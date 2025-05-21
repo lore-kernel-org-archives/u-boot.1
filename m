@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93260C3ABC9
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 03:53:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3ED1C3ABC9
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 03:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8E4E82D6F;
-	Wed, 21 May 2025 05:53:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40FD982DB7;
+	Wed, 21 May 2025 05:53:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QOIaUpZp";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="mofUUELn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96EAA82D88; Wed, 21 May 2025 05:53:53 +0200 (CEST)
+ id 9EB3882D59; Wed, 21 May 2025 05:53:53 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338AD82D59
+ by phobos.denx.de (Postfix) with ESMTPS id 42AE982D6B
  for <u-boot@lists.denx.de>; Wed, 21 May 2025 05:53:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54KGdkLT024579
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54KGdq3A028016
  for <u-boot@lists.denx.de>; Wed, 21 May 2025 03:53:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=QFlNHfXBnHC
- g0fUfHBJKmPEqBbCTepv5cPlPv24PLOg=; b=QOIaUpZpxHq+FJm02WLvy9hIqmT
- 9478waWCpHrAMwb8SnJfWAH6KjOfiMstXHXJDalx7NFjdeu1kbMtxIHZQquuV1Xi
- +LGneisec1tIrOVcRIDjceDoq2AbkDcZOASUBVpYOY8C4sHp8FkMAs9PpjCCH5DY
- +0I92DoZ8bP56iUEdL5cyuGwMgbqd33sXgHvroLPPTTXC3OLdmVnu8rTGINRnWjA
- 8kHqQndciFI05QdVKHN6dH9GiLQ8hNYGm6tJSz8hWp2oXrYx8qHRVKNq/8LPHRt9
- a2UmKjYgOWBNNebG9SGtKGMcyt4DUN2MdTIpvB2f8bWrKABtDb4OnOR6JeA==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46rwf31dny-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=BkTVyqzf3F6
+ eSoHWsev2Y0qg/B84C60thK7d7xbVRBc=; b=mofUUELnHyIlFhXViaNKsBpfKE7
+ GPSB5wG7jRSD+nWYi3eUwEDpedKNF9ayQp+W07rlOQgOwVldxfTiKrJ0judf1ztX
+ 7lQujy2ZC4DUWNt0SFrw7nipGJaf7yI5n1iqSqRp3wYQ0tdl3iJ0ZbPyx0BEPayp
+ Bemo9hzqRDtO5pLzr+AaEUpMkR0E7ua5ub17lQ/+HQypfoNToM1r0sr/PgNH8Abe
+ wgTCQ157K3dRXY4Q3smxovy8cUwtfIsYM6xj8w7EAqbPP37usnas7W9ixj7Ej7bn
+ KZKeQJnhZFhUs3fvkZtL21bUD2fXyezX6uooUyb6a44yGuZ/OMbyafIbucA==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46rwf41ef2-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
  for <u-boot@lists.denx.de>; Wed, 21 May 2025 03:53:49 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-b1ffc678adfso4103583a12.0
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-7377139d8b1so5433397b3a.0
  for <u-boot@lists.denx.de>; Tue, 20 May 2025 20:53:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747799624; x=1748404424;
+ d=1e100.net; s=20230601; t=1747799628; x=1748404428;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QFlNHfXBnHCg0fUfHBJKmPEqBbCTepv5cPlPv24PLOg=;
- b=YzQ3C1qt2j/Gd9BLFmD/gct3PPJa1ZMMfeJhbEmBayb8PkfCnxkL+m/hEKlkWKMl3i
- eUtBpabONRM8O+d1LhAXx2aucf2hM1LLqcZmsSeceOK9yXdtpSE8JVtoCupyXaITLB/O
- juwPXxCtxnPFszJdA8IS8bw/5pccMmg85LyB/dHiW5sfSGn2SftrFLY+v6eQp1mKiHYH
- XMw+8rkf/iw0VqaW7T6pZYchwBoccn5S76uzBF9/sNjq+1CMHZoVmuc9nos+A9POnXni
- bI3ItMcpqTZ07fB0LS4LjL2nLWjzD/ytuMKS41Z0ebWsKMCZBLx+JQorEaj/Je/E/Hpu
- 5Yxw==
+ bh=BkTVyqzf3F6eSoHWsev2Y0qg/B84C60thK7d7xbVRBc=;
+ b=du54V8//tf+3qli2DBDAcYMgPsOTznarPTCZvt9VlY+0A9gA+X+/fhosB6BULc9dE6
+ GZCwi8yjJ9AAQHSohJXh/KPYTVbBqsbReFkU3mR+GoDn8Juw1I+k/yhfpxmS+LlIGJ4k
+ odXawB7PYVhYTlo6BD/SOIJCr4aXFdvaaJN2xN3UInjYoYxMYZqEnHsOuCggE+biZn2w
+ //LR5ZqR/5tjkVnljCbYOLFIDvwiO8aorAPGlIpSnWS923ivogpZ4UTJkBE7r/MbVO7i
+ Tg6OIMpA709cbMtJXaFuyGRWA72d00GKKvCBlQkccNN1XgiOJw9Pbhxq1A+nFTe81fIa
+ p00A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/qogckUAucPkiBJafsKDzuSU8UkKlYfaCumBMZdmw3xKmH4ullthUjOq8efZ73fxB0XNiMgc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqcIAc5alQJEfY1/440m2MDpF9+ux5noMkLTgc1sifl+gwfPi0
- dHQCXqtxJ39zxGGrgFqSSxE/75MbxHTwpQYxBlRjld95l77xd3gdZI9NiUv5nAiTMebqKfrgm5x
- hOs+K3BnV7FFdSdLyPyitvZqtxDzMopVoOvRCNTQ3/yq4qp2ijG7Okuow
-X-Gm-Gg: ASbGnctmuX6vwek1LZ22tCsTwjogongv4jcg2ExtAVtbLUlCHTtm6GH6Vl9rVBnGTsV
- thYFDiuI6Axj5n4CtUoxXgqgs480lcfUYJY9MX17KiEH+D+cBUeMDVIk3bGr7gyN/CCd8/6zHCi
- RDKcgUiqjywZnvbU6vstgZhsOnSJ+xHB+Z4nHAH64c9flzr0KwpTwiIWYWF1y7DtrDuPDS/lQvh
- hgRpLskiu14oWIco+Y2xlRn86prQvw3sWALYgFeZTvIdfB4se6dFVEBlEbBZSFToUzAkwWVm/5M
- FeOVMXsoxQAESc+e0DU1N0KXKexAxyLEjszjQuhiZPk3zPxch64VphahGG5CQ+xVCTvA4H3PIu9
- Qj8SSwrHetvkY4Le/DxkZ6QFQxVZLygQ=
-X-Received: by 2002:a05:6a21:9006:b0:1ee:e655:97ea with SMTP id
- adf61e73a8af0-216219ece75mr28474787637.41.1747799623628; 
- Tue, 20 May 2025 20:53:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGLCsQiUD01hW0RKlbhaje3zTJaSnSFHTfG1AiVGTV9uvWPAn4wTZF6jHEmTUld1qbxA4KCXQ==
-X-Received: by 2002:a05:6a21:9006:b0:1ee:e655:97ea with SMTP id
- adf61e73a8af0-216219ece75mr28474749637.41.1747799623214; 
- Tue, 20 May 2025 20:53:43 -0700 (PDT)
+ AJvYcCWrF51Oc3HStNxKNF8+JqUuULVxRnS+Ke9h3ptldnGlYzdoExSL4poF4GAGK6bBa8O/+Sc5r6k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzfaa9lX1T+C0iCm2hatdL8UOE+TtJeG2W4PJ+H/o43pVePdo/9
+ wc+MSk+Vg0l7R6t7ROEv/tHRPESRjcCsz6dqlZFxcKBYg2eoYLxnGA0795RRpzEInL+WARxYeUL
+ 1WlGXw/g+kVXd4BlT3UyLKCZ8JliIZY7gQFkxjm2jN/l3V8F3GmKIVLSJ
+X-Gm-Gg: ASbGncvtJNNW++Fu8zjrsZsyr5PGhZjIr7UOODhqBdnCSa1ckLm9XLbzSURNogF2+bC
+ jK0naCKUy8BKtSNjPGPQmxvVzZCPj8qFn4hfdcGQ13LfRHigGKNh6HJv9cuepIazCdnUBYkjKVP
+ Fo/TvUecAUsWyEiQzh/7gEFPX06CebasqpslcUOJ+RKlBNnSncJ2LoduAghXXk0H6CPZMgw+OFr
+ sCgG8ZMeiJewgqwOhzXhf9bJqKfxAp5hY6w6xxXUrkmb9Ca1dkI8WJWo4euHjJHuswv3wtSAB8g
+ QidZMnHXRvXho7CK6oZwFxWEQFmywby76HwEP78V8RJ/VBjzV+y8fEAolKJ3PFGYe0/RDluOTzh
+ YyjavdE91HVeR1Yo53EnbOgTWzPhgVg4=
+X-Received: by 2002:a05:6a00:ae1c:b0:742:b3a6:db10 with SMTP id
+ d2e1a72fcca58-742b3a6dc2bmr20568696b3a.18.1747799628343; 
+ Tue, 20 May 2025 20:53:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEvTMcN+yZHVwbihu8qKOEFDWLdGKwESypC5E0SHQVblvaeqhztZbky7fuycsjgQ2Q3tHIUDA==
+X-Received: by 2002:a05:6a00:ae1c:b0:742:b3a6:db10 with SMTP id
+ d2e1a72fcca58-742b3a6dc2bmr20568655b3a.18.1747799627850; 
+ Tue, 20 May 2025 20:53:47 -0700 (PDT)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-742a97395adsm8601675b3a.75.2025.05.20.20.53.39
+ d2e1a72fcca58-742a97395adsm8601675b3a.75.2025.05.20.20.53.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 20:53:42 -0700 (PDT)
+ Tue, 20 May 2025 20:53:47 -0700 (PDT)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com,
@@ -89,36 +89,36 @@ To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  me@samcday.com, christopher.obbard@linaro.org, quic_varada@quicinc.com,
  sughosh.ganu@linaro.org, sjg@chromium.org, lehmanju@devpi.de,
  bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v2 2/5] phy: qcom: Enable QMP UFS PHY driver for QCS615
-Date: Wed, 21 May 2025 09:23:21 +0530
-Message-Id: <20250521035324.1182833-3-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v2 3/5] clk/qcom: qcs615: Add GCC clock driver for QCS615
+Date: Wed, 21 May 2025 09:23:22 +0530
+Message-Id: <20250521035324.1182833-4-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250521035324.1182833-1-aswin.murugan@oss.qualcomm.com>
 References: <20250521035324.1182833-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: cp0_n_GBUGU454Oik9RbTLhAfeUo8MFn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIxMDAzNSBTYWx0ZWRfX27ET5oOxUgtL
- wJM2FjoPxrabu9Nxp7BFXvdPjCMLYceCeooz81hZ6qYT2+l9bUkgz5QCTeGuRuG2/yFy98Bk/Aj
- oKf7QGaC9EpIQoRPbbi6w92c/ZMU/I2pwcqbzeyxLHESjacP4fQaPo4uLnlBHOLBgY2oYdXRWN1
- YSZ0y3TZXNeQE9hyCceiDQ9Co1Upe91GziaPessp4Pnhar1d64ImP8paBSzFMtSkrWtcDCj5JPT
- FEmSrfFQw1XHzmDFQe/RG9QfK5ixd7RLRP5KefnEnbCJF0o3eY9EOkcBBdzEwS7YbdnMYN6ChC7
- P3S5k+062yby/e21W6ra/HX3hCEhS+Hpv+on9RViSnfgdGpirZ8qOCnt54QzL4T2scU4adh9X3M
- 3AO0xE/EnQCfISefBBdNW04NNWEgC0TZwGyifhj1EobKBOJjULDlgd+cRGV6ptPpN3YQ3gSh
-X-Proofpoint-GUID: cp0_n_GBUGU454Oik9RbTLhAfeUo8MFn
-X-Authority-Analysis: v=2.4 cv=a9kw9VSF c=1 sm=1 tr=0 ts=682d4e4d cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=dt9VzEwgFbYA:10 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=-KtapgylDENPCd9WzicA:9
- a=x9snwWr2DeNwDh03kgHS:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIxMDAzNSBTYWx0ZWRfXwJfSY+9MCVuq
+ q3d5oEIU4x/YRzPncyi/PLmjYSQb7i9wyxlPVctfzDPx8LCyt2qBqyFGKenBHucpFlsPD4AG65A
+ YMfy/xNY5KAPktEYVxPRhKlfTX+KuMt0t7lcnqfjWaBaj9Ok/wnV9laurZtWh8yQR/4z3bY8jhh
+ GFEwkDWdrQTdNelFeriRpcck+iT2rXbnZswwqo+JBAQkfJ603eJNXJtrEbUpIlYjAtaAU8Ir4lG
+ p9WFRIq61gWIJPs2AllINDSrelDjYHmOGZF/QJiFhkCohYxgHR2PadSJ+YXCORx2e9UuOcrvoqs
+ AJcxGq9jgP/99+FCf63QKS3pVVioFQS7/Iko89bXZESPCK+s9B5eXDmuFyBEZd5YXTj9xZMNHQu
+ wex1M2R/C+WqZkdCFi0keZtHK+ko9kpiCdn7gqzio9svHWBjiYuefN+b763P6ObQmFkSRyK6
+X-Proofpoint-GUID: _APVBJYXcFbm6LP089o3h2QdP9IMKvc7
+X-Authority-Analysis: v=2.4 cv=Ws8rMcfv c=1 sm=1 tr=0 ts=682d4e4d cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=dt9VzEwgFbYA:10 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=240JKWVrdINMfe09_TgA:9
+ a=IoOABgeZipijB_acs4fv:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: _APVBJYXcFbm6LP089o3h2QdP9IMKvc7
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-21_01,2025-05-20_03,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 priorityscore=1501 phishscore=0 mlxscore=0
- lowpriorityscore=0 mlxlogscore=999 bulkscore=0 spamscore=0 adultscore=0
- malwarescore=0 suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
- definitions=main-2505210035
+ spamscore=0 malwarescore=0 clxscore=1015 suspectscore=0 mlxscore=0
+ bulkscore=0 phishscore=0 priorityscore=1501 impostorscore=0
+ lowpriorityscore=0 mlxlogscore=999 adultscore=0 classifier=spam authscore=0
+ authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505160000 definitions=main-2505210035
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,176 +135,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable QMP phy for QCS615, referenced from Linux.
+Port Linux's gcc-qcs615.c driver to U-Boot for basic bring-up.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
-v2:
-- No changes to this patch in v2
+Changes in v2:
+- Replaced the "1" with BIT(0) in GATE_CLK()
 ---
- drivers/phy/qcom/phy-qcom-qmp-ufs.c | 127 ++++++++++++++++++++++++++++
- 1 file changed, 127 insertions(+)
+ drivers/clk/qcom/Kconfig        |   8 ++
+ drivers/clk/qcom/Makefile       |   1 +
+ drivers/clk/qcom/clock-qcs615.c | 163 ++++++++++++++++++++++++++++++++
+ 3 files changed, 172 insertions(+)
+ create mode 100644 drivers/clk/qcom/clock-qcs615.c
 
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-index 449b9767778..175f55e8113 100644
---- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-+++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-@@ -86,6 +86,12 @@ enum qphy_reg_layout {
- 	QPHY_LAYOUT_SIZE
- };
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 3ea01f3c969..eaac4a97376 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -55,6 +55,14 @@ config CLK_QCOM_QCS404
+ 	  on the Snapdragon QCS404 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
  
-+static const unsigned int ufsphy_v2_regs_layout[QPHY_LAYOUT_SIZE] = {
-+	[QPHY_START_CTRL]		= QPHY_V2_PCS_UFS_PHY_START,
-+	[QPHY_PCS_READY_STATUS]		= QPHY_V2_PCS_UFS_READY_STATUS,
-+	[QPHY_PCS_POWER_DOWN_CONTROL]	= QPHY_V2_PCS_UFS_POWER_DOWN_CONTROL,
++config CLK_QCOM_QCS615
++        bool "Qualcomm QCS615 GCC"
++        select CLK_QCOM
++        help
++          Say Y here to enable support for the Global Clock Controller
++          on the Snapdragon QCS615 SoC. This driver supports the clocks
++          and resets exposed by the GCC hardware block.
++
+ config CLK_QCOM_SA8775P
+ 	bool "Qualcomm SA8775 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index e13fc8c1071..8f749487246 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+ obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+ obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+ obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
++obj-$(CONFIG_CLK_QCOM_QCS615) += clock-qcs615.o
+ obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
+ obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
+ obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
+diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
+new file mode 100644
+index 00000000000..4700baba8c9
+--- /dev/null
++++ b/drivers/clk/qcom/clock-qcs615.c
+@@ -0,0 +1,163 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Clock drivers for Qualcomm qcs615
++ *
++ * (C) Copyright 2024 Linaro Ltd.
++ */
++
++#include <linux/types.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <linux/delay.h>
++#include <asm/io.h>
++#include <linux/bug.h>
++#include <linux/bitops.h>
++#include <dt-bindings/clock/qcom,qcs615-gcc.h>
++#include "clock-qcom.h"
++
++#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0xf034
++#define USB30_PRIM_MASTER_CLK_CMD_RCGR		0xf01c
++#define USB3_PRIM_PHY_AUX_CMD_RCGR		0xf060
++
++#define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
++#define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
++#define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
++#define GCC_QUPV3_WRAP0_S3_CLK_ENA_BIT BIT(13)
++#define GCC_QUPV3_WRAP0_S4_CLK_ENA_BIT BIT(14)
++#define GCC_QUPV3_WRAP0_S5_CLK_ENA_BIT BIT(15)
++
++#define GCC_QUPV3_WRAP1_S0_CLK_ENA_BIT BIT(22)
++#define GCC_QUPV3_WRAP1_S1_CLK_ENA_BIT BIT(23)
++#define GCC_QUPV3_WRAP1_S2_CLK_ENA_BIT BIT(24)
++#define GCC_QUPV3_WRAP1_S3_CLK_ENA_BIT BIT(25)
++#define GCC_QUPV3_WRAP1_S4_CLK_ENA_BIT BIT(26)
++#define GCC_QUPV3_WRAP1_S5_CLK_ENA_BIT BIT(27)
++
++static ulong qcs615_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
++	if (clk->id < priv->data->num_clks)
++		debug("%s: %s, requested rate=%ld\n", __func__,
++		      priv->data->clks[clk->id].name, rate);
++
++	switch (clk->id) {
++	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
++		WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
++		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
++		return rate;
++	case GCC_USB30_PRIM_MASTER_CLK:
++		WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
++		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
++				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
++		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
++		return rate;
++	default:
++		return 0;
++	}
++}
++
++static const struct gate_clk qcs615_clks[] = {
++	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0xf078, BIT(0)),
++	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0xf010, BIT(0)),
++	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0xf07c, BIT(0)),
++	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0xf014, BIT(0)),
++	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0xf018, BIT(0)),
++	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, BIT(0)),
++	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, BIT(0)),
++	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf058, BIT(0)),
++	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x5200c, GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x5200c, GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK, 0x5200c, GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK, 0x5200c, GCC_QUPV3_WRAP0_S3_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK, 0x5200c, GCC_QUPV3_WRAP0_S4_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK, 0x5200c, GCC_QUPV3_WRAP0_S5_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK, 0x5200c, GCC_QUPV3_WRAP1_S0_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK, 0x5200c, GCC_QUPV3_WRAP1_S1_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP1_S2_CLK, 0x5200c, GCC_QUPV3_WRAP1_S2_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK, 0x5200c, GCC_QUPV3_WRAP1_S3_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK, 0x5200c, GCC_QUPV3_WRAP1_S4_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK, 0x5200c, GCC_QUPV3_WRAP1_S5_CLK_ENA_BIT),
++	GATE_CLK(GCC_DISP_HF_AXI_CLK, 0xb038, BIT(0)),
++	GATE_CLK(GCC_DISP_AHB_CLK, 0xb032, BIT(0))
 +};
 +
- static const unsigned int ufsphy_v3_regs_layout[QPHY_LAYOUT_SIZE] = {
- 	[QPHY_START_CTRL]		= QPHY_V3_PCS_UFS_PHY_START,
- 	[QPHY_PCS_READY_STATUS]		= QPHY_V3_PCS_UFS_READY_STATUS,
-@@ -715,6 +721,98 @@ static const struct qmp_ufs_init_tbl sc7280_ufsphy_hs_g4_rx[] = {
- 	QMP_PHY_INIT_CFG(QSERDES_V4_RX_GM_CAL, 0x0f),
- };
- 
-+static const struct qmp_ufs_init_tbl sm6115_ufsphy_serdes[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CMN_CONFIG, 0x0e),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_SYSCLK_EN_SEL, 0x14),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CLK_SELECT, 0x30),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_SYS_CLK_CTRL, 0x02),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_BIAS_EN_CLKBUFLR_EN, 0x08),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_BG_TIMER, 0x0a),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_HSCLK_SEL, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CORECLK_DIV, 0x0a),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CORECLK_DIV_MODE1, 0x0a),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP_EN, 0x01),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_CTRL, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_RESETSM_CNTRL, 0x20),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CORE_CLK_EN, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP_CFG, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_TIMER1, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_TIMER2, 0x3f),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_MAP, 0x04),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_SVS_MODE_CLK_SEL, 0x05),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DEC_START_MODE0, 0x82),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START1_MODE0, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START2_MODE0, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START3_MODE0, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CP_CTRL_MODE0, 0x0b),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_PLL_RCTRL_MODE0, 0x16),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_PLL_CCTRL_MODE0, 0x28),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_GAIN0_MODE0, 0x80),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_GAIN1_MODE0, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE1_MODE0, 0x28),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE2_MODE0, 0x02),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP1_MODE0, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP2_MODE0, 0x0c),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP3_MODE0, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DEC_START_MODE1, 0x98),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START1_MODE1, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START2_MODE1, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START3_MODE1, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_CP_CTRL_MODE1, 0x0b),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_PLL_RCTRL_MODE1, 0x16),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_PLL_CCTRL_MODE1, 0x28),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_GAIN0_MODE1, 0x80),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_GAIN1_MODE1, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE1_MODE1, 0xd6),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE2_MODE1, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP1_MODE1, 0x32),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP2_MODE1, 0x0f),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP3_MODE1, 0x00),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_PLL_IVCO, 0x0f),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_BG_TRIM, 0x0f),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_INITVAL1, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_INITVAL2, 0x00),
++static int qcs615_enable(struct clk *clk)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
++	if (priv->data->num_clks < clk->id) {
++		debug("%s: unknown clk id %lu\n", __func__, clk->id);
++		return 0;
++	}
++
++	debug("%s: clk %ld: %s\n", __func__, clk->id, qcs615_clks[clk->id].name);
++
++	switch (clk->id) {
++	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
++		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
++		fallthrough;
++	case GCC_USB30_PRIM_MASTER_CLK:
++		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
++		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
++		break;
++	}
++
++	qcom_gate_clk_en(priv, clk->id);
++
++	return 0;
++}
++
++static const struct qcom_reset_map qcs615_gcc_resets[] = {
++	[GCC_EMAC_BCR] = { 0x6000 },
++	[GCC_QUSB2PHY_PRIM_BCR] = { 0xd000 },
++	[GCC_QUSB2PHY_SEC_BCR] = { 0xd004 },
++	[GCC_USB30_PRIM_BCR] = { 0xf000 },
++	[GCC_USB2_PHY_SEC_BCR] = { 0x50018 },
++	[GCC_USB3_DP_PHY_SEC_BCR] = { 0x50020 },
++	[GCC_USB3PHY_PHY_SEC_BCR] = { 0x5001c },
++	[GCC_PCIE_0_BCR] = { 0x6b000 },
++	[GCC_PCIE_0_PHY_BCR] = { 0x6c01c },
++	[GCC_PCIE_PHY_BCR] = { 0x6f000 },
++	[GCC_PCIE_PHY_COM_BCR] = { 0x6f010 },
++	[GCC_UFS_PHY_BCR] = { 0x77000 },
++	[GCC_USB20_SEC_BCR] = { 0xa6000 },
++	[GCC_USB3PHY_PHY_PRIM_SP0_BCR] = { 0x50008 },
++	[GCC_USB3_PHY_PRIM_SP0_BCR] = { 0x50000 },
++	[GCC_SDCC1_BCR] = { 0x12000 },
++	[GCC_SDCC2_BCR] = { 0x14000 }
 +};
 +
-+static const struct qmp_ufs_init_tbl sm6115_ufsphy_hs_b_serdes[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_MAP, 0x44),
++static const struct qcom_power_map qcs615_gdscs[] = {
++	[UFS_PHY_GDSC] = { 0x77004 },
++	[USB30_PRIM_GDSC] = { 0xf004 },
 +};
 +
-+static const struct qmp_ufs_init_tbl sm6115_ufsphy_tx[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_TX_HIGHZ_TRANSCEIVEREN_BIAS_DRVR_EN, 0x45),
-+	QMP_PHY_INIT_CFG(QSERDES_TX_LANE_MODE, 0x06),
++static struct msm_clk_data sa8775_gcc_data = {
++	.resets = qcs615_gcc_resets,
++	.num_resets = ARRAY_SIZE(qcs615_gcc_resets),
++	.clks = qcs615_clks,
++	.num_clks = ARRAY_SIZE(qcs615_clks),
++
++	.power_domains = qcs615_gdscs,
++	.num_power_domains = ARRAY_SIZE(qcs615_gdscs),
++
++	.enable = qcs615_enable,
++	.set_rate = qcs615_set_rate,
 +};
 +
-+static const struct qmp_ufs_init_tbl sm6115_ufsphy_rx[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_RX_SIGDET_LVL, 0x24),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_SIGDET_CNTRL, 0x0f),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_INTERFACE_MODE, 0x40),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_SIGDET_DEGLITCH_CNTRL, 0x1e),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_UCDR_FASTLOCK_FO_GAIN, 0x0b),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_TERM_BW, 0x5b),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_EQ_GAIN1_LSB, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_EQ_GAIN1_MSB, 0x3f),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_EQ_GAIN2_LSB, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_EQ_GAIN2_MSB, 0x3f),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_RX_EQU_ADAPTOR_CNTRL2, 0x0d),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_UCDR_SVS_SO_GAIN_HALF, 0x04),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_UCDR_SVS_SO_GAIN_QUARTER, 0x04),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_UCDR_SVS_SO_GAIN, 0x04),
-+	QMP_PHY_INIT_CFG(QSERDES_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x5b),
-+};
-+
-+static const struct qmp_ufs_init_tbl sm6115_ufsphy_pcs[] = {
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_RX_PWM_GEAR_BAND, 0x15),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_RX_SIGDET_CTRL2, 0x6d),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_TX_LARGE_AMP_DRV_LVL, 0x0f),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_TX_SMALL_AMP_DRV_LVL, 0x02),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_RX_MIN_STALL_NOCONFIG_TIME_CAP, 0x28),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_RX_SYM_RESYNC_CTRL, 0x03),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_TX_LARGE_AMP_POST_EMP_LVL, 0x12),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_TX_SMALL_AMP_POST_EMP_LVL, 0x0f),
-+	QMP_PHY_INIT_CFG(QPHY_V2_PCS_UFS_RX_MIN_HIBERN8_TIME, 0x9a), /* 8 us */
-+};
-+
- struct qmp_ufs_offsets {
- 	u16 serdes;
- 	u16 pcs;
-@@ -1079,6 +1177,34 @@ static const struct qmp_ufs_cfg sa8775p_ufsphy_cfg = {
- 	.regs			= ufsphy_v5_regs_layout,
- };
- 
-+static const struct qmp_ufs_cfg sm6115_ufsphy_cfg = {
-+	.lanes			= 1,
-+
-+	.offsets		= &qmp_ufs_offsets,
-+
-+	.tbls = {
-+		.serdes		= sm6115_ufsphy_serdes,
-+		.serdes_num	= ARRAY_SIZE(sm6115_ufsphy_serdes),
-+		.tx		= sm6115_ufsphy_tx,
-+		.tx_num		= ARRAY_SIZE(sm6115_ufsphy_tx),
-+		.rx		= sm6115_ufsphy_rx,
-+		.rx_num		= ARRAY_SIZE(sm6115_ufsphy_rx),
-+		.pcs		= sm6115_ufsphy_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm6115_ufsphy_pcs),
++static const struct udevice_id gcc_qcs615_of_match[] = {
++	{
++		.compatible = "qcom,qcs615-gcc",
++		.data = (ulong)&sa8775_gcc_data,
 +	},
-+	.tbls_hs_b = {
-+		.serdes		= sm6115_ufsphy_hs_b_serdes,
-+		.serdes_num	= ARRAY_SIZE(sm6115_ufsphy_hs_b_serdes),
-+	},
-+	.clk_list		= sdm845_ufs_phy_clk_l,
-+	.num_clks		= ARRAY_SIZE(sdm845_ufs_phy_clk_l),
-+	.vreg_list		= qmp_ufs_vreg_l,
-+	.num_vregs		= ARRAY_SIZE(qmp_ufs_vreg_l),
-+	.regs			= ufsphy_v2_regs_layout,
-+
-+	.no_pcs_sw_reset	= true,
++	{ }
 +};
 +
- static void qmp_ufs_configure_lane(void __iomem *base,
- 					const struct qmp_ufs_init_tbl tbl[],
- 					int num,
-@@ -1472,6 +1598,7 @@ static const struct udevice_id qmp_ufs_ids[] = {
- 	{ .compatible = "qcom,sm8550-qmp-ufs-phy", .data = (ulong)&sm8550_ufsphy_cfg },
- 	{ .compatible = "qcom,sm8650-qmp-ufs-phy", .data = (ulong)&sm8650_ufsphy_cfg },
- 	{ .compatible = "qcom,sc7280-qmp-ufs-phy", .data = (ulong)&sc7280_ufsphy_cfg, },
-+	{ .compatible = "qcom,qcs615-qmp-ufs-phy", .data = (ulong)&sm6115_ufsphy_cfg, },
- 	{ }
- };
- 
++U_BOOT_DRIVER(gcc_qcs615) = {
++	.name		= "gcc_qcs615",
++	.id		= UCLASS_NOP,
++	.of_match	= gcc_qcs615_of_match,
++	.bind		= qcom_cc_bind,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++};
 -- 
 2.34.1
 
