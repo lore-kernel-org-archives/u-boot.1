@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0541C54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE4EC54E65
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 23:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30FF482FD2;
-	Thu, 22 May 2025 01:01:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8D1A82FBC;
+	Thu, 22 May 2025 01:01:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pvlj2irL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R0i6OfYc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1777282FED; Thu, 22 May 2025 01:01:48 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 38C6B82FC5; Thu, 22 May 2025 01:01:49 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEAAE82FC5
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 457C382FBC
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 01:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-404da7584adso2980807b6e.3
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:43 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-6065803ef35so2050925eaf.1
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 16:01:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747868502; x=1748473302; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747868504; x=1748473304; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MFjR6kYe/JaYG5oqXBcr/s5aPiXySyuwBHki4378vIw=;
- b=pvlj2irLWtpvt3V+hMBe5YN/bQAeAx/IKmH+bfYkS7yhfcJjCJGlc4HwkS21n5LM2G
- B7BmA7/My0ggHzQ3wNjXJNeXsokeTUPnyDqaUth98tL3NDwXjj+UKhruzJwNtQjEDt+7
- hZCwEnG2E1L+RZG7KeVfo2cs4pNvWQrInf4v8=
+ :reply-to; bh=BBZGSfhNqe+cqmGCjULDiW+dDXxs1jonZXrmzc+KkFM=;
+ b=R0i6OfYch8sXuauVuzDkSp31GZILplgbWuh4snqBRi4gd3Z87GfdEJFD9pl9C6OOL9
+ 8Jl/8bSq+CdtIXDByuBdbGGAxIBAMGJz0uXcll4s1v05t6SUTyvpW7SbjdZVxH2Az2mI
+ WftPBXJzlik84boGlTEhpq9P5gEwTC4m9iODU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747868502; x=1748473302;
+ d=1e100.net; s=20230601; t=1747868504; x=1748473304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MFjR6kYe/JaYG5oqXBcr/s5aPiXySyuwBHki4378vIw=;
- b=A1W/mbHXfKjIdfRb4KZvzxO11HzMR2I+zwVEACCly4YEVj7r4ZWEYTCpq57XPB2Xfa
- MKOiTN++WIo7Bw0KfSxdTLHZx8qTyWVb+ciDZdmoFXLsUnZQ2N6Klly6ZCUE0OL7lCmF
- TYCCxrZKgfvGH2gokWCnLgwHn4RPuHY6Xs/PqH7m7qEJAZfTINiKJbS2AKW8XptLNmJk
- /JNZYWSE8KhljyAu3BwACRjdMnQjTUp3EbO4gaLIrg6Msl2MPQyBleXkrnVtupZ2gqjM
- wXDaqiHaNhu68JRon9k8sEgpguEtCQEyp7piIBwlgQ3Eg0JH/yBzhZGh3j52wfhVvvP3
- Hy0g==
-X-Gm-Message-State: AOJu0YzugnK7F3rN8rWZmrqMUF2IApCcce6frhdHgFCqJZgz8pm0agLh
- 9dX8j3QpV1+2PBYUtqQobmAf0fTrA91WMSZrPr10I3d81JKr6loPZPGrUs8PCVZbLFYLkfVqxmU
- lk1wLo1Y=
-X-Gm-Gg: ASbGncsU4dOp2A5ncqy/l+f6p94YEGuaUE2x2nN44FjwyEg0vDF42IQQAF+sGRVLeBM
- XiF6TzNUWyykpsVXXwu5douM+p0FWkwxJ4byRbcCfF461ye5g7r3QA9t/7sE3RkyQ3YNs+Fm/CK
- NQomIkKkMSkMc1sPd3UPMdNCuvJhc6ilW1aZE8CVT/1rXCGJBUn8ALe1skoAP2kTRQpTCrW+olv
- gmGeN8bnJIBuO2caQQKOsrEf+/gGdXCwPTjVj6LAUMgSnJ9MSbXsVgHn9dcKEbXJHhcZsGvN0qQ
- 3P2O+XCwzT6xRpgLXsFI+7yn04X1lpQMAzVgjcDIdkSzF+4MVAbAYM7bTRpKcaroFdvjuSP5RMm
- 4s3kbiCm2j1zZeDk=
-X-Google-Smtp-Source: AGHT+IGeoZAhT5vs9gR5GyEUpT/W3FCF2ZjMcDPdLId+K1iqKrR08rh0wmDNWCbXBxng/xp2Ea6Wiw==
-X-Received: by 2002:a05:6808:6c8b:b0:3f8:e55c:16d6 with SMTP id
- 5614622812f47-404d87fe3c5mr14695008b6e.28.1747868502534; 
- Wed, 21 May 2025 16:01:42 -0700 (PDT)
+ bh=BBZGSfhNqe+cqmGCjULDiW+dDXxs1jonZXrmzc+KkFM=;
+ b=I8th8m8MEKhCFwsEtVznDk3a+zeufFd8Ai3ZJ0idT6pPo/2mr27/fhwGW+D++q4+3L
+ 6qK89ptDhmdOhWMrUf/WGIqrmlBijzopJAvHZv26XC+dKj/TlZ3Un6okS8FucWXvl++b
+ F6kzWzPUvdUgXfPzqoVjI5kZDyH8GlhLjEqKlGGHmg3bMBxQEovLQuegM6nM3Nc+cdTV
+ UEBwWNgsnpPxmdCWosrKg05bcAnN2PQDKl2cbuQRC5fCqWKHjn/Yj6P0t13VEOcYdr5a
+ JKXOD07U2aVp3T+IbCCBf24h8DsaU9OoRY2m6HGMKFsPV5T+416T8vTC89XXJ+DloNnD
+ BuWA==
+X-Gm-Message-State: AOJu0YzC1uc6Jqv7gecPx3kz3kF1tnOcPL3BpoVUQQ8U+qq6SZgvGk7f
+ eA4IpPHpiRI6D/2kLc7G4TPncm53UORGwyo2yjFf/PJulFifV3wcx5hCquUdkniSDdJocNRcbnv
+ c6FGZpIw=
+X-Gm-Gg: ASbGncvBP3mYA/YIrw+QLrCITG80fMj7a14jfKDbKlyH7Ydl206aULXbNHsiypFvywd
+ sZQls3KSYqWkdxX6o2pUErn4k4fWb59zxN3RmjDNW2lCh7yR/H99s4m4tGzvtYSHObtoBOQdomR
+ n9jvaIujrU9N1v8t8x+MowOx8BK43c5OQnNBzal2OiRgw+dnEknQ+v10aFT6CLY8N25PH6tFjPU
+ ejHxeNF36IOIBeoTGouBJQbiy07CnSti3kBjcGEXPikrdWGoZ6az7ctCSrNCX9uRIHfj/8+en0U
+ DTqnTT5WE5YxvIZEbqjIg4889AZZeNcsFFqKE/a3sD8wYGIROX+XtJGO0ygytCpeE/9EDFpDE/Z
+ QKFMcVYh28dLcDLk=
+X-Google-Smtp-Source: AGHT+IGQuzZBKesZ1IRLIqHnBnMfy4eDqohznvsf05v9rJbPfNZ26Tf2iVLockPAFkR+H7GjkKBAgQ==
+X-Received: by 2002:a4a:ee8b:0:b0:60b:87fa:80e8 with SMTP id
+ 006d021491bc7-60b87fa836bmr893878eaf.7.1747868503985; 
+ Wed, 21 May 2025 16:01:43 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.41
+ 006d021491bc7-60b7e43d07bsm473895eaf.26.2025.05.21.16.01.42
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 May 2025 16:01:42 -0700 (PDT)
+ Wed, 21 May 2025 16:01:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 13/17] include/fat.h: Audit include list
-Date: Wed, 21 May 2025 16:51:18 -0600
-Message-ID: <20250521230119.2084088-14-trini@konsulko.com>
+Subject: [PATCH 14/17] include/ide.h: Cleanup usage
+Date: Wed, 21 May 2025 16:51:19 -0600
+Message-ID: <20250521230119.2084088-15-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250521230119.2084088-1-trini@konsulko.com>
 References: <20250521230119.2084088-1-trini@konsulko.com>
@@ -94,39 +94,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file does not need <asm/cache.h> so remove it. However the file
-common/spl/spl_fat.c does need it, so add it there.
+At this point in time, <ide.h> provides the IDE_BUS macro and the
+function prototype for ide_set_reset, which is used with IDE_RESET. The
+only files which should include this header are the ones that either use
+that macro or that function. Remove <blk.h> from <ide.h> and remove
+<ide.h> from places which do not need it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- common/spl/spl_fat.c | 1 +
- include/fat.h        | 1 -
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ board/freescale/m5253demo/m5253demo.c | 1 +
+ board/imgtec/malta/malta.c            | 1 -
+ cmd/ide.c                             | 1 -
+ common/board_r.c                      | 1 -
+ disk/part.c                           | 1 -
+ disk/part_amiga.c                     | 1 -
+ disk/part_dos.c                       | 1 -
+ disk/part_efi.c                       | 1 -
+ disk/part_mac.c                       | 1 -
+ include/ide.h                         | 2 --
+ include/part.h                        | 1 -
+ lib/efi_loader/efi_device_path.c      | 1 +
+ 12 files changed, 2 insertions(+), 11 deletions(-)
 
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index f426a068ff96..8b7cafa7291e 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -16,6 +16,7 @@
+diff --git a/board/freescale/m5253demo/m5253demo.c b/board/freescale/m5253demo/m5253demo.c
+index 446a79e67232..50c5320b55cb 100644
+--- a/board/freescale/m5253demo/m5253demo.c
++++ b/board/freescale/m5253demo/m5253demo.c
+@@ -93,6 +93,7 @@ int testdram(void)
+ 
+ #ifdef CONFIG_IDE
+ #include <ata.h>
++#include <ide.h>
+ void ide_set_reset(int idereset)
+ {
+ 	atac_t *ata = (atac_t *) CONFIG_SYS_ATA_BASE_ADDR;
+diff --git a/board/imgtec/malta/malta.c b/board/imgtec/malta/malta.c
+index 4a72ab5cecad..0ffa964178f0 100644
+--- a/board/imgtec/malta/malta.c
++++ b/board/imgtec/malta/malta.c
+@@ -6,7 +6,6 @@
+ 
+ #include <config.h>
+ #include <fdt_support.h>
+-#include <ide.h>
+ #include <init.h>
+ #include <net.h>
+ #include <netdev.h>
+diff --git a/cmd/ide.c b/cmd/ide.c
+index 036489fda979..ed30f9468660 100644
+--- a/cmd/ide.c
++++ b/cmd/ide.c
+@@ -19,7 +19,6 @@
+ #include <dm/device-internal.h>
+ #include <dm/uclass-internal.h>
+ 
+-#include <ide.h>
+ #include <ata.h>
+ 
+ #ifdef CONFIG_LED_STATUS
+diff --git a/common/board_r.c b/common/board_r.c
+index b90a4d9ff695..a1183f0811dd 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -36,7 +36,6 @@
+ #include <env.h>
+ #include <env_internal.h>
+ #include <fdtdec.h>
+-#include <ide.h>
+ #include <init.h>
+ #include <initcall.h>
+ #include <kgdb.h>
+diff --git a/disk/part.c b/disk/part.c
+index 303178161c08..9cbd03686f5d 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -8,7 +8,6 @@
+ #include <command.h>
+ #include <env.h>
  #include <errno.h>
- #include <image.h>
- #include <linux/libfdt.h>
-+#include <asm/cache.h>
+-#include <ide.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <part.h>
+diff --git a/disk/part_amiga.c b/disk/part_amiga.c
+index 5b8ae5762d3a..22bf99f1b88c 100644
+--- a/disk/part_amiga.c
++++ b/disk/part_amiga.c
+@@ -6,7 +6,6 @@
+  */
+ #include <command.h>
+ #include <env.h>
+-#include <ide.h>
+ #include "part_amiga.h"
+ #include <part.h>
+ #include <vsprintf.h>
+diff --git a/disk/part_dos.c b/disk/part_dos.c
+index 96f748702fd5..5c77225cef93 100644
+--- a/disk/part_dos.c
++++ b/disk/part_dos.c
+@@ -15,7 +15,6 @@
  
- static int fat_registered;
+ #include <blk.h>
+ #include <command.h>
+-#include <ide.h>
+ #include <memalign.h>
+ #include <vsprintf.h>
+ #include <asm/unaligned.h>
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 932d058c184c..68ba1d11e7b6 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -21,7 +21,6 @@
+ #include <asm/unaligned.h>
+ #include <command.h>
+ #include <fdtdec.h>
+-#include <ide.h>
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <part_efi.h>
+diff --git a/disk/part_mac.c b/disk/part_mac.c
+index 21c85942fd84..dd3ce0be832b 100644
+--- a/disk/part_mac.c
++++ b/disk/part_mac.c
+@@ -15,7 +15,6 @@
+ #include <command.h>
+ #include <log.h>
+ #include <memalign.h>
+-#include <ide.h>
+ #include "part_mac.h"
+ #include <part.h>
  
-diff --git a/include/fat.h b/include/fat.h
-index ca97880de12d..bdf430f70675 100644
---- a/include/fat.h
-+++ b/include/fat.h
-@@ -11,7 +11,6 @@
+diff --git a/include/ide.h b/include/ide.h
+index 2c25e74ede08..550b33056213 100644
+--- a/include/ide.h
++++ b/include/ide.h
+@@ -7,8 +7,6 @@
+ #ifndef	_IDE_H
+ #define _IDE_H
  
- #include <fs.h>
- #include <asm/byteorder.h>
--#include <asm/cache.h>
+-#include <blk.h>
+-
+ #define IDE_BUS(dev)	(dev / (CONFIG_SYS_IDE_MAXDEVICE / CONFIG_SYS_IDE_MAXBUS))
  
- struct disk_partition;
+ /**
+diff --git a/include/part.h b/include/part.h
+index fcb3c13dea4d..3fa2d8424b70 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -7,7 +7,6 @@
+ #define _PART_H
  
+ #include <blk.h>
+-#include <ide.h>
+ #include <u-boot/uuid.h>
+ #include <linker_lists.h>
+ #include <linux/errno.h>
+diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+index c9bf2726fe24..66a951a8c1bb 100644
+--- a/lib/efi_loader/efi_device_path.c
++++ b/lib/efi_loader/efi_device_path.c
+@@ -10,6 +10,7 @@
+ #include <blk.h>
+ #include <dm.h>
+ #include <dm/root.h>
++#include <ide.h>
+ #include <log.h>
+ #include <net.h>
+ #include <usb.h>
 -- 
 2.43.0
 
