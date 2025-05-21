@@ -4,50 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53D5C54E65
-	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 09:50:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D43C2D0CD
+	for <u-boot@archiver.kernel.org>; Wed, 21 May 2025 10:03:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D98A82E2D;
-	Wed, 21 May 2025 11:50:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id E1DD582E31;
+	Wed, 21 May 2025 12:03:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8677F82E31; Wed, 21 May 2025 11:50:18 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04B0D82E0A
- for <u-boot@lists.denx.de>; Wed, 21 May 2025 11:50:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 54L9o6mj054918
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Wed, 21 May 2025 17:50:07 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
- 2025 17:50:06 +0800
-Date: Wed, 21 May 2025 17:50:03 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/master
-Message-ID: <aC2hyzxwKzO4k1im@swlinux02>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dcn22fuL";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B7B4F82E81; Wed, 21 May 2025 12:03:03 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D830482E2D
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 12:03:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7c9677cd6d7so676165385a.3
+ for <u-boot@lists.denx.de>; Wed, 21 May 2025 03:03:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1747821780; x=1748426580; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/duUTZ1TdpIYDBvfYEAJAVPbybmJCsU0CHrNNTU1prc=;
+ b=dcn22fuLwDP1U+agIS6R04BzbKh3WCkN8V3dB2OmDqwZ19huffArjLskKMPS7UQLP/
+ sCf0KQeM1Kl9DgbkRu6Nxp/h9m3udo+mFhX0PVqysrM1KaR5I7li88B97Y+NTMqMW2VE
+ ZB4fQTmw5cO4NGt5d3l49zrEFmGyGO7I6RnTZ5g5Z/DPIwjmqR3A0Ctq4QA0p0F6T35E
+ ZCYUA0EOnCxoxe8/OF+lhUlZGBF6TfbpK+vt28JHpEBOMXH11Eceki8Tx+PnxTVPcRF9
+ NKygjbnsC6E7Cde1kF93u6b5gbIUZOKLhkfqX+/Ngi1dkop/y45r3TIer1QmTLkWJDdB
+ 1QMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747821780; x=1748426580;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/duUTZ1TdpIYDBvfYEAJAVPbybmJCsU0CHrNNTU1prc=;
+ b=nk7aFZkdrHDEVcYA4ymHQTtYAOYf31gWUWKfwnkyzH2zjw4YVxleOqUf15d+0/YyRJ
+ Rhw6sd+pbX9Lp/1cmxwrXrgQo+tiBTlxrMB8ORkleFf4KGo5VWWWpEiP2w6qkQvCySZP
+ kch0OtOc8hoNuiOINrnFeiyc1Ay8eb5ZI4mc16evHaa54QRRBYjVYcuBX4UtdlJDKat4
+ DGEpdUPUXIYSCFyjR0NW7EZB6DNM0vUU20haSj+s2UwFOM6t0b30t26mTt77+HzO32/7
+ st/eCpPlxM5wTogEymtfkoRPa3/Rz9JW4fWbd4botRq9RXWPE1u8N9UpVoj2J4WVZXM8
+ 5Kvg==
+X-Gm-Message-State: AOJu0YxdUH80UhSTHfqvbYnuvne0xqGdn/8Ub3d9DloCe5wRyI87COGt
+ nffDMEb5kSVVhcvwIHxDJq+ECOdY57JoxdKQNadTQ3/n5zqWAkTfIMzMF1fpLPWYSYnuMZuU73H
+ WgEIiHHl48BX1lSspWmYAyMqr592MJ1l8do5NRK+VrA==
+X-Gm-Gg: ASbGnctdgt3LEYLRdADOSiBUGvz6ROoqmgvVdhR18F+jcLcxpupM+mWEFOJi92EScDt
+ zwMVKJbEjgpS9EkW/ndxpPEkyKLp/eO7qyupNk6T12RGmNfHJV4szLb/H9fxaTikfXkYsz5hqlR
+ khq/Q34SAnDjfFoLJdsrrNzRRH4vhLW+lM6Q==
+X-Google-Smtp-Source: AGHT+IGpZqGGBIR+VG1/gdRs8/7nccvHM8X21h7Dg+zU2Z35QdvptI5L8eEve483knR7F7o3Co5Oii3LjORYl9+ppkQ=
+X-Received: by 2002:a05:620a:2910:b0:7ca:cc88:bcef with SMTP id
+ af79cd13be357-7cd4672d904mr3021067085a.15.1747821779290; Wed, 21 May 2025
+ 03:02:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 54L9o6mj054918
+References: <20250520120606.173228-1-sughosh.ganu@linaro.org>
+ <20250520120606.173228-2-sughosh.ganu@linaro.org>
+ <DA1OCJCRJ6KI.1X5DUMJDQ6913@linaro.org>
+ <CADg8p97UZVCUoYe3wzykVMDc+wpVJuz06+vJuJvG6WsMRRto3g@mail.gmail.com>
+In-Reply-To: <CADg8p97UZVCUoYe3wzykVMDc+wpVJuz06+vJuJvG6WsMRRto3g@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 21 May 2025 15:32:47 +0530
+X-Gm-Features: AX0GCFvKjtaCSIadaRPrUiX59jqne6_Am2zu2w64EcvJsVFzqVpUjySUObANv-o
+Message-ID: <CADg8p95TjKPJKLF1+vSVRRh5_a67tUZAs0YSjDaSBrMumqnjGA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] lmb: replace lmb_reserve() and lmb_alloc_addr()
+ API's
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,124 +97,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed, 21 May 2025 at 14:48, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Wed, 21 May 2025 at 13:23, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Sughosh
+> >
+> > On Tue May 20, 2025 at 3:06 PM EEST, Sughosh Ganu wrote:
+> > > There currently are multiple allocation API's in the LMB module. There
+> > > are a couple of API's for allocating memory(lmb_alloc() and
+> > > lmb_alloc_base()), and then there are two for requesting a reservation
+> > > for a particular memory region (lmb_reserve() and
+> > > lmb_alloc_addr()). Introduce a single API lmb_allocate_mem() which
+> > > will cater to all types of allocation requests and replace
+> > > lmb_reserve() and lmb_alloc_addr() with the new API.
+> > >
+> > > Moreover, the lmb_reserve() API is pretty similar to the
+> > > lmb_alloc_addr() API, with the one difference being that the
+> > > lmb_reserve() API allows for reserving any address passed to it --
+> > > the address need not be part of the LMB memory map. The
+> > > lmb_alloc_addr() does check that the address being requested is
+> > > actually part of the LMB memory map.
+> > >
+> > > There is no need to support reserving memory regions which are outside
+> > > the LMB memory map. Remove the lmb_reserve() API functionality and use
+> > > the functionality provided by lmb_alloc_addr() instead. The
+> > > lmb_alloc_addr() will check if the requested address is part of the
+> > > LMB memory map and return an error if not.
+> > >
+> > >        * there's no need to check the result
+> > >        */
+> > >       arm_smccc_smc(MTK_SIP_GET_BL31_REGION, 0, 0, 0, 0, 0, 0, 0, &res);
+> > > -     lmb_reserve(res.a1, res.a2, LMB_NOMAP);
+> > > +     addr = (phys_addr_t)res.a1;
+> > > +     lmb_allocate_mem(LMB_MEM_ALLOC_ADDR, 0, &addr, res.a2, LMB_NOMAP);
+> >
+> > In some case you check the return value and in others you ignore it.
+> > Since you are changing this, check the return address everywhere
+>
+> Yes, I mentioned this in the cover-letter. I have kept the code in
+> arch-specific functions as is when it comes to error checking, as I do
+> not have the associated boards with me. I am not sure what side
+> effects erroring out would have. It would be better if the respective
+> custodians/maintainers fix this, as it would ensure no breakage.
+>
+>
+> >
+> > > + * be -EINVAL if the requested memory region is not part of the LMB memory
+> > > + * map, and -EEXIST if the requested region is already allocated.
+> > > + */
+> > > +int lmb_allocate_mem(enum lmb_mem_type type, u64 align, phys_addr_t *addr,
+> >
+> > Nit, but can you rename it to lmb_alloc_mem() so it uses abbreviations everywhere?
+>
+> You mean a shorter name? I had pondered over using lmb_alloc_mem()
+> instead earlier, but thought about using the current one, as this is a
+> globally visible API.
+>
+> >
+> > > +/**
+> > > + * lmb_can_reserve_region() - check if the region can be reserved
+> > > + * @base: base address of region to be reserved
+> > > + * @size: size of region to be reserved
+> > > + * @flags: flag of the region to be reserved
+> > > + *
+> > > + * Go through all the reserved regions and ensure that the requested
+> > > + * region does not overlap with any existing regions. An overlap is
+> > > + * allowed only when the flag of the request region and the existing
+> > > + * region is LMB_NONE.
+> > > + *
+> > > + * Return: true if region can be reserved, false otherwise
+> > > + */
+> > > +static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
+> > > +                                u32 flags)
+> >
+> > Overall this is a good cleanup. But I was hoping we can rid of this as well.
+> > This is almost identical to lmb_overlaps_region() with very small differences.
+> > One of these takes the lmb list as an argument and the other is also checking some flags.
+> > It's better if we keep one.
+>
+> I can get rid of the above function. It would require putting the
+> checks for the flags in the calling function, but we can indeed use
+> lmb_overlaps_region() instead. I will put this in a separate patch.
+> Thanks.
 
-The following changes since commit a3e09b24ffd4429909604f1b28455b44306edbaa:
+Sorry, I replied here in haste. The reason I introduced
+lmb_can_reserve_region() is because there is a subtle difference
+between what lmb_overlaps_region() does. The lmb_overlaps_region() is
+used primarily to check if an address can be allocated. So it stops
+iterating through the regions as soon as it finds an overlap -- this
+makes sense as we cannot allocate memory over already reserved memory.
+The lmb_can_reserve_region() is used for reserving memory, which might
+already have been reserved. This function then checks if the requested
+region overlaps one or multiple regions, and if the flags of all the
+existing regions match (all regions have flag LMB_NONE) so that the
+reservation can go through. I have depicted the scenario in a diagram
+[1]. So, in case of code re-use, there will have to be some tweaks
+made to lmb_overlaps_region(), so that in case of a reservation
+request, it should not stop iterating through the loop in case of an
+overlap. I will check if it can be cleanly implemented.
 
-  Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custodians/u-boot-mmc (2025-05-20 08:35:31 -0600)
+-sughosh
 
-are available in the Git repository at:
+[1] - https://gist.github.com/sughoshg/accfad55244fa0f3965e2137db8062b2
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
-
-for you to fetch changes up to ff6e20c32ff33c6963f7d0a79a0914681461f4fa:
-
-  riscv: dts: th1520: Complete clock tree (2025-05-21 16:49:58 +0800)
-
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26259
-
-----------------------------------------------------------------
-- Initial SPL support for T-Head TH1520 SoC
-- Improve usability of TH1520 with mainline SPL
-- Support building RV32 & RV64 images
-- riscv: Improve jh7110 support
-----------------------------------------------------------------
-E Shattow (3):
-      riscv: starfive: jh7110: move uart0 clock frequency to config header
-      riscv: dts: jh7110: remove redundant parent nodes
-      riscv: dts: jh7110: override syscrg assigned clock rates with defaults
-
-Mayuresh Chitale (4):
-      riscv: image: Add new image type for RV64
-      riscv: Select appropriate image type
-      booti/bootm: riscv: Verify image arch type
-      riscv: insn-def.h: Fix header guard
-
-Yao Zi (16):
-      riscv: dts: binman.dtsi: Drop filename property for proper U-Boot
-      riscv: Access gd with inline assembly when building with LTO or Clang
-      riscv: lib: Split out support for T-Head cache management operations
-      configs: th1520_lpi4a: Add UART clock frequency
-      riscv: cpu: Add TH1520 CPU support
-      ram: thead: Add initial DDR controller support for TH1520
-      riscv: dts: th1520: Preserve necessary devices for SPL
-      riscv: dts: lichee-module-4a: Preserve memory node for SPL
-      riscv: dts: th1520: Add DRAM controller
-      riscv: dts: th1520: Add binman configuration
-      board: thead: licheepi4a: Enable SPL support
-      doc: thead: lpi4a: Update documentation
-      riscv: cpu: th1520: Initialize IOPMPs in SPL
-      clk: thead: Port clock controller driver of TH1520 SoC
-      riscv: cpu: th1520: Select clock driver
-      riscv: dts: th1520: Complete clock tree
-
- arch/riscv/Kconfig                                 |    9 +
- arch/riscv/cpu/cpu.c                               |    6 +
- arch/riscv/cpu/cv1800b/Kconfig                     |    1 +
- arch/riscv/cpu/cv1800b/Makefile                    |    1 -
- arch/riscv/cpu/th1520/Kconfig                      |   22 +
- arch/riscv/cpu/th1520/Makefile                     |    8 +
- arch/riscv/cpu/th1520/cache.c                      |   32 +
- arch/riscv/cpu/th1520/cpu.c                        |   21 +
- arch/riscv/cpu/th1520/dram.c                       |   21 +
- arch/riscv/cpu/th1520/spl.c                        |   96 ++
- arch/riscv/dts/binman.dtsi                         |   15 +-
- arch/riscv/dts/jh7110-common-u-boot.dtsi           |    1 -
- arch/riscv/dts/jh7110-u-boot.dtsi                  |   73 +-
- arch/riscv/dts/th1520-lichee-module-4a.dtsi        |    9 +-
- arch/riscv/dts/th1520-lichee-pi-4a.dts             |    1 +
- arch/riscv/dts/th1520.dtsi                         |   91 +-
- arch/riscv/dts/thead-th1520-binman.dtsi            |   55 ++
- arch/riscv/include/asm/arch-th1520/cpu.h           |    9 +
- arch/riscv/include/asm/arch-th1520/iopmp.h         |   42 +
- arch/riscv/include/asm/arch-th1520/spl.h           |   10 +
- arch/riscv/include/asm/global_data.h               |   19 +
- arch/riscv/include/asm/insn-def.h                  |    6 +-
- arch/riscv/include/asm/u-boot.h                    |    4 +
- arch/riscv/lib/Makefile                            |    1 +
- arch/riscv/lib/bootm.c                             |    4 +
- .../riscv/{cpu/cv1800b/cache.c => lib/thead_cmo.c} |    0
- board/thead/th1520_lpi4a/Kconfig                   |    5 +-
- board/thead/th1520_lpi4a/Makefile                  |    1 +
- board/thead/th1520_lpi4a/spl.c                     |   48 +
- boot/image.c                                       |    3 +-
- cmd/booti.c                                        |    7 +-
- common/board_r.c                                   |    4 +-
- common/init/board_init.c                           |    7 +-
- configs/th1520_lpi4a_defconfig                     |   18 +
- doc/board/thead/lpi4a.rst                          |   58 +-
- drivers/clk/Kconfig                                |    1 +
- drivers/clk/Makefile                               |    1 +
- drivers/clk/thead/Kconfig                          |   19 +
- drivers/clk/thead/Makefile                         |    5 +
- drivers/clk/thead/clk-th1520-ap.c                  | 1031 ++++++++++++++++++++
- drivers/ram/Kconfig                                |    1 +
- drivers/ram/Makefile                               |    4 +
- drivers/ram/thead/Kconfig                          |    5 +
- drivers/ram/thead/Makefile                         |    1 +
- drivers/ram/thead/th1520_ddr.c                     |  787 +++++++++++++++
- include/configs/starfive-visionfive2.h             |    2 +
- include/configs/th1520_lpi4a.h                     |    1 +
- include/image.h                                    |    3 +-
- 48 files changed, 2459 insertions(+), 110 deletions(-)
- create mode 100644 arch/riscv/cpu/th1520/Kconfig
- create mode 100644 arch/riscv/cpu/th1520/Makefile
- create mode 100644 arch/riscv/cpu/th1520/cache.c
- create mode 100644 arch/riscv/cpu/th1520/cpu.c
- create mode 100644 arch/riscv/cpu/th1520/dram.c
- create mode 100644 arch/riscv/cpu/th1520/spl.c
- create mode 100644 arch/riscv/dts/thead-th1520-binman.dtsi
- create mode 100644 arch/riscv/include/asm/arch-th1520/cpu.h
- create mode 100644 arch/riscv/include/asm/arch-th1520/iopmp.h
- create mode 100644 arch/riscv/include/asm/arch-th1520/spl.h
- rename arch/riscv/{cpu/cv1800b/cache.c => lib/thead_cmo.c} (100%)
- create mode 100644 board/thead/th1520_lpi4a/spl.c
- create mode 100644 drivers/clk/thead/Kconfig
- create mode 100644 drivers/clk/thead/Makefile
- create mode 100644 drivers/clk/thead/clk-th1520-ap.c
- create mode 100644 drivers/ram/thead/Kconfig
- create mode 100644 drivers/ram/thead/Makefile
- create mode 100644 drivers/ram/thead/th1520_ddr.c
-
- Best regards,
- Leo
+>
+> >
+> > [...]
+> >
+> > Overall this is moving towards thr gith direction
+>
+> Good to know :)
+>
+> -sughosh
+>
+> >
+> > Cheers
+> > /Ilias
