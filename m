@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72038C54E90
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 06:58:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B89C54756
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:05:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DA5282E31;
-	Thu, 22 May 2025 08:58:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 247A482E31;
+	Thu, 22 May 2025 09:05:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BDrpG6hS";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HApxgxVZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AF3B803DF; Thu, 22 May 2025 08:58:25 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 3E26F82F8E; Thu, 22 May 2025 09:05:51 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E400882E28
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 08:58:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B46182E28
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5D24A5C5578;
- Thu, 22 May 2025 06:56:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC698C4CEEA;
- Thu, 22 May 2025 06:58:20 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7333049E75;
+ Thu, 22 May 2025 07:05:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09944C4CEE4;
+ Thu, 22 May 2025 07:05:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747897101;
- bh=+MyixZPs5ZUIdHXTQ6cKzvvopD7Eyvp48ufQvRUZgwk=;
+ s=k20201202; t=1747897547;
+ bh=9TQXwCkIUH8zZRRTjJHmlWXnlq2qodIvp5Vw0Plcqjw=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=BDrpG6hS56ERqs0y0+8tVC/a5cWZ0vYWx6CQPQFHjLJeR/Aabmjo+uxB2H6ItVzm4
- qkVDTCCRMuzx+kubW2EZGPh3LdKKDAadNXqwr3xJgtSmJNRjhRkDTa5NdYGQXtpCEI
- H7DgzecDfOE6OpE05Lwe4dW/CDcL9GbnXfHhajCdwtDvZUGlLTDpSveCNMpgC+1Pye
- Uoh1Wtdm3DLBDNWN6aDDtkiP4uaQHdqM/NNWZPccKp9KBdRLqBRTv2d2D8gaPHrA34
- +72JvA4kQSTR9hEyZ9uNBrD/eEGHv339jAESE+WUBFgiUi/0aucrV7I1yQ4Ey4asCt
- 58TnFzXhmlhsg==
+ b=HApxgxVZ1+NXCe16wYzAvvqYJ8SW2GT9Ex3wBRYEwnzgt0vEGdg1M1Mdmskb+PiPO
+ FOBlABxGpjXmBOMwc2qdooWq+bKfYlkglSQJvwUobsd0Af1xZwkxs8IH2LmB3E/gCU
+ /raYrWkuW93KeISWW2l/JF1eYSnOeX6ONw+dR1BNzcTg1wOeEJPT2cao5ewdfdnGJo
+ rbLBKjD3tAp2ua7N8vKD7Pe1mUMVHjV8ZOh6saXdp1C/4cl/IZvVl5eBY8/alrUpdU
+ /AWrn/ACNDPq3baZAAvdb7wpf2cJ8tGL34yTjNClWKIJAnFV8tSUTFkeAd3uaoKsyj
+ LhVu1XLpPuRsw==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- neil.armstrong@linaro.org, u-boot@lists.denx.de, Dmitrii Merkurev
- <dimorinny@google.com>
-Subject: Re: [PATCH RFT v3 0/3] fastboot: add support for generic block
- flashing
-In-Reply-To: <20250521190347.GF100073@bill-the-cat>
-References: <20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org>
- <174774092427.332438.8643753165301653831.b4-ty@kernel.org>
- <87zff6nhmo.fsf@kernel.org> <20250521151236.GC100073@bill-the-cat>
- <87wma9okxy.fsf@kernel.org> <20250521190347.GF100073@bill-the-cat>
-Date: Thu, 22 May 2025 08:58:18 +0200
-Message-ID: <87a575gmid.fsf@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH 09/17] include/dfu.h: Audit include list
+In-Reply-To: <20250521230119.2084088-10-trini@konsulko.com>
+References: <20250521230119.2084088-1-trini@konsulko.com>
+ <20250521230119.2084088-10-trini@konsulko.com>
+Date: Thu, 22 May 2025 09:05:45 +0200
+Message-ID: <877c29gm5y.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -74,112 +70,34 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On mer., mai 21, 2025 at 13:03, Tom Rini <trini@konsulko.com> wrote:
+Thank you for the patch.
 
-> On Wed, May 21, 2025 at 08:52:41PM +0200, Mattijs Korpershoek wrote:
->> Hi Tom,
->> 
->> On mer., mai 21, 2025 at 09:12, Tom Rini <trini@konsulko.com> wrote:
->> 
->> > On Wed, May 21, 2025 at 04:49:35PM +0200, Mattijs Korpershoek wrote:
->> >> Hi Neil,
->> >> 
->> >> On mar., mai 20, 2025 at 13:35, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
->> >> 
->> >> > Hi,
->> >> >
->> >> > On Tue, 06 May 2025 18:10:06 +0200, neil.armstrong@linaro.org wrote:
->> >> >> This serie permits using any block device as target
->> >> >> for fastboot by moving the generic block logic into
->> >> >> a common set of helpers and also use them as generic
->> >> >> backend.
->> >> >> 
->> >> >> The erase logic has been extended to support software
->> >> >> erase since only 2 block drivers exposes the erase
->> >> >> operation.
->> >> >> 
->> >> >> [...]
->> >> >
->> >> > Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
->> >> >
->> >> > [1/3] fastboot: blk: introduce fastboot block flashing support
->> >> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88239b5bb04bea2b58f7bf4c3ea72cf832de818c
->> >> > [2/3] fastboot: blk: switch emmc to use the block helpers
->> >> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/25ab5c32c28b9f25fb193f726f239d75af3c365a
->> >> > [3/3] fastboot: integrate block flashing back-end
->> >> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a885bd8c969e25d03bf406207d89b1145c9490fb
->> >> 
->> >> It seems this series cause CI to fail:
->> >> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26238
->> >> 
->> >> Without the patches applied, it passes:
->> >> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26235
->> >> 
->> >> Do you have any idea what is going wrong?
->> >> I could not find anything obvious by skimming through the logs.
->> >
->> > It's a Kconfig problem then. Some platform is prompting for a value (not
->> > a y/n) and there's no default.
->> 
->> You are correct. Thank you for the suggestion.
->> 
->> I've applied the following diff to 3/3:
->> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
->> index 68967abb751e..fdf34a6abe1e 100644
->> --- a/drivers/fastboot/Kconfig
->> +++ b/drivers/fastboot/Kconfig
->> @@ -200,6 +200,7 @@ config FASTBOOT_MMC_USER_NAME
->>  config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
->>         string "Define FASTBOOT block interface name"
->>         depends on FASTBOOT_FLASH_BLOCK
->> +       default "none"
->>         help
->>           The fastboot "flash" and "erase" commands support operations
->>           on any Block device, this should specify the block device name
+On mer., mai 21, 2025 at 16:51, Tom Rini <trini@konsulko.com> wrote:
+
+> This file does not need a forward declaration of 'struct list_head' as
+> it includes <linux/list.h> so remove it.
 >
-> Assuming that the code will see "none" and handle the error correctly,
-> OK. But we really should have a configured true value here, yes?
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-The code does not handle any special cases.
-If FASTBOOT_FLASH_BLOCK_INTERFACE_NAME is "none", we will call:
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-blk_get_dev("none", 0);
-
-Which will then be handled via:
-
-	if (!dev_desc) {
-		fastboot_fail("no such device", response);
-		return -ENODEV;
-	}
-
+> ---
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> ---
+>  include/dfu.h | 1 -
+>  1 file changed, 1 deletion(-)
 >
->> @@ -212,6 +213,7 @@ config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
->>  config FASTBOOT_FLASH_BLOCK_DEVICE_ID
->>         int "Define FASTBOOT block device identifier"
->>         depends on FASTBOOT_FLASH_BLOCK
->> +       default 0
->>         help
->>           The fastboot "flash" and "erase" commands support operations
->>           on any Block device, this should specify the block device
->
-> I do not like this at first. If FASTBOOT_FLASH_BLOCK_DEVICE_ID is set,
-> there should be a valid ID set too yes? Potentially worse, is 0 a valid
-> option here? If so, is that likely to be a real and common one? In that
-
-Yes, 0 is a valid option here. Think of this symbol as a similar one to
-FASTBOOT_FLASH_MMC_DEV however it's for generic block device type
-(virtio, scsi, ...)
-
-I'd think that 0 is typically the most common value, since it's the
-first block controller of a specific type.
-
-> case, we should also be updating the help text to make sure it's clear
-> what the normal range is I think.
-
-Ok. That's a bit too much for me to do in a fixup.
-
-Neil, can you send a v4?
-
->
+> diff --git a/include/dfu.h b/include/dfu.h
+> index 12f9dfcdfcdf..80593a906fd2 100644
+> --- a/include/dfu.h
+> +++ b/include/dfu.h
+> @@ -173,7 +173,6 @@ struct dfu_entity {
+>  	unsigned int inited:1;
+>  };
+>  
+> -struct list_head;
+>  extern struct list_head dfu_list;
+>  
+>  #ifdef CONFIG_SET_DFU_ALT_INFO
 > -- 
-> Tom
+> 2.43.0
