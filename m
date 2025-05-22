@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FEE5C54E90
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 16:57:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 102D3C54E90
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 18:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3BDE83189;
-	Thu, 22 May 2025 18:57:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A41083108;
+	Thu, 22 May 2025 20:37:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xgi6kgbq";
+	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="N6ZYosBY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAAF383164; Thu, 22 May 2025 18:57:03 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D9C258310F; Thu, 22 May 2025 20:37:26 +0200 (CEST)
+Received: from mx0b-002e3701.pphosted.com (mx0b-002e3701.pphosted.com
+ [148.163.143.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37D8083055
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 18:57:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6632B830E9
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 20:37:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72bc3987a05so50411a34.1
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:57:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747933020; x=1748537820; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dhw8dti74vy39y7NFec6phy7VZrvNeCQtoodg7PKGhg=;
- b=Xgi6kgbqdaIh6NWAemnkG2imEI/9wWkggfDvmTLxm7UdfduVenlHVXnTBt7GbOVK5c
- F1AAThJzOMLkgIvXw89e/A2tOnIdNrlyeFHXq6ucYIL7Thu/BbyVFdKMR8RG9Kv0nYrk
- tijdqVAh31t4WkG6ey6umdK8URiqVdoul97Hw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747933020; x=1748537820;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dhw8dti74vy39y7NFec6phy7VZrvNeCQtoodg7PKGhg=;
- b=t2ejD6T6GVEhSNKeEuJZHq6oxDHleNIw8Ue3NMxnMhwnyFCeTxbN2hpSRW+QR4domJ
- Glw+WwTzhM3OCOXcd4ujk3zxVFx/Z38HMEzvssIXOq68Md2H9n3q1vi0dIHWCkItUAiP
- GyKmzKFCaUDQgjZOEKX1y+Ybfx0bxaWjNPflglHAjdU5vlcfKfTF0GXnYPY7JrXcXNzW
- /iMOk41H5WnU7wiS2EhSLYxkpjUUvMze3YHq8pxzbjBx0kC2wOZ11dXPRw+eOLxpfGY2
- rIDsJWf7Y60hyS7/oSLF6qlpc1FrGySesPrQn7Zj7lI4h8cfjhMm+caQSGNqdlhTxQqn
- l8ww==
-X-Gm-Message-State: AOJu0YwQsmo1FMRLItFyQH8arUIHYEJMKYZbWQss8/g84rA5qqNu3cTm
- skUW0vzcjIikEdri9X4Kk0ixwReAlwibw6jxy3VymIDv5ULOQAC98UcmUR1ItfCSz0I5nBOT2Nl
- TPvF0H6w=
-X-Gm-Gg: ASbGnct/Pg9U7vmW2q9VqluFOLPQZGO+D5Bk8wrLRuQTZwbBkceIXq9lR65v2KLfFtH
- m8jLOakgIKclZsNtIfRwCb8ifba0Dnoym29jptRMOA+KIbR5GPfV9VcuwdQvNZ3nbqxJ2eBlIar
- /q3yi++RBbBiwSqQ8s4YSHCuQGmipOq6o2BZib4xCCTIjcTRFLTsT9VE+O+JO9q9VWuX2fIcln7
- ox75o/GVqpKv9jxABS+sySVNZsoJ2oppKkD96SXEih1qhjLfnBb6oUjNK3IY+2O/v5Oj1g92UoA
- LU7wRFjWNzWgwTCd4fDAh7n/0sMSvn6CFEZ2wLVSfD/3b4P5MspAoGpRoxOgK5421s/AdPdp8BL
- uiSTciKRd3jgV
-X-Google-Smtp-Source: AGHT+IHTyW6C9t6oRsvthd9FwZQAOyjDGyAex9lw2LgIkW9ls/bwWP72kSC0tCHFztzxJ4Arkc3DMw==
-X-Received: by 2002:a05:6830:391c:b0:72b:9422:aec with SMTP id
- 46e09a7af769-7354c9bfd16mr249902a34.8.1747933019845; 
- Thu, 22 May 2025 09:56:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6b3dce8sm2546103a34.53.2025.05.22.09.56.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 09:56:58 -0700 (PDT)
-Date: Thu, 22 May 2025 10:56:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH 0/4] list.h/treewide: get rid of no-op prefetch()
-Message-ID: <20250522165656.GB2179216@bill-the-cat>
-References: <20250507121246.518691-1-ravi@prevas.dk>
+ dmarc=pass (p=reject dis=none) header.from=hpe.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=verdun@hpe.com
+Received: from pps.filterd (m0150244.ppops.net [127.0.0.1])
+ by mx0b-002e3701.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54MEmnxn029238;
+ Thu, 22 May 2025 18:37:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=pps0720; bh=w8aoH4HuSthhDdXiC6iy1Jpzk0RvrezxVyExL
+ ouFqEc=; b=N6ZYosBYznCjEohjBjyzbEJOK56Zirjo69HsausqGsvZHNFmxdnyt
+ qNOCddf1nBFXKJmA5sQ+Qqan1Lp1k/OTvsmiG8njPU3OHVUiFbVCQgBG3aaqlGZs
+ ohQhemqwKRc2wAHV9zC1rswn5wd2CKqtfA/WjD4x/b6jhqMLA3APTSNQT9H3kL4h
+ hEJiZ3hM9ow0ctx4ZkOLWp4RQNuv0fcMd7bDYXv6JcvkLu6eaWY9X8zQ2T+hK07y
+ L90xDnrwxhzChWYClHigtMjDxVqm/ApOySkXTeIWR+uYVETw6i0GPvRCmDOBB/n3
+ UP482e1mEhtB2Lxh0hxKfMr+Gm52gBQEw==
+Received: from p1lg14881.it.hpe.com ([16.230.97.202])
+ by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 46t60rsu3c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 22 May 2025 18:37:22 +0000 (GMT)
+Received: from p1lg14886.dc01.its.hpecorp.net (unknown [10.119.18.237])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by p1lg14881.it.hpe.com (Postfix) with ESMTPS id A8C97805E4B;
+ Thu, 22 May 2025 18:37:21 +0000 (UTC)
+Received: from hpe.com (unknown [16.231.227.36])
+ by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id 52AF6804000;
+ Thu, 22 May 2025 18:37:21 +0000 (UTC)
+From: verdun@hpe.com
+To: verdun@hpe.com, jmverdun3@gmail.com, u-boot@lists.denx.de
+Subject: [PATCH v5 0/1] *** Initial Wiznet W5500 support ***
+Date: Thu, 22 May 2025 18:37:10 +0000
+Message-ID: <20250522183711.22708-1-verdun@hpe.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UYB+QbN4nqX0/654"
-Content-Disposition: inline
-In-Reply-To: <20250507121246.518691-1-ravi@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: Zhb5rdTOiarhXc5yYGmysp1jOU5xfWp0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIyMDE4NyBTYWx0ZWRfXy4NTY3B7rC7q
+ R5bzTxEZg3B540ZmARJfXhjCShlyrRnai/zY2ZVDKImuvybfuyzvqyHcRp4jLQCvayJjJUg/sKh
+ 8ySRp7ITexZRUGLr19Cgkx+DSaGhEkc8qmDCMaJVMIPR2ZlPdbTnidtuDM4/f/dfVfpGFgO67+O
+ T1mUOebF6OJfI9q/SfS2iaEQLJT47tL8aNWz8opZEYAwR1Cf8WNeZ5hGwAX4nkMjwwrkKUbfrz6
+ P8AKenrOqmaXqhdW28aj7mivTusiX/IZxBBu7NdJlXtIx9Kmt/v25TerE3jp7AfuZhTQ6n4w1Rl
+ J75evUUoKQk7AEmIMQyuxiUHZ89Evfe0GCvv9ZfNi/wliQ6gISMwjo7JFNxTYH7Zn6cCQii05Wc
+ dknPoiTY
+X-Proofpoint-GUID: Zhb5rdTOiarhXc5yYGmysp1jOU5xfWp0
+X-Authority-Analysis: v=2.4 cv=MtlS63ae c=1 sm=1 tr=0 ts=682f6ee2 cx=c_pps
+ a=FAnPgvRYq/vnBSvlTDCQOQ==:117 a=FAnPgvRYq/vnBSvlTDCQOQ==:17
+ a=dt9VzEwgFbYA:10 a=MvuuwTCpAAAA:8 a=_lroCgBNtfBhefZ1LIIA:9
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-22_09,2025-05-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 clxscore=1015
+ spamscore=0 mlxlogscore=999 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 malwarescore=0 suspectscore=0 bulkscore=0
+ mlxscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505160000 definitions=main-2505220187
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,65 +96,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Jean-Marie Verdun <verdun@hpe.com>
 
---UYB+QbN4nqX0/654
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+v5
+Remove of_to_plat init
+Remove unused cmd variable from probe
+Remove socket open command from hw mac setup code
+Remove read back mac address command from hw mac setup code
+Improve comment about RX_RSR register usage
+Check error code of spi_write calls
+Check error code from spi_command
+Enhance some if statement
+Order variable definition per line length
+Return ENOMEM in case malloc fail
+Return EAGAIN in case of failure during packet reception
+Remove all spi related functions call to pack the code and
+avoid redundancy
+Use pointers to call xfer instead of straight data
 
-On Wed, May 07, 2025 at 02:12:42PM +0200, Rasmus Villemoes wrote:
+v4
+Fix some comment typos
+Remove unnecessary IFDEF
+Drop w5500_eth_tx_hand_f definition and struct element as they are unused
+Reorder function to avoid predefinition
+Reorder variable definition per data size in functions
+Fix return value with spi_read and spi_read16
+Drop return value definition into spi_write16
+Define MAX_PACKET_SZ to 9000 bytes
+Use dynamic allocation for readbulk
+Realign readpoll_timeout call
+Add comment to enhance loop clarity on receive buffer length
+Remove mode variable into write_hwaddr
+Invert some direct if loop for indirect as to reduce code complexity
+Remove imr variable into w5500_socket_intr_mask function
+Drop rtr variable into probe function
 
-> While looking through list.h, I saw that the regular list_* helpers
-> (and one of the hlist_* ones) still contain the prefetch() that was
-> removed in linux 14 years ago. It doesn't do anything, but makes the
-> macros harder to read, so get rid of it, and the fallback, no-op
-> definition that they relied on. That requires removing a few uses
-> outside list.h as well.
->=20
-> checkpatch warns about some whitespace issues in list.h, but as I've
-> copied whole kerneldoc+#define blocks directly from the linux kernel,
-> I think it's better to just accept that so that we don't introduce
-> needless diffs. The "macro argument reuse" arguments should also be
-> ignored, as e.g. the "member" arguments are obviously always just bare
-> identifiers, and the "pos" arguments must be assigned to multiple
-> times.
->=20
-> Rasmus Villemoes (4):
->   linux/list.h: drop use of prefetch()
->   treewide: drop no-op prefetch() calls
->   mips: drop unused prefetch code and logic
->   linux/list.h: drop fallback definition of prefetch()
->=20
->  arch/mips/include/asm/processor.h |  16 -----
->  drivers/net/mvpp2.c               |   1 -
->  drivers/net/octeontx/nicvf_main.c |   2 -
->  drivers/usb/gadget/at91_udc.c     |   1 -
->  drivers/usb/musb-new/musb_core.c  |   2 -
->  include/linux/list.h              | 104 +++++++++++++++++-------------
->  6 files changed, 59 insertions(+), 67 deletions(-)
+v3
+Remove Global definition
+Replace polling by read_poll_timeout
+Remove unused function
+Add empty lines before returns statement
+Remove declaration and code mix
+Switch to dev_dbg
+Relocate read/write helpers to top of file
+Remove include and incorporate it into the code
 
-Unfortunately this leads to build problems on lots of platforms:
-https://source.denx.de/u-boot/u-boot/-/jobs/1141951
+v2
+Rebase source tree to create patch against top of tree and avoid issues
+with Kconfig and Makefile
+Recheck checkpatch.pl output as to minimize issues to CHECK state
+CHECK issues reported are coming from copy/paste section from the linux
+kernel driver, and aren't processed as being strong issues.
+command ran scripts/checkpatch.pl --no-tree v2-0001-Initial-support-for-Wiznet-W5500.patch
 
---=20
-Tom
 
---UYB+QbN4nqX0/654
-Content-Type: application/pgp-signature; name="signature.asc"
+Jean-Marie Verdun (1):
+  Initial support for Wiznet W5500
 
------BEGIN PGP SIGNATURE-----
+ drivers/net/Kconfig  |   9 +
+ drivers/net/Makefile |   1 +
+ drivers/net/w5500.c  | 610 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 620 insertions(+)
+ create mode 100644 drivers/net/w5500.c
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvV1gACgkQFHw5/5Y0
-tyz4fgwApEFNrkTY4jzBNhAlet1NlVnhX9f8SjynImXhDScy25Ui7WCYK9Qm6Om1
-hHe9vBSHnNYzAQrh20HlBA+lj9ZODAkXuv2B4RpQgAkXWwgsrorhkzJ7XEC3colW
-BR3LENQODaFER6pMbcxTAdgc8uFBAu8NLjrtjp9H/kcXdu+0sEeNRjEC9aX4j7g2
-GHF+AqRhJ4MmphM/R8obnXvu0cTDXRDLAGPpMpf6V3QF6Ifw+Y0mm3Rx8fbTKR6a
-naFPY1Kl1TValakP/0LBr+1ySiHgsYk4PSBXYOicMUwOuE3+Hl5TATRg98qQZmPe
-0jsjU2fH+RYFnsnm3O80nVqB33ZoTsBC3r1ciSHifXwxvC1CLyJdLD3PafP2Xbnu
-oKCkTXK/P6XmykDcsQMoSbVTCNLEFXurVQ5HaXK4mYvv0i90kTvam2qEVL5jxZZs
-Q31ouCJEROKaWrPfXPJ8wmYZwkGQhLcoiIqsCpjHv3nT670jGw49G5vP2PI4Ah2G
-9zxlFi+q
-=p9jh
------END PGP SIGNATURE-----
+-- 
+2.43.0
 
---UYB+QbN4nqX0/654--
