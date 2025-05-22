@@ -4,202 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976A8C54E65
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 05:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6FBC54756
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 06:18:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1EAA82E28;
-	Thu, 22 May 2025 07:57:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 4995082E28;
+	Thu, 22 May 2025 08:18:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NM48WE84";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FOMW3awA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E942582E31; Thu, 22 May 2025 07:57:05 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::624])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2572982E31; Thu, 22 May 2025 08:18:08 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96EF282E26
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 07:57:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E35D082E26
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 08:18:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=csCmoFAGWvgFLOCcXgUkLRJNKlpuiDhAYJgZf7SgO4i6hm6XmtIDF+CZw5+wJsG6W09NYQe8FPyoZCiEducijSrb7Qa+V0A3Eg1GNeRN2l2n1Ws/flBK2hyQdUrdaCQQ2EaeS8A9DS2HGNtfTp1Sgl8Lsll9nxif5cWTUQBdgjcgDQW1Ry7FzcztFNAibMwqvNqsZBMq1gp1HG1wZ14SCTEJTsxZ3WxSajDwAQ42ow64zWns3X5FsnYKY808JgvCeeFTkUKVSeOFWNohLxnfgV2KFtuV2iiSAxrtGS7vdmZUXGTrJOYmqw6CulO/w0uzYf4j8iX4IYNmWGrgWN+BvQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YFr4Ab3ojwf0BsuQLMklh7UxUVWekG2/F65lLWSdkHI=;
- b=Bs7Z9ENbxEbNziTao+nvRQG8BFFkj38FTmvxw1a21LM7LqIMSHN7JwLw20Lk4wkcY0jxzPDpS+aHJ8p3/V5afM61VUnQY791MzEMaOrJTqfdDwGt9meHjT4jBMiWLoTmc23/NkwB3osC05HABKiO8nYE0EKbzJF3iIOHdD1+3BoZoEILdTArSvUrqvhpkO9hE7xX0CHCQUFo6CIS2YtaKcyHqzO4XFCt/Z838bOlfSJGsCEMxmuveZ78PeBrxV6JPh6J9M6H1nWEvLoPHOu8NqbODKMAzKTO7pYB+LlK85iedfbAXVL3k45/sm54Sv0hAYiK9tN0yNE9XNvurVh3WA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YFr4Ab3ojwf0BsuQLMklh7UxUVWekG2/F65lLWSdkHI=;
- b=NM48WE847NphHEVjsVJycUTqcCOmaXVvNHxAqzvTOFOgNFFQMGeqq9Sei7EamCnuZUU31S02AXStKIKi78/KbVNhpRYYIoqi6qTDRwWG0jHR1RzO6zddsAftuH5X4GMw8IZ2Lbf2v18ECGJuej7MIPAYxY1sG8nPO3d61+D0GEo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by IA1PR12MB7616.namprd12.prod.outlook.com (2603:10b6:208:427::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Thu, 22 May
- 2025 05:57:00 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.8769.019; Thu, 22 May 2025
- 05:56:59 +0000
-Message-ID: <7d8ba8c8-49f6-43a3-af45-8a17d106af55@amd.com>
-Date: Thu, 22 May 2025 07:56:56 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] phy: zynqmp: Fix sgmii clk ctrl GTR lane bit shift
-To: Rutherther <rutherther@ditigal.xyz>, u-boot@lists.denx.de
-References: <20250521181620.8175-1-rutherther@ditigal.xyz>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <20250521181620.8175-1-rutherther@ditigal.xyz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PH7P221CA0021.NAMP221.PROD.OUTLOOK.COM
- (2603:10b6:510:32a::27) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=72372ec9ec=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54M33ldp004405;
+ Thu, 22 May 2025 08:18:01 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ IdkDQLU7c5TXMk8aFnr7z3PKf1PB/+MlAammx07ZcOo=; b=FOMW3awAYgQHuTwd
+ aBeHccZdIuJ0gYu83jVrvbWdbLRw5+8CV9v54uCNbE9IOMk34wKvkOPN/r67eUKv
+ jbpwijVzTM145cHfzOcls2aDuwITaqCS2XRBBH9/yjImPAhnN9/2BfjWsuA71Ax4
+ w8b359QqiQLbCnoQ5Dv+m70+MMoggWPxhhLSaLCsJbp7QScO/VHozje9JbTUXtyI
+ zXQhCwzJphvtT0YHqJ6BFG2/+GvpJCmTXoBBSODLUpA6irqgHdIWtWj+N6iuRbBm
+ s70hzh2UIi7K7G77OC7Bh9FkzOUo1MN6OhS6U0/9AoEzk/7aufvHR5V+TQmF4yzx
+ /MpI0A==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwf47991-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 22 May 2025 08:18:01 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CD5AC4004D;
+ Thu, 22 May 2025 08:17:07 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EF5A4B194E1;
+ Thu, 22 May 2025 08:16:40 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 22 May
+ 2025 08:16:40 +0200
+Message-ID: <2816b9e4-bc47-4fae-90f8-527a30d00769@foss.st.com>
+Date: Thu, 22 May 2025 08:16:39 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|IA1PR12MB7616:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0ab0c977-5595-499c-adc3-08dd98f5776b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YUM5cmFuemIzWm4yWGZIaWVXQjFOR3VoL1lvOGpOWGhUcHlBK0oyaFo4U0Vr?=
- =?utf-8?B?SXFsbUFhaUR3b2Z2L1AwdHRNekJoMHVxcDRuc1dETEFLL3cvVSszWFhkQlBu?=
- =?utf-8?B?YWc0SllDQXFhNVphT2thcGZtbEt6L1VJb2M4MDlqYktFUitsVm5lcStHaDVo?=
- =?utf-8?B?a0xJTnZKTjQwb3djMDRkckR1akxiZ0YrbnpGaVFESG9mdVltTW85OWJuU21H?=
- =?utf-8?B?S3pTaVl1MjdSM2VCWUd6ZmNDcFg5aWVYOElJSW1Mc0ZVTlIrRyszTU9IM296?=
- =?utf-8?B?emhtby9UNUtKUUVIT0ZNT290UEZFbEV6eCtaeDJvSXRyN1luaTZxbS9SaWdI?=
- =?utf-8?B?c2dYQWpKaC9IekRFMG9KTi9HMUU4K2NuNjdyY3VFTzFnRkZPZ21oMmIxaVRW?=
- =?utf-8?B?RUFPK0ZEQVRDcGgwV3h6K3RKRXozczFMNzFOcW5wZTczTlVjdmJNZEhCbjdX?=
- =?utf-8?B?d1V1TGJkc09CTUVyY1FuaEgvR3hFQXF3a1QwYTZWb2FMbE1MVkpIcm5jQjRZ?=
- =?utf-8?B?dVphTFlVcE9oWWFFQVBXYWRra0lLelgxOFUwcnpBT3NmL0E5c2dqbkxQYXVP?=
- =?utf-8?B?dVMrSmVXYm5oY0pmSjF1d1pWZjBhd204Q0RsNUV6Rnl1MzFJZ0wzM1JnNStK?=
- =?utf-8?B?T29kVzdWdkQzL1o4L0Fib09jQmt2WFpLNCtLdGxhaTJFbytWZWlhVHR2N0xW?=
- =?utf-8?B?VisrcTM2RWdwRVhOSkpPYWdMN05JOXJNUFBJUlNzK3NEdVJzYmFJaTJUSmZV?=
- =?utf-8?B?SkR2VlFIWGdqb1V2V083ZERVMVdNTW9OQ3Z1RzBnZzV6YXFHVmI4eTIray9v?=
- =?utf-8?B?SC91U1VKcFVXTXEwN0VVQklKZGJqZTlRMld0NldPVm9OTnZXMEIwTDF5N0tE?=
- =?utf-8?B?Qk0vb3owOStONGY5Ny9DOW1LTDltdW5KWTNpRXFlNGsyT0VKWVFHd0hIK2pY?=
- =?utf-8?B?MUFoZzJ5QS9UNVJCMStuQlVmS0poMmlvSy8xSUVqYWJQQzM1SkQwNnNpeGxv?=
- =?utf-8?B?K0hISzRWWFFIOEVYckJhbDJnbTV5Q3hBMzBpRTJ4U24xYWswQng0SnFHSDZt?=
- =?utf-8?B?bzdxN2FncE81OTJRL2lMQXAyd3BlOEFiM0xrMlc3NFI5VGZaK0pKSUxxNDEz?=
- =?utf-8?B?YmxsMHdyTWd3d3pLWFlTMURBam5yeGVBVmE0c2p3ZW1sRnJBZ3lUdFBUN1JF?=
- =?utf-8?B?UWl5QUo1bUo2NXVLOTBSL1AreTdwWXhJWEV5Nk9ONlZGMU1uMXVHb2Q2bFNY?=
- =?utf-8?B?WGIvZlJlREcycFFhVlNDd2I1eU5kSXFlL1NlWlBqbGJacjZxUDI4cTZLWFZu?=
- =?utf-8?B?cExtSkFBcHl4SUh1T3dTOWxRd3hCeGFwT0dDUlJKTG5lSDRYUHQzUWtQWUw3?=
- =?utf-8?B?N3JaNExUMitPdWdFK1pIOTAyTE5RdmFHbkw1djFMUXRONHFjMHFwaUZKbWwy?=
- =?utf-8?B?b0xTY3N2YnlKK0t3LzVoalJmd1ZNSHEvK05ORSs0OHZmcThFSU9qbVBxcUpD?=
- =?utf-8?B?cGx6NXgrT20vS3hPa2VHanh2K1p5SUo2Z0g3by9wcEVoTXgwaEZmeHE3dHZD?=
- =?utf-8?B?Y0N5dmQvUHNGcm5HeXFDcThqd0VvTDVZR3pDK0RaY053alMwSnJDcUNjaVFJ?=
- =?utf-8?B?S2tWZW55MTZYbDZMYlA3NFRqSHpOb3podU0zSTVlQm52WmFIYTlEVnQ4MENw?=
- =?utf-8?B?akhkME50b042UEh6Wmlta3VrVlp3dURPMFRjdWlZbFFlOWVpN3RzMlZJZENa?=
- =?utf-8?B?TGpSY21MR2dkMW04bTEzTFQ4NytyR3FpSGVlMnd0WnNpSDdIclB3OVhHQXlN?=
- =?utf-8?B?ZWhKV0hRQ3dWVHNWMG1pcE1VOWdUZGF6N3c2SU1ZNGMzODBReWl6SlYzL2pX?=
- =?utf-8?B?azBpbWMxNnJLdmtxNnA2ZER4aENaWXhKakJMQ1RLNEFXZk1nZVZmTjc3MHEz?=
- =?utf-8?Q?Lb3usL8TPV4=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c0kvYVdiZ0RLWm5MS1JLMDJDZndaYkRkU0pPVkRSOVdPUXpHcmF2Wlk0Y2dB?=
- =?utf-8?B?RlZwMUZFK1EvSE03dFh2Nnh5b09IRElPNDNvNGV5blpyMU5pTXFJNWUvNHNh?=
- =?utf-8?B?SDhLSjZtVmRiODl2NmNkL3dMMUNSRFM3d3NWME1sQ05ZWGgzcjY1dVdaZW92?=
- =?utf-8?B?RnoyOTNxdSthWFJ0S3JCUHU1YlpudzZuNUhpZ1FlekYwZWJnYXBubHVtNFpk?=
- =?utf-8?B?V2ZmY2FoQm53dUlXa0FubkFkenBMSU1ZaUtYSTJxRW5Qckd0OHdrVncvTFN0?=
- =?utf-8?B?MUo0eDIrakZyR1g1T0V0TU8xYzR3ZEhNOUk4eWMzZW9hRGVGRDFZb2dNVDNs?=
- =?utf-8?B?aVQrTE1tZit4SFd1d2R3Z0tDaVFEYTFZaGJBRUZYOElleXFwRzZoYkIzZ1Ex?=
- =?utf-8?B?WWlYVTNZRjNxVHZPajdOanpMOGJTK2twRlo0MnJpbXRzNUUrMGFrdzlvWWxk?=
- =?utf-8?B?bkZKdWNJVmZuY09TSm1Jampwcmo2V3BkaUdQVmV3emZhcnRFT1paWFZoY0NO?=
- =?utf-8?B?L0E1RDRNM1FiUlhiWEhyb1BYT0N2U052dEovT0VCSDQyVjd6djZmRUdQWi92?=
- =?utf-8?B?a0MzTjByK2RzeWQ3RzVGOXVvZ2NMSXplK0F4YUQzRTZPNVNUNTZXNXBMUUZV?=
- =?utf-8?B?enlCOThLc0tCdGREMTI2MUlMS3NkZjB6T01NZXMyOUlubnJqRGZZQlZZUmpq?=
- =?utf-8?B?ZDZ6ZXV2OWRsb0o2R0oyaWI3RzlBcVB0NXlINFdDUEdDbUdSbnVadjhrMTll?=
- =?utf-8?B?SEw1MXNKUy9DdnpnVDBQVXlCWW8rdC9vUDN3NFNWeWdZemlWdGJJNWhJU3hU?=
- =?utf-8?B?ODNJWFdHeFZFaHF3cG1tWG13aXBDQUN1RmRKWkdkclJtT0lWZUN2akNheVE1?=
- =?utf-8?B?K0JxVi9jSlpBNXNZdk9GZmoxdGsrQU5ZYjlZeWRIQ3JoenRWdEsrOUpXSTR3?=
- =?utf-8?B?K3BxRGd1MmtSOTU0a25uWDRxN2dMNnBLaDdwTU56NVhXbXljSjYxcHRmRUJW?=
- =?utf-8?B?YUdLN2NTejNSOEd2OGVTenlBanBueTEzdGNiSTd0ZXJKYUozeE92MWhFNGx0?=
- =?utf-8?B?MDErOW1SUWZuSTB4NkxXWEN5RUQxU0Y1bUcxZTFmTTB0dlNPWDJHM1JOY0ZI?=
- =?utf-8?B?SWFnYWVjM3RDTTk0cUpqMHFNdzBBV3dIVzNZN3pFMmx5WXpCR3J1dWQxR0dm?=
- =?utf-8?B?dVdQczZ4VzljRFJwc1dsclU1WTdqYnd0Y21sQXkwWkowUHRJL1hybGoyZWRL?=
- =?utf-8?B?M0FPT3dyN2MxY0lzMDFnQWNnNzl4YjZnTWhnMmhIQ2pwNkdSdUgxbGovMTFY?=
- =?utf-8?B?NkUvSm1KZUNaQkt0Ym9MVjFtQ2IzdXNER2V4Yncra3I5ZFFkVGJWclJiNFlZ?=
- =?utf-8?B?OE1tL3h2UTBMWXFHMVhpR1VhbzlQMUJpVzNnRVIydkVBaGRJREFGZnE3Qms2?=
- =?utf-8?B?cmgvbXVra0I2eWo2MjdFNmxqU2hVczdtSU01bHRNM3hXbVJWaHJ5UlRVckRK?=
- =?utf-8?B?R1F6a0FtVVB0LzdjRHNGZmxpa0FpL3N0NFZFZHpzWDQ2cVpiWHpXcjVBUi9r?=
- =?utf-8?B?OTE2SmZhSDcxclVuOVpwQTBvZHp2cWVlV3RuUDlmWUZLSVN5cndJMk1PNmhY?=
- =?utf-8?B?bkcvZWJpajZiQjVtZXNLT0wzUllGR004dFIzVkNrcFJWZ1E5MCtSYUg1SU1F?=
- =?utf-8?B?anZDM1RPVlZVQkVjQ2hXN1JVN3c2Y2NaUUZDUXczVWJPSGxyVm1xTEVSNCt0?=
- =?utf-8?B?UWE1TTV1eUFKKzV4em9pRWNGS0IyeGdoVElLcTU4N3J3c0xYMEJzWU5iZVJl?=
- =?utf-8?B?MC9EZVBPMFV3blZmazI1R1c2WGdyL2dBSWZEeDZ1ZU5Ua2tQb3RzaUQrbmJ6?=
- =?utf-8?B?ZnNzT091dXNDS2dNbGx3aFpwNTVzU01zOWRCdHNCcG1hdExLU2Yyc1YrTk5y?=
- =?utf-8?B?VFJOYU5pY1Z3SHBoc2VwRnlUR1puMVdzVVh5bHpoMTJQVUtpTlZ6WXdWSGhr?=
- =?utf-8?B?REJKMUl5WWNGNkFscW5JS09ha29uYklpM1ljSlkrcXV4c2R6ZGZzVHR2K3hi?=
- =?utf-8?B?RlB4U1VOQk54YUNHK1ByZ3RNcm9QVWRaTlc3ZVNpcUl0cm1NQXdkUHVXUU00?=
- =?utf-8?Q?yMMprEnyjiXzF6nVeFJ//LSTJ?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0ab0c977-5595-499c-adc3-08dd98f5776b
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2025 05:56:59.8071 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aqpJtoeMCFyXcd7idXCO/DAsznvJhjZsYEs3RvlDKGWd5VMeKlaFEPaZi2viG5cb
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7616
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] doc: cmd: gpt: add information on type partition
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: <ilias.apalodimas@linaro.org>, <caleb.connolly@linaro.org>,
+ <jerome.forissier@linaro.org>, Tom Rini <trini@konsulko.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
+ <20250519090421.470942-2-patrick.delaunay@foss.st.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250519090421.470942-2-patrick.delaunay@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-22_03,2025-05-20_03,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -218,24 +93,144 @@ X-Virus-Status: Clean
 
 
 
-On 5/21/25 20:16, Rutherther wrote:
-> The bitshift in GEM_CLK_CTRL register is five bits, not two. There are
-> four bits for each GEM, and one bit reserved in between.
+On 5/19/25 11:04, Patrick Delaunay wrote:
+> Add information on type partition, copied from README.gpt.
 > 
-> This has caused that using more than one GEM is impossible,
-> additionally corrupting the GEM0's configuration, leaving GEM0
-> unusable as well (ie. if GEM0 and GEM1 are used, GEM1 configuration is
-> going to write to GEM0's registers wrong value, leaving GEM0 unusable)
+> I also correct issue for gpt_parts variable and add example of
+> "gpt read" usage.
 > 
-> Signed-off-by: Frantisek Bohacek <rutherther@ditigal.xyz>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  doc/usage/cmd/gpt.rst | 93 ++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 84 insertions(+), 9 deletions(-)
+> 
+> diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
+> index 8534f78cbac0..13e8783be9b8 100644
+> --- a/doc/usage/cmd/gpt.rst
+> +++ b/doc/usage/cmd/gpt.rst
+> @@ -54,7 +54,7 @@ partition string
+>  
+>      * name=<NAME> - The partition name, required
+>      * start=<BYTES> - The partition start offset in bytes, required
+> -    * size=<BYTES> - The partition size in bytes or "-" to expand it to the whole free area
+> +    * size=<BYTES> - The partition size in bytes or "-" for the last partition to expand it to the whole free area
+>      * bootable - Set the legacy bootable flag
+>      * uuid=<UUID> - The partition UUID, optional if CONFIG_RANDOM_UUID=y is enabled
+>      * type=<UUID> - The partition type GUID, requires CONFIG_PARTITION_TYPE_GUID=y
+> @@ -63,6 +63,23 @@ partition string
+>      If 'uuid' is not specified, but CONFIG_RANDOM_UUID is enabled, a random UUID
+>      will be generated for the partition
+>  
+> +    If 'type' is not specified or without CONFIG_PARTITION_TYPE_GUID=y,
+> +    the used partition type GUID is PARTITION_BASIC_DATA_GUID.
+> +
+> +    Some strings can be also used at the place of the known partition type GUID:
+> +	* "mbr" = LEGACY_MBR_PARTITION_GUID (024DEE41-33E7-11D3-9D69-0008C781F39F)
+> +	* "msft" = PARTITION_MSFT_RESERVED_GUID (E3C9E316-0B5C-4DB8-817D-F92DF00215AE)
+> +	* "data" = PARTITION_BASIC_DATA_GUID (EBD0A0A2-B9E5-4433-87C0-68B6B72699C7)
+> +	* "linux" = PARTITION_LINUX_FILE_SYSTEM_DATA_GUID (0FC63DAF-8483-4772-8E79-3D69D8477DE4)
+> +	* "raid" = PARTITION_LINUX_RAID_GUID (A19D880F-05FC-4D3B-A006-743F0F84911E)
+> +	* "swap" = PARTITION_LINUX_SWAP_GUID (0657FD6D-A4AB-43C4-84E5-0933C84B4F4F)
+> +	* "lvm" = PARTITION_LINUX_LVM_GUID (E6D6D379-F507-44C2-A23C-238F2A3DF928)
+> +	* "u-boot-env" = PARTITION_U_BOOT_ENVIRONMENT(3DE21764-95BD-54BD-A5C3-4ABE786F38A8)
+> +	* "system" = PARTITION_SYSTEM_GUID (C12A7328-F81F-11D2-BA4B-00A0C93EC93B)
+> +
+> +    The GPT partitions layout and associated 'type' are also printed with the
+> +    :doc:`part command <part>` command by typing "part list".
+> +
+>  gpt enumerate
+>  ~~~~~~~~~~~~~
+>  
+> @@ -162,16 +179,17 @@ Examples
+>  
+>  Create 6 partitions on a disk::
+>  
+> -    => setenv gpt_parts 'uuid_disk=bec9fc2a-86c1-483d-8a0e-0109732277d7;
+> -        name=boot,start=4M,size=128M,bootable,type=ebd0a0a2-b9e5-4433-87c0-68b6b72699c7,
+> -        name=rootfs,size=3072M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+> -        name=system-data,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+> -        name=[ext],size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+> -        name=user,size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+> -        name=modules,size=100M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;
+> -        name=ramdisk,size=8M,type=0fc63daf-8483-4772-8e79-3d69d8477de4
+> +    => setenv gpt_parts 'uuid_disk=bec9fc2a-86c1-483d-8a0e-0109732277d7;\
+> +    name=boot,start=4M,size=128M,bootable,type=ebd0a0a2-b9e5-4433-87c0-68b6b72699c7;\
+> +    name=rootfs,size=3072M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
+> +    name=system-data,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
+> +    name=user,size=512M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
+> +    name=modules,size=100M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
+> +    name=ramdisk,size=8M,type=0fc63daf-8483-4772-8e79-3d69d8477de4;\
+> +    name=[ext],size=-,type=0fc63daf-8483-4772-8e79-3d69d8477de4'
+>      => gpt write mmc 0 $gpt_parts
+>  
+> +Last partition "[ext]" with '-' is extended up to the end of the disk
+>  
+>  Verify that the device matches the partition layout described in the variable
+>  $gpt_parts::
+> @@ -228,3 +246,60 @@ Swap the order of the 'boot' and 'rootfs' partition table entries::
+>      => gpt setenv mmc 0 boot
+>      => echo ${gpt_partition_entry}
+>      2
+> +
+> +Other example: a disk with known partition types::
+> +
+> +    => setenv gpt_parts 'name=u-boot,size=32M,type=data;\
+> +    name=env,size=1M,type=u-boot-env;
+> +    name=ESP,size=128M,type=system;
+> +    name=rootfs,size=3072M,type=linux;
+> +    name=swap,size=100M,type=swap;
+> +    name=user,size=-,type=linux'
+> +    => gpt write mmc 0 $gpt_parts
+> +
+> +    => part list mmc 0
+> +    Partition Map for mmc device 0  --   Partition Type: EFI
+> +    Part	Start LBA	End LBA		Name
+> +    	Attributes
+> +    	Type GUID
+> +    	Partition GUID
+> +    1	0x00000022	0x00010021	"u-boot"
+> +    	attrs:	0x0000000000000000
+> +    	type:	ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+> +    		(data)
+> +    	guid:	502d48f6-81c0-488f-bdc0-ad602498f3ce
+> +      2	0x00010022	0x00010821	"env"
+> +    	attrs:	0x0000000000000000
+> +    	type:	3de21764-95bd-54bd-a5c3-4abe786f38a8
+> +    		(u-boot-env)
+> +    	guid:	9dc62338-459a-485e-bd8f-b3fbf728d9c0
+> +      3	0x00010822	0x00050821	"ESP"
+> +    	attrs:	0x0000000000000000
+> +    	type:	c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+> +    		(EFI System Partition)
+> +    	guid:	8a3a1168-6af8-4ba7-a95d-9cd0d14e1b3d
+> +      4	0x00050822	0x00650821	"rootfs"
+> +    	attrs:	0x0000000000000000
+> +    	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
+> +    		(linux)
+> +    	guid:	411ffebc-8a19-469d-99a9-0982409a6851
+> +      5	0x00650822	0x00682821	"swap"
+> +    	attrs:	0x0000000000000000
+> +    	type:	0657fd6d-a4ab-43c4-84e5-0933c84b4f4f
+> +    		(swap)
+> +    	guid:	f8ec0410-95ec-4e3e-8b98-fb8cf271a201
+> +      6	0x00682822	0x01dacbde	"user"
+> +    	attrs:	0x0000000000000000
+> +    	type:	0fc63daf-8483-4772-8e79-3d69d8477de4
+> +    		(linux)
+> +    	guid:	c5543e1c-566d-4502-99ad-20545007e673
+> +
+> +Modifying GPT partition layout from U-Boot::
+> +
+> +    => gpt read mmc 0 current_partitions
+> +    => env edit current_partitions
+> +        edit: uuid_disk=[...];name=part1,start=0x4000,size=0x4000,uuid=[...];
+> +        name=part2,start=0xc000,size=0xc000,uuid=[...];[ . . . ]
+> +
+> +    => gpt write mmc 0 $current_partitions
+> +    => gpt verify mmc 0 $current_partitions
 
-You still have the problem that address which you are using for sending is not 
-matching your SOB line.
-Author:     Rutherther <rutherther@ditigal.xyz>
-Signed-off-by: Frantisek Bohacek <rutherther@ditigal.xyz>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-You can try to apply your patch yourself and see it via git log.
-
-Thanks,
-Michal
-
+Thanks
+Patrice
