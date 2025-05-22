@@ -4,53 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE607C54E90
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 12:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6ECAC54E90
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 12:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E15E8309A;
-	Thu, 22 May 2025 14:30:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ditigal.xyz
+	by phobos.denx.de (Postfix) with ESMTP id 1971082FC8;
+	Thu, 22 May 2025 14:33:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ditigal.xyz header.i=@ditigal.xyz header.b="OwazW3vG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DoUH+dq5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D839B8301F; Thu, 22 May 2025 11:19:37 +0200 (CEST)
-Received: from mail.ditigal.xyz (ditigal.xyz [IPv6:2a01:4f8:1c1b:6a1c::])
- (using TLSv1.3 with cipher TLS_CHACHA20_POLY1305_SHA256 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD84F82F67
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 11:19:35 +0200 (CEST)
+ id 022AD83043; Thu, 22 May 2025 14:33:45 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A575782F67
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 14:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ditigal.xyz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rutherther@ditigal.xyz
-Received: by cerebrum (OpenSMTPD) with ESMTPSA id 93a9ba15
- (TLSv1.3:TLS_CHACHA20_POLY1305_SHA256:256:NO); 
- Thu, 22 May 2025 09:19:35 +0000 (UTC)
-Date: Thu, 22 May 2025 11:19:33 +0200
-From: Rutherther <rutherther@ditigal.xyz>
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] phy: zynqmp: Fix sgmii clk ctrl GTR lane bit shift
-User-Agent: K-9 Mail for Android
-In-Reply-To: <fb1cc6f0-ee3e-4aeb-8fac-23b7e43d6a31@amd.com>
-References: <20250521181620.8175-1-rutherther@ditigal.xyz>
- <7d8ba8c8-49f6-43a3-af45-8a17d106af55@amd.com> <87msb5hxeg.fsf@ditigal.xyz>
- <fb1cc6f0-ee3e-4aeb-8fac-23b7e43d6a31@amd.com>
-Message-ID: <420C02B3-274E-4F9F-8A62-788A7A452B68@ditigal.xyz>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54MCXdjI641647;
+ Thu, 22 May 2025 07:33:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1747917219;
+ bh=H/Y1dy9UG1S522Ls7f8XLdeCtXJU1Dd5dIreD93TFdo=;
+ h=From:To:CC:Subject:Date;
+ b=DoUH+dq5U4MgDX0uGo12rFmt1xlvxAvAhjfkl0ZofRtPOvQYy1/KIzynkFt+Xgimf
+ DdEP2lX2oyIDawVCNrBwg5rPxWR72QtsVUyW5J8KmJZaoRjQaVZEGGFdZE8JRHD4Xp
+ poyF6vqLbUmbke5ZO7rTxHBlHBUpbQtQrL4/jlOU=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54MCXdFb3492344
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 22 May 2025 07:33:39 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
+ May 2025 07:33:39 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 22 May 2025 07:33:39 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54MCXcCX003505;
+ Thu, 22 May 2025 07:33:38 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1] mach-k3: am62ax: enable caches for the SPL stage
+Date: Thu, 22 May 2025 18:03:04 +0530
+Message-ID: <20250522123305.23302-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ditigal.xyz;
- i=@ditigal.xyz; q=dns/txt; s=20240917; t=1747905575; h=date : from :
- to : subject : in-reply-to : references : message-id : mime-version :
- content-type : content-transfer-encoding : from;
- bh=iRhETPhKOyhceo3pu4mpm/ldQ6LO/pT4KJIfqd3h/fY=;
- b=OwazW3vGJB3EeJkjaHZaOgTMye2aOow9yl9HPlitlGvN+vR7TDZ5zr8NJtwD4aPoFPNb4
- 4YgV2d+tN8QK10YJJgf9N0Oc8MLFB6T3VTslkYvrdOiBefC5zKC4G6gZlcyQpFZyYvJ9z/Y
- oK/Kw/2c+Wj1ryW/JVhxJJSGwGLwRdo=
-X-Mailman-Approved-At: Thu, 22 May 2025 14:30:51 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,56 +76,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+board_init_f for the am62a is missing the call to spl_enable_cache which
+exists for all other am62 platforms (check am625_init.c &
+am62p5_init.c).
 
+This allows the usage of caches while loading and parsing the u-boot.img
+FIT resulting in ~2x speedup in the A53 SPL stage.
 
-On May 22, 2025 11:03:33 AM GMT+02:00, Michal Simek <michal=2Esimek@amd=2E=
-com> wrote:
->
->
->On 5/22/25 10:17, Rutherther wrote:
->> Michal Simek <michal=2Esimek@amd=2Ecom> writes:
->>=20
->>> On 5/21/25 20:16, Rutherther wrote:
->>>> The bitshift in GEM_CLK_CTRL register is five bits, not two=2E There =
-are
->>>> four bits for each GEM, and one bit reserved in between=2E
->>>>=20
->>>> This has caused that using more than one GEM is impossible,
->>>> additionally corrupting the GEM0's configuration, leaving GEM0
->>>> unusable as well (ie=2E if GEM0 and GEM1 are used, GEM1 configuration=
- is
->>>> going to write to GEM0's registers wrong value, leaving GEM0 unusable=
-)
->>>>=20
->>>> Signed-off-by: Frantisek Bohacek <rutherther@ditigal=2Exyz>
->>>=20
->>> You still have the problem that address which you are using for sendin=
-g is not
->>> matching your SOB line=2E
->>> Author:     Rutherther <rutherther@ditigal=2Exyz>
->>> Signed-off-by: Frantisek Bohacek <rutherther@ditigal=2Exyz>
->>=20
->> Sorry about that, I forgot I configured my smtp client to replace name
->> in the From header=2E Should be fine in v3 I sent few hours ago, I hope=
-=2E
->
->But your v3 is not in lore=2E
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ arch/arm/mach-k3/am62ax/am62a7_init.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-It should be after it is manually approved in the list, like all my messag=
-es have to be=2E=20
+diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+index 52a21277227..1d8644bd073 100644
+--- a/arch/arm/mach-k3/am62ax/am62a7_init.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+@@ -191,6 +191,7 @@ void board_init_f(ulong dummy)
+ 	if (ret)
+ 		panic("DRAM init failed: %d\n", ret);
+ #endif
++	spl_enable_cache();
+ 
+ 	setup_qos();
+ 
+-- 
+2.49.0
 
->
->$ b4 am 20250522060703=2E4863-1-rutherther@ditigal=2Exyz
->Grabbing thread from lore=2Ekernel=2Eorg/all/20250522060703=2E4863-1-ruth=
-erther@ditigal=2Exyz/t=2Embox=2Egz
->That message-id is not known=2E
->
->>=20
->> Is full name a requirement to contribute to u-boot?
->
->It is generic rule to fully identify yourself in any open source project=
-=2E
->
->Thanks,
->Michal
->
