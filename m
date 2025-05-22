@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C8B3C54E65
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 13:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0ACC54E90
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 13:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EB448309A;
-	Thu, 22 May 2025 15:05:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF4E68309A;
+	Thu, 22 May 2025 15:06:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H7DWZKUS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iijq/I8f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27CEC8309E; Thu, 22 May 2025 15:05:56 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 992A78309E; Thu, 22 May 2025 15:06:36 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A8F08006D
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 15:05:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABAF68006D
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 15:06:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-32918fe5334so47438801fa.1
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 06:05:54 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-54b166fa41bso12164104e87.0
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 06:06:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747919153; x=1748523953; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1747919194; x=1748523994; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oYjBT0QP/BAqy9duXXruwluHAG6rZjizLXFLhlGSDSQ=;
- b=H7DWZKUSjWe4poAzPG4pf31DRczsLr+IU4R+Mf1R4rrJn2jvY6/usb3xoGS57Olyoj
- iIFZpbKMGz/P0q7vEfMVW+hDpkEPq20Jf/Dp40XQGSyA7ScTraOt16VLN/vi1Homonp1
- +BRiDkDlfTwBW3bnEV5JsBNcmVfUdnhH9a5bE5ftXtXtxTIi5khny3AqKAYjzr0DjWn6
- hKLX539P7hq/1hZRNFota8FzU0Z5WAPMUx1KCfvkNPk8XxanIjkcMdRYnEnTQkd8glsK
- tEfwu91LhmXJnuyUbWY6nDioMAvKv9Tz/MCXKoBViPppLAXNHPxRgbWoBGwygGmrqLpQ
- nTyQ==
+ bh=T3dNAtot4GCxgY+Ixm8/qWuWEl0p4vft+SrLRsObBSQ=;
+ b=iijq/I8f3b7zkmx/e7zXBbfxMzVnypQvWl2BChGoVXeBQYMUargEPGDZGywX53baLk
+ wZZ7KF2txUTIdwsMeYTd59Kwtyly08a0VATkCi5IHVVRswkynOFlHxNV2DYa+Po6OQtr
+ yHCqrhXWqIUUQxYgmCrZVbPW39NdIwPyQbzQVbxM2gdyEyokLDna+w0GjVpNIljhhvp6
+ 4P/47WK2rgE7okXirx2uwfp3J15QVMf7SvXXGFDrGrKoLkQINj4heWwpsx3+1ym8FAZi
+ J++n2k907pfDDKFZKlR8EIzHz6smeyhoeY+CO7aPz4P3ZE9rGlIanKzbidOOvM4sHIVa
+ lVaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747919153; x=1748523953;
+ d=1e100.net; s=20230601; t=1747919194; x=1748523994;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oYjBT0QP/BAqy9duXXruwluHAG6rZjizLXFLhlGSDSQ=;
- b=xF9PC9rJywfvLPN41PMCQMnA9ZB33q0gZH/bh3ewW7oZsIHPDxETraLrKzzJ5XGBeD
- /fP3fATNd2vqhG+YpMEIW0SilaG72gg4c8OaRfe5LEFkcuFmvRq3r5NHcHbDIat58vHl
- wMikx9olCuzD9n7aN1fJIXYIdIP1v/YzMimHk62MNOZXwZOGjUMWkJLWmPgj2YlOcLQO
- yT5hdwGNAx0sKKWHYQkFKowQg4jki+4uv9wiVDEiapO03j9OuN7OtgLzMNs3NCVgp5Wx
- sfeCxFFk54LCc4Ti85xEBOwHeeSKfxedZDb6eehIw5fQGWm609ve4YGdF9lh7j6qr/8v
- sLcw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVPiZv4Jy0cvdH23ToWLnkFiC5seopLsU6iDOxLkeK/6oPL4FMc9Zh0vk7XM4/nruYIta2QGTA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEJ19AECChhiw+ZUmgikaYueEUFR3StVbRSQLGeIjb+DlmZq21
- /Wu1A7ydvdTXlRTFmnXEr6TCP+58EFoHFKCaBQ5BT2qfBYIeU+kwELrYL7BlrhhYTqJndWtF0+u
- Orb1F7bNyI4wunuctkpNWUvK1OL5jqjtWrg==
-X-Gm-Gg: ASbGnctbLSTg7XzyA0E3L0ViHOm4xA/UljekfGi/6v3DPgVB2p3h8GURgAFaaTwAyw8
- f7qW5LqYTumlX1Yfopv4Mh4Y1wuGX8vMqyAS7KOnRD8zOHyNJab452+i+gn4/qRmZS6UkH7agEr
- QVL6OsaWnZDiKos7k47z828i8rAbIMyWh9WrFylhH3/uKnvB00P2DxVzw8K/MezQk=
-X-Google-Smtp-Source: AGHT+IHWKSoiYygSxTp0qxujBYschjBow347FbQkFmCj0tdYX9a1baLWK2DLPjBD3riOJMg3GVEuHNZOQD+vq3uub6A=
-X-Received: by 2002:a2e:ae0e:0:b0:30c:11ef:98ea with SMTP id
- 38308e7fff4ca-32807733addmr71719401fa.15.1747919153146; Thu, 22 May 2025
- 06:05:53 -0700 (PDT)
+ bh=T3dNAtot4GCxgY+Ixm8/qWuWEl0p4vft+SrLRsObBSQ=;
+ b=urYcs7HfBFZ8/sl1VsoyZLw4vrye6xS+oU4797QAlLyqbDmO6vEcGFbMhaVllGfiBB
+ 9mirTuVSC+ht3qU5YlhFbTUSx3IJ3x+XcwpPgBQyHpGyoMKS8ZxdblAU8m9nxqejnioF
+ jNBtHV7vSLE99OPhgcYDv75EHQLsmMwYMPxFcqrMatRPA77ij06VtohXIVYqoc0yioxj
+ qkCYizu1iAGmf+e7Gn5oGwjcaOq8PpA1CCiKB+fO0hTR4eD9TNoOvutcqFwNLpF/moFv
+ FkiMzwoBhoQId9iRreg9a9xrq12kMBfjaF7EK+Y6xWxnPSIMof6BCv8FnIFKQU/mbfof
+ PZ7g==
+X-Gm-Message-State: AOJu0Yxkw5DBSgTe2mymxECMhLGQGWV7WMrZc3V/c4kvf7FHM3Aaw+Ip
+ K/ClfzTvkp67mGBlTz7btV+KygCE/2/f05BoghPO6XDX4N3knb8WQLWQKxAke4skxgA0xaVegB8
+ 9wXHM3EZAD5TykFXaWMn7yAaG7H8r0KctIw==
+X-Gm-Gg: ASbGncsXiVaQb9kfp4ZfxPGzmiSNJcniSPqo8C8GQH9Jv78xbgcdkr92Pp4GT/n4T/f
+ YqvY5x32mmXqEoAeOBtxt6FEF2YnDhb42ANl7jYMyxXvaP7ReuS+NM+pVhasabmfTqnZFeN4BTJ
+ BNc1JObmZ/7tm1q6zhSB6ZuzfGwaX9qT2n/7TEsY4CyRfiy2TN24geV3as0YBvKiI=
+X-Google-Smtp-Source: AGHT+IHa4FTj6BmGOoQuDzl8OvqSsqgMeMvccKPUuNEitISvstMv1dK26MTlk6IbLzYgH6WCryjFI7GLUqHQcES41wY=
+X-Received: by 2002:a2e:a551:0:b0:30b:d562:c154 with SMTP id
+ 38308e7fff4ca-328077321a5mr95133881fa.19.1747919193724; Thu, 22 May 2025
+ 06:06:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250516104602.2445510-1-primoz.fiser@norik.com>
-In-Reply-To: <20250516104602.2445510-1-primoz.fiser@norik.com>
+References: <20250520085436.925901-1-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20250520085436.925901-1-dario.binacchi@amarulasolutions.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 22 May 2025 10:05:41 -0300
-X-Gm-Features: AX0GCFvxO1COCYjUTUACZbXLZFRFsBU1zjnXptja2WWbNH8pt9fg9-rEh92oGM8
-Message-ID: <CAOMZO5DJVs4DXLOir=sZ-5aQ9XOo=_1=KD+JNZc0yWWeXemt6A@mail.gmail.com>
-Subject: Re: [PATCH] ARM: dts: imx93-phycore: Migrate to OF_UPSTREAM
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- uboot-imx@nxp.com, Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, u-boot@lists.denx.de, 
- upstream@lists.phytec.de
+Date: Thu, 22 May 2025 10:06:21 -0300
+X-Gm-Features: AX0GCFvsJ1qCPNxSFqNX0fXDoi1EyviEIB3jI6CzJ7S907UmDy9AhcCwlB2Y0PI
+Message-ID: <CAOMZO5A8-7-KfnVaFpHuEJsnHc4xO3re_LChVp=gppR4kE4pKQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/5] Restore imx8mn_bsh_smm_s2 properly booting
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Sven Dembiann <Sven.Dembianny@bshg.com>, 
+ linux-amarula@amarulasolutions.com, michael@amarulasolutions.com, 
+ Simon Holesch <simon.holesch@bshg.com>, Anshul Dalal <anshuld@ti.com>, 
+ Greg Malysa <malysagreg@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Masahiro Yamada <yamada.masahiro@socionext.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,12 +104,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 16, 2025 at 7:46=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
-m> wrote:
+On Tue, May 20, 2025 at 5:55=E2=80=AFAM Dario Binacchi
+<dario.binacchi@amarulasolutions.com> wrote:
 >
-> Migrate to OF_UPSTREAM for phyCORE-i.MX93 since board can use upstream
-> Linux kernel device-tree for phyBOARD-Segin-i.MX93.
+> Commits [1] and [2] broke the booting of the BSH SMM S2 board. The
+> patches in this series restore proper booting.
 >
-> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+> [1] 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+> [2] dda454e933c6 ("serial: mxc: Support bulk enabling clocks")
 
-Applied, thanks.
+Applied the series, thanks.
