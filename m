@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4551CC54756
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A63C54756
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:19:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36AEE8302D;
-	Thu, 22 May 2025 09:18:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7B74983022;
+	Thu, 22 May 2025 09:18:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qZspNO1x";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W5M6vzmc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 203FE82E31; Thu, 22 May 2025 09:18:51 +0200 (CEST)
+ id 2F15C83043; Thu, 22 May 2025 09:18:54 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA09383022
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:18:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9FA282E31
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:18:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54M7Ij891746442;
- Thu, 22 May 2025 02:18:45 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54M7Inir1746462;
+ Thu, 22 May 2025 02:18:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747898326;
- bh=laVBBZlIuO4us69SFeJGRElqdQmGixJkHSx0zdSHiag=;
+ s=ti-com-17Q1; t=1747898329;
+ bh=ZFCwzrOsNV5pXVuU8qikylMlZ8sIAe83vhVpPfuFGvY=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qZspNO1x/Cz0n80tf9kNNMrT9lJVzlAq/cgRXYVNog5j7Q/XuX4Xavz/t+y1Ljh1B
- 9iLFg7lz6vQlnljuo20BLiRNB4EWYRlrpbSkgDvwSMl0w2L/pOsgbOnfz2T7vJ5Rfw
- 7z5jiTNZ7Xpw3a2KunVGutG28HxYVXuBzbSFhW3I=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54M7Ij6W2785860
+ b=W5M6vzmc+p5+3ZWpAVhnRBKilkx+9/C7uGLtMtGuVyezjkTQQn11F4g5sPXa//Olp
+ 3eeoRs51EIFjPfjGl7OSyy2eLJ/LRMq3sti+Ztn3Jr1L6IC9ly5BH7dQxzCLyq4aCD
+ OBNuX31P2L4q3JIOyH78DhBgkY1bQERJARGS1xvs=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54M7In433314414
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 22 May 2025 02:18:45 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 22 May 2025 02:18:49 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- May 2025 02:18:45 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 02:18:48 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 May 2025 02:18:45 -0500
+ Frontend Transport; Thu, 22 May 2025 02:18:48 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54M7IT9M467991;
- Thu, 22 May 2025 02:18:42 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54M7IT9N467991;
+ Thu, 22 May 2025 02:18:45 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>
 CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
  <jm@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>, <b-padhi@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 4/6] board: ti: j7*: Add firmware for MCU R5 core1
-Date: Thu, 22 May 2025 12:48:26 +0530
-Message-ID: <20250522071828.285462-5-b-padhi@ti.com>
+Subject: [PATCH 5/6] arm: dts: k3-j7*-binman: Enable split mode for MCU R5F
+Date: Thu, 22 May 2025 12:48:27 +0530
+Message-ID: <20250522071828.285462-6-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250522071828.285462-1-b-padhi@ti.com>
 References: <20250522071828.285462-1-b-padhi@ti.com>
@@ -80,65 +80,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Link the default firmware in the environment variable for MCU R5 core1
-for all J7 platforms.
+Set boot core-opts to enable split mode for MCU R5 cluster by default.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 ---
- board/ti/j7200/j7200.env   | 2 +-
- board/ti/j721e/j721e.env   | 2 +-
- board/ti/j721s2/j721s2.env | 2 +-
- board/ti/j784s4/j784s4.env | 4 ++--
- 4 files changed, 5 insertions(+), 5 deletions(-)
+ arch/arm/dts/k3-j7200-binman.dtsi  | 3 +++
+ arch/arm/dts/k3-j721e-binman.dtsi  | 4 ++++
+ arch/arm/dts/k3-j721s2-binman.dtsi | 3 +++
+ arch/arm/dts/k3-j784s4-binman.dtsi | 3 +++
+ 4 files changed, 13 insertions(+)
 
-diff --git a/board/ti/j7200/j7200.env b/board/ti/j7200/j7200.env
-index 6cc92bf0d8d..292fc72fd58 100644
---- a/board/ti/j7200/j7200.env
-+++ b/board/ti/j7200/j7200.env
-@@ -36,5 +36,5 @@ main_cpsw0_qsgmii_phyinit=
- #endif
- 
- #if CONFIG_TARGET_J7200_A72_EVM
--rproc_fw_binaries=2 /lib/firmware/j7200-main-r5f0_0-fw 3 /lib/firmware/j7200-main-r5f0_1-fw
-+rproc_fw_binaries= 1 /lib/firmware/j7200-mcu-r5f0_1-fw 2 /lib/firmware/j7200-main-r5f0_0-fw 3 /lib/firmware/j7200-main-r5f0_1-fw
- #endif
-diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
-index e5b4225b3ce..ead7fbdb212 100644
---- a/board/ti/j721e/j721e.env
-+++ b/board/ti/j721e/j721e.env
-@@ -38,5 +38,5 @@ main_cpsw0_qsgmii_phyinit=
- #endif
- 
- #if CONFIG_TARGET_J721E_A72_EVM
--rproc_fw_binaries=2 /lib/firmware/j7-main-r5f0_0-fw 3 /lib/firmware/j7-main-r5f0_1-fw 4 /lib/firmware/j7-main-r5f1_0-fw 5 /lib/firmware/j7-main-r5f1_1-fw 6 /lib/firmware/j7-c66_0-fw 7 /lib/firmware/j7-c66_1-fw 8 /lib/firmware/j7-c71_0-fw
-+rproc_fw_binaries= 1 /lib/firmware/j7-mcu-r5f0_1-fw 2 /lib/firmware/j7-main-r5f0_0-fw 3 /lib/firmware/j7-main-r5f0_1-fw 4 /lib/firmware/j7-main-r5f1_0-fw 5 /lib/firmware/j7-main-r5f1_1-fw 6 /lib/firmware/j7-c66_0-fw 7 /lib/firmware/j7-c66_1-fw 8 /lib/firmware/j7-c71_0-fw
- #endif
-diff --git a/board/ti/j721s2/j721s2.env b/board/ti/j721s2/j721s2.env
-index a6b22550809..abd4faea6ee 100644
---- a/board/ti/j721s2/j721s2.env
-+++ b/board/ti/j721s2/j721s2.env
-@@ -24,6 +24,6 @@ name_mcur5f0_0fw=/lib/firmware/j7-mcu-r5f0_0-fw
- #endif
- rd_spec=-
- 
--rproc_fw_binaries= 2 /lib/firmware/j721s2-main-r5f0_0-fw 3 /lib/firmware/j721s2-main-r5f0_1-fw 4 /lib/firmware/j721s2-main-r5f1_0-fw 5 /lib/firmware/j721s2-main-r5f1_1-fw 6 /lib/firmware/j721s2-c71_0-fw 7 /lib/firmware/j721s2-c71_1-fw
-+rproc_fw_binaries= 1 /lib/firmware/j721s2-mcu-r5f0_1-fw 2 /lib/firmware/j721s2-main-r5f0_0-fw 3 /lib/firmware/j721s2-main-r5f0_1-fw 4 /lib/firmware/j721s2-main-r5f1_0-fw 5 /lib/firmware/j721s2-main-r5f1_1-fw 6 /lib/firmware/j721s2-c71_0-fw 7 /lib/firmware/j721s2-c71_1-fw
- 
- 
-diff --git a/board/ti/j784s4/j784s4.env b/board/ti/j784s4/j784s4.env
-index 9e1741be424..2f1a5f549d1 100644
---- a/board/ti/j784s4/j784s4.env
-+++ b/board/ti/j784s4/j784s4.env
-@@ -21,7 +21,7 @@ bootdir=/boot
- rd_spec=-
- 
- #if CONFIG_TARGET_J784S4_A72_EVM
--rproc_fw_binaries= 2 /lib/firmware/j784s4-main-r5f0_0-fw 3 /lib/firmware/j784s4-main-r5f0_1-fw 4 /lib/firmware/j784s4-main-r5f1_0-fw 5 /lib/firmware/j784s4-main-r5f1_1-fw 6 /lib/firmware/j784s4-main-r5f2_0-fw 7 /lib/firmware/j784s4-main-r5f2_1-fw 8 /lib/firmware/j784s4-c71_0-fw 9 /lib/firmware/j784s4-c71_1-fw 10 /lib/firmware/j784s4-c71_2-fw 11 /lib/firmware/j784s4-c71_3-fw
-+rproc_fw_binaries= 1 /lib/firmware/j784s4-mcu-r5f0_1-fw 2 /lib/firmware/j784s4-main-r5f0_0-fw 3 /lib/firmware/j784s4-main-r5f0_1-fw 4 /lib/firmware/j784s4-main-r5f1_0-fw 5 /lib/firmware/j784s4-main-r5f1_1-fw 6 /lib/firmware/j784s4-main-r5f2_0-fw 7 /lib/firmware/j784s4-main-r5f2_1-fw 8 /lib/firmware/j784s4-c71_0-fw 9 /lib/firmware/j784s4-c71_1-fw 10 /lib/firmware/j784s4-c71_2-fw 11 /lib/firmware/j784s4-c71_3-fw
- #elif CONFIG_TARGET_J742S2_A72_EVM
--rproc_fw_binaries= 2 /lib/firmware/j742s2-main-r5f0_0-fw 3 /lib/firmware/j742s2-main-r5f0_1-fw 4 /lib/firmware/j742s2-main-r5f1_0-fw 5 /lib/firmware/j742s2-main-r5f1_1-fw 6 /lib/firmware/j742s2-main-r5f2_0-fw 7 /lib/firmware/j742s2-main-r5f2_1-fw 8 /lib/firmware/j742s2-c71_0-fw 9 /lib/firmware/j742s2-c71_1-fw 10 /lib/firmware/j742s2-c71_2-fw
-+rproc_fw_binaries= 1 /lib/firmware/j742s2-mcu-r5f0_1-fw 2 /lib/firmware/j742s2-main-r5f0_0-fw 3 /lib/firmware/j742s2-main-r5f0_1-fw 4 /lib/firmware/j742s2-main-r5f1_0-fw 5 /lib/firmware/j742s2-main-r5f1_1-fw 6 /lib/firmware/j742s2-main-r5f2_0-fw 7 /lib/firmware/j742s2-main-r5f2_1-fw 8 /lib/firmware/j742s2-c71_0-fw 9 /lib/firmware/j742s2-c71_1-fw 10 /lib/firmware/j742s2-c71_2-fw
- #endif
+diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
+index 47a4cde6b85..cf281bc72e0 100644
+--- a/arch/arm/dts/k3-j7200-binman.dtsi
++++ b/arch/arm/dts/k3-j7200-binman.dtsi
+@@ -61,6 +61,7 @@
+ 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			sysfw-inner-cert;
+ 			keyfile = "custMpk.pem";
+ 			sw-rev = <1>;
+@@ -153,6 +154,7 @@
+ 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			sysfw-inner-cert;
+ 			keyfile = "custMpk.pem";
+ 			sw-rev = <1>;
+@@ -199,6 +201,7 @@
+ 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+ 			load = <0x41c00000>;
+ 			content-sysfw = <&ti_fs_gp>;
+diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+index 6adfab164ee..54c7ad92069 100644
+--- a/arch/arm/dts/k3-j721e-binman.dtsi
++++ b/arch/arm/dts/k3-j721e-binman.dtsi
+@@ -13,6 +13,7 @@
+ 		ti-secure-rom {
+ 			content = <&u_boot_spl>;
+ 			core = "public";
++			core-opts = <2>;
+ 			load = <CONFIG_SPL_TEXT_BASE>;
+ 			keyfile = "custMpk.pem";
+ 		};
+@@ -26,6 +27,7 @@
+ 		ti-secure-rom {
+ 			content = <&u_boot_spl_sr2>;
+ 			core = "public";
++			core-opts = <2>;
+ 			load = <CONFIG_SPL_TEXT_BASE>;
+ 			keyfile = "custMpk.pem";
+ 		};
+@@ -223,6 +225,7 @@
+ 		ti-secure-rom {
+ 			content = <&u_boot_spl_fs>;
+ 			core = "public";
++			core-opts = <2>;
+ 			load = <CONFIG_SPL_TEXT_BASE>;
+ 			keyfile = "custMpk.pem";
+ 		};
+@@ -256,6 +259,7 @@
+ 		ti-secure-rom {
+ 			content = <&u_boot_spl_unsigned>;
+ 			core = "public";
++			core-opts = <2>;
+ 			load = <CONFIG_SPL_TEXT_BASE>;
+ 			sw-rev = <CONFIG_K3_X509_SWRV>;
+ 			keyfile = "ti-degenerate-key.pem";
+diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
+index 73af184d27e..2d34b193813 100644
+--- a/arch/arm/dts/k3-j721s2-binman.dtsi
++++ b/arch/arm/dts/k3-j721s2-binman.dtsi
+@@ -15,6 +15,7 @@
+ 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			sysfw-inner-cert;
+ 			keyfile = "custMpk.pem";
+ 			sw-rev = <1>;
+@@ -60,6 +61,7 @@
+ 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			sysfw-inner-cert;
+ 			keyfile = "custMpk.pem";
+ 			sw-rev = <1>;
+@@ -106,6 +108,7 @@
+ 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+ 			load = <0x41c00000>;
+ 			content-sysfw = <&ti_fs_gp>;
+diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
+index cb1fbc65923..14e71ab0f20 100644
+--- a/arch/arm/dts/k3-j784s4-binman.dtsi
++++ b/arch/arm/dts/k3-j784s4-binman.dtsi
+@@ -19,6 +19,7 @@
+ 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			sysfw-inner-cert;
+ 			keyfile = "custMpk.pem";
+ 			sw-rev = <1>;
+@@ -68,6 +69,7 @@
+ 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			sysfw-inner-cert;
+ 			keyfile = "custMpk.pem";
+ 			sw-rev = <1>;
+@@ -117,6 +119,7 @@
+ 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+ 			combined;
+ 			dm-data;
++			core-opts = <2>;
+ 			content-sbl = <&u_boot_spl_unsigned>;
+ 			load = <0x41c00000>;
+ 			content-sysfw = <&ti_fs_gp>;
 -- 
 2.34.1
 
