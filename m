@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5F6C54E65
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 19:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2A8CC54E65
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 19:36:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE51F8310F;
-	Thu, 22 May 2025 21:36:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0342B830EB;
+	Thu, 22 May 2025 21:36:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N5WSYwrd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R6yTD8rx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ACAF83082; Thu, 22 May 2025 21:36:33 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 6CF5E8318E; Thu, 22 May 2025 21:36:35 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C85483082
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 21:36:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52C8E830EB
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 21:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3f94b7bd964so6457344b6e.1
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 12:36:31 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3f6a92f234dso5495062b6e.3
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 12:36:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747942590; x=1748547390; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747942592; x=1748547392; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xcMxekAyNWc3aHdiMft5BJGwBA4zyVodXSVaHBU3BU0=;
- b=N5WSYwrdnVvMICap29N4A8rLEw+xTQrciFyFIHoiWJK/1DuoTrnByOyF2Ao/gDY/iX
- OcJvLO4U88dNd+NdAVhDVNyu4/kq3yilKRcTzufrUf6s3ELPE/mm3ZlXJVJjQaJZi9SY
- zIUp3xCgZKMfLqUsOyTlobmjj9bQ4iZWTj33M=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2vtbTm9XoneSiqOX7mS1kAQAP08KNSPydX3uCLDsV0I=;
+ b=R6yTD8rxAPIMNL+0UfFcEMWpCKmmy7FEhqpA/usjGQCf1kPQRTi4tLznW3n05WM6O1
+ CZllRGDMnClVfVp+q5OUQVnn8/2lRbd/9EjjbxVPipDFsqCvoBuJ90Ru0QQGqNPdLcfL
+ RYaYQiBHc8f3GkBpZBJv8ASbE0Bu1B5D+OI90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747942590; x=1748547390;
+ d=1e100.net; s=20230601; t=1747942592; x=1748547392;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xcMxekAyNWc3aHdiMft5BJGwBA4zyVodXSVaHBU3BU0=;
- b=n40F004rytlO3NzFua55+7ZKpCmkvGsTvbdJFneH21rqEy3NQlZS3AJYdzwknLdiTk
- dHM5h6wcHpfJjvn2gh4LNuAcAI7AmUyrL3POuEeiMOYTgZF1HA0TJuF95RgQuS/pdUNs
- BKwHWzvBdw4zQxCXNUn47c31NtG8PJ9LMAxeZpMKGWXO9chHuRSm6FQOGcda2SPpeF+7
- pM4X0nWfjJZgKNw9b8xKXxxug+t3iUy4ezFEDvoPUbK7KIJ786A1BwwAOV+m5neLixzC
- 2udIXie/5qCEAPg4plTZHTW4tYu7lngJEo8vJWlJZsi0npkUIWbwVCxKd6/USf+i/at+
- df4g==
-X-Gm-Message-State: AOJu0YwD6o9qda4ONcHvGp4hPbddAtVWuuvaG5GbOYmktrDY4TLwU/QG
- v57uOGmI/fMVSUDlkAT2dtBRs5UtDXlvwlO3QCn7ukm2//X5ZuerNbjfctnnI+Hli9w6NvWt0PN
- jIMYIt6o=
-X-Gm-Gg: ASbGncuovsgzmulDpSXrgtc4flh9ZAx33whHhIOcg5boKVYuQGm9xMf76GEdi99PWkc
- TlfvrvzixTi78pGj8vq6rUfPXYmoss1qQVxxH3xuDVVg/xfv8wdwF2hrhF/WEESiXcR84K5XRss
- y+9niWT7ZTbdnUsrlMJIUfgE+F/3/UNASLzM3M60xw/g8xM6VO7ZL6ENJMRIAwY/51a32tUQsV9
- 2z/6Z20Cw21HcBveRNabC2tdP9aAXJ+/dIGKkuAMuzsokpKCufSPfKALpGZigTVGiI/MVef51U+
- +fGE8JFxgmTMf1RcQmyZInYzYyUY7i2+JuBjzeJaaFSp6Du9A71jgEd32mlCCSCGxhXOEhhPeON
- 2VgG0ouT6O0A=
-X-Google-Smtp-Source: AGHT+IEXW/lo40+mFGGVXRS2s4CDCXTwG+4RzYEb5+O2htAp7g+I1nzvp5hys2uGwXGL1kxk4oZCdQ==
-X-Received: by 2002:a05:6808:6b97:b0:3f8:d2f8:d735 with SMTP id
- 5614622812f47-4063dadd666mr373229b6e.33.1747942589995; 
- Thu, 22 May 2025 12:36:29 -0700 (PDT)
+ bh=2vtbTm9XoneSiqOX7mS1kAQAP08KNSPydX3uCLDsV0I=;
+ b=u/r5Vja2qBJrPyRAhTN43T9VZZNTBtfjVbzA3+1whHDmzLubWYfbX5gxuwrC3nhz53
+ nvTu6Nl97ms7NVwcY9IRdQxe2h5ILmk4qUiGTzH6HZ+5EwqMOg/EdosGOE2Nkb6eKK0Y
+ IiXK1IjpBYWX6AHQanJ5LKXHiMwBY6h0tIT5rm67PyYzpAM/quBrXMOcor1APtItwwiP
+ joYce5UqbPYMVH1PpvCO9Ef1In1wEm7r7/zR6qc+bVmNrgV0OoPCZBu2QCkBer1+th7N
+ lydJYBQ40sIWAG+TL29RruGKWSO3WzKopWvq+OiPerM7uGFDl+5LMZFhCWrmf63y+lh6
+ 5QTw==
+X-Gm-Message-State: AOJu0YzUY7KNrR6C8iC8lR0U3sPgF4vYk3lP3r+NWQHB7qk3PwTmNKKD
+ HmmxL6ACER/C3Fj4M5BzQYm/gCuGS5bz/tmWcIDOCe7EHM0GlpvwNoyoxCLjSFPJgmE=
+X-Gm-Gg: ASbGncvcVoe3rlRtR2l8iBt1AJiD5r/nt65PzFfQL+cVOWrpvAA3emhCzbNKu0PvaiX
+ 5TgiR54269+ZJdzrKpErOAbcDKz8KnVyIn9kkR06bDXjFwsE+8fKgZwqWlnJA47+WzJWn1/AJqh
+ KMZCvyTIJbkEx5I/xhgaP5yWwOJDksceSjdeqykBvRP8/DXT26+oBZHmpSSJ/elv2S9s/hQQehZ
+ e0UR5Fcjdo9OpXzqkoS4Zy7y9aztrf8SOP1tBegZJiWCyBOIzcj/FveuO8A6ptb+QlJJ6RUhtO3
+ YLqS2rYRYg/rpp+8rkooPZVb0OFt+4qfI8EAvrFdeZYPvAHtpMICEf1VvW2XHI2K4gCV6Qwz4F0
+ 0uhxaIKliwpg=
+X-Google-Smtp-Source: AGHT+IH3d/gycpGb4aYJBrmsaOHbJEqoNgDU14UhZ7D3TuinZ2jlZW97YQwLMHeGARIDFkDj3On1gQ==
+X-Received: by 2002:a05:6808:2f06:b0:3fa:7909:2716 with SMTP id
+ 5614622812f47-404da7e64a9mr18211040b6e.39.1747942592096; 
+ Thu, 22 May 2025 12:36:32 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-404d98cef4esm2587795b6e.45.2025.05.22.12.36.28
+ 5614622812f47-404d98cef4esm2587795b6e.45.2025.05.22.12.36.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 12:36:28 -0700 (PDT)
+ Thu, 22 May 2025 12:36:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Johannes Krottmayer <johannes@krotti42.com>
-In-Reply-To: <20250508185943.628503-1-johannes@krotti42.com>
-References: <20250507060739.326096-1-johannes@krotti42.com>
- <20250507060739.326096-2-johannes@krotti42.com>
- <20250507165533.GO5430@bill-the-cat>
- <6d3af68a-15a7-4dd4-8095-ee2ac6037c0e@krotti42.com>
- <a138ecb5-680e-4272-8211-dbb354745247@krotti42.com>
- <20250507225123.GR5430@bill-the-cat>
- <20250508185943.628503-1-johannes@krotti42.com>
-Subject: Re: [PATCH v2 1/1] arm: cpu: armv7m: add ENTRY/ENDPROC macros
-Message-Id: <174794258870.2192967.1935908283399261068.b4-ty@konsulko.com>
-Date: Thu, 22 May 2025 13:36:28 -0600
+To: u-boot@lists.denx.de, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Simon Glass <sjg@chromium.org>, Michael Walle <mwalle@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut <marex@denx.de>, 
+ Benedikt Spranger <b.spranger@linutronix.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ John Ogness <john.ogness@linutronix.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20250508115725.18929-1-cniedermaier@dh-electronics.com>
+References: <20250508115725.18929-1-cniedermaier@dh-electronics.com>
+Subject: Re: [PATCH V4] tiny-printf: Handle formatting of %p with an extra
+ Kconfig
+Message-Id: <174794259022.2192967.5906980516148855133.b4-ty@konsulko.com>
+Date: Thu, 22 May 2025 13:36:30 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,23 +102,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 08 May 2025 19:00:28 +0000, Johannes Krottmayer wrote:
+On Thu, 08 May 2025 13:57:25 +0200, Christoph Niedermaier wrote:
 
-> Since GNU binutils version 2.44, assembly functions must include
-> the assembler directive .type name, %function. If not a call to
-> these functions fails with the error message 'Unknown destination
-> type (ARM/Thumb)' and the error message 'dangerous relocation:
-> unsupported relocation' at linking.
-> 
-> The macros ENTRY/ENDPROC includes this directive and should be
-> used for all assembly functions.
+> The formatting with %pa / %pap behaves like %x, which results in an
+> incorrect value being output. To improve this, a new fine-tuning
+> Kconfig SPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
+> has been added. If it is enabled, the output of %pa / %pap should
+> be correct, and if it is disabled, the pointer formatting is
+> completely unsupported. In addition to indicate unsupported formatting,
+> '?' will be output. This allows enabling pointer formatting only
+> when needed. For SPL_NET it is selected by default. Then it also
+> supports the formatting with %pm, %pM and %pI4.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm: cpu: armv7m: add ENTRY/ENDPROC macros
-      commit: 0a006371578a8f098c1850b0097c1af68c018165
+[1/1] tiny-printf: Handle formatting of %p with an extra Kconfig
+      commit: 1e24e84db41afc5beba0a0ef9dd6e0509127b1de
 -- 
 Tom
 
