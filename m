@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 110A6C54E65
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 14:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D92C54E65
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 14:45:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FEF083095;
-	Thu, 22 May 2025 16:40:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4FDA383095;
+	Thu, 22 May 2025 16:45:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E4VNkOD1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FuXFkog1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83107830B4; Thu, 22 May 2025 16:40:04 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 6C18F83095; Thu, 22 May 2025 16:45:12 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4492D83082
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 16:40:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C27883082
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 16:45:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72a4793d4e2so5770582a34.2
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 07:40:02 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2d4f832069bso3177347fac.3
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 07:45:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747924801; x=1748529601; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747925109; x=1748529909; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fc+ofZqrwaCUSqFojyyur41haHLG7SjKdjwcxQELQgI=;
- b=E4VNkOD1pH5mKwaDmmIhh7GvwEHElm2LX/dMW4HGMNOdyvkEM2Tgx/FYTDKJyrViBW
- qNABpJNTInmqqwE/szWO6bed1aRo7XIY+YGxxOrohS5ZL0ByY3vq9aiA0nzswAv3dsU0
- 48te8eT1Uxj+cXDw9Flxwm0wW5W3XuzPGwhU0=
+ bh=7q3VlmxPctUD36DLobuhwX4/Jvch76cV8OwHVUAybu0=;
+ b=FuXFkog1olYMPx/6mSLHFSwsjihHh+lF8np5M9Nj/yDL2smzpKnmHZFexsHDMgLFoN
+ dqiMc64FXRU7d5c/MQS5ADaCR0WPi+pMXzpS2qA/LajOqcmNEPpR6jFOsv1qUN6qFux4
+ 6JRhaWIB22YMzcKXpLgivUZ8CaSvb7GodcwFw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747924801; x=1748529601;
+ d=1e100.net; s=20230601; t=1747925109; x=1748529909;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fc+ofZqrwaCUSqFojyyur41haHLG7SjKdjwcxQELQgI=;
- b=nB/Bt0Zl5nvPmyWhTmOjhQkPI3zYD8FOKMaaXlS2oohq2WZXlpILwgln8mCR6CrEv5
- DGcCXxgAx5zFpK7oS9XTqFiksKIleGadrHN/EPJ4vySGnwAjHwvk+29M8BB7DUo+zO/M
- 03zwWEjz5rwhYJCT9U1Ll9zHQXTHB3qCS4tDD2o2bd0snnfKsO9jiHWORCmNfBVvPllG
- vFqiuqfzdXYGqmyq/lX8JFV6gtSP+1+TyH7hvFdyVOyUgBHj4237gNwstzSSxcdJpOhk
- v2rZSfYnStylp21LbCMn8Aow6WvqyueADZ2yLo0cOOn5rNZsBbcuVMaPw8APZT1HJ/Wa
- WLeA==
+ bh=7q3VlmxPctUD36DLobuhwX4/Jvch76cV8OwHVUAybu0=;
+ b=sWCapieqGUPjTNUFukjRri6S+GhfRWCbrgc/QRVJrd51ySI2m7T/WqaRuNvUBq5mBC
+ N7oZ0YAXXqTMiJOPGGr0vwLGnHLb72g6PCW9JjHKSn4xw+DE8SujXNJL/E9RIpjwP1pt
+ iGDt26iVqFYllcEhri0Mi56dX1+A5qCCj7CAM+YAzuqdWYL+nm5ToIna7gShYQ+Q772c
+ +Qzuc6hbuasgju20tpbp67gv7sjJJOTHqYi0KLwLUWWrlRtgQGcp6AEbh19jzarQLAuk
+ fH/+sN5nf8JAFKMPytxiyrAn9b3XD+Wp9xArwlb5k3N1qkhLK9q3GDoUJ3l6ngj8b7Ft
+ 5snw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCSWYuBWJDiPmO5sR+T4o17VUey+utkuxoKFTK8e/p93E+JisL9mcS573HCT+fOd9W76kSzY8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtsAZRHr6dZgl3K5xoAM5oyHIUEhmiaT0FYe6NhB0ckfMY76jw
- XaFfanQZyG66LxXVzZrRJKcx1YdrpwKWf6eMYcU6kKzEPS97poowjD1oW125o7ZMwEA=
-X-Gm-Gg: ASbGncs2fcjU92Z5rVpkyFJiAPiYQiAEKtzKyXqp54Wy/rabrxTGT112ia1QL4WJd0x
- iZhQNYx8J1WEO+f1WW4UkdQKcJ/ob2JtqNdW9/mUwlcpEYhFA41uM9qeKX9LVBeGDFU2AIONCvm
- 5hSEITFAtIRQz6xbAsV/t3h+i4O4PtDGPVgiKwTww4pyM3aBOwO5rzWPnH1EMeng7aiKBcIXgZQ
- peeEIuL7PpGlugDIT/xaD+QPB1oVm+BPcOmKisJqCOVX/fakze2FDqpTW5OJp3XsOkD0YxZ4mlt
- fFHr/ykSyv98Yv5aw4SxCPYaGPgU/nwp1l2G0X1Rb+MF6TH5hCi9xTW67+baTVQ6B9jWYK0Y3KV
- FLfyDq3Iy6FLW
-X-Google-Smtp-Source: AGHT+IGkeVTeZ7YO63/eENKSzJ5lCqnsjyGo6gmRFxAcp0lKOPovZwrd1WHTpcjGn9P5P58H31sMiQ==
-X-Received: by 2002:a05:6830:3984:b0:72b:8aec:fbd4 with SMTP id
- 46e09a7af769-734f6ac5737mr17654518a34.3.1747924800945; 
- Thu, 22 May 2025 07:40:00 -0700 (PDT)
+ AJvYcCVEsQ6wf/8511RmkaAmBvLDoNjlVa7OTJksA7xsfkQy+hj+HZfp+g/+tOX0r7j5IngOnjfNQDk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKcWqjg7BeXUv64nLOclCvU8ZGY7Z1PEEQPr/bJZKATo9OdTU/
+ H/5JytnRjwrBtepixuLMA/BQ16/kwmv6aJAV+59AxkfVsPf9W0+yUeaxiam3ZW7iCug=
+X-Gm-Gg: ASbGncur2XjCRLNdCRnnTLfgRFcn6MXqza5WynbIpTiVkbiK4aDjh9fYhwCVUQNnOHn
+ galjsCmDlTpS+nuvtAbxfE0Dcp/fwcZPr9XYjqD5e6bnxTTIEj70BospXjbSPnsn8i30darYByf
+ 2OFuuVfcR++Z9rFsovM+sicZcfYA54Nk6gPiAf/DH1/OrdaZitUtwxCtZIX3Fc10/lpEKsk3ay1
+ XPC73Uxi0/uUpk2rxygomHWqAsbE0I7wWKG4Td47QkrFSSvLVbNBX5Ds61N/rGY6AMoqd0xrs9E
+ RvseCNDGWGT6zCMEfINCggMwQAgtBrQJhRuu4x3IIV/U6Um1+byKGf+qo6h9cI7Y53l3SN06ZaV
+ ZaeWdbGpzgTtf
+X-Google-Smtp-Source: AGHT+IHKV3pthZxXUoJ831n75bg8HJjysLUtWU9kPalcpWFUn7FH7NGrSCLnsykJH7VBVXkdURrJug==
+X-Received: by 2002:a05:6870:cd87:b0:2d4:d9d6:c8d7 with SMTP id
+ 586e51a60fabf-2e3c1e927f1mr16004508fac.31.1747925108808; 
+ Thu, 22 May 2025 07:45:08 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a9a7adsm2506520a34.30.2025.05.22.07.39.59
+ 586e51a60fabf-2e3c06084ccsm3113744fac.7.2025.05.22.07.45.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 07:39:59 -0700 (PDT)
-Date: Thu, 22 May 2025 08:39:58 -0600
+ Thu, 22 May 2025 07:45:08 -0700 (PDT)
+Date: Thu, 22 May 2025 08:45:05 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Dmitrii Merkurev <dimorinny@google.com>
-Subject: Re: [PATCH RFT v4 3/3] fastboot: integrate block flashing back-end
-Message-ID: <20250522143958.GJ100073@bill-the-cat>
-References: <20250522-topic-fastboot-blk-v4-0-af7f7f30564d@linaro.org>
- <20250522-topic-fastboot-blk-v4-3-af7f7f30564d@linaro.org>
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: afd@ti.com, nm@ti.com, hnagalla@ti.com, n-francis@ti.com, jm@ti.com,
+ u-kumar1@ti.com, m-shah@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 6/6] DONOTMERGE: arm: dts: k3-j7*-mcu-wakeup: Enable
+ split mode for MCU R5
+Message-ID: <20250522144505.GK100073@bill-the-cat>
+References: <20250522071828.285462-1-b-padhi@ti.com>
+ <20250522071828.285462-7-b-padhi@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hcFQcPIs1DlkJ50l"
+ protocol="application/pgp-signature"; boundary="hl78fHPzFHKAHlNA"
 Content-Disposition: inline
-In-Reply-To: <20250522-topic-fastboot-blk-v4-3-af7f7f30564d@linaro.org>
+In-Reply-To: <20250522071828.285462-7-b-padhi@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,96 +101,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hcFQcPIs1DlkJ50l
+--hl78fHPzFHKAHlNA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 22, 2025 at 02:37:07PM +0200, Neil Armstrong wrote:
+On Thu, May 22, 2025 at 12:48:28PM +0530, Beleswar Padhi wrote:
 
-> From: Dmitrii Merkurev <dimorinny@google.com>
+> Previously, MCU R5F runs in lockstep mode. Enable split-mode on MCU R5F
+> as the support to shut down core1 and use it for loading other firmware,
+> while DM runs on core0, has been added.
 >=20
-> 1. Get partition info/size
-> 2. Erase partition
-> 3. Flash partition
-> 4. BCB
->=20
-> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 > ---
->  drivers/fastboot/Kconfig      | 29 +++++++++++++++++++++++++++++
->  drivers/fastboot/Makefile     |  1 +
->  drivers/fastboot/fb_command.c |  8 ++++++++
->  drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
->  drivers/fastboot/fb_getvar.c  |  8 +++++++-
->  5 files changed, 63 insertions(+), 5 deletions(-)
+>  dts/upstream/src/arm64/ti/k3-j7200-mcu-wakeup.dtsi              | 2 +-
+>  dts/upstream/src/arm64/ti/k3-j721e-mcu-wakeup.dtsi              | 2 +-
+>  dts/upstream/src/arm64/ti/k3-j721s2-mcu-wakeup.dtsi             | 2 +-
+>  .../src/arm64/ti/k3-j784s4-j742s2-mcu-wakeup-common.dtsi        | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
 
-I know this was posted before I replied with more feedback moments ago.
-
-[snip]
-> @@ -193,6 +197,31 @@ config FASTBOOT_MMC_USER_NAME
->  	  defined here.
->  	  The default target name for erasing EMMC_USER is "mmc0".
-> =20
-> +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
-> +	string "Define FASTBOOT block interface name"
-> +	depends on FASTBOOT_FLASH_BLOCK
-> +	default ""
-> +	help
-> +	  The fastboot "flash" and "erase" commands support operations
-> +	  on any Block device, this should specify the block device name
-> +	  like ide, scsi, usb, sata, nvme, virtio, blkmap, mtd...
-> +	  The mmc block device type can be used but most of the features
-> +	  available in the FASTBOOT_MMC will be missing.
-> +	  Consider using FASTBOOT_MMC on a MMC block device until all
-> +	  features are migrated.
-
-A default like "" in order to un-stick configs that are now here and
-enabling the option is wrong. If we're enabling new functionality for
-platforms, it needs to be configured correctly. This leads to building
-code on platforms that won't be used on the platform so we've likely
-added run-time bloat for no benefit.
-
-> +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
-> +	int "Define FASTBOOT block device identifier"
-> +	depends on FASTBOOT_FLASH_BLOCK
-> +	default 0
-> +	help
-> +	  The fastboot "flash" and "erase" commands support operations
-> +	  on any Block device, this should specify the block device
-> +	  identifier on the system, as a number.
-> +          The device identifier should be 0 for first device on the
-> +	  interface type specified in FLASH_BLOCK_INTERFACE_NAME config,
-> +	  1 the second, etc...
-
-This help should be one paragraph and note something along the lines of:
-- Device identifiers are numbered starting from 0.
-- The most common case is to use the first controller.
-
-And then yes, "default 0" is fine here because it is a reasonable
-default when configuring the system to use the functionality.
+Please don't post DONOTMERGE patches. If the series can be applied
+without this patch, because the functionality is backwards compatible
+put these changes in the cover letter or link to a gist or similar to
+show how to test the changes locally. If the series can't be merged
+until the DTS changes are ready too, please mark the whole thing as RFC.
+For clarity, what is the case with this series?
 
 --=20
 Tom
 
---hcFQcPIs1DlkJ50l
+--hl78fHPzFHKAHlNA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvNz0ACgkQFHw5/5Y0
-tyxyhgwAtc+scWoUQQHKD5F54GALpOgSJh2Vu1PyjDCxhvc3JgkJ2UsE83NjSuVw
-QIkI0tLio6cBbUTKPV/WdX0/kyoBCq4WM9zQBpd7wnKT4PrPbgGj6FtFzchTL7qX
-Y5s/X135Ri5Ens+SlmALIAyx/apUo3RE0oyUxtxt0NX60RgNoqd6Ax2yGUhWpMI0
-qaXCwJO7Iy9LYJE6KsrBnHJ+VvihzEpIwZX2ir2pa2eaMI+0fsTs4LAkyTJRrv4J
-xwH46oBSaJ0fUgUxZhdcYpTQQ2fMKJVRUvrY1jjZYjpcxvMqxtODt0xjhjJ/e0hp
-hWkd4iXj8f7SnKoxQmz54jLONzo7Tq1ibxYqZI1P2X/2XDYk5+YOocjgLhxupRBH
-L0l/qfxT7W2ZNjnbge/6LIx+Tr+eADwYxgoD3p2Czo4aSfQdrCBOEW6SukgT7omp
-ZyT8vYyOf57oyx+hz4qboFyj+GqPpTNJRFXlUIABbBW/7crH07vNaOki+8B51xpL
-EEiooc54
-=cJIA
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvOHEACgkQFHw5/5Y0
+tyzCbAv+JQKT2bIMprAWu8UA0RjbZHZA/o2HRp2WkVj5EX3vp9KIGukNTJ10d2x1
+YoW/YZGGbWIjAfeTgC22xqcqq4YjrJCk1tVY+NrSyuZBm5uuKoBTTsbySzmvNKbn
+JY+OLV5bEl8Qty3bsHO14Wlal6WtVKVSApu2MtFr8nJLB5Y9djw+fnP5zpuuq26F
+mjcyxn8J9PkmNkt4M8CKI2YPF+Sd7MOOmpZZtPeRIJ3Lfw6d2zfXhu7zjGnd88oA
+e3QXTd/cNzg04YR1jsvEZTU5CuPiEznYTEdg0IWgTpTgEkXLaFlOtON9ruvuyubn
+2jBAX86bjsgA9i76aOy2yEJyy3LrWDTgxn5FQ1I+qU0LDEpXPs7V4LeZSe3OiisW
+4QSxYHav5RHrFfmRPmfU38i6p6BKfwyf2K/PnSBMY5HLlq24l/SfN0fqBrHdPEIx
+CYO4VkD+ChkEp5rwZGyS+w25fbmHNLCxqpEL8329LMME04z76LHXOsD6wbDZTHYr
+d6+Id7tg
+=5tHg
 -----END PGP SIGNATURE-----
 
---hcFQcPIs1DlkJ50l--
+--hl78fHPzFHKAHlNA--
