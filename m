@@ -4,106 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD4FC54E90
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 20:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE2B9C54E65
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 20:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 732ED83189;
-	Thu, 22 May 2025 22:40:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 667D68310F;
+	Thu, 22 May 2025 22:51:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t1Lrtmi9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pPHqNZZ8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B63F83192; Thu, 22 May 2025 22:40:02 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 33F9D83164; Thu, 22 May 2025 22:51:07 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D912883108
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 22:39:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B62EB83108
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 22:51:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43cf257158fso66165835e9.2
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 13:39:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7300069c447so5443340a34.2
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 13:51:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747946399; x=1748551199; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=62SXSGQT1Sf/CtjV1yF6LHqnd+PX62SGrr6E9V9a9FU=;
- b=t1Lrtmi9MW4HKqIeYXAVPNiZ+aBrQIT3ZO+KzKUtNBMS+kHUuyJKODmqtfGV8QGE8g
- uMdVQ4cH7cgvIqXl9MqDXX1X1cWeaBW3lb+M/LGA6sWr6lwoylrBt2HyupbcZkox6tod
- 9sztRax0K6LWutl462URFD8pDXW4M/pi3+6CrAWG0lzPnEMBLFLVvXkiB4fGNx17gsX9
- K7HeAyHMjr56hVabX2mhMocBqLy7hILWRabwIAGjEPJjsXtOr1Xhr7LYw/PTPUSsLRJ2
- RArK63y5OEtWHcAmYx/2k1q/rS2L1RYHZUkhF1U8xWZtqCUTL3x83S/avnIgkVh9zlt/
- ONJA==
+ d=konsulko.com; s=google; t=1747947063; x=1748551863; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7FzWYlYGYNyIr42s7qUEL3xFbrqDqmjQmYAUlgqtiE8=;
+ b=pPHqNZZ8LTUCEiVTCnTQMjo/DUQCPHJsUk+1r0KoJKnPx0oBdLYb6V/uAGF6r4XHTV
+ jBIQOTW0L7GPrz8tE1QHQoG8btEdO8qYe/1EcnbrbcjynekIffBbZ+IFy8/1nQCSmEHZ
+ abh+UweBOisYX51tb9X54WABhHKIBs6t42yC8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747946399; x=1748551199;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=62SXSGQT1Sf/CtjV1yF6LHqnd+PX62SGrr6E9V9a9FU=;
- b=JHZt4H/vMSASauTjDBmNP4qXxJuaIRBPLP3HiEXzb6+w3Q4DQ4ZDWX5skYJmdkcr3e
- +9+ni9J9a8LGinYhtRAwHY+cT5nlrxm0FZj4cIdt2n1xfGkKHK1HJH3es91FgGidnnN7
- xCpfcuoVkpW0ixBqqrt8HnCXnrnZEbYJDs7tiTc81LNyheADs64dEuE3aA1DALGi239R
- Cnl4h4rm7xIwiJrUF718zYpWk+Q0KE7IFtcjYjURyhATtkI8uyWhkqlKBciwjnS+wWfR
- oT2l3poCbq7aN4fomXDWhRLJdZYGgHxM1X1jZbLQsqcsBL0GSAIoV6IP7TptnzwHHELX
- RKpg==
-X-Gm-Message-State: AOJu0YwGmOx+LPhtEG9wzVzsKp0pJJcBXqAX8sZjyP0XYGe49U/2vNsv
- 5l8B9piFzNwlCkQF+jrS1Aqt11jguw1+Ep15IZzYgehB37zLx7fk/MQI/IflMsJVhAw=
-X-Gm-Gg: ASbGnct6TIy0FAnJ1CPJYwzJnmAjEZ5k62lAjfRUal/ZBkk/e+TQZyR+wZR5vdP/sDD
- cJR3hwnAIwcPrr6MOHHeNk2M0MsU97AbUsKc/w/rgBE+sl9xVruZ6WyNpHCbra9KbGZ3e0L2WWP
- fjEpo0TSInEeihxrxEk0FGfrTHmknnWZviNTAS7Pf8F7gK4DwEDitY/IvguVRbukSWpIJL3911u
- onpr3ZkFNnVNyo5HNlOWO9I8wU1LKic4QBBA58ciUxa25XgrfiNhnH2GDx2MeMf6bPYjykJsTQ/
- NmA2p9Dlc/VFurBv9Dhhhs4O+fWln497hMhwBzNtRZP03d0R0bj/timNWvXnbyeefI2BZza8tCE
- K85lRH1TJ4qfzSZlVbb8NZrcmxJ0u
-X-Google-Smtp-Source: AGHT+IE9h7wVi0WG+bc4MKkExUKmviw8GJdsulxmRcLKHMK6ssjQvnvCrCgalevsFhrhxGtGZj/GaA==
-X-Received: by 2002:a05:600c:a402:b0:444:c28f:e81a with SMTP id
- 5b1f17b1804b1-444c28fea0amr172173845e9.27.1747946399203; 
- Thu, 22 May 2025 13:39:59 -0700 (PDT)
-Received: from toyger.tail248178.ts.net (i5E863A39.versanet.de. [94.134.58.57])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-447f6f05581sm117304575e9.13.2025.05.22.13.39.58
+ d=1e100.net; s=20230601; t=1747947063; x=1748551863;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7FzWYlYGYNyIr42s7qUEL3xFbrqDqmjQmYAUlgqtiE8=;
+ b=eYgPQKPthoMTZc6TS2+ixq8L0sthfQg3R/qDBm1DnneTlhEz6XlrQw8vPg4GY2U9PK
+ hUJ6K10j5c6LDCaGC8sUvGfRmsBqyLxWOvBWhTxNX98wXfjJGJtY28k22nryxpsDATgX
+ 9NWUP6AvBSI5KZW6yL+3qvBLbCEAKtwKcKzwQf7QqvkjV4uMciDajvsNLlwBHxzeLnVX
+ n2WaymQEIiFCSJXncPf8HMO5TsElVDvZIubyQR5+EUOW4+mdloVS7TRVmB4QJJBtZXbe
+ wBkyQfN9WB9C0wXzIrTy5HxI5dvCIsZ/UGaf1uxUjdE3JRRtBxHGuBpklDM7SCWHzYAl
+ NDiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZ3zFs+7pzNG26lC6ZqQBN6r/aI6zh+vD0lXdnn2GMu71C6CqEY9h8KL8IJi5X96B4usR9Wko=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDJ6tBT+FwUAtqIfw/12KP+W+YeYBaMAy9DI8e2EUkh8swf03/
+ ry12XFIyQeaFfMCBM2rCBjOQVKlWVNWw46Vkg9FTwbX165tmSAT2Bh06rr29EFNuU9E=
+X-Gm-Gg: ASbGnctfsx3WUO/cPzCVR5DP5NrTkr3kJa3ZaRIrjOLqTXTvZFqqa1H3JufFpYk3ey6
+ LViuGoDXbOkNVz/D74L9pa46qc8hwHCrbTfMFPVXvK1F6LwZdC6aXs8e8G/UpAvANBcoGLCTKmg
+ 6j6Y+atBAhdwGUdayGcYW17dI4o8oJ0tPFuRVK/Ky6lSJdPL99+CBFiumnyZ124rB1UGy4yuHV4
+ i0L3q8YCcg/wltGx3efZu0XkkvXMZXpoNua5uVXCRWuq1NqahA5CbaTqdqjKyaYEu4EpAiPH0ki
+ Mu3mGgIR+h6ghlpgV5QubgbmkO4MrGUjqk1GfystvZFVyy19TqjlaX/oOzLJep/AnbHxeXukYM4
+ rleoy5F0niyqt
+X-Google-Smtp-Source: AGHT+IHbED7WQ0E40a7qkUrEn56fI2Z8zlRfDDnaMgPzjUCL+3y7CRsk1QohvbPgqbnxs/km0vbrlg==
+X-Received: by 2002:a05:6830:6308:b0:72b:a6a9:8465 with SMTP id
+ 46e09a7af769-7354d5cc8b0mr473294a34.23.1747947063408; 
+ Thu, 22 May 2025 13:51:03 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-734f6b5f697sm2608798a34.57.2025.05.22.13.51.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 13:39:58 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 22 May 2025 22:39:43 +0200
-Subject: [PATCH 5/5] doc: board/qualcomm: update docs for new u-boot.mbn target
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250522-b4-qcom-tooling-improvements-v1-5-8141b8955cfb@linaro.org>
+ Thu, 22 May 2025 13:51:02 -0700 (PDT)
+Date: Thu, 22 May 2025 14:51:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH 0/5] Qualcomm: teach the build system to emit signed ELF
+ images
+Message-ID: <20250522205100.GN100073@bill-the-cat>
 References: <20250522-b4-qcom-tooling-improvements-v1-0-8141b8955cfb@linaro.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Rl6czu1YTgHFRr1j"
+Content-Disposition: inline
 In-Reply-To: <20250522-b4-qcom-tooling-improvements-v1-0-8141b8955cfb@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Casey Connolly <casey.connolly@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6320;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=rzmiumSurAHEDa9aarglhLyXk4Wh3vUTU5Bya2U6BcI=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoL4uWOlmvjczuZg0GqB1TkI/60jq4oEa/FwsxS
- O4uB0vXEruJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaC+LlgAKCRAFgzErGV9k
- tozwD/4iYDKzO+37D99ShsAVHLFUKEL05NYVmiYVSWTyL+yUX6QT51zb7WdvbKMeJnlOebjR0km
- Kqo9DjB8ugFHv+SFUvx0INhrPg48fPb1NFNiOhpHrFXzoMCV4/N0qUaiKqjtwQebX+W3t77oEje
- RvHv1ZAOJrb0hJTFmxL9viHm4l/wY7P+YO2XUQY725FhYL/ISIf+ad3FOIY4sf5DVfDq2NuRZCy
- JxLVS8z4M4pEz7VXS8sRkLfQKEmWwZ+KElNE9HwQy3tSucYccIYEtR30B4C5ku6h7VOSPPCiOG+
- cbf1RAQiPt/X3T++RrPnRhlDU0nbFsWyKziqUwTHRrPL0roiH4JPh/k0TmpsgSVbbCutSD1hVVt
- njEcP0AsQ16CqiKpRy5XNBdRPlgiGn/42EOwKOcu6MdSHAXgDsJbJNjqLxN2E6O9ZByHsJWnOQy
- K7ZSFlo648BqmepsqO2Bt3WmUaUMws76wQFVlfbEt7RZitS/YXE0P3JAbNsGpT2zJVB7SbZ6577
- Am7CMhVzWz5aT6l1mdPG0alkWLJWeLuSW7ECsbKQ1BYhbJ4HUEVtaC4w5wEzew2ciyHyBjlmKNq
- EtrBf7gJu9XlTJzTo9pwNirtFn7R25Zh4TqL8o8Eko1NzTUB89SScf7FEpcdTDERtDtQspv5rP3
- oN5xCYHJeFJVtag==
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,147 +102,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the build docs to describe building the u-boot.mbn target
-explicitly for some boards. Additionally add a new "signing" page to
-describe the purpose of mkmbn and the MBN format.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- doc/board/qualcomm/index.rst   |  1 +
- doc/board/qualcomm/rb3gen2.rst | 27 +++++++++++++--------------
- doc/board/qualcomm/rdp.rst     | 16 ++++------------
- doc/board/qualcomm/signing.rst | 29 +++++++++++++++++++++++++++++
- 4 files changed, 47 insertions(+), 26 deletions(-)
+--Rl6czu1YTgHFRr1j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index e2fcbfa19c2fff36c8551823ca4a53a5fdc7fa9a..0b24fb6691907ab6fcecc6ade55f363de44502a8 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -11,4 +11,5 @@ Qualcomm
-    board
-    phones
-    debugging
-    rdp
-+   signing
-diff --git a/doc/board/qualcomm/rb3gen2.rst b/doc/board/qualcomm/rb3gen2.rst
-index 4240606224f5b36968277792dfd5dc93a762fdfa..79a57c689657719b61582fc33cd079f134cda054 100644
---- a/doc/board/qualcomm/rb3gen2.rst
-+++ b/doc/board/qualcomm/rb3gen2.rst
-@@ -17,34 +17,33 @@ Installation
- First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``qcm6490``::
- 
-   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-   $ make qcm6490_defconfig
--  $ make -j8
-+  $ make -j8 DEVICE_TREE=qcom/qcs6490-rb3gen2 u-boot.mbn
- 
--This will build ``u-boot.elf`` in the configured output directory.
-+This will build ``u-boot.mbn`` in the configured output directory.
- 
- Although the RB3 Gen 2 does not have secure boot set up by default,
--the firmware still expects firmware ELF images to be "signed". The signature
--does not provide any security in this case, but it provides the firmware with
--some required metadata.
--
--To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
--
--  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
-+the firmware still expects firmware ELF images to be "signed". More information can be
-+found in :doc:`signing`.
- 
- Then install the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
- on your device with ``fastboot flash uefi_a u-boot.mbn``.
- 
- U-Boot should be running after a reboot (``fastboot reboot``).
- 
--Note that fastboot is not yet supported in U-Boot on this board, as a result,
--to flash back the original firmware, or new versoins of the U-Boot, EDL mode
--must be used. This can be accessed by pressing the EDL mode button as described
--in the Qualcomm Linux documentation. A tool like bkerler's `edl`_ can be used
--for flashing with the firehose loader binary appropriate for the board.
-+Note that fastboot is not yet supported in U-Boot on this board, as a result, to flash
-+back the original firmware, or new versoins of the U-Boot, EDL mode must be used. This
-+can be accessed by holding the EDL button while powering on as described in the
-+Qualcomm Linux documentation.
-+
-+A tool like bkerler's `edl`_ can be used for flashing with the firehose loader from the `RB3 Gen 2 bootbinaries`. ::
-+
-+  $ edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a u-boot.mbn
- 
- .. _qtestsign: https://github.com/msm8916-mainline/qtestsign
- .. _edl: https://github.com/bkerler/edl
-+.. _RB3 Gen 2 bootbinaries: https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/QCM6490.LE.1.0/common/build/ufs/bin/QCM6490_bootbinaries.zip
- 
- Usage
- -----
- 
-diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-index fd14f1d9829dfaea4a7b503c1f60de8441f362e5..51f8d5772d054f791274f494ba3b7b0e1b691706 100644
---- a/doc/board/qualcomm/rdp.rst
-+++ b/doc/board/qualcomm/rdp.rst
-@@ -16,22 +16,14 @@ Installation
- First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``IPQ9574``::
- 
-   $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-   $ make qcom_ipq9574_mmc_defconfig
--  $ make -j8
-+  $ make -j8 u-boot.mbn
- 
--This will build ``u-boot.elf`` in the configured output directory.
-+This will build the signed ``u-boot.mbn`` in the configured output directory. More information
-+about image signing can be found in :doc:`signing`.
- 
--Although the RDPs do not have secure boot set up by default, the firmware still
--expects firmware ELF images to be "signed". The signature does not provide any
--security in this case, but it provides the firmware with some required metadata.
--
--To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
--
--  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
--
--Then install the resulting ``u-boot.mbn`` to the ``0:APPSBL`` partition
--on your device with::
-+Then install the image to the ``0:APPSBL`` partition on your device with::
- 
-   IPQ9574# tftpboot path/to/u-boot.mbn
-   IPQ9574# mmc part (note down the start & end block no.s of '0:APPSBL' partition)
-   IPQ9574# mmc erase <start blk no> <count>
-diff --git a/doc/board/qualcomm/signing.rst b/doc/board/qualcomm/signing.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..443d6433d8fc66bcb4c9e6c0e7bc3e6dbe508bb0
---- /dev/null
-+++ b/doc/board/qualcomm/signing.rst
-@@ -0,0 +1,29 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Casey Connolly <casey.connolly@linaro.org>
-+
-+Qualcomm Image Signing
-+======================
-+
-+On some boards like the RB3 Gen 2 where U-Boot runs as the first stage bootloader,
-+it must be in a Qualcomm specific signed ELF format called ``mbn``.
-+
-+For most boards this is handled automatically with the ``mkmbn`` tool in the U-Boot
-+build system. If you're bringing up a new platform which will run U-Boot as the first
-+stage bootloader, you may need to add your board and platform compatible string and
-+the load address used by your board to the ``boards`` table in ``tools/qcom/mkmbn/mkmbn.py``.
-+
-+For example:
-+
-+.. code-block:: python
-+
-+	boards: dict[bytes, int] = {
-+		# Exact matches for boards, these are preferred
-+		# Don't forget the null terminator!
-+		b"qcom,qcs6490-rb3gen2\0": 0x9FC00000,
-+	...
-+	}
-+
-+
-+When you run make to build the ``u-boot.mbn`` target, ``mkmbn`` will inspect the DTB in your
-+U-Boot image and try to match the compatible to the table, then it will build an ELF image and
-+hash/sign it per the MBN spec.
+On Thu, May 22, 2025 at 10:39:38PM +0200, Casey Connolly wrote:
 
--- 
-2.49.0
+> With several new Qualcomm platforms appearing on the mailing list, all
+> of which build U-Boot as an ELF, sign it, and then flash it to some
+> partition on the board, we're getting a lot of defconfigs which just
+> contain a debug UART and a TEXT_BASE address. This leads to needless
+> rebuilds in CI of effectively the same image, and needless duplication
+> of build instructions.
+>=20
+> To address this, let's introduce a new tool "mkmbn.py", this is based
+> on the existing qtestsign[1] tool but is (currently) hardcoded to
+> only handle the Dragonwing and IPQ boards which use MBN header v6.
+> Additionally, the tool contains a lookup table that maps from a boards
+> DT compatible property to the load address it needs. Since it's highly
+> unusual for different boards using the same SoC to have different load
+> addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
+>=20
+> With this tool in place, we introduce a "u-boot.mbn" target in the
+> Makefile, this can be invoked to build a Qualcomm signed ELF image for
+> supported targets.
+>=20
+> Finally, the defconfigs are cleaned up by moving the debug UART
+> definitions to config fragments (since it doesn't make sense to have
+> them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
+> the qcs9100_defconfig is removed entirely since the same binary can
+> be created with just make arguments. This platform entirely lacked
+> documentation to begin with, which should be addressed by future
+> patches.
+>=20
+> The Qualcomm documentation is also cleaned up, a new "signing" page
+> is added to briefly cover the what and why of MBN signing, and board
+> specific pages are updated to explain the new build process.
+>=20
+> These patches have been tested on the RB3 Gen 2, but additionally
+> testing for other platforms would be super useful.
+>=20
+> [1]: https://github.com/msm8916-mainline/qtestsign
 
+How much did you look in to having binman be what invokes a tool to
+do the signing? Thanks.
+
+--=20
+Tom
+
+--Rl6czu1YTgHFRr1j
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvjjAACgkQFHw5/5Y0
+tyy4iAwAhs9Q9srJ2raqZUjltTP3nJVu0sYl2D/Vp3WwQ2/X7dVVmpnhl1DsF5vm
+L4O65Hucidm2TNWVDrWurzt3ch92n6aFOlO6cje1JiC1CSQWC2sHh68j1dvxRq9F
+mG1yb1s6yD7mRZUtWhX5WVhwYM8lzLOWDwb9n5k1SMzsgG38b7U0flxuOCGj+KrP
+0elY0v+Idv1htRHFD5ohkFxjezNqlqVVLw9t3MSq/tjmYW9EbPEGHyDzwyPL3VwP
+l8OLEhQ9zTimp3F801RklbtkkHa+CDEnI/WEMKStvLHrLrkY/xzyu4WiIrv4KDCf
+884yVBaoyNPtA+x0JKGzcSmdzXPWl63Jx20sLMgjwGxEbh5/1iu1l3VQOV/p9Psk
+6rxYYvvp7LLCGEEYOL5y5tnDWGhtWG8i50PfqGb6bel9BImsYczf+AgOQFruTip9
++q2CTEOPnism/lES95yykmE7uu3rB00CwSv/DnYvevYWSFOBbESahfzFTMCMhUm0
+fACmuLwS
+=jKFE
+-----END PGP SIGNATURE-----
+
+--Rl6czu1YTgHFRr1j--
