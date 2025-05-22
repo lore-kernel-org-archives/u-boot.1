@@ -4,69 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B711C54E90
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 09:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50579C54E90
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 09:54:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82C5582FC8;
-	Thu, 22 May 2025 11:54:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D2B0782FC8;
+	Thu, 22 May 2025 11:54:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IK3/Y0PI";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oED0rE6y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 176E68301F; Thu, 22 May 2025 11:54:03 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5998982F67
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 11:54:00 +0200 (CEST)
+ id 892A183043; Thu, 22 May 2025 11:54:48 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 30CAD82F67
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 11:54:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54M9rvIo606486;
- Thu, 22 May 2025 04:53:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747907637;
- bh=2anbqNv20gqm8dFNgSL4CHylWr2NoweMOsPUeGu+Bzo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=IK3/Y0PIo4YBmF0YPhzFROF4t9fyAHwGrGkaAe8MtsGPjTqBH4CtlQYpVTcz6RdeB
- iKGMnt5tzjr78GltIKacezJAwQEqzdqZhv9aL5Nv/i99g2yU47sZAkI1/iEcAAT+N4
- skxHW0yyDBHMvzZlrwhkN8Ecdm/ADY2XGs5IXVEk=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54M9ruBD3417022
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 22 May 2025 04:53:57 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- May 2025 04:53:56 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 May 2025 04:53:56 -0500
-Received: from [172.24.227.151] (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54M9rrZr052506;
- Thu, 22 May 2025 04:53:53 -0500
-Message-ID: <ee4506ff-50d8-4a93-8b2c-33be41e4e89e@ti.com>
-Date: Thu, 22 May 2025 15:23:52 +0530
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7237539014=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54M8iWtO005516;
+ Thu, 22 May 2025 11:54:42 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ eJFHq+BJdrJnp0xd0+zsTL/z+X5oREcHDumtX1as9nU=; b=oED0rE6yxidsw1Cx
+ bS5kofv5VqVgIxNJVO8ZCxwJawY4gppOYGdG6i0kIT/YjDmt58PuUmson7ljIy1D
+ GeS4MbWIY5afBT/tvVx4H2WxUj5eQzXXcDkhGbAkVLsgMY5tFvc25/J8RHS3cktH
+ W126kFO2gZ03zTThe9tn3hn2ayGPgKELG/+EcglUMJp4jsOlu4n8I1kOtin87Kj1
+ OOEeLd/NJSUJZnOVIpzv0H79L+MM+Fq/C3gCPNflKnCmt4gM+rK031Bs+f6KtQGU
+ 9/F0MlO72BVgxwBHfn+G0Uxq9zudVOH4NCJ6IBO3Lfpizy3Ky36mLjw7IIH+dOTZ
+ g7d1Xg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfc85ug-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 22 May 2025 11:54:42 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 28D5E4004D;
+ Thu, 22 May 2025 11:53:58 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4AF67B132B9;
+ Thu, 22 May 2025 11:53:40 +0200 (CEST)
+Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 22 May
+ 2025 11:53:39 +0200
+Message-ID: <a22cb1c0-bcee-4b12-bed8-2eb7e19e0939@foss.st.com>
+Date: Thu, 22 May 2025 11:53:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] arch: mach-k3: common: Add support to shutdown MCU R5
- Core 1
-To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <jm@ti.com>,
- <u-kumar1@ti.com>, <m-shah@ti.com>, <u-boot@lists.denx.de>
-References: <20250522071828.285462-1-b-padhi@ti.com>
- <20250522071828.285462-3-b-padhi@ti.com>
- <9b07130d-301e-425e-969f-a3f11106d5c1@ti.com>
+Subject: Re: [PATCH 4/4] watchdog: don't autostart watchdog on STM32MP boards
+To: Antonio Borneo <antonio.borneo@foss.st.com>, <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Marek Vasut <marex@denx.de>
+CC: <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>, =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?=
+ <clement.legoffic@foss.st.com>
+References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
+ <20250521122755.265760-5-antonio.borneo@foss.st.com>
 Content-Language: en-US
-From: Beleswar Prasad Padhi <b-padhi@ti.com>
-In-Reply-To: <9b07130d-301e-425e-969f-a3f11106d5c1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20250521122755.265760-5-antonio.borneo@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.86.182]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-22_05,2025-05-22_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,181 +93,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+Hi,
 
-On 22/05/25 13:21, Neha Malcom Francis wrote:
-> On 22/05/25 12:48, Beleswar Padhi wrote:
->> During boot, ROM can bring up the MCU R5F cores in either lockstep or
->> split mode based on X509 certificate flags. If booted in split mode,
->> core 0 will run DM firmware and second core sits in WFI. Add support to
->> shut down core 1 so that other firmwares can later be loaded on them.
->>
->> The shutdown of MCU R5 Core 1 is invoked at A72 SPL init, as by that
->> time Device Manager (DM) is up and running on R5 Core 0. The shutdown
->> request of Core 1 is handled by Device Manager itself.
->>
->> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
->> ---
->>  arch/arm/mach-k3/common.c             | 55 +++++++++++++++++++++++++++
->>  arch/arm/mach-k3/common.h             |  1 +
->>  arch/arm/mach-k3/j721e/j721e_init.c   |  9 ++++-
->>  arch/arm/mach-k3/j721s2/j721s2_init.c |  7 ++++
->>  arch/arm/mach-k3/j784s4/j784s4_init.c |  7 ++++
->>  5 files changed, 78 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
->> index fc230f180d0..68f24948134 100644
->> --- a/arch/arm/mach-k3/common.c
->> +++ b/arch/arm/mach-k3/common.c
->> @@ -31,6 +31,10 @@
->>  #include <dm/uclass-internal.h>
->>  #include <dm/device-internal.h>
->>  
->> +#define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
->> +#define PROC_ID_MCU_R5FSS0_CORE1		0x02
->> +#define PROC_BOOT_CFG_FLAG_R5_LOCKSTEP		0x00000100
->> +
->>  #include <asm/arch/k3-qos.h>
->>  
->>  struct ti_sci_handle *get_ti_sci_handle(void)
->> @@ -328,3 +332,54 @@ void setup_qos(void)
->>  		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
->>  }
->>  #endif
->> +
->> +int shutdown_mcu_r5_core1(void)
->> +{
-> Better to build this function only if CONFIG_ARM64 is enabled?
-
-
-Thanks. Perhaps we can use __maybe_unused here as the invocation of this function is CONFIG protected. Will address in revision.
-
-Thanks for the R/Bs,
-Beleswar
-
+On 5/21/25 14:27, Antonio Borneo wrote:
+> From: Patrice Chotard <patrice.chotard@foss.st.com>
 >
->> +	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
->> +	struct ti_sci_dev_ops *dev_ops = &ti_sci->ops.dev_ops;
->> +	struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
->> +	u32 dev_id_mcu_r5_core1 = put_core_ids[0];
->> +	u64 boot_vector;
->> +	u32 cfg, ctrl, sts;
->> +	int cluster_mode_lockstep, ret;
->> +
->> +	ret = proc_ops->proc_request(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
->> +	if (ret) {
->> +		printf("Unable to request processor control for core %d\n",
->> +		       PROC_ID_MCU_R5FSS0_CORE1);
->> +		return ret;
->> +	}
->> +
->> +	ret = proc_ops->get_proc_boot_status(ti_sci, PROC_ID_MCU_R5FSS0_CORE1,
->> +					     &boot_vector, &cfg, &ctrl, &sts);
->> +	if (ret) {
->> +		printf("Unable to get Processor boot status for core %d\n",
->> +		       PROC_ID_MCU_R5FSS0_CORE1);
->> +		goto release_proc_ctrl;
->> +	}
->> +
->> +	/* Shutdown MCU R5F Core 1 only if the cluster is booted in SplitMode */
->> +	cluster_mode_lockstep = !!(cfg & PROC_BOOT_CFG_FLAG_R5_LOCKSTEP);
->> +	if (cluster_mode_lockstep) {
->> +		ret = -EINVAL;
->> +		goto release_proc_ctrl;
->> +	}
->> +
->> +	ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_MCU_R5FSS0_CORE1,
->> +					   PROC_BOOT_CTRL_FLAG_R5_CORE_HALT, 0);
->> +	if (ret) {
->> +		printf("Unable to Halt core %d\n", PROC_ID_MCU_R5FSS0_CORE1);
->> +		goto release_proc_ctrl;
->> +	}
->> +
->> +	ret = dev_ops->put_device(ti_sci, dev_id_mcu_r5_core1);
->> +	if (ret) {
->> +		printf("Unable to assert reset on core %d\n",
->> +		       PROC_ID_MCU_R5FSS0_CORE1);
->> +		return ret;
->> +	}
->> +
->> +release_proc_ctrl:
->> +	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
->> +	return ret;
->> +}
->> diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
->> index 02c74731fea..6e33f578151 100644
->> --- a/arch/arm/mach-k3/common.h
->> +++ b/arch/arm/mach-k3/common.h
->> @@ -49,6 +49,7 @@ enum k3_device_type get_device_type(void);
->>  struct ti_sci_handle *get_ti_sci_handle(void);
->>  void do_board_detect(void);
->>  void ti_secure_image_check_binary(void **p_image, size_t *p_size);
->> +int shutdown_mcu_r5_core1(void);
->>  
->>  #if (IS_ENABLED(CONFIG_K3_QOS))
->>  void setup_qos(void);
->> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
->> index f31c20f7ed6..edca2634fb9 100644
->> --- a/arch/arm/mach-k3/j721e/j721e_init.c
->> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
->> @@ -296,9 +296,9 @@ void do_dt_magic(void)
->>  
->>  void board_init_f(ulong dummy)
->>  {
->> +	int ret;
->>  #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
->>  	struct udevice *dev;
->> -	int ret;
->>  #endif
->>  	/*
->>  	 * Cannot delay this further as there is a chance that
->> @@ -371,6 +371,13 @@ void board_init_f(ulong dummy)
->>  	preloader_console_init();
->>  #endif
->>  
->> +	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
->> +	if (IS_ENABLED(CONFIG_ARM64)) {
->> +		ret = shutdown_mcu_r5_core1();
->> +		if (ret)
->> +			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
->> +	}
->> +
->>  	/* Output System Firmware version info */
->>  	k3_sysfw_print_ver();
->>  
->> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> index 5941fa26a95..6342161f830 100644
->> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
->> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> @@ -230,6 +230,13 @@ void k3_spl_init(void)
->>  		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
->>  	}
->>  
->> +	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
->> +	if (IS_ENABLED(CONFIG_ARM64)) {
->> +		ret = shutdown_mcu_r5_core1();
->> +		if (ret)
->> +			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
->> +	}
->> +
->>  	/* Output System Firmware version info */
->>  	k3_sysfw_print_ver();
->>  }
->> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> index 787cf6261e4..2756accbe12 100644
->> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
->> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> @@ -206,6 +206,13 @@ void k3_spl_init(void)
->>  
->>  	writel(AUDIO_REFCLK1_DEFAULT, (uintptr_t)CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL);
->>  
->> +	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
->> +	if (IS_ENABLED(CONFIG_ARM64)) {
->> +		ret = shutdown_mcu_r5_core1();
->> +		if (ret)
->> +			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
->> +	}
->> +
->>  	/* Output System Firmware version info */
->>  	k3_sysfw_print_ver();
->>  }
+> The STM32MP2 boards have watchdog started by a previous boot
+
+why only for STM32MP2...
+
+I think it is case for STM32MP1 also.
+
+
+and in the patch it is the case => default n for ARCH_STM32MP
+
+= all STM32 MPU: STM32MP1(ARMv7) & STM32MP2(ARMv8)
+
+
+> stage (e.g. bootrom or secure OS), WATCHDOG_AUTOSTART is useless.
+> Prefer to rely on DT properties "u-boot,autostart" or "u-boot,noautostart"
+> if needed.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
+> ---
+>   drivers/watchdog/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 1bb67f50352..510330be8a5 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -15,6 +15,7 @@ config WATCHDOG_AUTOSTART
+>   	bool "Automatically start watchdog timer"
+>   	depends on WDT
+>   	default n if ARCH_SUNXI
+> +	default n if ARCH_STM32MP
+>   	default y
+>   	help
+>   	  Automatically start watchdog timer and start servicing it during
+
+
+With this patch you are change the behavior for ALL users of STM32MP arch...
+
+It is OK for any boot with TF-A/OP-TEE....
+
+so for stm32mp15_defconfig/stm32mp15_trusted_defconfig
+
+
+but what append for boot with SPL on ST boards ?
+
+stm32mp15_basic_defconfig
+
+and what appends for  customer defconfig  with SPL ?
+
+stm32mp15-microgea-stm32mp1-microdev2_defconfig
+stm32mp15-icore-stm32mp1-ctouch2_defconfig
+stm32mp15_dhcor_basic_defconfig
+stm32mp15_dhcom_basic_defconfig
+stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+
+if you want have no impact on other boards, I think a defconfig 
+modification is missing for all these defconfig without TF-A/OP-TEE support
+
+CONFIG_WATCHDOG_AUTOSTART=y
+
+or you are expecting STM32MP15 board device tree modification 
+("u-boot,autostart") ?
+
+
+Regards
+
+Patrick
+
+
