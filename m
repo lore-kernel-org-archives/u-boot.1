@@ -4,90 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20793C54756
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35B4C54756
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 898E282F8E;
-	Thu, 22 May 2025 09:15:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E9C582FCA;
+	Thu, 22 May 2025 09:18:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Y5hGfUK2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Y1HY+Fl3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F8D782FB9; Thu, 22 May 2025 09:15:25 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AFFC82E31
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:15:22 +0200 (CEST)
+ id 5005282FC8; Thu, 22 May 2025 09:18:39 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 53B0182E31
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:18:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7237832dd9=gabriel.fernandez@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54M0GOr6024125;
- Thu, 22 May 2025 09:14:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- 6l30OqHaEL8H6q23XmhkOfHC6j4QwVjVgjMBXyLIjU4=; b=Y5hGfUK2K1PPQBIl
- aX7x/7lxAuDuPgadX3a9pVW3XedumonoNAq0lO1oQjUn18dF+Dtu/DNsm1mIGdWo
- hlbo1XRYKyqf3Wm6cVXKneTKsnWnHLjg+oCPoXyQtJ/hhRsM7Vd5bX22Myc0SfSm
- nDVZ4EAtHlEjeHpYu22YvE3b+MSIXCcEHt1CZ2NhTu7OsuSmk0vJQucDjdQbRJ1E
- 3Of5MSxEovhHnrYW2Vlc09sTU5WDzi9w5i6bj+wYaILKJqDk2mikEEnbdphuGHqx
- HvrEAlzWVKY9VgpPG6Yj9FiDfVJkQKInfDx0ndp4IsLBElgQdvOteoeXMEgCg5wy
- evfTng==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfqqb8u-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 22 May 2025 09:14:54 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 33B5340051;
- Thu, 22 May 2025 09:12:41 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BD8A6B33BCF;
- Thu, 22 May 2025 09:10:31 +0200 (CEST)
-Received: from [10.48.87.146] (10.48.87.146) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 22 May
- 2025 09:10:30 +0200
-Message-ID: <ad156150-a116-4b85-92a5-9764a53166bc@foss.st.com>
-Date: Thu, 22 May 2025 09:10:26 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54M7IXIF1746430;
+ Thu, 22 May 2025 02:18:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1747898313;
+ bh=e3xAhpJVFVaIoEcGR8Kr5OxQt1gVRVdly/2tpLoZvNw=;
+ h=From:To:CC:Subject:Date;
+ b=Y1HY+Fl3CAyIu4gbJK2KbSVDYt0eyMrluzxs4bEhAeyMdQx+zXKlMTvSYouOcQHDZ
+ HXVNr99UR6pOnJL32Mxfezd5wnXLgu2ssFWFFkl5cig5k6jzPsjyx6CTLu+IfTZFAO
+ ejmiOsCc65nlJi5neSRV433onOQ+FvFmtoIykWx4=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54M7IXg13314349
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 22 May 2025 02:18:33 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
+ May 2025 02:18:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 22 May 2025 02:18:32 -0500
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54M7IT9I467991;
+ Thu, 22 May 2025 02:18:29 -0500
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>
+CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <jm@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>, <b-padhi@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH 0/6] Add IPC support on MCU R5F cluster in Split Mode
+Date: Thu, 22 May 2025 12:48:22 +0530
+Message-ID: <20250522071828.285462-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 11/13] reset: stm32mp25: add stm32mp25 reset driver
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Christian Marangi
- <ansuelsmth@gmail.com>, Elaine Zhang <zhangqing@rock-chips.com>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Greg Malysa <malysagreg@gmail.com>, Huan Zhou <me@per1cycle.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Jerome Forissier
- <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, Joseph Chen
- <chenjh@rock-chips.com>, Kever Yang <kever.yang@rock-chips.com>, Leo Yu-Chi
- Liang <ycliang@andestech.com>, Marek Vasut <marex@denx.de>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Robert Marko
- <robert.marko@sartura.hr>, Sam Protsenko <semen.protsenko@linaro.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, Simon Glass
- <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>, Tom Rini
- <trini@konsulko.com>
-References: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
- <20250521134117.2828335-12-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>
-In-Reply-To: <20250521134117.2828335-12-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.146]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-22_04,2025-05-20_03,2025-03-28_01
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,813 +78,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds remoteproc support on MCU R5F in Split mode.
 
-On 5/21/25 15:41, Patrice Chotard wrote:
-> From: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
->
-> Implement STM32MP25 reset drivers using stm32-core-reset API.
-> This reset stm32-reset-core API and will be able to use DT binding
-> index started from 0.
->
-> This patch also moves legacy reset into stm32 directory reset.
->
-> Signed-off-by: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->   MAINTAINERS                            |   3 +-
->   drivers/misc/stm32_rcc.c               |  66 +++++-----
->   drivers/reset/Kconfig                  |   9 +-
->   drivers/reset/Makefile                 |   4 +-
->   drivers/reset/stm32-reset.c            |  97 ---------------
->   drivers/reset/stm32/Kconfig            |  23 ++++
->   drivers/reset/stm32/Makefile           |   9 ++
->   drivers/reset/stm32/stm32-reset-core.c |  92 ++++++++++++++
->   drivers/reset/stm32/stm32-reset-core.h |  31 +++++
->   drivers/reset/stm32/stm32-reset-mp1.c  |  55 +++++++++
->   drivers/reset/stm32/stm32-reset-mp25.c | 159 +++++++++++++++++++++++++
->   drivers/reset/stm32/stm32-reset.c      |  43 +++++++
->   include/stm32_rcc.h                    |   7 +-
->   13 files changed, 460 insertions(+), 138 deletions(-)
->   delete mode 100644 drivers/reset/stm32-reset.c
->   create mode 100644 drivers/reset/stm32/Kconfig
->   create mode 100644 drivers/reset/stm32/Makefile
->   create mode 100644 drivers/reset/stm32/stm32-reset-core.c
->   create mode 100644 drivers/reset/stm32/stm32-reset-core.h
->   create mode 100644 drivers/reset/stm32/stm32-reset-mp1.c
->   create mode 100644 drivers/reset/stm32/stm32-reset-mp25.c
->   create mode 100644 drivers/reset/stm32/stm32-reset.c
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index d62dd35a385..fc7b6ff2cd6 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -718,7 +718,7 @@ F:	drivers/power/regulator/stm32-vrefbuf.c
->   F:	drivers/power/regulator/stpmic1.c
->   F:	drivers/ram/stm32mp1/
->   F:	drivers/remoteproc/stm32_copro.c
-> -F:	drivers/reset/stm32-reset.c
-> +F:	drivers/reset/stm32/
->   F:	drivers/rng/optee_rng.c
->   F:	drivers/rng/stm32_rng.c
->   F:	drivers/rtc/stm32_rtc.c
-> @@ -731,6 +731,7 @@ F:	include/dt-bindings/clock/stm32fx-clock.h
->   F:	include/dt-bindings/clock/stm32mp*
->   F:	include/dt-bindings/pinctrl/stm32-pinfunc.h
->   F:	include/dt-bindings/reset/stm32mp*
-> +F:	include/stm32-reset-core.h
->   F:	include/stm32_rcc.h
->   F:	tools/logos/st.bmp
->   F:	tools/stm32image.c
-> diff --git a/drivers/misc/stm32_rcc.c b/drivers/misc/stm32_rcc.c
-> index 5a6f979f91b..15bf69f7d57 100644
-> --- a/drivers/misc/stm32_rcc.c
-> +++ b/drivers/misc/stm32_rcc.c
-> @@ -14,47 +14,56 @@
->   #include <dm/device_compat.h>
->   #include <dm/lists.h>
->   
-> -struct stm32_rcc_clk stm32_rcc_clk_f42x = {
-> -	.drv_name = "stm32fx_rcc_clock",
-> +static const struct stm32_rcc stm32_rcc_f42x = {
-> +	.drv_name_clk = "stm32fx_rcc_clock",
-> +	.drv_name_rst = "stm32_rcc_reset",
->   	.soc = STM32F42X,
->   };
->   
-> -struct stm32_rcc_clk stm32_rcc_clk_f469 = {
-> -	.drv_name = "stm32fx_rcc_clock",
-> +static const struct stm32_rcc stm32_rcc_f469 = {
-> +	.drv_name_clk = "stm32fx_rcc_clock",
-> +	.drv_name_rst = "stm32_rcc_reset",
->   	.soc = STM32F469,
->   };
->   
-> -struct stm32_rcc_clk stm32_rcc_clk_f7 = {
-> -	.drv_name = "stm32fx_rcc_clock",
-> +static const struct stm32_rcc stm32_rcc_f7 = {
-> +	.drv_name_clk = "stm32fx_rcc_clock",
-> +	.drv_name_rst = "stm32_rcc_reset",
->   	.soc = STM32F7,
->   };
->   
-> -struct stm32_rcc_clk stm32_rcc_clk_h7 = {
-> -	.drv_name = "stm32h7_rcc_clock",
-> +static const struct stm32_rcc stm32_rcc_h7 = {
-> +	.drv_name_clk = "stm32h7_rcc_clock",
-> +	.drv_name_rst = "stm32_rcc_reset",
->   };
->   
-> -struct stm32_rcc_clk stm32_rcc_clk_mp1 = {
-> -	.drv_name = "stm32mp1_clk",
-> -	.soc = STM32MP1,
-> +static const struct stm32_rcc stm32_rcc_mp15 = {
-> +	.drv_name_clk = "stm32mp1_clk",
-> +	.drv_name_rst = "stm32mp1_reset",
->   };
->   
-> -struct stm32_rcc_clk stm32_rcc_clk_mp13 = {
-> -	.drv_name = "stm32mp13_clk",
-> -	.soc = STM32MP1,
-> +static const struct stm32_rcc stm32_rcc_mp13 = {
-> +	.drv_name_clk = "stm32mp13_clk",
-> +	.drv_name_rst = "stm32mp1_reset",
-> +};
-> +
-> +static const struct stm32_rcc stm32_rcc_mp25 = {
-> +	.drv_name_clk = "stm32mp25_clk",
-> +	.drv_name_rst = "stm32mp25_reset",
->   };
->   
->   static int stm32_rcc_bind(struct udevice *dev)
->   {
->   	struct udevice *child;
->   	struct driver *drv;
-> -	struct stm32_rcc_clk *rcc_clk =
-> -		(struct stm32_rcc_clk *)dev_get_driver_data(dev);
-> +	struct stm32_rcc *rcc_clk =
-> +		(struct stm32_rcc *)dev_get_driver_data(dev);
->   	int ret;
->   
->   	dev_dbg(dev, "RCC bind\n");
-> -	drv = lists_driver_lookup_name(rcc_clk->drv_name);
-> +	drv = lists_driver_lookup_name(rcc_clk->drv_name_clk);
->   	if (!drv) {
-> -		dev_err(dev, "Cannot find driver '%s'\n", rcc_clk->drv_name);
-> +		dev_err(dev, "Cannot find driver '%s'\n", rcc_clk->drv_name_clk);
->   		return -ENOENT;
->   	}
->   
-> @@ -65,25 +74,24 @@ static int stm32_rcc_bind(struct udevice *dev)
->   	if (ret)
->   		return ret;
->   
-> -	drv = lists_driver_lookup_name("stm32_rcc_reset");
-> +	drv = lists_driver_lookup_name(rcc_clk->drv_name_rst);
->   	if (!drv) {
->   		dev_err(dev, "Cannot find driver stm32_rcc_reset'\n");
->   		return -ENOENT;
->   	}
->   
-> -	return device_bind_with_driver_data(dev, drv, dev->name,
-> -					    rcc_clk->soc,
-> -					    dev_ofnode(dev), &child);
-> +	return device_bind(dev, drv, dev->name, NULL, dev_ofnode(dev), &child);
->   }
->   
->   static const struct udevice_id stm32_rcc_ids[] = {
-> -	{.compatible = "st,stm32f42xx-rcc", .data = (ulong)&stm32_rcc_clk_f42x },
-> -	{.compatible = "st,stm32f469-rcc", .data = (ulong)&stm32_rcc_clk_f469 },
-> -	{.compatible = "st,stm32f746-rcc", .data = (ulong)&stm32_rcc_clk_f7 },
-> -	{.compatible = "st,stm32h743-rcc", .data = (ulong)&stm32_rcc_clk_h7 },
-> -	{.compatible = "st,stm32mp1-rcc", .data = (ulong)&stm32_rcc_clk_mp1 },
-> -	{.compatible = "st,stm32mp1-rcc-secure", .data = (ulong)&stm32_rcc_clk_mp1 },
-> -	{.compatible = "st,stm32mp13-rcc", .data = (ulong)&stm32_rcc_clk_mp13 },
-> +	{.compatible = "st,stm32f42xx-rcc", .data = (ulong)&stm32_rcc_f42x },
-> +	{.compatible = "st,stm32f469-rcc", .data = (ulong)&stm32_rcc_f469 },
-> +	{.compatible = "st,stm32f746-rcc", .data = (ulong)&stm32_rcc_f7 },
-> +	{.compatible = "st,stm32h743-rcc", .data = (ulong)&stm32_rcc_h7 },
-> +	{.compatible = "st,stm32mp1-rcc", .data = (ulong)&stm32_rcc_mp15 },
-> +	{.compatible = "st,stm32mp1-rcc-secure", .data = (ulong)&stm32_rcc_mp15 },
-> +	{.compatible = "st,stm32mp13-rcc", .data = (ulong)&stm32_rcc_mp13 },
-> +	{.compatible = "st,stm32mp25-rcc", .data = (ulong)&stm32_rcc_mp25 },
->   	{ }
->   };
->   
-> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> index a0d079c4555..e92bb8a7c39 100644
-> --- a/drivers/reset/Kconfig
-> +++ b/drivers/reset/Kconfig
-> @@ -28,13 +28,6 @@ config STI_RESET
->   	  Say Y if you want to control reset signals provided by system config
->   	  block.
->   
-> -config STM32_RESET
-> -	bool "Enable the STM32 reset"
-> -	depends on ARCH_STM32 || ARCH_STM32MP
-> -	help
-> -	  Support for reset controllers on STMicroelectronics STM32 family SoCs.
-> -	  This reset driver is compatible with STM32 F4/F7 and H7 SoCs.
-> -
->   config TEGRA_CAR_RESET
->   	bool "Enable Tegra CAR-based reset driver"
->   	depends on TEGRA_CAR
-> @@ -258,4 +251,6 @@ config RESET_SPACEMIT_K1
->   	help
->   	  Support for SPACEMIT's K1 Reset system. Basic Assert/Deassert
->   	  is supported.
-> +
-> +source "drivers/reset/stm32/Kconfig"
->   endmenu
-> diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-> index 1dd3cd99a14..ee5b009d134 100644
-> --- a/drivers/reset/Makefile
-> +++ b/drivers/reset/Makefile
-> @@ -7,7 +7,6 @@ obj-$(CONFIG_DM_RESET) += reset-uclass.o
->   obj-$(CONFIG_SANDBOX_MBOX) += sandbox-reset.o
->   obj-$(CONFIG_SANDBOX_MBOX) += sandbox-reset-test.o
->   obj-$(CONFIG_STI_RESET) += sti-reset.o
-> -obj-$(CONFIG_STM32_RESET) += stm32-reset.o
->   obj-$(CONFIG_TEGRA_CAR_RESET) += tegra-car-reset.o
->   obj-$(CONFIG_TEGRA186_RESET) += tegra186-reset.o
->   obj-$(CONFIG_RESET_AIROHA) += reset-airoha.o
-> @@ -36,3 +35,6 @@ obj-$(CONFIG_RESET_AT91) += reset-at91.o
->   obj-$(CONFIG_$(PHASE_)RESET_JH7110) += reset-jh7110.o
->   obj-$(CONFIG_RESET_RZG2L_USBPHY_CTRL) += reset-rzg2l-usbphy-ctrl.o
->   obj-$(CONFIG_RESET_SPACEMIT_K1) += reset-spacemit-k1.o
-> +
-> +obj-$(CONFIG_ARCH_STM32) += stm32/
-> +obj-$(CONFIG_ARCH_STM32MP) += stm32/
-> diff --git a/drivers/reset/stm32-reset.c b/drivers/reset/stm32-reset.c
-> deleted file mode 100644
-> index 9d4f361b251..00000000000
-> --- a/drivers/reset/stm32-reset.c
-> +++ /dev/null
-> @@ -1,97 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-> - * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-> - */
-> -
-> -#define LOG_CATEGORY UCLASS_RESET
-> -
-> -#include <dm.h>
-> -#include <errno.h>
-> -#include <log.h>
-> -#include <malloc.h>
-> -#include <reset-uclass.h>
-> -#include <stm32_rcc.h>
-> -#include <asm/io.h>
-> -#include <dm/device_compat.h>
-> -#include <linux/bitops.h>
-> -
-> -/* offset of register without set/clear management */
-> -#define RCC_MP_GCR_OFFSET 0x10C
-> -
-> -/* reset clear offset for STM32MP RCC */
-> -#define RCC_CL 0x4
-> -
-> -struct stm32_reset_priv {
-> -	fdt_addr_t base;
-> -};
-> -
-> -static int stm32_reset_assert(struct reset_ctl *reset_ctl)
-> -{
-> -	struct stm32_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-> -	int bank = (reset_ctl->id / (sizeof(u32) * BITS_PER_BYTE)) * 4;
-> -	int offset = reset_ctl->id % (sizeof(u32) * BITS_PER_BYTE);
-> -
-> -	dev_dbg(reset_ctl->dev, "reset id = %ld bank = %d offset = %d)\n",
-> -		reset_ctl->id, bank, offset);
-> -
-> -	if (dev_get_driver_data(reset_ctl->dev) == STM32MP1)
-> -		if (bank != RCC_MP_GCR_OFFSET)
-> -			/* reset assert is done in rcc set register */
-> -			writel(BIT(offset), priv->base + bank);
-> -		else
-> -			clrbits_le32(priv->base + bank, BIT(offset));
-> -	else
-> -		setbits_le32(priv->base + bank, BIT(offset));
-> -
-> -	return 0;
-> -}
-> -
-> -static int stm32_reset_deassert(struct reset_ctl *reset_ctl)
-> -{
-> -	struct stm32_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-> -	int bank = (reset_ctl->id / (sizeof(u32) * BITS_PER_BYTE)) * 4;
-> -	int offset = reset_ctl->id % (sizeof(u32) * BITS_PER_BYTE);
-> -
-> -	dev_dbg(reset_ctl->dev, "reset id = %ld bank = %d offset = %d)\n",
-> -		reset_ctl->id, bank, offset);
-> -
-> -	if (dev_get_driver_data(reset_ctl->dev) == STM32MP1)
-> -		if (bank != RCC_MP_GCR_OFFSET)
-> -			/* reset deassert is done in rcc clr register */
-> -			writel(BIT(offset), priv->base + bank + RCC_CL);
-> -		else
-> -			setbits_le32(priv->base + bank, BIT(offset));
-> -	else
-> -		clrbits_le32(priv->base + bank, BIT(offset));
-> -
-> -	return 0;
-> -}
-> -
-> -static const struct reset_ops stm32_reset_ops = {
-> -	.rst_assert	= stm32_reset_assert,
-> -	.rst_deassert	= stm32_reset_deassert,
-> -};
-> -
-> -static int stm32_reset_probe(struct udevice *dev)
-> -{
-> -	struct stm32_reset_priv *priv = dev_get_priv(dev);
-> -
-> -	priv->base = dev_read_addr(dev);
-> -	if (priv->base == FDT_ADDR_T_NONE) {
-> -		/* for MFD, get address of parent */
-> -		priv->base = dev_read_addr(dev->parent);
-> -		if (priv->base == FDT_ADDR_T_NONE)
-> -			return -EINVAL;
-> -	}
-> -
-> -	return 0;
-> -}
-> -
-> -U_BOOT_DRIVER(stm32_rcc_reset) = {
-> -	.name			= "stm32_rcc_reset",
-> -	.id			= UCLASS_RESET,
-> -	.probe			= stm32_reset_probe,
-> -	.priv_auto	= sizeof(struct stm32_reset_priv),
-> -	.ops			= &stm32_reset_ops,
-> -};
-> diff --git a/drivers/reset/stm32/Kconfig b/drivers/reset/stm32/Kconfig
-> new file mode 100644
-> index 00000000000..39dcfa0a9ca
-> --- /dev/null
-> +++ b/drivers/reset/stm32/Kconfig
-> @@ -0,0 +1,23 @@
-> +config RESET_STM32
-> +	bool "Enable the STM32 reset"
-> +	depends on ARCH_STM32
-> +	default y
-> +	help
-> +	  Support for reset controllers on STMicroelectronics STM32 family SoCs.
-> +	  This reset driver is compatible with STM32 F4/F7 and H7 SoCs.
-> +
-> +config RESET_STM32MP1
-> +	bool "Enable the STM32MP1 reset"
-> +	depends on STM32MP13X || STM32MP15X
-> +	default y
-> +	help
-> +	  Support for reset controllers on STMicroelectronics STM32MP1 family SoCs.
-> +	  This reset driver is compatible with STM32MP13 and STM32MP15 SoCs.
-> +
-> +config RESET_STM32MP25
-> +	bool "Enable the STM32MP25 reset"
-> +	depends on STM32MP25X
-> +	default y
-> +	help
-> +	  Support for reset controllers on STMicroelectronics STM32MP2 family SoCs.
-> +	  This reset driver is compatible with STM32MP25 SoCs.
-> diff --git a/drivers/reset/stm32/Makefile b/drivers/reset/stm32/Makefile
-> new file mode 100644
-> index 00000000000..c31ae524ba1
-> --- /dev/null
-> +++ b/drivers/reset/stm32/Makefile
-> @@ -0,0 +1,9 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +#
-> +# Copyright (C) 2024, STMicroelectronics - All Rights Reserved
-> +
-> +obj-y += stm32-reset-core.o
-> +
-> +obj-$(CONFIG_RESET_STM32) += stm32-reset.o
-> +obj-$(CONFIG_RESET_STM32MP1) += stm32-reset-mp1.o
-> +obj-$(CONFIG_RESET_STM32MP25) += stm32-reset-mp25.o
-> diff --git a/drivers/reset/stm32/stm32-reset-core.c b/drivers/reset/stm32/stm32-reset-core.c
-> new file mode 100644
-> index 00000000000..7dd92e07e1a
-> --- /dev/null
-> +++ b/drivers/reset/stm32/stm32-reset-core.c
-> @@ -0,0 +1,92 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
-> + * Author(s): Gabriel Fernandez, <gabriel.fernandez@foss.st.com> for STMicroelectronics.
-> + */
-> +
-> +#include <dm.h>
-> +#include <reset-uclass.h>
-> +#include <stm32-reset-core.h>
-> +#include <stm32_rcc.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/iopoll.h>
-> +
-> +static int stm32_reset_update(struct reset_ctl *reset_ctl, bool status)
-> +{
-> +	struct stm32_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-> +	const struct stm32_reset_data *data = priv->data;
-> +	const struct stm32_reset_cfg *ptr_line;
-> +	fdt_addr_t addr;
-> +
-> +	assert(priv->data->get_reset_line);
-> +
-> +	ptr_line = priv->data->get_reset_line(reset_ctl);
-> +	if (!ptr_line)
-> +		return -EPERM;
-> +
-> +	addr = priv->base + ptr_line->offset;
-> +
-> +	dev_dbg(reset_ctl->dev, "reset id=%ld offset=0x%x bit=%d status=%d\n",
-> +		reset_ctl->id, ptr_line->offset, ptr_line->bit_idx, status);
-> +
-> +	status = ptr_line->inverted ^ status;
-> +
-> +	if (ptr_line->set_clr) {
-> +		if (!status)
-> +			addr += data->clear_offset;
-> +
-> +		writel(BIT(ptr_line->bit_idx), addr);
-> +
-> +	} else {
-> +		if (status)
-> +			setbits_le32(addr, BIT(ptr_line->bit_idx));
-> +		else
-> +			clrbits_le32(addr, BIT(ptr_line->bit_idx));
-> +	}
-> +
-> +	/* Check deassert */
-> +	if (!status) {
-> +		u32 reg;
-> +
-> +		return readl_poll_timeout(addr, reg,
-> +					  !(reg & BIT(ptr_line->bit_idx)),
-> +					  data->reset_us);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_reset_assert(struct reset_ctl *reset_ctl)
-> +{
-> +	return stm32_reset_update(reset_ctl, true);
-> +}
-> +
-> +static int stm32_reset_deassert(struct reset_ctl *reset_ctl)
-> +{
-> +	return stm32_reset_update(reset_ctl, false);
-> +}
-> +
-> +const struct reset_ops stm32_reset_ops = {
-> +	.rst_assert	= stm32_reset_assert,
-> +	.rst_deassert	= stm32_reset_deassert,
-> +};
-> +
-> +int stm32_reset_core_probe(struct udevice *dev,
-> +			   const struct stm32_reset_data *data)
-> +{
-> +	struct stm32_reset_priv *priv = dev_get_priv(dev);
-> +
-> +	priv->base = dev_read_addr(dev);
-> +	if (priv->base == FDT_ADDR_T_NONE) {
-> +		/* for MFD, get address of parent */
-> +		priv->base = dev_read_addr(dev->parent);
-> +		if (priv->base == FDT_ADDR_T_NONE)
-> +			return -EINVAL;
-> +	}
-> +
-> +	priv->data = data;
-> +
-> +	assert(priv->data);
-> +
-> +	return 0;
-> +}
-> diff --git a/drivers/reset/stm32/stm32-reset-core.h b/drivers/reset/stm32/stm32-reset-core.h
-> new file mode 100644
-> index 00000000000..25a1aa152cb
-> --- /dev/null
-> +++ b/drivers/reset/stm32/stm32-reset-core.h
-> @@ -0,0 +1,31 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
-> +/*
-> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-> + * Author(s): Gabriel Fernandez, <gabriel.fernandez@foss.st.com> for STMicroelectronics.
-> + */
-> +
-> +#include <reset-uclass.h>
-> +
-> +struct stm32_reset_cfg {
-> +	u16 offset;
-> +	u8 bit_idx;
-> +	bool set_clr;
-> +	bool inverted;
-> +};
-> +
-> +struct stm32_reset_data {
-> +	const struct stm32_reset_cfg * (*get_reset_line)(struct reset_ctl *reset_ctl);
-> +	u32 clear_offset;
-> +	u32 reset_us;
-> +};
-> +
-> +struct stm32_reset_priv {
-> +	fdt_addr_t base;
-> +	struct stm32_reset_cfg reset_line;
-> +	const struct stm32_reset_data *data;
-> +};
-> +
-> +extern const struct reset_ops stm32_reset_ops;
-> +
-> +int stm32_reset_core_probe(struct udevice *dev,
-> +			   const struct stm32_reset_data *data);
-> diff --git a/drivers/reset/stm32/stm32-reset-mp1.c b/drivers/reset/stm32/stm32-reset-mp1.c
-> new file mode 100644
-> index 00000000000..6863f6e64b7
-> --- /dev/null
-> +++ b/drivers/reset/stm32/stm32-reset-mp1.c
-> @@ -0,0 +1,55 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-> + * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-> + */
-> +
-> +#include <dm.h>
-> +#include <stm32-reset-core.h>
-> +
-> +/* Reset clear offset for STM32MP RCC */
-> +#define RCC_CLR_OFFSET			0x4
-> +
-> +/* Offset of register without set/clear management */
-> +#define RCC_MP_GCR_OFFSET		0x10C
-> +
-> +/* Timeout for deassert */
-> +#define STM32_DEASSERT_TIMEOUT_US	10000
-> +
-> +static const struct stm32_reset_cfg *stm32_get_reset_line(struct reset_ctl *reset_ctl)
-> +{
-> +	struct stm32_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-> +	struct stm32_reset_cfg *ptr_line = &priv->reset_line;
-> +	int bank = (reset_ctl->id / (sizeof(u32) * BITS_PER_BYTE)) * 4;
-> +	int offset = reset_ctl->id % (sizeof(u32) * BITS_PER_BYTE);
-> +
-> +	ptr_line->offset = bank;
-> +	ptr_line->bit_idx = offset;
-> +	ptr_line->set_clr = true;
-> +
-> +	if (ptr_line->offset == RCC_MP_GCR_OFFSET) {
-> +		ptr_line->set_clr = false;
-> +		ptr_line->inverted = true;
-> +	}
-> +
-> +	return ptr_line;
-> +}
-> +
-> +static const struct stm32_reset_data stm32mp1_reset_data = {
-> +	.get_reset_line	= stm32_get_reset_line,
-> +	.clear_offset	= RCC_CLR_OFFSET,
-> +	.reset_us	= STM32_DEASSERT_TIMEOUT_US,
-> +};
-> +
-> +static int stm32_reset_probe(struct udevice *dev)
-> +{
-> +	return stm32_reset_core_probe(dev, &stm32mp1_reset_data);
-> +}
-> +
-> +U_BOOT_DRIVER(stm32mp25_rcc_reset) = {
-> +	.name		= "stm32mp1_reset",
-> +	.id		= UCLASS_RESET,
-> +	.probe		= stm32_reset_probe,
-> +	.priv_auto	= sizeof(struct stm32_reset_priv),
-> +	.ops		= &stm32_reset_ops,
-> +};
-> diff --git a/drivers/reset/stm32/stm32-reset-mp25.c b/drivers/reset/stm32/stm32-reset-mp25.c
-> new file mode 100644
-> index 00000000000..5e154f286d2
-> --- /dev/null
-> +++ b/drivers/reset/stm32/stm32-reset-mp25.c
-> @@ -0,0 +1,159 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
-> + * Author(s): Gabriel Fernandez, <gabriel.fernandez@foss.st.com> for STMicroelectronics.
-> + */
-> +
-> +#include <dm.h>
-> +#include <stm32-reset-core.h>
-> +#include <stm32mp25_rcc.h>
-> +#include <dt-bindings/reset/st,stm32mp25-rcc.h>
-> +
-> +/* Reset clear offset for STM32MP RCC */
-> +#define RCC_CLR_OFFSET			0x4
-> +
-> +/* Timeout for deassert */
-> +#define STM32_DEASSERT_TIMEOUT_US	10000
-> +
-> +#define RESET(id, _offset, _bit_idx, _set_clr)		\
-> +	[id] = &(struct stm32_reset_cfg){		\
-> +		.offset		= (_offset),		\
-> +		.bit_idx	= (_bit_idx),		\
-> +		.set_clr	= (_set_clr),		\
-> +	}
-> +
-> +static const struct stm32_reset_cfg *stm32mp25_reset[STM32MP25_LAST_RESET] = {
-> +	RESET(TIM1_R,		RCC_TIM1CFGR,		0,	0),
-> +	RESET(TIM2_R,		RCC_TIM2CFGR,		0,	0),
-> +	RESET(TIM3_R,		RCC_TIM3CFGR,		0,	0),
-> +	RESET(TIM4_R,		RCC_TIM4CFGR,		0,	0),
-> +	RESET(TIM5_R,		RCC_TIM5CFGR,		0,	0),
-> +	RESET(TIM6_R,		RCC_TIM6CFGR,		0,	0),
-> +	RESET(TIM7_R,		RCC_TIM7CFGR,		0,	0),
-> +	RESET(TIM8_R,		RCC_TIM8CFGR,		0,	0),
-> +	RESET(TIM10_R,		RCC_TIM10CFGR,		0,	0),
-> +	RESET(TIM11_R,		RCC_TIM11CFGR,		0,	0),
-> +	RESET(TIM12_R,		RCC_TIM12CFGR,		0,	0),
-> +	RESET(TIM13_R,		RCC_TIM13CFGR,		0,	0),
-> +	RESET(TIM14_R,		RCC_TIM14CFGR,		0,	0),
-> +	RESET(TIM15_R,		RCC_TIM15CFGR,		0,	0),
-> +	RESET(TIM16_R,		RCC_TIM16CFGR,		0,	0),
-> +	RESET(TIM17_R,		RCC_TIM17CFGR,		0,	0),
-> +	RESET(TIM20_R,		RCC_TIM20CFGR,		0,	0),
-> +	RESET(LPTIM1_R,		RCC_LPTIM1CFGR,		0,	0),
-> +	RESET(LPTIM2_R,		RCC_LPTIM2CFGR,		0,	0),
-> +	RESET(LPTIM3_R,		RCC_LPTIM3CFGR,		0,	0),
-> +	RESET(LPTIM4_R,		RCC_LPTIM4CFGR,		0,	0),
-> +	RESET(LPTIM5_R,		RCC_LPTIM5CFGR,		0,	0),
-> +	RESET(SPI1_R,		RCC_SPI1CFGR,		0,	0),
-> +	RESET(SPI2_R,		RCC_SPI2CFGR,		0,	0),
-> +	RESET(SPI3_R,		RCC_SPI3CFGR,		0,	0),
-> +	RESET(SPI4_R,		RCC_SPI4CFGR,		0,	0),
-> +	RESET(SPI5_R,		RCC_SPI5CFGR,		0,	0),
-> +	RESET(SPI6_R,		RCC_SPI6CFGR,		0,	0),
-> +	RESET(SPI7_R,		RCC_SPI7CFGR,		0,	0),
-> +	RESET(SPI8_R,		RCC_SPI8CFGR,		0,	0),
-> +	RESET(SPDIFRX_R,	RCC_SPDIFRXCFGR,	0,	0),
-> +	RESET(USART1_R,		RCC_USART1CFGR,		0,	0),
-> +	RESET(USART2_R,		RCC_USART2CFGR,		0,	0),
-> +	RESET(USART3_R,		RCC_USART3CFGR,		0,	0),
-> +	RESET(UART4_R,		RCC_UART4CFGR,		0,	0),
-> +	RESET(UART5_R,		RCC_UART5CFGR,		0,	0),
-> +	RESET(USART6_R,		RCC_USART6CFGR,		0,	0),
-> +	RESET(UART7_R,		RCC_UART7CFGR,		0,	0),
-> +	RESET(UART8_R,		RCC_UART8CFGR,		0,	0),
-> +	RESET(UART9_R,		RCC_UART9CFGR,		0,	0),
-> +	RESET(LPUART1_R,	RCC_LPUART1CFGR,	0,	0),
-> +	RESET(IS2M_R,		RCC_IS2MCFGR,		0,	0),
-> +	RESET(I2C1_R,		RCC_I2C1CFGR,		0,	0),
-> +	RESET(I2C2_R,		RCC_I2C2CFGR,		0,	0),
-> +	RESET(I2C3_R,		RCC_I2C3CFGR,		0,	0),
-> +	RESET(I2C4_R,		RCC_I2C4CFGR,		0,	0),
-> +	RESET(I2C5_R,		RCC_I2C5CFGR,		0,	0),
-> +	RESET(I2C6_R,		RCC_I2C6CFGR,		0,	0),
-> +	RESET(I2C7_R,		RCC_I2C7CFGR,		0,	0),
-> +	RESET(I2C8_R,		RCC_I2C8CFGR,		0,	0),
-> +	RESET(SAI1_R,		RCC_SAI1CFGR,		0,	0),
-> +	RESET(SAI2_R,		RCC_SAI2CFGR,		0,	0),
-> +	RESET(SAI3_R,		RCC_SAI3CFGR,		0,	0),
-> +	RESET(SAI4_R,		RCC_SAI4CFGR,		0,	0),
-> +	RESET(MDF1_R,		RCC_MDF1CFGR,		0,	0),
-> +	RESET(MDF2_R,		RCC_ADF1CFGR,		0,	0),
-> +	RESET(FDCAN_R,		RCC_FDCANCFGR,		0,	0),
-> +	RESET(HDP_R,		RCC_HDPCFGR,		0,	0),
-> +	RESET(ADC12_R,		RCC_ADC12CFGR,		0,	0),
-> +	RESET(ADC3_R,		RCC_ADC3CFGR,		0,	0),
-> +	RESET(ETH1_R,		RCC_ETH1CFGR,		0,	0),
-> +	RESET(ETH2_R,		RCC_ETH2CFGR,		0,	0),
-> +	RESET(USBH_R,		RCC_USB2CFGR,		0,	0),
+During boot, ROM can bring up the boot R5F cores in either lockstep or
+split mode based on X509 certificate flags. If booted in lockstep mode,
+the MCU R5F cores will run first the R5 SPL, and then once A72 comes up,
+will run the Device Manager (DM) firmware. But if booted in split mode, core
+0 will run DM firmware and second core sits in WFI. Shut it down so that
+other firmwares can later be loaded on them.
 
-RCC_USBHCFGR
+The shutdown of MCU R5 Core 1 is invoked at A72 SPL init, as by that
+time Device Manager (DM) is up and running on R5 Core 0. The shutdown
+of MCU R5 Core 1 is handled by Device Manager itself.
 
-Best regards
+The devicetree patch [PATCH 6/6] need not be merged here, as it will be sent to
+the Linux Upstream list.
 
-Gabriel
+Testing done:
+1. Build test on all existing TI K3 platforms.
+2. Tested U-Boot and Linux load of MCU R5F core in split mode on all applicable
+boards (AM68-SK, AM69-SK, J7200-EVM, J721E-EVM, J721S2-EVM, J784S4-evm,
+J742S2-EVM)
 
-> +	RESET(USB2PHY1_R,	RCC_USB2PHY1CFGR,	0,	0),
-> +	RESET(USB2PHY2_R,	RCC_USB2PHY2CFGR,	0,	0),
-> +	RESET(USB3DR_R,		RCC_USB3DRCFGR,		0,	0),
-> +	RESET(USB3PCIEPHY_R,	RCC_USB3PCIEPHYCFGR,	0,	0),
-> +	RESET(USBTC_R,		RCC_UCPDCFGR,		0,	0),
-> +	RESET(ETHSW_R,		RCC_ETHSWCFGR,		0,	0),
-> +	RESET(SDMMC1_R,		RCC_SDMMC1CFGR,		0,	0),
-> +	RESET(SDMMC1DLL_R,	RCC_SDMMC1CFGR,		16,	0),
-> +	RESET(SDMMC2_R,		RCC_SDMMC2CFGR,		0,	0),
-> +	RESET(SDMMC2DLL_R,	RCC_SDMMC2CFGR,		16,	0),
-> +	RESET(SDMMC3_R,		RCC_SDMMC3CFGR,		0,	0),
-> +	RESET(SDMMC3DLL_R,	RCC_SDMMC3CFGR,		16,	0),
-> +	RESET(GPU_R,		RCC_GPUCFGR,		0,	0),
-> +	RESET(LTDC_R,		RCC_LTDCCFGR,		0,	0),
-> +	RESET(DSI_R,		RCC_DSICFGR,		0,	0),
-> +	RESET(LVDS_R,		RCC_LVDSCFGR,		0,	0),
-> +	RESET(CSI_R,		RCC_CSICFGR,		0,	0),
-> +	RESET(DCMIPP_R,		RCC_DCMIPPCFGR,		0,	0),
-> +	RESET(CCI_R,		RCC_CCICFGR,		0,	0),
-> +	RESET(VDEC_R,		RCC_VDECCFGR,		0,	0),
-> +	RESET(VENC_R,		RCC_VENCCFGR,		0,	0),
-> +	RESET(WWDG1_R,		RCC_WWDG1CFGR,		0,	0),
-> +	RESET(WWDG2_R,		RCC_WWDG2CFGR,		0,	0),
-> +	RESET(VREF_R,		RCC_VREFCFGR,		0,	0),
-> +	RESET(DTS_R,		RCC_DTSCFGR,		0,	0),
-> +	RESET(CRC_R,		RCC_CRCCFGR,		0,	0),
-> +	RESET(SERC_R,		RCC_SERCCFGR,		0,	0),
-> +	RESET(OSPIIOM_R,	RCC_OSPIIOMCFGR,	0,	0),
-> +	RESET(I3C1_R,		RCC_I3C1CFGR,		0,	0),
-> +	RESET(I3C2_R,		RCC_I3C2CFGR,		0,	0),
-> +	RESET(I3C3_R,		RCC_I3C3CFGR,		0,	0),
-> +	RESET(I3C4_R,		RCC_I3C4CFGR,		0,	0),
-> +	RESET(IWDG2_KER_R,	RCC_IWDGC1CFGSETR,	18,	1),
-> +	RESET(IWDG4_KER_R,	RCC_IWDGC2CFGSETR,	18,	1),
-> +	RESET(RNG_R,		RCC_RNGCFGR,		0,	0),
-> +	RESET(PKA_R,		RCC_PKACFGR,		0,	0),
-> +	RESET(SAES_R,		RCC_SAESCFGR,		0,	0),
-> +	RESET(HASH_R,		RCC_HASHCFGR,		0,	0),
-> +	RESET(CRYP1_R,		RCC_CRYP1CFGR,		0,	0),
-> +	RESET(CRYP2_R,		RCC_CRYP2CFGR,		0,	0),
-> +	RESET(PCIE_R,		RCC_PCIECFGR,		0,	0),
-> +};
-> +
-> +static const struct stm32_reset_cfg *stm32_get_reset_line(struct reset_ctl *reset_ctl)
-> +{
-> +	unsigned long id = reset_ctl->id;
-> +
-> +	if (id < STM32MP25_LAST_RESET)
-> +		return stm32mp25_reset[id];
-> +
-> +	return NULL;
-> +}
-> +
-> +static const struct stm32_reset_data stm32mp25_reset_data = {
-> +	.get_reset_line	= stm32_get_reset_line,
-> +	.clear_offset	= RCC_CLR_OFFSET,
-> +	.reset_us	= STM32_DEASSERT_TIMEOUT_US,
-> +};
-> +
-> +static int stm32_reset_probe(struct udevice *dev)
-> +{
-> +	return stm32_reset_core_probe(dev, &stm32mp25_reset_data);
-> +}
-> +
-> +U_BOOT_DRIVER(stm32mp25_rcc_reset) = {
-> +	.name		= "stm32mp25_reset",
-> +	.id		= UCLASS_RESET,
-> +	.probe		= stm32_reset_probe,
-> +	.priv_auto	= sizeof(struct stm32_reset_priv),
-> +	.ops		= &stm32_reset_ops,
-> +};
-> diff --git a/drivers/reset/stm32/stm32-reset.c b/drivers/reset/stm32/stm32-reset.c
-> new file mode 100644
-> index 00000000000..975f67f712a
-> --- /dev/null
-> +++ b/drivers/reset/stm32/stm32-reset.c
-> @@ -0,0 +1,43 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-> + * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-> + */
-> +
-> +#include <dm.h>
-> +#include <stm32-reset-core.h>
-> +
-> +/* Timeout for deassert */
-> +#define STM32_DEASSERT_TIMEOUT_US	10000
-> +
-> +static const struct stm32_reset_cfg *stm32_get_reset_line(struct reset_ctl *reset_ctl)
-> +{
-> +	struct stm32_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-> +	struct stm32_reset_cfg *ptr_line = &priv->reset_line;
-> +	int bank = (reset_ctl->id / (sizeof(u32) * BITS_PER_BYTE)) * 4;
-> +	int offset = reset_ctl->id % (sizeof(u32) * BITS_PER_BYTE);
-> +
-> +	ptr_line->offset = bank;
-> +	ptr_line->bit_idx = offset;
-> +	ptr_line->set_clr = true;
-> +
-> +	return ptr_line;
-> +}
-> +
-> +static const struct stm32_reset_data stm32_reset_data = {
-> +	.get_reset_line	= stm32_get_reset_line,
-> +	.reset_us	= STM32_DEASSERT_TIMEOUT_US,
-> +};
-> +
-> +static int stm32_reset_probe(struct udevice *dev)
-> +{
-> +	return stm32_reset_core_probe(dev, &stm32_reset_data);
-> +}
-> +
-> +U_BOOT_DRIVER(stm32_rcc_reset) = {
-> +	.name		= "stm32_rcc_reset",
-> +	.id		= UCLASS_RESET,
-> +	.probe		= stm32_reset_probe,
-> +	.priv_auto	= sizeof(struct stm32_reset_priv),
-> +	.ops		= &stm32_reset_ops,
-> +};
-> diff --git a/include/stm32_rcc.h b/include/stm32_rcc.h
-> index b559ea77281..447a555dcf5 100644
-> --- a/include/stm32_rcc.h
-> +++ b/include/stm32_rcc.h
-> @@ -39,11 +39,11 @@ struct stm32_clk_info {
->   	bool v2;
->   };
->   
-> +/* platdata used for clk-stm32f.c driver */
->   enum soc_family {
->   	STM32F42X,
->   	STM32F469,
->   	STM32F7,
-> -	STM32MP1,
->   };
->   
->   enum apb {
-> @@ -51,8 +51,9 @@ enum apb {
->   	APB2,
->   };
->   
-> -struct stm32_rcc_clk {
-> -	char *drv_name;
-> +struct stm32_rcc {
-> +	char *drv_name_clk;
-> +	char *drv_name_rst;
->   	enum soc_family soc;
->   };
->   
+Test logs:
+https://gist.github.com/3V3RYONE/ee8e3cb9aa5f4c5c00b059b9c14bfa98
+
+Thanks,
+Beleswar
+
+Beleswar Padhi (6):
+  arm: mach-k3: {am6/j7}*_hardware.h: Expose MCU R5 proc and device ids
+  arch: mach-k3: common: Add support to shutdown MCU R5 Core 1
+  remoteproc: k3-r5: Acquire processor control before reset ops
+  board: ti: j7*: Add firmware for MCU R5 core1
+  arm: dts: k3-j7*-binman: Enable split mode for MCU R5F
+  DONOTMERGE: arm: dts: k3-j7*-mcu-wakeup: Enable split mode for MCU R5
+
+ arch/arm/dts/k3-j7200-binman.dtsi             |  3 +
+ arch/arm/dts/k3-j721e-binman.dtsi             |  4 ++
+ arch/arm/dts/k3-j721s2-binman.dtsi            |  3 +
+ arch/arm/dts/k3-j784s4-binman.dtsi            |  3 +
+ arch/arm/mach-k3/common.c                     | 55 +++++++++++++++++++
+ arch/arm/mach-k3/common.h                     |  1 +
+ arch/arm/mach-k3/include/mach/am62_hardware.h |  4 +-
+ .../arm/mach-k3/include/mach/am62a_hardware.h |  4 +-
+ .../arm/mach-k3/include/mach/am62p_hardware.h |  4 +-
+ arch/arm/mach-k3/include/mach/am64_hardware.h |  9 +--
+ arch/arm/mach-k3/include/mach/am6_hardware.h  |  9 +--
+ .../arm/mach-k3/include/mach/j721e_hardware.h |  9 +--
+ .../mach-k3/include/mach/j721s2_hardware.h    |  9 +--
+ .../arm/mach-k3/include/mach/j722s_hardware.h |  4 +-
+ .../mach-k3/include/mach/j784s4_hardware.h    |  9 +--
+ arch/arm/mach-k3/j721e/j721e_init.c           |  9 ++-
+ arch/arm/mach-k3/j721s2/j721s2_init.c         |  7 +++
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  7 +++
+ board/ti/j7200/j7200.env                      |  2 +-
+ board/ti/j721e/j721e.env                      |  2 +-
+ board/ti/j721s2/j721s2.env                    |  2 +-
+ board/ti/j784s4/j784s4.env                    |  4 +-
+ drivers/remoteproc/ti_k3_r5f_rproc.c          |  6 ++
+ .../src/arm64/ti/k3-j7200-mcu-wakeup.dtsi     |  2 +-
+ .../src/arm64/ti/k3-j721e-mcu-wakeup.dtsi     |  2 +-
+ .../src/arm64/ti/k3-j721s2-mcu-wakeup.dtsi    |  2 +-
+ .../k3-j784s4-j742s2-mcu-wakeup-common.dtsi   |  2 +-
+ 27 files changed, 139 insertions(+), 38 deletions(-)
+
+-- 
+2.34.1
+
