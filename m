@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D92C54E65
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 14:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC01C54E65
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 14:46:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FDA383095;
-	Thu, 22 May 2025 16:45:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A28EB830B4;
+	Thu, 22 May 2025 16:46:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FuXFkog1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hU/Mtf8H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C18F83095; Thu, 22 May 2025 16:45:12 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 7C252830E9; Thu, 22 May 2025 16:46:16 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C27883082
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 16:45:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F13AD83082
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 16:46:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2d4f832069bso3177347fac.3
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 07:45:10 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-6060167af73so5098188eaf.2
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 07:46:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747925109; x=1748529909; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1747925173; x=1748529973; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7q3VlmxPctUD36DLobuhwX4/Jvch76cV8OwHVUAybu0=;
- b=FuXFkog1olYMPx/6mSLHFSwsjihHh+lF8np5M9Nj/yDL2smzpKnmHZFexsHDMgLFoN
- dqiMc64FXRU7d5c/MQS5ADaCR0WPi+pMXzpS2qA/LajOqcmNEPpR6jFOsv1qUN6qFux4
- 6JRhaWIB22YMzcKXpLgivUZ8CaSvb7GodcwFw=
+ bh=txYzfAYoqgAxbgxWXRSODbhW7OxUYVz/uFGdy7gjqvs=;
+ b=hU/Mtf8HKcs2TbxyaxKWEWMul5EEUDrlKeyEucB6X8UhkTakraVaAKTl2Fi98DWQNu
+ IxpiVa0sbxT9vegAXAwh2rRM0rsOyJ747r0DPXPAFKTkNGjhvkVFMKQzOtQCeo4860RE
+ Q/roCr+7Ga0/3rD3ntVN3+pC6RehCBAHV7HPA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747925109; x=1748529909;
+ d=1e100.net; s=20230601; t=1747925173; x=1748529973;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7q3VlmxPctUD36DLobuhwX4/Jvch76cV8OwHVUAybu0=;
- b=sWCapieqGUPjTNUFukjRri6S+GhfRWCbrgc/QRVJrd51ySI2m7T/WqaRuNvUBq5mBC
- N7oZ0YAXXqTMiJOPGGr0vwLGnHLb72g6PCW9JjHKSn4xw+DE8SujXNJL/E9RIpjwP1pt
- iGDt26iVqFYllcEhri0Mi56dX1+A5qCCj7CAM+YAzuqdWYL+nm5ToIna7gShYQ+Q772c
- +Qzuc6hbuasgju20tpbp67gv7sjJJOTHqYi0KLwLUWWrlRtgQGcp6AEbh19jzarQLAuk
- fH/+sN5nf8JAFKMPytxiyrAn9b3XD+Wp9xArwlb5k3N1qkhLK9q3GDoUJ3l6ngj8b7Ft
- 5snw==
+ bh=txYzfAYoqgAxbgxWXRSODbhW7OxUYVz/uFGdy7gjqvs=;
+ b=fjcY+1nVXgzfKgMwFNuA/oILAEIc8Fko7dH3QJw809HJ+/w5WcuttTrkvtSbQ5e335
+ jDLrNm5pWPpHMoJ9EDCHphmURr+vRed/t3kENWbW/mslAzIa7d3AvJkgCvGmw6HP0QQh
+ +FkAts3x3yH53TKKSRuXKa5vTKcu8DDc4M8yGOD8mCOo09o1VEq3Z1g3OpJWjfMmeEAY
+ MuRGnuTMN9BvTmhfxc+M+3Zx3a9dRlRHa6pe/13I7bZ9qLaqWFf0iMOkVJ7vkSWe78aK
+ XdDt8aaHrEI6VC39BgUndoC5So7+/r4ljfEZnQFvB/xxb7gp7QBI3QrZ5XOmhBzNkUyG
+ RSFA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEsQ6wf/8511RmkaAmBvLDoNjlVa7OTJksA7xsfkQy+hj+HZfp+g/+tOX0r7j5IngOnjfNQDk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKcWqjg7BeXUv64nLOclCvU8ZGY7Z1PEEQPr/bJZKATo9OdTU/
- H/5JytnRjwrBtepixuLMA/BQ16/kwmv6aJAV+59AxkfVsPf9W0+yUeaxiam3ZW7iCug=
-X-Gm-Gg: ASbGncur2XjCRLNdCRnnTLfgRFcn6MXqza5WynbIpTiVkbiK4aDjh9fYhwCVUQNnOHn
- galjsCmDlTpS+nuvtAbxfE0Dcp/fwcZPr9XYjqD5e6bnxTTIEj70BospXjbSPnsn8i30darYByf
- 2OFuuVfcR++Z9rFsovM+sicZcfYA54Nk6gPiAf/DH1/OrdaZitUtwxCtZIX3Fc10/lpEKsk3ay1
- XPC73Uxi0/uUpk2rxygomHWqAsbE0I7wWKG4Td47QkrFSSvLVbNBX5Ds61N/rGY6AMoqd0xrs9E
- RvseCNDGWGT6zCMEfINCggMwQAgtBrQJhRuu4x3IIV/U6Um1+byKGf+qo6h9cI7Y53l3SN06ZaV
- ZaeWdbGpzgTtf
-X-Google-Smtp-Source: AGHT+IHKV3pthZxXUoJ831n75bg8HJjysLUtWU9kPalcpWFUn7FH7NGrSCLnsykJH7VBVXkdURrJug==
-X-Received: by 2002:a05:6870:cd87:b0:2d4:d9d6:c8d7 with SMTP id
- 586e51a60fabf-2e3c1e927f1mr16004508fac.31.1747925108808; 
- Thu, 22 May 2025 07:45:08 -0700 (PDT)
+ AJvYcCUXsIVd8HhKOum2NRNAoPeo7l4ABzahIibg1RNofB0D1QgEnyJoDpHl9k2AW6ynR8Pbt9t3rk4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrCfjDc/nNIpgGVxSVhI7g9JJD8qXULk+Kc7w/DyLgRYLtos5b
+ +9142xh6lk2/dFgjDHFVqjDcIecLVX9i06kyOUYjTKI90qxoHIrPCVgfpNQJOSgQ7UAGKUX20eT
+ UwgBJM1g=
+X-Gm-Gg: ASbGnctGu++bS+yClbFB/OsgMHwoTCJFVBRbIrejIVS1OIoxI1povcU1p8e1TYBfASU
+ f5OVok/suRhMB1XDyG2uQ39Peewcw1xSWhKuxnHFGXM1WsaqtA7QDFOyxwOhH+nSENTVk/9UY4n
+ 2cCm1ao5x1ZUu3aodXxYt8OIej3Dd8JVwpv0J1WJnsClEMti60QYpNMXko4luQ3ntNRXGkd3nvM
+ JMVeKVBd37BieQFxUJ7U5649LtD9txgcLF64EePHuo9hpBFTfW0SFVIglwAIkV8GrJeHZQFSSIZ
+ jS10GMmVlBLlSjn+JNasVtmUZW545Q6dOX7VeVoExM+GdCzmOzsbmy09JrTICIte+RrAXnF2Ige
+ O2Ncb7Q87DUbO
+X-Google-Smtp-Source: AGHT+IFI0LQDQl8p3MzfHkvMjolCdL5gLm+40+p38+Pje0JLGnQ8wgok5b6GL8RapVFkhgCz6QXphw==
+X-Received: by 2002:a05:6808:3385:b0:3fa:f848:8dfa with SMTP id
+ 5614622812f47-404d885e2f0mr17922337b6e.30.1747925162392; 
+ Thu, 22 May 2025 07:46:02 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c06084ccsm3113744fac.7.2025.05.22.07.45.07
+ 46e09a7af769-734f6a9a7a2sm2568012a34.36.2025.05.22.07.46.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 07:45:08 -0700 (PDT)
-Date: Thu, 22 May 2025 08:45:05 -0600
+ Thu, 22 May 2025 07:46:01 -0700 (PDT)
+Date: Thu, 22 May 2025 08:45:59 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Beleswar Padhi <b-padhi@ti.com>
-Cc: afd@ti.com, nm@ti.com, hnagalla@ti.com, n-francis@ti.com, jm@ti.com,
- u-kumar1@ti.com, m-shah@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 6/6] DONOTMERGE: arm: dts: k3-j7*-mcu-wakeup: Enable
- split mode for MCU R5
-Message-ID: <20250522144505.GK100073@bill-the-cat>
-References: <20250522071828.285462-1-b-padhi@ti.com>
- <20250522071828.285462-7-b-padhi@ti.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de,
+ rick@andestech.com, Mayuresh Chitale <mchitale@ventanamicro.com>
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20250522144559.GL100073@bill-the-cat>
+References: <aC2hyzxwKzO4k1im@swlinux02>
+ <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
+ <20250522-eradicate-clip-538f48710ad7@spud>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hl78fHPzFHKAHlNA"
+ protocol="application/pgp-signature"; boundary="3+v3WYz0s9j2uqRa"
 Content-Disposition: inline
-In-Reply-To: <20250522071828.285462-7-b-padhi@ti.com>
+In-Reply-To: <20250522-eradicate-clip-538f48710ad7@spud>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,51 +102,123 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hl78fHPzFHKAHlNA
+--3+v3WYz0s9j2uqRa
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 22, 2025 at 12:48:28PM +0530, Beleswar Padhi wrote:
-
-> Previously, MCU R5F runs in lockstep mode. Enable split-mode on MCU R5F
-> as the support to shut down core1 and use it for loading other firmware,
-> while DM runs on core0, has been added.
+On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
+> On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
+> > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
+> >=20
+> > > The following changes since commit a3e09b24ffd4429909604f1b28455b4430=
+6edbaa:
+> > >=20
+> > >   Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custodi=
+ans/u-boot-mmc (2025-05-20 08:35:31 -0600)
+> > >=20
+> > > are available in the Git repository at:
+> > >=20
+> > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
+> > >=20
+> > > [...]
+> >=20
+> > Merged into u-boot/master, thanks!
 >=20
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> ---
->  dts/upstream/src/arm64/ti/k3-j7200-mcu-wakeup.dtsi              | 2 +-
->  dts/upstream/src/arm64/ti/k3-j721e-mcu-wakeup.dtsi              | 2 +-
->  dts/upstream/src/arm64/ti/k3-j721s2-mcu-wakeup.dtsi             | 2 +-
->  .../src/arm64/ti/k3-j784s4-j742s2-mcu-wakeup-common.dtsi        | 2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
+> This PR seems to have made my CI blow up, and I'm not entirely sure if
+> that's something intentional or not. I've not yet bisected, but since
+> the error is "Image arch not compatible with host arch", I can only
+> imagine the patch in question is:
+> | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV64
+> | Date: Fri,  4 Apr 2025 14:48:55 +0000	[thread overview]
+> | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com> (raw)
+> | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
+> |=20
+> | Similar to ARM and X86, introduce a new image type which allows u-boot
+> | to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
+> |=20
+> | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
+> | ---
+> |  boot/image.c    | 3 ++-
+> |  include/image.h | 3 ++-
+> |  2 files changed, 4 insertions(+), 2 deletions(-)
+> |=20
+> | diff --git a/boot/image.c b/boot/image.c
+> | index 139c5bd035a..45299a7dc33 100644
+> | --- a/boot/image.c
+> | +++ b/boot/image.c
+> | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
+> |  	{	IH_ARCH_ARC,		"arc",		"ARC",		},
+> |  	{	IH_ARCH_X86_64,		"x86_64",	"AMD x86_64",	},
+> |  	{	IH_ARCH_XTENSA,		"xtensa",	"Xtensa",	},
+> | -	{	IH_ARCH_RISCV,		"riscv",	"RISC-V",	},
+> | +	{	IH_ARCH_RISCV,		"riscv",	"RISC-V 32 Bit",},
+> | +	{	IH_ARCH_RISCV64,	"riscv64",	"RISC-V 64 Bit",},
+> |  	{	-1,			"",		"",		},
+> |  };
+> | =20
+> | diff --git a/include/image.h b/include/image.h
+> | index 07912606f33..411bfcd0877 100644
+> | --- a/include/image.h
+> | +++ b/include/image.h
+> | @@ -138,7 +138,8 @@ enum {
+> |  	IH_ARCH_ARC,			/* Synopsys DesignWare ARC */
+> |  	IH_ARCH_X86_64,			/* AMD x86_64, Intel and Via */
+> |  	IH_ARCH_XTENSA,			/* Xtensa	*/
+> | -	IH_ARCH_RISCV,			/* RISC-V */
+> | +	IH_ARCH_RISCV,			/* RISC-V 32 bit*/
+> | +	IH_ARCH_RISCV64,		/* RISC-V 64 bit*/
+> | =20
+> |  	IH_ARCH_COUNT,
+> |  };
+> | --=20
+> | 2.43.0
+> |=20
+> since it is changing the existing "riscv" image type to be the 32-bit
+> image and requiring the new entry for 64-bit. My CI job uses the system
+> mkimage to create the image that U-Boot is loading, so it doesn't know
+> about the new define etc. Maybe it's not considered a problem if a new
+> U-Boot cannot boot an old image, but the comment above the enum reads:
+> |/*
+> | * CPU Architecture Codes (supported by Linux)
+> | *
+> | * The following are exposed to uImage header.
+> | * New IDs *MUST* be appended at the end of the list and *NEVER*
+> | * inserted for backward compatibility.
+> | */
+> The overwhelming majority of existing supported boards in U-Boot are
+> 64-bit platforms, and the 64-bit platforms are the ones that have been
+> supported for longer, so my thought would be that the compatibility of
+> 64-bit platforms should be prioritised over 32-bit? Or even add explicit
+> 32-bit and 64-bit entries and the existing one is a catch-all for
+> compatibility reasons?
+>=20
+> Hopefully my lack of bisection isn't causing me to blame something
+> incorrect, but I'll go try to replicate now :)
 
-Please don't post DONOTMERGE patches. If the series can be applied
-without this patch, because the functionality is backwards compatible
-put these changes in the cover letter or link to a gist or similar to
-show how to test the changes locally. If the series can't be merged
-until the DTS changes are ready too, please mark the whole thing as RFC.
-For clarity, what is the case with this series?
+Ugh. No, this is a problem that needs to be fixed and I'm sorry I missed
+it during reviews. We need to keep the list compatible.
 
 --=20
 Tom
 
---hl78fHPzFHKAHlNA
+--3+v3WYz0s9j2uqRa
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvOHEACgkQFHw5/5Y0
-tyzCbAv+JQKT2bIMprAWu8UA0RjbZHZA/o2HRp2WkVj5EX3vp9KIGukNTJ10d2x1
-YoW/YZGGbWIjAfeTgC22xqcqq4YjrJCk1tVY+NrSyuZBm5uuKoBTTsbySzmvNKbn
-JY+OLV5bEl8Qty3bsHO14Wlal6WtVKVSApu2MtFr8nJLB5Y9djw+fnP5zpuuq26F
-mjcyxn8J9PkmNkt4M8CKI2YPF+Sd7MOOmpZZtPeRIJ3Lfw6d2zfXhu7zjGnd88oA
-e3QXTd/cNzg04YR1jsvEZTU5CuPiEznYTEdg0IWgTpTgEkXLaFlOtON9ruvuyubn
-2jBAX86bjsgA9i76aOy2yEJyy3LrWDTgxn5FQ1I+qU0LDEpXPs7V4LeZSe3OiisW
-4QSxYHav5RHrFfmRPmfU38i6p6BKfwyf2K/PnSBMY5HLlq24l/SfN0fqBrHdPEIx
-CYO4VkD+ChkEp5rwZGyS+w25fbmHNLCxqpEL8329LMME04z76LHXOsD6wbDZTHYr
-d6+Id7tg
-=5tHg
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvOKcACgkQFHw5/5Y0
+tyw9yQwAib5fgGX8jqaATC1QEIP7IeJVa47nDE7S54Ti93AxTJnUDnZF7B9StQmj
+gMfDytCTEOd4nwBqOCvTJjzOA1S1Mrv6Ook7q6JuVfdrNIx4aP2aez+cuB/s0yYF
+2svkIbXdS6D7QviZwTrkqO/vcxf0aNeDg1PRgUOaifrjjFox5FoihgUoW1dHnufu
+zTUX6GMSyJUnKz/ALUBRaRVhR5p97hOdqmDuOWl9w5h+EPD/CpI92CPuwMQE8OIF
+EpCKVwNlo2JhqvbQ6A2k8i25czR645Gl9smQBAakph5EVD8By8UNvz+3z7gna9HS
+fY2KYTld3jYJvog4CFqdrm2s3VV11ajuelgSzrjrXQS2ZXZA4ENC6H02xNj/4geO
+QSVg275V3B6nTRdtVKQn5tsl3pw3pslS44vB5sJpIWLqdjyfCj3g/oMfKcqzqk5J
+kwfgvQEzslrnake+xwe7m6R9dRyexp+y8fVLf8AdnfS2ScApreiG6K7DNybBese0
+hjjKytgt
+=HMkm
 -----END PGP SIGNATURE-----
 
---hl78fHPzFHKAHlNA--
+--3+v3WYz0s9j2uqRa--
