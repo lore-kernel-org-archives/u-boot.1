@@ -4,81 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E2DC54756
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 06:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72038C54E90
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 06:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FD5582E28;
-	Thu, 22 May 2025 08:22:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DA5282E31;
+	Thu, 22 May 2025 08:58:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="uo44vvI9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BDrpG6hS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17B8382E31; Thu, 22 May 2025 08:22:26 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9AF3B803DF; Thu, 22 May 2025 08:58:25 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDA9482E26
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 08:22:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E400882E28
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 08:58:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=72372ec9ec=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54M5FTZ0018754;
- Thu, 22 May 2025 08:22:16 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- n0nl9MhIRM30GVJXgaPllN1qRblUyizIJ9gjVJfcNGQ=; b=uo44vvI9GDxt296O
- TWuseszb1MfWKimXA9Qh006GLQiTXsnzP2JafOBlCriC4ukxsaRvhnodBfRHXXgA
- S0ceKUqOBdje1MrqxBXUD//tP2rThCqWa1v6n+LxPUk6Rsi+BixBzlEeWwnQFVUC
- LapNHYHOvqRSqcXgZ1UeTwOMatWNHzvo5CmggkgpYNZZ0l7yRBm7QT+HECS6xq2l
- jLVaATtjgB1ReSLySWpOWehseevv3EPesYYXnyCEJLrJSgwEJkf/cs2dP4YxbECx
- +EKZSPl4qJBah5JC0+x7fcmsPw5dOFRp/Xkl5Fa/2a2VXtvaAhzLgcetAmCLICVZ
- LjC02g==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfaf8af-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 22 May 2025 08:22:16 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 6081E40049;
- Thu, 22 May 2025 08:21:07 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 81309B08FD2;
- Thu, 22 May 2025 08:19:29 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 22 May
- 2025 08:19:28 +0200
-Message-ID: <13c3bec9-36a0-42e1-bc23-01053565cba2@foss.st.com>
-Date: Thu, 22 May 2025 08:19:28 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5D24A5C5578;
+ Thu, 22 May 2025 06:56:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC698C4CEEA;
+ Thu, 22 May 2025 06:58:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1747897101;
+ bh=+MyixZPs5ZUIdHXTQ6cKzvvopD7Eyvp48ufQvRUZgwk=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=BDrpG6hS56ERqs0y0+8tVC/a5cWZ0vYWx6CQPQFHjLJeR/Aabmjo+uxB2H6ItVzm4
+ qkVDTCCRMuzx+kubW2EZGPh3LdKKDAadNXqwr3xJgtSmJNRjhRkDTa5NdYGQXtpCEI
+ H7DgzecDfOE6OpE05Lwe4dW/CDcL9GbnXfHhajCdwtDvZUGlLTDpSveCNMpgC+1Pye
+ Uoh1Wtdm3DLBDNWN6aDDtkiP4uaQHdqM/NNWZPccKp9KBdRLqBRTv2d2D8gaPHrA34
+ +72JvA4kQSTR9hEyZ9uNBrD/eEGHv339jAESE+WUBFgiUi/0aucrV7I1yQ4Ey4asCt
+ 58TnFzXhmlhsg==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ neil.armstrong@linaro.org, u-boot@lists.denx.de, Dmitrii Merkurev
+ <dimorinny@google.com>
+Subject: Re: [PATCH RFT v3 0/3] fastboot: add support for generic block
+ flashing
+In-Reply-To: <20250521190347.GF100073@bill-the-cat>
+References: <20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org>
+ <174774092427.332438.8643753165301653831.b4-ty@kernel.org>
+ <87zff6nhmo.fsf@kernel.org> <20250521151236.GC100073@bill-the-cat>
+ <87wma9okxy.fsf@kernel.org> <20250521190347.GF100073@bill-the-cat>
+Date: Thu, 22 May 2025 08:58:18 +0200
+Message-ID: <87a575gmid.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] lib/uuid.c: restore support of system partition type
- for ESP
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: <ilias.apalodimas@linaro.org>, <caleb.connolly@linaro.org>,
- <jerome.forissier@linaro.org>, Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
- <20250519110417.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250519110417.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-22_03,2025-05-20_03,2025-03-28_01
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,352 +72,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On mer., mai 21, 2025 at 13:03, Tom Rini <trini@konsulko.com> wrote:
 
-On 5/19/25 11:04, Patrick Delaunay wrote:
-> Add support of shortname for type parameter and restore "system"
-> as short name for EFI System Partition (ESP) for filed "type" of the
-> "gpt write" command.
-> 
-> Fixes: d54e1004b8b1 ("lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID")
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  lib/uuid.c | 148 +++++++++++++++++++++++++++--------------------------
->  1 file changed, 76 insertions(+), 72 deletions(-)
-> 
-> diff --git a/lib/uuid.c b/lib/uuid.c
-> index 6abbcf27b1f3..ee02fa4d600d 100644
-> --- a/lib/uuid.c
-> +++ b/lib/uuid.c
-> @@ -62,184 +62,185 @@ int uuid_str_valid(const char *uuid)
->  	return 1;
->  }
->  
-> +/* List of known GUID for GPT partition type */
->  static const struct {
-> -	const char *string;
-> +	const char *string;     /* name for type parameter of gpt command */
-> +	const char *description;/* description used for %pUs */
->  	efi_guid_t guid;
->  } list_guid[] = {
->  #ifndef USE_HOSTCC
-> -#if defined(CONFIG_PARTITION_TYPE_GUID) || defined(CONFIG_CMD_EFIDEBUG) || \
-> -	defined(CONFIG_EFI)
-> -	{"EFI System Partition", PARTITION_SYSTEM_GUID},
-> -#endif
-> -#ifdef CONFIG_PARTITION_TYPE_GUID
-> -	{"mbr",		LEGACY_MBR_PARTITION_GUID},
-> -	{"msft",	PARTITION_MSFT_RESERVED_GUID},
-> -	{"data",	PARTITION_BASIC_DATA_GUID},
-> -	{"linux",	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
-> -	{"raid",	PARTITION_LINUX_RAID_GUID},
-> -	{"swap",	PARTITION_LINUX_SWAP_GUID},
-> -	{"lvm",		PARTITION_LINUX_LVM_GUID},
-> -	{"u-boot-env",	PARTITION_U_BOOT_ENVIRONMENT},
-> -	{"cros-kern",	PARTITION_CROS_KERNEL},
-> -	{"cros-root",	PARTITION_CROS_ROOT},
-> -	{"cros-fw",	PARTITION_CROS_FIRMWARE},
-> -	{"cros-rsrv",	PARTITION_CROS_RESERVED},
-> -#endif
-> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
-> +	{"mbr",		NULL,	LEGACY_MBR_PARTITION_GUID},
-> +	{"msft",	NULL,	PARTITION_MSFT_RESERVED_GUID},
-> +	{"data",	NULL,	PARTITION_BASIC_DATA_GUID},
-> +	{"linux",	NULL,	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
-> +	{"raid",	NULL,	PARTITION_LINUX_RAID_GUID},
-> +	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
-> +	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
-> +	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
-> +	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
-> +	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
-> +	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
-> +	{"cros-rsrv",	NULL,	PARTITION_CROS_RESERVED},
->  #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
->  	{
-> -		"Device Path",
-> +		"system", "EFI System Partition",
-> +		PARTITION_SYSTEM_GUID,
-> +	},
-> +	{
-> +		NULL, "Device Path",
->  		EFI_DEVICE_PATH_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Device Path To Text",
-> +		NULL, "Device Path To Text",
->  		EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Device Path Utilities",
-> +		NULL, "Device Path Utilities",
->  		EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Unicode Collation 2",
-> +		NULL, "Unicode Collation 2",
->  		EFI_UNICODE_COLLATION_PROTOCOL2_GUID,
->  	},
->  	{
-> -		"Driver Binding",
-> +		NULL, "Driver Binding",
->  		EFI_DRIVER_BINDING_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Simple Text Input",
-> +		NULL, "Simple Text Input",
->  		EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Simple Text Input Ex",
-> +		NULL, "Simple Text Input Ex",
->  		EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Simple Text Output",
-> +		NULL, "Simple Text Output",
->  		EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Block IO",
-> +		NULL, "Block IO",
->  		EFI_BLOCK_IO_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Disk IO",
-> +		NULL, "Disk IO",
->  		EFI_DISK_IO_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Simple File System",
-> +		NULL, "Simple File System",
->  		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Loaded Image",
-> +		NULL, "Loaded Image",
->  		EFI_LOADED_IMAGE_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Loaded Image Device Path",
-> +		NULL, "Loaded Image Device Path",
->  		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Graphics Output",
-> +		NULL, "Graphics Output",
->  		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
->  	},
->  	{
-> -		"HII String",
-> +		NULL, "HII String",
->  		EFI_HII_STRING_PROTOCOL_GUID,
->  	},
->  	{
-> -		"HII Database",
-> +		NULL, "HII Database",
->  		EFI_HII_DATABASE_PROTOCOL_GUID,
->  	},
->  	{
-> -		"HII Config Access",
-> +		NULL, "HII Config Access",
->  		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
->  	},
->  	{
-> -		"HII Config Routing",
-> +		NULL, "HII Config Routing",
->  		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Load File",
-> +		NULL, "Load File",
->  		EFI_LOAD_FILE_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Load File2",
-> +		NULL, "Load File2",
->  		EFI_LOAD_FILE2_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Random Number Generator",
-> +		NULL, "Random Number Generator",
->  		EFI_RNG_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Simple Network",
-> +		NULL, "Simple Network",
->  		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
->  	},
->  	{
-> -		"PXE Base Code",
-> +		NULL, "PXE Base Code",
->  		EFI_PXE_BASE_CODE_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Device-Tree Fixup",
-> +		NULL, "Device-Tree Fixup",
->  		EFI_DT_FIXUP_PROTOCOL_GUID,
->  	},
->  	{
-> -		"TCG2",
-> +		NULL, "TCG2",
->  		EFI_TCG2_PROTOCOL_GUID,
->  	},
->  	{
-> -		"Firmware Management",
-> +		NULL, "Firmware Management",
->  		EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID
->  	},
->  #if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
->  	{
-> -		"HTTP",
-> +		NULL, "HTTP",
->  		EFI_HTTP_PROTOCOL_GUID,
->  	},
->  	{
-> -		"HTTP Service Binding",
-> +		NULL, "HTTP Service Binding",
->  		EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID,
->  	},
->  	{
-> -		"IPv4 Config2",
-> +		NULL, "IPv4 Config2",
->  		EFI_IP4_CONFIG2_PROTOCOL_GUID,
->  	},
->  #endif
->  	/* Configuration table GUIDs */
->  	{
-> -		"ACPI table",
-> +		NULL, "ACPI table",
->  		EFI_ACPI_TABLE_GUID,
->  	},
->  	{
-> -		"EFI System Resource Table",
-> +		NULL, "EFI System Resource Table",
->  		EFI_SYSTEM_RESOURCE_TABLE_GUID,
->  	},
->  	{
-> -		"device tree",
-> +		NULL, "device tree",
->  		EFI_FDT_GUID,
->  	},
->  	{
-> -		"SMBIOS table",
-> +		NULL, "SMBIOS table",
->  		SMBIOS_TABLE_GUID,
->  	},
->  	{
-> -		"SMBIOS3 table",
-> +		NULL, "SMBIOS3 table",
->  		SMBIOS3_TABLE_GUID,
->  	},
->  	{
-> -		"Runtime properties",
-> +		NULL, "Runtime properties",
->  		EFI_RT_PROPERTIES_TABLE_GUID,
->  	},
->  	{
-> -		"TCG2 Final Events Table",
-> +		NULL, "TCG2 Final Events Table",
->  		EFI_TCG2_FINAL_EVENTS_TABLE_GUID,
->  	},
->  	{
-> -		"EFI Conformance Profiles Table",
-> +		NULL, "EFI Conformance Profiles Table",
->  		EFI_CONFORMANCE_PROFILES_TABLE_GUID,
->  	},
->  #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
->  	{
-> -		"RISC-V Boot",
-> +		NULL, "RISC-V Boot",
->  		RISCV_EFI_BOOT_PROTOCOL_GUID,
->  	},
->  #endif
-> @@ -247,35 +248,36 @@ static const struct {
->  #ifdef CONFIG_CMD_NVEDIT_EFI
->  	/* signature database */
->  	{
-> -		"EFI_GLOBAL_VARIABLE_GUID",
-> +		NULL, "EFI_GLOBAL_VARIABLE_GUID",
->  		EFI_GLOBAL_VARIABLE_GUID,
->  	},
->  	{
-> -		"EFI_IMAGE_SECURITY_DATABASE_GUID",
-> +		NULL, "EFI_IMAGE_SECURITY_DATABASE_GUID",
->  		EFI_IMAGE_SECURITY_DATABASE_GUID,
->  	},
->  	/* certificate types */
->  	{
-> -		"EFI_CERT_SHA256_GUID",
-> +		NULL, "EFI_CERT_SHA256_GUID",
->  		EFI_CERT_SHA256_GUID,
->  	},
->  	{
-> -		"EFI_CERT_X509_GUID",
-> +		NULL, "EFI_CERT_X509_GUID",
->  		EFI_CERT_X509_GUID,
->  	},
->  	{
-> -		"EFI_CERT_TYPE_PKCS7_GUID",
-> +		NULL, "EFI_CERT_TYPE_PKCS7_GUID",
->  		EFI_CERT_TYPE_PKCS7_GUID,
->  	},
->  #endif
->  #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
-> -	{ "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
-> -	{ "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
-> -	{ "EFI_HOB_LIST", EFI_HOB_LIST },
-> -	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
-> -	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
-> -	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
-> +	{ NULL, "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
-> +	{ NULL, "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
-> +	{ NULL, "EFI_HOB_LIST", EFI_HOB_LIST },
-> +	{ NULL, "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
-> +	{ NULL, "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
-> +	{ NULL, "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
->  #endif
-> +#endif /* EFI_PARTITION */
->  #endif /* !USE_HOSTCC */
->  };
->  
-> @@ -284,7 +286,8 @@ int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
->  	int i;
->  
->  	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
-> -		if (!strcmp(list_guid[i].string, guid_str)) {
-> +		if (list_guid[i].string &&
-> +		    !strcmp(list_guid[i].string, guid_str)) {
->  			memcpy(guid_bin, &list_guid[i].guid, 16);
->  			return 0;
->  		}
-> @@ -298,6 +301,8 @@ const char *uuid_guid_get_str(const unsigned char *guid_bin)
->  
->  	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
->  		if (!memcmp(list_guid[i].guid.b, guid_bin, 16)) {
-> +			if (list_guid[i].description)
-> +				return list_guid[i].description;
->  			return list_guid[i].string;
->  		}
->  	}
-> @@ -312,10 +317,9 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
->  	uint64_t tmp64;
->  
->  	if (!uuid_str_valid(uuid_str)) {
-> -#ifdef CONFIG_PARTITION_TYPE_GUID
-> -		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
-> +		if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) &&
-> +		    !uuid_guid_get_bin(uuid_str, uuid_bin))
->  			return 0;
-> -#endif
->  		return -EINVAL;
->  	}
->  
+> On Wed, May 21, 2025 at 08:52:41PM +0200, Mattijs Korpershoek wrote:
+>> Hi Tom,
+>> 
+>> On mer., mai 21, 2025 at 09:12, Tom Rini <trini@konsulko.com> wrote:
+>> 
+>> > On Wed, May 21, 2025 at 04:49:35PM +0200, Mattijs Korpershoek wrote:
+>> >> Hi Neil,
+>> >> 
+>> >> On mar., mai 20, 2025 at 13:35, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+>> >> 
+>> >> > Hi,
+>> >> >
+>> >> > On Tue, 06 May 2025 18:10:06 +0200, neil.armstrong@linaro.org wrote:
+>> >> >> This serie permits using any block device as target
+>> >> >> for fastboot by moving the generic block logic into
+>> >> >> a common set of helpers and also use them as generic
+>> >> >> backend.
+>> >> >> 
+>> >> >> The erase logic has been extended to support software
+>> >> >> erase since only 2 block drivers exposes the erase
+>> >> >> operation.
+>> >> >> 
+>> >> >> [...]
+>> >> >
+>> >> > Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+>> >> >
+>> >> > [1/3] fastboot: blk: introduce fastboot block flashing support
+>> >> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88239b5bb04bea2b58f7bf4c3ea72cf832de818c
+>> >> > [2/3] fastboot: blk: switch emmc to use the block helpers
+>> >> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/25ab5c32c28b9f25fb193f726f239d75af3c365a
+>> >> > [3/3] fastboot: integrate block flashing back-end
+>> >> >       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a885bd8c969e25d03bf406207d89b1145c9490fb
+>> >> 
+>> >> It seems this series cause CI to fail:
+>> >> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26238
+>> >> 
+>> >> Without the patches applied, it passes:
+>> >> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26235
+>> >> 
+>> >> Do you have any idea what is going wrong?
+>> >> I could not find anything obvious by skimming through the logs.
+>> >
+>> > It's a Kconfig problem then. Some platform is prompting for a value (not
+>> > a y/n) and there's no default.
+>> 
+>> You are correct. Thank you for the suggestion.
+>> 
+>> I've applied the following diff to 3/3:
+>> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+>> index 68967abb751e..fdf34a6abe1e 100644
+>> --- a/drivers/fastboot/Kconfig
+>> +++ b/drivers/fastboot/Kconfig
+>> @@ -200,6 +200,7 @@ config FASTBOOT_MMC_USER_NAME
+>>  config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+>>         string "Define FASTBOOT block interface name"
+>>         depends on FASTBOOT_FLASH_BLOCK
+>> +       default "none"
+>>         help
+>>           The fastboot "flash" and "erase" commands support operations
+>>           on any Block device, this should specify the block device name
+>
+> Assuming that the code will see "none" and handle the error correctly,
+> OK. But we really should have a configured true value here, yes?
 
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+The code does not handle any special cases.
+If FASTBOOT_FLASH_BLOCK_INTERFACE_NAME is "none", we will call:
 
-Tested on STM32MP157C-DK2 board for which stm32prog command was broken 
-by commit d54e1004b8b1 ("lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID").
+blk_get_dev("none", 0);
 
-Thanks
-Patrice
+Which will then be handled via:
+
+	if (!dev_desc) {
+		fastboot_fail("no such device", response);
+		return -ENODEV;
+	}
+
+>
+>> @@ -212,6 +213,7 @@ config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+>>  config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+>>         int "Define FASTBOOT block device identifier"
+>>         depends on FASTBOOT_FLASH_BLOCK
+>> +       default 0
+>>         help
+>>           The fastboot "flash" and "erase" commands support operations
+>>           on any Block device, this should specify the block device
+>
+> I do not like this at first. If FASTBOOT_FLASH_BLOCK_DEVICE_ID is set,
+> there should be a valid ID set too yes? Potentially worse, is 0 a valid
+> option here? If so, is that likely to be a real and common one? In that
+
+Yes, 0 is a valid option here. Think of this symbol as a similar one to
+FASTBOOT_FLASH_MMC_DEV however it's for generic block device type
+(virtio, scsi, ...)
+
+I'd think that 0 is typically the most common value, since it's the
+first block controller of a specific type.
+
+> case, we should also be updating the help text to make sure it's clear
+> what the normal range is I think.
+
+Ok. That's a bit too much for me to do in a fixup.
+
+Neil, can you send a v4?
+
+>
+> -- 
+> Tom
