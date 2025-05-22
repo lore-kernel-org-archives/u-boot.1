@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49194C54756
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3D9AC54E65
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 07:52:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBC5A82FC8;
-	Thu, 22 May 2025 09:51:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BA3C82FC8;
+	Thu, 22 May 2025 09:52:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pCUoanof";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pqk+uX7b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EFEB82FE1; Thu, 22 May 2025 09:51:16 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 8E85682FC8; Thu, 22 May 2025 09:52:21 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27BA182F67
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:51:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C96082F67
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 09:52:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54M7pC5X1740842;
- Thu, 22 May 2025 02:51:12 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54M7qHID538786;
+ Thu, 22 May 2025 02:52:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747900272;
- bh=JvgojveiPlW6ZnkPPKkyjHgf1eRak8fQ4Sqnn81c+Rk=;
+ s=ti-com-17Q1; t=1747900337;
+ bh=kGl0Bn3sXt35XUiS5ZZObd+Wzcsk6YU7sYp32JEfJLg=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pCUoanofZrVNiWVS612y/s0g1kBtIjKL8Zm/uBdR3zBBbT4BLY8n8hCTu5TzD/jHy
- MUJulgHelcwiNaVXaKVHlijWHBKWMPWQl+hKl5JxQCcG9Af7PNT+U5XUbgU1yYsDCP
- pt6Q3GTJiDMHXMX+uMmI17UgEBRCwSrO47UovOHU=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54M7pCoQ3331077
+ b=Pqk+uX7bfAqZs6OELadI5aSiCi4V4DA5o9F/TMc50LLBXT8GUnCxmTkTve12AyPHH
+ fo/0dPeJAae/WnP1DW8XcGM+/egHu25wQl+Y2MUfOsUyOHAdKi1OD0HLzhvmpeG8Iq
+ DarqD2I58TEd3/12H1itriC6Wif6Uw3v/gl4Hjp0=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54M7qHhD1306147
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 22 May 2025 02:51:12 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 22 May 2025 02:52:17 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- May 2025 02:51:12 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 02:52:17 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 May 2025 02:51:12 -0500
+ Frontend Transport; Thu, 22 May 2025 02:52:17 -0500
 Received: from [10.24.69.37]
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
  (may be forged))
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54M7p9Zt483590;
- Thu, 22 May 2025 02:51:09 -0500
-Message-ID: <9b07130d-301e-425e-969f-a3f11106d5c1@ti.com>
-Date: Thu, 22 May 2025 13:21:08 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54M7qEQY113021;
+ Thu, 22 May 2025 02:52:15 -0500
+Message-ID: <ef6def4c-96db-41f4-9015-0c83f6030b8d@ti.com>
+Date: Thu, 22 May 2025 13:22:14 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] arch: mach-k3: common: Add support to shutdown MCU R5
- Core 1
+Subject: Re: [PATCH 3/6] remoteproc: k3-r5: Acquire processor control before
+ reset ops
 To: Beleswar Padhi <b-padhi@ti.com>, <trini@konsulko.com>
 CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <jm@ti.com>,
  <u-kumar1@ti.com>, <m-shah@ti.com>, <u-boot@lists.denx.de>
 References: <20250522071828.285462-1-b-padhi@ti.com>
- <20250522071828.285462-3-b-padhi@ti.com>
+ <20250522071828.285462-4-b-padhi@ti.com>
 Content-Language: en-US
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250522071828.285462-3-b-padhi@ti.com>
+In-Reply-To: <20250522071828.285462-4-b-padhi@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -85,174 +85,36 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 22/05/25 12:48, Beleswar Padhi wrote:
-> During boot, ROM can bring up the MCU R5F cores in either lockstep or
-> split mode based on X509 certificate flags. If booted in split mode,
-> core 0 will run DM firmware and second core sits in WFI. Add support to
-> shut down core 1 so that other firmwares can later be loaded on them.
-> 
-> The shutdown of MCU R5 Core 1 is invoked at A72 SPL init, as by that
-> time Device Manager (DM) is up and running on R5 Core 0. The shutdown
-> request of Core 1 is handled by Device Manager itself.
+> Acquire processor control before doing core reset operations in probe
+> routine. Release the control afterwards, so that it can be acquired
+> during core loading operations.
 > 
 > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
 > ---
->  arch/arm/mach-k3/common.c             | 55 +++++++++++++++++++++++++++
->  arch/arm/mach-k3/common.h             |  1 +
->  arch/arm/mach-k3/j721e/j721e_init.c   |  9 ++++-
->  arch/arm/mach-k3/j721s2/j721s2_init.c |  7 ++++
->  arch/arm/mach-k3/j784s4/j784s4_init.c |  7 ++++
->  5 files changed, 78 insertions(+), 1 deletion(-)
+>  drivers/remoteproc/ti_k3_r5f_rproc.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 > 
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index fc230f180d0..68f24948134 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -31,6 +31,10 @@
->  #include <dm/uclass-internal.h>
->  #include <dm/device-internal.h>
+> diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
+> index 57268e7f8ff..f4bab6868ee 100644
+> --- a/drivers/remoteproc/ti_k3_r5f_rproc.c
+> +++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+> @@ -834,8 +834,14 @@ static int k3_r5f_probe(struct udevice *dev)
+>  			return 0;
+>  		}
 >  
-> +#define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
-> +#define PROC_ID_MCU_R5FSS0_CORE1		0x02
-> +#define PROC_BOOT_CFG_FLAG_R5_LOCKSTEP		0x00000100
-> +
->  #include <asm/arch/k3-qos.h>
->  
->  struct ti_sci_handle *get_ti_sci_handle(void)
-> @@ -328,3 +332,54 @@ void setup_qos(void)
->  		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
->  }
->  #endif
-> +
-> +int shutdown_mcu_r5_core1(void)
-> +{
-
-Better to build this function only if CONFIG_ARM64 is enabled?
-
-> +	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-> +	struct ti_sci_dev_ops *dev_ops = &ti_sci->ops.dev_ops;
-> +	struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
-> +	u32 dev_id_mcu_r5_core1 = put_core_ids[0];
-> +	u64 boot_vector;
-> +	u32 cfg, ctrl, sts;
-> +	int cluster_mode_lockstep, ret;
-> +
-> +	ret = proc_ops->proc_request(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
-> +	if (ret) {
-> +		printf("Unable to request processor control for core %d\n",
-> +		       PROC_ID_MCU_R5FSS0_CORE1);
-> +		return ret;
-> +	}
-> +
-> +	ret = proc_ops->get_proc_boot_status(ti_sci, PROC_ID_MCU_R5FSS0_CORE1,
-> +					     &boot_vector, &cfg, &ctrl, &sts);
-> +	if (ret) {
-> +		printf("Unable to get Processor boot status for core %d\n",
-> +		       PROC_ID_MCU_R5FSS0_CORE1);
-> +		goto release_proc_ctrl;
-> +	}
-> +
-> +	/* Shutdown MCU R5F Core 1 only if the cluster is booted in SplitMode */
-> +	cluster_mode_lockstep = !!(cfg & PROC_BOOT_CFG_FLAG_R5_LOCKSTEP);
-> +	if (cluster_mode_lockstep) {
-> +		ret = -EINVAL;
-> +		goto release_proc_ctrl;
-> +	}
-> +
-> +	ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_MCU_R5FSS0_CORE1,
-> +					   PROC_BOOT_CTRL_FLAG_R5_CORE_HALT, 0);
-> +	if (ret) {
-> +		printf("Unable to Halt core %d\n", PROC_ID_MCU_R5FSS0_CORE1);
-> +		goto release_proc_ctrl;
-> +	}
-> +
-> +	ret = dev_ops->put_device(ti_sci, dev_id_mcu_r5_core1);
-> +	if (ret) {
-> +		printf("Unable to assert reset on core %d\n",
-> +		       PROC_ID_MCU_R5FSS0_CORE1);
-> +		return ret;
-> +	}
-> +
-> +release_proc_ctrl:
-> +	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
-> +	return ret;
-> +}
-> diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-> index 02c74731fea..6e33f578151 100644
-> --- a/arch/arm/mach-k3/common.h
-> +++ b/arch/arm/mach-k3/common.h
-> @@ -49,6 +49,7 @@ enum k3_device_type get_device_type(void);
->  struct ti_sci_handle *get_ti_sci_handle(void);
->  void do_board_detect(void);
->  void ti_secure_image_check_binary(void **p_image, size_t *p_size);
-> +int shutdown_mcu_r5_core1(void);
->  
->  #if (IS_ENABLED(CONFIG_K3_QOS))
->  void setup_qos(void);
-> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-> index f31c20f7ed6..edca2634fb9 100644
-> --- a/arch/arm/mach-k3/j721e/j721e_init.c
-> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
-> @@ -296,9 +296,9 @@ void do_dt_magic(void)
->  
->  void board_init_f(ulong dummy)
->  {
-> +	int ret;
->  #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
->  	struct udevice *dev;
-> -	int ret;
->  #endif
->  	/*
->  	 * Cannot delay this further as there is a chance that
-> @@ -371,6 +371,13 @@ void board_init_f(ulong dummy)
->  	preloader_console_init();
->  #endif
->  
-> +	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
-> +	if (IS_ENABLED(CONFIG_ARM64)) {
-> +		ret = shutdown_mcu_r5_core1();
+> +		ret = k3_r5f_proc_request(core);
 > +		if (ret)
-> +			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
-> +	}
+> +			return ret;
 > +
->  	/* Output System Firmware version info */
->  	k3_sysfw_print_ver();
->  
-> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-> index 5941fa26a95..6342161f830 100644
-> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-> @@ -230,6 +230,13 @@ void k3_spl_init(void)
->  		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
+>  		/* Make sure Local reset is asserted. Redundant? */
+>  		reset_assert(&core->reset);
+> +
+> +		ti_sci_proc_release(&core->tsp);
 >  	}
 >  
-> +	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
-> +	if (IS_ENABLED(CONFIG_ARM64)) {
-> +		ret = shutdown_mcu_r5_core1();
-> +		if (ret)
-> +			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
-> +	}
-> +
->  	/* Output System Firmware version info */
->  	k3_sysfw_print_ver();
->  }
-> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> index 787cf6261e4..2756accbe12 100644
-> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> @@ -206,6 +206,13 @@ void k3_spl_init(void)
->  
->  	writel(AUDIO_REFCLK1_DEFAULT, (uintptr_t)CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL);
->  
-> +	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
-> +	if (IS_ENABLED(CONFIG_ARM64)) {
-> +		ret = shutdown_mcu_r5_core1();
-> +		if (ret)
-> +			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
-> +	}
-> +
->  	/* Output System Firmware version info */
->  	k3_sysfw_print_ver();
->  }
+>  	ret = k3_r5f_rproc_configure(core);
+
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
 -- 
 Thanking You
