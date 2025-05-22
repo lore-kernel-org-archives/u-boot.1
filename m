@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF3CDC54E90
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 15:05:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B38AC54E90
+	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 15:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1358F830F3;
-	Thu, 22 May 2025 17:05:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A4A3F830F4;
+	Thu, 22 May 2025 17:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lBglHEP4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a5XcI/nt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7CE5830F4; Thu, 22 May 2025 17:05:56 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 9105783100; Thu, 22 May 2025 17:10:20 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F050830E9
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 17:05:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55600830E9
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 17:10:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54MF5pYD1844483;
- Thu, 22 May 2025 10:05:51 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54MFAGeC1849072;
+ Thu, 22 May 2025 10:10:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1747926351;
- bh=8y7awMwciyA90lEb46O1c/gPbDoA0vxunZPut8N8u3k=;
+ s=ti-com-17Q1; t=1747926616;
+ bh=kYuGCLta0Gk/OGYJj+/ARYfLxx0jRvb3WMlOmw7WbT0=;
  h=From:To:CC:Subject:Date;
- b=lBglHEP4fl/UcVXdrcoa7wCo2YQyglho+oP0vgHhzoScSDN2eiUbbmhDn9ywFUuWC
- X8Flsg7rhN6RVe1TV11bpt1yFjNsrobTfDZPgv6UMWE5zdCSuXyrEUIJHs0u4d0mCh
- OnnK0VBltNqCJ0YjHo6lXVJFEQWQoAZHIX+cNQh8=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54MF5oA43585693
+ b=a5XcI/ntsA9Ih1rrwnfVQstkC1iO0UXhXN+k8SkCigp2VwISSOpC5RyO6jGz4Xr20
+ yP42gdNxvlvBAt76tLTRDCHqRx4Ahuw8ScxvZvf2+5+vj1xx3eng3WA9m5kHWphwTo
+ 9xNY7v3dYsiK3OlwimJAmR8zgduvUDdRIAh5Lx04=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54MFAGDG3582918
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 22 May 2025 10:05:51 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 22 May 2025 10:10:16 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- May 2025 10:05:50 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ May 2025 10:10:16 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 May 2025 10:05:50 -0500
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54MF5owU086418;
- Thu, 22 May 2025 10:05:50 -0500
-From: Judith Mendez <jm@ti.com>
-To: Judith Mendez <jm@ti.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2] mmc: am654_sdhci: Clear UHS_MODE_SELECT when <= MMC_HS_52
-Date: Thu, 22 May 2025 10:05:50 -0500
-Message-ID: <20250522150550.574018-1-jm@ti.com>
+ Frontend Transport; Thu, 22 May 2025 10:10:16 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54MFAFWe691522;
+ Thu, 22 May 2025 10:10:15 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1] ti: k3: abstract common fdt api for reserved mem fixups
+Date: Thu, 22 May 2025 20:39:40 +0530
+Message-ID: <20250522150941.563959-1-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -77,45 +76,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This clears UHS_MODE_SELECT for timing modes <= MMC_HS_52.
+The usage of fdt_fixup_reserved is repeated for ATF and OP-TEE for
+multiple platforms, this patch creates a single fdt API for fixing up
+the reserved-memory node with added error handling.
 
-When initializing to HS400 mode, the host controller downgrades to non-uhs
-modes so clear UHS_MODE_SELECT at modes <= MMC_HS_52.
+All k3 platforms already share a common tispl template which ensures
+binaries are loaded as per the respective CONFIG_*_LOAD_ADDR. And the
+provided new_size for the fixup is overridden by the size from fdt node
+anyways. This allows for safe abstraction of the reserved memory fixups
+for all current platforms.
 
-This fixes eMMC writes on j7200 EVM.
+fdt_fixup_reserved now abstracts the ATF and OP-TEE fixups by calling
+the renamed static fdt_fixup_reserved_memory function with the required
+parameters.
 
-Fixes: 6067aa66b3bb ("mmc: am654_sdhci: Add am654_sdhci_set_control_reg")
-Signed-off-by: Judith Mendez <jm@ti.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
-Changes since v1:
-- Add Pengs review tag
-- Fix commit description '<' -> '<='
----
- drivers/mmc/am654_sdhci.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/arm/mach-k3/am62ax/am62a7_fdt.c |  5 +----
+ arch/arm/mach-k3/am62px/am62p5_fdt.c |  5 +----
+ arch/arm/mach-k3/am62x/am625_fdt.c   |  5 +----
+ arch/arm/mach-k3/common_fdt.c        | 22 ++++++++++++++++++++--
+ arch/arm/mach-k3/common_fdt.h        |  3 +--
+ arch/arm/mach-k3/j722s/j722s_fdt.c   |  5 +----
+ 6 files changed, 25 insertions(+), 20 deletions(-)
 
-diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index 0df3568f073..d3c8f94dd0c 100644
---- a/drivers/mmc/am654_sdhci.c
-+++ b/drivers/mmc/am654_sdhci.c
-@@ -527,11 +527,16 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- void am654_sdhci_set_control_reg(struct sdhci_host *host)
+diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+index 7f764ab36b5..9a4599432ff 100644
+--- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+@@ -10,8 +10,5 @@
+ 
+ int ft_system_setup(void *blob, struct bd_info *bd)
  {
- 	struct mmc *mmc = host->mmc;
-+	u32 reg;
- 
-+	reg = sdhci_readw(host, SDHCI_HOST_CONTROL2);
-+	reg &= ~SDHCI_CTRL_UHS_MASK;
- 	sdhci_set_voltage(host);
- 
- 	if (mmc->selected_mode > MMC_HS_52)
- 		sdhci_set_uhs_timing(host);
-+	else
-+		sdhci_writew(host, reg, SDHCI_HOST_CONTROL2);
+-	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+-	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+-
+-	return 0;
++	return fdt_fixup_reserved(blob);
+ }
+diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+index 2c40fa5a594..9f4b1663864 100644
+--- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
++++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+@@ -92,8 +92,5 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+ 	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
+ 	fdt_fixup_thermal_zone_nodes_am62p(blob, k3_get_max_temp());
+ 	fdt_fixup_cpu_freq_nodes_am62p(blob, k3_get_a53_max_frequency());
+-	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+-	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+-
+-	return 0;
++	return fdt_fixup_reserved(blob);
+ }
+diff --git a/arch/arm/mach-k3/am62x/am625_fdt.c b/arch/arm/mach-k3/am62x/am625_fdt.c
+index 11152194ed0..e4382508dc3 100644
+--- a/arch/arm/mach-k3/am62x/am625_fdt.c
++++ b/arch/arm/mach-k3/am62x/am625_fdt.c
+@@ -118,8 +118,5 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+ 	fdt_fixup_pru_node_am625(blob, k3_has_pru());
+ 	fdt_fixup_thermal_zone_nodes_am625(blob, k3_get_max_temp());
+ 	fdt_fixup_thermal_cooling_device_cpus_am625(blob, k3_get_core_nr());
+-	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+-	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+-
+-	return 0;
++	return fdt_fixup_reserved(blob);
+ }
+diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+index 75f0469f456..5b89b85a852 100644
+--- a/arch/arm/mach-k3/common_fdt.c
++++ b/arch/arm/mach-k3/common_fdt.c
+@@ -115,8 +115,9 @@ int fdt_del_node_path(void *blob, const char *path)
+ 	return ret;
  }
  
- const struct sdhci_ops am654_sdhci_ops = {
+-int fdt_fixup_reserved(void *blob, const char *name,
+-		       unsigned int new_address, unsigned int new_size)
++static int fdt_fixup_reserved_memory(void *blob, const char *name,
++				     unsigned int new_address,
++				     unsigned int new_size)
+ {
+ 	int nodeoffset, subnode;
+ 	int ret;
+@@ -167,3 +168,20 @@ add_carveout:
+ 
+ 	return 0;
+ }
++
++int fdt_fixup_reserved(void *blob)
++{
++	int ret;
++
++	ret = fdt_fixup_reserved_memory(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
++					0x80000);
++	if (ret)
++		return ret;
++
++	ret = fdt_fixup_reserved_memory(blob, "optee",
++					CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
++	if (ret)
++		return ret;
++
++	return 0;
++}
+diff --git a/arch/arm/mach-k3/common_fdt.h b/arch/arm/mach-k3/common_fdt.h
+index 52c07957483..e2f26983a73 100644
+--- a/arch/arm/mach-k3/common_fdt.h
++++ b/arch/arm/mach-k3/common_fdt.h
+@@ -8,7 +8,6 @@
+ 
+ int fdt_fixup_msmc_ram_k3(void *blob);
+ int fdt_del_node_path(void *blob, const char *path);
+-int fdt_fixup_reserved(void *blob, const char *name,
+-		       unsigned int new_address, unsigned int new_size);
++int fdt_fixup_reserved(void *blob);
+ 
+ #endif /* _COMMON_FDT_H */
+diff --git a/arch/arm/mach-k3/j722s/j722s_fdt.c b/arch/arm/mach-k3/j722s/j722s_fdt.c
+index 29c832d28ac..97d34f50539 100644
+--- a/arch/arm/mach-k3/j722s/j722s_fdt.c
++++ b/arch/arm/mach-k3/j722s/j722s_fdt.c
+@@ -9,8 +9,5 @@
+ 
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
+-	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+-	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+-
+-	return 0;
++	return fdt_fixup_reserved(blob);
+ }
 -- 
 2.49.0
 
