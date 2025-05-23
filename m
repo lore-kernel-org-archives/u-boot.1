@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E14C54ED1
-	for <u-boot@archiver.kernel.org>; Thu, 22 May 2025 23:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D4DC3DA6D
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 05:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A8283164;
-	Fri, 23 May 2025 01:40:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E74B8310F;
+	Fri, 23 May 2025 07:02:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q7ivimtq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mJ0hbBWU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA8838319A; Fri, 23 May 2025 01:39:59 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 7F9C583164; Fri, 23 May 2025 07:02:20 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FCC78310F
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 01:39:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5745C83108
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 07:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-403407e998eso6156697b6e.0
- for <u-boot@lists.denx.de>; Thu, 22 May 2025 16:39:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-605f7d3215cso4526365eaf.0
+ for <u-boot@lists.denx.de>; Thu, 22 May 2025 22:02:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1747957196; x=1748561996; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BEio1iGFWtZzJdbCnWxFENIhJA26cSCt/x5ius4jEqY=;
- b=Q7ivimtqtB5nNs0+T9HDW7uM3eTjtMAHRUTFKWQV0ew0niPAqW/CwZp42fyXuBkqpc
- ZWdcIR/6eQZGfNnfwF5/48Y7X7uOXFjHC0BLqtBqWm8/6FIkgOJVzeWJJ3IYWDA+JEle
- hhEqd1DvZw2v7f9aNBu8NF9/iS78IHtDI4Ub4=
+ d=gmail.com; s=20230601; t=1747976537; x=1748581337; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MeDFlRmZGx/RhQkJ3zZCIcEjjD6NCW+r9w/1Xbh57Pw=;
+ b=mJ0hbBWUnSpez04v4n7VWRwelIOZq6ilP2qpxkIV+E3awOg5KeD9GXH5XEaameptg/
+ 0ypvsaxqPBeVS32p8uoKSGTrFp+4l7afnc5a0ZbwzQLHPl3zTyxyLFhfJ3ZlkiZ3NRrX
+ HCrXUgbW2uPVNS/ts4HcUUOv61gnqZZD2sBU7G0lSA9E0X+s8Pcl/49KCTeLkfyanv/X
+ lyLHj3D4uF0Pvv78uomemc0nb8zVHLWOSHFt4c0NpsDdj7qGrUDB9kqWzJiQNDnGOaSY
+ T34aZQjgt1w4SjsLFMovolrPvEAC4IPseseY3ffvISW4OApBjP1cBhb7gTH2vp5k1LR2
+ GZvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747957196; x=1748561996;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BEio1iGFWtZzJdbCnWxFENIhJA26cSCt/x5ius4jEqY=;
- b=XrfcBa2eW54xrOeuq7WT+Bb/oJ3CoSw7nn5O8iOY+CGTXCTztbf69Rbe8B32N3GbOu
- v+d7cGADwg93pvq93whxjAZfWPfPokzwFpE5SUkijqMLcKIxQ6qZROQctPqo3Q81N1We
- HxyQpegf83g33MzK0LX25Kbkwxdd6LFNTCDh2iiqbT+5ZdY5m1pw0ihvCYzcqeqPsInW
- 9/xB6x75NgDvXYPmqMy+lao5yzvtxiGOKApjOOvp2j/QgMZSvGQ94wNeMQS/9/7Ra+Ys
- 2vqdfQ540JZssl6wFHO6l9lalXaDNDTBk3Tacj+BuPk4DE4wASiivqXh4pDmT4hSZ7mP
- UOQQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrjoiUk1llOqquvr79Op/xoPI9+6JCRxKS+NC12J5tywR08qGRuouqVvhvYzqdO5B1eSdao0E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7b/4LDZRTRuSrZkJnStPNQh4bYVeATfVjNHzv2VbbZ1SbKWSt
- MMA9B8B7RLmDsuZZJRxn5xiIpRLFn6a+zKXDp33WBk099fmGIemFGJlbReKfBOPDb9c=
-X-Gm-Gg: ASbGncuINJLPtdnKx3bN4hOmOMcH10EctU807bzVoSdJJeZlGumzFg4XFr6DJFN6242
- BMJAaHPi8KgeyMWiQoXWwNr8aVGOTCSPnlnB+V4rqmRLJBMSLo1/r8Jx98FUPnyvJ0S613QAL6K
- TnKy6wOR5hx7+SUcuoc2nIjy7md9UlmI3MD2aOFpXrTfUOi3+E7bUjG6NgM7Y408UaozTjSdIN9
- P9Ic9PNfBRKWAvJ7hzxX/53X22dorhUUzE8bcahckodfry3V8Iu5qx26H7thrJaOegBkpo+wbvL
- GgfSDrh8aSIv81SBlBSBf9h6RQajiXyK2wgWyqzuCOTxqCoZDIR1hBhmmNB9aia19HUCAUlJ5VC
- BKOtn6BqGXFQL
-X-Google-Smtp-Source: AGHT+IHKZO7NpXXqhZ0eT7BZvzkdcw080vjjJ4wodKIyhKPzQKxAUwN3t69FcbGRNoF0MPLAthprJA==
-X-Received: by 2002:a05:6808:2f1b:b0:404:dd05:1bd9 with SMTP id
- 5614622812f47-4063d7a6dd3mr882934b6e.0.1747957195855; 
- Thu, 22 May 2025 16:39:55 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4062a39c88dsm961900b6e.25.2025.05.22.16.39.54
+ d=1e100.net; s=20230601; t=1747976537; x=1748581337;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MeDFlRmZGx/RhQkJ3zZCIcEjjD6NCW+r9w/1Xbh57Pw=;
+ b=jjIQnTKELOOAoSar4eZIlsF7re9r6zSQHCE4743dLI4Z1P8IbKBw8AThTYLy2HXoMG
+ Bmo/ayuOYjqhmABPAkSUOtuUxF5y9ZMCRZPiTQNQVi6SfTKGVllq+6jNv+H+JoBqskEq
+ z6/Ln/DnoJKn/YBrpYnD9dLhf7Vwa+VVuknCAvvp0h/VCqAweg5rO3N9GfURgwqcAmFJ
+ W6RRknaIXiIeKW9cjjaNkaiN/mgz0kyzLIAG67QF7H7ozYMnHGRGkFAR6VkO9IAX/lwR
+ HwIL5VtR1xDnIEifUfX5Ldx4AiI4OAbmsmS0EixFxnFEbA/g356hj9imY76BspA+6Guy
+ P+Cg==
+X-Gm-Message-State: AOJu0YwizBUn9ToR8UXYf40ppMeeO+Lh6Kz+2aCjF9gyHEM8sT9QM1sf
+ 0yhMaKIid6meMUCicH3d3QjMo352VR6oCJd3IMHA/bGltjK705g8gE7h
+X-Gm-Gg: ASbGnctjt6yNvmfGJFDeFATC7k+HmvBRteXPgBdkxWdoYtjCdEuPj7HtVGruHKN203a
+ yLGDaBz0e4lAYytzsMRZb914Yk+phrZZIKSpKpdp7AGJlOdkCBZgtSpie/6rMpyMClXeN+1xeDN
+ XiupYHQk6/8QiVtai2bOhd3U1Ix6QtpzL0UWo6gyP12M6ziqml4nA6lCORZbV7Q8dCKGnVlPwcm
+ FNmTZ3CdwNHIEMIpByyqHTINBV69LFXOlqerVL1e9QIOW0c6Hcg9/Q+XAR6+C6KTY8BIYjdl1Ci
+ VUvlu9CSuF5RS/qmPXlfhGvbh6LmvdjAeK0AFKQsVSCV/Cc5x5oNfbdJbza5Ru+qrpt21Ja5tDV
+ nGsbnQYnj6/GmREioQ2L9S7KOECMPwKdaijS7MMI=
+X-Google-Smtp-Source: AGHT+IEDBRocoxHfeGD3P3nITNpMflbNxd4FiClXTmAmnO2YD04UuRQFyhTI7Dx30FxKtUQwpLi0EA==
+X-Received: by 2002:a05:6870:ae8a:b0:2c1:9897:dd24 with SMTP id
+ 586e51a60fabf-2e3c1f92f9cmr18986040fac.35.1747976536912; 
+ Thu, 22 May 2025 22:02:16 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2e3c0aa0f61sm3421419fac.31.2025.05.22.22.02.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 16:39:54 -0700 (PDT)
-Date: Thu, 22 May 2025 17:39:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH 0/5] Qualcomm: teach the build system to emit signed ELF
- images
-Message-ID: <20250522233952.GO100073@bill-the-cat>
-References: <20250522-b4-qcom-tooling-improvements-v1-0-8141b8955cfb@linaro.org>
- <20250522205100.GN100073@bill-the-cat>
- <00bc73ad-e17b-429b-9531-115f90508425@linaro.org>
+ Thu, 22 May 2025 22:02:15 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tony Dinh <mibodhi@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] ext4fs: Fix: Read outside partition error
+Date: Thu, 22 May 2025 22:02:01 -0700
+Message-Id: <20250523050201.22442-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="umG1Y65R+AyV0RZu"
-Content-Disposition: inline
-In-Reply-To: <00bc73ad-e17b-429b-9531-115f90508425@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,96 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Use lbaint_t for blknr to avoid overflow in ext4fs_read_file().
 
---umG1Y65R+AyV0RZu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Background:
 
-On Fri, May 23, 2025 at 12:07:06AM +0200, Casey Connolly wrote:
->=20
->=20
-> On 5/22/25 21:51, Tom Rini wrote:
-> > On Thu, May 22, 2025 at 10:39:38PM +0200, Casey Connolly wrote:
-> >=20
-> > > With several new Qualcomm platforms appearing on the mailing list, all
-> > > of which build U-Boot as an ELF, sign it, and then flash it to some
-> > > partition on the board, we're getting a lot of defconfigs which just
-> > > contain a debug UART and a TEXT_BASE address. This leads to needless
-> > > rebuilds in CI of effectively the same image, and needless duplication
-> > > of build instructions.
-> > >=20
-> > > To address this, let's introduce a new tool "mkmbn.py", this is based
-> > > on the existing qtestsign[1] tool but is (currently) hardcoded to
-> > > only handle the Dragonwing and IPQ boards which use MBN header v6.
-> > > Additionally, the tool contains a lookup table that maps from a boards
-> > > DT compatible property to the load address it needs. Since it's highly
-> > > unusual for different boards using the same SoC to have different load
-> > > addresses, generic platform matching is also done (e.g. "qcom,qcm6490=
-").
-> > >=20
-> > > With this tool in place, we introduce a "u-boot.mbn" target in the
-> > > Makefile, this can be invoked to build a Qualcomm signed ELF image for
-> > > supported targets.
-> > >=20
-> > > Finally, the defconfigs are cleaned up by moving the debug UART
-> > > definitions to config fragments (since it doesn't make sense to have
-> > > them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
-> > > the qcs9100_defconfig is removed entirely since the same binary can
-> > > be created with just make arguments. This platform entirely lacked
-> > > documentation to begin with, which should be addressed by future
-> > > patches.
-> > >=20
-> > > The Qualcomm documentation is also cleaned up, a new "signing" page
-> > > is added to briefly cover the what and why of MBN signing, and board
-> > > specific pages are updated to explain the new build process.
-> > >=20
-> > > These patches have been tested on the RB3 Gen 2, but additionally
-> > > testing for other platforms would be super useful.
-> > >=20
-> > > [1]: https://github.com/msm8916-mainline/qtestsign
-> >=20
-> > How much did you look in to having binman be what invokes a tool to
-> > do the signing? Thanks.
->=20
-> To be honest, I know very little about binman. I've done some reading now
-> and on the surface it seems like it wants to solve the problem we have he=
-re,
-> but I'm not sure it would make things here much cleaner.
->=20
-> As I understand it, I would remove the additions to mach-snapdragon/Makef=
-ile
-> and instead have binman wrap mkmbn?
->=20
-> I can do this if it's preferred, but the abstraction feels a bit redundant
-> in this case imo. Especially if it requires adding some "binman DTB" to t=
-ell
-> binman which tool to use, we already know which tool to use because it's
-> encoded in the make target ("u-boot.mbn").
+blknr (block number) used in ext4fs_read_file() could be increased to a
+very large value and causes a wrap around at 32 bit signed integer max,
+thus becomes negative. This results in an out-of-normal range for sector
+number (during the assignment delayed_start = blknr) where delayed_start
+sector is typed uint64 lbaint_t. This causes the "Read outside partition"
+error.
 
-So, binman is the canonical tooling these days for doing this stuff,
-yes. Can you see what it would look like to integrate this that way
-instead for a comparison point? Thanks.
+This patch was tested on the Synology DS116 (Armada 385) board, and a
+4TB Seagate HDD.
 
---=20
-Tom
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
---umG1Y65R+AyV0RZu
-Content-Type: application/pgp-signature; name="signature.asc"
+ fs/ext4/ext4fs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+index 1727da2dc6d..f10c622e62c 100644
+--- a/fs/ext4/ext4fs.c
++++ b/fs/ext4/ext4fs.c
+@@ -101,7 +101,7 @@ int ext4fs_read_file(struct ext2fs_node *node, loff_t pos,
+ 	blockcnt = lldiv(((len + pos) + blocksize - 1), blocksize);
+ 
+ 	for (i = lldiv(pos, blocksize); i < blockcnt; i++) {
+-		long int blknr;
++		lbaint_t blknr;
+ 		int blockoff = pos - (blocksize * i);
+ 		int blockend = blocksize;
+ 		int skipfirst = 0;
+-- 
+2.39.5
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgvtcQACgkQFHw5/5Y0
-tywL6Qv8DJwTWSrfOebAgqz/SzIXzzJb4qe/rvcln0M3dDD2GBTcfpjn6mQV2NeC
-jZxAkEM0K9Xd0KAtZbuMU/jxWkvWFMsQAIcYg589peLMVCCf4XaXcf4nkSrJ+qSB
-IVVPKlHfnwfYoQNMXy36wrze3puIFVLXhb38ZgZbk/tBM/kUbsDojkA6B5bsIfyd
-9E6SL3AG9Ryxg+A4mxJmTTw1yIwrYVW7CDFlyQKF3qWPW1y4jas5+mCuc0GMwr//
-AH2qJt5g4zitOtS1Ub9MOs9dTwP3glbaljBYMl8gQiKn9od0Jfu8lYB+PExjcyhd
-+8G/JqGA3ylVBn9U4B1n3/Kk3XzQuPS0xTB0dyjK9i6yYnC5HnM90gnywH6QKCu2
-BlazOp+Nd0VKS3bFgGtNEzrnMoxhfV7eY7sbCm/HbgSPBdoFLJtyCI/XLLsR/nZh
-/NbXfUJXrjd/BbXZo/SLbiK9mRBHrSIe+KuF1nwNDx2SyCS2LSiQdLv9p887USoR
-64b4HXk5
-=iLtV
------END PGP SIGNATURE-----
-
---umG1Y65R+AyV0RZu--
+base-commit: 421d4844591e967435fe0fcfa048ad45c3a48377
+branch: master
