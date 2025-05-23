@@ -4,89 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C419C54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE1CC54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:04:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A539D836A8;
-	Sat, 24 May 2025 01:00:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CAFCF83443;
+	Sat, 24 May 2025 01:00:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lqi1j18T";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sxca+0Jj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D6C83340; Sat, 24 May 2025 00:59:33 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id 885C1833D3; Sat, 24 May 2025 00:17:37 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56F778334D
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3147683242
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:17:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-7426c44e014so430444b3a.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3fb3f4bf97aso136744b6e.2
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:17:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748041170; x=1748645970; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6xjzUa0EXVUH1/gKs3XM8Ygb0+CPj0k9d5MTPSfHfko=;
- b=lqi1j18TjUpjLGWsi1Z0990uDLMCSpJyvuRFCz3ufnDhhMSTNmDeAa8FwmA7FgLOy3
- tvMXLhh7Z+IshsZD1K7BvF8qAITZvp05wM+e4Bi6xZ+fsWYXryTTLSVl1F6QZvC1OADX
- HnaVW92uKSf3BV1tYOZfNj9U7d3Pvz7eSuVVw=
+ d=konsulko.com; s=google; t=1748038654; x=1748643454; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ajX5oggL+jdcXPVknnnWToxUKhYRAMmrjHY2Vo1a4wM=;
+ b=Sxca+0JjOIJxZl05QbBfM1j6NH1dNfZbB0ZltlSV6344Ixb7XwIuZbbmx/DR9i7l2R
+ cbZ6giyghp99AEfrF53XOZ8kP0IioTtI8F7ZB0JRvfHdP9flp5k2OAchugcbX2Mfi+JC
+ GQfIbnGVB7WdZuuEJsppVo+tngSgOmVHZmHi0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748041170; x=1748645970;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6xjzUa0EXVUH1/gKs3XM8Ygb0+CPj0k9d5MTPSfHfko=;
- b=IsuDWIcQWiD5JuqcQogyYb7CLRws9W+OioZW5zn0BCO0Qsp3BSbcW3ZpvTsxjWglBb
- n1d5TNbsMXN6V77Cv4Eqd8eGRYpI6lsmFL/T5oqkJ4mYeyMcsGi4CTBGW7XsvM4LSmF9
- S+usSRHiPnH4raQwHN2bAXDlYGWU2ZNG0yXtvB+UNNA+gIjmJX6XoWpO+MRnHEVb+KP8
- uL2eAVhIflV5GvaEm9BIgBA/PSZdaVY8lx1DwO34MSUJuQZywjyDLve0StkcwUKDPhdJ
- P0LltazwhKd+gAGJSLKrkBbA7jq+l/YNRcp1dp2sTUsicD9iYfw24Pf7SbNruU3zSw2i
- 62oA==
-X-Gm-Message-State: AOJu0Yyo4sGNWxuIWWE4fwtXRMTx455WTHAJq9bk0ugkRkaPkM3XZO5l
- b+b/8Li1JCgMgEXVfGryB0rCUB9xEvoFQKmVZ9mYkGgQLFKSxejUGye5l9zt5AdKiup4S2HSI6A
- J6aE=
-X-Gm-Gg: ASbGnctILKjJ11rGXdyBjtMdpBW1gOqFHVZgnlxNnzzSYTzCPeNXV8GQrpDPWqTD48G
- vXE/PllP7xiUbRVT95Z4Q+b/Ek1CNVuXkGty+aeZe3/gxonAHIRa2kXZsZEg5TAa4YXBgIoYZD+
- sad2GN1xbMlVTX2cwtj+yWqbOfFCVgDR/ZTA8YgStm9NTDeMogWLbBezFyOBpZKt64MxhGT3j0m
- rfoJ2JyCklOAm3b+fCxV6ML4ygNfbdIFx/3sYXxa9EfmntkIKJN4w5pRo3yDffUrjztFlSW0YIs
- zWdadOgT9+XiA7bwFMbJZP9H0/yPjz9Y0UUZ1gvtUbE2rBweouck1IAIgMtOHB1J5+MKaBHacse
- ATW+3G3P1QHVijmA=
-X-Google-Smtp-Source: AGHT+IE1mnA+6axpXbLpC/aJHgxqFAxxDViWPWDjTyq4fuVtHypJOPKSwDEC00NKfEbWGyP0+60msA==
-X-Received: by 2002:a05:6a00:84c:b0:742:39fa:13df with SMTP id
- d2e1a72fcca58-745fe067af5mr1881752b3a.19.1748041169713; 
- Fri, 23 May 2025 15:59:29 -0700 (PDT)
-Received: from localhost (188.139.125.34.bc.googleusercontent.com.
- [34.125.139.188]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-742a987677dsm13740937b3a.132.2025.05.23.15.59.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 23 May 2025 15:59:29 -0700 (PDT)
-From: Stephen Boyd <swboyd@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v4 28/28] doc: chromebook_trogdor: Add document detailing
- installation steps
-Date: Fri, 23 May 2025 15:58:43 -0700
-Message-ID: <20250523225845.2311989-29-swboyd@chromium.org>
-X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
-In-Reply-To: <20250523225845.2311989-1-swboyd@chromium.org>
-References: <20250523225845.2311989-1-swboyd@chromium.org>
+ d=1e100.net; s=20230601; t=1748038654; x=1748643454;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ajX5oggL+jdcXPVknnnWToxUKhYRAMmrjHY2Vo1a4wM=;
+ b=AZ4MpQLjW72TziVdXLh5BYe+3S9BOD0nbpWY5wdVZiCmdQkULt7y8Vu1IOWJMnKtjm
+ /oqbXBiPPXP7x9FimV32RAeDDNDOrxwBNVKZvco5pPpORfG8a8dfKDaXicI8Xgdhw+uF
+ pxglR9miltuLW9lNrAhCkSzFLM/+dw3vRqYK1y/JjxUgFWflko3wLJHkhNHuET0YBkVG
+ Wwvi545cBr+nldxA64tLKOI5g8LvcE7FqNE8Wa4CI/OUzF3kIGwXLBm3Ll+88LnUciKJ
+ wPpSFJ01yxIP/9M+GoyI0tJ+BBUW8EokumVBcO47pY3tiEsN563F8VHVWhGaKlcXInU4
+ 3H9A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXcOpFx/GTRKQ+4hmyHvHDdozuFnfX0Ex5RWV6ujznMz4vwDd1N+0jA5xzoG40msXKQm5IE8YQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCO4TLKzgPanfwqJAkmaCYgMrxwp+zeiqZIhT4GfkgLWK5O5My
+ pH1aTrh+4Q0lAohg2SRhCErgJRshnZSPF8ZhEaJ/Ty1t8B2h6siLuqCDNT6nPEGsqvA=
+X-Gm-Gg: ASbGncu1AlM4a+hF1A1WKnAhPG6RkXj8OcE4Hj8cMTTo29icjrjYxz/VeVN51Y4p2QL
+ Rv05/+dxrLBuvPrT9/SUCn7oTLC1qkIRakWFqDNABYcIxsWPwtMXa7twYRFouN4mWXhtjuDMqIF
+ 0wJTfbmA1xvOZCnZklActuh2IaQ+AczWigbLxbXGM67anl3p9IBOTz2yJ8ETuYu4WAScuRXCScN
+ 6q0EDnFBO12kZDCnKEzJpCPWqZbDHu+1x9GkQT9MSx6d9hTughPdnHZaMv2LFM6AbMeRZJFrMfs
+ sb/0QJ7K2VIYqR4psXpNEXnP6+stKt3yTpSB1mnuCdE7HzCmxZoE+4/zo6f9w29PgApF/UIafvB
+ ZENuWYK/kkGO2
+X-Google-Smtp-Source: AGHT+IGI7Zpy8fuTZTGktO2/CrQH7EfxRFmi886JyZzm0XbNbtcqp5WO8wawgsnlLfYtS2h+nW9Aug==
+X-Received: by 2002:a05:6808:6f97:b0:404:ee1a:2057 with SMTP id
+ 5614622812f47-40646845fc8mr425725b6e.29.1748038653754; 
+ Fri, 23 May 2025 15:17:33 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-404d9805df8sm3104999b6e.23.2025.05.23.15.17.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 May 2025 15:17:32 -0700 (PDT)
+Date: Fri, 23 May 2025 16:17:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, xypron.glpk@gmx.de,
+ adrianox@gmail.com, bmeng.cn@gmail.com, caleb.connolly@linaro.org,
+ christian@kohlschutter.com, daniel@makrotopia.org,
+ ddrokosov@salutedevices.com, eajames@linux.ibm.com,
+ francesco.dolcini@toradex.com, hiago.franco@toradex.com,
+ ilias.apalodimas@linaro.org, jdanisevskis@aurora.tech, j@jannau.net,
+ jeremy.compostella@intel.com, jerome.forissier@linaro.org,
+ maks.mishinfz@gmail.com, marek.vasut+renesas@mailbox.org,
+ marex@denx.de, mgarrett@aurora.tech, mkorpershoek@baylibre.com,
+ michal.simek@amd.com, moritzf@google.com, Oliver.Gaskell@analog.com,
+ patrick.delaunay@foss.st.com, patrick.rudolph@9elements.com,
+ pkochanowski@sii.pl, pbrobinson@gmail.com,
+ philippe.reynes@softathome.com, quentin.schulz@cherry.de,
+ raymond.mao@linaro.org, semen.protsenko@linaro.org,
+ sebastian.reichel@collabora.com, sughosh.ganu@linaro.org,
+ tharvey@gateworks.com, vincent.stehle@arm.com,
+ weijie.gao@mediatek.com, ziyao@disroot.org, u-boot@lists.denx.de
+Subject: Re: [PATCH 00/10] efi: Move some efi-loader code into a new shared dir
+Message-ID: <20250523221729.GY100073@bill-the-cat>
+References: <20250523130651.1329593-1-sjg@chromium.org>
+ <3b23fc9d-345f-4945-b89d-153a18f5828d@gmx.de>
+ <CAFLszTjofbRtjXxfR6MmnHP0hYcpg+pgLKLYDXN2KxLZ2rNPHQ@mail.gmail.com>
+ <20250523164909.GV100073@bill-the-cat>
+ <8734cv45fr.fsf@bloch.sibelius.xs4all.nl>
+ <CAFLszTgiPDQxESZ763G6AmZNSriB1W-OSGEEAtcn769oHep-EQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 24 May 2025 01:00:29 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="kaDenGth+BYugcx0"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgiPDQxESZ763G6AmZNSriB1W-OSGEEAtcn769oHep-EQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Sat, 24 May 2025 01:00:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,103 +119,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make it a little more ergonomic than navigating to the chromium.org docs
-by just documenting the steps needed to install U-Boot on a Trogdor
-chromebook. I've been using the Depthcharge 'altfw' flow to do this
-which is nice because you get to keep ChromeOS installed for any future
-firmware updates.
 
-Signed-off-by: Stephen Boyd <swboyd@chromium.org>
----
- doc/board/google/chromebook_trogdor.rst | 69 +++++++++++++++++++++++++
- doc/board/google/index.rst              |  1 +
- 2 files changed, 70 insertions(+)
- create mode 100644 doc/board/google/chromebook_trogdor.rst
+--kaDenGth+BYugcx0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/board/google/chromebook_trogdor.rst b/doc/board/google/chromebook_trogdor.rst
-new file mode 100644
-index 000000000000..dc40b9072bd5
---- /dev/null
-+++ b/doc/board/google/chromebook_trogdor.rst
-@@ -0,0 +1,69 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Stephen Boyd <swboyd@chromium.org>
-+
-+Chromebook Trogdor/Strongbad
-+============================
-+
-+Trogdor and Strongbad are Chromebooks that are either clamshells or
-+detachables. U-Boot can be installed into the alternate firmware (altfw) slot
-+in the SPI-NOR flash chip and selected in the developer mode boot screen. This
-+chain loads U-Boot from Depthcharge and avoids disabling the write protect
-+screw.
-+
-+Enable Alternate Firmware
-+=========================
-+
-+First, you need to enable developer mode on the Chromebook. On a clamshell
-+that's done by pressing power + ESC + refresh. On a detachable you press the
-+power button + volume up + volume down. Once you get to the recovery screen,
-+press Ctrl+d to enter developer mode.
-+
-+In developer mode, switch to VT2 (use Ctrl+Alt+refresh) and log in as 'root'
-+(the default has no password). Configure Depthcharge to load U-Boot::
-+
-+  cd /tmp
-+  flashrom -r bios.bin
-+  cat > ubootfw.txt <<EOF
-+  0;uboot;uboot;u-boot for coreboot on ARM
-+  1;uboot;uboot;u-boot for coreboot on ARM
-+  EOF
-+  cbfstool /tmp/bios.bin remove -r RW_LEGACY -n altfw/list
-+  cbfstool bios.bin add -r RW_LEGACY -n altfw/list -f ubootfw.txt -t raw
-+
-+You can also prevent future ChromeOS firmware updates from replacing the
-+alternate firmware::
-+
-+  cbfstool bios.bin remove -r RW_LEGACY -n cros_allow_auto_update
-+
-+And finally enable the alternate firmware feature::
-+
-+  crossystem dev_boot_altfw=1
-+
-+It's a good idea to flash the RW_LEGACY section now with this alternate
-+firwmare list even though we haven't installed U-Boot yet::
-+
-+  flashrom -w bios.bin -i RW_LEGACY
-+
-+Installation
-+------------
-+
-+Build U-Boot and obtain u-boot.elf::
-+
-+   $ make chromebook_trogdor_defconfig
-+   $ make
-+
-+Copy the 'u-boot.elf' file to the Chromebook. On the Chromebook, add the u-boot
-+payload::
-+
-+  cd /tmp
-+  flashrom -r bios.bin
-+  cbfstool bios.bin add-payload -r RW_LEGACY -c lzma -n uboot -f u-boot.elf
-+  flashrom -w bios.bin -i RW_LEGACY
-+
-+Now you can reboot and select the "Select alternate bootloader" option. Select
-+'uboot' to boot U-Boot. If you would like this to be the default boot option,
-+you can boot into ChromeOS and switch to VT2 (use Ctrl+Alt+refresh) to use
-+crossystem::
-+
-+  crossystem dev_default_boot=altfw
-+
-diff --git a/doc/board/google/index.rst b/doc/board/google/index.rst
-index 061c79771875..1144b164162c 100644
---- a/doc/board/google/index.rst
-+++ b/doc/board/google/index.rst
-@@ -9,3 +9,4 @@ Google
-    chromebook_coral
-    chromebook_link
-    chromebook_samus
-+   chromebook_trogdor
--- 
-Sent by a computer, using git, on the internet
+On Fri, May 23, 2025 at 09:23:15PM +0100, Simon Glass wrote:
+> Hi Mark, Tom,
+>=20
+> On Fri, 23 May 2025 at 18:12, Mark Kettenis <mark.kettenis@xs4all.nl> wro=
+te:
+> >
+> > > Date: Fri, 23 May 2025 10:49:09 -0600
+> > > From: Tom Rini <trini@konsulko.com>
+> > >
+> > > On Fri, May 23, 2025 at 05:36:52PM +0100, Simon Glass wrote:
+> > > > Hi Heinrich,
+> > > >
+> > > > On Fri, May 23, 2025, 15:19 Heinrich Schuchardt <xypron.glpk@gmx.de=
+> wrote:
+> > > > >
+> > > > > On 23.05.25 15:06, Simon Glass wrote:
+> > > > > > Some functions provided in lib/efi_loader are actually useful f=
+or the
+> > > > > > app as well. This series refactors the Kconfig and directories =
+a little
+> > > > > > so that code is easier to share.
+> > > > > >
+> > > > > > As a starting point, it moves some filename and device-path fun=
+ctions to
+> > > > > > the new directory.
+> > > > > >
+> > > > > > The next step would be to move device-path code over, but this =
+will need
+> > > > > > some discussion.
+> > > > >
+> > > > > Hello Simon,
+> > > > >
+> > > > > Overall the ideas in this series look fine to me. But this series=
+ does
+> > > > > not apply to origin/next.
+> > > > >
+> > > > > Applying: efi_loader: Separate device path into its own header
+> > > > > Patch failed at 0001 efi_loader: Separate device path into its ow=
+n header
+> > > > > error: patch failed: cmd/efidebug.c:8
+> > > > > error: cmd/efidebug.c: patch does not apply
+> > > > > error: patch failed: include/efi_loader.h:967
+> > > > > error: include/efi_loader.h: patch does not apply
+> > > > > error: patch failed: lib/efi_loader/efi_bootmgr.c:12
+> > > > > error: lib/efi_loader/efi_bootmgr.c: patch does not apply
+> > > > > error: patch failed: lib/efi_loader/efi_device_path.c:10
+> > > > > error: lib/efi_loader/efi_device_path.c: patch does not apply
+> > > > > error: patch failed: lib/efi_loader/efi_helper.c:6
+> > > > > error: lib/efi_loader/efi_helper.c: patch does not apply
+> > > > >
+> > > > > Please, resend the series based on origin/next.
+> > > > >
+> > > > > Patches that are not based on upstream U-Boot cannot be reviewed =
+via
+> > > > > this mailing list.
+> > > >
+> > > > The app is quite behind in Tom's tree due to rejected series.
+> > >
+> > > It was not "Rejected", it was "Changes Requested", please stop
+> > > mis-representing things.
+> > >
+> > > > In fact
+> > > > the app is pretty limited on x86 and there is no Arm app at all.
+> > > >
+> > > > My current plan is to move forward and eventually Tom might take it
+> > > > via a pull request.
+> > > >
+> > > > Do you have any other ideas?
+> > > >
+> > > > Perhaps this is something we could put on the agenda for a future c=
+all.
+> > >
+> > > There's nothing to discuss in a future call as step one is "post patc=
+hes
+> > > against mainline".
+> >
+> > I agree with Tom here.  I did look at some of the patches in this
+> > series and now that I've learnt it doesn't even apply on top of
+> > mainline it feels like I've wasted my time.
+>=20
+> There is a base commit in the cover letter, so you could look at that
+> if you like.
 
+Yes, it's on a commit that's not in mainline. No one wants to look at
+your personal tree.
+
+> I plan to apply this series at some point, so any review is not a
+> waste of time. I do respond to review feedback.
+
+And since it's not based on mainline, this is why people have told you
+they don't want to review your changes. Since you aren't working on
+mainline it's unclear if it will ever be in mainline.
+
+Since this series in fact looks to be addressing some of the feedback
+that was provided to one of the series you applied yourself (the other
+being part of Casey's RFC), it would be much more effective to start on
+the next branch now with the leg work on factoring the common EFI things
+to be usable by EFI_APP and EFI_LOADER. This would lead to being able to
+rebase other work on top of it and reduce the delta between your tree
+and mainline. That's the only way it will get in to mainline.
+
+--=20
+Tom
+
+--kaDenGth+BYugcx0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgw8/UACgkQFHw5/5Y0
+tyyjNQv7BoiF7Ibfe2+zK5yQpce+fa9hCyS1c5bPx0nWwBjS/fAi6Km/2dS6IeRN
+nDfVPz92JCOxrjZzrIwDdsXzqZx2v6P5IbwhSMkgb0NF+knYsYXeSJJ6U0l0ndNU
+jULWxpDgBQBCC/fvzoMMPFToIMTcQUmewQMr0gbM1HdQ4Ev04plDhWZa4YRhu6TR
+1sMu2MYYSNRaWIIyCfqNpIJccraGfVxdx/hIASHoZXzsrnq5w3zavipJBHS7H4Hj
+AslLXkjDqDzQv/1xfcjSXrPJ8s2QJRBUEyV/HfzxsVQyhxRbH+wrSgeoQaHRSkMs
+Y2UOlcCaVZ9NuaAaWcH2EnCtuG66FyP9vAuVgXegFvY338S7av0FoGs086qq4SFL
+sHMpmvCkpVOJw3mvbJq3H7Wjcr7z1QJQrRu/P+uQ9+5nDancxJysoGuNL2m/m5U5
+XxXSHkgHYjYMvbaE4edziX9mfde0RtvIWTsVX5w94wjH8O1hCVpSg3UWa1MzNmTl
+sUcJeHgW
+=V2JA
+-----END PGP SIGNATURE-----
+
+--kaDenGth+BYugcx0--
