@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3418C54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:56:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFA8C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9513D83631;
+	by phobos.denx.de (Postfix) with ESMTP id ED3A383642;
 	Fri, 23 May 2025 18:55:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="lFUtCPYN";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="CX06iDRi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9AD3830B4; Fri, 23 May 2025 11:48:11 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id E078B8324C; Fri, 23 May 2025 11:48:13 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F311B83211
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:48:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 746A68310F
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:48:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7238a91f03=antonio.borneo@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N821VG005102;
- Fri, 23 May 2025 11:48:08 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N826LP016426;
+ Fri, 23 May 2025 11:48:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- xwOITI/2hsvhERLqfmjAhHSsl7uqAkMgDz3yMq3GAEs=; b=lFUtCPYNYhMQY51D
- Dp6RYIko03XAtKC44ZXiFyDXxlLsBIgftnTEx8A+uNhDhxh37S2bERIiGRtK4yHi
- 8o5iDDCVqt5ztVfsXlrkUnYXQLa9FedmkMAT/Z715fsx5HlbBjINr0g/HknKksfo
- IHFyoLp9NTTs0m33UVzRqQccYhyX9jQg/5GDjEDha1pkrR9oBXde0jjDyDP7x5yt
- k+q3UTYqPwF9kmCfVXBxxdtrgWwaAHETJk2DSXNpj8wbdHcTtP6cuQZHrpoKH6e9
- qSyau1ObGt6k/3AjfMRHSw9Y9M6tTafPyXTnZ50mz6yAmuzgIZ43ohOBI9RfHlm0
- rGX/8Q==
+ ls8dx3XqZjziXW6N70aAJw18VFM1Q/6VdCHNig5QGd8=; b=CX06iDRis8WEqXc1
+ Kdav3CA6+3tS3L/tjBNI6R1oBsYUV2G8kiAyHS1RTh+0d6XK3MwWuVJ7B17AqzTM
+ /FssbTh4VO6i8s+Y7MZPaEUR3/mpcgHGsQWYl37VVTsGZJJsZiYeJETiAhg7owXc
+ 5Qtb2cDfS9c3GtqcCvqXOqs7VuWCVpdfCaUj1dSj3gPcO9E2P/oRcE9V29KPCAGO
+ KUXUH5BiuglRtHoiJAZxJkM8FyvbklMQVayq4jDPUtNd7HiGPRRFY7lEn1AY0gDG
+ nwxPraIBVSo6WoOIqNQ/hN5cguBGcc1JBl0cYWzkLYxs5sh/70ziaR1fRqJTYjVc
+ +t+/9Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfad8j9-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfqw6yg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Fri, 23 May 2025 11:48:08 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A0F2C4004F;
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C82EC40050;
  Fri, 23 May 2025 11:47:25 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F1EE5ADC011;
- Fri, 23 May 2025 11:47:11 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2B072ADC0CD;
+ Fri, 23 May 2025 11:47:13 +0200 (CEST)
 Received: from localhost (10.48.86.132) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 23 May
- 2025 11:47:11 +0200
+ 2025 11:47:12 +0200
 From: Antonio Borneo <antonio.borneo@foss.st.com>
 To: <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>,
@@ -61,16 +61,15 @@ CC: Antonio Borneo <antonio.borneo@foss.st.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
  <lionel.debieve@foss.st.com>, =?UTF-8?q?Cl=C3=A9ment=20Le=20Goffic?=
  <clement.legoffic@foss.st.com>
-Subject: [PATCH v2 1/4] watchdog: wdt-uclass.c: add wdt_set_force_autostart()
- helper
-Date: Fri, 23 May 2025 11:46:55 +0200
-Message-ID: <20250523094658.299730-2-antonio.borneo@foss.st.com>
+Subject: [PATCH v2 3/4] watchdog: stm32mp: check the watchdog status
+Date: Fri, 23 May 2025 11:46:57 +0200
+Message-ID: <20250523094658.299730-4-antonio.borneo@foss.st.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-Originating-IP: [10.48.86.132]
 X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -94,63 +93,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The watchdog could have been already started by a previous boot
-stage (e.g. bootrom or secure OS). U-Boot has to start and kick
-the watchdog even when CONFIG_WATCHDOG_AUTOSTART is not enabled
-or when the DT property u-boot,noautostart is present.
+From: Clément Le Goffic <clement.legoffic@foss.st.com>
 
-Add the helper wdt_set_force_autostart() that can be called by the
-driver's probe() when it detects that the watchdog has already
-been started and is running.
+Add a mean to check the IWDG status based on the peripheral version.
+This is done by either checking the status bit ONF either by updating
+the reload register with the same value and check if the reload succeed.
 
-Co-developed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
 Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
 ---
- drivers/watchdog/wdt-uclass.c | 9 +++++++++
- include/wdt.h                 | 9 +++++++++
- 2 files changed, 18 insertions(+)
+ drivers/watchdog/stm32mp_wdt.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
-index 10be334e9ed..b32590069d9 100644
---- a/drivers/watchdog/wdt-uclass.c
-+++ b/drivers/watchdog/wdt-uclass.c
-@@ -46,6 +46,15 @@ struct wdt_priv {
- 	struct cyclic_info cyclic;
+diff --git a/drivers/watchdog/stm32mp_wdt.c b/drivers/watchdog/stm32mp_wdt.c
+index 97ab8cfe7ab..0712524b4a8 100644
+--- a/drivers/watchdog/stm32mp_wdt.c
++++ b/drivers/watchdog/stm32mp_wdt.c
+@@ -21,11 +21,13 @@
+ #define IWDG_PR		0x04	/* Prescaler Register */
+ #define IWDG_RLR	0x08	/* ReLoad Register */
+ #define IWDG_SR		0x0C	/* Status Register */
++#define IWDG_VERR	0x3F4	/* Version Register */
+ 
+ /* IWDG_KR register bit mask */
+ #define KR_KEY_RELOAD	0xAAAA	/* Reload counter enable */
+ #define KR_KEY_ENABLE	0xCCCC	/* Peripheral enable */
+ #define KR_KEY_EWA	0x5555	/* Write access enable */
++#define KR_KEY_DWA	0x0000	/* Write access disable*/
+ 
+ /* IWDG_PR register bit values */
+ #define PR_256		0x06	/* Prescaler set to 256 */
+@@ -36,10 +38,17 @@
+ /* IWDG_SR register bit values */
+ #define SR_PVU		BIT(0)	/* Watchdog prescaler value update */
+ #define SR_RVU		BIT(1)	/* Watchdog counter reload value update */
++#define SR_ONF		BIT(8)	/* Watchdog enable status bit */
++
++/* IWDG Compatibility */
++#define ONF_MIN_VER	0x31
++
++#define TIMEOUT_US	10000
+ 
+ struct stm32mp_wdt_priv {
+ 	fdt_addr_t base;		/* registers addr in physical memory */
+ 	unsigned long wdt_clk_rate;	/* Watchdog dedicated clock rate */
++	unsigned int hw_version;	/* Peripheral version */
  };
  
-+int wdt_set_force_autostart(struct udevice *dev)
-+{
-+	struct wdt_priv *priv = dev_get_uclass_priv(dev);
-+
-+	priv->autostart = true;
-+
-+	return 0;
-+}
-+
- static void wdt_cyclic(struct cyclic_info *c)
+ static int stm32mp_wdt_reset(struct udevice *dev)
+@@ -90,6 +99,7 @@ static int stm32mp_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+ static int stm32mp_wdt_probe(struct udevice *dev)
  {
- 	struct wdt_priv *priv = container_of(c, struct wdt_priv, cyclic);
-diff --git a/include/wdt.h b/include/wdt.h
-index 5026f5a6db4..1ef656585c4 100644
---- a/include/wdt.h
-+++ b/include/wdt.h
-@@ -18,6 +18,15 @@ struct udevice;
-  * which typically include placing the system in a safe, known state.
-  */
+ 	struct stm32mp_wdt_priv *priv = dev_get_priv(dev);
++	u32 rlr, sr;
+ 	struct clk clk;
+ 	int ret;
  
-+/*
-+ * Force watchdog start during init. Called by driver's probe when the watchdog
-+ * is detected as already started.
-+ *
-+ * @dev: WDT Device
-+ * @return: 0 if OK, -ve on error
-+ */
-+int wdt_set_force_autostart(struct udevice *dev);
+@@ -115,6 +125,29 @@ static int stm32mp_wdt_probe(struct udevice *dev)
+ 
+ 	priv->wdt_clk_rate = clk_get_rate(&clk);
+ 
++	priv->hw_version = readl(priv->base + IWDG_VERR);
 +
- /*
-  * Start the timer
-  *
++	if (priv->hw_version >= ONF_MIN_VER) {
++		if (readl(priv->base + IWDG_SR) & SR_ONF)
++			wdt_set_force_autostart(dev);
++	} else {
++		/*
++		 * Workaround for old versions without IWDG_SR_ONF bit:
++		 * - write in IWDG_RLR_OFFSET
++		 * - wait for sync
++		 * - if sync succeeds, then iwdg is running
++		 */
++		writel(KR_KEY_EWA, priv->base + IWDG_KR);
++		rlr = readl(priv->base + IWDG_RLR);
++		writel(rlr, priv->base + IWDG_RLR);
++		ret = readl_poll_timeout(priv->base + IWDG_SR, sr, sr & SR_RVU,
++					 TIMEOUT_US);
++		if (!ret)
++			wdt_set_force_autostart(dev);
++
++		writel(KR_KEY_DWA, priv->base + IWDG_KR);
++	}
++
+ 	dev_dbg(dev, "IWDG init done\n");
+ 
+ 	return 0;
 -- 
 2.34.1
 
