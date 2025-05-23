@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFA8C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47917C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:57:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED3A383642;
-	Fri, 23 May 2025 18:55:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51AEA83669;
+	Fri, 23 May 2025 18:55:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="CX06iDRi";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="1p835buh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E078B8324C; Fri, 23 May 2025 11:48:13 +0200 (CEST)
+ id E9A318310F; Fri, 23 May 2025 11:48:13 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 746A68310F
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:48:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B1883242
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:48:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7238a91f03=antonio.borneo@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N826LP016426;
- Fri, 23 May 2025 11:48:09 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N822lG025877;
+ Fri, 23 May 2025 11:48:10 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- ls8dx3XqZjziXW6N70aAJw18VFM1Q/6VdCHNig5QGd8=; b=CX06iDRis8WEqXc1
- Kdav3CA6+3tS3L/tjBNI6R1oBsYUV2G8kiAyHS1RTh+0d6XK3MwWuVJ7B17AqzTM
- /FssbTh4VO6i8s+Y7MZPaEUR3/mpcgHGsQWYl37VVTsGZJJsZiYeJETiAhg7owXc
- 5Qtb2cDfS9c3GtqcCvqXOqs7VuWCVpdfCaUj1dSj3gPcO9E2P/oRcE9V29KPCAGO
- KUXUH5BiuglRtHoiJAZxJkM8FyvbklMQVayq4jDPUtNd7HiGPRRFY7lEn1AY0gDG
- nwxPraIBVSo6WoOIqNQ/hN5cguBGcc1JBl0cYWzkLYxs5sh/70ziaR1fRqJTYjVc
- +t+/9Q==
+ of9NU7iJb8qxaybHu2b6UkdVZ7w/oJhPxVieRaNKE3o=; b=1p835buheM+mrbol
+ FBqfAfTjXGcMvnA3Uyrkl1fXFnJ/aDomhDemmnYbzLSatQodjL1Fip9f2w7YCvvh
+ Jr/xHE45wtyLxa3/ZKzlLzzupnLLXkAcEd1uYc3QvCVAxRP+q7BwQ/AwDGhF+e99
+ immv+Mm/S5EEt/UUUV+Y36+YqUxhhsfT+37uIAKkT3JFM0O0ycSu63SPIdirpVM+
+ 0YmbYhu9jZiW+Owce158UErRoIok56bBmGQCQhBFbohm2BySTfxiSEsRWUNR3q8j
+ 9hp9RVlt5Z4BvGsrj88/3BTmB76TNpJ7sx5ush4B5Q1j7zuju++Cy8RuVsJvD+Y7
+ XsXK2w==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfqw6yg-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfcd7xh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 23 May 2025 11:48:08 +0200 (MEST)
+ Fri, 23 May 2025 11:48:09 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C82EC40050;
- Fri, 23 May 2025 11:47:25 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D0BB640051;
+ Fri, 23 May 2025 11:47:26 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2B072ADC0CD;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B4843ADC0DA;
  Fri, 23 May 2025 11:47:13 +0200 (CEST)
 Received: from localhost (10.48.86.132) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 23 May
- 2025 11:47:12 +0200
+ 2025 11:47:13 +0200
 From: Antonio Borneo <antonio.borneo@foss.st.com>
 To: <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>,
@@ -61,15 +61,16 @@ CC: Antonio Borneo <antonio.borneo@foss.st.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
  <lionel.debieve@foss.st.com>, =?UTF-8?q?Cl=C3=A9ment=20Le=20Goffic?=
  <clement.legoffic@foss.st.com>
-Subject: [PATCH v2 3/4] watchdog: stm32mp: check the watchdog status
-Date: Fri, 23 May 2025 11:46:57 +0200
-Message-ID: <20250523094658.299730-4-antonio.borneo@foss.st.com>
+Subject: [PATCH v2 4/4] watchdog: don't autostart watchdog on STM32MP
+ architecture
+Date: Fri, 23 May 2025 11:46:58 +0200
+Message-ID: <20250523094658.299730-5-antonio.borneo@foss.st.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [10.48.86.132]
 X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -93,92 +94,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Clément Le Goffic <clement.legoffic@foss.st.com>
+From: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Add a mean to check the IWDG status based on the peripheral version.
-This is done by either checking the status bit ONF either by updating
-the reload register with the same value and check if the reload succeed.
+On STM32MP reference boards, the watchdog is started by a previous
+boot stage (e.g. bootrom or secure OS), so the config flag
+WATCHDOG_AUTOSTART is not required.
+It's preferable to rely on the DT properties "u-boot,autostart" or
+"u-boot,noautostart", if needed.
 
-Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
+For backward compatibility on defconfigs that are based on SPL,
+thus cannot rely on a previous boot stage for starting the
+watchdog, enable WATCHDOG_AUTOSTART in their respective defconfig.
+The change in stm32mp15_dhsom.config is propagated to:
+- configs/stm32mp15_dhcom_basic.config
+- configs/stm32mp15_dhcor_basic.config
+and then to:
+- stm32mp15_dhcom_basic_defconfig
+- stm32mp15_dhcom_drc02_basic_defconfig
+- stm32mp15_dhcom_pdk2_basic_defconfig
+- stm32mp15_dhcom_picoitx_basic_defconfig
+- stm32mp15_dhcor_avenger96_basic_defconfig
+- stm32mp15_dhcor_basic_defconfig
+- stm32mp15_dhcor_drc_compact_basic_defconfig
+- stm32mp15_dhcor_testbench_basic_defconfig
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
 ---
- drivers/watchdog/stm32mp_wdt.c | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig          | 1 +
+ configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig         | 1 +
+ configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig | 1 +
+ configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig     | 1 +
+ configs/stm32mp15_basic_defconfig                           | 1 +
+ configs/stm32mp15_dhsom.config                              | 1 +
+ drivers/watchdog/Kconfig                                    | 1 +
+ 7 files changed, 7 insertions(+)
 
-diff --git a/drivers/watchdog/stm32mp_wdt.c b/drivers/watchdog/stm32mp_wdt.c
-index 97ab8cfe7ab..0712524b4a8 100644
---- a/drivers/watchdog/stm32mp_wdt.c
-+++ b/drivers/watchdog/stm32mp_wdt.c
-@@ -21,11 +21,13 @@
- #define IWDG_PR		0x04	/* Prescaler Register */
- #define IWDG_RLR	0x08	/* ReLoad Register */
- #define IWDG_SR		0x0C	/* Status Register */
-+#define IWDG_VERR	0x3F4	/* Version Register */
- 
- /* IWDG_KR register bit mask */
- #define KR_KEY_RELOAD	0xAAAA	/* Reload counter enable */
- #define KR_KEY_ENABLE	0xCCCC	/* Peripheral enable */
- #define KR_KEY_EWA	0x5555	/* Write access enable */
-+#define KR_KEY_DWA	0x0000	/* Write access disable*/
- 
- /* IWDG_PR register bit values */
- #define PR_256		0x06	/* Prescaler set to 256 */
-@@ -36,10 +38,17 @@
- /* IWDG_SR register bit values */
- #define SR_PVU		BIT(0)	/* Watchdog prescaler value update */
- #define SR_RVU		BIT(1)	/* Watchdog counter reload value update */
-+#define SR_ONF		BIT(8)	/* Watchdog enable status bit */
-+
-+/* IWDG Compatibility */
-+#define ONF_MIN_VER	0x31
-+
-+#define TIMEOUT_US	10000
- 
- struct stm32mp_wdt_priv {
- 	fdt_addr_t base;		/* registers addr in physical memory */
- 	unsigned long wdt_clk_rate;	/* Watchdog dedicated clock rate */
-+	unsigned int hw_version;	/* Peripheral version */
- };
- 
- static int stm32mp_wdt_reset(struct udevice *dev)
-@@ -90,6 +99,7 @@ static int stm32mp_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
- static int stm32mp_wdt_probe(struct udevice *dev)
- {
- 	struct stm32mp_wdt_priv *priv = dev_get_priv(dev);
-+	u32 rlr, sr;
- 	struct clk clk;
- 	int ret;
- 
-@@ -115,6 +125,29 @@ static int stm32mp_wdt_probe(struct udevice *dev)
- 
- 	priv->wdt_clk_rate = clk_get_rate(&clk);
- 
-+	priv->hw_version = readl(priv->base + IWDG_VERR);
-+
-+	if (priv->hw_version >= ONF_MIN_VER) {
-+		if (readl(priv->base + IWDG_SR) & SR_ONF)
-+			wdt_set_force_autostart(dev);
-+	} else {
-+		/*
-+		 * Workaround for old versions without IWDG_SR_ONF bit:
-+		 * - write in IWDG_RLR_OFFSET
-+		 * - wait for sync
-+		 * - if sync succeeds, then iwdg is running
-+		 */
-+		writel(KR_KEY_EWA, priv->base + IWDG_KR);
-+		rlr = readl(priv->base + IWDG_RLR);
-+		writel(rlr, priv->base + IWDG_RLR);
-+		ret = readl_poll_timeout(priv->base + IWDG_SR, sr, sr & SR_RVU,
-+					 TIMEOUT_US);
-+		if (!ret)
-+			wdt_set_force_autostart(dev);
-+
-+		writel(KR_KEY_DWA, priv->base + IWDG_KR);
-+	}
-+
- 	dev_dbg(dev, "IWDG init done\n");
- 
- 	return 0;
+diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+index fc095ac0de1..4c371c17334 100644
+--- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
++++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
+ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_SYSRESET_SYSCON=y
++CONFIG_WATCHDOG_AUTOSTART=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+index b243c45d690..7463eb5c95d 100644
+--- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
++++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
+ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_SYSRESET_SYSCON=y
++CONFIG_WATCHDOG_AUTOSTART=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+index e635c726459..e9f5bd32721 100644
+--- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
++++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
+ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_SYSRESET_SYSCON=y
++CONFIG_WATCHDOG_AUTOSTART=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+index 9e7849ff8f0..aefb78935b0 100644
+--- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
++++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
+ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_SYSRESET_SYSCON=y
++CONFIG_WATCHDOG_AUTOSTART=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index e3090ec2a50..241c9402560 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -191,6 +191,7 @@ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_WATCHDOG_AUTOSTART=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+index c84116482f6..565b49584e3 100644
+--- a/configs/stm32mp15_dhsom.config
++++ b/configs/stm32mp15_dhsom.config
+@@ -76,3 +76,4 @@ CONFIG_PREBOOT="run dh_preboot"
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+ CONFIG_TARGET_DH_STM32MP1_PDK2=y
+ CONFIG_USE_SERVERIP=y
++CONFIG_WATCHDOG_AUTOSTART=y
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 1bb67f50352..510330be8a5 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -15,6 +15,7 @@ config WATCHDOG_AUTOSTART
+ 	bool "Automatically start watchdog timer"
+ 	depends on WDT
+ 	default n if ARCH_SUNXI
++	default n if ARCH_STM32MP
+ 	default y
+ 	help
+ 	  Automatically start watchdog timer and start servicing it during
 -- 
 2.34.1
 
