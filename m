@@ -4,62 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B785FC54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4450DC54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3852B83303;
-	Fri, 23 May 2025 18:55:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
+	by phobos.denx.de (Postfix) with ESMTP id A853F835E0;
+	Fri, 23 May 2025 18:55:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="TUIyOIuG";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="rxykHew2";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NK7LI9YT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 276C28346B; Fri, 23 May 2025 18:55:18 +0200 (CEST)
-Received: from sendmail.purelymail.com (sendmail.purelymail.com
- [34.202.193.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF105831C3; Fri, 23 May 2025 11:27:27 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5289A833E8
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 18:55:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=tidylabs.net
+ by phobos.denx.de (Postfix) with ESMTPS id D9FB882E26
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:27:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=justin@tidylabs.net
-DKIM-Signature: a=rsa-sha256;
- b=TUIyOIuG9ukcjW4qTJFXTTbtKVjKOHhdCa3tWD7w+946viy/DR7Mta/1XkR3jAtKORPntDGcVJxCaY8Dvx//QQzH8Lx2rtNwCiwnWM/wEVhjXfsUGlYjIkMb71Xv7F/9jKUr01Fj55qV6VGRvDyjCKClkvj42eXA7pFsexoebv+pzV0T6Rv4wfOWJVnuiMiniaKMcj/0QK4zzW1CrGI6H4CCztn0VOVTbd20/RKYfz/cmW6G3jzdfWvwjPEJ+tStmEM+wRmFAfBNdc62SnPBRSwSuza2u4bD39tYRYkbva4X1Afvergy8yzqoRsIaueQpUMwseK+hzA2hY5QqZcS4A==;
- s=purelymail2; d=tidylabs.net; v=1;
- bh=CFrSQ/J4doRprQFZguCaK0dERH3Z3cZ2bpZ657iBGEc=;
- h=Received:From:To:Subject:Date; 
-DKIM-Signature: a=rsa-sha256;
- b=rxykHew2oHICGge/5ZWXzRjuPogad6Ioz+S9TuGaRsymyDb/dAFMUmGYYVV9EBEbbhwQDHHoCGR/zr2XhvgNerUmSILRyIsGalkrPUB19BC9D3+f+fk5JrQGxboHbHfLkoIUckblTunRer+XI2KCdG11kSO1jdj4pS5sLcVh1oRUKflccjbz4HGrPpmZne2VrsBH3NtJA5Q1Tn5rIL7mV2K6HTEar3O41vc83vRq4zmZU7V51Kdux7B0TBmdGkD92EOfXe7b+ndFf+YxeZxgZGGz2rzkFB0jqNWDnRZoyFcHbafP6HpFa3tbtC69esWvZic7tVxn0NpHBwW+awHlqQ==;
- s=purelymail2; d=purelymail.com; v=1;
- bh=CFrSQ/J4doRprQFZguCaK0dERH3Z3cZ2bpZ657iBGEc=;
- h=Feedback-ID:Received:From:To:Subject:Date; 
-Feedback-ID: 81901:11097:null:purelymail
-X-Pm-Original-To: u-boot@lists.denx.de
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -2127220571; 
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 23 May 2025 16:55:07 +0000 (UTC)
-From: Justin Klaassen <justin@tidylabs.net>
-To: u-boot@lists.denx.de
-Cc: Justin Klaassen <justin@tidylabs.net>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 4/5] rockchip: rk3399-nanopi-4: Allow MMC driver to control
- SD regulators
-Date: Fri, 23 May 2025 16:53:40 +0000
-Message-ID: <20250523165406.40915-5-justin@tidylabs.net>
-X-Mailer: git-send-email 2.45.3
-In-Reply-To: <20250523165406.40915-1-justin@tidylabs.net>
-References: <20250523165406.40915-1-justin@tidylabs.net>
-MIME-Version: 1.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7238a91f03=antonio.borneo@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N821QH005102;
+ Fri, 23 May 2025 11:27:23 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 9GCqtJqLA4S98+rZvFfoS/uxi48A4QlMUYqXuyF3y2A=; b=NK7LI9YTzHAq/vjI
+ obREHd0US1wjhYvXmXv0xs6KVsJ/VQdB5zf2s5DCNQHCebuOBrF8jzlaAA7zqz2d
+ 76psewZ0BZ8cgN6UnCay8cQDG7DKJliJ3aHzaNnhI+I9nsxdRFxM0QY0UlGrEcrU
+ 9ZKu/rccOoFA90CnMLbvaynCTnu5WaDxmou6brEeqjbtcXn5jVxzmNQlqTXNIn6x
+ KRDsg8ID4E2C1W8qHYgPqBVByG/zEaRs3KwxhjrsAkTMfrQs8Fq+hKwGUsCqSN4H
+ oIAinyY/Kj2yGBeHQCOwQOOflrPU35jcEZ5iGnNkcPxY94LvOLMVLsqUEkdJqzrw
+ uA+xCA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfad4k5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 23 May 2025 11:27:23 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4652E40079;
+ Fri, 23 May 2025 11:26:35 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F199ACFF63;
+ Fri, 23 May 2025 11:26:05 +0200 (CEST)
+Received: from [192.168.8.15] (10.48.86.132) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 23 May
+ 2025 11:26:04 +0200
+Message-ID: <e3e67c90fce020b2d02a2fa98ca9587e1ef12f91.camel@foss.st.com>
+Subject: Re: [PATCH 4/4] watchdog: don't autostart watchdog on STM32MP boards
+From: Antonio Borneo <antonio.borneo@foss.st.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Marek Vasut <marex@denx.de>
+CC: <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>, =?ISO-8859-1?Q?Cl=E9ment?= Le Goffic
+ <clement.legoffic@foss.st.com>
+Date: Fri, 23 May 2025 11:26:02 +0200
+In-Reply-To: <a22cb1c0-bcee-4b12-bed8-2eb7e19e0939@foss.st.com>
+References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
+ <20250521122755.265760-5-antonio.borneo@foss.st.com>
+ <a22cb1c0-bcee-4b12-bed8-2eb7e19e0939@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Evolution 3.48.4 
+MIME-Version: 1.0
+X-Originating-IP: [10.48.86.132]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-23_02,2025-05-22_01,2025-03-28_01
+X-Mailman-Approved-At: Fri, 23 May 2025 18:55:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,44 +94,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This change removes the "regulator-always-on" property from the
-"vcc3v0_sd" (vmmc-supply) and "vcc_sdio" (vqmmc-supply) regulators,
-which otherwise prevents the MMC driver from being able to power cycle
-the SD card as part of the initialization procedure.
+On Thu, 2025-05-22 at 11:53 +0200, Patrick DELAUNAY wrote:
+> Hi,
+>=20
+> On 5/21/25 14:27, Antonio Borneo wrote:
+> > From: Patrice Chotard <patrice.chotard@foss.st.com>
+> >=20
+> > The STM32MP2 boards have watchdog started by a previous boot
+>=20
+> why only for STM32MP2...
+>=20
+> I think it is case for STM32MP1 also.
+>=20
+>=20
+> and in the patch it is the case =3D> default n for ARCH_STM32MP
+>=20
+> =3D all STM32 MPU: STM32MP1(ARMv7) & STM32MP2(ARMv8)
 
-It also removes the "regulator-boot-on" from the "vcc_sdio" regulator,
-which could theoretically damage a SD card that is already initialized
-in a low voltage mode.
+My mistake. I will fix it in V2.
 
-Signed-off-by: Justin Klaassen <justin@tidylabs.net>
----
+> > stage (e.g. bootrom or secure OS), WATCHDOG_AUTOSTART is useless.
+> > Prefer to rely on DT properties "u-boot,autostart" or "u-boot,noautosta=
+rt"
+> > if needed.
+> >=20
+> > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> > Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
+> > ---
+> > =C2=A0 drivers/watchdog/Kconfig | 1 +
+> > =C2=A0 1 file changed, 1 insertion(+)
+> >=20
+> > diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> > index 1bb67f50352..510330be8a5 100644
+> > --- a/drivers/watchdog/Kconfig
+> > +++ b/drivers/watchdog/Kconfig
+> > @@ -15,6 +15,7 @@ config WATCHDOG_AUTOSTART
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool "Automatically sta=
+rt watchdog timer"
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0depends on WDT
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0default n if ARCH_SUNXI
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0default n if ARCH_STM32MP
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0default y
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0help
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Automatically st=
+art watchdog timer and start servicing it during
+>=20
+>=20
+> With this patch you are change the behavior for ALL users of STM32MP arch=
+...
+>=20
+> It is OK for any boot with TF-A/OP-TEE....
+>=20
+> so for stm32mp15_defconfig/stm32mp15_trusted_defconfig
+>=20
+>=20
+> but what append for boot with SPL on ST boards ?
+>=20
+> stm32mp15_basic_defconfig
+>=20
+> and what appends for=C2=A0 customer defconfig=C2=A0 with SPL ?
+>=20
+> stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> stm32mp15-icore-stm32mp1-ctouch2_defconfig
+> stm32mp15_dhcor_basic_defconfig
+> stm32mp15_dhcom_basic_defconfig
+> stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+> stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+>=20
+> if you want have no impact on other boards, I think a defconfig=20
+> modification is missing for all these defconfig without TF-A/OP-TEE suppo=
+rt
+>=20
+> CONFIG_WATCHDOG_AUTOSTART=3Dy
+>=20
+> or you are expecting STM32MP15 board device tree modification=20
+> ("u-boot,autostart") ?
 
-(no changes since v2)
+You are right!
+I will update the defconfig for the SPL based boards in V2.
 
-Changes in v2:
-- Added patch to remove device-tree properties that conflicted with MMC dri=
-ver initialization
+Thanks for the review
 
- arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-=
-nanopi4-u-boot.dtsi
-index 75736124996..ba2b73223d4 100644
---- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-@@ -19,8 +19,11 @@
-=20
- &vcc3v0_sd {
- =09bootph-pre-ram;
-+=09/delete-property/ regulator-always-on;
- };
-=20
- &vcc_sdio {
-+=09/delete-property/ regulator-always-on;
-+=09/delete-property/ regulator-boot-on;
- =09regulator-init-microvolt =3D <3000000>;
- };
---=20
-2.45.3
+Regards
+Antonio
 
