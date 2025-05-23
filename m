@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FD2C54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 17:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 537A6C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 17:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ACDF8334D;
-	Fri, 23 May 2025 19:45:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 604468338D;
+	Fri, 23 May 2025 19:45:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CD1D8334D; Fri, 23 May 2025 19:45:51 +0200 (CEST)
+ id 43534833C7; Fri, 23 May 2025 19:45:55 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B627C83278
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 19:45:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B46DE83278
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 19:45:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,17 +25,18 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uIW4O-0076pt-Gn;
- Fri, 23 May 2025 17:20:32 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1uIW4N-0076pt-CU;
+ Fri, 23 May 2025 17:20:31 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de,
 	Stefano Babic <sbabic@nabladev.com>
 Cc: Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 13/13] imx8mp-venice-gw74xx: add w_disable2 gpio configuration
-Date: Fri, 23 May 2025 10:20:18 -0700
-Message-Id: <20250523172018.4164647-13-tharvey@gateworks.com>
+Subject: [PATCH 11/13] board: venice: update model representation for
+ venice-flex
+Date: Fri, 23 May 2025 10:20:16 -0700
+Message-Id: <20250523172018.4164647-11-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250523172018.4164647-1-tharvey@gateworks.com>
 References: <20250523172018.4164647-1-tharvey@gateworks.com>
@@ -57,49 +58,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GW74xx D revision has added a M2SKT_WDIS2# GPIO which routes to the
-W_DISABLE2# pin of the M.2 socket.
-
-Add the iomux and a line name for this and rename the existing
-m2_wdis# signal to m2_wdis1#.
+Update the model string representation for the Venice-Flex product
+family (GW8xxx).
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ board/gateworks/venice/eeprom.c | 104 +++++++++++++++++++++++++++++++-
+ 1 file changed, 102 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi
-index a90794d8108a..95f5f15e742a 100644
---- a/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi
-@@ -98,6 +98,13 @@
- 		gpios = <6 GPIO_ACTIVE_HIGH>;
- 		line-name = "m2_rst";
- 	};
+diff --git a/board/gateworks/venice/eeprom.c b/board/gateworks/venice/eeprom.c
+index 49b1ad34b148..702ab392a047 100644
+--- a/board/gateworks/venice/eeprom.c
++++ b/board/gateworks/venice/eeprom.c
+@@ -6,6 +6,7 @@
+ #include <gsc.h>
+ #include <hexdump.h>
+ #include <i2c.h>
++#include <dm/device.h>
+ #include <dm/uclass.h>
+ 
+ #include "eeprom.h"
+@@ -19,7 +20,7 @@
+ 
+ struct venice_board_info som_info;
+ struct venice_board_info base_info;
+-char venice_model[32];
++char venice_model[64];
+ char venice_som_model[32];
+ char venice_baseboard_model[32];
+ u32 venice_serial;
+@@ -109,7 +110,7 @@ static int eeprom_read(int busno, int slave, int alen, struct venice_board_info
+ 	/* validate checksum */
+ 	for (chksum = 0, i = 0; i < (int)sizeof(*info) - 2; i++)
+ 		chksum += buf[i];
+-	if ((info->chksum[0] != chksum >> 8) ||
++	if ((info->chksum[0] != ((chksum >> 8) & 0xff)) ||
+ 	    (info->chksum[1] != (chksum & 0xff))) {
+ 		printf("EEPROM: I2C%d@0x%02x: Invalid Checksum\n", busno, slave);
+ 		print_hex_dump_bytes("", DUMP_PREFIX_NONE, buf, sizeof(*info));
+@@ -128,6 +129,54 @@ static int eeprom_read(int busno, int slave, int alen, struct venice_board_info
+ 	return 0;
+ }
+ 
++static int fsa_eeprom_read(const char *base, int fsa, struct fsa_board_info *info)
++{
++	int i;
++	int chksum;
++	unsigned char *buf = (unsigned char *)info;
++	struct udevice *dev, *bus;
++	int ret;
++	u8 reg;
 +
-+	m2_wdis2 {
-+		gpio-hog;
-+		output-high;
-+		gpios = <14 GPIO_ACTIVE_HIGH>;
-+		line-name = "m2_wdis2#";
-+	};
- };
++	/* probe mux */
++	ret = uclass_get_device_by_seq(UCLASS_I2C, 2, &bus);
++	if (!ret)
++		ret = dm_i2c_probe(bus, 0x70, 0, &dev);
++	if (ret)
++		return ret;
++	/* steer mux */
++	if (!strncmp(base, "GW82", 4)) {
++		if (fsa < 3)
++			reg = (fsa == 1) ? BIT(1) : BIT(0);
++		else
++			return -EINVAL;
++	}
++	dm_i2c_write(dev, 0x00, &reg, 1);
++
++	/* get eeprom */
++	ret = dm_i2c_probe(bus, 0x54, 0, &dev);
++	if (ret)
++		return ret;
++
++	/* read eeprom config section */
++	ret = dm_i2c_read(dev, 0x00, buf, sizeof(*info));
++	if (ret)
++		return ret;
++
++	/* validate checksum */
++	for (chksum = 0, i = 0; i < (int)sizeof(*info) - 2; i++)
++		chksum += buf[i];
++	if ((info->chksum[0] != ((chksum >> 8) & 0xff)) ||
++	    (info->chksum[1] != (chksum & 0xff))) {
++		printf("FSA%d EEPROM (board): %s: Invalid Checksum\n", fsa, dev->name);
++		print_hex_dump_bytes("", DUMP_PREFIX_OFFSET, buf, sizeof(*info));
++		memset(info, 0, sizeof(*info));
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
+ /* determine BOM revision from model */
+ int get_bom_rev(const char *str)
+ {
+@@ -352,6 +401,57 @@ int venice_eeprom_init(int quiet)
+ 	}
+ 	venice_serial = som_info.serial;
  
- &gpio4 {
-@@ -110,11 +117,11 @@
- 		line-name = "m2_off#";
- 	};
++	/* GW8xxx product family naming scheme */
++	if (venice_model[2] == '8') {
++		struct fsa_board_info fsa_info;
++		int i = 0;
++		int fsa;
++
++		/* baseboard */
++		if (base_info.model[0]) {
++			rev_pcb = get_pcb_rev(base_info.model);
++			rev_bom = get_bom_rev(base_info.model);
++			venice_model[i++] = 'G';
++			venice_model[i++] = 'W';
++			venice_model[i++] = base_info.model[2]; /* baseboard */
++			venice_model[i++] = base_info.model[3];
++			venice_model[i++] = base_info.model[4]; /* subload */
++			venice_model[i++] = base_info.model[5];
++			venice_model[i++] = rev_pcb;
++			if (rev_bom)
++				venice_model[i++] = rev_bom;
++			venice_model[i++] = '-';
++			venice_model[i++] = 'S';
++		} else {
++			venice_model[i++] = 'G';
++			venice_model[i++] = 'W';
++		}
++
++		/* som */
++		rev_pcb = get_pcb_rev(som_info.model);
++		rev_bom = get_bom_rev(som_info.model);
++		venice_model[i++] = som_info.model[4];
++		venice_model[i++] = som_info.model[5];
++		venice_model[i++] = rev_pcb;
++		if (rev_bom)
++			venice_model[i++] = rev_bom;
++
++		/* fsa */
++		for (fsa = 1; fsa < FSA_MAX; fsa++) {
++			if (!fsa_eeprom_read(venice_model, fsa, &fsa_info)) {
++				venice_model[i++] = '-';
++				venice_model[i++] = 'F';
++				venice_model[i++] = '0' + fsa;
++				venice_model[i++] = fsa_info.model[5];
++				venice_model[i++] = fsa_info.model[6];
++				venice_model[i++] = fsa_info.model[8];
++				if (fsa_info.model[9])
++					venice_model[i++] = fsa_info.model[9];
++			}
++		}
++		venice_model[i++] = 0;
++	}
++
+ 	if (!quiet)
+ 		eeprom_info(false);
  
--	m2_wdis {
-+	m2_wdis1 {
- 		gpio-hog;
- 		output-high;
- 		gpios = <18 GPIO_ACTIVE_HIGH>;
--		line-name = "m2_wdis#";
-+		line-name = "m2_wdis1#";
- 	};
- 
- 	rs485_en {
 -- 
 2.25.1
 
