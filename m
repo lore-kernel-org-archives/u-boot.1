@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7648DC54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:56:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B785FC54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:56:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2BC9834AD;
-	Fri, 23 May 2025 18:55:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3852B83303;
+	Fri, 23 May 2025 18:55:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hYH18eZB";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="TUIyOIuG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="rxykHew2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCE6F83448; Fri, 23 May 2025 18:55:17 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 276C28346B; Fri, 23 May 2025 18:55:18 +0200 (CEST)
+Received: from sendmail.purelymail.com (sendmail.purelymail.com
+ [34.202.193.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 405DD833DB
+ by phobos.denx.de (Postfix) with ESMTPS id 5289A833E8
  for <u-boot@lists.denx.de>; Fri, 23 May 2025 18:55:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a4c9024117so99849f8f.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 09:55:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748019312; x=1748624112; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=e0SAIsxA+/yd6dCyUuHIBDLPRifKsFsRmSXqkKHefs8=;
- b=hYH18eZBCXSLFv/2Oc9Ki2X0SlpLt6/Vmejw1odALMr/2TxXwjMTh5xs8ur3l7/4Tb
- m0HdanoRr1/PbDjEZa4WKcvm0LV5pYdErtwiviKEtpISF9Y+74ufA8ABXVeM6+lDdhX6
- mEbK9qTuT2d0mIBbrXkTH9v+QLxJjEJHYOBG8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748019312; x=1748624112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e0SAIsxA+/yd6dCyUuHIBDLPRifKsFsRmSXqkKHefs8=;
- b=NtQg00vz4MadqaEIox6UQP8vKeltMfeNy+FOUor5G+aqAOz1QymkuP0oS7uHNbpIkd
- mAHtFZhF+hCA/0sMHMJ65hV02dgIVnAUmR4Wr5Z0A4kn9/8htiKKfkNEuqfCt1cVxpaO
- 22VvO9PrAX0a+YSZMnihhPWnNH0pndZ4PaE5OCZY4uFrfLQ7C6c6Vd6lRkspJEH6JrZB
- C0WpGsLiPZEnKWm8Tx30Or+jQ/oVw+9WMMctzDZEA6lriQevHTs6hz5VdcjNv0qOzGxO
- OumRrcB3vzCyaxj1zWCXGcJAnj0SPiKx6ijpgxne7aIgyaoVJ1hNtnmQjDAlXE5uwfpS
- 1u7w==
-X-Gm-Message-State: AOJu0Yz8DcLibVdC7OACMUiEK+mtE1pqJX1zRRg74VjEFYgZYTakarjb
- OYczvvybNYi4/gch1EMXeLAfyNIJg20xp5eN1PIhumrEikIDExzt4rsS6rgQIXoEZD3xCwc/ps2
- 7yMxS583p
-X-Gm-Gg: ASbGnctkkfXXnusQH/cnpVoX/n5kvYvO/3G05Mef6zvObAJ2OJIHl5D/QthIxs1WMmw
- 5b4dxlpXsu2FzwdtAipehQUqogV3spkkGMJV5CRxpJFTjLO1lwaRR31x0elSeM9WXYSHHClNaNp
- XdRgHaYutIeyDO7fuYegJJjFjSbK7oe53+4rQVypZ0Wmt3NIZgUZTU0dJnIHAqP8Nwa1jOo92oZ
- oivLt77DqZHjbAM0Jz9oSp7Rlacz8zpADXyQi9Tv3mTBPylvmSSJYmHDcXmPh6ol/VklEBzAHif
- hKMpzKTINaeQSUCNUlfcGNZl1dPlbsIq+uJFgVkqTNJXm/VgB6WLFqKtdNi/0qPKY11G
-X-Google-Smtp-Source: AGHT+IEwUpjvO5rwOTVqAz6cpFx/GObso70TdBvF0ReQD0XBUbZH7D3wc59KNeSsMQFD9bC7ZtIr+w==
-X-Received: by 2002:a05:6000:2584:b0:3a3:7465:7e60 with SMTP id
- ffacd0b85a97d-3a4c15589c4mr4729387f8f.26.1748019312205; 
- Fri, 23 May 2025 09:55:12 -0700 (PDT)
-Received: from chromium.org (82-132-233-54.dab.02.net. [82.132.233.54])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-447eee9d8desm153476265e9.0.2025.05.23.09.55.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 09:55:11 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Niklas Sombert <niklas.sombert@uni-duesseldorf.de>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v2] x86: efi_loader: Ensure the SMBIOS tables are sent via EFI
-Date: Fri, 23 May 2025 17:55:04 +0100
-Message-ID: <20250523165508.1416716-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=justin@tidylabs.net
+DKIM-Signature: a=rsa-sha256;
+ b=TUIyOIuG9ukcjW4qTJFXTTbtKVjKOHhdCa3tWD7w+946viy/DR7Mta/1XkR3jAtKORPntDGcVJxCaY8Dvx//QQzH8Lx2rtNwCiwnWM/wEVhjXfsUGlYjIkMb71Xv7F/9jKUr01Fj55qV6VGRvDyjCKClkvj42eXA7pFsexoebv+pzV0T6Rv4wfOWJVnuiMiniaKMcj/0QK4zzW1CrGI6H4CCztn0VOVTbd20/RKYfz/cmW6G3jzdfWvwjPEJ+tStmEM+wRmFAfBNdc62SnPBRSwSuza2u4bD39tYRYkbva4X1Afvergy8yzqoRsIaueQpUMwseK+hzA2hY5QqZcS4A==;
+ s=purelymail2; d=tidylabs.net; v=1;
+ bh=CFrSQ/J4doRprQFZguCaK0dERH3Z3cZ2bpZ657iBGEc=;
+ h=Received:From:To:Subject:Date; 
+DKIM-Signature: a=rsa-sha256;
+ b=rxykHew2oHICGge/5ZWXzRjuPogad6Ioz+S9TuGaRsymyDb/dAFMUmGYYVV9EBEbbhwQDHHoCGR/zr2XhvgNerUmSILRyIsGalkrPUB19BC9D3+f+fk5JrQGxboHbHfLkoIUckblTunRer+XI2KCdG11kSO1jdj4pS5sLcVh1oRUKflccjbz4HGrPpmZne2VrsBH3NtJA5Q1Tn5rIL7mV2K6HTEar3O41vc83vRq4zmZU7V51Kdux7B0TBmdGkD92EOfXe7b+ndFf+YxeZxgZGGz2rzkFB0jqNWDnRZoyFcHbafP6HpFa3tbtC69esWvZic7tVxn0NpHBwW+awHlqQ==;
+ s=purelymail2; d=purelymail.com; v=1;
+ bh=CFrSQ/J4doRprQFZguCaK0dERH3Z3cZ2bpZ657iBGEc=;
+ h=Feedback-ID:Received:From:To:Subject:Date; 
+Feedback-ID: 81901:11097:null:purelymail
+X-Pm-Original-To: u-boot@lists.denx.de
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -2127220571; 
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 23 May 2025 16:55:07 +0000 (UTC)
+From: Justin Klaassen <justin@tidylabs.net>
+To: u-boot@lists.denx.de
+Cc: Justin Klaassen <justin@tidylabs.net>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 4/5] rockchip: rk3399-nanopi-4: Allow MMC driver to control
+ SD regulators
+Date: Fri, 23 May 2025 16:53:40 +0000
+Message-ID: <20250523165406.40915-5-justin@tidylabs.net>
+X-Mailer: git-send-email 2.45.3
+In-Reply-To: <20250523165406.40915-1-justin@tidylabs.net>
+References: <20250523165406.40915-1-justin@tidylabs.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
+Content-Type: text/plain; charset=UTF-8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,53 +76,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI-loader code has not been fully converted to use bloblist, so
-relies on the SMBIOS-table address being set in global_data.
+This change removes the "regulator-always-on" property from the
+"vcc3v0_sd" (vmmc-supply) and "vcc_sdio" (vqmmc-supply) regulators,
+which otherwise prevents the MMC driver from being able to power cycle
+the SD card as part of the initialization procedure.
 
-Set this up in write_tables() so that the SMBIOS tables are actually
-available.
+It also removes the "regulator-boot-on" from the "vcc_sdio" regulator,
+which could theoretically damage a SD card that is already initialized
+in a low voltage mode.
 
-Enable the command for x86 QEMU so that the SMBIOS tests actually run.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 83ce35d6ebb ("emulation: Use bloblist to hold tables")
-Reported-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-Tested-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
+Signed-off-by: Justin Klaassen <justin@tidylabs.net>
 ---
 
+(no changes since v2)
+
 Changes in v2:
-- Drop unwanted debugging
+- Added patch to remove device-tree properties that conflicted with MMC dri=
+ver initialization
 
- arch/x86/lib/tables.c            | 2 ++
- board/emulation/qemu-x86/Kconfig | 1 +
- 2 files changed, 3 insertions(+)
+ arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
-index ec52992209f..d7f183f95dc 100644
---- a/arch/x86/lib/tables.c
-+++ b/arch/x86/lib/tables.c
-@@ -126,6 +126,8 @@ int write_tables(void)
- 			use_high = true;
- 			if (!gd->arch.table_start_high)
- 				gd->arch.table_start_high = rom_addr;
-+			if (table->tag == BLOBLISTT_SMBIOS_TABLES)
-+				gd_set_smbios_start(rom_addr);
- 		}
- 		rom_table_end = table->write(rom_addr);
- 		if (!rom_table_end) {
-diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
-index b2a4e0891a4..c1564fba7cd 100644
---- a/board/emulation/qemu-x86/Kconfig
-+++ b/board/emulation/qemu-x86/Kconfig
-@@ -23,5 +23,6 @@ config BOARD_SPECIFIC_OPTIONS # dummy
- 	imply VIRTIO_PCI
- 	imply VIRTIO_NET
- 	imply VIRTIO_BLK
-+	imply CMD_SMBIOS
- 
- endif
--- 
-2.43.0
+diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-=
+nanopi4-u-boot.dtsi
+index 75736124996..ba2b73223d4 100644
+--- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
+@@ -19,8 +19,11 @@
+=20
+ &vcc3v0_sd {
+ =09bootph-pre-ram;
++=09/delete-property/ regulator-always-on;
+ };
+=20
+ &vcc_sdio {
++=09/delete-property/ regulator-always-on;
++=09/delete-property/ regulator-boot-on;
+ =09regulator-init-microvolt =3D <3000000>;
+ };
+--=20
+2.45.3
 
-base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
-branch: fix-smbios2
