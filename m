@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1F07C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:04:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A675DC54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63E0C8366C;
+	by phobos.denx.de (Postfix) with ESMTP id AA43F8367B;
 	Sat, 24 May 2025 01:00:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JsbYuk0e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fIG/prfS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED66A83416; Sat, 24 May 2025 00:59:27 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 1292783409; Sat, 24 May 2025 00:59:29 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 707638338C
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD72B8333D
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-b26ee6be1ecso214793a12.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:25 -0700 (PDT)
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-742c3d06de3so542315b3a.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748041164; x=1748645964; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748041165; x=1748645965; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yq5wgqbMAs0DcqXSGyjpyUTajIBzFtmL7NdeuCP05UU=;
- b=JsbYuk0emS8GrlxZei45tUw9NKnD4MOZOjN9B3LLSOE0oXKN5M74SkfaccMYV2b8Zw
- /nym6cwU/m+TNZSub7X71HJEYSk0k4izP3M8AG8yfiZHnfx7gwE/ssIqJE6ciZuOwHnm
- Eb5xBB/3iw8OFCG4Bp+okmXbyoaMlGSX+vNN0=
+ bh=6dEkOebyHIW5sFbRQIjVlRYoEAWWpj+eXL/AHGOvwbs=;
+ b=fIG/prfSYYM984o6w431nfuDpv2bJ9CVyMzP2iQpF5uLr1Mmd2srX7VEnK+efRipKr
+ /imdmbAT+MdRxG+3g72A4nF6qg11voWB9YKPwiOB2Auvbb537GMeV5GL8j5nBXzixs9s
+ r9ojqLCtJVQF00pkAokdK65fdB9fXafOLSgqc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748041164; x=1748645964;
+ d=1e100.net; s=20230601; t=1748041165; x=1748645965;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yq5wgqbMAs0DcqXSGyjpyUTajIBzFtmL7NdeuCP05UU=;
- b=rAO9BvaVQYGhHmO/jBc5u0rWmdw9YbQQdX8MlmUHqVKKkOQQDoL4R0QDkDAqW8fkCH
- zsSE06X5Lzkb17zX6og2qKR1V1z/EU2OGV7k7CtaJGsfmGbJpOfso/1TAY6EGxdAQZBr
- 1hZEDkaMk2VX91KMXaQOxiX2hZjXjF2ybqGn9BTPKdmSPHxwlo3hwU1D6MUwkD6sk3RP
- zENw8iE8zG/OA0tWqVV4sUJ8KWniGzhXmT8lBg7Z1VzdZGa0WZlASCPDKW1RuKRyFPQx
- NEVlGz7OcaTfK5D9DlpMBNqJmVhP/lcf+rtnHQbScwDRcw99jQjzO7PvVL6Xs6bQFDhc
- 6iCA==
-X-Gm-Message-State: AOJu0YyJyb8NsvrDKcS2y10JueDm+Wi832gkjJj9eE4G4FA71OrWO6PO
- nNGWAGDvbNB/H/dMcTprMq2VV5lNA/LjlOWonbI8WKw05PckUyp89ng2dXbZL375cD83JzPUmuE
- /u9c=
-X-Gm-Gg: ASbGncv6zo6Z9TlpPHH8j5ho3GP8U/o8/anwZ3XI7WalP66xWqs8VRvAzQcU2U7BUUc
- 1lxmb8HGAO9AJOIjONIltdDjbBHwu8qfyVhEVaualXn7MhqpmbgT1/3B3HOAVF5RjMIM+oNs9sO
- awJkMmDFMBirHD612aISsIY18WLknlbmCfGQ3LV1WKYvcqsAXdP6g+xJ1nM9bpx0y7IxLd1wF6p
- xLVr3DQWoIs7ce7uBXIt3hqhrlJAumaKAFag39ZtVIzn3vkOxECuIsdjGOIsxMmNqYQPciwm8an
- Qt0xbAnJbZjE+0rDOUiZqhBgI5y7Nl12LDP5x8ooniXcP63nESCK2kiuQ8llbvPcyd8K67P0o/F
- 1DhM5+OXJ2fPZVWc=
-X-Google-Smtp-Source: AGHT+IH6V5Uk7SdbHkeznbtJ+ylIW0UaJ9gd/eiayGpQwaF8gXftI5nGcYr7ol/1ADaecctZUPmAXg==
-X-Received: by 2002:a17:902:d4c8:b0:22f:b040:9751 with SMTP id
- d9443c01a7336-23414fce4eamr16408815ad.45.1748041163786; 
- Fri, 23 May 2025 15:59:23 -0700 (PDT)
+ bh=6dEkOebyHIW5sFbRQIjVlRYoEAWWpj+eXL/AHGOvwbs=;
+ b=n/hwR00t7T5xyKZS1fNu8YhazplwZt8ocioU93X/KPL7tHRbirjL1/gFdN3g5M47td
+ hj9XWeRGccSF0lwcLpfv70swPtcuRaEllH6RWKwFaBzRQWCC/XYrUooXSZxnVXzK6K5/
+ YFW8x+w902VGewDKfUkm4fWuG7/6qQwSpqth094fIorwoAOd4L1EMH7gku+l5vC5B2Qm
+ 9xMRyZrFlLLjkqSr0fi7XR1yNNz9v9hirJTW6JIRfSCdCF8XtqD5C0mmEWfgrCX4swoP
+ epQN3obiqKOJEykTfpS17U2pQrYmhr/d6HOJEbODEYCRghMueiCLgu6vEh/ZDoS8+N5D
+ 2sFQ==
+X-Gm-Message-State: AOJu0YyJOuRvXzvr1KKPTPAEidgwwKoz2Cvmo+9EqZDGIiE8fLlYebeh
+ e6quKWBXTwYfkaaR3C+QYoIBuJIUPTQBRVr7fN+KKMHEqXhLjvUEU9YrR9NVgjycxArMRYhbltj
+ Kx24=
+X-Gm-Gg: ASbGncvKGEGcJTfLJ6KqbscebJ/KKgJAgHb5KUHc/lNKCCBhr4umhcEYX7JVnEDmqiK
+ bTF0JaY++0fGwT1wBxOz0wsyt96DqRx/ZZ68YG/BKhCLYZyUr1QSQ1movt58UpZwvSKdkTcanFd
+ irh3nhVtKQV0Ki+d1AR57fW2hhV9PRHctJUhlgj55pwoWgQve6cbGcYh/IKgysjh8rOOt+GCoWp
+ MXFsU71UMOVbarxVJhxVa1HBP/YBpnZJSVSvA0mOgjbMHSfsKBWxRwzsOIiM3qKcm01LnCSjUG5
+ CfSW4g+tWTNyPgMJq3Zm+DI4AyT37rw0mcv6x5UrDEj2yZt7gTBSuoE6vYTBUySOAzLCw7K1o8R
+ CWWehA1lpWFnYnQE=
+X-Google-Smtp-Source: AGHT+IHTEFl3LscnNS+tPJtkdQEWXX5kvPF8C4qt63RD2r6v7FW1v5gMraNUab2NyT2KQiIVrBKU7g==
+X-Received: by 2002:a05:6a00:1822:b0:736:31cf:2590 with SMTP id
+ d2e1a72fcca58-745fe064383mr1864347b3a.16.1748041165317; 
+ Fri, 23 May 2025 15:59:25 -0700 (PDT)
 Received: from localhost (188.139.125.34.bc.googleusercontent.com.
  [34.125.139.188]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-231d4eba220sm128152755ad.165.2025.05.23.15.59.22
+ d2e1a72fcca58-742a9876e7asm13640846b3a.145.2025.05.23.15.59.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 23 May 2025 15:59:23 -0700 (PDT)
+ Fri, 23 May 2025 15:59:24 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,10 +77,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v4 24/28] board: google: Add board_debug_uart_init() for
- Trogdor
-Date: Fri, 23 May 2025 15:58:39 -0700
-Message-ID: <20250523225845.2311989-25-swboyd@chromium.org>
+Subject: [PATCH v4 25/28] cmd: ximg: Support LZO compressed images
+Date: Fri, 23 May 2025 15:58:40 -0700
+Message-ID: <20250523225845.2311989-26-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
 In-Reply-To: <20250523225845.2311989-1-swboyd@chromium.org>
 References: <20250523225845.2311989-1-swboyd@chromium.org>
@@ -103,91 +102,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement board_debug_uart_init() for Trogdor boards so that the debug
-UART can be used. Initialize the clk to XO speed (19.2MHz) and change
-the pin configuration to mux out the uart hardware on the pins that are
-connected to the closed case debug (CCD) port for the AP. This is enough
-to get the early debug console working on boards like Lazor, but it
-should work for all Google Trogdor boards.
+Add support to decompress LZO images.
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- board/google/trogdor/Makefile     |  3 +++
- board/google/trogdor/debug.config |  6 +++++
- board/google/trogdor/debug_uart.c | 41 +++++++++++++++++++++++++++++++
- 3 files changed, 50 insertions(+)
- create mode 100644 board/google/trogdor/Makefile
- create mode 100644 board/google/trogdor/debug.config
- create mode 100644 board/google/trogdor/debug_uart.c
+ cmd/ximg.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/board/google/trogdor/Makefile b/board/google/trogdor/Makefile
-new file mode 100644
-index 000000000000..fd2933cf1e6f
---- /dev/null
-+++ b/board/google/trogdor/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0
+diff --git a/cmd/ximg.c b/cmd/ximg.c
+index 29d7c3279b39..a6341a078019 100644
+--- a/cmd/ximg.c
++++ b/cmd/ximg.c
+@@ -14,6 +14,9 @@
+ #include <cpu_func.h>
+ #include <env.h>
+ #include <gzip.h>
++#if IS_ENABLED(CONFIG_LZO)
++#include <linux/lzo.h>
++#endif
+ #if IS_ENABLED(CONFIG_ZSTD)
+ #include <linux/zstd.h>
+ #endif
+@@ -238,6 +241,18 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 			}
+ 			break;
+ #endif /* CONFIG_BZIP2 */
++#if IS_ENABLED(CONFIG_LZO)
++		case IH_COMP_LZO:
++			{
++				int ret;
++				size_t size = unc_len;
++				printf("   Uncompressing part %d ... ", part);
 +
-+obj-$(CONFIG_DEBUG_UART_BOARD_INIT) += debug_uart.o
-diff --git a/board/google/trogdor/debug.config b/board/google/trogdor/debug.config
-new file mode 100644
-index 000000000000..7d8a6706a92e
---- /dev/null
-+++ b/board/google/trogdor/debug.config
-@@ -0,0 +1,6 @@
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0xa88000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=36864000
-+CONFIG_DEBUG_UART_BOARD_INIT=y
-diff --git a/board/google/trogdor/debug_uart.c b/board/google/trogdor/debug_uart.c
-new file mode 100644
-index 000000000000..3d15d0d77728
---- /dev/null
-+++ b/board/google/trogdor/debug_uart.c
-@@ -0,0 +1,41 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+#include <asm/io.h>
-+#include <debug_uart.h>
-+#include <linux/delay.h>
-+
-+/*
-+ * Enable the UART8 clks and pinctrl settings for SC7180.
-+ *
-+ * The debug UART goes out over CCD. The debug uart clk setting is 36864000 to
-+ * make the buad rate calculation come out properly for the qcom geni serial
-+ * driver.
-+ */
-+void board_debug_uart_init(void)
-+{
-+	u32 val, mask;
-+	unsigned int timeout = 100;
-+
-+	/* Enable wrap1_s2 clk */
-+	val = readl(0x100000 + 0x52008);
-+	val |= BIT(24);
-+	writel(val, 0x100000 + 0x52008);
-+	/* Wait for enable */
-+	do {
-+		val = readl(0x100000 + 0x18274);
-+		mask = GENMASK(30, 28) | BIT(31);
-+		val &= mask;
-+		if ((val & BIT(31)) == 0 || ((val >> 28) & 7) == 1)
++				ret = lzop_decompress((void *)data, len, (void *)dest, &size);
++				len = size;
++			}
 +			break;
-+		udelay(10);
-+	} while (timeout--);
-+
-+	/*
-+	 * Configure GPIOs
-+	 * Bits: 0-1 = pull
-+	 * Bits: 2-4 = func
-+	 * Bits: 6-8 = drive strength
-+	 */
-+	writel(0x3 | (1 << 2), 0x3900000 + (0x1000 * 44)); // Pin 44 - PULL_UP, func1 (qup12), 2ma
-+	writel(0x3 | (1 << 2), 0x3900000 + (0x1000 * 45)); // Pin 45 - PULL_UP, func1 (qup12), 2ma
-+}
++#endif /* CONFIG_LZO */
+ #if IS_ENABLED(CONFIG_ZSTD)
+ 		case IH_COMP_ZSTD:
+ 			{
 -- 
 Sent by a computer, using git, on the internet
 
