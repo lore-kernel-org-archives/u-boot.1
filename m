@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8CB8C54F2E
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:44:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 403CCC54F2E
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:48:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20E31832EA;
-	Fri, 23 May 2025 15:44:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AB9AD83285;
+	Fri, 23 May 2025 15:48:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fpeMkfA5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kaG5/pX8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD2D0832A4; Fri, 23 May 2025 15:44:28 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 90FA48329B; Fri, 23 May 2025 15:48:30 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C32B5832C0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:44:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FC6D83264
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:48:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ace94273f0dso1615199966b.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:44:26 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ad56cbc7b07so822822566b.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:48:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748007866; x=1748612666; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748008108; x=1748612908; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4jrGUoU+0v/HS0B8AXmjH0k4GUk55RrU1X9GksRGdnY=;
- b=fpeMkfA5qDxAQBZ+0ssllCqadpmCxcXsdNkmieu/ixFaUKlLZ35Hqk0tNHn/hF+Gsq
- 4mH2JzJvpu3dAHZbJsO+V/4RyQFjY1w8e8l0bYDrFGnhjLOOI01XnP+f8G9U234DUBIS
- 5qnm2bOv3P7nyxA9Z/+6/ywVuxeoPU8mYNojc=
+ bh=krPPjQXn33wgBAcAOml2hJeJxPVWG4IV5CoyfVRXZoU=;
+ b=kaG5/pX8iCt2rDRY/XwgjAH2tjhxa5Lg5mjze1XBLZLAnPdQPmvsu71Vt96zgm8nkJ
+ iKD3SjurDbHzfKEpvEQevWKQH2cZVlEaUtIAKVB/bEC3lZ+e4uU7eZKRopOBxSmPBr3y
+ 1eoNfGpSArnLX5QYcWWh+KkvxEaFzojVP0fKM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748007866; x=1748612666;
+ d=1e100.net; s=20230601; t=1748008108; x=1748612908;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4jrGUoU+0v/HS0B8AXmjH0k4GUk55RrU1X9GksRGdnY=;
- b=euOde9TX5g2QsAkOMP7gZquE/KHjVJ/V4d9epDFfbAHjxplXMUM2oByTcdaSdZTg6d
- L7ZTlQprn1Iztuv/NKFw7Q9qVRZ5eS7YojV0GyFjy2cE8ey3zKmdqMEgPlEBRpeDlR34
- oGRxNfnHk8vwWSlO59/2rvhfWx6lQuWgVVsuETJUGmuHY8wtllcAB5WEWsxnTAjLj9ai
- 84Vho86igRBX9mCpqxzTJn6dGVVJUgxs3vyVAK5WvEisVuVa92pW9c+ePEotj/QGnuEM
- Ju5wiPY5Ofx4kNZi06eOouBNgHNieNAW4hgym7bYDsaN/IlNU42Ob6PbKNGLzc3gN5/X
- yQoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWBM7vT1/UWTaUFlOOwD0bjjrpanQ5E2hTJWGv7ao6hmgowxkqChCL7pyT0onOgXByBeh8iGN8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxxUkyZOCWsaBYNXGMYD5mf7zrOMqY3B8YCORmg3mtcw46Ok1y1
- kfArN3LXm4FoAPyO3WdHmN6RkzlgmOpEIzKCn5/jq/CaaDgRnKAbrffPH8bGOiIMDDErdz9qtbi
- 0zeQtHZLn62mAGuVpRiDfkKTnu9ahUGhlxrvQj8EK
-X-Gm-Gg: ASbGncvEh+xCoEzDQqBsKy4PNdYpdS6VP9sQBn5fk7YZdETupYhd9sI1TWYmJW5YHIH
- 9O31S2YBF7LNDvks7jUUMLCoGDaOfRvKYcCQdC0SD1B5MK8+Q+NEFC1ynJyygKK9SZZm+7tOub0
- 8OKP7fZ6Xs2Zfoy+/wrWqXKhyjogk0mdHygg==
-X-Google-Smtp-Source: AGHT+IHTPzzqD3znu4ZC7VSh+FOMp0zHBLiWi0mdoO7mSBYqhrt/2KyazwaCAi/adv6OpgAf7+VmKIcoJuYIvOW1qcU=
-X-Received: by 2002:a17:907:3f29:b0:ad4:f5ee:3c0 with SMTP id
- a640c23a62f3a-ad7083bb71dmr313264266b.16.1748007866156; Fri, 23 May 2025
- 06:44:26 -0700 (PDT)
+ bh=krPPjQXn33wgBAcAOml2hJeJxPVWG4IV5CoyfVRXZoU=;
+ b=oqT9Bo3RRbK61XsQi1BeABxOzELXhtRvffDYy6pYNAjRghq9s3h4Iyv6nx1wVj7XfD
+ YEqn4xtSC+S3ehRnNQuImNlWMxrQUFt/E/7ylsB+O5P5zuxN1ptU99HkvRNWPRwNMT2v
+ wPk8EgfAGvd3XUiW9kLwvh9EBTbfaTTpUldnlug7H3XzTFyEcq7ugbGWE04ZqCwoJAPV
+ dv362xAhDa2JTc4rZud78Ho/NxNilSkDXemsADQgsScJgCeKWeAtanfgRW54D4myrCWL
+ xtDlyU5h5sd6UYqew5PJNAJiQQtFkCu8ZS/yqDO/zW+QoJP77qUzde+opDhnfUz+eYGy
+ c4eg==
+X-Gm-Message-State: AOJu0Ywe0aQGvRW0EjFm0dh2Gz+BvFBMVFwUqIn+BzvRb56vOFStJsf8
+ Gxam83kk+Ibk1JMKqNB+06Cxm9GgpDEpRbG3d+B9wbgullOna3GOXzNP1LLPpBQ7Qhrrfi9P8nx
+ cAYSxMStWnb73OywnbqjITD5Wd7itiZ8dn0viw+kTwt0L1Jzlq2GM3kiv
+X-Gm-Gg: ASbGncsW+OXBjYljApkmBlcVWREHDSPKxSZGY/oxMu4Bi8v7ubHBx+DIJsjRRoHzvTi
+ ieKmBBzaK476MxQQtsEju6NBx2LXWHxjhl3D+dMnimPKUYt2hRRShWQu8tNJ84EF/tfBGO/oS07
+ 7JPsLNau2yfVMGZP8CBZvKswj4TmTm5CbCSw==
+X-Google-Smtp-Source: AGHT+IEHX1DzEKU/efrFLoXpkRjEbmp5pd6G857t0eLsK5FzJOc5Y7PMcC/GM11UbkBBKcJEzJZIiWd693ImrMlbLzw=
+X-Received: by 2002:a17:906:7310:b0:ac7:edfb:5210 with SMTP id
+ a640c23a62f3a-ad7083b2d65mr272378466b.20.1748008107959; Fri, 23 May 2025
+ 06:48:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <qGUwuf16r8DyviFIr-y8PVzG36Fp4Q9yiMZWn6l1V7dsu9-OmwHLFXXKEOOZHdQNBFxW6SB8tU5jL3MzuDmxq0SRl1lELPpnwJqcKMqPeZY=@protonmail.com>
- <682d44f6.250a0220.1eefc.291d@mx.google.com>
-In-Reply-To: <682d44f6.250a0220.1eefc.291d@mx.google.com>
+References: <20250520203515.25839-1-dev@benjarobin.fr>
+In-Reply-To: <20250520203515.25839-1-dev@benjarobin.fr>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 23 May 2025 14:44:12 +0100
-X-Gm-Features: AX0GCFvtiG6MY9zFKKawb3pI_pXTlXClJFw1ybd0L3HIJOKMmsWN4Ku0RqVgnC4
-Message-ID: <CAFLszTgbS=rxLUXRq7+pdfVvace_KbYzdGmReFJZmirA0wVZ3Q@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] BeagleBoard: Bring it back with updates.
-To: "Derald D. Woods" <woods.technical@gmail.com>
-Cc: OMAP at BSF <omapbsf@protonmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Date: Fri, 23 May 2025 14:48:15 +0100
+X-Gm-Features: AX0GCFufpUSLa5l5_li6NLSWLSBF9ZHPg5CfMz0sF5jazzq3ATqFD-UQGXtc3FA
+Message-ID: <CAFLszTigMGxSjxPZ44BUx4WoWqVdNY3p6AeQwy3xK3gJ+VccTw@mail.gmail.com>
+Subject: Re: [PATCH v2] bootm: Fix bmi->images pointer not initialized in some
+ cases
+To: Benjamin ROBIN <dev@benjarobin.fr>
+Cc: u-boot@lists.denx.de, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,73 +86,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Hi,
+Hi Benjamin,
 
-On Wed, 21 May 2025 at 05:14, Derald D. Woods <woods.technical@gmail.com> wrote:
+On Tue, 20 May 2025 at 22:35, Benjamin ROBIN <dev@benjarobin.fr> wrote:
 >
-> On Sat, May 17, 2025 at 09:28:00PM +0000, OMAP at BSF wrote:
-> > * Converted to using DM_I2C.
-> > * New config file for xM.
-> > * Run 'patman' on patches.
-> > * Use upstream device tree files.
-> >
-> > Signed-off-by: Steven Hill <omapbsf@protonmail.com>
-> > ---
-> > v2: Use upstream device trees.
-> > v3: No change.
-> > v4: Update name in MAINTAINERS file.
-> >
-> > ---
-> >  arch/arm/dts/Makefile                       |   9 +
-> >  arch/arm/dts/omap3-beagle-u-boot.dtsi       |  14 +
-> >  arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi |  14 +
-> >  arch/arm/dts/omap3-beagle-xm-u-boot.dtsi    |  14 +
-> >  arch/arm/dts/omap3-u-boot.dtsi              |  34 +-
-> >  arch/arm/include/asm/arch-omap3/cpu.h       |   3 +-
-> >  arch/arm/include/asm/arch-omap3/hardware.h  |  22 +
-> >  arch/arm/include/asm/arch-omap3/mem.h       |   8 +-
-> >  arch/arm/mach-omap2/omap3/Kconfig           |  14 +
-> >  board/beagle/beagle/Kconfig                 |  14 +
-> >  board/beagle/beagle/MAINTAINERS             |   7 +
-> >  board/beagle/beagle/Makefile                |   7 +
-> >  board/beagle/beagle/beagle.c                | 541 +++++++++++++++++++
-> >  board/beagle/beagle/beagle.h                | 545 ++++++++++++++++++++
-> >  board/beagle/beagle/led.c                   |  70 +++
-> >  board/isee/igep00x0/spl.c                   |   6 +-
-> >  board/lg/sniper/sniper.c                    |   2 +-
-> >  board/logicpd/omap3som/omap3logic.c         |   4 +-
-> >  board/ti/omap3evm/evm.c                     |   2 +-
-> >  board/timll/devkit8000/devkit8000.c         |   2 +-
-> >  configs/omap3_beagle_defconfig              | 124 +++++
-> >  configs/omap3_beagle_xm_defconfig           | 109 ++++
-> >  include/configs/omap3_beagle.h              | 201 ++++++++
+> When building with only bootz command, without bootm, images pointer
+> inside bootm_info structure is not initialized. And since this structure
+> is stored in stack, the generated error is kind of random, but most of
+> the time this will generate: "ramdisk - allocation error".
+>
+> Also, after analysis, this problem could occur with the command booti,
+> if the command bootm is disabled.
+>
+> Currently bootm_init() is called by: do_bootz(), do_bootm(), do_booti()
+> and by do_stm32prog(). And all of these commands execute bootm_run_states()
+> which access the images pointer stored into bootm_info structure.
+>
+> So, to fix this issue, just do the assignment unconditionally.
+>
+> Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
+> Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
+> ---
+>  boot/bootm.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index f6aa32746b7e..108ca7fb472e 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -1169,8 +1169,7 @@ void bootm_init(struct bootm_info *bmi)
+>  {
+>         memset(bmi, '\0', sizeof(struct bootm_info));
+>         bmi->boot_progress = true;
+> -       if (IS_ENABLED(CONFIG_CMD_BOOTM))
+> -               bmi->images = &images;
+> +       bmi->images = &images;
 
-Please also move to bootstd and text environment.
+In my tree I have:
 
-> >  23 files changed, 1736 insertions(+), 30 deletions(-)
-> >  create mode 100644 arch/arm/dts/omap3-beagle-u-boot.dtsi
-> >  create mode 100644 arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi
-> >  create mode 100644 arch/arm/dts/omap3-beagle-xm-u-boot.dtsi
-> >  create mode 100644 arch/arm/include/asm/arch-omap3/hardware.h
-> >  create mode 100644 board/beagle/beagle/Kconfig
-> >  create mode 100644 board/beagle/beagle/MAINTAINERS
-> >  create mode 100644 board/beagle/beagle/Makefile
-> >  create mode 100644 board/beagle/beagle/beagle.c
-> >  create mode 100644 board/beagle/beagle/beagle.h
-> >  create mode 100644 board/beagle/beagle/led.c
-> >  create mode 100644 configs/omap3_beagle_defconfig
-> >  create mode 100644 configs/omap3_beagle_xm_defconfig
-> >  create mode 100644 include/configs/omap3_beagle.h
+if (IS_ENABLED(CONFIG_CMD_BOOTM) || IS_ENABLED(CONFIG_CMD_BOOTZ) ||
+    IS_ENABLED(CONFIG_CMD_BOOTI) || IS_ENABLED(CONFIG_PXE_UTILS))
 
-Some other things I noticed:
+but it seems that the few boards that didn't include boot/bootm.c have
+been dropped, so your patch is fine.
 
-Board detection in a SYSINFO driver
-Use DM_I2C always (drop dead code)
-Use DM_GPIO always
-Use a PMIC driver instead of manual access
-Use an I2C EEPROM driver instead of manually coding the I2C access
-Use a GPIO driver for TWL4030
-Is there a pinctrl driver?
+>  }
+>
+>  /**
+> --
+> 2.49.0
+>
 
 Regards,
 Simon
