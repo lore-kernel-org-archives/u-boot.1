@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35747C54F2E
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8CB8C54F2E
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:44:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3AD183285;
-	Fri, 23 May 2025 15:44:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20E31832EA;
+	Fri, 23 May 2025 15:44:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OLydBEgv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fpeMkfA5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5501583264; Fri, 23 May 2025 15:44:22 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id BD2D0832A4; Fri, 23 May 2025 15:44:28 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 452DD83264
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:44:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C32B5832C0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:44:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-601dbd75b74so9277520a12.1
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:44:20 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ace94273f0dso1615199966b.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:44:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748007860; x=1748612660; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748007866; x=1748612666; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vjmFbrAZos6SLYt7ryqbjEw7q+hODHBfiC/RtVU8GVY=;
- b=OLydBEgvgElUruvfD7wsCEFT/ax1hqCGVm0YHDIcCSS5O0tV7yuPwx6TYeNvJQPEh2
- SJ5LCos32Tecbc1FOEJluuN7jeYmcpF7aY1eDrKa4H7LXBGajnKAP5auKukyaui5BYaH
- /2mJyhBbfyOPP1MayJz4S1GyNFIvYDqEcaUds=
+ bh=4jrGUoU+0v/HS0B8AXmjH0k4GUk55RrU1X9GksRGdnY=;
+ b=fpeMkfA5qDxAQBZ+0ssllCqadpmCxcXsdNkmieu/ixFaUKlLZ35Hqk0tNHn/hF+Gsq
+ 4mH2JzJvpu3dAHZbJsO+V/4RyQFjY1w8e8l0bYDrFGnhjLOOI01XnP+f8G9U234DUBIS
+ 5qnm2bOv3P7nyxA9Z/+6/ywVuxeoPU8mYNojc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748007860; x=1748612660;
+ d=1e100.net; s=20230601; t=1748007866; x=1748612666;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vjmFbrAZos6SLYt7ryqbjEw7q+hODHBfiC/RtVU8GVY=;
- b=GITWlHzUBjbVYR47KayuoMEXthBTkxxEqZTCb+ZTupCgrzPVnpchjpd3kDOlua/wgO
- ZBVNvqsE0Tpa2sOLIIrHdZnOFTLxWhnT1gZfJb/mv+vdCXWGHuzECl6cmLRxCUMPJB5Q
- xbvmJyAOWXlch6EGJzuJ1QwQa2tI8b3g5O878sDhqGLYMoFpXv8kyjQJy9Qyqf8S2PQ9
- jvZEnntWnM9mCqn/HtAn8IQWa5KdQtsq8S0PP41M9vwuN1n4q445iNnf5YW3OtWyyTyL
- aGrSUtUhCPK08Hk33av6mXDgVg0U4hd5vm/iZZHb+hVl65fsdTL1zvH6Ebny+GaS3sdb
- aajQ==
-X-Gm-Message-State: AOJu0YwGaccrrf6g7It6JwCEENpjHn2CSfPwji803UHNTcQ8oAGp/MeC
- VTMSpJn0h7XRj18WwuN0d7hDwsFXuNAh56o0SG+KFsGl3L8dkN6BUYSeypdzLJUVCGqf+jDYCmI
- RQ11b8kF0UXVaEoexBYUA18nhZxujmnNP2lK/r1Jx
-X-Gm-Gg: ASbGncv3/bjdDpw4wujAeEiSf/5ZqXWLEDm2rR8Q8mM97nsY+8YMsaakXA0v455n5PE
- 38ff2aiQ3hPSuQym70E7zqY2eGcKzQOU7tmoqEAHD9v1sW90tGQtow8iekpv+b/qaNXhV8xLsm6
- TUdTHSakYNU3nTeYnAU7bJuzyKHw8gXVbSFA==
-X-Google-Smtp-Source: AGHT+IFMu7gaCETyvZl2F9ELcnP5wWrzU/5NptcaZJw11TjFmWoMjdic0Dp4zyvigAeJ3qgPqZ5is5+UGf7Im4jjG1A=
-X-Received: by 2002:a17:907:7da2:b0:ad2:2ef3:cc1b with SMTP id
- a640c23a62f3a-ad536b7bd28mr2637723866b.7.1748007859735; Fri, 23 May 2025
- 06:44:19 -0700 (PDT)
+ bh=4jrGUoU+0v/HS0B8AXmjH0k4GUk55RrU1X9GksRGdnY=;
+ b=euOde9TX5g2QsAkOMP7gZquE/KHjVJ/V4d9epDFfbAHjxplXMUM2oByTcdaSdZTg6d
+ L7ZTlQprn1Iztuv/NKFw7Q9qVRZ5eS7YojV0GyFjy2cE8ey3zKmdqMEgPlEBRpeDlR34
+ oGRxNfnHk8vwWSlO59/2rvhfWx6lQuWgVVsuETJUGmuHY8wtllcAB5WEWsxnTAjLj9ai
+ 84Vho86igRBX9mCpqxzTJn6dGVVJUgxs3vyVAK5WvEisVuVa92pW9c+ePEotj/QGnuEM
+ Ju5wiPY5Ofx4kNZi06eOouBNgHNieNAW4hgym7bYDsaN/IlNU42Ob6PbKNGLzc3gN5/X
+ yQoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWBM7vT1/UWTaUFlOOwD0bjjrpanQ5E2hTJWGv7ao6hmgowxkqChCL7pyT0onOgXByBeh8iGN8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxUkyZOCWsaBYNXGMYD5mf7zrOMqY3B8YCORmg3mtcw46Ok1y1
+ kfArN3LXm4FoAPyO3WdHmN6RkzlgmOpEIzKCn5/jq/CaaDgRnKAbrffPH8bGOiIMDDErdz9qtbi
+ 0zeQtHZLn62mAGuVpRiDfkKTnu9ahUGhlxrvQj8EK
+X-Gm-Gg: ASbGncvEh+xCoEzDQqBsKy4PNdYpdS6VP9sQBn5fk7YZdETupYhd9sI1TWYmJW5YHIH
+ 9O31S2YBF7LNDvks7jUUMLCoGDaOfRvKYcCQdC0SD1B5MK8+Q+NEFC1ynJyygKK9SZZm+7tOub0
+ 8OKP7fZ6Xs2Zfoy+/wrWqXKhyjogk0mdHygg==
+X-Google-Smtp-Source: AGHT+IHTPzzqD3znu4ZC7VSh+FOMp0zHBLiWi0mdoO7mSBYqhrt/2KyazwaCAi/adv6OpgAf7+VmKIcoJuYIvOW1qcU=
+X-Received: by 2002:a17:907:3f29:b0:ad4:f5ee:3c0 with SMTP id
+ a640c23a62f3a-ad7083bb71dmr313264266b.16.1748007866156; Fri, 23 May 2025
+ 06:44:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250522011749.3498970-1-paulliu@debian.org>
- <20250522011749.3498970-4-paulliu@debian.org>
-In-Reply-To: <20250522011749.3498970-4-paulliu@debian.org>
+References: <qGUwuf16r8DyviFIr-y8PVzG36Fp4Q9yiMZWn6l1V7dsu9-OmwHLFXXKEOOZHdQNBFxW6SB8tU5jL3MzuDmxq0SRl1lELPpnwJqcKMqPeZY=@protonmail.com>
+ <682d44f6.250a0220.1eefc.291d@mx.google.com>
+In-Reply-To: <682d44f6.250a0220.1eefc.291d@mx.google.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 23 May 2025 14:44:08 +0100
-X-Gm-Features: AX0GCFvKoYN4DQZfs8LD_7slbvSxfRVwcsI5BGNt6t8ONWCEMMhit__x-l8ctnw
-Message-ID: <CAFLszTjBDedSGTOLGy4w41+sG2H9yDBCSPcYwUhmWi52myjBoA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] lib: efi_loader: efi_memory.c: add efi_realloc()
- for realloc memory
-To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 23 May 2025 14:44:12 +0100
+X-Gm-Features: AX0GCFvtiG6MY9zFKKawb3pI_pXTlXClJFw1ybd0L3HIJOKMmsWN4Ku0RqVgnC4
+Message-ID: <CAFLszTgbS=rxLUXRq7+pdfVvace_KbYzdGmReFJZmirA0wVZ3Q@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] BeagleBoard: Bring it back with updates.
+To: "Derald D. Woods" <woods.technical@gmail.com>
+Cc: OMAP at BSF <omapbsf@protonmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,118 +89,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+ Hi,
 
-On Thu, 22 May 2025 at 03:18, Ying-Chun Liu (PaulLiu)
-<paulliu@debian.org> wrote:
+On Wed, 21 May 2025 at 05:14, Derald D. Woods <woods.technical@gmail.com> wrote:
 >
-> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
->
-> Add efi_realloc() for realloc memory that previously alloc by efi_alloc().
->
-> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> ---
->  include/efi_loader.h        |  2 ++
->  lib/efi_loader/efi_memory.c | 52 +++++++++++++++++++++++++++++++++++++
->  2 files changed, 54 insertions(+)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index d0c72d0bc58..ff7ca5a0480 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -878,6 +878,8 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
->  #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
->  /* Allocate boot service data pool memory */
->  void *efi_alloc(size_t len);
-> +/* Reallocate boot service data pool memory */
-> +void *efi_realloc(void *ptr, size_t len);
->  /* Allocate pages on the specified alignment */
->  void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
->  /* More specific EFI memory allocator, called by EFI payloads */
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 0abb1f6159a..4c76df642dc 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -666,6 +666,58 @@ void *efi_alloc(size_t size)
->         return buf;
->  }
->
-> +/**
-> + * efi_realloc() - reallocate boot services data pool memory
-> + *
-> + * Reallocate memory from pool for a new size and copy the data from old one.
-> + *
-> + * @ptr:       pointer to old buffer
-> + * @size:      number of bytes to allocate
-> + * Return:     pointer to allocated memory or NULL
-> + */
+> On Sat, May 17, 2025 at 09:28:00PM +0000, OMAP at BSF wrote:
+> > * Converted to using DM_I2C.
+> > * New config file for xM.
+> > * Run 'patman' on patches.
+> > * Use upstream device tree files.
+> >
+> > Signed-off-by: Steven Hill <omapbsf@protonmail.com>
+> > ---
+> > v2: Use upstream device trees.
+> > v3: No change.
+> > v4: Update name in MAINTAINERS file.
+> >
+> > ---
+> >  arch/arm/dts/Makefile                       |   9 +
+> >  arch/arm/dts/omap3-beagle-u-boot.dtsi       |  14 +
+> >  arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi |  14 +
+> >  arch/arm/dts/omap3-beagle-xm-u-boot.dtsi    |  14 +
+> >  arch/arm/dts/omap3-u-boot.dtsi              |  34 +-
+> >  arch/arm/include/asm/arch-omap3/cpu.h       |   3 +-
+> >  arch/arm/include/asm/arch-omap3/hardware.h  |  22 +
+> >  arch/arm/include/asm/arch-omap3/mem.h       |   8 +-
+> >  arch/arm/mach-omap2/omap3/Kconfig           |  14 +
+> >  board/beagle/beagle/Kconfig                 |  14 +
+> >  board/beagle/beagle/MAINTAINERS             |   7 +
+> >  board/beagle/beagle/Makefile                |   7 +
+> >  board/beagle/beagle/beagle.c                | 541 +++++++++++++++++++
+> >  board/beagle/beagle/beagle.h                | 545 ++++++++++++++++++++
+> >  board/beagle/beagle/led.c                   |  70 +++
+> >  board/isee/igep00x0/spl.c                   |   6 +-
+> >  board/lg/sniper/sniper.c                    |   2 +-
+> >  board/logicpd/omap3som/omap3logic.c         |   4 +-
+> >  board/ti/omap3evm/evm.c                     |   2 +-
+> >  board/timll/devkit8000/devkit8000.c         |   2 +-
+> >  configs/omap3_beagle_defconfig              | 124 +++++
+> >  configs/omap3_beagle_xm_defconfig           | 109 ++++
+> >  include/configs/omap3_beagle.h              | 201 ++++++++
 
-Should go in header file
+Please also move to bootstd and text environment.
 
-> +void *efi_realloc(void *ptr, size_t size)
-> +{
-> +       efi_status_t ret;
-> +       void *new_ptr;
-> +       struct efi_pool_allocation *alloc;
-> +       u64 num_pages = efi_size_in_pages(size +
-> +                                         sizeof(struct efi_pool_allocation));
-> +       size_t old_size;
-> +
-> +       if (!ptr)
-> +               return efi_alloc(size);
-> +
-> +       ret = efi_check_allocated((uintptr_t)ptr, true);
-> +       if (ret != EFI_SUCCESS)
-> +               return ptr;
-> +
-> +       alloc = container_of(ptr, struct efi_pool_allocation, data);
-> +
-> +       /* Check that this memory was allocated by efi_allocate_pool() */
-> +       if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
-> +           alloc->checksum != checksum(alloc)) {
-> +               printf("%s: illegal realloc 0x%p\n", __func__, ptr);
-> +               return ptr;
-> +       }
-> +
-> +       /* Don't realloc. The actual size in pages is the same. */
-> +       if (alloc->num_pages == num_pages)
-> +               return ptr;
-> +
-> +       old_size = alloc->num_pages * EFI_PAGE_SIZE -
-> +               sizeof(struct efi_pool_allocation);
-> +
-> +       new_ptr = efi_alloc(size);
-> +
-> +       /* copy old data to new alloced buffer */
-> +       memcpy(new_ptr, ptr, min(size, old_size));
-> +
-> +       /* free the old buffer */
-> +       efi_free_pool(ptr);
-> +
-> +       return new_ptr;
-> +}
-> +
->  /**
->   * efi_free_pool() - free memory from pool
->   *
-> --
-> 2.39.5
->
+> >  23 files changed, 1736 insertions(+), 30 deletions(-)
+> >  create mode 100644 arch/arm/dts/omap3-beagle-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/omap3-beagle-xm-ab-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/omap3-beagle-xm-u-boot.dtsi
+> >  create mode 100644 arch/arm/include/asm/arch-omap3/hardware.h
+> >  create mode 100644 board/beagle/beagle/Kconfig
+> >  create mode 100644 board/beagle/beagle/MAINTAINERS
+> >  create mode 100644 board/beagle/beagle/Makefile
+> >  create mode 100644 board/beagle/beagle/beagle.c
+> >  create mode 100644 board/beagle/beagle/beagle.h
+> >  create mode 100644 board/beagle/beagle/led.c
+> >  create mode 100644 configs/omap3_beagle_defconfig
+> >  create mode 100644 configs/omap3_beagle_xm_defconfig
+> >  create mode 100644 include/configs/omap3_beagle.h
 
-Could you add a bit of detail as to why this patch is needed? It is
-hard to tell which code will actually use it. So long as it cannot be
-used outside lib/efi_loader then it should be OK.
+Some other things I noticed:
 
-I would like to remove most/all use of efi_alloc() so that the EFI app
-can use the standard U-Boot malloc(). I am not 100% sure about this,
-but so far it seems like the best way to support EFI booting from the
-EFI app.
-
-So if this patch is accepted, it may make it harder to reconcile
-memory allocation in U-Boot across EFI loader and app.
+Board detection in a SYSINFO driver
+Use DM_I2C always (drop dead code)
+Use DM_GPIO always
+Use a PMIC driver instead of manual access
+Use an I2C EEPROM driver instead of manually coding the I2C access
+Use a GPIO driver for TWL4030
+Is there a pinctrl driver?
 
 Regards,
 Simon
