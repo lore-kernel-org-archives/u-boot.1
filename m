@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A20E2C54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 14:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E605C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 14:08:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BB238329B;
-	Fri, 23 May 2025 16:05:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C510A8329B;
+	Fri, 23 May 2025 16:08:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qOQZ2FPN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k9SmRYzj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7AF18329C; Fri, 23 May 2025 16:05:02 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 48DB18329C; Fri, 23 May 2025 16:08:19 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E011D83285
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 16:04:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21A0983285
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 16:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-605f7d3215cso4716357eaf.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 07:04:59 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-604ad6c4cf1so3246459eaf.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 07:08:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748009098; x=1748613898; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748009296; x=1748614096; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nbWwDftIGz5yJd9K415Bsc+AmfdFI1EPNjTOtqPgLGc=;
- b=qOQZ2FPNauEFiVpE6CUF9/aLLlDQ4QWWaaTMdjVTstD3U6hIO9JA+DkweTik1Kp5Mh
- SEk1ACDHb9OHp0LFh3Bg2ERFiweAcddPh7o8ckdANZH/ScVm2IXLr9ohSFs1dMG5VNlJ
- cJBSby5rOsfYFqf3DXf9yeUcpAR+1A1/+5buI=
+ bh=F1gd81xmZj9MzIN4M8XQUiHlfDtlcLAEvg5WnAfj2bU=;
+ b=k9SmRYzjMSWISRhNyrWOi3gAQ3RMChQuybDJ71i34qngyuiNbe4Uw6d7afaqnHUqi5
+ xWSOn6k29mYYS2Twgjlys0GAfyCIyWyCu21HtRoSJ1L4tNTvcvFax2GYOAzngWpnzM2s
+ TrfAUH9zX+kIsdIIS+mc7mNdlQzVz8PfqFzI8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748009098; x=1748613898;
+ d=1e100.net; s=20230601; t=1748009296; x=1748614096;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nbWwDftIGz5yJd9K415Bsc+AmfdFI1EPNjTOtqPgLGc=;
- b=l1BF5+h0JR+C3D8OlLbO986dL9dH2lDmCAeWNVWDhzk4yiHYJgqwQej4WpuK8GDbAg
- 60MB9NdwZE2NpOh1H53PAyOTQzLe8g71EGQH06eGYfFcvMGGsMEWljInsfriPNrYioAe
- b9ep5aUvoXLlMNe70woMhI7WNfS+t/mdxYWvAkNTNBiab44ntnLlluysj4GHCO6sOJLa
- iqb18qkqUQwlOx0rL4yNidMvtXWC0WXCrVc2/xIgy3ARYRQpWVOZk4UrcSEEip38wBkm
- t5zI3LfgU3YJjej+dwDEz84uTkI1L3gp40mTc5Jq7Ijqg8MbkFanyYBFVmlgjbSCdfyG
- xBeg==
-X-Gm-Message-State: AOJu0YxIiptv4zFC/Oejnduz4J3NtO2StKhzEJJ166brst0CpSQhN6Kn
- iaqu0BkZBxusGW5HrthImigcNW8uxlA5gnxWAB93kDzXPVeHKg4eGDGis7MzMq0+hrfMAryftL7
- 9J1iBLXc=
-X-Gm-Gg: ASbGncti8olczrXLcJkXPWPO0haO6MUG98DOlK0a9R5TQUaRDDibVSqKZBvuo6323Y8
- v6gNewuP7JGym+wH3gLdbkvdyFFFrzLu/zTiG55oR+PHc+5+Rh8e+uHMPxKzrUce1O2mZb/8An6
- IzyqM4IDR5fIHxNG+L7y1dqB6udmqOjD0NfPFh5n/XIGbE2fhunZHPuuic5HxS1m3mO3azXcv/4
- th0BRLvpuGE9RdTiGiOw6WCk9nIX01uGuzay7K9+IsvzVK8PCBauGE1j5oE9xxag5YXX/waLOLj
- hwEjAuesKu6t2sKxjxfeBifCD5/+Hz5hKbQEEdZn+jwYybz7k+wpdeUbRI8wDDwl/56G6i4S8cZ
- HZlUzDVNUSR6S
-X-Google-Smtp-Source: AGHT+IGfyWF9A6FzeYSkPwTB6x7I8nbvS9W+z5PVSkKVOtDSB/Dz6lguRb+HPA/usOE5WOr+6weePA==
-X-Received: by 2002:a05:6820:c83:b0:60a:5d5:b087 with SMTP id
- 006d021491bc7-60a05d5b3b8mr16673131eaf.6.1748009098659; 
- Fri, 23 May 2025 07:04:58 -0700 (PDT)
+ bh=F1gd81xmZj9MzIN4M8XQUiHlfDtlcLAEvg5WnAfj2bU=;
+ b=B4X6LJDjuK6aaDx2FoySIoImncDBnUtzOyEGZQdquiWD3l3LQCRWqHXLJQp1MTcSzT
+ qUyIaRIdUi+W8CkPTc2hQP1XvhPGXCXxklLwGa9JG0+z1bx+SZfoI4jqMhUv3jSmjMTw
+ 4yCt67vVjPHXVzNSvMEpDe6AGxM24wgC9inwmOZltVRuq4yuUAGY7XulxrH3P9Znkm8L
+ MJSh9XzGTq8oeD3S4xjOAga6nLr9xWf1c2/gCKP78AdCqTuoG8XhyuhKkoD8GsoObrhz
+ 2vhZ6buLDo3uBNI55mc4KAk1kqxZ9ziemgo5F8qfVvbI2y+rWUj5boSjStqPRgfVilIU
+ b9fw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjcRRafc4gRL0DDwgjXfT16Yzm06FIEmX+iBNNPPhvfldryOJ5PXhrsMNV9h2q2iynT26GNX0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyq2gLRz5kfvjmNLQLP30ps239yLq/jfi+tACj05D/ccv1Z69q1
+ GfMcDQbO+nWzx871GB4xt36/tdOLt18Jsew+cWoXiF3sRFkmyfCaZLE6+VtU5sE8EFubXk5JFCj
+ m/7NhwjI=
+X-Gm-Gg: ASbGncuyQxw/l+3UkZM5EqIVNhKDVW8ZM8npdTdXYQqpWX3aHqYjyBp5Mz/d/SkqNqD
+ 6rtbdAIuMsfFTL09lKBsU9XU3acpgCobDHmT/WXQpV/NLB5IV5EslGl3j4FU+cYYJ4p99BKHpUx
+ DwcA+CPg+60zp682wNcoNMvYNDXOmXGcaQu5WT7Ee9I89OHHKGVJsKsBiXkoTKj6VeFKiwgngFi
+ SZbu7dnFWEexNX8cleC/uEZ4E5fEezzVLLVMA1C52mxDGHe2DP5JLlxKHitulipcZOg5g7Q3Xju
+ rEUNz9O5QlNnTbrBnWvdFwo+uZZ44bgmyshrPomaBPJgnurYLtGW+xXJ9rtuFsLD05TRKFBGRo4
+ wYY9FT1tQTYPU
+X-Google-Smtp-Source: AGHT+IF/N10pKC/UY43Tn65tq8HDkBN8v8lXly0FR6b795mUVZb5DWYS7ZZh4qblajHa9Q1j3kkV3w==
+X-Received: by 2002:a05:6830:660e:b0:727:3e60:b44b with SMTP id
+ 46e09a7af769-734f98aa978mr19790396a34.14.1748009284630; 
+ Fri, 23 May 2025 07:08:04 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-609f2f1e2desm3149501eaf.5.2025.05.23.07.04.57
+ 46e09a7af769-734f6b5e60esm2868212a34.59.2025.05.23.07.08.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 07:04:57 -0700 (PDT)
-Date: Fri, 23 May 2025 08:04:55 -0600
+ Fri, 23 May 2025 07:08:03 -0700 (PDT)
+Date: Fri, 23 May 2025 08:08:01 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
- module
-Message-ID: <20250523140455.GP100073@bill-the-cat>
-References: <20250504132356.2317305-2-sjg@chromium.org>
- <20250504132356.2317305-1-sjg@chromium.org>
- <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
+Cc: Benjamin ROBIN <dev@benjarobin.fr>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] bootm: Fix bmi->images pointer not initialized in
+ some cases
+Message-ID: <20250523140801.GR100073@bill-the-cat>
+References: <20250520203515.25839-1-dev@benjarobin.fr>
+ <CAFLszTigMGxSjxPZ44BUx4WoWqVdNY3p6AeQwy3xK3gJ+VccTw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oFbnrb8s0R7az1CJ"
+ protocol="application/pgp-signature"; boundary="k98rBJ/LrDkthwww"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
+In-Reply-To: <CAFLszTigMGxSjxPZ44BUx4WoWqVdNY3p6AeQwy3xK3gJ+VccTw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,52 +101,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oFbnrb8s0R7az1CJ
+--k98rBJ/LrDkthwww
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
-> It is easier for tests if the top-level control logic is all in one
-> module. Create a new do_patman() function to handle this. Move the
-> existing code into it.
+On Fri, May 23, 2025 at 02:48:15PM +0100, Simon Glass wrote:
+> Hi Benjamin,
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> On Tue, 20 May 2025 at 22:35, Benjamin ROBIN <dev@benjarobin.fr> wrote:
+> >
+> > When building with only bootz command, without bootm, images pointer
+> > inside bootm_info structure is not initialized. And since this structure
+> > is stored in stack, the generated error is kind of random, but most of
+> > the time this will generate: "ramdisk - allocation error".
+> >
+> > Also, after analysis, this problem could occur with the command booti,
+> > if the command bootm is disabled.
+> >
+> > Currently bootm_init() is called by: do_bootz(), do_bootm(), do_booti()
+> > and by do_stm32prog(). And all of these commands execute bootm_run_stat=
+es()
+> > which access the images pointer stored into bootm_info structure.
+> >
+> > So, to fix this issue, just do the assignment unconditionally.
+> >
+> > Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
+> > Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
+> > ---
+> >  boot/bootm.c | 3 +--
+> >  1 file changed, 1 insertion(+), 2 deletions(-)
+> >
+> > diff --git a/boot/bootm.c b/boot/bootm.c
+> > index f6aa32746b7e..108ca7fb472e 100644
+> > --- a/boot/bootm.c
+> > +++ b/boot/bootm.c
+> > @@ -1169,8 +1169,7 @@ void bootm_init(struct bootm_info *bmi)
+> >  {
+> >         memset(bmi, '\0', sizeof(struct bootm_info));
+> >         bmi->boot_progress =3D true;
+> > -       if (IS_ENABLED(CONFIG_CMD_BOOTM))
+> > -               bmi->images =3D &images;
+> > +       bmi->images =3D &images;
 >=20
-> (no changes since v1)
+> In my tree I have:
 >=20
->  tools/patman/__main__.py | 49 ++----------------------------------
->  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++--
->  2 files changed, 54 insertions(+), 49 deletions(-)
+> if (IS_ENABLED(CONFIG_CMD_BOOTM) || IS_ENABLED(CONFIG_CMD_BOOTZ) ||
+>     IS_ENABLED(CONFIG_CMD_BOOTI) || IS_ENABLED(CONFIG_PXE_UTILS))
 >=20
-> Applied to sjg/master, thanks!
+> but it seems that the few boards that didn't include boot/bootm.c have
+> been dropped, so your patch is fine.
 
-Odd. I thought you had posted this against master or next, intending it
-for mainline, which is why I assigned it to you in patchwork. I see the
-cover letter is missing what commit it's against. And instead here you
-are once again spamming the list and with messages about your personal
-tree. Why?
+Yes, looking at the code, we should have always been doing the
+assignment as there's a few places where we reference bmi->images and
+not the global images, FYI.
 
 --=20
 Tom
 
---oFbnrb8s0R7az1CJ
+--k98rBJ/LrDkthwww
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgwgIMACgkQFHw5/5Y0
-tyxKJwv/e3ScW4u9ygYYWQpFW33227PyXdBLKv1sMqfWxc25UDFY6hqkXcfcThY2
-3jfoc9wBh8JxzwaHTV8sDRwjL6GQ2N8SpE/K4K8R97VAeOHh2ZmpRsZlpsTi0ucK
-aVpbqZI4Nk+v3owmGsrjOT/ckCnUKThV7CiAVU4pFcY7sPA+pPaWAjotORUvtUtu
-Wt7gLZtQVchSOEBSuyXHvHmbmym6w6BT95hggyjTlRNk1S8wUIvQ4e7dr6f4PAHY
-o7/g6bFjSxEAhmBz0WpFDaaQ7oGsTb3tJrRlWrPH39AykpwjJl3C18a0o+AhIySE
-8667G6WJh1hOUANmDmjaJaBMyuNIRkBDAA8dXU9JYGWq0W66rFwLtVqxsoSkI77Z
-NjIsnAp1FTwAEDKka+PPn7T3UVixKI3Abbem7QSOQxGeOAC5AiZPqp+MA5EJkAE1
-zGUAW9/PG1mToSU6LR/5C3unlzrFZxCeWiqvbQfE+Wpd1si+3bsxHTF1ZEZIY05o
-/rMWjEIY
-=w8NN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgwgUEACgkQFHw5/5Y0
+tyzqwQv/ZTezAQECzInFTtMvjGxSaatJYdbkr1teDB0ZNXCFswR1t2FJXV/iA/sF
+teEKdDpT2p4HYjf4+SvGgKeklM8qEF8laDZ19RDf470ROOhq2apbeafQks2XJeGR
+tffCq3g2x4tJkw2qdXPWVhe60slNmJ0LvXmjGREgFtAfJAvQXY/wH7CGO73HOqxP
+aWbgxWtMc7USrLeKSb+bu+3YjYGFkFrxl65tLkFEvKTt2Xc4Jegc7DrHVFvSa+2a
+D95gYOXm8yp4yekpDyO4mQmINkOmnoIJfjyi2HBScnVdTnlwNDYbxk4mdVOc6feR
+vWfXp+DfP4WJ8NmcLeT2n1PLbM66Z+h4o8O/v2ohf/DcGuPLqSdfqkQRFKbMBL7j
+9qq1wQTiIc9pPvum9be/5uSpro3gRAz5I6iGF7OESsKVBiUBvQ0wqIhgY2/CZ/ix
+U8TVMlHexdvdi5dLQ0ttyGNTAUHfxJnJLRrgGXxOCKk9QvMCFtuGh4sIwPtYZJHB
+uT8My2xd
+=sIPi
 -----END PGP SIGNATURE-----
 
---oFbnrb8s0R7az1CJ--
+--k98rBJ/LrDkthwww--
