@@ -4,88 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57514C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 21:25:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99FCC54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 22:26:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5D2F8338C;
-	Fri, 23 May 2025 23:25:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 325AC83340;
+	Sat, 24 May 2025 00:26:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BK8piFbB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ETgvgNOJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A13E1833D3; Fri, 23 May 2025 23:25:45 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 05F23833D3; Sat, 24 May 2025 00:26:17 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F4778334D
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 23:25:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D076B83264
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:26:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-72ecb4d9a10so255372a34.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 14:25:42 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3f9832f798aso263705b6e.2
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:26:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748035542; x=1748640342; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MxA6yEp02XgU4F2bX7HlHPIzrHcvsTr6GzKq099Fp1Q=;
- b=BK8piFbBUZiIKpgEGxIBXJSCgXNIQUwcxZ5ZFWMMMQn4G7fL2iQw7y6LDaO4NygByh
- xHC4czvl3yTMD993OpzcfGifzrHGSlplGe65AM4k3pmg9RJh94sHldbZBrMzVofF/qZ9
- RI66sOOnyuYs5+jcw0wXs5Yjq6lscTxs8nQ3I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748035542; x=1748640342;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1748039173; x=1748643973; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MxA6yEp02XgU4F2bX7HlHPIzrHcvsTr6GzKq099Fp1Q=;
- b=bSEHYpaUlduU34mpiLV5F4FvZgWUPlH8QAzGXGl5DYIbQ/HQzfoBAKJN92T2OguhWA
- V0w3lzOb5v3pv95hJpOw6SP46dhiVONvFiaoqYBlcJucER2SN/+Ggpir7e/3kWyQgg1c
- GqMcaZlfwvbsQTOl/Cc3oMcyFIp1fTFbfMyLAtfk0+wv+pHALdWYE4vnBybVboxLjeN3
- 36n8OIJdTzh7AvqRUn+OhiJLqtab1YKANnZLQeHh9sWNoZqZopV26VnY5YYOYnwCddxO
- dVBTEGzgDK5UGbmI4r+9CofyrVWihHfcLfwl0xHP0PtUigwx7BcTG2iqjK4/EsWgBi+e
- ySPg==
-X-Gm-Message-State: AOJu0YzAObZixO7xcZ6SbgF/uhgW1DEpBRHYPw3gYyd3+sr+cXvbxFeh
- FcZun+COjRtbQ54fG6uXzkoh2VNB5cHpPOCu2SoibMDeTHAUlWXC9pPZjSjzXtdUvQE=
-X-Gm-Gg: ASbGnct4jhST9fRygkyb8Ey7SmNspF+ZVxNDZYAFmXeXFQUgxxNyoneksQ1xuIGS/Gd
- aDQs55zZnlFDnEctA1hFGc5YZtbU1Na9aEun+W7/JXVviF2bW9IOIOp6I4utdGbYKvYvvGlw1jf
- /22SJtDnLqdC1AIaxMlxfvXodGR8EO1ORKfgPLLY9fq3IVYynqWbaCNcpg1JoRlcqcx8S/QdQ3i
- i/pXkhsc19YeBpmWR0Sg1MBX24ocaSg5+aaq3Mp3tW2z6RwLAw1ycnaax2s9aFxZuk+rfVtxAFj
- omy7uAN6+Vydat0pB8NffyOtD0nXRNmGqHrnBJOCro9/iJkJGG/ROZDf3/7AgnDw7JSlDymagaV
- 00gUBdC+7tWCe
-X-Google-Smtp-Source: AGHT+IG+MHvS9IkLnQFPhU/CMA4+qvPUG21k8gqT+DXpTTopq5MQ7K5RgXIX6WGzgAa6ul7R0InwTg==
-X-Received: by 2002:a05:6830:4994:b0:72a:ec6:7fc1 with SMTP id
- 46e09a7af769-7355d0b7671mr764688a34.14.1748035541751; 
- Fri, 23 May 2025 14:25:41 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ bh=9BY/yqNREpLvY264+S7M2w+9Rmu46mn6cq1ynaos1Gs=;
+ b=ETgvgNOJHMkFWc0UAhaEBTBZOPoopt0sYJ4ij8kyBa0yxM/4McoWxMkphbQf83wYFP
+ LX4JKRZWlgaUH5Xxcsc77FzG1Xuyvekl2ZN/J4Mi095bmlQt1KcRB9YhFj55J/RZmlnl
+ fzR6alcYlBfQsZKiJ+WxlPK7NUV2ubTM0Zns4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748039173; x=1748643973;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9BY/yqNREpLvY264+S7M2w+9Rmu46mn6cq1ynaos1Gs=;
+ b=EzI+j4eZJNwXMyfyfbG/qJ8w8Q9suVjH7YLUbLFxXbsJ6CnzJvXU4eRnf6hYJxFAWl
+ Kzhvv32HX/q4yis4INhtoQVKbtsj3GEJjqsbmzVbKWUoGDV0YWuC+8NbSELw3x/PY57y
+ kXShmbFYWssXRCe4TGWwRL48zhiiLzZ03wdEWo4t2ozsriPBUy4TZeg1WyGyDL3ZtsU+
+ GR99HUZKwBK0yrEmmt1CjjogMXmUk07uOQi7hu6ayj9OQSUE172DdBvusFpD/pWaZZpV
+ AoxkD2juqYviUbNYqo4VtXLqK5VP+XAzcclQuCRxOiYuApnJDxv3R4Toq16gj7WrAYoj
+ bzyQ==
+X-Gm-Message-State: AOJu0Yz48TkeoTJ2kp4wGkUDPmqoaw8dgNXnNwsTTBNxiktZpDo30IES
+ 2kDDMKH33ZnqVEFpBwwDBQHIzINuK0hQdBMiFu7iDnNQinBrwTMbxxQDyoyTlEEKpy0=
+X-Gm-Gg: ASbGncs/Yq1zHx54N8AASRX9xBJyZECYOhBjx2QeJs+/Y9Jmeu3H8evdeM2gQhgxsfZ
+ DKnGHtZLUxtkFv1GTx8hD2GAaYVt0GybbC/kmhyNYgQPk94U4CSR54FryH7MRO4+WCqE4F6AuJ6
+ uP7vKMs5QzqtqkZQjoj1TAy4l/3vxEQcffaTx4CW01VjhROIZYjb/TXwzArquXti20VNuYyxkGh
+ 5c3N4/QN/ksvEqwtwAXSXJHfLb9gKLrg2luRSTgvFXuzBInqN6OSSGaoVRvoMFdldMiJI+po8qc
+ 6ZO57s9QB9f/4QqrBbKn7f5rTXYFDku546yTSL74vwpR3IoQcNavk850JiHrOjAZKF9ZGzSRnMO
+ ktfR52DQDE8s=
+X-Google-Smtp-Source: AGHT+IE+ghMXeGZv9mK3NKUl4uOsOhHt+GINsoOfDxk+t8gIcakB6F6rvBYET5hiFEdLcqMr1zpqcw==
+X-Received: by 2002:a05:6808:229e:b0:404:764:fa10 with SMTP id
+ 5614622812f47-406467e3a21mr489417b6e.10.1748039173567; 
+ Fri, 23 May 2025 15:26:13 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734fa986d42sm2913162a34.12.2025.05.23.14.25.40
+ 5614622812f47-4064522312bsm194029b6e.34.2025.05.23.15.26.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 14:25:40 -0700 (PDT)
-Date: Fri, 23 May 2025 15:25:39 -0600
+ Fri, 23 May 2025 15:26:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
- module
-Message-ID: <20250523212539.GX100073@bill-the-cat>
-References: <20250504132356.2317305-2-sjg@chromium.org>
- <20250504132356.2317305-1-sjg@chromium.org>
- <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
- <20250523140455.GP100073@bill-the-cat>
- <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
- <20250523164717.GU100073@bill-the-cat>
- <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
+To: u-boot@lists.denx.de, Sean Edmond <seanedmond@microsoft.com>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>, 
+ Charles Hardin <ckhardin@gmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+In-Reply-To: <20240509023918.2504185-1-seanedmond@microsoft.com>
+References: <20240509023918.2504185-1-seanedmond@microsoft.com>
+Subject: Re: [PATCH v8 0/3] BOOTP/DHCPv4 enhancements
+Message-Id: <174803917198.2369538.18387605008838632819.b4-ty@konsulko.com>
+Date: Fri, 23 May 2025 16:26:11 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ekJIlFfPU+/DgQZ7"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,101 +107,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 08 May 2024 19:39:00 -0700, Sean Edmond wrote:
 
---ekJIlFfPU+/DgQZ7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> In our datacenter application, a single DHCP server is servicing 36000+ clients.
+> Improvements are required to the DHCPv4 retransmission behavior to align with
+> RFC and ensure less pressure is exerted on the server:
+> - retransmission backoff interval maximum is configurable
+>   (environment variable bootpretransmitperiodmax)
+> - initial retransmission backoff interval is configurable
+>   (environment variable bootpretransmitperiodinit)
+> - transaction ID is kept the same for each BOOTP/DHCPv4 request
+>   (not recreated on each retry)
+> 
+> [...]
 
-On Fri, May 23, 2025 at 09:20:37PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 23 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
-> > > > > It is easier for tests if the top-level control logic is all in o=
-ne
-> > > > > module. Create a new do_patman() function to handle this. Move the
-> > > > > existing code into it.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >  tools/patman/__main__.py | 49 ++--------------------------------=
---
-> > > > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++=
-++++--
-> > > > >  2 files changed, 54 insertions(+), 49 deletions(-)
-> > > > >
-> > > > > Applied to sjg/master, thanks!
-> > > >
-> > > > Odd. I thought you had posted this against master or next, intendin=
-g it
-> > > > for mainline, which is why I assigned it to you in patchwork. I see=
- the
-> > > > cover letter is missing what commit it's against. And instead here =
-you
-> > > > are once again spamming the list and with messages about your perso=
-nal
-> > > > tree. Why?
-> > >
-> > > I'm applying it to my tree and intend to send you a PR at some point,
-> > > with collected tools/ patches. So I believe I need to send emails
-> > > about applying things and update it in patchwork. Let's discuss this
-> > > in a future call.
-> >
-> > I don't see what there is to discuss. Please follow the normal process
-> > for mainline and stop spamming the list with notices for your personal
-> > tree. You're also diverging your own tree further from mainline by doing
-> > this and making it less likely (multiple people have told you they don't
-> > want to review things not against mainline) any follow-up work will get
-> > comments other than that it's not applicable to mainline.
->=20
-> For patman, I have another series [1] I'm planning to apply to my tree to=
-morrow
->=20
-> Would you like me to send 'applied' emails for it to the mailing list?
-> Or perhaps just for the cover letter? Would you like me to send you a
-> pull request?
->=20
-> Regards,
-> Simon
->=20
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D456256
+Applied to u-boot/next, thanks!
 
-Yes, that's another series that while I disagree with the direction
-you're taking things, would rather apply to mainline than let it bitrot
-in mainline. So please send a PR against next. And that would also apply
-to the series this email is in reply to. As again, I had expected it for
-mainline and not your downstream tree even if I think we (and our users)
-would all benefit from managing the python portions differently.
-
---=20
+[1/3] net: Enhancements for dhcp option 209
+      commit: c867045eef153b0beab69fbc74059fcfc4ad9472
+[2/3] net: bootp: BOOTP/DHCPv4 retransmission improvements
+      commit: e6bca3305bbc333cc71e5bf1ee483bbacfa84736
+[3/3] net: bootp: add config option BOOTP_RANDOM_XID
+      commit: 2111bd7e93a3044f0590c942a41f2667d15d923d
+-- 
 Tom
 
---ekJIlFfPU+/DgQZ7
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgw584ACgkQFHw5/5Y0
-tywvygv/ayATUsUSZa8OpFxMFrbwnCCdfoPp9Tk/6Fe3Cm1ZcN+p41SuBF+ES/Uz
-5g4uarOKWDYXEdgzQHxfzvf4BQ0AL/Iq9MACfBmNO/Nr5ami0/PZUSxCpLnmLubH
-4BVvMTiILoVOnkMhZuklIKSb4zETUMwjMY5nz/HUjsFFPX2+00kPE45JVLsrvZiH
-4vGWJi9oB4mCONi9vXo3Hc1iiGBABfTtoWD8Q3PuKQXFOmgBhpXjTBb7nNxdU/3U
-m25aC+7VJQxE2v2wFlfvbfdIRi4L4/0VdF/0GSCX0wkarzCv0Ag1PyRZwYfQTm8w
-CeXTOaaocETKaUhmE2mCqlLrQhQbyUkPpEneftC/7Y3WuWv4cbHelOGowNVQAKnJ
-w2Rh35daF6ApqjlnQkEIm1ZRsAQswYfwQcCefA+/zPevEpIK4qX4bshY3QF5PLbM
-iO4U3jEujSVsk/lKYoGfWGr+Gr/nruT/IcK45SEUyPiwCGPvT3bNqH+yFRcudV8M
-JptR1RUM
-=w0it
------END PGP SIGNATURE-----
-
---ekJIlFfPU+/DgQZ7--
