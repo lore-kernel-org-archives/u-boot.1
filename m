@@ -4,96 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E75C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 22:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20685C54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:00:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55B4B83340;
-	Sat, 24 May 2025 00:51:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FA8683340;
+	Sat, 24 May 2025 01:00:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vhq9+UwA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EeMJ1o7q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D18FF8333D; Sat, 24 May 2025 00:51:50 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 6B11C83409; Sat, 24 May 2025 00:58:52 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2939E833F8
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:51:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 968FA8333D
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:58:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-73502b47f24so180553a34.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:51:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=swboyd@chromium.org
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-b26f67f10ddso194998a12.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:58:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748040707; x=1748645507; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HQUePzk4JUo8bpZdKQ+b/GIS0cj1BHPq3sWBMLR8jBk=;
- b=Vhq9+UwAtkHnRBnSlAwHqgGuBX996brpeC8WrfnlJcSIthY8m4xz5HPrXvV5DDatXN
- jXTGIF+RvQm+l41HNMEW1fIv9Lb53VQTYpn1hjnJzBsdT1bmUFdvcgBAfaBLH62/Njke
- DCOgRAaGx8o3PxKjvDcD3T7IP0XuYa5833Th8=
+ d=chromium.org; s=google; t=1748041128; x=1748645928; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SmIWvxCRvwkfgZnPJsoGYkk6A21o82mASJx6qCM5Hqc=;
+ b=EeMJ1o7qRZxQ4MzkQ6RY96boqPVdGc4ox7CiV7nJaLkobo1j4CptnozVWp5I51iopU
+ 9l/rYEO73Uh1mAgawCqTr4RBaZVuSOK4PdHpV7i0q6xpEZutxEcgX3UBdYpEK1j/xs8f
+ agRKjIS//3C7P8SdzcHOo4ZQBynYqEuhLRAa0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748040707; x=1748645507;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HQUePzk4JUo8bpZdKQ+b/GIS0cj1BHPq3sWBMLR8jBk=;
- b=T4pvlhiX7DkbjcYsjVwVtE5HYqJeaRM+6hlHjCG2Te98xsvLUbdIOJ7RQZXm1UIkVn
- 0VFF5oN51kVfhEUggnoIYXIvn5xphbU13LAKooRhWbx5TC7Y5oQaNUYmXDLossZhZXTS
- B+SmRuLJmQLXoilOz6b6rCe95C0ppMkP1YFIWIxW+zeFiRxNWbwMjUufckXLgrnTk8jN
- iI0z2kmcfbueiGWN23JheRTX2IM5mcDQWGuQ6eEXFfxZ7tStB5zryOxsWw3oa1gQq3zK
- nsVD4YJvpcFfUHmgc9nGlbnaLQJ4qxP7k6ne2W5cpBEMi0xCO5iWgyJQX/xS5MPpNHa2
- gf/A==
-X-Gm-Message-State: AOJu0Yxm81eNNR7G9dGVgFkFsJ8hHLG1uBB5x1S0zn5M0N5hUwOmWnhN
- B8DCc//3MhmCx1XKWZRuvEnmiIaE/TY6qYfU3OjgKfqjOorj30BzXAobJC8JGJSzDF6N2/Qhowz
- o31q8+aU=
-X-Gm-Gg: ASbGncsvQ9sbRgaju3P279v2LL9Nmegvgzrpd66iklAljr9csEk4eXkRBW5An+nb4v5
- Fn4mJKtVvpsw2RbK9geHwpT3sY8fBpwipDCBKusl9w18V2eXluC7uvN+F7hNk/bM2oef5AsXlKI
- A8i8+odKCOJoXJs4Bet47065mdNLtEcSJuPv9g1Kn88NZz5nGQ2+GxCFI6UbvDCqLtSU43fq+/h
- hIpMIC+cavzw+vyBUnH6xsffQ7meDpLWeWnQ7BxFRRBMVzpI3xCFsb4t0erbFvKNXMEA1GhnGo4
- dGRFI81MdEQwvz2vm+I/zc/V5oRadiXDQ8EYoRYmgClQvUhoRbVPbP5ASA/EM4x2h+0Xpdpfx4o
- XmPpYd6yczczI
-X-Google-Smtp-Source: AGHT+IGw+OEi0Rw+gXbrD1un5WSbAcAP0mRpC5eM4gc6Us0Cx7pLH+1nD4EAJchE6YGNDusDl6jMbQ==
-X-Received: by 2002:a05:6830:b91:b0:731:cac7:362f with SMTP id
- 46e09a7af769-7355cf2a0camr880501a34.6.1748040706868; 
- Fri, 23 May 2025 15:51:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a4b0bfsm3080841a34.7.2025.05.23.15.51.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 15:51:46 -0700 (PDT)
-Date: Fri, 23 May 2025 16:51:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sean Edmond <seanedmond@microsoft.com>
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Charles Hardin <ckhardin@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH v8 0/3] BOOTP/DHCPv4 enhancements
-Message-ID: <20250523225143.GA100073@bill-the-cat>
-References: <20240509023918.2504185-1-seanedmond@microsoft.com>
- <174803917198.2369538.18387605008838632819.b4-ty@konsulko.com>
+ d=1e100.net; s=20230601; t=1748041128; x=1748645928;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SmIWvxCRvwkfgZnPJsoGYkk6A21o82mASJx6qCM5Hqc=;
+ b=aNMCtZ9wfKVqihfPmnkE6UGmGZAB5lMM9xLOkAelKFYHJlMUvPZM67Hd7vjIALFNNe
+ ESjkyCkRetetSN5P8xCysd112g3dm0dQe1A2I9f5HI1BHClpZtw0OVy+ekIYyVG6MJnW
+ FIczxnzEi1XqZZOV+3gTL1IITO0j5tvVNF+6tFlzJh7Y4PxomOPWGGPx7jZYiynwE9qe
+ aJcSgV8973TSMBp0iimBHxSRmTj+TuYEmi1HhOmeuUsx0vr4rZGyXWLB4UOfJnOzP/fI
+ VfshmnbZog2dYxk6w6C2Q2fjuY9LAh54n5CS15LN8KMpHVK0FvTK79qBFPwrS5xGqlnC
+ G49w==
+X-Gm-Message-State: AOJu0YzNZRp4Us1zM5meq8YC6QbGmKvsGuCf66LwHBRGxcRIVpB0xBZI
+ VtNBXWj1VBLn/6F8BdUkRQ3eoZ6H3ZQLMrC/zee3kf2/fWfm0nCeKBKIM/vqOYzYXZBOcdrVTHg
+ Shpg=
+X-Gm-Gg: ASbGncuXOGOQAUDNr2fgpRmC/+ESMw7u/WtktasustXJpsftt3x86GXfT/J8gGWSjfm
+ QQSDY1B59efehg8XMvq0x+rPUNLY+B4/jW1qP5QI4beyWRO4LrvhJhj6ciBBJULLHj0JkSkLwx5
+ 2C6jdNN/1oJCzUedFPw5S0bV8RAoIGtsItDu8ctwRFi5Xhl6La9o3YZxXqPjKu3eEcIP7xHJav7
+ +kAwlMuWTFaR420dhNIs9iu0d9C8OC7vvr39bg5P+Y+Psjs7Na8fGS/QbOVtKyWkJlcvpHSy5gI
+ VkGOk22P/J9ffeceIkAhgxm89a5OvlQzLNaDMyh5OAcsyCJuiITCX4fe863O0/q6F5JtIgDOOu7
+ sAtmFwA+gl33NFuBQxqTXzChUDw==
+X-Google-Smtp-Source: AGHT+IEkzOwiA2X4oTx1NwFnKIA0iR9x/9w9DO6J99j7pmF6LCYqoZmda0fm34n+TINQe6WVkbNgWQ==
+X-Received: by 2002:a17:903:b08:b0:22f:c19c:810c with SMTP id
+ d9443c01a7336-23414fd256cmr14344075ad.51.1748041127779; 
+ Fri, 23 May 2025 15:58:47 -0700 (PDT)
+Received: from localhost (188.139.125.34.bc.googleusercontent.com.
+ [34.125.139.188]) by smtp.gmail.com with UTF8SMTPSA id
+ d9443c01a7336-231d4e97dadsm129410215ad.141.2025.05.23.15.58.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 23 May 2025 15:58:47 -0700 (PDT)
+From: Stephen Boyd <swboyd@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
+Subject: [PATCH v4 00/28] Support to run U-Boot on sc7180 Trogdor Chromebooks
+Date: Fri, 23 May 2025 15:58:15 -0700
+Message-ID: <20250523225845.2311989-1-swboyd@chromium.org>
+X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2XcdcEQ//y0Wa2xd"
-Content-Disposition: inline
-In-Reply-To: <174803917198.2369538.18387605008838632819.b4-ty@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 24 May 2025 01:00:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,60 +99,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series supports running U-Boot as a payload on sc7180 Trogdor
+Chromebooks like Lazor or Wormdingler. This is a jumble of different
+patches to get to the final goal of booting a Linux distro from the eMMC
+on Lazor. I'm able to boot Fedora Workstation 41 from a USB stick on my
+Lazor.
 
---2XcdcEQ//y0Wa2xd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I moved the reviewed patch to the start. After that one line fix there's
+a few patches to add support for the particular SoC used on Trogdor
+devices, sc7180. The next set of patches move the coreboot logic out of
+arch/x86/ into lib/ to find the coreboot tables on ARM and stash them in
+global data. Then I have a handful of patches to let the coreboot
+commands and utilities parse and populate various things like pstore and
+firmware details into the DTB with the proper data from the coreboot
+tables. Finally, I add the calls to coreboot dram parsing code in the
+snapdragon board so that if coreboot tables exist we get the memory info
+from coreboot instead of from an earlier stage DTB.
 
-On Fri, May 23, 2025 at 04:26:11PM -0600, Tom Rini wrote:
-> On Wed, 08 May 2024 19:39:00 -0700, Sean Edmond wrote:
->=20
-> > In our datacenter application, a single DHCP server is servicing 36000+=
- clients.
-> > Improvements are required to the DHCPv4 retransmission behavior to alig=
-n with
-> > RFC and ensure less pressure is exerted on the server:
-> > - retransmission backoff interval maximum is configurable
-> >   (environment variable bootpretransmitperiodmax)
-> > - initial retransmission backoff interval is configurable
-> >   (environment variable bootpretransmitperiodinit)
-> > - transaction ID is kept the same for each BOOTP/DHCPv4 request
-> >   (not recreated on each retry)
-> >=20
-> > [...]
->=20
-> Applied to u-boot/next, thanks!
->=20
-> [1/3] net: Enhancements for dhcp option 209
->       commit: c867045eef153b0beab69fbc74059fcfc4ad9472
-> [2/3] net: bootp: BOOTP/DHCPv4 retransmission improvements
->       commit: e6bca3305bbc333cc71e5bf1ee483bbacfa84736
-> [3/3] net: bootp: add config option BOOTP_RANDOM_XID
->       commit: 2111bd7e93a3044f0590c942a41f2667d15d923d
+I tested the SPI driver with the crosec command. The cros bootflow
+method almost works, but it seems like chromeos userspace blows up
+spectacularly likely because crossystem can't figure out what board it
+is running on. I don't really care too much about booting chromeos
+userspace here so I'm ignoring that problem.
 
-And sorry for the delay here. Can you please follow up with a patch to=20
-doc/usage/environment.rst for the new environment variables? Thanks.
+I'm able to install fedora on Lazor with this as long as I start the USB
+with CONFIG_PREBOOT=y. I tried to get this working on SC7280 Hoglin but
+it crashed in Fedora. I'm not sure why but it could be because the
+memory stuff was all wrong. Either way I hope it may work in the near
+future.
 
---=20
-Tom
+The display is almost there but I suspect I'll need to do the whole
+initialization all over again so I punted for now.
 
---2XcdcEQ//y0Wa2xd
-Content-Type: application/pgp-signature; name="signature.asc"
+TODO:
+ * Get display working
+ * Implement FIT FDT picking similar to depthcharge based on coreboot
+   tables indicating the SKU and board id
 
------BEGIN PGP SIGNATURE-----
+Changes from v3 https://lore.kernel.org/r/20250428192427.3877612-1-swboyd@chromium.org
+ * GPIO chipselect in the SPI driver support
+ * sc7280 clk driver support for UART
+ * Enable the UART clk at probe
+ * Read VPD and inject the wifi MAC address
+ * Patch to inject wifi MAC from the environment
+ * Add a debug_board_init routine for trogdor to support early debug
+ * Add a defconfig
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgw+/sACgkQFHw5/5Y0
-tywtPgwAjwrSXiK20GQCEB2H3IqFR735cIIgK4+qkGefeTq1QNUkdtN6s2tmhfJg
-2zg0wYy9RbVFyjy1GeLHaEXfEquC1u1Rst26+mUOM4ktkbWavEWsd6KQL9GNGpjK
-J/Zco4jOBpe6U9nVvqdADyZokZR1L32XS5PhO/Cioq+6iukbpjXBzGPnME/+oUS+
-4UA4s41QMA0S+PrwQOpzx5mAGdAy5Gr8BWy1go8N0UUV1gKf4crVgi+JjmfG7OBa
-obvYnZCEGVfoyoraV1CNf5Rm+SWzUzQD3PK9t0C+4vXXDG2K6uzZdjk98G7gn+Q/
-d2c6ZZ7PD+kHWzuZOx5E1wCzUgRmsl2Pwzc3wsDy8ihJaLQVhupqqgt5AjVG+YNf
-yCKbm4KIfwmSEM18V5I09iRJkpigE/IwM+2oyZg6mYInybytMZEh8ICR76abNaQR
-Ssyahe170L1I+13QsgRkwqBSqZxZSnj1NFQ42pWtNSWPbpeXjjetjraYqYRpY0HO
-rE4ctc6o
-=g//i
------END PGP SIGNATURE-----
+Changes from v2 https://lore.kernel.org/r/20250226221607.1283592-1-swboyd@chromium.org
+ * Check SPI proto in probe
+ * Handle pins differently in pinctrl driver
+ * Pick up tags
+ * Rebase to ToT
+ * Update pinctrl driver for new changes in last few months
+ * Add some more gates to clk driver to handle missing clk warnings
+ * New patch to locate coreboot tables early
 
---2XcdcEQ//y0Wa2xd--
+Changes from v1 https://lore.kernel.org/r/20250220205900.3127680-1-swboyd@chromium.org
+ * Add Kconfig file in lib/coreboot/ to hold the coreboot config stuff
+   similar to EFI
+ * Couple new patches for ximg to support extracting the FDT from
+   chromeos kernel partitions
+ * Move the timestamp file out of arch/x86 as well in a different patch
+
+Stephen Boyd (28):
+  bootstd: cros: Return negative error code
+  clk: qcom: Add driver for sc7180
+  clk/stub: Add sc7180-rpmh clock
+  clk: qcom: Support uart clk on sc7280 CRD
+  pinctrl: qcom: Add driver for sc7180
+  spi: Add Qualcomm GENI SPI driver
+  serial: msm-geni: Enable SE clk in probe
+  coreboot: Move coreboot logic out of x86 to a generic place
+  coreboot: Set gd->ram_base when parsing tables
+  coreboot: Locate table earlier than arch_cpu_init()
+  arm: Support running U-Boot as a coreboot payload on ARM64
+  cmd/cbsysinfo: Skip the CMOS 'option_table' when not present
+  cmd/cbsysinfo: Allow on ARM as well
+  coreboot: Parse sku_id/fw_config from coreboot tables
+  pstore: Add pstore address from coreboot tables
+  coreboot: Add /firmware/coreboot node to DT
+  coreboot: Move timestamp parsing to generic place
+  coreboot: Dump VPD information in cbsysinfo command
+  coreboot: Set serial# from VPD
+  coreboot: Set wifi mac addr from VPD
+  fdt: Populate wifi MAC from environment
+  mach-snapdragon: Support booting as a coreboot payload
+  mach-snapdragon: Allow usb3 to work when a coreboot payload
+  board: google: Add board_debug_uart_init() for Trogdor
+  cmd: ximg: Support LZO compressed images
+  cmd: ximg: Support LZ4 compressed images
+  configs: Add chromebook_trogdor defconfig
+  doc: chromebook_trogdor: Add document detailing installation steps
+
+ arch/arm/cpu/armv8/Makefile                   |   1 +
+ arch/arm/cpu/armv8/coreboot/Makefile          |   4 +
+ arch/arm/cpu/armv8/coreboot/cpu.c             |  22 +
+ arch/arm/include/asm/global_data.h            |   3 +
+ arch/arm/mach-snapdragon/board.c              |  23 +
+ arch/arm/mach-snapdragon/of_fixup.c           |  22 +-
+ arch/x86/Kconfig                              |  22 -
+ arch/x86/cpu/coreboot/Kconfig                 |  33 -
+ arch/x86/cpu/coreboot/Makefile                |   1 -
+ arch/x86/cpu/coreboot/coreboot.c              |  16 +-
+ arch/x86/cpu/coreboot/sdram.c                 |  78 +--
+ arch/x86/cpu/cpu.c                            |  15 +-
+ arch/x86/cpu/i386/cpu.c                       |   2 +-
+ arch/x86/lib/bootm.c                          |   5 +-
+ arch/x86/lib/coreboot/Makefile                |   1 -
+ arch/x86/lib/coreboot/cb_support.c            |   2 +-
+ arch/x86/lib/coreboot_table.c                 |   2 +-
+ arch/x86/lib/tables.c                         |   2 +-
+ arch/x86/lib/zimage.c                         |   3 -
+ board/coreboot/coreboot/coreboot.c            |   2 +-
+ board/coreboot/coreboot/sysinfo.c             |   2 +-
+ board/google/chromebook_coral/coral.c         |   2 +-
+ board/google/trogdor/Makefile                 |   3 +
+ board/google/trogdor/debug.config             |   6 +
+ board/google/trogdor/debug_uart.c             |  41 ++
+ boot/Kconfig                                  |   1 +
+ boot/bootmeth_cros.c                          |   2 +-
+ boot/expo_build_cb.c                          |   2 +-
+ boot/fdt_support.c                            |  54 +-
+ boot/image-fdt.c                              |   4 +
+ cmd/Kconfig                                   |   4 +-
+ cmd/Makefile                                  |   1 +
+ cmd/{x86 => }/cbsysinfo.c                     |  40 +-
+ cmd/pstore.c                                  |  51 +-
+ cmd/version.c                                 |   2 +-
+ cmd/x86/Makefile                              |   1 -
+ cmd/x86/cbcmos.c                              |   2 +-
+ cmd/ximg.c                                    |  28 +
+ common/board_f.c                              |   4 +
+ configs/chromebook_trogdor_defconfig          | 138 +++++
+ doc/board/google/chromebook_trogdor.rst       |  69 +++
+ doc/board/google/index.rst                    |   1 +
+ drivers/clk/clk-stub.c                        |   1 +
+ drivers/clk/qcom/Kconfig                      |   8 +
+ drivers/clk/qcom/Makefile                     |   1 +
+ drivers/clk/qcom/clock-sc7180.c               | 153 +++++
+ drivers/clk/qcom/clock-sc7280.c               |  22 +
+ drivers/misc/cbmem_console.c                  |   2 +-
+ drivers/pinctrl/qcom/Kconfig                  |   8 +
+ drivers/pinctrl/qcom/Makefile                 |   1 +
+ drivers/pinctrl/qcom/pinctrl-sc7180.c         | 133 ++++
+ drivers/serial/serial_coreboot.c              |   2 +-
+ drivers/serial/serial_msm_geni.c              |  26 +-
+ drivers/spi/Kconfig                           |  10 +
+ drivers/spi/Makefile                          |   1 +
+ drivers/spi/spi-geni-qcom.c                   | 569 ++++++++++++++++++
+ drivers/video/coreboot.c                      |   2 +-
+ .../x86/include/asm => include}/cb_sysinfo.h  |  51 +-
+ .../include/asm => include}/coreboot_tables.h |  24 +
+ .../coreboot_timestamp.h                      |   9 +-
+ lib/Makefile                                  |   2 +
+ lib/coreboot/Kconfig                          |  55 ++
+ {arch/x86/cpu => lib}/coreboot/Makefile       |  11 +-
+ {arch/x86/lib => lib}/coreboot/cb_sysinfo.c   | 288 ++++++++-
+ {arch/x86/cpu => lib}/coreboot/sdram.c        |  25 +-
+ {arch/x86/cpu => lib}/coreboot/timestamp.c    |  15 +-
+ 66 files changed, 1863 insertions(+), 273 deletions(-)
+ create mode 100644 arch/arm/cpu/armv8/coreboot/Makefile
+ create mode 100644 arch/arm/cpu/armv8/coreboot/cpu.c
+ delete mode 100644 arch/x86/cpu/coreboot/Kconfig
+ create mode 100644 board/google/trogdor/Makefile
+ create mode 100644 board/google/trogdor/debug.config
+ create mode 100644 board/google/trogdor/debug_uart.c
+ rename cmd/{x86 => }/cbsysinfo.c (93%)
+ create mode 100644 configs/chromebook_trogdor_defconfig
+ create mode 100644 doc/board/google/chromebook_trogdor.rst
+ create mode 100644 drivers/clk/qcom/clock-sc7180.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sc7180.c
+ create mode 100644 drivers/spi/spi-geni-qcom.c
+ rename {arch/x86/include/asm => include}/cb_sysinfo.h (86%)
+ rename {arch/x86/include/asm => include}/coreboot_tables.h (96%)
+ rename arch/x86/include/asm/arch-coreboot/timestamp.h => include/coreboot_timestamp.h (63%)
+ create mode 100644 lib/coreboot/Kconfig
+ copy {arch/x86/cpu => lib}/coreboot/Makefile (71%)
+ rename {arch/x86/lib => lib}/coreboot/cb_sysinfo.c (62%)
+ copy {arch/x86/cpu => lib}/coreboot/sdram.c (84%)
+ rename {arch/x86/cpu => lib}/coreboot/timestamp.c (83%)
+
+
+base-commit: 9d3f1ebaf8751f0287b5d02158cc706435f8fb19
+-- 
+Sent by a computer, using git, on the internet
+
