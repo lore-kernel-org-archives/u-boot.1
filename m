@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD50C54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 17:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C425C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 17:21:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6CDE8338D;
-	Fri, 23 May 2025 19:20:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BB52833C8;
+	Fri, 23 May 2025 19:20:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 487608338D; Fri, 23 May 2025 19:20:32 +0200 (CEST)
+ id 71E6F8337A; Fri, 23 May 2025 19:20:32 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEF188337A
+ by phobos.denx.de (Postfix) with ESMTPS id 5B44C83303
  for <u-boot@lists.denx.de>; Fri, 23 May 2025 19:20:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
@@ -25,7 +25,7 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uIW4J-0076pt-Dr;
+ (envelope-from <tharvey@gateworks.com>) id 1uIW4I-0076pt-Sx;
  Fri, 23 May 2025 17:20:27 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de,
@@ -33,10 +33,10 @@ To: u-boot@lists.denx.de,
 Cc: Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 04/13] board: venice: fix dram bus config for
- GW7902/GW7903/GW7904
-Date: Fri, 23 May 2025 10:20:09 -0700
-Message-Id: <20250523172018.4164647-4-tharvey@gateworks.com>
+Subject: [PATCH 03/13] board: venice: move soc-specific dram config into
+ soc-specific files
+Date: Fri, 23 May 2025 10:20:08 -0700
+Message-Id: <20250523172018.4164647-3-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250523172018.4164647-1-tharvey@gateworks.com>
 References: <20250523172018.4164647-1-tharvey@gateworks.com>
@@ -58,116 +58,384 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GW7902/GW7903/GW7904 have an alternate databus layout affecting a few
-of the DDRC and DDR PHY registers.
-
-The 512MB configuration used this alternate bus layout. Change
-the 512MB config to the standard bus configuration and add a generic
-function to patch the DDRC/PHY configs for the alternate bus layout.
+Move the determination of the dram timings into the soc-specific files.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- board/gateworks/venice/lpddr4_timing_imx8mm.c | 46 +++++++++++++++++--
- 1 file changed, 41 insertions(+), 5 deletions(-)
+ board/gateworks/venice/lpddr4_timing.h        | 14 +--
+ board/gateworks/venice/lpddr4_timing_imx8mm.c | 57 ++++++++----
+ board/gateworks/venice/lpddr4_timing_imx8mn.c | 31 ++++++-
+ board/gateworks/venice/lpddr4_timing_imx8mp.c | 23 ++++-
+ board/gateworks/venice/spl.c                  | 86 ++++---------------
+ 5 files changed, 108 insertions(+), 103 deletions(-)
 
+diff --git a/board/gateworks/venice/lpddr4_timing.h b/board/gateworks/venice/lpddr4_timing.h
+index d19902f10ec3..21997f6fb2a1 100644
+--- a/board/gateworks/venice/lpddr4_timing.h
++++ b/board/gateworks/venice/lpddr4_timing.h
+@@ -6,18 +6,6 @@
+ #ifndef __LPDDR4_TIMING_H__
+ #define __LPDDR4_TIMING_H__
+ 
+-#ifdef CONFIG_IMX8MM
+-extern struct dram_timing_info dram_timing_512mb;
+-extern struct dram_timing_info dram_timing_1gb;
+-extern struct dram_timing_info dram_timing_2gb;
+-extern struct dram_timing_info dram_timing_4gb;
+-#elif CONFIG_IMX8MN
+-extern struct dram_timing_info dram_timing_1gb_single_die;
+-extern struct dram_timing_info dram_timing_2gb_single_die;
+-extern struct dram_timing_info dram_timing_2gb_dual_die;
+-#elif CONFIG_IMX8MP
+-extern struct dram_timing_info dram_timing_1gb_single_die;
+-extern struct dram_timing_info dram_timing_4gb_dual_die;
+-#endif
++extern struct dram_timing_info *spl_dram_init(const char *model, int sizemb);
+ 
+ #endif /* __LPDDR4_TIMING_H__ */
 diff --git a/board/gateworks/venice/lpddr4_timing_imx8mm.c b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-index 39e4e46490fd..956071c5125d 100644
+index 3f2c090a94fc..39e4e46490fd 100644
 --- a/board/gateworks/venice/lpddr4_timing_imx8mm.c
 +++ b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-@@ -6,6 +6,7 @@
-  */
+@@ -1830,7 +1830,7 @@ static struct dram_fsp_msg ddr_dram_fsp_msg_512mb[] = {
+ };
+ 
+ /* ddr timing config params */
+-struct dram_timing_info dram_timing_512mb = {
++static struct dram_timing_info dram_timing_512mb = {
+ 	.ddrc_cfg = ddr_ddrc_cfg_512mb,
+ 	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_512mb),
+ 	.ddrphy_cfg = ddr_ddrphy_cfg_512mb,
+@@ -2489,7 +2489,7 @@ static struct dram_fsp_msg lpddr4_dram_fsp_msg_1gb[] = {
+ };
+ 
+ /* lpddr4 timing config params */
+-struct dram_timing_info dram_timing_1gb = {
++static struct dram_timing_info dram_timing_1gb = {
+ 	.ddrc_cfg = lpddr4_ddrc_cfg_1gb,
+ 	.ddrc_cfg_num = ARRAY_SIZE(lpddr4_ddrc_cfg_1gb),
+ 	.ddrphy_cfg = lpddr4_ddrphy_cfg_1gb,
+@@ -3005,7 +3005,7 @@ static struct dram_fsp_msg lpddr4_dram_fsp_msg_4gb[] = {
+ };
+ 
+ /* lpddr4 timing config params */
+-struct dram_timing_info dram_timing_4gb = {
++static struct dram_timing_info dram_timing_4gb = {
+ 	.ddrc_cfg = lpddr4_ddrc_cfg_4gb,
+ 	.ddrc_cfg_num = ARRAY_SIZE(lpddr4_ddrc_cfg_4gb),
+ 	.ddrphy_cfg = lpddr4_ddrphy_cfg_4gb,
+@@ -3140,12 +3140,12 @@ static struct dram_cfg_param lpddr4_ddrphy_cfg_2gb[] = {
+ 	{ 0x100a7, 0x7 },
+ 	{ 0x110a0, 0x0 },
+ 	{ 0x110a1, 0x1 },
+-	{ 0x110a2, 0x2 },
+-	{ 0x110a3, 0x3 },
+-	{ 0x110a4, 0x4 },
+-	{ 0x110a5, 0x5 },
+-	{ 0x110a6, 0x6 },
+-	{ 0x110a7, 0x7 },
++	{ 0x110a2, 0x3 },
++	{ 0x110a3, 0x4 },
++	{ 0x110a4, 0x5 },
++	{ 0x110a5, 0x2 },
++	{ 0x110a6, 0x7 },
++	{ 0x110a7, 0x6 },
+ 	{ 0x120a0, 0x0 },
+ 	{ 0x120a1, 0x1 },
+ 	{ 0x120a2, 0x3 },
+@@ -3156,12 +3156,12 @@ static struct dram_cfg_param lpddr4_ddrphy_cfg_2gb[] = {
+ 	{ 0x120a7, 0x6 },
+ 	{ 0x130a0, 0x0 },
+ 	{ 0x130a1, 0x1 },
+-	{ 0x130a2, 0x5 },
+-	{ 0x130a3, 0x2 },
+-	{ 0x130a4, 0x3 },
+-	{ 0x130a5, 0x4 },
+-	{ 0x130a6, 0x7 },
+-	{ 0x130a7, 0x6 },
++	{ 0x130a2, 0x2 },
++	{ 0x130a3, 0x3 },
++	{ 0x130a4, 0x4 },
++	{ 0x130a5, 0x5 },
++	{ 0x130a6, 0x6 },
++	{ 0x130a7, 0x7 },
+ 	{ 0x1005f, 0x1ff },
+ 	{ 0x1015f, 0x1ff },
+ 	{ 0x1105f, 0x1ff },
+@@ -3521,7 +3521,7 @@ static struct dram_fsp_msg lpddr4_dram_fsp_msg_2gb[] = {
+ };
+ 
+ /* lpddr4 timing config params */
+-struct dram_timing_info dram_timing_2gb = {
++static struct dram_timing_info dram_timing_2gb = {
+ 	.ddrc_cfg = lpddr4_ddrc_cfg_2gb,
+ 	.ddrc_cfg_num = ARRAY_SIZE(lpddr4_ddrc_cfg_2gb),
+ 	.ddrphy_cfg = lpddr4_ddrphy_cfg_2gb,
+@@ -3534,3 +3534,28 @@ struct dram_timing_info dram_timing_2gb = {
+ 	.ddrphy_pie_num = ARRAY_SIZE(lpddr4_phy_pie),
+ 	.fsp_table = { 3000, 400, 100, },
+ };
++
++struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
++{
++	struct dram_timing_info *dram_timing;
++
++	switch (sizemb) {
++	case 512:
++		dram_timing = &dram_timing_512mb;
++		break;
++	case 1024:
++		dram_timing = &dram_timing_1gb;
++		break;
++	case 2048:
++		dram_timing = &dram_timing_2gb;
++		break;
++	case 4096:
++		dram_timing = &dram_timing_4gb;
++		break;
++	default:
++		printf("unsupported");
++		dram_timing = &dram_timing_1gb;
++	}
++
++	return dram_timing;
++}
+diff --git a/board/gateworks/venice/lpddr4_timing_imx8mn.c b/board/gateworks/venice/lpddr4_timing_imx8mn.c
+index 9ba2d2571ce5..e7d04822c9cf 100644
+--- a/board/gateworks/venice/lpddr4_timing_imx8mn.c
++++ b/board/gateworks/venice/lpddr4_timing_imx8mn.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
  
  #include <linux/kernel.h>
 +#include <string.h>
  #include <asm/arch/ddr.h>
- #include <asm/arch/lpddr4_define.h>
  
-@@ -1333,7 +1334,7 @@ static struct dram_cfg_param ddr_ddrc_cfg_512mb[] = {
- 	{ 0x3d400304, 0x1 },
- 	{ 0x3d400030, 0x1 },
- 	{ 0x3d400000, 0xa1080020 },
--	{ 0x3d400020, 0x203 },
-+	{ 0x3d400020, 0x223 },
- 	{ 0x3d400024, 0x3a980 },
- 	{ 0x3d400064, 0x5b0062 },
- 	{ 0x3d4000d0, 0xc00305ba },
-@@ -1385,7 +1386,7 @@ static struct dram_cfg_param ddr_ddrc_cfg_512mb[] = {
- 	{ 0x3d400498, 0x620096 },
- 	{ 0x3d40049c, 0x1100e07 },
- 	{ 0x3d4004a0, 0xc8012c },
--	{ 0x3d402020, 0x1 },
-+	{ 0x3d402020, 0x21 },
- 	{ 0x3d402024, 0x7d00 },
- 	{ 0x3d402050, 0x20d040 },
- 	{ 0x3d402064, 0xc000d },
-@@ -1410,7 +1411,7 @@ static struct dram_cfg_param ddr_ddrc_cfg_512mb[] = {
- 	{ 0x3d402194, 0x80303 },
- 	{ 0x3d4021b4, 0x100 },
- 	{ 0x3d4020f4, 0xc99 },
--	{ 0x3d403020, 0x1 },
-+	{ 0x3d403020, 0x21 },
- 	{ 0x3d403024, 0x1f40 },
- 	{ 0x3d403050, 0x20d040 },
- 	{ 0x3d403064, 0x30004 },
-@@ -1459,9 +1460,9 @@ static struct dram_cfg_param ddr_ddrphy_cfg_512mb[] = {
- 	{ 0x120a0, 0x0 },
- 	{ 0x120a1, 0x1 },
- 	{ 0x120a2, 0x3 },
--	{ 0x120a3, 0x4 },
-+	{ 0x120a3, 0x2 },
- 	{ 0x120a4, 0x5 },
--	{ 0x120a5, 0x2 },
-+	{ 0x120a5, 0x4 },
- 	{ 0x120a6, 0x7 },
- 	{ 0x120a7, 0x6 },
- 	{ 0x130a0, 0x0 },
-@@ -3535,6 +3536,28 @@ static struct dram_timing_info dram_timing_2gb = {
- 	.fsp_table = { 3000, 400, 100, },
+ /*
+@@ -1425,7 +1426,7 @@ static struct dram_fsp_msg ddr_dram_fsp_msg_1gb_single_die[] = {
  };
  
-+static void apply_cfg_patch(struct dram_cfg_param *cfg, int cfg_sz,
-+			    struct dram_cfg_param *patch, int patch_sz)
-+{
-+	int i, j;
-+
-+	for (i = 0; i < cfg_sz; i++)
-+		for (j = 0; j < patch_sz; j++)
-+			if (cfg[i].reg == patch[j].reg)
-+				cfg[i].val = patch[j].val;
-+}
-+
-+static struct dram_cfg_param ddr_ddrc_cfg_alt_patch[] = {
-+	{ 0x3d400020, 0x203},
-+	{ 0x3d402020, 0x1},
-+	{ 0x3d403020, 0x1}
-+};
-+
-+static struct dram_cfg_param ddr_ddrphy_cfg_alt_patch[] = {
-+	{ 0x120a3, 0x4 },
-+	{ 0x120a5, 0x2 },
-+};
-+
- struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
- {
- 	struct dram_timing_info *dram_timing;
-@@ -3557,5 +3580,18 @@ struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
- 		dram_timing = &dram_timing_1gb;
- 	}
+ /* ddr timing config params */
+-struct dram_timing_info dram_timing_1gb_single_die = {
++static struct dram_timing_info dram_timing_1gb_single_die = {
+ 	.ddrc_cfg = ddr_ddrc_cfg_1gb_single_die,
+ 	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_1gb_single_die),
+ 	.ddrphy_cfg = ddr_ddrphy_cfg_1gb_single_die,
+@@ -1890,7 +1891,7 @@ static struct dram_fsp_msg ddr_dram_fsp_msg_2gb_single_die[] = {
+ };
  
-+	/* apply ddrc/phy register changes for alternate dram bus layout */
-+	if (!strncmp(model, "GW7902", 6) ||
-+	    !strncmp(model, "GW7903", 6) ||
-+	    !strncmp(model, "GW7904", 6)) {
-+		apply_cfg_patch(dram_timing->ddrc_cfg, dram_timing->ddrc_cfg_num,
-+				ddr_ddrc_cfg_alt_patch,
-+				ARRAY_SIZE(ddr_ddrc_cfg_alt_patch));
+ /* ddr timing config params */
+-struct dram_timing_info dram_timing_2gb_single_die = {
++static struct dram_timing_info dram_timing_2gb_single_die = {
+ 	.ddrc_cfg = ddr_ddrc_cfg_2gb_single_die,
+ 	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_2gb_single_die),
+ 	.ddrphy_cfg = ddr_ddrphy_cfg_2gb_single_die,
+@@ -2354,7 +2355,7 @@ static struct dram_fsp_msg ddr_dram_fsp_msg_2gb_dual_die[] = {
+ };
+ 
+ /* ddr timing config params */
+-struct dram_timing_info dram_timing_2gb_dual_die = {
++static struct dram_timing_info dram_timing_2gb_dual_die = {
+ 	.ddrc_cfg = ddr_ddrc_cfg_2gb_dual_die,
+ 	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_2gb_dual_die),
+ 	.ddrphy_cfg = ddr_ddrphy_cfg_2gb_dual_die,
+@@ -2367,3 +2368,27 @@ struct dram_timing_info dram_timing_2gb_dual_die = {
+ 	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
+ 	.fsp_table = { 3200, 400, 100, },
+ };
 +
-+		apply_cfg_patch(dram_timing->ddrphy_cfg, dram_timing->ddrphy_cfg_num,
-+				ddr_ddrphy_cfg_alt_patch,
-+				ARRAY_SIZE(ddr_ddrphy_cfg_alt_patch));
++struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
++{
++	struct dram_timing_info *dram_timing;
++
++	switch (sizemb) {
++	case 1024:
++		dram_timing = &dram_timing_1gb_single_die;
++		break;
++	case 2048:
++		if (!strcmp(model, "GW7902-SP466-A") ||
++		    !strcmp(model, "GW7902-SP466-B")) {
++			dram_timing = &dram_timing_2gb_dual_die;
++		} else {
++			dram_timing = &dram_timing_2gb_single_die;
++		}
++		break;
++	default:
++		printf("unsupported");
++		dram_timing = &dram_timing_2gb_dual_die;
 +	}
 +
- 	return dram_timing;
++	return dram_timing;
++}
+diff --git a/board/gateworks/venice/lpddr4_timing_imx8mp.c b/board/gateworks/venice/lpddr4_timing_imx8mp.c
+index 56c6e2b5cff7..36c4cb147e82 100644
+--- a/board/gateworks/venice/lpddr4_timing_imx8mp.c
++++ b/board/gateworks/venice/lpddr4_timing_imx8mp.c
+@@ -1832,7 +1832,7 @@ struct dram_fsp_msg ddr_dram_fsp_msg_1gb_single_die[] = {
+ };
+ 
+ /* ddr timing config params */
+-struct dram_timing_info dram_timing_1gb_single_die = {
++static struct dram_timing_info dram_timing_1gb_single_die = {
+ 	.ddrc_cfg = ddr_ddrc_cfg_1gb_single_die,
+ 	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_1gb_single_die),
+ 	.ddrphy_cfg = ddr_ddrphy_cfg_1gb_single_die,
+@@ -2364,7 +2364,7 @@ static struct dram_fsp_msg ddr_dram_fsp_msg_4gb_dual_die[] = {
+ };
+ 
+ /* ddr timing config params */
+-struct dram_timing_info dram_timing_4gb_dual_die = {
++static struct dram_timing_info dram_timing_4gb_dual_die = {
+ 	.ddrc_cfg = ddr_ddrc_cfg_4gb_dual_die,
+ 	.ddrc_cfg_num = ARRAY_SIZE(ddr_ddrc_cfg_4gb_dual_die),
+ 	.ddrphy_cfg = ddr_ddrphy_cfg_4gb_dual_die,
+@@ -2377,3 +2377,22 @@ struct dram_timing_info dram_timing_4gb_dual_die = {
+ 	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
+ 	.fsp_table = { 4000, 400, 100, },
+ };
++
++struct dram_timing_info *spl_dram_init(const char *model, int sizemb)
++{
++	struct dram_timing_info *dram_timing;
++
++	switch (sizemb) {
++	case 1024:
++		dram_timing = &dram_timing_1gb_single_die;
++		break;
++	case 4096:
++		dram_timing = &dram_timing_4gb_dual_die;
++		break;
++	default:
++		printf("unsupported");
++		dram_timing = &dram_timing_4gb_dual_die;
++	}
++
++	return dram_timing;
++}
+diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
+index bcdc1a2a4685..275f9d3453ea 100644
+--- a/board/gateworks/venice/spl.c
++++ b/board/gateworks/venice/spl.c
+@@ -32,69 +32,6 @@
+ 
+ #define PCIE_RSTN IMX_GPIO_NR(4, 6)
+ 
+-static void spl_dram_init(int size)
+-{
+-	struct dram_timing_info *dram_timing;
+-
+-	switch (size) {
+-#ifdef CONFIG_IMX8MM
+-	case 512:
+-		dram_timing = &dram_timing_512mb;
+-		break;
+-	case 1024:
+-		dram_timing = &dram_timing_1gb;
+-		break;
+-	case 2048:
+-		dram_timing = &dram_timing_2gb;
+-		break;
+-	case 4096:
+-		dram_timing = &dram_timing_4gb;
+-		break;
+-	default:
+-		printf("Unknown DDR configuration: %d MiB\n", size);
+-		dram_timing = &dram_timing_1gb;
+-		size = 1024;
+-#elif CONFIG_IMX8MN
+-	case 1024:
+-		dram_timing = &dram_timing_1gb_single_die;
+-		break;
+-	case 2048:
+-		if (!strcmp(eeprom_get_model(), "GW7902-SP466-A") ||
+-		    !strcmp(eeprom_get_model(), "GW7902-SP466-B")) {
+-			dram_timing = &dram_timing_2gb_dual_die;
+-		} else {
+-			dram_timing = &dram_timing_2gb_single_die;
+-		}
+-		break;
+-	default:
+-		printf("Unknown DDR configuration: %d MiB\n", size);
+-		dram_timing = &dram_timing_2gb_dual_die;
+-		size = 2048;
+-#elif CONFIG_IMX8MP
+-	case 1024:
+-		dram_timing = &dram_timing_1gb_single_die;
+-		break;
+-	case 4096:
+-		dram_timing = &dram_timing_4gb_dual_die;
+-		break;
+-	default:
+-		printf("Unknown DDR configuration: %d GiB\n", size);
+-		dram_timing = &dram_timing_4gb_dual_die;
+-		size = 4096;
+-#endif
+-	}
+-
+-	printf("DRAM    : LPDDR4 ");
+-	if (size > 512)
+-		printf("%d GiB", size / 1024);
+-	else
+-		printf("%d MiB", size);
+-	printf(" %dMT/s %dMHz\n",
+-	       dram_timing->fsp_msg[0].drate,
+-	       dram_timing->fsp_msg[0].drate / 2);
+-	ddr_init(dram_timing);
+-}
+-
+ /*
+  * Model specific PMIC adjustments necessary prior to DRAM init
+  *
+@@ -118,9 +55,8 @@ static int dm_i2c_clrsetbits(struct udevice *dev, uint reg, uint clr, uint set)
+ 	return dm_i2c_write(dev, reg, &val, 1);
+ }
+ 
+-static int power_init_board(struct udevice *gsc)
++static int power_init_board(const char *model, struct udevice *gsc)
+ {
+-	const char *model = eeprom_get_model();
+ 	struct udevice *bus;
+ 	struct udevice *dev;
+ 	int ret;
+@@ -251,9 +187,11 @@ static int power_init_board(struct udevice *gsc)
+ 
+ void board_init_f(ulong dummy)
+ {
++	struct dram_timing_info *dram_timing;
+ 	struct udevice *bus, *dev;
++	const char *model;
++	int dram_szmb;
+ 	int i, ret;
+-	int dram_sz;
+ 
+ 	arch_cpu_init();
+ 
+@@ -311,13 +249,23 @@ void board_init_f(ulong dummy)
+ 			break;
+ 		mdelay(1);
+ 	}
+-	dram_sz = venice_eeprom_init(0);
++	dram_szmb = venice_eeprom_init(0);
++	model = eeprom_get_model();
+ 
+ 	/* PMIC */
+-	power_init_board(dev);
++	power_init_board(model, dev);
+ 
+ 	/* DDR initialization */
+-	spl_dram_init(dram_sz);
++	printf("DRAM    : LPDDR4 ");
++	if (dram_szmb > 512)
++		printf("%d GiB", dram_szmb / 1024);
++	else
++		printf("%d MiB", dram_szmb);
++	dram_timing = spl_dram_init(model, dram_szmb);
++	printf(" %dMT/s %dMHz\n",
++	       dram_timing->fsp_msg[0].drate,
++	       dram_timing->fsp_msg[0].drate / 2);
++	ddr_init(dram_timing);
+ 
+ 	board_init_r(NULL, 0);
  }
 -- 
 2.25.1
