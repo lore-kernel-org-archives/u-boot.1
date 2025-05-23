@@ -4,86 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CB0BC54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A176C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:55:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8680A831C2;
-	Fri, 23 May 2025 18:47:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8158983285;
+	Fri, 23 May 2025 18:55:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="soh9SvJw";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="Yv6GUMSt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="fKvRRCGX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC914832D8; Fri, 23 May 2025 18:47:23 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A1CA4832D8; Fri, 23 May 2025 18:55:03 +0200 (CEST)
+Received: from sendmail.purelymail.com (sendmail.purelymail.com
+ [34.202.193.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBDC982D2B
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 18:47:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD15E83278
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 18:55:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-2dfe2913a4bso53452fac.1
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 09:47:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748018840; x=1748623640; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GbTJUidmD/s+aEzFktGLLpUKvqGZH64JCdl5TErtj94=;
- b=soh9SvJw3P431FljY9H4CGqShugylcypdVyUOlSb8jIFKpY4sRffrT30xlLtwMOcxV
- QkjT6tZmS1Tohyq77LD92GUahIu93Luwb7nfK4Z95QUmVZktQ96Eu+uceki8UMkDA93W
- F8Qs/qcqeN1oRg11bHxMdhqSPvZApT6qFqcpk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748018840; x=1748623640;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GbTJUidmD/s+aEzFktGLLpUKvqGZH64JCdl5TErtj94=;
- b=rXmaoUxPYKbvRPls5reRrBYeuhyFci8BQ/HOU6trN4HmPLZCsyiecWGT2JZewTPNeZ
- lBgxA9486wf/lDNHla38F8U6XR+34jUYmYx1uVY7xa+dHu6LKMKeDYm5GHu41nqdaChs
- 9BSmYOuC1H2KJcDgiJswd317Fr/0FEAbyw78YNx7ao4yQi01y3UaUdYYQXjqVKlYC2LW
- NMuEXpwdyn+ktZJn0TcBeN2eh+xU2vRzC1a4/on8qJlTyvwnLN8gyM1+iqhxniup5/+j
- cQuL2zK0JV19j8Vv1mEFnWeRDSNc3dJel7v44VUi3fjFHhMISGiEHC8LKJB3aI+OVDJz
- PFiw==
-X-Gm-Message-State: AOJu0YzwSQekz1q8VIn3Kn9Q3w1FySN3N+eA9TDs36vE34llfkOyW5Bo
- l1Qiq1Kvy/4OZ/HZntduraPA9q1xpg4C2Z4E0S+XGxbl+BqhIJYO1dIN3dQcN/NvBnU=
-X-Gm-Gg: ASbGncuKJXuXMioqA8tRNIcXWi9lKqoTAxLQyDw1wAERPNtPtTOJ9fqkKkP2XBTJp4w
- XbP8+NbaceStye2C2EdLH/CeY0+/E8sXD/AXLRMaeYSMFrLL3PKOrw1WzPe6wuP6m9W5kKwAAB4
- D8b6A4nXAQah7mhQkuHHaYvj7ERWqjBDhou5VrB5GVLTUOM0OymZhRNPFuFZj+yqEvfAxdmQYiI
- 8Vfm0UJrJZU39h18Gx6UhlnKchKi+CcA0bC4fsRvY7AQnQx+E9w+kIXsrOFvL39vVxdxGbHt0Qc
- TkvMKMBvHjEHl2ld7U3pWng9qpEVBXd/gAgIeVfDNc3ipeLvJbV0/aaXC4r/V6mglzU7+n0FnkS
- p+/H/sLgPu+zO
-X-Google-Smtp-Source: AGHT+IFBcMhB12xB96AwWP2KzI440kuArASbZh0GK1OTKPqgs8e5Pd3K6RVJAQGdp/JXJAgm7dSlyw==
-X-Received: by 2002:a05:6871:2201:b0:2c2:5270:f182 with SMTP id
- 586e51a60fabf-2e3c85ed542mr17321768fac.39.1748018840317; 
- Fri, 23 May 2025 09:47:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c0a9bed5sm3631285fac.34.2025.05.23.09.47.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 09:47:19 -0700 (PDT)
-Date: Fri, 23 May 2025 10:47:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
- module
-Message-ID: <20250523164717.GU100073@bill-the-cat>
-References: <20250504132356.2317305-2-sjg@chromium.org>
- <20250504132356.2317305-1-sjg@chromium.org>
- <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
- <20250523140455.GP100073@bill-the-cat>
- <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
+ spf=pass smtp.mailfrom=justin@tidylabs.net
+DKIM-Signature: a=rsa-sha256;
+ b=Yv6GUMStDnhAFqZLoGiJb5ocdAM2+YwW+dFGLQgI11/itOdyvWDw0bbq4qUlKSBgvbN2kUWgaBm2lpA2K7x1106KPDru4ckHrt75uleRDaXjSuTavUQYhFufhdZs4MxfEDgZd56ytuucd39OsDOufh81fCMAGcFbudQga4waE/8vQpwhdh7yBdfr1AdQYKCuu14wCeqrymlj4JI62XwuZeSThNztNMTtghlaD9u2f8DKMVkIFeT21XCSQgXvIIPZq0ulyYZwodyigw7be/aa7ZDXrteqQWVYopJAVla0TBQK3ycVrXw+9hKT9YE+ZBct9IARiK+TDLWStoQjPV7olA==;
+ s=purelymail2; d=tidylabs.net; v=1;
+ bh=BxnPtYPU7BbWJn4NqMjSuyD6A3+4eVAk49+UqmarWf0=;
+ h=Received:From:To:Subject:Date; 
+DKIM-Signature: a=rsa-sha256;
+ b=fKvRRCGXNL0OEZd38+aSTSnUGeiKRosJOGqps0/DQnXjyc70TGQQUwycGtcFrQiZlXYl6NhsrhH5HxatbANBUlIB/R+xsxb6p0L/sMmtC22yyqGZaIFzfcO3KXQwXLhrmz02NbUXwIdsQhhh8d4SgGMXuxp6pnmHNpyzzJ0Pc30Rqb3UCTPzevVD/mKSOJjbr2veebXFS2vAE3CPKKwTNzKehXHNKSlsYALUCaJ+SylXf97JAA7Xfrl7RzqgqtlxyH/zrQWNdn+kyD95xDsirN+Ao9A+/bkTHhtSC9YPF5yofPHWV2sh7hMTCXUmuhZ8L0TGK2PZEWtExe48rX+iqg==;
+ s=purelymail2; d=purelymail.com; v=1;
+ bh=BxnPtYPU7BbWJn4NqMjSuyD6A3+4eVAk49+UqmarWf0=;
+ h=Feedback-ID:Received:From:To:Subject:Date; 
+Feedback-ID: 81901:11097:null:purelymail
+X-Pm-Original-To: u-boot@lists.denx.de
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -2127220571; 
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 23 May 2025 16:54:58 +0000 (UTC)
+From: Justin Klaassen <justin@tidylabs.net>
+To: u-boot@lists.denx.de
+Cc: Justin Klaassen <justin@tidylabs.net>, Alexandre Vicenzi <linux@alxd.me>,
+ Anand Moon <linux.amoon@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>,
+ Deepak Das <deepakdas.linux@gmail.com>, Harsha Vardhan V M <h-vm@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Keerthy <j-keerthy@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Samuel Holland <samuel@sholland.org>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Xiaobo Tian <peterwillcn@gmail.com>
+Subject: [PATCH v4 0/5] rockchip: rk3399: rk3399-nanopi-4: Fix SD power
+ initialization in SPL
+Date: Fri, 23 May 2025 16:53:36 +0000
+Message-ID: <20250523165406.40915-1-justin@tidylabs.net>
+X-Mailer: git-send-email 2.45.3
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FEXtxWHcYsWE9CdY"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
+Content-Type: text/plain; charset=UTF-8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,70 +88,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FEXtxWHcYsWE9CdY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The NanoPi RK3399 boards support UHS-I (up to SDR104) SD cards, however
+using any of these 1.8v modes results in a boot failure in SPL upon soft
+reboot.
 
-On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
-> > > It is easier for tests if the top-level control logic is all in one
-> > > module. Create a new do_patman() function to handle this. Move the
-> > > existing code into it.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v1)
-> > >
-> > >  tools/patman/__main__.py | 49 ++----------------------------------
-> > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++=
---
-> > >  2 files changed, 54 insertions(+), 49 deletions(-)
-> > >
-> > > Applied to sjg/master, thanks!
-> >
-> > Odd. I thought you had posted this against master or next, intending it
-> > for mainline, which is why I assigned it to you in patchwork. I see the
-> > cover letter is missing what commit it's against. And instead here you
-> > are once again spamming the list and with messages about your personal
-> > tree. Why?
->=20
-> I'm applying it to my tree and intend to send you a PR at some point,
-> with collected tools/ patches. So I believe I need to send emails
-> about applying things and update it in patchwork. Let's discuss this
-> in a future call.
+The issue is that the "vcc_sdio" regulator is left at 1.8v on reboot and
+the corresponding GPIO defaults to 3.3v. This prevents the SD card from
+being reinitialized and read successfully.
 
-I don't see what there is to discuss. Please follow the normal process
-for mainline and stop spamming the list with notices for your personal
-tree. You're also diverging your own tree further from mainline by doing
-this and making it less likely (multiple people have told you they don't
-want to review things not against mainline) any follow-up work will get
-comments other than that it's not applicable to mainline.
+This change series resolves this issue by allowing the proper
+initialization and control of the "vcc3v0_sd" (vmmc-supply) and
+"vcc_sdio" (vqmmc-supply) regulators and corresponding GPIO in SPL.
+
+Changes in v4:
+- Resolved merge conflict
+
+Changes in v3:
+- Use dev_dbg instead of log_debug
+- Add depends on SPL_DM_REGULATOR
+
+Changes in v2:
+- Made added IO-domain driver logs verbose and consistent
+- Added separate patch for added CONFIG_SPL_ROCKCHIP_IODOMAIN Kconfig
+- Added separate patch for added CONFIG_SPL_REGULATOR_RK8XX Kconfig
+- Added patch to remove device-tree properties that conflicted with MMC dri=
+ver initialization
+- Added defconfig changes for all NanoPi RK3399 boards
+
+Justin Klaassen (5):
+  rockchip: io-domain: Add debug logging for regulators during probe
+  rockchip: io-domain: Add CONFIG_SPL_ROCKCHIP_IODOMAIN
+  regulator: rk8xx: Add CONFIG_SPL_REGULATOR_RK8XX
+  rockchip: rk3399-nanopi-4: Allow MMC driver to control SD regulators
+  rockchip: rk3399-nanopi-4: Enable IO-domain driver in SPL
+
+ arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 12 ++++++++++++
+ configs/nanopc-t4-rk3399_defconfig      |  7 +++++++
+ configs/nanopi-m4-2gb-rk3399_defconfig  |  7 +++++++
+ configs/nanopi-m4-rk3399_defconfig      |  7 +++++++
+ configs/nanopi-m4b-rk3399_defconfig     |  7 +++++++
+ configs/nanopi-neo4-rk3399_defconfig    |  7 +++++++
+ configs/nanopi-r4s-rk3399_defconfig     |  7 +++++++
+ drivers/misc/Kconfig                    |  8 ++++++++
+ drivers/misc/rockchip-io-domain.c       |  5 ++++-
+ drivers/power/regulator/Kconfig         |  9 +++++++++
+ drivers/power/regulator/rk8xx.c         |  8 ++------
+ 11 files changed, 77 insertions(+), 7 deletions(-)
 
 --=20
-Tom
+2.45.3
 
---FEXtxWHcYsWE9CdY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgwpo0ACgkQFHw5/5Y0
-tywr6wwAujDh+qHTJdircWhBKmx3cpUw4LS8WasOh/PMfN4SnXkQkrQx1rWsgmnR
-//Kv+ubLspDvXwyZUwHfOIMS+eeFwdP2lNz4s4zL6wiGk/PN0/eyjF3KfI98x+Hy
-2BcHIzgV1qtcVFh0B5x+HFi8BtHzwl7pABa/dv5297nZrZo7hbONhpkR7Aq/ev4A
-0S8b3OqZUpmvg8K8LRvYCuf/2POZM+ySbJ+k/R659hIazxqh7OXCm90K2x0sjUaj
-NFlsImrMNriPd2Sfe7naW4xCnz3QtQQUJX+U0Nbo2BS6QERFSZuSR0CZW7R2DKiX
-cN4mHykGIBPHL2fKNS7E0ADIQ1aOFulractXwGSANGQzijwJcmIfnKHfTanifmgG
-MqhGcDHcOMvtbcmqTVWY/Lbqv5kN/RY2V8E3cE62csOmaJ5aXG0Mc5pjzJDtYush
-br48j5Dy7N2jGyhNjgVuMRsHoYRYgyTVBl1M5WpgLHVfHGSA2hPpaXGwn07Ac6wo
-zYCcjjVK
-=+Hv1
------END PGP SIGNATURE-----
-
---FEXtxWHcYsWE9CdY--
