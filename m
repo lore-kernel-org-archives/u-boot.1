@@ -4,77 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF6F4C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 20:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25A2C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 21:22:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CCC3833E8;
-	Fri, 23 May 2025 22:20:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F168E8338C;
+	Fri, 23 May 2025 23:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PkLru5h3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="INMLvDyO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 415AD8334D; Fri, 23 May 2025 22:20:58 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 80624833CA; Fri, 23 May 2025 22:23:29 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F10D2833E8
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:20:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 789408334D
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:23:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-602346b1997so436028a12.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 13:20:55 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-602e5dd500fso90601a12.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 13:23:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748031655; x=1748636455; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748031807; x=1748636607; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rYHWjMDDuQXknlzJ41uPNsDkDBPYlxAMpqdGvsF+dNA=;
- b=PkLru5h3+2KfuegbQQzMDUs9BSTHIQQBuAd4jC0WMujCOAQHtO1UOTw8pr6babjgSA
- ZcdPj9MzpXfTjOEXXprm62Uhx3ft2w5OvuzlMMerBD0qPrCL/QLP42BuahZLCz7SaKtD
- ErRCRYEkOLI1rPqshUlxnLJkLS0vigiiQYC9w=
+ bh=avrAIpzMbKaQGV0QGfLDjMQhwkFkjSs/cwLjbGQgo8E=;
+ b=INMLvDyOgC/79eEfb633ocM71FUNhux+cm6vHP5C2XxcTXYngPv48bJHZBX6FTheK3
+ fmwZCQlq4hI8VZo/YyKeBC4+asrXCFgvw+0Lz0szeFt0DUzNXsvYoClByRKxQmbtgxqB
+ 9rqrba64Py5ba9zh9mJIaOPBkmNPVWCa3lDs4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748031655; x=1748636455;
+ d=1e100.net; s=20230601; t=1748031807; x=1748636607;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rYHWjMDDuQXknlzJ41uPNsDkDBPYlxAMpqdGvsF+dNA=;
- b=ok3evGsMN9tBIuHmQ9BZq/r5BhzmFUIrhdzBFMWIgPq23dQK95vGNscSUaGxToMOH7
- rDZuxsKVShdh4QikpusDsq6eMSIv0O0yJRQHoOnJT+g5yYCl3uVhzQWB1tAx4JWCIMMz
- IraZUi4z7I9eE9DEzyhGie38atutNbxv4R8Nhlqcnw0paGl0X3Fsecf1xgPcNYEYqvhZ
- hUzVhihmVtfisG3hyi3NB1dgotocsTsZP8rh2gjHGFkpFzna754Wiroshbcrh1VamBix
- cZJqM3vN8NA2pY78GyFdn4Ot3+ltHX67agDgIPrlUHfrlMTGWrGu7fTAUvIBYLzHMjTb
- bkgA==
-X-Gm-Message-State: AOJu0Yyda509PH+AFc7zYPT5wRjFJvqj95XxezpY83QncFTeTZSjYu0z
- FnDT0e2ibl1k3vtUbG5ANLZVYg7F9x4izeIxUE49/eWWe99FiwKvW1GldtlYAOV+cmtdK2OIQip
- NyrmOG1tuzU5hO8f0ybrHTdCkABE5mLFRx47LAcii
-X-Gm-Gg: ASbGncug76aznTZ8Wa+Xco25m+nAchUicfHGX+IsSaYOOW+3GR1yvqHqPXsdhOKP/US
- R+KB/ETowyJQ8Bl9amxxWicV5kY7bIm8Ueat2OHXc2HVZlc038aQUAuCjcQBBqZ1kB3q5ZVWxUb
- 22dQ+XXU9ATqv/nqkcE/ITr/SZYsQXTYA=
-X-Google-Smtp-Source: AGHT+IGdYuhYJ3xa0QJWU6Bc1etroEeUdqcFVhd61jKv3D6DH69ejlGsdjy4QhOTuuf9TM1kDV5LoxjrbZmJltzsVto=
-X-Received: by 2002:a17:907:7b99:b0:ad2:39a9:f1b2 with SMTP id
- a640c23a62f3a-ad85b32b957mr39658566b.59.1748031655439; Fri, 23 May 2025
- 13:20:55 -0700 (PDT)
+ bh=avrAIpzMbKaQGV0QGfLDjMQhwkFkjSs/cwLjbGQgo8E=;
+ b=v7rbiiohr2zPHZJzUFQCw9tx/hE6nQGAHrADhE/AWQ+TESBihnlDBeiWgeWYq/60W/
+ OwnLMuE1K+BLd+1ynQj3mpH426FRz02zN4K5gx3W0Pxy2zwoYnNnz5M0a4WxXD6Y7+y0
+ J4xpIbXLgwkD6zXq0uJnsOP/wDX/g9IReR7ohJs6qN5ByLzmQCeuydO5uDzlvMsMOwJL
+ SGSKKP9sSVPKPfj+ATrtGXY6Z6FwbocB795wmnzSjOMu9zBYfyvcxBivQqSsuxDCjhPj
+ Zq4o9girkPO8799WYfLMYCk/wOkvurL+9vGIfkEbb3ATdWcYofCoRPMZtbXm9ziMHXIu
+ +wrQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAQJ2j6O6a0dPf3loXNqcTytN7uKCu+zqjqZVo9Yz6U8s060xIGnY4Ao4HYUmkQ8YMCRBsZQk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPwVZs6yswZ+C4Z3AK8VeGTUdZ2rupKMMTvRnTCBodMh1S2xvu
+ 6pTH9ye+T4XRS+kD5nJ+mGEv7g/VRIu4G7o5EeWOm4+M15IUC9pUP+T5o8mieEwOkCETO5dhQgE
+ KSiNzLxd8pPEQYndobYwaId/vaOfvXuPmUb5QRZ03
+X-Gm-Gg: ASbGnctdy8R3uz86BBj+g9c7G3yj/XCsJI7ZLYniegtECNYw49frYilfHEQNEz5SqL2
+ z/pXG//LaGGqa4cMnfLf6E1WqD3Ocpql/3SIHO2tG2BwnNP8ZK3G7k+Q6iFE9j3p7W63jaHSC/7
+ HS/epqva9YiYnQWDmtXg2SqTbTnBHJv5g=
+X-Google-Smtp-Source: AGHT+IGirqFSV8dIb544Cy7H3v1asdNzQD0Le4ipAKT1pHJnUP0sSJIOnFW4PyzbqP866rVusBIUayoSDkK4ZaoVmi0=
+X-Received: by 2002:a17:907:7ea8:b0:ad2:4736:9c07 with SMTP id
+ a640c23a62f3a-ad85b12ff10mr50739866b.2.1748031806755; Fri, 23 May 2025
+ 13:23:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250504132356.2317305-2-sjg@chromium.org>
- <20250504132356.2317305-1-sjg@chromium.org>
- <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
- <20250523140455.GP100073@bill-the-cat>
- <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
- <20250523164717.GU100073@bill-the-cat>
-In-Reply-To: <20250523164717.GU100073@bill-the-cat>
+References: <20250523130651.1329593-1-sjg@chromium.org>
+ <3b23fc9d-345f-4945-b89d-153a18f5828d@gmx.de>
+ <CAFLszTjofbRtjXxfR6MmnHP0hYcpg+pgLKLYDXN2KxLZ2rNPHQ@mail.gmail.com>
+ <20250523164909.GV100073@bill-the-cat>
+ <8734cv45fr.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <8734cv45fr.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 23 May 2025 21:20:37 +0100
-X-Gm-Features: AX0GCFuai7k9HlCp9pNR6WOnJcY0Sxqvo6zm_fldcV7LlmbmgdjNblajvRjG2No
-Message-ID: <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
-Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
- module
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri, 23 May 2025 21:23:15 +0100
+X-Gm-Features: AX0GCFvmB0_VSFCfL-cL7Qh2StE9jxKicO8URVLoMmYyzu3j2dwaliUHQsgfTtA
+Message-ID: <CAFLszTgiPDQxESZ763G6AmZNSriB1W-OSGEEAtcn769oHep-EQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] efi: Move some efi-loader code into a new shared dir
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Tom Rini <trini@konsulko.com>, xypron.glpk@gmx.de, adrianox@gmail.com, 
+ bmeng.cn@gmail.com, caleb.connolly@linaro.org, christian@kohlschutter.com, 
+ daniel@makrotopia.org, ddrokosov@salutedevices.com, eajames@linux.ibm.com, 
+ francesco.dolcini@toradex.com, hiago.franco@toradex.com, 
+ ilias.apalodimas@linaro.org, jdanisevskis@aurora.tech, j@jannau.net, 
+ jeremy.compostella@intel.com, jerome.forissier@linaro.org, 
+ maks.mishinfz@gmail.com, marek.vasut+renesas@mailbox.org, marex@denx.de, 
+ mgarrett@aurora.tech, mkorpershoek@baylibre.com, michal.simek@amd.com, 
+ moritzf@google.com, Oliver.Gaskell@analog.com, patrick.delaunay@foss.st.com, 
+ patrick.rudolph@9elements.com, pkochanowski@sii.pl, pbrobinson@gmail.com, 
+ philippe.reynes@softathome.com, quentin.schulz@cherry.de, 
+ raymond.mao@linaro.org, semen.protsenko@linaro.org, 
+ sebastian.reichel@collabora.com, sughosh.ganu@linaro.org, 
+ tharvey@gateworks.com, vincent.stehle@arm.com, weijie.gao@mediatek.com, 
+ ziyao@disroot.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Fri, 23 May 2025 23:22:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,56 +106,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Mark, Tom,
 
-On Fri, 23 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 23 May 2025 at 18:12, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
-> > Hi Tom,
+> > Date: Fri, 23 May 2025 10:49:09 -0600
+> > From: Tom Rini <trini@konsulko.com>
 > >
-> > On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
+> > On Fri, May 23, 2025 at 05:36:52PM +0100, Simon Glass wrote:
+> > > Hi Heinrich,
 > > >
-> > > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
-> > > > It is easier for tests if the top-level control logic is all in one
-> > > > module. Create a new do_patman() function to handle this. Move the
-> > > > existing code into it.
+> > > On Fri, May 23, 2025, 15:19 Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
+> > > > On 23.05.25 15:06, Simon Glass wrote:
+> > > > > Some functions provided in lib/efi_loader are actually useful for the
+> > > > > app as well. This series refactors the Kconfig and directories a little
+> > > > > so that code is easier to share.
+> > > > >
+> > > > > As a starting point, it moves some filename and device-path functions to
+> > > > > the new directory.
+> > > > >
+> > > > > The next step would be to move device-path code over, but this will need
+> > > > > some discussion.
 > > > >
-> > > > (no changes since v1)
+> > > > Hello Simon,
 > > > >
-> > > >  tools/patman/__main__.py | 49 ++----------------------------------
-> > > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++--
-> > > >  2 files changed, 54 insertions(+), 49 deletions(-)
+> > > > Overall the ideas in this series look fine to me. But this series does
+> > > > not apply to origin/next.
 > > > >
-> > > > Applied to sjg/master, thanks!
+> > > > Applying: efi_loader: Separate device path into its own header
+> > > > Patch failed at 0001 efi_loader: Separate device path into its own header
+> > > > error: patch failed: cmd/efidebug.c:8
+> > > > error: cmd/efidebug.c: patch does not apply
+> > > > error: patch failed: include/efi_loader.h:967
+> > > > error: include/efi_loader.h: patch does not apply
+> > > > error: patch failed: lib/efi_loader/efi_bootmgr.c:12
+> > > > error: lib/efi_loader/efi_bootmgr.c: patch does not apply
+> > > > error: patch failed: lib/efi_loader/efi_device_path.c:10
+> > > > error: lib/efi_loader/efi_device_path.c: patch does not apply
+> > > > error: patch failed: lib/efi_loader/efi_helper.c:6
+> > > > error: lib/efi_loader/efi_helper.c: patch does not apply
+> > > >
+> > > > Please, resend the series based on origin/next.
+> > > >
+> > > > Patches that are not based on upstream U-Boot cannot be reviewed via
+> > > > this mailing list.
 > > >
-> > > Odd. I thought you had posted this against master or next, intending it
-> > > for mainline, which is why I assigned it to you in patchwork. I see the
-> > > cover letter is missing what commit it's against. And instead here you
-> > > are once again spamming the list and with messages about your personal
-> > > tree. Why?
+> > > The app is quite behind in Tom's tree due to rejected series.
 > >
-> > I'm applying it to my tree and intend to send you a PR at some point,
-> > with collected tools/ patches. So I believe I need to send emails
-> > about applying things and update it in patchwork. Let's discuss this
-> > in a future call.
+> > It was not "Rejected", it was "Changes Requested", please stop
+> > mis-representing things.
+> >
+> > > In fact
+> > > the app is pretty limited on x86 and there is no Arm app at all.
+> > >
+> > > My current plan is to move forward and eventually Tom might take it
+> > > via a pull request.
+> > >
+> > > Do you have any other ideas?
+> > >
+> > > Perhaps this is something we could put on the agenda for a future call.
+> >
+> > There's nothing to discuss in a future call as step one is "post patches
+> > against mainline".
 >
-> I don't see what there is to discuss. Please follow the normal process
-> for mainline and stop spamming the list with notices for your personal
-> tree. You're also diverging your own tree further from mainline by doing
-> this and making it less likely (multiple people have told you they don't
-> want to review things not against mainline) any follow-up work will get
-> comments other than that it's not applicable to mainline.
+> I agree with Tom here.  I did look at some of the patches in this
+> series and now that I've learnt it doesn't even apply on top of
+> mainline it feels like I've wasted my time.
 
-For patman, I have another series [1] I'm planning to apply to my tree tomorrow
+There is a base commit in the cover letter, so you could look at that
+if you like.
 
-Would you like me to send 'applied' emails for it to the mailing list?
-Or perhaps just for the cover letter? Would you like me to send you a
-pull request?
+I plan to apply this series at some point, so any review is not a
+waste of time. I do respond to review feedback.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=456256
