@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9EFC54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A83C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:03:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8DDA8363C;
-	Sat, 24 May 2025 01:00:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B2E883655;
+	Sat, 24 May 2025 01:00:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jy24mY0G";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hY9KDHMP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7F2483416; Sat, 24 May 2025 00:59:24 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 4D04A8333D; Sat, 24 May 2025 00:59:26 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E5F88338C
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19B7183340
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-742c27df0daso398324b3a.1
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:22 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-b0b2d0b2843so200654a12.2
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748041161; x=1748645961; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748041162; x=1748645962; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q7vM9eXVVetOU2RTYxoukHh7g5LF1YG76H+8sBBj5Hc=;
- b=jy24mY0G8DNYaP/DH4Bx1q1UzPrhUYNHtqnjBYnw7h3ccyZc+1lXJGLbfAREnebi4W
- icw6B6Dgiw0UFV/2r5/lCxIRA/AI9h8Ag5VXt3DceIgfm7JchgDQOWmTu5TpppSVVkzi
- 6KYunQ/jnb3L0E4NUVpL7IuTbozDC80r3usbE=
+ bh=xS/5SPAiUxuPu7wbCfrZA9hWr6DgHyOeezj13xagxYE=;
+ b=hY9KDHMPYpeQXFmq8TMMwPmvhdnAtEAy/SAV/hNRtihU+Iq1imlRB7tTyyz2hAOODA
+ JeMCz7ZHkw6Ir2H4cY171opNwlOkdvsiE1Xhyx248gk3Hm0HRIiEYX9zn4U3zUiGIR5T
+ qjNzGZfBMbKnZw7/tO2esmBiuCe7QmAOdyqTA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748041161; x=1748645961;
+ d=1e100.net; s=20230601; t=1748041162; x=1748645962;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q7vM9eXVVetOU2RTYxoukHh7g5LF1YG76H+8sBBj5Hc=;
- b=GU3Om8xjWzQsm++Lc3DgOCuuTsn1mhAdXlQNM1/fkx3v6BnY7ephGfC/EtVciv4DnF
- kpcoKTres6fvUiO/dc2IcjvGnSlqjvGXzZrYq3OJCPSmWq8cu0uCpWeUhlLmlrR834bJ
- xtEDDKmg9BJp8ErrzYPvTtjJbw9i8dZ3gnlKcdCdcRSXF95INlNqf/skYQOBO0rQT8xx
- IJrHozekMtFhJgLanqcEyuk7Ho5uQbdze8H/g1Mr8nSObURsufRz3PAENbZHmT6tj7fo
- oW5yrpghdhZgeOroscr/UBvLrqSt33tl+W63cD5WEz4d9ZbxDjTQFs2qi41XFUhPa+Pd
- 70gg==
-X-Gm-Message-State: AOJu0YyusG/QwRFSHVBMVsRkl2LVt1H2W+GxnafDiQg9Ptp4IXwUNGEj
- FddRou/xc3VyCbQB9OkQuCA19C10j16WjYJpicxZag15QZZ6Ml9fPcua8/HY//nVnPRfe4ftnzP
- Oq1E=
-X-Gm-Gg: ASbGnct0E1h7peov5iHjgb0CCoLw+wjFfrc535breiP/uPjTt3xSXr35Jyyq7OfL/o9
- B5Hb7709dscHTlrCPUtF9Sgi68jOU2eUsz9PCvIj+yfOoUZ+bantgP89R3oB/oC5JQtd/a8Gupn
- vjqk5YSoynbFJmxGuH6rvbo/PIdDXygz8HATgXBRFfHs0vj1y3Hue0ZTyn7qmLYm29mNAnhO0K0
- OnqJWFErz3rspTo3+b85RNidcT/ho8NUYj9EanGrPDiwo82FzT1siB2X1ZixoG2hjFEHXIdh4cU
- QFLUZrEENOmVENUBbF1n6/FCfhue+rclXLwP03jwFfhvP2Mbe6T5IFpS1jjB3UoFTsPRDzLVntw
- 0+Y8VqoKKF4HAtR0=
-X-Google-Smtp-Source: AGHT+IFeXJv8K4AW1imUAs7XEb86haMf8NEavJBzkidq8a7jC64KyGdNLBwrNOte/6dNQNhFWnixYg==
-X-Received: by 2002:a05:6a21:3992:b0:1ee:d8c8:4b82 with SMTP id
- adf61e73a8af0-2188c327f47mr1863885637.31.1748041160838; 
- Fri, 23 May 2025 15:59:20 -0700 (PDT)
+ bh=xS/5SPAiUxuPu7wbCfrZA9hWr6DgHyOeezj13xagxYE=;
+ b=N62P33n7JIrrSsJNYWy0NDWYw+IBkwJlzdtt93eCr1kEFgQomEGzYdNiRuQOJMXcP8
+ YYEvQHdCHAfXU563db77k/8cgm2LLdoBVpnzf+hhU6JTNAoPL1bok+bwHkjyuE5PVEJY
+ gbW2WqC+gzEwCRjw0z83bCvqYr8hsFRX/nRfZWGtEQTh0KirFWdHlSRxmbfo6i6/luib
+ 2AqeF5ArZe6GDneasCOaccN/RdbA29nqHkCSvDRKkw+YtKAkkrAyC9nmSs9rKq47RPvz
+ uHO9swpmWqVNNVtYX/hcHUASbWrUPx6FTwnbGn+PrKgb9m7HPK9Ig1NZvsrj8OGyyb+9
+ zWbQ==
+X-Gm-Message-State: AOJu0YxWeMkTeGMtwC9Z0OCLo4v+8sHyUXGh1+C+kBkLf/2ptY9Qg3tC
+ qH9BcsT1b6WsuDlaYGk0qCB3nFqIfXhDiTDZCsFmCdxshLh3unMILsXLrgRjzjV0F+oEybwZM3B
+ QiT0=
+X-Gm-Gg: ASbGnctsuv6EqZAHT0tjOeTYV+l18G0AQyt8wVZGeKuYGKiCHcvBfVpHmBi8/8s9vBc
+ aiGCikrh8YF5R6y8TZSwifdLgUPc47x4cwSAQG2UfJG6IncaNUdbglZJlVH6+buAsScnqa7w8TZ
+ yGMvX7ur0u0PnIrsvRZTIwVcsGRKUrqrDE2dDFeEOIt0mZT25PDGn855AYfc/a2x9Ndwm+2i9VP
+ q2WRkqek0L2OV2DFLjy5wVKBTew6DNFAid1qMLSqf6K5karG45V5wcBRbAEJETFRI0lGYvSPIAc
+ RDL+h/E9MZspOeChJHOIobbCPKbEsaFwBYFhVSP1x5LL2vV/qpDIm116vMJFfKjKftwnTCtVnKO
+ bl77PAMOzfTb39i60C/EIX6djTQ==
+X-Google-Smtp-Source: AGHT+IFdCyYXFP3Dobr5S87uq//v02NuZTZvYB2UtpIqD219w/Dnnj3r0LL8vLZHAhVWCZ+pLg502w==
+X-Received: by 2002:a17:902:eccb:b0:22c:3609:97ed with SMTP id
+ d9443c01a7336-23414f9ee88mr16917565ad.30.1748041162405; 
+ Fri, 23 May 2025 15:59:22 -0700 (PDT)
 Received: from localhost (188.139.125.34.bc.googleusercontent.com.
  [34.125.139.188]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-742a987677dsm13740832b3a.132.2025.05.23.15.59.20
+ d9443c01a7336-23401ad40c9sm10051375ad.76.2025.05.23.15.59.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 23 May 2025 15:59:20 -0700 (PDT)
+ Fri, 23 May 2025 15:59:21 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -76,12 +76,11 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v4 22/28] mach-snapdragon: Support booting as a coreboot
+ Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
+Subject: [PATCH v4 23/28] mach-snapdragon: Allow usb3 to work when a coreboot
  payload
-Date: Fri, 23 May 2025 15:58:37 -0700
-Message-ID: <20250523225845.2311989-23-swboyd@chromium.org>
+Date: Fri, 23 May 2025 15:58:38 -0700
+Message-ID: <20250523225845.2311989-24-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
 In-Reply-To: <20250523225845.2311989-1-swboyd@chromium.org>
 References: <20250523225845.2311989-1-swboyd@chromium.org>
@@ -104,75 +103,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Coreboot sets up the DRAM, CPU, and devices before booting a payload,
-meaning we can parse the coreboot tables at boot for memory info when
-running as a payload. Use the memory descriptors from coreboot if the
-tables are present so that Snapdragon SoCs can run U-boot as a coreboot
-payload.
+Coreboot already initializes the USB3 controller and PHY on Qualcomm
+devices. Skip fixing up the USB node on platforms that are a coreboot
+payload. This provides a working USB-A port on device like Lazor.
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- arch/arm/mach-snapdragon/board.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ arch/arm/mach-snapdragon/of_fixup.c | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index deae4d323789..6850f226f8eb 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -14,6 +14,7 @@
- #include <asm/io.h>
- #include <asm/psci.h>
- #include <asm/system.h>
-+#include <cb_sysinfo.h>
- #include <dm/device.h>
- #include <dm/pinctrl.h>
- #include <dm/uclass-internal.h>
-@@ -48,6 +49,10 @@ static struct {
+diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+index 1ea0c18c2f27..fd4aa3ba7055 100644
+--- a/arch/arm/mach-snapdragon/of_fixup.c
++++ b/arch/arm/mach-snapdragon/of_fixup.c
+@@ -41,13 +41,6 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
  
- int dram_init(void)
- {
-+#ifdef CONFIG_SYS_COREBOOT
-+	if (gd->arch.coreboot_table)
-+		return coreboot_dram_init();
-+#endif
- 	/*
- 	 * gd->ram_base / ram_size have been setup already
- 	 * in qcom_parse_memory().
-@@ -81,8 +86,21 @@ static void qcom_configure_bi_dram(void)
+ 	debug("Fixing up %s\n", glue_np->name);
+ 
+-	/* Tell the glue driver to configure the wrapper for high-speed only operation */
+-	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
+-	if (ret) {
+-		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
+-		return ret;
+-	}
+-
+ 	/* Find the DWC3 node itself */
+ 	dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
+ 	if (!dwc3) {
+@@ -92,6 +85,21 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
+ 		return ret;
  	}
- }
  
-+phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+#ifdef CONFIG_SYS_COREBOOT
++	/*
++	 * Coreboot already initialized USB to the point that USB SuperSpeed
++	 * works, don't tell the glue driver to only use high-speed.
++	 */
 +	if (gd->arch.coreboot_table)
-+		return coreboot_board_get_usable_ram_top(total_size);
-+#endif
-+	return gd->ram_top;
-+}
++		return 0;
 +
- int dram_init_banksize(void)
- {
-+#ifdef CONFIG_SYS_COREBOOT
-+	if (gd->arch.coreboot_table)
-+		return coreboot_dram_init_banksize();
-+#endif
- 	qcom_configure_bi_dram();
- 
- 	return 0;
-@@ -235,6 +253,11 @@ int board_fdt_blob_setup(void **fdtp)
- 		ret = qcom_parse_memory(external_fdt);
- 	}
- 
-+#ifdef CONFIG_SYS_COREBOOT
-+	if (gd->arch.coreboot_table)
-+		debug("Using coreboot tables for memory ranges\n");
-+	else
-+#endif
- 	if (ret < 0)
- 		panic("No valid memory ranges found!\n");
- 
++	/* Tell the glue driver to configure the wrapper for high-speed only operation */
++	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
++	if (ret) {
++		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
++		return ret;
++	}
++
++	/* Tell the core driver to configure for high-speed only operation */
+ 	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed") + 1, "high-speed");
+ 	if (ret) {
+ 		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
 -- 
 Sent by a computer, using git, on the internet
 
