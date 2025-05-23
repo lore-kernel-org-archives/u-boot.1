@@ -4,58 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D9C2C3DA6D
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 09:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C65FC54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 09:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D52F5831C3;
-	Fri, 23 May 2025 11:18:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 86B6B8310F;
+	Fri, 23 May 2025 11:26:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DZmWJ5UY";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="XcLUgvaV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D360831D8; Fri, 23 May 2025 11:18:23 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 2E936831C3; Fri, 23 May 2025 11:26:03 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A9718310F
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:18:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F17A682E26
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:25:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 58DAE5C6ED1;
- Fri, 23 May 2025 09:16:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3E85C4CEE9;
- Fri, 23 May 2025 09:18:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1747991898;
- bh=UBM/0nKf/fnq35wbWrOHjLSFtfUXWH3XDH+4D/b7Aa4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=DZmWJ5UYC95G8EcXL55C+bmOQf5D0AC5UPewYBDsy9SCIycCGr7V+BKHIZDrT714X
- 0t1/KMDX9xuxJh1B3yuoPnwCYkVUso4LMcXxsdm7DCZkaaXkSXPRb1Ccg7OMZI0nrg
- A3Ulh+GhVLEXQQmDgvNUA1iv0430iDfPo1gkYo6MB+2H6oY9g3R6eDI5PEdl+dqtZE
- p3Ek2pI+EMBc4UvkO9XONLvq03A0NV9WKjXgueApy8KSmt3lAG+TtMHmiAjG+MGo2M
- Fl2OM6FNKsh9hEXCkYKF30bp/DgB4Qxp9/V7MI3TUHwA+Yap2hzf/B8NvuBFgm6YjV
- y5xVpRpHhT6qg==
-Date: Fri, 23 May 2025 10:18:14 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Yao Zi <ziyao@disroot.org>
-Cc: Tom Rini <trini@konsulko.com>, Leo Liang <ycliang@andestech.com>,
- u-boot@lists.denx.de, rick@andestech.com,
- Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <20250523-alibi-nervous-807af196fad3@spud>
-References: <aC2hyzxwKzO4k1im@swlinux02>
- <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
- <20250522-eradicate-clip-538f48710ad7@spud>
- <aC9TmaY7w2PL8lbn@pie.lan>
+ header.from=mediatek.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: edd340fe37b711f0813e4fe1310efc19-20250523
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=Xz575Ml/EgKbmFktdhsuIWzybaro9WD4eNJfs20GIrg=; 
+ b=XcLUgvaVvV+YTJJ8xSfqOsXv7Q7a5vE+mpGws4HtJSGzu+eIfwUxkyXKYXTQ1Pky3jbU9+WWhf1w9g6VfbJoUAItUVqkyKhvFNv9IrGPnbyEfsbP1LzGf4YG3PokWYvrO09YMwhZcVdXVajf8KNummjiUtHtbWoDTvaoHxq6sRA=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.2.1, REQID:ae4f843b-6679-439e-8c6e-aa617bef6f31, IP:0,
+ UR
+ L:0,TC:0,Content:0,EDM:-30,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-30
+X-CID-META: VersionHash:0ef645f, CLOUDID:165134f1-2ded-45ed-94e2-b3e9fa87100d,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:2,IP:nil
+ ,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:
+ 1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: edd340fe37b711f0813e4fe1310efc19-20250523
+Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 2121744485; Fri, 23 May 2025 17:25:55 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.39; Fri, 23 May 2025 17:25:52 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1258.39 via Frontend Transport; Fri, 23 May 2025 17:25:52 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH 0/2] Add baudrate accuracy compensation for MediaTek UART
+ driver
+Date: Fri, 23 May 2025 17:25:39 +0800
+Message-ID: <cover.1747991898.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="Ql3ojLaCluJ3Vifn"
-Content-Disposition: inline
-In-Reply-To: <aC9TmaY7w2PL8lbn@pie.lan>
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,131 +84,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series adds baudrate accuracy compensation for MediaTek UART
+driver in high-speed mode 3.
 
---Ql3ojLaCluJ3Vifn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Weijie Gao (2):
+  serial: mediatek: fix register names and offsets
+  serial: mediatek: enable baudrate accuracy compensation
 
-On Thu, May 22, 2025 at 04:40:57PM +0000, Yao Zi wrote:
-> On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
-> > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
-> > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
-> > >=20
-> > > > The following changes since commit a3e09b24ffd4429909604f1b28455b44=
-306edbaa:
-> > > >=20
-> > > >   Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custo=
-dians/u-boot-mmc (2025-05-20 08:35:31 -0600)
-> > > >=20
-> > > > are available in the Git repository at:
-> > > >=20
-> > > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
-> > > >=20
-> > > > [...]
-> > >=20
-> > > Merged into u-boot/master, thanks!
-> >=20
-> > This PR seems to have made my CI blow up, and I'm not entirely sure if
-> > that's something intentional or not. I've not yet bisected, but since
-> > the error is "Image arch not compatible with host arch", I can only
-> > imagine the patch in question is:
-> > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV64
-> > | Date: Fri,  4 Apr 2025 14:48:55 +0000	[thread overview]
-> > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com> (raw)
-> > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
-> > |=20
-> > | Similar to ARM and X86, introduce a new image type which allows u-boot
-> > | to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
-> > |=20
-> > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
-> > | ---
-> > |  boot/image.c    | 3 ++-
-> > |  include/image.h | 3 ++-
-> > |  2 files changed, 4 insertions(+), 2 deletions(-)
-> > |=20
-> > | diff --git a/boot/image.c b/boot/image.c
-> > | index 139c5bd035a..45299a7dc33 100644
-> > | --- a/boot/image.c
-> > | +++ b/boot/image.c
-> > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
-> > |  	{	IH_ARCH_ARC,		"arc",		"ARC",		},
-> > |  	{	IH_ARCH_X86_64,		"x86_64",	"AMD x86_64",	},
-> > |  	{	IH_ARCH_XTENSA,		"xtensa",	"Xtensa",	},
-> > | -	{	IH_ARCH_RISCV,		"riscv",	"RISC-V",	},
-> > | +	{	IH_ARCH_RISCV,		"riscv",	"RISC-V 32 Bit",},
-> > | +	{	IH_ARCH_RISCV64,	"riscv64",	"RISC-V 64 Bit",},
-> > |  	{	-1,			"",		"",		},
-> > |  };
-> > | =20
-> > | diff --git a/include/image.h b/include/image.h
-> > | index 07912606f33..411bfcd0877 100644
-> > | --- a/include/image.h
-> > | +++ b/include/image.h
-> > | @@ -138,7 +138,8 @@ enum {
-> > |  	IH_ARCH_ARC,			/* Synopsys DesignWare ARC */
-> > |  	IH_ARCH_X86_64,			/* AMD x86_64, Intel and Via */
-> > |  	IH_ARCH_XTENSA,			/* Xtensa	*/
-> > | -	IH_ARCH_RISCV,			/* RISC-V */
-> > | +	IH_ARCH_RISCV,			/* RISC-V 32 bit*/
-> > | +	IH_ARCH_RISCV64,		/* RISC-V 64 bit*/
-> > | =20
-> > |  	IH_ARCH_COUNT,
-> > |  };
-> > | --=20
-> > | 2.43.0
-> > |=20
-> > since it is changing the existing "riscv" image type to be the 32-bit
-> > image and requiring the new entry for 64-bit. My CI job uses the system
-> > mkimage to create the image that U-Boot is loading, so it doesn't know
-> > about the new define etc. Maybe it's not considered a problem if a new
-> > U-Boot cannot boot an old image, but the comment above the enum reads:
-> > |/*
-> > | * CPU Architecture Codes (supported by Linux)
-> > | *
-> > | * The following are exposed to uImage header.
-> > | * New IDs *MUST* be appended at the end of the list and *NEVER*
-> > | * inserted for backward compatibility.
-> > | */
-> > The overwhelming majority of existing supported boards in U-Boot are
-> > 64-bit platforms, and the 64-bit platforms are the ones that have been
-> > supported for longer, so my thought would be that the compatibility of
-> > 64-bit platforms should be prioritised over 32-bit? Or even add explicit
-> > 32-bit and 64-bit entries and the existing one is a catch-all for
-> > compatibility reasons?
->=20
-> I've mentioned entries with bitwidth explicitly specified in my previous
-> reply (and there hasn't been any response).
->=20
-> > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying 32bit
-> > when no suffix attached. We (and the Linux kernel) mix 32-bit and 64-bit
-> > variants of RISC-V together, thus it's hard to tell the exact bitwidth
-> > of "IH_ARCH_RISCV" without inspecting the code around. To me, it sounds
-> > more like "RISC-V, but no bitwidth specified".
-> >
-> > It will be nice if we could avoid this kind of ambiguity.
->=20
-> (referring my own reply[1])
->=20
+ drivers/serial/serial_mtk.c | 41 +++++++++++++++++++++++++++++--------
+ 1 file changed, 33 insertions(+), 8 deletions(-)
 
-> I'll second explicit 32-bit and 64-bit entries, and keeping
-> IH_ARCH_RISCV for compatibility consideration.
+-- 
+2.34.1
 
-Yeah, I noticed your mail after I sent this report. I think this is the
-way to go that makes most sense to me.
-
-> [1]: https://lore.kernel.org/u-boot/Z_CjTyXaVrpUOPnJ@pie.lan/
-
---Ql3ojLaCluJ3Vifn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaDA9VgAKCRB4tDGHoIJi
-0pgJAQCrZuaU47ZmOrYM9EaQ4xpdfhW4w7in/biQ8ZB+FzFipQEAgDJo3i3Xn1Yg
-rtgC8X+EeWzN4CkLrxCRvP2WRB7pmA0=
-=DTwg
------END PGP SIGNATURE-----
-
---Ql3ojLaCluJ3Vifn--
