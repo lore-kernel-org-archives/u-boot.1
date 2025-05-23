@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9064C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 14:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 933DAC54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 14:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A283832E6;
-	Fri, 23 May 2025 16:01:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 96E9C8329C;
+	Fri, 23 May 2025 16:02:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BPE4LzcV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JaiK3LwP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41C9483285; Fri, 23 May 2025 16:01:52 +0200 (CEST)
+ id 423CA8329C; Fri, 23 May 2025 16:01:59 +0200 (CEST)
 Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
  [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B3A78329C
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 16:01:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A4CB83285
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 16:01:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3fcfc85f1f5so2773474b6e.2
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 07:01:50 -0700 (PDT)
+ 5614622812f47-3fa6c54cc1aso6044634b6e.1
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 07:01:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748008909; x=1748613709; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748008916; x=1748613716; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gdSnWLppNuNV+1N5pAXpq5pjTpOq/BUmUtxI9KM5Ehg=;
- b=BPE4LzcV9KqRZWod7lzgWSMWtSVXqHex2HpqnFRQsdZ+MPs5JMwzaF+awu/KDeTr08
- MSskph64Ijzwbfg5ikjW4B6PeaXNcbvWtjQieKVzhrjzJLXl5Xa3LdforBadm0G3oITO
- PAgl+AK8UcYIL9QnWxDMctvUitUejy5lQGEC8=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m25LzdGGMNIUMZZd1VuS2tEa1ucKG4NZxtvVlyDrmlk=;
+ b=JaiK3LwP3s6v+P6fHppqrEqW94CcQQ6phKzEOhbNbUnqFFUUUk1XdoO1CBc/nr14FF
+ lF/YEBp7hu1xHgEI53up4KXcFsA/sG+DkQN/St69VNJXbtRugUVQnnm16i2LE07oQC54
+ +KrZttx7/qr5nplU+ydXB9rpd7Z7pysOX4p5U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748008909; x=1748613709;
+ d=1e100.net; s=20230601; t=1748008916; x=1748613716;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gdSnWLppNuNV+1N5pAXpq5pjTpOq/BUmUtxI9KM5Ehg=;
- b=TCzOvW2yTM5Uj0WzTj8xEJr6+mcVT6JskOFbEgqB9+840cr+cs9Sd57v7qUPIDdk8U
- OYdEFclwbgBueGQlNdBe/FM01k5GdMzNDWdYt/c0WGVnqRADOdWQfFbN6oX/xlMl+j7n
- UMkyRkbIb6LHfqW/rm+YJ/3NTLuM/uX9T+8LuIn9c/Un5WenR3RDOAkWuLrwojGzG0rr
- 4zqh5DLZmig/m2hNWiKkSOpFv7p5rcNuuNjHtSGVI33Ab1/KHO8s3U/YD92tz1IBThiB
- usULpHc7QNPcxDlWLUl+w/jcLpOdffQng2H+HzJ8LPHNLCV37GECYZVD5Uze++IDTRdu
- pv7w==
-X-Gm-Message-State: AOJu0YyfTtNzYF/VDbmU6oiLdr3umaowPfqTZ2QplXwG/NdTeAC8p/IN
- CK7C5ogruqHadiCM7/TBcGMajOYdbRhalDFLLmsHxfnnAmgQshIcC8yCkWwAj1w3asu2w04t214
- tzS+ycAc=
-X-Gm-Gg: ASbGncuwm1rClSg9BlAaWe8bs9jHNKLEiCDW2ldveCmlYlzZxlxcKFRMi5EaOQz4KrB
- 53xNc46r2pvbmEORUZI8xIjIuRvFaAsdV/wYaCeLyP9EmFgRNaGW9unI8PoQk2NxelDsInU6Pli
- FIl+wChsF7394NSlQcNPrZeuXhMqdQbJAy+5mmd9nMJDPKlN7yP5Io0MuU5hfaCSqlkdA78kRUf
- aqJv2x8+b0cq6CUeU/kpAkjuY3uuNEXt/RPXLGmf/UvwqzyrVa7U4XZKdK7gija/ZA8T+E95X05
- nZI5TURC9cahoWc4fP1p+GpObV7MLnyXeIr+/DKxrrsAjd5V6vKTXu2/cNgEtFKQQ9xO3NtY75c
- Ik4g9Qhjv+Lg=
-X-Google-Smtp-Source: AGHT+IHM4BYcbR98ehF4nFpYTVLtmC+kv9BwnTJ9gHstpDfQWcaX0d2NMgRBmYqJfBxcFQ8kLaU6Pg==
-X-Received: by 2002:a05:6808:2286:b0:401:ea99:54b with SMTP id
- 5614622812f47-404da798f9cmr19322661b6e.23.1748008908795; 
- Fri, 23 May 2025 07:01:48 -0700 (PDT)
+ bh=m25LzdGGMNIUMZZd1VuS2tEa1ucKG4NZxtvVlyDrmlk=;
+ b=eeGCasp/TtfvFk1tv3CWwYXgP7dDpnBVJsKKATtiFAFZpBwPGupmgpYMeVfmbFC+N5
+ F5kar4JLynHL99O+xL2skwTaBd6Vp0gI5eSQ4sZ3jDRq7QlJ9MOwAs7tM3YGg+2kTBti
+ 0ZsDA6BiaOEeZ3rWfU2QQ+7HTY9QJGO3HI3pVaJJ5hq23F0UZpixSMRDzKl7t208e6zZ
+ df2Ixm9KXsOXlT3A2y3p3CcBvEeuhiiFN4PAi1nfB8XfUcg9pa67+lvxDzz+MrXZWIT0
+ zAMXZ3Ds3/xz50eEJnqhL9pRwgoicCiew5zApDKbDpqnTLAmssoIH2QFlxs/XN0W1n3h
+ 2qsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJl/dD4kr1+dA1pgOZ025mN5yeRvyVU9yaSAP4LTuoXzLtKr3taczuuhpOF1zGuczxcwphxAE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy22NwYy2cE0Obo2pLm1RnBPVVXLzTUEOtlAvwDCnZRDNk/roSP
+ bHX643titx9bwo/hbeIqvHFbyS1dPBMWV7Ol3kY+Mu2wJp9Zc4kCswQqat0JUwGN3qU=
+X-Gm-Gg: ASbGnctXWnKwFmvaCWlXkv+8R/wzN3rleXnXja7j3KjI5baEoG3kg7a1nfxu14zq1Ea
+ lMz8lYwdOlKCdi8GviLHJj6wp9jszWRJ4MNrXX/kBs4nIl4z49f6g00UhLYe9zNFTlNwY1VNeM7
+ VJth9unokyf1lzO94sJEnBZxLDT8ilYs4gV5Q1XWvJMPH+KE7eyrg6+wcYjVVU38GikKGk8OPGG
+ hRORaq/9UQuHfnKoMkKiKxzUQlNtUuo3/9ux3Fyz3XUVtkt0Of54Dp77bOOajRHOCLbRy9NksRb
+ q7zL05Z7vImSZ+B2yQEYbkADXqm3y/cWlGG1AhG761DrNwj+QO8FgA+9yniKf7faZ5GmRpHzNwX
+ s/uKaV0gnU3U=
+X-Google-Smtp-Source: AGHT+IF1Rr3V5QD0t80n29KtxwmgmOtQizLPvtICqliPzT+rlPU4tIdpT9h9OWD7QzrQGQ6lvOt9aA==
+X-Received: by 2002:a05:6820:1841:b0:602:7078:df55 with SMTP id
+ 006d021491bc7-609f374f802mr17804992eaf.5.1748008910348; 
+ Fri, 23 May 2025 07:01:50 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-609f303156esm3167610eaf.38.2025.05.23.07.01.47
+ 006d021491bc7-609f303156esm3167610eaf.38.2025.05.23.07.01.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 07:01:48 -0700 (PDT)
+ Fri, 23 May 2025 07:01:49 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marius Dinu <m95d+git@psihoexpert.ro>
-In-Reply-To: <20250508120518.1489-2-m95d+git@psihoexpert.ro>
-References: <20250508120518.1489-2-m95d+git@psihoexpert.ro>
-Subject: Re: [PATCH] EXT4: add CRC16 dependency
-Message-Id: <174800890789.2288012.6961800034846457017.b4-ty@konsulko.com>
-Date: Fri, 23 May 2025 08:01:47 -0600
+To: Jayanth Dodderi Chidanand <jayanthdodderi.chidanand@arm.com>
+Cc: nd@arm.com, oleksandr.tarhunakov@arm.com, artem.kopotev@arm.com, 
+ manish.pandey2@arm.com, u-boot@lists.denx.de
+In-Reply-To: <20250508105556.2205022-2-jayanthdodderi.chidanand@arm.com>
+References: <20250508105556.2205022-1-jayanthdodderi.chidanand@arm.com>
+ <20250508105556.2205022-2-jayanthdodderi.chidanand@arm.com>
+Subject: Re: [PATCH 1/1] board: total_Compute: enable bloblist for SPL handoff
+Message-Id: <174800890895.2288012.13647576475172987497.b4-ty@konsulko.com>
+Date: Fri, 23 May 2025 08:01:48 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,21 +99,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 08 May 2025 12:05:19 +0000, Marius Dinu wrote:
+On Thu, 08 May 2025 11:55:55 +0100, Jayanth Dodderi Chidanand wrote:
 
-> CRC16 is used in ext4_common.c. Build fails without it.
+> Add bloblist support to total_comput platform for passing data
+> from TF-A using the firmware handoff framework.
 > 
-> PS:
-> This is my first patch sent to a mailing list.
-> If there is anything wrong with it (email format, whitespace, etc.)
-> please let me know.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] EXT4: add CRC16 dependency
-      commit: ba57d85e771db791f814f89df9933dbe70c21cf7
+[1/1] board: total_Compute: enable bloblist for SPL handoff
+      commit: ab0e1c11a9e2591371474d9567db80ffc9060e1a
 -- 
 Tom
 
