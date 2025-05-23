@@ -4,87 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EB4C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 22:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E75C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 22:51:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A0ED83340;
-	Sat, 24 May 2025 00:29:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55B4B83340;
+	Sat, 24 May 2025 00:51:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s3MG3hQC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vhq9+UwA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF3298334D; Sat, 24 May 2025 00:29:32 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id D18FF8333D; Sat, 24 May 2025 00:51:50 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89D5E83264
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:29:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2939E833F8
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:51:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-72ec926e828so78179a34.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:29:30 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-73502b47f24so180553a34.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:51:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748039369; x=1748644169; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748040707; x=1748645507; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wfcqZk9vtpoQD30j6dsq32nH6KnoiIajNKoDSC4hoRM=;
- b=s3MG3hQCzsDLbxHPZRJsyewTQxhlRF7WedAD9nm3QbU2dn0sHFgmw5MqjghrUYe8C0
- jAWs4tSJCHeWqjR+jIid8/no8gGOU/UHCGKwag/vbAcTLN1ygMXdop2oBRSQ9666hcte
- r59bNKRP1ffqZODQCAC3Of1bK2EL6+94WvvSs=
+ bh=HQUePzk4JUo8bpZdKQ+b/GIS0cj1BHPq3sWBMLR8jBk=;
+ b=Vhq9+UwAtkHnRBnSlAwHqgGuBX996brpeC8WrfnlJcSIthY8m4xz5HPrXvV5DDatXN
+ jXTGIF+RvQm+l41HNMEW1fIv9Lb53VQTYpn1hjnJzBsdT1bmUFdvcgBAfaBLH62/Njke
+ DCOgRAaGx8o3PxKjvDcD3T7IP0XuYa5833Th8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748039369; x=1748644169;
+ d=1e100.net; s=20230601; t=1748040707; x=1748645507;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wfcqZk9vtpoQD30j6dsq32nH6KnoiIajNKoDSC4hoRM=;
- b=pcYbPzwjIYYwNNHDMcCe8B9xSILgbhjL3JF8Gg3j6e+szXnxBqif7mhKqXiwtv+F6i
- AlMbGC1jK5yzxaYFQ4awzS7FxK86H+sUw8kraETOVsZJmNj+BzI6qJq/6NrlDaqhPWxN
- rbxOuPhHWF0g7/h6cwqHF2mzwSIvmgCJsphaC3OrIh8VyEBSlpazTMmotW/vZeScKZD/
- obbZ7g2U5KEpQpOtv4nGRrbMWqaNM6L/9QnNsCm6n/8v0P+kZIJwYkKLQJJrYs5rUrI9
- +AU44bJyp68DezznOid3wLnMRXRMBR71EsI/ITSaCEmut20JEovktNlRmePLlM+c9ntX
- ZheQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXB6Ono/ukpbFl8efIJmEaYXxGGDnrFdw9lfAr9G/pWnG1xiJyLS6L3BNFefNKY+hMKAdV7X+U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8qA9oCeyACNYu0Rns6Pj1SzM/AmvlcFwD1t6RdZbtbj6QyMC3
- bXM14jECWkE161RGSZo2PJ72VkLORhoTyCTzej6qhbR4OJosrnaYY872ddzs87oof1I=
-X-Gm-Gg: ASbGncvc9MhUBKZLI43aWihs7aA6+2dTVzohO5xRz1zBEa31qA8YC2PLlR+QfTlhYpG
- +vR78zafLRP8Jd1wwh44SLn3jB2V6Hx713/6ke9pEZfkwDZUG4j+4YO9sCgUi+U3DL1vmlSSIew
- 1194DkbtqvgtC5b5m8aoxnDXAJenODueWnV0/yvSvv7fh/3MXlVla0zsGfL2Ewz0m3dgMXzZjE0
- kYKTAOqGAAU4tYwKfC7NtN4NSFXgi90dXZv3kt5wnTgHC2szHzC7ZYzub2goQJBsTuCcuyXUPkS
- VVv+E7R/+q+0NR5AMny1S8ijjXYgIOwII+5IR1ioRzISC3oMsPRHJ+mUnlcuoPG+Jo203LraWq3
- hfVjWNDYIOYf/
-X-Google-Smtp-Source: AGHT+IHGvZP3zEctdbmBpEx4Aw2c/XzRDCqNJjbsPP1IHRHJdcX9Nttv93pZEbOLNA3YMeQ7SCOtWQ==
-X-Received: by 2002:a05:6830:6885:b0:72a:11aa:6ebd with SMTP id
- 46e09a7af769-7355d129602mr728519a34.23.1748039369271; 
- Fri, 23 May 2025 15:29:29 -0700 (PDT)
+ bh=HQUePzk4JUo8bpZdKQ+b/GIS0cj1BHPq3sWBMLR8jBk=;
+ b=T4pvlhiX7DkbjcYsjVwVtE5HYqJeaRM+6hlHjCG2Te98xsvLUbdIOJ7RQZXm1UIkVn
+ 0VFF5oN51kVfhEUggnoIYXIvn5xphbU13LAKooRhWbx5TC7Y5oQaNUYmXDLossZhZXTS
+ B+SmRuLJmQLXoilOz6b6rCe95C0ppMkP1YFIWIxW+zeFiRxNWbwMjUufckXLgrnTk8jN
+ iI0z2kmcfbueiGWN23JheRTX2IM5mcDQWGuQ6eEXFfxZ7tStB5zryOxsWw3oa1gQq3zK
+ nsVD4YJvpcFfUHmgc9nGlbnaLQJ4qxP7k6ne2W5cpBEMi0xCO5iWgyJQX/xS5MPpNHa2
+ gf/A==
+X-Gm-Message-State: AOJu0Yxm81eNNR7G9dGVgFkFsJ8hHLG1uBB5x1S0zn5M0N5hUwOmWnhN
+ B8DCc//3MhmCx1XKWZRuvEnmiIaE/TY6qYfU3OjgKfqjOorj30BzXAobJC8JGJSzDF6N2/Qhowz
+ o31q8+aU=
+X-Gm-Gg: ASbGncsvQ9sbRgaju3P279v2LL9Nmegvgzrpd66iklAljr9csEk4eXkRBW5An+nb4v5
+ Fn4mJKtVvpsw2RbK9geHwpT3sY8fBpwipDCBKusl9w18V2eXluC7uvN+F7hNk/bM2oef5AsXlKI
+ A8i8+odKCOJoXJs4Bet47065mdNLtEcSJuPv9g1Kn88NZz5nGQ2+GxCFI6UbvDCqLtSU43fq+/h
+ hIpMIC+cavzw+vyBUnH6xsffQ7meDpLWeWnQ7BxFRRBMVzpI3xCFsb4t0erbFvKNXMEA1GhnGo4
+ dGRFI81MdEQwvz2vm+I/zc/V5oRadiXDQ8EYoRYmgClQvUhoRbVPbP5ASA/EM4x2h+0Xpdpfx4o
+ XmPpYd6yczczI
+X-Google-Smtp-Source: AGHT+IGw+OEi0Rw+gXbrD1un5WSbAcAP0mRpC5eM4gc6Us0Cx7pLH+1nD4EAJchE6YGNDusDl6jMbQ==
+X-Received: by 2002:a05:6830:b91:b0:731:cac7:362f with SMTP id
+ 46e09a7af769-7355cf2a0camr880501a34.6.1748040706868; 
+ Fri, 23 May 2025 15:51:46 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a4aeecsm3059342a34.8.2025.05.23.15.29.28
+ 46e09a7af769-734f6a4b0bfsm3080841a34.7.2025.05.23.15.51.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 15:29:28 -0700 (PDT)
-Date: Fri, 23 May 2025 16:29:26 -0600
+ Fri, 23 May 2025 15:51:46 -0700 (PDT)
+Date: Fri, 23 May 2025 16:51:43 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] bootm: Pass SMP core ID and DTB address for
- ELF-formatted kernels
-Message-ID: <20250523222926.GZ100073@bill-the-cat>
-References: <ME0P300MB13096732AF44AC5409B9D0D49F96A@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
- <CAFLszTgpYgVfrf4P189tcNM7xOvoiVjMu_sP1nrP+FGfAYHYSw@mail.gmail.com>
- <28BD711D-9449-46DA-AD38-8142B0CAF7AB@gmx.de>
+To: u-boot@lists.denx.de, Sean Edmond <seanedmond@microsoft.com>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Charles Hardin <ckhardin@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH v8 0/3] BOOTP/DHCPv4 enhancements
+Message-ID: <20250523225143.GA100073@bill-the-cat>
+References: <20240509023918.2504185-1-seanedmond@microsoft.com>
+ <174803917198.2369538.18387605008838632819.b4-ty@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FGbLtX+5mNDpa1j/"
+ protocol="application/pgp-signature"; boundary="2XcdcEQ//y0Wa2xd"
 Content-Disposition: inline
-In-Reply-To: <28BD711D-9449-46DA-AD38-8142B0CAF7AB@gmx.de>
+In-Reply-To: <174803917198.2369538.18387605008838632819.b4-ty@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,76 +111,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FGbLtX+5mNDpa1j/
-Content-Type: text/plain; charset=utf-8
+--2XcdcEQ//y0Wa2xd
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 23, 2025 at 07:04:46PM +0200, Heinrich Schuchardt wrote:
-> Am 23. Mai 2025 18:41:45 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >+Heinrich Schuchardt
-> >
-> >Hi,
-> >
-> >On Tue, 13 May 2025 at 13:28, =E7=89=9B =E5=BF=97=E5=AE=8F <Zone.Niuzh@h=
-otmail.com> wrote:
-> >>
-> >> When booting RISC-V ELF-formatted kernel images (IH_TYPE_KERNEL + IH_O=
-S_ELF),
-> >> explicitly pass SMP core/hart ID and DTB address to comply with modern
-> >> SMP-enabled kernels' boot protocol requirements.
-> >>
-> >> Signed-off-by: Zone.N <zone.niuzh@hotmail.com>
-> >> ---
-> >>  boot/bootm_os.c | 5 +++++
-> >>  1 file changed, 5 insertions(+)
-> >>
-> >> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> >> index a3c7cb5332e..a0f310b1359 100644
-> >> --- a/boot/bootm_os.c
-> >> +++ b/boot/bootm_os.c
-> >> @@ -402,6 +402,11 @@ static int do_bootm_elf(int flag, struct bootm_in=
-fo *bmi)
-> >>         if (flag !=3D BOOTM_STATE_OS_GO)
-> >>                 return 0;
-> >>
-> >> +#if defined(CONFIG_RISCV)
-> >> +       bmi->argc =3D gd->arch.boot_hart;
-> >> +       bmi->argv =3D (char **)bmi->images->ft_addr;
-> >> +#endif
-> >
-> >If this is a kernel, it should really be using a FIT.  The Elf entry
-> >is for general ELF files, not Linux. Perhaps RISC-V is special in some
-> >way?
+On Fri, May 23, 2025 at 04:26:11PM -0600, Tom Rini wrote:
+> On Wed, 08 May 2024 19:39:00 -0700, Sean Edmond wrote:
 >=20
-> A defconfig kernel is booted via the booti command or via its EFI stub.
+> > In our datacenter application, a single DHCP server is servicing 36000+=
+ clients.
+> > Improvements are required to the DHCPv4 retransmission behavior to alig=
+n with
+> > RFC and ensure less pressure is exerted on the server:
+> > - retransmission backoff interval maximum is configurable
+> >   (environment variable bootpretransmitperiodmax)
+> > - initial retransmission backoff interval is configurable
+> >   (environment variable bootpretransmitperiodinit)
+> > - transaction ID is kept the same for each BOOTP/DHCPv4 request
+> >   (not recreated on each retry)
+> >=20
+> > [...]
 >=20
-> Why would you use an ELF formatted kernel? What kernel configuration are =
-you using to get such a kernel?
+> Applied to u-boot/next, thanks!
+>=20
+> [1/3] net: Enhancements for dhcp option 209
+>       commit: c867045eef153b0beab69fbc74059fcfc4ad9472
+> [2/3] net: bootp: BOOTP/DHCPv4 retransmission improvements
+>       commit: e6bca3305bbc333cc71e5bf1ee483bbacfa84736
+> [3/3] net: bootp: add config option BOOTP_RANDOM_XID
+>       commit: 2111bd7e93a3044f0590c942a41f2667d15d923d
 
-This is I assume a non-Linux OS kernel being booted. So the question is,
-does anyone externally have some standard defined here which should be
-used?
+And sorry for the delay here. Can you please follow up with a patch to=20
+doc/usage/environment.rst for the new environment variables? Thanks.
 
 --=20
 Tom
 
---FGbLtX+5mNDpa1j/
+--2XcdcEQ//y0Wa2xd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgw9sIACgkQFHw5/5Y0
-tyxShwwAhMUpqkLYbX/xv0frN3XUutUqMQK5KXNl9PEG50LL1akzTnv/Ip4JQ5cJ
-MXZLPt7AJ/B/o395u5X8CfQdu18mPGBZsFDW/TAMauY4Ce6fmydyCv1XlhyIUx4/
-T/eMl0m3mPV/Z3I87rz2rwSZ4aMvFLeNs0iiUXcQ1UO3sc1GqzHZhNSWsls3Uct/
-DgyzIbdlTV+LVRkpIiwXCOx+iZCcn8WXpJ5qNvWYC4g4fuaHWZsj+uPCjqaCvdPF
-yFEJoYItxD2e3U6l6OieGNZO9+4G+NMUvF3roIfWB697xzNrG12pexe4hCegOIqI
-Gm11qJqV9mkBWdgt8c408hyc+r5rW2iV9/0GED3Ypgg8AEoX/MyhkEV6n+z/SsfS
-gow9ZEg1waN/3PR3CyXL64KvtfvP23/s5FFCMYI2LzljltGbG0esXSyZVzjHBocQ
-JedRQXJJ4DF1Ef5XZ38Y93pFII6/aeyK1QJxKYHUIqjKb8s+UYj3WVoosor825hR
-PUXK25iJ
-=b3rF
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgw+/sACgkQFHw5/5Y0
+tywtPgwAjwrSXiK20GQCEB2H3IqFR735cIIgK4+qkGefeTq1QNUkdtN6s2tmhfJg
+2zg0wYy9RbVFyjy1GeLHaEXfEquC1u1Rst26+mUOM4ktkbWavEWsd6KQL9GNGpjK
+J/Zco4jOBpe6U9nVvqdADyZokZR1L32XS5PhO/Cioq+6iukbpjXBzGPnME/+oUS+
+4UA4s41QMA0S+PrwQOpzx5mAGdAy5Gr8BWy1go8N0UUV1gKf4crVgi+JjmfG7OBa
+obvYnZCEGVfoyoraV1CNf5Rm+SWzUzQD3PK9t0C+4vXXDG2K6uzZdjk98G7gn+Q/
+d2c6ZZ7PD+kHWzuZOx5E1wCzUgRmsl2Pwzc3wsDy8ihJaLQVhupqqgt5AjVG+YNf
+yCKbm4KIfwmSEM18V5I09iRJkpigE/IwM+2oyZg6mYInybytMZEh8ICR76abNaQR
+Ssyahe170L1I+13QsgRkwqBSqZxZSnj1NFQ42pWtNSWPbpeXjjetjraYqYRpY0HO
+rE4ctc6o
+=g//i
 -----END PGP SIGNATURE-----
 
---FGbLtX+5mNDpa1j/--
+--2XcdcEQ//y0Wa2xd--
