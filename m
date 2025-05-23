@@ -4,108 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16362C54F2E
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35747C54F2E
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:44:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F1BA83285;
-	Fri, 23 May 2025 15:43:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3AD183285;
+	Fri, 23 May 2025 15:44:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QakQi6MB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OLydBEgv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12CC831FE; Fri, 23 May 2025 15:07:04 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 5501583264; Fri, 23 May 2025 15:44:22 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C84F283108
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:07:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 452DD83264
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:44:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a36efcadb8so4921284f8f.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:07:02 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-601dbd75b74so9277520a12.1
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:44:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748005622; x=1748610422; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=eXkKnd2AtBuRk3k/wNR9SBh0vkP9tAPvNFHXY6XvK2Q=;
- b=QakQi6MByVnfPFF/yBUD1nSmbR6ibx5yOWpmsGjGTEMAifqKfj72RgRdCIr9B+d3RY
- ikTQ6Kr+v1emAapiLWqslYFb+lV2IaI2JnfioAyTEPlQVK96VLj37xqaO1qPKuWa4x0D
- F6k7C6kh+xYmvBktBslDsV9I60ZvkHLBg8FXY=
+ d=chromium.org; s=google; t=1748007860; x=1748612660; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vjmFbrAZos6SLYt7ryqbjEw7q+hODHBfiC/RtVU8GVY=;
+ b=OLydBEgvgElUruvfD7wsCEFT/ax1hqCGVm0YHDIcCSS5O0tV7yuPwx6TYeNvJQPEh2
+ SJ5LCos32Tecbc1FOEJluuN7jeYmcpF7aY1eDrKa4H7LXBGajnKAP5auKukyaui5BYaH
+ /2mJyhBbfyOPP1MayJz4S1GyNFIvYDqEcaUds=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748005622; x=1748610422;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1748007860; x=1748612660;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eXkKnd2AtBuRk3k/wNR9SBh0vkP9tAPvNFHXY6XvK2Q=;
- b=V4PFlGjOE14hCo/QMn8Jyim8/poO+aT4y9hSoai6GX5XZTqdjW0W4LTWxrQQ3Qkv6a
- cS1qytNDyu9ksS9pBk83vJuVeeMRTZXXKOIoNnP/s2GjwaS+p51HDugp1PAaYbd9dqeb
- gRIyEwot9CJjOmlT9A5hkxAAvCrf4euQtshF5e+kRCCD9Chx2qWBZ/T33fjyiQeYX/rW
- CYq4WydrNi236vPkMsiUF6TOj0+ZZm+RisE+kuqav9VRzzTDSQ23bOhFMBCVlUz/uJ9M
- JLxyxGaCf9n8Km/q+aD2VheVc8ZhHAUyuSAAI+bi/9yZoSQIOIw+tKqnvZglAoleZqcD
- K0MA==
-X-Gm-Message-State: AOJu0YwPUBg+ANOLtYq/PkiNipO82xfNker+k5oOzrUboNXlXcqVxpdF
- ouolmOWHySkIwdy4dZov43NYlqN1TPomItD4t6MUdWNzrWyI2Bez2v9GGXjFxQbgF9aiNRZYItq
- ThoovdYqx
-X-Gm-Gg: ASbGnctDoHXcGnKVflhLgXjMK0jSuVZs39UBsx6oIBz3WzegOvyBwboL5aDsywtVQiw
- wElU2JDkgz6gCCuSPHEr3VjxiHZr6/ovxQYPHggNhbVJ6yh6mloC6YWYJWUCj43l7n/66lOeUPX
- h0spEB4Yic/Zw781M2V0+7c5dMPBvl3yQnYMsAy4h8tYUA7J8uqj1Qv6gM6rkAQka/hmTVHNHuo
- qOyPxbBue2OcVTmDjWUeztFKb4d0LiqK6TxGm+g9LRm+PFQEge3vo/scaRQKt9B7xNQxqImPB1I
- AcAjkSvT5mZAUkNs+ogUcgrTxPOpSVXaO211/68vr9WPDzJ738wm5XNWgq6yi+MsfrtN+DI=
-X-Google-Smtp-Source: AGHT+IFMdJ8bJabuywRmeeOozPsRDVGEbu7DP3XrN2bhIlVWuoiVEgMJxIER0JjkSZvhcnQE/rPYOw==
-X-Received: by 2002:a05:6000:4308:b0:3a3:7435:9a32 with SMTP id
- ffacd0b85a97d-3a374359cc1mr16759879f8f.40.1748005621618; 
- Fri, 23 May 2025 06:07:01 -0700 (PDT)
-Received: from chromium.org (82-132-216-100.dab.02.net. [82.132.216.100])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a37b0bbd1fsm12109241f8f.100.2025.05.23.06.06.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 06:07:00 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Adriano Cordova <adrianox@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Christian=20Kohlschu=CC=88tter?= <christian@kohlschutter.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Eddie James <eajames@linux.ibm.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janis Danisevskis <jdanisevskis@aurora.tech>, Janne Grunau <j@jannau.net>,
- Jeremy Compostella <jeremy.compostella@intel.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Maks Mishin <maks.mishinfz@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, Moritz Fischer <moritzf@google.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Pawel Kochanowski <pkochanowski@sii.pl>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <ziyao@disroot.org>
-Subject: [PATCH 00/10] efi: Move some efi-loader code into a new shared dir
-Date: Fri, 23 May 2025 14:06:35 +0100
-Message-ID: <20250523130651.1329593-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ bh=vjmFbrAZos6SLYt7ryqbjEw7q+hODHBfiC/RtVU8GVY=;
+ b=GITWlHzUBjbVYR47KayuoMEXthBTkxxEqZTCb+ZTupCgrzPVnpchjpd3kDOlua/wgO
+ ZBVNvqsE0Tpa2sOLIIrHdZnOFTLxWhnT1gZfJb/mv+vdCXWGHuzECl6cmLRxCUMPJB5Q
+ xbvmJyAOWXlch6EGJzuJ1QwQa2tI8b3g5O878sDhqGLYMoFpXv8kyjQJy9Qyqf8S2PQ9
+ jvZEnntWnM9mCqn/HtAn8IQWa5KdQtsq8S0PP41M9vwuN1n4q445iNnf5YW3OtWyyTyL
+ aGrSUtUhCPK08Hk33av6mXDgVg0U4hd5vm/iZZHb+hVl65fsdTL1zvH6Ebny+GaS3sdb
+ aajQ==
+X-Gm-Message-State: AOJu0YwGaccrrf6g7It6JwCEENpjHn2CSfPwji803UHNTcQ8oAGp/MeC
+ VTMSpJn0h7XRj18WwuN0d7hDwsFXuNAh56o0SG+KFsGl3L8dkN6BUYSeypdzLJUVCGqf+jDYCmI
+ RQ11b8kF0UXVaEoexBYUA18nhZxujmnNP2lK/r1Jx
+X-Gm-Gg: ASbGncv3/bjdDpw4wujAeEiSf/5ZqXWLEDm2rR8Q8mM97nsY+8YMsaakXA0v455n5PE
+ 38ff2aiQ3hPSuQym70E7zqY2eGcKzQOU7tmoqEAHD9v1sW90tGQtow8iekpv+b/qaNXhV8xLsm6
+ TUdTHSakYNU3nTeYnAU7bJuzyKHw8gXVbSFA==
+X-Google-Smtp-Source: AGHT+IFMu7gaCETyvZl2F9ELcnP5wWrzU/5NptcaZJw11TjFmWoMjdic0Dp4zyvigAeJ3qgPqZ5is5+UGf7Im4jjG1A=
+X-Received: by 2002:a17:907:7da2:b0:ad2:2ef3:cc1b with SMTP id
+ a640c23a62f3a-ad536b7bd28mr2637723866b.7.1748007859735; Fri, 23 May 2025
+ 06:44:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 23 May 2025 15:43:51 +0200
+References: <20250522011749.3498970-1-paulliu@debian.org>
+ <20250522011749.3498970-4-paulliu@debian.org>
+In-Reply-To: <20250522011749.3498970-4-paulliu@debian.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 23 May 2025 14:44:08 +0100
+X-Gm-Features: AX0GCFvKoYN4DQZfs8LD_7slbvSxfRVwcsI5BGNt6t8ONWCEMMhit__x-l8ctnw
+Message-ID: <CAFLszTjBDedSGTOLGy4w41+sG2H9yDBCSPcYwUhmWi52myjBoA@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] lib: efi_loader: efi_memory.c: add efi_realloc()
+ for realloc memory
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,101 +90,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some functions provided in lib/efi_loader are actually useful for the
-app as well. This series refactors the Kconfig and directories a little
-so that code is easier to share.
+Hi,
 
-As a starting point, it moves some filename and device-path functions to
-the new directory.
+On Thu, 22 May 2025 at 03:18, Ying-Chun Liu (PaulLiu)
+<paulliu@debian.org> wrote:
+>
+> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+>
+> Add efi_realloc() for realloc memory that previously alloc by efi_alloc().
+>
+> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> ---
+>  include/efi_loader.h        |  2 ++
+>  lib/efi_loader/efi_memory.c | 52 +++++++++++++++++++++++++++++++++++++
+>  2 files changed, 54 insertions(+)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index d0c72d0bc58..ff7ca5a0480 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -878,6 +878,8 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+>  #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
+>  /* Allocate boot service data pool memory */
+>  void *efi_alloc(size_t len);
+> +/* Reallocate boot service data pool memory */
+> +void *efi_realloc(void *ptr, size_t len);
+>  /* Allocate pages on the specified alignment */
+>  void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
+>  /* More specific EFI memory allocator, called by EFI payloads */
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 0abb1f6159a..4c76df642dc 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -666,6 +666,58 @@ void *efi_alloc(size_t size)
+>         return buf;
+>  }
+>
+> +/**
+> + * efi_realloc() - reallocate boot services data pool memory
+> + *
+> + * Reallocate memory from pool for a new size and copy the data from old one.
+> + *
+> + * @ptr:       pointer to old buffer
+> + * @size:      number of bytes to allocate
+> + * Return:     pointer to allocated memory or NULL
+> + */
 
-The next step would be to move device-path code over, but this will need
-some discussion.
+Should go in header file
 
+> +void *efi_realloc(void *ptr, size_t size)
+> +{
+> +       efi_status_t ret;
+> +       void *new_ptr;
+> +       struct efi_pool_allocation *alloc;
+> +       u64 num_pages = efi_size_in_pages(size +
+> +                                         sizeof(struct efi_pool_allocation));
+> +       size_t old_size;
+> +
+> +       if (!ptr)
+> +               return efi_alloc(size);
+> +
+> +       ret = efi_check_allocated((uintptr_t)ptr, true);
+> +       if (ret != EFI_SUCCESS)
+> +               return ptr;
+> +
+> +       alloc = container_of(ptr, struct efi_pool_allocation, data);
+> +
+> +       /* Check that this memory was allocated by efi_allocate_pool() */
+> +       if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+> +           alloc->checksum != checksum(alloc)) {
+> +               printf("%s: illegal realloc 0x%p\n", __func__, ptr);
+> +               return ptr;
+> +       }
+> +
+> +       /* Don't realloc. The actual size in pages is the same. */
+> +       if (alloc->num_pages == num_pages)
+> +               return ptr;
+> +
+> +       old_size = alloc->num_pages * EFI_PAGE_SIZE -
+> +               sizeof(struct efi_pool_allocation);
+> +
+> +       new_ptr = efi_alloc(size);
+> +
+> +       /* copy old data to new alloced buffer */
+> +       memcpy(new_ptr, ptr, min(size, old_size));
+> +
+> +       /* free the old buffer */
+> +       efi_free_pool(ptr);
+> +
+> +       return new_ptr;
+> +}
+> +
+>  /**
+>   * efi_free_pool() - free memory from pool
+>   *
+> --
+> 2.39.5
+>
 
-Simon Glass (10):
-  efi_loader: Separate device path into its own header
-  efi: Include device-path functions in the EFI API docs
-  efi: Rename END to EFI_DP_END
-  efi: Rename the lib/efi directory
-  efi: Rename CONFIG_EFI to CONFIG_EFI_CLIENT
-  efi: Create a new CONFIG_EFI
-  efi: Update maintainers for EFI_CLIENT
-  efi: Move the base name and PXE info into lib/efi
-  efi: Adjust copyright and mention constant source
-  efi: Move FDT-filename discovery into lib/efi
+Could you add a bit of detail as to why this patch is needed? It is
+hard to tell which code will actually use it. So long as it cannot be
+used outside lib/efi_loader then it should be OK.
 
- MAINTAINERS                                |   5 +-
- Makefile                                   |   4 +-
- arch/arm/include/asm/global_data.h         |   2 +-
- arch/x86/Kconfig                           |   6 +-
- arch/x86/cpu/Makefile                      |   2 +-
- arch/x86/cpu/efi/Kconfig                   |   2 +-
- arch/x86/cpu/x86_64/Makefile               |   2 +-
- cmd/Makefile                               |   2 +-
- cmd/bootefi.c                              |   1 +
- cmd/eficonfig.c                            |   5 +-
- cmd/efidebug.c                             |   7 +-
- cmd/part_find.c                            |  10 +-
- configs/efi-arm_app64_defconfig            |   2 +-
- configs/efi-x86_app32_defconfig            |   2 +-
- configs/efi-x86_app64_defconfig            |   2 +-
- configs/efi-x86_payload32_defconfig        |   2 +-
- configs/efi-x86_payload64_defconfig        |   2 +-
- doc/api/efi.rst                            |   6 +
- doc/develop/uefi/u-boot_on_efi.rst         |  18 +-
- drivers/block/Kconfig                      |   2 +-
- include/efi_device_path.h                  | 420 +++++++++++++++++++++
- include/efi_loader.h                       |  57 +--
- include/init.h                             |   2 +-
- lib/Kconfig                                |   2 +-
- lib/Makefile                               |   1 +
- lib/efi/Kconfig                            |  86 +----
- lib/efi/Makefile                           |  28 +-
- lib/efi/basename.c                         | 153 ++++++++
- lib/efi_client/Kconfig                     |  83 ++++
- lib/efi_client/Makefile                    |  28 ++
- lib/{efi => efi_client}/efi.c              |   0
- lib/{efi => efi_client}/efi_app.c          |   0
- lib/{efi => efi_client}/efi_app_init.c     |   0
- lib/{efi => efi_client}/efi_dtb.S          |   0
- lib/{efi => efi_client}/efi_info.c         |   0
- lib/{efi => efi_client}/efi_stub_arm64.c   |   0
- lib/{efi => efi_client}/efi_stub_x86.c     |   0
- lib/{efi => efi_client}/efi_vars.c         |   0
- lib/{efi => efi_client}/sdram.c            |   0
- lib/efi_driver/efi_uclass.c                |   1 +
- lib/efi_loader/Kconfig                     |   3 +
- lib/efi_loader/efi_bootbin.c               |   1 +
- lib/efi_loader/efi_bootmgr.c               |   4 +-
- lib/efi_loader/efi_boottime.c              |   1 +
- lib/efi_loader/efi_capsule.c               |   1 +
- lib/efi_loader/efi_console.c               |   1 +
- lib/efi_loader/efi_device_path.c           | 175 +++------
- lib/efi_loader/efi_device_path_utilities.c |   3 +-
- lib/efi_loader/efi_disk.c                  |   1 +
- lib/efi_loader/efi_fdt.c                   |  64 +---
- lib/efi_loader/efi_helper.c                |  81 +---
- lib/efi_loader/efi_net.c                   |   1 +
- lib/efi_loader/efi_tcg2.c                  |   1 +
- lib/uuid.c                                 |   4 +-
- test/lib/efi_device_path.c                 |   1 +
- 55 files changed, 814 insertions(+), 473 deletions(-)
- create mode 100644 include/efi_device_path.h
- create mode 100644 lib/efi/basename.c
- create mode 100644 lib/efi_client/Kconfig
- create mode 100644 lib/efi_client/Makefile
- rename lib/{efi => efi_client}/efi.c (100%)
- rename lib/{efi => efi_client}/efi_app.c (100%)
- rename lib/{efi => efi_client}/efi_app_init.c (100%)
- rename lib/{efi => efi_client}/efi_dtb.S (100%)
- rename lib/{efi => efi_client}/efi_info.c (100%)
- rename lib/{efi => efi_client}/efi_stub_arm64.c (100%)
- rename lib/{efi => efi_client}/efi_stub_x86.c (100%)
- rename lib/{efi => efi_client}/efi_vars.c (100%)
- rename lib/{efi => efi_client}/sdram.c (100%)
+I would like to remove most/all use of efi_alloc() so that the EFI app
+can use the standard U-Boot malloc(). I am not 100% sure about this,
+but so far it seems like the best way to support EFI booting from the
+EFI app.
 
--- 
-2.43.0
+So if this patch is accepted, it may make it harder to reconcile
+memory allocation in U-Boot across EFI loader and app.
 
-base-commit: 3599a58a5114224a01557d18371036a5823233cc
-branch: app
+Regards,
+Simon
