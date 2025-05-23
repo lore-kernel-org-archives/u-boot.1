@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F4EC54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D5DBC54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 23:03:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32EA983619;
+	by phobos.denx.de (Postfix) with ESMTP id 7D22D83423;
 	Sat, 24 May 2025 01:00:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WBfO4FQF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E3PCHiQD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BD5883416; Sat, 24 May 2025 00:59:21 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 3DAD383409; Sat, 24 May 2025 00:59:23 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6108383340
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0554D8334D
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 00:59:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-231fc83a33aso3065425ad.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:19 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-7370a2d1981so313941b3a.2
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:59:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748041158; x=1748645958; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748041159; x=1748645959; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MQGPtQAx4Kc1PFHzksIb07KrMGgt4H1jo4tjj4gR79s=;
- b=WBfO4FQFEqOP11C7++fRmbZ9KoOHMCz7c8T+1B+X5QVqfCkxNWeQI3xcCooE/n1qsX
- gV3LofhvolYp6b8ytARV8rbvmk1CW2T2GWgaXWBOGp2IQIYlokJJ6pow0GwWLdILMmQl
- u4Y4n3Och7lRXRjQ6TlSLhZhrIkhVIQduBJVo=
+ bh=D3zg3do6lZMukq2adld3fz8C9++BmVFQooOwz3wgl90=;
+ b=E3PCHiQD/qKzFWEwb8fHk28w+xUCCFCqmSVzhNagjh6yePrAI6zpzmwdvQPh7GRX8j
+ 8hQigVhBJ4SFq0Wnk4Jd+VvpLcZOxv15uyfj+OFVFDLO/jthRmaz88ZYxdoepiHnBgtC
+ So13TZMJL39IAvAt3KWpmofkRfPzkNZ0oKZiE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748041158; x=1748645958;
+ d=1e100.net; s=20230601; t=1748041159; x=1748645959;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MQGPtQAx4Kc1PFHzksIb07KrMGgt4H1jo4tjj4gR79s=;
- b=J2gRwkczsm+++MItSDmhimEDfI868OkqSF+Bov4+IyaeYSrrzN8hk/Gxt3tfFsbWLK
- JT/z9QxXAEbyOn8Dbq3luDk1eM+cU5v5NN8ZZVoZEK7CwJKVYRbKuCqdY6zisIGMB7XO
- w8oK7QKx97bPv5UVZFuoW89WfInmjBpm6W9QYXcak3TU7jiKZxvjy+QXxFQtJDgnJnDf
- zv74aWfbdwihApWCRHPIszwZ73RVs/KUbVtt6zfflFB5GxYruDJAjQZvplxdi/Lj/sXb
- RJbyvA+COwFduArNlNy3xnHjTUwjKwGstBuHSpfxb/nNoPwGzR2uO+eFier2dskNVcva
- oKNQ==
-X-Gm-Message-State: AOJu0YwQuhG9evAgDd3GQCre7kNsrLSEusNdSPvGjQXVoffA/466c+sI
- qUnceFDcH7idRvONJRqp2sEfEkKbaz6qhpu+zTt74pHVVDwkOya5AD+/cFoQU9j6gvIJTRs34xw
- b4iM=
-X-Gm-Gg: ASbGncsse+eE2Haj2cdynfsrGjebWK9nmEZM5kd85LpWk+sN1D/GkBILhtYjLRLHacm
- EXw/RpUTRt85nZE069PG3n1v/ugkrCEHIPFwrY8MO7UvZ1gy476HqNr5aPxQJmFPvHAHG/4yHcH
- 46DdypaLGabET0B12hpmlmHCbJf0zzqK3vNSwqUQ0YkP7AVOCZuBQ4zv1E94n9soksDMiLN66P+
- HzvYD+rWTj62RXELVelHu2lRDDWCw0jA3il4WeqKLkUFWGyu0FUPvrcNd/fDuXKTV+JmtFgBBgy
- kHjpLkqOLmOaUyNPWh+q4z8UMgo4Q76gARLuaRAIObtS7tsHyTF0+qT2QaBW6ZN5G9kLAb5UEdv
- bsj6KaNSAUpMhVRs=
-X-Google-Smtp-Source: AGHT+IFiztUIaduxAU9ixVyCk2u/0dlVin/Kkrlqk7J5u95s0tNS7tfP1gBOSRmK23QEOtoilgTC7g==
-X-Received: by 2002:a17:902:e74b:b0:22d:e57a:27a2 with SMTP id
- d9443c01a7336-23414f68e06mr18267895ad.23.1748041157758; 
- Fri, 23 May 2025 15:59:17 -0700 (PDT)
+ bh=D3zg3do6lZMukq2adld3fz8C9++BmVFQooOwz3wgl90=;
+ b=Gp5nr0bBm9gVvxAKLYoIA56j6iT/I0kIXSd5+KdfEA4/lnEs7/ly8JSPAlv+OhFEzn
+ A457TEcvW+OfKp7jcfyxyXMDfYRmWny7hkBskLKd3noI7lx1TGk6dX8lndXgSpsgm189
+ 9XSxq5Nafqdhradj214wsYTIiaL8pRcseYCupkgWOCIciQqYG/S7/5kbFB2xpYFBDDmF
+ DtPHUX9oP3m/05HS74/8EBqy0VXyDHHiApHXt4MgdREzzyMqZCgYKPTFdnXHTlB2HPro
+ YUyZBEhOYjg7eUT311dL+p2HpYOXVOTW6jfWkDsBvgYca0L02bV8PoXggME6kkMq7vEu
+ +28w==
+X-Gm-Message-State: AOJu0YzUmgaOffOwPK1YV358sQ0+TKdmARuBI7Vv6s8qst3/Z6SCU+mV
+ WFLQqXLM5kokRIskYXkKo4rYxuHfcRkRu8p4beXMimlKPLFWkQGB7mdn92kysfjo8GaUSfN9CE0
+ UZoQ=
+X-Gm-Gg: ASbGncvbz8ZKWrZPggOTMg/Vw5W0L3n5Zs02qsIK/2ggawU8J4mqirdMYnTzpkN9UUi
+ iGZ1Y4rL5TPy1ci+col9m3iqlXAXMNb6xv3DgI8B35Gn/Ju10NuyFFGu4znYx/2UHBP4mDP0/ia
+ VBniTNcw2cZ52TmcYpfXSFjcBALR+goPOY1aKJ6Eh6dc7xiAeIBfvTwcrK2AvbBCtNXcmGkKXON
+ 3K8aS4g94ChTksO5tvQ+cYbUZ0pqsJdEJyvVuVYheGZzQiL+v56FpEGv856pzi/A2Ys14ZKZ7Nh
+ pL9/3js8XCvxr7WIwijMtKIKbRp88m6ILkBDDjRz78P1KVp91OMoRAOMzEvyYjCVhcsR+Fn0eGM
+ ilJItcd3eM+e6qTg=
+X-Google-Smtp-Source: AGHT+IEkyZBoZyBb3wyGCEouqr8vNvM6QH+rTjArHchqF1fJf79uUujJB/4toXbQL/DdlfWqP9eq0Q==
+X-Received: by 2002:a05:6a20:d70f:b0:1f5:9098:e42e with SMTP id
+ adf61e73a8af0-2188c1e8dfamr1870906637.7.1748041159419; 
+ Fri, 23 May 2025 15:59:19 -0700 (PDT)
 Received: from localhost (188.139.125.34.bc.googleusercontent.com.
  [34.125.139.188]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-23401ab6bcfsm10005715ad.77.2025.05.23.15.59.16
+ 41be03b00d2f7-b26eb09ffb8sm13225409a12.70.2025.05.23.15.59.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 23 May 2025 15:59:17 -0700 (PDT)
+ Fri, 23 May 2025 15:59:19 -0700 (PDT)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -77,9 +77,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v4 20/28] coreboot: Set wifi mac addr from VPD
-Date: Fri, 23 May 2025 15:58:35 -0700
-Message-ID: <20250523225845.2311989-21-swboyd@chromium.org>
+Subject: [PATCH v4 21/28] fdt: Populate wifi MAC from environment
+Date: Fri, 23 May 2025 15:58:36 -0700
+Message-ID: <20250523225845.2311989-22-swboyd@chromium.org>
 X-Mailer: git-send-email 2.49.0.1151.ga128411c76-goog
 In-Reply-To: <20250523225845.2311989-1-swboyd@chromium.org>
 References: <20250523225845.2311989-1-swboyd@chromium.org>
@@ -102,42 +102,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the environment variable for the wlan mac address based on the value
-stored in VPD.
+Set the MAC address of the wifi device node with an alias like 'wifi0'
+or 'wifi' based on the environment variables. This allows us to populate
+the wifi device's MAC address on devices like Trogdor that store the
+wifi MAC in the VPD.
 
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- lib/coreboot/cb_sysinfo.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ boot/fdt_support.c        | 54 +++++++++++++++++++++++++++------------
+ lib/coreboot/cb_sysinfo.c |  2 ++
+ 2 files changed, 40 insertions(+), 16 deletions(-)
 
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 92f2f534ee02..a02de4dfd9c5 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -611,13 +611,34 @@ int fdt_fixup_memory(void *blob, u64 start, u64 size)
+ 	return fdt_fixup_memory_banks(blob, &start, &size, 1);
+ }
+ 
++static void fdt_fixup_net_node(void *fdt, const char *path, const char *mac)
++{
++	int j;
++	char *tmp, *end;
++	unsigned char mac_addr[ARP_HLEN];
++
++	tmp = env_get(mac);
++	if (!tmp)
++		return;
++
++	for (j = 0; j < 6; j++) {
++		mac_addr[j] = tmp ?
++			      hextoul(tmp, &end) : 0;
++		if (tmp)
++			tmp = (*end) ? end + 1 : end;
++	}
++
++	do_fixup_by_path(fdt, path, "mac-address",
++			 &mac_addr, 6, 0);
++	do_fixup_by_path(fdt, path, "local-mac-address",
++			 &mac_addr, 6, 1);
++}
++
+ void fdt_fixup_ethernet(void *fdt)
+ {
+-	int i = 0, j, prop;
+-	char *tmp, *end;
++	int i = 0, w = 0, j, prop;
+ 	char mac[16];
+ 	const char *path;
+-	unsigned char mac_addr[ARP_HLEN];
+ 	int offset;
+ #ifdef FDT_SEQ_MACADDR_FROM_ENV
+ 	int nodeoff;
+@@ -670,21 +691,22 @@ void fdt_fixup_ethernet(void *fdt)
+ 				continue;
+ 			i++;
+ #endif
+-			tmp = env_get(mac);
+-			if (!tmp)
++			fdt_fixup_net_node(fdt, path, mac);
++		} else if (!strncmp(name, "wifi", 4)) {
++			/* Treat plain "wifi" same as "wifi0". */
++			if (!strcmp(name, "wifi"))
++				w = 0;
++			else
++				w = trailing_strtol(name);
++			if (w != -1) {
++				if (w == 0)
++					strcpy(mac, "wifiaddr");
++				else
++					sprintf(mac, "wifi%daddr", w);
++			} else {
+ 				continue;
+-
+-			for (j = 0; j < 6; j++) {
+-				mac_addr[j] = tmp ?
+-					      hextoul(tmp, &end) : 0;
+-				if (tmp)
+-					tmp = (*end) ? end + 1 : end;
+ 			}
+-
+-			do_fixup_by_path(fdt, path, "mac-address",
+-					 &mac_addr, 6, 0);
+-			do_fixup_by_path(fdt, path, "local-mac-address",
+-					 &mac_addr, 6, 1);
++			fdt_fixup_net_node(fdt, path, mac);
+ 		}
+ 	}
+ }
 diff --git a/lib/coreboot/cb_sysinfo.c b/lib/coreboot/cb_sysinfo.c
-index 92e4f9ca0c0c..555abc93f1cb 100644
+index 555abc93f1cb..959eaaab8e88 100644
 --- a/lib/coreboot/cb_sysinfo.c
 +++ b/lib/coreboot/cb_sysinfo.c
-@@ -12,6 +12,7 @@
- #include <init.h>
- #include <mapmem.h>
- #include <net.h>
-+#include <net-common.h>
- #include <asm/global_data.h>
- #include <linux/errno.h>
+@@ -686,9 +686,11 @@ static unsigned int coreboot_set_one(const u8 *blob, unsigned int i)
+ 	const u8 *key;
+ 	const u8 *val;
  
-@@ -703,6 +704,15 @@ static unsigned int coreboot_set_one(const u8 *blob, unsigned int i)
++	/* We only care about strings that may contain keys we can use */
+ 	if (vpd_type != VPD_TYPE_INFO && vpd_type != VPD_TYPE_STRING)
+ 		return i;
  
- 		strncpy(serialno, val, val_len);
- 		env_set("serial#", serialno);
-+	} else if (!strncmp(key, "wifi_mac0", key_len)) {
-+		u8 buf[ARP_HLEN_ASCII + 1];
-+		unsigned char ethaddr[6];
-+
-+		if (!eth_env_get_enetaddr("wifiaddr", ethaddr)) {
-+			strncpy(buf, val, val_len);
-+			string_to_enetaddr(buf, ethaddr);
-+			eth_env_set_enetaddr("wifiaddr", ethaddr);
-+		}
- 	}
- 
- 	return i;
++	/* Conntinue to move 'i' forward through the VPD blob */
+ 	i = vpd_cbmem_parse_key_value(blob, i, &key_offset, &key_len, &val_offset, &val_len);
+ 	if (vpd_type != VPD_TYPE_STRING)
+ 		return i;
 -- 
 Sent by a computer, using git, on the internet
 
