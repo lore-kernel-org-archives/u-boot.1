@@ -4,70 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6004BC3DA6D
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 11:54:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B88C54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:04:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 529E883145;
-	Fri, 23 May 2025 13:54:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AB58A8310F;
+	Fri, 23 May 2025 15:04:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KVbVhmXN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i0jgQBHi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A9FC831C3; Fri, 23 May 2025 13:54:05 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8163830EB
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 13:54:02 +0200 (CEST)
+ id 1969A831FE; Fri, 23 May 2025 15:04:17 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BDB4D83108
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:04:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54NBs1kx937826;
- Fri, 23 May 2025 06:54:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748001241;
- bh=zhDKO0hGn9JWNyR5nG2GXz4EWWXDHfhoJEHPcXDZWQI=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=KVbVhmXNNvtQkBr/+wrEWkwK0W7QzwKEA6vk4nGgJUFnaVlshk8LnxBn8ZnzPMaqC
- hTCiqVzoolKjGAy048Sdty4MIYaPLJO8I91dEbsfQikbBqMMnimC2RMELrHuxSJuFc
- N9y7lZW+1qt8ZozNhrkVc5FY55+GS9QceNtLLWv4=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54NBs1lY053666
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 23 May 2025 06:54:01 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 23
- May 2025 06:54:00 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 23 May 2025 06:54:00 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54NBs0GN1217446;
- Fri, 23 May 2025 06:54:00 -0500
-Date: Fri, 23 May 2025 06:54:00 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Beleswar Prasad Padhi <b-padhi@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <afd@ti.com>, <hnagalla@ti.com>,
- <n-francis@ti.com>, <jm@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 6/6] DONOTMERGE: arm: dts: k3-j7*-mcu-wakeup: Enable
- split mode for MCU R5
-Message-ID: <20250523115400.s5ikojqjueowfxpn@cubicle>
-References: <20250522071828.285462-1-b-padhi@ti.com>
- <20250522071828.285462-7-b-padhi@ti.com>
- <20250522144505.GK100073@bill-the-cat>
- <20250522154832.2phhu7i4e2t5dnrn@mountable>
- <c99863f3-2b55-46e2-8079-64b1aa7f9437@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6023cf146d3so6114080a12.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:04:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748005454; x=1748610254; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DCBLaEKhpywZWHtr43L99LcPV09Nk7X1dDZxnwaMSUg=;
+ b=i0jgQBHiocDKvrv03qJWCoBNIJ3XH/I/7SXHKHBD3C7PPnXxxYRc4d/au1fmAE4MQe
+ 76D3QK+IBCT2vEC+3wZ67xH0hMfu2EMQ+emB8JSB/b//hhV/cy8HDcXcDSPxESLUJK9q
+ x3QfaSdnYwv961Hr/BLTCIqq6ffqYRkxl7lxQDslJilI267WgMAG1TpDZaJCu6cLX0lR
+ WPnWXj+ZtHZaAZQ9aUQtuicm+c1WgkbuM6OQ4dm5sDQkZ1PThKAKpsxjr24ELvNbSd6I
+ aQCWzp/gxqqI7gJDDxoZ4vXHtl5jQBrRK+0L1sk7N5UjAi4GsQg/Tmrqm8jRX/dcJhMR
+ Evzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748005454; x=1748610254;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DCBLaEKhpywZWHtr43L99LcPV09Nk7X1dDZxnwaMSUg=;
+ b=j1Fpld/k8Rwc10dbIMSyBo2C9hMINC3YoioXLNNz4dPeNa3lb7I6zzwurtIob+NNZj
+ GbO0TvPCjnmF0EBT3Edt/Q4JCnRuCUQu3lH14yjN8OMCSU/telvhYQFOLWTonU2bTWCw
+ O71Eh/XpOEP647qIS/ZBs8qF1v8ZKkJhZOPa1So2LhofcjcENYnvO4MROO/bYKzOgnp6
+ Rz24p9L/NnlBVBcBIC1n4SPywgGZrmGQSG/ulOv/x/3+/qFgjInPA5ZPvjRm/8PubRVQ
+ 06tdhMkF5Jq8Lm0j75zWVswVPR3b7ouxVhq/T1OAzwyDXP6YLD/ZrAtQzQpbDnYKZtNf
+ QLag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbsRGIlRPc0CQSBHUOevLvMdQP7X0GWnmY7r8PE63cGRpDewcRcsfkUHPWNpPuhQxDx7dAHeg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1xx4Ubsa8JS6hv0lQt9jmHZjqKieb+dfoL7ZKlWh0OgN02huG
+ Rxss+jM5mP8j+/4jWVmbdJpqnfWjKdx00R+E+P9fq02AywzOv9DBDnOjAF4ybSPtEXU=
+X-Gm-Gg: ASbGncvTCLXFXTFOkIB+b0mtT/qw1ySr89otbtV2wrVoDt9rmvjzQd9g/AcdnQ38NnI
+ uB3oplr8cNLS+TjiLJ4bdIyzHdM+/RUxuEL/Cy5Ae6pHzsX/0d6qzLiFTFdtUvv27dQX9RYRg7N
+ LFAdyd8a3+FZAFU7vN5dnV1Y4l3Qm1K6ra82agmulutb9pbE/Ocb4qToocPxZiJWRnqKYQeT35m
+ akqVBPeuepSqx+fk5kIiEWcWijPRVFwv0XWfZth6r+li3xsLwL84IR/YxbLy6+RCIEoe0RcS21Q
+ h6m9iLPpQ2U5WxMhtySZT0JsS3R6rI/4BM+yXUdEzHhVrRunT+Us6j8S8bgdiV6jXUMVH+ZQ09E
+ =
+X-Google-Smtp-Source: AGHT+IExkEABDD8H1QQEdmp62ou6SyFHdQ9KvRqujIMw7s1UiEqV8a14bKz4bDXRXxR9/CxDpgQVpA==
+X-Received: by 2002:a17:906:68d5:b0:ad5:3a97:8438 with SMTP id
+ a640c23a62f3a-ad53a979ccdmr1948467166b.41.1748005453637; 
+ Fri, 23 May 2025 06:04:13 -0700 (PDT)
+Received: from localhost.localdomain ([46.198.180.244])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ad52d04f263sm1216545566b.1.2025.05.23.06.04.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 May 2025 06:04:13 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: michal.simek@amd.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Run dhcp if an http boot option is selected
+Date: Fri, 23 May 2025 16:04:04 +0300
+Message-ID: <20250523130404.2646298-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <c99863f3-2b55-46e2-8079-64b1aa7f9437@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,59 +99,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:05-20250523, Beleswar Prasad Padhi wrote:
-> Hi Nishanth,
-> 
-> On 5/22/2025 9:18 PM, Nishanth Menon wrote:
-> > On 08:45-20250522, Tom Rini wrote:
-> > > On Thu, May 22, 2025 at 12:48:28PM +0530, Beleswar Padhi wrote:
-> > > 
-> > > > Previously, MCU R5F runs in lockstep mode. Enable split-mode on MCU R5F
-> > > > as the support to shut down core1 and use it for loading other firmware,
-> > > > while DM runs on core0, has been added.
-> > > > 
-> > > > Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-> > > > ---
-> > > >   dts/upstream/src/arm64/ti/k3-j7200-mcu-wakeup.dtsi              | 2 +-
-> > > >   dts/upstream/src/arm64/ti/k3-j721e-mcu-wakeup.dtsi              | 2 +-
-> > > >   dts/upstream/src/arm64/ti/k3-j721s2-mcu-wakeup.dtsi             | 2 +-
-> > > >   .../src/arm64/ti/k3-j784s4-j742s2-mcu-wakeup-common.dtsi        | 2 +-
-> > > >   4 files changed, 4 insertions(+), 4 deletions(-)
-> > > Please don't post DONOTMERGE patches. If the series can be applied
-> > > without this patch, because the functionality is backwards compatible
-> > > put these changes in the cover letter or link to a gist or similar to
-> > > show how to test the changes locally. If the series can't be merged
-> > > until the DTS changes are ready too, please mark the whole thing as RFC.
-> > > For clarity, what is the case with this series?
-> > While I appreciate the energy to get upstream,
-> 
-> 
-> Thanks :)
-> 
-> > <vent>
-> > I think this habit of jumping ahead of kernel should be
-> > stopped.
-> > https://lore.kernel.org/all/20250522073426.329344-1-b-padhi@ti.com/ was
-> > posted, but not reviewed or accepted. I understand that there is a
-> > latency in picking things up in upstream kernel, but creating churn is
-> > not the right way of doing things. It took us an year+ to get
-> > OF_UPSTREAM settled down. At least wait for kernel maintainers to queue
-> > things up before attempting to sync u-boot with non-mainlined patches.
-> > </vent>
-> 
-> 
-> Actually the functionality added in this series is independent of the DT
-> patch. I posted this DT patch here as DONOTMERGE just so that folks can know
-> how to test the functionality.
-> 
-> I understand your concern, and if it was the case that these changes were
-> dependent on the DT, I would have waited until the DT patch is picked up
-> before posting this series here.
+The EFI boot manager relies on having an IP address before trying to
+boot an EFI HTTP(s) boot entry. However, defining it as a boot or
+pre-boot command is not always the right answer since it will
+unconditionally add delay to the board boot, even if we don't boot
+over the network.
 
-use gist next time if your intent is to show how to test it.. Let us
-continue the discussion on the kernel list for the dts portion
+So let's do a DHCP request from the boot manager, if 'ipaddr' is
+empty and fail early if we don't have an address.
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_bootmgr.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index c0df5cb9acd9..2076630648f7 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -479,6 +479,13 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 	if (!ctx)
+ 		return EFI_OUT_OF_RESOURCES;
+
++	s = env_get("ipaddr");
++	if (!s && dhcp_run(0, NULL, false)) {
++		log_err("Error: Can't find a valid IP address\n");
++		ret = EFI_DEVICE_ERROR;
++		goto err;
++	}
++
+ 	s = env_get("loadaddr");
+ 	if (!s) {
+ 		log_err("Error: loadaddr is not set\n");
+--
+2.49.0
+
