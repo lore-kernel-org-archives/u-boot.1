@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47917C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C88C54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 16:57:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51AEA83669;
-	Fri, 23 May 2025 18:55:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id CCD2283535;
+	Fri, 23 May 2025 18:55:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="1p835buh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AJsBvm2i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9A318310F; Fri, 23 May 2025 11:48:13 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06B1883242
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:48:11 +0200 (CEST)
+ id 5E091831FE; Fri, 23 May 2025 12:07:49 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3272183145
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 12:07:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7238a91f03=antonio.borneo@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N822lG025877;
- Fri, 23 May 2025 11:48:10 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- of9NU7iJb8qxaybHu2b6UkdVZ7w/oJhPxVieRaNKE3o=; b=1p835buheM+mrbol
- FBqfAfTjXGcMvnA3Uyrkl1fXFnJ/aDomhDemmnYbzLSatQodjL1Fip9f2w7YCvvh
- Jr/xHE45wtyLxa3/ZKzlLzzupnLLXkAcEd1uYc3QvCVAxRP+q7BwQ/AwDGhF+e99
- immv+Mm/S5EEt/UUUV+Y36+YqUxhhsfT+37uIAKkT3JFM0O0ycSu63SPIdirpVM+
- 0YmbYhu9jZiW+Owce158UErRoIok56bBmGQCQhBFbohm2BySTfxiSEsRWUNR3q8j
- 9hp9RVlt5Z4BvGsrj88/3BTmB76TNpJ7sx5ush4B5Q1j7zuju++Cy8RuVsJvD+Y7
- XsXK2w==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfcd7xh-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 23 May 2025 11:48:09 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D0BB640051;
- Fri, 23 May 2025 11:47:26 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B4843ADC0DA;
- Fri, 23 May 2025 11:47:13 +0200 (CEST)
-Received: from localhost (10.48.86.132) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 23 May
- 2025 11:47:13 +0200
-From: Antonio Borneo <antonio.borneo@foss.st.com>
-To: <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-CC: Antonio Borneo <antonio.borneo@foss.st.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>, =?UTF-8?q?Cl=C3=A9ment=20Le=20Goffic?=
- <clement.legoffic@foss.st.com>
-Subject: [PATCH v2 4/4] watchdog: don't autostart watchdog on STM32MP
- architecture
-Date: Fri, 23 May 2025 11:46:58 +0200
-Message-ID: <20250523094658.299730-5-antonio.borneo@foss.st.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250521122755.265760-1-antonio.borneo@foss.st.com>
-References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=c-shilwant@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54NA7jn3886044;
+ Fri, 23 May 2025 05:07:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1747994865;
+ bh=LJA2iJcedf0odDH/QjscoUCLWLFmpRp8FhRLtUWjJWM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=AJsBvm2iQGMzzusCzVF2BMsvLGPiL0sWcUKMW81w48wMc+320tN6sFrPcjhzDq4dc
+ Kh/s6e9/IfxqNshgcfcok+gg0hmTwgxnHZXrErTjfLwHdF6SgdAI4QIaqn09X7R7zc
+ BmsC0RalkC85zRcSq3g2RowQmYuySU1gITAVYlSA=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54NA7jar4182741
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 23 May 2025 05:07:45 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 23
+ May 2025 05:07:44 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 23 May 2025 05:07:44 -0500
+Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com
+ [172.24.227.238])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54NA7gPU1142599;
+ Fri, 23 May 2025 05:07:43 -0500
+Message-ID: <a89e2eaf-8d78-4efa-ae0b-140e85947089@ti.com>
+Date: Fri, 23 May 2025 15:37:41 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.86.132]
-X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-23_03,2025-05-22_01,2025-03-28_01
-X-Mailman-Approved-At: Fri, 23 May 2025 18:55:43 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: ti: am62ax: env: Use default MMC related args
+To: <u-boot@lists.denx.de>
+CC: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
+References: <20250522164013.125496-1-afd@ti.com>
+Content-Language: en-US
+From: Chirag Shilwant <c-shilwant@ti.com>
+In-Reply-To: <20250522164013.125496-1-afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Fri, 23 May 2025 18:55:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,123 +83,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Patrice Chotard <patrice.chotard@foss.st.com>
+Hi Andrew,
+On 22/05/25 22:10, Andrew Davis wrote:
+> There are common MMC args for TI plats in include/environment/ti/mmc.env.
+> Since we already include this, there is no need to redefine these
+> MMC vars. Use the defaults.
+>
+> This seems like something that could have been done while refactoring
+> these vars in the first place as it happened after this AM62A file
+> was available hence the fixes tag.
+>
+> Reported-by: Chirag Shilwant <c-shilwant@ti.com>
+> Fixes: 3709b529156e ("env: ti: mmc.env: Move mmc related args to common place")
+> Signed-off-by: Andrew Davis <afd@ti.com>
 
-On STM32MP reference boards, the watchdog is started by a previous
-boot stage (e.g. bootrom or secure OS), so the config flag
-WATCHDOG_AUTOSTART is not required.
-It's preferable to rely on the DT properties "u-boot,autostart" or
-"u-boot,noautostart", if needed.
 
-For backward compatibility on defconfigs that are based on SPL,
-thus cannot rely on a previous boot stage for starting the
-watchdog, enable WATCHDOG_AUTOSTART in their respective defconfig.
-The change in stm32mp15_dhsom.config is propagated to:
-- configs/stm32mp15_dhcom_basic.config
-- configs/stm32mp15_dhcor_basic.config
-and then to:
-- stm32mp15_dhcom_basic_defconfig
-- stm32mp15_dhcom_drc02_basic_defconfig
-- stm32mp15_dhcom_pdk2_basic_defconfig
-- stm32mp15_dhcom_picoitx_basic_defconfig
-- stm32mp15_dhcor_avenger96_basic_defconfig
-- stm32mp15_dhcor_basic_defconfig
-- stm32mp15_dhcor_drc_compact_basic_defconfig
-- stm32mp15_dhcor_testbench_basic_defconfig
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
----
- configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig          | 1 +
- configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig         | 1 +
- configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig | 1 +
- configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig     | 1 +
- configs/stm32mp15_basic_defconfig                           | 1 +
- configs/stm32mp15_dhsom.config                              | 1 +
- drivers/watchdog/Kconfig                                    | 1 +
- 7 files changed, 7 insertions(+)
+Acked-by: Chirag Shilwant <c-shilwant@ti.com>
 
-diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-index fc095ac0de1..4c371c17334 100644
---- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_SYSRESET_SYSCON=y
-+CONFIG_WATCHDOG_AUTOSTART=y
- CONFIG_WDT=y
- CONFIG_WDT_STM32MP=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-index b243c45d690..7463eb5c95d 100644
---- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_SYSRESET_SYSCON=y
-+CONFIG_WATCHDOG_AUTOSTART=y
- CONFIG_WDT=y
- CONFIG_WDT_STM32MP=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-index e635c726459..e9f5bd32721 100644
---- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_SYSRESET_SYSCON=y
-+CONFIG_WATCHDOG_AUTOSTART=y
- CONFIG_WDT=y
- CONFIG_WDT_STM32MP=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-index 9e7849ff8f0..aefb78935b0 100644
---- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-@@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_SYSRESET_SYSCON=y
-+CONFIG_WATCHDOG_AUTOSTART=y
- CONFIG_WDT=y
- CONFIG_WDT_STM32MP=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index e3090ec2a50..241c9402560 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -191,6 +191,7 @@ CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
- CONFIG_BMP_24BPP=y
- CONFIG_BMP_32BPP=y
-+CONFIG_WATCHDOG_AUTOSTART=y
- CONFIG_WDT=y
- CONFIG_WDT_STM32MP=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-index c84116482f6..565b49584e3 100644
---- a/configs/stm32mp15_dhsom.config
-+++ b/configs/stm32mp15_dhsom.config
-@@ -76,3 +76,4 @@ CONFIG_PREBOOT="run dh_preboot"
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
- CONFIG_TARGET_DH_STM32MP1_PDK2=y
- CONFIG_USE_SERVERIP=y
-+CONFIG_WATCHDOG_AUTOSTART=y
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 1bb67f50352..510330be8a5 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -15,6 +15,7 @@ config WATCHDOG_AUTOSTART
- 	bool "Automatically start watchdog timer"
- 	depends on WDT
- 	default n if ARCH_SUNXI
-+	default n if ARCH_STM32MP
- 	default y
- 	help
- 	  Automatically start watchdog timer and start servicing it during
--- 
-2.34.1
-
+> ---
+>   board/ti/am62ax/am62ax.env | 15 +--------------
+>   1 file changed, 1 insertion(+), 14 deletions(-)
+>
+> diff --git a/board/ti/am62ax/am62ax.env b/board/ti/am62ax/am62ax.env
+> index 96d9e1e2797..dc7af56a6f7 100644
+> --- a/board/ti/am62ax/am62ax.env
+> +++ b/board/ti/am62ax/am62ax.env
+> @@ -17,18 +17,5 @@ mmcdev=1
+>   bootpart=1:2
+>   bootdir=/boot
+>   rd_spec=-
+> -init_mmc=run args_all args_mmc
+> -get_overlay_mmc=
+> -	fdt address ${fdtaddr};
+> -	fdt resize 0x100000;
+> -	for overlay in $name_overlays;
+> -	do;
+> -	load mmc ${bootpart} ${dtboaddr} ${bootdir}/${overlay} &&
+> -	fdt apply ${dtboaddr};
+> -	done;
+> -get_kern_mmc=load mmc ${bootpart} ${loadaddr}
+> -	${bootdir}/${name_kern}
+> -get_fit_mmc=load mmc ${bootpart} ${addr_fit}
+> -	${bootdir}/${name_fit}
+> -partitions=name=rootfs,start=0,size=-,uuid=${uuid_gpt_rootfs}
+> +
+>   rproc_fw_binaries= 0 /lib/firmware/am62a-mcu-r5f0_0-fw 1 /lib/firmware/am62a-c71_0-fw
