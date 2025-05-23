@@ -4,92 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25A2C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 21:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57514C54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 21:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F168E8338C;
-	Fri, 23 May 2025 23:22:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A5D2F8338C;
+	Fri, 23 May 2025 23:25:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="INMLvDyO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BK8piFbB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80624833CA; Fri, 23 May 2025 22:23:29 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id A13E1833D3; Fri, 23 May 2025 23:25:45 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 789408334D
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:23:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F4778334D
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 23:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-602e5dd500fso90601a12.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 13:23:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-72ecb4d9a10so255372a34.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 14:25:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748031807; x=1748636607; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=avrAIpzMbKaQGV0QGfLDjMQhwkFkjSs/cwLjbGQgo8E=;
- b=INMLvDyOgC/79eEfb633ocM71FUNhux+cm6vHP5C2XxcTXYngPv48bJHZBX6FTheK3
- fmwZCQlq4hI8VZo/YyKeBC4+asrXCFgvw+0Lz0szeFt0DUzNXsvYoClByRKxQmbtgxqB
- 9rqrba64Py5ba9zh9mJIaOPBkmNPVWCa3lDs4=
+ d=konsulko.com; s=google; t=1748035542; x=1748640342; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MxA6yEp02XgU4F2bX7HlHPIzrHcvsTr6GzKq099Fp1Q=;
+ b=BK8piFbBUZiIKpgEGxIBXJSCgXNIQUwcxZ5ZFWMMMQn4G7fL2iQw7y6LDaO4NygByh
+ xHC4czvl3yTMD993OpzcfGifzrHGSlplGe65AM4k3pmg9RJh94sHldbZBrMzVofF/qZ9
+ RI66sOOnyuYs5+jcw0wXs5Yjq6lscTxs8nQ3I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748031807; x=1748636607;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=avrAIpzMbKaQGV0QGfLDjMQhwkFkjSs/cwLjbGQgo8E=;
- b=v7rbiiohr2zPHZJzUFQCw9tx/hE6nQGAHrADhE/AWQ+TESBihnlDBeiWgeWYq/60W/
- OwnLMuE1K+BLd+1ynQj3mpH426FRz02zN4K5gx3W0Pxy2zwoYnNnz5M0a4WxXD6Y7+y0
- J4xpIbXLgwkD6zXq0uJnsOP/wDX/g9IReR7ohJs6qN5ByLzmQCeuydO5uDzlvMsMOwJL
- SGSKKP9sSVPKPfj+ATrtGXY6Z6FwbocB795wmnzSjOMu9zBYfyvcxBivQqSsuxDCjhPj
- Zq4o9girkPO8799WYfLMYCk/wOkvurL+9vGIfkEbb3ATdWcYofCoRPMZtbXm9ziMHXIu
- +wrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVAQJ2j6O6a0dPf3loXNqcTytN7uKCu+zqjqZVo9Yz6U8s060xIGnY4Ao4HYUmkQ8YMCRBsZQk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPwVZs6yswZ+C4Z3AK8VeGTUdZ2rupKMMTvRnTCBodMh1S2xvu
- 6pTH9ye+T4XRS+kD5nJ+mGEv7g/VRIu4G7o5EeWOm4+M15IUC9pUP+T5o8mieEwOkCETO5dhQgE
- KSiNzLxd8pPEQYndobYwaId/vaOfvXuPmUb5QRZ03
-X-Gm-Gg: ASbGnctdy8R3uz86BBj+g9c7G3yj/XCsJI7ZLYniegtECNYw49frYilfHEQNEz5SqL2
- z/pXG//LaGGqa4cMnfLf6E1WqD3Ocpql/3SIHO2tG2BwnNP8ZK3G7k+Q6iFE9j3p7W63jaHSC/7
- HS/epqva9YiYnQWDmtXg2SqTbTnBHJv5g=
-X-Google-Smtp-Source: AGHT+IGirqFSV8dIb544Cy7H3v1asdNzQD0Le4ipAKT1pHJnUP0sSJIOnFW4PyzbqP866rVusBIUayoSDkK4ZaoVmi0=
-X-Received: by 2002:a17:907:7ea8:b0:ad2:4736:9c07 with SMTP id
- a640c23a62f3a-ad85b12ff10mr50739866b.2.1748031806755; Fri, 23 May 2025
- 13:23:26 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748035542; x=1748640342;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MxA6yEp02XgU4F2bX7HlHPIzrHcvsTr6GzKq099Fp1Q=;
+ b=bSEHYpaUlduU34mpiLV5F4FvZgWUPlH8QAzGXGl5DYIbQ/HQzfoBAKJN92T2OguhWA
+ V0w3lzOb5v3pv95hJpOw6SP46dhiVONvFiaoqYBlcJucER2SN/+Ggpir7e/3kWyQgg1c
+ GqMcaZlfwvbsQTOl/Cc3oMcyFIp1fTFbfMyLAtfk0+wv+pHALdWYE4vnBybVboxLjeN3
+ 36n8OIJdTzh7AvqRUn+OhiJLqtab1YKANnZLQeHh9sWNoZqZopV26VnY5YYOYnwCddxO
+ dVBTEGzgDK5UGbmI4r+9CofyrVWihHfcLfwl0xHP0PtUigwx7BcTG2iqjK4/EsWgBi+e
+ ySPg==
+X-Gm-Message-State: AOJu0YzAObZixO7xcZ6SbgF/uhgW1DEpBRHYPw3gYyd3+sr+cXvbxFeh
+ FcZun+COjRtbQ54fG6uXzkoh2VNB5cHpPOCu2SoibMDeTHAUlWXC9pPZjSjzXtdUvQE=
+X-Gm-Gg: ASbGnct4jhST9fRygkyb8Ey7SmNspF+ZVxNDZYAFmXeXFQUgxxNyoneksQ1xuIGS/Gd
+ aDQs55zZnlFDnEctA1hFGc5YZtbU1Na9aEun+W7/JXVviF2bW9IOIOp6I4utdGbYKvYvvGlw1jf
+ /22SJtDnLqdC1AIaxMlxfvXodGR8EO1ORKfgPLLY9fq3IVYynqWbaCNcpg1JoRlcqcx8S/QdQ3i
+ i/pXkhsc19YeBpmWR0Sg1MBX24ocaSg5+aaq3Mp3tW2z6RwLAw1ycnaax2s9aFxZuk+rfVtxAFj
+ omy7uAN6+Vydat0pB8NffyOtD0nXRNmGqHrnBJOCro9/iJkJGG/ROZDf3/7AgnDw7JSlDymagaV
+ 00gUBdC+7tWCe
+X-Google-Smtp-Source: AGHT+IG+MHvS9IkLnQFPhU/CMA4+qvPUG21k8gqT+DXpTTopq5MQ7K5RgXIX6WGzgAa6ul7R0InwTg==
+X-Received: by 2002:a05:6830:4994:b0:72a:ec6:7fc1 with SMTP id
+ 46e09a7af769-7355d0b7671mr764688a34.14.1748035541751; 
+ Fri, 23 May 2025 14:25:41 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-734fa986d42sm2913162a34.12.2025.05.23.14.25.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 May 2025 14:25:40 -0700 (PDT)
+Date: Fri, 23 May 2025 15:25:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
+ module
+Message-ID: <20250523212539.GX100073@bill-the-cat>
+References: <20250504132356.2317305-2-sjg@chromium.org>
+ <20250504132356.2317305-1-sjg@chromium.org>
+ <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
+ <20250523140455.GP100073@bill-the-cat>
+ <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
+ <20250523164717.GU100073@bill-the-cat>
+ <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250523130651.1329593-1-sjg@chromium.org>
- <3b23fc9d-345f-4945-b89d-153a18f5828d@gmx.de>
- <CAFLszTjofbRtjXxfR6MmnHP0hYcpg+pgLKLYDXN2KxLZ2rNPHQ@mail.gmail.com>
- <20250523164909.GV100073@bill-the-cat>
- <8734cv45fr.fsf@bloch.sibelius.xs4all.nl>
-In-Reply-To: <8734cv45fr.fsf@bloch.sibelius.xs4all.nl>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 23 May 2025 21:23:15 +0100
-X-Gm-Features: AX0GCFvmB0_VSFCfL-cL7Qh2StE9jxKicO8URVLoMmYyzu3j2dwaliUHQsgfTtA
-Message-ID: <CAFLszTgiPDQxESZ763G6AmZNSriB1W-OSGEEAtcn769oHep-EQ@mail.gmail.com>
-Subject: Re: [PATCH 00/10] efi: Move some efi-loader code into a new shared dir
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: Tom Rini <trini@konsulko.com>, xypron.glpk@gmx.de, adrianox@gmail.com, 
- bmeng.cn@gmail.com, caleb.connolly@linaro.org, christian@kohlschutter.com, 
- daniel@makrotopia.org, ddrokosov@salutedevices.com, eajames@linux.ibm.com, 
- francesco.dolcini@toradex.com, hiago.franco@toradex.com, 
- ilias.apalodimas@linaro.org, jdanisevskis@aurora.tech, j@jannau.net, 
- jeremy.compostella@intel.com, jerome.forissier@linaro.org, 
- maks.mishinfz@gmail.com, marek.vasut+renesas@mailbox.org, marex@denx.de, 
- mgarrett@aurora.tech, mkorpershoek@baylibre.com, michal.simek@amd.com, 
- moritzf@google.com, Oliver.Gaskell@analog.com, patrick.delaunay@foss.st.com, 
- patrick.rudolph@9elements.com, pkochanowski@sii.pl, pbrobinson@gmail.com, 
- philippe.reynes@softathome.com, quentin.schulz@cherry.de, 
- raymond.mao@linaro.org, semen.protsenko@linaro.org, 
- sebastian.reichel@collabora.com, sughosh.ganu@linaro.org, 
- tharvey@gateworks.com, vincent.stehle@arm.com, weijie.gao@mediatek.com, 
- ziyao@disroot.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 23 May 2025 23:22:13 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ekJIlFfPU+/DgQZ7"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,79 +102,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark, Tom,
 
-On Fri, 23 May 2025 at 18:12, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
->
-> > Date: Fri, 23 May 2025 10:49:09 -0600
-> > From: Tom Rini <trini@konsulko.com>
+--ekJIlFfPU+/DgQZ7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, May 23, 2025 at 09:20:37PM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 23 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, May 23, 2025 at 05:36:52PM +0100, Simon Glass wrote:
-> > > Hi Heinrich,
+> > On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > On Fri, May 23, 2025, 15:19 Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On 23.05.25 15:06, Simon Glass wrote:
-> > > > > Some functions provided in lib/efi_loader are actually useful for the
-> > > > > app as well. This series refactors the Kconfig and directories a little
-> > > > > so that code is easier to share.
+> > > > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
+> > > > > It is easier for tests if the top-level control logic is all in o=
+ne
+> > > > > module. Create a new do_patman() function to handle this. Move the
+> > > > > existing code into it.
 > > > > >
-> > > > > As a starting point, it moves some filename and device-path functions to
-> > > > > the new directory.
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
 > > > > >
-> > > > > The next step would be to move device-path code over, but this will need
-> > > > > some discussion.
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  tools/patman/__main__.py | 49 ++--------------------------------=
+--
+> > > > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++=
+++++--
+> > > > >  2 files changed, 54 insertions(+), 49 deletions(-)
+> > > > >
+> > > > > Applied to sjg/master, thanks!
 > > > >
-> > > > Hello Simon,
-> > > >
-> > > > Overall the ideas in this series look fine to me. But this series does
-> > > > not apply to origin/next.
-> > > >
-> > > > Applying: efi_loader: Separate device path into its own header
-> > > > Patch failed at 0001 efi_loader: Separate device path into its own header
-> > > > error: patch failed: cmd/efidebug.c:8
-> > > > error: cmd/efidebug.c: patch does not apply
-> > > > error: patch failed: include/efi_loader.h:967
-> > > > error: include/efi_loader.h: patch does not apply
-> > > > error: patch failed: lib/efi_loader/efi_bootmgr.c:12
-> > > > error: lib/efi_loader/efi_bootmgr.c: patch does not apply
-> > > > error: patch failed: lib/efi_loader/efi_device_path.c:10
-> > > > error: lib/efi_loader/efi_device_path.c: patch does not apply
-> > > > error: patch failed: lib/efi_loader/efi_helper.c:6
-> > > > error: lib/efi_loader/efi_helper.c: patch does not apply
-> > > >
-> > > > Please, resend the series based on origin/next.
-> > > >
-> > > > Patches that are not based on upstream U-Boot cannot be reviewed via
-> > > > this mailing list.
+> > > > Odd. I thought you had posted this against master or next, intendin=
+g it
+> > > > for mainline, which is why I assigned it to you in patchwork. I see=
+ the
+> > > > cover letter is missing what commit it's against. And instead here =
+you
+> > > > are once again spamming the list and with messages about your perso=
+nal
+> > > > tree. Why?
 > > >
-> > > The app is quite behind in Tom's tree due to rejected series.
+> > > I'm applying it to my tree and intend to send you a PR at some point,
+> > > with collected tools/ patches. So I believe I need to send emails
+> > > about applying things and update it in patchwork. Let's discuss this
+> > > in a future call.
 > >
-> > It was not "Rejected", it was "Changes Requested", please stop
-> > mis-representing things.
-> >
-> > > In fact
-> > > the app is pretty limited on x86 and there is no Arm app at all.
-> > >
-> > > My current plan is to move forward and eventually Tom might take it
-> > > via a pull request.
-> > >
-> > > Do you have any other ideas?
-> > >
-> > > Perhaps this is something we could put on the agenda for a future call.
-> >
-> > There's nothing to discuss in a future call as step one is "post patches
-> > against mainline".
->
-> I agree with Tom here.  I did look at some of the patches in this
-> series and now that I've learnt it doesn't even apply on top of
-> mainline it feels like I've wasted my time.
+> > I don't see what there is to discuss. Please follow the normal process
+> > for mainline and stop spamming the list with notices for your personal
+> > tree. You're also diverging your own tree further from mainline by doing
+> > this and making it less likely (multiple people have told you they don't
+> > want to review things not against mainline) any follow-up work will get
+> > comments other than that it's not applicable to mainline.
+>=20
+> For patman, I have another series [1] I'm planning to apply to my tree to=
+morrow
+>=20
+> Would you like me to send 'applied' emails for it to the mailing list?
+> Or perhaps just for the cover letter? Would you like me to send you a
+> pull request?
+>=20
+> Regards,
+> Simon
+>=20
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D456256
 
-There is a base commit in the cover letter, so you could look at that
-if you like.
+Yes, that's another series that while I disagree with the direction
+you're taking things, would rather apply to mainline than let it bitrot
+in mainline. So please send a PR against next. And that would also apply
+to the series this email is in reply to. As again, I had expected it for
+mainline and not your downstream tree even if I think we (and our users)
+would all benefit from managing the python portions differently.
 
-I plan to apply this series at some point, so any review is not a
-waste of time. I do respond to review feedback.
+--=20
+Tom
 
-Regards,
-Simon
+--ekJIlFfPU+/DgQZ7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgw584ACgkQFHw5/5Y0
+tywvygv/ayATUsUSZa8OpFxMFrbwnCCdfoPp9Tk/6Fe3Cm1ZcN+p41SuBF+ES/Uz
+5g4uarOKWDYXEdgzQHxfzvf4BQ0AL/Iq9MACfBmNO/Nr5ami0/PZUSxCpLnmLubH
+4BVvMTiILoVOnkMhZuklIKSb4zETUMwjMY5nz/HUjsFFPX2+00kPE45JVLsrvZiH
+4vGWJi9oB4mCONi9vXo3Hc1iiGBABfTtoWD8Q3PuKQXFOmgBhpXjTBb7nNxdU/3U
+m25aC+7VJQxE2v2wFlfvbfdIRi4L4/0VdF/0GSCX0wkarzCv0Ag1PyRZwYfQTm8w
+CeXTOaaocETKaUhmE2mCqlLrQhQbyUkPpEneftC/7Y3WuWv4cbHelOGowNVQAKnJ
+w2Rh35daF6ApqjlnQkEIm1ZRsAQswYfwQcCefA+/zPevEpIK4qX4bshY3QF5PLbM
+iO4U3jEujSVsk/lKYoGfWGr+Gr/nruT/IcK45SEUyPiwCGPvT3bNqH+yFRcudV8M
+JptR1RUM
+=w0it
+-----END PGP SIGNATURE-----
+
+--ekJIlFfPU+/DgQZ7--
