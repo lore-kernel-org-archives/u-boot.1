@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AE17C54ED1
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 20:20:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5542DC54ED1
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 20:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 366C78338C;
-	Fri, 23 May 2025 22:20:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8381C833D3;
+	Fri, 23 May 2025 22:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NZojICFy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HcJa8stz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DB2F833B3; Fri, 23 May 2025 22:20:37 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 5E86D833E8; Fri, 23 May 2025 22:20:41 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 893438334D
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:20:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C8C9833CF
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:20:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-acbb85ce788so36130566b.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 13:20:35 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-601a5747638so425526a12.3
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 13:20:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748031635; x=1748636435; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748031639; x=1748636439; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Wx1NygAtK2ngHI7QhihWoLi/xdYaN3E653ZfL6CgQpc=;
- b=NZojICFyb05yLwj7EiNn2YzSn2jnyeOAgwVFYLDS49sob6tKNnqTMh0z/W5jwyQwW4
- qGiSd+FLaZGxmmIEigs8GiWpwjmPiGS+9QEcr4Wyw3I0jEfoiuCaJBnTvixOjsjyNruV
- CMJoW046r1ukW5NefMPTWUPDr6rjAERWv6wos=
+ bh=lPLBg9ProOwYEfqrqxruyuWmf7tPJXPdbz1zRAPdQ7o=;
+ b=HcJa8stzCoOPjy+/CovCJ0xIEdmLG+KEyMvrWWKkuaFjjtopBSF0m3gtjxyrxk+PY4
+ SSea+wP8z/dmWcfJfkKouNq+jE2l5mh/BeeX73dIPzFhUSAAOEl29DCbcU4V5GMYCcbf
+ DGySM5DuBNJ5dpBDNpI7lsjknk9eqyC26PwOo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748031635; x=1748636435;
+ d=1e100.net; s=20230601; t=1748031639; x=1748636439;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Wx1NygAtK2ngHI7QhihWoLi/xdYaN3E653ZfL6CgQpc=;
- b=iYfOa9xU9idMocpu3KimQzCl6PZoyp3CyQZY2OXAg6DEDKp1k3Etk4DY0c8B2SesT4
- XICJm/5r8lxco9D2Rmr4pBN0HDnCtpv7BeVUp+xFBRMZo8TD/8qgw0lJta8bI/eq+rRU
- Vl1SoCNPooH4p+MrkCcM6h7SgfC/MSG/cPF5IICaVRuy131cUjnp82U3JzPA56nundeO
- zuNNPZRiPai3ijk0Cz5muFo8d5cVLifjXvIcTQa/8xvnLshKrJF7orPa83NtF6Csk2jS
- rZCKR70TAj52WwnPnLwH9rH5AMQ86m6AXgUFeYkw8qRZuUs1JcmGUoO3NM4I2dNqQN7i
- 46+w==
-X-Gm-Message-State: AOJu0YytK14z3snhQDkva2p/5espdyU9dbKWSYtrP8dq3UzLJhZEOwIK
- wvt7EVfLL+4ir5dcWxkaW1UmQUnFX/FY1OMeQlg1ZtWXRDsSmQSFNRvHinsDsTj1AgwxC/Dvg8w
- tEQkjjX8Lb5HfwWe7YYJDMEX7fA9cUJhQMvSOay7Q
-X-Gm-Gg: ASbGncuPA0fPJeK4B7ztZbW66jSjFu78+dRlwN9DBnSEtrs49kooHJNd09JLmelUDva
- ze6tLC1i6ma2TZ2xmtjJ7kiVEXtbLEVu3EZfCtXs4dRVKIH/vFp4CbnwWG9HiPx76n5jPLPgm7G
- Zwde4s0fyZsW29ZxbGnJSlUAFSUY0G1Dg=
-X-Google-Smtp-Source: AGHT+IGaJq7iWGpdoFEqYBVrHSK1sINpiCyX6W8zIUQC2zB1fPxIpxsRxcQ495hmhYY2FcBBpwTNejdT9KKIkZopX6I=
-X-Received: by 2002:a17:907:96a8:b0:ad5:ef0:5724 with SMTP id
- a640c23a62f3a-ad85b19f6d6mr42487666b.34.1748031634937; Fri, 23 May 2025
- 13:20:34 -0700 (PDT)
+ bh=lPLBg9ProOwYEfqrqxruyuWmf7tPJXPdbz1zRAPdQ7o=;
+ b=FKTP76Rr7XNKc1FtazhDzij+SiqA+v7LtVi20GsNXCdU0m7EFT5Hrw1UEdy4eJw3e7
+ 945P8FZV0nfu/uuvuI3zuJ8Z79w2+K5MAo+xDozbvQxVKW7d42W1GJEwH1alxApRtQa5
+ F1Z6eaAutFy2e31s05xs+b4TSBJk6ZQz86I96YvuudZVQCLqvI94mU5e7eO/NrSyTN9H
+ iF9Q+9GxknllbzKI+9znMe50SN8ZUS2E5juJi6m9EgAPKLERyy5ueBCxJpKh2SEKpdsB
+ 8cOad5bmE21vC26Jf1eC44pS8ixO2Mc4NJzcA58i1jXkRkzNN/cilauxM+QQ4SgzofTe
+ ZpOw==
+X-Gm-Message-State: AOJu0YxFnBASlMIr8BGLI6d4hYHgE3+AB+4RpwIXl8I/bW3CKGCG+SRQ
+ SOZBFx7nkS91G9Tcckkm3XCf951+QD4HCrD21e4HwDudaJK/SvLV3MLQLpFhFhiqnoVz45Bj7dK
+ farp1Lcau5q06DfkKYcv2DWhPw8QWCLm2rxId5hFM
+X-Gm-Gg: ASbGncsPe5GaNdpS/Ms6qxZIln8bLYj6ZYhltnQdkR9MdN+4WdYMtGdg2R6vX9b2+EL
+ SG/T3JP4ivtuWchAKNDAUoCLcYprimuTqxEMCX49BqcOE0Ard2cr58lCwhwAh7jnVsJODg0URKP
+ cmwYNQQUz9KtmFQUu6O5talpLSV8XI0H0=
+X-Google-Smtp-Source: AGHT+IHb9bkEU+w3HYUs1UEEWuYX7m7q+p5gPBk7iMAkKTLJLaA8881rNUkE6saC+0CGF7XgSGYJ/PAMsMlV4g6FF3Y=
+X-Received: by 2002:a17:906:f58b:b0:ad5:557b:c369 with SMTP id
+ a640c23a62f3a-ad85b1c2be8mr44133766b.33.1748031638925; Fri, 23 May 2025
+ 13:20:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250516125430.1361912-1-ravi@prevas.dk>
- <CAFLszTjHnxzTxGUVOkTBo6CxoZc3DxO4q8=R8_Y847g_WHWM1w@mail.gmail.com>
- <878qms51zp.fsf@prevas.dk>
-In-Reply-To: <878qms51zp.fsf@prevas.dk>
+References: <20250428192427.3877612-1-swboyd@chromium.org>
+ <20250428192427.3877612-2-swboyd@chromium.org>
+In-Reply-To: <20250428192427.3877612-2-swboyd@chromium.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 23 May 2025 21:20:22 +0100
-X-Gm-Features: AX0GCFsvHaNs9C4tENR2UAt57DMHINyb-jNOEgEKfbF7yTU_WJccJNuJOG_KiVQ
-Message-ID: <CAFLszTgZgXX=gogi7x3+84UReWC3PM1=QKevNPO-6koTV16QRg@mail.gmail.com>
-Subject: Re: [PATCH] mkimage: do a rough estimate for the size needed for
- hashes/signatures
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Fri, 23 May 2025 21:20:25 +0100
+X-Gm-Features: AX0GCFuQgnWtiF0Fv2zIJJBDCzdM7CTZCGU1KSHytuomQddv3h8fShlukq4wcu8
+Message-ID: <CAFLszTj_dbnxPF6YFRfQojFiK18NRLwH0cPHStXVgWXMU8pBgA@mail.gmail.com>
+Subject: Re: [PATCH v3 01/17] bootstd: cros: Return negative error code
+To: Stephen Boyd <swboyd@chromium.org>
+Cc: u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,57 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+On Mon, 28 Apr 2025 at 20:24, Stephen Boyd <swboyd@chromium.org> wrote:
+>
+> This should be negative EFAULT to indicate an error code.
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+> ---
+>  boot/bootmeth_cros.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Mon, 19 May 2025 at 11:28, Rasmus Villemoes <ravi@prevas.dk> wrote:
->
-> On Fri, May 16 2025, Simon Glass <sjg@chromium.org> wrote:
->
-> > Hi Rasmus,
-> >
-> > On Fri, 16 May 2025 at 14:54, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> >>
-> >>
-> >> While not perfect, we can give a reasonable estimate of an upper bound
-> >> on the necessary extra size by simply counting the number of hash and
-> >> signature nodes in the FIT image.
-> >>
-> >> As indicated in the comments, one could probably make it even more
-> >> precise, and if there would ever be signatures larger than 512 bytes,
-> >> probably one would have to do that. But this works well enough in
-> >> practice for now, and is in fact an improvement in the normal case:
-> >> Currently, starting with size_inc of 0 is guaranteed to fail, so we
-> >> always enter the loop at least twice, even when not doing any signing
-> >> but merely filling hash values.
-> >>
-> >
-> > I have no particular objection here if you really want to go this way,
-> > but it seems to me that it would be better to have a way to determine
-> > the size of signatures using a new (or existing?) API call. Then you
-> > can make this deterministic and always correct.
->
-> Well, I'm not saying I won't revisit this at some point in the future
-> and improve on the heuristics.
->
-> However, as indicated, it's not just a matter of knowing the exact size
-> of the signature data; one also has to account for the space used by the
-> "hashed-nodes" property, which of course depends on the number of
-> elements in the sign-images property, but also on the number of hash-*
-> nodes in those "pointed-to" images. So it ends up being quite a lot of
-> code to get it more exact.
->
-> So yes, for now I would like to go this way, because it's a fix that
-> works for my use case now and is easy to reason about, and should also
-> be an improvement outside my use case in that it avoids at least one
-> iteration, but possibly many.
-
-The 'right' way to do this might involve converting the APIs to use
-ofnode, then enhancing ofnode to support tracking how much extra space
-is needed (instead of actually updating the fdt), so you can then set
-the size and do it for real.
-
-Anyway, you seem keen on your current approach and it is better than
-what we have.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
