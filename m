@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8A8C54ED0
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F20F9C54ED0
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 13:08:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F203983285;
-	Fri, 23 May 2025 15:08:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 523A4832A4;
+	Fri, 23 May 2025 15:08:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UXckkG6S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nIjun1k6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8B5783108; Fri, 23 May 2025 15:08:00 +0200 (CEST)
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
- [IPv6:2a00:1450:4864:20::443])
+ id B086283236; Fri, 23 May 2025 15:08:02 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7301483108
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:07:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A58B283285
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 15:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x443.google.com with SMTP id
- ffacd0b85a97d-3a36e950e41so3742181f8f.0
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:07:58 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3a375888297so564796f8f.1
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 06:08:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748005677; x=1748610477; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748005679; x=1748610479; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lmhl0qBBb5KVzhEg+3TX9DwiMenE2I6PV1axrSxRMn0=;
- b=UXckkG6SSEHlS+Be7ez9d65UHEZDBSBVzNdN1uer5jSIdw7XYBptBBayinvkHeUEw3
- ZJZ/th1PNZrPsWV+8jncXz/mxf9ruCP7PLg3Bwwx8yzW1f4uItUBqZKpSWpEdTw3HfiW
- GkBsNyzMXPOgFiR1qUCNMbmFA3IfgyPEGMCAk=
+ bh=j6o4E3jNXkQa29/NDXM8umJGqTLTyNKlCj1RvLjADnk=;
+ b=nIjun1k6IzKcVKrMZ2HMFgfaQyx3ufVG+htNDu4/ZoWVFbihAgG8rxzGvP6389cHJb
+ C7zKSdUkRkytz4O/BkV6JlTqMEayw7yvjJk7t+dghegokCI8WsKYx1g3YSDHFgJa5gcH
+ /OZihQKOUr0Oi0hB6cVsCQS6ml01pU9Xfra64=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748005677; x=1748610477;
+ d=1e100.net; s=20230601; t=1748005679; x=1748610479;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lmhl0qBBb5KVzhEg+3TX9DwiMenE2I6PV1axrSxRMn0=;
- b=OHBY3+uYSbYJSVnqTdXe0K2srw2IJD0YbW71jg5XdbqVlhWACkRb/1fricQkSEePF1
- tgvrDRtTpxfhDc4+CjR1fu66UBda+NAw7PNkcuM2lvDijeFwYYxQ0ywbFPkUg0XkE5IT
- 2jMDfTTBlnKTmavh0perUuXrvIi2ZMENQCmCcWhrgHhV/2usKVtDI1HAguyUlQR3AyBq
- jwYzDLa0YaRPSAz8LkIFrcEW9AiYgxXmzrHwkUbDiYZhpo/qvgXrwMDrohgPkUAEufyv
- O0ZJ2/mf5Z2xcB7k5wu4bcHykwPazNEX3Sq4XisS+kwbXVc6qsXC4ujcXgm8HNgh7Hkb
- WoQA==
-X-Gm-Message-State: AOJu0Yz6NwUTl5Q5ukKVcqJ3qOezBQ8FRsehTcXTIr6vFjJ9kLKpSKkM
- Kp2AnyG9kp017AfpK2GiOotAzh06oAmh1nG0AmVfGEzbmYX7B9XRRZVIpi/eaS+sLdXes+S3kTo
- gPQbUwp/+/To=
-X-Gm-Gg: ASbGncsQrOcpIasQnfNYkoV/r6uXqxyBfSyqyKVwEnyGj65CiVVGUbf+ZU5EWmUXwph
- reFTeztMIrmIY4sJ1XCSxnpc5MmFGpot19cMHA4a9BKNYwNZqWaWYzB++z9Vab2ZJwvmMYRVBLc
- PBgRLlmWDRSxhNa4koNcIyZq1Soyz+SUQ9loYNnIpH4E3sBGYAAin+dgbCujZDdGgowaoIJioi3
- n4loJdMfLKdWVrf2wxTSpPdl9Z6G+HM9BfIygCOe8F/eYZ9bPGEKO4WydkrxaP3AAA3U/e3Axro
- 4vHdJAlQb2b5rc6MJehp9jqSpuSvqJ0RrUxCie6QtFl85e0+ApyKicj/Ek7IMbdPNNSmShE=
-X-Google-Smtp-Source: AGHT+IFZFb9vlbpoRxNe2PeszzSHM0q2O8BCwf61Fd0QCGjih/eUtJ9doMl8jUABhfXPcGqPOnJSEQ==
-X-Received: by 2002:a05:6000:40cf:b0:3a3:581f:9af9 with SMTP id
- ffacd0b85a97d-3a35c822085mr27846803f8f.7.1748005677338; 
- Fri, 23 May 2025 06:07:57 -0700 (PDT)
+ bh=j6o4E3jNXkQa29/NDXM8umJGqTLTyNKlCj1RvLjADnk=;
+ b=CEF/0ZMR82RZcGreJjb4dV42SzYvPh5BvVvAy9Qeh3XvPoxokUrJ0G6HjJFQHgZm1r
+ B7VIRy+s5z1DFRRXbJwNSGwlf8j4kX0XbzU4Q5vosCcLQP7ZdYEgtFhDLKLZCzj/dXic
+ Rx9bK4uwuYhLuTfAbiBq8gOJtoHms+JobnHo5YcbsAIWMHpiDp14AH6u7X8BkAxVsG9A
+ 7J2qhPE9GG46rWK2kir02+RbMy7V7cTQ8eM6cZ0+6V4DllxH+lsHty/hbKJ0vKNAdKDO
+ C2aJhkJtaIe12kJ6Fnga29LnpAKUpahhmAbldysLJmCIs2uVzNi7pV2h4T3UAretC2R0
+ yQNw==
+X-Gm-Message-State: AOJu0YwlvVdU8RZ82dLJQg4upgyIRSBrnPMmQSjw4fyhAIEmCRhYtrk5
+ OtSRAU6zJwEczwlufAtJPqHLJJqKgB31pkdcZpFlVjoDUdDQA2JTKW4qH6D3d37Em6BlSkLnRbJ
+ rnqY1Fwx7
+X-Gm-Gg: ASbGnct33EHB5rO6r2jAJixaycYGxEIMigjokeOtO3i0RRb32UZsJnKYrndsI+Ho1UQ
+ NXBcyKRGitZ2c9i2V7EA2Ed+MW1NVbyLJEac6qaqYZ9I0cq/JNqleVM/g1RiAFIrSRaOjSYk20q
+ 4wHD4MPltO8CmJ5fRC5ibYWvoVDS2fbAJ25AeWbkclOcVWrVsmqUkqUCevghCArkeAwOauXTc0s
+ 3bx9pSat1oDmSw8Qdh6ZgERTQfCXl+Rq5BuwArl8cIXvdk/yBohjZF/ZiyOxNqPyyvUJ0oQ+7Fs
+ 9bXJ063RDINlhKoVP8m2NnJdfRA14CH9VlknM5eArfuWgAcz2pzT2GS/1nDne4Yut0VR0qE=
+X-Google-Smtp-Source: AGHT+IGPRAif1uEVV/PPzonL7NGyeloeXjF0FY36lHyeUOMLeyoVqPTZnvHrEwAcA2iLnOltraweYQ==
+X-Received: by 2002:a5d:64c6:0:b0:3a4:c71a:8119 with SMTP id
+ ffacd0b85a97d-3a4c71a81f3mr845782f8f.25.1748005679307; 
+ Fri, 23 May 2025 06:07:59 -0700 (PDT)
 Received: from chromium.org (82-132-216-100.dab.02.net. [82.132.216.100])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a37b0bbd1fsm12109241f8f.100.2025.05.23.06.07.56
+ ffacd0b85a97d-3a37b0bbd1fsm12109241f8f.100.2025.05.23.06.07.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 May 2025 06:07:56 -0700 (PDT)
+ Fri, 23 May 2025 06:07:58 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/10] efi: Adjust copyright and mention constant source
-Date: Fri, 23 May 2025 14:06:44 +0100
-Message-ID: <20250523130651.1329593-10-sjg@chromium.org>
+Subject: [PATCH 10/10] efi: Move FDT-filename discovery into lib/efi
+Date: Fri, 23 May 2025 14:06:45 +0100
+Message-ID: <20250523130651.1329593-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250523130651.1329593-1-sjg@chromium.org>
 References: <20250523130651.1329593-1-sjg@chromium.org>
@@ -96,51 +97,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While the file where the basename.c code came from is marked as Linaro
-from 2020, commit [1] was based on Heinrich's email. Also, [2] and [3]
-were my patches. Linaro is not the copyright holder and none of the code
-is from 2020.
-
-Update the file accordingly.
-
-Link: https://lore.kernel.org/u-boot/2175cecb-a392-5107-b932-b099ec21d62c@gmx.de
-[1] 4e65ca00f3a ("efi_loader: bootmgr: add booting from removable media")
-[2] 3e18860e3f3 ("bootstd: Allow reading an EFI file from the network")
-[3] 7506c156699 ("sandbox: Report host default-filename in native mode")
+Move efi_get_distro_fdt_name() into lib/efi so it can be used from the
+app.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 
- lib/efi/basename.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ lib/efi/basename.c       | 62 +++++++++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_fdt.c | 63 ----------------------------------------
+ 2 files changed, 62 insertions(+), 63 deletions(-)
 
 diff --git a/lib/efi/basename.c b/lib/efi/basename.c
-index 4d6eb41cd90..a01cdf1f5fa 100644
+index a01cdf1f5fa..b747dffad1d 100644
 --- a/lib/efi/basename.c
 +++ b/lib/efi/basename.c
-@@ -1,6 +1,6 @@
--// SPDX-License-Identifier: GPL-2.0+
-+// SPDX-License-Identifier: GPL-2.0-or-later
- /*
-- * Copyright (c) 2020, Linaro Limited
-+ * Copyright (c) 2022, Heinrich Schuchardt <xypron.glpk@gmx.de>
-  */
+@@ -89,3 +89,65 @@ int efi_get_pxe_arch(void)
  
- #define LOG_CATEGORY LOGC_EFI
-@@ -12,6 +12,12 @@
- 
- #undef BOOTEFI_NAME
- 
-+/*
-+ * The constants below come from:
-+ *
-+ * https://www.iana.org/assignments/dhcpv6-parameters/dhcpv6-parameters.xhtml#processor-architecture
-+ */
+ 	return -EINVAL;
+ }
 +
- #if HOST_ARCH == HOST_ARCH_X86_64
- #define HOST_BOOTEFI_NAME "BOOTX64.EFI"
- #define HOST_PXE_ARCH 0x6
++/**
++ * efi_get_distro_fdt_name() - get the filename for reading the .dtb file
++ *
++ * @fname:	buffer for filename
++ * @size:	buffer size
++ * @seq:	sequence number, to cycle through options (0=first)
++ *
++ * Returns:
++ * 0 on success,
++ * -ENOENT if the "fdtfile" env var does not exist,
++ * -EINVAL if there are no more options,
++ * -EALREADY if the control FDT should be used
++ */
++int efi_get_distro_fdt_name(char *fname, int size, int seq)
++{
++	const char *fdt_fname;
++	const char *prefix;
++
++	/* select the prefix */
++	switch (seq) {
++	case 0:
++		/* this is the default */
++		prefix = "/dtb";
++		break;
++	case 1:
++		prefix = "";
++		break;
++	case 2:
++		prefix = "/dtb/current";
++		break;
++	case 3:
++		prefix = "/dtbs";
++		break;
++	default:
++		return log_msg_ret("pref", -EINVAL);
++	}
++
++	fdt_fname = env_get("fdtfile");
++	if (fdt_fname) {
++		snprintf(fname, size, "%s/%s", prefix, fdt_fname);
++		log_debug("Using device tree: %s\n", fname);
++	} else if (IS_ENABLED(CONFIG_OF_HAS_PRIOR_STAGE)) {
++		strcpy(fname, "<prior>");
++		return log_msg_ret("pref", -EALREADY);
++	/* Use this fallback only for 32-bit ARM */
++	} else if (IS_ENABLED(CONFIG_ARM) && !IS_ENABLED(CONFIG_ARM64)) {
++		const char *soc = env_get("soc");
++		const char *board = env_get("board");
++		const char *boardver = env_get("boardver");
++
++		/* cf the code in label_boot() which seems very complex */
++		snprintf(fname, size, "%s/%s%s%s%s.dtb", prefix,
++			 soc ? soc : "", soc ? "-" : "", board ? board : "",
++			 boardver ? boardver : "");
++		log_debug("Using default device tree: %s\n", fname);
++	} else {
++		return log_msg_ret("env", -ENOENT);
++	}
++
++	return 0;
++}
+diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
+index bfaa9cfc207..bd7cf454471 100644
+--- a/lib/efi_loader/efi_fdt.c
++++ b/lib/efi_loader/efi_fdt.c
+@@ -11,73 +11,10 @@
+ #include <efi_device_path.h>
+ #include <efi_loader.h>
+ #include <env.h>
+-#include <errno.h>
+ #include <log.h>
+ #include <string.h>
+ #include <vsprintf.h>
+ 
+-/**
+- * efi_get_distro_fdt_name() - get the filename for reading the .dtb file
+- *
+- * @fname:	buffer for filename
+- * @size:	buffer size
+- * @seq:	sequence number, to cycle through options (0=first)
+- *
+- * Returns:
+- * 0 on success,
+- * -ENOENT if the "fdtfile" env var does not exist,
+- * -EINVAL if there are no more options,
+- * -EALREADY if the control FDT should be used
+- */
+-int efi_get_distro_fdt_name(char *fname, int size, int seq)
+-{
+-	const char *fdt_fname;
+-	const char *prefix;
+-
+-	/* select the prefix */
+-	switch (seq) {
+-	case 0:
+-		/* this is the default */
+-		prefix = "/dtb";
+-		break;
+-	case 1:
+-		prefix = "";
+-		break;
+-	case 2:
+-		prefix = "/dtb/current";
+-		break;
+-	case 3:
+-		prefix = "/dtbs";
+-		break;
+-	default:
+-		return log_msg_ret("pref", -EINVAL);
+-	}
+-
+-	fdt_fname = env_get("fdtfile");
+-	if (fdt_fname) {
+-		snprintf(fname, size, "%s/%s", prefix, fdt_fname);
+-		log_debug("Using device tree: %s\n", fname);
+-	} else if (IS_ENABLED(CONFIG_OF_HAS_PRIOR_STAGE)) {
+-		strcpy(fname, "<prior>");
+-		return log_msg_ret("pref", -EALREADY);
+-	/* Use this fallback only for 32-bit ARM */
+-	} else if (IS_ENABLED(CONFIG_ARM) && !IS_ENABLED(CONFIG_ARM64)) {
+-		const char *soc = env_get("soc");
+-		const char *board = env_get("board");
+-		const char *boardver = env_get("boardver");
+-
+-		/* cf the code in label_boot() which seems very complex */
+-		snprintf(fname, size, "%s/%s%s%s%s.dtb", prefix,
+-			 soc ? soc : "", soc ? "-" : "", board ? board : "",
+-			 boardver ? boardver : "");
+-		log_debug("Using default device tree: %s\n", fname);
+-	} else {
+-		return log_msg_ret("env", -ENOENT);
+-	}
+-
+-	return 0;
+-}
+-
+ /**
+  * efi_load_distro_fdt() - load distro device-tree
+  *
 -- 
 2.43.0
 
