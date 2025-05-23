@@ -4,78 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 595DCC3DA6D
-	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 09:14:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D9C2C3DA6D
+	for <u-boot@archiver.kernel.org>; Fri, 23 May 2025 09:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4485183214;
-	Fri, 23 May 2025 11:13:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D52F5831C3;
+	Fri, 23 May 2025 11:18:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="3ekU5Ffx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DZmWJ5UY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 679488310F; Fri, 23 May 2025 11:13:55 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7D360831D8; Fri, 23 May 2025 11:18:23 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AF29831E1
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:13:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=72381bbdd8=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54N825Bb024875;
- Fri, 23 May 2025 11:13:40 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=ACFrisDu8tg1goyDNxT7D6
- YzhKoQyyK3ZgaPIm9+gjs=; b=3ekU5FfxMPzPp0vxEASlHy+qhURsvTxV62+t7n
- F6c2QYBqGMLxs3PM2xSJIxozNc5c6EctI57Ih3p34RHBnHaMqoquK7J5rVrBVaYN
- 8jZx1jdk5gr5RA3HmztSFmhNxwm5mzyesBUY7DGCcA0cV1ZzKt4Ro1ojagP6sxfT
- iqO1qqvWrqnWZBp0VOoIKB27zETVk+FpiVSC2ei3Hu0SqoriYHBjtSaPGuYPOoCg
- WKY1ZZfttqXuhhy1ey0H0mUg18NQjcCZZc1TLw0lkSreHEjCiM1d9LR2hvx4RdM0
- HIo389lFjYUnajMY2oi4aMJkRd7cp+4jEX+TWk1iHgg6Zy7g==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfan7p0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 23 May 2025 11:13:40 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 41A5440048;
- Fri, 23 May 2025 11:12:36 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8FBB1AC4D07;
- Fri, 23 May 2025 11:11:48 +0200 (CEST)
-Received: from localhost (10.48.86.182) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 23 May
- 2025 11:11:48 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: <caleb.connolly@linaro.org>, <jerome.forissier@linaro.org>,
- <ilias.apalodimas@linaro.org>, <patrice.chotard@foss.st.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Adriano Cordova
- <adrianox@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, =?UTF-8?q?Vincent=20Stehl=C3=A9?=
- <vincent.stehle@arm.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v2 0/3] Restore support of short name for type UUID parameter
-Date: Fri, 23 May 2025 11:11:37 +0200
-Message-ID: <20250523091140.149298-1-patrick.delaunay@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ by phobos.denx.de (Postfix) with ESMTPS id 9A9718310F
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 11:18:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 58DAE5C6ED1;
+ Fri, 23 May 2025 09:16:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3E85C4CEE9;
+ Fri, 23 May 2025 09:18:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1747991898;
+ bh=UBM/0nKf/fnq35wbWrOHjLSFtfUXWH3XDH+4D/b7Aa4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DZmWJ5UYC95G8EcXL55C+bmOQf5D0AC5UPewYBDsy9SCIycCGr7V+BKHIZDrT714X
+ 0t1/KMDX9xuxJh1B3yuoPnwCYkVUso4LMcXxsdm7DCZkaaXkSXPRb1Ccg7OMZI0nrg
+ A3Ulh+GhVLEXQQmDgvNUA1iv0430iDfPo1gkYo6MB+2H6oY9g3R6eDI5PEdl+dqtZE
+ p3Ek2pI+EMBc4UvkO9XONLvq03A0NV9WKjXgueApy8KSmt3lAG+TtMHmiAjG+MGo2M
+ Fl2OM6FNKsh9hEXCkYKF30bp/DgB4Qxp9/V7MI3TUHwA+Yap2hzf/B8NvuBFgm6YjV
+ y5xVpRpHhT6qg==
+Date: Fri, 23 May 2025 10:18:14 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Yao Zi <ziyao@disroot.org>
+Cc: Tom Rini <trini@konsulko.com>, Leo Liang <ycliang@andestech.com>,
+ u-boot@lists.denx.de, rick@andestech.com,
+ Mayuresh Chitale <mchitale@ventanamicro.com>
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20250523-alibi-nervous-807af196fad3@spud>
+References: <aC2hyzxwKzO4k1im@swlinux02>
+ <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
+ <20250522-eradicate-clip-538f48710ad7@spud>
+ <aC9TmaY7w2PL8lbn@pie.lan>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.86.182]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-23_02,2025-05-22_01,2025-03-28_01
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="Ql3ojLaCluJ3Vifn"
+Content-Disposition: inline
+In-Reply-To: <aC9TmaY7w2PL8lbn@pie.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,64 +73,130 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Fix and add documentation/tests for selection by string for known
-partition type GUID introduced by bcb41dcaefac ("uuid: add
-selection by string for known partition type GUID"):
+--Ql3ojLaCluJ3Vifn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-- split list_guid for short name (used also for partiton
-  description with type parameter) and full name to display
-  information
+On Thu, May 22, 2025 at 04:40:57PM +0000, Yao Zi wrote:
+> On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
+> > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
+> > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
+> > >=20
+> > > > The following changes since commit a3e09b24ffd4429909604f1b28455b44=
+306edbaa:
+> > > >=20
+> > > >   Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custo=
+dians/u-boot-mmc (2025-05-20 08:35:31 -0600)
+> > > >=20
+> > > > are available in the Git repository at:
+> > > >=20
+> > > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
+> > > >=20
+> > > > [...]
+> > >=20
+> > > Merged into u-boot/master, thanks!
+> >=20
+> > This PR seems to have made my CI blow up, and I'm not entirely sure if
+> > that's something intentional or not. I've not yet bisected, but since
+> > the error is "Image arch not compatible with host arch", I can only
+> > imagine the patch in question is:
+> > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV64
+> > | Date: Fri,  4 Apr 2025 14:48:55 +0000	[thread overview]
+> > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com> (raw)
+> > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
+> > |=20
+> > | Similar to ARM and X86, introduce a new image type which allows u-boot
+> > | to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
+> > |=20
+> > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
+> > | ---
+> > |  boot/image.c    | 3 ++-
+> > |  include/image.h | 3 ++-
+> > |  2 files changed, 4 insertions(+), 2 deletions(-)
+> > |=20
+> > | diff --git a/boot/image.c b/boot/image.c
+> > | index 139c5bd035a..45299a7dc33 100644
+> > | --- a/boot/image.c
+> > | +++ b/boot/image.c
+> > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
+> > |  	{	IH_ARCH_ARC,		"arc",		"ARC",		},
+> > |  	{	IH_ARCH_X86_64,		"x86_64",	"AMD x86_64",	},
+> > |  	{	IH_ARCH_XTENSA,		"xtensa",	"Xtensa",	},
+> > | -	{	IH_ARCH_RISCV,		"riscv",	"RISC-V",	},
+> > | +	{	IH_ARCH_RISCV,		"riscv",	"RISC-V 32 Bit",},
+> > | +	{	IH_ARCH_RISCV64,	"riscv64",	"RISC-V 64 Bit",},
+> > |  	{	-1,			"",		"",		},
+> > |  };
+> > | =20
+> > | diff --git a/include/image.h b/include/image.h
+> > | index 07912606f33..411bfcd0877 100644
+> > | --- a/include/image.h
+> > | +++ b/include/image.h
+> > | @@ -138,7 +138,8 @@ enum {
+> > |  	IH_ARCH_ARC,			/* Synopsys DesignWare ARC */
+> > |  	IH_ARCH_X86_64,			/* AMD x86_64, Intel and Via */
+> > |  	IH_ARCH_XTENSA,			/* Xtensa	*/
+> > | -	IH_ARCH_RISCV,			/* RISC-V */
+> > | +	IH_ARCH_RISCV,			/* RISC-V 32 bit*/
+> > | +	IH_ARCH_RISCV64,		/* RISC-V 64 bit*/
+> > | =20
+> > |  	IH_ARCH_COUNT,
+> > |  };
+> > | --=20
+> > | 2.43.0
+> > |=20
+> > since it is changing the existing "riscv" image type to be the 32-bit
+> > image and requiring the new entry for 64-bit. My CI job uses the system
+> > mkimage to create the image that U-Boot is loading, so it doesn't know
+> > about the new define etc. Maybe it's not considered a problem if a new
+> > U-Boot cannot boot an old image, but the comment above the enum reads:
+> > |/*
+> > | * CPU Architecture Codes (supported by Linux)
+> > | *
+> > | * The following are exposed to uImage header.
+> > | * New IDs *MUST* be appended at the end of the list and *NEVER*
+> > | * inserted for backward compatibility.
+> > | */
+> > The overwhelming majority of existing supported boards in U-Boot are
+> > 64-bit platforms, and the 64-bit platforms are the ones that have been
+> > supported for longer, so my thought would be that the compatibility of
+> > 64-bit platforms should be prioritised over 32-bit? Or even add explicit
+> > 32-bit and 64-bit entries and the existing one is a catch-all for
+> > compatibility reasons?
+>=20
+> I've mentioned entries with bitwidth explicitly specified in my previous
+> reply (and there hasn't been any response).
+>=20
+> > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying 32bit
+> > when no suffix attached. We (and the Linux kernel) mix 32-bit and 64-bit
+> > variants of RISC-V together, thus it's hard to tell the exact bitwidth
+> > of "IH_ARCH_RISCV" without inspecting the code around. To me, it sounds
+> > more like "RISC-V, but no bitwidth specified".
+> >
+> > It will be nice if we could avoid this kind of ambiguity.
+>=20
+> (referring my own reply[1])
+>=20
 
-- as the function are uuid_str_to_bin() / uuid_guid_get_str()
-  are no more under CONFIG_PARTITION_TYPE_GUID,  since commit
-  31ce367cd100 ("lib/uuid.c: change prototype of uuid_guid_get_str()")
-  and commit c1528f324c60 ("lib: compile uuid_guid_get_str if
-  CONFIG_LIB_UUID=y") move the content of array under EFI_PARTITION
-  and linker will remove it is not used it (in SPL)
+> I'll second explicit 32-bit and 64-bit entries, and keeping
+> IH_ARCH_RISCV for compatibility consideration.
 
-- Add and fix documentation for gpt command
+Yeah, I noticed your mail after I sent this report. I think this is the
+way to go that makes most sense to me.
 
-- Add test test_gpt_write_part_type to test "type=" parameters
+> [1]: https://lore.kernel.org/u-boot/Z_CjTyXaVrpUOPnJ@pie.lan/
 
-This first patch solves an issue for the "system" shortcut for ESP,
-removed by commit d54e1004b8b1 ("lib/uuid.c: use unique name
-for PARTITION_SYSTEM_GUID") but used in 2 location (at least):
+--Ql3ojLaCluJ3Vifn
+Content-Type: application/pgp-signature; name="signature.asc"
 
-1- board/samsung/e850-96/e850-96.env:10:
+-----BEGIN PGP SIGNATURE-----
 
-partitions=name=esp,start=512K,size=128M,bootable,type=system;
-partitions+=name=rootfs,size=-,bootable,type=linux
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaDA9VgAKCRB4tDGHoIJi
+0pgJAQCrZuaU47ZmOrYM9EaQ4xpdfhW4w7in/biQ8ZB+FzFipQEAgDJo3i3Xn1Yg
+rtgC8X+EeWzN4CkLrxCRvP2WRB7pmA0=
+=DTwg
+-----END PGP SIGNATURE-----
 
-2- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c:1151
-
-			case PART_ESP:
-				/* EFI System Partition */
-				type_str = "system"
-....
-			offset += snprintf(buf + offset,
-					   buflen - offset,
-					   ",type=%s", type_str);
-
-
-Changes in v2:
-- change 'string' to 'type' in struct for list_guid[]
-- clarify the usage of struct field 'type' and 'description' in
-  comment and in commit message
-- use 'type' for EFI_XXX description as these string have
-  no space and size is lower than 36 characters.
-
-Patrick Delaunay (3):
-  lib/uuid.c: restore support of system partition type for ESP
-  doc: cmd: gpt: add information on type partition
-  test/py: tests: gpt: add test_gpt_write_part_type
-
- doc/usage/cmd/gpt.rst     |  93 +++++++++++++++++++---
- lib/uuid.c                | 158 ++++++++++++++++++++------------------
- test/py/tests/test_gpt.py |  27 +++++++
- 3 files changed, 196 insertions(+), 82 deletions(-)
-
--- 
-2.25.1
-
-base-commit: cf37480bc8335494cf88b7180dc3f1eb8cf63a9d
-branch: sdsfsfsdfsdfds
+--Ql3ojLaCluJ3Vifn--
