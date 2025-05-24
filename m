@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48F77C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:09:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25B4C54E71
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:09:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A0A28367B;
-	Sat, 24 May 2025 07:06:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D80F836A8;
+	Sat, 24 May 2025 07:06:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CXujoUtd";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lhnEF7u5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D37834BC; Sat, 24 May 2025 07:06:44 +0200 (CEST)
+ id E66A2834BC; Sat, 24 May 2025 07:06:46 +0200 (CEST)
 Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
  [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABDF283303
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:06:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C5AC8363D
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:06:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ad52dfe06ceso51244866b.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:06:40 -0700 (PDT)
+ a640c23a62f3a-ad1a87d93f7so76257166b.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:06:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748063200; x=1748668000; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748063203; x=1748668003; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZQOTzyGpROWVVqWlpVXPxewkBSYz75j20JaJwDvYXqE=;
- b=CXujoUtdZ+d/PESe3LkbR/uc8/S2UPRCP7M/j+umzvnPqpZUZLubqZ+xN4rvel5k//
- lD8yp9xKv9kZRTZxLKSLQ9le7mFLrbM0Z8shk6bTh/qdSth35EHhPmWnKikt7l+7eVoZ
- XN1eRZk9UJgnhlmWJ8Oy3hdtGAqZP3lk/+rFM=
+ bh=3xvovru3P8Y8Uaw9I34NGW+1T0rvSDC/VFxCmqQQv8M=;
+ b=lhnEF7u5yR9AXWOynx/GvykAuuzTbIVxPjQPIz9t+6mHNB7tS6U/RbNo1lJGNfn7xS
+ oWm5ruPY2bi/cWXSDLBldjtmvbtiNbuFIio3tteIup+/8v63ZPizxdY/GGG5Pk9T3e1z
+ vXEOS9/Hfqj68hYLt+raRJwOB55JINQOc250o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748063200; x=1748668000;
+ d=1e100.net; s=20230601; t=1748063203; x=1748668003;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZQOTzyGpROWVVqWlpVXPxewkBSYz75j20JaJwDvYXqE=;
- b=nIkk8OdFDOw5UEMWhUaow693Piqa16bdtG0JBsp/tDJXW5AnBIJ5pnl1+0Rs2WxhI8
- VDfaBaMU3KvsAJaPvFgXaVOyclrFoZJE3sYXqf8sLtsNmX7INXDTS49+7yvdYj4O0VGd
- aSjBW/yQLqBy3TvPpK7NFjsBJaatYauGDFO9dB8FTDsyTKTE3IV1UPiJ8cx7xC+63zIG
- /BIMskqukYsShKyJRL+4dPuvTSmNb5YJe06nt6q5jgFdfk9coPhYavfz7TkbopVK1wY+
- YgRDv/y/SAFBJRLduzUdoUNyOt0g69GMC9ValIn85YYzDo6aNPy3QfhGqkX29uOjRoIh
- DEbg==
+ bh=3xvovru3P8Y8Uaw9I34NGW+1T0rvSDC/VFxCmqQQv8M=;
+ b=ugK9BkQAA1sIeE75+F/6XF4GtoXbGG73qdSDY0Hj0Jq7ev173kzW2qHNhtdpuYAbDx
+ 0qQJYoRzcvJXBrnPZ01z9dh8Dyw8WaJ7M6y5R20baQ8xz0N68V/dhc1uu9fjHg50dghD
+ eQAI72BxB7Yh6lU0yciE0dZSOsO64pFzChIlrbiqFdgOYr1z1gzf9CTh08Ia5hdAlCze
+ 2AnjuanBRDClR6FTDTuFz6bU7CG630mfNsrrI4wjC2Vf5etkri5Gwk468v/gC2kaA5GV
+ E4boRPiRhgNJhgzzU2aN+Jh+6JNDuHCxxHe/R2xJ6k4B7ZFHiE7N8sWkeRtAUC0Hgf1Y
+ pRhA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyVbc+2hKw+E27/+bYUNIagmQ6FqJsDDHd4oWZM3iGRespghdi/xtl7ux/2mc2aTaMgwR3U4c=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKpiZBsvspKaLH/ULTovDhkTtjbVHMszCm9GqVQWaRqKdKG1T3
- FZ2MlfeahnQ0ezD9jmvE2+7A/HUTToYmKyeor76t8PkuSiTKmhkJJQWmtvmdXM8mZWmSnQ/BUXw
- 7QEEBwXBPCcyit3JIzT8r7EuzHdqK9/J/5tyYSvto6HhdI9XOg2QYI7mB
-X-Gm-Gg: ASbGncvp9BR6IYqVNCgn9udOM8PfBrDRYL1rgi2wc7ZTc9h+bzVzp8G7/e+i8tI81wi
- 2hHoy5tRo3DiESxiBElR4US6OTogV54MD0xvX0dLP4bqqVyyfWtYpjg070evYnVeq6qL8/z/Vsq
- KSkoif4MNaxGOap6ZWb97+7/7PTdUw3YE=
-X-Google-Smtp-Source: AGHT+IHTt5MGGsP3R544IM0dhe9Et/5m4z+jra7ifwuRQLw/quOH+s3VywA9oSGBMwQEg5CqZhClcZdBTRZpxm6YwWM=
-X-Received: by 2002:a17:907:3eaa:b0:ad5:50da:691f with SMTP id
- a640c23a62f3a-ad85b2a50d9mr149513266b.59.1748063200144; Fri, 23 May 2025
- 22:06:40 -0700 (PDT)
+ AJvYcCXG8K7RLhi6c94S5kjq3uac7rr6CAq0+gfjMl+57oEYXluoamAPXfKiA9fZBR+MSpuPQLSru3U=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdSV9FOuJMz7qy/34BbUsBcP508+sbfLVsZhnx+6sC4wb0HEgG
+ l1rygzyXV9hi1be1ADp3HOOMH1mNuqbYafX3xxz0B7fZqazg0axsHjPz+2+wDsKrZXhblT6IBTL
+ mdDFDVl6av1QcM8JOK0dwrjSpWA8Bp8zJgil4qf9q
+X-Gm-Gg: ASbGnctH0treEIWXZpnEy8Va/iE5riJIJ9o8h8y9rPQqW4AROfZCWaqUhOQ3/u5bHZi
+ bbhQvm3nkfQmEX4M1m8XHGGWV5Iq2IgLaVAzPf5rX2xOmXFYcQz4O5YRDqr64OyBTRpfHZrOc3p
+ Rqdc/SwbPuVAkboHYx6r7efL0O2JBf5dI=
+X-Google-Smtp-Source: AGHT+IEauBQO9wxWEejh3D9owNlVmbW6OCZ0erbw/JPHWLR8kj7Lz6nlpk5WXEVcP23v8btcIjzzZWXKXPwQCPPbyBQ=
+X-Received: by 2002:a17:907:9627:b0:ad2:595d:dd3f with SMTP id
+ a640c23a62f3a-ad85b329ac3mr132629566b.56.1748063203113; Fri, 23 May 2025
+ 22:06:43 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:06:37 -0500
+ HTTPREST; Sat, 24 May 2025 00:06:40 -0500
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:06:37 -0500
+ HTTPREST; Sat, 24 May 2025 00:06:40 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250510110535.1453745-3-sjg@chromium.org>
-References: <20250510110535.1453745-3-sjg@chromium.org>
+In-Reply-To: <20250510110535.1453745-2-sjg@chromium.org>
+References: <20250510110535.1453745-2-sjg@chromium.org>
  <20250510110535.1453745-1-sjg@chromium.org>
-Date: Sat, 24 May 2025 00:06:37 -0500
-X-Google-Sender-Auth: igQjPprH6E0EYPKj9YlGw1ePCBw
-X-Gm-Features: AX0GCFsRlBLXHrsvzfeCPUJ4UzlrOA6ir7u8CKX9uS5mMlfsfpTRrodPqJQLDLM
-Message-ID: <CAFLszTi-K-86B1ghXCkD-iOL=-G2qLAXPif+gjEVO4A3PXaxpA@mail.gmail.com>
-Subject: Re: [PATCH 02/25] patman: Deal with git safe-directory warning
+Date: Sat, 24 May 2025 00:06:40 -0500
+X-Google-Sender-Auth: Z5SVBm7ROFNo5V4r69ynwFheciQ
+X-Gm-Features: AX0GCFs4OLRDketHgTpXiERDw0kaRxkp-erej7oTEhcoENdZsJq3JQ6gX65AxG4
+Message-ID: <CAFLszTi-Hi8DrSAa-cVbebybT7A54=HQDSbF5e+Apo3fnZ1zBg@mail.gmail.com>
+Subject: Re: [PATCH 01/25] u_boot_pylib: Correct pylint warnings in gitutil
 To: Simon Glass <sjg@chromium.org>
-Cc: Brandon Maier <brandon.maier@collins.com>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,26 +93,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When running tests where the .git directory is not owned by the current
-user, various warnings are produced and the tests fail. This happens in
-CI.
+Correct various pylint warnings in this file.
 
-For patman itself, modify the gitutil.get_top_level() function to return
-None in this case. Ensure that the warning is not shown, since it creates
-about 1000 lines of output.
-
-For checkpatch, the same warning is produced even though --no-tree is
-given. Suppress that as well.
+The remaining ones are three functions with too many arguments (R0913
+and R0918) and use of global (W0603).
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/checkpatch.py     |  7 ++++---
- tools/patman/cmdline.py        |  8 ++++++--
- tools/patman/get_maintainer.py | 13 ++++++++-----
- tools/patman/project.py        |  3 ++-
- tools/patman/settings.py       |  3 ++-
- tools/u_boot_pylib/gitutil.py  | 11 ++++++++---
- 6 files changed, 30 insertions(+), 15 deletions(-)
+ tools/u_boot_pylib/gitutil.py | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
 Applied to sjg/master, thanks!
