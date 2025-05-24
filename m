@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FCA5C54F32
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 12:10:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6497C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 13:06:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E34183242;
-	Sat, 24 May 2025 14:10:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D90DC8307F;
+	Sat, 24 May 2025 15:06:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gntVQvA2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UFtTXlkS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85A4081F6B; Sat, 24 May 2025 14:09:59 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 96E21830B4; Sat, 24 May 2025 15:06:53 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B42C831FE
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 14:09:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB16C83055
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 15:06:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso4598755e9.2
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 05:09:57 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3dc978d5265so4434045ab.0
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 06:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748088596; x=1748693396; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wQkKvqnSdyAY8ePbZVBOHHkkESb+xsw7rNXrpNPny4Q=;
- b=gntVQvA2MLBc2S30UswN+k/BrC/LcaGD6BLcKrXivKUU9geSvAeE3b65T3JZocN65Y
- ApJmWGvuoG5Quwj3J35DJq4V9Q9XaMDyS9K6jtJy0X9+DJEPxJoE+gG6ZVrvh7oincqq
- jvSc4zOuqZyXqcE+Y8GWoyr1Fv9CRakwLlerA=
+ d=chromium.org; s=google; t=1748092009; x=1748696809; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xP2+HW7nCkhn1+lAaOPzV7Z7PHMOokS4STan/ewcIQw=;
+ b=UFtTXlkSrSGtEeQGMd9STNrRXrlk/TtGYVOFcaHrKjnCNdSdxULMFYVC7B7WybQYaW
+ 5spC6uPWq8L2E4O08fisVXKROq3kf1me0K3/QmWkiGSI16hasaOkC7bKoYe4mxIqIvnV
+ 9gjTfCr6Ue+iMUdLRLxCOJAMiZ9pooF+je/2g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748088596; x=1748693396;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wQkKvqnSdyAY8ePbZVBOHHkkESb+xsw7rNXrpNPny4Q=;
- b=tswHpYPj0FIyUgJNW2VSNqMrYIb7aAdNbDpphBR6jCh5oemWF9BdQ5bSl50sOAxPEm
- wdHrNqzoqBy/Zhq/e/VGkVJ6/9yZVQUF0ILzIiSK4odfgyNfY43NVKLehVURBkh1G7Ub
- rwGuBQSgeFeomPfLteMqLygCppDJAsJd/qGK99G5StBdC+RAChPAttkTGj9fYG+v0CQG
- ox4crgQc9aFg5W84qSAWStnzuyVJ5m4+m3y4cFuLzU5XXBPNi7Z2/bNN4ZKIzU2RcWwQ
- e341eTP9TURy8Ns/ioO8YPDIecfCgYZtB0J4fBA4zEGa/zWG2lo1Tc9R/EP8u13ARCPL
- tcNQ==
-X-Gm-Message-State: AOJu0Yzg75MbuI97le7ggCnT8IvIuvvKvSt4KaF/tVSqxGmvHjEhmpfT
- gQ3xyopCdg3ZfZe95irU4vcc0FpAsfe+gMmX4v4ynsWEPnFRiHBNRFVC27LBuobMHRMQTMwqtt+
- SKkJC1eew
-X-Gm-Gg: ASbGncsWx6TGZwZC6GuoNUZ/3WCGFWB6xpQmrvJpXPvQDdcsHwOJygqQF5Bt8ipLlcw
- aF87K8NmYF+Yf2fK/uM3eNlR6ThOWV9827cCv4Za3CLDhwUbCiEy03p/lpyHmpx6Becyd3B6mnx
- 8JtpPiUUHSYdDeKttB2z42leVcTIliGXT2y0TJX2MlQW6U+5/ri3SXpmyeaoFLOincF+cBH0kj/
- Db6rSrjtRFdbvQBnYlwj+LgD9OvuENHVhqIPLcUoLtxhKVn/XW5RP79ZfotfojHwFqZClamm2W2
- jXe6r1w/zp9mR7hS5PpP1zdcQNJ2cvq+x9WMxhrMOjoq0aK2iJWSIAU5LqxValrEqYvkXL4=
-X-Google-Smtp-Source: AGHT+IE6EWi4FihLTKBfMe0s7siZiP8kfxVAEQrVq62JnvUzhzxOWEn/yXY8g5dKN5fJl8NfCcLPwQ==
-X-Received: by 2002:a05:600c:5006:b0:43c:e2dd:98f3 with SMTP id
- 5b1f17b1804b1-44c9493e665mr20757245e9.21.1748088596573; 
- Sat, 24 May 2025 05:09:56 -0700 (PDT)
-Received: from tasman.. (host-80-43-238-15.as13285.net. [80.43.238.15])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-447f23c07bfsm177028585e9.23.2025.05.24.05.09.55
+ d=1e100.net; s=20230601; t=1748092009; x=1748696809;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xP2+HW7nCkhn1+lAaOPzV7Z7PHMOokS4STan/ewcIQw=;
+ b=UKSRiXRsRknbJzxe5ukPSsKQVpUBICbCGLDYwrMR7MiYK60yKpZbwOm90uyVTlTG2F
+ W8MNI0DE0gFcdPKb9StostCEyOmJJJtBf23KAm56otqU9p0FEahDdB/vF5Vva/RlcBuB
+ BlMXTWGXQKJ3/ooDxHgfB8NuJOjEKO3E52pz4BTbS/7ImyzTsIF8U3q5Dfpc2GsjZbU2
+ GkalcEst8ILmr1XukcgXV8ndIlqUeldBGF1qisppl7XAaW1/nf0Iy3MMfHh+GwrkgJKl
+ x9eQfPio9gzdigT25FMKmAsH5MkjDKbysi4UmjjQmfxq8K4YT55Ob7Gqwg7D8Ux8Sng/
+ 2MAw==
+X-Gm-Message-State: AOJu0YwU2fK0YEoCufUp6E0y4bZ0aUblhsb9So2Y4yLk0Su5EJOh8w1I
+ nKa6Fxq7CDHmwv6FIFVpgy9aEP3Mto3FwuYetiHbwNyOETyTf6UhdcRPrbYwRxxCb6ePOQ8zUTD
+ KwPUIsJMB
+X-Gm-Gg: ASbGnctrbiNds6rymR0yVTJ2wDKYoE0fS487e7VYLu1QsTgwVojWpzTpFO+KiEq3PqC
+ 5iwz7hUYxiSIHaRZt/wyC6tftkt1XIkBm7lE7D7l1cSIkSeyvQmktk6InbO6gRLBPa6HaIkRpZp
+ vLWHRKkyk/+6FMycp3tgHA13HHmOh9ZTzbbpMj0Aj25xIJ4lWTFyNYT2XqTI2AFKOWbCDRIGwnp
+ TVGUsGTUAjeJFSoPJMDHB9Mkzim59quVSVJMDEyWdx1wVt3qQgFtzOPwMBhC8i+8yYiR37AwoYE
+ vTTcqaMbF/KkL2rKsObMWFHmEsn0E66b9qw/HPps27Hb56KAYm7h60shW4BAJ8uuGG9mubzZ0TL
+ Bj7OB0o/jQrWa
+X-Google-Smtp-Source: AGHT+IGLdxKfuGx4XlnMvvKxUX+1H7IQzhcnnA6iOAFaNBRY+tzIlAcRUJTTwrhw4bSMseJcqVLHBg==
+X-Received: by 2002:a05:6602:4c0f:b0:86a:2f67:177c with SMTP id
+ ca18e2360f4ac-86cbb89cfe8mr307653139f.10.1748092008735; 
+ Sat, 24 May 2025 06:06:48 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-86a236e898dsm373238339f.37.2025.05.24.06.06.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 05:09:55 -0700 (PDT)
+ Sat, 24 May 2025 06:06:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] Revert "doc: Update authenticated capsules documentation"
-Date: Sat, 24 May 2025 13:09:03 +0100
-Message-Id: <20250524120904.684977-4-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250524120904.684977-1-sjg@chromium.org>
-References: <20250524120904.684977-1-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v3 0/4] tpm: Start to tidy up TPM tests
+Date: Sat, 24 May 2025 07:06:33 -0600
+Message-ID: <20250524130642.902486-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,42 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restore the documentation for using signatures in the devicetree.
+This series is a starting point only. It tries to provide some direction
+for how the TPM tests should be run on real hardware and on sandbox.
 
-This reverts commit 8082116dff3351277a019f7f35a0aeb62fe235ce.
+For sandbox, things are relatively easy since the TPM is reset before
+each test. Tests should start up the TPM before doing anything. Tests
+can be run in parallel, which is fine because tests are independent.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+For real hardware, tests cannot be made independent, other than by
+resetting the board, which if the hardware is correct, resets the TPM.
+So there may be more work to do to figure that out. The approach taken
+in this series for real hardware is to have a few tests which do init,
+then have the rest of the tests assume that the init is done. Tests
+that depend on the TPM already being inited can use 'tpm autostart'
+which works OK on sandbox and real hardware.
 
- doc/develop/uefi/uefi.rst | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+Changes in v3:
+- Use 'check' instead of 'test' when naming test helpers
+- Add missing tpm_self_test_full() call
+- Add new patch to skip failing tests on coral
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 3ca22b572a9..48d6110b2ad 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -597,6 +597,21 @@ and used by the steps highlighted below.
-       [--fit | --raw | --guid <guid-string] \
-       <image_blob> <capsule_file_name>
- 
-+4. Insert the signature list into a device tree in the following format::
-+
-+    {
-+            signature {
-+                    capsule-key = [ <binary of signature list> ];
-+            }
-+            ...
-+    }
-+
-+You can perform step-4 through the Kconfig symbol
-+CONFIG_EFI_CAPSULE_CRT_FILE. This symbol points to the signing key
-+generated in step-2. As part of U-Boot build, the ESL certificate file will
-+be generated from the signing key and automatically get embedded into the
-+platform's dtb.
-+
- Anti-rollback Protection
- ************************
- 
+Changes in v2:
+- Keep test_tpm2_continue_self_test()
+
+Simon Glass (4):
+  tpm: sandbox: Support self-test continue in emulator
+  tpm: Convert sandbox-focussed tests to C
+  tpm: Drop unwanted special cases for sandbox
+  test: tpm: Skip failing tests on coral
+
+ drivers/tpm/tpm_tis_sandbox.c |  1 +
+ test/dm/tpm.c                 | 77 ++++++++++++++++++++++++++++++-
+ test/py/tests/test_tpm2.py    | 86 ++++++-----------------------------
+ 3 files changed, 89 insertions(+), 75 deletions(-)
+
 -- 
-2.34.1
+2.43.0
 
+base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
+branch: tpm3
