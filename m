@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88509C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:09:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06024C54E71
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:09:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5C5583689;
-	Sat, 24 May 2025 07:06:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AC588369D;
+	Sat, 24 May 2025 07:06:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JXxsjC9X";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cT/RDprW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 315C083666; Sat, 24 May 2025 07:06:34 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 94AA5835D8; Sat, 24 May 2025 07:06:37 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 085C4834BC
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:06:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4A2D83303
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:06:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-603fdd728ccso93903a12.2
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:06:32 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-601f1914993so1007437a12.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:06:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748063191; x=1748667991; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748063195; x=1748667995; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qo3z8osGXdiqFjyWAiZQwi6I1/kSYYe/vpf60wdLCcc=;
- b=JXxsjC9XB9BV95iBJMd6GPpjqImw87hsaE0kVgR5yPettzdhGESyr2VDoCHPihMZ9s
- t7mxjm6GyQunbgNz8CVavN0IViZdtOpYoF+0oLvmQhazkm3ZMtKszYURiQdYfEnbzAU+
- P4TipUuD0d2j7A62ggy7skE1LTGp5PXWM+njw=
+ bh=R0bl5L/47ySLboVzP0mPAyrNzpnEdMUm9tLCUZnk2Yk=;
+ b=cT/RDprW6F8AJft7EQ5jCE0/2kg/dsZd55QhwxMPtE5By/7esnqHjZrmfSHfrqqGBG
+ 64BsWV/9vmvr77Jbe9ROQJVBQF0lGFlcz1MANof2x4hR0o4R2u+B18Q71kYStSzenB+R
+ bJusRk28yOV4lPr4cnn7mbljRAcs83Fsksvxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748063191; x=1748667991;
+ d=1e100.net; s=20230601; t=1748063195; x=1748667995;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qo3z8osGXdiqFjyWAiZQwi6I1/kSYYe/vpf60wdLCcc=;
- b=LDQM4DY2DuqUU6T3EOpediG/PKWQdQssyBJC8dkU9RB9/700hLLCRThKmAzdwrAxL2
- U50l7PzWN8YRfnzaDDlzFuZwkvz1d7yzc/Dxymb9ft5W7Xj3DDnGjbFDwCaUtv2L2G/D
- BBsPtqcaRS6I9jb/I4P41hqszWxx3IthkjSvuzhWUdwgPJFqe2ctp0en6Ld0KKst/lEH
- 6ywL8HMcN4OoCAE21cd9WMl5eEcMsFaA5ksr1c8GIsHXXI03qLs/0qyWFGGiKE5g7iO0
- 4kMgREKn03LPFna+/rZ0ZJN1K/8NJEybzVo5V9eqiwQuNAvjFX3JdHFOMzHlgH+CLJ8J
- D1tw==
+ bh=R0bl5L/47ySLboVzP0mPAyrNzpnEdMUm9tLCUZnk2Yk=;
+ b=TbF0W8Ea4OVWhFop4TI47BAGyyuGixrTNdQoj4sXxOysppglQFmpdfrNQ27swcO3op
+ 9781KQuXObsD2cMkcx7E4VjhUhxpnrU3OyN8CAiPH15hHetRCTTJvR0kZ4yHPeejAbIt
+ oSNtswn1xcMbPMXCedBPD4EKR5Zx/MfhgJEeGIg5PYgqc3VOljZUBNuS3fDAZdQiV04F
+ xRsTzmr9QsrfFcir3vwRDGoTpphZFcJlpkcQWRXeML+SMRA+s0/q4mFEP7L0ckvs3cO/
+ 2saADXxXVOEQXR1AIDwDzTMSJ3720Ys8rWFdVcIcTonQynj4m72AmjhjM7n+eVheaY4s
+ RoAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXr4KaVnOtxbqCLU3nPNy4iBsliKIzsjSKZwoMQZ7kj7q8SnYS0yXhc7MbSnUy9M0vBvh5y2j0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAXXnFdjsjXES8nNu6cF0J6bD+anYHkU6kdFpB8rHlN45bVeJB
- SIVjkxW7ItxAsy4UVlZlrtae1ahJSHV55wfyphCMg52AotRqwXKN+ORIgPv/GJ4L0bIzd8KTY6d
- 683xdlG+kv4eoTERUuJRAO4dtVIQjSBAYPv/zkS5SPk4lwrnwKI/5k3u9
-X-Gm-Gg: ASbGnctTh/3/x5HY/WJoiuByqDfUirvrMBZo4WiKBk7K0+nvD270h5gGpM6q/wlBiKT
- c+//iHZggqcuGg/PP4rdlVRJftIrMwvni5KEbe6v67oo09TXLX1IXa/uBVSN0Mwe9D3IkDpiHUs
- Stsgv5T/GB/RS5RGw8VXK5C9P7/Vy2W5I=
-X-Google-Smtp-Source: AGHT+IELaqkTpfglLtrutEj32pxCgvFQRIxvxPWpsd4hKRm8QyBdz/YAEpW6iYwZFlZjcCLUqJapK9R4ly56lkENvPU=
-X-Received: by 2002:a17:907:3faa:b0:ad5:1db5:6ec0 with SMTP id
- a640c23a62f3a-ad85b1844e2mr137002966b.20.1748063191492; Fri, 23 May 2025
- 22:06:31 -0700 (PDT)
+ AJvYcCWOMJyLzSb+yrwtg+OB80DT0rdZOnpRoBm5D+jIrSgtUfcztfIcRIfNxtCr8sC+AckD3CCHg90=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNe6JPQmbP5xrjk90fe9XP4vzXkXKsvjMfCfwkUbQj3JHhukWV
+ 5qSctm3wUMnTS1FvkalnCh7YeS3X/5Vhgnl2CrYF0GgPD0sjyA9jFtGMRyoR4sINnJq1sADE4Jd
+ APEQFFlrs9wSLd4bCv4X60KC8Mfg+glkho+eb22Gu
+X-Gm-Gg: ASbGnctXR3NTZjh9MkoShcEZRDL3KiH24b/NM4cDUsJlJx4nEwLFlgEjMR1HWDJVY+N
+ sfUKGvm2YMvZpGTZKLvHK8f9faBfnqtD9xxll7drUKFeQkAEPqOhSxBeGZRGF9te3Wncn1OwjiB
+ P8PGsGJS8aewKWDvNdvPJrzkUdqhVkl+g=
+X-Google-Smtp-Source: AGHT+IFKRryXabQKYp2fGy9rejOI5kAUjAuoTIQF8W7p0lBWWGrhaU+fV0/EgBNIHTXkj4bonptYBSHlkqxPcZLhqy0=
+X-Received: by 2002:a17:907:3e06:b0:ad5:27f5:7174 with SMTP id
+ a640c23a62f3a-ad85adbbbf7mr146089966b.0.1748063195152; Fri, 23 May 2025
+ 22:06:35 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:06:30 -0500
+ HTTPREST; Sat, 24 May 2025 00:06:33 -0500
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:06:30 -0500
+ HTTPREST; Sat, 24 May 2025 00:06:33 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250510110535.1453745-6-sjg@chromium.org>
-References: <20250510110535.1453745-6-sjg@chromium.org>
+In-Reply-To: <20250510110535.1453745-5-sjg@chromium.org>
+References: <20250510110535.1453745-5-sjg@chromium.org>
  <20250510110535.1453745-1-sjg@chromium.org>
-Date: Sat, 24 May 2025 00:06:30 -0500
-X-Google-Sender-Auth: gSUL4w3MU_rxja3_QfptjHvJ8kc
-X-Gm-Features: AX0GCFvAU3eYH2pbPFhSR4tU-h20OmLfheGHrBEpvinlvbHtcOqfm5aa8uHuNQc
-Message-ID: <CAFLszTgb5QHOgU8U1FHYvBOsEZj4zUo=WC+bErWP+wSm8KUX5A@mail.gmail.com>
-Subject: Re: [PATCH 05/25] patman: Add a test for collecting a PATCH prefix
+Date: Sat, 24 May 2025 00:06:33 -0500
+X-Google-Sender-Auth: xnrKPckhIQ-_CS6_Hk2GaLsu9tQ
+X-Gm-Features: AX0GCFu0qkyLaKl62ppHqPRXxJmZKj5eznb9dhzqitIa2Nk-w1tLdf5EgM81jCo
+Message-ID: <CAFLszTjjaRua1xq=C=v7O62fq7qs==z=74T=+QivUi1wN54qGg@mail.gmail.com>
+Subject: Re: [PATCH 04/25] patman: Use python3 with /usr/bin/env
 To: Simon Glass <sjg@chromium.org>
 Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -94,12 +94,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add one more test for completeness, since this occurs commonly.
+If python2 is available then we must specify python3 here. Update the
+test to handle this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/func_test.py | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ tools/patman/func_test.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 Applied to sjg/master, thanks!
