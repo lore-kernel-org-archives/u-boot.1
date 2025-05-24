@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02EA8C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 15:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 217A2C54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 15:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42DE582B0E;
-	Sat, 24 May 2025 17:29:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E97D82F67;
+	Sat, 24 May 2025 17:41:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NG4q5mja";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cEiaBFht";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E3D382B70; Sat, 24 May 2025 17:29:20 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 575C582D06; Sat, 24 May 2025 17:41:26 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1974482A9E
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 17:29:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23EEB82B70
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 17:41:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-601609043cfso1257918a12.0
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 08:29:18 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3dc8265b9b5so7544375ab.1
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 08:41:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748100557; x=1748705357; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pDY9HcjQFZpPMIv+1X5tUwwozGB7pLwkiZxxvsTcrGM=;
- b=NG4q5mjaA8nJbeXVqyGO6GdRC+5fUdRQmMzP78B/Ia4/nQgsPuNJor5NdGRpheg2sN
- PWbKpxh+llrUzdadjFJ9G31S1vrvNgPYghbDux6+hXMld1vU7qaZaeWn98845IeJJbTo
- Ft1aroag/pDP2QAajDKTPAx8vfZ0bNggNaEpI=
+ d=chromium.org; s=google; t=1748101282; x=1748706082; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/Lv5fMlQTsoT7rGddNOWjuMZbJfQJ8yBWJwo744fNr4=;
+ b=cEiaBFhtZe1Nqi0jqjtOGtUVI2Vzr+8eahfLEfxrYTKwRcdZ6hReyEbuKOqe4IwkVR
+ 1jAehBIcp7okNQTUvot7DG9m2KR760WfQlYQVMmTT3ES5dFpncguci+U2b5wXruo2LPw
+ 6FEGP9wrFQwz+5e6XdD3+ov0J81HaM2qcdIes=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748100557; x=1748705357;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1748101282; x=1748706082;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pDY9HcjQFZpPMIv+1X5tUwwozGB7pLwkiZxxvsTcrGM=;
- b=sFFyGVHJe8Wjbg4DoEEx1xhyVtuUs0ZQyVNN5A/9A22i9ugcunJon8pjogPoiGPTac
- UOQPXPLLC9jzndOwHFCGBgCdDSXOrQPKbu2P2XmIW5miwg+nbM43DWf0A87BZeByo1UI
- /NIBcY6xHaJtRv9BoYLsLPFwSifrw9hgJiDGGCMref7iq/SQYaY+J45gXJ2wVi99u4cl
- YNwBqaJDYdQaPeV72BPZVKUYVJJaXC0mgG0V36+68ji3H42QbJwyFxGtMob7Fh/AbSKm
- 55YpZDR8eF0Rm1UZug6v6uC9agDTT+W0IbJdv3IJKW+Q2rvC9uimB9wEvQ/wmuk1/hrb
- Taig==
-X-Gm-Message-State: AOJu0Yxv2IXbJ/l1t3L7indWLbnYboXmtXqJQCcE0+/cLdkDvl+PJkI6
- HzyJEMj15hjV8OxVzlLLibHliUxW6g6nTarrAsEtCJguQFMjwH662rKxiOqWO6rGXYKqfbxTsyY
- SzIGWDCQvwyoM2zHvMl0nwIUwbvsKHIEK0efPY/Mo
-X-Gm-Gg: ASbGncvOu8d4oftCKKoF50vw5sCv/KBFY0UfMZIxViPKnUqkPDE59P5crNYpst70p+W
- z/DLmGp5RKpriBLIQq2o6zzhA3YDEQrrzfNZGG84jVEiPNxep7ojEe6lD7x3Mpag2Mw2KhSexO0
- 5XA9unoglRvOoa1nEOWEiA3CjaJUFXskk=
-X-Google-Smtp-Source: AGHT+IHEYsQgaz8qU+BL1GW/pUfy83zOxmWsOuwUSQ2X8OEz3QrIB1wHoMyFQTgRvVFpq9EiZQYkAwsf4u9Jf2d7Pco=
-X-Received: by 2002:a17:907:961a:b0:ad5:58f7:6c8 with SMTP id
- a640c23a62f3a-ad85b2a3b4dmr243822966b.49.1748100557500; Sat, 24 May 2025
- 08:29:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250510134253.1581164-1-sjg@chromium.org>
- <20250510154214.v4.9.I56d9d06e5d74724c963eaffbbe1c2aa400b60bb8@changeid>
- <20250514215821.GD603748@bill-the-cat>
- <CAFLszTg2vMEVSR--ksh9cVRHBQWxzC++Nf83iDq7utUwku8Hrg@mail.gmail.com>
- <20250515205413.GD100073@bill-the-cat>
- <CAFLszTgHg6VfuJbTwdbkfAu4s-ZG0EpZ+6W5i13vC5iu=c+16w@mail.gmail.com>
- <20250524145313.GP100073@bill-the-cat>
-In-Reply-To: <20250524145313.GP100073@bill-the-cat>
+ bh=/Lv5fMlQTsoT7rGddNOWjuMZbJfQJ8yBWJwo744fNr4=;
+ b=G5+n82Dh2zLj7acgCQZSnlkHhF/gQMJuGjpUjksO+t4erzWMw+cCShBx7Oih7WXaVx
+ w1YzTcbReznuW+gWO1gyaZ7vWGeAQxmL0XUH8dbW88C9VnaeYF6X0yqhGzetdtMlXc1B
+ Z6m/H60QNpqOc7LIaHMscmRENT7veAtBwWgw9A79Rp7qLRzVzr+bWkdi4cZ20Vz56hu1
+ /nOUB7tFRKePkW+jim8oxSSTcjp2hp5IuZiHTA1U9Kk4Z7TEVfsvd3N57kjuDRK64y//
+ mi18FTg/4s+4qHmuy2tCwfNPeUNvuZhgGW0xCf6Qj4lNfv+g2lrgCBllyhMqIfkAqY2Z
+ /4ZQ==
+X-Gm-Message-State: AOJu0YzvSzY491nLbYq2VetYjOsPiPFD2l7l03xEqqQkK5FYH4uZkeoW
+ n0KKlip7iIgzrEqmPwo8R/1/cPT+GrgN9qnRkJ4pREolc9k1ksevBVwW3hGxsaFdxi8CjBXiHXf
+ nnMeFdxIT
+X-Gm-Gg: ASbGncubdNmvs0Wz90wGxF7wDeLZUl4NC0NKRTsn3N6M5K0scuIV8+9TcBfZg4la60K
+ W17kNwMahtNyftx2mwm3J652VOqPEM9DwnEgPbaCENfaACZmu+Lnp08VsUFzn4gHFfATXX+oADA
+ eyDkMcOCjkYZnScDDu+z3ziyJUp73DzVyrBMkRI/khaAopM+9OCR494CpO3eOYkSMuoqHQjIAMh
+ 5+DcqJVyVuNIpPX2TtH2NUfxcen4SuAAqmmIG3RtXL0zboyGHVRu6En/voIkiLuuBUGRuquQmPN
+ BJ+747XpgzxVz7qHBRJNGNnTBfeS6XA9rlWKStgFqlI4IBqpDYdI3D8DRmZJdv+NgF5A1Xw2zLh
+ RzV8tfQd9BaLZ
+X-Google-Smtp-Source: AGHT+IHh9wSmg1nuukE94bE2ZfNqnlPaAUxBW9+a1bxR1vq+wlHOBMCVLLHFoN5gYTREeu1cHJt2iA==
+X-Received: by 2002:a05:6e02:b45:b0:3dc:8a5f:7cbe with SMTP id
+ e9e14a558f8ab-3dc9b549069mr26522775ab.0.1748101282325; 
+ Sat, 24 May 2025 08:41:22 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4fbcc4b1543sm4040779173.121.2025.05.24.08.41.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 24 May 2025 08:41:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 24 May 2025 16:29:05 +0100
-X-Gm-Features: AX0GCFuWmqFyqxOBMtvlVhGGnm3FdTulpMtH0wS0LmXQF820Rn1Y93n68L_2Ank
-Message-ID: <CAFLszTh0+8eDAwu7AxcZ28W_sSEGPGSKufh9PY9ZDr=U-F-a1Q@mail.gmail.com>
-Subject: Re: [PATCH v4 09/22] passage: arm: Accept a passage from the previous
- phase
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bill Mills <bill.mills@linaro.org>, 
- Andrew Phelps <andrew.phelps@canonical.com>,
- =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Xu Zhang <423756212@qq.com>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/6] expo: Allow the nominal display-size to be selected
+Date: Sat, 24 May 2025 09:41:07 -0600
+Message-ID: <20250524154117.1217190-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,111 +92,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+At present all coordinates are absolute and must fit within the display.
+This makes it hard to create an expo which can work on any size of
+display, a key goal of expo.
 
-On Sat, 24 May 2025 at 15:53, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, May 24, 2025 at 03:31:08PM +0100, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 15 May 2025 at 21:54, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, May 15, 2025 at 09:26:42PM +0200, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 14 May 2025 at 23:58, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sat, May 10, 2025 at 03:42:07PM +0200, Simon Glass wrote:
-> > > > >
-> > > > > > Accept a bloblist and control devicetree from a previous phase in
-> > > > > > registers 0 to 3, as documented in the Firmware Handoff
-> > > > > > specification[1].
-> > > > > >
-> > > > > > Note that there is currently a weak function called save_boot_params()
-> > > > > > which happens to save the same registers as are needed for this
-> > > > > > protocol. But it seems better to implement this feature as a first-class
-> > > > > > citizen, if for no other reason than that many boards have their own
-> > > > > > version of save_boot_params() which may not happen to save the required
-> > > > > > registers. A weak function is not a good basis for an API.
-> > > > > >
-> > > > > > [1] https://firmwarehandoff.github.io/firmware_handoff/main/index.html
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > > While some efforts were made to encourage Intel to adopt this
-> > > > > > specification, this has not yet been successful. However I do intend to
-> > > > > > use my proposed x86 handoff in U-Boot, once this series is in.
-> > > > > >
-> > > > > > Changes in v4:
-> > > > > > - Update commit message to indicate this can only be for ARM at present
-> > > > > > - Update commit message to mention why save_boot_params() is not used
-> > > > > >
-> > > > > > Changes in v3:
-> > > > > > - Add support for aarch64 also
-> > > > > > - Update registers to match the Firmware Handoff protocol
-> > > > > >
-> > > > > > Changes in v2:
-> > > > > > - Use three registers instead of two for the entry
-> > > > > >
-> > > > > >  arch/arm/cpu/armv7/start.S | 10 +++++++++-
-> > > > > >  arch/arm/cpu/armv8/start.S | 12 ++++++++++++
-> > > > > >  arch/arm/lib/crt0.S        |  6 ++++++
-> > > > > >  arch/arm/lib/crt0_64.S     |  6 ++++++
-> > > > > >  4 files changed, 33 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > This is what makes me think you aren't actually working on my feedback
-> > > > > about taking what we have in-tree, now, rather than just forward porting
-> > > > > your old series and deleting the current code.
-> > > >
-> > > > Well, yes, I sent this v3 series because I had thought you were
-> > > > willing to allow me to maintain bloblist. I certainly appreciate the
-> > > > work in this area, though.
-> > > >
-> > > > >
-> > > > > We have save_boot_params doing exactly what it should today, including
-> > > > > saving off a standard passage and making what was saved available later,
-> > > > > in an intentional fashion. If, hypothetically, Pi needs to override
-> > > > > save_boot_param because a future new-firmware-blob does standard passage
-> > > > > but at run time we want to support both, that's a good thing.
-> > > > >
-> > > > > With commit ea3348ebc215 ('Merge patch series "Handoff bloblist from
-> > > > > previous boot stage"') we already implement the specification in [1]. It
-> > > > > is not a "which happens to". It is intentional.
-> > > > >
-> > > > > I guess the overall challenge here is that you want to do things which
-> > > > > are a superset of the firmware handoff spec itself?
-> > > >
-> > > > Yes,, much of this series relates to putting some structure into
-> > > > things which are passed via standard passage, including validation.
-> > > >
-> > > > I actually don't understand why you would be keen on using
-> > > > save_boot_params(), a weak function, used for board-specific features,
-> > > > to implement standard passage. We should build standard passage in as
-> > > > a first-class citizen. I certainly don't want to try to implement
-> > > > things that way on x86.
-> > >
-> > > You seem to have misunderstood a lot of things and perhaps need to go
-> > > and re-read the feedback. Nothing about a weak function implies less
-> > > than "first class" and "maintain the code" does not equate "delete and
-> > > replace functional code with the same thing, but I wrote it". And if you
-> > > aren't going to do that, please don't bother posting a v4 either later
-> > > this week. I feel like I'm having zero progress with you taking my
-> > > feedback on anything at this point.
-> >
-> > Are you completely set on the idea of a weak function here?
->
-> Am I completely set on following the general architecture and design we
-> have and not making needless changes? Again, you seem to have either
-> misread not not understood feedback and are intent on doing what you
-> want anyhow.
+Add the concept of a nominal size, to which all coordinates conform. Once
+the real display-size is known, expo can in principle (i.e. with later
+work) scale the coordinates and objects according.
 
-The save_boot_params() mechanism is ARM-only and is not suitable for
-standard passage, IMO...
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-So can you just tell me whether you are willing to have the registers
-saved in global_data early in startup, in assembly code? I want that
-before progressing with standard passage on x86. I don't need to say
-yes. I just need a clear answer, so I can decide which path to take.
+ boot/bootflow_menu.c |  1 +
+ boot/expo.c          |  6 ++++++
+ include/expo.h       | 17 +++++++++++++++++
+ 3 files changed, 24 insertions(+)
 
-Regards,
-Simon
+diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
+index a0437177364..1966e38a6d6 100644
+--- a/boot/bootflow_menu.c
++++ b/boot/bootflow_menu.c
+@@ -49,6 +49,7 @@ int bootflow_menu_new(struct expo **expp)
+ 	ret = expo_new("bootflows", priv, &exp);
+ 	if (ret)
+ 		return log_msg_ret("exp", ret);
++	expo_req_size(exp, 1366, 768);
+ 
+ 	ret = scene_new(exp, "main", MAIN, &scn);
+ 	if (ret < 0)
+diff --git a/boot/expo.c b/boot/expo.c
+index 035c3de5a0a..6f05c47aba6 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -376,3 +376,9 @@ int expo_poll(struct expo *exp, struct expo_action *act)
+ 
+ 	return 0;
+ }
++
++void expo_req_size(struct expo *exp, int width, int height)
++{
++	exp->req_width = width;
++	exp->req_height = height;
++}
+diff --git a/include/expo.h b/include/expo.h
+index e383872b307..5eb3299284c 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -109,6 +109,8 @@ struct expo_theme {
+  * @scene_id: Current scene ID (0 if none)
+  * @next_id: Next ID number to use, for automatic allocation
+  * @action: Action selected by user. At present only one is supported, with the
++ * @req_width: Requested width of the display
++ * @req_height: Requested height of the display
+  * type set to EXPOACT_NONE if there is no action
+  * @text_mode: true to use text mode for the menu (no vidconsole)
+  * @popup: true to use popup menus, instead of showing all items
+@@ -128,6 +130,8 @@ struct expo {
+ 	uint scene_id;
+ 	uint next_id;
+ 	struct expo_action action;
++	int req_width;
++	int req_height;
+ 	bool text_mode;
+ 	bool popup;
+ 	bool show_highlight;
+@@ -1081,4 +1085,17 @@ int cb_expo_build(struct expo **expp);
+  */
+ int expo_poll(struct expo *exp, struct expo_action *act);
+ 
++/**
++ * expo_req_size() - Request a size for the expo display
++ *
++ * Set the width and height of the display, so far as requested positions and
++ * size are concerned. The actual display may be larger or smaller, in which
++ * case expo scales the objects to fit
++ *
++ * @exp: Expo to update
++ * @width: Requested display width
++ * @height: Requested display height
++ */
++void expo_req_size(struct expo *exp, int width, int height);
++
+ #endif /*__EXPO_H */
+-- 
+2.43.0
+
+base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
+branch: expa
