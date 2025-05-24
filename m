@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90FFC54FC6
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531E0C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:38:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6540D83443;
-	Sat, 24 May 2025 16:35:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD0398357C;
+	Sat, 24 May 2025 16:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K6feyje1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jNvgUCoa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5219E834EC; Sat, 24 May 2025 16:35:47 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 1C034835FD; Sat, 24 May 2025 16:38:48 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAE7A831C2
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:35:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9BEB82F67
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ad560321ed9so84284566b.1
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:35:44 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-86135af1045so73190739f.1
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:38:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748097344; x=1748702144; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tC5/73bAB7XFxbfBa2p1V5I6nSUfKf06PiN29vKD6D0=;
- b=K6feyje1nfifNu0hUX+/ZWUVlfTshT0+ZqokY6hV3QV0vVfWmVsZKma8Fzqv8G+86E
- tT9mdFNsxkgOO4oE/vMhK//qrhgmY/xcBGkNxqrGl2PdCOEHU3oBAxNDEtTDFlc5rCxU
- Ia2oN4uAW3ZGNwGMKiW3DW5Ay4MLo1lmXiUZQ=
+ d=chromium.org; s=google; t=1748097522; x=1748702322; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zcW/3TqyZ/bg/50SmYa3X9I2W4ECdPpQJqL5tDG42IU=;
+ b=jNvgUCoau0myytxEdBIt5f7E+oCJewEP0s/OlEYTQhHasQ8ibn+b+gdfXJ3HteLL/p
+ KOxxW5/GvwvjSPuZyktkek4byDur8ZVIsrOyIxGR7ONxy0AMiYr6pYQ7tz9C4x4Dyp13
+ eN7CzYtq2L0ajRWltyjaCpnzwUzJ4SWYQS19Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748097344; x=1748702144;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1748097522; x=1748702322;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tC5/73bAB7XFxbfBa2p1V5I6nSUfKf06PiN29vKD6D0=;
- b=ckp08XgxGN2o1QvDvW9aHuY+rXmuXjAvMRcqHBURf9vYBYxm7sYoF3i/0wD/awAsaA
- N9GcAM1XYOKIl1Fe6SKg35VGpSbAATZwv9DpxD8f55jn2dwO1FHEMBFnGAllSbIKE0um
- dmdU8ppTAK4/quMwS8m9yb/UoUMtIG9XeHvM8gdHX0kW5FPfSOo2rDvjKVBToodZ6FBD
- VtongBI3gFqkF4YuxBZ7Eysxk6I7jporYnm77VPOhbtf45dRaq5HoWrxYRIcAW0hlZXT
- HbpOQ4beD4EdQ0OGbuzx8s1NNUqlvSPr11GssADym/AJgqv+U+dRlQLN8rZcpAzb7P7h
- HaCw==
-X-Gm-Message-State: AOJu0YxYAzeWM0M430JIkreRO40iGO1gmIiKr6GnRqAMvr+IytK/ReuZ
- 3ZwuR/EJyhJgZlAyOHhbxlQOX0A+5UpeMKy7poJUqkfQuvdv4YxfpLEC7vO9JvkWDXNyLdHI6Pt
- AHsp1ZkCB+hLTk95LzkUXLQWw3gLVRXU4ZGpFazRI
-X-Gm-Gg: ASbGnct7sSC9NupGK+ESQj7tA9xYBLrDv7TXIjc4X34lGcr5oyl+Y7VYwPB8yEV32UB
- rNsBr0CPG9bUcru0admcB/ovVZjvPBDyEMZ8rSrPkvalFt0PnsC9GurW1ARdPiB+M1BqwO5BXKO
- c/lSfesAj+mG9KvxPuXauTwG3YRhU6qIA=
-X-Google-Smtp-Source: AGHT+IGX0fg9qNizmsn1LyvarC4IfK/vud7e+zC8V6WnosTj2yjpdOYxVh1bZIzv5tV/ZxC6w4LyBT69MFRjzV+Zki0=
-X-Received: by 2002:a17:907:c26:b0:ad5:2e64:983e with SMTP id
- a640c23a62f3a-ad85b12f717mr248031466b.10.1748097344358; Sat, 24 May 2025
- 07:35:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250504132356.2317305-1-sjg@chromium.org>
- <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
- <20250523140455.GP100073@bill-the-cat>
- <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
- <20250523164717.GU100073@bill-the-cat>
- <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
- <20250523212539.GX100073@bill-the-cat>
- <CAFLszTioW78gyU2qK+-E5CcjyTAatvFuodWV3NKuwq5anBGdpg@mail.gmail.com>
- <20250524141805.GB100073@bill-the-cat>
- <CAFLszTj=6W2miuLkU0Acbi-HBNSAiq-9YfwdOu0-+OSSy9+gvw@mail.gmail.com>
- <20250524143124.GI100073@bill-the-cat>
-In-Reply-To: <20250524143124.GI100073@bill-the-cat>
+ bh=zcW/3TqyZ/bg/50SmYa3X9I2W4ECdPpQJqL5tDG42IU=;
+ b=NcKRjYUjKBKNdkNs1QyW4Nv4/PQc8a3EFACXmGC4u/PK0W9ekmLYlhMKUuqR8fPKPH
+ doNh7Lc7l8HPYioYymBHHMJxKjBQx/u4IOdUy/AJUaeBbHKRN4yynPhiKYYmQVQYoWvA
+ mpSzqpa4+UNLH6Mzh9B0ETCmvPeot9Y0AyPL3SznIlB3NR3z/TXQaSK/IHp6XHjI+tq/
+ fF/lE3ja/NzglF7KX31nAvElhUjsOXFBw3wGwNN52ykmnQR7xo510j9W5dL6GRw+xVQv
+ nxaFXN+/nMCrV81TFmwa5i8UiTwlSDEv9tOfdXXNgLlOvTHWECLHdZ2pn3YV3NfactI8
+ SuOA==
+X-Gm-Message-State: AOJu0YxyjJt6IJefnvS4NiUYUfZy2ISZLOXlZWUa03bzkMe3vQ9W+Qcz
+ KHMUaYFcHGQAlzVQjmX2LV2SgKr36LapXyi4gzoUbyxzOH1wINRLz/IlHeW0zkaPXvoMAcPtCDO
+ HnbEBzFJU
+X-Gm-Gg: ASbGnctfdwd3kGJ1Pie1TRa3fFH70LoWtW90pZKrm8TpEVf9KLfpe5+ugiUJTksvEhr
+ 2fjqaRAn7ufb6nsHVvgcI6aimVcLWok1I7VU6AZrGa0R8WDPSCWK702G7ej1KRT1nqu7WyVkxuc
+ noL4mAO3yHD0WWepKNjkvlZZErQcbBy1OmGvl7LB1bYQ5qo+BNt7oQ9KY9ECp7oKRmlPZrNsDUt
+ d+h0nwkFOqp3eQ9OJTeA2Fy/AnOmhOPQHpyVtNenRT6BPMin4OHQhWDfG+zdQRqUPsHeckFQ21Z
+ eSYcx7eAVOLDpuzofL/j/r+XqV/NSj7Ade1zGCsKTrzqwzxkW9Y3aoQnFxOqhCDHJwDJ8eKe6aT
+ mqLiR8YNd9zgI
+X-Google-Smtp-Source: AGHT+IHr6gsmwO+VpaB6MLJX5ksbrqw91Eoih/lRQP1B7PtdGz9rxEIz60RwinpmwoCxJ8CZGedv2g==
+X-Received: by 2002:a05:6602:4a0c:b0:86a:93c:f5fb with SMTP id
+ ca18e2360f4ac-86cbb7b7c38mr286547639f.1.1748097521983; 
+ Sat, 24 May 2025 07:38:41 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-86a235bff42sm389321739f.1.2025.05.24.07.38.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 24 May 2025 07:38:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 24 May 2025 15:35:32 +0100
-X-Gm-Features: AX0GCFs4A1pJX_R7H-0edyvAnGr4GTJzdTIK_2L_IelmklRgEaQWlNNmzwHO12k
-Message-ID: <CAFLszTizvrb9jX+a6-BVVtrH-fU5T_DdV8gakyEszSVCojp3hQ@mail.gmail.com>
-Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
- module
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] sandbox: Move FDT to a different address
+Date: Sat, 24 May 2025 08:38:27 -0600
+Message-ID: <20250524143837.1205231-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,121 +92,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The FDT is near its limit and may overlap with the early-malloc region
+if more things are added. Move it to a better location.
 
-On Sat, 24 May 2025 at 15:31, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, May 24, 2025 at 03:22:57PM +0100, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 24 May 2025 at 15:18, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, May 24, 2025 at 05:23:48AM +0100, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 23 May 2025 at 22:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, May 23, 2025 at 09:20:37PM +0100, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 23 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
-> > > > > > > > > > It is easier for tests if the top-level control logic is all in one
-> > > > > > > > > > module. Create a new do_patman() function to handle this. Move the
-> > > > > > > > > > existing code into it.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > ---
-> > > > > > > > > >
-> > > > > > > > > > (no changes since v1)
-> > > > > > > > > >
-> > > > > > > > > >  tools/patman/__main__.py | 49 ++----------------------------------
-> > > > > > > > > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++--
-> > > > > > > > > >  2 files changed, 54 insertions(+), 49 deletions(-)
-> > > > > > > > > >
-> > > > > > > > > > Applied to sjg/master, thanks!
-> > > > > > > > >
-> > > > > > > > > Odd. I thought you had posted this against master or next, intending it
-> > > > > > > > > for mainline, which is why I assigned it to you in patchwork. I see the
-> > > > > > > > > cover letter is missing what commit it's against. And instead here you
-> > > > > > > > > are once again spamming the list and with messages about your personal
-> > > > > > > > > tree. Why?
-> > > > > > > >
-> > > > > > > > I'm applying it to my tree and intend to send you a PR at some point,
-> > > > > > > > with collected tools/ patches. So I believe I need to send emails
-> > > > > > > > about applying things and update it in patchwork. Let's discuss this
-> > > > > > > > in a future call.
-> > > > > > >
-> > > > > > > I don't see what there is to discuss. Please follow the normal process
-> > > > > > > for mainline and stop spamming the list with notices for your personal
-> > > > > > > tree. You're also diverging your own tree further from mainline by doing
-> > > > > > > this and making it less likely (multiple people have told you they don't
-> > > > > > > want to review things not against mainline) any follow-up work will get
-> > > > > > > comments other than that it's not applicable to mainline.
-> > > > > >
-> > > > > > For patman, I have another series [1] I'm planning to apply to my tree tomorrow
-> > > > > >
-> > > > > > Would you like me to send 'applied' emails for it to the mailing list?
-> > > > > > Or perhaps just for the cover letter? Would you like me to send you a
-> > > > > > pull request?
-> > > > > >
-> > > > > > Regards,
-> > > > > > Simon
-> > > > > >
-> > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=456256
-> > > > >
-> > > > > Yes, that's another series that while I disagree with the direction
-> > > > > you're taking things, would rather apply to mainline than let it bitrot
-> > > > > in mainline. So please send a PR against next. And that would also apply
-> > > > > to the series this email is in reply to. As again, I had expected it for
-> > > > > mainline and not your downstream tree even if I think we (and our users)
-> > > > > would all benefit from managing the python portions differently.
-> > > >
-> > > > OK, once I have applied the remaining two series I will send a PR.
-> > >
-> > > Based on the emails in my inbox this morning, you're doing the opposite
-> > > of what I asked for. But maybe this afternoon will bring something
-> > > different.
-> > >
-> > > > You didn't express a preference for the 'applied' emails. It seems
-> > > > better to send these emails so that there is a record of the patch
-> > > > being applied.
-> > >
-> > > I guess I wasn't clear enough. Stop spamming the list with *anything*
-> > > about your personal tree. And if you're going to send anything about
-> > > something that's intended for mainline, you should make patman act more
-> > > like b4 and NOT send a message to every patch. I know I used to, but the
-> > > workflow b4 enables is much better for everyone.
-> >
-> > How do I (or anyone else) know whether a patch was applied? If you
-> > only reply to the cover letter, doesn't that mean that the patches are
-> > left 'hanging' in the mailing list?
-> >
-> > I didn't know you had changed your policy on this...it certainly seems
-> > odd to me. I often find Heinrich's patches are 'silently' applied, so
-> > perhaps he does the same thing?
->
-> Every custodian does things as they see fit for mainline, but most are
-> adopting b4 which means that no, I'm not sure why there would be
-> confusion, or where it would come from. The emails say what the commit
-> ranges are for a series, patchwork is updated and then periodically most
-> patches in patchwork then get their githash added. Replying to the cover
-> letter with the commit range for the series means it's very much not
-> "hanging".
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Generally I rely on seeing a reply to a patch to know it was applied.
-So it is confusing when the patch goes in but there was no reply to
-the patch.
+ arch/sandbox/Kconfig         | 2 +-
+ doc/arch/sandbox/sandbox.rst | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-I've noticed that you seem less inclined to apply some patches from a
-series, instead requesting that the whole series is resent. Perhaps
-that is why?
+diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
+index 1c8353d6156..a6b69fb5f53 100644
+--- a/arch/sandbox/Kconfig
++++ b/arch/sandbox/Kconfig
+@@ -75,7 +75,7 @@ config SANDBOX_BITS_PER_LONG
+ 
+ config SYS_FDT_LOAD_ADDR
+ 	hex "Address at which to load devicetree"
+-	default 0x100
++	default 0x180000
+ 	help
+ 	  With sandbox the devicetree is loaded into the emulated RAM. This sets
+ 	  the address that is used. There must be enough space at this address
+diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
+index a8b0d7f0395..f9e73c91fd4 100644
+--- a/doc/arch/sandbox/sandbox.rst
++++ b/doc/arch/sandbox/sandbox.rst
+@@ -658,11 +658,11 @@ that are mapped into that memory:
+ ========   ========================   ===============================
+ Addr       Config                     Usage
+ ========   ========================   ===============================
+-     100   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
+     b000   CONFIG_BLOBLIST_ADDR       Blob list
+    10000   CFG_MALLOC_F_ADDR          Early memory allocation
+    f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
+   100000   TCG Event log              TCG Event Log
++  180000   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
+   200000   CONFIG_TRACE_EARLY_ADDR    Early trace buffer (if enabled). Also used
+   400000   CONFIG_TEXT_BASE           Load buffer for U-Boot (sandbox_spl only)
+ 10000000                              PCI address space (see test.dts)
+-- 
+2.43.0
 
-Regards,
-Simon
+base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
+branch: sand
