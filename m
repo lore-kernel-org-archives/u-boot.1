@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 217A2C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 15:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9AA0C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 15:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E97D82F67;
-	Sat, 24 May 2025 17:41:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6AA6835AA;
+	Sat, 24 May 2025 17:41:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cEiaBFht";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MFTTeViS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 575C582D06; Sat, 24 May 2025 17:41:26 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id F1321835AA; Sat, 24 May 2025 17:41:28 +0200 (CEST)
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
+ [IPv6:2607:f8b0:4864:20::d43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23EEB82B70
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 17:41:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C595E82B70
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 17:41:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3dc8265b9b5so7544375ab.1
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 08:41:24 -0700 (PDT)
+Received: by mail-io1-xd43.google.com with SMTP id
+ ca18e2360f4ac-86142446f3fso16222039f.2
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 08:41:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748101282; x=1748706082; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/Lv5fMlQTsoT7rGddNOWjuMZbJfQJ8yBWJwo744fNr4=;
- b=cEiaBFhtZe1Nqi0jqjtOGtUVI2Vzr+8eahfLEfxrYTKwRcdZ6hReyEbuKOqe4IwkVR
- 1jAehBIcp7okNQTUvot7DG9m2KR760WfQlYQVMmTT3ES5dFpncguci+U2b5wXruo2LPw
- 6FEGP9wrFQwz+5e6XdD3+ov0J81HaM2qcdIes=
+ d=chromium.org; s=google; t=1748101285; x=1748706085; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5L8cZnILOx6i2MPNxk8jt6JbuLaTu3gDX4LaRWmLj5k=;
+ b=MFTTeViSSFYMzDbO35IKphhgpeDrs1LrUssOuijxcG31DmXawdKssi0qQ0poQNj0cf
+ rLrBI23VhfJFr7CHOeLDHGykIFuJC1xrka0w7JWvSJsUGZBjV/rH6qsE0IwpuZvSZ3H1
+ 4/ghxIl/jhyvYc/OT+RvNGDTD4B6VeGz1Q8WM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748101282; x=1748706082;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/Lv5fMlQTsoT7rGddNOWjuMZbJfQJ8yBWJwo744fNr4=;
- b=G5+n82Dh2zLj7acgCQZSnlkHhF/gQMJuGjpUjksO+t4erzWMw+cCShBx7Oih7WXaVx
- w1YzTcbReznuW+gWO1gyaZ7vWGeAQxmL0XUH8dbW88C9VnaeYF6X0yqhGzetdtMlXc1B
- Z6m/H60QNpqOc7LIaHMscmRENT7veAtBwWgw9A79Rp7qLRzVzr+bWkdi4cZ20Vz56hu1
- /nOUB7tFRKePkW+jim8oxSSTcjp2hp5IuZiHTA1U9Kk4Z7TEVfsvd3N57kjuDRK64y//
- mi18FTg/4s+4qHmuy2tCwfNPeUNvuZhgGW0xCf6Qj4lNfv+g2lrgCBllyhMqIfkAqY2Z
- /4ZQ==
-X-Gm-Message-State: AOJu0YzvSzY491nLbYq2VetYjOsPiPFD2l7l03xEqqQkK5FYH4uZkeoW
- n0KKlip7iIgzrEqmPwo8R/1/cPT+GrgN9qnRkJ4pREolc9k1ksevBVwW3hGxsaFdxi8CjBXiHXf
- nnMeFdxIT
-X-Gm-Gg: ASbGncubdNmvs0Wz90wGxF7wDeLZUl4NC0NKRTsn3N6M5K0scuIV8+9TcBfZg4la60K
- W17kNwMahtNyftx2mwm3J652VOqPEM9DwnEgPbaCENfaACZmu+Lnp08VsUFzn4gHFfATXX+oADA
- eyDkMcOCjkYZnScDDu+z3ziyJUp73DzVyrBMkRI/khaAopM+9OCR494CpO3eOYkSMuoqHQjIAMh
- 5+DcqJVyVuNIpPX2TtH2NUfxcen4SuAAqmmIG3RtXL0zboyGHVRu6En/voIkiLuuBUGRuquQmPN
- BJ+747XpgzxVz7qHBRJNGNnTBfeS6XA9rlWKStgFqlI4IBqpDYdI3D8DRmZJdv+NgF5A1Xw2zLh
- RzV8tfQd9BaLZ
-X-Google-Smtp-Source: AGHT+IHh9wSmg1nuukE94bE2ZfNqnlPaAUxBW9+a1bxR1vq+wlHOBMCVLLHFoN5gYTREeu1cHJt2iA==
-X-Received: by 2002:a05:6e02:b45:b0:3dc:8a5f:7cbe with SMTP id
- e9e14a558f8ab-3dc9b549069mr26522775ab.0.1748101282325; 
- Sat, 24 May 2025 08:41:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748101285; x=1748706085;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5L8cZnILOx6i2MPNxk8jt6JbuLaTu3gDX4LaRWmLj5k=;
+ b=OrevzIsCNqOK1j2KX7fY90ZJEqGMsacsajeTei9+JSCOG9xr9sMwH36ru40gMUG7hN
+ t3l9oEmWhHkZx83TYscVo00hd2Qd4PiEwrakAzajF0L2d6Vp2ryXjvhs/Cq+c9QZ/Q7G
+ 6h6ep0N5CyTTKakuq6VuWX0/0Wb/nuSmrNPCAM8e3BVXurG5yc3WahCcfrRLXRaaba8X
+ YzuOXqeI7E4vjzf+fbHeinuUZhnKe3X1FmapdP6ECf7/v4EaUzwobbrE1SkKFih62KjL
+ HL8rQ/k+4c91mbLo0lME0Klcy9gTPgYBagThaZO06BdZ2W7OQO1F40bjrJToBUfyYY8e
+ /bDw==
+X-Gm-Message-State: AOJu0YyLwq0+1o7wR8UqxfIl8KJaEeECgtCDsGPVz3tyC3sIHI4HdWt/
+ 1Y0/gdWtG3gJWl8EOkPmn6fnB0p89wYo7hJpLCp/rP0es9aCtj+MMUzElVMcssywVG298zyNCog
+ loKDRcQLMZEs=
+X-Gm-Gg: ASbGncu+y0pphrukSbLMmXIB/r4KT/+QXrOYjyfM1h0GtzotMI9SHRFqzWO3bSFA4Xr
+ D4hVPIKe/Gc5c2SqUmlYwoPXCyLvrSB4h/p4UfqxI+ZkMEiFtvqsIDUmQL5lb22t1n8v7Hhzfx1
+ J7QHZW/K+vtl2dg0PcA8MeRCM6dO2jWkvnr7vsdwFriTlRfVMVLljuwfkEHaKrIXAx2cMD7K/Cn
+ Vjb+GuZltnc4P1bEbDqLsrfI+mCwv6ahvXf1kpHuW07SjO27kSX4EIxpPA5iebLVvtdvQ0Or+FF
+ VUJ0DB8wLdIn0nPKd5Fna2xc71ifkSW5SK/E3wUOjgqF56cF/YX0hTIH/aO2Wio9AJ/gbyU80c+
+ 96ZL7daWpXPu/
+X-Google-Smtp-Source: AGHT+IHtuP5lMfwmMjo/CKIyTQIzuA5OxEp3NaSz2Lvkrlw4AMjITNjwJxqTFEcT+4c+GFk5CTgnDQ==
+X-Received: by 2002:a05:6602:371a:b0:85b:538e:1faf with SMTP id
+ ca18e2360f4ac-86cbb893ea5mr315732339f.7.1748101284997; 
+ Sat, 24 May 2025 08:41:24 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fbcc4b1543sm4040779173.121.2025.05.24.08.41.20
+ 8926c6da1cb9f-4fbcc4b1543sm4040779173.121.2025.05.24.08.41.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 08:41:20 -0700 (PDT)
+ Sat, 24 May 2025 08:41:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/6] expo: Allow the nominal display-size to be selected
-Date: Sat, 24 May 2025 09:41:07 -0600
-Message-ID: <20250524154117.1217190-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/6] expo: Indicate with the pointed-to item has changed
+Date: Sat, 24 May 2025 09:41:08 -0600
+Message-ID: <20250524154117.1217190-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250524154117.1217190-1-sjg@chromium.org>
+References: <20250524154117.1217190-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,88 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present all coordinates are absolute and must fit within the display.
-This makes it hard to create an expo which can work on any size of
-display, a key goal of expo.
-
-Add the concept of a nominal size, to which all coordinates conform. Once
-the real display-size is known, expo can in principle (i.e. with later
-work) scale the coordinates and objects according.
+Allow the caller to detect when a keypress has actually resulted in a
+change of the item that is pointed to.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootflow_menu.c |  1 +
- boot/expo.c          |  6 ++++++
- include/expo.h       | 17 +++++++++++++++++
- 3 files changed, 24 insertions(+)
+ boot/scene_menu.c | 22 ++++++++++++++++------
+ include/expo.h    |  3 +++
+ 2 files changed, 19 insertions(+), 6 deletions(-)
 
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index a0437177364..1966e38a6d6 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -49,6 +49,7 @@ int bootflow_menu_new(struct expo **expp)
- 	ret = expo_new("bootflows", priv, &exp);
- 	if (ret)
- 		return log_msg_ret("exp", ret);
-+	expo_req_size(exp, 1366, 768);
+diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+index fd16cad6521..fe44bd42133 100644
+--- a/boot/scene_menu.c
++++ b/boot/scene_menu.c
+@@ -410,6 +410,7 @@ int scene_menu_send_key(struct scene *scn, struct scene_obj_menu *menu, int key,
+ {
+ 	const bool open = menu->obj.flags & SCENEOF_OPEN;
+ 	struct scene_menitem *item, *cur, *key_item;
++	bool changed = false;
  
- 	ret = scene_new(exp, "main", MAIN, &scn);
- 	if (ret < 0)
-diff --git a/boot/expo.c b/boot/expo.c
-index 035c3de5a0a..6f05c47aba6 100644
---- a/boot/expo.c
-+++ b/boot/expo.c
-@@ -376,3 +376,9 @@ int expo_poll(struct expo *exp, struct expo_action *act)
- 
- 	return 0;
- }
-+
-+void expo_req_size(struct expo *exp, int width, int height)
-+{
-+	exp->req_width = width;
-+	exp->req_height = height;
-+}
+ 	cur = NULL;
+ 	key_item = NULL;
+@@ -433,19 +434,28 @@ int scene_menu_send_key(struct scene *scn, struct scene_obj_menu *menu, int key,
+ 					     struct scene_menitem, sibling)) {
+ 			item = list_entry(item->sibling.prev,
+ 					  struct scene_menitem, sibling);
+-			event->type = EXPOACT_POINT_ITEM;
+-			event->select.id = item->id;
+-			log_debug("up to item %d\n", event->select.id);
++			changed = true;
+ 		}
++		/*
++		 * issue an event even if the pointer did not move, so the
++		 * caller knows that an attempt was made, e.g. to cancel an
++		 * autoboot timeout
++		 */
++		event->type = EXPOACT_POINT_ITEM;
++		event->select.id = item->id;
++		event->select.changed = changed;
++		log_debug("up to item %d\n", event->select.id);
+ 		break;
+ 	case BKEY_DOWN:
+ 		if (!list_is_last(&item->sibling, &menu->item_head)) {
+ 			item = list_entry(item->sibling.next,
+ 					  struct scene_menitem, sibling);
+-			event->type = EXPOACT_POINT_ITEM;
+-			event->select.id = item->id;
+-			log_debug("down to item %d\n", event->select.id);
++			changed = true;
+ 		}
++		event->type = EXPOACT_POINT_ITEM;
++		event->select.id = item->id;
++		event->select.changed = changed;
++		log_debug("down to item %d\n", event->select.id);
+ 		break;
+ 	case BKEY_SELECT:
+ 		event->type = EXPOACT_SELECT;
 diff --git a/include/expo.h b/include/expo.h
-index e383872b307..5eb3299284c 100644
+index 5eb3299284c..6acbc54c648 100644
 --- a/include/expo.h
 +++ b/include/expo.h
-@@ -109,6 +109,8 @@ struct expo_theme {
-  * @scene_id: Current scene ID (0 if none)
-  * @next_id: Next ID number to use, for automatic allocation
-  * @action: Action selected by user. At present only one is supported, with the
-+ * @req_width: Requested width of the display
-+ * @req_height: Requested height of the display
-  * type set to EXPOACT_NONE if there is no action
-  * @text_mode: true to use text mode for the menu (no vidconsole)
-  * @popup: true to use popup menus, instead of showing all items
-@@ -128,6 +130,8 @@ struct expo {
- 	uint scene_id;
- 	uint next_id;
- 	struct expo_action action;
-+	int req_width;
-+	int req_height;
- 	bool text_mode;
- 	bool popup;
- 	bool show_highlight;
-@@ -1081,4 +1085,17 @@ int cb_expo_build(struct expo **expp);
+@@ -65,12 +65,15 @@ enum expoact_type {
+  * @type: Action type (EXPOACT_NONE if there is no action)
+  * @select: Used for EXPOACT_POINT_ITEM and EXPOACT_SELECT
+  * @select.id: ID number of the object affected.
++ * @select.changed: true if the selection has changed since last time (only
++ * valid for EXPOACT_POINT_ITEM)
   */
- int expo_poll(struct expo *exp, struct expo_action *act);
- 
-+/**
-+ * expo_req_size() - Request a size for the expo display
-+ *
-+ * Set the width and height of the display, so far as requested positions and
-+ * size are concerned. The actual display may be larger or smaller, in which
-+ * case expo scales the objects to fit
-+ *
-+ * @exp: Expo to update
-+ * @width: Requested display width
-+ * @height: Requested display height
-+ */
-+void expo_req_size(struct expo *exp, int width, int height);
-+
- #endif /*__EXPO_H */
+ struct expo_action {
+ 	enum expoact_type type;
+ 	union {
+ 		struct {
+ 			int id;
++			bool changed;
+ 		} select;
+ 	};
+ };
 -- 
 2.43.0
 
