@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C22E2C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 087AAC54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:07:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDEB183483;
-	Sat, 24 May 2025 07:06:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB475835BF;
+	Sat, 24 May 2025 07:06:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ilQc5yuF";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VL0Fa8lD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 999B083559; Sat, 24 May 2025 07:06:06 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id B40AB834BC; Sat, 24 May 2025 07:06:09 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1941834BC
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:06:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CC1F835B6
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:06:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ad545e74f60so59718966b.2
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:06:04 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ad56cbc7b07so65312766b.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:06:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748063164; x=1748667964; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748063167; x=1748667967; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=emSQ6c2j1Ux5J6rHEkRCXBEQRtlziERoJjDyRrYutB4=;
- b=ilQc5yuFy315X8zQ4GvkF2Gj55QVqq9dKdbXCCPZEUgtOdoo/kJuDclgW95f4sTNYb
- bsS5Dc9G/Db2gpNtQnOQGTESG1oVB+EGrKHcJUK2kH4zt5YN3geCdiYPwa7sGxd3oFYy
- /2fkFmbnKkNxtRGc3FLeSgYF+hvAm6okYzzyI=
+ bh=+k2MAtZo+jSOFjM7dzVEpweavr2gqM6R14XTiqoAxr4=;
+ b=VL0Fa8lDl0DFiTiE9EY/3dmEJfuAjRmQged/8/MYg9VEzCnHJgLtptw2lsFSCTFuAR
+ F/hLds5X+yIXY1IWcI/VnpY98Tp/pRytnfMIFXwZ4bv9CSWqGmmj9zdztm/ftwipBOxS
+ xmDrUTz42YLlBmDMyy9ZtXIwM4mSN/OivGAR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748063164; x=1748667964;
+ d=1e100.net; s=20230601; t=1748063167; x=1748667967;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=emSQ6c2j1Ux5J6rHEkRCXBEQRtlziERoJjDyRrYutB4=;
- b=XOyPdVinnp40UQ/giVq53ifa+dt5G8M682VBDDKXC2D7axqEujLEDr0tw8Gnr/h9th
- xTWShyO6o3x+PzsXm422sCP/wqwRz055kX18O43MHZKqJ9innjAJ1lgnFxtEhLe+JeAs
- a8govA9dtBc65K1nlBuG80kJpavC9EhOajxuNGUbDx2XXSP+nzxhDTC1/TsIYRXA2Ayt
- BtsFnkL5AVZH5xj88bMBTVJbOGFm8hAc2+rkMRXZ5SfVafoX7YLnnFBEYXtmT4gkkcVU
- p5T2xz6PRwk2QK+Uc9thtOWrBaa50ZeHZHVLN6QOLTZnvPPRHZQ47HjVZKvzSv83PT+n
- hfew==
+ bh=+k2MAtZo+jSOFjM7dzVEpweavr2gqM6R14XTiqoAxr4=;
+ b=nyUUjkJbZD/TFeEkvFvtDjJgMo2HMQttoqYtSO8S+AZOaXKu6X8M1iW782FAzCDfUC
+ ITAO1t2OGe3Z+Hvm+PMwTQA9BlvNIlcHe1+a7tM5TYs6SHHYGshodMHtwdx7guDNsioy
+ pTa3VDZoRgBJ0+f/J1cdx8I5cWvvpMQYddN6Z2rnz0KYrIYTg6a7wkYAhcudw24VSixd
+ X+KLostbZ3WDCdvpWTHL4aeyV/PJm71ZyCb82++GQF8AqyoAk0jmgDovU5mSVItzSDKs
+ V9k8jvxTe9OuhfOAYLUafVevJXSWn35QuFKtaa0zPuh4UddNt2FsoLfffITTFoeJmKmn
+ BiYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIo/iGshY45T9UbmWnBTdSlLjXrBRnWr/Tnw2PW7lVNhsHfr1wUZHx2bhsHhmhW4UOsADltwo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYVtGep4Yeb8a/O9iC1dRDWgJmPeY5EjKJdZpHIO2L17+6TeeR
- wxndKukGb+dqoC9ZGNhs478dsvdFj6hWFbUOezro0WDBMddHly1MXYqEfM3Eoc5KBoXQgK3t6dA
- AGLNO5nYFoAqeL6T0zF5n7rx4F9fyTUohPa41o1jRUGBx42Tu4fs23KRu
-X-Gm-Gg: ASbGncs2CNs+mx5Hgzh76fCXsD/NwroPdyu65vKocTWx7SIxiRdD2C6WBT/WUDOv5DM
- x2/0W4yGpFiIsm0dDii6zW+7MpustG8pgr97EAwlrz60kL0sJlyr+lV+1u4a4kiRrR+2uaIjE0Z
- jVSkF/FAt1f9JDyedGFzVFh76jP5xWWzk=
-X-Google-Smtp-Source: AGHT+IFQJT5/Hf1zShZ5V1Rlv/7vDyvsfL6LM42vfU3p2+gAY2NXsuF6IrQacTCj7eW2h/tbRaPvYMSzZpJExPF54lw=
-X-Received: by 2002:a17:906:478b:b0:aca:b72b:4576 with SMTP id
- a640c23a62f3a-ad85b1ce893mr133978866b.33.1748063164157; Fri, 23 May 2025
- 22:06:04 -0700 (PDT)
+ AJvYcCXSqAeT/LKk6kfwdNUb7PAZdr/AVzEB4UPt4EmEsyvFxrAqaVmOuMLDH/vG4UvEsTpSdM+kXAs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqYfaW4fTvELMK/jHDCF7AsF8RkxjQRbkVu0PgP50SfIDqyRSI
+ rdteeUNPS/T5ubiRrEmriTjtIjTrMpaYNXb6GknHlFjWfk3mfA+PymsSCG0ff7WITODDFnYcxdT
+ VFYRGGZgjj5kxl1jpOLHRN/QCEkQGHbeSHBca5BIqcmJaoVgwdzXt9AXJ
+X-Gm-Gg: ASbGncufnMgvcuX1Hv75bsd0Rr2EBUVmUzbHGsAdxF7dW/YziuCPsySDV80XM46mgxL
+ CjT+IbwYsYBbSX7j2NdfeSKG656u+xohC0YNTPeLhSedGFXqGxewdxRSy11jq2hy6K2opC0JFqu
+ 9LWilUmPMwPZu80YToWcDZ37H1X1AGg70=
+X-Google-Smtp-Source: AGHT+IG483uFeZA2U0Mn5uKaobGYzl/hjbO5qck+KhcFxBs43GRby6jXRWUtr6jOwfyKFBh5yWewcTXkV7OJ0JTeslM=
+X-Received: by 2002:a17:907:d8d:b0:ad5:5067:6bb9 with SMTP id
+ a640c23a62f3a-ad85b1de2e2mr119756766b.47.1748063166941; Fri, 23 May 2025
+ 22:06:06 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:06:02 -0500
+ HTTPREST; Fri, 23 May 2025 22:06:05 -0700
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:06:02 -0500
+ HTTPREST; Fri, 23 May 2025 22:06:05 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250510110535.1453745-16-sjg@chromium.org>
-References: <20250510110535.1453745-16-sjg@chromium.org>
+In-Reply-To: <20250510110535.1453745-15-sjg@chromium.org>
+References: <20250510110535.1453745-15-sjg@chromium.org>
  <20250510110535.1453745-1-sjg@chromium.org>
-Date: Sat, 24 May 2025 00:06:02 -0500
-X-Google-Sender-Auth: I6i1lJhlyafT1G9zj8hONx1yC4c
-X-Gm-Features: AX0GCFuLK0s-mWJffwRyBqvP3keME_T-m1aNckVYUzjUW7Ixps724xPQ1oMTrD4
-Message-ID: <CAFLszTjoz1+xEc2SpN0EOHQ_-TAREuVXAQVu3gmhZmJGyOBgJQ@mail.gmail.com>
-Subject: Re: [PATCH 15/25] patman: Use -c to show patch comments
+Date: Fri, 23 May 2025 22:06:05 -0700
+X-Google-Sender-Auth: qvvBAbAkgP73_HqesIW2JDhIaww
+X-Gm-Features: AX0GCFve0JPbOVSITdkMoSrTJjFU0gQExE9VP-RnUR7BCrc7uIFyRjRxATXhTxY
+Message-ID: <CAFLszTh0gsu8q6qS71-L4Oa2LNvOvn6A-jB1X9Smv6i6Rqmo7A@mail.gmail.com>
+Subject: Re: [PATCH 14/25] patman: Enhance implementation of file-based
+ defaults
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Brandon Maier <brandon.maier@collins.com>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,21 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We chose -C as the flag to enable showing comments because -c was used
-in 'patman send' to specify the patch count. Now that the 'send' parser
-is separated we don't need to do this and it is OK to use the same flag
-in a different subcommand.
+Patman allows defaults for its command-line flags to be read from a
+file. The implementation of this does not fully work with subcommands,
+since we don't want a default for those.
 
-We want to have a flag for cover-letter comments, so it makes most sense
-to have -C for that and -c for patch comments. Update the latter.
+Also, it relies on being able to parse any sort of cmdline in order to
+figure out the options that are available. But in some cases, the
+cmdline may not parse, e.g. if there are required options, or
+conflicting options.
 
-Put this in a function since the new 'series' command will add this flag
-too.
+Add a class which can be safely used to parse any cmdline, since it
+allows execution to continue even when errors are obtained. Use this to
+determine the defaults, being careful to skip sub/commands.
+
+Another way to handle all of this would be to maintain the defaults
+separately and insert them into the parser manually. For now, I'm not
+sure which is best.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/cmdline.py | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ tools/patman/cmdline.py  | 21 ++++++++++++++++-
+ tools/patman/settings.py | 50 ++++++++++++++++++++++++++++++++++++----
+ 2 files changed, 65 insertions(+), 6 deletions(-)
 
 Applied to sjg/master, thanks!
