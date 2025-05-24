@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FB5C54E71
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40AEDC54E71
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 05:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A62DE83477;
-	Sat, 24 May 2025 07:06:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D34783559;
+	Sat, 24 May 2025 07:06:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZveU0Qxc";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ct5+KNK6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BA0283483; Sat, 24 May 2025 07:05:59 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 9FC99835AA; Sat, 24 May 2025 07:06:01 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CE05835A2
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:05:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D5DE83477
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-601968db16bso1044241a12.3
- for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:05:57 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ad1f6aa2f84so105542166b.0
+ for <u-boot@lists.denx.de>; Fri, 23 May 2025 22:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748063156; x=1748667956; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748063159; x=1748667959; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IzMdCTkShDvnHBmGfbo+pEkZH9uiRaveAdojJAocBY4=;
- b=ZveU0Qxch5LYQmK+X/LfitAQTOSCl0L1GIqJtvbjt0vLL+c/IjvK5I3zUMue6/12NV
- wa55spmQEPpw6lNaX2VrsOVkH5n6KncF3ISZpX0muFvikHb6H6zLywdWIvfqB6085Z/1
- wHQGnM+rOcz9bjL+jP+VcTbVKNhxtEyUF+t+s=
+ bh=by/DxVfRFE6Dyb6vNOZ0A26LxULmSkVJOtgqRcD54Zg=;
+ b=ct5+KNK69scNxm6DLLn2fIvrEurnw55djaDnGI4063rTdY3Fd5xSSbqwU4/geaOpE6
+ MO55zfemx5jr/Q3ldh9W92+trFhzicc7PHpaYwSkaT9CKrItUY2BBbK4Qk41NId45udL
+ 5T3RTSzUw96XvTjv0ALEYHblIqfggQDGYvo/s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748063156; x=1748667956;
+ d=1e100.net; s=20230601; t=1748063159; x=1748667959;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IzMdCTkShDvnHBmGfbo+pEkZH9uiRaveAdojJAocBY4=;
- b=XbwfPF6QfkAY6aqHn/CEJkRPVyN1Q2cno7fOcMPANbMdafVgruQG90Sf+Y9sFyBW6e
- Pr+pTHuwAIvEdDK7zMmklWpWAqffkHEvAoCV4w8JZTCjyoKBt31bBvERa3p407tUuEeG
- WGvT6KMoitIzNd536NA4J6cU4wSpV9KgKss6iu5i0MA6aDX5RGkBugmqGkzUHWZk6itX
- ruo2tWz1T6HZVgGCZV7VGSj5qU5yA5vfL27aJ1DS4YKVjjkNGwsDvYDCETi+Dejt+6Td
- ftRHSN+nKUVNOBWgt2k6O7vRabWjRFHrZqv7CNfRdKOaC9bVS9nbwJGWStEezE9KHbkf
- aqHQ==
+ bh=by/DxVfRFE6Dyb6vNOZ0A26LxULmSkVJOtgqRcD54Zg=;
+ b=A+653Bx787klKmkY2JiCUu/IT/W/3nd2CTWZEEJYFUYlQy43FFb8MQHgDPLanJ49Bt
+ Q9ibKrDVgCwjq6JkB4wu/xUZavW/muMy/I571L2dlBbwzAbx1qKxTrLG8bKwU71QJnnR
+ ZVpDysGEB0WAiGO7tb/5HtG5OpyDvfwYVO3l/ekZXXadTlkuOwWO0OhiaD+5Lye+bWpa
+ BFh1m7wOsy/15v+LQHKjRVYRF3rXBWlQC6skooqtZz/rAH3bWjo82LGxmNl7rcHryYBR
+ RTjo/fuu+tlFDRsUQVEUAU0tRK2AZl1bCxihdpJoIihdUjPuCXFWC/OXOy83YYjZr67d
+ YoGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLZTKTkUtguRO1y/pVi0hHOsn7SunC3cYxBpCkOc9JA2tQRMZdUzFn0EM8vWR3fSx+9SF9NK8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBU5ZeaQO19DhTiLofvydmf2Nw0ggQNfxja/Nx+dykG/dukHWz
- WHukWYEuEekMKHQQr8udNQSjzvPvjmZmxM1e8EKjAgfpzelkYb5un/8s1hjsdPnoshw5UUqRQoL
- e+inRoEyb82Sj5BuaU87O4kQeLHa23RmBZZcyV8Qa
-X-Gm-Gg: ASbGncu6wnwB6XBG2lrj+/icSvA8jet95a1nZ125PsGgy2MQXbphJUeGyZMlD1+79Tw
- Ct6Jg4kgYkKoy12YsnAF9wPH7KABeYJwS7Epri/IP1AMPQe4/g/+iG8I2zcFoyOhYIoLnNFfmbg
- kPKHayIcx3aL03RoaDPRG13uOnJgcTJGLV2u19tW9W5w==
-X-Google-Smtp-Source: AGHT+IFAsi3ho0JOg6+GIoQZzMYn764en+M6ov3+4sf7HHK2GnpAJUr6P/8FBVEFw+xexzzSPpjZKlzIwRTJiy26YlI=
-X-Received: by 2002:a17:907:96a8:b0:ad5:ef0:5724 with SMTP id
- a640c23a62f3a-ad85b19f6d6mr122155666b.34.1748063156635; Fri, 23 May 2025
- 22:05:56 -0700 (PDT)
+ AJvYcCWQh6JzlcpoLMN+20cLO9P6wb4SbyXIXUL7CoKrspMQ/DfKWqsP4HcXhWeL/pKWPBpJR+j/DPs=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywcavxoqs4N8hOxHJLRMHXxBvm3r7Qv8kxLe50VXBYf9nfGvpio
+ g9IZkoFTT68m79tAENW+LZr4SZFH5ynC+XJkyBbJMKM6t6hXJGd/9hKZrdbByQ08dnaCPopV2QD
+ lPJDUkBS72erF4sI+Ri5T+0asBcMOzglBFNhM3+wOa0tXiuWayoWhmDkw
+X-Gm-Gg: ASbGnctM1/Y4kTHT6ZXqOahkjxVZCHvGZG3a+Afbfy2BpgRyc4+8lXGCluYtDboDNL+
+ HAWwaVGOBIzT99dqZM7CEh/aRriwthKZB7FDJtDHnbwDl7XsIhlObL11ZUkVFnrp/M5c6z7WPLc
+ zyssSjPspO6QLg456zTXRegQAFM5TMJmI=
+X-Google-Smtp-Source: AGHT+IHhDUny0ezLNV3yw38T1k0ZhmpotHkK0+Ze8TSfedw4AszsdckLntgv+qv1mFmGxZ42h3v3hDGFIFcRDCL+TmQ=
+X-Received: by 2002:a17:907:1b27:b0:aca:95eb:12e with SMTP id
+ a640c23a62f3a-ad8599ed438mr133773066b.24.1748063159148; Fri, 23 May 2025
+ 22:05:59 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:05:54 -0500
+ HTTPREST; Sat, 24 May 2025 01:05:57 -0400
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 May 2025 00:05:54 -0500
+ HTTPREST; Sat, 24 May 2025 01:05:57 -0400
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250510110535.1453745-19-sjg@chromium.org>
-References: <20250510110535.1453745-19-sjg@chromium.org>
+In-Reply-To: <20250510110535.1453745-18-sjg@chromium.org>
+References: <20250510110535.1453745-18-sjg@chromium.org>
  <20250510110535.1453745-1-sjg@chromium.org>
-Date: Sat, 24 May 2025 00:05:54 -0500
-X-Google-Sender-Auth: 6CKPinRNTZwlYSiW8iMvlO4ss0w
-X-Gm-Features: AX0GCFsnVeklu0DNSRFCyaatKOa9GmQuPE4uJGTup18rAEMpPQ7vHXFx0TCr4MQ
-Message-ID: <CAFLszTh_E65b1+rBv-x4M-n5REqde5LYjwikeVZASfHh51UUYw@mail.gmail.com>
-Subject: Re: [PATCH 18/25] patman: Improve Series support for patchwork links
+Date: Sat, 24 May 2025 01:05:57 -0400
+X-Google-Sender-Auth: Iku9hILeCiw4oCnrfM43xWf-VGQ
+X-Gm-Features: AX0GCFstk6JRNlbUQzC7va5JyZx825100eTEC9rrpu8eR1LitSA-N0DlvW3IaC0
+Message-ID: <CAFLszTiZq-cJ=z1dnwr5rR0KuEuQJzTH+8vF0ucuzUXLOH5+PA@mail.gmail.com>
+Subject: Re: [PATCH 17/25] patman: Introduce basic database support in Series
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -93,15 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update Series with a way to better manage the Series-links lines in
-patches. Use this in the 'status' subcommand instead of the existing
-primitive method of expecting a link without a version prefix.
+This class manages a series, i.e. a group of patches with a possible
+cover letter. Add some properties for recording basic patchwork info,
+including the database ID.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/control.py | 25 ++++++++++++-------
- tools/patman/series.py  | 55 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 71 insertions(+), 9 deletions(-)
+ tools/patman/series.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
 Applied to sjg/master, thanks!
