@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D54C54F30
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 15:41:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A41C54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 15:41:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F3B283043;
-	Sat, 24 May 2025 17:41:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E730835FD;
+	Sat, 24 May 2025 17:41:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U2eWyW40";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DyQygbJ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20C7C835C7; Sat, 24 May 2025 17:41:31 +0200 (CEST)
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com
- [IPv6:2607:f8b0:4864:20::d42])
+ id 4B0A7835CD; Sat, 24 May 2025 17:41:33 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0B5683595
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 17:41:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A1C782D06
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 17:41:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd42.google.com with SMTP id
- ca18e2360f4ac-85e1b1f08a5so18555139f.2
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 08:41:28 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3da73df6c4eso6554535ab.0
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 08:41:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748101287; x=1748706087; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748101289; x=1748706089; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iriQ4MbN7o/oX4vmRp4DYhni7FkxkaodQEoxBU2NNtk=;
- b=U2eWyW40QAO2BXF1d7LzIIP1CYQqqHTEtgkT/pfTM61+q9lKwsECqV249Bff2B2NzB
- TgX/cSGP7nV4azk58PiCAbl2tz9HzgU1kh7/lJkoayYtnDEqnMPQnIGqvhMxCi7qZBFF
- lb3Vdg++WxKKYYH/aROTUSooJGObd1pBPaQ3w=
+ bh=sZ6Ajnn6AUEChhkdsumd2A7DIJ3DzK65XmjMIaPq+Is=;
+ b=DyQygbJ0denDRG8ianSf9ILbuVDZB+q6urNavtwXuzqefaCjKkbmcQew3eAY3ZBW5p
+ 2j4yZqjSpi6YYcv4B9LZTE/isY4BWcQgyhyn9WOj+N1kxZmxa3MTjen7Ha8BDvorx51K
+ 8j2N+IlSlxWN8GkrlUh1UMbBvNexPfYo7Npps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748101287; x=1748706087;
+ d=1e100.net; s=20230601; t=1748101289; x=1748706089;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iriQ4MbN7o/oX4vmRp4DYhni7FkxkaodQEoxBU2NNtk=;
- b=wCaJ48xr3UdxJPj01odCCBtnoNO0EagU4+N+j2WknVj02ntzP17kH2D7TZnzIgF/3e
- VLWqPyel2tL9a1TaLD80Svb4FFKE7Ffdck1/rTTej8ut9e32H/BRmzk4jLjdlB02moPo
- Brgo19zyYeR2dmDdhDEg08wY1pQZfWVq4XG0VbqG1q9fIO75CKP3WIz25doOJdtcksBC
- 3/xCWrmVQtyVlJrIq00l15jU8sqTRUp67jHGQ2rGPjn/aRYoK0ELZoUL0l+McvnPxRG4
- +mn8NoWQOBJFyhiRVzPWA6mnkKs3/xj7yuVX1ZZ66OCeY/u3ufJh25fBTvx5IiGJtE2G
- r7DQ==
-X-Gm-Message-State: AOJu0YzSeLkzmmolvfumlkEaUdmv9qetbpbbIbF/23OLm3IMZu2S5UPf
- oD0kibiNH/rDtdQl0/dvuEeFT9gvANJMuPTtmCxVB4Sl8s6gCqO4qK/1w1rUJNBDMMAoxK8kUkp
- fnUVnch5bgns=
-X-Gm-Gg: ASbGncvHqv8/Px57jsEx2jPUGOsNVqnY5/3rIa0JLnIS2dGxY9LzwliaHdEHB2Gk7BW
- dNBgAQJCkWOTDZqP1JoU7NijXlSy5NED8laynTpdHODIPgoxFISwPYOmFManZnH745SZqhQJeOk
- DKRZ19nbopFV/hzimoKWRwyZtzyfDxZUsgw9DMaCj++qxtFkoAMooDFLvmbj1NfiJoLDSIbqD8R
- F4aWDp8Ah7C0AsCoMBDohy3YpD4jXoj45BYGbHdr91bNpy03VwSB+aH94Qt0rIQOBxi9y+Gygdl
- RR8vUOsxWoUmb7aDcuYEaPP6zC+hG7S6OLzJmHmPpJBJ0oJmY6nmfSUAqByG396Bz6Gl9Vd0IIa
- XBM49YY3QIKkD
-X-Google-Smtp-Source: AGHT+IFmf9YRW0LFw7OsCpIhmzFNs66Jf/XuxRhDnYs9fudFNTShgsfKRefOIFTHEJNA4NN+x8H0bQ==
-X-Received: by 2002:a05:6602:6a95:b0:861:7d39:d4d3 with SMTP id
- ca18e2360f4ac-86cbb7b2859mr336289239f.3.1748101287161; 
- Sat, 24 May 2025 08:41:27 -0700 (PDT)
+ bh=sZ6Ajnn6AUEChhkdsumd2A7DIJ3DzK65XmjMIaPq+Is=;
+ b=s2GDHywrASDNqA/inJgfQJ09Voli9c8IXyKyWiHTMjjrzhAf+XemVryJBa+FZ7bxnu
+ I3HOJ+I7F6Ln8rPnEiJ46WYTJdDAB00CFEJUBUs+HQpSbwh0e2cO5j0KkSdZNEEiKxFl
+ 3UuzH3EkTzgDYle4YoVl2jN3kwr/CKJnESGSFCw8HPcFl9eg8TUwNZOHxB7WSWCw0ynK
+ MJR+ON9pV7SAboVfRmkHXRuKKy+k+i+rul/ZdvHUcGXtnbOBsuoPfHUgmAttI9aqTY+2
+ 5tieDfP6+B0HE94kHjpFz28QCN8kRLXNHJfgLWr39yti5Iy4Hv1yFtLP1ax4Kj3evWUR
+ MDkw==
+X-Gm-Message-State: AOJu0YyYP23vZ7/X2BKu6iISiKsnLdLTObzjLAFtaImamYc3OcNqVKgQ
+ eHbSrKIjX3w8UcHJ9Mg1JT8gMsm+fkVTIEWoKnshSbth7VRIVYdOpmHMaih2FZesH78VtqjMPtn
+ 9p+CPnefw
+X-Gm-Gg: ASbGncvTaWBYHYL4q/GfLB/mz4E/3ql/JEEQTmdNPF7wDSHX+iHqn+/QMcPCjRo3ceB
+ 1q7fAVr94qLcLufQtzV7ARflRObyNKMqUVbAqgYEp/1CVU0X5JpW2Un8p9+GLuR8qm2Y9C5Sscm
+ +tpvAVKO7koxtLO3EXx3PUWj3nnQYN0bnn0Pgc1Ybw32HOayJegGe2k37wrpycLq7ChbbXZkNHI
+ 5dieMZNoxlOCDOO5XC/GiCMUFe0v9TJaajYGq2RY+1f7QPoEdklgz4gRcp/FxDmOhko5qZXeTRg
+ lRTpq5hxrR8HQGWzPHTaGrzOhChegr6eFHu93abrpkmsh9Zu3pSw7Qm4AtjnnyS231SugKl264F
+ I/yGIrnPiApgg
+X-Google-Smtp-Source: AGHT+IHiVJu9qf7Ze1RXylRCC82zOTU+8uz/ohf+eeTh+oPAx+RWshJkT+7HiVZlA4LgiFqKLELSWg==
+X-Received: by 2002:a05:6e02:174a:b0:3dc:757b:3fab with SMTP id
+ e9e14a558f8ab-3dc9b68e03fmr27130065ab.6.1748101289278; 
+ Sat, 24 May 2025 08:41:29 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fbcc4b1543sm4040779173.121.2025.05.24.08.41.25
+ 8926c6da1cb9f-4fbcc4b1543sm4040779173.121.2025.05.24.08.41.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 08:41:25 -0700 (PDT)
+ Sat, 24 May 2025 08:41:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/6] bootstd: Indicate refresh need with bootflow_menu_poll()
-Date: Sat, 24 May 2025 09:41:09 -0600
-Message-ID: <20250524154117.1217190-3-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 4/6] expo: Allow changing scene_img data
+Date: Sat, 24 May 2025 09:41:10 -0600
+Message-ID: <20250524154117.1217190-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250524154117.1217190-1-sjg@chromium.org>
 References: <20250524154117.1217190-1-sjg@chromium.org>
@@ -98,61 +97,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the user presses 'up' when on the top menu item, it is a waste of
-time to refresh since nothing has changed.
+In some cases we want to change the image data used by a scene_img. Add
+a function to handle this.
 
-Add a new return code from this function to indicate that the UI must be
-refreshed.
+Adjust the BMP function to use a const for the data, since it is not
+allowed to change it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootflow_menu.c | 2 ++
- cmd/bootflow.c       | 2 +-
- include/bootflow.h   | 4 +++-
- 3 files changed, 6 insertions(+), 2 deletions(-)
+ boot/scene.c              | 13 +++++++++++++
+ drivers/video/video_bmp.c |  4 ++--
+ include/expo.h            | 13 ++++++++++++-
+ include/video.h           |  2 +-
+ test/boot/expo.c          |  6 ++++++
+ 5 files changed, 34 insertions(+), 4 deletions(-)
 
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 1966e38a6d6..2f08fa54081 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -310,6 +310,8 @@ int bootflow_menu_poll(struct expo *exp, int *seqp)
- 		ret = scene_menu_select_item(scn, OBJ_MENU, act.select.id);
- 		if (ret)
- 			return log_msg_ret("bmp", ret);
-+		if (act.select.changed)
-+			return -EREMCHG;
- 		return -ERESTART;
+diff --git a/boot/scene.c b/boot/scene.c
+index 61b943e2b52..5d2d6617491 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -1173,6 +1173,19 @@ void scene_highlight_first(struct scene *scn)
  	}
- 	case EXPOACT_QUIT:
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 9d449f430c9..3bdebd96bda 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -126,7 +126,7 @@ __maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
- 				return log_msg_ret("bhr", ret);
- 		}
- 		ret = bootflow_menu_poll(exp, &seq);
--	} while (ret == -EAGAIN || ret == -ERESTART);
-+	} while (ret == -EAGAIN || ret == -ERESTART || ret == -EREMCHG);
+ }
  
- 	if (ret == -EPIPE) {
- 		printf("Nothing chosen\n");
-diff --git a/include/bootflow.h b/include/bootflow.h
-index c0e19feb9cc..18bfa1fe8b1 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -688,7 +688,9 @@ int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
-  * @exp: Expo to poll
-  * @seqp: Returns the bootflow chosen or currently pointed to (numbered from 0)
-  * Return: 0 if a bootflow was chosen, -EAGAIN if nothing is chosen yet, -EPIPE
-- *	if the user quit, -ERESTART if the expo needs refreshing
-+ *	if the user quit, -EREMCHG if the expo needs refreshing, -ERESTART if
-+ *	the user tried to move to a new selection but was unable (e.g. already
-+ *	at the top and tried to move up)
++int scene_img_set_data(struct scene *scn, uint id, const void *data, int size)
++{
++	struct scene_obj_img *img;
++
++	img = scene_obj_find(scn, id, SCENEOBJT_IMAGE);
++	if (!img)
++		return log_msg_ret("sid", -ENOENT);
++	img->data = data;
++	/* TODO: Consider using an abuf for the image */
++
++	return 0;
++}
++
+ static int scene_obj_open(struct scene *scn, struct scene_obj *obj)
+ {
+ 	int ret;
+diff --git a/drivers/video/video_bmp.c b/drivers/video/video_bmp.c
+index 1f267d45812..478b8fbe5fd 100644
+--- a/drivers/video/video_bmp.c
++++ b/drivers/video/video_bmp.c
+@@ -242,10 +242,10 @@ static void video_splash_align_axis(int *axis, unsigned long panel_size,
+ 	*axis = max(0, (int)axis_alignment);
+ }
+ 
+-void video_bmp_get_info(void *bmp_image, ulong *widthp, ulong *heightp,
++void video_bmp_get_info(const void *bmp_image, ulong *widthp, ulong *heightp,
+ 			uint *bpixp)
+ {
+-	struct bmp_image *bmp = bmp_image;
++	const struct bmp_image *bmp = bmp_image;
+ 
+ 	*widthp = get_unaligned_le32(&bmp->header.width);
+ 	*heightp = get_unaligned_le32(&bmp->header.height);
+diff --git a/include/expo.h b/include/expo.h
+index 6acbc54c648..522f6a93f98 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -368,7 +368,7 @@ static inline bool scene_obj_can_highlight(const struct scene_obj *obj)
   */
- int bootflow_menu_poll(struct expo *exp, int *seqp);
+ struct scene_obj_img {
+ 	struct scene_obj obj;
+-	char *data;
++	const char *data;
+ };
  
+ /**
+@@ -708,6 +708,17 @@ void scene_highlight_first(struct scene *scn);
+  */
+ void scene_set_highlight_id(struct scene *scn, uint id);
+ 
++/**
++ * scene_img_set_data() - Set the image data for an image object
++ *
++ * @scn: Scene to update
++ * @id: ID of existing image obejct
++ * @data: Image data to use
++ * @size: Size of image data
++ * Returns: 0 if OK, -ENOENT if @id is invalid
++ */
++int scene_img_set_data(struct scene *scn, uint id, const void *data, int size);
++
+ /**
+  * scene_set_open() - Set whether an item is open or not
+  *
+diff --git a/include/video.h b/include/video.h
+index 2fbf8a9598a..5b539eafb89 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -310,7 +310,7 @@ void video_sync_all(void);
+  * @heightp: Returns height in pixels
+  * @bpixp: Returns log2 of bits per pixel
+  */
+-void video_bmp_get_info(void *bmp_image, ulong *widthp, ulong *heightp,
++void video_bmp_get_info(const void *bmp_image, ulong *widthp, ulong *heightp,
+ 			uint *bpixp);
+ 
+ /**
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index b025e48469f..239591ff6cd 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -262,6 +262,7 @@ static int expo_object_attr(struct unit_test_state *uts)
+ 	struct expo *exp;
+ 	ulong start_mem;
+ 	char name[100];
++	char image[10];
+ 	ofnode node;
+ 	char *data;
+ 	int id;
+@@ -305,6 +306,11 @@ static int expo_object_attr(struct unit_test_state *uts)
+ 	ut_assertok(expo_setup_theme(exp, node));
+ 	ut_asserteq(30, txt->gen.font_size);
+ 
++	/* try setting up a fake image */
++	strcpy(image, "wibble");
++	ut_assertok(scene_img_set_data(scn, OBJ_LOGO, image, sizeof(image)));
++	ut_asserteq_str("wibble", img->data);
++
+ 	expo_destroy(exp);
+ 
+ 	ut_assertok(ut_check_delta(start_mem));
 -- 
 2.43.0
 
