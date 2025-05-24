@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21455C54F30
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 13:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E941C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 13:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FD0C83082;
-	Sat, 24 May 2025 15:44:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91A8E831C2;
+	Sat, 24 May 2025 15:44:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d+JXF4ZH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P0YFrQgz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C07D830B4; Sat, 24 May 2025 15:44:05 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 87B67831FE; Sat, 24 May 2025 15:44:08 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 067E882E8E
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 15:44:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63D04830E9
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 15:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3dc6f653152so2159305ab.3
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 06:44:02 -0700 (PDT)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-85e73562577so83914639f.0
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 06:44:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748094241; x=1748699041; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bUZaj5uKg5cGp+RGtTemOOOzppPzxVkAot2HtyLbNXY=;
- b=d+JXF4ZHv2I+Y3A7dylCEjc64BZGeKTxMpNay8Out6ZUF1l9eJtcuWuIvmL1eGODuc
- 85EN1AOvTS7bGWzCsQYd+gWY87AdTyAG60rgR/tlS+5xgr4gY+iaDp7f5DTYEOYYu6Lh
- WHjYEdWq6L54LpWZ587z6KEEbxpHyeCrZQniY=
+ d=chromium.org; s=google; t=1748094244; x=1748699044; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6BhWs1hA3vTCAImvTiOQLtcJkVA7H7X3jrNx7/sUvGg=;
+ b=P0YFrQgzidvlYhodEoEinNFLg8vr7oezcyDx6uL/w/4lZCNbewvihh59KPOFyvWuWV
+ fw4VJ6q2EqcWvrioQf948aejvui6QDyn7QIpWxJFqUR6ZKKfm6kVi/dG9mQvSJRj5YCx
+ 7hUmSYjMLsL3Mm12EAd7EHbmnUwbxEoeaNFkI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748094241; x=1748699041;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bUZaj5uKg5cGp+RGtTemOOOzppPzxVkAot2HtyLbNXY=;
- b=VAqGNJ7MjslGaIg1WnlquB0FUG53Eqz450HYpOfxluOgfNw/qyTo05y2SPXXOjY2F5
- belqw2WGnzEakxJnOUZEcHjW9FiILsY5tHtVe4t0kYS3wM2zROfHkwHIdCkWKmevzP6o
- XhYtQ9ZA39sHGOckKTme/vBXTMmjXN6NdN+ve5CHqBKh8OWLLMMFvpvN5JtGr4wbz5co
- ybD4cJo3Y5sfKbFU1mfngK7nugmrIokwyl8rESQzWR2hyjBrcLll9OyuIHF5Nh/QMiKm
- SoU3ABKYA8uhVFVJ7gTgIvlYpV0f468IWk95Qr7znjcm/I8N+f7mtuztMpAHFJny4v3O
- fwmw==
-X-Gm-Message-State: AOJu0YxtegT8DPJtgJaW9rrgl7KmH+EbL1CqNNQBp13gihnTWciokRv1
- VmyxG6GXgqcjSITHLxpleA33qb8sdQJ7q2zTONLAqRpBSz8TKwNOtslGY/5EO+2BbGmA85ovy4H
- RnzKm8n+Z
-X-Gm-Gg: ASbGncsQdNPl+4G6oRKDQ6JlxOeeUQ4DyUcSMo9bLl9AeUhsmjVJFrvbhKF8KX+2J1d
- 6fqxhoJ92DDQH8IH2Tl3jg866BiUP6yfon17mJBJEZrxXarSpOtWqAro4jsylKpvM5N90ty/iKo
- TL8ESn+HR2vl8qvjEeQMCtT9wvziCu0rMmdz2Cqyyjbz0WrQPVu4RFMAsE5VvMvTiufTBN0k+vM
- XFPq30pUY/IifySXG67jU6vw3ctekYHdGhOUWxSbou2sX9EwUTOuUeMGlhr6W2G9dQ6eAS74na2
- 6hazXzZa8+Fd5YuIMe9bqIZ5P4fUnqvCFcK+ZOyaUwHtVXbAPyB84pYPpTUXq5zx3Xm2ESy0hBV
- yrFxxA4j2eyKH
-X-Google-Smtp-Source: AGHT+IGe2DEBKrE1vuOEe2Y304a3hckkxJwZQ+2tbH6Uab9ZQWpahnegfGCA+WApMZFVlHzf5SA3Zg==
-X-Received: by 2002:a05:6e02:3788:b0:3dc:8273:8c81 with SMTP id
- e9e14a558f8ab-3dc9b719446mr25117935ab.22.1748094241139; 
- Sat, 24 May 2025 06:44:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748094244; x=1748699044;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6BhWs1hA3vTCAImvTiOQLtcJkVA7H7X3jrNx7/sUvGg=;
+ b=oin+7KhZP1bvCPL4iCLGQechNk66qZQREIixwFDejHlq9crw03y/WYBx5GkYlu9Klq
+ WsgM+y7q3PeKXoiFAeES6nuC9y3pSYirVd9WwK3Y+eVpo2Ulx8hq9c7YOEl4MJSWC8qg
+ DD3F/pjg9/AUy5m8gZ5CUTj6zcx/rNMrwzVA5hyk9SbDXE98Iqcr4aZ1w4PwZKSCV5t8
+ VtcBw9IUQvYYG9w8gbzAKZNw2HGLmCy45+ImgIUNlqfwm66WvX1B4PyzpRO3DaQfdsh4
+ cDxxEDKJ5sC0GHpUFDLwNBhDBcZ6QPpGFB6HeSNj6XjGhaIdI8ufr5pc/ayJnEOVx5jg
+ jZhg==
+X-Gm-Message-State: AOJu0YwQ+EZbIXtDoarJwTda5bWIF4f/vmFgS+BinnJWQTQTIfAbWAuu
+ IprQM06ejT+nbS+gO9Xp9JcgMjFp1j+lrd3dwhoAdoyZzHGI6yH1Oji15OOo1Pi1EIAXz9/NjJ5
+ wTcLoGLlD
+X-Gm-Gg: ASbGncukV0wJFhsOjkq344adEQdo7XY+DxhtbZULeqyaEMcU4lCBYalrNhsWvM/mNLi
+ dfOZtWew4KvfiMsuiRsicKjpy7kUlcOBISIcYqgAYtqXb9q4KRWxZLSIsYs8htG8g9Sl32dA0ua
+ YC3R1rD6Udq8DmA9Mc5fbs2O33qC9kU890Ee9wKPSG2ts5uQsfYKOtYYurMPqDe65kkzjQRUn7N
+ YG0xsCQOesZPnKpd59NfWN1VuBXYDaE0ySsmZ8aB+CAAcdT1PicdHZAoCfDPUuEgJSuj6dOAGaJ
+ P/Mc6d8EMy8h6omMM/YCRKwQXf6jQYovuwA4IRbpfqcr9E9Um/7wmX1+mGlY8G+DZD5oZ9DpVTx
+ khIc+8wUBN/DD
+X-Google-Smtp-Source: AGHT+IEBcaQ+m3qqe3Gz+XPNcJfrQx43b4skrxbHcuAaT1vOlHrTN93CoI+enLaWaqyYw5qH6F6htA==
+X-Received: by 2002:a05:6e02:2185:b0:3dc:7f17:72cd with SMTP id
+ e9e14a558f8ab-3dc9b724814mr23486425ab.19.1748094244115; 
+ Sat, 24 May 2025 06:44:04 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fbcc38bf26sm4033091173.19.2025.05.24.06.43.59
+ 8926c6da1cb9f-4fbcc38bf26sm4033091173.19.2025.05.24.06.44.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 06:43:59 -0700 (PDT)
+ Sat, 24 May 2025 06:44:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
- Martyn Welch <martyn.welch@collabora.com>,
+Cc: Simon Glass <sjg@chromium.org>, Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] bootstd: Add a function to find an image by type
-Date: Sat, 24 May 2025 07:43:46 -0600
-Message-ID: <20250524134356.939898-1-sjg@chromium.org>
+ Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/2] bootstd: Improve parsing on extlinux.conf files
+Date: Sat, 24 May 2025 07:43:47 -0600
+Message-ID: <20250524134356.939898-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250524134356.939898-1-sjg@chromium.org>
+References: <20250524134356.939898-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,103 +97,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a way to locate an image in a bootflow based on its type.
+These files can have tabs, but they are currently parsed as separate
+lines. Fix this.
+
+Also, some files provide a separate 'menu label' which has more
+information than the 'label', so use that if available.
+
+Finally, we don't yet have the ability to parse all entries in the
+file until the user actually boots the extlinux.conf file. At present,
+this means that the last entry is shown. It seems better to use the
+first entry, so update it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootflow.c        | 13 +++++++++++++
- boot/bootmeth-uclass.c |  2 +-
- include/bootflow.h     | 11 +++++++++++
- test/boot/bootflow.c   | 16 ++++++++++++++++
- 4 files changed, 41 insertions(+), 1 deletion(-)
+ boot/bootmeth_extlinux.c | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 76dadb93be1..ec455e86215 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -998,6 +998,19 @@ struct bootflow_img *bootflow_img_add(struct bootflow *bflow, const char *fname,
- 	return ptr;
- }
+diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+index 71a9009479b..4b9e22b8d7c 100644
+--- a/boot/bootmeth_extlinux.c
++++ b/boot/bootmeth_extlinux.c
+@@ -83,13 +83,28 @@ static int extlinux_fill_info(struct bootflow *bflow)
+ 	log_debug("parsing bflow file size %x\n", bflow->size);
+ 	membuf_init(&mb, bflow->buf, bflow->size);
+ 	membuf_putraw(&mb, bflow->size, true, &data);
+-	while (len = membuf_readline(&mb, line, sizeof(line) - 1, ' ', true), len) {
++	while (len = membuf_readline(&mb, line, sizeof(line) - 1, 0, true), len) {
+ 		char *tok, *p = line;
++		const char *name = NULL;
  
-+const struct bootflow_img *bootflow_img_find(const struct bootflow *bflow,
-+					     enum bootflow_img_t type)
-+{
-+	const struct bootflow_img *img;
-+
-+	alist_for_each(img, &bflow->images) {
-+		if (img->type == type)
-+			return img;
-+	}
-+
-+	return NULL;
-+}
-+
- int bootflow_get_seq(const struct bootflow *bflow)
- {
- 	struct bootstd_priv *std;
-diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-index 02bbe77b563..5f2e10c879b 100644
---- a/boot/bootmeth-uclass.c
-+++ b/boot/bootmeth-uclass.c
-@@ -388,7 +388,7 @@ int bootmeth_alloc_other(struct bootflow *bflow, const char *fname,
- 	if (ret)
- 		return log_msg_ret("all", ret);
- 
--	if (!bootflow_img_add(bflow, bflow->fname, type, map_to_sysmem(buf),
-+	if (!bootflow_img_add(bflow, bflow->fname, type, abuf_addr(buf),
- 			      size))
- 		return log_msg_ret("boi", -ENOMEM);
- 
-diff --git a/include/bootflow.h b/include/bootflow.h
-index c0e19feb9cc..1c3f950bfe3 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -647,6 +647,17 @@ const char *bootflow_img_type_name(enum bootflow_img_t type);
- struct bootflow_img *bootflow_img_add(struct bootflow *bflow, const char *fname,
- 				      enum bootflow_img_t type, ulong addr,
- 				      ulong size);
-+
-+/**
-+ * bootflow_img_find() - Find the first image of a given type
-+ *
-+ * @bflow: Bootflow to search
-+ * @type: Image type to search for
-+ * Return: Pointer to image, or NULL if not found
-+ */
-+const struct bootflow_img *bootflow_img_find(const struct bootflow *bflow,
-+					     enum bootflow_img_t type);
-+
- /**
-  * bootflow_get_seq() - Get the sequence number of a bootflow
-  *
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 0dd8fa71261..a39757627c7 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1488,6 +1488,22 @@ static int bootstd_images(struct unit_test_state *uts)
- 	ptr = map_sysmem(img->addr, 0);
- 	ut_asserteq(0, *(ulong *)ptr);
- 
-+	/* check we can find images */
-+	bflow = alist_get(&std->bootflows, 1, struct bootflow);
-+	img = bootflow_img_find(bflow, (enum bootflow_img_t)IH_TYPE_SCRIPT);
-+	ut_assertnonnull(img);
-+	ut_asserteq(IH_TYPE_SCRIPT, img->type);
-+	ut_asserteq(map_to_sysmem(bflow->buf), img->addr);
-+	ut_asserteq(bflow->size, img->size);
-+
-+	img = bootflow_img_find(bflow, BFI_LOGO);
-+	ut_assertnonnull(img);
-+	ut_asserteq(BFI_LOGO, img->type);
-+	ut_asserteq(map_to_sysmem(bflow->logo), img->addr);
-+	ut_asserteq(bflow->logo_size, img->size);
-+
-+	ut_assertnull(bootflow_img_find(bflow, BFI_CMDLINE));
-+
- 	ut_assert_console_end();
- 
- 	return 0;
++		if (*p == '#')
++			continue;
++		while (*p == ' ' || *p == '\t')
++			p++;
+ 		tok = strsep(&p, " ");
+ 		if (p) {
+ 			if (!strcmp("label", tok)) {
+-				bflow->os_name = strdup(p);
++				name = p;
++				if (bflow->os_name)
++					break;	/* just find the first */
++			} else if (!strcmp("menu", tok)) {
++				tok = strsep(&p, " ");
++				if (!strcmp("label", tok))
++					name = p;
++			}
++			if (name) {
++				free(bflow->os_name);
++				bflow->os_name = strdup(name);
+ 				if (!bflow->os_name)
+ 					return log_msg_ret("os", -ENOMEM);
+ 			}
 -- 
 2.43.0
 
