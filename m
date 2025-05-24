@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 408BEC54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 17:07:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5919FC54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 17:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155F983631;
-	Sat, 24 May 2025 19:07:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 683A4834BC;
+	Sat, 24 May 2025 19:07:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PELJ3pYF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hq2ZON1x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D31E83600; Sat, 24 May 2025 19:07:25 +0200 (CEST)
-Received: from mail-il1-x142.google.com (mail-il1-x142.google.com
- [IPv6:2607:f8b0:4864:20::142])
+ id E6B2F835AA; Sat, 24 May 2025 19:07:27 +0200 (CEST)
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
+ [IPv6:2607:f8b0:4864:20::d43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01CEB82E76
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 19:07:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4BD082ED0
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 19:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x142.google.com with SMTP id
- e9e14a558f8ab-3da831c17faso3020965ab.3
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 10:07:20 -0700 (PDT)
+Received: by mail-io1-xd43.google.com with SMTP id
+ ca18e2360f4ac-86a55400913so19512639f.1
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 10:07:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748106439; x=1748711239; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748106442; x=1748711242; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kxgnxpl7x2s7cB+p7DqCJCIZbj9bhsdlRTyiiD6TJ0c=;
- b=PELJ3pYFvY0RUpaF8cejxycJySSjNPOvYZqFKO6NZC4yllXJgJvA8RKRKAMXBC2gJX
- DE6PUfnZl0HYmwIjsCgbCU1orrmqfr5i3gXEkU7PEBrMj3X4TBmkmUH9kW8TOBsWlAVK
- BjxB0Svf3GP6koGIJOCwtec24jmt4eLFLsaKc=
+ bh=ktoK+FhsiBGO9SMx9MoYWujHWCKSlqg6JoXlypaYyuU=;
+ b=Hq2ZON1xpBPKRFVwkLGku4IvicfmeeUetDpfYNQqgR3FWklzoZ3vzkSWJWobSPBlVd
+ d/KXQm10r1cVcU0PGMshcb9Ma0JKBIA5OowmZUkRv41vubrZFvN8ejc8pEwl8EvUXNew
+ kbSDVwKHhCSzyiMJB5hFp+9h3Mb6sFDHOzd08=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748106439; x=1748711239;
+ d=1e100.net; s=20230601; t=1748106442; x=1748711242;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kxgnxpl7x2s7cB+p7DqCJCIZbj9bhsdlRTyiiD6TJ0c=;
- b=VedHCPvFD8VIGqAhcYsegaERScLIrDvadZB19h84/yxbLWdMpPFlPumQocpOGeZIrj
- 6xbt6MzYC62T1fJpX50l785W43xjvxugOyx3BaFNDF2Fq969wwe44P3bnsAJkAzLvXs0
- avYhMDL1zJP9Pfcd4KW8fzyAnl30fWU+tUsKXdHZBKcgscdw3jMmX79s6dFi+fmzBHIB
- noT1qc2Bv89RyS4NbvE/97YHNw5i0XArUWpCCucUm4RbU4HB+rTP4c1hlKpRETclvFBP
- fmfhFcVcShQJHSJDS0ciDLPCrrQzmQTSM1ox2p2Q8vG15v9T505QYm0stWRT4lne8A8V
- s5ew==
-X-Gm-Message-State: AOJu0YzlvYDgqn+SZ0IRQIDbmwjYENrjj6ZMlic/gSMDHjfz72P6THAv
- u+cqjaMI3u0EXBFrKbtOr5F6S5JLnXWXEGqBFBdJKuR51zlQdbUCOzP47C+qBHCDDqSJQ96dAxO
- nCQZgZrNTK84=
-X-Gm-Gg: ASbGncvEb4mmAHbbnuxg+6tcp1JMf2FXfgAuT56KlxB9IpvvfFPeBB/0xaG0Ek/Q6gC
- KftCuoq41lvV9Tjw+eHXpqWE8y9e5ajfd6UgmtAdi6hC1VFxnZ1mBvXOkoqR4iyKK7tS9/mU1LV
- c6wjC0OfjndSCvbgHnefO90exCrqQJvD7BmN0CVErE8hskL4Td5rm5z5oBJyyFpGJ/uN9Eh0+k9
- JLvXea7it6NaTfFId6yXZqkfUS72bmr8lKg88SnwFAbahXE2wt4RPcVgPuBSl63Ei7DOA1kWuGy
- d1ZAvmpTXT+XOnCmXX+nPjPB25svcQi+KaXKgO31KoT4sP80W4dGuiXUqc2Yo9ySPv98RruIIqk
- QnfnxgBGk9oGT
-X-Google-Smtp-Source: AGHT+IHCJ2WSdQijUhN7T/tCpevyC0UQOwr8HkgpVxkhf6eLc9pajyxl1N+VRs2grFgzv/FnI/T7Uw==
-X-Received: by 2002:a05:6e02:3081:b0:3dc:8bd3:3cdd with SMTP id
- e9e14a558f8ab-3dc9b6800f6mr26401445ab.1.1748106439012; 
- Sat, 24 May 2025 10:07:19 -0700 (PDT)
+ bh=ktoK+FhsiBGO9SMx9MoYWujHWCKSlqg6JoXlypaYyuU=;
+ b=RSX33MdMqaUdnOGZPQ9Xa0OBXOkNF1aLEqTaUWMMKtfwxxUMkqnyuSHeBndLPePr1k
+ 2AXG1+Ja5aBC9qcKgDjYX6f3n/FwbCGwNyCTgyUrv66o8/XWl0ZCPA+MUm+y4fqZp0tP
+ Z/Xdybpr5hR/yW7ILwcxJrokD3BOmbOpxGU3yIihHSoc/8U8SNxtUrgAFBOIKZD2kbY2
+ rId75Gr0Z9b4nODmSjCWeI7sAKvp89DlkOdWjMl0PQsZ+kwiydDGRcjv57ALeBQz85r8
+ bx4++qEpRFgj+Zp3VelqDq8Fc1WdnlvE/8GcyXGTemdXnDMvuLcRJ3zZpfwhhln7RwNQ
+ K9jw==
+X-Gm-Message-State: AOJu0Yxzf0ywrNvOo/oT7XfRCfBMdmyyK1qaAMnOj9zDUtGT7Plqnts6
+ f+pP6CEXM2KfzmX0ygZtjMQ2xD+o0wx4JzmWjBpiayB0FU7URDem52UbaTW011KlVV9G1fTwlCg
+ U9yW+BYlW/R0=
+X-Gm-Gg: ASbGnct8YSRsxV1CA0NUgJRabRB3im1ucVNMxtNVtfoQPBSY3AOiH2EuMKBXDLuNkDg
+ MCedO1PuSxozbnSI7usGALBSTYBxRldmQSVxPF/gr4QkOSMl7Rb8NhG96mElJNtdvWoKzR2e16z
+ Q1uLI+R9Da3uQWVG8yEipUqhVHSIoH/OxTOLLRK27BZOPgOwSjrJLoY0uuy1PDb5d71PVaFpwso
+ osqRGzCsbMXBR/+FREhcrjgM8gRa9ytD3RfSi3CVGxYO2EQGnip3LbLA3keFlf0q7fr7M9AzzR6
+ fAqNQprE/AGFE2HFka39VIgaOQLaO/67hCGp2Ejvawd7wvQhYxjWsG0mXsVcSLwHqu8FbT5HC01
+ sSulwKJ7y4Ys4
+X-Google-Smtp-Source: AGHT+IGCGeZcL/LR332iGLBHM/5JZOnNIntLFyPRb/X4st0XAqZdhx92+4f32HQblp2cEWTw4X+BOw==
+X-Received: by 2002:a05:6e02:1a4d:b0:3dc:8b29:30bc with SMTP id
+ e9e14a558f8ab-3dc9b7739d3mr30699725ab.21.1748106441871; 
+ Sat, 24 May 2025 10:07:21 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3dc9e7d18c9sm3940355ab.53.2025.05.24.10.07.16
+ e9e14a558f8ab-3dc9e7d18c9sm3940355ab.53.2025.05.24.10.07.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 10:07:17 -0700 (PDT)
+ Sat, 24 May 2025 10:07:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/7] patman: Allow showing progress on archived series
-Date: Sat, 24 May 2025 11:06:52 -0600
-Message-ID: <20250524170701.1238642-4-sjg@chromium.org>
+Subject: [PATCH 5/7] patman: Allow using the first commit as series description
+Date: Sat, 24 May 2025 11:06:53 -0600
+Message-ID: <20250524170701.1238642-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250524170701.1238642-1-sjg@chromium.org>
 References: <20250524170701.1238642-1-sjg@chromium.org>
@@ -95,227 +95,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sometimes it is useful to include archived series in the progress report
-so you can see all the work completed. Add a flag for this.
+Sometimes series don't have a cover letter. Add a --use-commit option to
+easily use the first commit's subject instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/cmdline.py      |  1 +
+ tools/patman/cmdline.py      |  3 +++
  tools/patman/control.py      |  2 +-
- tools/patman/cser_helper.py  | 18 +++++++++++------
- tools/patman/cseries.py      |  9 ++++++---
+ tools/patman/cseries.py      | 17 ++++++++++++----
  tools/patman/test_cseries.py | 38 +++++++++++++++++++++++++++++++++---
- 5 files changed, 55 insertions(+), 13 deletions(-)
+ 4 files changed, 52 insertions(+), 8 deletions(-)
 
 diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
-index 18bcece211f..3095b67e009 100644
+index 3095b67e009..f80323b7853 100644
 --- a/tools/patman/cmdline.py
 +++ b/tools/patman/cmdline.py
-@@ -289,6 +289,7 @@ def add_series_subparser(subparsers):
-                       help='Show all series versions, not just the latest')
-     prog.add_argument('-l', '--list-patches', action='store_true',
-                       help='List patch subject and status')
-+    _add_archived(prog)
- 
-     ren = series_subparsers.add_parser('rename')
-     ren.add_argument('-N', '--new-name', help='New name for the series')
+@@ -229,6 +229,9 @@ def add_series_subparser(subparsers):
+     add = series_subparsers.add_parser('add')
+     add.add_argument('-D', '--desc',
+                      help='Series description / cover-letter title')
++    add.add_argument(
++        '-u', '--use-commit', action='store_true',
++        help="Use the first commit's subject as series description if needed")
+     add.add_argument(
+         '-f', '--force-version', action='store_true',
+         help='Change the Series-version on a series to match its branch')
 diff --git a/tools/patman/control.py b/tools/patman/control.py
-index d898a4482af..57d2dbe8edd 100644
+index 57d2dbe8edd..7d679ea02d6 100644
 --- a/tools/patman/control.py
 +++ b/tools/patman/control.py
-@@ -184,7 +184,7 @@ def do_series(args, test_db=None, pwork=None, cser=None):
-                               args.patch)
-         elif args.subcmd == 'progress':
-             cser.progress(args.series, args.show_all_versions,
--                          args.list_patches)
-+                          args.list_patches, args.include_archived)
-         elif args.subcmd == 'rm':
-             cser.remove(args.series, dry_run=args.dry_run)
-         elif args.subcmd == 'rm-version':
-diff --git a/tools/patman/cser_helper.py b/tools/patman/cser_helper.py
-index 39f291cb3ec..dd2cfc5cbf0 100644
---- a/tools/patman/cser_helper.py
-+++ b/tools/patman/cser_helper.py
-@@ -1156,6 +1156,7 @@ class CseriesHelper:
-         states = defaultdict(int)
-         count = len(pwc)
-         ok = True
-+        cmt = None
-         for seq, item in enumerate(pwc.values()):
-             if series:
-                 cmt = series.commits[seq]
-@@ -1178,7 +1179,8 @@ class CseriesHelper:
-                 subject = item.subject
- 
-             line = (f'{seq:3} {col_state}{pad} {comments.rjust(3)} '
--                    f'{patch_id:7} {oid(cmt.hash)} {subject}')
-+                    f"{patch_id:7} {oid(cmt.hash) if cmt else ' ' * HASH_LEN} "
-+                    f'{subject}')
-             lines.append(line)
-             states[item.state] += 1
-         out = ''
-@@ -1187,7 +1189,7 @@ class CseriesHelper:
-             state_totals[state] += freq
-         name = ''
-         if not list_patches:
--            name = desc or series.desc
-+            name = desc or (series.desc if series else '')
-             name = self.col.build(self.col.YELLOW, name[:41].ljust(41))
-             if not ok:
-                 out = '*' + out[1:]
-@@ -1402,7 +1404,7 @@ class CseriesHelper:
-             return await self._sync_all(client, pwork, to_fetch)
- 
-     def _progress_one(self, ser, show_all_versions, list_patches,
--                      state_totals):
-+                      state_totals, use_metadata=True):
-         """Show progress information for all versions in a series
- 
-         Args:
-@@ -1414,6 +1416,8 @@ class CseriesHelper:
-             state_totals (dict): Holds totals for each state across all patches
-                 key (str): state name
-                 value (int): Number of patches in that state
-+            use_metadata (bool): True to read the series metadata from the
-+                branch
- 
-         Return: tuple
-             int: Number of series shown
-@@ -1441,10 +1445,12 @@ class CseriesHelper:
-             _, pwc = self._series_get_version_stats(ser.idnum, ver)
-             count = len(pwc)
-             branch = self._join_name_version(ser.name, ver)
--            series = patchstream.get_metadata(branch, 0, count,
--                                              git_dir=self.gitdir)
-+            series = None
-+            if use_metadata:
-+                series = patchstream.get_metadata(branch, 0, count,
-+                                                  git_dir=self.gitdir)
-+                self._copy_db_fields_to(series, ser)
-             svinfo = self.get_ser_ver(ser.idnum, ver)
--            self._copy_db_fields_to(series, ser)
- 
-             ok = self._list_patches(
-                 branch, pwc, series, svinfo.name, svinfo.cover_id,
+@@ -147,7 +147,7 @@ def do_series(args, test_db=None, pwork=None, cser=None):
+         if args.subcmd == 'add':
+             cser.add(args.series, args.desc, mark=args.mark,
+                      allow_unmarked=args.allow_unmarked, end=args.upstream,
+-                     dry_run=args.dry_run)
++                     use_commit=args.use_commit, dry_run=args.dry_run)
+         elif args.subcmd == 'archive':
+             cser.archive(args.series)
+         elif args.subcmd == 'autolink':
 diff --git a/tools/patman/cseries.py b/tools/patman/cseries.py
-index 717a2504962..7064c33b6ee 100644
+index 7064c33b6ee..38fedebbc3f 100644
 --- a/tools/patman/cseries.py
 +++ b/tools/patman/cseries.py
-@@ -556,7 +556,8 @@ class Cseries(cser_helper.CseriesHelper):
-         # environment.
-         cros_subprocess.Popen(['xdg-open', url])
+@@ -38,7 +38,7 @@ class Cseries(cser_helper.CseriesHelper):
+         super().__init__(topdir, colour)
  
--    def progress(self, series, show_all_versions, list_patches):
-+    def progress(self, series, show_all_versions, list_patches,
-+                 include_archived):
-         """Show progress information for all versions in a series
+     def add(self, branch_name, desc=None, mark=False, allow_unmarked=False,
+-            end=None, force_version=False, dry_run=False):
++            end=None, use_commit=False, force_version=False, dry_run=False):
+         """Add a series (or new version of a series) to the database
  
          Args:
-@@ -566,6 +567,7 @@ class Cseries(cser_helper.CseriesHelper):
-                 False to show only the final version
-             list_patches (bool): True to list all patches for each series,
-                 False to just show the series summary on a single line
-+            include_archived (bool): True to include archived series also
-         """
-         with terminal.pager():
-             state_totals = defaultdict(int)
-@@ -581,7 +583,7 @@ class Cseries(cser_helper.CseriesHelper):
+@@ -47,6 +47,10 @@ class Cseries(cser_helper.CseriesHelper):
+             mark (str): True to mark each commit with a change ID
+             allow_unmarked (str): True to not require each commit to be marked
+             end (str): Add only commits up to but exclu
++            use_commit (bool)): True to use the first commit's subject as the
++                series description, if none is available in the series or
++                provided in 'desc')
++
+             force_version (bool): True if ignore a Series-version tag that
+                 doesn't match its branch name
+             dry_run (bool): True to do a dry run
+@@ -58,9 +62,14 @@ class Cseries(cser_helper.CseriesHelper):
+             tout.info(msg)
+         if desc is None:
+             if not ser.cover:
+-                raise ValueError(f"Branch '{name}' has no cover letter - "
+-                                 'please provide description')
+-            desc = ser['cover'][0]
++                if use_commit and ser.commits:
++                    desc = ser.commits[0].subject
++                    tout.info(f"Using description from first commit: '{desc}'")
++                else:
++                    raise ValueError(f"Branch '{name}' has no cover letter - "
++                                    'please provide description')
++            if not desc:
++                desc = ser['cover'][0]
  
-             total_patches = 0
-             total_series = 0
--            sdict = self.db.series_get_dict()
-+            sdict = self.db.series_get_dict(include_archived)
-             border = None
-             total_need_scan = 0
-             if not list_patches:
-@@ -593,7 +595,8 @@ class Cseries(cser_helper.CseriesHelper):
-             for name in sorted(sdict):
-                 ser = sdict[name]
-                 num_series, num_patches, need_scan = self._progress_one(
--                    ser, show_all_versions, list_patches, state_totals)
-+                    ser, show_all_versions, list_patches, state_totals,
-+                    not include_archived)
-                 total_need_scan += need_scan
-                 if list_patches:
-                     print()
+         ser = self._handle_mark(name, ser, version, mark, allow_unmarked,
+                                 force_version, dry_run)
 diff --git a/tools/patman/test_cseries.py b/tools/patman/test_cseries.py
-index d6cd042e990..ab59ae7c9a3 100644
+index ab59ae7c9a3..1189a1344e8 100644
 --- a/tools/patman/test_cseries.py
 +++ b/tools/patman/test_cseries.py
-@@ -720,7 +720,7 @@ Tested-by: Mary Smith <msmith@wibble.com>   # yak
-         self.setup_second()
+@@ -199,7 +199,7 @@ class TestCseries(unittest.TestCase, TestCommon):
+             Pcommit(2, 1, 'spi: SPI fixes', 1, None, None, None, None),
+             pclist[2])
  
-         self.db_close()
--        args = Namespace(subcmd='ls')
-+        args = Namespace(subcmd='ls', include_archived=False)
+-    def test_series_not_checked_out(self):
++    def test_series_add_not_checked_out(self):
+         """Test adding a new cseries when a different one is checked out"""
+         cser = self.get_cser()
+         self.assertFalse(cser.db.series_get_dict())
+@@ -442,6 +442,38 @@ class TestCseries(unittest.TestCase, TestCommon):
+         series = patchstream.get_metadata('first', 0, 2, git_dir=self.gitdir)
+         self.assertNotIn('version', series)
+ 
++    def test_series_add_no_desc(self):
++        """Test adding a cseries with no cover letter"""
++        cser = self.get_cser()
++        self.assertFalse(cser.db.series_get_dict())
++
++        with self.assertRaises(ValueError) as exc:
++            with terminal.capture() as (out, _):
++                cser.add('first', allow_unmarked=True)
++        self.assertEqual(
++            "Branch 'first' has no cover letter - please provide description",
++            str(exc.exception))
++
++        with terminal.capture() as (out, _):
++            self.run_args('series', '-s', 'first', 'add', '--use-commit',
++                        '--allow-unmarked', pwork=True)
++        lines = out.getvalue().splitlines()
++        self.assertEqual(
++            "Adding series 'first' v1: mark False allow_unmarked True",
++            lines[0])
++        self.assertEqual(
++            "Using description from first commit: 'i2c: I2C things'",
++            lines[1])
++        self.assertEqual("Added series 'first' v1 (2 commits)", lines[2])
++        self.assertEqual(3, len(lines))
++
++        sdict = cser.db.series_get_dict()
++        self.assertEqual(1, len(sdict))
++        ser = sdict.get('first')
++        self.assertTrue(ser)
++        self.assertEqual('first', ser.name)
++        self.assertEqual('i2c: I2C things', ser.desc)
++
+     def _fake_patchwork_cser(self, subpath):
+         """Fake Patchwork server for the function below
+ 
+@@ -766,7 +798,7 @@ Tested-by: Mary Smith <msmith@wibble.com>   # yak
+         self.make_git_tree()
+         args = Namespace(subcmd='add', desc='my-description', series='first',
+                          mark=False, allow_unmarked=True, upstream=None,
+-                         dry_run=False)
++                         use_commit=False, dry_run=False)
          with terminal.capture() as (out, _):
              control.do_series(args, test_db=self.tmpdir, pwork=True)
-         lines = out.getvalue().splitlines()
-@@ -780,6 +780,7 @@ Tested-by: Mary Smith <msmith@wibble.com>   # yak
  
-         self.db_close()
-         args.subcmd = 'ls'
-+        args.include_archived = False
-         with terminal.capture() as (out, _):
+@@ -814,7 +846,7 @@ Tested-by: Mary Smith <msmith@wibble.com>   # yak
+                          force=True)
+         args = Namespace(subcmd='add', series=None, mark=False,
+                          allow_unmarked=True, upstream=None, dry_run=False,
+-                         desc=None)
++                         desc=None, use_commit=False)
+         with terminal.capture():
              control.do_series(args, test_db=self.tmpdir, pwork=True)
-         lines = out.getvalue().splitlines()
-@@ -2996,7 +2997,8 @@ Date:   .*
  
-         with self.stage('latest versions'):
-             args = Namespace(subcmd='progress', series='second',
--                             show_all_versions=False, list_patches=True)
-+                             show_all_versions=False, list_patches=True,
-+                             include_archived=False)
-             with terminal.capture() as (out, _):
-                 control.do_series(args, test_db=self.tmpdir, pwork=True)
-             lines = iter(out.getvalue().splitlines())
-@@ -3033,7 +3035,8 @@ Date:   .*
- 
-         with self.stage('progress with patches'):
-             args = Namespace(subcmd='progress', series=None,
--                             show_all_versions=False, list_patches=True)
-+                             show_all_versions=False, list_patches=True,
-+                             include_archived=False)
-             with terminal.capture() as (out, _):
-                 control.do_series(args, test_db=self.tmpdir, pwork=True)
-             lines = iter(out.getvalue().splitlines())
-@@ -3048,6 +3051,35 @@ Date:   .*
-             self._check_first(lines)
-             self._check_second(lines, True)
- 
-+    def test_series_progress_all_archived(self):
-+        """Test showing progress for all cseries including archived ones"""
-+        self.setup_second()
-+        self.cser.archive('first')
-+
-+        with self.stage('progress without archived'):
-+            with terminal.capture() as (out, _):
-+                self.run_args('series', 'progress', pwork=True)
-+            itr = iter(out.getvalue().splitlines())
-+            self.assertEqual(
-+                'Name             Description                               Count  Status',
-+                next(itr))
-+            self.assertTrue(next(itr).startswith('--'))
-+            self.assertEqual(
-+                'second2          The name of the cover letter              '
-+                '    3  1:accepted 1:changes 1:rejected', next(itr))
-+
-+        with self.stage('progress with archived'):
-+            with terminal.capture() as (out, _):
-+                self.run_args('series', 'progress', '--include-archived',
-+                              pwork=True)
-+            lines = out.getvalue().splitlines()
-+            self.assertEqual(
-+                'first                                                      '
-+                '    2  2:unknown', lines[2])
-+            self.assertEqual(
-+                'second2          The name of the cover letter              '
-+                '    3  1:accepted 1:changes 1:rejected', lines[3])
-+
-     def test_series_progress_no_patches(self):
-         """Test showing progress for all cseries without patches"""
-         self.setup_second()
 -- 
 2.43.0
 
