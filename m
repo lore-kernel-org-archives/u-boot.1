@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB8B2C54FC6
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90FFC54FC6
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:35:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12FAC83416;
-	Sat, 24 May 2025 16:35:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6540D83443;
+	Sat, 24 May 2025 16:35:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l+54HfgC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K6feyje1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 815F883443; Sat, 24 May 2025 16:35:28 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 5219E834EC; Sat, 24 May 2025 16:35:47 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 180BC831C2
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:35:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAE7A831C2
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:35:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-72ec926e828so157026a34.0
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:35:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ad560321ed9so84284566b.1
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:35:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748097325; x=1748702125; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=soJzyxREE2S8kgnRAoSXEplSN3y6bnsep7N+ky+1w9g=;
- b=l+54HfgCweEtB1aSk7CXHirPmRktr0z2efaaIO7bo52z5RBWS1cWn8S3GhB5gBFcT/
- mE1Iy8ADURqxYw1ExV+7S5Ji577JTd8O5E8kbxrVzUP+lcKiXqheR3sIOhnJocC0DwJq
- AqpWeatjekHXxhd54ArM1sHdKWUbqIGJArjeE=
+ d=chromium.org; s=google; t=1748097344; x=1748702144; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tC5/73bAB7XFxbfBa2p1V5I6nSUfKf06PiN29vKD6D0=;
+ b=K6feyje1nfifNu0hUX+/ZWUVlfTshT0+ZqokY6hV3QV0vVfWmVsZKma8Fzqv8G+86E
+ tT9mdFNsxkgOO4oE/vMhK//qrhgmY/xcBGkNxqrGl2PdCOEHU3oBAxNDEtTDFlc5rCxU
+ Ia2oN4uAW3ZGNwGMKiW3DW5Ay4MLo1lmXiUZQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748097325; x=1748702125;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=soJzyxREE2S8kgnRAoSXEplSN3y6bnsep7N+ky+1w9g=;
- b=Iur0Jc/X94kqkRbAaHuwFBT6foMOvPMeB4S1xGqnnebNTbD6cg2XFiUbx+IH6XvbR2
- x26xqLHSEVlpEa5XGIXvy7dvXr0yw3E2Rbhpb9N6t6xO2cK3cFQjPpqjPKP46sqpFzEB
- N/maCbVo1SbNr/kRKXKUOJUV70FEftRgM93MLGBHaOQqa6sin3YKjWb3HVsNllD5Zl/I
- hc+26MO7T3E6avjmmEBe7VQcFB5OWLV2Yl0MAOlmH8jKksr4KuFUoO5yu9XTnG/lnjBD
- nRGj8YTsIBkPVDwPwG3e5hknOZY6D45OYfSoNKP52WioneasY42sCI4jfe2mTfWA1KWO
- rMBw==
-X-Gm-Message-State: AOJu0YwgBRxkjwnDz85GOzpSJv+tcml7oknXVW4P1qrXHdm48bwph11m
- h9uGTDz0pNdv63NYrerVo5S6AG4OP5aLUfDGYtV8UdDIdKNTegAtfBBcDDWHw9H+AFo=
-X-Gm-Gg: ASbGncvPhSTm3u/uPRkPCGBGQbsJ1E4h8uDZ/NCFw0vgECm9caa61Er65nJ1pQB1Et7
- X6DDzv2MHo830nZDKFkeP28Pgic1EyZeSy27+nFqz5FALz78Cago++nb29CwZiXgzd4Q6EBZS0C
- 8p44Fn9FIRh9NM0JVhk7NET4YPd+WjW3tma9TpakgbV1qsqZi/UPU0hrnBUf5nplXVr3EnLfZOI
- V+kYi265Ie2SASHcFXvJyktyh0swnK3EKk5dQuuLyKDCMuAzKa7YQGtB0sn2IPYRK5phcLJv4sh
- afJre0XXuWu2a582AVwSqTYfM2QNX+4JZQaxBMSnm1tOyD/xikLgim+W8/YS7Pz8d1P6HXZFcz/
- zpfAZPr8l/yGX
-X-Google-Smtp-Source: AGHT+IFbCaqwYO9hitF/AXbBNGYSQ/QcIOihaB/I/RWjncM/PVfwvaTQqzTZNESKjCjUW1rLC6fVEA==
-X-Received: by 2002:a05:6830:6219:b0:732:2633:91e5 with SMTP id
- 46e09a7af769-7355d0c84a3mr2471244a34.21.1748097324700; 
- Sat, 24 May 2025 07:35:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-734f6a4b0e6sm3316050a34.11.2025.05.24.07.35.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 07:35:23 -0700 (PDT)
-Date: Sat, 24 May 2025 08:35:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v2 01/18] abuf: Add a helper for initing and allocating a
- buffer
-Message-ID: <20250524143521.GK100073@bill-the-cat>
-References: <20250501133726.2627373-2-sjg@chromium.org>
- <20250505203810.GM5430@bill-the-cat>
- <CAFLszTgw6pP7SgRp=C-skUeA_cOhEfoVXD+YNKE9jP8vj0UPXw@mail.gmail.com>
- <20250506194817.GH5430@bill-the-cat>
- <CAFLszTiiM1e_MQHiArK5sRrL-8gpg+DEDg6rs4ONJmz8V8mfug@mail.gmail.com>
- <20250512223540.GU603748@bill-the-cat>
- <CAFLszTiUKyOhGxfEOm8Bj-LvqT=L35Sxa0gprRhA-BE9xsLZaw@mail.gmail.com>
- <CAFLszTgSFoAda_arLJqhojHi=BmODHB7cgOaWcvKJKJEmgvo4g@mail.gmail.com>
- <20250524142024.GC100073@bill-the-cat>
- <CAFLszTg_jptL71am4Hh3wnb3O2PCsWBGMxCqvgN2jbsWOrOA2Q@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1748097344; x=1748702144;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tC5/73bAB7XFxbfBa2p1V5I6nSUfKf06PiN29vKD6D0=;
+ b=ckp08XgxGN2o1QvDvW9aHuY+rXmuXjAvMRcqHBURf9vYBYxm7sYoF3i/0wD/awAsaA
+ N9GcAM1XYOKIl1Fe6SKg35VGpSbAATZwv9DpxD8f55jn2dwO1FHEMBFnGAllSbIKE0um
+ dmdU8ppTAK4/quMwS8m9yb/UoUMtIG9XeHvM8gdHX0kW5FPfSOo2rDvjKVBToodZ6FBD
+ VtongBI3gFqkF4YuxBZ7Eysxk6I7jporYnm77VPOhbtf45dRaq5HoWrxYRIcAW0hlZXT
+ HbpOQ4beD4EdQ0OGbuzx8s1NNUqlvSPr11GssADym/AJgqv+U+dRlQLN8rZcpAzb7P7h
+ HaCw==
+X-Gm-Message-State: AOJu0YxYAzeWM0M430JIkreRO40iGO1gmIiKr6GnRqAMvr+IytK/ReuZ
+ 3ZwuR/EJyhJgZlAyOHhbxlQOX0A+5UpeMKy7poJUqkfQuvdv4YxfpLEC7vO9JvkWDXNyLdHI6Pt
+ AHsp1ZkCB+hLTk95LzkUXLQWw3gLVRXU4ZGpFazRI
+X-Gm-Gg: ASbGnct7sSC9NupGK+ESQj7tA9xYBLrDv7TXIjc4X34lGcr5oyl+Y7VYwPB8yEV32UB
+ rNsBr0CPG9bUcru0admcB/ovVZjvPBDyEMZ8rSrPkvalFt0PnsC9GurW1ARdPiB+M1BqwO5BXKO
+ c/lSfesAj+mG9KvxPuXauTwG3YRhU6qIA=
+X-Google-Smtp-Source: AGHT+IGX0fg9qNizmsn1LyvarC4IfK/vud7e+zC8V6WnosTj2yjpdOYxVh1bZIzv5tV/ZxC6w4LyBT69MFRjzV+Zki0=
+X-Received: by 2002:a17:907:c26:b0:ad5:2e64:983e with SMTP id
+ a640c23a62f3a-ad85b12f717mr248031466b.10.1748097344358; Sat, 24 May 2025
+ 07:35:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pOgZxkEDhyiEU7uQ"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg_jptL71am4Hh3wnb3O2PCsWBGMxCqvgN2jbsWOrOA2Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250504132356.2317305-1-sjg@chromium.org>
+ <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
+ <20250523140455.GP100073@bill-the-cat>
+ <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
+ <20250523164717.GU100073@bill-the-cat>
+ <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
+ <20250523212539.GX100073@bill-the-cat>
+ <CAFLszTioW78gyU2qK+-E5CcjyTAatvFuodWV3NKuwq5anBGdpg@mail.gmail.com>
+ <20250524141805.GB100073@bill-the-cat>
+ <CAFLszTj=6W2miuLkU0Acbi-HBNSAiq-9YfwdOu0-+OSSy9+gvw@mail.gmail.com>
+ <20250524143124.GI100073@bill-the-cat>
+In-Reply-To: <20250524143124.GI100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 24 May 2025 15:35:32 +0100
+X-Gm-Features: AX0GCFs4A1pJX_R7H-0edyvAnGr4GTJzdTIK_2L_IelmklRgEaQWlNNmzwHO12k
+Message-ID: <CAFLszTizvrb9jX+a6-BVVtrH-fU5T_DdV8gakyEszSVCojp3hQ@mail.gmail.com>
+Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
+ module
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,264 +96,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---pOgZxkEDhyiEU7uQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, May 24, 2025 at 03:31:42PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 24 May 2025 at 15:20, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 24 May 2025 at 15:31, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, May 24, 2025 at 03:22:57PM +0100, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Sat, May 24, 2025 at 08:51:43AM +0100, Simon Glass wrote:
-> > > Hi Tom,
+> > On Sat, 24 May 2025 at 15:18, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Wed, 14 May 2025 at 20:44, Simon Glass <sjg@chromium.org> wrote:
-> > > >
+> > > On Sat, May 24, 2025 at 05:23:48AM +0100, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Tue, 13 May 2025 at 00:35, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Fri, 23 May 2025 at 22:25, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Sat, May 10, 2025 at 01:27:03PM +0200, Simon Glass wrote:
+> > > > > On Fri, May 23, 2025 at 09:20:37PM +0100, Simon Glass wrote:
 > > > > > > Hi Tom,
 > > > > > >
-> > > > > > On Tue, 6 May 2025 at 21:48, Tom Rini <trini@konsulko.com> wrot=
-e:
+> > > > > > On Fri, 23 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > >
-> > > > > > > On Tue, May 06, 2025 at 03:23:39PM +0200, Simon Glass wrote:
+> > > > > > > On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
 > > > > > > > > Hi Tom,
 > > > > > > > >
-> > > > > > > > On Mon, 5 May 2025 at 22:38, Tom Rini <trini@konsulko.com> =
-wrote:
+> > > > > > > > On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > > > >
-> > > > > > > > > On Thu, May 01, 2025 at 07:37:01AM -0600, Simon Glass wro=
-te:
-> > > > > > > > >
-> > > > > > > > > > This construct appears in various places. Reduce code s=
-ize by adding a
-> > > > > > > > > > function for it.
-> > > > > > > > > >
-> > > > > > > > > > It inits the abuf, then allocates it to the requested s=
-ize.
+> > > > > > > > > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
+> > > > > > > > > > It is easier for tests if the top-level control logic is all in one
+> > > > > > > > > > module. Create a new do_patman() function to handle this. Move the
+> > > > > > > > > > existing code into it.
 > > > > > > > > > >
 > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > > > > > > > > ---
 > > > > > > > > > >
-> > > > > > > > > > Changes in v2:
-> > > > > > > > > > - Add new patch with a helper for initing and allocatin=
-g a buffer
+> > > > > > > > > > (no changes since v1)
 > > > > > > > > > >
-> > > > > > > > > >  boot/cedit.c          |  3 +--
-> > > > > > > > > >  boot/scene.c          |  3 +--
-> > > > > > > > > >  boot/scene_textline.c |  3 +--
-> > > > > > > > > >  include/abuf.h        | 11 +++++++++++
-> > > > > > > > > >  lib/abuf.c            |  9 +++++++++
-> > > > > > > > > >  lib/of_live.c         |  3 +--
-> > > > > > > > > >  test/lib/abuf.c       | 22 ++++++++++++++++++++++
-> > > > > > > > > >  7 files changed, 46 insertions(+), 8 deletions(-)
+> > > > > > > > > >  tools/patman/__main__.py | 49 ++----------------------------------
+> > > > > > > > > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++--
+> > > > > > > > > >  2 files changed, 54 insertions(+), 49 deletions(-)
+> > > > > > > > > >
+> > > > > > > > > > Applied to sjg/master, thanks!
 > > > > > > > > >
-> > > > > > > > > This just made me look again at the abuf implementation i=
-tself and
-> > > > > > > > > become filled with regret I didn't reject it back in 2021=
-=2E We're
-> > > > > > > > > introducing wrappers around standard functions and callin=
-g conventions /
-> > > > > > > > > patterns with something homegrown (and so not intuitive t=
-o others) that
-> > > > > > > > > mainly hides the "sysmem" challenge we also have  and I w=
-ish you were
-> > > > > > > > > interested in revisiting how that part of sandbox works i=
-nstead. And
-> > > > > > > > > even if this is a better design, for the sake of argument=
-, it's not
-> > > > > > > > > something everyone else is used to. And that's important.
-> > > > > > > > >
-> > > > > > > > > If we *really* need something different / new here, I'd r=
-ather see us go
-> > > > > > > > > and wrap common/dlmalloc.c with kmalloc/kfree/etc and so =
-give people
-> > > > > > > > > something even more familiar-looking.
+> > > > > > > > > Odd. I thought you had posted this against master or next, intending it
+> > > > > > > > > for mainline, which is why I assigned it to you in patchwork. I see the
+> > > > > > > > > cover letter is missing what commit it's against. And instead here you
+> > > > > > > > > are once again spamming the list and with messages about your personal
+> > > > > > > > > tree. Why?
 > > > > > > > >
-> > > > > > > > The purpose of abuf is actually not about hiding sysmem - y=
-ou can see
-> > > > > > > > that if you look at lib/abuf.c and the tests. It provides a=
-n easy way
-> > > > > > > > to manage buffers, which we do a lot in U-Boot, particularl=
-y with
-> > > > > > > > standard boot. It deals with whether the buffer is allocate=
-d or not,
-> > > > > > > > so freeing is easy. With expo I want to be able to manage a=
- buffer
-> > > > > > > > containing an autoboot string in high-level code, say, with=
-out
-> > > > > > > > worrying whether it has to be realloced.
+> > > > > > > > I'm applying it to my tree and intend to send you a PR at some point,
+> > > > > > > > with collected tools/ patches. So I believe I need to send emails
+> > > > > > > > about applying things and update it in patchwork. Let's discuss this
+> > > > > > > > in a future call.
 > > > > > > >
-> > > > > > > It's a wrapper around free/malloc/et al, which then also incl=
-udes the
-> > > > > > > sandbox-specific requirement of *sysmap* stuff. This is best =
-shown by
-> > > > > > > the next two patches which convert from standard malloc/free =
-patterns
-> > > > > > > (which both humans and analysis checkers are fond of) to a ho=
-me grown
-> > > > > > > invention.
+> > > > > > > I don't see what there is to discuss. Please follow the normal process
+> > > > > > > for mainline and stop spamming the list with notices for your personal
+> > > > > > > tree. You're also diverging your own tree further from mainline by doing
+> > > > > > > this and making it less likely (multiple people have told you they don't
+> > > > > > > want to review things not against mainline) any follow-up work will get
+> > > > > > > comments other than that it's not applicable to mainline.
 > > > > > >
-> > > > > > Yes, although I should point out that most of my code is a home=
--grown
-> > > > > > invention, if by that you mean it wasn't invented by someone el=
-se and
-> > > > > > then posted by me as if it were my own invention.
-> > > > >
-> > > > > Well, I'm referring to the cases where solutions to the problems =
-exist,
-> > > > > but you're inventing a new one instead.
-> > > > >
-> > > > > > > > For sysmem, I don't see a viable alternative, which keeps c=
-an reliably
-> > > > > > > > keep addresses consistent across multiple phases (e.g. sand=
-box_vpl).
-> > > > > > > > Also, I don't believe addresses like 0x7ffff7fbc000 are
-> > > > > > > > human-friendly, yet that is what we would see in tests if w=
-e dropped
-> > > > > > > > the mapping. The point of sandbox is to test U-Boot, not ex=
-pose the
-> > > > > > > > system internals. But we could discuss it if you like?
-> > > > > > >
-> > > > > > > I'm not sure how this is relevant to the general high level p=
-oint of
-> > > > > > > "sandbox should be able to, in 2025, be designed so that spec=
-ial macros
-> > > > > > > do not need to be everywhere for the sanity checking it can d=
-o to
-> > > > > > > happen". If my web browser is going to suck up 11GiB of memor=
-y all the
-> > > > > > > time I can live with sandbox using 1/2/4/whatever GiB of memo=
-ry when it
-> > > > > > > runs. The "this is not a pointer" problem sandbox can solve c=
-ould be
-> > > > > > > done differently these days.
+> > > > > > For patman, I have another series [1] I'm planning to apply to my tree tomorrow
 > > > > > >
-> > > > > > The special macros have several purposes:
-> > > > > > 1. Allow sandbox to have a contiguous region of memory at addre=
-ss 0,
-> > > > > > while the pointers are wherever the RAM buffer happens to end up
-> > > > > > 2. Provide an indication of whether code has been converted to =
-sandbox
-> > > > > > yet, or not
-> > > > > > 3. Provide a way to mark all casts to/from address/pointers so =
-it is
-> > > > > > clear that the cast is intentional
-> > > > > > 4. Ensure that sandbox seg-faults if a bad pointer is used
+> > > > > > Would you like me to send 'applied' emails for it to the mailing list?
+> > > > > > Or perhaps just for the cover letter? Would you like me to send you a
+> > > > > > pull request?
 > > > > > >
-> > > > > > You seemed quite happy about it until my EFI test was rejected.
-> > > > >
-> > > > > No, I've never really been happy with the macros and never unders=
-tood
-> > > > > why we couldn't do the useful sanity checking wholly under arch/s=
-andbox/
-> > > > >
-> > > > > > > > In general I am sensing that there are a lot of things whic=
-h bug you
-> > > > > > > > about the direction of U-Boot. and that you feel very diffe=
-rently
-> > > > > > > > about some things than you did in 2021. I have quite a few =
-concerns
-> > > > > > > > too. So how about we make time to discuss these and see if =
-we can get
-> > > > > > > > on the same page, at least somewhat?
-> > > > > > >
-> > > > > > > Yes, we've had numerous long threads, and a few calls. You ar=
-e then
-> > > > > > > unhappy with what I say I want to see done, want me to just t=
-ake your
-> > > > > > > changes instead and "Say Yes" more. I wonder if I had said No=
-, or gather
-> > > > > > > more feedback from potential users, or just slow down, more b=
-ack in 2021
-> > > > > > > if we would not be in a different position here.
+> > > > > > Regards,
+> > > > > > Simon
 > > > > > >
-> > > > > > I wonder if you had said yes more, if we might have got standar=
-d boot
-> > > > > > done a few years earlier and would not be stuck now on EFI boot=
-mgr.
+> > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=456256
 > > > > >
-> > > > > No, we probably would have just had more developers leave as I ov=
-errode
-> > > > > their objections.
-> > > > >
-> > > > > > > > Coming back to this patch though, this is really about a co=
-de-side
-> > > > > > > > win, rather than anything else.
-> > > > > > >
-> > > > > > > No, it's about how similar to the "log a message and return" =
-convention
-> > > > > > > change you wanted to make and then dropped, how I do not see =
-good value
-> > > > > > > in changing from standard convention of malloc/free to abuf b=
-eing a win.
-> > > > > > > Maybe this is a case where borrowing the kernel's mempool log=
-ic would be
-> > > > > > > a win instead? Because another part of this is that we want t=
-o avoid
-> > > > > > > making up our own APIs for things if we can instead borrow so=
-mething
-> > > > > > > from the kernel, where most of the rest of the community will=
- already be
-> > > > > > > familiar.
-> > > > > >
-> > > > > > mempool is actually lmb, as I understand it. We haven't done th=
-at
-> > > > > > rename. It allocates from a region of pre-allocated memory. It =
-doesn't
-> > > > > > use malloc(). So to me, that is quite different.
-> > > > >
-> > > > > Then we should probably just drop the abuf thing and use standard
-> > > > > conventions that developers are used to.
+> > > > > Yes, that's another series that while I disagree with the direction
+> > > > > you're taking things, would rather apply to mainline than let it bitrot
+> > > > > in mainline. So please send a PR against next. And that would also apply
+> > > > > to the series this email is in reply to. As again, I had expected it for
+> > > > > mainline and not your downstream tree even if I think we (and our users)
+> > > > > would all benefit from managing the python portions differently.
 > > > >
-> > > > No, abuf is a valuable abstraction which makes it easier to avoid
-> > > > alloc/free errors, size errors, etc. Python has bytes, C++ has
-> > > > std::byte. Linux has sk_buff which is a bit like membuf. Perhaps Li=
-nux
-> > > > would benefit from abuf but its memory model and usage is quite a b=
-it
-> > > > different, so I'm not sure.
+> > > > OK, once I have applied the remaining two series I will send a PR.
 > > >
-> > > This series seems to be blocked on a desire to remove abuf from
-> > > U-Boot. Other than that I have a minor comment to resolve on the new
-> > > 'bootdev order' command. So I sent a patch for that.
+> > > Based on the emails in my inbox this morning, you're doing the opposite
+> > > of what I asked for. But maybe this afternoon will bring something
+> > > different.
+> > >
+> > > > You didn't express a preference for the 'applied' emails. It seems
+> > > > better to send these emails so that there is a record of the patch
+> > > > being applied.
+> > >
+> > > I guess I wasn't clear enough. Stop spamming the list with *anything*
+> > > about your personal tree. And if you're going to send anything about
+> > > something that's intended for mainline, you should make patman act more
+> > > like b4 and NOT send a message to every patch. I know I used to, but the
+> > > workflow b4 enables is much better for everyone.
 > >
-> > Yes, I disagree with spreading the use of abuf. Whatever benefits it may
-> > or may not have are outweighed by not following any normal conventions
-> > the rest of the developers use.
->=20
-> Are you completely set on this?
+> > How do I (or anyone else) know whether a patch was applied? If you
+> > only reply to the cover letter, doesn't that mean that the patches are
+> > left 'hanging' in the mailing list?
+> >
+> > I didn't know you had changed your policy on this...it certainly seems
+> > odd to me. I often find Heinrich's patches are 'silently' applied, so
+> > perhaps he does the same thing?
+>
+> Every custodian does things as they see fit for mainline, but most are
+> adopting b4 which means that no, I'm not sure why there would be
+> confusion, or where it would come from. The emails say what the commit
+> ranges are for a series, patchwork is updated and then periodically most
+> patches in patchwork then get their githash added. Replying to the cover
+> letter with the commit range for the series means it's very much not
+> "hanging".
 
-I sure would appreciate it if any other developer would chime in and say
-that they do see value here and that I'm missing something. You've made
-your case, I've explained what you're missing, and you seem set on
-ignoring it.
+Generally I rely on seeing a reply to a patch to know it was applied.
+So it is confusing when the patch goes in but there was no reply to
+the patch.
 
---=20
-Tom
+I've noticed that you seem less inclined to apply some patches from a
+series, instead requesting that the whole series is resent. Perhaps
+that is why?
 
---pOgZxkEDhyiEU7uQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgx2SkACgkQFHw5/5Y0
-tyyp8gwAhDXGB+zcHgr91ldVc1DIINZ78+mtOA3mtNwq0PcetBLSqEh8qMVPpGF4
-jTB2LbK3S/S324XFJt71fsoHWHAhBql+ZTs1hHal5o+QJtS7J5oi3AGoijewd644
-mK1yb055Ai8lgUWgsovhJ82ERcnOLfcqngEO+p8v7cRGXdHdyFyGYtONIcGHBgC6
-7aL8cCJRiPb/UklefBXNXfMZhNpbJNzY6GBoH9yi3hT/+LFIvyaRaSp/kM4VWNBP
-NTBwGwXuXP2kpO0ES4nAyKGM1bR1rwbIHxQ9zPI2hjRXybzcWPExMKWdxUDLbQHp
-exZkfNEDUznRFiiPsxXMGQu9pGRRrGGinUk1jut7uaoUj09eu+ocvmv7PAV/ghW/
-YYudYp4XG499wAsustA3VQ5AOPq5kKZSyWFU8ZnIn217jbvrWHt64CNAbwLKk4pK
-d14/EMK7NM5z/hf9/2RB2J3JHt39E6wKOERtbgFwe+dG0i5h4I8ujsQWbm00Zwwi
-bzt1hjoF
-=9sPx
------END PGP SIGNATURE-----
-
---pOgZxkEDhyiEU7uQ--
+Regards,
+Simon
