@@ -4,63 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 642EAC54F30
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 17:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64FC6C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 18:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4BB082E76;
-	Sat, 24 May 2025 19:43:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9759B82E76;
+	Sat, 24 May 2025 20:00:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="E64UffkW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RsdTUBwa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BF1A82ED0; Sat, 24 May 2025 19:43:23 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6C7B482E76; Sat, 24 May 2025 20:00:31 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49DA382E28
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 19:43:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C866782E28
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 20:00:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=efaa=YJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: References: Cc:
- To: From: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1748108599;
- bh=bhjN0/7pV6qPofh/DV5os6lCSzUku4pcnc2Hfo8unnE=;
- b=E64UffkW3poolGJ7FpOhZEVsofKPirR4NMWX0IsrtOWZKnKdU8WS+9S73ZpuD62HSIxMTKNwV
- 38r4egLPTbr/CNSb9zsLZ86XtdrScF0EcG1tuf55mvfSIboZsTLra7SXzdxNwQf8MAHEHfi6Iuy
- eunhCkf8akONsrDibKVXPMHrj7b1BzxF9ruyzbek0Y4qUQu5OnDJLSmnWtUzq19TX6W28w8pa4j
- bg4FNcz4313NSBMh+2453O22NbJqY+0cENMYjXxI4YD+OnYuO8+l11jn+H30531WGCekic3a+k5
- paKPS+WVOwEKCGWJD4Acx7TDMcRrUDyIFbVZ8H1lO26w==
-X-Forward-Email-ID: 68320532c9f5592e59ab9d9b
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <5aecf685-07fd-4cc5-88f4-9624c78aac03@kwiboo.se>
-Date: Sat, 24 May 2025 19:43:09 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-70a57a8ffc3so8379137b3.0
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 11:00:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748109627; x=1748714427; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4NULFow4LOVxBllFvN7WuvMKM9yX7LP6pcaqsMBj460=;
+ b=RsdTUBwaUnZMhi4BH8a7rsoaHAofkT+poFxeQU5EPnohkBRcqn2/GpVvppcb5JkIjX
+ Gk/UA69JQC/nF1QQPAHxjptGzZ+ChT3R4KgN3+5ufc/k8WPtaB29Y4+8fwsOuJCudhS4
+ tO2h7bXAmiRBC9ZeAO3K6oHaH3gj/ob5Zcy4gX/d5vD0dlmq8IqfeDjtAD9hE0gcqH/W
+ Gr7Da2LSh40mQTDZOVcwRtpWXRcg8/W9CAIdPipIQ5f478XyJHzr3kduq2nEqtaDV0tY
+ US+i1qTjn2Xn7q2L/Ylh4ez0HUzbDlXWvsFrDvO0Z8imd8BqlucZ3SVnzuUNg8NOIDaB
+ HM9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748109627; x=1748714427;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4NULFow4LOVxBllFvN7WuvMKM9yX7LP6pcaqsMBj460=;
+ b=OfLaeKvhuZUdrMALtsDziIfJUK4syr+tpTHI3FWiv5Ukq6GlQw8NO5SsNA19C6ieEo
+ 6nQUpjjQfED4ztgd6e6ViyOJTc7+FmGleI28XqV21MsbL7wWf7U9iJNQVEkcFXIdFh+y
+ Ea7EffGvGuxtA27I++hvWfWEnjdEesexyCx3+y1GqFMKTZNgJntN+IAm7WliaG6uA55X
+ 8bS7/PB4UC58i1Vw+m1hxmqkdERG9CAABzShYh58f7xkjoKWeltGhXAy+Bgc9VtwdYbi
+ +wBiYBhspq9b1Xgi39GaE7IUM27LnhpZgaHYtHBSsCv1nwRT/Od4896GjQvSN5uFNlDS
+ kcWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUc+wJIdkkedWQwlPjicTRAdD1BkS3RmSklNsfl5qnSAul8vjw0fFcmb/Xd5G6/Fw4SBqBO+L8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6Y2DqSnfAtgw6HYPwqyMILxc2bNUp8TfY9FJVTk3UW/Xv1Sui
+ B/FzCkcb6gB/eTPmAwvSQceqyoq3+CFdkHqLMX6Inw+i9EeIUOW1wj8aDujrmAL7GNIxECo9jAR
+ Fa8jj2f6F27PC1fqByLUnOWKpPGw8w9tJm62y0l2+Aw==
+X-Gm-Gg: ASbGncsXT3lDLLFqUU3VTqhUfOikDQN7aON5UnxkkbIdWNJtIc0UmJhht8uFtjCNAYE
+ myLedCqnnvI6XkaEuP3UMFg7W7TiuVMufF3f14iMUkVxqlZB8eL2EDZQvOaCviWZrVQTT+bpXvh
+ em6pN3CevBha6/rdNz3/1j31nmos7d6x9ERQ==
+X-Google-Smtp-Source: AGHT+IFqjp6RAqnm8N98GZECcEzCY9taf5ZBfp6IhmpHFOifrmcYQq3PTvzCN5hg4Qirh7SN7RxVd+xRE7zVGpqUqv0=
+X-Received: by 2002:a05:690c:c:b0:70e:1b53:b9c2 with SMTP id
+ 00721157ae682-70e2d98468cmr30883997b3.3.1748109627510; Sat, 24 May 2025
+ 11:00:27 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3328: Fix Synchronous Abort on usb start
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Alex Shumsky <alexthreed@gmail.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250524142258.297397-1-alexthreed@gmail.com>
- <65b2368d-fed5-4633-b9e6-25ab9d151d1e@kwiboo.se>
-Content-Language: en-US
-In-Reply-To: <65b2368d-fed5-4633-b9e6-25ab9d151d1e@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250524141348.965322-1-sjg@chromium.org>
+ <20250524142603.GG100073@bill-the-cat>
+In-Reply-To: <20250524142603.GG100073@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 24 May 2025 20:59:51 +0300
+X-Gm-Features: AX0GCFun-062wnBVqE1SFVgTuVvegv8LUw0FDQajP1VL_Snh9vA-6pKluS0W_9g
+Message-ID: <CAC_iWjKckRrKSjn=RG3BAdo5zi-h_-bnYBSVWh9Y0BCqREzZCg@mail.gmail.com>
+Subject: Re: [PATCH] tpm: Export the function to set up the TPM log
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Raymond Mao <raymond.mao@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,88 +93,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-05-24 18:02, Jonas Karlman wrote:
-> Hi Alex,
-> 
-> On 2025-05-24 16:20, Alex Shumsky wrote:
->> Remove incorrect assigned-clock-parents in rk3328-u-boot.dtsi.
->> This incorrect parent has become a problem since recent commit with parent
->> clock enablement.
->>
->> Currently assigned-clock-parents is not a CLK node, but rk3328-usb2phy.
->> It looks like a mistake in dts made a long time ago (~8 years ago).
-> 
-> No, this is very much correct, u2phy is a clk provider as can be seen
-> by the use of the '#clock-cells' prop so being able to use it as a
-> parent clk is allowed and the device tree is correct.
-> 
->>
->>   => usb start
->>   starting USB...
->>   Bus usb@ff580000: "Synchronous Abort" handler, esr 0x96000210, far 0x4
+Thanks Tom
 
-I have now tried to re-create this issue using latest master branch on a
-rk3328 board, however I was only able to re-create a different issue.
+On Sat, 24 May 2025 at 17:26, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, May 24, 2025 at 08:13:46AM -0600, Simon Glass wrote:
+>
+> > In some cases, we may wish to set up the TPM log under full control of
+> > a driver in U-Boot. Export the required function to make this possible.
+> >
+> > This avoids calling the weak function tcg2_platform_get_log() when the
+> > caller already knows where the log is.
 
-On what board and U-Boot version/commit are you seeing this issue?
+This doesn't make too much sense to me. If the caller knows where the
+log is, he needs to replay it in hardware.  Which also means you need
+to check the logs vs the active PCR banks.
 
-The issue I faced was due to only enable usb20_otg and not u2phy_otg,
-something that could be fixed with following diff:
+This has all been abstracted in tcg2_measurement_init().
+The UEFI subsystem calls tcg2_log_prepare_buffer(), but that's a
+remnant from when measured boot was only supported in EFI. I was
+planning to get rid of it and call tcg2_measurement_init() from EFI as
+well.
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-index 88b33de1b2a0..d6ce12b5e83d 100644
---- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-+++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-@@ -538,7 +538,7 @@ U_BOOT_DRIVER(rockchip_usb2phy_clock) = {
- 
- U_BOOT_DRIVER(rockchip_usb2phy) = {
- 	.name	= "rockchip_usb2phy",
--	.id	= UCLASS_PHY,
-+	.id	= UCLASS_NOP,
- 	.of_match = rockchip_usb2phy_ids,
- 	.probe = rockchip_usb2phy_probe,
- 	.bind = rockchip_usb2phy_bind,
+Is there a reason you can't use that? Is it slowing down the boot time
+significantly?
 
-Regards,
-Jonas
-
->>
->> Linux dts source reference:
->> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c60c0373a5e85d8bd0bb026cd5440576249d2299
->>
->> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
->> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
->> ---
->>
->>  arch/arm/dts/rk3328-u-boot.dtsi | 4 ++++
->>  1 file changed, 4 insertions(+)
->>
->> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
->> index b0e50a973a..39dcc2313b 100644
->> --- a/arch/arm/dts/rk3328-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
->> @@ -150,6 +150,10 @@
->>  	bootph-all;
->>  };
->>  
->> +&u2phy {
->> +	/delete-property/ assigned-clock-parents;
->> +};
-> 
-> We should fix the driver code and not modify the device tree to fit the
-> code.
-> 
-> The u2phy ofnode is tied to multiple uclass drivers so is it possible
-> that the parent clock lookup from commit ac30d90f3367 ("clk: Ensure the
-> parent clocks are enabled while reparenting") is not getting the
-> UCLASS_CLK driver?
-> 
-> Regards,
-> Jonas
-> 
->> +
->>  #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->>  &binman {
->>  	simple-bin-spi {
-> 
-
+Thanks
+/Ilias
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  include/tpm_tcg2.h | 9 +++++++++
+> >  lib/tpm_tcg2.c     | 2 +-
+> >  2 files changed, 10 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
+> > index eb6afe49e77..189a93ee840 100644
+> > --- a/include/tpm_tcg2.h
+> > +++ b/include/tpm_tcg2.h
+> > @@ -345,4 +345,13 @@ void tcg2_platform_startup_error(struct udevice *dev, int rc);
+> >   */
+> >  u32 tcg2_algorithm_to_mask(enum tpm2_algorithms);
+> >
+> > +/**
+> > + * tcg2_log_init() - Set up the elog
+> > + *
+> > + * @dev: TPM device, used to find the number of PCRs
+> > + * @elog     Platform event log
+> > + * Return: zero on success, negative errno otherwise
+> > + */
+> > +int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog);
+> > +
+> >  #endif /* __TPM_TCG_V2_H */
+> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> > index c314b401d0b..9909d9e14d5 100644
+> > --- a/lib/tpm_tcg2.c
+> > +++ b/lib/tpm_tcg2.c
+> > @@ -220,7 +220,7 @@ static int tcg2_log_append_check(struct tcg2_event_log *elog, u32 pcr_index,
+> >       return 0;
+> >  }
+> >
+> > -static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
+> > +int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
+> >  {
+> >       struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
+> >       struct tcg_efi_spec_id_event *ev;
+> > --
+> > 2.43.0
+> >
+> > base-commit: bab54f5942c428be698216224fd10b91d974d4da
+> > branch: tpma
+>
+> This is based on mainline, but you forgot to CC the TPM maintainer.
+>
+> --
+> Tom
