@@ -4,62 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1847C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 16:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0A9C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 17:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A10082D2B;
-	Sat, 24 May 2025 18:03:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2E7A182E8E;
+	Sat, 24 May 2025 19:07:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="FmbeFjQJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fRu7XnWb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C6A482ED0; Sat, 24 May 2025 18:03:09 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E7FCF82E76; Sat, 24 May 2025 19:07:14 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A2582D06
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 18:03:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 695FF82CD2
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 19:07:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=efaa=YJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1748102585;
- bh=eU3tfuJkoYP5KR0CuStX14fVGSMVkRilAA3L2sVVkAU=;
- b=FmbeFjQJPzjB6tj3Yl0acuMBrxWJHCQHg+MmmCV9I8brJDZc/zi+Xr43u7vlhYTCY1qG/mwH8
- ruGJor3ZvVFkXkErb+fAtkRUsPpQSR2tRpVzW5m28kYcQJdFlhDxlbF59VKC7lShBVmzbveUN7R
- uR7SwB9nSgnsJlQiO/li80VeVpa5jJ8PJ8OkEo08br6237cmxFCUG85HV1X9K58oS9EcD43OHIs
- Evo1vHQGOVCuIYe1tS2nRIYDrAdjUs5abuZeUr25CLYchZ/yG8Nbl9HnW2rS3NrMbLFOtX/zyi5
- FHkOGfGtnkBUWQyGjuXrLcDIZSubwAgtZdLqlqyGiBhg==
-X-Forward-Email-ID: 6831edb6c9f5592e59ab7f5f
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <65b2368d-fed5-4633-b9e6-25ab9d151d1e@kwiboo.se>
-Date: Sat, 24 May 2025 18:02:57 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3dc978d5265so5204735ab.0
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 10:07:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1748106430; x=1748711230; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=73mmyZlBM9Sjw9hs8Qoz8Frz+r3lo9PHDHJqWQz7c/k=;
+ b=fRu7XnWbVsIhyeCcvfTJ3ZrlzR99tXsMl/Mmj2I45Z1SB2euWEpIfGryk4lpgPIijU
+ kmx+glAFWQLtKjm95oUBqqL5xnVKamiS6v0DcQRNl3RG6GSOua81OVoKGAoiU+ftcKac
+ Gw9MtivEIW/VK79ChEzxUiVPM9IGMWneFblOE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748106430; x=1748711230;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=73mmyZlBM9Sjw9hs8Qoz8Frz+r3lo9PHDHJqWQz7c/k=;
+ b=o+KLUsN8avLiE0LgiVADnnSZZ+nwkH6gc82CX7u0hNC7NLjDlqxgGfOqAQ1PRVEgNN
+ 0xoQ2VAvr41h2rpD3jihR8XYJbhM9alv5kNgLPlnvVTLER6C4YkALENldvbZr8aaV22H
+ RSwOcCHLmBpWoGDJP4RgqbKoc4a5HvD2/XlJAHLZIl/HMxIU77RpG/4SOhxHsNh4exSR
+ 4XEWN7gaa//ySFl1RSnFEreK7el5bzYLctuwHY+HWokO7z8PcHz2oKo4om7B2YeDOSOu
+ VK2QW9o7nNdEdI32SUMX0kQpgFMMzh37ZMNIUp2JwqYJyKhQzjoMEudGVFEGh1OnDTfc
+ zZ2g==
+X-Gm-Message-State: AOJu0Yx8W/NOoFVMH0MkpgyYMzXgUP2y3CDCyj4UptEUbaj7mFVpVomR
+ Kb4hTdFhBpNXc2sZPbqNFAo2sYCsxk9oYVMNoz73ZKrgy/zkj+E8BQUejU43V3UFYr+TCbI0cLz
+ pH5DOLwTP
+X-Gm-Gg: ASbGncuMrAjA4xdPxTzhx2EQv11rGihUp4ShD1IgCp5VKQf/agOAV24gCoFpmrz3u8z
+ P2ul+SLX1bq88KTumYyyrqIswEcFGcJfhkzubiQQ5oa8OXkkd1MM4DNj0VlJqIjKdheVOVdrTvy
+ SK+KzmxPAbD8p/SnYcQjODzi8z18NZy8PqCNnzMeA6QFWAwaUC7zgDutKUao3MhHKYjxIT/UClS
+ xoNI45ulNSewv4F2F5zBZdX3Utnpm0xyuLBY/9HF2FpAU0YPUR6JpsfEzTDglPg3qEPKU3Go5lI
+ ddiccymA6siCEqHexp6l/p0QeslhoHTZCjPI4M78444ed2b//hOPyiUrq8WTdj7ur+slA2KUss+
+ IaFfNxqQZ80IJR9eOZJxacio=
+X-Google-Smtp-Source: AGHT+IGPxTlUP4/umPP1kuJq6ERNOl0wF9OEe2o3IYLr91E3Q7T60cmlbbfGDhz9r5Vx8ZHgXNn0vg==
+X-Received: by 2002:a05:6e02:2161:b0:3dc:7660:9efe with SMTP id
+ e9e14a558f8ab-3dc9b6752bcmr24600385ab.9.1748106430547; 
+ Sat, 24 May 2025 10:07:10 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3dc9e7d18c9sm3940355ab.53.2025.05.24.10.07.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 24 May 2025 10:07:09 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/7] patman: Avoid needing pygit2 for all subcommands
+Date: Sat, 24 May 2025 11:06:49 -0600
+Message-ID: <20250524170701.1238642-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3328: Fix Synchronous Abort on usb start
-To: Alex Shumsky <alexthreed@gmail.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250524142258.297397-1-alexthreed@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250524142258.297397-1-alexthreed@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,60 +92,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alex,
+If pygit2 does not exist, patman refuses to work at all, but most
+subcommands don't need it. Move the imports to resolve this.
 
-On 2025-05-24 16:20, Alex Shumsky wrote:
-> Remove incorrect assigned-clock-parents in rk3328-u-boot.dtsi.
-> This incorrect parent has become a problem since recent commit with parent
-> clock enablement.
-> 
-> Currently assigned-clock-parents is not a CLK node, but rk3328-usb2phy.
-> It looks like a mistake in dts made a long time ago (~8 years ago).
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-No, this is very much correct, u2phy is a clk provider as can be seen
-by the use of the '#clock-cells' prop so being able to use it as a
-parent clk is allowed and the device tree is correct.
+ tools/patman/control.py | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-> 
->   => usb start
->   starting USB...
->   Bus usb@ff580000: "Synchronous Abort" handler, esr 0x96000210, far 0x4
-> 
-> Linux dts source reference:
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c60c0373a5e85d8bd0bb026cd5440576249d2299
-> 
-> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
-> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
-> ---
-> 
->  arch/arm/dts/rk3328-u-boot.dtsi | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-> index b0e50a973a..39dcc2313b 100644
-> --- a/arch/arm/dts/rk3328-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
-> @@ -150,6 +150,10 @@
->  	bootph-all;
->  };
->  
-> +&u2phy {
-> +	/delete-property/ assigned-clock-parents;
-> +};
+diff --git a/tools/patman/control.py b/tools/patman/control.py
+index 3e09b16e87b..e10125e2581 100644
+--- a/tools/patman/control.py
++++ b/tools/patman/control.py
+@@ -21,8 +21,6 @@ from u_boot_pylib import gitutil
+ from u_boot_pylib import terminal
+ from u_boot_pylib import tools
+ from u_boot_pylib import tout
+-from patman import cseries
+-from patman import cser_helper
+ from patman import patchstream
+ from patman.patchwork import Patchwork
+ from patman import send
+@@ -73,6 +71,8 @@ def patchwork_status(branch, count, start, end, dest_branch, force,
+     Raises:
+         ValueError: if the branch has no Series-link value
+     """
++    from patman import cser_helper
++
+     if not branch:
+         branch = gitutil.get_branch()
+     if count == -1:
+@@ -124,6 +124,8 @@ def do_series(args, test_db=None, pwork=None, cser=None):
+             needed
+         cser (Cseries): Cseries object to use, None to create one
+     """
++    from patman import cseries
++
+     if not cser:
+         cser = cseries.Cseries(test_db)
+     needs_patchwork = [
+@@ -226,6 +228,8 @@ def upstream(args, test_db=None):
+         test_db (str or None): Directory containing the test database, None to
+             use the normal one
+     """
++    from patman import cseries
++
+     cser = cseries.Cseries(test_db)
+     try:
+         cser.open_database()
+@@ -257,6 +261,8 @@ def patchwork(args, test_db=None, pwork=None):
+             use the normal one
+         pwork (Patchwork): Patchwork object to use
+     """
++    from patman import cseries
++
+     cser = cseries.Cseries(test_db)
+     try:
+         cser.open_database()
+-- 
+2.43.0
 
-We should fix the driver code and not modify the device tree to fit the
-code.
-
-The u2phy ofnode is tied to multiple uclass drivers so is it possible
-that the parent clock lookup from commit ac30d90f3367 ("clk: Ensure the
-parent clocks are enabled while reparenting") is not getting the
-UCLASS_CLK driver?
-
-Regards,
-Jonas
-
-> +
->  #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->  &binman {
->  	simple-bin-spi {
-
+base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
+branch: pate
