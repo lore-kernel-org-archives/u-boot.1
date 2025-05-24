@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4391C54FC6
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77342C54F30
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4146B82A25;
-	Sat, 24 May 2025 16:39:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D871D82F67;
+	Sat, 24 May 2025 16:43:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UJLEho2d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ItHbXZC2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7099682F67; Sat, 24 May 2025 16:39:49 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id C42078310F; Sat, 24 May 2025 16:43:09 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E3E1828BC
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:39:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC866828BC
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:43:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ad5533c468cso107961666b.0
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:39:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-2d0d25cebfeso557717fac.2
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:43:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748097586; x=1748702386; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2zHmiiVLNqtUBzk0dbw+m6WreHMLbwFULmkiED+eoW4=;
- b=UJLEho2dju8RvgETI9eBE0o5zGRKepXyfU/2DvBpSARPUIW6+6wOdU5CfihtY54D4e
- QmaJyDGAT0diuPMX7u567UVzYcdw0NvB5f/Nsdld3T9YtMFeTZOokfozVdjNSzPNaMVW
- 5lm6OhxgMpAYO5+CS/NiUk8lF5WDUZdEBw1q0=
+ d=konsulko.com; s=google; t=1748097786; x=1748702586; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QYazZm34LLKNznYzIR4CyjRSPJVhoQyNXzjTdfxkxCI=;
+ b=ItHbXZC2i3U41C7wupvMrlWV9vMbC9R/jpIolCC5QMMV9ZAd6vl/ndIke6Tt1+Y6UP
+ cdoqWE7PJlVPuEWpDf9juPASAl7kVzfmAedT6PtrqD6RSKnQmkvGXzpBr9hnTS8/j8Oi
+ 0NP0jfBE/rdDZnIxDGDEo2h/ZVSAuu/98gaH0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748097586; x=1748702386;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2zHmiiVLNqtUBzk0dbw+m6WreHMLbwFULmkiED+eoW4=;
- b=gLt2e7R64ccRf8Aw2lM/OEAf96+vTlC2qAbjXkdPWYbonYqLLRlz2IFihFBw1hX9iL
- DED5EP/L4AQ/tu71Ya6m+vmyIbBQYv2wz7ya0o/fVmo46a2MDr12igZ4tuugC0x2QrPu
- mvPVUq9+c2CFS/5p1AIHoIwkXdUz+hloH7q7GkZkAjViUAVpMDe1HGpAO5QKBK/vzjrA
- k1MiqeNomDTItYjIGvciv9h5c6mr78Tz4CqI2XReXuCNSIqpY2UoTf88bnrZa8q1W+ud
- Ia6df4pnlJGwiNNmN33slZvUCdpwVRCn1QwTpIZ2W7w3p+P1ApdXfwODaXudivWTZo5h
- 5W/g==
-X-Gm-Message-State: AOJu0Yx/xXABwkCY1MhUF0iC93EK4Rcs08LOoaOosCxDCphoSY49V34X
- RIBk9arlWEBXm+e3bA+gt/MH369C2TPvg68iyv201aTadXAx0xCrkdQAw2MQMwxnYbQ1fjgws2M
- 1uKv/hkqQ0PSalmHCFnA97/JhZpXxMd5tiOiLeThpbT2bK3X/PqyYDHxksko=
-X-Gm-Gg: ASbGnctalEZ18KMBUfVpzHvf5RDjVxcC+bT5bu0ttj6Ks64T77LBxv9j57TOW/hTizP
- T+wV3wN0snVJjoEO9GbNHuGFEsddLJ6tSRliY92cOQWebebKt6MFkpZpkWOtL7p38BC7PTol0Bi
- WEuQ8BZzvDaYRhBd829xhxZYwJ0YaUDGU=
-X-Google-Smtp-Source: AGHT+IFzqbD2+T4MMBx2Pr9YOy2Dsjswps6Kn2EjCO6ydWqjY1oBHLlR91B2YivKL1m0bGYBY0eZKU7e2LSUH92/4xI=
-X-Received: by 2002:a17:906:9fcc:b0:ad5:10d9:9061 with SMTP id
- a640c23a62f3a-ad85b2799cdmr271791466b.54.1748097586489; Sat, 24 May 2025
- 07:39:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748097786; x=1748702586;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QYazZm34LLKNznYzIR4CyjRSPJVhoQyNXzjTdfxkxCI=;
+ b=OTOPjPE5GqlMTndPJMdwkAofSDBuxniF69/+vMCT+eZ+r2W7x6muEIJ3NXIpvwVhex
+ uL4QvE65TtNhAwwQPKv/KhwvlGD3frDZq1HV2qBUPhct2nPyyyOlvGKBmsBGDIxkfqAa
+ hLJsdLsEWuHfSAkzDtpb+8qMXwbA/AKGSxVXwJQptaK2BgMF70FQBSqLR1b6nqHMRQT2
+ Vm69gV/TJWGii0MwXjHrEJRePnq3ACxaHPAb8BPXvwWzJsXpjceTWleGiq0itWx9j5Sx
+ j2uhrLjZzyV/MOlQuWdOzeLjejtOcwuIq6U4M1MdTTu8BaGjkxreL5Fu3xeE+6GtqyqH
+ WjKQ==
+X-Gm-Message-State: AOJu0YzyaS45SRo262vssDdxQJ5KXANDLsm2CvhEDxUAPT/5aJUk0QUz
+ uJ/GJVnoRtpatBTpd6KuXicRiSxU1pVNfmEn5F7krui4nhYI/0xCN0NQ5+ntIsI5spbfa79m0UL
+ 7NFfp6Sk=
+X-Gm-Gg: ASbGncumQXhhIRf2+3wfp+NjUqh9mxdTTSOCO59FA3bUwEYV7419sFIjWfepAIbTpKj
+ iOK32m9q8CyfTI+hNWxdS9HyTYr87D6O9f0jzSReFA7nNnx36tuhCrX5dhDryLNF1aDR2e4YRQs
+ w26JRjcxEdlkTCVeZJ7+c1zWLxj1VJul2PWDLU2t2BEFjcK6K8owXHdxvGPkr3X4EKoIAUR9UC2
+ H+LSPLGT599HZx1RilaAUt/Dkybf3e+8KCe6nD+UwpqyOqrRKskSqRZAoXNBcgip1+MNkw07YLG
+ 2wTceOP/c4Q6pZTGWBA2EjZ9mZuzgHGJL/LbTm/gD7NAP6onUm1uNS6NuqyD2KfE0cfsj8SzS+Z
+ WucoYj3agXxWA
+X-Google-Smtp-Source: AGHT+IFRLwT9Su0kHCf6i4YUc6Jov6vQgmqDXReTUNEO9PlcqGnZbBc6nGK8fd5dArah3svyYZNshw==
+X-Received: by 2002:a05:6871:e418:b0:2c2:3e24:9b54 with SMTP id
+ 586e51a60fabf-2e861e02c19mr1692872fac.11.1748097786428; 
+ Sat, 24 May 2025 07:43:06 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2e3c06084ccsm4140620fac.7.2025.05.24.07.43.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 24 May 2025 07:43:05 -0700 (PDT)
+Date: Sat, 24 May 2025 08:43:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH] sandbox: Move FDT to a different address
+Message-ID: <20250524144303.GM100073@bill-the-cat>
+References: <20250524143837.1205231-1-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20250504132356.2317305-1-sjg@chromium.org>
- <CAFLszTi6LwvSoNtThF5DzKjJNFzJxB5rk5DjYi9wzsfkiwwjcg@mail.gmail.com>
- <20250523140455.GP100073@bill-the-cat>
- <CAFLszTj1v7dhvdj9vM70OP=Bb8j3FArYHS3SGcpnJO31z3Ns1g@mail.gmail.com>
- <20250523164717.GU100073@bill-the-cat>
- <CAFLszTg0CO5PqagaAZNov-N4rv6D17iUV_qnAasJ336zW=eG9w@mail.gmail.com>
- <20250523212539.GX100073@bill-the-cat>
- <CAFLszTioW78gyU2qK+-E5CcjyTAatvFuodWV3NKuwq5anBGdpg@mail.gmail.com>
- <20250524141805.GB100073@bill-the-cat>
- <CAFLszTj=6W2miuLkU0Acbi-HBNSAiq-9YfwdOu0-+OSSy9+gvw@mail.gmail.com>
- <20250524143124.GI100073@bill-the-cat>
- <CAFLszTizvrb9jX+a6-BVVtrH-fU5T_DdV8gakyEszSVCojp3hQ@mail.gmail.com>
-In-Reply-To: <CAFLszTizvrb9jX+a6-BVVtrH-fU5T_DdV8gakyEszSVCojp3hQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 24 May 2025 15:39:35 +0100
-X-Gm-Features: AX0GCFv6I5CqQAXaNviK4SSsQ-iErmeLHls2liqm119bwXj8gTNwPwyGyWb4gkY
-Message-ID: <CAFLszThUpdm2e0QgYuENfmC8+4L-29iW7XQgNLhZzpkkyEeUnw@mail.gmail.com>
-Subject: Re: [PATCH v2 01/30] patman: Move all non-test logic into control
- module
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rIWs7PFyBxok1I5D"
+Content-Disposition: inline
+In-Reply-To: <20250524143837.1205231-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,128 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Sat, 24 May 2025 at 15:35, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Tom,
->
-> On Sat, 24 May 2025 at 15:31, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sat, May 24, 2025 at 03:22:57PM +0100, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 24 May 2025 at 15:18, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, May 24, 2025 at 05:23:48AM +0100, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 23 May 2025 at 22:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, May 23, 2025 at 09:20:37PM +0100, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 23 May 2025 at 17:47, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Fri, May 23, 2025 at 05:32:36PM +0100, Simon Glass wrote:
-> > > > > > > > > Hi Tom,
-> > > > > > > > >
-> > > > > > > > > On Fri, 23 May 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Fri, May 23, 2025 at 08:19:30AM -0500, Simon Glass wrote:
-> > > > > > > > > > > It is easier for tests if the top-level control logic is all in one
-> > > > > > > > > > > module. Create a new do_patman() function to handle this. Move the
-> > > > > > > > > > > existing code into it.
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > ---
-> > > > > > > > > > >
-> > > > > > > > > > > (no changes since v1)
-> > > > > > > > > > >
-> > > > > > > > > > >  tools/patman/__main__.py | 49 ++----------------------------------
-> > > > > > > > > > >  tools/patman/control.py  | 54 ++++++++++++++++++++++++++++++++++++++--
-> > > > > > > > > > >  2 files changed, 54 insertions(+), 49 deletions(-)
-> > > > > > > > > > >
-> > > > > > > > > > > Applied to sjg/master, thanks!
-> > > > > > > > > >
-> > > > > > > > > > Odd. I thought you had posted this against master or next, intending it
-> > > > > > > > > > for mainline, which is why I assigned it to you in patchwork. I see the
-> > > > > > > > > > cover letter is missing what commit it's against. And instead here you
-> > > > > > > > > > are once again spamming the list and with messages about your personal
-> > > > > > > > > > tree. Why?
-> > > > > > > > >
-> > > > > > > > > I'm applying it to my tree and intend to send you a PR at some point,
-> > > > > > > > > with collected tools/ patches. So I believe I need to send emails
-> > > > > > > > > about applying things and update it in patchwork. Let's discuss this
-> > > > > > > > > in a future call.
-> > > > > > > >
-> > > > > > > > I don't see what there is to discuss. Please follow the normal process
-> > > > > > > > for mainline and stop spamming the list with notices for your personal
-> > > > > > > > tree. You're also diverging your own tree further from mainline by doing
-> > > > > > > > this and making it less likely (multiple people have told you they don't
-> > > > > > > > want to review things not against mainline) any follow-up work will get
-> > > > > > > > comments other than that it's not applicable to mainline.
-> > > > > > >
-> > > > > > > For patman, I have another series [1] I'm planning to apply to my tree tomorrow
-> > > > > > >
-> > > > > > > Would you like me to send 'applied' emails for it to the mailing list?
-> > > > > > > Or perhaps just for the cover letter? Would you like me to send you a
-> > > > > > > pull request?
-> > > > > > >
-> > > > > > > Regards,
-> > > > > > > Simon
-> > > > > > >
-> > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=456256
-> > > > > >
-> > > > > > Yes, that's another series that while I disagree with the direction
-> > > > > > you're taking things, would rather apply to mainline than let it bitrot
-> > > > > > in mainline. So please send a PR against next. And that would also apply
-> > > > > > to the series this email is in reply to. As again, I had expected it for
-> > > > > > mainline and not your downstream tree even if I think we (and our users)
-> > > > > > would all benefit from managing the python portions differently.
-> > > > >
-> > > > > OK, once I have applied the remaining two series I will send a PR.
-> > > >
-> > > > Based on the emails in my inbox this morning, you're doing the opposite
-> > > > of what I asked for. But maybe this afternoon will bring something
-> > > > different.
-> > > >
-> > > > > You didn't express a preference for the 'applied' emails. It seems
-> > > > > better to send these emails so that there is a record of the patch
-> > > > > being applied.
-> > > >
-> > > > I guess I wasn't clear enough. Stop spamming the list with *anything*
-> > > > about your personal tree. And if you're going to send anything about
-> > > > something that's intended for mainline, you should make patman act more
-> > > > like b4 and NOT send a message to every patch. I know I used to, but the
-> > > > workflow b4 enables is much better for everyone.
-> > >
-> > > How do I (or anyone else) know whether a patch was applied? If you
-> > > only reply to the cover letter, doesn't that mean that the patches are
-> > > left 'hanging' in the mailing list?
-> > >
-> > > I didn't know you had changed your policy on this...it certainly seems
-> > > odd to me. I often find Heinrich's patches are 'silently' applied, so
-> > > perhaps he does the same thing?
-> >
-> > Every custodian does things as they see fit for mainline, but most are
-> > adopting b4 which means that no, I'm not sure why there would be
-> > confusion, or where it would come from. The emails say what the commit
-> > ranges are for a series, patchwork is updated and then periodically most
-> > patches in patchwork then get their githash added. Replying to the cover
-> > letter with the commit range for the series means it's very much not
-> > "hanging".
->
-> Generally I rely on seeing a reply to a patch to know it was applied.
-> So it is confusing when the patch goes in but there was no reply to
-> the patch.
->
-> I've noticed that you seem less inclined to apply some patches from a
-> series, instead requesting that the whole series is resent. Perhaps
-> that is why?
+--rIWs7PFyBxok1I5D
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Also, was there an announcement about this change? If so, could you
-please point me to it?
+On Sat, May 24, 2025 at 08:38:27AM -0600, Simon Glass wrote:
 
-Regards,
-Simon
+> The FDT is near its limit and may overlap with the early-malloc region
+> if more things are added. Move it to a better location.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  arch/sandbox/Kconfig         | 2 +-
+>  doc/arch/sandbox/sandbox.rst | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+[snip]
+> --=20
+> 2.43.0
+>=20
+> base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
+> branch: sand
+
+This is once again, not against mainline.
+
+--=20
+Tom
+
+--rIWs7PFyBxok1I5D
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgx2vcACgkQFHw5/5Y0
+tyw7igwAgtkwz5gDURh6Cbkozlau2YYeQO3p8pYzphZNWz2jGiAzBAoNnJc0Y7Fr
+Phk72g8niQCrp8VWxwKQqDmCYBAF0TMVX4ktGgsgkmQkFbBrEstGcDRk37O5jnul
+rwK4A4tEjYEOD1XVn2tpeIsc2ssWS7+pTGC91cOJ1xDu0p0Igf/J62sTfTnKY8Vy
+WZpOOATuvzAnhSsQysDY8BysxICVKB6cIsV1cm9KduWyCPCkhWJuSggliBV3d/Gl
+jzkZbNSdgw/UEHAd169zpzYOSeeryY7Q94ppr6OOHyq4rpRCCrn6MELWPmTuzeAj
+LaKQVSIP5RYrFI76z0e4hyQQak8svjvmbvkuI/46a1XVnTC/QsczDoOK5fJBTF2M
+NegEYRW5ULQxbHn7LoJenMvhUMGC1qRuR6QBCJ1VwwSI9EsL/oaMlLY0Mw7EXyCZ
+IblIs983S1TrSOBLFzj6ACRlOw+OlzeM4MVw8HJsaSBISH+p86MqYSO7roy4ukXH
+IzZ2h5az
+=EZaX
+-----END PGP SIGNATURE-----
+
+--rIWs7PFyBxok1I5D--
