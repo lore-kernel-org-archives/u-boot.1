@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E941C54F30
-	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 13:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B91C54FC6
+	for <u-boot@archiver.kernel.org>; Sat, 24 May 2025 14:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91A8E831C2;
-	Sat, 24 May 2025 15:44:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D875782F67;
+	Sat, 24 May 2025 16:13:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P0YFrQgz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ci3ZFYYT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87B67831FE; Sat, 24 May 2025 15:44:08 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id DA3DA83082; Sat, 24 May 2025 16:13:55 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63D04830E9
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 15:44:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A99F382AE2
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 16:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-85e73562577so83914639f.0
- for <u-boot@lists.denx.de>; Sat, 24 May 2025 06:44:06 -0700 (PDT)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-85e46f5c50fso78434639f.3
+ for <u-boot@lists.denx.de>; Sat, 24 May 2025 07:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748094244; x=1748699044; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6BhWs1hA3vTCAImvTiOQLtcJkVA7H7X3jrNx7/sUvGg=;
- b=P0YFrQgzidvlYhodEoEinNFLg8vr7oezcyDx6uL/w/4lZCNbewvihh59KPOFyvWuWV
- fw4VJ6q2EqcWvrioQf948aejvui6QDyn7QIpWxJFqUR6ZKKfm6kVi/dG9mQvSJRj5YCx
- 7hUmSYjMLsL3Mm12EAd7EHbmnUwbxEoeaNFkI=
+ d=chromium.org; s=google; t=1748096032; x=1748700832; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6mRJvoRqaSfvfKhGio5gXq13We+T9BeWSENItwW6FZ0=;
+ b=Ci3ZFYYTsjHs0uy79vkqqb1J+7sY4nBJi47CXBF2tyxgTW7IG5/Ari86cPKvPj4D6a
+ U7HHwcFPoktrwR0jSyCPilyvnmsHrs2uNRoYeW2SY86yvTew7NBLZZA8hvV7dtk1ubDY
+ BxrPrxgJtXXjFLG85lIkE9Z4liRlenz2MJxz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748094244; x=1748699044;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6BhWs1hA3vTCAImvTiOQLtcJkVA7H7X3jrNx7/sUvGg=;
- b=oin+7KhZP1bvCPL4iCLGQechNk66qZQREIixwFDejHlq9crw03y/WYBx5GkYlu9Klq
- WsgM+y7q3PeKXoiFAeES6nuC9y3pSYirVd9WwK3Y+eVpo2Ulx8hq9c7YOEl4MJSWC8qg
- DD3F/pjg9/AUy5m8gZ5CUTj6zcx/rNMrwzVA5hyk9SbDXE98Iqcr4aZ1w4PwZKSCV5t8
- VtcBw9IUQvYYG9w8gbzAKZNw2HGLmCy45+ImgIUNlqfwm66WvX1B4PyzpRO3DaQfdsh4
- cDxxEDKJ5sC0GHpUFDLwNBhDBcZ6QPpGFB6HeSNj6XjGhaIdI8ufr5pc/ayJnEOVx5jg
- jZhg==
-X-Gm-Message-State: AOJu0YwQ+EZbIXtDoarJwTda5bWIF4f/vmFgS+BinnJWQTQTIfAbWAuu
- IprQM06ejT+nbS+gO9Xp9JcgMjFp1j+lrd3dwhoAdoyZzHGI6yH1Oji15OOo1Pi1EIAXz9/NjJ5
- wTcLoGLlD
-X-Gm-Gg: ASbGncukV0wJFhsOjkq344adEQdo7XY+DxhtbZULeqyaEMcU4lCBYalrNhsWvM/mNLi
- dfOZtWew4KvfiMsuiRsicKjpy7kUlcOBISIcYqgAYtqXb9q4KRWxZLSIsYs8htG8g9Sl32dA0ua
- YC3R1rD6Udq8DmA9Mc5fbs2O33qC9kU890Ee9wKPSG2ts5uQsfYKOtYYurMPqDe65kkzjQRUn7N
- YG0xsCQOesZPnKpd59NfWN1VuBXYDaE0ySsmZ8aB+CAAcdT1PicdHZAoCfDPUuEgJSuj6dOAGaJ
- P/Mc6d8EMy8h6omMM/YCRKwQXf6jQYovuwA4IRbpfqcr9E9Um/7wmX1+mGlY8G+DZD5oZ9DpVTx
- khIc+8wUBN/DD
-X-Google-Smtp-Source: AGHT+IEBcaQ+m3qqe3Gz+XPNcJfrQx43b4skrxbHcuAaT1vOlHrTN93CoI+enLaWaqyYw5qH6F6htA==
-X-Received: by 2002:a05:6e02:2185:b0:3dc:7f17:72cd with SMTP id
- e9e14a558f8ab-3dc9b724814mr23486425ab.19.1748094244115; 
- Sat, 24 May 2025 06:44:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748096032; x=1748700832;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6mRJvoRqaSfvfKhGio5gXq13We+T9BeWSENItwW6FZ0=;
+ b=QrUBxCPfY+E1WpJczcgHD3skGHOqSYnhv9bAExdqV6DuwEJeBvVMVoYR1pLiefBZdN
+ sNpGAt8mvbu34qwCIQcku3ufxClzGzL+n1iP6YccgpPLst70BkCHtwZNCUeb4yQ3yS9r
+ rDbcjvkmu2QSBBlrnzeSFRlc+U8i6WlcIMxVyKkIf3Xix57slvloAjl/0t6WOW2tlKtT
+ naJ2vuxvpaIe2msnYdXCAtMwNOzuF+Ry/c9ZYxrFgsEOnfYCa4/uI8Iu8xHXIYhE121X
+ JuhpvRDF4UcZbJaHh3kK1os0YeaQPIMPiFxlffzToxuWeAswlRmMNJ7g3xKzJB2Mtnan
+ 5S5A==
+X-Gm-Message-State: AOJu0YwE9+r+rkezwCUECTSpfv55R5UGu+1zUgYG27Pg08npJITAP9fL
+ shBUI/hHj+TmAM+kuWK1a7RRsbjU+Dy+QkvkLvkfYg5XcpXijbj5QP7Oc6qF894iFxAu7lvwxxN
+ JSEro/ltC
+X-Gm-Gg: ASbGncspQi8Ml4n5W74bapKRUOtc8DwfnH17/3xEZ55AD0Q3trJE7uHzZhfn8lx08IN
+ 0JBhL8R1C8aIH61EfMxC1Kq2Erz659S6yLAOnEbc7bsPGoR76ZQpOCHtSNatY1palWtnWbNotLG
+ +n/5Fbwavf1UAWz1xJx3AkCMBDOGvn53EV5pcQC9qX7rneJLJ1sbNgA0y5GaoN1a9tF71LQGqMu
+ LYT09o0xuPNL3pIMLJFfg165OaIfHh90R2jRoxRN9QTINWZXJ3PfnFxivvlKIJUpb4g15ugt/nE
+ 1ornUin7l2QhZFvrl7A6Mf9LhDDbmN8Y07qarLl5I/r7Mqz2jfqzrgqqBKf7vTXQ3llNnxwHUAL
+ Tmfxwffno3dHqvuHQqodksCA=
+X-Google-Smtp-Source: AGHT+IG5gZxsLO1TxhXXVW0jDLAQrOvZy4HlJvIlJ3Nw0ddkswIxRsZbrEwdsXKd8y6SUWCbekrL3Q==
+X-Received: by 2002:a05:6e02:1606:b0:3dc:87b5:2ca6 with SMTP id
+ e9e14a558f8ab-3dc9b6d3abcmr25369485ab.7.1748096031818; 
+ Sat, 24 May 2025 07:13:51 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fbcc38bf26sm4033091173.19.2025.05.24.06.44.01
+ e9e14a558f8ab-3dc63c1bd8bsm34615685ab.38.2025.05.24.07.13.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 May 2025 06:44:02 -0700 (PDT)
+ Sat, 24 May 2025 07:13:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
+Cc: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] bootstd: Improve parsing on extlinux.conf files
-Date: Sat, 24 May 2025 07:43:47 -0600
-Message-ID: <20250524134356.939898-2-sjg@chromium.org>
+Subject: [PATCH] tpm: Export the function to set up the TPM log
+Date: Sat, 24 May 2025 08:13:46 -0600
+Message-ID: <20250524141348.965322-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250524134356.939898-1-sjg@chromium.org>
-References: <20250524134356.939898-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,60 +92,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These files can have tabs, but they are currently parsed as separate
-lines. Fix this.
+In some cases, we may wish to set up the TPM log under full control of
+a driver in U-Boot. Export the required function to make this possible.
 
-Also, some files provide a separate 'menu label' which has more
-information than the 'label', so use that if available.
-
-Finally, we don't yet have the ability to parse all entries in the
-file until the user actually boots the extlinux.conf file. At present,
-this means that the last entry is shown. It seems better to use the
-first entry, so update it.
+This avoids calling the weak function tcg2_platform_get_log() when the
+caller already knows where the log is.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootmeth_extlinux.c | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+ include/tpm_tcg2.h | 9 +++++++++
+ lib/tpm_tcg2.c     | 2 +-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index 71a9009479b..4b9e22b8d7c 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -83,13 +83,28 @@ static int extlinux_fill_info(struct bootflow *bflow)
- 	log_debug("parsing bflow file size %x\n", bflow->size);
- 	membuf_init(&mb, bflow->buf, bflow->size);
- 	membuf_putraw(&mb, bflow->size, true, &data);
--	while (len = membuf_readline(&mb, line, sizeof(line) - 1, ' ', true), len) {
-+	while (len = membuf_readline(&mb, line, sizeof(line) - 1, 0, true), len) {
- 		char *tok, *p = line;
-+		const char *name = NULL;
+diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
+index eb6afe49e77..189a93ee840 100644
+--- a/include/tpm_tcg2.h
++++ b/include/tpm_tcg2.h
+@@ -345,4 +345,13 @@ void tcg2_platform_startup_error(struct udevice *dev, int rc);
+  */
+ u32 tcg2_algorithm_to_mask(enum tpm2_algorithms);
  
-+		if (*p == '#')
-+			continue;
-+		while (*p == ' ' || *p == '\t')
-+			p++;
- 		tok = strsep(&p, " ");
- 		if (p) {
- 			if (!strcmp("label", tok)) {
--				bflow->os_name = strdup(p);
-+				name = p;
-+				if (bflow->os_name)
-+					break;	/* just find the first */
-+			} else if (!strcmp("menu", tok)) {
-+				tok = strsep(&p, " ");
-+				if (!strcmp("label", tok))
-+					name = p;
-+			}
-+			if (name) {
-+				free(bflow->os_name);
-+				bflow->os_name = strdup(name);
- 				if (!bflow->os_name)
- 					return log_msg_ret("os", -ENOMEM);
- 			}
++/**
++ * tcg2_log_init() - Set up the elog
++ *
++ * @dev: TPM device, used to find the number of PCRs
++ * @elog	Platform event log
++ * Return: zero on success, negative errno otherwise
++ */
++int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog);
++
+ #endif /* __TPM_TCG_V2_H */
+diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+index c314b401d0b..9909d9e14d5 100644
+--- a/lib/tpm_tcg2.c
++++ b/lib/tpm_tcg2.c
+@@ -220,7 +220,7 @@ static int tcg2_log_append_check(struct tcg2_event_log *elog, u32 pcr_index,
+ 	return 0;
+ }
+ 
+-static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
++int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
+ {
+ 	struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
+ 	struct tcg_efi_spec_id_event *ev;
 -- 
 2.43.0
 
-base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
-branch: boo
+base-commit: bab54f5942c428be698216224fd10b91d974d4da
+branch: tpma
