@@ -4,109 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD1C2C54E90
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 09:18:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE4E4C54E90
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 09:24:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D915182B0E;
-	Sun, 25 May 2025 11:18:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7AB4482AB9;
+	Sun, 25 May 2025 11:24:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="R0oeaNw2";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ta48O/gl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DA0182AB9; Sun, 25 May 2025 11:18:32 +0200 (CEST)
+ id D459982AE2; Sun, 25 May 2025 11:24:00 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FD998003E
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 11:18:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67E97829E7
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 11:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1748164708; x=1748769508; i=xypron.glpk@gmx.de;
- bh=Aj9NSkLny2+srb+N7w7qy+VkcYWEw6DVbOiIzpfQHso=;
+ s=s31663417; t=1748165033; x=1748769833; i=xypron.glpk@gmx.de;
+ bh=gZ79riSGSDhbpKPDZrgFb1NUxWBOq9S/sAfAiJ35JDk=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=R0oeaNw2Pi/Zn3LZHORCVVOotzNZUI1nQBXRxPOBDFQA5v1SRjoKkUkJP6zP95d0
- L/3JTQtS8JTxUjsQC3zVTkeDl4P91yQmzv3E2DoSXVv8iZqyhD2Gu1RM+U+X5dtAA
- s4Vp16TkK7GxTH7WbLeq4dKWut/nYZWACHK31cM49LEgtFzRqwKOTUcPBi7YMeTpM
- kPCw+lkXh1yFKc115mtgdiP8tjQKKBrH3eB4J98Wh/Mgbe/Xd/TOAXUG1COxOEBXP
- J4TcslUZcWUniOo4RtQ1qULGakRh43LVQ0hzUwFAT6eoqEgjvPOH3ceFN+6s7OeVY
- qyP4Fx+lybH9W6vN/w==
+ b=ta48O/glNULLOo/HyMAEg9q+7ajU87AOpV80UdeNXiYOuFgMWUIrbmEbKb83dGV8
+ MteovchHMS5oPMHuhmLb3K9n5tuv7TpKIUs4K0rKfpeLg+WeToHKgXEPA5J3Uru6w
+ Dba1f3ked+vbn/snRJjwPgRFfe2cHLrrCrVLqdvs4IN0nVsFfgIaT1s/c58aKaHHk
+ qaLjOtGjm97kO1HdpVgZ4iADGpaPN9ZZCBhcSme9vGmINJZWmVM0TPLx76zIVLku/
+ BFfYWP4REJSJz8UmG6ussQRsCigyExRSAnoomvvkEAMICTG/wUa3hBQkaeqG5dDZV
+ ET1+08G7EPN+63mgXA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.143.105] ([46.114.106.142]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mg6e4-1uqYyj47dm-00f06e; Sun, 25
- May 2025 11:18:28 +0200
-Message-ID: <501660c5-2c69-4f93-ae10-d83253706890@gmx.de>
-Date: Sun, 25 May 2025 11:18:21 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MSbxD-1uUIfR2mBF-00RCTy; Sun, 25
+ May 2025 11:23:52 +0200
+Message-ID: <6c3c3f3e-2ceb-448b-ab25-87729d117d8e@gmx.de>
+Date: Sun, 25 May 2025 11:23:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] efi: Include device-path functions in the EFI API docs
+Subject: Re: [PATCH 3/3] efi: Rename END to EFI_DP_END
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Daniel Golle <daniel@makrotopia.org>, Moritz Fischer <moritzf@google.com>,
+ Pawel Kochanowski <pkochanowski@sii.pl>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Tom Rini <trini@konsulko.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20250524172827.1243975-1-sjg@chromium.org>
- <20250524172827.1243975-2-sjg@chromium.org>
+ <20250524172827.1243975-3-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250524172827.1243975-2-sjg@chromium.org>
+In-Reply-To: <20250524172827.1243975-3-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nOuH/91+M/qxyDjHwXRBn4ZZ3LY82pZE+RiBuwl7TAdOBlMzzA5
- w5cJNx0BGM8sLn9OBdmcWRTJC9q/M71vFofn9Aigb5HvUiyL0PjW4pFBkBBVzcwH+9PlRp/
- YF+NIGAH0tzzga4agHi0bvwqG2o8JnUS7QafyyWd7MlJPBVtTLMw/EZzvfjZjEGEE9We5tq
- 8auJ1j+CrhNyop2kD632Q==
-UI-OutboundReport: notjunk:1;M01:P0:GHf+S3r42gY=;Jp2QbeCqdGqbIOtGN66Y6sKhQEV
- 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
- z0Oh7dVU49HuMeX2p0PG+TheC5V4L9+b8h
+X-Provags-ID: V03:K1:lP3N80f9tEPcO4R/mxJ8rMqvwtFS/KR17xU/VVb/22vb6zkLUgx
+ 5cN8sosZKt4G00ubi8cUGQshQcfnhST+6FJRSuRvMoy73bUn9m/0uhKVAV+I46uR56QWtPz
+ +YBmBbyQuTJMmRKqRZwMATlWX7tqKGqbt9BGFE+uyFweLX5v7wevK0kmcdT7Sh5ayvL8jE5
+ 4X7rY0yC0qn1yP22opK9Q==
+UI-OutboundReport: notjunk:1;M01:P0:61jk4djOvMY=;0DlvFt6phEe4vF/z10tY6pQfu5A
+ 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
+ 41FeqydMf3MoI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,60 +132,568 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 5/24/25 19:28, Simon Glass wrote:
-> Include these function so they can be browsed in the API docs. Exclude
-> END since it causes a warning, which becomes an error:
+> This exported symbol has a very generic name. Rename it to indicate that
+> it relates to EFI and device-paths.
 >=20
->     ./include/efi_device_path.h:22: warning: cannot understand function
->        prototype: 'const struct efi_device_path END; '
+> Fix checkpatch warnings related to use of multiple assignments.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Suggested-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-We expect builds to succeed after each patch.
-
-In patch 1/3 you need to change '/**' to '/*' for variable END to let=20
-'make htmldocs' succeed after this patch.
-
-Somehow you dropped Ilias from the Cc list for the series.
+Thank you for fixing this.
 
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
+>=20
 > ---
 >=20
-> (no changes since v1)
+> Changes in v2:
+> - Fix EFI_DP_3 typo
 >=20
->   doc/api/efi.rst           | 6 ++++++
->   include/efi_device_path.h | 2 +-
->   2 files changed, 7 insertions(+), 1 deletion(-)
+>   cmd/eficonfig.c                            |  4 +-
+>   cmd/efidebug.c                             |  6 +-
+>   include/efi_device_path.h                  | 27 +++----
+>   lib/efi_loader/efi_bootmgr.c               |  3 +-
+>   lib/efi_loader/efi_device_path.c           | 86 +++++++++++-----------
+>   lib/efi_loader/efi_device_path_utilities.c |  2 +-
+>   lib/efi_loader/efi_helper.c                |  6 +-
+>   7 files changed, 68 insertions(+), 66 deletions(-)
 >=20
-> diff --git a/doc/api/efi.rst b/doc/api/efi.rst
-> index 43d6f936fb0..a98298f93dc 100644
-> --- a/doc/api/efi.rst
-> +++ b/doc/api/efi.rst
-> @@ -178,6 +178,12 @@ Driver binding protocol
->   .. kernel-doc:: include/efi_driver.h
->      :internal:
+> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> index de1647b943c..6e14d34a6bd 100644
+> --- a/cmd/eficonfig.c
+> +++ b/cmd/eficonfig.c
+> @@ -515,7 +515,7 @@ struct efi_device_path *eficonfig_create_device_path=
+(struct efi_device_path *dp_
+>   	struct efi_device_path_file_path *fp;
 >  =20
-> +Device paths
-> +------------
-> +
-> +.. kernel-doc:: include/efi_device_path.h
-> +   :internal:
-> +
->   Unit testing
->   ------------
+>   	fp_size =3D sizeof(struct efi_device_path) + u16_strsize(current_path=
+);
+> -	buf =3D calloc(1, fp_size + sizeof(END));
+> +	buf =3D calloc(1, fp_size + sizeof(EFI_DP_END));
+>   	if (!buf)
+>   		return NULL;
 >  =20
+> @@ -527,7 +527,7 @@ struct efi_device_path *eficonfig_create_device_path=
+(struct efi_device_path *dp_
+>  =20
+>   	p =3D buf;
+>   	p +=3D fp_size;
+> -	*((struct efi_device_path *)p) =3D END;
+> +	*((struct efi_device_path *)p) =3D EFI_DP_END;
+>  =20
+>   	dp =3D efi_dp_shorten(dp_volume);
+>   	if (!dp)
+> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> index 01e58031573..109496d9e95 100644
+> --- a/cmd/efidebug.c
+> +++ b/cmd/efidebug.c
+> @@ -813,7 +813,7 @@ static int efi_boot_add_uri(int argc, char *const ar=
+gv[], u16 *var_name16,
+>   	lo->label =3D label;
+>  =20
+>   	uridp_len =3D sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
+> -	uridp =3D efi_alloc(uridp_len + sizeof(END));
+> +	uridp =3D efi_alloc(uridp_len + sizeof(EFI_DP_END));
+>   	if (!uridp) {
+>   		log_err("Out of memory\n");
+>   		return CMD_RET_FAILURE;
+> @@ -823,10 +823,10 @@ static int efi_boot_add_uri(int argc, char *const =
+argv[], u16 *var_name16,
+>   	uridp->dp.length =3D uridp_len;
+>   	strcpy(uridp->uri, argv[3]);
+>   	pos =3D (char *)uridp + uridp_len;
+> -	memcpy(pos, &END, sizeof(END));
+> +	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+>  =20
+>   	*file_path =3D &uridp->dp;
+> -	*fp_size +=3D uridp_len + sizeof(END);
+> +	*fp_size +=3D uridp_len + sizeof(EFI_DP_END);
+>  =20
+>   	return CMD_RET_SUCCESS;
+>   }
 > diff --git a/include/efi_device_path.h b/include/efi_device_path.h
-> index 67474d6d0c1..33b6cfe9b79 100644
+> index 33b6cfe9b79..03fbe8f1622 100644
 > --- a/include/efi_device_path.h
 > +++ b/include/efi_device_path.h
-> @@ -14,7 +14,7 @@ struct blk_desc;
->   struct efi_load_option;
+> @@ -15,12 +15,12 @@ struct efi_load_option;
 >   struct udevice;
 >  =20
-> -/**
-> +/*
->    * END - Template end node for EFI device paths.
+>   /*
+> - * END - Template end node for EFI device paths.
+> + * EFI_DP_END - Template end node for EFI device paths.
 >    *
 >    * Represents the terminating node of an EFI device path.
+>    * It has a type of DEVICE_PATH_TYPE_END and sub_type DEVICE_PATH_SUB_=
+TYPE_END
+>    */
+> -extern const struct efi_device_path END;
+> +extern const struct efi_device_path EFI_DP_END;
+>  =20
+>   /**
+>    * efi_dp_next() - Iterate to next block in device-path
+> @@ -85,11 +85,11 @@ efi_handle_t efi_dp_find_obj(struct efi_device_path =
+*dp, const efi_guid_t *guid,
+>    * efi_dp_last_node() - Determine the last device path node before the=
+ end node
+>    *
+>    * Iterate through the device path to find the very last node before
+> - * the terminating END node.
+> + * the terminating EFI_DP_END node.
+>    *
+>    * @dp: Pointer to the device path.
+>    * Return: Pointer to the last actual data node before the end node if=
+ it exists
+> - * otherwise NULL (e.g., if dp is NULL or only an END node).
+> + * otherwise NULL (e.g., if dp is NULL or only an EFI_DP_END node).
+>    */
+>   const struct efi_device_path *efi_dp_last_node(const struct efi_device=
+_path *dp);
+>  =20
+> @@ -101,8 +101,8 @@ const struct efi_device_path *efi_dp_last_node(const=
+ struct efi_device_path *dp)
+>    * end node (if any) or the final device path. The end node is not inc=
+luded.
+>    *
+>    * @dp: Pointer to the device path.
+> - * Return: Size in bytes of the first instance, or 0 if dp is NULL or a=
+n END
+> - * node
+> + * Return: Size in bytes of the first instance, or 0 if dp is NULL or a=
+n
+> + * EFI_DP_END node
+>    */
+>   efi_uintn_t efi_dp_instance_size(const struct efi_device_path *dp);
+>  =20
+> @@ -115,7 +115,7 @@ efi_uintn_t efi_dp_instance_size(const struct efi_de=
+vice_path *dp);
+>    *
+>    * @dp: Pointer to the device path.
+>    * Return: Total size in bytes of all nodes in the device path (exclud=
+ing the
+> - * final END node), or 0 if dp is NULL.
+> + * final EFI_DP_END node), or 0 if dp is NULL.
+>    */
+>   efi_uintn_t efi_dp_size(const struct efi_device_path *dp);
+>  =20
+> @@ -139,7 +139,7 @@ struct efi_device_path *efi_dp_dup(const struct efi_=
+device_path *dp);
+>    * @dp2:        Second device path
+>    * @split_end_node:
+>    * - 0 to concatenate (dp1 is assumed not to have an end node or it's =
+ignored,
+> - *   dp2 is appended, then one END node)
+> + *   dp2 is appended, then one EFI_DP_END node)
+>    * - 1 to concatenate with end node added as separator (dp1, END_THIS_=
+INSTANCE,
+>    *   dp2, END_ENTIRE)
+>    *
+> @@ -160,10 +160,11 @@ struct efi_device_path *efi_dp_concat(const struct=
+ efi_device_path *dp1,
+>    * Create a new device path by appending a given node to an existing
+>    * device path.
+>    * If the original device path @dp is NULL, a new path is created
+> - * with the given @node followed by an END node.
+> + * with the given @node followed by an EFI_DP_END node.
+>    * If the @node is NULL and @dp is not NULL, the original path @dp is
+>    * duplicated.
+> - * If both @dp and @node are NULL, a path with only an END node is retu=
+rned.
+> + * If both @dp and @node are NULL, a path with only an EFI_DP_END node =
+is
+> + * returned.
+>    * The caller must free the returned path (e.g., using efi_free()).
+>    *
+>    * @dp:   Original device path (can be NULL).
+> @@ -216,7 +217,7 @@ efi_dp_append_instance(const struct efi_device_path =
+*dp,
+>    *
+>    * Given a pointer to a pointer to a device path (@dp), this function =
+extracts
+>    * the first instance from the path. It allocates a new path for this =
+extracted
+> - * instance (including its instance-specific END node). The input point=
+er
+> + * instance (including its instance-specific EFI_DP_END node). The inpu=
+t pointer
+>    * (*@dp) is then updated to point to the start of the next instance i=
+n the
+>    * original path, or set to NULL if no more instances remain.
+>    * The caller is responsible for freeing the returned instance path (e=
+.g.,
+> @@ -226,7 +227,7 @@ efi_dp_append_instance(const struct efi_device_path =
+*dp,
+>    * On output, *@dp is updated to point to the start of the next instan=
+ce,
+>    * or NULL if no more instances.
+>    * @size: Optional pointer to an efi_uintn_t variable that will receiv=
+e the size
+> - * of the extracted instance path (including its END node).
+> + * of the extracted instance path (including its EFI_DP_END node).
+>    * Return: Pointer to a newly allocated device path for the extracted =
+instance,
+>    * or NULL if no instance could be extracted or an error occurred (e.g=
+.,
+>    * allocation failure).
+> @@ -408,7 +409,7 @@ struct efi_device_path *search_gpt_dp_node(struct ef=
+i_device_path *device_path);
+>    *
+>    * Set the device path to an IPv4 path as provided by efi_dp_from_ipv4
+>    * concatenated with a device path of subtype DEVICE_PATH_SUB_TYPE_MSG=
+_URI,
+> - * and an END node.
+> + * and an EFI_DP_END node.
+>    *
+>    * @server:	URI of remote server
+>    * @dev:	net udevice
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index a2ab90030b4..3ef0a9e73f3 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -856,7 +856,8 @@ efi_bootmgr_enumerate_boot_options(struct eficonfig_=
+media_boot_option *opt,
+>   		lo.label =3D dev_name;
+>   		lo.attributes =3D LOAD_OPTION_ACTIVE;
+>   		lo.file_path =3D device_path;
+> -		lo.file_path_length =3D efi_dp_size(device_path) + sizeof(END);
+> +		lo.file_path_length =3D efi_dp_size(device_path) +
+> +			sizeof(EFI_DP_END);
+>   		/*
+>   		 * Set the dedicated guid to optional_data, it is used to identify
+>   		 * the boot option that automatically generated by the bootmenu.
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
+e_path.c
+> index 818f993f7cc..7316a76f462 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -22,11 +22,11 @@
+>   #include <asm-generic/unaligned.h>
+>   #include <linux/compat.h> /* U16_MAX */
+>  =20
+> -/* template END node: */
+> -const struct efi_device_path END =3D {
+> +/* template EFI_DP_END node: */
+> +const struct efi_device_path EFI_DP_END =3D {
+>   	.type     =3D DEVICE_PATH_TYPE_END,
+>   	.sub_type =3D DEVICE_PATH_SUB_TYPE_END,
+> -	.length   =3D sizeof(END),
+> +	.length   =3D sizeof(EFI_DP_END),
+>   };
+>  =20
+>   #if defined(CONFIG_MMC)
+> @@ -214,7 +214,7 @@ efi_uintn_t efi_dp_size(const struct efi_device_path=
+ *dp)
+>   struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
+>   {
+>   	struct efi_device_path *ndp;
+> -	size_t sz =3D efi_dp_size(dp) + sizeof(END);
+> +	size_t sz =3D efi_dp_size(dp) + sizeof(EFI_DP_END);
+>  =20
+>   	if (!dp)
+>   		return NULL;
+> @@ -237,7 +237,7 @@ efi_device_path *efi_dp_concat(const struct efi_devi=
+ce_path *dp1,
+>  =20
+>   	if (!dp1 && !dp2) {
+>   		/* return an end node */
+> -		ret =3D efi_dp_dup(&END);
+> +		ret =3D efi_dp_dup(&EFI_DP_END);
+>   	} else if (!dp1) {
+>   		ret =3D efi_dp_dup(dp2);
+>   	} else if (!dp2) {
+> @@ -254,9 +254,9 @@ efi_device_path *efi_dp_concat(const struct efi_devi=
+ce_path *dp1,
+>   			sz1 =3D split_end_node;
+>  =20
+>   		if (split_end_node)
+> -			end_size =3D 2 * sizeof(END);
+> +			end_size =3D 2 * sizeof(EFI_DP_END);
+>   		else
+> -			end_size =3D sizeof(END);
+> +			end_size =3D sizeof(EFI_DP_END);
+>   		p =3D efi_alloc(sz1 + sz2 + end_size);
+>   		if (!p)
+>   			return NULL;
+> @@ -265,14 +265,14 @@ efi_device_path *efi_dp_concat(const struct efi_de=
+vice_path *dp1,
+>   		p +=3D sz1;
+>  =20
+>   		if (split_end_node) {
+> -			memcpy(p, &END, sizeof(END));
+> -			p +=3D sizeof(END);
+> +			memcpy(p, &EFI_DP_END, sizeof(EFI_DP_END));
+> +			p +=3D sizeof(EFI_DP_END);
+>   		}
+>  =20
+>   		/* the end node of the second device path has to be retained */
+>   		memcpy(p, dp2, sz2);
+>   		p +=3D sz2;
+> -		memcpy(p, &END, sizeof(END));
+> +		memcpy(p, &EFI_DP_END, sizeof(EFI_DP_END));
+>   	}
+>  =20
+>   	return ret;
+> @@ -284,26 +284,26 @@ struct efi_device_path *efi_dp_append_node(const s=
+truct efi_device_path *dp,
+>   	struct efi_device_path *ret;
+>  =20
+>   	if (!node && !dp) {
+> -		ret =3D efi_dp_dup(&END);
+> +		ret =3D efi_dp_dup(&EFI_DP_END);
+>   	} else if (!node) {
+>   		ret =3D efi_dp_dup(dp);
+>   	} else if (!dp) {
+>   		size_t sz =3D node->length;
+> -		void *p =3D efi_alloc(sz + sizeof(END));
+> +		void *p =3D efi_alloc(sz + sizeof(EFI_DP_END));
+>   		if (!p)
+>   			return NULL;
+>   		memcpy(p, node, sz);
+> -		memcpy(p + sz, &END, sizeof(END));
+> +		memcpy(p + sz, &EFI_DP_END, sizeof(EFI_DP_END));
+>   		ret =3D p;
+>   	} else {
+>   		/* both dp and node are non-null */
+>   		size_t sz =3D efi_dp_size(dp);
+> -		void *p =3D efi_alloc(sz + node->length + sizeof(END));
+> +		void *p =3D efi_alloc(sz + node->length + sizeof(EFI_DP_END));
+>   		if (!p)
+>   			return NULL;
+>   		memcpy(p, dp, sz);
+>   		memcpy(p + sz, node, node->length);
+> -		memcpy(p + sz + node->length, &END, sizeof(END));
+> +		memcpy(p + sz + node->length, &EFI_DP_END, sizeof(EFI_DP_END));
+>   		ret =3D p;
+>   	}
+>  =20
+> @@ -341,17 +341,17 @@ struct efi_device_path *efi_dp_append_instance(
+>   		return efi_dp_dup(dpi);
+>   	sz =3D efi_dp_size(dp);
+>   	szi =3D efi_dp_instance_size(dpi);
+> -	p =3D efi_alloc(sz + szi + 2 * sizeof(END));
+> +	p =3D efi_alloc(sz + szi + 2 * sizeof(EFI_DP_END));
+>   	if (!p)
+>   		return NULL;
+>   	ret =3D p;
+> -	memcpy(p, dp, sz + sizeof(END));
+> +	memcpy(p, dp, sz + sizeof(EFI_DP_END));
+>   	p =3D (void *)p + sz;
+>   	p->sub_type =3D DEVICE_PATH_SUB_TYPE_INSTANCE_END;
+> -	p =3D (void *)p + sizeof(END);
+> +	p =3D (void *)p + sizeof(EFI_DP_END);
+>   	memcpy(p, dpi, szi);
+>   	p =3D (void *)p + szi;
+> -	memcpy(p, &END, sizeof(END));
+> +	memcpy(p, &EFI_DP_END, sizeof(EFI_DP_END));
+>   	return ret;
+>   }
+>  =20
+> @@ -366,17 +366,17 @@ struct efi_device_path *efi_dp_get_next_instance(s=
+truct efi_device_path **dp,
+>   	if (!dp || !*dp)
+>   		return NULL;
+>   	sz =3D efi_dp_instance_size(*dp);
+> -	p =3D efi_alloc(sz + sizeof(END));
+> +	p =3D efi_alloc(sz + sizeof(EFI_DP_END));
+>   	if (!p)
+>   		return NULL;
+> -	memcpy(p, *dp, sz + sizeof(END));
+> +	memcpy(p, *dp, sz + sizeof(EFI_DP_END));
+>   	*dp =3D (void *)*dp + sz;
+>   	if ((*dp)->sub_type =3D=3D DEVICE_PATH_SUB_TYPE_INSTANCE_END)
+> -		*dp =3D (void *)*dp + sizeof(END);
+> +		*dp =3D (void *)*dp + sizeof(EFI_DP_END);
+>   	else
+>   		*dp =3D NULL;
+>   	if (size)
+> -		*size =3D sz + sizeof(END);
+> +		*size =3D sz + sizeof(EFI_DP_END);
+>   	return p;
+>   }
+>  =20
+> @@ -763,13 +763,13 @@ struct efi_device_path *efi_dp_from_part(struct bl=
+k_desc *desc, int part)
+>   {
+>   	void *buf, *start;
+>  =20
+> -	start =3D buf =3D efi_alloc(dp_part_size(desc, part) + sizeof(END));
+> -	if (!buf)
+> +	start =3D efi_alloc(dp_part_size(desc, part) + sizeof(EFI_DP_END));
+> +	if (!start)
+>   		return NULL;
+>  =20
+> -	buf =3D dp_part_fill(buf, desc, part);
+> +	buf =3D dp_part_fill(start, desc, part);
+>  =20
+> -	*((struct efi_device_path *)buf) =3D END;
+> +	*((struct efi_device_path *)buf) =3D EFI_DP_END;
+>  =20
+>   	return start;
+>   }
+> @@ -836,7 +836,7 @@ struct efi_device_path *efi_dp_from_file(const struc=
+t efi_device_path *dp,
+>   	if (fpsize > U16_MAX)
+>   		return NULL;
+>  =20
+> -	buf =3D efi_alloc(dpsize + fpsize + sizeof(END));
+> +	buf =3D efi_alloc(dpsize + fpsize + sizeof(EFI_DP_END));
+>   	if (!buf)
+>   		return NULL;
+>  =20
+> @@ -853,7 +853,7 @@ struct efi_device_path *efi_dp_from_file(const struc=
+t efi_device_path *dp,
+>   		pos +=3D fpsize;
+>   	}
+>  =20
+> -	memcpy(pos, &END, sizeof(END));
+> +	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+>  =20
+>   	return buf;
+>   }
+> @@ -862,7 +862,7 @@ struct efi_device_path *efi_dp_from_uart(void)
+>   {
+>   	void *buf, *pos;
+>   	struct efi_device_path_uart *uart;
+> -	size_t dpsize =3D dp_size(dm_root()) + sizeof(*uart) + sizeof(END);
+> +	size_t dpsize =3D dp_size(dm_root()) + sizeof(*uart) + sizeof(EFI_DP_E=
+ND);
+>  =20
+>   	buf =3D efi_alloc(dpsize);
+>   	if (!buf)
+> @@ -873,7 +873,7 @@ struct efi_device_path *efi_dp_from_uart(void)
+>   	uart->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MSG_UART;
+>   	uart->dp.length =3D sizeof(*uart);
+>   	pos +=3D sizeof(*uart);
+> -	memcpy(pos, &END, sizeof(END));
+> +	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+>  =20
+>   	return buf;
+>   }
+> @@ -887,13 +887,13 @@ struct efi_device_path __maybe_unused *efi_dp_from=
+_eth(struct udevice *dev)
+>  =20
+>   	dpsize +=3D dp_size(dev);
+>  =20
+> -	start =3D buf =3D efi_alloc(dpsize + sizeof(END));
+> -	if (!buf)
+> +	start =3D efi_alloc(dpsize + sizeof(EFI_DP_END));
+> +	if (!start)
+>   		return NULL;
+>  =20
+> -	buf =3D dp_fill(buf, dev);
+> +	buf =3D dp_fill(start, dev);
+>  =20
+> -	*((struct efi_device_path *)buf) =3D END;
+> +	*((struct efi_device_path *)buf) =3D EFI_DP_END;
+>  =20
+>   	return start;
+>   }
+> @@ -903,7 +903,7 @@ struct efi_device_path __maybe_unused *efi_dp_from_e=
+th(struct udevice *dev)
+>    *
+>    * Set the device path to an ethernet device path as provided by
+>    * efi_dp_from_eth() concatenated with a device path of subtype
+> - * DEVICE_PATH_SUB_TYPE_MSG_IPV4, and an END node.
+> + * DEVICE_PATH_SUB_TYPE_MSG_IPV4, and an EFI_DP_END node.
+>    *
+>    * @ip:		IPv4 local address
+>    * @mask:	network mask
+> @@ -934,7 +934,7 @@ static struct efi_device_path *efi_dp_from_ipv4(stru=
+ct efi_ipv4_address *ip,
+>   	if (srv)
+>   		memcpy(&dp.ipv4dp.remote_ip_address, srv, sizeof(*srv));
+>   	pos =3D &dp.end;
+> -	memcpy(pos, &END, sizeof(END));
+> +	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+>  =20
+>   	dp1 =3D efi_dp_from_eth(dev);
+>   	if (!dp1)
+> @@ -979,7 +979,7 @@ struct efi_device_path *efi_dp_from_http(const char =
+*server, struct udevice *dev
+>   	}
+>  =20
+>   	uridp_len =3D sizeof(struct efi_device_path) + strlen(tmp) + 1;
+> -	uridp =3D efi_alloc(uridp_len + sizeof(END));
+> +	uridp =3D efi_alloc(uridp_len + sizeof(EFI_DP_END));
+>   	if (!uridp) {
+>   		log_err("Out of memory\n");
+>   		return NULL;
+> @@ -991,7 +991,7 @@ struct efi_device_path *efi_dp_from_http(const char =
+*server, struct udevice *dev
+>   	memcpy(uridp->uri, tmp, strlen(tmp) + 1);
+>  =20
+>   	pos =3D (char *)uridp + uridp_len;
+> -	memcpy(pos, &END, sizeof(END));
+> +	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+>  =20
+>   	dp2 =3D efi_dp_concat(dp1, (const struct efi_device_path *)uridp, 0);
+>  =20
+> @@ -1009,11 +1009,11 @@ struct efi_device_path *efi_dp_from_mem(uint32_t=
+ memory_type,
+>   	struct efi_device_path_memory *mdp;
+>   	void *buf, *start;
+>  =20
+> -	start =3D buf =3D efi_alloc(sizeof(*mdp) + sizeof(END));
+> -	if (!buf)
+> +	start =3D efi_alloc(sizeof(*mdp) + sizeof(EFI_DP_END));
+> +	if (!start)
+>   		return NULL;
+>  =20
+> -	mdp =3D buf;
+> +	mdp =3D start;
+>   	mdp->dp.type =3D DEVICE_PATH_TYPE_HARDWARE_DEVICE;
+>   	mdp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MEMORY;
+>   	mdp->dp.length =3D sizeof(*mdp);
+> @@ -1022,7 +1022,7 @@ struct efi_device_path *efi_dp_from_mem(uint32_t m=
+emory_type,
+>   	mdp->end_address =3D start_address + size;
+>   	buf =3D &mdp[1];
+>  =20
+> -	*((struct efi_device_path *)buf) =3D END;
+> +	*((struct efi_device_path *)buf) =3D EFI_DP_END;
+>  =20
+>   	return start;
+>   }
+> diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader=
+/efi_device_path_utilities.c
+> index f3ef3eabdae..87d52df5066 100644
+> --- a/lib/efi_loader/efi_device_path_utilities.c
+> +++ b/lib/efi_loader/efi_device_path_utilities.c
+> @@ -32,7 +32,7 @@ static efi_uintn_t EFIAPI get_device_path_size(
+>   	efi_uintn_t sz =3D 0;
+>  =20
+>   	EFI_ENTRY("%pD", device_path);
+> -	/* size includes the END node: */
+> +	/* size includes the EFI_DP_END node: */
+>   	if (device_path)
+>   		sz =3D efi_dp_size(device_path) + sizeof(struct efi_device_path);
+>   	return EFI_EXIT(sz);
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index 2acae7856f9..44b806aadc4 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -200,7 +200,7 @@ efi_status_t efi_load_option_dp_join(struct efi_devi=
+ce_path **dp,
+>   		efi_free_pool(tmp_dp);
+>   		if (!*dp)
+>   			return EFI_OUT_OF_RESOURCES;
+> -		*dp_size +=3D efi_dp_size(initrd_dp) + sizeof(END);
+> +		*dp_size +=3D efi_dp_size(initrd_dp) + sizeof(EFI_DP_END);
+>   	}
+>  =20
+>   	if (fdt_dp) {
+> @@ -210,10 +210,10 @@ efi_status_t efi_load_option_dp_join(struct efi_de=
+vice_path **dp,
+>   		efi_free_pool(tmp_dp);
+>   		if (!*dp)
+>   			return EFI_OUT_OF_RESOURCES;
+> -		*dp_size +=3D efi_dp_size(fdt_dp) + sizeof(END);
+> +		*dp_size +=3D efi_dp_size(fdt_dp) + sizeof(EFI_DP_END);
+>   	}
+>  =20
+> -	*dp_size +=3D sizeof(END);
+> +	*dp_size +=3D sizeof(EFI_DP_END);
+>  =20
+>   	return EFI_SUCCESS;
+>   }
 
