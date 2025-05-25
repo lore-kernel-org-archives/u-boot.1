@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911B5C54F30
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:51:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 634C6C54F30
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9759836F0;
-	Sun, 25 May 2025 12:48:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01603836D1;
+	Sun, 25 May 2025 12:48:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MQkx0UeC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U3xHn0H3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97B4983721; Sun, 25 May 2025 12:48:42 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 8BA5F836D1; Sun, 25 May 2025 12:48:44 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFECE82CCE
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 578DD83700
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a366843fa6so809484f8f.1
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:40 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-441d1ed82dbso15654775e9.0
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748170120; x=1748774920; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748170121; x=1748774921; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FzG8E0zWJpDT09infXpZgomlJwI2jm/0RM9eVG/RzRU=;
- b=MQkx0UeCvXXcrdB4agATzY9sk7hW+9bcxnji5AhWzuqX2B+AkOjOGNIOEkmoAV2R1R
- MIY5YZljBhoFvuurB2s5HMHesdUXCQMae1AoiYRP0NUAVLtTn3cNV/YYLumdvxuNGM6d
- JMqNqYgR5qQBPAKlaeGJ4buU6WkG//FOeicuY=
+ bh=EngnAuF1Qzjl4xSd9Gx0NsN/oPoxNW7bvbsjyu8VRNY=;
+ b=U3xHn0H3BbEPU4u2UzSApYScUW1citZ9NzZoPzboNOoZs6knjHI9tK1D45vQEvaAl8
+ y1qpBuXIe8TJnV8e98NMOcYXIy6to72/3XC/T/+7sNdEq6a1YKPRFee4gjN9dUKqrYPv
+ J5fylq814n7YfuL+kGkbsdbOiu3XAYgE5BFqM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748170120; x=1748774920;
+ d=1e100.net; s=20230601; t=1748170121; x=1748774921;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FzG8E0zWJpDT09infXpZgomlJwI2jm/0RM9eVG/RzRU=;
- b=jtZzPHQHMOG/n/acWtnuWLHL9Tp4cVz9r8C5LtomxUYDiJB2MGYE8gY/E/qHfLRov7
- hb0ioQ3V4Y5G2Yd1PMn62Ln61e954mXDBVsWhEIqnWCyIiNGow8UsiVZrR1UlS7remxZ
- tveRo26U1Et4c60ZqNQMkO0udfo43yJ1W5pUXhS2c/MLoRqJg3cfkKGxDRZYb8fnZmem
- kbAIB6Oj/hRU4SAcaoohDRFbMtWFEVAg1MfU8z1kgcrxyqsOAkWHsoK5Urjvg7aX3Zoz
- alZwsKIGXZuTHXWuOu6r3NKhRhWlSAcOMsdtwlhFPbO54981eAFZgCmsjofQAMDlTFAA
- 0iXw==
-X-Gm-Message-State: AOJu0YwKNaWXwQy2zkWYer8WhzFNgFtM7/2/cB3W0q2wqC/qyA79c9v/
- 42HcYSo6Bh3kKQYLK5nJGxAdDNm9iMoo1/UhIwJjjodvllGoYVoflT8Y9Mp9A0knhuOLkSJurJn
- BHEF270Ra
-X-Gm-Gg: ASbGncuyOQCocExQvQyGG4CGHMOPxaRJP707TZyD1SQU5W5SI8vslrgE7VokOrhMhUD
- WAWWVGFNse7KJoGFKDuZU1M8lXhVU+VmwxAS5USPvPc6BUQt53tQxnzVUwQKr9idhbagPuBKoTi
- KeBo0RW4yPyC14nMe+Pi+V25Xl3xV7fIvzA/Dgxq+TWcnWdk0Uaay4iS2olS+lCR7zMYczm97kE
- m2qYmRn67GQ1vkgvzFvt6N0q5FpzxRFxkFN8huzFU9LYDhM6EBtq+8KuUB+5UdazF1FyASktz09
- /LxrS6k3bEmrnNML2p1DceHFWi2OTPK98kUcWzCTQnj45FbiOUZsVigXz25ZKmTBHK42QfO8ZFD
- k+WXu6g==
-X-Google-Smtp-Source: AGHT+IGi8Vxcd/MFWYFba/vqDXQbp057vazfKQJgo/ECxtj0AWiGm5T3fAmXu4WkPgPBB9zqRbdbkw==
-X-Received: by 2002:adf:ec4d:0:b0:3a4:cf40:ff2d with SMTP id
- ffacd0b85a97d-3a4cf41007bmr2483102f8f.21.1748170119710; 
- Sun, 25 May 2025 03:48:39 -0700 (PDT)
+ bh=EngnAuF1Qzjl4xSd9Gx0NsN/oPoxNW7bvbsjyu8VRNY=;
+ b=ZXJVFuU3Mipa84gNOLB9fc0c5UT0UMKGv/RZECVTMkcwpD6p9bgf11pK2zg4qikWNi
+ ujnl9+qGgbL8aCCYyOUwNhL8zHc269BJtWfwaKGfGlX/12VGtKpXCHvZKvBBlKSHnFy1
+ GsgHFs42CoEFMuBfoHS3/Zn9bsjD7/KiymUEVsKnAY+9rOwTxHIsDO5Wza7AZJxmMWVx
+ TuNSUsJvXPf1fgiq1nOI4oW5nitjJ/E5mdpYYRBODh7V2ytKjD9aXvmdTzphAGeqhgKu
+ 4QR3RbwwHh28pYFxw1e7wjfM1uAwlNgEenxoa/ArKjmykOHXx47WgMiElPHAxy3gOzeB
+ QYsg==
+X-Gm-Message-State: AOJu0Yx6brnUvmXi5dDDaJSgGVRO1b8Jl/hwx474RaPgwLT2MF20iA4k
+ BXHs6tds4p1da2aDX2LoWhYUMBXxJISDexFWnkusJnsdqINQFfbMkMHNeXhvqS2ppYmkfW8wCiE
+ TMkrp6jcJ
+X-Gm-Gg: ASbGnctnxRhf0X78qTPObLmLNyGbN4Qh3o39719bJ9zLGYjOkC029ffBR79F+qE3bJV
+ u5F/LfO97qEzaLVp15uQ9yGmJDqm7c3N0WPzzSvFQa9pmS2CrSaR0Mb7naoye9HbnGvAfcvvvXB
+ joJRP/e2yR4OjxI4urVpKg8nJILiMfS9Oqcs+YZAIstH6DN58FGORKm0Q6Q2Cxejzs3cQnIf3p+
+ qftsK7Y1qr704Slt2E2gk0shLF3nj99f0BI5YwX0jZxrKSpUgzXJpG597VVr7ABCHVDdbqvwfC6
+ jQ/cHsq6fuN5NNWAxYhIcXUadG90eCb9/GpJRNq8jeRUpSVPTFzN5E3rSlL3FZYsCEVRdDA=
+X-Google-Smtp-Source: AGHT+IH7WPZ/pMpW/IeteXz3g5B7y4WdapsxaWs53rx3n/JFrk+8yucYRtBo9tagc2TDA9G3UZ7bfw==
+X-Received: by 2002:a05:600c:4f02:b0:43c:f470:7605 with SMTP id
+ 5b1f17b1804b1-44c91dd11a6mr40766125e9.12.1748170121256; 
+ Sun, 25 May 2025 03:48:41 -0700 (PDT)
 Received: from tasman.. (host-80-43-238-15.as13285.net. [80.43.238.15])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.38
+ ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 May 2025 03:48:38 -0700 (PDT)
+ Sun, 25 May 2025 03:48:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
- Greg Malysa <malysagreg@gmail.com>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-Subject: [PATCH v4 20/25] rockchip: Set the skip-at-start property correctly
-Date: Sun, 25 May 2025 11:47:56 +0100
-Message-Id: <20250525104801.1440260-21-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 21/25] vbe: Add a bootmeth driver for abrec
+Date: Sun, 25 May 2025 11:47:57 +0100
+Message-Id: <20250525104801.1440260-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250525104801.1440260-1-sjg@chromium.org>
 References: <20250525104801.1440260-1-sjg@chromium.org>
@@ -104,11 +94,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The rockchip image is written to the media at block 64, which is a 32K
-offset, so set the skip-at-start property to 0x8000
-
-Update CONFIG_SPL_PAD_TO to point to the offset in the image, since
-Binman is dealing with the 'missing' 32K now.
+Add a VBE-ABrec bootmeth so that the VBE state can be accessed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -116,38 +102,125 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v2)
 
 Changes in v2:
-- Move this patch to the end of the series
-- Drop 0x8000 offset for SPI
+- Add new patch with a bootmeth driver for abrec
 
- arch/arm/dts/rockchip-u-boot.dtsi | 1 +
- common/spl/Kconfig                | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ boot/vbe_abrec.c | 99 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 99 insertions(+)
 
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 905706c68e7..8da3c1c2a98 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -170,6 +170,7 @@
- 	simple-bin {
- 		filename = "u-boot-rockchip.bin";
- 		pad-byte = <0xff>;
-+		skip-at-start = <0x8000>;
+diff --git a/boot/vbe_abrec.c b/boot/vbe_abrec.c
+index 6d0f622262d..8593082fd79 100644
+--- a/boot/vbe_abrec.c
++++ b/boot/vbe_abrec.c
+@@ -8,6 +8,7 @@
  
- #ifndef CONFIG_VPL
- 		mkimage {
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index fb6c90733ee..fa28c18fa48 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -96,7 +96,7 @@ config SPL_MAX_SIZE
+ #define LOG_CATEGORY LOGC_BOOT
  
- config SPL_PAD_TO
- 	hex "Offset to which the SPL should be padded before appending the SPL payload"
--	default 0x7f8000 if ARCH_ROCKCHIP
-+	default 0x800000 if ARCH_ROCKCHIP
- 	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
- 	default 0x11000 if ARCH_MX7 || (ARCH_MX6 && !MX6_OCRAM_256KB)
- 	default 0x10000 if ARCH_KEYSTONE
++#include <bootmeth.h>
+ #include <dm.h>
+ #include <memalign.h>
+ #include <mmc.h>
+@@ -81,3 +82,101 @@ int abrec_read_state(struct udevice *dev, struct abrec_state *state)
+ 
+ 	return 0;
+ }
++
++static int vbe_abrec_get_state_desc(struct udevice *dev, char *buf,
++				    int maxsize)
++{
++	struct abrec_state state;
++	int ret;
++
++	ret = abrec_read_state(dev, &state);
++	if (ret)
++		return log_msg_ret("read", ret);
++
++	if (maxsize < 30)
++		return -ENOSPC;
++	snprintf(buf, maxsize, "Version: %s\nVernum: %x/%x", state.fw_version,
++		 state.fw_vernum >> FWVER_KEY_SHIFT,
++		 state.fw_vernum & FWVER_FW_MASK);
++
++	return 0;
++}
++
++static int vbe_abrec_read_bootflow(struct udevice *dev, struct bootflow *bflow)
++{
++	int ret;
++
++	if (CONFIG_IS_ENABLED(BOOTMETH_VBE_ABREC_FW)) {
++		if (vbe_phase() == VBE_PHASE_FIRMWARE) {
++			ret = abrec_read_bootflow_fw(dev, bflow);
++			if (ret)
++				return log_msg_ret("fw", ret);
++			return 0;
++		}
++	}
++
++	return -EINVAL;
++}
++
++static int vbe_abrec_read_file(struct udevice *dev, struct bootflow *bflow,
++			       const char *file_path, ulong addr,
++			       enum bootflow_img_t type, ulong *sizep)
++{
++	int ret;
++
++	if (vbe_phase() == VBE_PHASE_OS) {
++		ret = bootmeth_common_read_file(dev, bflow, file_path, addr,
++						type, sizep);
++		if (ret)
++			return log_msg_ret("os", ret);
++	}
++
++	/* To be implemented */
++	return -EINVAL;
++}
++
++static struct bootmeth_ops bootmeth_vbe_abrec_ops = {
++	.get_state_desc	= vbe_abrec_get_state_desc,
++	.read_bootflow	= vbe_abrec_read_bootflow,
++	.read_file	= vbe_abrec_read_file,
++};
++
++static int bootmeth_vbe_abrec_probe(struct udevice *dev)
++{
++	struct abrec_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = abrec_read_priv(dev_ofnode(dev), priv);
++	if (ret)
++		return log_msg_ret("abp", ret);
++
++	return 0;
++}
++
++static int bootmeth_vbe_abrec_bind(struct udevice *dev)
++{
++	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
++
++	plat->desc = "VBE A/B/recovery";
++	plat->flags = BOOTMETHF_GLOBAL;
++
++	return 0;
++}
++
++#if CONFIG_IS_ENABLED(OF_REAL)
++static const struct udevice_id generic_simple_vbe_abrec_ids[] = {
++	{ .compatible = "fwupd,vbe-abrec" },
++	{ }
++};
++#endif
++
++U_BOOT_DRIVER(vbe_abrec) = {
++	.name	= "vbe_abrec",
++	.id	= UCLASS_BOOTMETH,
++	.of_match = of_match_ptr(generic_simple_vbe_abrec_ids),
++	.ops	= &bootmeth_vbe_abrec_ops,
++	.bind	= bootmeth_vbe_abrec_bind,
++	.probe	= bootmeth_vbe_abrec_probe,
++	.flags	= DM_FLAG_PRE_RELOC,
++	.priv_auto	= sizeof(struct abrec_priv),
++};
 -- 
 2.34.1
 
