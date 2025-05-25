@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D24C54F30
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:48:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E1EC54F30
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00A4E82BAA;
+	by phobos.denx.de (Postfix) with ESMTP id 481FE82C84;
 	Sun, 25 May 2025 12:48:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OAEFwI4d";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LkeG7gLy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D221282C13; Sun, 25 May 2025 12:48:13 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 53BED82C13; Sun, 25 May 2025 12:48:15 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D02B182B5B
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5789F82B53
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a36e0d22c1so891731f8f.2
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:11 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-442ec3ce724so11065625e9.0
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748170091; x=1748774891; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748170092; x=1748774892; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NASoAdTWon9mmszoUqgX/Z2c279RE3AOk4azjT1ffyI=;
- b=OAEFwI4d3Tx0Z0OgZHJvMKyfZW2idFBnbpDq8RAb9nddb0Sw9BknF/6Wc4VHn2Lxgg
- ZLa4HzIlVltojeVwQT2k8mQSkFIIuCoPw16Vzwi2Ck/DqIiRP21hLMwkuCw37hoRp0+8
- wbPVJP4EgwROZ2ttjCeAszWnEMw6J6FgvKG5U=
+ bh=PPJlLfL9ED3hHDK4ycl9EY2VqcSS0gEp0vfDFhYakHQ=;
+ b=LkeG7gLyaIwRERGbBz8gZnI2rx5XzxB6valZmAIiYKZ7RXFVsvTLJDGZdQTJaTi/PS
+ G27DQh7yTcutN9B2NlCCkdDcXouTsDv1JV84R0R531bZdimzhJQzJYQjHsQIVWIJF88c
+ 5fAYCmCmoVyFosZCxbZCuetdY2ASpdW0qwRu8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748170091; x=1748774891;
+ d=1e100.net; s=20230601; t=1748170092; x=1748774892;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NASoAdTWon9mmszoUqgX/Z2c279RE3AOk4azjT1ffyI=;
- b=YOmP1xxswXmnMYm9DisjefIYEiV6BUWyo+0X9yzHfUCUb/lKLfV+P0tf0H8phBVoOC
- T32cCaM0uK3LnTJf6oOS6aNQ/56DKiCVdMvyHTEENuU+frWAYy3PJn1CYwLYQ1iUQxeG
- H1DeHH0sZyGnX1qqZwA1Lpc/ipdN2+s1Ioyym5BSaMBRO28J+c6dmaoCRNiqbdGgoUQd
- DAL0K/6rubdfus9OdRT2KL/lKiCbgQeZ1bFPFBVlMBT1oErxSz78lpOeZoWsnOZ3PMPn
- PS3GVxVmkbw9X2OVnr1XdXhxzuIzh8dSlWJFaooR5leu2w7zKqiK1iK5UxDVdCtNbGZf
- SjdQ==
-X-Gm-Message-State: AOJu0YxSqCZA7VSN3LBH+GaNND4g2ePZ04d7OZbxNSiy/53YibFre2ln
- GNqyht6lXjx0Blti/XNx2lR9OP+1sAVeRWGpQyys+Pdow/qustr2iOlf5Ect9WCNb3+XjfIoifN
- OMxkVWX6i
-X-Gm-Gg: ASbGncu7iaRvN8MJUZyhcy3qCrJciLtLdRvT+coUgQOJscO/fcFmYHbMsrFduFyS/fB
- sKU8gzLLX94JItGTRqnYGq36gbL8TOiLxBn/AYJiPV1IGySflA8H9UcOtJfyO7AmlSrE1a3/Xji
- rCZ0k6KTqgIdiJ2nDsgTYvLWAQWK+u6XO5Uz5TIgRXcYeAAkezAMyvh9k1zxmAcnTNG68jD9tMo
- O8WkFKv1b/qFIrVph9J50/ktn8tsi3s2HNe7XRhTJbfJfmut2wR18iuJoCjUFj31Eaur4Ff0sI/
- gH0qIvwqGAzjKPfRFSf6O0fYCS1yjcjpIyeZ3sGdnqbsdwOy3t510lWrH5HICly2N31KQ5FHqQg
- Cl3GODA==
-X-Google-Smtp-Source: AGHT+IEw4CRpVcLcLcivkRGaIUDHCDIw4HeVZkbeaOnlusTKd8cpfYbB8sEdYjfCYST84/x+32Kryg==
-X-Received: by 2002:a5d:5f8b:0:b0:3a0:bad4:1247 with SMTP id
- ffacd0b85a97d-3a4cb43214amr4275760f8f.15.1748170090785; 
- Sun, 25 May 2025 03:48:10 -0700 (PDT)
+ bh=PPJlLfL9ED3hHDK4ycl9EY2VqcSS0gEp0vfDFhYakHQ=;
+ b=ElNAdO/S41Z+8or4/FjvxUQKhzHCuHaQKkc0wekuWwdgRz5lR4gpRr9uYUfmJ1f0TT
+ 8Ajcd8zyOP8NtdGQunTGEggg6fz+xIXm6rTBdUr+YMCz0Tgm43r0miU6J1LXVbY2WGSH
+ HlsqIBK9VsmeUSFpKh13SgpGsbNFovmTjm9+FDfVBSVm63hOuVgDfKSZ4fc0QYZYXtpk
+ 1ep6y14gAlwP0JolXNWiAPqUzedSZxpJoI7l3OYPkbRNoaUxQbegCXH3NRHrtgAQGrv/
+ lc26y5Rd1yolG4Av8Uy34p4pIXP7zCbDb2mnXdiyVFVDNM8K1zLAvmk5R9hWEn3VJv0i
+ XfRw==
+X-Gm-Message-State: AOJu0Yw8rCedIK4nUOMbxobasrkY7chPUe/ot5N9SlyNKqLDiabdWUXQ
+ rPatxM47TIpqkCGrbSVMw2R1ElZLkD4dnyU5brY4bCKjqxs5HwxvBv0s0/vb35cYk18JYbkYO99
+ 7E61sanD0
+X-Gm-Gg: ASbGncu6jtckIPqyZs5hbNODhWawkYhAT4nQh3fh/lr9q/UUfWYS1jAPZZtt/VBBc2z
+ DC6nkvKUAZ/i4rBfSP277lQLs5jX1QcUcK/O/OCmY+QAxdJCfO8QIDrTuG+E9yuTteJlO+BghnT
+ LEFLnjyYuJG2lSVcqvOncJyuDElvneL+jg1ZXCRPebTMHavFDL/IfjKlK1g8v+IbVh3yaWqtXO6
+ X+oPOGvxPmc1gqwjjSNvgp1clEbYg+hKDAui9HzRTf36aQQPYAdE0NxCTzbOTqZC/x28hJw3F9L
+ bdVbVxSZ1+v2BoJ8flGZbFqxeAbDmbO7eIxzqclNDZvo8iqyhaihsC12jsQJCsl26rbe8hI=
+X-Google-Smtp-Source: AGHT+IGMOkWqtehGAPLWKOGWyaSvkKr0/ghQFccQUJzydXS7YD6f8pk1GkkKvk+6I3qgMxC1oOwtOA==
+X-Received: by 2002:a05:600c:4e8a:b0:43c:f1b8:16ad with SMTP id
+ 5b1f17b1804b1-44c933f020dmr50600615e9.30.1748170092308; 
+ Sun, 25 May 2025 03:48:12 -0700 (PDT)
 Received: from tasman.. (host-80-43-238-15.as13285.net. [80.43.238.15])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.08
+ ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 May 2025 03:48:09 -0700 (PDT)
+ Sun, 25 May 2025 03:48:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 02/25] spl: Allow VBE to handle xPL size
-Date: Sun, 25 May 2025 11:47:38 +0100
-Message-Id: <20250525104801.1440260-3-sjg@chromium.org>
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 03/25] vbe: Show the margin when using SPL_RELOC
+Date: Sun, 25 May 2025 11:47:39 +0100
+Message-Id: <20250525104801.1440260-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250525104801.1440260-1-sjg@chromium.org>
 References: <20250525104801.1440260-1-sjg@chromium.org>
@@ -98,30 +94,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When VBE is in use, the size of each phase is obtained by reading it
-from a FIT. Avoid using binman symbols unless necessary, i.e. in TPL.
+Collect information about the memory-margin in each phase which uses
+this feature. Update the 'vbe state' command to show it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/spl.c | 2 ++
- 1 file changed, 2 insertions(+)
+ cmd/vbe.c              |  8 ++++++--
+ common/spl/spl_reloc.c | 12 ++++++++++++
+ include/vbe.h          |  3 +++
+ 3 files changed, 21 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 76fd56dfe4b..42053b4afa0 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -200,6 +200,8 @@ ulong spl_get_image_size(void)
- #ifdef CONFIG_VPL
- 	if (xpl_next_phase() == PHASE_VPL)
- 		return binman_sym(ulong, u_boot_vpl_any, size);
+diff --git a/cmd/vbe.c b/cmd/vbe.c
+index 186f6e6860d..02d224ad286 100644
+--- a/cmd/vbe.c
++++ b/cmd/vbe.c
+@@ -92,9 +92,13 @@ static int do_vbe_state(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	printf("Phases:");
+ 	for (i = PHASE_NONE; i < PHASE_COUNT; i++) {
+-		if (handoff->phases & (1 << i))
+-			printf(" %s", xpl_name(i));
++		if (handoff->phases & (1 << i)) {
++			int margin = handoff->reloc_margin[i];
+ 
++			printf(" %s", xpl_name(i));
++			if (margin)
++				printf(" (margin %x) ", margin);
++		}
+ 	}
+ 	if (!handoff->phases)
+ 		printf(" (none)");
+diff --git a/common/spl/spl_reloc.c b/common/spl/spl_reloc.c
+index 216c0f36623..6bfc75bc484 100644
+--- a/common/spl/spl_reloc.c
++++ b/common/spl/spl_reloc.c
+@@ -4,11 +4,13 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
++#include <bloblist.h>
+ #include <gzip.h>
+ #include <image.h>
+ #include <log.h>
+ #include <mapmem.h>
+ #include <spl.h>
++#include <vbe.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/sections.h>
+@@ -58,6 +60,16 @@ static int setup_layout(struct spl_image_info *image, ulong *addrp)
+ 	buf_size = rcode_base - base;
+ 	uint need_size = image->size + image->fdt_size;
+ 	margin = buf_size - need_size;
 +
-+	return 0;	/* VBE handles this */
- #endif
- 	return xpl_next_phase() == PHASE_SPL ?
- 		binman_sym(ulong, u_boot_spl_any, size) :
++	if (CONFIG_IS_ENABLED(BLOBLIST)) {
++		struct vbe_handoff *handoff;
++
++		handoff = bloblist_find(BLOBLISTT_VBE,
++					sizeof(struct vbe_handoff));
++		if (handoff)
++			handoff->reloc_margin[xpl_phase()] = margin;
++	}
++
+ 	log_debug("spl_reloc %s->%s: margin%s%lx limit %lx fdt_size %lx base %lx avail %x image %x fdt %lx need %x\n",
+ 		  xpl_name(xpl_phase()), xpl_name(xpl_phase() + 1),
+ 		  margin >= 0 ? " " : " -", abs(margin), limit, fdt_size, base,
+diff --git a/include/vbe.h b/include/vbe.h
+index 61bfa0e557d..84a996cdf7f 100644
+--- a/include/vbe.h
++++ b/include/vbe.h
+@@ -11,6 +11,7 @@
+ #define __VBE_H
+ 
+ #include <linux/types.h>
++#include <spl.h>
+ 
+ /**
+  * enum vbe_phase_t - current phase of VBE
+@@ -47,12 +48,14 @@ enum vbe_pick_t {
+  * @size: Size of the area containing the FIT
+  * @phases: Indicates which phases used the VBE bootmeth (1 << PHASE_...)
+  * @pick: Indicates which firmware pick was used (enum vbe_pick_t)
++ * @reloc_margin: Indicates the number of bytes of margin coming into this phase
+  */
+ struct vbe_handoff {
+ 	ulong offset;
+ 	ulong size;
+ 	u8 phases;
+ 	u8 pick;
++	int reloc_margin[PHASE_COUNT];
+ };
+ 
+ /**
 -- 
 2.34.1
 
