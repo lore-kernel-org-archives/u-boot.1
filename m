@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DEDBC54F30
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 19:45:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BD89C54F30
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 19:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FB5582B34;
-	Sun, 25 May 2025 21:45:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C33B82B37;
+	Sun, 25 May 2025 21:49:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bVVUupLF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mEU8VaMK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1677082B37; Sun, 25 May 2025 21:45:56 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 548AD82C79; Sun, 25 May 2025 21:49:33 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1684F82B33
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 21:45:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB28E82B33
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 21:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-602c4eae8d5so3131823a12.1
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:45:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-72fffa03ac6so856800a34.3
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:49:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748202353; x=1748807153; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f7fTZBtzakUP/sMQc7bnYC+15H2us4M3uPm6w/6gxc8=;
- b=bVVUupLFrNdfx0j66Zx3joQJUi1uivj4m6LuroqV5DeOfwVhUyNMlw+SOE6cn1nf9C
- nhdMpT8Ei7nOm8TxtHDHPGcXAGTQ4XjA7oS4QN81XRwBDQLJ3peZuFZJthRzRdWX6aN7
- Nl9skXn2qvORzcpSPxYxx+V9hryYoqu0jhWYI=
+ d=konsulko.com; s=google; t=1748202570; x=1748807370; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7XPHuQDe4VCi2K8fD1DVF5amfX5x3l6t0fjpkKlDhn4=;
+ b=mEU8VaMKwDX+ia0XZ9dyq1iB2TMRtwlYwIrwyuDsOzWsz9IkC9f5CIKcVVBJdJvX3h
+ v3df/dpHgIagtFDCUF1PAffTt4chD2kb+/bw5MjGv7bL52gIQchNhbWSYOb9FI4O7pew
+ yx/zyTnKyqOKZDjTl7VE4adR5Bdcm76XBXAq0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748202353; x=1748807153;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=f7fTZBtzakUP/sMQc7bnYC+15H2us4M3uPm6w/6gxc8=;
- b=IIyyvLXdZrcygYm6x465jnGnhT7ya4ARkj3aJS5TaR+vjxESZ4u08H1FhJ5HlyxMKe
- aJ5JjsYCDBlMDRqN3uN6IZ1CuMa5/pm19fZEG6kT/Yky6gObt+qyz6tZ7wnt6KknS3Zs
- LxsPhP0mYoxncflBF7iNXNp4g4ajg6vd6rXM8j2ExfrvYL6C44rHhN40BqfEaGCDHjB0
- 5t6e7vS+S9i4T167j3MUnHGaa0xEUl3CzxeTbcEvRNgFnMNkhvG/84Oo2m7TsPWwSG51
- 71Slzd73V2AVsOXr5/r6tp5eflGjSySubVB5eSezhy9lIxbgt/T5bhtEeZJoLmF1sAmj
- 2ftA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhyY9t0WJSQdeIPwD6JsPW8nODLO+KZGb/IUKB1tTU1PhhiHJyNAQOu1D1FuGGoEaYV9bzwaw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNf3ryY77SllDKo/qYxrYf0typdiFUpMmzf/26iDdJNI1J7nZA
- CZm9gBYiXAG9xVLtnIU5oVluiwMFBU5efwzduQAlVlZoUB6I7GHXY4nkL2vzDWsOpcSB6XFzq+E
- 4NLw8ElvqQW8clYPxATwlgJHlxUBBPsGu1JEB+JHP
-X-Gm-Gg: ASbGncs71uoo6C/HIaqTmK8ym5RjkxQ0YfZN0NeTV2EO3MElmaH73SkFy0mCEenK4GC
- QB+niybU7xyx9ZC4I2sUKjVy9+xTUVr2IhllJTUl9EFOEzuhisD9oyiPaxJVi6RPw0muOz+xqOB
- ChFnSPj+SjEk7L0cW5rvXTHHOmZW5xqAY=
-X-Google-Smtp-Source: AGHT+IG13UQI+mmm5cUDzW05x+OE0f+kmIQX4IviFN1mXPxnkQhHhMgJVXKlcX9+E233rQo1Tignh4q6AESlRUqc5wA=
-X-Received: by 2002:a05:6402:2925:b0:5ec:6feb:5742 with SMTP id
- 4fb4d7f45d1cf-602ce4dfb87mr3939094a12.16.1748202353458; Sun, 25 May 2025
- 12:45:53 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748202570; x=1748807370;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7XPHuQDe4VCi2K8fD1DVF5amfX5x3l6t0fjpkKlDhn4=;
+ b=A95Q9pjJ9fzLd89TMDoxegt3yGWXnhhrl6ff0beVuv0SOu/P+xf6bWp5U1CeI2/yoU
+ hvqyABKnZ2ylnjwx+FEVuJ6YwCPKZbSzAFmX4MGT8xKzO9MfKgr9qYzOr5T+zGBL1ziP
+ BPaO4Rmqjj0hz45J6Kg1l/fyH1kNShYa3tX3auIrMdtOUxfzbDDZQ+vK/bWyAU/nfH0O
+ QJuFbZjqqyXDtO8ObAf7vlw5Vk4VncdqU3BpuePAxSutaUipkFHx6t+cEBdfO6/NKKGn
+ Kzp/GuSgO/SGwDbaNOMiVYuILrpWnIlAE+csFbHy+0d2/wwNsWbVMzKKmk0VcKz9Tuda
+ AIYA==
+X-Gm-Message-State: AOJu0YwazyCNWHc+YKGMSrQ3C8uAN2ZgRR9YGzHrEU/V9OUpJamgXBIB
+ DwxFIf/urbQlMM3MJaiohThUppKy5rOtCZ4lf1O0pBAQLsvwyv+35f32Umut/oh5yrQ=
+X-Gm-Gg: ASbGncsB1FQUbq2tuZekNDIUf7n/RhdZwHWyJ/g7fvL7T1IixaH8a/f9V51rahgJnJb
+ ArHQdrRtXMLJE+WNUpTChrtZLE6SL1ESSNvns7dztt/Zi7IY/4lk+kHjE1d0LphytKKz0Wz6zt1
+ 4Llon2Vr3NNQGdmb/zyOtl5xjFRfdmE8vMkDL/GM479CdmN8XT7vuJ55qYQPE2wGqY5kOAsexh9
+ F/Bqwsw8edLwzOacVZtxuTlsPyeLye71yeImnmeJ3Q7ImH4K3cLG4YdOtSkWaOODGPCEt+bnybA
+ AUHpBn3iNivB3JOPXDjJtqKSMrla5R2+oD2PsjKjmtKwPBbkA94gWgNRnvIjbk7dsHa7VuPPDZ3
+ t7K52jWApET4=
+X-Google-Smtp-Source: AGHT+IHHD/qG6oWpoAz/+N6HpAPGhf7AMViiC33BbDJKElSceUmfysG5OBYa/cbTjOcoVT6W/6gCmA==
+X-Received: by 2002:a05:6830:698e:b0:734:fcd4:d1f9 with SMTP id
+ 46e09a7af769-7355d13ebd7mr4100164a34.23.1748202569755; 
+ Sun, 25 May 2025 12:49:29 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-734f6a4b1d1sm3715577a34.10.2025.05.25.12.49.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 25 May 2025 12:49:29 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>
+In-Reply-To: <7c08e63f-3008-46dd-9a7c-bd1d4bb376b3@gmx.de>
+References: <7c08e63f-3008-46dd-9a7c-bd1d4bb376b3@gmx.de>
+Subject: Re: Pull request efi-2025-07-rc3-3
+Message-Id: <174820256854.2599391.3141238678395207834.b4-ty@konsulko.com>
+Date: Sun, 25 May 2025 13:49:28 -0600
 MIME-Version: 1.0
-References: <20250421094310.764765-1-heinrich.schuchardt@canonical.com>
- <CAFLszTgeJ_kvdUrBC=btzKAQGVZDtyJzk1LuD4t58n0zMmvU8w@mail.gmail.com>
- <ecde0d49-f04a-4a75-bacf-a170c2ebb0df@canonical.com>
-In-Reply-To: <ecde0d49-f04a-4a75-bacf-a170c2ebb0df@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 25 May 2025 20:45:41 +0100
-X-Gm-Features: AX0GCFtN1iyHDia-WSmRWRjk1cNf5PyVwMID6_wIjvzukjFQRjG2igEaTyPpj1g
-Message-ID: <CAFLszTiKaLmDnr2BSWBF8zGESJjh71vrAomzoYetb=EAJ9w8tw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] boot: BOOTMETH_DISTRO should select
- BOOTMETH_EFI_BOOTMGR
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,75 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Sun, 25 May 2025 12:52:59 +0200, Heinrich Schuchardt wrote:
 
-On Wed, 23 Apr 2025 at 14:02, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 23.04.25 14:28, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Mon, 21 Apr 2025 at 03:43, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> Distros expect the EFI boot manager to run. It falls back to launching
-> >> EFI\BOOT\BOOT<ARCH>.EFI from the ESP.
-> >>
-> >> BOOTMETH_EFILOADER is obsolete.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   boot/Kconfig | 5 ++++-
-> >>   1 file changed, 4 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/boot/Kconfig b/boot/Kconfig
-> >> index fb37d912bc9..89076220adb 100644
-> >> --- a/boot/Kconfig
-> >> +++ b/boot/Kconfig
-> >> @@ -597,6 +597,9 @@ config BOOTMETH_EFILOADER
-> >>          imply CMD_TFTPBOOT if CMD_NET
-> >>          default y
-> >>          help
-> >> +         This bootmeth is obsolete. BOOTMETH_EFI_BOOTMGR takes care of
-> >> +         launching EFI\BOOT\BOOT<ARCH>.EFI if no boot option matches.
-> >> +
-> >>            Enables support for EFI boot using bootdevs. This makes the
-> >>            bootdevs look for a 'boot<arch>.efi' on each filesystem
-> >>            they scan. The resulting file is booted after enabling U-Boot's
-> >> @@ -648,7 +651,7 @@ config BOOTMETH_DISTRO
-> >>          select BOOTMETH_SCRIPT if CMDLINE # E.g. Armbian uses scripts
-> >>          select BOOTMETH_EXTLINUX  # E.g. Debian uses these
-> >>          select BOOTMETH_EXTLINUX_PXE if CMD_PXE && CMD_NET && DM_ETH
-> >> -       select BOOTMETH_EFILOADER if EFI_BINARY_EXEC # E.g. Ubuntu uses this
-> >> +       select BOOTMETH_EFI_BOOTMGR if EFI_BINARY_EXEC # E.g. Ubuntu uses this
-> >>
-> >>   config SPL_BOOTMETH_VBE
-> >>          bool "Bootdev support for Verified Boot for Embedded (SPL)"
-> >> --
-> >> 2.48.1
-> >>
-> >
-> > I don't want to make this bootmeth obsolete. What is the motivation for that?
->
-> This method was written in a way that per se violates the UEFI
-> specification as it does not set up required UEFI variables.
->
-> You must never run this before the boot manager as booting
-> EFI/BOOT/BOOT<ARCH>.EFI if there is a boot option violates the UEFI
-> specification-
->
-> The boot manager covers the functionality of this bootmeth.
+> The following changes since commit df2ed552f0b05591090369a7fe7ddc92439dea5c:
+> 
+>    ext4fs: Fix: Read outside partition error (2025-05-23 10:42:49 -0600)
+> 
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2025-07-rc3-3
+> 
+> [...]
 
-I'm OK with the workaround we discussed, but this seems to go beyond
-that. Can you do this without disabling this bootmeth? Or is there
-some other clever way to keep things working as they do today?
+Merged into u-boot/master, thanks!
 
-I know we've discussed this before, but is there really no way to know
-whether a board is using bootmgr? That would make things much easier.
-Perhaps we should just disable the default for bootmgr and then let
-boards enable it as needed? I think we discussed that too, but it
-seemed it caused other issues? Perhaps we could add an environment
-variable that gets checked?
+-- 
+Tom
 
-Regards,
-Simon
+
