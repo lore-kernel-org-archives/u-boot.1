@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36A8C54E90
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 08:43:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3DBC54E90
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 08:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B80D181E06;
-	Sun, 25 May 2025 10:43:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 519D081E06;
+	Sun, 25 May 2025 10:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h8PUr6JU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UmBXzT76";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1342082BAF; Sun, 25 May 2025 10:43:29 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 0F80482BAF; Sun, 25 May 2025 10:46:18 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 180598144A
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 10:43:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D0C18144A
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 10:46:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-60462000956so508098a12.0
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 01:43:27 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6049431b0e9so137565a12.0
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 01:46:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748162605; x=1748767405; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748162774; x=1748767574; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=k5z0MEQkvXSoF8EYWrc6W13fp6egEud7np3+MJnCQ1c=;
- b=h8PUr6JUW00WCD3lacwi/7JJouFttonhfgSTg4XEjuBuNTcghImwD7BrWMR7McyuxE
- sVxjyN7uuXWfly+0qepuutEFU8jQeZjDDwROElhOIFKSBtlA1g+MwuQ2Zt9Hxk+p/S0U
- s8zBLRnd1ssC+UmO0guCV/kNrf9DtSv0EW9Z4=
+ bh=RdlpfA2P/4YboSlNBj30VCSagXC/hZSA0dJSVmT0Kfc=;
+ b=UmBXzT76X38dgQhc5aJg6j26Cah8teJx8ShasVjFT6vmXDQVRQsXfyyuqr2I/Vjrof
+ J8LFnUhrdEwnhBafHhkGCarTvniFDlKeYVY6m4q51Yu99at9qVpywT8/A9X9hEsuq+Br
+ Nmjpg/uywYknDbj3t1nA4nSVhUzIEUlgcw8kk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748162605; x=1748767405;
+ d=1e100.net; s=20230601; t=1748162774; x=1748767574;
  h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=k5z0MEQkvXSoF8EYWrc6W13fp6egEud7np3+MJnCQ1c=;
- b=LfBPCu4LEOk8kjpuIlTKsX4hhHSV9IIAK9ghkV+7aIvgXnFcuovr9IAAakMWkXTcAl
- lXxCWrfqMr5TF72CfEn/wC/+8fymI8YEwYtePwYagqN/3Su0SKDN9jhonLyw1VQD5xY9
- g785r4zGpnpw2dQJb4ZLxO7r+IGsSQZCYjvQGNALxn13E1kaRaM7sxxR23jqKJCSnY5e
- CBkbOepNm7elea2CfIb5YXQc10vEg0Y0zOjP8uOWqtCq4lbHckuqstxi9IwUr367FAP+
- 52he/US+m11nBaZYytgzy/x8Uvb63GUCtxb5tADNijSLkZ7+rSS3qCvEfQXfSIJ/Cg14
- 0i8A==
-X-Gm-Message-State: AOJu0YzIysZ9SRXcff1B4+VDTC//WAGSYjjmB8TNaWn9gJvhCJKMTwg8
- Avh7Lw0ecFKyiZpUDeFldYvaecSYjd6NZ9GgOFF61ICbqPjTufv6DfxJCmnDLdud1PajYN00bnG
- 4dGlZPAsx4B1N9m43plsLwGC27g38oeqQsQ16gevsDcUobpSsfz4GzTnK
-X-Gm-Gg: ASbGncvi0t7HSLjWG8W5jBi4oKnv09cPQh6LJlskup4VkuZVNX1vfUv/1dF4TRI/Nuw
- F783JRqS3AlqbMzTB0vvTPx9sdcjcdABC1M8lbEDFsWwjnPaBFyfuy3ovVFYr+rD4n6K60U407a
- JzfE380ymjdrGmrX4BNb3dFj9i2I49mEA=
-X-Google-Smtp-Source: AGHT+IGvkHrECZ3ledWxF8MTB+CShELEAEK1zwcSPezVXiuPMuZytDesECJgskrFzXFiO/fzVDNJUprzlyAH/JOPjx0=
-X-Received: by 2002:a05:6402:5c9:b0:5f8:d490:33c5 with SMTP id
- 4fb4d7f45d1cf-602da5f8cf9mr4016194a12.33.1748162605493; Sun, 25 May 2025
- 01:43:25 -0700 (PDT)
+ bh=RdlpfA2P/4YboSlNBj30VCSagXC/hZSA0dJSVmT0Kfc=;
+ b=X/pQhUZQPsd1z4//9SE33+R0cdjc8rQ2iT+0EosKkhfWByc/R3j62B9dClGGBdK5BZ
+ q/M/OkQ58BUbo1HlImSK5mwmobdQ41DqAY/aUHm/TPTDjBVrrw0VZd3a7D6MKnKFGuOH
+ 8EM0b90bcelwvoSpfgAJ7Burv8+rtfkONklhSlnP1JN8qJ6ji29J/G3TWHQqslRar6aQ
+ UJPplREvmTLmyphxEx7b+UehyvBb9lT0oRCigmwZtm5AsgeEk30vMYHUNOQBBp2vbPpV
+ weC0pvZpZ947QBYsz96TSgaFyuz5kzaH5kchHp7d2hzXXV2ihxYVLfESrAckLDPLIcFF
+ kDuA==
+X-Gm-Message-State: AOJu0Yxl/i3HR4/K8EAXGmCxKIyjHAK8Gvs7cU/FIa/S9ogWRNzfmN78
+ hfHXcceRbYhXxGTmUFc1rqAWzfkcTPFHxNb5bxwR47MG7HG4xymROoucQ2xZan9Ttpanj5bvPWG
+ 0gw2QwBcJBXPsXYIW+dSwKQPeL+Vu3ALU2m2/N3a3XbAS4CFjiIC0FO83
+X-Gm-Gg: ASbGncvdGitOiyzTwFUx32kDFFwiw9HrwYKQ+xMLsfdRt1u374omTdXHbpJdDWV1WCC
+ jyoAtuChJrST5Upmc+hIMPb69sao63wO8qkjPABr5CxE1DDukY+1K5/rpidQRb8zDTXrwa/c2i3
+ dUoMtsvelnoEJFLSLyrj+0hFuhTOUxrN8=
+X-Google-Smtp-Source: AGHT+IFkESKZ1DtvV1uwFkXPGvd3/uGUeuEwxwchaFuGNgjG2H45OaDzWMlU0eGr7KO+3kvXZQAV6Et63GypJSCtDwI=
+X-Received: by 2002:a05:6402:4407:b0:5e6:e842:f9d2 with SMTP id
+ 4fb4d7f45d1cf-602da5f8b9dmr3127483a12.29.1748162774444; Sun, 25 May 2025
+ 01:46:14 -0700 (PDT)
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 25 May 2025 09:43:14 +0100
-X-Gm-Features: AX0GCFuOQDGd5Lox_CsWnIYS34s3mY6YlT131ZqQU57OsuRAsXj6JaExD2_vNh4
-Message-ID: <CAFLszThhKENznk_+7TpxjtSdcsHB=mosyS=ftqFMUbZAY7xuxQ@mail.gmail.com>
-Subject: Bloblist request
+Date: Sun, 25 May 2025 09:46:03 +0100
+X-Gm-Features: AX0GCFvkhy9MjJqtn4dzLn31j8YGC7vO1cZ3yOkLVO0TO8_DZpTqlohiOLzsnLQ
+Message-ID: <CAFLszThbRhKF1Xwqk+hLu8Y-VXB6+fHVXYfphfVjWMN=dVC1dg@mail.gmail.com>
+Subject: Broken boards?
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,23 +84,8 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-Bloblist is IMO a bit of a mess, with 2-3 maintainers who don't agree
-on the direction.
+It seems that some of the boards in my lab are broken in your tree.
+Have you noticed that?
 
-You have requested that I:
-- implement a handoff protocol for x86 in the spec
-- do the same in the code
-- convert x86 boards to use OF_BLOBLIST
-- remove BLOBLIST_FIXED
-
-I also want to enable VBE, which would require further work. I'm
-sending a v4 today.
-
-I am willing to do the above, but to do so, I want to make bloblist a
-first-class citizen, available on any arch, built into global_data,
-with no reliance on weak functions.
-
-Please can you allow me to maintain bloblist?
-
-Thanks,
+Regards,
 Simon
