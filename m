@@ -4,74 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7401C54ED0
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 18:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F138C54ED0
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 18:43:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 018DA82B37;
-	Sun, 25 May 2025 20:09:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 17F8A82B37;
+	Sun, 25 May 2025 20:43:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C2Tn2hBk";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U0tWpgR9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1075482B48; Sun, 25 May 2025 20:09:25 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BAA2B82B48; Sun, 25 May 2025 20:43:38 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26FCD82B34
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 20:09:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D25A82B34
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 20:43:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-6020ff8d35dso3025806a12.0
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 11:09:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748196562; x=1748801362; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nko9d41RDMdmfLp4oI0rTfy4X3Wg1G6kf+EwWjdMbcA=;
- b=C2Tn2hBkSR60PdB3SV0LdQ1RsmBb7lRw5stBHowg3TK32OGadh3hZ0+JtlVs2f1vyh
- BLahFEd5Aca+Txmfm5zA2/1edRNAUHFU3CdPr9Ilez8fQmZtIbC9FlKzN0affmudQuG4
- nK5R69kQDH7a11oNd1ND7PIYM7aymjaTdFVhc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748196562; x=1748801362;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nko9d41RDMdmfLp4oI0rTfy4X3Wg1G6kf+EwWjdMbcA=;
- b=UMIKhXAyr5RbIhRBtaMNsLqOFSkVk5GkjWphDeFW6hevyT4saDwZeGzZPPSod6VgIC
- VY6LaDMtvffgxDdPfbsLXW1WRCBNUYkWfxEQXAbbgTT9mSBucOydAJSYdWPuQU09ykAU
- XQFBdgT12g6WXFjK+yvCU5oDc1Bfgz4r7tBedfO7YqRoz5UuakaEWmWQwAkVgFRZqjc2
- FrSmRTSMogYd/pmkdg6XDjd2ieJfTjQmo4KaHiGjNmEpDqZ1tY/NDRJMq0heoL7Awz5d
- usfx2ffJSDRbQsLZJxIwiTzk015MRDjYw4ergmkBjNPS491rJLN5u5Ndh6B54RnH+QKr
- oRzA==
-X-Gm-Message-State: AOJu0YwLVK9CS4a850Qkau8JLY7/KiKU2v4LGK+cOkLn+ExZWFmhhkqM
- yKdD8INYjZbgrslhl3atAds3idB2DfPWOLEM7GoS1ZJLaPCaSaQ28YG8z90A4983vblIYa+8iSh
- SByi+oqjpesR24wuEbngN6WHmOQoZ4H8fG97asHch
-X-Gm-Gg: ASbGncuacL67vJBCdmHWp5U9/Qh3wyLynd2b6TH9lSBuQwDL+ThATuT/LTX143qJ8/C
- m3mSZ2KHb4z933MqTa7h8JLbUhYF+iKk4GOv0uHdQibxqx06Rd8Nl8xljpUDshchuRaN8BNKqeB
- BfDnh20uYm4QnSto41j4ywj/mZOi9tT8M=
-X-Google-Smtp-Source: AGHT+IH2EcWe92bAkwT4Y4koylf6S8s/gjnPUFEBx2aLw6b8Clq8Seebs6HRkDAwfAN18T2VMpX20PmbVtVOsA1GKQY=
-X-Received: by 2002:a05:6402:13cc:b0:603:51cd:f1cf with SMTP id
- 4fb4d7f45d1cf-60351cdf8d5mr4125425a12.7.1748196562619; Sun, 25 May 2025
- 11:09:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=671e=YK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1748198615;
+ bh=hKGk05zBAOwOeqg6LyIoZW143+RjYpXnToUbnUUw5e8=;
+ b=U0tWpgR9y6LJ/SxW/fDDl1QKjz6b2v4FXwMp7MWBRQh+FzoxkbstuhiQJWERmFRJpY5qVrvim
+ 0vZwx+nkI6n6Z1vjsZyTWiY8RC5yai4d/C7Xk9eIuZ4UsWAD+qi6wld7vHuJrKV72+jGS2NvcC2
+ 3TmFYNKz4lsgzhkfSIxK2FrzFysql0XQeVXbY7sOue9/MJ7yaNu9hT8Q5BsRo2kHtQ1IdHEy3zn
+ IW6Zl7f57eoRvD6pq63QBSOkTPlQCxQ76ZjpsQCrEmmHDXcC8BuQY1H5wU3loWi22tRpMeSFRX3
+ AfWfWMRX+eF0dE9jHzzfN48F2EYtPSTk1N1vSgIBlN5g==
+X-Forward-Email-ID: 683364d2a0e3f2dd0ce22949
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.3
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <b1ae479c-e5c6-49c3-b94b-3315df9076f2@kwiboo.se>
+Date: Sun, 25 May 2025 20:43:26 +0200
 MIME-Version: 1.0
-References: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 25 May 2025 19:09:11 +0100
-X-Gm-Features: AX0GCFuscXa5i2AsDpdOZMnoeksZ2B8bCSbruYbbDDyXch_eKRO3NPNqJ-kscF8
-Message-ID: <CAFLszTgC4Z2EUNgy8Ya6joUk3HV6+d2qoiqEq6taf9Wvuhdy2Q@mail.gmail.com>
-Subject: Re: QEMU & KVM broken for arm64
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andre Przywara <andre.przywara@arm.com>, 
- Mark Kettenis <kettenis@openbsd.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/25] rockchip: dts: Add an fdtmap
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+References: <20250525104801.1440260-1-sjg@chromium.org>
+ <20250525104801.1440260-6-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250525104801.1440260-6-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,25 +78,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Ilias,
+Hi Simon,
 
-On Wed, 21 May 2025 at 10:08, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi all,
->
-> Starting from commit 53d5a221632e  ("emulation: Use bloblist to hold
-> tables") I can't boot U-Boot with QEMU (version 8.2.2) & KVM anymore.
-> The command line to reproduce it is:
-> qemu-system-aarch64 -smp 2 -nographic -cpu host -m 4096 -accel kvm
-> -bios u-boot.bin -machine virt,secure=off
->
-> commit 24768a23a9b3 ("emulation: fdt: Relax condition for
-> OF_HAS_PRIOR_STAGE") boots fine.
->
-> Simon do you have an arm64 host to reproduce this?
+On 2025-05-25 12:47, Simon Glass wrote:
+> Add an fdtmap so it is possible to look at the image with 'binman ls'.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> 
+> (no changes since v3)
+> 
+> Changes in v3:
+> - Add blank lines before the node
+> 
+>  arch/arm/dts/rockchip-u-boot.dtsi | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> index cc2feed6464..8a37a9d8e7f 100644
+> --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> @@ -192,6 +192,10 @@
+>  #endif
+>  			offset = <CONFIG_SPL_PAD_TO>;
+>  		};
+> +#endif
 
-Yes I can use the runner to try it out.
+This should not be added here as it breaks the build. It is reverted in
+a later patch in this series so your CI has not noticed the build error.
 
 Regards,
-Simon
+Jonas
+
+> +
+> +		fdtmap {
+> +		};
+>  	};
+>  
+>  #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+> @@ -224,6 +228,9 @@
+>  			/* Sync with u-boot,spl-payload-offset if present */
+>  			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+>  		};
+> +
+> +		fdtmap {
+> +		};
+>  	};
+>  #endif /* CONFIG_ROCKCHIP_SPI_IMAGE */
+>  };
+
