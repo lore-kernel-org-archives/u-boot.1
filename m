@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E29C54E90
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89014C54E90
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE6F38369D;
-	Sun, 25 May 2025 12:48:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 83D5983693;
+	Sun, 25 May 2025 12:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JCi6uo5Q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FIdjiXz3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB94582CCE; Sun, 25 May 2025 12:48:34 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 2D0EA836C1; Sun, 25 May 2025 12:48:36 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A0F7836BE
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3758482AA7
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a35919fa8bso431495f8f.0
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:32 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43cfe574976so9600455e9.1
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748170111; x=1748774911; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748170113; x=1748774913; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2y9yBTk/zUuYxbsGTKShF3SU3q7cB+8Yyo6WOvn7br4=;
- b=JCi6uo5Qouhg9Uiuxkdxe3l8bbqdkD45/T6hnwW5tG/elMeNFjxIebn5JeJ/k854T1
- R21D4nBUVRiCX5BJN6Yg0aDlDYPFTZvWMJAE9+K3s1Rpc5DIwnhMFlJGxeMVnB7Fsf+0
- a0TEK8fszXoKfZEH23747rjZnMI3OfQQrytlc=
+ bh=87sA9g/OBKgaEIo3fazfxg/kdkd040onUxdZJULqGC0=;
+ b=FIdjiXz3ow7Jhv0WjKkewrVfuqXVB6PSXisdauFOohVe343cYa9Lsm0Z+jSxv7r8cb
+ 0LxnMnkjds4awij59Dy6QxNjVMA7UJimMKGff3VOSrMGfoqOYB/4km0Wnx6BRzi7hJPq
+ nDVcSJZARGKSYCedh2YsyxYVS/RW+mjd9MJAY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748170111; x=1748774911;
+ d=1e100.net; s=20230601; t=1748170113; x=1748774913;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2y9yBTk/zUuYxbsGTKShF3SU3q7cB+8Yyo6WOvn7br4=;
- b=LMGtCgIujEQ/vna23/DrYv6/zCK44XUqzWrgw00KFNEHxWhpRJYkkJjOdHGpXgklGh
- J4n9fPBSr32jbqez0gBYnMV0OglzjivZJ9W0DOtEmgAxYxW5y3MiBxoIa/6u8IltgWAn
- bfgWnABK00GW0yoUsa7MhbW50XnGH6QA8qxmB5Sr1ymre6+6lhvYdsGrfwtilMImS9Gi
- 3bF23aW/+wNKQqa6BgbHHU/dd15WOeBhAWdg3D7yCK71tQ7XdTVBoscTpqRKprL3aidR
- mcsnFVfyEbKMw25yydzsxl6AqUt4WXMC87TkVGJ6We8TmSeUG73M0YrHpb4SLskddpfv
- LHVQ==
-X-Gm-Message-State: AOJu0YzCzvzyDqAsSbPA/OquJJ+KOvnYZIa7Oq/KV8kQ6QDZjxXspo2s
- LBKATJSWgNpR+3T9W5cc8NK0PsIsFsHhfEQgBG1V5NHXCsOS+2g2ceA/qfSd67+8OzlSnoozQGH
- cJ3O95Q2m
-X-Gm-Gg: ASbGncumU4Ws/FMJbW0x7H31dF/Ho5n6YgW+9adOcURdmtwMxeh5sQFvCNKXnSWpwaC
- mFtPykgXdlWB+CX5PgFTvieMUW2Bmzzla3i2GvOQLv9ne0Rnj4QX+hj7994YSkam2mrW18u/HEe
- Y7mgNnn2/NqnX96jRUYCg1p6kLDXss67eBeVWAI/2vAXG4oatTsIUC5UkKq64m2YFRydRZE2u/1
- FrHpA+u6zEVf98M1b8kiJPd2fa6V0MXgkvK6A5o3Ik3WBZodxrWrRpUQc+vsqy+ELrsXv/f5M58
- 0BPq+4TTMi2loaTLdtJuVpMpKV63GKUG2So0u1blPYcBVMqKoeX99S3tDHoIPNKwXygSGdYM/Mt
- 4kPVoGw==
-X-Google-Smtp-Source: AGHT+IHRrzNqVvSGPCaIbW5Qc/v2wAgozCaYid2LTCtSiI4pQdTEMLtqLLdUDxbJftRSN9ArN9pUrw==
-X-Received: by 2002:a05:6000:2288:b0:3a3:71c2:f753 with SMTP id
- ffacd0b85a97d-3a4cb44630fmr4959146f8f.34.1748170111604; 
- Sun, 25 May 2025 03:48:31 -0700 (PDT)
+ bh=87sA9g/OBKgaEIo3fazfxg/kdkd040onUxdZJULqGC0=;
+ b=l24bMLdhMe5NKP9HCECcnz1Xve0QlRKZkIyfHT1H8CeII9vSSLeyxsmv0Y9/P6l6U5
+ BZ26AtJ2oQBc4ArcK7T5RNMpk9WXui6uTN6Ffj5Q1nDKuFN/QyumofzHgqt7W+aG0KMl
+ xUzzrOowVpL1g38X7JTMAyzRAc+n1uliSoc0d2bx21qtypEaXVIQz/O4rFVDTwtMSQvk
+ TkbY7aJDJLVTLqB2Fv5w1t1WpdcU28a5BvGH8RhcDERf42L6NrLUXV3GRb7cbfWmj8ep
+ Fc+yCCwFkKHdRy4qjjeqspXmyW52baGgeM08YLTSSTn1WnJy1+bghU6YguVgdcMdE//n
+ twGA==
+X-Gm-Message-State: AOJu0YznA9vTmTnYJvShViRcTRgEri6lpnrywowo3qvZviAuuikMh9MF
+ Y3knlLorHubVa1LB4U4lcZMAXaFEvZ4sd01Lg+DDhPEc/ISbwagju7Cf2Ada5JiGVJwHYf3OQYA
+ v1+4lyl4t
+X-Gm-Gg: ASbGncvWuyIO+GXpY8f4O6JS3On9mfCAtQ5JrldBSPAcx1ya75S+AuHOWui7Y8wRgBF
+ qAXGyydkuo7cC+47XYybHSgRP72ccn7eJcEnkXwELaUgGydSWHV1eKguYuQX2h00tklpGwWReGX
+ FUFiQDeoPbiMUlEP9TyTbjXpJSuXXjMqJVuSSRFwPSZRYJiLlgd1eYece492MUmaVA7hpHs+XER
+ joXBmvLHLiNwqTMlxJ2kWVbE2W/dirqEaZS5ZTwhHnTt14rb6aAGEqrr5IoWLdmxfgEm/C+FGyS
+ K/uWCBsV5xpngh25nUYytkcGcyu8+wT+V6EP9jMD7FX+lCDKfsyh0haTeb87n8jR4IRMzBo=
+X-Google-Smtp-Source: AGHT+IEaUqrSa+5VoxD6niw0PaMYqEmCdAglUu3TqZ8Gxyq7SbEM3ZwxV0gGnYnd++kR64EXcTN+YA==
+X-Received: by 2002:a05:600c:1e02:b0:43c:e6d1:efe7 with SMTP id
+ 5b1f17b1804b1-44d5c54c831mr28503005e9.26.1748170113143; 
+ Sun, 25 May 2025 03:48:33 -0700 (PDT)
 Received: from tasman.. (host-80-43-238-15.as13285.net. [80.43.238.15])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.30
+ ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 May 2025 03:48:30 -0700 (PDT)
+ Sun, 25 May 2025 03:48:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+Cc: Simon Glass <sjg@chromium.org>, Dragan Simic <dsimic@manjaro.org>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Paul Kocialkowski <paulk@sys-base.io>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v4 15/25] rockchip: rk3399: Adjust initial TPL-stack to match
- SPL
-Date: Sun, 25 May 2025 11:47:51 +0100
-Message-Id: <20250525104801.1440260-16-sjg@chromium.org>
+Subject: [PATCH v4 16/25] rockchip: Allow SPL to set up SDRAM
+Date: Sun, 25 May 2025 11:47:52 +0100
+Message-Id: <20250525104801.1440260-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250525104801.1440260-1-sjg@chromium.org>
 References: <20250525104801.1440260-1-sjg@chromium.org>
@@ -99,37 +99,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There doesn't seem to be a good reason to use a different value for TPL
-than SPL. Change the TPL value, since it allows a 256-byte bloblist to
-be safely located above the stack in all phases.
-
-Note that for most boards, SDRAM init happens in TPL so the SPL stack
-ends up in DRAM, at address CONFIG_SPL_STACK_R_ADDR.
+The current logic assumes that if TPL exists then it must be setting up
+the SDRAM. This is not true with VBE, so allow this to be controlled by
+whether CONFIG_TPL_RAM is enabled, or not.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Reword commit to mention comments from Jonas
+ arch/arm/mach-rockchip/tpl.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
- arch/arm/mach-rockchip/rk3399/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
-index 7b2d47fcb49..cbe718a428a 100644
---- a/arch/arm/mach-rockchip/rk3399/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3399/Kconfig
-@@ -145,7 +145,7 @@ config TPL_LDSCRIPT
- 	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
+diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
+index cc794a7dca2..2a261199179 100644
+--- a/arch/arm/mach-rockchip/tpl.c
++++ b/arch/arm/mach-rockchip/tpl.c
+@@ -60,10 +60,12 @@ void board_init_f(ulong dummy)
  
- config TPL_STACK
--        default 0xff8effff
-+        default 0xff8eff00
+ 	tpl_board_init();
  
- config TPL_TEXT_BASE
-         default 0xff8c2000
+-	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+-	if (ret) {
+-		printf("DRAM init failed: %d\n", ret);
+-		return;
++	if (CONFIG_IS_ENABLED(RAM)) {
++		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
++		if (ret) {
++			printf("DRAM init failed: %d\n", ret);
++			return;
++		}
+ 	}
+ }
+ 
 -- 
 2.34.1
 
