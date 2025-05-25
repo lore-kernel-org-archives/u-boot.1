@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C264BC54E90
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21100C54E90
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A62F82CFD;
-	Sun, 25 May 2025 12:48:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C148382CED;
+	Sun, 25 May 2025 12:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hZ03cwmv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ssxyudln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6AAD82D08; Sun, 25 May 2025 12:48:21 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 64E2D82CCE; Sun, 25 May 2025 12:48:23 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE28782BF3
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 777E082CF8
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb46so12153345e9.0
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:19 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a367ec7840so992273f8f.2
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748170099; x=1748774899; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748170100; x=1748774900; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9o7VNKYQ2GfAu8Ho1w/ZT8SuLCQm0djaDvXaF9L6fNA=;
- b=hZ03cwmvE61SaQhcmwcIZruIYL4IpPTw4KMH3Tx9c5M5/bBJSmj0QM9bFrL2rVuXJv
- pdSS8iP+ESzZ4XEI52659HhAlN0KvaO9XS665WCiWI6DYRQ+Ne/2MJApJPcAR2IVNc4m
- +0KeaVoU7RXJVW9g6qXtsCCdzAWhSATei2ahg=
+ bh=Do+4Rru6M2N5GxCTknC09nx6aiBbH+QMXvMjneX8ReU=;
+ b=SsxyudlnaQFWFNJ9nKHTl93bmLOtfYQqMvpT4clI90qwi2+0cRRhscjGpyk/tRr/bu
+ e1fRck1nI/+T1DyDyzAcUMo7mXrJAKpMkMDzdXwNI611OBeo794Hbfx2EPl5vW61mJ6E
+ +YM6i+0JFEa2ChiVvrXxTwIPR5uCR9ACDwpoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748170099; x=1748774899;
+ d=1e100.net; s=20230601; t=1748170100; x=1748774900;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9o7VNKYQ2GfAu8Ho1w/ZT8SuLCQm0djaDvXaF9L6fNA=;
- b=U8Nw3DAZHtAqU63hmrz81jn9+ZET/JKi3tqqhQSKU2hkRlIYcYh6E1LXjnrpw9X+Ml
- SAmqD1fg9eympwlHvl+8dVZ3CUPq8AXZkZCDp4CmdFf66PCPCoq9PxQY1CnTIJIGl7qs
- XAz8YHF36iCswD/R5nofFRi9B35BBOHckbJSNaFjWh+dsEu3q/10ukQZn5RVZt4sD5IO
- /AZk3021RP4Ci+shZ2xtYbZB8suGbr1cGp/0tRbqPyqBAjlhbLDFcmdIGLXMuWG7c05Q
- 74tmQx67WLEdmuICaMu6xWRxtO05FvHXusiw7Rj1GupU4B22YG6cq2JeJfz6aRBNbCmG
- ZCAQ==
-X-Gm-Message-State: AOJu0YySqpxbhfCf5lhs/8l1Tjj572rPFObnCCIin9xrkVN2RXAiNwhU
- gt+iOGV/sTc/8DUbc561AGf7cNpVF1NgWwYKi3birwbe2ax/nbpOzn4UWqoe8BsQMNyl/QogYp2
- xRXnwz0uc
-X-Gm-Gg: ASbGncsi3YzsItY5ocRjxLl6ZUPXhRuyq/SRJfKmeHMy6Nt6AMwKOUuxoJBaadR/w55
- UAGcNXM3m5uMFiIJfLYXi4cElJRDsSMa1I8Em0Cu/AbYF2axFse3KfB1hI8kWYH0xeXuCDhe+tX
- UqnUGtbf8IyWXlL0BfauNSKTqY0klzF3aJgd1nAh1FXx5DohiSP/GR5dfqJ5655pSfdisGa7WbU
- 0NBN4IW0yWCWfIp7e4zTOAkQtF8xhj+R5XMUGtabUwxK55Ex+EtK9qPlHo89NDe8W7RG6sokfGd
- XefVw9l0Xsj14ZPJZK5F/gx/ICucR4DEyKGNPqQB66sQ3LBytOrPdIlNOKSsYxlYHi6sN2I=
-X-Google-Smtp-Source: AGHT+IGWTEjdSkjMZ/6nfQTlBlCEf9Z7iBCUzZxvgRQxmHcyDxPEYYoHIb3s8n/f3HM4YN6AH1sy5g==
-X-Received: by 2002:a05:6000:2892:b0:3a4:cf76:b3b6 with SMTP id
- ffacd0b85a97d-3a4cf76b68dmr3085460f8f.13.1748170098692; 
- Sun, 25 May 2025 03:48:18 -0700 (PDT)
+ bh=Do+4Rru6M2N5GxCTknC09nx6aiBbH+QMXvMjneX8ReU=;
+ b=tlB0PDfMRsHQghdqcppmbbQdgq3c7UQNJvCCsjgM+daPRGavIYwHjqUVOmy2PUuwf4
+ HtEHB3xlS7O9gXQcJFlcZnkq6u15U94U7QZ97ywl1cNXZtHhOSuIYiS3kW7Xf3mmmxj0
+ uk0iIuxoLn3vnpjYrLutyhkSE8z2iU/vVSArtGKtiNtMFKFe5f4Bc8cw7u0JGQ/fQa6E
+ oqsFYm7ADlGwVXmzxO/1P+Grmt5IBLthWvVbs46g3u0Xn1F4wS0OWU5G4yTElRS4q4/5
+ pf7fXf5roFT9c2GfkH4CAMN5PaLxzOIix9uyTrdgw2ki9Su91Mgs/Y2Lvtin5sfHUHfI
+ u+vA==
+X-Gm-Message-State: AOJu0Yz4/mvwT+K0Q2GFmuKEJ3Neor0byqfIq7cv5iQcnbc03r8MJz3O
+ V5cSbsG1SKgg4NnD/y4lqoPCcxZiPO3/tzhqEjiAnE4glqogoz473WtyPRmgx+mvavZRubZIWp8
+ EPFr38rTV
+X-Gm-Gg: ASbGncvOetvWodzcozKUbJg+zdUYZ/C4JGOxFaB2si9hPdxN6nJBw1rfUJJj0eKo3xx
+ Qf0PNkSdWLVqFhRGdENg3xpW60VdUYBeaW3YZPaut4K71HBmvhHKsaccyIsbDOZ0a9jjYJq29aR
+ YGKHwsDEzxu35/5lH1D2QfwaQVRVIzimZHGmB0dgOsPeaL7kfCTFeHYPnDhLKJtMlp+yACHITvr
+ lTkj8A8M3kmFYBuI0YTciaoKYZB1GbVq59b/Fu2ZaGdpzX0i1UMFDTMizIcW56TeTMLoVpXFJin
+ B2X7Iz5bwaMrOMZycz7pu7JFGNO/ujf0Ss6ULsEzlQ7EWZM6FZomq/LzZU2/iV/DrX2/aLI=
+X-Google-Smtp-Source: AGHT+IFLEowcCsD8B8Kuo1efMBUh4yo02nrTwwkOXnd51KJWhDSxbJrASX3/4ubRCJ42gz8vVN3fVA==
+X-Received: by 2002:a05:6000:2485:b0:3a3:7031:59da with SMTP id
+ ffacd0b85a97d-3a4cb4c6d15mr4030983f8f.59.1748170100455; 
+ Sun, 25 May 2025 03:48:20 -0700 (PDT)
 Received: from tasman.. (host-80-43-238-15.as13285.net. [80.43.238.15])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.17
+ ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 May 2025 03:48:17 -0700 (PDT)
+ Sun, 25 May 2025 03:48:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v4 07/25] rockchip: Provide a bootstd configuration
-Date: Sun, 25 May 2025 11:47:43 +0100
-Message-Id: <20250525104801.1440260-8-sjg@chromium.org>
+Subject: [PATCH v4 08/25] rockchip: Add SPL into the main FIT
+Date: Sun, 25 May 2025 11:47:44 +0100
+Message-Id: <20250525104801.1440260-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250525104801.1440260-1-sjg@chromium.org>
 References: <20250525104801.1440260-1-sjg@chromium.org>
@@ -97,80 +96,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bootstd information for VBE. Put it in a separate file to avoid
-cluttering the main one.
+VBE may want to load the SPL image from the same FIT as contains U-Boot,
+if there is enough memory, so add it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
-
-Changes in v3:
-- Add a comment about the offsets
+Changes in v4:
+- Use FIT_ARCH instead of ARCH
 
 Changes in v2:
 - Move VPL things into a separate file
 
- arch/arm/dts/rockchip-u-boot.dtsi     |  4 +++
- arch/arm/dts/rockchip-vpl-u-boot.dtsi | 40 +++++++++++++++++++++++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 arch/arm/dts/rockchip-vpl-u-boot.dtsi
+ arch/arm/dts/rockchip-vpl-u-boot.dtsi | 29 +++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 4c882c4a450..18669f73402 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -239,3 +239,7 @@
- #endif /* CONFIG_ROCKCHIP_SPI_IMAGE */
- };
- #endif /* CONFIG_SPL */
-+
-+#ifdef CONFIG_VPL
-+#include "rockchip-vpl-u-boot.dtsi"
-+#endif
 diff --git a/arch/arm/dts/rockchip-vpl-u-boot.dtsi b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-new file mode 100644
-index 00000000000..475dbc53796
---- /dev/null
+index 475dbc53796..dc1664d7b2d 100644
+--- a/arch/arm/dts/rockchip-vpl-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-@@ -0,0 +1,40 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2019 Jagan Teki <jagan@amarulasolutions.com>
-+ */
+@@ -38,3 +38,32 @@
+ 		};
+ 	};
+ };
 +
-+/ {
-+	bootstd {
-+		bootph-verify;
-+		compatible = "u-boot,boot-std";
-+
-+		/*
-+		 * This is used for the VBE OS-request tests. A FAT filesystem
-+		 * created in a partition with the VBE information appearing
-+		 * before the partition starts.
-+		 *
-+		 * Offsets are aligned to the media block-size, typically 0x200
-+		 *
-+		 * The start of the VBE area is set at 8MB, adjusted for the
-+		 * skip-at-start offset. Before that is a block containing the
-+		 * version information and before that is the state. These could
-+		 * be stored in a different storage device if available, but so
-+		 * far VBE only supports MMC.
-+		 *
-+		 * The total area size is 8MB which should be enough for a FIT
-+		 * containing U-Boot and a number of devicetrees.
-+		 */
-+		firmware0 {
-+			bootph-verify;
-+			compatible = "fwupd,vbe-abrec";
-+			storage = "mmc0";
-+			skip-offset = <0x8000>;
-+			area-start = <0x7f8000>;
-+			area-size = <0x800000>;
-+			state-offset = <(0x7f8000 - 0x400)>;
-+			state-size = <0x40>;
-+			version-offset = <(0x7f8000 - 0x200)>;
-+			version-size = <0x100>;
++&binman {
++	template-1 {
++		images {
++			spl {
++				description = "U-Boot SPL";
++				type = "firmware";
++				os = "u-boot";
++				arch = FIT_ARCH;
++				compression = "lz4";
++				load = <CONFIG_SPL_TEXT_BASE>;
++				entry = <CONFIG_SPL_TEXT_BASE>;
++				phase = "spl";
++				section {
++					compress = "lz4";
++					u-boot-spl-nodtb {
++					};
++					u-boot-spl-bss-pad {
++					};
++				};
++			};
++		};
++		configurations {
++			@config-SEQ {
++				fit,firmware = "atf-1", "u-boot", "spl";
++			};
 +		};
 +	};
 +};
