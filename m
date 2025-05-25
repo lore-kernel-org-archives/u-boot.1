@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F19FFC54ED0
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 18:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7401C54ED0
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 18:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7245F82C0C;
-	Sun, 25 May 2025 20:06:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 018DA82B37;
+	Sun, 25 May 2025 20:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bae4l5D7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C2Tn2hBk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30F6782C15; Sun, 25 May 2025 20:06:07 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 1075482B48; Sun, 25 May 2025 20:09:25 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0170482C0C
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 20:06:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26FCD82B34
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 20:09:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ad69e4f2100so222051866b.2
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 11:06:04 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6020ff8d35dso3025806a12.0
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 11:09:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748196364; x=1748801164; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748196562; x=1748801362; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1eAnJlOO9WABNqgs4c7emw1LFewbNcCmktQzBrw8XGo=;
- b=Bae4l5D74GvYY7aCRyyDPBvIZPb0dLBrCX5pwiTiUTJX0tvvA3D1uLGf273KQLmEKk
- 3aedgfVZS8lBYck2Vagvo3kOqT6FgYEFy+x0rDFfmKq72DG+FmN6dz/7MupEod321b1V
- hMWNo7VDFgFNxyLyKdjbBmX7INAYD+JaIT19Q=
+ bh=nko9d41RDMdmfLp4oI0rTfy4X3Wg1G6kf+EwWjdMbcA=;
+ b=C2Tn2hBkSR60PdB3SV0LdQ1RsmBb7lRw5stBHowg3TK32OGadh3hZ0+JtlVs2f1vyh
+ BLahFEd5Aca+Txmfm5zA2/1edRNAUHFU3CdPr9Ilez8fQmZtIbC9FlKzN0affmudQuG4
+ nK5R69kQDH7a11oNd1ND7PIYM7aymjaTdFVhc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748196364; x=1748801164;
+ d=1e100.net; s=20230601; t=1748196562; x=1748801362;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1eAnJlOO9WABNqgs4c7emw1LFewbNcCmktQzBrw8XGo=;
- b=BrGreeikWRIxdOWplMLJ+fCdB0V0qihi5KecbBYpBppnOGAlDXG6WHXjjonXCz0jCi
- HX9b3qBMhU5ThimL3u7piOswUUGwspc7SQ7YF8MpvoMAOZ0gtmLZStITX8CG1YAK0XfN
- LMMWereHCfWYVVjVmpAcShDJ1kaIgCyjiYd/qG8iTgui/IXHmA4x2wZg7snm6LZ4ZDaK
- J3DXBWV11eeP1KhfpGqp11H86zmkChbZD2Ehpo1rt7AXondZQq32BhbiENRWv6TQtiHs
- zaDpksoQxy9WiB+2iFGGBUb1WVl1yxfLeMGOwKoG9Xd2C7+SfnXhtNqElpXDOwmYnWDx
- w0zw==
-X-Gm-Message-State: AOJu0Yw9X6eLu0ofe/QXbzx7ngCgW7JBlSRqal5k82aIppdQ6GgKW1yG
- nDpwttpufXvI3vtHppTO+XaIhwiC5uHy1/6OPspqlvauMYZXaGFY7RsqzADkirNgBSQhvZujbWO
- TENWBtBElPa4rn7DqLMixXViFa5rg1T4Lg4yF+YwLtZd0IKMzdtpX8Q==
-X-Gm-Gg: ASbGncuB5ocSmF22tejJFKQKxDcfJF8tTfquLbRLzlXkt1h0R1cg6Q3mE7T8AELpuS4
- TdSEf46lUMfn6Mn71YrDjODmDKsS4srBIzZbVadYOku71fqaCGHtsXGUvQCtPZbuazlqueKRGsf
- 70QNrU4ESBo44HnSVbHa3v5Qw5SKmr4Tc=
-X-Google-Smtp-Source: AGHT+IGzGTBVQf+m7pOwhQ4ZpyyBs/OU/v/w8Km+w6FA/m+rffeSrqDPixAm9SUONV9bASKjRACQRAwoqRCS05hZXYs=
-X-Received: by 2002:a17:907:7b99:b0:ad2:39a9:f1b2 with SMTP id
- a640c23a62f3a-ad85b32b957mr527353566b.59.1748196364408; Sun, 25 May 2025
- 11:06:04 -0700 (PDT)
+ bh=nko9d41RDMdmfLp4oI0rTfy4X3Wg1G6kf+EwWjdMbcA=;
+ b=UMIKhXAyr5RbIhRBtaMNsLqOFSkVk5GkjWphDeFW6hevyT4saDwZeGzZPPSod6VgIC
+ VY6LaDMtvffgxDdPfbsLXW1WRCBNUYkWfxEQXAbbgTT9mSBucOydAJSYdWPuQU09ykAU
+ XQFBdgT12g6WXFjK+yvCU5oDc1Bfgz4r7tBedfO7YqRoz5UuakaEWmWQwAkVgFRZqjc2
+ FrSmRTSMogYd/pmkdg6XDjd2ieJfTjQmo4KaHiGjNmEpDqZ1tY/NDRJMq0heoL7Awz5d
+ usfx2ffJSDRbQsLZJxIwiTzk015MRDjYw4ergmkBjNPS491rJLN5u5Ndh6B54RnH+QKr
+ oRzA==
+X-Gm-Message-State: AOJu0YwLVK9CS4a850Qkau8JLY7/KiKU2v4LGK+cOkLn+ExZWFmhhkqM
+ yKdD8INYjZbgrslhl3atAds3idB2DfPWOLEM7GoS1ZJLaPCaSaQ28YG8z90A4983vblIYa+8iSh
+ SByi+oqjpesR24wuEbngN6WHmOQoZ4H8fG97asHch
+X-Gm-Gg: ASbGncuacL67vJBCdmHWp5U9/Qh3wyLynd2b6TH9lSBuQwDL+ThATuT/LTX143qJ8/C
+ m3mSZ2KHb4z933MqTa7h8JLbUhYF+iKk4GOv0uHdQibxqx06Rd8Nl8xljpUDshchuRaN8BNKqeB
+ BfDnh20uYm4QnSto41j4ywj/mZOi9tT8M=
+X-Google-Smtp-Source: AGHT+IH2EcWe92bAkwT4Y4koylf6S8s/gjnPUFEBx2aLw6b8Clq8Seebs6HRkDAwfAN18T2VMpX20PmbVtVOsA1GKQY=
+X-Received: by 2002:a05:6402:13cc:b0:603:51cd:f1cf with SMTP id
+ 4fb4d7f45d1cf-60351cdf8d5mr4125425a12.7.1748196562619; Sun, 25 May 2025
+ 11:09:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszThbRhKF1Xwqk+hLu8Y-VXB6+fHVXYfphfVjWMN=dVC1dg@mail.gmail.com>
- <20250525135553.GQ100073@bill-the-cat>
-In-Reply-To: <20250525135553.GQ100073@bill-the-cat>
+References: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJirOoP49HAzMSmnK0B5fZji9+-GAg7Vku3DWOZ6DQOhw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 25 May 2025 19:05:52 +0100
-X-Gm-Features: AX0GCFtJfEZBswgDIDS28RVHvTsYBUtgoFROZtqODptysJQ-MXe6n-b8EfXWRNA
-Message-ID: <CAFLszTgPK_TWjoaJPMa6RAH-pugpO_uhkm-VafQLzaNuFZRDLw@mail.gmail.com>
-Subject: Re: Broken boards?
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 25 May 2025 19:09:11 +0100
+X-Gm-Features: AX0GCFuscXa5i2AsDpdOZMnoeksZ2B8bCSbruYbbDDyXch_eKRO3NPNqJ-kscF8
+Message-ID: <CAFLszTgC4Z2EUNgy8Ya6joUk3HV6+d2qoiqEq6taf9Wvuhdy2Q@mail.gmail.com>
+Subject: Re: QEMU & KVM broken for arm64
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Mark Kettenis <kettenis@openbsd.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,33 +88,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+HI Ilias,
 
-On Sun, 25 May 2025 at 14:55, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 21 May 2025 at 10:08, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Sun, May 25, 2025 at 09:46:03AM +0100, Simon Glass wrote:
+> Hi all,
 >
-> > Hi Tom,
-> >
-> > It seems that some of the boards in my lab are broken in your tree.
-> > Have you noticed that?
+> Starting from commit 53d5a221632e  ("emulation: Use bloblist to hold
+> tables") I can't boot U-Boot with QEMU (version 8.2.2) & KVM anymore.
+> The command line to reproduce it is:
+> qemu-system-aarch64 -smp 2 -nographic -cpu host -m 4096 -accel kvm
+> -bios u-boot.bin -machine virt,secure=off
 >
-> Your lab has never fully functioned in mainline, so no I've not paid
-> attention to it and don't use it. I figure it's part of the lab
-> maintainers duties to figure out false failures and
-> more-or-less-expected failures.
+> commit 24768a23a9b3 ("emulation: fdt: Relax condition for
+> OF_HAS_PRIOR_STAGE") boots fine.
+>
+> Simon do you have an arm64 host to reproduce this?
 
-Oh, that's a shame. I didn't know you had stopped using it.
-
-I use it on nearly every PR. I did once send a patch to disable the
-boards that were broken, then another to re-enable them, but I don't
-think you took either of them...
-
-Here's a recent run showing a few problems:
-
-https://sjg.u-boot.org/u-boot/u-boot/-/pipelines/794
-
-But x86, RISC-V and some rockchip seem to be broken in your tree.
+Yes I can use the runner to try it out.
 
 Regards,
 Simon
