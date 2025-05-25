@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F1BC54F30
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E29C54E90
+	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 10:50:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A982E82E28;
+	by phobos.denx.de (Postfix) with ESMTP id EE6F38369D;
 	Sun, 25 May 2025 12:48:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U+Bg26An";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JCi6uo5Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11DD882AA7; Sun, 25 May 2025 12:48:33 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id DB94582CCE; Sun, 25 May 2025 12:48:34 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21BA882E28
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0F7836BE
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 12:48:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a4c9024117so1005546f8f.0
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:31 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3a35919fa8bso431495f8f.0
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 03:48:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748170110; x=1748774910; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748170111; x=1748774911; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E/P4xb3oAPlDWJu7e7KpdPrzs9t2P2GNK+tNpMQv15w=;
- b=U+Bg26Ank+iUpzR2JV7x/r10VB68aGJ7vQn7iwnOIqh6pJP6lwBymlqq5GN/35brks
- qEkBnU7Bhe8S9EHpr7+cH0eptOwCwhNSRdEd16/m+82nnjbqOLQOY+J9tlgY0R+pK19r
- mYeZe/OOF6PSHvQtqck8abDe00v7bKmYScSyo=
+ bh=2y9yBTk/zUuYxbsGTKShF3SU3q7cB+8Yyo6WOvn7br4=;
+ b=JCi6uo5Qouhg9Uiuxkdxe3l8bbqdkD45/T6hnwW5tG/elMeNFjxIebn5JeJ/k854T1
+ R21D4nBUVRiCX5BJN6Yg0aDlDYPFTZvWMJAE9+K3s1Rpc5DIwnhMFlJGxeMVnB7Fsf+0
+ a0TEK8fszXoKfZEH23747rjZnMI3OfQQrytlc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748170110; x=1748774910;
+ d=1e100.net; s=20230601; t=1748170111; x=1748774911;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E/P4xb3oAPlDWJu7e7KpdPrzs9t2P2GNK+tNpMQv15w=;
- b=NAyTfkLOx4yWYd+O0hxFX7KGqHD3PEcghaFmryrA0UpiorC9lsPX3GXBln79hRQm5y
- tXjUWvzy8pIDW2iGpps+m5Gdmz7fjC2XUJC5K+0oHfS+9DbOPY4BV/hMqA4zgW3Ibp+a
- tcewFsH+rnoYIw/TLERm7hFKJ7FP+r5hyYLyDeVzNpLTAtfkGoqkMCJ5ntXeff0n3iPi
- JjEb7UVPnfrZUu/zDtb4MafU1QZMRPJkZqqVkkT1ewhUjj3qCI9vGNVr9lu5flV+kbHr
- hWAQq1AD33C7hI060MoktvBlAEyZQhQ/JNMOxIdFjRPcB1avoFaR09Jk4RxtBNCICJJD
- 3//w==
-X-Gm-Message-State: AOJu0YzW2ym1jd4Qm1ojLtXilRZNIUywAOLkqzzpD8knfoTfntTTNa8H
- CWkznw9oj4RdR3HNhbr7tePKAW3zD2dfk2nbhf1tMg57Nl2fS90HkaFMMWtTIRRkAMhrm3aSgj1
- YLyB7ZMpk
-X-Gm-Gg: ASbGncvR2UxkP/WUVP7BohSQ9ERF62n2OhqcAuP0F6g+OpW3itUzMrFs/dv3g7JEPRm
- g0yxmxma7E+gLQyFvY54jk0TcQlv8an1/AGn5Jt/KYfmEWVfqUayTDK4kVpX4GMPx4KLeHTN0/u
- UJKA4TKeSp2cx/OWheyVKdlx3UoJqi8J+cPntrXihpaJV0CfAy0McKIH9feN43qVXrR5N5FDk96
- kDE9tUZlbKcjlOhmZtVASA0i3J4vE6PkJYVPfNGlGOx7izkUJ6CSUhAaLY14d4bvUA/SjXSPBSN
- tJxr6GYRBWJxLDbAvMJ0BMAEGhy5OhlqyXo8iRPdoxf9N4RZX9+dGNN9XaIlBW2XaJbyz1Q=
-X-Google-Smtp-Source: AGHT+IEq4S5Q8dOZcX/BmuLYcfn4b43/o9D+O2JDqs4fi0A4+nL+7ez54cWEskYS3pug71+sglUbGw==
-X-Received: by 2002:a5d:4b8d:0:b0:3a4:d038:cb9b with SMTP id
- ffacd0b85a97d-3a4d03934c5mr2675419f8f.7.1748170109757; 
- Sun, 25 May 2025 03:48:29 -0700 (PDT)
+ bh=2y9yBTk/zUuYxbsGTKShF3SU3q7cB+8Yyo6WOvn7br4=;
+ b=LMGtCgIujEQ/vna23/DrYv6/zCK44XUqzWrgw00KFNEHxWhpRJYkkJjOdHGpXgklGh
+ J4n9fPBSr32jbqez0gBYnMV0OglzjivZJ9W0DOtEmgAxYxW5y3MiBxoIa/6u8IltgWAn
+ bfgWnABK00GW0yoUsa7MhbW50XnGH6QA8qxmB5Sr1ymre6+6lhvYdsGrfwtilMImS9Gi
+ 3bF23aW/+wNKQqa6BgbHHU/dd15WOeBhAWdg3D7yCK71tQ7XdTVBoscTpqRKprL3aidR
+ mcsnFVfyEbKMw25yydzsxl6AqUt4WXMC87TkVGJ6We8TmSeUG73M0YrHpb4SLskddpfv
+ LHVQ==
+X-Gm-Message-State: AOJu0YzCzvzyDqAsSbPA/OquJJ+KOvnYZIa7Oq/KV8kQ6QDZjxXspo2s
+ LBKATJSWgNpR+3T9W5cc8NK0PsIsFsHhfEQgBG1V5NHXCsOS+2g2ceA/qfSd67+8OzlSnoozQGH
+ cJ3O95Q2m
+X-Gm-Gg: ASbGncumU4Ws/FMJbW0x7H31dF/Ho5n6YgW+9adOcURdmtwMxeh5sQFvCNKXnSWpwaC
+ mFtPykgXdlWB+CX5PgFTvieMUW2Bmzzla3i2GvOQLv9ne0Rnj4QX+hj7994YSkam2mrW18u/HEe
+ Y7mgNnn2/NqnX96jRUYCg1p6kLDXss67eBeVWAI/2vAXG4oatTsIUC5UkKq64m2YFRydRZE2u/1
+ FrHpA+u6zEVf98M1b8kiJPd2fa6V0MXgkvK6A5o3Ik3WBZodxrWrRpUQc+vsqy+ELrsXv/f5M58
+ 0BPq+4TTMi2loaTLdtJuVpMpKV63GKUG2So0u1blPYcBVMqKoeX99S3tDHoIPNKwXygSGdYM/Mt
+ 4kPVoGw==
+X-Google-Smtp-Source: AGHT+IHRrzNqVvSGPCaIbW5Qc/v2wAgozCaYid2LTCtSiI4pQdTEMLtqLLdUDxbJftRSN9ArN9pUrw==
+X-Received: by 2002:a05:6000:2288:b0:3a3:71c2:f753 with SMTP id
+ ffacd0b85a97d-3a4cb44630fmr4959146f8f.34.1748170111604; 
+ Sun, 25 May 2025 03:48:31 -0700 (PDT)
 Received: from tasman.. (host-80-43-238-15.as13285.net. [80.43.238.15])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.28
+ ffacd0b85a97d-3a4cb450867sm5045047f8f.57.2025.05.25.03.48.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 May 2025 03:48:28 -0700 (PDT)
+ Sun, 25 May 2025 03:48:30 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v4 14/25] rockchip: Add symbols for spl_reloc
-Date: Sun, 25 May 2025 11:47:50 +0100
-Message-Id: <20250525104801.1440260-15-sjg@chromium.org>
+Subject: [PATCH v4 15/25] rockchip: rk3399: Adjust initial TPL-stack to match
+ SPL
+Date: Sun, 25 May 2025 11:47:51 +0100
+Message-Id: <20250525104801.1440260-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250525104801.1440260-1-sjg@chromium.org>
 References: <20250525104801.1440260-1-sjg@chromium.org>
@@ -98,60 +99,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add various symbols so that this feature works as intended. This allows
-xPL to copy the relocating-jump code up to the top of memory, then use
-it to decompress and start the next phase.
+There doesn't seem to be a good reason to use a different value for TPL
+than SPL. Change the TPL value, since it allows a 256-byte bloblist to
+be safely located above the stack in all phases.
+
+Note that for most boards, SDRAM init happens in TPL so the SPL stack
+ends up in DRAM, at address CONFIG_SPL_STACK_R_ADDR.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+Changes in v2:
+- Reword commit to mention comments from Jonas
 
-diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-index 958a1b70aef..842bd4eb07f 100644
---- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-+++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-@@ -25,10 +25,21 @@ SECTIONS
- 	__image_copy_start = ADDR(.text);
- 	.text : {
- 		. = ALIGN(8);
-+		__image_copy_start = .;
- 		CPUDIR/start.o (.text*)
-+
-+		/* put relocation code all together */
-+		//. = . + 0xc0;
-+		_rcode_start = .;
-+		*(.text.rcode)
-+		*(.text.rdata)
-+		_rcode_end = .;
-+
- 		*(.text*)
- 	}
+ arch/arm/mach-rockchip/rk3399/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
+index 7b2d47fcb49..cbe718a428a 100644
+--- a/arch/arm/mach-rockchip/rk3399/Kconfig
++++ b/arch/arm/mach-rockchip/rk3399/Kconfig
+@@ -145,7 +145,7 @@ config TPL_LDSCRIPT
+ 	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
  
-+	_rcode_size = _rcode_end - _rcode_start;
-+
- 	.rodata : {
- 		. = ALIGN(8);
- 		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-@@ -48,6 +59,7 @@ SECTIONS
- 	__image_copy_end = .;
- 	_end = .;
- 	_image_binary_end = .;
-+	__image_copy_end = .;
+ config TPL_STACK
+-        default 0xff8effff
++        default 0xff8eff00
  
- 	.bss ALIGN(8) : {
- 		__bss_start = .;
-@@ -55,6 +67,7 @@ SECTIONS
- 		. = ALIGN(8);
- 		__bss_end = .;
- 	}
-+	__bss_size = __bss_end - __bss_start;
- 
- 	/DISCARD/ : { *(.dynsym) }
- 	/DISCARD/ : { *(.dynstr*) }
+ config TPL_TEXT_BASE
+         default 0xff8c2000
 -- 
 2.34.1
 
