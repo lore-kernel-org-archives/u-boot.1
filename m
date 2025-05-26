@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF3AC54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F37C5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:42:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC66A82F28;
-	Mon, 26 May 2025 16:30:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C60282E8C;
+	Mon, 26 May 2025 16:42:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k4qSjvHY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FWdGahmD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E13D82EDA; Mon, 26 May 2025 16:30:31 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 2FF2782EA3; Mon, 26 May 2025 16:42:41 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9C5F82F54
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:30:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05A0682E50
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-54e7967cf67so2827942e87.0
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:30:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3f9a7cbc8f1so312985b6e.0
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748269828; x=1748874628; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=h7QpoCBu4fgtOCvygmqb0nSHaj+hOzW4YCMsnBcy44s=;
- b=k4qSjvHYJpZo+ZoMe+P5puxugd6cMvzE/VEu2Mx6XB2cbLPz2ektXPx+py1yJHDWNf
- Si4INZrjcCniadPtU5TBSxEx2pBJUNR81sc2HLmySA2w5/V7xCv3EnXYEVckd6v9tUW2
- OUQ78VPQGJb2FAUPc5RuUa0R7DTIBtZWJPmRdwewZ1/jOU41Hv8QE7iynfSUIbcSui6z
- eCZyug5gMnEyKPQuSKoCnZHnfINCIlRO4u9VW11P7iy6e1PhqeBS9IYxt2k76vU82jsP
- vb5XYbCKmYAm5Dh6y5g/7edeaLSipjyODc+uMtxPytBZ+/7iMOQ03ROrurJlzwjijwqj
- slqw==
+ d=konsulko.com; s=google; t=1748270558; x=1748875358; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KbXHCFbHryI+eFkbk596B7Xk8MVirzXcPpmp3OvmV58=;
+ b=FWdGahmDQ7lYuJB2yIeqSuGy1RMlACmVa7Qo8OVb4QKays3t0Br8+Q09hY0IKLmmO3
+ CHwmT3r7iyy9Gahs/+LqznUeCK/r2k/moPZDiFxfEZ7CAXkjGwj29/kcLkEx8mCjjgAB
+ ayHp6YZZpoE+2SefD4dBxrVbEUTn+bFtCtTi8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748269828; x=1748874628;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=h7QpoCBu4fgtOCvygmqb0nSHaj+hOzW4YCMsnBcy44s=;
- b=Q/Kny+6dJ5tFMOkBQkc2nnjc3d8X3vrY0gvLS8MT1S1wZkaaq28LUs8wORpAx1Wvsz
- gb1vU6Ka2Pg4MSNRmxto6DfOplNs1dk7bYA8F1OUR+z1oLN1VZD9OhTasxQaxYYbAv9a
- rD3IVSId9Krwfe1OM2XTEN6YaiZfDL8jU3URmPv/eyfTbTeknPKqrSY3rftXXjOFQ2Qd
- zzjV2CNozBbmmwKLzQAFljd5JXyiT7lvvWG96mRQcuf4WWluxL7OQ+/0cugHj6WLXl/a
- IPDDDBXUNSXmWh2IKaDJzAL/umn0gxHKF2ZaP0ycWDSezhjjPSU4oKAcunfIpqxx0wVi
- f1XA==
-X-Gm-Message-State: AOJu0Yzc3jTgJsvIp5pDXBKz6u6vbhKQLYNaYt55pusjKyZH7R4US+AS
- 0J7iS/Hxtmldb+nsYJoV6iZbq1e1DxMSh4JYKhiVULAE3pqFePS9iFg3S7hmP1yp91buD7OYHqs
- RRmXNlheVnPlXyACvwrXUO2bAa6/PmUk=
-X-Gm-Gg: ASbGncs4s4xs/vfVclDaqu5jcWU3qTbtn/AnOfqkpX4d9WJV6kn6I8wXQE3gItads1w
- S4h2+jXlN9kUsXfKPPb297kZujjZfY/PL926sK4++DbXa42eo3h+5GwV2rqUGb+nZJvVNAymGrx
- ZoCwcDh+k5nMp9jMRvqJfjrdOn92jT8Ztps3w5mPSp812yQxnQ3gh8l0P+48NCp/gZYppRAD17i
- 9E=
-X-Google-Smtp-Source: AGHT+IF0eE02gtmCAu3Tt6kI48DRYY+pTV5mnavtlG9C64/T9FwossT8RSodVSlk3PjL95gb+EHCsgZCotAOIhzpyoU=
-X-Received: by 2002:a05:6512:3191:b0:545:b28:2fa2 with SMTP id
- 2adb3069b0e04-5521c7a83demr2748535e87.7.1748269827924; Mon, 26 May 2025
- 07:30:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748270558; x=1748875358;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KbXHCFbHryI+eFkbk596B7Xk8MVirzXcPpmp3OvmV58=;
+ b=dGJiwuu0tMxConfk/AOr2RMFcTXBpGHN5nvF2jhrJc6Vjsv91TOb7d3V/fTnYmjfvq
+ Q6i7doYyO8JNcDtUD519xJHll8XyCS2NBMKlpW3ymKdb2dP4IppBLVswiRH1XWlDs7QU
+ OU3Z9Xx1lqrj1Mha699MtYAvz7mFj1bA/WYg2SL8vSCMCEa54Rjlh4kWxqXU4d3f016A
+ aLREpktkQ0jUD62DUrcHcQM2SfR2yoWVVrC/2H3l8wf/lKQGg+NDKrRSAc9ZQy46aNnI
+ WkHH99FMbh/TuxTts4ftm8RuxwYDB+2MY+yJWiUVEZ0cKoAs7a4nV+5MADyIBVpNMLck
+ MvGQ==
+X-Gm-Message-State: AOJu0Yy/XGhzsHLBaqEIfn7bCITGhDD7hF91fh9ITlVm4BcQNMerl8xQ
+ gVZTNiXsRUB2gJSD8Ssu+nFs+YQ0N8ZzbEOGRyqk7OOJXxYiirzZw4F2WXGS4jUNpzE=
+X-Gm-Gg: ASbGncsffC/7JLvXIczvOxmFZ1yJOggFxZT0+F/87GHT4vCkmUuoMZQB/Ghjiey/qot
+ 5yBVHX3Ub0TErxlgzvceAeGHjVC4Qo8H71BZTaDTal1t9Nm3h8P9X7CXd7TIfpEMlsTsoufI9/r
+ KGWw0K9tEsOIlNB4/HeI3oaBa6/SmZfFiNIsMo5RrWhWpIeyJCug18getYdihM2V/Y4WP2DsYjS
+ 43XY5c3tyX0qY2rvoHdM73ykpApRiIY4epqgL7Jf0n5F/DnYrccc6csjLQ994SZiky3KdaKOi7S
+ M/W2W4ae5NBstimRB1asBkdGBo2H10kTOOJ9G6Y6NwCNJ8xIGiYhgkzS8yGeY1SW/sHhDcQO7vW
+ mSaywejtjgdUvXUMKo1qW31Y=
+X-Google-Smtp-Source: AGHT+IEkvyr/yMycphJYLezYpfv5cPDMmPiTdsYaN5sJOciTwDxgAf5TS2VNkqkadEy/lxpyNfvKxg==
+X-Received: by 2002:a05:6808:2f18:b0:403:34b3:c987 with SMTP id
+ 5614622812f47-40646845fd6mr5406992b6e.28.1748270557700; 
+ Mon, 26 May 2025 07:42:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-404dc2d4954sm4043351b6e.48.2025.05.26.07.42.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 May 2025 07:42:36 -0700 (PDT)
+Date: Mon, 26 May 2025 08:42:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: Bloblist request
+Message-ID: <20250526144234.GV100073@bill-the-cat>
+References: <CAFLszThhKENznk_+7TpxjtSdcsHB=mosyS=ftqFMUbZAY7xuxQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250525122316.661999-1-michael@amarulasolutions.com>
- <20250525122316.661999-4-michael@amarulasolutions.com>
-In-Reply-To: <20250525122316.661999-4-michael@amarulasolutions.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 26 May 2025 11:30:16 -0300
-X-Gm-Features: AX0GCFudntbWTQERBAre8-Sza3mmzdmIYM8QQ0UCFvuQcnR8vV_W-YQ6xaYfGhI
-Message-ID: <CAOMZO5Dn7JRfvcxjB9Nxg2K0myxwJ=a+=OWm_pB1oWdV4+pmJg@mail.gmail.com>
-Subject: Re: [PATCH 4/4] configs/imx6ulz_smm_m2_defconfig: Enable clock
- framework
-To: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, 
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NLHhXJw+8uwxGTR6"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThhKENznk_+7TpxjtSdcsHB=mosyS=ftqFMUbZAY7xuxQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,40 +96,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 25, 2025 at 9:24=E2=80=AFAM Michael Trimarchi
-<michael@amarulasolutions.com> wrote:
+
+--NLHhXJw+8uwxGTR6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, May 25, 2025 at 09:43:14AM +0100, Simon Glass wrote:
+
+> Hi Tom,
+>=20
+> Bloblist is IMO a bit of a mess, with 2-3 maintainers who don't agree
+> on the direction.
 >
-> Allow to use clock framework for the m2 platform. This allow
-> to have better performance to nand controller
+> You have requested that I:
+> - implement a handoff protocol for x86 in the spec
+> - do the same in the code
+> - convert x86 boards to use OF_BLOBLIST
+> - remove BLOBLIST_FIXED
+>=20
+> I also want to enable VBE, which would require further work. I'm
+> sending a v4 today.
+>=20
+> I am willing to do the above, but to do so, I want to make bloblist a
+> first-class citizen, available on any arch, built into global_data,
+> with no reliance on weak functions.
+>=20
+> Please can you allow me to maintain bloblist?
 
-Enable the clock framework on the m2 platform.
+First, OK, yes, fine.
 
-This helps to increase the NAND controller performance.
+Second, for the record, I am compromising and "Saying Yes" to what you
+want to do, over what I think is a bad idea. We have had a mechanism to
+allow for saving off registers early so we can make use of them a little
+bit later as a "first class citizen" for 14 years come this July.
+Bloblist is not unique or new. What you want to do instead will come
+back to be a problem for some other valid use case later on and require
+some further architecture work at that time (or be an "ugly workaround"
+that we have to accept if we want that case to work).
 
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> ---
->
->  configs/imx6ulz_smm_m2_defconfig | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/configs/imx6ulz_smm_m2_defconfig b/configs/imx6ulz_smm_m2_de=
-fconfig
-> index 436bfb78cc2..5f0ec452467 100644
-> --- a/configs/imx6ulz_smm_m2_defconfig
-> +++ b/configs/imx6ulz_smm_m2_defconfig
-> @@ -43,6 +43,8 @@ CONFIG_ENV_IS_IN_NAND=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
->  CONFIG_NO_NET=3Dy
->  CONFIG_BOUNCE_BUFFER=3Dy
-> +CONFIG_CLK_COMPOSITE_CCF=3Dy
-> +CONFIG_CLK_IMX6UL=3Dy
->  CONFIG_USB_FUNCTION_FASTBOOT=3Dy
->  CONFIG_FASTBOOT_BUF_ADDR=3D0x82000000
->  CONFIG_FASTBOOT_FLASH=3Dy
-> @@ -50,6 +52,7 @@ CONFIG_FASTBOOT_UUU_SUPPORT=3Dy
->  CONFIG_SYS_I2C_MXC=3Dy
->  # CONFIG_MMC is not set
->  CONFIG_MTD=3Dy
-> +CONFIG_DM_MTD=3Dy
+--=20
+Tom
 
-This change is not mentioned in the commit log.
+--NLHhXJw+8uwxGTR6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg0fdYACgkQFHw5/5Y0
+tyw68wv/SLKWtHdhhFZRSMhuinCcTwoTrYJq5vWJzlqxSP2EBJo2FJQ7aaUHV1tZ
+KZ1jRTONUB7RN+FFN7gfqpIWpHh79Fnwh5KVXD/ADEX+6pCNuS0HbVQEZrRoQ5MQ
+Mq8v0eO4t71zNJEMkGI9g00NWflZP2/SMFkqBenihHZus3Nq6t38+TAGq6VTlopI
+PgLuRraVBAzR/gwI8smpKt2vDUZ/kw22xQZWgnEYD+gAD48F5Qr6/R9sfSVfpc1x
+F2dxBkHSzF3X7ZCQf3ImtAu/z71j/Q2Y4wX7mebScPP+i7jby+g2BJmj9NLMUt+0
+mAOQODaNr66+v8LysaMRTKLQnv9NWbTvfABFJ+sFZlnMJ0XPvgEZe0RF/MyrQaLo
+OLMOZSk73vSsg70DdnziXY0HRIjd5e+LrMDIfBoPYdpqw5Ja/e4/ZCmFrswgOidN
+AEh4ImZ1+Cg0nR5sCHtoOgdq/8FkwwPSxlt5279GZyYPO99C2xzdEvMBxlKrvJLE
+TzHg5nnZ
+=nHko
+-----END PGP SIGNATURE-----
+
+--NLHhXJw+8uwxGTR6--
