@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC2B2C5AD49
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 19:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E921C54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 20:01:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BBAC82F33;
-	Mon, 26 May 2025 21:58:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C406382E66;
+	Mon, 26 May 2025 22:01:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O9S0DHJ6";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZCIVanZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F76082F66; Mon, 26 May 2025 21:58:56 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id EC1D982E67; Mon, 26 May 2025 22:01:56 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FB1482E67
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 21:58:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC84282E25
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 22:01:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-601f278369bso5360395a12.1
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 12:58:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-23449dde9ccso11832055ad.3
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 13:01:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748289534; x=1748894334; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1748289713; x=1748894513;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZX/R1gNflXIV2gIQLy7vJlSEWsYPsxWchBlk8tbyd4c=;
- b=O9S0DHJ6fC1UtwmwO3F+s13/sP52cZbe9WXtwlA3Fdc7lc/II8vkA9HUNa19W/raCf
- F9m9xhwF5eCUL0DBlXS/2Wt6MTV1CCsoOOnuwVUMCgmRHR1f6h76r/CnVIxrZuDPHfii
- 7YFXpIbATrkXmXZ2sWKAr3p8GaLtbpWnCvESuiTbh4a7fq8EBp9KwIxlMKAbqQUKs245
- lRCfiWJp7rsMeMf8VAm+zI/at0L4nG56ulcRfH5+N3XnOBYHDrVQTQ2PrJqQoQNDZhIF
- dvo/AsLCddPafLalJ/7d05TSbKsVxniUXWQYxX79QG5lNWeHERbBmbjylOkJTgSHznlU
- zoGQ==
+ bh=AoMMgthn3tUAzouiTDdbEndsLMdiedZk962c/tHpJMo=;
+ b=ZCIVanZrl907ZVLZuzBNIQC9IYHr9JxQRVpDmqnvXMhI53SuLsi9t+FMbFFOb5rf5A
+ gASFJiFZUrJnITSnH3rHu0EfKXVD/JF8ohiRm7ciA5L2TgHF7duTFIqUwAml4JIZQ6um
+ uKjYt+iPr8Z++w/KQ+ztYcDa9h/QHyBwgTfEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748289534; x=1748894334;
+ d=1e100.net; s=20230601; t=1748289713; x=1748894513;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZX/R1gNflXIV2gIQLy7vJlSEWsYPsxWchBlk8tbyd4c=;
- b=OMd97+4FgJR+wTfSgJlFaw2sYPAaDxbFnEFKIZ4xujXGWyaZq4UlHgHnCwLlKmZ/rK
- bzQy2jp+4rhYL+lQT8dvjIy5PI3BFRaH/a2bEPFTDZajBck5xbmsDKp0EI9xMLuH7igl
- 1i6+5l31msEo7ZTLPIfizbOCa0e5qZy8BcaTPq7RGcQl0DjjthE1fGNFeO2DTB696rL8
- myaFNVzQe6jS3PNU5e3TiLySc0ycjtRjto30cTXgRixSblmOdtI5MOGNgDgTArsdUxUi
- /aT/yU3Pmfwzn7f1PvxAu5iluVUgBX+JJzZCy1XA0cZiaho8hIVUw7zH/cdT7Nsv3gUb
- hlNQ==
-X-Gm-Message-State: AOJu0YwdpGs2kOjEZcZ6isQzaq/W9DK6ch/9Ck3vBDhF/6kjTSHuI9oE
- +LrR2c4tgA+DG6UnYcg3n4gwmzkJoJrtadtCyoCwjNmDnGs7/WGK++pVoI3z58TZXDtFGOhblEs
- 2z/DDTxFhoLwQY8bMdQP+8XjXz87KYMoyGw==
-X-Gm-Gg: ASbGncstNP9J0a5j2cUNwNInDo/WAXwbdMM3Ba/KIe6hJlRMr9Nbei2Ly2welJLmUxj
- D736s8F1x9cuF3i1f5a0erB7MTft7RlSWl2OhjE5Aq2rHsM9zzsMufuKY1TD1evVyPvzJ59TjR6
- DPy9kH9bcCCOHBH+3+xxqjXv5TMEx+ComZh1W+wCT2SKE80oZwgyok/P6w6rJANM1r
-X-Google-Smtp-Source: AGHT+IHXy2e3Lo1hEQQaxdBwb5p8Yq7kPrWR6cm1SNq6xvWLCqunMmgkDTM+WPEPDClK2QRsrn8tlCvLVv1fPjB9tRY=
-X-Received: by 2002:a05:6512:159a:b0:552:31c:d263 with SMTP id
- 2adb3069b0e04-5521c9b32a5mr2533538e87.39.1748289523490; Mon, 26 May 2025
- 12:58:43 -0700 (PDT)
+ bh=AoMMgthn3tUAzouiTDdbEndsLMdiedZk962c/tHpJMo=;
+ b=vn6Q8ZeF69aN8alC27+Y9KS/V6FzlSDhgVDVOKyTn/mrPSKN1ePJ3ijyyvzBNw0f3m
+ yc/qCNr/bCqTD5V8HHrpSKOGVGAEtX7U3zQRV4ZffMQk4nojj/FolNP/RhjGGnm7BBEY
+ kQOXsvmpwym+/BMkz/hfaQtWKoryN1LU9g81bznx0AUETon2hMFmVFq5KNZFi5i4Ewdv
+ 4zaamSdIJfIK17Sci7gRxOf5pGhhbH0UQlrSS29r3N/6RkezAlE6CTlSP53jYIgihUlJ
+ NYYvgTWh9KpeETQhKVgRUSxWbhO6EmPNChaUhoQTqbS+IoMJ5sTNLsTAv5P6ptyj/kIE
+ IUsg==
+X-Gm-Message-State: AOJu0YyPmxDGmwyMcY6Md7DgAj07VEiGMsPSg5NYW7AZeAH9BAW6Jh9F
+ 41N6M7MuNfi7Y46KwCD4DboUsQAJzzGh6PzPMN2tBaLBa8lHzulzRM+11LFR3i9jfotNhdWkkPq
+ Qa1OrNL4EMeYVSHxNbrFoCA+j2OVlYSUk770k0VY8Xg==
+X-Gm-Gg: ASbGnctSYrVkfoFGYPzIQBkHUCvRbOyc2d9h8EkDMZsC4a4JpS0aj0QCo8YaPSLwhqC
+ rlwxWKCL7+zdkpzuZMpxoE3IlJAb9p1QfsWrnJrjecN+RMngxIB0Wz9liWPCc3Vv3IqRwcHYLer
+ +9bENC8ovORUutFYxKp1+0mjEeaujYUBrpEyeG6o2HGJgLJlLzLnjcJUMYsiWhlw==
+X-Google-Smtp-Source: AGHT+IGWeXcvrfdnGpMrVTAkvxsrlTjsy3EDnrGxLrW3FKBKBuR6ScPubz95Y8JcK44JwXiP/i9c54WGEE0y58+4pxc=
+X-Received: by 2002:a17:90b:4b83:b0:30e:382f:8b86 with SMTP id
+ 98e67ed59e1d1-3110f824189mr18519800a91.15.1748289713110; Mon, 26 May 2025
+ 13:01:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250526194811.1179530-1-michael@amarulasolutions.com>
  <20250526194811.1179530-3-michael@amarulasolutions.com>
-In-Reply-To: <20250526194811.1179530-3-michael@amarulasolutions.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 26 May 2025 16:58:32 -0300
-X-Gm-Features: AX0GCFvUQgKlh2NXJecZNbHhgDValPcECLYEFvnoiL7ko-cIKe3ezvBC1MNhIk0
-Message-ID: <CAOMZO5ARdWa2bZrg+0VnndR66yFbmAOMNaMtn6PFS1Y9b1xPOw@mail.gmail.com>
+ <CAOMZO5ARdWa2bZrg+0VnndR66yFbmAOMNaMtn6PFS1Y9b1xPOw@mail.gmail.com>
+In-Reply-To: <CAOMZO5ARdWa2bZrg+0VnndR66yFbmAOMNaMtn6PFS1Y9b1xPOw@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 26 May 2025 22:01:41 +0200
+X-Gm-Features: AX0GCFtb0vBlCjto0YJMNgwblNWG0xAA_uYLO_fOkZUZbO__lxtHLU8wH5O0YJ4
+Message-ID: <CAOf5uwm5mTn3ac65cZiZedpo3kLQH4H1PEWtYMR+Rp_f8tR9fQ@mail.gmail.com>
 Subject: Re: [PATCH v2 3/4] mtd: nand: Add support for EDO mode 1-5 to IMX6ULL
  platform
-To: Michael Trimarchi <michael@amarulasolutions.com>
+To: Fabio Estevam <festevam@gmail.com>
 Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -94,20 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Hi Fabio
 
-On Mon, May 26, 2025 at 4:48=E2=80=AFPM Michael Trimarchi
-<michael@amarulasolutions.com> wrote:
+On Mon, May 26, 2025 at 9:58=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> The clock driver allows to boost the NAND performance
-> controller. Make changes to let it use the new clock driver
+> Hi Michael,
 >
-> =3D> time nand read ${loadaddr} kernel
+> On Mon, May 26, 2025 at 4:48=E2=80=AFPM Michael Trimarchi
+> <michael@amarulasolutions.com> wrote:
+> >
+> > The clock driver allows to boost the NAND performance
+> > controller. Make changes to let it use the new clock driver
+> >
+> > =3D> time nand read ${loadaddr} kernel
+> >
+> > NAND read: device 0 offset 0x500000, size 0x800000
+> >  8388608 bytes read: OK
+> >
+> > time: 0.488 seconds
 >
-> NAND read: device 0 offset 0x500000, size 0x800000
->  8388608 bytes read: OK
->
-> time: 0.488 seconds
+> Out of curiosity: what was the original read time without the clock
+> driver being used?
 
-Out of curiosity: what was the original read time without the clock
-driver being used?
+The downstream driver I made 2 years ago before this change was around
+3/3.5mB/sec, if I remember correctly.
+One point all the IMX6 platforms can then be migrated but I don't have
+any board with me.
+
+Michael
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
