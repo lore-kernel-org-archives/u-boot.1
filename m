@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE50DC54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:25:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EDA6C54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:25:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8035782E17;
+	by phobos.denx.de (Postfix) with ESMTP id CCCE282F75;
 	Mon, 26 May 2025 16:24:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="cmoK3S3I";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="2y1ew1Cx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22B3582EA2; Mon, 26 May 2025 16:24:52 +0200 (CEST)
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [IPv6:2a00:1450:4864:20::642])
+ id D741E82EA2; Mon, 26 May 2025 16:24:52 +0200 (CEST)
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC16D82F4E
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:24:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ABE282F5D
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:24:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ej1-x642.google.com with SMTP id
- a640c23a62f3a-ad5574b59c0so442756066b.2
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:24:49 -0700 (PDT)
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-5fff52493e0so2760443a12.3
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:24:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1748269489; x=1748874289;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1748269490; x=1748874290;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NYCXKwjdHiEzjnGqkFqOetEkE+T0IatW9TWPO/+0gLk=;
- b=cmoK3S3I8aiHDyqb53AtykqSWTOlpzBiz1b27ykSVAmQfv6O6vOkhV7y0nm3ypc/4M
- B9p/N0/KfJxPQ2+U4xnxcPm2eqWacpm2vmBnqS/d3z21NWICS6/ThQno1p1dUIlZvjhl
- 1h7olmE0FPOryc9PAPBqI+d3FY5wNOoHnImXv6QWeGqMh9bdtxPdjHiY5K7AXYemYhH0
- 9eZ2diWflWJNYIBy5OSh9LoMLBY6AHryr/7q6kfFTQCBnCCKKvaxZkgjBD0jFbJnTGev
- rqDUT26NaxGL4ZsEvaypM1RaqvROKqvF4R33p8Ow/0AcCKbU1KqokGEsXzjSIvOZqv3V
- 779A==
+ :reply-to; bh=INOLQvXHasPDi++M72+sSJj5/hOlXOAqjMjjG7n7pn0=;
+ b=2y1ew1Cxl12OSTheiim/2y/1qFwCxPkBeH9A/IkNoFpUqgx/Ec9Cqmk9UrV1dO49I2
+ sRP7KytbfC+vH8Dyo91HJwXH38V33nYRDp4UQt8XZXx2H4w7mIkLVWFkW+QSehvKlNad
+ 8ykComslhEDDuRHBKarvS3w5jtWPjlyAMPQ88v9cHcljWqvbbNtOen67V50ICmxXlsox
+ 4oFq+mTWC++ECz1STzE/2HQeYGYHRTDMR1jDuWf1kftefB5dN3DVf37ch0K8fAb7Q6QQ
+ rL2tyiggV/VdPxVNEkq4bQ+6zL/fxoomug7L5QjtE2iHdr/zagB9Qnl69kSlSB3X3mHb
+ 69qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748269489; x=1748874289;
+ d=1e100.net; s=20230601; t=1748269490; x=1748874290;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NYCXKwjdHiEzjnGqkFqOetEkE+T0IatW9TWPO/+0gLk=;
- b=o8EYRDkyrS07Nsq/cDTj2fe4XXOS+AMzenez34WD0NysQ7x6x1gQIFDB3IrKLdf9j2
- WAgbuNjfGvrTaOCZ5neAomMYnNmg17Fo4bYiT0TFOSjTIrsO3aDMOsscaUqvbdYbN5WI
- cuCs96XmLFHJGIePAmY4NkN2gs5lUFJFZiDmYwk3ENs7HfzyeHcQPlJOpNpZ5Ak6Sy/i
- XgB/2duSlvQDK19ktmwPsDgN+6vyFDld7IsTravgqBPr/GjNQ+hmZiBTOVPcyACOJyLi
- ArbYV8wCCj5zmGANcQRZrLJiwrgJLyHbxuUcRhXi8oiF1++roiQPaCyrFCeF78uQr3vv
- 4rtQ==
-X-Gm-Message-State: AOJu0YzuOI4/1FJf6oXGY6SucE0h9j4zed4CRH9IWyNJobh6jYPLGNlW
- wB6Swf0FmusztkBdn54vgp79SrRRe2yxVLodqj3+HTloDl6ZN1FQH4UDSjksahFwEwP9zZO9N4v
- GBNlO2K//PQ==
-X-Gm-Gg: ASbGncs7MUsZy3fYyK8WptxXsKIXdtyu2F7sBJhU1Ptsr6xzxCYCzqsh66W/HBVkt9R
- 8pqrTy5rX3ivXmgf0vE2VU8oaIP8tlJXGK2Tu+kBgscysSHXh1YzaWdYIiv9rpmdbLDeDhdly+Z
- M8g1rBqZPTyss/sasREYb1GgoTKuRDlk0+zC8302acrQPAYJ3qtOCszk8yySDh0vQsWWbKErNDX
- ghVvu/B4ITEVajJFYfHhYPdfxdSiS9fb19dONYCQxad3EumZWMeXQbJ6fOTZt0Fs2E55FJimaKZ
- epZ08XmwzBG/40IfSIPC/lmCviaalE1XOfmw3pi5QLLREi5eCPf52/8/tjvsfSj9
-X-Google-Smtp-Source: AGHT+IEXr8Z/AEUu90JQait0jDIGN8vIrsOadqGZQisWnZZbLOHDOHbgAy/9g8FRqmssJPOJniOriQ==
-X-Received: by 2002:a17:907:3d12:b0:acf:15d:2385 with SMTP id
- a640c23a62f3a-ad85b08523fmr906765866b.16.1748269488691; 
- Mon, 26 May 2025 07:24:48 -0700 (PDT)
+ bh=INOLQvXHasPDi++M72+sSJj5/hOlXOAqjMjjG7n7pn0=;
+ b=jhBKoSprcpKp0C20OQXPGki3NuJlXObysfx7QCRXO3wWEn1T4N9D8La6Te+KZ6BP8R
+ QzrVrgv6VYZEoRP5rLCnb++uPk/BPJj8u5ZOVxdLlSix6Ir31hTLUG3hSjeVaYTWmK3Q
+ bq8R1zjgaAPni0b6haWe+kchd2ugwJFeemNOmZndZ3OWZWe8B0dTAPlO9dpF9wN9Bge9
+ 204BPl8vBAJGhm3I/8ZlT17y1ixWkOYtbbHuz2j1lVzwavNwvAatZnL6hN7FjI1w8tJv
+ W3SEpRhh8KTkMwNm7kIc2ogVSbIKkyUEsUdIc+y2nYEAw8ujPf3T2jSEFqgorL2oyWwX
+ ZGjQ==
+X-Gm-Message-State: AOJu0YxFn7n6CSuUhozmhvu6JH1kHirNauFqzyX6On97TvIbCx28hOeN
+ FrFsPrlPDK6RH9SAZasdSNnDF/kw4FBMXg7pw+ftC9dzNAzWvkOl5Z5IMJXhhFzHb2cJTT4x37I
+ soybdRWf1kA==
+X-Gm-Gg: ASbGnct4iaUhmY1j8oN6kUtAb0zkcQ7OVDfXsh4fbjTD9yZZQ56CTao51dsO+Vpk7w5
+ zFv+nB5wcT8Z+wHet9y1rJFE1DC+dnoSM57sSxjmh+c9w5dwjBblxZV+KpEwto6ECtLS2A8pDOe
+ cKl2yiWAIGzM3+6Tz7oh4nelX1aA8QrEZ86e4OGmSOPL+3Or8GHQQSQS2bK2PLRpq0fdxdDDnmZ
+ oup8qc67gyQEONkn/ghiKoGKL1H+ee7QIWNHqVUM5AAqG3XbsIEus4fPsVlBT4Dpmm5CIhBvRQ8
+ fWH3FESN7HKMOUsKZvM3HKlZ01B/uMPpu1qSj7w+kBaDTF9U3TnxE6VtlzighJpU
+X-Google-Smtp-Source: AGHT+IFQc3as3fpXgAt++i6xjOIqPnOlOD/+/wqopjKiFvJH0vDU6oI0/NPqHZoW6QbiS2nOkJmmmg==
+X-Received: by 2002:a17:907:3f1c:b0:ad8:8529:4fa5 with SMTP id
+ a640c23a62f3a-ad885295437mr112762966b.46.1748269489742; 
+ Mon, 26 May 2025 07:24:49 -0700 (PDT)
 Received: from [127.0.1.1] ([91.90.172.13]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6045c6d25dcsm2926950a12.8.2025.05.26.07.24.47
+ 4fb4d7f45d1cf-6045c6d25dcsm2926950a12.8.2025.05.26.07.24.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 07:24:48 -0700 (PDT)
+ Mon, 26 May 2025 07:24:49 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Date: Mon, 26 May 2025 16:24:23 +0200
-Subject: [PATCH v2 4/5] usb: onboard-hub: Add support for multiple power
- supplies
+Date: Mon, 26 May 2025 16:24:24 +0200
+Subject: [PATCH v2 5/5] usb: onboard-hub: Add support for Cypress HX3
+ family
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250526-usb_onboard_hub_cypress_hx3-v2-4-f382415da84f@thaumatec.com>
+Message-Id: <20250526-usb_onboard_hub_cypress_hx3-v2-5-f382415da84f@thaumatec.com>
 References: <20250526-usb_onboard_hub_cypress_hx3-v2-0-f382415da84f@thaumatec.com>
 In-Reply-To: <20250526-usb_onboard_hub_cypress_hx3-v2-0-f382415da84f@thaumatec.com>
 To: u-boot@lists.denx.de
@@ -99,154 +99,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the onboard hubs require multiple power supplies, so extend
-the driver to support them.
-The implementation is inspired by the kernel driver, as introduced
-by commit [1] in the v6.10 kernel.
+The HX3 is a family of USB3.0 hub controllers that comes in
+different variants: CYUSB330x/CYUSB331x/CYUSB332x/CYUSB230x.
+To support this hub, controlling of reset pin and two
+power supplies is required.
+The reset time is set to 10ms, based on the datasheet [1].
+Power-on delay time is not required, so it is set to 0.
+The compatible strings added to of_match table are
+compliant with usb/cypress,hx3.yaml bindings.
 
-[1] https://github.com/torvalds/linux/commit/ec1848cd5df426f57a7f6a8a6b95b69259c52cfc
+[1] https://www.infineon.com/dgdl/Infineon-HX3_USB_3_0_Hub_Consumer_Industrial-DataSheet-v22_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0ecb53f644b8
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 ---
- common/usb_onboard_hub.c | 65 ++++++++++++++++++++++++++++++++++++------------
- 1 file changed, 49 insertions(+), 16 deletions(-)
+ common/usb_onboard_hub.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index dcaa24d30ece..2d2114ea6d17 100644
+index 2d2114ea6d17..244d7cfb1294 100644
 --- a/common/usb_onboard_hub.c
 +++ b/common/usb_onboard_hub.c
-@@ -20,14 +20,18 @@
- #define USB5744_CONFIG_REG_ACCESS	0x0037
- #define USB5744_CONFIG_REG_ACCESS_LSB	0x99
- 
-+#define MAX_SUPPLIES 2
-+
- struct onboard_hub {
--	struct udevice *vdd;
-+	struct udevice *vdd[MAX_SUPPLIES];
- 	struct gpio_desc *reset_gpio;
+@@ -269,6 +269,12 @@ static const struct onboard_hub_data usb5744_data = {
+ 	.supply_names = { "vdd-supply" },
  };
  
- struct onboard_hub_data {
- 	unsigned long reset_us;
- 	unsigned long power_on_delay_us;
-+	unsigned int num_supplies;
-+	const char * const supply_names[MAX_SUPPLIES];
- 	int (*init)(struct udevice *dev);
- };
- 
-@@ -139,30 +143,53 @@ int usb_onboard_hub_reset(struct udevice *dev)
- 	return 0;
- }
- 
-+static int usb_onboard_hub_power_off(struct udevice *dev)
-+{
-+	struct onboard_hub_data *data =
-+		(struct onboard_hub_data *)dev_get_driver_data(dev);
-+	struct onboard_hub *hub = dev_get_priv(dev);
-+	int ret = 0;
-+	int i;
++static const struct onboard_hub_data usbhx3_data = {
++	.reset_us = 10000,
++	.num_supplies = 2,
++	.supply_names = { "vdd-supply", "vdd2-supply" },
++};
 +
-+	for (i = data->num_supplies - 1; i >= 0; i--)
-+		if (hub->vdd[i])
-+			ret |= regulator_set_enable_if_allowed(hub->vdd[i], false);
-+
-+	return ret;
-+}
-+
- static int usb_onboard_hub_probe(struct udevice *dev)
- {
- 	struct onboard_hub_data *data =
- 		(struct onboard_hub_data *)dev_get_driver_data(dev);
- 	struct onboard_hub *hub = dev_get_priv(dev);
-+	unsigned int i;
- 	int ret;
- 
--	ret = device_get_supply_regulator(dev, "vdd-supply", &hub->vdd);
--	if (ret && ret != -ENOENT) {
--		dev_err(dev, "can't get vdd-supply: %d\n", ret);
--		return ret;
-+	if (data->num_supplies > MAX_SUPPLIES) {
-+		dev_err(dev, "invalid supplies number, max supported: %d\n", MAX_SUPPLIES);
-+		return -EINVAL;
- 	}
- 
--	if (hub->vdd) {
--		ret = regulator_set_enable_if_allowed(hub->vdd, true);
--		if (ret && ret != -ENOSYS) {
--			dev_err(dev, "can't enable vdd-supply: %d\n", ret);
--			return ret;
-+	for (i = 0; i < data->num_supplies; i++) {
-+		ret = device_get_supply_regulator(dev, data->supply_names[i], &hub->vdd[i]);
-+		if (ret && ret != -ENOENT) {
-+			dev_err(dev, "can't get %s: %d\n", data->supply_names[i], ret);
-+			goto err_supply;
-+		}
-+
-+		if (hub->vdd[i]) {
-+			ret = regulator_set_enable_if_allowed(hub->vdd[i], true);
-+			if (ret && ret != -ENOSYS) {
-+				dev_err(dev, "can't enable %s: %d\n", data->supply_names[i], ret);
-+				goto err_supply;
-+			}
- 		}
- 	}
- 
- 	ret = usb_onboard_hub_reset(dev);
- 	if (ret)
--		return ret;
-+		goto err_supply;
- 
- 	if (data->init) {
- 		ret = data->init(dev);
-@@ -174,6 +201,8 @@ static int usb_onboard_hub_probe(struct udevice *dev)
- 	return 0;
- err:
- 	dm_gpio_set_value(hub->reset_gpio, 0);
-+err_supply:
-+	usb_onboard_hub_power_off(dev);
- 	return ret;
- }
- 
-@@ -209,7 +238,7 @@ static int usb_onboard_hub_bind(struct udevice *dev)
- static int usb_onboard_hub_remove(struct udevice *dev)
- {
- 	struct onboard_hub *hub = dev_get_priv(dev);
--	int ret;
-+	int ret = 0, ret2;
- 
- 	if (hub->reset_gpio) {
- 		ret = dm_gpio_set_value(hub->reset_gpio, 1);
-@@ -218,22 +247,26 @@ static int usb_onboard_hub_remove(struct udevice *dev)
- 				ret);
- 	}
- 
--	ret = regulator_set_enable_if_allowed(hub->vdd, false);
--	if (ret)
--		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
-+	ret2 = usb_onboard_hub_power_off(dev);
-+	if (ret2)
-+		dev_err(dev, "can't disable regulators: %d\n", ret2);
- 
--	return ret;
-+	return ret | ret2;
- }
- 
- static const struct onboard_hub_data usb2514_data = {
- 	.power_on_delay_us = 500,
- 	.reset_us = 1,
-+	.num_supplies = 1,
-+	.supply_names = { "vdd-supply" },
- };
- 
- static const struct onboard_hub_data usb5744_data = {
- 	.init = usb5744_i2c_init,
- 	.power_on_delay_us = 1000,
- 	.reset_us = 5,
-+	.num_supplies = 1,
-+	.supply_names = { "vdd-supply" },
- };
- 
  static const struct udevice_id usb_onboard_hub_ids[] = {
+ 	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
+ 	{	.compatible = "usb424,2514",	/* USB2514B USB 2.0 */
+@@ -279,7 +285,14 @@ static const struct udevice_id usb_onboard_hub_ids[] = {
+ 	}, {
+ 		.compatible = "usb424,5744",	/* USB5744 USB 3.0 */
+ 		.data = (ulong)&usb5744_data,
+-	}
++	}, {
++		.compatible = "usb4b4,6504",	/* Cypress HX3 USB 3.0 */
++		.data = (ulong)&usbhx3_data,
++	}, {
++		.compatible = "usb4b4,6506",	/* Cypress HX3 USB 2.0 */
++		.data = (ulong)&usbhx3_data,
++	},
++	{ /* sentinel */ }
+ };
+ 
+ U_BOOT_DRIVER(usb_onboard_hub) = {
 
 -- 
 2.43.0
