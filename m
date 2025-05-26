@@ -4,89 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56850C5AD49
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 09:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98F3AC54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 09:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5B8082D40;
-	Mon, 26 May 2025 11:40:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1DBA282D4A;
+	Mon, 26 May 2025 11:43:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iHUcMFnx";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pa/4xNIZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AB5682D4A; Mon, 26 May 2025 11:40:47 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C8DCE82E05; Mon, 26 May 2025 11:43:30 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C0B882CF8
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 11:40:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ad216a5a59cso261826866b.3
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 02:40:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748252444; x=1748857244; darn=lists.denx.de;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g3KnqDqX/Qz90PdClbM8mu9yLJR9a9fHQqk4cOJ/Ub8=;
- b=iHUcMFnx1P/xZM6mrVu45iK619alfTKtiNvRvAwCK8THep7Kaw2BFaOOsKsl6hX0E+
- Qh04bGBiTRDrNj1CtLiRUd2SihhWb8s0mcO/B2GAyIa3mQFcas4HcAY7kX7+VnMoxhgb
- OQNqctA7bXGpNoNFuXbyk4DSkkoaxYxquSpJqS5cIjnn8VXIY3dkaHgk/WdRhx3aY8g/
- Q3MIgeKk+aqtlBBX8dgAeFSajmRdnJbxfiTg+F6Dirpo0Hf/0vkwK6nmgtvDb8hVJqfr
- qg95YWsfwxbHoQvOnicDuR9Xx3i9PXglADCYPc5sN37t9fTUFp2n/F7NzXBY9QY26FmQ
- l5DA==
+ by phobos.denx.de (Postfix) with ESMTPS id 9AFE982D40
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 11:43:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54Q9eo0E025751
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 09:43:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=7ZWG0UvbZG6yUZsulc03OXyDWhEYO+pKXXt
+ rU7/e0I0=; b=pa/4xNIZB4Y0nLmmE22RI6e5vp/2UGxGm1c+LJb6XBcgSbVZiXN
+ 4DOs/Nv+3ZZP+Pm++g/OliCpU5zaIMtoE98TdyjJD/xKZSu+p5Q78MCkU5GHUZjq
+ FkAODZOgud8llzWG95+UfMUPYCSU6e44ObbQ74DWPf0YQg7ItRrROR+m7HzVj2uk
+ jUEH5zWErtoqp7ydVU5NgTFlvDZdYF/fvOuHMBSiTpxKUtyi3FzabARDT4TN6UHQ
+ FsA+8ivISxYpP2wR7Jjia2Zt4WHY5BtlMKhDwMkfT2zNy1zqWVS2z39Vcsx9ywa4
+ NcIZkas5tjEiEhAltGg6myYXYeDlTG+g9Tg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46u6vjkpwv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 09:43:26 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-7c5d608e6f5so581525385a.0
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 02:43:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748252444; x=1748857244;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=g3KnqDqX/Qz90PdClbM8mu9yLJR9a9fHQqk4cOJ/Ub8=;
- b=ovghPJRGlqvqfUutb4tH4c1RNjJTvN20XjOFhjfqioiHc5NuGTBZQZoaD89mJhxCvT
- W5jH2kcDz1T7FXZ8xohqNe9dhnWg5Adv5pPSN0qOV3zEN8qOdAWHBvbj3lkWR3mXy6r0
- PJD1ZOwkc2aJyb9SJhrfTMcIpkWv3V+g1C9dgrAY+uF0rpMkBMQ3AuUN7Dk7awtNi4UN
- o9cvzygm2/YYg+qfImNP81zKAOkGB6Sk6syRrBMkS8Kx2a4iN0X2cW2q8KA6DuQw/WrR
- ClANrYbVEb8H+Wr+DnGkHSzRNeHML/EYdPcMOp/Wjpzr9hCuPlZzIlZfIkcUoVFICxF+
- ZMEA==
+ d=1e100.net; s=20230601; t=1748252605; x=1748857405;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7ZWG0UvbZG6yUZsulc03OXyDWhEYO+pKXXtrU7/e0I0=;
+ b=EObDCv202CW18pocm4nAsvOsVF4vfTRjCDsblCsEElKzimvWsRMciYzv8pwroQ9vW3
+ jnCemurcBPLcxZ4IvTuoKW0uY8f3SQLUgNq8RmwSKNHzLv6xrRqc/JKpU71OjewvoBWQ
+ LkTPxUgx5EHJzHW1rySdXZ2Y+WZAJ1EQjaxGSWYhe+uyWqIYvnrJaouV0ypXRqIGJP7g
+ oHeeQLnjTGBRGpYMM/mmlzgHAFWmAk1RHj/Y1oQtFfzVN8xwf4RYPQf/3UbA+AZQwNlR
+ QC/HE8dIwqwRQAHnBo+JFn02Sn47PDRyIueJr9fLym05FXrqyYQcTgFn9TdqUkEEHygw
+ 3UPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXqbG9oQlPLZl8lTErq+L+ktacBqeuM01QqPQBYB2Y5j7tcPZv6V+PXIKAwsiF7zWdWvqtADwg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRkOR/8jm2sSFl1qQzsrRVX5xcGm+W3y039hEcETbRmwudcqFR
- 6p62yfR6UqAU5shdhaD4YFQPXS8eH+uw6VJ9C3BL4wrIhCkcq2LPcjLf6K6UfzZS2AQ=
-X-Gm-Gg: ASbGncuk7p8ESMB8m5TQAmOff+nEiBb1nYglzW2Q2E77TmZUuhnto/r4PE7biF1ZmW0
- Uj1b1PKWlkj2rCj0NWqMx5jgbr2yLIaFof16dd7wYQWoA3fFsXgqXhr6LjyZm4Z+AG/QeHRWHOK
- SCHFdJZB/X+rfX3qbmcNr0ckBJ+b3tGqijfFE5LPuY4HrWmaMpfPTk2zHy+DWk3aQHnexjuVV3v
- xUWzUg+YJwT0rT2WXs2L0pf+VSNgwzxrVOL+0i1bQUqqTN7OS+dkSN8ljlsRPehKjtjl2+QQwvE
- 5aPqJyut564hOgU7obo3sMFAJZWSqZ3vrvPY25xDnOjvDDw8vWm2HTtG7Yj8odZPOjOhYkXLxcD
- oVHb2jLzCrv8XAw==
-X-Google-Smtp-Source: AGHT+IGnaFQntNFs8/NZIii6zuY88PTLiUo5SAjfrpRIFofFbKuYUzjP3S7fB1wi4wO8DV3eIFuanA==
-X-Received: by 2002:a17:907:1c1e:b0:aca:d6f0:af0c with SMTP id
- a640c23a62f3a-ad85b213551mr718360966b.59.1748252444314; 
- Mon, 26 May 2025 02:40:44 -0700 (PDT)
-Received: from localhost (ppp089210105145.access.hol.gr. [89.210.105.145])
+ AJvYcCVvybdJgOv3sivlCbe1YoV6rp0LMHZyLame4CRt1z+gg149Sp6vhYef7OFSl6URpJEhSqZHWIc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfS0Fv0UcyZJnA4dK/MJmumNumeWoNulwZEEzVQkkEPFDmyyfH
+ F39B4lJIN9qHm4a/O+18DrPA/5xMR45cp638uDF76U60eUfvsDprAAHoh0YiFoKL6MGBosBKTWB
+ x9/UESz1AwUXM9h7lz6d+ats5uHur8dCJbkS9nCOStwrOXhAOSWs9VLdD
+X-Gm-Gg: ASbGnctLkwdElzvLP2Jq8C3tOqsezHz52k/xbMiy+xyCMStWjoJAmUf1YvbN/3ASZIu
+ JW5VerHZicHfJXEkVIxcf8RqRo7oUo0YYQ3rmbdfaqnkRyaHM4A/qiIPyQ9DTkqmcVcVj5iCj9S
+ sSFpG5uV18fpPy42a4U/JZozo1E2Ooq+Kc0OW6CE7Yv1K9FRuXxtdcQL1xU4WcsJ3FOwCcBzGNU
+ B8/L48oLWS6WTkyuh2CxrkRN22rz4lct1bP2kQMJRwZD6pnsbPOzitmLOr9I5XzUPCLm55BPgF0
+ woYPFdqIU6tQK2uaqG5O1oEU+yWwuahqGrfJgRr0dL9Ug5Uk2U0WAP/EyFCzMVgrN4aJ6ZcWprV
+ MjvNPdQ++/l0bnMG9lvmjN3tqWKcRxUaflxc79Np0
+X-Received: by 2002:a17:902:fc46:b0:220:be86:a421 with SMTP id
+ d9443c01a7336-23414fb1a6bmr142244755ad.38.1748251923423; 
+ Mon, 26 May 2025 02:32:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH/eCgDo9zphNxEImaHIDh4jcpfMw+QL3x3Krow/wiKQvKn6Qgj7BUXUY+QoAtoFQ8Ns9MrAQ==
+X-Received: by 2002:a17:902:fc46:b0:220:be86:a421 with SMTP id
+ d9443c01a7336-23414fb1a6bmr142244405ad.38.1748251923020; 
+ Mon, 26 May 2025 02:32:03 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad52d4e8afdsm1665514366b.176.2025.05.26.02.40.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 May 2025 02:40:43 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 26 May 2025 12:40:42 +0300
-Message-Id: <DA5ZROS80I01.25NCAU84JM742@linaro.org>
-To: "Simon Glass" <sjg@chromium.org>, "U-Boot Mailing List"
- <u-boot@lists.denx.de>
-Cc: "Tom Rini" <trini@konsulko.com>, "Mattijs Korpershoek"
- <mkorpershoek@baylibre.com>, "Tim Harvey" <tharvey@gateworks.com>
-Subject: Re: [PATCH v3 2/4] tpm: Convert sandbox-focussed tests to C
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-X-Mailer: aerc 0.20.0
-References: <20250524130642.902486-1-sjg@chromium.org>
- <20250524070636.v3.2.I8ff77e0c1288f6a4da564e9454eb223f72809839@changeid>
-In-Reply-To: <20250524070636.v3.2.I8ff77e0c1288f6a4da564e9454eb223f72809839@changeid>
+ d9443c01a7336-233ff290d45sm46633845ad.153.2025.05.26.02.31.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 May 2025 02:32:02 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: trini@konsulko.com, sr@denx.de, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, sjg@chromium.org,
+ jonas@kwiboo.se, jerome.forissier@linaro.org, raymond.mao@linaro.org,
+ ravi@prevas.dk, hs@denx.de, arturs.artamonovs@analog.com,
+ devarsht@ti.com, nathan.morrison@timesys.com,
+ balaji.selvanathan@oss.qualcomm.com, bastien.curutchet@bootlin.com,
+ ian.roberts@timesys.com, festevam@gmail.com,
+ vasileios.bimpikas@analog.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: [PATCH v1 0/2] Add Qualcomm Watchdog Driver Support
+Date: Mon, 26 May 2025 15:01:51 +0530
+Message-Id: <20250526093153.3387410-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=UOXdHDfy c=1 sm=1 tr=0 ts=683437be cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=dt9VzEwgFbYA:10 a=ret7OEkzLnChM7SNpeAA:9 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-ORIG-GUID: ChzwBM3dOi2jzoGVJyZAUUF0lrvV88Pl
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI2MDA4MSBTYWx0ZWRfXylmwgb2QxYi5
+ EnnJdfMlo3DBzpzj+tneT4VMqJLrR2C+diObuho1xlvTrjpAP/2h8J1sBdsYxX21h7d1FxSlEHu
+ kEZVsxaxWsC9nJQ4v2dZkWG7/EuIe5DX2B59G70otOuRQa545L6JLIhakNrjxqfvuj083Q/GeNl
+ EwmZRlYhJAc/GmCiQkPcoSLFV59oYrKCNV0s0CLcGqJAWl5aTcb7FSkJH/phkI6DJuTP7ojXLYZ
+ mPOEdnHfCSq5naLTOBW067j1X8+LR1gr7qMQx5ADxaHnnvjzJcDz2zLU6e75k+DA8iAGDWHkd/V
+ yj/gEjS2+gUJ8KpR2oVMlgdJ+bSNcZHsdHF8uie1FN8qxrt4dDso7Lkfh6l2tSr2eW7/OrRy8K+
+ h5eY9b07vYpJxI3ZyCFDzovh/Pe9Zogbdf45I+pzyUFOgiyb+FBTmdOpaXGr5AwDSlOquNni
+X-Proofpoint-GUID: ChzwBM3dOi2jzoGVJyZAUUF0lrvV88Pl
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-26_05,2025-05-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 mlxscore=0 adultscore=0 priorityscore=1501
+ mlxlogscore=824 bulkscore=0 malwarescore=0 impostorscore=0 spamscore=0
+ suspectscore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505160000 definitions=main-2505260081
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,212 +133,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+This patch series introduces support for the Qualcomm watchdog timer 
+in U-Boot. It includes a new driver based on the upstream Linux 
+implementation and integrates the driver into the 
+early boot initialization sequence.
 
-On Sat May 24, 2025 at 4:06 PM EEST, Simon Glass wrote:
-> Some of the Python tests are a pain because they don't reset the TPM
-> state before each test. Driver model tests do this, so convert the
-> tests to C.
->
-> This means that these tests won't run on real hardware, but we have
-> tests which do TPM init, so there is still enough coverage.
->
+The first patch adds the Qualcomm watchdog driver under 
+drivers/watchdog/, while the second patch updates board_f.c to 
+initialize the watchdog when CONFIG_QCOM_WATCHDOG is enabled.
+This ensures that the watchdog is properly configured during 
+early boot on Qualcomm-based platforms.
 
-What's needed to run DM tests on real hardware?
+Balaji Selvanathan (2):
+  drivers: watchdog: Add Qualcomm Watchdog Driver Support
+  common: board_f: Enable Qualcomm watchdog initialization in board_f
 
-We have full coverage. The auto start command, which is not removed from th=
-e
-python tests, will run the selftest command so I think overall this is ok.
+ common/board_f.c            |   2 +-
+ drivers/watchdog/Kconfig    |  17 ++++
+ drivers/watchdog/Makefile   |   2 +
+ drivers/watchdog/qcom-wdt.c | 194 ++++++++++++++++++++++++++++++++++++
+ 4 files changed, 214 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/watchdog/qcom-wdt.c
 
-> Rename and update the Python tpm_init test to use 'tpm autostart',
-> since this deals with starting up ready for the tests below.
-
-may 'since this fully initializes the TPM and performs the self tests'?
-
-Other than that it looks good to me.
-I can rewrite the commit message on my PR to Tom if you don't want to send =
-a v4.
-
-With the changes above
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-Thanks
-/Ilias
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v3:
-> - Use 'check' instead of 'test' when naming test helpers
-> - Add missing tpm_self_test_full() call
->
-> Changes in v2:
-> - Keep test_tpm2_continue_self_test()
->
->  test/dm/tpm.c              | 77 +++++++++++++++++++++++++++++++++++++-
->  test/py/tests/test_tpm2.py | 38 +------------------
->  2 files changed, 76 insertions(+), 39 deletions(-)
->
-> diff --git a/test/dm/tpm.c b/test/dm/tpm.c
-> index 962a3fd1943..87c5c416daa 100644
-> --- a/test/dm/tpm.c
-> +++ b/test/dm/tpm.c
-> @@ -49,14 +49,87 @@ static int test_tpm_init(struct unit_test_state *uts,=
- enum tpm_version version)
->  	return 0;
->  }
->
-> -static int dm_test_tpm(struct unit_test_state *uts)
-> +static int dm_test_tpm_init(struct unit_test_state *uts)
->  {
->  	ut_assertok(test_tpm_init(uts, TPM_V1));
->  	ut_assertok(test_tpm_init(uts, TPM_V2));
->
->  	return 0;
->  }
-> -DM_TEST(dm_test_tpm, UTF_SCAN_FDT);
-> +DM_TEST(dm_test_tpm_init, UTF_SCAN_FDT);
-> +
-> +/* check TPM startup */
-> +static int check_tpm_startup(struct unit_test_state *uts,
-> +			     enum tpm_version version)
-> +{
-> +	struct udevice *dev;
-> +
-> +	/* check probe success */
-> +	ut_assertok(get_tpm_version(version, &dev));
-> +
-> +	ut_assertok(tpm_init(dev));
-> +	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
-> +
-> +	return 0;
-> +}
-> +
-> +/* test TPM startup */
-> +static int dm_test_tpm_startup(struct unit_test_state *uts)
-> +{
-> +	ut_assertok(check_tpm_startup(uts, TPM_V1));
-> +	ut_assertok(check_tpm_startup(uts, TPM_V2));
-> +
-> +	return 0;
-> +}
-> +DM_TEST(dm_test_tpm_startup, UTF_SCAN_FDT);
-> +
-> +static int check_tpm_self_test_full(struct unit_test_state *uts,
-> +				    enum tpm_version version)
-> +{
-> +	struct udevice *dev;
-> +
-> +	ut_assertok(check_tpm_startup(uts, version));
-> +
-> +	ut_assertok(get_tpm_version(version, &dev));
-> +	ut_assertok(tpm_self_test_full(dev));
-> +
-> +	return 0;
-> +}
-> +
-> +/* Test TPM self-test full */
-> +static int dm_test_tpm_self_test_full(struct unit_test_state *uts)
-> +{
-> +	ut_assertok(check_tpm_self_test_full(uts, TPM_V1));
-> +	ut_assertok(check_tpm_self_test_full(uts, TPM_V2));
-> +
-> +	return 0;
-> +}
-> +DM_TEST(dm_test_tpm_self_test_full, UTF_SCAN_FDT);
-> +
-> +/* Test TPM self-test continue */
-> +static int test_tpm_self_test_cont(struct unit_test_state *uts,
-> +				   enum tpm_version version)
-> +{
-> +	struct udevice *dev;
-> +
-> +	/* check probe success */
-> +	ut_assertok(get_tpm_version(version, &dev));
-> +
-> +	ut_assertok(tpm_init(dev));
-> +	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
-> +	ut_assertok(tpm_continue_self_test(dev));
-> +
-> +	return 0;
-> +}
-> +
-> +static int dm_test_tpm_self_test_cont(struct unit_test_state *uts)
-> +{
-> +	ut_assertok(test_tpm_self_test_cont(uts, TPM_V1));
-> +	ut_assertok(test_tpm_self_test_cont(uts, TPM_V2));
-> +
-> +	return 0;
-> +}
-> +DM_TEST(dm_test_tpm_self_test_cont, UTF_SCAN_FDT);
->
->  /* Test report_state */
->  static int dm_test_tpm_report_state(struct unit_test_state *uts)
-> diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-> index 064651c3e23..e55adfe784c 100644
-> --- a/test/py/tests/test_tpm2.py
-> +++ b/test/py/tests/test_tpm2.py
-> @@ -56,7 +56,7 @@ def is_sandbox(ubman):
->      return sys_arch =3D=3D 'sandbox'
->
->  @pytest.mark.buildconfigspec('cmd_tpm_v2')
-> -def test_tpm2_init(ubman):
-> +def test_tpm2_autostart(ubman):
->      """Init the software stack to use TPMv2 commands."""
->      skip_test =3D ubman.config.env.get('env__tpm_device_test_skip', Fals=
-e)
->      if skip_test:
-> @@ -65,19 +65,6 @@ def test_tpm2_init(ubman):
->      output =3D ubman.run_command('echo $?')
->      assert output.endswith('0')
->
-> -@pytest.mark.buildconfigspec('cmd_tpm_v2')
-> -def test_tpm2_startup(ubman):
-> -    """Execute a TPM2_Startup command.
-> -
-> -    Initiate the TPM internal state machine.
-> -    """
-> -    skip_test =3D ubman.config.env.get('env__tpm_device_test_skip', Fals=
-e)
-> -    if skip_test:
-> -        pytest.skip('skip TPM device test')
-> -    ubman.run_command('tpm2 startup TPM2_SU_CLEAR')
-> -    output =3D ubman.run_command('echo $?')
-> -    assert output.endswith('0')
-> -
->  def tpm2_sandbox_init(ubman):
->      """Put sandbox back into a known state so we can run a test
->
-> @@ -92,29 +79,6 @@ def tpm2_sandbox_init(ubman):
->      if skip_test:
->          pytest.skip('skip TPM device test')
->
-> -@pytest.mark.buildconfigspec('cmd_tpm_v2')
-> -def test_tpm2_sandbox_self_test_full(ubman):
-> -    """Execute a TPM2_SelfTest (full) command.
-> -
-> -    Ask the TPM to perform all self tests to also enable full capabiliti=
-es.
-> -    """
-> -    if is_sandbox(ubman):
-> -        ubman.restart_uboot()
-> -        ubman.run_command('tpm2 autostart')
-> -        output =3D ubman.run_command('echo $?')
-> -        assert output.endswith('0')
-> -
-> -        ubman.run_command('tpm2 startup TPM2_SU_CLEAR')
-> -        output =3D ubman.run_command('echo $?')
-> -        assert output.endswith('0')
-> -
-> -    skip_test =3D ubman.config.env.get('env__tpm_device_test_skip', Fals=
-e)
-> -    if skip_test:
-> -        pytest.skip('skip TPM device test')
-> -    ubman.run_command('tpm2 self_test full')
-> -    output =3D ubman.run_command('echo $?')
-> -    assert output.endswith('0')
-> -
->  @pytest.mark.buildconfigspec('cmd_tpm_v2')
->  def test_tpm2_continue_self_test(ubman):
->      """Execute a TPM2_SelfTest (continued) command.
+-- 
+2.34.1
 
