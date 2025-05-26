@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E56C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF3AC54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70B6682DB7;
-	Mon, 26 May 2025 16:27:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC66A82F28;
+	Mon, 26 May 2025 16:30:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Oh9e76SV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k4qSjvHY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 162CE82E17; Mon, 26 May 2025 16:27:38 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 2E13D82EDA; Mon, 26 May 2025 16:30:31 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E556A82D4A
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:27:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9C5F82F54
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:30:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-549b116321aso3216252e87.3
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:27:35 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-54e7967cf67so2827942e87.0
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:30:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748269655; x=1748874455; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1748269828; x=1748874628; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=te0lE2CnwmZZP+XYzSnwhd3L7Gt18U5+pyQgmCITnj8=;
- b=Oh9e76SVpq+Fn1S+AGKkAi1knS8E88g0M0Hhl8fWkHOf2PSMyzbTk3Boh6j05rxEoa
- lmUktr75JItv0yFz8ZYHzRkDs1UnNpr3P2VSqQsc9aakCwBUXyWIjKENfk5BR7bfmcsQ
- eckwmIfCQ2EI5tMyDENTNEmkppVv+6bmAuhqvFunQt0b3AeByVSsaG7yYdhsqIfp06qX
- qVHp3CQmitdeyvM42ZnkXrXJLzjFJGwYOhGjLzcRg9q61MZUeVCWVam5GPxuax8OS9Hc
- +tJI05fgf/Zut+x2bUhyR2IWVh6ZcapUcwGK8Db0iFkYu86dl1HwOGk6clz9omIZsm1+
- L1gw==
+ bh=h7QpoCBu4fgtOCvygmqb0nSHaj+hOzW4YCMsnBcy44s=;
+ b=k4qSjvHYJpZo+ZoMe+P5puxugd6cMvzE/VEu2Mx6XB2cbLPz2ektXPx+py1yJHDWNf
+ Si4INZrjcCniadPtU5TBSxEx2pBJUNR81sc2HLmySA2w5/V7xCv3EnXYEVckd6v9tUW2
+ OUQ78VPQGJb2FAUPc5RuUa0R7DTIBtZWJPmRdwewZ1/jOU41Hv8QE7iynfSUIbcSui6z
+ eCZyug5gMnEyKPQuSKoCnZHnfINCIlRO4u9VW11P7iy6e1PhqeBS9IYxt2k76vU82jsP
+ vb5XYbCKmYAm5Dh6y5g/7edeaLSipjyODc+uMtxPytBZ+/7iMOQ03ROrurJlzwjijwqj
+ slqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748269655; x=1748874455;
+ d=1e100.net; s=20230601; t=1748269828; x=1748874628;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=te0lE2CnwmZZP+XYzSnwhd3L7Gt18U5+pyQgmCITnj8=;
- b=Mg1oLzPIAYOXd/6/BTVZ03PVPSS/m1zqmpY5vNPtOn9eC9rhffo8XUJwA7C2M1QYkl
- SgCG0rtGyzWcUWwypOGyIo8Xs72/U7SlowSgYceKvRY0EKtDECQF8+ORmXqv/SM2gydC
- GjFp5mkO4fLAY5iF2IzCZIScDrUM3j8KWsSIFK0J40QAJV+DZLo+2SV2DbxxZSiskcNW
- BeaIPY8owZYNVvoz/opAOlhSs5JPhyXJOJyxdn7BWf3NGAnJRrQdIiYQiH+tZPDQundo
- drleVg5pRzhncoyjRCHk1fnAL9DOBqe05OqcMQybQ6EG9SW2LDwotZXyfkMAO/h+eNAY
- u8zQ==
-X-Gm-Message-State: AOJu0YwfBSQH7cAVyypK09dSszEy3BB38ltd1C3hpKyI4CfSNtBaYxk5
- jDH7Xk+ijsrQ9HgSaUyhPRO6b+nbGJuxoxLcUPdofTuFh542H79d7UTZkpF0u8U1Ryy2/hvaKOw
- X9Q9f36oI+WuWRjIr1xSrvWXrbtbtJCg=
-X-Gm-Gg: ASbGnctPyySs8HtErtw8M3IgeOxt3nQLX7tiPaojMx1JsTPAU1RrInRfoTH8v63AHzs
- LL4mJL6rOxhsvxjFqg31nPHv4NR2FPOw8V0jB4XdKaX7KirNxTAznTTpF8K1yNp2WPW0PPp6hX9
- Hea3Om69ziZ1FT5+cxayU2YG/RBDoh1c1xgLW2WpeJGivi5RhaTJoPs2GBgG4gpnEv
-X-Google-Smtp-Source: AGHT+IGzRnojYbTAAMgTXrWhrsiD76tcCl+3P3tIxEG/ATGK8R9kob0nkYYBlbcvAqpkfuxyO7f7P++4dAaZbeQUD58=
-X-Received: by 2002:a05:6512:234c:b0:553:25f4:695b with SMTP id
- 2adb3069b0e04-55325f46ac2mr318553e87.6.1748269654901; Mon, 26 May 2025
- 07:27:34 -0700 (PDT)
+ bh=h7QpoCBu4fgtOCvygmqb0nSHaj+hOzW4YCMsnBcy44s=;
+ b=Q/Kny+6dJ5tFMOkBQkc2nnjc3d8X3vrY0gvLS8MT1S1wZkaaq28LUs8wORpAx1Wvsz
+ gb1vU6Ka2Pg4MSNRmxto6DfOplNs1dk7bYA8F1OUR+z1oLN1VZD9OhTasxQaxYYbAv9a
+ rD3IVSId9Krwfe1OM2XTEN6YaiZfDL8jU3URmPv/eyfTbTeknPKqrSY3rftXXjOFQ2Qd
+ zzjV2CNozBbmmwKLzQAFljd5JXyiT7lvvWG96mRQcuf4WWluxL7OQ+/0cugHj6WLXl/a
+ IPDDDBXUNSXmWh2IKaDJzAL/umn0gxHKF2ZaP0ycWDSezhjjPSU4oKAcunfIpqxx0wVi
+ f1XA==
+X-Gm-Message-State: AOJu0Yzc3jTgJsvIp5pDXBKz6u6vbhKQLYNaYt55pusjKyZH7R4US+AS
+ 0J7iS/Hxtmldb+nsYJoV6iZbq1e1DxMSh4JYKhiVULAE3pqFePS9iFg3S7hmP1yp91buD7OYHqs
+ RRmXNlheVnPlXyACvwrXUO2bAa6/PmUk=
+X-Gm-Gg: ASbGncs4s4xs/vfVclDaqu5jcWU3qTbtn/AnOfqkpX4d9WJV6kn6I8wXQE3gItads1w
+ S4h2+jXlN9kUsXfKPPb297kZujjZfY/PL926sK4++DbXa42eo3h+5GwV2rqUGb+nZJvVNAymGrx
+ ZoCwcDh+k5nMp9jMRvqJfjrdOn92jT8Ztps3w5mPSp812yQxnQ3gh8l0P+48NCp/gZYppRAD17i
+ 9E=
+X-Google-Smtp-Source: AGHT+IF0eE02gtmCAu3Tt6kI48DRYY+pTV5mnavtlG9C64/T9FwossT8RSodVSlk3PjL95gb+EHCsgZCotAOIhzpyoU=
+X-Received: by 2002:a05:6512:3191:b0:545:b28:2fa2 with SMTP id
+ 2adb3069b0e04-5521c7a83demr2748535e87.7.1748269827924; Mon, 26 May 2025
+ 07:30:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250525122316.661999-1-michael@amarulasolutions.com>
- <20250525122316.661999-3-michael@amarulasolutions.com>
-In-Reply-To: <20250525122316.661999-3-michael@amarulasolutions.com>
+ <20250525122316.661999-4-michael@amarulasolutions.com>
+In-Reply-To: <20250525122316.661999-4-michael@amarulasolutions.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 26 May 2025 11:27:23 -0300
-X-Gm-Features: AX0GCFs8S_qtwQU-dNiec8xN7wGCKHOrAWhdWuk02gubhidF7h5OjrCzsc1eSYQ
-Message-ID: <CAOMZO5CdLBngWjE=ozR-sFdXRUS36t-PKiG1O5L1JujrxUWAkw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] mtd: nand: Add support for EDO mode 1-5 to IMX6ULL
- platform
+Date: Mon, 26 May 2025 11:30:16 -0300
+X-Gm-Features: AX0GCFudntbWTQERBAre8-Sza3mmzdmIYM8QQ0UCFvuQcnR8vV_W-YQ6xaYfGhI
+Message-ID: <CAOMZO5Dn7JRfvcxjB9Nxg2K0myxwJ=a+=OWm_pB1oWdV4+pmJg@mail.gmail.com>
+Subject: Re: [PATCH 4/4] configs/imx6ulz_smm_m2_defconfig: Enable clock
+ framework
 To: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,56 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 25, 2025 at 9:33=E2=80=AFAM Michael Trimarchi
+On Sun, May 25, 2025 at 9:24=E2=80=AFAM Michael Trimarchi
 <michael@amarulasolutions.com> wrote:
 >
-> The clock driver allow to burst the performance of the nand
+> Allow to use clock framework for the m2 platform. This allow
+> to have better performance to nand controller
 
-allows to boost....NAND
+Enable the clock framework on the m2 platform.
 
-> controller. Make changes to let it use the new clock driver
->
+This helps to increase the NAND controller performance.
+
 > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 > ---
 >
->  drivers/mtd/nand/raw/mxs_nand.c    | 12 ++++++++++++
->  drivers/mtd/nand/raw/mxs_nand_dt.c |  2 +-
->  2 files changed, 13 insertions(+), 1 deletion(-)
+>  configs/imx6ulz_smm_m2_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/drivers/mtd/nand/raw/mxs_nand.c b/drivers/mtd/nand/raw/mxs_n=
-and.c
-> index 80d9307cdd1..2679b6ab650 100644
-> --- a/drivers/mtd/nand/raw/mxs_nand.c
-> +++ b/drivers/mtd/nand/raw/mxs_nand.c
-> @@ -1507,8 +1507,20 @@ static void mxs_compute_timings(struct nand_chip *=
-chip,
->         writel(GPMI_CTRL1_CLEAR_MASK, &nand_info->gpmi_regs->hw_gpmi_ctrl=
-1_clr);
->         writel(ctrl1n, &nand_info->gpmi_regs->hw_gpmi_ctrl1_set);
->
-> +       /* Clock dividers do NOT guarantee a clean clock signal on its ou=
-tput
+> diff --git a/configs/imx6ulz_smm_m2_defconfig b/configs/imx6ulz_smm_m2_de=
+fconfig
+> index 436bfb78cc2..5f0ec452467 100644
+> --- a/configs/imx6ulz_smm_m2_defconfig
+> +++ b/configs/imx6ulz_smm_m2_defconfig
+> @@ -43,6 +43,8 @@ CONFIG_ENV_IS_IN_NAND=3Dy
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+>  CONFIG_NO_NET=3Dy
+>  CONFIG_BOUNCE_BUFFER=3Dy
+> +CONFIG_CLK_COMPOSITE_CCF=3Dy
+> +CONFIG_CLK_IMX6UL=3Dy
+>  CONFIG_USB_FUNCTION_FASTBOOT=3Dy
+>  CONFIG_FASTBOOT_BUF_ADDR=3D0x82000000
+>  CONFIG_FASTBOOT_FLASH=3Dy
+> @@ -50,6 +52,7 @@ CONFIG_FASTBOOT_UUU_SUPPORT=3Dy
+>  CONFIG_SYS_I2C_MXC=3Dy
+>  # CONFIG_MMC is not set
+>  CONFIG_MTD=3Dy
+> +CONFIG_DM_MTD=3Dy
 
-their output.
-
-> +        * during the change of the divide factor on i.MX6Q/UL/SX. On i.M=
-X7/8,
-> +        * all clock dividers provide these guarantee.
-
-this guarantee
-
-> +        */
-> +       if (IS_ENABLED(CONFIG_MX6ULL)) {
-> +               clk_disable(nand_info->gpmi_clk);
-> +       }
-
-Please remove { } for single-line statements.
-
-> +
->         clk_set_rate(nand_info->gpmi_clk, clk_rate);
->
-> +       if (IS_ENABLED(CONFIG_MX6ULL)) {
-> +               clk_enable(nand_info->gpmi_clk);
-> +       }
-
-Ditto.
+This change is not mentioned in the commit log.
