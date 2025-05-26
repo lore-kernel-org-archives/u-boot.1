@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63977C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 22:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67ECC54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 23:18:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C16F082E25;
-	Tue, 27 May 2025 00:29:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AE15E82DB7;
+	Tue, 27 May 2025 01:18:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qHO9tddV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ahNH73x0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B38682EBE; Tue, 27 May 2025 00:29:37 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id B50D882DB7; Tue, 27 May 2025 01:18:45 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E245782DB7
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 00:29:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B115882D4A
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 01:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72c13802133so685313a34.3
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:29:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-acae7e7587dso346713066b.2
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:18:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748298574; x=1748903374; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=roajmwZAOeYQbWQ9caJtmk/zwrBIx/l8lNn1Jvrc4PE=;
- b=qHO9tddV8lulxi27Y48JAFCDjbivFpO5/JK3PzC/gSWbKd/6RIGsPgZ9R5LaakE2hf
- t4g38qGm1p0QEEiSNOEFTCYnRNBMTdoxHTgFEdZEJZmn47wifn4w5zM4VsQ5mlCGSS+I
- JNqMG4FZftou85I269/ACsWpBglRGQN8vK5Hk=
+ d=gmail.com; s=20230601; t=1748301523; x=1748906323; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E65pDG6HsNdsLB5NiOGpG6YTRUbRkF6Qo5TmyCfWSaA=;
+ b=ahNH73x0FJriF5Cd4v1uc048ElFN3mYtPqRxpkrTtgHI5DUrH7PNClg5b2dAjVuvoa
+ lvFEijjjCvTG/AxNfufNuRSdLCg+GIrNAvFn0MyChBReSdctJZD5+pVsaauDl5qMVBDn
+ NBa9HIyq9g0hzurQ3Tzz1l/iq9ewh57ws/E+yr+MbYyqc7YVpt7Yyz+ssuuK5bMFxlS/
+ MiRD0br+fpp9Hn9eOBm2bHDMSU/Jv/M9enLF2YbwRJkDKytr1t/w6UXTuPEgVsa0cRb6
+ dfBtbXgNPYRmJILX6dhBoBw+pZby1SygmPAptOGAI+T32rfUq0Rgf746ZQoMLfdSpSS7
+ FD+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748298574; x=1748903374;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=roajmwZAOeYQbWQ9caJtmk/zwrBIx/l8lNn1Jvrc4PE=;
- b=Owz12EMGetP5VWVpqarsdhLNVz1k0ioBkBrmzYEvWSjV+oV3wDhmndavXUTzqRj76u
- pQ5kaKzPz47Z5MqjRLJZPDJx2V24LlMZcna5ZYGGFQvh0d1q0lMgwv/nVHwZJ8G7ey6J
- G+5hqCXBBESQhd9oZURvS+AWunoEBQeE0P8M0pTKSSM1ITwvji+AYoNIQau512yPAfLH
- Xwn8qtA7/BTqYKyEyfoe2iOie78do5xKnJXiwRC2+5P5n6k+oKnOOyznxnzY8N9r+hb8
- r6CRU3JwCo7/lgcLJq5mbUZeO/klIFtwyA9TyI6pNKuTDm7xwWllwNzxE0QOidJ7v4nR
- gdmg==
-X-Gm-Message-State: AOJu0Ywsp8Kmr29iJYGXZ8eGUWAK5Hnc6JTWvUlC6zbPOHMvbjHYZnF6
- fAHVGdfolysbdsorJrF9tB1xWHwswgkbg4d0AmrrJoEpZi8zO0Nhp9BuMsim3gwRs5uUiJgknpS
- YtI4XUvk=
-X-Gm-Gg: ASbGncsiru/OPobD6uA1KihpD2tR/HnRaP0U9mc+QfMtY7sG+czJJNQlwx9LrT4HmY2
- WuoHN8PGmgJIOrcKto3M2X+0jlg+TZ+XxNCzQqg5ImomVCMp2MGyBLWgTLhFS2aXNRaZ0HyoQeW
- YEKZzg8SSbupCSx811x9OYrnK0gXSB2S2JP+axkz/kEzhWWc6gybx6dSM/ZAA/SuFkX72E1MCTk
- jOvdOWBm1e5Cy/Cl2VfkgbQrnnRUBFSFf/Tu6kBf+C1pLYNwtQ9TvEDMKGliLJqp0El+bCVRhri
- Sj0OcfOxlnMWhOg12KjFigJzjgjrITinSWSBRV60EiVLqPi5pLF+2bV1yvRhTbcbyqQsljhnWTW
- 2q/IX/0th+agkVRc=
-X-Google-Smtp-Source: AGHT+IEBXFQoPXJ0wq/UkwiYZt8BEHjHc1mBmkS1596ZNNvJ/yqNXeOLv9IWgJNM2yQQr9/+tvlQWA==
-X-Received: by 2002:a05:6808:680a:b0:403:31b5:7eb1 with SMTP id
- 5614622812f47-40646877de6mr6193892b6e.36.1748298573674; 
- Mon, 26 May 2025 15:29:33 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60b87fa82c3sm2156537eaf.8.2025.05.26.15.29.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 15:29:32 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH] Revert "ext4fs: Fix: Read outside partition error"
-Date: Mon, 26 May 2025 16:29:31 -0600
-Message-ID: <20250526222931.2775004-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1748301523; x=1748906323;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E65pDG6HsNdsLB5NiOGpG6YTRUbRkF6Qo5TmyCfWSaA=;
+ b=OGxV2ier6btpOFntoKHDdS4M0NadcQsf4cerAHxEQC/Exp01IUDt7zl8VAdXrnZ/n/
+ jRBepB4xQOrW3iFSJkFzu7pR6rFjC9Hd56KTD8aqIA2rf1r7dW11AETHp8nXkYAzO4oj
+ 9NNqhotwwo+pXdKg4bzTWIEO7zDgi5Ik6P7lIB4KQV5ddG83RPhUlYAZLxLqJhtjg0OA
+ fh/U3cFVETBvoxtIB7aAIZSXlCJqjJ7gQxHwkKNFA1fkNVXw4jQ9gssGqNB4qGeg5C4f
+ +Ll8nKhOvRQvvZm+Xz1h/ROxUVuh/+fKdpwBaQyHW7QC6/Iysum5v37d1Ot8XFqDTEwn
+ /HDw==
+X-Gm-Message-State: AOJu0YyE8YLKtWuN9FbaSDvUPBT249z1TvWN4CIeuW/tuZwZVAjmbAms
+ MD+94zjZwaOaq9+kRy6ZknT6XUjyhWnzGSVQThLiwfJ2fZ9HlxJ8QTKGhsbgbHEf1Zydt9hLTif
+ 0LucoPAy8p5KXQ35WCxN10Qp03toWMkw=
+X-Gm-Gg: ASbGncu2kSEYa0L4p1jiOt4I+Bkk7bYIGT70kmlnTkVh41uqpABMets21vc9Ii/qBK4
+ M18amEjbx9caOhAljh9BmR0ANPlSdQQf0gPj5uXpH6c9JFvTs1+SH62uY9OKsoVVPBJE69qRACr
+ yWwZAkt8jwPgdV5GC2ESgbijfTgczHWmUiXA==
+X-Google-Smtp-Source: AGHT+IE1LC8WV6Kaq+8qKyMX/UXwg/qCkIzxIges/PVUdG1swHgH7B8eN5judqRUg7xlA+LNb3hg9+nl3qWTmngtNJg=
+X-Received: by 2002:a17:906:f595:b0:ad5:72d4:85f9 with SMTP id
+ a640c23a62f3a-ad85b1de31dmr968696266b.40.1748301522988; Mon, 26 May 2025
+ 16:18:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250523050201.22442-1-mibodhi@gmail.com>
+ <20250526222524.GA2774370@bill-the-cat>
+In-Reply-To: <20250526222524.GA2774370@bill-the-cat>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 26 May 2025 16:18:31 -0700
+X-Gm-Features: AX0GCFucSgHX5drEzX8E7ZczmpbPFFPHeOhIRxddtoneWgjZloDFqnk_8q3E-xo
+Message-ID: <CAJaLiFz9pehw77zD87n5VrwJX09L7dBM=ZxFA1CNzmE_U5Ghjw@mail.gmail.com>
+Subject: Re: [PATCH] ext4fs: Fix: Read outside partition error
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,36 +97,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The issue here is that the function read_allocated_block() will report
-problems via a negative return value. If we say the return value is
-stored in an lbaint_t that can no longer happen (and Coverity discovered
-this by reporting a no effect comparison and then dead code). The
-problem being fixed by allowing for storing a larger block number will
-have to be solved in some other manner.
+Hi Tom,
 
-This reverts commit df2ed552f0b05591090369a7fe7ddc92439dea5c.
+On Mon, May 26, 2025 at 3:25=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Thu, May 22, 2025 at 10:02:01PM -0700, Tony Dinh wrote:
+>
+> > Use lbaint_t for blknr to avoid overflow in ext4fs_read_file().
+> >
+> > Background:
+> >
+> > blknr (block number) used in ext4fs_read_file() could be increased to a
+> > very large value and causes a wrap around at 32 bit signed integer max,
+> > thus becomes negative. This results in an out-of-normal range for secto=
+r
+> > number (during the assignment delayed_start =3D blknr) where delayed_st=
+art
+> > sector is typed uint64 lbaint_t. This causes the "Read outside partitio=
+n"
+> > error.
+> >
+> > This patch was tested on the Synology DS116 (Armada 385) board, and a
+> > 4TB Seagate HDD.
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > ---
+> >
+> >  fs/ext4/ext4fs.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+> > index 1727da2dc6d..f10c622e62c 100644
+> > --- a/fs/ext4/ext4fs.c
+> > +++ b/fs/ext4/ext4fs.c
+> > @@ -101,7 +101,7 @@ int ext4fs_read_file(struct ext2fs_node *node, loff=
+_t pos,
+> >       blockcnt =3D lldiv(((len + pos) + blocksize - 1), blocksize);
+> >
+> >       for (i =3D lldiv(pos, blocksize); i < blockcnt; i++) {
+> > -             long int blknr;
+> > +             lbaint_t blknr;
+> >               int blockoff =3D pos - (blocksize * i);
+> >               int blockend =3D blocksize;
+> >               int skipfirst =3D 0;
+>
+> Sorry, I should have reviewed this deeper before accepting it. This
+> patch isn't right because it introduces a new problem, we ignore all
+> failures from read_allocated_block() now because we can never return a
+> negative value. This was reported by Coverity as CID 131183 and I need
+> to revert this for now.
 
-Addresses-Coverity-ID: 131183
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Tony Dinh <mibodhi@gmail.com>
----
- fs/ext4/ext4fs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks! Indeed that was bad. I'll take a look again.
 
-diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-index f10c622e62c5..1727da2dc6db 100644
---- a/fs/ext4/ext4fs.c
-+++ b/fs/ext4/ext4fs.c
-@@ -101,7 +101,7 @@ int ext4fs_read_file(struct ext2fs_node *node, loff_t pos,
- 	blockcnt = lldiv(((len + pos) + blocksize - 1), blocksize);
- 
- 	for (i = lldiv(pos, blocksize); i < blockcnt; i++) {
--		lbaint_t blknr;
-+		long int blknr;
- 		int blockoff = pos - (blocksize * i);
- 		int blockend = blocksize;
- 		int skipfirst = 0;
--- 
-2.43.0
+All the best,
+Tony
 
+
+>
+> --
+> Tom
