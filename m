@@ -4,85 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04E9EC54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 17:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD568C5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:03:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BA1D82E67;
-	Mon, 26 May 2025 19:34:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id D82B782E35;
+	Mon, 26 May 2025 20:03:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="S0NurIu5";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="CWG/Hg5o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3DEF82E8C; Mon, 26 May 2025 19:34:42 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C6BE182E37; Mon, 26 May 2025 20:03:43 +0200 (CEST)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B81182E37
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 19:34:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8687882D43
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:03:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6faa19e0661so20572186d6.3
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 10:34:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1748280879; x=1748885679; darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2VYG0B+lIUm1mqHprYEhA1RnrbC7X4YygChS0CTIe+U=;
- b=S0NurIu5xB8QrqGpyrIxoGYHIBEZJCclRZbuw5V9kB3d/8HJnlO5lUKB/jOvcg3b/J
- 9zAPHAUThYXXph1kC+xbpoSHD9aEtQnQrPozdki3RvWqHHJxExV0w6z1JQHtpEZYF+4U
- AakH9BZr0xdIqYUFPAEPTgR9R/dKD3LMvNNxLIMBJghTmm41atBycHbfaJYsrdnSneh/
- 8Was6mIZ9bJzpf7fH8Ox6qZ/bX9ZErLVyNPEJzTn0sIXb5xust2GFzHfxa3GnDrzRbhn
- dCHB2/9zeThRJlsTnvDlk3msl/NJS+SzsH6Z0Zfrqz1vClzsFs3JsMM23C8xpBpwSOn4
- bSoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748280879; x=1748885679;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2VYG0B+lIUm1mqHprYEhA1RnrbC7X4YygChS0CTIe+U=;
- b=ISRiU4cNgtEkpPL3ggequ4f78FfRa7m2HVJM7lFEyT+GUR9uV+M3SzuwDNIqwg8bPf
- OW0/rxeyzUBFoj/BcWGFQHHN6a9d9cio2UGGyHRfGyIaU90JMPrAEc5lPU2bS27xmwEF
- Yvr0LArmKyXwVmNOaIvwrNALlhjzMbROh9KynevS/abBoe4ssaVMifqZBeI8fn6srWyT
- nkz9nKbba0Aqrk2IzYFwBFZKKmLwwO43Tg2rPWuNmXIl9Jl3wlszE7RQ6RGZvfOoZRgM
- GOlBSPTpPOr1Hw0vsxSi3qGHH8V/2zcGyA/6NuPs7IY0+HRZs9KhRPz/D/SD2zjs7GWB
- aiPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7Fub/kwRPZmpPPh6GTJfEDIWxUuY/FfKVPtaGohoOLUpnL9TJKfQtzJkG5HQey+9B+AjZTRc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTtzugbkYhHk7zwxxGRA+t7zmVTtvwqZyqbYlsVV4lqU2/4Rk5
- EXAbubbd7XytYl81i2UxAUZIAHrhxhHjdMdnD1y5gTUtY1ZHvOSgUhyPhCdovQGa3w5Ay1lqZFl
- ZcJ50ePpAhElcZt4m20VCQKgkJsgl+hVhULGTO606MQ==
-X-Gm-Gg: ASbGncvYJmaEK/VMF794EqO6iXiTudeH2iYq98PRUaUeBZAmW+xnnPHNNBkbBEA1Gm/
- b/2GZL6hjPKqHLTn429H3zsuYt3jwoUuIlvH+rcDyL50zPo5Hmg9nD7dUH5anSWVFGjEOpMEcOo
- /tw+fp6daYxp7vEbgw++RM6oEmj3kXtFy6CnnADMeA3YRSCcd/pTMsa2FzbazNcJKluno=
-X-Google-Smtp-Source: AGHT+IFfdxpunVnCOROkAly5IV3HG54TwggRTi1s81RyMumPkZivcqxqskG2Msh3xjKT4pWahLjVcMfVBbsgbIUpVBo=
-X-Received: by 2002:a05:622a:59c8:b0:480:7147:1998 with SMTP id
- d75a77b69052e-49f4674dce1mr145431821cf.22.1748280879018; Mon, 26 May 2025
- 10:34:39 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Bi+Z8VBOv2N13hJG7vfz/bPszn/kBK0YGryTtYxsh0oYMG+ZdeXMNzFV43bqbzYzWjutj5ey0ENxsq7V0uA3V1Oc31/e9IyQxuHcTU9acvFFnAOqADSlr5b4KCRcxkuHqXPXCSjrTew+Bnb/XGk8oHc0JhmL8ZLftKM5RMHIBYjJ1NpXnslSb/J8v7z1mBcYItY19zhY/Y1RRMudhxAGdrfVHjgcBvJF+WoLMUcIVvu8awdC+3pNWvaFyEY3gC04WoFIhMrJNoev3TZ3yWiJJPaxEb+AYAt4/bQcXy2kOUO2uLKDZml5Hcr/zW0KHnYOhEeF9M8Gz5KLqna1L0dWpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EXJMMDjUYo4GTkTZBWEy/q9UQcOSLn/HCDOA6qM0lSs=;
+ b=I6nFjjuMkfgrj91naVyVknRF7o4igBX1UmLKJLalzEvj2gE+UT+o2xjJvCF5BjSZHimeE6Jj7tS1BpoDUqSMlGuggr97i4B7A8LYqKCuVa0KQcxIDl5Rg0xSerrdcgQPeaq4WvK90iIEYZL+37s+RJ6+MlzOyzuUqn/82pQL3Ac8b8rWmpkhURiHQZxw+JKWZFI0kQcm6PoiXbmewxhu2YP0O72v8Jh0Q4Yca4U3PtSl1L+9scYkJDcnCI4gsDGWTySBNOeI2jZfCEQEUyzfl8I5T/0Mt4jNCkfP0icuGOqzs1CQwBsgqDUVO7sgZYc+DfzdAFW/JjAYPIoWZFiuJw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EXJMMDjUYo4GTkTZBWEy/q9UQcOSLn/HCDOA6qM0lSs=;
+ b=CWG/Hg5oo6/EV32NDpCwePlbgHwhksnH4hwhkI4Zwqzx4HecmS63utBFpTJUoySWhC2CeauETIE0BsmOUGNWdvEoDumrxPZ0I+1V5GhTa6knOnQyK+zPBCA/DkOdvgQtd+iAHSE4c3N7lca/pp6Kx6gvGiMQRl2fRrbF82W4gZHMuMxJYp7ZJBAM47Y5dpyuCK0iaqcGyogn7O+rhHjORlCQLx+kIANfmhEaaVPet9s6qoNMEII6g8Af3ct09bD6OHLH6puPQerhHWjrvFyGjyXsqNKjBz1HuJadFued0bE68aU4qRjZcVOSJTtZ0y8wNQm+YpYhlHEjfOjcn7LYmQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from BYAPR03MB4646.namprd03.prod.outlook.com (2603:10b6:a03:133::26)
+ by MW4PR03MB6379.namprd03.prod.outlook.com (2603:10b6:303:11e::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Mon, 26 May
+ 2025 18:03:38 +0000
+Received: from BYAPR03MB4646.namprd03.prod.outlook.com
+ ([fe80::8919:e2df:10df:51ce]) by BYAPR03MB4646.namprd03.prod.outlook.com
+ ([fe80::8919:e2df:10df:51ce%4]) with mapi id 15.20.8769.022; Mon, 26 May 2025
+ 18:03:37 +0000
+From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+Subject: [PATCH v2 0/6] Enhance DDR support for Arria10 SoCFPGA
+Date: Mon, 26 May 2025 11:03:22 -0700
+Message-Id: <20250526180328.13644-1-nareshkumar.ravulapalli@altera.com>
+X-Mailer: git-send-email 2.35.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0057.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c2::32) To BYAPR03MB4646.namprd03.prod.outlook.com
+ (2603:10b6:a03:133::26)
 MIME-Version: 1.0
-References: <aC2hyzxwKzO4k1im@swlinux02>
- <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
- <20250522-eradicate-clip-538f48710ad7@spud> <aC9TmaY7w2PL8lbn@pie.lan>
- <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
- <20250526-disband-cover-cdc6567452f2@spud>
- <20250526145636.GX100073@bill-the-cat>
-In-Reply-To: <20250526145636.GX100073@bill-the-cat>
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-Date: Mon, 26 May 2025 23:04:02 +0530
-X-Gm-Features: AX0GCFsA12_89ihj3xjpSNUUf5lIYrRyg0MeISSb8PGY6NEsxyjYJkBc-pJrV4s
-Message-ID: <CAN37VV6SLVFmfxjbhs8YYEBpzdE8FqjstNh5Xw+DAUx5tC05FQ@mail.gmail.com>
-Subject: Re: [GIT PULL] u-boot-riscv/master
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor@kernel.org>, Yao Zi <ziyao@disroot.org>, 
- Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR03MB4646:EE_|MW4PR03MB6379:EE_
+X-MS-Office365-Filtering-Correlation-Id: 355b4e63-dde7-4fc5-bf5c-08dd9c7fa31b
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?poVHXMJKJtlVPAEiNQ69Yi5vf/OD5cO9Y+lpJYydqB5wr15zgWjGbmqW4rbD?=
+ =?us-ascii?Q?FtsAY45UysrTmYKuzC2xQDjDe1wxLYYWldd/b4mxn8dDKC5g6/uv49wesOC8?=
+ =?us-ascii?Q?30QjgNZKpD8YGiPsgqVcp2XyfOKIgTHm9PGubx2Xwpl2wYF635TDzmpWFg6k?=
+ =?us-ascii?Q?8U78gXDELkYG+ux04RpkpB3OiHEmqSVkF7forCi7HaIOPiI9ff1gZhVTXleS?=
+ =?us-ascii?Q?kuIdULSUsoNMdoF3Iohanq4u+F55noO16kdv5++sk1/AO7kE4V8FqCK+0S4s?=
+ =?us-ascii?Q?IPYFhdTKLr3KaPURX5fO77j/tJYBMqFdqIeuwPSCa4svXPCf8NZ7kkzX0YC7?=
+ =?us-ascii?Q?W8HAaODKyA5VUxm2CPtXgOA3O/mIQ+Oh3ryvNSrgjbSvf91ydrnIE1AuwLil?=
+ =?us-ascii?Q?pHUrbwNGp5MJF560ZrJ0xSatbivk4oGpCUtLrrS9yE8Z0ho9bBaQAFkrfCCc?=
+ =?us-ascii?Q?SY3O/KbTPxk1NHX+TsvQlZQseogyiG3URGw0FyzFfRRhmvLAKPwmoUtgSAwy?=
+ =?us-ascii?Q?5ySMpPREKSAf6lQsmnDKYplt2Yb+TfkfI6uZy/mTJqrB8fsOzP1iqBWH+qj3?=
+ =?us-ascii?Q?njWHrTRBtPafcYtWFrC92cJ/YCQqsr6pdk01XZkdDeRQelwvMHk6m5XEyvmx?=
+ =?us-ascii?Q?p8/2p7aMX1JunZenhArVmkfgt4sNbU+xW6Yu58NpgZV0OMEqDgfALIJxdBVC?=
+ =?us-ascii?Q?RUBbJykzUY4RB2ln24p3RXj8uUE9rP2Y06EOBxkICrZtfhOwKcFqz9Sriz5m?=
+ =?us-ascii?Q?JXd7/zAcmE6OuABSnUe2dLPrUqnFQ+DSRAULwzMfbcVJjyhe14gduBy+6y/z?=
+ =?us-ascii?Q?0u7Uvel8Fuakn/sl8SDrvarCoFvjiijKTXwndVQOHuRpR+yq2WZ+IghAky1c?=
+ =?us-ascii?Q?bDKKNNzWG1/HM6m3Xm3nzmo/7r+V8tqs1K+ndshkCMftc9Bv9Bce2OaQVLz0?=
+ =?us-ascii?Q?BmRZYOzb37Br7N1kmagxzAzzVIZR1dXIQ1v2BIZKPy93k5VyJ+UErsYfj2bt?=
+ =?us-ascii?Q?TpYqHKHwHa1G91NbER/+tFvtXVC+d3Nbk8h5ITvQTQQ6lHb0FKjj1eRUP2xS?=
+ =?us-ascii?Q?vl34/HZnXgEx41TdX3CmOrDYdzCes6eV2fBga3wfs0RzxLc/g4qcpQDbGg5j?=
+ =?us-ascii?Q?K6oAS5aDBbt6CJODeK7OC5PY2CO4E75cNZry9IWp5Ddyswff298MG8nz187m?=
+ =?us-ascii?Q?hymMkptGp1xx62c6JpM0vkSnv23y8YMXIpULRWPOYJ7Fx0v7hcqVDTC59KYv?=
+ =?us-ascii?Q?xyQWMnEg9fBbtjD6bmcexi5l4zV7nx5UUEXaB6T854Njg3T8E2o10X15J7aF?=
+ =?us-ascii?Q?aQ52+nwWm/xYmKd5gxCZ1GVh6UznmicP4AkqktlsGI0ClUxdBwtGvTOyWbnw?=
+ =?us-ascii?Q?t/r8UYkNP8PPhD5Umog2uYlo6hXOAXFyEAo9GHIg31nGRnsqaPfChgLxrpxj?=
+ =?us-ascii?Q?oiMoIGIj0wE=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR03MB4646.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nwTEyATzZi6IjjHq2M1QEFqgMjH8YiAYbUKEIrV6nm7WCdWBZRcyfV4Xy8d0?=
+ =?us-ascii?Q?vsu7H2TH335hoDGfVAv6Lvsfm8ZSt+wEyiZfuP3s8bsQ6ouyGJY21PIPZSJe?=
+ =?us-ascii?Q?V1N9HuDvXU7O9vUMLqfIIgPxSF2/AzZeeU5f1wiH3jzOfhb1FJEjbOCM+PAy?=
+ =?us-ascii?Q?yZFQKhfUGvJhn+9mwJQdORuYLDw4TtXHCXzzypS1GsT9xENcJayyIe9i7X36?=
+ =?us-ascii?Q?VuLtpphjObahFsjPU2qUacnGGbyS+08RL9N+sWyeu531AO5wCqzY3s9BoOTm?=
+ =?us-ascii?Q?jndrBja2L2eAdTwi63OD4yryNflHcYYd9NQOOF/+jVX2NXTtAgYUYfa8U3lX?=
+ =?us-ascii?Q?jfMw1Il0ciMnRvXeRg7QIIAJ42DrPRjuKkaIdwNK+j7tXiuFxarrSe94StXe?=
+ =?us-ascii?Q?y+JsN3caCub8UGkfxJ/uMoK7kAvXkubifKxux7rRJt2gcaA+3todJQ5m/4B1?=
+ =?us-ascii?Q?e1Odg5f1CH6UO4JPQnD9BpCYtnQeKh3LgUJGOCI5HkW3arLYHEDS4o3qtMKv?=
+ =?us-ascii?Q?QXEp+rWPG4MV6ooo2o+T7tj2pZKbktiA5OR6Ap7iWsik0QXDOl6AzTrVeKrW?=
+ =?us-ascii?Q?AzgY/SK4i8/TgpJgsCmomqZsQcm7kgjt4PfRteiz8AcZAt50kVoByjjrEvBp?=
+ =?us-ascii?Q?uBYlXE3bUAu5NVNJMrokvXfdxiAlg3NiloV12qbFMuadTdEkAh2YQtPnhxsu?=
+ =?us-ascii?Q?VNfeUar3yBhThRSa9WvoYeLkFPjOmYjqyS9IBjGJUfji5quoPWIUVqqW5XAM?=
+ =?us-ascii?Q?MhRyUt08dYsJK6e4hG4+MArJN7SSKdKuYjlTJeldlEm6MQmPB5WnlYg+47VV?=
+ =?us-ascii?Q?CoZby+z39NUtEkhQjB7nektdjPBN+670ayeBC2/HwWyq+KiaQrxXEziEKj2S?=
+ =?us-ascii?Q?VdCBSX63R+oroJKoaT1asoPS48RPmZG8Rv4Nw71GST0f+yZy2QaU099oa4Rr?=
+ =?us-ascii?Q?LQUcdpo5kG9YG0VsKRyz+FurRqmJ6fPK4nKTzMhafOJHlTaJWVylfTPvPNjU?=
+ =?us-ascii?Q?K3uzKDzcfhftisB6Aj5EzTxaAwPnDwbL4+S+dQaQ0lcddd3TeiYzdZ/ewvC7?=
+ =?us-ascii?Q?kE08kU4PhK/hHVlK0IH6yOpvKnVSC2UQPgBEtHexP5EqZ0zbIKwDklTaqMX8?=
+ =?us-ascii?Q?Nz+k2ERmEd1NY1lmMfiorTBAvRShi99nkFJuUlARw9F27m+gmpvVVMn6bOu4?=
+ =?us-ascii?Q?CXbilpArCp6qpQ3Iq6oJdHnombIgHVwYqnISa0zm/GfufTkSL3XYVcKXj5r3?=
+ =?us-ascii?Q?frM+sppXSaQaKyLh5FtjaogTrcK+WwPHhdzHjJx8IBq2JhclUx6wAtCxYDLH?=
+ =?us-ascii?Q?ImRjPaDRE+4eHdL2SxeNnE7fmLKAvWWQex56+B+Oe4Sv3qpbEiS/FiON1o7i?=
+ =?us-ascii?Q?qItzpIrHpDpgcCFr5hom/z5ODyCI0R33cLW67ad/tgxs7b1y1YBGS4pXLagb?=
+ =?us-ascii?Q?1B2g3zj9UsyhmjRVheX2QsKBiiG75o9qwwjb8fCAI17yAFI7FXLWPv54BW+r?=
+ =?us-ascii?Q?sf+FWGrORecvHsYlHsnR8WYv97a3I7qFKfjg7xpVenbQiBnpEHsXU2+BeYDv?=
+ =?us-ascii?Q?cjVxzBTWK7nyziGj50nNOOaYIi4QI/ThjAtCR+gYn5bQc04ZwEhU4S7Bj3uw?=
+ =?us-ascii?Q?d0iFvwqc34I1J/+msWNlWnM=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 355b4e63-dde7-4fc5-bf5c-08dd9c7fa31b
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4646.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 18:03:37.7488 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Izme1+KZOFqsx38TZchUTPKp8gYuXHaGHcE0Mf/UVhZ4MHRUn7o1skE5diQFzWHXhSXVnoEZzJPQ0NhaUhQEaIK2AMauQaAK230GMyPwsLy5V2Uy0lFBSkEguZp8Y15g
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6379
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,160 +159,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 26, 2025 at 8:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Mon, May 26, 2025 at 10:17:54AM +0100, Conor Dooley wrote:
-> > On Mon, May 26, 2025 at 09:02:46AM +0530, Mayuresh Chitale wrote:
-> > > On Thu, May 22, 2025 at 10:11=E2=80=AFPM Yao Zi <ziyao@disroot.org> w=
-rote:
-> > > >
-> > > > On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
-> > > > > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
-> > > > > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
-> >
-> > > > > This PR seems to have made my CI blow up, and I'm not entirely su=
-re if
-> > > > > that's something intentional or not. I've not yet bisected, but s=
-ince
-> > > > > the error is "Image arch not compatible with host arch", I can on=
-ly
-> > > > > imagine the patch in question is:
-> > > > > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV=
-64
-> > > > > | Date: Fri,  4 Apr 2025 14:48:55 +0000       [thread overview]
-> > > > > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com>=
- (raw)
-> > > > > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com=
->
-> > > > > |
-> > > > > | Similar to ARM and X86, introduce a new image type which allows=
- u-boot
-> > > > > | to distinguish between images built for 32-bit vs 64-bit Risc-V=
- CPUs.
-> > > > > |
-> > > > > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > > > > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
-> > > > > | ---
-> > > > > |  boot/image.c    | 3 ++-
-> > > > > |  include/image.h | 3 ++-
-> > > > > |  2 files changed, 4 insertions(+), 2 deletions(-)
-> > > > > |
-> > > > > | diff --git a/boot/image.c b/boot/image.c
-> > > > > | index 139c5bd035a..45299a7dc33 100644
-> > > > > | --- a/boot/image.c
-> > > > > | +++ b/boot/image.c
-> > > > > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D =
-{
-> > > > > |     {       IH_ARCH_ARC,            "arc",          "ARC",     =
-     },
-> > > > > |     {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_64=
-",   },
-> > > > > |     {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",  =
-     },
-> > > > > | -   {       IH_ARCH_RISCV,          "riscv",        "RISC-V",  =
-     },
-> > > > > | +   {       IH_ARCH_RISCV,          "riscv",        "RISC-V 32 =
-Bit",},
-> > > > > | +   {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 64 =
-Bit",},
-> > > > > |     {       -1,                     "",             "",        =
-     },
-> > > > > |  };
-> > > > > |
-> > > > > | diff --git a/include/image.h b/include/image.h
-> > > > > | index 07912606f33..411bfcd0877 100644
-> > > > > | --- a/include/image.h
-> > > > > | +++ b/include/image.h
-> > > > > | @@ -138,7 +138,8 @@ enum {
-> > > > > |     IH_ARCH_ARC,                    /* Synopsys DesignWare ARC =
-*/
-> > > > > |     IH_ARCH_X86_64,                 /* AMD x86_64, Intel and Vi=
-a */
-> > > > > |     IH_ARCH_XTENSA,                 /* Xtensa       */
-> > > > > | -   IH_ARCH_RISCV,                  /* RISC-V */
-> > > > > | +   IH_ARCH_RISCV,                  /* RISC-V 32 bit*/
-> > > > > | +   IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
-> > > > > |
-> > > > > |     IH_ARCH_COUNT,
-> > > > > |  };
-> > > > > | --
-> > > > > | 2.43.0
-> > > > > |
-> > > > > since it is changing the existing "riscv" image type to be the 32=
--bit
-> > > > > image and requiring the new entry for 64-bit. My CI job uses the =
-system
-> > > > > mkimage to create the image that U-Boot is loading, so it doesn't=
- know
-> > > > > about the new define etc. Maybe it's not considered a problem if =
-a new
-> > > > > U-Boot cannot boot an old image, but the comment above the enum r=
-eads:
-> > > > > |/*
-> > > > > | * CPU Architecture Codes (supported by Linux)
-> > > > > | *
-> > > > > | * The following are exposed to uImage header.
-> > > > > | * New IDs *MUST* be appended at the end of the list and *NEVER*
-> > > > > | * inserted for backward compatibility.
-> > > > > | */
-> > > > > The overwhelming majority of existing supported boards in U-Boot =
-are
-> > > > > 64-bit platforms, and the 64-bit platforms are the ones that have=
- been
-> > > > > supported for longer, so my thought would be that the compatibili=
-ty of
-> > > > > 64-bit platforms should be prioritised over 32-bit? Or even add e=
-xplicit
-> > > > > 32-bit and 64-bit entries and the existing one is a catch-all for
-> > > > > compatibility reasons?
-> > > >
-> > > > I've mentioned entries with bitwidth explicitly specified in my pre=
-vious
-> > > > reply (and there hasn't been any response).
-> > > >
-> > > > > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying =
-32bit
-> > > > > when no suffix attached. We (and the Linux kernel) mix 32-bit and=
- 64-bit
-> > > > > variants of RISC-V together, thus it's hard to tell the exact bit=
-width
-> > > > > of "IH_ARCH_RISCV" without inspecting the code around. To me, it =
-sounds
-> > > > > more like "RISC-V, but no bitwidth specified".
-> > > > >
-> > > > > It will be nice if we could avoid this kind of ambiguity.
-> > > >
-> > > > (referring my own reply[1])
-> > > >
-> > > > I'll second explicit 32-bit and 64-bit entries, and keeping
-> > > > IH_ARCH_RISCV for compatibility consideration.
-> > > >
-> > > Are you suggesting something like this :
-> > >
-> > > { IH_ARCH_RISCV, "riscv", "RISC-V",},
-> > > { IH_ARCH_RISCV32, "riscv32", "RISC-V 32 Bit",},
-> > > { IH_ARCH_RISCV64, "riscv64", "RISC-V 64 Bit",},
-> > >
-> > > I tried to implement it like on ARM64. However the problem is that
-> > > while on ARM64 it switches to aarch32 if it encounters an IH_ARCH_ARM
-> > > kernel image, there is no equivalent mechanism for Risc-V yet.
-> >
-> > But we don't even want that, since the current behaviour on a 64-bit
-> > system is not to do anything 32-bit related, right? My 64-bit images
-> > created with my system mkimage use IH_ARCH_RISCV.
-> >
-> > > Another
-> > > option could be to disable this check in the bootm flow for now until
-> > > a similar mechanism is implemented on Risc-V.
-> >
-> > Why not just allow IH_ARCH_RISCV to retain the current "dumb" behaviour
-> > permanently, and only implement the strict checking when the explicit
-> > width types are detected?
->
-> This seems most reasonable to me for the current situation.
+DDR driver of Arria10 SoCFPGA is enhanced in below ways:
+a) Check DRAM size from device tree and actual hardware,
+   mismatch is notified to the user
+b) In case DRAM size from device tree is greater than actual
+   hardware, DRAM size is initialized to the hardware value
+c) Fix a bug during computation of mpu1 address
+d) Move common code specifically, initializing SDRAM ECC bits to a
+   common sdram_soc32 file. This allows using the same code for
+   future devices.
+e) DRAM initialization is sped up by enabling Dcache
 
-Ok. In that case, I think the patch set needs to be reverted.
->
-> --
-> Tom
+Changes in v2:
+- Avoid hang if DRAM size from device tree is greater than
+  actual hardware
+- Correct ECC Scrubbing commit message to appropriate one
+- Address minor comments in v1
+
+Naresh Kumar Ravulapalli (6):
+  drivers: ddr: altera: Add DRAM size checking for arria10
+  drivers: ddr: altera: Add valid RAM size check for arria10
+  drivers: ddr: altera: Fix incorrect address for arria10 mpu1
+  drivers: ddr: altera: Clean common code for SoC32 devices
+  drivers: ddr: altera: Correct code alignment in sdram file
+  drivers: ddr: altera: Improve DRAM init with Dcache
+
+ drivers/ddr/altera/Makefile        |   2 +-
+ drivers/ddr/altera/sdram_arria10.c | 112 ++++++++++++++++-------------
+ drivers/ddr/altera/sdram_soc32.c   |  88 +++++++++++++++++++++++
+ drivers/ddr/altera/sdram_soc32.h   |  11 +++
+ 4 files changed, 163 insertions(+), 50 deletions(-)
+ create mode 100644 drivers/ddr/altera/sdram_soc32.c
+ create mode 100644 drivers/ddr/altera/sdram_soc32.h
+
+-- 
+2.35.3
+
