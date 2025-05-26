@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BFA8C5AD49
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2057AC54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B9F82F14;
-	Mon, 26 May 2025 20:03:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8026F82F42;
+	Mon, 26 May 2025 20:03:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="tcIkdctG";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="jnr/yHYe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D649F82D43; Mon, 26 May 2025 20:03:45 +0200 (CEST)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id DEB3382F50; Mon, 26 May 2025 20:03:49 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C775F82D43
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:03:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D180F82F35
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jusMwv4K3yWGGENpHcw3yPwuMAwLM71ffWNNkl4dQXD5bkPj/Ii32nBZKEev5358KhwjMesFb014Q7yCQXuwWqD2JZPwHS31IrraEdUK/MI7xZnPRwRwmOvaIOD3vy0QHgipiK9VtHForczRspjMWkFplLWLbj7crZdG5MASNYG74Yu90Pjv/M0D/wqk5SD450l0FoBpCyEmsaBbWu+s2hPklZrsABh+QI/psKxqN8bW6i6w2736cAuFRDZMIyaTYmqym2LfbbMn/6krukn3ZwrX3AhVTwT+XYqpuCDza0q8HdqoOyuEcZXvXYVUuAY0SPPTx6pYMAmJESPZDL2UGA==
+ b=KwgDOWOlYU5/kF3oBOwM5r9EEHEDwl57TCMy8ZnezCA7nHrnpLoJbdcKY5v2Flmgv6tg4Ao6SyO3OQqWc6LaHu2pRuhkDh9rHRqt0jgdNiDDX50qyzudy6sPjNi/XAmVfmf9KaZKGoHuNdrC9Vo+WYyX0MEokFgpy2GxHR3eCRnxQjQqIw7hp1RCvw9y4LPhungD64pYeOE+EUg0xarCVACvzJZPMLwjb7DJttUXeUxLyJ56h7L7xx4W5rM7xWWlcZCY2v58Z8JY0MVW+0pcbPBlWa9jlpI/+32C0nOxzK474VxwvnBUgGz/DJhr9DFJNAoOX/MeXCjWVJlxb3BFhQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y2b5QCIgD+rDcA+8TkLdDdr3N9sNfnDC7z8bimZevpc=;
- b=TCR80e7FKS1hYO8tFjF3MVJu7N06V3oy/Jpb4CWcprLSor7YWldWe9UfV6iz6efxo/hqaXOuoyU9n1f9w/AAFZBt7dDHrPSYPySktyTGHWWM3m4mAnkV4GuHxopT9XXwjFab0JizTSI8yNHJzsQbq8WhHy6GLhv9Utae/+loscsM0EJ5iKWIrOkiBqtntM3YLEtOoynXiRad9Gz1uMgU5Wa1UxqjIXeGR+kR2oJBAF+izXj8UqXwf9uggz3EoXXdXDtSRTrYiyNm2NY0sUq6unZWBTk22EVABIxiZtzpCuxgeK9UOSAgT5I90zSFa5cZ3PrCt+wKwqXQYNHO9PwOYQ==
+ bh=wDO85wbjYwwBjycoc5ThMwSGB8IbBb9mNGV3aGjzRo0=;
+ b=jotW07Q4I3XY8CQ275Z71NDC0ixsHBKZYB0/XQlDKHSZhCcpR8iPvKm89f2BOZyTGTU/hd+Qv03u5YMijAmZTOwRHOjPVujRk/e74pa3VlBOhmO3UfSSzA4kOZVQvXHLjmdNuDNMrbfOpIju40FBBSKoRWJ408p8Hp23/zXxlidtVlNK16k2wqH0B2sd2HoMvwkGzYbdGU5e5LWuO8T1/JyJzcXJ9Ojl1TpPwrRdg1mkbTSaRF/2AnTauUdqqT4GSRDbLalSUAw4mMl+tyFoxtRfK3DWm5Hah+4an/foA/8VwVdUDfoBQvrrLiVUcOYTN38dI0Ois9AeVQN91Ww6Tw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y2b5QCIgD+rDcA+8TkLdDdr3N9sNfnDC7z8bimZevpc=;
- b=tcIkdctGC9LpLTXyKiI8r9mRmrwnDMDqgFNP1KlWLIzq8jqoibWxhX0Cia3J4a+oSTpfmg5S5xBROX5DftkO5j2JZbBIHpPt2dziVI1J/RUpfZjAZGFVLZzaVp61UsXQVaGaX5hqBaWUNCtjb7E8mJ9HkU3K7RgSrOMRXupJ4twcucPyC0gs+l+2bkW83x+AXaiAnWWqUGnYKNnXaJZKeEgXK/xTdFV66+6+har/fL/M+ZFUFRMKy0TjsKZ6c9b7oXi8noeOQKyclkjnTu6Vkfn0xnCWa5pqEUprD1W2o38jCKAtYTSUhOcZOcOftnUnbYR7uAwS6+fpasrtOfL4jw==
+ bh=wDO85wbjYwwBjycoc5ThMwSGB8IbBb9mNGV3aGjzRo0=;
+ b=jnr/yHYeyLskBKj8vahDqCTtr2Sk0P+mE+YNXPFkqHOpWDemeRI/9J0PD5mPn3Kn8ps5tBNZC0hpuUaVKuyJfsO9hgUOevDCcobtOT2cwAPk+NCnI0jwSU3tgDOPFas0XXtRBFL2gTufpgc8qTQ0VNZUBksVE6/bVos+xFzwbsZEbvxveew8NiSCF/UtDjQYKRAWz+p4/lfGJmgOqZNSMlDusYs1V2PLtq+JVvDadaCtSEYUaP08oD1OjDwq+uXVUkYjnmtstSDqBnvTY0ePk+5aTt5UBe0Dj/zcbb0zgFriD0wrSjTHi/u1gf7D5d+DGjp2CWNz8/mg2dRSVNDh3Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from BYAPR03MB4646.namprd03.prod.outlook.com (2603:10b6:a03:133::26)
  by MW4PR03MB6379.namprd03.prod.outlook.com (2603:10b6:303:11e::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Mon, 26 May
- 2025 18:03:41 +0000
+ 2025 18:03:45 +0000
 Received: from BYAPR03MB4646.namprd03.prod.outlook.com
  ([fe80::8919:e2df:10df:51ce]) by BYAPR03MB4646.namprd03.prod.outlook.com
  ([fe80::8919:e2df:10df:51ce%4]) with mapi id 15.20.8769.022; Mon, 26 May 2025
- 18:03:41 +0000
+ 18:03:45 +0000
 From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-Subject: [PATCH v2 1/6] drivers: ddr: altera: Add DRAM size checking for
+Subject: [PATCH v2 2/6] drivers: ddr: altera: Add valid RAM size check for
  arria10
-Date: Mon, 26 May 2025 11:03:23 -0700
-Message-Id: <20250526180328.13644-2-nareshkumar.ravulapalli@altera.com>
+Date: Mon, 26 May 2025 11:03:24 -0700
+Message-Id: <20250526180328.13644-3-nareshkumar.ravulapalli@altera.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20250526180328.13644-1-nareshkumar.ravulapalli@altera.com>
 References: <20250526180328.13644-1-nareshkumar.ravulapalli@altera.com>
@@ -74,76 +74,77 @@ X-ClientProxiedBy: SJ0PR13CA0057.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BYAPR03MB4646:EE_|MW4PR03MB6379:EE_
-X-MS-Office365-Filtering-Correlation-Id: 01f8b69e-b680-4107-a0c2-08dd9c7fa60b
+X-MS-Office365-Filtering-Correlation-Id: 96a9aa3b-6376-489f-8d78-08dd9c7fa7ff
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?rN+BcWShWcNQ4l865iS4vVko2Wbo5A0ODAGfleCO/ayDWPHsLLKcs+EAmP7R?=
- =?us-ascii?Q?FQysMSm3BlRdEjU6H0+v3CDJJzVecaZUrEyJHRNUsGwdd+cy6B+E61jiCwrI?=
- =?us-ascii?Q?nHP372/IDLQSi5OkJtXaJjhl4bqaweJ1xr+dCBXA2CrN/K8gjJxwdBEHPotx?=
- =?us-ascii?Q?2AYQ0I8FimgKlI+Q11gjz+eISgv4gVhUMwJyrMGBj17tvUahkQNvRXUPj5iQ?=
- =?us-ascii?Q?9I7du1v6A9mEpALlYclxdXz4yrmFFmEBYk1LqN16ulw8XCkzy/7zsdcuKc6G?=
- =?us-ascii?Q?aoW/zNFj0ydEJaZFtc09xdoTn+ogcaef4c68oop48IWoSfvHCLcbJj2B+bVO?=
- =?us-ascii?Q?bvvCAh0KS2PrioISlqKeGS2rIpJa/PY/y+yCRNpkbsjbFmtv1XPKh0XFUAw3?=
- =?us-ascii?Q?srl1oJUkrSwHJ2cZRV8sO4lk6Sj76OFcqVzjNsGWEsPSV+bwIMgCczS5TtUk?=
- =?us-ascii?Q?qBxL+6pC+QTayE/8dWRmy84RbZt9pKUecsIdIdi3AYcqvyrBacMWzS4SJH2w?=
- =?us-ascii?Q?IFvb4kNsIPFIXl7o6tMr/dryOmRxlPQEXZUto1P+TEqX9JYxkUYy5FN1Dior?=
- =?us-ascii?Q?2E7+TvbbUnTqMxqjapC7gbhWfFRgfLSjqlycm0wrRIVyXc561aTFtn/FDoVU?=
- =?us-ascii?Q?00yRKnGjDii/2OjJoV46ABGsNhG4LKkraomGTE1PdmqdJjWiXGIeUjTESjIG?=
- =?us-ascii?Q?m3Nb+Qootismr5ZCixYApTpSqmG5o/CZ2sjQ2rje0fA3vvBgYV0VumKFFhXq?=
- =?us-ascii?Q?G8U8uC8oatx/8y38STQbrI43KgwqMSrUOMx4NvsrxxETarO1Be1RtLYCVSSS?=
- =?us-ascii?Q?1LbgQrab+YluwDdZBDiwyOWMd3aetg2NAFxBAo0AY2W89bqHX90eTVx8c4I6?=
- =?us-ascii?Q?kV1G+ONNav3Vtt0FpVgQCyLWiLpXz7WkTtvWBQKubWa6QaoBjiQmC+vRapsG?=
- =?us-ascii?Q?2P4l9I3bmdhDXusafZaUXBUTqFeAm9K6CllTZEYVo16lj3lpTkUYwLbLelN9?=
- =?us-ascii?Q?vLRynf70EgW3Tozqi6qQaUCx5/uZFn1uD/ViqxiKbpfQGQeKSIQVQiWOHB5R?=
- =?us-ascii?Q?nhMpFYZYGjKZUpeTzst6mtpgFGHDKYXDBGr9A/cZyrOjS8JjhHXpGFEl9K9I?=
- =?us-ascii?Q?Z4+Xj6ExEoGbxTCo/ZN0I/Tcz2ykJNKwgLWtHxNy66RWgQMiFaEXvJ3FkrtY?=
- =?us-ascii?Q?xVPwRkJ5UXZ05totflO8/tqrf6GqJvaV5VPoB2EsVGgIRcLB2UxiANosB79s?=
- =?us-ascii?Q?uFS1FA7dWVcgC+TGyTpjrL6q5M7VmZrxiXcySAEGvm+sHKW3L1XInSokcu3S?=
- =?us-ascii?Q?tRW7+QSM4F0ZDWkl4THglWZSWyyzXYCzGQm00Zic8wbIUnyq5XpFlhdSCYJu?=
- =?us-ascii?Q?vc0+RCs=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dZlTjRnvRkLRnrcsUQYXZ2x//OTVTVD51o0wLbIxFbqxhEUEzIpn688QcWX2?=
+ =?us-ascii?Q?oKKyOaX1GkUzrvUIuU52JrY2FA2Qx97X0BuZNtxsevlLJcFhfkR5s3tLqQY5?=
+ =?us-ascii?Q?3/7S9V2ch5WlRUA9vOPL6pWpSnKdckn8SRaFIIHcKDpQBBhlY8vVUMgVdZeQ?=
+ =?us-ascii?Q?7wveeCvQd1u90T6apJTmCZxsVIS2+sKj/XoJYuBCarf9Z6vOzjvhVWqf9Rm0?=
+ =?us-ascii?Q?HYR0/uS7nV8zWulJgKS83rZhXb5lmKTS5biNFWNZt6gv6hriosFe/Jia/ZkT?=
+ =?us-ascii?Q?9c95+WPWLN2soc3MGkrB6XZc9Em9p3p9ZHSGeu/mv/NrRo5lm24W1qvLkczO?=
+ =?us-ascii?Q?3Za7zyAHFhsmHOjNh7tQtURXx0FRHxWH0GmqQlC2JGH3A7VLQjSyJ3QSWeKi?=
+ =?us-ascii?Q?8Q9OWqWPPp24qKGCc9F6DxDFymnxDNSmFQCJfrRImtUtD4kkoTwB9f5uT6GG?=
+ =?us-ascii?Q?3XTAW4WYrHZpwww6a/Hr1qMl91nnAJ+bHvU0EyLSIspzfnshbYEiS7FhBdIz?=
+ =?us-ascii?Q?M7pOUswUSiwPbWjJsMG/Arfm8nc6k4p3srnh5/e+L2NLdRloOpPj/kkHtz/2?=
+ =?us-ascii?Q?3F7w6IZe5O2iY7JV4akj5Okiyf48fdU2TBmkuFpgPhmclcQF4tiuSz1Fe2jI?=
+ =?us-ascii?Q?W41Xqktheo+a46tYEjOmyoZcU1O9ty+PuZSfs+mclC1nb6rqGnIIWjiMhLRp?=
+ =?us-ascii?Q?HEvNe1HwpNalVZd3mLhHuPeC/UBXj3fn6QGe53p2m0OVLBJAgNQ4QoAjQdzy?=
+ =?us-ascii?Q?MUf+R12lbJTViJX/QeRizCCrPmdSt/8PnvC+9OEfJumry/bGlQw6hD1uMNSz?=
+ =?us-ascii?Q?smrLnqXBkfylNwXmCBN+Ih86r3gHz1pLZfFFKVV+KrUpfIrBH6ug1khAxl5v?=
+ =?us-ascii?Q?HlAMo7EJ0ElBkNIjvnnRXlEntEOXy8LAJeO14CYtfveD/WLg4TJTq9cTqWaf?=
+ =?us-ascii?Q?G8dI0k/Gs8sL+klPJ0LvXP92YxhTy0XzVXA9K/5xOS8XEdyXlUMGaZNybBem?=
+ =?us-ascii?Q?HXNVqeYrgfVhalLNCebQJKEqeT+GT+R2srr5cIE95LmI7xf74GGjQ3IJkpdq?=
+ =?us-ascii?Q?jGiFgPEt287d3dqmUrUZVxvgfSiLCAWWsSwNTSvcD9/kCrxikHrAZ5qRaef6?=
+ =?us-ascii?Q?a2idObpKcwQpZUXEt99JWx9a9rZ1IPjd+5Rai9vG7GDhM3eM9qrCtKoCysGl?=
+ =?us-ascii?Q?6DOJzBRGTvO/EV5PIrqQaoss8yKLdZopAk8nXfSKo9wj6cjrFLRAr1eG7yOa?=
+ =?us-ascii?Q?/3KoLimvVjl3h7ayJJg243NttAbf04SPgemZYqZVTCJupOf43hqpnrGukzNV?=
+ =?us-ascii?Q?/vvJQwEKEd2J9n02BqpHgRXObHm0R76EyP4JuRGIjYB7q+aWTk+WSQhCm0mW?=
+ =?us-ascii?Q?o5+oty3f0lgcV7SIWn+8kktskeQg3t+C5C0bHIVLD8M99SXSNZvu6ptBYGz6?=
+ =?us-ascii?Q?70TFXwYIxgs=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR03MB4646.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?e7jsdhugRwu75VAxTXGASKQfvF8ReqZZXSl9OX5x0nA7p2TLyzvIhDK5BWr5?=
- =?us-ascii?Q?XnTTkFxWVb6S1lM5jPpxL52tw+LDO7k1rxN6pPzdgknZ2MRGwmmft5Zr4taE?=
- =?us-ascii?Q?sOWSZFM70/RXRFOAwKIDue3XWm8RHH/4ENlbylQUrlFDnSHnfMvfkXVOvDr/?=
- =?us-ascii?Q?WsgdxRit1qerOUydtXUAubDgIcsbNkFigfBVc31iDa1HpxjE91m2LLNdM9Ni?=
- =?us-ascii?Q?uacBDnmnINyyYHB0eVbjWTZfui3d1L+hJygZzCTBo4tsiSWEJvmjNe38euKM?=
- =?us-ascii?Q?vnBtQhh9MXtO9UaOkRL98/R8XDwSYe9VhJKdAV3alibr59Bi/6egMDHmkmlS?=
- =?us-ascii?Q?JdQN7DST5mn5fGYFC3wHsY9Y+YRgL6BRFsCtMZUb7Tvd7Bab6SmtvA7mqWEO?=
- =?us-ascii?Q?RbFCwmXTgMkrgnfqbP3ehg9GjYWr9ln+WSqBofM1uR1c3lq3OdEfV1HDWpjx?=
- =?us-ascii?Q?zS5+YgfRYAGH64CBMhF8IuAvPS/RNe4C4ppZKRDniuyxV5xVkALVvWKqKV8X?=
- =?us-ascii?Q?DwVhXVgt2dOFLW9ZSNTLCuBMGYmDnxnZva/IBKV4sghgm7nmuVTRRyN+3YsH?=
- =?us-ascii?Q?+dR2hhrN/H93eMlJ6t7PY6RcrQFsR0MXhjOHh81VaZkxEF5WRUvEoyAXuRLa?=
- =?us-ascii?Q?1GNoBGX2wJktffN1WNoUPHbSrLUob6ssyT/7sqXziHhaJozHZ/bC+SxSOfmc?=
- =?us-ascii?Q?ol70SwYzrBw6N0MmumV6Cc6a6MUMiPoODBWPnvkj8x6Jduwj2zCN68cRyRgI?=
- =?us-ascii?Q?noN18LiLgtuDTnsTu4iP39pANxeGAsX4YnPeauHRZKVwjgt+I5OwU6c5bpEg?=
- =?us-ascii?Q?QCVux2nzpIbxY8NN3XlCHgYYf7Trph0bjZ/eB36/bwiVdapQIwo5l6NIJp2i?=
- =?us-ascii?Q?gKyklt2E4Y1oCb09e7mACjKxNJRqVyrgSInQY2JTwZqLbilPWN6EXxliF3jb?=
- =?us-ascii?Q?/bzhSptH5tO1ME1CwbgWh6DgEC4vhiN0VabPvEydDZdLiuKM1XJhB8XvDtH/?=
- =?us-ascii?Q?7gpSeZqoo/1SPKJY5DQJp1DraGmZFBsm0ZnRIUHyd8rGjUtBZIywl5hhXKiP?=
- =?us-ascii?Q?MsLdgLcTf+Jkx43NTzhuX6PzuBvCuWLPh2c1gbX3Taz5E+bsBQDgy4cO3kV5?=
- =?us-ascii?Q?PgykA98v2wFtkDXrBcspYmzu874DYLypklgSZMjwlelLmTdNavvCnWeDIVu9?=
- =?us-ascii?Q?hTLxl0gI5dis+t9ZKWWKzSlud9bGmIO2EPZzGS5nuXIbdIGZ/yzagoxCdC3A?=
- =?us-ascii?Q?n4It8+hqlejC4lWRv7nOL+PwgaHNp1GOiWj3HLYC3RbFPWcIRcR9uC6IIYTi?=
- =?us-ascii?Q?2qMzvihtvEn3/S7ITOzF9a2J0WLOhZWXs93Pd4BW4jiUNRCGmyvLDDKGrjqY?=
- =?us-ascii?Q?tcSdvVfo9B1/d1dGHXTcGttUP8fOBoyr/F6pJligcqqaZ5qlMOrmZlT0pHDa?=
- =?us-ascii?Q?Giv2hjEhk1mH/YcrRiG5GtfjE4SpzHjDAqla3aKbiqo8bEdCzXlywA1PPEGe?=
- =?us-ascii?Q?ag5WaqXZB4FZlsTrlPkR2eA9IlWJk3BwUiKHz5SybnSBV6BlIbG5c6B+7L3O?=
- =?us-ascii?Q?TwARDhEexkQWJD4XNzIbpGf1uocs1+DOzPtTfUkVr8kbACz7AXkh3GFmhhuh?=
- =?us-ascii?Q?ASV5fWtWa2CtLf0BKqNIAR4=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bJxQPJNlyCWngftxEYSU8iCGRi6JdCZjAbZXXF1qqESoECOpOAiPgBDw5oix?=
+ =?us-ascii?Q?CV5YgTs9zLo+mKWxtm2o6ebWr/yC9tvyoA0rECAZUqOIFCzUYUUy/InkUmLJ?=
+ =?us-ascii?Q?aMjUi26ZB1D01dMGAYa+Vq6HRvMWoCzJUXplYCcDhGQ5bEYpmuxL1WkZVFdW?=
+ =?us-ascii?Q?J36AYxWOOEDlrFt0KuY+814+5kEHeZkKqhjicCPiW1671yu2EBVfHXX6uWlE?=
+ =?us-ascii?Q?ewCdxCl3liZIeXVn7Rwt9C+S7IKivZ84ArYfRkWYUEmgQpXlr0TyupHhVlo/?=
+ =?us-ascii?Q?EGF9KRrFQDaWa3PnTxcJ/+ROer56WY7mzaotb8ZLKHb1+cl/fmv4IVc17H8C?=
+ =?us-ascii?Q?h1m7PcTJHbJxAUz94xJKMhkkFrimQvWiJMTenfsEQFykQTiAclDL9pRTNGXb?=
+ =?us-ascii?Q?4b+tHymKGATaw4/vKj6BIJcFkSgXAV2TzawdoGsj67RzLfhvBVtVC5DxgdVX?=
+ =?us-ascii?Q?36KNznizvZRyUtiW2KcOheo3MR//aH+9d5e7xJ3hPsoW2DqjTT4jfQ9Hawit?=
+ =?us-ascii?Q?Ve2zsUaJf8qGlwS5vI7fkbwMwlbxcJ/QS0j1MPZ0bz7ldOFddEOKXsSnqNOi?=
+ =?us-ascii?Q?M5riMuy5XykAdVPw+DsbayyQ5v6HG31sPu7MUPxpGNwidRWR/rdg53EA3OZc?=
+ =?us-ascii?Q?85wy3V9FKMuY6f7fMhY5eLoiQQEfg/Hx1q14G4WKCsYMLwKHjtrPu3s90uTz?=
+ =?us-ascii?Q?hWH8oUNFNNQdh9aY/404rGeZTWBFIxe4TaWX8MxZ3su8Dr9MQxaEC/3aBOhq?=
+ =?us-ascii?Q?Brth7nlYYX+4lo+gyXvjm9Y2doUAWM8XnYazvxYlpq+W/OyX8pmZashtHO7w?=
+ =?us-ascii?Q?oAzv+8Sdab/jE9i/xtp948B6s6aYdBKQa5KVi+ZUn4uNghT4MViF1URLcKpA?=
+ =?us-ascii?Q?bzDrJ8mkk+UR+99cwqeOBXX1c8r+921QK0GfO3uf3GopOBld5spDvLPVDBYB?=
+ =?us-ascii?Q?U3kppK686lASgLeNPP08oU7AI7hHrjmI5cRJX0yv7wt3lha8vYKVbKJvNQ5k?=
+ =?us-ascii?Q?/Bl0MmLCi4pFpkLb3Ws4p4Yq5HGiDjUi3RI49jt9gOKNW5CccePnND+4SM/6?=
+ =?us-ascii?Q?GVrVEvCv9XiJptozEUNL6g4BYcZDdEy8RHBlDXhFHNVlvHGBXYcDInGoMwNH?=
+ =?us-ascii?Q?wc65sdaptk2JGlmBTP/Vo5dKQ56AHGMt+JnipGvzQn9sZG1sh1idJRMuLXg4?=
+ =?us-ascii?Q?npr7gSGtA9w9yBy+BVUdlk6vhfG+K5jM78VUy6/x4K7+gcHV6XZE2bOKX6Gu?=
+ =?us-ascii?Q?k7E6VjB0mHvILNPcATMv4WtyT8VlC3DGM9EQjmPBrau7fEuzkpF3TWKm1yBi?=
+ =?us-ascii?Q?4YylGBgEs5eYLQ7Y9yeR+BGidNpQKkmTtw0LK5zIRBR453RNjO0FJUZdcloX?=
+ =?us-ascii?Q?FC6gr+2bpGRVckiosnoH9/gokX4keOfHcQb8NZ1XbYaIW28siTCdkUY7cPvu?=
+ =?us-ascii?Q?Rxw1+JitHAmB8MF7flhCF2Ul8MrWCUUGT3q7AR35oyMctGhjHhxOz3BhCjYP?=
+ =?us-ascii?Q?rAG7ZWBaCOko3ZwC7Fx/M4ANDPv1ZPcc/b2I5rRkPcqO4dS1fsVSMazFAwzM?=
+ =?us-ascii?Q?175nt0Va+xhjm0GEXkLgqp+N729X2AvVRJOLHaZ8VKPQtvbgM0K3ShfIjW79?=
+ =?us-ascii?Q?/CbUUga8gz6KvJ6GBFsc59s=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01f8b69e-b680-4107-a0c2-08dd9c7fa60b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96a9aa3b-6376-489f-8d78-08dd9c7fa7ff
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4646.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 18:03:41.8043 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 18:03:45.2233 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1EwnA+giYiCxAM8jbiIsn3C+m56wDXoZoPcapKClCc80o0rBzAt6LWvk6fjeV6tv5hzhJGQn34h5t7qwbOLgiaDI37lUhKzoLeBpM08jrTcQBmFNaNm7nViu6UIKzIWC
+X-MS-Exchange-CrossTenant-UserPrincipalName: qBmU5G75b3GHg7i/UZhkP6A4YZjyVk9p5KJ1f6MzMXO/aClHYBcUmaBVcNw9Y612yFbVYf0nb17vo3Qme11HuuyWmOJRhZB8lHcO2QHADKaR1AbERdlZET06NrpousNH
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6379
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -161,50 +162,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add DRAM size checking compare between size from device tree and actual
-hardware.
-
-Display warning message if DRAM size mismatch between device tree and
-actual hardware. Use DRAM size from hardware if device tree value is
-greater than actual hardware value.
+Add call to get_ram_size() function to check memory range
+for valid RAM.
 
 Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 ---
- drivers/ddr/altera/sdram_arria10.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ drivers/ddr/altera/sdram_arria10.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
 diff --git a/drivers/ddr/altera/sdram_arria10.c b/drivers/ddr/altera/sdram_arria10.c
-index d3305a6c82d..088dc1cb33f 100644
+index 088dc1cb33f..7d7bea153c8 100644
 --- a/drivers/ddr/altera/sdram_arria10.c
 +++ b/drivers/ddr/altera/sdram_arria10.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-  * Copyright (C) 2017 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-  */
+@@ -22,6 +22,7 @@
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/kernel.h>
++#include <hang.h>
  
- #include <cpu_func.h>
-@@ -702,6 +703,19 @@ int ddr_calibration_sequence(void)
- 	/* setup the dram info within bd */
- 	dram_init_banksize();
+ DECLARE_GLOBAL_DATA_PTR;
  
-+	if (gd->ram_size != gd->bd->bi_dram[0].size) {
-+		printf("DDR: Warning: DRAM size from device tree (%ld MiB)\n",
-+		       gd->bd->bi_dram[0].size >> 20);
-+		printf(" mismatch with hardware (%ld MiB).\n",
-+		       gd->ram_size >> 20);
+@@ -668,6 +669,22 @@ static int of_sdram_firewall_setup(const void *blob)
+ 	return 0;
+ }
+ 
++static void sdram_size_check(void)
++{
++	phys_size_t ram_check = 0;
++
++	debug("DDR: Running SDRAM size sanity check\n");
++
++	ram_check = get_ram_size((long *)gd->bd->bi_dram[0].start,
++				 gd->bd->bi_dram[0].size);
++	if (ram_check != gd->bd->bi_dram[0].size) {
++		puts("DDR: SDRAM size check failed!\n");
++		hang();
 +	}
 +
-+	if (gd->bd->bi_dram[0].size > gd->ram_size) {
-+		printf("DDR: Warning: DRAM size from device tree > hardware size.\n");
-+		printf("Hence, initializing DRAM size to hardware DRAM size.\n");
-+		gd->bd->bi_dram[0].size = gd->ram_size;
-+	}
++	debug("DDR: SDRAM size check passed!\n");
++}
 +
- 	if (of_sdram_firewall_setup(gd->fdt_blob))
- 		puts("FW: Error Configuring Firewall\n");
+ int ddr_calibration_sequence(void)
+ {
+ 	schedule();
+@@ -722,5 +739,7 @@ int ddr_calibration_sequence(void)
+ 	if (sdram_is_ecc_enabled())
+ 		sdram_init_ecc_bits(gd->ram_size);
  
++	sdram_size_check();
++
+ 	return 0;
+ }
 -- 
 2.35.3
 
