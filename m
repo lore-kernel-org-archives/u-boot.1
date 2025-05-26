@@ -4,83 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0472EC54FC6
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 03:33:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FF7C54FC6
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 05:19:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0359C82B2F;
-	Mon, 26 May 2025 05:33:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ABED82B19;
+	Mon, 26 May 2025 07:19:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="bZGCg9G1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ma3DzBLq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A4F182B33; Mon, 26 May 2025 05:33:26 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id C40D782B2F; Mon, 26 May 2025 07:19:37 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF1A382AF6
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 05:33:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 89A8382B0F
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4774ce422easo15278301cf.1
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 20:33:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-6045a8a59c5so1968010a12.1
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 22:19:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1748230402; x=1748835202; darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cTKJNUu5WqJ5ogxMbSlbVJlDpdKF/2A2qhEdJ3YHbxQ=;
- b=bZGCg9G1W4o69P8+HCUrg7wrZXV2oZFIH1i+CGfJ88T19pr6P8ajsxgwDNMPWcXhpU
- sWZ8TSoNrFWysEQRzY5q7+vJkWg+eEviEWRD7bun7bpRSziWCSBN2fR2Yf4Z0saicecL
- XiaRLZrRiiCiFhO2lnfDWz8iA2p2/eIPPA6Z/ExA6pds+Lix8o016QhfeGpPceXMpqZQ
- dfiXWyA9wEszbvG137qM8nhg1Qh2ngz6cj6qpxi9TE++VoKJQJAHA1puGSWj5jIXUBrB
- G4ecRirvTj8pSoMIIYCNnfyKlLVSL7cdoX2aRmVKoq20PUMEC6Cu3SXfDMRvryPRkQYM
- JKpA==
+ d=chromium.org; s=google; t=1748236775; x=1748841575; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3r2itxjQKL0HQbaCND1f551gCkCJOyls+HUKIMbGCnM=;
+ b=Ma3DzBLqUbrO/hdm0uO7Cl/rJhGTnFIqi6lZWnUzCv+CutTT9dUrTouQWGfWhjYczb
+ EIjDrP2nM6Wwm+8zsa2ZWOoVpcod8KLerG/mADQQHAByTNMahqTEFa4Y83paKcPex+pr
+ p2aDjGCzxTbkprSnZ0OM02iHm4DaKUCa0bu9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748230402; x=1748835202;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cTKJNUu5WqJ5ogxMbSlbVJlDpdKF/2A2qhEdJ3YHbxQ=;
- b=ej9lWZiWd16tO8ITp/itGfQRcha3NaHMSiVqvQ1jGdS80ESMPRYsiMenFAaVG0WnXS
- BwBb6IqNswkWh9DMlf8Y+j84z1H2jD8vWYqL+0NLS3f8GEHHevNMU/d3MCDvW0pp9MAf
- khnxYNh/ZDbFLwoYozhLewTmkPhm/CmAPDrxssLMwsSRFbV2u+LNkkrOdqAu4lRP0xSD
- +iP+hVmRr4ben3TrT+TktEEqUR559GOHtFnEOOSFD9O3EyCXx11Rdjz2CNng55SbxQLP
- IpAXRjO0mq33f8FSaAANwoRkH7VMlefetNA/v2ZpVY8kVXtd5ZjHjCGXhX6YICjIvTf0
- B/nQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0G04yauooF2cYoh4R2iiY6n/iwekTGHqFNxQ1y1wU0DyJ94Ex6QJKHujsTsghn1hAfEOb5Ps=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy69PJs4vsfRITnGdvb7UJk4uxxadflm553JXlfHcdb8+sbPP0A
- 6Bq3qZ67CXmv6DjiD6CQoCV7mP/Dl9QQzL1i5ICPcU2xq1UistGSlX5cFp8fMyOyceY4RAGPlTA
- GiQ1vdx5LmSH3R4ZgAG3HNuZbancHv3nBklXMH+Flog==
-X-Gm-Gg: ASbGncsFqAn8W+fXcaGXlHiM0iBwxyiCxqvFFtwOHdKyhlkv2HMjpPhgbqipwwUOp2V
- m9xKx8fWDXj8+JHP70stlTGskY3gvMTRRSwGa5oXnGljsG5FXlb2MpLrHoR641/PFOz/HCQcC7t
- uSKUhDKgqhF3CwkDb5sCR/udC2lw89YW9VBt9xEHqp0Vi2qSuBZGC87JhLFGztngeVIV2Z/MjOx
- b7Org==
-X-Google-Smtp-Source: AGHT+IEpjEfdFhyNcUO1HMVOp4bGaYT3HdGo8QRsWZXYOCXhhA6aYixusIsorFqLR97VyMwYyCIeOTW+NoW1ahQY/Xk=
-X-Received: by 2002:a05:622a:1bac:b0:48a:bbd7:19c2 with SMTP id
- d75a77b69052e-49f4674da89mr126684461cf.15.1748230402531; Sun, 25 May 2025
- 20:33:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748236775; x=1748841575;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3r2itxjQKL0HQbaCND1f551gCkCJOyls+HUKIMbGCnM=;
+ b=qzX84Z8r5zqIQN9nIvJ+uLzxuyjAUUBoICO9+jZB5uvI4896/7yDSIa32dZ///Z3e+
+ uEkWKYVqgQhkgDPJk7cPh9Aw1yXbCGm264fa4cbXoZut125J1z2akqPQseep+OM8lruo
+ 8hqLZ6BzMGrydVYhrOtfPipN9JnQSeEMj+hdNJUdaab3bWkcP0Zn5aAhP+zMMSG7Aeyi
+ fkZTfPLxxEH3ZdwVxPvxjTedpMehUh/7xiNVWrdpfMfvVYaaKtuHQXRljfZVpkUGYd11
+ 0CYDVxkwmmw/xv/SM9wz1u0Q7Gs9K9y4ZvIhep+QZcpAtniZfrLJQwdiizyDxoaTCMuG
+ hHOQ==
+X-Gm-Message-State: AOJu0YyVia+lzNy74ceq7mDGnOxAZFgLbMZv8T0KZ6FEfwBoFGm6Xbzt
+ HzSZqrWLx+0U30cUWxbXeLlk/f6hfkv9SOQDV/3ry0tx/4ADe/Hc5yybvsytx+vrtZp2VL2qjsz
+ /MmYUz1nciaTgLEcdZ6vCA04pLeQ6WAWUq/XRt1Rj
+X-Gm-Gg: ASbGnctU96YfpFgJqUPFqe7OBDa3xQvo7h7iXJmZGfZ7J+SYG+eRAWkI0skeB6z7HtW
+ IxiJSQ+DEEQfGOxMkXhYpWeLKZReWdOB60PeGEQb6r2zWIn+AxUjSVCBXyBupMwY7/z/WnPYiLX
+ ExYAw1KLaeD1rwhkU//aHGb6Akbj1z+dy8QyDrgWdNBw==
+X-Google-Smtp-Source: AGHT+IFHRUreClrkZxjcR4dAgoq9TLhhBPG8kAtWwAHUy1HjkUtFvXVtSG9X3qrZ5dodTrht8F9lS7BkkcM/JQ2Frms=
+X-Received: by 2002:a17:906:1f4c:b0:ad2:1a63:3ba4 with SMTP id
+ a640c23a62f3a-ad85b3071b1mr409820066b.37.1748236774929; Sun, 25 May 2025
+ 22:19:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <aC2hyzxwKzO4k1im@swlinux02>
- <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
- <20250522-eradicate-clip-538f48710ad7@spud> <aC9TmaY7w2PL8lbn@pie.lan>
-In-Reply-To: <aC9TmaY7w2PL8lbn@pie.lan>
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-Date: Mon, 26 May 2025 09:02:46 +0530
-X-Gm-Features: AX0GCFskqcI9uAUbQrZAcAG1wS0cZR4EAQ3VrGM_tOauGTzg1V-my2Yg7kv4cqM
-Message-ID: <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
-Subject: Re: [GIT PULL] u-boot-riscv/master
-To: Yao Zi <ziyao@disroot.org>
-Cc: Conor Dooley <conor@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
+References: <20250524130642.902486-1-sjg@chromium.org>
+ <20250524142307.GE100073@bill-the-cat>
+In-Reply-To: <20250524142307.GE100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 26 May 2025 06:19:22 +0100
+X-Gm-Features: AX0GCFuKyeqszj0A5fiSQ6tOdO84H42PSI7YR6ITAppcplVJudvfiun9Rok9AA4
+Message-ID: <CAFLszThmgQobz+r82TJj5Owc1eeQr+Vm9e_sfFkq+YYb=33QeA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] tpm: Start to tidy up TPM tests
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tim Harvey <tharvey@gateworks.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,137 +89,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, May 22, 2025 at 10:11=E2=80=AFPM Yao Zi <ziyao@disroot.org> wrote:
->
-> On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
-> > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
-> > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
-> > >
-> > > > The following changes since commit a3e09b24ffd4429909604f1b28455b44=
-306edbaa:
-> > > >
-> > > >   Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custo=
-dians/u-boot-mmc (2025-05-20 08:35:31 -0600)
-> > > >
-> > > > are available in the Git repository at:
-> > > >
-> > > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
-> > > >
-> > > > [...]
-> > >
-> > > Merged into u-boot/master, thanks!
-> >
-> > This PR seems to have made my CI blow up, and I'm not entirely sure if
-> > that's something intentional or not. I've not yet bisected, but since
-> > the error is "Image arch not compatible with host arch", I can only
-> > imagine the patch in question is:
-> > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV64
-> > | Date: Fri,  4 Apr 2025 14:48:55 +0000       [thread overview]
-> > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com> (raw)
-> > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
-> > |
-> > | Similar to ARM and X86, introduce a new image type which allows u-boo=
-t
-> > | to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
-> > |
-> > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
-> > | ---
-> > |  boot/image.c    | 3 ++-
-> > |  include/image.h | 3 ++-
-> > |  2 files changed, 4 insertions(+), 2 deletions(-)
-> > |
-> > | diff --git a/boot/image.c b/boot/image.c
-> > | index 139c5bd035a..45299a7dc33 100644
-> > | --- a/boot/image.c
-> > | +++ b/boot/image.c
-> > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
-> > |     {       IH_ARCH_ARC,            "arc",          "ARC",          }=
-,
-> > |     {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_64",   }=
-,
-> > |     {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",       }=
-,
-> > | -   {       IH_ARCH_RISCV,          "riscv",        "RISC-V",       }=
-,
-> > | +   {       IH_ARCH_RISCV,          "riscv",        "RISC-V 32 Bit",}=
-,
-> > | +   {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 64 Bit",}=
-,
-> > |     {       -1,                     "",             "",             }=
-,
-> > |  };
-> > |
-> > | diff --git a/include/image.h b/include/image.h
-> > | index 07912606f33..411bfcd0877 100644
-> > | --- a/include/image.h
-> > | +++ b/include/image.h
-> > | @@ -138,7 +138,8 @@ enum {
-> > |     IH_ARCH_ARC,                    /* Synopsys DesignWare ARC */
-> > |     IH_ARCH_X86_64,                 /* AMD x86_64, Intel and Via */
-> > |     IH_ARCH_XTENSA,                 /* Xtensa       */
-> > | -   IH_ARCH_RISCV,                  /* RISC-V */
-> > | +   IH_ARCH_RISCV,                  /* RISC-V 32 bit*/
-> > | +   IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
-> > |
-> > |     IH_ARCH_COUNT,
-> > |  };
-> > | --
-> > | 2.43.0
-> > |
-> > since it is changing the existing "riscv" image type to be the 32-bit
-> > image and requiring the new entry for 64-bit. My CI job uses the system
-> > mkimage to create the image that U-Boot is loading, so it doesn't know
-> > about the new define etc. Maybe it's not considered a problem if a new
-> > U-Boot cannot boot an old image, but the comment above the enum reads:
-> > |/*
-> > | * CPU Architecture Codes (supported by Linux)
-> > | *
-> > | * The following are exposed to uImage header.
-> > | * New IDs *MUST* be appended at the end of the list and *NEVER*
-> > | * inserted for backward compatibility.
-> > | */
-> > The overwhelming majority of existing supported boards in U-Boot are
-> > 64-bit platforms, and the 64-bit platforms are the ones that have been
-> > supported for longer, so my thought would be that the compatibility of
-> > 64-bit platforms should be prioritised over 32-bit? Or even add explici=
-t
-> > 32-bit and 64-bit entries and the existing one is a catch-all for
-> > compatibility reasons?
->
-> I've mentioned entries with bitwidth explicitly specified in my previous
-> reply (and there hasn't been any response).
->
-> > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying 32bit
-> > when no suffix attached. We (and the Linux kernel) mix 32-bit and 64-bi=
-t
-> > variants of RISC-V together, thus it's hard to tell the exact bitwidth
-> > of "IH_ARCH_RISCV" without inspecting the code around. To me, it sounds
-> > more like "RISC-V, but no bitwidth specified".
-> >
-> > It will be nice if we could avoid this kind of ambiguity.
->
-> (referring my own reply[1])
->
-> I'll second explicit 32-bit and 64-bit entries, and keeping
-> IH_ARCH_RISCV for compatibility consideration.
->
-Are you suggesting something like this :
+Hi Ilias,
 
-{ IH_ARCH_RISCV, "riscv", "RISC-V",},
-{ IH_ARCH_RISCV32, "riscv32", "RISC-V 32 Bit",},
-{ IH_ARCH_RISCV64, "riscv64", "RISC-V 64 Bit",},
-
-I tried to implement it like on ARM64. However the problem is that
-while on ARM64 it switches to aarch32 if it encounters an IH_ARCH_ARM
-kernel image, there is no equivalent mechanism for Risc-V yet. Another
-option could be to disable this check in the bootm flow for now until
-a similar mechanism is implemented on Risc-V.
+On Sat, 24 May 2025 at 15:23, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, May 24, 2025 at 07:06:33AM -0600, Simon Glass wrote:
+>
+> > This series is a starting point only. It tries to provide some direction
+> > for how the TPM tests should be run on real hardware and on sandbox.
 > >
-> > Hopefully my lack of bisection isn't causing me to blame something
-> > incorrect, but I'll go try to replicate now :)
+> > For sandbox, things are relatively easy since the TPM is reset before
+> > each test. Tests should start up the TPM before doing anything. Tests
+> > can be run in parallel, which is fine because tests are independent.
+> >
+> > For real hardware, tests cannot be made independent, other than by
+> > resetting the board, which if the hardware is correct, resets the TPM.
+> > So there may be more work to do to figure that out. The approach taken
+> > in this series for real hardware is to have a few tests which do init,
+> > then have the rest of the tests assume that the init is done. Tests
+> > that depend on the TPM already being inited can use 'tpm autostart'
+> > which works OK on sandbox and real hardware.
+> >
+> > Changes in v3:
+> > - Use 'check' instead of 'test' when naming test helpers
+> > - Add missing tpm_self_test_full() call
+> > - Add new patch to skip failing tests on coral
+> >
+> > Changes in v2:
+> > - Keep test_tpm2_continue_self_test()
+> >
+> > Simon Glass (4):
+> >   tpm: sandbox: Support self-test continue in emulator
+> >   tpm: Convert sandbox-focussed tests to C
+> >   tpm: Drop unwanted special cases for sandbox
+> >   test: tpm: Skip failing tests on coral
+> >
+> >  drivers/tpm/tpm_tis_sandbox.c |  1 +
+> >  test/dm/tpm.c                 | 77 ++++++++++++++++++++++++++++++-
+> >  test/py/tests/test_tpm2.py    | 86 ++++++-----------------------------
+> >  3 files changed, 89 insertions(+), 75 deletions(-)
+> >
+> > --
+> > 2.43.0
+> >
+> > base-commit: e3ced530e543c9f24cbc66430abc6109ce8df015
+> > branch: tpm3
 >
-> Regards,
-> Yao Zi
->
-> [1]: https://lore.kernel.org/u-boot/Z_CjTyXaVrpUOPnJ@pie.lan/
+> This is not based on mainline, please stop posting things like this.
+
+This applies cleanly to Tom's tree.
+
+You've reviewed patches 1 and 3. I updated patch 2 based on your
+comments, so let me know if you have any further thoughts.
+
+I'd plan to apply this (or a later version) to my tree as well so that
+coral TPM tests pass.
+
+BTW I got the LetsTrust TPM so should be able to add this to my lab in
+the next few weeks.
+
+Regards,
+Simon
