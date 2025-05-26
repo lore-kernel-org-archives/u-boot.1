@@ -4,99 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 384F6C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AB6C5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF32A82E25;
-	Mon, 26 May 2025 20:15:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2EA1682E25;
+	Mon, 26 May 2025 20:16:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s5kJtVwC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cbXP0o8B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05AF082E35; Mon, 26 May 2025 20:15:22 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 76A2082E35; Mon, 26 May 2025 20:16:38 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 525F682D4A
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:15:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2314C82D4A
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:16:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-605fda00c30so1056931eaf.1
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 11:15:19 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2d54b936ad9so969945fac.1
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 11:16:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748283318; x=1748888118; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748283395; x=1748888195; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RmKkMBDycCKpFBpnDIP1iYgZAZOpkeduu9tXU8dFXXI=;
- b=s5kJtVwC4IDoEUTp1iX4iqrQUUP+7Ed3L3OphLvTEhjrEhIKKkjMNJYwMtgh6NJ9RE
- RjFMSPSS1BbHvpriZSWqLH55sPt4P7YBu420+zOCY+wdwad9oERsSYrBRrA6PQ6EZz6F
- bClAeuyBbRuO0veZfgj2ab0BhNZBkzC9YvWdE=
+ bh=WrzBhEB7paIiHrAMjBUc5aAQUHC99wduHRbtfxU9ZZs=;
+ b=cbXP0o8BZWsyDmuI9BNy/ujpq/6r8Amaw5+L2SFp47qHcAr47MVltRCNRL4nY18xt0
+ l+Wu1/4QkXInSmQAOhP1PeucPnw6fOgCivc/DnIKC4ygVl/6Nsfk2YusAjoOzQi1zEhz
+ 5X8WBL0RYY61UlVrX/7GvQHi0thVgRt/4yQrU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748283318; x=1748888118;
+ d=1e100.net; s=20230601; t=1748283395; x=1748888195;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RmKkMBDycCKpFBpnDIP1iYgZAZOpkeduu9tXU8dFXXI=;
- b=nEIGGdNFcQVjyDInZIbeLOGDN8gYe0KBBBsq1DEhd0fQ1VPpdw3qKm3tLf0yfwnFGI
- bN5lYhRNYXuzME6041l34sAPz+M0VD33bAhHuovQsFSUGXoPg2bD3c5Q80TEHRpS12Ds
- MgJiJhARJ5v42FnHNnitZGsZXovcnVvWHzCKX0hZPacWMwPJnJGyAsUwCZfxR0l6MSW0
- vpPy9dPWdStjsputYPyZtJlB2bcK0ySLP/E0Q9J5NrXWMPLmmdRJKsUH6axgO1JnqMsM
- xImr26hBPTPImJdomQpVzUJeq0Nr1OymifbCJAiuEr3em6Chp8zRcDNLlikCOuwhqkK4
- d+8Q==
-X-Gm-Message-State: AOJu0Yyo1YMobbfxtnDOe55NJelPDBMhU5RCuYysjR058eGpckK/KVPm
- Snvxnk3y7x7Dw0TRFNKR/mGCdRmuLAfWoKEB0KXxtPCz+EjchEwBBIlJQdJJS63+eGPDzBPh0W5
- RmXIeG/M=
-X-Gm-Gg: ASbGncuG4fS9pI1JEjFfi3wZHdAjumpkqADOw0TT4hHBfSnU+UeKi+Q+ukNdGQ8RQMU
- W1aPoGZ291pp5jyVlrfGyMAaN+w4jkncwz/9+oIEKtrJIbb3W2t4oAfW0GWMDWRwEgQM6ZbICER
- QY0COAtTW1Vy8CSY8ZoZgwsHoDd4rObav7UUCo81fEUdmxQL1VrTc3Q6NioKy7F/XUoTQqfd3dL
- HuATUyQPfANTr9k22khDmwMPpLFT/O0+rVpm/zgH7w5dopuSTKX0LgSYyaDzvcJ0w0ybQ93oQsa
- uHq/mX37KjwUmvDhehWcwV1qJeR/klmd8yYjrkLoUyKOCWDw5HvuAeN5TFfHjAoIXHC4MWigPo8
- o/JDBEvRbZyYu
-X-Google-Smtp-Source: AGHT+IF4/AdGcKVj5XnqaVdtKc16lt/sAa2qzMjqTK7z+Fqx91HUXCNorhhwSOB2toi478+mOJC7GQ==
-X-Received: by 2002:a05:6820:270c:b0:60b:c7bf:5ff4 with SMTP id
- 006d021491bc7-60bc7bf6141mr721204eaf.2.1748283317863; 
- Mon, 26 May 2025 11:15:17 -0700 (PDT)
+ bh=WrzBhEB7paIiHrAMjBUc5aAQUHC99wduHRbtfxU9ZZs=;
+ b=W3V+fWRNoMeBI5/DGdoBP8VEl4kyj78HR6Sil/663h6RpYFyy+sE4d77I9nEHFJYtp
+ zpIJiuljIv2FP4kNTiK4Yi6X7/yo3+phkEdOuI3WfpezwNUAJPh/QxUH3r3T5Vs2DZf5
+ 02GNq6bicYFDuPI3aTE3Qv9pJ0Ak+U4MhGy6YW3qV1I1ApAGwSjyde+fk1ln2ie40BSZ
+ 6cCFX0kZRbs8/TcNIl1XEgW9mkFCI8YTeAoRuvF6Z/+BlIa7Jq3UoM2B7UkBnsIGxsKh
+ 4Z4yCP5E3IaqLhcB+VUNuUGmH32+QnujpzxezeKSUgA9fdXvdlWTgfjWxTbFSqauOvqq
+ kZuQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWCMN26ucfZy56431cLsyBD3miqJbnPNDMPVXq8JbvcBlf3HDnqgVJRIRxsTUWjwjCd08LA6cA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVLwHI95MDgzqWrve2lgseCV/xMud1GQ4LU7CHBuVLmiwsasRA
+ 4ohZSiLyje2zY28A+RS9bsQWXwQ8uNF7tBiZuej5YP8O+J5VN9PWcfCaJnVcSWsQWo8=
+X-Gm-Gg: ASbGncsXZH793ZwmCrFge1N/Lr+dH7JLFXwoBXz25UcXjlF8nTS6NdZ64mX9jWWWpnw
+ N7q3RR0fWys5CT1BcdEbPI7PU2meospv1H0lwhJEj6cXgWwLsuibzi3kVcTYeKLvB3Px2xWQolw
+ UHVzGDMoTEhhU10f/jUbbaoqaPIR+Zf5Eji5vB5yt4k8AZunPlH9Qho7jX9k+kmzlJwHGHGpUrx
+ SQeDqsYczh6xPe2v34tcZ5Nu9Yj4pm2R6EwWA4Yl8Hu8xjwRpNtkoSYntD0zixLV4gCAxUAk+xv
+ vgAnRxhER+2ZRM8WoICbNE6nwrPUs9q6ey9wW6P2HFCn5+wFnGjgjXjHbSwrnTdwPexxqtcOofa
+ f+pJeFlXkHNe2u4d6EJIoy0c=
+X-Google-Smtp-Source: AGHT+IGnEKaLSRk+Dja8DeaEC1OoM4rgVDSM4Jh/chUa1i0kfOq/AEsqsaCqSA6V18tUuGL6qS9W2Q==
+X-Received: by 2002:a05:6871:a691:b0:2e4:140:4b1f with SMTP id
+ 586e51a60fabf-2e86200b85fmr5018111fac.17.1748283394717; 
+ Mon, 26 May 2025 11:16:34 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-609f2f5f847sm4592496eaf.24.2025.05.26.11.15.15
+ 586e51a60fabf-2e3c0b21cb2sm4896820fac.46.2025.05.26.11.16.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 11:15:16 -0700 (PDT)
-Date: Mon, 26 May 2025 12:15:14 -0600
+ Mon, 26 May 2025 11:16:33 -0700 (PDT)
+Date: Mon, 26 May 2025 12:16:31 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Peter Maydell <peter.maydell@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bill Mills <bill.mills@linaro.org>,
- Andrew Phelps <andrew.phelps@canonical.com>,
- =?iso-8859-1?Q?Fran=E7ois?= Ozog <francois.ozog@linaro.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Xu Zhang <423756212@qq.com>
-Subject: Re: [PATCH v4 09/22] passage: arm: Accept a passage from the
- previous phase
-Message-ID: <20250526181514.GZ100073@bill-the-cat>
-References: <20250510134253.1581164-1-sjg@chromium.org>
- <20250510154214.v4.9.I56d9d06e5d74724c963eaffbbe1c2aa400b60bb8@changeid>
- <20250514215821.GD603748@bill-the-cat>
- <CAFLszTg2vMEVSR--ksh9cVRHBQWxzC++Nf83iDq7utUwku8Hrg@mail.gmail.com>
- <20250515205413.GD100073@bill-the-cat>
- <CAFLszTgHg6VfuJbTwdbkfAu4s-ZG0EpZ+6W5i13vC5iu=c+16w@mail.gmail.com>
- <20250524145313.GP100073@bill-the-cat>
- <CAFLszTh0+8eDAwu7AxcZ28W_sSEGPGSKufh9PY9ZDr=U-F-a1Q@mail.gmail.com>
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: Conor Dooley <conor@kernel.org>, Yao Zi <ziyao@disroot.org>,
+ Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20250526181631.GA100073@bill-the-cat>
+References: <aC2hyzxwKzO4k1im@swlinux02>
+ <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
+ <20250522-eradicate-clip-538f48710ad7@spud>
+ <aC9TmaY7w2PL8lbn@pie.lan>
+ <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
+ <20250526-disband-cover-cdc6567452f2@spud>
+ <20250526145636.GX100073@bill-the-cat>
+ <CAN37VV6SLVFmfxjbhs8YYEBpzdE8FqjstNh5Xw+DAUx5tC05FQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UikPMPCTfOM8GloD"
+ protocol="application/pgp-signature"; boundary="cZEs7YTzMVc6xQ8s"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTh0+8eDAwu7AxcZ28W_sSEGPGSKufh9PY9ZDr=U-F-a1Q@mail.gmail.com>
+In-Reply-To: <CAN37VV6SLVFmfxjbhs8YYEBpzdE8FqjstNh5Xw+DAUx5tC05FQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,169 +106,193 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---UikPMPCTfOM8GloD
-Content-Type: text/plain; charset=us-ascii
+--cZEs7YTzMVc6xQ8s
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, May 24, 2025 at 04:29:05PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 24 May 2025 at 15:53, Tom Rini <trini@konsulko.com> wrote:
+On Mon, May 26, 2025 at 11:04:02PM +0530, Mayuresh Chitale wrote:
+> On Mon, May 26, 2025 at 8:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
 > >
-> > On Sat, May 24, 2025 at 03:31:08PM +0100, Simon Glass wrote:
-> > > Hi Tom,
+> > On Mon, May 26, 2025 at 10:17:54AM +0100, Conor Dooley wrote:
+> > > On Mon, May 26, 2025 at 09:02:46AM +0530, Mayuresh Chitale wrote:
+> > > > On Thu, May 22, 2025 at 10:11=E2=80=AFPM Yao Zi <ziyao@disroot.org>=
+ wrote:
+> > > > >
+> > > > > On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
+> > > > > > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
+> > > > > > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
 > > >
-> > > On Thu, 15 May 2025 at 21:54, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > This PR seems to have made my CI blow up, and I'm not entirely =
+sure if
+> > > > > > that's something intentional or not. I've not yet bisected, but=
+ since
+> > > > > > the error is "Image arch not compatible with host arch", I can =
+only
+> > > > > > imagine the patch in question is:
+> > > > > > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for =
+RV64
+> > > > > > | Date: Fri,  4 Apr 2025 14:48:55 +0000       [thread overview]
+> > > > > > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.co=
+m> (raw)
+> > > > > > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.c=
+om>
+> > > > > > |
+> > > > > > | Similar to ARM and X86, introduce a new image type which allo=
+ws u-boot
+> > > > > > | to distinguish between images built for 32-bit vs 64-bit Risc=
+-V CPUs.
+> > > > > > |
+> > > > > > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > > > > > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
+> > > > > > | ---
+> > > > > > |  boot/image.c    | 3 ++-
+> > > > > > |  include/image.h | 3 ++-
+> > > > > > |  2 files changed, 4 insertions(+), 2 deletions(-)
+> > > > > > |
+> > > > > > | diff --git a/boot/image.c b/boot/image.c
+> > > > > > | index 139c5bd035a..45299a7dc33 100644
+> > > > > > | --- a/boot/image.c
+> > > > > > | +++ b/boot/image.c
+> > > > > > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =
+=3D {
+> > > > > > |     {       IH_ARCH_ARC,            "arc",          "ARC",   =
+       },
+> > > > > > |     {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_=
+64",   },
+> > > > > > |     {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",=
+       },
+> > > > > > | -   {       IH_ARCH_RISCV,          "riscv",        "RISC-V",=
+       },
+> > > > > > | +   {       IH_ARCH_RISCV,          "riscv",        "RISC-V 3=
+2 Bit",},
+> > > > > > | +   {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 6=
+4 Bit",},
+> > > > > > |     {       -1,                     "",             "",      =
+       },
+> > > > > > |  };
+> > > > > > |
+> > > > > > | diff --git a/include/image.h b/include/image.h
+> > > > > > | index 07912606f33..411bfcd0877 100644
+> > > > > > | --- a/include/image.h
+> > > > > > | +++ b/include/image.h
+> > > > > > | @@ -138,7 +138,8 @@ enum {
+> > > > > > |     IH_ARCH_ARC,                    /* Synopsys DesignWare AR=
+C */
+> > > > > > |     IH_ARCH_X86_64,                 /* AMD x86_64, Intel and =
+Via */
+> > > > > > |     IH_ARCH_XTENSA,                 /* Xtensa       */
+> > > > > > | -   IH_ARCH_RISCV,                  /* RISC-V */
+> > > > > > | +   IH_ARCH_RISCV,                  /* RISC-V 32 bit*/
+> > > > > > | +   IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
+> > > > > > |
+> > > > > > |     IH_ARCH_COUNT,
+> > > > > > |  };
+> > > > > > | --
+> > > > > > | 2.43.0
+> > > > > > |
+> > > > > > since it is changing the existing "riscv" image type to be the =
+32-bit
+> > > > > > image and requiring the new entry for 64-bit. My CI job uses th=
+e system
+> > > > > > mkimage to create the image that U-Boot is loading, so it doesn=
+'t know
+> > > > > > about the new define etc. Maybe it's not considered a problem i=
+f a new
+> > > > > > U-Boot cannot boot an old image, but the comment above the enum=
+ reads:
+> > > > > > |/*
+> > > > > > | * CPU Architecture Codes (supported by Linux)
+> > > > > > | *
+> > > > > > | * The following are exposed to uImage header.
+> > > > > > | * New IDs *MUST* be appended at the end of the list and *NEVE=
+R*
+> > > > > > | * inserted for backward compatibility.
+> > > > > > | */
+> > > > > > The overwhelming majority of existing supported boards in U-Boo=
+t are
+> > > > > > 64-bit platforms, and the 64-bit platforms are the ones that ha=
+ve been
+> > > > > > supported for longer, so my thought would be that the compatibi=
+lity of
+> > > > > > 64-bit platforms should be prioritised over 32-bit? Or even add=
+ explicit
+> > > > > > 32-bit and 64-bit entries and the existing one is a catch-all f=
+or
+> > > > > > compatibility reasons?
+> > > > >
+> > > > > I've mentioned entries with bitwidth explicitly specified in my p=
+revious
+> > > > > reply (and there hasn't been any response).
+> > > > >
+> > > > > > I'll consider IH_ARCH_RISCV32 a better idea, instead of implyin=
+g 32bit
+> > > > > > when no suffix attached. We (and the Linux kernel) mix 32-bit a=
+nd 64-bit
+> > > > > > variants of RISC-V together, thus it's hard to tell the exact b=
+itwidth
+> > > > > > of "IH_ARCH_RISCV" without inspecting the code around. To me, i=
+t sounds
+> > > > > > more like "RISC-V, but no bitwidth specified".
+> > > > > >
+> > > > > > It will be nice if we could avoid this kind of ambiguity.
+> > > > >
+> > > > > (referring my own reply[1])
+> > > > >
+> > > > > I'll second explicit 32-bit and 64-bit entries, and keeping
+> > > > > IH_ARCH_RISCV for compatibility consideration.
+> > > > >
+> > > > Are you suggesting something like this :
 > > > >
-> > > > On Thu, May 15, 2025 at 09:26:42PM +0200, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Wed, 14 May 2025 at 23:58, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, May 10, 2025 at 03:42:07PM +0200, Simon Glass wrote:
-> > > > > >
-> > > > > > > Accept a bloblist and control devicetree from a previous phas=
-e in
-> > > > > > > registers 0 to 3, as documented in the Firmware Handoff
-> > > > > > > specification[1].
-> > > > > > >
-> > > > > > > Note that there is currently a weak function called save_boot=
-_params()
-> > > > > > > which happens to save the same registers as are needed for th=
-is
-> > > > > > > protocol. But it seems better to implement this feature as a =
-first-class
-> > > > > > > citizen, if for no other reason than that many boards have th=
-eir own
-> > > > > > > version of save_boot_params() which may not happen to save th=
-e required
-> > > > > > > registers. A weak function is not a good basis for an API.
-> > > > > > >
-> > > > > > > [1] https://firmwarehandoff.github.io/firmware_handoff/main/i=
-ndex.html
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > > While some efforts were made to encourage Intel to adopt this
-> > > > > > > specification, this has not yet been successful. However I do=
- intend to
-> > > > > > > use my proposed x86 handoff in U-Boot, once this series is in.
-> > > > > > >
-> > > > > > > Changes in v4:
-> > > > > > > - Update commit message to indicate this can only be for ARM =
-at present
-> > > > > > > - Update commit message to mention why save_boot_params() is =
-not used
-> > > > > > >
-> > > > > > > Changes in v3:
-> > > > > > > - Add support for aarch64 also
-> > > > > > > - Update registers to match the Firmware Handoff protocol
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Use three registers instead of two for the entry
-> > > > > > >
-> > > > > > >  arch/arm/cpu/armv7/start.S | 10 +++++++++-
-> > > > > > >  arch/arm/cpu/armv8/start.S | 12 ++++++++++++
-> > > > > > >  arch/arm/lib/crt0.S        |  6 ++++++
-> > > > > > >  arch/arm/lib/crt0_64.S     |  6 ++++++
-> > > > > > >  4 files changed, 33 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > > > This is what makes me think you aren't actually working on my f=
-eedback
-> > > > > > about taking what we have in-tree, now, rather than just forwar=
-d porting
-> > > > > > your old series and deleting the current code.
-> > > > >
-> > > > > Well, yes, I sent this v3 series because I had thought you were
-> > > > > willing to allow me to maintain bloblist. I certainly appreciate =
-the
-> > > > > work in this area, though.
-> > > > >
-> > > > > >
-> > > > > > We have save_boot_params doing exactly what it should today, in=
-cluding
-> > > > > > saving off a standard passage and making what was saved availab=
-le later,
-> > > > > > in an intentional fashion. If, hypothetically, Pi needs to over=
-ride
-> > > > > > save_boot_param because a future new-firmware-blob does standar=
-d passage
-> > > > > > but at run time we want to support both, that's a good thing.
-> > > > > >
-> > > > > > With commit ea3348ebc215 ('Merge patch series "Handoff bloblist=
- from
-> > > > > > previous boot stage"') we already implement the specification i=
-n [1]. It
-> > > > > > is not a "which happens to". It is intentional.
-> > > > > >
-> > > > > > I guess the overall challenge here is that you want to do thing=
-s which
-> > > > > > are a superset of the firmware handoff spec itself?
-> > > > >
-> > > > > Yes,, much of this series relates to putting some structure into
-> > > > > things which are passed via standard passage, including validatio=
-n.
-> > > > >
-> > > > > I actually don't understand why you would be keen on using
-> > > > > save_boot_params(), a weak function, used for board-specific feat=
-ures,
-> > > > > to implement standard passage. We should build standard passage i=
-n as
-> > > > > a first-class citizen. I certainly don't want to try to implement
-> > > > > things that way on x86.
+> > > > { IH_ARCH_RISCV, "riscv", "RISC-V",},
+> > > > { IH_ARCH_RISCV32, "riscv32", "RISC-V 32 Bit",},
+> > > > { IH_ARCH_RISCV64, "riscv64", "RISC-V 64 Bit",},
 > > > >
-> > > > You seem to have misunderstood a lot of things and perhaps need to =
-go
-> > > > and re-read the feedback. Nothing about a weak function implies less
-> > > > than "first class" and "maintain the code" does not equate "delete =
-and
-> > > > replace functional code with the same thing, but I wrote it". And i=
-f you
-> > > > aren't going to do that, please don't bother posting a v4 either la=
-ter
-> > > > this week. I feel like I'm having zero progress with you taking my
-> > > > feedback on anything at this point.
+> > > > I tried to implement it like on ARM64. However the problem is that
+> > > > while on ARM64 it switches to aarch32 if it encounters an IH_ARCH_A=
+RM
+> > > > kernel image, there is no equivalent mechanism for Risc-V yet.
 > > >
-> > > Are you completely set on the idea of a weak function here?
+> > > But we don't even want that, since the current behaviour on a 64-bit
+> > > system is not to do anything 32-bit related, right? My 64-bit images
+> > > created with my system mkimage use IH_ARCH_RISCV.
+> > >
+> > > > Another
+> > > > option could be to disable this check in the bootm flow for now unt=
+il
+> > > > a similar mechanism is implemented on Risc-V.
+> > >
+> > > Why not just allow IH_ARCH_RISCV to retain the current "dumb" behavio=
+ur
+> > > permanently, and only implement the strict checking when the explicit
+> > > width types are detected?
 > >
-> > Am I completely set on following the general architecture and design we
-> > have and not making needless changes? Again, you seem to have either
-> > misread not not understood feedback and are intent on doing what you
-> > want anyhow.
+> > This seems most reasonable to me for the current situation.
 >=20
-> The save_boot_params() mechanism is ARM-only and is not suitable for
-> standard passage, IMO...
->=20
-> So can you just tell me whether you are willing to have the registers
-> saved in global_data early in startup, in assembly code? I want that
-> before progressing with standard passage on x86. I don't need to say
-> yes. I just need a clear answer, so I can decide which path to take.
+> Ok. In that case, I think the patch set needs to be reverted.
 
-I already replied in another thread that fine, we can try your idea. But
-I'm going to note here that trying to write to global data before it
-exists seems like a bad idea. Something is only "ARM-only" by virtue of
-being in assembly because it's too early to be able to use a C function.
+Please post a revert and Link: to this thread, thanks!
 
 --=20
 Tom
 
---UikPMPCTfOM8GloD
+--cZEs7YTzMVc6xQ8s
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg0r7IACgkQFHw5/5Y0
-tyw5EAv/XlVbJOYbxqUS4djKBPUaU2gRjhqfZE3aNSx+WfuZciiR2NFC+hDPRkoi
-0iIF1Ju5Anufm8uBBVTNMyHJFiyrGcaY4QqVhqO7SOFQyTzkY9aIbDvCltttabMK
-7EeTV5bwQ2PAhYvhyECXQcwzCBBrXQ3AYuo8+sclOX9i8E6LmEYiT0za9WsW0bdh
-qr/TvBs9I42+MWSnRpaQk/s3TSp2zA0zt/zkLjcfLJiGSsHtBOoNoAspjNUpzB9B
-V5dWJ3Jbe5IHfILeQelaGFhmu710HZoIFttMpcqDuZ5IZeat20r2XFk9qBSE0EIf
-jBTrJBLVsrDcoug5sCZDe9oVNjzA16o/Ql0syedUOowaRnS7GhBuYkuOXd8hpRjE
-z0IfUQkfrH36pESAbKbu2CVbbcMGsUajTERNTTksUjvWbiltEqmSezdRWLaEt0+n
-8YFw2OqmGCQhK8CLqcK3se+za+nCFDF5z6B5lJFoLz8bEwr1qF4X9rMX1sWshFOr
-RrZhW3Q5
-=23QD
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg0r/8ACgkQFHw5/5Y0
+tyw3eAv+JOfcCcV2pXRqR+H5oL5qjS6q+K66+onwP/ezGX841HNMoS0BFu3OWlo6
+gQlkHLIcYCz1sQf/PWG2IWPoCGC3zMpbLQCBUd4ahOdVL8SisA1F39CNBfvkeBug
+nZFuQM94vzXwQoHlPqYPC5n/HDhyAti2Fs4v0IrhwqtWtmXMTXwsqylysIsoIFvi
+IRuq/RAnmG9piUw1x3HfjjlNFtOLQcSa7GZr8lDcHTYWhmcDtyB8mXL7bwNNSVZI
+O362X85SynSTZi8BGO6k2DkGwBmNYWiO/TcTOSkjjKMDOIyxxWp2qc0p4+TvnM94
+ZJT2fIqRjrgrfYp4O+4fLTdQ2pK/sLOl8uE8Twt01ZUt5hJzzDyX1Ct+k7S49CHg
+Uz1FGuIA4Ocy13PFWbOlO838F0//TMUneb32crns1dOHgLi8kTaZ0yeqih0sfXDG
+yy+A6k49117RJz37ExA9fso0m5AHb4wAfad1Xh03qlYpsrp9OfltdRmitCiHWYED
+Uogvj69H
+=psHM
 -----END PGP SIGNATURE-----
 
---UikPMPCTfOM8GloD--
+--cZEs7YTzMVc6xQ8s--
