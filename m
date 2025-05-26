@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2C4C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 22:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3E5C5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 22:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B74F482E2D;
-	Tue, 27 May 2025 00:02:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55BCF82F66;
+	Tue, 27 May 2025 00:03:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IcaVw1Ck";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g44lwDir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6481B82E34; Tue, 27 May 2025 00:02:01 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id B29A582DB7; Tue, 27 May 2025 00:03:17 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3874C82D4A
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 00:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4852782E2D
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 00:03:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-2e4bbd9cad6so1300626fac.0
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:01:59 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-609e7f3caf3so1298315eaf.1
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:03:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748296918; x=1748901718; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WkPCzCeZ/V1FBcevnQ/J914qg8O5ADn61mpxfZoEAok=;
- b=IcaVw1Ck8Dwa96F1KiSjlP3iNJORKXMZg2Upww/0nT/rqFaOuqnczcIcXzRHQTpbLo
- ILrPdRKW5g3wIsTZeovdRosPZOEWU9V0BD4qVuY2ZY0T8GLw+Jhr4LxRM/Kp3UFfl+hr
- z9FGrWt5bYOep9+TzNttqMnbEMBF3SccL8xHk=
+ d=konsulko.com; s=google; t=1748296994; x=1748901794; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=tdZS25hA4P8EhzZHJPzS7eOTLpIE17ePeHFL3/Q9/Q0=;
+ b=g44lwDirG3pUVekgQrHur9XBpI8HDKdhHPmErHzMEQNCm3ZdBQy+CHFTcXrRCjb9K3
+ gh8GXbXVJEtbYL+DeI/KNQMefuqst73/HjuDHMzyvr+Og8WUwapEq8GuDhUb4/G4Ey3R
+ MrgGmrFNI1EO5AlO3AsnsMyyDqkrA++fjSPOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748296918; x=1748901718;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WkPCzCeZ/V1FBcevnQ/J914qg8O5ADn61mpxfZoEAok=;
- b=GTfHAb0DPGNQeIsGiEy2ON1hdCCcZ8kxYJZTkOwCQU4eR05yViRsRHJy17vRnCbm2o
- TksdwGml2y4NnHv+BpvPYqbsjR1kECTIbt3kyk0WJS8qSuy0jkRoFXT8UNBPxWf5L7vr
- IGNmYcIhWGJjXE8gYuSOSjtmT0mt03Xvk54KV9HlIsQsDDFft+qbx4yT5SQO7Ch+LbOI
- trKK0bmlx41qqr1lo6is6beA+c/M4ImuHEKMXtRIpTs6u4xLaLpMJ3wSSeV1Z+VWOofx
- 8726hjp6z3oalwN08TeIYTrpg0LJo9nP9BSXBm2y4VbwlJIXmtN94Ay2CmGNN1/p71kw
- aC8g==
-X-Gm-Message-State: AOJu0YynoRlwDl+Fz7m1hAS9h0qMd1l/PQNCcFnL4uZJQfnvdprvCLv1
- dICjL2NXVVLPJKLPjslZ34pixZrPZDKfB/FjgjC11kUtQotNo7IowR6ZLoCDhgBbO9M=
-X-Gm-Gg: ASbGncueowM34U7cWkZ8msw7u6qgDvilrQisbmx7v0Xo8pFkeL8iZAD5eQ2/YAUs+7M
- 1TxKMxK2rvLPzACjCQmV5sKjQftPa1FBlrnf4JJ3Kc+O3WtSpm3ffp2xhj7Ll31APPXY5HHk82g
- PcXTYNGeOsAtBXmm/YSSb0d6ci7fLTBc3EEOSaEcnWAweBaNsjvmmotYvJrdkXiPoN4e7MzisX7
- DYQMnvT78Kuni3vqxQb29anwcH+O17h9LLs+YQ2DPzHRMETthQOO7/RrAJN7jK81yBdm9bGinr2
- jV+0MWqasQHsRTmM53f3bauTznrZvHl63fs8GQ5XWFMCW4GUPbcLKMuRXnrhEnuqhtw7/kXR8MN
- XoI2utKilTkxqjmyi5Z6TsbU=
-X-Google-Smtp-Source: AGHT+IFNsOj3lYAO1+vs1PedkTUnZULvfwoaOaeWxDHOs+sL+Ul/xRd7jZGFf3wtlXPcSfXMErILVQ==
-X-Received: by 2002:a05:6870:af44:b0:2b3:55b3:e38 with SMTP id
- 586e51a60fabf-2e861f383a7mr5537754fac.21.1748296917930; 
- Mon, 26 May 2025 15:01:57 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748296994; x=1748901794;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=tdZS25hA4P8EhzZHJPzS7eOTLpIE17ePeHFL3/Q9/Q0=;
+ b=ez/XQeMkx/FsiiLLz3Fq9tiNqSsUwJ9JTZNNErJHmKDsUMA/Zn2rsBBo+65GJJUHdC
+ kv41m9STyBKk6pEv7ood7iqYOINLZB2NoAUMSfGRGxDtdQjf6S5XvfsnRGIAS5dH1zwX
+ cmXG5D+8TbuEtsFK3FimzZ0Qzl5qG/gD5TAG14t1tGdK6oLuBLvUqqjDBlNH8l8WrjEm
+ uJAWnq3LFVlVW1msDiZain646YhjuIE2rMmAomHYCFJLDBCEDF/cO+iuMCSshhl41SIh
+ WZIoAzfToFf+nPiMtGRsGNAePVM3FFbN+JU8U8nDuX2Vt0nNQ0VNHVUELK+ir9cpTSlB
+ TnYg==
+X-Gm-Message-State: AOJu0YyOy3iSoT+IhDic3dbQXYo+aojGUf08RGT2CfPF3TH140Rbo5yP
+ jrODGsfdQi713yWMdcZgyciRDpVL1SMQAPBZkhXco/vif7vUiDR2QamTZWQbPuc9V8yk8E4eLnE
+ B+ylXR2s=
+X-Gm-Gg: ASbGnctTZi9D6bU/iAu/GnCWqPwYq62dusM81J1N7+/1c74E3EW+oL766VH+Y188FES
+ QSGN+Id2uw2rOVsyYSf3CunRne8N5Fiu0YemtlOpMmzM7ryWmDWiO8gilTnIDFwOlD6wy61fKGi
+ zIS6OqF0syixZQEG4se8rR6mjuXffLsMHl1q9K9C0ppuQ1+3orjVu06ys1xwnkW0XqHhLjuVk5s
+ 2Il+mYPds6vQbR1pWH4y5f1V/3S7SpurAzRgKjPcHzDRRo2Jypw8VYr8Q2v2pY9QS7O4tLKWYm8
+ yDE2DhuWqfjBGoBVjvbtMP8ZpCStIRw0F/8g/Cdd7Z+I1XIb8r/8OtEjgfDRECJSco3+NgUXrhl
+ ruyXQJNu3Bq8J
+X-Google-Smtp-Source: AGHT+IEZjhxc0gl09Wdx1z3yQlxViP03SeGKautvr1JRIgxv0c/IacCTpBG//+ZTNblXelLLZ2ePDg==
+X-Received: by 2002:a05:6820:2612:b0:60b:cbde:bd14 with SMTP id
+ 006d021491bc7-60bcbdee3dcmr96933eaf.8.1748296993895; 
+ Mon, 26 May 2025 15:03:13 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c075b1fdsm5117089fac.24.2025.05.26.15.01.56
+ 006d021491bc7-60b7f26375esm2451634eaf.40.2025.05.26.15.03.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 15:01:56 -0700 (PDT)
-Date: Mon, 26 May 2025 16:01:55 -0600
+ Mon, 26 May 2025 15:03:13 -0700 (PDT)
+Date: Mon, 26 May 2025 16:03:11 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH 0/4] list.h/treewide: get rid of no-op prefetch()
-Message-ID: <20250526220155.GE100073@bill-the-cat>
-References: <20250507121246.518691-1-ravi@prevas.dk>
- <20250522165656.GB2179216@bill-the-cat> <87r00c3143.fsf@prevas.dk>
- <20250525230201.GS100073@bill-the-cat> <87msaz2i46.fsf@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2025.07-rc3 released
+Message-ID: <20250526220311.GF100073@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ku+sL/Kd2ziupSlS"
+ protocol="application/pgp-signature"; boundary="Nc7WifZCeLDhBirG"
 Content-Disposition: inline
-In-Reply-To: <87msaz2i46.fsf@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,82 +93,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ku+sL/Kd2ziupSlS
+--Nc7WifZCeLDhBirG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 26, 2025 at 11:10:33PM +0200, Rasmus Villemoes wrote:
-> On Sun, May 25 2025, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Sun, May 25, 2025 at 10:07:56PM +0200, Rasmus Villemoes wrote:
-> >>=20
-> >> :( so we've been relying on that prefetch() laundering away the
-> >> volatile.
-> >>=20
-> >> Which really begs the question: Why, exactly, is it that gd even has
-> >> that volatile qualifier in the first place?=20
-> >
-> > The answer is likely early 2000s GCC.
-> >
-> >> I'm 98% certain that we could drop that and get better code generation
-> >> and avoid a ton of places where we cast away that volatile which
-> >> shouldn't really be there anyway.
-> >
-> > It would be a good thing to experiment with now and maybe try for real
-> > in a near-future merge window.
->=20
-> So since it's declared per architecture I just tried with arm for now,
-> and this
->=20
-> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/gl=
-obal_data.h
-> index 45401d5e3c8..f7a47204b7c 100644
-> --- a/arch/arm/include/asm/global_data.h
-> +++ b/arch/arm/include/asm/global_data.h
-> @@ -133,9 +133,9 @@ static inline gd_t *get_gd(void)
->  #else
-> =20
->  #ifdef CONFIG_ARM64
-> -#define DECLARE_GLOBAL_DATA_PTR                register volatile gd_t *g=
-d asm ("x18")
-> +#define DECLARE_GLOBAL_DATA_PTR                register gd_t *gd asm ("x=
-18")
->  #else
-> -#define DECLARE_GLOBAL_DATA_PTR                register volatile gd_t *g=
-d asm ("r9")
-> +#define DECLARE_GLOBAL_DATA_PTR                register gd_t *gd asm ("r=
-9")
->  #endif
->  #endif
-> =20
->=20
-> builds, boots to linux, and passes our test suite on our
-> beagleboneblack, imx7 SabreSD, RPi 3, RPi 4, RPi-cm4, wandboard,
-> imx8mp-evk; i.e. a good mix of 32 and 64 bit arm.
+Hey all,
 
-That's a good set of datapoints, thanks. Do you want to post a real
-series at some point or should I do it and Suggested-by you? Thanks.
+So it's release day and I have tagged and pushed things out. I will be
+updating the next branch shortly. There's still a few things that need
+to come in for the release, as fixes, but otherwise I think the next
+branch is where most changes should end up.
+
+We're continuing with a community meeting following the release and is
+the same time as the previous meeting. The meeting details itself are:
+https://meet.google.com/btj-wgcg-euw
+May 27th, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+
+In terms of a changelog,=20
+git log --merges v2025.07-rc2..v2025.07-rc3
+As always, more details in pull requests (or the tags referenced by
+them) will result in more details here.
+
+I continue to plan to do an rc release every two weeks and the final
+release will be 07 July 2025.
+
+Thanks all!
 
 --=20
 Tom
 
---Ku+sL/Kd2ziupSlS
+--Nc7WifZCeLDhBirG
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg05NIACgkQFHw5/5Y0
-tyzGkQv/ZSUT6MArS2ZLc99kU9otVF0MDwQFWg1rj3W+qP/W51jTWrf8cU1pzL1g
-o0fIwp2tVBEfxkKlOGTumFZyQIKRGULyUmOLp4CarYSwCynFD9v2n8K1yqeIdWKQ
-NBf1K5glWhekSGt9aGtrSSLVyQW5XHeBGJS1UvtIiXVFKCr7usLRbUqvzWjPo1rl
-3Ki8ynDSB3CD281vs5EZLwFoC+xwO80I16Mp0cHGNXOAuGd2i4TywfCTnzXiJq8V
-nfHaWmwBNSoKKb6UrexaNI7gcVzRKRcgRUMeHRDTck5nu2X9kfurpEtgrMY8xrZU
-cxxTexKrcrG3HA3MMSENUgJ1PnNtwjuytT3Z5Fq4SqKEsCqEuG5yoUSdelH5xRLD
-Rrnb9v9xG06OSjr0IAwIau5z6heyhi1eF0b/h3oBPp7NN9SRs2mf57pki02VPEVT
-58steVBj+tUBch8jn3tOM6vYrUTFCzfMaAMJPA0YFJPP3NdASu1m02kLZEZHl0O4
-sQlXdSxk
-=X5nB
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg05R8ACgkQFHw5/5Y0
+tyw1lAwAgBiiTJ2U/oWZKVpCkAqKYi9U5tCZbgndvulAGal3UQsvc2bAhHWPfXpM
+T+NGIcFD0pLILi6tbT/hgWLaRGnQJ1rYJXh3/2kBba51z6FotUbYnp+OD50xrSRg
+3DXUDW9HunL05skLI43DWTRaTRVDR0J13gCgOLhCrdI/9Kxpf2MOszfa4ZiqNSrG
+TsRfVTwGi0aLkQlz2K25OIj4LtizDUjpyRrtE/2zBoSZfJbiqoM12cxb4vdngT10
+bUkYCMO273AqNWx7/hB60AgREknbGBYtI7iNeeC9RY1HaTJan0J9qMLvLULjzRvl
+bHDXZw5ixrMq8/g52+U8sUDtMlVHOJYXcJxbbL6opGYH7HOs03HCRRjnCh8gHGVj
+DWBWUVjPX6aFt0gtgmOTeCh3/ZIlMOyCB9XDXMH9oy2+c6xHuBFcSKzDtU44fKuh
+vjVl2B6IMFA966KSAKftWKUx6Pylrt0HY8azbA9EuhpNV3N0roqQJQPXrotTq1wc
+NzgU+p6n
+=Jhgs
 -----END PGP SIGNATURE-----
 
---Ku+sL/Kd2ziupSlS--
+--Nc7WifZCeLDhBirG--
