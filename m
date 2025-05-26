@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A98BEC5AD49
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 10:19:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B5B1C5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 10:19:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CC3D837FC;
-	Mon, 26 May 2025 12:16:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 686FE83826;
+	Mon, 26 May 2025 12:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V/wt6JjU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VcXogXI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 205C5837FC; Mon, 26 May 2025 12:16:39 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 09B5C836B8; Mon, 26 May 2025 12:16:40 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 083C682B19
+ by phobos.denx.de (Postfix) with ESMTPS id E1AB1837F5
  for <u-boot@lists.denx.de>; Mon, 26 May 2025 12:16:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3dc7294716cso19171335ab.2
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 03:16:36 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3dc8265b9b5so17973245ab.1
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 03:16:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1748254595; x=1748859395; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PeJBKL3nla9T56Me/+0hcxchUVY/x7aWt+q6cEB+zyw=;
- b=V/wt6JjUB2p1CYN0nmmNRdFxfvMAbbDQJRA3qJXCzX0wnaZWHNskwE9E7MKYj3mUsI
- R8zoII4/2UheUC2eqaX3NPEb7wN2TzxFqiiBXUKYt+FFDQXxMBkhk6v2ihkoAFIoOHye
- 9JkES5QLiArOgaEvyrXr3PNEYaT02o/n7/AWA=
+ bh=lBEcIS4cZqZU+1bfwRhB5CC3fSwbjLDiFw5yY5ktUDQ=;
+ b=VcXogXI44Nen5OlVTzqi41sCyq7PgqFbch5bZ+SRjfNsIBURU+df13ZDA2Fu0LmWh5
+ Kb8vuwXCwOFkhzlJaE3PTzC7xkgneUw6hpbSbvGt5cDYEqMECpH5zHqueB3nR0ImNmLw
+ M3d9UpELWBsINqFuxVW9DXu6JQxd5U4jei7VU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1748254595; x=1748859395;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PeJBKL3nla9T56Me/+0hcxchUVY/x7aWt+q6cEB+zyw=;
- b=ahY/iX+msBANHgrYCpDTzT7XrVeZOUuMvJtOOXNNUysYiyzwuvLphsrnbaqI+DKf3s
- hLDyubTqoocJdJdoDpeq3iw1givChyATs0fhobPRef13NWGwy0bKTxfZQox66+RXdO/N
- j84+C4xVF1Nq7+tAaxegY9cxI18VoIIY/6RPSnDmL6iFdEez9ke/BuJrFQv8XBg5UQ9b
- zeYuR5U5vZsmDSm0bXZcgR11jdSLujypqeUB7qSGjrh3uaYqf5hZxarAhJjImeX4urCn
- mXy2kMWDJ9WHBe85wH9mDp9qemXw7n900ykUQeWCIXMFzgz0J2nWzu3eo+YQKk6IeIJE
- tpMQ==
-X-Gm-Message-State: AOJu0Yw2tHmJrLnPMjt28wtKsR/wGCsx1C8IGwHPHyvIYvQhxCd9tCzf
- CQ6pxHDWB10R4sCeUhh/SK6ucMx0PWMJ8gVPe9TBFhbCX3ZeA+OFnpvMY8fYf7+kqa0JfKpmiPf
- lsV/i0ykx
-X-Gm-Gg: ASbGnctdyohilUoXUMXpoWabzx1v1Jh2o6YOfi1dj/R8rriey3KTCgXv5gDocMuhSNz
- LuVT/ddTsCNGA7MoZL6tXDhorHEoOk7RjL1RAy5TbLicFmq3jk/jNziEG86esfZMVgfxVdFHEFw
- iqa4bzZKu+88Doc3qTsyOkpH4ajuDHsN3idHaEnEcYeYJ50magQfGO5zN7uaeX/UJayGoK0wuqQ
- lxD4JRg3F93CqcZwBl1A+pRmAXa7IcW6JJ/qSM7b0hKqoJqH0cP3OC4I4hiLI2DIA3Kchkil3ZZ
- 9pjqD9dgBZOkN0aQfs0YCSRg851TSVfgyjAbFrfTPlLRhBtGqFxk3QkbyRtCwNUJmSDUj6loUgE
- uFncSzeyjzzMg
-X-Google-Smtp-Source: AGHT+IGwr6F30dhxsNWE3dixT6CXWRoA6vS0Ri32MoHgK1YpqOyGhbsEoGahwt3aTj15AsCBIHzTRA==
-X-Received: by 2002:a05:6e02:19cb:b0:3dc:80e6:3819 with SMTP id
- e9e14a558f8ab-3dc9b754f6amr81352205ab.22.1748254594244; 
- Mon, 26 May 2025 03:16:34 -0700 (PDT)
+ bh=lBEcIS4cZqZU+1bfwRhB5CC3fSwbjLDiFw5yY5ktUDQ=;
+ b=jflALLj6rjvOATKtXvNmXV8FlXrWVUMsShyx4iucCtl5VQkUfupmcQuuIeFyhGgvs8
+ /HSHC8Q0ebItDKdIWWqvd1qHE3KcndT+C8R4EpPmjTS7xQ8OCpdvlFxOKVzSm6dLK6dU
+ 5GqOVenwDfMWiBvYTeQoR1oYRQeVBNFZ8rB3ugqYKiQWwJTMriV5GfnxaY/V3yWgMlQC
+ fCYJcmnTBWMMwTsZ9ax3hK9HMElE7M9pFOngJ6mfCXzasJpQ/IiwJNaBTd2FcBPGMAAq
+ xD4N86xS8ocs1uVnLJ/IGf0LMKr5v6r/ic6nDOxn4tufSuroBwfkZo9pXgw0yAkUd9cY
+ aNkQ==
+X-Gm-Message-State: AOJu0YxBew3NMIom7O57+X9ZKQbxoL1lydryhahQe2Q5h51A4LLIA+wy
+ 0RECcGlZrSmadC5w8zKcKIKEfHBjZGJVIypicHQQcBQrGtOJpfVXHadM0nvTDbe3YyGoYeKBXHh
+ 2MgX/gEfr
+X-Gm-Gg: ASbGncsrfMwm39zgayhrIbuLQUGmMZs21Icv1C6c3dMdM4g8rI3Sej4pIzd+pcyxFf5
+ uWiamRzpt6L4ui9kyhiH+5mFss7wei1dvaEbkWiDQ22EG6ab+IJG+X0StKcJZWudAKngW13N7ih
+ MqH5f32YfX/C7/feg0pf67N6thjYVPcv1NDww6iYEfrZudLC2v2xDimzChd4ml+D74GV4g0F4ie
+ 8jRxvJy2Cg8MK8OQWWdU/P62VRPf6Ina4gsX3Cclkr7hNutLmjDEc7axMcvGFg0C3yKmY3fXOge
+ /zkoSFzVhUoStbK9+em8rz7OvOrBrWF6GEWuYXuLcikDQ9vDxsrIbgseeGfAbCr1oK71pbsRvcV
+ yEEJKj6lt5DMmLU117ygd1YE=
+X-Google-Smtp-Source: AGHT+IF+O20mMPO89ML0nevbsv3F7Z3s7D8go/m8LgiJ/Q87ZC6QT1NZWYaTrHlbtH4NJS5Ef/gonQ==
+X-Received: by 2002:a05:6e02:174a:b0:3dc:757b:3fab with SMTP id
+ e9e14a558f8ab-3dc9b68e03fmr73152025ab.6.1748254595581; 
+ Mon, 26 May 2025 03:16:35 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fbcc3b19aasm4679249173.52.2025.05.26.03.16.32
+ 8926c6da1cb9f-4fbcc3b19aasm4679249173.52.2025.05.26.03.16.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 03:16:32 -0700 (PDT)
+ Mon, 26 May 2025 03:16:34 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heiko Stuebner <heiko@sntech.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sebastian Kropatsch <seb-dev@mail.de>, Tom Rini <trini@konsulko.com>,
- Xuhui Lin <xuhui.lin@rock-chips.com>, huang lin <hl@rock-chips.com>
-Subject: [PATCH v5 18/25] rockchip: Add documentation for VBE
-Date: Mon, 26 May 2025 04:15:04 -0600
-Message-ID: <20250526101541.3254628-19-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 19/25] gitlab: Add an VBE board to the sjg lab
+Date: Mon, 26 May 2025 04:15:05 -0600
+Message-ID: <20250526101541.3254628-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250526101541.3254628-1-sjg@chromium.org>
 References: <20250526101541.3254628-1-sjg@chromium.org>
@@ -101,41 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that VBE is running at a basic level on rk3399, add mention of it in
-the documentation.
+Add a rockchip rk3399 board which runs Verified Boot for Embedded.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- doc/board/rockchip/rockchip.rst | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ .gitlab-ci.yml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index b88299cbba2..cf983c91bd9 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -519,6 +519,19 @@ config-flash.ini:
-         [OUTPUT]
-         PATH=RK30xxLoader_uboot.bin
- 
-+Verified Boot for Embedded (VBE)
-+--------------------------------
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 7aadd5d8b73..cf8147fbfd5 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -738,3 +738,9 @@ qemu-x86_64:
+     ROLE: qemu-x86_64
+     TEST_PY_TEST_SPEC: "and not sleep"
+   <<: *lab_dfn
 +
-+VBE is supported on rk3399 at present, with SDRAM being set up in SPL. The full
-+A/B/recovery flow is supported in U-Boot.
-+
-+To build this, use the rk3399-generic board, setting CONFIG_OF_LIST to the list
-+of boards you want to support. All boards must use the same SDRAM type.
-+
-+VBE uses internal SRAM (IRAM) for the TPL, VPL and early SPL phases. The stack
-+stop is near the top of this (0xff8eff00) with the 256-byte bloblist immediately
-+following.
-+
- TODO
- ----
- 
++# Firefly-RK3399 board running the rk3399-generic build
++vbe:
++  variables:
++    ROLE: vbe
++  <<: *lab_dfn
 -- 
 2.43.0
 
