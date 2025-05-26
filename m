@@ -4,59 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C4FC54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 09:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4835FC5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 09:25:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA3F082D34;
-	Mon, 26 May 2025 11:18:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 9772282D34;
+	Mon, 26 May 2025 11:25:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="D1H/pl5d";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="f83ShLBM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1418982D43; Mon, 26 May 2025 11:18:02 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C2BC982CED; Mon, 26 May 2025 11:25:25 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B989D82CED
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 11:17:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C022EA4E8DE;
- Mon, 26 May 2025 09:17:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 240CBC4CEE7;
- Mon, 26 May 2025 09:17:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748251078;
- bh=1bVYFWZf5bCd7xdNV5X6RU061fQ2CmUsLLowXS7vTFs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=D1H/pl5dfNN9prt+xqJJUC8GPa/zh3Pz8T+u/kNlmJ4a5XD2C38PgMHkaC7fIZU21
- vEN99R5UHbBk0gbvpwcO48QYTZSXKVqlAzcNcuwiVvMcWb0pGLwqBO3IAZUXd0LJRz
- /4oGy/IvUM8CUmNomEtCmiupB1QtuWomTZTWciwHP6ZYTNipg+koBnzRgDN0I/NW9f
- F7wUjg2uLE1Pd+iHDcWJmRP423Op4OXp0Bi3+FcsjKZMNjQY1zumColXWnPwj6Lt8q
- 3Tny2xTxSZ89P1PMPiIsm9OjKZur1sMY8pt2ecKRGFE3U6yJ5Z5x4GD5vsyf/Y4rBU
- Z5ncoClo9iEAA==
-Date: Mon, 26 May 2025 10:17:54 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: Yao Zi <ziyao@disroot.org>, Tom Rini <trini@konsulko.com>,
- Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <20250526-disband-cover-cdc6567452f2@spud>
-References: <aC2hyzxwKzO4k1im@swlinux02>
- <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
- <20250522-eradicate-clip-538f48710ad7@spud>
- <aC9TmaY7w2PL8lbn@pie.lan>
- <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 1ED7E82D34
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 11:25:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-310f082a677so1520151a91.2
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 02:25:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1748251521; x=1748856321;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=02rHxee/xjRtm6LV5Y0KGjxhMXZVsf0iOJsLeMtd3BE=;
+ b=f83ShLBMC7ur79s7ydGKVt6dnhJkkPidXY8mz+vTmfvPELfRcTpkTYhFklgO6Z4kbc
+ l/fLzGKp9jq9AH0zGwi4TU+izUf7Wru/ScaD/dy1ML+NIKif3C8g7no5dFF6dOLzVi7g
+ 2xcQHY5bQrF+g7/VJr5bfotUAEScG/VWFEHIc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748251521; x=1748856321;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=02rHxee/xjRtm6LV5Y0KGjxhMXZVsf0iOJsLeMtd3BE=;
+ b=iS7wTNF/k6tf5egvbtNuaQUdHWq6jUYRgaIUlvgrrDedCYEDIYYrFxU/qomJ2bzXua
+ +v0nure0y3Qo25RMkHGcKy07SWPPEPegnLUO4bLLGYw0dOnvmrliIxHzCOIvxg65jKjL
+ LKoR4ZPwo8nKMGJe28LI1o8JLFeY8QXhHgWIQNR5G0ST8IR5l+yQfuQnJI2ZD4o8s/hg
+ J++EfhEDtDYoEEgkn1KHsn+M/rIcsMbI4luM25m1dB4YYc5aHm+7ca8U3XKNLH+MNSHU
+ fpAlRhaCoeDwMVcUzU1ovOUD2tolJ1NColCKVGIgvl8gap1I8I751OZBhyI2CDF0uPtw
+ RSEA==
+X-Gm-Message-State: AOJu0YxBGgN4JRZ+SG9AUksep1u+oYfYVyoVb8i4ALuWpPGRl6YbGi1q
+ EICouT7XhCLBglmSogqLr4MZs21/t0F2MF1+FEsbiXKxQS6dRAwA0Fav50zToooMAk3Mg0QLTqf
+ +IT694k/C+hYyYuL+Ya2qgCJZWBxW1S/akPspyblzmQ==
+X-Gm-Gg: ASbGncu7O+UIdnlFZ/X8rdlalnoLnDJnRD3/OMr3cd/6WYz9lQ5PPfn1Ygb1DgEnAuf
+ IYJr/orQxlz2x0fMBkI2HXdDOm5TOozK5BZSszyW4WWnpaPhnZRFlkT2GeUq/p5vfgUO6tlD6NZ
+ D6Vy9Ix6+3iVDWvgTrFdn1gVzwDU/JgFE+ZPd9MCQgaQDnjCDS6Xj9qQTdD9c8F9dgIOnr95+U
+X-Google-Smtp-Source: AGHT+IGAwnP/3Rs5ewb1U/772d+pQSQNPgyju5aQywaDrg4cDFHrtJRhICR7a5uUfavi8LEB3C/Vn+l5EsX++2mz7GE=
+X-Received: by 2002:a17:90b:2e4e:b0:2fa:228d:5af2 with SMTP id
+ 98e67ed59e1d1-3110f30d83bmr14462973a91.15.1748251521551; Mon, 26 May 2025
+ 02:25:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="PHAd/PYnbgnvqgvs"
-Content-Disposition: inline
-In-Reply-To: <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
+References: <20250525122316.661999-1-michael@amarulasolutions.com>
+ <20250525122316.661999-2-michael@amarulasolutions.com>
+ <20250526084356.GQ19264@nxa18884-linux>
+ <CAOf5uw=Fk0y0G24f2JWcDiWdvWEUUTRWsD5v3ugBxRjSZGrtAg@mail.gmail.com>
+ <CAOf5uwngXsW9_A+XdA4emgzg7mRkGEcfAioD6k-4YviLCuue-A@mail.gmail.com>
+In-Reply-To: <CAOf5uwngXsW9_A+XdA4emgzg7mRkGEcfAioD6k-4YviLCuue-A@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 26 May 2025 11:25:09 +0200
+X-Gm-Features: AX0GCFudMrag2C9m7Z9sYTZGWXQ4yaDQqSSxuW0AYm0zKfoX-A7vFcKO_W38vmw
+Message-ID: <CAOf5uwm4zgghtJDvPOFg0Sh_CHbEUiXmjhqj2cajSzddCnf0jg@mail.gmail.com>
+Subject: Re: [PATCH 2/4] mtd: mxs_nand_dt: Move from clk_get/clk_enable to
+ clk_bulk api
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,150 +95,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peng
 
---PHAd/PYnbgnvqgvs
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, May 26, 2025 at 09:02:46AM +0530, Mayuresh Chitale wrote:
-> On Thu, May 22, 2025 at 10:11=E2=80=AFPM Yao Zi <ziyao@disroot.org> wrote:
+On Mon, May 26, 2025 at 9:42=E2=80=AFAM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi Peng
+>
+> On Mon, May 26, 2025 at 9:38=E2=80=AFAM Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
 > >
-> > On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
-> > > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
-> > > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
-
-> > > This PR seems to have made my CI blow up, and I'm not entirely sure if
-> > > that's something intentional or not. I've not yet bisected, but since
-> > > the error is "Image arch not compatible with host arch", I can only
-> > > imagine the patch in question is:
-> > > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV64
-> > > | Date: Fri,  4 Apr 2025 14:48:55 +0000       [thread overview]
-> > > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com> (ra=
-w)
-> > > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
-> > > |
-> > > | Similar to ARM and X86, introduce a new image type which allows u-b=
-oot
-> > > | to distinguish between images built for 32-bit vs 64-bit Risc-V CPU=
-s.
-> > > |
-> > > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
-> > > | ---
-> > > |  boot/image.c    | 3 ++-
-> > > |  include/image.h | 3 ++-
-> > > |  2 files changed, 4 insertions(+), 2 deletions(-)
-> > > |
-> > > | diff --git a/boot/image.c b/boot/image.c
-> > > | index 139c5bd035a..45299a7dc33 100644
-> > > | --- a/boot/image.c
-> > > | +++ b/boot/image.c
-> > > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
-> > > |     {       IH_ARCH_ARC,            "arc",          "ARC",         =
- },
-> > > |     {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_64",  =
- },
-> > > |     {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",      =
- },
-> > > | -   {       IH_ARCH_RISCV,          "riscv",        "RISC-V",      =
- },
-> > > | +   {       IH_ARCH_RISCV,          "riscv",        "RISC-V 32 Bit"=
-,},
-> > > | +   {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 64 Bit"=
-,},
-> > > |     {       -1,                     "",             "",            =
- },
-> > > |  };
-> > > |
-> > > | diff --git a/include/image.h b/include/image.h
-> > > | index 07912606f33..411bfcd0877 100644
-> > > | --- a/include/image.h
-> > > | +++ b/include/image.h
-> > > | @@ -138,7 +138,8 @@ enum {
-> > > |     IH_ARCH_ARC,                    /* Synopsys DesignWare ARC */
-> > > |     IH_ARCH_X86_64,                 /* AMD x86_64, Intel and Via */
-> > > |     IH_ARCH_XTENSA,                 /* Xtensa       */
-> > > | -   IH_ARCH_RISCV,                  /* RISC-V */
-> > > | +   IH_ARCH_RISCV,                  /* RISC-V 32 bit*/
-> > > | +   IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
-> > > |
-> > > |     IH_ARCH_COUNT,
-> > > |  };
-> > > | --
-> > > | 2.43.0
-> > > |
-> > > since it is changing the existing "riscv" image type to be the 32-bit
-> > > image and requiring the new entry for 64-bit. My CI job uses the syst=
-em
-> > > mkimage to create the image that U-Boot is loading, so it doesn't know
-> > > about the new define etc. Maybe it's not considered a problem if a new
-> > > U-Boot cannot boot an old image, but the comment above the enum reads:
-> > > |/*
-> > > | * CPU Architecture Codes (supported by Linux)
-> > > | *
-> > > | * The following are exposed to uImage header.
-> > > | * New IDs *MUST* be appended at the end of the list and *NEVER*
-> > > | * inserted for backward compatibility.
-> > > | */
-> > > The overwhelming majority of existing supported boards in U-Boot are
-> > > 64-bit platforms, and the 64-bit platforms are the ones that have been
-> > > supported for longer, so my thought would be that the compatibility of
-> > > 64-bit platforms should be prioritised over 32-bit? Or even add expli=
-cit
-> > > 32-bit and 64-bit entries and the existing one is a catch-all for
-> > > compatibility reasons?
+> > Hi Peng
 > >
-> > I've mentioned entries with bitwidth explicitly specified in my previous
-> > reply (and there hasn't been any response).
-> >
-> > > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying 32bit
-> > > when no suffix attached. We (and the Linux kernel) mix 32-bit and 64-=
-bit
-> > > variants of RISC-V together, thus it's hard to tell the exact bitwidth
-> > > of "IH_ARCH_RISCV" without inspecting the code around. To me, it soun=
-ds
-> > > more like "RISC-V, but no bitwidth specified".
+> > On Mon, May 26, 2025 at 9:34=E2=80=AFAM Peng Fan <peng.fan@oss.nxp.com>=
+ wrote:
 > > >
-> > > It will be nice if we could avoid this kind of ambiguity.
+> > > On Sun, May 25, 2025 at 02:23:10PM +0200, Michael Trimarchi wrote:
+> > > >Make simple the clock registration and enable and allow later
+> > > >to add support for other platforms
+> > > >
+>
+> Ok, I think that I need anyway to disable the gpmi_io clk because the
+> driver should
+> handle it during nfc timing calculation
+>
+
+No it's ok this way, the driver expect the clock enabled
+
+Michael
+
+> Michael
+>
+>
+> > > >Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+> > > >---
+> > > >
+> > > > drivers/mtd/nand/raw/mxs_nand_dt.c | 48 ++++-----------------------=
+---
+> > > > 1 file changed, 5 insertions(+), 43 deletions(-)
+> > > >
+> > > >diff --git a/drivers/mtd/nand/raw/mxs_nand_dt.c b/drivers/mtd/nand/r=
+aw/mxs_nand_dt.c
+> > > >index 11dbcbbf442..b62474bc5ab 100644
+> > > >--- a/drivers/mtd/nand/raw/mxs_nand_dt.c
+> > > >+++ b/drivers/mtd/nand/raw/mxs_nand_dt.c
+> > > >@@ -100,9 +100,7 @@ static int mxs_nand_dt_probe(struct udevice *dev=
+)
+> > > >
+> > > >       if (IS_ENABLED(CONFIG_CLK) &&
+> > > >           (IS_ENABLED(CONFIG_IMX8) || IS_ENABLED(CONFIG_IMX8M))) {
+> > > >-              /* Assigned clock already set clock */
+> > > >-              struct clk gpmi_clk;
+> > > >-
+> > > >+              struct clk_bulk clk_bulk;
+> > > >               info->gpmi_clk =3D devm_clk_get(dev, "gpmi_io");
+> > > >
+> > > >               if (IS_ERR(info->gpmi_clk)) {
+> > > >@@ -111,47 +109,11 @@ static int mxs_nand_dt_probe(struct udevice *d=
+ev)
+> > > >                       return ret;
+> > > >               }
+> > > >
+> > > >-              ret =3D clk_enable(info->gpmi_clk);
+> > > >-              if (ret < 0) {
+> > > >-                      debug("Can't enable gpmi io clk: %d\n", ret);
+> > > >-                      return ret;
+> > > >-              }
+> > > >-
+> > > >-              if (IS_ENABLED(CONFIG_IMX8)) {
+> > > >-                      ret =3D clk_get_by_name(dev, "gpmi_apb", &gpm=
+i_clk);
+> > > >-                      if (ret < 0) {
+> > > >-                              debug("Can't get gpmi_apb clk: %d\n",=
+ ret);
+> > > >-                              return ret;
+> > > >-                      }
+> > > >-
+> > > >-                      ret =3D clk_enable(&gpmi_clk);
+> > > >-                      if (ret < 0) {
+> > > >-                              debug("Can't enable gpmi_apb clk: %d\=
+n", ret);
+> > > >-                              return ret;
+> > > >-                      }
+> > > >-
+> > > >-                      ret =3D clk_get_by_name(dev, "gpmi_bch", &gpm=
+i_clk);
+> > > >-                      if (ret < 0) {
+> > > >-                              debug("Can't get gpmi_bch clk: %d\n",=
+ ret);
+> > > >-                              return ret;
+> > > >-                      }
+> > > >-
+> > > >-                      ret =3D clk_enable(&gpmi_clk);
+> > > >-                      if (ret < 0) {
+> > > >-                              debug("Can't enable gpmi_bch clk: %d\=
+n", ret);
+> > > >-                              return ret;
+> > > >-                      }
+> > > >-              }
+> > > >-
+> > > >-              ret =3D clk_get_by_name(dev, "gpmi_bch_apb", &gpmi_cl=
+k);
+> > > >-              if (ret < 0) {
+> > > >-                      debug("Can't get gpmi_bch_apb clk: %d\n", ret=
+);
+> > > >-                      return ret;
+> > > >-              }
+> > > >-
+> > > >-              ret =3D clk_enable(&gpmi_clk);
+> > > >+              ret =3D clk_get_bulk(dev, &clk_bulk);
+> > > >+              if (!ret)
+> > > >+                      ret =3D clk_enable_bulk(&clk_bulk);
+> > >
+> > > You enable clk bulk and together with a standalone gpmi_io clk?
+> > >
 > >
-> > (referring my own reply[1])
+> > I need to get and refer to the gpmi_io because it is used then by the
+> > driver. I think
+> > that this does not change what was before. Am I missing?
 > >
-> > I'll second explicit 32-bit and 64-bit entries, and keeping
-> > IH_ARCH_RISCV for compatibility consideration.
+> > Michael
 > >
-> Are you suggesting something like this :
->=20
-> { IH_ARCH_RISCV, "riscv", "RISC-V",},
-> { IH_ARCH_RISCV32, "riscv32", "RISC-V 32 Bit",},
-> { IH_ARCH_RISCV64, "riscv64", "RISC-V 64 Bit",},
->=20
-> I tried to implement it like on ARM64. However the problem is that
-> while on ARM64 it switches to aarch32 if it encounters an IH_ARCH_ARM
-> kernel image, there is no equivalent mechanism for Risc-V yet.
+> > > Regards,
+> > > Peng
+> > >
+> > >
+> > > >               if (ret < 0) {
+> > > >-                      debug("Can't enable gpmi_bch_apb clk: %d\n", =
+ret);
+> > > >+                      debug("Can't enable gpmi clks: %d\n", ret);
+> > > >                       return ret;
+> > > >               }
+> > > >       }
+> > > >--
+> > > >2.43.0
+> > > >
+> > > >base-commit: df2ed552f0b05591090369a7fe7ddc92439dea5c
+> >
+> >
+> >
+> > --
+> > Michael Nazzareno Trimarchi
+> > Co-Founder & Chief Executive Officer
+> > M. +39 347 913 2170
+> > michael@amarulasolutions.com
+> > __________________________________
+> >
+> > Amarula Solutions BV
+> > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> > T. +31 (0)85 111 9172
+> > info@amarulasolutions.com
+> > www.amarulasolutions.com
+>
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
 
-But we don't even want that, since the current behaviour on a 64-bit
-system is not to do anything 32-bit related, right? My 64-bit images
-created with my system mkimage use IH_ARCH_RISCV.
-
-> Another
-> option could be to disable this check in the bootm flow for now until
-> a similar mechanism is implemented on Risc-V.
-
-Why not just allow IH_ARCH_RISCV to retain the current "dumb" behaviour
-permanently, and only implement the strict checking when the explicit
-width types are detected?
 
 
---PHAd/PYnbgnvqgvs
-Content-Type: application/pgp-signature; name="signature.asc"
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaDQxvwAKCRB4tDGHoIJi
-0pHIAP9MS9NWOliTeDztBPq4eXOvhbes/03WW9YRDeIlzNw47AD+PQOELnPnzoMp
-L3uD1clibhmuN+HiF02MGGrE7LqNUQY=
-=/IhB
------END PGP SIGNATURE-----
-
---PHAd/PYnbgnvqgvs--
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
