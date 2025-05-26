@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4FCC5AD49
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 474ACC5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 14:25:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0ED382EA9;
-	Mon, 26 May 2025 16:24:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3837882F54;
+	Mon, 26 May 2025 16:24:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="TxsmurkM";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="mSlRl1rX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C863382F6D; Mon, 26 May 2025 16:24:50 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id D20CB82EA2; Mon, 26 May 2025 16:24:50 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C155182EA2
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:24:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 779B082EA9
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 16:24:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-60477f1a044so1818725a12.0
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:24:47 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-60462000956so2124811a12.0
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 07:24:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1748269487; x=1748874287;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1748269488; x=1748874288;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=OkLPAbVSJkGJ4x3cspMW0lUapeRHvIvu5y262lJB3K4=;
- b=TxsmurkMaLxEouIcLRFl5sy+qgq2IKQPOen7RHSinNuw3b5QzVfNushHLIS+l4/c2I
- 9T1qy0I2uVgcgZj3/phUqRfBFq6nWG/HSj9/a/k4xQQjrgmCWrsTIWERaIMsdbjIT4v4
- hhg99eJzsHZhPxKSZZP65Df5BZMpvx5UXZjGAoKh2gYoOaRpiZQSjMenWFGMHYLV1DVi
- 6k68+SIWtySdevqns9BVuDi+BD4dsq7653TLltYHkf5fSI2kiL4+0+tIJ7VgPtJdIcAW
- DPutxvRQ9fj9e1UBDyH7gVWA+PZQtCiUhj83VeMUo1PZo7yD5y2cIljB3fGGRn1KWnez
- TeOQ==
+ :reply-to; bh=YZrcSkXFFHpDK5h4NcqfdYFN0yKokP0/srWZAHMfWKA=;
+ b=mSlRl1rX/eR+DJjgEOg37TDziy3r/V0Ia1kbV5HAxhIXQVS9tuxwGd+9mM73CTShoE
+ d1+suEBnyrwoLHaY7cbNRtTo0ZRdYj1t+GlquxLseF7kBtdlUblOsKwZkTFI0G/CV0mU
+ VWIVQdwKrqFr6qNtS4xlYwtHKw5kNY7U4Osy4nYfW/rKvFkn9hEGqXHd39HlS8riF4Kk
+ cZ8kCOAhYS1v84P2PoxWMTRHf8en3o8/dJcY9QSflQtT+2ji6DvtIgtXveFeGCj+vmrU
+ yutnOJ3fhg+rHI0I2IuE8JWNQsZPyzGbiJFtGw8Fi7fXO/mLuAvEVRstUER6RHQjyj7K
+ ghbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748269487; x=1748874287;
+ d=1e100.net; s=20230601; t=1748269488; x=1748874288;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OkLPAbVSJkGJ4x3cspMW0lUapeRHvIvu5y262lJB3K4=;
- b=dFYcACGwIPmkEnEagZR1LbqzaCttLmGnxfKd6DlsTLmrdBU1OvqaUSh8wtp/PRM/70
- cvNtlJqITLTWSO0EGg7ac8BBPI86kuos5I32gPLxiNh6waQLdAAUL/VUlEcpZrxxouYY
- 58wJICAHFzi61AGGxvbf8uNZ8DhyF+9WJmKS/JF73s7qjgSxZAwdqi8jMjBsM+oILkrz
- VQQACFfEtuAdLXZXXnKGt6VT+G/UwssYfAHMP8HqVXxYPzOHg8zVpiUynN7FHDiUqvvN
- R0U5X7D8Ml4f2In9cH4A11Wj1vcaFDVuLoOETfr9JPj6/5e5spFTpQQq27qOMn2Dfb/V
- rbLw==
-X-Gm-Message-State: AOJu0YxzXbUI1wKYDjKvHDP0EF0lNkwzLnbAbRs2KN9xFSm/50eu2F1F
- K2NxTgKHde3Yf0SY1+/46yZ/14skfwhxnclbK0iiSJmKoNeOlUEXz0qv7kGqSpDjwI2/cnEjSVz
- P2A0K4e4=
-X-Gm-Gg: ASbGncs7gLaBblozqveZfrmwMCu3rYdIxskDvLPdSyHp5LPXvj9lclEC+7ZW83xcouf
- EBXtOIAhuzWwLVQq+v3JDAywNgVreJ3PUHHX1h1uJpn83eet/YlrTW3YOVTBpE+N3HdDCGzbRpz
- 8wIhVeD+n5iXzBvf567gE2r6rAFIpkF4kQEJf1fFRHq2Fd4A8Hj2AKj43n78gTU3B3j4gMj0Nki
- IFmu2a2L1P6lDuqM+v7GMP08sw3a1YB9RWPbVs0mZYAjtQbkJ5/5mHE2mGBuCANlANwwOFH6n5J
- 9SBf+Qs21IDWxUBVeHTnpzLBO1Ax6TTdY9GvC8FHiZBWr1gpJj4achCIjDorfLdN8jgkIEfkNC0
- =
-X-Google-Smtp-Source: AGHT+IHGwrOzou9l8fOkA2SpdPzenmAvhRU+6Y+LMzDF8wCpUdAwx4w3C4Jm3W2YsI//H9P9UHzX6w==
-X-Received: by 2002:a05:6402:26c3:b0:5fe:e3a7:a8bb with SMTP id
- 4fb4d7f45d1cf-602da407a83mr6991313a12.25.1748269486998; 
- Mon, 26 May 2025 07:24:46 -0700 (PDT)
+ bh=YZrcSkXFFHpDK5h4NcqfdYFN0yKokP0/srWZAHMfWKA=;
+ b=O+7OxiTqboZAvacO/slp8hFnpZuef5XZ4DzIrnksKWzNC4/LcocrTWxRs/XXX97n/M
+ cXHZwHrgTgyPHKo9mmXLF9k8oJp7t+RV265Ek4WGtkUDbmZis4vwydRjn9RQnq1V84wi
+ +LNZvuGudGUIXxv3HY0zOTJ6hbTpZs96LldLu/QFFfon1Ibuu/W5x204tZ9yHrKDOC90
+ sP0e4BKdRraNCRRXLY3OzUj+HYGagy7e8KtCXzlIp8Bk65XZHETE4j7l423q6qC6cakm
+ G/QVZiXfSxDlZUmcNcj3UoPNfaKiVEVtDzglaOEnCV8Ik6EwSSjmVIKFjqNkjdqXE/0o
+ EnKQ==
+X-Gm-Message-State: AOJu0YzHiihR1UuDm6W+2jV4X76rae9K8h/3GOTNJt+SRPWpPb/4nhrt
+ vSdvYHwec6ZFR+cZgBbxaJ82w233pmssgjsRkQab4kUepgTrGzFJd2Z19yR53P24tcBiUdYRBCD
+ p0o2SiMw=
+X-Gm-Gg: ASbGncujnlMjW87AfY8Dmri/s2XS0+hY72o2Vryg475mdx39SlikSIbLXzdobLLPr0f
+ GhO/zi2GZ8SZmykm2zyW4P5xMiT8vbpWBI55fZOWiNqvfkd+a8r6bowPBTWhXjNMqCy7nurEl/r
+ Jcctfr9SmU6yZaRyzzTh2Yo+HT89/FXV+NPExo9pU8MVn9qTcqV3BGfRjVK0o48CoYgEx2eF2pB
+ cMCba8GPIGValBK73pgsvKBMnX8CcTsfCKMqMaAeCv1j2UCwCYbdT1cVijUA9KlmC/bDWEY+7Mt
+ GQ5kMgHU6VPZqy76hLWusK3BRLUOL+NK9HKmPmFYsMnmOUBmpqvINPNge4Pbwy+w
+X-Google-Smtp-Source: AGHT+IGQtW0lqhAi/CM2Ze6jSr72fmfqTzoPoiN8EvoGxpkdDTy2DWbM2vcmCRec7rBCiMolTBzwPQ==
+X-Received: by 2002:a17:907:da7:b0:ad5:2c48:2835 with SMTP id
+ a640c23a62f3a-ad85b1830b1mr813944166b.18.1748269487774; 
+ Mon, 26 May 2025 07:24:47 -0700 (PDT)
 Received: from [127.0.1.1] ([91.90.172.13]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6045c6d25dcsm2926950a12.8.2025.05.26.07.24.46
+ 4fb4d7f45d1cf-6045c6d25dcsm2926950a12.8.2025.05.26.07.24.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 07:24:46 -0700 (PDT)
+ Mon, 26 May 2025 07:24:47 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Date: Mon, 26 May 2025 16:24:21 +0200
-Subject: [PATCH v2 2/5] usb: onboard-hub: Use devm API do automatically
- free the reset GPIO
+Date: Mon, 26 May 2025 16:24:22 +0200
+Subject: [PATCH v2 3/5] usb: onboard-hub: Set the reset gpio pin before freeing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250526-usb_onboard_hub_cypress_hx3-v2-2-f382415da84f@thaumatec.com>
+Message-Id: <20250526-usb_onboard_hub_cypress_hx3-v2-3-f382415da84f@thaumatec.com>
 References: <20250526-usb_onboard_hub_cypress_hx3-v2-0-f382415da84f@thaumatec.com>
 In-Reply-To: <20250526-usb_onboard_hub_cypress_hx3-v2-0-f382415da84f@thaumatec.com>
 To: u-boot@lists.denx.de
@@ -100,46 +98,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The reset GPIO is obtained during driver probing by the function
-devm_gpiod_get_optional, which means the GPIO will be automatically
-freed when the device is removed. Because of this, explicit call
-to free the reset GPIO in hub remove function is not needed.
-To support the Managed device resources, the DEVRES config must
-be enabled, otherwise the devres functions fall back to non-managed
-variants. Set the necessary dependency to DEVRES in Kconfig.
+In the usb_onboard_hub_remove, the reset gpio, if available, is
+freed. The pin state however, remains unchanged, as set in the
+usb_onboard_hub_reset. The hub is then left enabled.
 
+During second onboard hub probing, the hub is initially enabled
+(reset pin in state "0"), and then it is being reset by the reset
+function (transition to "1" and then to "0"). Because of this,
+the hub first disconnects from root hub, and then it connects again.
+
+When the devices are being discovered in the usb_scan_port in the
+usb_hub driver, initially there is the USB_PORT_STAT_CONNECTION bit
+not set in portstatus, but USB_PORT_STAT_C_CONNECTION set in
+portchange data (which is because disconnect event occurred first).
+In this condition, the driver does not wait for devices to appear.
+This can cause the hub (and all child devices) to be not enumerated
+when rescanning on "usb reset" command.
+
+To fix this, set the reset gpio to active in usb_onboard_hub_remove,
+to put the hub into reset state.
+However, in case the hub reset pin is by default held in high
+state by HW before U-Boot takes over, in which case the USB hub is
+active, then during the first probe it gets reset and we might get
+into the same issue of the hub being not enumerated.
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 ---
- common/usb_onboard_hub.c | 3 ---
- drivers/usb/Kconfig      | 1 +
- 2 files changed, 1 insertion(+), 3 deletions(-)
+ common/usb_onboard_hub.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
 diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 3dfeb0cb5a59..286f90b22c24 100644
+index 286f90b22c24..dcaa24d30ece 100644
 --- a/common/usb_onboard_hub.c
 +++ b/common/usb_onboard_hub.c
-@@ -211,9 +211,6 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+@@ -211,6 +211,13 @@ static int usb_onboard_hub_remove(struct udevice *dev)
  	struct onboard_hub *hub = dev_get_priv(dev);
  	int ret;
  
--	if (hub->reset_gpio)
--		dm_gpio_free(hub->reset_gpio->dev, hub->reset_gpio);
--
++	if (hub->reset_gpio) {
++		ret = dm_gpio_set_value(hub->reset_gpio, 1);
++		if (ret)
++			dev_err(dev, "can't set gpio %s: %d\n", hub->reset_gpio->dev->name,
++				ret);
++	}
++
  	ret = regulator_set_enable_if_allowed(hub->vdd, false);
  	if (ret)
  		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
-diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
-index 99c6649e4178..daf2240ffd92 100644
---- a/drivers/usb/Kconfig
-+++ b/drivers/usb/Kconfig
-@@ -112,6 +112,7 @@ config USB_KEYBOARD
- config USB_ONBOARD_HUB
- 	bool "Onboard USB hub support"
- 	depends on DM_USB
-+	select DEVRES
- 	---help---
- 	  Say Y here if you want to support discrete onboard USB hubs that
- 	  don't require an additional control bus for initialization, but
 
 -- 
 2.43.0
