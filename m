@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E7C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 13:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7343DC54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 13:35:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C9082103;
-	Mon, 26 May 2025 15:33:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF89382A8B;
+	Mon, 26 May 2025 15:35:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k45gkeDW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BSF5C7Ti";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35AAD829E4; Mon, 26 May 2025 15:33:42 +0200 (CEST)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
+ id 408F582CF8; Mon, 26 May 2025 15:35:26 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0BFC81FFC
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:33:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECD1C81FFC
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:35:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-87de47585acso1629602241.3
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 06:33:39 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2341e1fddb8so18154545ad.0
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 06:35:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748266418; x=1748871218; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jlnFbhZW1MUDQd2DBb7ghgJ7IEAHq+17ZAq2OQGFthE=;
- b=k45gkeDWxeAPZJ5g+c4QUix8YGkYzQD/cVUZWM+Db35Yhh2M0LRVlnkkO+owFPO9r/
- yf+vXKjmyDmtpsv5hdWJB8oKA68p1lf3PU3/F8TmwfsOOLEFSLJ/9puvF91J09JSvG2a
- Vvgx1Iaf2Koaq0zGIrHDonXW610NBoOOfev1Y=
+ d=konsulko.com; s=google; t=1748266522; x=1748871322; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a4RWG/8K3cQcrPIzqSDaHtu/4v7FygI+i6QVE9dVpK8=;
+ b=BSF5C7TiiUQy6JwOrsDSLSlOnJWtCJzHoMTVq807obeuHqpJ3tAzspvxPBb/masZ9T
+ X5jWw4HAg7+y2yP4kDt/3rf6+URx2dnkjuJeAtWEM4QWS2pUhypuUUCmbBOQA/9ws8Xu
+ iKUqPwX2xeI91PM+tMBAyzcrM4qL6cy/wMQV4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748266418; x=1748871218;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jlnFbhZW1MUDQd2DBb7ghgJ7IEAHq+17ZAq2OQGFthE=;
- b=NF6hfRUJ+uZ0HMR+uvdRI/wqGr3s8cyGOHMHaj1shLInmA0muUK0mgek7cMGf1wrsz
- erc4VXfUJa7rQHIzC0sK6pb+Xnz4YyYKdbtdL7jc6x0sWeccEF48PzTeEPj9Qid+hfaP
- IvKy5XVpuOfiaseit4K5ulr4QLcR0F67bUSe8Gul3OlkWbAKI0a5TNgBq54pqEDGA3PA
- TLo6sNsQrPoLsIoo9stQrypVsDw61rEpyOufKk9uVQqbhGyb82c2Qs17B21fEgkzrb0m
- 4CCbX2sZ8pTFmePbxOn/Dg2zrNrv1UW+jzTELuYc+AVykspFlBGgchBFCG8v57VAkJWW
- EMZw==
-X-Gm-Message-State: AOJu0Yzz3KoerdCfRutRoPZmvqe8qahp/LcawSWH/6xhCuYNAge8Hs63
- LDqcJIXY/MnXUCmETfncGyLEsshnGLXxsw/iLj3h8cCxgVv7cEVvrZpG0vdqVVamUmHx8ZTx2nJ
- iCcBQGqY=
-X-Gm-Gg: ASbGncvE+C6yFTnMb+i/m/wBYElTgZblnK3/aeGFFQjiGvwh9V6ZOmDsOU5YvKPl2MB
- NTdeXpYXD8q/bsCd0RPkuTOCES6a6YR6MktcbCCdYvU7qr+Pk69FygvOEnlJ6Cx8nCoBZ1g4llD
- FSQLoAAIKtSLvs+L1N2hG78wLXcOWTWXtC2GvYit7smjudXNRczHkpD1kxxVZhvFGsmXlRNQ7lU
- aPOf/U1YfeR8z3hsQOGPD2CVhlKLj/+/3IgHXwyFzQNNFwUbc9MdpbcQQmq/61qImuIAcCD5rJg
- 3GKXfgcrzV35VQlz+AQvxeWGlZ3XUx/9tnpMhXsyho6xfv1XkowoeG7ynapCvPpaxq9aqG47pKl
- mwtuLqhNoa7M=
-X-Google-Smtp-Source: AGHT+IEFUeh7YGse/HYg6Sh/9Cb19/EpH6s/1I14etDNmzNZQjLm27Y+DgtkFVd1IOzWBGiPkmJz3w==
-X-Received: by 2002:a05:6870:d626:b0:29e:2caf:8cc with SMTP id
- 586e51a60fabf-2e8620fadebmr4208576fac.37.1748266407880; 
- Mon, 26 May 2025 06:33:27 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1748266522; x=1748871322;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a4RWG/8K3cQcrPIzqSDaHtu/4v7FygI+i6QVE9dVpK8=;
+ b=GA3zvGuGGWY9RXZwVGIR1KuOym4WB5mvqv75JqVk4teWNW0JVOvS6c2LfQWyzZGkmo
+ j77SgzqjV7joVIqL1PtU6i/IhQ8AxWdWTyNpg3IhQIlaNo2K3YTU8ckUMYG/3BPR7d9V
+ iMFgUK14Xx1nPFsIDUn2rVL12Ydlzf5MM9ECz8Q8Fm+q6mu13SXLs7DMIdq2tmcOJhFw
+ UumuMGw/eLYPaEkjXmanzrlaR2Gxw0Wl7dFNx2CpMDqyYKVwJN7ggkhYxOd47Oa9reJ+
+ TgKgxlHD1wKVGB5rL7rrR/ERpUd3ge03I7on6KgVKasyv/PE316nrT5mirk48HpHeoiz
+ WChg==
+X-Gm-Message-State: AOJu0YwttCTWnwKyDKxK0VYriUkDAzdqU3leDHAdLW6HsvxYnDXcfriZ
+ W09icoBbsNTEE8B3lyEjTTEYg+ZiUV+/TdMxxYcIBjPJUkXWsfGVjm4I7N36jyyuWLr5f065cd2
+ 5lwl3lYE=
+X-Gm-Gg: ASbGncuLukO3ILe0DFQRS1cdAPHfvP6bFLPfGLbvO4HFAJGXV8QMQZ4cfEO6k9x8AIP
+ CWUzxL3JvNSvlx2enlPqKhQL8ys8kczJHW+AmtZckpgFB6opKRetqRicycC6Ee1Ur2o+fnAFCju
+ BBwZ2xrZExVX4DbKZcu4Evq4S+Wj3wb6Mk9CCyTykkUGIZ6H3bE1bKVeFXv9usConxILg1wfMQ5
+ utgdt3hVKOd9SNlvkx13LSmVsdNzVWBjL/l7Qo0GZHHJhQnUXAkEhjiQtJLErmNxTmCkXrsLjgI
+ SGyVyf8jDlovKeFzCEomC0r4m6t4ISTo0/NmNhp09YEU6Wxi8DNNdqMvgBObxMZiphStvNnlxoF
+ qYsMd0kFU12r7qxcH6DJy0LD3pQ==
+X-Google-Smtp-Source: AGHT+IHl7XpylrH4wJthl6Z0A8KzXkXng4A6bJV9y00nG5kInEoAsGhuqbmcQ87ZBVcWVO4b4Ip5XA==
+X-Received: by 2002:a05:6830:2aa7:b0:72b:8ec6:e533 with SMTP id
+ 46e09a7af769-7355d06b02amr5539515a34.7.1748266512288; 
+ Mon, 26 May 2025 06:35:12 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c0b21cccsm4873361fac.44.2025.05.26.06.33.26
+ 46e09a7af769-734fa986d42sm3881596a34.12.2025.05.26.06.35.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 May 2025 06:33:27 -0700 (PDT)
+ Mon, 26 May 2025 06:35:11 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
-Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
-In-Reply-To: <20250525224949.176427-1-marex@denx.de>
-References: <20250525224949.176427-1-marex@denx.de>
-Subject: Re: [PULL] u-boot-usb/master
-Message-Id: <174826640663.2688859.1573909720869409303.b4-ty@konsulko.com>
-Date: Mon, 26 May 2025 07:33:26 -0600
+To: u-boot@lists.denx.de
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: [PATCH] scripts/setlocalversion: sync with linux v6.15
+Date: Mon, 26 May 2025 07:35:10 -0600
+Message-ID: <20250526133510.2689220-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +92,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 May 2025 00:49:32 +0200, Marek Vasut wrote:
+The changes upstream since the last sync at commit 5c02350fa03d
+("scripts/setlocalversion: sync with linux v6.9") are
 
-> The following changes since commit df2ed552f0b05591090369a7fe7ddc92439dea5c:
-> 
->   ext4fs: Fix: Read outside partition error (2025-05-23 10:42:49 -0600)
-> 
-> are available in the Git repository at:
-> 
->   git://source.denx.de/u-boot-usb.git master
-> 
-> [...]
+e2ff1219a554 setlocalversion: add -e option
+523f3dbc187a setlocalversion: work around "git describe" performance
 
-Merged into u-boot/master, thanks!
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+---
+ scripts/setlocalversion | 58 +++++++++++++++++++++++++++++------------
+ 1 file changed, 42 insertions(+), 16 deletions(-)
 
+diff --git a/scripts/setlocalversion b/scripts/setlocalversion
+index dbe048210d6c..9ed3f56bebf9 100755
+--- a/scripts/setlocalversion
++++ b/scripts/setlocalversion
+@@ -10,6 +10,8 @@
+ #
+ #
+ 
++set -e
++
+ usage() {
+ 	echo "Usage: $0 [--no-local] [srctree]" >&2
+ 	exit 1
+@@ -30,6 +32,29 @@ if test $# -gt 0 -o ! -d "$srctree"; then
+ 	usage
+ fi
+ 
++try_tag() {
++	tag="$1"
++
++	# Is $tag an annotated tag?
++	if [ "$(git cat-file -t "$tag" 2> /dev/null)" != tag ]; then
++		 return
++	fi
++
++	# Is it an ancestor of HEAD, and if so, how many commits are in $tag..HEAD?
++	# shellcheck disable=SC2046 # word splitting is the point here
++	set -- $(git rev-list --count --left-right "$tag"...HEAD 2> /dev/null)
++
++	# $1 is 0 if and only if $tag is an ancestor of HEAD. Use
++	# string comparison, because $1 is empty if the 'git rev-list'
++	# command somehow failed.
++	if [ "$1" != 0 ]; then
++		return
++	fi
++
++	# $2 is the number of commits in the range $tag..HEAD, possibly 0.
++	count="$2"
++}
++
+ scm_version()
+ {
+ 	local short=false
+@@ -61,33 +86,33 @@ scm_version()
+ 	# stable kernel:    6.1.7      ->  v6.1.7
+ 	version_tag=v$(echo "${KERNELVERSION}" | sed -E 's/^([0-9]+\.[0-9]+)\.0(.*)$/\1\2/')
+ 
++	# try_tag initializes count if the tag is usable.
++	count=
++
+ 	# If a localversion* file exists, and the corresponding
+ 	# annotated tag exists and is an ancestor of HEAD, use
+ 	# it. This is the case in linux-next.
+-	tag=${file_localversion#-}
+-	desc=
+-	if [ -n "${tag}" ]; then
+-		desc=$(git describe --match=$tag 2>/dev/null)
++	if [ -n "${file_localversion#-}" ] ; then
++		try_tag "${file_localversion#-}"
+ 	fi
+ 
+ 	# Otherwise, if a localversion* file exists, and the tag
+ 	# obtained by appending it to the tag derived from
+ 	# KERNELVERSION exists and is an ancestor of HEAD, use
+ 	# it. This is e.g. the case in linux-rt.
+-	if [ -z "${desc}" ] && [ -n "${file_localversion}" ]; then
+-		tag="${version_tag}${file_localversion}"
+-		desc=$(git describe --match=$tag 2>/dev/null)
++	if [ -z "${count}" ] && [ -n "${file_localversion}" ]; then
++		try_tag "${version_tag}${file_localversion}"
+ 	fi
+ 
+ 	# Otherwise, default to the annotated tag derived from KERNELVERSION.
+-	if [ -z "${desc}" ]; then
+-		tag="${version_tag}"
+-		desc=$(git describe --match=$tag 2>/dev/null)
++	if [ -z "${count}" ]; then
++		try_tag "${version_tag}"
+ 	fi
+ 
+-	# If we are at the tagged commit, we ignore it because the version is
+-	# well-defined.
+-	if [ "${tag}" != "${desc}" ]; then
++	# If we are at the tagged commit, we ignore it because the
++	# version is well-defined. If none of the attempted tags exist
++	# or were usable, $count is still empty.
++	if [ -z "${count}" ] || [ "${count}" -gt 0 ]; then
+ 
+ 		# If only the short version is requested, don't bother
+ 		# running further git commands
+@@ -95,14 +120,15 @@ scm_version()
+ 			echo "+"
+ 			return
+ 		fi
++
+ 		# If we are past the tagged commit, we pretty print it.
+ 		# (like 6.1.0-14595-g292a089d78d3)
+-		if [ -n "${desc}" ]; then
+-			echo "${desc}" | awk -F- '{printf("-%05d", $(NF-1))}'
++		if [ -n "${count}" ]; then
++			printf "%s%05d" "-" "${count}"
+ 		fi
+ 
+ 		# Add -g and exactly 12 hex chars.
+-		printf '%s%s' -g "$(echo $head | cut -c1-12)"
++		printf '%s%.12s' -g "$head"
+ 	fi
+ 
+ 	if ${no_dirty}; then
 -- 
-Tom
-
+2.43.0
 
