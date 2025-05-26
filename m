@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AF8C54F30
-	for <u-boot@archiver.kernel.org>; Sun, 25 May 2025 23:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0472EC54FC6
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 03:33:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1A7D82B31;
-	Mon, 26 May 2025 01:02:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0359C82B2F;
+	Mon, 26 May 2025 05:33:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NI/altTh";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="bZGCg9G1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8878282B37; Mon, 26 May 2025 01:02:08 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 6A4F182B33; Mon, 26 May 2025 05:33:26 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D19182B19
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 01:02:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF1A382AF6
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 05:33:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-2d4f8c42f49so1459877fac.1
- for <u-boot@lists.denx.de>; Sun, 25 May 2025 16:02:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=mchitale@ventanamicro.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4774ce422easo15278301cf.1
+ for <u-boot@lists.denx.de>; Sun, 25 May 2025 20:33:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748214125; x=1748818925; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xseIWdahJF2J6SBdk7+Bf5Chd0iWv9/o0f/1QPGrd74=;
- b=NI/altThzsJt5YHnLx6P6GBzl666HF2ws2+CnRC4JDaWuEHjYfR3TwTTXG864Yazp+
- CnF0yTdt5O91hL2Rr3zrZxjzrfLfoVy3nWi9PxpNI+ve8+lM2hPMSmGG/dONOKjrXi4R
- YNa+tveFveyQ141l2Zt1gNRpw1VPNiTcHmor8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748214125; x=1748818925;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1748230402; x=1748835202; darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xseIWdahJF2J6SBdk7+Bf5Chd0iWv9/o0f/1QPGrd74=;
- b=vz2pIp1DEYT+KE+D1oZICi1ZCqOR29Go4wmmCu7IzXooOlxTo7cEQVZjNeFNo5yetH
- muN8wpOxx+lgG7thNoxBUH0QEHdDHPfe+2Q/KDqsijMc2OVFEnojTZVem0dTiFSb5gSj
- HQxK904TmKH+IPcSwRdiP6WVJZeln+bHkO4xVqU+OGauK0VcKtwd04Anb/kqX0njeyei
- 1egS6OQ0FuQV6zNceIzsMGoKo5cirll852k432en6TtY+74c4vrdM1/C7HMbkawyIsXf
- xxTKf5vC9mH+7SZC51LL8UivQtQ/gI/G+t87+bZf45kNaezqb6f74NBB6l7POZFdVgU6
- AfiA==
-X-Gm-Message-State: AOJu0YwqxbOdpv+iW7H0bF964ajeKdhzt5y2evq/bX5hbPxV5RO8+KOz
- j5TVnkfnh3ItxHNYeelZ8nIxO7IqwvGejGmpA7OqC42bfrU1VCeg7WcqZzVVdb3N3ws=
-X-Gm-Gg: ASbGncvL190TlWwtojmq0DjSj69mrWyCgzzB/agj9ardgRjuvPjK4rLEaTS+yq12KiN
- tViWsTAGZqclIsihBaqDMGKDvsZU5Qx9phbPHrOZJ0nJLayhp5gXSQVNrzyvw4bct4qbWDtnW+n
- CxqhqrX1FFbCGXfBh4pg9B9UVh/1xqVvh3uyXLh09u10lDceb42xzqon76hLzmWZwH2ByXbvTOZ
- EZ+GK1vdHSnR1+P8F0ZN/fwuRkfVIdaN1sCdHTYXpr+p84xJir8k53tn2RwC70TevY69CHOkgEN
- RryiJQ1nHq7lYFAtKjtMzHJBlwEmgadiml68eG76vcl3a1OKEL2Q7PaMR+apRvGGddfNTaGucjG
- LVBzKA/MYPMqXi3JeA7vXSgQ=
-X-Google-Smtp-Source: AGHT+IEaJsbq0iwsEX9Oyau5PZASjrLOKfar3Z2S+ZoqoTx11vivKnr8Sz+kO7Tc+9wybruSoVDLpA==
-X-Received: by 2002:a05:6870:e994:b0:2b8:b76f:1196 with SMTP id
- 586e51a60fabf-2e860b8762amr3637122fac.19.1748214124733; 
- Sun, 25 May 2025 16:02:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c0aa15f5sm4629751fac.39.2025.05.25.16.02.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 May 2025 16:02:03 -0700 (PDT)
-Date: Sun, 25 May 2025 17:02:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH 0/4] list.h/treewide: get rid of no-op prefetch()
-Message-ID: <20250525230201.GS100073@bill-the-cat>
-References: <20250507121246.518691-1-ravi@prevas.dk>
- <20250522165656.GB2179216@bill-the-cat> <87r00c3143.fsf@prevas.dk>
+ bh=cTKJNUu5WqJ5ogxMbSlbVJlDpdKF/2A2qhEdJ3YHbxQ=;
+ b=bZGCg9G1W4o69P8+HCUrg7wrZXV2oZFIH1i+CGfJ88T19pr6P8ajsxgwDNMPWcXhpU
+ sWZ8TSoNrFWysEQRzY5q7+vJkWg+eEviEWRD7bun7bpRSziWCSBN2fR2Yf4Z0saicecL
+ XiaRLZrRiiCiFhO2lnfDWz8iA2p2/eIPPA6Z/ExA6pds+Lix8o016QhfeGpPceXMpqZQ
+ dfiXWyA9wEszbvG137qM8nhg1Qh2ngz6cj6qpxi9TE++VoKJQJAHA1puGSWj5jIXUBrB
+ G4ecRirvTj8pSoMIIYCNnfyKlLVSL7cdoX2aRmVKoq20PUMEC6Cu3SXfDMRvryPRkQYM
+ JKpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748230402; x=1748835202;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cTKJNUu5WqJ5ogxMbSlbVJlDpdKF/2A2qhEdJ3YHbxQ=;
+ b=ej9lWZiWd16tO8ITp/itGfQRcha3NaHMSiVqvQ1jGdS80ESMPRYsiMenFAaVG0WnXS
+ BwBb6IqNswkWh9DMlf8Y+j84z1H2jD8vWYqL+0NLS3f8GEHHevNMU/d3MCDvW0pp9MAf
+ khnxYNh/ZDbFLwoYozhLewTmkPhm/CmAPDrxssLMwsSRFbV2u+LNkkrOdqAu4lRP0xSD
+ +iP+hVmRr4ben3TrT+TktEEqUR559GOHtFnEOOSFD9O3EyCXx11Rdjz2CNng55SbxQLP
+ IpAXRjO0mq33f8FSaAANwoRkH7VMlefetNA/v2ZpVY8kVXtd5ZjHjCGXhX6YICjIvTf0
+ B/nQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV0G04yauooF2cYoh4R2iiY6n/iwekTGHqFNxQ1y1wU0DyJ94Ex6QJKHujsTsghn1hAfEOb5Ps=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy69PJs4vsfRITnGdvb7UJk4uxxadflm553JXlfHcdb8+sbPP0A
+ 6Bq3qZ67CXmv6DjiD6CQoCV7mP/Dl9QQzL1i5ICPcU2xq1UistGSlX5cFp8fMyOyceY4RAGPlTA
+ GiQ1vdx5LmSH3R4ZgAG3HNuZbancHv3nBklXMH+Flog==
+X-Gm-Gg: ASbGncsFqAn8W+fXcaGXlHiM0iBwxyiCxqvFFtwOHdKyhlkv2HMjpPhgbqipwwUOp2V
+ m9xKx8fWDXj8+JHP70stlTGskY3gvMTRRSwGa5oXnGljsG5FXlb2MpLrHoR641/PFOz/HCQcC7t
+ uSKUhDKgqhF3CwkDb5sCR/udC2lw89YW9VBt9xEHqp0Vi2qSuBZGC87JhLFGztngeVIV2Z/MjOx
+ b7Org==
+X-Google-Smtp-Source: AGHT+IEpjEfdFhyNcUO1HMVOp4bGaYT3HdGo8QRsWZXYOCXhhA6aYixusIsorFqLR97VyMwYyCIeOTW+NoW1ahQY/Xk=
+X-Received: by 2002:a05:622a:1bac:b0:48a:bbd7:19c2 with SMTP id
+ d75a77b69052e-49f4674da89mr126684461cf.15.1748230402531; Sun, 25 May 2025
+ 20:33:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h5jPE2NKhDzN2p8W"
-Content-Disposition: inline
-In-Reply-To: <87r00c3143.fsf@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <aC2hyzxwKzO4k1im@swlinux02>
+ <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
+ <20250522-eradicate-clip-538f48710ad7@spud> <aC9TmaY7w2PL8lbn@pie.lan>
+In-Reply-To: <aC9TmaY7w2PL8lbn@pie.lan>
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Mon, 26 May 2025 09:02:46 +0530
+X-Gm-Features: AX0GCFskqcI9uAUbQrZAcAG1wS0cZR4EAQ3VrGM_tOauGTzg1V-my2Yg7kv4cqM
+Message-ID: <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
+Subject: Re: [GIT PULL] u-boot-riscv/master
+To: Yao Zi <ziyao@disroot.org>
+Cc: Conor Dooley <conor@kernel.org>, Tom Rini <trini@konsulko.com>, 
+ Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,83 +97,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---h5jPE2NKhDzN2p8W
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sun, May 25, 2025 at 10:07:56PM +0200, Rasmus Villemoes wrote:
-> On Thu, May 22 2025, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Wed, May 07, 2025 at 02:12:42PM +0200, Rasmus Villemoes wrote:
+On Thu, May 22, 2025 at 10:11=E2=80=AFPM Yao Zi <ziyao@disroot.org> wrote:
+>
+> On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
+> > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
+> > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
+> > >
+> > > > The following changes since commit a3e09b24ffd4429909604f1b28455b44=
+306edbaa:
+> > > >
+> > > >   Merge tag 'mmc-2025-05-20' of https://source.denx.de/u-boot/custo=
+dians/u-boot-mmc (2025-05-20 08:35:31 -0600)
+> > > >
+> > > > are available in the Git repository at:
+> > > >
+> > > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
+> > > >
+> > > > [...]
+> > >
+> > > Merged into u-boot/master, thanks!
 > >
-> >> While looking through list.h, I saw that the regular list_* helpers
-> >> (and one of the hlist_* ones) still contain the prefetch() that was
-> >> removed in linux 14 years ago. It doesn't do anything, but makes the
-> >> macros harder to read, so get rid of it, and the fallback, no-op
-> >> definition that they relied on. That requires removing a few uses
-> >> outside list.h as well.
-> >>=20
-> >> checkpatch warns about some whitespace issues in list.h, but as I've
-> >> copied whole kerneldoc+#define blocks directly from the linux kernel,
-> >> I think it's better to just accept that so that we don't introduce
-> >> needless diffs. The "macro argument reuse" arguments should also be
-> >> ignored, as e.g. the "member" arguments are obviously always just bare
-> >> identifiers, and the "pos" arguments must be assigned to multiple
-> >> times.
-> >>=20
-> >> Rasmus Villemoes (4):
-> >>   linux/list.h: drop use of prefetch()
-> >>   treewide: drop no-op prefetch() calls
-> >>   mips: drop unused prefetch code and logic
-> >>   linux/list.h: drop fallback definition of prefetch()
-> >>=20
-> >>  arch/mips/include/asm/processor.h |  16 -----
-> >>  drivers/net/mvpp2.c               |   1 -
-> >>  drivers/net/octeontx/nicvf_main.c |   2 -
-> >>  drivers/usb/gadget/at91_udc.c     |   1 -
-> >>  drivers/usb/musb-new/musb_core.c  |   2 -
-> >>  include/linux/list.h              | 104 +++++++++++++++++-------------
-> >>  6 files changed, 59 insertions(+), 67 deletions(-)
+> > This PR seems to have made my CI blow up, and I'm not entirely sure if
+> > that's something intentional or not. I've not yet bisected, but since
+> > the error is "Image arch not compatible with host arch", I can only
+> > imagine the patch in question is:
+> > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV64
+> > | Date: Fri,  4 Apr 2025 14:48:55 +0000       [thread overview]
+> > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com> (raw)
+> > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
+> > |
+> > | Similar to ARM and X86, introduce a new image type which allows u-boo=
+t
+> > | to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
+> > |
+> > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
+> > | ---
+> > |  boot/image.c    | 3 ++-
+> > |  include/image.h | 3 ++-
+> > |  2 files changed, 4 insertions(+), 2 deletions(-)
+> > |
+> > | diff --git a/boot/image.c b/boot/image.c
+> > | index 139c5bd035a..45299a7dc33 100644
+> > | --- a/boot/image.c
+> > | +++ b/boot/image.c
+> > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
+> > |     {       IH_ARCH_ARC,            "arc",          "ARC",          }=
+,
+> > |     {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_64",   }=
+,
+> > |     {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",       }=
+,
+> > | -   {       IH_ARCH_RISCV,          "riscv",        "RISC-V",       }=
+,
+> > | +   {       IH_ARCH_RISCV,          "riscv",        "RISC-V 32 Bit",}=
+,
+> > | +   {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 64 Bit",}=
+,
+> > |     {       -1,                     "",             "",             }=
+,
+> > |  };
+> > |
+> > | diff --git a/include/image.h b/include/image.h
+> > | index 07912606f33..411bfcd0877 100644
+> > | --- a/include/image.h
+> > | +++ b/include/image.h
+> > | @@ -138,7 +138,8 @@ enum {
+> > |     IH_ARCH_ARC,                    /* Synopsys DesignWare ARC */
+> > |     IH_ARCH_X86_64,                 /* AMD x86_64, Intel and Via */
+> > |     IH_ARCH_XTENSA,                 /* Xtensa       */
+> > | -   IH_ARCH_RISCV,                  /* RISC-V */
+> > | +   IH_ARCH_RISCV,                  /* RISC-V 32 bit*/
+> > | +   IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
+> > |
+> > |     IH_ARCH_COUNT,
+> > |  };
+> > | --
+> > | 2.43.0
+> > |
+> > since it is changing the existing "riscv" image type to be the 32-bit
+> > image and requiring the new entry for 64-bit. My CI job uses the system
+> > mkimage to create the image that U-Boot is loading, so it doesn't know
+> > about the new define etc. Maybe it's not considered a problem if a new
+> > U-Boot cannot boot an old image, but the comment above the enum reads:
+> > |/*
+> > | * CPU Architecture Codes (supported by Linux)
+> > | *
+> > | * The following are exposed to uImage header.
+> > | * New IDs *MUST* be appended at the end of the list and *NEVER*
+> > | * inserted for backward compatibility.
+> > | */
+> > The overwhelming majority of existing supported boards in U-Boot are
+> > 64-bit platforms, and the 64-bit platforms are the ones that have been
+> > supported for longer, so my thought would be that the compatibility of
+> > 64-bit platforms should be prioritised over 32-bit? Or even add explici=
+t
+> > 32-bit and 64-bit entries and the existing one is a catch-all for
+> > compatibility reasons?
+>
+> I've mentioned entries with bitwidth explicitly specified in my previous
+> reply (and there hasn't been any response).
+>
+> > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying 32bit
+> > when no suffix attached. We (and the Linux kernel) mix 32-bit and 64-bi=
+t
+> > variants of RISC-V together, thus it's hard to tell the exact bitwidth
+> > of "IH_ARCH_RISCV" without inspecting the code around. To me, it sounds
+> > more like "RISC-V, but no bitwidth specified".
 > >
-> > Unfortunately this leads to build problems on lots of platforms:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1141951
->=20
-> :( so we've been relying on that prefetch() laundering away the
-> volatile.
->=20
-> Which really begs the question: Why, exactly, is it that gd even has
-> that volatile qualifier in the first place?=20
+> > It will be nice if we could avoid this kind of ambiguity.
+>
+> (referring my own reply[1])
+>
+> I'll second explicit 32-bit and 64-bit entries, and keeping
+> IH_ARCH_RISCV for compatibility consideration.
+>
+Are you suggesting something like this :
 
-The answer is likely early 2000s GCC.
+{ IH_ARCH_RISCV, "riscv", "RISC-V",},
+{ IH_ARCH_RISCV32, "riscv32", "RISC-V 32 Bit",},
+{ IH_ARCH_RISCV64, "riscv64", "RISC-V 64 Bit",},
 
-> I'm 98% certain that we could drop that and get better code generation
-> and avoid a ton of places where we cast away that volatile which
-> shouldn't really be there anyway.
-
-It would be a good thing to experiment with now and maybe try for real
-in a near-future merge window.
-
---=20
-Tom
-
---h5jPE2NKhDzN2p8W
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmgzoWkACgkQFHw5/5Y0
-tyxyPgv8CmU/dbHwFTpg7kSaWav/8PGtwakZw+YiVeezC2clGm+D1WU3XPTTwcle
-wYEvkVle2VJ6lbmeDBQ2iPlsZQi6WfqLD3DDL4kRPPewisKqDrBoj9QLZyFj3Bqb
-i4D2P0hKMTR2kRz/1kxerxKdJkNpyC3+B5rREHawQG6OhUuCfPhX2NR4AQd8CFz5
-PgsZG5TecYzVqhbjMrUwgAOqgatRcx8gdl3okwlSUQTlehBb/QHlCVRvwxrrRWhg
-xM6qUDrDp6kQyQnWKZ+1wsjSb4ZBy33HlnCQvGbusyV6GPFPoQ2JK85klP7o5zMl
-7N5P+/3WX9UeYOseEoPFCj/I9m3SzOu/C0DSFtYCvH/vUSFWmOCLQYPUpjVpp9fy
-FUNOY/yTZ3OO6LW39I/+XTQNl4NvMuTROHo7Lwld3yRJK5SdvPQe2W12sCGgGE9M
-lBGfFrX3ZTZKKic7TfMntsE9+JQ09iUGoiOAIVOBFnUdQwwNS/Bq758pPWvYM1kB
-ppVBSzJF
-=UVys
------END PGP SIGNATURE-----
-
---h5jPE2NKhDzN2p8W--
+I tried to implement it like on ARM64. However the problem is that
+while on ARM64 it switches to aarch32 if it encounters an IH_ARCH_ARM
+kernel image, there is no equivalent mechanism for Risc-V yet. Another
+option could be to disable this check in the bootm flow for now until
+a similar mechanism is implemented on Risc-V.
+> >
+> > Hopefully my lack of bisection isn't causing me to blame something
+> > incorrect, but I'll go try to replicate now :)
+>
+> Regards,
+> Yao Zi
+>
+> [1]: https://lore.kernel.org/u-boot/Z_CjTyXaVrpUOPnJ@pie.lan/
