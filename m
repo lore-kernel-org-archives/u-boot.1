@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53D5C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:04:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5D5C5AD49
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 18:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B53982F50;
-	Mon, 26 May 2025 20:03:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 78C9A82F10;
+	Mon, 26 May 2025 20:03:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="qQWPyfBj";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Fs2uC9u1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3623382F50; Mon, 26 May 2025 20:03:54 +0200 (CEST)
+ id 2C05882F87; Mon, 26 May 2025 20:03:57 +0200 (CEST)
 Received: from SN4PR2101CU001.outbound.protection.outlook.com
  (mail-southcentralusazlp170120001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F006882E37
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:03:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B6BB82F10
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 20:03:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RfoWzlekWVG4Jc6HhgNxUHkECCLSejgHFaTOa041t9FRtUxQ5c5YXokjJlFTHC3ZrsPobVW0ry+6Zitht/qfmYaxWRnuGX30WXM9rlbxmMn3y1U+dIy+7ly3SpYamP13GfVI9kZnpbVaDncXkwSQgQLmEBFgfgfj2t3dCU6eWw9BY5hou/N5iiohr/KH1DsItCjeL+sMlAB1R7nqQESQW0QTrH3ID45smI+cgubomIVJXe7rKMESptJ5C2+LI58zJLTNmZOXBe/rEiee0zLaFwyt+SmsDcouQla5QxmGDb30p+1p2yXpLgckVog3letOF9S8cI3fCncuM+onEkvpvg==
+ b=tzg1Hh5FcIw26VW1UrPslAEPsAWQ+2TTLvfTYn2wEWxZ2tM0EQ/Hs0B13VAtLwMhnERmGK6Pz4uWjupp3CH7bGox62A4O05FJx88YFJ8TYTSxU1/s9tIF297R8vYm62NPUea8R4TqwKRu2W8u0s9r/ve4uUEltPyF0AWvq0MG0DhSDQtcgz2kT9XWWN9XWYv8R1KTe2FaXTnNYtQrs1010kFhXhKYGgu8Om/wqtAiJDZQ7bt+L/gBqWV5FWwPf0b5H/J5gpMUv4L3zZwNVm2lJgW1ERZFlGTnQBLhiBtJkTIsciOsftSnbcoIJLxTFVD96OiXQAKwoGvE3sJzuM0Ow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B1G1HOcGh4StUS0Ow1goluQa4AX2c+YqvhRv/KsRbhw=;
- b=djW7WKyryTM0u32Xz03E7df93kyODexaAEJ06efq0JlMGxbwO/z9QoP/XNmsfnYd1Vlw44LMnQKiPHTr0rmznDqq+ejTeuSmhlUQKBU52NC4N7pDEnyTcPYf8QyWaPTSSc970VpyYh3lq/tCe2OzfIPN85Wcp1ktcMSyxE2YRUtQYIYwYLGgjLlYAEHTdqxOrI2djSCbuv1VjX1XKfxoqLK9E8Iiv1veI3/QGqBAxyktQ8o9J8sGCzI/mDQS1aIgH3vV3GBT2o0dnRk2oIIoOf05n6E0qvlT5+e2EwAOs4YeESi6HCRBHym3en83r7pbjunqNHlTW2sll6cVyBn5Rw==
+ bh=rg1FkHFkFiJ7O0Evdr65LFSJEw+3L70bpcgCX+GmTmg=;
+ b=uhGBpjqq9VtMiNM+2dWgPyscvHTQTTWoXxJ5ZGujkAVfYzOME3g1oKomD9sN84Uc3so+knxrxc69eeWCuCYglsb4yZu92DqXqUMAzxP7+qJydKyIbCcZl7GMmjvHoIJQS53id6tw57zXjzOkX6cqud2Kaea41NSh7owtSWyfA8KnTckz41COf7dd4BEshfdT8mExqusvASBZp2yS7HH6MII2v4trBrzGsZwiO/yygnIf5ZwdxDdKYwuGMgjKzDG752BghJmHKU7OSDLbJtyzYLRvRxS2Jx9NY3FPWh1hvyQzaDIJ+c4jWA//0nQY708m26eYpOzvNl02T65ymbrchA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B1G1HOcGh4StUS0Ow1goluQa4AX2c+YqvhRv/KsRbhw=;
- b=qQWPyfBjVlMcsVvNmUL+EHRIZkBV9eNtq/cAq5qzkLcKPIdfsrwoS8t8/Bcfck+X05eaY/qLnakgr+jaWK9aOIO+lnu4Mqqm3leFeYhxxKtajQygdB0TpAcSk6HKrh5ebTe1yk0Arby7yIXnNFU7y09CsAscuBs+YV1iOec9CM4Tzd/APSN3ej38r/At3JXIi2lZ9QvZWiZFFoVfRqWxmJaEjup6RSUor+LQYIIYDy973qdulGUgI4LbbEH6ghFMCnuPefiBijede7d21O94E5wURXFqNi5VO7flubXAX80amO6rLKal1P9Sbu4hSxgiR7OmD1bY9XYeqdKuyqBg3w==
+ bh=rg1FkHFkFiJ7O0Evdr65LFSJEw+3L70bpcgCX+GmTmg=;
+ b=Fs2uC9u1sPcjaEli8NISKd1LiyBE98Ava+WpNlCTG9WnuQOaX5oyd3g2oFG28W7o/+6aqvW1egOYpV0GiCGUzFwuuCyJUQz16odDQwfGdf1RyPPmtr+xoDr1EYCCADyJ29Dl6+gi0Q9/V6HlYTwu5WdLjQfOiCTnBci/GEdexY78PGZhgCu5OZJAdiYmi/s6Sll/aY6DaIRLTyEnmmLU3C6nbxWS/M1wVP8XZnpgF2dYGnM9R8zQZ3mAXFeNoIO788R3ID4+uQSzWddCnwnO5rBXO5t8F72oS14IpSs//IO5QhpZLsGPnldHlVPapFR6xmv++KzFIdx4RokiMoT0Fg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from BYAPR03MB4646.namprd03.prod.outlook.com (2603:10b6:a03:133::26)
  by MW4PR03MB6379.namprd03.prod.outlook.com (2603:10b6:303:11e::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Mon, 26 May
- 2025 18:03:49 +0000
+ 2025 18:03:52 +0000
 Received: from BYAPR03MB4646.namprd03.prod.outlook.com
  ([fe80::8919:e2df:10df:51ce]) by BYAPR03MB4646.namprd03.prod.outlook.com
  ([fe80::8919:e2df:10df:51ce%4]) with mapi id 15.20.8769.022; Mon, 26 May 2025
- 18:03:49 +0000
+ 18:03:52 +0000
 From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
  Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
-Subject: [PATCH v2 4/6] drivers: ddr: altera: Clean common code for SoC32
- devices
-Date: Mon, 26 May 2025 11:03:26 -0700
-Message-Id: <20250526180328.13644-5-nareshkumar.ravulapalli@altera.com>
+Subject: [PATCH v2 5/6] drivers: ddr: altera: Correct code alignment in sdram
+ file
+Date: Mon, 26 May 2025 11:03:27 -0700
+Message-Id: <20250526180328.13644-6-nareshkumar.ravulapalli@altera.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20250526180328.13644-1-nareshkumar.ravulapalli@altera.com>
 References: <20250526180328.13644-1-nareshkumar.ravulapalli@altera.com>
@@ -74,76 +74,77 @@ X-ClientProxiedBy: SJ0PR13CA0057.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BYAPR03MB4646:EE_|MW4PR03MB6379:EE_
-X-MS-Office365-Filtering-Correlation-Id: 777547c5-bb89-4a64-95dc-08dd9c7faaa1
+X-MS-Office365-Filtering-Correlation-Id: e5286873-3b23-4a55-9ad8-08dd9c7fac71
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|1800799024|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9bBhrbdbTLwRQqkuSGh6rJn/w5iXyfSaFIBvWecy+Y7OYIXoUtBehprKNEyb?=
- =?us-ascii?Q?h+aBsXoiHm6t1PFsHRdabOJtBDCFvEJ3XDspGYkbqDt1WEfBIOvW6CI5EjOL?=
- =?us-ascii?Q?xcfGsEqgi3jX8eJSEgwGXRBLcLpNVjU6LCDIZXmiwQqeFdOBmtcx7qjH+Nhz?=
- =?us-ascii?Q?fJLw+woS+/iWn7TKfPTLgJCirUKh7zFEYDzCfmEiwqSKz1aOJ6l3bGFNizHk?=
- =?us-ascii?Q?nLXcvbgMLYoIamCe3cOeAVdQLuhWLH+KjVZ+AHaX7NFhmUL0hynuUyo7FRyI?=
- =?us-ascii?Q?d0/PY1HqWNKYJXAscmmcKLM6jXU6HHqDtYDJA6zk1YtyepqBytpfLmqEsawI?=
- =?us-ascii?Q?7h7jGQ6XXUMGlzrIRjbUomnJ5x/SVaQCDsMwU1N5FMV7sqHgsb2cQLoM86Ux?=
- =?us-ascii?Q?4apSlUshv8B+s7O+lNCPh7uJAXwl/0UunYqHUF4fqmJ3v475LTTOPLhWSpgf?=
- =?us-ascii?Q?EPfV4TdbHs1lXGu2eIKreHzRReLMBznyyyRZrbgkUCvGNNv+UmEJpkcjIOc7?=
- =?us-ascii?Q?nk0jQpJIPlAABr+2HScbl9Uh8sJe0xuxylXj/EyAzUwUxKUJm8eSPIwgs8xX?=
- =?us-ascii?Q?OKuOzuhc4B5/RJDu5QvJ1c9dnl3kQGFK1YKERtK6Hmc6fokJgVet0AN7yU3W?=
- =?us-ascii?Q?EIkf3lS1ZPkj+zYmFKj0p+M3gcboYfQ8DGvrQxZWqS62Us02Bh5h0UxLjU8t?=
- =?us-ascii?Q?4mNJofbnKX4sWmknrkmVZ0GAZGFGz8H7VitLMgjVChb/smYBVDuFSThuwPgg?=
- =?us-ascii?Q?bZTroa9Vrl6GWZ2Pc0bk7vNN+YZN4y6ZWVsM/XJCwjSYSiq8ZyUbit7tJW7i?=
- =?us-ascii?Q?X2X7OtQ647V3XlYPXL7TpXiOiT4VcJhKaEg1Deznenj+7OjVzoXVYwFuvHLz?=
- =?us-ascii?Q?EA//MwmdDe2yH7G6GqO90ivcRTVwZ9vov24+Lece9ubFNSasBndkNYYxEpqi?=
- =?us-ascii?Q?IQDia4KdSI1h8CvA0feCXy1Xuv292DLnsr0ML4XgtbnBcpk6/5MRVI7wQ2Pr?=
- =?us-ascii?Q?ZvQEeFqEuHJWEx0VHt3RwP4LT15VB+RQr78oSNVWB0ZUMjWGSUDVr9EMltjK?=
- =?us-ascii?Q?cS4Zq9glYeVQaguUR232DUucpDjveBQFDb0C0oMfeiTJzTt46DDj9XEddGxa?=
- =?us-ascii?Q?DcG6tC6Zg2eyyadoU4IiLwOPtLyW9HWTfQjTp3uLls3SmYXg8o/VKNbXyDY3?=
- =?us-ascii?Q?ayfLsltb4vugWdTvGlgGF9x9GlJ6SwaPw/GkQE2N5JCKYIrGRPkEGHXeOiSl?=
- =?us-ascii?Q?WyDFt48ghUam1ryB5TwWD5kVLINBsSRwXOhhj8rcmhZ44RiD6JuLwRb9D8ta?=
- =?us-ascii?Q?HjTaztSzfPrVgp7zn0uRjrsWteLYoILHXOmN5l8XucFPIMURfkPpkDzFoLwZ?=
- =?us-ascii?Q?Z+wA+5c=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?sOHAm7zqHVOcTa4p8+/e9f5wPgiv8y4gSbp1HAn/JbBqAihCs49OmYvzPcO/?=
+ =?us-ascii?Q?zhnEOv7RRSFKRrRjyo1VGTH72WgCJBH/WjaS9Q9Gd2p0v+Nrl/xIs2t2Xfma?=
+ =?us-ascii?Q?8O02Jv8/pwg6Iu/suwjyk9SxZQFCZHOPoej9bMVQIs3cA5J7nIpauRsByB4g?=
+ =?us-ascii?Q?5OUdSqm2yscJVBNQSfpjt7X0ztIX2zhxBV9pVXof6CqIH6+DTCpxdXaw5FZ6?=
+ =?us-ascii?Q?j2dtHeLJxrmPUekYvDqEnpRgprpQFXr2uOtte19+EeM/Y9+eBxpyphpYvYlT?=
+ =?us-ascii?Q?ffqiCNNCYxiWqqmMmY68VeqHidz48+5Yv5hPoRIILlLwKPoLgTj3woR2nLhi?=
+ =?us-ascii?Q?pFGa0G9xp669bEaAY0NnwlNxmAzgoouvjEb9DqNF0t35PdJg8iMgaczEooIx?=
+ =?us-ascii?Q?LPuxN01PDMRehy9cXhV+AzQZCg5WAheUTztE7bxpK7OxUz2ZykUzF1wld70/?=
+ =?us-ascii?Q?1eFXaLUEVGZPGmlsUb6c3BUI18+wrodOgWIiOn7rhU8Xgro9i6Cb5LUlf9UH?=
+ =?us-ascii?Q?OgZa4vZ1h8fdhoTpO/WvualyjvFI1E3dQkBErtp9TMfgeYVk15JV+moh1Mvf?=
+ =?us-ascii?Q?oUKbiVuIq2GK/Q0wNqQczdzeCbX3ca0u384E3STlK5L0gI9G8ihQc5B76Aat?=
+ =?us-ascii?Q?Zpd48XvWjbBixkUxST8iDZQP266rPxhriu2qJ4+h2FA8k0DLqlKhPTO9AR7K?=
+ =?us-ascii?Q?f/PAR4pB/rxK+oQnEuumTUaEzRFN4Ynbq6H42UmM9Pwtj9pFDza0FbaSIPgl?=
+ =?us-ascii?Q?U7afSl69m+1Taw4JPztnkzwPos66gZUTI2rqDGemGiWbL2PN5WQ3BF30iAlR?=
+ =?us-ascii?Q?yo6W4NVRS8fDVTvEvpjKWzTZWUZsEuTwHN3nypWMCzQVmGLN4t9YP8ytFBlk?=
+ =?us-ascii?Q?sJ5utC36YzEMMYkgf/LlEeflAPGzRLrhQQ42zwUfL0BhqSPtMYdGI3OMIT1R?=
+ =?us-ascii?Q?fxKxwyS919CEIEdZ4vNCSgPkEw5V3+M7xYvAqJdyh//6BAb9uAQhCAmCSs8K?=
+ =?us-ascii?Q?nY4BvqYWat0fOfhG05MkY/zpO25Uir13btfYBFJatpJkIk+zlGDifN2/ssAU?=
+ =?us-ascii?Q?B7kPtwoWXSzJ+L+rT6CEkQYSz8LjKd9w7oGs5uwczwVZ0T48AaB/N39rOr6A?=
+ =?us-ascii?Q?AHDZJphuD7UN+UjSvMmeHT9L2up2IhZ0Lq18Et2rRa/QKt6QJYsDhuyIy4Oi?=
+ =?us-ascii?Q?A8P8r8L3WEd3nhHP9FDB2nY4m//WeuSsy51lQs7UddhIDl7s/mjf3ws6AVLc?=
+ =?us-ascii?Q?tfCpRAkbeATUe9Z7+981tfwAryZs97qpBaCmQGiC55SWDo28hfQMhfd/cpn5?=
+ =?us-ascii?Q?e56PMIyuuxLQZKY6ahG/LK9nM2r3y2OQqVgEMId5Lq3at6b8R+dBSggSPzYM?=
+ =?us-ascii?Q?rpMTc3BmSSUnVBunOZhL8Q6V6tfmerOHbn+NAs336LLSlcErl0pIufCm1r2h?=
+ =?us-ascii?Q?klE+pKc4GwA=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR03MB4646.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(13003099007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?HuvKLaFqqgn3oEu2XEyxM9OS3jq+5UwEg1A3nvoZOOfdzJZ6kR1V1nBcJSrO?=
- =?us-ascii?Q?1N5JH5WNbaOYOdCbXNgXjBaIMEcdthi81WZAz66AoDcQmn4epbhEmMqSSt93?=
- =?us-ascii?Q?ehOEU9TualOpU5jHZNp8Uu9C4w0gYfveWkr3mAcBZ5LzNpNaDRQVuvhm3E+4?=
- =?us-ascii?Q?JQ4J2SSnzKMJ5DzJeV6rLHnrUuoaIJtwVXm1yEDfCcB63reSXm1RkPxwHd4L?=
- =?us-ascii?Q?tfbxF9DX1TE9zD2kUngS+Im4FE1BZcYea9OHAaNVFZvm/RZJuIY2ePwzc/Hx?=
- =?us-ascii?Q?4kJqlFytow8D63E3K0HsSnPwEVY9SyKA70qAAdcuF1uKc/ZdqQHjF8UcWcrZ?=
- =?us-ascii?Q?WvQeFkKjKljY1jBAvu7OtsyOnD+6Xt7nLZpZwUhdQgBZf1qUGiSDk/k2vAQs?=
- =?us-ascii?Q?jlqIUQUXYdoaNzek58cUUvX8r/TYv8jHUDSeN0iAPBeitKv+7fvDxIZkqaoH?=
- =?us-ascii?Q?UNB0wmoQLDSbh6gJ3N73NwtyjP07LjIEqzYauPdp7mVvTWTUuyBvdrIB65l4?=
- =?us-ascii?Q?1C1caBF2tI+XaQuwdbK3NPLA0Oa6gk5jtC+EyjECRTP/5/VkeRiTCS3OwRvm?=
- =?us-ascii?Q?4tvCaGJQqMuDr09jfruehCuUAKUlZdBjOY2vBDp2p7MEeS5+DX5saTCY3bM8?=
- =?us-ascii?Q?ZxX2fAvi9Pm5MEIBRyrrv9dOCuh9vmEhsGdv3XP7CQPxW7ayWZzYOKFrRjaa?=
- =?us-ascii?Q?uO4OmvTnnv4Q/A7SDH0X1iQvFrN2NYc/17JAVf1LTwp39atwjmuRvJ7ftzeH?=
- =?us-ascii?Q?4xydKkHL1VtYjwTctchE2/X9wDMC9CJH48e5c10ku2Wi/ZhAwWqEHh9jiXkW?=
- =?us-ascii?Q?3lAxqrx9SCNLBoA1O2n4rwVBc+1s794tNXTFGbqkBF/+9m5CE/zsLdFi6liG?=
- =?us-ascii?Q?DO1OzmDAOaRfrDEPyUQIL4LRqtdKy1hjPXKFpuwTeyk7StgRyBY6EdMi71XE?=
- =?us-ascii?Q?Wd1d/JOrqDilVYxtMNQoOYY9/YxEEAtiOkq/EVs+qJu+gvrEXzIeuU3x5iBb?=
- =?us-ascii?Q?jzpARAc2yJqHGTDMlzCTMpHEx6F+Z/EKK1Sf/zH/nSxyNPuI0AhJ70/3In5M?=
- =?us-ascii?Q?q6UuDhx2LeOPYtrCPmdsw2oR53H8n1wBV0lHS+Lp1jHtPtqlo8ZenApq2ix0?=
- =?us-ascii?Q?UyfLbAXer5WtdczpndUKimufdg/T6Cn1KS5ybn+HCToIvNe93cRX+WF83Ah/?=
- =?us-ascii?Q?uz/UWCkm7Dtw15ytC6HkqfmnNQLQdYZ1EfJwXsp4OjCEKB4EPjn3A3tatw0t?=
- =?us-ascii?Q?n4hJZTeDS8cTZBsC3MhPUAizCqL6GGfC23/y4XMMY/QNgJYe8r4F04+kctB/?=
- =?us-ascii?Q?NFcCN/kk7UeNW49J8hcNIVDsXa6RM1l2wQe4Eaca1TY8o9mSe2x6Koi6wC9S?=
- =?us-ascii?Q?SvQa3ypmE2rPN0i5mUVTgL3b8feSRf99+Mk+drwp6QyZp0ZTqyDTqCt0+6Qj?=
- =?us-ascii?Q?Cp7l6/zDGpdwNe7e1ikf3Wuvel5+VqdYsXT7WFhov7c7T0vtfFm7jjqQl1sU?=
- =?us-ascii?Q?ElqPaRvl8S02GmI4ekqft5dNkJ5bulAelP/lV+kIKVsGzXDUyT8ZsqPhSGCj?=
- =?us-ascii?Q?A4aNX2J6Oj9atW8pDIBE6gSqHNKWlJAQo0CieQ2wZk1Cc1iRV+6oOSC8qYTc?=
- =?us-ascii?Q?+Py9qmdrGIXHeNjujyZJ+eA=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yZK8LhUwG0YaUSd7e29UrlYdgRw4TRSihdQ/uFb/E2PIVhSruKCPbbuNxbSS?=
+ =?us-ascii?Q?TAmSbX6FlP9Vrd6j2mJdYEHGYCSXHJB6Y46XXtOd6vpJhl8ZqDO/UNsr0r06?=
+ =?us-ascii?Q?U6b5khaWk96s7HGD2MUUrx4GAUvmhTa56rUiqv4VGEkogqChUMTtFZzE+D0p?=
+ =?us-ascii?Q?Ppsh8EIQdFwglI9EtZ7kOOthUJ3zFuAGiO3aPWti0Sco0mrqeQKZBszkJ5vE?=
+ =?us-ascii?Q?ui0EbKv7ek5+UjahXlQZF90fjq61ENAYEJsFG8b8hqAhtAhBwmsj4q5/lm7h?=
+ =?us-ascii?Q?u98mc5hXbaIA9U5NS5Rg/jgcObYNxjByEQ/LLk5dXMDYsHQ5lY/yhuU4jQPo?=
+ =?us-ascii?Q?Du4wB8njw+YSKx6AcKXXoZLVex//HKc50KkIQIxfIZ4bmZbw1S3XofAb+Vta?=
+ =?us-ascii?Q?NP2348TBziYYiC7COnrAdxCfSxN0/XKwW6dfSOC321NuOdNawlzOLUVx3MdP?=
+ =?us-ascii?Q?fbVeF/aoYBoZ8AW+351AoUI/jL2u3gNfghR3RDdhO0/IDb7E44aYAJvFCFPV?=
+ =?us-ascii?Q?2QKECN6x0aSBm1TdohV8NObl/6xdXDJm34NE8LXXjOD2NsGutHmApObVDKDt?=
+ =?us-ascii?Q?F1UBFGmrL+hLNzYoCeIj7rAe5GoYwL7a8hFFZX0hoCrpgW9Gj8grqGfrZ2Wg?=
+ =?us-ascii?Q?gU7FX+GDIn0YX1AhLMdyhkSzk1P9cekS59494492zg5a0NAEMV9H7KHW6N8l?=
+ =?us-ascii?Q?naqTs2Ky42IQ067aWbW7PeM/lsVl9+MnLiioTwCst/DgR+lTP03URlJV7dyX?=
+ =?us-ascii?Q?5KC8pJ+cuxrPDyuV0yUZBtAqV7w399CDr8cB+f6xH8DhAbNB9GExl6Oaq6LR?=
+ =?us-ascii?Q?c39+znwgnAsGOm6ixmdQzrwVPR6UOvr2QspC5TRJa0bKnrzp6rZeJIwU7aW8?=
+ =?us-ascii?Q?ZGgVOYh8/ELDHapt8n2f77wyzSj8ej7TtwmG3tWZoLLIEWFLUhjAXwKTgeCv?=
+ =?us-ascii?Q?Vv09eLC3RWZv2vcwWjOA9PzKGSgHe7RCmI5UyOV714P8k/y6K/84pX+u5/16?=
+ =?us-ascii?Q?R3G9G6HaSRDTwBSSOIQoaPFXuGNHC+I6lbrKRRl/KGlHiBIpZWmzHXzQVL/M?=
+ =?us-ascii?Q?PvTLEs8Od0ayBL+tR2Nb7Q9uQWw2f4KVJukqub7RPeYRXlip9favq5q3GabK?=
+ =?us-ascii?Q?n4inr5TQvRqwbuKpLSne+6hsQBOKJl975Wu2eUWtqH59GS5ac/w3ncGVid64?=
+ =?us-ascii?Q?2iR2+BQ8Jlb5njTm6wPT2h98Jp6+GVqzD7IPr5NOE+4g5RaCzV1bd1VgMQlp?=
+ =?us-ascii?Q?HwNc8dTfBL8Vwo454hdw9JYDYaAV1I560tLDOSHnzKmPn6CQKePVP8CYV2Po?=
+ =?us-ascii?Q?hp6Kc+z3bXU2JnnL3JpIZzSciTrPgQyVu2hNOztRqfQJlSrMaGlJ7bBK8O6N?=
+ =?us-ascii?Q?gvXV4CEgesfYDpFvyA9ABgBjkFcag2vIqp2HkZhEv7Ba9pcpOG2niuo9J8Xf?=
+ =?us-ascii?Q?HEDQdtEBLtF6p/ZKlVgMjtkAEKbbUMFp0p1Z+FH4EueAwJGSSD9eNwNPCpPa?=
+ =?us-ascii?Q?QvUgo7pAddk3Rdr9YTkXjseMRzgs3MapZq16EXQ09ZhMP05N/r95otoj1GZf?=
+ =?us-ascii?Q?Qg3bszxYZEl4IO9Jz0OgF9g9/LB6fAiDSHHEaV/wuIV3kQsQgbowD2l0pOjk?=
+ =?us-ascii?Q?Ld7oUhxe9sJk/0TpNxNVY68=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 777547c5-bb89-4a64-95dc-08dd9c7faaa1
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5286873-3b23-4a55-9ad8-08dd9c7fac71
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4646.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 18:03:49.7491 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 18:03:52.5149 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: E4OVxe99buOFNP49QualCiH0CVoOZ8pq9GeQPEAmtzn5Dl074IAwIm5aOVlNekdRgwKBagczoW6J07ArjEcq6mUZZDMipgrwPIhTkfuDCwcGK5hts0mYxPLXxhlD8R+G
+X-MS-Exchange-CrossTenant-UserPrincipalName: 872gXlD2I3gBlEY4cvEal3qH3IwWH2a+k5+PAX6fys7x+sk+3ZuDYRtblBRt3fkOkN9V40Az0suQmrZrXn3AXHWkJVTlccCqBXodIPYZDRMynD2Y3JYAVgOB4AyA24+L
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6379
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -161,124 +162,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move common code sdram_init_ecc_bits() to new common SoC32 file.
-Preparation for next gen devices which uses the same ECC init
-function.
+Code alignment is corrected in sdram_arria10.c file.
 
 Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 ---
- drivers/ddr/altera/Makefile        |  2 +-
- drivers/ddr/altera/sdram_arria10.c | 19 +-----------------
- drivers/ddr/altera/sdram_soc32.c   | 31 ++++++++++++++++++++++++++++++
- drivers/ddr/altera/sdram_soc32.h   | 11 +++++++++++
- 4 files changed, 44 insertions(+), 19 deletions(-)
- create mode 100644 drivers/ddr/altera/sdram_soc32.c
- create mode 100644 drivers/ddr/altera/sdram_soc32.h
+ drivers/ddr/altera/sdram_arria10.c | 56 +++++++++++++++---------------
+ 1 file changed, 28 insertions(+), 28 deletions(-)
 
-diff --git a/drivers/ddr/altera/Makefile b/drivers/ddr/altera/Makefile
-index c627f16711e..78b0afc38e7 100644
---- a/drivers/ddr/altera/Makefile
-+++ b/drivers/ddr/altera/Makefile
-@@ -8,7 +8,7 @@
- 
- ifdef CONFIG_$(PHASE_)ALTERA_SDRAM
- obj-$(CONFIG_TARGET_SOCFPGA_GEN5) += sdram_gen5.o sequencer.o
--obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) += sdram_arria10.o
-+obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) += sdram_soc32.o sdram_arria10.o
- obj-$(CONFIG_TARGET_SOCFPGA_STRATIX10) += sdram_soc64.o sdram_s10.o
- obj-$(CONFIG_TARGET_SOCFPGA_AGILEX) += sdram_soc64.o sdram_agilex.o
- obj-$(CONFIG_TARGET_SOCFPGA_N5X) += sdram_soc64.o sdram_n5x.o
 diff --git a/drivers/ddr/altera/sdram_arria10.c b/drivers/ddr/altera/sdram_arria10.c
-index ba6f0f4160f..4c48b1bab6d 100644
+index 4c48b1bab6d..a1288d5fb50 100644
 --- a/drivers/ddr/altera/sdram_arria10.c
 +++ b/drivers/ddr/altera/sdram_arria10.c
-@@ -23,6 +23,7 @@
- #include <linux/delay.h>
- #include <linux/kernel.h>
- #include <hang.h>
-+#include "sdram_soc32.h"
+@@ -128,10 +128,10 @@ static int emif_reset(void)
+ 	s2c = readl(DDR_REG_SEQ2CORE);
  
- DECLARE_GLOBAL_DATA_PTR;
+ 	debug("c2s=%08x s2c=%08x nr0=%08x nr1=%08x nr2=%08x dst=%08x\n",
+-	     c2s, s2c, readl(IO48_MMR_NIOS2_RESERVE0),
+-	     readl(IO48_MMR_NIOS2_RESERVE1),
+-	     readl(IO48_MMR_NIOS2_RESERVE2),
+-	     readl(IO48_MMR_DRAMSTS));
++		c2s, s2c, readl(IO48_MMR_NIOS2_RESERVE0),
++		readl(IO48_MMR_NIOS2_RESERVE1),
++		readl(IO48_MMR_NIOS2_RESERVE2),
++		readl(IO48_MMR_DRAMSTS));
  
-@@ -194,24 +195,6 @@ static int sdram_is_ecc_enabled(void)
- 		  ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK);
+ 	if (s2c & SEQ2CORE_MASK) {
+ 		ret = emif_clear();
+@@ -161,9 +161,9 @@ static int emif_reset(void)
+ 	debug("emif_reset interrupt cleared\n");
+ 
+ 	debug("nr0=%08x nr1=%08x nr2=%08x\n",
+-	     readl(IO48_MMR_NIOS2_RESERVE0),
+-	     readl(IO48_MMR_NIOS2_RESERVE1),
+-	     readl(IO48_MMR_NIOS2_RESERVE2));
++		readl(IO48_MMR_NIOS2_RESERVE0),
++		readl(IO48_MMR_NIOS2_RESERVE1),
++		readl(IO48_MMR_NIOS2_RESERVE2));
+ 
+ 	return 0;
+ }
+@@ -224,7 +224,7 @@ static u64 sdram_size_calc(void)
+ 		(dramaddrw & IO48_MMR_DRAMADDRW_CFG_COL_ADDR_WIDTH_MASK));
+ 
+ 	size *= (2 << (readl(&socfpga_ecc_hmc_base->ddrioctrl) &
+-		       ALT_ECC_HMC_OCP_DDRIOCTRL_IO_SIZE_MSK));
++		 ALT_ECC_HMC_OCP_DDRIOCTRL_IO_SIZE_MSK));
+ 
+ 	debug("SDRAM size=%llu\n", size);
+ 
+@@ -263,7 +263,7 @@ static void sdram_mmr_init(void)
+ 	if ((readl(&socfpga_io48_mmr_base->niosreserve1) >> 6) & 0x1FF) {
+ 		update_value = readl(&socfpga_io48_mmr_base->niosreserve0);
+ 		writel(((update_value & 0xFF) >> 5),
+-		       &socfpga_ecc_hmc_base->ddrioctrl);
++			&socfpga_ecc_hmc_base->ddrioctrl);
+ 	}
+ 
+ 	ddrioctl = readl(&socfpga_ecc_hmc_base->ddrioctrl);
+@@ -351,11 +351,11 @@ static void sdram_mmr_init(void)
+ 			(ctrlcfg0_cfg_ctrl_burst_len >> 2));
+ 
+ 	io48_value = ((((readl(&socfpga_io48_mmr_base->dramtiming0) &
+-		      ALT_IO48_DRAMTIME_MEM_READ_LATENCY_MASK) + 2 + 15 +
+-		      (ctrlcfg0_cfg_ctrl_burst_len >> 1)) >> 1) -
+-		      /* Up to here was in memory cycles so divide by 2 */
+-		      caltim1_cfg_rd_to_wr + caltim0_cfg_act_to_rdwr +
+-		      caltim4_cfg_pch_to_valid);
++			ALT_IO48_DRAMTIME_MEM_READ_LATENCY_MASK) + 2 + 15 +
++			(ctrlcfg0_cfg_ctrl_burst_len >> 1)) >> 1) -
++			/* Up to here was in memory cycles so divide by 2 */
++			caltim1_cfg_rd_to_wr + caltim0_cfg_act_to_rdwr +
++			caltim4_cfg_pch_to_valid);
+ 
+ 	writel(((caltim0_cfg_act_to_act <<
+ 			ALT_NOC_MPU_DDR_T_SCHED_DDRTIMING_ACTTOACT_LSB) |
+@@ -413,23 +413,23 @@ static void sdram_mmr_init(void)
+ 	/* Enable or disable the SDRAM ECC */
+ 	if (ctrlcfg1 & IO48_MMR_CTRLCFG1_CTRL_ENABLE_ECC) {
+ 		setbits_le32(&socfpga_ecc_hmc_base->eccctrl,
+-			     (ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK));
++				(ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK));
+ 		clrbits_le32(&socfpga_ecc_hmc_base->eccctrl,
+-			     (ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK));
++				(ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK));
+ 		setbits_le32(&socfpga_ecc_hmc_base->eccctrl2,
+-			     (ALT_ECC_HMC_OCP_ECCCTL2_RMW_EN_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL2_AWB_EN_SET_MSK));
++				(ALT_ECC_HMC_OCP_ECCCTL2_RMW_EN_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL2_AWB_EN_SET_MSK));
+ 	} else {
+ 		clrbits_le32(&socfpga_ecc_hmc_base->eccctrl,
+-			     (ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK));
++				(ALT_ECC_HMC_OCP_ECCCTL_AWB_CNT_RST_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL_CNT_RST_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL_ECC_EN_SET_MSK));
+ 		clrbits_le32(&socfpga_ecc_hmc_base->eccctrl2,
+-			     (ALT_ECC_HMC_OCP_ECCCTL2_RMW_EN_SET_MSK |
+-			      ALT_ECC_HMC_OCP_ECCCTL2_AWB_EN_SET_MSK));
++				(ALT_ECC_HMC_OCP_ECCCTL2_RMW_EN_SET_MSK |
++				ALT_ECC_HMC_OCP_ECCCTL2_AWB_EN_SET_MSK));
+ 	}
  }
  
--/* Initialize SDRAM ECC bits to avoid false DBE */
--static void sdram_init_ecc_bits(u32 size)
--{
--	icache_enable();
--
--	memset(0, 0, 0x8000);
--	gd->arch.tlb_addr = 0x4000;
--	gd->arch.tlb_size = PGTABLE_SIZE;
--
--	dcache_enable();
--
--	printf("DDRCAL: Scrubbing ECC RAM (%i MiB).\n", size >> 20);
--	memset((void *)0x8000, 0, size - 0x8000);
--	flush_dcache_all();
--	printf("DDRCAL: Scrubbing ECC RAM done.\n");
--	dcache_disable();
--}
--
- /* Function to startup the SDRAM*/
- static int sdram_startup(void)
- {
-diff --git a/drivers/ddr/altera/sdram_soc32.c b/drivers/ddr/altera/sdram_soc32.c
-new file mode 100644
-index 00000000000..0b928a2352f
---- /dev/null
-+++ b/drivers/ddr/altera/sdram_soc32.c
-@@ -0,0 +1,31 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ */
-+
-+ #include <cpu_func.h>
-+#include <asm/system.h>
-+#include <linux/sizes.h>
-+#include "sdram_soc32.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define PGTABLE_OFF	0x4000
-+
-+/* Initialize SDRAM ECC bits to avoid false DBE */
-+void sdram_init_ecc_bits(u32 size)
-+{
-+	icache_enable();
-+
-+	memset(0, 0, 0x8000);
-+	gd->arch.tlb_addr = 0x4000;
-+	gd->arch.tlb_size = PGTABLE_SIZE;
-+
-+	dcache_enable();
-+
-+	printf("DDRCAL: Scrubbing ECC RAM (%i MiB).\n", size >> 20);
-+	memset((void *)0x8000, 0, size - 0x8000);
-+	flush_dcache_all();
-+	printf("DDRCAL: Scrubbing ECC RAM done.\n");
-+	dcache_disable();
-+}
-diff --git a/drivers/ddr/altera/sdram_soc32.h b/drivers/ddr/altera/sdram_soc32.h
-new file mode 100644
-index 00000000000..4c6137e728d
---- /dev/null
-+++ b/drivers/ddr/altera/sdram_soc32.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ */
-+
-+#ifndef	_SDRAM_SOC32_H_
-+#define	_SDRAM_SOC32_H_
-+
-+void sdram_init_ecc_bits(u32 size);
-+
-+#endif /* _SDRAM_SOC32_H_ */
+@@ -642,8 +642,8 @@ static int of_sdram_firewall_setup(const void *blob)
+ 		}
+ 
+ 		writel((start_end[0] & ALT_NOC_FW_DDR_ADDR_MASK) |
+-		       (start_end[1] << ALT_NOC_FW_DDR_END_ADDR_LSB),
+-		       firewall_table[i].cfg_addr);
++			(start_end[1] << ALT_NOC_FW_DDR_END_ADDR_LSB),
++			firewall_table[i].cfg_addr);
+ 		setbits_le32(firewall_table[i].en_addr,
+ 			     firewall_table[i].en_bit);
+ 	}
 -- 
 2.35.3
 
