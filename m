@@ -4,80 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E743BC5AD49
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 07:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84850C54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 07:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D39882C96;
-	Mon, 26 May 2025 09:43:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 0481C82C57;
+	Mon, 26 May 2025 09:48:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KZRTuYEF";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gdHuZuNx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17FE082A8B; Mon, 26 May 2025 09:43:11 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3843F82C96; Mon, 26 May 2025 09:48:26 +0200 (CEST)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20611.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::611])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28E1B82CF5
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 09:43:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 229BA82B18
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 09:48:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-b26f5f47ba1so874466a12.1
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 00:43:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1748245386; x=1748850186;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7odlvDyAU9ZHNr3rnwrP48JAgpWN711mRXaxnQ0zRU0=;
- b=KZRTuYEFiOzrLzMqJLp3hj3XbO4Rto0BX3EuRqCIHfWiqkl8jhZd3Nk5G4SGPGBwkA
- HQ3aKVnPU6P9fPYklTynkv9CNkXNEYteLT8Y1Bh/0dJ/MkxiNdiAICHWUOGWeLsLLl1G
- /qHulqqfHK+eObudOEw0onCnHARXpJl3RpSHY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748245386; x=1748850186;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7odlvDyAU9ZHNr3rnwrP48JAgpWN711mRXaxnQ0zRU0=;
- b=EVKsww4f9HqIKhCwllsaEjcaFjmCAcYnL/6laYTW76/XQ8Bkm8aWBNpwq5HazWN2or
- EelgfZ6NvXPg5DygCMLUf47okqVoBEIouh/WmI+ww31cCUX+QO5RaVW1uWd6l7yoZnP6
- HXZoGss01uA5jVDGISNx2U6iRDMI8zUwdlo4eo3fugeIesoaBDYnvnnD2+6mZEXXLQ4h
- Gg1qZJQd1DrS4n779zfxQmw2/gCMoOKKiSnbXfCSFdQiy8TRHVXakhYF4fOV1LXp0C4g
- F4Y5RdYVWk2VWXu6qdsUkRSqG556m2FWxSpQ3bV/15Mn+zv63Eug9fIswAzylar57YxF
- 9SUw==
-X-Gm-Message-State: AOJu0Yzaa1206Dh+sWoRRo3jsAGQZPXbfqBPlXxG/MWywhRuVjm3qhUv
- VGVqbI62wpWGMchNLciYguB8A1aF5AbnbdLwbACiqNEeYKl8fZ+BrVcIyyQ0nZ3WGcirtGtm3KV
- WdLjIG1Hy1bRexcr+foEpIZWrgDUVOFco4aMtzdHNxQ==
-X-Gm-Gg: ASbGncuWl9Gt0U3zlBtI5Iesvc7Uj9SnWbhSnUyz/ab3FC2qMWjAE3iRWGuPOFiTc/1
- FsiCf4C5wd+IsUUthpa9WgfPmJBMwIGIWujbHR72OcAKjFzVUXRcaAWQuEUanCx+Rr+5TuAH/vi
- O+TeOmaWXhgv0p7OoRtZ0VWaE/M0ljZgVJUHCar8O9go4rwXKMxLDg1P/Tt1wwGQ==
-X-Google-Smtp-Source: AGHT+IH8x5UBaT9jejCadoLvX/BTy3fY1mfQdHHk9xxIIMYX3IbfJ40YfOjJhUXFT3b8sXjH1yEtCBT6XUzfH1pCNps=
-X-Received: by 2002:a17:90b:4b51:b0:308:7a70:489a with SMTP id
- 98e67ed59e1d1-311119433eamr11147172a91.30.1748245386561; Mon, 26 May 2025
- 00:43:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LdP341CzfHhgLghNqn1E2lwoh+GTe8sG96unTq1gktwayz0m7bEfgEaMdv+j2iXlYiVyuvtejGvMK7hmiIDWoK8QK46dlCabswgtLoslhiFtwxn3G4RKCb9X+6DrVZjL+4AjVNMOwei46KX75ALkrKDlwFj/X+ftNPTZg8H2Oa+9nPaysH9/Jk5bxPsztHLIlhxSYIvzJD+sjSH5bcEVXQi2+Ss4UBrnL+43t9EBcsYAGwVB/tzNeGDWe1GkJrxuRTkYAbkdzX6bvFWr5xlpgqjKJ4NRw0+f1mwBKVnak6aiy5Y2dj2xu4C5qUqRPVz04X47OiSj2CM7HOW+vGjQkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wg8aE4NkPLTiK5QQvm7DvFk82H3ionTaumPvi8hjDnE=;
+ b=CiAXqez/qvrns0Kb4h8U/NBW96yL8F1yJs+lgiAskiijAPrf0+VhMCeM8xuitNslnDzwlZUNMi6/3fvv0/B8YTYGU1E0HNaAb7EaOkFF7f8lfwx+IQxP6V0cSTp2IbKM67VJH3pB+doJjqVnsNb+yW6Z+9JTxLZ9IUCW+X72kZTaoqIZWP3cEFKLatds6FWm2qUahVpANRHecRVouXNL7cTUQRqhF6SFnmibLWaor3bEj6i5Sz1mpXKs8f/PnWjM1IkN34Ncwqzq1Ck1EHQ38y67ka29Eb4qA7s2YdJAOqLfwjWJtJab++TH4hI9afsUum7ZlTbDCP8btUD272mAZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wg8aE4NkPLTiK5QQvm7DvFk82H3ionTaumPvi8hjDnE=;
+ b=gdHuZuNxRUAkLjQQBUj0YlaUCrT9cRa9jPYLjbJujC5J5ZbPUZ4i4xFVzxI+oGFynI6D1N8t+zkli1JdqOTjmHbdP2ZuMez1yyJ9G2MLc8lZgpQ50tVaaapEVNvRbZaBXdinAI/1P1x3R1G1u0qyQ+dcrL/ZilbJLjXYaumm0pc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB9593.eurprd04.prod.outlook.com (2603:10a6:102:24f::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.22; Mon, 26 May
+ 2025 07:48:21 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8746.030; Mon, 26 May 2025
+ 07:48:21 +0000
+Message-ID: <97e69b7e-0ecb-4d30-945c-d2c32438149f@cherry.de>
+Date: Mon, 26 May 2025 09:48:19 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] bootstd: Use -c flag with bootdev order
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250524054245.409399-1-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250524054245.409399-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR04CA0125.eurprd04.prod.outlook.com
+ (2603:10a6:803:f0::23) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-References: <20250525122316.661999-1-michael@amarulasolutions.com>
- <20250525122316.661999-2-michael@amarulasolutions.com>
- <20250526084356.GQ19264@nxa18884-linux>
- <CAOf5uw=Fk0y0G24f2JWcDiWdvWEUUTRWsD5v3ugBxRjSZGrtAg@mail.gmail.com>
-In-Reply-To: <CAOf5uw=Fk0y0G24f2JWcDiWdvWEUUTRWsD5v3ugBxRjSZGrtAg@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 26 May 2025 09:42:53 +0200
-X-Gm-Features: AX0GCFvFuzcvHK4ZFyWCSzdMrj3XaILQpq_L_K2aZQYGRaWLOcOEp5YSIxwtb-o
-Message-ID: <CAOf5uwngXsW9_A+XdA4emgzg7mRkGEcfAioD6k-4YviLCuue-A@mail.gmail.com>
-Subject: Re: [PATCH 2/4] mtd: mxs_nand_dt: Move from clk_get/clk_enable to
- clk_bulk api
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB9593:EE_
+X-MS-Office365-Filtering-Correlation-Id: c22ea864-e93c-4912-a3f3-08dd9c29af75
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?M0ZzQmp4NUJnMU94ZEFOUlBxOEIrTXRJbldkc0dxbXdnSk5sNTdyRjM4clRi?=
+ =?utf-8?B?TE1wOTRuVWpSNnpicGRIWVRlV2c1NXNqWWtMMTVjdUxCaUx4TTdJb1FIeTcy?=
+ =?utf-8?B?bnpCNW1lSDVoRTdFbFdISTMvbWo4Qlp0cno4NGhsbm5IMWErK3dldnRrTHUv?=
+ =?utf-8?B?MXQxeW1rYzJQVkJ5SUNXRjZCalZ6T29zTmNSbTk1bXRDM2lINW1TcTFUK0hv?=
+ =?utf-8?B?Y0ltVWNoaTNoaUQ5eE02OW42ZnpMQ3N1bkJqYStiMUFadWlHaDNvQ0JQc0cv?=
+ =?utf-8?B?QVU5NU5GZm9WeTdGdVR6Rms5M2tVSjZPVnozR3kvZHo2OW0yenhtQi9yMGhB?=
+ =?utf-8?B?Q2tmc2gzN0M0Mi9weGxXVjlmeTlCYlZlZVlHcEN0SGVaUlNUUERHY3l6aE9P?=
+ =?utf-8?B?Mi9QTjVmQnhQQXBQaHFmYW1weXFKOUFBcVQwQmNQMWR6TlREemFmUVZCOFVm?=
+ =?utf-8?B?MEVsdTMxZnZxTGhaM1R0OUhYWjlKRWR4aWdmc3BFU0hOZkVxaVpQZnJJYzJG?=
+ =?utf-8?B?VHN6ZXpLQ1ZMTFpPU1YvTktyWThDK0thSjFpbUwyeDI0bmVxWmNwNURNS3o2?=
+ =?utf-8?B?VDhGcFFLZGpUYkFTSGxXMGM1cGx5Nnc1a3VCN3NaNnVSdEs4K1dLdUZsbjlr?=
+ =?utf-8?B?M2dnUmFtQ2tHb0JGNndZWThCR040UmpwVWdwRkhlb0JhS1RtY1RiOWEvVSt0?=
+ =?utf-8?B?a1pxT1hoNWhKM0djakEyNDIrY2JKTVBzd0ZpamdGYkZPRURIVGRQaFh6S3Fw?=
+ =?utf-8?B?V2paZm1xOWU3anUwNEF2MVpvU1p2Qjg4YTZIZjlmbk9LdEVpbm9SY2ZFVEI0?=
+ =?utf-8?B?Q0JvSUtrK1RBbkFVOXVJekdrMitldm80VUdPMW9mcXBNblg1YUtRcXZmL21G?=
+ =?utf-8?B?eEtXMHN1TENsQTBmRWd6aVFUMnk3UktWclMvOVRQWHZuOHFxZWwwZFIyVjJK?=
+ =?utf-8?B?UlRMU0JhTmdlVkdyV0xlNkJEU0l4eUpzckFjdXBxenpLMVliWXJjYTlKZ0E0?=
+ =?utf-8?B?N1Q5NzVyTnlYdFJnLzhxZzJFK0Jvc1liVXZYSGZWRi9XcjJDUXQvL0llcFAz?=
+ =?utf-8?B?V3FtOS84UkJrdjdrd3JWeWY5OUZjWGc0dVpKSkI3K3VPY3hhNTJkazVWYU5G?=
+ =?utf-8?B?dFBxM1ZobVJ6Q0kzQjZEa25HNWEyd3Z3TGVZNWsvUXIxUldjZFVWWmFzMzh4?=
+ =?utf-8?B?WkhiYXdQMzdodHpZUTZSYkNZMVlYbWx6ZUtCVDd2dkttUnN2bFZLOGZ1c2wz?=
+ =?utf-8?B?Y2hqaXBMKzJUVWtQSWxGMGRLNTVpU3c0a0xRQ0dFbEZQKzdXbHZXQ25TTUJJ?=
+ =?utf-8?B?UnRMVEgxOFZQVk8yV2lMZklrWjA2c1lkaXRGa3hCQmplaGZMVWt0Tzlrc0JT?=
+ =?utf-8?B?d3dLdlVIR252WDE3VVEyYTdBVnhzaVZGYjZFT3lpZG02UjBZalliRFVmY0hK?=
+ =?utf-8?B?VlIwYzhGSFdHSkdrNVQxMzJ5WDRhUzVXUWozME9ubTB5ajNBbU1PdzBNeUpP?=
+ =?utf-8?B?Q2hrRHNmY2htLzB1N21la2lWdW9rMENsSm9iWkFHWWdONmlUN0g3aVQ2SCsr?=
+ =?utf-8?B?eHVnc2VlRWE4c0ZJQWN4Mm93S1F1VnR5dElacm9NQzhpZ3JGcXcrV3cvU3dB?=
+ =?utf-8?B?YXhmUFpqb0VZaE84VDBvQS9NS1c4dkVsWEtZKzdHb2ZXMCszUGlNdFdKZyto?=
+ =?utf-8?B?ZEp1bnQ4SEF2dU9tZ1dJSFNGVUltRTVaR09WcTh4eWVnZm1laWhUSFBhank0?=
+ =?utf-8?B?dXJCaHYxSFF3YWxUbUg4dmI3Rm9zdzBYTE5rZ3NzRnlTMHQxTVNlNDgwOWpa?=
+ =?utf-8?B?dmdqOEJ6YXFiZFlORUgwREdkSFIwb2MzUnltZE5TSEMrL0JiMjgwY1AzU1E1?=
+ =?utf-8?B?SXVPcDc0Y2RRZ2lhellQUlhvTmtFY1VEZnlBTDQvdEFJK2c9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aDhMSmxQd05mRlk5Yk9mWThEdklBYzNwNFRXM1dlZkpSaHVNaWl1NFQ0S3Qw?=
+ =?utf-8?B?d0dLWEZHaDQ3TjRDcXpjdmVtcE5VVGFJYW45d0cwL1RPeGp4ZXRmVnpxamxB?=
+ =?utf-8?B?cC9LeGZjQVhBdUFtK0VqVExrRHF0V2NYL3FPaDYyOXIxQWdrZk90dHhWMmo1?=
+ =?utf-8?B?a0dDbnZjWW9BWmR0YmhyYTd0bWdUdDdWV2ZzY1FsbnhyNU1FS2NXZExkKzBm?=
+ =?utf-8?B?bFZXcjBPamlpMkpBSk1IUkg5ait5K2pIelZteWU5dTZ0NUdmNDEyOTFqVDZB?=
+ =?utf-8?B?Snd4QkpYcGpVZXZ6WElaZ05OajdNS1ZtZnBXanNQOEpLaFRWMWE0ajZ4a2Vo?=
+ =?utf-8?B?Q0xLT1c1VU1CVGZpM1pxYktodEF3bUVsblU5dGdpa1JmWU5IQVVXblFQbGo4?=
+ =?utf-8?B?SGlTMWR0NXBEUmhRNmdSOXRZR05QQkdGcXA5NyswOVptQzMyeUxUUHR1UXhy?=
+ =?utf-8?B?RUJZdkRFeFV3VkRGclYycmw1Q0RsOEhTNnB1eXJia0VrRVZubTZCeExNMld5?=
+ =?utf-8?B?SkM1ZVVubXh6bzdHSUd3d2NrNndPZDdwUW5yZlZrNkQ3N3BTSEV1dVBZV3V1?=
+ =?utf-8?B?YTkyb0FWSFBmVUEyNVNmSUIwMWtrOEsvS1lQRW1WVW9KYmUrK0M1ZkZJUFJW?=
+ =?utf-8?B?OU5FYkNMYjR1Sys3ako2Kzh1bWFpeitqTzhYWVhSZU1oTUQ5TFhJcFN5VUJk?=
+ =?utf-8?B?Y0dYWVEwZUNEWmtRTzBuR0lka0hlb0NheUYvZ2daUTdSREpoMVFKSy8vOVRY?=
+ =?utf-8?B?cktNRS9zZlo1d01mN2RSQWVaMStna09kd2swUVB3Wlh4WHdpOFFXdHVzUkY0?=
+ =?utf-8?B?SlR3NWYxTFIrYVUrbHZVRkRYRVBBalNQYi9pbEc4bEFLekN4MERBYWc5ZEQ4?=
+ =?utf-8?B?TXBKbHBGVWMvU1pISi93SElPMTJHdmZlSmUrS2Q4dUxBbEpGSXdENXdGVWlr?=
+ =?utf-8?B?M3VNNFFxbTdrLzZ6ZEF6SHFJOXpLRHNISW5OY1kvZll1VzBwYmt1b20zZE9z?=
+ =?utf-8?B?V2tibjhRQ3FDTGdlY3o4YlFDRUVGZ1d6ckxIazl3cVF2aERIc1dXTEx2QnJi?=
+ =?utf-8?B?Qk03SzdRemJRNnZ0cFpheWNFSkQydnIybUx5a0srWFVXTk1zVzE0QTZCZkNP?=
+ =?utf-8?B?M1hNY1RWUWhiT1RPMTE5bmJIdVFQYjY1LzVMOHM3VXdOSnBMZVJoQmRrYkJi?=
+ =?utf-8?B?WHJGUUFIc2ZxQlhiNzJwa0c3eVRzK2krQUpTY29OMk9LL0lwaXVqS2FJNDk3?=
+ =?utf-8?B?akxqOVB2RjA1K1UweDh1SGtzUVRJeDl2aWlUd1hUZE5ub09YSmowSHV0b3hG?=
+ =?utf-8?B?cVFha2JGLzBmQWNzRSt1WVJBQWxObXJxQUh5NURDU013QmhUcVMyNDY0aWts?=
+ =?utf-8?B?WUFZdXh5Zk5sMmZOc0ZDcEQzcGJ6cDFBQW1qYlVhaDFVM3BVREY3NmtxSGpk?=
+ =?utf-8?B?NC85Mkc4UGw1MVJzZVdRMGVIQkJQemNhbThISTZRTVB3Qk1UR2RHa01ySW4y?=
+ =?utf-8?B?eG8wSXMwNWlGQm9sUnJPODdkY05CMlZoZGxISThrYmZHRDY1eWVCVXR4clBn?=
+ =?utf-8?B?Vk9YUmh4Skl5YlByNEZFTEY4enM3Q3pUR2svc3lFc2llQVRmK2ErN09zOU00?=
+ =?utf-8?B?aXV1eVcyUnZMWVZjenc4VUFaYnJvd05WYnNJa2Fyd1cwMWZHdWFKQWhJaFR4?=
+ =?utf-8?B?STV3RXdqcmRqZFA4Y1p6LzhxcWUraXlQd0dkUUJ2b1RRR1V3VmFxcnp6Zi9Q?=
+ =?utf-8?B?c3doN1RjaWxpZUtsTGdIaGdTQ1JmMC9JYnRzbCtleFA1UGN2RFBGMkxPRFdt?=
+ =?utf-8?B?VE9ZMDhoQi9GeHhLdHhvQ0ZLTnBkemhVSzhxVGhnczJtYzJZZ1NwdFYzdWQx?=
+ =?utf-8?B?bVdrTS9ZT1dhOHFURUNkSlJLQ01KQytTZEhXNUF4NjFISDhsVU5iYUEvUVpH?=
+ =?utf-8?B?MTk0OEhiWTZpaHRJWGsvckRLaHJmRTkycFpKWWVrcll6dGoxY0lINWdoUGhm?=
+ =?utf-8?B?NEtBNndGQ2h1UnJUdnNYUzlZSzg0Wm84Q1N1U0UwQjBUcHNWZUQxUEdEa0dK?=
+ =?utf-8?B?dWR0RlBaRHZVWDBlVjh2TlVqMUtidzZPNUxZTURSdjhTa00yUTNZNnExR09i?=
+ =?utf-8?B?N1BmRXNRU0RwSjlsUm1UQ2l1bVpqdEIwUy8xeVVZUi9tNThYU000dVN6QlNX?=
+ =?utf-8?B?N3c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c22ea864-e93c-4912-a3f3-08dd9c29af75
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2025 07:48:21.0010 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: swjXuqGSQKV5DXlyDDR0jUJzZKN3E4qbg8WZUayCiRou9JLAUqUBbxFS1XEeQcvldeafuj2+Feju1DDUVyYXApS/oeNvD9Xsgzns9sV9v+s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9593
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,157 +177,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng
+Hi Simon,
 
-On Mon, May 26, 2025 at 9:38=E2=80=AFAM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi Peng
->
-> On Mon, May 26, 2025 at 9:34=E2=80=AFAM Peng Fan <peng.fan@oss.nxp.com> w=
-rote:
-> >
-> > On Sun, May 25, 2025 at 02:23:10PM +0200, Michael Trimarchi wrote:
-> > >Make simple the clock registration and enable and allow later
-> > >to add support for other platforms
-> > >
+On 5/24/25 7:42 AM, Simon Glass wrote:
+> Update this command to use a -c flag rather than a special 'clear'
+> argument.
+> 
 
-Ok, I think that I need anyway to disable the gpmi_io clk because the
-driver should
-handle it during nfc timing calculation
+I don't see the commit which adds the clear command to either master or 
+next branch, so maybe just fix that in the original commit before 
+sending a pull request instead of via fixups?
 
-Michael
+Did I miss something instead maybe?
 
-
-> > >Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> > >---
-> > >
-> > > drivers/mtd/nand/raw/mxs_nand_dt.c | 48 ++++-------------------------=
--
-> > > 1 file changed, 5 insertions(+), 43 deletions(-)
-> > >
-> > >diff --git a/drivers/mtd/nand/raw/mxs_nand_dt.c b/drivers/mtd/nand/raw=
-/mxs_nand_dt.c
-> > >index 11dbcbbf442..b62474bc5ab 100644
-> > >--- a/drivers/mtd/nand/raw/mxs_nand_dt.c
-> > >+++ b/drivers/mtd/nand/raw/mxs_nand_dt.c
-> > >@@ -100,9 +100,7 @@ static int mxs_nand_dt_probe(struct udevice *dev)
-> > >
-> > >       if (IS_ENABLED(CONFIG_CLK) &&
-> > >           (IS_ENABLED(CONFIG_IMX8) || IS_ENABLED(CONFIG_IMX8M))) {
-> > >-              /* Assigned clock already set clock */
-> > >-              struct clk gpmi_clk;
-> > >-
-> > >+              struct clk_bulk clk_bulk;
-> > >               info->gpmi_clk =3D devm_clk_get(dev, "gpmi_io");
-> > >
-> > >               if (IS_ERR(info->gpmi_clk)) {
-> > >@@ -111,47 +109,11 @@ static int mxs_nand_dt_probe(struct udevice *dev=
-)
-> > >                       return ret;
-> > >               }
-> > >
-> > >-              ret =3D clk_enable(info->gpmi_clk);
-> > >-              if (ret < 0) {
-> > >-                      debug("Can't enable gpmi io clk: %d\n", ret);
-> > >-                      return ret;
-> > >-              }
-> > >-
-> > >-              if (IS_ENABLED(CONFIG_IMX8)) {
-> > >-                      ret =3D clk_get_by_name(dev, "gpmi_apb", &gpmi_=
-clk);
-> > >-                      if (ret < 0) {
-> > >-                              debug("Can't get gpmi_apb clk: %d\n", r=
-et);
-> > >-                              return ret;
-> > >-                      }
-> > >-
-> > >-                      ret =3D clk_enable(&gpmi_clk);
-> > >-                      if (ret < 0) {
-> > >-                              debug("Can't enable gpmi_apb clk: %d\n"=
-, ret);
-> > >-                              return ret;
-> > >-                      }
-> > >-
-> > >-                      ret =3D clk_get_by_name(dev, "gpmi_bch", &gpmi_=
-clk);
-> > >-                      if (ret < 0) {
-> > >-                              debug("Can't get gpmi_bch clk: %d\n", r=
-et);
-> > >-                              return ret;
-> > >-                      }
-> > >-
-> > >-                      ret =3D clk_enable(&gpmi_clk);
-> > >-                      if (ret < 0) {
-> > >-                              debug("Can't enable gpmi_bch clk: %d\n"=
-, ret);
-> > >-                              return ret;
-> > >-                      }
-> > >-              }
-> > >-
-> > >-              ret =3D clk_get_by_name(dev, "gpmi_bch_apb", &gpmi_clk)=
-;
-> > >-              if (ret < 0) {
-> > >-                      debug("Can't get gpmi_bch_apb clk: %d\n", ret);
-> > >-                      return ret;
-> > >-              }
-> > >-
-> > >-              ret =3D clk_enable(&gpmi_clk);
-> > >+              ret =3D clk_get_bulk(dev, &clk_bulk);
-> > >+              if (!ret)
-> > >+                      ret =3D clk_enable_bulk(&clk_bulk);
-> >
-> > You enable clk bulk and together with a standalone gpmi_io clk?
-> >
->
-> I need to get and refer to the gpmi_io because it is used then by the
-> driver. I think
-> that this does not change what was before. Am I missing?
->
-> Michael
->
-> > Regards,
-> > Peng
-> >
-> >
-> > >               if (ret < 0) {
-> > >-                      debug("Can't enable gpmi_bch_apb clk: %d\n", re=
-t);
-> > >+                      debug("Can't enable gpmi clks: %d\n", ret);
-> > >                       return ret;
-> > >               }
-> > >       }
-> > >--
-> > >2.43.0
-> > >
-> > >base-commit: df2ed552f0b05591090369a7fe7ddc92439dea5c
->
->
->
-> --
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com
-> __________________________________
->
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com
-> www.amarulasolutions.com
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Cheers,
+Quentin
