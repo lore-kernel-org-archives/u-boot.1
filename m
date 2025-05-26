@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A0B3C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 13:25:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E7C54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 13:33:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9268482D34;
-	Mon, 26 May 2025 15:25:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 69C9082103;
+	Mon, 26 May 2025 15:33:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XwGq90IR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k45gkeDW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92FD082CF8; Mon, 26 May 2025 15:25:05 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 35AAD829E4; Mon, 26 May 2025 15:33:42 +0200 (CEST)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51DBE82D43
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:25:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0BFC81FFC
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 15:33:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-601f278369bso4671120a12.1
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 06:25:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-87de47585acso1629602241.3
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 06:33:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748265903; x=1748870703; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7QB7VmfK8oC6YBT6UyYu+MPWzbjsct15phkUN7nynj4=;
- b=XwGq90IR08AN86wZI1U/ROVC5unsWDG2TAEgGNGJh+YbPZ8CD2U0MFXqFxcE7ynRFr
- SmvHM52OEjUqQfz5yJTrULMuTULDWC6xbsQHziEfBUBaQ/obLZj6EivrdeOtZhTCh/8m
- Kxw77USMuBo7vmhr9yt0WJt1vpa2nUhRoMCZiYlIdOhlB5/LOuTjZE/NRXGMxijoHM9T
- eHqj5wstL9j9ATCGj+q5/UM9Gyhv22hfoV8GqSmC3I4lzityKNUu0Sr7/1oARgWJcc0M
- BrOSNv4UiwMqRAExREiJQNMSh7m4Ks8hePepC5FzR7dDfAowF9dSUTB0LRJdV5vb0pyE
- R/Iw==
+ d=konsulko.com; s=google; t=1748266418; x=1748871218; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jlnFbhZW1MUDQd2DBb7ghgJ7IEAHq+17ZAq2OQGFthE=;
+ b=k45gkeDWxeAPZJ5g+c4QUix8YGkYzQD/cVUZWM+Db35Yhh2M0LRVlnkkO+owFPO9r/
+ yf+vXKjmyDmtpsv5hdWJB8oKA68p1lf3PU3/F8TmwfsOOLEFSLJ/9puvF91J09JSvG2a
+ Vvgx1Iaf2Koaq0zGIrHDonXW610NBoOOfev1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748265903; x=1748870703;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7QB7VmfK8oC6YBT6UyYu+MPWzbjsct15phkUN7nynj4=;
- b=VQroHp8Z2JKeBYePM2LEb1Z/djdGgIf4swFUgJJ0KP8TWiRP1Xh9yj7tPVjvG+Mocv
- gA0Lhi1+wbwtU1aSWMwjcJfIx1quWtAQaOkdESLhjLL41RGdQAbCai4ATDZKs69KVj90
- 57Q/ovalYkYgnQJUwf9zXnTIacrQoxAmUhWkz22wLYY2kuZGTIfv270+21l5oYXAnuR8
- euON8gq/q26BtnzgZ6MlL96qTSrxT6TNHm/bofqsw08IKgDMNAxPdGZ48LJjqPzbiUkH
- ExUe3VftVmQmjwD7qY/R5XKfrrxkgtSeKY7a7Mrgb5ho4CMsB9agpNgDvtGuVu+t2Gb1
- wJTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVDYbalNMXuCSIuDwNq6PomO0x3LKjh/GvLTQuaj+4+cqnGrjPCppMqQQfK1J87AdMs7bAQ4FI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCAcKhtDleTHpUVUB6PD1NZ21MTz9WjejC8X3JCzXvaK8qK8UY
- TW6vbq27usqYtzNnSfEijtZm59ou/9PLhwQ9Yr7zfluE8fKXigAk7icT9mo8Q1kjirCO3WtEtJ2
- cgZe5F9MPS8XtErTk5vKsnmzLxS94xqE=
-X-Gm-Gg: ASbGncvHIsrraZrpp4Fd7MTNQS8m1fv12WAz5KvnJW7NsgUcC85hykx3uVncHFshLM+
- lEQFFS4A4zJPBVxB/SI4a+LIF/Z3CKxBAjmiZXLOF9soSVHDNT53MGpBi/0x0LwTzieci383euC
- Ng+Ct2+MnBrqRKFmnxes9sGQuVvPw/N8b2CDqTWg8c9iBfZY9ufipmU6jwmCPaFSS+HOo0N85Zz
- H7h
-X-Google-Smtp-Source: AGHT+IGdCxAA7VoThcXC2mZvUmbZHWMtkpKTFETk7ZEaNKKRfVCF9w4RxVhuqVpMu+XJv8GsEuhKQc5hthkCeNhaf/A=
-X-Received: by 2002:a05:6402:a51:b0:604:6149:1c66 with SMTP id
- 4fb4d7f45d1cf-6046149235fmr3980399a12.33.1748265902523; Mon, 26 May 2025
- 06:25:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748266418; x=1748871218;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jlnFbhZW1MUDQd2DBb7ghgJ7IEAHq+17ZAq2OQGFthE=;
+ b=NF6hfRUJ+uZ0HMR+uvdRI/wqGr3s8cyGOHMHaj1shLInmA0muUK0mgek7cMGf1wrsz
+ erc4VXfUJa7rQHIzC0sK6pb+Xnz4YyYKdbtdL7jc6x0sWeccEF48PzTeEPj9Qid+hfaP
+ IvKy5XVpuOfiaseit4K5ulr4QLcR0F67bUSe8Gul3OlkWbAKI0a5TNgBq54pqEDGA3PA
+ TLo6sNsQrPoLsIoo9stQrypVsDw61rEpyOufKk9uVQqbhGyb82c2Qs17B21fEgkzrb0m
+ 4CCbX2sZ8pTFmePbxOn/Dg2zrNrv1UW+jzTELuYc+AVykspFlBGgchBFCG8v57VAkJWW
+ EMZw==
+X-Gm-Message-State: AOJu0Yzz3KoerdCfRutRoPZmvqe8qahp/LcawSWH/6xhCuYNAge8Hs63
+ LDqcJIXY/MnXUCmETfncGyLEsshnGLXxsw/iLj3h8cCxgVv7cEVvrZpG0vdqVVamUmHx8ZTx2nJ
+ iCcBQGqY=
+X-Gm-Gg: ASbGncvE+C6yFTnMb+i/m/wBYElTgZblnK3/aeGFFQjiGvwh9V6ZOmDsOU5YvKPl2MB
+ NTdeXpYXD8q/bsCd0RPkuTOCES6a6YR6MktcbCCdYvU7qr+Pk69FygvOEnlJ6Cx8nCoBZ1g4llD
+ FSQLoAAIKtSLvs+L1N2hG78wLXcOWTWXtC2GvYit7smjudXNRczHkpD1kxxVZhvFGsmXlRNQ7lU
+ aPOf/U1YfeR8z3hsQOGPD2CVhlKLj/+/3IgHXwyFzQNNFwUbc9MdpbcQQmq/61qImuIAcCD5rJg
+ 3GKXfgcrzV35VQlz+AQvxeWGlZ3XUx/9tnpMhXsyho6xfv1XkowoeG7ynapCvPpaxq9aqG47pKl
+ mwtuLqhNoa7M=
+X-Google-Smtp-Source: AGHT+IEFUeh7YGse/HYg6Sh/9Cb19/EpH6s/1I14etDNmzNZQjLm27Y+DgtkFVd1IOzWBGiPkmJz3w==
+X-Received: by 2002:a05:6870:d626:b0:29e:2caf:8cc with SMTP id
+ 586e51a60fabf-2e8620fadebmr4208576fac.37.1748266407880; 
+ Mon, 26 May 2025 06:33:27 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2e3c0b21cccsm4873361fac.44.2025.05.26.06.33.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 May 2025 06:33:27 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
+In-Reply-To: <20250525224949.176427-1-marex@denx.de>
+References: <20250525224949.176427-1-marex@denx.de>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <174826640663.2688859.1573909720869409303.b4-ty@konsulko.com>
+Date: Mon, 26 May 2025 07:33:26 -0600
 MIME-Version: 1.0
-References: <CAJ+vNU3H1vjbvyZTycBQhufii5SqyTnk4AaMRk_ztGY10g9joQ@mail.gmail.com>
-In-Reply-To: <CAJ+vNU3H1vjbvyZTycBQhufii5SqyTnk4AaMRk_ztGY10g9joQ@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 26 May 2025 14:24:51 +0100
-X-Gm-Features: AX0GCFvmLNKhqVQYysPEXNXju3cALX4iOPUdJxSF-pH1f9cIvJuj-JX9QiQlQ9g
-Message-ID: <CALeDE9NNHm+qt8pPo_Hf64DvcWD6gh6qiC1g6mgidMRVJBpjWw@mail.gmail.com>
-Subject: Re: lwip tftp not working on imx8mm
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- u-boot <u-boot@lists.denx.de>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,41 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+On Mon, 26 May 2025 00:49:32 +0200, Marek Vasut wrote:
 
-> I've enabled LWIP on imx8mm_venice to see how it's doing and while
-> dhcp/dns/ping/wget appear to work great, tftp is broken.
->
-> Enabling LWIP_DEBUG shows the following:
-> ip4_input: packet accepted on interface et
-> IP packet dropped since it was fragmented (0x2000) (while IP_REASSEMBLY == 0).
->
-> I tried enabling IP_REASSEMBLY in lwip but that seems to change the issue to:
-> ip4_input: packet accepted on interface et
-> ip4_input:
-> IP header:
-> +-------------------------------+
-> | 4 | 5 |  0xc0 |       108     | (v, hl, tos, len)
-> +-------------------------------+
-> |    10568      |000|       0   | (id, flags, offset)
-> +-------------------------------+
-> |   64  |    1  |    0xe25b     | (ttl, proto, chksum)
-> +-------------------------------+
-> |  172  |   24  |    0  |    2  | (src)
-> +-------------------------------+
-> |  172  |   24  |   21  |  251  | (dest)
-> +-------------------------------+
-> ip4_input: p->len 108 p->tot_len 108
-> Unsupported transport protocol 1
->
-> Any ideas what the issue is here?
+> The following changes since commit df2ed552f0b05591090369a7fe7ddc92439dea5c:
+> 
+>   ext4fs: Fix: Read outside partition error (2025-05-23 10:42:49 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
+> 
+> [...]
 
-You reported the same issue some time ago [1] and while I could fine
-the original thread in my inbox, I thought we had got to the bottom of
-the issue and it had been fixed I couldn't find a follow up thread.
-Maybe Fabio can remember as I seem to recall he was the one that got
-to the bottom of the issue.
+Merged into u-boot/master, thanks!
 
-Peter
+-- 
+Tom
 
-[1] https://lists.denx.de/pipermail/u-boot/2023-November/538832.html
+
