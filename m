@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9775C54FB3
-	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 17:08:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04E9EC54FB3
+	for <u-boot@archiver.kernel.org>; Mon, 26 May 2025 17:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4269F82E67;
-	Mon, 26 May 2025 19:07:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=hpe.com
+	by phobos.denx.de (Postfix) with ESMTP id 4BA1D82E67;
+	Mon, 26 May 2025 19:34:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="grX+JYBP";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="S0NurIu5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F2C082E67; Mon, 26 May 2025 19:07:58 +0200 (CEST)
-Received: from mx0a-002e3701.pphosted.com (mx0a-002e3701.pphosted.com
- [148.163.147.86])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B3DEF82E8C; Mon, 26 May 2025 19:34:42 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEF4F82DB7
- for <u-boot@lists.denx.de>; Mon, 26 May 2025 19:07:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B81182E37
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 19:34:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=hpe.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=verdun@hpe.com
-Received: from pps.filterd (m0150241.ppops.net [127.0.0.1])
- by mx0a-002e3701.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54QH2isR005093;
- Mon, 26 May 2025 17:07:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=pps0720; bh=L38Mt2vVwJzEACTJb6mYtSRv+pUGtHpYK7vYS
- t3kwUc=; b=grX+JYBPNKMoCH/g/gDYCwwBV6XOdzGzg1p/XA2zKx6SQRRnBRctb
- 2kEI44qVqVX0KdrPfOGvMjuf9oiQ+iX9GBqls9PKJgCdYKOx2JhX6fabvCXkOKaa
- ieA7txe59kW+ZrnkFqD8P81o0v+WLp+Df69v9419a5gqhD8PHkIQLdQEueNGK2v3
- 6f9XIpkYASubq0HqipuUeoij3g1ovYNQvOfnxk+brsHngMTRHxEHkjrUD/GFgmuI
- /f++ApBiIPwZ+G13XVtKad+KW69SfvGs9G2JEPPvA+qUlweFlxfo5rej4txWgrRo
- WdMPXil6NPq0A6pX7cbp3qJdl/8zksh2w==
-Received: from p1lg14880.it.hpe.com ([16.230.97.201])
- by mx0a-002e3701.pphosted.com (PPS) with ESMTPS id 46vnxyb7g9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 26 May 2025 17:07:52 +0000 (GMT)
-Received: from p1lg14886.dc01.its.hpecorp.net (unknown [10.119.18.237])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by p1lg14880.it.hpe.com (Postfix) with ESMTPS id 0F9A280044F;
- Mon, 26 May 2025 17:07:19 +0000 (UTC)
-Received: from hpe.com (unknown [16.231.227.36])
- by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id 5E029809741;
- Mon, 26 May 2025 17:07:18 +0000 (UTC)
-From: verdun@hpe.com
-To: verdun@hpe.com, jmverdun3@gmail.com, u-boot@lists.denx.de
-Subject: [PATCH v6 0/1] *** Initial Wiznet W5500 support ***
-Date: Mon, 26 May 2025 17:07:11 +0000
-Message-ID: <20250526170712.4133-1-verdun@hpe.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=mchitale@ventanamicro.com
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6faa19e0661so20572186d6.3
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 10:34:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1748280879; x=1748885679; darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2VYG0B+lIUm1mqHprYEhA1RnrbC7X4YygChS0CTIe+U=;
+ b=S0NurIu5xB8QrqGpyrIxoGYHIBEZJCclRZbuw5V9kB3d/8HJnlO5lUKB/jOvcg3b/J
+ 9zAPHAUThYXXph1kC+xbpoSHD9aEtQnQrPozdki3RvWqHHJxExV0w6z1JQHtpEZYF+4U
+ AakH9BZr0xdIqYUFPAEPTgR9R/dKD3LMvNNxLIMBJghTmm41atBycHbfaJYsrdnSneh/
+ 8Was6mIZ9bJzpf7fH8Ox6qZ/bX9ZErLVyNPEJzTn0sIXb5xust2GFzHfxa3GnDrzRbhn
+ dCHB2/9zeThRJlsTnvDlk3msl/NJS+SzsH6Z0Zfrqz1vClzsFs3JsMM23C8xpBpwSOn4
+ bSoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748280879; x=1748885679;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2VYG0B+lIUm1mqHprYEhA1RnrbC7X4YygChS0CTIe+U=;
+ b=ISRiU4cNgtEkpPL3ggequ4f78FfRa7m2HVJM7lFEyT+GUR9uV+M3SzuwDNIqwg8bPf
+ OW0/rxeyzUBFoj/BcWGFQHHN6a9d9cio2UGGyHRfGyIaU90JMPrAEc5lPU2bS27xmwEF
+ Yvr0LArmKyXwVmNOaIvwrNALlhjzMbROh9KynevS/abBoe4ssaVMifqZBeI8fn6srWyT
+ nkz9nKbba0Aqrk2IzYFwBFZKKmLwwO43Tg2rPWuNmXIl9Jl3wlszE7RQ6RGZvfOoZRgM
+ GOlBSPTpPOr1Hw0vsxSi3qGHH8V/2zcGyA/6NuPs7IY0+HRZs9KhRPz/D/SD2zjs7GWB
+ aiPg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX7Fub/kwRPZmpPPh6GTJfEDIWxUuY/FfKVPtaGohoOLUpnL9TJKfQtzJkG5HQey+9B+AjZTRc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTtzugbkYhHk7zwxxGRA+t7zmVTtvwqZyqbYlsVV4lqU2/4Rk5
+ EXAbubbd7XytYl81i2UxAUZIAHrhxhHjdMdnD1y5gTUtY1ZHvOSgUhyPhCdovQGa3w5Ay1lqZFl
+ ZcJ50ePpAhElcZt4m20VCQKgkJsgl+hVhULGTO606MQ==
+X-Gm-Gg: ASbGncvYJmaEK/VMF794EqO6iXiTudeH2iYq98PRUaUeBZAmW+xnnPHNNBkbBEA1Gm/
+ b/2GZL6hjPKqHLTn429H3zsuYt3jwoUuIlvH+rcDyL50zPo5Hmg9nD7dUH5anSWVFGjEOpMEcOo
+ /tw+fp6daYxp7vEbgw++RM6oEmj3kXtFy6CnnADMeA3YRSCcd/pTMsa2FzbazNcJKluno=
+X-Google-Smtp-Source: AGHT+IFfdxpunVnCOROkAly5IV3HG54TwggRTi1s81RyMumPkZivcqxqskG2Msh3xjKT4pWahLjVcMfVBbsgbIUpVBo=
+X-Received: by 2002:a05:622a:59c8:b0:480:7147:1998 with SMTP id
+ d75a77b69052e-49f4674dce1mr145431821cf.22.1748280879018; Mon, 26 May 2025
+ 10:34:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI2MDE0NSBTYWx0ZWRfX+Z3DYsxWK7Kp
- tShN47Uc9s2e/DUbEl9Kyd4VeJPOHZI56lDG0v7Nf0zzBQB8u/GynvX8THuf7w0yXRyIrk3eG6H
- J3c+83FJLBV7/Q5MvbCnDbe4ed3gkfSCE5yCj3vUaSR7OlTf4/49YjFeaN5T82WloM1c3b8TDtL
- sPA4UGBKmO3yScIFWlXjUTjOxoF+JVTz3Btnm6S4M4U4OKhSqatSTrlZof5IcjTwZnMpMBFm3gN
- TDGb7F3z8vxQcljPeilXEB9AL40ppm3sNU0fJarWp0dW4wSIJrtsDATstpcc+8iHkcxqAQyXWUg
- 0KG1lKyLds7R1QjBT7iu6uM1klfTopzgMWsLKiukCMTmV5Ii3NvwGKPXGkDsPV0HHznNf+rz7eP
- vBPnSSI7
-X-Proofpoint-GUID: _DW406StBrNRn47ca4R5yOEDF3-mCIla
-X-Proofpoint-ORIG-GUID: _DW406StBrNRn47ca4R5yOEDF3-mCIla
-X-Authority-Analysis: v=2.4 cv=H+Pbw/Yi c=1 sm=1 tr=0 ts=68349fe8 cx=c_pps
- a=A+SOMQ4XYIH4HgQ50p3F5Q==:117 a=A+SOMQ4XYIH4HgQ50p3F5Q==:17
- a=dt9VzEwgFbYA:10 a=MvuuwTCpAAAA:8 a=_lroCgBNtfBhefZ1LIIA:9
-X-HPE-SCL: -1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-26_08,2025-05-26_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0
- adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
- malwarescore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
- mlxlogscore=999 mlxscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2505160000 definitions=main-2505260145
+References: <aC2hyzxwKzO4k1im@swlinux02>
+ <174785279069.2062062.17616710293064147131.b4-ty@konsulko.com>
+ <20250522-eradicate-clip-538f48710ad7@spud> <aC9TmaY7w2PL8lbn@pie.lan>
+ <CAN37VV4y58GeqbviFaJDCr1vqLc5tKaTcBLg4_PmeHF-As6tAw@mail.gmail.com>
+ <20250526-disband-cover-cdc6567452f2@spud>
+ <20250526145636.GX100073@bill-the-cat>
+In-Reply-To: <20250526145636.GX100073@bill-the-cat>
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Mon, 26 May 2025 23:04:02 +0530
+X-Gm-Features: AX0GCFsA12_89ihj3xjpSNUUf5lIYrRyg0MeISSb8PGY6NEsxyjYJkBc-pJrV4s
+Message-ID: <CAN37VV6SLVFmfxjbhs8YYEBpzdE8FqjstNh5Xw+DAUx5tC05FQ@mail.gmail.com>
+Subject: Re: [GIT PULL] u-boot-riscv/master
+To: Tom Rini <trini@konsulko.com>
+Cc: Conor Dooley <conor@kernel.org>, Yao Zi <ziyao@disroot.org>, 
+ Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, rick@andestech.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,67 +99,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jean-Marie Verdun <verdun@hpe.com>
+On Mon, May 26, 2025 at 8:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Mon, May 26, 2025 at 10:17:54AM +0100, Conor Dooley wrote:
+> > On Mon, May 26, 2025 at 09:02:46AM +0530, Mayuresh Chitale wrote:
+> > > On Thu, May 22, 2025 at 10:11=E2=80=AFPM Yao Zi <ziyao@disroot.org> w=
+rote:
+> > > >
+> > > > On Thu, May 22, 2025 at 12:28:18PM +0100, Conor Dooley wrote:
+> > > > > On Wed, May 21, 2025 at 12:39:50PM -0600, Tom Rini wrote:
+> > > > > > On Wed, 21 May 2025 17:50:03 +0800, Leo Liang wrote:
+> >
+> > > > > This PR seems to have made my CI blow up, and I'm not entirely su=
+re if
+> > > > > that's something intentional or not. I've not yet bisected, but s=
+ince
+> > > > > the error is "Image arch not compatible with host arch", I can on=
+ly
+> > > > > imagine the patch in question is:
+> > > > > | Subject: [PATCH v2 1/3] riscv: image: Add new image type for RV=
+64
+> > > > > | Date: Fri,  4 Apr 2025 14:48:55 +0000       [thread overview]
+> > > > > | Message-ID: <20250404144859.112313-2-mchitale@ventanamicro.com>=
+ (raw)
+> > > > > | In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com=
+>
+> > > > > |
+> > > > > | Similar to ARM and X86, introduce a new image type which allows=
+ u-boot
+> > > > > | to distinguish between images built for 32-bit vs 64-bit Risc-V=
+ CPUs.
+> > > > > |
+> > > > > | Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > > > > | Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
+> > > > > | ---
+> > > > > |  boot/image.c    | 3 ++-
+> > > > > |  include/image.h | 3 ++-
+> > > > > |  2 files changed, 4 insertions(+), 2 deletions(-)
+> > > > > |
+> > > > > | diff --git a/boot/image.c b/boot/image.c
+> > > > > | index 139c5bd035a..45299a7dc33 100644
+> > > > > | --- a/boot/image.c
+> > > > > | +++ b/boot/image.c
+> > > > > | @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D =
+{
+> > > > > |     {       IH_ARCH_ARC,            "arc",          "ARC",     =
+     },
+> > > > > |     {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_64=
+",   },
+> > > > > |     {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",  =
+     },
+> > > > > | -   {       IH_ARCH_RISCV,          "riscv",        "RISC-V",  =
+     },
+> > > > > | +   {       IH_ARCH_RISCV,          "riscv",        "RISC-V 32 =
+Bit",},
+> > > > > | +   {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 64 =
+Bit",},
+> > > > > |     {       -1,                     "",             "",        =
+     },
+> > > > > |  };
+> > > > > |
+> > > > > | diff --git a/include/image.h b/include/image.h
+> > > > > | index 07912606f33..411bfcd0877 100644
+> > > > > | --- a/include/image.h
+> > > > > | +++ b/include/image.h
+> > > > > | @@ -138,7 +138,8 @@ enum {
+> > > > > |     IH_ARCH_ARC,                    /* Synopsys DesignWare ARC =
+*/
+> > > > > |     IH_ARCH_X86_64,                 /* AMD x86_64, Intel and Vi=
+a */
+> > > > > |     IH_ARCH_XTENSA,                 /* Xtensa       */
+> > > > > | -   IH_ARCH_RISCV,                  /* RISC-V */
+> > > > > | +   IH_ARCH_RISCV,                  /* RISC-V 32 bit*/
+> > > > > | +   IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
+> > > > > |
+> > > > > |     IH_ARCH_COUNT,
+> > > > > |  };
+> > > > > | --
+> > > > > | 2.43.0
+> > > > > |
+> > > > > since it is changing the existing "riscv" image type to be the 32=
+-bit
+> > > > > image and requiring the new entry for 64-bit. My CI job uses the =
+system
+> > > > > mkimage to create the image that U-Boot is loading, so it doesn't=
+ know
+> > > > > about the new define etc. Maybe it's not considered a problem if =
+a new
+> > > > > U-Boot cannot boot an old image, but the comment above the enum r=
+eads:
+> > > > > |/*
+> > > > > | * CPU Architecture Codes (supported by Linux)
+> > > > > | *
+> > > > > | * The following are exposed to uImage header.
+> > > > > | * New IDs *MUST* be appended at the end of the list and *NEVER*
+> > > > > | * inserted for backward compatibility.
+> > > > > | */
+> > > > > The overwhelming majority of existing supported boards in U-Boot =
+are
+> > > > > 64-bit platforms, and the 64-bit platforms are the ones that have=
+ been
+> > > > > supported for longer, so my thought would be that the compatibili=
+ty of
+> > > > > 64-bit platforms should be prioritised over 32-bit? Or even add e=
+xplicit
+> > > > > 32-bit and 64-bit entries and the existing one is a catch-all for
+> > > > > compatibility reasons?
+> > > >
+> > > > I've mentioned entries with bitwidth explicitly specified in my pre=
+vious
+> > > > reply (and there hasn't been any response).
+> > > >
+> > > > > I'll consider IH_ARCH_RISCV32 a better idea, instead of implying =
+32bit
+> > > > > when no suffix attached. We (and the Linux kernel) mix 32-bit and=
+ 64-bit
+> > > > > variants of RISC-V together, thus it's hard to tell the exact bit=
+width
+> > > > > of "IH_ARCH_RISCV" without inspecting the code around. To me, it =
+sounds
+> > > > > more like "RISC-V, but no bitwidth specified".
+> > > > >
+> > > > > It will be nice if we could avoid this kind of ambiguity.
+> > > >
+> > > > (referring my own reply[1])
+> > > >
+> > > > I'll second explicit 32-bit and 64-bit entries, and keeping
+> > > > IH_ARCH_RISCV for compatibility consideration.
+> > > >
+> > > Are you suggesting something like this :
+> > >
+> > > { IH_ARCH_RISCV, "riscv", "RISC-V",},
+> > > { IH_ARCH_RISCV32, "riscv32", "RISC-V 32 Bit",},
+> > > { IH_ARCH_RISCV64, "riscv64", "RISC-V 64 Bit",},
+> > >
+> > > I tried to implement it like on ARM64. However the problem is that
+> > > while on ARM64 it switches to aarch32 if it encounters an IH_ARCH_ARM
+> > > kernel image, there is no equivalent mechanism for Risc-V yet.
+> >
+> > But we don't even want that, since the current behaviour on a 64-bit
+> > system is not to do anything 32-bit related, right? My 64-bit images
+> > created with my system mkimage use IH_ARCH_RISCV.
+> >
+> > > Another
+> > > option could be to disable this check in the bootm flow for now until
+> > > a similar mechanism is implemented on Risc-V.
+> >
+> > Why not just allow IH_ARCH_RISCV to retain the current "dumb" behaviour
+> > permanently, and only implement the strict checking when the explicit
+> > width types are detected?
+>
+> This seems most reasonable to me for the current situation.
 
-v6
-Switch all log to dev_dbg call
-
-v5
-Remove of_to_plat init
-Remove unused cmd variable from probe
-Remove socket open command from hw mac setup code
-Remove read back mac address command from hw mac setup code
-Improve comment about RX_RSR register usage
-Check error code of spi_write calls
-Check error code from spi_command
-Enhance some if statement
-Order variable definition per line length
-Return ENOMEM in case malloc fail
-
-v4
-Fix some comment typos
-Remove unnecessary IFDEF
-Drop w5500_eth_tx_hand_f definition and struct element as they are unused
-Reorder function to avoid predefinition
-Reorder variable definition per data size in functions
-Fix return value with spi_read and spi_read16
-Drop return value definition into spi_write16
-Define MAX_PACKET_SZ to 9000 bytes
-Use dynamic allocation for readbulk
-Realign readpoll_timeout call
-Add comment to enhance loop clarity on receive buffer length
-Remove mode variable into write_hwaddr
-Invert some direct if loop for indirect as to reduce code complexity
-Remove imr variable into w5500_socket_intr_mask function
-Drop rtr variable into probe function
-
-v3
-Remove Global definition
-Replace polling by read_poll_timeout
-Remove unused function
-Add empty lines before returns statement
-Remove declaration and code mix
-Switch to dev_dbg
-Relocate read/write helpers to top of file
-Remove include and incorporate it into the code
-
-v2
-Rebase source tree to create patch against top of tree and avoid issues
-with Kconfig and Makefile
-Recheck checkpatch.pl output as to minimize issues to CHECK state
-CHECK issues reported are coming from copy/paste section from the linux
-kernel driver, and aren't processed as being strong issues.
-command ran scripts/checkpatch.pl --no-tree v2-0001-Initial-support-for-Wiznet-W5500.patch
-
-Jean-Marie Verdun (1):
-  Initial support for Wiznet W5500
-
- drivers/net/Kconfig  |   9 +
- drivers/net/Makefile |   1 +
- drivers/net/w5500.c  | 610 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 620 insertions(+)
- create mode 100644 drivers/net/w5500.c
-
--- 
-2.43.0
-
+Ok. In that case, I think the patch set needs to be reverted.
+>
+> --
+> Tom
