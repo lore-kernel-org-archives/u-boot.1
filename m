@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C7BC54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:30:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75D5FC54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:30:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 736918383E;
-	Tue, 27 May 2025 15:29:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD2A083873;
+	Tue, 27 May 2025 15:29:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="o/HJWu+l";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="IG0c6J60";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44A008388B; Tue, 27 May 2025 15:29:40 +0200 (CEST)
+ id 1AD938388A; Tue, 27 May 2025 15:29:49 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A9D38384B
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:29:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6F1182B26
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:29:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RCungM001150;
- Tue, 27 May 2025 15:29:34 +0200
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RDG7HS011128;
+ Tue, 27 May 2025 15:29:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- xmfwORAjZqMGe2QqIep4GzCe9bdXMj8pmLCQnYLw8HY=; b=o/HJWu+lAoHlsHhg
- 9nmwPIty2ZEJgZSXaxQDYYP3TOGR8aXipKEdU49g2dNfVLw0cTCAz0oDW1IgJeDU
- E/aDDFC+NnjyV6gWpKcH43n7olQZmKE9rGKX+GI1j6aOuNXD7Fi+6XtLcKbjxRPt
- aVrj8zE3PoQ6LM+WKtFYw11rhtJWS/eFLx1yAyMs+X0TX3omD0xfSphWB4jpe2+j
- DFzmGYsninyfKrS7/N2cOJadUR6G1P3Vuqp2p6id/BXDjNya229OnZ51V6O9DELn
- 1COK47Yh4rQE1J4TqUBALv45E5ohcqDKgbhxdFeQ/HjQPM5Tj53KolB0v2N3v5NA
- WfDjUQ==
+ RWofWQVrN6u7N4V6vFrxB/GWKCG+k61l+mivQS5qwio=; b=IG0c6J60dtqBV70J
+ j3+bhfBMQuXpmcD+gEyhUgJ+mJJLyezLWz3FToyf88CDlnZsfBQdcFyR7Ggjkuaj
+ bsBbgTQ2jJCk2rE+7uEGC0hiySFXb4TprvuTOlO9jFspESzIc2aR/9iTSCsuvBvB
+ 192PaVHEMiFTrps9RzmlUM5UaiNtBseOpG83tK5X7LTXBQI7ZVKBkI9orBn8PvSI
+ MpMLYczBT8KEPkH5tnuva6pQcYe9EUzL8l7xPPfMZak7OT6SfYc2RWS6hr1DBfOE
+ 7blhEGaueSHIIaNYXc0jDMhr+fN+A5jcpMVMTW9LKt3ptzMf6Z8JZu0oCA4CxgPZ
+ +3Htjg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u3hk4hx7-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4j55y-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 15:29:33 +0200 (MEST)
+ Tue, 27 May 2025 15:29:40 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A7E0A4004A;
- Tue, 27 May 2025 15:28:35 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A52F940050;
+ Tue, 27 May 2025 15:28:42 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DEB46AEB165;
- Tue, 27 May 2025 15:27:58 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0255AAEC29A;
+ Tue, 27 May 2025 15:28:03 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 15:27:58 +0200
+ 2025 15:28:02 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Valentin Caron
- <valentin.caron@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH v2 01/13] clk: scmi: add compatibility with clock protocol 2.0
-Date: Tue, 27 May 2025 15:27:43 +0200
-Message-ID: <20250527132755.2169508-2-patrice.chotard@foss.st.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 05/13] clk: sandbox: update driver for CONFIG_CLK_AUTO_ID
+ support
+Date: Tue, 27 May 2025 15:27:47 +0200
+Message-ID: <20250527132755.2169508-6-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
 References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
@@ -94,18 +92,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Valentin Caron <valentin.caron@foss.st.com>
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Since clock protocol 2.0, SCMI specification add an option field
-"clock_enable_delay" to CLOCK_ATTRIBUTES command.
+Update the sandbox driver to allow support of the
+CONFIG_CLK_AUTO_ID by using the new API clk_get_id()
+to get the internal SANDBOX identifier.
 
-scmi_read_resp_from_smt() will return an error ("Buffer too small") as
-the message length coming from the SCMI server is not the same as expected.
+With CONFIG_CLK_AUTO_ID, clk->id have the also seq identifier.
 
-So implement a condition to SCMI clock protocol version to change the
-length of the expected message.
-
-Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Lukasz Majewski <lukma@denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>
@@ -113,113 +108,194 @@ Cc: Sean Anderson <seanga2@gmail.com>
 
 (no changes since v1)
 
- drivers/clk/clk_scmi.c   | 54 +++++++++++++++++++++++++++++-----------
- include/scmi_protocols.h | 15 +++++++++++
- 2 files changed, 54 insertions(+), 15 deletions(-)
+ drivers/clk/clk_sandbox.c     | 30 +++++++++++++---------
+ drivers/clk/clk_sandbox_ccf.c | 48 +++++++++++++++++------------------
+ 2 files changed, 42 insertions(+), 36 deletions(-)
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index af69850cdd8..e323a948780 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -84,26 +84,47 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
- static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
- 				 u32 *attr)
+diff --git a/drivers/clk/clk_sandbox.c b/drivers/clk/clk_sandbox.c
+index 8dd77f18d90..c8c5a88c52d 100644
+--- a/drivers/clk/clk_sandbox.c
++++ b/drivers/clk/clk_sandbox.c
+@@ -13,24 +13,26 @@
+ static ulong sandbox_clk_get_rate(struct clk *clk)
  {
-+	struct scmi_clock_priv *priv = dev_get_priv(dev);
- 	struct scmi_clk_attribute_in in = {
- 		.clock_id = clkid,
- 	};
--	struct scmi_clk_attribute_out out;
--	struct scmi_msg msg = {
--		.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
--		.message_id = SCMI_CLOCK_ATTRIBUTES,
--		.in_msg = (u8 *)&in,
--		.in_msg_sz = sizeof(in),
--		.out_msg = (u8 *)&out,
--		.out_msg_sz = sizeof(out),
--	};
- 	int ret;
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong id = clk_get_id(clk);
  
--	ret = devm_scmi_process_msg(dev, &msg);
--	if (ret)
--		return ret;
--
--	*name = strdup(out.clock_name);
--	*attr = out.attributes;
-+	if (priv->version >= 0x20000) {
-+		struct scmi_clk_attribute_out_v2 out;
-+		struct scmi_msg msg = {
-+			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
-+			.message_id = SCMI_CLOCK_ATTRIBUTES,
-+			.in_msg = (u8 *)&in,
-+			.in_msg_sz = sizeof(in),
-+			.out_msg = (u8 *)&out,
-+			.out_msg_sz = sizeof(out),
-+		};
-+
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			return ret;
-+
-+		*name = strdup(out.clock_name);
-+		*attr = out.attributes;
-+	} else {
-+		struct scmi_clk_attribute_out out;
-+		struct scmi_msg msg = {
-+			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
-+			.message_id = SCMI_CLOCK_ATTRIBUTES,
-+			.in_msg = (u8 *)&in,
-+			.in_msg_sz = sizeof(in),
-+			.out_msg = (u8 *)&out,
-+			.out_msg_sz = sizeof(out),
-+		};
-+
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			return ret;
-+
-+		*name = strdup(out.clock_name);
-+		*attr = out.attributes;
-+	}
+ 	if (!priv->probed)
+ 		return -ENODEV;
+ 
+-	if (clk->id >= SANDBOX_CLK_ID_COUNT)
++	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+-	return priv->rate[clk->id];
++	return priv->rate[id];
+ }
+ 
+ static ulong sandbox_clk_round_rate(struct clk *clk, ulong rate)
+ {
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong id = clk_get_id(clk);
+ 
+ 	if (!priv->probed)
+ 		return -ENODEV;
+ 
+-	if (clk->id >= SANDBOX_CLK_ID_COUNT)
++	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+ 	if (!rate)
+@@ -43,18 +45,19 @@ static ulong sandbox_clk_set_rate(struct clk *clk, ulong rate)
+ {
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
+ 	ulong old_rate;
++	ulong id = clk_get_id(clk);
+ 
+ 	if (!priv->probed)
+ 		return -ENODEV;
+ 
+-	if (clk->id >= SANDBOX_CLK_ID_COUNT)
++	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+ 	if (!rate)
+ 		return -EINVAL;
+ 
+-	old_rate = priv->rate[clk->id];
+-	priv->rate[clk->id] = rate;
++	old_rate = priv->rate[id];
++	priv->rate[id] = rate;
+ 
+ 	return old_rate;
+ }
+@@ -62,14 +65,15 @@ static ulong sandbox_clk_set_rate(struct clk *clk, ulong rate)
+ static int sandbox_clk_enable(struct clk *clk)
+ {
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong id = clk_get_id(clk);
+ 
+ 	if (!priv->probed)
+ 		return -ENODEV;
+ 
+-	if (clk->id >= SANDBOX_CLK_ID_COUNT)
++	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+-	priv->enabled[clk->id] = true;
++	priv->enabled[id] = true;
  
  	return 0;
  }
-@@ -257,6 +278,9 @@ static int scmi_clk_probe(struct udevice *dev)
- 	if (!CONFIG_IS_ENABLED(CLK_CCF))
- 		return 0;
+@@ -77,14 +81,15 @@ static int sandbox_clk_enable(struct clk *clk)
+ static int sandbox_clk_disable(struct clk *clk)
+ {
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong id = clk_get_id(clk);
  
-+	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
-+					    &priv->version);
-+
- 	/* register CCF children: CLK UCLASS, no probed again */
- 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
- 		return 0;
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index 9046de7e3e7..762a1032c37 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -782,6 +782,21 @@ struct scmi_clk_attribute_out {
- 	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
- };
+ 	if (!priv->probed)
+ 		return -ENODEV;
  
-+/**
-+ * struct scmi_clk_get_nb_out_v2 - Response payload for SCMI_CLOCK_ATTRIBUTES command
-+ * Clock management Protocol 2.0
-+ * @status:	SCMI command status
-+ * @attributes:	clock attributes
-+ * @clock_name:	name of the clock
-+ * @clock_enable_delay: delay incurred by the platform to enable the clock
-+ */
-+struct scmi_clk_attribute_out_v2 {
-+	s32 status;
-+	u32 attributes;
-+	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
-+	u32 clock_enable_delay;
-+};
-+
- /**
-  * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
-  * @clock_id:	SCMI clock ID
+-	if (clk->id >= SANDBOX_CLK_ID_COUNT)
++	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+-	priv->enabled[clk->id] = false;
++	priv->enabled[id] = false;
+ 
+ 	return 0;
+ }
+@@ -92,11 +97,12 @@ static int sandbox_clk_disable(struct clk *clk)
+ static int sandbox_clk_request(struct clk *clk)
+ {
+ 	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong id = clk_get_id(clk);
+ 
+-	if (clk->id >= SANDBOX_CLK_ID_COUNT)
++	if (id >= SANDBOX_CLK_ID_COUNT)
+ 		return -EINVAL;
+ 
+-	priv->requested[clk->id] = true;
++	priv->requested[id] = true;
+ 	return 0;
+ }
+ 
+diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/clk_sandbox_ccf.c
+index f96a15c30b3..9b8036d41aa 100644
+--- a/drivers/clk/clk_sandbox_ccf.c
++++ b/drivers/clk/clk_sandbox_ccf.c
+@@ -235,47 +235,47 @@ static int sandbox_clk_ccf_probe(struct udevice *dev)
+ 	void *base = NULL;
+ 	u32 reg;
+ 
+-	clk_dm(SANDBOX_CLK_PLL3,
+-	       sandbox_clk_pllv3(SANDBOX_PLLV3_USB, "pll3_usb_otg", "osc",
+-				 base + 0x10, 0x3));
++	dev_clk_dm(dev, SANDBOX_CLK_PLL3,
++		   sandbox_clk_pllv3(SANDBOX_PLLV3_USB, "pll3_usb_otg", "osc",
++				     base + 0x10, 0x3));
+ 
+-	clk_dm(SANDBOX_CLK_PLL3_60M,
+-	       sandbox_clk_fixed_factor("pll3_60m",  "pll3_usb_otg",   1, 8));
++	dev_clk_dm(dev, SANDBOX_CLK_PLL3_60M,
++		   sandbox_clk_fixed_factor("pll3_60m", "pll3_usb_otg",   1, 8));
+ 
+-	clk_dm(SANDBOX_CLK_PLL3_80M,
+-	       sandbox_clk_fixed_factor("pll3_80m",  "pll3_usb_otg",   1, 6));
++	dev_clk_dm(dev, SANDBOX_CLK_PLL3_80M,
++		   sandbox_clk_fixed_factor("pll3_80m", "pll3_usb_otg",   1, 6));
+ 
+ 	/* The HW adds +1 to the divider value (2+1) is the divider */
+ 	reg = (2 << 19);
+-	clk_dm(SANDBOX_CLK_ECSPI_ROOT,
+-	       sandbox_clk_divider("ecspi_root", "pll3_60m", &reg, 19, 6));
++	dev_clk_dm(dev, SANDBOX_CLK_ECSPI_ROOT,
++		   sandbox_clk_divider("ecspi_root", "pll3_60m", &reg, 19, 6));
+ 
+ 	reg = 0;
+-	clk_dm(SANDBOX_CLK_ECSPI0,
+-	       sandbox_clk_gate("ecspi0", "ecspi_root", &reg, 0, 0));
++	dev_clk_dm(dev, SANDBOX_CLK_ECSPI0,
++		   sandbox_clk_gate("ecspi0", "ecspi_root", &reg, 0, 0));
+ 
+-	clk_dm(SANDBOX_CLK_ECSPI1,
+-	       sandbox_clk_gate2("ecspi1", "ecspi_root", base + 0x6c, 0));
++	dev_clk_dm(dev, SANDBOX_CLK_ECSPI1,
++		   sandbox_clk_gate2("ecspi1", "ecspi_root", base + 0x6c, 0));
+ 
+ 	/* Select 'pll3_60m' */
+ 	reg = 0;
+-	clk_dm(SANDBOX_CLK_USDHC1_SEL,
+-	       sandbox_clk_mux("usdhc1_sel", &reg, 16, 1, usdhc_sels,
+-			       ARRAY_SIZE(usdhc_sels)));
++	dev_clk_dm(dev, SANDBOX_CLK_USDHC1_SEL,
++		   sandbox_clk_mux("usdhc1_sel", &reg, 16, 1, usdhc_sels,
++				   ARRAY_SIZE(usdhc_sels)));
+ 
+ 	/* Select 'pll3_80m' */
+ 	reg = BIT(17);
+-	clk_dm(SANDBOX_CLK_USDHC2_SEL,
+-	       sandbox_clk_mux("usdhc2_sel", &reg, 17, 1, usdhc_sels,
+-			       ARRAY_SIZE(usdhc_sels)));
++	dev_clk_dm(dev, SANDBOX_CLK_USDHC2_SEL,
++		   sandbox_clk_mux("usdhc2_sel", &reg, 17, 1, usdhc_sels,
++				   ARRAY_SIZE(usdhc_sels)));
+ 
+ 	reg = BIT(28) | BIT(24) | BIT(16);
+-	clk_dm(SANDBOX_CLK_I2C,
+-	       sandbox_clk_composite("i2c", i2c_sels, ARRAY_SIZE(i2c_sels),
+-				     &reg, CLK_SET_RATE_UNGATE));
++	dev_clk_dm(dev, SANDBOX_CLK_I2C,
++		   sandbox_clk_composite("i2c", i2c_sels, ARRAY_SIZE(i2c_sels),
++					 &reg, CLK_SET_RATE_UNGATE));
+ 
+-	clk_dm(SANDBOX_CLK_I2C_ROOT,
+-	       sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
++	dev_clk_dm(dev, SANDBOX_CLK_I2C_ROOT,
++		   sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
+ 
+ 	return 0;
+ }
 -- 
 2.25.1
 
