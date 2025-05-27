@@ -4,93 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 515D4C54F30
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 09:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A2BC54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 09:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 868FE82FE1;
-	Tue, 27 May 2025 11:20:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2E79582C8B;
+	Tue, 27 May 2025 11:33:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fTanlzIV";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="WYSoFStI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8237982FE7; Tue, 27 May 2025 11:20:50 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 9CF2782FE1; Tue, 27 May 2025 11:33:47 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1706C82FAB
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 11:20:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4923C82B07
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 11:33:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-70e4bd65106so16495627b3.0
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 02:20:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3a4dd5f69e7so1030120f8f.0
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 02:33:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748337641; x=1748942441; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2m65nF4UcLHMwgs3cbSbDBtY/vSr/mGkGgqfnthzUHs=;
- b=fTanlzIVBNWKO23o8nE918eOjYhCvxbO5IHqOAaB62qQJpQ72f7lzV+rCCLsAQqLS6
- SW6g5e2fTd7Ad4VP8L/K3YRF6OaiW3NkNB500b2A2vyRCHKYYnQANRs1lYB5XpjD+Qph
- Uc42+pt1hhpMw/uu+SmG+3YkV07N0JWgbjtAKc/zN5JB07TCTi8CPfDKN5zTtCY4GAS1
- bL6DS9wdSvYgv0Nw0a/G5cfrmM5OUa1eWSSEx6zf9LtjrX4aBkwTdpixJwYUeK92h57B
- v6e4tVsVeDVzQZTnGO+rCEWnmHjNbGHp0EBXNCC+P2wEx0fHp0vXxAvIk22LvkZtA8bP
- sQug==
+ d=9elements.com; s=google; t=1748338424; x=1748943224; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sm0y89k9exDo7B0s59RKotpEh6qwAfikB+9aNpPvhkA=;
+ b=WYSoFStIWfJnGinCTpiXY2wgEPhaYzHHxA4qXgCIVbzCnq5+Ow7Uaqyh5rt/fff/35
+ SwrMLilK/D3PiNkml1SRvtRe6hg8srGLxriLWFWh6xMJ/u1SMPd5APyJfhW3x5STpogn
+ A8WyBzFUWffTuhnm4uz9is1UA/brDqBELvv2H78DXBsTCnUFDzOfe4C0lxyhemacosfw
+ HoLWWiEuvHm3sTz/XOZQuJp3al3TI8WMC80kEsHJSDtVwAK2MqIgEzRSoX3ORzr4hsti
+ 8hYFBSHPIKGoM/6quWSYXJBoQNchIDyTLVWgja6oYidys0yKUn7yMUmLJyoUqFn9v+FN
+ Nr/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748337641; x=1748942441;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1748338424; x=1748943224;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2m65nF4UcLHMwgs3cbSbDBtY/vSr/mGkGgqfnthzUHs=;
- b=iSQZpaRKTadraaP+MHWjpYt4NxdqSlJCUnFE030dX0ONaTu6opKs1rPVbkBAgJbr+W
- tk6YA2n82QXajExWCRJbZxTFD06yC3FIXBu2p1FWEnuEuqVZd1uQvgW8//l19yCiY7Mg
- HO9e/MN+spweiKeHUVcdiF820/YefANfuhgiSA9M1oXm7jDvmPYJ0wDKYEit0nhmAFtZ
- PeTcJnPE6bjMfTVzCibYzqwHUy8N3NTxDj9HNSaPbOTnsVRUgXYTKe3F0jaaMStJeIeX
- 76XzXjeN1F6E+jLZ1NOQQjFKAekexUI40Xvw9I8kVilQR5gwykhfS8kjeQdgvGgmYr8m
- GafQ==
-X-Gm-Message-State: AOJu0YyWUBp7l8HqBjfSrNyH/8zo0IxW2GFUzOk2B7q2hDeYbUwGyDA3
- aBd2Lgy6NoMYKlWdX0QphI33ZiwPdSxsuxajuM2ZHG5Jh/cRf3DVq6oKPGuOIZ9Wm09PXGNYnRM
- NxbSIuPuFBrD7CFA86GfsRTzBoQidMAyEMWigd9QS4mo7mPyck4NF
-X-Gm-Gg: ASbGncvNMmbH2XYC0mdAwpxZr2qRNruRE85s6/J+97SWK2wLBF9ZEkRNbduABmuIMR1
- IadqLhIynEUM5+2Jy9hTpDlBoyAoNfwkcWfHq1YUHkVJfrWSjqI58FwBMRPck9CAjVI68Ph2MfR
- sqVCy8Uw8V9LTemLgLoy9mLrAdxCm5C1J2YQQ2EnPkfn7z
-X-Google-Smtp-Source: AGHT+IFbRorUyDykrxQMjxbb4HWKePkesPeTjZrIOTFMIpW6Ru2ePnPTmxc/+68DP4j9tKabQM/DCudPoaHNXb0stkU=
-X-Received: by 2002:a05:690c:8c06:b0:70e:23e6:60f7 with SMTP id
- 00721157ae682-70e2dabb3a3mr107892827b3.27.1748337640856; Tue, 27 May 2025
- 02:20:40 -0700 (PDT)
+ bh=sm0y89k9exDo7B0s59RKotpEh6qwAfikB+9aNpPvhkA=;
+ b=r5U0ZwG+X0mpKkfhwmNkJWIM/qlHfcc3LQVa3HmcY1E+qkV0kq3PtTKAEHn8U99T3U
+ FY/qtVEQsmgG5MG39TVJx5gmFQgiqBlREuiL46vtZoquyoDAQ4URuCpv/YMxOcwrwjId
+ VwO+rYeRSpBizmyaf0EOVMbxMOG6sUZIvWN63fFmHVE0VpEnPqCKZA8CFTo6dOgpV1Ra
+ Qor1a1LEru2jNTrBsJVewiRx+nkralgQ9yAnxJ9hnMFokzK2WFt+5w3wGKkSHEFxRfIe
+ bwii6o9miAM1QoFmUkKMn6iDWgrAhlZnmB4J6rFBfF1JDIbic6+koCwAeNxWUqc4Fzx/
+ uN1w==
+X-Gm-Message-State: AOJu0Ywp+ajYzdZp6wMQeBekYTW8oAo7XKZZwNd6Zu0AUtTJpA0TxSJo
+ YVGFKKBCgv12fBfKG1Ov5WbQ2Ac57xQUrKhsTprOYLV1ZuHmb8hMjLnmLfuIbcKeJBA=
+X-Gm-Gg: ASbGnctzV2GNaPAiXcl2459Cvc4OsZymwdkTIJBtunPZOkWMtgYmrc04vkYkpz4Suhz
+ 1HcZ8BKSoY4WSvopQb64Iy9LjtrUaWIBXgLylZbdDizD5p/B0PLGvXqMqOaBGcnB736yc4dmS6B
+ GJ1pA5v02UoDp0iu+rJZAqRgmd++t8WAKx5e/jC8eZZIce58/rztxWf9bI+sZYwmXku4WvkdfD1
+ HQiKP/wsGf83f0aYaOquLw2ydBNInLMS5ls2/A4JWyOdgkHoUCPS9M8iAqidarZTI6c1kh5ELH6
+ ynPDh31t0X2SP+3r7SXYrss4Z7lavxubE79r4OISL4d/C1gWAh5V8ZFzOKEgQJ8vj+K/MA++U9W
+ tHrjqEA6mmEjq8PwYs12jWNFUFyk0rWiXquGhPpVLt+78iRoWVEqIWCJXP4Fv2d8=
+X-Google-Smtp-Source: AGHT+IFOqIbQ37N+1ZpJGUTBkNuWEWDUbODqnAOfvjbpfi4vcomPw31gVGJ9/E6OMQh9Pw0QY2CJWA==
+X-Received: by 2002:a05:6000:178b:b0:3a4:d6ed:8df7 with SMTP id
+ ffacd0b85a97d-3a4d6eda61amr6901385f8f.59.1748338424379; 
+ Tue, 27 May 2025 02:33:44 -0700 (PDT)
+Received: from T14sGen4.sec.9e.network
+ (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4db4e6f15sm4592294f8f.81.2025.05.27.02.33.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 May 2025 02:33:43 -0700 (PDT)
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+To: Tom Rini <trini@konsulko.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] arm/dts/qemu-sbsa: Fix interrupt
+Date: Tue, 27 May 2025 11:33:31 +0200
+Message-ID: <20250527093332.518931-1-patrick.rudolph@9elements.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250524120904.684977-1-sjg@chromium.org>
- <CAC_iWj+XfkWPj+R1JUc0ZPFatRtpMso-Lw+uYzcgcbuKPuV3Dw@mail.gmail.com>
- <CAFLszTho++gscP4rUUY354iyVWFyPkZeMCpa-TpX0GaWOQzQvw@mail.gmail.com>
-In-Reply-To: <CAFLszTho++gscP4rUUY354iyVWFyPkZeMCpa-TpX0GaWOQzQvw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 27 May 2025 12:20:04 +0300
-X-Gm-Features: AX0GCFtVPvRyMGi8eQbGxblJ3Mrd-k10fn0CSFzWNk_JdnMzQQvsASIUebef2tE
-Message-ID: <CAC_iWjKjZ-Q_hreO1Z64AFBWXOHB_YB_+Au_9psecVO+ATE_Pw@mail.gmail.com>
-Subject: Re: [PATCH 0/3] efi_loader: Move the public cerificate back to the
- devicetree
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, 
- Prasad Kummari <prasad.kummari@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <cfsworks@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tim Harvey <tharvey@gateworks.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,93 +96,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Change the vcpumntirq in the GICv3 node from SPI to PPI.
 
-On Tue, 27 May 2025 at 11:20, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Sat, 24 May 2025 at 19:13, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Sat, 24 May 2025 at 15:09, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > A previously rejected patch to move the EFI public cerificate out of the
-> > > devicetree has recently been applied. This series reverts the change,
-> > > pending further discussion as to why it was accepted.
-> >
-> > I spent a good amount of time, writing the commit message an
-> > explaining why this patch was sent
->
-> Yes, that is [1] and I did read it carefully before sending my series.
->
-> From my POV there are two things wrong there:
-> - The signature is not an internal U-Boot ABI.
+Prevents Linux from complaining:
+'[Firmware Bug]: CPU interface incapable of MMIO access'
 
-It is, as it is for every firmware that builds out there. EDKII does
-the same thing.
+Fixes: 6d722894fd48 "board: emulation: Add QEMU sbsa support"
 
->  It is how U-Boot works,
-> so if a build systems wants to inject a key it should use that
-> mechanism, not add a new mechanism into U-Boot's build system. If it
-> would help to have some documentation somewhere which says this, I
-> would be happy to send a patch to add something
-> - QEMU is blocked from accepting devicetree additions due to another
-> Linaro employee's refusal to accept a patch[2]
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+---
+ arch/arm/dts/qemu-sbsa.dts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-It's not blocked. It has been NAK'ed and IMHO for a very good reason.
+diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
+index 099b51b927f..a7718d6c29e 100644
+--- a/arch/arm/dts/qemu-sbsa.dts
++++ b/arch/arm/dts/qemu-sbsa.dts
+@@ -91,7 +91,10 @@
+ 		#interrupt-cells = <3>;
+ 		status = "okay";
+ 		interrupt-controller;
+-		interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>;
++
++		/* vcpumntirq: virtual CPU interface maintenance interrupt */
++		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
++
+ 		reg = /bits/ 64 <SBSA_GIC_DIST_BASE_ADDR SBSA_GIC_DIST_LENGTH>,
+ 		      /bits/ 64 <SBSA_GIC_REDIST_BASE_ADDR SBSA_GIC_REDIST_LENGTH>,
+ 		      /bits/ 64 <0 0>,
+-- 
+2.49.0
 
->
-> > (which btw wasn't 'rejected', you
-> > forcefully reverted it back then with no agreements from anyone)
->
-> The original series [4] was applied (I believe accidentally) against
-> my objections. Heinrich pulled the revert [5]. I went ahead and did
-> the QEMU patch, to help with your issue*.
-
-Heinrich applied the patches initially, and you send the revert, that
-none of the patch reviewers ack'ed.
-You reasoning back then is that the RO functionality was moot, because
-we didn't have it. It's here now.
-
->
-> > and
-> > why we prefer to do it this way. tl;dr early boot loaders that pass as
-> > a DT is a problem now.
-> > If there's a good reason to revert it, please explain it on the commit message
->
-> The reasoning hasn't changed from the discussion three years ago -
-> please see [4]. There's also lots of discussion on your original
-> series and my revert, e.g the cover letter. A highly relevant part of
-> this is that devicetree is where config should be stored, so the build
-> system has control over what is placed there.
->
-> But in any case, it isn't right to send the series again, under a
-> different name, e.g. not mentioning device tree.
->
-> [..]
->
-> Regards,
-> Simon
->
-> * The QEMU patch is still outstanding after three years. Could you
-> please talk to Peter Maydell and see if you can get this resolved? I
-> have sent it twice since, most recently in April [7] but there was not
-> even a reply.
-
-Because they NAK'ed it a few years ago, and aren't willing to take it.
-I don't think there's anything to discuss and for the record I agree
-with the QEMU maintainers on this.
-
-Thanks
-/Ilias
->
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250401112729.2181793-1-ilias.apalodimas@linaro.org/
-> [2] https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
-> [3] https://lore.kernel.org/u-boot/CAPnjgZ2uM=n8Qo-a=DUkx5VW5Bzp5Xy8=Wgmrw8ESqUBK00YJQ@mail.gmail.com/
-> [4] https://patchwork.ozlabs.org/project/uboot/list/?series=253693&state=*&archive=both
-> [5] https://patchwork.ozlabs.org/project/uboot/cover/20210802144431.2396678-1-sjg@chromium.org/
-> [6] https://patchwork.kernel.org/project/qemu-devel/patch/20250405191352.2597585-1-sjg@chromium.org/
-> [7] https://patchwork.kernel.org/project/qemu-devel/patch/20250405191352.2597585-1-sjg@chromium.org/
