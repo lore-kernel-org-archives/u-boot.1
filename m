@@ -4,68 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90C3C54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 12:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E8ECC54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 12:37:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E213836C1;
-	Tue, 27 May 2025 14:15:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 744A58363B;
+	Tue, 27 May 2025 14:37:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MDfd1i0B";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="cw7ILj5m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A93283721; Tue, 27 May 2025 14:15:30 +0200 (CEST)
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A59318304C
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 14:15:27 +0200 (CEST)
+ id 8DE388300F; Tue, 27 May 2025 13:12:40 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+ by phobos.denx.de (Postfix) with ESMTP id C5C0282E40
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:12:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x544.google.com with SMTP id
- 4fb4d7f45d1cf-602039559d8so6552432a12.1
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 05:15:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748348126; x=1748952926; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=osSrwJJ2u4lPGh84O5dIj2O4u87Xy+Lwet7HUaIuVkI=;
- b=MDfd1i0BDF3NizvWTLOum+Su/P0k62MHqfyxgFXe5HWf0asz8w3ff9geJ53hUY6LFY
- jwO0G6NhPZM8M/dYmLS+RN3goqwgqr8g9zcwtjUB1Ip81DCMABEipZ+nIN9D3ulUKXPz
- ScwuC9QxCDUKV9cTU860Dqpd8hEjjMikD/tRw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748348126; x=1748952926;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=osSrwJJ2u4lPGh84O5dIj2O4u87Xy+Lwet7HUaIuVkI=;
- b=ujkkL6Nwgk9NMJKHxe8rSOoKa19Sil06t6Z130SRTAOLDITZpy6ThlYP3tAtDO8MDL
- ShX8r11L0zYq1tf9Vcx1z1UZjjzYn5QInfpSwjQ+lULPe9tyrJKvvRk5yq4mko+85NFF
- AP74hZu3zTju7XQhQ0sY0Ug8RmRTUlV3DudOCO8RGDRBRr7zSSKTbbbbMtwXMsBvUoH/
- 1uvAActs3We+8yp3g1lVuXfGh0Fk9O60pk6tCHoXqtS3DRYX2nIcgWqIEmv8/Wff0PGM
- BjXVGUfx6ob+ca7u1ekVfMKMXfOXYaJQajFFW97KIeA9QwIHyq+CfW8H9kFMtO37Y2Y9
- uX9Q==
-X-Gm-Message-State: AOJu0YwhW7tUokt5ADqTGSu7YAV1rHdahPHbCGp23O6bM8t8ZlpQ8j4d
- 7Zh3yK7WElNuaW8YUyXlFQadBhMsucQrmOJ14Jj4IoMk7ToFVLeB09FLa3BMPhUrHd+/4nciv1N
- Ke5PDk3OvLJzE+1WeQcSD64JFK7RZAT2edbQXDUJRXBZARy7Pt7VlCWMZhK4=
-X-Gm-Gg: ASbGncuh2S1GqwdlLGfaYh8lAHyCcvAxAl3i8IiQdyyx/Ym9zJoK7tDpnFjYcnKXG24
- JYWlfJeEmVllON9DqOF4+G3N6cq7cl4O4LuoMVnBCxlOmM3zfje/UL+gSwW0qoUHdSGj0RNfSQm
- nEGfVE1QlDFI+5RvMecKjB0ATZkhYRvFw=
-X-Google-Smtp-Source: AGHT+IFmGuSmXge+kbNHETI07NEVczOR3RUvpyG7bykays/Vg9j6mPgXR+ZzhM1/+fL7dSdkMLNOGfTH0598OuKCMOw=
-X-Received: by 2002:a05:6402:2111:b0:602:cfab:ea9a with SMTP id
- 4fb4d7f45d1cf-602da402afbmr11613877a12.27.1748348126146; Tue, 27 May 2025
- 05:15:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ybdesire@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=0mtMFs0+AIXmN5AbFT38/lQEC/U2YrSIrb3620DcJkM=; b=c
+ w7ILj5mQghw8DT4G8kvnoFb3Gqn+5KjxkBcGv39/yR1oLIbnNB+ieRhUF0tnQzyJ
+ WE5RBTKgs6Z8dcluqEbNRa1wk+0NNisAGjn/Nvkts3TzaBJObUqZa+m9T60vc168
+ jUIHApuR5UcIpWX5Lxf+sTgbnwrrqTsYuoyBWvYX1E=
+Received: from ybdesire$163.com ( [220.181.41.75] ) by
+ ajax-webmail-wmsvr-40-114 (Coremail) ; Tue, 27 May 2025 19:12:32 +0800
+ (CST)
+X-Originating-IP: [220.181.41.75]
+Date: Tue, 27 May 2025 19:12:32 +0800 (CST)
+From: yb <ybdesire@163.com>
+To: u-boot@lists.denx.de
+Subject: Potential Integer Overflow in video_splash_align_axis() Function
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20240801(9da12a7b)
+ Copyright (c) 2002-2025 www.mailtech.cn 163com
+X-NTES-SC: AL_Qu2fCv+fu0su5Cabbekfm0Yaj+Y8Ucuwu/4j1I9RPp5+jDvp6DEnbX1jAlX62c6EMyChjTi3bghLycdZdpdEQr4FnvGiiouwF/+EVFqnfWlj/w==
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 27 May 2025 13:15:14 +0100
-X-Gm-Features: AX0GCFtKyk3VHfKCgUwnMU76gXwnGxqHbzZM3aOiLd6r8ux61v0Jf17cLs_IZI0
-Message-ID: <CAFLszTitaKMU84qGpu_RqVi6HJ1C5F92vy4eZg17PDoVAGZGWg@mail.gmail.com>
-Subject: Please pull u-boot-dm into -next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <39d8503a.a4b8.1971171af83.Coremail.ybdesire@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: cigvCgDnr6MgnjVoOoAOAA--.1290W
+X-CM-SenderInfo: 51egv2xluhqiywtou0bp/1tbixx5a62g1SagvFAADss
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Tue, 27 May 2025 14:37:04 +0200
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,191 +66,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-This is for -next
-
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/26346
-(note that x86 boards and RISC-V board don't work in your tree at present)
-
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=79&view=results
-
-
-The following changes since commit 39b815d02d7ce6af32bcf023d20243c404b75a84:
-
-  Merge tag 'v2025.07-rc3' into next (2025-05-26 16:07:19 -0600)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-next-27may25
-
-for you to fetch changes up to ec2482a24ac3a1d0beadae80bcb28c8d89b4c1ab:
-
-  patman: Add basic documentation for new features (2025-05-27 10:07:43 +0100)
-
-----------------------------------------------------------------
-Sync up Python tools from my tree
-
-- minor binman tweaks
-- terminal improvements in u_boot_pylib
-- patman move to asyncio
-- patman support for new 'series' subcommand
-
-----------------------------------------------------------------
-Simon Glass (84):
-      buildman: Add a way to build a particular
-targethttps://dev.azure.com/simon0972/u-boot/_build/results?buildId=79&view=results
-      binman: Read the skip-at-start value on startup
-      binman: x86: Write skip-at-start when end-at-4gb is used
-      patman: Move all non-test logic into control module
-      patman: Move capture_sys_output() into terminal and rename
-      binman: Correct a typo in the toolpath comment
-      u_boot_pylib: Allow control of capturing
-      u_boot_pylib: Improve ANSI-colour output with backgrounds
-      u_boot_pylib: Add a pager
-      u_boot_pylib: Avoid concurrent execution of only one test
-      u_boot_pylib: Allow disabling colour output
-      tools: Plumb in capture control
-      patman: Correct a stray quote
-      patman: Rename test_basic() in test_checkpatch
-      patman: Tidy up the start-up code
-      patman: Support extra test features
-      patman: Move code for sending into its own module
-      CI: Add a dependency file for patman
-      patman: Create a module for handling patchwork
-      patman: Move Patch and Review to patchwork module
-      patman: Add reading of series and patch status
-      patman: Rename check_patchwork_status()
-      patman: Split up check_and_show_status()
-      patman: Split out the processing of find_new_responses()
-      patman: Adjust how the fake request() function is provided
-      patman: Simplify test_find_new_responses()
-      patman: Show patches in yellow
-      patman: Add more information to Patch
-      patman: Use defaultdict directly
-      patman: Switch over to asyncio
-      patman: Provide an option to run in single-threaded mode
-      patman: Use a pager when outputting status
-      patman: Drop the old status code
-      patman: Untangle settings from gitutil
-      patman: Pass the alias dict into gitutil.build_email_list()
-      patman: Pass the alias dict into gitutil.email_patches()
-      patman: Pass aliases to Series.MakeCcFile()
-      patman: Update Series.ShowActions() to pass alias
-      u_boot_pylib: Support a fatal level in tout
-      u_boot_pylib: Tidy up quoting of cc and to
-      u_boot_pylib: Provide directories to gitutil functions
-      u_boot_pylib: Speed up determining the upstream branch
-      patman: Add all files to __init__.py
-      patman: Allow setting the current directory when sending
-      patman: Allow setting a git directory when sending
-      patman: Correct use of str in code
-      patman: Use itr instead of lines for iterator
-      patman: Use .git as the git directory
-      patman: Use variables for series ID and title
-      patman: Clean up creation of the git tree
-      patman: Use git to set up the test config
-      patman: Correct some pylint and asyncio issues
-      patman: Split parser creation from parsing
-      patman: Add tests for help
-      patman: Split subparsers into their own functions
-      patman: Move arguments for sent into the correct parser
-      patman: Move -H out of the send command
-      patman: Tidy up function comments in the series module
-      patman: Support collecting all lines in the commit message
-      u_boot_pylib: Correct pylint warnings in gitutil
-      patman: Deal with git safe-directory warning
-      u_boot_pylib: Add more functions to gitutil
-      patman: Use python3 with /usr/bin/env
-      patman: Add a test for collecting a PATCH prefix
-      patman: Move common test code into a new module
-      patman: Add a fourth series for testing
-      patman: Avoid touching the system or local config
-      patman: Add a simple database implementation
-      patman: Add a helper for managing cseries
-      patman: Add a Cseries class
-      patman: Update status command support cover-letter info
-      patman: Enhance patchwork interface to support Cseries
-      patman: Enhance implementation of file-based defaults
-      patman: Use -c to show patch comments
-      patman: Support returning the parsers to use
-      patman: Introduce basic database support in Series
-      patman: Improve Series support for patchwork links
-      patman: Implement the patchwork subcommand
-      patman: Support aliases for commands and subcommands
-      patman: Update send function to return whether it sent
-      patman: Implement the series subcommand
-      patman: Implement the upstream subcommand
-      patman: Add tests for Cseries
-      patman: Add basic documentation for new features
-
- arch/x86/cpu/intel_common/intel_opregion.c |    1 -
- arch/x86/lib/fsp2/fsp_init.c               |    2 +-
- doc/develop/binman_tests.rst               |    6 +-
- doc/develop/pics/patman.jpg                |  Bin 0 -> 97131 bytes
- lib/binman.c                               |   16 +-
- tools/binman/bintool_test.py               |   20 +-
- tools/binman/cbfs_util_test.py             |   15 +-
- tools/binman/control.py                    |    6 +-
- tools/binman/elf_test.py                   |    3 +-
- tools/binman/etype/section.py              |    6 +-
- tools/binman/fip_util_test.py              |   11 +-
- tools/binman/ftest.py                      |  106 +--
- tools/binman/image_test.py                 |    4 +-
- tools/binman/main.py                       |    4 +-
- tools/buildman/builder.py                  |    4 +-
- tools/buildman/builderthread.py            |    2 +
- tools/buildman/buildman.rst                |    4 +
- tools/buildman/cmdline.py                  |    3 +
- tools/buildman/control.py                  |    5 +-
- tools/buildman/func_test.py                |   20 +-
- tools/buildman/main.py                     |    2 +-
- tools/buildman/test.py                     |    6 +-
- tools/dtoc/main.py                         |    5 +-
- tools/dtoc/test_dtoc.py                    |   11 +-
- tools/dtoc/test_fdt.py                     |    2 +-
- tools/dtoc/test_src_scan.py                |   25 +-
- tools/patman/__init__.py                   |    9 +-
- tools/patman/__main__.py                   |   67 +-
- tools/patman/checkpatch.py                 |   15 +-
- tools/patman/cmdline.py                    |  527 ++++++++++--
- tools/patman/control.py                    |  424 ++++++----
- tools/patman/cser_helper.py                | 1524
-++++++++++++++++++++++++++++++++++
- tools/patman/cseries.py                    | 1165 ++++++++++++++++++++++++++
- tools/patman/database.py                   |  823 ++++++++++++++++++
- tools/patman/func_test.py                  |  544 +++++-------
- tools/patman/get_maintainer.py             |   13 +-
- tools/patman/patchstream.py                |   44 +-
- tools/patman/patchwork.py                  |  852 +++++++++++++++++++
- tools/patman/patman.rst                    |  283 ++++++-
- tools/patman/project.py                    |    3 +-
- tools/patman/pyproject.toml                |    2 +-
- tools/patman/requirements.txt              |    3 +-
- tools/patman/send.py                       |  197 +++++
- tools/patman/series.py                     |  143 +++-
- tools/patman/settings.py                   |   77 +-
- tools/patman/status.py                     |  488 +++++------
- tools/patman/test_checkpatch.py            |    2 +-
- tools/patman/test_common.py                |  254 ++++++
- tools/patman/test_cseries.py               | 3684
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- tools/patman/test_settings.py              |    2 +-
- tools/u_boot_pylib/__main__.py             |    2 +-
- tools/u_boot_pylib/command.py              |    5 +-
- tools/u_boot_pylib/gitutil.py              |  255 ++++--
- tools/u_boot_pylib/terminal.py             |  105 ++-
- tools/u_boot_pylib/test_util.py            |   29 +-
- tools/u_boot_pylib/tout.py                 |   27 +-
- 56 files changed, 10659 insertions(+), 1198 deletions(-)
- create mode 100644 doc/develop/pics/patman.jpg
- create mode 100644 tools/patman/cser_helper.py
- create mode 100644 tools/patman/cseries.py
- create mode 100644 tools/patman/database.py
- create mode 100644 tools/patman/patchwork.py
- create mode 100644 tools/patman/send.py
- create mode 100644 tools/patman/test_common.py
- create mode 100644 tools/patman/test_cseries.py
-
-Regards,
-SImon
+RGVhcnMsCkhlbGxvIGV2ZXJ5b25lLCBJIGhhdmUgZm91bmQgYSBwb3RlbnRpYWwgdnVsbmVyYWJp
+bGl0eS4gVGhlIHNwZWNpZmljIGRlc2NyaXB0aW9uIGlzIGFzIGZvbGxvd3MuIFBsZWFzZSBoZWxw
+IG1lIGNoZWNrIHdoZXRoZXIgdGhpcyBpcyBhIHJlYWwgdnVsbmVyYWJpbGl0eS4KCgoxLiBEZXNj
+cmlwdGlvbiAgClRoaXMgY29kZSBkZW1vbnN0cmF0ZXMgdGhlIENXRS0xOTAgKEludGVnZXIgT3Zl
+cmZsb3cgb3IgV3JhcGFyb3VuZCkgdnVsbmVyYWJpbGl0eSBpbiB0aGUgYHZpZGVvX3NwbGFzaF9h
+bGlnbl9heGlzKClgIGZ1bmN0aW9uLCB3aGljaCBmYWlscyB0byBwcm9wZXJseSBoYW5kbGUgdW5z
+aWduZWQtdG8tc2lnbmVkIGludGVnZXIgY29udmVyc2lvbnMgYW5kIGFyaXRobWV0aWMgb3BlcmF0
+aW9ucy4gIApodHRwczovL2dpdGh1Yi5jb20vdS1ib290L3UtYm9vdC9ibG9iLzcwZGZkNjc0Nzgy
+YWRiNDdhNjQxMjg4OTI1NDg0ZDZlZGM4ZGY5NjMvZHJpdmVycy92aWRlby92aWRlb19ibXAuYyNM
+MjI5XApUaGUgY3VycmVudCBtYWluIGJyYW5jaCBhbHNvIGhhcyB0aGlzIHZ1bG5lcmFiaWxpdHku
+CgoKMi4gVnVsbmVyYWJpbGl0eSBEZXRhaWxzCkludGVnZXIgT3ZlcmZsb3cgTWVjaGFuaXNtOiAg
+ClRoZSBmdW5jdGlvbiBzdWJ0cmFjdHMgdHdvIGB1bnNpZ25lZCBsb25nYCB2YWx1ZXMgKGBwYW5l
+bF9zaXplYCBhbmQgYHBpY3R1cmVfc2l6ZWApLCBzdG9yaW5nIHRoZSByZXN1bHQgaW4gYSBgbG9u
+Z2AgdmFyaWFibGUuICAKV2hlbiBgcGFuZWxfc2l6ZSA8IHBpY3R1cmVfc2l6ZWAsIHRoZSB1bnNp
+Z25lZCBzdWJ0cmFjdGlvbiB5aWVsZHMgYSBsYXJnZSBwb3NpdGl2ZSB2YWx1ZSAoZS5nLiwgYFVM
+T05HX01BWCAtIGRlbHRhYCksIHdoaWNoIGNvbnZlcnRzIHRvIGEgKipuZWdhdGl2ZSBzaWduZWQg
+dmFsdWUqKiBkdWUgdG8gdW5kZWZpbmVkIGJlaGF2aW9yLiAgClN1YnNlcXVlbnQgZGl2aXNpb24g
+YnkgMiBhbmQgY2FzdGluZyB0byBgaW50YCBjYW4gY2F1c2UgdHJ1bmNhdGlvbiBvciBzaWduIHJl
+dmVyc2FsLCBsZWFkaW5nIHRvIHVuZXhwZWN0ZWQgY29vcmRpbmF0ZSB2YWx1ZXMuICAKCgozLiBF
+eHBsb2l0CkFuIGF0dGFja2VyIGNvdWxkIGV4cGxvaXQgdGhpcyB2dWxuZXJhYmlsaXR5IGJ5OiAg
+CigxKSBGb3JjaW5nIGBwYW5lbF9zaXplIDwgcGljdHVyZV9zaXplYDogU3VwcGx5IGNyYWZ0ZWQg
+dmFsdWVzIChlLmcuLCBgcGFuZWxfc2l6ZSA9IDEwMGAsIGBwaWN0dXJlX3NpemUgPSBVTE9OR19N
+QVggLSAxMDBgKSB0byB0cmlnZ2VyIGEgbGFyZ2UgdW5zaWduZWQgcmVzdWx0LiAgCigyKSBUcmln
+Z2VyaW5nIFNpZ25lZCBDb252ZXJzaW9uOiAgVGhlIHVuc2lnbmVkIHJlc3VsdCBjb252ZXJ0cyB0
+byBhIG5lZ2F0aXZlIHNpZ25lZCB2YWx1ZSwgd2hpY2ggaXMgdGhlbiBkaXZpZGVkIGFuZCBjYXN0
+IHRvIGBpbnRgLiAgCigzKSBDYXVzaW5nIFVuaW50ZW5kZWQgQmVoYXZpb3I6IFRoZSBmaW5hbCBg
+aW50YCB2YWx1ZSAoZS5nLiwgYC0xMGAgaW5zdGVhZCBvZiB0aGUgZXhwZWN0ZWQgYDEwMDAwMDAw
+MDBgKSBjYW4gY3Jhc2ggdGhlIGFwcGxpY2F0aW9uIGlmIHRoZSBjb29yZGluYXRlIGlzIHVzZWQg
+YXMgYSBtZW1vcnkgb2Zmc2V0LiAgT3IgYnlwYXNzIHNlY3VyaXR5IGNoZWNrcyBieSBjcmVhdGlu
+ZyBvdXQtb2YtYm91bmRzIGNvbmRpdGlvbnMuICAKCgo0LiBQcm9vZiBvZiBDb25jZXB0IChQb0Mp
+ClRoZSBwcm92aWRlZCBjb2RlIGRlbW9uc3RyYXRlcyB0aGUgdnVsbmVyYWJpbGl0eSBieTogIAot
+IFNldHRpbmcgYHBhbmVsX3NpemUgPSBVTE9OR19NQVggLSAxMGAgYW5kIGBwaWN0dXJlX3NpemUg
+PSAxMGAuICAKLSBUaGUgc3VidHJhY3Rpb24gcmVzdWx0cyBpbiBgVUxPTkdfTUFYIC0gMjBgLCB3
+aGljaCBjb252ZXJ0cyB0byBgLTIxYCB3aGVuIGNhc3QgdG8gYGxvbmdgLiAgCi0gRGl2aXNpb24g
+YnkgMiB5aWVsZHMgYC0xMGAsIHdoaWNoIGlzIGFzc2lnbmVkIHRvIGBheGlzYCwgY2F1c2luZyB1
+bmV4cGVjdGVkIGFsaWdubWVudC4gIAoKCgoKYGBgYwojaW5jbHVkZSA8c3RkaW8uaD4KI2luY2x1
+ZGUgPHN0ZGxpYi5oPgojaW5jbHVkZSA8bGltaXRzLmg+CgoKI2RlZmluZSBCTVBfQUxJR05fQ0VO
+VEVSIDB4N2ZmZgoKCnN0YXRpYyB2b2lkIHZpZGVvX3NwbGFzaF9hbGlnbl9heGlzKGludCAqYXhp
+cywgdW5zaWduZWQgbG9uZyBwYW5lbF9zaXplLAogICAgdW5zaWduZWQgbG9uZyBwaWN0dXJlX3Np
+emUpCnsKdW5zaWduZWQgbG9uZyBwYW5lbF9waWN0dXJlX2RlbHRhID0gcGFuZWxfc2l6ZSAtIHBp
+Y3R1cmVfc2l6ZTsKbG9uZyBheGlzX2FsaWdubWVudDsKCgpwcmludGYoIkJlZm9yZSBjYWxjdWxh
+dGlvbjogcGFuZWxfc2l6ZSA9ICVsdSwgcGljdHVyZV9zaXplID0gJWx1XG4iLCBwYW5lbF9zaXpl
+LCBwaWN0dXJlX3NpemUpOwpwcmludGYoInBhbmVsX3NpemUgLSBwaWN0dXJlX3NpemUgPSAlbHUg
+KHVuc2lnbmVkKVxuIiwgcGFuZWxfcGljdHVyZV9kZWx0YSk7Ci8vIEZvcmNlIGNvbnZlcnNpb24g
+dG8gc2lnbmVkIGxvbmcsIG1heSBjYXVzZSBzaWduIGVycm9yCmxvbmcgc2lnbmVkX2RlbHRhID0g
+KGxvbmcpcGFuZWxfcGljdHVyZV9kZWx0YTsKcHJpbnRmKCJDb252ZXJ0ZWQgdG8gc2lnbmVkOiAl
+bGRcbiIsIHNpZ25lZF9kZWx0YSk7CgoKaWYgKCpheGlzID09IEJNUF9BTElHTl9DRU5URVIpCmF4
+aXNfYWxpZ25tZW50ID0gc2lnbmVkX2RlbHRhIC8gMjsKZWxzZSBpZiAoKmF4aXMgPCAwKQpheGlz
+X2FsaWdubWVudCA9IHNpZ25lZF9kZWx0YSArICpheGlzICsgMTsKZWxzZQpyZXR1cm47CgoKcHJp
+bnRmKCJheGlzX2FsaWdubWVudCA9ICVsZFxuIiwgYXhpc19hbGlnbm1lbnQpOwpwcmludGYoImlu
+dCByYW5nZSBiZWZvcmUgY29udmVyc2lvbjogSU5UX01JTj0lZCwgSU5UX01BWD0lZFxuIiwgSU5U
+X01JTiwgSU5UX01BWCk7Ci8vIENoZWNrIGZvciA2NC1iaXQgb3ZlcmZsb3cgY29uZGl0aW9uCmlm
+IChheGlzX2FsaWdubWVudCA+IExPTkdfTUFYIHx8IGF4aXNfYWxpZ25tZW50IDwgTE9OR19NSU4p
+IHsKcHJpbnRmKCJXYXJuaW5nOiBDYWxjdWxhdGlvbiByZXN1bHQgZXhjZWVkcyBsb25nIHJhbmdl
+ISAoJWxkKVxuIiwgYXhpc19hbGlnbm1lbnQpOwp9CipheGlzID0gKGludClheGlzX2FsaWdubWVu
+dDsKcHJpbnRmKCJDb252ZXJ0ZWQgdG8gaW50OiAlZCAoYmluYXJ5OiAweCUwOHgpXG4iLCAqYXhp
+cywgKmF4aXMpOwp9CgoKaW50IG1haW4oKSB7CiAgICAvLyBVc2UgdmFsdWVzIGNsb3NlIHRvIFVM
+T05HX01BWCB0byBlbnN1cmUgb3ZlcmZsb3cKICAgIHVuc2lnbmVkIGxvbmcgcGFuZWxfc2l6ZSA9
+IFVMT05HX01BWCAtIDEwOyAgLy8gMl42NCAtIDExCiAgICB1bnNpZ25lZCBsb25nIHBpY3R1cmVf
+c2l6ZSA9IDEwOwogICAgCiAgICBpbnQgYXhpcyA9IEJNUF9BTElHTl9DRU5URVI7CgoKICAgIHBy
+aW50ZigiQmVmb3JlIGNhbGw6IGF4aXMgPSAlZCwgcGFuZWxfc2l6ZSA9ICVsdSwgcGljdHVyZV9z
+aXplID0gJWx1XG4iLCAKICAgICAgICAgICBheGlzLCBwYW5lbF9zaXplLCBwaWN0dXJlX3NpemUp
+OwoKCiAgICB2aWRlb19zcGxhc2hfYWxpZ25fYXhpcygmYXhpcywgcGFuZWxfc2l6ZSwgcGljdHVy
+ZV9zaXplKTsKCgogICAgcHJpbnRmKCJBZnRlciBjYWxsOiBheGlzID0gJWQgKEV4cGVjdGVkIHBv
+c2l0aXZlIHZhbHVlLCBidXQgb3ZlcmZsb3dlZCB0byBuZWdhdGl2ZSlcbiIsIGF4aXMpOwoKCiAg
+ICByZXR1cm4gMDsKfSAgICAKYGBgCgoKb3V0cHV0OgoKCmBgYApCZWZvcmUgY2FsbDogYXhpcyA9
+IDMyNzY3LCBwYW5lbF9zaXplID0gMTg0NDY3NDQwNzM3MDk1NTE2MDUsIHBpY3R1cmVfc2l6ZSA9
+IDEwCkJlZm9yZSBjYWxjdWxhdGlvbjogcGFuZWxfc2l6ZSA9IDE4NDQ2NzQ0MDczNzA5NTUxNjA1
+LCBwaWN0dXJlX3NpemUgPSAxMApwYW5lbF9zaXplIC0gcGljdHVyZV9zaXplID0gMTg0NDY3NDQw
+NzM3MDk1NTE1OTUgKHVuc2lnbmVkKQpDb252ZXJ0ZWQgdG8gc2lnbmVkOiAtMjEKYXhpc19hbGln
+bm1lbnQgPSAtMTAKaW50IHJhbmdlIGJlZm9yZSBjb252ZXJzaW9uOiBJTlRfTUlOPS0yMTQ3NDgz
+NjQ4LCBJTlRfTUFYPTIxNDc0ODM2NDcKQ29udmVydGVkIHRvIGludDogLTEwIChiaW5hcnk6IDB4
+ZmZmZmZmZjYpCkFmdGVyIGNhbGw6IGF4aXMgPSAtMTAgKEV4cGVjdGVkIHBvc2l0aXZlIHZhbHVl
+LCBidXQgb3ZlcmZsb3dlZCB0byBuZWdhdGl2ZSkKYGBgCgoKQmVzdCBSZWdhcmRzLAp5YmRlc2ly
+ZQoK
