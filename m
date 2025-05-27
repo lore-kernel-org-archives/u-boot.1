@@ -4,69 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A405DC54F30
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 11:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FF0C54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 11:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F93783022;
-	Tue, 27 May 2025 13:38:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 152228303C;
+	Tue, 27 May 2025 13:50:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1748345924;
-	bh=aQjjEgXk/VCkQzB0ANRswD2uclT5Rjm5QIM4STLWJWo=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ygjCatc45hxTFEXWIbQ8vdS40v7U8Km+1eY03ww8TFaa7AWzPZ4/ugv9r56IAaz4w
-	 SeDjSLr2a58cN3F0wD+w7G3f0vi3YpR9IbtRN61qYw8CjV9sEYU11pkHnF/WmDmWpb
-	 kJAYDfNzIR6zSZW98Jj45AxzC2yo8uVZlmEfTO4L3HveBsbLb0pWmS57J5KtV0inMk
-	 6bJYZ8hi8cmCSCiAjiC8ilYVTAfG99a2p8DewJdjp9/7F+nf87+plqLcqsBnUX2WpQ
-	 CBcLLVF/W0ZBKUryVtFe/qOYo0h5y9O4uaRbEk3O/0pWjTANaAl4lW0Z5vJYU8G1eg
-	 caprHyoMHUnLg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 08F7183037; Tue, 27 May 2025 13:38:43 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7757D82B7C
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:38:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="XgPyA3KC"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 17FB11039728C; 
- Tue, 27 May 2025 13:38:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1748345919; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=aQjjEgXk/VCkQzB0ANRswD2uclT5Rjm5QIM4STLWJWo=;
- b=XgPyA3KCPnk+NEGoqWm2D5L90n6oQZq/IvVmEkXEjjBCTpxi2WdO3W4LnsmxtrR3ClvvxD
- 4lSAtKyVG4iAGAA+2PobE5KVZ58WconClB0fkSgbU/hQsYZ3iFYBSyXPUQ6a27A0EdYRQ4
- ZJ5hjg+FgYEetZxkMy7l0BMHRDGXb4CW+ZgmqGZVqBuVRdora+oCMuL5OTGL0PZXDnYliD
- Xdc4s5S8Xvlt46uB1uxneAXCGjXcgcmMNz2gsBFrSwIuh5kIu8NeNxRNsJB6XnY/ga9cWr
- XSrsP3CqpjDZVnOV5zBSDE7IfZ8DsytKTHZQFG1IS+TPGT5xFGcFJOvGDXmLcA==
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Cc: Philip Oberfichtner <pro@denx.de>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 2/2] mips: mt7628: Add Onion Omega2/2+ board support
-Date: Tue, 27 May 2025 13:37:51 +0200
-Message-Id: <20250527113751.95741-3-pro@denx.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250527113751.95741-1-pro@denx.de>
-References: <20250527113751.95741-1-pro@denx.de>
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="mcL5QyFp";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C3EED83045; Tue, 27 May 2025 13:50:23 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D22B82B7C
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:50:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RA60ir027752;
+ Tue, 27 May 2025 13:49:40 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ sZXe1hRznVvomhT0D0Zh9WpmzwMlyHOTOftd/CMNdsU=; b=mcL5QyFpLgCSKeQq
+ dZ9NiNXHscHkDDLQXvp7VS0xrk7uRsBhHz5Z4qjdezg5nXfcYtVgmRdqIjM3AyCF
+ fcrfVgOUNjE8XmSeW9n+rkZki6Pm7YlygeBKYii9ZQEtbTR2ooHowDuaqlOFUD5f
+ zc5B4DnnHwpQ/A1OIwJPmcMTbI57Q+1I/pWsVOvVLTqRB3XwDlx8QDB8NyqfWK89
+ w89seGbcwH+eCNu08mvV/rBQr/7eVZN7kg+iP9mUR8ExJfjoGGgoUY3cZExbWz28
+ D5tbkh9HUU2Sd+8a8US9owMfLTIJ9AEz7Rjp4n9c8yk/XWiEmrKYUhOjVn6UDDvI
+ iDqVlg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4hnj9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 27 May 2025 13:49:40 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BD46D40046;
+ Tue, 27 May 2025 13:47:23 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F35C1A473E5;
+ Tue, 27 May 2025 13:45:59 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
+ 2025 13:45:58 +0200
+Message-ID: <60be33dc-0833-45c9-adad-b7e2fe7b3eaf@foss.st.com>
+Date: Tue, 27 May 2025 13:45:57 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 11/13] reset: stm32mp25: add stm32mp25 reset driver
+To: Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, Elaine Zhang <zhangqing@rock-chips.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Greg Malysa <malysagreg@gmail.com>, Huan Zhou <me@per1cycle.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, Joseph Chen
+ <chenjh@rock-chips.com>, Kever Yang <kever.yang@rock-chips.com>, Leo Yu-Chi
+ Liang <ycliang@andestech.com>, Marek Vasut <marex@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Robert Marko
+ <robert.marko@sartura.hr>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>, Simon Glass
+ <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
+ <20250521134117.2828335-12-patrice.chotard@foss.st.com>
+ <ad156150-a116-4b85-92a5-9764a53166bc@foss.st.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <ad156150-a116-4b85-92a5-9764a53166bc@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-27_06,2025-05-27_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,432 +105,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Omega2 / Omega2+ are based on the MediaTek MT7688 SoC with the
-following features:
-    - 64 / 128MB of DDR2 memory
-    - 16 / 32MB of SPI NOR flash
-    - USB, WiFi and many more peripherals
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
----
- arch/mips/dts/Makefile               |   1 +
- arch/mips/dts/onion-omega2p.dts      |  58 ++++++++++++
- arch/mips/mach-mtmips/mt7628/Kconfig |   7 ++
- board/onion/omega2p/Kconfig          |  12 +++
- board/onion/omega2p/Makefile         |   3 +
- board/onion/omega2p/board.c          | 134 +++++++++++++++++++++++++++
- board/onion/omega2p/omega2p.env      |  18 ++++
- configs/onion-omega2p_defconfig      |  81 ++++++++++++++++
- include/configs/onion-omega2p.h      |  15 +++
- 9 files changed, 329 insertions(+)
- create mode 100644 arch/mips/dts/onion-omega2p.dts
- create mode 100644 board/onion/omega2p/Kconfig
- create mode 100644 board/onion/omega2p/Makefile
- create mode 100644 board/onion/omega2p/board.c
- create mode 100644 board/onion/omega2p/omega2p.env
- create mode 100644 configs/onion-omega2p_defconfig
- create mode 100644 include/configs/onion-omega2p.h
 
-diff --git a/arch/mips/dts/Makefile b/arch/mips/dts/Makefile
-index 7c4ee8b668b..d57fc4f6b3e 100644
---- a/arch/mips/dts/Makefile
-+++ b/arch/mips/dts/Makefile
-@@ -21,6 +21,7 @@ dtb-$(CONFIG_BOARD_MT7621_NAND_RFB) += mediatek,mt7621-nand-rfb.dtb
- dtb-$(CONFIG_BOARD_MT7628_RFB) += mediatek,mt7628-rfb.dtb
- dtb-$(CONFIG_BOARD_GARDENA_SMART_GATEWAY_MT7688) += gardena-smart-gateway-mt7688.dtb
- dtb-$(CONFIG_BOARD_LINKIT_SMART_7688) += linkit-smart-7688.dtb
-+dtb-$(CONFIG_BOARD_ONION_OMEGA2P) += onion-omega2p.dtb
- dtb-$(CONFIG_TARGET_OCTEON_EBB7304) += mrvl,octeon-ebb7304.dtb
- dtb-$(CONFIG_TARGET_OCTEON_NIC23) += mrvl,octeon-nic23.dtb
- dtb-$(CONFIG_BOARD_NETGEAR_CG3100D) += netgear,cg3100d.dtb
-diff --git a/arch/mips/dts/onion-omega2p.dts b/arch/mips/dts/onion-omega2p.dts
-new file mode 100644
-index 00000000000..64fecba1db9
---- /dev/null
-+++ b/arch/mips/dts/onion-omega2p.dts
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2024 Zheng Han <zh@onioniot.com>, Lazar Demin <lazar@onioniot.com>
-+ */
-+
-+/dts-v1/;
-+
-+#include "mt7628a.dtsi"
-+#include <dt-bindings/gpio/gpio.h>
-+
-+/ {
-+	compatible = "onion,omega2", "onion,omega2p", "ralink,mt7628a-soc";
-+	model = "Onion Omega2/Omega2+";
-+
-+	aliases {
-+		serial0 = &uart0;
-+		spi0 = &spi0;
-+	};
-+
-+	chosen {
-+		stdout-path = &uart0;
-+	};
-+};
-+
-+&pinctrl {
-+	state_default: pin_state {
-+		p0led {
-+			groups = "p0led_a";
-+			function = "led";
-+		};
-+	};
-+};
-+
-+&uart0 {
-+	status = "okay";
-+};
-+
-+&spi0 {
-+	status = "okay";
-+	num-cs = <2>;
-+
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&spi_dual_pins>;
-+
-+	spi-flash@0 {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "jedec,spi-nor";
-+		spi-max-frequency = <40000000>;
-+		reg = <0>;
-+	};
-+};
-+
-+&eth {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&ephy_iot_mode>;
-+	mediatek,poll-link-phy = <0>;
-+};
-diff --git a/arch/mips/mach-mtmips/mt7628/Kconfig b/arch/mips/mach-mtmips/mt7628/Kconfig
-index 79b2ddc6692..a75196eaefd 100644
---- a/arch/mips/mach-mtmips/mt7628/Kconfig
-+++ b/arch/mips/mach-mtmips/mt7628/Kconfig
-@@ -27,6 +27,12 @@ config BOARD_MT7628_RFB
- 	  SPI-NOR flash, 1 built-in switch with 5 ports, 1 UART, 1 USB host,
- 	  1 SDXC, 1 PCIe socket and JTAG pins.
- 
-+config BOARD_ONION_OMEGA2
-+	bool "Onion Omega2/2+"
-+	help
-+	  Onion Omega2/2+ IoT computer. Has a MT7688 SoC with 64/128 MiB of DDR2
-+	  RAM and 16/32 MiB of SPI flash.
-+
- config BOARD_VOCORE2
- 	bool "VoCore2"
- 	select SPL_SERIAL
-@@ -52,6 +58,7 @@ config SYS_CONFIG_NAME
- 	default "mt7628" if BOARD_MT7628_RFB
- 
- source "board/gardena/smart-gateway-mt7688/Kconfig"
-+source "board/onion/omega2p/Kconfig"
- source "board/seeed/linkit-smart-7688/Kconfig"
- source "board/vocore/vocore2/Kconfig"
- 
-diff --git a/board/onion/omega2p/Kconfig b/board/onion/omega2p/Kconfig
-new file mode 100644
-index 00000000000..d72977d97ed
---- /dev/null
-+++ b/board/onion/omega2p/Kconfig
-@@ -0,0 +1,12 @@
-+if BOARD_ONION_OMEGA2P
-+
-+config SYS_BOARD
-+	default "omega2p"
-+
-+config SYS_VENDOR
-+	default "onion"
-+
-+config SYS_CONFIG_NAME
-+	default "onion-omega2p"
-+
-+endif
-diff --git a/board/onion/omega2p/Makefile b/board/onion/omega2p/Makefile
-new file mode 100644
-index 00000000000..70cd7a8e568
---- /dev/null
-+++ b/board/onion/omega2p/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y += board.o
-diff --git a/board/onion/omega2p/board.c b/board/onion/omega2p/board.c
-new file mode 100644
-index 00000000000..9d8ac8632d1
---- /dev/null
-+++ b/board/onion/omega2p/board.c
-@@ -0,0 +1,134 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Zheng Han <zh@onioniot.com>, Lazar Demin <lazar@onioniot.com>
-+ * Copyright (C) 2025 DENX Software Engineering GmbH, Philip Oberfichtner <pro@denx.de>
-+ */
-+
-+#include <asm/io.h>
-+#include <env.h>
-+#include <init.h>
-+#include <mtd.h>
-+
-+#define OMEGA2_REG(x)		(*((volatile u32 *)(x)))
-+#define OMEGA2_SYSCTL_BASE	0xB0000000
-+#define OMEGA2_SYS_CNTL_BASE	(OMEGA2_SYSCTL_BASE)
-+#define OMEGA2_REG_PIODIR	(OMEGA2_SYSCTL_BASE + 0x600)
-+
-+static int detect_rst( void )
-+{
-+	u32 val;
-+	val=OMEGA2_REG(0xb0000624); // Read GPIO 44 (reset button)
-+
-+	return (val&1<<6) ? 1 : 0;
-+}
-+
-+static void gpio_init(void)
-+{
-+	u32 val;
-+	printf( "Initializing MT7688 GPIO system.\n" );
-+
-+	//set gpio2_mode - setting wled, and p0,p1,p2,p3,p4 LED pins to GPIO mode
-+	val = 0x555;
-+	OMEGA2_REG(OMEGA2_SYS_CNTL_BASE+0x64)=val; // GPIO2_MODE register
-+	// GINT_FEDGE_1: setting "Enable falling edge triggered" for GPIOs 39-42
-+	OMEGA2_REG(0xb0000644)=0x0f<<7;
-+
-+	// set gpio_ctrl_1 register: set GPIO44 to output
-+	//gpio44 output gpio_ctrl_1 bit3=1
-+	val=OMEGA2_REG(OMEGA2_REG_PIODIR+0x04);
-+	val|=1<<12;
-+	OMEGA2_REG(OMEGA2_REG_PIODIR+0x04)=val;
-+
-+	// set gpio1_mode register: set WDT_MODE to GPIO mode
-+	//set gpio1_mode 14=1b1
-+	val=OMEGA2_REG(OMEGA2_SYS_CNTL_BASE+0x60);
-+	val|=1<<14;
-+	OMEGA2_REG(OMEGA2_SYS_CNTL_BASE+0x60)=val;
-+
-+	// set gpio_ctrl_1 resgister: set GPIO38 to input
-+	//gpio38 input gpio_ctrl_1 bit5=0
-+	val=OMEGA2_REG(OMEGA2_REG_PIODIR+0x04);
-+	val&=~1<<6;
-+	OMEGA2_REG(OMEGA2_REG_PIODIR+0x04)=val;
-+}
-+
-+enum onion_board_variant {
-+	OMEGA2,
-+	OMEGA2P,
-+	UNKNOWN,
-+};
-+
-+static enum onion_board_variant board_variant(void)
-+{
-+	struct mtd_info *mtd;
-+
-+	mtd_probe_devices();
-+
-+	mtd_for_each_device(mtd) {
-+		if (mtd->type != MTD_NORFLASH)
-+			continue;
-+
-+		switch (mtd->size) {
-+		case 16*1024*1024: // 16 MB
-+			return OMEGA2;
-+
-+		case 32*1024*1024: // 32 MB
-+			return OMEGA2P;
-+
-+		default:
-+			break;
-+		}
-+	}
-+
-+	return UNKNOWN;
-+}
-+
-+#define ONION_MTDPARTS_BASE "spi0.0:192k(u-boot),64k(u-boot-env),64k(factory)"
-+
-+static void set_mtdparts(void)
-+{
-+	switch (board_variant()) {
-+	case OMEGA2P:
-+		printf("Detected board variant OMEGA2+: ");
-+		env_set("mtdparts", ONION_MTDPARTS_BASE ",32448k(firmware)");
-+		break;
-+
-+	case OMEGA2:
-+		printf("Detected board variant OMEGA2: ");
-+		env_set("mtdparts", ONION_MTDPARTS_BASE ",16064k(firmware)");
-+		break;
-+
-+	default:
-+		printf("Unable to detect board variant! Using default value: ");
-+		env_set("mtdparts", ONION_MTDPARTS_BASE);
-+	}
-+
-+	printf("mtdparts=\"%s\"\n", env_get("mtdparts"));
-+}
-+
-+#define WELCOME_MESSAGE                                                     \
-+	"\n\n"                                                              \
-+	"   *************************************************************\n"\
-+	"   *  For more info on using U-Boot, visit                     *\n"\
-+	"   *  https://documentation.onioniot.com/bootloader/overview   *\n"\
-+	"   *                                                           *\n"\
-+	"   *  Hold the reset button to enter the U-Boot commandline.   *\n"\
-+	"   *************************************************************\n"\
-+	"\n"
-+
-+int board_late_init (void)
-+{
-+	gpio_init();
-+
-+	printf(WELCOME_MESSAGE);
-+
-+	set_mtdparts();
-+
-+	if (detect_rst()) {
-+		printf("Reset button pressed - entering shell ...\n");
-+		env_set("reset_pressed", "1");
-+		// This env variable is evaluated by our bootcmd.
-+	}
-+
-+	return 0;
-+}
-diff --git a/board/onion/omega2p/omega2p.env b/board/onion/omega2p/omega2p.env
-new file mode 100644
-index 00000000000..ff3fdcadf90
---- /dev/null
-+++ b/board/onion/omega2p/omega2p.env
-@@ -0,0 +1,18 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2025 DENX Software Engineering GmbH, Philip Oberfichtner <pro@denx.de>
-+
-+# Boot options
-+bootargs=console=ttyS0,115200 rootfstype=squashfs,jffs2
-+bootfile=firmware.bin
-+boot_linux=sf probe && mtd read firmware 81800000 0 400000 && bootm 81800000
-+enter_shell=env set reset_pressed # unset variable
-+bootcmd= if test -z "${reset_pressed}"; then run boot_linux; else run enter_shell; fi
-+
-+# Network configuration
-+serverip=192.168.8.100
-+ipaddr=192.168.8.8
-+loadaddr=0x81800000
-+
-+# MTD settings
-+mtdids=nor0=spi0.0
-+# mtdparts will be set at runtime, according to the specific board variant.
-diff --git a/configs/onion-omega2p_defconfig b/configs/onion-omega2p_defconfig
-new file mode 100644
-index 00000000000..047f14f4e6b
---- /dev/null
-+++ b/configs/onion-omega2p_defconfig
-@@ -0,0 +1,81 @@
-+CONFIG_MIPS=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_ENV_OFFSET=0x30000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_DEFAULT_DEVICE_TREE="onion-omega2p"
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x80000
-+CONFIG_SPL_BSS_START_ADDR=0x80010000
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_SPL=y
-+CONFIG_ARCH_MTMIPS=y
-+CONFIG_SOC_MT7628=y
-+CONFIG_BOARD_ONION_OMEGA2P=y
-+CONFIG_SYS_MIPS_TIMER_FREQ=290000000
-+CONFIG_MIPS_CACHE_SETUP=y
-+CONFIG_MIPS_CACHE_DISABLE=y
-+CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
-+# CONFIG_MIPS_BOOT_ENV_LEGACY is not set
-+CONFIG_MIPS_BOOT_FDT=y
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_BOOTDELAY=0
-+CONFIG_AUTOBOOT_KEYED=y
-+CONFIG_AUTOBOOT_KEYED_CTRLC=y
-+CONFIG_OF_STDOUT_VIA_ALIAS=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SYS_MALLOC_BOOTPARAMS=y
-+CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT=0x30000
-+CONFIG_SPL_MAX_SIZE=0x10000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_NOR_SUPPORT=y
-+CONFIG_HUSH_PARSER=y
-+# CONFIG_CMD_ELF is not set
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_USE_DEFAULT_ENV_FILE=y
-+CONFIG_DEFAULT_ENV_FILE="board/onion/omega2p/omega2p.env"
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_IPADDR=y
-+CONFIG_IPADDR="192.168.8.8"
-+CONFIG_USE_SERVERIP=y
-+CONFIG_SERVERIP="192.168.8.100"
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_DM=y
-+CONFIG_LED=y
-+CONFIG_LED_BLINK=y
-+CONFIG_LED_GPIO=y
-+CONFIG_DM_MTD=y
-+CONFIG_SPI_FLASH_BAR=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_MT7628_ETH=y
-+CONFIG_PHY=y
-+CONFIG_SPI=y
-+CONFIG_MT7621_SPI=y
-+CONFIG_LZMA=y
-+# CONFIG_GZIP is not set
-+CONFIG_SPL_LZMA=y
-diff --git a/include/configs/onion-omega2p.h b/include/configs/onion-omega2p.h
-new file mode 100644
-index 00000000000..ca170b22a40
---- /dev/null
-+++ b/include/configs/onion-omega2p.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024 Zheng Han <zh@onioniot.com>, Lazar Demin <lazar@onioniot.com>
-+ */
-+#ifndef __CONFIG_ONION_OMEGA2P_H
-+#define __CONFIG_ONION_OMEGA2P_H
-+
-+/* RAM */
-+#define CFG_SYS_SDRAM_BASE      0x80000000
-+#define CFG_SYS_INIT_SP_OFFSET  0x400000
-+
-+/* Dummy value */
-+#define CFG_SYS_UBOOT_BASE      0
-+
-+#endif /* __CONFIG_ONION_OMEGA2P_H */
--- 
-2.39.5
+On 5/22/25 09:10, Gabriel FERNANDEZ wrote:
+> 
+> On 5/21/25 15:41, Patrice Chotard wrote:
+>> From: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
+>>
+>> Implement STM32MP25 reset drivers using stm32-core-reset API.
+>> This reset stm32-reset-core API and will be able to use DT binding
+>> index started from 0.
+>>
+>> This patch also moves legacy reset into stm32 directory reset.
+>>
+>> Signed-off-by: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+
+[...]
+
+>> +    RESET(ADC12_R,        RCC_ADC12CFGR,        0,    0),
+>> +    RESET(ADC3_R,        RCC_ADC3CFGR,        0,    0),
+>> +    RESET(ETH1_R,        RCC_ETH1CFGR,        0,    0),
+>> +    RESET(ETH2_R,        RCC_ETH2CFGR,        0,    0),
+>> +    RESET(USBH_R,        RCC_USB2CFGR,        0,    0),
+> 
+> RCC_USBHCFGR
+
+Ok
+
+> 
+> Best regards
+> 
+> Gabriel
+> 
+>> +    RESET(USB2PHY1_R,    RCC_USB2PHY1CFGR,    0,    0),
+>> +    RESET(USB2PHY2_R,    RCC_USB2PHY2CFGR,    0,    0),
+>> +    RESET(USB3DR_R,        RCC_USB3DRCFGR,        0,    0),
+>> +    RESET(USB3PCIEPHY_R,    RCC_USB3PCIEPHYCFGR,    0,    0),
+>> +    RESET(USBTC_R,        RCC_UCPDCFGR,        0,    0),
+>> +    RESET(ETHSW_R,        RCC_ETHSWCFGR,        0,    0),
+>> +    RESET(SDMMC1_R,        RCC_SDMMC1CFGR,        0,    0),
+>> +    RESET(SDMMC1DLL_R,    RCC_SDMMC1CFGR,        16,    0),
+>> +    RESET(SDMMC2_R,        RCC_SDMMC2CFGR,        0,    0),
+>> +    RESET(SDMMC2DLL_R,    RCC_SDMMC2CFGR,        16,    0),
 
