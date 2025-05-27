@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F3FC54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 03:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C171C54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 05:39:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 240BA82E40;
-	Tue, 27 May 2025 05:38:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B80A182DB7;
+	Tue, 27 May 2025 07:39:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1748317105;
-	bh=LP1/S5oH7VH84t5KD6CksjdVSmdjfSZJqXMz7zeT/mk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=bdKJdXqtZepLQpB1eLCM6pi1dQauQAuNLgfwVDUY5b1PGD3L1bT7gpCfscsyq2FCu
-	 bz988p1xByTeNvTlp/MaQfIr7wFZVHlUjR7jWp/ISzW6bsbMSPjJh8nsFK/ISIayjk
-	 bsGnEInwV5MTBHY2NTqg4d/kdS00TzFXRWJpplH5zg6mG+FTO+wSnz7vuyK2TL6Rrf
-	 GJ+WLg4wOrCGMQrv0shMv9/m2Of7F41MDWOUc/JiqSUMiMzqI70mH3WFDUTBNYN8YI
-	 f4auIuhFybRe9849qoI8oCtQmlscxZNZb87pD/7iv0omugMXTU3au8BGP/f6DJleN4
-	 oJX/PPlAgfu+Q==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A74D682EBE; Tue, 27 May 2025 05:38:24 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B681582E25
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 05:38:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="gCzaHWfh"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DD2FD1039728C; 
- Tue, 27 May 2025 05:38:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1748317101;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=LP1/S5oH7VH84t5KD6CksjdVSmdjfSZJqXMz7zeT/mk=;
- b=gCzaHWfheTfh03FhHpcxMUA7UiTy7ATqHVjUe5FnTsFO1lZjseKpddRyY/PorKC5Hs6l8L
- zgzqOv74Xz5Sv0E7r86bFHwn6ffow8mAG1s+u8RXTC4RWbp298mIXb/58VxxYi9LD9xrep
- C8N9LbNIeIzxIt7I6WjUF5YfsLYFbVnDPF6H/wnzGKvnCXmcwzYyKPjK1+/2Umug0vbzO1
- VdVWwP55qksNW8X7LbzvF9wCdQZYkroSvRLv8ppcETLCOYEwnScVHm4hr50RndPFPt5o6G
- 2NQUMb0FIFl4KNuXMm+5eW98yBXGiYKqqUJRlehYtN9IGEodvk+7RJZ3BO9vtw==
-Message-ID: <d1fdcbd9-eca4-00e3-afa3-0903e3dffd22@denx.de>
-Date: Tue, 27 May 2025 05:38:55 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="faxnwwnu";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7029B82E25; Tue, 27 May 2025 07:39:08 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4816782B7C
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 07:39:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ad88d77314bso66059166b.1
+ for <u-boot@lists.denx.de>; Mon, 26 May 2025 22:39:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1748324345; x=1748929145; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XQk3bYLb0nWYvC09PJyAQQ6dafY1mPw8GyzbnUvvOJE=;
+ b=faxnwwnu3fhPnNlPRZqJ8ZErhgV/SCRgaBxPZS8dD7yJzZ7wxpMQe6BT21l3YvlyAv
+ hQruUFITFzNwHBQSU5CODc+mVjky0C0JtsZraFxPtIiMFfWnKaY/KEQE2qJZbCqSoNmB
+ Di88+mqof0k/ueGTIXHMWlJboaRgBfGBIayTE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748324345; x=1748929145;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XQk3bYLb0nWYvC09PJyAQQ6dafY1mPw8GyzbnUvvOJE=;
+ b=u/HfQtvuIqAmB1RsOSKfgQ8+vi2w5Yu/VG/U/54rhzS+JTowBy+R6xXHL+czJkCpni
+ KywGgojazZilwKqhtSgpF0bOaxn6M5zBcZ6nBGYh4sbORl+FDkaH4/xSL8Cjwm6/WE5k
+ XtchVA3mTA4NIp8AFh05J2xbkHYx1Z6jvANinrEYNZlND5u6GB8LLPlMOFDauohTaYbk
+ 0oLRHYO4gFljeqxRexDdChAr//LZfwz45BP+Ko+07Fn2sx3d5R1L1olVFIc2gGMRvIZl
+ PiRH2zfggM2eS/Lz8pyDgywnw0u6A8/PdjrqcMOzOwrPdYGB4Qxtd+9qlBKrp5lzjWpT
+ qFZQ==
+X-Gm-Message-State: AOJu0YwP7VXcS/LbtIgNsRXH9bOejBTT6KctWDHXqYroRqoYdF6qkAXn
+ OmFRR4IgdXLxvQhy6kTEMF8GezT/2w/7RmqxdB6Dzkm6619TaaL/oYVvn670QQLNARo8lJLVKPt
+ LFr7+jKktdSdetYuYlNfX/Lb8rG9q76wxgJwrAU3iCFU+s/zY7gdbXZgU
+X-Gm-Gg: ASbGncsXAIORXYcYBNu3J0LdoQNbRIchjF7ydHz2OxOXL1jGx4sIrD7w3px8hd0diuw
+ E7fEBQCkjnHNpjCcrKaVQz6/oRq8snDc3Nbtxr2DJSw+m1gJ8p6sUB10Cu52Un0Qk+lGoj6pM68
+ sjrAaySz87KQpTQahdtdHcTkxf6qnQdHE=
+X-Google-Smtp-Source: AGHT+IHB7185LOohApxGFkwNOSYkyN+tqegINTPVkvNMLsvx6FgpqK+59r0iEQcOwFKxWDiWOiJnflYhvt/Gq+GCK9g=
+X-Received: by 2002:a17:907:2d0e:b0:ad8:89c7:2735 with SMTP id
+ a640c23a62f3a-ad889c72964mr193173366b.58.1748324344603; Mon, 26 May 2025
+ 22:39:04 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] i2c: designware_i2c Return -ETIMEDOUT for timeout errors
-Content-Language: en-US
-To: Wojciech Szamocki <wojciech.szamocki@nokia.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20250523105707.16605-1-wojciech.szamocki@nokia.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250523105707.16605-1-wojciech.szamocki@nokia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250526101541.3254628-1-sjg@chromium.org>
+ <20250526101541.3254628-21-sjg@chromium.org>
+In-Reply-To: <20250526101541.3254628-21-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 27 May 2025 06:38:52 +0100
+X-Gm-Features: AX0GCFu_O8GxSBgOQ3i8_nukzsLF5hpiOfVat3EFAlUgeF23UKiv2vIEIJBc7ts
+Message-ID: <CAFLszTg1jw0+rODAXL6K=Czpd7FV6y+McdyND4gsS-nEbZU0Lg@mail.gmail.com>
+Subject: Re: [PATCH v5 20/25] rockchip: Set the skip-at-start property
+ correctly
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Anshul Dalal <anshuld@ti.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Peng Fan <peng.fan@nxp.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ huang lin <hl@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,40 +91,83 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Wojciech,
+Hi Jonas,
 
-On 23.05.25 12:57, Wojciech Szamocki wrote:
-> Change the return value for timeout errors in i2c-designware from 1 to
-> -ETIMEDOUT. Returning errors as negative values is standard practice in the
-> u-boot, which enhances error handling consistency across the codebase.
-> 
-> The current behavior can lead to silent errors when functions check for
-> negative return values to identify errors. For example, in
-> `dm_i2c_reg_read` from i2c-uclass.c, a timeout results in an uninitialized
-> value being returned, potentially causing unexpected behavior.
-> 
-> Cc: Heiko Schocher <hs@denx.de>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Wojciech Szamocki <wojciech.szamocki@nokia.com>
-> Signed-off-by: Wojciech Szamocki <wojciech.szamocki@nokia.com>
+On Mon, 26 May 2025 at 11:16, Simon Glass <sjg@chromium.org> wrote:
+>
+> The rockchip image is written to the media at block 64, which is a 32K
+> offset, so set the skip-at-start property to 0x8000
+>
+> Update CONFIG_SPL_PAD_TO to point to the offset in the image, since
+> Binman is dealing with the 'missing' 32K now.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
-> 
->   drivers/i2c/designware_i2c.c | 30 +++++++++++++++++++-----------
->   1 file changed, 19 insertions(+), 11 deletions(-)
+>
+> Changes in v5:
+> - Add to VPL file also
+>
+> Changes in v2:
+> - Move this patch to the end of the series
+> - Drop 0x8000 offset for SPI
+>
+>  arch/arm/dts/rockchip-u-boot.dtsi     | 1 +
+>  arch/arm/dts/rockchip-vpl-u-boot.dtsi | 1 +
+>  common/spl/Kconfig                    | 2 +-
+>  3 files changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> index 7a60f6b4526..3ff75c07121 100644
+> --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> @@ -171,6 +171,7 @@
+>         simple-bin {
+>                 filename = "u-boot-rockchip.bin";
+>                 pad-byte = <0xff>;
+> +               skip-at-start = <0x8000>;
+>
+>                 mkimage {
+>                         filename = "idbloader.img";
+> diff --git a/arch/arm/dts/rockchip-vpl-u-boot.dtsi b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
+> index ac67b29c57a..66dcf36010e 100644
+> --- a/arch/arm/dts/rockchip-vpl-u-boot.dtsi
+> +++ b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
+> @@ -113,6 +113,7 @@
+>         simple-bin {
+>                 filename = "u-boot-rockchip.bin";
+>                 pad-byte = <0xff>;
+> +               skip-at-start = <0x8000>;
+>
+>                 alternates-fdt {
+>                         fdt-list-dir = "dts/upstream/src/arm64/rockchip";
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index fb6c90733ee..fa28c18fa48 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -96,7 +96,7 @@ config SPL_MAX_SIZE
+>
+>  config SPL_PAD_TO
+>         hex "Offset to which the SPL should be padded before appending the SPL payload"
+> -       default 0x7f8000 if ARCH_ROCKCHIP
+> +       default 0x800000 if ARCH_ROCKCHIP
+>         default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
+>         default 0x11000 if ARCH_MX7 || (ARCH_MX6 && !MX6_OCRAM_256KB)
+>         default 0x10000 if ARCH_KEYSTONE
+> --
+> 2.43.0
+>
 
-Thanks!
+Unfortunately this patch needs an defconfig update for
+CONFIG_SPL_PAD_TO for puma-rk3399 and ringneck-px30
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+CONFIG_SPL_PAD_TO=0x40000
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+I'll hold off sending a new version until this is reviewed.
+
+Regards,
+Simon
