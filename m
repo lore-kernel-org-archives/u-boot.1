@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E3BC54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 15:52:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F1BC54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 16:02:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 133AA830E4;
-	Tue, 27 May 2025 17:52:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A984830B3;
+	Tue, 27 May 2025 18:02:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lUSew16S";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="DU+bGbHq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E942D830EA; Tue, 27 May 2025 17:52:12 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 34AFB830CA; Tue, 27 May 2025 18:02:15 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94FD482FAB
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 17:52:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2AC182B7C
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 18:02:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-6066c02cd92so1562022eaf.2
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 08:52:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748361128; x=1748965928; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LU2hKMF5M09H2bhV93T5PgRzJu/YX2Irv3vhMgMcmrM=;
- b=lUSew16Syq9hn41KYLsDhbsfv52Ad4laugVkCdKeMQF3XPFBp/CbfP5j/bxtmFC2ve
- lDrBPwZfrZ8CzI/n6Wr41nKc1j63/4dFlaYSZxfAPShM3OZJY3LvWcXFdytkTF/hxeSc
- UuUznRvdUK3iKuinLg1AYbq+tTicfOkSx1Cuo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748361128; x=1748965928;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LU2hKMF5M09H2bhV93T5PgRzJu/YX2Irv3vhMgMcmrM=;
- b=C76Wk6yLY3hSnibSjZXKffWMHtSl8RogYoKJpXbG22wotmbfdp27kPiZBb+Z36xJmp
- /DKMcmPrxJHLIsZhZ4G91gkFFL5zxGYv09MG2qHHqJ9JfiqcK53BgVA2IzxUPi/j7NBs
- sldpxq2E0Jayc6cEIlmqukuDbjkLEVd4LHVGHGQG80bj3mVcNkFaZfRa7VjAtAXzHMi/
- moV6RPf6r4Rr7lK775KVoVsdZrqwYzKaXu27+MxCqmZKgZ/hf+oC/fq6Kk3b2izuUKNo
- IB7o8/7GJ6cHMS7AsRxVFFiVsozgEssYic3CNXd4gIDE3nuyFxe93mRUOI89Isn7xLxn
- jFVw==
-X-Gm-Message-State: AOJu0Yx4EXVNycNJVq796OWS8AlJO+rEsGCvrx/rcHLP6R4lV7JguZt0
- 1BWvZg0bfvNv/FqyzD6tyDCSpl6A3YtPmqXmGtRL4BGz8tB+K/XrlMTPrWqmLEtcjN/lZR5EQf2
- DNPNRKkA=
-X-Gm-Gg: ASbGnctVWTkS4zLpXIdQvmeMye4D/w6MJVJ3NN7ey9P9FExZMEEZJ0eMZmT2XCsob/W
- ERUCLNcEk4WTNN1IeARX4RUmkCTzMzBjpd9HEUebflWqx9YwvSbey/2/pO0LvTN4HGmqOpD02Jk
- qnB98ncNaArmP/zLDzZuK7ze3TamRIZwIIIgAxcnv/C6sGLQg0P4rOACjGatLoa/Bum6LTA0qwN
- 2eDcOp+TdpXS/rhNc/WYZy1dazhrHths/0CnuWf8MbGSi6CeNGizJ7r59VjYdJ4yk4XjQa4cKiY
- JZNDwDPaTFTWwOETMAzzOyBrDHMDpN5YrG+gMu9q8TDDa1PTmeg1VL0xSEznRH5wA2MW5WgvDF4
- sND1DVV2DOIMT
-X-Google-Smtp-Source: AGHT+IEc7TC2dWl0Rcr1mY72Tk53fbz9nv55goviOjjm2OT6CZwff2BzsxzIM5DSU4TQOILA9MnqPg==
-X-Received: by 2002:a05:6820:1e18:b0:602:7078:df55 with SMTP id
- 006d021491bc7-60b9fb1d5d7mr7181304eaf.5.1748361128245; 
- Tue, 27 May 2025 08:52:08 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-609f2f1e132sm4878118eaf.6.2025.05.27.08.52.07
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 May 2025 08:52:07 -0700 (PDT)
-Date: Tue, 27 May 2025 09:52:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Merging v6.15-dts to next
-Message-ID: <20250527155205.GJ100073@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RD3vka020807;
+ Tue, 27 May 2025 18:02:05 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ FYqe0JG+SQm8ZmCjT4AMw1oESx9ZxOa84YWalD9lF2I=; b=DU+bGbHqICU1TVzf
+ x+8j/VsUi3gda6T/bfa8L3k0b0qXrMpHXdlPLllFgpKjT3YNEL9rb3/G3FdagAOr
+ uTvVKf9xLZEcpRmYehs2n9K8wdiODhoZdulRFJAoAsPicwR9lK8fVTcHg2JWT+Er
+ HBpxdjYWJvX3h3CHm9sGd0esTo7EAdQParSCf9viipbUVwp9iudBzQxCg72D9iFd
+ WaJu9/f7ZQQzqbo60stegWq6z6/4YaGweVmjfnNEnCUE+RJnSu7I9OvG5z/MY4qI
+ iS38cvpR7wBKnOcjLgg4y1vL/PQGYAJD8kZJMRvXglVgEMQG/bFUJ8s+w6Zi8sAA
+ Xg7dZQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46w54hkbr4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 27 May 2025 18:02:05 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4495840059;
+ Tue, 27 May 2025 18:00:45 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 55572B11150;
+ Tue, 27 May 2025 17:59:42 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
+ 2025 17:59:41 +0200
+Message-ID: <02f308bf-032a-4e97-a8dc-3a1169b75c71@foss.st.com>
+Date: Tue, 27 May 2025 17:59:40 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mc+EHqRANZQLRfrh"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tools: stm32image: Add support for STM32 Image V2.0
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Julien Masson
+ <jmasson@baylibre.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Paul HENRYS
+ <paul.henrys_ext@softathome.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250512171016.149233-1-marek.vasut@mailbox.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250512171016.149233-1-marek.vasut@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-27_08,2025-05-27_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,36 +95,364 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---mc+EHqRANZQLRfrh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+On 5/12/25 19:09, Marek Vasut wrote:
+> Add support for generating STM32 Image V2.0, which is used by STM32MP13xx.
+> The image header layout is similar to STM32MP15xx STM32 Image V1.0, but is
+> different enough to justify duplicate functions to generate the v2 image.
+> This code at least attempts to align the V1 and V2 image handling where
+> possible.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 
-With the Linux kernel release of v6.15 over the weekend, and v6.15-dts
-now being tagged in the devicetree-rebasing repository I'm merging that
-to the next branch now and expect to push it later today.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
---=20
-Tom
+Thanks
+Patrice
 
---mc+EHqRANZQLRfrh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg136EACgkQFHw5/5Y0
-tywjTAwAlslxA/U51/o/l6RJov/S6qXDa1okBdE77Tr1NJMrRbzaRj0l3nCsTP8y
-8ve7+Db1Yt7Lng8lC88nMPNr+d4STYesvW/lPBka338MpLEo9/3Mze7gfHn7te/o
-Rz/ppJO7rI9EHTbLkwG84T1tX2W5btiBhCDJLhtNFYEHGTjumhwKrMKSgQVqCPyt
-03n0qyxPjjUcp5M361ywwBTy38qzBUYqa3ej35OQSp61EplbJhgyFY3rX5okDF/d
-VTiYlJX3jQfq3FfP24+HVl/w5/LdATdc7njaB36qYnb91iJfVUU0UYkUCzrK3vtP
-K27Dg8l3yb3oOHMcHNoPutWM6f4X9p+rlLPbA5p+I/FTq7cd4SHtLHCxM2vLAHsN
-x2zdSD3nu5xtTAI88Yx1zJaMswyKnBWM+K7REbq0w/tbQUxC+olJ33Id/QiNuLpt
-xtb3+/bdVcV9Gf5oBhWJLnnVW3+jICIa2n/Xfh+zzEO/jyeJhQhkCqHpSJIvwBDi
-5Jtl9606
-=9x4p
------END PGP SIGNATURE-----
-
---mc+EHqRANZQLRfrh--
+> ---
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Julien Masson <jmasson@baylibre.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Paul HENRYS <paul.henrys_ext@softathome.com>
+> Cc: Raymond Mao <raymond.mao@linaro.org>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  boot/image.c       |   1 +
+>  include/image.h    |   1 +
+>  tools/stm32image.c | 215 +++++++++++++++++++++++++++++++++------------
+>  3 files changed, 163 insertions(+), 54 deletions(-)
+> 
+> diff --git a/boot/image.c b/boot/image.c
+> index 139c5bd035a..abac2c7034b 100644
+> --- a/boot/image.c
+> +++ b/boot/image.c
+> @@ -184,6 +184,7 @@ static const table_entry_t uimage_type[] = {
+>  	{	IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
+>  	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
+>  	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
+> +	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
+>  	{	-1,		    "",		  "",			},
+>  };
+>  
+> diff --git a/include/image.h b/include/image.h
+> index f09862b636f..37506c81cdb 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -233,6 +233,7 @@ enum image_type_t {
+>  	IH_TYPE_RENESAS_SPKG,		/* Renesas SPKG image */
+>  	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
+>  	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
+> +	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
+>  
+>  	IH_TYPE_COUNT,			/* Number of image types */
+>  };
+> diff --git a/tools/stm32image.c b/tools/stm32image.c
+> index 5c6991f35de..3cc80651fa9 100644
+> --- a/tools/stm32image.c
+> +++ b/tools/stm32image.c
+> @@ -8,58 +8,74 @@
+>  
+>  /* magic ='S' 'T' 'M' 0x32 */
+>  #define HEADER_MAGIC be32_to_cpu(0x53544D32)
+> -#define VER_MAJOR_IDX	2
+> -#define VER_MINOR_IDX	1
+> -#define VER_VARIANT_IDX	0
+> +#define VER_MAJOR	2
+> +#define VER_MINOR	1
+> +#define VER_VARIANT	0
+>  #define HEADER_VERSION_V1	0x1
+> +#define HEADER_VERSION_V2	0x2
+>  /* default option : bit0 => no signature */
+>  #define HEADER_DEFAULT_OPTION	(cpu_to_le32(0x00000001))
+>  /* default binary type for U-Boot */
+>  #define HEADER_TYPE_UBOOT	(cpu_to_le32(0x00000000))
+> +#define PADDING_HEADER_MAGIC	(cpu_to_le32(0xFFFF5453))
+> +#define PADDING_HEADER_FLAG	(1ULL << 31)
+> +#define PADDING_HEADER_LENGTH	0x180
+>  
+> -struct stm32_header {
+> +struct stm32_header_v1 {
+>  	uint32_t magic_number;
+> -	uint32_t image_signature[64 / 4];
+> +	uint8_t image_signature[64];
+>  	uint32_t image_checksum;
+> -	uint8_t  header_version[4];
+> +	uint8_t header_version[4];
+>  	uint32_t image_length;
+>  	uint32_t image_entry_point;
+>  	uint32_t reserved1;
+>  	uint32_t load_address;
+>  	uint32_t reserved2;
+>  	uint32_t version_number;
+> +	/* V1.0 specific content */
+>  	uint32_t option_flags;
+>  	uint32_t ecdsa_algorithm;
+> -	uint32_t ecdsa_public_key[64 / 4];
+> -	uint32_t padding[83 / 4];
+> -	uint32_t binary_type;
+> +	uint8_t ecdsa_public_key[64];
+> +	uint8_t padding[83];
+> +	uint8_t binary_type;
+>  };
+>  
+> -static struct stm32_header stm32image_header;
+> +struct stm32_header_v2 {
+> +	uint32_t magic_number;
+> +	uint8_t image_signature[64];
+> +	uint32_t image_checksum;
+> +	uint8_t header_version[4];
+> +	uint32_t image_length;
+> +	uint32_t image_entry_point;
+> +	uint32_t reserved1;
+> +	uint32_t load_address;
+> +	uint32_t reserved2;
+> +	uint32_t version_number;
+> +	/* V2.0 specific content */
+> +	uint32_t extension_flags;
+> +	uint32_t extension_headers_length;
+> +	uint32_t binary_type;
+> +	uint8_t padding[16];
+> +	uint32_t extension_header_type;
+> +	uint32_t extension_header_length;
+> +	uint8_t extension_padding[376];
+> +};
+>  
+> -static void stm32image_default_header(struct stm32_header *ptr)
+> -{
+> -	if (!ptr)
+> -		return;
+> -
+> -	ptr->magic_number = HEADER_MAGIC;
+> -	ptr->header_version[VER_MAJOR_IDX] = HEADER_VERSION_V1;
+> -	ptr->option_flags = HEADER_DEFAULT_OPTION;
+> -	ptr->ecdsa_algorithm = cpu_to_le32(1);
+> -	ptr->binary_type = HEADER_TYPE_UBOOT;
+> -}
+> +static struct stm32_header_v1 stm32image_header_v1;
+> +static struct stm32_header_v2 stm32image_header_v2;
+>  
+> -static uint32_t stm32image_checksum(void *start, uint32_t len)
+> +static uint32_t stm32image_checksum(void *start, uint32_t len,
+> +				    uint32_t header_size)
+>  {
+>  	uint32_t csum = 0;
+> -	uint32_t hdr_len = sizeof(struct stm32_header);
+>  	uint8_t *p;
+>  
+> -	if (len < hdr_len)
+> +	if (len < header_size) {
+>  		return 0;
+> +	}
+>  
+> -	p = start + hdr_len;
+> -	len -= hdr_len;
+> +	p = (unsigned char *)start + header_size;
+> +	len -= header_size;
+>  
+>  	while (len > 0) {
+>  		csum += *p;
+> @@ -70,24 +86,53 @@ static uint32_t stm32image_checksum(void *start, uint32_t len)
+>  	return csum;
+>  }
+>  
+> -static int stm32image_check_image_types(uint8_t type)
+> +static int stm32image_check_image_types_v1(uint8_t type)
+>  {
+>  	if (type == IH_TYPE_STM32IMAGE)
+>  		return EXIT_SUCCESS;
+>  	return EXIT_FAILURE;
+>  }
+>  
+> -static int stm32image_verify_header(unsigned char *ptr, int image_size,
+> -				    struct image_tool_params *params)
+> +static int stm32image_check_image_types_v2(uint8_t type)
+> +{
+> +	if (type == IH_TYPE_STM32IMAGE_V2)
+> +		return EXIT_SUCCESS;
+> +	return EXIT_FAILURE;
+> +}
+> +
+> +static int stm32image_verify_header_v1(unsigned char *ptr, int image_size,
+> +				       struct image_tool_params *params)
+> +{
+> +	struct stm32_header_v1 *stm32hdr = (struct stm32_header_v1 *)ptr;
+> +	int i;
+> +
+> +	if (image_size < sizeof(struct stm32_header_v1))
+> +		return -1;
+> +	if (stm32hdr->magic_number != HEADER_MAGIC)
+> +		return -1;
+> +	if (stm32hdr->header_version[VER_MAJOR] != HEADER_VERSION_V1)
+> +		return -1;
+> +	if (stm32hdr->reserved1 || stm32hdr->reserved2)
+> +		return -1;
+> +	for (i = 0; i < (sizeof(stm32hdr->padding) / 4); i++) {
+> +		if (stm32hdr->padding[i] != 0)
+> +			return -1;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32image_verify_header_v2(unsigned char *ptr, int image_size,
+> +				       struct image_tool_params *params)
+>  {
+> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
+> +	struct stm32_header_v2 *stm32hdr = (struct stm32_header_v2 *)ptr;
+>  	int i;
+>  
+> -	if (image_size < sizeof(struct stm32_header))
+> +	if (image_size < sizeof(struct stm32_header_v2))
+>  		return -1;
+>  	if (stm32hdr->magic_number != HEADER_MAGIC)
+>  		return -1;
+> -	if (stm32hdr->header_version[VER_MAJOR_IDX] != HEADER_VERSION_V1)
+> +	if (stm32hdr->header_version[VER_MAJOR] != HEADER_VERSION_V2)
+>  		return -1;
+>  	if (stm32hdr->reserved1 || stm32hdr->reserved2)
+>  		return -1;
+> @@ -101,38 +146,85 @@ static int stm32image_verify_header(unsigned char *ptr, int image_size,
+>  
+>  static void stm32image_print_header(const void *ptr, struct image_tool_params *params)
+>  {
+> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
+> +	struct stm32_header_v1 *stm32hdr_v1 = (struct stm32_header_v1 *)ptr;
+> +	struct stm32_header_v2 *stm32hdr_v2 = (struct stm32_header_v2 *)ptr;
+>  
+>  	printf("Image Type   : STMicroelectronics STM32 V%d.%d\n",
+> -	       stm32hdr->header_version[VER_MAJOR_IDX],
+> -	       stm32hdr->header_version[VER_MINOR_IDX]);
+> +	       stm32hdr_v1->header_version[VER_MAJOR],
+> +	       stm32hdr_v1->header_version[VER_MINOR]);
+>  	printf("Image Size   : %lu bytes\n",
+> -	       (unsigned long)le32_to_cpu(stm32hdr->image_length));
+> +	       (unsigned long)le32_to_cpu(stm32hdr_v1->image_length));
+>  	printf("Image Load   : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->load_address));
+> +	       le32_to_cpu(stm32hdr_v1->load_address));
+>  	printf("Entry Point  : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->image_entry_point));
+> +	       le32_to_cpu(stm32hdr_v1->image_entry_point));
+>  	printf("Checksum     : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->image_checksum));
+> -	printf("Option     : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->option_flags));
+> -	printf("BinaryType : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->binary_type));
+> +	       le32_to_cpu(stm32hdr_v1->image_checksum));
+> +	switch (stm32hdr_v1->header_version[VER_MAJOR]) {
+> +	case HEADER_VERSION_V1:
+> +		printf("Option     : 0x%08x\n",
+> +		       __le32_to_cpu(stm32hdr_v1->option_flags));
+> +		printf("BinaryType : 0x%08x\n",
+> +		       le32_to_cpu(stm32hdr_v1->binary_type));
+> +		break;
+> +
+> +	case HEADER_VERSION_V2:
+> +		printf("Extension    : 0x%08x\n",
+> +		       __le32_to_cpu(stm32hdr_v2->extension_flags));
+> +		break;
+> +
+> +	default:
+> +		printf("Incorrect header version\n");
+> +	}
+>  }
+>  
+> -static void stm32image_set_header(void *ptr, struct stat *sbuf, int ifd,
+> -				  struct image_tool_params *params)
+> +static void stm32image_set_header_v1(void *ptr, struct stat *sbuf, int ifd,
+> +				     struct image_tool_params *params)
+>  {
+> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
+> +	struct stm32_header_v1 *stm32hdr = (struct stm32_header_v1 *)ptr;
+>  
+> -	stm32image_default_header(stm32hdr);
+> +	stm32hdr->magic_number = HEADER_MAGIC;
+> +	stm32hdr->version_number = cpu_to_le32(0);
+> +
+> +	stm32hdr->header_version[VER_MAJOR] = HEADER_VERSION_V1;
+> +	stm32hdr->option_flags = HEADER_DEFAULT_OPTION;
+> +	stm32hdr->ecdsa_algorithm = cpu_to_le32(1);
+> +	stm32hdr->binary_type = HEADER_TYPE_UBOOT;
+>  
+>  	stm32hdr->load_address = cpu_to_le32(params->addr);
+>  	stm32hdr->image_entry_point = cpu_to_le32(params->ep);
+>  	stm32hdr->image_length = cpu_to_le32((uint32_t)sbuf->st_size -
+> -					     sizeof(struct stm32_header));
+> +					     sizeof(*stm32hdr));
+>  	stm32hdr->image_checksum =
+> -		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size));
+> +		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size,
+> +						sizeof(*stm32hdr)));
+> +}
+> +
+> +static void stm32image_set_header_v2(void *ptr, struct stat *sbuf, int ifd,
+> +				     struct image_tool_params *params)
+> +{
+> +	struct stm32_header_v2 *stm32hdr = (struct stm32_header_v2 *)ptr;
+> +
+> +	stm32hdr->magic_number = HEADER_MAGIC;
+> +	stm32hdr->version_number = cpu_to_le32(0);
+> +
+> +	stm32hdr->header_version[VER_MAJOR] = HEADER_VERSION_V2;
+> +	stm32hdr->extension_flags =
+> +		cpu_to_le32(PADDING_HEADER_FLAG);
+> +	stm32hdr->extension_headers_length =
+> +		cpu_to_le32(PADDING_HEADER_LENGTH);
+> +	stm32hdr->extension_header_type =
+> +		cpu_to_le32(PADDING_HEADER_MAGIC);
+> +	stm32hdr->extension_header_length =
+> +		cpu_to_le32(PADDING_HEADER_LENGTH);
+> +
+> +	stm32hdr->load_address = cpu_to_le32(params->addr);
+> +	stm32hdr->image_entry_point = cpu_to_le32(params->ep);
+> +	stm32hdr->image_length = cpu_to_le32((uint32_t)sbuf->st_size -
+> +					     sizeof(*stm32hdr));
+> +	stm32hdr->image_checksum =
+> +		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size,
+> +						sizeof(*stm32hdr)));
+>  }
+>  
+>  /*
+> @@ -141,14 +233,29 @@ static void stm32image_set_header(void *ptr, struct stat *sbuf, int ifd,
+>  U_BOOT_IMAGE_TYPE(
+>  	stm32image,
+>  	"STMicroelectronics STM32MP Image support",
+> -	sizeof(struct stm32_header),
+> -	(void *)&stm32image_header,
+> +	sizeof(struct stm32_header_v1),
+> +	(void *)&stm32image_header_v1,
+> +	NULL,
+> +	stm32image_verify_header_v1,
+> +	stm32image_print_header,
+> +	stm32image_set_header_v1,
+> +	NULL,
+> +	stm32image_check_image_types_v1,
+> +	NULL,
+> +	NULL
+> +);
+> +
+> +U_BOOT_IMAGE_TYPE(
+> +	stm32imagev2,
+> +	"STMicroelectronics STM32MP Image V2.0 support",
+> +	sizeof(struct stm32_header_v2),
+> +	(void *)&stm32image_header_v2,
+>  	NULL,
+> -	stm32image_verify_header,
+> +	stm32image_verify_header_v2,
+>  	stm32image_print_header,
+> -	stm32image_set_header,
+> +	stm32image_set_header_v2,
+>  	NULL,
+> -	stm32image_check_image_types,
+> +	stm32image_check_image_types_v2,
+>  	NULL,
+>  	NULL
+>  );
