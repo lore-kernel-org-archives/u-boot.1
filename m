@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19BCCC54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 21:04:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD99C54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 21:05:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41D5A8277D;
-	Tue, 27 May 2025 23:04:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B4D782998;
+	Tue, 27 May 2025 23:05:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CLQuYEX7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M/6NP9Mh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4173582998; Tue, 27 May 2025 23:04:55 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 838BA831AC; Tue, 27 May 2025 23:05:23 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1AD482145
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 23:04:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67A5E82145
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 23:05:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4766cb762b6so3023061cf.0
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 14:04:52 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7cadd46ea9aso475576085a.1
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 14:05:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748379891; x=1748984691; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748379920; x=1748984720; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ToB6Av9bK3IicMoFWzBG1e1Xh+73yzcM4hZWVcxkjUw=;
- b=CLQuYEX7M+QMkBYuYGuKBxuECHqJTO+qHFRgvPHINhKkswTh0nCvMfQXF67FLrhSH/
- niiHbr2dUwZrhvf7RbV+d2hFnT1jY+9qweo/Gxlhqpf+Vc2ptk6isr0kuHpbQS51htzx
- L3Av3iQkDbuKjC8nElewjH1fuow3cKzslKsXIznyqsRysm0lX44DOMkBhVCH0uJIwKsr
- 8ZAwKE1JXgxtyVHGc9Xs0q94qDK7keW3Q80wk9HbGElPm9VNid8cPoamsYcDhlKoq9H8
- 4nx6w9l4Cx9mfedykU2fQ2TgXeh/iofVUYgiPYOik93cfVgsoEt+oCr0yOCFoM4dLmPW
- 0VYg==
+ bh=TFzSUtTfTgiMH9i9pTcQPeZSP5+CvSIevuyMNiOS39M=;
+ b=M/6NP9Mh1fWsetn8z1MzxkcKCGWazACOuMK9bDxx+XDm+nabDEVIeTPEuO+0Nq/NWf
+ +indV6zfcgok8rngicRnQ3Il8Y3mNrcBBR7X3LM7aTFZxd2ao5m8CQGfW8aNS6M3wVyw
+ EsbqNm7HYkbkXjXwDT0soHc8IenYRBGU/fse4EFV9FtwiMfCVq71QIT4ui9jFzOLDHWs
+ NslPYlcDFOWRElby/pOREvAttvFG5+K5mGFjvHyN6tLUVN0KF31zavKXikVkmxRd7bGK
+ kG2LTxa9hDsOi27xotI0cqPSqEAzms45CFtTi34Lk6n+JPMJv5DDXxktaNr5MrWHbSjF
+ r9Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748379891; x=1748984691;
+ d=1e100.net; s=20230601; t=1748379920; x=1748984720;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ToB6Av9bK3IicMoFWzBG1e1Xh+73yzcM4hZWVcxkjUw=;
- b=dPKXeRlumLaCIYT2IQTlqFzFQEnQ/gYj488PJUU6JQQnDTzy4B8kkh62zZoI5JA+gc
- O7IIsbJZctG9Lnot/seAwdiA55gGBNuCMMvdRq/RRmMW7rla/bioy6YJHxKvkBmh1LoE
- +4MNy+y1yixQDydnhTIvt2Xr9Cm2sVOG/cpgmnDL3igQ4Xvqz/aT1obGJuQWJXGzVPiM
- xBXbTsHW/xEvX+BIwFzr3zs5TD1Q/9WR0MLWzIr/Wd6R4Grir4cjO9HLcUD7v/a2o7fb
- IJ32ygwxkhmZ5s1XrZ6B0byKw2qCMvVQuJJSOVPChz77DkV8zbRJHxsV/IvBeklTHQFS
- 1ceg==
-X-Gm-Message-State: AOJu0Yx3dgioeXeqHLL7Gp5buQyntV4iUp6sxXejWUf2kaeUtrK2DuLv
- rkux8CuneO9SDglZLgKyJ5LiW3ODuNGV7qXCAk52ipaeBlgCC3HHI20mk4gUpNEzYXiqr3/q/E6
- UFxkK
-X-Gm-Gg: ASbGncva8k5A8fDfZDQX8Oo6msFJKNXv34+a6k/MNtA++9dG6hhjuvg86QrJTYwTikn
- ZVtX7Lj+fLMQ2zSrxDMcxMSqJQ+BNZ78eiQJCSUqUuYLMzUtpTk7fDQxsUVu4Zzk0xvQPPld6aA
- jHqk+ynxHaGgC7OwQdGOm78tznxkX4fomBcLFHgHA0GrRGLDFXij+G24jV9Wtzc9VM2nG516tIl
- tzpfevyJd/pQyLpBbHgB8F81CkGRXmRnPAnEb5nb4NT0FVXm97L5ZjaMT27aH/6obBNIJzntFfr
- 5F5fgsFPyvRRKW6A93bKvLJc/SUURX3cHOQcOC6OwzFI4sc0GLJHtQXLsHQ77ORgH5Yi8/U+yL2
- 9
-X-Google-Smtp-Source: AGHT+IG+drh1ZqhijDiqNsABM8xD9cgPkQy663FQHMTgRXYtY1fR5iTxzrdALuTZyZDttCSqkSFJjA==
-X-Received: by 2002:a05:622a:261a:b0:49c:d64b:3d5f with SMTP id
- d75a77b69052e-4a2f51c2d0dmr30355491cf.9.1748379891208; 
- Tue, 27 May 2025 14:04:51 -0700 (PDT)
+ bh=TFzSUtTfTgiMH9i9pTcQPeZSP5+CvSIevuyMNiOS39M=;
+ b=pH8juiOHl95FdixiKpdoFi9mHgMb9eBfhHzLnjp3qvmsRQ+6tH/nIVegpvEphTAGPs
+ XUXsggmmdol/HyqT3HV92gwFJDYieGSD4IwM+e4UReMcOPP6b5f3680Un4f9qYwhqAYj
+ Jw+7iwI6xWs7Stwi9XtuB8WyHYE0gapovhn0OhI1emvwdnST5LFshjTFFj3f15oqLfhR
+ siCJOvbBmzsUKJYt5MXTa16P5teaUCBnk1hRjSJqpW6VDwJkq9iImIbzQIOOL+fEOd4Q
+ K01ASS2X8AvXcJLyPQ51bklgl8237AvnOITqRckvwss+H9mg83VVFY0E9DFLlBIH4SGR
+ yB/w==
+X-Gm-Message-State: AOJu0YzLCFzpNk9TEM13/SAYLMbkiZPvcsVP40Ch0UusGb60PrzDTuoE
+ +lPySegST2Dq9vJEhAZ7gqfBITwN5RGCbJGCJs+F5SgV9SN5hGeKatj9/5hxcXt1ctbjjC2ZMkP
+ 1yURw
+X-Gm-Gg: ASbGncsiTiYxKotfoAqMceN5M/qSe6hy8p69OYIXkcWjS8lT06W/VSdU5tkKz8qpLut
+ wRpcdtjJ2Yhy9mOZO0Iskr5cxP9mZm3+Uv1Vc9KoivZDZcVZ22Phrea88iJ6vRQt/kRwAYydzPd
+ lci1ghG62Rr4DTjBZiTzxpkdaLNVjoG7mvquVrVzjnpQlcLZnlgKi4yOHspLowqAfNIwlX1BAyX
+ weoDOVWRGzfPsnHjUGaTdOOS8vZxrCtCjZUE07tZkBx45KBIZY40xIus3+UKl/Vz7rKv3ZDXxqk
+ lMSj8EWSp6/HOplSScdFC7PvvwtTIoTcEm1ZAFDIzOoEdFnuZjqHauTKDbMMC49MeDyhw0QDZsd
+ c
+X-Google-Smtp-Source: AGHT+IHfCKkMpso0RXwn8KGnR7Kj5bEbhyRZ+nYKL3bcmTLvfJ8SZOWLnGgeyW+y/blGNXuZYe6F+g==
+X-Received: by 2002:a05:620a:2416:b0:7c5:405e:e88f with SMTP id
+ af79cd13be357-7ceecbd70d0mr2368654385a.21.1748379919851; 
+ Tue, 27 May 2025 14:05:19 -0700 (PDT)
 Received: from ubuntu.localdomain ([209.227.128.158])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4a2f92a1a07sm1097501cf.38.2025.05.27.14.04.49
+ af79cd13be357-7cf19d98cd5sm7249685a.103.2025.05.27.14.05.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 May 2025 14:04:50 -0700 (PDT)
+ Tue, 27 May 2025 14:05:19 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -78,18 +78,19 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH] armv8: fix Clang warning on writing 32-bit variable to a
- 64-bit register
-Date: Tue, 27 May 2025 14:04:31 -0700
-Message-Id: <20250527210436.1488428-1-raymond.mao@linaro.org>
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH] makefile: fix Clang link error when RSA_PUBLIC_KEY_PARSER is
+ selected
+Date: Tue, 27 May 2025 14:05:05 -0700
+Message-Id: <20250527210508.1488509-1-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -109,28 +110,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clang is stricter than GCC when it comes to inline assembly and expects the
-register to be written with explicitly same type of variable.
+MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+function provided by the compiler runtime, typically libgcc for GCC or
+clang_rt.builtins for Clang.
+Thus 'clang_rt.builtins' library is required when building using Clang.
 
-Fixes: c0e1775a867c ("armv8: Add arch-specific sysinfo platform driver")
+Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- arch/arm/cpu/armv8/sysinfo.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Makefile | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/cpu/armv8/sysinfo.c b/arch/arm/cpu/armv8/sysinfo.c
-index 850142da37d..ff0abee4c6b 100644
---- a/arch/arm/cpu/armv8/sysinfo.c
-+++ b/arch/arm/cpu/armv8/sysinfo.c
-@@ -134,7 +134,7 @@ int sysinfo_get_cache_info(u8 level, struct cache_info *cinfo)
+diff --git a/Makefile b/Makefile
+index f88684947ee..16506dcaec6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -37,7 +37,6 @@ else ifeq ("riscv32", $(MK_ARCH))
+ else ifeq ("riscv64", $(MK_ARCH))
+   export HOST_ARCH=$(HOST_ARCH_RISCV64)
+ endif
+-undefine MK_ARCH
  
- 	/* Select cache level */
- 	csselr_el1 = (level << 1);
--	asm volatile("msr csselr_el1, %0" : : "r" (csselr_el1));
-+	asm volatile("msr csselr_el1, %0" : : "r" ((u64)csselr_el1));
+ # Avoid funny character set dependencies
+ unexport LC_ALL
+@@ -915,8 +914,13 @@ PLATFORM_LIBGCC = arch/$(ARCH)/lib/lib.a
+ else
+ ifndef CONFIG_CC_IS_CLANG
+ PLATFORM_LIBGCC := -L $(shell dirname `$(CC) $(c_flags) -print-libgcc-file-name`) -lgcc
++else ifeq ($(CONFIG_RSA_PUBLIC_KEY_PARSER_MBEDTLS),y)
++# mbedtls bignum needs '__udivti3' - a 128-bit division function that's provided by clang-rt.
++CLANG_RT_DIR := $(shell $(CC) --print-resource-dir)/lib/linux
++PLATFORM_LIBGCC := -L$(CLANG_RT_DIR) -lclang_rt.builtins-$(MK_ARCH)
+ endif
+ endif
++undefine MK_ARCH
+ PLATFORM_LIBS += $(PLATFORM_LIBGCC)
  
- 	/* Read CCSIDR_EL1 */
- 	asm volatile("mrs %0, ccsidr_el1" : "=r" (creg.data));
+ ifdef CONFIG_CC_COVERAGE
 -- 
 2.25.1
 
