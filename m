@@ -4,85 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84AF3C54F30
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 842C6C54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:33:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39736838B7;
-	Tue, 27 May 2025 15:30:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E7CF83898;
+	Tue, 27 May 2025 15:32:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="fRm9Pctc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fC8uzl4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8B4E838B7; Tue, 27 May 2025 15:30:42 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A0456838A3; Tue, 27 May 2025 15:32:57 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2CB08384E
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:30:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FF3A8384E
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:32:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RBv0e5024726;
- Tue, 27 May 2025 15:30:35 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- kYW7kd5dSSG6HmTWiHt3Jt9SqxE93oz1FcyjhpY1ttw=; b=fRm9PctclEKB7IT/
- je3GvPJPi7MSS+lbX6KoxDte2yjM/OcQc1UCvQEyRzIEHGDmz81g72y0p6KUUjPH
- rozJaRzqpAMILRLlcVU8Z8S+S9aKveFSeWh6UIpYQqm6gxoLVBgC6pa6utb6r01q
- Hm4Sb8c4jUWht3uAEfYIjejnJ2ZzvZx7DKBgw7bApabFJsRRxPHXB72oWDwRCOMb
- 1nUIhqp3gwHnsxB7JouaLdu42KTHpqjSLAz+bh4DKYTJJiwYXl0F/l27EvaSOvvI
- XmAAZgHqHBYcWNGWYOS0MPFUGnt1odMJLzx8uLazLz9E2YZEw2gpxJckrRZXs7Cm
- GDMqFQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u50gky04-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 15:30:34 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 30AEA4005E;
- Tue, 27 May 2025 15:29:22 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 045A3AEBFD8;
- Tue, 27 May 2025 15:28:02 +0200 (CEST)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 15:28:01 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Alexander Dahl <ada@thorsis.com>, Casey
- Connolly <casey.connolly@linaro.org>, Gabriel Fernandez
- <gabriel.fernandez@foss.st.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, Jonas
- Karlman <jonas@kwiboo.se>, Kongyang Liu <seashell11234455@gmail.com>, Marek
- Vasut <marex@denx.de>, Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 04/13] clk: add CONFIG_CLK_AUTO_ID
-Date: Tue, 27 May 2025 15:27:46 +0200
-Message-ID: <20250527132755.2169508-5-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
-References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2c76a1b574cso906646fac.2
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 06:32:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1748352774; x=1748957574; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kMkvsEG9dv5wbRhNRl0bOVJ7xa4uw1ZJ7T6+beiF/38=;
+ b=fC8uzl4aemscJjmWtQ5UOyxFZ/Kv7zDSQA/Nw/w9V2whN4/g0SRXtpl5Mn6D9M/i71
+ gn5kFWCkSZR0mJW9BCLCHubFveaZ/9b3VpX3pP3JU/0VjZwyhc1lmWDthHSUdyvH0c/n
+ GJ7csyarPulsjCGZRxYTQ89qbG8jI77brlIaU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748352774; x=1748957574;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kMkvsEG9dv5wbRhNRl0bOVJ7xa4uw1ZJ7T6+beiF/38=;
+ b=rbRbSkzoueZXDQPqBG3y3bWiUIdQkABN/HNx7Rrg5t/3yqY2R+Du9F+MnrMInP7pf3
+ H9dAr0Bh3Ft6eTvnKm26FAGWqkqZz8DPEnssrHw8tQW68qT2oszdo41cZQ385zex9qQV
+ JrCWILGk3FUjXWp7WyiJk6ZFppNvbJmUD8slDPxY1qZgFd2mwWAXRD4t8Gt3EQLBVIXv
+ 1Ip5wm+MqSD3LBerkQTWbstB/PBPFPTB5HeaX6tXGTFxhS4n2E4EuEx1MM4Ttq9e7FOL
+ LRENs24Iye6qmp7Pe2BhPhMCXAKCdWEDIXYD/iqhZcfLzguQzRCNuOxlta+NCgTToLra
+ KHYw==
+X-Gm-Message-State: AOJu0Yxiv9QUlK2YtaCscjty9Ao8zKnRjtseyU0srFijtZM2qF5muy1h
+ YWmHaF7XE4cEr2FRvgWzkjwGAhkj6hYQs1rsnZB3d106CjDX7WkKo/iNwCoBnVYo/A4=
+X-Gm-Gg: ASbGncuWq5/91jblY480GXgIG8moTwK9QYwz68cjmwgkoLKfNC3gxCQpGSr4J5jmNwy
+ oDrdunApiVOmPAHGuz14mB0aYMiWA8HHO1/ecraHOdnJAyPzv7T2OEya6dhYe4Qm5mtGlcNLlTc
+ eLaweIJkU21kcRShFYSfmH45ES/lVIIjzNUQZPByraCNuRU4OPGZLmBYyf+WLIHhDAbWgQZwyr2
+ qKAl1c2etoPPX+WxMZUpf4RDtg8ZOX0W7CprCSWQTo4/5U/zmzdoy4gZ4a27NZXQt0PC8cwUPYZ
+ HUOLaDqe8OLIZekqsfDg74R29LaSk+yAIt3e97BVf6PTifq5qWAOYDKRKsHEnUGHiUt/7NvE/9G
+ EBcqmEGDd9OkY
+X-Google-Smtp-Source: AGHT+IHx9pLSTwfipGNRqiu63LrB9JTyjfMrXfgajmBJ2VkccisJVMLUY4pLKlADby7VQAdoFxFmUw==
+X-Received: by 2002:a05:6871:a482:b0:29e:766d:e969 with SMTP id
+ 586e51a60fabf-2e861e5f2damr7256953fac.10.1748352773783; 
+ Tue, 27 May 2025 06:32:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2e3c06b0b3csm5293200fac.14.2025.05.27.06.32.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 May 2025 06:32:52 -0700 (PDT)
+Date: Tue, 27 May 2025 07:32:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Huan Wang <alison.wang@nxp.com>, Janne Grunau <j@jannau.net>,
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Maxim Moskalets <maximmosk4@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Rick Chen <rick@andestech.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Thomas Chou <thomas@wytron.com.tw>, uboot-snps-arc@synopsys.com
+Subject: Re: [PATCH 1/2] bootm: Shorten BOOTM_STATE_
+Message-ID: <20250527133249.GH100073@bill-the-cat>
+References: <20250527124038.3633270-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-27_06,2025-05-27_01,2025-03-28_01
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4SVnrQwPyGv8Nr9J"
+Content-Disposition: inline
+In-Reply-To: <20250527124038.3633270-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,180 +114,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Add a new config CONFIG_CLK_AUTO_ID to support a unique clk id
-for all the clock providers, managed by clk uclass, when the clock
-reference arg[0] is the same.
+--4SVnrQwPyGv8Nr9J
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-When the CONFIG is activated, the clock id is limited to the lower
-CLK_ID_SZ = 24 bits in default clock xlate function
-and the sequence number + 1 of the clk provider device is
-added for the 8 higher bits.
+On Tue, May 27, 2025 at 06:40:34AM -0600, Simon Glass wrote:
 
-We use sequence number + 1 to avoid the "dummy" clock id = 0,
-used for invalid clock when CCF is activated.
+> This is quite long at present. Rename it so that fixes better with the
+> bootstd naming.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-When this config is activated, the new function clk_get_id()
-should be used to get back the internal reference to clock
-for the each clock provider.
+First of all, sigh, this doesn't apply to mainline. After the last few
+days, that starts to feel like bad faith on your part. Second, I feel
+like this reduces code clarity. I'm not rejecting the concept, but
+shorten + document doesn't feel as useful as "document". Finally, what
+"bootstd naming" does this better fit with?
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Sean Anderson <seanga2@gmail.com>
----
+--=20
+Tom
 
-(no changes since v1)
+--4SVnrQwPyGv8Nr9J
+Content-Type: application/pgp-signature; name="signature.asc"
 
- drivers/clk/Kconfig                | 10 ++++++++++
- drivers/clk/clk-uclass.c           |  9 +++++++--
- drivers/clk/stm32/clk-stm32-core.c |  3 ++-
- include/clk.h                      | 24 ++++++++++++++++++++++++
- include/linux/clk-provider.h       |  9 ++++++++-
- 5 files changed, 51 insertions(+), 4 deletions(-)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-index 18bd640a68b..b2e53fe325e 100644
---- a/drivers/clk/Kconfig
-+++ b/drivers/clk/Kconfig
-@@ -10,6 +10,16 @@ config CLK
- 	  feed into other clocks in a tree structure, with multiplexers to
- 	  choose the source for each clock.
- 
-+config CLK_AUTO_ID
-+	bool "Enable support of an unique clock id with several provider"
-+	depends on CLK
-+	help
-+	  Add the uclass sequence number of clock provider in the 8 higher bits
-+	  of the clk id to guaranty an unique clock identifier in clk uclass
-+	  when several clock providers are present on the device and when
-+	  default xlate are used.
-+	  This feature limit each identifier for each clock providers (24 bits).
-+
- config SPL_CLK
- 	bool "Enable clock support in SPL"
- 	depends on CLK && SPL && SPL_DM
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 2167cd5ad0f..7262e89b512 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -34,6 +34,11 @@ struct clk *dev_get_clk_ptr(struct udevice *dev)
- 	return (struct clk *)dev_get_uclass_priv(dev);
- }
- 
-+ulong clk_get_id(const struct clk *clk)
-+{
-+	return (ulong)(clk->id & CLK_ID_MSK);
-+}
-+
- #if CONFIG_IS_ENABLED(OF_PLATDATA)
- int clk_get_by_phandle(struct udevice *dev, const struct phandle_1_arg *cells,
- 		       struct clk *clk)
-@@ -43,7 +48,7 @@ int clk_get_by_phandle(struct udevice *dev, const struct phandle_1_arg *cells,
- 	ret = device_get_by_ofplat_idx(cells->idx, &clk->dev);
- 	if (ret)
- 		return ret;
--	clk->id = cells->arg[0];
-+	clk->id = CLK_ID(dev, cells->arg[0]);
- 
- 	return 0;
- }
-@@ -61,7 +66,7 @@ static int clk_of_xlate_default(struct clk *clk,
- 	}
- 
- 	if (args->args_count)
--		clk->id = args->args[0];
-+		clk->id = CLK_ID(clk->dev, args->args[0]);
- 	else
- 		clk->id = 0;
- 
-diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
-index 358ee56682a..df3b35b1003 100644
---- a/drivers/clk/stm32/clk-stm32-core.c
-+++ b/drivers/clk/stm32/clk-stm32-core.c
-@@ -46,7 +46,8 @@ int stm32_rcc_init(struct udevice *dev,
- 
- 		if (cfg->setup) {
- 			clk = cfg->setup(dev, cfg);
--			clk->id = cfg->id;
-+			/* set identifier of clock provider*/
-+			dev_clk_dm(dev, cfg->id, clk);
- 		} else {
- 			dev_err(dev, "failed to register clock %s\n", cfg->name);
- 			return -ENOENT;
-diff --git a/include/clk.h b/include/clk.h
-index a6ef4e02692..f94135ff778 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -13,6 +13,15 @@
- #include <linux/errno.h>
- #include <linux/types.h>
- 
-+#ifdef CONFIG_CLK_AUTO_ID
-+#define CLK_ID_SZ	24
-+#define CLK_ID_MSK	GENMASK(23, 0)
-+#define CLK_ID(dev, id)	(((dev_seq(dev) + 1) << CLK_ID_SZ) | ((id) & CLK_ID_MSK))
-+#else
-+#define CLK_ID_MSK	(~0UL)
-+#define CLK_ID(dev, id)	id
-+#endif
-+
- /**
-  * DOC: Overview
-  *
-@@ -570,6 +579,16 @@ int clk_get_by_id(ulong id, struct clk **clkp);
-  */
- bool clk_dev_binded(struct clk *clk);
- 
-+/**
-+ * clk_get_id - get clk id
-+ *
-+ * @clk:	A clock struct
-+ *
-+ * Return: the clock identifier as it is defined by the clock provider in
-+ * device tree or in platdata
-+ */
-+ulong clk_get_id(const struct clk *clk);
-+
- #else /* CONFIG_IS_ENABLED(CLK) */
- 
- static inline int clk_request(struct udevice *dev, struct clk *clk)
-@@ -641,6 +660,11 @@ static inline bool clk_dev_binded(struct clk *clk)
- {
- 	return false;
- }
-+
-+static inline ulong clk_get_id(const struct clk *clk)
-+{
-+	return 0;
-+}
- #endif /* CONFIG_IS_ENABLED(CLK) */
- 
- /**
-diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
-index 267757939e0..2d754fa4287 100644
---- a/include/linux/clk-provider.h
-+++ b/include/linux/clk-provider.h
-@@ -15,10 +15,17 @@
- 
- struct udevice;
- 
-+/* update clock ID for the dev = clock provider, compatible with CLK_AUTO_ID */
-+static inline void dev_clk_dm(const struct udevice *dev, ulong id, struct clk *clk)
-+{
-+	if (!IS_ERR(clk))
-+		clk->id = CLK_ID(dev, id);
-+}
-+
- static inline void clk_dm(ulong id, struct clk *clk)
- {
- 	if (!IS_ERR(clk))
--		clk->id = id;
-+		clk->id = CLK_ID(clk->dev, id);
- }
- 
- /*
--- 
-2.25.1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg1vv0ACgkQFHw5/5Y0
+tywgqAv+M7boRcNTa2sB5trp3KtBtBoeDR0eX8FthUFPsrZCv3v4ImDqTG8zibnJ
+JyGG6Xg92Tmz48Q3ltQLR1znOS7e3aCqSday44vm1Jk2leRd/yN6kqyrmN4r3dmp
+4xMP+3l/lcH/Z0CgQB2Lp9cHAFhqgsIP+2YuwTznSFNt/ayinX5OtAtvdXaFF3cH
+hMs0XsbaKYlluBGxcqLz+nI9G/zUQdTQPqbAkfo9bWdW6DUgm6MRSHHX/VI8bSdj
+QE6n+Z5A50J6fa0f9FThchRGjOiGb4UMvTyl4s8ZXKb//su0xWsvMkJH6Ywe7e8G
+vwRfZWKChIsTIyvXpQ5eynl9ixC25DKJwVg43RGdGQPaQE3CUasP3dbSQPAK6Utc
+MlG3BtAriDqEhNl5FC6bE4Mx2nOsnnFIhik0ZJiUJmyBjqhFbsiJpZ7RFuKkAo7/
+XOtgNR74JkVzFzfI2IB79PDJAEUH8mI33/nTmKJdqAaNGaSs6DPuGZEy8LXFb0vB
+ZM4Guud7
+=qmmR
+-----END PGP SIGNATURE-----
 
+--4SVnrQwPyGv8Nr9J--
