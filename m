@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29FBC54F30
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 12:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90C3C54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 12:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D5BD836AB;
-	Tue, 27 May 2025 14:13:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2E213836C1;
+	Tue, 27 May 2025 14:15:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1748347989;
-	bh=SII3FBtKS9LLPFmqd8aWUeeXmDjJqi9XaumaW4zcQJM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ej3v1warjO1P5nwWVKJES5F//B/4bSxZ/uRW6hc22PBchnLTo2eiwx3envv6ubDC1
-	 dDw5+RJBQmcfNtHM/Djw0YKaC1tGWRSXix+UnfPMec1Zg6Bo+lP5fakXOPDOTxoeeC
-	 mw2X7+3sqPJki28ZDvsmuhRPM6Ezn2a+GFBn2td4eLWVdkHLyy/utjWwV5H16i2Qe0
-	 Ek4UIDDgVn88CLeExRgRR0NeqZTrBeIy6OK0aBg5kwfu35FTsW/VAUux0gLbYSUVik
-	 R4n2uPNOwJBiJ4AnePshbIN3+xiMmtdDRNhTpR/qoPZlUp3Q/cK/1H9kYQztrz77vl
-	 wElLRjQNvsExA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A1F67836B8; Tue, 27 May 2025 14:13:08 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26F4483010
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 14:13:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="H1eXZG0N"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C7E1C1039728C; 
- Tue, 27 May 2025 14:13:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1748347985; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=SII3FBtKS9LLPFmqd8aWUeeXmDjJqi9XaumaW4zcQJM=;
- b=H1eXZG0NKhoAll8mU95M/c9ZB6IQq5/GcYfunHNUM91afqfYIKVTa+qGgqoyOQgdifpb5U
- LMUXkOzBrhlrHr1GDSO1SVbFfQI9T1kf7K/vxcfOBylz65qi71SLBCEVpGI/Z8VwfeuIK6
- blXbobZEnnjfBNqvRKtR9XTRF5LD/UmJhGCAr9GdM3+KKU3SgsoKsH/Qyjm6HHMOoioN59
- Nw06v6mpDTU6hJz+05KmPw3hfCon2QFSbBpwJTk3fEIZsw8l4JRJzZxfiZX+HW3ext4s30
- JXWWohjjssdBEdh65uMO0BrfOTGzYq6e1tQpdY3nxiAsn3gdExG4Jce1NpVPlw==
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Cc: Philip Oberfichtner <pro@denx.de>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v2 2/2] mips: mt7628: Add Onion Omega2/2+ board support
-Date: Tue, 27 May 2025 14:10:49 +0200
-Message-Id: <20250527121049.106825-3-pro@denx.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250527121049.106825-1-pro@denx.de>
-References: <20250527121049.106825-1-pro@denx.de>
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MDfd1i0B";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4A93283721; Tue, 27 May 2025 14:15:30 +0200 (CEST)
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
+ [IPv6:2a00:1450:4864:20::544])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A59318304C
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 14:15:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x544.google.com with SMTP id
+ 4fb4d7f45d1cf-602039559d8so6552432a12.1
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 05:15:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1748348126; x=1748952926; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=osSrwJJ2u4lPGh84O5dIj2O4u87Xy+Lwet7HUaIuVkI=;
+ b=MDfd1i0BDF3NizvWTLOum+Su/P0k62MHqfyxgFXe5HWf0asz8w3ff9geJ53hUY6LFY
+ jwO0G6NhPZM8M/dYmLS+RN3goqwgqr8g9zcwtjUB1Ip81DCMABEipZ+nIN9D3ulUKXPz
+ ScwuC9QxCDUKV9cTU860Dqpd8hEjjMikD/tRw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748348126; x=1748952926;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=osSrwJJ2u4lPGh84O5dIj2O4u87Xy+Lwet7HUaIuVkI=;
+ b=ujkkL6Nwgk9NMJKHxe8rSOoKa19Sil06t6Z130SRTAOLDITZpy6ThlYP3tAtDO8MDL
+ ShX8r11L0zYq1tf9Vcx1z1UZjjzYn5QInfpSwjQ+lULPe9tyrJKvvRk5yq4mko+85NFF
+ AP74hZu3zTju7XQhQ0sY0Ug8RmRTUlV3DudOCO8RGDRBRr7zSSKTbbbbMtwXMsBvUoH/
+ 1uvAActs3We+8yp3g1lVuXfGh0Fk9O60pk6tCHoXqtS3DRYX2nIcgWqIEmv8/Wff0PGM
+ BjXVGUfx6ob+ca7u1ekVfMKMXfOXYaJQajFFW97KIeA9QwIHyq+CfW8H9kFMtO37Y2Y9
+ uX9Q==
+X-Gm-Message-State: AOJu0YwhW7tUokt5ADqTGSu7YAV1rHdahPHbCGp23O6bM8t8ZlpQ8j4d
+ 7Zh3yK7WElNuaW8YUyXlFQadBhMsucQrmOJ14Jj4IoMk7ToFVLeB09FLa3BMPhUrHd+/4nciv1N
+ Ke5PDk3OvLJzE+1WeQcSD64JFK7RZAT2edbQXDUJRXBZARy7Pt7VlCWMZhK4=
+X-Gm-Gg: ASbGncuh2S1GqwdlLGfaYh8lAHyCcvAxAl3i8IiQdyyx/Ym9zJoK7tDpnFjYcnKXG24
+ JYWlfJeEmVllON9DqOF4+G3N6cq7cl4O4LuoMVnBCxlOmM3zfje/UL+gSwW0qoUHdSGj0RNfSQm
+ nEGfVE1QlDFI+5RvMecKjB0ATZkhYRvFw=
+X-Google-Smtp-Source: AGHT+IFmGuSmXge+kbNHETI07NEVczOR3RUvpyG7bykays/Vg9j6mPgXR+ZzhM1/+fL7dSdkMLNOGfTH0598OuKCMOw=
+X-Received: by 2002:a05:6402:2111:b0:602:cfab:ea9a with SMTP id
+ 4fb4d7f45d1cf-602da402afbmr11613877a12.27.1748348126146; Tue, 27 May 2025
+ 05:15:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 27 May 2025 13:15:14 +0100
+X-Gm-Features: AX0GCFtKyk3VHfKCgUwnMU76gXwnGxqHbzZM3aOiLd6r8ux61v0Jf17cLs_IZI0
+Message-ID: <CAFLszTitaKMU84qGpu_RqVi6HJ1C5F92vy4eZg17PDoVAGZGWg@mail.gmail.com>
+Subject: Please pull u-boot-dm into -next
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,457 +82,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Omega2 / Omega2+ are based on the MediaTek MT7688 SoC with the
-following features:
-    - 64 / 128MB of DDR2 memory
-    - 16 / 32MB of SPI NOR flash
-    - USB, WiFi and many more peripherals
+Hi Tom,
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
----
+This is for -next
 
-Notes:
-    Changes in v2:
-    
-    	- Fix style issues as reported by checkpatch
-    	- Add MAINTAINERS file
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/26346
+(note that x86 boards and RISC-V board don't work in your tree at present)
 
- arch/mips/dts/Makefile               |   1 +
- arch/mips/dts/onion-omega2p.dts      |  58 ++++++++++++
- arch/mips/mach-mtmips/mt7628/Kconfig |   7 ++
- board/onion/omega2p/Kconfig          |  12 +++
- board/onion/omega2p/MAINTAINERS      |  10 ++
- board/onion/omega2p/Makefile         |   3 +
- board/onion/omega2p/board.c          | 134 +++++++++++++++++++++++++++
- board/onion/omega2p/omega2p.env      |  18 ++++
- configs/onion-omega2p_defconfig      |  81 ++++++++++++++++
- include/configs/onion-omega2p.h      |  15 +++
- 10 files changed, 339 insertions(+)
- create mode 100644 arch/mips/dts/onion-omega2p.dts
- create mode 100644 board/onion/omega2p/Kconfig
- create mode 100644 board/onion/omega2p/MAINTAINERS
- create mode 100644 board/onion/omega2p/Makefile
- create mode 100644 board/onion/omega2p/board.c
- create mode 100644 board/onion/omega2p/omega2p.env
- create mode 100644 configs/onion-omega2p_defconfig
- create mode 100644 include/configs/onion-omega2p.h
+https://dev.azure.com/simon0972/u-boot/_build/results?buildId=79&view=results
 
-diff --git a/arch/mips/dts/Makefile b/arch/mips/dts/Makefile
-index 7c4ee8b668b..cb33f96edee 100644
---- a/arch/mips/dts/Makefile
-+++ b/arch/mips/dts/Makefile
-@@ -21,6 +21,7 @@ dtb-$(CONFIG_BOARD_MT7621_NAND_RFB) += mediatek,mt7621-nand-rfb.dtb
- dtb-$(CONFIG_BOARD_MT7628_RFB) += mediatek,mt7628-rfb.dtb
- dtb-$(CONFIG_BOARD_GARDENA_SMART_GATEWAY_MT7688) += gardena-smart-gateway-mt7688.dtb
- dtb-$(CONFIG_BOARD_LINKIT_SMART_7688) += linkit-smart-7688.dtb
-+dtb-$(CONFIG_BOARD_ONION_OMEGA2) += onion-omega2p.dtb
- dtb-$(CONFIG_TARGET_OCTEON_EBB7304) += mrvl,octeon-ebb7304.dtb
- dtb-$(CONFIG_TARGET_OCTEON_NIC23) += mrvl,octeon-nic23.dtb
- dtb-$(CONFIG_BOARD_NETGEAR_CG3100D) += netgear,cg3100d.dtb
-diff --git a/arch/mips/dts/onion-omega2p.dts b/arch/mips/dts/onion-omega2p.dts
-new file mode 100644
-index 00000000000..64fecba1db9
---- /dev/null
-+++ b/arch/mips/dts/onion-omega2p.dts
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2024 Zheng Han <zh@onioniot.com>, Lazar Demin <lazar@onioniot.com>
-+ */
-+
-+/dts-v1/;
-+
-+#include "mt7628a.dtsi"
-+#include <dt-bindings/gpio/gpio.h>
-+
-+/ {
-+	compatible = "onion,omega2", "onion,omega2p", "ralink,mt7628a-soc";
-+	model = "Onion Omega2/Omega2+";
-+
-+	aliases {
-+		serial0 = &uart0;
-+		spi0 = &spi0;
-+	};
-+
-+	chosen {
-+		stdout-path = &uart0;
-+	};
-+};
-+
-+&pinctrl {
-+	state_default: pin_state {
-+		p0led {
-+			groups = "p0led_a";
-+			function = "led";
-+		};
-+	};
-+};
-+
-+&uart0 {
-+	status = "okay";
-+};
-+
-+&spi0 {
-+	status = "okay";
-+	num-cs = <2>;
-+
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&spi_dual_pins>;
-+
-+	spi-flash@0 {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "jedec,spi-nor";
-+		spi-max-frequency = <40000000>;
-+		reg = <0>;
-+	};
-+};
-+
-+&eth {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&ephy_iot_mode>;
-+	mediatek,poll-link-phy = <0>;
-+};
-diff --git a/arch/mips/mach-mtmips/mt7628/Kconfig b/arch/mips/mach-mtmips/mt7628/Kconfig
-index 79b2ddc6692..a75196eaefd 100644
---- a/arch/mips/mach-mtmips/mt7628/Kconfig
-+++ b/arch/mips/mach-mtmips/mt7628/Kconfig
-@@ -27,6 +27,12 @@ config BOARD_MT7628_RFB
- 	  SPI-NOR flash, 1 built-in switch with 5 ports, 1 UART, 1 USB host,
- 	  1 SDXC, 1 PCIe socket and JTAG pins.
- 
-+config BOARD_ONION_OMEGA2
-+	bool "Onion Omega2/2+"
-+	help
-+	  Onion Omega2/2+ IoT computer. Has a MT7688 SoC with 64/128 MiB of DDR2
-+	  RAM and 16/32 MiB of SPI flash.
-+
- config BOARD_VOCORE2
- 	bool "VoCore2"
- 	select SPL_SERIAL
-@@ -52,6 +58,7 @@ config SYS_CONFIG_NAME
- 	default "mt7628" if BOARD_MT7628_RFB
- 
- source "board/gardena/smart-gateway-mt7688/Kconfig"
-+source "board/onion/omega2p/Kconfig"
- source "board/seeed/linkit-smart-7688/Kconfig"
- source "board/vocore/vocore2/Kconfig"
- 
-diff --git a/board/onion/omega2p/Kconfig b/board/onion/omega2p/Kconfig
-new file mode 100644
-index 00000000000..45c18ee27ef
---- /dev/null
-+++ b/board/onion/omega2p/Kconfig
-@@ -0,0 +1,12 @@
-+if BOARD_ONION_OMEGA2
-+
-+config SYS_BOARD
-+	default "omega2p"
-+
-+config SYS_VENDOR
-+	default "onion"
-+
-+config SYS_CONFIG_NAME
-+	default "onion-omega2p"
-+
-+endif
-diff --git a/board/onion/omega2p/MAINTAINERS b/board/onion/omega2p/MAINTAINERS
-new file mode 100644
-index 00000000000..4532c1c6d3e
---- /dev/null
-+++ b/board/onion/omega2p/MAINTAINERS
-@@ -0,0 +1,10 @@
-+ONION OMEGA2/2+
-+M:	Philip Oberfichtner <pro@denx.de>
-+S:	Maintained
-+F:	arch/mips/dts/onion-omega2p.dts
-+F:	board/onion/omega2p/Kconfig
-+F:	board/onion/omega2p/Makefile
-+F:	board/onion/omega2p/board.c
-+F:	board/onion/omega2p/omega2p.env
-+F:	configs/onion-omega2p_defconfig
-+F:	include/configs/onion-omega2p.h
-diff --git a/board/onion/omega2p/Makefile b/board/onion/omega2p/Makefile
-new file mode 100644
-index 00000000000..70cd7a8e568
---- /dev/null
-+++ b/board/onion/omega2p/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y += board.o
-diff --git a/board/onion/omega2p/board.c b/board/onion/omega2p/board.c
-new file mode 100644
-index 00000000000..b56fbf262ad
---- /dev/null
-+++ b/board/onion/omega2p/board.c
-@@ -0,0 +1,134 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Zheng Han <zh@onioniot.com>, Lazar Demin <lazar@onioniot.com>
-+ * Copyright (C) 2025 DENX Software Engineering GmbH, Philip Oberfichtner <pro@denx.de>
-+ */
-+
-+#include <asm/io.h>
-+#include <env.h>
-+#include <init.h>
-+#include <mtd.h>
-+
-+#define OMEGA2_REG(x)		(*((u32 *)(x)))
-+#define OMEGA2_SYSCTL_BASE	0xB0000000
-+#define OMEGA2_SYS_CNTL_BASE	(OMEGA2_SYSCTL_BASE)
-+#define OMEGA2_REG_PIODIR	(OMEGA2_SYSCTL_BASE + 0x600)
-+
-+static int detect_rst(void)
-+{
-+	u32 val = OMEGA2_REG(0xb0000624); // Read GPIO 44 (reset button)
-+
-+	return (val & 1 << 6) ? 1 : 0;
-+}
-+
-+static void gpio_init(void)
-+{
-+	u32 val;
-+
-+	printf("Initializing MT7688 GPIO system.\n");
-+
-+	//set gpio2_mode - setting wled, and p0,p1,p2,p3,p4 LED pins to GPIO mode
-+	val = 0x555;
-+	OMEGA2_REG(OMEGA2_SYS_CNTL_BASE + 0x64) = val; // GPIO2_MODE register
-+	// GINT_FEDGE_1: setting "Enable falling edge triggered" for GPIOs 39-42
-+	OMEGA2_REG(0xb0000644) = 0x0f << 7;
-+
-+	// set gpio_ctrl_1 register: set GPIO44 to output
-+	//gpio44 output gpio_ctrl_1 bit3=1
-+	val = OMEGA2_REG(OMEGA2_REG_PIODIR + 0x04);
-+	val |= 1 << 12;
-+	OMEGA2_REG(OMEGA2_REG_PIODIR + 0x04) = val;
-+
-+	// set gpio1_mode register: set WDT_MODE to GPIO mode
-+	//set gpio1_mode 14=1b1
-+	val = OMEGA2_REG(OMEGA2_SYS_CNTL_BASE + 0x60);
-+	val |= 1 << 14;
-+	OMEGA2_REG(OMEGA2_SYS_CNTL_BASE + 0x60) = val;
-+
-+	// set gpio_ctrl_1 resgister: set GPIO38 to input
-+	//gpio38 input gpio_ctrl_1 bit5=0
-+	val = OMEGA2_REG(OMEGA2_REG_PIODIR + 0x04);
-+	val &= ~1 << 6;
-+	OMEGA2_REG(OMEGA2_REG_PIODIR + 0x04) = val;
-+}
-+
-+enum onion_board_variant {
-+	OMEGA2,
-+	OMEGA2P,
-+	UNKNOWN,
-+};
-+
-+static enum onion_board_variant board_variant(void)
-+{
-+	struct mtd_info *mtd;
-+
-+	mtd_probe_devices();
-+
-+	mtd_for_each_device(mtd) {
-+		if (mtd->type != MTD_NORFLASH)
-+			continue;
-+
-+		switch (mtd->size) {
-+		case 16 * 1024 * 1024: // 16 MB
-+			return OMEGA2;
-+
-+		case 32 * 1024 * 1024: // 32 MB
-+			return OMEGA2P;
-+
-+		default:
-+			break;
-+		}
-+	}
-+
-+	return UNKNOWN;
-+}
-+
-+#define ONION_MTDPARTS_BASE "spi0.0:192k(u-boot),64k(u-boot-env),64k(factory)"
-+
-+static void set_mtdparts(void)
-+{
-+	switch (board_variant()) {
-+	case OMEGA2P:
-+		printf("Detected board variant OMEGA2+: ");
-+		env_set("mtdparts", ONION_MTDPARTS_BASE ",32448k(firmware)");
-+		break;
-+
-+	case OMEGA2:
-+		printf("Detected board variant OMEGA2: ");
-+		env_set("mtdparts", ONION_MTDPARTS_BASE ",16064k(firmware)");
-+		break;
-+
-+	default:
-+		printf("Unable to detect board variant! Using default value: ");
-+		env_set("mtdparts", ONION_MTDPARTS_BASE);
-+	}
-+
-+	printf("mtdparts=\"%s\"\n", env_get("mtdparts"));
-+}
-+
-+#define WELCOME_MESSAGE                                                     \
-+	"\n\n"                                                              \
-+	"   *************************************************************\n"\
-+	"   *  For more info on using U-Boot, visit                     *\n"\
-+	"   *  https://documentation.onioniot.com/bootloader/overview   *\n"\
-+	"   *                                                           *\n"\
-+	"   *  Hold the reset button to enter the U-Boot commandline.   *\n"\
-+	"   *************************************************************\n"\
-+	"\n"
-+
-+int board_late_init(void)
-+{
-+	gpio_init();
-+
-+	printf(WELCOME_MESSAGE);
-+
-+	set_mtdparts();
-+
-+	if (detect_rst()) {
-+		printf("Reset button pressed - entering shell ...\n");
-+		env_set("reset_pressed", "1");
-+		// This env variable is evaluated by our bootcmd.
-+	}
-+
-+	return 0;
-+}
-diff --git a/board/onion/omega2p/omega2p.env b/board/onion/omega2p/omega2p.env
-new file mode 100644
-index 00000000000..ff3fdcadf90
---- /dev/null
-+++ b/board/onion/omega2p/omega2p.env
-@@ -0,0 +1,18 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2025 DENX Software Engineering GmbH, Philip Oberfichtner <pro@denx.de>
-+
-+# Boot options
-+bootargs=console=ttyS0,115200 rootfstype=squashfs,jffs2
-+bootfile=firmware.bin
-+boot_linux=sf probe && mtd read firmware 81800000 0 400000 && bootm 81800000
-+enter_shell=env set reset_pressed # unset variable
-+bootcmd= if test -z "${reset_pressed}"; then run boot_linux; else run enter_shell; fi
-+
-+# Network configuration
-+serverip=192.168.8.100
-+ipaddr=192.168.8.8
-+loadaddr=0x81800000
-+
-+# MTD settings
-+mtdids=nor0=spi0.0
-+# mtdparts will be set at runtime, according to the specific board variant.
-diff --git a/configs/onion-omega2p_defconfig b/configs/onion-omega2p_defconfig
-new file mode 100644
-index 00000000000..95f1a469f00
---- /dev/null
-+++ b/configs/onion-omega2p_defconfig
-@@ -0,0 +1,81 @@
-+CONFIG_MIPS=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_ENV_OFFSET=0x30000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_DEFAULT_DEVICE_TREE="onion-omega2p"
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x80000
-+CONFIG_SPL_BSS_START_ADDR=0x80010000
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_SPL=y
-+CONFIG_ARCH_MTMIPS=y
-+CONFIG_SOC_MT7628=y
-+CONFIG_BOARD_ONION_OMEGA2=y
-+CONFIG_SYS_MIPS_TIMER_FREQ=290000000
-+CONFIG_MIPS_CACHE_SETUP=y
-+CONFIG_MIPS_CACHE_DISABLE=y
-+CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
-+# CONFIG_MIPS_BOOT_ENV_LEGACY is not set
-+CONFIG_MIPS_BOOT_FDT=y
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_BOOTDELAY=0
-+CONFIG_AUTOBOOT_KEYED=y
-+CONFIG_AUTOBOOT_KEYED_CTRLC=y
-+CONFIG_OF_STDOUT_VIA_ALIAS=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SYS_MALLOC_BOOTPARAMS=y
-+CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT=0x30000
-+CONFIG_SPL_MAX_SIZE=0x10000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_NOR_SUPPORT=y
-+CONFIG_HUSH_PARSER=y
-+# CONFIG_CMD_ELF is not set
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_USE_DEFAULT_ENV_FILE=y
-+CONFIG_DEFAULT_ENV_FILE="board/onion/omega2p/omega2p.env"
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_IPADDR=y
-+CONFIG_IPADDR="192.168.8.8"
-+CONFIG_USE_SERVERIP=y
-+CONFIG_SERVERIP="192.168.8.100"
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_DM=y
-+CONFIG_LED=y
-+CONFIG_LED_BLINK=y
-+CONFIG_LED_GPIO=y
-+CONFIG_DM_MTD=y
-+CONFIG_SPI_FLASH_BAR=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_MT7628_ETH=y
-+CONFIG_PHY=y
-+CONFIG_SPI=y
-+CONFIG_MT7621_SPI=y
-+CONFIG_LZMA=y
-+# CONFIG_GZIP is not set
-+CONFIG_SPL_LZMA=y
-diff --git a/include/configs/onion-omega2p.h b/include/configs/onion-omega2p.h
-new file mode 100644
-index 00000000000..ca170b22a40
---- /dev/null
-+++ b/include/configs/onion-omega2p.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024 Zheng Han <zh@onioniot.com>, Lazar Demin <lazar@onioniot.com>
-+ */
-+#ifndef __CONFIG_ONION_OMEGA2P_H
-+#define __CONFIG_ONION_OMEGA2P_H
-+
-+/* RAM */
-+#define CFG_SYS_SDRAM_BASE      0x80000000
-+#define CFG_SYS_INIT_SP_OFFSET  0x400000
-+
-+/* Dummy value */
-+#define CFG_SYS_UBOOT_BASE      0
-+
-+#endif /* __CONFIG_ONION_OMEGA2P_H */
--- 
-2.39.5
 
+The following changes since commit 39b815d02d7ce6af32bcf023d20243c404b75a84:
+
+  Merge tag 'v2025.07-rc3' into next (2025-05-26 16:07:19 -0600)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-next-27may25
+
+for you to fetch changes up to ec2482a24ac3a1d0beadae80bcb28c8d89b4c1ab:
+
+  patman: Add basic documentation for new features (2025-05-27 10:07:43 +0100)
+
+----------------------------------------------------------------
+Sync up Python tools from my tree
+
+- minor binman tweaks
+- terminal improvements in u_boot_pylib
+- patman move to asyncio
+- patman support for new 'series' subcommand
+
+----------------------------------------------------------------
+Simon Glass (84):
+      buildman: Add a way to build a particular
+targethttps://dev.azure.com/simon0972/u-boot/_build/results?buildId=79&view=results
+      binman: Read the skip-at-start value on startup
+      binman: x86: Write skip-at-start when end-at-4gb is used
+      patman: Move all non-test logic into control module
+      patman: Move capture_sys_output() into terminal and rename
+      binman: Correct a typo in the toolpath comment
+      u_boot_pylib: Allow control of capturing
+      u_boot_pylib: Improve ANSI-colour output with backgrounds
+      u_boot_pylib: Add a pager
+      u_boot_pylib: Avoid concurrent execution of only one test
+      u_boot_pylib: Allow disabling colour output
+      tools: Plumb in capture control
+      patman: Correct a stray quote
+      patman: Rename test_basic() in test_checkpatch
+      patman: Tidy up the start-up code
+      patman: Support extra test features
+      patman: Move code for sending into its own module
+      CI: Add a dependency file for patman
+      patman: Create a module for handling patchwork
+      patman: Move Patch and Review to patchwork module
+      patman: Add reading of series and patch status
+      patman: Rename check_patchwork_status()
+      patman: Split up check_and_show_status()
+      patman: Split out the processing of find_new_responses()
+      patman: Adjust how the fake request() function is provided
+      patman: Simplify test_find_new_responses()
+      patman: Show patches in yellow
+      patman: Add more information to Patch
+      patman: Use defaultdict directly
+      patman: Switch over to asyncio
+      patman: Provide an option to run in single-threaded mode
+      patman: Use a pager when outputting status
+      patman: Drop the old status code
+      patman: Untangle settings from gitutil
+      patman: Pass the alias dict into gitutil.build_email_list()
+      patman: Pass the alias dict into gitutil.email_patches()
+      patman: Pass aliases to Series.MakeCcFile()
+      patman: Update Series.ShowActions() to pass alias
+      u_boot_pylib: Support a fatal level in tout
+      u_boot_pylib: Tidy up quoting of cc and to
+      u_boot_pylib: Provide directories to gitutil functions
+      u_boot_pylib: Speed up determining the upstream branch
+      patman: Add all files to __init__.py
+      patman: Allow setting the current directory when sending
+      patman: Allow setting a git directory when sending
+      patman: Correct use of str in code
+      patman: Use itr instead of lines for iterator
+      patman: Use .git as the git directory
+      patman: Use variables for series ID and title
+      patman: Clean up creation of the git tree
+      patman: Use git to set up the test config
+      patman: Correct some pylint and asyncio issues
+      patman: Split parser creation from parsing
+      patman: Add tests for help
+      patman: Split subparsers into their own functions
+      patman: Move arguments for sent into the correct parser
+      patman: Move -H out of the send command
+      patman: Tidy up function comments in the series module
+      patman: Support collecting all lines in the commit message
+      u_boot_pylib: Correct pylint warnings in gitutil
+      patman: Deal with git safe-directory warning
+      u_boot_pylib: Add more functions to gitutil
+      patman: Use python3 with /usr/bin/env
+      patman: Add a test for collecting a PATCH prefix
+      patman: Move common test code into a new module
+      patman: Add a fourth series for testing
+      patman: Avoid touching the system or local config
+      patman: Add a simple database implementation
+      patman: Add a helper for managing cseries
+      patman: Add a Cseries class
+      patman: Update status command support cover-letter info
+      patman: Enhance patchwork interface to support Cseries
+      patman: Enhance implementation of file-based defaults
+      patman: Use -c to show patch comments
+      patman: Support returning the parsers to use
+      patman: Introduce basic database support in Series
+      patman: Improve Series support for patchwork links
+      patman: Implement the patchwork subcommand
+      patman: Support aliases for commands and subcommands
+      patman: Update send function to return whether it sent
+      patman: Implement the series subcommand
+      patman: Implement the upstream subcommand
+      patman: Add tests for Cseries
+      patman: Add basic documentation for new features
+
+ arch/x86/cpu/intel_common/intel_opregion.c |    1 -
+ arch/x86/lib/fsp2/fsp_init.c               |    2 +-
+ doc/develop/binman_tests.rst               |    6 +-
+ doc/develop/pics/patman.jpg                |  Bin 0 -> 97131 bytes
+ lib/binman.c                               |   16 +-
+ tools/binman/bintool_test.py               |   20 +-
+ tools/binman/cbfs_util_test.py             |   15 +-
+ tools/binman/control.py                    |    6 +-
+ tools/binman/elf_test.py                   |    3 +-
+ tools/binman/etype/section.py              |    6 +-
+ tools/binman/fip_util_test.py              |   11 +-
+ tools/binman/ftest.py                      |  106 +--
+ tools/binman/image_test.py                 |    4 +-
+ tools/binman/main.py                       |    4 +-
+ tools/buildman/builder.py                  |    4 +-
+ tools/buildman/builderthread.py            |    2 +
+ tools/buildman/buildman.rst                |    4 +
+ tools/buildman/cmdline.py                  |    3 +
+ tools/buildman/control.py                  |    5 +-
+ tools/buildman/func_test.py                |   20 +-
+ tools/buildman/main.py                     |    2 +-
+ tools/buildman/test.py                     |    6 +-
+ tools/dtoc/main.py                         |    5 +-
+ tools/dtoc/test_dtoc.py                    |   11 +-
+ tools/dtoc/test_fdt.py                     |    2 +-
+ tools/dtoc/test_src_scan.py                |   25 +-
+ tools/patman/__init__.py                   |    9 +-
+ tools/patman/__main__.py                   |   67 +-
+ tools/patman/checkpatch.py                 |   15 +-
+ tools/patman/cmdline.py                    |  527 ++++++++++--
+ tools/patman/control.py                    |  424 ++++++----
+ tools/patman/cser_helper.py                | 1524
+++++++++++++++++++++++++++++++++++
+ tools/patman/cseries.py                    | 1165 ++++++++++++++++++++++++++
+ tools/patman/database.py                   |  823 ++++++++++++++++++
+ tools/patman/func_test.py                  |  544 +++++-------
+ tools/patman/get_maintainer.py             |   13 +-
+ tools/patman/patchstream.py                |   44 +-
+ tools/patman/patchwork.py                  |  852 +++++++++++++++++++
+ tools/patman/patman.rst                    |  283 ++++++-
+ tools/patman/project.py                    |    3 +-
+ tools/patman/pyproject.toml                |    2 +-
+ tools/patman/requirements.txt              |    3 +-
+ tools/patman/send.py                       |  197 +++++
+ tools/patman/series.py                     |  143 +++-
+ tools/patman/settings.py                   |   77 +-
+ tools/patman/status.py                     |  488 +++++------
+ tools/patman/test_checkpatch.py            |    2 +-
+ tools/patman/test_common.py                |  254 ++++++
+ tools/patman/test_cseries.py               | 3684
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ tools/patman/test_settings.py              |    2 +-
+ tools/u_boot_pylib/__main__.py             |    2 +-
+ tools/u_boot_pylib/command.py              |    5 +-
+ tools/u_boot_pylib/gitutil.py              |  255 ++++--
+ tools/u_boot_pylib/terminal.py             |  105 ++-
+ tools/u_boot_pylib/test_util.py            |   29 +-
+ tools/u_boot_pylib/tout.py                 |   27 +-
+ 56 files changed, 10659 insertions(+), 1198 deletions(-)
+ create mode 100644 doc/develop/pics/patman.jpg
+ create mode 100644 tools/patman/cser_helper.py
+ create mode 100644 tools/patman/cseries.py
+ create mode 100644 tools/patman/database.py
+ create mode 100644 tools/patman/patchwork.py
+ create mode 100644 tools/patman/send.py
+ create mode 100644 tools/patman/test_common.py
+ create mode 100644 tools/patman/test_cseries.py
+
+Regards,
+SImon
