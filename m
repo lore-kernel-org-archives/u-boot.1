@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53D27C54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 11:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59284C54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 11:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 923DA82E31;
-	Tue, 27 May 2025 13:38:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DEE5283015;
+	Tue, 27 May 2025 13:38:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1748345902;
-	bh=zXWgQd/TV1CG5ZwXb+ta36kJOWzEaYqn+QRvPXotGSs=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ldBY+hI4tUcYUXcK5WNbfud5Sh7ZdVp40ATnZF6ZrBut0aAFEwnAgPUz8A7/3vXwE
-	 n8MjB2pyLhdR8L0VKiZ/FMPsRPjHUrykawzL7nMN01tkMKgFrQJoA5mFEnlJIKP6Tv
-	 4ms1ZAwaG0KOcMfgAAXD/loImNzV9/S6+HziZE2k0FPFjpjgBfzzg1FEnY4wKnzgQx
-	 C417Zn3USnX+d+hU+gcFAnP775pOVlXOgdDTxTSeqRDa74rjrX47lvLVVpZR2RYUBd
-	 8Er5RKHTyBSyB9686UT2d8HQ5sx768HMfmfOCPpgvLFLN8qBRJTtbSigQEzEX+XtUM
-	 Dm1kmEiKLJJgw==
+	s=phobos-20191101; t=1748345915;
+	bh=sLGAUd4gL52dqEoK0U26/F0vvU9DOBq8S+q9daCBCvI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vWNXDTwP6fGOM8ftEJr7AlbiIs5EEIOosm1yrMgR/b4hF4gvvYYmQ3VufTHVvbMPg
+	 R+LgU5QHzFKW3iaaQXDpOecP24NwhzgG0dn/o7lgVmD3PwPNYP2AFwUR6azdpj/qvX
+	 u+wMS+yojEZrjkT9Vtvlh3KlRiq0lw4ycYnj5ip/4Lz4CHvOHczwO2tOXsUbQ89+2V
+	 hDVDmN2yaKBXprcT44bEWpwQEz5X5O4vd+9z8FF4OveoQH9fefGVQj2TCKapAkHpMS
+	 XmIG21uGUe284OhfmchKHjvUsqZjbD2Ym/5osMrXH4vrNzYaYP/RmefAlWiAZ3PPnX
+	 VrTAOTxmTH5NQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E09A78300F; Tue, 27 May 2025 13:38:21 +0200 (CEST)
+ id CA49C82B7C; Tue, 27 May 2025 13:38:34 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E58A282B7C
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:38:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 748AB83022
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:38:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="N/SChglt"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="bcy4YR61"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7E2921039728C; 
- Tue, 27 May 2025 13:38:12 +0200 (CEST)
+ with ESMTPSA id 446B41039728C; 
+ Tue, 27 May 2025 13:38:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1748345897; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=zXWgQd/TV1CG5ZwXb+ta36kJOWzEaYqn+QRvPXotGSs=;
- b=N/SChgltaMtPbbgqqLuv2BBoaaJLCi+mm4hKxIckQrDSW8TorKVU0r8dKaoPvW1xjGVIAl
- 51IDR6XoJxcHBsg6xdEQ1pkqLauGvXytg3V5r26+OHUGd5kIc/f8Xm94aLZph4v14+K9Cv
- h63FCNjc5flC5MUFIUmXEwjsu2FvxgF5BYDBnyZrdRMrl9a/UIUkR1cbK1N7OTXCCxm84a
- PmfFNm0mztaC0OBE7q9CtbklqVeA2lKocuXfa95IcYvomxC1DcxkbvyLwNHI+jgJrCqPO3
- pnPMT/1IKxe0IN7J10snKA3L0mTyodib92KUPR85TmBnj9vqVLfy8QQb85XO2Q==
+ t=1748345911; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=sLGAUd4gL52dqEoK0U26/F0vvU9DOBq8S+q9daCBCvI=;
+ b=bcy4YR61jz6NTdaxcvlYepHxujxYke2y1Vbxlp0ac72zimLsnY39JZ9HObfbXKLlpoU2TY
+ urM1WjriLG4+dQcqSfSmKPc9/BAVfTSzKJnkgciM+fWkHFxFZCtncNnch0xwBQog1mYkBI
+ eQe5uPcBBHxrySZVLjf3EnMGtheqf2JnqNGPmvS/hKz16Y8nmY1q/jVAOsPRbnYnLdJWSk
+ KHavqxbf+M3vPbV5HjJLxluXn6NIx9S4Sz5e5QiGpXLsR/+K3FiPzrnMOllewGWmdxUJGw
+ 9+eICxyY2k92XWFAbYZ4vkS0t+/KaoZPBWW+qNAynu9hDKVSDXHdXwKd0D8JbA==
 From: Philip Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
 Cc: Philip Oberfichtner <pro@denx.de>, Anshul Dalal <anshuld@ti.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Greg Malysa <malysagreg@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Marek Vasut <marex@denx.de>,
+ Marek Vasut <marex@denx.de>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
  Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 0/2] Add Onion Omega2/2+ board support
-Date: Tue, 27 May 2025 13:37:49 +0200
-Message-Id: <20250527113751.95741-1-pro@denx.de>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] spl: Add size check for u-boot-with-spl.bin
+Date: Tue, 27 May 2025 13:37:50 +0200
+Message-Id: <20250527113751.95741-2-pro@denx.de>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250527113751.95741-1-pro@denx.de>
+References: <20250527113751.95741-1-pro@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -85,34 +86,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the MediaTek based boards by Onion. Whereas the second commit
-adds the actual board support, the first commit handles a tight flash size
-constraint for the u-boot-with-spl.bin image.
+Introduce another SIZE_CHECK macro for u-boot-with-spl.bin.
 
-Philip Oberfichtner (2):
-  spl: Add size check for u-boot-with-spl.bin
-  mips: mt7628: Add Onion Omega2/2+ board support
+Signed-off-by: Philip Oberfichtner <pro@denx.de>
+---
+ Makefile           | 7 +++++++
+ common/spl/Kconfig | 7 +++++++
+ 2 files changed, 14 insertions(+)
 
- Makefile                             |   7 ++
- arch/mips/dts/Makefile               |   1 +
- arch/mips/dts/onion-omega2p.dts      |  58 ++++++++++++
- arch/mips/mach-mtmips/mt7628/Kconfig |   7 ++
- board/onion/omega2p/Kconfig          |  12 +++
- board/onion/omega2p/Makefile         |   3 +
- board/onion/omega2p/board.c          | 134 +++++++++++++++++++++++++++
- board/onion/omega2p/omega2p.env      |  18 ++++
- common/spl/Kconfig                   |   7 ++
- configs/onion-omega2p_defconfig      |  81 ++++++++++++++++
- include/configs/onion-omega2p.h      |  15 +++
- 11 files changed, 343 insertions(+)
- create mode 100644 arch/mips/dts/onion-omega2p.dts
- create mode 100644 board/onion/omega2p/Kconfig
- create mode 100644 board/onion/omega2p/Makefile
- create mode 100644 board/onion/omega2p/board.c
- create mode 100644 board/onion/omega2p/omega2p.env
- create mode 100644 configs/onion-omega2p_defconfig
- create mode 100644 include/configs/onion-omega2p.h
-
+diff --git a/Makefile b/Makefile
+index f3278e3b013..dea9f4f133f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -951,6 +951,12 @@ else
+ SPL_SIZE_CHECK =
+ endif
+ 
++ifneq ($(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT),0x0)
++UBOOT_WITH_SPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_UBOOT_WITH_SPL_SIZE_LIMIT))
++else
++UBOOT_WITH_SPL_SIZE_CHECK =
++endif
++
+ ifneq ($(CONFIG_TPL_SIZE_LIMIT),0x0)
+ TPL_SIZE_CHECK = @$(call size_check,$@,$(CONFIG_TPL_SIZE_LIMIT))
+ else
+@@ -1535,6 +1541,7 @@ OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
+ 				   --pad-to=$(CONFIG_SPL_PAD_TO)
+ u-boot-with-spl.bin: $(SPL_IMAGE) $(SPL_PAYLOAD) FORCE
+ 	$(call if_changed,pad_cat)
++	$(UBOOT_WITH_SPL_SIZE_CHECK)
+ 
+ ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
+ MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 77cf04d38ed..ace2002023a 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -36,6 +36,13 @@ config SPL_FRAMEWORK_BOARD_INIT_F
+ 	  - initialize the serial (preloader_console_init)
+ 	  Unless you want to provide your own board_init_f, you should say Y.
+ 
++config UBOOT_WITH_SPL_SIZE_LIMIT
++	hex "Maximum size of u-boot-with-spl.bin"
++	default 0x0
++	help
++	  Specifies the maximum length of the u-boot-with-spl.bin image.
++	  If this value is zero, it is ignored.
++
+ config SPL_SIZE_LIMIT
+ 	hex "Maximum size of SPL image"
+ 	default 0x11000 if ARCH_MX6 && !MX6_OCRAM_256KB
 -- 
 2.39.5
 
