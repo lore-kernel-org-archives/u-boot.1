@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7271C54F30
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C7BC54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:30:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FB8A83885;
-	Tue, 27 May 2025 15:29:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 736918383E;
+	Tue, 27 May 2025 15:29:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZHS78ah4";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="o/HJWu+l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D78B382B26; Tue, 27 May 2025 15:29:37 +0200 (CEST)
+ id 44A008388B; Tue, 27 May 2025 15:29:40 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6FCB8384B
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:29:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A9D38384B
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:29:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RAsMKH011814;
- Tue, 27 May 2025 15:29:31 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RCungM001150;
+ Tue, 27 May 2025 15:29:34 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- CSpa1AWD8m3w0XGGu+oOO1Zz3V0sB7g68I3Xv9YAhkQ=; b=ZHS78ah4zvqRouPI
- s7DvJsq79A9+0/R1gV13GvbKgMs5XGWTmGJRM5r1MT4uqk+qfbHygSqIxxUo6V3V
- Zh7GvcW6uanDRZFw4UdYxOjRzIvPvDlGqBO8fjbNlXEVAxlcC+vyTm4CzQ7mQKNy
- 4iQ1XwtWRRxcauNHgxYVylzDi0aphfdmtkL8IeyJbK7d67fczKMe0nDFpcCA6PGq
- 4dZClH4kztmogYtZqVx2dtojwHfIiLSuIg15X7ym4lwlKpVHCfIK4vKvXADah0vh
- dPwJ9/LG0T1QHQySLOrUmqG4AzQLPeR4AlO7+KKYiygH9DKaPVdkMNoX5LFTVXXS
- 7nPr7A==
+ xmfwORAjZqMGe2QqIep4GzCe9bdXMj8pmLCQnYLw8HY=; b=o/HJWu+lAoHlsHhg
+ 9nmwPIty2ZEJgZSXaxQDYYP3TOGR8aXipKEdU49g2dNfVLw0cTCAz0oDW1IgJeDU
+ E/aDDFC+NnjyV6gWpKcH43n7olQZmKE9rGKX+GI1j6aOuNXD7Fi+6XtLcKbjxRPt
+ aVrj8zE3PoQ6LM+WKtFYw11rhtJWS/eFLx1yAyMs+X0TX3omD0xfSphWB4jpe2+j
+ DFzmGYsninyfKrS7/N2cOJadUR6G1P3Vuqp2p6id/BXDjNya229OnZ51V6O9DELn
+ 1COK47Yh4rQE1J4TqUBALv45E5ohcqDKgbhxdFeQ/HjQPM5Tj53KolB0v2N3v5NA
+ WfDjUQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u3hk4hx5-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u3hk4hx7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 15:29:31 +0200 (MEST)
+ Tue, 27 May 2025 15:29:33 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 720064004F;
- Tue, 27 May 2025 15:28:42 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A7E0A4004A;
+ Tue, 27 May 2025 15:28:35 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EF336AEC296;
- Tue, 27 May 2025 15:28:04 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DEB46AEB165;
+ Tue, 27 May 2025 15:27:58 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 15:28:04 +0200
+ 2025 15:27:58 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Valentin Caron
+ <valentin.caron@foss.st.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 07/13] clk: fixed_rate: configure clock ID with
- CONFIG_CLK_AUTO_ID
-Date: Tue, 27 May 2025 15:27:49 +0200
-Message-ID: <20250527132755.2169508-8-patrice.chotard@foss.st.com>
+ Alice Guo <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH v2 01/13] clk: scmi: add compatibility with clock protocol 2.0
+Date: Tue, 27 May 2025 15:27:43 +0200
+Message-ID: <20250527132755.2169508-2-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
 References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
@@ -92,13 +94,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+From: Valentin Caron <valentin.caron@foss.st.com>
 
-Update CLK ID to avoid 0 id, used for dummy clock with CCF
-and to allow selection by clk_get_by_id, used to
-get private data associated to the UCLASS_CLK device
+Since clock protocol 2.0, SCMI specification add an option field
+"clock_enable_delay" to CLOCK_ATTRIBUTES command.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+scmi_read_resp_from_smt() will return an error ("Buffer too small") as
+the message length coming from the SCMI server is not the same as expected.
+
+So implement a condition to SCMI clock protocol version to change the
+length of the expected message.
+
+Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Lukasz Majewski <lukma@denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>
@@ -106,21 +113,113 @@ Cc: Sean Anderson <seanga2@gmail.com>
 
 (no changes since v1)
 
- drivers/clk/clk_fixed_rate.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/clk/clk_scmi.c   | 54 +++++++++++++++++++++++++++++-----------
+ include/scmi_protocols.h | 15 +++++++++++
+ 2 files changed, 54 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
-index d1da05cc18a..95a77d2e041 100644
---- a/drivers/clk/clk_fixed_rate.c
-+++ b/drivers/clk/clk_fixed_rate.c
-@@ -44,6 +44,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
- 	dev_set_uclass_priv(dev, clk);
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index af69850cdd8..e323a948780 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -84,26 +84,47 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
+ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+ 				 u32 *attr)
+ {
++	struct scmi_clock_priv *priv = dev_get_priv(dev);
+ 	struct scmi_clk_attribute_in in = {
+ 		.clock_id = clkid,
+ 	};
+-	struct scmi_clk_attribute_out out;
+-	struct scmi_msg msg = {
+-		.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
+-		.message_id = SCMI_CLOCK_ATTRIBUTES,
+-		.in_msg = (u8 *)&in,
+-		.in_msg_sz = sizeof(in),
+-		.out_msg = (u8 *)&out,
+-		.out_msg_sz = sizeof(out),
+-	};
+ 	int ret;
  
- 	clk->dev = dev;
-+	clk->id = CLK_ID(dev, 0);
- 	clk->enable_count = 0;
+-	ret = devm_scmi_process_msg(dev, &msg);
+-	if (ret)
+-		return ret;
+-
+-	*name = strdup(out.clock_name);
+-	*attr = out.attributes;
++	if (priv->version >= 0x20000) {
++		struct scmi_clk_attribute_out_v2 out;
++		struct scmi_msg msg = {
++			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
++			.message_id = SCMI_CLOCK_ATTRIBUTES,
++			.in_msg = (u8 *)&in,
++			.in_msg_sz = sizeof(in),
++			.out_msg = (u8 *)&out,
++			.out_msg_sz = sizeof(out),
++		};
++
++		ret = devm_scmi_process_msg(dev, &msg);
++		if (ret)
++			return ret;
++
++		*name = strdup(out.clock_name);
++		*attr = out.attributes;
++	} else {
++		struct scmi_clk_attribute_out out;
++		struct scmi_msg msg = {
++			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
++			.message_id = SCMI_CLOCK_ATTRIBUTES,
++			.in_msg = (u8 *)&in,
++			.in_msg_sz = sizeof(in),
++			.out_msg = (u8 *)&out,
++			.out_msg_sz = sizeof(out),
++		};
++
++		ret = devm_scmi_process_msg(dev, &msg);
++		if (ret)
++			return ret;
++
++		*name = strdup(out.clock_name);
++		*attr = out.attributes;
++	}
+ 
+ 	return 0;
  }
+@@ -257,6 +278,9 @@ static int scmi_clk_probe(struct udevice *dev)
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return 0;
  
++	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
++					    &priv->version);
++
+ 	/* register CCF children: CLK UCLASS, no probed again */
+ 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
+ 		return 0;
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index 9046de7e3e7..762a1032c37 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -782,6 +782,21 @@ struct scmi_clk_attribute_out {
+ 	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
+ };
+ 
++/**
++ * struct scmi_clk_get_nb_out_v2 - Response payload for SCMI_CLOCK_ATTRIBUTES command
++ * Clock management Protocol 2.0
++ * @status:	SCMI command status
++ * @attributes:	clock attributes
++ * @clock_name:	name of the clock
++ * @clock_enable_delay: delay incurred by the platform to enable the clock
++ */
++struct scmi_clk_attribute_out_v2 {
++	s32 status;
++	u32 attributes;
++	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
++	u32 clock_enable_delay;
++};
++
+ /**
+  * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
+  * @clock_id:	SCMI clock ID
 -- 
 2.25.1
 
