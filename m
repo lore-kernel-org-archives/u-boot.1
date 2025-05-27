@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8755FC54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 16:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D15C54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 16:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCEE9830C0;
-	Tue, 27 May 2025 18:36:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F8C8830F4;
+	Tue, 27 May 2025 18:47:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="TJq7H2Fp";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="FJgLFQA/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0653830F4; Tue, 27 May 2025 18:36:12 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 1DAF983118; Tue, 27 May 2025 18:47:01 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DE4E8309A
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 18:36:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 673A382E40
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 18:46:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e7da20d35ddso2144167276.1
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 09:36:10 -0700 (PDT)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e7c5d470a8bso2829456276.0
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 09:46:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1748363769; x=1748968569; darn=lists.denx.de;
+ d=gateworks.com; s=google; t=1748364417; x=1748969217; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dxfuX7PLa6k8TbnajGIUfAZxB8hOK8l0tCFZiiwjJDk=;
- b=TJq7H2FpKhKV15sFhCI+8Q+WVTle8g31QuM/rQfi+vge3gtlKrYj0ceV5pFoKrbpNR
- pdlhpCKKwhpruwuJz6A7b/+9qYNpL+kPUro5DdYATH92ccVFE85pa88ArzGW1ZLt8b9N
- b0tRS5SbVi9GBoEds1nyZDia/gNZ0d66NtFVmfYvYb1NqVEdBTFCPYi25ebzN/dWUiYP
- pqQxKlWv0nlTjWGC1KJbgfA1MevpAfWUFZn6p/nkLY6Oa8jnFlpv4TfOdpnhZ187JzlL
- gH2KN6foeWyGobJRXDsNp9L5nhezTa1kQTWJSz8VFpQ0UvCoR4fE3cAhg/Cy48dWFJ1Q
- 6gcg==
+ bh=o1WcQKK9P+4mtSP3YBBDCJB5eXKD/nV9R0ViJn7KLro=;
+ b=FJgLFQA/ACpQMqMwEtoavSl98lP8QpdtRUI3UGjUqLqkREnVMHXBtkhSo+/96Jbbf+
+ O2jk9zVqiq7aNFlnQIPtN5EGISx1WsiVSXocn8hA7t8kmH8jHJ8uZfDUEq0K0U9F99zm
+ d+r3HbDSydB4EWVcF6xF9IaCXkyBeIB5L5722sU3CoTz55Ogs48npexfJ0+kGTBYZ6IE
+ hpIVbAkhdWwQYggi19CkSxODlfyQE+ijgkAAP7L6z9P+n9RhWZj5fErrxUmbMeb9GhN6
+ QZVedFkNCFzRgBPt88nckVEGh11qi3NcDpjVe0zQ/YPxB5LPx+MhO8S5Oqvh202xvikU
+ D+Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748363769; x=1748968569;
+ d=1e100.net; s=20230601; t=1748364417; x=1748969217;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dxfuX7PLa6k8TbnajGIUfAZxB8hOK8l0tCFZiiwjJDk=;
- b=U2UYOJffjaM40ZrqBFn+KmhuPaqdknDq26hXOaYO2crfRZhYDUpcmbsVJQAOsZJLpP
- ObnKiuYTXJI9sMyLHXEuCN0xb5m3nHp8zaAo5aDuoPmoqcnwryfF515e/EyYtUWWemNp
- XJI6AgvOc+gyVsCX5bTz8oVMS3AgsG8yYH5VCt2ZGZEvH1zmHHjXBtKIx8H9ItG5/YzG
- R84/pon1AnmZadbzjIEnnNsrPm50GT4U4xD+09SOH0l8pQMNPAdYnOKtqCxCIRZjIl9i
- UZVWjU7AwKAefz5vfTvq6EyiGqGj2qlMckUQon7Rqw5S10LIlRTyqrZRnNp88ejYPiR7
- Z7HQ==
-X-Gm-Message-State: AOJu0Yz2sC0dDRk4WcqICBZiaFC9zqdL1hH5DWS2hngwpEoohIbJPM6g
- DV/LrfcM70tuJTd8en2z1Wh5c18O77cuchRASIOigZXusgJjSBhiiZvDBqUsX9/JZOGNuQVC2iZ
- CExPIvVDn2ivUX2XWEC5yJYuUjCfluGc41pwWrh1Ikw==
-X-Gm-Gg: ASbGncsQR1hVy0sRSZIhjVrC0azhE5iI21rXj1X1DSgyXa40xc06oHE2KDsj9iNSBFO
- hYGbgx1MsieqdNHDmR23J0fsLpc/qfd7Oqd4WSKr0oeHVdpn9Fusx4VKnFA2yPBqTuYOYYd8ZAv
- blV/Dx+EVqZiKiD7kns424ho3qqi3y9Aez
-X-Google-Smtp-Source: AGHT+IFdCVj7lWdcUbUQ0Al/TGNSkbEok8677/AcYUvx4yeeDahbP/2FcTMlGZeAFwJvqkmtoT5zul4bpocJYTT1PxA=
-X-Received: by 2002:a05:6902:20c1:b0:e7b:a4b9:c02d with SMTP id
- 3f1490d57ef6-e7d919c072fmr15690344276.4.1748363768977; Tue, 27 May 2025
- 09:36:08 -0700 (PDT)
+ bh=o1WcQKK9P+4mtSP3YBBDCJB5eXKD/nV9R0ViJn7KLro=;
+ b=Kr+nNDJAqsxDJLys1+euZHqpizEwsc0+UC8XpSKGi1OJyYlpA0bBbVoRWptM93f1yT
+ Mq4MWzVH/H1telpvKKBBgIcHBfbNmChtREDI8R7qUd7eT2rZEZ+rJkq23FjQkdLjFRyG
+ MjRAi5OLUT9ZePDrbZfAS9ang5Dp08wG9JjKV0rDjp1YzGbMuNzMm2fKsy+xjgUigKdz
+ YQIjzXwlxfSTbzKNOGCgcJDKSfZydJpfLkS2tR4GoYNDt/Ud/Nh5YlTDEYXjEiVPLa6o
+ 5cesXPyhgZXnKudOwfGM2Iht8xzy7L7pxgMSG9YUrm34qZI8PXz73z44apx39EnaOn7O
+ Z9dw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWke7cMqUkjp7vlzgkTI/99b0DEwuGB2Op/KiMNMphjm4pTP0ihH02oDJA2tHoHNR2KsfcaZNw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwT+SfAR33X64tVgO+j98GwA0hOaMlxyQ+EPIiu4xXbwpqg8uGC
+ rwa77oBUlhuo9Oogh4shjE4GyLXBxBLuhsVA7VoBOMgvJBSAxylOWP5w3AGv0ixA5XCkoHWt5ac
+ r838BtPvrDMP/r/I7Kh9eUFsmPAwpt5Ke+SNQBCYVbA==
+X-Gm-Gg: ASbGncuz0DwlTTvuCeYVKNo7rrif7V1U32aWm/7vfY7A5LG258Y2l2L0/r94PfB7I3U
+ XR+3Syx7gQgjZl/tZ8Ps61lv1tSXfIM7heHoxOwL8zNAVo6fftJuSQKVWd61uDLW0PIh8IUppTS
+ M6p3jwvXPUL/pHPzApZGuB3dWtzJIgKRQ1ci4UmHH42Ho=
+X-Google-Smtp-Source: AGHT+IEMANnUxrchDT0PrS+pnc1dBJRhSupSJRUyFVV/RXQo9TmzAd20QceerabUKnbQDP4iknvS5wdTVdHVHiAcmY0=
+X-Received: by 2002:a05:6902:450d:b0:e7b:5578:e0a9 with SMTP id
+ 3f1490d57ef6-e7d918a8079mr10110891276.20.1748364416931; Tue, 27 May 2025
+ 09:46:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAJ+vNU3H1vjbvyZTycBQhufii5SqyTnk4AaMRk_ztGY10g9joQ@mail.gmail.com>
- <6e667ef9-9fa0-441b-8520-46e7bdbc344a@linaro.org>
-In-Reply-To: <6e667ef9-9fa0-441b-8520-46e7bdbc344a@linaro.org>
+ <CALeDE9NNHm+qt8pPo_Hf64DvcWD6gh6qiC1g6mgidMRVJBpjWw@mail.gmail.com>
+In-Reply-To: <CALeDE9NNHm+qt8pPo_Hf64DvcWD6gh6qiC1g6mgidMRVJBpjWw@mail.gmail.com>
 From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 27 May 2025 09:35:58 -0700
-X-Gm-Features: AX0GCFtXsqI3P-lJ5XImKz9d1InUqWdpun8B8WX9DJP8ocRO_PQc8kMTa0Ny8vk
-Message-ID: <CAJ+vNU0kY=iNR6Q3PR6+x=wqv2932=1E+Ci0CwvURCPh6JD5-A@mail.gmail.com>
+Date: Tue, 27 May 2025 09:46:46 -0700
+X-Gm-Features: AX0GCFvEKsRLgDNPUhdVKwe42XxGJClrWuUWgXxyccW_gDIrRbYZUz5dhWqTDyg
+Message-ID: <CAJ+vNU2A84Cc7-uipe28wQdSmhc1jWfPZFS57n8dS-cKccmMkg@mail.gmail.com>
 Subject: Re: lwip tftp not working on imx8mm
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot <u-boot@lists.denx.de>, Fabio Estevam <festevam@gmail.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ u-boot <u-boot@lists.denx.de>, Fabio Estevam <festevam@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,14 +95,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 26, 2025 at 5:17=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Mon, May 26, 2025 at 6:25=E2=80=AFAM Peter Robinson <pbrobinson@gmail.co=
+m> wrote:
 >
 > Hi Tim,
 >
-> On 5/23/25 20:31, Tim Harvey wrote:
-> > Hi Jerome,
-> >
 > > I've enabled LWIP on imx8mm_venice to see how it's doing and while
 > > dhcp/dns/ping/wget appear to work great, tftp is broken.
 > >
@@ -107,8 +107,6 @@ On Mon, May 26, 2025 at 5:17=E2=80=AFAM Jerome Forissier
 > > ip4_input: packet accepted on interface et
 > > IP packet dropped since it was fragmented (0x2000) (while IP_REASSEMBLY=
  =3D=3D 0).
->
-> Hmmmmm IP_REASSEMBLY should probably default to 1.
 > >
 > > I tried enabling IP_REASSEMBLY in lwip but that seems to change the iss=
 ue to:
@@ -131,17 +129,25 @@ ue to:
 > >
 > > Any ideas what the issue is here?
 >
-> Not really :-/ Does the transfer work with a smaller block size?
-> (CONFIG_TFTP_BLOCKSIZE, default 1468, try 500 for instance). You could
-> also enable CONFIG_LWIP_DEBUG_RXTX in order to get a full hex dump of
-> the messages going into/out of the lwIP stack.
+> You reported the same issue some time ago [1] and while I could fine
+> the original thread in my inbox, I thought we had got to the bottom of
+> the issue and it had been fixed I couldn't find a follow up thread.
+> Maybe Fabio can remember as I seem to recall he was the one that got
+> to the bottom of the issue.
+>
+> Peter
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2023-November/538832.html
 
-Hi Jerome,
+Hi Peter,
 
-My config was with 4096, setting it to 1468 works and anything above
-that seems to cause this failure.
-
-Some sort of fragmentation issue?
+At that time (before lwip was merged) none of the network apps worked
+on imx fec and it was found that the root cause was that LwIP uses
+malloc() to allocate the outgoing packets and didn't enforce any
+alignment. This was later resolved. At one time lwip
+dhcp/ping/tftp/wget worked fine for me on imx fec but its very likely
+at the time I may have been using a default or smaller
+CONFIG_TFTP_BLOCKSIZE.
 
 Best Regards,
 
