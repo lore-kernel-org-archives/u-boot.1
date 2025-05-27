@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0571FC5B542
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 20:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5102AC5B542
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 20:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BD328317B;
-	Tue, 27 May 2025 22:19:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A14948318F;
+	Tue, 27 May 2025 22:22:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="atFMQU6p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bHoJDo/3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3FA98313B; Tue, 27 May 2025 22:19:21 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 67FDB838A0; Tue, 27 May 2025 22:22:15 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8414C8318F
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 22:19:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3973C8313B
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 22:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-2d4e91512b4so1856927fac.1
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:19:19 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3fcfc85f1f5so819457b6e.2
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:22:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748377158; x=1748981958; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bFNwpWB9vyX3142e4HmlavvEdgJef9M7T55YDmPy24w=;
- b=atFMQU6pmuXI+k5z2o5R8cqW6NdqoJ2h57VTlfS38TKRknOzx6IHPrSHRNhxsYs60u
- iUWlvNPl6Z+iUduY6NaqKNOEz9AXF+6lsIj78Jxr0b2dvd3jwnqQGesFHiQ3oLtoS5p/
- fi923EpSk8cl5pSyjRWlC2DXttwRuJjUIK2zQ=
+ d=konsulko.com; s=google; t=1748377332; x=1748982132; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QbWv3lzGQaal5VCWVhHlWRHo+cGTdGRdq59va1xS4GI=;
+ b=bHoJDo/3CK8977TnUN7i4f/cW2j6C18PJ4zlYKbmNmyerL09bwx1O9JJZeUgRhrn19
+ VkF/fD44g2i/GgdwtgriqDGCYZwCe3ADSRyV6BHkxeI8T4jAQEi8i3TEBX8yEVFoUeik
+ oQWUhnFsDwT9VXdMNJZ4ceK5ETClCGZCtwbVg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748377158; x=1748981958;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bFNwpWB9vyX3142e4HmlavvEdgJef9M7T55YDmPy24w=;
- b=SqkLxzVouFp4APsQjuQ0lmyVV8dJ572Rjky0jaU7IG2RcqOvv5jED7TJzfzsDaNGLw
- RuhcVqkiHgs7SlkQW3ClzYXROfKU6iD80ntkDJlPgtNlmFRr6MaBbAcbWIyg6tJjU5/+
- saOxU1/4M2GLFx0My5qEcnQTVVHRmw07g6RActZtgSqGhIQUd4r0XhdqQ7wKe0tmp1Ie
- FukJTymk2WTPOdkJfufwQH8pfNPje9n2AwdBwZII/oJD5wEX5P3G3s/IO6g//c6pVgKY
- ruL4/EWz8S/FToYtm/C0T2hd2UwlGX0cD/VIzw6yl1VirBuySoEoulA2aYlXyym0Oisi
- 8B0Q==
-X-Gm-Message-State: AOJu0Yx2UdzKug4u3Ay1l9Wi9uAEZ5HIXFGWni9ggm5O1h3lSSQgjRte
- cz9r44BDAVTJvRy4BsthKuulYUaizayZJuHyzIZkcRhUOtQqXjKewKdXrV2tydF6sYf/W1LF7Q6
- 0Wh/y4iM=
-X-Gm-Gg: ASbGncs8lgFLq5H+RrqkUWmwy3REfdGnK/pkatlt4VQ+fGNT4+uF0/Pm8xs1Fs5aiBJ
- lEFQF4xfXFZz/IYGPYysIU0GUl/YkUtOZ9XwidaTkuIa5Jz71IMzBKMK3wnt8nAOHJrPXEpOJsV
- GbQXWIndlM+WWl8MIFESSDsRuN7ZY6Z3EdbF10zroDQZoDGK7nWdVzSjhLVbBFvYAylrCjDYq88
- dFs8oE2gZQ5ZfosyB6t5WpxrZZaWNaspjEBXAs36RwXwkfeBdDEb72OCcX6G30DsBQtHHiX4Sz6
- 8G98jC74AbTxAs9FzEQCgzliezAEAfRWS0XZhNr42ndDkZrByCwV8fbQukNb8oCzm/TFLt9xTjy
- 8S1Km7fkXOo0=
-X-Google-Smtp-Source: AGHT+IFUqVIB8p6PQ416dPePfttdfCfnrL9ncPRHjB1LgVZtp4EaEp5Ku1JQP8Ky3iLaBkSrxPTaXg==
-X-Received: by 2002:a05:6870:4581:b0:296:b0d8:9025 with SMTP id
- 586e51a60fabf-2e861eb07b6mr7145472fac.20.1748377155324; 
- Tue, 27 May 2025 13:19:15 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1748377332; x=1748982132;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QbWv3lzGQaal5VCWVhHlWRHo+cGTdGRdq59va1xS4GI=;
+ b=sUfuTLPMZY5T2Ssvm+IWQ4cNg/D/ugbHeIgNIvQEPTGe+8eu+w4kqSssgIuheEv8JV
+ snZm+4zwTLyTMWZTnwXgoVxvPXaH/7Z/fuPMe6TGl/kjTpCUkUzgE4rz7Q1h+OMst/hN
+ lpvOhs5PrIDWuX9yuuwNJ30mNuHZHP2gMy4dLuMh22XfN8FAv/np8kvsD/TqDZlZyZRM
+ FhVRXe/Y+fWPwza3gu04cAE2aiQiFNU2I4W9Jm0y8KYcHSj90+Uws4Jjh2GgIfSkqpEb
+ A2rCjWJgIzcb45z9WYbmFCaILmNBLBn908gXLNbhcgPglduDWdnJhXTeLH9C/T88Oy6V
+ p2ug==
+X-Gm-Message-State: AOJu0YzRbGM1AGuvQl8yY1iDWcpaJ1ZAyZ2swDWcTMFmLp2uHkfbLuvC
+ ocyrg0+tdxqqDDm+nOTw+pQjxzEwG+t+RitM+3UV/LvD0MMRPTq9/+mqPe6DuUFoCdUnIlSitGw
+ SAk5BcWM=
+X-Gm-Gg: ASbGnctmEMEhr5W0iNY3cFtj+MGRmsjghZSvnXXJviD/mL6wfoR86w0awjkbr0s2VGc
+ CjrC2YrtI0OVnPo2J8I6j3UBOkvu76V71rlZJTowEBUJv8m9G6iSekb3hDbHUEeKPygkO/Ev3kw
+ +tRWT8LjeQdg2KqrVMRVqvIQnDSCgy430OxFwKT3q9zT/n0M8vO02kFv2dZ+gp/0nhE0heB/YqJ
+ Z9ck4sq/zah1glQNUHnzDF4Rlgp5zFDug4wFs8W1juucn5ebv809CZw1MScq+JabBh7X5qGSVuV
+ /GDPAUDfZy8wAqn+WuRwJ5uXuNkvjThoFmCMHcojTvzSKz+eF2U8P6Sr6IIDX3A6meIQeRiLeN6
+ L5/Sx3PXhkx3EApaxjeexmz4=
+X-Google-Smtp-Source: AGHT+IEGcRRaeYNjZDXmwHJVM2eVVQgHYDEZXkG8s05ZoPRPCTpCeGwQUxOsh0ykrELqxVRRLgPwMA==
+X-Received: by 2002:a05:6808:80aa:b0:404:e0b3:12e with SMTP id
+ 5614622812f47-406467b8c8dmr8265324b6e.3.1748377331845; 
+ Tue, 27 May 2025 13:22:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e3c06084ccsm5559631fac.7.2025.05.27.13.19.14
+ 5614622812f47-404d98b27a3sm4826900b6e.35.2025.05.27.13.22.10
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 May 2025 13:19:14 -0700 (PDT)
+ Tue, 27 May 2025 13:22:10 -0700 (PDT)
+Date: Tue, 27 May 2025 14:22:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Tony Dinh <mibodhi@gmail.com>
-In-Reply-To: <20250526222931.2775004-1-trini@konsulko.com>
-References: <20250526222931.2775004-1-trini@konsulko.com>
-Subject: Re: [PATCH] Revert "ext4fs: Fix: Read outside partition error"
-Message-Id: <174837715432.2894052.3605745777922613423.b4-ty@konsulko.com>
-Date: Tue, 27 May 2025 14:19:14 -0600
+To: u-boot@lists.denx.de
+Subject: Re: Merging v6.15-dts to next
+Message-ID: <20250527202209.GN100073@bill-the-cat>
+References: <20250527155205.GJ100073@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eS7U4nlx0pCW0BxR"
+Content-Disposition: inline
+In-Reply-To: <20250527155205.GJ100073@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +96,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 May 2025 16:29:31 -0600, Tom Rini wrote:
 
-> The issue here is that the function read_allocated_block() will report
-> problems via a negative return value. If we say the return value is
-> stored in an lbaint_t that can no longer happen (and Coverity discovered
-> this by reporting a no effect comparison and then dead code). The
-> problem being fixed by allowing for storing a larger block number will
-> have to be solved in some other manner.
-> 
-> [...]
+--eS7U4nlx0pCW0BxR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Tue, May 27, 2025 at 09:52:05AM -0600, Tom Rini wrote:
 
-[1/1] Revert "ext4fs: Fix: Read outside partition error"
-      commit: e04d137231f2e9e14708a32448c879125b8e308f
--- 
+> Hey all,
+>=20
+> With the Linux kernel release of v6.15 over the weekend, and v6.15-dts
+> now being tagged in the devicetree-rebasing repository I'm merging that
+> to the next branch now and expect to push it later today.
+
+This is now pushed. The only small hiccup was that our non-upstream
+version of dt-bindings/media/video-interfaces.h was now out of sync with
+upstream. However, all users of that file are OF_UPSTREAM and so the
+easy resolution was to delete the other copy. I'm going to do a little
+grep'ing and checking to see if we have other dt-bindings files outside
+of dts/upstream/ which are unused and can be removed.
+
+--=20
 Tom
 
+--eS7U4nlx0pCW0BxR
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg2Hu0ACgkQFHw5/5Y0
+tyxBegv+OXV/Fj82YntSP3m3uCUa4zNZItZntQ4dSYOw/KpvD4ufxQnFOlpM8mBH
+cuU1amYrpe8ZajY8cDlm///CiKSNz3kJFDBfOvWgi+fngVvCvOqgfdBDpe8B01Sd
+cV529R8Ma0FKqgUsaeMviBoXAEXfkkX0ys1aSRioEO84pWfrCm1pfgSSXZ/nsDp9
+dVul5dxAetQSYTYhjycEtmEPJ0aeUKYO6r9gK8+on2iAAWw3t56qmJsMujXcmzZ6
+yZTLLV4jOvFodJnQbbOIOR8N9yaeKD6dwZPvAY1BV68neAiNdG/ZQdvLfSxHQEMK
+4DWfx8uNAwGUb5M0rH35AHMDA/tI5bihrln1RGRDjna95oFQx5Al1+OkVhjaWzhb
+XIn7F2gtk04KsdYxJ6q4RkxhHQCEVnvBqmOh/OlS/e6EQNHA9erqNg3VWQDWMiDJ
++IqxfC4ukAwPGK5VITQuwkkUe2cWsVTTlwx162QUK/WfXIA8IBmc4qj/0z+Zi7aD
+dAcZpg/m
+=8jvy
+-----END PGP SIGNATURE-----
+
+--eS7U4nlx0pCW0BxR--
