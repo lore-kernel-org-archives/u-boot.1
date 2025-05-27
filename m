@@ -4,100 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B2A9C54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 16:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8755FC54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 16:36:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A936D83102;
-	Tue, 27 May 2025 18:15:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id DCEE9830C0;
+	Tue, 27 May 2025 18:36:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="1XkPLW/6";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="TJq7H2Fp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA855838A3; Tue, 27 May 2025 15:32:44 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F0653830F4; Tue, 27 May 2025 18:36:12 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6980F8384E
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:32:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DE4E8309A
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 18:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RA6083027752;
- Tue, 27 May 2025 15:32:08 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=KFifMdoiqpiJKtLluqrgKy
- ySZaW65kj6hjFXQckiV0s=; b=1XkPLW/6CobgWhpAndcD6JMQC0lmGeLmxeT/jf
- gbgJPK2qvDjwTQejBdcF2Bl/YiHTjK1TBquC7L0T3i0MUnWLh+FQbN+df0sLbpjZ
- hF7XDA9TLZMX9Q3hdgl26r9xoi82jNvqlZ9s9LDpw0z6WtyL3gFbGn+R/0kzRd5h
- ofb7N+AwQykXbWVUKZmOAZnzeUDWJuIJofblfM5AYDUuhs7/MtEEmKM2tue+0RmW
- oP2NaTpwdyM9wwKWtMMRq1qQeTzpMRp2okp0/OVnxq4iIUa4F+OB7w6KkF/yI8B7
- 8ofzVOlUyDMdXwI0d85knrbJSWlt0fzhHoYL7t+OEAGzRNHg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4j5jf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 15:32:08 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D65C140049;
- Tue, 27 May 2025 15:29:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E606CAE6C44;
- Tue, 27 May 2025 15:27:57 +0200 (CEST)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 15:27:57 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Alexander Dahl <ada@thorsis.com>, Alice Guo <alice.guo@nxp.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, Elaine Zhang
- <zhangqing@rock-chips.com>, Gabriel Fernandez
- <gabriel.fernandez@foss.st.com>, Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Huan Zhou <me@per1cycle.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jan
- Kiszka <jan.kiszka@siemens.com>, Jerome Forissier
- <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>, Kever
- Yang <kever.yang@rock-chips.com>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>, Miquel Raynal
- <miquel.raynal@bootlin.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Paul Barker
- <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, Robert Marko
- <robert.marko@sartura.hr>, Sam Protsenko <semen.protsenko@linaro.org>, Sean
- Anderson <seanga2@gmail.com>, Sebastian Reichel
- <sebastian.reichel@collabora.com>, Simon Glass <sjg@chromium.org>, Sughosh
- Ganu <sughosh.ganu@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Valentin Caron <valentin.caron@foss.st.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v2 00/13] stm32mp25: Add clock and reset drivers support
-Date: Tue, 27 May 2025 15:27:42 +0200
-Message-ID: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e7da20d35ddso2144167276.1
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 09:36:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1748363769; x=1748968569; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dxfuX7PLa6k8TbnajGIUfAZxB8hOK8l0tCFZiiwjJDk=;
+ b=TJq7H2FpKhKV15sFhCI+8Q+WVTle8g31QuM/rQfi+vge3gtlKrYj0ceV5pFoKrbpNR
+ pdlhpCKKwhpruwuJz6A7b/+9qYNpL+kPUro5DdYATH92ccVFE85pa88ArzGW1ZLt8b9N
+ b0tRS5SbVi9GBoEds1nyZDia/gNZ0d66NtFVmfYvYb1NqVEdBTFCPYi25ebzN/dWUiYP
+ pqQxKlWv0nlTjWGC1KJbgfA1MevpAfWUFZn6p/nkLY6Oa8jnFlpv4TfOdpnhZ187JzlL
+ gH2KN6foeWyGobJRXDsNp9L5nhezTa1kQTWJSz8VFpQ0UvCoR4fE3cAhg/Cy48dWFJ1Q
+ 6gcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748363769; x=1748968569;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dxfuX7PLa6k8TbnajGIUfAZxB8hOK8l0tCFZiiwjJDk=;
+ b=U2UYOJffjaM40ZrqBFn+KmhuPaqdknDq26hXOaYO2crfRZhYDUpcmbsVJQAOsZJLpP
+ ObnKiuYTXJI9sMyLHXEuCN0xb5m3nHp8zaAo5aDuoPmoqcnwryfF515e/EyYtUWWemNp
+ XJI6AgvOc+gyVsCX5bTz8oVMS3AgsG8yYH5VCt2ZGZEvH1zmHHjXBtKIx8H9ItG5/YzG
+ R84/pon1AnmZadbzjIEnnNsrPm50GT4U4xD+09SOH0l8pQMNPAdYnOKtqCxCIRZjIl9i
+ UZVWjU7AwKAefz5vfTvq6EyiGqGj2qlMckUQon7Rqw5S10LIlRTyqrZRnNp88ejYPiR7
+ Z7HQ==
+X-Gm-Message-State: AOJu0Yz2sC0dDRk4WcqICBZiaFC9zqdL1hH5DWS2hngwpEoohIbJPM6g
+ DV/LrfcM70tuJTd8en2z1Wh5c18O77cuchRASIOigZXusgJjSBhiiZvDBqUsX9/JZOGNuQVC2iZ
+ CExPIvVDn2ivUX2XWEC5yJYuUjCfluGc41pwWrh1Ikw==
+X-Gm-Gg: ASbGncsQR1hVy0sRSZIhjVrC0azhE5iI21rXj1X1DSgyXa40xc06oHE2KDsj9iNSBFO
+ hYGbgx1MsieqdNHDmR23J0fsLpc/qfd7Oqd4WSKr0oeHVdpn9Fusx4VKnFA2yPBqTuYOYYd8ZAv
+ blV/Dx+EVqZiKiD7kns424ho3qqi3y9Aez
+X-Google-Smtp-Source: AGHT+IFdCVj7lWdcUbUQ0Al/TGNSkbEok8677/AcYUvx4yeeDahbP/2FcTMlGZeAFwJvqkmtoT5zul4bpocJYTT1PxA=
+X-Received: by 2002:a05:6902:20c1:b0:e7b:a4b9:c02d with SMTP id
+ 3f1490d57ef6-e7d919c072fmr15690344276.4.1748363768977; Tue, 27 May 2025
+ 09:36:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-27_06,2025-05-27_01,2025-03-28_01
-X-Mailman-Approved-At: Tue, 27 May 2025 18:15:08 +0200
+References: <CAJ+vNU3H1vjbvyZTycBQhufii5SqyTnk4AaMRk_ztGY10g9joQ@mail.gmail.com>
+ <6e667ef9-9fa0-441b-8520-46e7bdbc344a@linaro.org>
+In-Reply-To: <6e667ef9-9fa0-441b-8520-46e7bdbc344a@linaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 27 May 2025 09:35:58 -0700
+X-Gm-Features: AX0GCFtXsqI3P-lJ5XImKz9d1InUqWdpun8B8WX9DJP8ocRO_PQc8kMTa0Ny8vk
+Message-ID: <CAJ+vNU0kY=iNR6Q3PR6+x=wqv2932=1E+Ci0CwvURCPh6JD5-A@mail.gmail.com>
+Subject: Re: lwip tftp not working on imx8mm
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot <u-boot@lists.denx.de>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,94 +92,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, May 26, 2025 at 5:17=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Hi Tim,
+>
+> On 5/23/25 20:31, Tim Harvey wrote:
+> > Hi Jerome,
+> >
+> > I've enabled LWIP on imx8mm_venice to see how it's doing and while
+> > dhcp/dns/ping/wget appear to work great, tftp is broken.
+> >
+> > Enabling LWIP_DEBUG shows the following:
+> > ip4_input: packet accepted on interface et
+> > IP packet dropped since it was fragmented (0x2000) (while IP_REASSEMBLY=
+ =3D=3D 0).
+>
+> Hmmmmm IP_REASSEMBLY should probably default to 1.
+> >
+> > I tried enabling IP_REASSEMBLY in lwip but that seems to change the iss=
+ue to:
+> > ip4_input: packet accepted on interface et
+> > ip4_input:
+> > IP header:
+> > +-------------------------------+
+> > | 4 | 5 |  0xc0 |       108     | (v, hl, tos, len)
+> > +-------------------------------+
+> > |    10568      |000|       0   | (id, flags, offset)
+> > +-------------------------------+
+> > |   64  |    1  |    0xe25b     | (ttl, proto, chksum)
+> > +-------------------------------+
+> > |  172  |   24  |    0  |    2  | (src)
+> > +-------------------------------+
+> > |  172  |   24  |   21  |  251  | (dest)
+> > +-------------------------------+
+> > ip4_input: p->len 108 p->tot_len 108
+> > Unsupported transport protocol 1
+> >
+> > Any ideas what the issue is here?
+>
+> Not really :-/ Does the transfer work with a smaller block size?
+> (CONFIG_TFTP_BLOCKSIZE, default 1468, try 500 for instance). You could
+> also enable CONFIG_LWIP_DEBUG_RXTX in order to get a full hex dump of
+> the messages going into/out of the lwIP stack.
 
-Add clock and reset drivers support for STM32MP2 platforms:
-  - add SCMI clock protocol v2.0 support
-  - introduce CONFIG_CLK_AUTO_ID flag to support unique clk ID
-    when several clock providers are in use.
-  - add STM32MP2 clock  driver
-  - add STM32MP2 reset driver
-  - fix clock counter
+Hi Jerome,
 
-Tested with following components:
-  _ TF-A lts-v2.12.2.
-  _ SCP-firmware main branch (commit c914b3f0c756 "fwk: Refactor fwk_module_get_sub_element_count").
-  _ OP-TEE 4.6.0 + pull request https://github.com/OP-TEE/optee_os/pull/7324
+My config was with 4096, setting it to 1468 works and anything above
+that seems to cause this failure.
 
+Some sort of fragmentation issue?
 
-Changes in v2:
-    - Rename GATE_USB2 into GATE_USBH
-    - Rename RCC_USB2CFGR to RCC_USBHCFGR
+Best Regards,
 
-Gabriel Fernandez (4):
-  clk: stm32mp25: Add clock driver support
-  clk: stm32mp25: implement clock check security function
-  clk: stm32: fix clock counter
-  reset: stm32mp25: add stm32mp25 reset driver
-
-Patrice Chotard (2):
-  ARM: dts: stm32: switch from fixed to scmi clocks for stm32mp257f-ev1
-  configs: stm32mp25: increase SYS_MALLOC_F_LEN to 0x60000
-
-Patrick Delaunay (6):
-  clk: add CONFIG_CLK_AUTO_ID
-  clk: sandbox: update driver for CONFIG_CLK_AUTO_ID support
-  sandbox: test: update for CONFIG_CLK_AUTO_ID support
-  clk: fixed_rate: configure clock ID with CONFIG_CLK_AUTO_ID
-  clk: scmi: manage properly the clk identifier with CCF
-  phy: stm32-usbphyc: manage properly the clk identifier with CCF
-
-Valentin Caron (1):
-  clk: scmi: add compatibility with clock protocol 2.0
-
- MAINTAINERS                              |   3 +-
- arch/arm/dts/stm32mp25-u-boot.dtsi       |   8 +
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  74 ---
- configs/stm32mp25_defconfig              |   2 +-
- drivers/clk/Kconfig                      |  11 +
- drivers/clk/clk-uclass.c                 |   9 +-
- drivers/clk/clk_fixed_rate.c             |   1 +
- drivers/clk/clk_sandbox.c                |  30 +-
- drivers/clk/clk_sandbox_ccf.c            |  48 +-
- drivers/clk/clk_scmi.c                   |  62 +-
- drivers/clk/stm32/Kconfig                |   9 +
- drivers/clk/stm32/Makefile               |   1 +
- drivers/clk/stm32/clk-stm32-core.c       |  73 ++-
- drivers/clk/stm32/clk-stm32-core.h       |   2 +-
- drivers/clk/stm32/clk-stm32mp13.c        |   2 +-
- drivers/clk/stm32/clk-stm32mp25.c        | 782 +++++++++++++++++++++++
- drivers/misc/stm32_rcc.c                 |  66 +-
- drivers/phy/phy-stm32-usbphyc.c          |  19 +
- drivers/reset/Kconfig                    |   9 +-
- drivers/reset/Makefile                   |   4 +-
- drivers/reset/stm32-reset.c              |  97 ---
- drivers/reset/stm32/Kconfig              |  23 +
- drivers/reset/stm32/Makefile             |   9 +
- drivers/reset/stm32/stm32-reset-core.c   |  92 +++
- drivers/reset/stm32/stm32-reset-core.h   |  31 +
- drivers/reset/stm32/stm32-reset-mp1.c    |  55 ++
- drivers/reset/stm32/stm32-reset-mp25.c   | 159 +++++
- drivers/reset/stm32/stm32-reset.c        |  43 ++
- include/clk.h                            |  24 +
- include/linux/clk-provider.h             |   9 +-
- include/scmi_protocols.h                 |  15 +
- include/stm32_rcc.h                      |   7 +-
- include/stm32mp25_rcc.h                  | 712 +++++++++++++++++++++
- test/dm/clk_ccf.c                        |  30 +-
- 34 files changed, 2227 insertions(+), 294 deletions(-)
- create mode 100644 drivers/clk/stm32/clk-stm32mp25.c
- delete mode 100644 drivers/reset/stm32-reset.c
- create mode 100644 drivers/reset/stm32/Kconfig
- create mode 100644 drivers/reset/stm32/Makefile
- create mode 100644 drivers/reset/stm32/stm32-reset-core.c
- create mode 100644 drivers/reset/stm32/stm32-reset-core.h
- create mode 100644 drivers/reset/stm32/stm32-reset-mp1.c
- create mode 100644 drivers/reset/stm32/stm32-reset-mp25.c
- create mode 100644 drivers/reset/stm32/stm32-reset.c
- create mode 100644 include/stm32mp25_rcc.h
-
--- 
-2.25.1
-
-base-commit: cf37480bc8335494cf88b7180dc3f1eb8cf63a9d
-branch: upstream_scmi_clock_mp25_v2
+Tim
