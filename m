@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13354C54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D757FC54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 13:26:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E16483865;
-	Tue, 27 May 2025 15:24:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C3AA83852;
+	Tue, 27 May 2025 15:24:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="kJ+8G+5d";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="eD2fTP1+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEEEB83830; Tue, 27 May 2025 15:24:41 +0200 (CEST)
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on2070f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2607::70f])
+ id 0811F8309E; Tue, 27 May 2025 15:24:43 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20724.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::724])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8D008309C
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:24:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA7FF83844
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:24:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Xk/8L1nywrFhaB9e39OIQeelGvkOfLIvKeIoqOyzbcDFJmyrQYAQj87tYlG7gOwVUOChyPc3erB10puUMJA3LEJPlS8s/kssag+iL5LOE1fVBgZaXWhZ8x7y90Nrd+tIFv87VjtSycK+Cz2HE8Ym3Vs6snOD/V4ummYC93p1dtRJuQmXTMN6Ib7XAySbTSIQctVDqn5diP0N87jfJcjFfBBHlU5Pu0HYvLhms+D0UjVaIPCrZWnvPorJiwBMCTfP2qoGAxl8iSn0dfcM7XzHnh/K19RqM7VU6qZGXFqsM7Uk2Xu81IrfmuWCd6y98VyTN4bIRnToaDZfT3jkLfB86g==
+ b=E4tHsqKx6rbAF9G+LApZeYYMhqCXfXVXr/flLFBKDPxK+NTjJPevLsvjFmXJYirkLgYSnedlzIgiwuvRT1ozUfDr4lih6tXFt3T2RJO9qvDZ8/g2+jygEUjTxIqdOmA4nKZIOXWYnWHsdg/ZNVbGt0fRn1Zu6oYCvgg5Raaal/CI5fCI7y6YtewxLBrMMcJOru08KKzHNQlA8MOReRMD5jJDvpzZ5WEc1WCJ9OIfjMi1kxTx/s6BNRoNyPvitw2tvva/avaSeThgJBe8XgK3EBzK8U8P0AleM9Jg2RrzNzb+e/YEYN9q0kZmVR3omvfzkgrWflOq15c+1dYX9lAiLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yN7KALff6wmeVIWdK6xReD/LrjG8n4g+SyoIBfoNDjU=;
- b=Qen3ed8K9I7vs2rLEvvVHglarq2t4+37AnzfL6SaUP2hCc2ay+dZRRMDhZMj62RsQfPE3goAUS5M+dKvgEwiVDK5HgkGyXAeiLkmA7FOLFNqwHeHwvTRbomHYB/dkEGg7T5diOhkYbeMK8RzP92WLMSNosW+/pmRfSNBrIsU7dKf4GLHgIYDiWiyQIt1qMnxhqynR+J9WBdiwjzQ1pyZLdFre3x5nAnzOMMInutWSWcufPZt68kjjwgKL1/WtQcKtC19U4yrsNl68L/+6nmHk5KWUUWweSez4DE+h0ua26J93BeUl8GpisZWLvUqVxXsKaxUx+51mzJ0zWuprKCxbw==
+ bh=Jqil0OMh9WDlP20CBveb18VHu9fsViGyvSMQYaPaUkg=;
+ b=HEkNsYh0e5/gkhY1lDnuurUvadljSFZQ8GFTpVrLSuPgX5879RfEiC8DUU7GDqNZHyQ+erleHyhWBstcSE7kSoNtIAZX7emHPJvFpJGbzGX1YraV3W34qQTAXzdyZI1wqjhuXzppQxWsaH22TqEq2jqNlL5MVBwAjQyMepIh2PFDNsDFa31XmZb+81Tc6wFpoX+QUMyY96BXR42AVBA150p43lf7KflSNvwHhRyIe4Osg59BONrkQS0WNEGqZpTpqgBfxgO7Xad1kbrxXPSeCAMbsOpRPob/c+XUgG8blhPRS16KjPUI7jhZQst+tfSEP2cIAiNqLwtMAD4OxXCnPQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yN7KALff6wmeVIWdK6xReD/LrjG8n4g+SyoIBfoNDjU=;
- b=kJ+8G+5diOtOvt/kIYWrXQilsSuBP2rM17PO1Esj0CdZ5rTxsnQdfiK0teL315N3yNNIi+cC66tBc1naIAZPBhZwXySX+qZRqpiy1X+aaTIfsCnziuzBdykATzubP7q40k4as9vPJ4S3SslanENSMzJLl4gzSbo3Ui8VC2ZVEISBrVH3XkNFSBLRuVrh+XG3MAFnjQCbJqvoRCoPPKnnL322Olv6HT9Pvu4KTtlCb8attAfS985dyLsjDLDstu0n7QR39CT7HuVw4rB5sFSYVsOrRwO88p5EymusauhtFWxlKyxkM1GX/A7ryPN3By77fdKjErIdvSQ36GzflT6Otw==
-Received: from PR1P264CA0021.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:19f::8)
- by DB5P195MB2403.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:4a8::21) with
+ bh=Jqil0OMh9WDlP20CBveb18VHu9fsViGyvSMQYaPaUkg=;
+ b=eD2fTP1+aFcraDZb2dRffM0NGpe7EC59lSBW5l/EvAs1Arbiwv2aszvcKBj+m4SUI9kH8zCsUzJ71p8GPTSxUYALPJsvIM6vgIAnLsVXQbVQ6NqTyFFQOZUWlertMD1kDUrXrDUXDENXzvpWIWuVCf3VsA5L3ki6WEo0vRnE1EzvkS1nVWqjGctjsuyjiekzc3dOq3soDn70PepGWdVy5uSihw3hb3GIBjgBxZlB79ngvewi1BDsbqrifvZmV8JVcA8B0UPRABIocJykL296heI42G3dHmu6ORbYZ1JLcTy2pXYmukCMFo3hdyXI5rKq+025Un5PCUJZeIUoULJnyQ==
+Received: from PR1P264CA0022.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:19f::9)
+ by DB9P195MB1145.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:29b::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Tue, 27 May
- 2025 13:24:35 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.32; Tue, 27 May
+ 2025 13:24:33 +0000
 Received: from AMS0EPF0000019D.eurprd05.prod.outlook.com
- (2603:10a6:102:19f:cafe::39) by PR1P264CA0021.outlook.office365.com
- (2603:10a6:102:19f::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.24 via Frontend Transport; Tue,
- 27 May 2025 13:24:35 +0000
+ (2603:10a6:102:19f:cafe::e4) by PR1P264CA0022.outlook.office365.com
+ (2603:10a6:102:19f::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.18 via Frontend Transport; Tue,
+ 27 May 2025 13:24:33 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -60,7 +60,7 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AMS0EPF0000019D.mail.protection.outlook.com (10.167.16.249) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8769.18 via Frontend Transport; Tue, 27 May 2025 13:24:35 +0000
+ 15.20.8769.18 via Frontend Transport; Tue, 27 May 2025 13:24:33 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 27 May
@@ -68,26 +68,26 @@ Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
 Received: from llp-moog.phytec.de (172.25.32.70) by Florix.phytec.de
  (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 27 May
- 2025 15:24:31 +0200
+ 2025 15:24:30 +0200
 From: Yannic Moog <y.moog@phytec.de>
-Date: Tue, 27 May 2025 15:24:15 +0200
-Subject: [PATCH RFC v2 7/8] tools: binman: ftest: fix tests that require
- non-faked ext blobs
+Date: Tue, 27 May 2025 15:24:10 +0200
+Subject: [PATCH RFC v2 2/8] tools: binman: drop "faked" return value from
+ check_fake_fname
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250527-binman_faked_optional-v2-7-3362ab897581@phytec.de>
+Message-ID: <20250527-binman_faked_optional-v2-2-3362ab897581@phytec.de>
 References: <20250527-binman_faked_optional-v2-0-3362ab897581@phytec.de>
 In-Reply-To: <20250527-binman_faked_optional-v2-0-3362ab897581@phytec.de>
 To: Simon Glass <sjg@chromium.org>
 CC: <upstream@lists.phytec.de>, <u-boot@lists.denx.de>, Yannic Moog
  <y.moog@phytec.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1748352270; l=3424;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1748352270; l=4770;
  i=y.moog@phytec.de; s=20250509; h=from:subject:message-id;
- bh=eGNorwv47xyYBgBgkl0ycGJouEe52B5katTZgF0daZA=;
- b=o0K/CmcELst3I7lqp+Y1WzNIg97KoqwmOUCZNMhmhee26kWV0XomgxsXxOXOSQezAEGNiyKi4
- rSzAfTjVA6OAKm00aAw+uuPvZLijiIIOhwOqlfTZx0zqlaDujlZMoMo
+ bh=NNoLsdQ3bWm72CJmfz2whR4uB6luz7gUkEsO/aX1/J0=;
+ b=598YrBYQ8X6h6yJMgw79SfqHQ6pDASxYovsqCJK4J5oJo5zQpfgjVPU92yUGuZ+fzDTBbrKjo
+ 21D8RZ4IWtcBYBM0HWqlLhoaAr9PRniaxWHdKQw6wI08ZSQSjIbDq5N
 X-Developer-Key: i=y.moog@phytec.de; a=ed25519;
  pk=rpKoEJ4E7nD9qsrU/rfKVwMTWNWYaTBylZuJUXUiFr8=
 X-Originating-IP: [172.25.32.70]
@@ -95,61 +95,61 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF0000019D:EE_|DB5P195MB2403:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7000319a-747b-42c5-da3a-08dd9d21d302
+X-MS-TrafficTypeDiagnostic: AMS0EPF0000019D:EE_|DB9P195MB1145:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb0835cd-9671-4fc4-7fd1-08dd9d21d180
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?L3VISjFLT3gxYk5MZ1lhTjhRR0I1SHlkMlExeUFxNHdkMVFrMk11blpCRjNh?=
- =?utf-8?B?cVNBakVrWUxqVmdLRnlKOXFaK2ZCZUJzL0RRQlFsc3RwaVZUZ043am84UFRK?=
- =?utf-8?B?RnB1blVrdkRvbnZBRnlRSlphZHFyaXFNamRaUFpLc0hMZlNPVVQyd0d3NXJn?=
- =?utf-8?B?NVdOOElmMlUydFVEWGtqSjRCU2U1enEvREY2ZFJuQ1pWZlltcnFVVkRiaktM?=
- =?utf-8?B?Q3BPdlptQ2VaVjZXNWdVYmxvN1l3UEQrMVdMb3VycFkwd01SOWZadFhRcUFs?=
- =?utf-8?B?ZHZuU0dDM0YwenRaUXRYblNwb01tMk8yNFNRRVU3ZmV2ZC9zN3FkdHBrOVJ4?=
- =?utf-8?B?UnVDa2ZoTkxodXl6cVZVR3hkQ3diSnBJNnZJWVlNUHBUb3hxWFI5QlMxTURa?=
- =?utf-8?B?NkVHQ2MyeGFxQkpscFhqeEVDb0J3OTJ5TkRDNlBLU3hVaGtTMSttM0F3UDEv?=
- =?utf-8?B?R3JFaHFhRVVSWHM3Y3ZQc0ZYbkpVNEgvdE1qY3EzekFsM05sNHh3Tnk1QkFU?=
- =?utf-8?B?U1hZcDIwV1lNaWRZQnhtdmlySTlRRFRuTlZYaGgxUk9TTUt6L3hManpEejJN?=
- =?utf-8?B?L0lvc1h4RlRyRlBtYmJsNmpjdmRpUyt2K09YR0VMVmZJa1pqNWdZMXhHdW9z?=
- =?utf-8?B?L0t3L1BKRGtZZnpBQTVub21YOThXSmcrVVdFckUvSTFxR1pOREN2Mzc0Y1Yw?=
- =?utf-8?B?NUtOc3lvN3RQbnB0R2dVK0pMWlBjMnRpa2QzUVVxV2xqNUVvNEorOU1seUFk?=
- =?utf-8?B?ZnJielZKVlB3bklKRDZUUVNreXl3NHdZNk9KTWY4cCtRQkVXSFBjQUN6SGFp?=
- =?utf-8?B?S29VVlNMN3IxQkNaWVN5TTVocFZpeGlab0RhcE0yR1RvWTF3WTlONlRRM3or?=
- =?utf-8?B?VC83MHUwcHdndk5IL210Y2VQeUpLYjVQaDVDeE1ZSzZ5T3c2SGp0eTFXV0RF?=
- =?utf-8?B?TENjdXBhK3VKckY2eERkSWZJa3ZZeFE3RzNZNHBvRHpiT210aXc5WVhpUXFM?=
- =?utf-8?B?ejRkYUJEY0RZVmxwRWNMTnhDNTVNNzcyMnUwckczcVBIaDBJZTc4VzE0V0JO?=
- =?utf-8?B?SlMvZkFxcmdUNGYvYTVwMVlLVDVBMEFURkpXcnNpeTcwbFZVYWNwSHB2MXFx?=
- =?utf-8?B?WGFCeitVNlhIMHhyWE1ZZmJUay9WanJrSllOZnI3TGFaeWl2U1hoNlhkcm9h?=
- =?utf-8?B?K1ZxdUd0K0M5Q00vcFFMbVRFKzFXS2IzNDJGMXJuQzAzL2dFUzN2bDFjRzl3?=
- =?utf-8?B?MlFVRHBLejc3NUFiVkZieDBhY0dadXJYcS9CTUE1SHMzN1p5dzVCL2hWNjE0?=
- =?utf-8?B?RFFGeWlUeE1DcEc3emdPMzJCNGJLOHl2ZjVIRXFFbHhLd01lQWtMWUh6V01I?=
- =?utf-8?B?QlJGUStQRzREV0hDUnBHQkRSVG9Ld0R3UFF5eFAvYnhWaE00dStQRlNQRnk3?=
- =?utf-8?B?dldUNXZnemF4ZHBkTnptQmVMQURnNk1XR3pTb1dYeTJWMUhsOTMveUNpcHpl?=
- =?utf-8?B?SlM5d2R4MEp2ZXBxenp2UXpaNUdRTDB4NTVFSTdVcUVjdW9QcjJ5OEpjeDRC?=
- =?utf-8?B?aUhoQVF3andqQnVyQms5azMvd0VjUjFJOTVwOUYvN24wcSs5K0p5QmM3QmR3?=
- =?utf-8?B?bGZoMXYwUzM4Tk5kZURPaVJmYkdXZFh3WWEzbktFRFIzRlFhZkttTGU5UFJQ?=
- =?utf-8?B?YW13RUZnNFFZamhLMDhjMDgydnBnSlI4U0ZsNXNuQnNFcmIrdHN6Sk1NSGxS?=
- =?utf-8?B?eUwxS1RDTVlWUmx4QVJIV2VKYm1UMU1PbEp2OUpsS2o5MjlabWJxV0FtUVJN?=
- =?utf-8?B?MnFrRWhCVW1haXRSdnlzWW5tSkVlSzBnSjFPOEgzSGp2eGZDS3dsdlF3WVlq?=
- =?utf-8?B?bHVDa1FDV1NlcDNQRlJBTWJFWEJsTU5GUVlmaG5jazJUZElyYVlMYjdMamgy?=
- =?utf-8?B?YlZackl1b2ozblM5TVdIZXo2V0paYnhId3V1Y2k0dUNaMFJtR3gwYWdERWhm?=
- =?utf-8?B?WHZOM0xCeW1RaW41U1ZCRG0vNDJqdU4wSDBUSEJHeTljVFZIWWIvdUw0YVVa?=
- =?utf-8?Q?rzhcwF?=
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YXdvcjdmdGM0bmdBN2Y1QUtMWlF3Qko1OTdwcVp4RUU2cGFnYkxJaFNsMDdB?=
+ =?utf-8?B?aVRyVEJFRWpNcStGeHhxQ2RtZUVWTXBxblZPUnRxZkdxMTZ5SzNaK3dQMmNH?=
+ =?utf-8?B?dUxoa0lFUnRkV1dLTEc1Sk1nQnBZak53VHRxY3NoQ3J5cU9tVjY2V1IwVG9Y?=
+ =?utf-8?B?a1BvWlNWYW1YS0Vvem1GRmxiazZIbGU3dlV3MElEUFpmOTc0S0hNY3dENGhU?=
+ =?utf-8?B?NjVXU0drL29pajl6MmRxbUZwanM3cXF6akpjRFBFcTVPOTV6b0pZdjlXVDg3?=
+ =?utf-8?B?Nk0zTThoTGVJRnNoMzJJcC9KVGtxRUQxUFBTQXBWT2NMMzlXdGEvdWljY2Rz?=
+ =?utf-8?B?YUFJSE0xek5mb0hFNzljNThPS3N6aUhYVXc0M0hiVER4K3VOVENDK3ZDbm5v?=
+ =?utf-8?B?bmw3clpINW91L1Zzcklod2lYZ2lDcHo0bDA2SWc4c3BIODAwSUxUMWc2MzlP?=
+ =?utf-8?B?VUQxU0JYTE5NU1V1M1FoUzU4cEs0MmphUHl4SVdUUGxmNHJIL3c3SmtDL09J?=
+ =?utf-8?B?RWlWZkpXWGFKb1dBeXpMTnNNbHJEOHZES0VHWTRBUlF4TWFhSDMrK1NKMDEy?=
+ =?utf-8?B?c1ZBeEZuZnBWL3grd3Y3bUZkK1VKL09TV3hZbXpuSW15WUxSS2t2K3VBUXg1?=
+ =?utf-8?B?UGZYQTZMOFdwWERYeW05Q3p3SWY5ang2STBTK0ZkbzRhRDlhOHZEeGhKdC9H?=
+ =?utf-8?B?UnJNa0RGZ0s1KzlhMW04WFV0M2crSEZBd3FERGdBdUVibmNXeitYRDBKbzM2?=
+ =?utf-8?B?RnExWDYrUjNJY1k4dm1sZUdXMElvbHhBdXlIcm5GMGx1QndVT05CblJGbHVw?=
+ =?utf-8?B?dndTbUkwUjF5ZFg2OGoxZXZaM3RNRTVDS3Y5L1U0KzdhMjVubDN4c2NlbW1y?=
+ =?utf-8?B?aVpIZk9oc2gzeDRmcE8xbkZRSnZ0SE9KTlp6bnd6U1B1WnVQamlOaUdYaGJQ?=
+ =?utf-8?B?RUVVTUFOY1pjRnhHRW5FdnY2elJ5ZmhJbWNGdmIrSmZhdHRSUG1YdGE1Nm5p?=
+ =?utf-8?B?ZmpwZ1dqdnFJSWl5dGFOV3hxK3BSNFA2YVp6aG9MSzd6WWRhZGM2SHorZVZ6?=
+ =?utf-8?B?U1BtUjlOMGo0UHNqMmVqNU5CYmZxSzNSZTN3SnBnNWV1UFFkYW5EMWluMEk2?=
+ =?utf-8?B?TlAvRHdrZ2tDNGlWd3NTVm5zKzBmMU5SbDBCSFNSTzFoT2ZYaWFTRUt6bUVU?=
+ =?utf-8?B?V0hTVWhvelNLREJ1YTlsc0dKSGJUSmZ4bGl4OGp4YkI0bmpTUENlZE9iVDhJ?=
+ =?utf-8?B?TDB0S2VXeGhrNDFkL2wyVlNSQlI5a2Rhbit5WlRkbnF4YThLS2loNEJlU21O?=
+ =?utf-8?B?V1Y4MlhHOXpRbngvQlNiZWhkaEpzLzlWYllKaXVMQlQ2RlRxcURLaDRQR1hz?=
+ =?utf-8?B?UVFOcVB2NnU2L0lpanc2SUhSTHpMbFZOb0JSOHN5SXpnQ2RoMEhoUllHQzRp?=
+ =?utf-8?B?NmxralFiUFpNOVIzWk1uVTU0VFY5VTFxL2NtaTBMQzNONDdsVnVQQTNDZE04?=
+ =?utf-8?B?d2tVcE5JR0t6TDZGU2VSTmFMV2JKOWZoSStkVmRNVDZEZXJIQmIwNlJHVGRZ?=
+ =?utf-8?B?a2k4clhJYVVQYUFKdzR0RkE5ZUdnUk04aGxjOW9RNE55TFJnNVJrTSs5SEJ4?=
+ =?utf-8?B?eWkzdkJyZnpxS1UwSjZEZTdENUEveG1hbW5jVmFtVnZoWWhpVWJKZkl1bGNB?=
+ =?utf-8?B?aXBXQ1JiSFVXd25MQm13cTZnYUE3YU5NeUxyakJLL1BxY0o0Wno1UDdsdXFN?=
+ =?utf-8?B?WDYwc3I5LzFYL05nSlVsWEhJYXBhY3NwRkV6SURUWStDUjA1RTFKd1RibDhr?=
+ =?utf-8?B?Mmh4bUxKVHllWUVPODRGSmFOTURKYVVwejNkNmNBVDZSNHdpUDA3SkdvL1lL?=
+ =?utf-8?B?elViSUtXeFM3UXVGbDNrRHJRbDAwQjRqR1FhVVJGMXhhVXBVSUd2QmRRL2pW?=
+ =?utf-8?B?VEcwWUNwTnUycy94WStmYzFadCtFZXBVd2NmeVE4aXJBbjBpMWo1K20xd00y?=
+ =?utf-8?B?bDdXMGF0RGE2cTNZaWJmei8yZFNtL24yT3lTaXBkekE2ZHFUOVFhMlRXT1NH?=
+ =?utf-8?Q?IJR28W?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2025 13:24:35.5713 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7000319a-747b-42c5-da3a-08dd9d21d302
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2025 13:24:33.0397 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb0835cd-9671-4fc4-7fd1-08dd9d21d180
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000019D.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5P195MB2403
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1145
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,73 +166,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-By default, external blobs are faked. Some tests care only about more
-basic functionality. In those cases no external blobs should be faked.
-That would trigger a different (binman) case which is not in scope for
-those particular tests.
-Thus, disable faked blobs for those test cases.
+check_fake_fname sets the faked member of the entry. Use that member
+to get the faked status instead of a returned value indicating the same.
+Add type annotations to the modified functions while at it.
 
 Signed-off-by: Yannic Moog <y.moog@phytec.de>
 ---
- tools/binman/ftest.py | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+ tools/binman/entry.py               | 11 +++++------
+ tools/binman/etype/blob.py          |  7 +++----
+ tools/binman/etype/blob_ext_list.py |  4 ++--
+ 3 files changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 3fccd4c8ef5f8757b54f3b3fe5fe7898fd166dcb..d7deb3e68ce69c9c1a132f8f29cb71638646277a 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -5207,13 +5207,15 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+diff --git a/tools/binman/entry.py b/tools/binman/entry.py
+index bdc60e47fcab7bc69907eb08de9b50e977934b74..6390917e5083e40a4e3294e5d36ec300d2057fe9 100644
+--- a/tools/binman/entry.py
++++ b/tools/binman/entry.py
+@@ -88,6 +88,7 @@ class Entry(object):
+             updated with a hash of the entry contents
+         comp_bintool: Bintools used for compress and decompress data
+         fake_fname: Fake filename, if one was created, else None
++        faked (bool): True if the entry is absent and faked
+         required_props (dict of str): Properties which must be present. This can
+             be added to by subclasses
+         elf_fname (str): Filename of the ELF file, if this entry holds an ELF
+@@ -1120,7 +1121,7 @@ features to produce new behaviours.
+         if self.missing and not self.optional:
+             missing_list.append(self)
  
-     def testExtblobList(self):
-         """Test an image with an external blob list"""
--        data = self._DoReadFile('215_blob_ext_list.dts')
--        self.assertEqual(REFCODE_DATA + FSP_M_DATA, data)
-+        data = self._DoReadFileDtb('215_blob_ext_list.dts',
-+                                   allow_fake_blobs=False)
-+        self.assertEqual(REFCODE_DATA + FSP_M_DATA, data[0])
+-    def check_fake_fname(self, fname, size=0):
++    def check_fake_fname(self, fname: str, size: int = 0) -> str:
+         """If the file is missing and the entry allows fake blobs, fake it
  
-     def testExtblobListMissing(self):
-         """Test an image with a missing external blob"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('216_blob_ext_list_missing.dts')
-+            self._DoReadFileDtb('216_blob_ext_list_missing.dts',
-+                                allow_fake_blobs=False)
-         self.assertIn("Filename 'missing-file' not found in input path",
-                       str(e.exception))
+         Sets self.faked to True if faked
+@@ -1130,9 +1131,7 @@ features to produce new behaviours.
+             size (int): Size of fake file to create
  
-@@ -5221,7 +5223,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test an image with an missing external blob that is allowed"""
-         with test_util.capture_sys_output() as (stdout, stderr):
-             self._DoTestFile('216_blob_ext_list_missing.dts',
--                             allow_missing=True)
-+                             allow_missing=True, allow_fake_blobs=False)
-         err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing.*: blob-ext")
+         Returns:
+-            tuple:
+-                fname (str): Filename of faked file
+-                bool: True if the blob was faked, False if not
++            fname (str): Filename of faked file
+         """
+         if self.allow_fake and not pathlib.Path(fname).is_file():
+             if not self.fake_fname:
+@@ -1142,8 +1141,8 @@ features to produce new behaviours.
+                 tout.info(f"Entry '{self._node.path}': Faked blob '{outfname}'")
+                 self.fake_fname = outfname
+             self.faked = True
+-            return self.fake_fname, True
+-        return fname, False
++            return self.fake_fname
++        return fname
  
-@@ -5758,10 +5760,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def CheckFakedBlobs(self, faked_blobs_list):
+         """Check if any entries in this section have faked external blobs
+diff --git a/tools/binman/etype/blob.py b/tools/binman/etype/blob.py
+index 041e1122953ef80c0c48735fa8116f56def58f58..970fae91cd9b2a31b3f31d2ecdb77e27a89d69fb 100644
+--- a/tools/binman/etype/blob.py
++++ b/tools/binman/etype/blob.py
+@@ -42,7 +42,7 @@ class Entry_blob(Entry):
+             if fdt_util.GetBool(self._node, 'write-symbols'):
+                 self.auto_write_symbols = True
  
+-    def ObtainContents(self, fake_size=0):
++    def ObtainContents(self, fake_size: int = 0) -> bool:
+         self._filename = self.GetDefaultFilename()
+         self._pathname = tools.get_input_filename(self._filename,
+             self.external and (self.optional or self.section.GetAllowMissing()))
+@@ -50,10 +50,9 @@ class Entry_blob(Entry):
+         if not self._pathname:
+             if not fake_size and self.assume_size:
+                 fake_size = self.assume_size
+-            self._pathname, faked = self.check_fake_fname(self._filename,
+-                                                          fake_size)
++            self._pathname = self.check_fake_fname(self._filename, fake_size)
+             self.missing = True
+-            if not faked:
++            if not self.faked:
+                 content_size = 0
+                 if self.assume_size: # Ensure we get test coverage on next line
+                     content_size = self.assume_size
+diff --git a/tools/binman/etype/blob_ext_list.py b/tools/binman/etype/blob_ext_list.py
+index 1bfcf6733a752d3552d5adbbf5a1cd206d36963f..a8b5a24c3a1c2c9b0b1bd7ab793ba3993cb4368e 100644
+--- a/tools/binman/etype/blob_ext_list.py
++++ b/tools/binman/etype/blob_ext_list.py
+@@ -33,11 +33,11 @@ class Entry_blob_ext_list(Entry_blob):
+         self._filenames = fdt_util.GetStringList(self._node, 'filenames')
+         self._pathnames = []
  
-     def testFitSplitElfMissing(self):
--        """Test an split-elf FIT with a missing ELF file"""
-+        """Test an split-elf FIT with a missing ELF file. Don't fake the file."""
-         if not elf.ELF_TOOLS:
-             self.skipTest('Python elftools not available')
--        out, err = self.checkFitSplitElf(allow_missing=True)
-+        out, err = self.checkFitSplitElf(allow_missing=True, allow_fake_blobs=False)
-         self.assertRegex(
-             err,
-             "Image '.*' is missing external blobs and is non-functional: .*")
-@@ -6532,7 +6534,9 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testExtblobOptional(self):
-         """Test an image with an external blob that is optional"""
-         with test_util.capture_sys_output() as (stdout, stderr):
--            data = self._DoReadFile('266_blob_ext_opt.dts')
-+            data = self._DoReadFileDtb('266_blob_ext_opt.dts',
-+                                       allow_fake_blobs=False)[0]
-+
-         self.assertEqual(REFCODE_DATA, data)
-         err = stderr.getvalue()
-         self.assertRegex(
+-    def ObtainContents(self):
++    def ObtainContents(self) -> bool:
+         missing = False
+         pathnames = []
+         for fname in self._filenames:
+-            fname, _ = self.check_fake_fname(fname)
++            fname = self.check_fake_fname(fname)
+             pathname = tools.get_input_filename(
+                 fname, self.external and self.section.GetAllowMissing())
+             # Allow the file to be missing
 
 -- 
 2.43.0
