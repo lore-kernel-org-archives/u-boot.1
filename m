@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDE6AC54ED1
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 07:30:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70754C54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 07:34:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BAF382FBE;
-	Tue, 27 May 2025 09:30:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4DE582FD2;
+	Tue, 27 May 2025 09:34:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g/lyChWx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mLXwAshP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1247182FC5; Tue, 27 May 2025 09:30:06 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 2E0CD82FD4; Tue, 27 May 2025 09:34:50 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE11282FB8
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 09:30:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0127982FB9
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 09:34:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-60461fc88d7so4133378a12.0
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 00:30:03 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-60462000956so3191623a12.0
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 00:34:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748331003; x=1748935803; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748331287; x=1748936087; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nO6RdrO4JMiiGzihBVGseB5Y0Errp9mJZIzq+F6dA1c=;
- b=g/lyChWx+ELzRGG/aoFceHdFAFxDd5bDzHX7+Y1FEjgX0Wzyy4NGL1wg8Xkmu054E2
- 9YBy0auf6s7WB1bEoOXVkMuD/z1EttXopDmDb82dlmyzMqKWn8Hx6ead+hxZx85JfBN0
- lPB6jnk7t8koOI8lH45JMvhfXGXElzJBILuwY=
+ bh=btqsDpVBErEc6y40WxRRPUOZrtOamgjdlf+iuOg8Ge8=;
+ b=mLXwAshPUqp4HQDwzg5RvSrB/FLXjZMPAgiz1eQrLS/xUpVvW8YiRpBmE4TvbVcQtB
+ Ao8VirEmd6CaYMg45S4NP3fgmMUfV+9j2bMbEcGgz4V4/n3qukG3DY7J4Fx4r8kBoRuL
+ iLP5s7yAR0r2jx+AqCn6mVvmKCftAJNE1X3dI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748331003; x=1748935803;
+ d=1e100.net; s=20230601; t=1748331287; x=1748936087;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nO6RdrO4JMiiGzihBVGseB5Y0Errp9mJZIzq+F6dA1c=;
- b=R7O2gEVfJ803jRZ57rWAU2M9A577Sx3/sW2vSDCTbfTWtKjErkbT6eyzWq//O7dYGG
- ZFzdA4XiE81pgzOMf84K0AdtEyOvRbXVZz7MNjlOaOC9TYE1EPqZZ3q7o3RCZJrggeEd
- 4DjOt8oHBbglo/gOy34oBNbRqsGLrJB/BtaMlTxwMdaqxA+bn4lxean5RsHjMLqD8xWh
- WgU08/zA6odqdhUaoCuw+fNJ/y9zS6gZqL9t2tpl6DISLZCGPLwn+PA3GuwPK78ENt/m
- l8EWDTHMFUkvRJZYQRznXXcquOVT9RQrDOiDbzpPCoJkxv4jDUip73Nc+LVr28p6TZYh
- zqFA==
+ bh=btqsDpVBErEc6y40WxRRPUOZrtOamgjdlf+iuOg8Ge8=;
+ b=mSEylddzBxiU31GCvI+yHG8pHamjC/6lRH3Swi3+oSDLonYT9+jekxPA0qYZKIoi/o
+ 8LwqLtGpF/htkEMWZ6sYklEuC1icS25BdjxbImJzYRLETH0EXbuyYpw4FR6OeVdIjqLW
+ h0lcyGuKKxstPfkWNmtMW4S9VtmBqW5/UMN8FsdLE4n3m9cxtSgf+qYwG/A9/QxDAEQV
+ zWmSQ7tExdA0vlz7eb+eA6DoWDIXvmLDjDzv282BoX1O/K8/4eA6QM2bHfdee4sX2dbf
+ vqlnE8k3/k4JkeO/b6B8BoJTGaBik/9yocwZyARh3IXE8+AbuqIgjEI4hWJoF3/pddcV
+ pddg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqasGma7AG2l2RiTYbFj/u/b1iPm53wCnPclwSime01eKhhZU666kb9PpODRNigFrND6F64kM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMpk6dw3dOu7RmTxKtXJhvKwqSMeUVMFI8jnGtCcEjuRwT+6Es
- r01pclZPmX0RqqAUw9jl7ezwMkc/vTex5szqc1Stcz9TJzC8s4RuIbk7UYuJ+TiShewFwrsUH+0
- imG0vfQUz6Z/4F/18oOpfmsojG0DcRbXyugcg6ajTe8ARGho+NzlQTg==
-X-Gm-Gg: ASbGncusUZy2v7PGUCwYPtheZiiNc2MEw/Hz/+kZVBHK6dMckKm61bGDG68OfQSa2s+
- OP7n4FSgdfA7cA3W0xaab4OUygIHGO2/hUpZC4MJHeMiVuWGGPoaYHzgljXys80PgTLCNJNNf8F
- pniJoEUR7V3obWG9GkXlsGMzeT22xBNoo=
-X-Google-Smtp-Source: AGHT+IF5Q0yfkqXT8pD1iIesg+eD20D5y7YwOdqEoFwRm0RcGFNIt80Yq/H7hTPNffgxsbO9tM2qdXhaiT1mlTAZoyg=
-X-Received: by 2002:a17:907:da0:b0:ad8:8c09:a51a with SMTP id
- a640c23a62f3a-ad88c09a678mr163261866b.4.1748331003087; Tue, 27 May 2025
- 00:30:03 -0700 (PDT)
+ AJvYcCUGx2Js8PRvxewOS0Rbj2QYpT0LClWGxkzW4qz1A6/IZ6QuAPakvves8gf3LVbP8hIAMOmzqVU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxyk/PXlRzq+5yDHhmgLQbprLhYJLxgctJpQ/lLRoTVYBo4BI+R
+ NIMKlv4A0QTx4WuTJAa+cylQSAUWtkgO5BrkOW4MNs5shmpG2bP6Bah9TwECdplrJG0JNyWYVc/
+ SWu1AIgjvQUp7pgh3wQBLoOCcAoWkE+8gSMYjgwWlPQZ748Ganlprtw==
+X-Gm-Gg: ASbGnct76WxZtYpRhznVwTW0nprX+Q0sOTTDgou783/VjH9KJ70YOyk2AhhmKAfG9/d
+ V85avpu/RwRdUTmUZE30ZoDsLq3xsM5zx/8SjauJY0eaGvU+AuHwrgPrt9qLzd4qdYs+akfIoWS
+ ZdXGpT8aHLROmCTsdfZ6USL1oaBG/YDyg=
+X-Google-Smtp-Source: AGHT+IFYctthYRJXe06tecaftsNkpmWZKxtQsq3ZLV9SiqtA37SVCyKe+YTDnhph3q81sm1TWP2quM6cbWxys9OTx0M=
+X-Received: by 2002:a05:6402:27d1:b0:5ff:abc8:97bb with SMTP id
+ 4fb4d7f45d1cf-602d9163815mr7266068a12.9.1748331277292; Tue, 27 May 2025
+ 00:34:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszThbRhKF1Xwqk+hLu8Y-VXB6+fHVXYfphfVjWMN=dVC1dg@mail.gmail.com>
- <20250525135553.GQ100073@bill-the-cat>
- <CAFLszTgPK_TWjoaJPMa6RAH-pugpO_uhkm-VafQLzaNuFZRDLw@mail.gmail.com>
- <d041c823-a258-4d73-902d-350a2aae0066@kwiboo.se>
-In-Reply-To: <d041c823-a258-4d73-902d-350a2aae0066@kwiboo.se>
+References: <20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de>
+ <20250129-binman_faked_optional-v1-6-a4534bc67cbb@phytec.de>
+ <CAFLszTgFvp_YYHZ5GzvZAfLmWeGmoTW5_vhM88ebd7RoA3Mo=g@mail.gmail.com>
+ <54732a43eeea4e18829a0c1d561110d9de07e286.camel@phytec.de>
+ <CAFLszTik+WRQUb8++nvZxdNPeipeOCyFwMF+WaVJZ95-peHY9Q@mail.gmail.com>
+ <d3bfaf2fda01b1ace77d3335028bb5adcf536197.camel@phytec.de>
+ <CAFLszTjhYPkaQdtxrNNkLnfg=YkJ6f7JRtg=jPjDR2h_DD8Wkg@mail.gmail.com>
+ <8efb1beb7dc94f16919b00fa88fc8048eec80905.camel@phytec.de>
+ <CAFLszTg0UXfcsy8-A9QMq5CSsAvAXHLKRBpHyzdNuwdj17VwKQ@mail.gmail.com>
+ <150cc82d61583d092aed27ce043c6316b093a13a.camel@phytec.de>
+ <CAFLszTinxMvBiz8sWC8+qEiHUHXX6LFgw1FnC8kNY1DMG8AF9g@mail.gmail.com>
+In-Reply-To: <CAFLszTinxMvBiz8sWC8+qEiHUHXX6LFgw1FnC8kNY1DMG8AF9g@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 27 May 2025 08:29:51 +0100
-X-Gm-Features: AX0GCFts6Gr7CPZrMIfkq4-JSo5bnth-mOXO7UiOoYgbF0qgDevHibkUyLONjF8
-Message-ID: <CAFLszThT_kqtDtGW5Tij9gz9zDVJ3FMwnKRQ7JAUMQamfmEs2w@mail.gmail.com>
-Subject: Re: Broken boards?
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 27 May 2025 08:34:25 +0100
+X-Gm-Features: AX0GCFu3f1HfJqyft7-BpLMlAqqxftxOnOIF0S9jMCh2ZAX334ome8VEezdZS2o
+Message-ID: <CAFLszThotL8ufW-qkc2Eo3ooyf7MMHFfr_OB-H6u7kV3BTt4Jw@mail.gmail.com>
+Subject: Re: [PATCH RFC 6/6] binman: doc: update Optional entries
+To: Yannic Moog <Y.Moog@phytec.de>
+Cc: "alpernebiyasak@gmail.com" <alpernebiyasak@gmail.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>, 
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "festevam@gmail.com" <festevam@gmail.com>, 
+ Yashwanth Varakala <Y.Varakala@phytec.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Teresa Remmet <T.Remmet@phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,53 +105,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Yannic,
 
-On Sun, 25 May 2025 at 20:51, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Wed, 19 Feb 2025 at 00:01, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Simon,
+> Hi Yannic,
 >
-> On 2025-05-25 20:05, Simon Glass wrote:
-> > Hi Tom,
+> On Tue, 18 Feb 2025 at 06:15, Yannic Moog <Y.Moog@phytec.de> wrote:
 > >
-> > On Sun, 25 May 2025 at 14:55, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Sun, May 25, 2025 at 09:46:03AM +0100, Simon Glass wrote:
-> >>
-> >>> Hi Tom,
-> >>>
-> >>> It seems that some of the boards in my lab are broken in your tree.
-> >>> Have you noticed that?
-> >>
-> >> Your lab has never fully functioned in mainline, so no I've not paid
-> >> attention to it and don't use it. I figure it's part of the lab
-> >> maintainers duties to figure out false failures and
-> >> more-or-less-expected failures.
+> > On Mon, 2025-02-17 at 06:13 -0700, Simon Glass wrote:
+> > > Hi Yannic,
+> > >
+> > > On Mon, 17 Feb 2025 at 00:21, Yannic Moog <Y.Moog@phytec.de> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Fri, 2025-02-14 at 06:48 -0700, Simon Glass wrote:
+> > > > > Hi Yannic,
+> > > > >
+> > > > > On Fri, 14 Feb 2025 at 00:05, Yannic Moog <Y.Moog@phytec.de>
+> > > > > wrote:
+> > > > > >
+> > > > > > On Thu, 2025-02-13 at 07:01 -0700, Simon Glass wrote:
+> > > > > > > Hi Yannic,
+> > > > > > >
+> > > > > > > On Thu, 13 Feb 2025 at 00:21, Yannic Moog <Y.Moog@phytec.de>
+> > > > > > > wrote:
+> > > > > > > >
+> > > > > > > > On Mon, 2025-02-10 at 06:08 -0700, Simon Glass wrote:
+> > > > > > > > > On Wed, 29 Jan 2025 at 03:30, Yannic Moog
+> > > > > > > > > <y.moog@phytec.de> wrote:
+> > > > > > > > > >
+> > > > > > > > > > The binman documentation of Optional entries is not
+> > > > > > > > > > accurate in the
+> > > > > > > > > > sense that it does not cover blobs entry type. As this
+> > > > > > > > > > is also the most
+> > > > > > > > > > widely used type to have the optional entry, document
+> > > > > > > > > > the interaction
+> > > > > > > > > > with faking blobs.
+> > > > > > > > > >
+> > > > > > > > > > Signed-off-by: Yannic Moog <y.moog@phytec.de>
+> > > > > > > > > > ---
+> > > > > > > > > >  tools/binman/binman.rst | 9 ++++++++-
+> > > > > > > > > >  1 file changed, 8 insertions(+), 1 deletion(-)
+> > > > > > > > > >
+> > > > > > > > > > diff --git a/tools/binman/binman.rst
+> > > > > > > > > > b/tools/binman/binman.rst
+> > > > > > > > > > index 990fc295770..2bafa6ca408 100644
+> > > > > > > > > > --- a/tools/binman/binman.rst
+> > > > > > > > > > +++ b/tools/binman/binman.rst
+> > > > > > > > > > @@ -1145,7 +1145,14 @@ called on all entries.
+> > > > > > > > > >  It is not possible for an entry to mark itself absent
+> > > > > > > > > > at any other point in the
+> > > > > > > > > >  processing. It must happen in the ObtainContents()
+> > > > > > > > > > method.
+> > > > > > > > > >
+> > > > > > > > > > -The effect is as if the entry had never been present
+> > > > > > > > > > at all, since the image
+> > > > > > > > > > +The effect depends on the type of entry.
+> > > > > > > > > > +
+> > > > > > > > > > +Blobs
+> > > > > > > > > > +~~~~~
+> > > > > > > > > > +For blobs, the effect depends on whether --fake-ext-
+> > > > > > > > > > blobs is passed
+> > > > > > > > > > +to binman. (This is the case by default)
+> > > > > > > > > > +In case --fake-ext-blobs is set, any missing entries
+> > > > > > > > > > will be faked.
+> > > > > > > > > > +If not set, it is as if the entry had never been
+> > > > > > > > > > present at all, since the image
+> > > > > > > > > >  is packed without it and it disappears from the list
+> > > > > > > > > > of entries.
+> > > > > > > > >
+> > > > > > > > > I'm not quite following this. The text seems OK but your
+> > > > > > > > > heading
+> > > > > > > > > implies that things other than blobs can be faked. All of
+> > > > > > > > > this
+> > > > > > > > > functionality is only for blobs.
+> > > > > > > >
+> > > > > > > > The heading is a subsection of "Optional entries". To my
+> > > > > > > > knowledge the "optional" property
+> > > > > > > > is
+> > > > > > > > not
+> > > > > > > > limited to blobs. But blobs get special treatment in
+> > > > > > > > regards to "optional" due to the --
+> > > > > > > > fake-
+> > > > > > > > ext-
+> > > > > > > > blobs option. Hence the subsection.
+> > > > > > > >
+> > > > > > > > What would you like me to change to make this clearer?
+> > > > > > >
+> > > > > > > Oh I see. Are you saying that optional entries end up in the
+> > > > > > > image
+> > > > > > > when they are faked, external blobs? If so, that seems like a
+> > > > > > > bug to
+> > > > > > > me.
+> > > > > >
+> > > > > > To clarify, optional images are faked only when they are
+> > > > > > missing. So in case the image is
+> > > > > > missing, a
+> > > > > > faked image is indeed packaged into the image.
+> > > > > >
+> > > > >
+> > > > > OK, but I still think it is a bug.
+> > > >
+> > > > I didn't question your judgement, I simply don't have the broader
+> > > > goal of binman in mind to be able
+> > > > to judge if this behaviour is unintended.
+> > > > What should happen instead? Should the image simply be absent in
+> > > > the final image?
+> > > >
+> > > > > Why add an optional thing in this way?
+> > > >
+> > > > Because it seems like a simple, elegant solution.
+> > > > To elaborate:
+> > > > The goal (in case of OP-TEE) is to have the binary packaged when
+> > > > its there and not packaged when it
+> > > > is not present.
+> > > > Precisely because it is not required for a bootable image, but may
+> > > > be added to enhance functionality
+> > > > . I.e. it is optional.
+> > > > I found the U-Boot doc to explain optional entries and thought it
+> > > > to be a perfect fit.
+> > > > What do you have in mind to achieve this goal?
+> > >
+> > > I think we are talking about slightly different things.
+> > >
+> > > If a binary is optional then I don't see much point in including an
+> > > empty (or faked) binary. If it is the only thing missing, the image
+> > > should still boot OK if it just doesn't appear in the image.
+> > >
+> > > The idea with Binman is to produce a functional image, where
+> > > possible.
+> > > An image without an optional blob is functional, so we should not
+> > > need
+> > > to add it.
+> > >
+> > > I'm not saying this is a big problem, just that it seems surprising
+> > > and not what I intended.
 > >
-> > Oh, that's a shame. I didn't know you had stopped using it.
+> > I am with you on this. It was suprising to me, too. And I agree there
+> > is no point (at least to me) in including it in the final image.
+> > So we were talking about the same thing, I simply want to make sure we
+> > are on the same page.
 > >
-> > I use it on nearly every PR. I did once send a patch to disable the
-> > boards that were broken, then another to re-enable them, but I don't
-> > think you took either of them...
+> > >
+> > > Perhaps we do need to fake the blob in case it is used by some other
+> > > tool. But I wonder if we can stop Binman adding the faked blob into
+> > > the image, if it is optional?
 > >
-> > Here's a recent run showing a few problems:
-> >
-> > https://sjg.u-boot.org/u-boot/u-boot/-/pipelines/794
-> >
-> > But x86, RISC-V and some rockchip seem to be broken in your tree.
+> > From my point of view, It would be better to stop binman from adding
+> > faked blobs than what I proposed in these RFC patches. I didn't know,
+> > however, if there was a use case for adding them to the images that I
+> > am not aware of.
+> > Since you now confirm that it was never your intention to have them
+> > included in the first place I think we can go ahead in preventing
+> > binman from adding faked blobs to images.
+> > I'll work on it for the next version.
 >
-> At least for bob, jerry and kevin you will need to change your lab
-> configuration/scripts to use u-boot-rockchip-spi.bin as the old
-> u-boot.rom finally has been removed from mainline [1].
+> Thanks, and also for spotting this.
 
-Ah yes, I forgot about that, thanks. I've added it as a fallback if
-u-boot.rom doesn't exist, so bisecting still works.
-
->
-> [1] http://lore.kernel.org/r/20250505-has_rom-u-boot-rockchip-spi-bin-v3-0-75f23b3bd8d3@cherry.de/
->
-> Regards,
-> Jonas
+Did you ever get back to this series? I'd like to get it in if we can.
 
 Regards,
 Simon
