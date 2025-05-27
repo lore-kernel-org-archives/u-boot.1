@@ -4,82 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5102AC5B542
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 20:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19BCCC54ED1
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 21:04:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A14948318F;
-	Tue, 27 May 2025 22:22:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 41D5A8277D;
+	Tue, 27 May 2025 23:04:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bHoJDo/3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CLQuYEX7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67FDB838A0; Tue, 27 May 2025 22:22:15 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 4173582998; Tue, 27 May 2025 23:04:55 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3973C8313B
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 22:22:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1AD482145
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 23:04:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3fcfc85f1f5so819457b6e.2
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 13:22:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4766cb762b6so3023061cf.0
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 14:04:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748377332; x=1748982132; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QbWv3lzGQaal5VCWVhHlWRHo+cGTdGRdq59va1xS4GI=;
- b=bHoJDo/3CK8977TnUN7i4f/cW2j6C18PJ4zlYKbmNmyerL09bwx1O9JJZeUgRhrn19
- VkF/fD44g2i/GgdwtgriqDGCYZwCe3ADSRyV6BHkxeI8T4jAQEi8i3TEBX8yEVFoUeik
- oQWUhnFsDwT9VXdMNJZ4ceK5ETClCGZCtwbVg=
+ d=linaro.org; s=google; t=1748379891; x=1748984691; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ToB6Av9bK3IicMoFWzBG1e1Xh+73yzcM4hZWVcxkjUw=;
+ b=CLQuYEX7M+QMkBYuYGuKBxuECHqJTO+qHFRgvPHINhKkswTh0nCvMfQXF67FLrhSH/
+ niiHbr2dUwZrhvf7RbV+d2hFnT1jY+9qweo/Gxlhqpf+Vc2ptk6isr0kuHpbQS51htzx
+ L3Av3iQkDbuKjC8nElewjH1fuow3cKzslKsXIznyqsRysm0lX44DOMkBhVCH0uJIwKsr
+ 8ZAwKE1JXgxtyVHGc9Xs0q94qDK7keW3Q80wk9HbGElPm9VNid8cPoamsYcDhlKoq9H8
+ 4nx6w9l4Cx9mfedykU2fQ2TgXeh/iofVUYgiPYOik93cfVgsoEt+oCr0yOCFoM4dLmPW
+ 0VYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748377332; x=1748982132;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QbWv3lzGQaal5VCWVhHlWRHo+cGTdGRdq59va1xS4GI=;
- b=sUfuTLPMZY5T2Ssvm+IWQ4cNg/D/ugbHeIgNIvQEPTGe+8eu+w4kqSssgIuheEv8JV
- snZm+4zwTLyTMWZTnwXgoVxvPXaH/7Z/fuPMe6TGl/kjTpCUkUzgE4rz7Q1h+OMst/hN
- lpvOhs5PrIDWuX9yuuwNJ30mNuHZHP2gMy4dLuMh22XfN8FAv/np8kvsD/TqDZlZyZRM
- FhVRXe/Y+fWPwza3gu04cAE2aiQiFNU2I4W9Jm0y8KYcHSj90+Uws4Jjh2GgIfSkqpEb
- A2rCjWJgIzcb45z9WYbmFCaILmNBLBn908gXLNbhcgPglduDWdnJhXTeLH9C/T88Oy6V
- p2ug==
-X-Gm-Message-State: AOJu0YzRbGM1AGuvQl8yY1iDWcpaJ1ZAyZ2swDWcTMFmLp2uHkfbLuvC
- ocyrg0+tdxqqDDm+nOTw+pQjxzEwG+t+RitM+3UV/LvD0MMRPTq9/+mqPe6DuUFoCdUnIlSitGw
- SAk5BcWM=
-X-Gm-Gg: ASbGnctmEMEhr5W0iNY3cFtj+MGRmsjghZSvnXXJviD/mL6wfoR86w0awjkbr0s2VGc
- CjrC2YrtI0OVnPo2J8I6j3UBOkvu76V71rlZJTowEBUJv8m9G6iSekb3hDbHUEeKPygkO/Ev3kw
- +tRWT8LjeQdg2KqrVMRVqvIQnDSCgy430OxFwKT3q9zT/n0M8vO02kFv2dZ+gp/0nhE0heB/YqJ
- Z9ck4sq/zah1glQNUHnzDF4Rlgp5zFDug4wFs8W1juucn5ebv809CZw1MScq+JabBh7X5qGSVuV
- /GDPAUDfZy8wAqn+WuRwJ5uXuNkvjThoFmCMHcojTvzSKz+eF2U8P6Sr6IIDX3A6meIQeRiLeN6
- L5/Sx3PXhkx3EApaxjeexmz4=
-X-Google-Smtp-Source: AGHT+IEGcRRaeYNjZDXmwHJVM2eVVQgHYDEZXkG8s05ZoPRPCTpCeGwQUxOsh0ykrELqxVRRLgPwMA==
-X-Received: by 2002:a05:6808:80aa:b0:404:e0b3:12e with SMTP id
- 5614622812f47-406467b8c8dmr8265324b6e.3.1748377331845; 
- Tue, 27 May 2025 13:22:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-404d98b27a3sm4826900b6e.35.2025.05.27.13.22.10
- for <u-boot@lists.denx.de>
+ d=1e100.net; s=20230601; t=1748379891; x=1748984691;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ToB6Av9bK3IicMoFWzBG1e1Xh+73yzcM4hZWVcxkjUw=;
+ b=dPKXeRlumLaCIYT2IQTlqFzFQEnQ/gYj488PJUU6JQQnDTzy4B8kkh62zZoI5JA+gc
+ O7IIsbJZctG9Lnot/seAwdiA55gGBNuCMMvdRq/RRmMW7rla/bioy6YJHxKvkBmh1LoE
+ +4MNy+y1yixQDydnhTIvt2Xr9Cm2sVOG/cpgmnDL3igQ4Xvqz/aT1obGJuQWJXGzVPiM
+ xBXbTsHW/xEvX+BIwFzr3zs5TD1Q/9WR0MLWzIr/Wd6R4Grir4cjO9HLcUD7v/a2o7fb
+ IJ32ygwxkhmZ5s1XrZ6B0byKw2qCMvVQuJJSOVPChz77DkV8zbRJHxsV/IvBeklTHQFS
+ 1ceg==
+X-Gm-Message-State: AOJu0Yx3dgioeXeqHLL7Gp5buQyntV4iUp6sxXejWUf2kaeUtrK2DuLv
+ rkux8CuneO9SDglZLgKyJ5LiW3ODuNGV7qXCAk52ipaeBlgCC3HHI20mk4gUpNEzYXiqr3/q/E6
+ UFxkK
+X-Gm-Gg: ASbGncva8k5A8fDfZDQX8Oo6msFJKNXv34+a6k/MNtA++9dG6hhjuvg86QrJTYwTikn
+ ZVtX7Lj+fLMQ2zSrxDMcxMSqJQ+BNZ78eiQJCSUqUuYLMzUtpTk7fDQxsUVu4Zzk0xvQPPld6aA
+ jHqk+ynxHaGgC7OwQdGOm78tznxkX4fomBcLFHgHA0GrRGLDFXij+G24jV9Wtzc9VM2nG516tIl
+ tzpfevyJd/pQyLpBbHgB8F81CkGRXmRnPAnEb5nb4NT0FVXm97L5ZjaMT27aH/6obBNIJzntFfr
+ 5F5fgsFPyvRRKW6A93bKvLJc/SUURX3cHOQcOC6OwzFI4sc0GLJHtQXLsHQ77ORgH5Yi8/U+yL2
+ 9
+X-Google-Smtp-Source: AGHT+IG+drh1ZqhijDiqNsABM8xD9cgPkQy663FQHMTgRXYtY1fR5iTxzrdALuTZyZDttCSqkSFJjA==
+X-Received: by 2002:a05:622a:261a:b0:49c:d64b:3d5f with SMTP id
+ d75a77b69052e-4a2f51c2d0dmr30355491cf.9.1748379891208; 
+ Tue, 27 May 2025 14:04:51 -0700 (PDT)
+Received: from ubuntu.localdomain ([209.227.128.158])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4a2f92a1a07sm1097501cf.38.2025.05.27.14.04.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 May 2025 13:22:10 -0700 (PDT)
-Date: Tue, 27 May 2025 14:22:09 -0600
-From: Tom Rini <trini@konsulko.com>
+ Tue, 27 May 2025 14:04:50 -0700 (PDT)
+From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Subject: Re: Merging v6.15-dts to next
-Message-ID: <20250527202209.GN100073@bill-the-cat>
-References: <20250527155205.GJ100073@bill-the-cat>
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>
+Subject: [PATCH] armv8: fix Clang warning on writing 32-bit variable to a
+ 64-bit register
+Date: Tue, 27 May 2025 14:04:31 -0700
+Message-Id: <20250527210436.1488428-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eS7U4nlx0pCW0BxR"
-Content-Disposition: inline
-In-Reply-To: <20250527155205.GJ100073@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,46 +109,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Clang is stricter than GCC when it comes to inline assembly and expects the
+register to be written with explicitly same type of variable.
 
---eS7U4nlx0pCW0BxR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: c0e1775a867c ("armv8: Add arch-specific sysinfo platform driver")
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+ arch/arm/cpu/armv8/sysinfo.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Tue, May 27, 2025 at 09:52:05AM -0600, Tom Rini wrote:
+diff --git a/arch/arm/cpu/armv8/sysinfo.c b/arch/arm/cpu/armv8/sysinfo.c
+index 850142da37d..ff0abee4c6b 100644
+--- a/arch/arm/cpu/armv8/sysinfo.c
++++ b/arch/arm/cpu/armv8/sysinfo.c
+@@ -134,7 +134,7 @@ int sysinfo_get_cache_info(u8 level, struct cache_info *cinfo)
+ 
+ 	/* Select cache level */
+ 	csselr_el1 = (level << 1);
+-	asm volatile("msr csselr_el1, %0" : : "r" (csselr_el1));
++	asm volatile("msr csselr_el1, %0" : : "r" ((u64)csselr_el1));
+ 
+ 	/* Read CCSIDR_EL1 */
+ 	asm volatile("mrs %0, ccsidr_el1" : "=r" (creg.data));
+-- 
+2.25.1
 
-> Hey all,
->=20
-> With the Linux kernel release of v6.15 over the weekend, and v6.15-dts
-> now being tagged in the devicetree-rebasing repository I'm merging that
-> to the next branch now and expect to push it later today.
-
-This is now pushed. The only small hiccup was that our non-upstream
-version of dt-bindings/media/video-interfaces.h was now out of sync with
-upstream. However, all users of that file are OF_UPSTREAM and so the
-easy resolution was to delete the other copy. I'm going to do a little
-grep'ing and checking to see if we have other dt-bindings files outside
-of dts/upstream/ which are unused and can be removed.
-
---=20
-Tom
-
---eS7U4nlx0pCW0BxR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg2Hu0ACgkQFHw5/5Y0
-tyxBegv+OXV/Fj82YntSP3m3uCUa4zNZItZntQ4dSYOw/KpvD4ufxQnFOlpM8mBH
-cuU1amYrpe8ZajY8cDlm///CiKSNz3kJFDBfOvWgi+fngVvCvOqgfdBDpe8B01Sd
-cV529R8Ma0FKqgUsaeMviBoXAEXfkkX0ys1aSRioEO84pWfrCm1pfgSSXZ/nsDp9
-dVul5dxAetQSYTYhjycEtmEPJ0aeUKYO6r9gK8+on2iAAWw3t56qmJsMujXcmzZ6
-yZTLLV4jOvFodJnQbbOIOR8N9yaeKD6dwZPvAY1BV68neAiNdG/ZQdvLfSxHQEMK
-4DWfx8uNAwGUb5M0rH35AHMDA/tI5bihrln1RGRDjna95oFQx5Al1+OkVhjaWzhb
-XIn7F2gtk04KsdYxJ6q4RkxhHQCEVnvBqmOh/OlS/e6EQNHA9erqNg3VWQDWMiDJ
-+IqxfC4ukAwPGK5VITQuwkkUe2cWsVTTlwx162QUK/WfXIA8IBmc4qj/0z+Zi7aD
-dAcZpg/m
-=8jvy
------END PGP SIGNATURE-----
-
---eS7U4nlx0pCW0BxR--
