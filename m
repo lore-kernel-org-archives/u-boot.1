@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A81CC54F30
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 14:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44E68C54F30
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 14:46:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BD3A8386F;
-	Tue, 27 May 2025 16:02:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CA3B8380E;
+	Tue, 27 May 2025 16:46:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="X0XiHOkq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nIoJ1KRe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEBC783881; Tue, 27 May 2025 16:02:11 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 95D2E83818; Tue, 27 May 2025 16:46:30 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C151583818
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 16:02:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7671830B5
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 16:46:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=724286f330=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RCp2Gb031311;
- Tue, 27 May 2025 16:02:07 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- ps/nq+PBNy55XlzF8j1d8Id4DGrkrgM+rrZ+2hjVfQk=; b=X0XiHOkqSVXkKUuy
- A7lcbDhxXICXYK+6GElno+PDA0GaCJou4xjTJOh5xH+PyMRXPZJmjedFVL+a2V4Q
- lnJcJlefEooeImIb6oBGiPVvNPx9dQOybMBqFMfaGSNDrSHWPoEF+zYzZmRbodL9
- fiioDxUMTP6cKd1/puqQ2eXkUn5EUiS6FGTVnfdEao7OpJQhU8CmPWw7DZeRJH5P
- juiqyurXVbhXglZ4OrGb0jCw7rqb+0FE7kYWjUj3f5+88mu5dy3XoG//vRGL6zzw
- kYwq/xD7e4lFMLhEv2kBgqo9f3pVOuAi3sI6KVAYTl2qSfHkWw/ujkyzUiiGBBQN
- ABNeyA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4j9nw-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 16:02:07 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AD2EF40061;
- Tue, 27 May 2025 16:01:26 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5C327AFB29E;
- Tue, 27 May 2025 16:01:13 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 16:01:12 +0200
-Message-ID: <a1c78894-529d-4e46-8d4d-51fcee834fb3@foss.st.com>
-Date: Tue, 27 May 2025 16:01:12 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-6065803ef35so706903eaf.1
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 07:46:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1748357186; x=1748961986; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Ui7dRqvHH79IXA/wAVQTXcCEmx6uZ3ERNSL6klbRkkI=;
+ b=nIoJ1KReLGsJd1uqY9QYHIR+Sa202Bul1E8Zw3FCeeUMSB9K9RX9b1P88mszjiN7kE
+ 6nnaJoVXD1ZlcrI1YPHEKKIxF6kWQ+h3VRu4RgL74mmOUXvHDWcJGZ19T623PRBfoVux
+ CbP9eqlqhUIiX/PFUa2YXxu548jrRuA5pMtNg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748357186; x=1748961986;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ui7dRqvHH79IXA/wAVQTXcCEmx6uZ3ERNSL6klbRkkI=;
+ b=C+0j61XiKNtTPrHmVBoYqMclunT2l0VdLYKQNJQCI5bA7j+2ZYKDusyHysS+Bg1HLF
+ +oNgTnPXqHaD0dKzRA+zotSmoTKRNir9xUZ7vYb2arZGHSHR/7Sao92t6oSlQzymUCMh
+ rbXTqBker0Y+ZMH68c5BHHk/6oesrgI/boHDTj0TuETIqwonqVooa05o8kHmdDIVEOnC
+ gTZI+2BYQLmNdWvy2oY7NXEM2+eSSc3jiO1CcIq9TYIuOf1u8MM5YIKLfZEaSjzSDMwg
+ vxWdHoU5k/gWcn5S+ALiOW/CLrk270j7tsY7KeY9NLCg0eyKmE0zv/Ehd0Ccc8U3gFPR
+ zK2A==
+X-Gm-Message-State: AOJu0YxBoxdSJP/KuBSimsvUNchQXelrRPni6kNz+T+Pvlsqz0/jLGiP
+ JlrDwwaKftpa7KA1dIZ2qDcCbI+qHuIGYNHIyKVTH3gvxZZ63POYZyY8NmYfJCyRNHA=
+X-Gm-Gg: ASbGncseV/QIr2IZJUcBO0yKEz/wAOzd0d9yvmLg52FmSJaFjoGFpNkjCG+fclHX5BW
+ meUYBJKDfFteZ+fxd2zef+nwI4/5z5blWPbWFQ+9bTavHikk777VmkcKVkA+IWlOBqQABGKh5MJ
+ sG/SQMjBpfGOfpHVehUv8W/wRogDChKqsuNGm+ynjUZXDaI2Eo4JUVWCOm+t0wmspD7Ep/KI+30
+ vJQjHlev0PSwbbTC8inN5DbdxRW2QP0LhPmdP3Jvp21cTG0pLG+SHCPOD4UQ8BXFGW0Vpyy1QeQ
+ e/hXVH4Am65JQ/Jau7eyYP5yBwusvBLJZgc54OMOKgslStv++k/0Ks131N2JGl4CCmr0TN5Ds2M
+ MVYUdRpOU4aU=
+X-Google-Smtp-Source: AGHT+IFlmFj5o78w4QrktN1iv+tbLRnAQ7rqdJcAJrH7UEJQJElEv/OZ8j1Uu+klmbbwlcpHsQpHPA==
+X-Received: by 2002:a05:6820:2610:b0:5fe:9edb:eafe with SMTP id
+ 006d021491bc7-60b9fba1696mr6644450eaf.5.1748357186681; 
+ Tue, 27 May 2025 07:46:26 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-609f2f58b94sm4793261eaf.17.2025.05.27.07.46.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 May 2025 07:46:25 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <CAFLszTitaKMU84qGpu_RqVi6HJ1C5F92vy4eZg17PDoVAGZGWg@mail.gmail.com>
+References: <CAFLszTitaKMU84qGpu_RqVi6HJ1C5F92vy4eZg17PDoVAGZGWg@mail.gmail.com>
+Subject: Re: Please pull u-boot-dm into -next
+Message-Id: <174835718543.2857927.15275163345249546039.b4-ty@konsulko.com>
+Date: Tue, 27 May 2025 08:46:25 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] watchdog: don't autostart watchdog on STM32MP
- architecture
-To: Antonio Borneo <antonio.borneo@foss.st.com>, <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>, =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?=
- <clement.legoffic@foss.st.com>
-References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
- <20250523094658.299730-5-antonio.borneo@foss.st.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250523094658.299730-5-antonio.borneo@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-27_07,2025-05-27_01,2025-03-28_01
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,127 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 27 May 2025 13:15:14 +0100, Simon Glass wrote:
+
+> This is for -next
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/26346
+> (note that x86 boards and RISC-V board don't work in your tree at present)
+> 
+> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=79&view=results
+> 
+> 
+> [...]
+
+Merged into u-boot/next, thanks!
+
+-- 
+Tom
 
 
-On 5/23/25 11:46, Antonio Borneo wrote:
-> From: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> On STM32MP reference boards, the watchdog is started by a previous
-> boot stage (e.g. bootrom or secure OS), so the config flag
-> WATCHDOG_AUTOSTART is not required.
-> It's preferable to rely on the DT properties "u-boot,autostart" or
-> "u-boot,noautostart", if needed.
-> 
-> For backward compatibility on defconfigs that are based on SPL,
-> thus cannot rely on a previous boot stage for starting the
-> watchdog, enable WATCHDOG_AUTOSTART in their respective defconfig.
-> The change in stm32mp15_dhsom.config is propagated to:
-> - configs/stm32mp15_dhcom_basic.config
-> - configs/stm32mp15_dhcor_basic.config
-> and then to:
-> - stm32mp15_dhcom_basic_defconfig
-> - stm32mp15_dhcom_drc02_basic_defconfig
-> - stm32mp15_dhcom_pdk2_basic_defconfig
-> - stm32mp15_dhcom_picoitx_basic_defconfig
-> - stm32mp15_dhcor_avenger96_basic_defconfig
-> - stm32mp15_dhcor_basic_defconfig
-> - stm32mp15_dhcor_drc_compact_basic_defconfig
-> - stm32mp15_dhcor_testbench_basic_defconfig
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
-> ---
->  configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig          | 1 +
->  configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig         | 1 +
->  configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig | 1 +
->  configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig     | 1 +
->  configs/stm32mp15_basic_defconfig                           | 1 +
->  configs/stm32mp15_dhsom.config                              | 1 +
->  drivers/watchdog/Kconfig                                    | 1 +
->  7 files changed, 7 insertions(+)
-> 
-> diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-> index fc095ac0de1..4c371c17334 100644
-> --- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-> +++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
->  CONFIG_SYSRESET_SYSCON=y
-> +CONFIG_WATCHDOG_AUTOSTART=y
->  CONFIG_WDT=y
->  CONFIG_WDT_STM32MP=y
->  # CONFIG_BINMAN_FDT is not set
-> diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-> index b243c45d690..7463eb5c95d 100644
-> --- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-> +++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
->  CONFIG_SYSRESET_SYSCON=y
-> +CONFIG_WATCHDOG_AUTOSTART=y
->  CONFIG_WDT=y
->  CONFIG_WDT_STM32MP=y
->  # CONFIG_BINMAN_FDT is not set
-> diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> index e635c726459..e9f5bd32721 100644
-> --- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> +++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
->  CONFIG_SYSRESET_SYSCON=y
-> +CONFIG_WATCHDOG_AUTOSTART=y
->  CONFIG_WDT=y
->  CONFIG_WDT_STM32MP=y
->  # CONFIG_BINMAN_FDT is not set
-> diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-> index 9e7849ff8f0..aefb78935b0 100644
-> --- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-> +++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_DM_RTC=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
->  CONFIG_SYSRESET_SYSCON=y
-> +CONFIG_WATCHDOG_AUTOSTART=y
->  CONFIG_WDT=y
->  CONFIG_WDT_STM32MP=y
->  # CONFIG_BINMAN_FDT is not set
-> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-> index e3090ec2a50..241c9402560 100644
-> --- a/configs/stm32mp15_basic_defconfig
-> +++ b/configs/stm32mp15_basic_defconfig
-> @@ -191,6 +191,7 @@ CONFIG_SPLASH_SCREEN_ALIGN=y
->  CONFIG_BMP_16BPP=y
->  CONFIG_BMP_24BPP=y
->  CONFIG_BMP_32BPP=y
-> +CONFIG_WATCHDOG_AUTOSTART=y
->  CONFIG_WDT=y
->  CONFIG_WDT_STM32MP=y
->  # CONFIG_BINMAN_FDT is not set
-> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-> index c84116482f6..565b49584e3 100644
-> --- a/configs/stm32mp15_dhsom.config
-> +++ b/configs/stm32mp15_dhsom.config
-> @@ -76,3 +76,4 @@ CONFIG_PREBOOT="run dh_preboot"
->  CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
->  CONFIG_TARGET_DH_STM32MP1_PDK2=y
->  CONFIG_USE_SERVERIP=y
-> +CONFIG_WATCHDOG_AUTOSTART=y
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 1bb67f50352..510330be8a5 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -15,6 +15,7 @@ config WATCHDOG_AUTOSTART
->  	bool "Automatically start watchdog timer"
->  	depends on WDT
->  	default n if ARCH_SUNXI
-> +	default n if ARCH_STM32MP
->  	default y
->  	help
->  	  Automatically start watchdog timer and start servicing it during
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
