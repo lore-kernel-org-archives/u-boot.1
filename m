@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6262C5B542
-	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 22:06:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068E5C5B542
+	for <u-boot@archiver.kernel.org>; Tue, 27 May 2025 22:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC40F838BD;
-	Wed, 28 May 2025 00:06:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=hpe.com
+	by phobos.denx.de (Postfix) with ESMTP id 29F0B838CB;
+	Wed, 28 May 2025 00:18:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="ksK9hW8e";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CZ22bBXs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ACBF838BD; Wed, 28 May 2025 00:06:37 +0200 (CEST)
-Received: from mx0a-002e3701.pphosted.com (mx0a-002e3701.pphosted.com
- [148.163.147.86])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 535FE82E2D; Wed, 28 May 2025 00:18:45 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0116B8315B
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 00:06:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4990A82E2D
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 00:18:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=hpe.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=verdun@hpe.com
-Received: from pps.filterd (m0134420.ppops.net [127.0.0.1])
- by mx0b-002e3701.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RKIQl6022543;
- Tue, 27 May 2025 22:06:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=pps0720; bh=DoN8+nMrKYvs6
- MKy/S3z2Q+tK0fJmAVUbj1YqXN4qo4=; b=ksK9hW8eR2kBpF9plCkf9Fod4xRt/
- wFal5bQhqlPWwHv5gvES5ZORVptP44al0IuF8M5ydOW2O39RlG0jZoezK6dIv9+i
- hoRpcDi1bqzcUTJnZQuvsOLr7UUHxLg/G71MXegumvf0ANqnLibKN6Htfg6zF0S7
- uTsmQTKCw0CMm/QF+r6aTUcCfxgBKXFie+12qyH8tQU1WI93F5gc9jWZfrUzo3d2
- 9UL1ykdpavCOTUXxThlpXkYQ0FppAK0bW9wJRH0jg/0lhHnzDCgVawMV/0WZ8iJX
- cDebnXzzICqpNsbiJsZaPftX2JX25xie444s7TXJiFselbU9pTbyoq19w==
-Received: from p1lg14878.it.hpe.com ([16.230.97.204])
- by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 46wmafrpra-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 22:06:31 +0000 (GMT)
-Received: from p1lg14885.dc01.its.hpecorp.net (unknown [10.119.18.236])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by p1lg14878.it.hpe.com (Postfix) with ESMTPS id A281E13153;
- Tue, 27 May 2025 22:06:30 +0000 (UTC)
-Received: from hpe.com (unknown [16.231.227.36])
- by p1lg14885.dc01.its.hpecorp.net (Postfix) with ESMTP id 1BBFA8065ED;
- Tue, 27 May 2025 22:06:30 +0000 (UTC)
-From: verdun@hpe.com
-To: verdun@hpe.com, jmverdun3@gmail.com, u-boot@lists.denx.de
-Subject: [PATCH v8 1/1] Initial support for Wiznet W5500
-Date: Tue, 27 May 2025 22:06:18 +0000
-Message-ID: <20250527220618.7415-2-verdun@hpe.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-72ec58e45baso2141666a34.2
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 15:18:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1748384320; x=1748989120; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=msnsdakTiUqT/RxM7R7iHk8ZQtl65N4UB6lEGkWYnbo=;
+ b=CZ22bBXsPA0XAA2fvnSh+jpecZ472MAcrIrwZwuZ1r9kajczAx8Jf5X61chjauFLHW
+ W4eB2dIAq769d5J+Ds49rWdo4P2g7lC3SdvnJwtKo0UI6Hfy7qgq8shasDYPTCtJu2yb
+ NNwhjt6MX7kt16QzR6hYHRuXMaUaFWuThoL2Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748384320; x=1748989120;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=msnsdakTiUqT/RxM7R7iHk8ZQtl65N4UB6lEGkWYnbo=;
+ b=iTlVvflTfkQM2iV+jKUQ0ytbzAPcxMRKc50wtk8JGmTF0x20RWv960XFED4UuSme9y
+ OyZRxudTzH+14vhDFc6uBgsg6RqEITn51d48zTELVuOvpkIRxn6WXpZs2MowF9hC3e9T
+ HEVHypDpx2PDuMVJzqBgDju3cwwDwlP72eIfihKS5e6kUSvNLlNNQYvCEew0CBDLr+uZ
+ CP59PoUfM5uDF7yz3gHvacNaEQTzpPsBX4JvXDNgrBrw3fAVtRRroeRDpOlQ15qohMK4
+ gHg1ZH3fCL4c/IbrylvYNPRkL3vmwq3YWw50eMn3npW4qM2gUyWpFGDALglcgPlxR5vZ
+ npkA==
+X-Gm-Message-State: AOJu0YwWFp4LuD+s+xxj2/wBtVTPv1ajpYxWZDxgJioyP8ajiBXFDv+E
+ MYXu6WZ2q5c6D6Fs4O4xFc7xwOJRv0/S/32VHp72bfGy5Ero0kB8qEiRHCsk2Bn6cveYncyvmt1
+ Yp1SR64s=
+X-Gm-Gg: ASbGncuKU/ysLa+WUhAA0QNTyQ72ejm8e1/9WaIMDxubN6uZhLF+bppgIZtGgsRsf78
+ w5YW6FCsX+MmF5nHzPP2R3pdUg65jwTUNvWm8UrJRwqqNKxD31u2bkB4Bjos6sxuYWEAekWwX81
+ LvB5Yu/K3ooyzvAcqQ4c27APwF4oJ5408JNs3r6pCOeYrGW134JCNQnvNFRokeuw1rXenrUzgat
+ talROUqWNMIwzDRRRDfSmjdoCodMu5v+N46HeSR/Msov7QA0MI1EjQlA4NE99yA+S4gy+721wfg
+ q81DF2SzW5LN6t4eRA+uKdglQR/t/arC4jHpTrajtzNmsUEnVzE9OAGvs25OdbbO+4F76ao5VnK
+ R0sYktTxFPemFbKA=
+X-Google-Smtp-Source: AGHT+IEFOZFLfVEeJYRKZVovsf+gTkF5j1HrBfzrtm91OA531UVlGaKCKcuybDeQwYFZ1UoZqQFLrg==
+X-Received: by 2002:a05:6808:1649:b0:3fc:1f7b:c3b3 with SMTP id
+ 5614622812f47-40646842b42mr7946537b6e.33.1748384319671; 
+ Tue, 27 May 2025 15:18:39 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-60bd7d39abasm51124eaf.32.2025.05.27.15.18.38
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 May 2025 15:18:38 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/2] include/dt-bindings: Remove unused headers
+Date: Tue, 27 May 2025 16:18:33 -0600
+Message-ID: <20250527221837.2987226-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250527220618.7415-1-verdun@hpe.com>
-References: <20250527220618.7415-1-verdun@hpe.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI3MDE4NiBTYWx0ZWRfX3ovwBAsdOGsr
- vDfqyiNVehsDuAp/KpmTHNRQZlG3fCe8W7cR7A6m2WkbqwxLVhyhNodC0LsHKByrLB+23+Siol9
- jmXrNk2rV0CbdfKORPVfEcgKHFbHinpDC5ETlK4DMjGPBCGKZSSHwgG0rXxyLb9c59+QuWP6LFH
- +qodnfmfQ6tfklIPhwfHohv9DhWaeZcjY4aCEVwG9NzsXOc6A7+gvUNd1zlxiDWnuCRKcNFqQ/U
- wHE+x9lKT8KDol77jzx57tWja+uXgQl/ReiGWId7AmM7XOLLLS0CU5HKlNnRVdSh3zvySojCAXj
- W/eP0AfiFxMHZzyr0LX3QSSAQIXzX+qCwboP6p8FOvmahjF2L80bCRPV5unZNImbik6qJ2gALpy
- dsXuvW2J
-X-Authority-Analysis: v=2.4 cv=QPBoRhLL c=1 sm=1 tr=0 ts=68363767 cx=c_pps
- a=UObrlqRbTUrrdMEdGJ+KZA==:117 a=UObrlqRbTUrrdMEdGJ+KZA==:17
- a=dt9VzEwgFbYA:10 a=NEAV23lmAAAA:8 a=LRAzMRsBAAAA:8 a=n3L1Gg68AAAA:8
- a=e4MKTBlXAAAA:8 a=MvuuwTCpAAAA:8 a=RAAhVHCUAAAA:8
- a=WMS3Zvg_s6Hi7s_pieIA:9 a=eiwAIEGCQfgA:10 a=d6GWgvC6fySyAPvCsraX:22
- a=p_7pKuLLFrodEiwWNAVu:22 a=y3a8Nef1vbq10CTKF07I:22
-X-Proofpoint-GUID: kJt_UIru3Lyzd4_qGvYl3TafEBFVdmyv
-X-Proofpoint-ORIG-GUID: kJt_UIru3Lyzd4_qGvYl3TafEBFVdmyv
-X-HPE-SCL: -1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-27_10,2025-05-27_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
- malwarescore=0 clxscore=1015 mlxlogscore=999 mlxscore=0 adultscore=0
- impostorscore=0 classifier=spam authscore=0 adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2505160000 definitions=main-2505270186
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,676 +91,1144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jean-Marie Verdun <verdun@hpe.com>
+As part of moving to using OF_UPSTREAM and so the upstream dt-bindings
+headers we have a number of these headers that are in our include
+directory and not referenced by any code outside of dts/upstream. We can
+remove these now to prevent future conflicts.
 
-Add support for the Wiznet W5500 spi to ethernet controller
-
-Signed-off-by: Jean-Marie Verdun <verdun@hpe.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/net/Kconfig  |   9 +
- drivers/net/Makefile |   1 +
- drivers/net/w5500.c  | 621 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 631 insertions(+)
- create mode 100644 drivers/net/w5500.c
+ include/dt-bindings/arm/coresight-cti-dt.h    |  37 ----
+ include/dt-bindings/clock/omap4.h             | 149 --------------
+ include/dt-bindings/clock/omap5.h             | 129 ------------
+ include/dt-bindings/clock/sun4i-a10-pll2.h    |  53 -----
+ include/dt-bindings/clock/xlnx-versal-clk.h   | 123 ------------
+ .../dt-bindings/interrupt-controller/irq-st.h |  30 ---
+ .../interrupt-controller/mips-gic.h           |   9 -
+ include/dt-bindings/leds/leds-netxbig.h       |  18 --
+ include/dt-bindings/leds/leds-ns2.h           |   9 -
+ include/dt-bindings/mux/ti-serdes.h           | 190 ------------------
+ include/dt-bindings/net/mscc-phy-vsc8531.h    |  31 ---
+ include/dt-bindings/phy/phy-am654-serdes.h    |  13 --
+ .../dt-bindings/pinctrl/brcm,pinctrl-ns3.h    |  41 ----
+ include/dt-bindings/pinctrl/k3.h              |  50 -----
+ .../dt-bindings/reset/xlnx-versal-resets.h    | 105 ----------
+ include/dt-bindings/sound/tlv320aic31xx.h     |  14 --
+ 16 files changed, 1001 deletions(-)
+ delete mode 100644 include/dt-bindings/arm/coresight-cti-dt.h
+ delete mode 100644 include/dt-bindings/clock/omap4.h
+ delete mode 100644 include/dt-bindings/clock/omap5.h
+ delete mode 100644 include/dt-bindings/clock/sun4i-a10-pll2.h
+ delete mode 100644 include/dt-bindings/clock/xlnx-versal-clk.h
+ delete mode 100644 include/dt-bindings/interrupt-controller/irq-st.h
+ delete mode 100644 include/dt-bindings/interrupt-controller/mips-gic.h
+ delete mode 100644 include/dt-bindings/leds/leds-netxbig.h
+ delete mode 100644 include/dt-bindings/leds/leds-ns2.h
+ delete mode 100644 include/dt-bindings/mux/ti-serdes.h
+ delete mode 100644 include/dt-bindings/net/mscc-phy-vsc8531.h
+ delete mode 100644 include/dt-bindings/phy/phy-am654-serdes.h
+ delete mode 100644 include/dt-bindings/pinctrl/brcm,pinctrl-ns3.h
+ delete mode 100644 include/dt-bindings/pinctrl/k3.h
+ delete mode 100644 include/dt-bindings/reset/xlnx-versal-resets.h
+ delete mode 100644 include/dt-bindings/sound/tlv320aic31xx.h
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 950ed0f25a9..a2ce2aecd78 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -15,6 +15,15 @@ config DM_ETH
- 	  This is currently implemented in net/eth-uclass.c
- 	  Look in include/net.h for details.
- 
-+config W5500
-+	bool "W5500 device driver"
-+	depends on SPI
-+	help
-+	  Enable w5500 driver
-+
-+	  Adds support for Wiznet W5500 device. The device must be attached
-+	  to a SPI bus.
-+
- config SPL_DM_ETH
- 	depends on SPL_NET
- 	def_bool y
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index 67bba3a8536..6d85c38d869 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -103,6 +103,7 @@ obj-$(CONFIG_SUN8I_EMAC) += sun8i_emac.o
- obj-$(CONFIG_TSEC_ENET) += tsec.o fsl_mdio.o
- obj-$(CONFIG_TULIP) += dc2114x.o
- obj-$(CONFIG_VSC7385_ENET) += vsc7385.o
-+obj-$(CONFIG_W5500) += w5500.o
- obj-$(CONFIG_XILINX_AXIEMAC) += xilinx_axi_emac.o
- obj-$(CONFIG_XILINX_AXIMRMAC) += xilinx_axi_mrmac.o
- obj-$(CONFIG_XILINX_EMACLITE) += xilinx_emaclite.o
-diff --git a/drivers/net/w5500.c b/drivers/net/w5500.c
-new file mode 100644
-index 00000000000..bb7c9d3e2bb
---- /dev/null
-+++ b/drivers/net/w5500.c
-@@ -0,0 +1,620 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ *  Copyright Hewlett Packard Enterprise Development LP.
-+ *
-+ * Jean-Marie Verdun <verdun@hpe.com>
-+ *
-+ * Inspired from the linux kernel driver from:
-+ * - Copyright (C) 2006-2008 WIZnet Co.,Ltd.
-+ * - Copyright (C) 2012 Mike Sinkovsky <msink@permonline.ru>
-+ *
-+ * available at
-+ * - https://github.com/torvalds/linux/blob/master/drivers/net/ethernet/wiznet/w5100.c
-+ *
-+ * Datasheet:
-+ * - http://www.wiznet.co.kr/wp-content/uploads/wiznethome/Chip/W5100/Document/W5100_Datasheet_v1.2.6.pdf
-+ * - http://wiznethome.cafe24.com/wp-content/uploads/wiznethome/Chip/W5200/Documents/W5200_DS_V140E.pdf
-+ * - http://wizwiki.net/wiki/lib/exe/fetch.php?media=products:w5500:w5500_ds_v106e_141230.pdf
-+ *
-+ */
-+
-+#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <spi.h>
-+#include <net.h>
-+#include <asm/global_data.h>
-+#include <dm/device_compat.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+#include <net.h>
-+#include <malloc.h>
-+
-+#define BUFFER_SZ       16384
-+#define MAX_PACKET_SZ	1500
-+#define W5100_SPI_WRITE_OPCODE 0xf0
-+#define W5100_SPI_READ_OPCODE 0x0f
-+#define W5100_SHAR              0x0009	/* Source MAC address */
-+#define W5500_S0_REGS           0x10000
-+#define S0_REGS(priv)           ((priv)->s0_regs)
-+#define W5100_MR                0x0000	/* Mode Register */
-+#define   MR_RST                  0x80	/* S/W reset */
-+#define   MR_PB                   0x10	/* Ping block */
-+
-+#define W5100_Sn_MR             0x0000	/* Sn Mode Register */
-+#define W5100_Sn_CR             0x0001	/* Sn Command Register */
-+#define W5100_Sn_IR             0x0002	/* Sn Interrupt Register */
-+#define W5100_Sn_SR             0x0003	/* Sn Status Register */
-+#define W5100_Sn_TX_FSR         0x0020	/* Sn Transmit free memory size */
-+#define W5100_Sn_TX_RD          0x0022	/* Sn Transmit memory read pointer */
-+#define W5100_Sn_TX_WR          0x0024	/* Sn Transmit memory write pointer */
-+#define W5100_Sn_RX_RSR         0x0026	/* Sn Receive free memory size */
-+#define W5100_Sn_RX_RD          0x0028	/* Sn Receive memory read pointer */
-+
-+#define W5100_S0_MR(priv)       (S0_REGS(priv) + W5100_Sn_MR)
-+
-+#define   S0_MR_MACRAW            0x04	/* MAC RAW mode */
-+#define   S0_MR_MF                0x40	/* MAC Filter for W5100 and W5200 */
-+#define   W5500_S0_MR_MF          0x80	/* MAC Filter for W5500 */
-+#define W5100_S0_MR(priv)       (S0_REGS(priv) + W5100_Sn_MR)
-+
-+#define   S0_MR_MACRAW            0x04	/* MAC RAW mode */
-+#define   S0_MR_MF                0x40	/* MAC Filter for W5100 and W5200 */
-+#define   W5500_S0_MR_MF          0x80	/* MAC Filter for W5500 */
-+
-+/*
-+ * W5100 and W5200 common registers about the same with the W5500
-+ */
-+#define W5100_IMR               0x0016	/* Interrupt Mask Register */
-+#define   IR_S0                   0x01	/* S0 interrupt */
-+#define W5100_RTR               0x0017	/* Retry Time-value Register */
-+#define   RTR_DEFAULT             2000	/* =0x07d0 (2000) */
-+#define W5500_SIMR              0x0018	/* Socket Interrupt Mask Register */
-+#define W5500_RTR               0x0019	/* Retry Time-value Register */
-+
-+#define W5100_S0_CR(priv)       (S0_REGS(priv) + W5100_Sn_CR)
-+#define   S0_CR_OPEN              0x01	/* OPEN command */
-+#define   S0_CR_CLOSE             0x10	/* CLOSE command */
-+#define   S0_CR_SEND              0x20	/* SEND command */
-+#define   S0_CR_RECV              0x40	/* RECV command */
-+#define W5100_S0_IR(priv)       (S0_REGS(priv) + W5100_Sn_IR)
-+#define   S0_IR_SENDOK            0x10	/* complete sending */
-+#define   S0_IR_RECV              0x04	/* receiving data */
-+#define W5100_S0_SR(priv)       (S0_REGS(priv) + W5100_Sn_SR)
-+#define   S0_SR_MACRAW            0x42	/* mac raw mode */
-+#define W5100_S0_TX_FSR(priv)   (S0_REGS(priv) + W5100_Sn_TX_FSR)
-+#define W5100_S0_TX_RD(priv)    (S0_REGS(priv) + W5100_Sn_TX_RD)
-+#define W5100_S0_TX_WR(priv)    (S0_REGS(priv) + W5100_Sn_TX_WR)
-+#define W5100_S0_RX_RSR(priv)   (S0_REGS(priv) + W5100_Sn_RX_RSR)
-+#define W5100_S0_RX_RD(priv)    (S0_REGS(priv) + W5100_Sn_RX_RD)
-+
-+#define W5500_TX_MEM_START      0x20000
-+#define W5500_TX_MEM_SIZE       0x04000
-+#define W5500_RX_MEM_START      0x30000
-+#define W5500_RX_MEM_SIZE       0x04000
-+
-+#define W5500_Sn_RXMEM_SIZE(n)  \
-+		(0x1001e + (n) * 0x40000)	/* Sn RX Memory Size */
-+#define W5500_Sn_TXMEM_SIZE(n)  \
-+		(0x1001f + (n) * 0x40000)	/* Sn TX Memory Size */
-+
-+/**
-+ * struct eth_w5500_priv - memory for w5500 driver
-+ */
-+struct eth_w5500_priv {
-+	uchar host_hwaddr[ARP_HLEN];
-+	uchar * recv_packet_buffer[PKTBUFSRX];
-+	int recv_packet_length[PKTBUFSRX];
-+	int recv_packets;
-+	const struct dm_spi_ops *spi_ops;
-+	struct udevice **spi_dev;
-+	u32 s0_regs;
-+	u32 s0_tx_buf;
-+	u16 s0_tx_buf_size;
-+	u32 s0_rx_buf;
-+	u16 s0_rx_buf_size;
-+	bool promisc;
-+	bool disabled;
-+	u32 msg_enable;
-+	u16 offset;
-+	u8 *buffin;
-+	u8 *buffout;
-+	void *priv;
-+};
-+
-+static int xfer(struct udevice *dev, void *dout, unsigned int bout,
-+		void *din, unsigned int bin)
-+{
-+	/* Ok the xfer function in uboot is symmetrical
-+	 * (write and read operation happens at the same time)
-+	 * w5500 requires bytes send followed by receive operation on the MISO line
-+	 * So we need to create a buffer which contain bout+bin bytes and pass the various
-+	 * pointer to the xfer function
-+	 */
-+
-+	struct udevice *bus = dev_get_parent(dev);
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	u8 *buffin = priv->buffin;
-+	u8 *buffout = priv->buffout;
-+	int ret;
-+
-+	if ((bout + bin) < BUFFER_SZ) {
-+		for (int i = 0; i < bout; i++) {
-+			buffout[i] = ((u8 *)(dout))[i];
-+			buffin[i] = 0;
-+		}
-+		for (int i = bout; i < (bin + bout); i++) {
-+			buffin[i] = 0;
-+			buffout[i] = 0;
-+		}
-+		if (!bus)
-+			return -1;
-+
-+		ret = dm_spi_xfer(dev, 8 * (bout + bin), buffout, buffin,
-+				  SPI_XFER_BEGIN | SPI_XFER_END);
-+		if (!ret)
-+			for (int i = bout; i < (bin + bout); i++)
-+				((u8 *)(din))[bin + bout - i - 1] = buffin[i];
-+		return ret;
-+	}
-+
-+	return -ENOMEM;
-+}
-+
-+static int w5500_writebulk(struct udevice *dev, u32 addr, const u8 *buf,
-+			   int len)
-+{
-+	u8 *cmd;
-+	int i;
-+	int ret;
-+	u8 bank;
-+	u8 din = 0;
-+
-+	bank = (addr >> 16);
-+	if (bank > 0)
-+		bank = bank << 3;
-+	cmd = (u8 *)malloc(3 + len);
-+	if (!cmd)
-+		return -ENOMEM;
-+
-+	cmd[0] = (addr >> 8) & 0xff;
-+	cmd[1] = addr & 0xff;
-+	cmd[2] = bank | 0x4;
-+
-+	switch (len) {
-+	case 1:
-+		cmd[3] = *buf;
-+		break;
-+	case 2:
-+		cmd[3] = buf[1];
-+		cmd[4] = buf[0];
-+		break;
-+	default:
-+		for (i = 0; i < len; i++)
-+			cmd[i + 3] = buf[i];
-+	}
-+	ret = xfer(dev, cmd, len + 3, &din, 0);
-+	free(cmd);
-+	return ret;
-+}
-+
-+static int w5500_readbulk(struct udevice *dev, u32 addr, u8 *buf, int len)
-+{
-+	u8 *data;
-+	u8 cmd[3];
-+	int i;
-+	int ret;
-+	u16 twobytes;
-+	u8 bank;
-+	u8 onebyte;
-+
-+	switch (len) {
-+	case 1:
-+		data = &onebyte;
-+		break;
-+	case 2:
-+		data = (u8 *)&twobytes;
-+		break;
-+	default:
-+		data = (u8 *)malloc(len);
-+		if (!data) {
-+			buf = NULL;
-+			return -ENOMEM;
-+		}
-+	}
-+
-+	bank = (addr >> 16);
-+
-+	if (bank > 0)
-+		bank = bank << 3;
-+
-+	cmd[0] = addr >> 8;
-+	cmd[1] = addr & 0xff;
-+	cmd[2] = bank;
-+
-+	ret = xfer(dev, cmd, sizeof(cmd), data, len);
-+
-+	if (ret) {
-+		if (len > 2)
-+			free(data);
-+		return ret;
-+	}
-+	if (len > 2) {
-+		for (i = 0; i < len; i++)
-+			buf[(len - 1) - i] = data[i];
-+		free(data);
-+	} else {
-+		for (i = 0; i < len; i++)
-+			buf[i] = data[i];
-+	}
-+
-+	return 0;
-+}
-+
-+static int w5500_readbuf(struct udevice *dev, u16 offset, u8 *buf, int len)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	const u32 mem_start = priv->s0_rx_buf;
-+	u32 addr;
-+	int remain = 0;
-+	int ret;
-+	const u16 mem_size = priv->s0_rx_buf_size;
-+
-+	offset %= mem_size;
-+	addr = mem_start + offset;
-+
-+	if (offset + len > mem_size) {
-+		remain = (offset + len) % mem_size;
-+		len = mem_size - offset;
-+	}
-+	ret = w5500_readbulk(dev, addr, buf, len);
-+	if (ret || !remain)
-+		return ret;
-+	return w5500_readbulk(dev, mem_start, buf + len, remain);
-+}
-+
-+static int w5500_writebuf(struct udevice *dev, u16 offset, const u8 *buf,
-+			  int len)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	const u32 mem_start = priv->s0_tx_buf;
-+	u32 addr;
-+	int ret;
-+	int remain = 0;
-+	const u16 mem_size = priv->s0_tx_buf_size;
-+
-+	offset %= mem_size;
-+	addr = mem_start + offset;
-+
-+	if (offset + len > mem_size) {
-+		remain = (offset + len) % mem_size;
-+		len = mem_size - offset;
-+	}
-+
-+	ret = w5500_writebulk(dev, addr, buf, len);
-+	if (ret || !remain)
-+		return ret;
-+
-+	return w5500_writebulk(dev, mem_start, buf + len, remain);
-+}
-+
-+static u8 w5500_cmd_poll(struct udevice *dev, u32 addr, int len)
-+{
-+	u8 cmd[3];
-+	u8 bank;
-+	u8 data;
-+	int ret;
-+
-+	bank = (addr >> 16);
-+
-+	if (bank > 0)
-+		bank = bank << 3;
-+
-+	cmd[0] = addr >> 8;
-+	cmd[1] = addr & 0xff;
-+	cmd[2] = bank;
-+
-+	ret = xfer(dev, cmd, sizeof(cmd), &data, len);
-+	if (ret < 0)
-+		return ret;
-+	return data;
-+}
-+
-+static int w5500_command(struct udevice *dev, u8 cmd)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	u8 val;
-+	u8 check;
-+	int ret;
-+
-+	ret = w5500_writebulk(dev, W5100_S0_CR(priv), &cmd, 1);
-+
-+	if (ret)
-+		return ret;
-+
-+	ret = read_poll_timeout(w5500_cmd_poll, val, (val < 0 || val == 0),
-+				10, 5000, dev, W5100_S0_CR(priv), 1);
-+
-+	return ret;
-+}
-+
-+static int w5500_eth_send(struct udevice *dev, void *packet, int length)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	int ret;
-+	u16 offset;
-+	u16 addr;
-+
-+	if (priv->disabled)
-+		return 0;
-+
-+	ret = w5500_readbulk(dev, W5100_S0_TX_WR(priv), (u8 *)&offset, 2);
-+	if (ret)
-+		return ret;
-+
-+	ret = w5500_writebuf(dev, offset, packet, length);
-+	if (ret)
-+		return ret;
-+
-+	addr = offset + length;
-+	ret = w5500_writebulk(dev, W5100_S0_TX_WR(priv), (u8 *)&addr, 2;
-+	if (ret)
-+		return ret;
-+
-+	return w5500_command(dev, S0_CR_SEND);
-+}
-+
-+static int w5500_eth_recv(struct udevice *dev, int flags, u8 **packetp)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	u8 *data;
-+	int ret;
-+	u16 rx_len;
-+	u16 offset;
-+	u16 tmp;
-+	u16 rx_buf_len;
-+	u8 i;
-+
-+	ret = w5500_readbulk(dev, W5100_S0_RX_RSR(priv), (u8 *)&rx_buf_len, 2);
-+	if (ret)
-+		return -EAGAIN;
-+
-+	/*
-+	 * w5500 is updating rx_buf_len as soon as bytes are received
-+	 * to avoid reading partial data we must wait for that register to
-+	 * stay stable between two read otherwise we might be issuing
-+	 * reading operations while buffer hasn't been completed by the driver
-+	 * per architectural specifications
-+	 * (W5500 Datasheet specifies "Therefore, it is recommended that you
-+	 * read all 16-bits twice or more until getting the same value." into
-+	 * Sn_RX_RSR Register description.
-+	 */
-+	ret = w5500_readbulk(dev, W5100_S0_RX_RSR(priv), (u8 *)&tmp, 2);
-+	if (ret)
-+		return -EAGAIN;
-+	while (tmp != rx_buf_len) {
-+		rx_buf_len = tmp;
-+		ret = w5500_readbulk(dev, W5100_S0_RX_RSR(priv), (u8 *)&tmp, 2);
-+		if (ret)
-+			return -EAGAIN;
-+	}
-+
-+	if (rx_buf_len == 0)
-+		return -EAGAIN;
-+
-+	ret = w5500_readbulk(dev, W5100_S0_RX_RD(priv), (u8 *)&offset, 2);
-+	if (ret)
-+		return -EAGAIN;
-+
-+	rx_len = rx_buf_len - 2;
-+
-+	for (i = 0; i < PKTBUFSRX ; i++)
-+		if (priv->recv_packet_length[i] == 0)
-+			break;
-+
-+	if (i > PKTBUFSRX)
-+		return -ENOMEM;
-+
-+	data = (u8 *)priv->recv_packet_buffer[i];
-+	priv->recv_packet_length[i] = rx_len;
-+
-+	ret = w5500_readbuf(dev, offset + 2, data, rx_len);
-+	if (ret)
-+		return ret;
-+
-+	tmp = offset + 2 + rx_len;
-+	ret = w5500_writebulk(dev, W5100_S0_RX_RD(priv), (u8 *)&tmp, 2);
-+	if (ret)
-+		return ret;
-+
-+	ret = w5500_command(dev, S0_CR_RECV);
-+	if (ret)
-+		return ret;
-+
-+	*packetp = data;
-+	priv->offset += rx_buf_len;
-+	return rx_len;
-+}
-+
-+static int w5500_eth_free_pkt(struct udevice *dev, u8 *packet, int length)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	u8 i;
-+
-+	for (i = 0; i < PKTBUFSRX ; i++)
-+		if (priv->recv_packet_buffer[i] == packet)
-+			priv->recv_packet_length[i] = 0;
-+
-+	return 0;
-+}
-+
-+static void w5500_eth_stop(struct udevice *dev)
-+{
-+	dev_dbg(dev, "eth_w5500: Stop\n");
-+}
-+
-+static void w5500_socket_intr_mask(struct udevice *dev, u8 mask)
-+{
-+	w5500_writebulk(dev, W5500_SIMR, &mask, 1);
-+}
-+
-+static void w5500_disable_intr(struct udevice *dev)
-+{
-+	w5500_socket_intr_mask(dev, 0);
-+}
-+
-+static void w5500_enable_intr(struct udevice *dev)
-+{
-+	w5500_socket_intr_mask(dev, IR_S0);
-+}
-+
-+static int w5500_eth_start(struct udevice *dev)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	dev_dbg(dev, "eth_w5500: Start\n");
-+
-+	u8 mode = S0_MR_MACRAW;
-+
-+	if (!priv->promisc)
-+		mode |= W5500_S0_MR_MF;
-+
-+	ret = w5500_writebulk(dev, W5100_S0_MR(priv), &mode, 1);
-+
-+	if (ret)
-+		return ret;
-+
-+	ret = w5500_command(dev, S0_CR_OPEN);
-+
-+	if (ret)
-+		return ret;
-+
-+	priv->offset = 0;
-+	w5500_enable_intr(dev);
-+
-+	return 0;
-+}
-+
-+static int w5500_eth_write_hwaddr(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+
-+	if (memcmp(priv->host_hwaddr, pdata->enetaddr, ARP_HLEN) != 0) {
-+		memcpy(priv->host_hwaddr, pdata->enetaddr, ARP_HLEN);
-+		w5500_writebulk(dev, W5100_SHAR, priv->host_hwaddr, ARP_HLEN);
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct eth_ops w5500_eth_ops = {
-+	.start = w5500_eth_start,
-+	.send = w5500_eth_send,
-+	.recv = w5500_eth_recv,
-+	.free_pkt = w5500_eth_free_pkt,
-+	.stop = w5500_eth_stop,
-+	.write_hwaddr = w5500_eth_write_hwaddr,
-+};
-+
-+int w5500_eth_probe(struct udevice *dev)
-+{
-+	struct eth_w5500_priv *priv = dev_get_priv(dev);
-+	int i;
-+	u8 tmp;
-+	u16 buf;
-+	int ret;
-+
-+	if (device_get_uclass_id(dev->parent) != UCLASS_SPI) {
-+		dev_dbg(dev, "Error device not attached to a SPI controller\n");
-+		return -ENODEV;
-+	}
-+
-+	priv->buffin = (u8 *)malloc(BUFFER_SZ);
-+
-+	if (!priv->buffin)
-+		return -ENOMEM;
-+
-+	priv->buffout = (u8 *)malloc(BUFFER_SZ);
-+
-+	if (!priv->buffout) {
-+		free(priv->buffin);
-+		return -ENOMEM;
-+	}
-+
-+	for (i = 0; i < PKTBUFSRX ; i++) {
-+		priv->recv_packet_buffer[i] = (u8 *)malloc(MAX_PACKET_SZ);
-+		if (!priv->recv_packet_buffer[i])
-+			goto exit2;
-+		priv->recv_packet_length[i] = 0;
-+	}
-+
-+	tmp = MR_RST;
-+	if (w5500_writebulk(dev, W5100_MR, &tmp, 1))
-+		goto exit1;
-+	tmp = MR_PB;
-+	if (w5500_writebulk(dev, W5100_MR, &tmp, 1))
-+		goto exit1;
-+
-+	ret = w5500_readbulk(dev, W5500_RTR, (u8 *)&buf, 2);
-+	if (ret)
-+		goto exit1;
-+	if (buf != RTR_DEFAULT) {
-+		dev_dbg(dev, "RTR issue in probe .... %x\n", buf);
-+		goto exit1;
-+	}
-+
-+	w5500_disable_intr(dev);
-+
-+	/* Configure internal RX memory as 16K RX buffer and
-+	 * internal TX memory as 16K TX buffer
-+	 */
-+	tmp = 0x10;
-+	if (w5500_writebulk(dev, W5500_Sn_RXMEM_SIZE(0), &tmp, 1))
-+		goto exit1;
-+	if (w5500_writebulk(dev, W5500_Sn_TXMEM_SIZE(0), &tmp, 1))
-+		goto exit1;
-+
-+	tmp = 0;
-+	for (i = 1; i < 8; i++) {
-+		if (w5500_writebulk(dev, W5500_Sn_RXMEM_SIZE(i), &tmp, 1))
-+			goto exit1;
-+		if (w5500_writebulk(dev, W5500_Sn_TXMEM_SIZE(i), &tmp, 1))
-+			goto exit1;
-+	}
-+
-+	priv->s0_regs = W5500_S0_REGS;
-+	priv->s0_tx_buf = W5500_TX_MEM_START;
-+	priv->s0_tx_buf_size = W5500_TX_MEM_SIZE;
-+	priv->s0_rx_buf = W5500_RX_MEM_START;
-+	priv->s0_rx_buf_size = W5500_RX_MEM_SIZE;
-+	priv->offset = 0;
-+
-+	return 0;
-+exit1:
-+	if (priv->buffin)
-+		free(priv->buffin);
-+	if (priv->buffout)
-+		free(priv->buffout);
-+exit2:
-+	for (i = 0; i < PKTBUFSRX ; i++)
-+		if (priv->recv_packet_buffer[i])
-+			free(priv->recv_packet_buffer[i]);
-+	return -EIO;
-+}
-+
-+static const struct udevice_id w5500_eth_ids[] = {
-+	{.compatible = "wiznet,w5500" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(eth_w5500) = {
-+	.name = "eth_w5500",
-+	.id = UCLASS_ETH,
-+	.of_match = w5500_eth_ids,
-+	.probe = w5500_eth_probe,
-+	.ops = &w5500_eth_ops,
-+	.priv_auto = sizeof(struct eth_w5500_priv),
-+	.plat_auto = sizeof(struct eth_pdata),
-+};
+diff --git a/include/dt-bindings/arm/coresight-cti-dt.h b/include/dt-bindings/arm/coresight-cti-dt.h
+deleted file mode 100644
+index 61e7bdf8ea6e..000000000000
+--- a/include/dt-bindings/arm/coresight-cti-dt.h
++++ /dev/null
+@@ -1,37 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for the defined trigger signal
+- * types on CoreSight CTI.
+- */
+-
+-#ifndef _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
+-#define _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
+-
+-#define GEN_IO		0
+-#define GEN_INTREQ	1
+-#define GEN_INTACK	2
+-#define GEN_HALTREQ	3
+-#define GEN_RESTARTREQ	4
+-#define PE_EDBGREQ	5
+-#define PE_DBGRESTART	6
+-#define PE_CTIIRQ	7
+-#define PE_PMUIRQ	8
+-#define PE_DBGTRIGGER	9
+-#define ETM_EXTOUT	10
+-#define ETM_EXTIN	11
+-#define SNK_FULL	12
+-#define SNK_ACQCOMP	13
+-#define SNK_FLUSHCOMP	14
+-#define SNK_FLUSHIN	15
+-#define SNK_TRIGIN	16
+-#define STM_ASYNCOUT	17
+-#define STM_TOUT_SPTE	18
+-#define STM_TOUT_SW	19
+-#define STM_TOUT_HETE	20
+-#define STM_HWEVENT	21
+-#define ELA_TSTART	22
+-#define ELA_TSTOP	23
+-#define ELA_DBGREQ	24
+-#define CTI_TRIG_MAX	25
+-
+-#endif /*_DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H */
+diff --git a/include/dt-bindings/clock/omap4.h b/include/dt-bindings/clock/omap4.h
+deleted file mode 100644
+index 88d73be84b94..000000000000
+--- a/include/dt-bindings/clock/omap4.h
++++ /dev/null
+@@ -1,149 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Copyright 2017 Texas Instruments, Inc.
+- */
+-#ifndef __DT_BINDINGS_CLK_OMAP4_H
+-#define __DT_BINDINGS_CLK_OMAP4_H
+-
+-#define OMAP4_CLKCTRL_OFFSET	0x20
+-#define OMAP4_CLKCTRL_INDEX(offset)	((offset) - OMAP4_CLKCTRL_OFFSET)
+-
+-/* mpuss clocks */
+-#define OMAP4_MPU_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* tesla clocks */
+-#define OMAP4_DSP_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* abe clocks */
+-#define OMAP4_L4_ABE_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_AESS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_MCPDM_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-#define OMAP4_DMIC_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x38)
+-#define OMAP4_MCASP_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x40)
+-#define OMAP4_MCBSP1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x48)
+-#define OMAP4_MCBSP2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x50)
+-#define OMAP4_MCBSP3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x58)
+-#define OMAP4_SLIMBUS1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x60)
+-#define OMAP4_TIMER5_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x68)
+-#define OMAP4_TIMER6_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x70)
+-#define OMAP4_TIMER7_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x78)
+-#define OMAP4_TIMER8_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x80)
+-#define OMAP4_WD_TIMER3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x88)
+-
+-/* l4_ao clocks */
+-#define OMAP4_SMARTREFLEX_MPU_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_SMARTREFLEX_IVA_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-#define OMAP4_SMARTREFLEX_CORE_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x38)
+-
+-/* l3_1 clocks */
+-#define OMAP4_L3_MAIN_1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* l3_2 clocks */
+-#define OMAP4_L3_MAIN_2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_GPMC_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_OCMC_RAM_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-
+-/* ducati clocks */
+-#define OMAP4_IPU_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* l3_dma clocks */
+-#define OMAP4_DMA_SYSTEM_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* l3_emif clocks */
+-#define OMAP4_DMM_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_EMIF1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-#define OMAP4_EMIF2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x38)
+-
+-/* d2d clocks */
+-#define OMAP4_C2C_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* l4_cfg clocks */
+-#define OMAP4_L4_CFG_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_SPINLOCK_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_MAILBOX_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-
+-/* l3_instr clocks */
+-#define OMAP4_L3_MAIN_3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_L3_INSTR_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_OCP_WP_NOC_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x40)
+-
+-/* ivahd clocks */
+-#define OMAP4_IVA_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_SL2IF_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-
+-/* iss clocks */
+-#define OMAP4_ISS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_FDIF_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-
+-/* l3_dss clocks */
+-#define OMAP4_DSS_CORE_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* l3_gfx clocks */
+-#define OMAP4_GPU_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-/* l3_init clocks */
+-#define OMAP4_MMC1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_MMC2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-#define OMAP4_HSI_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x38)
+-#define OMAP4_USB_HOST_HS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x58)
+-#define OMAP4_USB_OTG_HS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x60)
+-#define OMAP4_USB_TLL_HS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x68)
+-#define OMAP4_USB_HOST_FS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xd0)
+-#define OMAP4_OCP2SCP_USB_PHY_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xe0)
+-
+-/* l4_per clocks */
+-#define OMAP4_TIMER10_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x28)
+-#define OMAP4_TIMER11_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-#define OMAP4_TIMER2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x38)
+-#define OMAP4_TIMER3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x40)
+-#define OMAP4_TIMER4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x48)
+-#define OMAP4_TIMER9_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x50)
+-#define OMAP4_ELM_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x58)
+-#define OMAP4_GPIO2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x60)
+-#define OMAP4_GPIO3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x68)
+-#define OMAP4_GPIO4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x70)
+-#define OMAP4_GPIO5_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x78)
+-#define OMAP4_GPIO6_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x80)
+-#define OMAP4_HDQ1W_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x88)
+-#define OMAP4_I2C1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xa0)
+-#define OMAP4_I2C2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xa8)
+-#define OMAP4_I2C3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xb0)
+-#define OMAP4_I2C4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xb8)
+-#define OMAP4_L4_PER_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xc0)
+-#define OMAP4_MCBSP4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xe0)
+-#define OMAP4_MCSPI1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xf0)
+-#define OMAP4_MCSPI2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0xf8)
+-#define OMAP4_MCSPI3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x100)
+-#define OMAP4_MCSPI4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x108)
+-#define OMAP4_MMC3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x120)
+-#define OMAP4_MMC4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x128)
+-#define OMAP4_SLIMBUS2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x138)
+-#define OMAP4_UART1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x140)
+-#define OMAP4_UART2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x148)
+-#define OMAP4_UART3_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x150)
+-#define OMAP4_UART4_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x158)
+-#define OMAP4_MMC5_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x160)
+-
+-/* l4_secure clocks */
+-#define OMAP4_L4_SECURE_CLKCTRL_OFFSET	0x1a0
+-#define OMAP4_L4_SECURE_CLKCTRL_INDEX(offset)	((offset) - OMAP4_L4_SECURE_CLKCTRL_OFFSET)
+-#define OMAP4_AES1_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1a0)
+-#define OMAP4_AES2_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1a8)
+-#define OMAP4_DES3DES_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1b0)
+-#define OMAP4_PKA_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1b8)
+-#define OMAP4_RNG_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1c0)
+-#define OMAP4_SHA2MD5_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1c8)
+-#define OMAP4_CRYPTODMA_CLKCTRL	OMAP4_L4_SECURE_CLKCTRL_INDEX(0x1d8)
+-
+-/* l4_wkup clocks */
+-#define OMAP4_L4_WKUP_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-#define OMAP4_WD_TIMER2_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x30)
+-#define OMAP4_GPIO1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x38)
+-#define OMAP4_TIMER1_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x40)
+-#define OMAP4_COUNTER_32K_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x50)
+-#define OMAP4_KBD_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x78)
+-
+-/* emu_sys clocks */
+-#define OMAP4_DEBUGSS_CLKCTRL	OMAP4_CLKCTRL_INDEX(0x20)
+-
+-#endif
+diff --git a/include/dt-bindings/clock/omap5.h b/include/dt-bindings/clock/omap5.h
+deleted file mode 100644
+index 41775272fd27..000000000000
+--- a/include/dt-bindings/clock/omap5.h
++++ /dev/null
+@@ -1,129 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Copyright 2017 Texas Instruments, Inc.
+- */
+-#ifndef __DT_BINDINGS_CLK_OMAP5_H
+-#define __DT_BINDINGS_CLK_OMAP5_H
+-
+-#define OMAP5_CLKCTRL_OFFSET	0x20
+-#define OMAP5_CLKCTRL_INDEX(offset)	((offset) - OMAP5_CLKCTRL_OFFSET)
+-
+-/* mpu clocks */
+-#define OMAP5_MPU_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* dsp clocks */
+-#define OMAP5_MMU_DSP_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* abe clocks */
+-#define OMAP5_L4_ABE_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-#define OMAP5_AESS_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x28)
+-#define OMAP5_MCPDM_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x30)
+-#define OMAP5_DMIC_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x38)
+-#define OMAP5_MCBSP1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x48)
+-#define OMAP5_MCBSP2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x50)
+-#define OMAP5_MCBSP3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x58)
+-#define OMAP5_TIMER5_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x68)
+-#define OMAP5_TIMER6_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x70)
+-#define OMAP5_TIMER7_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x78)
+-#define OMAP5_TIMER8_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x80)
+-
+-/* l3main1 clocks */
+-#define OMAP5_L3_MAIN_1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* l3main2 clocks */
+-#define OMAP5_L3_MAIN_2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* ipu clocks */
+-#define OMAP5_MMU_IPU_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* dma clocks */
+-#define OMAP5_DMA_SYSTEM_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* emif clocks */
+-#define OMAP5_DMM_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-#define OMAP5_EMIF1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x30)
+-#define OMAP5_EMIF2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x38)
+-
+-/* l4cfg clocks */
+-#define OMAP5_L4_CFG_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-#define OMAP5_SPINLOCK_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x28)
+-#define OMAP5_MAILBOX_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x30)
+-
+-/* l3instr clocks */
+-#define OMAP5_L3_MAIN_3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-#define OMAP5_L3_INSTR_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x28)
+-
+-/* l4per clocks */
+-#define OMAP5_TIMER10_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x28)
+-#define OMAP5_TIMER11_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x30)
+-#define OMAP5_TIMER2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x38)
+-#define OMAP5_TIMER3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x40)
+-#define OMAP5_TIMER4_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x48)
+-#define OMAP5_TIMER9_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x50)
+-#define OMAP5_GPIO2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x60)
+-#define OMAP5_GPIO3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x68)
+-#define OMAP5_GPIO4_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x70)
+-#define OMAP5_GPIO5_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x78)
+-#define OMAP5_GPIO6_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x80)
+-#define OMAP5_I2C1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xa0)
+-#define OMAP5_I2C2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xa8)
+-#define OMAP5_I2C3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xb0)
+-#define OMAP5_I2C4_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xb8)
+-#define OMAP5_L4_PER_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xc0)
+-#define OMAP5_MCSPI1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xf0)
+-#define OMAP5_MCSPI2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xf8)
+-#define OMAP5_MCSPI3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x100)
+-#define OMAP5_MCSPI4_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x108)
+-#define OMAP5_GPIO7_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x110)
+-#define OMAP5_GPIO8_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x118)
+-#define OMAP5_MMC3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x120)
+-#define OMAP5_MMC4_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x128)
+-#define OMAP5_UART1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x140)
+-#define OMAP5_UART2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x148)
+-#define OMAP5_UART3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x150)
+-#define OMAP5_UART4_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x158)
+-#define OMAP5_MMC5_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x160)
+-#define OMAP5_I2C5_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x168)
+-#define OMAP5_UART5_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x170)
+-#define OMAP5_UART6_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x178)
+-
+-/* l4_secure clocks */
+-#define OMAP5_L4_SECURE_CLKCTRL_OFFSET	0x1a0
+-#define OMAP5_L4_SECURE_CLKCTRL_INDEX(offset)	((offset) - OMAP5_L4_SECURE_CLKCTRL_OFFSET)
+-#define OMAP5_AES1_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1a0)
+-#define OMAP5_AES2_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1a8)
+-#define OMAP5_DES3DES_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1b0)
+-#define OMAP5_FPKA_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1b8)
+-#define OMAP5_RNG_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1c0)
+-#define OMAP5_SHA2MD5_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1c8)
+-#define OMAP5_DMA_CRYPTO_CLKCTRL	OMAP5_L4_SECURE_CLKCTRL_INDEX(0x1d8)
+-
+-/* iva clocks */
+-#define OMAP5_IVA_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-#define OMAP5_SL2IF_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x28)
+-
+-/* dss clocks */
+-#define OMAP5_DSS_CORE_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* gpu clocks */
+-#define OMAP5_GPU_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-
+-/* l3init clocks */
+-#define OMAP5_MMC1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x28)
+-#define OMAP5_MMC2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x30)
+-#define OMAP5_USB_HOST_HS_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x58)
+-#define OMAP5_USB_TLL_HS_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x68)
+-#define OMAP5_SATA_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x88)
+-#define OMAP5_OCP2SCP1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xe0)
+-#define OMAP5_OCP2SCP3_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xe8)
+-#define OMAP5_USB_OTG_SS_CLKCTRL	OMAP5_CLKCTRL_INDEX(0xf0)
+-
+-/* wkupaon clocks */
+-#define OMAP5_L4_WKUP_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x20)
+-#define OMAP5_WD_TIMER2_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x30)
+-#define OMAP5_GPIO1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x38)
+-#define OMAP5_TIMER1_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x40)
+-#define OMAP5_COUNTER_32K_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x50)
+-#define OMAP5_KBD_CLKCTRL	OMAP5_CLKCTRL_INDEX(0x78)
+-
+-#endif
+diff --git a/include/dt-bindings/clock/sun4i-a10-pll2.h b/include/dt-bindings/clock/sun4i-a10-pll2.h
+deleted file mode 100644
+index 071c8112d531..000000000000
+--- a/include/dt-bindings/clock/sun4i-a10-pll2.h
++++ /dev/null
+@@ -1,53 +0,0 @@
+-/*
+- * Copyright 2015 Maxime Ripard
+- *
+- * Maxime Ripard <maxime.ripard@free-electrons.com>
+- *
+- * This file is dual-licensed: you can use it either under the terms
+- * of the GPL or the X11 license, at your option. Note that this dual
+- * licensing only applies to this file, and not this project as a
+- * whole.
+- *
+- *  a) This file is free software; you can redistribute it and/or
+- *     modify it under the terms of the GNU General Public License as
+- *     published by the Free Software Foundation; either version 2 of the
+- *     License, or (at your option) any later version.
+- *
+- *     This file is distributed in the hope that it will be useful,
+- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *     GNU General Public License for more details.
+- *
+- * Or, alternatively,
+- *
+- *  b) Permission is hereby granted, free of charge, to any person
+- *     obtaining a copy of this software and associated documentation
+- *     files (the "Software"), to deal in the Software without
+- *     restriction, including without limitation the rights to use,
+- *     copy, modify, merge, publish, distribute, sublicense, and/or
+- *     sell copies of the Software, and to permit persons to whom the
+- *     Software is furnished to do so, subject to the following
+- *     conditions:
+- *
+- *     The above copyright notice and this permission notice shall be
+- *     included in all copies or substantial portions of the Software.
+- *
+- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+- *     OTHER DEALINGS IN THE SOFTWARE.
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_SUN4I_A10_PLL2_H_
+-#define __DT_BINDINGS_CLOCK_SUN4I_A10_PLL2_H_
+-
+-#define SUN4I_A10_PLL2_1X	0
+-#define SUN4I_A10_PLL2_2X	1
+-#define SUN4I_A10_PLL2_4X	2
+-#define SUN4I_A10_PLL2_8X	3
+-
+-#endif /* __DT_BINDINGS_CLOCK_SUN4I_A10_PLL2_H_ */
+diff --git a/include/dt-bindings/clock/xlnx-versal-clk.h b/include/dt-bindings/clock/xlnx-versal-clk.h
+deleted file mode 100644
+index 264d634d226e..000000000000
+--- a/include/dt-bindings/clock/xlnx-versal-clk.h
++++ /dev/null
+@@ -1,123 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  Copyright (C) 2019 Xilinx Inc.
+- *
+- */
+-
+-#ifndef _DT_BINDINGS_CLK_VERSAL_H
+-#define _DT_BINDINGS_CLK_VERSAL_H
+-
+-#define PMC_PLL					1
+-#define APU_PLL					2
+-#define RPU_PLL					3
+-#define CPM_PLL					4
+-#define NOC_PLL					5
+-#define PLL_MAX					6
+-#define PMC_PRESRC				7
+-#define PMC_POSTCLK				8
+-#define PMC_PLL_OUT				9
+-#define PPLL					10
+-#define NOC_PRESRC				11
+-#define NOC_POSTCLK				12
+-#define NOC_PLL_OUT				13
+-#define NPLL					14
+-#define APU_PRESRC				15
+-#define APU_POSTCLK				16
+-#define APU_PLL_OUT				17
+-#define APLL					18
+-#define RPU_PRESRC				19
+-#define RPU_POSTCLK				20
+-#define RPU_PLL_OUT				21
+-#define RPLL					22
+-#define CPM_PRESRC				23
+-#define CPM_POSTCLK				24
+-#define CPM_PLL_OUT				25
+-#define CPLL					26
+-#define PPLL_TO_XPD				27
+-#define NPLL_TO_XPD				28
+-#define APLL_TO_XPD				29
+-#define RPLL_TO_XPD				30
+-#define EFUSE_REF				31
+-#define SYSMON_REF				32
+-#define IRO_SUSPEND_REF				33
+-#define USB_SUSPEND				34
+-#define SWITCH_TIMEOUT				35
+-#define RCLK_PMC				36
+-#define RCLK_LPD				37
+-#define WDT					38
+-#define TTC0					39
+-#define TTC1					40
+-#define TTC2					41
+-#define TTC3					42
+-#define GEM_TSU					43
+-#define GEM_TSU_LB				44
+-#define MUXED_IRO_DIV2				45
+-#define MUXED_IRO_DIV4				46
+-#define PSM_REF					47
+-#define GEM0_RX					48
+-#define GEM0_TX					49
+-#define GEM1_RX					50
+-#define GEM1_TX					51
+-#define CPM_CORE_REF				52
+-#define CPM_LSBUS_REF				53
+-#define CPM_DBG_REF				54
+-#define CPM_AUX0_REF				55
+-#define CPM_AUX1_REF				56
+-#define QSPI_REF				57
+-#define OSPI_REF				58
+-#define SDIO0_REF				59
+-#define SDIO1_REF				60
+-#define PMC_LSBUS_REF				61
+-#define I2C_REF					62
+-#define TEST_PATTERN_REF			63
+-#define DFT_OSC_REF				64
+-#define PMC_PL0_REF				65
+-#define PMC_PL1_REF				66
+-#define PMC_PL2_REF				67
+-#define PMC_PL3_REF				68
+-#define CFU_REF					69
+-#define SPARE_REF				70
+-#define NPI_REF					71
+-#define HSM0_REF				72
+-#define HSM1_REF				73
+-#define SD_DLL_REF				74
+-#define FPD_TOP_SWITCH				75
+-#define FPD_LSBUS				76
+-#define ACPU					77
+-#define DBG_TRACE				78
+-#define DBG_FPD					79
+-#define LPD_TOP_SWITCH				80
+-#define ADMA					81
+-#define LPD_LSBUS				82
+-#define CPU_R5					83
+-#define CPU_R5_CORE				84
+-#define CPU_R5_OCM				85
+-#define CPU_R5_OCM2				86
+-#define IOU_SWITCH				87
+-#define GEM0_REF				88
+-#define GEM1_REF				89
+-#define GEM_TSU_REF				90
+-#define USB0_BUS_REF				91
+-#define UART0_REF				92
+-#define UART1_REF				93
+-#define SPI0_REF				94
+-#define SPI1_REF				95
+-#define CAN0_REF				96
+-#define CAN1_REF				97
+-#define I2C0_REF				98
+-#define I2C1_REF				99
+-#define DBG_LPD					100
+-#define TIMESTAMP_REF				101
+-#define DBG_TSTMP				102
+-#define CPM_TOPSW_REF				103
+-#define USB3_DUAL_REF				104
+-#define OUTCLK_MAX				105
+-#define REF_CLK					106
+-#define PL_ALT_REF_CLK				107
+-#define MUXED_IRO				108
+-#define PL_EXT					109
+-#define PL_LB					110
+-#define MIO_50_OR_51				111
+-#define MIO_24_OR_25				112
+-
+-#endif
+diff --git a/include/dt-bindings/interrupt-controller/irq-st.h b/include/dt-bindings/interrupt-controller/irq-st.h
+deleted file mode 100644
+index 6baa9ad2644c..000000000000
+--- a/include/dt-bindings/interrupt-controller/irq-st.h
++++ /dev/null
+@@ -1,30 +0,0 @@
+-/*
+- *  include/linux/irqchip/irq-st.h
+- *
+- *  Copyright (C) 2014 STMicroelectronics All Rights Reserved
+- *
+- *  Author: Lee Jones <lee.jones@linaro.org>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- */
+-
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_ST_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_ST_H
+-
+-#define ST_IRQ_SYSCFG_EXT_0		0
+-#define ST_IRQ_SYSCFG_EXT_1		1
+-#define ST_IRQ_SYSCFG_EXT_2		2
+-#define ST_IRQ_SYSCFG_CTI_0		3
+-#define ST_IRQ_SYSCFG_CTI_1		4
+-#define ST_IRQ_SYSCFG_PMU_0		5
+-#define ST_IRQ_SYSCFG_PMU_1		6
+-#define ST_IRQ_SYSCFG_pl310_L2		7
+-#define ST_IRQ_SYSCFG_DISABLED		0xFFFFFFFF
+-
+-#define ST_IRQ_SYSCFG_EXT_1_INV		0x1
+-#define ST_IRQ_SYSCFG_EXT_2_INV		0x2
+-#define ST_IRQ_SYSCFG_EXT_3_INV		0x4
+-
+-#endif
+diff --git a/include/dt-bindings/interrupt-controller/mips-gic.h b/include/dt-bindings/interrupt-controller/mips-gic.h
+deleted file mode 100644
+index cf35a577e371..000000000000
+--- a/include/dt-bindings/interrupt-controller/mips-gic.h
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_MIPS_GIC_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_MIPS_GIC_H
+-
+-#include <dt-bindings/interrupt-controller/irq.h>
+-
+-#define GIC_SHARED 0
+-#define GIC_LOCAL 1
+-
+-#endif
+diff --git a/include/dt-bindings/leds/leds-netxbig.h b/include/dt-bindings/leds/leds-netxbig.h
+deleted file mode 100644
+index 92658b0310b2..000000000000
+--- a/include/dt-bindings/leds/leds-netxbig.h
++++ /dev/null
+@@ -1,18 +0,0 @@
+-/*
+- * This header provides constants for netxbig LED bindings.
+- *
+- * This file is licensed under the terms of the GNU General Public
+- * License version 2.  This program is licensed "as is" without any
+- * warranty of any kind, whether express or implied.
+- */
+-
+-#ifndef _DT_BINDINGS_LEDS_NETXBIG_H
+-#define _DT_BINDINGS_LEDS_NETXBIG_H
+-
+-#define NETXBIG_LED_OFF		0
+-#define NETXBIG_LED_ON		1
+-#define NETXBIG_LED_SATA	2
+-#define NETXBIG_LED_TIMER1	3
+-#define NETXBIG_LED_TIMER2	4
+-
+-#endif /* _DT_BINDINGS_LEDS_NETXBIG_H */
+diff --git a/include/dt-bindings/leds/leds-ns2.h b/include/dt-bindings/leds/leds-ns2.h
+deleted file mode 100644
+index fd615749e703..000000000000
+--- a/include/dt-bindings/leds/leds-ns2.h
++++ /dev/null
+@@ -1,9 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef _DT_BINDINGS_LEDS_NS2_H
+-#define _DT_BINDINGS_LEDS_NS2_H
+-
+-#define NS_V2_LED_OFF	0
+-#define NS_V2_LED_ON	1
+-#define NS_V2_LED_SATA	2
+-
+-#endif
+diff --git a/include/dt-bindings/mux/ti-serdes.h b/include/dt-bindings/mux/ti-serdes.h
+deleted file mode 100644
+index b0b1091aad6d..000000000000
+--- a/include/dt-bindings/mux/ti-serdes.h
++++ /dev/null
+@@ -1,190 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for SERDES MUX for TI SoCs
+- */
+-
+-#ifndef _DT_BINDINGS_MUX_TI_SERDES
+-#define _DT_BINDINGS_MUX_TI_SERDES
+-
+-/*
+- * These bindings are deprecated, because they do not match the actual
+- * concept of bindings but rather contain pure constants values used only
+- * in DTS board files.
+- * Instead include the header in the DTS source directory.
+- */
+-#warning "These bindings are deprecated. Instead, use the header in the DTS source directory."
+-
+-/* J721E */
+-
+-#define J721E_SERDES0_LANE0_QSGMII_LANE1	0x0
+-#define J721E_SERDES0_LANE0_PCIE0_LANE0		0x1
+-#define J721E_SERDES0_LANE0_USB3_0_SWAP		0x2
+-#define J721E_SERDES0_LANE0_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES0_LANE1_QSGMII_LANE2	0x0
+-#define J721E_SERDES0_LANE1_PCIE0_LANE1		0x1
+-#define J721E_SERDES0_LANE1_USB3_0		0x2
+-#define J721E_SERDES0_LANE1_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES1_LANE0_QSGMII_LANE3	0x0
+-#define J721E_SERDES1_LANE0_PCIE1_LANE0		0x1
+-#define J721E_SERDES1_LANE0_USB3_1_SWAP		0x2
+-#define J721E_SERDES1_LANE0_SGMII_LANE0		0x3
+-
+-#define J721E_SERDES1_LANE1_QSGMII_LANE4	0x0
+-#define J721E_SERDES1_LANE1_PCIE1_LANE1		0x1
+-#define J721E_SERDES1_LANE1_USB3_1		0x2
+-#define J721E_SERDES1_LANE1_SGMII_LANE1		0x3
+-
+-#define J721E_SERDES2_LANE0_IP1_UNUSED		0x0
+-#define J721E_SERDES2_LANE0_PCIE2_LANE0		0x1
+-#define J721E_SERDES2_LANE0_USB3_1_SWAP		0x2
+-#define J721E_SERDES2_LANE0_SGMII_LANE0		0x3
+-
+-#define J721E_SERDES2_LANE1_IP1_UNUSED		0x0
+-#define J721E_SERDES2_LANE1_PCIE2_LANE1		0x1
+-#define J721E_SERDES2_LANE1_USB3_1		0x2
+-#define J721E_SERDES2_LANE1_SGMII_LANE1		0x3
+-
+-#define J721E_SERDES3_LANE0_IP1_UNUSED		0x0
+-#define J721E_SERDES3_LANE0_PCIE3_LANE0		0x1
+-#define J721E_SERDES3_LANE0_USB3_0_SWAP		0x2
+-#define J721E_SERDES3_LANE0_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES3_LANE1_IP1_UNUSED		0x0
+-#define J721E_SERDES3_LANE1_PCIE3_LANE1		0x1
+-#define J721E_SERDES3_LANE1_USB3_0		0x2
+-#define J721E_SERDES3_LANE1_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES4_LANE0_EDP_LANE0		0x0
+-#define J721E_SERDES4_LANE0_IP2_UNUSED		0x1
+-#define J721E_SERDES4_LANE0_QSGMII_LANE5	0x2
+-#define J721E_SERDES4_LANE0_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES4_LANE1_EDP_LANE1		0x0
+-#define J721E_SERDES4_LANE1_IP2_UNUSED		0x1
+-#define J721E_SERDES4_LANE1_QSGMII_LANE6	0x2
+-#define J721E_SERDES4_LANE1_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES4_LANE2_EDP_LANE2		0x0
+-#define J721E_SERDES4_LANE2_IP2_UNUSED		0x1
+-#define J721E_SERDES4_LANE2_QSGMII_LANE7	0x2
+-#define J721E_SERDES4_LANE2_IP4_UNUSED		0x3
+-
+-#define J721E_SERDES4_LANE3_EDP_LANE3		0x0
+-#define J721E_SERDES4_LANE3_IP2_UNUSED		0x1
+-#define J721E_SERDES4_LANE3_QSGMII_LANE8	0x2
+-#define J721E_SERDES4_LANE3_IP4_UNUSED		0x3
+-
+-/* J7200 */
+-
+-#define J7200_SERDES0_LANE0_QSGMII_LANE3	0x0
+-#define J7200_SERDES0_LANE0_PCIE1_LANE0		0x1
+-#define J7200_SERDES0_LANE0_IP3_UNUSED		0x2
+-#define J7200_SERDES0_LANE0_IP4_UNUSED		0x3
+-
+-#define J7200_SERDES0_LANE1_QSGMII_LANE4	0x0
+-#define J7200_SERDES0_LANE1_PCIE1_LANE1		0x1
+-#define J7200_SERDES0_LANE1_IP3_UNUSED		0x2
+-#define J7200_SERDES0_LANE1_IP4_UNUSED		0x3
+-
+-#define J7200_SERDES0_LANE2_QSGMII_LANE1	0x0
+-#define J7200_SERDES0_LANE2_PCIE1_LANE2		0x1
+-#define J7200_SERDES0_LANE2_IP3_UNUSED		0x2
+-#define J7200_SERDES0_LANE2_IP4_UNUSED		0x3
+-
+-#define J7200_SERDES0_LANE3_QSGMII_LANE2	0x0
+-#define J7200_SERDES0_LANE3_PCIE1_LANE3		0x1
+-#define J7200_SERDES0_LANE3_USB			0x2
+-#define J7200_SERDES0_LANE3_IP4_UNUSED		0x3
+-
+-/* AM64 */
+-
+-#define AM64_SERDES0_LANE0_PCIE0		0x0
+-#define AM64_SERDES0_LANE0_USB			0x1
+-
+-/* J721S2 */
+-
+-#define J721S2_SERDES0_LANE0_EDP_LANE0		0x0
+-#define J721S2_SERDES0_LANE0_PCIE1_LANE0	0x1
+-#define J721S2_SERDES0_LANE0_IP3_UNUSED		0x2
+-#define J721S2_SERDES0_LANE0_IP4_UNUSED		0x3
+-
+-#define J721S2_SERDES0_LANE1_EDP_LANE1		0x0
+-#define J721S2_SERDES0_LANE1_PCIE1_LANE1	0x1
+-#define J721S2_SERDES0_LANE1_USB		0x2
+-#define J721S2_SERDES0_LANE1_IP4_UNUSED		0x3
+-
+-#define J721S2_SERDES0_LANE2_EDP_LANE2		0x0
+-#define J721S2_SERDES0_LANE2_PCIE1_LANE2	0x1
+-#define J721S2_SERDES0_LANE2_IP3_UNUSED		0x2
+-#define J721S2_SERDES0_LANE2_IP4_UNUSED		0x3
+-
+-#define J721S2_SERDES0_LANE3_EDP_LANE3		0x0
+-#define J721S2_SERDES0_LANE3_PCIE1_LANE3	0x1
+-#define J721S2_SERDES0_LANE3_USB		0x2
+-#define J721S2_SERDES0_LANE3_IP4_UNUSED		0x3
+-
+-/* J784S4 */
+-
+-#define J784S4_SERDES0_LANE0_IP1_UNUSED		0x0
+-#define J784S4_SERDES0_LANE0_PCIE1_LANE0	0x1
+-#define J784S4_SERDES0_LANE0_IP3_UNUSED		0x2
+-#define J784S4_SERDES0_LANE0_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES0_LANE1_IP1_UNUSED		0x0
+-#define J784S4_SERDES0_LANE1_PCIE1_LANE1	0x1
+-#define J784S4_SERDES0_LANE1_IP3_UNUSED		0x2
+-#define J784S4_SERDES0_LANE1_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES0_LANE2_PCIE3_LANE0	0x0
+-#define J784S4_SERDES0_LANE2_PCIE1_LANE2	0x1
+-#define J784S4_SERDES0_LANE2_IP3_UNUSED		0x2
+-#define J784S4_SERDES0_LANE2_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES0_LANE3_PCIE3_LANE1	0x0
+-#define J784S4_SERDES0_LANE3_PCIE1_LANE3	0x1
+-#define J784S4_SERDES0_LANE3_USB		0x2
+-#define J784S4_SERDES0_LANE3_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES1_LANE0_QSGMII_LANE3	0x0
+-#define J784S4_SERDES1_LANE0_PCIE0_LANE0	0x1
+-#define J784S4_SERDES1_LANE0_IP3_UNUSED		0x2
+-#define J784S4_SERDES1_LANE0_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES1_LANE1_QSGMII_LANE4	0x0
+-#define J784S4_SERDES1_LANE1_PCIE0_LANE1	0x1
+-#define J784S4_SERDES1_LANE1_IP3_UNUSED		0x2
+-#define J784S4_SERDES1_LANE1_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES1_LANE2_QSGMII_LANE1	0x0
+-#define J784S4_SERDES1_LANE2_PCIE0_LANE2	0x1
+-#define J784S4_SERDES1_LANE2_PCIE2_LANE0	0x2
+-#define J784S4_SERDES1_LANE2_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES1_LANE3_QSGMII_LANE2	0x0
+-#define J784S4_SERDES1_LANE3_PCIE0_LANE3	0x1
+-#define J784S4_SERDES1_LANE3_PCIE2_LANE1	0x2
+-#define J784S4_SERDES1_LANE3_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES2_LANE0_QSGMII_LANE5	0x0
+-#define J784S4_SERDES2_LANE0_IP2_UNUSED		0x1
+-#define J784S4_SERDES2_LANE0_IP3_UNUSED		0x2
+-#define J784S4_SERDES2_LANE0_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES2_LANE1_QSGMII_LANE6	0x0
+-#define J784S4_SERDES2_LANE1_IP2_UNUSED		0x1
+-#define J784S4_SERDES2_LANE1_IP3_UNUSED		0x2
+-#define J784S4_SERDES2_LANE1_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES2_LANE2_QSGMII_LANE7	0x0
+-#define J784S4_SERDES2_LANE2_QSGMII_LANE1	0x1
+-#define J784S4_SERDES2_LANE2_IP3_UNUSED		0x2
+-#define J784S4_SERDES2_LANE2_IP4_UNUSED		0x3
+-
+-#define J784S4_SERDES2_LANE3_QSGMII_LANE8	0x0
+-#define J784S4_SERDES2_LANE3_QSGMII_LANE2	0x1
+-#define J784S4_SERDES2_LANE3_IP3_UNUSED		0x2
+-#define J784S4_SERDES2_LANE3_IP4_UNUSED		0x3
+-
+-#endif /* _DT_BINDINGS_MUX_TI_SERDES */
+diff --git a/include/dt-bindings/net/mscc-phy-vsc8531.h b/include/dt-bindings/net/mscc-phy-vsc8531.h
+deleted file mode 100644
+index c340437414fb..000000000000
+--- a/include/dt-bindings/net/mscc-phy-vsc8531.h
++++ /dev/null
+@@ -1,31 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+-/*
+- * Device Tree constants for Microsemi VSC8531 PHY
+- *
+- * Author: Nagaraju Lakkaraju
+- *
+- * Copyright (c) 2017 Microsemi Corporation
+- */
+-
+-#ifndef _DT_BINDINGS_MSCC_VSC8531_H
+-#define _DT_BINDINGS_MSCC_VSC8531_H
+-
+-/* PHY LED Modes */
+-#define VSC8531_LINK_ACTIVITY			0
+-#define VSC8531_LINK_1000_ACTIVITY		1
+-#define VSC8531_LINK_100_ACTIVITY		2
+-#define VSC8531_LINK_10_ACTIVITY		3
+-#define VSC8531_LINK_100_1000_ACTIVITY		4
+-#define VSC8531_LINK_10_1000_ACTIVITY		5
+-#define VSC8531_LINK_10_100_ACTIVITY		6
+-#define VSC8584_LINK_100FX_1000X_ACTIVITY	7
+-#define VSC8531_DUPLEX_COLLISION		8
+-#define VSC8531_COLLISION			9
+-#define VSC8531_ACTIVITY			10
+-#define VSC8584_100FX_1000X_ACTIVITY		11
+-#define VSC8531_AUTONEG_FAULT			12
+-#define VSC8531_SERIAL_MODE			13
+-#define VSC8531_FORCE_LED_OFF			14
+-#define VSC8531_FORCE_LED_ON			15
+-
+-#endif
+diff --git a/include/dt-bindings/phy/phy-am654-serdes.h b/include/dt-bindings/phy/phy-am654-serdes.h
+deleted file mode 100644
+index e8d901729ed9..000000000000
+--- a/include/dt-bindings/phy/phy-am654-serdes.h
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for AM654 SERDES.
+- */
+-
+-#ifndef _DT_BINDINGS_AM654_SERDES
+-#define _DT_BINDINGS_AM654_SERDES
+-
+-#define AM654_SERDES_CMU_REFCLK	0
+-#define AM654_SERDES_LO_REFCLK	1
+-#define AM654_SERDES_RO_REFCLK	2
+-
+-#endif /* _DT_BINDINGS_AM654_SERDES */
+diff --git a/include/dt-bindings/pinctrl/brcm,pinctrl-ns3.h b/include/dt-bindings/pinctrl/brcm,pinctrl-ns3.h
+deleted file mode 100644
+index 81ebd58ca503..000000000000
+--- a/include/dt-bindings/pinctrl/brcm,pinctrl-ns3.h
++++ /dev/null
+@@ -1,41 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2020 Broadcom.
+- */
+-
+-#ifndef __DT_BINDINGS_PINCTRL_BRCM_STINGRAY_H__
+-#define __DT_BINDINGS_PINCTRL_BRCM_STINGRAY_H__
+-
+-/* Alternate functions available in MUX controller */
+-#define MODE_NITRO				0
+-#define MODE_NAND				1
+-#define MODE_PNOR				2
+-#define MODE_GPIO				3
+-
+-/* Pad configuration attribute */
+-#define PAD_SLEW_RATE_ENA			BIT(0)
+-#define PAD_SLEW_RATE_ENA_MASK			BIT(0)
+-
+-#define PAD_DRIVE_STRENGTH_2_MA			(0 << 1)
+-#define PAD_DRIVE_STRENGTH_4_MA			BIT(1)
+-#define PAD_DRIVE_STRENGTH_6_MA			(2 << 1)
+-#define PAD_DRIVE_STRENGTH_8_MA			(3 << 1)
+-#define PAD_DRIVE_STRENGTH_10_MA		(4 << 1)
+-#define PAD_DRIVE_STRENGTH_12_MA		(5 << 1)
+-#define PAD_DRIVE_STRENGTH_14_MA		(6 << 1)
+-#define PAD_DRIVE_STRENGTH_16_MA		(7 << 1)
+-#define PAD_DRIVE_STRENGTH_MASK			(7 << 1)
+-
+-#define PAD_PULL_UP_ENA				BIT(4)
+-#define PAD_PULL_UP_ENA_MASK			BIT(4)
+-
+-#define PAD_PULL_DOWN_ENA			BIT(5)
+-#define PAD_PULL_DOWN_ENA_MASK			BIT(5)
+-
+-#define PAD_INPUT_PATH_DIS			BIT(6)
+-#define PAD_INPUT_PATH_DIS_MASK			BIT(6)
+-
+-#define PAD_HYSTERESIS_ENA			BIT(7)
+-#define PAD_HYSTERESIS_ENA_MASK			BIT(7)
+-
+-#endif
+diff --git a/include/dt-bindings/pinctrl/k3.h b/include/dt-bindings/pinctrl/k3.h
+deleted file mode 100644
+index e8418318eb9c..000000000000
+--- a/include/dt-bindings/pinctrl/k3.h
++++ /dev/null
+@@ -1,50 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for pinctrl bindings for TI's K3 SoC
+- * family.
+- *
+- * Copyright (C) 2018-2021 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-#ifndef _DT_BINDINGS_PINCTRL_TI_K3_H
+-#define _DT_BINDINGS_PINCTRL_TI_K3_H
+-
+-#define PULLUDEN_SHIFT		(16)
+-#define PULLTYPESEL_SHIFT	(17)
+-#define RXACTIVE_SHIFT		(18)
+-
+-#define PULL_DISABLE		(1 << PULLUDEN_SHIFT)
+-#define PULL_ENABLE		(0 << PULLUDEN_SHIFT)
+-
+-#define PULL_UP			(1 << PULLTYPESEL_SHIFT | PULL_ENABLE)
+-#define PULL_DOWN		(0 << PULLTYPESEL_SHIFT | PULL_ENABLE)
+-
+-#define INPUT_EN		(1 << RXACTIVE_SHIFT)
+-#define INPUT_DISABLE		(0 << RXACTIVE_SHIFT)
+-
+-/* Only these macros are expected be used directly in device tree files */
+-#define PIN_OUTPUT		(INPUT_DISABLE | PULL_DISABLE)
+-#define PIN_OUTPUT_PULLUP	(INPUT_DISABLE | PULL_UP)
+-#define PIN_OUTPUT_PULLDOWN	(INPUT_DISABLE | PULL_DOWN)
+-#define PIN_INPUT		(INPUT_EN | PULL_DISABLE)
+-#define PIN_INPUT_PULLUP	(INPUT_EN | PULL_UP)
+-#define PIN_INPUT_PULLDOWN	(INPUT_EN | PULL_DOWN)
+-
+-#define AM65X_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM65X_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define J721E_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define J721E_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define AM64X_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM64X_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define J721S2_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define J721S2_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define AM62X_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM62X_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define AM62AX_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM62AX_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#endif
+diff --git a/include/dt-bindings/reset/xlnx-versal-resets.h b/include/dt-bindings/reset/xlnx-versal-resets.h
+deleted file mode 100644
+index 895424e9b0e5..000000000000
+--- a/include/dt-bindings/reset/xlnx-versal-resets.h
++++ /dev/null
+@@ -1,105 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  Copyright (C) 2020 Xilinx, Inc.
+- */
+-
+-#ifndef _DT_BINDINGS_VERSAL_RESETS_H
+-#define _DT_BINDINGS_VERSAL_RESETS_H
+-
+-#define VERSAL_RST_PMC_POR			(0xc30c001U)
+-#define VERSAL_RST_PMC				(0xc410002U)
+-#define VERSAL_RST_PS_POR			(0xc30c003U)
+-#define VERSAL_RST_PL_POR			(0xc30c004U)
+-#define VERSAL_RST_NOC_POR			(0xc30c005U)
+-#define VERSAL_RST_FPD_POR			(0xc30c006U)
+-#define VERSAL_RST_ACPU_0_POR			(0xc30c007U)
+-#define VERSAL_RST_ACPU_1_POR			(0xc30c008U)
+-#define VERSAL_RST_OCM2_POR			(0xc30c009U)
+-#define VERSAL_RST_PS_SRST			(0xc41000aU)
+-#define VERSAL_RST_PL_SRST			(0xc41000bU)
+-#define VERSAL_RST_NOC				(0xc41000cU)
+-#define VERSAL_RST_NPI				(0xc41000dU)
+-#define VERSAL_RST_SYS_RST_1			(0xc41000eU)
+-#define VERSAL_RST_SYS_RST_2			(0xc41000fU)
+-#define VERSAL_RST_SYS_RST_3			(0xc410010U)
+-#define VERSAL_RST_FPD				(0xc410011U)
+-#define VERSAL_RST_PL0				(0xc410012U)
+-#define VERSAL_RST_PL1				(0xc410013U)
+-#define VERSAL_RST_PL2				(0xc410014U)
+-#define VERSAL_RST_PL3				(0xc410015U)
+-#define VERSAL_RST_APU				(0xc410016U)
+-#define VERSAL_RST_ACPU_0			(0xc410017U)
+-#define VERSAL_RST_ACPU_1			(0xc410018U)
+-#define VERSAL_RST_ACPU_L2			(0xc410019U)
+-#define VERSAL_RST_ACPU_GIC			(0xc41001aU)
+-#define VERSAL_RST_RPU_ISLAND			(0xc41001bU)
+-#define VERSAL_RST_RPU_AMBA			(0xc41001cU)
+-#define VERSAL_RST_R5_0				(0xc41001dU)
+-#define VERSAL_RST_R5_1				(0xc41001eU)
+-#define VERSAL_RST_SYSMON_PMC_SEQ_RST		(0xc41001fU)
+-#define VERSAL_RST_SYSMON_PMC_CFG_RST		(0xc410020U)
+-#define VERSAL_RST_SYSMON_FPD_CFG_RST		(0xc410021U)
+-#define VERSAL_RST_SYSMON_FPD_SEQ_RST		(0xc410022U)
+-#define VERSAL_RST_SYSMON_LPD			(0xc410023U)
+-#define VERSAL_RST_PDMA_RST1			(0xc410024U)
+-#define VERSAL_RST_PDMA_RST0			(0xc410025U)
+-#define VERSAL_RST_ADMA				(0xc410026U)
+-#define VERSAL_RST_TIMESTAMP			(0xc410027U)
+-#define VERSAL_RST_OCM				(0xc410028U)
+-#define VERSAL_RST_OCM2_RST			(0xc410029U)
+-#define VERSAL_RST_IPI				(0xc41002aU)
+-#define VERSAL_RST_SBI				(0xc41002bU)
+-#define VERSAL_RST_LPD				(0xc41002cU)
+-#define VERSAL_RST_QSPI				(0xc10402dU)
+-#define VERSAL_RST_OSPI				(0xc10402eU)
+-#define VERSAL_RST_SDIO_0			(0xc10402fU)
+-#define VERSAL_RST_SDIO_1			(0xc104030U)
+-#define VERSAL_RST_I2C_PMC			(0xc104031U)
+-#define VERSAL_RST_GPIO_PMC			(0xc104032U)
+-#define VERSAL_RST_GEM_0			(0xc104033U)
+-#define VERSAL_RST_GEM_1			(0xc104034U)
+-#define VERSAL_RST_SPARE			(0xc104035U)
+-#define VERSAL_RST_USB_0			(0xc104036U)
+-#define VERSAL_RST_UART_0			(0xc104037U)
+-#define VERSAL_RST_UART_1			(0xc104038U)
+-#define VERSAL_RST_SPI_0			(0xc104039U)
+-#define VERSAL_RST_SPI_1			(0xc10403aU)
+-#define VERSAL_RST_CAN_FD_0			(0xc10403bU)
+-#define VERSAL_RST_CAN_FD_1			(0xc10403cU)
+-#define VERSAL_RST_I2C_0			(0xc10403dU)
+-#define VERSAL_RST_I2C_1			(0xc10403eU)
+-#define VERSAL_RST_GPIO_LPD			(0xc10403fU)
+-#define VERSAL_RST_TTC_0			(0xc104040U)
+-#define VERSAL_RST_TTC_1			(0xc104041U)
+-#define VERSAL_RST_TTC_2			(0xc104042U)
+-#define VERSAL_RST_TTC_3			(0xc104043U)
+-#define VERSAL_RST_SWDT_FPD			(0xc104044U)
+-#define VERSAL_RST_SWDT_LPD			(0xc104045U)
+-#define VERSAL_RST_USB				(0xc104046U)
+-#define VERSAL_RST_DPC				(0xc208047U)
+-#define VERSAL_RST_PMCDBG			(0xc208048U)
+-#define VERSAL_RST_DBG_TRACE			(0xc208049U)
+-#define VERSAL_RST_DBG_FPD			(0xc20804aU)
+-#define VERSAL_RST_DBG_TSTMP			(0xc20804bU)
+-#define VERSAL_RST_RPU0_DBG			(0xc20804cU)
+-#define VERSAL_RST_RPU1_DBG			(0xc20804dU)
+-#define VERSAL_RST_HSDP				(0xc20804eU)
+-#define VERSAL_RST_DBG_LPD			(0xc20804fU)
+-#define VERSAL_RST_CPM_POR			(0xc30c050U)
+-#define VERSAL_RST_CPM				(0xc410051U)
+-#define VERSAL_RST_CPMDBG			(0xc208052U)
+-#define VERSAL_RST_PCIE_CFG			(0xc410053U)
+-#define VERSAL_RST_PCIE_CORE0			(0xc410054U)
+-#define VERSAL_RST_PCIE_CORE1			(0xc410055U)
+-#define VERSAL_RST_PCIE_DMA			(0xc410056U)
+-#define VERSAL_RST_CMN				(0xc410057U)
+-#define VERSAL_RST_L2_0				(0xc410058U)
+-#define VERSAL_RST_L2_1				(0xc410059U)
+-#define VERSAL_RST_ADDR_REMAP			(0xc41005aU)
+-#define VERSAL_RST_CPI0				(0xc41005bU)
+-#define VERSAL_RST_CPI1				(0xc41005cU)
+-#define VERSAL_RST_XRAM				(0xc30c05dU)
+-#define VERSAL_RST_AIE_ARRAY			(0xc10405eU)
+-#define VERSAL_RST_AIE_SHIM			(0xc10405fU)
+-
+-#endif
+diff --git a/include/dt-bindings/sound/tlv320aic31xx.h b/include/dt-bindings/sound/tlv320aic31xx.h
+deleted file mode 100644
+index 4a80238ab250..000000000000
+--- a/include/dt-bindings/sound/tlv320aic31xx.h
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_TLV320AIC31XX_H
+-#define __DT_TLV320AIC31XX_H
+-
+-#define MICBIAS_2_0V		1
+-#define MICBIAS_2_5V		2
+-#define MICBIAS_AVDDV		3
+-
+-#define PLL_CLKIN_MCLK		0x00
+-#define PLL_CLKIN_BCLK		0x01
+-#define PLL_CLKIN_GPIO1		0x02
+-#define PLL_CLKIN_DIN		0x03
+-
+-#endif /* __DT_TLV320AIC31XX_H */
 -- 
 2.43.0
 
