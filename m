@@ -4,79 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71DCBC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 00:03:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A914C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 00:20:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0076D838C8;
-	Wed, 28 May 2025 02:03:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ADB9C838D5;
+	Wed, 28 May 2025 02:20:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LQkjNx/T";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="olSwPu84";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E208D838D2; Wed, 28 May 2025 02:03:07 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 84EA8838D7; Wed, 28 May 2025 02:20:02 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76C538318E
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 02:03:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B89358312E
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 02:19:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-6065251725bso2436162eaf.1
- for <u-boot@lists.denx.de>; Tue, 27 May 2025 17:03:05 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-2d4e91512b4so1942331fac.1
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 17:19:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748390584; x=1748995384; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=bppW7KJ5xK7ecl/weaZPB8PoQ8/nn63EJ6XAnfs7p/Y=;
- b=LQkjNx/TBGDYo1RVel5MBDYIIzQFIcKbjH8dbiN4M1Q2+TrytUOoCs9tjZm2ViH2k9
- DDsyZenw1R+ZNDw2rH66U+gxFuQdugHYECIbO6RHzrKnXXIi3oPeAzrsDXJBZVPzPuJv
- 1C9fmU9f5n+pjNJvkciopAXIXxGOn3Hw3VKgg=
+ d=konsulko.com; s=google; t=1748391598; x=1748996398; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PT/6d7echEuHywiGJVtveElNaCHNkUn5P5YSGeXXVEQ=;
+ b=olSwPu84OkTMFNw3LE4zafUwmJFxIEOrW7rCRXi4bO7Nox7lEktPa3BmjML4MEaepa
+ iINkxmrwJJNLKGCwgB5CDC7TKEalWcnjU+4u6VNrMxW8VMZEsYt1yfSBRIfPTEwNoeOX
+ 8H5y+aK103M0MyQ1JJOOFip7ePkkADVSo1Sg4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748390584; x=1748995384;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bppW7KJ5xK7ecl/weaZPB8PoQ8/nn63EJ6XAnfs7p/Y=;
- b=vaoWOhUYqt/K21G3k5zCi0GT8PfSmyVWDGOdG4kem36kDqogzKaPk3+IX8IqVITdiG
- 6RawnnodnKJ7R1vLN45ZXHwnV5YprNlX+r5pR71vAqg/xixLRa68/rstiXHs8s/HFiEH
- X24UF9b3IrdG9AB58NRsPuGotTaFhLRqgfhtVOJPli8JSF87xGa0dMMQLCEgcGuHJ+ZX
- OW2AMDefr52X5obX44mVjwApkZFL1OzjXqMiBaLi7gVcpRIvsjZVMdKGPwR4OM8aYyxg
- HntxoS3zz8ekn5OrrUl7pVmV5I4FvGBjUA+ytmN1pijQU+dH4pj0suboV7QB+bothyuX
- ba3w==
-X-Gm-Message-State: AOJu0YwXe2dsZFqov4TLJUmAlA6rsfvvZo/TC2/i8rIKM2uc+LVlLmii
- Uou8cd83B35Zhm6LqM5lAu3vRJ5u0aRTcmyu77VIsFu5lLxwfT5sFmpFh1jEZ9cKCLn1row4GL1
- 5f3ghRcU=
-X-Gm-Gg: ASbGncsjlvrX2s/ugqLpcSjPBusLzQsi0212jYbDG4Zkglq1TaKLXFfi5N5o9qO396U
- 9vY87uJsfuHZp3likAx+Vs+w5CIHmEi7GAsLvZNjBaRwzYKHuSx2dVEVhlG+KtDjoXIpbZ8O4pG
- EmD276jP00uRRWMs5OIH/wn08ez8Jx/UZ9vKvZWK5dHIwmtzwzv/o1ipRtIRPLBJ05YpRihPOxP
- K6MzlANWrxBtXLu1/4xDAyajJddt/FXZfvrnP5olNJB42yMXu6Ns2Zld/xTdiBJTAr+HzeFtGKu
- VoRDX5BiqGVFCWMc/F5swqO3Wiyd3QjLEP2YqfvB0VICr75bDPObQmUMBoyY2wU31KaRH+G5Bt4
- qaKgwL71Rj0XTggE=
-X-Google-Smtp-Source: AGHT+IE0WwYg/RLUpVsQLmuvPzgy54iufXy12p+oyZsSO0NN9oIUYZuK8s35Vv5Wq+oufo3WgO773A==
-X-Received: by 2002:a4a:d856:0:b0:60b:a7d2:f993 with SMTP id
- 006d021491bc7-60ba7d30363mr5899654eaf.7.1748390584120; 
- Tue, 27 May 2025 17:03:04 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1748391598; x=1748996398;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PT/6d7echEuHywiGJVtveElNaCHNkUn5P5YSGeXXVEQ=;
+ b=UYpBJQfZIak2r862RXaq0Ub4fbHWLagqmId7n2YEYDS4DSNj7tsavB9bbvtWZ/Ezoo
+ Ca2CP0AwsCJJ9sSS0AymAVK8OUivYQrVdzOvrskk5QGEYbreEUARbVvNWa8z5usyhZjD
+ 1t6QXobTZS6xcmdEvj29nPawmimWEk01gmCQN06MOjvZ6nieo/7et8HmlpH0NzBi5RkH
+ ku631sFdO8U5Wo+YZncrNXH5aajhpPT4Q/mJRZZtSxplsiAXjulk340wsgx1BtxehbzZ
+ kJqWJ949pFXRvoZw9qp5v6OrQzSC+6rrKySFNvtCVwfTS967UZTE/orC46PYYmuwrQf1
+ 4lqA==
+X-Gm-Message-State: AOJu0Yz9RN30fvGr46N13z7axhZnmncBsDIjA8FaGwWYXHeoAqRozgy4
+ XM2xrHSojQcvNOAnogxGGwH5YRf52hQHQVzlXXEEZ1ucj2qKH3+FTGL6PG9aWeoiUiM=
+X-Gm-Gg: ASbGncuFmBskpYBJmFFRdUVt+P2neQpzjKfyiQ9BTWnZ0Phy1wMRLC6XPVRw81KoWur
+ lvtsC1pFxmPb1IV6F42aeYwwJkX5+y1kXMLARscWljtKQGnCyevPRycPCO29LArWRRar8bUFIo/
+ rxkw09c6SLRMcLW/w/mINYJNWwnzyrHpl65byePTk5YNjDhU32ob/uREfLc4Dgbz+uc5dtnSEZl
+ j8rOJ0tDFzDGZj1wUpX3b+Y4o5pIFlTFovmADOaJzHLk5AwTGW8qE7V2aRwD5stmcKMxEaoSw2A
+ RI2mv2vxxWasAk02SwiWolqy9Ig/y3mM1RuRSI+9P2I+sGCpNTYsEOIWGaUjVlJcLC+D8IuAahX
+ auu7QxuZYU+OgxF2yd5W7Ikc=
+X-Google-Smtp-Source: AGHT+IHIHuPt57pTRuSKBweZnT00wH9HXIUY8KaERaOXn7EYPJWgTFqx7uvNa/aAjAW/ciZJOxr9Og==
+X-Received: by 2002:a05:6870:30d:b0:2c1:51f7:e648 with SMTP id
+ 586e51a60fabf-2e8620f133dmr9124081fac.35.1748391598340; 
+ Tue, 27 May 2025 17:19:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60bd9c2fce7sm17504eaf.19.2025.05.27.17.03.02
- for <u-boot@lists.denx.de>
+ 586e51a60fabf-2e8e16bdee5sm18921fac.1.2025.05.27.17.19.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 May 2025 17:03:03 -0700 (PDT)
+ Tue, 27 May 2025 17:19:57 -0700 (PDT)
+Date: Tue, 27 May 2025 18:19:54 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] include/dt-bindings/reset: Remove local version of
- bcm6318-reset.h
-Date: Tue, 27 May 2025 18:03:01 -0600
-Message-ID: <20250528000302.3003129-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] makefile: fix Clang link error when
+ RSA_PUBLIC_KEY_PARSER is selected
+Message-ID: <20250528001954.GO100073@bill-the-cat>
+References: <20250527210508.1488509-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eYy5ZE/eJHS5zVMC"
+Content-Disposition: inline
+In-Reply-To: <20250527210508.1488509-1-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,47 +109,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Aside from SPDX tags, the only difference between our version of this
-header and upstream is that BCM6318_RST_HOSTMIPS was defined to 11 (the
-same as BCM6318_RST_PHYMIPS) and is now defined to 12.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- include/dt-bindings/reset/bcm6318-reset.h | 25 -----------------------
- 1 file changed, 25 deletions(-)
- delete mode 100644 include/dt-bindings/reset/bcm6318-reset.h
+--eYy5ZE/eJHS5zVMC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/include/dt-bindings/reset/bcm6318-reset.h b/include/dt-bindings/reset/bcm6318-reset.h
-deleted file mode 100644
-index 1422500f8f52..000000000000
---- a/include/dt-bindings/reset/bcm6318-reset.h
-+++ /dev/null
-@@ -1,25 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (C) 2018 Álvaro Fernández Rojas <noltari@gmail.com>
-- *
-- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
-- */
--
--#ifndef __DT_BINDINGS_RESET_BCM6318_H
--#define __DT_BINDINGS_RESET_BCM6318_H
--
--#define BCM6318_RST_SPI		0
--#define BCM6318_RST_EPHY	1
--#define BCM6318_RST_SAR		2
--#define BCM6318_RST_ENETSW	3
--#define BCM6318_RST_USBD	4
--#define BCM6318_RST_USBH	5
--#define BCM6318_RST_PCIE_CORE	6
--#define BCM6318_RST_PCIE	7
--#define BCM6318_RST_PCIE_EXT	8
--#define BCM6318_RST_PCIE_HARD	9
--#define BCM6318_RST_ADSL	10
--#define BCM6318_RST_PHYMIPS	11
--#define BCM6318_RST_HOSTMIPS	11
--
--#endif /* __DT_BINDINGS_RESET_BCM6318_H */
--- 
-2.43.0
+On Tue, May 27, 2025 at 02:05:05PM -0700, Raymond Mao wrote:
 
+> MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> function provided by the compiler runtime, typically libgcc for GCC or
+> clang_rt.builtins for Clang.
+> Thus 'clang_rt.builtins' library is required when building using Clang.
+>=20
+> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--eYy5ZE/eJHS5zVMC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg2VqYACgkQFHw5/5Y0
+tyxZsAv8DrEaERthmsJ2HfN9tIH6dTHOa5hnUgh50t4me7MP9HQHtCCA+Jaa9rsw
+u3xWzfdl/e3kJmA3nL15dPrhSfJFzKX/HDP4DJ3ew5e4GmtrDFUAkSRwPvpHKfjU
+oB0lnrZIKnISE3pnduWkaOt7jK6fz7GpnQNa9gRDKsZ/7LBxjCXHpyH0FIunwx8R
+v97tEmBs+sGmDcCHUa1P6fwTJ9jtATKVGvtyQB1K3QfFV0DxCOE5ncGMCd+E7Y4H
+TsXZEN4ahMrOa+bD/XPFMpPDVZXpfCroTPQaALDcSsw/X0R1MGuVCVm+t9ttCUzM
+OqWnP3QJsQUkIj0Xw6bq1wDmCc0tTxQIAmyhvN1fweVY+4k5CAThOYK0Xm9sFroq
+bTUPtJp5cFnjbSUM81KYc7LV3fztd1kAH+74F3VjfiNsmH5m7gwIrcNR3XzOUq+Y
+g8uGWazq9IDi+CjP7Uk0ZfKoyqzrJjJc5q7lLqvIXVqYWzZQJmzNvooK4Wuom82Q
+wxRyYd3x
+=uzWh
+-----END PGP SIGNATURE-----
+
+--eYy5ZE/eJHS5zVMC--
