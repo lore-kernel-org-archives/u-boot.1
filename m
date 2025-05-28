@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C91EC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FBC2C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 333B183986;
-	Wed, 28 May 2025 14:33:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E06B838E6;
+	Wed, 28 May 2025 14:33:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NZl3AsU2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NNNaA6+/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A84B838E6; Wed, 28 May 2025 14:33:23 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 4290B83A36; Wed, 28 May 2025 14:33:26 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE9A4839CB
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1407A8390C
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-85b3f92c8f8so98108639f.1
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:20 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3dc7294716cso36817075ab.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748435598; x=1749040398; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748435602; x=1749040402; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c9Tg36wpyIEyDVR+dvJTZ69Gd+LwO5lR+RPbWuW8b2w=;
- b=NZl3AsU2AJPAmXwoWt2xuFAMA4C2BmWKiLBqO3DujenDkqj322SXMTwjYU+qAHP8av
- YIHyTfNir4KQx8sggUdz9u7ivuTj03iIrSbKpOHt9zOiGv9e/RYrCXhi+9c2QurkRA6K
- Vm1yOZNJHpSbaq0jl/6YE1FnKP7shU04DUfKs=
+ bh=x9O6ckfmfKi5Rag/BJWR0fBLpW1UVYrdx9Wp35yw2RQ=;
+ b=NNNaA6+/wvnBw5DYADBu7zTumMo6gtfqVbWs7jMdWBB44Q6WZFpSVKTlg+KLWUcEAh
+ TFdirDVFtK4eNNjQ5egg4WdqN5g9MxeZhU4DGfnZbaphyRA3QXfsAf+CmCWaVCMnjBkL
+ sxxw4lqAsvDQ82kNflnYGXIZ2o53w3E/b/EBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748435598; x=1749040398;
+ d=1e100.net; s=20230601; t=1748435602; x=1749040402;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c9Tg36wpyIEyDVR+dvJTZ69Gd+LwO5lR+RPbWuW8b2w=;
- b=LjgzNJItk8B7NGpG/BnNb6chsviA0HiZM3gHVn5UbIwiQ5pYQnAWhN6Lek/lVO1Eqk
- +wIuC16M73zlUutLrThAR8B9J/apM8x27BLQpJfNrF2gWnebKeyeKiUGVvm2oBorq2BS
- +FmYEr1j4jadbFC2Lsge1lA/0ONQzkmQRIkpjlqK9q4YILMOB5c2fcUohkzQYiHoptFW
- I5tToewKnbWU8mewiTTQDNMOJrKVrVQJMJ6mDaRktpTIqWFe2xTsKQ/BAp1VNnXUctYe
- r1SANDcNCFlp6rfwCaV73KDoaQE1DVL9wG8m6SqDXrG7KmLU14VFoarhMTG1+AP3nDi6
- ZpSg==
-X-Gm-Message-State: AOJu0Yz8xIZMlHX+TXXiDlfaXBnDT5AxpgBTrTjipq12ePjifpUb7u5p
- tFFNh+7ikOlZi9txSGqVzrKxkyTNI296SJorSIOq/Yqe3EMcudJr7Gn0Vpe1n6h7Z+JnxvYMiUi
- EPI35B9N+
-X-Gm-Gg: ASbGncuKYlGEsB4dlbIKTXcQsBUJrLMzJ5iXhfJiewIPYgEmncSN2/GaKCNuexQbeC+
- anplfhmy+8uuQ2jwyEIFU+QICLt2jC+0PY3QAk8FhZz0ANAL47fiCxXJ7Z5GJNfLlxF5yuD6cJ0
- KyWy3JUHPv//53OVf25irhMBNGCToEMr8xMRQq/5bmbElBg1CHYsYUPm3mH4mHNFIqFUFqQILh1
- SYiywblKSwH6oQ7vulyLRKr/5iHnCjwsFcpj/HJFro5nwkuCYCE77X7gMH+3FTWMaTsPg7Vs1JL
- ZOdAbYC6R2F3CGJ1bptIJHd7jbPekdiLv4sbz9jxdeRl3vSNAhjS3Ho7+2HNobsWLJn5C4t0f0V
- KvAq/0FULqw4V
-X-Google-Smtp-Source: AGHT+IFwFbzwEQNja2nqslMggtMktRubeXhZ8Q6Jm/MiOWskqMyEFYmJVGYBS+DBmAtbP2YN29XOfg==
-X-Received: by 2002:a6b:6b01:0:b0:86c:bbd8:3fc with SMTP id
- ca18e2360f4ac-86cbbd8049dmr1313209939f.0.1748435598400; 
- Wed, 28 May 2025 05:33:18 -0700 (PDT)
+ bh=x9O6ckfmfKi5Rag/BJWR0fBLpW1UVYrdx9Wp35yw2RQ=;
+ b=NW13LEGyODgBmXhotLUaTW4hWUXyWIcqmIHwgdT+EXnL+6ByOSJTpcXTcCej49HWJM
+ VJ7e76THLTrNiQNlqfaz0rKM7f5mxjn0Oh+54ZIp/H7/6LjYi7J6H0B5NjujHLD4A6Je
+ cXYNirMV1t+bIZiHNQxfJeo2eQqtCEFGSlTpobBAo/oiqvWBjBxLs3HYuz9rkJTZdKq4
+ ya4hPei2pTXrnAwdbxNPHkZELBqrYxOLXW+Aj5PzzsdUANPxvqBXmrJCh/zqAlvoAo8t
+ jQvrRt+CrpBQSZffAqJLuMqs8wUww7Bm5eOqkln/usXwupzlQVRkWg0xRlErugoeHFS4
+ m7fg==
+X-Gm-Message-State: AOJu0Ywq3aPKdigKD53+Cwp2C32NSCN9op1kwSaVcZ7kVuDIQW2ltJ+7
+ fee87l0rsuaOuW+Y03JQ9NBuLwb3icJjHROz/Rec74r9P9C+Vn3ZMonWmVFjc5hgZ3i3hZpDJY5
+ euXWoZ1Dg
+X-Gm-Gg: ASbGnctj2m11foI4UdPxqc7smq3bw0eEIFVuZAdp8OjjFg5k4wHCBSU73E6eCdJQWyR
+ vWEuDFlAKyFBPmWaHs5fPmNjn2zNpJhRVYqbyYU8b7amksAiyshgOeMgd8lMHO2ApQeNvXST1Tk
+ Pl1LdmxnWQvdvKcVrDtzYn9DcAv/MnXevne0VlVe/x8Vw/Tn4+fCC85yJhdz8UoWY9O4AQOlzc2
+ YDy4gWBJSqStJJnEHpuYdDbU/mjzXgb/5M8k80WoSZte6Ay4Lz26f5HFrhn/SbEsqEbYown6I5F
+ NDIeaC1mzYYRJ+lHVIZhQdrG81/5V1dEFLNW+72VXNcojM2qA3iFFXDJqeBRK+zkZeSKFk+eJW5
+ 32cC91y77ezUx
+X-Google-Smtp-Source: AGHT+IHtvjaQIAnqQwIQ68wYjyljnDuHqZZtzYG66etr656BmiTaWpGw/8FoVURv1RgItKm96jMAXQ==
+X-Received: by 2002:a05:6e02:154e:b0:3dc:875e:ed7e with SMTP id
+ e9e14a558f8ab-3dc9b6cc045mr179958585ab.12.1748435602143; 
+ Wed, 28 May 2025 05:33:22 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.16
+ 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 05:33:17 -0700 (PDT)
+ Wed, 28 May 2025 05:33:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
@@ -75,11 +75,13 @@ Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Bill Mills <bill.mills@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Andrew Phelps <andrew.phelps@canonical.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v5 04/25] spl: Tidy up the header includes
-Date: Wed, 28 May 2025 06:32:06 -0600
-Message-ID: <20250528063224.v5.4.Ie563607416a8f7504c69b46ce608c1c1df75caa6@changeid>
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: [PATCH v5 05/25] x86: Move Intel GNVS file into the common include
+ directory
+Date: Wed, 28 May 2025 06:32:07 -0600
+Message-ID: <20250528123236.1138632-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
 References: <20250528123236.1138632-1-sjg@chromium.org>
@@ -101,76 +103,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are out of order. Fix them.
+Move this so we can include it from sandbox, needed since it is in a
+bloblist and must have a check.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/spl.c | 27 +++++++++++++--------------
- 1 file changed, 13 insertions(+), 14 deletions(-)
+ arch/x86/cpu/apollolake/acpi.c                    | 2 +-
+ arch/x86/cpu/intel_common/acpi.c                  | 2 +-
+ arch/x86/include/asm/arch-apollolake/global_nvs.h | 2 +-
+ board/google/chromebook_coral/coral.c             | 2 +-
+ {arch/x86/include/asm => include}/intel_gnvs.h    | 0
+ 5 files changed, 4 insertions(+), 4 deletions(-)
+ rename {arch/x86/include/asm => include}/intel_gnvs.h (100%)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 76fd56dfe4b..abbca9acde0 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -6,42 +6,41 @@
-  * Aneesh V <aneesh@ti.com>
-  */
+diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
+index 93040e7bb37..f32a10daedd 100644
+--- a/arch/x86/cpu/apollolake/acpi.c
++++ b/arch/x86/cpu/apollolake/acpi.c
+@@ -12,6 +12,7 @@
  
--#include <config.h>
--#include <bloblist.h>
- #include <binman_sym.h>
-+#include <bloblist.h>
-+#include <bootcount.h>
- #include <bootstage.h>
+ #include <cpu.h>
  #include <dm.h>
-+#include <fat.h>
-+#include <fdt_support.h>
- #include <handoff.h>
- #include <hang.h>
-+#include <image.h>
- #include <init.h>
- #include <irq_func.h>
++#include <intel_gnvs.h>
  #include <log.h>
-+#include <malloc.h>
- #include <mapmem.h>
-+#include <nand.h>
- #include <serial.h>
- #include <spl.h>
- #include <spl_load.h>
- #include <system-constants.h>
--#include <asm/global_data.h>
--#include <asm-generic/gpio.h>
--#include <nand.h>
--#include <fat.h>
--#include <u-boot/crc.h>
- #if CONFIG_IS_ENABLED(BANNER_PRINT)
- #include <timestamp.h>
- #endif
- #include <version.h>
--#include <image.h>
--#include <malloc.h>
--#include <mapmem.h>
-+#include <video.h>
-+#include <wdt.h>
-+#include <asm-generic/gpio.h>
-+#include <asm/global_data.h>
-+#include <asm/u-boot.h>
- #include <dm/root.h>
- #include <dm/util.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
- #include <linux/compiler.h>
--#include <fdt_support.h>
--#include <bootcount.h>
--#include <wdt.h>
--#include <video.h>
-+#include <u-boot/crc.h>
+ #include <p2sb.h>
+ #include <pci.h>
+@@ -20,7 +21,6 @@
+ #include <asm/acpi_table.h>
+ #include <asm/cpu_common.h>
+ #include <asm/intel_acpi.h>
+-#include <asm/intel_gnvs.h>
+ #include <asm/intel_pinctrl.h>
+ #include <asm/intel_pinctrl_defs.h>
+ #include <asm/intel_regs.h>
+diff --git a/arch/x86/cpu/intel_common/acpi.c b/arch/x86/cpu/intel_common/acpi.c
+index 982149b394e..8688232ec34 100644
+--- a/arch/x86/cpu/intel_common/acpi.c
++++ b/arch/x86/cpu/intel_common/acpi.c
+@@ -11,6 +11,7 @@
+ #include <bloblist.h>
+ #include <cpu.h>
+ #include <dm.h>
++#include <intel_gnvs.h>
+ #include <acpi/acpigen.h>
+ #include <asm/acpigen.h>
+ #include <asm/acpi_table.h>
+@@ -23,7 +24,6 @@
+ #include <asm/mpspec.h>
+ #include <asm/smm.h>
+ #include <asm/turbo.h>
+-#include <asm/intel_gnvs.h>
+ #include <asm/arch/iomap.h>
+ #include <asm/arch/pm.h>
+ #include <asm/arch/systemagent.h>
+diff --git a/arch/x86/include/asm/arch-apollolake/global_nvs.h b/arch/x86/include/asm/arch-apollolake/global_nvs.h
+index ef8eb228dbe..639d8f2de78 100644
+--- a/arch/x86/include/asm/arch-apollolake/global_nvs.h
++++ b/arch/x86/include/asm/arch-apollolake/global_nvs.h
+@@ -10,6 +10,6 @@
+ #ifndef _GLOBAL_NVS_H_
+ #define _GLOBAL_NVS_H_
  
- DECLARE_GLOBAL_DATA_PTR;
- DECLARE_BINMAN_MAGIC_SYM;
+-#include <asm/intel_gnvs.h>
++#include <intel_gnvs.h>
+ 
+ #endif /* _GLOBAL_NVS_H_ */
+diff --git a/board/google/chromebook_coral/coral.c b/board/google/chromebook_coral/coral.c
+index db96534857c..b4053fa097d 100644
+--- a/board/google/chromebook_coral/coral.c
++++ b/board/google/chromebook_coral/coral.c
+@@ -11,13 +11,13 @@
+ #include <dm.h>
+ #include <event.h>
+ #include <init.h>
++#include <intel_gnvs.h>
+ #include <log.h>
+ #include <sysinfo.h>
+ #include <acpi/acpigen.h>
+ #include <asm-generic/gpio.h>
+ #include <asm/acpi_nhlt.h>
+ #include <asm/cb_sysinfo.h>
+-#include <asm/intel_gnvs.h>
+ #include <asm/intel_pinctrl.h>
+ #include <dm/acpi.h>
+ #include <linux/delay.h>
+diff --git a/arch/x86/include/asm/intel_gnvs.h b/include/intel_gnvs.h
+similarity index 100%
+rename from arch/x86/include/asm/intel_gnvs.h
+rename to include/intel_gnvs.h
 -- 
 2.43.0
 
