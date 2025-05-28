@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E88A6C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C54C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BB5B83A8D;
-	Wed, 28 May 2025 14:33:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7956083AA4;
+	Wed, 28 May 2025 14:33:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kORDZE+V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GcJXNeGu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E58D483A98; Wed, 28 May 2025 14:33:43 +0200 (CEST)
-Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
- [IPv6:2607:f8b0:4864:20::d43])
+ id 7712883AA6; Wed, 28 May 2025 14:33:45 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C51D8397A
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3652D83A7D
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd43.google.com with SMTP id
- ca18e2360f4ac-85de3e8d0adso117171439f.1
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:41 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3da73df6b6bso12835815ab.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748435619; x=1749040419; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748435621; x=1749040421; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7gWQbfA2QmiDZTQ3Uk/c6g0T24Z+jvrEuviFCMU2l+s=;
- b=kORDZE+VC0yZy9fCBawutgRu/iT5E35Rf7e7wuasa8JvGcdGilQ9/aYbnm+huDMNrZ
- yZcnaoPHAhpz5ggmb3Kj5p8Ii9iFJPywyKgrtUdDZKkHh6r7TjbR8uiHOtDsnXz9IvOi
- Jp/azP5r10M2ecz5qMThclYDZtxt55IhhPw7g=
+ bh=eoYwqe3Ojud+jRx1+7hPf9ndoDSz0HM2eiBeFnlc1vE=;
+ b=GcJXNeGu8TVSbBqWjmAMp0qhcZ6X2bNHphx3c3HW1InpTSLrtZAkPQYCzlObhGGfV0
+ v5aaArL3FYQqzDxN+SXb9eayNDulhv2s/Aw8jVTdLo/WXhtLYfeJAl3hlxsl/Nr7hy1f
+ 48tVzboGfCmPJs/V1OVCpcDhN/1JI62n8kNDM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748435619; x=1749040419;
+ d=1e100.net; s=20230601; t=1748435621; x=1749040421;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7gWQbfA2QmiDZTQ3Uk/c6g0T24Z+jvrEuviFCMU2l+s=;
- b=xUHzuZWbjvJ/eGa3GudJg94kD5U43PhNz/1UXIkNVMyMxuQf1fqiSQKl41bUWWkh6J
- r+G6FvXZ3M7DKS0jm3lQBIpA0jYe+6UGrrLIoPVxfFg0F+yU9krsE+0WDB4Aghw0dSQU
- NLotGdm+mCDD0oRiAQKuU4uU3BQZi+FMyn09kWbucJYwLklEWx1z6tOwAkaRxF5nd555
- WYo+z+7Xye9SoEvo0HgLR/wvDySfXv7j3jHEs6tsDaz5HtlVfzzn/BFBNQc14lHGjzoB
- 7zzBAyB+5qmZoCU6lo1TiKlnYH80IppXzEgZg2nF/ccAZ8QGY7IMlW8Va3njY1ghZJg1
- dU6Q==
-X-Gm-Message-State: AOJu0Yw2v0ZhUpcSrK+sJwpbuEylHx6Rpdww+w2dwv0/2v/jDQ0d9t/P
- /i1VzZFo4HKbvdjrEYsHRp3xswGJtA1/CN0qCupozgkDHAGgfxyLOFze60cigO6SvCfB+aKXTxt
- VSaQoTz1/WMA=
-X-Gm-Gg: ASbGncs6lcGWXpgkWQ65OFuJCw5gqhlzm469fx517GpdhHDbMf8FgH7PuAcHfDXZ6i+
- kvA695OFVz5VXNtLQljvuaD0psMCFryGiJHJKI8NcIDMJzyovimIZxPkxi8fBG0zd8Dbav2/TY/
- v5uqIvbbTHRjqs0td0E92vCIhSywyyWSPPIg1LgUA2sMp+vYRGgQz6XfDb7Gy4ttvNwrIH1AMbN
- 9M8ImCM+1x0dzuW0AxFPfGp7/3CMJ5D99mPZdby6RLGrWLCComw5xFjbIQN+iRGkLPIyKAJuW9H
- dZdIQw5/3y86pUxA8rnwySylpKJB1Tp35ESFMY1Rb58S5TYIkj91bEtL1X7HoU5dle1kW7z2L8J
- rIbc5AVfQjjK8+s4WAeV8m2M=
-X-Google-Smtp-Source: AGHT+IF2QsUvQxy5TF34GhTFfOXZddcsupdkXqsPbfapFdA7LIdLrxvDq/pakGFz/R2HfUOuM9M8jg==
-X-Received: by 2002:a05:6e02:2513:b0:3dc:79fa:ed5b with SMTP id
- e9e14a558f8ab-3dc9b6884fbmr142382005ab.11.1748435618680; 
- Wed, 28 May 2025 05:33:38 -0700 (PDT)
+ bh=eoYwqe3Ojud+jRx1+7hPf9ndoDSz0HM2eiBeFnlc1vE=;
+ b=JeyaFVkRwwkm01IewaEYhjLtIxKGel7ts48OYgMVIyw5jjEFj3NvE74zFaaDSNeBM1
+ BuO7Fd2uxTTOtZFm8X9+9md37hn3sigfVxy64vnSpAQJUEBo+mHFVEYlS143v2jmpPYX
+ kXZir1r0ke7AW8K+ySKtCNVnGG/Kxa5ERNv9rfsg5VzGYLm9qbysxQmmVeSXPLycIUKf
+ 3T1z8wqQsfOE8v5yIgBYvSwkDXmB1dHWiMWZDEtz6o3MRLR6+Itkv/nsXZ7EA54jPW86
+ zU8VNiE3riHK5QHGxOsVqXsIdyyT43IvoW/AC1ter/Tv48+NfJP8UI+QcaSvPbT9qbFc
+ XZcA==
+X-Gm-Message-State: AOJu0Ywzm4CyYogK0k7Cj8KNdi1jHqycT5x/OeILjGi3Z4ODPYKzftqa
+ SA3By6WDnVY7o6UPyfGTUfAl72LzlSJSB76L/V39y1WljX50FlZFqd0tuMFKcfJh+LU0yt66MKV
+ wtOi47rrx
+X-Gm-Gg: ASbGncu94sAWlTXqXkd/bdzETLZAlsVVeklIIa9gXPNYYe8xRqNd7eo3Yo6owvcNRtw
+ pcyplqX3HARk0LYugGDLu9RZS9l5yqkQwGNyoLEsUlKPr9BEMi/54qpeV6sCYngD4i7YRGGREhJ
+ 3OaKwYSiWElMC8k1lPIA+KwQCu3EG7Bajs2Uj45kQVXtqrIjG6Dr6+CMobnsMQ4qVEFXvgzsNXf
+ pxLQc11NEt/yQa0/Y9KNc3iaPQRvD8d6HV+hCjXzaWFCWPSYMrSXsDN8C9dInPhtVNoN2Gosj87
+ 75Vh5Xx40POuR1nu+9YPWzmHmlt9Q8JsS6BWTO9G0IYPcW9Rsf8ELwx0OwFKVi76xKrDJGSKhe1
+ 6NPsZiGFWItQy
+X-Google-Smtp-Source: AGHT+IHXOli7fsC99e0aIN+CRNz5tA4PHuA6S6KCe354mltDY6FLC9q4WuZzGb6laISIJpr0BETyaw==
+X-Received: by 2002:a05:6e02:2503:b0:3dc:7fa4:832 with SMTP id
+ e9e14a558f8ab-3dc9b68826fmr132326895ab.9.1748435621124; 
+ Wed, 28 May 2025 05:33:41 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.37
+ 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 05:33:37 -0700 (PDT)
+ Wed, 28 May 2025 05:33:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
@@ -75,13 +75,18 @@ Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Bill Mills <bill.mills@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Andrew Phelps <andrew.phelps@canonical.com>,
- Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Simon Glass <sjg@chromium.org>, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Xu Zhang <423756212@qq.com>
-Subject: [PATCH v5 12/25] passage: arm: Accept a passage from the previous
- phase
-Date: Wed, 28 May 2025 06:32:14 -0600
-Message-ID: <20250528063224.v5.12.I56d9d06e5d74724c963eaffbbe1c2aa400b60bb8@changeid>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v5 13/25] passage: spl: Support adding the dtb to the passage
+ bloblist
+Date: Wed, 28 May 2025 06:32:15 -0600
+Message-ID: <20250528063224.v5.13.Id6acd05e6730b3301ddc62b415a155202ddba74b@changeid>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
 References: <20250528123236.1138632-1-sjg@chromium.org>
@@ -103,129 +108,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Accept a bloblist and control devicetree from a previous phase in
-registers 0 to 3, as documented in the Firmware Handoff
-specification[1].
+Add an option for SPL to add a devicetree to the passage bloblist, so
+SPL can provide the devicetree to U-Boot.
 
-Note that there is currently a weak function called save_boot_params()
-which happens to save the same registers as are needed for this
-protocol. But it seems better to implement this feature as a first-class
-citizen, if for no other reason than that many boards have their own
-version of save_boot_params() which may not happen to save the required
-registers. A weak function is not a good basis for an API.
-
-[1] https://firmwarehandoff.github.io/firmware_handoff/main/index.html
+Fix a few long lines while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-While some efforts were made to encourage Intel to adopt this
-specification, this has not yet been successful. However I do intend to
-use my proposed x86 handoff in U-Boot, once this series is in.
 
-(no changes since v4)
-
-Changes in v4:
-- Update commit message to indicate this can only be for ARM at present
-- Update commit message to mention why save_boot_params() is not used
-
-Changes in v3:
-- Add support for aarch64 also
-- Update registers to match the Firmware Handoff protocol
+(no changes since v2)
 
 Changes in v2:
-- Use three registers instead of two for the entry
+- Rebase on -master
+- Update the commit message to mention the long lines
 
- arch/arm/cpu/armv7/start.S | 10 +++++++++-
- arch/arm/cpu/armv8/start.S | 12 ++++++++++++
- arch/arm/lib/crt0.S        |  6 ++++++
- arch/arm/lib/crt0_64.S     |  6 ++++++
- 4 files changed, 33 insertions(+), 1 deletion(-)
+ common/Kconfig   | 20 ++++++++++++++++++++
+ common/spl/spl.c | 43 +++++++++++++++++++++++++++++++++++++++++--
+ include/spl.h    |  2 ++
+ 3 files changed, 63 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
-index 959251957de..81cb20987ad 100644
---- a/arch/arm/cpu/armv7/start.S
-+++ b/arch/arm/cpu/armv7/start.S
-@@ -40,6 +40,14 @@ reset:
- 	/* Allow the board to save important registers */
- 	b	save_boot_params
- save_boot_params_ret:
-+#if CONFIG_IS_ENABLED(PASSAGE_IN)
-+	# Keep passage information in case it is provided
-+	cmp	r0, #0
-+	moveq	r6, r1		/* mach */
-+	moveq	r7, r2		/* dtb */
-+	moveq	r8, r3		/* bloblist */
-+	movne	r6, #0
-+#endif
- #ifdef CONFIG_POSITION_INDEPENDENT
- 	/*
- 	 * Fix .rela.dyn relocations. This allows U-Boot to loaded to and
-@@ -123,7 +131,7 @@ switch_to_hypervisor_ret:
- 	bl	cpu_init_crit
- #endif
- #endif
--
-+	# Note: r6-r8 are available to _main in case standard passage is used
- 	bl	_main
+diff --git a/common/Kconfig b/common/Kconfig
+index 94046c9aa8c..fcd9d1620b5 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1250,6 +1250,26 @@ config SPL_PASSAGE_IN
+ 	  firmware phases to communicate state and settings to following
+ 	  phases.
  
- /*------------------------------------------------------------------------------*/
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index 829a620faeb..75d2fd1e271 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -57,6 +57,18 @@ reset:
- 	b	save_boot_params
- .globl	save_boot_params_ret
- save_boot_params_ret:
-+#if CONFIG_IS_ENABLED(PASSAGE_IN)
-+	# Keep passage information in case it is provided
-+	cmp	x2, #0
-+	bne	no_passage
-+	mov	x19, x1		/* mach */
-+	mov	x20, x0		/* dtb */
-+	mov	x21, x3		/* bloblist */
-+	b	passage_done
-+no_passage:
-+	mov	x19, #0
-+passage_done:
-+#endif
++config SPL_PASSAGE_OUT
++	bool "Support the standard-passage protocol in SPL (out)"
++	depends on SPL_BLOBLIST
++	default y if PASSAGE_IN
++	help
++	  This enables a standard protocol for entering U-Boot, providing
++	  parameters in a bloblist and a devicetree. It allows the various
++	  firmware stages to communicate state and settings to following
++	  stages.
++
++config SPL_PASSAGE_ADD_DTB
++	bool "Add devicetree to the outgoing passage"
++	depends on SPL_PASSAGE_OUT
++	default y if SPL_PASSAGE_OUT && !SPL_PASSAGE_IN
++	help
++	  Add the devicetree into the bloblist in SPL (it is assumed to not
++	  already be there) so that the next phase (U-Boot) can find it.
++
++	  This option should be enabled in the phase that sets up the passage.
++
+ source "common/spl/Kconfig"
  
- #if CONFIG_POSITION_INDEPENDENT && !defined(CONFIG_XPL_BUILD)
- 	/* Verify that we're 4K aligned.  */
-diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
-index a50dde60e8b..ab758ca900f 100644
---- a/arch/arm/lib/crt0.S
-+++ b/arch/arm/lib/crt0.S
-@@ -113,6 +113,12 @@ ENTRY(_main)
- 	mov	r9, r0
- 	bl	board_init_f_init_reserve
+ config IMAGE_SIGN_INFO
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index f14c68c46a5..6e38f118f48 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -66,6 +66,11 @@ binman_sym_declare(ulong, u_boot_vpl_any, size);
  
-+#if CONFIG_IS_ENABLED(PASSAGE_IN)
-+	str	r6, [r9, #GD_PASSAGE_MACH]
-+	str	r7, [r9, #GD_PASSAGE_DTB]
-+	str	r8, [r9, #GD_PASSAGE_BLOBLIST]
+ #endif /* BINMAN_UBOOT_SYMBOLS */
+ 
++#if CONFIG_IS_ENABLED(PASSAGE_ADD_DTB)
++binman_sym_declare(ulong, u_boot_dtb, image_pos);
++binman_sym_declare(ulong, u_boot_dtb, size);
 +#endif
 +
- #if defined(CONFIG_DEBUG_UART) && CONFIG_IS_ENABLED(SERIAL)
- 	bl	debug_uart_init
- #endif
-diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-index 30950ddaf9b..498fe849f50 100644
---- a/arch/arm/lib/crt0_64.S
-+++ b/arch/arm/lib/crt0_64.S
-@@ -94,6 +94,12 @@ ENTRY(_main)
- 	bl	debug_uart_init
- #endif
+ /* Define board data structure */
+ static struct bd_info bdata __attribute__ ((section(".data")));
  
-+#if CONFIG_IS_ENABLED(PASSAGE_IN)
-+	str	x19, [x18, #GD_PASSAGE_MACH]
-+	str	x20, [x18, #GD_PASSAGE_DTB]
-+	str	x21, [x18, #GD_PASSAGE_BLOBLIST]
-+#endif
+@@ -412,7 +417,8 @@ static int setup_spl_handoff(void)
+ {
+ 	struct spl_handoff *ho;
+ 
+-	ho = bloblist_ensure(BLOBLISTT_U_BOOT_SPL_HANDOFF, sizeof(struct spl_handoff));
++	ho = bloblist_ensure(BLOBLISTT_U_BOOT_SPL_HANDOFF,
++			     sizeof(struct spl_handoff));
+ 	if (!ho)
+ 		return -ENOENT;
+ 
+@@ -429,7 +435,8 @@ static int write_spl_handoff(void)
+ 	struct spl_handoff *ho;
+ 	int ret;
+ 
+-	ho = bloblist_find(BLOBLISTT_U_BOOT_SPL_HANDOFF, sizeof(struct spl_handoff));
++	ho = bloblist_find(BLOBLISTT_U_BOOT_SPL_HANDOFF,
++			   sizeof(struct spl_handoff));
+ 	if (!ho)
+ 		return -ENOENT;
+ 	handoff_save_dram(ho);
+@@ -446,6 +453,33 @@ static inline int write_spl_handoff(void) { return 0; }
+ 
+ #endif /* HANDOFF */
+ 
++/**
++ * Write the devicetree for the next phase into the passage
++ *
++ * For now we assume the next phase is U-Boot proper
++ *
++ * @return 0 on success,  -ENOSPC if it is missing and could not be added due to
++ *	lack of space, or -ESPIPE it exists but has the wrong size
++ */
++static int passage_write_dtb(void)
++{
++	if (CONFIG_IS_ENABLED(PASSAGE_ADD_DTB)) {
++		ulong start = binman_sym(ulong, u_boot_dtb, image_pos);
++		ulong size = binman_sym(ulong, u_boot_dtb, size);
++		void *dtb;
++		int ret;
 +
- 	mov	x0, #0
- 	bl	board_init_f
++		log_debug("passage: Adding control dtb size %lx\n", size);
++		ret = bloblist_ensure_size(BLOBLISTT_CONTROL_FDT, size, 0,
++					   (void **)&dtb);
++		if (ret)
++			return ret;
++		memcpy(dtb, map_sysmem(start, size), size);
++	}
++
++	return 0;
++}
++
+ /**
+  * get_bootstage_id() - Get the bootstage ID to emit
+  *
+@@ -835,6 +869,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 			hang();
+ 		}
+ 	}
++	if (CONFIG_IS_ENABLED(PASSAGE_ADD_DTB)) {
++		ret = passage_write_dtb();
++		if (ret)
++			printf(PHASE_PROMPT "Write DTB failed (err=%d)\n", ret);
++	}
+ 	if (CONFIG_IS_ENABLED(BLOBLIST)) {
+ 		ret = bloblist_finish();
+ 		if (ret)
+diff --git a/include/spl.h b/include/spl.h
+index 7c10c7f792e..4fa97078a31 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -441,6 +441,8 @@ binman_sym_extern(ulong, u_boot_spl_any, image_pos);
+ binman_sym_extern(ulong, u_boot_spl_any, size);
+ binman_sym_extern(ulong, u_boot_vpl_any, image_pos);
+ binman_sym_extern(ulong, u_boot_vpl_any, size);
++binman_sym_extern(ulong, u_boot_dtb, image_pos);
++binman_sym_extern(ulong, u_boot_dtb, size);
  
+ /**
+  * spl_get_image_pos() - get the image position of the next phase
 -- 
 2.43.0
 
