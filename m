@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39FEEC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 09:35:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82800C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 10:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65BDD82991;
-	Wed, 28 May 2025 11:35:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BB89E839C7;
+	Wed, 28 May 2025 12:14:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ECzuvK+2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IuUP6ma5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B942483A24; Wed, 28 May 2025 11:35:40 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A7848070C
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 11:35:38 +0200 (CEST)
+ id 66AF683A07; Wed, 28 May 2025 12:14:57 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EA44A83091
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 12:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6020ff8d35dso1406339a12.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 02:35:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748424938; x=1749029738; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=06z9JUxpK3c73by+kPC+fzNAMVijopd7Ys46+F+a/78=;
- b=ECzuvK+2U/KdC2ztQWJLNOf+nVK6i9Movc+OzsFE7sB3py1HC09UVV6sJuB3cN+24p
- QGBHCxQL49U565fr4jerf8EnZyaznieox70Q5iMHkKGdC73UagBG32TWC5cKO6nGwYTZ
- px1KqnHqU0KjO+PYiF1LRcu236n9TyqIIM5Tc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748424938; x=1749029738;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=06z9JUxpK3c73by+kPC+fzNAMVijopd7Ys46+F+a/78=;
- b=vC3naaIwJGf4350lCTDVwkCFJ1InPMpmaZgOA+gPAMtdjgWlL6r43C8wb+maP3DWs6
- ZeDf9SpUEnIXlxHXBK68sppjBFeGwlfLgw+RXFUy+ahMblvOMB9HlEN/8MCle8ej8it7
- 49RU9Qr7R6YFF1osPA3CmxsOMAVGwwqVyxYmTTTG8zLI9QpVjQZ2W3zSNMv2gqeNf8s7
- U1ieCZFCLw3/z0Fdy1ylsHHplA4ShWfU8U0bmLHWEdepAylZMduWjvRA9j/jFlpcZ5Cx
- iel3cnvTKsRgAtQW+APO4wdonNsUOvz+m0dWhsAN0rAO99NPeaCBrpydUfsyGBBjU8FG
- 5NKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV9BlCXU52n352SVSa94VcylJRmYpUlKjS1KunYYM1p7JmV7qi207SfQepTcohhLkk9eya4+EA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIZgB0JSO9o/697v0ocScSjUxuhN2wno8YwJoKKUzJ+23G0juG
- sxp7bfJTgRvkPpMqGIJ7hvuCpcLCSz71N2OVnqGsYnmpAyg5sDyQG1UpIlinZzoCUCKsBJTV//v
- LY1Fn63rwOpyr2VriYwlCDrTT6XtjTUiYsRzjiyRR
-X-Gm-Gg: ASbGncsvAdDm9DxkheeEOP+730mrp8MUktX4H/cT1qaQawygFO5Yt36LnnowdtsOIS6
- 0CuN+3ojqubJ72cG4p4S0rCrGk5id0P7icuhYg46K/iB2/PHz5CG37OOGSzYYatoGr85MybMZqf
- pguqXyhYx1APtPeugjlWBYTU2sNWGViVe69Aq9Zy4jsg==
-X-Google-Smtp-Source: AGHT+IFIHEtK9PyR1VwfbA4f8GyTVZWsQo81zpkOXJkFgZRrKMBHq54jSDGuXDN5yg+MERZtIXYWC0pIbbO6Ej4bXdg=
-X-Received: by 2002:a05:6402:27cc:b0:602:7de0:b30f with SMTP id
- 4fb4d7f45d1cf-6050e58b1a6mr3319781a12.16.1748424937893; Wed, 28 May 2025
- 02:35:37 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54SAErTv2063995;
+ Wed, 28 May 2025 05:14:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748427293;
+ bh=N4sunxm/KaPkEekadd2dhw8fAuPti1CgwrLqdbTysRc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=IuUP6ma5t67zfU08BhUn/o0hlnE3mjXHtzAoud5ZKh+LFMFnB6fkjr7ZmSDWE7K/7
+ PETb1VkA6GqU/HfnUDRAVIcX+LyjBgGXpg/uZqadvW5LGhUx/Girls9WuC6RSR575M
+ tgByb0Q2cx+mFFjLK4j3KAqnOjNKqJ/BK/NCq62g=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54SAEqU03362054
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 28 May 2025 05:14:52 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
+ May 2025 05:14:52 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 28 May 2025 05:14:52 -0500
+Received: from [172.24.227.139]
+ (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.139])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54SAEnxN129887;
+ Wed, 28 May 2025 05:14:49 -0500
+Message-ID: <edf9c133-8f07-40d7-8345-62c5d9dff8bc@ti.com>
+Date: Wed, 28 May 2025 15:44:48 +0530
 MIME-Version: 1.0
-References: <CAFLszTjtw8s2NnrS+B6-K8i_YF0ZGU9JB+O_vNYmT+AD7Km_AA@mail.gmail.com>
- <20250526145128.GW100073@bill-the-cat>
-In-Reply-To: <20250526145128.GW100073@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 May 2025 10:35:26 +0100
-X-Gm-Features: AX0GCFtsMeNCBiOI_yks-a18-nIsExATe1ScuacXA7smPb0oDsFJkB4YNuZpLhA
-Message-ID: <CAFLszTiF_3hMcgL7g6scpHRPa0wdmZSbKL4wfe+YYS5Wv94OJg@mail.gmail.com>
-Subject: Re: Booting distros in CI
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] arm: mach-k3: am62a: Fixup a53 max cpu frequency by
+ speed-grade
+To: Daniel Schultz <d.schultz@phytec.de>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <afd@ti.com>
+CC: <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>,
+ <bb@ti.com>
+References: <20250430104236.2611089-1-a-patra@ti.com>
+ <20250430104236.2611089-4-a-patra@ti.com>
+ <e9ff8b0e-5aa7-44d7-a661-b21dd2643d95@phytec.de>
+Content-Language: en-US
+From: Aparna Patra <a-patra@ti.com>
+In-Reply-To: <e9ff8b0e-5aa7-44d7-a661-b21dd2643d95@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,33 +85,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 26 May 2025 at 15:51, Tom Rini <trini@konsulko.com> wrote:
+On 02/05/25 15:02, Daniel Schultz wrote:
 >
-> On Mon, May 26, 2025 at 03:10:49PM +0100, Simon Glass wrote:
+> On 4/30/25 12:42, Aparna Patra wrote:
+>> AM62A SoC has multiple speed grades. Add function to delete
+>> non-relevant CPU frequency nodes, based on the information
+>> retrieved from hardware registers. Fastest grade's maximum
+>> frequency also depends on PMIC voltage,hence to simplify
+>> implementation use the smaller value.
+>>
+>> Signed-off-by: Aparna Patra <a-patra@ti.com>
+>> ---
+>>   arch/arm/mach-k3/am62ax/am62a7_fdt.c          | 14 +++++++++++
+>>   .../arm/mach-k3/include/mach/am62a_hardware.h | 23 +++++++++++++++++++
+>>   2 files changed, 37 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c 
+>> b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+>> index 40833ca392..9526c5b255 100644
+>> --- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+>> +++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+>> @@ -81,6 +81,19 @@ static void 
+>> fdt_fixup_thermal_zone_nodes_am62a(void *blob, int maxc)
+>>       }
+>>   }
+>>   +static void fdt_fixup_cpu_freq_nodes_am62a(void *blob, int max_freq)
+>> +{
+>> +    if (max_freq >= 1250000000)
+>> +        return;
+> I dont think this if case is required. Just let if fail both following 
+> conditions.
+Agreed, will remove this.
+>> +    if (max_freq <= 1000000000) {
+>> +        fdt_del_node_path(blob, "/opp-table/opp-1250000000");
+>> +        fdt_del_node_path(blob, "/opp-table/opp-1400000000");
+>> +    }
+>> +    if (max_freq <= 800000000) {
+>> +        fdt_del_node_path(blob, "/opp-table/opp-1000000000");
+>> +    }
+>> +}
+>> +
+>>   int ft_system_setup(void *blob, struct bd_info *bd)
+>>   {
+>>       fdt_fixup_cores_wdt_nodes_am62a(blob, k3_get_core_nr());
+>> @@ -88,6 +101,7 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+>>       fdt_fixup_video_codec_nodes_am62a(blob, k3_has_video_codec());
+>>       fdt_fixup_canfd_nodes_am62a(blob, k3_has_canfd());
+>>       fdt_fixup_thermal_zone_nodes_am62a(blob, k3_get_max_temp());
+>> +    fdt_fixup_cpu_freq_nodes_am62a(blob, k3_get_a53_max_frequency());
+>>       fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+>>       fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 
+>> 0x1800000);
+>>   diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h 
+>> b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+>> index 0ec04a72f5..64e4a379fa 100644
+>> --- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
+>> +++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+>> @@ -28,6 +28,8 @@
+>>   #define JTAG_DEV_VIDEO_CODEC_SHIFT            14
+>>   #define JTAG_DEV_DSS_MASK            GENMASK(16, 13)
+>>   #define JTAG_DEV_DSS_SHIFT            13
+>> +#define JTAG_DEV_SPEED_MASK            GENMASK(10, 6)
+>> +#define JTAG_DEV_SPEED_SHIFT            6
+>>   #define JTAG_DEV_TEMP_MASK            GENMASK(5, 3)
+>>   #define JTAG_DEV_TEMP_SHIFT            3
+>>   @@ -144,6 +146,27 @@ static inline int k3_get_max_temp(void)
+>>           return JTAG_DEV_TEMP_EXTENDED_VALUE;
+>>   }
+>>   +static inline char k3_get_speed_grade(void)
+>> +{
+>> +    u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
+>> +    u32 speed_grade = (dev_id & JTAG_DEV_SPEED_MASK) >>
+>> +               JTAG_DEV_SPEED_SHIFT;
+>> +
+>> +    return 'A' - 1 + speed_grade;
+>> +}
+>> +
+>> +static inline int k3_get_a53_max_frequency(void)
+>> +{
+>> +    if (k3_get_speed_grade() <= 'N')
+>> +        return 800000000;
+>> +
 >
-> > Hi Tom,
-> >
-> > What do you think about having a Linux distro in the docker image so
-> > we could run a 'boot' test in CI without needing my lab?
-> >
-> > Alpine Linux has an image which is about 250MB.
+> ^ empty lines where should be none in this function.
 >
-> I did say we should be doing this in some other thread we had, so yes, I
-> think it's a good concept. Ilias I believe has been telling me about
-> some HTTP (or HTTPS) boot pipeline Linaro has for a while, and with
-> Adriano's patch to add a simple web server to CI too, yes, a pytest
-> doing that would be a good next step forward. I'm sure we can find some
-> sufficient and small stock images to fetch and use.
+> - Daniel
 
-As discussed on the call, Ilias / team is planning to take a look at
-this, so I'll hold off for a few months on anything here from my own
-side.
+Will remove the empty lines as well.
+Thanks!
 
-Regards,
-SImon
-
-
-> --
-> Tom
+>
+>> +    else if (k3_get_speed_grade() <= 'R')
+>> +        return 1000000000;
+>> +
+>> +    else
+>> +        return 1250000000;
+>> +}
+>> +
+>>   #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+>>     static const u32 put_device_ids[] = {};
