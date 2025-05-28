@@ -4,110 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E36AC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 16:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2069EC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 16:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D74D83A1B;
+	by phobos.denx.de (Postfix) with ESMTP id 7337083A5E;
 	Wed, 28 May 2025 18:54:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="snhCvK1T";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IbOHla4K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF677832A4; Wed, 28 May 2025 16:25:29 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id F2EB6839D5; Wed, 28 May 2025 16:32:29 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 269688328D
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:25:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A681832A4
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:32:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-735a8be4ea9so85538a34.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 07:25:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-604e745b6fbso4772165a12.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 07:32:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748442326; x=1749047126; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rSYy3JOnjlvPanwi3lqHexOXKUTQ/Go2whW10qTiO9w=;
- b=snhCvK1T43nhS4UWQYtQmUeqAhYn4xc1PVa2XO5N3ujVq6oOP5ypF2z3T6TA+vtC1L
- ZZFU/n61rznYDVDGtHQrT7ugxn2y9ppONXDx0wGgcbEV/MQ3rOWmxhSWTaD2u7A3//kK
- LZbsQg5F4z3E28Jxjp7cHqPWRl1ed5kNrZNOQ=
+ d=chromium.org; s=google; t=1748442747; x=1749047547; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hlyxwwbkYDCgxjmtT+iaqRm3xTS+mo2sOBLrwaQWENM=;
+ b=IbOHla4KEOjxSa019hgLdTh4nKBVGc88YByKLLaBR9y0bV+nPEljdHYYV3H9T9iBcb
+ ZC6PyiKNf6GND+tEZkbIYHPVD1pshUCRoIIv2lvOBGMMRBYxInguSWtlfO0LT21VdT7M
+ AG9bHUK/gz3uKxe0SYiMFzcTkrWf5GBc0Ir5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748442326; x=1749047126;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rSYy3JOnjlvPanwi3lqHexOXKUTQ/Go2whW10qTiO9w=;
- b=D6SSS9xCoUMrRQDyCPqrswGqEwACnyibGey9wwDjgd+sNiOwQWzd1xCBzXz+kS0FUK
- bhm6XSe5LGNjBZze/FiKyO+Rj/TRTXucOemaGc+tke7stR+/YtMRWIB92eDZEzBbNd00
- 7HwkorYYSeOswVXuRIDWBgw7KG3SxSnOCN64T9JUbzPqNthUIiISm7QGuVST8FtB/8Ti
- PVGDEn80ivU7UMISMntTqHQMuADZjCMeiEOz0zOIF0VlY5BNFAe3Bnm5B+e04BPKQ4sv
- 0Hkt1tkYMG89PWz6f6w7m3eskYEH/qVXEa2Ly1pYuAjgcMnQbVDXqv7F8eFdV9SksS31
- cbRw==
-X-Gm-Message-State: AOJu0YwoIfEX6BacEUMCf9tWaWTY19SlAiU14tM3Eue5hgl6BQWwK0z7
- Oj7n58V/QOhwq6RnX4tooaZVZanOmBno67wjNos+JrjyjbigOjYXvXyYVnNaDRFZVlw=
-X-Gm-Gg: ASbGncvE5wlF4ZujW4145U9esg3OCy/kR6n75fefFUYZ9eqh01G3IIaU7zpyRo7O7Vt
- 3yG1hQiaFBMqkJOCS0z7ZpRQ60o0oGlx2L7ScPHvLG+HVqbmGtZEfrvNIfW6Wz+mI+412ZPi+NA
- /9nO/NRNi3Qr7bbECKa4Hf2fPDTxuErqHYYepWAzleKKJbSn5saJ+jiZZCc2ki4o3h51BEOrq+1
- wF7Mulik7JXviqL8iSzViac5lAB0WJFJ21crEPCsJt7VgdLnH0JrBVlwp3VGHimrupaajEwSsI+
- uZeG62vOjwXFEUTz+p5dEgzWRWQxeiJRUMCAOezE+UGkiD5y9ViWxEhSlmop6WWMkTAh+UGs7hC
- eZ/vpYKX1h5wg
-X-Google-Smtp-Source: AGHT+IHDmfyr/dRl+RQ3e60qohzQTRuBJtZ5OdJuNCC/AzPGkx9rlKpPCM5q7edkEcqz8yKJ5BNiVA==
-X-Received: by 2002:a05:6808:6905:b0:3f8:eee4:7140 with SMTP id
- 5614622812f47-40646802306mr9903336b6e.22.1748442325796; 
- Wed, 28 May 2025 07:25:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60bd9c35479sm194134eaf.24.2025.05.28.07.25.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 07:25:24 -0700 (PDT)
-Date: Wed, 28 May 2025 08:25:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- =?iso-8859-1?Q?Fran=E7ois?= Ozog <francois.ozog@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bill Mills <bill.mills@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Phelps <andrew.phelps@canonical.com>,
- Alexander Graf <agraf@csgraf.de>,
- Boyan Karatotev <boyan.karatotev@arm.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Fabio Estevam <festevam@gmail.com>,
- Harrison Mutai <harrison.mutai@arm.com>, Jonas Karlman <jonas@kwiboo.se>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Liya Huang <1425075683@qq.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@nabladev.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Xu Zhang <423756212@qq.com>, qemu-devel@nongnu.org
-Subject: Re: [PATCH v5 00/25] passage: Define a standard for firmware data flow
-Message-ID: <20250528142521.GW100073@bill-the-cat>
-References: <20250528123236.1138632-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1748442747; x=1749047547;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hlyxwwbkYDCgxjmtT+iaqRm3xTS+mo2sOBLrwaQWENM=;
+ b=lISKa1DWZNqr0c+M/alsuthaa41ShfY0Fz9Mx/WjmxFB6MxQQ3eKJX5dJdU8sS7tcv
+ blvwj4DvK92wzH4S17aFsw0YkDy0pUtsniFYSi0h4VitjXI0q9534BxVZ1bhKouiNgfK
+ EPFwADUL72UQWwuAMkdm0tUBxQrjHiZvakFQpH+BCayU/yy5LhaIYsDVdur52W2w+BhN
+ rjTjbCqmiuOxtKzq5344/PpocGIPW/d303v/MXMMfDE8dSBUj2cHhCG6HjGXUwydlmx+
+ VRGWGBXFNUKzy+Pa6T/hUS145rOVOmsIIfrSnoOBJanIQSw8sbdmf7JX+H0RQEl5vEe3
+ NVpw==
+X-Gm-Message-State: AOJu0YwYx3JN3iv1sYrMG8q9e2FnnFS+faDGpt5esYxRBOm3C74fzJb6
+ w5u09AFQJCJNnGPPKh0/59/6C63lP5H7sA8Kvvd/BMpRWHH8PHOoKKFWMUoK+zDrKmt+5nljtNp
+ n7JL586g1Gw+0RSLJea4jI5AF9ScvM/IPrXfxC4Hm
+X-Gm-Gg: ASbGncspqdphfL4em+0bGhe54/ajehAwvKtt0F7AA54JZPcDNeJcHmjzmk44JwZtvno
+ /Up5dSeNHBuYBGPzsQTM4ipwq2I2tdcfQ5sV/oKLMlfFuzxUx7bz7Jr4+rPHrL9nsrYbyxiqYM6
+ qnUYDjQcpwB+RZbE8g6+JB72Bz0RKItaQ=
+X-Google-Smtp-Source: AGHT+IEtBjpnrCkR+rvCtZR6h+C3QvbbBMGUo5TaDKUa4mpvb0XZCv0UF7MPI/rYm2UicCE0F15hx9taUmJMhZelg7Y=
+X-Received: by 2002:a05:6402:2685:b0:601:ff94:4a41 with SMTP id
+ 4fb4d7f45d1cf-6051c508081mr1848208a12.29.1748442746647; Wed, 28 May 2025
+ 07:32:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s6I0JLWs7/f7a4tv"
-Content-Disposition: inline
-In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250528123236.1138632-1-sjg@chromium.org>
+ <20250528142521.GW100073@bill-the-cat>
+In-Reply-To: <20250528142521.GW100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 28 May 2025 15:32:12 +0100
+X-Gm-Features: AX0GCFvcCHrPLCj_kfo01VmkqMM7E9fRLJsRanSmS7gq4al0pvRFhb8qpEpdfGQ
+Message-ID: <CAFLszTiHxdkoGbdOg8rzmn9kUmt925LZvZNxSXQC5Y4A=s2Vig@mail.gmail.com>
+Subject: Re: [PATCH v5 00/25] passage: Define a standard for firmware data flow
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bill Mills <bill.mills@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Phelps <andrew.phelps@canonical.com>, Alexander Graf <agraf@csgraf.de>, 
+ Boyan Karatotev <boyan.karatotev@arm.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Fabio Estevam <festevam@gmail.com>, Harrison Mutai <harrison.mutai@arm.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Liviu Dudau <liviu.dudau@foss.arm.com>, 
+ Liya Huang <1425075683@qq.com>, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>,
+ =?UTF-8?B?TWFyZWsgTW9qw61r?= <marek.mojik@nic.cz>, 
+ Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Xu Zhang <423756212@qq.com>, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 28 May 2025 18:54:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -125,77 +113,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---s6I0JLWs7/f7a4tv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 28 May 2025 at 15:25, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, May 28, 2025 at 06:32:02AM -0600, Simon Glass wrote:
+> >
+> > This series adds a standard way of passing information between different
+> > firmware phases. This already exists in U-Boot at a very basic level, in
+> > the form of a bloblist containing an spl_handoff structure, but the intent
+> > here is to define something useful across projects.
+> >
+> > The need for this is growing as firmware fragments into multiple binaries
+> > each with its own purpose. Without any run-time connection, we must rely
+> > on build-time settings which are brittle and painful to keep in sync.
+> >
+> > This feature is named 'standard passage' since the name is more unique
+> > than many others that could be chosen, it is a passage in the sense that
+> > information is flowing from one place to another and it is standard,
+> > because that is what we want to create.
+> >
+> > The implementation is mostly a pointer to a bloblist in a register, with
+> > an extra register to point to a devicetree, for more complex data. This
+> > should cover all cases (small memory footprint as well as complex data
+> > flow) and be easy enough to implement on all architectures.
+> >
+> > The emphasis is on enabling open communcation between binaries, not
+> > enabling passage of secret, undocumented data, although this is possible
+> > in a private environment.
+> >
+> > To try this out:
+> >
+> > $ ./scripts/build-qemu -a arm -rsx
+> >
+> > This will build and run QEMU for arm64 and you should see the standdard
+> > passage working:
+> >
+> >    Core:  49 devices, 13 uclasses, devicetree: passage
+> >
+> > This series is available at u-boot-dm/pass-working
+> >
+> > Changes in v5:
+> > - Add RFC for test script
+>
+> And this is why I question if you are working in good faith. I've
+> rejected this countless times. I'm still rejecting it. Stop including
+> it. Point at the version you could easily be maintaining in the contrib
+> repository where you have write access and no one will be telling you to
+> not do something. People would even review the patches since it would be
+> against mainline.
 
-On Wed, May 28, 2025 at 06:32:02AM -0600, Simon Glass wrote:
->=20
-> This series adds a standard way of passing information between different
-> firmware phases. This already exists in U-Boot at a very basic level, in
-> the form of a bloblist containing an spl_handoff structure, but the intent
-> here is to define something useful across projects.
->=20
-> The need for this is growing as firmware fragments into multiple binaries
-> each with its own purpose. Without any run-time connection, we must rely
-> on build-time settings which are brittle and painful to keep in sync.
->=20
-> This feature is named 'standard passage' since the name is more unique
-> than many others that could be chosen, it is a passage in the sense that
-> information is flowing from one place to another and it is standard,
-> because that is what we want to create.
->=20
-> The implementation is mostly a pointer to a bloblist in a register, with
-> an extra register to point to a devicetree, for more complex data. This
-> should cover all cases (small memory footprint as well as complex data
-> flow) and be easy enough to implement on all architectures.
->=20
-> The emphasis is on enabling open communcation between binaries, not
-> enabling passage of secret, undocumented data, although this is possible
-> in a private environment.
->=20
-> To try this out:
->=20
-> $ ./scripts/build-qemu -a arm -rsx
->=20
-> This will build and run QEMU for arm64 and you should see the standdard
-> passage working:
->=20
->    Core:  49 devices, 13 uclasses, devicetree: passage
->=20
-> This series is available at u-boot-dm/pass-working
->=20
-> Changes in v5:
-> - Add RFC for test script
+I fully understand that you don't want the script and I'm only
+including (as an RFC) so people can actually try this series out. I
+didn't want to point to my tree as I thought that would annoy you. I
+already went through why the contrib tree is not suitable for me.
 
-And this is why I question if you are working in good faith. I've
-rejected this countless times. I'm still rejecting it. Stop including
-it. Point at the version you could easily be maintaining in the contrib
-repository where you have write access and no one will be telling you to
-not do something. People would even review the patches since it would be
-against mainline.
+Please just ignore that patch. I've marked it as rejected in patchwork
+and if I send a v6, I'll drop it.
 
---=20
-Tom
-
---s6I0JLWs7/f7a4tv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg3HNEACgkQFHw5/5Y0
-tyzpzQv/QAvNLQIMwMNIoNlySjMBTRKDsdEucnkSGWEE4bSazKS8NUXsereQpKSG
-5oDQe6KQNIuQLEUF+fcBDnvy8gaDfW6iKtrXku3jqrLIMRpgTWsulHlEqSjJ+2HS
-GcUpeKSDwftsVs3L+c1HN/qXGbT7v1oBuSUPc0PBTviJ1ITjBblokyGvx/u/UWFr
-G4um65qj/NgEjGREV8SCuoV9hA/L5QLjXrSe/nzz3WKLcTKt/el0FF0b3SRIageT
-Us3WJYIwPLo3RJeQT/7n9gdmZn0Xs63mWgJqd3yUqvP/pmb9e8z+rHC+HMC3c/Ez
-RqrjDxzswBhDNjGjPW0eogtJWagzOCXptoFesV3iGOVFgOc56g1WaHeXeMM8Eejx
-j9Sll7c1HNoCBj52lihpcpsgPMmVus3Xdk+ePyJWLtqXPi8h20/mXY7Aontkp83X
-ZPrnovhA5VTKit9aqPnH9+XRSkqsUJcy96zS6z0ZoN2ow38GRiY8f+RzPwIKSPnx
-/JbMx5FE
-=gcjb
------END PGP SIGNATURE-----
-
---s6I0JLWs7/f7a4tv--
+Regards,
+Simon
