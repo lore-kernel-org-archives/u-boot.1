@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50D1C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 15:47:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B5C4C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 16:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D25C83403;
-	Wed, 28 May 2025 17:47:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2567D838EF;
+	Wed, 28 May 2025 18:08:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E5EuAP+R";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DRqhjRbd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB117838EF; Wed, 28 May 2025 17:47:02 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 779668394E; Wed, 28 May 2025 18:08:31 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D68B8334F
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 17:46:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D187C833F6
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 18:08:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-232059c0b50so71805ad.2
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 08:46:58 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-7370a2d1981so3076626b3a.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 09:08:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748447217; x=1749052017; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1VNo58UkLZuk1fpbhU2QpXijaghBCFxPb2Haf4OsKSI=;
- b=E5EuAP+RfwKR9jFyJhbakSx+otP1BMQj4CSl8ILdh1Oh3WQggKGHQmqFK6BhXfdTq+
- Jn3Q9txzzFTnb5HApgfUNRpNGg/b1d8+xIkwBh9FW9RqpuQPvNpFfM3vOhCRCOM9wAt3
- v1KLLigdPrzCKOo7enV3o8h4fPHDN62mDf1VMaa2YiI8LXMyy3hzqmTo1kkJEBuQYOI9
- S1JKj9FWl5fDAyhFKHl3gbKV69BiiuOpZITfFQN9T6IQNZCIQir9jq9rtGRO5HKvjmEh
- E3aj0Ii/15S+FRtt2AItaO51z8avDHLJvsZ6cJDaTN5ByuoA6o5UUE8a2ttFPLDCce3b
- +k+A==
+ d=chromium.org; s=google; t=1748448507; x=1749053307; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1VYX8d7cChvAvWxHuiBQzZASbedEZSwD+wRhAOVBAlg=;
+ b=DRqhjRbdhsTlVPses2rQ3/gAHpnsdV/mPYpRTuC3kUf1Md87lkVUIVP05EKthgTiti
+ vOFjVPGR7sIGk17lIavxXtmIas0vU4t8SwvZE//0VimMd32/Hf+OrAWcCbb9D90v1dYt
+ MtzBNRIo1HQJa3czE7ANwMaMgy6b1B4rDOKP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748447217; x=1749052017;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1748448507; x=1749053307;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1VNo58UkLZuk1fpbhU2QpXijaghBCFxPb2Haf4OsKSI=;
- b=Ga2REDP4RqyRTVQAt5zsF8vSMGbyTqO61eZRueyGUC2MyafBODcpSW35ONnea8kG3U
- EskH1hJKsvOx+W5EDSxUD2STZNN8EpnL4xEgZsVOWorJaoRkksmlP0cYxMR4rqCvjYUq
- dWnn8vcJwnANSJESKy3fGSDr7y/eKXIKGfTteyqakN585sBtTEQ82CKz1ZcOg/7PPGYN
- xm6woazk4mjDv2WkL39COlkNo9BNATmo2V47jdyHOIwA5fBSs+nTU2dooJOfOWNeHqyE
- gCM8h4wNXaRriv0jAz+RMTNEzOZMnsDVA6UoDvwTr0sthCd+Y59Dyxzad6VMT8AoXaT5
- jEyw==
-X-Gm-Message-State: AOJu0YwNYAUCETBC+gYJS45xm4C6UbZ/yAQvKat0l5CxmhcCUf+gfPoh
- F6mJQqd/6oSDvLOnkZq+nCW+CDL2DZGKxjN4ot+XhMpxEiuXI6yIlHH3ZM9lsjGNvcro646kmHj
- coquuqpEBC7TIAmLAlweC02zRKzMvt4AneKsAoL9lqQ==
-X-Gm-Gg: ASbGnctn6Cpn5EIjHyvcc8n5VEZmK3szTpsDIEWmxKPBgxZLxaTToa/R9u39iCfkxrt
- qVf7xjl/egoRdfzjl+yxdVCrLMGbUbi28F4OLH/YGTojXTFhoPHVOWpQrVTehO6V3VH7Eh+1JjS
- 7yOa2VLeGv7DF733ZA6jTI6plOfEuUkBDdMw==
-X-Google-Smtp-Source: AGHT+IHzn4/rAiupe0LOS6Nxt8gPfetKsUbIbNl8/9b4idNjqMnUXhB6jDpPQfco1xM9+L2cqzp1JD0oVQA4QwZcf+I=
-X-Received: by 2002:a17:90b:3ec6:b0:30a:255c:9d10 with SMTP id
- 98e67ed59e1d1-3110f3369demr24607670a91.8.1748447217404; Wed, 28 May 2025
- 08:46:57 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250527210508.1488509-1-raymond.mao@linaro.org>
- <6b992b47-de7c-45ce-9c3c-ca4a2295f7c9@linaro.org>
- <CAEfUkUK-hpCLC6oeMdomDNQHvtObDowecr4uY0CiStugHNWpBg@mail.gmail.com>
- <5c26ad0f-3dfc-4dea-bd81-9f201c17e5c1@linaro.org>
-In-Reply-To: <5c26ad0f-3dfc-4dea-bd81-9f201c17e5c1@linaro.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 28 May 2025 11:46:45 -0400
-X-Gm-Features: AX0GCFsusnI7ahmMmjhCznTleUdFy63MehyXkhZW77cz1XoAOulAI60-R0R60Bk
-Message-ID: <CAEfUkU+vHG5p7jPQF7GMAy1yvmKmXD31Lk2kEDimTLf3ncRHJw@mail.gmail.com>
-Subject: Re: [PATCH] makefile: fix Clang link error when RSA_PUBLIC_KEY_PARSER
- is selected
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ bh=1VYX8d7cChvAvWxHuiBQzZASbedEZSwD+wRhAOVBAlg=;
+ b=sgGWErLH54IHzgGHlOhOmXB34jDRL8JXZ1ykSY+llt3UrRM64Zwr9dng8SztsqrZ/w
+ SgAMey0+eBEBIUdOH/wabxgs8GqJ4iWDbO7ga5f0Qxim/sJQh0oxqbqWRTCd9p/cYOCo
+ t9puHxd8sw2+1hac7lgYweQ1Z+lUcc5kUgYg8OlX8Kp/Uq8z17uWQunN1O+qhW2hHgVQ
+ scLGS+n/SGtvaQY6D8fnKxLm1oY91vM5pxqwH2qzZ5j9sZrjr6Q/sRVKaiXhnrEl1f/c
+ nOyzJwAo4vya/U7J7j72mKGzdfBZSYMSI3FoR3FWvT9KDHj15AhchxhkYFIfk7wOpaYu
+ 4Rpg==
+X-Gm-Message-State: AOJu0YyRj/1qkjPmod92mESdSDOzu6zyPmBjFyOb6LOnq7Eq4dU6oXL/
+ YxzSGsBsk2LodeUdP0MCj8p+pRAuu6W7/+HwC6NjolQtKDDBOzDyasgOu3TREwggEa7Ke8x07tR
+ zjJLTCPy3
+X-Gm-Gg: ASbGncv5aPM0Qja+Xroi67DnJVFH6/1h/HZlEwVsE5Gis9eTjRfy4BVguZsTaQoJ8Yo
+ 2foaGwsGw2Lger0EJluF+TgGBbE41arhU0yBa68ptCsgBRlMy69HhjqCiRyEvFDaneCcHrLDOdE
+ yuncCCXGj5V9NixPqDGaHsJq+czkUlSEtxUEeNTOIdS9k/45dnlmbGXv+lI+gyG/+2AebC06dPc
+ W7Skiqiohe6I5ijnI/PRvooAhrP4BDcrG35Hm2XTy+WfmloualYwJkmOtFihky4CnICpdeiGErZ
+ deNGbu/pffEcr4ufss5qpGJJF4DRzv+BhBDGOsCs3mpsBdJ5FjP+DX6GIw8aSV/QSVdvmczkXAR
+ RR2WRny03AwFe
+X-Google-Smtp-Source: AGHT+IGC1TtwyMviMGdj0CjHdpyxxAk+fK4sJUWL+bXksVZNGkAmVII5lEpZyuT7jwi0FLxLxwrYyw==
+X-Received: by 2002:a05:6a20:9f4f:b0:218:6697:1b67 with SMTP id
+ adf61e73a8af0-2188c1e8d6bmr25427269637.8.1748448506521; 
+ Wed, 28 May 2025 09:08:26 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4fdbd586873sm276277173.90.2025.05.28.09.08.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 May 2025 09:08:25 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
+ Greg Malysa <malysagreg@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Sam Edwards <cfsworks@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Prasad Kummari <prasad.kummari@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+ Raymond Mao <raymond.mao@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/4] efi: Rename the lib/efi directory
+Date: Wed, 28 May 2025 10:03:14 -0600
+Message-ID: <20250528160323.1184731-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,225 +105,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+This directory was created when U-Boot gained the ability to run as an
+EFI app in 2015. Since then the EFI-loader feature has been added.
 
-On Wed, 28 May 2025 at 11:37, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
->
->
-> On 5/28/25 17:22, Raymond Mao wrote:
-> > Hi Jerome,
-> >
-> > On Wed, 28 May 2025 at 04:25, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> >>
-> >> Hi Rayond,
-> >>
-> >> On 5/27/25 23:05, Raymond Mao wrote:
-> >>> MbedTLS bignum module needs '__udivti3' which is a 128-bit division
-> >>> function provided by the compiler runtime, typically libgcc for GCC or
-> >>> clang_rt.builtins for Clang.
-> >>> Thus 'clang_rt.builtins' library is required when building using Clang.
-> >>
-> >> How do you reproduce the problem? Can you give the config and build
-> >> command you are using?
-> >>
-> > I am using this:
-> > CROSS_COMPILE=aarch64-none-linux-gnu- make O=out CC="clang -target
-> > aarch64-none-linux-gnu" all
-> >
-> >>>
-> >>> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
-> >>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >>> ---
-> >>>  Makefile | 6 +++++-
-> >>>  1 file changed, 5 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/Makefile b/Makefile
-> >>> index f88684947ee..16506dcaec6 100644
-> >>> --- a/Makefile
-> >>> +++ b/Makefile
-> >>> @@ -37,7 +37,6 @@ else ifeq ("riscv32", $(MK_ARCH))
-> >>>  else ifeq ("riscv64", $(MK_ARCH))
-> >>>    export HOST_ARCH=$(HOST_ARCH_RISCV64)
-> >>>  endif
-> >>> -undefine MK_ARCH
-> >>>
-> >>>  # Avoid funny character set dependencies
-> >>>  unexport LC_ALL
-> >>> @@ -915,8 +914,13 @@ PLATFORM_LIBGCC = arch/$(ARCH)/lib/lib.a
-> >>>  else
-> >>>  ifndef CONFIG_CC_IS_CLANG
-> >>>  PLATFORM_LIBGCC := -L $(shell dirname `$(CC) $(c_flags) -print-libgcc-file-name`) -lgcc
-> >>> +else ifeq ($(CONFIG_RSA_PUBLIC_KEY_PARSER_MBEDTLS),y)
-> >>> +# mbedtls bignum needs '__udivti3' - a 128-bit division function that's provided by clang-rt.
-> >>> +CLANG_RT_DIR := $(shell $(CC) --print-resource-dir)/lib/linux
-> >>> +PLATFORM_LIBGCC := -L$(CLANG_RT_DIR) -lclang_rt.builtins-$(MK_ARCH)
-> >>
-> >> I'm afraid this won't work when cross-compiling because the compiler-rt
-> >> builtins libraries are usually not installed with the compiler.
-> >> For example on my Ubuntu 24.04 machine:
-> >>
-> >> $ clang --version
-> >> Ubuntu clang version 18.1.3 (1ubuntu1)
-> >> Target: x86_64-pc-linux-gnu
-> >> Thread model: posix
-> >> InstalledDir: /usr/bin
-> >> $ clang --print-targets
-> >>
-> >>   Registered Targets:
-> >>     aarch64     - AArch64 (little endian)
-> >>     aarch64_32  - AArch64 (little endian ILP32)
-> >>     aarch64_be  - AArch64 (big endian)
-> >>     amdgcn      - AMD GCN GPUs
-> >>     arm         - ARM
-> >>     arm64       - ARM64 (little endian)
-> >>     arm64_32    - ARM64 (little endian ILP32)
-> >>     armeb       - ARM (big endian)
-> >>     avr         - Atmel AVR Microcontroller
-> >>     bpf         - BPF (host endian)
-> >>     bpfeb       - BPF (big endian)
-> >>     bpfel       - BPF (little endian)
-> >>     hexagon     - Hexagon
-> >>     lanai       - Lanai
-> >>     loongarch32 - 32-bit LoongArch
-> >>     loongarch64 - 64-bit LoongArch
-> >>     m68k        - Motorola 68000 family
-> >>     mips        - MIPS (32-bit big endian)
-> >>     mips64      - MIPS (64-bit big endian)
-> >>     mips64el    - MIPS (64-bit little endian)
-> >>     mipsel      - MIPS (32-bit little endian)
-> >>     msp430      - MSP430 [experimental]
-> >>     nvptx       - NVIDIA PTX 32-bit
-> >>     nvptx64     - NVIDIA PTX 64-bit
-> >>     ppc32       - PowerPC 32
-> >>     ppc32le     - PowerPC 32 LE
-> >>     ppc64       - PowerPC 64
-> >>     ppc64le     - PowerPC 64 LE
-> >>     r600        - AMD GPUs HD2XXX-HD6XXX
-> >>     riscv32     - 32-bit RISC-V
-> >>     riscv64     - 64-bit RISC-V
-> >>     sparc       - Sparc
-> >>     sparcel     - Sparc LE
-> >>     sparcv9     - Sparc V9
-> >>     systemz     - SystemZ
-> >>     thumb       - Thumb
-> >>     thumbeb     - Thumb (big endian)
-> >>     ve          - VE
-> >>     wasm32      - WebAssembly 32-bit
-> >>     wasm64      - WebAssembly 64-bit
-> >>     x86         - 32-bit X86: Pentium-Pro and above
-> >>     x86-64      - 64-bit X86: EM64T and AMD64
-> >>     xcore       - XCore
-> >>     xtensa      - Xtensa 32
-> >> $ clang --print-resource-dir
-> >> /usr/lib/llvm-18/lib/clang/18
-> >> $ ls /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins*
-> >> /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-i386.a  /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-x86_64.a
-> >>
-> >>
-> >> Are you doing cross compilation for arm or arm64? Did you have to
-> >> install the compiler-rt libraries separately from the compiler?
-> >>
-> > I installed clang manually.
-> >
-> > This is what I have:
-> > $ which clang
-> > /home/raymond/toolchain/clang-12.0.0/bin/clang
-> > $ clang --version
-> > clang version 12.0.0
-> > Target: x86_64-unknown-linux-gnu
-> > Thread model: posix
-> > InstalledDir: /home/raymond/toolchain/clang-12.0.0/bin
-> > $ clang --print-targets
-> >   Registered Targets:
-> >     aarch64    - AArch64 (little endian)
-> >     aarch64_32 - AArch64 (little endian ILP32)
-> >     aarch64_be - AArch64 (big endian)
-> >     amdgcn     - AMD GCN GPUs
-> >     arm        - ARM
-> >     arm64      - ARM64 (little endian)
-> >     arm64_32   - ARM64 (little endian ILP32)
-> >     armeb      - ARM (big endian)
-> >     avr        - Atmel AVR Microcontroller
-> >     bpf        - BPF (host endian)
-> >     bpfeb      - BPF (big endian)
-> >     bpfel      - BPF (little endian)
-> >     hexagon    - Hexagon
-> >     lanai      - Lanai
-> >     mips       - MIPS (32-bit big endian)
-> >     mips64     - MIPS (64-bit big endian)
-> >     mips64el   - MIPS (64-bit little endian)
-> >     mipsel     - MIPS (32-bit little endian)
-> >     msp430     - MSP430 [experimental]
-> >     nvptx      - NVIDIA PTX 32-bit
-> >     nvptx64    - NVIDIA PTX 64-bit
-> >     ppc32      - PowerPC 32
-> >     ppc32le    - PowerPC 32 LE
-> >     ppc64      - PowerPC 64
-> >     ppc64le    - PowerPC 64 LE
-> >     r600       - AMD GPUs HD2XXX-HD6XXX
-> >     riscv32    - 32-bit RISC-V
-> >     riscv64    - 64-bit RISC-V
-> >     sparc      - Sparc
-> >     sparcel    - Sparc LE
-> >     sparcv9    - Sparc V9
-> >     systemz    - SystemZ
-> >     thumb      - Thumb
-> >     thumbeb    - Thumb (big endian)
-> >     wasm32     - WebAssembly 32-bit
-> >     wasm64     - WebAssembly 64-bit
-> >     x86        - 32-bit X86: Pentium-Pro and above
-> >     x86-64     - 64-bit X86: EM64T and AMD64
-> >     xcore      - XCore
-> > $ clang --print-resource-dir
-> > /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0
-> > $ ls /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins*
-> > /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-aarch64.a
-> >  /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-x86_64.a
-> > /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-armhf.a
->
-> Interesting. How did you install clang/LLVM? Did you get those builins
-> library from multiple release packages?
->
-That is an old version 12.0.0 and I cannot recall well where I got it
-and how I installed it...
-But looking at the CI job here [1], the clang builds passed and that
-implies it got the libs properly.
-I will take a look at the newer clang releases if I can find some clues.
+The code in lib/efi is not actually used by the loader, so the name is
+confusing.
 
-[1] https://github.com/u-boot/u-boot/pull/773
+Rename the directory to efi_client to indicate that it includes files
+just for U-Boot being a client of EFI, i.e. the EFI app and stub.
 
-Regards,
-Raymond
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-> In the OP-TEE project we used to do that via a get_clang.sh script [1] but
-> it broke when llvm-project stopped releasing all the binary packages we needed
-> (aarch64-linux-gnu and armv7a-linux-gnueabihf). So we ended up importing the
-> __udivti3 implementation in source code instead [3]. I'm not saying this is
-> the way to go, but relying on libclang_rt.builtins assumes that a proper
-> toolchain is available, and that should at least be documented.
->
-> [1] https://github.com/OP-TEE/build/blob/1b68e0bb8a00/get_clang.sh
-> [2] https://github.com/OP-TEE/build/commit/8dd39dc99f09
-> [3] https://github.com/OP-TEE/optee_os/commit/48952fd403d8
->
-> Regards,
-> --
-> Jerome
->
-> >
-> > Regards,
-> > Raymond
-> >
-> >> Thanks,
-> >> --
-> >> Jerome
-> >>
-> >>>  endif
-> >>>  endif
-> >>> +undefine MK_ARCH
-> >>>  PLATFORM_LIBS += $(PLATFORM_LIBGCC)
-> >>>
-> >>>  ifdef CONFIG_CC_COVERAGE
+ MAINTAINERS                            | 2 +-
+ Makefile                               | 2 +-
+ doc/develop/uefi/u-boot_on_efi.rst     | 8 ++++----
+ lib/Makefile                           | 2 +-
+ lib/{efi => efi_client}/Kconfig        | 0
+ lib/{efi => efi_client}/Makefile       | 0
+ lib/{efi => efi_client}/efi.c          | 0
+ lib/{efi => efi_client}/efi_app.c      | 0
+ lib/{efi => efi_client}/efi_app_init.c | 0
+ lib/{efi => efi_client}/efi_info.c     | 0
+ lib/{efi => efi_client}/efi_stub.c     | 0
+ lib/efi_loader/Kconfig                 | 2 +-
+ 12 files changed, 8 insertions(+), 8 deletions(-)
+ rename lib/{efi => efi_client}/Kconfig (100%)
+ rename lib/{efi => efi_client}/Makefile (100%)
+ rename lib/{efi => efi_client}/efi.c (100%)
+ rename lib/{efi => efi_client}/efi_app.c (100%)
+ rename lib/{efi => efi_client}/efi_app_init.c (100%)
+ rename lib/{efi => efi_client}/efi_info.c (100%)
+ rename lib/{efi => efi_client}/efi_stub.c (100%)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d62dd35a385..46ef4359961 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1102,7 +1102,7 @@ F:	configs/efi-x86_app*
+ F:	doc/develop/uefi/u-boot_on_efi.rst
+ F:	drivers/block/efi-media-uclass.c
+ F:	drivers/block/sb_efi_media.c
+-F:	lib/efi/efi_app.c
++F:	lib/efi_client/
+ F:	scripts/build-efi.sh
+ F:	test/dm/efi_media.c
+ 
+diff --git a/Makefile b/Makefile
+index f88684947ee..b24a16627db 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1686,7 +1686,7 @@ u-boot-payload.lds: $(LDSCRIPT_EFI) FORCE
+ quiet_cmd_u-boot_payload ?= LD      $@
+       cmd_u-boot_payload ?= $(LD) $(LDFLAGS_EFI_PAYLOAD) -o $@ \
+       -T u-boot-payload.lds arch/x86/cpu/call32.o \
+-      lib/efi/efi.o lib/efi/efi_stub.o u-boot.bin.o \
++      lib/efi_client/efi.o lib/efi_client/efi_stub.o u-boot.bin.o \
+       $(addprefix arch/$(ARCH)/lib/,$(EFISTUB))
+ 
+ u-boot-payload: u-boot.bin.o u-boot-payload.lds FORCE
+diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
+index 245b4af1fa3..42e84c13049 100644
+--- a/doc/develop/uefi/u-boot_on_efi.rst
++++ b/doc/develop/uefi/u-boot_on_efi.rst
+@@ -113,7 +113,7 @@ implemented completely differently.
+ EFI Application
+ ~~~~~~~~~~~~~~~
+ For the application the whole of U-Boot is built as a shared library. The
+-efi_main() function is in lib/efi/efi_app.c. It sets up some basic EFI
++efi_main() function is in lib/efi_client/efi_app.c. It sets up some basic EFI
+ functions with efi_init(), sets up U-Boot global_data, allocates memory for
+ U-Boot's malloc(), etc. and enters the normal init sequence (board_init_f()
+ and board_init_r()).
+@@ -149,7 +149,7 @@ image (including device tree) into a small EFI stub application responsible
+ for booting it. The stub application is built as a normal EFI application
+ except that it has a lot of data attached to it.
+ 
+-The stub application is implemented in lib/efi/efi_stub.c. The efi_main()
++The stub application is implemented in lib/efi_client/efi_stub.c. The efi_main()
+ function is called by EFI. It is responsible for copying U-Boot from its
+ original location into memory, disabling EFI boot services and starting
+ U-Boot. U-Boot then starts as normal, relocates, starts all drivers, etc.
+@@ -192,7 +192,7 @@ careful to build the correct one so that your UEFI firmware can start it. Most
+ UEFI images are 64-bit at present.
+ 
+ The payload stub can be build as either 32- or 64-bits. Only a small amount
+-of code is built this way (see the extra- line in lib/efi/Makefile).
++of code is built this way (see the extra- line in lib/efi_client/Makefile).
+ Everything else is built as a normal U-Boot, so is always 32-bit on x86 at
+ present.
+ 
+@@ -353,7 +353,7 @@ This work could be extended in a number of ways:
+ 
+ Where is the code?
+ ------------------
+-lib/efi
++lib/efi_client
+ 	payload stub, application, support code. Mostly arch-neutral
+ 
+ arch/x86/cpu/efi
+diff --git a/lib/Makefile b/lib/Makefile
+index 18ae0cd87bf..1dd738a7cd1 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -5,7 +5,7 @@
+ 
+ ifndef CONFIG_XPL_BUILD
+ 
+-obj-$(CONFIG_EFI) += efi/
++obj-$(CONFIG_EFI) += efi_client/
+ obj-$(CONFIG_EFI_LOADER) += efi_driver/
+ obj-$(CONFIG_EFI_LOADER) += efi_loader/
+ obj-$(CONFIG_CMD_BOOTEFI_SELFTEST) += efi_selftest/
+diff --git a/lib/efi/Kconfig b/lib/efi_client/Kconfig
+similarity index 100%
+rename from lib/efi/Kconfig
+rename to lib/efi_client/Kconfig
+diff --git a/lib/efi/Makefile b/lib/efi_client/Makefile
+similarity index 100%
+rename from lib/efi/Makefile
+rename to lib/efi_client/Makefile
+diff --git a/lib/efi/efi.c b/lib/efi_client/efi.c
+similarity index 100%
+rename from lib/efi/efi.c
+rename to lib/efi_client/efi.c
+diff --git a/lib/efi/efi_app.c b/lib/efi_client/efi_app.c
+similarity index 100%
+rename from lib/efi/efi_app.c
+rename to lib/efi_client/efi_app.c
+diff --git a/lib/efi/efi_app_init.c b/lib/efi_client/efi_app_init.c
+similarity index 100%
+rename from lib/efi/efi_app_init.c
+rename to lib/efi_client/efi_app_init.c
+diff --git a/lib/efi/efi_info.c b/lib/efi_client/efi_info.c
+similarity index 100%
+rename from lib/efi/efi_info.c
+rename to lib/efi_client/efi_info.c
+diff --git a/lib/efi/efi_stub.c b/lib/efi_client/efi_stub.c
+similarity index 100%
+rename from lib/efi/efi_stub.c
+rename to lib/efi_client/efi_stub.c
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 7f02a83e2a2..86b5a3f947f 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -587,6 +587,6 @@ config BOOTEFI_TESTAPP_COMPILE
+ 
+ endif
+ 
+-source "lib/efi/Kconfig"
++source "lib/efi_client/Kconfig"
+ 
+ endmenu
+-- 
+2.43.0
+
+base-commit: 2f3766949bbea7aa5a472157561d387fd94205d2
+branch: efit
