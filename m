@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72D9FC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 23:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F3EDC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 23:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF8E4833B3;
-	Thu, 29 May 2025 01:31:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2654883531;
+	Thu, 29 May 2025 01:31:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ItLd0Iak";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CJk7f9G6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72CAD83531; Thu, 29 May 2025 01:31:09 +0200 (CEST)
+ id 78E94833F1; Thu, 29 May 2025 01:31:09 +0200 (CEST)
 Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
  [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D4FF833B3
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 01:31:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8675683429
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 01:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-735a6faec9eso230764a34.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:31:04 -0700 (PDT)
+ 46e09a7af769-72c40235c34so137734a34.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:31:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748475063; x=1749079863; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748475064; x=1749079864; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F0LUT9is05FDHHJ6SabadGXo+rbfRBLKyZegzKPVi5g=;
- b=ItLd0IaktWA9Dxtfqr1p+TEIQU/6q8YbJDs5wYpcMafwVG8dIGnNaNE6cDyys1APoD
- z7l+pfLW9llo2BrzH99s0O0dkn7skJ+MikfQ/t+EwWdHn24k0E700Rj5bbgMat0PSZk9
- OLzNcaaiSglhe2mMVhj5IFedxism4HT/HstRw=
+ bh=PbkCzgWnOAFamy9UIlXGwhfcaI6IYExHMp5Yc4I0u9g=;
+ b=CJk7f9G6pykLA2eOkKac9mnrgyE9gg+nbKHnOwobIbvUTptxOAINGKku7XoAUBMynl
+ wKMkJnnu4Bg5AySsCJByUfsc6HUf5P0zXcrflTXsyFWtmIsCvy+l3REWePlOCUwuynRh
+ fR6lYanwuiisqM2/6GgcnxMugIdw1xeD3F0fY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748475063; x=1749079863;
+ d=1e100.net; s=20230601; t=1748475064; x=1749079864;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F0LUT9is05FDHHJ6SabadGXo+rbfRBLKyZegzKPVi5g=;
- b=O8gYt1VY0XP6PhGNVBtEfBct6yRk4cv042WtFw4QU4PcZ7Omu507ZpyZCtEhrFZI7A
- lXVoEcEuNf2y0rcjSahijrwxOifKFKBBw3kM2FS96Yo61pBrqeSSwZDokfGVzfHYOLWI
- Gob3UfOeaXmlgqNL1x0Vino3/DDlPRvfXPZFk9eOzdCeQtBBMuL0/GlSDbaLoaq1Hjz+
- y0KlGhT0eUAUjBX8YOksmb+C+GR9kEzDFw4U3U3WJ9j5nhiNKMKcTpjS5Gf+As/sreTD
- FFFDWnewEQP29TwTcfZLIhz/RWjUhzsqIGAsmLNlj99PCOo+umZl2i2zyYSEjGFPamc6
- mlwQ==
-X-Gm-Message-State: AOJu0Yzvw1NEva9xZa7WMHsgl4c8M5i6q40QVyKYambIfS8+QtgbWKzc
- GHAg/lhSNbFq285mCT+D9QX+B4jJk8jZggvqqCRCC0mXFSp2nbfyuSPwX6+v/xjOvNS8ts2ozRQ
- B5Etozao=
-X-Gm-Gg: ASbGncsa5AkxV9zjsCSpeE8X0eLKwdkbZLTbNeK1SDH7gkPBsM64hk405K7SCYcvEzQ
- d22G6ch9TsXGFrnBwR8yubfNvytAH1Yb/k62Ox0VnQDw6umKFmDiUiolowlmkaFIK9VDVwhDWfX
- BuKKRaRXHaEYEwOlVGrMkgjUM+pe8lABu6Y+JgXlq3qROGrfQW0U3ipiUqiisSz+8geYKK6W3gp
- RxVIUwlIddpDh0zrDPz1xwMexa9JWmAOqFuKq3P5ZZkQbMtcpLjpLxgQ9PrpDN7NXqCmiKmWKOg
- +RYFSE+kD4R9aZLovEUhj47Az+KYb5CORd67A0gOwbmaee6PjF8n3vr0rC7RL0/j1x45XAik+mJ
- dObgnjN+QnimY0EE=
-X-Google-Smtp-Source: AGHT+IH6v00uG/TZr5uwW/l9xgCmb2YBmkWGwen698+CukQHsdibGvxkC+3ZhxIvij2d8z4mrKKBwQ==
-X-Received: by 2002:a05:6830:4703:b0:72b:b8b9:9cc1 with SMTP id
- 46e09a7af769-7355cfbf912mr12843919a34.5.1748475062769; 
- Wed, 28 May 2025 16:31:02 -0700 (PDT)
+ bh=PbkCzgWnOAFamy9UIlXGwhfcaI6IYExHMp5Yc4I0u9g=;
+ b=Dogci6UxoYpd8NZSRYVDPbYQ17qnwPVd5aTaC2b8mfJ2z0ylYUrsweX1o9nLnkj2X3
+ xN9QbVez8dgQWF+M6V9eSKlN3xT1NqbWN4UMKVkneL7yX4P5gpnMJfoEOWCLb9yWAjFy
+ Zfj7xpKRqq0RbFJkUOR58W0xRaZrUNk1sSgipjNL8dh6FBBXbfxotb5eEck2xxe0pUci
+ HiQbnNkOwyzm4S43/vQQ0KntU75/M4DrZ1cmxG2j23Ish8jhnv+zDmz3lNqtBKYBajXZ
+ /WWIwb8hMAFDpnRMzOFocyGb6Rt3fYZVo5heDZmRC5VzsQZO/XepRHjA6IpRGyb3RDl3
+ eMeA==
+X-Gm-Message-State: AOJu0Yw2IZOeXyLPtea8qH4OUTXzmCmLdaJodLTdZrB7EziNUkFHGdfs
+ PldmdP2zS/wpm/d2bJKcBVNmjsCubeT+J0l6SUwKTpvOpSHQEe+5jFYRzeXWqfDx096nR71ppV3
+ kbP6ia74=
+X-Gm-Gg: ASbGncs6ZmRkhszgQO6Q8Suq2sT9l5FGylN6/D9RQg7WZhdAZqBNkIrIUjelge96r9Z
+ 4s8A7ijcQu3ZkKms+5GcJnA8no4N0anzWoibkhsX4NPqxKZ0pr/+lh21hR+bwOHfNVNBTukCJXf
+ s+4gEX3ZdZoc2w17tQl1LtEg9uQ1sPqQUtPEKF/dSDTLORjAEH/JGDgkkfIDR6deq1h0dueE+Uu
+ rr4Oh5WZDfNuc71oC4e+nVDMuDi2NNPzENi+NhzCIVzdWQTBuz9LTjZ/x7+3Pw+Cdp+B+Z+mUuh
+ uRL1JiJA9UWGWzZAw6kS7vnVPfB7k1L6TeRh1lHsF+ryCS5AT5CirmQZKr7pVYLBhAPxk+NX2T8
+ rDRFeg1HY/3ORh6vrtI2e2qiCdQ==
+X-Google-Smtp-Source: AGHT+IFdjQgZO+sYiiH6CZVg4GH0H0pmy8lunyHS08y+Cj8/BjA3DV3We1xRZ8CiiNGe/00zGWrVew==
+X-Received: by 2002:a05:6830:4885:b0:731:d1e5:7c5d with SMTP id
+ 46e09a7af769-7355cf2bdc0mr11650115a34.9.1748475063995; 
+ Wed, 28 May 2025 16:31:03 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-735af9bc741sm58239a34.44.2025.05.28.16.31.01
+ 46e09a7af769-735af9bc741sm58239a34.44.2025.05.28.16.31.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 16:31:01 -0700 (PDT)
+ Wed, 28 May 2025 16:31:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Heiko Thiery <heiko.thiery@gmail.com>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Mihai Sain <mihai.sain@microchip.com>
-Subject: [PATCH 6/7] atmel: Remove local arch/arm/dts/{sama5d2,
- sama7g5}-pinfunc.h
-Date: Wed, 28 May 2025 17:27:09 -0600
-Message-ID: <20250528233050.3820722-7-trini@konsulko.com>
+Cc: Heiko Thiery <heiko.thiery@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: [PATCH 7/7] nxp: Remove local arch/arm/dts/imx8mm-pinfunc.h
+Date: Wed, 28 May 2025 17:27:10 -0600
+Message-ID: <20250528233050.3820722-8-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528233050.3820722-1-trini@konsulko.com>
 References: <20250528233050.3820722-1-trini@konsulko.com>
@@ -98,1840 +97,673 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have these files in both arch/arm/dts and
-dts/upstream/src/arm/microchip. These files are identical save for
+We have this file in both arch/arm/dts and
+dts/upstream/src/arm64/freescale. This file is identical save for
 changes which have been made upstream.  Remove our local copy to get in
 sync with upstream now.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-I didn't dig in to the kernel side of these like I did for the binding
-header one so I'm unsure of their severity.
-
-Cc: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Mihai Sain <mihai.sain@microchip.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 ---
- arch/arm/dts/sama5d2-pinfunc.h | 880 -------------------------------
- arch/arm/dts/sama7g5-pinfunc.h | 923 ---------------------------------
- 2 files changed, 1803 deletions(-)
- delete mode 100644 arch/arm/dts/sama5d2-pinfunc.h
- delete mode 100644 arch/arm/dts/sama7g5-pinfunc.h
+ arch/arm/dts/imx8mm-pinfunc.h | 646 ----------------------------------
+ 1 file changed, 646 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mm-pinfunc.h
 
-diff --git a/arch/arm/dts/sama5d2-pinfunc.h b/arch/arm/dts/sama5d2-pinfunc.h
+diff --git a/arch/arm/dts/imx8mm-pinfunc.h b/arch/arm/dts/imx8mm-pinfunc.h
 deleted file mode 100644
-index b0c912feaa2f..000000000000
---- a/arch/arm/dts/sama5d2-pinfunc.h
+index 83c8f715cd90..000000000000
+--- a/arch/arm/dts/imx8mm-pinfunc.h
 +++ /dev/null
-@@ -1,880 +0,0 @@
--#define PINMUX_PIN(no, func, ioset) \
--(((no) & 0xffff) | (((func) & 0xf) << 16) | (((ioset) & 0xff) << 20))
+@@ -1,646 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2017-2018 NXP
+- */
 -
--#define PIN_PA0				0
--#define PIN_PA0__GPIO			PINMUX_PIN(PIN_PA0, 0, 0)
--#define PIN_PA0__SDMMC0_CK		PINMUX_PIN(PIN_PA0, 1, 1)
--#define PIN_PA0__QSPI0_SCK		PINMUX_PIN(PIN_PA0, 2, 1)
--#define PIN_PA0__D0			PINMUX_PIN(PIN_PA0, 6, 2)
--#define PIN_PA1				1
--#define PIN_PA1__GPIO			PINMUX_PIN(PIN_PA1, 0, 0)
--#define PIN_PA1__SDMMC0_CMD		PINMUX_PIN(PIN_PA1, 1, 1)
--#define PIN_PA1__QSPI0_CS		PINMUX_PIN(PIN_PA1, 2, 1)
--#define PIN_PA1__D1			PINMUX_PIN(PIN_PA1, 6, 2)
--#define PIN_PA2				2
--#define PIN_PA2__GPIO			PINMUX_PIN(PIN_PA2, 0, 0)
--#define PIN_PA2__SDMMC0_DAT0		PINMUX_PIN(PIN_PA2, 1, 1)
--#define PIN_PA2__QSPI0_IO0		PINMUX_PIN(PIN_PA2, 2, 1)
--#define PIN_PA2__D2			PINMUX_PIN(PIN_PA2, 6, 2)
--#define PIN_PA3				3
--#define PIN_PA3__GPIO			PINMUX_PIN(PIN_PA3, 0, 0)
--#define PIN_PA3__SDMMC0_DAT1		PINMUX_PIN(PIN_PA3, 1, 1)
--#define PIN_PA3__QSPI0_IO1		PINMUX_PIN(PIN_PA3, 2, 1)
--#define PIN_PA3__D3			PINMUX_PIN(PIN_PA3, 6, 2)
--#define PIN_PA4				4
--#define PIN_PA4__GPIO			PINMUX_PIN(PIN_PA4, 0, 0)
--#define PIN_PA4__SDMMC0_DAT2		PINMUX_PIN(PIN_PA4, 1, 1)
--#define PIN_PA4__QSPI0_IO2		PINMUX_PIN(PIN_PA4, 2, 1)
--#define PIN_PA4__D4			PINMUX_PIN(PIN_PA4, 6, 2)
--#define PIN_PA5				5
--#define PIN_PA5__GPIO			PINMUX_PIN(PIN_PA5, 0, 0)
--#define PIN_PA5__SDMMC0_DAT3		PINMUX_PIN(PIN_PA5, 1, 1)
--#define PIN_PA5__QSPI0_IO3		PINMUX_PIN(PIN_PA5, 2, 1)
--#define PIN_PA5__D5			PINMUX_PIN(PIN_PA5, 6, 2)
--#define PIN_PA6				6
--#define PIN_PA6__GPIO			PINMUX_PIN(PIN_PA6, 0, 0)
--#define PIN_PA6__SDMMC0_DAT4		PINMUX_PIN(PIN_PA6, 1, 1)
--#define PIN_PA6__QSPI1_SCK		PINMUX_PIN(PIN_PA6, 2, 1)
--#define PIN_PA6__TIOA5			PINMUX_PIN(PIN_PA6, 4, 1)
--#define PIN_PA6__FLEXCOM2_IO0		PINMUX_PIN(PIN_PA6, 5, 1)
--#define PIN_PA6__D6			PINMUX_PIN(PIN_PA6, 6, 2)
--#define PIN_PA7				7
--#define PIN_PA7__GPIO			PINMUX_PIN(PIN_PA7, 0, 0)
--#define PIN_PA7__SDMMC0_DAT5		PINMUX_PIN(PIN_PA7, 1, 1)
--#define PIN_PA7__QSPI1_IO0		PINMUX_PIN(PIN_PA7, 2, 1)
--#define PIN_PA7__TIOB5			PINMUX_PIN(PIN_PA7, 4, 1)
--#define PIN_PA7__FLEXCOM2_IO1		PINMUX_PIN(PIN_PA7, 5, 1)
--#define PIN_PA7__D7			PINMUX_PIN(PIN_PA7, 6, 2)
--#define PIN_PA8				8
--#define PIN_PA8__GPIO			PINMUX_PIN(PIN_PA8, 0, 0)
--#define PIN_PA8__SDMMC0_DAT6		PINMUX_PIN(PIN_PA8, 1, 1)
--#define PIN_PA8__QSPI1_IO1		PINMUX_PIN(PIN_PA8, 2, 1)
--#define PIN_PA8__TCLK5			PINMUX_PIN(PIN_PA8, 4, 1)
--#define PIN_PA8__FLEXCOM2_IO2		PINMUX_PIN(PIN_PA8, 5, 1)
--#define PIN_PA8__NWE_NANDWE		PINMUX_PIN(PIN_PA8, 6, 2)
--#define PIN_PA9				9
--#define PIN_PA9__GPIO			PINMUX_PIN(PIN_PA9, 0, 0)
--#define PIN_PA9__SDMMC0_DAT7		PINMUX_PIN(PIN_PA9, 1, 1)
--#define PIN_PA9__QSPI1_IO2		PINMUX_PIN(PIN_PA9, 2, 1)
--#define PIN_PA9__TIOA4			PINMUX_PIN(PIN_PA9, 4, 1)
--#define PIN_PA9__FLEXCOM2_IO3		PINMUX_PIN(PIN_PA9, 5, 1)
--#define PIN_PA9__NCS3			PINMUX_PIN(PIN_PA9, 6, 2)
--#define PIN_PA10			10
--#define PIN_PA10__GPIO			PINMUX_PIN(PIN_PA10, 0, 0)
--#define PIN_PA10__SDMMC0_RSTN		PINMUX_PIN(PIN_PA10, 1, 1)
--#define PIN_PA10__QSPI1_IO3		PINMUX_PIN(PIN_PA10, 2, 1)
--#define PIN_PA10__TIOB4			PINMUX_PIN(PIN_PA10, 4, 1)
--#define PIN_PA10__FLEXCOM2_IO4		PINMUX_PIN(PIN_PA10, 5, 1)
--#define PIN_PA10__A21_NANDALE		PINMUX_PIN(PIN_PA10, 6, 2)
--#define PIN_PA11			11
--#define PIN_PA11__GPIO			PINMUX_PIN(PIN_PA11, 0, 0)
--#define PIN_PA11__SDMMC0_VDDSEL		PINMUX_PIN(PIN_PA11, 1, 1)
--#define PIN_PA11__QSPI1_CS		PINMUX_PIN(PIN_PA11, 2, 1)
--#define PIN_PA11__TCLK4			PINMUX_PIN(PIN_PA11, 4, 1)
--#define PIN_PA11__A22_NANDCLE		PINMUX_PIN(PIN_PA11, 6, 2)
--#define PIN_PA12			12
--#define PIN_PA12__GPIO			PINMUX_PIN(PIN_PA12, 0, 0)
--#define PIN_PA12__SDMMC0_WP		PINMUX_PIN(PIN_PA12, 1, 1)
--#define PIN_PA12__IRQ			PINMUX_PIN(PIN_PA12, 2, 1)
--#define PIN_PA12__NRD_NANDOE		PINMUX_PIN(PIN_PA12, 6, 2)
--#define PIN_PA13			13
--#define PIN_PA13__GPIO			PINMUX_PIN(PIN_PA13, 0, 0)
--#define PIN_PA13__SDMMC0_CD		PINMUX_PIN(PIN_PA13, 1, 1)
--#define PIN_PA13__FLEXCOM3_IO1		PINMUX_PIN(PIN_PA13, 5, 1)
--#define PIN_PA13__D8			PINMUX_PIN(PIN_PA13, 6, 2)
--#define PIN_PA14			14
--#define PIN_PA14__GPIO			PINMUX_PIN(PIN_PA14, 0, 0)
--#define PIN_PA14__SPI0_SPCK		PINMUX_PIN(PIN_PA14, 1, 1)
--#define PIN_PA14__TK1			PINMUX_PIN(PIN_PA14, 2, 1)
--#define PIN_PA14__QSPI0_SCK		PINMUX_PIN(PIN_PA14, 3, 2)
--#define PIN_PA14__I2SC1_MCK		PINMUX_PIN(PIN_PA14, 4, 2)
--#define PIN_PA14__FLEXCOM3_IO2		PINMUX_PIN(PIN_PA14, 5, 1)
--#define PIN_PA14__D9			PINMUX_PIN(PIN_PA14, 6, 2)
--#define PIN_PA15			15
--#define PIN_PA15__GPIO			PINMUX_PIN(PIN_PA15, 0, 0)
--#define PIN_PA15__SPI0_MOSI		PINMUX_PIN(PIN_PA15, 1, 1)
--#define PIN_PA15__TF1			PINMUX_PIN(PIN_PA15, 2, 1)
--#define PIN_PA15__QSPI0_CS		PINMUX_PIN(PIN_PA15, 3, 2)
--#define PIN_PA15__I2SC1_CK		PINMUX_PIN(PIN_PA15, 4, 2)
--#define PIN_PA15__FLEXCOM3_IO0		PINMUX_PIN(PIN_PA15, 5, 1)
--#define PIN_PA15__D10			PINMUX_PIN(PIN_PA15, 6, 2)
--#define PIN_PA16			16
--#define PIN_PA16__GPIO			PINMUX_PIN(PIN_PA16, 0, 0)
--#define PIN_PA16__SPI0_MISO		PINMUX_PIN(PIN_PA16, 1, 1)
--#define PIN_PA16__TD1			PINMUX_PIN(PIN_PA16, 2, 1)
--#define PIN_PA16__QSPI0_IO0		PINMUX_PIN(PIN_PA16, 3, 2)
--#define PIN_PA16__I2SC1_WS		PINMUX_PIN(PIN_PA16, 4, 2)
--#define PIN_PA16__FLEXCOM3_IO3		PINMUX_PIN(PIN_PA16, 5, 1)
--#define PIN_PA16__D11			PINMUX_PIN(PIN_PA16, 6, 2)
--#define PIN_PA17			17
--#define PIN_PA17__GPIO			PINMUX_PIN(PIN_PA17, 0, 0)
--#define PIN_PA17__SPI0_NPCS0		PINMUX_PIN(PIN_PA17, 1, 1)
--#define PIN_PA17__RD1			PINMUX_PIN(PIN_PA17, 2, 1)
--#define PIN_PA17__QSPI0_IO1		PINMUX_PIN(PIN_PA17, 3, 2)
--#define PIN_PA17__I2SC1_DI0		PINMUX_PIN(PIN_PA17, 4, 2)
--#define PIN_PA17__FLEXCOM3_IO4		PINMUX_PIN(PIN_PA17, 5, 1)
--#define PIN_PA17__D12			PINMUX_PIN(PIN_PA17, 6, 2)
--#define PIN_PA18			18
--#define PIN_PA18__GPIO			PINMUX_PIN(PIN_PA18, 0, 0)
--#define PIN_PA18__SPI0_NPCS1		PINMUX_PIN(PIN_PA18, 1, 1)
--#define PIN_PA18__RK1			PINMUX_PIN(PIN_PA18, 2, 1)
--#define PIN_PA18__QSPI0_IO2		PINMUX_PIN(PIN_PA18, 3, 2)
--#define PIN_PA18__I2SC1_DO0		PINMUX_PIN(PIN_PA18, 4, 2)
--#define PIN_PA18__SDMMC1_DAT0		PINMUX_PIN(PIN_PA18, 5, 1)
--#define PIN_PA18__D13			PINMUX_PIN(PIN_PA18, 6, 2)
--#define PIN_PA19			19
--#define PIN_PA19__GPIO			PINMUX_PIN(PIN_PA19, 0, 0)
--#define PIN_PA19__SPI0_NPCS2		PINMUX_PIN(PIN_PA19, 1, 1)
--#define PIN_PA19__RF1			PINMUX_PIN(PIN_PA19, 2, 1)
--#define PIN_PA19__QSPI0_IO3		PINMUX_PIN(PIN_PA19, 3, 2)
--#define PIN_PA19__TIOA0			PINMUX_PIN(PIN_PA19, 4, 1)
--#define PIN_PA19__SDMMC1_DAT1		PINMUX_PIN(PIN_PA19, 5, 1)
--#define PIN_PA19__D14			PINMUX_PIN(PIN_PA19, 6, 2)
--#define PIN_PA20			20
--#define PIN_PA20__GPIO			PINMUX_PIN(PIN_PA20, 0, 0)
--#define PIN_PA20__SPI0_NPCS3		PINMUX_PIN(PIN_PA20, 1, 1)
--#define PIN_PA20__TIOB0			PINMUX_PIN(PIN_PA20, 4, 1)
--#define PIN_PA20__SDMMC1_DAT2		PINMUX_PIN(PIN_PA20, 5, 1)
--#define PIN_PA20__D15			PINMUX_PIN(PIN_PA20, 6, 2)
--#define PIN_PA21			21
--#define PIN_PA21__GPIO			PINMUX_PIN(PIN_PA21, 0, 0)
--#define PIN_PA21__IRQ			PINMUX_PIN(PIN_PA21, 1, 2)
--#define PIN_PA21__PCK2			PINMUX_PIN(PIN_PA21, 2, 3)
--#define PIN_PA21__TCLK0			PINMUX_PIN(PIN_PA21, 4, 1)
--#define PIN_PA21__SDMMC1_DAT3		PINMUX_PIN(PIN_PA21, 5, 1)
--#define PIN_PA21__NANDRDY		PINMUX_PIN(PIN_PA21, 6, 2)
--#define PIN_PA22			22
--#define PIN_PA22__GPIO			PINMUX_PIN(PIN_PA22, 0, 0)
--#define PIN_PA22__FLEXCOM1_IO2		PINMUX_PIN(PIN_PA22, 1, 1)
--#define PIN_PA22__D0			PINMUX_PIN(PIN_PA22, 2, 1)
--#define PIN_PA22__TCK			PINMUX_PIN(PIN_PA22, 3, 4)
--#define PIN_PA22__SPI1_SPCK		PINMUX_PIN(PIN_PA22, 4, 2)
--#define PIN_PA22__SDMMC1_CK		PINMUX_PIN(PIN_PA22, 5, 1)
--#define PIN_PA22__QSPI0_SCK		PINMUX_PIN(PIN_PA22, 6, 3)
--#define PIN_PA23			23
--#define PIN_PA23__GPIO			PINMUX_PIN(PIN_PA23, 0, 0)
--#define PIN_PA23__FLEXCOM1_IO1		PINMUX_PIN(PIN_PA23, 1, 1)
--#define PIN_PA23__D1			PINMUX_PIN(PIN_PA23, 2, 1)
--#define PIN_PA23__TDI			PINMUX_PIN(PIN_PA23, 3, 4)
--#define PIN_PA23__SPI1_MOSI		PINMUX_PIN(PIN_PA23, 4, 2)
--#define PIN_PA23__QSPI0_CS		PINMUX_PIN(PIN_PA23, 6, 3)
--#define PIN_PA24			24
--#define PIN_PA24__GPIO			PINMUX_PIN(PIN_PA24, 0, 0)
--#define PIN_PA24__FLEXCOM1_IO0		PINMUX_PIN(PIN_PA24, 1, 1)
--#define PIN_PA24__D2			PINMUX_PIN(PIN_PA24, 2, 1)
--#define PIN_PA24__TDO			PINMUX_PIN(PIN_PA24, 3, 4)
--#define PIN_PA24__SPI1_MISO		PINMUX_PIN(PIN_PA24, 4, 2)
--#define PIN_PA24__QSPI0_IO0		PINMUX_PIN(PIN_PA24, 6, 3)
--#define PIN_PA25			25
--#define PIN_PA25__GPIO			PINMUX_PIN(PIN_PA25, 0, 0)
--#define PIN_PA25__FLEXCOM1_IO3		PINMUX_PIN(PIN_PA25, 1, 1)
--#define PIN_PA25__D3			PINMUX_PIN(PIN_PA25, 2, 1)
--#define PIN_PA25__TMS			PINMUX_PIN(PIN_PA25, 3, 4)
--#define PIN_PA25__SPI1_NPCS0		PINMUX_PIN(PIN_PA25, 4, 2)
--#define PIN_PA25__QSPI0_IO1		PINMUX_PIN(PIN_PA25, 6, 3)
--#define PIN_PA26			26
--#define PIN_PA26__GPIO			PINMUX_PIN(PIN_PA26, 0, 0)
--#define PIN_PA26__FLEXCOM1_IO4		PINMUX_PIN(PIN_PA26, 1, 1)
--#define PIN_PA26__D4			PINMUX_PIN(PIN_PA26, 2, 1)
--#define PIN_PA26__NTRST			PINMUX_PIN(PIN_PA26, 3, 4)
--#define PIN_PA26__SPI1_NPCS1		PINMUX_PIN(PIN_PA26, 4, 2)
--#define PIN_PA26__QSPI0_IO2		PINMUX_PIN(PIN_PA26, 6, 3)
--#define PIN_PA27			27
--#define PIN_PA27__GPIO			PINMUX_PIN(PIN_PA27, 0, 0)
--#define PIN_PA27__TIOA1			PINMUX_PIN(PIN_PA27, 1, 2)
--#define PIN_PA27__D5			PINMUX_PIN(PIN_PA27, 2, 1)
--#define PIN_PA27__SPI0_NPCS2		PINMUX_PIN(PIN_PA27, 3, 2)
--#define PIN_PA27__SPI1_NPCS2		PINMUX_PIN(PIN_PA27, 4, 2)
--#define PIN_PA27__SDMMC1_RSTN		PINMUX_PIN(PIN_PA27, 5, 1)
--#define PIN_PA27__QSPI0_IO3		PINMUX_PIN(PIN_PA27, 6, 3)
--#define PIN_PA28			28
--#define PIN_PA28__GPIO			PINMUX_PIN(PIN_PA28, 0, 0)
--#define PIN_PA28__TIOB1			PINMUX_PIN(PIN_PA28, 1, 2)
--#define PIN_PA28__D6			PINMUX_PIN(PIN_PA28, 2, 1)
--#define PIN_PA28__SPI0_NPCS3		PINMUX_PIN(PIN_PA28, 3, 2)
--#define PIN_PA28__SPI1_NPCS3		PINMUX_PIN(PIN_PA28, 4, 2)
--#define PIN_PA28__SDMMC1_CMD		PINMUX_PIN(PIN_PA28, 5, 1)
--#define PIN_PA28__CLASSD_L0		PINMUX_PIN(PIN_PA28, 6, 1)
--#define PIN_PA29			29
--#define PIN_PA29__GPIO			PINMUX_PIN(PIN_PA29, 0, 0)
--#define PIN_PA29__TCLK1			PINMUX_PIN(PIN_PA29, 1, 2)
--#define PIN_PA29__D7			PINMUX_PIN(PIN_PA29, 2, 1)
--#define PIN_PA29__SPI0_NPCS1		PINMUX_PIN(PIN_PA29, 3, 2)
--#define PIN_PA29__SDMMC1_WP		PINMUX_PIN(PIN_PA29, 5, 1)
--#define PIN_PA29__CLASSD_L1		PINMUX_PIN(PIN_PA29, 6, 1)
--#define PIN_PA30			30
--#define PIN_PA30__GPIO			PINMUX_PIN(PIN_PA30, 0, 0)
--#define PIN_PA30__NWE_NANDWE		PINMUX_PIN(PIN_PA30, 2, 1)
--#define PIN_PA30__SPI0_NPCS0		PINMUX_PIN(PIN_PA30, 3, 2)
--#define PIN_PA30__PWMH0			PINMUX_PIN(PIN_PA30, 4, 1)
--#define PIN_PA30__SDMMC1_CD		PINMUX_PIN(PIN_PA30, 5, 1)
--#define PIN_PA30__CLASSD_L2		PINMUX_PIN(PIN_PA30, 6, 1)
--#define PIN_PA31			31
--#define PIN_PA31__GPIO			PINMUX_PIN(PIN_PA31, 0, 0)
--#define PIN_PA31__NCS3			PINMUX_PIN(PIN_PA31, 2, 1)
--#define PIN_PA31__SPI0_MISO		PINMUX_PIN(PIN_PA31, 3, 2)
--#define PIN_PA31__PWML0			PINMUX_PIN(PIN_PA31, 4, 1)
--#define PIN_PA31__CLASSD_L3		PINMUX_PIN(PIN_PA31, 6, 1)
--#define PIN_PB0				32
--#define PIN_PB0__GPIO			PINMUX_PIN(PIN_PB0, 0, 0)
--#define PIN_PB0__A21_NANDALE		PINMUX_PIN(PIN_PB0, 2, 1)
--#define PIN_PB0__SPI0_MOSI		PINMUX_PIN(PIN_PB0, 3, 2)
--#define PIN_PB0__PWMH1			PINMUX_PIN(PIN_PB0, 4, 1)
--#define PIN_PB1				33
--#define PIN_PB1__GPIO			PINMUX_PIN(PIN_PB1, 0, 0)
--#define PIN_PB1__A22_NANDCLE		PINMUX_PIN(PIN_PB1, 2, 1)
--#define PIN_PB1__SPI0_SPCK		PINMUX_PIN(PIN_PB1, 3, 2)
--#define PIN_PB1__PWML1			PINMUX_PIN(PIN_PB1, 4, 1)
--#define PIN_PB1__CLASSD_R0		PINMUX_PIN(PIN_PB1, 6, 1)
--#define PIN_PB2				34
--#define PIN_PB2__GPIO			PINMUX_PIN(PIN_PB2, 0, 0)
--#define PIN_PB2__NRD_NANDOE		PINMUX_PIN(PIN_PB2, 2, 1)
--#define PIN_PB2__PWMFI0			PINMUX_PIN(PIN_PB2, 4, 1)
--#define PIN_PB2__CLASSD_R1		PINMUX_PIN(PIN_PB2, 6, 1)
--#define PIN_PB3				35
--#define PIN_PB3__GPIO			PINMUX_PIN(PIN_PB3, 0, 0)
--#define PIN_PB3__URXD4			PINMUX_PIN(PIN_PB3, 1, 1)
--#define PIN_PB3__D8			PINMUX_PIN(PIN_PB3, 2, 1)
--#define PIN_PB3__IRQ			PINMUX_PIN(PIN_PB3, 3, 3)
--#define PIN_PB3__PWMEXTRG0		PINMUX_PIN(PIN_PB3, 4, 1)
--#define PIN_PB3__CLASSD_R2		PINMUX_PIN(PIN_PB3, 6, 1)
--#define PIN_PB4				36
--#define PIN_PB4__GPIO			PINMUX_PIN(PIN_PB4, 0, 0)
--#define PIN_PB4__UTXD4			PINMUX_PIN(PIN_PB4, 1, 1)
--#define PIN_PB4__D9			PINMUX_PIN(PIN_PB4, 2, 1)
--#define PIN_PB4__FIQ			PINMUX_PIN(PIN_PB4, 3, 4)
--#define PIN_PB4__CLASSD_R3		PINMUX_PIN(PIN_PB4, 6, 1)
--#define PIN_PB5				37
--#define PIN_PB5__GPIO			PINMUX_PIN(PIN_PB5, 0, 0)
--#define PIN_PB5__TCLK2			PINMUX_PIN(PIN_PB5, 1, 1)
--#define PIN_PB5__D10			PINMUX_PIN(PIN_PB5, 2, 1)
--#define PIN_PB5__PWMH2			PINMUX_PIN(PIN_PB5, 3, 1)
--#define PIN_PB5__QSPI1_SCK		PINMUX_PIN(PIN_PB5, 4, 2)
--#define PIN_PB5__GTSUCOMP		PINMUX_PIN(PIN_PB5, 6, 3)
--#define PIN_PB6				38
--#define PIN_PB6__GPIO			PINMUX_PIN(PIN_PB6, 0, 0)
--#define PIN_PB6__TIOA2			PINMUX_PIN(PIN_PB6, 1, 1)
--#define PIN_PB6__D11			PINMUX_PIN(PIN_PB6, 2, 1)
--#define PIN_PB6__PWML2			PINMUX_PIN(PIN_PB6, 3, 1)
--#define PIN_PB6__QSPI1_CS		PINMUX_PIN(PIN_PB6, 4, 2)
--#define PIN_PB6__GTXER			PINMUX_PIN(PIN_PB6, 6, 3)
--#define PIN_PB7				39
--#define PIN_PB7__GPIO			PINMUX_PIN(PIN_PB7, 0, 0)
--#define PIN_PB7__TIOB2			PINMUX_PIN(PIN_PB7, 1, 1)
--#define PIN_PB7__D12			PINMUX_PIN(PIN_PB7, 2, 1)
--#define PIN_PB7__PWMH3			PINMUX_PIN(PIN_PB7, 3, 1)
--#define PIN_PB7__QSPI1_IO0		PINMUX_PIN(PIN_PB7, 4, 2)
--#define PIN_PB7__GRXCK			PINMUX_PIN(PIN_PB7, 6, 3)
--#define PIN_PB8				40
--#define PIN_PB8__GPIO			PINMUX_PIN(PIN_PB8, 0, 0)
--#define PIN_PB8__TCLK3			PINMUX_PIN(PIN_PB8, 1, 1)
--#define PIN_PB8__D13			PINMUX_PIN(PIN_PB8, 2, 1)
--#define PIN_PB8__PWML3			PINMUX_PIN(PIN_PB8, 3, 1)
--#define PIN_PB8__QSPI1_IO1		PINMUX_PIN(PIN_PB8, 4, 2)
--#define PIN_PB8__GCRS			PINMUX_PIN(PIN_PB8, 6, 3)
--#define PIN_PB9				41
--#define PIN_PB9__GPIO			PINMUX_PIN(PIN_PB9, 0, 0)
--#define PIN_PB9__TIOA3			PINMUX_PIN(PIN_PB9, 1, 1)
--#define PIN_PB9__D14			PINMUX_PIN(PIN_PB9, 2, 1)
--#define PIN_PB9__PWMFI1			PINMUX_PIN(PIN_PB9, 3, 1)
--#define PIN_PB9__QSPI1_IO2		PINMUX_PIN(PIN_PB9, 4, 2)
--#define PIN_PB9__GCOL			PINMUX_PIN(PIN_PB9, 6, 3)
--#define PIN_PB10			42
--#define PIN_PB10__GPIO			PINMUX_PIN(PIN_PB10, 0, 0)
--#define PIN_PB10__TIOB3			PINMUX_PIN(PIN_PB10, 1, 1)
--#define PIN_PB10__D15			PINMUX_PIN(PIN_PB10, 2, 1)
--#define PIN_PB10__PWMEXTRG1		PINMUX_PIN(PIN_PB10, 3, 1)
--#define PIN_PB10__QSPI1_IO3		PINMUX_PIN(PIN_PB10, 4, 2)
--#define PIN_PB10__GRX2			PINMUX_PIN(PIN_PB10, 6, 3)
--#define PIN_PB11			43
--#define PIN_PB11__GPIO			PINMUX_PIN(PIN_PB11, 0, 0)
--#define PIN_PB11__LCDDAT0		PINMUX_PIN(PIN_PB11, 1, 1)
--#define PIN_PB11__A0_NBS0		PINMUX_PIN(PIN_PB11, 2, 1)
--#define PIN_PB11__URXD3			PINMUX_PIN(PIN_PB11, 3, 3)
--#define PIN_PB11__PDMIC_DAT		PINMUX_PIN(PIN_PB11, 4, 2)
--#define PIN_PB11__GRX3			PINMUX_PIN(PIN_PB11, 6, 3)
--#define PIN_PB12			44
--#define PIN_PB12__GPIO			PINMUX_PIN(PIN_PB12, 0, 0)
--#define PIN_PB12__LCDDAT1		PINMUX_PIN(PIN_PB12, 1, 1)
--#define PIN_PB12__A1			PINMUX_PIN(PIN_PB12, 2, 1)
--#define PIN_PB12__UTXD3			PINMUX_PIN(PIN_PB12, 3, 3)
--#define PIN_PB12__PDMIC_CLK		PINMUX_PIN(PIN_PB12, 4, 2)
--#define PIN_PB12__GTX2			PINMUX_PIN(PIN_PB12, 6, 3)
--#define PIN_PB13			45
--#define PIN_PB13__GPIO			PINMUX_PIN(PIN_PB13, 0, 0)
--#define PIN_PB13__LCDDAT2		PINMUX_PIN(PIN_PB13, 1, 1)
--#define PIN_PB13__A2			PINMUX_PIN(PIN_PB13, 2, 1)
--#define PIN_PB13__PCK1			PINMUX_PIN(PIN_PB13, 3, 3)
--#define PIN_PB13__GTX3			PINMUX_PIN(PIN_PB13, 6, 3)
--#define PIN_PB14			46
--#define PIN_PB14__GPIO			PINMUX_PIN(PIN_PB14, 0, 0)
--#define PIN_PB14__LCDDAT3		PINMUX_PIN(PIN_PB14, 1, 1)
--#define PIN_PB14__A3			PINMUX_PIN(PIN_PB14, 2, 1)
--#define PIN_PB14__TK1			PINMUX_PIN(PIN_PB14, 3, 2)
--#define PIN_PB14__I2SC1_MCK		PINMUX_PIN(PIN_PB14, 4, 1)
--#define PIN_PB14__QSPI1_SCK		PINMUX_PIN(PIN_PB14, 5, 3)
--#define PIN_PB14__GTXCK			PINMUX_PIN(PIN_PB14, 6, 3)
--#define PIN_PB15			47
--#define PIN_PB15__GPIO			PINMUX_PIN(PIN_PB15, 0, 0)
--#define PIN_PB15__LCDDAT4		PINMUX_PIN(PIN_PB15, 1, 1)
--#define PIN_PB15__A4			PINMUX_PIN(PIN_PB15, 2, 1)
--#define PIN_PB15__TF1			PINMUX_PIN(PIN_PB15, 3, 2)
--#define PIN_PB15__I2SC1_CK		PINMUX_PIN(PIN_PB15, 4, 1)
--#define PIN_PB15__QSPI1_CS		PINMUX_PIN(PIN_PB15, 5, 3)
--#define PIN_PB15__GTXEN			PINMUX_PIN(PIN_PB15, 6, 3)
--#define PIN_PB16			48
--#define PIN_PB16__GPIO			PINMUX_PIN(PIN_PB16, 0, 0)
--#define PIN_PB16__LCDDAT5		PINMUX_PIN(PIN_PB16, 1, 1)
--#define PIN_PB16__A5			PINMUX_PIN(PIN_PB16, 2, 1)
--#define PIN_PB16__TD1			PINMUX_PIN(PIN_PB16, 3, 2)
--#define PIN_PB16__I2SC1_WS		PINMUX_PIN(PIN_PB16, 4, 1)
--#define PIN_PB16__QSPI1_IO0		PINMUX_PIN(PIN_PB16, 5, 3)
--#define PIN_PB16__GRXDV			PINMUX_PIN(PIN_PB16, 6, 3)
--#define PIN_PB17			49
--#define PIN_PB17__GPIO			PINMUX_PIN(PIN_PB17, 0, 0)
--#define PIN_PB17__LCDDAT6		PINMUX_PIN(PIN_PB17, 1, 1)
--#define PIN_PB17__A6			PINMUX_PIN(PIN_PB17, 2, 1)
--#define PIN_PB17__RD1			PINMUX_PIN(PIN_PB17, 3, 2)
--#define PIN_PB17__I2SC1_DI0		PINMUX_PIN(PIN_PB17, 4, 1)
--#define PIN_PB17__QSPI1_IO1		PINMUX_PIN(PIN_PB17, 5, 3)
--#define PIN_PB17__GRXER			PINMUX_PIN(PIN_PB17, 6, 3)
--#define PIN_PB18			50
--#define PIN_PB18__GPIO			PINMUX_PIN(PIN_PB18, 0, 0)
--#define PIN_PB18__LCDDAT7		PINMUX_PIN(PIN_PB18, 1, 1)
--#define PIN_PB18__A7			PINMUX_PIN(PIN_PB18, 2, 1)
--#define PIN_PB18__RK1			PINMUX_PIN(PIN_PB18, 3, 2)
--#define PIN_PB18__I2SC1_DO0		PINMUX_PIN(PIN_PB18, 4, 1)
--#define PIN_PB18__QSPI1_IO2		PINMUX_PIN(PIN_PB18, 5, 3)
--#define PIN_PB18__GRX0			PINMUX_PIN(PIN_PB18, 6, 3)
--#define PIN_PB19			51
--#define PIN_PB19__GPIO			PINMUX_PIN(PIN_PB19, 0, 0)
--#define PIN_PB19__LCDDAT8		PINMUX_PIN(PIN_PB19, 1, 1)
--#define PIN_PB19__A8			PINMUX_PIN(PIN_PB19, 2, 1)
--#define PIN_PB19__RF1			PINMUX_PIN(PIN_PB19, 3, 2)
--#define PIN_PB19__TIOA3			PINMUX_PIN(PIN_PB19, 4, 2)
--#define PIN_PB19__QSPI1_IO3		PINMUX_PIN(PIN_PB19, 5, 3)
--#define PIN_PB19__GRX1			PINMUX_PIN(PIN_PB19, 6, 3)
--#define PIN_PB20			52
--#define PIN_PB20__GPIO			PINMUX_PIN(PIN_PB20, 0, 0)
--#define PIN_PB20__LCDDAT9		PINMUX_PIN(PIN_PB20, 1, 1)
--#define PIN_PB20__A9			PINMUX_PIN(PIN_PB20, 2, 1)
--#define PIN_PB20__TK0			PINMUX_PIN(PIN_PB20, 3, 1)
--#define PIN_PB20__TIOB3			PINMUX_PIN(PIN_PB20, 4, 2)
--#define PIN_PB20__PCK1			PINMUX_PIN(PIN_PB20, 5, 4)
--#define PIN_PB20__GTX0			PINMUX_PIN(PIN_PB20, 6, 3)
--#define PIN_PB21			53
--#define PIN_PB21__GPIO			PINMUX_PIN(PIN_PB21, 0, 0)
--#define PIN_PB21__LCDDAT10		PINMUX_PIN(PIN_PB21, 1, 1)
--#define PIN_PB21__A10			PINMUX_PIN(PIN_PB21, 2, 1)
--#define PIN_PB21__TF0			PINMUX_PIN(PIN_PB21, 3, 1)
--#define PIN_PB21__TCLK3			PINMUX_PIN(PIN_PB21, 4, 2)
--#define PIN_PB21__FLEXCOM3_IO2		PINMUX_PIN(PIN_PB21, 5, 3)
--#define PIN_PB21__GTX1			PINMUX_PIN(PIN_PB21, 6, 3)
--#define PIN_PB22			54
--#define PIN_PB22__GPIO			PINMUX_PIN(PIN_PB22, 0, 0)
--#define PIN_PB22__LCDDAT11		PINMUX_PIN(PIN_PB22, 1, 1)
--#define PIN_PB22__A11			PINMUX_PIN(PIN_PB22, 2, 1)
--#define PIN_PB22__TDO			PINMUX_PIN(PIN_PB22, 3, 1)
--#define PIN_PB22__TIOA2			PINMUX_PIN(PIN_PB22, 4, 2)
--#define PIN_PB22__FLEXCOM3_IO1		PINMUX_PIN(PIN_PB22, 5, 3)
--#define PIN_PB22__GMDC			PINMUX_PIN(PIN_PB22, 6, 3)
--#define PIN_PB23			55
--#define PIN_PB23__GPIO			PINMUX_PIN(PIN_PB23, 0, 0)
--#define PIN_PB23__LCDDAT12		PINMUX_PIN(PIN_PB23, 1, 1)
--#define PIN_PB23__A12			PINMUX_PIN(PIN_PB23, 2, 1)
--#define PIN_PB23__RD0			PINMUX_PIN(PIN_PB23, 3, 1)
--#define PIN_PB23__TIOB2			PINMUX_PIN(PIN_PB23, 4, 2)
--#define PIN_PB23__FLEXCOM3_IO0		PINMUX_PIN(PIN_PB23, 5, 3)
--#define PIN_PB23__GMDIO			PINMUX_PIN(PIN_PB23, 6, 3)
--#define PIN_PB24			56
--#define PIN_PB24__GPIO			PINMUX_PIN(PIN_PB24, 0, 0)
--#define PIN_PB24__LCDDAT13		PINMUX_PIN(PIN_PB24, 1, 1)
--#define PIN_PB24__A13			PINMUX_PIN(PIN_PB24, 2, 1)
--#define PIN_PB24__RK0			PINMUX_PIN(PIN_PB24, 3, 1)
--#define PIN_PB24__TCLK2			PINMUX_PIN(PIN_PB24, 4, 2)
--#define PIN_PB24__FLEXCOM3_IO3		PINMUX_PIN(PIN_PB24, 5, 3)
--#define PIN_PB24__ISC_D10		PINMUX_PIN(PIN_PB24, 6, 3)
--#define PIN_PB25			57
--#define PIN_PB25__GPIO			PINMUX_PIN(PIN_PB25, 0, 0)
--#define PIN_PB25__LCDDAT14		PINMUX_PIN(PIN_PB25, 1, 1)
--#define PIN_PB25__A14			PINMUX_PIN(PIN_PB25, 2, 1)
--#define PIN_PB25__RF0			PINMUX_PIN(PIN_PB25, 3, 1)
--#define PIN_PB25__FLEXCOM3_IO4		PINMUX_PIN(PIN_PB25, 5, 3)
--#define PIN_PB25__ISC_D11		PINMUX_PIN(PIN_PB25, 6, 3)
--#define PIN_PB26			58
--#define PIN_PB26__GPIO			PINMUX_PIN(PIN_PB26, 0, 0)
--#define PIN_PB26__LCDDAT15		PINMUX_PIN(PIN_PB26, 1, 1)
--#define PIN_PB26__A15			PINMUX_PIN(PIN_PB26, 2, 1)
--#define PIN_PB26__URXD0			PINMUX_PIN(PIN_PB26, 3, 1)
--#define PIN_PB26__PDMIC_DAT		PINMUX_PIN(PIN_PB26, 4, 1)
--#define PIN_PB26__ISC_D0		PINMUX_PIN(PIN_PB26, 6, 3)
--#define PIN_PB27			59
--#define PIN_PB27__GPIO			PINMUX_PIN(PIN_PB27, 0, 0)
--#define PIN_PB27__LCDDAT16		PINMUX_PIN(PIN_PB27, 1, 1)
--#define PIN_PB27__A16			PINMUX_PIN(PIN_PB27, 2, 1)
--#define PIN_PB27__UTXD0			PINMUX_PIN(PIN_PB27, 3, 1)
--#define PIN_PB27__PDMIC_CLK		PINMUX_PIN(PIN_PB27, 4, 1)
--#define PIN_PB27__ISC_D1		PINMUX_PIN(PIN_PB27, 6, 3)
--#define PIN_PB28			60
--#define PIN_PB28__GPIO			PINMUX_PIN(PIN_PB28, 0, 0)
--#define PIN_PB28__LCDDAT17		PINMUX_PIN(PIN_PB28, 1, 1)
--#define PIN_PB28__A17			PINMUX_PIN(PIN_PB28, 2, 1)
--#define PIN_PB28__FLEXCOM0_IO0		PINMUX_PIN(PIN_PB28, 3, 1)
--#define PIN_PB28__TIOA5			PINMUX_PIN(PIN_PB28, 4, 2)
--#define PIN_PB28__ISC_D2		PINMUX_PIN(PIN_PB28, 6, 3)
--#define PIN_PB29			61
--#define PIN_PB29__GPIO			PINMUX_PIN(PIN_PB29, 0, 0)
--#define PIN_PB29__LCDDAT18		PINMUX_PIN(PIN_PB29, 1, 1)
--#define PIN_PB29__A18			PINMUX_PIN(PIN_PB29, 2, 1)
--#define PIN_PB29__FLEXCOM0_IO1		PINMUX_PIN(PIN_PB29, 3, 1)
--#define PIN_PB29__TIOB5			PINMUX_PIN(PIN_PB29, 4, 2)
--#define PIN_PB29__ISC_D3		PINMUX_PIN(PIN_PB29, 7, 3)
--#define PIN_PB30			62
--#define PIN_PB30__GPIO			PINMUX_PIN(PIN_PB30, 0, 0)
--#define PIN_PB30__LCDDAT19		PINMUX_PIN(PIN_PB30, 1, 1)
--#define PIN_PB30__A19			PINMUX_PIN(PIN_PB30, 2, 1)
--#define PIN_PB30__FLEXCOM0_IO2		PINMUX_PIN(PIN_PB30, 3, 1)
--#define PIN_PB30__TCLK5			PINMUX_PIN(PIN_PB30, 4, 2)
--#define PIN_PB30__ISC_D4		PINMUX_PIN(PIN_PB30, 6, 3)
--#define PIN_PB31			63
--#define PIN_PB31__GPIO			PINMUX_PIN(PIN_PB31, 0, 0)
--#define PIN_PB31__LCDDAT20		PINMUX_PIN(PIN_PB31, 1, 1)
--#define PIN_PB31__A20			PINMUX_PIN(PIN_PB31, 2, 1)
--#define PIN_PB31__FLEXCOM0_IO3		PINMUX_PIN(PIN_PB31, 3, 1)
--#define PIN_PB31__TWD0			PINMUX_PIN(PIN_PB31, 4, 1)
--#define PIN_PB31__ISC_D5		PINMUX_PIN(PIN_PB31, 6, 3)
--#define PIN_PC0				64
--#define PIN_PC0__GPIO			PINMUX_PIN(PIN_PC0, 0, 0)
--#define PIN_PC0__LCDDAT21		PINMUX_PIN(PIN_PC0, 1, 1)
--#define PIN_PC0__A23			PINMUX_PIN(PIN_PC0, 2, 1)
--#define PIN_PC0__FLEXCOM0_IO4		PINMUX_PIN(PIN_PC0, 3, 1)
--#define PIN_PC0__TWCK0			PINMUX_PIN(PIN_PC0, 4, 1)
--#define PIN_PC0__ISC_D6			PINMUX_PIN(PIN_PC0, 6, 3)
--#define PIN_PC1				65
--#define PIN_PC1__GPIO			PINMUX_PIN(PIN_PC1, 0, 0)
--#define PIN_PC1__LCDDAT22		PINMUX_PIN(PIN_PC1, 1, 1)
--#define PIN_PC1__A24			PINMUX_PIN(PIN_PC1, 2, 1)
--#define PIN_PC1__CANTX0			PINMUX_PIN(PIN_PC1, 3, 1)
--#define PIN_PC1__SPI1_SPCK		PINMUX_PIN(PIN_PC1, 4, 1)
--#define PIN_PC1__I2SC0_CK		PINMUX_PIN(PIN_PC1, 5, 1)
--#define PIN_PC1__ISC_D7			PINMUX_PIN(PIN_PC1, 6, 3)
--#define PIN_PC2				66
--#define PIN_PC2__GPIO			PINMUX_PIN(PIN_PC2, 0, 0)
--#define PIN_PC2__LCDDAT23		PINMUX_PIN(PIN_PC2, 1, 1)
--#define PIN_PC2__A25			PINMUX_PIN(PIN_PC2, 2, 1)
--#define PIN_PC2__CANRX0			PINMUX_PIN(PIN_PC2, 3, 1)
--#define PIN_PC2__SPI1_MOSI		PINMUX_PIN(PIN_PC2, 4, 1)
--#define PIN_PC2__I2SC0_MCK		PINMUX_PIN(PIN_PC2, 5, 1)
--#define PIN_PC2__ISC_D8			PINMUX_PIN(PIN_PC2, 6, 3)
--#define PIN_PC3				67
--#define PIN_PC3__GPIO			PINMUX_PIN(PIN_PC3, 0, 0)
--#define PIN_PC3__LCDPWM			PINMUX_PIN(PIN_PC3, 1, 1)
--#define PIN_PC3__NWAIT			PINMUX_PIN(PIN_PC3, 2, 1)
--#define PIN_PC3__TIOA1			PINMUX_PIN(PIN_PC3, 3, 1)
--#define PIN_PC3__SPI1_MISO		PINMUX_PIN(PIN_PC3, 4, 1)
--#define PIN_PC3__I2SC0_WS		PINMUX_PIN(PIN_PC3, 5, 1)
--#define PIN_PC3__ISC_D9			PINMUX_PIN(PIN_PC3, 6, 3)
--#define PIN_PC4				68
--#define PIN_PC4__GPIO			PINMUX_PIN(PIN_PC4, 0, 0)
--#define PIN_PC4__LCDDISP		PINMUX_PIN(PIN_PC4, 1, 1)
--#define PIN_PC4__NWR1_NBS1		PINMUX_PIN(PIN_PC4, 2, 1)
--#define PIN_PC4__TIOB1			PINMUX_PIN(PIN_PC4, 3, 1)
--#define PIN_PC4__SPI1_NPCS0		PINMUX_PIN(PIN_PC4, 4, 1)
--#define PIN_PC4__I2SC0_DI0		PINMUX_PIN(PIN_PC4, 5, 1)
--#define PIN_PC4__ISC_PCK		PINMUX_PIN(PIN_PC4, 6, 3)
--#define PIN_PC5				69
--#define PIN_PC5__GPIO			PINMUX_PIN(PIN_PC5, 0, 0)
--#define PIN_PC5__LCDVSYNC		PINMUX_PIN(PIN_PC5, 1, 1)
--#define PIN_PC5__NCS0			PINMUX_PIN(PIN_PC5, 2, 1)
--#define PIN_PC5__TCLK1			PINMUX_PIN(PIN_PC5, 3, 1)
--#define PIN_PC5__SPI1_NPCS1		PINMUX_PIN(PIN_PC5, 4, 1)
--#define PIN_PC5__I2SC0_DO0		PINMUX_PIN(PIN_PC5, 5, 1)
--#define PIN_PC5__ISC_VSYNC		PINMUX_PIN(PIN_PC5, 6, 3)
--#define PIN_PC6				70
--#define PIN_PC6__GPIO			PINMUX_PIN(PIN_PC6, 0, 0)
--#define PIN_PC6__LCDHSYNC		PINMUX_PIN(PIN_PC6, 1, 1)
--#define PIN_PC6__NCS1			PINMUX_PIN(PIN_PC6, 2, 1)
--#define PIN_PC6__TWD1			PINMUX_PIN(PIN_PC6, 3, 1)
--#define PIN_PC6__SPI1_NPCS2		PINMUX_PIN(PIN_PC6, 4, 1)
--#define PIN_PC6__ISC_HSYNC		PINMUX_PIN(PIN_PC6, 6, 3)
--#define PIN_PC7				71
--#define PIN_PC7__GPIO			PINMUX_PIN(PIN_PC7, 0, 0)
--#define PIN_PC7__LCDPCK			PINMUX_PIN(PIN_PC7, 1, 1)
--#define PIN_PC7__NCS2			PINMUX_PIN(PIN_PC7, 2, 1)
--#define PIN_PC7__TWCK1			PINMUX_PIN(PIN_PC7, 3, 1)
--#define PIN_PC7__SPI1_NPCS3		PINMUX_PIN(PIN_PC7, 4, 1)
--#define PIN_PC7__URXD1			PINMUX_PIN(PIN_PC7, 5, 2)
--#define PIN_PC7__ISC_MCK		PINMUX_PIN(PIN_PC7, 6, 3)
--#define PIN_PC8				72
--#define PIN_PC8__GPIO			PINMUX_PIN(PIN_PC8, 0, 0)
--#define PIN_PC8__LCDDEN			PINMUX_PIN(PIN_PC8, 1, 1)
--#define PIN_PC8__NANDRDY		PINMUX_PIN(PIN_PC8, 2, 1)
--#define PIN_PC8__FIQ			PINMUX_PIN(PIN_PC8, 3, 1)
--#define PIN_PC8__PCK0			PINMUX_PIN(PIN_PC8, 4, 3)
--#define PIN_PC8__UTXD1			PINMUX_PIN(PIN_PC8, 5, 2)
--#define PIN_PC8__ISC_FIELD		PINMUX_PIN(PIN_PC8, 6, 3)
--#define PIN_PC9				73
--#define PIN_PC9__GPIO			PINMUX_PIN(PIN_PC9, 0, 0)
--#define PIN_PC9__FIQ			PINMUX_PIN(PIN_PC9, 1, 3)
--#define PIN_PC9__GTSUCOMP		PINMUX_PIN(PIN_PC9, 2, 1)
--#define PIN_PC9__ISC_D0			PINMUX_PIN(PIN_PC9, 2, 1)
--#define PIN_PC9__TIOA4			PINMUX_PIN(PIN_PC9, 4, 2)
--#define PIN_PC10			74
--#define PIN_PC10__GPIO			PINMUX_PIN(PIN_PC10, 0, 0)
--#define PIN_PC10__LCDDAT2		PINMUX_PIN(PIN_PC10, 1, 2)
--#define PIN_PC10__GTXCK			PINMUX_PIN(PIN_PC10, 2, 1)
--#define PIN_PC10__ISC_D1		PINMUX_PIN(PIN_PC10, 3, 1)
--#define PIN_PC10__TIOB4			PINMUX_PIN(PIN_PC10, 4, 2)
--#define PIN_PC10__CANTX0		PINMUX_PIN(PIN_PC10, 5, 2)
--#define PIN_PC11			75
--#define PIN_PC11__GPIO			PINMUX_PIN(PIN_PC11, 0, 0)
--#define PIN_PC11__LCDDAT3		PINMUX_PIN(PIN_PC11, 1, 2)
--#define PIN_PC11__GTXEN			PINMUX_PIN(PIN_PC11, 2, 1)
--#define PIN_PC11__ISC_D2		PINMUX_PIN(PIN_PC11, 3, 1)
--#define PIN_PC11__TCLK4			PINMUX_PIN(PIN_PC11, 4, 2)
--#define PIN_PC11__CANRX0		PINMUX_PIN(PIN_PC11, 5, 2)
--#define PIN_PC11__A0_NBS0		PINMUX_PIN(PIN_PC11, 6, 2)
--#define PIN_PC12			76
--#define PIN_PC12__GPIO			PINMUX_PIN(PIN_PC12, 0, 0)
--#define PIN_PC12__LCDDAT4		PINMUX_PIN(PIN_PC12, 1, 2)
--#define PIN_PC12__GRXDV			PINMUX_PIN(PIN_PC12, 2, 1)
--#define PIN_PC12__ISC_D3		PINMUX_PIN(PIN_PC12, 3, 1)
--#define PIN_PC12__URXD3			PINMUX_PIN(PIN_PC12, 4, 1)
--#define PIN_PC12__TK0			PINMUX_PIN(PIN_PC12, 5, 2)
--#define PIN_PC12__A1			PINMUX_PIN(PIN_PC12, 6, 2)
--#define PIN_PC13			77
--#define PIN_PC13__GPIO			PINMUX_PIN(PIN_PC13, 0, 0)
--#define PIN_PC13__LCDDAT5		PINMUX_PIN(PIN_PC13, 1, 2)
--#define PIN_PC13__GRXER			PINMUX_PIN(PIN_PC13, 2, 1)
--#define PIN_PC13__ISC_D4		PINMUX_PIN(PIN_PC13, 3, 1)
--#define PIN_PC13__UTXD3			PINMUX_PIN(PIN_PC13, 4, 1)
--#define PIN_PC13__TF0			PINMUX_PIN(PIN_PC13, 5, 2)
--#define PIN_PC13__A2			PINMUX_PIN(PIN_PC13, 6, 2)
--#define PIN_PC14			78
--#define PIN_PC14__GPIO			PINMUX_PIN(PIN_PC14, 0, 0)
--#define PIN_PC14__LCDDAT6		PINMUX_PIN(PIN_PC14, 1, 2)
--#define PIN_PC14__GRX0			PINMUX_PIN(PIN_PC14, 2, 1)
--#define PIN_PC14__ISC_D5		PINMUX_PIN(PIN_PC14, 3, 1)
--#define PIN_PC14__TDO			PINMUX_PIN(PIN_PC14, 5, 2)
--#define PIN_PC14__A3			PINMUX_PIN(PIN_PC14, 6, 2)
--#define PIN_PC15			79
--#define PIN_PC15__GPIO			PINMUX_PIN(PIN_PC15, 0, 0)
--#define PIN_PC15__LCDDAT7		PINMUX_PIN(PIN_PC15, 1, 2)
--#define PIN_PC15__GRX1			PINMUX_PIN(PIN_PC15, 2, 1)
--#define PIN_PC15__ISC_D6		PINMUX_PIN(PIN_PC15, 3, 1)
--#define PIN_PC15__RD0			PINMUX_PIN(PIN_PC15, 5, 2)
--#define PIN_PC15__A4			PINMUX_PIN(PIN_PC15, 6, 2)
--#define PIN_PC16			80
--#define PIN_PC16__GPIO			PINMUX_PIN(PIN_PC16, 0, 0)
--#define PIN_PC16__LCDDAT10		PINMUX_PIN(PIN_PC16, 1, 2)
--#define PIN_PC16__GTX0			PINMUX_PIN(PIN_PC16, 2, 1)
--#define PIN_PC16__ISC_D7		PINMUX_PIN(PIN_PC16, 3, 1)
--#define PIN_PC16__RK0			PINMUX_PIN(PIN_PC16, 5, 2)
--#define PIN_PC16__A5			PINMUX_PIN(PIN_PC16, 6, 2)
--#define PIN_PC17			81
--#define PIN_PC17__GPIO			PINMUX_PIN(PIN_PC17, 0, 0)
--#define PIN_PC17__LCDDAT11		PINMUX_PIN(PIN_PC17, 1, 2)
--#define PIN_PC17__GTX1			PINMUX_PIN(PIN_PC17, 2, 1)
--#define PIN_PC17__ISC_D8		PINMUX_PIN(PIN_PC17, 3, 1)
--#define PIN_PC17__RF0			PINMUX_PIN(PIN_PC17, 5, 2)
--#define PIN_PC17__A6			PINMUX_PIN(PIN_PC17, 6, 2)
--#define PIN_PC18			82
--#define PIN_PC18__GPIO			PINMUX_PIN(PIN_PC18, 0, 0)
--#define PIN_PC18__LCDDAT12		PINMUX_PIN(PIN_PC18, 1, 2)
--#define PIN_PC18__GMDC			PINMUX_PIN(PIN_PC18, 2, 1)
--#define PIN_PC18__ISC_D9		PINMUX_PIN(PIN_PC18, 3, 1)
--#define PIN_PC18__FLEXCOM3_IO2		PINMUX_PIN(PIN_PC18, 5, 2)
--#define PIN_PC18__A7			PINMUX_PIN(PIN_PC18, 6, 2)
--#define PIN_PC19			83
--#define PIN_PC19__GPIO			PINMUX_PIN(PIN_PC19, 0, 0)
--#define PIN_PC19__LCDDAT13		PINMUX_PIN(PIN_PC19, 1, 2)
--#define PIN_PC19__GMDIO			PINMUX_PIN(PIN_PC19, 2, 1)
--#define PIN_PC19__ISC_D10		PINMUX_PIN(PIN_PC19, 3, 1)
--#define PIN_PC19__FLEXCOM3_IO1		PINMUX_PIN(PIN_PC19, 5, 2)
--#define PIN_PC19__A8			PINMUX_PIN(PIN_PC19, 6, 2)
--#define PIN_PC20			84
--#define PIN_PC20__GPIO			PINMUX_PIN(PIN_PC20, 0, 0)
--#define PIN_PC20__LCDDAT14		PINMUX_PIN(PIN_PC20, 1, 2)
--#define PIN_PC20__GRXCK			PINMUX_PIN(PIN_PC20, 2, 1)
--#define PIN_PC20__ISC_D11		PINMUX_PIN(PIN_PC20, 3, 1)
--#define PIN_PC20__FLEXCOM3_IO0		PINMUX_PIN(PIN_PC20, 5, 2)
--#define PIN_PC20__A9			PINMUX_PIN(PIN_PC20, 6, 2)
--#define PIN_PC21			85
--#define PIN_PC21__GPIO			PINMUX_PIN(PIN_PC21, 0, 0)
--#define PIN_PC21__LCDDAT15		PINMUX_PIN(PIN_PC21, 1, 2)
--#define PIN_PC21__GTXER			PINMUX_PIN(PIN_PC21, 2, 1)
--#define PIN_PC21__ISC_PCK		PINMUX_PIN(PIN_PC21, 3, 1)
--#define PIN_PC21__FLEXCOM3_IO3		PINMUX_PIN(PIN_PC21, 5, 2)
--#define PIN_PC21__A10			PINMUX_PIN(PIN_PC21, 6, 2)
--#define PIN_PC22			86
--#define PIN_PC22__GPIO			PINMUX_PIN(PIN_PC22, 0, 0)
--#define PIN_PC22__LCDDAT18		PINMUX_PIN(PIN_PC22, 1, 2)
--#define PIN_PC22__GCRS			PINMUX_PIN(PIN_PC22, 2, 1)
--#define PIN_PC22__ISC_VSYNC		PINMUX_PIN(PIN_PC22, 3, 1)
--#define PIN_PC22__FLEXCOM3_IO4		PINMUX_PIN(PIN_PC22, 5, 2)
--#define PIN_PC22__A11			PINMUX_PIN(PIN_PC22, 6, 2)
--#define PIN_PC23			87
--#define PIN_PC23__GPIO			PINMUX_PIN(PIN_PC23, 0, 0)
--#define PIN_PC23__LCDDAT19		PINMUX_PIN(PIN_PC23, 1, 2)
--#define PIN_PC23__GCOL			PINMUX_PIN(PIN_PC23, 2, 1)
--#define PIN_PC23__ISC_HSYNC		PINMUX_PIN(PIN_PC23, 3, 1)
--#define PIN_PC23__A12			PINMUX_PIN(PIN_PC23, 6, 2)
--#define PIN_PC24			88
--#define PIN_PC24__GPIO			PINMUX_PIN(PIN_PC24, 0, 0)
--#define PIN_PC24__LCDDAT20		PINMUX_PIN(PIN_PC24, 1, 2)
--#define PIN_PC24__GRX2			PINMUX_PIN(PIN_PC24, 2, 1)
--#define PIN_PC24__ISC_MCK		PINMUX_PIN(PIN_PC24, 3, 1)
--#define PIN_PC24__A13			PINMUX_PIN(PIN_PC24, 6, 2)
--#define PIN_PC25			89
--#define PIN_PC25__GPIO			PINMUX_PIN(PIN_PC25, 0, 0)
--#define PIN_PC25__LCDDAT21		PINMUX_PIN(PIN_PC25, 1, 2)
--#define PIN_PC25__GRX3			PINMUX_PIN(PIN_PC25, 2, 1)
--#define PIN_PC25__ISC_FIELD		PINMUX_PIN(PIN_PC25, 3, 1)
--#define PIN_PC25__A14			PINMUX_PIN(PIN_PC25, 6, 2)
--#define PIN_PC26			90
--#define PIN_PC26__GPIO			PINMUX_PIN(PIN_PC26, 0, 0)
--#define PIN_PC26__LCDDAT22		PINMUX_PIN(PIN_PC26, 1, 2)
--#define PIN_PC26__GTX2			PINMUX_PIN(PIN_PC26, 2, 1)
--#define PIN_PC26__CANTX1		PINMUX_PIN(PIN_PC26, 4, 1)
--#define PIN_PC26__A15			PINMUX_PIN(PIN_PC26, 6, 2)
--#define PIN_PC27			91
--#define PIN_PC27__GPIO			PINMUX_PIN(PIN_PC27, 0, 0)
--#define PIN_PC27__LCDDAT23		PINMUX_PIN(PIN_PC27, 1, 2)
--#define PIN_PC27__GTX3			PINMUX_PIN(PIN_PC27, 2, 1)
--#define PIN_PC27__PCK1			PINMUX_PIN(PIN_PC27, 3, 2)
--#define PIN_PC27__CANRX1		PINMUX_PIN(PIN_PC27, 4, 1)
--#define PIN_PC27__TWD0			PINMUX_PIN(PIN_PC27, 5, 2)
--#define PIN_PC27__A16			PINMUX_PIN(PIN_PC27, 6, 2)
--#define PIN_PC28			92
--#define PIN_PC28__GPIO			PINMUX_PIN(PIN_PC28, 0, 0)
--#define PIN_PC28__LCDPWM		PINMUX_PIN(PIN_PC28, 1, 2)
--#define PIN_PC28__FLEXCOM4_IO0		PINMUX_PIN(PIN_PC28, 2, 1)
--#define PIN_PC28__PCK2			PINMUX_PIN(PIN_PC28, 3, 2)
--#define PIN_PC28__TWCK0			PINMUX_PIN(PIN_PC28, 5, 2)
--#define PIN_PC28__A17			PINMUX_PIN(PIN_PC28, 6, 2)
--#define PIN_PC29			93
--#define PIN_PC29__GPIO			PINMUX_PIN(PIN_PC29, 0, 0)
--#define PIN_PC29__LCDDISP		PINMUX_PIN(PIN_PC29, 1, 2)
--#define PIN_PC29__FLEXCOM4_IO1		PINMUX_PIN(PIN_PC29, 2, 1)
--#define PIN_PC29__A18			PINMUX_PIN(PIN_PC29, 6, 2)
--#define PIN_PC30			94
--#define PIN_PC30__GPIO			PINMUX_PIN(PIN_PC30, 0, 0)
--#define PIN_PC30__LCDVSYNC		PINMUX_PIN(PIN_PC30, 1, 2)
--#define PIN_PC30__FLEXCOM4_IO2		PINMUX_PIN(PIN_PC30, 2, 1)
--#define PIN_PC30__A19			PINMUX_PIN(PIN_PC30, 6, 2)
--#define PIN_PC31			95
--#define PIN_PC31__GPIO			PINMUX_PIN(PIN_PC31, 0, 0)
--#define PIN_PC31__LCDHSYNC		PINMUX_PIN(PIN_PC31, 1, 2)
--#define PIN_PC31__FLEXCOM4_IO3		PINMUX_PIN(PIN_PC31, 2, 1)
--#define PIN_PC31__URXD3			PINMUX_PIN(PIN_PC31, 3, 2)
--#define PIN_PC31__A20			PINMUX_PIN(PIN_PC31, 6, 2)
--#define PIN_PD0				96
--#define PIN_PD0__GPIO			PINMUX_PIN(PIN_PD0, 0, 0)
--#define PIN_PD0__LCDPCK			PINMUX_PIN(PIN_PD0, 1, 2)
--#define PIN_PD0__FLEXCOM4_IO4		PINMUX_PIN(PIN_PD0, 2, 1)
--#define PIN_PD0__UTXD3			PINMUX_PIN(PIN_PD0, 3, 2)
--#define PIN_PD0__GTSUCOMP		PINMUX_PIN(PIN_PD0, 4, 2)
--#define PIN_PD0__A23			PINMUX_PIN(PIN_PD0, 6, 2)
--#define PIN_PD1				97
--#define PIN_PD1__GPIO			PINMUX_PIN(PIN_PD1, 0, 0)
--#define PIN_PD1__LCDDEN			PINMUX_PIN(PIN_PD1, 1, 2)
--#define PIN_PD1__GRXCK			PINMUX_PIN(PIN_PD1, 4, 2)
--#define PIN_PD1__A24			PINMUX_PIN(PIN_PD1, 6, 2)
--#define PIN_PD2				98
--#define PIN_PD2__GPIO			PINMUX_PIN(PIN_PD2, 0, 0)
--#define PIN_PD2__URXD1			PINMUX_PIN(PIN_PD2, 1, 1)
--#define PIN_PD2__GTXER			PINMUX_PIN(PIN_PD2, 4, 2)
--#define PIN_PD2__ISC_MCK		PINMUX_PIN(PIN_PD2, 5, 2)
--#define PIN_PD2__A25			PINMUX_PIN(PIN_PD2, 6, 2)
--#define PIN_PD3				99
--#define PIN_PD3__GPIO			PINMUX_PIN(PIN_PD3, 0, 0)
--#define PIN_PD3__UTXD1			PINMUX_PIN(PIN_PD3, 1, 1)
--#define PIN_PD3__FIQ			PINMUX_PIN(PIN_PD3, 2, 2)
--#define PIN_PD3__GCRS			PINMUX_PIN(PIN_PD3, 4, 2)
--#define PIN_PD3__ISC_D11		PINMUX_PIN(PIN_PD3, 5, 2)
--#define PIN_PD3__NWAIT			PINMUX_PIN(PIN_PD3, 6, 2)
--#define PIN_PD4				100
--#define PIN_PD4__GPIO			PINMUX_PIN(PIN_PD4, 0, 0)
--#define PIN_PD4__TWD1			PINMUX_PIN(PIN_PD4, 1, 2)
--#define PIN_PD4__URXD2			PINMUX_PIN(PIN_PD4, 2, 1)
--#define PIN_PD4__GCOL			PINMUX_PIN(PIN_PD4, 4, 2)
--#define PIN_PD4__ISC_D10		PINMUX_PIN(PIN_PD4, 5, 2)
--#define PIN_PD4__NCS0			PINMUX_PIN(PIN_PD4, 6, 2)
--#define PIN_PD5				101
--#define PIN_PD5__GPIO			PINMUX_PIN(PIN_PD5, 0, 0)
--#define PIN_PD5__TWCK1			PINMUX_PIN(PIN_PD5, 1, 2)
--#define PIN_PD5__UTXD2			PINMUX_PIN(PIN_PD5, 2, 1)
--#define PIN_PD5__GRX2			PINMUX_PIN(PIN_PD5, 4, 2)
--#define PIN_PD5__ISC_D9			PINMUX_PIN(PIN_PD5, 5, 2)
--#define PIN_PD5__NCS1			PINMUX_PIN(PIN_PD5, 6, 2)
--#define PIN_PD6				102
--#define PIN_PD6__GPIO			PINMUX_PIN(PIN_PD6, 0, 0)
--#define PIN_PD6__TCK			PINMUX_PIN(PIN_PD6, 1, 2)
--#define PIN_PD6__PCK1			PINMUX_PIN(PIN_PD6, 2, 1)
--#define PIN_PD6__GRX3			PINMUX_PIN(PIN_PD6, 4, 2)
--#define PIN_PD6__ISC_D8			PINMUX_PIN(PIN_PD6, 5, 2)
--#define PIN_PD6__NCS2			PINMUX_PIN(PIN_PD6, 6, 2)
--#define PIN_PD7				103
--#define PIN_PD7__GPIO			PINMUX_PIN(PIN_PD7, 0, 0)
--#define PIN_PD7__TDI			PINMUX_PIN(PIN_PD7, 1, 2)
--#define PIN_PD7__UTMI_RXVAL		PINMUX_PIN(PIN_PD7, 3, 1)
--#define PIN_PD7__GTX2			PINMUX_PIN(PIN_PD7, 4, 2)
--#define PIN_PD7__ISC_D0			PINMUX_PIN(PIN_PD7, 5, 2)
--#define PIN_PD7__NWR1_NBS1		PINMUX_PIN(PIN_PD7, 6, 2)
--#define PIN_PD8				104
--#define PIN_PD8__GPIO			PINMUX_PIN(PIN_PD8, 0, 0)
--#define PIN_PD8__TDO			PINMUX_PIN(PIN_PD8, 1, 2)
--#define PIN_PD8__UTMI_RXERR		PINMUX_PIN(PIN_PD8, 3, 1)
--#define PIN_PD8__GTX3			PINMUX_PIN(PIN_PD8, 4, 2)
--#define PIN_PD8__ISC_D1			PINMUX_PIN(PIN_PD8, 5, 2)
--#define PIN_PD8__NANDRDY		PINMUX_PIN(PIN_PD8, 6, 2)
--#define PIN_PD9				105
--#define PIN_PD9__GPIO			PINMUX_PIN(PIN_PD9, 0, 0)
--#define PIN_PD9__TMS			PINMUX_PIN(PIN_PD9, 1, 2)
--#define PIN_PD9__UTMI_RXACT		PINMUX_PIN(PIN_PD9, 3, 1)
--#define PIN_PD9__GTXCK			PINMUX_PIN(PIN_PD9, 4, 2)
--#define PIN_PD9__ISC_D2			PINMUX_PIN(PIN_PD9, 5, 2)
--#define PIN_PD10			106
--#define PIN_PD10__GPIO			PINMUX_PIN(PIN_PD10, 0, 0)
--#define PIN_PD10__NTRST			PINMUX_PIN(PIN_PD10, 1, 2)
--#define PIN_PD10__UTMI_HDIS		PINMUX_PIN(PIN_PD10, 3, 1)
--#define PIN_PD10__GTXEN			PINMUX_PIN(PIN_PD10, 4, 2)
--#define PIN_PD10__ISC_D3		PINMUX_PIN(PIN_PD10, 5, 2)
--#define PIN_PD11			107
--#define PIN_PD11__GPIO			PINMUX_PIN(PIN_PD11, 0, 0)
--#define PIN_PD11__TIOA1			PINMUX_PIN(PIN_PD11, 1, 3)
--#define PIN_PD11__PCK2			PINMUX_PIN(PIN_PD11, 2, 2)
--#define PIN_PD11__UTMI_LS0		PINMUX_PIN(PIN_PD11, 3, 1)
--#define PIN_PD11__GRXDV			PINMUX_PIN(PIN_PD11, 4, 2)
--#define PIN_PD11__ISC_D4		PINMUX_PIN(PIN_PD11, 5, 2)
--#define PIN_PD11__ISC_MCK		PINMUX_PIN(PIN_PD11, 7, 4)
--#define PIN_PD12			108
--#define PIN_PD12__GPIO			PINMUX_PIN(PIN_PD12, 0, 0)
--#define PIN_PD12__TIOB1			PINMUX_PIN(PIN_PD12, 1, 3)
--#define PIN_PD12__FLEXCOM4_IO0		PINMUX_PIN(PIN_PD12, 2, 2)
--#define PIN_PD12__UTMI_LS1		PINMUX_PIN(PIN_PD12, 3, 1)
--#define PIN_PD12__GRXER			PINMUX_PIN(PIN_PD12, 4, 2)
--#define PIN_PD12__ISC_D5		PINMUX_PIN(PIN_PD12, 5, 2)
--#define PIN_PD12__ISC_D4		PINMUX_PIN(PIN_PD12, 6, 4)
--#define PIN_PD13			109
--#define PIN_PD13__GPIO			PINMUX_PIN(PIN_PD13, 0, 0)
--#define PIN_PD13__TCLK1			PINMUX_PIN(PIN_PD13, 1, 3)
--#define PIN_PD13__FLEXCOM4_IO1		PINMUX_PIN(PIN_PD13, 2, 2)
--#define PIN_PD13__UTMI_CDRPCSEL0	PINMUX_PIN(PIN_PD13, 3, 1)
--#define PIN_PD13__GRX0			PINMUX_PIN(PIN_PD13, 4, 2)
--#define PIN_PD13__ISC_D6		PINMUX_PIN(PIN_PD13, 5, 2)
--#define PIN_PD13__ISC_D5		PINMUX_PIN(PIN_PD13, 6, 4)
--#define PIN_PD14			110
--#define PIN_PD14__GPIO			PINMUX_PIN(PIN_PD14, 0, 0)
--#define PIN_PD14__TCK			PINMUX_PIN(PIN_PD14, 1, 1)
--#define PIN_PD14__FLEXCOM4_IO2		PINMUX_PIN(PIN_PD14, 2, 2)
--#define PIN_PD14__UTMI_CDRPCSEL1	PINMUX_PIN(PIN_PD14, 3, 1)
--#define PIN_PD14__GRX1			PINMUX_PIN(PIN_PD14, 4, 2)
--#define PIN_PD14__ISC_D7		PINMUX_PIN(PIN_PD14, 5, 2)
--#define PIN_PD14__ISC_D6		PINMUX_PIN(PIN_PD14, 6, 4)
--#define PIN_PD15			111
--#define PIN_PD15__GPIO			PINMUX_PIN(PIN_PD15, 0, 0)
--#define PIN_PD15__TDI			PINMUX_PIN(PIN_PD15, 1, 1)
--#define PIN_PD15__FLEXCOM4_IO3		PINMUX_PIN(PIN_PD15, 2, 2)
--#define PIN_PD15__UTMI_CDRCPDIVEN	PINMUX_PIN(PIN_PD15, 3, 1)
--#define PIN_PD15__GTX0			PINMUX_PIN(PIN_PD15, 4, 2)
--#define PIN_PD15__ISC_PCK		PINMUX_PIN(PIN_PD15, 5, 2)
--#define PIN_PD15__ISC_D7		PINMUX_PIN(PIN_PD15, 6, 4)
--#define PIN_PD16			112
--#define PIN_PD16__GPIO			PINMUX_PIN(PIN_PD16, 0, 0)
--#define PIN_PD16__TDO			PINMUX_PIN(PIN_PD16, 1, 1)
--#define PIN_PD16__FLEXCOM4_IO4		PINMUX_PIN(PIN_PD16, 2, 2)
--#define PIN_PD16__UTMI_CDRBISTEN	PINMUX_PIN(PIN_PD16, 3, 1)
--#define PIN_PD16__GTX1			PINMUX_PIN(PIN_PD16, 4, 2)
--#define PIN_PD16__ISC_VSYNC		PINMUX_PIN(PIN_PD16, 5, 2)
--#define PIN_PD16__ISC_D8		PINMUX_PIN(PIN_PD16, 6, 4)
--#define PIN_PD17			113
--#define PIN_PD17__GPIO			PINMUX_PIN(PIN_PD17, 0, 0)
--#define PIN_PD17__TMS			PINMUX_PIN(PIN_PD17, 1, 1)
--#define PIN_PD17__UTMI_CDRCPSELDIV	PINMUX_PIN(PIN_PD17, 3, 1)
--#define PIN_PD17__GMDC			PINMUX_PIN(PIN_PD17, 4, 2)
--#define PIN_PD17__ISC_HSYNC		PINMUX_PIN(PIN_PD17, 5, 2)
--#define PIN_PD17__ISC_D9		PINMUX_PIN(PIN_PD17, 6, 4)
--#define PIN_PD18			114
--#define PIN_PD18__GPIO			PINMUX_PIN(PIN_PD18, 0, 0)
--#define PIN_PD18__NTRST			PINMUX_PIN(PIN_PD18, 1, 1)
--#define PIN_PD18__GMDIO			PINMUX_PIN(PIN_PD18, 4, 2)
--#define PIN_PD18__ISC_FIELD		PINMUX_PIN(PIN_PD18, 5, 2)
--#define PIN_PD18__ISC_D10		PINMUX_PIN(PIN_PD18, 6, 4)
--#define PIN_PD19			115
--#define PIN_PD19__GPIO			PINMUX_PIN(PIN_PD19, 0, 0)
--#define PIN_PD19__PCK0			PINMUX_PIN(PIN_PD19, 1, 1)
--#define PIN_PD19__TWD1			PINMUX_PIN(PIN_PD19, 2, 3)
--#define PIN_PD19__URXD2			PINMUX_PIN(PIN_PD19, 3, 3)
--#define PIN_PD19__I2SC0_CK		PINMUX_PIN(PIN_PD19, 5, 2)
--#define PIN_PD19__ISC_D11		PINMUX_PIN(PIN_PD19, 6, 4)
--#define PIN_PD20			116
--#define PIN_PD20__GPIO			PINMUX_PIN(PIN_PD20, 0, 0)
--#define PIN_PD20__TIOA2			PINMUX_PIN(PIN_PD20, 1, 3)
--#define PIN_PD20__TWCK1			PINMUX_PIN(PIN_PD20, 2, 3)
--#define PIN_PD20__UTXD2			PINMUX_PIN(PIN_PD20, 3, 3)
--#define PIN_PD20__I2SC0_MCK		PINMUX_PIN(PIN_PD20, 5, 2)
--#define PIN_PD20__ISC_PCK		PINMUX_PIN(PIN_PD20, 6, 4)
--#define PIN_PD21			117
--#define PIN_PD21__GPIO			PINMUX_PIN(PIN_PD21, 0, 0)
--#define PIN_PD21__TIOB2			PINMUX_PIN(PIN_PD21, 1, 3)
--#define PIN_PD21__TWD0			PINMUX_PIN(PIN_PD21, 2, 4)
--#define PIN_PD21__FLEXCOM4_IO0		PINMUX_PIN(PIN_PD21, 3, 3)
--#define PIN_PD21__I2SC0_WS		PINMUX_PIN(PIN_PD21, 5, 2)
--#define PIN_PD21__ISC_VSYNC		PINMUX_PIN(PIN_PD21, 6, 4)
--#define PIN_PD22			118
--#define PIN_PD22__GPIO			PINMUX_PIN(PIN_PD22, 0, 0)
--#define PIN_PD22__TCLK2			PINMUX_PIN(PIN_PD22, 1, 3)
--#define PIN_PD22__TWCK0			PINMUX_PIN(PIN_PD22, 2, 4)
--#define PIN_PD22__FLEXCOM4_IO1		PINMUX_PIN(PIN_PD22, 3, 3)
--#define PIN_PD22__I2SC0_DI0		PINMUX_PIN(PIN_PD22, 5, 2)
--#define PIN_PD22__ISC_HSYNC		PINMUX_PIN(PIN_PD22, 6, 4)
--#define PIN_PD23			119
--#define PIN_PD23__GPIO			PINMUX_PIN(PIN_PD23, 0, 0)
--#define PIN_PD23__URXD2			PINMUX_PIN(PIN_PD23, 1, 2)
--#define PIN_PD23__FLEXCOM4_IO2		PINMUX_PIN(PIN_PD23, 3, 3)
--#define PIN_PD23__I2SC0_DO0		PINMUX_PIN(PIN_PD23, 5, 2)
--#define PIN_PD23__ISC_FIELD		PINMUX_PIN(PIN_PD23, 6, 4)
--#define PIN_PD24			120
--#define PIN_PD24__GPIO			PINMUX_PIN(PIN_PD24, 0, 0)
--#define PIN_PD24__UTXD2			PINMUX_PIN(PIN_PD23, 1, 2)
--#define PIN_PD24__FLEXCOM4_IO3		PINMUX_PIN(PIN_PD23, 3, 3)
--#define PIN_PD25			121
--#define PIN_PD25__GPIO			PINMUX_PIN(PIN_PD25, 0, 0)
--#define PIN_PD25__SPI1_SPCK		PINMUX_PIN(PIN_PD25, 1, 3)
--#define PIN_PD25__FLEXCOM4_IO4		PINMUX_PIN(PIN_PD25, 3, 3)
--#define PIN_PD26			122
--#define PIN_PD26__GPIO			PINMUX_PIN(PIN_PD26, 0, 0)
--#define PIN_PD26__SPI1_MOSI		PINMUX_PIN(PIN_PD26, 1, 3)
--#define PIN_PD26__FLEXCOM2_IO0		PINMUX_PIN(PIN_PD26, 3, 2)
--#define PIN_PD27			123
--#define PIN_PD27__GPIO			PINMUX_PIN(PIN_PD27, 0, 0)
--#define PIN_PD27__SPI1_MISO		PINMUX_PIN(PIN_PD27, 1, 3)
--#define PIN_PD27__TCK			PINMUX_PIN(PIN_PD27, 2, 3)
--#define PIN_PD27__FLEXCOM2_IO1		PINMUX_PIN(PIN_PD27, 3, 2)
--#define PIN_PD28			124
--#define PIN_PD28__GPIO			PINMUX_PIN(PIN_PD28, 0, 0)
--#define PIN_PD28__SPI1_NPCS0		PINMUX_PIN(PIN_PD28, 1, 3)
--#define PIN_PD28__TCI			PINMUX_PIN(PIN_PD28, 2, 3)
--#define PIN_PD28__FLEXCOM2_IO2		PINMUX_PIN(PIN_PD28, 3, 2)
--#define PIN_PD29			125
--#define PIN_PD29__GPIO			PINMUX_PIN(PIN_PD29, 0, 0)
--#define PIN_PD29__SPI1_NPCS1		PINMUX_PIN(PIN_PD29, 1, 3)
--#define PIN_PD29__TDO			PINMUX_PIN(PIN_PD29, 2, 3)
--#define PIN_PD29__FLEXCOM2_IO3		PINMUX_PIN(PIN_PD29, 3, 2)
--#define PIN_PD29__TIOA3			PINMUX_PIN(PIN_PD29, 4, 3)
--#define PIN_PD29__TWD0			PINMUX_PIN(PIN_PD29, 5, 3)
--#define PIN_PD30			126
--#define PIN_PD30__GPIO			PINMUX_PIN(PIN_PD30, 0, 0)
--#define PIN_PD30__SPI1_NPCS2		PINMUX_PIN(PIN_PD30, 1, 3)
--#define PIN_PD30__TMS			PINMUX_PIN(PIN_PD30, 2, 3)
--#define PIN_PD30__FLEXCOM2_IO4		PINMUX_PIN(PIN_PD30, 3, 2)
--#define PIN_PD30__TIOB3			PINMUX_PIN(PIN_PD30, 4, 3)
--#define PIN_PD30__TWCK0			PINMUX_PIN(PIN_PD30, 5, 3)
--#define PIN_PD31			127
--#define PIN_PD31__GPIO			PINMUX_PIN(PIN_PD31, 0, 0)
--#define PIN_PD31__ADTRG			PINMUX_PIN(PIN_PD31, 1, 1)
--#define PIN_PD31__NTRST			PINMUX_PIN(PIN_PD31, 2, 3)
--#define PIN_PD31__IRQ			PINMUX_PIN(PIN_PD31, 3, 4)
--#define PIN_PD31__TCLK3			PINMUX_PIN(PIN_PD31, 4, 3)
--#define PIN_PD31__PCK0			PINMUX_PIN(PIN_PD31, 5, 2)
-diff --git a/arch/arm/dts/sama7g5-pinfunc.h b/arch/arm/dts/sama7g5-pinfunc.h
-deleted file mode 100644
-index a17707ba60a4..000000000000
---- a/arch/arm/dts/sama7g5-pinfunc.h
-+++ /dev/null
-@@ -1,923 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#define PINMUX_PIN(no, func, ioset) \
--(((no) & 0xffff) | (((func) & 0xf) << 16) | (((ioset) & 0xff) << 20))
+-#ifndef __DTS_IMX8MM_PINFUNC_H
+-#define __DTS_IMX8MM_PINFUNC_H
 -
--#define PIN_PA0				0
--#define PIN_PA0__GPIO			PINMUX_PIN(PIN_PA0, 0, 0)
--#define PIN_PA0__SDMMC0_CK		PINMUX_PIN(PIN_PA0, 1, 1)
--#define PIN_PA0__FLEXCOM0_IO0		PINMUX_PIN(PIN_PA0, 2, 1)
--#define PIN_PA0__CANTX3			PINMUX_PIN(PIN_PA0, 3, 1)
--#define PIN_PA0__PWML0			PINMUX_PIN(PIN_PA0, 5, 2)
--#define PIN_PA1				1
--#define PIN_PA1__GPIO			PINMUX_PIN(PIN_PA1, 0, 0)
--#define PIN_PA1__SDMMC0_CMD		PINMUX_PIN(PIN_PA1, 1, 1)
--#define PIN_PA1__FLEXCOM0_IO1		PINMUX_PIN(PIN_PA1, 2, 1)
--#define PIN_PA1__CANRX3			PINMUX_PIN(PIN_PA1, 3, 1)
--#define PIN_PA1__D14			PINMUX_PIN(PIN_PA1, 4, 1)
--#define PIN_PA1__PWMH0			PINMUX_PIN(PIN_PA1, 5, 3)
--#define PIN_PA2				2
--#define PIN_PA2__GPIO			PINMUX_PIN(PIN_PA2, 0, 0)
--#define PIN_PA2__SDMMC0_RSTN		PINMUX_PIN(PIN_PA2, 1, 1)
--#define PIN_PA2__FLEXCOM0_IO2		PINMUX_PIN(PIN_PA2, 2, 1)
--#define PIN_PA2__PDMC1_CLK		PINMUX_PIN(PIN_PA2, 3, 1)
--#define PIN_PA2__D15			PINMUX_PIN(PIN_PA2, 4, 1)
--#define PIN_PA2__PWMH1			PINMUX_PIN(PIN_PA2, 5, 3)
--#define PIN_PA2__FLEXCOM1_IO0		PINMUX_PIN(PIN_PA2, 6, 3)
--#define PIN_PA3				3
--#define PIN_PA3__GPIO			PINMUX_PIN(PIN_PA3, 0, 0)
--#define PIN_PA3__SDMMC0_DAT0		PINMUX_PIN(PIN_PA3, 1, 1)
--#define PIN_PA3__FLEXCOM0_IO3		PINMUX_PIN(PIN_PA3, 2, 1)
--#define PIN_PA3__PDMC1_DS0		PINMUX_PIN(PIN_PA3, 3, 1)
--#define PIN_PA3__NWR1_NBS1		PINMUX_PIN(PIN_PA3, 4, 1)
--#define PIN_PA3__PWML3			PINMUX_PIN(PIN_PA3, 5, 3)
--#define PIN_PA3__FLEXCOM1_IO1		PINMUX_PIN(PIN_PA3, 6, 3)
--#define PIN_PA4				4
--#define PIN_PA4__GPIO			PINMUX_PIN(PIN_PA4, 0, 0)
--#define PIN_PA4__SDMMC0_DAT1		PINMUX_PIN(PIN_PA4, 1, 1)
--#define PIN_PA4__FLEXCOM0_IO4		PINMUX_PIN(PIN_PA4, 2, 1)
--#define PIN_PA4__PDMC1_DS1		PINMUX_PIN(PIN_PA4, 3, 1)
--#define PIN_PA4__NCS2			PINMUX_PIN(PIN_PA4, 4, 1)
--#define PIN_PA4__PWMH3			PINMUX_PIN(PIN_PA4, 5, 3)
--#define PIN_PA4__FLEXCOM2_IO0		PINMUX_PIN(PIN_PA4, 6, 3)
--#define PIN_PA5				5
--#define PIN_PA5__GPIO			PINMUX_PIN(PIN_PA5, 0, 0)
--#define PIN_PA5__SDMMC0_DAT2		PINMUX_PIN(PIN_PA5, 1, 1)
--#define PIN_PA5__FLEXCOM1_IO0		PINMUX_PIN(PIN_PA5, 2, 1)
--#define PIN_PA5__CANTX2			PINMUX_PIN(PIN_PA5, 3, 1)
--#define PIN_PA5__A23			PINMUX_PIN(PIN_PA5, 4, 1)
--#define PIN_PA5__PWMEXTRG0		PINMUX_PIN(PIN_PA5, 5, 3)
--#define PIN_PA5__FLEXCOM2_IO1		PINMUX_PIN(PIN_PA5, 6, 3)
--#define PIN_PA6				6
--#define PIN_PA6__GPIO			PINMUX_PIN(PIN_PA6, 0, 0)
--#define PIN_PA6__SDMMC0_DAT3		PINMUX_PIN(PIN_PA6, 1, 1)
--#define PIN_PA6__FLEXCOM1_IO1		PINMUX_PIN(PIN_PA6, 2, 1)
--#define PIN_PA6__CANRX2			PINMUX_PIN(PIN_PA6, 3, 1)
--#define PIN_PA6__A24			PINMUX_PIN(PIN_PA6, 4, 1)
--#define PIN_PA6__PWMEXTRG1		PINMUX_PIN(PIN_PA6, 5, 3)
--#define PIN_PA6__FLEXCOM3_IO0		PINMUX_PIN(PIN_PA6, 6, 3)
--#define PIN_PA7				7
--#define PIN_PA7__GPIO			PINMUX_PIN(PIN_PA7, 0, 0)
--#define PIN_PA7__SDMMC0_DAT4		PINMUX_PIN(PIN_PA7, 1, 1)
--#define PIN_PA7__FLEXCOM2_IO0		PINMUX_PIN(PIN_PA7, 2, 1)
--#define PIN_PA7__CANTX1			PINMUX_PIN(PIN_PA7, 3, 1)
--#define PIN_PA7__NWAIT			PINMUX_PIN(PIN_PA7, 4, 1)
--#define PIN_PA7__PWMFI0			PINMUX_PIN(PIN_PA7, 5, 3)
--#define PIN_PA7__FLEXCOM3_IO1		PINMUX_PIN(PIN_PA7, 6, 3)
--#define PIN_PA8				8
--#define PIN_PA8__GPIO			PINMUX_PIN(PIN_PA8, 0, 0)
--#define PIN_PA8__SDMMC0_DAT5		PINMUX_PIN(PIN_PA8, 1, 1)
--#define PIN_PA8__FLEXCOM2_IO1		PINMUX_PIN(PIN_PA8, 2, 1)
--#define PIN_PA8__CANRX1			PINMUX_PIN(PIN_PA8, 3, 1)
--#define PIN_PA8__NCS0			PINMUX_PIN(PIN_PA8, 4, 1)
--#define PIN_PA8__PWMIF1			PINMUX_PIN(PIN_PA8, 5, 3)
--#define PIN_PA8__FLEXCOM4_IO0		PINMUX_PIN(PIN_PA8, 6, 3)
--#define PIN_PA9				9
--#define PIN_PA9__GPIO			PINMUX_PIN(PIN_PA9, 0, 0)
--#define PIN_PA9__SDMMC0_DAT6		PINMUX_PIN(PIN_PA9, 1, 1)
--#define PIN_PA9__FLEXCOM2_IO2		PINMUX_PIN(PIN_PA9, 2, 1)
--#define PIN_PA9__CANTX0			PINMUX_PIN(PIN_PA9, 3, 1)
--#define PIN_PA9__SMCK			PINMUX_PIN(PIN_PA9, 4, 1)
--#define PIN_PA9__SPDIF_RX		PINMUX_PIN(PIN_PA9, 5, 1)
--#define PIN_PA9__FLEXCOM4_IO1		PINMUX_PIN(PIN_PA9, 6, 3)
--#define PIN_PA10			10
--#define PIN_PA10__GPIO			PINMUX_PIN(PIN_PA10, 0, 0)
--#define PIN_PA10__SDMMC0_DAT7		PINMUX_PIN(PIN_PA10, 1, 1)
--#define PIN_PA10__FLEXCOM2_IO3		PINMUX_PIN(PIN_PA10, 2, 1)
--#define PIN_PA10__CANRX0		PINMUX_PIN(PIN_PA10, 3, 1)
--#define PIN_PA10__NCS1			PINMUX_PIN(PIN_PA10, 4, 1)
--#define PIN_PA10__SPDIF_TX		PINMUX_PIN(PIN_PA10, 5, 1)
--#define PIN_PA10__FLEXCOM5_IO0		PINMUX_PIN(PIN_PA10, 6, 3)
--#define PIN_PA11			11
--#define PIN_PA11__GPIO			PINMUX_PIN(PIN_PA11, 0, 0)
--#define PIN_PA11__SDMMC0_DS		PINMUX_PIN(PIN_PA11, 1, 1)
--#define PIN_PA11__FLEXCOM2_IO4		PINMUX_PIN(PIN_PA11, 2, 1)
--#define PIN_PA11__A0_NBS0		PINMUX_PIN(PIN_PA11, 4, 1)
--#define PIN_PA11__TIOA0			PINMUX_PIN(PIN_PA11, 5, 1)
--#define PIN_PA11__FLEXCOM5_IO1		PINMUX_PIN(PIN_PA11, 6, 3)
--#define PIN_PA12			12
--#define PIN_PA12__GPIO			PINMUX_PIN(PIN_PA12, 0, 0)
--#define PIN_PA12__SDMMC0_WP		PINMUX_PIN(PIN_PA12, 1, 1)
--#define PIN_PA12__FLEXCOM1_IO3		PINMUX_PIN(PIN_PA12, 2, 1)
--#define PIN_PA12__FLEXCOM3_IO5		PINMUX_PIN(PIN_PA12, 4, 1)
--#define PIN_PA12__PWML2			PINMUX_PIN(PIN_PA12, 5, 3)
--#define PIN_PA12__FLEXCOM6_IO0		PINMUX_PIN(PIN_PA12, 6, 3)
--#define PIN_PA13			13
--#define PIN_PA13__GPIO			PINMUX_PIN(PIN_PA13, 0, 0)
--#define PIN_PA13__SDMMC0_1V8SEL		PINMUX_PIN(PIN_PA13, 1, 1)
--#define PIN_PA13__FLEXCOM1_IO2		PINMUX_PIN(PIN_PA13, 2, 1)
--#define PIN_PA13__FLEXCOM3_IO6		PINMUX_PIN(PIN_PA13, 4, 1)
--#define PIN_PA13__PWMH2			PINMUX_PIN(PIN_PA13, 5, 3)
--#define PIN_PA13__FLEXCOM6_IO1		PINMUX_PIN(PIN_PA13, 6, 3)
--#define PIN_PA14			14
--#define PIN_PA14__GPIO			PINMUX_PIN(PIN_PA14, 0, 0)
--#define PIN_PA14__SDMMC0_CD		PINMUX_PIN(PIN_PA14, 1, 1)
--#define PIN_PA14__FLEXCOM1_IO4		PINMUX_PIN(PIN_PA14, 2, 1)
--#define PIN_PA14__A25			PINMUX_PIN(PIN_PA14, 4, 1)
--#define PIN_PA14__PWML1			PINMUX_PIN(PIN_PA14, 5, 3)
--#define PIN_PA15			15
--#define PIN_PA15__GPIO			PINMUX_PIN(PIN_PA15, 0, 0)
--#define PIN_PA15__G0_TXEN		PINMUX_PIN(PIN_PA15, 1, 1)
--#define PIN_PA15__FLEXCOM3_IO0		PINMUX_PIN(PIN_PA15, 2, 1)
--#define PIN_PA15__ISC_MCK		PINMUX_PIN(PIN_PA15, 3, 1)
--#define PIN_PA15__A1			PINMUX_PIN(PIN_PA15, 4, 1)
--#define PIN_PA15__TIOB0			PINMUX_PIN(PIN_PA15, 5, 1)
--#define PIN_PA16			16
--#define PIN_PA16__GPIO			PINMUX_PIN(PIN_PA16, 0, 0)
--#define PIN_PA16__G0_TX0		PINMUX_PIN(PIN_PA16, 1, 1)
--#define PIN_PA16__FLEXCOM3_IO1		PINMUX_PIN(PIN_PA16, 2, 1)
--#define PIN_PA16__ISC_D0		PINMUX_PIN(PIN_PA16, 3, 1)
--#define PIN_PA16__A2			PINMUX_PIN(PIN_PA16, 4, 1)
--#define PIN_PA16__TCLK0			PINMUX_PIN(PIN_PA16, 5, 1)
--#define PIN_PA17			17
--#define PIN_PA17__GPIO			PINMUX_PIN(PIN_PA17, 0, 0)
--#define PIN_PA17__G0_TX1		PINMUX_PIN(PIN_PA17, 1, 1)
--#define PIN_PA17__FLEXCOM3_IO2		PINMUX_PIN(PIN_PA17, 2, 1)
--#define PIN_PA17__ISC_D1		PINMUX_PIN(PIN_PA17, 3, 1)
--#define PIN_PA17__A3			PINMUX_PIN(PIN_PA17, 4, 1)
--#define PIN_PA17__TIOA1			PINMUX_PIN(PIN_PA17, 5, 1)
--#define PIN_PA18			18
--#define PIN_PA18__GPIO			PINMUX_PIN(PIN_PA18, 0, 0)
--#define PIN_PA18__G0_RXDV		PINMUX_PIN(PIN_PA18, 1, 1)
--#define PIN_PA18__FLEXCOM3_IO3		PINMUX_PIN(PIN_PA18, 2, 1)
--#define PIN_PA18__ISC_D2		PINMUX_PIN(PIN_PA18, 3, 1)
--#define PIN_PA18__A4			PINMUX_PIN(PIN_PA18, 4, 1)
--#define PIN_PA18__TIOB1			PINMUX_PIN(PIN_PA18, 5, 1)
--#define PIN_PA19			19
--#define PIN_PA19__GPIO			PINMUX_PIN(PIN_PA19, 0, 0)
--#define PIN_PA19__G0_RX0		PINMUX_PIN(PIN_PA19, 1, 1)
--#define PIN_PA19__FLEXCOM3_IO4		PINMUX_PIN(PIN_PA19, 2, 1)
--#define PIN_PA19__ISC_D3		PINMUX_PIN(PIN_PA19, 3, 1)
--#define PIN_PA19__A5			PINMUX_PIN(PIN_PA19, 4, 1)
--#define PIN_PA19__TCLK1			PINMUX_PIN(PIN_PA19, 5, 1)
--#define PIN_PA20			20
--#define PIN_PA20__GPIO			PINMUX_PIN(PIN_PA20, 0, 0)
--#define PIN_PA20__G0_RX1		PINMUX_PIN(PIN_PA20, 1, 1)
--#define PIN_PA20__FLEXCOM4_IO0		PINMUX_PIN(PIN_PA20, 2, 1)
--#define PIN_PA20__ISC_D4		PINMUX_PIN(PIN_PA20, 3, 1)
--#define PIN_PA20__A6			PINMUX_PIN(PIN_PA20, 4, 1)
--#define PIN_PA20__TIOA2			PINMUX_PIN(PIN_PA20, 5, 1)
--#define PIN_PA21			21
--#define PIN_PA21__GPIO			PINMUX_PIN(PIN_PA21, 0, 0)
--#define PIN_PA21__G0_RXER		PINMUX_PIN(PIN_PA21, 1, 1)
--#define PIN_PA21__FLEXCOM4_IO1		PINMUX_PIN(PIN_PA21, 2, 1)
--#define PIN_PA21__ISC_D5		PINMUX_PIN(PIN_PA21, 3, 1)
--#define PIN_PA21__A7			PINMUX_PIN(PIN_PA21, 4, 1)
--#define PIN_PA21__TIOB2			PINMUX_PIN(PIN_PA21, 5, 1)
--#define PIN_PA22			22
--#define PIN_PA22__GPIO			PINMUX_PIN(PIN_PA22, 0, 0)
--#define PIN_PA22__G0_MDC		PINMUX_PIN(PIN_PA22, 1, 1)
--#define PIN_PA22__FLEXCOM4_IO2		PINMUX_PIN(PIN_PA22, 2, 1)
--#define PIN_PA22__ISC_D6		PINMUX_PIN(PIN_PA22, 3, 1)
--#define PIN_PA22__A8			PINMUX_PIN(PIN_PA22, 4, 1)
--#define PIN_PA22__TCLK2			PINMUX_PIN(PIN_PA22, 5, 1)
--#define PIN_PA23			23
--#define PIN_PA23__GPIO			PINMUX_PIN(PIN_PA23, 0, 0)
--#define PIN_PA23__G0_MDIO		PINMUX_PIN(PIN_PA23, 1, 1)
--#define PIN_PA23__FLEXCOM4_IO3		PINMUX_PIN(PIN_PA23, 2, 1)
--#define PIN_PA23__ISC_D7		PINMUX_PIN(PIN_PA23, 3, 1)
--#define PIN_PA23__A9			PINMUX_PIN(PIN_PA23, 4, 1)
--#define PIN_PA24			24
--#define PIN_PA24__GPIO			PINMUX_PIN(PIN_PA24, 0, 0)
--#define PIN_PA24__G0_TXCK		PINMUX_PIN(PIN_PA24, 1, 1)
--#define PIN_PA24__FLEXCOM4_IO4		PINMUX_PIN(PIN_PA24, 2, 1)
--#define PIN_PA24__ISC_HSYNC		PINMUX_PIN(PIN_PA24, 3, 1)
--#define PIN_PA24__A10			PINMUX_PIN(PIN_PA24, 4, 1)
--#define PIN_PA24__FLEXCOM0_IO5		PINMUX_PIN(PIN_PA24, 5, 1)
--#define PIN_PA25			25
--#define PIN_PA25__GPIO			PINMUX_PIN(PIN_PA25, 0, 0)
--#define PIN_PA25__G0_125CK		PINMUX_PIN(PIN_PA25, 1, 1)
--#define PIN_PA25__FLEXCOM5_IO4		PINMUX_PIN(PIN_PA25, 2, 1)
--#define PIN_PA25__ISC_VSYNC		PINMUX_PIN(PIN_PA25, 3, 1)
--#define PIN_PA25__A11			PINMUX_PIN(PIN_PA25, 4, 1)
--#define PIN_PA25__FLEXCOM0_IO6		PINMUX_PIN(PIN_PA25, 5, 1)
--#define PIN_PA25__FLEXCOM7_IO0		PINMUX_PIN(PIN_PA25, 6, 3)
--#define PIN_PA26			26
--#define PIN_PA26__GPIO			PINMUX_PIN(PIN_PA26, 0, 0)
--#define PIN_PA26__G0_TX2		PINMUX_PIN(PIN_PA26, 1, 1)
--#define PIN_PA26__FLEXCOM5_IO2		PINMUX_PIN(PIN_PA26, 2, 1)
--#define PIN_PA26__ISC_FIELD		PINMUX_PIN(PIN_PA26, 3, 1)
--#define PIN_PA26__A12			PINMUX_PIN(PIN_PA26, 4, 1)
--#define PIN_PA26__TF0			PINMUX_PIN(PIN_PA26, 5, 1)
--#define PIN_PA26__FLEXCOM7_IO1		PINMUX_PIN(PIN_PA26, 6, 3)
--#define PIN_PA27			27
--#define PIN_PA27__GPIO			PINMUX_PIN(PIN_PA27, 0, 0)
--#define PIN_PA27__G0_TX3		PINMUX_PIN(PIN_PA27, 1, 1)
--#define PIN_PA27__FLEXCOM5_IO3		PINMUX_PIN(PIN_PA27, 2, 1)
--#define PIN_PA27__ISC_PCK		PINMUX_PIN(PIN_PA27, 3, 1)
--#define PIN_PA27__A13			PINMUX_PIN(PIN_PA27, 4, 1)
--#define PIN_PA27__TK0			PINMUX_PIN(PIN_PA27, 5, 1)
--#define PIN_PA27__FLEXCOM8_IO0		PINMUX_PIN(PIN_PA27, 6, 3)
--#define PIN_PA28			28
--#define PIN_PA28__GPIO			PINMUX_PIN(PIN_PA28, 0, 0)
--#define PIN_PA28__G0_RX2		PINMUX_PIN(PIN_PA28, 1, 1)
--#define PIN_PA28__FLEXCOM5_IO0		PINMUX_PIN(PIN_PA28, 2, 1)
--#define PIN_PA28__ISC_D8		PINMUX_PIN(PIN_PA28, 3, 1)
--#define PIN_PA28__A14			PINMUX_PIN(PIN_PA28, 4, 1)
--#define PIN_PA28__RD0			PINMUX_PIN(PIN_PA28, 5, 1)
--#define PIN_PA28__FLEXCOM8_IO1		PINMUX_PIN(PIN_PA28, 6, 3)
--#define PIN_PA29			29
--#define PIN_PA29__GPIO			PINMUX_PIN(PIN_PA29, 0, 0)
--#define PIN_PA29__G0_RX3		PINMUX_PIN(PIN_PA29, 1, 1)
--#define PIN_PA29__FLEXCOM5_IO1		PINMUX_PIN(PIN_PA29, 2, 1)
--#define PIN_PA29__ISC_D9		PINMUX_PIN(PIN_PA29, 3, 1)
--#define PIN_PA29__A15			PINMUX_PIN(PIN_PA29, 4, 1)
--#define PIN_PA29__RF0			PINMUX_PIN(PIN_PA29, 5, 1)
--#define PIN_PA29__FLEXCOM9_IO0		PINMUX_PIN(PIN_PA29, 6, 3)
--#define PIN_PA30			30
--#define PIN_PA30__GPIO			PINMUX_PIN(PIN_PA30, 0, 0)
--#define PIN_PA30__G0_RXCK		PINMUX_PIN(PIN_PA30, 1, 1)
--#define PIN_PA30__FLEXCOM6_IO4		PINMUX_PIN(PIN_PA30, 2, 1)
--#define PIN_PA30__ISC_D10		PINMUX_PIN(PIN_PA30, 3, 1)
--#define PIN_PA30__A16			PINMUX_PIN(PIN_PA30, 4, 1)
--#define PIN_PA30__RK0			PINMUX_PIN(PIN_PA30, 5, 1)
--#define PIN_PA30__FLEXCOM9_IO1		PINMUX_PIN(PIN_PA30, 6, 3)
--#define PIN_PA31			31
--#define PIN_PA31__GPIO			PINMUX_PIN(PIN_PA31, 0, 0)
--#define PIN_PA31__G0_TXER		PINMUX_PIN(PIN_PA31, 1, 1)
--#define PIN_PA31__FLEXCOM6_IO2		PINMUX_PIN(PIN_PA31, 2, 1)
--#define PIN_PA31__ISC_D11		PINMUX_PIN(PIN_PA31, 3, 1)
--#define PIN_PA31__A17			PINMUX_PIN(PIN_PA31, 4, 1)
--#define PIN_PA31__TD0			PINMUX_PIN(PIN_PA31, 5, 1)
--#define PIN_PA31__FLEXCOM10_IO0		PINMUX_PIN(PIN_PA31, 6, 3)
--#define PIN_PB0				32
--#define PIN_PB0__GPIO			PINMUX_PIN(PIN_PB0, 0, 0)
--#define PIN_PB0__G0_COL			PINMUX_PIN(PIN_PB0, 1, 1)
--#define PIN_PB0__FLEXCOM6_IO3		PINMUX_PIN(PIN_PB0, 2, 2)
--#define PIN_PB0__EXT_IRQ0		PINMUX_PIN(PIN_PB0, 3, 1)
--#define PIN_PB0__A18			PINMUX_PIN(PIN_PB0, 4, 1)
--#define PIN_PB0__SPDIF_RX		PINMUX_PIN(PIN_PB0, 5, 2)
--#define PIN_PB0__FLEXCOM10_IO1		PINMUX_PIN(PIN_PB0, 6, 3)
--#define PIN_PB1				33
--#define PIN_PB1__GPIO			PINMUX_PIN(PIN_PB1, 0, 0)
--#define PIN_PB1__G0_CRS			PINMUX_PIN(PIN_PB1, 1, 1)
--#define PIN_PB1__FLEXCOM6_IO1		PINMUX_PIN(PIN_PB1, 2, 2)
--#define PIN_PB1__EXT_IRQ1		PINMUX_PIN(PIN_PB1, 3, 1)
--#define PIN_PB1__A19			PINMUX_PIN(PIN_PB1, 4, 1)
--#define PIN_PB1__SPDIF_TX		PINMUX_PIN(PIN_PB1, 5, 2)
--#define PIN_PB1__FLEXCOM11_IO0		PINMUX_PIN(PIN_PB1, 6, 3)
--#define PIN_PB2				34
--#define PIN_PB2__GPIO			PINMUX_PIN(PIN_PB2, 0, 0)
--#define PIN_PB2__G0_TSUCOMP		PINMUX_PIN(PIN_PB2, 1, 1)
--#define PIN_PB2__FLEXCOM6_IO0		PINMUX_PIN(PIN_PB2, 2, 1)
--#define PIN_PB2__ADTRG			PINMUX_PIN(PIN_PB2, 3, 1)
--#define PIN_PB2__A20			PINMUX_PIN(PIN_PB2, 4, 1)
--#define PIN_PB2__FLEXCOM11_IO1		PINMUX_PIN(PIN_PB2, 6, 3)
--#define PIN_PB3				35
--#define PIN_PB3__GPIO			PINMUX_PIN(PIN_PB3, 0, 0)
--#define PIN_PB3__RF1			PINMUX_PIN(PIN_PB3, 1, 1)
--#define PIN_PB3__FLEXCOM11_IO0		PINMUX_PIN(PIN_PB3, 2, 1)
--#define PIN_PB3__PCK2			PINMUX_PIN(PIN_PB3, 3, 2)
--#define PIN_PB3__D8			PINMUX_PIN(PIN_PB3, 4, 1)
--#define PIN_PB4				36
--#define PIN_PB4__GPIO			PINMUX_PIN(PIN_PB4, 0, 0)
--#define PIN_PB4__TF1			PINMUX_PIN(PIN_PB4, 1, 1)
--#define PIN_PB4__FLEXCOM11_IO1		PINMUX_PIN(PIN_PB4, 2, 1)
--#define PIN_PB4__PCK3			PINMUX_PIN(PIN_PB4, 3, 2)
--#define PIN_PB4__D9			PINMUX_PIN(PIN_PB4, 4, 1)
--#define PIN_PB5				37
--#define PIN_PB5__GPIO			PINMUX_PIN(PIN_PB5, 0, 0)
--#define PIN_PB5__TK1			PINMUX_PIN(PIN_PB5, 1, 1)
--#define PIN_PB5__FLEXCOM11_IO2		PINMUX_PIN(PIN_PB5, 2, 1)
--#define PIN_PB5__PCK4			PINMUX_PIN(PIN_PB5, 3, 2)
--#define PIN_PB5__D10			PINMUX_PIN(PIN_PB5, 4, 1)
--#define PIN_PB6				38
--#define PIN_PB6__GPIO			PINMUX_PIN(PIN_PB6, 0, 0)
--#define PIN_PB6__RK1			PINMUX_PIN(PIN_PB6, 1, 1)
--#define PIN_PB6__FLEXCOM11_IO3		PINMUX_PIN(PIN_PB6, 2, 1)
--#define PIN_PB6__PCK5			PINMUX_PIN(PIN_PB6, 3, 2)
--#define PIN_PB6__D11			PINMUX_PIN(PIN_PB6, 4, 1)
--#define PIN_PB7				39
--#define PIN_PB7__GPIO			PINMUX_PIN(PIN_PB7, 0, 0)
--#define PIN_PB7__TD1			PINMUX_PIN(PIN_PB7, 1, 1)
--#define PIN_PB7__FLEXCOM11_IO4		PINMUX_PIN(PIN_PB7, 2, 1)
--#define PIN_PB7__FLEXCOM3_IO5		PINMUX_PIN(PIN_PB7, 3, 2)
--#define PIN_PB7__D12			PINMUX_PIN(PIN_PB7, 4, 1)
--#define PIN_PB8				40
--#define PIN_PB8__GPIO			PINMUX_PIN(PIN_PB8, 0, 0)
--#define PIN_PB8__RD1			PINMUX_PIN(PIN_PB8, 1, 1)
--#define PIN_PB8__FLEXCOM8_IO0		PINMUX_PIN(PIN_PB8, 2, 1)
--#define PIN_PB8__FLEXCOM3_IO6		PINMUX_PIN(PIN_PB8, 3, 2)
--#define PIN_PB8__D13			PINMUX_PIN(PIN_PB8, 4, 1)
--#define PIN_PB9				41
--#define PIN_PB9__GPIO			PINMUX_PIN(PIN_PB9, 0, 0)
--#define PIN_PB9__QSPI0_IO3		PINMUX_PIN(PIN_PB9, 1, 1)
--#define PIN_PB9__FLEXCOM8_IO1		PINMUX_PIN(PIN_PB9, 2, 1)
--#define PIN_PB9__PDMC0_CLK		PINMUX_PIN(PIN_PB9, 3, 1)
--#define PIN_PB9__NCS3_NANDCS		PINMUX_PIN(PIN_PB9, 4, 1)
--#define PIN_PB9__PWML0			PINMUX_PIN(PIN_PB9, 5, 2)
--#define PIN_PB10			42
--#define PIN_PB10__GPIO			PINMUX_PIN(PIN_PB10, 0, 0)
--#define PIN_PB10__QSPI0_IO2		PINMUX_PIN(PIN_PB10, 1, 1)
--#define PIN_PB10__FLEXCOM8_IO2		PINMUX_PIN(PIN_PB10, 2, 1)
--#define PIN_PB10__PDMC0_DS0		PINMUX_PIN(PIN_PB10, 3, 1)
--#define PIN_PB10__NWE_NWR0_NANDWE	PINMUX_PIN(PIN_PB10, 4, 1)
--#define PIN_PB10__PWMH0			PINMUX_PIN(PIN_PB10, 5, 2)
--#define PIN_PB11			43
--#define PIN_PB11__GPIO			PINMUX_PIN(PIN_PB11, 0, 0)
--#define PIN_PB11__QSPI0_IO1		PINMUX_PIN(PIN_PB11, 1, 1)
--#define PIN_PB11__FLEXCOM8_IO3		PINMUX_PIN(PIN_PB11, 2, 1)
--#define PIN_PB11__PDMC0_DS1		PINMUX_PIN(PIN_PB11, 3, 1)
--#define PIN_PB11__NRD_NANDOE		PINMUX_PIN(PIN_PB11, 4, 1)
--#define PIN_PB11__PWML1			PINMUX_PIN(PIN_PB11, 5, 2)
--#define PIN_PB12			44
--#define PIN_PB12__GPIO			PINMUX_PIN(PIN_PB12, 0, 0)
--#define PIN_PB12__QSPI0_IO0		PINMUX_PIN(PIN_PB12, 1, 1)
--#define PIN_PB12__FLEXCOM8_IO4		PINMUX_PIN(PIN_PB12, 2, 1)
--#define PIN_PB12__FLEXCOM6_IO5		PINMUX_PIN(PIN_PB12, 3, 1)
--#define PIN_PB12__A21_NANDALE		PINMUX_PIN(PIN_PB12, 4, 1)
--#define PIN_PB12__PWMH1			PINMUX_PIN(PIN_PB12, 5, 2)
--#define PIN_PB13			45
--#define PIN_PB13__GPIO			PINMUX_PIN(PIN_PB13, 0, 0)
--#define PIN_PB13__QSPI0_CS		PINMUX_PIN(PIN_PB13, 1, 1)
--#define PIN_PB13__FLEXCOM9_IO0		PINMUX_PIN(PIN_PB13, 2, 1)
--#define PIN_PB13__FLEXCOM6_IO6		PINMUX_PIN(PIN_PB13, 3, 1)
--#define PIN_PB13__A22_NANDCLE		PINMUX_PIN(PIN_PB13, 4, 1)
--#define PIN_PB13__PWML2			PINMUX_PIN(PIN_PB13, 5, 2)
--#define PIN_PB14			46
--#define PIN_PB14__GPIO			PINMUX_PIN(PIN_PB14, 0, 0)
--#define PIN_PB14__QSPI0_SCK		PINMUX_PIN(PIN_PB14, 1, 1)
--#define PIN_PB14__FLEXCOM9_IO1		PINMUX_PIN(PIN_PB14, 2, 1)
--#define PIN_PB14__D0			PINMUX_PIN(PIN_PB14, 4, 1)
--#define PIN_PB14__PWMH2			PINMUX_PIN(PIN_PB14, 5, 2)
--#define PIN_PB15			47
--#define PIN_PB15__GPIO			PINMUX_PIN(PIN_PB15, 0, 0)
--#define PIN_PB15__QSPI0_SCKN		PINMUX_PIN(PIN_PB15, 1, 1)
--#define PIN_PB15__FLEXCOM9_IO2		PINMUX_PIN(PIN_PB15, 2, 1)
--#define PIN_PB15__D1			PINMUX_PIN(PIN_PB15, 4, 1)
--#define PIN_PB15__PWML3			PINMUX_PIN(PIN_PB15, 5, 2)
--#define PIN_PB16			48
--#define PIN_PB16__GPIO			PINMUX_PIN(PIN_PB16, 0, 0)
--#define PIN_PB16__QSPI0_IO4		PINMUX_PIN(PIN_PB16, 1, 1)
--#define PIN_PB16__FLEXCOM9_IO3		PINMUX_PIN(PIN_PB16, 2, 1)
--#define PIN_PB16__PCK0			PINMUX_PIN(PIN_PB16, 3, 1)
--#define PIN_PB16__D2			PINMUX_PIN(PIN_PB16, 4, 1)
--#define PIN_PB16__PWMH3			PINMUX_PIN(PIN_PB16, 5, 2)
--#define PIN_PB16__EXT_IRQ0		PINMUX_PIN(PIN_PB16, 6, 2)
--#define PIN_PB17			49
--#define PIN_PB17__GPIO			PINMUX_PIN(PIN_PB17, 0, 0)
--#define PIN_PB17__QSPI0_IO5		PINMUX_PIN(PIN_PB17, 1, 1)
--#define PIN_PB17__FLEXCOM9_IO4		PINMUX_PIN(PIN_PB17, 2, 1)
--#define PIN_PB17__PCK1			PINMUX_PIN(PIN_PB17, 3, 1)
--#define PIN_PB17__D3			PINMUX_PIN(PIN_PB17, 4, 1)
--#define PIN_PB17__PWMEXTRG0		PINMUX_PIN(PIN_PB17, 5, 2)
--#define PIN_PB17__EXT_IRQ1		PINMUX_PIN(PIN_PB17, 6, 2)
--#define PIN_PB18			50
--#define PIN_PB18__GPIO			PINMUX_PIN(PIN_PB18, 0, 0)
--#define PIN_PB18__QSPI0_IO6		PINMUX_PIN(PIN_PB18, 1, 1)
--#define PIN_PB18__FLEXCOM10_IO0		PINMUX_PIN(PIN_PB18, 2, 1)
--#define PIN_PB18__PCK2			PINMUX_PIN(PIN_PB18, 3, 1)
--#define PIN_PB18__D4			PINMUX_PIN(PIN_PB18, 4, 1)
--#define PIN_PB18__PWMEXTRG1		PINMUX_PIN(PIN_PB18, 5, 2)
--#define PIN_PB19			51
--#define PIN_PB19__GPIO			PINMUX_PIN(PIN_PB19, 0, 0)
--#define PIN_PB19__QSPI0_IO7		PINMUX_PIN(PIN_PB19, 1, 1)
--#define PIN_PB19__FLEXCOM10_IO1		PINMUX_PIN(PIN_PB19, 2, 1)
--#define PIN_PB19__PCK3			PINMUX_PIN(PIN_PB19, 3, 1)
--#define PIN_PB19__D5			PINMUX_PIN(PIN_PB19, 4, 1)
--#define PIN_PB19__PWMFI0		PINMUX_PIN(PIN_PB19, 5, 2)
--#define PIN_PB20			52
--#define PIN_PB20__GPIO			PINMUX_PIN(PIN_PB20, 0, 0)
--#define PIN_PB20__QSPI0_DQS		PINMUX_PIN(PIN_PB20, 1, 1)
--#define PIN_PB20__FLEXCOM10_IO2		PINMUX_PIN(PIN_PB20, 2, 1)
--#define PIN_PB20__D6			PINMUX_PIN(PIN_PB20, 4, 1)
--#define PIN_PB20__PWMFI1		PINMUX_PIN(PIN_PB20, 5, 2)
--#define PIN_PB21			53
--#define PIN_PB21__GPIO			PINMUX_PIN(PIN_PB21, 0, 0)
--#define PIN_PB21__QSPI0_INT		PINMUX_PIN(PIN_PB21, 1, 1)
--#define PIN_PB21__FLEXCOM10_IO3		PINMUX_PIN(PIN_PB21, 2, 1)
--#define PIN_PB21__FLEXCOM9_IO5		PINMUX_PIN(PIN_PB21, 3, 1)
--#define PIN_PB21__D7			PINMUX_PIN(PIN_PB21, 4, 1)
--#define PIN_PB22			54
--#define PIN_PB22__GPIO			PINMUX_PIN(PIN_PB22, 0, 0)
--#define PIN_PB22__QSPI1_IO3		PINMUX_PIN(PIN_PB22, 1, 1)
--#define PIN_PB22__FLEXCOM10_IO4		PINMUX_PIN(PIN_PB22, 2, 1)
--#define PIN_PB22__FLEXCOM9_IO6		PINMUX_PIN(PIN_PB22, 3, 1)
--#define PIN_PB22__NANDRDY		PINMUX_PIN(PIN_PB22, 4, 1)
--#define PIN_PB23			55
--#define PIN_PB23__GPIO			PINMUX_PIN(PIN_PB23, 0, 0)
--#define PIN_PB23__QSPI1_IO2		PINMUX_PIN(PIN_PB23, 1, 1)
--#define PIN_PB23__FLEXCOM7_IO0		PINMUX_PIN(PIN_PB23, 2, 1)
--#define PIN_PB23__I2SMCC0_CK		PINMUX_PIN(PIN_PB23, 3, 1)
--#define PIN_PB23__PCK4			PINMUX_PIN(PIN_PB23, 6, 1)
--#define PIN_PB24			56
--#define PIN_PB24__GPIO			PINMUX_PIN(PIN_PB24, 0, 0)
--#define PIN_PB24__QSPI1_IO1		PINMUX_PIN(PIN_PB24, 1, 1)
--#define PIN_PB24__FLEXCOM7_IO1		PINMUX_PIN(PIN_PB24, 2, 1)
--#define PIN_PB24__I2SMCC0_WS		PINMUX_PIN(PIN_PB24, 3, 1)
--#define PIN_PB24__PCK5			PINMUX_PIN(PIN_PB24, 6, 1)
--#define PIN_PB25			57
--#define PIN_PB25__GPIO			PINMUX_PIN(PIN_PB25, 0, 0)
--#define PIN_PB25__QSPI1_IO0		PINMUX_PIN(PIN_PB25, 1, 1)
--#define PIN_PB25__FLEXCOM7_IO2		PINMUX_PIN(PIN_PB25, 2, 1)
--#define PIN_PB25__I2SMCC0_DOUT1		PINMUX_PIN(PIN_PB25, 3, 1)
--#define PIN_PB25__PCK6			PINMUX_PIN(PIN_PB25, 6, 1)
--#define PIN_PB26			58
--#define PIN_PB26__GPIO			PINMUX_PIN(PIN_PB26, 0, 0)
--#define PIN_PB26__QSPI1_CS		PINMUX_PIN(PIN_PB26, 1, 1)
--#define PIN_PB26__FLEXCOM7_IO3		PINMUX_PIN(PIN_PB26, 2, 1)
--#define PIN_PB26__I2SMCC0_DOUT0		PINMUX_PIN(PIN_PB26, 3, 1)
--#define PIN_PB26__PWMEXTRG0		PINMUX_PIN(PIN_PB26, 5, 1)
--#define PIN_PB26__PCK7			PINMUX_PIN(PIN_PB26, 6, 1)
--#define PIN_PB27			59
--#define PIN_PB27__GPIO			PINMUX_PIN(PIN_PB27, 0, 0)
--#define PIN_PB27__QSPI1_SCK		PINMUX_PIN(PIN_PB27, 1, 1)
--#define PIN_PB27__FLEXCOM7_IO4		PINMUX_PIN(PIN_PB27, 2, 1)
--#define PIN_PB27__I2SMCC0_MCK		PINMUX_PIN(PIN_PB27, 3, 1)
--#define PIN_PB27__PWMEXTRG1		PINMUX_PIN(PIN_PB27, 5, 1)
--#define PIN_PB28			60
--#define PIN_PB28__GPIO			PINMUX_PIN(PIN_PB28, 0, 0)
--#define PIN_PB28__SDMMC1_RSTN		PINMUX_PIN(PIN_PB28, 1, 1)
--#define PIN_PB28__ADTRG			PINMUX_PIN(PIN_PB28, 2, 2)
--#define PIN_PB28__PWMFI0		PINMUX_PIN(PIN_PB28, 5, 1)
--#define PIN_PB28__FLEXCOM7_IO0		PINMUX_PIN(PIN_PB28, 6, 4)
--#define PIN_PB29			61
--#define PIN_PB29__GPIO			PINMUX_PIN(PIN_PB29, 0, 0)
--#define PIN_PB29__SDMMC1_CMD		PINMUX_PIN(PIN_PB29, 1, 1)
--#define PIN_PB29__FLEXCOM3_IO2		PINMUX_PIN(PIN_PB29, 2, 2)
--#define PIN_PB29__FLEXCOM0_IO5		PINMUX_PIN(PIN_PB29, 3, 2)
--#define PIN_PB29__TIOA3			PINMUX_PIN(PIN_PB29, 4, 2)
--#define PIN_PB29__PWMFI1		PINMUX_PIN(PIN_PB29, 5, 1)
--#define PIN_PB29__FLEXCOM7_IO1		PINMUX_PIN(PIN_PB29, 6, 4)
--#define PIN_PB30			62
--#define PIN_PB30__GPIO			PINMUX_PIN(PIN_PB30, 0, 0)
--#define PIN_PB30__SDMMC1_CK		PINMUX_PIN(PIN_PB30, 1, 1)
--#define PIN_PB30__FLEXCOM3_IO3		PINMUX_PIN(PIN_PB30, 2, 2)
--#define PIN_PB30__FLEXCOM0_IO6		PINMUX_PIN(PIN_PB30, 3, 2)
--#define PIN_PB30__TIOB3			PINMUX_PIN(PIN_PB30, 4, 1)
--#define PIN_PB30__PWMH0			PINMUX_PIN(PIN_PB30, 5, 1)
--#define PIN_PB30__FLEXCOM8_IO0		PINMUX_PIN(PIN_PB30, 6, 4)
--#define PIN_PB31			63
--#define PIN_PB31__GPIO			PINMUX_PIN(PIN_PB31, 0, 0)
--#define PIN_PB31__SDMMC1_DAT0		PINMUX_PIN(PIN_PB31, 1, 1)
--#define PIN_PB31__FLEXCOM3_IO4		PINMUX_PIN(PIN_PB31, 2, 2)
--#define PIN_PB31__FLEXCOM9_IO5		PINMUX_PIN(PIN_PB31, 3, 2)
--#define PIN_PB31__TCLK3			PINMUX_PIN(PIN_PB31, 4, 1)
--#define PIN_PB31__PWML0			PINMUX_PIN(PIN_PB31, 5, 1)
--#define PIN_PB31__FLEXCOM8_IO1		PINMUX_PIN(PIN_PB31, 6, 4)
--#define PIN_PC0				64
--#define PIN_PC0__GPIO			PINMUX_PIN(PIN_PC0, 0, 0)
--#define PIN_PC0__SDMMC1_DAT1		PINMUX_PIN(PIN_PC0, 1, 1)
--#define PIN_PC0__FLEXCOM3_IO0		PINMUX_PIN(PIN_PC0, 2, 2)
--#define PIN_PC0__TIOA4			PINMUX_PIN(PIN_PC0, 4, 1)
--#define PIN_PC0__PWML1			PINMUX_PIN(PIN_PC0, 5, 1)
--#define PIN_PC0__FLEXCOM9_IO0		PINMUX_PIN(PIN_PC0, 6, 4)
--#define PIN_PC1				65
--#define PIN_PC1__GPIO			PINMUX_PIN(PIN_PC1, 0, 0)
--#define PIN_PC1__SDMMC1_DAT2		PINMUX_PIN(PIN_PC1, 1, 1)
--#define PIN_PC1__FLEXCOM3_IO1		PINMUX_PIN(PIN_PC1, 2, 2)
--#define PIN_PC1__TIOB4			PINMUX_PIN(PIN_PC1, 4, 1)
--#define PIN_PC1__PWMH1			PINMUX_PIN(PIN_PC1, 5, 1)
--#define PIN_PC1__FLEXCOM9_IO1		PINMUX_PIN(PIN_PC1, 6, 4)
--#define PIN_PC2				66
--#define PIN_PC2__GPIO			PINMUX_PIN(PIN_PC2, 0, 0)
--#define PIN_PC2__SDMMC1_DAT3		PINMUX_PIN(PIN_PC2, 1, 1)
--#define PIN_PC2__FLEXCOM4_IO0		PINMUX_PIN(PIN_PC2, 2, 2)
--#define PIN_PC2__TCLK4			PINMUX_PIN(PIN_PC2, 4, 1)
--#define PIN_PC2__PWML2			PINMUX_PIN(PIN_PC2, 5, 1)
--#define PIN_PC2__FLEXCOM10_IO0		PINMUX_PIN(PIN_PC2, 6, 4)
--#define PIN_PC3				67
--#define PIN_PC3__GPIO			PINMUX_PIN(PIN_PC3, 0, 0)
--#define PIN_PC3__SDMMC1_WP		PINMUX_PIN(PIN_PC3, 1, 1)
--#define PIN_PC3__FLEXCOM4_IO1		PINMUX_PIN(PIN_PC3, 2, 2)
--#define PIN_PC3__TIOA5			PINMUX_PIN(PIN_PC3, 4, 1)
--#define PIN_PC3__PWMH2			PINMUX_PIN(PIN_PC3, 5, 1)
--#define PIN_PC3__FLEXCOM10_IO1		PINMUX_PIN(PIN_PC3, 6, 4)
--#define PIN_PC4				68
--#define PIN_PC4__GPIO			PINMUX_PIN(PIN_PC4, 0, 0)
--#define PIN_PC4__SDMMC1_CD		PINMUX_PIN(PIN_PC4, 1, 1)
--#define PIN_PC4__FLEXCOM4_IO2		PINMUX_PIN(PIN_PC4, 2, 2)
--#define PIN_PC4__FLEXCOM9_IO6		PINMUX_PIN(PIN_PC4, 3, 2)
--#define PIN_PC4__TIOB5			PINMUX_PIN(PIN_PC4, 4, 1)
--#define PIN_PC4__PWML3			PINMUX_PIN(PIN_PC4, 5, 1)
--#define PIN_PC4__FLEXCOM11_IO0		PINMUX_PIN(PIN_PC4, 6, 4)
--#define PIN_PC5				69
--#define PIN_PC5__GPIO			PINMUX_PIN(PIN_PC5, 0, 0)
--#define PIN_PC5__SDMMC1_1V8SEL		PINMUX_PIN(PIN_PC5, 1, 1)
--#define PIN_PC5__FLEXCOM4_IO3		PINMUX_PIN(PIN_PC5, 2, 2)
--#define PIN_PC5__FLEXCOM6_IO5		PINMUX_PIN(PIN_PC5, 3, 2)
--#define PIN_PC5__TCLK5			PINMUX_PIN(PIN_PC5, 4, 1)
--#define PIN_PC5__PWMH3			PINMUX_PIN(PIN_PC5, 5, 1)
--#define PIN_PC5__FLEXCOM11_IO1		PINMUX_PIN(PIN_PC5, 6, 4)
--#define PIN_PC6				70
--#define PIN_PC6__GPIO			PINMUX_PIN(PIN_PC6, 0, 0)
--#define PIN_PC6__FLEXCOM4_IO4		PINMUX_PIN(PIN_PC6, 2, 2)
--#define PIN_PC6__FLEXCOM6_IO6		PINMUX_PIN(PIN_PC6, 3, 2)
--#define PIN_PC7				71
--#define PIN_PC7__GPIO			PINMUX_PIN(PIN_PC7, 0, 0)
--#define PIN_PC7__I2SMCC0_DIN0		PINMUX_PIN(PIN_PC7, 1, 1)
--#define PIN_PC7__FLEXCOM7_IO0		PINMUX_PIN(PIN_PC7, 2, 2)
--#define PIN_PC8				72
--#define PIN_PC8__GPIO			PINMUX_PIN(PIN_PC8, 0, 0)
--#define PIN_PC8__I2SMCC0_DIN1		PINMUX_PIN(PIN_PC8, 1, 1)
--#define PIN_PC8__FLEXCOM7_IO1		PINMUX_PIN(PIN_PC8, 2, 2)
--#define PIN_PC9				73
--#define PIN_PC9__GPIO			PINMUX_PIN(PIN_PC9, 0, 0)
--#define PIN_PC9__I2SMCC0_DOUT3		PINMUX_PIN(PIN_PC9, 1, 1)
--#define PIN_PC9__FLEXCOM7_IO2		PINMUX_PIN(PIN_PC9, 2, 2)
--#define PIN_PC9__FLEXCOM1_IO0		PINMUX_PIN(PIN_PC9, 6, 4)
--#define PIN_PC10			74
--#define PIN_PC10__GPIO			PINMUX_PIN(PIN_PC10, 0, 0)
--#define PIN_PC10__I2SMCC0_DOUT2		PINMUX_PIN(PIN_PC10, 1, 1)
--#define PIN_PC10__FLEXCOM7_IO3		PINMUX_PIN(PIN_PC10, 2, 2)
--#define PIN_PC10__FLEXCOM1_IO1		PINMUX_PIN(PIN_PC10, 6, 4)
--#define PIN_PC11			75
--#define PIN_PC11__GPIO			PINMUX_PIN(PIN_PC11, 0, 0)
--#define PIN_PC11__I2SMCC1_CK		PINMUX_PIN(PIN_PC11, 1, 1)
--#define PIN_PC11__FLEXCOM7_IO4		PINMUX_PIN(PIN_PC11, 2, 2)
--#define PIN_PC11__FLEXCOM2_IO0		PINMUX_PIN(PIN_PC11, 6, 4)
--#define PIN_PC12			76
--#define PIN_PC12__GPIO			PINMUX_PIN(PIN_PC12, 0, 0)
--#define PIN_PC12__I2SMCC1_WS		PINMUX_PIN(PIN_PC12, 1, 1)
--#define PIN_PC12__FLEXCOM8_IO2		PINMUX_PIN(PIN_PC12, 2, 2)
--#define PIN_PC12__FLEXCOM2_IO1		PINMUX_PIN(PIN_PC12, 6, 4)
--#define PIN_PC13			77
--#define PIN_PC13__GPIO			PINMUX_PIN(PIN_PC13, 0, 0)
--#define PIN_PC13__I2SMCC1_MCK		PINMUX_PIN(PIN_PC13, 1, 1)
--#define PIN_PC13__FLEXCOM8_IO1		PINMUX_PIN(PIN_PC13, 2, 2)
--#define PIN_PC13__FLEXCOM3_IO0		PINMUX_PIN(PIN_PC13, 6, 4)
--#define PIN_PC14			78
--#define PIN_PC14__GPIO			PINMUX_PIN(PIN_PC14, 0, 0)
--#define PIN_PC14__I2SMCC1_DOUT0		PINMUX_PIN(PIN_PC14, 1, 1)
--#define PIN_PC14__FLEXCOM8_IO0		PINMUX_PIN(PIN_PC14, 2, 2)
--#define PIN_PC14__FLEXCOM3_IO1		PINMUX_PIN(PIN_PC14, 6, 4)
--#define PIN_PC15			79
--#define PIN_PC15__GPIO			PINMUX_PIN(PIN_PC15, 0, 0)
--#define PIN_PC15__I2SMCC1_DOUT1		PINMUX_PIN(PIN_PC15, 1, 1)
--#define PIN_PC15__FLEXCOM8_IO3		PINMUX_PIN(PIN_PC15, 2, 2)
--#define PIN_PC15__FLEXCOM4_IO0		PINMUX_PIN(PIN_PC15, 6, 4)
--#define PIN_PC16			80
--#define PIN_PC16__GPIO			PINMUX_PIN(PIN_PC16, 0, 0)
--#define PIN_PC16__I2SMCC_DOUT2		PINMUX_PIN(PIN_PC16, 1, 1)
--#define PIN_PC16__FLEXCOM8_IO4		PINMUX_PIN(PIN_PC16, 2, 2)
--#define PIN_PC16__FLEXCOM3_IO1		PINMUX_PIN(PIN_PC16, 6, 4)
--#define PIN_PC17			81
--#define PIN_PC17__GPIO			PINMUX_PIN(PIN_PC17, 0, 0)
--#define PIN_PC17__I2SMCC1_DOUT3		PINMUX_PIN(PIN_PC17, 1, 1)
--#define PIN_PC17__EXT_IRQ0		PINMUX_PIN(PIN_PC17, 2, 3)
--#define PIN_PC17__FLEXCOM5_IO0		PINMUX_PIN(PIN_PC17, 6, 4)
--#define PIN_PC18			82
--#define PIN_PC18__GPIO			PINMUX_PIN(PIN_PC18, 0, 0)
--#define PIN_PC18__I2SMCC1_DIN0		PINMUX_PIN(PIN_PC18, 1, 1)
--#define PIN_PC18__FLEXCOM9_IO0		PINMUX_PIN(PIN_PC18, 2, 2)
--#define PIN_PC18__FLEXCOM5_IO1		PINMUX_PIN(PIN_PC18, 6, 4)
--#define PIN_PC19			83
--#define PIN_PC19__GPIO			PINMUX_PIN(PIN_PC19, 0, 0)
--#define PIN_PC19__I2SMCC1_DIN1		PINMUX_PIN(PIN_PC19, 1, 1)
--#define PIN_PC19__FLEXCOM9_IO1		PINMUX_PIN(PIN_PC19, 2, 2)
--#define PIN_PC19__FLEXCOM6_IO0		PINMUX_PIN(PIN_PC19, 6, 4)
--#define PIN_PC20			84
--#define PIN_PC20__GPIO			PINMUX_PIN(PIN_PC20, 0, 0)
--#define PIN_PC20__I2SMCC1_DIN2		PINMUX_PIN(PIN_PC20, 1, 1)
--#define PIN_PC20__FLEXCOM9_IO4		PINMUX_PIN(PIN_PC20, 2, 2)
--#define PIN_PC20__FLEXCOM6_IO1		PINMUX_PIN(PIN_PC20, 6, 4)
--#define PIN_PC21			85
--#define PIN_PC21__GPIO			PINMUX_PIN(PIN_PC21, 0, 0)
--#define PIN_PC21__I2SMCC1_DIN3		PINMUX_PIN(PIN_PC21, 1, 1)
--#define PIN_PC21__FLEXCOM9_IO2		PINMUX_PIN(PIN_PC21, 2, 2)
--#define PIN_PC21__D3			PINMUX_PIN(PIN_PC21, 4, 2)
--#define PIN_PC21__FLEXCOM6_IO0		PINMUX_PIN(PIN_PC21, 6, 5)
--#define PIN_PC22			86
--#define PIN_PC22__GPIO			PINMUX_PIN(PIN_PC22, 0, 0)
--#define PIN_PC22__I2SMCC0_DIN2		PINMUX_PIN(PIN_PC22, 1, 1)
--#define PIN_PC22__FLEXCOM9_IO3		PINMUX_PIN(PIN_PC22, 2, 2)
--#define PIN_PC22__D4			PINMUX_PIN(PIN_PC22, 4, 2)
--#define PIN_PC22__FLEXCOM6_IO1		PINMUX_PIN(PIN_PC22, 6, 5)
--#define PIN_PC23			87
--#define PIN_PC23__GPIO			PINMUX_PIN(PIN_PC23, 0, 0)
--#define PIN_PC23__I2SMCC0_DIN3		PINMUX_PIN(PIN_PC23, 1, 1)
--#define PIN_PC23__FLEXCOM0_IO5		PINMUX_PIN(PIN_PC23, 2, 3)
--#define PIN_PC23__D5			PINMUX_PIN(PIN_PC23, 4, 2)
--#define PIN_PC23__FLEXCOM7_IO0		PINMUX_PIN(PIN_PC23, 6, 5)
--#define PIN_PC24			88
--#define PIN_PC24__GPIO			PINMUX_PIN(PIN_PC24, 0, 0)
--#define PIN_PC24__FLEXCOM0_IO6		PINMUX_PIN(PIN_PC24, 2, 3)
--#define PIN_PC24__EXT_IRQ1		PINMUX_PIN(PIN_PC24, 3, 3)
--#define PIN_PC24__D6			PINMUX_PIN(PIN_PC24, 4, 2)
--#define PIN_PC24__FLEXCOM7_IO1		PINMUX_PIN(PIN_PC24, 6, 5)
--#define PIN_PC25			89
--#define PIN_PC25__GPIO			PINMUX_PIN(PIN_PC25, 0, 0)
--#define PIN_PC25__NTRST			PINMUX_PIN(PIN_PC25, 1, 1)
--#define PIN_PC26			90
--#define PIN_PC26__GPIO			PINMUX_PIN(PIN_PC26, 0, 0)
--#define PIN_PC26__TCK_SWCLK		PINMUX_PIN(PIN_PC26, 1, 1)
--#define PIN_PC27			91
--#define PIN_PC27__GPIO			PINMUX_PIN(PIN_PC27, 0, 0)
--#define PIN_PC27__TMS_SWDIO		PINMUX_PIN(PIN_PC27, 1, 1)
--#define PIN_PC28			92
--#define PIN_PC28__GPIO			PINMUX_PIN(PIN_PC28, 0, 0)
--#define PIN_PC28__TDI			PINMUX_PIN(PIN_PC28, 1, 1)
--#define PIN_PC29			93
--#define PIN_PC29__GPIO			PINMUX_PIN(PIN_PC29, 0, 0)
--#define PIN_PC29__TDO			PINMUX_PIN(PIN_PC29, 1, 1)
--#define PIN_PC30			94
--#define PIN_PC30__GPIO			PINMUX_PIN(PIN_PC30, 0, 0)
--#define PIN_PC30__FLEXCOM10_IO0		PINMUX_PIN(PIN_PC30, 2, 2)
--#define PIN_PC31			95
--#define PIN_PC31__GPIO			PINMUX_PIN(PIN_PC31, 0, 0)
--#define PIN_PC31__FLEXCOM10_IO1		PINMUX_PIN(PIN_PC31, 2, 2)
--#define PIN_PD0				96
--#define PIN_PD0__GPIO			PINMUX_PIN(PIN_PD0, 0, 0)
--#define PIN_PD0__FLEXCOM11_IO0		PINMUX_PIN(PIN_PD0, 2, 2)
--#define PIN_PD1				97
--#define PIN_PD1__GPIO			PINMUX_PIN(PIN_PD1, 0, 0)
--#define PIN_PD1__FLEXCOM11_IO1		PINMUX_PIN(PIN_PD1, 2, 2)
--#define PIN_PD2				98
--#define PIN_PD2__GPIO			PINMUX_PIN(PIN_PD2, 0, 0)
--#define PIN_PD2__SDMMC2_RSTN		PINMUX_PIN(PIN_PD2, 1, 1)
--#define PIN_PD2__PCK0			PINMUX_PIN(PIN_PD2, 2, 2)
--#define PIN_PD2__CANTX4			PINMUX_PIN(PIN_PD2, 3, 1)
--#define PIN_PD2__D7			PINMUX_PIN(PIN_PD2, 4, 2)
--#define PIN_PD2__TIOA0			PINMUX_PIN(PIN_PD2, 5, 2)
--#define PIN_PD2__FLEXCOM8_IO0		PINMUX_PIN(PIN_PD2, 6, 5)
--#define PIN_PD3				99
--#define PIN_PD3__GPIO			PINMUX_PIN(PIN_PD3, 0, 0)
--#define PIN_PD3__SDMMC2_CMD		PINMUX_PIN(PIN_PD3, 1, 1)
--#define PIN_PD3__FLEXCOM0_IO0		PINMUX_PIN(PIN_PD3, 2, 2)
--#define PIN_PD3__CANRX4			PINMUX_PIN(PIN_PD3, 3, 1)
--#define PIN_PD3__NANDRDY		PINMUX_PIN(PIN_PD3, 4, 2)
--#define PIN_PD3__TIOB0			PINMUX_PIN(PIN_PD3, 5, 2)
--#define PIN_PD3__FLEXCOM8_IO1		PINMUX_PIN(PIN_PD3, 6, 5)
--#define PIN_PD4				100
--#define PIN_PD4__GPIO			PINMUX_PIN(PIN_PD4, 0, 0)
--#define PIN_PD4__SDMMC2_CK		PINMUX_PIN(PIN_PD4, 1, 1)
--#define PIN_PD4__FLEXCOM0_IO1		PINMUX_PIN(PIN_PD4, 2, 2)
--#define PIN_PD4__CANTX5			PINMUX_PIN(PIN_PD4, 3, 1)
--#define PIN_PD4__NCS3_NANDCS		PINMUX_PIN(PIN_PD4, 4, 2)
--#define PIN_PD4__TCLK0			PINMUX_PIN(PIN_PD4, 5, 2)
--#define PIN_PD4__FLEXCOM9_IO0		PINMUX_PIN(PIN_PD4, 6, 5)
--#define PIN_PD5				101
--#define PIN_PD5__GPIO			PINMUX_PIN(PIN_PD5, 0, 0)
--#define PIN_PD5__SDMMC2_DAT0		PINMUX_PIN(PIN_PD5, 1, 1)
--#define PIN_PD5__FLEXCOM0_IO2		PINMUX_PIN(PIN_PD5, 2, 2)
--#define PIN_PD5__CANRX5			PINMUX_PIN(PIN_PD5, 3, 1)
--#define PIN_PD5__NWE_NWR0_NANDWE	PINMUX_PIN(PIN_PD5, 4, 2)
--#define PIN_PD5__TIOA1			PINMUX_PIN(PIN_PD5, 5, 2)
--#define PIN_PD5__FLEXCOM9_IO1		PINMUX_PIN(PIN_PD5, 6, 5)
--#define PIN_PD6				102
--#define PIN_PD6__GPIO			PINMUX_PIN(PIN_PD6, 0, 0)
--#define PIN_PD6__SDMMC2_DAT1		PINMUX_PIN(PIN_PD6, 1, 1)
--#define PIN_PD6__FLEXCOM0_IO3		PINMUX_PIN(PIN_PD6, 2, 2)
--#define PIN_PD6__SPDIF_RX		PINMUX_PIN(PIN_PD6, 3, 3)
--#define PIN_PD6__NRD_NANDOE		PINMUX_PIN(PIN_PD6, 4, 2)
--#define PIN_PD6__TIOB1			PINMUX_PIN(PIN_PD6, 5, 2)
--#define PIN_PD6__FLEXCOM10_IO0		PINMUX_PIN(PIN_PD6, 6, 5)
--#define PIN_PD7				103
--#define PIN_PD7__GPIO			PINMUX_PIN(PIN_PD7, 0, 0)
--#define PIN_PD7__SDMMC2_DAT2		PINMUX_PIN(PIN_PD7, 1, 1)
--#define PIN_PD7__FLEXCOM0_IO4		PINMUX_PIN(PIN_PD7, 2, 2)
--#define PIN_PD7__SPDIF_TX		PINMUX_PIN(PIN_PD7, 2, 2)
--#define PIN_PD7__A21_NANDALE		PINMUX_PIN(PIN_PD7, 4, 2)
--#define PIN_PD7__TCLK1			PINMUX_PIN(PIN_PD7, 5, 2)
--#define PIN_PD7__FLEXCOM10_IO1		PINMUX_PIN(PIN_PD7, 6, 5)
--#define PIN_PD8				104
--#define PIN_PD8__GPIO			PINMUX_PIN(PIN_PD8, 0, 0)
--#define PIN_PD8__SDMMC2_DAT3		PINMUX_PIN(PIN_PD8, 1, 1)
--#define PIN_PD8__I2SMCC0_DIN0		PINMUX_PIN(PIN_PD8, 3, 1)
--#define PIN_PD8__A22_NANDCLE		PINMUX_PIN(PIN_PD8, 4, 2)
--#define PIN_PD8__TIOA2			PINMUX_PIN(PIN_PD8, 5, 2)
--#define PIN_PD8__FLEXCOM11_IO0		PINMUX_PIN(PIN_PD8, 6, 5)
--#define PIN_PD9				105
--#define PIN_PD9__GPIO			PINMUX_PIN(PIN_PD9, 0, 0)
--#define PIN_PD9__SDMMC2_WP		PINMUX_PIN(PIN_PD9, 1, 1)
--#define PIN_PD9__I2SMCC0_DIN1		PINMUX_PIN(PIN_PD9, 3, 2)
--#define PIN_PD9__D0			PINMUX_PIN(PIN_PD9, 4, 2)
--#define PIN_PD9__TIOB2			PINMUX_PIN(PIN_PD9, 5, 2)
--#define PIN_PD9__FLEXCOM11_IO1		PINMUX_PIN(PIN_PD9, 6, 5)
--#define PIN_PD10			106
--#define PIN_PD10__GPIO			PINMUX_PIN(PIN_PD10, 0, 0)
--#define PIN_PD10__SDMMC2_CD		PINMUX_PIN(PIN_PD10, 1, 1)
--#define PIN_PD10__PCK6			PINMUX_PIN(PIN_PD10, 2, 2)
--#define PIN_PD10__I2SMCC0_DIN2		PINMUX_PIN(PIN_PD10, 3, 2)
--#define PIN_PD10__D1			PINMUX_PIN(PIN_PD10, 4, 2)
--#define PIN_PD10__TCLK2			PINMUX_PIN(PIN_PD10, 5, 2)
--#define PIN_PD10__FLEXCOM0_IO0		PINMUX_PIN(PIN_PD10, 6, 3)
--#define PIN_PD11			107
--#define PIN_PD11__GPIO			PINMUX_PIN(PIN_PD11, 0, 0)
--#define PIN_PD11__SDMMC2_1V8SEL		PINMUX_PIN(PIN_PD11, 1, 1)
--#define PIN_PD11__PCK7			PINMUX_PIN(PIN_PD11, 2, 2)
--#define PIN_PD11__I2SMCC0_DIN3		PINMUX_PIN(PIN_PD11, 3, 2)
--#define PIN_PD11__D2			PINMUX_PIN(PIN_PD11, 4, 2)
--#define PIN_PD11__TIOA3			PINMUX_PIN(PIN_PD11, 5, 2)
--#define PIN_PD11__FLEXCOM0_IO1		PINMUX_PIN(PIN_PD11, 6, 3)
--#define PIN_PD12			108
--#define PIN_PD12__GPIO			PINMUX_PIN(PIN_PD12, 0, 0)
--#define PIN_PD12__PCK1			PINMUX_PIN(PIN_PD12, 1, 2)
--#define PIN_PD12__FLEXCOM1_IO0		PINMUX_PIN(PIN_PD12, 2, 2)
--#define PIN_PD12__CANTX0		PINMUX_PIN(PIN_PD12, 4, 2)
--#define PIN_PD12__TIOB3			PINMUX_PIN(PIN_PD12, 5, 2)
--#define PIN_PD13			109
--#define PIN_PD13__GPIO			PINMUX_PIN(PIN_PD13, 0, 0)
--#define PIN_PD13__I2SMCC0_CK		PINMUX_PIN(PIN_PD13, 1, 2)
--#define PIN_PD13__FLEXCOM1_IO1		PINMUX_PIN(PIN_PD13, 2, 2)
--#define PIN_PD13__PWML0			PINMUX_PIN(PIN_PD13, 3, 4)
--#define PIN_PD13__CANRX0		PINMUX_PIN(PIN_PD13, 4, 2)
--#define PIN_PD13__TCLK3			PINMUX_PIN(PIN_PD13, 5, 2)
--#define PIN_PD14			110
--#define PIN_PD14__GPIO			PINMUX_PIN(PIN_PD14, 0, 0)
--#define PIN_PD14__I2SMCC0_MCK		PINMUX_PIN(PIN_PD14, 1, 2)
--#define PIN_PD14__FLEXCOM1_IO2		PINMUX_PIN(PIN_PD14, 2, 2)
--#define PIN_PD14__PWMH0			PINMUX_PIN(PIN_PD14, 3, 4)
--#define PIN_PD14__CANTX1		PINMUX_PIN(PIN_PD14, 4, 2)
--#define PIN_PD14__TIOA4			PINMUX_PIN(PIN_PD14, 5, 2)
--#define PIN_PD14__FLEXCOM2_IO0		PINMUX_PIN(PIN_PD14, 6, 5)
--#define PIN_PD15			111
--#define PIN_PD15__GPIO			PINMUX_PIN(PIN_PD15, 0, 0)
--#define PIN_PD15__I2SMCC0_WS		PINMUX_PIN(PIN_PD15, 1, 2)
--#define PIN_PD15__FLEXCOM1_IO3		PINMUX_PIN(PIN_PD15, 2, 2)
--#define PIN_PD15__PWML1			PINMUX_PIN(PIN_PD15, 3, 4)
--#define PIN_PD15__CANRX1		PINMUX_PIN(PIN_PD15, 4, 2)
--#define PIN_PD15__TIOB4			PINMUX_PIN(PIN_PD15, 5, 2)
--#define PIN_PD15__FLEXCOM2_IO1		PINMUX_PIN(PIN_PD15, 6, 5)
--#define PIN_PD16			112
--#define PIN_PD16__GPIO			PINMUX_PIN(PIN_PD16, 0, 0)
--#define PIN_PD16__I2SMCC0_DOUT0		PINMUX_PIN(PIN_PD16, 1, 2)
--#define PIN_PD16__FLEXCOM1_IO4		PINMUX_PIN(PIN_PD16, 2, 2)
--#define PIN_PD16__PWMH1			PINMUX_PIN(PIN_PD16, 3, 4)
--#define PIN_PD16__CANTX2		PINMUX_PIN(PIN_PD16, 4, 2)
--#define PIN_PD16__TCLK4			PINMUX_PIN(PIN_PD16, 5, 2)
--#define PIN_PD16__FLEXCOM3_IO0		PINMUX_PIN(PIN_PD16, 6, 5)
--#define PIN_PD17			113
--#define PIN_PD17__GPIO			PINMUX_PIN(PIN_PD17, 0, 0)
--#define PIN_PD17__I2SMCC0_DOUT1		PINMUX_PIN(PIN_PD17, 1, 2)
--#define PIN_PD17__FLEXCOM2_IO0		PINMUX_PIN(PIN_PD17, 2, 2)
--#define PIN_PD17__PWML2			PINMUX_PIN(PIN_PD17, 3, 4)
--#define PIN_PD17__CANRX2		PINMUX_PIN(PIN_PD17, 4, 2)
--#define PIN_PD17__TIOA5			PINMUX_PIN(PIN_PD17, 5, 2)
--#define PIN_PD17__FLEXCOM3_IO1		PINMUX_PIN(PIN_PD17, 6, 5)
--#define PIN_PD18			114
--#define PIN_PD18__GPIO			PINMUX_PIN(PIN_PD18, 0, 0)
--#define PIN_PD18__I2SMCC0_DOUT2		PINMUX_PIN(PIN_PD18, 1, 2)
--#define PIN_PD18__FLEXCOM2_IO1		PINMUX_PIN(PIN_PD18, 2, 2)
--#define PIN_PD18__PWMH2			PINMUX_PIN(PIN_PD18, 3, 4)
--#define PIN_PD18__CANTX3		PINMUX_PIN(PIN_PD18, 4, 2)
--#define PIN_PD18__TIOB5			PINMUX_PIN(PIN_PD18, 5, 2)
--#define PIN_PD18__FLEXCOM4_IO0		PINMUX_PIN(PIN_PD18, 6, 5)
--#define PIN_PD19			115
--#define PIN_PD19__GPIO			PINMUX_PIN(PIN_PD19, 0, 0)
--#define PIN_PD19__I2SMCC0_DOUT3		PINMUX_PIN(PIN_PD19, 1, 2)
--#define PIN_PD19__FLEXCOM2_IO2		PINMUX_PIN(PIN_PD19, 2, 2)
--#define PIN_PD19__PWML3			PINMUX_PIN(PIN_PD19, 3, 4)
--#define PIN_PD19__CANRX3		PINMUX_PIN(PIN_PD19, 4, 2)
--#define PIN_PD19__TCLK5			PINMUX_PIN(PIN_PD19, 5, 2)
--#define PIN_PD19__FLEXCOM4_IO1		PINMUX_PIN(PIN_PD19, 6, 5)
--#define PIN_PD20			116
--#define PIN_PD20__GPIO			PINMUX_PIN(PIN_PD20, 0, 0)
--#define PIN_PD20__PCK0			PINMUX_PIN(PIN_PD20, 1, 3)
--#define PIN_PD20__FLEXCOM2_IO3		PINMUX_PIN(PIN_PD20, 2, 2)
--#define PIN_PD20__PWMH3			PINMUX_PIN(PIN_PD20, 3, 4)
--#define PIN_PD20__CANTX4		PINMUX_PIN(PIN_PD20, 4, 2)
--#define PIN_PD20__FLEXCOM5_IO0		PINMUX_PIN(PIN_PD20, 6, 5)
--#define PIN_PD21			117
--#define PIN_PD21__GPIO			PINMUX_PIN(PIN_PD21, 0, 0)
--#define PIN_PD21__PCK1			PINMUX_PIN(PIN_PD21, 1, 3)
--#define PIN_PD21__FLEXCOM2_IO4		PINMUX_PIN(PIN_PD21, 2, 2)
--#define PIN_PD21__CANRX4		PINMUX_PIN(PIN_PD21, 4, 2)
--#define PIN_PD21__FLEXCOM5_IO1		PINMUX_PIN(PIN_PD21, 6, 5)
--#define PIN_PD21__G1_TXEN		PINMUX_PIN(PIN_PD21, 7, 1)
--#define PIN_PD22			118
--#define PIN_PD22__GPIO			PINMUX_PIN(PIN_PD22, 0, 0)
--#define PIN_PD22__PDMC0_CLK		PINMUX_PIN(PIN_PD22, 1, 2)
--#define PIN_PD22__PWMEXTRG0		PINMUX_PIN(PIN_PD22, 3, 4)
--#define PIN_PD22__RD1			PINMUX_PIN(PIN_PD22, 4, 2)
--#define PIN_PD22__CANTX5		PINMUX_PIN(PIN_PD22, 6, 2)
--#define PIN_PD22__G1_TX0		PINMUX_PIN(PIN_PD22, 7, 1)
--#define PIN_PD23			119
--#define PIN_PD23__GPIO			PINMUX_PIN(PIN_PD23, 0, 0)
--#define PIN_PD23__PDMC0_DS0		PINMUX_PIN(PIN_PD23, 1, 2)
--#define PIN_PD23__PWMEXTRG1		PINMUX_PIN(PIN_PD23, 3, 4)
--#define PIN_PD23__RF1			PINMUX_PIN(PIN_PD23, 4, 2)
--#define PIN_PD23__ISC_MCK		PINMUX_PIN(PIN_PD23, 5, 2)
--#define PIN_PD23__CANRX5		PINMUX_PIN(PIN_PD23, 6, 2)
--#define PIN_PD23__G1_TX1		PINMUX_PIN(PIN_PD23, 7, 1)
--#define PIN_PD24			120
--#define PIN_PD24__GPIO			PINMUX_PIN(PIN_PD24, 0, 0)
--#define PIN_PD24__PDMC0_DS1		PINMUX_PIN(PIN_PD24, 1, 2)
--#define PIN_PD24__PWMFI0		PINMUX_PIN(PIN_PD24, 3, 4)
--#define PIN_PD24__RK1			PINMUX_PIN(PIN_PD24, 4, 2)
--#define PIN_PD24__ISC_D0		PINMUX_PIN(PIN_PD24, 5, 2)
--#define PIN_PD24__G1_RXDV		PINMUX_PIN(PIN_PD24, 7, 1)
--#define PIN_PD25			121
--#define PIN_PD25__GPIO			PINMUX_PIN(PIN_PD25, 0, 0)
--#define PIN_PD25__PDMC1_CLK		PINMUX_PIN(PIN_PD25, 1, 2)
--#define PIN_PD25__FLEXCOM5_IO0		PINMUX_PIN(PIN_PD25, 2, 2)
--#define PIN_PD25__PWMFI1		PINMUX_PIN(PIN_PD25, 3, 4)
--#define PIN_PD25__TD1			PINMUX_PIN(PIN_PD25, 4, 2)
--#define PIN_PD25__ISC_D1		PINMUX_PIN(PIN_PD25, 5, 2)
--#define PIN_PD25__G1_RX0		PINMUX_PIN(PIN_PD25, 7, 1)
--#define PIN_PD26			122
--#define PIN_PD26__GPIO			PINMUX_PIN(PIN_PD26, 0, 0)
--#define PIN_PD26__PDMC1_DS0		PINMUX_PIN(PIN_PD26, 1, 2)
--#define PIN_PD26__FLEXCOM5_IO1		PINMUX_PIN(PIN_PD26, 2, 2)
--#define PIN_PD26__ADTRG			PINMUX_PIN(PIN_PD26, 3, 3)
--#define PIN_PD26__TF1			PINMUX_PIN(PIN_PD26, 4, 2)
--#define PIN_PD26__ISC_D2		PINMUX_PIN(PIN_PD26, 5, 2)
--#define PIN_PD26__G1_RX1		PINMUX_PIN(PIN_PD26, 7, 1)
--#define PIN_PD27			123
--#define PIN_PD27__GPIO			PINMUX_PIN(PIN_PD27, 0, 0)
--#define PIN_PD27__PDMC1_DS1		PINMUX_PIN(PIN_PD27, 1, 2)
--#define PIN_PD27__FLEXCOM5_IO2		PINMUX_PIN(PIN_PD27, 2, 2)
--#define PIN_PD27__TIOA0			PINMUX_PIN(PIN_PD27, 3, 3)
--#define PIN_PD27__TK1			PINMUX_PIN(PIN_PD27, 4, 2)
--#define PIN_PD27__ISC_D3		PINMUX_PIN(PIN_PD27, 5, 2)
--#define PIN_PD27__G1_RXER		PINMUX_PIN(PIN_PD27, 7, 1)
--#define PIN_PD28			124
--#define PIN_PD28__GPIO			PINMUX_PIN(PIN_PD28, 0, 0)
--#define PIN_PD28__RD0			PINMUX_PIN(PIN_PD28, 1, 2)
--#define PIN_PD28__FLEXCOM5_IO3		PINMUX_PIN(PIN_PD28, 2, 2)
--#define PIN_PD28__TIOB0			PINMUX_PIN(PIN_PD28, 3, 3)
--#define PIN_PD28__I2SMCC1_CK		PINMUX_PIN(PIN_PD28, 4, 2)
--#define PIN_PD28__ISC_D4		PINMUX_PIN(PIN_PD28, 5, 2)
--#define PIN_PD28__PWML3			PINMUX_PIN(PIN_PD28, 6, 5)
--#define PIN_PD28__G1_MDC		PINMUX_PIN(PIN_PD28, 7, 1)
--#define PIN_PD29			125
--#define PIN_PD29__GPIO			PINMUX_PIN(PIN_PD29, 0, 0)
--#define PIN_PD29__RF0			PINMUX_PIN(PIN_PD29, 1, 2)
--#define PIN_PD29__FLEXCOM5_IO4		PINMUX_PIN(PIN_PD29, 2, 2)
--#define PIN_PD29__TCLK0			PINMUX_PIN(PIN_PD29, 3, 3)
--#define PIN_PD29__I2SMCC1_WS		PINMUX_PIN(PIN_PD29, 4, 2)
--#define PIN_PD29__ISC_D5		PINMUX_PIN(PIN_PD29, 5, 2)
--#define PIN_PD29__PWMH3			PINMUX_PIN(PIN_PD29, 6, 5)
--#define PIN_PD29__G1_MDIO		PINMUX_PIN(PIN_PD29, 7, 1)
--#define PIN_PD30			126
--#define PIN_PD30__GPIO			PINMUX_PIN(PIN_PD30, 0, 0)
--#define PIN_PD30__RK0			PINMUX_PIN(PIN_PD30, 1, 2)
--#define PIN_PD30__FLEXCOM6_IO0		PINMUX_PIN(PIN_PD30, 2, 2)
--#define PIN_PD30__TIOA1			PINMUX_PIN(PIN_PD30, 3, 3)
--#define PIN_PD30__I2SMCC1_MCK		PINMUX_PIN(PIN_PD30, 4, 2)
--#define PIN_PD30__ISC_D6		PINMUX_PIN(PIN_PD30, 5, 2)
--#define PIN_PD30__PWMEXTRG0		PINMUX_PIN(PIN_PD30, 6, 5)
--#define PIN_PD30__G1_TXCK		PINMUX_PIN(PIN_PD30, 7, 1)
--#define PIN_PD31			127
--#define PIN_PD31__GPIO			PINMUX_PIN(PIN_PD31, 0, 0)
--#define PIN_PD31__TD0			PINMUX_PIN(PIN_PD31, 1, 2)
--#define PIN_PD31__FLEXCOM6_IO1		PINMUX_PIN(PIN_PD31, 2, 2)
--#define PIN_PD31__TIOB1			PINMUX_PIN(PIN_PD31, 3, 3)
--#define PIN_PD31__I2SMCC1_DOUT0		PINMUX_PIN(PIN_PD31, 4, 2)
--#define PIN_PD31__ISC_D7		PINMUX_PIN(PIN_PD31, 5, 2)
--#define PIN_PD31__PWM_EXTRG1		PINMUX_PIN(PIN_PD31, 6, 5)
--#define PIN_PD31__G1_TX2		PINMUX_PIN(PIN_PD31, 7, 1)
--#define PIN_PE0				128
--#define PIN_PE0__GPIO			PINMUX_PIN(PIN_PE0, 0, 0)
--#define PIN_PE0__TF0			PINMUX_PIN(PIN_PE0, 1, 2)
--#define PIN_PE0__FLEXCOM6_IO2		PINMUX_PIN(PIN_PE0, 2, 2)
--#define PIN_PE0__TCLK1			PINMUX_PIN(PIN_PE0, 3, 3)
--#define PIN_PE0__I2SMCC1_DOUT1		PINMUX_PIN(PIN_PE0, 4, 2)
--#define PIN_PE0__ISC_HSYNC		PINMUX_PIN(PIN_PE0, 5, 2)
--#define PIN_PE0__PWMFI0			PINMUX_PIN(PIN_PE0, 6, 5)
--#define PIN_PE0__G1_TX3			PINMUX_PIN(PIN_PE0, 7, 1)
--#define PIN_PE1				129
--#define PIN_PE1__GPIO			PINMUX_PIN(PIN_PE1, 0, 0)
--#define PIN_PE1__TK0			PINMUX_PIN(PIN_PE1, 1, 2)
--#define PIN_PE1__FLEXCOM6_IO3		PINMUX_PIN(PIN_PE1, 2, 2)
--#define PIN_PE1__TIOA2			PINMUX_PIN(PIN_PE1, 3, 3)
--#define PIN_PE1__I2SMCC1_DOUT2		PINMUX_PIN(PIN_PE1, 4, 2)
--#define PIN_PE1__ISC_VSYNC		PINMUX_PIN(PIN_PE1, 5, 2)
--#define PIN_PE1__PWMFI1			PINMUX_PIN(PIN_PE1, 6, 5)
--#define PIN_PE1__G1_RX2			PINMUX_PIN(PIN_PE1, 7, 1)
--#define PIN_PE2				130
--#define PIN_PE2__GPIO			PINMUX_PIN(PIN_PE2, 0, 0)
--#define PIN_PE2__PWML0			PINMUX_PIN(PIN_PE2, 1, 5)
--#define PIN_PE2__FLEXCOM6_IO4		PINMUX_PIN(PIN_PE2, 2, 2)
--#define PIN_PE2__TIOB2			PINMUX_PIN(PIN_PE2, 3, 3)
--#define PIN_PE2__I2SMCC1_DOUT3		PINMUX_PIN(PIN_PE2, 4, 2)
--#define PIN_PE2__ISC_FIELD		PINMUX_PIN(PIN_PE2, 5, 2)
--#define PIN_PE2__G1_RX3			PINMUX_PIN(PIN_PE2, 7, 1)
--#define PIN_PE3				131
--#define PIN_PE3__GPIO			PINMUX_PIN(PIN_PE3, 0, 0)
--#define PIN_PE3__PWMH0			PINMUX_PIN(PIN_PE3, 1, 5)
--#define PIN_PE3__FLEXCOM0_IO0		PINMUX_PIN(PIN_PE3, 2, 4)
--#define PIN_PE3__TCLK2			PINMUX_PIN(PIN_PE3, 3, 3)
--#define PIN_PE3__I2SMCC1_DIN0		PINMUX_PIN(PIN_PE3, 4, 2)
--#define PIN_PE3__ISC_PCK		PINMUX_PIN(PIN_PE3, 5, 2)
--#define PIN_PE3__G1_RXCK		PINMUX_PIN(PIN_PE3, 7, 1)
--#define PIN_PE4				132
--#define PIN_PE4__GPIO			PINMUX_PIN(PIN_PE4, 0, 0)
--#define PIN_PE4__PWML1			PINMUX_PIN(PIN_PE4, 1, 5)
--#define PIN_PE4__FLEXCOM0_IO1		PINMUX_PIN(PIN_PE4, 2, 4)
--#define PIN_PE4__TIOA3			PINMUX_PIN(PIN_PE4, 3, 3)
--#define PIN_PE4__I2SMCC1_DIN1		PINMUX_PIN(PIN_PE4, 4, 2)
--#define PIN_PE4__ISC_D8			PINMUX_PIN(PIN_PE4, 5, 2)
--#define PIN_PE4__G1_TXER		PINMUX_PIN(PIN_PE4, 7, 1)
--#define PIN_PE5				133
--#define PIN_PE5__GPIO			PINMUX_PIN(PIN_PE5, 0, 0)
--#define PIN_PE5__PWMH1			PINMUX_PIN(PIN_PE5, 1, 5)
--#define PIN_PE5__FLEXCOM0_IO2		PINMUX_PIN(PIN_PE5, 2, 4)
--#define PIN_PE5__TIOB3			PINMUX_PIN(PIN_PE5, 3, 3)
--#define PIN_PE5__I2SMCC1_DIN2		PINMUX_PIN(PIN_PE5, 4, 2)
--#define PIN_PE5__ISC_D9			PINMUX_PIN(PIN_PE5, 5, 2)
--#define PIN_PE5__G1_COL			PINMUX_PIN(PIN_PE5, 7, 1)
--#define PIN_PE6				134
--#define PIN_PE6__GPIO			PINMUX_PIN(PIN_PE6, 0, 0)
--#define PIN_PE6__PWML2			PINMUX_PIN(PIN_PE6, 1, 5)
--#define PIN_PE6__FLEXCOM0_IO3		PINMUX_PIN(PIN_PE6, 2, 4)
--#define PIN_PE6__TCLK3			PINMUX_PIN(PIN_PE6, 3, 3)
--#define PIN_PE6__I2SMCC1_DIN3		PINMUX_PIN(PIN_PE6, 4, 2)
--#define PIN_PE6__ISC_D10		PINMUX_PIN(PIN_PE6, 5, 2)
--#define PIN_PE6__G1_CRS			PINMUX_PIN(PIN_PE6, 7, 1)
--#define PIN_PE7				135
--#define PIN_PE7__GPIO			PINMUX_PIN(PIN_PE7, 0, 0)
--#define PIN_PE7__PWMH2			PINMUX_PIN(PIN_PE7, 1, 5)
--#define PIN_PE7__FLEXCOM0_IO4		PINMUX_PIN(PIN_PE7, 2, 4)
--#define PIN_PE7__TIOA4			PINMUX_PIN(PIN_PE7, 3, 3)
--#define PIN_PE7__ISC_D11		PINMUX_PIN(PIN_PE7, 5, 2)
--#define PIN_PE7__G1_TSUCOMP		PINMUX_PIN(PIN_PE7, 7, 1)
+-/*
+- * The pin function ID is a tuple of
+- * <mux_reg conf_reg input_reg mux_mode input_val>
+- */
+-
+-#define MX8MM_IOMUXC_GPIO1_IO00_GPIO1_IO0                                   0x028 0x290 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO00_CCMSRCGPCMIX_ENET_PHY_REF_CLK_ROOT          0x028 0x290 0x4C0 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO00_ANAMIX_REF_CLK_32K                          0x028 0x290 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO00_CCMSRCGPCMIX_EXT_CLK1                       0x028 0x290 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO00_SJC_FAIL                                    0x028 0x290 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO01_GPIO1_IO1                                   0x02C 0x294 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO01_PWM1_OUT                                    0x02C 0x294 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO01_ANAMIX_REF_CLK_24M                          0x02C 0x294 0x4BC 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO01_CCMSRCGPCMIX_EXT_CLK2                       0x02C 0x294 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO01_SJC_ACTIVE                                  0x02C 0x294 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO02_GPIO1_IO2                                   0x030 0x298 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO02_WDOG1_WDOG_B                                0x030 0x298 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO02_WDOG1_WDOG_ANY                              0x030 0x298 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO02_SJC_DE_B                                    0x030 0x298 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO03_GPIO1_IO3                                   0x034 0x29C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO03_USDHC1_VSELECT                              0x034 0x29C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO03_SDMA1_EXT_EVENT0                            0x034 0x29C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO03_ANAMIX_XTAL_OK                              0x034 0x29C 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO03_SJC_DONE                                    0x034 0x29C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO04_GPIO1_IO4                                   0x038 0x2A0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT                              0x038 0x2A0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO04_SDMA1_EXT_EVENT1                            0x038 0x2A0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO04_ANAMIX_XTAL_OK_LV                           0x038 0x2A0 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO04_USDHC1_TEST_TRIG                            0x038 0x2A0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO05_GPIO1_IO5                                   0x03C 0x2A4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO05_M4_NMI                                      0x03C 0x2A4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO05_CCMSRCGPCMIX_PMIC_READY                     0x03C 0x2A4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO05_CCMSRCGPCMIX_INT_BOOT                       0x03C 0x2A4 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO05_USDHC2_TEST_TRIG                            0x03C 0x2A4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6                                   0x040 0x2A8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO06_ENET1_MDC                                   0x040 0x2A8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO06_USDHC1_CD_B                                 0x040 0x2A8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO06_CCMSRCGPCMIX_EXT_CLK3                       0x040 0x2A8 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO06_ECSPI1_TEST_TRIG                            0x040 0x2A8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO07_GPIO1_IO7                                   0x044 0x2AC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO07_ENET1_MDIO                                  0x044 0x2AC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO07_USDHC1_WP                                   0x044 0x2AC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO07_CCMSRCGPCMIX_EXT_CLK4                       0x044 0x2AC 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO07_ECSPI2_TEST_TRIG                            0x044 0x2AC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO08_GPIO1_IO8                                   0x048 0x2B0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO08_ENET1_1588_EVENT0_IN                        0x048 0x2B0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO08_USDHC2_RESET_B                              0x048 0x2B0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO08_CCMSRCGPCMIX_WAIT                           0x048 0x2B0 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO08_QSPI_TEST_TRIG                              0x048 0x2B0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO09_GPIO1_IO9                                   0x04C 0x2B4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO09_ENET1_1588_EVENT0_OUT                       0x04C 0x2B4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO09_SDMA2_EXT_EVENT0                            0x04C 0x2B4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO09_CCMSRCGPCMIX_STOP                           0x04C 0x2B4 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO09_RAWNAND_TEST_TRIG                           0x04C 0x2B4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO10_GPIO1_IO10                                  0x050 0x2B8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO10_USB1_OTG_ID                                 0x050 0x2B8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO10_OCOTP_CTRL_WRAPPER_FUSE_LATCHED             0x050 0x2B8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO11_GPIO1_IO11                                  0x054 0x2BC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO11_USB2_OTG_ID                                 0x054 0x2BC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO11_CCMSRCGPCMIX_PMIC_READY                     0x054 0x2BC 0x4BC 0x5 0x1
+-#define MX8MM_IOMUXC_GPIO1_IO11_CCMSRCGPCMIX_OUT0                           0x054 0x2BC 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO11_CAAM_WRAPPER_RNG_OSC_OBS                    0x054 0x2BC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO12_GPIO1_IO12                                  0x058 0x2C0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO12_USB1_OTG_PWR                                0x058 0x2C0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO12_SDMA2_EXT_EVENT1                            0x058 0x2C0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO12_CCMSRCGPCMIX_OUT1                           0x058 0x2C0 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO12_CSU_CSU_ALARM_AUT0                          0x058 0x2C0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO13_GPIO1_IO13                                  0x05C 0x2C4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO13_USB1_OTG_OC                                 0x05C 0x2C4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO13_PWM2_OUT                                    0x05C 0x2C4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO13_CCMSRCGPCMIX_OUT2                           0x05C 0x2C4 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO13_CSU_CSU_ALARM_AUT1                          0x05C 0x2C4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO14_GPIO1_IO14                                  0x060 0x2C8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO14_USB2_OTG_PWR                                0x060 0x2C8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO14_PWM3_OUT                                    0x060 0x2C8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO14_CCMSRCGPCMIX_CLKO1                          0x060 0x2C8 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO14_CSU_CSU_ALARM_AUT2                          0x060 0x2C8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO15_GPIO1_IO15                                  0x064 0x2CC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO15_USB2_OTG_OC                                 0x064 0x2CC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO15_PWM4_OUT                                    0x064 0x2CC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO15_CCMSRCGPCMIX_CLKO2                          0x064 0x2CC 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_GPIO1_IO15_CSU_CSU_INT_DEB                             0x064 0x2CC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ENET_MDC_ENET1_MDC                                     0x068 0x2D0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_MDC_GPIO1_IO16                                    0x068 0x2D0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_MDIO_ENET1_MDIO                                   0x06C 0x2D4 0x4C0 0x0 0x1
+-#define MX8MM_IOMUXC_ENET_MDIO_GPIO1_IO17                                   0x06C 0x2D4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_TD3_ENET1_RGMII_TD3                               0x070 0x2D8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_TD3_GPIO1_IO18                                    0x070 0x2D8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_TD2_ENET1_RGMII_TD2                               0x074 0x2DC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_TD2_ENET1_TX_CLK                                  0x074 0x2DC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ENET_TD2_GPIO1_IO19                                    0x074 0x2DC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_TD1_ENET1_RGMII_TD1                               0x078 0x2E0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_TD1_GPIO1_IO20                                    0x078 0x2E0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_TD0_ENET1_RGMII_TD0                               0x07C 0x2E4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_TD0_GPIO1_IO21                                    0x07C 0x2E4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_TX_CTL_ENET1_RGMII_TX_CTL                         0x080 0x2E8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_TX_CTL_GPIO1_IO22                                 0x080 0x2E8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_TXC_ENET1_RGMII_TXC                               0x084 0x2EC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_TXC_ENET1_TX_ER                                   0x084 0x2EC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ENET_TXC_GPIO1_IO23                                    0x084 0x2EC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_RX_CTL_ENET1_RGMII_RX_CTL                         0x088 0x2F0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_RX_CTL_GPIO1_IO24                                 0x088 0x2F0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_RXC_ENET1_RGMII_RXC                               0x08C 0x2F4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_RXC_ENET1_RX_ER                                   0x08C 0x2F4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ENET_RXC_GPIO1_IO25                                    0x08C 0x2F4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_RD0_ENET1_RGMII_RD0                               0x090 0x2F8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_RD0_GPIO1_IO26                                    0x090 0x2F8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_RD1_ENET1_RGMII_RD1                               0x094 0x2FC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_RD1_GPIO1_IO27                                    0x094 0x2FC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_RD2_ENET1_RGMII_RD2                               0x098 0x300 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_RD2_GPIO1_IO28                                    0x098 0x300 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ENET_RD3_ENET1_RGMII_RD3                               0x09C 0x304 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ENET_RD3_GPIO1_IO29                                    0x09C 0x304 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_CLK_USDHC1_CLK                                     0x0A0 0x308 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_CLK_GPIO2_IO0                                      0x0A0 0x308 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_CMD_USDHC1_CMD                                     0x0A4 0x30C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_CMD_GPIO2_IO1                                      0x0A4 0x30C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA0_USDHC1_DATA0                                 0x0A8 0x310 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA0_GPIO2_IO2                                    0x0A8 0x310 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA1_USDHC1_DATA1                                 0x0AC 0x314 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA1_GPIO2_IO3                                    0x0AC 0x314 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA2_USDHC1_DATA2                                 0x0B0 0x318 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA2_GPIO2_IO4                                    0x0B0 0x318 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA3_USDHC1_DATA3                                 0x0B4 0x31C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA3_GPIO2_IO5                                    0x0B4 0x31C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA4_USDHC1_DATA4                                 0x0B8 0x320 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA4_GPIO2_IO6                                    0x0B8 0x320 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA5_USDHC1_DATA5                                 0x0BC 0x324 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA5_GPIO2_IO7                                    0x0BC 0x324 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA6_USDHC1_DATA6                                 0x0C0 0x328 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA6_GPIO2_IO8                                    0x0C0 0x328 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_DATA7_USDHC1_DATA7                                 0x0C4 0x32C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_DATA7_GPIO2_IO9                                    0x0C4 0x32C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_RESET_B_USDHC1_RESET_B                             0x0C8 0x330 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_RESET_B_GPIO2_IO10                                 0x0C8 0x330 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD1_STROBE_USDHC1_STROBE                               0x0CC 0x334 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD1_STROBE_GPIO2_IO11                                  0x0CC 0x334 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_CD_B_USDHC2_CD_B                                   0x0D0 0x338 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_CD_B_GPIO2_IO12                                    0x0D0 0x338 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_CLK_USDHC2_CLK                                     0x0D4 0x33C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_CLK_GPIO2_IO13                                     0x0D4 0x33C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_CLK_CCMSRCGPCMIX_OBSERVE0                          0x0D4 0x33C 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_CLK_OBSERVE_MUX_OUT0                               0x0D4 0x33C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SD2_CMD_USDHC2_CMD                                     0x0D8 0x340 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_CMD_GPIO2_IO14                                     0x0D8 0x340 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_CMD_CCMSRCGPCMIX_OBSERVE1                          0x0D8 0x340 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_CMD_OBSERVE_MUX_OUT1                               0x0D8 0x340 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SD2_DATA0_USDHC2_DATA0                                 0x0DC 0x344 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_DATA0_GPIO2_IO15                                   0x0DC 0x344 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_DATA0_CCMSRCGPCMIX_OBSERVE2                        0x0DC 0x344 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_DATA0_OBSERVE_MUX_OUT2                             0x0DC 0x344 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SD2_DATA1_USDHC2_DATA1                                 0x0E0 0x348 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_DATA1_GPIO2_IO16                                   0x0E0 0x348 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_DATA1_CCMSRCGPCMIX_WAIT                            0x0E0 0x348 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_DATA1_OBSERVE_MUX_OUT3                             0x0E0 0x348 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SD2_DATA2_USDHC2_DATA2                                 0x0E4 0x34C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_DATA2_GPIO2_IO17                                   0x0E4 0x34C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_DATA2_CCMSRCGPCMIX_STOP                            0x0E4 0x34C 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_DATA2_OBSERVE_MUX_OUT4                             0x0E4 0x34C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3                                 0x0E8 0x350 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_DATA3_GPIO2_IO18                                   0x0E8 0x350 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_DATA3_CCMSRCGPCMIX_EARLY_RESET                     0x0E8 0x350 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_RESET_B_USDHC2_RESET_B                             0x0EC 0x354 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_RESET_B_GPIO2_IO19                                 0x0EC 0x354 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_RESET_B_CCMSRCGPCMIX_SYSTEM_RESET                  0x0EC 0x354 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SD2_WP_USDHC2_WP                                       0x0F0 0x358 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SD2_WP_GPIO2_IO20                                      0x0F0 0x358 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SD2_WP_SIM_M_HMASTLOCK                                 0x0F0 0x358 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_ALE_RAWNAND_ALE                                   0x0F4 0x35C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_ALE_QSPI_A_SCLK                                   0x0F4 0x35C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_ALE_GPIO3_IO0                                     0x0F4 0x35C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_ALE_SIM_M_HPROT0                                  0x0F4 0x35C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_CE0_B_RAWNAND_CE0_B                               0x0F8 0x360 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_CE0_B_QSPI_A_SS0_B                                0x0F8 0x360 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_CE0_B_GPIO3_IO1                                   0x0F8 0x360 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_CE0_B_SIM_M_HPROT1                                0x0F8 0x360 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_CE1_B_RAWNAND_CE1_B                               0x0FC 0x364 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_CE1_B_QSPI_A_SS1_B                                0x0FC 0x364 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_CE1_B_USDHC3_STROBE                               0x0FC 0x364 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_CE1_B_GPIO3_IO2                                   0x0FC 0x364 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_CE1_B_SIM_M_HPROT2                                0x0FC 0x364 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_CE2_B_RAWNAND_CE2_B                               0x100 0x368 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_CE2_B_QSPI_B_SS0_B                                0x100 0x368 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_CE2_B_USDHC3_DATA5                                0x100 0x368 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_CE2_B_GPIO3_IO3                                   0x100 0x368 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_CE2_B_SIM_M_HPROT3                                0x100 0x368 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_CE3_B_RAWNAND_CE3_B                               0x104 0x36C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_CE3_B_QSPI_B_SS1_B                                0x104 0x36C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_CE3_B_USDHC3_DATA6                                0x104 0x36C 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_CE3_B_GPIO3_IO4                                   0x104 0x36C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_CE3_B_SIM_M_HADDR0                                0x104 0x36C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_CLE_RAWNAND_CLE                                   0x108 0x370 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_CLE_QSPI_B_SCLK                                   0x108 0x370 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_CLE_USDHC3_DATA7                                  0x108 0x370 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_CLE_GPIO3_IO5                                     0x108 0x370 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_CLE_SIM_M_HADDR1                                  0x108 0x370 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA00_RAWNAND_DATA00                             0x10C 0x374 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA00_QSPI_A_DATA0                               0x10C 0x374 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA00_GPIO3_IO6                                  0x10C 0x374 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA00_SIM_M_HADDR2                               0x10C 0x374 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA01_RAWNAND_DATA01                             0x110 0x378 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA01_QSPI_A_DATA1                               0x110 0x378 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA01_GPIO3_IO7                                  0x110 0x378 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA01_SIM_M_HADDR3                               0x110 0x378 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA02_RAWNAND_DATA02                             0x114 0x37C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA02_QSPI_A_DATA2                               0x114 0x37C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA02_GPIO3_IO8                                  0x114 0x37C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA02_SIM_M_HADDR4                               0x114 0x37C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA03_RAWNAND_DATA03                             0x118 0x380 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA03_QSPI_A_DATA3                               0x118 0x380 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA03_GPIO3_IO9                                  0x118 0x380 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA03_SIM_M_HADDR5                               0x118 0x380 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA04_RAWNAND_DATA04                             0x11C 0x384 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA04_QSPI_B_DATA0                               0x11C 0x384 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0                               0x11C 0x384 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_DATA04_GPIO3_IO10                                 0x11C 0x384 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA04_SIM_M_HADDR6                               0x11C 0x384 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA05_RAWNAND_DATA05                             0x120 0x388 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA05_QSPI_B_DATA1                               0x120 0x388 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1                               0x120 0x388 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_DATA05_GPIO3_IO11                                 0x120 0x388 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA05_SIM_M_HADDR7                               0x120 0x388 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA06_RAWNAND_DATA06                             0x124 0x38C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA06_QSPI_B_DATA2                               0x124 0x38C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2	                            0x124 0x38C 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_DATA06_GPIO3_IO12                                 0x124 0x38C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA06_SIM_M_HADDR8                               0x124 0x38C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DATA07_RAWNAND_DATA07                             0x128 0x390 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DATA07_QSPI_B_DATA3                               0x128 0x390 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3                               0x128 0x390 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_DATA07_GPIO3_IO13                                 0x128 0x390 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DATA07_SIM_M_HADDR9                               0x128 0x390 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_DQS_RAWNAND_DQS                                   0x12C 0x394 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_DQS_QSPI_A_DQS                                    0x12C 0x394 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_DQS_GPIO3_IO14                                    0x12C 0x394 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_DQS_SIM_M_HADDR10                                 0x12C 0x394 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_RE_B_RAWNAND_RE_B                                 0x130 0x398 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_RE_B_QSPI_B_DQS                                   0x130 0x398 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_NAND_RE_B_USDHC3_DATA4                                 0x130 0x398 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_RE_B_GPIO3_IO15                                   0x130 0x398 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_RE_B_SIM_M_HADDR11                                0x130 0x398 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_READY_B_RAWNAND_READY_B                           0x134 0x39C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_READY_B_SD3_RESET_B                               0x134 0x39C 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_READY_B_GPIO3_IO16                                0x134 0x39C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_READY_B_SIM_M_HADDR12                             0x134 0x39C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_WE_B_RAWNAND_WE_B                                 0x138 0x3A0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK                                   0x138 0x3A0 0x000 0x12 0x0
+-#define MX8MM_IOMUXC_NAND_WE_B_GPIO3_IO17                                   0x138 0x3A0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_WE_B_SIM_M_HADDR13                                0x138 0x3A0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_NAND_WP_B_RAWNAND_WP_B                                 0x13C 0x3A4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD                                   0x13C 0x3A4 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_NAND_WP_B_GPIO3_IO18                                   0x13C 0x3A4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_NAND_WP_B_SIM_M_HADDR14                                0x13C 0x3A4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI5_RXFS_SAI5_RX_SYNC                                 0x140 0x3A8 0x4E4 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_RXFS_SAI1_TX_DATA0                                0x140 0x3A8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_RXFS_GPIO3_IO19                                   0x140 0x3A8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_RXC_SAI5_RX_BCLK                                  0x144 0x3AC 0x4D0 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_RXC_SAI1_TX_DATA1                                 0x144 0x3AC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_RXC_PDM_CLK                                       0x144 0x3AC 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI5_RXC_GPIO3_IO20                                    0x144 0x3AC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD0_SAI5_RX_DATA0                                0x148 0x3B0 0x4D4 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD0_SAI1_TX_DATA2                                0x148 0x3B0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD0_PDM_DATA0                                    0x148 0x3B0 0x534 0x4 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD0_GPIO3_IO21                                   0x148 0x3B0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD1_SAI5_RX_DATA1                                0x14C 0x3B4 0x4D8 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD1_SAI1_TX_DATA3                                0x14C 0x3B4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD1_SAI1_TX_SYNC                                 0x14C 0x3B4 0x4CC 0x2 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD1_SAI5_TX_SYNC                                 0x14C 0x3B4 0x4EC 0x3 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD1_PDM_DATA1                                    0x14C 0x3B4 0x538 0x4 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD1_GPIO3_IO22                                   0x14C 0x3B4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD2_SAI5_RX_DATA2                                0x150 0x3B8 0x4DC 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD2_SAI1_TX_DATA4                                0x150 0x3B8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD2_SAI1_TX_SYNC                                 0x150 0x3B8 0x4CC 0x2 0x1
+-#define MX8MM_IOMUXC_SAI5_RXD2_SAI5_TX_BCLK                                 0x150 0x3B8 0x4E8 0x3 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD2_PDM_DATA2                                    0x150 0x3B8 0x53C 0x4 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD2_GPIO3_IO23                                   0x150 0x3B8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD3_SAI5_RX_DATA3                                0x154 0x3BC 0x4E0 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD3_SAI1_TX_DATA5                                0x154 0x3BC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD3_SAI1_TX_SYNC                                 0x154 0x3BC 0x4CC 0x2 0x2
+-#define MX8MM_IOMUXC_SAI5_RXD3_SAI5_TX_DATA0                                0x154 0x3BC 0x000 0x3 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD3_PDM_DATA3                                    0x154 0x3BC 0x540 0x4 0x0
+-#define MX8MM_IOMUXC_SAI5_RXD3_GPIO3_IO24                                   0x154 0x3BC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_MCLK_SAI5_MCLK                                    0x158 0x3C0 0x52C 0x0 0x0
+-#define MX8MM_IOMUXC_SAI5_MCLK_SAI1_TX_BCLK                                 0x158 0x3C0 0x4C8 0x1 0x0
+-#define MX8MM_IOMUXC_SAI5_MCLK_SAI4_MCLK                                    0x158 0x3C0 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_SAI5_MCLK_GPIO3_IO25                                   0x158 0x3C0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI5_MCLK_CCMSRCGPCMIX_TESTER_ACK                      0x158 0x3C0 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXFS_SAI1_RX_SYNC                                 0x15C 0x3C4 0x4C4 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXFS_SAI5_RX_SYNC                                 0x15C 0x3C4 0x4E4 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_RXFS_CORESIGHT_TRACE_CLK                          0x15C 0x3C4 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXFS_GPIO4_IO0                                    0x15C 0x3C4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXFS_SIM_M_HADDR15                                0x15C 0x3C4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXC_SAI1_RX_BCLK                                  0x160 0x3C8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXC_SAI5_RX_BCLK                                  0x160 0x3C8 0x4D0 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_RXC_CORESIGHT_TRACE_CTL                           0x160 0x3C8 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXC_GPIO4_IO1                                     0x160 0x3C8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXC_SIM_M_HADDR16                                 0x160 0x3C8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD0_SAI1_RX_DATA0                                0x164 0x3CC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD0_SAI5_RX_DATA0                                0x164 0x3CC 0x4D4 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD0_PDM_DATA0                                    0x164 0x3CC 0x534 0x3 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD0_CORESIGHT_TRACE0                             0x164 0x3CC 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD0_GPIO4_IO2                                    0x164 0x3CC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD0_CCMSRCGPCMIX_BOOT_CFG0                       0x164 0x3CC 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD0_SIM_M_HADDR17                                0x164 0x3CC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD1_SAI1_RX_DATA1                                0x168 0x3D0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD1_SAI5_RX_DATA1                                0x168 0x3D0 0x4D8 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD1_PDM_DATA1                                    0x168 0x3D0 0x538 0x3 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD1_CORESIGHT_TRACE1                             0x168 0x3D0 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD1_GPIO4_IO3                                    0x168 0x3D0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD1_CCMSRCGPCMIX_BOOT_CFG1                       0x168 0x3D0 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD1_SIM_M_HADDR18                                0x168 0x3D0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD2_SAI1_RX_DATA2                                0x16C 0x3D4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD2_SAI5_RX_DATA2                                0x16C 0x3D4 0x4DC 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD2_PDM_DATA2                                    0x16C 0x3D4 0x53C 0x3 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD2_CORESIGHT_TRACE2                             0x16C 0x3D4 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD2_GPIO4_IO4                                    0x16C 0x3D4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD2_CCMSRCGPCMIX_BOOT_CFG2                       0x16C 0x3D4 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD2_SIM_M_HADDR19                                0x16C 0x3D4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD3_SAI1_RX_DATA3                                0x170 0x3D8 0x4E0 0x0 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD3_SAI5_RX_DATA3                                0x170 0x3D8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD3_PDM_DATA3                                    0x170 0x3D8 0x540 0x3 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD3_CORESIGHT_TRACE3                             0x170 0x3D8 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD3_GPIO4_IO5                                    0x170 0x3D8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD3_CCMSRCGPCMIX_BOOT_CFG3                       0x170 0x3D8 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD3_SIM_M_HADDR20                                0x170 0x3D8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_SAI1_RX_DATA4                                0x174 0x3DC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_SAI6_TX_BCLK                                 0x174 0x3DC 0x51C 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_SAI6_RX_BCLK                                 0x174 0x3DC 0x510 0x2 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_CORESIGHT_TRACE4                             0x174 0x3DC 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_GPIO4_IO6                                    0x174 0x3DC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_CCMSRCGPCMIX_BOOT_CFG4                       0x174 0x3DC 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD4_SIM_M_HADDR21                                0x174 0x3DC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_SAI1_RX_DATA5                                0x178 0x3E0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_SAI6_TX_DATA0                                0x178 0x3E0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_SAI6_RX_DATA0                                0x178 0x3E0 0x514 0x2 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_SAI1_RX_SYNC                                 0x178 0x3E0 0x4C4 0x3 0x1
+-#define MX8MM_IOMUXC_SAI1_RXD5_CORESIGHT_TRACE5                             0x178 0x3E0 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_GPIO4_IO7                                    0x178 0x3E0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_CCMSRCGPCMIX_BOOT_CFG5                       0x178 0x3E0 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD5_SIM_M_HADDR22                                0x178 0x3E0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_SAI1_RX_DATA6                                0x17C 0x3E4 0x520 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_SAI6_TX_SYNC                                 0x17C 0x3E4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_SAI6_RX_SYNC                                 0x17C 0x3E4 0x518 0x2 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_CORESIGHT_TRACE6                             0x17C 0x3E4 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_GPIO4_IO8                                    0x17C 0x3E4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_CCMSRCGPCMIX_BOOT_CFG6                       0x17C 0x3E4 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD6_SIM_M_HADDR23                                0x17C 0x3E4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_SAI1_RX_DATA7                                0x180 0x3E8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_SAI6_MCLK                                    0x180 0x3E8 0x530 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_SAI1_TX_SYNC                                 0x180 0x3E8 0x4CC 0x2 0x4
+-#define MX8MM_IOMUXC_SAI1_RXD7_SAI1_TX_DATA4                                0x180 0x3E8 0x000 0x3 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_CORESIGHT_TRACE7                             0x180 0x3E8 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_GPIO4_IO9                                    0x180 0x3E8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_CCMSRCGPCMIX_BOOT_CFG7                       0x180 0x3E8 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_RXD7_SIM_M_HADDR24                                0x180 0x3E8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXFS_SAI1_TX_SYNC                                 0x184 0x3EC 0x4CC 0x0 0x3
+-#define MX8MM_IOMUXC_SAI1_TXFS_SAI5_TX_SYNC                                 0x184 0x3EC 0x4EC 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_TXFS_CORESIGHT_EVENTO                             0x184 0x3EC 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10                                   0x184 0x3EC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXFS_SIM_M_HADDR25                                0x184 0x3EC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXC_SAI1_TX_BCLK                                  0x188 0x3F0 0x4C8 0x0 0x1
+-#define MX8MM_IOMUXC_SAI1_TXC_SAI5_TX_BCLK                                  0x188 0x3F0 0x4E8 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_TXC_CORESIGHT_EVENTI                              0x188 0x3F0 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXC_GPIO4_IO11                                    0x188 0x3F0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXC_SIM_M_HADDR26                                 0x188 0x3F0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD0_SAI1_TX_DATA0                                0x18C 0x3F4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD0_SAI5_TX_DATA0                                0x18C 0x3F4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD0_CORESIGHT_TRACE8                             0x18C 0x3F4 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD0_GPIO4_IO12                                   0x18C 0x3F4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD0_CCMSRCGPCMIX_BOOT_CFG8                       0x18C 0x3F4 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD0_SIM_M_HADDR27                                0x18C 0x3F4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD1_SAI1_TX_DATA1                                0x190 0x3F8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD1_SAI5_TX_DATA1                                0x190 0x3F8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD1_CORESIGHT_TRACE9                             0x190 0x3F8 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD1_GPIO4_IO13                                   0x190 0x3F8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD1_CCMSRCGPCMIX_BOOT_CFG9                       0x190 0x3F8 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD1_SIM_M_HADDR28                                0x190 0x3F8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD2_SAI1_TX_DATA2                                0x194 0x3FC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD2_SAI5_TX_DATA2                                0x194 0x3FC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD2_CORESIGHT_TRACE10                            0x194 0x3FC 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD2_GPIO4_IO14                                   0x194 0x3FC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD2_CCMSRCGPCMIX_BOOT_CFG10                      0x194 0x3FC 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD2_SIM_M_HADDR29                                0x194 0x3FC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD3_SAI1_TX_DATA3                                0x198 0x400 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD3_SAI5_TX_DATA3                                0x198 0x400 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD3_CORESIGHT_TRACE11                            0x198 0x400 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD3_GPIO4_IO15                                   0x198 0x400 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD3_CCMSRCGPCMIX_BOOT_CFG11                      0x198 0x400 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD3_SIM_M_HADDR30                                0x198 0x400 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD4_SAI1_TX_DATA4                                0x19C 0x404 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD4_SAI6_RX_BCLK                                 0x19C 0x404 0x510 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_TXD4_SAI6_TX_BCLK                                 0x19C 0x404 0x51C 0x2 0x1
+-#define MX8MM_IOMUXC_SAI1_TXD4_CORESIGHT_TRACE12                            0x19C 0x404 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD4_GPIO4_IO16                                   0x19C 0x404 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD4_CCMSRCGPCMIX_BOOT_CFG12                      0x19C 0x404 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD4_SIM_M_HADDR31                                0x19C 0x404 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD5_SAI1_TX_DATA5                                0x1A0 0x408 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD5_SAI6_RX_DATA0                                0x1A0 0x408 0x514 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_TXD5_SAI6_TX_DATA0                                0x1A0 0x408 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD5_CORESIGHT_TRACE13                            0x1A0 0x408 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD5_GPIO4_IO17                                   0x1A0 0x408 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD5_CCMSRCGPCMIX_BOOT_CFG13                      0x1A0 0x408 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD5_SIM_M_HBURST0                                0x1A0 0x408 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD6_SAI1_TX_DATA6                                0x1A4 0x40C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD6_SAI6_RX_SYNC                                 0x1A4 0x40C 0x518 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_TXD6_SAI6_TX_SYNC                                 0x1A4 0x40C 0x520 0x2 0x1
+-#define MX8MM_IOMUXC_SAI1_TXD6_CORESIGHT_TRACE14                            0x1A4 0x40C 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD6_GPIO4_IO18                                   0x1A4 0x40C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD6_CCMSRCGPCMIX_BOOT_CFG14                      0x1A4 0x40C 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD6_SIM_M_HBURST1                                0x1A4 0x40C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD7_SAI1_TX_DATA7                                0x1A8 0x410 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD7_SAI6_MCLK                                    0x1A8 0x410 0x530 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_TXD7_PDM_CLK                                      0x1A8 0x410 0x000 0x3 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD7_CORESIGHT_TRACE15                            0x1A8 0x410 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD7_GPIO4_IO19                                   0x1A8 0x410 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD7_CCMSRCGPCMIX_BOOT_CFG15                      0x1A8 0x410 0x000 0x6 0x0
+-#define MX8MM_IOMUXC_SAI1_TXD7_SIM_M_HBURST2                                0x1A8 0x410 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI1_MCLK_SAI1_MCLK                                    0x1AC 0x414 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI1_MCLK_SAI5_MCLK                                    0x1AC 0x414 0x52C 0x1 0x1
+-#define MX8MM_IOMUXC_SAI1_MCLK_SAI1_TX_BCLK                                 0x1AC 0x414 0x4C8 0x2 0x2
+-#define MX8MM_IOMUXC_SAI1_MCLK_PDM_CLK                                      0x1AC 0x414 0x000 0x3 0x0
+-#define MX8MM_IOMUXC_SAI1_MCLK_GPIO4_IO20                                   0x1AC 0x414 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI1_MCLK_SIM_M_HRESP                                  0x1AC 0x414 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_RXFS_SAI2_RX_SYNC                                 0x1B0 0x418 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_RXFS_SAI5_TX_SYNC                                 0x1B0 0x418 0x4EC 0x1 0x2
+-#define MX8MM_IOMUXC_SAI2_RXFS_UART1_DCE_TX                                 0x1B0 0x418 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI2_RXFS_UART1_DTE_RX                                 0x1B0 0x418 0x4F4 0x4 0x2
+-#define MX8MM_IOMUXC_SAI2_RXFS_GPIO4_IO21                                   0x1B0 0x418 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_RXFS_SIM_M_HSIZE0                                 0x1B0 0x418 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_RXC_SAI2_RX_BCLK                                  0x1B4 0x41C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_RXC_SAI5_TX_BCLK                                  0x1B4 0x41C 0x4E8 0x1 0x2
+-#define MX8MM_IOMUXC_SAI2_RXC_UART1_DCE_RX                                  0x1B4 0x41C 0x4F4 0x4 0x3
+-#define MX8MM_IOMUXC_SAI2_RXC_UART1_DTE_TX                                  0x1B4 0x41C 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI2_RXC_GPIO4_IO22                                    0x1B4 0x41C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_RXC_SIM_M_HSIZE1                                  0x1B4 0x41C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_RXD0_SAI2_RX_DATA0                                0x1B8 0x420 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_RXD0_SAI5_TX_DATA0                                0x1B8 0x420 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI2_RXD0_UART1_DCE_RTS_B                              0x1B8 0x420 0x4F0 0x4 0x2
+-#define MX8MM_IOMUXC_SAI2_RXD0_UART1_DTE_CTS_B                              0x1B8 0x420 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI2_RXD0_GPIO4_IO23                                   0x1B8 0x420 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_RXD0_SIM_M_HSIZE2                                 0x1B8 0x420 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_TXFS_SAI2_TX_SYNC                                 0x1BC 0x424 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_TXFS_SAI5_TX_DATA1                                0x1BC 0x424 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI2_TXFS_UART1_DCE_CTS_B                              0x1BC 0x424 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI2_TXFS_UART1_DTE_RTS_B                              0x1BC 0x424 0x4F0 0x4 0x3
+-#define MX8MM_IOMUXC_SAI2_TXFS_GPIO4_IO24                                   0x1BC 0x424 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_TXFS_SIM_M_HWRITE                                 0x1BC 0x424 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_TXC_SAI2_TX_BCLK                                  0x1C0 0x428 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_TXC_SAI5_TX_DATA2                                 0x1C0 0x428 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI2_TXC_GPIO4_IO25                                    0x1C0 0x428 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_TXC_SIM_M_HREADYOUT                               0x1C0 0x428 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_TXD0_SAI2_TX_DATA0                                0x1C4 0x42C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_TXD0_SAI5_TX_DATA3                                0x1C4 0x42C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI2_TXD0_GPIO4_IO26                                   0x1C4 0x42C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_TXD0_TPSMP_CLK                                    0x1C4 0x42C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI2_MCLK_SAI2_MCLK                                    0x1C8 0x430 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI2_MCLK_SAI5_MCLK                                    0x1C8 0x430 0x52C 0x1 0x2
+-#define MX8MM_IOMUXC_SAI2_MCLK_GPIO4_IO27                                   0x1C8 0x430 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI2_MCLK_TPSMP_HDATA_DIR                              0x1C8 0x430 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_RXFS_SAI3_RX_SYNC                                 0x1CC 0x434 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_RXFS_GPT1_CAPTURE1                                0x1CC 0x434 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_RXFS_SAI5_RX_SYNC                                 0x1CC 0x434 0x4E4 0x2 0x2
+-#define MX8MM_IOMUXC_SAI3_RXFS_GPIO4_IO28                                   0x1CC 0x434 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_RXFS_TPSMP_HTRANS0                                0x1CC 0x434 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_RXC_SAI3_RX_BCLK                                  0x1D0 0x438 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_RXC_GPT1_CLK                                      0x1D0 0x438 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_RXC_SAI5_RX_BCLK                                  0x1D0 0x438 0x4D0 0x2 0x2
+-#define MX8MM_IOMUXC_SAI3_RXC_UART2_DCE_CTS_B                               0x1D0 0x438 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI3_RXC_UART2_DTE_RTS_B                               0x1D0 0x438 0x4F8 0x4 0x2
+-#define MX8MM_IOMUXC_SAI3_RXC_GPIO4_IO29                                    0x1D0 0x438 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_RXC_TPSMP_HTRANS1                                 0x1D0 0x438 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_RXD_SAI3_RX_DATA0                                 0x1D4 0x43C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_RXD_GPT1_COMPARE1                                 0x1D4 0x43C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_RXD_SAI5_RX_DATA0                                 0x1D4 0x43C 0x4D4 0x2 0x2
+-#define MX8MM_IOMUXC_SAI3_RXD_UART2_DCE_RTS_B                               0x1D4 0x43C 0x4F8 0x4 0x3
+-#define MX8MM_IOMUXC_SAI3_RXD_UART2_DTE_CTS_B                               0x1D4 0x43C 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI3_RXD_GPIO4_IO30                                    0x1D4 0x43C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_RXD_TPSMP_HDATA0                                  0x1D4 0x43C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_TXFS_SAI3_TX_SYNC                                 0x1D8 0x440 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_TXFS_GPT1_CAPTURE2                                0x1D8 0x440 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_TXFS_SAI5_RX_DATA1                                0x1D8 0x440 0x4D8 0x2 0x2
+-#define MX8MM_IOMUXC_SAI3_TXFS_UART2_DCE_RX                                 0x1D8 0x440 0x4FC 0x4 0x2
+-#define MX8MM_IOMUXC_SAI3_TXFS_UART2_DTE_TX                                 0x1D8 0x440 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI3_TXFS_GPIO4_IO31                                   0x1D8 0x440 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_TXFS_TPSMP_HDATA1                                 0x1D8 0x440 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_TXC_SAI3_TX_BCLK                                  0x1DC 0x444 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_TXC_GPT1_COMPARE2                                 0x1DC 0x444 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_TXC_SAI5_RX_DATA2                                 0x1DC 0x444 0x4DC 0x2 0x2
+-#define MX8MM_IOMUXC_SAI3_TXC_UART2_DCE_TX                                  0x1DC 0x444 0x000 0x4 0x0
+-#define MX8MM_IOMUXC_SAI3_TXC_UART2_DTE_RX                                  0x1DC 0x444 0x4FC 0x4 0x3
+-#define MX8MM_IOMUXC_SAI3_TXC_GPIO5_IO0                                     0x1DC 0x444 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_TXC_TPSMP_HDATA2                                  0x1DC 0x444 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_TXD_SAI3_TX_DATA0                                 0x1E0 0x448 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_TXD_GPT1_COMPARE3                                 0x1E0 0x448 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_TXD_SAI5_RX_DATA3                                 0x1E0 0x448 0x4E0 0x2 0x2
+-#define MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1                                     0x1E0 0x448 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_TXD_TPSMP_HDATA3                                  0x1E0 0x448 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SAI3_MCLK_SAI3_MCLK                                    0x1E4 0x44C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SAI3_MCLK_PWM4_OUT                                     0x1E4 0x44C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SAI3_MCLK_SAI5_MCLK                                    0x1E4 0x44C 0x52C 0x2 0x3
+-#define MX8MM_IOMUXC_SAI3_MCLK_GPIO5_IO2                                    0x1E4 0x44C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SAI3_MCLK_TPSMP_HDATA4                                 0x1E4 0x44C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SPDIF_TX_SPDIF1_OUT                                    0x1E8 0x450 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SPDIF_TX_PWM3_OUT                                      0x1E8 0x450 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SPDIF_TX_GPIO5_IO3                                     0x1E8 0x450 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SPDIF_TX_TPSMP_HDATA5                                  0x1E8 0x450 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SPDIF_RX_SPDIF1_IN                                     0x1EC 0x454 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SPDIF_RX_PWM2_OUT                                      0x1EC 0x454 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SPDIF_RX_GPIO5_IO4                                     0x1EC 0x454 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SPDIF_RX_TPSMP_HDATA6                                  0x1EC 0x454 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_SPDIF_EXT_CLK_SPDIF1_EXT_CLK                           0x1F0 0x458 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_SPDIF_EXT_CLK_PWM1_OUT                                 0x1F0 0x458 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_SPDIF_EXT_CLK_GPIO5_IO5                                0x1F0 0x458 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_SPDIF_EXT_CLK_TPSMP_HDATA7                             0x1F0 0x458 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SCLK_ECSPI1_SCLK                                0x1F4 0x45C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SCLK_UART3_DCE_RX                               0x1F4 0x45C 0x504 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SCLK_UART3_DTE_TX                               0x1F4 0x45C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SCLK_GPIO5_IO6                                  0x1F4 0x45C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SCLK_TPSMP_HDATA8                               0x1F4 0x45C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MOSI_ECSPI1_MOSI                                0x1F8 0x460 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MOSI_UART3_DCE_TX                               0x1F8 0x460 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MOSI_UART3_DTE_RX                               0x1F8 0x460 0x504 0x1 0x1
+-#define MX8MM_IOMUXC_ECSPI1_MOSI_GPIO5_IO7                                  0x1F8 0x460 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MOSI_TPSMP_HDATA9                               0x1F8 0x460 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MISO_ECSPI1_MISO                                0x1FC 0x464 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MISO_UART3_DCE_CTS_B                            0x1FC 0x464 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MISO_UART3_DTE_RTS_B                            0x1FC 0x464 0x500 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MISO_GPIO5_IO8                                  0x1FC 0x464 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI1_MISO_TPSMP_HDATA10                              0x1FC 0x464 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SS0_ECSPI1_SS0                                  0x200 0x468 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SS0_UART3_DCE_RTS_B                             0x200 0x468 0x500 0x1 0x1
+-#define MX8MM_IOMUXC_ECSPI1_SS0_UART3_DTE_CTS_B                             0x200 0x468 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SS0_GPIO5_IO9                                   0x200 0x468 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI1_SS0_TPSMP_HDATA11                               0x200 0x468 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SCLK_ECSPI2_SCLK                                0x204 0x46C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SCLK_UART4_DCE_RX                               0x204 0x46C 0x50C 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SCLK_UART4_DTE_TX                               0x204 0x46C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SCLK_GPIO5_IO10                                 0x204 0x46C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SCLK_TPSMP_HDATA12                              0x204 0x46C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MOSI_ECSPI2_MOSI                                0x208 0x470 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MOSI_UART4_DCE_TX                               0x208 0x470 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MOSI_UART4_DTE_RX                               0x208 0x470 0x50C 0x1 0x1
+-#define MX8MM_IOMUXC_ECSPI2_MOSI_GPIO5_IO11                                 0x208 0x470 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MOSI_TPSMP_HDATA13                              0x208 0x470 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MISO_ECSPI2_MISO                                0x20C 0x474 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MISO_UART4_DCE_CTS_B                            0x20C 0x474 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MISO_UART4_DTE_RTS_B                            0x20C 0x474 0x508 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MISO_GPIO5_IO12                                 0x20C 0x474 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI2_MISO_TPSMP_HDATA14                              0x20C 0x474 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SS0_ECSPI2_SS0                                  0x210 0x478 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SS0_UART4_DCE_RTS_B                             0x210 0x478 0x508 0x1 0x1
+-#define MX8MM_IOMUXC_ECSPI2_SS0_UART4_DTE_CTS_B                             0x210 0x478 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SS0_GPIO5_IO13                                  0x210 0x478 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_ECSPI2_SS0_TPSMP_HDATA15                               0x210 0x478 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C1_SCL_I2C1_SCL                                      0x214 0x47C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C1_SCL_ENET1_MDC                                     0x214 0x47C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C1_SCL_GPIO5_IO14                                    0x214 0x47C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C1_SCL_TPSMP_HDATA16                                 0x214 0x47C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C1_SDA_I2C1_SDA                                      0x218 0x480 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C1_SDA_ENET1_MDIO                                    0x218 0x480 0x4C0 0x1 0x2
+-#define MX8MM_IOMUXC_I2C1_SDA_GPIO5_IO15                                    0x218 0x480 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C1_SDA_TPSMP_HDATA17                                 0x218 0x480 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C2_SCL_I2C2_SCL                                      0x21C 0x484 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C2_SCL_ENET1_1588_EVENT1_IN                          0x21C 0x484 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C2_SCL_GPIO5_IO16                                    0x21C 0x484 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C2_SCL_TPSMP_HDATA18                                 0x21C 0x484 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C2_SDA_I2C2_SDA                                      0x220 0x488 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C2_SDA_ENET1_1588_EVENT1_OUT                         0x220 0x488 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C2_SDA_GPIO5_IO17                                    0x220 0x488 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C2_SDA_TPSMP_HDATA19                                 0x220 0x488 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C3_SCL_I2C3_SCL                                      0x224 0x48C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C3_SCL_PWM4_OUT                                      0x224 0x48C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C3_SCL_GPT2_CLK                                      0x224 0x48C 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_I2C3_SCL_GPIO5_IO18                                    0x224 0x48C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C3_SCL_TPSMP_HDATA20                                 0x224 0x48C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C3_SDA_I2C3_SDA                                      0x228 0x490 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C3_SDA_PWM3_OUT                                      0x228 0x490 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C3_SDA_GPT3_CLK                                      0x228 0x490 0x000 0x2 0x0
+-#define MX8MM_IOMUXC_I2C3_SDA_GPIO5_IO19                                    0x228 0x490 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C3_SDA_TPSMP_HDATA21                                 0x228 0x490 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C4_SCL_I2C4_SCL                                      0x22C 0x494 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C4_SCL_PWM2_OUT                                      0x22C 0x494 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C4_SCL_PCIE1_CLKREQ_B                                0x22C 0x494 0x524 0x12 0x0
+-#define MX8MM_IOMUXC_I2C4_SCL_GPIO5_IO20                                    0x22C 0x494 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C4_SCL_TPSMP_HDATA22                                 0x22C 0x494 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_I2C4_SDA_I2C4_SDA                                      0x230 0x498 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_I2C4_SDA_PWM1_OUT                                      0x230 0x498 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_I2C4_SDA_PCIE2_CLKREQ_B                                0x230 0x498 0x528 0x2 0x0
+-#define MX8MM_IOMUXC_I2C4_SDA_GPIO5_IO21                                    0x230 0x498 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_I2C4_SDA_TPSMP_HDATA23                                 0x230 0x498 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART1_RXD_UART1_DCE_RX                                 0x234 0x49C 0x4F4 0x0 0x0
+-#define MX8MM_IOMUXC_UART1_RXD_UART1_DTE_TX                                 0x234 0x49C 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART1_RXD_ECSPI3_SCLK                                  0x234 0x49C 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART1_RXD_GPIO5_IO22                                   0x234 0x49C 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART1_RXD_TPSMP_HDATA24                                0x234 0x49C 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART1_TXD_UART1_DCE_TX                                 0x238 0x4A0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART1_TXD_UART1_DTE_RX                                 0x238 0x4A0 0x4F4 0x0 0x0
+-#define MX8MM_IOMUXC_UART1_TXD_ECSPI3_MOSI                                  0x238 0x4A0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART1_TXD_GPIO5_IO23                                   0x238 0x4A0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART1_TXD_TPSMP_HDATA25                                0x238 0x4A0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART2_RXD_UART2_DCE_RX                                 0x23C 0x4A4 0x4FC 0x0 0x0
+-#define MX8MM_IOMUXC_UART2_RXD_UART2_DTE_TX                                 0x23C 0x4A4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART2_RXD_ECSPI3_MISO                                  0x23C 0x4A4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART2_RXD_GPIO5_IO24                                   0x23C 0x4A4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART2_RXD_TPSMP_HDATA26                                0x23C 0x4A4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART2_TXD_UART2_DCE_TX                                 0x240 0x4A8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART2_TXD_UART2_DTE_RX                                 0x240 0x4A8 0x4FC 0x0 0x1
+-#define MX8MM_IOMUXC_UART2_TXD_ECSPI3_SS0                                   0x240 0x4A8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART2_TXD_GPIO5_IO25                                   0x240 0x4A8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART2_TXD_TPSMP_HDATA27                                0x240 0x4A8 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART3_RXD_UART3_DCE_RX                                 0x244 0x4AC 0x504 0x0 0x2
+-#define MX8MM_IOMUXC_UART3_RXD_UART3_DTE_TX                                 0x244 0x4AC 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART3_RXD_UART1_DCE_CTS_B                              0x244 0x4AC 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART3_RXD_UART1_DTE_RTS_B                              0x244 0x4AC 0x4F0 0x1 0x0
+-#define MX8MM_IOMUXC_UART3_RXD_GPIO5_IO26                                   0x244 0x4AC 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART3_RXD_TPSMP_HDATA28                                0x244 0x4AC 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART3_TXD_UART3_DCE_TX                                 0x248 0x4B0 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART3_TXD_UART3_DTE_RX                                 0x248 0x4B0 0x504 0x0 0x3
+-#define MX8MM_IOMUXC_UART3_TXD_UART1_DCE_RTS_B                              0x248 0x4B0 0x4F0 0x1 0x1
+-#define MX8MM_IOMUXC_UART3_TXD_UART1_DTE_CTS_B                              0x248 0x4B0 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART3_TXD_GPIO5_IO27                                   0x248 0x4B0 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART3_TXD_TPSMP_HDATA29                                0x248 0x4B0 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART4_RXD_UART4_DCE_RX                                 0x24C 0x4B4 0x50C 0x0 0x2
+-#define MX8MM_IOMUXC_UART4_RXD_UART4_DTE_TX                                 0x24C 0x4B4 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART4_RXD_UART2_DCE_CTS_B                              0x24C 0x4B4 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART4_RXD_UART2_DTE_RTS_B                              0x24C 0x4B4 0x4F8 0x1 0x0
+-#define MX8MM_IOMUXC_UART4_RXD_PCIE1_CLKREQ_B                               0x24C 0x4B4 0x524 0x2 0x1
+-#define MX8MM_IOMUXC_UART4_RXD_GPIO5_IO28                                   0x24C 0x4B4 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART4_RXD_TPSMP_HDATA30                                0x24C 0x4B4 0x000 0x7 0x0
+-#define MX8MM_IOMUXC_UART4_TXD_UART4_DCE_TX                                 0x250 0x4B8 0x000 0x0 0x0
+-#define MX8MM_IOMUXC_UART4_TXD_UART4_DTE_RX                                 0x250 0x4B8 0x50C 0x0 0x3
+-#define MX8MM_IOMUXC_UART4_TXD_UART2_DCE_RTS_B                              0x250 0x4B8 0x4F8 0x1 0x1
+-#define MX8MM_IOMUXC_UART4_TXD_UART2_DTE_CTS_B                              0x250 0x4B8 0x000 0x1 0x0
+-#define MX8MM_IOMUXC_UART4_TXD_PCIE2_CLKREQ_B                               0x250 0x4B8 0x528 0x2 0x1
+-#define MX8MM_IOMUXC_UART4_TXD_GPIO5_IO29                                   0x250 0x4B8 0x000 0x5 0x0
+-#define MX8MM_IOMUXC_UART4_TXD_TPSMP_HDATA31                                0x250 0x4B8 0x000 0x7 0x0
+-
+-#endif /* __DTS_IMX8MM_PINFUNC_H */
 -- 
 2.43.0
 
