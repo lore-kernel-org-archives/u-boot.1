@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6EDC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E607C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:28:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73CFD8399C;
-	Wed, 28 May 2025 10:26:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C0B9F839DF;
+	Wed, 28 May 2025 10:26:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WjeJC7xe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YZ8NaZ3L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BFF783966; Wed, 28 May 2025 10:26:28 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 5ECD7839DE; Wed, 28 May 2025 10:26:31 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C1DB839CA
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FB6483966
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3dc75fe4e9bso2202005ab.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:26 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-861d7a09c88so87363939f.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748420784; x=1749025584; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748420787; x=1749025587; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XwKT/m4msj1g/ZcUG5uXUt8ZmpmL5HrJ9QY+ioD+jVU=;
- b=WjeJC7xeyKVpcVbD4bBYA9jt7cBPo0ZURwsMLuFZ0zKqLGMgK6iACw6yfXQ4zNerSZ
- h8rZyv+4GsjY/rN7tCyWzw+oy5XVjbh0yOp7lnbhrTVwRzZk9vuSbqFHlHyr9hLq5mBg
- iiMuXH+gj1hIbqZ/pdUglc2d/X/VyRUeK2h5E=
+ bh=4NdUz+wH5Zi5EXzBuG1UE46s+QyHNqPzklG7Sm9R1EQ=;
+ b=YZ8NaZ3LGdR8gQVwRoVOay/wcyAbnB3eX9Xc9wL/kCJW5Lc+ABOhvU9VYSJY8mq1UV
+ WvXl6+1RHGWGFEvCxikMbNzKCZuGBHi0XsMIr4cn4iRzjuOF/VcbODkWclFgFDg9hKJX
+ fRnhQn5+zI7SpxKM3CIYgboJmbTBZGCVCWFlM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748420784; x=1749025584;
+ d=1e100.net; s=20230601; t=1748420787; x=1749025587;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XwKT/m4msj1g/ZcUG5uXUt8ZmpmL5HrJ9QY+ioD+jVU=;
- b=IBnW/lqioWyM39GdQnWaLvZyK8dpvepxq9nVpp4EzTWWiQ7+Ts+6CFLvQagotSGyPe
- NxdxjTHr0xFwLqFGt3RZMih9eMwSe/D0s3ljSEV2YVrPjRu7g/LWw8bFojOh5G31IPhJ
- x+FxX7bducY9ecImluJcS7FXEMiyISMv5209tKy20ITc/VICGd8hpAyIZGGzHIWH+81W
- gmfDEvfWcQuryP13D1/nnPmYAX++FcYL/eSRkmqt5lLqDa9FaGd1wNjmJ2fXBoMtg28v
- 785pE9WBfBdthbDywisKtmlFnu8lHumZs9aQc9e9y6G9LYws9vaBJmK++HxzBgA/gV+k
- cW0A==
-X-Gm-Message-State: AOJu0YxVtPIst0FNBGYrMLXP8RgSeCXTOE6+hdYCwNd6k6cVTrB2yd+v
- 8aLPRfZSDB58mLXbiQp/tQYuJswalS/XpIwbH7zSdi8CZxHzCfH3N/+uZKJIRjhsMj7Ryid/1/M
- aNr5R5eRA
-X-Gm-Gg: ASbGncv6pJKT0HFkcx+Fs9hP09ZeSXrVSkeeaEFTSjM0F//fPFXqhSVQXN5Jh0CvaCO
- X1VHi5oJqAYX0h00bDJ70c2BPxSg53v2i39TSuA2N6KCTgrSmVe3Hp9F1tsY1o8LhwB4xi0C8tp
- KNOV+sSLMpeZ0nG6FNtk88cOCn/pk9e95630jM4sZtKS48Oolmj7uMZPPU1WrPJDJvYno7yxy/R
- DLroywPMZppeCupAT2n1o38+HgOU9wYujRnwYWqVW9bv7MNgwHP7kcXoiPr2qXP2B5zP4HEeFy5
- OrQYxUGtclaoFlG+4jGFqjOd9wIl7jVB5U8w93gSHPzip0I8nmFdHkWprDSlerebAXneIVp8fja
- KORvTCuLiVqCt
-X-Google-Smtp-Source: AGHT+IEs7Wxshf2PW6b1v8MBwbzptbAFx5GUN+4xYcvAtXNo0q9FzofoFMtXi9sjJCRHKYdMDBKyuw==
-X-Received: by 2002:a05:6e02:238a:b0:3dd:8136:a687 with SMTP id
- e9e14a558f8ab-3dd8767cd50mr32694495ab.8.1748420784375; 
- Wed, 28 May 2025 01:26:24 -0700 (PDT)
+ bh=4NdUz+wH5Zi5EXzBuG1UE46s+QyHNqPzklG7Sm9R1EQ=;
+ b=lLQnG4CeVe6iGpwcMjNHWGBnQVzDgPtCKdHmcmwogL9xYccNGPMpIrgiz0hirF6/pJ
+ MkAq835M9u/EM8ttm80JAnsSh0EyaLgN6ZpPmSXRpezsMsw+tiFpCdbtvpZyUaHDutjJ
+ yQ6yv4TXRdJZnxmdY2l55c6Nqejp3+INQ+HNoytL/OQ4sZ8JTQhfXlk3YSqppiWGtr7b
+ 2CCyEw1lYPRwq1GpwhjXuEjRpc3iyguz09WDQuZUsZhMnegN8RM4FW7Bj0QPFhK7CUeM
+ 00tJCZsBkc5uuFMVLrjhOFqZ4r0LBMZL4/ZIUhoavdbJE8rsh/clvxlhOThmpKPE4CFv
+ qKfg==
+X-Gm-Message-State: AOJu0Yyr/pIoZ7Ie9hjmoZFbff22MgkRT1GiA2kzmVcmubchffvN3qc9
+ Tcg/rbu9HLSSpA5bMpsXuRuSXy83uz1wxrimPhbYIo3Srhqq2iv/FwQjIdmNsJj83N0zl2fbHEw
+ mt0AzYUmM
+X-Gm-Gg: ASbGncuGP74HpVGWSPGnqrMyeJ6VRabHsPOuOAchw2D+HRddsNpktaPo7TiYH7k7Kmv
+ 4rbsaa65/fVu0gKAG/tTLcpmoKvfkubRaHXuQwkBGzwBA6/QADt3yHysEi+XgZRTdD9LQG84YyT
+ VlGulxYqM2nZFZ3CjGDtF4CImJ74c6FqdruvOucyxqIqBAs0mXv/Xd/swDL5NWw2Lzm8LFGElqQ
+ 0Pd86RJO3tTyeDmX7Bads4+67tYEBi/9pGRQLBRqluU/poRmj6mWvyl8CVwFbhbvnQOnMu02hen
+ do8PgK4U/fw08scACTf9+m1GS+zf++9mTT3nNZeJZg4KEvBRKojkAO9ov5n8Xwoqdn+4WZV5JmK
+ rOGjO71Nr8QOj
+X-Google-Smtp-Source: AGHT+IG7P/qCcpHV4Ob+NF1YJKVMFlpRhk9QsWCFF8Rosujh/yVlOv8YLrkGeERUd4IlFjUOvr5Waw==
+X-Received: by 2002:a05:6e02:b43:b0:3d8:20fb:f060 with SMTP id
+ e9e14a558f8ab-3dc9b6acf08mr169791105ab.4.1748420787208; 
+ Wed, 28 May 2025 01:26:27 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.22
+ e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:26:22 -0700 (PDT)
+ Wed, 28 May 2025 01:26:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Matthew Garrett <mgarrett@aurora.tech>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 19/27] x86: efi: Sync up the two link scripts somewhat
-Date: Wed, 28 May 2025 02:24:45 -0600
-Message-ID: <20250528082520.152391-20-sjg@chromium.org>
+Subject: [PATCH 20/27] x86: efi: Tidy up the link scripts
+Date: Wed, 28 May 2025 02:24:46 -0600
+Message-ID: <20250528082520.152391-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528082520.152391-1-sjg@chromium.org>
 References: <20250528082520.152391-1-sjg@chromium.org>
@@ -96,157 +96,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 32- and 64-bit scripts are more different than they need to be.
-Make some changes to both so that it is easier to see the necessary
-differences.
+Mark important sections with KEEP so that the linker will not remove
+them when garbage-collection is (later) enabled.
 
-For the 32-bit script this is mostly just whitespace. For the 64-bit
-script the eh_frame section is discarded and the .data section is
-reordered.
+Provide a _end symbol so that this can be accessed in setup_mon_len()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/lib/elf_ia32_efi.lds   | 26 ++++++++++++++------------
- arch/x86/lib/elf_x86_64_efi.lds | 25 +++++++++----------------
- 2 files changed, 23 insertions(+), 28 deletions(-)
+ arch/x86/lib/elf_ia32_efi.lds   | 5 +++--
+ arch/x86/lib/elf_x86_64_efi.lds | 5 +++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/arch/x86/lib/elf_ia32_efi.lds b/arch/x86/lib/elf_ia32_efi.lds
-index 37a6c386b81..a3ff0068b40 100644
+index a3ff0068b40..230df63bb48 100644
 --- a/arch/x86/lib/elf_ia32_efi.lds
 +++ b/arch/x86/lib/elf_ia32_efi.lds
-@@ -13,12 +13,12 @@ SECTIONS
- 	image_base = .;
- 	.hash : { *(.hash) }	/* this MUST come first, EFI expects it */
- 	. = ALIGN(4096);
--	.text :
--	{
-+	.text : {
- 		*(.text)
- 		*(.text.*)
- 		*(.gnu.linkonce.t.*)
+@@ -51,7 +51,7 @@ SECTIONS
+ 
+ 		/* U-Boot lists and device tree */
+ 		. = ALIGN(8);
+-		*(SORT(__u_boot_list*));
++		KEEP(*(SORT(__u_boot_list*)));
+ 		. = ALIGN(8);
+ 		*(.dtb*);
  	}
-+
+@@ -75,7 +75,7 @@ SECTIONS
+ 
  	. = ALIGN(4096);
- 	.sdata :
- 	{
-@@ -29,9 +29,9 @@ SECTIONS
- 		*(.sbss)
- 		*(.scommon)
- 	}
-+
- 	. = ALIGN(4096);
--	.data :
--	{
-+	.data : {
- 		*(.rodata*)
- 		*(.data)
- 		*(.data1)
-@@ -57,7 +57,8 @@ SECTIONS
+ 	.reloc : {	/* This is the PECOFF .reloc section! */
+-		*(.reloc)
++		KEEP(*(.reloc))
  	}
  
  	. = ALIGN(4096);
--	.dynamic  : { *(.dynamic) }
-+	.dynamic : { *(.dynamic) }
-+
+@@ -83,6 +83,7 @@ SECTIONS
  	. = ALIGN(4096);
- 	.rel :
- 	{
-@@ -71,18 +72,19 @@ SECTIONS
- 		*(.data.rel*)
- 		*(.rel__u_boot_list*)
- 	}
-+
- 	. = ALIGN(4096);
--		.reloc :	/* This is the PECOFF .reloc section! */
--	{
--	*(.reloc)
-+	.reloc : {	/* This is the PECOFF .reloc section! */
-+		*(.reloc)
- 	}
-+
- 	. = ALIGN(4096);
--	.dynsym   : { *(.dynsym) }
-+	.dynsym : { *(.dynsym) }
- 	. = ALIGN(4096);
--	.dynstr   : { *(.dynstr) }
-+	.dynstr : { *(.dynstr) }
- 	. = ALIGN(4096);
--	/DISCARD/ :
--	{
-+
-+	/DISCARD/ : {
- 		*(.rel.reloc)
- 		*(.eh_frame)
- 		*(.note.GNU-stack)
-diff --git a/arch/x86/lib/elf_x86_64_efi.lds b/arch/x86/lib/elf_x86_64_efi.lds
-index cb656ac46ea..5e1e8714351 100644
---- a/arch/x86/lib/elf_x86_64_efi.lds
-+++ b/arch/x86/lib/elf_x86_64_efi.lds
-@@ -13,12 +13,6 @@ SECTIONS
- 	image_base = .;
- 	.hash : { *(.hash) }	/* this MUST come first, EFI expects it */
- 	. = ALIGN(4096);
--	.eh_frame : {
--		*(.eh_frame)
--	}
--
--	. = ALIGN(4096);
--
- 	.text : {
- 		*(.text)
- 		*(.text.*)
-@@ -26,21 +20,21 @@ SECTIONS
- 	}
- 
- 	. = ALIGN(4096);
--
- 	.reloc : {
- 		*(.reloc)
- 	}
- 
- 	. = ALIGN(4096);
--
- 	.data : {
- 		*(.rodata*)
--		*(.got.plt)
--		*(.got)
- 		*(.data*)
- 		*(.sdata)
--		/* the EFI loader doesn't seem to like a .bss section, so we stick
--		 * it all into .data: */
-+		*(.got.plt)
-+		*(.got)
-+		/*
-+		 * the EFI loader doesn't seem to like a .bss section, so we
-+		 * stick it all into .data:
-+		 */
- 		*(.sbss)
- 		*(.scommon)
- 		*(.dynbss)
-@@ -57,8 +51,8 @@ SECTIONS
- 
- 	. = ALIGN(4096);
- 	.dynamic : { *(.dynamic) }
--	. = ALIGN(4096);
- 
-+	. = ALIGN(4096);
- 	.rela : {
- 		*(.rela.data*)
- 		*(.rela.got)
-@@ -72,10 +66,9 @@ SECTIONS
  	.dynstr : { *(.dynstr) }
  	. = ALIGN(4096);
++	_end = .;
  
--        /DISCARD/ : { *(.eh_frame) }
--
--	.ignored.reloc : {
-+	/DISCARD/ : {
- 		*(.rela.reloc)
-+		*(.eh_frame)
- 		*(.note.GNU-stack)
+ 	/DISCARD/ : {
+ 		*(.rel.reloc)
+diff --git a/arch/x86/lib/elf_x86_64_efi.lds b/arch/x86/lib/elf_x86_64_efi.lds
+index 5e1e8714351..e5da5a58952 100644
+--- a/arch/x86/lib/elf_x86_64_efi.lds
++++ b/arch/x86/lib/elf_x86_64_efi.lds
+@@ -21,7 +21,7 @@ SECTIONS
+ 
+ 	. = ALIGN(4096);
+ 	.reloc : {
+-		*(.reloc)
++		KEEP(*(.reloc))
  	}
  
+ 	. = ALIGN(4096);
+@@ -44,7 +44,7 @@ SECTIONS
+ 
+ 		/* U-Boot lists and device tree */
+ 		. = ALIGN(8);
+-		*(SORT(__u_boot_list*));
++		KEEP(*(SORT(__u_boot_list*)));
+ 		. = ALIGN(8);
+ 		*(.dtb*);
+ 	}
+@@ -65,6 +65,7 @@ SECTIONS
+ 	. = ALIGN(4096);
+ 	.dynstr : { *(.dynstr) }
+ 	. = ALIGN(4096);
++	_end = .;
+ 
+ 	/DISCARD/ : {
+ 		*(.rela.reloc)
 -- 
 2.43.0
 
