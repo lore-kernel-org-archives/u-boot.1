@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C5EC5AE59
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE5FC5AE59
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:28:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68032839BB;
-	Wed, 28 May 2025 10:26:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B19D5839CF;
+	Wed, 28 May 2025 10:26:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mggkrnpE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nzgSJsHt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3467E8399C; Wed, 28 May 2025 10:26:19 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 2608B839CB; Wed, 28 May 2025 10:26:22 +0200 (CEST)
+Received: from mail-il1-x143.google.com (mail-il1-x143.google.com
+ [IPv6:2607:f8b0:4864:20::143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16B078399C
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A563783966
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3dc75fe4e9bso2201775ab.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:17 -0700 (PDT)
+Received: by mail-il1-x143.google.com with SMTP id
+ e9e14a558f8ab-3dd24c86779so27446185ab.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748420775; x=1749025575; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748420778; x=1749025578; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+Xbdd5usXea1Kj7eqWOzPQFdrtYfAGmKuo067Z0I9X4=;
- b=mggkrnpEgZu/l64BaS4BDGTBcBFcFFvSC1qD4eriIUZElutNogx5rN+G9ibQbJ1QuJ
- VA654KIfgJxyS2N55rlVXX3MF9rXFABUF2nn6gGFR/66W06XtHZ7v3iZHlghYKgLDK4p
- 2ikhMMYV36fl6NfTHu5xhH0rjf5KhISlZf8gU=
+ bh=hCG6F6lfP/kd/WIlLUdvq94aM/w6NxD+9f3YT0ixgPk=;
+ b=nzgSJsHtdB2BDZ85aVShNz7oufFJ581N415tvYE6rnV3srj+GD2/QfVt3HaJcBLMeO
+ C/C5Df5Ia7tSB4CgFN2Lgi+JDs1SiIdcTk3etba4W9Vmu+5s/eoaHlQBNlmkByD++NOl
+ lpMRAL6fZ43SJ2ZqdQYfernjq/eDH42mzv16A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748420775; x=1749025575;
+ d=1e100.net; s=20230601; t=1748420778; x=1749025578;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+Xbdd5usXea1Kj7eqWOzPQFdrtYfAGmKuo067Z0I9X4=;
- b=vx1qt+YD73arABBkD/raTsO5R/wM8oVuau0JNFfSIq/+Z/gbn+AaU9V9oey3jAPO6b
- wIxwspAs0tQtWQhp/XK7rav3/+d40xf75UM0F5zfw2xeWBpt3qdihqMkw0Tb7e17zf8H
- PoM1DY8VTz+aF7TNclXON1Dt2wV9bbNiryzsMFBBV56IsQF/PG/gsGjK1wNts6tfWofh
- pwv1tjT/08pla94GaNjhHUVBj59Sh99G1qimLs5l6LQL7bPPLGXFOXMxX5m2btxt+I94
- h85EXkicR8UJSvTL2j2wyeeeOCy5ZBisjpyaXqLNvEZ6gyWUle3z980Ckx5Reb/wXKa6
- jBFg==
-X-Gm-Message-State: AOJu0YweBTJmnigz1iiKQ+pGnYoxVnOPGa5qqchKYAJfITgJKe/KqkAK
- dMAzF8Ez/rZIXYe6UblzXmtNpcz8kdngdt5Yuryqw0YIf3GNOu1N06o8wQtbM2GFXKnpBxuJLrY
- /IWXqsqeJ
-X-Gm-Gg: ASbGncsltFbQDvREP+rqly9WF6SEgJHBYz6l4RSZD7ZPttYldBG7WJLRU9Rhc189y+H
- xjsDHH77raJNJV+tMZRjRSbLdtOm8WmxZpEgaUQd/YASvUleEh6lZUDYrOm6MxtrejSIdT75V7b
- PYCDDxN/KDf3ree77UITZ0M4VHZ9nD7SmgVxc4Rhi7L+kU/Ykde3kLEiCLiv6LFWI0hIMO2zy1M
- HtuNXxaKDW8WPmzUknHsRbvY68jg83TzBZAt0HAwXvlF+ntEjTl6oTQL/JmVq8GRULAqUdcskrD
- dVnlo6pKGAj27lBoZfif22vf9WWlVnRHBJWys3d14kqN/NNtyra2+Byt8WeeSzNE/prGEOsybX0
- E22uLS2IKRimGI01/d/Dw2jQ=
-X-Google-Smtp-Source: AGHT+IEqB1ZQxTtFkc0ldJcIm8aJZYnP0D4ZbAjXrJOaSWsk6GZ3ukJVlGni1ISEuO65SfL9eM6YuA==
-X-Received: by 2002:a05:6e02:17cd:b0:3d4:2ea4:6b87 with SMTP id
- e9e14a558f8ab-3dd87682d95mr32813255ab.11.1748420775032; 
- Wed, 28 May 2025 01:26:15 -0700 (PDT)
+ bh=hCG6F6lfP/kd/WIlLUdvq94aM/w6NxD+9f3YT0ixgPk=;
+ b=T/WWZ8pUl1iycWnOZgIHP2tHvVjfTvorucehA7Tw8qKat24YCrSA9ZaADZCsmefH8e
+ +OkwurZRSO8YvP1b4YfhQU2RSysYhYnAWRgZlTBNRmIwetyAt1wQ2wA+h6laA0DT5xAx
+ kLQDAPHMs/1yZzuyQDytionJ7ae7d8erdVpmO/6Hjn47p/GLs1qX/zmkds8l5XLLC73U
+ RA1fy8vBnOAkimqTgH3ycmkvLJZs+k9VNUM1IWEaUyL7YUdFN+3qBAnn0XXHGEdLeShG
+ 0NB10sJtxaDJQKztiL8MkKvJGrZQtkC0Xb2YW3F4YIgfQRxXFaDZIzEOVTh3cYskCz5p
+ a5gQ==
+X-Gm-Message-State: AOJu0Yx5du9DSW6kqGb+SxRbk45Tgwz4oRuaV5QtP5+d04X5HVqZhnST
+ LLljOCNxip+HWbJ4DRRUX1IrXZrtkODcKVI0+PvOgHDsR9LLoWclG0OHsnC4vHWnnCZgOCVjAqc
+ CUUce9rHS5pU=
+X-Gm-Gg: ASbGnctQVH3Jby15q8sD7AxBShB6UGGQhI14ZhFXmO0gMABhPXuEdslmVOXhnwljxiS
+ +cSPHmAG3owhyAjNbjngC0yC7XZlU5KR83G7e/ZRXyq422ghjhsBwyJ2aKZec0hqXCFkoMKN03T
+ 35eV5n/plsGvIgoSOsT4vshEiXEjISYZGH/Uf2BWyJxee5IzmwVFKSQhyWuChZ9YrHmM5WW3o2V
+ dFTy2d1qzUU4u/1Tpeq4L0K80tTFckF8HCpb93GUCXztghK6yfMrr1Zq5USUqW40r7n4zh+psQJ
+ xaydy1PR7hU+aZDldZR7Wg+ALnDugfX2+ie9JzP2O7EweKwH8qr8zFETYh10WMpXSq64GCzyOot
+ jjO/5WZgM+5Ew
+X-Google-Smtp-Source: AGHT+IEiZacgzg2zN6ukLxc+bMRJ15pY2zE/7273hEp/4CUG1qOpp5Gg/bPSXlqwhMDKqsJAREXThg==
+X-Received: by 2002:a05:6e02:2407:b0:3d9:3e8e:60ce with SMTP id
+ e9e14a558f8ab-3dc9b74dbffmr153375985ab.19.1748420777841; 
+ Wed, 28 May 2025 01:26:17 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.13
+ e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:26:14 -0700 (PDT)
+ Wed, 28 May 2025 01:26:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Janis Danisevskis <jdanisevskis@aurora.tech>,
- Matthew Garrett <mgarrett@aurora.tech>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/27] efi: Allow disabling the TPM in the app
-Date: Wed, 28 May 2025 02:24:41 -0600
-Message-ID: <20250528082520.152391-16-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 16/27] efi: doc: Use inline links for EFI app documentation
+Date: Wed, 28 May 2025 02:24:42 -0600
+Message-ID: <20250528082520.152391-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528082520.152391-1-sjg@chromium.org>
 References: <20250528082520.152391-1-sjg@chromium.org>
@@ -96,33 +95,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the TPM is disabled, avoid trying to use it in the app.
+Update the links to an embedded style. Also drop the part about needing
+to support ARM, as this is done now.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/efi_client/efi_app_init.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ doc/develop/uefi/u-boot_on_efi.rst | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/lib/efi_client/efi_app_init.c b/lib/efi_client/efi_app_init.c
-index ff31266fb12..938b16d14ab 100644
---- a/lib/efi_client/efi_app_init.c
-+++ b/lib/efi_client/efi_app_init.c
-@@ -347,9 +347,11 @@ int board_early_init_r(void)
- 			if (ret)
- 				return ret;
- 		}
--		ret = setup_tpm();
--		if (ret)
--			return ret;
-+		if (IS_ENABLED(CONFIG_TPM)) {
-+			ret = setup_tpm();
-+			if (ret)
-+				return ret;
-+		}
- 	}
+diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
+index 7a1713f7588..f1f9113b01f 100644
+--- a/doc/develop/uefi/u-boot_on_efi.rst
++++ b/doc/develop/uefi/u-boot_on_efi.rst
+@@ -44,7 +44,9 @@ Build Instructions
+ ------------------
+ First choose a board that has EFI support and obtain an EFI implementation
+ for that board. It will be either 32-bit or 64-bit. Alternatively, you can
+-opt for using QEMU [1] and the OVMF [2], as detailed below.
++opt for using `QEMU <http://www.qemu.org>`_ and the
++`OVMF <https://github.com/tianocore/tianocore.github.io/wiki/OVMF>`_, as
++detailed below.
  
- 	return 0;
+ To build U-Boot as an EFI application, enable CONFIG_EFI_CLIENT and
+ CONFIG_EFI_APP. The efi-x86_app32 and efi-x86_app64 configs are set up for
+@@ -341,8 +343,6 @@ Future work
+ -----------
+ This work could be extended in a number of ways:
+ 
+-- Add ARM support
+-
+ - Figure out how to solve the interrupt problem
+ 
+ - Add more drivers to the application side (e.g.USB, environment access).
+@@ -372,6 +372,3 @@ common/cmd_efi.c
+ Ben Stoltz, Simon Glass
+ Google, Inc
+ July 2015
+-
+-* [1] http://www.qemu.org
+-* [2] https://github.com/tianocore/tianocore.github.io/wiki/OVMF
 -- 
 2.43.0
 
