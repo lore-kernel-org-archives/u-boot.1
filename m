@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36BE7C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 06:47:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA031C5AE59
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 07:30:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B375D83918;
-	Wed, 28 May 2025 08:47:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 241F3831D3;
+	Wed, 28 May 2025 09:30:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="x6GmXwDU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tz9ZOGxh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EAA483918; Wed, 28 May 2025 08:47:42 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1B79983906; Wed, 28 May 2025 09:30:17 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E1A83910
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 08:47:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A845831C5
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 09:30:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=8243e56e33=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54S10vKN023602;
- Wed, 28 May 2025 08:47:28 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- D4Zw0oBrwY6hPdKsddGl2+urmCVASXnKO30cEA4w/XM=; b=x6GmXwDUVzHrHRZC
- g9h3ub8IqaRYGfOka5yw92sUI7jWNE3l/E+5fpMOOKEs3R3Wqcx1aMjXR6QcvfSP
- PvLtTkHIkTWPpwvd3hOpQCvkrbvzMGTnH1TcNEyXfYP5CgcfmPeG1YiGEbc3YM8Z
- aDnbujM5wMrkakV5XofYJ8OTAsfuFUTuT8ca/JyR1KirmdD8j9JvQCSu8XvO3o7/
- MM9essX1a2qLw7eo+I/GvyzuGOawsiEjO8uVdQbj8uNvpPGDFZQ6+hdDdpa0jM7W
- xb4LlsuzVx9TkTD+8VOSXoasq1ByaFcmXyH4urZH+eIolC9yviJH1w6wg5lWvDa+
- S8I2Bw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u3hk7rw6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 28 May 2025 08:47:28 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A4C22400B8;
- Wed, 28 May 2025 08:46:12 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 67F76B6C3EA;
- Wed, 28 May 2025 08:45:10 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 28 May
- 2025 08:45:09 +0200
-Message-ID: <d1188c24-8830-4522-8f1c-ad7575e5c73b@foss.st.com>
-Date: Wed, 28 May 2025 08:45:08 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-604bf67b515so4855690a12.0
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 00:30:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1748417411; x=1749022211; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QMO29Ai3GSGPwX3i0pLYKRuA+kJ1QJ2rCk3HVVpJ3NU=;
+ b=Tz9ZOGxhKdA2m62aN+QX1zIvTFBBov1uUKXOU/HfJgqklf6+e/5ycfTQDrrgL9LQ0f
+ Fs4cPUko+BqdHdJhw52SWEF9A6dtyJPrKlISaAWYdfA265bvjjqWErKi9VBqtIAdZxyg
+ 3LFKXVuyRnLUw9IiLsqoYMMBJ5a0B8wsydL7g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748417411; x=1749022211;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QMO29Ai3GSGPwX3i0pLYKRuA+kJ1QJ2rCk3HVVpJ3NU=;
+ b=FzqMZAjls6/iA2iilLNNjQbgfDeay2NRbRfJfYzB5jl/bapBmIFpshzUsmG+w2M8kA
+ Dpk4O82XgG4P0+tFftB71rpYV8X/2n8pWYudR+65cw9mGfS69d3CgFH3rQ0ZG1kSVGzm
+ k8n1S75uVqgfNxUA9TBeHPzV1lqaAcP/qVvJcMLIStcnTEvkZL1O/UzObWUzD98Ca+bm
+ NvJhkyYciWjANVGjZGsR0IvEVo7Kn5FD+rUEKbY0svrAHbAcIXfJ2wtOqf/V08o4kLHu
+ 0xutpwZskyLPphFRVXxIq2JsV/mTDPOG9V1JubAOE9TOEuvgq1wmfX5GsGEAKbqhgPqJ
+ O4ww==
+X-Gm-Message-State: AOJu0YyrFurfa9uWQ82zo08dDZlZ2xwp6+V+769kCJX2/zBG4hvAxaga
+ yzZ1I/NBBByWKsQmCatm9emiAoNNOXY1Ndc+cbVj6tehLJJzouypOigJC1mngQ7p9zkx3PFt8GP
+ sXXWzyUA7EwxHHuSygx3FP5YvfYrPgdBtIpN7o5h1
+X-Gm-Gg: ASbGncvPFI2yvIDt4gFTwjaxh/SbgOF4sGCt58lT3L1UD7523CW+M5ckX0+yOle+gJz
+ Bqodb0kI8+LqfUDotfKDaWx5NhT9tZ5hvF/LUbPUxy9rg2s79nzUAyKwMIhFlAfh+RGyGaeF14l
+ m/yCdu4AqnZnV3ky0eMDQvaqDD3gkJ25I=
+X-Google-Smtp-Source: AGHT+IEC5evHX8QyUSo69+c8FgzUMbdxosQlENri3oNBum1UO3foz0+7Ufi1VL0Onm0azHKROLaQF5YPFdRifW/ruVM=
+X-Received: by 2002:a05:6402:40d5:b0:5fe:7b09:9e27 with SMTP id
+ 4fb4d7f45d1cf-602d9af7e19mr11636129a12.12.1748417411516; Wed, 28 May 2025
+ 00:30:11 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/10] ARM: dts: stm32: Switch defconfig to SPL for DH
- STM32MP13xx DHCOR DHSBC
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Cheick Traore <cheick.traore@foss.st.com>, Fabrice Gasnier
- <fabrice.gasnier@foss.st.com>, Gatien Chevallier
- <gatien.chevallier@foss.st.com>,
- Lionel Debieve <lionel.debieve@foss.st.com>,
- Pascal Zimmermann <pzimmermann@dh-electronics.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250512172149.150214-1-marek.vasut@mailbox.org>
- <20250512172149.150214-11-marek.vasut@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250512172149.150214-11-marek.vasut@mailbox.org>
+References: <20250526220311.GF100073@bill-the-cat>
+ <20250527193448.GL100073@bill-the-cat>
+ <20250527194440.GM100073@bill-the-cat>
+In-Reply-To: <20250527194440.GM100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 28 May 2025 08:29:59 +0100
+X-Gm-Features: AX0GCFtDgQHXvwqsgpnJcn2o1CdyCRrkKQsTP6YmxMZ8FwRGUL7u677Cxp3Vv88
+Message-ID: <CAFLszTi6NqQmwoU99XHJu7eWemJaTVaa2P8gKgF0Hp6qx=dGJA@mail.gmail.com>
+Subject: Re: [ANN] U-Boot v2025.07-rc3 released
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de, 
+ u-boot-board-maintainers@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-28_03,2025-05-27_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,266 +88,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Tue, 27 May 2025 at 20:44, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, May 27, 2025 at 01:34:48PM -0600, Tom Rini wrote:
+> > On Mon, May 26, 2025 at 04:03:11PM -0600, Tom Rini wrote:
+> > `
+> > > Hey all,
+> > >
+> > > So it's release day and I have tagged and pushed things out. I will be
+> > > updating the next branch shortly. There's still a few things that need
+> > > to come in for the release, as fixes, but otherwise I think the next
+> > > branch is where most changes should end up.
+> > >
+> > > We're continuing with a community meeting following the release and is
+> > > the same time as the previous meeting. The meeting details itself are:
+> > > https://meet.google.com/btj-wgcg-euw
+> > > May 27th, 2025. 9am (GMT -06:00)
+> > >
+> > > To join by phone:
+> > > https://meet.google.com/tel/btj-wgcg-euw?pin=1307528552322&hs=1
+> >
+> > For today's meeting it was suggested to try and use Google's
+> > transcription service to take notes. What follows is a lightly edited
+> > copy of the transcript. I will say it took a good amount of time to read
+> > and re-edit. I will follow-up with a lightly edited Gemini summary, just
+> > to finish evaluating this idea.
+>
+> And here is Gemini's summary of the transcript:
+>
+> Release Updates
+>
+> * Tom Rini announced that Release Candidate 3 (RC3) was released the previous
+> day and things are generally in good condition.
+> * There's an outstanding issue and revert for the ext4 overflow issue that
+> needs addressing.
+> * Kernel release v6.15 is now in the device tree rebasing repository, and plans
+> are underway to sync and test it with CI.
+> * The community is encouraged to test the current state of the master branch on
+> available hardware in preparation for the upcoming July release.
+> * Regression fixes should be brought to Tom Rini's attention with links for
+> tracking.
+>
+> Kbuild System Updates
+>
+> * Ilias Apalodimas initiated a discussion about updating the Kbuild system,
+> which is significantly outdated.
+> * There are two approaches: incremental updates with detailed commit messages
+> or a large diff to bring it up to speed quickly.
+> * The consensus is to prioritize updating the Kbuild system over maintaining a
+> detailed commit history.
+> * Ilias has been working on porting patches to bring the system up to v5.1 and
+> plans to split makefiles into an include file for easier future syncs.
+> * The aim is to get the current updates into the next window and work on
+> syncing with v6.15 afterward.
+> * There's a desire to enable compiling with LLVM for catching more bugs due to
+> its stricter default flags.
+>
+> QEMU Issue
+>
+> * There's an ongoing issue with QEMU on the vexpress_ca9x4 platform,
+> particularly with TFTP crashing.
+> * There's debate about whether the issue lies with QEMU or the U-Boot
+> implementation, with suggestions to engage QEMU developers for further
+> insights.
+> * Peter and Richard Henderson from QEMU have been consulted, and there are
+> assumptions that the problem could be due to unaligned accesses and the MMU not
+> being enabled, but these assumptions might be incorrect as the TFTP crashes
+> early.
+> * Ilias plans to debug the issue further by the end of the week.
+>
+> Continuous Integration (CI) Discussions
+>
+> * Jesse T asked about making reproducible builds in CI, similar to Buildroot.
+> Tom Rini explained that the focus is on using pre-built toolchains to avoid
+> compiler build issues.
+> * There's interest in setting up a CI bot to test on boards. Ilias Apalodimas
+> has past experience with Buildbot and can share configurations. Haiko has also
+> worked on tbot and integrating it with GitLab CI.
+> * Jesse T raised a bug found by a professor on the DE1 SOC, possibly a compiler
+> issue, and shared build scripts for review.
+> * A CI discussion about running OSS was initiated by Simon. Ilias mentioned a
+> missing kernel module in Alpine, but is working on adding it to Yocto for
+> easier testing.
+> * Simon has a test that boots Ubuntu 2404 Desktop installer on his lab, but is
+> interested in CI testing with smaller images like Alpine.
+> * There are challenges with booting OS images from RAM using EFI and handling
+> ISO images in CI, leading to discussions about network booting solutions.
+>
+> Other Topics
+>
+> * Jesse T mentioned a bug on the D10 standard board, not the D1 SOC, and shared
+> pkg builds via IRC.
+> * Simon Glass and Ilias talked about a hang when running QEMU on an ARM64
+> machine with KVM enabled, possibly related to out-of-memory issues with blob
+> list.
+>
+> Conclusion
+>
+> The meeting covered various topics, including release updates, Kbuild system
+> updates, QEMU issues, CI improvements, and other specific problems encountered.
+> The community continues to work on enhancing U-Boot and ensuring its stability
+> across different platforms.
 
-On 5/12/25 19:21, Marek Vasut wrote:
-> Update defconfig to make use of U-Boot SPL to initialize DH STM32MP13xx
-> DHCOM DHSBC SoM and board. This is largely a move of SPL enablement from
-> DH STM32MP15xx DHSOM defconfigs into generic DH STM32MP1xx defconfig .
-> Support for SPI NOR chips which are not used on STM32MP13xx DHCOR are
-> moved into STM32MP15xx DHSOM defconfigs. Changes to STM32MP13xx DHCOR
-> defconfig then enable SPL support, CCF in SPL to configure clock, pin
-> configuration support in SPL, and OpTee OS start support in U-Boot.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-> ---
-> Cc: Cheick Traore <cheick.traore@foss.st.com>
-> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> Cc: Gatien Chevallier <gatien.chevallier@foss.st.com>
-> Cc: Lionel Debieve <lionel.debieve@foss.st.com>
-> Cc: Pascal Zimmermann <pzimmermann@dh-electronics.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  configs/stm32mp13_dhcor_defconfig | 30 +++++++++++++------
->  configs/stm32mp15_dhsom.config    | 48 +++++--------------------------
->  configs/stm32mp_dhsom.config      | 35 ++++++++++++++++++++--
->  3 files changed, 60 insertions(+), 53 deletions(-)
-> 
-> diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
-> index 2da9287ea7b..0d70aab5e8f 100644
-> --- a/configs/stm32mp13_dhcor_defconfig
-> +++ b/configs/stm32mp13_dhcor_defconfig
-> @@ -2,7 +2,6 @@
->  
->  CONFIG_ARM=y
->  CONFIG_ARCH_STM32MP=y
-> -CONFIG_TFABOOT=y
->  CONFIG_SYS_MALLOC_F_LEN=0x1c0000
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0400000
->  CONFIG_ENV_OFFSET=0x3E0000
-> @@ -12,11 +11,16 @@ CONFIG_DDR_CACHEABLE_SIZE=0x8000000
->  CONFIG_TARGET_ST_STM32MP13X=y
->  CONFIG_ENV_OFFSET_REDUND=0x3F0000
->  CONFIG_STM32MP15_PWR=y
-> -# CONFIG_ARMV7_NONSEC is not set
-> +CONFIG_ARMV7_NONSEC=y
-> +CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
-> +CONFIG_ARMV7_PSCI_NR_CPUS=2
-> +# CONFIG_ARMV7_LPAE is not set
->  CONFIG_SYS_MEMTEST_START=0xc0000000
->  CONFIG_SYS_MEMTEST_END=0xc4000000
-> +CONFIG_SYS_MEM_TOP_HIDE=0x2000000
->  CONFIG_BOOTSTAGE_RECORD_COUNT=100
->  CONFIG_BOOTDELAY=3
-> +CONFIG_BOOTM_OPTEE=y
->  CONFIG_SYS_CONSOLE_IS_IN_ENV=y
->  CONFIG_CMD_ASKENV=y
->  CONFIG_CMD_ERASEENV=y
-> @@ -31,20 +35,28 @@ CONFIG_ENV_IS_NOWHERE=y
->  CONFIG_ENV_IS_IN_MMC=y
->  CONFIG_ENV_MMC_USE_DT=y
->  CONFIG_ENV_SPI_MAX_HZ=50000000
-> -CONFIG_CLK_SCMI=y
->  CONFIG_SET_DFU_ALT_INFO=y
->  CONFIG_SYS_I2C_EEPROM_ADDR=0x50
->  CONFIG_SYS_MMC_ENV_DEV=0
->  CONFIG_SYS_MMC_ENV_PART=1
->  CONFIG_PHY_REALTEK=y
-> -CONFIG_DM_REGULATOR_SCMI=y
-> -CONFIG_RESET_SCMI=y
->  CONFIG_DM_RNG=y
->  CONFIG_RNG_STM32=y
-> -CONFIG_SYSRESET_PSCI=y
-> -CONFIG_TEE=y
-> -CONFIG_OPTEE=y
-> -# CONFIG_OPTEE_TA_AVB is not set
->  CONFIG_USB_ONBOARD_HUB=y
->  CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=2000
->  CONFIG_ERRNO_STR=y
-> +CONFIG_OPTEE_LIB=y
-> +CONFIG_OPTEE_IMAGE=y
-> +CONFIG_OPTEE_TZDRAM_SIZE=0x02000000
-> +CONFIG_SPL_TEXT_BASE=0x2FFE0000
-> +CONFIG_SPL_CLK_CCF=y
-> +CONFIG_SPL_CLK_COMPOSITE_CCF=y
-> +# CONFIG_SPL_SHA1 is not set
-> +# CONFIG_SPL_SHA256 is not set
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_SPL_PINCTRL_GENERIC=y
-> +CONFIG_SPL_PINMUX=y
-> +CONFIG_SPL_PINCONF=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-> index c84116482f6..f7ff5db5943 100644
-> --- a/configs/stm32mp15_dhsom.config
-> +++ b/configs/stm32mp15_dhsom.config
-> @@ -2,10 +2,6 @@
->  
->  # CONFIG_ARMV7_VIRT is not set
->  # CONFIG_BINMAN_FDT is not set
-> -# CONFIG_SPL_DOS_PARTITION is not set
-> -# CONFIG_SPL_PARTITION_UUIDS is not set
-> -# CONFIG_SPL_PINCTRL_FULL is not set
-> -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_BOARD_EARLY_INIT_F=y
->  CONFIG_BOARD_SIZE_LIMIT=1441792
->  CONFIG_BOOTCOUNT_BOOTLIMIT=3
-> @@ -20,9 +16,7 @@ CONFIG_CMD_STM32PROG_OTP=y
->  CONFIG_CONSOLE_MUX=y
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
->  CONFIG_DM_HWSPINLOCK=y
-> -CONFIG_DM_REGULATOR_STM32_VREFBUF=y
->  CONFIG_HAS_BOARD_SIZE_LIMIT=y
-> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->  CONFIG_HWSPINLOCK_STM32=y
->  CONFIG_KS8851_MLL=y
->  CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks access-controllers"
-> @@ -31,42 +25,7 @@ CONFIG_PINCTRL_STMFX=y
->  CONFIG_REMOTEPROC_STM32_COPRO=y
->  CONFIG_SERVERIP="192.168.1.1"
->  CONFIG_SF_DEFAULT_SPEED=50000000
-> -CONFIG_SPL=y
-> -CONFIG_SPL_BLOCK_CACHE=y
-> -CONFIG_SPL_BOOTCOUNT_LIMIT=y
-> -CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
-> -CONFIG_SPL_DFU=y
-> -CONFIG_SPL_DM_REGULATOR=y
-> -CONFIG_SPL_DM_REGULATOR_STPMIC1=y
-> -CONFIG_SPL_DM_SPI=y
-> -CONFIG_SPL_DM_SPI_FLASH=y
-> -CONFIG_SPL_DM_USB_GADGET=y
-> -CONFIG_SPL_ENV_IS_NOWHERE=y
-> -CONFIG_SPL_ENV_SUPPORT=y
-> -CONFIG_SPL_FOOTPRINT_LIMIT=y
-> -CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> -CONFIG_SPL_I2C=y
-> -CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-> -CONFIG_SPL_LOAD_FIT=y
-> -CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
-> -CONFIG_SPL_MAX_FOOTPRINT=0x3db00
-> -CONFIG_SPL_MMC=y
-> -CONFIG_SPL_MTD=y
-> -CONFIG_SPL_PHY=y
-> -CONFIG_SPL_POWER=y
-> -CONFIG_SPL_RAM_DEVICE=y
-> -CONFIG_SPL_SPI=y
-> -CONFIG_SPL_SPI_FLASH_MTD=y
-> -CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> -CONFIG_SPL_HAVE_INIT_STACK=y
-> -CONFIG_SPL_STACK=0x30000000
-> -CONFIG_SPL_SYS_MALLOC=y
-> -CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
-> -CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> -CONFIG_SPL_TEXT_BASE=0x2FFC2500
-> -CONFIG_SPL_USB_GADGET=y
->  CONFIG_STM32_ADC=y
-> -CONFIG_SYSRESET_SYSCON=y
->  CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
->  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
->  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-> @@ -76,3 +35,10 @@ CONFIG_PREBOOT="run dh_preboot"
->  CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
->  CONFIG_TARGET_DH_STM32MP1_PDK2=y
->  CONFIG_USE_SERVERIP=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_SPANSION=y
-> +CONFIG_SPI_FLASH_STMICRO=y
-> +CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_SPL_TEXT_BASE=0x2FFC2500
-> +CONFIG_SPL_BLOCK_CACHE=y
-> +CONFIG_SPL_MMC=y
-> diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
-> index 01d65cfd893..13f9186b1cf 100644
-> --- a/configs/stm32mp_dhsom.config
-> +++ b/configs/stm32mp_dhsom.config
-> @@ -2,6 +2,10 @@
->  # CONFIG_CMD_EXPORTENV is not set
->  # CONFIG_EFI_LOADER is not set
->  # CONFIG_ISO_PARTITION is not set
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +# CONFIG_SPL_PARTITION_UUIDS is not set
-> +# CONFIG_SPL_PINCTRL_FULL is not set
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
->  CONFIG_BOOTCOUNT_LIMIT=y
->  CONFIG_CMD_BOOTCOUNT=y
-> @@ -38,6 +42,7 @@ CONFIG_DM_REGULATOR=y
->  CONFIG_DM_REGULATOR_FIXED=y
->  CONFIG_DM_REGULATOR_GPIO=y
->  CONFIG_DM_REGULATOR_STPMIC1=y
-> +CONFIG_DM_REGULATOR_STM32_VREFBUF=y
->  CONFIG_DM_RTC=y
->  CONFIG_DM_SPI=y
->  CONFIG_DM_SPI_FLASH=y
-> @@ -49,6 +54,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_FAT_WRITE=y
->  CONFIG_FIT=y
->  CONFIG_GPIO_HOG=y
-> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->  CONFIG_I2C_EEPROM=y
->  CONFIG_IPV6=y
->  CONFIG_IP_DEFRAG=y
-> @@ -58,6 +64,7 @@ CONFIG_MTD=y
->  CONFIG_NET_RANDOM_ETHADDR=y
->  CONFIG_OF_LIVE=y
->  CONFIG_OF_UPSTREAM=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
->  CONFIG_PHY=y
->  CONFIG_PHY_STM32_USBPHYC=y
->  CONFIG_PINCONF=y
-> @@ -66,17 +73,39 @@ CONFIG_PROT_TCP_SACK=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
->  CONFIG_SPI=y
-> -CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_MTD=y
->  CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> -CONFIG_SPI_FLASH_SPANSION=y
-> -CONFIG_SPI_FLASH_STMICRO=y
->  CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPL=y
-> +CONFIG_SPL_BOOTCOUNT_LIMIT=y
-> +CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
-> +CONFIG_SPL_DFU=y
-> +CONFIG_SPL_DM_SPI=y
-> +CONFIG_SPL_DM_SPI_FLASH=y
-> +CONFIG_SPL_ENV_IS_NOWHERE=y
-> +CONFIG_SPL_ENV_SUPPORT=y
-> +CONFIG_SPL_FOOTPRINT_LIMIT=y
-> +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
-> +CONFIG_SPL_MAX_FOOTPRINT=0x3db00
-> +CONFIG_SPL_MTD=y
-> +CONFIG_SPL_PHY=y
-> +CONFIG_SPL_POWER=y
-> +CONFIG_SPL_RAM_DEVICE=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SPL_SPI_FLASH_MTD=y
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_STACK=0x30000000
-> +CONFIG_SPL_SYS_MALLOC=y
-> +CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
->  CONFIG_STM32_FMC2_EBI=y
->  CONFIG_STM32_QSPI=y
->  CONFIG_STM32_SDMMC2=y
->  CONFIG_STM32_SPI=y
->  CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_SYSRESET_SYSCON=y
->  CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
->  CONFIG_SYS_BOOTM_LEN=0x2000000
->  CONFIG_SYS_DISABLE_AUTOLOAD=y
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+The summary seems good enough to me, and is shorter!
 
-Thanks
-Patrice
+- Simon
+
+>
+> --
+> Tom
