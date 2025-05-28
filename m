@@ -4,73 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA031C5AE59
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 07:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFAC3C5AE59
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 07:35:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 241F3831D3;
-	Wed, 28 May 2025 09:30:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4760A831BB;
+	Wed, 28 May 2025 09:35:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tz9ZOGxh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q1RtXziQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B79983906; Wed, 28 May 2025 09:30:17 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id D2840831C5; Wed, 28 May 2025 09:35:53 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A845831C5
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 09:30:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6349083158
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 09:35:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-604bf67b515so4855690a12.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 00:30:12 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-6049431b409so4812658a12.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 00:35:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748417411; x=1749022211; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748417751; x=1749022551; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QMO29Ai3GSGPwX3i0pLYKRuA+kJ1QJ2rCk3HVVpJ3NU=;
- b=Tz9ZOGxhKdA2m62aN+QX1zIvTFBBov1uUKXOU/HfJgqklf6+e/5ycfTQDrrgL9LQ0f
- Fs4cPUko+BqdHdJhw52SWEF9A6dtyJPrKlISaAWYdfA265bvjjqWErKi9VBqtIAdZxyg
- 3LFKXVuyRnLUw9IiLsqoYMMBJ5a0B8wsydL7g=
+ bh=HW+PqhlFklA2Sia7Ze7uBwzS/YOUYj2hRtFCq+pBFU0=;
+ b=Q1RtXziQcFs+5Xzoe2sd1cBOqEJA3XjHWSewqbNN/0W4P4lWLrznviW1Z494UXoyiI
+ FdoTLfdBas9E0WkxRpd3gWdJ6deXuwjqXiWWHrbSSR1MtZpdG+H3fuBHAgSSH1uApfve
+ toS053h7XDFnBHlRov4Bqdde4YHQehRnHjMhs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748417411; x=1749022211;
+ d=1e100.net; s=20230601; t=1748417751; x=1749022551;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QMO29Ai3GSGPwX3i0pLYKRuA+kJ1QJ2rCk3HVVpJ3NU=;
- b=FzqMZAjls6/iA2iilLNNjQbgfDeay2NRbRfJfYzB5jl/bapBmIFpshzUsmG+w2M8kA
- Dpk4O82XgG4P0+tFftB71rpYV8X/2n8pWYudR+65cw9mGfS69d3CgFH3rQ0ZG1kSVGzm
- k8n1S75uVqgfNxUA9TBeHPzV1lqaAcP/qVvJcMLIStcnTEvkZL1O/UzObWUzD98Ca+bm
- NvJhkyYciWjANVGjZGsR0IvEVo7Kn5FD+rUEKbY0svrAHbAcIXfJ2wtOqf/V08o4kLHu
- 0xutpwZskyLPphFRVXxIq2JsV/mTDPOG9V1JubAOE9TOEuvgq1wmfX5GsGEAKbqhgPqJ
- O4ww==
-X-Gm-Message-State: AOJu0YyrFurfa9uWQ82zo08dDZlZ2xwp6+V+769kCJX2/zBG4hvAxaga
- yzZ1I/NBBByWKsQmCatm9emiAoNNOXY1Ndc+cbVj6tehLJJzouypOigJC1mngQ7p9zkx3PFt8GP
- sXXWzyUA7EwxHHuSygx3FP5YvfYrPgdBtIpN7o5h1
-X-Gm-Gg: ASbGncvPFI2yvIDt4gFTwjaxh/SbgOF4sGCt58lT3L1UD7523CW+M5ckX0+yOle+gJz
- Bqodb0kI8+LqfUDotfKDaWx5NhT9tZ5hvF/LUbPUxy9rg2s79nzUAyKwMIhFlAfh+RGyGaeF14l
- m/yCdu4AqnZnV3ky0eMDQvaqDD3gkJ25I=
-X-Google-Smtp-Source: AGHT+IEC5evHX8QyUSo69+c8FgzUMbdxosQlENri3oNBum1UO3foz0+7Ufi1VL0Onm0azHKROLaQF5YPFdRifW/ruVM=
-X-Received: by 2002:a05:6402:40d5:b0:5fe:7b09:9e27 with SMTP id
- 4fb4d7f45d1cf-602d9af7e19mr11636129a12.12.1748417411516; Wed, 28 May 2025
- 00:30:11 -0700 (PDT)
+ bh=HW+PqhlFklA2Sia7Ze7uBwzS/YOUYj2hRtFCq+pBFU0=;
+ b=Y/swFRuhpUXbGei8GedP78rqHzFmjA5EXVFB1kdchbEely6cQsTwbb086nbpGruJWE
+ 4OoM1f9vit6FjZRQ12HLjcysBkEcSi8J6PfSYlxvxHKFqdkFUZbJRsdjNQVGAvRPett7
+ 2rbedNvt3TLkdbe8TWqcd2cdaDTSzT3xeefALp5h+cnGkNr/k9OPM8dg3IrGh4wj0QS1
+ V1k4ozMh8Z/poWIFqtMEEH5o7cIqANppJ89ARYPv89NEe+AEsgNchQ0wtb4JKG+Y6D2e
+ ylwQHJLW6RVdcDY7N07nzqBbcRkFpX3pdk5ugJxAlbk7cEAGJZOA7Y3MX1F1eF8vh2Xy
+ VnNQ==
+X-Gm-Message-State: AOJu0YwStaEKMPgcidDSjFFNyYKCMXYlKTErHJVCQRfnXA9OLxEhr7Oq
+ 8PrcjDLQjst/tej0OFQukTVUt6sJuvuMCOMYABgaYsEXF+cc7UW6a4Yag2ZLs7Q0Txw9qdm4DJc
+ /5ydn3hRZMO+Qb/BcpBeTJs8moB1ncb3j0XD4vcNL
+X-Gm-Gg: ASbGncv+JTvhQd/Q04vF0FoSNVzRFhROwRxmpNEoUXazqhyCYmLMPTqw9IxcsOLVEuo
+ v/QT8D1G1/Gg9ExgQvMC3+lTYix5mbvDPT+79Q+r4qSe8yAnGkctKwbWlzIgRrXElbYgcsoHZug
+ zfe30Z+cslGiVm3FueMaEMgij3KIeBiRs=
+X-Google-Smtp-Source: AGHT+IFMdrqA0QU2An76YtDHDLa8egNKfkGLul4NyKuC+DIsOx4KTGRJOikq0n6c+W4gY0lmV3jMSEw7MVV7lqDr7XQ=
+X-Received: by 2002:a05:6402:5106:b0:605:2990:a9dc with SMTP id
+ 4fb4d7f45d1cf-6052990ad3amr449329a12.27.1748417750693; Wed, 28 May 2025
+ 00:35:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250526220311.GF100073@bill-the-cat>
- <20250527193448.GL100073@bill-the-cat>
- <20250527194440.GM100073@bill-the-cat>
-In-Reply-To: <20250527194440.GM100073@bill-the-cat>
+References: <20250524120904.684977-1-sjg@chromium.org>
+ <CAC_iWj+XfkWPj+R1JUc0ZPFatRtpMso-Lw+uYzcgcbuKPuV3Dw@mail.gmail.com>
+ <CAFLszTho++gscP4rUUY354iyVWFyPkZeMCpa-TpX0GaWOQzQvw@mail.gmail.com>
+ <CAC_iWjKjZ-Q_hreO1Z64AFBWXOHB_YB_+Au_9psecVO+ATE_Pw@mail.gmail.com>
+In-Reply-To: <CAC_iWjKjZ-Q_hreO1Z64AFBWXOHB_YB_+Au_9psecVO+ATE_Pw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 May 2025 08:29:59 +0100
-X-Gm-Features: AX0GCFtDgQHXvwqsgpnJcn2o1CdyCRrkKQsTP6YmxMZ8FwRGUL7u677Cxp3Vv88
-Message-ID: <CAFLszTi6NqQmwoU99XHJu7eWemJaTVaa2P8gKgF0Hp6qx=dGJA@mail.gmail.com>
-Subject: Re: [ANN] U-Boot v2025.07-rc3 released
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de, 
- u-boot-board-maintainers@lists.denx.de
+Date: Wed, 28 May 2025 08:35:37 +0100
+X-Gm-Features: AX0GCFvHJghsbb3YhaeTnjULQd06KAsfRqNJfYWb4XsFML3GdKDQGVJS06qyCj0
+Message-ID: <CAFLszTi7M335=whLPav5P4+mhunAvs4eue780_eJZNjEG_+YAg@mail.gmail.com>
+Subject: Re: [PATCH 0/3] efi_loader: Move the public cerificate back to the
+ devicetree
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, 
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <cfsworks@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tim Harvey <tharvey@gateworks.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,114 +104,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Tue, 27 May 2025 at 20:44, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 27 May 2025 at 10:20, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Tue, May 27, 2025 at 01:34:48PM -0600, Tom Rini wrote:
-> > On Mon, May 26, 2025 at 04:03:11PM -0600, Tom Rini wrote:
-> > `
-> > > Hey all,
-> > >
-> > > So it's release day and I have tagged and pushed things out. I will be
-> > > updating the next branch shortly. There's still a few things that need
-> > > to come in for the release, as fixes, but otherwise I think the next
-> > > branch is where most changes should end up.
-> > >
-> > > We're continuing with a community meeting following the release and is
-> > > the same time as the previous meeting. The meeting details itself are:
-> > > https://meet.google.com/btj-wgcg-euw
-> > > May 27th, 2025. 9am (GMT -06:00)
-> > >
-> > > To join by phone:
-> > > https://meet.google.com/tel/btj-wgcg-euw?pin=1307528552322&hs=1
+> Hi Simon,
+>
+> On Tue, 27 May 2025 at 11:20, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > For today's meeting it was suggested to try and use Google's
-> > transcription service to take notes. What follows is a lightly edited
-> > copy of the transcript. I will say it took a good amount of time to read
-> > and re-edit. I will follow-up with a lightly edited Gemini summary, just
-> > to finish evaluating this idea.
+> > Hi Ilias,
+> >
+> > On Sat, 24 May 2025 at 19:13, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Sat, 24 May 2025 at 15:09, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > A previously rejected patch to move the EFI public cerificate out of the
+> > > > devicetree has recently been applied. This series reverts the change,
+> > > > pending further discussion as to why it was accepted.
+> > >
+> > > I spent a good amount of time, writing the commit message an
+> > > explaining why this patch was sent
+> >
+> > Yes, that is [1] and I did read it carefully before sending my series.
+> >
+> > From my POV there are two things wrong there:
+> > - The signature is not an internal U-Boot ABI.
 >
-> And here is Gemini's summary of the transcript:
->
-> Release Updates
->
-> * Tom Rini announced that Release Candidate 3 (RC3) was released the previous
-> day and things are generally in good condition.
-> * There's an outstanding issue and revert for the ext4 overflow issue that
-> needs addressing.
-> * Kernel release v6.15 is now in the device tree rebasing repository, and plans
-> are underway to sync and test it with CI.
-> * The community is encouraged to test the current state of the master branch on
-> available hardware in preparation for the upcoming July release.
-> * Regression fixes should be brought to Tom Rini's attention with links for
-> tracking.
->
-> Kbuild System Updates
->
-> * Ilias Apalodimas initiated a discussion about updating the Kbuild system,
-> which is significantly outdated.
-> * There are two approaches: incremental updates with detailed commit messages
-> or a large diff to bring it up to speed quickly.
-> * The consensus is to prioritize updating the Kbuild system over maintaining a
-> detailed commit history.
-> * Ilias has been working on porting patches to bring the system up to v5.1 and
-> plans to split makefiles into an include file for easier future syncs.
-> * The aim is to get the current updates into the next window and work on
-> syncing with v6.15 afterward.
-> * There's a desire to enable compiling with LLVM for catching more bugs due to
-> its stricter default flags.
->
-> QEMU Issue
->
-> * There's an ongoing issue with QEMU on the vexpress_ca9x4 platform,
-> particularly with TFTP crashing.
-> * There's debate about whether the issue lies with QEMU or the U-Boot
-> implementation, with suggestions to engage QEMU developers for further
-> insights.
-> * Peter and Richard Henderson from QEMU have been consulted, and there are
-> assumptions that the problem could be due to unaligned accesses and the MMU not
-> being enabled, but these assumptions might be incorrect as the TFTP crashes
-> early.
-> * Ilias plans to debug the issue further by the end of the week.
->
-> Continuous Integration (CI) Discussions
->
-> * Jesse T asked about making reproducible builds in CI, similar to Buildroot.
-> Tom Rini explained that the focus is on using pre-built toolchains to avoid
-> compiler build issues.
-> * There's interest in setting up a CI bot to test on boards. Ilias Apalodimas
-> has past experience with Buildbot and can share configurations. Haiko has also
-> worked on tbot and integrating it with GitLab CI.
-> * Jesse T raised a bug found by a professor on the DE1 SOC, possibly a compiler
-> issue, and shared build scripts for review.
-> * A CI discussion about running OSS was initiated by Simon. Ilias mentioned a
-> missing kernel module in Alpine, but is working on adding it to Yocto for
-> easier testing.
-> * Simon has a test that boots Ubuntu 2404 Desktop installer on his lab, but is
-> interested in CI testing with smaller images like Alpine.
-> * There are challenges with booting OS images from RAM using EFI and handling
-> ISO images in CI, leading to discussions about network booting solutions.
->
-> Other Topics
->
-> * Jesse T mentioned a bug on the D10 standard board, not the D1 SOC, and shared
-> pkg builds via IRC.
-> * Simon Glass and Ilias talked about a hang when running QEMU on an ARM64
-> machine with KVM enabled, possibly related to out-of-memory issues with blob
-> list.
->
-> Conclusion
->
-> The meeting covered various topics, including release updates, Kbuild system
-> updates, QEMU issues, CI improvements, and other specific problems encountered.
-> The community continues to work on enhancing U-Boot and ensuring its stability
-> across different platforms.
+> It is, as it is for every firmware that builds out there. EDKII does
+> the same thing.
 
-The summary seems good enough to me, and is shorter!
-
-- Simon
+I mean that in U-Boot's case it is a published and documented
+interface, or was until a few weeks ago.
 
 >
-> --
-> Tom
+> >  It is how U-Boot works,
+> > so if a build systems wants to inject a key it should use that
+> > mechanism, not add a new mechanism into U-Boot's build system. If it
+> > would help to have some documentation somewhere which says this, I
+> > would be happy to send a patch to add something
+> > - QEMU is blocked from accepting devicetree additions due to another
+> > Linaro employee's refusal to accept a patch[2]
+>
+> It's not blocked. It has been NAK'ed and IMHO for a very good reason.
+>
+> >
+> > > (which btw wasn't 'rejected', you
+> > > forcefully reverted it back then with no agreements from anyone)
+> >
+> > The original series [4] was applied (I believe accidentally) against
+> > my objections. Heinrich pulled the revert [5]. I went ahead and did
+> > the QEMU patch, to help with your issue*.
+>
+> Heinrich applied the patches initially, and you send the revert, that
+> none of the patch reviewers ack'ed.
+> You reasoning back then is that the RO functionality was moot, because
+> we didn't have it. It's here now.
+
+That was one aspect of my reasoning, but of course we can copy the
+signature into protected memory, make the devicetree readonly, etc. if
+desired.
+
+>
+> >
+> > > and
+> > > why we prefer to do it this way. tl;dr early boot loaders that pass as
+> > > a DT is a problem now.
+> > > If there's a good reason to revert it, please explain it on the commit message
+> >
+> > The reasoning hasn't changed from the discussion three years ago -
+> > please see [4]. There's also lots of discussion on your original
+> > series and my revert, e.g the cover letter. A highly relevant part of
+> > this is that devicetree is where config should be stored, so the build
+> > system has control over what is placed there.
+> >
+> > But in any case, it isn't right to send the series again, under a
+> > different name, e.g. not mentioning device tree.
+> >
+> > [..]
+> >
+> > Regards,
+> > Simon
+> >
+> > * The QEMU patch is still outstanding after three years. Could you
+> > please talk to Peter Maydell and see if you can get this resolved? I
+> > have sent it twice since, most recently in April [7] but there was not
+> > even a reply.
+>
+> Because they NAK'ed it a few years ago, and aren't willing to take it.
+> I don't think there's anything to discuss and for the record I agree
+> with the QEMU maintainers on this.
+
+Yes, I agree that discussion is unlikely to be fruitful. My point
+remains though that your series should not have been applied, given
+the previous discussion.
+
+This thread and the links should provide context for the future, if needed.
+
+One other thing I forgot for the record is that [8] and [9] are only
+needed due to Linaro's refusal to accept the QEMU patch or propose a
+convenient alternative.
+
+For now I've applied this series to my tree.
+
+Regards,
+Simon
+
+> > [1] https://patchwork.ozlabs.org/project/uboot/patch/20250401112729.2181793-1-ilias.apalodimas@linaro.org/
+> > [2] https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+> > [3] https://lore.kernel.org/u-boot/CAPnjgZ2uM=n8Qo-a=DUkx5VW5Bzp5Xy8=Wgmrw8ESqUBK00YJQ@mail.gmail.com/
+> > [4] https://patchwork.ozlabs.org/project/uboot/list/?series=253693&state=*&archive=both
+> > [5] https://patchwork.ozlabs.org/project/uboot/cover/20210802144431.2396678-1-sjg@chromium.org/
+> > [6] https://patchwork.kernel.org/project/qemu-devel/patch/20250405191352.2597585-1-sjg@chromium.org/
+> > [7] https://patchwork.kernel.org/project/qemu-devel/patch/20250405191352.2597585-1-sjg@chromium.org/
+[8] https://lore.kernel.org/u-boot/20250510134253.1581164-2-sjg@chromium.org/
+[9] https://docs.u-boot.org/en/latest/develop/devicetree/dt_qemu.html
