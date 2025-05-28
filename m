@@ -4,71 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E98C5C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 10:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1571C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 11:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48F6B83208;
-	Wed, 28 May 2025 12:22:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D6B8683A71;
+	Wed, 28 May 2025 13:11:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZXyj6nV2";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="tMWog3VX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F2CF83939; Wed, 28 May 2025 12:22:30 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C230383091
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 12:22:27 +0200 (CEST)
+ id 5B4A983A79; Wed, 28 May 2025 13:11:29 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2062c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::62c])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8125E839A7
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 13:11:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54SAMQcC3236620;
- Wed, 28 May 2025 05:22:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748427746;
- bh=XHKe0Pp1pGoFm1caQz5swpyxGy2f/sKa/0HgZpoFguo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ZXyj6nV2w2EVbnYJhnsSAuactB2frolMszX8sfPNipuG62hL8e1Y8EZF8rusKmhVs
- oFxuoYal1MKu/HfNSKAtVBKJIuob+6raOQcARn6UbTna3WGQqC1Eb2lPr4jJ6arUeZ
- r5kulizFeBvQAyZtsHtp+UMrYHe0eVApCUNgkIuY=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54SAMQKM3541823
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 28 May 2025 05:22:26 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
- May 2025 05:22:25 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 28 May 2025 05:22:25 -0500
-Received: from [172.24.227.139]
- (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.139])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 54SAMM4q009471;
- Wed, 28 May 2025 05:22:22 -0500
-Message-ID: <5d7fab64-1403-489f-9a0e-3f49d0ac7202@ti.com>
-Date: Wed, 28 May 2025 15:52:21 +0530
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ShRf5HyrjshdyiwJ6vcyCsxyvRw7oSBXtwjur7xx+fgI7KVh/36ilvllvLqG5mBKt82gs+KlDP43ZFyd5LNzq/3OXi7IlT/OQIc1AnWaeb89A7eRCEQLX/eIpCPS2QfZHE0lrC1v7cuIT0JQ31IiAZ7qvow4sOdMUxAsP77WoWigh61GlVxEBH1+rEQLfiIHMG3jf8sYiLZuY4egenPA9GD2b7GaDaqhdkx6YAGHZxbZrdKQdGbCSOx0chOFDWmAFwEf3vqlnidbqkxY8QfDOzHrb5Ax4jOjUVBzt3faVaoC2lS3GXBGGft1PS/r0QcJ5QBxH10Xlbue+oC4ookwjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vDd1GMe1Znl+FEnOBFEt8GNUJuKvsvbxmHSKupJFWAU=;
+ b=ha+uUIX6uJm0TnNhKPGQ8YyEfTWSjsq7iY1Le5triq827XfjsaG07oe+qugUJ8mcfBQcyXyIBqRgH8mOhOIw/DrtNuj6BlQjOUEs/Yhw1XCvNAGsO+MakKbOLnsI3Wg7qsXHmKtAYtjL8ziw+u1rCYXcELFFNtkHzraCFG34jB3c/YWu9G63yCD5xFu3yd7BmizpuKDg/lBqJbKMH10xqiDJEo1IsfJMXLSuYRvAZbGJ5/5TAY5vaIrJOMsN/BTRIb+I32yx60e2yd3qU1oIhjAhyRVIXwLS1JCa2ZwdsAYGrwNfZWomGYcn6RTgizmTAuglu2RrQNz9MMlfFhS9QA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vDd1GMe1Znl+FEnOBFEt8GNUJuKvsvbxmHSKupJFWAU=;
+ b=tMWog3VXqRC9f3F+54UUV5m614FWj7Xs5+VPjDVYS8L/2MegB1CVMefQYrhLWvAERgUfKYFcuLEwaUhffvA2GV+Pt+TUSoGGBk6u0fE2LK3wh5tIQ4fCU2dsHs4JP9MY3NEynscXHfckuGEdW/GQc+BI2Z4SWyi0nEMFq7507kbefoJeXHtsb/vN23LGQbIPcpMR2NfmlZU6fcdJMiMROUVvy1rJQFbS5SjE2b71wC3woBktyuBXNoxfglMw9/r9RHEE004DKadtpHV4isuNx2CMuQlThm6Ds8GOrSYIoGFkus343yXlldy3vEExIdUOLDHnj0PfMmSey15EL/Pshg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from BYAPR03MB4646.namprd03.prod.outlook.com (2603:10b6:a03:133::26)
+ by DM6PR03MB5211.namprd03.prod.outlook.com (2603:10b6:5:24a::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.27; Wed, 28 May
+ 2025 11:11:23 +0000
+Received: from BYAPR03MB4646.namprd03.prod.outlook.com
+ ([fe80::8919:e2df:10df:51ce]) by BYAPR03MB4646.namprd03.prod.outlook.com
+ ([fe80::8919:e2df:10df:51ce%4]) with mapi id 15.20.8769.022; Wed, 28 May 2025
+ 11:11:23 +0000
+Message-ID: <459a6e3d-040e-4130-b643-c822f4008daf@altera.com>
+Date: Wed, 28 May 2025 16:41:15 +0530
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] arm: mach-k3: am62a: Fixup CPU core, DSS, CAN-FD and
- Video-codec nodes in fdt
-To: Daniel Schultz <d.schultz@phytec.de>, Nishanth Menon <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <afd@ti.com>,
- <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <bb@ti.com>
-References: <20250430104236.2611089-1-a-patra@ti.com>
- <20250430104236.2611089-2-a-patra@ti.com>
- <20250501122848.jaun54umcun6ijs7@domain>
- <235f58b4-6c3e-49ea-9a16-4eb0582b472b@phytec.de>
+Subject: Re: [PATCH v2 0/5] Create FPGA Partial Reconfiguration (fpga pr)
+ command
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
+References: <20250524203737.20541-1-nareshkumar.ravulapalli@altera.com>
+ <CAFLszTjiRpYaG=Hx2fo5gGowpfkww1t4=W7iaEpgbU3OgWKbuQ@mail.gmail.com>
 Content-Language: en-US
-From: Aparna Patra <a-patra@ti.com>
-In-Reply-To: <235f58b4-6c3e-49ea-9a16-4eb0582b472b@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <CAFLszTjiRpYaG=Hx2fo5gGowpfkww1t4=W7iaEpgbU3OgWKbuQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PN4P287CA0105.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:276::8) To BYAPR03MB4646.namprd03.prod.outlook.com
+ (2603:10b6:a03:133::26)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR03MB4646:EE_|DM6PR03MB5211:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b6592f8-a24f-41e3-2b82-08dd9dd86159
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NlpvbjFZREtMTGtUbnkvS0E2ZHo0WGxMTWdlalZtU2cxR2NsTWpQWEo3UnMw?=
+ =?utf-8?B?d0ZKWUFWZzVnTHRtOEl5Q09GOUhLcW1Jc2pYbURQTXo0QmNRUHEzSVd2SVZN?=
+ =?utf-8?B?U1JNZEhwTnlEcUZvWXMyNUhsRXJPSTd1Q2l6OVVLKzBSaGM2R0hkeHFGd0R3?=
+ =?utf-8?B?Y2FtU2lCYVp1Nk9vWWd4cFphUFRtb3Blb1dHanRaelpGTjNKcUtTYVlIUFRk?=
+ =?utf-8?B?UjMyVUdSM241cDJZWktXUDFQb0g2K1YzemI3ZExGSmFKU0FJS2VGUGRQTjNr?=
+ =?utf-8?B?N0RLSFkwaGxxdW5aMy9FS09YUWRFczV6MjhIMEZWSzNpWm03Mk1GOFI0V1BX?=
+ =?utf-8?B?V25JQURaN3cvKzJDZ05lYXBLVXNRaGVwK09GQlhLTjh6OXpKY2cwczF1ME1i?=
+ =?utf-8?B?THJTWUp0akhpTHRUa0JMbnZzQTFUeDl1S2tjWTFUaVBQbTVVNnpwcGpqTnVo?=
+ =?utf-8?B?ZFZGQkMrbXZaNWdYZ09wN2FIYzhoUlNFVjdLdjNuaDVUYlNjUHF2LzBNTkJK?=
+ =?utf-8?B?TFQ1Z3F1VTJwMkY3SXQxQTRUSVZ4RUNBOWtPT1Z6K3JBS0Z4Y3RwaWhMQ3FH?=
+ =?utf-8?B?QnVjTHNQc2h6NDVpWWE1VnZnNWFCMmRFemVYSS9wNnVlVjROTUFaenpXRWRq?=
+ =?utf-8?B?VktlVTFMWDVra3RKTXAzTzgwQ3FjMHo5cUJtdndPbTZWVzlXQVpwb1MyamdZ?=
+ =?utf-8?B?dkFDK082dGpnS2o4d3QzMHZ4YUdUZlEzQ1czZVl0Ni9lZ2dpTGRWdndxNDZT?=
+ =?utf-8?B?U0xMZklGOENjQWRYZHRaMEpBa3pMSW9lcGlZQ3AwYmV6MUcrZWYzRHYwUERx?=
+ =?utf-8?B?eUozellQV3d1WEk0dVp3SzRnVXJxblRZaXdSMnluamh5R0dCYXQyYXNqN3BC?=
+ =?utf-8?B?eWxQbXJBVFVreFhhZXJwWWRNNlBoNVhuR3FPMjdEaE40NU5EYlppTW8wNzQx?=
+ =?utf-8?B?Rk9hZjFPTlIydUlMUjN2WkRURWs5MFhKSEFBUFB1c3NYNnRFUnZySE9lT0hH?=
+ =?utf-8?B?dHBCTG5ZZ0pyeWJYNTQyQzUyTEx0WjZIeDU3V0JRMCtzbjd4ajVUWHhjYS9H?=
+ =?utf-8?B?Z1lSZWY4VVloRTRsRXVRZmNDVHVBclVrcnp2RllsRnBNc3dwTmJGYXpBb2x2?=
+ =?utf-8?B?RXFSUTJUNGd5V2J5RWRiN2hhMHQwSXZhRHZqcUNpVUg3Sm1yZ29HVURGUDV1?=
+ =?utf-8?B?cEh2Umo5R25zMzhwSWVKS0NDNGx1c0laS2RDbW42OXZscnBIbE1DU21qa0lq?=
+ =?utf-8?B?cWY1RVBqdERydTNMOTlXbEk2S2dIblhWVkMxVVNhZ2VyOTlWMWlSM095WlVk?=
+ =?utf-8?B?OE9zcDhaN3BYRUkzZG53VnN6VkttZXVOKzhpWnByRVRZSmk2YTVXMStiVkE4?=
+ =?utf-8?B?MW8xV3c4TjZzYzJiVERGVUZ1b0JWOTh3dnlMRWkzTzYxOU1LNlRHYWJEc1Zz?=
+ =?utf-8?B?WUxHWlplZFMxTXNxdUk3MzBMZHNoSlNGTTRMdVJBUGpYb0JFclp1TWErYnBK?=
+ =?utf-8?B?TnM1RUxWd1EyMWFGS05mRVRBUlJvdFpEM2YvVEp4WHNvNlJPNWhiSy9UdFNo?=
+ =?utf-8?B?amZQam9WL3J1bGVLd0dPMzlvL0ZMakFvZkhWQ1RJY1AvTmYxWkl1NzNQdWJi?=
+ =?utf-8?B?SEVKQVRoRGZJSklhOWVxVENQeHVCUnMrVzN2UUp3clRVRm5yd1NsQVpMRjBz?=
+ =?utf-8?B?clJ3Sm5UbTJlalNBdTVCbFRPQUpyMHlETnlXbVp2MFQzSTM1RVJmVzJQeEph?=
+ =?utf-8?B?REFteUhLcmIwQStjZlhyeFFEajFQV0xpenlCUWhlUDRva3lZZ3poeVRnazFw?=
+ =?utf-8?B?UUtVamVBTk03QVY3TktpS0g4dndJQWJZOFI5MXBDbnZVRmoyMjBrOG0xbWVV?=
+ =?utf-8?B?QjNqeXJ6dTE2a1lIQVIwZWRFRTUvZVIrd3BpcCtTbmtoVDMyb0lsNXB3OFpJ?=
+ =?utf-8?Q?oQRES3TB69Y=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR03MB4646.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NTkydXI4VHUyd29UYmtMRHorRDBXSFhDWDk1RlhYWW90NWlKbXBRcHBucEhV?=
+ =?utf-8?B?Z0hyRDNjMlcvdm5oNTlYRmhTVUEyZjJyc3hKRTQvSlR4b0FMNy8zL0JvMjli?=
+ =?utf-8?B?RVI0cXZUMTF5OHhHcU82SmsrM2k4UUtMeThIV0ZNNkhlMG9aOFFXZkhmSW04?=
+ =?utf-8?B?RGtnVWI3YklaRm9MQ0ZYd1ZuN2ZEV2dydCs0TDRMaG9EQ052UDhsU2FRSzNN?=
+ =?utf-8?B?TkNsUGhaN1gvdzNnbW1XNC9Ca1c4TFBHUWNQNml1aHVPdDhNOGVZVWNxbHBt?=
+ =?utf-8?B?cEc4Z1lwRlIzS2daZ1p4SzFibHFBWnVoYmVZZkxvcEFoQ0ZZZFhsZ0pXVGVi?=
+ =?utf-8?B?VDdidER5emhwTU5acFQ0Q2x5TXBmZXEvdFZkNjgxWGU2NjBKMXk5WS9nZ2VT?=
+ =?utf-8?B?U3pXbVRkQUNPWnFwR0poaVdiK2VQOG1wbmwzU2hHTE1IWWZ5RlJxYnFENVQ5?=
+ =?utf-8?B?c25pbkEyQkNlbVR1eDFFTVF4RHlCS01OMndrT2Q0bnFYc1ZBdDNHN0hHcWtP?=
+ =?utf-8?B?b1VoQjVOa0VLQnplUFZVbEJUOTVkM3pwR3VBL3BiMU5KUXpJQjdFNnJpM3Rp?=
+ =?utf-8?B?Q0ZWait1V2Q2U0JZU05TT2o4blR6NEplTXBBemZjRWt0aGNEVTJBazI3TWdE?=
+ =?utf-8?B?eklhTTJOK3RQL1EyMlFFSDMyMnVsWFFTR2VMdFNySmpMeDQ1NkJvdCtxVXNT?=
+ =?utf-8?B?YU51Mi85Zm9LVzBFVkVFOUVVdXh5d3NtakUwRzI3L1duWXZuODl3UVFmejNK?=
+ =?utf-8?B?Uk9MVlZ6Zjh1YlpvMUVyRVRvOFVROU5qUkN6dlB6eGZZTlN1MEJzTGJvME5q?=
+ =?utf-8?B?bFFVSFdaMzB2MEppeTVhYlQycmVpSXVtWkE5OEhTQm5UQTBTK25oNkxxelN2?=
+ =?utf-8?B?Q0tXZzMreGN1bzBiNE1BWlFlSjZDM1dQS2FSbks1Vkp5elc0QXl2K1p0T3Ry?=
+ =?utf-8?B?MGkrNU8vRFMyd3U5VnVkZFBWUXY3cDlzZjBHa1JHWjB2c2JDckd6VVJzaDJh?=
+ =?utf-8?B?UWx1ZU9VTnFkcEd5dEZzY3UvREYwZ0NIbVlIMmkxYU5LQ2I5aEJrWVRya0J5?=
+ =?utf-8?B?Z0hsWE5SQ2V3NlhuQ082VmNvREJubGJJekxYbHU5Z3llcTVhemQ2YjEyTjM1?=
+ =?utf-8?B?T2tjS1J5d3lnNEZBYmtUNzRTejRZaDNQSS9qVEF0dTU1MFQ1aHZXQWxXbU9u?=
+ =?utf-8?B?NVlYb0NPUkN0c3JPQUsyR2lSdGw5TWlKTFJmNTQ5eXJaOEVPb1ZJYlNvNXhy?=
+ =?utf-8?B?bjhTdnplcFlqZDRsdko5ZEdGUnN5WTIyMVg2dEsycngwejdSRkUrZUVjTE9a?=
+ =?utf-8?B?bkE4bFQwNGd5bG5vVCtlYzd0NkR1QlpVZFdHMFROa3dSSzZ4M3JHOWF6N3Zz?=
+ =?utf-8?B?ZUJNZzNXaUJUa24xTUx6R2s1VHNhaS9vMjFoa1c5TmE5K0tNN2ZBaHFwRHpU?=
+ =?utf-8?B?ZFo4VnYwZ3BpemFBYWEyR1plZzRGYTI0dFNNVy9KN1RFdU02SHRGTHlBZXJo?=
+ =?utf-8?B?QnAvTkJyWHRkN1dGb3BvbmpKQzVBKy85cGQvTXlCRmtiZlE3Z2RMV0grSWdN?=
+ =?utf-8?B?cU9NbEhYdVA4WW1IQXc5NnJDYXp6U3hNQ2I4cDRRaENqZ0E4MjQrMDRXcnMy?=
+ =?utf-8?B?QUszODI4NU5weGxzbzB4N216TzdqK3JYWGM0RHFadzhRRUd3QVRHNnNaSERx?=
+ =?utf-8?B?ZktHNndMcHJELytRUVdMbUVidGpYaGdtbzBTQjNWMEpFNi9DUmRBM3h5Zi9L?=
+ =?utf-8?B?SmFsbTRsVTNtQ2ZqVjBHL2doUlRrZWV1WFViNzE1a2ttRUJjSHdVb1ZMdFA4?=
+ =?utf-8?B?NjJQSEtKU2RjVVJUMCsxL3R0aWZhSlRaci9JZGFSVFVzbHpIU3ZqNmxrUFl4?=
+ =?utf-8?B?WTluSHYvNTF5d0pGdjd4RUdQVUNGK2ZFZWpuMmhwOFNBTEdTM1ZzcHM3WWNZ?=
+ =?utf-8?B?elBnQ2pGRmZyZUl4OWlsVWtrckpRZDNabHNlNFNxcUhjeHF4T0tVYVd5ZkpX?=
+ =?utf-8?B?MVR4b3UrMlpkTkp4emRvTy8vYVFTN1FtSTJRYWE3VVVQUEN0MXo5ZHJIdHFz?=
+ =?utf-8?B?SGpsYmJhSHBrbE1LeWR5aUF6Z1JxWVdubHJKVTd2c25sWWdCSzVJZmtMMWVu?=
+ =?utf-8?B?Wk0wUWQzUEVvSU9Ld25VWmE0NWtvLzNhWXg2blF1dktFZXU2TXozVEwyUFUx?=
+ =?utf-8?Q?CWF8LvFT18I8yW2U89O3t4g=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b6592f8-a24f-41e3-2b82-08dd9dd86159
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4646.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2025 11:11:23.2357 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CGREi4ERPRmCUQLS/DbEjzLPMa8hnrujFEdMSONiQpUxdOnrGV2eWQz3QBzdDk5gdIH+0Y8N1oasnUDEE13GnEOALF1X+ZzAyl6xvnnlNl8E/BcPuBSShHTahmUyIFxu
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5211
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,177 +181,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon
 
-On 02/05/25 15:08, Daniel Schultz wrote:
->
-> On 5/1/25 14:28, Nishanth Menon wrote:
->> On 16:12-20250430, Aparna Patra wrote:
->>> AM62A SOC is available in multiple variants:
->>> -CPU cores (Cortex-A) AM62Ax1 (1 core),
->>>   AM62Ax2 (2 cores), AM62Ax4 (4 cores)
->>> -With and without DSS, CAN-FD & Video-codec support
->>>
->>> Remove the relevant FDT nodes by reading the actual configuration
->>> from the SoC registers, with that change it is possible to have a 
->>> single
->>> dts/dtb file handling the different variants at runtime.
->>>
->>> Signed-off-by: Aparna Patra <a-patra@ti.com>
->>> ---
->>>   arch/arm/mach-k3/am62ax/am62a7_fdt.c          | 41 
->>> +++++++++++++++++++
->>>   .../arm/mach-k3/include/mach/am62a_hardware.h | 40 ++++++++++++++++++
->>>   2 files changed, 81 insertions(+)
->>>
->>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c 
->>> b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
->>> index 7f764ab36b..56fd658202 100644
->>> --- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
->>> +++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
->>> @@ -8,8 +8,49 @@
->>>     #include "../common_fdt.h"
->>>   +static void fdt_fixup_cores_wdt_nodes_am62a(void *blob, int core_nr)
->>> +{
->>> +    char node_path[32];
->>> +
->>> +    if (core_nr < 1)
->>> +        return;
->>> +
->>> +    for (; core_nr < 4; core_nr++) {
->>> +        snprintf(node_path, sizeof(node_path), "/cpus/cpu@%d", 
->>> core_nr);
->>> +        fdt_del_node_path(blob, node_path);
->>> +        snprintf(node_path, sizeof(node_path), 
->>> "/cpus/cpu-map/cluster0/core%d", core_nr);
->>> +        fdt_del_node_path(blob, node_path);
->>> +        snprintf(node_path, sizeof(node_path), 
->>> "/bus@f0000/watchdog@e0%d0000", core_nr);
->>> +        fdt_del_node_path(blob, node_path);
->>> +    }
->>> +}
->>> +
->>> +static void fdt_fixup_dss_nodes_am62a(void *blob, bool has_dss)
->>> +{
->>> +    if (!has_dss) {
->>> +        fdt_del_node_path(blob, "/bus@f0000/dss@30200000");
->>> +        fdt_del_node_path(blob, 
->>> "/bus@f0000/pinctrl@f4000/main-dss0-default-pins");
->>> +    }
->>> +}
->>> +
->>> +static void fdt_fixup_video_codec_nodes_am62a(void *blob, bool 
->>> has_video_codec)
->>> +{
->>> +    if (!has_video_codec)
->>> +        fdt_del_node_path(blob, "/bus@f0000/video-codec@30210000");
->>> +}
->>> +
->>> +static void fdt_fixup_canfd_nodes_am62a(void *blob, bool has_canfd)
->>> +{
->>> +    if (!has_canfd)
->>> +        fdt_del_node_path(blob, "/bus@f0000/can@20701000");
->>> +}
->>> +
->>>   int ft_system_setup(void *blob, struct bd_info *bd)
->>>   {
->>> +    fdt_fixup_cores_wdt_nodes_am62a(blob, k3_get_core_nr());
->>> +    fdt_fixup_dss_nodes_am62a(blob, k3_has_dss());
->>> +    fdt_fixup_video_codec_nodes_am62a(blob, k3_has_video_codec());
->>> +    fdt_fixup_canfd_nodes_am62a(blob, k3_has_canfd());
->>>       fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 
->>> 0x80000);
->>>       fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 
->>> 0x1800000);
->>>   diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h 
->>> b/arch/arm/mach-k3/include/mach/am62a_hardware.h
->>> index cd61abe018..ab281129d7 100644
->>> --- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
->>> +++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
->>> @@ -19,6 +19,18 @@
->>>   #define MCU_CTRL_MMR0_BASE            0x04500000
->>>   #define WKUP_CTRL_MMR0_BASE            0x43000000
->>>   +#define CTRLMMR_WKUP_JTAG_DEVICE_ID (WKUP_CTRL_MMR0_BASE + 0x18)
->>> +#define JTAG_DEV_CORE_NR_MASK            GENMASK(19, 18)
->>> +#define JTAG_DEV_CORE_NR_SHIFT            18
->>> +#define JTAG_DEV_CANFD_MASK            BIT(15)
->>> +#define JTAG_DEV_CANFD_SHIFT            15
->>> +#define JTAG_DEV_VIDEO_CODEC_MASK            BIT(14)
->>> +#define JTAG_DEV_VIDEO_CODEC_SHIFT            14
->>> +#define JTAG_DEV_DSS_MASK            GENMASK(16, 13)
->>> +#define JTAG_DEV_DSS_SHIFT            13
->>> +
->>> +#define JTAG_DEV_HAS_DSS_VALUE            0xD
->>> +
->>>   #define CTRLMMR_MAIN_DEVSTAT            (WKUP_CTRL_MMR0_BASE + 0x30)
->>>   #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK    GENMASK(6, 3)
->>>   #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT    3
->>> @@ -86,6 +98,34 @@
->>>   #define TI_SRAM_SCRATCH_BOARD_EEPROM_START    0x70000001
->>>   #endif /* CONFIG_CPU_V7R */
->>>   +static inline int k3_get_core_nr(void)
->>> +{
->>> +    u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->>> +
->>> +    return ((dev_id & JTAG_DEV_CORE_NR_MASK) >> 
->>> JTAG_DEV_CORE_NR_SHIFT) + 1;
->>> +}
->>> +
->
-> I can see these three following components are optional but I don't 
-> see any silicon devices without them. The AM62A processor data sheet 
-> only lists devices with different A53 and C7 options.
->
-> BTW: C7x fixup is missing in this series ;)
+On 25-May-25 11:35 PM, Simon Glass wrote:
 
-Daniel, table 4-1 only shows the classification of AM62A family.
-please refer to table 9.1 in datasheet for device grades information. 
-There are device grades which doesnot have DSS, Video-codec etc
-
-For C7x, upstream does not include C7x device nodes as of now. Fixups 
-will be added once nodes are included in dts.
-
->
->>> +static inline int k3_has_dss(void)
->>> +{
->>> +    u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->>> +
->>> +    return (JTAG_DEV_HAS_DSS_VALUE == ((dev_id & JTAG_DEV_DSS_MASK) 
->>> >> JTAG_DEV_DSS_SHIFT));
->>> +}
->>> +
->>> +static inline int k3_has_video_codec(void)
->>> +{
->>> +    u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->>> +
->>> +    return !((dev_id & JTAG_DEV_VIDEO_CODEC_MASK) >> 
->>> JTAG_DEV_VIDEO_CODEC_SHIFT);
->>> +}
->>> +
->>> +static inline int k3_has_canfd(void)
->>> +{
->>> +    u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
->>> +
->>> +    return (dev_id & JTAG_DEV_CANFD_MASK) >> JTAG_DEV_CANFD_SHIFT;
->>> +}
->>> +
->>>   #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->>>     static const u32 put_device_ids[] = {};
->>> -- 
->>> 2.34.1
->>>
->> We should do a proper framework for this that scales multiple devices.
->
-> I agree, this should be reworked afterwards and moved into a 
-> framework. We have literally the same logic for AM62 and AM62Ax. I 
-> also have temperature fixup patches for the AM64 which are identical 
-> again. Would be nice to move most of this logic into a common part.
->
-> Thanks for sending those patches!
->
-> - Daniel
->
-Thanks for reviewing the patches Daniel. We will soon define a common 
-framework and reuse APIs wherever possible.
-- Aparna
+> Hi Naresh,
+> 
+> On Sat, 24 May 2025 at 21:37, Naresh Kumar Ravulapalli
+> <nareshkumar.ravulapalli@altera.com> wrote:
 >>
+>> Partial Reconfiguration (pr) FPGA command is added to U-Boot console.
+>> The "fpga pr" command supports multiple regions for partial
+>> reconfiguration by specifying the region number. The implementation
+>> of the command is specific to the underlying FPGA device.
 >>
+>> In case of Altera, it is used to freeze the specified partial
+>> reconfiguration region, then user loading the reconfiguration image
+>> followed by unfreezing of the region.
+>>
+>> Test set currently can't be added as the command is implementation
+>> specific. It involves opening of FPGA bridges and loading of external
+>> images during run time. Currently, existing FPGA commands don't
+>> have any tests/sandbox environment. The design is being worked on,
+>> but would take some more time to share and get the community
+>> feedback.
+>>
+>> Changes in v2:
+>> - Change the command implementation to generic FPGA command
+>> - Add usage documentation for the command
+>> - Correct "_" with "-" in alias name in Altera dts files
+>> - Add FPGA partial reconfiguration support for Altera devices
+>> - Address minor comments in v1
+>>
+>> Naresh Kumar Ravulapalli (5):
+>>    drivers: fpga: Add generic partial reconfiguration support
+>>    cmd: Add partial reconfiguration command
+>>    doc: usage: cmd: Add documentation for fpga pr command
+>>    arch: arm: dts: Correct alias name for Altera SoCs
+>>    drivers: fpga: Add partial reconfig support for Altera SoCs
+>>
+>>   .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |   2 +-
+>>   arch/arm/dts/socfpga_agilex_socdk-u-boot.dtsi |   3 +-
+>>   .../dts/socfpga_stratix10_socdk-u-boot.dtsi   |   3 +-
+>>   cmd/Kconfig                                   |   8 +
+>>   cmd/fpga.c                                    |  38 ++++
+>>   doc/usage/cmd/fpga.rst                        |  65 +++++++
+>>   drivers/fpga/Kconfig                          |   7 +
+>>   drivers/fpga/altera.c                         | 163 ++++++++++++++++++
+>>   drivers/fpga/fpga.c                           |  37 ++++
+>>   include/altera.h                              |   7 +
+>>   include/fpga.h                                |   3 +
+>>   11 files changed, 333 insertions(+), 3 deletions(-)
+>>   create mode 100644 doc/usage/cmd/fpga.rst
+>>
+>> --
+>> 2.35.3
+>>
+> 
+> How about creating a uclass for FPGA, with an API? I think it would
+> help to make things more uniform.
+
+Yes, I agree. While going through the existing FPGA commands, I also
+feel we need to refactor them for uniformity. But this patch series is 
+about adding a command with existing framework, I would like to keep 
+both tasks isolated.
+
+I will push the refactoring work as a separate patch series.
+
+Kind Regards
+Naresh
+
