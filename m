@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50676C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 23:31:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24F5AC5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 23:31:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38459833C7;
-	Thu, 29 May 2025 01:31:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48CFD8343F;
+	Thu, 29 May 2025 01:31:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q8FxM5UM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ffWAzI/i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80EA883404; Thu, 29 May 2025 01:31:00 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 549BA83429; Thu, 29 May 2025 01:31:05 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE058833C7
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 01:30:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B31A783487
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 01:31:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72bc3987a05so248729a34.1
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:30:57 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-72ecb4d9a10so347487a34.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748475056; x=1749079856; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748475061; x=1749079861; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P+DgjYHg78BUiqqAEJGJpgEnyKm8kJ/eSxzxfgtF4qM=;
- b=q8FxM5UMe5uxeUClX+PE1ucjUs8TnXj9AGl+kx/1278RvSfpXJiYwwhepk4gNnOIFA
- tnSlPixptS/0miRNl8DkfHOXf/20Sm/QjMFeVlTxeHbOU+DUudeH5gYUGFfcZA4VcLk9
- qG9B9IjFTDmVN8eOYIHxx+9ICU2HEN/Is65v4=
+ bh=iGyxp4AmHYR3jELHJzWu/0KbmCt2SBdWLg/pD+8d268=;
+ b=ffWAzI/ipeWxv+3SHrwiynXE4DTKsNnSB6Ewm/v9m1/765NPJc+Nb7zsaGonf2B/X3
+ QEneLrPmhEJPXUqW7yLvecGeQ/qaoriPQGfsq6DwLMBKUT3TXpkhcpv+cU5V9WaFj6Vz
+ 2LZv8H0nA+svH4ShlnICK9UDeCzYdJObUx8Jg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748475056; x=1749079856;
+ d=1e100.net; s=20230601; t=1748475061; x=1749079861;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P+DgjYHg78BUiqqAEJGJpgEnyKm8kJ/eSxzxfgtF4qM=;
- b=eScshcoHHDewgVAcbs8bCS+4vGaYlzxBTtIlbKDPK7qiHp3ckgI6xHtsPO6NENpZnN
- XisZ3+x7ezQaREqIBdHTpab/2Fq2NTDH3bZuIZeURLNj8dFn49SncSove43bvKpA7uAr
- W99urjF30SFxvTlLCx20ICenAzRwLFs+nCiFDPb+c+W7B2mXPmI3EWyQkYOg/c4g0Hzt
- gYp4fArd8Qzben5D+sadXCgrbodrp/97SNNnt5urgWlXf6Z0B4L0++4htLsK+/LY2V8a
- LnXU2IUr+uvumUuvtoVRx+12h9xRc3+NByp1eudSq+I1vv9qHuvaEThMPOh/GrW7MIcn
- kccQ==
-X-Gm-Message-State: AOJu0YwjnqU+195w3VqKrP1tlaz1xBdAD0UQbXMj8gp9vCZ3N4JCAy1R
- xhjCSgWFT1xc0JoNyMDYUaYrYDUwCrSspJ/UiTo0fbU1loNnxnVjojjdU/wV6hS7NeDdzymq6Rq
- rbm5pcUQ=
-X-Gm-Gg: ASbGncvtsNzt3/gJtworbqcTMDDNyhqdfn3qJDfhPZ5jQ1mz/5TizncNV/abaksa9ho
- spXSo+PAZtjaVIqNkvZ2mDzjAFRzE4T4NSTuAkIsp0ad/XOWl74dxhUE4Z2s613DtmlsSU0qjTu
- CsNZMTDxhrdBhR7CyWIsDkSX8yS4pzuyER+H2E0zfdQuQxrM3gpZQbyo92Sr4uyUHQjZdgTQTw8
- WTC9Qn32IJ1AoI8KElCcvLnU1kPZdRCeMAv3CnRaf4kXueigJrRNMCtk9KBGPCXHx9DzjC51vs+
- K9fGR5nB6B63Fre//HxQD6maonaSe40oA8NPjSmRbkrxdo8M7nhX1B7+vpqOB5eoZxcIuzwz8mH
- b59S2FfUsT31a1iE=
-X-Google-Smtp-Source: AGHT+IGnw8XRn8SUs8IfioLbFdT0j4sWsS/jPdhFyKHG7e7Al6AT7WeW3itYFEkBwYhjdRRVx6FOrw==
-X-Received: by 2002:a05:6830:3884:b0:727:3587:fd1 with SMTP id
- 46e09a7af769-735acebb033mr1061708a34.3.1748475056495; 
- Wed, 28 May 2025 16:30:56 -0700 (PDT)
+ bh=iGyxp4AmHYR3jELHJzWu/0KbmCt2SBdWLg/pD+8d268=;
+ b=rxBiev8Xmx1iJ6rj+wU6jsO4BYR7Uy18khFAl+ITted8AoO/viprzjmrFcXo03olb9
+ NdKT8DtNBy2NI6NaMjiFq3GPChck6YLLtvX/Z4HOzfFG7jAbJ7i8CI2RGqhsLxkFgNwX
+ XR+TqYFsWKJpBYjJ8xK9jUfCz3U0EHQztWmiMbuGeQgEow/6bqzRELCtSC/8OqCi28De
+ /TT+qhxQ2+t277wDHtl/lZ9cgyoSN8vzxB0usUnY631oOafMh58tZtRHliNlUIHTo6gL
+ MvhihM5CO3Y1xuYO2LkTKPXNEUSnEVoJ6gY4l1H43qrwhQ1rs6o5viRvWMFPtafVtDyC
+ 4UzA==
+X-Gm-Message-State: AOJu0YykWc9SEwyFxIuJHQnYeG7RKbI05P5zffbkbXvHWpPifDv3FaYy
+ 9UD7H7Ayc0a+kS/JXDuYf95G5BjxExNJaa3egVOatqnpn9WWxWcdS/dYR9+QMJ/RZ/zyzsJBF3j
+ bWTNhB/0=
+X-Gm-Gg: ASbGncv03zVuvJo5MmyZTbASeHciH+8JsghkVaqnZcRiBds2SRlNuLfigqYKForhezs
+ ZWr/lzwOdkTyxhYNB/MiqwRb6dsuV3ZV/Ce3nWvGAJht3HVHPps+tPWKGJMtJwfZuQbaiz0tUbb
+ Fm2znsvVj/WAWe6PpGYGMtrrzVE+nP2xlINc4TDV/B5U0ssihE2CVkdATKw9CMMvYpgqryzEQdg
+ STQ4L+vyHPi1jDq6Dm0iRUIXUASswsfAZA9BkprFHKcUhFfGa27Td/OeptnjUc88l6nTUVDL1tJ
+ NkEU0PKQ/thtOXAgJeedD6UysMS91/Q3GiwDoin3OhdZgFJZz6PGW3kErN5M5tl2myiBRMOy0hT
+ wE6w+i0zKkRQ5ElM=
+X-Google-Smtp-Source: AGHT+IE40TtnPhG03xn7BgIa1MMekd25CSsW+Eh7DZTBo3EiLu2H0tDexvG1GPGEUukXcn8Sllv35A==
+X-Received: by 2002:a05:6830:6f43:b0:72a:10ec:3637 with SMTP id
+ 46e09a7af769-7355d0c276amr13064030a34.15.1748475061411; 
+ Wed, 28 May 2025 16:31:01 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-735af9bc741sm58239a34.44.2025.05.28.16.30.55
+ 46e09a7af769-735af9bc741sm58239a34.44.2025.05.28.16.31.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 16:30:56 -0700 (PDT)
+ Wed, 28 May 2025 16:31:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Heiko Thiery <heiko.thiery@gmail.com>
-Subject: [PATCH 2/7] arch/arm/dts: Remove unused header
-Date: Wed, 28 May 2025 17:27:05 -0600
-Message-ID: <20250528233050.3820722-3-trini@konsulko.com>
+Subject: [PATCH 5/7] arch/arm/dts: Remove strict subset header
+Date: Wed, 28 May 2025 17:27:08 -0600
+Message-ID: <20250528233050.3820722-6-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528233050.3820722-1-trini@konsulko.com>
 References: <20250528233050.3820722-1-trini@konsulko.com>
@@ -97,99 +97,86 @@ X-Virus-Status: Clean
 
 As part of moving to using OF_UPSTREAM and so the upstream DT related
 header files we have a header that is under the arch/arm/dts directory
-and now unused. We can remove this now to prevent any future conflicts.
+and differ in being a strict subset of what is found upstream. We can
+remove this now to prevent future conflicts.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/dts/exynos-pinctrl.h | 79 -----------------------------------
- 1 file changed, 79 deletions(-)
- delete mode 100644 arch/arm/dts/exynos-pinctrl.h
+ arch/arm/dts/k3-pinctrl.h | 65 ---------------------------------------
+ 1 file changed, 65 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-pinctrl.h
 
-diff --git a/arch/arm/dts/exynos-pinctrl.h b/arch/arm/dts/exynos-pinctrl.h
+diff --git a/arch/arm/dts/k3-pinctrl.h b/arch/arm/dts/k3-pinctrl.h
 deleted file mode 100644
-index 7dd94a9b3652..000000000000
---- a/arch/arm/dts/exynos-pinctrl.h
+index 2a4e0e084d69..000000000000
+--- a/arch/arm/dts/k3-pinctrl.h
 +++ /dev/null
-@@ -1,79 +0,0 @@
+@@ -1,65 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Samsung Exynos DTS pinctrl constants
+- * This header provides constants for pinctrl bindings for TI's K3 SoC
+- * family.
 - *
-- * Copyright (c) 2016 Samsung Electronics Co., Ltd.
-- *		http://www.samsung.com
-- * Copyright (c) 2022 Linaro Ltd
-- * Author: Krzysztof Kozlowski <krzk@kernel.org>
+- * Copyright (C) 2018-2023 Texas Instruments Incorporated - https://www.ti.com/
 - */
+-#ifndef DTS_ARM64_TI_K3_PINCTRL_H
+-#define DTS_ARM64_TI_K3_PINCTRL_H
 -
--#ifndef __DTS_ARM64_SAMSUNG_EXYNOS_PINCTRL_H__
--#define __DTS_ARM64_SAMSUNG_EXYNOS_PINCTRL_H__
+-#define PULLUDEN_SHIFT		(16)
+-#define PULLTYPESEL_SHIFT	(17)
+-#define RXACTIVE_SHIFT		(18)
+-#define DEBOUNCE_SHIFT		(11)
 -
--#define EXYNOS_PIN_PULL_NONE		0
--#define EXYNOS_PIN_PULL_DOWN		1
--#define EXYNOS_PIN_PULL_UP		3
+-#define PULL_DISABLE		(1 << PULLUDEN_SHIFT)
+-#define PULL_ENABLE		(0 << PULLUDEN_SHIFT)
 -
--/* Pin function in power down mode */
--#define EXYNOS_PIN_PDN_OUT0		0
--#define EXYNOS_PIN_PDN_OUT1		1
--#define EXYNOS_PIN_PDN_INPUT		2
--#define EXYNOS_PIN_PDN_PREV		3
+-#define PULL_UP			(1 << PULLTYPESEL_SHIFT | PULL_ENABLE)
+-#define PULL_DOWN		(0 << PULLTYPESEL_SHIFT | PULL_ENABLE)
 -
--/*
-- * Drive strengths for Exynos5410, Exynos542x, Exynos5800, Exynos7885, Exynos850
-- * (except GPIO_HSI block), ExynosAutov9 (FSI0, PERIC1)
-- */
--#define EXYNOS5420_PIN_DRV_LV1		0
--#define EXYNOS5420_PIN_DRV_LV2		1
--#define EXYNOS5420_PIN_DRV_LV3		2
--#define EXYNOS5420_PIN_DRV_LV4		3
+-#define INPUT_EN		(1 << RXACTIVE_SHIFT)
+-#define INPUT_DISABLE		(0 << RXACTIVE_SHIFT)
 -
--/* Drive strengths for Exynos5433 */
--#define EXYNOS5433_PIN_DRV_FAST_SR1	0
--#define EXYNOS5433_PIN_DRV_FAST_SR2	1
--#define EXYNOS5433_PIN_DRV_FAST_SR3	2
--#define EXYNOS5433_PIN_DRV_FAST_SR4	3
--#define EXYNOS5433_PIN_DRV_FAST_SR5	4
--#define EXYNOS5433_PIN_DRV_FAST_SR6	5
--#define EXYNOS5433_PIN_DRV_SLOW_SR1	8
--#define EXYNOS5433_PIN_DRV_SLOW_SR2	9
--#define EXYNOS5433_PIN_DRV_SLOW_SR3	0xa
--#define EXYNOS5433_PIN_DRV_SLOW_SR4	0xb
--#define EXYNOS5433_PIN_DRV_SLOW_SR5	0xc
--#define EXYNOS5433_PIN_DRV_SLOW_SR6	0xf
+-/* Only these macros are expected be used directly in device tree files */
+-#define PIN_OUTPUT		(INPUT_DISABLE | PULL_DISABLE)
+-#define PIN_OUTPUT_PULLUP	(INPUT_DISABLE | PULL_UP)
+-#define PIN_OUTPUT_PULLDOWN	(INPUT_DISABLE | PULL_DOWN)
+-#define PIN_INPUT		(INPUT_EN | PULL_DISABLE)
+-#define PIN_INPUT_PULLUP	(INPUT_EN | PULL_UP)
+-#define PIN_INPUT_PULLDOWN	(INPUT_EN | PULL_DOWN)
 -
--/* Drive strengths for Exynos7 (except FSYS1) */
--#define EXYNOS7_PIN_DRV_LV1		0
--#define EXYNOS7_PIN_DRV_LV2		2
--#define EXYNOS7_PIN_DRV_LV3		1
--#define EXYNOS7_PIN_DRV_LV4		3
+-#define PIN_DEBOUNCE_DISABLE	(0 << DEBOUNCE_SHIFT)
+-#define PIN_DEBOUNCE_CONF1	(1 << DEBOUNCE_SHIFT)
+-#define PIN_DEBOUNCE_CONF2	(2 << DEBOUNCE_SHIFT)
+-#define PIN_DEBOUNCE_CONF3	(3 << DEBOUNCE_SHIFT)
+-#define PIN_DEBOUNCE_CONF4	(4 << DEBOUNCE_SHIFT)
+-#define PIN_DEBOUNCE_CONF5	(5 << DEBOUNCE_SHIFT)
+-#define PIN_DEBOUNCE_CONF6	(6 << DEBOUNCE_SHIFT)
 -
--/* Drive strengths for Exynos7 FSYS1 block */
--#define EXYNOS7_FSYS1_PIN_DRV_LV1	0
--#define EXYNOS7_FSYS1_PIN_DRV_LV2	4
--#define EXYNOS7_FSYS1_PIN_DRV_LV3	2
--#define EXYNOS7_FSYS1_PIN_DRV_LV4	6
--#define EXYNOS7_FSYS1_PIN_DRV_LV5	1
--#define EXYNOS7_FSYS1_PIN_DRV_LV6	5
+-#define AM62AX_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM62AX_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
 -
--/* Drive strengths for Exynos850 GPIO_HSI block */
--#define EXYNOS850_HSI_PIN_DRV_LV1	0	/* 1x   */
--#define EXYNOS850_HSI_PIN_DRV_LV1_5	1	/* 1.5x */
--#define EXYNOS850_HSI_PIN_DRV_LV2	2	/* 2x   */
--#define EXYNOS850_HSI_PIN_DRV_LV2_5	3	/* 2.5x */
--#define EXYNOS850_HSI_PIN_DRV_LV3	4	/* 3x   */
--#define EXYNOS850_HSI_PIN_DRV_LV4	5	/* 4x   */
+-#define AM62PX_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM62PX_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
 -
--#define EXYNOS_PIN_FUNC_INPUT		0
--#define EXYNOS_PIN_FUNC_OUTPUT		1
--#define EXYNOS_PIN_FUNC_2		2
--#define EXYNOS_PIN_FUNC_3		3
--#define EXYNOS_PIN_FUNC_4		4
--#define EXYNOS_PIN_FUNC_5		5
--#define EXYNOS_PIN_FUNC_6		6
--#define EXYNOS_PIN_FUNC_EINT		0xf
--#define EXYNOS_PIN_FUNC_F		EXYNOS_PIN_FUNC_EINT
+-#define AM62X_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM62X_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
 -
--#endif /* __DTS_ARM64_SAMSUNG_EXYNOS_PINCTRL_H__ */
+-#define AM64X_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM64X_MCU_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define AM65X_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define AM65X_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define J721E_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define J721E_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define J721S2_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define J721S2_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#define J784S4_IOPAD(pa, val, muxmode)		(((pa) & 0x1fff)) ((val) | (muxmode))
+-#define J784S4_WKUP_IOPAD(pa, val, muxmode)	(((pa) & 0x1fff)) ((val) | (muxmode))
+-
+-#endif
 -- 
 2.43.0
 
