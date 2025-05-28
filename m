@@ -4,68 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89648C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F1FBC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:25:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8172083910;
-	Wed, 28 May 2025 10:05:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D2A0B83950;
+	Wed, 28 May 2025 10:25:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FcRInwv+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wf1YRBtg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE88D8393C; Wed, 28 May 2025 10:05:49 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77F9983910
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:05:43 +0200 (CEST)
+ id 4669383951; Wed, 28 May 2025 10:25:13 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 50B2583939
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:25:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54S85fZp3198632;
- Wed, 28 May 2025 03:05:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748419541;
- bh=2ibOVlusKC2QhYBHJMmdyxY/MDFQrkPLiv7XaoeZeBg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FcRInwv+SMcFUzX59DFFRAl6zhSc3IrssaOy9yVtMgX5p9vTyCUC2LNZaZTFjq0xj
- k7/byYkoBbqjKpeQzbQRbQBrGtcdoX9wMzq6bf6wFusr4Rf1vL9q68ODn9Nsbe1sdG
- vjKpK1K3kZlC7N6KL7oLqaJUHuDH/VybNjIlzO88=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54S85fcB3422720
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 28 May 2025 03:05:41 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
- May 2025 03:05:40 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 28 May 2025 03:05:40 -0500
-Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com
- [172.24.227.136] (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54S85Joj023330;
- Wed, 28 May 2025 03:05:38 -0500
-From: Moteen Shah <m-shah@ti.com>
-To: <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <d-gole@ti.com>,
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <m-shah@ti.com>
-Subject: [PATCH 6/6] arm: mach-k3: Print version of DM firmware during boot
- process
-Date: Wed, 28 May 2025 13:35:19 +0530
-Message-ID: <20250528080519.677750-7-m-shah@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250528080519.677750-1-m-shah@ti.com>
-References: <20250528080519.677750-1-m-shah@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-603fdd728ccso6455164a12.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:25:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748420710; x=1749025510; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zC5qZyg+jQgSiv+9/ROOF6jYTpJRTaxIO8Kh0T2CaEU=;
+ b=wf1YRBtgbUIGjvreOlz4oMJamE1aqfP5cLhWkHcv5fMUABH4YUvy4lHX++ze0DgB5+
+ QOtqoXEXBiakPNFBK1CHWxJ5JYgj/FGvR33aszxW2b96rhMjkJ5JCbCkMZjUu7tviFn5
+ cO84jagmAwloUhYHsUjpdYQVV1qHKS415EIPFj++dwSrZ+Eq7DfsFuWCcF8PAakIftIo
+ rDafsH1lsJKRLWwxpgBx/YvSF7Nvbj2b6EWYp/1oiS3lxo7KMuDRaapWKgPqgMKoxRK5
+ QB773oVDzEFUcO97NjuIW4rePPHsZO/P3vUQJwIy0xkfgA3CKzWb6jfXhRzb/Ch9xDM9
+ 5r1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748420710; x=1749025510;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zC5qZyg+jQgSiv+9/ROOF6jYTpJRTaxIO8Kh0T2CaEU=;
+ b=VXHCf6tRz5glkpNaYg+8k7uRZHsmkTKdqkFUaRl35LHwLbq3LFTau8n9SUwkQw53/M
+ bUr3bcPDl2RU5SCMZ5y33xQ3GjuLSdKAvIJaoXp49VBgapoN9SFO3/TlbqhGQOTmeM6n
+ ppY+ENlJ5CSwlZv7852SM8BOAJHGRfzI5PLYAef7Z4RDNQ5nBDOjrvRQ3l9/X43Us3pV
+ r3Lb4NkTP+jo8LUVhekGiMhOAVlK3DaSTltyJtwggcATepnRMpj/E6iSLeD0F/BxTOPb
+ ZylBdIsppmSgIr418Hbgl6SNg5xqCt3XAZBdEtKxJXxo5PZDiyMvValzY0Rl4+/oGUSg
+ b0hg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULGDnk1LuvPrx/cA6RifGWVxOUsNVwv5uzB6LnKg+zI3zBXNsLFpeZ9dbqbqw6V1O06265ilU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1Gmw69fBOj/rpEycj58PF/q0bNGCZEI7daQwlf4Xz754zUkXa
+ SWETppQa3J+F7ekHCvkIQwT9dV//DLWes45nr3K+0TuZhvjTSgWxAJxjSEit6uef7Os=
+X-Gm-Gg: ASbGncu+ttIi3AAplydiGIZXRqFbY/4xYQeaSNvpVIyIoGdKzuPlwzXjh9JxTF/4uBj
+ sa1wwNuomgs2om/GyXpxygLsDJz/Gc7rNjXtW3Cv5aFjbrP0R1VuHpktensk5zeEmkizTLTxADe
+ Zr2YGicPrP1HG47CtTUe3w0oRnwSoVGmoGLnay3cgqd644Ko3r1d9pEzBlbiPkYZ4SvYIVr7CJp
+ MBcYQFUQY50vMlC5AmJ2YS+heZTPz6bNfE3pj1IAug2lr6gCTmED0b2es+XsEYyl3RkZSp0umg0
+ Mo1YGmrviZeCTWALdUY/i3f5Ylx+Xc20ITX5tRCaP1BU56fR7iW7Z5x3vlbI
+X-Google-Smtp-Source: AGHT+IGS4i29hDH+fww+ezM0pX6UvSf+kQUYZriHM8JTjMD4SGw8wH43QjLJTHXLQ5oYbPo0K08ZGA==
+X-Received: by 2002:a05:6402:5112:b0:604:e5cc:1a3f with SMTP id
+ 4fb4d7f45d1cf-604e5cc1f8cmr6399370a12.20.1748420709724; 
+ Wed, 28 May 2025 01:25:09 -0700 (PDT)
+Received: from [10.5.0.2] ([94.101.114.227]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6051d5f24afsm447822a12.22.2025.05.28.01.25.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 May 2025 01:25:09 -0700 (PDT)
+Message-ID: <6b992b47-de7c-45ce-9c3c-ca4a2295f7c9@linaro.org>
+Date: Wed, 28 May 2025 10:25:06 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] makefile: fix Clang link error when RSA_PUBLIC_KEY_PARSER
+ is selected
+To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20250527210508.1488509-1-raymond.mao@linaro.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250527210508.1488509-1-raymond.mao@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,156 +111,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Print DM firmware's version in the boot up process of K3 devices.
+Hi Rayond,
 
-Signed-off-by: Moteen Shah <m-shah@ti.com>
----
- arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ++++
- arch/arm/mach-k3/am62px/am62p5_init.c | 4 ++++
- arch/arm/mach-k3/am62x/am625_init.c   | 4 ++++
- arch/arm/mach-k3/am64x/am642_init.c   | 4 ++++
- arch/arm/mach-k3/am65x/am654_init.c   | 4 ++++
- arch/arm/mach-k3/j721e/j721e_init.c   | 4 ++++
- arch/arm/mach-k3/j721s2/j721s2_init.c | 4 ++++
- arch/arm/mach-k3/j722s/j722s_init.c   | 4 ++++
- arch/arm/mach-k3/j784s4/j784s4_init.c | 4 ++++
- 9 files changed, 36 insertions(+)
+On 5/27/25 23:05, Raymond Mao wrote:
+> MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> function provided by the compiler runtime, typically libgcc for GCC or
+> clang_rt.builtins for Clang.
+> Thus 'clang_rt.builtins' library is required when building using Clang.
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index 52a21277227..5bee04c5c31 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -172,6 +172,10 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
-+
- 	if (IS_ENABLED(CONFIG_ESM_K3)) {
- 		/* Probe/configure ESM0 */
- 		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@420000", &dev);
-diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
-index 01e47deca94..304fdc75736 100644
---- a/arch/arm/mach-k3/am62px/am62p5_init.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_init.c
-@@ -224,6 +224,10 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
-+
- 	if (IS_ENABLED(CONFIG_K3_AM62A_DDRSS)) {
- 		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
- 		if (ret)
-diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-index 595fc391ac5..5bcce365790 100644
---- a/arch/arm/mach-k3/am62x/am625_init.c
-+++ b/arch/arm/mach-k3/am62x/am625_init.c
-@@ -261,6 +261,10 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
-+
- 	if (IS_ENABLED(CONFIG_ESM_K3)) {
- 		/* Probe/configure ESM0 */
- 		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@420000", &dev);
-diff --git a/arch/arm/mach-k3/am64x/am642_init.c b/arch/arm/mach-k3/am64x/am642_init.c
-index 41812b7dbf7..7a317632e5b 100644
---- a/arch/arm/mach-k3/am64x/am642_init.c
-+++ b/arch/arm/mach-k3/am64x/am642_init.c
-@@ -242,6 +242,10 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
-+
- 	do_dt_magic();
- 
- #if defined(CONFIG_ESM_K3)
-diff --git a/arch/arm/mach-k3/am65x/am654_init.c b/arch/arm/mach-k3/am65x/am654_init.c
-index a4f038029d7..774ad7feb1d 100644
---- a/arch/arm/mach-k3/am65x/am654_init.c
-+++ b/arch/arm/mach-k3/am65x/am654_init.c
-@@ -244,6 +244,10 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
-+
- 	/* Perform board detection */
- 	do_board_detect();
- 
-diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-index f31c20f7ed6..498243485f5 100644
---- a/arch/arm/mach-k3/j721e/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e/j721e_init.c
-@@ -374,6 +374,10 @@ void board_init_f(ulong dummy)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
-+
- 	/* Perform board detection */
- 	do_board_detect();
- 
-diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-index 5941fa26a95..528590f0434 100644
---- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-+++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-@@ -232,6 +232,10 @@ void k3_spl_init(void)
- 
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
-+
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
- }
- 
- bool check_rom_loaded_sysfw(void)
-diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
-index af211377e7c..d8123f282ee 100644
---- a/arch/arm/mach-k3/j722s/j722s_init.c
-+++ b/arch/arm/mach-k3/j722s/j722s_init.c
-@@ -150,6 +150,10 @@ static void k3_spl_init(void)
- 
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
-+
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
- }
- 
- static void k3_mem_init(void)
-diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-index 787cf6261e4..ccf29810849 100644
---- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-+++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-@@ -208,6 +208,10 @@ void k3_spl_init(void)
- 
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
-+
-+	/* Output DM Firmware version info */
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		k3_dm_print_ver();
- }
- 
- void k3_mem_init(void)
+How do you reproduce the problem? Can you give the config and build
+command you are using?
+
+> 
+> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  Makefile | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Makefile b/Makefile
+> index f88684947ee..16506dcaec6 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -37,7 +37,6 @@ else ifeq ("riscv32", $(MK_ARCH))
+>  else ifeq ("riscv64", $(MK_ARCH))
+>    export HOST_ARCH=$(HOST_ARCH_RISCV64)
+>  endif
+> -undefine MK_ARCH
+>  
+>  # Avoid funny character set dependencies
+>  unexport LC_ALL
+> @@ -915,8 +914,13 @@ PLATFORM_LIBGCC = arch/$(ARCH)/lib/lib.a
+>  else
+>  ifndef CONFIG_CC_IS_CLANG
+>  PLATFORM_LIBGCC := -L $(shell dirname `$(CC) $(c_flags) -print-libgcc-file-name`) -lgcc
+> +else ifeq ($(CONFIG_RSA_PUBLIC_KEY_PARSER_MBEDTLS),y)
+> +# mbedtls bignum needs '__udivti3' - a 128-bit division function that's provided by clang-rt.
+> +CLANG_RT_DIR := $(shell $(CC) --print-resource-dir)/lib/linux
+> +PLATFORM_LIBGCC := -L$(CLANG_RT_DIR) -lclang_rt.builtins-$(MK_ARCH)
+
+I'm afraid this won't work when cross-compiling because the compiler-rt
+builtins libraries are usually not installed with the compiler.
+For example on my Ubuntu 24.04 machine:
+
+$ clang --version
+Ubuntu clang version 18.1.3 (1ubuntu1)
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+$ clang --print-targets
+
+  Registered Targets:
+    aarch64     - AArch64 (little endian)
+    aarch64_32  - AArch64 (little endian ILP32)
+    aarch64_be  - AArch64 (big endian)
+    amdgcn      - AMD GCN GPUs
+    arm         - ARM
+    arm64       - ARM64 (little endian)
+    arm64_32    - ARM64 (little endian ILP32)
+    armeb       - ARM (big endian)
+    avr         - Atmel AVR Microcontroller
+    bpf         - BPF (host endian)
+    bpfeb       - BPF (big endian)
+    bpfel       - BPF (little endian)
+    hexagon     - Hexagon
+    lanai       - Lanai
+    loongarch32 - 32-bit LoongArch
+    loongarch64 - 64-bit LoongArch
+    m68k        - Motorola 68000 family
+    mips        - MIPS (32-bit big endian)
+    mips64      - MIPS (64-bit big endian)
+    mips64el    - MIPS (64-bit little endian)
+    mipsel      - MIPS (32-bit little endian)
+    msp430      - MSP430 [experimental]
+    nvptx       - NVIDIA PTX 32-bit
+    nvptx64     - NVIDIA PTX 64-bit
+    ppc32       - PowerPC 32
+    ppc32le     - PowerPC 32 LE
+    ppc64       - PowerPC 64
+    ppc64le     - PowerPC 64 LE
+    r600        - AMD GPUs HD2XXX-HD6XXX
+    riscv32     - 32-bit RISC-V
+    riscv64     - 64-bit RISC-V
+    sparc       - Sparc
+    sparcel     - Sparc LE
+    sparcv9     - Sparc V9
+    systemz     - SystemZ
+    thumb       - Thumb
+    thumbeb     - Thumb (big endian)
+    ve          - VE
+    wasm32      - WebAssembly 32-bit
+    wasm64      - WebAssembly 64-bit
+    x86         - 32-bit X86: Pentium-Pro and above
+    x86-64      - 64-bit X86: EM64T and AMD64
+    xcore       - XCore
+    xtensa      - Xtensa 32
+$ clang --print-resource-dir
+/usr/lib/llvm-18/lib/clang/18
+$ ls /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins*
+/usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-i386.a  /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-x86_64.a
+
+
+Are you doing cross compilation for arm or arm64? Did you have to
+install the compiler-rt libraries separately from the compiler?
+
+Thanks,
 -- 
-2.34.1
+Jerome
 
+>  endif
+>  endif
+> +undefine MK_ARCH
+>  PLATFORM_LIBS += $(PLATFORM_LIBGCC)
+>  
+>  ifdef CONFIG_CC_COVERAGE
