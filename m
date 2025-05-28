@@ -4,82 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21CEC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 09:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77EA7C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 09:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4550C831EA;
-	Wed, 28 May 2025 11:05:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B8F7081D6A;
+	Wed, 28 May 2025 11:34:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kVCbKZ9j";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1748424870;
+	bh=vZtzC/ejli+ccm/hwFcc8nWpcoroTQ+YfwUhuGT0D7Y=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=TJqXwyJYGQHBXQSxW6lZT7fd5mvXOSMRs9IzifbnWhnGQ5StLzT5bhYEWiXeawZ4R
+	 Aaj/hSsatm7h/lpG0vBQnzZlLYU4I7p3cr7+2fwi069Uet/AlgW2rh5nVDnbb9+I0+
+	 SjMvXZRftSMjaUo3j14tLBj4EVa/P5LJ7iPW1DUotNf3yl6bIEevyHK+ygQKIBNAhP
+	 7vMIA/see71UJTlweyUWXK16M8rWPes/DSygFg8+7YfBuyxDldWqJ2vbXqUGcoa0To
+	 SgXpaW6ZsnBKYehdSNN4pS8qGpB0QF699VgwCZPd+K5GFe/ugt90JDrjS3Letr/UTf
+	 5KDkqNPIO0eZA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D83C48391A; Wed, 28 May 2025 11:05:52 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9635782991; Wed, 28 May 2025 11:34:29 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74A0D831E4
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 11:05:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A5D08070C
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 11:34:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6046ecc3e43so5217162a12.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 02:05:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748423149; x=1749027949; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gxrPWH6I2A25CUw4GaCE96NwZq+9ltrzxdXxfEYR43Q=;
- b=kVCbKZ9jh/fzb4kMw/zWLqFlL+QP4Nz+yuROg9st3SSMmmtKP3Slva4aAeq6A4H1Ka
- aUjdBeJxk665N4QP8dC9vxjUoMJvIOM4QypX2VzrAWGEPaNmDgDsaQhBTguFVhjwl4RN
- JCXuaFGFqIswc98if6PpPqD5qrfdZZ4DCv6GxoGN9P/Sq6+N3sZLPD7vEqvV1FA40c/g
- q1VI+4WvNVfkieEwz5bi0qzZ96AdtKzZEnrMQqKEWdNqvdBnFa01Wr5uMGxgNyXO3tWr
- mlVa0KWzrdHMhTCW+r8uKeOB7SJFPJ5w51X5FQ9lJuM7IzH3/iLCmGe3iwnZ0Z/e+LOW
- YHrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748423149; x=1749027949;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gxrPWH6I2A25CUw4GaCE96NwZq+9ltrzxdXxfEYR43Q=;
- b=TgdJhdKLdfGiBreYwlnGF1DpefCNUgRKLyXY70s6OnuF8KVtUD42rs/S/yVoaiAe7W
- PTPOvDkRgBfblz4PUjdwCQ6w41YMRB5o/Ck4Tom4it2FAUVBMrbvE8wIABdJFBI/iGNQ
- W8rr4ulmwyz/5OLQ+LTwYwae0Lvygy/iXJtUcHqdqbrQoxydPfieghewjNcxQr+Lyb2h
- moCR/jh0hVJGe8U0Qdd6aR/jn4BQTxtRTkmlAkFgmI9Emas5So+3JqZH2Hl1NparHVkj
- siAc1U4AJTyXtSCol5iLW0DPiIwsbhZLxw0E4zJ9qiiL+4vPUyoZhma3yiHfMPGEMiIH
- nt6w==
-X-Gm-Message-State: AOJu0YxFciWPgD4sLXPhBYW9oHM4Bw/UCT1ZGvFHCKVvl81uv9hBEf4o
- abMXkbcwSLmemP7D3cXKl5i4LTWH0D56H8o96wgjML20k0hAIewmOXSEpJ38Lg==
-X-Gm-Gg: ASbGnct16hGKTJTie4nVGHV/HXaRIgnAwZluJ97FbrMIhXyiTU00TGh0Y/vUSi0sXPn
- wxDWGcLkQ52DwwNX9KVUPPVaMZJDDVYlamVorJ4EjF1hdhW1DTY8QXdekt4Cpnd8XKWqXzZhb0k
- 1+pTdi5jbLrm+J5cMRnc/x3rpnxFZ/MX/8maDxAqfTmTt70k4bmOiLLGz7Yxzm1BYVOQ81MZ41V
- w6LSfHD9DBVw6J8+iBL8rlFA2wCQH346TVBZFS4cLyajjR5Zj32DG/nA6rs7upv/e9ZBHjEAI7j
- qkx7v9c0uPfGYUyrU264a0NF8wencBPVgBJYSGHIElO6Ax5v3c0+Vm/a3WCy0QwaxWZ+B0wlOmP
- Cs1U=
-X-Google-Smtp-Source: AGHT+IGQwlAmeu0JAPjMhe/cAlQvlj0Zbf7WREqL1PMAqGu9DyfDcZhYDtn6+bP6Iovo1eUy1s0spg==
-X-Received: by 2002:a05:6402:430a:b0:602:1061:5ebb with SMTP id
- 4fb4d7f45d1cf-6051c50934bmr1266443a12.32.1748423149134; 
- Wed, 28 May 2025 02:05:49 -0700 (PDT)
-Received: from hthiery.kontron.local ([213.135.10.150])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6051d5f80dfsm486990a12.30.2025.05.28.02.05.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 02:05:48 -0700 (PDT)
-From: Heiko Thiery <heiko.thiery@gmail.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Thomas=20Sch=C3=A4fer?= <thomas.schaefer@kontron.com>,
- Michael Walle <mwalle@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Tom Rini <trini@konsulko.com>, Heiko Thiery <heiko.thiery@gmail.com>
-Subject: [PATCH] arm: dts: remove k3-serdes.h
-Date: Wed, 28 May 2025 11:05:37 +0200
-Message-Id: <20250528090536.765499-1-heiko.thiery@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="K792rWSk"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 187E11039728C; 
+ Wed, 28 May 2025 11:34:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1748424866;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=vZtzC/ejli+ccm/hwFcc8nWpcoroTQ+YfwUhuGT0D7Y=;
+ b=K792rWSkXJyxvnFScaWzbwJd7RSQ5lNQ3g49H6PyK+ykINWy4RFyCxOCyU7my0eAv1cSvZ
+ tvv9561FM01ZjaYncL2NSxhf8X6qpn9NW3OVBYxARmSKfMmE1RXBw6mBjf4Ev1DJFJ7az0
+ folouUPiAs9Wh4LpS8RNFvHjcZ1C40mI3kY6R5cYiSI2xNirvY38JsHi01luIVdOLABINI
+ AGgbYGz1lQpaPdWe9HT2TQAchmGZ8CArLdAHcrt+xJpGE2MyFDr8C/+jSuaMv8b9pXtg4U
+ onb9iwddyVbtjmZytLb2afoHonlD+0DblV0MoEXe1IC1mqs/WzPrcPisdr1ibQ==
+Message-ID: <0f2037cd-3bfc-bc50-79e0-e84d8bf6766b@denx.de>
+Date: Wed, 28 May 2025 11:34:58 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] i2c: mux: Fix the crash when the i2c-arbitrator node is
+ present
+Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Cc: michal.simek@amd.com, trini@konsulko.com, git@amd.com
+References: <20250528031255.1762438-1-venkatesh.abbarapu@amd.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250528031255.1762438-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,231 +77,105 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file is a duplicate and also comes with the sync of the linux
-mainline dts files. By removing this the one from the dts folder should
-be taken that is more up-to-date.
+Hello Venkatesh,
 
-Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
----
- arch/arm/dts/k3-serdes.h | 204 ---------------------------------------
- 1 file changed, 204 deletions(-)
- delete mode 100644 arch/arm/dts/k3-serdes.h
+On 28.05.25 05:12, Venkatesh Yadav Abbarapu wrote:
+> Observing the crash when we add the i2c-arbitrator node in the device
 
-diff --git a/arch/arm/dts/k3-serdes.h b/arch/arm/dts/k3-serdes.h
-deleted file mode 100644
-index 21b4886c47b..00000000000
---- a/arch/arm/dts/k3-serdes.h
-+++ /dev/null
-@@ -1,204 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * This header provides constants for SERDES MUX for TI SoCs
-- *
-- * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-- */
--
--#ifndef DTS_ARM64_TI_K3_SERDES_H
--#define DTS_ARM64_TI_K3_SERDES_H
--
--/* J721E */
--
--#define J721E_SERDES0_LANE0_QSGMII_LANE1	0x0
--#define J721E_SERDES0_LANE0_PCIE0_LANE0		0x1
--#define J721E_SERDES0_LANE0_USB3_0_SWAP		0x2
--#define J721E_SERDES0_LANE0_IP4_UNUSED		0x3
--
--#define J721E_SERDES0_LANE1_QSGMII_LANE2	0x0
--#define J721E_SERDES0_LANE1_PCIE0_LANE1		0x1
--#define J721E_SERDES0_LANE1_USB3_0		0x2
--#define J721E_SERDES0_LANE1_IP4_UNUSED		0x3
--
--#define J721E_SERDES1_LANE0_QSGMII_LANE3	0x0
--#define J721E_SERDES1_LANE0_PCIE1_LANE0		0x1
--#define J721E_SERDES1_LANE0_USB3_1_SWAP		0x2
--#define J721E_SERDES1_LANE0_SGMII_LANE0		0x3
--
--#define J721E_SERDES1_LANE1_QSGMII_LANE4	0x0
--#define J721E_SERDES1_LANE1_PCIE1_LANE1		0x1
--#define J721E_SERDES1_LANE1_USB3_1		0x2
--#define J721E_SERDES1_LANE1_SGMII_LANE1		0x3
--
--#define J721E_SERDES2_LANE0_IP1_UNUSED		0x0
--#define J721E_SERDES2_LANE0_PCIE2_LANE0		0x1
--#define J721E_SERDES2_LANE0_USB3_1_SWAP		0x2
--#define J721E_SERDES2_LANE0_SGMII_LANE0		0x3
--
--#define J721E_SERDES2_LANE1_IP1_UNUSED		0x0
--#define J721E_SERDES2_LANE1_PCIE2_LANE1		0x1
--#define J721E_SERDES2_LANE1_USB3_1		0x2
--#define J721E_SERDES2_LANE1_SGMII_LANE1		0x3
--
--#define J721E_SERDES3_LANE0_IP1_UNUSED		0x0
--#define J721E_SERDES3_LANE0_PCIE3_LANE0		0x1
--#define J721E_SERDES3_LANE0_USB3_0_SWAP		0x2
--#define J721E_SERDES3_LANE0_IP4_UNUSED		0x3
--
--#define J721E_SERDES3_LANE1_IP1_UNUSED		0x0
--#define J721E_SERDES3_LANE1_PCIE3_LANE1		0x1
--#define J721E_SERDES3_LANE1_USB3_0		0x2
--#define J721E_SERDES3_LANE1_IP4_UNUSED		0x3
--
--#define J721E_SERDES4_LANE0_EDP_LANE0		0x0
--#define J721E_SERDES4_LANE0_IP2_UNUSED		0x1
--#define J721E_SERDES4_LANE0_QSGMII_LANE5	0x2
--#define J721E_SERDES4_LANE0_IP4_UNUSED		0x3
--
--#define J721E_SERDES4_LANE1_EDP_LANE1		0x0
--#define J721E_SERDES4_LANE1_IP2_UNUSED		0x1
--#define J721E_SERDES4_LANE1_QSGMII_LANE6	0x2
--#define J721E_SERDES4_LANE1_IP4_UNUSED		0x3
--
--#define J721E_SERDES4_LANE2_EDP_LANE2		0x0
--#define J721E_SERDES4_LANE2_IP2_UNUSED		0x1
--#define J721E_SERDES4_LANE2_QSGMII_LANE7	0x2
--#define J721E_SERDES4_LANE2_IP4_UNUSED		0x3
--
--#define J721E_SERDES4_LANE3_EDP_LANE3		0x0
--#define J721E_SERDES4_LANE3_IP2_UNUSED		0x1
--#define J721E_SERDES4_LANE3_QSGMII_LANE8	0x2
--#define J721E_SERDES4_LANE3_IP4_UNUSED		0x3
--
--/* J7200 */
--
--#define J7200_SERDES0_LANE0_QSGMII_LANE3	0x0
--#define J7200_SERDES0_LANE0_PCIE1_LANE0		0x1
--#define J7200_SERDES0_LANE0_IP3_UNUSED		0x2
--#define J7200_SERDES0_LANE0_IP4_UNUSED		0x3
--
--#define J7200_SERDES0_LANE1_QSGMII_LANE4	0x0
--#define J7200_SERDES0_LANE1_PCIE1_LANE1		0x1
--#define J7200_SERDES0_LANE1_IP3_UNUSED		0x2
--#define J7200_SERDES0_LANE1_IP4_UNUSED		0x3
--
--#define J7200_SERDES0_LANE2_QSGMII_LANE1	0x0
--#define J7200_SERDES0_LANE2_PCIE1_LANE2		0x1
--#define J7200_SERDES0_LANE2_IP3_UNUSED		0x2
--#define J7200_SERDES0_LANE2_IP4_UNUSED		0x3
--
--#define J7200_SERDES0_LANE3_QSGMII_LANE2	0x0
--#define J7200_SERDES0_LANE3_PCIE1_LANE3		0x1
--#define J7200_SERDES0_LANE3_USB			0x2
--#define J7200_SERDES0_LANE3_IP4_UNUSED		0x3
--
--/* AM64 */
--
--#define AM64_SERDES0_LANE0_PCIE0		0x0
--#define AM64_SERDES0_LANE0_USB			0x1
--
--/* J721S2 */
--
--#define J721S2_SERDES0_LANE0_EDP_LANE0		0x0
--#define J721S2_SERDES0_LANE0_PCIE1_LANE0	0x1
--#define J721S2_SERDES0_LANE0_IP3_UNUSED		0x2
--#define J721S2_SERDES0_LANE0_IP4_UNUSED		0x3
--
--#define J721S2_SERDES0_LANE1_EDP_LANE1		0x0
--#define J721S2_SERDES0_LANE1_PCIE1_LANE1	0x1
--#define J721S2_SERDES0_LANE1_USB		0x2
--#define J721S2_SERDES0_LANE1_IP4_UNUSED		0x3
--
--#define J721S2_SERDES0_LANE2_EDP_LANE2		0x0
--#define J721S2_SERDES0_LANE2_PCIE1_LANE2	0x1
--#define J721S2_SERDES0_LANE2_USB_SWAP		0x2
--#define J721S2_SERDES0_LANE2_IP4_UNUSED		0x3
--
--#define J721S2_SERDES0_LANE3_EDP_LANE3		0x0
--#define J721S2_SERDES0_LANE3_PCIE1_LANE3	0x1
--#define J721S2_SERDES0_LANE3_USB		0x2
--#define J721S2_SERDES0_LANE3_IP4_UNUSED		0x3
--
--/* J784S4 */
--
--#define J784S4_SERDES0_LANE0_IP1_UNUSED		0x0
--#define J784S4_SERDES0_LANE0_PCIE1_LANE0	0x1
--#define J784S4_SERDES0_LANE0_IP3_UNUSED		0x2
--#define J784S4_SERDES0_LANE0_IP4_UNUSED		0x3
--
--#define J784S4_SERDES0_LANE1_IP1_UNUSED		0x0
--#define J784S4_SERDES0_LANE1_PCIE1_LANE1	0x1
--#define J784S4_SERDES0_LANE1_IP3_UNUSED		0x2
--#define J784S4_SERDES0_LANE1_IP4_UNUSED		0x3
--
--#define J784S4_SERDES0_LANE2_PCIE3_LANE0	0x0
--#define J784S4_SERDES0_LANE2_PCIE1_LANE2	0x1
--#define J784S4_SERDES0_LANE2_IP3_UNUSED		0x2
--#define J784S4_SERDES0_LANE2_IP4_UNUSED		0x3
--
--#define J784S4_SERDES0_LANE3_PCIE3_LANE1	0x0
--#define J784S4_SERDES0_LANE3_PCIE1_LANE3	0x1
--#define J784S4_SERDES0_LANE3_USB		0x2
--#define J784S4_SERDES0_LANE3_IP4_UNUSED		0x3
--
--#define J784S4_SERDES1_LANE0_QSGMII_LANE3	0x0
--#define J784S4_SERDES1_LANE0_PCIE0_LANE0	0x1
--#define J784S4_SERDES1_LANE0_IP3_UNUSED		0x2
--#define J784S4_SERDES1_LANE0_IP4_UNUSED		0x3
--
--#define J784S4_SERDES1_LANE1_QSGMII_LANE4	0x0
--#define J784S4_SERDES1_LANE1_PCIE0_LANE1	0x1
--#define J784S4_SERDES1_LANE1_IP3_UNUSED		0x2
--#define J784S4_SERDES1_LANE1_IP4_UNUSED		0x3
--
--#define J784S4_SERDES1_LANE2_QSGMII_LANE1	0x0
--#define J784S4_SERDES1_LANE2_PCIE0_LANE2	0x1
--#define J784S4_SERDES1_LANE2_PCIE2_LANE0	0x2
--#define J784S4_SERDES1_LANE2_IP4_UNUSED		0x3
--
--#define J784S4_SERDES1_LANE3_QSGMII_LANE2	0x0
--#define J784S4_SERDES1_LANE3_PCIE0_LANE3	0x1
--#define J784S4_SERDES1_LANE3_PCIE2_LANE1	0x2
--#define J784S4_SERDES1_LANE3_IP4_UNUSED		0x3
--
--#define J784S4_SERDES2_LANE0_QSGMII_LANE5	0x0
--#define J784S4_SERDES2_LANE0_IP2_UNUSED		0x1
--#define J784S4_SERDES2_LANE0_IP3_UNUSED		0x2
--#define J784S4_SERDES2_LANE0_IP4_UNUSED		0x3
--
--#define J784S4_SERDES2_LANE1_QSGMII_LANE6	0x0
--#define J784S4_SERDES2_LANE1_IP2_UNUSED		0x1
--#define J784S4_SERDES2_LANE1_IP3_UNUSED		0x2
--#define J784S4_SERDES2_LANE1_IP4_UNUSED		0x3
--
--#define J784S4_SERDES2_LANE2_QSGMII_LANE7	0x0
--#define J784S4_SERDES2_LANE2_QSGMII_LANE1	0x1
--#define J784S4_SERDES2_LANE2_IP3_UNUSED		0x2
--#define J784S4_SERDES2_LANE2_IP4_UNUSED		0x3
--
--#define J784S4_SERDES2_LANE3_QSGMII_LANE8	0x0
--#define J784S4_SERDES2_LANE3_QSGMII_LANE2	0x1
--#define J784S4_SERDES2_LANE3_IP3_UNUSED		0x2
--#define J784S4_SERDES2_LANE3_IP4_UNUSED		0x3
--
--#define J784S4_SERDES4_LANE0_EDP_LANE0		0x0
--#define J784S4_SERDES4_LANE0_QSGMII_LANE5	0x1
--#define J784S4_SERDES4_LANE0_IP3_UNUSED		0x2
--#define J784S4_SERDES4_LANE0_IP4_UNUSED		0x3
--
--#define J784S4_SERDES4_LANE1_EDP_LANE1		0x0
--#define J784S4_SERDES4_LANE1_QSGMII_LANE6	0x1
--#define J784S4_SERDES4_LANE1_IP3_UNUSED		0x2
--#define J784S4_SERDES4_LANE1_IP4_UNUSED		0x3
--
--#define J784S4_SERDES4_LANE2_EDP_LANE2		0x0
--#define J784S4_SERDES4_LANE2_QSGMII_LANE7	0x1
--#define J784S4_SERDES4_LANE2_IP3_UNUSED		0x2
--#define J784S4_SERDES4_LANE2_IP4_UNUSED		0x3
--
--#define J784S4_SERDES4_LANE3_EDP_LANE3		0x0
--#define J784S4_SERDES4_LANE3_QSGMII_LANE8	0x1
--#define J784S4_SERDES4_LANE3_USB		0x2
--#define J784S4_SERDES4_LANE3_IP4_UNUSED		0x3
--
--#endif /* DTS_ARM64_TI_K3_SERDES_H */
+Which crash?
+
+> tree as per the DT bindings. The issue is with the child node of
+> i2c-arbitrator@72 i.e., i2c@f1950000->i2c-arbitrator@72->i2c-arb, as the
+> arbitrator uses the uclass of mux(UCLASS_I2C_MUX) and the mux uclass driver
+> checks for the "reg" property using the i2c_mux_child_post_bind() function,
+> if it won't find the "reg" property it will return -EINVAL which is leading
+> to the crash.
+> So, add the logic to check whether the  child node has the "reg" property,
+> if the "reg" property exists then read the "reg" and update the channel.
+> 
+> https://www.kernel.org/doc/Documentation/devicetree/bindings/i2c/i2c-arb.txt
+> 
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/i2c/muxes/i2c-mux-uclass.c | 11 +++++++----
+>   1 file changed, 7 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/i2c/muxes/i2c-mux-uclass.c b/drivers/i2c/muxes/i2c-mux-uclass.c
+> index d1999d21feb..b18999c1fe3 100644
+> --- a/drivers/i2c/muxes/i2c-mux-uclass.c
+> +++ b/drivers/i2c/muxes/i2c-mux-uclass.c
+> @@ -40,11 +40,14 @@ static int i2c_mux_child_post_bind(struct udevice *dev)
+>   	struct i2c_mux_bus *plat = dev_get_parent_plat(dev);
+>   	int channel;
+>   
+> -	channel = dev_read_u32_default(dev, "reg", -1);
+
+Shouldn;t this function return -1 (the default value), if property "reg" is
+not present? (And also if dev_ofnode(dev) is not valid?)
+
+Seems we should look into this function and may fix the problem there?
+
+Aha, this comes from
+
+drivers/core/read.c
+int dev_read_u32_default(const struct udevice *dev, const char *propname,
+                          int def)
+{
+         return ofnode_read_u32_default(dev_ofnode(dev), propname, def);
+}
+
+with drivers/core/ofnode.c
+u32 ofnode_read_u32_default(ofnode node, const char *propname, u32 def)
+{
+         assert(ofnode_valid(node));
+         ofnode_read_u32_index(node, propname, 0, &def);
+
+         return def;
+}
+
+added Simon.
+
+@Simon: may proper fix would be to check in ofnode_read_u32_default()
+         if propname exists, and if not return default value?
+         May also return with default value if node is not valid?
+
+         What do you think?
+
+         Thanks!
+
+
+> -	if (channel < 0)
+> -		return -EINVAL;
+> -	plat->channel = channel;
+> +	ofnode node = dev_ofnode(dev);
+>   
+> +	if (ofnode_has_property(node, "reg")) {
+
+If we fix it in this code, you can here simply return immediately
+if "reg" propertyis missing, so you can save the identation level,
+and patch looks cleaner.
+
+> +		channel = dev_read_u32_default(dev, "reg", -1);
+> +		if (channel < 0)
+> +			return -EINVAL;
+> +		plat->channel = channel;
+> +	}
+>   	return 0;
+>   }
+>   
+> 
+
+Thanks!
+
+bye,
+Heiko
 -- 
-2.39.5
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
