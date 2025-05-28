@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF65C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 11:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126C4C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 11:25:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63F9F83A7F;
-	Wed, 28 May 2025 13:23:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F6CB83A8E;
+	Wed, 28 May 2025 13:25:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OJB3MlE/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XWlcidq/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D21F483A8A; Wed, 28 May 2025 13:23:06 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 1D78783A8A; Wed, 28 May 2025 13:25:22 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7631F839A7
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 13:23:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B31D383A8F
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 13:25:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-441c99459e9so28874375e9.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 04:23:04 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ad5273c1fd7so883031966b.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 04:25:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748431384; x=1749036184; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748431519; x=1749036319; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=77+OSxSbNpuELypXeqBauA35p/0XCphsRhwC164ZRh8=;
- b=OJB3MlE/H+KOI8sVTdk4JdlQKWs+JYPriH1jtZR0ms8URzJlkBdodgTd+hAB9pWL9u
- hUaDlqJPNaiyvPB2ttvmZclKw0xWu8OY3zW9SjYKukKpFQsESAWWpsZ+Wtjmk6DiJQPq
- mRrd8B5Qfmyc+05DhIy+t5fi2w8Wn+nwHxtCMKqX22+PoRC/L/EwOeKcnT0QE6NoY6HW
- B+vs/zQIuFH5aH6zerdw8W50w1aUGtdWwjAWeNGTV5iVk7FJuweQB2VjyenmBOswCnKI
- 9HhDtG2Et+H7zYOWH5Xr5RLCtclRzJEobRXPVQu+8AgUL/Iufpiiyb5sePB1m4UAoQWy
- 39Ww==
+ bh=1OQKjpSxAfNoQ63uIKCKFj72YND8/CepL9f0E6KPLfo=;
+ b=XWlcidq/TK2CK5QH+/6Z+VWMIc1cvAhni5l1eq3TBmitRmrMRUKP/eP2004/I+VUtR
+ hz2sm+7TavJFoF9yxKcMg7egDKsZDFkX1jwYJLQz+YTq43J19qnXYkjwTP6B93Dwy4dv
+ NDHwQAO2pFBh+TXnJa1x/wUJpPZYXsHFJPXbx6HvK+jf20Kpj9X1oImT+vlulddR5PWk
+ gPs8mXq4wD6rAKM4iDqfaYWkBDV4ph7j1UtPFTD1+Se5EEOGSFmM1v6tTXY/6ulFDP30
+ 4UuP2MaCArh3DdFqm4987DQNwY2hdLy3wpuh0iBygamy66LOyWs/t4oc+UrvZc6+RVHK
+ 5BDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748431384; x=1749036184;
+ d=1e100.net; s=20230601; t=1748431519; x=1749036319;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=77+OSxSbNpuELypXeqBauA35p/0XCphsRhwC164ZRh8=;
- b=dfHbSXr1+LVCO5F63wliWOU03A4D+kN6IYzZ4yFN3OohKqMnuCj8MMCGZ4bZbIeWy6
- wVrvL0BfWZZ+BxGAaT6RwawKK+qy0AaRbg9TiGkuFiVszQ0l57nzhiwhB8hyyyhFX+zH
- ALBxoj922yXk2cKzlF9qEA4BFjbdPKaonBCP7ObWPx2bnHI3bJ/K3z2W/5FyDp8Kk/iv
- wCAG71yQJxvkIgiAed88wmzb46wYUv4i4aTIPI89Q7qrh2gI73VxzKY9Czn1hUYFo13p
- 3KGn4woVYiCSX2RqLzNvhNv7TGlQP9uO6Bkev2pjCKvtDgLVAagiWsPz1nAKX4iwNOcn
- X6Pg==
+ bh=1OQKjpSxAfNoQ63uIKCKFj72YND8/CepL9f0E6KPLfo=;
+ b=mwpXC2LonYp0NhgcsxsZsn1+dypzuchOhoqNlItYjeZcSFAx0SVjy+AkVoP3OMeSlj
+ MDNeT6+cSOIo9+vS2rwORwLaFQzA5IHsDSvoKbKoLn88Sj22jUKjq+ej3ESqQV4QWLLk
+ I6GfE2D8uY+6D46bwW1i1qZmvJYCz97UPm+p0Y6BRF9D7ez73y4CflWvyi6E2bN/QDYr
+ qswIWzqUb0651QVt+H8Qas+y627Nrf9lUmqHy3rt0bFDuXrc12gB8/my36XQk75IQK3R
+ RlkpGvIe+Cv60ft+5emx7cOHNFFCdO4k1jgIto0NEm9+LsXb8PPm8qFB8GdP4KGJo3oS
+ D1Sg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXk3iKLpq8kmbaHCXSGeWg8MWnjVYMeAb+ODbc+pFyUbcYgMTjdLpSM1ZfyBw5dTicC381pAAo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJYtVAxJDKZV8xdnJrzyyOt7NQb6iSY8CYvE8OXVVLWBzFtnIu
- AJWBw3PEuI2GJSna+xpdsepLr29Rgw9pGEldUjkjAu1DgM9xMYcOqhsbfqgvD6xXLwo=
-X-Gm-Gg: ASbGncunkHfblLLHEmOdvcQXDJ0lpvshQB4HjMvyv2YeaAY8no+pOaihAgb2uL6R00H
- UYIkBvbiSW0Eb8dPB5fmGIctMufYOdLEmuOOo553zNOyiJIMnyIYIdyVA7XpkXpopxm7gZWpJSI
- XJb6dXvBETPmruCONRDXOG/KqT4eUBHMU1Q9PypL67aqrei2ItdQiwwC4h2WwHuOvcuf7lXl0E3
- zO/eP4pwrURjg/OjFqYf5xK+8LJCmOH9Cyg5SXy1jA+o9UPJXQVhPBc0ljGxmYQvt7/y8fapXj7
- nZKSHGo0/f0cSVQPmGCDNDgX5bb9MzmQVn4h2yiiD1midAcpo8I4uIrxws1+Kd97VhtriUoyLPM
- H1MrNQ96IncwwYAm40J/Lqc3E1Q==
-X-Google-Smtp-Source: AGHT+IEL+Y5rTjKoIQaRa/KcXPFTt13ybKU2Xti4n2KIVJiNrjUHAf51rW+EWABkJeDyJOe+Vxckig==
-X-Received: by 2002:a05:600c:1d15:b0:43c:fe90:1282 with SMTP id
- 5b1f17b1804b1-450725458d3mr14824065e9.7.1748431383742; 
- Wed, 28 May 2025 04:23:03 -0700 (PDT)
+ AJvYcCVpHHIKOXqETrSmJShU2c4a8WCvEpl8Ns+YAbTeM595A7vONTURP/AjLkD/FNPCIVhfWMR3JqM=@lists.denx.de
+X-Gm-Message-State: AOJu0YytELnqGKgq5tJAO57vcP8QZVmTTGKvrKnAr1iYKp6BiFrlojfI
+ Y0q9l6q4cuOrdr7/DWPs/VMATB3jnTmgo3PjGtdas5GRL9V1sOHBBFObSLejm/2fxRw=
+X-Gm-Gg: ASbGnctLON/0OGkQGtfj4u9MKujkmVZCr8BzM97/f3M7TTvWSQoU8N/tAinqlVIESKU
+ FFrEzePHQNBOiYA8tHqam5S+fXIkbaZb3zmFYzxEd3CgUKltDl79tKLD0YVLDa4hSDha9+WdRi6
+ lh4eq4CtfYcSDazFb0cHrLqRtnMH7HWWMYc7Wh/e+C41ERD14knKxDGmVO+3x5mpXL16jyIKsx0
+ 9B0Cqpcd87Imk/k5zAHxU7QyYLJijG3UjGMKVes0yoyDBsZDNBaxee6pc6dIQvY1tgBi2gosYex
+ SR8voC4ivahvHn/snVK1nPULHWPHbGF2fmgY/25DdFhl9OgTS5+kI2lsMNbLrXDTRZeG55e40/P
+ BJ0r4zXr0r5dMjMYeWuEyE2kjMw==
+X-Google-Smtp-Source: AGHT+IEQQrL+KzEI/MhhKZnbWZKZRNCMUEDgTzoapuakYJD5NHe92X87eXvCtxwq9Iiorv3e69kHnQ==
+X-Received: by 2002:a17:907:1b0f:b0:ad5:2e5b:d16b with SMTP id
+ a640c23a62f3a-ad85b0ed0e2mr1628346766b.27.1748431518919; 
+ Wed, 28 May 2025 04:25:18 -0700 (PDT)
 Received: from ?IPV6:2a01:170:117e:fc:7b9d:1015:16d5:5c7e?
  ([2a01:170:117e:fc:7b9d:1015:16d5:5c7e])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4eac6e5d0sm1216036f8f.4.2025.05.28.04.23.02
+ a640c23a62f3a-ad8a19ca392sm91314166b.70.2025.05.28.04.25.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 May 2025 04:23:02 -0700 (PDT)
-Message-ID: <5b13c86b-1efb-44e1-9ee8-03c2863337d0@linaro.org>
-Date: Wed, 28 May 2025 13:23:01 +0200
+ Wed, 28 May 2025 04:25:18 -0700 (PDT)
+Message-ID: <6fdb5e17-7d9f-4248-9d18-72c4b5582fd9@linaro.org>
+Date: Wed, 28 May 2025 13:25:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 07/28] serial: msm-geni: Enable SE clk in probe
+Subject: Re: [PATCH v4 24/28] board: google: Add board_debug_uart_init() for
+ Trogdor
 To: Stephen Boyd <swboyd@chromium.org>, u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -86,10 +87,10 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
 References: <20250523225845.2311989-1-swboyd@chromium.org>
- <20250523225845.2311989-8-swboyd@chromium.org>
+ <20250523225845.2311989-25-swboyd@chromium.org>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250523225845.2311989-8-swboyd@chromium.org>
+In-Reply-To: <20250523225845.2311989-25-swboyd@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,84 +109,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stephen,
+
 
 On 5/24/25 00:58, Stephen Boyd wrote:
-> Enable the serial engine clk in probe so that this driver can work on
-> platforms that don't already initialize the clk for this device before
-> this driver runs. This fixes a problem I see on Coreboot platforms like
-> Trogdor where the UART hardware isn't enabled by coreboot unless the
-> serial console build is used.
+> Implement board_debug_uart_init() for Trogdor boards so that the debug
+> UART can be used. Initialize the clk to XO speed (19.2MHz) and change
+> the pin configuration to mux out the uart hardware on the pins that are
+> connected to the closed case debug (CCD) port for the AP. This is enough
+> to get the early debug console working on boards like Lazor, but it
+> should work for all Google Trogdor boards.
 > 
 > Signed-off-by: Stephen Boyd <swboyd@chromium.org>
-> ---
->   drivers/serial/serial_msm_geni.c | 26 ++++++++++++--------------
->   1 file changed, 12 insertions(+), 14 deletions(-)
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+Would you be willing to add a MAINTAINERS file here for the trogdor 
+specific bits?
+
+Kind regards,> ---
+>   board/google/trogdor/Makefile     |  3 +++
+>   board/google/trogdor/debug.config |  6 +++++
+>   board/google/trogdor/debug_uart.c | 41 +++++++++++++++++++++++++++++++
+>   3 files changed, 50 insertions(+)
+>   create mode 100644 board/google/trogdor/Makefile
+>   create mode 100644 board/google/trogdor/debug.config
+>   create mode 100644 board/google/trogdor/debug_uart.c
 > 
-> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-> index cb6c09fdd09e..620cb9a59343 100644
-> --- a/drivers/serial/serial_msm_geni.c
-> +++ b/drivers/serial/serial_msm_geni.c
-> @@ -131,6 +131,7 @@ struct msm_serial_data {
->   	phys_addr_t base;
->   	u32 baud;
->   	u32 oversampling;
-> +	struct clk *se;
->   };
->   
->   unsigned long root_freq[] = {7372800,  14745600, 19200000, 29491200,
-> @@ -181,19 +182,6 @@ static int get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
->   	return ser_clk;
->   }
->   
-> -static int geni_serial_set_clock_rate(struct udevice *dev, u64 rate)
-> -{
-> -	struct clk *clk;
-> -	int ret;
-> -
-> -	clk = devm_clk_get(dev, NULL);
-> -	if (IS_ERR(clk))
-> -		return PTR_ERR(clk);
-> -
-> -	ret = clk_set_rate(clk, rate);
-> -	return ret;
-> -}
-> -
->   /**
->    * geni_se_get_tx_fifo_depth() - Get the TX fifo depth of the serial engine
->    * @base:	Pointer to the concerned serial engine.
-> @@ -252,7 +240,7 @@ static int msm_serial_setbrg(struct udevice *dev, int baud)
->   	priv->baud = baud;
->   
->   	clk_rate = get_clk_div_rate(baud, priv->oversampling, &clk_div);
-> -	ret = geni_serial_set_clock_rate(dev, clk_rate);
-> +	ret = clk_set_rate(priv->se, clk_rate);
->   	if (ret < 0) {
->   		pr_err("%s: Couldn't set clock rate: %d\n", __func__, ret);
->   		return ret;
-> @@ -561,6 +549,16 @@ static int msm_serial_probe(struct udevice *dev)
->   {
->   	struct msm_serial_data *priv = dev_get_priv(dev);
->   	int ret;
-> +	struct clk *clk;
+> diff --git a/board/google/trogdor/Makefile b/board/google/trogdor/Makefile
+> new file mode 100644
+> index 000000000000..fd2933cf1e6f
+> --- /dev/null
+> +++ b/board/google/trogdor/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0
 > +
-> +	clk = devm_clk_get(dev, NULL);
-> +	if (IS_ERR(clk))
-> +		return PTR_ERR(clk);
-> +	priv->se = clk;
+> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) += debug_uart.o
+> diff --git a/board/google/trogdor/debug.config b/board/google/trogdor/debug.config
+> new file mode 100644
+> index 000000000000..7d8a6706a92e
+> --- /dev/null
+> +++ b/board/google/trogdor/debug.config
+> @@ -0,0 +1,6 @@
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_DEBUG_UART_BASE=0xa88000
+> +CONFIG_DEBUG_UART_MSM_GENI=y
+> +CONFIG_DEBUG_UART_CLOCK=36864000
+> +CONFIG_DEBUG_UART_BOARD_INIT=y
+> diff --git a/board/google/trogdor/debug_uart.c b/board/google/trogdor/debug_uart.c
+> new file mode 100644
+> index 000000000000..3d15d0d77728
+> --- /dev/null
+> +++ b/board/google/trogdor/debug_uart.c
+> @@ -0,0 +1,41 @@
+> +// SPDX-License-Identifier: GPL-2.0
 > +
-> +	ret = clk_enable(clk);
-> +	if (ret)
-> +		return ret;
+> +#include <asm/io.h>
+> +#include <debug_uart.h>
+> +#include <linux/delay.h>
+> +
+> +/*
+> + * Enable the UART8 clks and pinctrl settings for SC7180.
+> + *
+> + * The debug UART goes out over CCD. The debug uart clk setting is 36864000 to
+> + * make the buad rate calculation come out properly for the qcom geni serial
+> + * driver.
+> + */
+> +void board_debug_uart_init(void)
+> +{
+> +	u32 val, mask;
+> +	unsigned int timeout = 100;
+> +
+> +	/* Enable wrap1_s2 clk */
+> +	val = readl(0x100000 + 0x52008);
+> +	val |= BIT(24);
+> +	writel(val, 0x100000 + 0x52008);
+> +	/* Wait for enable */
+> +	do {
+> +		val = readl(0x100000 + 0x18274);
+> +		mask = GENMASK(30, 28) | BIT(31);
+> +		val &= mask;
+> +		if ((val & BIT(31)) == 0 || ((val >> 28) & 7) == 1)
+> +			break;
+> +		udelay(10);
+> +	} while (timeout--);
+> +
+> +	/*
+> +	 * Configure GPIOs
+> +	 * Bits: 0-1 = pull
+> +	 * Bits: 2-4 = func
+> +	 * Bits: 6-8 = drive strength
+> +	 */
+> +	writel(0x3 | (1 << 2), 0x3900000 + (0x1000 * 44)); // Pin 44 - PULL_UP, func1 (qup12), 2ma
+> +	writel(0x3 | (1 << 2), 0x3900000 + (0x1000 * 45)); // Pin 45 - PULL_UP, func1 (qup12), 2ma
+> +}
 
-There's a subtle change in behaviour here, since we'll now fail probe if 
-the clock isn't found. I think it would be best to treat this clock 
-being missing as non-fatal since it can make bringup a little easier (no 
-need to stub the clock).
-
-Kind regards,>
->   	ret = geni_set_oversampling(dev);
->   	if (ret < 0)
 -- 
 Casey (she/they)
 
