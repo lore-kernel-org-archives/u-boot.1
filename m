@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B500C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 15:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D5FCC5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 15:22:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1F14832F9;
-	Wed, 28 May 2025 17:21:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 790808338B;
+	Wed, 28 May 2025 17:22:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QxRvp7sB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kAlHxXtD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63D918338B; Wed, 28 May 2025 17:21:16 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id F2BBF8339D; Wed, 28 May 2025 17:22:16 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47A378329C
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 17:21:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C0AF8329C
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 17:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-735a6c02a96so235841a34.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 08:21:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-30e8feb1886so4357358a91.0
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 08:22:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748445673; x=1749050473; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U7s1bk+WBnDuFEGLiD4O7ooG0XD6p2a1ElVLk9R9A/U=;
- b=QxRvp7sBI6wuxY6H3yWo0U5qZlsbttoo43l8kTdEh7BbwG/+/MNOcvKhniYM6/mN6x
- pCeFlngJe3cWikCNlNvfa0SPN/iXEr2JkZVPTmwRBmgYQWpv37sP90/2L5LLD+Rhww1j
- arzyuFBn0oVVtO5/JqcmKTLg2XPCY4dbkg/Hw=
+ d=linaro.org; s=google; t=1748445732; x=1749050532; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MLogXbmKyallBinWrkSPwUwMG9uLmrs7oVpuzrrS7og=;
+ b=kAlHxXtDO6uw0q68xDnSt4WLpaf0tlIxd5/6Z+N+uDrfPH9+d4BQnHG+LPuGSpCYYH
+ 9b9rymG+sP3YQOTddsYYfa+41NCANuOjy23PPOTa6UALF1V9ZZ9G+fGYEZT6WleZRh0b
+ 7xAzQnr8l/0VeizhC1y7OU0BO33zPpEFw4YtjUweWr1lKdqPrm+oZf0fyegAieu/IE27
+ BpEOf8MHlG6L2ybfKQiExAYc+jVuZm/bnowWoonApJiZbljLSsAsKGGo0zvIq1fsu159
+ aOZimJSx+BxNU3bQAQlDyZez29kUszYr60vY362dmBO6LS8BtSnnBRuNoJvCEPLNoaF0
+ uj3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748445673; x=1749050473;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U7s1bk+WBnDuFEGLiD4O7ooG0XD6p2a1ElVLk9R9A/U=;
- b=nCBZPMH8wZ0zC+uvjRwtypdo5JMXJP5UhtAGLQF5iKRRGhzG6LFPKrGkzr1uyyNBBO
- xSuVZrJ08liAIYpszOqkF2simfj0d9ORS7bwse632MUGncoO2LOBqFZscP8N7S/L1NYj
- WYL6kd8LFwddfX8mvoxdBgblwXqQDL7Q5vsFXMta2igZLiDx07pMiRQ4E5phc6+Ciss0
- vzuXG9ByM5K/EdIsT4dd14qWxc8SbjJ42rrwRYktNCmdBJcA7IHeckUoR9MyBLhNFXBo
- /iCxhDUSPQ9+SxK4NJHi6rCWTtXljo8/0Sl0xqaESeedl2mWkoYM72p9Nlmqjyo6KCR9
- bi1w==
-X-Gm-Message-State: AOJu0YzC5oT6TfqehhUhMec8At9bnIUVifAA0fQrlRAVckyMAeBfAqk7
- jnxEYvC+2wdF3OUxO4dbxuHoerV6c3RiUUCI6WJnpStwyNuKHJNAfX9E512jp7Sq4fE=
-X-Gm-Gg: ASbGncse8pAW7FxvZZFolMCs0q+tzesITLF2/25XJMLWq5qZ+HR+p4B7FVz/lBgqI6r
- RaZ+bhwvCXGO2609QA3mfPtF+B9S3LVbv0BpQl7s2AaAmTrvvXAnOm12elbdsZFjCfk5QIygQcG
- uwVx62VuKPWbwFVMQatutDjr3Tvi32HxDy2MdEmFki7XRC3VIXnTHJaFmLW8/q3TY852OZ/1KsE
- jgS11YDrjw0XW05iuwNIecGdbb87W0IKhumXqvfcE0YXKVEuvhXUnlF34LZ9V0B7QTdKotdHFrN
- LDlT1H5WSYq0yz8LL+KP44G6i4T8IaB8WOilKAwgiG4sayX9qHvK5nnOFR2ETx3eHq9aNZ+HOLl
- QWUZYe27B2EGRnSNUW7nc0HM=
-X-Google-Smtp-Source: AGHT+IFai6YQS3DCFACENbFHK57ooHLUw4xqzBISNntL4KMpzRraOLG3okqh/Dg+Ia4v1uutGycB4w==
-X-Received: by 2002:a05:6808:22ab:b0:3f8:bbf3:3a18 with SMTP id
- 5614622812f47-4066042e4femr3336189b6e.16.1748445672984; 
- Wed, 28 May 2025 08:21:12 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60bd9d24757sm207069eaf.36.2025.05.28.08.21.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 08:21:12 -0700 (PDT)
-Date: Wed, 28 May 2025 09:21:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- sjg@chromium.org, jerome.forissier@linaro.org, rfried.dev@gmail.com,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH v2 6/9] net/eth-uclass: Add eth_get_ethaddr_from_dev
-Message-ID: <20250528152110.GC100073@bill-the-cat>
-References: <20250528083821.567514-1-adriano.cordova@canonical.com>
- <20250528083821.567514-7-adriano.cordova@canonical.com>
+ d=1e100.net; s=20230601; t=1748445732; x=1749050532;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MLogXbmKyallBinWrkSPwUwMG9uLmrs7oVpuzrrS7og=;
+ b=OWOQcrx6Cra7mT9oXSzeDUkjcdazp7GKe7wYaECFWS6MktWPf2h9msb2kqxPYLyyxl
+ l+1qE8u8A0EEml6zaM1MK7juRLKqSXVOLGKL1t0tzx09jhTcAhKDW9WmBjEfzRxSPJcj
+ 0BXraOxmIAQtuJLGYHk7YQC0hJH4TCyHY2yzmtZy7Rntv2+W5lkqHNL8hJUGxzLH8xfn
+ vpFotITUlWWxK2FxLyLIv/MI5CfW7Hap3yyWhRCNWeaZ7tRODsCSsxGTI7RUO0miOl9Q
+ vX58i7q0YV9Jdww17oCYISqAHQr7Sjyfg8imOjQqLY7GHh4cZVxskIqGm73DueQmecJB
+ uyeQ==
+X-Gm-Message-State: AOJu0YxOXxkcbs3dAQG4UZH9SEbN5Mqvkn1M0TsnNAJ8bqnOL1sUzSyc
+ vQkGaCkXa59CJNZUE8CUdkPfxjgu2MkS6oQX1ICwayflLhffq1vy5BQ+1LpdUt38J+agt4KDS5p
+ MkmivkUkeqqOBeC5e9E+En48SAF1XOHCKFhzPSnahHQ==
+X-Gm-Gg: ASbGnct2Cwmd1grcU9mLZ7WXkBF4bmhFqVEjGqC3zu3kMl7wRtbCrwimVHWctMyXGz2
+ 1cfShhMAz81XHACatpJ9v3TODiFVu+fwa3WsKJ5YIzadq+EGk41R9CZOB6FXYsveTduNQWrujOM
+ nIt4DihyVsEzs2VNCEkz68OfnlDMmkKGOBEh2fJtvXwK+E
+X-Google-Smtp-Source: AGHT+IENBgDikg2GiAeX3dZ6D2/pVEUp5Cm8UEZ1xF5I7NvbI8ty5cE6hdK06m7tNrjk38GTFnmTpsl5s7mnYAVzjFw=
+X-Received: by 2002:a17:90b:38c1:b0:311:b07f:1b86 with SMTP id
+ 98e67ed59e1d1-311b07f1ccemr9138369a91.29.1748445732457; Wed, 28 May 2025
+ 08:22:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ptPRObJutkrrhydh"
-Content-Disposition: inline
-In-Reply-To: <20250528083821.567514-7-adriano.cordova@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250527210508.1488509-1-raymond.mao@linaro.org>
+ <6b992b47-de7c-45ce-9c3c-ca4a2295f7c9@linaro.org>
+In-Reply-To: <6b992b47-de7c-45ce-9c3c-ca4a2295f7c9@linaro.org>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 28 May 2025 11:22:00 -0400
+X-Gm-Features: AX0GCFtUZtUwzrnHa0Fz5dJvp7Uighzz5EqTXWmGraZL_3IfkjBGHA3xCZsbqHE
+Message-ID: <CAEfUkUK-hpCLC6oeMdomDNQHvtObDowecr4uY0CiStugHNWpBg@mail.gmail.com>
+Subject: Re: [PATCH] makefile: fix Clang link error when RSA_PUBLIC_KEY_PARSER
+ is selected
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Sam Edwards <cfsworks@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,42 +103,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jerome,
 
---ptPRObJutkrrhydh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 28 May 2025 at 04:25, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Hi Rayond,
+>
+> On 5/27/25 23:05, Raymond Mao wrote:
+> > MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> > function provided by the compiler runtime, typically libgcc for GCC or
+> > clang_rt.builtins for Clang.
+> > Thus 'clang_rt.builtins' library is required when building using Clang.
+>
+> How do you reproduce the problem? Can you give the config and build
+> command you are using?
+>
+I am using this:
+CROSS_COMPILE=aarch64-none-linux-gnu- make O=out CC="clang -target
+aarch64-none-linux-gnu" all
 
-On Wed, May 28, 2025 at 04:38:18AM -0400, Adriano Cordova wrote:
+> >
+> > Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> >  Makefile | 6 +++++-
+> >  1 file changed, 5 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index f88684947ee..16506dcaec6 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -37,7 +37,6 @@ else ifeq ("riscv32", $(MK_ARCH))
+> >  else ifeq ("riscv64", $(MK_ARCH))
+> >    export HOST_ARCH=$(HOST_ARCH_RISCV64)
+> >  endif
+> > -undefine MK_ARCH
+> >
+> >  # Avoid funny character set dependencies
+> >  unexport LC_ALL
+> > @@ -915,8 +914,13 @@ PLATFORM_LIBGCC = arch/$(ARCH)/lib/lib.a
+> >  else
+> >  ifndef CONFIG_CC_IS_CLANG
+> >  PLATFORM_LIBGCC := -L $(shell dirname `$(CC) $(c_flags) -print-libgcc-file-name`) -lgcc
+> > +else ifeq ($(CONFIG_RSA_PUBLIC_KEY_PARSER_MBEDTLS),y)
+> > +# mbedtls bignum needs '__udivti3' - a 128-bit division function that's provided by clang-rt.
+> > +CLANG_RT_DIR := $(shell $(CC) --print-resource-dir)/lib/linux
+> > +PLATFORM_LIBGCC := -L$(CLANG_RT_DIR) -lclang_rt.builtins-$(MK_ARCH)
+>
+> I'm afraid this won't work when cross-compiling because the compiler-rt
+> builtins libraries are usually not installed with the compiler.
+> For example on my Ubuntu 24.04 machine:
+>
+> $ clang --version
+> Ubuntu clang version 18.1.3 (1ubuntu1)
+> Target: x86_64-pc-linux-gnu
+> Thread model: posix
+> InstalledDir: /usr/bin
+> $ clang --print-targets
+>
+>   Registered Targets:
+>     aarch64     - AArch64 (little endian)
+>     aarch64_32  - AArch64 (little endian ILP32)
+>     aarch64_be  - AArch64 (big endian)
+>     amdgcn      - AMD GCN GPUs
+>     arm         - ARM
+>     arm64       - ARM64 (little endian)
+>     arm64_32    - ARM64 (little endian ILP32)
+>     armeb       - ARM (big endian)
+>     avr         - Atmel AVR Microcontroller
+>     bpf         - BPF (host endian)
+>     bpfeb       - BPF (big endian)
+>     bpfel       - BPF (little endian)
+>     hexagon     - Hexagon
+>     lanai       - Lanai
+>     loongarch32 - 32-bit LoongArch
+>     loongarch64 - 64-bit LoongArch
+>     m68k        - Motorola 68000 family
+>     mips        - MIPS (32-bit big endian)
+>     mips64      - MIPS (64-bit big endian)
+>     mips64el    - MIPS (64-bit little endian)
+>     mipsel      - MIPS (32-bit little endian)
+>     msp430      - MSP430 [experimental]
+>     nvptx       - NVIDIA PTX 32-bit
+>     nvptx64     - NVIDIA PTX 64-bit
+>     ppc32       - PowerPC 32
+>     ppc32le     - PowerPC 32 LE
+>     ppc64       - PowerPC 64
+>     ppc64le     - PowerPC 64 LE
+>     r600        - AMD GPUs HD2XXX-HD6XXX
+>     riscv32     - 32-bit RISC-V
+>     riscv64     - 64-bit RISC-V
+>     sparc       - Sparc
+>     sparcel     - Sparc LE
+>     sparcv9     - Sparc V9
+>     systemz     - SystemZ
+>     thumb       - Thumb
+>     thumbeb     - Thumb (big endian)
+>     ve          - VE
+>     wasm32      - WebAssembly 32-bit
+>     wasm64      - WebAssembly 64-bit
+>     x86         - 32-bit X86: Pentium-Pro and above
+>     x86-64      - 64-bit X86: EM64T and AMD64
+>     xcore       - XCore
+>     xtensa      - Xtensa 32
+> $ clang --print-resource-dir
+> /usr/lib/llvm-18/lib/clang/18
+> $ ls /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins*
+> /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-i386.a  /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-x86_64.a
+>
+>
+> Are you doing cross compilation for arm or arm64? Did you have to
+> install the compiler-rt libraries separately from the compiler?
+>
+I installed clang manually.
 
-> Add eth_get_ethaddr_from_dev() to retrieve the MAC address
-> of a specific eth udevice. The function eth_get_ethaddr()
-> preserves its behavior of returning the MAC address of the
-> current eth udevice.
->=20
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+This is what I have:
+$ which clang
+/home/raymond/toolchain/clang-12.0.0/bin/clang
+$ clang --version
+clang version 12.0.0
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /home/raymond/toolchain/clang-12.0.0/bin
+$ clang --print-targets
+  Registered Targets:
+    aarch64    - AArch64 (little endian)
+    aarch64_32 - AArch64 (little endian ILP32)
+    aarch64_be - AArch64 (big endian)
+    amdgcn     - AMD GCN GPUs
+    arm        - ARM
+    arm64      - ARM64 (little endian)
+    arm64_32   - ARM64 (little endian ILP32)
+    armeb      - ARM (big endian)
+    avr        - Atmel AVR Microcontroller
+    bpf        - BPF (host endian)
+    bpfeb      - BPF (big endian)
+    bpfel      - BPF (little endian)
+    hexagon    - Hexagon
+    lanai      - Lanai
+    mips       - MIPS (32-bit big endian)
+    mips64     - MIPS (64-bit big endian)
+    mips64el   - MIPS (64-bit little endian)
+    mipsel     - MIPS (32-bit little endian)
+    msp430     - MSP430 [experimental]
+    nvptx      - NVIDIA PTX 32-bit
+    nvptx64    - NVIDIA PTX 64-bit
+    ppc32      - PowerPC 32
+    ppc32le    - PowerPC 32 LE
+    ppc64      - PowerPC 64
+    ppc64le    - PowerPC 64 LE
+    r600       - AMD GPUs HD2XXX-HD6XXX
+    riscv32    - 32-bit RISC-V
+    riscv64    - 64-bit RISC-V
+    sparc      - Sparc
+    sparcel    - Sparc LE
+    sparcv9    - Sparc V9
+    systemz    - SystemZ
+    thumb      - Thumb
+    thumbeb    - Thumb (big endian)
+    wasm32     - WebAssembly 32-bit
+    wasm64     - WebAssembly 64-bit
+    x86        - 32-bit X86: Pentium-Pro and above
+    x86-64     - 64-bit X86: EM64T and AMD64
+    xcore      - XCore
+$ clang --print-resource-dir
+/home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0
+$ ls /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins*
+/home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+ /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-x86_64.a
+/home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-armhf.a
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Regards,
+Raymond
 
---=20
-Tom
-
---ptPRObJutkrrhydh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg3KeYACgkQFHw5/5Y0
-tyyutwv/Q8ym1HE22PxtHKIXwULPi7xcEFbbepAd9v+tFVPYWPcS4FyTPPFYOYvt
-IYD99mCYmcEgXw8keAU/6mBjR8guWn8kIjkZv97UuzbtpM4ZpphIhGji7lTj0+bu
-j50S2NBWuRQDorwgJxid6B5uB85plUGkdvBiPQNU6UR3S6PDaDFqOIHGOFm/RjAh
-zZnteGy6RtB2rdZKh9FElQtJV7ZEodfSDwKHA8Ks7cXvWmo6xdxvlq6wg8mz5aAe
-2QGA5TVIuSnFg3MedWlfhi7SlqfmIGEThxUwLqiqm0XWwl9vj0rAIkbF21Cf6E6X
-Iov0z1MeR7JYLsoxmHBGFXwFGsNjRrQEf8LW+YoJdsQy9nNPZrKL86lZdtqZ7Tdi
-c+kklIJEkqxdDoBv5tVpXQOVHdQUkO2tPdunTsDAk22hAeC1kcmJ9GZErOL4ycZH
-nfSX7iKeTXhjQmWS5X8l7wqXV8rQfkX68ihFs8NJvF4NVPYk0BAKGRe7BCwuL4Mi
-nflJOjT4
-=Eec7
------END PGP SIGNATURE-----
-
---ptPRObJutkrrhydh--
+> Thanks,
+> --
+> Jerome
+>
+> >  endif
+> >  endif
+> > +undefine MK_ARCH
+> >  PLATFORM_LIBS += $(PLATFORM_LIBGCC)
+> >
+> >  ifdef CONFIG_CC_COVERAGE
