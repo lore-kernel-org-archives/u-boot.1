@@ -4,90 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C2F1C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 14:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4026EC5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 14:39:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC365832DA;
-	Wed, 28 May 2025 16:33:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A326832BC;
+	Wed, 28 May 2025 16:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EyG5CXqi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZOQkglZs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0E0D83323; Wed, 28 May 2025 16:33:04 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id AEF75832EB; Wed, 28 May 2025 16:39:09 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22D0E832AF
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:33:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6863D832AF
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 16:39:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ad52dfe06ceso562606066b.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 07:33:02 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-604e299b5b6so1928239a12.0
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 07:39:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748442781; x=1749047581; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748443147; x=1749047947; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1dpQTtpYObNlT2xSfY0tlhypjOn7JLGOlrtiwIJSD3E=;
- b=EyG5CXqiYMnpMLSzB4G9B84uK/BpAUw72795YRNGXHiuhG+SoSNK0Aj4hpS0pfCtrk
- ev+MDlsMVMPSWpIr1g30leMkqM76SXrvn/NMxb0HnvjLkyoxXp6l1g5/9FcZEhSKADai
- fIHpDLoYqHPBs1rhuSg8pCI7atkMV7fAKuKow=
+ bh=DSVRr3fBrjzZLjWJ6ziSqf1maH3IjgJWnZ07A2hgtPk=;
+ b=ZOQkglZs9cgF5KuOKxPmU+XI+nJELDTYImJsG1GU0HJ1z/5NWv9MQzwOh+8GkIOrhb
+ OvqxJU5Yim+kavbiNwTICfFqnpaEiLpdfUC+Iu56QE07kDQ6GdqPJPyqYPpg6gDT/bQM
+ /8A9ZQIq5CVsZIbOHCWHc84BeU/9vSdXN6OuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748442781; x=1749047581;
+ d=1e100.net; s=20230601; t=1748443147; x=1749047947;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1dpQTtpYObNlT2xSfY0tlhypjOn7JLGOlrtiwIJSD3E=;
- b=cX6AcwPp2waefzXqIDe1WmShbwZ8j+oL5xDaqPLpM/61xBugzWywqGPcXn/pPO/ry4
- I4eBesMuwEW+gt5EGULMc84rhn2nkHbC1fjJKx0IYnUJl4GsEyUu34zYYIZL4g4Mq2T3
- LVMinxewUMYg8mkC+i9fqXyhi7yyRxb/C7CgjFWlBWcflvscjRMjoVRB0ZxcgG3X5sgl
- e/OrRWWVetIDk4hQpKQDn+d1XnwYdmcx7h1DZCN+By8VabeyqA4E4PyMWDEh22BG5JuH
- MH86LqNoeAIxSaQ7fAjuxERUJDu7RxbFnHbJr3fiFDCrSRdfn5vDBenkvy4oKkbvKyZe
- tXng==
-X-Gm-Message-State: AOJu0YwT1yW7oKToAfzdGU33oG65ebgI3W6moci9nRcgQKY5T2puRm4l
- 9X9bpHf6DJyKwW2gwsb0ClEFznyzGiP8tYJ0VsCDJVRtB1P54HKvZBJyXV26pol2MWaxEoMVmBb
- NPqvj0Yyhv9kPJDv1GNVL9yWEi34io9ZBptovKRwi
-X-Gm-Gg: ASbGncv0ItY5Bplpxz7UxQJakV+h0VLMC9Xy/bXoBQPCRrdxVSOtBgKHhgkdAHgRVQk
- 31tFli1uGII9XZmvLuup8liRfeCu8PqO8C412IMJLLxP2YhnPJPuIkpGk+607BLiSYhYr35p0R9
- k33Sz04tXwgKfZR0DDLTmczg26IZgW438=
-X-Google-Smtp-Source: AGHT+IHm17kvOz4ZFmKyyOVVm0YqIhNkVu57Lxk0LWb5xTJzxMRPlfzkvQ+jkqmqfrPaVQBRZx2B7d6/WMWWGeDd8dY=
-X-Received: by 2002:a17:906:c153:b0:ad5:55db:e40d with SMTP id
- a640c23a62f3a-ad85b12060fmr1431319766b.34.1748442781441; Wed, 28 May 2025
- 07:33:01 -0700 (PDT)
+ bh=DSVRr3fBrjzZLjWJ6ziSqf1maH3IjgJWnZ07A2hgtPk=;
+ b=d4UehA1dX5Y6IQIjhGRoxRYyXBkyUpgcdI+IFatcFHf1tOcGQSVWugJ2AXHD9HLkoL
+ R24JDZPCF1Dz3kx/LKaZEfZGiiFnWwrHdfITiunRjM18wXoj1L/tQezyBxWUTb9Zr00I
+ Ejy0HIwHDJAVjF54eSOlVJhZ9VkyrhLMKAe1cS1JrM5xgvkoS3Gd3jB/GAGgvOlYEUZ1
+ D1jH3wdrNM2Yg71HoRY2OOeFMeT26lgrhT58mxVOQDb2E6SqkRSVkwtOe85jLX17OYiY
+ TQcBq6M1TSO9ILy4ipgBuq6K7azrP+rq+MPqBZv0J5aF3DggjKKDZBiPJIM+Uc/SXdQB
+ DfEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUVmsb1Ixc6ffbmc3Q5Tr/3pmH3l6RJUvnCxs/G93fHQo8FQdYP/LOiscGxqION4nCo6nG0u4M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2vLS5aGICpLk/MZA5fELg/Bx+F/jHuvr4VjU1iNxB1MJaAMlc
+ wfKZhXFwZVFS46JOvFCxrGIaEEk9wcYAjbFg8yExccJd/YItpphsW2NQ9vV9lcaHGG762gwIaOY
+ CZ/+ZSHNjjc/ur/WpMcjt5mMN9ouvA/SC73vpoOu/3+jV8uLFDJDDAw==
+X-Gm-Gg: ASbGncsolky5P/DFF5FXK3WCymi9Ctfgz9YPuqOyRr/J2tOtbt2PtauNWaJQ4D+FVVP
+ m5xlXgPC2NE5CgaPJAPVjfDqfHdePxIaiUAzh3Vh3wUgsWkg6YA2HpMPORoRylsq80Fxgi6M+X5
+ AmNOZoFtvhHZPK/fzmpWdartZztAE8wYrQ/J/1860l+Q==
+X-Google-Smtp-Source: AGHT+IHx9SeQM9q2JejcyxEM8+WvEsgI5x9j6+A8M6i7PVpZRwzBOoI78JL2OIxub4JwwlKlmhZJV6Acp1q6FESin7Y=
+X-Received: by 2002:a05:6402:2793:b0:5f4:8c80:77d with SMTP id
+ 4fb4d7f45d1cf-6050e4424e5mr3701003a12.6.1748442751874; Wed, 28 May 2025
+ 07:32:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250527124038.3633270-1-sjg@chromium.org>
- <20250527133249.GH100073@bill-the-cat>
-In-Reply-To: <20250527133249.GH100073@bill-the-cat>
+References: <20250528-dev_read_x32_default-v1-0-6ab1734dd7a2@cherry.de>
+ <20250528-dev_read_x32_default-v1-1-6ab1734dd7a2@cherry.de>
+In-Reply-To: <20250528-dev_read_x32_default-v1-1-6ab1734dd7a2@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 May 2025 15:32:48 +0100
-X-Gm-Features: AX0GCFtZxo6SH829mcAsng9HxUp2jHjcrzmsnK6P9tiwrTXtmBT2SepDdfSDM4I
-Message-ID: <CAFLszTjjoxc+THgdrWEam2XQKNPp5zeYXF2o2u=MyibNOYT6oA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bootm: Shorten BOOTM_STATE_
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Adriano Cordova <adrianox@gmail.com>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Eddie James <eajames@linux.ibm.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Huan Wang <alison.wang@nxp.com>,
- Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rick Chen <rick@andestech.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Thomas Chou <thomas@wytron.com.tw>, 
- uboot-snps-arc@synopsys.com
+Date: Wed, 28 May 2025 15:32:16 +0100
+X-Gm-Features: AX0GCFt6Nlc1tMw4bPI54paS9FZ7plrPHSjQtcQIlxRUGu65pfIwXpCFNyYejjs
+Message-ID: <CAFLszTjw2E3v4sWNtuMc0tafLmtPMv64z=xqzbQyHSQ04NE6Rw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] dm: core: use u32 instead of int for
+ dev_read_u32_default
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,36 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Quentin,
 
-On Tue, 27 May 2025 at 14:32, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 28 May 2025 at 14:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
-> On Tue, May 27, 2025 at 06:40:34AM -0600, Simon Glass wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> > This is quite long at present. Rename it so that fixes better with the
-> > bootstd naming.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> dev_read_u32_default is for getting a u32 from a Device Tree property
+> and allows to take a default value if that property is missing.
 >
-> First of all, sigh, this doesn't apply to mainline. After the last few
-> days, that starts to feel like bad faith on your part. Second, I feel
-> like this reduces code clarity. I'm not rejecting the concept, but
-> shorten + document doesn't feel as useful as "document". Finally, what
-> "bootstd naming" does this better fit with?
+> Considering it calls ofnode_read_u32_default which takes a u32 and
+> returns a u32, it should do the same instead of using an int, especially
+> considering that int size is typically architecture-specific, as opposed
+> to u32.
+>
+> This incidentally matches all other dev_read_*_default functions (except
+> dev_read_s32_default which will be tackled in the next commit).
+>
+> Fixes: 47a0fd3bad38 ("dm: core: Implement live tree 'read' functions")
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+>  drivers/core/read.c | 4 ++--
+>  include/dm/read.h   | 6 +++---
+>  2 files changed, 5 insertions(+), 5 deletions(-)
 
-Firstly, the conflicts are trivial to resolve, if you would like to
-take this patch, since the conflicting code is not in your tree. This
-relates to the booti and bootz features, since you wanted it done a
-different way, reverting an entire series ("Precursor series for
-supporting read_all() in extlinux / PXE") rather than accept a bugfix.
-I'm happy to send a PR once I get to the point where you are happy
-with my bootz/booti fixes, but I do want to work on that
-incrementally.
+Re your comment above 'int' seems to mean 32-bit on the toolchains we
+use. For example, in global_data we use int when we want a 32-bit
+value and long when we want a machine-word-sized value.
 
-The bootstd naming just means that flags start with a BOOTxx prefix. I
-am trying to be consistent with this, as is done in other boot*.h
-header files. This variable relates to bootm, so I'd like it to have a
-BOOTM prefix.
+In general I try to use natural types (int, long, ulong) where
+possible, to avoid the compiler masking values before calling a
+function, which can increase code size. In this case I could make the
+argument either way.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
