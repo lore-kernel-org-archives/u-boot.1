@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27943C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:37:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 556DAC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:37:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 332B383A2B;
+	by phobos.denx.de (Postfix) with ESMTP id 7EE8183A3A;
 	Wed, 28 May 2025 10:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QaRkVHZq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EKL2Z4qo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DDF583A32; Wed, 28 May 2025 10:37:19 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 9A0E083A32; Wed, 28 May 2025 10:37:20 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F9DE83A2A
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:37:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E9E383A24
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:37:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43ede096d73so32695035e9.2
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:37:17 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3a4bdee0bf7so2836651f8f.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:37:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748421436; x=1749026236; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1748421438; x=1749026238; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MeKGR59ND8Ih5ewTSLxsrfERfONm9o/Pyl5+6kX5hiI=;
- b=QaRkVHZq86QQH1jShPV/h/wXyCd6RrOAn5nh11mvkxw+M1UMXD4Nqkur4pUochwtkW
- AiFw3QnqG7Qv9rqqLcW3wLscVazEi3w89Qbzt0IiceuvQgP+CYUnt4n/NHZkrUkxaM++
- SB4AA+i4TGcvL41kOvrOrzbe1znSxaAhqJ7hpkVkFXQLvBYQ7u21Y6ocz6/StJyI1Qlp
- xhHgFGT0Bs/VMvIND5BSNaAS9FKJieGYdqhEqkpFLPAjLZLjiptg/XlWRNY5XqPDlsna
- SIaFIiqVvcHyaHrnwf/9lSxyWhnXPBLegXRd5C/7/t0jEQIB3CgX9AkXUx8nzPLifhI4
- Q9XA==
+ bh=MiUKMWwX2zt+03Rh7J0bGF9AeLym14O1lSpw9+zBUTk=;
+ b=EKL2Z4qoNoomoXaN7KyOJKT6jUV8jb5u8+nhr4+EmFG3DNv0EniN51Imdp9YSwHYYB
+ I71yCPaCJw5mANST2kfuhzWlIkttJMQCM/OHVc0m48HO8fLRZJdxO8SqctNMIMHz4bVW
+ WYlGEcFee8mIEgkAL3D7KfRoCVDAuIGyBXaxHMLzLSor4aviiO5DWM8AZaYVoiqDm3Tq
+ n84+EFDzhriEgGEpPeo3eT0+ywMXSgEwFLc5dQDDiY6VZFI+4IcK/27oSsd2pIUv7FWx
+ HubgA6t1U0rEy/kzZdMvhBa+UIswPsg5jwuadIdo+OSgYpS/S5IkZnKjMODueJfrTQww
+ sNmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748421436; x=1749026236;
+ d=1e100.net; s=20230601; t=1748421438; x=1749026238;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MeKGR59ND8Ih5ewTSLxsrfERfONm9o/Pyl5+6kX5hiI=;
- b=eQ0jDMs6ocFrOct7zyG0vUyyIsmOrrhteHJdbZK89iiJUmFRIsXLAvXr/DOVsJ7vZI
- BE/7z6u9J1yT6vvFKDqSuW4bD8Uh0/oVOVTxODA6vQ9X0LGOaQzZK1YLkEy/000WePpk
- Qzn78Z771kioYfeZ4k75jyxfjsxe+3qIrwDkZwcuMJknSznnmhiE1kIyWKojF9rLBMn9
- HBZMyMnEWKBluoFQmiQXuoBaMaVROGcbKIQwTt0wbt4Y3LfSBvLB4eCh/G4HkAlnHEwt
- PBfdk1UcMWOyNqZ6qUpqWoqrbpe97SXdE5h4Kn64dWIxA2UzCaFvJy+fpXxgpEjrIcRL
- Jldw==
-X-Gm-Message-State: AOJu0YyKkfQgWqhEsS5BGR5rLLspMajNurJAntLAvXkpDYYqKVVFUFtc
- YNv4HntxokAG0+Yd9h7sHjVu/bikBsVSGWQm8xq0NlNKI/fVrRoZGwNaAeshyMX8kho=
-X-Gm-Gg: ASbGnctNyubFxX80K4rsuvl/RGaWjKB0DEddojK6LpUM4ENvYG6jH06/AWU56Z7I0dO
- mPJTUsJV9xNlYFnXQwfomsIXFBttuyt+iKkF70VyIMmAqPqaZlpBkCZBkF7oI5/3apGAi0kYPTr
- 0SnXhnkpDykWRnskNSLfsCeNXHRwu42FHHwfLhMsC3x9tuMJEtxZ4tI6PBiS8c1gM/f9p3QoO7f
- igrKttmg6hAauQKBmGJo7R5Ayissqo7oUT1SZ5l4Oi2oMaXuXBx21m5DocVnkSvSvuaZlTyN6a0
- wVmQZU0A1obPrcWjEbf/L69DCTragUgz0+7LkdkUBqD9DGudZ2vU+f+Azpx/yBU5UlCY7z+EYdf
- +q+Xg0mLU/ofsPXWXEhRNNHg+k/4=
-X-Google-Smtp-Source: AGHT+IF1vkyC6q1CNIwCzlG5hegHFxtXR7+aH4xvAYSFk/EP9OFOZc1pBbcJ7gGeW7b/6pdJqwXNRw==
-X-Received: by 2002:a05:6000:248a:b0:3a4:dd16:a26d with SMTP id
- ffacd0b85a97d-3a4dd16a2e9mr8732305f8f.38.1748421436344; 
- Wed, 28 May 2025 01:37:16 -0700 (PDT)
+ bh=MiUKMWwX2zt+03Rh7J0bGF9AeLym14O1lSpw9+zBUTk=;
+ b=wSf+rueQETb5JN/Rdxuy9SAhY0XlTVgVTqHVVUZrcTaznXsgYg6VON9koStzh6cbeh
+ CL0aRJp8lmcWWs0ycLukHP9UndJM/pNuerVt11msMkNj4+yNBmGpYOu48rRwOBOghJfZ
+ 7y05mZ7GOf1gyxr/XAn0GbSXzR1cBgTdKZ3S05pL1PWjRxJiMIk2n/14PCdNEXgjtqyx
+ WECmygQ2n3q27wdqINwHmgPWo7HcEsdolz8pQsLNLhcnQK88lDi3eL9UMbqR035jJ/yM
+ Jc+B+CIKwhrq0aeUKuHdUzZtyY5uDqiEiAa7kmCjwspiXGuPNA1NuGeqUZGU8pUwchUi
+ Axyw==
+X-Gm-Message-State: AOJu0YxF7uQpwJrtliZe6WJ1GImAHhLti9fmcNV7oiT5S2i4uuXv2GyL
+ +Byap5DLO1LQrKB7WPM0BF5LQ2X4ZJ9NXE15QEz9b1BP4ZbRmLkg8eVvdCNPCSZSFvM=
+X-Gm-Gg: ASbGncuefAh34hKANih98i+BuluJTtUnKOKYrEtWLMM7qbGlvRPEHar5RTvK7bacTD9
+ zxQGR9BzVbhXhv7OLopinowXFCYnPSWFlEMKRoC/saBCDHpYpJknd+EL7t1JLu6WW9rhhE+ZOuY
+ 9yl79Mq4tPS04+9E8ScSusVMwRz1YiNkvNBDInIAZPau8qfllslosA0i/4oRVjGeWC70GjmXftO
+ m6dsR4PowqDwl0WMrzD6Au769h9odz2iBaxA/Jh51s1DHKK5YhZMpZMmGwuFMHpOAUNF1vV16C+
+ 3UNrwzIdVICJoFhxGTPeRDolKH9Y5ZFI3u6OfMkw1ifzNSV9cuYrgwd4Z2h6VEs4I09kNgFcYea
+ DKykvsji5md36kdqZqPpuke9yOf0=
+X-Google-Smtp-Source: AGHT+IGV37eUadqAM/6ehAUWGpr87E7AE/KIvDvG6CirJuMkZ28ws2sYL++2+lM34aDPvPtOfMbGtA==
+X-Received: by 2002:a05:6000:1a8e:b0:3a4:e5ea:1ac0 with SMTP id
+ ffacd0b85a97d-3a4e5ea1d05mr3521997f8f.5.1748421437513; 
+ Wed, 28 May 2025 01:37:17 -0700 (PDT)
 Received: from adriano.. (15.red-79-153-17.dynamicip.rima-tde.net.
  [79.153.17.15]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4eac6eb45sm857130f8f.12.2025.05.28.01.37.15
+ ffacd0b85a97d-3a4eac6eb45sm857130f8f.12.2025.05.28.01.37.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:37:15 -0700 (PDT)
+ Wed, 28 May 2025 01:37:17 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  trini@konsulko.com, jerome.forissier@linaro.org, rfried.dev@gmail.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v2 1/9] lib/efi_loader: Move EFI network files into
- /lib/efi_loader/net/
-Date: Wed, 28 May 2025 04:38:13 -0400
-Message-ID: <20250528083821.567514-2-adriano.cordova@canonical.com>
+Subject: [PATCH v2 2/9] efi_loader/net: Remove http and ip4_config2 data from
+ efi_net.c
+Date: Wed, 28 May 2025 04:38:14 -0400
+Message-ID: <20250528083821.567514-3-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250528083821.567514-1-adriano.cordova@canonical.com>
 References: <20250528083821.567514-1-adriano.cordova@canonical.com>
@@ -101,79 +101,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Created /lib/efi_loader/net/ and moved efi_net.c, efi_http.c, and
-efi_ipconfig.c into it. Previously, efi_net.c contained implementations
-for all supported EFI network protocols, which made the file bloated
-and hard to maintain.
-
-Now, each protocol has its own file under net/. efi_net.c is responsible
-only for installing and uninstalling these protocols on EFI network
-devices.
+efi_net.c should only [un]install protocols, leaving the
+actual implementation to efi_http.c and efi_ipconfig.c
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- doc/api/efi.rst                         | 2 +-
- lib/efi_loader/Makefile                 | 4 +---
- lib/efi_loader/net/Makefile             | 3 +++
- lib/efi_loader/{ => net}/efi_http.c     | 0
- lib/efi_loader/{ => net}/efi_ipconfig.c | 0
- lib/efi_loader/{ => net}/efi_net.c      | 0
- 6 files changed, 5 insertions(+), 4 deletions(-)
- create mode 100644 lib/efi_loader/net/Makefile
- rename lib/efi_loader/{ => net}/efi_http.c (100%)
- rename lib/efi_loader/{ => net}/efi_ipconfig.c (100%)
- rename lib/efi_loader/{ => net}/efi_net.c (100%)
 
-diff --git a/doc/api/efi.rst b/doc/api/efi.rst
-index a98298f93dc..c123056b58a 100644
---- a/doc/api/efi.rst
-+++ b/doc/api/efi.rst
-@@ -145,7 +145,7 @@ RAM disk. U-Boot can be configured to provide an implementation.
- Network protocols
- ~~~~~~~~~~~~~~~~~
+Changes in v2:
+	- free protocol interfaces if protocol installation fails
+
+ include/efi_loader.h              |  6 ++----
+ lib/efi_loader/net/efi_http.c     | 24 +++++++++++++++---------
+ lib/efi_loader/net/efi_ipconfig.c | 25 +++++++++++++++----------
+ lib/efi_loader/net/efi_net.c      | 26 ++++++++++++++------------
+ 4 files changed, 46 insertions(+), 35 deletions(-)
+
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index b3beda5de7b..fd8ae599ced 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -682,11 +682,9 @@ efi_status_t efi_gop_register(void);
+ efi_status_t efi_net_register(struct udevice *dev);
+ efi_status_t efi_net_do_start(struct udevice *dev);
+ /* Called by efi_net_register to make the ip4 config2 protocol available */
+-efi_status_t efi_ipconfig_register(const efi_handle_t handle,
+-				   struct efi_ip4_config2_protocol *ip4config);
++efi_status_t efi_ip4_config2_install(const efi_handle_t handle);
+ /* Called by efi_net_register to make the http protocol available */
+-efi_status_t efi_http_register(const efi_handle_t handle,
+-			       struct efi_service_binding_protocol *http_service_binding);
++efi_status_t efi_http_install(const efi_handle_t handle);
+ /* Called by bootefi to make the watchdog available */
+ efi_status_t efi_watchdog_register(void);
+ efi_status_t efi_initrd_register(struct efi_device_path *dp_initrd);
+diff --git a/lib/efi_loader/net/efi_http.c b/lib/efi_loader/net/efi_http.c
+index 189317fe2d2..709167a2a25 100644
+--- a/lib/efi_loader/net/efi_http.c
++++ b/lib/efi_loader/net/efi_http.c
+@@ -24,6 +24,7 @@ static const efi_guid_t efi_http_guid = EFI_HTTP_PROTOCOL_GUID;
+  *
+  * @http:			EFI_HTTP_PROTOCOL interface
+  * @handle:			handle to efi object
++ * @parent:			service binding that created this child
+  * @configured:			configuration status
+  * @http_load_addr:		data buffer
+  * @file_size:			size of data
+@@ -391,7 +392,7 @@ static efi_status_t EFIAPI efi_http_service_binding_create_child(
+ 	if (!child_handle)
+ 		return EFI_EXIT(EFI_INVALID_PARAMETER);
  
--.. kernel-doc:: lib/efi_loader/efi_net.c
-+.. kernel-doc:: lib/efi_loader/net/efi_net.c
-    :internal:
+-	new_instance = calloc(1, sizeof(struct efi_http_instance));
++	new_instance = calloc(1, sizeof(*new_instance));
+ 	if (!new_instance) {
+ 		ret = EFI_OUT_OF_RESOURCES;
+ 		goto failure_to_add_protocol;
+@@ -482,24 +483,29 @@ static efi_status_t EFIAPI efi_http_service_binding_destroy_child(
+ }
  
- Random number generator protocol
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index cf050e5385d..92c6822bc13 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -59,9 +59,7 @@ obj-y += efi_watchdog.o
- obj-$(CONFIG_EFI_ESRT) += efi_esrt.o
- obj-$(CONFIG_VIDEO) += efi_gop.o
- obj-$(CONFIG_BLK) += efi_disk.o
--obj-$(CONFIG_NETDEVICES) += efi_net.o
--obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ipconfig.o
--obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
-+obj-$(CONFIG_NETDEVICES) += net/
- obj-$(CONFIG_ACPI) += efi_acpi.o
- obj-$(CONFIG_SMBIOS) += efi_smbios.o
- obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
-diff --git a/lib/efi_loader/net/Makefile b/lib/efi_loader/net/Makefile
-new file mode 100644
-index 00000000000..ab41f358de9
---- /dev/null
-+++ b/lib/efi_loader/net/Makefile
-@@ -0,0 +1,3 @@
-+obj-y += efi_net.o
-+obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ipconfig.o
-+obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
-\ No newline at end of file
-diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/net/efi_http.c
-similarity index 100%
-rename from lib/efi_loader/efi_http.c
-rename to lib/efi_loader/net/efi_http.c
-diff --git a/lib/efi_loader/efi_ipconfig.c b/lib/efi_loader/net/efi_ipconfig.c
-similarity index 100%
-rename from lib/efi_loader/efi_ipconfig.c
-rename to lib/efi_loader/net/efi_ipconfig.c
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/net/efi_net.c
-similarity index 100%
-rename from lib/efi_loader/efi_net.c
-rename to lib/efi_loader/net/efi_net.c
+ /**
+- * efi_http_register() - register the http protocol
++ * efi_http_install() - install the EFI_HTTP_SERVICE_BINDING_PROTOCOL
+  *
++ * @handle:	handle to install the protocol
+  */
+-efi_status_t efi_http_register(const efi_handle_t handle,
+-			       struct efi_service_binding_protocol *http_service_binding)
++efi_status_t efi_http_install(const efi_handle_t handle)
+ {
+ 	efi_status_t r = EFI_SUCCESS;
++	struct efi_service_binding_protocol *http_service_binding;
+ 
+-	r = efi_add_protocol(handle, &efi_http_service_binding_guid,
+-			     http_service_binding);
++	r = efi_allocate_pool(EFI_LOADER_DATA,
++			      sizeof(*http_service_binding),
++			      (void **)&http_service_binding);
+ 	if (r != EFI_SUCCESS)
+-		goto failure_to_add_protocol;
++		return r;
+ 
+ 	http_service_binding->create_child = efi_http_service_binding_create_child;
+ 	http_service_binding->destroy_child = efi_http_service_binding_destroy_child;
+ 
+-	return EFI_SUCCESS;
+-failure_to_add_protocol:
++	r = efi_add_protocol(handle, &efi_http_service_binding_guid,
++			     http_service_binding);
++	if (r != EFI_SUCCESS)
++		efi_free_pool(http_service_binding);
++
+ 	return r;
+ }
+ 
+diff --git a/lib/efi_loader/net/efi_ipconfig.c b/lib/efi_loader/net/efi_ipconfig.c
+index 9f51f77fa9a..7e18026cfea 100644
+--- a/lib/efi_loader/net/efi_ipconfig.c
++++ b/lib/efi_loader/net/efi_ipconfig.c
+@@ -190,20 +190,20 @@ static efi_status_t EFIAPI efi_ip4_config2_unregister_notify(struct efi_ip4_conf
+ }
+ 
+ /**
+- * efi_ipconfig_register() - register the ip4_config2 protocol
++ * efi_ip4_config2_install() - install the EFI_IP4_CONFIG2_PROTOCOL
+  *
++ * @handle	handle to install the protocol
+  */
+-efi_status_t efi_ipconfig_register(const efi_handle_t handle,
+-				   struct efi_ip4_config2_protocol *ip4config)
++efi_status_t efi_ip4_config2_install(const efi_handle_t handle)
+ {
+-	efi_status_t r = EFI_SUCCESS;
++	efi_status_t r;
++	struct efi_ip4_config2_protocol *ip4config;
+ 
+-	r = efi_add_protocol(handle, &efi_ip4_config2_guid,
+-			     ip4config);
+-	if (r != EFI_SUCCESS) {
+-		log_err("ERROR: Failure to add protocol\n");
++	r = efi_allocate_pool(EFI_LOADER_DATA,
++			      sizeof(*ip4config),
++			      (void **)&ip4config);
++	if (r != EFI_SUCCESS)
+ 		return r;
+-	}
+ 
+ 	memcpy(current_mac_addr, eth_get_ethaddr(), 6);
+ 
+@@ -212,5 +212,10 @@ efi_status_t efi_ipconfig_register(const efi_handle_t handle,
+ 	ip4config->register_data_notify = efi_ip4_config2_register_notify;
+ 	ip4config->unregister_data_notify = efi_ip4_config2_unregister_notify;
+ 
+-	return EFI_SUCCESS;
++	r = efi_add_protocol(handle, &efi_ip4_config2_guid,
++			     ip4config);
++	if (r != EFI_SUCCESS)
++		efi_free_pool(ip4config);
++
++	return r;
+ }
+diff --git a/lib/efi_loader/net/efi_net.c b/lib/efi_loader/net/efi_net.c
+index 8e708d8d350..387bfec7cb2 100644
+--- a/lib/efi_loader/net/efi_net.c
++++ b/lib/efi_loader/net/efi_net.c
+@@ -32,6 +32,8 @@
+ const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
+ static const efi_guid_t efi_pxe_base_code_protocol_guid =
+ 					EFI_PXE_BASE_CODE_PROTOCOL_GUID;
++static const efi_guid_t efi_http_service_binding_guid =
++					EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID;
+ 
+ struct dp_entry {
+ 	struct efi_device_path *net_dp;
+@@ -74,8 +76,6 @@ static int next_dhcp_entry;
+  * @net_mode:			status of the network interface
+  * @pxe:			PXE base code protocol interface
+  * @pxe_mode:			status of the PXE base code protocol
+- * @ip4_config2:		IP4 Config2 protocol interface
+- * @http_service_binding:	Http service binding protocol interface
+  * @new_tx_packet:		new transmit packet
+  * @transmit_buffer:	transmit buffer
+  * @receive_buffer:		array of receive buffers
+@@ -93,12 +93,6 @@ struct efi_net_obj {
+ 	struct efi_simple_network_mode net_mode;
+ 	struct efi_pxe_base_code_protocol pxe;
+ 	struct efi_pxe_mode pxe_mode;
+-#if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
+-	struct efi_ip4_config2_protocol ip4_config2;
+-#endif
+-#if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
+-	struct efi_service_binding_protocol http_service_binding;
+-#endif
+ 	void *new_tx_packet;
+ 	void *transmit_buffer;
+ 	uchar **receive_buffer;
+@@ -1286,13 +1280,12 @@ efi_status_t efi_net_register(struct udevice *dev)
+ 	}
+ 
+ #if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
+-	r = efi_ipconfig_register(&netobj->header, &netobj->ip4_config2);
++	r = efi_ip4_config2_install(&netobj->header);
+ 	if (r != EFI_SUCCESS)
+ 		goto failure_to_add_protocol;
+ #endif
+-
+ #ifdef CONFIG_EFI_HTTP_PROTOCOL
+-	r = efi_http_register(&netobj->header, &netobj->http_service_binding);
++	r = efi_http_install(&netobj->header);
+ 	if (r != EFI_SUCCESS)
+ 		goto failure_to_add_protocol;
+ #endif
+@@ -1646,6 +1639,7 @@ efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buf
+ 	int wget_ret;
+ 	static bool last_head;
+ 	struct udevice *dev;
++	struct efi_handler *phandler;
+ 	int i;
+ 
+ 	if (!buffer || !file_size || !parent)
+@@ -1657,8 +1651,16 @@ efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buf
+ 	// Set corresponding udevice
+ 	dev = NULL;
+ 	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
+-		if (net_objs[i] && &net_objs[i]->http_service_binding == parent)
++		if (!net_objs[i])
++			continue;
++
++		ret = efi_search_protocol(&net_objs[i]->header,
++					  &efi_http_service_binding_guid,
++					  &phandler);
++		if (ret == EFI_SUCCESS && phandler == (void *)parent) {
+ 			dev = net_objs[i]->dev;
++			break;
++		}
+ 	}
+ 	if (!dev)
+ 		return EFI_ABORTED;
 -- 
 2.48.1
 
