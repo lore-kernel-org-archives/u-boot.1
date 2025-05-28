@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFEBC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 17:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 678F8C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 18:13:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF794828BC;
-	Wed, 28 May 2025 19:59:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 999DC832EB;
+	Wed, 28 May 2025 20:13:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CrffWa75";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="fa+epxJv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBBB482B20; Wed, 28 May 2025 19:59:08 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 478C283321; Wed, 28 May 2025 20:13:02 +0200 (CEST)
+Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F03682116
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 19:59:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2041832AF
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 20:12:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-72c13802133so35023a34.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:59:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748455145; x=1749059945; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NlDas/wAYwuX26JY6td0JrqHSZEgfyG0b06iiDs9ti0=;
- b=CrffWa7561+STkkWa8L8rk7npw/Di7tl/vYQmQlkjOyZDN6lmQ/PtSRqm4gERInuGl
- pLnf+0Z7+yrbA5TZ0a1lFmWUAXdafP86vXK8nPlJ1UFoeAQ3hL4udLXcAG9jR+0Ed9I+
- eLHSTxXy4O7NpfKS33m7TyvvToMeCjlkXR048=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748455145; x=1749059945;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NlDas/wAYwuX26JY6td0JrqHSZEgfyG0b06iiDs9ti0=;
- b=td3B/r9TZfHlRCLNMcHEyzLYyf4eAziulU5ax0TzgOjITsjPxqz/WNvWagqu/SS+KB
- q3s8Zp/Bh6wWkxY+xWXKE56ue3HepiX21iolNbacXTHFSPP+2VuBFbw0lu2fnT+qcNLj
- VaQ2e5rh5AqT3kCBowCQ+8sLgINpT4OWVzSaA9N0k3+IolY7gRnZgt3sADocn0or+rki
- es/Lm1MvEGKKhpLUJ4xYLAo53OMsw82QokTxEVrfsBNq9Fwd1mf/XgF0JfXYrs1dwoKk
- C3lJv7vcAJU5DZ+DG5BGg5waETK/mrQaVA+OJHbvWwI26JgQ25lo3IbmeTUr6hf7G/1J
- lERw==
-X-Gm-Message-State: AOJu0Ywli2yojYGj0G6kj9KF1/NDObZwvbYCDXPqRQgqDV30pdTKA0DI
- JEJUzqr4anT/aewi8DbuAMh6znQvxNojBA5/loIq3K7WDqacHris87Shx6uMVSvEULT9UG1oq4A
- BZJ0YGyA=
-X-Gm-Gg: ASbGnctP1qAqSv2yNbRv2FaWiCWAe4W335DvB5Bx1HegUiYVbneGVrWJbk/lNKVYZqW
- SBkDnDUv/zk+nrjbt18I4DQxkdlsfnaHZ9okJrY4P5HV+pVL8dN1oqFZvZ+3/rbbq6AWpFYASGx
- EQkgEVh23YrEYL05IGEygrzj8ADQOL2BhF+kGJvQKUQZ3vDBZ5ewKsMS5G0ovxBdaCsHvBX4yjh
- UfzoYqYs/bz5Uqm4C3lYhRfANJSAZx+ytYjLiU/zbw9HGXCns4GcRN/ZzseQO+n/Fc9K8ZemOJR
- cP5DJFMT5WHKMuqEooxDOuzhkYrQ8vjCY3miToBpcrDRhVlTUng+Pci2B1ZDWIj4JVTe18w4YNi
- vbxeaY5vS+UBk
-X-Google-Smtp-Source: AGHT+IGlaaeqke7gwKhS/uHdJFDLmYEH3Uf1eX45Gx6vEl2LtOTa0cCnKiSYd7OOTUmhfdVeT60QRg==
-X-Received: by 2002:a05:6808:320f:b0:401:e61b:5f73 with SMTP id
- 5614622812f47-406467d8956mr11783988b6e.11.1748455144876; 
- Wed, 28 May 2025 10:59:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40665472aabsm263189b6e.31.2025.05.28.10.59.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 10:59:04 -0700 (PDT)
-Date: Wed, 28 May 2025 11:59:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: Determining Simon Glass's future in the U-Boot project
-Message-ID: <20250528175901.GG100073@bill-the-cat>
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1748449448;
+ bh=+8lV/pX3sZR8cdygpk3/n85s9qxIcW47LB/z8jtOn+o=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=fa+epxJvvg9f7SIQEXAslZ8vXkyMqtGPald8/DDbYCeS9SenwEXpqNZF/ZKubeJBT
+ AqE4+plB3UB4d4tDRELOyO84KMDL2QZhQJK3Uq88YVnA+OtSjSBK+F88mBpDi6SNUM
+ sZzHwSWHC4Y0jZFC7Wvlfu9hIY9ZSrreRViOCWb+hpLz9JuArD5/nt1zSpugIjKulf
+ tBEFyB3CCey02Bf+Rr+yVEzxhmnjgT5UqLfZGWjeNf/+u6AT8pWqjnUrfDTMJfC75V
+ M1fjX94ngbUlGGBeueL20R2yZ6qyZh35dUmZZfpzybnKiAVnBj1bhI2X5xmEkOIplY
+ Rpl11U+ISzS8g==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Michael Trimarchi <michael@amarulasolutions.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Peng Fan <peng.fan@nxp.com>, Adam Ford <aford173@gmail.com>, "Lukasz
+ Majewski" <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Simon Glass
+ <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: RE: [PATCH v2 1/4] clk: imx: add i.MX6UL clk driver
+Thread-Topic: [PATCH v2 1/4] clk: imx: add i.MX6UL clk driver
+Thread-Index: AQJDXFZB41jY8Cb3FaUBY8FUWfOc9bMZDOUA
+Date: Wed, 28 May 2025 16:24:06 +0000
+Message-ID: <c56157288f9341f2bc12eccdaccb4e4d@dh-electronics.com>
+References: <20250526194811.1179530-1-michael@amarulasolutions.com>
+In-Reply-To: <20250526194811.1179530-1-michael@amarulasolutions.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fugm3uamNDvz/g1U"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,67 +74,349 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Michael Trimarchi
+Sent: Monday, May 26, 2025 9:48 PM
 
---fugm3uamNDvz/g1U
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-Hey all,
+> Subject: [PATCH v2 1/4] clk: imx: add i.MX6UL clk driver
+>=20
+> Add i.MX6UL clk driver for i.MX6UL CLK driver model usage
+>=20
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+>=20
+> ---
+>=20
+> Changes in v2:
+> - Add review tag
+>=20
+>  drivers/clk/imx/Kconfig      |   8 ++
+>  drivers/clk/imx/Makefile     |   1 +
+>  drivers/clk/imx/clk-imx6ul.c | 270 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 279 insertions(+)
+>  create mode 100644 drivers/clk/imx/clk-imx6ul.c
+>=20
+> diff --git a/drivers/clk/imx/Kconfig b/drivers/clk/imx/Kconfig
+> index d17a54fb9b3..705d4a8e2ac 100644
+> --- a/drivers/clk/imx/Kconfig
+> +++ b/drivers/clk/imx/Kconfig
+> @@ -14,6 +14,14 @@ config CLK_IMX6Q
+>  	help
+>  	  This enables DM/DTS support for clock driver in i.MX6Q platforms.
+>=20
+> +config CLK_IMX6UL
+> +	bool "Clock support for i.MXUL"
+> +	depends on ARCH_MX6
+> +	select CLK
+> +	select CLK_CCF
+> +	help
+> +	  This enables DM/DTS support for clock driver in i.MX6UL platforms.
+> +
+>  config CLK_IMX8
+>  	bool "Clock support for i.MX8"
+>  	depends on ARCH_IMX8
+> diff --git a/drivers/clk/imx/Makefile b/drivers/clk/imx/Makefile
+> index a89ee7acb12..b10221a195c 100644
+> --- a/drivers/clk/imx/Makefile
+> +++ b/drivers/clk/imx/Makefile
+> @@ -4,6 +4,7 @@
+>=20
+>  obj-$(CONFIG_$(PHASE_)CLK_CCF) +=3D clk-gate2.o clk-pllv3.o clk-pfd.o
+>  obj-$(CONFIG_$(PHASE_)CLK_IMX6Q) +=3D clk-imx6q.o
+> +obj-$(CONFIG_$(PHASE_)CLK_IMX6UL) +=3D clk-imx6ul.o
+>  obj-$(CONFIG_CLK_IMX8) +=3D clk-imx8.o
+>=20
+>  ifdef CONFIG_CLK_IMX8
+> diff --git a/drivers/clk/imx/clk-imx6ul.c b/drivers/clk/imx/clk-imx6ul.c
+> new file mode 100644
+> index 00000000000..941c9352248
+> --- /dev/null
+> +++ b/drivers/clk/imx/clk-imx6ul.c
+> @@ -0,0 +1,270 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (C) 2025 Amarula Solutions Software Engineering
+> + * Michael Trimarchi, Amarula Solutions Software Engineering,
+> michael@amarulasolutions.com
+> + */
+> +
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <log.h>
+> +#include <asm/arch/clock.h>
+> +#include <asm/arch/imx-regs.h>
+> +#include <dt-bindings/clock/imx6ul-clock.h>
+> +
+> +#include "clk.h"
+> +
+> +static int imx6ul_clk_request(struct clk *clk)
+> +{
+> +	debug("%s: request clk id %ld\n", __func__, clk->id);
+> +
+> +	if (clk->id < IMX6UL_CLK_DUMMY || clk->id >=3D IMX6UL_CLK_END) {
+> +		printf("%s: Invalid clk ID #%lu\n", __func__, clk->id);
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static struct clk_ops imx6ul_clk_ops =3D {
+> +	.request =3D imx6ul_clk_request,
+> +	.set_rate =3D ccf_clk_set_rate,
+> +	.get_rate =3D ccf_clk_get_rate,
+> +	.enable =3D ccf_clk_enable,
+> +	.disable =3D ccf_clk_disable,
+> +};
+> +
+> +static const char *const pll_bypass_src_sels[] =3D { "osc", "dummy", };
+> +static const char *const pll3_bypass_sels[] =3D { "pll3", "pll3_bypass_s=
+rc", };
+> +static const char *const bch_sels[] =3D { "pll2_pfd2_396m", "pll2_pfd0_3=
+52m", };
+> +static const char *const gpmi_sels[] =3D { "pll2_pfd2_396m", "pll2_pfd0_=
+352m", };
+> +
+> +static const char *const enfc_sels[] =3D { "pll2_pfd0_352m", "pll2_bus",=
+ "pll3_usb_otg",
+> "pll2_pfd2_396m",
+> +					 "pll3_pfd3_454m", "dummy", "dummy", "dummy", };
+> +static const char *const usdhc_sels[] =3D { "pll2_pfd2_396m", "pll2_pfd0=
+_352m", };
+> +static const char *const periph_sels[] =3D { "periph_pre", "periph_clk2"=
+, };
+> +static const char *const periph2_pre_sels[] =3D { "pll2_bus", "pll2_pfd2=
+_396m",
+> "pll2_pfd0_352m",
+> +						"pll4_audio_div", };
+> +static const char *const periph_clk2_sels[] =3D { "pll3_usb_otg", "osc",=
+ "pll2_bypass_src",
+> };
+> +static const char *const periph2_clk2_sels[] =3D { "pll3_usb_otg", "osc"=
+, };
+> +static const char *const perclk_sels[] =3D { "ipg", "osc", };
+> +
+> +static const char *const periph_pre_sels[] =3D { "pll2_bus", "pll2_pfd2_=
+396m",
+> "pll2_pfd0_352m",
+> +					       "pll2_198m", };
+> +static const char *const uart_sels[] =3D { "pll3_80m", "osc", };
+> +static const char *const ecspi_sels[] =3D { "pll3_60m", "osc", };
+> +
+> +static int imx6ul_clk_probe(struct udevice *dev)
+> +{
+> +	struct clk osc_clk;
+> +	void *base;
+> +	int ret;
+> +
+> +	/* Anatop clocks */
+> +	base =3D (void *)ANATOP_BASE_ADDR;
+> +
+> +	clk_dm(IMX6UL_CLK_DUMMY, clk_register_fixed_rate(NULL, "dummy", 0));
 
-First, I am not happy to be writing this email. But at this point, I
-feel I have no other choice, for the good of the overall project and
-community.
+I think you should move your clk_get_by_name of "osc" etc. from below
+to this place, because you refer to it in the next lines.
 
-Back in January[0] of this year I made a post with almost this same
-subject line. At that point there had already been a number of problems
-working with Simon and the overall community. I did not include a list
-of links. At that point the easiest answer would be to go to the mailing
-list archive, pick any thread that Simon and I had and see the long
-disagreements. This trend has fundamentally not changed. And while I
-started this out with some threads and my summaries of them, instead I
-want to point to this email I sent this mornig:
-https://lore.kernel.org/u-boot/20250528170533.GE100073@bill-the-cat/
+> +	clk_dm(IMX6UL_CLK_PLL2,
+> +	       imx_clk_pllv3(dev, IMX_PLLV3_GENERIC, "pll2_bus", "osc",
+> +			     base + 0x30, 0x1));
+> +	clk_dm(IMX6UL_CLK_PLL3_USB_OTG,
+> +	       imx_clk_pllv3(dev, IMX_PLLV3_USB, "pll3_bypass", "osc",
+> +			     base + 0x10, 0x3));
 
-And to repeat what I said there, Simon needs to decide if it's more
-important to work with the community or have his way every time. Simon
-cannot have both. Simon needs to accept that some things he think are
-good ideas have been rejected or he needs to fork off from U-Boot. Or he
-can ask the community to take over as the project head. If the community
-wants Simon to run things, I will step down and just be an individual
-contributor again. Five months of this experiment shows me that it's not
-working at all and will only be a bigger problem as time goes on.
+From my point of view the line with "pll3_bypass" here looks not correct
+and should be removed.
 
-And, I mean it. I cannot take the additional stress of what new problems
-await me every morning. I do not take the above lightly, but I do not
-think the project can become healthy moving forward without some
-resolution here and quickly. While I won't claim my time as the head of
-the project has been perfect, I have tried my best to always be honest
-and fair and to seek compromise.
+> +	clk_dm(IMX6UL_CLK_PLL3,
+> +	       imx_clk_pllv3(dev, IMX_PLLV3_USB, "pll3", "osc",
+> +			     base + 0x10, 0x3));
 
-With respect to voting, would anyone volunteer to run a poll from
-https://civs1.civs.us/ (which is used by the Yocto Project /
-OpenEmbedded and likely other FOSS projects/communities) ?
+I think you should move your definition of "pll3_bypass_src" and "pll3_bypa=
+ss"
+from below to this place, because you refer to it in the next lines.
 
---=20
-Tom
+> +	clk_dm(IMX6UL_CLK_PLL3_USB_OTG,
+> +	       imx_clk_gate(dev, "pll3_usb_otg", "pll3_bypass", base + 0x10,
+> +			    13));
+> +	clk_dm(IMX6UL_CLK_PLL3_80M,
+> +	       imx_clk_fixed_factor(dev, "pll3_80m", "pll3_usb_otg", 1, 6));
+> +	clk_dm(IMX6UL_CLK_PLL3_60M,
+> +	       imx_clk_fixed_factor(dev, "pll3_60m", "pll3_usb_otg", 1, 8));
+> +	clk_dm(IMX6UL_CLK_PLL2_PFD0,
+> +	       imx_clk_pfd("pll2_pfd0_352m", "pll2_bus", base + 0x100, 0));
+> +	clk_dm(IMX6UL_CLK_PLL2_PFD1,
+> +	       imx_clk_pfd("pll2_pfd1_594m", "pll2_bus", base + 0x100, 1));
+> +	clk_dm(IMX6UL_CLK_PLL2_PFD2,
+> +	       imx_clk_pfd("pll2_pfd2_396m", "pll2_bus", base + 0x100, 2));
+> +	clk_dm(IMX6UL_CLK_PLL2_PFD3,
+> +	       imx_clk_pfd("pll2_pfd3_396m", "pll2_bus", base + 0x100, 3));
+> +	clk_dm(IMX6UL_CLK_PLL6,
+> +	       imx_clk_pllv3(dev, IMX_PLLV3_ENET, "pll6", "osc", base + 0xe0,
+> +			     0x3));
+> +	clk_dm(IMX6UL_CLK_PLL6_ENET,
+> +	       imx_clk_gate(dev, "pll6_enet", "pll6", base + 0xe0, 13));
+> +	clk_dm(IMX6UL_PLL3_BYPASS_SRC,
+> +	       imx_clk_mux(dev, "pll3_bypass_src", base + 0x10, 14, 1,
+> +			   pll_bypass_src_sels,
+> +			   ARRAY_SIZE(pll_bypass_src_sels)));
+> +	clk_dm(IMX6UL_PLL3_BYPASS,
+> +	       imx_clk_mux_flags(dev, "pll3_bypass", base + 0x10, 16, 1,
+> +				 pll3_bypass_sels, ARRAY_SIZE(pll3_bypass_sels),
+> +				 CLK_SET_RATE_PARENT));
+> +
+> +	ret =3D clk_get_by_name(dev, "osc", &osc_clk);
+> +	if (ret)
+> +		return ret;
+> +	clk_dm(IMX6UL_CLK_OSC, dev_get_clk_ptr(osc_clk.dev));
+> +
+> +	/* CCM clocks */
+> +	base =3D dev_read_addr_ptr(dev);
+> +	if (!base)
+> +		return -EINVAL;
+> +
+> +	clk_dm(IMX6UL_CLK_GPMI_SEL,
+> +	       imx_clk_mux(dev, "gpmi_sel", base + 0x1c, 19, 1, gpmi_sels,
+> +			   ARRAY_SIZE(gpmi_sels)));
+> +	clk_dm(IMX6UL_CLK_BCH_SEL,
+> +	       imx_clk_mux(dev, "bch_sel", base + 0x1c, 18, 1, bch_sels,
+> +			   ARRAY_SIZE(bch_sels)));
+> +	clk_dm(IMX6UL_CLK_USDHC1_SEL,
+> +	       imx_clk_mux(dev, "usdhc1_sel", base + 0x1c, 16, 1, usdhc_sels,
+> +			   ARRAY_SIZE(usdhc_sels)));
+> +	clk_dm(IMX6UL_CLK_USDHC2_SEL,
+> +	       imx_clk_mux(dev, "usdhc2_sel", base + 0x1c, 17, 1, usdhc_sels,
+> +			   ARRAY_SIZE(usdhc_sels)));
+> +	clk_dm(IMX6UL_CLK_ECSPI_SEL,
+> +	       imx_clk_mux(dev, "ecspi_sel", base + 0x38, 18, 1, ecspi_sels,
+> +			   ARRAY_SIZE(ecspi_sels)));
+> +	clk_dm(IMX6UL_CLK_UART_SEL,
+> +	       imx_clk_mux(dev, "uart_sel", base + 0x24, 6, 1, uart_sels,
+> +			   ARRAY_SIZE(uart_sels)));
+> +	clk_dm(IMX6UL_CLK_ENFC_SEL,
+> +	       imx_clk_mux(dev, "enfc_sel", base + 0x2c, 15, 3, enfc_sels,
+> +			   ARRAY_SIZE(enfc_sels)));
+> +	clk_dm(IMX6UL_CLK_PERCLK_SEL,
+> +	       imx_clk_mux(dev, "perclk_sel", base + 0x1c, 6, 1, perclk_sels,
+> +			   ARRAY_SIZE(perclk_sels)));
+> +	clk_dm(IMX6UL_CLK_PERIPH_PRE,
+> +	       imx_clk_mux(dev, "periph_pre", base + 0x18, 18, 2,
+> +			   periph_pre_sels, ARRAY_SIZE(periph_pre_sels)));
+> +	clk_dm(IMX6UL_CLK_PERIPH2_PRE,
+> +	       imx_clk_mux(dev, "periph2_pre", base + 0x18, 21, 2,
+> +			   periph2_pre_sels, ARRAY_SIZE(periph2_pre_sels)));
+> +	clk_dm(IMX6UL_CLK_PERIPH_CLK2_SEL,
+> +	       imx_clk_mux(dev, "periph_clk2_sel", base + 0x18, 12, 2,
+> +			   periph_clk2_sels, ARRAY_SIZE(periph_clk2_sels)));
+> +	clk_dm(IMX6UL_CLK_PERIPH2_CLK2_SEL,
+> +	       imx_clk_mux(dev, "periph2_clk2_sel", base + 0x18, 20, 1,
+> +			   periph2_clk2_sels, ARRAY_SIZE(periph2_clk2_sels)));
+> +	clk_dm(IMX6UL_CLK_PERIPH,
+> +	       imx_clk_busy_mux(dev, "periph", base + 0x14, 25, 1, base + 0x48,
+> +				5, periph_sels, ARRAY_SIZE(periph_sels)));
+> +	clk_dm(IMX6UL_CLK_AHB,
+> +	       imx_clk_busy_divider(dev, "ahb", "periph", base + 0x14, 10, 3,
+> +				    base + 0x48, 1));
+> +	clk_dm(IMX6UL_CLK_PERIPH_CLK2,
+> +	       imx_clk_divider(dev, "periph_clk2", "periph_clk2_sel",
+> +			       base + 0x14, 27, 3));
+> +	clk_dm(IMX6UL_CLK_PERIPH2_CLK2,
+> +	       imx_clk_divider(dev, "periph2_clk2", "periph2_clk2_sel",
+> +			       base + 0x14, 0, 3));
+> +	clk_dm(IMX6UL_CLK_IPG,
+> +	       imx_clk_divider(dev, "ipg", "ahb", base + 0x14, 8, 2));
+> +	clk_dm(IMX6UL_CLK_ENFC_PRED,
+> +	       imx_clk_divider(dev, "enfc_pred", "enfc_sel", base + 0x2c, 18,
+> +			       3));
+> +	clk_dm(IMX6UL_CLK_ENFC_PODF,
+> +	       imx_clk_divider(dev, "enfc_podf", "enfc_pred", base + 0x2c, 21,
+> +			       6));
+> +	clk_dm(IMX6UL_CLK_GPMI_PODF,
+> +	       imx_clk_divider(dev, "gpmi_podf", "gpmi_sel", base + 0x24, 22,
+> +			       3));
+> +	clk_dm(IMX6UL_CLK_BCH_PODF,
+> +	       imx_clk_divider(dev, "bch_podf", "bch_sel", base + 0x24, 19, 3))=
+;
+> +	clk_dm(IMX6UL_CLK_PERCLK,
+> +	       imx_clk_divider(dev, "perclk", "perclk_sel", base + 0x1c, 0, 6))=
+;
+> +	clk_dm(IMX6UL_CLK_UART_PODF,
+> +	       imx_clk_divider(dev, "uart_podf", "uart_sel", base + 0x24, 0,
+> +			       6));
+> +	clk_dm(IMX6UL_CLK_USDHC1_PODF,
+> +	       imx_clk_divider(dev, "usdhc1_podf", "usdhc1_sel", base + 0x24,
+> +			       11, 3));
+> +	clk_dm(IMX6UL_CLK_USDHC2_PODF,
+> +	       imx_clk_divider(dev, "usdhc2_podf", "usdhc2_sel", base + 0x24,
+> +			       16, 3));
+> +	clk_dm(IMX6UL_CLK_ECSPI_PODF,
+> +	       imx_clk_divider(dev, "ecspi_podf", "ecspi_sel", base + 0x38, 19,
+> +			       6));
+> +
+> +	clk_dm(IMX6UL_CLK_APBHDMA,
+> +	       imx_clk_gate2(dev, "apbh_dma", "bch_podf", base + 0x68, 4));
+> +	clk_dm(IMX6UL_CLK_ECSPI1,
+> +	       imx_clk_gate2(dev, "ecspi1", "ecspi_podf", base + 0x6c, 0));
+> +	clk_dm(IMX6UL_CLK_ECSPI2,
+> +	       imx_clk_gate2(dev, "ecspi2", "ecspi_podf", base + 0x6c, 2));
+> +	clk_dm(IMX6UL_CLK_ECSPI3,
+> +	       imx_clk_gate2(dev, "ecspi3", "ecspi_podf", base + 0x6c, 4));
+> +	clk_dm(IMX6UL_CLK_ECSPI4,
+> +	       imx_clk_gate2(dev, "ecspi4", "ecspi_podf", base + 0x6c, 6));
+> +
+> +	clk_dm(IMX6UL_CLK_USBOH3,
+> +	       imx_clk_gate2(dev, "usboh3", "ipg", base + 0x80, 0));
+> +	clk_dm(IMX6UL_CLK_USDHC1,
+> +	       imx_clk_gate2(dev, "usdhc1", "usdhc1_podf", base + 0x80, 2));
+> +	clk_dm(IMX6UL_CLK_USDHC2,
+> +	       imx_clk_gate2(dev, "usdhc2", "usdhc2_podf", base + 0x80, 4));
+> +
+> +	clk_dm(IMX6UL_CLK_UART3_IPG,
+> +	       imx_clk_gate2(dev, "uart3_ipg", "ipg", base + 0x6c, 10));
+> +	clk_dm(IMX6UL_CLK_UART3_SERIAL,
+> +	       imx_clk_gate2(dev, "uart3_serial", "uart_podf", base + 0x6c,
+> +			     10));
+> +	clk_dm(IMX6UL_CLK_UART4_IPG,
+> +	       imx_clk_gate2(dev, "uart4_ipg", "ipg", base + 0x6c, 24));
+> +	clk_dm(IMX6UL_CLK_UART4_SERIAL,
+> +	       imx_clk_gate2(dev, "uart4_serial", "uart_podf", base + 0x6c,
+> +			     24));
 
---fugm3uamNDvz/g1U
-Content-Type: application/pgp-signature; name="signature.asc"
+My Console doesn't work with this driver, because it is on UART1.
+Could you define all UARTs for imx6UL/i.MX6ULL/i.MX6ULZ here?
 
------BEGIN PGP SIGNATURE-----
+clk_dm(IMX6UL_CLK_UART1_IPG,
+       imx_clk_gate2(dev, "uart1_ipg", "ipg", base + 0x7c, 24));
+clk_dm(IMX6UL_CLK_UART1_SERIAL,
+       imx_clk_gate2(dev, "uart1_serial", "uart_podf", base + 0x7c, 24));
+clk_dm(IMX6UL_CLK_UART2_IPG,
+       imx_clk_gate2(dev, "uart2_ipg", "ipg", base + 0x68, 28));
+clk_dm(IMX6UL_CLK_UART2_SERIAL,
+       imx_clk_gate2(dev, "uart2_serial", "uart_podf", base + 0x68, 28));
+clk_dm(IMX6UL_CLK_UART3_IPG,
+       imx_clk_gate2(dev, "uart3_ipg", "ipg", base + 0x6c, 10));
+clk_dm(IMX6UL_CLK_UART3_SERIAL,
+       imx_clk_gate2(dev, "uart3_serial", "uart_podf", base + 0x6c, 10));
+clk_dm(IMX6UL_CLK_UART4_IPG,
+       imx_clk_gate2(dev, "uart4_ipg", "ipg", base + 0x6c, 24));
+clk_dm(IMX6UL_CLK_UART4_SERIAL,
+       imx_clk_gate2(dev, "uart4_serial", "uart_podf", base + 0x6c, 24));
+clk_dm(IMX6UL_CLK_UART5_IPG,
+       imx_clk_gate2(dev, "uart5_ipg", "ipg", base + 0x74, 2));
+clk_dm(IMX6UL_CLK_UART5_SERIAL,
+       imx_clk_gate2(dev, "uart5_serial", "uart_podf", base + 0x74, 2));
+clk_dm(IMX6UL_CLK_UART6_IPG,
+       imx_clk_gate2(dev, "uart6_ipg", "ipg", base + 0x74, 6));
+clk_dm(IMX6UL_CLK_UART6_SERIAL,
+       imx_clk_gate2(dev, "uart6_serial", "uart_podf", base + 0x74, 6));
+clk_dm(IMX6UL_CLK_UART7_IPG,
+       imx_clk_gate2(dev, "uart7_ipg", "ipg", base + 0x7c, 26));
+clk_dm(IMX6UL_CLK_UART7_SERIAL,
+       imx_clk_gate2(dev, "uart7_serial", "uart_podf", base + 0x7c, 26));
+clk_dm(IMX6UL_CLK_UART8_IPG,
+       imx_clk_gate2(dev, "uart8_ipg", "ipg", base + 0x80, 14));
+clk_dm(IMX6UL_CLK_UART8_SERIAL,
+       imx_clk_gate2(dev, "uart8_serial", "uart_podf", base + 0x80, 14));
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg3TuIACgkQFHw5/5Y0
-tywSywwAiVJ28gbaGxIDUfPQ5BUryPEXGRib+aJ0VW5EyBkpmpo5S3HwDCgDHI5u
-w3jcDKCc+7tFztMsGVRDf4Aclu1wEMEx4GW4lzn7n45XbZIexZQGinTjOso1i1wz
-6iarkaviOT3ibIfBo/C2ZcUUB86akeODYasMbLMhrflI4cgdTtneilVJ4oq9/gYk
-xmmO5L579h5iqrlm68JYBPHLsn9Qx70z8trKX3EsjoI16zpZHiTaY/1An3Dd7oqp
-Vvz6ztR84iksit3mh63OjStoDZudYkuFnPFNXf+SN/PUPTfzSLZaZpOlCx1L0QuT
-JQgzWPFVVSyF0sist4U5UfabjuNQyX5Uz+TR5sEI/8jFHFqE1rPs4L9kBjTkG6vs
-UdjrBK+ELlYp3oA41/wNOpoqbfqWtVn3Y1H40b40wZoA32IG4IHl6rO21EbTn066
-XZZ48tz8fyb1JnYG+Uxgv3jIwdYXGP6lPLVbYySqxndGtS2LgNw4EtL5wyc033Ln
-AFsENrMB
-=DAaX
------END PGP SIGNATURE-----
-
---fugm3uamNDvz/g1U--
+Regards
+Christoph
