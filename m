@@ -4,107 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38512C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CEDC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D73A839A7;
-	Wed, 28 May 2025 14:46:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F0E68391E;
+	Wed, 28 May 2025 14:53:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZfcqCY4F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xjnhm2/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D48BB83956; Wed, 28 May 2025 14:40:51 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 5808083937; Wed, 28 May 2025 14:53:57 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEA038394E
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:40:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF6378390C
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:53:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-604b9c53f6fso6053920a12.2
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:40:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-70df67e1b17so41190077b3.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:53:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748436049; x=1749040849; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748436832; x=1749041632; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MnsiBb+uPB/z2PPaBIm/YZcH3FDW6TID3e4f4+t6484=;
- b=ZfcqCY4Fml6+KsGxNAReEFpQk2KM5V/+pqfEz4/yfzGlJfB1b6mew1mbfzyZeU6soE
- D8G4GoD1fxFjJM8iQ9wY0VO9UIcSqLaaWYBZHmTlEn1rSefPI95MyAC25R5g+hHrc7ZD
- D0oFN0m1yORqj5ylhty7SgX+dmNiAOTlcM/7o=
+ bh=daaZfaTC+lXxj0lySRpn7bG3OX+HUtP7LZa/M9Y55NQ=;
+ b=Xjnhm2/lpmFo6XAbLD4E/ulRmfvkWcu+iCyQtmxTerEWpPOTamoPxPqmVuRFzQorAJ
+ 7iAeej+ZOHWjcCb17iR7CIMdr6iHw5c42wcP7ElQSGyeZxHT7t4724obmo+nSm4zA8lq
+ 5EHrJf5PjOXtbz0fa98gQou+rOYMaRST23dwd93KKjGLdu0PNI1e+y/te8TZ8CcF5mTW
+ o70+qEUUPzMwGYtrS0bBJ37r7WpPbnJ828Myzq53uU+vcPzKoVrwJF05hppJ5E+ECDP5
+ zEmhWegEnXbWcguivZ9kn39/1IsTR3btUZTIf7l60IL7wHYT1Y3LXE0Ey4uvQUBB2fnZ
+ XaXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748436049; x=1749040849;
+ d=1e100.net; s=20230601; t=1748436832; x=1749041632;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MnsiBb+uPB/z2PPaBIm/YZcH3FDW6TID3e4f4+t6484=;
- b=e16ptZCqVjq7HB4l2ZlD3TSq4ky9PmTqpnoIBF9phg5gK+ZzhCV1zdIkgsCAn4Dddg
- UD9NkZTelRkkrpHuHrhsXGx4Bba4Y1uhu95tjBFl+qPW7Sv7N2B5f+55Mqcj79j0tMvf
- GzA6d+/4uDcG4Zv+B61Zhl1+1nmfgsRR9PRmD9cbUaCZajezV4btH1lTe48NAvDsHgqo
- 2y4j+NzEVWxD0rmWjyDDKjrdMpsradC84bIF7DNPX2ZyigRiChtkEFSTw6ZeFn3y4uy8
- I+Jd9NngG9H12xN0Q3Hc5Ebbd6ykTMxsSm9m9VBMICpAlIdkndFFtrq2dzCOd/zAgh3Q
- W65A==
+ bh=daaZfaTC+lXxj0lySRpn7bG3OX+HUtP7LZa/M9Y55NQ=;
+ b=e7eNu3/uUwWlMEPUrkhGfa9o9GCCBB20AWaPKXOjHIbfvkXbflX1lUgraILWRn+d7t
+ DnooaEXYfQFu7slp6sySTyxE0gfWQik10qu+fVxEXv6Nl/x1+AbawFM9f1MpVniJQS9Z
+ 0XYSlv2YV5qXxn6uHtJv+vndkthzNiL6BQ94IqrtJT4hFHxs5Mdi15FSLlckixh8e0z/
+ g37uaYk9avyJBrGXfqFP6bJD1GQN5Zq7HItlzVKmN22npMk03/4ZtMrEPd/Z03b3epfb
+ JsdAgJZHXzXYSY9Q4/GAIirmfgsNRq8s5ayYZCYPNY3P+F0tFnKWdv+LmM3WyabuXa3b
+ LJTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX02dRB1nc2uGZ4NFaqhz/dS64mnb2GxfQW9neHdSKyMNx8/4C034JlDTXqJjfIlmrQtLaQjmg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxX4r92ldD6Bp19q3T6Flu6PjPx0W7mR+q9OPX1fh2gfh4zFNic
- /ay3soAcg67eFvL56jL1h5SOljHMuq3hglGY5MXcrSlCRGDK8fThLJDPkv9Co6/RbFYOUkWqola
- +bn7F+7yG9l2mAFj4aCkkEb8EnuOWDFCC1y0VABJd
-X-Gm-Gg: ASbGnct583SvZj41JhbD+V0SJ2Kp5dIyU2dSz7NQ0frgXIq60mK4/RygTu+12DPmYzb
- DKEIsNduphig/zubB3vFpaHmraTGWx3OycjuPBFPZw+NZk/NfFxQKvrHTeLAzwNYSOzdm5LhVkX
- ECMIN9RVMhmP4+vL+AmjvadhLEkuy6GuRulIIsdZQCsA==
-X-Google-Smtp-Source: AGHT+IGfUfTSm4Sd3vaVsmyHlxv/cTvOoVQFQ7KxiMkJZtmsFmy6s5a65scRQHc1/rHVf37Gf8lypIYjp+p4IpIBP0w=
-X-Received: by 2002:a05:6402:909:b0:600:5a9e:2b52 with SMTP id
- 4fb4d7f45d1cf-602da1f0d2amr12375242a12.8.1748436048812; Wed, 28 May 2025
- 05:40:48 -0700 (PDT)
+ AJvYcCW58qvYq0267oyz0MdQMEl+GJi5ZDRSFXzq+l4Gnsdiv8CLXakunlmzet9M7+pYm+FJYobAmAA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywl4qbav4lSut1EsFalh3nVxi93dYMiizfOgYR3MT2hw0GoDBr+
+ W3tKJHZ8jAPTqZd5h99F1OIbn2PLtN08kyMekcn+GYYxCeskaZAp9tyeVRKppm3QoDS8L7YqAxM
+ VkjYcddtpGns/UFj5Cm6nNCg3SYkEmd6bmj/+6KG9Zg==
+X-Gm-Gg: ASbGncv7e4/ZFD7rs0PHOp0yQmg/zBaF2THB/04qWra7WVml5bzHEVU2p1oM1RsS7l0
+ SEwFjdDKDN220P/81ICyUXZ5vEDqIoZl/IkZFvp3jxIc2d8/tTVCFZROmgYTpbDTv5XxIah9s2Q
+ Jmt5Dd0hUqYDV8lN4z/fLJ/rQ9vrVTAcvBxw==
+X-Google-Smtp-Source: AGHT+IFDZTpGWiOLBq2BogEx4RhuOQwCdHzZfqeVx75JWonMbCTmyu3gbfEgUknKpDPw6XId/3B07o8c5MFZ6FK2lBE=
+X-Received: by 2002:a05:690c:f8b:b0:70d:f47a:7e1a with SMTP id
+ 00721157ae682-70e2d99d830mr220495717b3.10.1748436830144; Wed, 28 May 2025
+ 05:53:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250523130651.1329593-1-sjg@chromium.org>
- <20250523140613.GQ100073@bill-the-cat>
- <b8c81f80-a32b-4935-b2f6-edb361822b6f@linaro.org>
-In-Reply-To: <b8c81f80-a32b-4935-b2f6-edb361822b6f@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 May 2025 13:40:36 +0100
-X-Gm-Features: AX0GCFuWNG_ymL9OhpcotVHvLoshCxbC0hgWLFefzTdUnl18SnNFzJ0eKxmqYsU
-Message-ID: <CAFLszThaeVF_6ewTqupDH-CvpZAvXr=6XxkUzv2UbaX9+z6Hvg@mail.gmail.com>
-Subject: Re: [PATCH 00/10] efi: Move some efi-loader code into a new shared dir
-To: Casey Connolly <casey.connolly@linaro.org>
+References: <CAFLszTjtw8s2NnrS+B6-K8i_YF0ZGU9JB+O_vNYmT+AD7Km_AA@mail.gmail.com>
+ <20250526145128.GW100073@bill-the-cat>
+ <CAFLszTiF_3hMcgL7g6scpHRPa0wdmZSbKL4wfe+YYS5Wv94OJg@mail.gmail.com>
+In-Reply-To: <CAFLszTiF_3hMcgL7g6scpHRPa0wdmZSbKL4wfe+YYS5Wv94OJg@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 28 May 2025 15:53:14 +0300
+X-Gm-Features: AX0GCFuFhUWNSb70w1My5JWMz5l1i-JBopMjE8EXp1AUXOLv4Cpz_yeTb77SH84
+Message-ID: <CAC_iWjKmCX3m7uiFGsPXQt+0xEpzoGmgVFPrM5epR7dDzm=wmA@mail.gmail.com>
+Subject: Re: Booting distros in CI
+To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- =?UTF-8?Q?Christian_Kohlschu=CC=88tter?= <christian@kohlschutter.com>, 
- Daniel Golle <daniel@makrotopia.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Eddie James <eajames@linux.ibm.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Janis Danisevskis <jdanisevskis@aurora.tech>, Janne Grunau <j@jannau.net>, 
- Jeremy Compostella <jeremy.compostella@intel.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Maks Mishin <maks.mishinfz@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>, Moritz Fischer <moritzf@google.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Pawel Kochanowski <pkochanowski@sii.pl>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tim Harvey <tharvey@gateworks.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <ziyao@disroot.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 28 May 2025 14:46:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,36 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+Hi all
 
-On Wed, 28 May 2025 at 12:03, Casey Connolly <casey.connolly@linaro.org> wrote:
+On Wed, 28 May 2025 at 12:35, Simon Glass <sjg@chromium.org> wrote:
 >
+> Hi Tom,
 >
->
-> On 5/23/25 16:06, Tom Rini wrote:
-> > On Fri, May 23, 2025 at 02:06:35PM +0100, Simon Glass wrote:
+> On Mon, 26 May 2025 at 15:51, Tom Rini <trini@konsulko.com> wrote:
 > >
-> >> Some functions provided in lib/efi_loader are actually useful for the
-> >> app as well. This series refactors the Kconfig and directories a little
-> >> so that code is easier to share.
-> >>
-> >> As a starting point, it moves some filename and device-path functions to
-> >> the new directory.
-> >>
-> >> The next step would be to move device-path code over, but this will need
-> >> some discussion.
-> > [snip]
-> >> base-commit: 3599a58a5114224a01557d18371036a5823233cc
-> >> branch: app
+> > On Mon, May 26, 2025 at 03:10:49PM +0100, Simon Glass wrote:
 > >
-> > Please base this on mainline, next branch before asking for review.
+> > > Hi Tom,
+> > >
+> > > What do you think about having a Linux distro in the docker image so
+> > > we could run a 'boot' test in CI without needing my lab?
+> > >
+> > > Alpine Linux has an image which is about 250MB.
+> >
+> > I did say we should be doing this in some other thread we had, so yes, I
+> > think it's a good concept. Ilias I believe has been telling me about
+> > some HTTP (or HTTPS) boot pipeline Linaro has for a while, and with
+> > Adriano's patch to add a simple web server to CI too, yes, a pytest
+> > doing that would be a good next step forward. I'm sure we can find some
+> > sufficient and small stock images to fetch and use.
 >
-> Seconding this, for the second (third?) time: please don't send me
-> patches that don't apply to mainline U-Boot. This especially sucks since
-> I want to see EFISTUB upstream>
+> As discussed on the call, Ilias / team is planning to take a look at
+> this, so I'll hold off for a few months on anything here from my own
+> side.
 
-OK, I have adjusted my system so you won't see future patches. I must
-have missed your previous two requests, sorry.
+If anyone else wants to have a look I don't mind.
+commit df11ac859d has enough information, but the tl;dr is that we can
+boot a live image over the network now as long as the kernel is
+compiled with
 
-Regards,
-Simon
+CONFIG_ARCH_HAS_PMEM_API
+CONFIG_OF_PMEM
+CONFIG_DEV_DAX_PMEM
+CONFIG_ARM64_PMEM
+ CONFIG_BLK_DEV_PMEM
+CONFIG_ARM64_PMEM
+CONFIG_DEV_DAX_PMEM
+
+Cheers
+/Ilias
+
+>
+> Regards,
+> SImon
+>
+>
+> > --
+> > Tom
