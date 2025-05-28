@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C54C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:35:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EEE0C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:35:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7956083AA4;
-	Wed, 28 May 2025 14:33:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EFD1E83A97;
+	Wed, 28 May 2025 14:33:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GcJXNeGu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V1njCKGb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7712883AA6; Wed, 28 May 2025 14:33:45 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 9100883A98; Wed, 28 May 2025 14:33:47 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3652D83A7D
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E4BB83AA4
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3da73df6b6bso12835815ab.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:42 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-85db3475637so26405739f.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748435621; x=1749040421; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748435623; x=1749040423; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eoYwqe3Ojud+jRx1+7hPf9ndoDSz0HM2eiBeFnlc1vE=;
- b=GcJXNeGu8TVSbBqWjmAMp0qhcZ6X2bNHphx3c3HW1InpTSLrtZAkPQYCzlObhGGfV0
- v5aaArL3FYQqzDxN+SXb9eayNDulhv2s/Aw8jVTdLo/WXhtLYfeJAl3hlxsl/Nr7hy1f
- 48tVzboGfCmPJs/V1OVCpcDhN/1JI62n8kNDM=
+ bh=U2CabTZBrewwErcizQtiA9yQjzZcMR09BizNKS3rt4M=;
+ b=V1njCKGbMTkFc/o0ZUGlCYjMgaWPK5kjgJwAXEZBOOvMAyAxaYyqnh5QoJoqRSIDzB
+ r7nFB79Q8mfNF0cCp0rIciv8ucoHMJjpl5BQpFR3R8mMQDuarWgm+WINJJ9HXLAy0nVB
+ Ecfz+WX6zz33jVYZJxE11/2tzYX/RU9lE9mX8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748435621; x=1749040421;
+ d=1e100.net; s=20230601; t=1748435623; x=1749040423;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eoYwqe3Ojud+jRx1+7hPf9ndoDSz0HM2eiBeFnlc1vE=;
- b=JeyaFVkRwwkm01IewaEYhjLtIxKGel7ts48OYgMVIyw5jjEFj3NvE74zFaaDSNeBM1
- BuO7Fd2uxTTOtZFm8X9+9md37hn3sigfVxy64vnSpAQJUEBo+mHFVEYlS143v2jmpPYX
- kXZir1r0ke7AW8K+ySKtCNVnGG/Kxa5ERNv9rfsg5VzGYLm9qbysxQmmVeSXPLycIUKf
- 3T1z8wqQsfOE8v5yIgBYvSwkDXmB1dHWiMWZDEtz6o3MRLR6+Itkv/nsXZ7EA54jPW86
- zU8VNiE3riHK5QHGxOsVqXsIdyyT43IvoW/AC1ter/Tv48+NfJP8UI+QcaSvPbT9qbFc
- XZcA==
-X-Gm-Message-State: AOJu0Ywzm4CyYogK0k7Cj8KNdi1jHqycT5x/OeILjGi3Z4ODPYKzftqa
- SA3By6WDnVY7o6UPyfGTUfAl72LzlSJSB76L/V39y1WljX50FlZFqd0tuMFKcfJh+LU0yt66MKV
- wtOi47rrx
-X-Gm-Gg: ASbGncu94sAWlTXqXkd/bdzETLZAlsVVeklIIa9gXPNYYe8xRqNd7eo3Yo6owvcNRtw
- pcyplqX3HARk0LYugGDLu9RZS9l5yqkQwGNyoLEsUlKPr9BEMi/54qpeV6sCYngD4i7YRGGREhJ
- 3OaKwYSiWElMC8k1lPIA+KwQCu3EG7Bajs2Uj45kQVXtqrIjG6Dr6+CMobnsMQ4qVEFXvgzsNXf
- pxLQc11NEt/yQa0/Y9KNc3iaPQRvD8d6HV+hCjXzaWFCWPSYMrSXsDN8C9dInPhtVNoN2Gosj87
- 75Vh5Xx40POuR1nu+9YPWzmHmlt9Q8JsS6BWTO9G0IYPcW9Rsf8ELwx0OwFKVi76xKrDJGSKhe1
- 6NPsZiGFWItQy
-X-Google-Smtp-Source: AGHT+IHXOli7fsC99e0aIN+CRNz5tA4PHuA6S6KCe354mltDY6FLC9q4WuZzGb6laISIJpr0BETyaw==
-X-Received: by 2002:a05:6e02:2503:b0:3dc:7fa4:832 with SMTP id
- e9e14a558f8ab-3dc9b68826fmr132326895ab.9.1748435621124; 
- Wed, 28 May 2025 05:33:41 -0700 (PDT)
+ bh=U2CabTZBrewwErcizQtiA9yQjzZcMR09BizNKS3rt4M=;
+ b=wVvo4v8hb875QyFME56VbCLYXlCDxVDRmjHlSgvtsdHB14m9WKsHRvGCiOCwz4UfnD
+ f9/zm/BwY6C+Quda43BTbWHnIOhPtwOdb+BhDSxkih0bUTXgQYSrZWyrGynhIOq4tH3t
+ wInYYChlEdxww4LDfogAJE3LdVnUSQGicx42LuBcFNTdxFo0V1R9nnhMgc+5MO7Aefae
+ 75WnJevpdmdtRI58XIChdN+De3seQ5Xcl+zzTzaOyqZZ/cWjK0gcvrgYdIZitblKtWh2
+ ch4pW6ewheZnQDiCG3+6Wo2zPtsmOZWODFpLcBloapNPiyvp4nIqrXtbDsPpVVSmM/n6
+ 7qZQ==
+X-Gm-Message-State: AOJu0YwrXpg/5I35nZDfyMXNnBbS/LN9RktjMQqCnaF9Jxhj9I4UvEXU
+ bMw3/nTsMiES6JbKik/YpoQkd8hyjs6lDXXmlHNKQGA6xE5dykLHcohgXjgtwUltKFfs4YQpAuL
+ nKZvornLW
+X-Gm-Gg: ASbGncsPhA/2LymNE3aQfnY78vTd7NCokfLDstHZwYNSwZfzT02ymqMfKCeMOCzELSN
+ dkBnmXsemtVdY/q0rxWGEmIaHcc1FmO6rcBzMhVayX1B3+0XWF+hZHOc51QBTlCMuWhEVNIKZIh
+ BByCQn3K8HbscTGtG6SN1GTRMS8sFVbpIJ0W9BFtUebESZB+kleYPaOwa1v43Ax1sYQRUVPR37R
+ h77t+yjsTgoaxf3ken8byYC8Wt6+mJFWXkCqO4aCRVFqW8fH2/nbq3q3SJXSflTOpmZjotb5CAu
+ jCNR4incFMM/HJgipz26PLMoQkpOjmgVbnz9CrHhsyj2M0MJ8RpGNl6w9A2r+0a77pd4T7/hx86
+ HY7U9LePDdDND
+X-Google-Smtp-Source: AGHT+IFdGLJUTUdr31C01CUCtoIvvnwYJ6NbXuyy6l0VS/t6yZCSE5uFkhjFJZS4FzOlnJvsJxIasw==
+X-Received: by 2002:a05:6e02:1b04:b0:3dc:8358:fc07 with SMTP id
+ e9e14a558f8ab-3dd8761496cmr50713855ab.3.1748435623185; 
+ Wed, 28 May 2025 05:33:43 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.39
+ 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 05:33:39 -0700 (PDT)
+ Wed, 28 May 2025 05:33:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
@@ -75,18 +75,11 @@ Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Bill Mills <bill.mills@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Andrew Phelps <andrew.phelps@canonical.com>,
- Simon Glass <sjg@chromium.org>, Ben Dooks <ben.dooks@codethink.co.uk>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v5 13/25] passage: spl: Support adding the dtb to the passage
- bloblist
-Date: Wed, 28 May 2025 06:32:15 -0600
-Message-ID: <20250528063224.v5.13.Id6acd05e6730b3301ddc62b415a155202ddba74b@changeid>
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v5 14/25] passage: spl: Support passing the passage to U-Boot
+Date: Wed, 28 May 2025 06:32:16 -0600
+Message-ID: <20250528063224.v5.14.Ifb43052c7d1729d6d1503a74e89abb69ee99cbf3@changeid>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
 References: <20250528123236.1138632-1-sjg@chromium.org>
@@ -108,151 +101,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an option for SPL to add a devicetree to the passage bloblist, so
-SPL can provide the devicetree to U-Boot.
-
-Fix a few long lines while we are here.
+Create a new arch-specific way of creating a standard passage for the
+next phase.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v4)
+
+Changes in v4:
+- Fix 'to' typo
 
 Changes in v2:
-- Rebase on -master
-- Update the commit message to mention the long lines
+- Make the stdpass calling standard arch-specific
 
- common/Kconfig   | 20 ++++++++++++++++++++
- common/spl/spl.c | 43 +++++++++++++++++++++++++++++++++++++++++--
- include/spl.h    |  2 ++
- 3 files changed, 63 insertions(+), 2 deletions(-)
+ common/spl/spl.c | 26 +++++++++++++++++++++-----
+ 1 file changed, 21 insertions(+), 5 deletions(-)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 94046c9aa8c..fcd9d1620b5 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1250,6 +1250,26 @@ config SPL_PASSAGE_IN
- 	  firmware phases to communicate state and settings to following
- 	  phases.
- 
-+config SPL_PASSAGE_OUT
-+	bool "Support the standard-passage protocol in SPL (out)"
-+	depends on SPL_BLOBLIST
-+	default y if PASSAGE_IN
-+	help
-+	  This enables a standard protocol for entering U-Boot, providing
-+	  parameters in a bloblist and a devicetree. It allows the various
-+	  firmware stages to communicate state and settings to following
-+	  stages.
-+
-+config SPL_PASSAGE_ADD_DTB
-+	bool "Add devicetree to the outgoing passage"
-+	depends on SPL_PASSAGE_OUT
-+	default y if SPL_PASSAGE_OUT && !SPL_PASSAGE_IN
-+	help
-+	  Add the devicetree into the bloblist in SPL (it is assumed to not
-+	  already be there) so that the next phase (U-Boot) can find it.
-+
-+	  This option should be enabled in the phase that sets up the passage.
-+
- source "common/spl/Kconfig"
- 
- config IMAGE_SIGN_INFO
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index f14c68c46a5..6e38f118f48 100644
+index 6e38f118f48..b705fd5514a 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
-@@ -66,6 +66,11 @@ binman_sym_declare(ulong, u_boot_vpl_any, size);
+@@ -22,6 +22,7 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <nand.h>
++#include <passage.h>
+ #include <serial.h>
+ #include <spl.h>
+ #include <spl_load.h>
+@@ -398,13 +399,28 @@ int spl_load(struct spl_image_info *spl_image,
  
- #endif /* BINMAN_UBOOT_SYMBOLS */
- 
-+#if CONFIG_IS_ENABLED(PASSAGE_ADD_DTB)
-+binman_sym_declare(ulong, u_boot_dtb, image_pos);
-+binman_sym_declare(ulong, u_boot_dtb, size);
-+#endif
-+
- /* Define board data structure */
- static struct bd_info bdata __attribute__ ((section(".data")));
- 
-@@ -412,7 +417,8 @@ static int setup_spl_handoff(void)
+ __weak void __noreturn jump_to_image(struct spl_image_info *spl_image)
  {
- 	struct spl_handoff *ho;
+-	typedef void __noreturn (*image_entry_noargs_t)(void);
+-
+-	image_entry_noargs_t image_entry =
+-		(image_entry_noargs_t)spl_image->entry_point;
++	ulong bloblist = 0;
  
--	ho = bloblist_ensure(BLOBLISTT_U_BOOT_SPL_HANDOFF, sizeof(struct spl_handoff));
-+	ho = bloblist_ensure(BLOBLISTT_U_BOOT_SPL_HANDOFF,
-+			     sizeof(struct spl_handoff));
- 	if (!ho)
- 		return -ENOENT;
- 
-@@ -429,7 +435,8 @@ static int write_spl_handoff(void)
- 	struct spl_handoff *ho;
- 	int ret;
- 
--	ho = bloblist_find(BLOBLISTT_U_BOOT_SPL_HANDOFF, sizeof(struct spl_handoff));
-+	ho = bloblist_find(BLOBLISTT_U_BOOT_SPL_HANDOFF,
-+			   sizeof(struct spl_handoff));
- 	if (!ho)
- 		return -ENOENT;
- 	handoff_save_dram(ho);
-@@ -446,6 +453,33 @@ static inline int write_spl_handoff(void) { return 0; }
- 
- #endif /* HANDOFF */
- 
-+/**
-+ * Write the devicetree for the next phase into the passage
-+ *
-+ * For now we assume the next phase is U-Boot proper
-+ *
-+ * @return 0 on success,  -ENOSPC if it is missing and could not be added due to
-+ *	lack of space, or -ESPIPE it exists but has the wrong size
-+ */
-+static int passage_write_dtb(void)
-+{
-+	if (CONFIG_IS_ENABLED(PASSAGE_ADD_DTB)) {
-+		ulong start = binman_sym(ulong, u_boot_dtb, image_pos);
-+		ulong size = binman_sym(ulong, u_boot_dtb, size);
-+		void *dtb;
-+		int ret;
+ 	debug("image entry point: 0x%lx\n", spl_image->entry_point);
+-	image_entry();
 +
-+		log_debug("passage: Adding control dtb size %lx\n", size);
-+		ret = bloblist_ensure_size(BLOBLISTT_CONTROL_FDT, size, 0,
-+					   (void **)&dtb);
-+		if (ret)
-+			return ret;
-+		memcpy(dtb, map_sysmem(start, size), size);
++	if (CONFIG_IS_ENABLED(PASSAGE_OUT)) {
++		const void *fdt;
++
++		bloblist = bloblist_get_base();
++		fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
++
++		log_debug("passage: sending bloblist %lx dtb %lx\n",
++			  bloblist, (ulong)map_to_sysmem(fdt));
++		arch_passage_entry(spl_image->entry_point,
++				   map_to_sysmem(gd_bloblist()),
++				   map_to_sysmem(fdt));
++	} else {
++		typedef void __noreturn (*image_entry_noargs_t)(void);
++
++		image_entry_noargs_t image_entry =
++			(image_entry_noargs_t)spl_image->entry_point;
++		image_entry();
 +	}
-+
-+	return 0;
-+}
-+
- /**
-  * get_bootstage_id() - Get the bootstage ID to emit
-  *
-@@ -835,6 +869,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 			hang();
- 		}
- 	}
-+	if (CONFIG_IS_ENABLED(PASSAGE_ADD_DTB)) {
-+		ret = passage_write_dtb();
-+		if (ret)
-+			printf(PHASE_PROMPT "Write DTB failed (err=%d)\n", ret);
-+	}
- 	if (CONFIG_IS_ENABLED(BLOBLIST)) {
- 		ret = bloblist_finish();
- 		if (ret)
-diff --git a/include/spl.h b/include/spl.h
-index 7c10c7f792e..4fa97078a31 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -441,6 +441,8 @@ binman_sym_extern(ulong, u_boot_spl_any, image_pos);
- binman_sym_extern(ulong, u_boot_spl_any, size);
- binman_sym_extern(ulong, u_boot_vpl_any, image_pos);
- binman_sym_extern(ulong, u_boot_vpl_any, size);
-+binman_sym_extern(ulong, u_boot_dtb, image_pos);
-+binman_sym_extern(ulong, u_boot_dtb, size);
+ }
  
- /**
-  * spl_get_image_pos() - get the image position of the next phase
+ #if CONFIG_IS_ENABLED(HANDOFF)
 -- 
 2.43.0
 
