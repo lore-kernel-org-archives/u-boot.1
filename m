@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1127AC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 15:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C66B0C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 15:37:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 689D08331B;
-	Wed, 28 May 2025 17:28:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D980D833C6;
+	Wed, 28 May 2025 17:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dkrz6t6K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RGKRSHih";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26635833C6; Wed, 28 May 2025 17:28:37 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id EA494833D1; Wed, 28 May 2025 17:37:37 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B57508329C
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 17:28:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 886538334F
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 17:37:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a366843fa6so2913266f8f.1
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 08:28:34 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-441ab63a415so54775075e9.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 08:37:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748446114; x=1749050914; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748446654; x=1749051454; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Kwa425+7b87LPCiBbKUfpyMV6u5+rKNLo7T4pa7PEjQ=;
- b=dkrz6t6KvQT33ZAbAklxCbS+SkW3x+vhbJcmibXkAaGWyavR+na86bGvtGMAMPNQCQ
- 1lxKt2mw8cvJ62Ojop7JlsoqvKZmMovd+KfAHwOP/oJPi8dW+DVk0lKHxRjbUSjJYKY+
- gGfj2Ta7+Zoz2mm8VjwUGlMyV9CmxgAadmSBHTnsQ0nFPwJXfwCJ2rhTdKcWwOHlB3mn
- z6vk4jVbopRMeleHGi67tN2o2f2fjhjwvOm+6gaK9DHR0QWb21dqzsHlDTV9tUtkexLT
- 680KI2sOR6BuQTvmtQs61ohAbCacqkO4D9bt3FE8DHmPs5ql3LnyFb5O2ppQfsfTQriq
- VOZw==
+ bh=hwf+e0ArbACMl+vYEwu/S5EjngYaoE8wfVX7gEDX7iw=;
+ b=RGKRSHihpXxLX8T+plq7ZnfCZN0IE03pZxS3vgr7EGP7kJ0fxbbfHNIAyeJtNRsuIQ
+ fu9UMRNYWNTxk7bKeecpUYg4272FQ7ZThPqYbzOnMBZx9uK0CZQj6VnelLgughNFLu7d
+ 3aoCL/7t+NB+Ydnq0w1dR+auxBxVMZlbYzIfY3ItoIe7LJZlKSmeQ6hQ5+sqnHTzh0RT
+ kBnMnlPF/mJtIvDkjyV5rjYiUFmqe0fXbGGzxXEOhh8EpVH4lZoYaKGJ3hc5x5UM6lMy
+ 8vlVAgjqp2FV4qrktb/vDMRIqe9VBok5CLSyRAbzN112b7PltSwLEOFi8z0CiWqOzrWo
+ TrLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748446114; x=1749050914;
+ d=1e100.net; s=20230601; t=1748446654; x=1749051454;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Kwa425+7b87LPCiBbKUfpyMV6u5+rKNLo7T4pa7PEjQ=;
- b=InBYIgwnKcHWDmjBV5Uqm4XqtcUjdp6Jket1p97fd3v083UP4zOfskZwT/OK+QaZtw
- X/eUDOP705Z3WPOnnkXqNGGl6PO4ROPtdYyHebMx1XV+KbfZm6OMrl0PLIdvSBiTm6Rb
- +URGYjE+4dqkLoIaijeSzEff1e+eS45sYorn5acin+vV/r6NxhrMvaVxRyfDEIf2P5rk
- c/hFI0jlc4OrQuvZKj+pvVYJ5vf06i9VdUr9FAsw5cG60MehXKrYKjzeeOELcdVxSeBO
- Imp6jh6D9pzbyYDGXF6csBl50YkH0ZXv8tEVIhCOXJjQcsur5r2IVpkMaTcmPYaWL1HO
- VafA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/CmGyPtnL/NyVbiQWsjUsFCBy4Uax8PQtzHHbwHrGBSorbEmZOgLoOeLl+lgnUhSsEsz0kbE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxh6QRX0eS1ZvFY7ttywtuuK3qtBYDvW6m8TL0gnvZBp65cHV/o
- yFmK1tNSmvb3U3NYhbRuM32aIIT+WqWz6vBmSJZk2ZNj0DzqT6BInSL9tRjYA2GtNtA=
-X-Gm-Gg: ASbGnctBw9kbQuNEhlI5t4W5/VGnrrPOUareJnf0PMNvhY1bsbeGAhXE1fRo6vfYOEb
- KGWEH1PosZLFgFTzVkhFBw3ozsCdXt6nO3v3hhcnNXPww7AVifZqBL6NDa9EC+uCZxOZhr2abVn
- RGeo0L0WtgAdWFX444ji7mFBRzJA66Zyvv+67Yz85RXoiVFCHHelG2EdQ4URN7dzTRUX1oLE7wZ
- 3yUUOmbKVpXO6Oy9Wg/qZTNEfcxyWzhcoXRbkU9F8zyv4coL0prXf8SMiEtgVb5p4fPqqhO6yJD
- wfAB62XMySHma7WaG5Bor77lAza2QUFdy1l3Uw+OpVhkvJ5NgnuL+P3Q0Cxu0tFBuEClXS2TPb4
- 3t37zHariRme5CbkeSEx4oiElKRszce8=
-X-Google-Smtp-Source: AGHT+IGq/mFsx7H2dCYOZxNPLXxcC3K2LwGNbh3QqrpwBBh6YJA/cvS/wpK+5WeSVpiuwlY4XAXfww==
-X-Received: by 2002:a05:6000:40c9:b0:3a3:6a9a:5ebf with SMTP id
- ffacd0b85a97d-3a4cb436e22mr13740720f8f.20.1748446114080; 
- Wed, 28 May 2025 08:28:34 -0700 (PDT)
+ bh=hwf+e0ArbACMl+vYEwu/S5EjngYaoE8wfVX7gEDX7iw=;
+ b=t7Lkqlh4nTHjahG9frKt8f5KHwalES+kM3HbjefG0ao5x7wMelShC+6QjHhnSecxpL
+ tADVHrQU5O/6xDuHQKyugQkfk+ZjvRQRfQ2BS385MMZXTteLKMLBaYZYFnbzfc/Bb8S3
+ QNzV7lv0BlG65783ohkB0YGXdEfceAtcGan6YnHzAr5ZuCx169HkzeQ5uPyENn/bpGNj
+ MSKoZm/yf++oJRgB4fQgbSDoJRKnDpQcJZMo6zVUxlgSyaMROFkfPprh5GQTx1mf13D9
+ oKlAyqojc/xgNkYXeBQ9tFizDptYmuLR8CLj4+x5/ZZIklY2iMo5/fg2vGpy//PUBojU
+ Ik9w==
+X-Gm-Message-State: AOJu0YwI6FB6XE2khk2zCrKMsoKrKkPfnl/V9sa/8LXWPnj2CV5WdKXX
+ OV9WJzwPkRN0Vd7jVD5Ok9ECL1Azqt9aA0lsxgQwcXDA4TXa7IMhIgNrsLYG4zvNb4Y=
+X-Gm-Gg: ASbGncsN1fla6OgHmz0vCZujB/BcpjIZL/sj9ZsLsytktAefMkuMY8/biShn0HGtWqW
+ Ql70g9E2PmWhQLX/ez/nHFHIVXV+i1pAxm+jgq94w9OY6Ioa0bNiNMdVfxqDICd63OzOnHPnadO
+ VsaKCC0e2Z97js3dhTsr8nrtQhRZvRyvG7zdQD1EaCmZ7/+FHdK1qTnRQ4axAaNjYbo34gJa5uQ
+ 9oPnMJkyB00mvgKewzGQSke67ofuIHKTfLvihKQYQv1oJoYbekTU4Gp2DS/2M1DzyQdyfxA3C8h
+ KGIBhCRGRjH3iioIx4bHwwgJ2tWS5l4K9dl0+SeGFanFkfj3DonKUeTC26mptpOlWLeotSuXpq2
+ FtDbva3jlAVUAXOcXZxYB5VirmEo8ybk=
+X-Google-Smtp-Source: AGHT+IFisjQGJiwHlDiSVuo31Rem1apq1G7V4O8A95ZGT03Rm4UyBEc58r7jzInsBrKdOp6rcwZVNg==
+X-Received: by 2002:a05:600c:8218:b0:450:b240:aaab with SMTP id
+ 5b1f17b1804b1-450b240ae90mr26199945e9.8.1748446653859; 
+ Wed, 28 May 2025 08:37:33 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:f07d:7465:d8f9:92f1?
  ([2a01:e0a:3cb:7bb0:f07d:7465:d8f9:92f1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4eac6eb5esm1736910f8f.2.2025.05.28.08.28.32
+ 5b1f17b1804b1-4500e1da033sm24858525e9.31.2025.05.28.08.37.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 May 2025 08:28:33 -0700 (PDT)
-Message-ID: <5623adb2-8755-4c04-bdd2-498907b00b4d@linaro.org>
-Date: Wed, 28 May 2025 17:28:31 +0200
+ Wed, 28 May 2025 08:37:32 -0700 (PDT)
+Message-ID: <5c26ad0f-3dfc-4dea-bd81-9f201c17e5c1@linaro.org>
+Date: Wed, 28 May 2025 17:37:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] makefile: fix Clang link error when RSA_PUBLIC_KEY_PARSER
  is selected
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Marek Vasut
@@ -95,10 +93,10 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
  Quentin Schulz <quentin.schulz@cherry.de>
 References: <20250527210508.1488509-1-raymond.mao@linaro.org>
  <6b992b47-de7c-45ce-9c3c-ca4a2295f7c9@linaro.org>
- <20250528141945.GV100073@bill-the-cat>
+ <CAEfUkUK-hpCLC6oeMdomDNQHvtObDowecr4uY0CiStugHNWpBg@mail.gmail.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250528141945.GV100073@bill-the-cat>
+In-Reply-To: <CAEfUkUK-hpCLC6oeMdomDNQHvtObDowecr4uY0CiStugHNWpBg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -119,8 +117,12 @@ X-Virus-Status: Clean
 
 
 
-On 5/28/25 16:19, Tom Rini wrote:
-> On Wed, May 28, 2025 at 10:25:06AM +0200, Jerome Forissier wrote:
+On 5/28/25 17:22, Raymond Mao wrote:
+> Hi Jerome,
+> 
+> On Wed, 28 May 2025 at 04:25, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
 >> Hi Rayond,
 >>
 >> On 5/27/25 23:05, Raymond Mao wrote:
@@ -132,6 +134,10 @@ On 5/28/25 16:19, Tom Rini wrote:
 >> How do you reproduce the problem? Can you give the config and build
 >> command you are using?
 >>
+> I am using this:
+> CROSS_COMPILE=aarch64-none-linux-gnu- make O=out CC="clang -target
+> aarch64-none-linux-gnu" all
+> 
 >>>
 >>> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
 >>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
@@ -148,7 +154,7 @@ On 5/28/25 16:19, Tom Rini wrote:
 >>>    export HOST_ARCH=$(HOST_ARCH_RISCV64)
 >>>  endif
 >>> -undefine MK_ARCH
->>>  
+>>>
 >>>  # Avoid funny character set dependencies
 >>>  unexport LC_ALL
 >>> @@ -915,8 +914,13 @@ PLATFORM_LIBGCC = arch/$(ARCH)/lib/lib.a
@@ -169,18 +175,149 @@ On 5/28/25 16:19, Tom Rini wrote:
 >> Target: x86_64-pc-linux-gnu
 >> Thread model: posix
 >> InstalledDir: /usr/bin
+>> $ clang --print-targets
+>>
+>>   Registered Targets:
+>>     aarch64     - AArch64 (little endian)
+>>     aarch64_32  - AArch64 (little endian ILP32)
+>>     aarch64_be  - AArch64 (big endian)
+>>     amdgcn      - AMD GCN GPUs
+>>     arm         - ARM
+>>     arm64       - ARM64 (little endian)
+>>     arm64_32    - ARM64 (little endian ILP32)
+>>     armeb       - ARM (big endian)
+>>     avr         - Atmel AVR Microcontroller
+>>     bpf         - BPF (host endian)
+>>     bpfeb       - BPF (big endian)
+>>     bpfel       - BPF (little endian)
+>>     hexagon     - Hexagon
+>>     lanai       - Lanai
+>>     loongarch32 - 32-bit LoongArch
+>>     loongarch64 - 64-bit LoongArch
+>>     m68k        - Motorola 68000 family
+>>     mips        - MIPS (32-bit big endian)
+>>     mips64      - MIPS (64-bit big endian)
+>>     mips64el    - MIPS (64-bit little endian)
+>>     mipsel      - MIPS (32-bit little endian)
+>>     msp430      - MSP430 [experimental]
+>>     nvptx       - NVIDIA PTX 32-bit
+>>     nvptx64     - NVIDIA PTX 64-bit
+>>     ppc32       - PowerPC 32
+>>     ppc32le     - PowerPC 32 LE
+>>     ppc64       - PowerPC 64
+>>     ppc64le     - PowerPC 64 LE
+>>     r600        - AMD GPUs HD2XXX-HD6XXX
+>>     riscv32     - 32-bit RISC-V
+>>     riscv64     - 64-bit RISC-V
+>>     sparc       - Sparc
+>>     sparcel     - Sparc LE
+>>     sparcv9     - Sparc V9
+>>     systemz     - SystemZ
+>>     thumb       - Thumb
+>>     thumbeb     - Thumb (big endian)
+>>     ve          - VE
+>>     wasm32      - WebAssembly 32-bit
+>>     wasm64      - WebAssembly 64-bit
+>>     x86         - 32-bit X86: Pentium-Pro and above
+>>     x86-64      - 64-bit X86: EM64T and AMD64
+>>     xcore       - XCore
+>>     xtensa      - Xtensa 32
+>> $ clang --print-resource-dir
+>> /usr/lib/llvm-18/lib/clang/18
+>> $ ls /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins*
+>> /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-i386.a  /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-x86_64.a
+>>
+>>
+>> Are you doing cross compilation for arm or arm64? Did you have to
+>> install the compiler-rt libraries separately from the compiler?
+>>
+> I installed clang manually.
 > 
-> How about if you use the llvm.org packages?
+> This is what I have:
+> $ which clang
+> /home/raymond/toolchain/clang-12.0.0/bin/clang
+> $ clang --version
+> clang version 12.0.0
+> Target: x86_64-unknown-linux-gnu
+> Thread model: posix
+> InstalledDir: /home/raymond/toolchain/clang-12.0.0/bin
+> $ clang --print-targets
+>   Registered Targets:
+>     aarch64    - AArch64 (little endian)
+>     aarch64_32 - AArch64 (little endian ILP32)
+>     aarch64_be - AArch64 (big endian)
+>     amdgcn     - AMD GCN GPUs
+>     arm        - ARM
+>     arm64      - ARM64 (little endian)
+>     arm64_32   - ARM64 (little endian ILP32)
+>     armeb      - ARM (big endian)
+>     avr        - Atmel AVR Microcontroller
+>     bpf        - BPF (host endian)
+>     bpfeb      - BPF (big endian)
+>     bpfel      - BPF (little endian)
+>     hexagon    - Hexagon
+>     lanai      - Lanai
+>     mips       - MIPS (32-bit big endian)
+>     mips64     - MIPS (64-bit big endian)
+>     mips64el   - MIPS (64-bit little endian)
+>     mipsel     - MIPS (32-bit little endian)
+>     msp430     - MSP430 [experimental]
+>     nvptx      - NVIDIA PTX 32-bit
+>     nvptx64    - NVIDIA PTX 64-bit
+>     ppc32      - PowerPC 32
+>     ppc32le    - PowerPC 32 LE
+>     ppc64      - PowerPC 64
+>     ppc64le    - PowerPC 64 LE
+>     r600       - AMD GPUs HD2XXX-HD6XXX
+>     riscv32    - 32-bit RISC-V
+>     riscv64    - 64-bit RISC-V
+>     sparc      - Sparc
+>     sparcel    - Sparc LE
+>     sparcv9    - Sparc V9
+>     systemz    - SystemZ
+>     thumb      - Thumb
+>     thumbeb    - Thumb (big endian)
+>     wasm32     - WebAssembly 32-bit
+>     wasm64     - WebAssembly 64-bit
+>     x86        - 32-bit X86: Pentium-Pro and above
+>     x86-64     - 64-bit X86: EM64T and AMD64
+>     xcore      - XCore
+> $ clang --print-resource-dir
+> /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0
+> $ ls /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins*
+> /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+>  /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-x86_64.a
+> /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-armhf.a
 
-Nope. Doesn't seem to have the compiler-rt libs for multiple targets :-/
+Interesting. How did you install clang/LLVM? Did you get those builins
+library from multiple release packages?
 
-$ wget https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.0/LLVM-20.1.0-Linux-X64.tar.xz
-[...]
-LLVM-20.1.0-Linux-X64.tar.xz     100%[==================================>]   1.88G   265MB/s    in 7.4s
-$ tar tvf LLVM-20.1.0-Linux-X64.tar.xz | grep 'libclang_rt\.builtins'
--rw-r--r-- runner/docker    270638 2025-03-04 23:03 LLVM-20.1.0-Linux-X64/lib/clang/20/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
+In the OP-TEE project we used to do that via a get_clang.sh script [1] but
+it broke when llvm-project stopped releasing all the binary packages we needed
+(aarch64-linux-gnu and armv7a-linux-gnueabihf). So we ended up importing the
+__udivti3 implementation in source code instead [3]. I'm not saying this is
+the way to go, but relying on libclang_rt.builtins assumes that a proper
+toolchain is available, and that should at least be documented.
 
+[1] https://github.com/OP-TEE/build/blob/1b68e0bb8a00/get_clang.sh
+[2] https://github.com/OP-TEE/build/commit/8dd39dc99f09
+[3] https://github.com/OP-TEE/optee_os/commit/48952fd403d8
 
-Thanks,
+Regards,
 -- 
 Jerome
+
+> 
+> Regards,
+> Raymond
+> 
+>> Thanks,
+>> --
+>> Jerome
+>>
+>>>  endif
+>>>  endif
+>>> +undefine MK_ARCH
+>>>  PLATFORM_LIBS += $(PLATFORM_LIBGCC)
+>>>
+>>>  ifdef CONFIG_CC_COVERAGE
