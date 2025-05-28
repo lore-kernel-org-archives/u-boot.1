@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C109CC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 13:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2287BC5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 13:06:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C03B8839C6;
-	Wed, 28 May 2025 15:06:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C3C683A15;
+	Wed, 28 May 2025 15:06:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AE1583A05; Wed, 28 May 2025 15:06:38 +0200 (CEST)
-Received: from smtp-8fa8.mail.infomaniak.ch (smtp-8fa8.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::8fa8])
+ id 13226839C1; Wed, 28 May 2025 15:06:39 +0200 (CEST)
+Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc0c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6961F839C1
+ by phobos.denx.de (Postfix) with ESMTPS id C33BC839D5
  for <u-boot@lists.denx.de>; Wed, 28 May 2025 15:06:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,22 +25,19 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4b6qWw01G6zn8s;
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4b6qWw2tRqzpDc;
  Wed, 28 May 2025 15:06:36 +0200 (CEST)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4b6qWv304Nz58T; Wed, 28 May 2025 15:06:35 +0200 (CEST)
+ id 4b6qWv70LPz5yj; Wed, 28 May 2025 15:06:35 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 0/2] dm: core: use {s,u}32 instead of int for
- dev_read_{s,u}32_default
-Date: Wed, 28 May 2025 15:06:17 +0200
-Message-Id: <20250528-dev_read_x32_default-v1-0-6ab1734dd7a2@cherry.de>
+Date: Wed, 28 May 2025 15:06:18 +0200
+Subject: [PATCH 1/2] dm: core: use u32 instead of int for dev_read_u32_default
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEkKN2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDUyML3ZTUsvii1MSU+Apjo/iU1LTE0pwSXXPjVAPLZEvTNDOTVCWg1oK
- i1LTMCrCx0bG1tQDDtmraZgAAAA==
-X-Change-ID: 20250528-dev_read_x32_default-73e09c95f64e
+Message-Id: <20250528-dev_read_x32_default-v1-1-6ab1734dd7a2@cherry.de>
+References: <20250528-dev_read_x32_default-v1-0-6ab1734dd7a2@cherry.de>
+In-Reply-To: <20250528-dev_read_x32_default-v1-0-6ab1734dd7a2@cherry.de>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, 
  Quentin Schulz <quentin.schulz@cherry.de>
@@ -62,30 +59,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Out of all the dev_read_*_default functions, only two do not properly
-use the type as argument and return type: dev_read_u32_default and
-dev_read_s32_default. They both use int instead of u32/s32.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Considering that it's generally not guaranteed that an int is 4 bytes
-but also for consistency sake, let's have them use the expected type.
+dev_read_u32_default is for getting a u32 from a Device Tree property
+and allows to take a default value if that property is missing.
 
-Note that I have not tested this, just stumbled upon that inconsistency
-by chance.
+Considering it calls ofnode_read_u32_default which takes a u32 and
+returns a u32, it should do the same instead of using an int, especially
+considering that int size is typically architecture-specific, as opposed
+to u32.
 
+This incidentally matches all other dev_read_*_default functions (except
+dev_read_s32_default which will be tackled in the next commit).
+
+Fixes: 47a0fd3bad38 ("dm: core: Implement live tree 'read' functions")
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (2):
-      dm: core: use u32 instead of int for dev_read_u32_default
-      dm: core: use s32 instead of int for dev_read_s32_default
+ drivers/core/read.c | 4 ++--
+ include/dm/read.h   | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
- drivers/core/read.c |  8 ++++----
- include/dm/read.h   | 14 +++++++-------
- 2 files changed, 11 insertions(+), 11 deletions(-)
----
-base-commit: e04d137231f2e9e14708a32448c879125b8e308f
-change-id: 20250528-dev_read_x32_default-73e09c95f64e
+diff --git a/drivers/core/read.c b/drivers/core/read.c
+index 55c19f335ae12b8d9f83d1cb2a10e2ffc13cf935..981204bffe4c26641ea8b387f00f4efc641d6e47 100644
+--- a/drivers/core/read.c
++++ b/drivers/core/read.c
+@@ -38,8 +38,8 @@ int dev_read_u32(const struct udevice *dev, const char *propname, u32 *outp)
+ 	return ofnode_read_u32(dev_ofnode(dev), propname, outp);
+ }
+ 
+-int dev_read_u32_default(const struct udevice *dev, const char *propname,
+-			 int def)
++u32 dev_read_u32_default(const struct udevice *dev, const char *propname,
++			 u32 def)
+ {
+ 	return ofnode_read_u32_default(dev_ofnode(dev), propname, def);
+ }
+diff --git a/include/dm/read.h b/include/dm/read.h
+index 894bc698bb49209c03e7cf74628a2600ea1be675..87017f076216492af5bb8da3a984ed1e074428cc 100644
+--- a/include/dm/read.h
++++ b/include/dm/read.h
+@@ -90,8 +90,8 @@ int dev_read_u32(const struct udevice *dev, const char *propname, u32 *outp);
+  * @def:	default value to return if the property has no value
+  * Return: property value, or @def if not found
+  */
+-int dev_read_u32_default(const struct udevice *dev, const char *propname,
+-			 int def);
++u32 dev_read_u32_default(const struct udevice *dev, const char *propname,
++			 u32 def);
+ 
+ /**
+  * dev_read_u32_index() - read an indexed 32-bit integer from a device's DT
+@@ -896,7 +896,7 @@ static inline int dev_read_u32(const struct udevice *dev,
+ }
+ 
+ static inline int dev_read_u32_default(const struct udevice *dev,
+-				       const char *propname, int def)
++				       const char *propname, u32 def)
+ {
+ 	return ofnode_read_u32_default(dev_ofnode(dev), propname, def);
+ }
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.49.0
 
