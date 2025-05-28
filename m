@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F7CCC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 17:23:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B38CC5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 17:43:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 323B683330;
-	Wed, 28 May 2025 19:23:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 32B0182A39;
+	Wed, 28 May 2025 19:43:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fg/KU6ou";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P4u1pKGW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53AF683276; Wed, 28 May 2025 19:23:28 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 604A882AAF; Wed, 28 May 2025 19:43:22 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB8C983330
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 19:23:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 299F08070C
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 19:43:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ad51ba0af48so201076066b.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:23:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-72c40235c34so37278a34.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:43:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748453005; x=1749057805; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=imLhpDBYwie6ovY2GQVq/mRywZ6STK8mLb9lAS9TGYo=;
- b=Fg/KU6ouIauuOE4kxbbR4hZFpaE2VUk4I1WoICqDRCMEaAfn32L14xUQIEvX+GH/3t
- PyNIq1sEN4zy18Fz8WWLrOS5VKRKf97Y2Z7mzLDMuMF6q4DhNisj14xkcjI0i9HHj8Bv
- WZKccIRuNoEk3G6QQRCkv2/LEsTDYq6q/upayGXWxLMilld69UTUCBOc0za5KMgQi6hp
- 5fZg2TQD7ObocHBrT4UE3tU7+IU4yi0JcrQWlM90mSgaS+LRXWq0mVbhKyS1FRdxdVty
- 36FJpgUxH7lZV+BiezmI2SzzUflYvh+vPF/W29Zl3oHc9vN6Lbx47vs8zaocADEZuhI7
- aaTA==
+ d=konsulko.com; s=google; t=1748454199; x=1749058999; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mGqQ6ICMRPE5utcIdLf78OMTW94vJFnNSO/VAYVGt0Q=;
+ b=P4u1pKGWK2QW6TGa/MTUfwxjzImM8wkcIlEhtoYF79hpwpqNQIWKt4IbqhOd3wT2TG
+ a5gQbUXLsXvIRe5j4Gk5AproFkhuDbuf45Srobi5wCHW8bPevmPQnHRUs+qxdSaw9wM1
+ NLtzqGJP4OhjDhGvjuWhhzc5BapQdWGS6QvTw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748453005; x=1749057805;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=imLhpDBYwie6ovY2GQVq/mRywZ6STK8mLb9lAS9TGYo=;
- b=lwPoZcHrzVCLbU/tfwrjCt+RhiWdUi6syuXXu5FTemTNqhYlmbZv/ld4c0oYVs7mdS
- yjOjltwdTFEGVZagRnxULxesS0C+mi4Tch/a4Zta6PZ2rSZ1v5aDUKoWtl2K4GYXzTg3
- 4JwXoMoBEpUiTeW1SMVHDHUE3hAyjW7kVslzM63deOtYSNHATHy/FWRAoP+kE5qnieGl
- i4YC9LVFoM53DVoa3J93qmp/TvdSHajJ87RpFppFIXi5znY4sQvnLGxshxMm08Au/wr4
- 8u+XP1XnMIK6e02Nw5MZ6vcDpT391IsQBVI48yKpuhjs6BF3jF6glA6gl6qfMwNwfTnd
- Hmjg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVamEWYBfeRmcWuQYyfBzrz5DvhtIf4CHbDWMfJP+ZiSRDKF1eCFaB60m2sVuFgQGdaNccl+ug=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqIgY67Xc0dM4S7K0FI+b+qZiqJOHg1zB7c9GsKqswT2D++4ll
- b8B9zLWfWhcdpZ+DSecMuOcNJcmYeRcnwd1hSEh3YwvBXzyXRATVCbZYFwmlBIZrA3m1byT1NCZ
- 4hq6YdNCJHoHQuLH2Y8C7IlXT2MlKdXo=
-X-Gm-Gg: ASbGncswcx27fdxJcJShSlAABpyFF6rJkb8hHaQIbsuWnK8TYtfrj61isFZ8DUP/VBg
- AUYvxXmETzQdzGsbcKOzAJY47wnHJOn8T8KM43curN/mOtPYUYryj/rHHCIZK90Dkb2IRWbGIfu
- 40F/qGTdCCLHCBkEEmntunswPEDT65FyLz7s6RPdcOD5Ibywdsn9CgfZrNhFkWHXmMyQ==
-X-Google-Smtp-Source: AGHT+IHMjQ1fOrgPeTZvgoIa5zy+DFf23PVT+QL0Jc9SMpr0LahRu+Z9um+tdQH73zgxhAqZVAl66x1qKA9ijYYiDsg=
-X-Received: by 2002:a17:907:6d06:b0:ad5:4cde:fb97 with SMTP id
- a640c23a62f3a-ad8b0e940b9mr43407266b.29.1748453005149; Wed, 28 May 2025
- 10:23:25 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748454199; x=1749058999;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mGqQ6ICMRPE5utcIdLf78OMTW94vJFnNSO/VAYVGt0Q=;
+ b=OU18L5i4tEUiUpjUNbq2XtJ6xhFWrSooQpGegHgAlgqI5JtXXGnjpGK1FG5H//FQDx
+ vFmbdTxSSRVnm+iUuFguAdAY25zOYGZv+8WWVxMHtXe+x6UYaqS4bjccXuIfkikXrFWO
+ +8mAHWFgtM+X+NRStO7woH2Y+npe+u6Uu1sW4UVD1YRcMlfoMx/rP/OkxsHm23jJDoa8
+ bIILNl0nwX4u/4KCbm17g8cJu3F9YHjC2zgsgnVQ1YrDvY9wVRJq44TJrmDumW+NukrN
+ JXqu4K/3eeZHylBWK0E4JT7MR7+cjc9/ibFotus4y1PrRHYZj2MS3csHLUBwuZ4o2+hU
+ zqfQ==
+X-Gm-Message-State: AOJu0Yyxu4kqUuHvg+WdWTdjRXOmobArH8CF5zoATNdrRWDHSK0aDIpw
+ fOpz63+Y9RrpQRgrrF3uPnfPpHOIOInkcXD17PBuu+jvQC8J06kiyTePCTrEd9AIQ6M=
+X-Gm-Gg: ASbGncsDMDHF/MgHdiSJ8+wmg2JzWIB1Q1ZvCLNGSYJvBAljTwkwraOjIi987Ycn1sg
+ XsZY8HlXHoDG8FObJuW60OJuILaAe1PkIJu2FdotPMftzsvMslW3ek0+Mq1fiUn6pe73VuHj29N
+ j9p79i8lE6obYicfzAkXP8hp0iUE+L90//TKLx4VjOJAHwtfrmNyB2z6k1djeUUwOtoqxZQOVSD
+ yfJ97EnuSf0Ryb0Et9Y770dLLw6/qndttCiy+OL2lYk738FDSttio0fLxc1VCGos5pkSfninuMh
+ wgL2YR6ERdzt2oxVVSuecczzEHqADoMMQa/0eCTaEcmF4jQ+vv/QdUhLFORFyGlQeuXvlN8WACl
+ bbTQsDX/eRgkm
+X-Google-Smtp-Source: AGHT+IEp0mWC5oCbdfAGfB4rGgJs0TIAPNI8XpEfQ5rRkoOvp+dRLqjc+eV5GEIkaS0+CZIBCqoqlA==
+X-Received: by 2002:a05:6830:4885:b0:731:d1e5:7c5d with SMTP id
+ 46e09a7af769-7355cf2bdc0mr11010864a34.9.1748454198647; 
+ Wed, 28 May 2025 10:43:18 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-735a53dc6e6sm180242a34.42.2025.05.28.10.43.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 May 2025 10:43:17 -0700 (PDT)
+Date: Wed, 28 May 2025 11:43:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: Re: [PATCH 00/27] x86: efi: Various app improvements to support
+ bootstd
+Message-ID: <20250528174315.GF100073@bill-the-cat>
+References: <20250528082520.152391-1-sjg@chromium.org>
+ <20250528140929.GR100073@bill-the-cat>
+ <CAFLszTiVtyAsdqLNaGrs11TuugAhTp0Rru30=yNJoAa2RyU6YA@mail.gmail.com>
+ <20250528150123.GY100073@bill-the-cat>
+ <CAFLszTgVE+WLjsf4cWgaCDQD47adR2RTNNNJAqPMRS7pyzWcTw@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAJ+vNU3H1vjbvyZTycBQhufii5SqyTnk4AaMRk_ztGY10g9joQ@mail.gmail.com>
- <6e667ef9-9fa0-441b-8520-46e7bdbc344a@linaro.org>
- <CAJ+vNU0kY=iNR6Q3PR6+x=wqv2932=1E+Ci0CwvURCPh6JD5-A@mail.gmail.com>
- <ebb48519-a02b-4b06-a801-f9c05fccd428@linaro.org>
- <CAJ+vNU2rOgp77+ML7LYuVu5hYFOwkbRytG8q2+NeXm7OgSL0vg@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2rOgp77+ML7LYuVu5hYFOwkbRytG8q2+NeXm7OgSL0vg@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 28 May 2025 18:23:13 +0100
-X-Gm-Features: AX0GCFs8VLWBz_tXovlyJzfcrK2eOYk8D35t53oS6efDXIX-YHqL_l7Er0lI7h4
-Message-ID: <CALeDE9Odhr5OOrcGj+3-fyj4XrxAN+QMnrHW_sjSjicD1HrB2w@mail.gmail.com>
-Subject: Re: lwip tftp not working on imx8mm
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- u-boot <u-boot@lists.denx.de>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JGZAJIefEt/0qNW5"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgVE+WLjsf4cWgaCDQD47adR2RTNNNJAqPMRS7pyzWcTw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,88 +110,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 May 2025 at 17:59, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> On Wed, May 28, 2025 at 5:24=E2=80=AFAM Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> >
-> >
-> > On 5/27/25 18:35, Tim Harvey wrote:
-> > > On Mon, May 26, 2025 at 5:17=E2=80=AFAM Jerome Forissier
-> > > <jerome.forissier@linaro.org> wrote:
-> > >>
-> > >> Hi Tim,
-> > >>
-> > >> On 5/23/25 20:31, Tim Harvey wrote:
-> > >>> Hi Jerome,
-> > >>>
-> > >>> I've enabled LWIP on imx8mm_venice to see how it's doing and while
-> > >>> dhcp/dns/ping/wget appear to work great, tftp is broken.
-> > >>>
-> > >>> Enabling LWIP_DEBUG shows the following:
-> > >>> ip4_input: packet accepted on interface et
-> > >>> IP packet dropped since it was fragmented (0x2000) (while IP_REASSE=
-MBLY =3D=3D 0).
-> > >>
-> > >> Hmmmmm IP_REASSEMBLY should probably default to 1.
-> > >>>
-> > >>> I tried enabling IP_REASSEMBLY in lwip but that seems to change the=
- issue to:
-> > >>> ip4_input: packet accepted on interface et
-> > >>> ip4_input:
-> > >>> IP header:
-> > >>> +-------------------------------+
-> > >>> | 4 | 5 |  0xc0 |       108     | (v, hl, tos, len)
-> > >>> +-------------------------------+
-> > >>> |    10568      |000|       0   | (id, flags, offset)
-> > >>> +-------------------------------+
-> > >>> |   64  |    1  |    0xe25b     | (ttl, proto, chksum)
-> > >>> +-------------------------------+
-> > >>> |  172  |   24  |    0  |    2  | (src)
-> > >>> +-------------------------------+
-> > >>> |  172  |   24  |   21  |  251  | (dest)
-> > >>> +-------------------------------+
-> > >>> ip4_input: p->len 108 p->tot_len 108
-> > >>> Unsupported transport protocol 1
-> > >>>
-> > >>> Any ideas what the issue is here?
-> > >>
-> > >> Not really :-/ Does the transfer work with a smaller block size?
-> > >> (CONFIG_TFTP_BLOCKSIZE, default 1468, try 500 for instance). You cou=
-ld
-> > >> also enable CONFIG_LWIP_DEBUG_RXTX in order to get a full hex dump o=
-f
-> > >> the messages going into/out of the lwIP stack.
-> > >
-> > > Hi Jerome,
-> > >
-> > > My config was with 4096, setting it to 1468 works and anything above
-> > > that seems to cause this failure.
-> >
-> > Good to know.
-> >
-> > > Some sort of fragmentation issue?
-> >
-> > Quite possibly, yes. In any case it does not make much sense to use a
-> > clock size that causes the packet to be larger than the PMTU (it would
-> > be sub-optimal) but it should definitely work, especially since I don't
-> > believe PMTU discovery is implemented in lwIP. I add this to my to-do
-> > list but feel free to investigate further :)
-> >
->
-> Hi Jerome,
->
-> I'll take a look at it as larger than MTU packets are definitely not
-> suboptimal for TFTP. A 4096B block size will ack once per 4K so 4x
-> less ACK's and in my testing the 4K blocksize gives a 3x performance
-> boost on large files.
 
-Refreshing my memory on TFTP slightly, I think larger than MTU tftp
-transfers need support for RFC 2348 [1], maybe that's something we
-need to explicitly enable if the TFTP layer is part of LWIP (or maybe
-LWIP doesn't support it), or if the tftp application is ours on top of
-LWIP maybe we're missing some glue. I didn't look at the code, rather
-this was from some of my own notes from a long time ago.
+--JGZAJIefEt/0qNW5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[1] https://www.rfc-editor.org/rfc/rfc2348
+On Wed, May 28, 2025 at 04:20:19PM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 28 May 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, May 28, 2025 at 03:25:32PM +0100, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 28 May 2025 at 15:09, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, May 28, 2025 at 02:24:26AM -0600, Simon Glass wrote:
+> > > >
+> > > > > This series makes a number of improvements to the EFI app. Mostly=
+ it
+> > > > > applies to x86 but the ARM version will share some improvements.
+> > > > >
+> > > > > The main updates are:
+> > > > > - Improve linker scripts and options to detect missing symbols and
+> > > > >   remove unused code
+> > > > > - Enable bootstd and provide a default which can find an extlinux=
+ OS on
+> > > > >   EFI media
+> > > > > - Make the 32/64-bit apps more similar in terms of features and l=
+ink
+> > > > >   script
+> > > >
+> > > > So I give a little, and say Yes to you despite technical misgivings=
+, and
+> > > > you post yet another big series that's based on your tree with alre=
+ady
+> > > > rejected changes in it. I do not feel that you are working in good
+> > > > faith. Please stop, and work in good faith.
+> > >
+> > > What specifically would you like me to do for the EFI app?
+> >
+> > Well, the three patches you posted and Heinrich accepted were a start.
+> > You need to build on that, in mainline. As again, the concept was fine,
+> > the introduction of more technical debt to deal with later was not.
+>=20
+> Yes, I'm doing that. I said to Heinrich that I'd wait to see what
+> happened with those three patches and then do some more. They are in
+> CI so I'll post them soon.
+>=20
+> But I also mentioned to Heinrich that I don't think I am the right
+> person to undertake all the refactoring work - moving EFI-loader code
+> out to lib/efi etc. I'm not a maintainer for lib/efi_loader and my
+> track record of getting patches in there is not good. We have the
+> U-Boot versus EFI memory-allocation problem and my ideas for that have
+> already been rejected. So at the moment I'm not planning to go that
+> much further in your tree, unless there is somehow a future meeting of
+> the minds. Perhaps Heinrich or Linaro will be able to work on it and
+> then we can re-unify things down the track?
+
+If you are unable to work with other custodians then yes, you will have
+to wait for someone else to do the work. Since you have so many other
+things in progress, it would probably benefit them if you focused on
+that instead.
+
+--=20
+Tom
+
+--JGZAJIefEt/0qNW5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg3Sy8ACgkQFHw5/5Y0
+tyweFgwAj8w61WzTIDnnOIehaf+rYySWcqgBNmrTbBjHRyygBy4/rdU4PJ+c1qLX
+2VukEw9i/jbA4m8X82Sx2BHqfAfxMvQamufUFByo56ByeTGqYgdeYlyQnxCzT/9Q
+RnyfL93QnLU5y1avR6OgYXK5UH+VyUZnyzOeIV6V4/GtZEhV7aUh7Tmm04aPfT5B
+F77gt8syUTdJ+CMazkh/tGyGb1/uIhP4YtxDnN3X4h+MJnwsMi4zhNfQo/5QvU+t
+1vz6MMkBGDgiVrOfX8K4+i0DP0TZnv0Lpf++Nv0F01TqObgveRk6rBpOAnDGbpza
+XetjvMQ8VW5UMF0S3muaAUiIpd+YkMjE8qsgXnJJo6X7PWI7rb/uLzC/wSFbLA1E
+cRJABreQ9pQGoC/SG0sbKVeddGZrQbgihp8VY4GSNN5UnQOVlqwofgYHV73mfJpe
+iFOGYZIzFu82Zmf+NYt/z3Utk+ZXPCDvFoQ2g8OQYh/mnjeITe1BDN65p+XQ+O4E
+uSkNfROk
+=hQYf
+-----END PGP SIGNATURE-----
+
+--JGZAJIefEt/0qNW5--
