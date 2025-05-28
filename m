@@ -4,85 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8970C5AE59
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 07:57:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 131C8C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:05:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29D9C83922;
-	Wed, 28 May 2025 09:57:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E5738392E;
+	Wed, 28 May 2025 10:05:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ugrqjp7P";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vIyBOPAM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E53A83923; Wed, 28 May 2025 09:57:52 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4254283910
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 09:57:49 +0200 (CEST)
+ id AE69383910; Wed, 28 May 2025 10:05:28 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DB84183910
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:05:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ad52d9be53cso625723066b.2
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 00:57:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748419069; x=1749023869; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Pr/vbkk+YYRSSQNMXY+PRrFxpsUkoqbnhFYQS7jm9VI=;
- b=Ugrqjp7PziP8QmVl2uiZ0knigX0ToPQ8u/6hQ5KnZ/cEyXsCq0IkAjs/IAvmBEEVqS
- rZuycwXbnOHo+51l67e/CLe2jL4TuIdzo9DdwqlEnZjxWH6KBrjSmvZP+4+Vi0unr3sn
- xEyxTc38v+kR0oV0erkIqix5AZ+V3sUfhZ5NbFNNljHwwa58RxLxZphoVe5VzvJ+aEHA
- HeIJaWeT62vhnMI9r28/Js3pPCEBKDcGZLR2eN5g0z3wGX+QGlreWlLDs7MsELRIWf2N
- RNdmaW64gJGZFtqSBNKFfv4HSLQQiAcOazwzDuo1I7lACz3xOIi5A44bv7CCOPJUkBic
- UluA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748419069; x=1749023869;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Pr/vbkk+YYRSSQNMXY+PRrFxpsUkoqbnhFYQS7jm9VI=;
- b=DOinH3AHb4ELcNyzbaZNma7cgYHCvycqzfiG72bdDhpw2RF+DeloTTxyCeToSt65Tq
- sKK4FfgZMjQRnU1x518JQ/c4/J3RTLFFzZJgQxIHrRYcrzkqForUBB2QMgl7H9RWMRay
- LxlaZ5h2S9jEzlOCF9Ie1f7T6A/JX4jJ98YN2CD2+LFNlh58yNBxxL7XCD89wIzYMoxh
- 9sYzzJrY38tmGL+7+sxB3+5LSL+bP2gRn0BAzla2dwzRVBqJrKjmcX+cp4gLld3AG05R
- uw55UpiI/ThQH1H+hlq3t+Xwq+eCvOAEUEox/laXN9o7hdjC7C0Hd7HZyKQdV/PdXSmI
- f9xQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVh26XZsTr8dwI5qamiWxJxpkX2CNWXK6PKZe/LCmc41y+YZslZsWC9GxwHpW5Qy6Rg1ITwlfo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTO3tDOuQk5zQDkVVciz8/5Fdi+T4GG10SQ9nBD0jmTHmPLfbV
- z0+bFTEg/TnZLObwpHlKoyEXHPfIWyCXVBzYoNMLWw1VS3DswivBxTNWNgDP++KBOM4=
-X-Gm-Gg: ASbGncskZg13BR4F0/WHnrtu/6nMeTAX5lGXDxR4lg6ufUBDAj13L+v0rbNCVhxclZT
- VmC2GovuJRFi+ev/e9OfMTviw58Wx5nALaT63PUJeBR/fKXLPZV/eyXwR9e0f4+sdey2+A/S5Nd
- FYJ4CQspIUfThyGoUtOyPFWzhzoDgLp36r5zqFCJ1nB16F8jskHHKW9etOIOtMuogdXg3ZPF8Co
- DUOCksZOfzqcugg/JZbJLNaZ7MzUgGIwZplNkcP6dl04317hUBV88zljmbLKMaydkrNiZToL/0H
- aW5pNOa4fwIfj0tMpD5q5BW4WGmjvA03tHdkbKT7DAs9FkqbbOtd97c4MEoqm5vy5Dqc/3Y=
-X-Google-Smtp-Source: AGHT+IGnRZxWHSwZR+NoCxIudpxU682HquTMt0gtMoZ1FrDCmo5mcFC3BikR/PAyH/ealiy01UX5eg==
-X-Received: by 2002:a17:907:7ea3:b0:ac2:a50a:51ad with SMTP id
- a640c23a62f3a-ad85b0d1dcemr1524330366b.14.1748419069215; 
- Wed, 28 May 2025 00:57:49 -0700 (PDT)
-Received: from [10.5.0.2] ([94.101.114.227]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad8a19ad565sm65828966b.13.2025.05.28.00.57.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 May 2025 00:57:48 -0700 (PDT)
-Message-ID: <2b22423d-36db-4dba-8844-9bab22579158@linaro.org>
-Date: Wed, 28 May 2025 09:57:47 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 54S85N1m2006297;
+ Wed, 28 May 2025 03:05:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748419523;
+ bh=yKpuGdJaI+zELiTaA5gkv+T0bkO7G9Kp4Qyt/Pbc97k=;
+ h=From:To:CC:Subject:Date;
+ b=vIyBOPAMuJm/RHDZRK0vB55fLFuaW5vGApVSLEJPFbmNgaBJddcswrEAXaxOu+twG
+ p/QOGbmOlp4Wj8ikR2Ar9MGMZhF1TmlL+3sgtUn5oRSXFEYvW0O0KpzO3zsQDhdjsQ
+ 1eszWte4H5ljSIg6qdYKxWDpI1KyNQjum6H+Y6YU=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 54S85NlB3464767
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 28 May 2025 03:05:23 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
+ May 2025 03:05:22 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 28 May 2025 03:05:23 -0500
+Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com
+ [172.24.227.136] (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 54S85Jod023330;
+ Wed, 28 May 2025 03:05:20 -0500
+From: Moteen Shah <m-shah@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <d-gole@ti.com>,
+ <m-chawdhry@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <m-shah@ti.com>
+Subject: [PATCH 0/6] Print version of the DM firmware
+Date: Wed, 28 May 2025 13:35:13 +0530
+Message-ID: <20250528080519.677750-1-m-shah@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: lwIP watchdog not being serviced
-To: Tim Harvey <tharvey@gateworks.com>, u-boot <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>
-References: <CAJ+vNU1=maNegZ=DiVR+OQG6B+eaGdn9v9Spz+KhYGCbzhRaFA@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAJ+vNU1=maNegZ=DiVR+OQG6B+eaGdn9v9Spz+KhYGCbzhRaFA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,47 +79,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+This patch series adds the functionality to print the DM firmware
+version being used. Before requesting TISCI for the DM version we
+first check if the DM split mode capability exists, if yes, we proceed
+onto making the call to TISCI for retrieving the version information.
 
-On 5/27/25 21:07, Tim Harvey wrote:
-> Hi Jerome,
-> 
-> In my continued evaluation to see if I want to switch my boards over
-> to use lwIP I've noticed that the watchdog does not get serviced
-> during at least http/tftp which surprised me. This causes board resets
-> when transferring large files such as disk images.
-> 
-> It seems lwIP is missing some calls to schedule(). Do you have a
-> suggestion for the right place to call this for lwIP?
+DM split mode capability[0] indicates that the DM is a separate binary
+altogether and has its own versioning information similar to TIFS. 
 
-That's a good point. Anywhere in the receive loops should be OK, for
-example right after net_lwip_rx(udev, netif). But for simplicity and
-to avoid pattern duplication we may want to call schedule() as well
-as sys_check_timeouts() inside net_lwip_rx():
+Boot Logs: https://gist.github.com/Jamm02/37864f605445944a0c0caf426e0aba50
 
-int net_lwip_rx(struct udevice *udev, struct netif *netif)
-{
-	struct pbuf *pbuf;
-	uchar *packet;
-	int flags;
-	int len;
-	int i;
+[0]https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/general/core.html#tisci-msg-query-fw-caps
 
-	/* lwIP timers */
-	sys_check_timeouts();
-	/* Other tasks and actions */
-	schedule();
+Moteen Shah (6):
+  ti_sci_*: Add utility to access tisci firmware and SOC capability
+  ti_sci_* : Add capability to access DM firmware's metadata
+  firmware: ti_sci.c: Add a function to query DM firmware's capability
+  firmware: ti_sci.c: Add a function to request DM metadata using
+    ti_sci* calls
+  arm: mach-k3: Add a function for printing DM version
+  arm: mach-k3: Print version of DM firmware during boot process
 
-	if (!eth_is_active(udev))
-		return -EINVAL;
-	...
-}
+ arch/arm/mach-k3/am62ax/am62a7_init.c  |  4 ++
+ arch/arm/mach-k3/am62px/am62p5_init.c  |  4 ++
+ arch/arm/mach-k3/am62x/am625_init.c    |  4 ++
+ arch/arm/mach-k3/am64x/am642_init.c    |  4 ++
+ arch/arm/mach-k3/am65x/am654_init.c    |  4 ++
+ arch/arm/mach-k3/common.c              | 29 ++++++++
+ arch/arm/mach-k3/common.h              |  1 +
+ arch/arm/mach-k3/j721e/j721e_init.c    |  4 ++
+ arch/arm/mach-k3/j721s2/j721s2_init.c  |  4 ++
+ arch/arm/mach-k3/j722s/j722s_init.c    |  4 ++
+ arch/arm/mach-k3/j784s4/j784s4_init.c  |  4 ++
+ drivers/firmware/ti_sci.c              | 99 ++++++++++++++++++++++++++
+ drivers/firmware/ti_sci.h              | 42 +++++++++++
+ include/linux/soc/ti/ti_sci_protocol.h | 38 ++++++++++
+ 14 files changed, 245 insertions(+)
 
-Regards,
 -- 
-Jerome
+2.34.1
 
-> 
-> Best Regards,
-> 
-> Tim
