@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69325C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:37:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A87DC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF36083ACD;
-	Wed, 28 May 2025 14:34:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C167383AEA;
+	Wed, 28 May 2025 14:34:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C/jknHOX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Biymj/V+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 496F783ABF; Wed, 28 May 2025 14:34:00 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id B8F9D8397A; Wed, 28 May 2025 14:34:03 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1679C8004F
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B857183ABA
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-72fffa03ac6so2451590a34.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:58 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-85b38fb692fso81553639f.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748435636; x=1749040436; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748435638; x=1749040438; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uaY/MfrPsxSmgja2oOswi7OR1hHogJ3ruaRUjBYV76w=;
- b=C/jknHOX/kbg0zIA3yrxHE5WAQoDuC0CkKwyrSOOkz+1WDNGfci0hErRT9yDugZy/E
- l6I44TsiiowVSc8g5yQkGzrGta0DQSOwplEn81fMikcOjSuSwxWcrjLLpzEAPctxWqoB
- oUbukTxx6A7qEHFsR7b5gdmht4t3bZHW6DFrA=
+ bh=S44Fi0nM7BWEfTXV8u2lLj0ZATmP5sMzZBga4rh6gNk=;
+ b=Biymj/V+PAIkdg6sUmCvzaHVsppRAtljy3w6+6P3jHVBM7A5fMwc86KZpNe+39a0gZ
+ mcT3ig8rXl/j2p9esAGST3lUiY5jur762h4qA2ZrTRqFwOEdcOZGEhu7gdGP2Q/+doLa
+ CaNEwuhuonHGJPRUy84SZNbhH/Q6grO1FUOl4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748435636; x=1749040436;
+ d=1e100.net; s=20230601; t=1748435638; x=1749040438;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uaY/MfrPsxSmgja2oOswi7OR1hHogJ3ruaRUjBYV76w=;
- b=JAU5pGFZdp7xe/1FYOC9n/vKhJwkEoxg0nIIxpDunzM0oC+0hkUjtD9Ddd2T687x0J
- rE+qIKiqez9qqBLvE9JQC6ifnM3g/gFfurmwSWWRG4l2H9JA1KnhUJH2cLboIP4ORz7M
- 8YkL0sz7kDMnh/wLtCmclOlrnK5JiNicg/TAI+zCG0LBUl/H9MvEpwIQZ8aogmyEzTKb
- tk38GPmY71MqowILaPdyFeNBfb9cgk4SHVVInbRjIr+2/4CoQYHP/CNQMftah7DgxtOI
- IFBse52i12jqQsPSGAXpxNkPUxfVaJXfN81FeZgWzYf8FC6ym2KALq/4C1rQCQK0ZRE/
- 5GIA==
-X-Gm-Message-State: AOJu0YxbIZGJ401d7pV7K8Rozcn6YzRRoC+fxMy5U9W9/FipcCz2Kk4R
- fPTVfx2ZEZWCLTlqrpeJP8ERz39o5PQXjpDYpxXMaGrdBlvCrXGsQs6AjVaupz6FfW7334qWxN5
- WDzg8U63B
-X-Gm-Gg: ASbGncucfgjOJ8i8sdxEoRjqwmcEzRHgm+IitPSmOEDYAPqLwnCoKlraTVf9cPsZVZ/
- gNDquKIt9evgTrCcJXxUT95d8xLHeuKs9wCwjq4syMGK8A0Xzsj6/tb2mQhjPQD+ufwkh0oVI4j
- CVE9rVVCCdAQOCWjCOm6IRHfOIQBBCy0AgYkF113sBiX6t+O9euX7HvBDBFCn+StM7bWveZ+VVT
- MpfojxAfB5EHDLj6TBmg7I2f4kWo/3Oj9XbuMnJEBJAEDF7FQUbDqm1cu100kZbrLkbi3GJX7rK
- jhA9hwJGDLyWg9eIzNCpZF4IwHDZSWNSQCYZB+s38JLWPd6mQwy2jAEYDBoYTvGNny9UWbA3xMz
- sH7tkqJLdadH6
-X-Google-Smtp-Source: AGHT+IE1ZaGyTVape/CxK9uwMNsg/OdZHOnONLZQ4TDW9H9pL0rlQxjli5GTG+qNHk0CxebXL3JybQ==
-X-Received: by 2002:a05:6808:6f87:b0:402:2a3:57ea with SMTP id
- 5614622812f47-40664803bbamr1069991b6e.18.1748435635702; 
- Wed, 28 May 2025 05:33:55 -0700 (PDT)
+ bh=S44Fi0nM7BWEfTXV8u2lLj0ZATmP5sMzZBga4rh6gNk=;
+ b=gwyydf7Rbol2WTRFOjkGVGdZBgHao+gRsJHEsazFzSw0wLCFdFlIiIrBRExs6Q/nw6
+ cejDsDZbiLyjm7BHLERSDExjFi3rCKsxaloFx7wCI01+tRhT3ruCPNwmXvGClbv1BoRU
+ EbMmlohe7hVoBX3pQ2M5vT+mm2M3mU7EGNFo9or4XVopVoFqmLfSKQfgKZC8zr2ENcHT
+ nYEo9DITXOgWqExguXzTjRZ9JkGG9V5VVuLs0efV1HtWzMealf1AMm1hEBj6pY/l4vu+
+ yiPvAEf7FnW2h8NiIJqs0jGT0OyKM65LgptL7SyOihvc23j7svY/MrC3qvhz/nimXnig
+ YXaw==
+X-Gm-Message-State: AOJu0Yw7hrDUe37FkpuowviS5g9RJDtwIQW6a0nQDnPicx0D9nRXta8Y
+ C4PPMZI3ya8BBIgUqwWMoASNL+Tt/pmmvsPPhvG1mIcyD4uqFlt/Cd5o8OlE4z2RZmcX+l5r8Rx
+ KAD28NhTf
+X-Gm-Gg: ASbGnctSNyx7EuS6QW1Mii3IjhwzLLh4JHt5ePoC50kj2JgH7uzcExISQBOc8+yofGg
+ 6pbpAYr+t1sSrf2p95iGSrTbdafv/DLsBU/s2c3+KuNPoxmsHeGluNne+gIvQwpsvqLwnfAybvl
+ On6Hac+7kpdJRk9k78Fkf2wmN5r8/1twcYoUrjLaRiRC3R0cNIR1hNNOHmM4utkDWk9PFUFKV9V
+ TpM/9B83mxpXcS+TI7wQIX08qadrQ/zcGYoQCF3Xy3TVkR5B552pLb0uBO83u85gfX6H4f16PfW
+ x6aUy7wGCmB21OPiavbT7Axh1+nTvHfkcpFHuqkA/yIKG/WPL59Jo0LDYCv0kYDdkBUzr8y9n/R
+ wjy/gHVXw17qL
+X-Google-Smtp-Source: AGHT+IHqqZ8uIaGOWRptjsx+TDZg6+RgXf9XvzRMX6AnjLkPyxFROPtY/rICACuj0BIeZsUb39LvZg==
+X-Received: by 2002:a05:6e02:12c6:b0:3dc:5be8:9695 with SMTP id
+ e9e14a558f8ab-3dc9b663fccmr154974635ab.3.1748435637854; 
+ Wed, 28 May 2025 05:33:57 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.53
+ 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 05:33:54 -0700 (PDT)
+ Wed, 28 May 2025 05:33:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
@@ -75,13 +75,11 @@ Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Bill Mills <bill.mills@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Andrew Phelps <andrew.phelps@canonical.com>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-Subject: [PATCH v5 20/25] passage: Add a qemu test for ARM
-Date: Wed, 28 May 2025 06:32:22 -0600
-Message-ID: <20250528123236.1138632-15-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>
+Subject: [PATCH v5 21/25] sandbox: Add a way of checking structs for standard
+ passage
+Date: Wed, 28 May 2025 06:32:23 -0600
+Message-ID: <20250528123236.1138632-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
 References: <20250528123236.1138632-1-sjg@chromium.org>
@@ -103,99 +101,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Check that the standard passage works on ARM, by setting it up in SPL
-and making sure that it comes through correctly in U-Boot proper.
+Add a file which can be used to check that structs used in standard
+passage do compile. No other validation is done at present, but could be
+considered later.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v5:
-- Enable the test for any board which uses OF_PASSAGE
+(no changes since v1)
 
-Changes in v3:
-- Add conditions to avoid enaling the test on qemu_arm_sbsa
-- Add support for a 64-bit test also
+ board/sandbox/Makefile        |  3 ++-
+ board/sandbox/stdpass_check.c | 34 ++++++++++++++++++++++++++++++++++
+ include/stdpass/README        |  4 ++++
+ 3 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 board/sandbox/stdpass_check.c
+ create mode 100644 include/stdpass/README
 
-Changes in v2:
-- Add a devicetree for qemu-arm so that qemu_arm_spl can work
-
- configs/qemu_arm64_spl_defconfig |  5 +++++
- configs/qemu_arm_spl_defconfig   |  6 ++++++
- test/py/tests/test_passage.py    | 11 +++++++++++
- 3 files changed, 22 insertions(+)
- create mode 100644 test/py/tests/test_passage.py
-
-diff --git a/configs/qemu_arm64_spl_defconfig b/configs/qemu_arm64_spl_defconfig
-index a9ed47c8d3b..60651f80938 100644
---- a/configs/qemu_arm64_spl_defconfig
-+++ b/configs/qemu_arm64_spl_defconfig
-@@ -33,6 +33,10 @@ CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_PCI_INIT_R=y
- CONFIG_BLOBLIST=y
-+CONFIG_BLOBLIST_PASSAGE=y
-+CONFIG_BLOBLIST_SIZE=0x4000
-+CONFIG_SPL_BLOBLIST_ALLOC=y
-+CONFIG_PASSAGE_IN=y
- CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
- CONFIG_SPL_NO_BSS_LIMIT=y
- # CONFIG_SPL_SEPARATE_BSS is not set
-@@ -47,6 +51,7 @@ CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_PASSAGE=y
- CONFIG_OF_BOARD=y
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_SPL_DM=y
-diff --git a/configs/qemu_arm_spl_defconfig b/configs/qemu_arm_spl_defconfig
-index 9c4408dc73c..cf8ac703577 100644
---- a/configs/qemu_arm_spl_defconfig
-+++ b/configs/qemu_arm_spl_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="qemu-arm"
- CONFIG_TARGET_QEMU_ARM_32BIT_SPL=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x9000
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x40200000
- CONFIG_DEBUG_UART_BASE=0x9000000
-@@ -34,6 +35,10 @@ CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_PCI_INIT_R=y
- CONFIG_BLOBLIST=y
-+CONFIG_BLOBLIST_PASSAGE=y
-+CONFIG_BLOBLIST_SIZE=0x4000
-+CONFIG_SPL_BLOBLIST_ALLOC=y
-+CONFIG_PASSAGE_IN=y
- CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_CMD_BOOTEFI_SELFTEST=y
-@@ -44,6 +49,7 @@ CONFIG_CMD_PCI=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_PASSAGE=y
- CONFIG_OF_BOARD=y
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_SPL_DM=y
-diff --git a/test/py/tests/test_passage.py b/test/py/tests/test_passage.py
+diff --git a/board/sandbox/Makefile b/board/sandbox/Makefile
+index 411b53c2b8d..d9b56adbbb8 100644
+--- a/board/sandbox/Makefile
++++ b/board/sandbox/Makefile
+@@ -2,4 +2,5 @@
+ #
+ # Copyright (c) 2011 The Chromium OS Authors.
+ 
+-obj-y	:= sandbox.o
++obj-y	+= sandbox.o
++obj-y	+= stdpass_check.o
+diff --git a/board/sandbox/stdpass_check.c b/board/sandbox/stdpass_check.c
 new file mode 100644
-index 00000000000..2cb3ddd253a
+index 00000000000..c8ddb635f57
 --- /dev/null
-+++ b/test/py/tests/test_passage.py
-@@ -0,0 +1,11 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright 2021 Google LLC
++++ b/board/sandbox/stdpass_check.c
+@@ -0,0 +1,34 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * This file compiles all the struct definitions for standard passage, to ensure
++ * there are no errors
++ *
++ * Copyright 2021 Google LLC
++ */
 +
-+import pytest
++/* BLOBLISTT_U_BOOT_SPL_HANDOFF */
++#include <handoff.h>
++void check_spl_handoff(void)
++{
++	__maybe_unused struct spl_handoff check;
++};
 +
-+@pytest.mark.buildconfigspec('of_passage')
-+def test_passage(ubman):
-+    """Test that the standard passage on ARM from SPL to U-Boot works."""
++/*
++ * See also doc/develop/std_passage.rst
++ *
++ * Instructions:
++ *
++ * 1. Add your header file to U-Boot, or to include/stdpass if it is not used in
++ * U-Boot
++ *
++ * 2. Add a function below to include the header and use the struct
++ *
++ * Template follows, see above for example
++ */
 +
-+    response = ubman.run_command('bdinfo')
-+    assert 'devicetree  = passage' in response
++/* BLOBLISTT_tag here */
++/* #include <stdpass/yourfile.h> if not used in U-Boot*/
++void check_struct_name(void)
++{
++	/* __maybe_unused struct struct_name check; */
++}
+diff --git a/include/stdpass/README b/include/stdpass/README
+new file mode 100644
+index 00000000000..a972121f40c
+--- /dev/null
++++ b/include/stdpass/README
+@@ -0,0 +1,4 @@
++This directory contains standard passage structures
++
++See doc/develop/std_passage.rst for instructions
++
 -- 
 2.43.0
 
