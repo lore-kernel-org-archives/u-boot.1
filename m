@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CAEC3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:37:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27943C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:37:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC4DD83A2F;
-	Wed, 28 May 2025 10:37:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 332B383A2B;
+	Wed, 28 May 2025 10:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b3mq60Zm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QaRkVHZq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 114F383A2D; Wed, 28 May 2025 10:37:18 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 1DDF583A32; Wed, 28 May 2025 10:37:19 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B741E83A24
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:37:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F9DE83A2A
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:37:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3a4c6c0a9c7so2977720f8f.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:37:15 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43ede096d73so32695035e9.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:37:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748421435; x=1749026235; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=IAGVq15LX9e/gSzeSMR1p4MaKXMTeiUiey6MLQFdYlo=;
- b=b3mq60Zmk4ZcHTHld03nyZegkTdr/HS4XDtn6wj2SfXORwYBTPFkU2drYFDlAuQEBR
- WElkmy0a/m+8tHk4rcHpVuA5qmDRAuBvBtE7sIK2tqqDHnf3vpSx4oi/9LeWGPzwK3Xt
- l/ctG4amPq6+RJzKZ1J4mWJgWwjR5LBXvYUZT29YVF0/QqiZK868Pezbz0TRdQ6gMIPZ
- Pwog7/3ITY0ThpKDBGzpSyeOxhLv218BtSyQAxsRsZ0E90AyIRp8t88gi031LJPct7O8
- dOLh8NSRjau2UD3tc2j/sprIR4WFmHy5JZToY870NPKoWcFBBaBn1CtE5JKsAUZbu4aH
- uR3A==
+ d=gmail.com; s=20230601; t=1748421436; x=1749026236; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MeKGR59ND8Ih5ewTSLxsrfERfONm9o/Pyl5+6kX5hiI=;
+ b=QaRkVHZq86QQH1jShPV/h/wXyCd6RrOAn5nh11mvkxw+M1UMXD4Nqkur4pUochwtkW
+ AiFw3QnqG7Qv9rqqLcW3wLscVazEi3w89Qbzt0IiceuvQgP+CYUnt4n/NHZkrUkxaM++
+ SB4AA+i4TGcvL41kOvrOrzbe1znSxaAhqJ7hpkVkFXQLvBYQ7u21Y6ocz6/StJyI1Qlp
+ xhHgFGT0Bs/VMvIND5BSNaAS9FKJieGYdqhEqkpFLPAjLZLjiptg/XlWRNY5XqPDlsna
+ SIaFIiqVvcHyaHrnwf/9lSxyWhnXPBLegXRd5C/7/t0jEQIB3CgX9AkXUx8nzPLifhI4
+ Q9XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748421435; x=1749026235;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IAGVq15LX9e/gSzeSMR1p4MaKXMTeiUiey6MLQFdYlo=;
- b=eCKUpu/fssFDcPEjr/j7613O/4Pce1dS0JqUICUxNRjGJb1BBZMjqjYSgCCqbwT8eb
- ktzC6bU9r8bzO9Fbnv1zea5HGJOyQguyrNRTeoIhHQsHv8k/AEA1Nfr28X/v0FnEfGH+
- y/LQ587UF05xc4nkf/vfPg/H+NYhTWfmbuyEagP9fKYqjVUboF6EEfGQIcBuzlUfpSfs
- oXejaOy7OXciRYCuJTVB9avpqvRss3arlNZG5cA3aMYxaMSyBPYIrqUepTIz8YrSRs59
- 92iFZ3fDCBsS/3sA5WHGBN/a1WjZ9biZmKRMtH5GvfkhwcOFj585DxPehAgDoPoh4P1b
- PNlw==
-X-Gm-Message-State: AOJu0Yw6ZfeHDVFUDg/chn11kVv2RcwQhPwrehPHjP6NTYWfya7jv/GL
- 5pOZ00A1pBuwWtNgVfbEWu8G3hHHDRbY7MOavrEz5oNTYaDBLgViUgHol/jSCEnpgWU=
-X-Gm-Gg: ASbGnctu3IY8oH5PTDxNb+vgHWKLdvhm6Y/vKS4/3+TnILdDoCvIF1tSe0fl/lOqdlU
- 0S5N6kWCJZUznlfPM85W7Iz/Ez8bKNQwASVPXjcOP8O51a+Cg8fntAsIVlpQT6D/rCZRcxqJ+SU
- Xxwm2GsnKc4EjSxtE20cXZ3VDaqEgAd3A8Roxh3IMFbZknRiN45PZ8wL0e2dGj279++lF7HAb66
- 1TKe52Vfo+Tz109BLj6Isb6fTICpPLmzAGkQWSBwq7MgXkKv2M1Vd46IP2/uGdC/THJ1WZZH6iv
- 0RY69lLDJJAwzUSiBATgZYhlLB+QGiZ7iVQEn/JqMpXVBkzQaM79MiggxefPSIg6pUpLVBLzjsN
- QCBrzP8eglBXCrSDx/WTxPclFS3E=
-X-Google-Smtp-Source: AGHT+IHyRXePU3J/tazxrGb4fIJ5TXDQx6YbHrstyWwuhABIDEYMLx2U3oBKgyr+/WLMdgn6BXwF3Q==
-X-Received: by 2002:a05:6000:2dc4:b0:3a4:e841:b236 with SMTP id
- ffacd0b85a97d-3a4e841b2c1mr1521616f8f.33.1748421434936; 
- Wed, 28 May 2025 01:37:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748421436; x=1749026236;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MeKGR59ND8Ih5ewTSLxsrfERfONm9o/Pyl5+6kX5hiI=;
+ b=eQ0jDMs6ocFrOct7zyG0vUyyIsmOrrhteHJdbZK89iiJUmFRIsXLAvXr/DOVsJ7vZI
+ BE/7z6u9J1yT6vvFKDqSuW4bD8Uh0/oVOVTxODA6vQ9X0LGOaQzZK1YLkEy/000WePpk
+ Qzn78Z771kioYfeZ4k75jyxfjsxe+3qIrwDkZwcuMJknSznnmhiE1kIyWKojF9rLBMn9
+ HBZMyMnEWKBluoFQmiQXuoBaMaVROGcbKIQwTt0wbt4Y3LfSBvLB4eCh/G4HkAlnHEwt
+ PBfdk1UcMWOyNqZ6qUpqWoqrbpe97SXdE5h4Kn64dWIxA2UzCaFvJy+fpXxgpEjrIcRL
+ Jldw==
+X-Gm-Message-State: AOJu0YyKkfQgWqhEsS5BGR5rLLspMajNurJAntLAvXkpDYYqKVVFUFtc
+ YNv4HntxokAG0+Yd9h7sHjVu/bikBsVSGWQm8xq0NlNKI/fVrRoZGwNaAeshyMX8kho=
+X-Gm-Gg: ASbGnctNyubFxX80K4rsuvl/RGaWjKB0DEddojK6LpUM4ENvYG6jH06/AWU56Z7I0dO
+ mPJTUsJV9xNlYFnXQwfomsIXFBttuyt+iKkF70VyIMmAqPqaZlpBkCZBkF7oI5/3apGAi0kYPTr
+ 0SnXhnkpDykWRnskNSLfsCeNXHRwu42FHHwfLhMsC3x9tuMJEtxZ4tI6PBiS8c1gM/f9p3QoO7f
+ igrKttmg6hAauQKBmGJo7R5Ayissqo7oUT1SZ5l4Oi2oMaXuXBx21m5DocVnkSvSvuaZlTyN6a0
+ wVmQZU0A1obPrcWjEbf/L69DCTragUgz0+7LkdkUBqD9DGudZ2vU+f+Azpx/yBU5UlCY7z+EYdf
+ +q+Xg0mLU/ofsPXWXEhRNNHg+k/4=
+X-Google-Smtp-Source: AGHT+IF1vkyC6q1CNIwCzlG5hegHFxtXR7+aH4xvAYSFk/EP9OFOZc1pBbcJ7gGeW7b/6pdJqwXNRw==
+X-Received: by 2002:a05:6000:248a:b0:3a4:dd16:a26d with SMTP id
+ ffacd0b85a97d-3a4dd16a2e9mr8732305f8f.38.1748421436344; 
+ Wed, 28 May 2025 01:37:16 -0700 (PDT)
 Received: from adriano.. (15.red-79-153-17.dynamicip.rima-tde.net.
  [79.153.17.15]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4eac6eb45sm857130f8f.12.2025.05.28.01.37.13
+ ffacd0b85a97d-3a4eac6eb45sm857130f8f.12.2025.05.28.01.37.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:37:14 -0700 (PDT)
+ Wed, 28 May 2025 01:37:15 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  trini@konsulko.com, jerome.forissier@linaro.org, rfried.dev@gmail.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v2 0/9] efi_loader/net: spit protocols and add testing
-Date: Wed, 28 May 2025 04:38:12 -0400
-Message-ID: <20250528083821.567514-1-adriano.cordova@canonical.com>
+Subject: [PATCH v2 1/9] lib/efi_loader: Move EFI network files into
+ /lib/efi_loader/net/
+Date: Wed, 28 May 2025 04:38:13 -0400
+Message-ID: <20250528083821.567514-2-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250528083821.567514-1-adriano.cordova@canonical.com>
+References: <20250528083821.567514-1-adriano.cordova@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,67 +101,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series depends on series 457127 "test/py: enable HTTP testing".
+Created /lib/efi_loader/net/ and moved efi_net.c, efi_http.c, and
+efi_ipconfig.c into it. Previously, efi_net.c contained implementations
+for all supported EFI network protocols, which made the file bloated
+and hard to maintain.
 
-Create lib/efi_loader/net/, implement each EFI network protocol in a
-separated file under lib/efi_loader/net/ and let efi_net.c be used only
-to un/install protocols. The network protocol EFI_FOO_PROTOCOL is now
-implemented in lib/efi_loader/net/efi_foo.c.
+Now, each protocol has its own file under net/. efi_net.c is responsible
+only for installing and uninstalling these protocols on EFI network
+devices.
 
-Add an app netdump.efi used to test the EFI_HTTP_PROTOCOL and the
-EFI_IP4_CONFIG2_PROTOCOL.
-
-Add tests test_efi_httpprotocol_net_* in test_efi_loader.py to test
-the EFI_HTTP_PROTOCOL in the CI using netdump.efi. A branch of
-u-boot-test-hooks with the necessay env variables can be found at
-https://github.com/0n41rd4/u-boot-test-hooks.git.
-
-U-Boot branch with this series on top of
-457127 "test/py: enable HTTP testing" and next:
-https://github.com/0n41rd4/u-boot.git
-
-Changes in v2:
-  - patch 2/9: free protocol interfaces if protocol installation fails
-  - patch 4/9: free protocol interfaces and close events if installation
-               fails.
-
-Adriano Cordova (9):
-  lib/efi_loader: Move EFI network files into /lib/efi_loader/net/
-  efi_loader/net: Remove http and ip4_config2 data from efi_net.c
-  efi_loader/net: Rename efi_ipconfig.c to efi_ip4_config2.c
-  efi_loader/net: Remove simple network and pxe protocols from efi_net.c
-  efi_loader/net: Remove efi_net_obj struct
-  net/eth-uclass: Add eth_get_ethaddr_from_dev
-  efi_loader/net/ip4_config2: Add support for multiple instances
-  efi_loader: Add netdump efi app
-  pytests/test_efi_loader: Test EFI_HTTP_PROTOCOL
-
- doc/api/efi.rst                               |    2 +-
- include/efi_api.h                             |   28 +-
- include/efi_loader.h                          |   16 +-
- include/net-common.h                          |    1 +
- lib/efi_loader/Makefile                       |    5 +-
- lib/efi_loader/efi_net.c                      | 1716 -----------------
- lib/efi_loader/net/Makefile                   |    5 +
- lib/efi_loader/{ => net}/efi_http.c           |   24 +-
- .../{efi_ipconfig.c => net/efi_ip4_config2.c} |   88 +-
- lib/efi_loader/net/efi_net.c                  |  750 +++++++
- lib/efi_loader/net/efi_pxe.c                  |  190 ++
- lib/efi_loader/net/efi_simple_network.c       |  889 +++++++++
- lib/efi_loader/netdump.c                      |  851 ++++++++
- lib/efi_selftest/efi_selftest_snp.c           |    4 +-
- net/eth-uclass.c                              |   11 +-
- test/py/tests/test_efi_loader.py              |   63 +
- 16 files changed, 2859 insertions(+), 1784 deletions(-)
- delete mode 100644 lib/efi_loader/efi_net.c
+Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+---
+ doc/api/efi.rst                         | 2 +-
+ lib/efi_loader/Makefile                 | 4 +---
+ lib/efi_loader/net/Makefile             | 3 +++
+ lib/efi_loader/{ => net}/efi_http.c     | 0
+ lib/efi_loader/{ => net}/efi_ipconfig.c | 0
+ lib/efi_loader/{ => net}/efi_net.c      | 0
+ 6 files changed, 5 insertions(+), 4 deletions(-)
  create mode 100644 lib/efi_loader/net/Makefile
- rename lib/efi_loader/{ => net}/efi_http.c (96%)
- rename lib/efi_loader/{efi_ipconfig.c => net/efi_ip4_config2.c} (69%)
- create mode 100644 lib/efi_loader/net/efi_net.c
- create mode 100644 lib/efi_loader/net/efi_pxe.c
- create mode 100644 lib/efi_loader/net/efi_simple_network.c
- create mode 100644 lib/efi_loader/netdump.c
+ rename lib/efi_loader/{ => net}/efi_http.c (100%)
+ rename lib/efi_loader/{ => net}/efi_ipconfig.c (100%)
+ rename lib/efi_loader/{ => net}/efi_net.c (100%)
 
+diff --git a/doc/api/efi.rst b/doc/api/efi.rst
+index a98298f93dc..c123056b58a 100644
+--- a/doc/api/efi.rst
++++ b/doc/api/efi.rst
+@@ -145,7 +145,7 @@ RAM disk. U-Boot can be configured to provide an implementation.
+ Network protocols
+ ~~~~~~~~~~~~~~~~~
+ 
+-.. kernel-doc:: lib/efi_loader/efi_net.c
++.. kernel-doc:: lib/efi_loader/net/efi_net.c
+    :internal:
+ 
+ Random number generator protocol
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index cf050e5385d..92c6822bc13 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -59,9 +59,7 @@ obj-y += efi_watchdog.o
+ obj-$(CONFIG_EFI_ESRT) += efi_esrt.o
+ obj-$(CONFIG_VIDEO) += efi_gop.o
+ obj-$(CONFIG_BLK) += efi_disk.o
+-obj-$(CONFIG_NETDEVICES) += efi_net.o
+-obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ipconfig.o
+-obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
++obj-$(CONFIG_NETDEVICES) += net/
+ obj-$(CONFIG_ACPI) += efi_acpi.o
+ obj-$(CONFIG_SMBIOS) += efi_smbios.o
+ obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
+diff --git a/lib/efi_loader/net/Makefile b/lib/efi_loader/net/Makefile
+new file mode 100644
+index 00000000000..ab41f358de9
+--- /dev/null
++++ b/lib/efi_loader/net/Makefile
+@@ -0,0 +1,3 @@
++obj-y += efi_net.o
++obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ipconfig.o
++obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
+\ No newline at end of file
+diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/net/efi_http.c
+similarity index 100%
+rename from lib/efi_loader/efi_http.c
+rename to lib/efi_loader/net/efi_http.c
+diff --git a/lib/efi_loader/efi_ipconfig.c b/lib/efi_loader/net/efi_ipconfig.c
+similarity index 100%
+rename from lib/efi_loader/efi_ipconfig.c
+rename to lib/efi_loader/net/efi_ipconfig.c
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/net/efi_net.c
+similarity index 100%
+rename from lib/efi_loader/efi_net.c
+rename to lib/efi_loader/net/efi_net.c
 -- 
 2.48.1
 
