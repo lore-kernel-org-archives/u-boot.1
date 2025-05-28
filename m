@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE58DC5AE59
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:26:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94A64C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:26:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7FAE83971;
-	Wed, 28 May 2025 10:25:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D9938395B;
+	Wed, 28 May 2025 10:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gFCe6lLD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lWCxGXSW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDC4383970; Wed, 28 May 2025 10:25:52 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 09AFB83956; Wed, 28 May 2025 10:25:54 +0200 (CEST)
+Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
+ [IPv6:2607:f8b0:4864:20::343])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9D4583956
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:25:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1BFB8396E
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:25:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3dd898a16bbso4696445ab.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:25:50 -0700 (PDT)
+Received: by mail-ot1-x343.google.com with SMTP id
+ 46e09a7af769-734f2ddb868so2489883a34.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:25:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748420749; x=1749025549; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wLkapK2Jl8rIxxTwUp5feMBZHIk55fVKYxstBOA9Yrk=;
- b=gFCe6lLDsA8pthVhk4oGCFO5naEqSvJiWopDcxi3j9soeKvFKXR6pvaqXBU3MRrfbP
- kWtGesMZUqdjh39maFCFz4oqLE6cPv7e+zpIuJvnCznW9PT8fImRxJATdbUC+I19PFnl
- t4Xju/qATHt8p9McazXR8ko6A8Zq0Dmzu9cms=
+ d=chromium.org; s=google; t=1748420750; x=1749025550; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1bmI9BgoApRwr0z42n5rbLU5hCktNBe13PmM4VL8uss=;
+ b=lWCxGXSWVW0sRHRU9dLC9fJBEnbqPXy9BjcZYQevzAmbbxvJydAavW5kcpkbe6qtQ2
+ IkQVZjycHEylaEZD6oxObv+elk6oZvjBYWobfMdCTyc23feV0y26XsTp/AKF6Qjhx+fY
+ UGr1012bNjU3TKqLCb1taBhJ79mJi3uXzrIGU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748420749; x=1749025549;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wLkapK2Jl8rIxxTwUp5feMBZHIk55fVKYxstBOA9Yrk=;
- b=Bibq6aBDS4E8bdhv0QUcEmeXp3yFiRKD04BOO4jFpeqFTCBgvLR7z4ogCcS9c/RYIv
- f51YGGqOC+OgDbcuWkNNMgSy++a9b1n0cWSU/UnOMBWFnc3qmMzHEySbMKdYa1KHE4Ct
- VSSzeXsuk0mJsP0V1m1jYBxLhOiqF7bhKzPqzMxhSpRide/xpK0DHQ4SJTmypbHSHJ+6
- nJVj47guvzBxaXy6akR1XpPaXqNJ1ERv2JTJFZvFdaRaPramaoD8VJ2eJm/vM7SC6LuJ
- erCY4zMrAX6MgxofXilfVY9iJbUavLl8vCnNnXZK3282OS3w8lF3HuMrVD/lPMB6FwYh
- C3eQ==
-X-Gm-Message-State: AOJu0YxUa6OHLmYcRwYHLus1KFWXiOqRqgBzVMYAiZLq5S0Jkop9S1a0
- xWZSJ59LlNd8vLhDS0adUk2T6jeJ/Hd8t0SY2MpbZSHMUVA03Lfh5kq4D2BQSJGcLLloSCJ4Tia
- 8p9XZCwr9
-X-Gm-Gg: ASbGnct4HDN3SpW+SGjuRtB25biHu2ZUuxpIcvgX2fWHpKZ/Fq3k+6CX0KglsIA91SS
- yxobkBtnq6sJfJP/yQutX7TG7Q84tG83HOJ4q2O+un9GJA9sfzmRGT+sHBFyP5M9t67dX7F87nV
- ky1sX2euEiJAjb1ftOxRB1bCBXlKUMgqgIybPiAhi6Z1crZp0lm+xuDlUkBTE2a/a2BvTNJprQV
- 8ubomIJAV/jUmhAEaQQBDVwGLEvUCpm1b3l5h8U/WopLgTqsSpcS9WzjHRsqJ1SUTlEAIuQuRVe
- faqjG/e1zgex23T2TPJSdMHc7ReTuq/Bvaj42sLO1xHhcGe8A6APMnlcAm4pqwQMCcJVr7p9L+n
- 5FuoittOTC4bW
-X-Google-Smtp-Source: AGHT+IGaEmZGcJiLW/C1DMLTxQNUkRt1ojgUsYkMBe7/2UkSb/vV3uOPJeCPEMenWNTkOdWpP6NWrg==
-X-Received: by 2002:a05:6e02:144d:b0:3d5:8923:faa5 with SMTP id
- e9e14a558f8ab-3dc9b6aa36dmr127094345ab.10.1748420748766; 
- Wed, 28 May 2025 01:25:48 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748420750; x=1749025550;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1bmI9BgoApRwr0z42n5rbLU5hCktNBe13PmM4VL8uss=;
+ b=Kh0PpYZKhYxMSvZm6htkPGdLQsqpjhGC/MwC52NQTBzR5lb2GiXDztLKuW6I2gffBd
+ 3X1xpB7m5xPgwLphKCVTjEODbs1UOMTwUA5pV4pc2aike7TYYIti/OLAy6uWRqhW4GGo
+ FV+yMjov6pMF+w2H+kdspt4/Wrz4fqXEBn/3SuMNCbB7SItLESP2mDgSAOknXEfzVgx1
+ Xd9+UAU5DOZHouegs4ERT7XWS3wUwqkMBhg9wdfbyFclcHLHPEEgVLZtD/W0FYXGKNSn
+ rt3yIj+FRxdvhZA7LbicgGm+T7jbcNWJ0M3hG6nYifteFYC9AsAUSsUQr0EgDRBG5gQA
+ E0gA==
+X-Gm-Message-State: AOJu0YwUf8kiJDQqrRODZSRr8M4oEDBCmbBaEOEa2BRtwRDxNfWsp2Lb
+ oWdXNh0N6cHLvDGJE82v6V27M0NtkFLGWQbP2KGsmoLauLb4vCrFLs4v3aIAA4q8ZJMKiUoMT8C
+ 0RcewUNy9NSM=
+X-Gm-Gg: ASbGncvNa1mbki4qzRMHtcuiS65UOcZb196O8SbTuNjUJP2ztoXTfAKUlycdSApJ8Dk
+ emEnIXR7NGMSehvQP3EqzjtOfffw0a5Urn0T9irNNXTdbBGTz0l4MSozxB+TK6cOBbXcGfqmcJm
+ ovA/h+NgnXE8dWbNue9NdjFUlBbB3/XHrqrFwHgB/O4KM763Mhwt62As+MhqFHMiGhFgWGPkNoc
+ PcnTXcd58l0CilkM7nGbj61DAH0J2P/GW5Sow3CPLMV7P4lqaKAZRGj1tLTFumnvf3knT4O2BHn
+ sbc5LTjCzZztYac5S5JG+J3Usi0/mn2IlUBlBoefnz9d1xoihSAg1H1GgHRnnJ2EPGjvLc9TfuU
+ zU8EkLiZhkBPp
+X-Google-Smtp-Source: AGHT+IFpNRHMlJ3n480Cy1mVkFzKUvfLD/pCayZeduGokoxJL5CYcf0maJdrJV4yWxoY6rgQ8UaLHw==
+X-Received: by 2002:a05:6e02:3e04:b0:3d8:1dc7:ca7a with SMTP id
+ e9e14a558f8ab-3dd8b00b4d6mr9390275ab.5.1748420738972; 
+ Wed, 28 May 2025 01:25:38 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.25.47
+ e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.25.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:25:47 -0700 (PDT)
+ Wed, 28 May 2025 01:25:37 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>,
+ This contributor prefers not to receive mails <noreply@example.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/27] scripts: Update build-efi to support booting an OS
-Date: Wed, 28 May 2025 02:24:30 -0600
-Message-ID: <20250528082520.152391-5-sjg@chromium.org>
+Subject: [PATCH 00/27] x86: efi: Various app improvements to support bootstd
+Date: Wed, 28 May 2025 02:24:26 -0600
+Message-ID: <20250528082520.152391-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250528082520.152391-1-sjg@chromium.org>
-References: <20250528082520.152391-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,103 +101,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bring this script into line with build-qemu so an OS and release can be
-specified. As with that script, only Ubuntu is supported for now.
+This series makes a number of improvements to the EFI app. Mostly it
+applies to x86 but the ARM version will share some improvements.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+The main updates are:
+- Improve linker scripts and options to detect missing symbols and
+  remove unused code
+- Enable bootstd and provide a default which can find an extlinux OS on
+  EFI media
+- Make the 32/64-bit apps more similar in terms of features and link
+  script
 
- scripts/build-efi | 29 ++++++++++++++++++++++++++++-
- 1 file changed, 28 insertions(+), 1 deletion(-)
 
-diff --git a/scripts/build-efi b/scripts/build-efi
-index 4f0457e973c..fb6575a89a6 100755
---- a/scripts/build-efi
-+++ b/scripts/build-efi
-@@ -17,6 +17,7 @@ Use ~/.build-efi to configure the various paths used by this script.
- 
- from argparse import ArgumentParser
- import os
-+from pathlib import Path
- import shutil
- 
- from build_helper import Helper
-@@ -47,12 +48,17 @@ def parse_args():
-                         help='Add a kernel')
-     parser.add_argument('-O', '--old', action='store_true',
-                         help='Use old EFI app build (before 32/64 split)')
-+    parser.add_argument('-o', '--os', metavar='NAME', choices=['ubuntu'],
-+                        help='Run a specified Operating System')
-     parser.add_argument('-p', '--payload', action='store_true',
-                         help='Package up the payload')
-     parser.add_argument('-P', '--partition', action='store_true',
-                         help='Create a partition table')
-     parser.add_argument('-r', '--run', action='store_true',
-                         help='Run QEMU with the image')
-+    parser.add_argument(
-+        '-R', '--release', default='24.04.1',
-+        help='Select OS release version (e.g, 24.04) Default: 24.04.1')
-     parser.add_argument('-s', '--serial', action='store_true',
-                         help='Run QEMU with serial only (no display)')
-     parser.add_argument('-w', '--word', action='store_true',
-@@ -73,6 +79,7 @@ class BuildEfi:
-         self.img = self.helper.get_setting('efi_image_file', 'efi.img')
-         self.build_dir = self.helper.get_setting("build_dir", '/tmp')
-         self.args = args
-+        self.imagedir = Path(self.helper.get_setting('image_dir', '~/dev'))
- 
-     def run_qemu(self, bitness, serial_only):
-         """Run QEMU
-@@ -84,6 +91,7 @@ class BuildEfi:
-         extra = []
-         efi_dir = self.helper.get_setting('efi_dir')
-         if self.args.arm:
-+            os_arch = 'arm64'
-             qemu_arch = 'aarch64'
-             extra += ['--machine', 'virt', '-cpu', 'max']
-             bios = os.path.join(efi_dir, 'OVMF-pure-efi.aarch64.fd.64m')
-@@ -99,9 +107,11 @@ class BuildEfi:
-             if bitness == 64:
-                 qemu_arch = 'x86_64'
-                 bios = 'OVMF-pure-efi.x64.fd'
-+                os_arch = 'amd64'
-             else:
-                 qemu_arch = 'i386'
-                 bios = 'OVMF-pure-efi.i386.fd'
-+                os_arch = 'i386'
-             extra += ['-bios', os.path.join(efi_dir, bios)]
-             extra += ['-drive', f'id=disk,file={self.img},if=none,format=raw']
-             extra += ['-device', 'ahci,id=ahci']
-@@ -118,11 +128,28 @@ class BuildEfi:
-         if self.args.kvm:
-             extra.extend(['-enable-kvm', '-cpu', 'host'])
- 
-+        os_path = None
-+        if self.args.os == 'ubuntu':
-+            img_name = f'{self.args.os}-{self.args.release}-desktop-{os_arch}.iso'
-+            os_path = self.imagedir / self.args.os / img_name
-+            if not os_path.exists():
-+                tout.error(f'OS image {os_path} specified but not found')
-+            else:
-+                extra.extend([
-+                    '-drive',
-+                    f'if=virtio,file={os_path},format=raw,id=hd0,readonly=on'])
-+
-         print(f'Running {qemu}{serial_msg}')
- 
-         # Use 512MB since U-Boot EFI likes to have 256MB to play with
-+        if self.args.os:
-+            mem = '4G'
-+            extra.extend(['-smp', '4'])
-+        else:
-+            mem = '512'
-+
-         cmd = [qemu]
--        cmd += '-m', '512'
-+        cmd += '-m', mem
-         cmd += '-nic', 'none'
-         cmd += extra
-         command.run(*cmd)
+Simon Glass (27):
+  scripts: Tidy up build-qemu a little
+  scripts: Change -k and -o options
+  scripts: Update build-efi to support kvm
+  scripts: Update build-efi to support booting an OS
+  scripts: Update build-efi to allow showing the QEMU cmdline
+  scripts: Update build-efi to support passing a root disk
+  scripts: Update build-efi to support debugging with QEMU
+  scripts: Update build-efi to allow firmware settings
+  bootstd: Tidy up help for boot flags
+  bootstd: Provide an option to scan any partition
+  vbe: Avoid accessing TEXT_BASE if undefined
+  efi: Use the correct driver for TPM
+  efi: Allow disabling networking in the app
+  efi: Rename the media device
+  efi: Allow disabling the TPM in the app
+  efi: doc: Use inline links for EFI app documentation
+  efi: Add a bootdev for EFI media
+  efi: Provide an easy way to debug with gdb
+  x86: efi: Sync up the two link scripts somewhat
+  x86: efi: Tidy up the link scripts
+  x86: efi: Add a few dummy functions
+  x86: efi: Avoid calling arch_setup_gd() from jump_to_copy()
+  x86: efi: Drop relocate and physmem
+  x86: efi: Enable --gc-sections to drop unused code
+  x86: efi: Drop some unused options
+  x86: efi: Enable bootstd
+  x86: efi: Add various useful options
+
+ arch/x86/config.mk                 |  2 +-
+ arch/x86/lib/Makefile              |  3 ++
+ arch/x86/lib/elf_ia32_efi.lds      | 29 ++++++------
+ arch/x86/lib/elf_x86_64_efi.lds    | 30 +++++-------
+ boot/vbe_common.c                  |  2 +-
+ cmd/bootflow.c                     | 10 +++-
+ common/board_f.c                   |  2 +-
+ configs/efi-x86_app32_defconfig    | 26 +++++------
+ configs/efi-x86_app64_defconfig    | 24 ++++------
+ doc/develop/uefi/u-boot_on_efi.rst | 48 +++++++++++++++++---
+ doc/usage/cmd/bootflow.rst         | 15 +++---
+ drivers/block/efi-media-uclass.c   |  2 +-
+ drivers/block/efi_blk.c            | 30 ++++++++++++
+ lib/efi_client/Kconfig             | 12 ++++-
+ lib/efi_client/efi.c               | 36 +++++++++++++++
+ lib/efi_client/efi_app.c           | 10 ++++
+ lib/efi_client/efi_app_init.c      | 18 +++++---
+ scripts/build-efi                  | 73 +++++++++++++++++++++++++++---
+ scripts/build-qemu                 | 20 ++++----
+ 19 files changed, 292 insertions(+), 100 deletions(-)
+
 -- 
 2.43.0
 
+base-commit: 42c99ae5bebcecc7b734865c8077c4bf9275e78a
+branch: appc
