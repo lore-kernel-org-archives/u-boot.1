@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 611F9C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:30:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11C6CC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:30:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD72C839F3;
-	Wed, 28 May 2025 10:26:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5CCB283A22;
+	Wed, 28 May 2025 10:26:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XdKXoGzd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oWxP8AUh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1200783966; Wed, 28 May 2025 10:26:50 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id D48FE83A1F; Wed, 28 May 2025 10:26:51 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25D8F83A1C
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0654683A26
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-86cdb330b48so142478139f.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:44 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3d817bc6eb0so22015785ab.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748420802; x=1749025602; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748420805; x=1749025605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c6g/Yn7pXjN5nDbjWAg290Y3bL13aOpFZF/lmG0U1Mc=;
- b=XdKXoGzdDvgLK1V609lcVsBZQEi/dmhkSbG68Tcm+J9WuXlnd/DCcmHDotP7EE1YE8
- R/fDFPN92ncZVETTk5s4yLMZAiYjhqQ5vEZu0Ssotvfh4WoodXwmmEMub3J0lA3b3M4z
- ekZiNR/XiNnd5sYxbdLhSPPgZZgcjS63Y1JGE=
+ bh=KYcAAYcVH3TI5QjbQGVFeF0odLs4Oh3qP0NeUOiwT4o=;
+ b=oWxP8AUhQZyN6DHVP4JBbW5ZlFKLE7hGJGIUbg4Lu2Lplwu5D2PHlK6l2bm/CAbcH0
+ R+imXN0UGawezUMU9UaYGzobNUtSakgJcT25KgzrB9u/gzbN5o04ekKwA4lgl1NViKEu
+ 3GXLatO6fU+gGkuYMUeyJ9DbeKY25duTY1Zqo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748420802; x=1749025602;
+ d=1e100.net; s=20230601; t=1748420805; x=1749025605;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c6g/Yn7pXjN5nDbjWAg290Y3bL13aOpFZF/lmG0U1Mc=;
- b=oyXQDpPdBoet32JNJvuxg2+oQb94fIRliaiSz++Suxuwl/9hQ+6VzupBOBqjU/qnws
- FdatiLRvO1qKruN9bw4wil9DBgQISr23cDWXeCV31KqmVct4jc+MxkseFfl5vmy9otRj
- Qug/84OW/CBDi111ySm2lTSdWrKhhrRccwb2VGrdUT3MPi4Q/wg61gl2COuNn/7M6d9r
- iDCZDvFZDU08D3Bxb7bBwAtbTK2ab68evsaNKd+jTwYBq5S8YOgqnxFuwlTby+HqxeST
- iNW/ZXWZIiIm6MFDT8HD3QIR29WCsFhI+qGVxa84IQaJvZc6y2pNzI0chZ7TERx9lEva
- TlcQ==
-X-Gm-Message-State: AOJu0YyxvVNDcvO9t98pcAYglv9AOwt0f6sIZzOrbU2D8rpsg1SIUjM1
- Z21iujdF8JEzM96p8nFZNjxuEDm97f6A+aW4LZ7judQ5MbZjY0R8FQ03VBxHgI59IJX7WMwoH5I
- 2u5VwNkqD
-X-Gm-Gg: ASbGnctuDX4ylfwPVCx0eWYp9ZfmFp/G9fRy509E34YuIo9/ktBBqeYDxfEL3LEpOlH
- ZWFXUuf98XWxjKINfdwiLU8fgjB2m4XQMWbQc7M4GmsFV70OLY2/NnDk3xXdwP4Qzsduo66PVfX
- G+jpsknTCNotItOoEjhIVd6dWhnKUqjqL4RQONLiVqPqv28yNnaxRssgeCRXspGB/xroTEpaESo
- iYJEHve/xU1IZOmNTkXlsN2r1b/9nNJIANIpYkxkG4ilKY1XMBUuJ34+TVpRukpqS9/ZbKwQf9j
- ljFwiaunm3Vmm66lL9d0F5+2F5N/NJ+j9K4CI4x/5kPoIwD1Ff4IRgxQHxelWrclPCKI/HTaYL8
- 3DvK23998XC2n
-X-Google-Smtp-Source: AGHT+IHw4YAli+WD2AbfOK6IBDhyvSqHKEbXTn3KOOeg15dCU/6cq5E94ApkEiULz/+gXjvAh9xOcw==
-X-Received: by 2002:a05:6e02:8a:b0:3dc:8058:8e9d with SMTP id
- e9e14a558f8ab-3dd8b070d57mr11728425ab.20.1748420802337; 
- Wed, 28 May 2025 01:26:42 -0700 (PDT)
+ bh=KYcAAYcVH3TI5QjbQGVFeF0odLs4Oh3qP0NeUOiwT4o=;
+ b=ovY5gKz9PXWI0FVeML8VIvQrrhyYEUz2nWQ9e011n0Es5c2s/quaoZ2v2Us8HokxAU
+ OMcYBh1XCui6XJ99PedsfKs+BBgHubMNrDrs+ULYWqzX97YMDX+aziEveJ0p1sWpwFsc
+ CISSetAxDShkvkxqTT2E4ecctuMgX7eD40mqwzqfLbfXkn6tIqgXWq4FVPtPN4HyHePW
+ z1I31zxzunKmkRTzJeZAq9hCas2Del36K1Ay6ssRNOTDHiF8d4WUDx4bIVisROrLk4DD
+ 0t4iRQ2WydZJH2o5+UbMLcU4ClZGq/Gy7RNqsmsu1SI/HumHLjJ7zyy45iNvYPNT3T+W
+ Eilg==
+X-Gm-Message-State: AOJu0Yw5Cq5c8YnmzOScmxNxCpQ2X3+2BANdIaz/OuHY71twgPJZAtP3
+ TktiU3yfLovYzSWdab7LsaLT+w2I33eA8I9TzCqOLBVrUa9D6N6rm8TGfjg8Ind+46qOB7a1t+c
+ nM/ARpXED
+X-Gm-Gg: ASbGnctP9iA3DP/jUucIhjwfC6JMX9VnG7ZVbpOWcZA8sQirU3r4eorldvp2ed0eiIM
+ B/rViQROIssSGIcc0dujAacv2PjuGl5yVKYaZ9EALUKtW3iKfgErTSNhxxxitkh/FAZzl83hy4p
+ gYOUre8GsHtv22TPKP2UaI8l3wdmzX8KnvbPP9gKGiF26sRyNeww+mltYAOqZGNhUOYXCfKIBnx
+ OqEcieuSVW5zk9cWCF9AzYoDAMVk8Dfqlqitjnj63oY2f72j4z/2AkJ/r6CB51o6hjxZVg7WWmE
+ S8tei4jElWPyvh6nzF/dH5C9zA44b1J93CBjhEk1lJnIKwelTxJj/NHyiAX0ssHo8AyJbiEFO7Z
+ bGXtA+hsRPX27Ac+iSpGVois=
+X-Google-Smtp-Source: AGHT+IF2H6Bc0h1Ykxa5OKC4D0IxqrZ+pWhlX6n2vWZS2D7XxEaY8mtHTvWpl26dJ5qeMafGdmQPAQ==
+X-Received: by 2002:a05:6e02:4505:b0:3dd:792d:ce42 with SMTP id
+ e9e14a558f8ab-3dd792dd094mr67490935ab.0.1748420805231; 
+ Wed, 28 May 2025 01:26:45 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.39
+ e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:26:40 -0700 (PDT)
+ Wed, 28 May 2025 01:26:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 26/27] x86: efi: Enable bootstd
-Date: Wed, 28 May 2025 02:24:52 -0600
-Message-ID: <20250528082520.152391-27-sjg@chromium.org>
+Subject: [PATCH 27/27] x86: efi: Add various useful options
+Date: Wed, 28 May 2025 02:24:53 -0600
+Message-ID: <20250528082520.152391-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528082520.152391-1-sjg@chromium.org>
 References: <20250528082520.152391-1-sjg@chromium.org>
@@ -97,89 +97,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use bootstd for booting. Add the -p option since we may wish to boot
-from an extlinux file even if a EFI partition is present.
+Enable logging, TPM and the lsblk and cat commands. These are all useful
+for using and debugging the EFI app.
 
-Disable the bootz command since this is not applicable for x86 and
-causes bootstd to attempt it anyway.
+For the 32-bit app, enable CONFIG_BOARD_EARLY_INIT_R so that the EFI
+devices are scanned.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- configs/efi-x86_app32_defconfig | 15 ++-------------
- configs/efi-x86_app64_defconfig | 14 ++------------
- 2 files changed, 4 insertions(+), 25 deletions(-)
+ configs/efi-x86_app32_defconfig | 9 +++++++++
+ configs/efi-x86_app64_defconfig | 6 ++++++
+ 2 files changed, 15 insertions(+)
 
 diff --git a/configs/efi-x86_app32_defconfig b/configs/efi-x86_app32_defconfig
-index 2a7d6c9916e..2848dac905b 100644
+index 2848dac905b..de97cb64ce7 100644
 --- a/configs/efi-x86_app32_defconfig
 +++ b/configs/efi-x86_app32_defconfig
-@@ -10,28 +10,17 @@ CONFIG_DEBUG_UART=y
- CONFIG_TARGET_EFI_X86_APP32=y
- CONFIG_EFI_CLIENT=y
- CONFIG_FIT=y
--# CONFIG_BOOTSTD is not set
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_SHOW_BOOT_PROGRESS=y
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="ext2load scsi 0:3 01000000 /boot/vmlinuz; zboot 01000000"
-+CONFIG_BOOTCOMMAND="bootflow scan -lbp"
+@@ -17,7 +17,11 @@ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
+ CONFIG_BOOTCOMMAND="bootflow scan -lbp"
  CONFIG_SYS_PBSIZE=532
  CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_LOG=y
  CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_HUSH_PARSER=y
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_PART=y
--# CONFIG_CMD_SCSI is not set
++CONFIG_BOARD_EARLY_INIT_R=y
++CONFIG_CMD_LSBLK=y
++CONFIG_CMD_CAT=y
  CONFIG_CMD_TIME=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
  CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
  CONFIG_MAC_PARTITION=y
--CONFIG_ISO_PARTITION=y
--CONFIG_EFI_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
+@@ -29,4 +33,9 @@ CONFIG_NO_NET=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ # CONFIG_SCSI is not set
++# CONFIG_TPM_V1 is not set
++CONFIG_TPM2_EFI=y
++CONFIG_CONSOLE_SCROLL_LINES=5
++CONFIG_CMD_DHRYSTONE=y
++CONFIG_TPM=y
+ # CONFIG_GZIP is not set
 diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_defconfig
-index e822dd24f00..f0dac46a552 100644
+index f0dac46a552..55daf7bec2a 100644
 --- a/configs/efi-x86_app64_defconfig
 +++ b/configs/efi-x86_app64_defconfig
-@@ -12,28 +12,18 @@ CONFIG_TARGET_EFI_X86_APP64=y
- CONFIG_EFI_CLIENT=y
- CONFIG_EFI_APP_64BIT=y
- CONFIG_FIT=y
--# CONFIG_BOOTSTD is not set
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_SHOW_BOOT_PROGRESS=y
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="ext2load scsi 0:3 01000000 /boot/vmlinuz; zboot 01000000"
-+CONFIG_BOOTCOMMAND="bootflow scan -lbp"
+@@ -19,8 +19,11 @@ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
+ CONFIG_BOOTCOMMAND="bootflow scan -lbp"
  CONFIG_SYS_PBSIZE=532
  CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_LOG=y
  CONFIG_DISPLAY_BOARDINFO_LATE=y
  CONFIG_BOARD_EARLY_INIT_R=y
--CONFIG_HUSH_PARSER=y
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_PART=y
++CONFIG_CMD_LSBLK=y
++CONFIG_CMD_CAT=y
  CONFIG_CMD_TIME=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
  CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
  CONFIG_MAC_PARTITION=y
--CONFIG_ISO_PARTITION=y
--CONFIG_EFI_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
+@@ -32,6 +35,9 @@ CONFIG_NO_NET=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ # CONFIG_SCSI is not set
++# CONFIG_TPM_V1 is not set
++CONFIG_TPM2_EFI=y
+ CONFIG_CONSOLE_SCROLL_LINES=5
+ CONFIG_CMD_DHRYSTONE=y
++CONFIG_TPM=y
+ # CONFIG_GZIP is not set
 -- 
 2.43.0
 
