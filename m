@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0EDBC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDE7C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 12:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C76F83A6B;
-	Wed, 28 May 2025 14:33:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E1EAD83A61;
+	Wed, 28 May 2025 14:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z4icJ/6Y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fEr9nZ1C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0916783A61; Wed, 28 May 2025 14:33:39 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id EB90A8397A; Wed, 28 May 2025 14:33:40 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D06BA83A6B
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4C9183A5E
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 14:33:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3dd7a95d19eso20220595ab.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:36 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-735a6faec9eso154178a34.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:33:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748435615; x=1749040415; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748435616; x=1749040416; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jtVEWTaEhcdi26ANWFOalN9+UtwW0THDh9KdOFc58CA=;
- b=Z4icJ/6YkjOq7I/5zIB0Jw1R99GTjNHgJkrUQIb7B8g5pMq145zPMMN//vN6DQiVi0
- dIrLc7Asjm16aFxe1SJdGYEtaLWZOgTX4thEzhK+6wBTgjAmCBC3ZlzgyvxWp9BCaozp
- tKg7z8MwG5vd8GCrSxk5HWwIjoze3JB4Ubvls=
+ bh=kokxPTOiNCifPxRaPpPOEH5wI101j8LBa23p+gWgshg=;
+ b=fEr9nZ1CBqw6uk88dXD9XHVBQFhqHFdUAkWXmy4m25XEfc6TwulVlu3GFxMUIC4IUy
+ OykZugWrGORPEEDkwdW1eo7s1yNW0Rt2K/U1CYmOkATkTtpwFCTzt4r2Su9sSVavluoL
+ V20InwDZa93NGJMMxDY/RM6gBl68yE6S79O28=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748435615; x=1749040415;
+ d=1e100.net; s=20230601; t=1748435616; x=1749040416;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jtVEWTaEhcdi26ANWFOalN9+UtwW0THDh9KdOFc58CA=;
- b=xSi3Z/RQJnL5t8ninOjorqtrDy9VASeedlwf8sXY0UBKrLnWFsoTROrFyHCsEHAg1N
- YCH1uo1yc98XLaBDLPTp1wHBD5TerTxbagS8H9yXkJgCWOuTe3HuWZo3jmCUYBUcwizN
- H9sO+94EI55qlZ6xUCoD77E5tTwgMSVPSfgCykrYkUzKlbpm9yySkYZ5a++3e1VGQpJV
- NqdkjDoQ46+LEVxei/zjR6CJyaUL2eWaQCLyRIYBh8K3/IysQn7e96LZVHYjfZXv+g68
- NGnR2bCX7Sk6wZmOLjGlNH3MlOHRL6N9Ki5Iz/9hENNQlgAzXuS1Pd2mfRjqCLw83IbK
- en/g==
-X-Gm-Message-State: AOJu0Yw+EPfoEfu5jrot6l6JhHHP+eFPJvUUT+7y87dwkI4vKzoCg7Av
- hUtUlbSpJXXb+evios7NjS2nCm8AH123PvKkCwEDwsGFqiqHKQ4Dmg2EKRm2XfOmQta4A3/7213
- 7oHEESHkN
-X-Gm-Gg: ASbGncveklwT5OHUgv1L9/Y137jV9JfQ2rjVE70eUvKZKgjryStKZ2EqyZkI7GH+lXy
- mUBTfpcSJWNddrk9UPlXR7pOtAXrI9bizi4Ja0o10D6v+9G0H7VYtmM+e3TMWU7uHuU6O5GF4h9
- J42bRhhEyUSrX+Kblivbe/XV2BTV4j3a74AEyvHo7Qdhdydr/BmGoEojCMpQyjLmW7acJNUSNVr
- xTnZpZfvhhnUfxC284hDrKBNvyNjdOwq8r2plRSC0ll+YrK+75j/UNpzk3CVE187JJwkTpr6YbH
- lJ3zjoYUl9dJJ5j/pS179kRHSPsHiJ3MGR4GL0KZxSe/kwVpjPKUVu6tKW8PPccVOu1F9P57z5K
- Yk6TOSa4E/GvN+8WzmutFvdc=
-X-Google-Smtp-Source: AGHT+IGcCW7uC4PB797lrrnyN2zYvwS40OB1uVefAncYAiF8PuUA2qaiZXI5ppxoNY+S35pHpO9WXg==
-X-Received: by 2002:a05:6e02:188d:b0:3dc:8109:d64b with SMTP id
- e9e14a558f8ab-3dc9b695261mr155573145ab.5.1748435615054; 
- Wed, 28 May 2025 05:33:35 -0700 (PDT)
+ bh=kokxPTOiNCifPxRaPpPOEH5wI101j8LBa23p+gWgshg=;
+ b=sfrKfT07UY7oGUG82fU8ZI2kqy3D7rU9TvruBMSEbCkI5cVH3Zf//QoiBCulNlhDVg
+ UEYkj8WDjaye59PBzPaVIH3S9oV91jR9pmx88qTB/wX1xQMecDynx9MhXTEQ/V0SLVu1
+ amkpDPkyeEknVRhVDIA418tfSV4Q21EDxLQ5ZLpLLaVHxJtySoRkFAi03PAry3+FvLLw
+ avnCL0lWWtG7g8WWqq/T97zaGeDupR7NIZVVhtIOXGTjCXPdQiSWVjNwhZiFmuzZv2ue
+ rXYrIp8Lw9ncDD6yNQ1ZrFgDJ/KCMsUdNHXoRWuehkC637hBPvTuitv9H5kLSKbkwUky
+ IHMw==
+X-Gm-Message-State: AOJu0Yx49cOslNPwot88rUn1GWZZ02SEQQvxJYNNN+RE/8kRq9JCo92J
+ Gfc1O8TDdpb8XY2zDV0MiFmn/5c6Rowto89i4ID+/eD8HZwKQJU/ZSSd9H0KCDXLX15QsXFSk+I
+ Mata6HN6O
+X-Gm-Gg: ASbGncv08BhMDId46J6h7xz8llV9NhIpqlJ9lZVMBiBJIecJpHjVGdQzmOUO+TWFGxk
+ hNepYsHOL2R/Ia1amUat508o6qH02DVzH8UWEvBfoK+qD5Znr5YgFCoRhMfJLzcH7Im9x32kDoQ
+ N3FzTZZaKeFBaufx+BZgB+btdMuK8t4Q/JeB54b4EWZejGjDBKUjG/DQJwrT0AJXe88hBZw6+31
+ w/GBZ0Mm6crEI8RcZ75aQyczdVIgQLOWKnzOTrO96OwSTPLKAkLY5Qop7fWY/naM45gdZjQ2qy9
+ 2Fwe77jUUK1tTlhDNOx76GNcw38BKVlwmOMdek32CpZByN631nvLmh7dqkb8yJfGq+/gV63ZfxO
+ 0xSwWojmr5lMe
+X-Google-Smtp-Source: AGHT+IFxj6V9lCdJsy0PedSp/sbtpAOtu/grgH9s+AgduUmxiJHWgzXiCdhTU7lxqzgYaQ8uIutj9g==
+X-Received: by 2002:a05:6808:6f8e:b0:401:ea47:2c4a with SMTP id
+ 5614622812f47-40646829b0emr10243980b6e.28.1748435616645; 
+ Wed, 28 May 2025 05:33:36 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.33
+ 8926c6da1cb9f-4fdbd4bb408sm205972173.58.2025.05.28.05.33.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 05:33:34 -0700 (PDT)
+ Wed, 28 May 2025 05:33:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
@@ -77,13 +77,14 @@ Cc: =?UTF-8?q?Fran=C3=A7ois=20Ozog?= <francois.ozog@linaro.org>,
  Andrew Phelps <andrew.phelps@canonical.com>,
  Simon Glass <sjg@chromium.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>, Levi Yun <yeoreum.yun@arm.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Levi Yun <yeoreum.yun@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v5 10/25] bloblist: Adjust how the bloblist is received from
- passage
-Date: Wed, 28 May 2025 06:32:12 -0600
-Message-ID: <20250528123236.1138632-9-sjg@chromium.org>
+Subject: [PATCH v5 11/25] bloblist: Drop bloblist_maybe_init()
+Date: Wed, 28 May 2025 06:32:13 -0600
+Message-ID: <20250528123236.1138632-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
 References: <20250528123236.1138632-1-sjg@chromium.org>
@@ -105,124 +106,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With standard passage we can read the bloblist from global_data. Update
-the implementation to handle this, thus simplifying the code somewhat.
-
-Shrink the log_msg_ret() string back down to a more normal size.
-
-Note that if OF_BLOBLIST is enabled, this code should never be reached
-unless there is a valid bloblist, since the devicetree is processed
-first.
+The bloblist is not inited any earlier in the board_f sequence now, so
+drop this function. Just use bloblist_init() instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+Changes in v5:
+- Add new patch to drop bloblist_maybe_init()
 
-Changes in v3:
-- Add new patch to adjust how the bloblist is received from stdpass
-
- common/bloblist.c | 70 ++++++++++++++++++++---------------------------
- 1 file changed, 30 insertions(+), 40 deletions(-)
+ common/bloblist.c  |  8 --------
+ common/board_f.c   |  4 +++-
+ include/bloblist.h | 16 ----------------
+ 3 files changed, 3 insertions(+), 25 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index 6e4f020d7c4..c7322b96bcb 100644
+index c7322b96bcb..ac3fd3b64ee 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -11,6 +11,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <mapmem.h>
-+#include <passage.h>
- #include <spl.h>
- #include <tables_csum.h>
- #include <asm/global_data.h>
-@@ -513,47 +514,37 @@ int __weak xferlist_from_boot_arg(ulong __always_unused *addr)
- int bloblist_init(void)
+@@ -580,14 +580,6 @@ int bloblist_init(void)
+ 	return 0;
+ }
+ 
+-int bloblist_maybe_init(void)
+-{
+-	if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLOBLIST_READY))
+-		return bloblist_init();
+-
+-	return 0;
+-}
+-
+ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig, ulong xlist)
  {
- 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
--	int ret = 0;
--	ulong addr = 0, size;
+ 	u64 version = BLOBLIST_REGCONV_VER;
+diff --git a/common/board_f.c b/common/board_f.c
+index e9ffa2d7fed..006a1717c29 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -910,7 +910,9 @@ static void initcall_run_f(void)
+ 	INITCALL(log_init);
+ 	INITCALL(initf_bootstage); /* uses its own timer, so does not need DM */
+ 	INITCALL(event_init);
+-	INITCALL(bloblist_maybe_init);
++#if CONFIG_IS_ENABLED(BLOBLIST)
++	INITCALL(bloblist_init);
++#endif
+ 	INITCALL(setup_spl_handoff);
+ #if CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F)
+ 	INITCALL(console_record_init);
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f32faf78560..04d72e786f2 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -476,22 +476,6 @@ int bloblist_reloc(void *to, uint to_size);
+  */
+ int bloblist_init(void);
+ 
+-#if CONFIG_IS_ENABLED(BLOBLIST)
+-/**
+- * bloblist_maybe_init() - Init the bloblist system if not already done
+- *
+- * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not set
+- *
+- * Return: 0 if OK, -ve on error
+- */
+-int bloblist_maybe_init(void);
+-#else
+-static inline int bloblist_maybe_init(void)
+-{
+-	return 0;
+-}
+-#endif /* BLOBLIST */
 -
--	/* Check if a valid transfer list passed in */
--	if (!xferlist_from_boot_arg(&addr)) {
--		size = bloblist_get_total_size();
--	} else {
--		/*
--		 * If U-Boot is not in the first phase, an existing bloblist must
--		 * be at a fixed address.
--		 */
--		bool from_addr = fixed && !xpl_is_first_phase();
--
--		/*
--		 * If Firmware Handoff is mandatory but no transfer list is
--		 * observed, report it as an error.
--		 */
--		if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
--			return -ENOENT;
--
--		ret = -ENOENT;
--
--		if (xpl_prev_phase() == PHASE_TPL &&
--		    !IS_ENABLED(CONFIG_TPL_BLOBLIST))
--			from_addr = false;
--		if (fixed)
--			addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
--					      CONFIG_BLOBLIST_ADDR);
--		size = CONFIG_BLOBLIST_SIZE;
--
--		if (from_addr)
--			ret = bloblist_check(addr, size);
--
--		if (ret)
--			log_warning("Bloblist at %lx not found (err=%d)\n",
-+	int ret = -ENOENT;
-+	ulong addr, size;
-+	bool expected;
-+
-+	/**
-+	 * We don't expect to find an existing bloblist in the first phase of
-+	 * U-Boot that runs. The only way to receive the address of an allocated
-+	 * bloblist from a previous stage is with standard passage, so without
-+	 * that, the bloblist must be at a fixed address.
-+	 */
-+	expected = (fixed && !xpl_is_first_phase()) || passage_valid();
-+	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-+		expected = false;
-+	if (fixed)
-+		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-+				      CONFIG_BLOBLIST_ADDR);
-+	size = CONFIG_BLOBLIST_SIZE;
-+	if (expected) {
-+		if (passage_valid()) {
-+			addr = gd_passage_bloblist();
-+			size = 0;
-+		}
-+		ret = bloblist_check(addr, size);
-+		if (ret) {
-+			log_warning("Expected bloblist at %lx not found (err=%d)\n",
- 				    addr, ret);
--		else
--			/* Get the real size */
-+		} else {
-+			/* Get the real size, if it is not what we expected */
- 			size = gd->bloblist->total_size;
-+		}
- 	}
--
- 	if (ret) {
- 		/*
- 		 * If we don't have a bloblist from a fixed address, or the one
-@@ -567,8 +558,7 @@ int bloblist_init(void)
- 				return log_msg_ret("alloc", -ENOMEM);
- 			addr = map_to_sysmem(ptr);
- 		} else if (!fixed) {
--			return log_msg_ret("BLOBLIST_FIXED is not enabled",
--					   ret);
-+			return log_msg_ret("!fixed", ret);
- 		}
- 		log_debug("Creating new bloblist size %lx at %lx\n", size,
- 			  addr);
+ /**
+  * bloblist_check_reg_conv() - Check whether the bloblist is compliant to
+  *			       the register conventions according to the
 -- 
 2.43.0
 
