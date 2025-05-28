@@ -4,133 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87AA8C54F30
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 03:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A742EC3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 04:11:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A799831B4;
-	Wed, 28 May 2025 05:13:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C8EFC838BB;
+	Wed, 28 May 2025 06:11:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="DmzTfVLa";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="h0oQr1yq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6565C831C8; Wed, 28 May 2025 05:13:20 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::60b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 168AB838BF; Wed, 28 May 2025 06:11:37 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7562D8319C
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 05:13:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VO8bRVbtGPfkIZCKR8IW6Eci7h2GgE+NRaj9dxddf1HP0sxGqIrdx7B/zGTvijZbpJEmtu8bBuaVUGWXxVDhPM8hwSJFGP404skiVLg4vJ4PbUmlzKjfocVHdP0YevU8z8tUioszG16ET+YtIIGNVWbXLCuCGuDOm3UHoS1eur8oFJ6ZXlLvCiW1Q6XJmtIyLE+fygNem+tuXV1rPbBdKSgNRtDp3jh7pypnbw3itCZ1GRsZW0xHWkUWwSFW1Yd1EykHYQ2XCOpNUvBIiJ9EwGlUp/+JrmGyUbkNBTgEpZzETZp1gonpHPgnNfNzjmP6oAqGsSGj6Np2eQ1IbrdvBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vQlw64pPMii6iDBYnDFwzOsI3e2htMgeQ0AVCGVbM5c=;
- b=mag2fEpevtr5pBKfy30fkR7NrjVnqZU5h9sVwkVZ5jeqTlGLcRAkkzd0Sqgebm9j0HzZbD2MBCQ8uRZQnOb3n8UBpNIgPq1C/r2ZL+x7YXJNar7NrbA7h+Prn+9P/2zQGS19wZjBqcmkPQ0lCMB6tXjsHt5+FO8ViP9A3v0n1UG8zy4wbYLgGQkWJ9D7o6GCqpZ5C7Ze+3b7o4USPPU+qscnRZpomUcipCyA5SlDro9bZa5kUaBn4x11KiUKpecKMVXG5uWpFhamT693QKKQfAK+wQIr2PgY5wZ/Gf7tQnDlP4HQMDoy6JAEl69NmKnm/1e5KuzE7h+mukrehzCHiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vQlw64pPMii6iDBYnDFwzOsI3e2htMgeQ0AVCGVbM5c=;
- b=DmzTfVLa1Hz6PyRjHyadHDs+0CsC74FWhQPaq37t03W8hOHG+GnpQZNzqFA6XzaIoqMr6OouI6SQVHxJ4nZ+v54FpZQTSUzD3BjjoGBolFg76+dcSTtgEKpyOzEXcB1K35oeKPhIRSmyr37ql06Bjl0COtrTxN34M2Jdr9cle8c=
-Received: from BN0PR08CA0002.namprd08.prod.outlook.com (2603:10b6:408:142::18)
- by DS7PR12MB6189.namprd12.prod.outlook.com (2603:10b6:8:9a::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Wed, 28 May
- 2025 03:13:12 +0000
-Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
- (2603:10b6:408:142:cafe::6f) by BN0PR08CA0002.outlook.office365.com
- (2603:10b6:408:142::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.18 via Frontend Transport; Wed,
- 28 May 2025 03:13:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8769.18 via Frontend Transport; Wed, 28 May 2025 03:13:11 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 22:13:08 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 27 May 2025 22:13:07 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <hs@denx.de>, <trini@konsulko.com>, <git@amd.com>
-Subject: [PATCH] i2c: mux: Fix the crash when the i2c-arbitrator node is
- present
-Date: Wed, 28 May 2025 08:42:55 +0530
-Message-ID: <20250528031255.1762438-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 6222C831C8
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 06:11:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54S0EKSx012741
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 04:11:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ ZAxuABe40iDbJ95SeGV6aINBUOtHzP7Gl4ZlOxIbNmw=; b=h0oQr1yqE4okbQli
+ WQMl/cxzSW0cw9sevBGjaajrij/OBtpEpYZauIR08+ty3yY8CYZn5K2WAQUMkbpv
+ Vui6NpER6+O5XBekMy3GB2gmU7VpULBDEwUb5BDFHxr0lfzfiDL0EXl4d7PfAIpl
+ X4rthb+UHx9rXGS0B0o/cLpBKJ0fJK12xmydBGWB5qN+YzxhfZCTcbSFhR3qUeRP
+ kcgC8BVZ2L+7QZssLFXrx+xvv/YOZ4Vs5TP4tIymAHkhUdp/6iTR5p6PcFtjpbLf
+ xDcE61WiLJaCSILbmkGXJJ6axsRyia648gUmycGMi19OZ+ecZlPxlsZUs6s0IugF
+ GvKW6g==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46w691bfpm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 04:11:32 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-73e0094706bso5372418b3a.3
+ for <u-boot@lists.denx.de>; Tue, 27 May 2025 21:11:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748405491; x=1749010291;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZAxuABe40iDbJ95SeGV6aINBUOtHzP7Gl4ZlOxIbNmw=;
+ b=Fcca5J9yxliF+6j0L80NqP/X1M/Dtlz6kGMRUNmbmqrqwSlneT8CiY/Zx1WDsRS2Z0
+ Ucaw1l3mCdZYTobrF+f0F7i4Ie1ppOuIco6KUSqMpGpekTRIRlsTC7l8wuL0hWT+Jwaj
+ jbUPvgONTkU8l8K4dTQWw+MEc0fCyct5k1OwPlS9mEaCIC/AIgqsRfEK3/SsdaTNtTUZ
+ +T6OSxuWGdTDcCTk1a3nSAstQedTRuW3u2hLHJN0F04vl/FtSanZSqpi6Tlp8PxtrI9e
+ OX7bgr5BR+okinXiIP7HdKtWu2d3glKdx4II856M+omcRpHaZNAOEyHrcW10a8Q6Z+Kg
+ f4CA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXqhJj1M6XeUEBSBhn0KIaTh82FikjMuwC1o+iBpKBq6ID9mkvJS6s2pG7mPKW//TkxhqXZTGc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxxkz7aRqUMsSedFvh2ISy9KesU2oRP2Q0YznS6tj2LxrA1bQwp
+ rdrE7b2MfJmnw04HWHnbLat9KZL1CFAC936TVSkZQQ8Kwr8sE86AmGBOVLD7iUouTQC8knn0KSn
+ 0nfDQDgug54kYto0A0NKDb3AEcMpIivPbB7uQQx5CZytGAvHZEcu0tT2I
+X-Gm-Gg: ASbGncsSHBQyTDcFE4LOxRGHoBGqXhox+TflpPiBrnN7+Lxco5LU6JmJYACX3eZh9ty
+ I1GkUn2DJkGvCZXDwD+Esri6meTYi32y5fGzsSNe2hzTgGtQvis2rAJTRd8duQL4V0ftajl7bRP
+ BUJkI/+jRw7xDvR3X917vwNN57xAow91ZPaOSGOODqqTmoWUOapbbdIuq/uP7tew3RQO4cwCje0
+ MhzAUVxjEUYCLFjjta+qhnJ5FS9ETqBTgnTMLPxhe3/MM/gyrIaFqx1HApQEFJIiLJmNqs5Ryct
+ fuphJpkHHksspvgyN8Q2aSwlN2ed91VYSvyD8yn7be1Jpg==
+X-Received: by 2002:a05:6a00:10cb:b0:740:6fa3:e429 with SMTP id
+ d2e1a72fcca58-745fdf46524mr19164910b3a.11.1748405491499; 
+ Tue, 27 May 2025 21:11:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IELJ7iKEIJiRijSr6cJDz2N9PTLgqR65iLkQ1vS11iNfmdhRwMCad71kRLMfI3svvLZ9IR8FA==
+X-Received: by 2002:a05:6a00:10cb:b0:740:6fa3:e429 with SMTP id
+ d2e1a72fcca58-745fdf46524mr19164870b3a.11.1748405491057; 
+ Tue, 27 May 2025 21:11:31 -0700 (PDT)
+Received: from [10.152.199.49] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-746e340965dsm289607b3a.117.2025.05.27.21.11.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 May 2025 21:11:30 -0700 (PDT)
+Message-ID: <473c791e-3ae5-4971-8632-632bbaa8e327@oss.qualcomm.com>
+Date: Wed, 28 May 2025 09:41:22 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/2] Add Qualcomm Watchdog Driver Support
+To: Neil Armstrong <neil.armstrong@linaro.org>, trini@konsulko.com, sr@denx.de,
+ casey.connolly@linaro.org, sumit.garg@kernel.org, sjg@chromium.org,
+ jonas@kwiboo.se, jerome.forissier@linaro.org, raymond.mao@linaro.org,
+ ravi@prevas.dk, hs@denx.de, arturs.artamonovs@analog.com,
+ devarsht@ti.com, nathan.morrison@timesys.com,
+ bastien.curutchet@bootlin.com, ian.roberts@timesys.com,
+ festevam@gmail.com, vasileios.bimpikas@analog.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250526093153.3387410-1-balaji.selvanathan@oss.qualcomm.com>
+ <66da4aea-c47c-48d4-a9fd-35c5b63dfb16@linaro.org>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <66da4aea-c47c-48d4-a9fd-35c5b63dfb16@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|DS7PR12MB6189:EE_
-X-MS-Office365-Filtering-Correlation-Id: 59c8114c-119e-46eb-a61e-08dd9d959425
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?AMi0ZJ2FD0gms8F0XTXT/4JQQWS5e5/LXwIB0ZIssqqYGrl1ylIZPH3OdfFa?=
- =?us-ascii?Q?c80cL5H4vpQo1srCTqGGYey0uWK32Y6D/98eOXpqt6idh3IYnGP4sRRKvOyX?=
- =?us-ascii?Q?Y7mtwe0yGxatIhIAXvmEbZenJ0LrakkMib3KNWZn6ZuhMfvo6jCj95SGftiC?=
- =?us-ascii?Q?uALDalmEyzo3WHLaM6HzDuJWKwDb1S3idJ+bZucmuc06SDeXjtC2uokvYCih?=
- =?us-ascii?Q?5BvCOz90J/N/3MmDVbeK02j67gp4231m6CHFzgaHQNw/VvYdT+te7WsStkVI?=
- =?us-ascii?Q?zWPRGhrsDXkwLK56Cz8gNO+cZkZoc92OIzyhP5PMiC4WiXusB9Ys28xhMrqG?=
- =?us-ascii?Q?MIqzQBTMbYK4/UCGfrXb7Fd5UyI0C/CumeFf4cS9CAh7GqYqOoc/2mNSdajU?=
- =?us-ascii?Q?z39rMSSSOxH255aUNn7QhXKWpd42PMDwXc3GoI/6kRslXbBDcjYGGQ7GF7WF?=
- =?us-ascii?Q?MR+BaPMyK4Erh9m9LbOkc3KMUKhMp9HeUKUbsVc6fGughfljLj1JKKVzT+PP?=
- =?us-ascii?Q?KwKWbsWbFdCUH6iP2/49skZVCfiwHIaJHPTswTTg8AUPN8IhKUM3sY/cWHCW?=
- =?us-ascii?Q?4p2auWXE7TPsAllcXya2B8N1MqjzIVV5VnU4LbylDIaByayD5ueUlisK0IJa?=
- =?us-ascii?Q?1/8Kv+kkUWfY+DcrLxEgv3Amhb6hUWx6yeZYWCaxGFqVG3UinmaJ0EPCwFXQ?=
- =?us-ascii?Q?O3yLiC9guq4U/tl/l/7cj+eVJCfAxxZPrudqbcH23+tYJxGye1a5Q/XJrSjC?=
- =?us-ascii?Q?64tWzkGQ0zU9TNV/RxKgGt4W0Cn0kGvcm/xm8WAarTgrH97l+NLBUtjz0N7C?=
- =?us-ascii?Q?1gTBFge77N6otYZZShcwEp6T7aMm5WQGT27ttvQqsQiLI5fmLMY5Hg3hM0g4?=
- =?us-ascii?Q?V+bqz0h9traRImUEPY2R6bchMpxQWFjTShQqIro5IFVQ3sQBC55nnglwFvwJ?=
- =?us-ascii?Q?8tzn75GQOImDSrLFGOXpsiBKjClXIPMGnNj47h8NWuoMIl9JE+BtTXSPOx9M?=
- =?us-ascii?Q?zqOrNqCWFMnYpnjfD5DL3ooC0lE9PT2i8hvEeaven/FSpuJb/D4zLRebKHJC?=
- =?us-ascii?Q?u4//wnI3Bnepv2W0C185ovM/HKKrwPg4pZvbFXMqNDGiASu/QcHofqqEf1r/?=
- =?us-ascii?Q?ZGBiu5IgozSC2Ph5W1r27ER8uj3MIcE01qQaerg7EcJs/xHgMJSxMXpaYaGN?=
- =?us-ascii?Q?e4rsuZwMISQtfeWTj/pNuvtzAKHYuLiKBgAOf1lC/S0zw/NopU8SMobQBV5m?=
- =?us-ascii?Q?X9Jcke1NaiU8hpc/+l1mXKcF+pnYpi1xoHGSt5w73+c4mXNBYtVTr5UY5I4m?=
- =?us-ascii?Q?H/XEEG/S21d4bE9XrdIuVf6J/0MOtgvxPzYAfQSYnm0t7kYJQ2d3S7dJlYuc?=
- =?us-ascii?Q?fBWz0CA6eKoNNojlkFtqpw6+YF09awwxx9JyuZzhBG/LWCuNRQYjw+JGdBhX?=
- =?us-ascii?Q?tTKiYz4Cing/xyURGXtK88ch1BCWNHGG1g4S+nNYRTuTdLrboPrqRzBlfla4?=
- =?us-ascii?Q?vBSDvNsMmQS5+LMDFqb4I/HTEXj7dyZzS1/z?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2025 03:13:11.7231 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59c8114c-119e-46eb-a61e-08dd9d959425
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B071.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6189
+X-Authority-Analysis: v=2.4 cv=WfoMa1hX c=1 sm=1 tr=0 ts=68368cf4 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=dt9VzEwgFbYA:10 a=VwQbUJbxAAAA:8 a=53EZ7TDeAAAA:8
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=_JDYb9XYqTFTpSYka_sA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=OpyuDcXvxspvyRM73sMx:22 a=4uUo5ylOvWPqrpBE2UM3:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: 0MMLQmRt9xeiILxV9ZM6-IJaTfehzeUc
+X-Proofpoint-ORIG-GUID: 0MMLQmRt9xeiILxV9ZM6-IJaTfehzeUc
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI4MDAzNCBTYWx0ZWRfX5OhiDR9efMKG
+ JRosKuGH1r8xge87hYfrp7nLanG4aGOWMfl3kW+XjUQf1r0ulne9G5knGMyz/g4tPaOy1felwvG
+ 1wTH9wNmeH2HRfvQ+lavq+WD0vlb7MoNzwy3coY76lvkuPovOPeKexosv2BcaDXmludnH/jdv7v
+ 94A9fNuc+BEHncgrEb3nuKPiJ2O+hiT7ThJIZqPHsPgZoRFZYdjHZtLclLB3RWNjLeqteHSQBg0
+ 6QlM/PFWo6O/jfCPvr9UYpJNelQ4yNUPWO8yL76UKchGASISp6WGlgXEPXR2UL8/Mbvdg3eS3zf
+ UyfMyX/KDRsL897nwWslpiV5qIIZF3qRuVR8AVMy5F5zWtcOGWc0KuVkzqYbOEniiEdzZMX8O6W
+ fxQ6PFERhywgeNWjbOQckvrv9TxhRC8ExzjGEsSxlVW0OeZ6UILAsIKx0eJR9wCVCF+ryDci
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-28_02,2025-05-27_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 phishscore=0 mlxlogscore=999 priorityscore=1501 mlxscore=0
+ bulkscore=0 adultscore=0 spamscore=0 suspectscore=0 malwarescore=0
+ clxscore=1015 impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
+ definitions=main-2505280034
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,46 +141,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Observing the crash when we add the i2c-arbitrator node in the device
-tree as per the DT bindings. The issue is with the child node of
-i2c-arbitrator@72 i.e., i2c@f1950000->i2c-arbitrator@72->i2c-arb, as the
-arbitrator uses the uclass of mux(UCLASS_I2C_MUX) and the mux uclass driver
-checks for the "reg" property using the i2c_mux_child_post_bind() function,
-if it won't find the "reg" property it will return -EINVAL which is leading
-to the crash.
-So, add the logic to check whether the  child node has the "reg" property,
-if the "reg" property exists then read the "reg" and update the channel.
+Hi Neil,
 
-https://www.kernel.org/doc/Documentation/devicetree/bindings/i2c/i2c-arb.txt
+The submission you shared misses timeout setting support in the watchdog 
+driver. So have added that support (on top of the submission you shared: 
+https://lore.kernel.org/all/20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com/) 
+and created a new patch: 
+https://lore.kernel.org/u-boot/20250527124926.128413-1-balaji.selvanathan@oss.qualcomm.com/ 
+<- Please go through this.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/i2c/muxes/i2c-mux-uclass.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+Regards,
 
-diff --git a/drivers/i2c/muxes/i2c-mux-uclass.c b/drivers/i2c/muxes/i2c-mux-uclass.c
-index d1999d21feb..b18999c1fe3 100644
---- a/drivers/i2c/muxes/i2c-mux-uclass.c
-+++ b/drivers/i2c/muxes/i2c-mux-uclass.c
-@@ -40,11 +40,14 @@ static int i2c_mux_child_post_bind(struct udevice *dev)
- 	struct i2c_mux_bus *plat = dev_get_parent_plat(dev);
- 	int channel;
- 
--	channel = dev_read_u32_default(dev, "reg", -1);
--	if (channel < 0)
--		return -EINVAL;
--	plat->channel = channel;
-+	ofnode node = dev_ofnode(dev);
- 
-+	if (ofnode_has_property(node, "reg")) {
-+		channel = dev_read_u32_default(dev, "reg", -1);
-+		if (channel < 0)
-+			return -EINVAL;
-+		plat->channel = channel;
-+	}
- 	return 0;
- }
- 
--- 
-2.34.1
+Balaji
 
+
+On 5/26/2025 5:50 PM, neil.armstrong@linaro.org wrote:
+> Hi,
+>
+> On 26/05/2025 11:31, Balaji Selvanathan wrote:
+>> This patch series introduces support for the Qualcomm watchdog timer
+>> in U-Boot. It includes a new driver based on the upstream Linux
+>> implementation and integrates the driver into the
+>> early boot initialization sequence.
+>
+> A watchdog support has already been submitted at [1]. Can you check
+> if some support is missing on this implementation instead ?
+>
+> [1] 
+> https://lore.kernel.org/all/20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com/
+>
+> Thanks,
+> Neil
+>
+>>
+>> The first patch adds the Qualcomm watchdog driver under
+>> drivers/watchdog/, while the second patch updates board_f.c to
+>> initialize the watchdog when CONFIG_QCOM_WATCHDOG is enabled.
+>> This ensures that the watchdog is properly configured during
+>> early boot on Qualcomm-based platforms.
+>>
+>> Balaji Selvanathan (2):
+>>    drivers: watchdog: Add Qualcomm Watchdog Driver Support
+>>    common: board_f: Enable Qualcomm watchdog initialization in board_f
+>>
+>>   common/board_f.c            |   2 +-
+>>   drivers/watchdog/Kconfig    |  17 ++++
+>>   drivers/watchdog/Makefile   |   2 +
+>>   drivers/watchdog/qcom-wdt.c | 194 ++++++++++++++++++++++++++++++++++++
+>>   4 files changed, 214 insertions(+), 1 deletion(-)
+>>   create mode 100644 drivers/watchdog/qcom-wdt.c
+>>
+>
