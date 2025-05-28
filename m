@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A388C5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 19:48:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37D54C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 19:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0BF8833FC;
-	Wed, 28 May 2025 21:48:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9AAC583426;
+	Wed, 28 May 2025 21:51:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kOmUrkeY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YxXVeSmD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA2338344C; Wed, 28 May 2025 21:48:50 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id C7166834E5; Wed, 28 May 2025 21:51:01 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 779B2833D0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 21:48:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81313831E1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 21:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-747abb3cd0bso375755b3a.1
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 12:48:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-70f86c9e3e7so2473917b3.1
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 12:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748461727; x=1749066527; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AMiqpkXirJso6EnDP1A0HAw7DKfoNljq6WlxiF1zWsU=;
- b=kOmUrkeYzZeG0PPPfgm/GrzJ8ncHxwGbPievBu3UPp/2do4cGON2NEdyavYH2ShjSz
- pvDMHXHgVNLH7LtzZp4foGXz2K5sAuaE5nH1pfAnyBB+CAQ55XEQRBSeJMTqdnqKfjC7
- GXqR0nAaZCYZTzs7syGnbACfIXPpPE1Mt7aYDkac46hXVK1eMG/6ML5mUPkkStP027hc
- SDQNM4Zsm40xXNYdmAsiPPPm0fgiIR76IH5yW8lJuJyxZOIYC3l68cKu3Du/U2QV1AcP
- +99HMf44JbaDS8pglnLJRLuarxYyEUwcP8YYGS7gYc/B1eYrzHCHe1uLnp/kGRzBRixI
- nFHg==
+ d=linaro.org; s=google; t=1748461858; x=1749066658; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cwsw05Vxl1sE3Imr8XVQtdhyHllBwEd83rAcO8eyNdk=;
+ b=YxXVeSmD5WxvZYJRQWEt9gZCHtAubt4xf2MONwrKoC86C9MDZxJPbLk9yPTtV3rvAl
+ xSGuSrtZVWXz+K+PuaFBou1tsfs1YBDDLaNWLoDLpAoCLmUsurKPVVNpzII2sDyq6HoZ
+ IJilpczBTj2wCYrqLVxhDnATPCP0eWVWyS0QlsMPrC3U3qizfYVB6k+0nILvfMX7eqHM
+ QOAroiG4XyQiJuU/+nYN6080sBgXn6/2OSmqnHikkJMeSQkjFcPM7ex/H4Kg+WAWhe+I
+ 2YUfVEGaYQ4pkZebP/C5L9QF7SNKZlYE5ff7bT+JUijHoilb1wrZ7m6rCFPv/qHaUG/T
+ RxXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748461727; x=1749066527;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1748461858; x=1749066658;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AMiqpkXirJso6EnDP1A0HAw7DKfoNljq6WlxiF1zWsU=;
- b=oxoCRYiesNkXC0AHcm8RSdFbRV+FnZagb0C74M1YZX8r6Wr76RZLW91nNGkHIdETw2
- tu+MKFS2pfTAydMFDW6OHZfKRaTtlr/NOQ7pvpITL+65LZpowMmvt5pNz30BQtMVOEnj
- Zoi2arTdHRx0MYWmBQNm1KHqJA5pzorKSpg5EQx74hCgmf0EEZ2849DUyuKkfbvlfg8m
- Q0uJ9++LXwIwthT1Un9xBUiwc5NXHN9ugcuSFixLWy+CLfwPKwSUVqaxw+AZbGzhzTga
- mZ9YUkaJVoy7zwhhMs3xIAGR4Jtl0vFgj5aXh1/XbAkLaev736tAvhuqWWWwxEmqLheQ
- KMFg==
-X-Gm-Message-State: AOJu0YxkdvZYr3IJ5swUEPHGXDKhYolSZpBdCixd/b5/Z8xNgW61CIeU
- 2Pqtkwhs0+d1vKWgBfvLI07r53Z7KdM0tGQPkZQn39Xg4TDBRxQ7oQfs
-X-Gm-Gg: ASbGncsOUGjuXJAdwCGTAVq2LwLEt0hFm3dbeYJeyNHaZqgM4F9rgCrxJ/iNusClZqo
- Kei2PtfK85MEuwe87bVweJjK0+7NPv9c9HG5q9C00uH/9zus0/g6An0WbsNJvyGciXoV6h+UA0Z
- fnWE25KnpBBWq7aM1pVbCn/atn7MHZE0XqsdhAcwwbRY6P44BHfduwOW/JG6vES8c/Z7ZNo6Fo0
- djMJZym/jVAPEL5gzbpBpzju1rv7aphpd/JQC2JymVdhxWXJzSrjRfY02YiEibNo3jujJ7QOGDl
- aB3yea1UiAy15HHvNXI6rqDE/xI65Y/64UOPA3qD1DHzCQkOz+FaI4kzWTrUDYlizyHeG8xJ9gH
- U1pOq+7eF3OGLtrdyM1OZV+Wi8MrxYFgEbtTrWfs=
-X-Google-Smtp-Source: AGHT+IH10ExZKd65ln5+xYjgl0W8AQg7MN3Dny/HCj4WX3DvlCO0VqKbziYJLpUdrx+V93uM1fLRCg==
-X-Received: by 2002:a17:90b:2786:b0:311:a5ab:3d47 with SMTP id
- 98e67ed59e1d1-31214e2651amr1192971a91.1.1748461726928; 
- Wed, 28 May 2025 12:48:46 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3121ba3e5c7sm14306a91.45.2025.05.28.12.48.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 12:48:46 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tony Dinh <mibodhi@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] ext4fs: Fix: Read outside partition error (take 2)
-Date: Wed, 28 May 2025 12:48:39 -0700
-Message-Id: <20250528194839.1206-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ bh=cwsw05Vxl1sE3Imr8XVQtdhyHllBwEd83rAcO8eyNdk=;
+ b=Wc7hJbVsrH6vW4oqZ5k68OpLUPJKARXggMp+p6ewAPxR9KLmfdw3jPqaB8AwFTnZtY
+ bqh/q31uFHcKz0VZJUiYyaaXuZA41eeH5WN7K8tdOaie40VMJWBpmaOvODHJAIMYs6KF
+ 6Aacr0zktdxyxAGiX3HTm5kzA0G1uSqDNbIT/Rv54REVKb0TZVGBFiHz935IKgQKJrIe
+ XfT59jh5ZRcbfr/4XmY2OFydzxyNS5+gNhCxxTYHkKYgfrszEW9+31i0dYSD6ivqctM+
+ sJmPnvmDgsLgrqcKW7yC/8knnrvSjN/+uJQ6qykRRM7L/pXs8BbL7EIipYpaKVKKGG/m
+ 6rAw==
+X-Gm-Message-State: AOJu0YwX3npXJSv4boayj2J6xi/A0LxQ7iPPTZK59bDDVY9WBRYRpiQp
+ vAytDpChWjHJ42P7LxLvCv6edbTuRugo3S/tzxcZ3ceLzCAj1UQ8l/UC6XIYT3oNRfMKs8fuWhc
+ o7fUVRwkZ3dq5KUp6OAqHdmTidho0uib/6HBhmvD8OA==
+X-Gm-Gg: ASbGncvRf4PpGqkV3YWfAHaJAqU9Q3TmrvFa/ocaw0rY/KHagxRVgS2l3p/421/9uuc
+ uwwofcMkc2UnFa0WxyDlsUoiuhM2bARuxvAKr0FClVJINWOucqsRK9q95cQGAlNxQsyIPsWfRvz
+ R/7uZNJTBeZOeEoWSEAXSHB56as7n8kzEPog==
+X-Google-Smtp-Source: AGHT+IG0IMgt5kioXc3kQddMwy5Bi1s+OfCkT1zjBHm5Kkjk8II5gm8Lozww5X04VFDTn421Fw/6Obkr++By6igdP1E=
+X-Received: by 2002:a05:690c:d1c:b0:70e:86a:ae1e with SMTP id
+ 00721157ae682-70e2d9c0870mr247715507b3.22.1748461858340; Wed, 28 May 2025
+ 12:50:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250528160323.1184731-1-sjg@chromium.org>
+ <20250528160323.1184731-4-sjg@chromium.org>
+In-Reply-To: <20250528160323.1184731-4-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 28 May 2025 22:50:22 +0300
+X-Gm-Features: AX0GCFss0MEcDAH0TBF54vk-dTSTeIVMBBdQ-QVfoxwViw8GBF3xFIjqZv4vSGE
+Message-ID: <CAC_iWj+mvNkSMBru-7PDPiBMsccCag3oRudS04Wytn4B37fS6g@mail.gmail.com>
+Subject: Re: [PATCH 4/4] efi: Update maintainers for EFI_CLIENT
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Greg Malysa <malysagreg@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,61 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use lbaint_t for blknr to avoid overflow in ext4fs_read_file().
+On Wed, 28 May 2025 at 19:09, Simon Glass <sjg@chromium.org> wrote:
+>
+> The 'EFI PAYLOAD' entry really refers to the EFI loader and EFI APP
+> refers to the app and the payload.
+>
+> Rename 'EFI PAYLOAD' to 'EFI LOADER' and 'EFI APP' to 'EFI CLIENT'
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  MAINTAINERS | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 46ef4359961..8109f0b4df1 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1092,7 +1092,7 @@ F:        drivers/core/
+>  F:     include/dm/
+>  F:     test/dm/
+>
+> -EFI APP
+> +EFI CLIENT
+>  M:     Simon Glass <sjg@chromium.org>
+>  M:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+>  S:     Maintained
+> @@ -1106,7 +1106,7 @@ F:        lib/efi_client/
+>  F:     scripts/build-efi.sh
+>  F:     test/dm/efi_media.c
+>
+> -EFI PAYLOAD
+> +EFI LOADER
+>  M:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+>  M:     Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>  S:     Maintained
+> --
+> 2.43.0
+>
+> base-commit: 2f3766949bbea7aa5a472157561d387fd94205d2
+> branch: efit
 
-Background:
-
-blknr (block number) used in ext4fs_read_file() could be increased to a
-very large value and causes a wrap around at 32 bit signed integer max,
-thus becomes negative. This results in an out-of-normal range for sector
-number (during the assignment delayed_start = blknr) where delayed_start
-sector is typed uint64 lbaint_t. This causes the "Read outside partition"
-error.
-
-Looks like we also have this overflown problem in ext4_write.c that needs
-to be addressed.
-
-This patch was tested on the Synology DS116 (Armada 385) board, and a
-4TB Seagate HDD.
-
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
-
- fs/ext4/ext4fs.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-index 1727da2dc6d..3d68d6c6394 100644
---- a/fs/ext4/ext4fs.c
-+++ b/fs/ext4/ext4fs.c
-@@ -101,17 +101,21 @@ int ext4fs_read_file(struct ext2fs_node *node, loff_t pos,
- 	blockcnt = lldiv(((len + pos) + blocksize - 1), blocksize);
- 
- 	for (i = lldiv(pos, blocksize); i < blockcnt; i++) {
--		long int blknr;
-+		lbaint_t blknr;
-+		long blknr_and_status;
- 		int blockoff = pos - (blocksize * i);
- 		int blockend = blocksize;
- 		int skipfirst = 0;
--		blknr = read_allocated_block(&node->inode, i, &cache);
--		if (blknr < 0) {
-+		blknr_and_status = read_allocated_block(&node->inode, i, &cache);
-+		if (blknr_and_status < 0) {
- 			ext_cache_fini(&cache);
- 			return -1;
- 		}
- 
--		blknr = blknr << log2_fs_blocksize;
-+		/* Block number could becomes very large when CONFIG_SYS_64BIT_LBA is enabled
-+		 * and wrap around at max long int
-+		 */
-+		blknr = (lbaint_t)blknr_and_status << log2_fs_blocksize;
- 
- 		/* Last block.  */
- 		if (i == blockcnt - 1) {
--- 
-2.39.5
-
-base-commit: e04d137231f2e9e14708a32448c879125b8e308f
-branch: master
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
