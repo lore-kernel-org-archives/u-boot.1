@@ -4,95 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC92DC5AD49
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 11:12:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF65C3ABB2
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 11:23:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DFA983A79;
-	Wed, 28 May 2025 13:12:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63F9F83A7F;
+	Wed, 28 May 2025 13:23:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qcznh+5N";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OJB3MlE/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 301E483A7F; Wed, 28 May 2025 13:12:21 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id D21F483A8A; Wed, 28 May 2025 13:23:06 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7E94839A7
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 13:12:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7631F839A7
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 13:23:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-acbb85ce788so874863066b.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 04:12:18 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-441c99459e9so28874375e9.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 04:23:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748430737; x=1749035537; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748431384; x=1749036184; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=yGLBJjrGkZVcLCd/GZUuIohbvxvfMMBZnBB7e9GBgPc=;
- b=qcznh+5NwLxSFYHzK6JWNm69CC1wedPlJktKBBfOmRgEACDlH3si6bEuL0ZeWcWXqj
- Kq5s+O6SLL9lWuojZL39whyJ2HeIY5ymMH/bdMxmsG6MRP2aAdNczBAinB/HFkTRFENj
- 3EPVTB4ADcNTWP0qtz9etDjh5bW+JuskJz2adZhviU//MhYbxeDk9YlBgkae/MyuZycf
- 3YflV26Q9I191fJX9YpdPgFUgBrQoz5N6CQDIeVyVsZMeGW51pHvUTWqG2AzApquMB/8
- xac7/ZKHrjAyP92KkD4XjHYfk4MEGzI6GoLc26COITaE/muJOIHo7k+DMHbUIY6J04rs
- 18Lg==
+ bh=77+OSxSbNpuELypXeqBauA35p/0XCphsRhwC164ZRh8=;
+ b=OJB3MlE/H+KOI8sVTdk4JdlQKWs+JYPriH1jtZR0ms8URzJlkBdodgTd+hAB9pWL9u
+ hUaDlqJPNaiyvPB2ttvmZclKw0xWu8OY3zW9SjYKukKpFQsESAWWpsZ+Wtjmk6DiJQPq
+ mRrd8B5Qfmyc+05DhIy+t5fi2w8Wn+nwHxtCMKqX22+PoRC/L/EwOeKcnT0QE6NoY6HW
+ B+vs/zQIuFH5aH6zerdw8W50w1aUGtdWwjAWeNGTV5iVk7FJuweQB2VjyenmBOswCnKI
+ 9HhDtG2Et+H7zYOWH5Xr5RLCtclRzJEobRXPVQu+8AgUL/Iufpiiyb5sePB1m4UAoQWy
+ 39Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748430737; x=1749035537;
+ d=1e100.net; s=20230601; t=1748431384; x=1749036184;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yGLBJjrGkZVcLCd/GZUuIohbvxvfMMBZnBB7e9GBgPc=;
- b=Y8Q9jdMq8P5dBpbZxo1SYWnlaVBA2hbv/L4pi0+yXdNJjGx5o2whRTl5qqNO9Wj3/U
- XEl0oqZZ2jnbLOORM+kb+E7f1ecGJNt6lwV2HPNkdK7c+wXMhz2cbe860GWtVd/EaP1a
- Ga4WK72pf9+41ewvkdYJOL7FKZjNF+wsqrWNK2fN8prtcdJsf5ZUpnEzk3zJHJDLlE2b
- AbEmx42nylZzNHJuAC0/Qm+ueATfslg9GpDf26ZfrNl5PrRn6c0qRYNMYQbBJsXKHa3p
- iMg1BJ8LZn08XktEAe6HeXOw6rBiZMGak6H2v58LQwZ3nw+OxSnIUoZ6rF66pjvezaTj
- VAAw==
+ bh=77+OSxSbNpuELypXeqBauA35p/0XCphsRhwC164ZRh8=;
+ b=dfHbSXr1+LVCO5F63wliWOU03A4D+kN6IYzZ4yFN3OohKqMnuCj8MMCGZ4bZbIeWy6
+ wVrvL0BfWZZ+BxGAaT6RwawKK+qy0AaRbg9TiGkuFiVszQ0l57nzhiwhB8hyyyhFX+zH
+ ALBxoj922yXk2cKzlF9qEA4BFjbdPKaonBCP7ObWPx2bnHI3bJ/K3z2W/5FyDp8Kk/iv
+ wCAG71yQJxvkIgiAed88wmzb46wYUv4i4aTIPI89Q7qrh2gI73VxzKY9Czn1hUYFo13p
+ 3KGn4woVYiCSX2RqLzNvhNv7TGlQP9uO6Bkev2pjCKvtDgLVAagiWsPz1nAKX4iwNOcn
+ X6Pg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVcfNQ3Z6ESXR4nxEHXItkByo+MnA59slahjhRsUmNYrHSFnY2hvd0Mk5eTiTEY3oJ6Jcgas/s=@lists.denx.de
-X-Gm-Message-State: AOJu0YzHyobCS6RJqeuwLjmg46Nvrpl0Ws+H/FWCbaVhIlMzJp1rz6+l
- HxXfumIOlIGH2QdTdi/vEGU/YVT4ZzYyI7Qa7Vl6hsnwyMB/MsJjUJ0NPl4e8aczl3GaI604tnB
- jQffI
-X-Gm-Gg: ASbGncvknYpP/SyV9/KHd0iNdOa7FeZJViTpRguNa3k0nNMoxFC4FJ+MaCMsgAVaaGQ
- qQYeqg53zMzyY9UhtvoO34rYHubE+He1DOUcnfQ5Z+cCbn91jukEi65jKYL/fdFNLoCJ11Q2mLC
- pJCJJkvpS+PVZgEVkPzdegrr9EiD2C2OsMtPJw5eZqsTv94sG+mvzTESyRdKxIluKoRwN77KTqc
- B121swCWVDG+epa1H/PF8q1Opq5R60VPP8bQVFaeUj8k4KYgn7lRw3KDr6g4B/hEcjQNkRFtbzG
- 9r8DOeBMkH9hpPuXftLXJb3DkOuBeNhRXPH78K9cOodmEMsRKofd3U5K8VxrdkRKoNyH5SPjwBE
- tdTqUk2cAu4wWs+eO8Mio4NpAgCp2aai1JLwC
-X-Google-Smtp-Source: AGHT+IFp2c0pTEznqj+VoIu/2m+A6HksLqDTvM7faNzjdNHuNoXO2NVv9rDrNsDtiRWe9lmsKb9YdA==
-X-Received: by 2002:a17:906:d542:b0:ad8:a4a8:1034 with SMTP id
- a640c23a62f3a-ad8a4a8118cmr96250566b.8.1748430736883; 
- Wed, 28 May 2025 04:12:16 -0700 (PDT)
+ AJvYcCXk3iKLpq8kmbaHCXSGeWg8MWnjVYMeAb+ODbc+pFyUbcYgMTjdLpSM1ZfyBw5dTicC381pAAo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJYtVAxJDKZV8xdnJrzyyOt7NQb6iSY8CYvE8OXVVLWBzFtnIu
+ AJWBw3PEuI2GJSna+xpdsepLr29Rgw9pGEldUjkjAu1DgM9xMYcOqhsbfqgvD6xXLwo=
+X-Gm-Gg: ASbGncunkHfblLLHEmOdvcQXDJ0lpvshQB4HjMvyv2YeaAY8no+pOaihAgb2uL6R00H
+ UYIkBvbiSW0Eb8dPB5fmGIctMufYOdLEmuOOo553zNOyiJIMnyIYIdyVA7XpkXpopxm7gZWpJSI
+ XJb6dXvBETPmruCONRDXOG/KqT4eUBHMU1Q9PypL67aqrei2ItdQiwwC4h2WwHuOvcuf7lXl0E3
+ zO/eP4pwrURjg/OjFqYf5xK+8LJCmOH9Cyg5SXy1jA+o9UPJXQVhPBc0ljGxmYQvt7/y8fapXj7
+ nZKSHGo0/f0cSVQPmGCDNDgX5bb9MzmQVn4h2yiiD1midAcpo8I4uIrxws1+Kd97VhtriUoyLPM
+ H1MrNQ96IncwwYAm40J/Lqc3E1Q==
+X-Google-Smtp-Source: AGHT+IEL+Y5rTjKoIQaRa/KcXPFTt13ybKU2Xti4n2KIVJiNrjUHAf51rW+EWABkJeDyJOe+Vxckig==
+X-Received: by 2002:a05:600c:1d15:b0:43c:fe90:1282 with SMTP id
+ 5b1f17b1804b1-450725458d3mr14824065e9.7.1748431383742; 
+ Wed, 28 May 2025 04:23:03 -0700 (PDT)
 Received: from ?IPV6:2a01:170:117e:fc:7b9d:1015:16d5:5c7e?
  ([2a01:170:117e:fc:7b9d:1015:16d5:5c7e])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ad8a1b5ca28sm91109366b.172.2025.05.28.04.12.15
+ ffacd0b85a97d-3a4eac6e5d0sm1216036f8f.4.2025.05.28.04.23.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 May 2025 04:12:16 -0700 (PDT)
-Message-ID: <d5865822-79d6-4266-96cb-a864c3fb2a60@linaro.org>
-Date: Wed, 28 May 2025 13:12:14 +0200
+ Wed, 28 May 2025 04:23:02 -0700 (PDT)
+Message-ID: <5b13c86b-1efb-44e1-9ee8-03c2863337d0@linaro.org>
+Date: Wed, 28 May 2025 13:23:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/27] x86: efi: Various app improvements to support
- bootstd
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
- Janis Danisevskis <jdanisevskis@aurora.tech>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Weinberger <richard@nod.at>, Tom Rini <trini@konsulko.com>
-References: <20250528082520.152391-1-sjg@chromium.org>
+Subject: Re: [PATCH v4 07/28] serial: msm-geni: Enable SE clk in probe
+To: Stephen Boyd <swboyd@chromium.org>, u-boot@lists.denx.de
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
+References: <20250523225845.2311989-1-swboyd@chromium.org>
+ <20250523225845.2311989-8-swboyd@chromium.org>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250528082520.152391-1-sjg@chromium.org>
+In-Reply-To: <20250523225845.2311989-8-swboyd@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,80 +108,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- > base-commit: 42c99ae5bebcecc7b734865c8077c4bf9275e78a
+Hi Stephen,
 
-$ git branch --all --contains 42c99ae5bebcecc7b734865c8077c4bf9275e78a
-   remotes/sjg/HEAD -> sjg/master
-   remotes/sjg/master
-   remotes/sjg/appc
+On 5/24/25 00:58, Stephen Boyd wrote:
+> Enable the serial engine clk in probe so that this driver can work on
+> platforms that don't already initialize the clk for this device before
+> this driver runs. This fixes a problem I see on Coreboot platforms like
+> Trogdor where the UART hardware isn't enabled by coreboot unless the
+> serial console build is used.
+> 
+> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+> ---
+>   drivers/serial/serial_msm_geni.c | 26 ++++++++++++--------------
+>   1 file changed, 12 insertions(+), 14 deletions(-)
+> 
+> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+> index cb6c09fdd09e..620cb9a59343 100644
+> --- a/drivers/serial/serial_msm_geni.c
+> +++ b/drivers/serial/serial_msm_geni.c
+> @@ -131,6 +131,7 @@ struct msm_serial_data {
+>   	phys_addr_t base;
+>   	u32 baud;
+>   	u32 oversampling;
+> +	struct clk *se;
+>   };
+>   
+>   unsigned long root_freq[] = {7372800,  14745600, 19200000, 29491200,
+> @@ -181,19 +182,6 @@ static int get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
+>   	return ser_clk;
+>   }
+>   
+> -static int geni_serial_set_clock_rate(struct udevice *dev, u64 rate)
+> -{
+> -	struct clk *clk;
+> -	int ret;
+> -
+> -	clk = devm_clk_get(dev, NULL);
+> -	if (IS_ERR(clk))
+> -		return PTR_ERR(clk);
+> -
+> -	ret = clk_set_rate(clk, rate);
+> -	return ret;
+> -}
+> -
+>   /**
+>    * geni_se_get_tx_fifo_depth() - Get the TX fifo depth of the serial engine
+>    * @base:	Pointer to the concerned serial engine.
+> @@ -252,7 +240,7 @@ static int msm_serial_setbrg(struct udevice *dev, int baud)
+>   	priv->baud = baud;
+>   
+>   	clk_rate = get_clk_div_rate(baud, priv->oversampling, &clk_div);
+> -	ret = geni_serial_set_clock_rate(dev, clk_rate);
+> +	ret = clk_set_rate(priv->se, clk_rate);
+>   	if (ret < 0) {
+>   		pr_err("%s: Couldn't set clock rate: %d\n", __func__, ret);
+>   		return ret;
+> @@ -561,6 +549,16 @@ static int msm_serial_probe(struct udevice *dev)
+>   {
+>   	struct msm_serial_data *priv = dev_get_priv(dev);
+>   	int ret;
+> +	struct clk *clk;
+> +
+> +	clk = devm_clk_get(dev, NULL);
+> +	if (IS_ERR(clk))
+> +		return PTR_ERR(clk);
+> +	priv->se = clk;
+> +
+> +	ret = clk_enable(clk);
+> +	if (ret)
+> +		return ret;
 
-So just totally ignoring the exact same feedback again... Why are these 
-patches on the list? These patches don't belong on the list.
+There's a subtle change in behaviour here, since we'll now fail probe if 
+the clock isn't found. I think it would be best to treat this clock 
+being missing as non-fatal since it can make bringup a little easier (no 
+need to stub the clock).
 
-On 5/28/25 10:24, Simon Glass wrote:
-> This series makes a number of improvements to the EFI app. Mostly it
-> applies to x86 but the ARM version will share some improvements.
-> 
-> The main updates are:
-> - Improve linker scripts and options to detect missing symbols and
->    remove unused code
-> - Enable bootstd and provide a default which can find an extlinux OS on
->    EFI media
-> - Make the 32/64-bit apps more similar in terms of features and link
->    script
-> 
-> 
-> Simon Glass (27):
->    scripts: Tidy up build-qemu a little
->    scripts: Change -k and -o options
->    scripts: Update build-efi to support kvm
->    scripts: Update build-efi to support booting an OS
->    scripts: Update build-efi to allow showing the QEMU cmdline
->    scripts: Update build-efi to support passing a root disk
->    scripts: Update build-efi to support debugging with QEMU
->    scripts: Update build-efi to allow firmware settings
->    bootstd: Tidy up help for boot flags
->    bootstd: Provide an option to scan any partition
->    vbe: Avoid accessing TEXT_BASE if undefined
->    efi: Use the correct driver for TPM
->    efi: Allow disabling networking in the app
->    efi: Rename the media device
->    efi: Allow disabling the TPM in the app
->    efi: doc: Use inline links for EFI app documentation
->    efi: Add a bootdev for EFI media
->    efi: Provide an easy way to debug with gdb
->    x86: efi: Sync up the two link scripts somewhat
->    x86: efi: Tidy up the link scripts
->    x86: efi: Add a few dummy functions
->    x86: efi: Avoid calling arch_setup_gd() from jump_to_copy()
->    x86: efi: Drop relocate and physmem
->    x86: efi: Enable --gc-sections to drop unused code
->    x86: efi: Drop some unused options
->    x86: efi: Enable bootstd
->    x86: efi: Add various useful options
-> 
->   arch/x86/config.mk                 |  2 +-
->   arch/x86/lib/Makefile              |  3 ++
->   arch/x86/lib/elf_ia32_efi.lds      | 29 ++++++------
->   arch/x86/lib/elf_x86_64_efi.lds    | 30 +++++-------
->   boot/vbe_common.c                  |  2 +-
->   cmd/bootflow.c                     | 10 +++-
->   common/board_f.c                   |  2 +-
->   configs/efi-x86_app32_defconfig    | 26 +++++------
->   configs/efi-x86_app64_defconfig    | 24 ++++------
->   doc/develop/uefi/u-boot_on_efi.rst | 48 +++++++++++++++++---
->   doc/usage/cmd/bootflow.rst         | 15 +++---
->   drivers/block/efi-media-uclass.c   |  2 +-
->   drivers/block/efi_blk.c            | 30 ++++++++++++
->   lib/efi_client/Kconfig             | 12 ++++-
->   lib/efi_client/efi.c               | 36 +++++++++++++++
->   lib/efi_client/efi_app.c           | 10 ++++
->   lib/efi_client/efi_app_init.c      | 18 +++++---
->   scripts/build-efi                  | 73 +++++++++++++++++++++++++++---
->   scripts/build-qemu                 | 20 ++++----
->   19 files changed, 292 insertions(+), 100 deletions(-)
-> 
-
+Kind regards,>
+>   	ret = geni_set_oversampling(dev);
+>   	if (ret < 0)
 -- 
 Casey (she/they)
 
