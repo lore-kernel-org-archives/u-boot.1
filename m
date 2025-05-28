@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC1D8C3ABB2
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF04C5AD49
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:38:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18DE683A44;
+	by phobos.denx.de (Postfix) with ESMTP id 602DA83A62;
 	Wed, 28 May 2025 10:37:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E0CS3aLg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ULC90Zkv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3010B83A24; Wed, 28 May 2025 10:37:28 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 901D983A44; Wed, 28 May 2025 10:37:29 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3F3D83A28
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:37:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BC6983A5E
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:37:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43cfebc343dso32823295e9.2
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:37:25 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-442eb5d143eso45122065e9.0
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:37:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748421445; x=1749026245; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1748421446; x=1749026246; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8IP+2u9h32GzZX0e/Kfqv2iqd/RrFw+JTcC0iQpWFyg=;
- b=E0CS3aLgE5TJ4N4tjnzWngT3ZiNNDnW3+5EvvrEk5K+9Han9f+H1nRE3eWkdv8Yyb3
- e9OfkNe1Gg+cGnurKawOhijBbSqMg7IJupHA9vCfKqxosM+yYGYw0++/WBfArIFTfMwx
- nZ7iTjPpbpIqiFyN8MNWKGOjbjmx0xjWphp0DbKnWi81WjNy9ruxIxK01fLmnMX3Z3Sg
- KQbEjSPO7NES121xYxqWdNmaYUePxx7A153bbxm0Q3NCDtGskZ/iJKEFSnVgD6YmP8nl
- er5kZd0flZvUZKvmsUt1U6j2OHUTkqUxQF47WXkllUAUvZVz0vzYctSzdgfCgLa/DKPu
- cyNg==
+ bh=eEG7LJyHsNEZ97ji+ZyysYaNteOevWoW54Cx8HL2y0U=;
+ b=ULC90ZkvmA1boe3Kex01khP/U3v8q7JDkGPy0Yzq2+edIzfAlTPVMzho0usJlkraGR
+ R8qCJxLQzgUvOX/gwVpYRTuvFc8ATDCw5C/Fhc1DoztLb2mIo9TuslopypNTmyF4SDyY
+ H4B1lt836zhyLskNJL2nkQ2GYl32CpHfHRNuhMaZyvCArKyvvVvfD58649U7ZJ0J33vX
+ JQZTd+NvxNxy1T00+YZDYFUHcrDXV7tPtelUPzRUDpW0UKnhadwvBQKbOfMFGG8jfN0/
+ 6zhlnQSSCnd8haEpZf/7yOC0FaWKQIJhWhCe6IcKmIdyxZ6iF8IB1OEK5TVOBBUtTy3L
+ AeWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748421445; x=1749026245;
+ d=1e100.net; s=20230601; t=1748421446; x=1749026246;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8IP+2u9h32GzZX0e/Kfqv2iqd/RrFw+JTcC0iQpWFyg=;
- b=I75Ub/gv7DY9OlyzOF5DWL9ov0xTULnfqbfc1eD+896twT/2Heq+3JF7Mp5iKwg/Ex
- 3uLzABpxAv+43JC1/DmkcxX+7RZUIEsf7f2XFoTTCxBd/vrOIU3zAls0y5lyeEgdzi7B
- YCkY/Punk25cZXxRQHf451GkcUDa/RzEoin9z5BKDl6y3kv4EODsw6cM2+IvUNrfhO8y
- GzzzQ1+t9UCadWdpzEujWwKuc6OOUe9Yd0CPN4ANotyKbSdRoJ6PmkcnXCl/q6Kd6wfR
- ts5VX8NKLsfkMLL/qTJmjqCr70sR2KmsMNJSgVRwrYwnnNYCu70Uc4zMf2spiFLKJCvt
- kdVA==
-X-Gm-Message-State: AOJu0YzQj2AfbAifS61xgyyx+BkvUzGs1midBJDUtDfKkKsh/fB9xtE8
- 56CZwyFCihAKSFPwW0pKscqWqA2tXpI13z/pxN/CVI77g0Sw36N/2fTZp9FYYl3CjVs=
-X-Gm-Gg: ASbGncv/Y8DRAGT81TGOv3U4VPq8c8WLN/+rT2d+NyBTS+LFD9j64zhKe80A7AnnAij
- Q1rocSvxl0OLCJtu9oDr/gyTlOjFjUI1u51keqy83Aw4tTifWT37p80Df83GOphNvHAON545rOC
- dmQoWGYwV7l5FCRqyIgxlcG7y6ZbeRXUtjxf4qFrPkXYkEvfbMqwLeohikVN/p4XrSJl51ssrOs
- d23NsALToxoul+RwrrY8newFHZKwNkdBqyIFsmhqtAEuddjsI0N1WTPZshZC27mMOEBxa2AYZqL
- zldEOZYoTyU+/hRzqYB1qr8SduEW9BvvQNs+BZnQXdP4wqOTM4+wKrsoTguPBdVDDtHYI+KBxcv
- M3gjbXfUqMbM7BrcqxOot2i9Dens=
-X-Google-Smtp-Source: AGHT+IFf0OyLZgW2urk2KkdeTyAgMaIFDQLhLcfvW6z+At725siz7XJE+d8QJsCvpp3uE9glHCI32A==
-X-Received: by 2002:a05:600c:5396:b0:43b:c0fa:f9dd with SMTP id
- 5b1f17b1804b1-45072a49ea7mr9447895e9.25.1748421444885; 
- Wed, 28 May 2025 01:37:24 -0700 (PDT)
+ bh=eEG7LJyHsNEZ97ji+ZyysYaNteOevWoW54Cx8HL2y0U=;
+ b=S2EGwACeBSUrpS+CuXWvPm0YdJ3kZ6LSU8qXnNvqIfmoer5DuDOn31H2hh3Yjxs6rh
+ hu1WA2guU09Isn8Z7TtxDsfqecvyc/E/TXdaMRI4QBWzqG+2/KBb5rG+coJl0MRnwQo/
+ GdONVm5QoAcNtkwfgryDc+SSSjr7F5W/UvpxLRhwcnG8m3GSrcqrinMm21mjucKYQoVo
+ HSzHMnboiQ2RRydOPzMwyrQf4L4f703KVxb2qcQk3Kte8CL8brdecgf7v2qOrzpkl5s1
+ YWuAoEcNVKeKXb/W48phzglVjfO27k5qLN+tEShG6lm3yAc99xqZe9fg5ZA3dxOf9bjo
+ sa5w==
+X-Gm-Message-State: AOJu0YxQvlSXjU7xtv2eJnHaH5XtOCu8ZSNXalpk6CdnB4P/Q8ttLwJi
+ i+Aq5snslOGwDFfCCo/7MrkXI3OIRXauefN6SrvNnK1dii84UFRs34cJjctNbmCtXtQ=
+X-Gm-Gg: ASbGnctsdQgk4KX76bFQuNKt6TdXv0QY3bhiDqrBeFCDxN/kjeTEkk9OpujnHL/OlyE
+ xi84U49CxreCmKNhdsvW5BVkg5bOj1KRQaf1UqG7OSYng6Ua4JDMB1KV/bvwKYDVhPJEG3Q2HBw
+ nuwNMQ1RTTsx/EhSlvOZCisapOjg1ZsiCEQBNOcQ3FxhlEBWERlw1ikKOmJw1Yb3fcHWUzbMOuG
+ PA4hfsUxmhSrDR/Ya/LmXNtMuBWF5UsgocKxq3QhI3w7BiRXZ8a6kbojB11auAHlBScCoreLn7m
+ b3bmsHg/n8A7R1yJZSHimSDP98PfleuGvH8Kb2OQ/LedXqEA5rzdNeSvGoGnfJvFsHY9hcYWiH2
+ x8Mnm54nR7qVVvMiH25CmCXTd/jc=
+X-Google-Smtp-Source: AGHT+IElV9A4MV6FjcN4YWmPyFBshOK9vqDAf9hgjZ47X0Lp9O0ejr4Vx4e15ZUIkFpYEINsgmqibg==
+X-Received: by 2002:a05:600c:37c4:b0:442:e109:3027 with SMTP id
+ 5b1f17b1804b1-44c92d351e0mr128375375e9.24.1748421446159; 
+ Wed, 28 May 2025 01:37:26 -0700 (PDT)
 Received: from adriano.. (15.red-79-153-17.dynamicip.rima-tde.net.
  [79.153.17.15]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4eac6eb45sm857130f8f.12.2025.05.28.01.37.23
+ ffacd0b85a97d-3a4eac6eb45sm857130f8f.12.2025.05.28.01.37.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:37:24 -0700 (PDT)
+ Wed, 28 May 2025 01:37:25 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  trini@konsulko.com, jerome.forissier@linaro.org, rfried.dev@gmail.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v2 8/9] efi_loader: Add netdump efi app
-Date: Wed, 28 May 2025 04:38:20 -0400
-Message-ID: <20250528083821.567514-9-adriano.cordova@canonical.com>
+Subject: [PATCH v2 9/9] pytests/test_efi_loader: Test EFI_HTTP_PROTOCOL
+Date: Wed, 28 May 2025 04:38:21 -0400
+Message-ID: <20250528083821.567514-10-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250528083821.567514-1-adriano.cordova@canonical.com>
 References: <20250528083821.567514-1-adriano.cordova@canonical.com>
@@ -100,885 +100,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a netdump EFI app to test the U-Boot EFI network
-stack.
+Download via both TFTP and HTTP an EFI application implementing
+an HTTP client using the U-Boot EFI_HTTP_PROTOCOL implementation
+as backend, and from the application then download a payload via
+HTTP.
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- lib/efi_loader/Makefile  |   1 +
- lib/efi_loader/netdump.c | 851 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 852 insertions(+)
- create mode 100644 lib/efi_loader/netdump.c
+ test/py/tests/test_efi_loader.py | 63 ++++++++++++++++++++++++++++++++
+ 1 file changed, 63 insertions(+)
 
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 92c6822bc13..98c8ad40f95 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -17,6 +17,7 @@ apps-$(CONFIG_RISCV) += boothart
- apps-$(CONFIG_BOOTEFI_HELLO_COMPILE) += helloworld
- apps-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbiosdump
- apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
-+apps-$(CONFIG_EFI_HTTP_PROTOCOL) += netdump
- ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
- apps-y += dtbdump
- endif
-diff --git a/lib/efi_loader/netdump.c b/lib/efi_loader/netdump.c
-new file mode 100644
-index 00000000000..c4ed4243c56
---- /dev/null
-+++ b/lib/efi_loader/netdump.c
-@@ -0,0 +1,851 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * netdump.efi tests EFI network protocols
-+ *
-+ * Specifying 'nocolor' as load option data suppresses colored output and
-+ * clearing of the screen.
-+ */
-+
-+#include <efi_api.h>
-+#include <charset.h>
-+#include <net.h>
-+
-+#define BUFFER_SIZE 64
-+#define ESC 0x17
-+
-+#define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
-+
-+static struct efi_system_table *systable;
-+static struct efi_boot_services *bs;
-+static struct efi_simple_text_output_protocol *cerr;
-+static struct efi_simple_text_output_protocol *cout;
-+static struct efi_simple_text_input_protocol *cin;
-+
-+static efi_handle_t http_protocol_handle;
-+static int callback_done;
-+
-+static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-+static const efi_guid_t efi_http_guid = EFI_HTTP_PROTOCOL_GUID;
-+static const efi_guid_t efi_http_service_binding_guid = EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID;
-+static const efi_guid_t efi_ip4_config2_guid = EFI_IP4_CONFIG2_PROTOCOL_GUID;
-+
-+static efi_handle_t handle;
-+static efi_handle_t net_handle;
-+
-+static bool nocolor;
-+
-+/**
-+ * color() - set foreground color
-+ *
-+ * @color:	foreground color
-+ */
-+static void color(u8 color)
-+{
-+	if (!nocolor)
-+		cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
-+}
-+
-+/**
-+ * print() - print string
-+ *
-+ * @string:	text
-+ */
-+static void print(u16 *string)
-+{
-+	cout->output_string(cout, string);
-+}
-+
-+/**
-+ * cls() - clear screen
-+ */
-+static void cls(void)
-+{
-+	if (nocolor)
-+		print(u"\r\n");
-+	else
-+		cout->clear_screen(cout);
-+}
-+
-+/**
-+ * error() - print error string
-+ *
-+ * @string:	error text
-+ */
-+static void error(u16 *string)
-+{
-+	color(EFI_LIGHTRED);
-+	print(string);
-+	color(EFI_LIGHTBLUE);
-+}
-+
-+/*
-+ * printx() - print hexadecimal number
-+ *
-+ * @val:	value to print;
-+ * @prec:	minimum number of digits to print
-+ */
-+static void printx(u64 val, u32 prec)
-+{
-+	int i;
-+	u16 c;
-+	u16 buf[16];
-+	u16 *pos = buf;
-+
-+	for (i = 2 * sizeof(val) - 1; i >= 0; --i) {
-+		c = (val >> (4 * i)) & 0x0f;
-+		if (c || pos != buf || !i || i < prec) {
-+			c += '0';
-+			if (c > '9')
-+				c += 'a' - '9' - 1;
-+			*pos++ = c;
-+		}
-+	}
-+	*pos = 0;
-+	print(buf);
-+}
-+
-+/*
-+ * printd() - print decimal byte
-+ *
-+ * @val:	value to print;
-+ */
-+static void printd(u64 val)
-+{
-+	u16 buf[21];
-+	u16 tmp;
-+	int i = 0;
-+
-+	do {
-+		buf[i++] = '0' + (val % 10);
-+		val /= 10;
-+	} while (val > 0);
-+
-+	for (int j = 0; j < i / 2; ++j) {
-+		tmp = buf[j];
-+		buf[j] = buf[i - 1 - j];
-+		buf[i - 1 - j] = tmp;
-+	}
-+
-+	buf[i] = 0;
-+	print(buf);
-+}
-+
-+/**
-+ * efi_drain_input() - drain console input
-+ */
-+static void efi_drain_input(void)
-+{
-+	cin->reset(cin, true);
-+}
-+
-+/**
-+ * efi_input() - read string from console
-+ *
-+ * @buffer:		input buffer
-+ * @buffer_size:	buffer size
-+ * Return:		status code
-+ */
-+static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
-+{
-+	struct efi_input_key key = {0};
-+	efi_uintn_t index;
-+	efi_uintn_t pos = 0;
-+	u16 outbuf[2] = u" ";
-+	efi_status_t ret;
-+
-+	*buffer = 0;
-+	for (;;) {
-+		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		ret = cin->read_key_stroke(cin, &key);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		switch (key.scan_code) {
-+		case 0x17: /* Escape */
-+			print(u"\r\nAborted\r\n");
-+			return EFI_ABORTED;
-+		default:
-+			break;
-+		}
-+		switch (key.unicode_char) {
-+		case 0x08: /* Backspace */
-+			if (pos) {
-+				buffer[pos--] = 0;
-+				print(u"\b \b");
-+			}
-+			break;
-+		case 0x0a: /* Linefeed */
-+		case 0x0d: /* Carriage return */
-+			print(u"\r\n");
-+			return EFI_SUCCESS;
-+		default:
-+			break;
-+		}
-+		/* Ignore surrogate codes */
-+		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
-+			continue;
-+		if (key.unicode_char >= 0x20 &&
-+		    pos < buffer_size - 1) {
-+			*outbuf = key.unicode_char;
-+			buffer[pos++] = key.unicode_char;
-+			buffer[pos] = 0;
-+			print(outbuf);
-+		}
-+	}
-+}
-+
-+/**
-+ * skip_whitespace() - skip over leading whitespace
-+ *
-+ * @pos:	UTF-16 string
-+ * Return:	pointer to first non-whitespace
-+ */
-+static u16 *skip_whitespace(u16 *pos)
-+{
-+	for (; *pos && *pos <= 0x20; ++pos)
-+		;
-+	return pos;
-+}
-+
-+/**
-+ * starts_with() - check if @string starts with @keyword
-+ *
-+ * @string:	string to search for keyword
-+ * @keyword:	keyword to be searched
-+ * Return:	true if @string starts with the keyword
-+ */
-+static bool starts_with(u16 *string, u16 *keyword)
-+{
-+	if (!string || !keyword)
-+		return false;
-+
-+	for (; *keyword; ++string, ++keyword) {
-+		if (*string != *keyword)
-+			return false;
-+	}
-+	return true;
-+}
-+
-+/*
-+ * efi_dectoul() - decimal string to efi_uintn_t
-+ *
-+ * @s:		string
-+ * Return:	string as efi_uintn_t
-+ */
-+static efi_uintn_t efi_dectoul(char *s)
-+{
-+	efi_uintn_t result = 0;
-+
-+	while (*s >= '0' && *s <= '9') {
-+		result = result * 10 + (*s - '0');
-+		s++;
-+	}
-+	return result;
-+}
-+
-+/*
-+ * parse_address() - parse string IP address into ip_addr
-+ *
-+ * @input:	string IP address
-+ * @address:	pointer to u8[4] buffer
-+ */
-+static void parse_address(u8 **input, u8 *address)
-+{
-+	int i = 0;
-+	efi_uintn_t part;
-+
-+	if (**input < '0' || **input > '9')
-+		return;
-+
-+	while (i <= 3) {
-+		part = efi_dectoul(*input);
-+		if (part > 255)
-+			return;
-+		address[i] = (u8)part;
-+		while (**input >= '0' && **input <= '9')
-+			(*input)++;
-+		if (**input == '.')
-+			(*input)++;
-+		else
-+			break;
-+		i++;
-+	}
-+}
-+
-+/*
-+ * utf16le_ascii_to_utf8() - simple utf16to utf8 converter
-+ *
-+ * @out:	output utf8 buffer
-+ * @in:		input utf16 buffer
-+ * @max_out:	maximum characters to convert
-+ */
-+static int utf16le_ascii_to_utf8(char *out, const u16 *in, size_t max_out)
-+{
-+	size_t i = 0;
-+
-+	while (in[i] && i < max_out - 1) {
-+		if (in[i] > 0x7F)
-+			return -1;  // non-ASCII detected, not supported
-+		out[i] = (char)(in[i] & 0xFF);
-+		i++;
-+	}
-+	out[i] = '\0';
-+	return 0;
-+}
-+
-+/**
-+ * do_help() - print help
-+ */
-+static void do_help(void)
-+{
-+	error(u"set address <ip> <netmask> - set IP and netmask\r\n");
-+	error(u"get address                - get IP and netmask\r\n");
-+	error(u"set policy static          - set policy to static\r\n");
-+	error(u"wget <uri>                 - fetch a file via EFI_HTTP_PROTOCOL\r\n");
-+	error(u"exit                       - exit the shell\r\n");
-+}
-+
-+/**
-+ * do_set_address() - sets IP and netmask using EFI_IP4_CONFIG2_PROTOCOL
-+ *
-+ * @address:		ip and netmask
-+ * Return:		status code
-+ */
-+static efi_status_t do_set_address(u16 *address)
-+{
-+	efi_uintn_t ret;
-+	struct efi_ip4_config2_protocol *ip4_config2;
-+	struct efi_ip4_config2_manual_address manual_address;
-+	u8 netmask[4];
-+	u8 ip[4];
-+	u8 utf8[128];
-+	u8 *tmp;
-+
-+	ret = bs->open_protocol(net_handle, &efi_ip4_config2_guid,
-+					(void **)&ip4_config2, 0, 0,
-+					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+
-+	if (ret != EFI_SUCCESS) {
-+		error(u"set address: failed to open ipv4 config2 protocol\r\n");
-+		return ret;
-+	}
-+
-+	// Convert the UTF-16 string to UTF-8
-+	if (utf16le_ascii_to_utf8(utf8, address, sizeof(utf8)) != 0) {
-+		error(u"set address: failed to convert address to utf8\r\n");
-+		return EFI_DEVICE_ERROR;
-+	}
-+
-+	tmp = utf8;
-+	parse_address(&tmp, ip);
-+	tmp++;
-+	parse_address(&tmp, netmask);
-+
-+	/* Set static ip and netmask */
-+	memcpy(&manual_address.address, ip,
-+	       sizeof(struct efi_ipv4_address));
-+	memcpy(&manual_address.subnet_mask, netmask,
-+	       sizeof(struct efi_ipv4_address));
-+	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+			      sizeof(manual_address), &manual_address);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"set address: failed to set ip address and netmask\r\n");
-+		return ret;
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * do_get_address() - get IP and netmask using EFI_IP4_CONFIG2_PROTOCOL
-+ *
-+ * Return:		status code
-+ */
-+static efi_status_t do_get_address(void)
-+{
-+	efi_uintn_t ret;
-+	struct efi_ip4_config2_protocol *ip4_config2;
-+	struct efi_ip4_config2_manual_address manual_address;
-+	efi_uintn_t data_size;
-+
-+	ret = bs->open_protocol(net_handle, &efi_ip4_config2_guid,
-+					(void **)&ip4_config2, 0, 0,
-+					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+
-+	if (ret != EFI_SUCCESS) {
-+		error(u"get address: failed to open ipv4 config2 protocol\r\n");
-+		return ret;
-+	}
-+
-+	/* Get IP address and netmask */
-+	data_size = sizeof(manual_address);
-+	ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
-+			      &data_size, &manual_address);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"get address: failed to get IP address and netmask\r\n");
-+		return ret;
-+	}
-+
-+	print(u"CURRENT IP: ");
-+	printd(manual_address.address.ip_addr[0]);
-+	print(u".");
-+	printd(manual_address.address.ip_addr[1]);
-+	print(u".");
-+	printd(manual_address.address.ip_addr[2]);
-+	print(u".");
-+	printd(manual_address.address.ip_addr[3]);
-+	print(u"\r\n");
-+	print(u"CURRENT NETMASK: ");
-+	printd(manual_address.subnet_mask.ip_addr[0]);
-+	print(u".");
-+	printd(manual_address.subnet_mask.ip_addr[1]);
-+	print(u".");
-+	printd(manual_address.subnet_mask.ip_addr[2]);
-+	print(u".");
-+	printd(manual_address.subnet_mask.ip_addr[3]);
-+	print(u"\r\n");
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * do_set_policy_static() - sets policy to static
-+ *
-+ * Return:		status code
-+ */
-+static efi_status_t do_set_policy_static(void)
-+{
-+	efi_uintn_t ret;
-+	struct efi_ip4_config2_protocol *ip4_config2;
-+	enum efi_ip4_config2_policy policy;
-+
-+	ret = bs->open_protocol(net_handle, &efi_ip4_config2_guid,
-+					(void **)&ip4_config2, 0, 0,
-+					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"set polict: failed to open ipv4 config2 protocol\r\n");
-+		return ret;
-+	}
-+
-+	/* Set policy to static */
-+	policy = EFI_IP4_CONFIG2_POLICY_STATIC;
-+	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_POLICY,
-+			      sizeof(policy), (void *)&policy);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to set policy\r\n");
-+		return ret;
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * select_net() - get a handle for networking
-+ *
-+ * Return:		status code
-+ */
-+static efi_status_t select_net(void)
-+{
-+	efi_uintn_t ret;
-+	efi_uintn_t num_handles;
-+	efi_handle_t *current_handle;
-+	efi_handle_t *handles;
-+	struct efi_ip4_config2_protocol *ip4_config2;
-+
-+	num_handles = 0;
-+	ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_ip4_config2_guid,
-+				       NULL, &num_handles, &handles);
-+
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to locate ipv4 config2 protocol\r\n");
-+		return ret;
-+	}
-+
-+	for (current_handle = handles; num_handles--; current_handle++) {
-+		ret = bs->open_protocol(*current_handle, &efi_ip4_config2_guid,
-+					      (void **)&ip4_config2, 0, 0,
-+					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		break; // Get first handle that supports
-+	}
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to open ipv4 config2 protocol\r\n");
-+		return ret;
-+	}
-+
-+	net_handle = *current_handle;
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * setup_http() - get handles and open protocols
-+ *
-+ * Return:		status code
-+ */
-+static efi_status_t setup_http(void)
-+{
-+	efi_uintn_t ret;
-+	struct efi_http_config_data http_config;
-+	struct efi_httpv4_access_point ipv4_node;
-+	struct efi_http_protocol *http;
-+	struct efi_service_binding_protocol *http_service;
-+
-+	ret = bs->open_protocol(net_handle, &efi_http_service_binding_guid,
-+					(void **)&http_service, 0, 0,
-+					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to open http service binding protocol\r\n");
-+		return ret;
-+	}
-+
-+	http_protocol_handle = NULL;
-+	ret = http_service->create_child(http_service, &http_protocol_handle);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to create an http service instance\r\n");
-+		return ret;
-+	}
-+
-+	ret = bs->open_protocol(http_protocol_handle, &efi_http_guid,
-+				      (void **)&http, 0, 0, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to open http protocol\r\n");
-+		return ret;
-+	}
-+	print(u"HTTP Service Binding: child created successfully\r\n");
-+
-+	http_config.http_version = HTTPVERSION11;
-+	http_config.is_ipv6 = false;
-+	http_config.access_point.ipv4_node = &ipv4_node;
-+	ipv4_node.use_default_address = true;
-+
-+	ret = http->configure(http, &http_config);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to configure http instance\r\n");
-+		return ret;
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
-+static void EFIAPI callback_http(struct efi_event *event, void *context)
-+{
-+	callback_done = 1;
-+}
-+
-+/**
-+ * execute_http() - execute http request
-+ *
-+ * @filename:	file name
-+ * Return:	status code
-+ */
-+static efi_status_t execute_http(u16 *filename, void **buffer, efi_uintn_t *buffer_size)
-+{
-+	efi_status_t ret;
-+	struct efi_http_protocol *http;
-+	struct efi_http_request_data request_data;
-+	struct efi_http_message request_message;
-+	struct efi_http_token request_token;
-+	struct efi_http_response_data response_data;
-+	struct efi_http_message response_message;
-+	struct efi_http_token response_token;
-+	enum efi_http_status_code status_code;
-+	efi_uintn_t len, sum, content_len;
-+	int i;
-+
-+	request_data.method = HTTP_METHOD_GET;
-+	request_data.url = filename;
-+	request_message.data.request = &request_data;
-+	request_message.header_count = 3;
-+	request_message.body_length = 0;
-+	request_message.body = NULL;
-+
-+	/* request token */
-+	request_token.event = NULL;
-+	request_token.status = EFI_NOT_READY;
-+	request_token.message = &request_message;
-+	callback_done = 0;
-+	ret = bs->create_event(EVT_NOTIFY_SIGNAL,
-+			TPL_CALLBACK,
-+			callback_http,
-+			NULL,
-+			&request_token.event);
-+
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to create request event\r\n");
-+		return ret;
-+	}
-+
-+	ret = bs->open_protocol(http_protocol_handle, &efi_http_guid,
-+				      (void **)&http, 0, 0, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to open http protocol\r\n");
-+		return ret;
-+	}
-+
-+	ret = http->request(http, &request_token);
-+
-+	if (ret != EFI_SUCCESS) {
-+		bs->close_event(request_token.event);
-+		error(u"Failed to proceed with the http request\r\n");
-+		return ret;
-+	}
-+
-+	while (!callback_done)
-+		http->poll(http);
-+
-+	response_data.status_code = HTTP_STATUS_UNSUPPORTED_STATUS;
-+	response_message.data.response = &response_data;
-+	response_message.header_count = 0;
-+	response_message.headers = NULL;
-+	response_message.body_length = 0;
-+	response_message.body = NULL;
-+	response_token.event = NULL;
-+
-+	ret = bs->create_event(EVT_NOTIFY_SIGNAL,
-+			TPL_CALLBACK,
-+			callback_http,
-+			NULL,
-+			&response_token.event);
-+
-+	if (ret != EFI_SUCCESS) {
-+		bs->close_event(request_token.event);
-+		error(u"Failed to create response event\r\n");
-+		return ret;
-+	}
-+
-+	response_token.status = EFI_SUCCESS;
-+	response_token.message = &response_message;
-+
-+	callback_done = 0;
-+	ret = http->response(http, &response_token);
-+
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed http first response\r\n");
-+		goto fail;
-+	}
-+
-+	while (!callback_done)
-+		http->poll(http);
-+
-+	if (response_message.data.response->status_code != HTTP_STATUS_200_OK) {
-+		status_code = response_message.data.response->status_code;
-+		if (status_code == HTTP_STATUS_404_NOT_FOUND) {
-+			error(u"File not found\r\n");
-+		} else {
-+			error(u"Bad http status:\r\n");
-+			printx(response_message.data.response->status_code, 2);
-+			print(u"\r\n");
-+		}
-+		goto fail_free_hdr;
-+	}
-+
-+	for (i = 0; i < response_message.header_count; i++) {
-+		if (!memcmp(response_message.headers[i].field_name,
-+			    "Content-Length", sizeof("Content-Length")))
-+			content_len = efi_dectoul(response_message.headers[i].field_value);
-+	}
-+
-+	ret = bs->allocate_pool(EFI_LOADER_CODE, content_len,
-+				      buffer);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed allocating response buffer\r\n");
-+		goto fail_free_hdr;
-+	}
-+
-+	*buffer_size = content_len;
-+	len = content_len;
-+	sum = 0;
-+	while (len) {
-+		response_message.data.response = NULL;
-+		response_message.header_count = 0;
-+		response_message.headers = NULL;
-+		response_message.body_length = len;
-+		response_message.body = *buffer + sum;
-+
-+		response_token.message = &response_message;
-+		response_token.status = EFI_NOT_READY;
-+
-+		callback_done = 0;
-+		ret = http->response(http, &response_token);
-+		if (ret != EFI_SUCCESS) {
-+			error(u"Failed http second response\r\n");
-+			goto fail_free_buf;
-+		}
-+
-+		while (!callback_done)
-+			http->poll(http);
-+
-+		if (!response_message.body_length)
-+			break;
-+
-+		len -= response_message.body_length;
-+		sum += response_message.body_length;
-+	}
-+
-+	if (len) {
-+		ret = EFI_DEVICE_ERROR;
-+		goto fail_free_buf;
-+	}
-+
-+	if (response_message.headers)
-+		bs->free_pool(response_message.headers);
-+	bs->close_event(request_token.event);
-+	bs->close_event(response_token.event);
-+	print(u"Efi Http request executed successfully\r\n");
-+	return EFI_SUCCESS;
-+
-+fail_free_buf:
-+	bs->free_pool(*buffer);
-+	*buffer = NULL;
-+fail_free_hdr:
-+	if (response_message.headers)
-+		bs->free_pool(response_message.headers);
-+fail:
-+	bs->close_event(request_token.event);
-+	bs->close_event(response_token.event);
-+	return ret;
-+}
-+
-+/**
-+ * do_netdump_wget() - fetch a file via EFI_HTTP_PROTOCOL
-+ *
-+ * @filename:	file name
-+ * Return:	status code
-+ */
-+static efi_status_t do_netdump_wget(u16 *filename)
-+{
-+	void *buffer;
-+	efi_uintn_t buffer_size;
-+	u32 crc32;
-+	efi_uintn_t ret = EFI_SUCCESS;
-+
-+	ret = do_set_policy_static();
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to set static network policy\r\n");
-+		return ret;
-+	}
-+
-+	ret = setup_http();
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to set up http protocol\r\n");
-+		return ret;
-+	}
-+
-+	buffer = NULL;
-+	ret = execute_http(filename, &buffer, &buffer_size);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to execute http request\r\n");
-+		return ret;
-+	}
-+
-+	ret = bs->calculate_crc32(buffer, buffer_size, &crc32);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Calculating CRC32 failed\r\n");
-+		goto out;
-+	}
-+
-+	print(u"length: ");
-+	printd(buffer_size);
-+	print(u"\r\n");
-+
-+	print(u"crc32: 0x");
-+	printx(crc32, 8);
-+	print(u"\r\n");
-+out:
-+	bs->free_pool(buffer);
-+	return ret;
-+}
-+
-+/**
-+ * get_load_options() - get load options
-+ *
-+ * Return:	load options or NULL
-+ */
-+static u16 *get_load_options(void)
-+{
-+	efi_status_t ret;
-+	struct efi_loaded_image *loaded_image;
-+
-+	ret = bs->open_protocol(handle, &loaded_image_guid,
-+				(void **)&loaded_image, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Loaded image protocol not found\r\n");
-+		return NULL;
-+	}
-+
-+	if (!loaded_image->load_options_size || !loaded_image->load_options)
-+		return NULL;
-+
-+	return loaded_image->load_options;
-+}
-+
-+/**
-+ * efi_main() - entry point of the EFI application.
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systab:	system table
-+ * Return:	status code
-+ */
-+efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
-+			     struct efi_system_table *systab)
-+{
-+	u16 *load_options;
-+	efi_status_t ret;
-+
-+	handle = image_handle;
-+	systable = systab;
-+	cerr = systable->std_err;
-+	cout = systable->con_out;
-+	cin = systable->con_in;
-+	bs = systable->boottime;
-+	load_options = get_load_options();
-+
-+	if (starts_with(load_options, u"nocolor"))
-+		nocolor = true;
-+
-+	ret = select_net();
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to set up networking\r\n");
-+		return ret;
-+	}
-+
-+	color(EFI_WHITE);
-+	cls();
-+	print(u"NET Dump\r\n========\r\n\r\n");
-+
-+	color(EFI_LIGHTBLUE);
-+
-+	for (;;) {
-+		u16 command[BUFFER_SIZE];
-+		u16 *pos;
-+		efi_uintn_t ret;
-+
-+		efi_drain_input();
-+		print(u"=> ");
-+		ret = efi_input(command, sizeof(command));
-+		if (ret == EFI_ABORTED)
-+			break;
-+		pos = skip_whitespace(command);
-+		if (starts_with(pos, u"exit"))
-+			break;
-+		else if (starts_with(pos, u"set address "))
-+			do_set_address(pos + 12);
-+		else if (starts_with(pos, u"get address"))
-+			do_get_address();
-+		else if (starts_with(pos, u"set policy static"))
-+			do_set_policy_static();
-+		else if (starts_with(pos, u"wget "))
-+			do_netdump_wget(pos + 5);
-+		else
-+			do_help();
-+	}
-+
-+	color(EFI_LIGHTGRAY);
-+	cls();
-+
-+	return EFI_SUCCESS;
-+}
+diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_loader.py
+index dc58c0d4dbd..1714af0f255 100644
+--- a/test/py/tests/test_efi_loader.py
++++ b/test/py/tests/test_efi_loader.py
+@@ -48,6 +48,18 @@ For example:
+         'addr': 0x40400000,                    # load address
+     }
+ 
++    # Details regarding a httpprotocol file that may be read from a TFTP server. This
++    # variable may be omitted or set to None if TFTP testing is not possible or desired.
++    env__efi_loader_httpprotocol_file = {
++        'fn': 'lib/efi_loader/netdump.efi',              # file name
++        'size': 5058624,                                 # file length in bytes
++        'crc32': 'c2244b26',                             # CRC32 check sum
++        'addr': 0x40400000,                              # load address
++        'payload': 'http://10.0.2.2/path/to/payload',    # file uri
++        'payload_length': 6354745,                       # file length in bytes
++        'payload_crc32': 'b22e4a36',                     # CRC32 check sum
++    }
++
+     # False if the helloworld EFI over HTTP boot test should be performed.
+     # If HTTP boot testing is not possible or desired, set this variable to True or
+     # ommit it.
+@@ -200,6 +212,57 @@ def test_efi_helloworld_net_http(ubman):
+ 
+     do_test_efi_helloworld_net(ubman, PROTO_HTTP);
+ 
++def do_test_efi_httpprotocol_net(ubman, proto):
++    f = ubman.config.env.get('env__efi_loader_httpprotocol_file', None)
++    if not f:
++        pytest.skip('No env__efi_loader_httpprotocol_file specified in environment')
++
++    payload = f.get('payload', None)
++    if not payload:
++        pytest.skip('No payload specified in env__efi_loader_httpprotocol_file')
++
++    ubman.run_command('setenv bootargs nocolor');
++
++    addr = fetch_file(ubman, 'env__efi_loader_httpprotocol_file', proto)
++
++    output = ubman.run_command('bootefi %x' % addr)
++    assert "NET Dump" in output
++    assert '## Application failed' not in output
++    response = ubman.run_command('wget %s' % payload, wait_for_echo=False)
++    expected_text = 'Efi Http request executed successfully'
++    assert expected_text in response
++    expected_length = f.get('payload_length', None)
++    if expected_length:
++        assert f"length: {expected_length}" in response
++    expected_crc = f.get('payload_crc32', None)
++    if expected_crc:
++        assert f"crc32: 0x{expected_crc}" in response
++    ubman.restart_uboot()
++
++@pytest.mark.buildconfigspec('of_control')
++@pytest.mark.buildconfigspec('efi_http_protocol')
++@pytest.mark.buildconfigspec('cmd_tftpboot')
++def test_efi_httpprotocol_net_tftp(ubman):
++    """Run the httpprotocol.efi binary via HTTP.
++
++    The httppotocol.efi file is downloaded from the TFTP server and executed
++    """
++
++    do_test_efi_httpprotocol_net(ubman, PROTO_TFTP);
++
++@pytest.mark.buildconfigspec('of_control')
++@pytest.mark.buildconfigspec('efi_http_protocol')
++@pytest.mark.buildconfigspec('cmd_wget')
++def test_efi_httpprotocol_net_http(ubman):
++    """Run the httpprotocol.efi binary via HTTP.
++
++    The httppotocol.efi file is downloaded from the HTTP server and executed
++    """
++    if ubman.config.env.get('env__efi_helloworld_net_http_test_skip', False):
++        pytest.skip('httpprotocol.efi HTTP test is not enabled!')
++
++    do_test_efi_httpprotocol_net(ubman, PROTO_HTTP);
++
+ @pytest.mark.buildconfigspec('cmd_bootefi_hello')
+ def test_efi_helloworld_builtin(ubman):
+     """Run the builtin helloworld.efi binary.
 -- 
 2.48.1
 
