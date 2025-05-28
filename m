@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA1B6C5AE59
-	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B56CC5AE59
+	for <u-boot@archiver.kernel.org>; Wed, 28 May 2025 08:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0ACE83987;
-	Wed, 28 May 2025 10:26:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE92B83976;
+	Wed, 28 May 2025 10:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jk1aisrg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KV0CtZys";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95B2C83990; Wed, 28 May 2025 10:26:08 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id AAE028398D; Wed, 28 May 2025 10:26:10 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CF2083956
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E0FE8398D
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 10:26:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-85b41281b50so97497239f.3
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:06 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3da831c17faso13542475ab.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 01:26:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748420764; x=1749025564; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1748420767; x=1749025567; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mYnTTp5icbLCmOpWUoNMQRqJJuUYJe4jNyQJYKC0r9E=;
- b=Jk1aisrg3CSmV60pdho4yaDMnuy1P//9onjXdXoPuuKzjm2gBalHZEnTKjqt8dBI8U
- BXd/MPeAmziBEaYKpaSFQHDxdeNb91GGr//1Sdq1YeHRz8F20SpK+P2DxxLce3D5B/KR
- OaPCI8YWcK1Pq01rRF2GrwGIuQ0tXmnyv7vD4=
+ bh=/bHJmoiGVFrfOQh/IiVXG8F4pb61PliK3Knpz9DRMSk=;
+ b=KV0CtZysMxWib5xKCJOzCz+hzfWh0JvaymC8RMrEryLKfZnymoxO0+YkrRl/mvVaY+
+ 67lp+QfgwmLfDgpoaYnoqoAFS/uFKF1TGJ0LXPEVPObeqHLuq63WsfTbE9SCr6lSdwud
+ 3euVwRBKTtzfKqHIMFyLuh3JW9QdQxLwgdG68=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748420764; x=1749025564;
+ d=1e100.net; s=20230601; t=1748420767; x=1749025567;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mYnTTp5icbLCmOpWUoNMQRqJJuUYJe4jNyQJYKC0r9E=;
- b=bkLA0K9Ap2ZSHk7cPHAm51PQsjXoDrk1DlhpoLyuCWdseCQFu0aDLrpjlvj1Fe4kMK
- FIW8Lpt7Nn3L+GQyHyh1w2Sfe5QfFA5brVVkJTjM3g4ajgVwjBS2RPDtV5FAxnWSlyqC
- yAPqbS8e4RxhiGgEyQ6bnB0FOlg5HXfaHprJdkEMYcEChONBEzSbT8tNzNxzA7ik0ZGr
- sT7ziXQWV3pXjGXFPbudejVMMSGeY2mZ3UUFXW9x54m1k5ottHudRHhDkF5RHpb+4KvL
- 2hY3/cDKWkuPcpeKCJc6LWW4YOV5UWxMti1CqE4rhacXYbL6IETyf3JFhPGpEl9PUnPm
- bsLQ==
-X-Gm-Message-State: AOJu0YympGAWbO/WouJjHKjhF+EeN6Ng0Te9fu9EOlWkH6Q/eB+xImUg
- UXDLD2umBnfeaefwx6rVim1qbBdDcWPfoRajhYVFZI0j9HybxffD4iJ6g6lgrbCS0jbmViAAiHK
- 8wREUVYf1
-X-Gm-Gg: ASbGncspfLqTy20sZFjy4uK3vTiV7pMlpwM2Jf3/yOqjOATxMJSt0LUyFM/RYfe95IR
- EOMd05+lhDympBi8Vkb8nsRaX8Jv8X9seqR57usl3+Z1uw7mYMKl5YEdZso+NoSjjlHbxVHNbOy
- sDdEn+BS+T5K9kDnUQQfaLmRaryByg8+ARHU/EvQA0Vdfs5ABme7KJcXmys7SDq5YrIhYvdxPtI
- LrITdQyDARiYBWm42CSvoq4rN2tzOYQwf6dlDU6WJofvnA1lws+xHKJ7/Nqhj0kdvj1QqcVM4vB
- ynyRFYNbej2RELi4WA6tI5RDtshBC6mhEHvxUe2gDrnUvinqSvazzrXJ1tJ9t+WOyEvk6D6as12
- hWocjMcXw2Fux
-X-Google-Smtp-Source: AGHT+IGyvt8is80RDN0tjFvbvdiSxbZUNjBod0/01JyDR4EPAJEP8kIW4yHlB2VtgmKQkR5bRmaTjA==
-X-Received: by 2002:a05:6e02:3cc4:b0:3dd:8a06:4db3 with SMTP id
- e9e14a558f8ab-3dd8a0653damr12154745ab.19.1748420764668; 
- Wed, 28 May 2025 01:26:04 -0700 (PDT)
+ bh=/bHJmoiGVFrfOQh/IiVXG8F4pb61PliK3Knpz9DRMSk=;
+ b=RxJLiwKyZNdww7rtEx53BwImNtCPyy8Z+NcWbl0sem5g+CWWBFPk4ZgUeSPQDnkNBY
+ Rb3lstFjQYNNMXLiV1y5B8fdBMUvurANVAb+M0erz46OZv+ZAz+/FrxB85VLjWo71ivn
+ RJ6n+6iOyReOQhpjDJGQZDCOW62DsXrgMoYCCKMkS48y41BZuFv6eaM7/HeumXyCKhOZ
+ EtEFnrqLcwaR5fPmDf3lKP8Iu1M/7st0+tHqT8KOhAgBpixgs7VBi7CtndY1fjaOTPR8
+ pnQh6pX+65tCkMt3p6Xmxd8sR+Th1yuIYKHXAIZoemnbYbzBugGGJYZILJjMvIJr0CXq
+ XeuQ==
+X-Gm-Message-State: AOJu0Yxt4kkh9Gr++gcdj8ZTJ33njxpRzxVKi2ZBk24FyjWySeMTrOqB
+ lGxQQOmsIHSdyVWO8qjwsUhS4y2HZKwstyyKoRith+uwXWVT9mQqaYKoCfu82mTszMEKJCFUk3r
+ n0Y437A99
+X-Gm-Gg: ASbGnctf0qn+DdXK+1pBztOyNHuNylB6xSfvl9196m0FWf+fW9DTfZ1+wd6vKk0g7/h
+ yLmtZvhoVWABccMIxy/nrZAqGOhfAKXOA69ZfQQmSnW0BY+e6ff8h5rjssj2HeYT4IAh/Tl6o4p
+ 6RRwHFvdzsn12/kLO+w9AvP3OXIAfgkTbAFtnU5PMWn1vFcEOa7jsantAXA6lr7pLBMvZhiS+Na
+ IcSiEUk5n2Zyb7yomgHq+kSlp7YetrBmBw8EU4pjQa7EYOc7YM+QDKZ1eJBQSohC1k/QKN/02d1
+ QEYEVnCXyFlJ8gdPkd0RjUI8om4pWTUnU/WSC4b5YH4DH9TkU/sxU0RCA4RLeHG3JEJTNEcBZNk
+ 5UBXJg9RcOGDP
+X-Google-Smtp-Source: AGHT+IHegNIN67jrKLZaRFWbMMDAHuMHGZ0T69D3/sb7Il9biKciXkiChIZJhHAaOQomLDurrVhAjg==
+X-Received: by 2002:a05:6e02:3788:b0:3dc:79e5:e6b7 with SMTP id
+ e9e14a558f8ab-3dc9b723ff1mr158734105ab.20.1748420766765; 
+ Wed, 28 May 2025 01:26:06 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.03
+ e9e14a558f8ab-3dd8b880f80sm1870385ab.0.2025.05.28.01.26.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:26:04 -0700 (PDT)
+ Wed, 28 May 2025 01:26:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/27] vbe: Avoid accessing TEXT_BASE if undefined
-Date: Wed, 28 May 2025 02:24:37 -0600
-Message-ID: <20250528082520.152391-12-sjg@chromium.org>
+ Janis Danisevskis <jdanisevskis@aurora.tech>,
+ Matthew Garrett <mgarrett@aurora.tech>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 12/27] efi: Use the correct driver for TPM
+Date: Wed, 28 May 2025 02:24:38 -0600
+Message-ID: <20250528082520.152391-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250528082520.152391-1-sjg@chromium.org>
 References: <20250528082520.152391-1-sjg@chromium.org>
@@ -95,27 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a condition to ensure this symbol is not accessed in the EFI app.
+The TPM driver used in the app here should 'efi_tpm', not 'efi_net'. Fix
+it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/vbe_common.c | 2 +-
+ lib/efi_client/efi_app_init.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/boot/vbe_common.c b/boot/vbe_common.c
-index a86986d86e9..f9368a6a9ab 100644
---- a/boot/vbe_common.c
-+++ b/boot/vbe_common.c
-@@ -174,7 +174,7 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 	 * external data, so this is quite small, perhaps a few KB.
- 	 */
- 	if (IS_ENABLED(CONFIG_SANDBOX)) {
--		addr = CONFIG_VAL(TEXT_BASE);
-+		addr = IF_ENABLED_INT(CONFIG_SANDBOX, CONFIG_VAL(TEXT_BASE));
- 		buf = map_sysmem(addr, size);
- 	} else {
- 		buf = malloc(aligned_size);
+diff --git a/lib/efi_client/efi_app_init.c b/lib/efi_client/efi_app_init.c
+index cc91e1d74b8..25a9b105d63 100644
+--- a/lib/efi_client/efi_app_init.c
++++ b/lib/efi_client/efi_app_init.c
+@@ -308,7 +308,7 @@ static int setup_tpm(void)
+ 
+ 		plat->handle = handle[i];
+ 		plat->proto = proto;
+-		ret = device_bind(dm_root(), DM_DRIVER_GET(efi_net), "efi_tpm",
++		ret = device_bind(dm_root(), DM_DRIVER_GET(efi_tpm), "efi_tpm",
+ 				  plat, ofnode_null(), &dev);
+ 		if (ret) {
+ 			log_warning("- bind TPM %d failed (ret=0x%x)\n", i,
 -- 
 2.43.0
 
