@@ -4,122 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB2DFC54FB3
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 15:51:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12160C5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 15:55:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8261D830A0;
-	Thu, 29 May 2025 17:50:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8225482AB9;
+	Thu, 29 May 2025 17:55:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="G2vavBnH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bker7CdM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 899AF830E4; Thu, 29 May 2025 17:50:14 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A1ECA82B8E; Thu, 29 May 2025 17:55:43 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12F28830A0
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 17:50:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54TC1OV7013717
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 15:50:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=+Xe8zRT9y5o
- ubDnYfECGK7cwIM5zsN5YWwh7lJ32lTE=; b=G2vavBnHNPBtOTjSomdjzxcb+5u
- PGvLm59pC/tL4HV6LrdSo+3b87px3mO+e8vbO5aJh8F3p4/TaLzw9vuoudZBmIT0
- M1knsYniZN0RMwZFeQBwZkaNFjSgWat9iujy7ilI5Ikkpb7S2KcHF+4z/Ogp1/uk
- 0pb03ENZJcBXW2behQbL7IU4k49B5p2XttfoAGvzJJ6w1dsj63zt1QVEBuWvY2t6
- +ZoY/nNzcA4FtgfEYZ7BzubHIGWJeBKYhVGXLjY+J6jJKfoVniJiIWy6sN+eAPJp
- 4nedJbSu0BeoTfha98X2wEM+QZ6k391TOGZDjh7LjMuUT4LWGpGdEEeyRew==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46wavm02cm-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 15:50:10 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-b26e0fee541so768255a12.1
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 08:50:10 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id BAAEE820B0
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 17:55:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-23228b9d684so12664275ad.1
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 08:55:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748534139; x=1749138939; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qjuoYwWc5FUAXyotF0HMe1KfoN0Kcp3ZZpP0bl9m3jY=;
+ b=Bker7CdMcNYyn75aZJXdyT7sRMOM8WmYDT9ERf58jK1U6RoaLyke5+TQ7eYRSPSpUG
+ DT4d5E2qlIaR6tjOzxKRiIcjYGgO21jbCBH+FOlGgEgbd+nhzus0jOVrkOjBZNWq8TGW
+ CTtCeGVuNmDb7tu28zeX+EfVVoWVVnPRdU4y5IvRKWeVrOh5tEH0csM1tny0I8/qPJ1o
+ YraByMm+cig3ZFkBGGAp/Du7BUJ2ibeFMcLJeMxnEVbrsdAuerQ6RFEzureKhyoDxKgb
+ grJB9TVf05p0Rkl7jfITMEtB2XE4a0o+XKZJdkhLMcUkEr7jumR6Y4+5PQDbvdvkQFd+
+ 6eyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748533809; x=1749138609;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+Xe8zRT9y5oubDnYfECGK7cwIM5zsN5YWwh7lJ32lTE=;
- b=KDqRIQedIClrP21ccy66ZlZ8P2zsK/pRMf63LQx1O0nGDaJuAEZQlWLMihxpbWUGGo
- YmUiOncp4/s6G2pYo+YV/Ke0JPGFtHOzIv/pzeRpVxmOSqtEWXkXJ8mhriz5XqxBxlKo
- q1IMp41OUWsv7JQdy1Cc+jT0twupBZdEORnxr8ybTSm8DiZiMCJACCJxORrFMhzrpF5c
- pM4jlbgcgvtdb9h9e71HQJCenFZA88m8fbjUHTqYusMHoFY1jbwHUjZRgYovZsvDaeJ/
- le+7uUydAUC3tElUoqDPleTv2f5ZoIGahYR3XxmjySRLL2BZ7zViM+btzBJvdT6JNLgw
- U9Dw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpPkWr48aacy/OKOw3L1ay+OMkBhjin0q6Ucdr95K4kGb3ZpVXaHC8G38tv6Qcf/4CA5gmcRs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxE9aqZdVMNNs/utisWSB55bKDs0Aa/Fm1dZoD/fe9OkRQchube
- 4auTfMjj+rYHRqVva2NzdOd5SHeTlkpDejdEvvz0URTXif8HTWlQ5QkKrmmzZWInDWXsJwQ6nFz
- Y30EAuDbcvZbuKp3/fKO0bjci8rJRUjfGJM9qdBLi9bg8qZE93Vc5g+91
-X-Gm-Gg: ASbGncvx0VSyL/qGORnZ0y3HIPM+lEx7K5fnmug91nkVrVBsq2QkhDeoYvvaXK0wA6O
- iudOOIYprSOgOtSQuNU9UA8fQZRHPXRKO2wfheYkp/qXjzFrpafiuUgm6k+mFYk0mR4rQiSg5FK
- 4nGoImlWpl/74O90Z3SPPYVrUd7qhCHZ35D4iHzZCzLsaF4jh8rqYGyFb11Svh6xvgXjVrWjQJx
- 3dzOKt0H2vacS6Ma1mAgrpCGUI6i9D1NsOPlZLP4r6jGc5ZPmDkBf5pFN/YrGUEHZVsq+PKNclt
- 8Z8W2BiFjuDNb5VcSwSUC3fvXDfwykEjnhXc8mnmfnpRI2rzS05JwzQZaJNfx0BoxWevmyAChJb
- DPat2SoXUPhgOm5l5sqD5T5y48yw=
-X-Received: by 2002:a17:903:647:b0:235:7c6:eba2 with SMTP id
- d9443c01a7336-235298f01b0mr1155615ad.37.1748533809339; 
- Thu, 29 May 2025 08:50:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFn3lOM7YdSRdzYsIn7XiIWSdTkFcwx3WXPp7hEzelAOaHjOf+9VYE74aytRAqdvjvS+v4GKQ==
-X-Received: by 2002:a17:903:647:b0:235:7c6:eba2 with SMTP id
- d9443c01a7336-235298f01b0mr1155205ad.37.1748533808975; 
- Thu, 29 May 2025 08:50:08 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23506cf5448sm13879045ad.185.2025.05.29.08.50.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 May 2025 08:50:08 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Google-Original-From: Balaji Selvanathan <quic_bselvana@quicinc.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, lukma@denx.de, seanga2@gmail.com,
- balaji.selvanathan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
- me@samcday.com, christopher.obbard@linaro.org, quic_varada@quicinc.com,
- sughosh.ganu@linaro.org, sjg@chromium.org, lehmanju@devpi.de,
- bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v4 6/6] configs: add qcom_qcs8300_defconfig
-Date: Thu, 29 May 2025 21:19:31 +0530
-Message-Id: <20250529154931.1879976-7-quic_bselvana@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250529154931.1879976-1-quic_bselvana@quicinc.com>
-References: <20250529154931.1879976-1-quic_bselvana@quicinc.com>
+ d=1e100.net; s=20230601; t=1748534139; x=1749138939;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qjuoYwWc5FUAXyotF0HMe1KfoN0Kcp3ZZpP0bl9m3jY=;
+ b=c2oYDzIVvMbp/h9rXn8N4yH2qvrIhekoWqsq0BSCAWYyynowDDAPMIvnTnQ3SryoVn
+ qPeVnQW5y/PpNvOQ0Ed3Dby8tiIbgtxljdBA75e9p88+IWONbm9GU1Bjfb1QqmfachsL
+ 0+ctt/SR/qs4XKqHYiPMg7cA5T014X2p3rVkqPPop1RRGtbVpZ3vMc1EloPqbaPE4YT5
+ Z5Q7F30HhcEFxpm5awkNBhawpc5t30D8ePjXDRkXC/+JYdqAXnnW/iK+ZgT87/eayaQe
+ kv4s9pZmPSP6ZES4wcXY8DlT5HvmaZPbMUqrBSeTSG4w2A4BYVsN/C0Wx2wU84R6qSj6
+ 5zBQ==
+X-Gm-Message-State: AOJu0Ywcz2sWrTjQ2nnuCY8lIvaB5/n7kKr5Z39CVtmpgIQAXnG0OU0N
+ xqg/cZ49EGlVAhq3sP+NXpbZ2VqwAjPEg//mpQxJ5+0JvHWP3hUdAlIwmsP3Kxsxvxo0k+UDAg8
+ KFfQytdVj+EncuYM/zDmgj9IRuZNxbuV56MhL2sEvxw==
+X-Gm-Gg: ASbGncteoLMuh4KX8aUsW34mN0qY3C4lgmTWPQWhjEc6UXVXSJWwfauHzGOSASV+mRV
+ mhTWBLnbcFw3Yb3+cY+neZFJ3OXXV13qIUmb9cg7uxkR12XsV8QCy+pke6NULUnSzn9I2O3+LCE
+ 1zxGs5zdx11qjX1cH8cp0KGfvOEhguIAjvDaBPTc3PU47Z
+X-Google-Smtp-Source: AGHT+IHRdnVvHaWn3Rgxix7WmTjR4mcxaz0t2AXmD16SCJ8p2Y7kCkEuGaWtTAySKYOemWtJYgakRERgv3cAkltfwl8=
+X-Received: by 2002:a17:903:40cb:b0:234:e655:a627 with SMTP id
+ d9443c01a7336-23529a0f380mr1499005ad.35.1748534139148; Thu, 29 May 2025
+ 08:55:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: kFMLQP4YNA120dNNwpMRag5C1RZrkoVK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI5MDE1NCBTYWx0ZWRfX6gXFU0AnjQuU
- rjnjVhpKA0lxl+3GkmaD2TVE6LmiRTArdvU6D9G7oX6kINpDPoZPrNf7tK9Pq6cccw/JAtOTos2
- NkmgrSMh8Ngy5Scqc87Kw3C6Oz549A7DQPqgzLF+pqdl6nLjEP7Ki/r4AsEtH5SblpS9dL1fc1W
- w9tKDe1R63EFY9MupQcB0kbIa4cfXmtXe487y8ISrw+/EWAtj558Stji8O58IGjT64muFwvmk7T
- T+vTeRmWnR9tHngq7hPgu+0Zb2EOiD/vUWXCcVji4S1keIsrPjv5zmV/sedb65NyxTdw280fAOz
- nrgHSIqO5V2HGVSSnlo3og/17JlQVgmmFqqK1BD3ISw8ZcXdUggTfHAbUKzki5tBfgOroP0+j19
- RTKiMNzbo4p+6eineDu7hy8uLWcE9/BMErFBt9+YY/L0T6AM7A6WoYJTkNrYD9h6UUI7/r64
-X-Authority-Analysis: v=2.4 cv=fMk53Yae c=1 sm=1 tr=0 ts=68388232 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8 a=SDtKitdulPDloLDBxsMA:9
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-ORIG-GUID: kFMLQP4YNA120dNNwpMRag5C1RZrkoVK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-29_08,2025-05-29_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 impostorscore=0 phishscore=0 suspectscore=0
- spamscore=0 priorityscore=1501 lowpriorityscore=0 clxscore=1015 mlxscore=0
- mlxlogscore=919 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
- definitions=main-2505290154
+References: <20250527210508.1488509-1-raymond.mao@linaro.org>
+ <6b992b47-de7c-45ce-9c3c-ca4a2295f7c9@linaro.org>
+ <CAEfUkUK-hpCLC6oeMdomDNQHvtObDowecr4uY0CiStugHNWpBg@mail.gmail.com>
+ <5c26ad0f-3dfc-4dea-bd81-9f201c17e5c1@linaro.org>
+ <CAEfUkU+vHG5p7jPQF7GMAy1yvmKmXD31Lk2kEDimTLf3ncRHJw@mail.gmail.com>
+In-Reply-To: <CAEfUkU+vHG5p7jPQF7GMAy1yvmKmXD31Lk2kEDimTLf3ncRHJw@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 29 May 2025 11:55:27 -0400
+X-Gm-Features: AX0GCFtSVMLUPziuFgxOpkSdCyX-piJAehHL9Y5gxSaZdc4aNYP0QP4vNBiVIak
+Message-ID: <CAEfUkU+JH77hsjX4zV1dnVsENW5pWgHMuH14k8zTTYFkq20Phg@mail.gmail.com>
+Subject: Re: [PATCH] makefile: fix Clang link error when RSA_PUBLIC_KEY_PARSER
+ is selected
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Sam Edwards <cfsworks@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,53 +106,256 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Hi Tom, Jerome,
 
-Introduce a defconfig for QCS8300 based boards.
+On Wed, 28 May 2025 at 11:46, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Jerome,
+>
+> On Wed, 28 May 2025 at 11:37, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+> >
+> >
+> >
+> > On 5/28/25 17:22, Raymond Mao wrote:
+> > > Hi Jerome,
+> > >
+> > > On Wed, 28 May 2025 at 04:25, Jerome Forissier
+> > > <jerome.forissier@linaro.org> wrote:
+> > >>
+> > >> Hi Rayond,
+> > >>
+> > >> On 5/27/25 23:05, Raymond Mao wrote:
+> > >>> MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> > >>> function provided by the compiler runtime, typically libgcc for GCC or
+> > >>> clang_rt.builtins for Clang.
+> > >>> Thus 'clang_rt.builtins' library is required when building using Clang.
+> > >>
+> > >> How do you reproduce the problem? Can you give the config and build
+> > >> command you are using?
+> > >>
+> > > I am using this:
+> > > CROSS_COMPILE=aarch64-none-linux-gnu- make O=out CC="clang -target
+> > > aarch64-none-linux-gnu" all
+> > >
+> > >>>
+> > >>> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> > >>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > >>> ---
+> > >>>  Makefile | 6 +++++-
+> > >>>  1 file changed, 5 insertions(+), 1 deletion(-)
+> > >>>
+> > >>> diff --git a/Makefile b/Makefile
+> > >>> index f88684947ee..16506dcaec6 100644
+> > >>> --- a/Makefile
+> > >>> +++ b/Makefile
+> > >>> @@ -37,7 +37,6 @@ else ifeq ("riscv32", $(MK_ARCH))
+> > >>>  else ifeq ("riscv64", $(MK_ARCH))
+> > >>>    export HOST_ARCH=$(HOST_ARCH_RISCV64)
+> > >>>  endif
+> > >>> -undefine MK_ARCH
+> > >>>
+> > >>>  # Avoid funny character set dependencies
+> > >>>  unexport LC_ALL
+> > >>> @@ -915,8 +914,13 @@ PLATFORM_LIBGCC = arch/$(ARCH)/lib/lib.a
+> > >>>  else
+> > >>>  ifndef CONFIG_CC_IS_CLANG
+> > >>>  PLATFORM_LIBGCC := -L $(shell dirname `$(CC) $(c_flags) -print-libgcc-file-name`) -lgcc
+> > >>> +else ifeq ($(CONFIG_RSA_PUBLIC_KEY_PARSER_MBEDTLS),y)
+> > >>> +# mbedtls bignum needs '__udivti3' - a 128-bit division function that's provided by clang-rt.
+> > >>> +CLANG_RT_DIR := $(shell $(CC) --print-resource-dir)/lib/linux
+> > >>> +PLATFORM_LIBGCC := -L$(CLANG_RT_DIR) -lclang_rt.builtins-$(MK_ARCH)
+> > >>
+> > >> I'm afraid this won't work when cross-compiling because the compiler-rt
+> > >> builtins libraries are usually not installed with the compiler.
+> > >> For example on my Ubuntu 24.04 machine:
+> > >>
+> > >> $ clang --version
+> > >> Ubuntu clang version 18.1.3 (1ubuntu1)
+> > >> Target: x86_64-pc-linux-gnu
+> > >> Thread model: posix
+> > >> InstalledDir: /usr/bin
+> > >> $ clang --print-targets
+> > >>
+> > >>   Registered Targets:
+> > >>     aarch64     - AArch64 (little endian)
+> > >>     aarch64_32  - AArch64 (little endian ILP32)
+> > >>     aarch64_be  - AArch64 (big endian)
+> > >>     amdgcn      - AMD GCN GPUs
+> > >>     arm         - ARM
+> > >>     arm64       - ARM64 (little endian)
+> > >>     arm64_32    - ARM64 (little endian ILP32)
+> > >>     armeb       - ARM (big endian)
+> > >>     avr         - Atmel AVR Microcontroller
+> > >>     bpf         - BPF (host endian)
+> > >>     bpfeb       - BPF (big endian)
+> > >>     bpfel       - BPF (little endian)
+> > >>     hexagon     - Hexagon
+> > >>     lanai       - Lanai
+> > >>     loongarch32 - 32-bit LoongArch
+> > >>     loongarch64 - 64-bit LoongArch
+> > >>     m68k        - Motorola 68000 family
+> > >>     mips        - MIPS (32-bit big endian)
+> > >>     mips64      - MIPS (64-bit big endian)
+> > >>     mips64el    - MIPS (64-bit little endian)
+> > >>     mipsel      - MIPS (32-bit little endian)
+> > >>     msp430      - MSP430 [experimental]
+> > >>     nvptx       - NVIDIA PTX 32-bit
+> > >>     nvptx64     - NVIDIA PTX 64-bit
+> > >>     ppc32       - PowerPC 32
+> > >>     ppc32le     - PowerPC 32 LE
+> > >>     ppc64       - PowerPC 64
+> > >>     ppc64le     - PowerPC 64 LE
+> > >>     r600        - AMD GPUs HD2XXX-HD6XXX
+> > >>     riscv32     - 32-bit RISC-V
+> > >>     riscv64     - 64-bit RISC-V
+> > >>     sparc       - Sparc
+> > >>     sparcel     - Sparc LE
+> > >>     sparcv9     - Sparc V9
+> > >>     systemz     - SystemZ
+> > >>     thumb       - Thumb
+> > >>     thumbeb     - Thumb (big endian)
+> > >>     ve          - VE
+> > >>     wasm32      - WebAssembly 32-bit
+> > >>     wasm64      - WebAssembly 64-bit
+> > >>     x86         - 32-bit X86: Pentium-Pro and above
+> > >>     x86-64      - 64-bit X86: EM64T and AMD64
+> > >>     xcore       - XCore
+> > >>     xtensa      - Xtensa 32
+> > >> $ clang --print-resource-dir
+> > >> /usr/lib/llvm-18/lib/clang/18
+> > >> $ ls /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins*
+> > >> /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-i386.a  /usr/lib/llvm-18/lib/clang/18/lib/linux/libclang_rt.builtins-x86_64.a
+> > >>
+> > >>
+> > >> Are you doing cross compilation for arm or arm64? Did you have to
+> > >> install the compiler-rt libraries separately from the compiler?
+> > >>
+> > > I installed clang manually.
+> > >
+> > > This is what I have:
+> > > $ which clang
+> > > /home/raymond/toolchain/clang-12.0.0/bin/clang
+> > > $ clang --version
+> > > clang version 12.0.0
+> > > Target: x86_64-unknown-linux-gnu
+> > > Thread model: posix
+> > > InstalledDir: /home/raymond/toolchain/clang-12.0.0/bin
+> > > $ clang --print-targets
+> > >   Registered Targets:
+> > >     aarch64    - AArch64 (little endian)
+> > >     aarch64_32 - AArch64 (little endian ILP32)
+> > >     aarch64_be - AArch64 (big endian)
+> > >     amdgcn     - AMD GCN GPUs
+> > >     arm        - ARM
+> > >     arm64      - ARM64 (little endian)
+> > >     arm64_32   - ARM64 (little endian ILP32)
+> > >     armeb      - ARM (big endian)
+> > >     avr        - Atmel AVR Microcontroller
+> > >     bpf        - BPF (host endian)
+> > >     bpfeb      - BPF (big endian)
+> > >     bpfel      - BPF (little endian)
+> > >     hexagon    - Hexagon
+> > >     lanai      - Lanai
+> > >     mips       - MIPS (32-bit big endian)
+> > >     mips64     - MIPS (64-bit big endian)
+> > >     mips64el   - MIPS (64-bit little endian)
+> > >     mipsel     - MIPS (32-bit little endian)
+> > >     msp430     - MSP430 [experimental]
+> > >     nvptx      - NVIDIA PTX 32-bit
+> > >     nvptx64    - NVIDIA PTX 64-bit
+> > >     ppc32      - PowerPC 32
+> > >     ppc32le    - PowerPC 32 LE
+> > >     ppc64      - PowerPC 64
+> > >     ppc64le    - PowerPC 64 LE
+> > >     r600       - AMD GPUs HD2XXX-HD6XXX
+> > >     riscv32    - 32-bit RISC-V
+> > >     riscv64    - 64-bit RISC-V
+> > >     sparc      - Sparc
+> > >     sparcel    - Sparc LE
+> > >     sparcv9    - Sparc V9
+> > >     systemz    - SystemZ
+> > >     thumb      - Thumb
+> > >     thumbeb    - Thumb (big endian)
+> > >     wasm32     - WebAssembly 32-bit
+> > >     wasm64     - WebAssembly 64-bit
+> > >     x86        - 32-bit X86: Pentium-Pro and above
+> > >     x86-64     - 64-bit X86: EM64T and AMD64
+> > >     xcore      - XCore
+> > > $ clang --print-resource-dir
+> > > /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0
+> > > $ ls /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins*
+> > > /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+> > >  /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-x86_64.a
+> > > /home/raymond/toolchain/clang-12.0.0/lib/clang/12.0.0/lib/linux/libclang_rt.builtins-armhf.a
+> >
+> > Interesting. How did you install clang/LLVM? Did you get those builins
+> > library from multiple release packages?
+> >
+> That is an old version 12.0.0 and I cannot recall well where I got it
+> and how I installed it...
+> But looking at the CI job here [1], the clang builds passed and that
+> implies it got the libs properly.
+> I will take a look at the newer clang releases if I can find some clues.
+>
+> [1] https://github.com/u-boot/u-boot/pull/773
+>
+> Regards,
+> Raymond
+>
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-v4:
-- Corrected the commit title to "qcom_qcs8300_defconfig"
+After researching on the LLVM project releases, two facts are observed.
+1. Since 15.0.0, the location layout of the 'libclang_rt.builtins'
+libraries was changed from pattern [1] to pattern [2].
+2. Since 20.0.0, no official prebuilt aarch64-linux-gnu targets have
+been released.
 
-v3:
-- No changes to this patch in v3
+Thus, if you agree, I can update my patch to support both patterns
+when looking up the libraries, but for the case of release >= 20.0.0,
+users have to crossbuild the targets by themselves (by default the
+outputs are aligned to pattern [2]).
+What are your thoughts?
 
-v2:
-- Renamed from "qcs8300_defconfig" to "qcom_qcs8300_defconfig"
-- Corrected a comment in qcom_qcs8300_defconfig file
----
- configs/qcom_qcs8300_defconfig | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 configs/qcom_qcs8300_defconfig
+Regards,
+Raymond
 
-diff --git a/configs/qcom_qcs8300_defconfig b/configs/qcom_qcs8300_defconfig
-new file mode 100644
-index 00000000000..5fffcddc16e
---- /dev/null
-+++ b/configs/qcom_qcs8300_defconfig
-@@ -0,0 +1,21 @@
-+# Configuration for building U-Boot to be flashed
-+# to the uefi partition of QCS8300 dev boards with
-+# the "Linux Embedded" partition layout (which have
-+# a dedicated "uefi_a" partition for edk2/U-Boot)
-+
-+#include "qcom_defconfig"
-+
-+# Otherwise buildman thinks this isn't an ARM platform
-+CONFIG_ARM=y
-+
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x99C000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+
-+# Address where U-Boot will be loaded
-+CONFIG_TEXT_BASE=0xaf000000
-+CONFIG_REMAKE_ELF=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs8300-ride"
--- 
-2.34.1
+[1] <INSTALLED_DIR>/lib/clang/<REV>/lib/linux/libclang_rt.builtins-<ARCH>.a
+E.g.
+lib/clang/14.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+lib/clang/14.0.0/lib/linux/libclang_rt.builtins-x86_64.a
 
+[2] <INSTALLED_DIR>/lib/clang/<REV_MAJOR>/lib/<CROSSTOOL_NAME>/libclang_rt.builtins.a
+E.g.
+lib/clang/21/lib/aarch64-none-linux-gnu/libclang_rt.builtins.a
+lib/clang/21/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
+
+
+> > In the OP-TEE project we used to do that via a get_clang.sh script [1] but
+> > it broke when llvm-project stopped releasing all the binary packages we needed
+> > (aarch64-linux-gnu and armv7a-linux-gnueabihf). So we ended up importing the
+> > __udivti3 implementation in source code instead [3]. I'm not saying this is
+> > the way to go, but relying on libclang_rt.builtins assumes that a proper
+> > toolchain is available, and that should at least be documented.
+> >
+> > [1] https://github.com/OP-TEE/build/blob/1b68e0bb8a00/get_clang.sh
+> > [2] https://github.com/OP-TEE/build/commit/8dd39dc99f09
+> > [3] https://github.com/OP-TEE/optee_os/commit/48952fd403d8
+> >
+> > Regards,
+> > --
+> > Jerome
+> >
+> > >
+> > > Regards,
+> > > Raymond
+> > >
+> > >> Thanks,
+> > >> --
+> > >> Jerome
+> > >>
+> > >>>  endif
+> > >>>  endif
+> > >>> +undefine MK_ARCH
+> > >>>  PLATFORM_LIBS += $(PLATFORM_LIBGCC)
+> > >>>
+> > >>>  ifdef CONFIG_CC_COVERAGE
