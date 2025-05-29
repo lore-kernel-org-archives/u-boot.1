@@ -4,80 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE155C5AD49
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:39:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC3BC5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E5482AFC;
-	Thu, 29 May 2025 23:39:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CD6F82ED0;
+	Thu, 29 May 2025 23:49:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="FpLoo0/F";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6846582ED0; Thu, 29 May 2025 23:39:50 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C6F2830F4; Thu, 29 May 2025 23:49:27 +0200 (CEST)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A287282AC4
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 23:39:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B80A882B19
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 23:49:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-70e6bddc30aso14528517b3.0
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 14:39:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1748554786; x=1749159586; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i5qXDqzn0mqDFIHQDHwNd6ew1F9FV0GA35OW5v6V278=;
- b=FpLoo0/FDXFzYFE96X0YXX5AP+44Q56bqkL6PY4QW86kvXg/NXqy1zJ1TpTzSW7dJP
- ltHwlw/de5j4rNeZsyJ2AMgVQ5BMjnkVKWDHwdQhhygmxdBT/qOVTE+LI5hzqMff0mDy
- exmaYc35ocnOZacadYRSuJmsYueuCksVDkM3RiXGLZwZwBjHQRdlMtqW0cTsIvUXKhyo
- 5RR8xP5oVIKQ25tPiRugXdupqw607BnErHYr+rYGjZdfFBMFV2RzZ/PkzuYLg4BKzvsR
- 9iVDlNC1s7+eRhBOEVfItlCjM/0gUqy9NeuLLTvd3S882uKPr3wf7BCmAfDaQEp96vk5
- ad4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748554786; x=1749159586;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=i5qXDqzn0mqDFIHQDHwNd6ew1F9FV0GA35OW5v6V278=;
- b=Okd7LqRH1DO9LYoxnaUn08HJBAjSR/QNg13f6tmdarHZekRGCDDCChk+WOFCduM5OI
- m0rjv8TyrOC7ft6jCn/gakx0X3pLnncpYm+4U5/iu7BbcYorxxc8/pW/7BNQvi2XDRCG
- ETiVe53TYyoDUp2SzaL4MqsgXFMNwMyxRWw6FCvrSw/K1A1+4aDpPsMVWv9NgkySvFN5
- M88ASRDVYN9KjLiWzJbqu5U7NsYYHG9ig56V/tptAHUgw7ny6JQCxKtqudpy0cu5v5UN
- DrqZKjvA+89a9qn+WT//y8YUjRJdtB+9J5iF1YXtKP0iGVIq/2cVN9wkXx+TsNkluNhx
- 2EJw==
-X-Gm-Message-State: AOJu0YwPxJseggP7rS01fPpA6n5NOXFbSiP+hrHKJNW6y3bxWOJepgK7
- l9wJO6GtmBWcbb21LuRKo37jRelNo3BUwa6PMNJfPyn0kESj5b+oFLVKnHJUAOrVMJbLVRyMClI
- bP9/Alw+71p4XWIUqdF0/xz6U9T9wGBdggY7WWL4A22PvzT7cyz17p+Y=
-X-Gm-Gg: ASbGncvI79/zodHQ+TqY+kDkuqZczjfuXyVpV7slyz2hSgxjBA13KKFF5BQ5gJAjLct
- x/adPabikj5H/dcRFmQFhDQjFS8cTocyVdsIN8LUh9NXg8FuasORmKbMo8hKrpIEZBmkS6m3Drk
- f9qwJCF8x5Oi/zrQkRoUGy8oeW2qoqL4ah
-X-Google-Smtp-Source: AGHT+IGOPk8vwcyE4T7oeU17IvtFJ+F/0YLVUKF3vLDlJvGPX/C22glajCZFh3Hp0Is/Z83/9NEc2AlXzqTcGpsVMVQ=
-X-Received: by 2002:a05:690c:6e02:b0:70d:ffaf:48df with SMTP id
- 00721157ae682-70f97e1ce40mr17605067b3.3.1748554786315; Thu, 29 May 2025
- 14:39:46 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250520084120.4175862-1-olaf.baehring@draeger.com>
-In-Reply-To: <20250520084120.4175862-1-olaf.baehring@draeger.com>
+Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1uKl7q-007IAa-SY;
+ Thu, 29 May 2025 21:49:23 +0000
 From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 29 May 2025 14:39:35 -0700
-X-Gm-Features: AX0GCFtxJjPzK7nxNYtFOObPmMSTZo-HExUHFtVP7GrMhMz_l2ZQHhKlKoekcSs
-Message-ID: <CAJ+vNU1Ge_s4mEFYCn0TPhuKW5X1J-jcV3GyZqc_70GjgsqRtA@mail.gmail.com>
-Subject: Re: [PATCH v2] caam: bugfix CAAM error on startup
-To: Olaf Baehring <olaf.baehring@draeger.com>
-Cc: u-boot@lists.denx.de, Gaurav Jain <gaurav.jain@nxp.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH 2/6] net: lwip: enable IP_FRAG and IP_REASSEMBLY
+Date: Thu, 29 May 2025 14:49:06 -0700
+Message-Id: <20250529214910.984024-2-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250529214910.984024-1-tharvey@gateworks.com>
+References: <20250529214910.984024-1-tharvey@gateworks.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,121 +59,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 20, 2025 at 5:29=E2=80=AFAM Olaf Baehring <olaf.baehring@draege=
-r.com> wrote:
->
-> In rare cases U-Boot returns an error message when intantiating the RNG
-> of the CAAM device:
-> =E2=80=9CSEC0:  RNG4 SH0 instantiation failed with error 0xffffffff=E2=80=
-=9D
-> This  means, that even when the CAAM device reports a finished
-> descriptor, none is found in the output ring.
-> This might be caused by a missing cache invalidation before
-> reading the memory of the output ring
-> This patch moves the cache invalidation of the output ring from start of
-> the job to immediately after the notification from hardware where the
-> output ring will be read.
->
-> Signed-off-by: Olaf Baehring <olaf.baehring@draeger.com>
-> ---
->
-> (no changes since v1)
->
->  drivers/crypto/fsl/jr.c | 30 +++++++++++++++++-------------
->  drivers/crypto/fsl/jr.h |  4 ----
->  2 files changed, 17 insertions(+), 17 deletions(-)
->
-> diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-> index 8f7a821ebf3..edf678d363e 100644
-> --- a/drivers/crypto/fsl/jr.c
-> +++ b/drivers/crypto/fsl/jr.c
-> @@ -217,13 +217,6 @@ static int jr_enqueue(uint32_t *desc_addr,
->
->         jr->head =3D (head + 1) & (jr->size - 1);
->
-> -       /* Invalidate output ring */
-> -       start =3D (unsigned long)jr->output_ring &
-> -                                       ~(ARCH_DMA_MINALIGN - 1);
-> -       end =3D ALIGN((unsigned long)jr->output_ring + jr->op_size,
-> -                   ARCH_DMA_MINALIGN);
-> -       invalidate_dcache_range(start, end);
-> -
->         sec_out32(&regs->irja, 1);
->
->         return 0;
-> @@ -243,6 +236,7 @@ static int jr_dequeue(int sec_idx, struct caam_regs *=
-caam)
->  #else
->         uint32_t *addr;
->  #endif
-> +       unsigned long start, end;
->
->         while (sec_in32(&regs->orsf) && CIRC_CNT(jr->head, jr->tail,
->                                                  jr->size)) {
-> @@ -250,6 +244,14 @@ static int jr_dequeue(int sec_idx, struct caam_regs =
-*caam)
->                 found =3D 0;
->
->                 caam_dma_addr_t op_desc;
-> +
-> +               /* Invalidate output ring */
-> +               start =3D (unsigned long)jr->output_ring &
-> +                                               ~(ARCH_DMA_MINALIGN - 1);
-> +               end =3D ALIGN((unsigned long)jr->output_ring
-> +                                       + jr->op_size, ARCH_DMA_MINALIGN)=
-;
-> +               invalidate_dcache_range(start, end);
-> +
->         #ifdef CONFIG_CAAM_64BIT
->                 /* Read the 64 bit Descriptor address from Output Ring.
->                  * The 32 bit hign and low part of the address will
-> @@ -283,28 +285,31 @@ static int jr_dequeue(int sec_idx, struct caam_regs=
- *caam)
->                 }
->
->                 /* Error condition if match not found */
-> -               if (!found)
-> +               if (!found) {
-> +                       int slots_full =3D sec_in32(&regs->orsf);
-> +
-> +                       jr->tail =3D (jr->tail + slots_full) & (jr->size =
-- 1);
-> +                       sec_out32(&regs->orjr, slots_full);
->                         return -1;
-> +               }
->
+Enable IP_FRAG and IP_REASSEMBLY to allow packets larger than MTU.
 
-Hi Olaf,
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+---
+ lib/lwip/u-boot/lwipopts.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-I could not find v3 of your patch in my mailbox, which I think was the
-version that was accepted by Fabio,
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+index edac74ff7a21..1818a445dc5e 100644
+--- a/lib/lwip/u-boot/lwipopts.h
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -72,8 +72,8 @@
+ 
+ #define IP_FORWARD                      0
+ #define IP_OPTIONS_ALLOWED              1
+-#define IP_REASSEMBLY                   0
+-#define IP_FRAG                         0
++#define IP_REASSEMBLY                   1
++#define IP_FRAG                         1
+ #define IP_REASS_MAXAGE                 3
+ #define IP_REASS_MAX_PBUFS              4
+ #define IP_FRAG_USES_STATIC_BUF         0
+-- 
+2.25.1
 
-I've found that this patch causes a regression on an imx8mm board
-(imx8mm_venice_defconfig) where the first call to caam_rng_read fails
-here in jr_dequeue but if you call it again it works. With some
-debugging added:
-SEC0:  RNG instantiated
-...
-Hit any key to stop autoboot:  0
-u-boot=3D> rng list
-RNG #0 - caam-rng
-u-boot=3D> rng 0 10
-caam_rng_read caam-rng len=3D16
-run_descriptor_jr_idx idx=3D0
-Error in SEC deq: -1
-caam_rng_read_one run_descriptor_jr failed: -1
-caam_rng_read caam-rng caam_rng_read_one failed: -5
-Reading RNG failed
-u-boot=3D> rng 0 10
-caam_rng_read caam-rng len=3D16
-run_descriptor_jr_idx idx=3D0
-00000000: ad 2e ad c0 2a 12 27 c4 65 82 66 19 be ef f6 07  ....*.'.e.f.....
-
-If I revert your patch caam_rng_read works initially and on subsequent call=
-s.
-
-Thoughts?
-
-Best Regards,
-
-Tim
