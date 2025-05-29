@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56444C5AE59
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 04:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFB0C54FB3
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 04:06:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D5B835EA;
-	Thu, 29 May 2025 06:05:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CD9EC835A5;
+	Thu, 29 May 2025 06:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f9VJeIwg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fepik/v8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 805CB835B9; Thu, 29 May 2025 06:05:41 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 3983E83641; Thu, 29 May 2025 06:05:44 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03B918354B
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 06:05:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3BB38354B
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 06:05:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-73c17c770a7so458973b3a.2
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 21:05:38 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-311ef4fb43dso359429a91.3
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 21:05:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748491537; x=1749096337; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1748491540; x=1749096340; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PbQ0JgyWeTa8yr1I6otTZhj93ooreegHVhFql5kSI3c=;
- b=f9VJeIwgrIY9GRL8BUQMZe2JLB8yDc50osmGfDkhuNq6dzAN26LfZzOTEaZ8WxYLVz
- irveyYrRfxqLKP36OczPCKg4VLvY/l8fsQ/MlB4w7jT3IbiYmGoJFddsRdquULE/Qv4E
- QsxtAqwBGBvQ1ArSq9veBBjClTFTwx7OIkfWsbYwNtcZN8MLpOWDZlfzakbUYhctzLH3
- fK8nbd2OMnm56a5H7DuIJjUNwUOwsfIArha/mrVYXe/nnVcMlQ6NnPIEWWtj7mGlRUmw
- 21vPZNyB6rgGNRgqxE3iw7bMMr+O76ZCo/lw83bXmWrTozemt7c6WSb17N31S/C8aMbH
- Zn/g==
+ bh=OAxJD/tro4tQ+LLFN6U7a59OXHxib3oVjSK6WfPOJpk=;
+ b=fepik/v84yibxdYIVSM8XT9/Til9YK5yYH7FV1GoQuh8DiM41FeB9O3puoxmRywstC
+ r0pm9Fj2G8l9YYQzPoVPfvAi3f7TEffNtzSOOd/eJi2pLU18fs1Vj8WNbMJqPiblML5+
+ qlstCqxaQ7VINoFR1SoURnXL6gKhe2valEWmwvdPjzCt51ingFF64qrt8Sf0upCbl+u/
+ 4QUmIrVef+l5av7pwbbqRDU4U2suF4mF7xS+rtI+ef+ao/cAVdqwqvdlSKpiK2P4vIg8
+ wUoZyuQ81gDQuC8FMc7FQHvbZ049PLy3XihYASVI5HoqKoMONgHbzUvDRtDYNsm1C/Xw
+ pibg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748491537; x=1749096337;
+ d=1e100.net; s=20230601; t=1748491540; x=1749096340;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PbQ0JgyWeTa8yr1I6otTZhj93ooreegHVhFql5kSI3c=;
- b=PMbW/2YdETKM8S6PEIPNLGFqva8pH8zEvwBAl9CPZrarhyAykp2kobnEHkDK6zqOWJ
- co5IlXihYnHqGRp+bbmcq/YFXkwd1ss612z7OFBZHn9QtmsT9xIhLZOjK7s6EJoJpukU
- ORbdC8ZqohXrL42UK/Fa5+QORiwA+1lc89uLqzQXEqb0VivwJW2+CU8VEqljQLPScIEz
- zbVe65KQA+0DH8zQQy4P75jO/gk2SspWJ5SiAXAborj6Tjy/35NQn3X/nAGBKDgCtFPI
- mxj1hLkTJhr3ZhWAjEasI2VL2WlCKY7KhP7kB1YhB0N0Afj58JylfPcgOX/8qiL82jUV
- 1ZHQ==
-X-Gm-Message-State: AOJu0Yzqnv5n6/IgHLmZaWP/toEtFUOrRfYvYnaCxFM/eiJsRu15FYgP
- svQLQFeDWpSBs5hMtp32TRQ2ty3sWQokiCXu9eUt+wJ6VIrk4P0/Xe6xztpQJNNk
-X-Gm-Gg: ASbGncv4taKiPo0XHJiHFeArEg8a86CZ5YoQOQn+wktPO8zHJE1YeEiehcrbmSQ0LTE
- byFuDm7HL2UDZp/F7DO1utBksfoIguOrPALWOGQYl7Xx3rlJ5v0r3JzqzJVlyT4wJ+WQMLdovxw
- RUVh9LfQJTb21zCZkyX3G/1+K2o9Sm0eEqVhjhSQSHsY8RBMhcKzvOplR72cSh8fer2xjHChUO5
- UCDe8UbqYGHwTwdg5Dxcf6FBIMDaLdMddBcmajLGOc4Yv3liJIyotztuF6l/q8zuWHwRtkm/Zgn
- EGYZJOTpYTn7x0Hq3ZatxLtFeu/AhHSXX8sXbUzRZdWjB1Jn3duMzKJiSw==
-X-Google-Smtp-Source: AGHT+IG1MKLcPiyo3R3Z87u7xjJGSmwzUqEmAFmiZ3EsyHas0DQ0GzWgsktq34jr5FWuLFahiyBfnA==
-X-Received: by 2002:a05:6a21:4781:b0:1f5:a3e8:64d3 with SMTP id
- adf61e73a8af0-2188c28e2a4mr28392077637.21.1748491536624; 
- Wed, 28 May 2025 21:05:36 -0700 (PDT)
+ bh=OAxJD/tro4tQ+LLFN6U7a59OXHxib3oVjSK6WfPOJpk=;
+ b=Ok+ljNZ0u0qspeYccLC2KpphusnX2bwgbrqFMNYjpgcIq8NzI132y8HF8nIWN3Foaa
+ nPH2Q+3H/FtXipCc6+Qh7+8gYB49FdWHYvwmY+ZtAtOWE440q0nT0bIjAuAWTJIMDPGU
+ smFhw0oVvRtKQewEQun/v7CctPxoIYyWm6waFi1xQrqUu2zVQXhodcwl4BzGdsMBMZCG
+ QwsagtZImXidO2EIClT47CgfZM8wVKtciwM8H4blwhyvs68PPXK/f7DsEfW6cJOp9+ru
+ KsY+65KKwabcMr6L4FasICtQscPeZds3LY7lylXFD4BVVvVXl/S+MfGhqb00qZtnlJjP
+ LKFg==
+X-Gm-Message-State: AOJu0Yx8m9QZI2sFac3pYYGhUloeH9uUtQ371YDUBJ/th+Cu5QakhVPS
+ P+ZRmfGB6z4ExTYU/Q7gwEIs2B7JteygNDLHurAG0GEg37lBlZSvmlG21pjSEzqA
+X-Gm-Gg: ASbGncsm5moPiIvr95cWvMVSXq5WjWtlTHJpXOoRAj2XUPryp5WKsG6P93h/h5CdqSJ
+ rCrSQFfOrb0COM/jfLo1DphKwLF6BVi+bKqyZMQso3O5Unbb34L9tY7wwgd9XEyrAjgYeaaLWUZ
+ CTnrN01FQ4VzwPAw/+9kdXZ9XZUkvczxiCra0lPODxdT4HQNoL9sB3+zQF4fXYKYrL5NHS+85ox
+ L0GbdHPSxS7tgATRbdczQ+5lDRIB/9yDxw148kBSdS0OSkKRIgMrw1cCdak9Pa1GNWGh2hts4Ir
+ uns2xtQpokud3uU3lC/QHgNcyXcefHf+7WpaRpELqvkVb3M=
+X-Google-Smtp-Source: AGHT+IGNDoe1S+jjKEmvIRVRU+P/r0c0P+0weuU3OsETZlWK8y9DLBtgLiXhUfSTqUpi6usIsqaxLg==
+X-Received: by 2002:a17:90b:224e:b0:311:df4b:4b7a with SMTP id
+ 98e67ed59e1d1-311df4b4dcemr8154307a91.29.1748491539750; 
+ Wed, 28 May 2025 21:05:39 -0700 (PDT)
 Received: from localhost ([61.71.79.124]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-747affadf70sm408774b3a.91.2025.05.28.21.05.35
+ 98e67ed59e1d1-3121b71deafsm504158a91.16.2025.05.28.21.05.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 21:05:36 -0700 (PDT)
+ Wed, 28 May 2025 21:05:39 -0700 (PDT)
 From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
 To: u-boot@lists.denx.de
 Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 2/4] efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
-Date: Thu, 29 May 2025 12:05:18 +0800
-Message-ID: <20250529040520.3799600-3-paulliu@debian.org>
+Subject: [PATCH v4 3/4] lib: efi_loader: efi_memory.c: add efi_realloc() for
+ realloc memory
+Date: Thu, 29 May 2025 12:05:19 +0800
+Message-ID: <20250529040520.3799600-4-paulliu@debian.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250529040520.3799600-1-paulliu@debian.org>
 References: <20250529040520.3799600-1-paulliu@debian.org>
@@ -100,13 +101,7 @@ X-Virus-Status: Clean
 
 From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 
-EFI_DEBUG_IMAGE_INFO_TABLE is used to store EFI_LOADED_IMAGE for
-debug purpose. This commit adds the table to the EFI_CONFIGURATION_TABLE.
-
-This feature is described in UEFI Spec version 2.10. Section 18.4.
-The implementation ensures support for hardware-assisted debugging and
-provides a standardized mechanism for debuggers to discover and interact
-with system-level debug resources.
+Add efi_realloc() for realloc memory that previously alloc by efi_alloc().
 
 Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -114,136 +109,100 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Peter Robinson <pbrobinson@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>
 ---
-V3: Fix the way of installation of configuration table.
+V4: Fix efi_realloc return failure code.
 ---
- include/efi_api.h          | 53 ++++++++++++++++++++++++++++++++++++++
- include/efi_loader.h       |  2 ++
- lib/efi_loader/efi_setup.c | 17 ++++++++++++
- 3 files changed, 72 insertions(+)
+ include/efi_loader.h        | 10 +++++++
+ lib/efi_loader/efi_memory.c | 56 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 66 insertions(+)
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index 6c4c1a0cc7b..8da0a350ce3 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -238,6 +238,10 @@ enum efi_reset_type {
- 	EFI_GUID(0xcce33c35, 0x74ac, 0x4087, 0xbc, 0xe7, \
- 		 0x8b, 0x29, 0xb0, 0x2e, 0xeb, 0x27)
- 
-+#define EFI_DEBUG_IMAGE_INFO_TABLE_GUID \
-+	EFI_GUID(0x49152e77, 0x1ada, 0x4764, 0xb7, 0xa2, \
-+		 0x7a, 0xfe, 0xfe, 0xd9, 0x5e, 0x8b)
-+
- struct efi_conformance_profiles_table {
- 	u16 version;
- 	u16 number_of_profiles;
-@@ -574,6 +578,55 @@ struct efi_loaded_image {
- 	efi_status_t (EFIAPI *unload)(efi_handle_t image_handle);
- };
- 
-+#define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
-+#define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
-+
-+/**
-+ * struct efi_debug_image_info_normal - Store Debug Information for normal
-+ * image.
-+ * @image_info_type: the type of image info.
-+ * @loaded_image_protocol_instance: the pointer to struct efi_loaded_image.
-+ * @image_handle: the EFI handle of the image.
-+ *
-+ * This struct is created by efi_load_image() and store the information
-+ * for debugging an normal image.
-+ */
-+struct efi_debug_image_info_normal {
-+	u32 image_info_type;
-+	struct efi_loaded_image *loaded_image_protocol_instance;
-+	efi_handle_t image_handle;
-+};
-+
-+/**
-+ * union efi_debug_image_info - The union to store a pointer for EFI
-+ * DEBUG IMAGE INFO.
-+ * @image_info_type: the type of the image_info if it is not a normal image.
-+ * @normal_image: The pointer to a normal image.
-+ *
-+ * This union is for a pointer that can point to the struct of normal_image.
-+ * Or it points to an image_info_type.
-+ */
-+union efi_debug_image_info {
-+	u32 *image_info_type;
-+	struct efi_debug_image_info_normal *normal_image;
-+};
-+
-+/**
-+ * struct efi_debug_image_info_table_header - store the array of
-+ * struct efi_debug_image_info.
-+ * @update_status: Status to notify this struct is ready to use or not.
-+ * @table_size: The number of elements of efi_debug_image_info_table.
-+ * @efi_debug_image_info_table: The array of efi_debug_image_info.
-+ *
-+ * This struct stores the array of efi_debug_image_info. The
-+ * number of elements is table_size.
-+ */
-+struct efi_debug_image_info_table_header {
-+	volatile u32 update_status;
-+	u32 table_size;
-+	union efi_debug_image_info *efi_debug_image_info_table;
-+};
-+
- #define EFI_DEVICE_PATH_PROTOCOL_GUID \
- 	EFI_GUID(0x09576e91, 0x6d3f, 0x11d2, \
- 		 0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
 diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 8f065244d8e..d0c72d0bc58 100644
+index d0c72d0bc58..13ca2ec9a4e 100644
 --- a/include/efi_loader.h
 +++ b/include/efi_loader.h
-@@ -315,6 +315,8 @@ extern const struct efi_hii_config_routing_protocol efi_hii_config_routing;
- extern const struct efi_hii_config_access_protocol efi_hii_config_access;
- extern const struct efi_hii_database_protocol efi_hii_database;
- extern const struct efi_hii_string_protocol efi_hii_string;
-+/* structure for EFI_DEBUG_SUPPORT_PROTOCOL */
-+extern struct efi_debug_image_info_table_header efi_m_debug_info_table_header;
+@@ -878,6 +878,16 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+ #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
+ /* Allocate boot service data pool memory */
+ void *efi_alloc(size_t len);
++/**
++ * efi_realloc() - reallocate boot services data pool memory
++ *
++ * Reallocate memory from pool for a new size and copy the data from old one.
++ *
++ * @ptr:	pointer to the buffer
++ * @size:	number of bytes to allocate
++ * Return:	EFI status to indicate success or not
++ */
++efi_status_t efi_realloc(void **ptr, size_t len);
+ /* Allocate pages on the specified alignment */
+ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
+ /* More specific EFI memory allocator, called by EFI payloads */
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 0abb1f6159a..d69bbb85efb 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -666,6 +666,62 @@ void *efi_alloc(size_t size)
+ 	return buf;
+ }
  
- uint16_t *efi_dp_str(struct efi_device_path *dp);
- 
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index a6b37d994f6..e949100593f 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -18,6 +18,15 @@
- 
- efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
- 
-+struct efi_debug_image_info_table_header efi_m_debug_info_table_header = {
-+	0,
-+	0,
-+	NULL
-+};
++/**
++ * efi_realloc() - reallocate boot services data pool memory
++ *
++ * Reallocate memory from pool for a new size and copy the data from old one.
++ *
++ * @ptr:	pointer to old buffer
++ * @size:	number of bytes to allocate
++ * Return:	EFI status to indicate success or not
++ */
++efi_status_t efi_realloc(void **ptr, size_t size)
++{
++	efi_status_t ret;
++	void *new_ptr;
++	struct efi_pool_allocation *alloc;
++	u64 num_pages = efi_size_in_pages(size +
++					  sizeof(struct efi_pool_allocation));
++	size_t old_size;
 +
-+const efi_guid_t efi_debug_image_info_table_guid =
-+	EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
++	if (!*ptr) {
++		*ptr = efi_alloc(size);
++		return EFI_SUCCESS;
++	}
 +
- /*
-  * Allow unaligned memory access.
++	ret = efi_check_allocated((uintptr_t)*ptr, true);
++	if (ret != EFI_SUCCESS)
++		return ret;
++
++	alloc = container_of(*ptr, struct efi_pool_allocation, data);
++
++	/* Check that this memory was allocated by efi_allocate_pool() */
++	if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
++	    alloc->checksum != checksum(alloc)) {
++		printf("%s: illegal realloc 0x%p\n", __func__, *ptr);
++		return EFI_INVALID_PARAMETER;
++	}
++
++	/* Don't realloc. The actual size in pages is the same. */
++	if (alloc->num_pages == num_pages)
++		return EFI_SUCCESS;
++
++	old_size = alloc->num_pages * EFI_PAGE_SIZE -
++		sizeof(struct efi_pool_allocation);
++
++	new_ptr = efi_alloc(size);
++
++	/* copy old data to new alloced buffer */
++	memcpy(new_ptr, *ptr, min(size, old_size));
++
++	/* free the old buffer */
++	efi_free_pool(*ptr);
++
++	*ptr = new_ptr;
++
++	return EFI_SUCCESS;
++}
++
+ /**
+  * efi_free_pool() - free memory from pool
   *
-@@ -280,10 +289,18 @@ efi_status_t efi_init_obj_list(void)
- 
- 	/* Initialize system table pointer */
- 	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
-+		efi_guid_t debug_image_info_table_guid =
-+			efi_debug_image_info_table_guid;
- 		ret = efi_initialize_system_table_pointer();
- 		if (ret != EFI_SUCCESS) {
- 			goto out;
- 		}
-+
-+		ret = efi_install_configuration_table(&debug_image_info_table_guid,
-+						      &efi_m_debug_info_table_header);
-+		if (ret != EFI_SUCCESS) {
-+			goto out;
-+		}
- 	}
- 
- 	if (IS_ENABLED(CONFIG_EFI_ECPT)) {
 -- 
 2.39.5
 
