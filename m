@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EADC5AD49
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 17:55:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23821C5AE59
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 17:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ED4782B34;
-	Thu, 29 May 2025 19:55:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9C928309C;
+	Thu, 29 May 2025 19:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KPy8Bnz0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TKIYwe6g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92B6B830F4; Thu, 29 May 2025 19:55:10 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 44FB683055; Thu, 29 May 2025 19:55:13 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B83E82B27
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 19:55:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C9A282B27
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 19:55:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-60402c94319so734965eaf.1
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 10:55:08 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-40667dc8a62so503820b6e.0
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 10:55:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748541307; x=1749146107; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HwGglg2vCJsC9Fmixz+oL8uZpKyhYFuHesKTbFFAifY=;
- b=KPy8Bnz0yXkhf0SgNq8L70Bd/qzl5pFq1cLogsBo9K3+3/TOcZPasFp+JhMiIwznJM
- zpLPJEDpFgsJsYozVy6dYGiTuQdjLRWc9X6WXaL+btyE3B8qG7GllO4rX4kllnjR5iFo
- /sSh12mXoXJJrTB4CSYF4tDSDhho5qwwCoqaA=
+ d=konsulko.com; s=google; t=1748541310; x=1749146110; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ax1AdtWlZfBOw1TRcXNpg19cKt+iwYvCsI1cUzqIWkg=;
+ b=TKIYwe6grMJHgwMG8Qb62ZcbnHSvPTGdQkhfVzBLpEn1qXH6eWjGclcU8fCsKkNq8H
+ lVsZpcdS7Szy1YmvlPbiW533qswaXT/ZtNHwh3Z8TCwRha/wduGe9iCgzRuxRlIdymeO
+ bNC7kdMY7ysFigRf+SXvuaj0gykAMFYVIowqw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748541307; x=1749146107;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HwGglg2vCJsC9Fmixz+oL8uZpKyhYFuHesKTbFFAifY=;
- b=glkVUDEYZOkXqK6j5n7oQjWNWQJXoiNjzcz+GRCETpu1wmNBa0HZ5c11uj9V81NYxa
- kRVY9+AOzdZIt7VRNUc5Dwsv6awXkgjl5o3B2Zp6d8usDjQBGCl86kPl7gNPt/kChOIv
- NIznfmNH8Zxe7e31LuFF/y64hBXDoj4CQ8DLao+MjmqgZc469GpbiL6K/7A19mzcmzOG
- 8gl86yJJ10FYe3ARjVgTBBLp/hlGxBQ8qvE6IRuCN5yH301uqCz3EYHgU3UWdCG/VGoG
- g09n6LR7lNexe3jpZfs9aUOLNrQNzEIIP6vOO26nzhYoNjyOB6pmQWUIhjHx5VXZ1qqB
- wfnA==
-X-Gm-Message-State: AOJu0YznfLuPKklOdb5JJmNVHjCX3nCY/0ONInXlgBBHwLN+prZnJA6K
- gH6Vmb5y2q0KKeC4mYGozK0FIqTo8R8VyAjZz+J0yot1k0IXbLjVlXu+gVu1wqHCC2c=
-X-Gm-Gg: ASbGnctTRjWNZCxTT5yIrZZ1wmOvS4ZepcFEB/XkNGjX030yDUA6V2mdgOZmVpCGdcK
- fParW7IojOYWUkaqm1EnyvLrpxOUKJOmLg2l/ROrcg4FJ8IbtZhgXwDMQBWSQiYKpdjcqohTNpG
- puc0ENA6ES85aMGSN4ghITsVLlrBotNjZrbTKLfh4wX3ai6DeU8s8HZdFOzgpRTB/OvE4zxGsHh
- 1O3NBdqcNoB9GRZOofmUblkCEWdz7ccyzCqww80wlMHV/3pr7OwweBVpSD6QYaOb8D+YQ05gqT6
- LEz+6+3RwWJud1bzquVaNOEzylhDUyviWsYxbEfY/1yAtMY0jrjoz6IuA6mGhWDtzn7zv7NkZn8
- kyvswhFhZtj/Iy/TzK9JXiA==
-X-Google-Smtp-Source: AGHT+IGgvDNm7KNSFGZe125gKxe1WqyXan4EZuTyMiIMvLTR73Qr4WUU9v23nL+cIMhYrdwJrjOQQg==
-X-Received: by 2002:a4a:ee86:0:b0:60b:ad9e:2bbf with SMTP id
- 006d021491bc7-60c4d7b5a00mr429855eaf.8.1748541306968; 
- Thu, 29 May 2025 10:55:06 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1748541310; x=1749146110;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ax1AdtWlZfBOw1TRcXNpg19cKt+iwYvCsI1cUzqIWkg=;
+ b=rEL6bQMdTfHbWL2Zk28YbYykTzoskNj5DDdI2qT9DZ9AiqaPZJa2T/f51o+2LQoMSH
+ 79qp5RRGsYGbkN/0aW5/svR/Fs+aeycTGrURTIi5DaKMdX6nSVibHkcmqvaehvLxYDn2
+ LcisXHCNf5E/9399OVVWm7YAswtUWkqf6gr2OMFRwQ1xMyGrUFAp6MV9/TIxPsJqHgI0
+ Md2FXcWpeQtd9RRt0nwFlV57fLaU1uCyebrcHU9q8ryGDiFjnMLlvxrC4KTMJfELtU5I
+ GJSVmp67uIl0WD8AWjxKU9E6+8Q0MfKkHCLGqyzn1bHjZ3fP0RAZN9jCJ94dns5B6qk6
+ IloQ==
+X-Gm-Message-State: AOJu0YwsfaGKwoKS4M4PXpFV6cbb/aqQqm7DrdNaZeI5SmCWWKz69k6a
+ KpFThPt6oJgGUNwWyrmYi/a6acJ4/yLuLtsptB5h5a/AtyeFUxEpw70fpZQopOJrqAg=
+X-Gm-Gg: ASbGncs0JJuu1Kb7knRtKAZhsDuqvFzUhdC2mc0Bc+7zN9tpqABk317B8sb81nxiPiB
+ 59m7nelPS/ZOT+nAenPZ9gFL+PpwcTPH/uxm3CGRhVCVS815fdu9aNk/XusI+RWIb9o3BqVEc0g
+ V7lRqiZTAxe1JDn0/1iKr5PJkPuw7892rAiC5qECi9eL8SwkmXKr7AzlTsXF/B/DbWzUFx9L46F
+ 9qY8Kmcb0um+jwKBYpAPvuU5Ago2WZ14ONb/3mO3thI/40zpYy+Y6IBCxXH97i2YCdPV7xig6XT
+ 3ntVmVObuhOMKFYddcItkpD7Oj59p+TaOgIiY7/AmC0F/7JQPWfEQcNdkQpxoZJ4emJL9dMN1dI
+ H5x8KYlIYqJP9
+X-Google-Smtp-Source: AGHT+IHQfUnJ/XheIDUMstLEhRFK11OUYdnvkQxkTHCFFWBQmDBVUtbct9oNWENx/uTZe14Z5OnclQ==
+X-Received: by 2002:a05:6808:3a89:b0:400:b3a8:2cb8 with SMTP id
+ 5614622812f47-4067979fd74mr221004b6e.25.1748541309793; 
+ Thu, 29 May 2025 10:55:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60c14c42c16sm77455eaf.7.2025.05.29.10.55.05
+ 006d021491bc7-60c14c8bafbsm77839eaf.19.2025.05.29.10.55.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 May 2025 10:55:06 -0700 (PDT)
+ Thu, 29 May 2025 10:55:08 -0700 (PDT)
+Date: Thu, 29 May 2025 11:55:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Wadim Egorov <w.egorov@phytec.de>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Garrett Giordano <ggiordano@phytec.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>, 
- Chandru Dhavamani <chandru@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250515-b4-upstream-k3-pll-miss-v1-0-e38b89f027b8@ti.com>
-References: <20250515-b4-upstream-k3-pll-miss-v1-0-e38b89f027b8@ti.com>
-Subject: Re: [PATCH 0/4] Remove clocks from R5 dtsi for missed boards.
-Message-Id: <174854130594.3917659.12318910845038334879.b4-ty@konsulko.com>
-Date: Thu, 29 May 2025 11:55:05 -0600
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH] scripts/setlocalversion: Reinstate .scmversion support
+Message-ID: <20250529175506.GN100073@bill-the-cat>
+References: <20250302183128.326418-1-marex@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Y39JAcHUEDlnkm11"
+Content-Disposition: inline
+In-Reply-To: <20250302183128.326418-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,28 +95,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 15 May 2025 17:08:33 +0530, Manorit Chawdhry wrote:
 
-> Fix some of the boards that could be affected by the change done in [0].
-> 
-> I can't test the changes. Please give Tested-by.
-> 
-> [0]: https://lore.kernel.org/u-boot/20241121-b4-upstream-pll-fix-v1-0-904f618897a7@ti.com/T/#mecb70b415a364fdf322a94241438db7b5607e92b
-> 
-> 
-> [...]
+--Y39JAcHUEDlnkm11
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Sun, Mar 02, 2025 at 07:30:28PM +0100, Marek Vasut wrote:
 
-[1/4] arm: dts: k3-am625-beagleplay-r5*: Remove clocks from main_timer0
-      commit: 53f42c564367c4f2ff645b6c080da62855ee11bc
-[2/4] arm: dts: k3-am625-phycore-r5*: Remove clocks from main_timer0
-      commit: 92f1347d7caafbcc03b67bc5eb131813c3ed2eb6
-[3/4] arm: dts: k3-am625-verdin-r5*: Remove clocks from main_timer0
-      commit: 2696d3baea5910c9fb9f93d14e2354eed05f4e15
-[4/4] arm: dts: k3-am62a7-phycore-r5*: Remove clocks from main_timer0
-      commit: 8668c6a3bd1aa1da9c02ac140b7dbf7b3266ab1e
--- 
+> The .scmversion is used by oe-core to append U-Boot version string.
+>=20
+> LOCALVERSION is not fully compatible replacement as it adds trailing
+> "-dirty" string at the end of version string in case the U-Boot git
+> tree contains uncommitted changes. This behavior itself is correct.
+> However, OE builds do clone U-Boot sources from git and may apply
+> additional patches on top, which are not tracked in U-Boot git tree,
+> but rather in the OE metalayer git tree, which leads to the addition
+> of "-dirty" string as well.
+>=20
+> The .scmversion used by oe-core used to replace the version string
+> suffix fully, including the "-dirty" string. Reinstate support for
+> the .scmversion to let OE core do exactly that as it used to do it.
+>=20
+> Fixes: 5c02350fa03d ("scripts/setlocalversion: sync with linux v6.9")
+> Signed-off-by: Marek Vasut <marex@denx.de>
+
+So, I've talked with Marek off-list, a lot. We have a few sets of
+problems, both with U-Boot and with OE. In U-Boot, we don't have the
+software-clout to force other projects to adapt to our whims, unlike the
+linux kernel. So as much as I don't like re-introducing this, we need to
+for a transition window at least their localversion support is just not
+functioning. But from the U-Boot point of view, we need to get OE (and
+anyone else out there!) to stop relying on .scmversion. It will go away
+again. The other problem is OE (and anyone else!) that was relying on
+this mechanism to patch out "-dirty" and not at the same time provide a
+meaningful version distinction. This also needs to be fixed in other
+projects.
+
+So with all of that said, I've applied this to u-boot/master now, and in
+some number of years once whatever OE LTS doesn't rely on this at least,
+we'll rip it out again.
+
+--=20
 Tom
 
+--Y39JAcHUEDlnkm11
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg4n3YACgkQFHw5/5Y0
+tyx/5QwAofmg0I9n+p0+Me0iCk53kRMJ/aD4bWdy2DXWlmAv4V84XiL/M0UpFcEN
+CXdjvMtMJkiAVkNtSEgx/Ud8yTI6ClPfnoY+6C9DeBHSZyMWXYMV3EE+xLI4Akih
+4s2d7dAea9OvnWgtVIT4zzCoFODJoSDrVCErV2xX4iq7+3XLHlXD9vSqHPYwo01+
+5cWaZFCFeLbh+0A7+nCraQH3+OMYghJV7tLORQL1mf5WQ0kvgU2QUjxQgvw3W07s
+xA0flprgBgEMY77YNu7abA88HAtxs7iSSIRM7Tqoll0inIYU5pOxK6bmoXNpDnCD
+vS3xF+P0pTUpAB0t6wJ+OQQ+NURUgx6vQfKirbApL0XeNrBoU54D70i/XHWCWUXA
+2aYcEfQcaEdnnCkphqGE5zoUt0ZSPbCxHNBZXfrtbvMCSDgULENcAZn5+Rn5f/1R
+SLLp7zF+HFgO8InnubEvF6eItVbs1iN88B5V9VBHmz8NmT3/kLPow38X3YM3vwz1
+GnagxFeL
+=wZqB
+-----END PGP SIGNATURE-----
+
+--Y39JAcHUEDlnkm11--
