@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06314C54FB3
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D039C5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:50:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17B9382B19;
+	by phobos.denx.de (Postfix) with ESMTP id 628AA830C0;
 	Thu, 29 May 2025 23:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2ED78315B; Thu, 29 May 2025 23:49:28 +0200 (CEST)
+ id 0280F82F8E; Thu, 29 May 2025 23:49:29 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93F6582F8E
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 23:49:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D43A4830C0
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 23:49:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -25,8 +25,8 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uKl7r-007IAa-KG;
- Thu, 29 May 2025 21:49:23 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1uKl7t-007IAa-1R;
+ Thu, 29 May 2025 21:49:25 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
@@ -35,10 +35,10 @@ Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 3/6] net: lwip: tftp: add support for setting blocksize at
- runtime
-Date: Thu, 29 May 2025 14:49:07 -0700
-Message-Id: <20250529214910.984024-3-tharvey@gateworks.com>
+Subject: [PATCH 5/6] net: lwip: wget: initialize dns if a hostname is used in
+ a URL
+Date: Thu, 29 May 2025 14:49:09 -0700
+Message-Id: <20250529214910.984024-5-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250529214910.984024-1-tharvey@gateworks.com>
 References: <20250529214910.984024-1-tharvey@gateworks.com>
@@ -60,41 +60,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for setting the blocksize at runtime via the tftpblocksize env
-variable as such is done with the legacy stack (CONFIG_NET).
+Initialize dns servers if a hostname (vs ipaddr) is used in a URL.
+Otherwise the wget will fail without displaying an error due to
+dns_gethostbyname failing silently when no DNS servers are set unless
+you have previously performed a 'dns <arg>' command.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- net/lwip/tftp.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ net/lwip/wget.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index fae701bad2eb..6cdb0642536c 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -156,8 +156,10 @@ static void no_response(void *arg)
- static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
- 		     ip_addr_t srvip, uint16_t srvport)
- {
-+	int blksize = CONFIG_TFTP_BLOCKSIZE;
- 	struct netif *netif;
- 	struct tftp_ctx ctx;
-+	const char *ep;
- 	err_t err;
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index ea1113e18b11..76401991bde6 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -460,6 +460,10 @@ int wget_do_request(ulong dst_addr, char *uri)
+ 	if (!netif)
+ 		return -1;
  
- 	if (!fname || addr == 0)
-@@ -186,7 +188,10 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
- 	if (!(err == ERR_OK || err == ERR_USE))
- 		log_err("tftp_init_client err: %d\n", err);
- 
--	tftp_client_set_blksize(CONFIG_TFTP_BLOCKSIZE);
-+	ep = env_get("tftpblocksize");
-+	if (ep)
-+		blksize = simple_strtol(ep, NULL, 10);
-+	tftp_client_set_blksize(blksize);
- 
- 	ctx.start_time = get_timer(0);
- 	err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
++	/* if URL with hostname init dns */
++	if (!ipaddr_aton(ctx.server_name, NULL) && net_lwip_dns_init())
++		return CMD_RET_FAILURE;
++
+ 	memset(&conn, 0, sizeof(conn));
+ #if CONFIG_IS_ENABLED(WGET_HTTPS)
+ 	if (is_https) {
 -- 
 2.25.1
 
