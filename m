@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B60C5AD49
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 10:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B66C5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 11:11:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43F3683015;
-	Thu, 29 May 2025 12:43:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55C8D83015;
+	Thu, 29 May 2025 13:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e20EucIz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IspbjsoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526368301F; Thu, 29 May 2025 12:43:23 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 8CB4E8301F; Thu, 29 May 2025 13:11:18 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04A9C82FD6
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 12:43:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92EB882FD6
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 13:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-604bde84d0fso1066367a12.3
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 03:43:20 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-adb2bd27c7bso33323066b.2
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 04:11:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748515400; x=1749120200; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1748517076; x=1749121876; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g/uURSBBBWdEBqsLEqR0qhVYGcG7CqntyWj0JcxgV6g=;
- b=e20EucIzJwi9ZxftA3iqMStws9sv1d434+7XLjdu+brt9bn0bVTZKxcNHGY7hdElLa
- 2g47fLEb6J1ESDHokAbX9e+vbW/ZFNpGA46kMqhJB5WbWriXm5R3PBpi6sz3tWKZRw96
- B/JXmGlbN5Qnh9iMCU5hDAuYIg4ZzNBm+zXKKS/VAw5wsbce71V5QojPMJlX4H9DNivH
- KD/VC02G1ouzs0mgnxsYORrl+YasOX95XkxJ0bsnoNe0YSO7yX5G63jDyAFLnw5fQlfK
- 5+/T8Inwbz/7XXy9kKqpq7pKfBuMWKK33gxjGtlqHV9colmMB3GmLysgolZJv9GvKN8p
- L7qQ==
+ bh=hY6wpXz0TDorW+d9RB8YQHpmkh0m6agTIrLoVIChIOo=;
+ b=IspbjsoHLgKYCItM8A/FoQw7bnqYv2KLZVnjmerl9rHrPU7p4mp1xKn3LkqGnY7jja
+ 7sGrK9wFmlF/JF5btJo/8EVhNQffhE4lDuiIHdofe0HoAmLcMEOTcpvyY/+qxfxWwumC
+ LQxaaL/oGUNe5tNFnNFIBS/9labBrxxhBUksRciyXAoVKeqiuCfyyCTaUu4L1p3MoQss
+ wT/dI/KFvOJn5p6xBubKIPCIwyv0w4z8ZHI9ZwB/yVdVxtugfha2Vx/71/lvaIWgMUmU
+ xt8pO09tS4wdRmNAu+M+WwXqm4HJEog9bJWMi2f8iWA1GqY+f/GYYGJX9Fb20Tha3Glr
+ v7Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748515400; x=1749120200;
+ d=1e100.net; s=20230601; t=1748517076; x=1749121876;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g/uURSBBBWdEBqsLEqR0qhVYGcG7CqntyWj0JcxgV6g=;
- b=gNyFzG81hHc9UkDfQiHiAchQKGDy7a8Dcza3fFwLA4pKMv5Z5oOWOMU0Dlo0dwElcr
- Bf9f49JJ4niVKAvEOXZSYTicmgY7/QBvksD2lxU6CowZzJuwXxQZzAh6FxLcw2Xrs10Q
- ZbyuY86BVMYJsgU7NkEYA9uy+GY5PFmpX/eWi+x1OcOAJv6VGSzyEWaKDG/9kx9iBZ5E
- hb4xMjzFf78JA/TJ0jhCqOlc4+ImCs71VGnrEq3FF0mu7sCCa2C4YCaM+4xMkT2oED1A
- SEvMmdTMxHzHJ8XunqnLWK/ycQ1RGWfFS//Q/DtFKSGHnJl3mFt2Bc06NIzQQyEEZK+z
- ojng==
+ bh=hY6wpXz0TDorW+d9RB8YQHpmkh0m6agTIrLoVIChIOo=;
+ b=QklT8dIJp4z+sodGyD8KhlozCps/uGxTMmd70rn3SEagHCbo+Xe2KkA1u1HOprJDqO
+ EDpipdiLtsoH0e1uvSiXTvr4k/tDWKHr5I1KTXRggknx1e82HfnwlqOKBaJHay6zwBeQ
+ 32G2mWlyr5HAE+HIqJvIGZXq4DRZjemw0ZW15XG4DoOaG9HijIlZgjq8AOvvHMMxzoUP
+ a+qxM3C5OzHmZXAPuiEt2JqC4addj8ILeDMOTjSWJ9suE4fL0CRctcwNb93SJL5oRxFF
+ lMzMo0JKS7N7fz9UoMcHov4csfWx0+X+fYv8c0WpK7rF1w0Vqn9vgGKV16Ncx16sDIx7
+ 3fjQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVB+hlPxtxuOggo8+n5xovG+WmUCi9OIRUhyTnFmjpV+eTl4paNcG4mSaHt4TOydetBbeAdJ1o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxn6jjOTTwxoWmX5tKaul/ZfmSyXoyTdaVHVaGFZSV0I/9hZnWX
- IhaNsr6VOor7XTHiWwnLdqJGJ9iB+H2hFB2RRO8YDjdat9Mavv16q33vtVZEWNHRomHNLKTOknG
- fnc60N0IIRenITTCHUNLBCMiW1ngv5m0=
-X-Gm-Gg: ASbGnct2hWCsvk1WrFm922jArtiXRjJlJvJUptvRR1WBVpvSHC9MthLRDjZcNcJawG9
- gR37lpTN4xmNbai0DqsAw1SXQ33EGNcFgUIUKOGvn2t/+1YhN9YBlUZXAW2O0KRZpU/tuSJIgzW
- F+gYM8+mPlpUmdvnw66+NA598I8ZFaEoFcbCV/AYplNgSbf73XQoX6HSjFRhz6lB0tL4vDKUfJ3
- XUL
-X-Google-Smtp-Source: AGHT+IG0w1TOvAFoJymA4FYetALeNlX2pmOuGY17AB2bCdcPjjhva/D+lsF0okNeI8UcIDUq4zleUpHBTd1SoyKV8uY=
-X-Received: by 2002:a05:6402:1eca:b0:5fa:8277:3d5c with SMTP id
- 4fb4d7f45d1cf-60546621da4mr1074308a12.30.1748515400223; Thu, 29 May 2025
- 03:43:20 -0700 (PDT)
+ AJvYcCUX6+iNjDaOzAbr6+Uknw3MIEjo2uMMB6j9yV+FIXJtwa9TICrtT62/YFhT/z857Y9hJ1YZT0A=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzHvr0c0q3xq5BKdcLHwDo9yn4e9AZOEIILeWkAJOgYo49f8w7
+ wOwjeiXCfTMr8n1h6Jkh0ielTlPz71SbdRyOBTwHIKIpzL3H+/8/8fOH2InscK6A6B/4V1I9+nW
+ EWoLHjY/qzOhhctFSDPKuqgu2v5vjse+JOYUFw8I=
+X-Gm-Gg: ASbGncvLvm0ard+pGExH0CUedZijSj4awreIUmMPcuTWJJhNbS7Ypc6yJlDG1BFccgQ
+ 2H4nerqGWuIjoEbAfJFYJE1HSMcEeHdM6nSjza4takHPpvuHWcPGJF/juYCqO4ozQQAKh6z5+Mw
+ fCwvk84ELUTiRFixxlwELuAL1DOWn65pIQlYBOfTGUX5dvbJb7pG0Sit5rZYcjijhiS+FC3/fjg
+ vrG
+X-Google-Smtp-Source: AGHT+IHSx0rVp2742CxHRknAn4XtGqgqbE8C56zcP+n4Y0bvfbr0Umc7mDW5/kvbkhVVap4TJVLwXGQnpnfr5ILdlbI=
+X-Received: by 2002:a17:907:86a2:b0:ad1:e7f0:d8e5 with SMTP id
+ a640c23a62f3a-ad85b0d21f9mr2057908166b.16.1748517075715; Thu, 29 May 2025
+ 04:11:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250525121102.415770-1-pbrobinson@gmail.com>
- <20250527150004.bniix33re7os2lqj@lcpd911>
-In-Reply-To: <20250527150004.bniix33re7os2lqj@lcpd911>
+References: <20250408221151.2762853-1-jonas@kwiboo.se>
+In-Reply-To: <20250408221151.2762853-1-jonas@kwiboo.se>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 29 May 2025 11:43:09 +0100
-X-Gm-Features: AX0GCFvIZaC-3esFUHcb253KtomTPC4oWogOXT2R-WpOifEroNRyyTbCRpZASh4
-Message-ID: <CALeDE9MC8it9HEABvW58Gspyh+d2ods=5bQhjKdoN52um8ViOA@mail.gmail.com>
-Subject: Re: [PATCH] doc: board: ti: Add missing firmware for BB-AI64
-To: Dhruva Gole <d-gole@ti.com>
-Cc: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Thu, 29 May 2025 12:11:03 +0100
+X-Gm-Features: AX0GCFvBrPkd3kZz1j2ENofPQPyMJ2HzHTNjcux0Bv2FvbSBScHIrMkKWMHnFBo
+Message-ID: <CALeDE9N+9ki7OtCqG9U0FU4FXP-z-WSTuPQkonWYGTQkMuynzw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] rockchip: Update rng compatible for RK356x and
+ RK3588
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,52 +95,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 27 May 2025 at 16:00, Dhruva Gole <d-gole@ti.com> wrote:
->
-> Hi Peter,
->
-> On May 25, 2025 at 13:10:58 +0100, Peter Robinson wrote:
-> > The details of the sysfw.itb from the R5 build that
-> > also needs to be copied as part of the target images
-> > is missing, but is included in the image formats a
-> > little further down, so add it to the instructions.
-> >
-> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> > ---
-> >  doc/board/beagle/j721e_beagleboneai64.rst | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/doc/board/beagle/j721e_beagleboneai64.rst b/doc/board/beagle/j721e_beagleboneai64.rst
-> > index 090b2b3b86a..a57bc743569 100644
-> > --- a/doc/board/beagle/j721e_beagleboneai64.rst
-> > +++ b/doc/board/beagle/j721e_beagleboneai64.rst
-> > @@ -83,6 +83,7 @@ Target Images
-> >  Copy the below images to an SD card and boot:
-> >
-> >  * tiboot3-j721e-gp-evm.bin from R5 build as tiboot3.bin
-> > +* sysfw-j721e-gp-evm.itb from R5 build as sysfw.itb
->
-> Thanks for adding this, and I am okay with the changes.
->
-> But also, does it make sense to make all of this inherit from a label that
-> we can add inside [1] and include that here directly?
-> I am okay if you just wanna label the gp part and include it here as
-> well.
+Hi Jonas,
 
-I'm guessing you're referring to doing something with markdown in this
-context, I apologise but I am far from a markdown expert here, I think
-possibly including it may make it less readable for those using a
-terminal but I may have also completely missed your point here, maybe
-that could be done as a follow up :)
+Sorry for the late reply here.
 
-> Either way,
-> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+On Tue, 8 Apr 2025 at 23:37, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> [1] https://docs.u-boot.org/en/latest/board/ti/j721e_evm.html#target-images
+> This series adds support for and updates the random generator compatible
+> used for RK356x and RK3588.
 >
+> The RK356x rng node is already part of dts/upstream so the rng node in
+> u-boot.dtsi is removed, and because it is not enabled for rk3566 it gets
+> enabled in u-boot.dtsi to restore its use in U-Boot.
+
+It's explicitly disabled in the upstream kernel because it doesn't
+produce actual random data and hence upstream believe it shouldn't be
+used, there's a couple of threads on it.
+
+Have we tested to see if the data produced in U-Boot from the HW
+exhibits a different outcome? I wonder if Kever is aware of the kernel
+issue and can provide input.
+
+Peter
+
+> The RK3588 rng node is added into dts/upstream DT by picking a commit
+> from devicetree-rebasing v6.15-rc1-dts and the rng node in u-boot.dtsi
+> is removed.
 >
+> Changes in v2:
+> - Split rng driver and DT change into separate patches for RK356x
+> - Pick RK3588 rng node commit from devicetree-rebasing v6.15-rc1-dts
+>
+> Jonas Karlman (3):
+>   rng: rockchip_rng: Add compatible for RK3568
+>   rockchip: rk356x: Remove rng node from u-boot.dtsi
+>   rng: rockchip_rng: Update compatible for RK3588
+>
+> Nicolas Frattaroli (1):
+>   arm64: dts: rockchip: Add rng node to RK3588
+>
+>  arch/arm/dts/rk356x-u-boot.dtsi                  | 9 ++++-----
+>  arch/arm/dts/rk3588s-u-boot.dtsi                 | 5 -----
+>  drivers/rng/rockchip_rng.c                       | 6 +++++-
+>  dts/upstream/src/arm64/rockchip/rk3588-base.dtsi | 8 ++++++++
+>  4 files changed, 17 insertions(+), 11 deletions(-)
 >
 > --
-> Best regards,
-> Dhruva Gole
-> Texas Instruments Incorporated
+> 2.49.0
+>
