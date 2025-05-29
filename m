@@ -4,125 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0196C54FB3
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 16:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67E69C5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 17:55:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 688EA82F8E;
-	Thu, 29 May 2025 18:06:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 87B088306D;
+	Thu, 29 May 2025 19:55:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="C9sASoSz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="txSjlTWU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FAA283010; Thu, 29 May 2025 18:06:51 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 06EDB82B27; Thu, 29 May 2025 19:55:05 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C498582E2D
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 18:06:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54TC1Q3x006932
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 16:06:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- PUO1Fo9H7OWxMgc3TwWxeVhiSPzti9siG3NxJq+yhyc=; b=C9sASoSzuyOtlgbV
- ZThDDYu1Lq4BSVajzXRfDkRkJOdAX4zi/++rurizBzjaSX8toY+62gO9/RAxXGKu
- ANpq7JgooMM82a1s82F505Hrp4EP0s8yweaPOzsn+pAOyzM6wsC7GqcmFc/jKfpz
- Ci7RV3o+EpcemzyWk3S21uu6A1YCvNmo9fWvd189auTvkqDkdPIk58CU+A35+F3H
- 6/nS6xd2NLZov4tf0ddEStI8NVfqXTTVwR00hkF/v+Y25O5oTAFAFt2sI0aQMo8X
- 6IrhBGuNc1LJWoJmz/jBg+Skztgavp3i+kISSZ+qlbFsg13lwCzJ09vKq07RtZfk
- mmZIQQ==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46u3fqee8n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 16:06:47 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2349fe5be47so8482505ad.0
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 09:06:47 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id C634B82B27
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 19:55:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-4064ec636a4so641723b6e.0
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 10:55:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1748541301; x=1749146101; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tdqSjahCHZJnt3zyCCBelKvClH5drj3IUYkS3zSXrDs=;
+ b=txSjlTWUZSH5ROwErBjj6s5dba5QOZEAKYd6wkur3a8It+MP29pv/vFg6m8aaBbTmd
+ uMxI8FHQsTKmx/IVISCOh3UsjpD2lLTthMGAMgEbWkyfWaw2adcQgbUOgcB147ni3xyk
+ 3HtjNm0Mv2DXRFqEXgLnt1/vvqMzuORrlLTAU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748534806; x=1749139606;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PUO1Fo9H7OWxMgc3TwWxeVhiSPzti9siG3NxJq+yhyc=;
- b=JjByg0PnRvDG1y+tI7ajSK2ardytN0PGmMNJfqS4eVaDro08h3QQ01jsIdHvYt1axf
- kME9nxr0VqL423MXnX/kN8h4+rkiyPTKwVxvdvdRBUrBEzq4pDECgqfjsDr4R26/BMiz
- PJsvQl+Qyedm4gXDtnJyU7ZMtUIXHDuBebrPGbKQyZNUOS7X+nxiP1IZ5RAoKxjt6T8O
- waUhzrl/O3ISlKn+9WROiZJdxpWfly2IajuuGg16n3OjzgjJnr7U2ZDt/OP0kraGK9vH
- 4FXPISoUqdOREUJ67FMQ6qIJFl7T3WQjZBH8+UlignWToPqv6Hu4hVeh1APtRRuX+PXH
- eCmw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2EI0OL0dcOKsPMm9wuRNG4RgcPEnYU9allfpX6DtYmd/LdV6Du/b+T5gZHIM3qmh7Wtvh1cQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8XKeX3F0GV+oGRaMpofczjJ5Y+hVD4K13APQgkF7kgXVrJJ3s
- 6Ln6v4PDw6h7nmsHvvwjZyobGVgQJOpM3R+b4zTBr5G+O4yG2QNUVe/UgH7rRMhMsJfBvDzFL7X
- 4p/GM803OWDoGPZ9DLQv66uULMkH4VqX9AFDIxKHuotU4/34xGFRnILef
-X-Gm-Gg: ASbGncsdqkqLo2kwPCbcXUU/dL7cPFK4s7/IHdvaDF2y5hI1SblSw8dhESJix72uypQ
- xyKQX5xaKyUZgPZco6dYH1ovvo2ILt7QZo4P/prdTEOC0cTSz4CLVfzx6NrJir6HM9CEA22d9ad
- Mi2NRLSk9tJbbRoTUtLCVoX/Lv20bDkp7oHgPKZxhyyh6oyPVyXH8XH0PT3GrIw56q5uPXUDYTa
- 0s7i8phZQ99nzQ05/pT3CnW3+6JOzF5rYG54spJs2Q8rUZcTlxLEGOR60yKO/b1+4hJOY7gZzaX
- tWjoFMpXp2QWrhvqwH3xADbYqk7uTBe+1K3mcoLmZL8=
-X-Received: by 2002:a17:903:184:b0:224:255b:c934 with SMTP id
- d9443c01a7336-23529b46808mr1821035ad.51.1748534805756; 
- Thu, 29 May 2025 09:06:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF0JszkJQGSHnzwZzVF6gKUk2TY22IZjlcv4J8WWCWFILO9jMrpneTDwZ2c2DNrRgRNR440SA==
-X-Received: by 2002:a17:903:184:b0:224:255b:c934 with SMTP id
- d9443c01a7336-23529b46808mr1820485ad.51.1748534805214; 
- Thu, 29 May 2025 09:06:45 -0700 (PDT)
-Received: from [192.168.0.2] ([49.206.97.88]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23506cd34edsm14011765ad.126.2025.05.29.09.06.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 May 2025 09:06:44 -0700 (PDT)
-Message-ID: <1af681d3-5dee-4431-b619-48dc095d013c@oss.qualcomm.com>
-Date: Thu, 29 May 2025 21:36:38 +0530
+ d=1e100.net; s=20230601; t=1748541301; x=1749146101;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tdqSjahCHZJnt3zyCCBelKvClH5drj3IUYkS3zSXrDs=;
+ b=Rrg0rscdfqP2fKtWpH4TIWy/k6rfbiGGHZge6xxKVc2lg8iK0+jq2t67GNn6OrPkc9
+ TsuaCOiBVRVg4DGFr6ZhVGWctd56CVycuoA4C8NJSKzvNemS+8lvZZIDzWJR5zudnPrZ
+ QQR/ENV0S9Fl7aNpHhDlA2Z8wgTfZWJBC6/QyzXAc4HPbAxCRSvxbyBLaJ85nyTdPE35
+ 5Zdjut607nIY2WXHqg7EZ5cN3vJG7Arq7KvzbO2AU2oOtnV2JADLpDBh8tvhP4fPNdE2
+ YvwX9QVt9m88X0DCuW3CQRWyPsYGSAP+N79r3/Uc3aDLKcgXLg1aHTaa7OabRYsM9EVZ
+ TxFg==
+X-Gm-Message-State: AOJu0YzRMbqfb1z721luuPxkrPaHwfa6NKJ44Tb3zOycRFbkVx/qfjBf
+ D85am5Y1VFcOiPejad0Gtt0Zd/NmyNaowpmTVNn7aLeuqZL7xIXr9vRS7hyeJVrrKrA03Nft3Z9
+ vRTSi+sk=
+X-Gm-Gg: ASbGnctcKOI+K3GpcovJo7GQU/Cw2aE4XfEzxlCl9bXe5QEWXw5jC+djz6qiDEsWS/f
+ jw7R2f1O6XyG9NLXLCX63/W7362Px+vLFpnc3ty1Xr4B1NwaLhG0txHsKoqNnd7yyZ0I7hu1qek
+ 1MY/s4zzxHZvtVp6HTwKdu99YL+jOGsvA0NiS5tv0uptISPA05v1mGQmcZnXponBvT2g814uSiB
+ KoQZM6BwBUejDUpTzDNx0IfVCCBv4DzwUeGY4oLzQQbmDsGg2PZNyRaqLsX+53Ory9RfxPGVmOs
+ ZYgcnQZe1qFEjkE1ejIEi3mm0vS2cYJ8UUvIgIUYzfYp6f+3xB3EgwvsrIDQ0siZpyuHyJMvFDI
+ A4lr6t0YPzjQ=
+X-Google-Smtp-Source: AGHT+IF+xYtfx2cRojwMTH3pEEO49cjeVJhaxCwycvvqyTAbT7jatOt0jhFbNocSixEGcsU6hE/f/g==
+X-Received: by 2002:a05:6808:3849:b0:403:56f4:8780 with SMTP id
+ 5614622812f47-4067963173dmr301241b6e.9.1748541301482; 
+ Thu, 29 May 2025 10:55:01 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-60c14c42c16sm77455eaf.7.2025.05.29.10.55.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 May 2025 10:55:00 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250513084034.654865-1-ravi@prevas.dk>
+References: <20250513084034.654865-1-ravi@prevas.dk>
+Subject: Re: [PATCH v2 00/12] regex patches
+Message-Id: <174854130056.3917659.17138175311263264969.b4-ty@konsulko.com>
+Date: Thu, 29 May 2025 11:55:00 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] doc: board: qualcomm: document Dragonwing board
- building/flashing
-To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de,
- seanga2@gmail.com, ilias.apalodimas@linaro.org, me@samcday.com,
- quic_varada@quicinc.com, sughosh.ganu@linaro.org, sjg@chromium.org,
- lehmanju@devpi.de, bhupesh.linux@gmail.com, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20250521094442.3522036-1-balaji.selvanathan@oss.qualcomm.com>
- <20250521094442.3522036-2-balaji.selvanathan@oss.qualcomm.com>
- <43bdeede-85ac-4394-80c2-ae246ae6b197@linaro.org>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <43bdeede-85ac-4394-80c2-ae246ae6b197@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: yKWIgyafNIQ8DNgmgw7QOMBrta81aq0t
-X-Proofpoint-ORIG-GUID: yKWIgyafNIQ8DNgmgw7QOMBrta81aq0t
-X-Authority-Analysis: v=2.4 cv=X8FSKHTe c=1 sm=1 tr=0 ts=68388617 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=F4hkcdt4JzA9jL8HvjiHYA==:17
- a=IkcTkHD0fZMA:10 a=dt9VzEwgFbYA:10 a=qC_FGOx9AAAA:8 a=VwQbUJbxAAAA:8
- a=COk6AnOGAAAA:8 a=hBlZPJNRg3lnjCDeoEMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22 a=fsdK_YakeE02zTmptMdW:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI5MDE1NiBTYWx0ZWRfXy1g7mXDMMkuA
- Hf8+4eevqewt3THhyOqeI9kAyHNC4AdClSlXUfu+nzmhkA2KATR7dRM4kWcu9+WHZBpgv+uNMfG
- V2+OZqIzCLh1vpC8LZ/9A1sR2PFLmy5XooW6G7zZDgl1sIEgtmhBmZPNQQ2VBkw44uaRBut2Lgw
- Nb1l49r4GnU51ll8WFTc/qPz4WJVl73HIAwreUOwWTAPgGItdk4dSqSvDzc/pOqF9Qu0jrwoR1H
- NMmbJF90Yzm09NJYqHRVZ72BR8M2rcQH7gxoTnfMw5rqDT38WLsjuvc78DvhqsQvtadbQXF1N7d
- lOE6uYXnTxkOcgbjN5nJIJaNC2AeN7WBMgj4IRImX7St20EBaTKthSCYNt+OLAp6+gv99180XyM
- ldOKFVCNCuIrWj8GVmhVVNPp7sa+1eIw3dLGXdKMUwiYDuA+I3v8rz8K04no5wb/fxpk/KKI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-29_08,2025-05-29_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 phishscore=0 bulkscore=0 mlxlogscore=724
- mlxscore=0 clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0
- malwarescore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505160000 definitions=main-2505290156
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,35 +96,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+On Tue, 13 May 2025 10:40:22 +0200, Rasmus Villemoes wrote:
 
-Thanks for the feedback!
+> This started as a rather simple patch, 1/12, adding the ability to
+> more conveniently do regex matching in shell.
+> 
+> But with that, it became very easy to see what the slre library can
+> and especially what it cannot do, and that way I found both outright
+> bugs and a "wow, doesn't it support that syntax" gotcha. I couldn't
+> find any tests ('git grep slre -- test/' was empty), so I added a
+> small test suite and tweaked slre.c.
+> 
+> [...]
 
-I've updated the documentation with more detailed instructions on how to 
-flash using the EDL tool. And yes, I agree—it would be helpful to have a 
-dedicated, generic "EDL flashing" page. We’ll look into adding that soon.
+Applied to u-boot/next, thanks!
 
-Regarding the firehose loader links: currently, we only have the 
-firehose loader available for the QCS9100 board, which I’ve included in 
-the documentation. Unfortunately, the binaries for the QCS8300 and 
-QCS615 boards have not yet been uploaded to 
-https://artifacts.codelinaro.org. Once they are available there, we’ll 
-update the documentation to include those links as well.
+[01/12] cmd: test: add support for =~ operator
+        commit: 04044a567b6b177eb24944343d9e9e61a89edd53
+[02/12] slre: add myself as maintainer
+        commit: a5af8f9ad2779e2a18bc9d723c687ee2213086f0
+[03/12] test: slre: add tests for regex library
+        commit: ced883d92c0568cdb15b5b67106c29a4623b19d8
+[04/12] slre: drop wrong "anchored" optimization
+        commit: 19b3e24083eb0b1b5299e689d0bc5f1a6c4ebdcd
+[05/12] test: slre: add more test cases
+        commit: 09b48305d3b6492553982df75e3a9f99d1f856d0
+[06/12] test: slre: add some (negative) character class tests
+        commit: ebdd78c487f6599f693e53e707606d7295f20f6e
+[07/12] slre: refactor is_any_but()
+        commit: 457f19815c8f8b74c36d8cbef454a0b575ea7068
+[08/12] slre: fix matching of escape sequence used inside character class
+        commit: 5d3f91d6a82386e94c3178721641608563560871
+[09/12] test: slre: add test cases for escape char in character class
+        commit: 4d08883556b588bc1e6ef392349c51eceb550829
+[10/12] slre: implement support for ranges in character classes
+        commit: fe4f21185050ef3f2cc847ba04701d1e714522e3
+[11/12] test: slre: add tests for character ranges
+        commit: de6e54d74dec9da5d7b8572d5a0711c7280eae2c
+[12/12] doc: document test command
+        commit: 6990cc5257283a631a286a4321a3515c7537f636
+-- 
+Tom
 
-Hope that works for now. You can find the latest changes in v4 here: 
-https://lore.kernel.org/u-boot/20250529154931.1879976-1-quic_bselvana@quicinc.com/
 
-
-On 5/22/2025 3:52 PM, Casey Connolly wrote:
-> The flashing steps here are a bit vague, with the edl tool it's 
-> something like
->
-> ./edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a 
-> /path/to/u-boot.mbn
->
-> All the pages are a bit sparse in this regard, we should probably add 
-> a generic "edl flashing" page at some point.
->
-> As a final note, is the firehose loader for these boards published 
-> anywhere? Otherwise there is a major risk of bricking here. Could you 
-> include a link to them?
