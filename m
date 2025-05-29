@@ -4,94 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D745BC5AD49
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 19:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE155C5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:39:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 672DF82F8E;
-	Thu, 29 May 2025 21:03:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C2E5482AFC;
+	Thu, 29 May 2025 23:39:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g3HsXGTV";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="FpLoo0/F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A30018307F; Thu, 29 May 2025 21:03:46 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 6846582ED0; Thu, 29 May 2025 23:39:50 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFA3282B20
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 21:03:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A287282AC4
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 23:39:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3a36e950e41so830185f8f.0
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 12:03:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-70e6bddc30aso14528517b3.0
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 14:39:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748545424; x=1749150224; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=OOHIEuKO0DkVynqaEAlfb5Uiz1atXroFTCjt7STNeIc=;
- b=g3HsXGTVVB4NdBaRioCyeJFPD58upmRm8zp0fkLINROxOrT0PLIUkiF9Ldn7d1UybD
- CMc18S7qfFYJtSI+StfcprCmuwIKpkCfsLRObTpYoW9G4ytS4U9XHLxbKNXk7o18A7X7
- OiB/DR1uVb/qwAIB6e97/yWSQe3VIqa6AczmueyRMU4uXaDNi/gtAeJbvAMFdYCKQaMG
- XZ6sTQ3pLxPhQO97aekvn9h7IlA4O0rkxMnMWs0Wo+3nEXd46vGh5hSLyNnYGhnC/59S
- e3teEKqHO7AS9VXOPyGYXjskxM2LVoY0LLpaBWI+IwPHNHYpjaxVJZOAJT4bI9WL0wu6
- zv7w==
+ d=gateworks.com; s=google; t=1748554786; x=1749159586; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i5qXDqzn0mqDFIHQDHwNd6ew1F9FV0GA35OW5v6V278=;
+ b=FpLoo0/FDXFzYFE96X0YXX5AP+44Q56bqkL6PY4QW86kvXg/NXqy1zJ1TpTzSW7dJP
+ ltHwlw/de5j4rNeZsyJ2AMgVQ5BMjnkVKWDHwdQhhygmxdBT/qOVTE+LI5hzqMff0mDy
+ exmaYc35ocnOZacadYRSuJmsYueuCksVDkM3RiXGLZwZwBjHQRdlMtqW0cTsIvUXKhyo
+ 5RR8xP5oVIKQ25tPiRugXdupqw607BnErHYr+rYGjZdfFBMFV2RzZ/PkzuYLg4BKzvsR
+ 9iVDlNC1s7+eRhBOEVfItlCjM/0gUqy9NeuLLTvd3S882uKPr3wf7BCmAfDaQEp96vk5
+ ad4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748545424; x=1749150224;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OOHIEuKO0DkVynqaEAlfb5Uiz1atXroFTCjt7STNeIc=;
- b=VLIXm+TDHiW1t7KsfWSJd67lCKz+o2OH65p8+PPgeNmiG3L668/OCGrMXGSOyMQ7sJ
- w4sBJnnedVJRknTTIj74D/K5Kyiysa8wHdnUi25KFT4AFpvKoEG1XUDSQim8DX91IukU
- 7whXhES5LIE1N9+FtGvz6acfAPpXgnD9+vNNB9EWTQUPpOLIHuKXJUxS6yGoy8KRqJ58
- qEAloh74gTiOLfkAkK+JIgFvMEireK0GYMszO2P765+ooaB4a7Cluo6LW9CqTyPxyrns
- dcUjMFiiBPOxbiY8ICq26oR9mF8oF4eB0dG0GrRBXNYZEsKAYovVvH9aZpeiYk0MrrCO
- paxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVdEpXs3NGfAA0C61czSfwu5ZSejEIWcB8cnuZXqT0RdlmtT68UvdLuSnDilsao0IwaPFsD1OU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzxQfJ9r8XfWxcWyrPybDB4DyKJaiu9mJrHMlygHju6taxCbTM
- 0YVa0ed91vdhha1s9IrSpnaxy0mj5FXM6JZ8zSMzvsisxSYstJ5A3jJW7gu/aJ4/i4o=
-X-Gm-Gg: ASbGncsSC29JbcnTrDZQGqiGjVcSsuih7AGaCaD0YerMbX4ogDg/YLLHl5RY6UXuEZy
- 3dnuv3kYpRtmOY7+l7Pqc3y6/Eum901zvp2YbF0mGgoUqGDknoUOE5AsZQw17FbGeVKdAI3wytz
- 9I+yPSaENvBQ8IODV0Z7pgWuqadtcTX7IjBLRuCQOgaLuENQgB1Cn2b5bvqPwFM5ZWrfTs30eEF
- WxVI0fwcbgimiRs18I+3aWu8FYFmYIiLNhu6ghxzkWB/fJThRRrV3yIq7V2iSL2QWj92hT2CgcU
- uWoOT/zWBSuswj2Hufv0AguFs+mUu8cgDG/WvQH8x9LOPeKACzq97wUz1Pn5/yv+E8Rwj7VhPF6
- 6kTkaElv7V8X1zDUVNC7BN/Nl+xp1RV3Njb1D
-X-Google-Smtp-Source: AGHT+IEzvrBUSJMUT4UIApimvjl0cY3uVzKQRdCsjSsQ/8H+rDdr2xvGNgnJS7vScycI+khe26Kcdw==
-X-Received: by 2002:a05:6000:1887:b0:3a4:d53d:be20 with SMTP id
- ffacd0b85a97d-3a4f7a4c9a5mr320106f8f.18.1748545424101; 
- Thu, 29 May 2025 12:03:44 -0700 (PDT)
-Received: from ?IPV6:2a01:170:117e:fc:9bc3:77c2:6c71:775c?
- ([2a01:170:117e:fc:9bc3:77c2:6c71:775c])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4efe74072sm2844764f8f.52.2025.05.29.12.03.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 May 2025 12:03:42 -0700 (PDT)
-Message-ID: <348f3857-f5c5-4f7b-90aa-50cd95bc35ca@linaro.org>
-Date: Thu, 29 May 2025 21:03:40 +0200
+ d=1e100.net; s=20230601; t=1748554786; x=1749159586;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=i5qXDqzn0mqDFIHQDHwNd6ew1F9FV0GA35OW5v6V278=;
+ b=Okd7LqRH1DO9LYoxnaUn08HJBAjSR/QNg13f6tmdarHZekRGCDDCChk+WOFCduM5OI
+ m0rjv8TyrOC7ft6jCn/gakx0X3pLnncpYm+4U5/iu7BbcYorxxc8/pW/7BNQvi2XDRCG
+ ETiVe53TYyoDUp2SzaL4MqsgXFMNwMyxRWw6FCvrSw/K1A1+4aDpPsMVWv9NgkySvFN5
+ M88ASRDVYN9KjLiWzJbqu5U7NsYYHG9ig56V/tptAHUgw7ny6JQCxKtqudpy0cu5v5UN
+ DrqZKjvA+89a9qn+WT//y8YUjRJdtB+9J5iF1YXtKP0iGVIq/2cVN9wkXx+TsNkluNhx
+ 2EJw==
+X-Gm-Message-State: AOJu0YwPxJseggP7rS01fPpA6n5NOXFbSiP+hrHKJNW6y3bxWOJepgK7
+ l9wJO6GtmBWcbb21LuRKo37jRelNo3BUwa6PMNJfPyn0kESj5b+oFLVKnHJUAOrVMJbLVRyMClI
+ bP9/Alw+71p4XWIUqdF0/xz6U9T9wGBdggY7WWL4A22PvzT7cyz17p+Y=
+X-Gm-Gg: ASbGncvI79/zodHQ+TqY+kDkuqZczjfuXyVpV7slyz2hSgxjBA13KKFF5BQ5gJAjLct
+ x/adPabikj5H/dcRFmQFhDQjFS8cTocyVdsIN8LUh9NXg8FuasORmKbMo8hKrpIEZBmkS6m3Drk
+ f9qwJCF8x5Oi/zrQkRoUGy8oeW2qoqL4ah
+X-Google-Smtp-Source: AGHT+IGOPk8vwcyE4T7oeU17IvtFJ+F/0YLVUKF3vLDlJvGPX/C22glajCZFh3Hp0Is/Z83/9NEc2AlXzqTcGpsVMVQ=
+X-Received: by 2002:a05:690c:6e02:b0:70d:ffaf:48df with SMTP id
+ 00721157ae682-70f97e1ce40mr17605067b3.3.1748554786315; Thu, 29 May 2025
+ 14:39:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/5] Enable env in SCSI
-To: Varadarajan Narayanan <quic_varada@quicinc.com>,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
- joe.hershberger@ni.com, avromanov@salutedevices.com,
- michael@amarulasolutions.com, sjg@chromium.org, hs@denx.de,
- michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
- venkatesh.abbarapu@amd.com, ansuelsmth@gmail.com,
- cniedermaier@dh-electronics.com, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250513091710.3719292-1-quic_varada@quicinc.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250513091710.3719292-1-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250520084120.4175862-1-olaf.baehring@draeger.com>
+In-Reply-To: <20250520084120.4175862-1-olaf.baehring@draeger.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 29 May 2025 14:39:35 -0700
+X-Gm-Features: AX0GCFtxJjPzK7nxNYtFOObPmMSTZo-HExUHFtVP7GrMhMz_l2ZQHhKlKoekcSs
+Message-ID: <CAJ+vNU1Ge_s4mEFYCn0TPhuKW5X1J-jcV3GyZqc_70GjgsqRtA@mail.gmail.com>
+Subject: Re: [PATCH v2] caam: bugfix CAAM error on startup
+To: Olaf Baehring <olaf.baehring@draeger.com>
+Cc: u-boot@lists.denx.de, Gaurav Jain <gaurav.jain@nxp.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,56 +94,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For all except the doc: commit
+On Tue, May 20, 2025 at 5:29=E2=80=AFAM Olaf Baehring <olaf.baehring@draege=
+r.com> wrote:
+>
+> In rare cases U-Boot returns an error message when intantiating the RNG
+> of the CAAM device:
+> =E2=80=9CSEC0:  RNG4 SH0 instantiation failed with error 0xffffffff=E2=80=
+=9D
+> This  means, that even when the CAAM device reports a finished
+> descriptor, none is found in the output ring.
+> This might be caused by a missing cache invalidation before
+> reading the memory of the output ring
+> This patch moves the cache invalidation of the output ring from start of
+> the job to immediately after the notification from hardware where the
+> output ring will be read.
+>
+> Signed-off-by: Olaf Baehring <olaf.baehring@draeger.com>
+> ---
+>
+> (no changes since v1)
+>
+>  drivers/crypto/fsl/jr.c | 30 +++++++++++++++++-------------
+>  drivers/crypto/fsl/jr.h |  4 ----
+>  2 files changed, 17 insertions(+), 17 deletions(-)
+>
+> diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
+> index 8f7a821ebf3..edf678d363e 100644
+> --- a/drivers/crypto/fsl/jr.c
+> +++ b/drivers/crypto/fsl/jr.c
+> @@ -217,13 +217,6 @@ static int jr_enqueue(uint32_t *desc_addr,
+>
+>         jr->head =3D (head + 1) & (jr->size - 1);
+>
+> -       /* Invalidate output ring */
+> -       start =3D (unsigned long)jr->output_ring &
+> -                                       ~(ARCH_DMA_MINALIGN - 1);
+> -       end =3D ALIGN((unsigned long)jr->output_ring + jr->op_size,
+> -                   ARCH_DMA_MINALIGN);
+> -       invalidate_dcache_range(start, end);
+> -
+>         sec_out32(&regs->irja, 1);
+>
+>         return 0;
+> @@ -243,6 +236,7 @@ static int jr_dequeue(int sec_idx, struct caam_regs *=
+caam)
+>  #else
+>         uint32_t *addr;
+>  #endif
+> +       unsigned long start, end;
+>
+>         while (sec_in32(&regs->orsf) && CIRC_CNT(jr->head, jr->tail,
+>                                                  jr->size)) {
+> @@ -250,6 +244,14 @@ static int jr_dequeue(int sec_idx, struct caam_regs =
+*caam)
+>                 found =3D 0;
+>
+>                 caam_dma_addr_t op_desc;
+> +
+> +               /* Invalidate output ring */
+> +               start =3D (unsigned long)jr->output_ring &
+> +                                               ~(ARCH_DMA_MINALIGN - 1);
+> +               end =3D ALIGN((unsigned long)jr->output_ring
+> +                                       + jr->op_size, ARCH_DMA_MINALIGN)=
+;
+> +               invalidate_dcache_range(start, end);
+> +
+>         #ifdef CONFIG_CAAM_64BIT
+>                 /* Read the 64 bit Descriptor address from Output Ring.
+>                  * The 32 bit hign and low part of the address will
+> @@ -283,28 +285,31 @@ static int jr_dequeue(int sec_idx, struct caam_regs=
+ *caam)
+>                 }
+>
+>                 /* Error condition if match not found */
+> -               if (!found)
+> +               if (!found) {
+> +                       int slots_full =3D sec_in32(&regs->orsf);
+> +
+> +                       jr->tail =3D (jr->tail + slots_full) & (jr->size =
+- 1);
+> +                       sec_out32(&regs->orjr, slots_full);
+>                         return -1;
+> +               }
+>
 
-Acked-by: Casey Connolly <casey.connolly@linaro.org>
+Hi Olaf,
 
-On 5/13/25 11:17, Varadarajan Narayanan wrote:
-> The qcs9100 based Ride platforms have UFS as their primary storage.
-> Hence add support to U-Boot env framework to be able to save and
-> retrieve the environment from UFS. The environment will be
-> saved/retrieved from the partition specified in the config option
-> CONFIG_SCSI_ENV_PART.
-> 
-> Also add an API to convert partition UUID string to block device
-> descriptor for UFS. This API will be used to get the block device
-> descriptor for the partition specified in CONFIG_SCSI_ENV_PART.
-> 
-> v4: Use 'if (CONFIG_IS_ENABLED(xxx))' instead of '#if CONFIG_IS_ENABLED(xxx)
->      Add documentation about the platform
-> 
-> v3: s/scsi_get_blk/scsi_get_blk_by_uuid
->      Fix argument name in scsi_get_blk_by_uuid
-> 
-> v2: Add part_get_info_by_uuid() similar to part_get_info_by_name()
->      Use SCSI instead of UFS
->      Use UUID for SCSI_ENV_PART instead of name
-> 
-> Varadarajan Narayanan (5):
->    disk: part: implement generic function part_get_info_by_uuid()
->    scsi: Implement get_blk() function
->    env: Add support for storing env variables in SCSI devices
->    doc: board/qualcomm: document iq9 building and flashing
->    configs: qcs9100: Enable env in SCSI
-> 
->   configs/qcs9100_defconfig  |   5 +-
->   disk/part.c                |  39 +++++++++++++
->   doc/board/qualcomm/iq9.rst |  62 ++++++++++++++++++++
->   drivers/scsi/scsi-uclass.c |  30 ++++++++++
->   env/Kconfig                |  15 ++++-
->   env/Makefile               |   1 +
->   env/env.c                  |   3 +
->   env/scsi.c                 | 115 +++++++++++++++++++++++++++++++++++++
->   include/env_internal.h     |   1 +
->   include/part.h             |  20 +++++++
->   include/scsi.h             |  10 ++++
->   11 files changed, 299 insertions(+), 2 deletions(-)
->   create mode 100644 doc/board/qualcomm/iq9.rst
->   create mode 100644 env/scsi.c
-> 
-> 
-> base-commit: 48db49b0977cc1c9c9abf82c0fb704238fcef4fd
+I could not find v3 of your patch in my mailbox, which I think was the
+version that was accepted by Fabio,
 
--- 
-Casey (she/they)
+I've found that this patch causes a regression on an imx8mm board
+(imx8mm_venice_defconfig) where the first call to caam_rng_read fails
+here in jr_dequeue but if you call it again it works. With some
+debugging added:
+SEC0:  RNG instantiated
+...
+Hit any key to stop autoboot:  0
+u-boot=3D> rng list
+RNG #0 - caam-rng
+u-boot=3D> rng 0 10
+caam_rng_read caam-rng len=3D16
+run_descriptor_jr_idx idx=3D0
+Error in SEC deq: -1
+caam_rng_read_one run_descriptor_jr failed: -1
+caam_rng_read caam-rng caam_rng_read_one failed: -5
+Reading RNG failed
+u-boot=3D> rng 0 10
+caam_rng_read caam-rng len=3D16
+run_descriptor_jr_idx idx=3D0
+00000000: ad 2e ad c0 2a 12 27 c4 65 82 66 19 be ef f6 07  ....*.'.e.f.....
 
+If I revert your patch caam_rng_read works initially and on subsequent call=
+s.
+
+Thoughts?
+
+Best Regards,
+
+Tim
