@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EDA2C54FB3
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 03:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10477C54FB3
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 04:05:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 618CB8362C;
-	Thu, 29 May 2025 05:31:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id D153A835CE;
+	Thu, 29 May 2025 06:05:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="hGcRkUQI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BYx8itfm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE3EA835B9; Thu, 29 May 2025 05:31:10 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id ADE6A8354B; Thu, 29 May 2025 06:05:35 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FA4583612
- for <u-boot@lists.denx.de>; Thu, 29 May 2025 05:31:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id DBB878354B
+ for <u-boot@lists.denx.de>; Thu, 29 May 2025 06:05:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-742c3d06de3so469997b3a.0
- for <u-boot@lists.denx.de>; Wed, 28 May 2025 20:31:08 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=grandpaul@gmail.com
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-72d3b48d2ffso303443b3a.2
+ for <u-boot@lists.denx.de>; Wed, 28 May 2025 21:05:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1748489467; x=1749094267; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T9lJQwCxeAWohxZr10c91rOwvMFWrZ3PBcdvZy1Ha0I=;
- b=hGcRkUQIqRVmqKGX0feLlmLbV6LCcYjat89OoDRQ4wv4S9sIrnoDZK4dS7zOY65H4B
- YwaLeoduU/iQ9EmMDiBzm2ZABDKDGm+PgijsK16BbFPS4Qhng9/Uln3Plq7ugS8xUUtv
- h2i+dON/fyKwHBjr9ZFbtBvnjbfpYgI5nP0Jo+xejrLZzADaTT0PYeJofJ32jqdaYXnq
- zNzRqKH5b5n/nGPx8r43n1wP37b0KlVlVgc1OkWssi1XFpGDGIrMzNXJLRw7MTaNZAvc
- Q5ww9TUJz/q4tglEMKPToJdNXNcrLT5BWmuKtlHDIsrOVlvF8CsLw9k5kGnj3WE3cGRZ
- USnQ==
+ d=gmail.com; s=20230601; t=1748491530; x=1749096330; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=Iwhh+u2PpZJJqbqISwQAoOlVl7I7H7XyoQlcJ1YnWm8=;
+ b=BYx8itfmUBCTkj0FWQwLxa+0lII2Eo6SY4sAvhtn5wJzrqDfVd96fI8rSAyTnJNpE5
+ Tdpc01fu/wBxaHl5jwr7XGHd/eSnFqd/1z7Uf6PnATQbCDjg6i4K3ryvv+gOtBgi9frp
+ HTPKqJjJclA8wm7YVhzVtkijXI7pxIARC7/J5pZms+Niq9NFAmtlXlF+65ccb7aJyrxY
+ eSLUz6+ep7ubgytHcEX/pqcZ43B7QphFLJn8r7Gv1jIiH/y9pEVi2JifXIIqeDfJIioT
+ JaM/ssEVVkEqdrvKe1EtW4mVuvrwJbiN8p4IPwwXOYJ2r1LLa9QsGDfsIkpa86F3UXIt
+ GV5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748489467; x=1749094267;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T9lJQwCxeAWohxZr10c91rOwvMFWrZ3PBcdvZy1Ha0I=;
- b=vuNWWjFDH9NMRcZK0QCUV+EI2ewiilXzsukYiY7i1y63cb3BBZJdc8+oW7SqENYSOL
- Sc2dsD4KVALDGqdP6MWQaefT87+m+FHjkJotleqMQNCEipTFeaPBZyVwxo7rH6gKml7t
- 4h60h+1X5gQ+ZLeKEbfgj7VurCQQwR8loCq5lfT9sAQ0W2cHvxhdBox1hWPguMa6ktAX
- QE03xM5Sdpj43TpHM7LNTFZsnjFJG1dsXYEhIpgqgXg90gDE1EReyfgcCHtWXnI6GoGi
- Dn7IQC1EIeFH01k4v7QhuEe83S+MYVKWjPeHbjvbNYR60jfgsnJ0ZncIPwD+BY5xpG7I
- vA2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUWbxdi8cxNGZnzTOZ12pB08I2hASAqD6aA1MvuWbBt9sGk3PyVIPl7JqgWzN1KeftDpU5J25g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxt1UBYNbsz9BjwB5o3tJTth6oRSDAu+RrSVzWyHL4y6TnxDkGo
- 0pwv+CuP7dfHqaInfdRvLX7I7QzEJZHe1ruLjHLTZDM8VosBieo3kPYsGI5Dv8Y0fEg=
-X-Gm-Gg: ASbGncspLUhzQ+sjeoBbNF0X581Bi85FtQDsJgOoY4lWigSRf1bg5qBnB3wVOt4Iv0U
- 4aWicd2dSnJaZOQDg1GTQmhuFYDTLgi7mmiD5DDU8+i4M72n63thEVo9IWtOLWBeiBATLJC/Zvj
- F3NxUsAR5t2KsWZ2DqVah1HiIzk1THAinF4Kodoe27L92YWix++EHHYp366Xq5fJ/FNlD7JurLm
- MrdUm93Yb20LxfBbFvQNzk6kC9SjzcChOdrlXldpJWese05XneLNi1+N1k3k/cNkqo6HjlM/VKq
- H2ol4LtFElUldmhZVh9EFL8J0RYBuOPP2B1wKKifkBaz+HNXGwRFJYTkmruSXqTEvmc15koa
-X-Google-Smtp-Source: AGHT+IEds+oCLZZnp5mQT9CpDmpkTPqF0JEMYOKD5WtA7wq/oP4K/RSyMxBC4BLpfVqq0c8fmGfrFw==
-X-Received: by 2002:a05:6a20:cf8c:b0:204:4573:d856 with SMTP id
- adf61e73a8af0-2188c1e7e13mr28104263637.4.1748489466883; 
- Wed, 28 May 2025 20:31:06 -0700 (PDT)
-Received: from localhost.localdomain ([223.228.139.23])
- by smtp.googlemail.com with ESMTPSA id
- 41be03b00d2f7-b2d9872cca0sm1847252a12.15.2025.05.28.20.31.04
+ d=1e100.net; s=20230601; t=1748491530; x=1749096330;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Iwhh+u2PpZJJqbqISwQAoOlVl7I7H7XyoQlcJ1YnWm8=;
+ b=rWVkjzZJgOnju331MQabjuWulfZvzR9RT8NoKv/EQVYkO6r8SOYUfSP465aHSVIsqv
+ xuu0tmaUaRQbq3N+HkgGHlBVou6xZ7RqS9OLQKcjYwM0x8QLNn8Z8jnP7rzhph0m/M2U
+ Ve77sNX1W+AhOddjNlKgOmcyqFQHg0FilBW5yxYRrxFrEbhnijUxnI3C+QslAmALUarg
+ KwoYRtabEDIP2fuSjUEJLCE2qiq8Wjkv6LxfhgXFeQgOtBN3v4kTtIamHd/RO3rRrwrL
+ QVHQ/IksjEPGVuQebFazAfbaw87nivFcoJXLGVuFprUEhhe9EcR51HqBsJL8FYp8Fd9j
+ nb8A==
+X-Gm-Message-State: AOJu0YwWQI/yqwvjyKsWj28gDm4QniFknzin34SBzaQsryMzgbJoO/HH
+ /7KQwfJZc2AlpEFylCeZwrwSb1Bt2zpm5Ivl4gkQOZmsYpAr6u9j9jLwfur40w==
+X-Gm-Gg: ASbGncv2V0YnEULexiRJWd7E+kfXble8WrQ9cEWQ6vXqOGjy5bcXfRMUYHkpTyu31bK
+ YQzX5URcOQU/6aezlHSRcwaeLqxXfiyPy+HYluzxmg7EhCdJTHoVbT9hJyeoUI0GbFC0nDHM54h
+ kYHlrM5OQ0GcW1bLXCEmSEPcJklylK1+XdyEWjuziZBx5CVWReS1lRjhMj0w29gEk9DMMNsoLm0
+ 6tz6M+AQKmo+38ywDoATmZobCPZqn3l+ZISx9e3cv6MpyfoN6pv412CYdNst6wg5kzxdOszplc2
+ eYjv/42CIOrMUrVWATfWrEpgTOSaGxNoX5pylTSzKUZQBIk=
+X-Google-Smtp-Source: AGHT+IHSO1TTRnZr2Z8kpVbZNNUK4pPgVR8wHVXpELGj/S6s6iLSLrvPNnsNU8pATPVl6kKqW6O2aw==
+X-Received: by 2002:a05:6a00:6f1b:b0:746:2706:a7fc with SMTP id
+ d2e1a72fcca58-7462706a9a7mr13561435b3a.12.1748491530238; 
+ Wed, 28 May 2025 21:05:30 -0700 (PDT)
+Received: from localhost ([61.71.79.124]) by smtp.gmail.com with UTF8SMTPSA id
+ d2e1a72fcca58-747affafad4sm392143b3a.116.2025.05.28.21.05.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 20:31:06 -0700 (PDT)
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: trini@konsulko.com
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] Revert "riscv: image: Add new image type for RV64"
-Date: Thu, 29 May 2025 03:30:51 +0000
-Message-ID: <20250529033052.399573-3-mchitale@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250529033052.399573-1-mchitale@ventanamicro.com>
-References: <20250529033052.399573-1-mchitale@ventanamicro.com>
+ Wed, 28 May 2025 21:05:29 -0700 (PDT)
+From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+To: u-boot@lists.denx.de
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v4 0/4] Add EFI Debug Support Table feature
+Date: Thu, 29 May 2025 12:05:16 +0800
+Message-ID: <20250529040520.3799600-1-paulliu@debian.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,45 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit 14a4792a71db3561bea065415ac1f2ac69ef32b5 as
-discussed in [1].
+From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 
-[1] https://lists.denx.de/pipermail/u-boot/2025-May/590841.html
+I implemented the UEFI Specification version 2.10, specifically focusing on
+the functionality described in Section 18.4, which details the EFI Debug
+Support Table feature. This implementation ensures support for
+hardware-assisted debugging and provides a standardized mechanism for
+debuggers to discover and interact with system-level debug resources.
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
----
- boot/image.c    | 3 +--
- include/image.h | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+V2: add Kconfig options to turn on/off this feature.
+V3: Fix the way of removing debug_image_info.
+V4: Fix efi_realloc return failure code and efi_alloc_aligned_pages() for
+    system_table_pointer.
 
-diff --git a/boot/image.c b/boot/image.c
-index 45299a7dc33..139c5bd035a 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -92,8 +92,7 @@ static const table_entry_t uimage_arch[] = {
- 	{	IH_ARCH_ARC,		"arc",		"ARC",		},
- 	{	IH_ARCH_X86_64,		"x86_64",	"AMD x86_64",	},
- 	{	IH_ARCH_XTENSA,		"xtensa",	"Xtensa",	},
--	{	IH_ARCH_RISCV,		"riscv",	"RISC-V 32 Bit",},
--	{	IH_ARCH_RISCV64,	"riscv64",	"RISC-V 64 Bit",},
-+	{	IH_ARCH_RISCV,		"riscv",	"RISC-V",	},
- 	{	-1,			"",		"",		},
- };
- 
-diff --git a/include/image.h b/include/image.h
-index 4620782c069..c1db8383459 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -138,8 +138,7 @@ enum {
- 	IH_ARCH_ARC,			/* Synopsys DesignWare ARC */
- 	IH_ARCH_X86_64,			/* AMD x86_64, Intel and Via */
- 	IH_ARCH_XTENSA,			/* Xtensa	*/
--	IH_ARCH_RISCV,			/* RISC-V 32 bit*/
--	IH_ARCH_RISCV64,		/* RISC-V 64 bit*/
-+	IH_ARCH_RISCV,			/* RISC-V */
- 
- 	IH_ARCH_COUNT,
- };
+Ying-Chun Liu (PaulLiu) (4):
+  efi: add EFI_SYSTEM_TABLE_POINTER for debug
+  efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
+  lib: efi_loader: efi_memory.c: add efi_realloc() for realloc memory
+  efi: add EFI_DEBUG_IMAGE_INFO for debug
+
+ include/efi_api.h             |  71 ++++++++++++++
+ include/efi_loader.h          |  19 ++++
+ lib/efi_loader/Kconfig        |   7 ++
+ lib/efi_loader/efi_boottime.c | 174 ++++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_memory.c   |  56 +++++++++++
+ lib/efi_loader/efi_setup.c    |  25 +++++
+ 6 files changed, 352 insertions(+)
+
 -- 
-2.43.0
+2.39.5
 
