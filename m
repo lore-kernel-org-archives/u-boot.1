@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC3BC5AD49
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23EB2C5AD49
+	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 21:49:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CD6F82ED0;
+	by phobos.denx.de (Postfix) with ESMTP id BBCFF8312E;
 	Thu, 29 May 2025 23:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C6F2830F4; Thu, 29 May 2025 23:49:27 +0200 (CEST)
+ id 1F4C482B19; Thu, 29 May 2025 23:49:27 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B80A882B19
+ by phobos.denx.de (Postfix) with ESMTPS id B708E82AFC
  for <u-boot@lists.denx.de>; Thu, 29 May 2025 23:49:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
@@ -25,8 +25,8 @@ Authentication-Results: phobos.denx.de;
 Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uKl7q-007IAa-SY;
- Thu, 29 May 2025 21:49:23 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1uKl7q-007IAa-4l;
+ Thu, 29 May 2025 21:49:22 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
@@ -35,12 +35,10 @@ Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 2/6] net: lwip: enable IP_FRAG and IP_REASSEMBLY
-Date: Thu, 29 May 2025 14:49:06 -0700
-Message-Id: <20250529214910.984024-2-tharvey@gateworks.com>
+Subject: [PATCH 1/6] net: lwip: call sys_check_timeouts and schedule on rx
+Date: Thu, 29 May 2025 14:49:05 -0700
+Message-Id: <20250529214910.984024-1-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250529214910.984024-1-tharvey@gateworks.com>
-References: <20250529214910.984024-1-tharvey@gateworks.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -59,28 +57,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable IP_FRAG and IP_REASSEMBLY to allow packets larger than MTU.
+Call sys_check_timeouts to service lwIP timers and schedule to service
+U-Boot tasks and actions during packet rx.
 
+This resolves the issue of an active watchdog resetting the board on
+long network activities.
+
+Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- lib/lwip/u-boot/lwipopts.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ net/lwip/net-lwip.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
-index edac74ff7a21..1818a445dc5e 100644
---- a/lib/lwip/u-boot/lwipopts.h
-+++ b/lib/lwip/u-boot/lwipopts.h
-@@ -72,8 +72,8 @@
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index f05c4cd3f64f..e8d4cc542ed8 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -13,8 +13,10 @@
+ #include <lwip/etharp.h>
+ #include <lwip/init.h>
+ #include <lwip/prot/etharp.h>
++#include <lwip/timeouts.h>
+ #include <net.h>
+ #include <timer.h>
++#include <u-boot/schedule.h>
  
- #define IP_FORWARD                      0
- #define IP_OPTIONS_ALLOWED              1
--#define IP_REASSEMBLY                   0
--#define IP_FRAG                         0
-+#define IP_REASSEMBLY                   1
-+#define IP_FRAG                         1
- #define IP_REASS_MAXAGE                 3
- #define IP_REASS_MAX_PBUFS              4
- #define IP_FRAG_USES_STATIC_BUF         0
+ /* xx:xx:xx:xx:xx:xx\0 */
+ #define MAC_ADDR_STRLEN 18
+@@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 	int len;
+ 	int i;
+ 
++	/* lwIP timers */
++	sys_check_timeouts();
++	/* Other tasks and actions */
++	schedule();
++
+ 	if (!eth_is_active(udev))
+ 		return -EINVAL;
+ 
 -- 
 2.25.1
 
