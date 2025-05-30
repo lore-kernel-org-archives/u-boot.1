@@ -4,81 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 705A4C5B543
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 14:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 829EAC5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 14:14:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C88A182B97;
-	Fri, 30 May 2025 16:06:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BF65A82B70;
+	Fri, 30 May 2025 16:14:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pwj6u/ps";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L1pXbST8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB38682BAA; Fri, 30 May 2025 16:06:56 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id D844A82B97; Fri, 30 May 2025 16:14:07 +0200 (CEST)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0C5682B70
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 16:06:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A52D782B5B
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 16:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-401f6513cb2so1747081b6e.0
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 07:06:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-476977848c4so22708861cf.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 07:14:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748614013; x=1749218813; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5tzObDKQZMDzUItWtEc+PUMVLxm8hRPoKtuTiwbxWbc=;
- b=pwj6u/psJ/+9YIqwP83Ef66o4s2TH6zRhth/SUnCJU2O6JxaK17EI4722/zkMY5gv/
- mVE6LuWW/DTLCm3Pq4xEsHpjJeNygP+57sK+qz9bC3JWn8m9T4ICjp+haHBVdE0R260E
- 36iVRkhb6Z8rpweT28/dhx6YbFKjLSsfG5tXE=
+ d=linaro.org; s=google; t=1748614444; x=1749219244; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jbBk605LBpO2MVpcEITJYH6Erm2Ghk4/ILepjslkfMU=;
+ b=L1pXbST8EwHpI4hD56YKav0CTxYKDLGq0zGK7eCe9iN+m2+jISy3ZlpbotCmqA42qF
+ RvWa3UlrNWxwxvxsHB7EuFNsTzZMY4fw+3JmXmN6q8UUM3E6tqzJuWt2VKyxEBS+HzMc
+ wSjEgOz/r8O7qhHjITnA8Wqe+0USJRDTcYKzhOzIUcQCf1aQae3uBI36CENAqz4WbSar
+ 6Xq0pVe/8SBgbZqNVQBPJlUS71AxPXG3mgCHKbo5ggHFmgsBL5dyo/CtknVZp8BojAOC
+ +gtAwZuABnnqboaVc7ZvuvKNhXaDt29t+rZPkFiraeBNQOOElxtjo82NKuwI8Hwvb5c7
+ brMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748614013; x=1749218813;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5tzObDKQZMDzUItWtEc+PUMVLxm8hRPoKtuTiwbxWbc=;
- b=ppLwJBvwYuTF3tW2xNteuVm1hKCxQSmR6nITispeGfADgh5Ol82T0o1P6ESc6lCZ1M
- 1wVUJ50rrKOnJHpXTqUFM1zzhCMqLR3/3kZvPn/+bYni8rKQvvs9h+90dj+CnyCn97X8
- L6lJZBIUPxueFepbtkDiiL6cexjw7xxyL+bcLNNdhUvGd4Q2BQuFMhuNak5xgfQGZwXE
- cni4g+RJ/ATrS5Z1sKgPNa8DCHr8sx1PI7FKuwtFv5n0nY2+f3ROzgnIO2/w3n9JqvV/
- ejAhBSHT5c55gfzrYfSkBhaV+5OgVBn4q2r751BSy8LcM0EZKyBxSUJe8XOd8qt4RsKK
- QA4g==
-X-Gm-Message-State: AOJu0YxqQAXM5QdUxu9c4euQpKcRzImDRZzRrUEDnYrXwF2YPj/KtV1X
- GWupxGIjJiM0mTtuFLJH36Kph2laHV96RkjsoLRZ+Q9x3fOeV75sojBNhjvTczg47Ag=
-X-Gm-Gg: ASbGncuKSt76dzkirSawQwawPKwhjCwadULvJHVqiIy8Cov0wqyUe3wpbI9WkkLJsMP
- dhQ30dRx1CyIqh/mJYIL0uGfIaulX7F1AzDWSVhV051digkvP1V8eDJI/D70kIgIEanSXAtBbMx
- vZvmi9WhVM7mnEyKECaA309ZYM9bZA+UIiQIkob4rltQ4hy/mjucF0PiY0DSsJjWcpGxk8lR6Cy
- 7Mpl2+Rj4YgFcMG/mSvc3/zpJ+ruoNB/LyV3gsZ+5Yy4c/t87OEglnVeWctpFzI8XSWgBtwah1s
- D3LvKpRxRGO1pltDSuq3SedUp5j82PUQHm04YTt7WqaotOvPxnhH8gI4MhWZHOZ4sgrVUuQdJ12
- RY2p7eR3VJEgc
-X-Google-Smtp-Source: AGHT+IH05f+EryqrXbiNRhHEBu9dLAR53ZwZusXkltwRqDl5iwTQZBC/FXoBiWZ3qtoflomvbnyBmw==
-X-Received: by 2002:a05:6808:2f11:b0:400:e771:ab80 with SMTP id
- 5614622812f47-40679c0c283mr1882321b6e.0.1748614013282; 
- Fri, 30 May 2025 07:06:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40678ce83e1sm398978b6e.33.2025.05.30.07.06.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 07:06:52 -0700 (PDT)
-Date: Fri, 30 May 2025 08:06:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Azure runners
-Message-ID: <20250530140650.GT100073@bill-the-cat>
-References: <CAFLszTiFLpYoJnu65CWgqKgq6=ffXpWh4kcXqSaBjAwgkoP6vw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1748614444; x=1749219244;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jbBk605LBpO2MVpcEITJYH6Erm2Ghk4/ILepjslkfMU=;
+ b=gkjiGNrO72N0zvT+95CKiknsicC6Yr7q1IH5iUfiUnug/Lg2XwYT5nO0n1oA7b4frF
+ S1+EgvMjLeAc4dT7yZrzpBKYTEO4fc2AzengMGzyYpmyRAzzxYXGNoUeXjGWZ0nRuk8Z
+ vPVRvMoSol6GulpizlDC9SgR10tOxR9OWQRjPvUCH/9Mfe0P/MyAd/AzK3F+N0G8DB44
+ FHS+okLSehMqNtpSe37O/j8ByejK37VH7m3cNqqnaEXam7OOpE557BylF9MBfR8U/WyS
+ zrg+LD/UxJSFXzfTMbLReI8Hmkw1tRe1BPa6h4Hwv62QPju8D6D7VmdbexN+zaTw7Xls
+ fuUA==
+X-Gm-Message-State: AOJu0YyxC9IycHowx6cHuAjHbNmSC3RLmfXNoQWE+CGs/fpUM+FB8vqk
+ tyxEn8E8WykqpLZQxg4jQgLZOFCICOp3iPqiggGFgFfkL+9z0WbJ8E62lciYmq784PYwNGnKq3C
+ WDzJxnp3IohHvlZ3Pq+FBgVv1SZN8y8EWmSmI7spXUTHpkifVFYc8kMw=
+X-Gm-Gg: ASbGncuRbf/o42kNJObp1NyGiaFLzMJaPEuuuiiUR1z89RSN614qrXEv7zEYZfKD8NR
+ uM4K1MlPrZOzn74rhbvkUrAwxhCUlr4YH3UYWk925fSPZpZ1HITl8SUs92sT5kgmKjaHKxcexQk
+ hfHiCEH97TJ7dM5XvVDV+c9WylVuX2/xpOOvNeGszC/FPR
+X-Google-Smtp-Source: AGHT+IG4oGFjWwie4fQO0N0X2lNPOAzNT/UGRfimEPhMcf+2v/wgIU6yg06Dqps7Dmri+94J1IIyZtdA6QYaS8OU6kI=
+X-Received: by 2002:a05:690c:6813:b0:70f:8883:eb1a with SMTP id
+ 00721157ae682-70f97e2eae1mr54826567b3.6.1748614433844; Fri, 30 May 2025
+ 07:13:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9FDg30ZAgFD/18g3"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiFLpYoJnu65CWgqKgq6=ffXpWh4kcXqSaBjAwgkoP6vw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250527210436.1488428-1-raymond.mao@linaro.org>
+In-Reply-To: <20250527210436.1488428-1-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 30 May 2025 17:13:18 +0300
+X-Gm-Features: AX0GCFv_UfMZjEhfhcv1wAhzKdt7983Sbt-Tw0cIJOmoXNDlqi4ivc3Fxo3SEFE
+Message-ID: <CAC_iWj+rSHWdhXk9rP_Y7SQxM1a3UbtQGJ0a=Zza0wMndYR6zg@mail.gmail.com>
+Subject: Re: [PATCH] armv8: fix Clang warning on writing 32-bit variable to a
+ 64-bit register
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
+ Prasad Kummari <prasad.kummari@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,42 +101,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 28 May 2025 at 00:04, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Clang is stricter than GCC when it comes to inline assembly and expects the
+> register to be written with explicitly same type of variable.
+>
+> Fixes: c0e1775a867c ("armv8: Add arch-specific sysinfo platform driver")
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  arch/arm/cpu/armv8/sysinfo.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/cpu/armv8/sysinfo.c b/arch/arm/cpu/armv8/sysinfo.c
+> index 850142da37d..ff0abee4c6b 100644
+> --- a/arch/arm/cpu/armv8/sysinfo.c
+> +++ b/arch/arm/cpu/armv8/sysinfo.c
+> @@ -134,7 +134,7 @@ int sysinfo_get_cache_info(u8 level, struct cache_info *cinfo)
+>
+>         /* Select cache level */
+>         csselr_el1 = (level << 1);
+> -       asm volatile("msr csselr_el1, %0" : : "r" (csselr_el1));
+> +       asm volatile("msr csselr_el1, %0" : : "r" ((u64)csselr_el1));
+>
+>         /* Read CCSIDR_EL1 */
+>         asm volatile("mrs %0, ccsidr_el1" : "=r" (creg.data));
+> --
+> 2.25.1
+>
 
---9FDg30ZAgFD/18g3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, May 30, 2025 at 02:31:13PM +0100, Simon Glass wrote:
-
-> Hi Tom,
->=20
-> I have always found the azure pipeline to be slow, but I found that it
-> actually does support having your own runners / agents. I set up 8 of
-> them on ruru:
-
-I had not seen that before, can you please send a link to the
-documentation you're working from? Thanks.
-
---=20
-Tom
-
---9FDg30ZAgFD/18g3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg5u3oACgkQFHw5/5Y0
-tyyOvQv/SgRax5bWmtui1jnho4B8wvBE0+bV0vayihsLUWtgiiYVH2CppEOVYqLv
-thcxtgp8+5So06wszR0JueBmYnN7x7CPFwezLNOiCbAfX+0mYtGEQpAtct2U9c48
-7twEKl9trtZAxw4lri+q4MQBIUI4u1pfr4Zf3OAY4BCFDC15/6UwnZF/5gA1D7Qg
-wQepFad1lo9voIi87oHCg4vgSmVOnef/WbuiF6qdDn9B3gl9nWiJQX25EihRXDwi
-4Mn/9wZpespB/DF3yTm1lKYj6mKo75LNe4qAk9MvDilFEZSVDxLovtwycYUU1XzK
-oBBg7roW+ns84YFN//gl2GjjqPfEsVLz+YRoiQbhJRgp90cyk5DWg8Kmkz8F9PR8
-suuEADdRShFbxyfSIHXT8JXB4z+te8atlfraI4EFrNQftZ0Ac51qfAtOMLpNngAQ
-a117/GjfQmux11aUdVsnISOS5/nC8abafWRtqixcehVkOf4psE3AJ7twOhw9dnzv
-lc/lEeB+
-=c3Ze
------END PGP SIGNATURE-----
-
---9FDg30ZAgFD/18g3--
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
