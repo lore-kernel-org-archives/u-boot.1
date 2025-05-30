@@ -4,75 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8807EC5B543
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 22:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E579C5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 22:09:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94B0182C13;
-	Sat, 31 May 2025 00:05:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B440782BA7;
+	Sat, 31 May 2025 00:09:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iXwYxIic";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="me6N5jOY";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=wolfssl-com.20230601.gappssmtp.com header.i=@wolfssl-com.20230601.gappssmtp.com header.b="0X02XqvC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EDAE82C13; Sat, 31 May 2025 00:05:00 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 762B382C0C; Fri, 30 May 2025 21:46:14 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2D8682B0F
- for <u-boot@lists.denx.de>; Sat, 31 May 2025 00:04:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 842C382BA7
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 21:46:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4b8HN91jXhz9tNF;
- Sat, 31 May 2025 00:04:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1748642697;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dTmLwXIzCcDOmTxHe6f0hD8escHHRtddcGClqXmdVTA=;
- b=iXwYxIicblE9o75BWRGKDZcF4J19rYnJmRL9Q+7QRnIYmUbiwoqOAy/SawSxu4qbRA1Vi5
- qKODy6SpHe4AHXCVGB4sdQdI0NB1tMBiYgDhFF4n23Nj4ulrzz6nTgLXQpMQdB1coZCMvs
- t9eYjX2Ush9vTuoPYpmw4GE28pSGFqg32uhIV7Tgu7mSentSxCXGP0GB80ixcALGTwdy+O
- JLcfAbUlRmmcHcEAcFDxG300uBBZuljJwcFHInR9S1STflxaD8H7NRyDy5KSZ7zWfo7262
- rekHnF7yOZP0aeukz8gzGB+Eq7Ys+VxWQizPr+TAcCehdOiM+aacwpQczkAbkw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1748642695;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dTmLwXIzCcDOmTxHe6f0hD8escHHRtddcGClqXmdVTA=;
- b=me6N5jOYK+76vAlj+EQ/tYv9xDAkDOkx1xIeqFZQxUjq4jqf32vZ/D13NFsnWOe65MdLfC
- Plvt8rV5rLPlY5gXI9qffkx56mN2I/1+dA7U+MNP8Hx5IClCFwqvrDaEJcOFITAW0PTKu0
- KaRpSolFSuaZBsReY9TXjl0cZoxYLIsQnsHDvrl/7T0pm4EbQpEJOOWcHRV9q6h8UzI66R
- XB0u10pdjZoDkEjooH1FJLGld953irt/GV+s84HW7qvtIp7zr4Wn0SQh2IptsBquxwJ2Un
- DftyAe8BC+KIFTxtlULQR2pmf4FbJclm586qh4/95/1DRb/fWuIhVy9jebP1xg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] arm64: dts: renesas: r8a779g3: Add Retronix R-Car V4H
- Sparrow Hawk board support
-Date: Sat, 31 May 2025 00:03:40 +0200
-Message-ID: <20250530220420.26891-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250530220420.26891-1-marek.vasut+renesas@mailbox.org>
-References: <20250530220420.26891-1-marek.vasut+renesas@mailbox.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: tbyqtfn95f16k9m1jfor9ewtu483fybg
-X-MBO-RS-ID: b43d0620c1f854068e3
-X-Rspamd-Queue-Id: 4b8HN91jXhz9tNF
+ spf=pass smtp.mailfrom=david@wolfssl.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-742c9907967so2520545b3a.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 12:46:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=wolfssl-com.20230601.gappssmtp.com; s=20230601; t=1748634370; x=1749239170;
+ darn=lists.denx.de; 
+ h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jxY3GTVTp0UlUpbQyenrk5maHusbncfUwWzPGv19PfI=;
+ b=0X02XqvCppwVh5whCmh+VYhYLeEAm1mi+GnduFdupIc6+qMlMnLT2YD4r1TCKSmc3S
+ hnhGOjuqAkBi5cnfj+PRG6R5zQtjyk8SOtZiw13k/MvCmkePOzpVUEZYBX21mfRo5sAH
+ Nrlh3aEqSgVuRbjMDJJ3npS62DUe57XaU+I8BLwGdLFX28wAaOSWqcvZ+sDcP3mQKrLL
+ vJLefsa3CBdi71Aga9z60KGtfpEH1FQxvP1bpqqMEOPtQC1QUN3cO+FFZVJA4iLyAI2p
+ LyMRLgggzSjuTAy2h4dI/HoF9+o9HCK90a5Y8IkSp1pPT1lKMskztzRbjxqfLtQUldTC
+ Kg/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748634370; x=1749239170;
+ h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=jxY3GTVTp0UlUpbQyenrk5maHusbncfUwWzPGv19PfI=;
+ b=bL0Mt5eGlSBBqfAxXnYm8SX2+3VYD4uEt+altKM47UJMP4ubez0ZaDsr1Mf1zZXlrh
+ UykeYLuB/DzoT5UdN+UVPH1r/q/reFHsVdNnV7uk6yigkTX4iuycboMijzhDqGpIV/eU
+ WNADT1j4Hw/wxdVhjovnjVJhzoixICvsQgu5Sa60TNsyLawQGNn3NKjfvBDwdaSBmLwW
+ QZCn80QI2NxMCPYmtsbWU4gHvdjQKMfnHf6gCUp0A+6KfvZDAP71h876ODJTLqjDA9OP
+ J12fzLeW/cJmveeFlSeCxjUOP+feQ90LSt756FbvP5reRbz4Gu9Bl5LVKXCn97km//xb
+ exGg==
+X-Gm-Message-State: AOJu0Yy9PcbYFBzMMbJSJMs6lrFck3vGtcB5LuxULFp7pU6JjFt1jP8K
+ BMB9yMU0KrSeC6GWFs2KR0/QhTK5YBKOaesTBZ6ipcw+entcUPDyIJcO7GOAcfNfFQs=
+X-Gm-Gg: ASbGncsmkkmZm0WUTS6BBHB0f0ByVLozz28yip8Fg4WAJ8trjKQnGoxxqh+Zf4XFlZO
+ e0u14gRJWlOZ5dS+UjN0EA7fBvHcX4b7Wj9bQw1qAwWFrUxm+LngBQJRSVNot/wsOlAxM+F1JcG
+ paD7Y1yI0O2di8mScKCbj/h0nGROIjTCzv/W84U9s1Sazn+WSrPbcGy20ArQftPWe5M2pBzcemM
+ ApxQ4aRi0RzI0BPBjKenhjNV0GPWVXohtzM+/ApWzuNuuV+qXBCKIqPTrhIn7pbX3fYfzYYCGLO
+ pS0dwbqbNS5+bcNsYKOFJcaGxZMWHZuKNOU+ZJ2E7+80U7RHdSs9gGBd/sBhNtccB7twmzYylw=
+ =
+X-Google-Smtp-Source: AGHT+IHMrEU4IhdjPaGKTUSe/9rPC0bB7wetS84e6Q+tLCuNRPUEQpErJWRcxQqBxlbQgyus4JfG9Q==
+X-Received: by 2002:a05:6a20:1605:b0:1f5:8cc8:9cc5 with SMTP id
+ adf61e73a8af0-21ad978cfe9mr8387940637.34.1748634369835; 
+ Fri, 30 May 2025 12:46:09 -0700 (PDT)
+Received: from smtpclient.apple ([2607:fb91:1d06:4b8:c8ff:7756:da2:93b2])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-747affcfa0csm3508766b3a.131.2025.05.30.12.46.08
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 30 May 2025 12:46:09 -0700 (PDT)
+From: David Garske <david@wolfssl.com>
+Message-Id: <BE301B14-56AC-44D0-9EA4-84346EEF313F@wolfssl.com>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.500.181.1.5\))
+Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
+Date: Fri, 30 May 2025 12:45:57 -0700
+In-Reply-To: <CAC_iWjJt=Rq2=FzhLpZpiSycXFuUC1Yd-07Ru4NZUMRt+hqKbw@mail.gmail.com>
+Cc: u-boot@lists.denx.de, Todd Ouska <todd@wolfssl.com>,
+ Larry Stefonic <larry@wolfssl.com>, Wolfram Kusterer <wolfram@wolfssl.com>,
+ Aidan Garske <aidan@wolfssl.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
+ <D9RMK91R8Q2I.3BA39TM77AYZA@linaro.org>
+ <AB2FA403-CBB0-44F6-AC75-4A70B3E9242B@wolfssl.com>
+ <CAC_iWj+mH2jywAYA_cBOqBnk+pvH-+r4nwL7SD8HGDbdmu284g@mail.gmail.com>
+ <D73260F8-6334-4F8A-A8DD-FF70B8EF313E@wolfssl.com>
+ <CAC_iWjJt=Rq2=FzhLpZpiSycXFuUC1Yd-07Ru4NZUMRt+hqKbw@mail.gmail.com>
+X-Mailer: Apple Mail (2.3826.500.181.1.5)
+X-Mailman-Approved-At: Sat, 31 May 2025 00:09:35 +0200
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,1104 +107,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Retronix R-Car V4H Sparrow Hawk board based on Renesas R-Car V4H ES3.0
-(R8A779G3) SoC. This is a single-board computer with single gigabit ethernet,
-DSI-to-eDP bridge, DSI and two CSI2 interfaces, audio codec, two CANFD ports,
-micro SD card slot, USB PD supply, USB 3.0 ports, M.2 Key-M slot for NVMe SSD,
-debug UART and JTAG.
+Hi Ilias,
 
-DT is imported from Linux next commit:
-a719915e76f2 ("arm64: dts: renesas: r8a779g3: Add Retronix R-Car V4H Sparrow Hawk board support")
+Thank you for the reply. I totally understand about being busy! There is =
+nothing specific to discuss at this point. I=E2=80=99ll reach out again =
+soon with the proposed u-boot wolfTPM patches.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- .../arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi |  50 ++
- arch/arm/mach-renesas/Kconfig.rcar4           |   7 +
- board/renesas/sparrowhawk/Kconfig             |  15 +
- board/renesas/sparrowhawk/MAINTAINERS         |   7 +
- board/renesas/sparrowhawk/Makefile            |   9 +
- board/renesas/sparrowhawk/sparrowhawk.c       | 143 ++++
- configs/r8a779g3_sparrowhawk_defconfig        |  69 ++
- doc/board/renesas/renesas.rst                 |   6 +
- .../arm64/renesas/r8a779g3-sparrow-hawk.dts   | 666 ++++++++++++++++++
- include/configs/sparrowhawk.h                 |  14 +
- 10 files changed, 986 insertions(+)
- create mode 100644 arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
- create mode 100644 board/renesas/sparrowhawk/Kconfig
- create mode 100644 board/renesas/sparrowhawk/MAINTAINERS
- create mode 100644 board/renesas/sparrowhawk/Makefile
- create mode 100644 board/renesas/sparrowhawk/sparrowhawk.c
- create mode 100644 configs/r8a779g3_sparrowhawk_defconfig
- create mode 100644 dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
- create mode 100644 include/configs/sparrowhawk.h
+Thanks,
+David Garske
+Software Engineer, wolfSSL
++1 (530) 409-2990
+https://www.wolfssl.com <https://www.wolfssl.com/>
+https://github.com/wolfssl
 
-diff --git a/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi b/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-new file mode 100644
-index 00000000000..c9f302799f1
---- /dev/null
-+++ b/arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
-@@ -0,0 +1,50 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Device Tree Source extras for U-Boot for the R-Car V4H Sparrow Hawk board
-+ *
-+ * Copyright (C) 2025 Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+#include "r8a779g0-u-boot.dtsi"
-+
-+/* Page 31 / FAN */
-+&gpio1 {
-+	pwm-fan-hog {
-+		gpio-hog;
-+		gpios = <15 GPIO_ACTIVE_HIGH>;
-+		output-high;
-+		line-name = "PWM-FAN";
-+	};
-+};
-+
-+/* Page 29 / CSI_IF_CN / CAM_CN0 */
-+&i2c1 {
-+	status = "okay";
-+};
-+
-+/* Page 29 / CSI_IF_CN / CAM_CN1 */
-+&i2c2 {
-+	status = "okay";
-+};
-+
-+/* Page 31 / IO_CN */
-+&i2c3 {
-+	status = "okay";
-+};
-+
-+/* Page 31 / IO_CN */
-+&i2c4 {
-+	status = "okay";
-+};
-+
-+/* Page 18 / POWER_CORE and Page 19 / POWER_PMIC */
-+&i2c5 {
-+	status = "okay";
-+};
-+
-+&rpc {
-+	flash@0 {
-+		spi-tx-bus-width = <1>;
-+		spi-rx-bus-width = <1>;
-+	};
-+};
-diff --git a/arch/arm/mach-renesas/Kconfig.rcar4 b/arch/arm/mach-renesas/Kconfig.rcar4
-index c42bb9765ef..04418f7aa05 100644
---- a/arch/arm/mach-renesas/Kconfig.rcar4
-+++ b/arch/arm/mach-renesas/Kconfig.rcar4
-@@ -66,6 +66,12 @@ config TARGET_WHITEHAWK
- 	help
- 	  Support for Renesas R-Car Gen4 White Hawk platform
- 
-+config TARGET_SPARROWHAWK
-+	bool "Sparrow Hawk board"
-+	imply R8A779G0
-+	help
-+	  Support for Renesas R-Car Gen4 Sparrow Hawk platform
-+
- config TARGET_GRAYHAWK
- 	bool "Gray Hawk board"
- 	imply R8A779H0
-@@ -78,6 +84,7 @@ source "board/renesas/falcon/Kconfig"
- source "board/renesas/spider/Kconfig"
- source "board/renesas/s4sk/Kconfig"
- source "board/renesas/whitehawk/Kconfig"
-+source "board/renesas/sparrowhawk/Kconfig"
- source "board/renesas/grayhawk/Kconfig"
- 
- endif
-diff --git a/board/renesas/sparrowhawk/Kconfig b/board/renesas/sparrowhawk/Kconfig
-new file mode 100644
-index 00000000000..6b7aba348df
---- /dev/null
-+++ b/board/renesas/sparrowhawk/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_SPARROWHAWK
-+
-+config SYS_SOC
-+	default "renesas"
-+
-+config SYS_BOARD
-+	default "sparrowhawk"
-+
-+config SYS_VENDOR
-+	default "renesas"
-+
-+config SYS_CONFIG_NAME
-+	default "sparrowhawk"
-+
-+endif
-diff --git a/board/renesas/sparrowhawk/MAINTAINERS b/board/renesas/sparrowhawk/MAINTAINERS
-new file mode 100644
-index 00000000000..9f759aefab8
---- /dev/null
-+++ b/board/renesas/sparrowhawk/MAINTAINERS
-@@ -0,0 +1,7 @@
-+SPARROWHAWK BOARD
-+M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
-+S:	Maintained
-+F:	arch/arm/dts/r8a779g3*
-+F:	board/renesas/sparrowhawk/
-+F:	configs/r8a779g3_sparrowhawk_defconfig
-+F:	include/configs/sparrowhawk.h
-diff --git a/board/renesas/sparrowhawk/Makefile b/board/renesas/sparrowhawk/Makefile
-new file mode 100644
-index 00000000000..90da9e02537
---- /dev/null
-+++ b/board/renesas/sparrowhawk/Makefile
-@@ -0,0 +1,9 @@
-+#
-+# board/renesas/sparrowhawk/Makefile
-+#
-+# Copyright (C) 2025 Marek Vasut <marek.vasut+renesas@mailbox.org>
-+#
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+
-+obj-y	+= sparrowhawk.o
-diff --git a/board/renesas/sparrowhawk/sparrowhawk.c b/board/renesas/sparrowhawk/sparrowhawk.c
-new file mode 100644
-index 00000000000..8e72b5424d1
---- /dev/null
-+++ b/board/renesas/sparrowhawk/sparrowhawk.c
-@@ -0,0 +1,143 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025 Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+#include <asm/io.h>
-+#include <compiler.h>
-+#include <dbsc5.h>
-+#include <spl.h>
-+
-+#if defined(CONFIG_XPL_BUILD)
-+
-+static const struct renesas_dbsc5_board_config
-+renesas_v4h_sparrowhawk_8g_6400_dbsc5_board_config = {
-+	/* RENESAS V4H Sparrow Hawk (64Gbit 1rank) */
-+	.bdcfg_phyvalid	= 0xF,
-+	.bdcfg_vref_r	= 0x0,
-+	.bdcfg_vref_w	= 0x0,
-+	.bdcfg_vref_ca	= 0x0,
-+	.bdcfg_rfm_chk	= true,
-+	.ch = {
-+		[0] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0xFF },
-+			.bdcfg_ca_swap =	0x04506132,
-+			.bdcfg_dqs_swap =	0x01,
-+			.bdcfg_dq_swap =	{ 0x26157084, 0x12306854 },
-+			.bdcfg_dm_swap =	{ 0x03, 0x07 },
-+			.bdcfg_cs_swap =	0x10
-+		},
-+		[1] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0xFF },
-+			.bdcfg_ca_swap =	0x02431065,
-+			.bdcfg_dqs_swap =	0x10,
-+			.bdcfg_dq_swap =	{ 0x56782314, 0x70423856 },
-+			.bdcfg_dm_swap =	{ 0x00, 0x01 },
-+			.bdcfg_cs_swap =	0x10
-+		},
-+		[2] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0xFF },
-+			.bdcfg_ca_swap =	0x02150643,
-+			.bdcfg_dqs_swap =	0x10,
-+			.bdcfg_dq_swap =	{ 0x58264031, 0x40587236 },
-+			.bdcfg_dm_swap =	{ 0x07, 0x01 },
-+			.bdcfg_cs_swap =	0x10
-+		},
-+		[3] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0xFF },
-+			.bdcfg_ca_swap =	0x01546230,
-+			.bdcfg_dqs_swap =	0x01,
-+			.bdcfg_dq_swap =	{ 0x45761328, 0x68023745 },
-+			.bdcfg_dm_swap =	{ 0x00, 0x01 },
-+			.bdcfg_cs_swap =	0x10
-+		}
-+	}
-+};
-+
-+static const struct renesas_dbsc5_board_config
-+renesas_v4h_sparrowhawk_16g_5500_dbsc5_board_config = {
-+	/* RENESAS V4H Sparrow Hawk (64Gbit 2rank) */
-+	.bdcfg_phyvalid	= 0xF,
-+	.bdcfg_vref_r	= 0x0,
-+	.bdcfg_vref_w	= 0x0,
-+	.bdcfg_vref_ca	= 0x0,
-+	.bdcfg_rfm_chk	= true,
-+	.ch = {
-+		[0] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0x06 },
-+			.bdcfg_ca_swap =	0x04506132,
-+			.bdcfg_dqs_swap =	0x01,
-+			.bdcfg_dq_swap =	{ 0x26157084, 0x12306854 },
-+			.bdcfg_dm_swap =	{ 0x03, 0x07 },
-+			.bdcfg_cs_swap =	0x10
-+		},
-+		[1] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0x06 },
-+			.bdcfg_ca_swap =	0x02431065,
-+			.bdcfg_dqs_swap =	0x10,
-+			.bdcfg_dq_swap =	{ 0x56782314, 0x70423856 },
-+			.bdcfg_dm_swap =	{ 0x00, 0x01 },
-+			.bdcfg_cs_swap =	0x10
-+		},
-+		[2] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0x06 },
-+			.bdcfg_ca_swap =	0x02150643,
-+			.bdcfg_dqs_swap =	0x10,
-+			.bdcfg_dq_swap =	{ 0x58264031, 0x40587236 },
-+			.bdcfg_dm_swap =	{ 0x07, 0x01 },
-+			.bdcfg_cs_swap =	0x10
-+		},
-+		[3] = {
-+			.bdcfg_ddr_density =	{ 0x06, 0x06 },
-+			.bdcfg_ca_swap =	0x01546230,
-+			.bdcfg_dqs_swap =	0x01,
-+			.bdcfg_dq_swap =	{ 0x45761328, 0x68023745 },
-+			.bdcfg_dm_swap =	{ 0x00, 0x01 },
-+			.bdcfg_cs_swap =	0x10
-+		}
-+	}
-+};
-+
-+const struct renesas_dbsc5_board_config *
-+dbsc5_get_board_data(struct udevice *dev, const u32 modemr0)
-+{
-+	/*
-+	 * MD[19] is used to discern between 5500 Mbps and 6400 Mbps operation.
-+	 *
-+	 * Boards with 1 rank of DRAM can operate at 6400 Mbps, those are the
-+	 * Sparrow Hawk boards with 8 GiB of DRAM. Boards with 2 ranks of DRAM
-+	 * are limited to 5500 Mbps operation, those are the boards with 16 GiB
-+	 * of DRAM.
-+	 *
-+	 * Use MD[19] setting to discern 8 GiB and 16 GiB DRAM Sparrow Hawk
-+	 * board variants from each other automatically.
-+	 */
-+	if (modemr0 & BIT(19))
-+		return &renesas_v4h_sparrowhawk_16g_5500_dbsc5_board_config;
-+	else
-+		return &renesas_v4h_sparrowhawk_8g_6400_dbsc5_board_config;
-+}
-+
-+#endif
-+
-+#define RST_MODEMR0			0xe6160000
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+void renesas_dram_init_banksize(void)
-+{
-+	const u32 modemr0 = readl(RST_MODEMR0);
-+	int bank;
-+
-+	/* 8 GiB device, do nothing. */
-+	if (!(modemr0 & BIT(19)))
-+		return;
-+
-+	/* 16 GiB device, adjust memory map. */
-+	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-+		if (gd->bd->bi_dram[bank].start == 0x480000000ULL)
-+			gd->bd->bi_dram[bank].size = 0x180000000ULL;
-+		else if (gd->bd->bi_dram[bank].start == 0x600000000ULL)
-+			gd->bd->bi_dram[bank].size = 0x200000000ULL;
-+	}
-+}
-diff --git a/configs/r8a779g3_sparrowhawk_defconfig b/configs/r8a779g3_sparrowhawk_defconfig
-new file mode 100644
-index 00000000000..47fc536df81
---- /dev/null
-+++ b/configs/r8a779g3_sparrowhawk_defconfig
-@@ -0,0 +1,69 @@
-+#include <configs/renesas_rcar4.config>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_RENESAS=y
-+CONFIG_RCAR_GEN4=y
-+CONFIG_ARM_SMCCC=y
-+CONFIG_ARMV8_PSCI=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_OFFSET=0x3f80000
-+CONFIG_ENV_OFFSET_REDUND=0x3fc0000
-+CONFIG_ENV_SECT_SIZE=0x40000
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a779g3-sparrow-hawk"
-+CONFIG_TARGET_SPARROWHAWK=y
-+CONFIG_SYS_BOOT_GET_CMDLINE=y
-+CONFIG_SYS_CLK_FREQ=16666666
-+CONFIG_SYS_BARGSIZE=2048
-+CONFIG_SYS_CBSIZE=2048
-+CONFIG_BAUDRATE=921600
-+CONFIG_BINMAN=y
-+CONFIG_BOOTCOMMAND="tftp 0x50000000 fitImage && bootm 0x50000000"
-+CONFIG_DEFAULT_FDT_FILE="r8a779g3-sparrow-hawk.dtb"
-+CONFIG_CMD_REMOTEPROC=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_REMOTEPROC_RENESAS_APMU=y
-+CONFIG_BITBANGMII=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_RENESAS_RAVB=y
-+
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xeb300000
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_SPL_TEXT_BASE=0xeb210000
-+CONFIG_SPL_STACK_R_ADDR=0x44000000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SPL_FIT_PRINT=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x48000000
-+# CONFIG_SPL_BOARD_INIT is not set
-+# CONFIG_SPL_LEGACY_IMAGE_FORMAT is not set
-+# CONFIG_SPL_SEPARATE_BSS is not set
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_GPIO_HOG=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_PINCONF=y
-+CONFIG_SPL_RAM=y
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_RAM=y
-+CONFIG_RAM_RENESAS_DBSC5=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+CONFIG_SF_DEFAULT_SPEED=40000000
-+# CONFIG_SPL_PARTITIONS is not set
-+# CONFIG_SPL_DOS_PARTITION is not set
-+# CONFIG_SPL_EFI_PARTITION is not set
-+# CONFIG_SPL_PARTITION_UUIDS is not set
-+# CONFIG_SPL_DM_MMC is not set
-diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index 0a38ff42eae..fedfeed42e3 100644
---- a/doc/board/renesas/renesas.rst
-+++ b/doc/board/renesas/renesas.rst
-@@ -180,6 +180,12 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
-      - arm64
-      - r8a779g0_whitehawk_defconfig
- 
-+   * -
-+     - Sparrow Hawk
-+     - R8A779G3 (V4H)
-+     - arm64
-+     - r8a779g3_sparrowhawk_defconfig
-+
-    * - RZ/G2 Family
-      - Beacon EmbeddedWorks RZ/G2M SoM
-      - R8A774A1 (RZ/G2M)
-diff --git a/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
-new file mode 100644
-index 00000000000..b109095a0d8
---- /dev/null
-+++ b/dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
-@@ -0,0 +1,666 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+/*
-+ * Device Tree Source for the R-Car V4H ES3.0 Sparrow Hawk board
-+ *
-+ * Copyright (C) 2025 Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+/dts-v1/;
-+#include <dt-bindings/gpio/gpio.h>
-+
-+#include "r8a779g3.dtsi"
-+
-+/ {
-+	model = "Retronix Sparrow Hawk board based on r8a779g3";
-+	compatible = "retronix,sparrow-hawk", "renesas,r8a779g3",
-+		     "renesas,r8a779g0";
-+
-+	aliases {
-+		ethernet0 = &avb0;
-+		i2c0 = &i2c0;
-+		i2c1 = &i2c1;
-+		i2c2 = &i2c2;
-+		i2c3 = &i2c3;
-+		i2c4 = &i2c4;
-+		i2c5 = &i2c5;
-+		serial0 = &hscif0;
-+		serial1 = &hscif1;
-+		serial2 = &hscif3;
-+		spi0 = &rpc;
-+	};
-+
-+	chosen {
-+		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
-+		stdout-path = "serial0:921600n8";
-+	};
-+
-+	/* Page 31 / FAN */
-+	fan: pwm-fan {
-+		pinctrl-0 = <&irq4_pins>;
-+		pinctrl-names = "default";
-+		compatible = "pwm-fan";
-+		#cooling-cells = <2>;
-+		interrupts-extended = <&intc_ex 4 IRQ_TYPE_EDGE_FALLING>;
-+		/*
-+		 * The fan model connected to this device can be selected
-+		 * by user. Set "cooling-levels" DT property to single 255
-+		 * entry to force the fan PWM into constant HIGH, which
-+		 * forces the fan to spin at maximum RPM, thus providing
-+		 * maximum cooling to this device and protection against
-+		 * misconfigured PWM duty cycle to the fan.
-+		 *
-+		 * User has to configure "pwms" and "pulses-per-revolution"
-+		 * DT properties according to fan datasheet first, and then
-+		 * extend "cooling-levels = <0 m n ... 255>" property to
-+		 * achieve proper fan control compatible with fan model
-+		 * installed by user.
-+		 */
-+		cooling-levels = <255>;
-+		pulses-per-revolution = <2>;
-+		pwms = <&pwm0 0 50000>;
-+	};
-+
-+	/*
-+	 * Page 15 / LPDDR5
-+	 *
-+	 * This configuration listed below is for the 8 GiB board variant
-+	 * with MT62F1G64D8EK-023 WT:C LPDDR5 part populated on the board.
-+	 *
-+	 * A variant with 16 GiB MT62F2G64D8EK-023 WT:C part populated on
-+	 * the board is automatically handled by the bootloader, which
-+	 * adjusts the correct DRAM size into the memory nodes below.
-+	 */
-+	memory@48000000 {
-+		device_type = "memory";
-+		/* first 128MB is reserved for secure area. */
-+		reg = <0x0 0x48000000 0x0 0x78000000>;
-+	};
-+
-+	memory@480000000 {
-+		device_type = "memory";
-+		reg = <0x4 0x80000000 0x0 0x80000000>;
-+	};
-+
-+	memory@600000000 {
-+		device_type = "memory";
-+		reg = <0x6 0x00000000 0x1 0x00000000>;
-+	};
-+
-+	/* Page 27 / DSI to Display */
-+	mini-dp-con {
-+		compatible = "dp-connector";
-+		label = "CN6";
-+		type = "full-size";
-+
-+		port {
-+			mini_dp_con_in: endpoint {
-+				remote-endpoint = <&sn65dsi86_out>;
-+			};
-+		};
-+	};
-+
-+	reg_1p2v: regulator-1p2v {
-+		compatible = "regulator-fixed";
-+		regulator-name = "fixed-1.2V";
-+		regulator-min-microvolt = <1200000>;
-+		regulator-max-microvolt = <1200000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+	};
-+
-+	reg_1p8v: regulator-1p8v {
-+		compatible = "regulator-fixed";
-+		regulator-name = "fixed-1.8V";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+	};
-+
-+	reg_3p3v: regulator-3p3v {
-+		compatible = "regulator-fixed";
-+		regulator-name = "fixed-3.3V";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-boot-on;
-+		regulator-always-on;
-+	};
-+
-+	/* Page 27 / DSI to Display */
-+	sn65dsi86_refclk: clk-x9 {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <38400000>;
-+	};
-+
-+	/* Page 17 uSD-Slot */
-+	vcc_sdhi: regulator-vcc-sdhi {
-+		compatible = "regulator-gpio";
-+		regulator-name = "SDHI VccQ";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpios = <&gpio8 13 GPIO_ACTIVE_HIGH>;
-+		gpios-states = <1>;
-+		states = <3300000 0>, <1800000 1>;
-+	};
-+};
-+
-+/* Page 22 / Ether_AVB0 */
-+&avb0 {
-+	pinctrl-0 = <&avb0_pins>;
-+	pinctrl-names = "default";
-+	phy-handle = <&avb0_phy>;
-+	tx-internal-delay-ps = <2000>;
-+	status = "okay";
-+
-+	mdio {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		avb0_phy: ethernet-phy@0 {	/* KSZ9031RNXVB */
-+			compatible = "ethernet-phy-id0022.1622",
-+				     "ethernet-phy-ieee802.3-c22";
-+			rxc-skew-ps = <1500>;
-+			reg = <0>;
-+			/* AVB0_PHY_INT_V */
-+			interrupts-extended = <&gpio7 5 IRQ_TYPE_LEVEL_LOW>;
-+			/* GP7_10/AVB0_RESETN_V */
-+			reset-gpios = <&gpio7 10 GPIO_ACTIVE_LOW>;
-+			reset-assert-us = <10000>;
-+			reset-deassert-us = <300>;
-+		};
-+	};
-+};
-+
-+/* Page 28 / CANFD_IF */
-+&can_clk {
-+	clock-frequency = <40000000>;
-+};
-+
-+/* Page 28 / CANFD_IF */
-+&canfd {
-+	pinctrl-0 = <&canfd3_pins>, <&canfd4_pins>, <&can_clk_pins>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+
-+	channel3 {
-+		status = "okay";
-+	};
-+
-+	channel4 {
-+		status = "okay";
-+	};
-+};
-+
-+/* Page 27 / DSI to Display */
-+&dsi1 {
-+	status = "okay";
-+
-+	ports {
-+		port@1 {
-+			dsi1_out: endpoint {
-+				remote-endpoint = <&sn65dsi86_in>;
-+				data-lanes = <1 2 3 4>;
-+			};
-+		};
-+	};
-+};
-+
-+/* Page 27 / DSI to Display */
-+&du {
-+	status = "okay";
-+};
-+
-+/* Page 5 / R-Car V4H_INT_I2C */
-+&extal_clk {	/* X3 */
-+	clock-frequency = <16666666>;
-+};
-+
-+/* Page 5 / R-Car V4H_INT_I2C */
-+&extalr_clk {	/* X2 */
-+	clock-frequency = <32768>;
-+};
-+
-+/* Page 26 / 2230 Key M M.2 */
-+&gpio4 {
-+	/* 9FGV0441 nOE inputs 0 and 1 */
-+	pcie-m2-oe-hog {
-+		gpio-hog;
-+		gpios = <21 GPIO_ACTIVE_HIGH>;
-+		output-low;
-+		line-name = "PCIe-CLK-nOE-M2";
-+	};
-+
-+	/* 9FGV0441 nOE inputs 2 and 3 */
-+	pcie-usb-oe-hog {
-+		gpio-hog;
-+		gpios = <22 GPIO_ACTIVE_HIGH>;
-+		output-low;
-+		line-name = "PCIe-CLK-nOE-USB";
-+	};
-+};
-+
-+/* Page 23 / DEBUG */
-+&hscif0 {	/* FTDI ADBUS[3:0] */
-+	pinctrl-0 = <&hscif0_pins>;
-+	pinctrl-names = "default";
-+	uart-has-rtscts;
-+	bootph-all;
-+
-+	status = "okay";
-+};
-+
-+/* Page 23 / DEBUG */
-+&hscif1 {	/* FTDI BDBUS[3:0] */
-+	pinctrl-0 = <&hscif1_pins>;
-+	pinctrl-names = "default";
-+	uart-has-rtscts;
-+
-+	status = "okay";
-+};
-+
-+/* Page 24 / UART */
-+&hscif3 {	/* CN7 pins 8 (TX) and 10 (RX) */
-+	pinctrl-0 = <&hscif3_pins>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+};
-+
-+/* Page 24 / I2C SWITCH */
-+&i2c0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	pinctrl-0 = <&i2c0_pins>;
-+	pinctrl-names = "default";
-+	clock-frequency = <400000>;
-+	status = "okay";
-+
-+	mux@71 {
-+		compatible = "nxp,pca9544";	/* TCA9544 */
-+		reg = <0x71>;
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		vdd-supply = <&reg_3p3v>;
-+
-+		i2c0_mux0: i2c@0 {
-+			reg = <0>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			/* Page 27 / DSI to Display */
-+			bridge@2c {
-+				pinctrl-0 = <&irq0_pins>;
-+				pinctrl-names = "default";
-+
-+				compatible = "ti,sn65dsi86";
-+				reg = <0x2c>;
-+
-+				clocks = <&sn65dsi86_refclk>;
-+				clock-names = "refclk";
-+
-+				interrupts-extended = <&intc_ex 0 IRQ_TYPE_LEVEL_HIGH>;
-+
-+				enable-gpios = <&gpio2 1 GPIO_ACTIVE_HIGH>;
-+
-+				vccio-supply = <&reg_1p8v>;
-+				vpll-supply = <&reg_1p8v>;
-+				vcca-supply = <&reg_1p2v>;
-+				vcc-supply = <&reg_1p2v>;
-+
-+				ports {
-+					#address-cells = <1>;
-+					#size-cells = <0>;
-+
-+					port@0 {
-+						reg = <0>;
-+						sn65dsi86_in: endpoint {
-+							remote-endpoint = <&dsi1_out>;
-+						};
-+					};
-+
-+					port@1 {
-+						reg = <1>;
-+						sn65dsi86_out: endpoint {
-+							remote-endpoint = <&mini_dp_con_in>;
-+						};
-+					};
-+				};
-+			};
-+		};
-+
-+		i2c0_mux1: i2c@1 {
-+			reg = <1>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+		};
-+
-+		i2c0_mux2: i2c@2 {
-+			reg = <2>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+		};
-+
-+		i2c0_mux3: i2c@3 {
-+			reg = <3>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+		};
-+	};
-+};
-+
-+/* Page 29 / CSI_IF_CN / CAM_CN0 */
-+&i2c1 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	pinctrl-0 = <&i2c1_pins>;
-+	pinctrl-names = "default";
-+};
-+
-+/* Page 29 / CSI_IF_CN / CAM_CN1 */
-+&i2c2 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	pinctrl-0 = <&i2c2_pins>;
-+	pinctrl-names = "default";
-+};
-+
-+/* Page 31 / IO_CN */
-+&i2c3 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	pinctrl-0 = <&i2c3_pins>;
-+	pinctrl-names = "default";
-+};
-+
-+/* Page 31 / IO_CN */
-+&i2c4 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	pinctrl-0 = <&i2c4_pins>;
-+	pinctrl-names = "default";
-+};
-+
-+/* Page 18 / POWER_CORE and Page 19 / POWER_PMIC */
-+&i2c5 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	pinctrl-0 = <&i2c5_pins>;
-+	pinctrl-names = "default";
-+};
-+
-+/* Page 17 uSD-Slot */
-+&mmc0 {
-+	pinctrl-0 = <&sd_pins>;
-+	pinctrl-1 = <&sd_uhs_pins>;
-+	pinctrl-names = "default", "state_uhs";
-+	bus-width = <4>;
-+	cd-gpios = <&gpio3 11 GPIO_ACTIVE_LOW>;	/* SD_CD */
-+	sd-uhs-sdr50;
-+	sd-uhs-sdr104;
-+	vmmc-supply = <&reg_3p3v>;
-+	vqmmc-supply = <&vcc_sdhi>;
-+	status = "okay";
-+};
-+
-+/* Page 26 / 2230 Key M M.2 */
-+&pcie0_clkref {
-+	clock-frequency = <100000000>;
-+};
-+
-+&pciec0 {
-+	reset-gpios = <&gpio2 2 GPIO_ACTIVE_LOW>;
-+	status = "okay";
-+};
-+
-+/* Page 25 / PCIe to USB */
-+&pcie1_clkref {
-+	clock-frequency = <100000000>;
-+};
-+
-+&pciec1 {
-+	/* uPD720201 is PCIe Gen2 x1 device */
-+	num-lanes = <1>;
-+	reset-gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
-+	status = "okay";
-+};
-+
-+&pfc {
-+	pinctrl-0 = <&scif_clk_pins>;
-+	pinctrl-names = "default";
-+
-+	/* Page 22 / Ether_AVB0 */
-+	avb0_pins: avb0 {
-+		mux {
-+			groups = "avb0_link", "avb0_mdio", "avb0_rgmii",
-+				 "avb0_txcrefclk";
-+			function = "avb0";
-+		};
-+
-+		pins-mdio {
-+			groups = "avb0_mdio";
-+			drive-strength = <21>;
-+		};
-+
-+		pins-mii {
-+			groups = "avb0_rgmii";
-+			drive-strength = <21>;
-+		};
-+
-+	};
-+
-+	/* Page 28 / CANFD_IF */
-+	can_clk_pins: can-clk {
-+		groups = "can_clk";
-+		function = "can_clk";
-+	};
-+
-+	/* Page 28 / CANFD_IF */
-+	canfd3_pins: canfd3 {
-+		groups = "canfd3_data";
-+		function = "canfd3";
-+	};
-+
-+	/* Page 28 / CANFD_IF */
-+	canfd4_pins: canfd4 {
-+		groups = "canfd4_data";
-+		function = "canfd4";
-+	};
-+
-+	/* Page 23 / DEBUG */
-+	hscif0_pins: hscif0 {
-+		groups = "hscif0_data", "hscif0_ctrl";
-+		function = "hscif0";
-+	};
-+
-+	/* Page 23 / DEBUG */
-+	hscif1_pins: hscif1 {
-+		groups = "hscif1_data_a", "hscif1_ctrl_a";
-+		function = "hscif1";
-+	};
-+
-+	/* Page 24 / UART */
-+	hscif3_pins: hscif3 {
-+		groups = "hscif3_data_a";
-+		function = "hscif3";
-+	};
-+
-+	/* Page 24 / I2C SWITCH */
-+	i2c0_pins: i2c0 {
-+		groups = "i2c0";
-+		function = "i2c0";
-+	};
-+
-+	/* Page 29 / CSI_IF_CN / CAM_CN0 */
-+	i2c1_pins: i2c1 {
-+		groups = "i2c1";
-+		function = "i2c1";
-+	};
-+
-+	/* Page 29 / CSI_IF_CN / CAM_CN1 */
-+	i2c2_pins: i2c2 {
-+		groups = "i2c2";
-+		function = "i2c2";
-+	};
-+
-+	/* Page 31 / IO_CN */
-+	i2c3_pins: i2c3 {
-+		groups = "i2c3";
-+		function = "i2c3";
-+	};
-+
-+	/* Page 31 / IO_CN */
-+	i2c4_pins: i2c4 {
-+		groups = "i2c4";
-+		function = "i2c4";
-+	};
-+
-+	/* Page 18 / POWER_CORE */
-+	i2c5_pins: i2c5 {
-+		groups = "i2c5";
-+		function = "i2c5";
-+	};
-+
-+	/* Page 27 / DSI to Display */
-+	irq0_pins: irq0 {
-+		groups = "intc_ex_irq0_a";
-+		function = "intc_ex";
-+	};
-+
-+	/* Page 31 / FAN */
-+	irq4_pins: irq4 {
-+		groups = "intc_ex_irq4_b";
-+		function = "intc_ex";
-+	};
-+
-+	/* Page 31 / FAN */
-+	pwm0_pins: pwm0 {
-+		groups = "pwm0";
-+		function = "pwm0";
-+	};
-+
-+	/* Page 31 / CN7 pin 12 */
-+	pwm1_pins: pwm1 {
-+		groups = "pwm1_b";
-+		function = "pwm1";
-+	};
-+
-+	/* Page 31 / CN7 pin 32 */
-+	pwm6_pins: pwm6 {
-+		groups = "pwm6";
-+		function = "pwm6";
-+	};
-+
-+	/* Page 31 / CN7 pin 33 */
-+	pwm7_pins: pwm7 {
-+		groups = "pwm7";
-+		function = "pwm7";
-+	};
-+
-+	/* Page 16 / QSPI_FLASH */
-+	qspi0_pins: qspi0 {
-+		groups = "qspi0_ctrl", "qspi0_data4";
-+		function = "qspi0";
-+		bootph-all;
-+	};
-+
-+	/* Page 6 / SCIF_CLK_SOC_V */
-+	scif_clk_pins: scif-clk {
-+		groups = "scif_clk";
-+		function = "scif_clk";
-+	};
-+
-+	/* Page 17 uSD-Slot */
-+	sd_pins: sd {
-+		groups = "mmc_data4", "mmc_ctrl";
-+		function = "mmc";
-+		power-source = <3300>;
-+	};
-+
-+	/* Page 17 uSD-Slot */
-+	sd_uhs_pins: sd-uhs {
-+		groups = "mmc_data4", "mmc_ctrl";
-+		function = "mmc";
-+		power-source = <1800>;
-+	};
-+};
-+
-+/* Page 31 / FAN */
-+&pwm0 {
-+	pinctrl-0 = <&pwm0_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+/* Page 31 / CN7 pin 12 */
-+&pwm1 {
-+	pinctrl-0 = <&pwm1_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+/* Page 31 / CN7 pin 32 */
-+&pwm6 {
-+	pinctrl-0 = <&pwm6_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+/* Page 31 / CN7 pin 33 */
-+&pwm7 {
-+	pinctrl-0 = <&pwm7_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+/* Page 16 / QSPI_FLASH */
-+&rpc {
-+	pinctrl-0 = <&qspi0_pins>;
-+	pinctrl-names = "default";
-+	bootph-all;
-+
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "spansion,s25fs512s", "jedec,spi-nor";
-+		reg = <0>;
-+		spi-max-frequency = <40000000>;
-+		spi-rx-bus-width = <4>;
-+		spi-tx-bus-width = <4>;
-+		bootph-all;
-+
-+		partitions {
-+			compatible = "fixed-partitions";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			boot@0 {
-+				reg = <0x0 0x1000000>;
-+				read-only;
-+			};
-+
-+			user@1000000 {
-+				reg = <0x1000000 0x2f80000>;
-+			};
-+
-+			env1@3f80000 {
-+				reg = <0x3f80000 0x40000>;
-+			};
-+
-+			env2@3fc0000 {
-+				reg = <0x3fc0000 0x40000>;
-+			};
-+		};
-+	};
-+};
-+
-+&rwdt {
-+	timeout-sec = <60>;
-+	status = "okay";
-+};
-+
-+/* Page 6 / SCIF_CLK_SOC_V */
-+&scif_clk {	/* X12 */
-+	clock-frequency = <24000000>;
-+};
-diff --git a/include/configs/sparrowhawk.h b/include/configs/sparrowhawk.h
-new file mode 100644
-index 00000000000..0524e39229c
---- /dev/null
-+++ b/include/configs/sparrowhawk.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * include/configs/sparrowhawk.h
-+ *     This file is Sparrow Hawk board configuration.
-+ *
-+ * Copyright (C) 2025 Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+#ifndef __SPARROWHAWK_H
-+#define __SPARROWHAWK_H
-+
-+#include "rcar-gen4-common.h"
-+
-+#endif /* __SPARROWHAWK_H */
--- 
-2.47.2
+> On May 30, 2025, at 12:32=E2=80=AFAM, Ilias Apalodimas =
+<ilias.apalodimas@linaro.org> wrote:
+>=20
+> Hi David,
+>=20
+> On Wed, 21 May 2025 at 20:12, David Garske <david@wolfssl.com> wrote:
+>>=20
+>> Hi Ilias,
+>>=20
+>> Thank you! It=E2=80=99s a pleasure to meet you! I=E2=80=99m the =
+author and maintainer or wolfTPM.
+>>=20
+>> Perhaps it would be useful to meet and chat for a bit? Are you free =
+next week May 28th at 7:30 AM PT?
+>>=20
+>> I loved the feedback from Simon Glass and we will be implementing =
+those and suggesting a new patch soon.
+>=20
+> I am a bit overloaded. Is there anything specific you would like to =
+discuss?
+>=20
+> Thanks
+> /Ilias
+>>=20
+>> Thanks,
+>> David Garske
+>> Software Engineer, wolfSSL
+>> +1 (530) 409-2990
+>> https://www.wolfssl.com
+>> https://github.com/wolfssl
+>>=20
+>> On May 19, 2025, at 1:52=E2=80=AFAM, Ilias Apalodimas =
+<ilias.apalodimas@linaro.org> wrote:
+>>=20
+>> On Fri, 9 May 2025 at 18:43, David Garske <david@wolfssl.com> wrote:
+>>=20
+>>=20
+>> Hi Ilias,
+>>=20
+>> Thank you for the quick reply. I am happy that you will consider =
+wolfTPM as a submodule. We have 100=E2=80=99s of commercial customers =
+and it is very actively maintained. In fact we will continue to provide =
+direct maintenance for any u-boot issues that come up using wolfTPM. =
+Also we=E2=80=99ve done safety critical DO-178 certification on wolfTPM.
+>>=20
+>> 1) U-Boot subsystem maintainers. Can you point me to that list of =
+maintainers?
+>>=20
+>>=20
+>> it's in MAINTAINERS. I am responsible for TPM
+>>=20
+>> 2) Size: I haven=E2=80=99t run any size comparisons but I expect to =
+be inline with existing code. I will make sure we run some comparisons.
+>> 3) Releases: Yes we have stable releases done each quarter. I am =
+about to do a release v3.9.0 next week that includes the U-boot support, =
+so I will update the submodule to use the tagged release when it=E2=80=99s=
+ ready.
+>> 4) CVE: Yes we track and create CVE=E2=80=99s if we find issues or =
+any are reported. We typically have a fix posted within 36 hours of a =
+report. Vulnerabilities are published in the release notes and for our =
+premium support customers they get early notification.
+>> 5) Patch Size: I will work on reducing the changes and splitting them =
+into logical commits.
+>>=20
+>> Enjoy your time away. I=E2=80=99ll have updates to share soon.
+>>=20
+>>=20
+>> Thanks
+>> /Ilias
+>>=20
+>>=20
+>> Thanks,
+>> David Garske
+>> Software Engineer, wolfSSL
+>> +1 (530) 409-2990
+>> https://www.wolfssl.com
+>> https://github.com/wolfssl
+>>=20
+>> On May 9, 2025, at 5:22=E2=80=AFAM, Ilias Apalodimas =
+<ilias.apalodimas@linaro.org> wrote:
+>>=20
+>> Hi David
+>>=20
+>> Hi Denx,
+>>=20
+>> We at wolfSSL have developed a port for wolfTPM in U-Boot. The patch =
+allows using the current built-in TPM 2.0 support or switching to =
+wolfTPM via CONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware =
+update for the Infineon SLB9672 and SLB9673.
+>>=20
+>> I think there is probably some more cleanup and testing needed, but I =
+wanted to submit this to start the discussion and see your thoughts.
+>>=20
+>>=20
+>> It's easier if you CC the appropriate maintainers for each subsystem =
+next
+>> time!
+>>=20
+>>=20
+>> The wolfTPM library is GPLv2 and added as a submodule. If the license =
+or submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive we =
+can resolve anything.
+>>=20
+>>=20
+>> We recently added a few external libraries. mbedTLS and lwIP. Both of =
+these
+>> are pulled as subtrees, so I'd like to stick to that.
+>>=20
+>> I briefly went through the patch and I don't disagree in pulling an
+>> external library as long as it's reasonably stable and will continue
+>> to be maintained. A few questions since I am not familiar with =
+wolfTPM
+>>=20
+>> - Have you made any size comparisons wrt to the final binary size?
+>> - Does wolfTPM have stable releases that we can use?
+>> - Is there a CVE policy ?
+>>=20
+>> The current patch is quite big and I honestly don't have time to go
+>> through all of it in detail. I'll be away next week, but I can give =
+some
+>> general feedback in ~10days. The easiest thing to do is try to split =
+it
+>> a reasonable amount of patches -- and only include the bare minimum =
+of what's
+>> required to work.
+>>=20
+>> Thanks
+>> /Ilias
+>>=20
+>>=20
+>> Attached is the patch based on latest master 3b6760ddeb4 to review.
+>>=20
+>> =EF=BF=BC
+>>=20
+>> Thanks,
+>> David Garske
+>> Software Engineer, wolfSSL
+>> +1 (530) 409-2990
+>> https://www.wolfssl.com <https://www.wolfssl.com/>
+>> https://github.com/wolfssl
+>>=20
+>>=20
+>>=20
+>>=20
 
