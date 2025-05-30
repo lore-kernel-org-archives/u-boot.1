@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DB0CC3ABB2
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958EFC5B549
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:50:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02A1B8312C;
-	Fri, 30 May 2025 09:49:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A54C68319C;
+	Fri, 30 May 2025 09:50:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bjezuS3s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MUcgz1Tz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5178781FEE; Fri, 30 May 2025 09:49:28 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 831C7831D6; Fri, 30 May 2025 09:50:26 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0757D830EA
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:49:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24966830EA
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-7080dd5fe92so16874287b3.3
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:49:25 -0700 (PDT)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-70b4e497d96so17426307b3.2
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748591365; x=1749196165; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748591423; x=1749196223; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E3JkeSRFYaJEwvSPf78uPSVW6PdYxGzRiX7as/Oie2o=;
- b=bjezuS3sPQZKpXAIQMfjmVhbz3Iv2I19DIyfl+fhdcSwkCvvzWtVLSs0GuCUcOnRPX
- 87QSiBpy7jXnAJhJGhckHJTlGmGeWmsp3IEKyTu+4zzHxiE+B9VsUnxG5zMCpC81fmHA
- 3wcQMLtcABpjGuglCsZyKgp81ICeVDjYJ75pQMkzJEtD/mBEYRY8Lr/hREeiWrZ7dfZK
- Y+xSeBNZryRyNykJGeBBzlxK4lVTA50BdnU8SfZgFJmPgK2bTUveuMrx8/d7+wK/GLqU
- /mgErPhlIrnvmJyOFjOE+XuunlBpHo9DgPG9x0tEEp3lKcNnMpnC+a1m9OsQKA+1dC56
- Tybg==
+ bh=rFPSUAuk+DwCzHPoHr9vNwl09unc1FvkpCcXiCIBIS0=;
+ b=MUcgz1TzNVrj2Nv9s++zjOcyL2SDr6aXUHukqqf12sl0W4coWWU8VSWNC42UtxX10u
+ elGCGE75zmpRnxrF5p3KiMZc1rSsSsY+418DPGe8aEYynkyOsh3WCiB353GGeWqzzpxR
+ ytCjM8NEqOyhcPuFa+P0AzT+UfN3BZSOna66KRuibfgoTqCM/EYVtHb8rbU3FH9A/FP+
+ UwQwnueiADleSPDf8Dnes/8j6QHHWfUx/fOP9L9IWPgWNwVVMSGHXDFveX53zoSlUTyq
+ KuvLajyZhPNyMZcR5XtmA0RYoQ/M7/VG740zeooZ4Jztp0uFTz7+tIZtvee1UgbWW/sv
+ lFGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748591365; x=1749196165;
+ d=1e100.net; s=20230601; t=1748591423; x=1749196223;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E3JkeSRFYaJEwvSPf78uPSVW6PdYxGzRiX7as/Oie2o=;
- b=UnAUb6eip8uQcQMZA5jGIcx/8AXt8Qyscos3G0G3CsSyuYL3XtAix4eDMqElqT8Ycp
- IX1jOGOLy4b6r3f6a+COgDhvUwNWY/l3bQlsZ39GN0vOOap9TafEC5yOOcgbNmOSFgxQ
- YJO9p/7TzpdCbpLNZrfQrxydoY1I6hKYwBcuQ4izq865Yx3dhZZufzbJkDVrE/4whTDg
- 9u56NH8wW7Modk0ZGIUtZqlL+vSi0TPIXSqGFjQqlaNiFui7xLxCFlI0mHvzTcu12ZPL
- SllyJpHpXvzgB2IC01CZuAwLvc8UG8fsFzeLOPQOch8WuOKRSoUwP6Z013PuBQ91/shu
- W1yg==
-X-Gm-Message-State: AOJu0Ywg6YJbaya9n1WXQ8K+ayah0MyRizGF0hxYB+MG5VYu/7wQ7o2S
- oC/+Fb+X+rDXPrY4DwHomUgFptN+lWaUEtsLY9/PLvej8BC7chIJEQnETU9kk46mxLMhnMBmMMT
- E+FvQW+nHgSfnq6Ot6lrvmnc0UcKP6BiMTr2dfasyDh+RXxs1NlZ9KyM=
-X-Gm-Gg: ASbGnctENB9n8aM9eR1M68bqA2JMb5aqFov0/RaR6Akw3pABkDPQxVMSIT8rhxkA0oB
- wpPttA5eM2drgBe/N2jQJKpkpoLfHN5fNTeZ3nWzmwOHWUud5w2WqOgNhfPx+WwI5QSh8Yc+Brt
- JDWUCVCN7I7/Qm1BXSaoNpBy53m4br1fJARw==
-X-Google-Smtp-Source: AGHT+IEpHay5MweDRsW2Ha3ylUfyHH+aibbQLbDE7n4DQPdPyB+loUwHdwOetaVnFqFtBdpomb9wrZOiYjgveEvgUIo=
-X-Received: by 2002:a05:690c:4904:b0:70d:fd2a:1457 with SMTP id
- 00721157ae682-70f97e1c2eamr37418627b3.1.1748591364831; Fri, 30 May 2025
- 00:49:24 -0700 (PDT)
+ bh=rFPSUAuk+DwCzHPoHr9vNwl09unc1FvkpCcXiCIBIS0=;
+ b=PXWeO0PMuvzwra6PgEDeatsUM0HcPry8Bh6xONRDMcNsb2oCOBKg2/KWWRBJ9GDrpG
+ g+gpqtj6tfhtuxhEj1JHYvrM4rBAM3RYBCST2c6KHHnlmFdktfJ5R3ulixRprKHO0S9i
+ BaOEcfsxAtgezRi3tYoenny13NBsUlzPOcLj18i5Ycx7Km0iVErFmS0J7MurNmHV4kwj
+ uS2fdT81C9ki0i4PWOeCNeF0RnZEDZICr7hYvika/PrfzbJjQn6i5+PnYg/tJhwdJCVM
+ DQXJBfTJdtc40EdIB9CkjSm1vrjLLYQ8nEoJfp3u5OAgy+DL+aoQM1+kss2m/HFJAk8V
+ CNhg==
+X-Gm-Message-State: AOJu0YwjJe1y5pAw1YggsjV/wAeCULvWojd4MGQ2AbQ+Fb5Jc8bXPHlt
+ Ag0ffdftHTWhLTcNOvy8E1wVYlhkzZH4JJiUzy7DCAIDXoyLPqUYOPj0ZFGx+W2GOfdPx240rYS
+ 9o87A6+k4YGZBZIW/SoOdNvG3GDONMCOtEN/DpEE10BI+6oDOSJ4wMy0=
+X-Gm-Gg: ASbGncvoSlcUMd9Xq+927sx+U5trHqsGCviJ3Li+Cgs6feIt9I8yEXmMpMnT4B2WsQX
+ bTfuy7cPC2B2PEOErz9fKgPnEE3u7dnUAKa5UKD3zRlSZ2i6fFknPitOuZw/jOksv+vHwsMxEMA
+ quj3GnJ7HkmcmUlFrA056fxVJtqxtwcvJhdA==
+X-Google-Smtp-Source: AGHT+IFPqPkbYYgbgJJ2R4rvgOIipyr/u1Y8z81QZaoNNgjF+Z4zoC98p/Lzm4d16QyUxA41NI+6SoOYFOQvjy5EiCs=
+X-Received: by 2002:a05:690c:c0b:b0:70e:1ef7:6eff with SMTP id
+ 00721157ae682-70f97e9b49bmr34355157b3.3.1748591422942; Fri, 30 May 2025
+ 00:50:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
- <20250526091253.400802-6-sughosh.ganu@linaro.org>
-In-Reply-To: <20250526091253.400802-6-sughosh.ganu@linaro.org>
+ <20250526091253.400802-7-sughosh.ganu@linaro.org>
+In-Reply-To: <20250526091253.400802-7-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 30 May 2025 10:48:47 +0300
-X-Gm-Features: AX0GCFs4vo2cvBPievQ0LWVJsgMUjRY98zTCIT6r3JQ-IccQhMpSpjSqxXhmaCI
-Message-ID: <CAC_iWjKYz4rcyy0DQKUrqBFk7TpStuPAd9E3WxV1Bzyb3d8Bpw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/6] lmb: use a single function to check for allocation
- and reservation requests
+Date: Fri, 30 May 2025 10:49:45 +0300
+X-Gm-Features: AX0GCFvqWXPX4Wrd_Qwn-8tYDXpxKoP2SMRHq_NLDI6hKFdtR_ZvksD6VcSupZo
+Message-ID: <CAC_iWj+G6+N5L2ThYHVDRfivJ9PsR3rZWZ+hFKCgC53MWe4Wow@mail.gmail.com>
+Subject: Re: [PATCH v3 6/6] doc: add lmb documentation
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Casey Connolly <casey.connolly@linaro.org>,
@@ -95,188 +94,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks,
-
-This is a great cleanup
-
 On Mon, 26 May 2025 at 12:13, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The functions that handle allocation requests check if a region of
-> memory overlaps with a used region. This is done through
-> lmb_overlaps_region(). Similar checks are done for reservation
-> requests made to the LMB module, where the caller asks specifically
-> for a particular region of memory. These checks are being done through
-> lmb_can_reserve_region().
->
-> There are subtle differences in the checking needed for allocation
-> requests, as against reservation requests. In the former, it is only
-> needed to be checked if a region is overlapping with an existing
-> used region, and return as soon as an overlap is found. For
-> reservation request checks, because U-Boot allows for re-use of in-use
-> regions with a particular memory attribute, this check has to iterate
-> through all the regions that might overlap with the requested region,
-> and then check that the necessary conditions are met to allow for the
-> overlap.
->
-> Combine these two checks in a single function, lmb_overlap_checks() as
-> both lmb_overlaps_region() and lmb_can_reserve_region() are pretty
-> similar otherwise.
+> The LMB module has undergone significant changes in the recent
+> past. Add a document which briefly describes what the LMB module does,
+> and the changes that have been made to it's design since the 2025.01
+> release.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
 > Changes since V2:
-> * New patch based on suggestion from Ilias
+> * Reflect the changed name of the API (lmb_alloc_mem)
 >
->  lib/lmb.c | 84 +++++++++++++++++++++++++++----------------------------
->  1 file changed, 42 insertions(+), 42 deletions(-)
+>  doc/api/index.rst     |   1 -
+>  doc/api/lmb.rst       |   7 --
+>  doc/develop/index.rst |   1 +
+>  doc/develop/lmb.rst   | 166 ++++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 167 insertions(+), 8 deletions(-)
+>  delete mode 100644 doc/api/lmb.rst
+>  create mode 100644 doc/develop/lmb.rst
 >
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 9986b38168a..fa6bdac2b3e 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -317,8 +317,34 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
->                                     rgn[i].flags);
->  }
->
-> -static long lmb_overlaps_region(struct alist *lmb_rgn_lst, phys_addr_t base,
-> -                               phys_size_t size)
-> +/**
-> + * lmb_overlap_checks() - perform checks to see if region can be allocated or reserved
-> + * @lmb_rgn_lst: list of LMB regions
-> + * @base: base address of region to be checked
-> + * @size: size of region to be checked
-> + * @flags: flag of the region to be checked (only for reservation requests)
-> + * @alloc: if checks are to be done for allocation or reservation request
-> + *
-> + * Check if the region passed to the function overlaps with any one of
-> + * the regions of the passed lmb region list.
-> + *
-> + * If the @alloc flag is set to true, this check stops as soon an
-> + * overlapping region is found. The function can also be called to
-> + * check if a reservation request can be satisfied, by setting
-> + * @alloc to false. In that case, the function then iterates through
-> + * all the regions in the list passed to ensure that the requested
-> + * region does not overlap with any existing regions. An overlap is
-> + * allowed only when the flag of the requested region and the existing
-> + * region is LMB_NONE.
-> + *
-> + * Return: index of the overlapping region, -1 if no overlap is found
-> + *
-> + * When the function is called for a reservation request check, -1 will
-> + * also be returned when there is an allowed overlap, i.e. requested
-> + * region and existing regions have flags as LMB_NONE.
-> + */
-> +static long lmb_overlap_checks(struct alist *lmb_rgn_lst, phys_addr_t base,
-> +                              phys_size_t size, u32 flags, bool alloc)
->  {
->         unsigned long i;
->         struct lmb_region *rgn = lmb_rgn_lst->data;
-> @@ -326,9 +352,12 @@ static long lmb_overlaps_region(struct alist *lmb_rgn_lst, phys_addr_t base,
->         for (i = 0; i < lmb_rgn_lst->count; i++) {
->                 phys_addr_t rgnbase = rgn[i].base;
->                 phys_size_t rgnsize = rgn[i].size;
-> +               u32 rgnflags = rgn[i].flags;
->
-> -               if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
-> -                       break;
-> +               if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> +                       if (alloc || flags != LMB_NONE || flags != rgnflags)
-> +                               break;
-> +               }
->         }
->
->         return (i < lmb_rgn_lst->count) ? i : -1;
-> @@ -390,7 +419,8 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align)
->                 base = ALIGN_DOWN(lmbbase + lmbsize - size, align);
->
->                 while (base && lmbbase <= base) {
-> -                       rgn = lmb_overlaps_region(&io_lmb->used_mem, base, size);
-> +                       rgn = lmb_overlap_checks(&io_lmb->used_mem, base, size,
-> +                                                LMB_NOOVERWRITE, true);
->                         if (rgn < 0) {
->                                 /* This area isn't reserved, take it */
->                                 if (lmb_add_region_flags(&io_lmb->used_mem, base,
-> @@ -488,45 +518,12 @@ void lmb_dump_all(void)
->  #endif
->  }
->
-> -/**
-> - * lmb_can_reserve_region() - check if the region can be reserved
-> - * @base: base address of region to be reserved
-> - * @size: size of region to be reserved
-> - * @flags: flag of the region to be reserved
-> - *
-> - * Go through all the reserved regions and ensure that the requested
-> - * region does not overlap with any existing regions. An overlap is
-> - * allowed only when the flag of the request region and the existing
-> - * region is LMB_NONE.
-> - *
-> - * Return: true if region can be reserved, false otherwise
-> - */
-> -static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-> -                                  u32 flags)
-> -{
-> -       uint i;
-> -       struct lmb_region *lmb_reserved = lmb.used_mem.data;
+> diff --git a/doc/api/index.rst b/doc/api/index.rst
+> index 506843ed74a..cf9d21e4c1c 100644
+> --- a/doc/api/index.rst
+> +++ b/doc/api/index.rst
+> @@ -17,7 +17,6 @@ U-Boot API documentation
+>     interrupt
+>     led
+>     linker_lists
+> -   lmb
+>     logging
+>     nvmem
+>     part
+> diff --git a/doc/api/lmb.rst b/doc/api/lmb.rst
+> deleted file mode 100644
+> index 2095bfa1618..00000000000
+> --- a/doc/api/lmb.rst
+> +++ /dev/null
+> @@ -1,7 +0,0 @@
+> -.. SPDX-License-Identifier: GPL-2.0+
 > -
-> -       for (i = 0; i < lmb.used_mem.count; i++) {
-> -               u32 rgnflags = lmb_reserved[i].flags;
-> -               phys_addr_t rgnbase = lmb_reserved[i].base;
-> -               phys_size_t rgnsize = lmb_reserved[i].size;
+> -Logical memory blocks
+> -=====================
 > -
-> -               if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> -                       if (flags != LMB_NONE || flags != rgnflags)
-> -                               return false;
-> -               }
-> -       }
-> -
-> -       return true;
-> -}
-> -
->  static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
->  {
->         long ret = 0;
->         struct alist *lmb_rgn_lst = &lmb.used_mem;
->
-> -       if (!lmb_can_reserve_region(base, size, flags))
-> +       if (lmb_overlap_checks(lmb_rgn_lst, base, size, flags, false) != -1)
->                 return -EEXIST;
->
->         ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
-> @@ -698,7 +695,8 @@ static int _lmb_alloc_base(phys_size_t size, ulong align,
->                 }
->
->                 while (base && lmbbase <= base) {
-> -                       rgn = lmb_overlaps_region(&lmb.used_mem, base, size);
-> +                       rgn = lmb_overlap_checks(&lmb.used_mem, base, size,
-> +                                                LMB_NOOVERWRITE, true);
->                         if (rgn < 0) {
->                                 /* This area isn't reserved, take it */
->                                 if (lmb_add_region_flags(&lmb.used_mem, base,
-> @@ -733,7 +731,8 @@ static int _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
->         struct lmb_region *lmb_memory = lmb.available_mem.data;
->
->         /* Check if the requested address is in one of the memory regions */
-> -       rgn = lmb_overlaps_region(&lmb.available_mem, base, size);
-> +       rgn = lmb_overlap_checks(&lmb.available_mem, base, size,
-> +                                LMB_NOOVERWRITE, true);
->         if (rgn >= 0) {
->                 /*
->                  * Check if the requested end address is in the same memory
-> @@ -788,7 +787,8 @@ phys_size_t lmb_get_free_size(phys_addr_t addr)
->         struct lmb_region *lmb_memory = lmb.available_mem.data;
->
->         /* check if the requested address is in the memory regions */
-> -       rgn = lmb_overlaps_region(&lmb.available_mem, addr, 1);
-> +       rgn = lmb_overlap_checks(&lmb.available_mem, addr, 1, LMB_NOOVERWRITE,
-> +                                true);
->         if (rgn >= 0) {
->                 for (i = 0; i < lmb.used_mem.count; i++) {
->                         if (addr < lmb_used[i].base) {
+> -.. kernel-doc:: include/lmb.h
+> -   :internal:
+> diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+> index 0c83ef109ab..3c044e67927 100644
+> --- a/doc/develop/index.rst
+> +++ b/doc/develop/index.rst
+> @@ -46,6 +46,7 @@ Implementation
+>     cedit
+>     event
+>     global_data
+> +   lmb
+>     logging
+>     makefiles
+>     menus
+> diff --git a/doc/develop/lmb.rst b/doc/develop/lmb.rst
+> new file mode 100644
+> index 00000000000..b9d0f09c2bb
+> --- /dev/null
+> +++ b/doc/develop/lmb.rst
+> @@ -0,0 +1,166 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +Logical Memory Blocks (LMB)
+> +===========================
+> +
+> +U-Boot has support for reserving chunks of memory which is primarily
+> +used for loading images to the DRAM memory, before these are booted,
+> +or written to non-volatile storage medium. This functionality is
+> +provided through the Logical Memory Blocks (LMB) module.
+> +
+> +Introduction
+> +------------
+> +
+> +The LMB module manages allocation requests for memory region not
+> +occupied by the U-Boot image. Allocation requests that are made
+> +through malloc() and similar functions result in memory getting
+> +allocated from the heap region, which is part of the U-Boot
+> +image. Typically, the heap memory is a few MiB in size. Loading an
+> +image like the linux kernel might require lot more memory than what
+> +the heap can provide. Such allocations are usually handled through the
+> +LMB module.
+> +
+> +The U-Boot image typically gets relocated to the top of the usable
+> +DRAM memory region. A typical memory layout looks as follows::
+> +
+> +
+> +
+> +
+> +
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +       ---            +--------------+  <--- U-Boot ram top
+> +        |             |              |
+> +        |             |    Text      |
+> +        |             +--------------+
+> +        |             |              |
+> +        |             |    Data      |
+> +        |             +--------------+
+> +        |             |              |
+> +        |             |    BSS       |
+> +  U-Boot Image        +--------------+
+> +        |             |              |
+> +        |             |    Heap      |
+> +        |             |              |
+> +        |             +--------------+
+> +        |             |              |
+> +        |             |              |
+> +        |             |    Stack     |
+> +        |             |              |
+> +        |             |              |
+> +       ---            +--------------+
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      |              |
+> +                      +--------------+  <--- ram start
+> +
+> +
+> +
+> +The region of memory below the U-Boot image is the one controlled by
+> +the LMB module.
+> +
+> +
+> +Types of LMB Allocations
+> +------------------------
+> +
+> +There are two classes of allocation requests that get made to the LMB
+> +module. One type of allocation requests are requesting memory of a
+> +particular number of bytes. This type of allocation is similar to that
+> +done using the malloc type of function calls. The other type of
+> +allocations, are requests made for a specific memory address. The
+> +second type of allocations are usually made for loading images to a
+> +particular memory address.
+> +
+> +
+> +LMB design Pre 2025.01
+> +----------------------
+> +
+> +The earlier versions of U-Boot (pre 2025.01 release)
+> +had a local memory map based LMB implementation whereby it was
+> +possible to declare the LMB map inside a function or a C file. This
+> +design resulted in temporary, non-global LMB maps, which also allowed
+> +for re-use of memory. This meant that it was possible to use a region
+> +of memory to load some image, and subsequently the same region of
+> +memory could be used for loading a different image. A typical example
+> +of this usage would be loading an image to a memory address, followed
+> +by writing that image to some non-volatile storage medium. Once this
+> +is done, the same address can be used for loading a different image
+> +and then writing it to it's non-volatile storage
+> +destination. Typically, environment variables like `loadaddr`,
+> +`kernel_addr_r`, `ramdisk_addr_r` are used for loading images to
+> +memory regions.
+> +
+> +
+> +Current LMB implementation
+> +--------------------------
+> +
+> +Changes were made in the 2025.01 release to make the LMB memory map
+> +global and persistent. With this, the LMB memory map is the same
+> +across all of U-Boot, and also persists as long as U-Boot is
+> +active. Even with this change, there has been consistency as far as
+> +re-use of memory is concerned to maintain backward compatibility. It
+> +is allowed for re-requesting the same region of memory if the memory
+> +region has a particular attribute (LMB_NONE).
+> +
+> +As part of the platform boot, DRAM memory available for use in U-Boot
+> +gets added to the LMB memory map. Any allocation requests made
+> +subsequently will be made from this memory added as part of the board
+> +init.
+> +
+> +
+> +Allocation API
+> +--------------
+> +
+> +Any request for non-heap memory can be made through the LMB allocation
+> +API.
+> +
+> +.. code-block:: c
+> +
+> +       int lmb_alloc_mem(enum lmb_mem_type type, u64 align,
+> +                         phys_addr_t *addr, phys_size_t size,
+> +                         u32 flags);
+> +
+> +Correspondingly, the allocated memory can be free'd
+> +
+> +.. code-block:: c
+> +
+> +       long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
+> +
+> +For a detailed API description, please refer to the header file.
+> +
+> +
+> +UEFI allocations with LMB as the backend
+> +----------------------------------------
+> +
+> +The UEFI specification describes boot-time API's for allocation of
+> +memory. These API's use the same memory that is being used by the LMB
+> +module. Pre 2025.01 release, there wasn't any synchronisation between
+> +the EFI sub-system and the LMB module about the memory that was
+> +getting allocated by each of these modules. This was the primary
+> +reason for making the LMB memory map global and persistent. With this
+> +change, the EFI memory allocation API's have also been changed to use
+> +the LMB module as the backend for the allocation requests. Any other
+> +sub-system which might wish to use the same memory region for it's use
+> +can then use the LMB as the backend for the memory allocations and
+> +it's associated book-keeping.
+> +
+> +
+> +API documentation
+> +-----------------
+> +
+> +.. kernel-doc:: include/lmb.h
+> +
 > --
 > 2.34.1
 >
