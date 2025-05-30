@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F326C54F30
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B56CAC3ABB2
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:33:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2DCB830EA;
-	Fri, 30 May 2025 09:32:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2FF7B830EA;
+	Fri, 30 May 2025 09:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NPJ06dd3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QoU9VzYS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E5028312C; Fri, 30 May 2025 09:32:12 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id ED03A8312C; Fri, 30 May 2025 09:33:17 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D346E830D9
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:32:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63F29830D9
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:33:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e7c5d4709caso1665442276.1
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:32:09 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-70f31433d96so18116737b3.2
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:33:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748590329; x=1749195129; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zyKXL9lxLAOryRtbQO37Q+Og22rUzXhZ3xhk6IhH98g=;
- b=NPJ06dd3uP2QV8gk37wDrwjpoS3exFS4Mc5YIGK8SrOq3PV3FZ5HeYguNEAkfC+JYw
- Lk6KAaXQ2cdRSbyZWWX8y3jtvTqSDKT2lYXTTGP3jv+ZmT8/Z0UKs+eFjTL84HVoKJjd
- tmvGyfgA97ZNXiCfGQ56xBSpsOWLSDInvqGEUZ1Ap/nhDfzee817PJlLG0JzbtBFLjf5
- oHD7151HUT0abJUQFvIzjg+Go5GJuw4EnTBPBdZ9QDHjxh4B2du40sepkoDeaUFEYI4p
- KWWBOn25lhbV4LUgp7CcwVa9BBur0prIR/SEHrGNFl8nNcn2kMyi0U0dox8+N2vscVNu
- BPjw==
+ d=linaro.org; s=google; t=1748590394; x=1749195194; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=C2tvjwCzLPOX0q85XbVjMm9wrYnPAw3ACleFfERTiiw=;
+ b=QoU9VzYSj/haYZj85E2a2ObneBJm/CkWvoSlUCYLQyMTNq0UfPsMLCZZYcChH/lW3f
+ nZ5Id96OvS+lY8jh8lj8JvmdhJToAZxEsA3m1oTTzRwIRxjMEMsMvB2GeHFeTrvVd5R5
+ ixjrRMaf5VnE3gb+bRXTerVWMsul5RKwJjooWc8LwL9+aeoUQpQqXB4zPDNbu4fDp7+F
+ Qisgf8JL2r454OqRj0M0kcU91EtYz6DSdJTfuA9KIFTfJL5eCbmmdsFNDCFOXa/94rSs
+ IDi8ppoZSokhZkRFG1I1ceFl7HWJIbjMrbDPzDpF2p6yovuNRJX3XacDs0WfJtnXlKRj
+ smnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748590329; x=1749195129;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zyKXL9lxLAOryRtbQO37Q+Og22rUzXhZ3xhk6IhH98g=;
- b=BCfVJylpDkxhx4OEUq/zk/MoIeLvJE10/5GLF4S8KJ3NF/YVOb4GDC6xl5uIrV3GS8
- QCTzbYdUSzjXIkl8upnHb2bkhv1m7ckrDMmsOd0POhHi5LgD/ZrRdZcsz0WVITOPS3+d
- KfpdB2oq8fVHIs3jpyX+jiKLGXjcTBoEZFYlfcHh7+YTc7b3PCqFixsFtoME+TGKSpvI
- Z3kW+o0YosaXN5Syu96yFwN56KKF8YZJPYAH+XiTzSWRTXzgin/gvWTgUq3J2QqhWaME
- 246+JaoB2HdamrJV4pz5Ga1Eugz/WA/C8+paxusUL8gbNQsdQTAl3S8+Y0pOuwyF2lN+
- nB3Q==
-X-Gm-Message-State: AOJu0Yyrn9+F8OplIFBSlF2pjJeoJFfi/jACMF1HlesOw/AEVeFMNwfM
- Qd4zdRqIoP3mZMx2Mi3MLWEaGPg1DW8dQouOq71kuPceriz8+0N/BfzAtXbevG3xuPtO1jtweNA
- ULrRSCbBKBC6jrlkZ9sQDuIW1nCkiIb5M54e+AyVXOQ==
-X-Gm-Gg: ASbGnctmO0PzAwCngGkfqIoau47fB0hI5DD3hLPXPOBoEy4cmIE1gN+lmo66MqTSy8J
- 4A/TJp2JBZr+Dqdjkbq+U1O5KAvhscEjXmg0qLBZVX3jzdA9ZUOheC77VjCvBqt6Dr8gZwtaJJ3
- 7Gnehenuhu88KI+wI9YN83pwse/SiDQ/To/A==
-X-Google-Smtp-Source: AGHT+IESjfyLIVvSBpYiK5P6XnctG6Kujir+fkeBWIR+v0CpYeAp/ennUbCbhWAsIHNcNu7edMbnp6nWHdF/2CCDU/o=
-X-Received: by 2002:a05:690c:45c6:b0:6fb:1e5a:fcdd with SMTP id
- 00721157ae682-71057cceedemr15039497b3.17.1748590328722; Fri, 30 May 2025
- 00:32:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748590394; x=1749195194;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C2tvjwCzLPOX0q85XbVjMm9wrYnPAw3ACleFfERTiiw=;
+ b=GGDNKswpYAosjO6QpeKX6ECWCOPWwcgmTTe4qIOnWCwkyQCleHlLNOlKu0hUnU4QQM
+ Dk/n0cFeGej1n4XaIykNI60ANjIEu5Nli8jbWHh3jDhcTrAehy5g4/+xHzeelh1+dKA/
+ HBOP7LY6BnlMmVihjGgHFGkJ1NwSZAB2TwTGLOW4Cz4HcIwoFScqchdPxiobVVBOSH1P
+ 5Pl/YhI+4mw992Hi1p3r8hMqwsJrdTVTt81aepUz6K4GkkYYFa2lt8wVbW0QipEnGIO1
+ uVXNGc11pKNmNLuymSdxnSSNCrHgONVJJILZXQy5fE8px/W3oxzKLl724Kr8Y0tN7u9X
+ 24Qg==
+X-Gm-Message-State: AOJu0Yzow+8fcSU0C41/A4h914T6Mtt0Am6Dh4iIDcXPDYcTBB0B0X/V
+ bxKM7t1PupT89gRFCvrDifsYIqJzvCqY805sttR7q3cz2Gw3CYZmWk7G8BlwQPVHPhtxsI1fg5b
+ A/L28InRj719UVcOs2PuxhhO0TxqICYefOou9ziSfvTlccpSomdNy
+X-Gm-Gg: ASbGnct29H5i3nVV7aI+CcJ8gKNSkAGy6t6iNbToAY4elueQ1GQKgCejiq7zmeP8ToF
+ wmiOFqM7cAF8r7PqQsSoKLDERfU7mca6Gzc34/j3f4TnfdHUVSnsfpmixUtiB6JLLsq3RlmH2Ll
+ wDM2WEc9l1tzzO36WLVX3N1Etk8glVzOsWdAObt5QiDzwu
+X-Google-Smtp-Source: AGHT+IEh0fooisnOBryRvdl4xRevDNwKo47q9pmtqhsWoaQWLUicIfHtTS99YmHvuv9E8wBjyWRnkrYE+rCrkO8DjSU=
+X-Received: by 2002:a05:690c:6d07:b0:70e:2cba:868c with SMTP id
+ 00721157ae682-71057c28ae9mr16494717b3.11.1748590394203; Fri, 30 May 2025
+ 00:33:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
- <20250526091253.400802-2-sughosh.ganu@linaro.org>
-In-Reply-To: <20250526091253.400802-2-sughosh.ganu@linaro.org>
+References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
+ <D9RMK91R8Q2I.3BA39TM77AYZA@linaro.org>
+ <AB2FA403-CBB0-44F6-AC75-4A70B3E9242B@wolfssl.com>
+ <CAC_iWj+mH2jywAYA_cBOqBnk+pvH-+r4nwL7SD8HGDbdmu284g@mail.gmail.com>
+ <D73260F8-6334-4F8A-A8DD-FF70B8EF313E@wolfssl.com>
+In-Reply-To: <D73260F8-6334-4F8A-A8DD-FF70B8EF313E@wolfssl.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 30 May 2025 10:31:32 +0300
-X-Gm-Features: AX0GCFv--6uHAc-8AnzAJr0FjnSsOiaPGwyv0QplNuJEQFeCAeawSaFp1tNS_4Q
-Message-ID: <CAC_iWjJ1ghSnu5YAN3965mfL_SoadioFeV36yq+8K0fM1+Y=Kw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/6] lmb: replace lmb_reserve() and lmb_alloc_addr()
- API's
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Date: Fri, 30 May 2025 10:32:38 +0300
+X-Gm-Features: AX0GCFue-tdd0k5HbKfEaE7gb5unB8br5s_sCwASCn44YYppT1PbwdYjkIQPbao
+Message-ID: <CAC_iWjJt=Rq2=FzhLpZpiSycXFuUC1Yd-07Ru4NZUMRt+hqKbw@mail.gmail.com>
+Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
+To: David Garske <david@wolfssl.com>
+Cc: u-boot@lists.denx.de, Todd Ouska <todd@wolfssl.com>, 
+ Larry Stefonic <larry@wolfssl.com>, Wolfram Kusterer <wolfram@wolfssl.com>, 
+ Aidan Garske <aidan@wolfssl.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,37 +97,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh
+Hi David,
 
-[...]
-
-
->         /*
->          * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
-> diff --git a/cmd/load.c b/cmd/load.c
-> index 899bb4f598e..c3ef307bb68 100644
-> --- a/cmd/load.c
-> +++ b/cmd/load.c
-> @@ -178,8 +178,11 @@ static ulong load_serial(long offset)
->  #endif
->                     {
->                         void *dst;
-> +                       phys_addr_t addr;
-
-addr is already defined as ulong in this function. You need a
-different name here.
-But on that why can't you use store_addr directly?
-
+On Wed, 21 May 2025 at 20:12, David Garske <david@wolfssl.com> wrote:
 >
-> -                       ret = lmb_reserve(store_addr, binlen, LMB_NONE);
-> +                       addr = (phys_addr_t)store_addr;
-> +                       ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &addr,
-> +                                           binlen, LMB_NONE);
->                         if (ret) {
->                                 printf("\nCannot overwrite reserved area (%08lx..%08lx)\n",
->                                         store_addr, store_addr + binlen);
+> Hi Ilias,
+>
+> Thank you! It=E2=80=99s a pleasure to meet you! I=E2=80=99m the author an=
+d maintainer or wolfTPM.
+>
+> Perhaps it would be useful to meet and chat for a bit? Are you free next =
+week May 28th at 7:30 AM PT?
+>
+> I loved the feedback from Simon Glass and we will be implementing those a=
+nd suggesting a new patch soon.
 
-[...]
+I am a bit overloaded. Is there anything specific you would like to discuss=
+?
 
 Thanks
 /Ilias
+>
+> Thanks,
+> David Garske
+> Software Engineer, wolfSSL
+> +1 (530) 409-2990
+> https://www.wolfssl.com
+> https://github.com/wolfssl
+>
+> On May 19, 2025, at 1:52=E2=80=AFAM, Ilias Apalodimas <ilias.apalodimas@l=
+inaro.org> wrote:
+>
+> On Fri, 9 May 2025 at 18:43, David Garske <david@wolfssl.com> wrote:
+>
+>
+> Hi Ilias,
+>
+> Thank you for the quick reply. I am happy that you will consider wolfTPM =
+as a submodule. We have 100=E2=80=99s of commercial customers and it is ver=
+y actively maintained. In fact we will continue to provide direct maintenan=
+ce for any u-boot issues that come up using wolfTPM. Also we=E2=80=99ve don=
+e safety critical DO-178 certification on wolfTPM.
+>
+> 1) U-Boot subsystem maintainers. Can you point me to that list of maintai=
+ners?
+>
+>
+> it's in MAINTAINERS. I am responsible for TPM
+>
+> 2) Size: I haven=E2=80=99t run any size comparisons but I expect to be in=
+line with existing code. I will make sure we run some comparisons.
+> 3) Releases: Yes we have stable releases done each quarter. I am about to=
+ do a release v3.9.0 next week that includes the U-boot support, so I will =
+update the submodule to use the tagged release when it=E2=80=99s ready.
+> 4) CVE: Yes we track and create CVE=E2=80=99s if we find issues or any ar=
+e reported. We typically have a fix posted within 36 hours of a report. Vul=
+nerabilities are published in the release notes and for our premium support=
+ customers they get early notification.
+> 5) Patch Size: I will work on reducing the changes and splitting them int=
+o logical commits.
+>
+> Enjoy your time away. I=E2=80=99ll have updates to share soon.
+>
+>
+> Thanks
+> /Ilias
+>
+>
+> Thanks,
+> David Garske
+> Software Engineer, wolfSSL
+> +1 (530) 409-2990
+> https://www.wolfssl.com
+> https://github.com/wolfssl
+>
+> On May 9, 2025, at 5:22=E2=80=AFAM, Ilias Apalodimas <ilias.apalodimas@li=
+naro.org> wrote:
+>
+> Hi David
+>
+> Hi Denx,
+>
+> We at wolfSSL have developed a port for wolfTPM in U-Boot. The patch allo=
+ws using the current built-in TPM 2.0 support or switching to wolfTPM via C=
+ONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware update for the Infine=
+on SLB9672 and SLB9673.
+>
+> I think there is probably some more cleanup and testing needed, but I wan=
+ted to submit this to start the discussion and see your thoughts.
+>
+>
+> It's easier if you CC the appropriate maintainers for each subsystem next
+> time!
+>
+>
+> The wolfTPM library is GPLv2 and added as a submodule. If the license or =
+submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive we can re=
+solve anything.
+>
+>
+> We recently added a few external libraries. mbedTLS and lwIP. Both of the=
+se
+> are pulled as subtrees, so I'd like to stick to that.
+>
+> I briefly went through the patch and I don't disagree in pulling an
+> external library as long as it's reasonably stable and will continue
+> to be maintained. A few questions since I am not familiar with wolfTPM
+>
+> - Have you made any size comparisons wrt to the final binary size?
+> - Does wolfTPM have stable releases that we can use?
+> - Is there a CVE policy ?
+>
+> The current patch is quite big and I honestly don't have time to go
+> through all of it in detail. I'll be away next week, but I can give some
+> general feedback in ~10days. The easiest thing to do is try to split it
+> a reasonable amount of patches -- and only include the bare minimum of wh=
+at's
+> required to work.
+>
+> Thanks
+> /Ilias
+>
+>
+> Attached is the patch based on latest master 3b6760ddeb4 to review.
+>
+> =EF=BF=BC
+>
+> Thanks,
+> David Garske
+> Software Engineer, wolfSSL
+> +1 (530) 409-2990
+> https://www.wolfssl.com <https://www.wolfssl.com/>
+> https://github.com/wolfssl
+>
+>
+>
+>
