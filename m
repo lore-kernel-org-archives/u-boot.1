@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29DD9C5B549
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 08:03:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 865D8C5B549
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 08:07:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C3698319C;
-	Fri, 30 May 2025 10:03:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8BC282B34;
+	Fri, 30 May 2025 10:07:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x8mNmt2l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Uaxd2Ush";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A38E3831C6; Fri, 30 May 2025 10:03:07 +0200 (CEST)
+ id 94A528312C; Fri, 30 May 2025 10:07:00 +0200 (CEST)
 Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
  [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44EB68312C
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 10:03:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D2BD82A9E
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 10:06:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
 Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3a0ac853894so1591823f8f.3
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 01:03:05 -0700 (PDT)
+ ffacd0b85a97d-3a4bdee0bf7so992492f8f.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 01:06:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748592185; x=1749196985; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748592418; x=1749197218; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=p/Ir+bnSWUibRpoaz5cwGWoe1LUVVrUh0xpmKxC4DHw=;
- b=x8mNmt2lv4T/5mAMvsJ/0XbeXThO0LneQ82L/TUJAJGsDA2RTu6YZSx6aJGI8NCtNb
- tX7n4O4htb48ZxwSOmp+b56sf4D75YROz5HnSe0xxxzl9B3kAyeJL0aa/0yCRw2Juisk
- DPM3hU9WaF6K3PIOX9UaSyg7QuloLgY22KnLqDxFkYD35wI5CyAuboQk3trZ7vsOdI4d
- mM6hqVEk8SbAEp1ZL1T6xOu5eS1j0gzJPTF47XQjDfVhS2FEDbvDBTQej3KvtBXP7v0o
- fhf+nJXCI7/JoQ2Hfqspz7dLctWTJD/84hAaUFYvwO7TREBjLaBpyEv7zWn7PFquyxzq
- dJzQ==
+ bh=Vf9wse5kz7RzD/ol8ok8o0o4VtLw87Fot+IaVocnlB8=;
+ b=Uaxd2UshTCucB2Mtg0IOWU9It15RGUwn8hcN0vBYQoh7rBdOs+E6R/H5PNweNUBKGb
+ 5vT4LH6tx8Z5IcrXPlxwOEk3Nlk1yjMFegIdGSsq8j7IzWGGIu8PlgUmEaDRVBEqgkca
+ /uWUQ7r3asgVINNzJT++NiXZrjEoO8qZeXognMaIRfZ/VHN4vo0tAipoJc9zv9jvdBgT
+ pvrodGRxQDuWTuXtnkTPYBI3oEp+/UmB9Cou+vflLInGQkRaDhVcEWb9K+Cx6gtgF2Et
+ wFwlG76jpljHoQngPHvU9KDnPNiguxa7MqoyW5+puzmOS7uo16S9YlHrHsNbl9eZCyQ0
+ gmag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748592185; x=1749196985;
+ d=1e100.net; s=20230601; t=1748592418; x=1749197218;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p/Ir+bnSWUibRpoaz5cwGWoe1LUVVrUh0xpmKxC4DHw=;
- b=O+MKwQrYx+lsAnhQLZXRf1cHf3f8Xq/3IqBYAIjUZjnM2QFzpYvzoNsqMoKjj6mcar
- etsfs1/tth6WQBq0Z8+rsMNzr3S2kDV1vHX4vu4IkkZsz5YJEp+pPfJi8de9l2XIlJQB
- 9mOaHVHwL/t4iCVqYdnt3zkrvbRWP/I01yFZz1DfnOypv6zF5DVBLcLtXWiydwE78I3D
- ebG9ENMPpOLqdpOFmDUbqbvmyIbPSaN9rplu0JwVaYKfwicJAnhCK4K4FQk3XHZAQYM4
- vGYV7LmQvKZAeJSYpsHHy+ea0omqb7qKS1KdENVs2BwS73s9vZK1gGgpRc3nTbbjdGlO
- ZcPA==
+ bh=Vf9wse5kz7RzD/ol8ok8o0o4VtLw87Fot+IaVocnlB8=;
+ b=qDFVJalZ9pZ6iZH+HLy77ZqVInos+exZNfiqO0phkUhBFFry6KpGchC2RqCTFh7xNn
+ kAnVCzRd9Og+40rCdVEuikZCY7iS8TuwFqBUCNiC/YMyHSDH3k/TE394NURydRZNJ5Kb
+ xdx47+O2R5BfUCmijZz+u2L6XtorY7X6qQYwJ3xtV8GdlobS2WnEfYg5cnOR5VubvqPm
+ iCi6eBZRLyzZh9tKzAp73ZM+ZXpeNCdkQaUaz84ioUsZCdVMKt0P8RpiRjiNw+YWIAN9
+ jnZaycOWKmfFAitOWCQghNoZ3gIHznhdv8DDImW2EewCpzyoamUVtEHtuQg5hfFxtTZ9
+ plqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8M9QlhGhGO7V/X9VvdCxXrk4Lmqxg9BAw0vFbcu8PsAJstAKlAyCt2FuRFiqgKJgyfWv3M5k=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxVNdag2jBBscHSJyu55KQ186pF1sFhssmaX6kLhMHzrDpUA8H
- hJ/d8XVlCrE7aL98WGP0RRLQ/a5GqkvTTrJ9aXUhiWCeEXMUVwwY3bTefAmej3GmYRE=
-X-Gm-Gg: ASbGnctCxbToMWfkZMuzXFdsmiyZ4MbchweAwlqSoh2Rzo4+BUPNre5hAt2etALf37X
- ENFJ+zSHdbDX8Q3nFEWkAJ0SiPk5B+vEUnS2PJgtOSMq7G1K/jJ+A45Cj6702Q8/eD99P4m8pnB
- jc6/2BkOxLNbFXpcY/u1n3xJF7wUgkn49FOT2AKM7B+RjVkKXhAnNE2yyIhn0EtZoV8F/NvFUkf
- q6iKsG2PrWN5jwiPHSPbrbTcwwz/qjD5q/LpV+EGV93ktbr8zG0obpjVbTtd5jhcg94B7g+/+ji
- RRhT/uXco88JoRBRcZwr47DfdWmtRA4AAhPtMIeCwOs2ed9AJ5Vg0iCoXkxvaG/dW3WyXiuh1Ow
- 3D+SnJIvpXniPjek181Ax7IvsKTb6H0Y=
-X-Google-Smtp-Source: AGHT+IHdaGKPGuQTJLJ5Y0nrahoxEsU94bSDg5vqvNTphPzc6ODELDPuggx0wG8rwS9d7DAGv7ej1A==
-X-Received: by 2002:a05:6000:2004:b0:3a4:e945:980a with SMTP id
- ffacd0b85a97d-3a4f7a63d24mr1511314f8f.29.1748592184612; 
- Fri, 30 May 2025 01:03:04 -0700 (PDT)
+ AJvYcCXVIFLlQnULDmBcOylZPl+C3gVSvaah5ibqZTOtpz5ofSuEimGhBWWw8BjSL0F3Wl/dX9hVClA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw76XyLB1R0UfY687xBgOo/UK6o34ZvDk//46jw9FOxjhXtvvF+
+ 2nDVfNOChgHUoyUgxmytRRPRWjfZo4/0TulWnLCSB7LFGTupOHCHBp5+VSS1yhKkNFsRdRo3DWR
+ UfxVe
+X-Gm-Gg: ASbGncv/VKkKdIkb7y/4xsCr7Xp9Mt9HKsvm3dHSt3ydXfT3H1ohTr7qokqJk4tEQHw
+ r7EnnXgVGayINextpNO3ZVIK31CEl1CjzFKiFDHH4TdovR6XkVk8b8nGpATxsPnPOLaSH1DvrGe
+ A8Gjo9URsQfFU5amhgl6e3E0K5tcjTCeHERMdiewANG2cgw+j+QEMW0b+5Fjfr70/6xjSo4L/bQ
+ M3+Jo2aBxc9pFavOgsJAai2DudNbMTper+7xGj1O8u30juHfLqNQeTrcesRCE66huDPVGzQ8HXn
+ FKVqN0ZNo3WDcHEicWBGR3DojRLrCHUBl9r6Y9V6Zx7/IXVLLYk1Tg8QEuiDfxzla2f/0ns0OqZ
+ p1gLp3LrNmF32bEkWi+P6fxLyay7gQZA=
+X-Google-Smtp-Source: AGHT+IF71mrJc4859zN1qN07AKEIyYq0trNGiEAUyqA7spFgZAZAev0DfvB2XInjt7x4McF74v/XfQ==
+X-Received: by 2002:a5d:64c9:0:b0:3a4:e60b:7c63 with SMTP id
+ ffacd0b85a97d-3a4f89e2a49mr957971f8f.42.1748592417958; 
+ Fri, 30 May 2025 01:06:57 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4?
  ([2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4f009748fsm4071108f8f.80.2025.05.30.01.03.03
+ ffacd0b85a97d-3a4f00972f3sm4184409f8f.69.2025.05.30.01.06.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 May 2025 01:03:03 -0700 (PDT)
-Message-ID: <b19493e1-b79a-494c-a150-300969eaee5d@linaro.org>
-Date: Fri, 30 May 2025 10:03:02 +0200
+ Fri, 30 May 2025 01:06:56 -0700 (PDT)
+Message-ID: <6f445bd3-463b-4c9e-af07-17cba289b345@linaro.org>
+Date: Fri, 30 May 2025 10:06:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/6] net: lwip: wget: use loadaddr env var for default
- address
+Subject: Re: [PATCH 5/6] net: lwip: wget: initialize dns if a hostname is used
+ in a URL
 To: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -86,10 +87,10 @@ Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
 References: <20250529214910.984024-1-tharvey@gateworks.com>
- <20250529214910.984024-6-tharvey@gateworks.com>
+ <20250529214910.984024-5-tharvey@gateworks.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250529214910.984024-6-tharvey@gateworks.com>
+In-Reply-To: <20250529214910.984024-5-tharvey@gateworks.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,34 +109,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
 On 5/29/25 23:49, Tim Harvey wrote:
-> The loadAddress is optional and defaults to image_load_address
-> which should be initialized to the 'loadaddr' env variable like the
-> legacy stack (CONFIG_NET) does.
+> Initialize dns servers if a hostname (vs ipaddr) is used in a URL.
+> Otherwise the wget will fail without displaying an error due to
+> dns_gethostbyname failing silently when no DNS servers are set unless
+> you have previously performed a 'dns <arg>' command.
+
+Ha! I think I did not notice this issue because I always used DHCP,
+which populates the DNS servers internally in the lwIP stack.
+That sounds reasonable.
+
 > 
 > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 > ---
->  net/lwip/wget.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  net/lwip/wget.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
 > diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-> index 76401991bde6..ff8dbdc08d9b 100644
+> index ea1113e18b11..76401991bde6 100644
 > --- a/net/lwip/wget.c
 > +++ b/net/lwip/wget.c
-> @@ -579,7 +579,7 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
->  			return CMD_RET_USAGE;
->  		url = argv[2];
->  	} else {
-> -		dst_addr = image_load_addr;
-> +		dst_addr = env_get_ulong("loadaddr", 16, image_load_addr);
->  		url = argv[1];
->  	}
+> @@ -460,6 +460,10 @@ int wget_do_request(ulong dst_addr, char *uri)
+>  	if (!netif)
+>  		return -1;
 >  
+> +	/* if URL with hostname init dns */
+> +	if (!ipaddr_aton(ctx.server_name, NULL) && net_lwip_dns_init())
+> +		return CMD_RET_FAILURE;
+> +
+>  	memset(&conn, 0, sizeof(conn));
+>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
+>  	if (is_https) {
 
-image_load_addr is initialized in initr_env() (common/board_r.c) so this
-should not be necessary.
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
 Thanks,
 -- 
