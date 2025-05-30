@@ -4,83 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B56CAC3ABB2
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:33:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32914C5B549
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FF7B830EA;
-	Fri, 30 May 2025 09:33:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7447D830EA;
+	Fri, 30 May 2025 09:47:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QoU9VzYS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="flMGrXPn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED03A8312C; Fri, 30 May 2025 09:33:17 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id E1F848318F; Fri, 30 May 2025 09:47:17 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63F29830D9
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:33:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCC59830D9
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:47:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-70f31433d96so18116737b3.2
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:33:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-442ea341570so11476695e9.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:47:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748590394; x=1749195194; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C2tvjwCzLPOX0q85XbVjMm9wrYnPAw3ACleFfERTiiw=;
- b=QoU9VzYSj/haYZj85E2a2ObneBJm/CkWvoSlUCYLQyMTNq0UfPsMLCZZYcChH/lW3f
- nZ5Id96OvS+lY8jh8lj8JvmdhJToAZxEsA3m1oTTzRwIRxjMEMsMvB2GeHFeTrvVd5R5
- ixjrRMaf5VnE3gb+bRXTerVWMsul5RKwJjooWc8LwL9+aeoUQpQqXB4zPDNbu4fDp7+F
- Qisgf8JL2r454OqRj0M0kcU91EtYz6DSdJTfuA9KIFTfJL5eCbmmdsFNDCFOXa/94rSs
- IDi8ppoZSokhZkRFG1I1ceFl7HWJIbjMrbDPzDpF2p6yovuNRJX3XacDs0WfJtnXlKRj
- smnQ==
+ d=linaro.org; s=google; t=1748591235; x=1749196035; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Qcc/obqeArgDmsg7H32qm8bgtYgAH64jUaF78FmfDfU=;
+ b=flMGrXPnaHp0P12LoaNWMgG/qbdB5gSfVj9Bo0/3dFqIRGL/wWhoulwbH0vEdhO0Pc
+ OiETfBjtJ1mjvuhbMoNCfkxOjoQ7NzpaTDPQHW4VFPhF3ief5YiFzHaYm2Q7A2jEdOQX
+ TvM2hEMKpryM/Dmyi8No6ZL3D5CLiLPp6LpGt61l95fLAop287PooJ0eSP1aR/c4Nh/H
+ S2zV+DdHy086PSEFtiBLUQBUPm6x5yNrve/outGyJiAQi+5m2ArllL75YbJn+SgWHcfp
+ q8jFGikZ4Wp7tTluDOP2vX7tpPM8kE5kb6NMXwEpdTCG/pfD1sDI0QFz6mERK/piyDpY
+ ipgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748590394; x=1749195194;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=C2tvjwCzLPOX0q85XbVjMm9wrYnPAw3ACleFfERTiiw=;
- b=GGDNKswpYAosjO6QpeKX6ECWCOPWwcgmTTe4qIOnWCwkyQCleHlLNOlKu0hUnU4QQM
- Dk/n0cFeGej1n4XaIykNI60ANjIEu5Nli8jbWHh3jDhcTrAehy5g4/+xHzeelh1+dKA/
- HBOP7LY6BnlMmVihjGgHFGkJ1NwSZAB2TwTGLOW4Cz4HcIwoFScqchdPxiobVVBOSH1P
- 5Pl/YhI+4mw992Hi1p3r8hMqwsJrdTVTt81aepUz6K4GkkYYFa2lt8wVbW0QipEnGIO1
- uVXNGc11pKNmNLuymSdxnSSNCrHgONVJJILZXQy5fE8px/W3oxzKLl724Kr8Y0tN7u9X
- 24Qg==
-X-Gm-Message-State: AOJu0Yzow+8fcSU0C41/A4h914T6Mtt0Am6Dh4iIDcXPDYcTBB0B0X/V
- bxKM7t1PupT89gRFCvrDifsYIqJzvCqY805sttR7q3cz2Gw3CYZmWk7G8BlwQPVHPhtxsI1fg5b
- A/L28InRj719UVcOs2PuxhhO0TxqICYefOou9ziSfvTlccpSomdNy
-X-Gm-Gg: ASbGnct29H5i3nVV7aI+CcJ8gKNSkAGy6t6iNbToAY4elueQ1GQKgCejiq7zmeP8ToF
- wmiOFqM7cAF8r7PqQsSoKLDERfU7mca6Gzc34/j3f4TnfdHUVSnsfpmixUtiB6JLLsq3RlmH2Ll
- wDM2WEc9l1tzzO36WLVX3N1Etk8glVzOsWdAObt5QiDzwu
-X-Google-Smtp-Source: AGHT+IEh0fooisnOBryRvdl4xRevDNwKo47q9pmtqhsWoaQWLUicIfHtTS99YmHvuv9E8wBjyWRnkrYE+rCrkO8DjSU=
-X-Received: by 2002:a05:690c:6d07:b0:70e:2cba:868c with SMTP id
- 00721157ae682-71057c28ae9mr16494717b3.11.1748590394203; Fri, 30 May 2025
- 00:33:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748591235; x=1749196035;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qcc/obqeArgDmsg7H32qm8bgtYgAH64jUaF78FmfDfU=;
+ b=kQwPHo6dVOW8DB8233rVRUVNCdZ9un7G9oIDEPghSN+5t9Tfi3hZfMWHWyQdkb5eQj
+ DFho+WSYH0jDgbtzbBDzR35HMOt/eWN1lJo/Mm2g8/Bh0lzaXmQLlDGUibDFh1WSIjKc
+ PMYI2hKCraWEskfxthbXBlrNLugY1M/M631H5Pci0x5D7srzBx7yOOA8i3qGYNf0ecur
+ nNV+p50dvn8tA2THpRac+0tDn7m12Lu1faX9oH3EyBqsrGYigKZRJJp336MaVBW67oHO
+ En5w+HwluIw4BUODPe6vlevJ25uHmY8p8P+979fcrwhoCJaypFE8/yNFRmeyZFiO1i99
+ KSrw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXkltWjaMy11UrVD7UDqupVy2sJzZVEZxtAwE6QfOSMRBa+5SRcnrTYre7dqK4LkTZWxxRBGXI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyh3JVL+mPuVAjWIHceFhUKjeMVywihQ9BF/XFL0NmaAuGZzPOV
+ +eJGQLykGDX/2oMqd3gw7tQarwng22HUkN4PozJ6vixkE0e2z7YPMYWAxVg6+e9COOw=
+X-Gm-Gg: ASbGncsDLZ1XIqp4yliT+Kf+VbR04k6dLj1drWSKgpL8xDUVIfgDrDveDbtlobFbH9I
+ xh/qIPQP/YWBoD+ELbnA0ripLvouks/mogvh1KjhYtF/X+i1o4ecdb/dZkeCud4ZfghGpwQbrkD
+ o7XIQiGCn0qOQRbTdxOSBFGxbUkyE/HdHUSKMfbydCtUfkVYm5aXafcx7TAwHki58riz6eH1jMF
+ IiYF/Q2Hnq93/dWqtXPQTeHqMzYYjR+kc3uGxVZluL8KHFUSjrEODLhuUA+UxoSv1/fKKtNeNJp
+ xWzqeZwmMr1uzCxbM07sFM9wTkUnnZYTOh/Dus4lwwiDJZWGnDRANamTTrL+0BtGrZZtsGfymAe
+ IpAwSH4/3A77sImhH8BNM2neDGU4gxyw=
+X-Google-Smtp-Source: AGHT+IG+4ejC6BFcLEz8qclSmwf79OC49S3lJaT00TmRRPmOudHtXvGC3a9w8nG2uo0rq/JR3wW7Bg==
+X-Received: by 2002:a05:6000:40c7:b0:3a4:ead4:5ea4 with SMTP id
+ ffacd0b85a97d-3a4f89ab616mr991703f8f.24.1748591235286; 
+ Fri, 30 May 2025 00:47:15 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4?
+ ([2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4f00a13fasm4097170f8f.98.2025.05.30.00.47.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 30 May 2025 00:47:14 -0700 (PDT)
+Message-ID: <e9f4cad1-81f1-4cd6-8689-a343635fe9cc@linaro.org>
+Date: Fri, 30 May 2025 09:47:14 +0200
 MIME-Version: 1.0
-References: <145501C2-B034-44EC-A16D-4F1A150347FB@wolfssl.com>
- <D9RMK91R8Q2I.3BA39TM77AYZA@linaro.org>
- <AB2FA403-CBB0-44F6-AC75-4A70B3E9242B@wolfssl.com>
- <CAC_iWj+mH2jywAYA_cBOqBnk+pvH-+r4nwL7SD8HGDbdmu284g@mail.gmail.com>
- <D73260F8-6334-4F8A-A8DD-FF70B8EF313E@wolfssl.com>
-In-Reply-To: <D73260F8-6334-4F8A-A8DD-FF70B8EF313E@wolfssl.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 30 May 2025 10:32:38 +0300
-X-Gm-Features: AX0GCFue-tdd0k5HbKfEaE7gb5unB8br5s_sCwASCn44YYppT1PbwdYjkIQPbao
-Message-ID: <CAC_iWjJt=Rq2=FzhLpZpiSycXFuUC1Yd-07Ru4NZUMRt+hqKbw@mail.gmail.com>
-Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
-To: David Garske <david@wolfssl.com>
-Cc: u-boot@lists.denx.de, Todd Ouska <todd@wolfssl.com>, 
- Larry Stefonic <larry@wolfssl.com>, Wolfram Kusterer <wolfram@wolfssl.com>, 
- Aidan Garske <aidan@wolfssl.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] net: lwip: call sys_check_timeouts and schedule on rx
+To: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250529214910.984024-1-tharvey@gateworks.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250529214910.984024-1-tharvey@gateworks.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,139 +106,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
+Hi Tim,
 
-On Wed, 21 May 2025 at 20:12, David Garske <david@wolfssl.com> wrote:
->
-> Hi Ilias,
->
-> Thank you! It=E2=80=99s a pleasure to meet you! I=E2=80=99m the author an=
-d maintainer or wolfTPM.
->
-> Perhaps it would be useful to meet and chat for a bit? Are you free next =
-week May 28th at 7:30 AM PT?
->
-> I loved the feedback from Simon Glass and we will be implementing those a=
-nd suggesting a new patch soon.
+On 5/29/25 23:49, Tim Harvey wrote:
+> Call sys_check_timeouts to service lwIP timers and schedule to service
+> U-Boot tasks and actions during packet rx.
+> 
+> This resolves the issue of an active watchdog resetting the board on
+> long network activities.
+> 
+> Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+>  net/lwip/net-lwip.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index f05c4cd3f64f..e8d4cc542ed8 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -13,8 +13,10 @@
+>  #include <lwip/etharp.h>
+>  #include <lwip/init.h>
+>  #include <lwip/prot/etharp.h>
+> +#include <lwip/timeouts.h>
+>  #include <net.h>
+>  #include <timer.h>
+> +#include <u-boot/schedule.h>
+>  
+>  /* xx:xx:xx:xx:xx:xx\0 */
+>  #define MAC_ADDR_STRLEN 18
+> @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+>  	int len;
+>  	int i;
+>  
+> +	/* lwIP timers */
+> +	sys_check_timeouts();
+> +	/* Other tasks and actions */
+> +	schedule();
+> +
+>  	if (!eth_is_active(udev))
+>  		return -EINVAL;
+>  
 
-I am a bit overloaded. Is there anything specific you would like to discuss=
-?
+With that, there is no need for calling sys_check_timeouts() in the
+callers of net_lwip_rx(). Please simplify the dhcp/dns/ping/tftp/wget
+loops.
 
-Thanks
-/Ilias
->
-> Thanks,
-> David Garske
-> Software Engineer, wolfSSL
-> +1 (530) 409-2990
-> https://www.wolfssl.com
-> https://github.com/wolfssl
->
-> On May 19, 2025, at 1:52=E2=80=AFAM, Ilias Apalodimas <ilias.apalodimas@l=
-inaro.org> wrote:
->
-> On Fri, 9 May 2025 at 18:43, David Garske <david@wolfssl.com> wrote:
->
->
-> Hi Ilias,
->
-> Thank you for the quick reply. I am happy that you will consider wolfTPM =
-as a submodule. We have 100=E2=80=99s of commercial customers and it is ver=
-y actively maintained. In fact we will continue to provide direct maintenan=
-ce for any u-boot issues that come up using wolfTPM. Also we=E2=80=99ve don=
-e safety critical DO-178 certification on wolfTPM.
->
-> 1) U-Boot subsystem maintainers. Can you point me to that list of maintai=
-ners?
->
->
-> it's in MAINTAINERS. I am responsible for TPM
->
-> 2) Size: I haven=E2=80=99t run any size comparisons but I expect to be in=
-line with existing code. I will make sure we run some comparisons.
-> 3) Releases: Yes we have stable releases done each quarter. I am about to=
- do a release v3.9.0 next week that includes the U-boot support, so I will =
-update the submodule to use the tagged release when it=E2=80=99s ready.
-> 4) CVE: Yes we track and create CVE=E2=80=99s if we find issues or any ar=
-e reported. We typically have a fix posted within 36 hours of a report. Vul=
-nerabilities are published in the release notes and for our premium support=
- customers they get early notification.
-> 5) Patch Size: I will work on reducing the changes and splitting them int=
-o logical commits.
->
-> Enjoy your time away. I=E2=80=99ll have updates to share soon.
->
->
-> Thanks
-> /Ilias
->
->
-> Thanks,
-> David Garske
-> Software Engineer, wolfSSL
-> +1 (530) 409-2990
-> https://www.wolfssl.com
-> https://github.com/wolfssl
->
-> On May 9, 2025, at 5:22=E2=80=AFAM, Ilias Apalodimas <ilias.apalodimas@li=
-naro.org> wrote:
->
-> Hi David
->
-> Hi Denx,
->
-> We at wolfSSL have developed a port for wolfTPM in U-Boot. The patch allo=
-ws using the current built-in TPM 2.0 support or switching to wolfTPM via C=
-ONFIG_TPM_WOLF=3Dy. It also supports TPM 2.0 firmware update for the Infine=
-on SLB9672 and SLB9673.
->
-> I think there is probably some more cleanup and testing needed, but I wan=
-ted to submit this to start the discussion and see your thoughts.
->
->
-> It's easier if you CC the appropriate maintainers for each subsystem next
-> time!
->
->
-> The wolfTPM library is GPLv2 and added as a submodule. If the license or =
-submodule is an issue let=E2=80=99s discuss! I=E2=80=99m positive we can re=
-solve anything.
->
->
-> We recently added a few external libraries. mbedTLS and lwIP. Both of the=
-se
-> are pulled as subtrees, so I'd like to stick to that.
->
-> I briefly went through the patch and I don't disagree in pulling an
-> external library as long as it's reasonably stable and will continue
-> to be maintained. A few questions since I am not familiar with wolfTPM
->
-> - Have you made any size comparisons wrt to the final binary size?
-> - Does wolfTPM have stable releases that we can use?
-> - Is there a CVE policy ?
->
-> The current patch is quite big and I honestly don't have time to go
-> through all of it in detail. I'll be away next week, but I can give some
-> general feedback in ~10days. The easiest thing to do is try to split it
-> a reasonable amount of patches -- and only include the bare minimum of wh=
-at's
-> required to work.
->
-> Thanks
-> /Ilias
->
->
-> Attached is the patch based on latest master 3b6760ddeb4 to review.
->
-> =EF=BF=BC
->
-> Thanks,
-> David Garske
-> Software Engineer, wolfSSL
-> +1 (530) 409-2990
-> https://www.wolfssl.com <https://www.wolfssl.com/>
-> https://github.com/wolfssl
->
->
->
->
+Thanks, 		
+-- 
+Jerome
