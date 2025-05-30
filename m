@@ -4,46 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C5E0C5B543
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B9FC5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:42:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19819833AD;
-	Fri, 30 May 2025 17:38:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 42061831EA;
+	Fri, 30 May 2025 17:42:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XLuiAFod";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98BA38331C; Fri, 30 May 2025 17:38:35 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8CC5682CB6; Fri, 30 May 2025 17:42:34 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99D3C801BE
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:38:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12A06801BE
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:42:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uL1oV-007QGb-Ik;
- Fri, 30 May 2025 15:38:31 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2 5/5] net: lwip: wget: initialize dns if a hostname is used
- in a URL
-Date: Fri, 30 May 2025 08:38:26 -0700
-Message-Id: <20250530153826.1057407-5-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250530153826.1057407-1-tharvey@gateworks.com>
-References: <20250530153826.1057407-1-tharvey@gateworks.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-604e745b6fbso4168179a12.2
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 08:42:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1748619751; x=1749224551; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=g/39nu5KK45btYA9qbovdsJnhf0fgWPf9KXMOTqNQQ8=;
+ b=XLuiAFod9I0chiHBGX6URfBARJpm7+SB3D6FTy7UdAsXTBagUaxnVfHp/wF3I5yKSv
+ 9jji2/34Lvgn9G1JJ1jQtvDkusXp415yL+oX5hYFeNUsE4XC7qdaC5dZ/RiM9jZO75ZW
+ PwhntQK8C6Bc4bXoaoGo3fKPb5ILnbgwa1KWk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748619751; x=1749224551;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g/39nu5KK45btYA9qbovdsJnhf0fgWPf9KXMOTqNQQ8=;
+ b=bI+LRyh6T5EoxcOcKgBdzueMTxUz0UzRfFh7YPqFuTW/JnAtZL2m5Yq5BeRqzLp3iG
+ jtWrpYU5qLTRabAVmxl/xQnSUm4I6pssvdoC2oDWAVanA6z0FvLUCVP6u+4bPsamaWyI
+ wvG42mLjCionuJjJSNqtnP9+ntclA8Gs1DJXQAqQK7eXT9C4kTtqp6JSR26mCIfpRRMk
+ U0qaNOK4A3jdVdoG97Kud+afmQY0GsOq0nRV4XMfKjm3x80BdJ+BKUNhj+/oCjrwldro
+ SUHTyOOLEdFMruMYy+6Hr/x9JS+dlzHDDWcmqArkkGTbAkqX4YrciN9ttI6K5up/sL6B
+ zHlw==
+X-Gm-Message-State: AOJu0Ywig0nNF1ATHpMaA9dvgHf3ztyPOVfpL/vQk50P3Z8TwdXj9+5w
+ CwPjKOBnKHmyRdWxdw3W6H9eI6+LluPEXDdO1+yBbuD4pe0mfgXWFfpR6Uh9aZlfUwfgF52G87/
+ 3CIU0HamB41tqcCwBh9ecw/AOwLRqaxLtF9YLZWLTWd8lBcST6PpvPA==
+X-Gm-Gg: ASbGnctnXh5cGtP236WmkDmKs0jYgSz23nYTZpy8DCPolW7PIV0kBIUPuiSOBlef840
+ sqB1Ovfa3pSC8lKdC2FCXPjsov/KhHn3Jbma3hJfdM0PV66Bf3SNvgDsVgitzdnKf8JvAEwFhq7
+ YGtaT0QWu9KMO0NCxlEO4aBEvIqBmXBu8=
+X-Google-Smtp-Source: AGHT+IGVQ0+n8mJiECwPqWHQCF6bo8iSZZ1vcpY1EiIS+ZlKYNT8GZadQmQ4ktEyTjKLwMorDNMVtoI26YpSRq5qgms=
+X-Received: by 2002:a05:6402:2708:b0:5fb:c4be:b1e with SMTP id
+ 4fb4d7f45d1cf-6056df46761mr3563486a12.11.1748619751524; Fri, 30 May 2025
+ 08:42:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAFLszTiFLpYoJnu65CWgqKgq6=ffXpWh4kcXqSaBjAwgkoP6vw@mail.gmail.com>
+ <20250530140650.GT100073@bill-the-cat>
+In-Reply-To: <20250530140650.GT100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 30 May 2025 16:42:18 +0100
+X-Gm-Features: AX0GCFuoVXUbMy_j2w9HM_mQ1mgv6vw_hPDWlOYDARe77FVnIm8F13roG0lRUwk
+Message-ID: <CAFLszThB6uWQuAM2e3UP1_x1qRWjBU24cLYApjs8RSN7oSHHTQ@mail.gmail.com>
+Subject: Re: Azure runners
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,35 +86,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Initialize dns servers if a hostname (vs ipaddr) is used in a URL.
-Otherwise the wget will fail without displaying an error due to
-dns_gethostbyname failing silently when no DNS servers are set unless
-you have previously performed a 'dns <arg>' command.
+Hi Tom,
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
----
-v2:
- - added tags
----
- net/lwip/wget.c | 4 ++++
- 1 file changed, 4 insertions(+)
+On Fri, 30 May 2025 at 15:06, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, May 30, 2025 at 02:31:13PM +0100, Simon Glass wrote:
+>
+> > Hi Tom,
+> >
+> > I have always found the azure pipeline to be slow, but I found that it
+> > actually does support having your own runners / agents. I set up 8 of
+> > them on ruru:
+>
+> I had not seen that before, can you please send a link to the
+> documentation you're working from? Thanks.
 
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index fcaf684e61da..2ca369db65a1 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -460,6 +460,10 @@ int wget_do_request(ulong dst_addr, char *uri)
- 	if (!netif)
- 		return -1;
- 
-+	/* if URL with hostname init dns */
-+	if (!ipaddr_aton(ctx.server_name, NULL) && net_lwip_dns_init())
-+		return CMD_RET_FAILURE;
-+
- 	memset(&conn, 0, sizeof(conn));
- #if CONFIG_IS_ENABLED(WGET_HTTPS)
- 	if (is_https) {
--- 
-2.25.1
+Hmm, actually I used Gemini, but here is a link I found which looks
+like the source:
 
+https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-agent?view=azure-devops&tabs=IP-V4
+
+Regards,
+Simon
