@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7481C5B549
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:48:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A8FAC3ABB2
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:48:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 298B08312C;
-	Fri, 30 May 2025 09:48:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0ABB8312C;
+	Fri, 30 May 2025 09:48:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n5hRVP/A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z6h6PsG5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E86128319C; Fri, 30 May 2025 09:48:02 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id D80EF8319C; Fri, 30 May 2025 09:48:40 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED658830EA
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:48:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C62C830EA
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso13817375e9.2
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:48:00 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-442ea341570so11487725e9.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:48:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748591280; x=1749196080; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748591318; x=1749196118; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=p7cM6c4TnpzNIVO+LSRx5tzBKbS2gnr0tegm+noAr54=;
- b=n5hRVP/AcBP0Yy+BpSGzpgD12oIS0peV8eL959YS9y2sUaEykTHm4CrJsx5VXZxmVu
- IG8qG+CikEY2FH7DjCcyJFLRi/YeokELOfURuYl7Dy/V80/7eB+b5yWxwQ5ukgMzT40c
- 8sBzoVFHnU8OQJ+p1T+XruAh1RrgTIViQQw6t1YxsmE57I+/0jnGg2/0n9t7yB12K7fO
- X1HUlghJFSA8KYCK50VlVf9p5M6iUKPYLt5VtctRoKYkER14mVGIUJXg7M+o1FYyx8wC
- l5yprh2pLTVmkwfGB8zUgbXIu0lqmRlGLeEQ2tOGPmwwmsoUPb0OaEKqY4E9LaL5vZ6c
- cEJg==
+ bh=A+QzdhgPFsQfXlZkc2o7x6hRmzYQDcqbE3t+AkyQHqA=;
+ b=Z6h6PsG5vxaq4DhxcPlLSlNF9R1t7h8Xow3WR4m2sYm6XZnp/NNzFAAnhxw+bJQazZ
+ E7cGwdWzuwezSv88wbMaojg/JX3yGiemb3CWxLSeloXJc0zr/Fc8uUchqVkC0JMeGEUo
+ HukuEU0LNtPSKX7cQxXryRROhClpBPFlPDeSjKMzDb/LLYhDN9pulFXZTBCtLkUfT/w+
+ 5Tx2CUOO3tdbZlZyWw3N/HhFLuwQFoEQrYVvyTle/IScf5cf6ty8bdM7tuBNFbUbzG4c
+ MRe9ivulTEqJXIH60A2gbv4KvPn9hRncdq2oMjSM5zU4lEqNTdYn2ochBmjMYC2agPdx
+ cCww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748591280; x=1749196080;
+ d=1e100.net; s=20230601; t=1748591318; x=1749196118;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p7cM6c4TnpzNIVO+LSRx5tzBKbS2gnr0tegm+noAr54=;
- b=dBPFWlsYo49ynWSoAwgNGpVQS3WFvijLwqJJzpm62Nf4ro0I1wzAzJyVj8fp43O3Mc
- wr2nzW/rroPAi26NSMAxtc8CGYWUOl2BlJW7zLU+HQEbISQYuaIzZkKgbMHpFMSKIN/s
- E/8PKdZuL1VDORf25/q8Wlp9lYvgEVtdLVNWkkullF7FH/j4GAfVPVwSW69cmcRhJJgZ
- ApTjUBb+5MwJedwf0R54Z6KMhDBnHNNGKoJVpMDcmRuquLJ77xWWqO+WLx2uNCFNpzG7
- M75hi+3AdAxvM8Bk5G03J98bbaQoNT3ZlYOstAS0JzL5zaUmJYf/dfNpmDSMhKF2h21m
- XKxw==
+ bh=A+QzdhgPFsQfXlZkc2o7x6hRmzYQDcqbE3t+AkyQHqA=;
+ b=X61eUObC5gGr1l6Efj+9Ab+DgMxhFMjZ99TE/DKW2wrVwbMiWwjiuoLhMprRIF1tAD
+ nStOrJ+oDXffcRDoIfWKGXP4TPUdsC2BtqSbKSP/Jn0K70YY7nxn4MReDtyIMHmqhfqi
+ HC7ayGDwdMO60LUpfNhW1ZdoAmsJbnvJa+FcOk8itiSoGobi9ECz97FV8TDgCKReZTiP
+ WcB73JrTIYX9iMnvzO/MPEHtsIJovFolVKV2ovTlUu5Sc3SMwkiBGW8lILcA8TqhaNJF
+ p+NE7SU8mjxNXYwq8VT6FWgIN/mIVFoQf9nKwMHfarV8k9R5LUunnL23EnrxmIlehU0y
+ bneg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlw1SMkeJ9bj9dg+kaWMqoTIzhG5V5usq3cO/ZsIKw1fKV2GCZbPzKOagM624Leo6zYyB/4fg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBCWUktjyjgi/3vtMKwuegcHyhBacjeOFLVUfubr0yhm53Ow50
- yoNBpoz1c8Nx+4kV+68X+g/vlSv71i0teXPjxaBkOpgSe1WOm/dZJnGmu8Jm3VR3wh0=
-X-Gm-Gg: ASbGncvDOx2SEI0wFxxndXln3gk0J33UhYHhRUWWkfpkfr2J4Zry2nrmZW+O2ZHBtSk
- 8qG/G1ZInNaMyebFeL+wE8PA3VLr2txQYlViK/CheoLk7rSr1+WalN0GxKko+lSZuPkfzKhZH1n
- N42gNyQPbIUQ5dAh/7tQa7LNIIFQ9Og1sTsJHZckNpv1U9NsC7ywVRb94Pkd3nKctmWObkF445Q
- lH08fclrZskSuFALWREb7CtMA4UeOPXGSPIvNQTZvAdgsddTsX5ZN+6ZGNAeI8u+jfSh7qSpjln
- erXEwj6xqwCC6hqWrimDBFEhnbHDllOcuDXuBT8syeGIT8eMHUsfKGAYGJSHnTG3+OFhpuHw/lY
- 6dzIakKOEFtJRkv3b0oVqmKOULzKALWzC5UbkQRWvmg==
-X-Google-Smtp-Source: AGHT+IFr6BfBizTF3LFJYFyj4Rf+h5cApFtSS6Tcv/LWsouXu8Rd1HDHsEZetA4u+MDAfgjUe8o7+g==
-X-Received: by 2002:a05:600c:5250:b0:43c:fd27:a216 with SMTP id
- 5b1f17b1804b1-450d8875db2mr8672505e9.23.1748591280354; 
- Fri, 30 May 2025 00:48:00 -0700 (PDT)
+ AJvYcCVZRJXUkwxL7X8Kk+O+IwvAJ7ftCM12zOdgOKy/OHa8qaAhcILyunmNNNATf6+vbcR2Fp4XZU0=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywffr3G1dKVKEq8qeS2NjVEd52YBDgrOFmWW6fj5vhOH8ETAij1
+ ALQVXpv+KlVVsa8IbN2aN8LzpLBLzzBeRXwZSO0qvnfSSVQVBGvasIxURExI/JpnM0k=
+X-Gm-Gg: ASbGnctE8QDEKxlcyNQcSFujTG4/4HhvlIbJFYnqxr3xasWgs5RrIeKOXDj6n9a+BRw
+ mQiUT7VTMVfi+MuTCUFmBQtrT7Tg8bTFXftyYGOYQQ16163SaEG2M/MxHGOxi6A+BArER39VXZG
+ jMW3JJBdwe1rINjS/Jdr8sGq+TrNIeszp+1XPBduyq2oDJQ+kMHlGxaxa1PfBQ3/Xs6mVXQ9zU/
+ qSTXd3WIONsPP2XBucqwTXP5LCsLNuVOM9wVT0CE2VkPKEYJwUR8jO4ooMvYSOZQ2wGkQ755zGo
+ tE/K1JWdPPnlZwwSin6/5gb589+dxofNR5VEI/tKVRhoqDeh+EkMEWtK5AKKk6iqPguTv4fPoHs
+ 5R9zzDM9sMt3hlgXl+3AX9dkJcHJGbS53JmsWLq3ctA==
+X-Google-Smtp-Source: AGHT+IFRYrrO4ccfZclS0WarZu6GImZeR+7kZgezw5pqAX+aRlfFNNz90RBKwDXb3grQ+qfeLaHduA==
+X-Received: by 2002:a05:6000:1a89:b0:3a4:eb92:b5eb with SMTP id
+ ffacd0b85a97d-3a4f89e0035mr886020f8f.50.1748591317956; 
+ Fri, 30 May 2025 00:48:37 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4?
  ([2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4f009748fsm4041701f8f.80.2025.05.30.00.47.59
+ ffacd0b85a97d-3a4f009ff7asm4108659f8f.90.2025.05.30.00.48.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 May 2025 00:48:00 -0700 (PDT)
-Message-ID: <ae5f24b5-f339-46ce-8d25-9823c5cbe9e9@linaro.org>
-Date: Fri, 30 May 2025 09:47:59 +0200
+ Fri, 30 May 2025 00:48:37 -0700 (PDT)
+Message-ID: <91b770c4-7243-4635-9107-9e46cb729410@linaro.org>
+Date: Fri, 30 May 2025 09:48:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] net: lwip: enable IP_FRAG and IP_REASSEMBLY
+Subject: Re: [PATCH 3/6] net: lwip: tftp: add support for setting blocksize at
+ runtime
 To: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -85,10 +86,10 @@ Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
 References: <20250529214910.984024-1-tharvey@gateworks.com>
- <20250529214910.984024-2-tharvey@gateworks.com>
+ <20250529214910.984024-3-tharvey@gateworks.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250529214910.984024-2-tharvey@gateworks.com>
+In-Reply-To: <20250529214910.984024-3-tharvey@gateworks.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,31 +108,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
 On 5/29/25 23:49, Tim Harvey wrote:
-> Enable IP_FRAG and IP_REASSEMBLY to allow packets larger than MTU.
+> Add support for setting the blocksize at runtime via the tftpblocksize env
+> variable as such is done with the legacy stack (CONFIG_NET).
 > 
 > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 > ---
->  lib/lwip/u-boot/lwipopts.h | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  net/lwip/tftp.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 > 
-> diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
-> index edac74ff7a21..1818a445dc5e 100644
-> --- a/lib/lwip/u-boot/lwipopts.h
-> +++ b/lib/lwip/u-boot/lwipopts.h
-> @@ -72,8 +72,8 @@
+> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> index fae701bad2eb..6cdb0642536c 100644
+> --- a/net/lwip/tftp.c
+> +++ b/net/lwip/tftp.c
+> @@ -156,8 +156,10 @@ static void no_response(void *arg)
+>  static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+>  		     ip_addr_t srvip, uint16_t srvport)
+>  {
+> +	int blksize = CONFIG_TFTP_BLOCKSIZE;
+>  	struct netif *netif;
+>  	struct tftp_ctx ctx;
+> +	const char *ep;
+>  	err_t err;
 >  
->  #define IP_FORWARD                      0
->  #define IP_OPTIONS_ALLOWED              1
-> -#define IP_REASSEMBLY                   0
-> -#define IP_FRAG                         0
-> +#define IP_REASSEMBLY                   1
-> +#define IP_FRAG                         1
->  #define IP_REASS_MAXAGE                 3
->  #define IP_REASS_MAX_PBUFS              4
->  #define IP_FRAG_USES_STATIC_BUF         0
+>  	if (!fname || addr == 0)
+> @@ -186,7 +188,10 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+>  	if (!(err == ERR_OK || err == ERR_USE))
+>  		log_err("tftp_init_client err: %d\n", err);
+>  
+> -	tftp_client_set_blksize(CONFIG_TFTP_BLOCKSIZE);
+> +	ep = env_get("tftpblocksize");
+> +	if (ep)
+> +		blksize = simple_strtol(ep, NULL, 10);
+> +	tftp_client_set_blksize(blksize);
+>  
+>  	ctx.start_time = get_timer(0);
+>  	err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
