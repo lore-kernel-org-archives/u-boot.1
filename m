@@ -4,82 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0878AC5B543
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:42:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E298BC5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:46:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C9E082102;
-	Fri, 30 May 2025 17:42:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 492A482B0E;
+	Fri, 30 May 2025 17:46:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GXsBCyq/";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="e9+KT+LA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 560DF8334F; Fri, 30 May 2025 17:42:37 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id C35FD82CB6; Fri, 30 May 2025 17:46:48 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 526DB801BE
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:42:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F33182991
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:46:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5efe8d9ebdfso3968355a12.3
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 08:42:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-70e78e04e48so17437007b3.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 08:46:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748619755; x=1749224555; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FvMIsUzzc0tOXtvFPsxIJC2RaZztvCDyHX+g54JGuaQ=;
- b=GXsBCyq/cIwub1Y1qc9r44xw+AJcjECQ3RedTl2Cj9cMUTT5pJ7YQAtzDpiuB0iIL/
- x1+d0HRGqB8lSpHLYsHHFczF/UJl2s2ljdErfLsdjmHSaVnJJTehP6090JSViu5Jt8oX
- 06fWOBwitJUH8lCFsgpttxUpgsrWdlMk6ZBZE=
+ d=gateworks.com; s=google; t=1748620004; x=1749224804; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aG0TIYbXwjvRiIfdPyGfIIae5cHhspyEXX2jr3YIVpw=;
+ b=e9+KT+LAZw3cy2YJ0JaMFDtXJMURsc3GCkBBQgwfBSu0bkGWp/RDBlVSRvOxT9bUP/
+ /qaLinWkYvjFSl9hnSGfqRihUId6DfTGpMtNi8BVtiURou5fMpBMQQ/ghoeH1HsHVBBJ
+ uovdq2jwL/MXc5PJyUseqedAUkeiuu7V2K6e7fKzOQP+/F9MGIGDpJTF+9PtZ2Fz5SOJ
+ pSi9ogvpXXW2+OKpKAfR7lGtBJUbyw8ERqMXqncIyyWtOP2R3YeirEzW+5Td1bGLEy88
+ NJwwPS6yKX85gHGn8oc1LyToW4OvHetlLMGiA4k0OeVokDKu0xI2PjB/Nxg4smJFw4FO
+ IMnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748619755; x=1749224555;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FvMIsUzzc0tOXtvFPsxIJC2RaZztvCDyHX+g54JGuaQ=;
- b=AJ8U0cFtxjH/pwrWkOYopgK+Y0515eCyOv8Vijmlxu4pmE6n96LG2zEk+X25c7Lk1W
- NK7k4EDEjVuW7kuTRecZJVAvzOEp+SiG0uXTMc+wSgK8Yh07ni5Y5DCu8dklip7Jt84j
- CheqeDJq3bL3HZli64wkF3qeJl96wjcefYgGtGTkX+FkJeHpfyD3QHHkBGbEbydWdGCS
- JYGsMBTvZG/KMbvGbsFiN6On7htTXxfkAayR1ST4cH2LfAMABA7CFzyMKJglyMz98NKH
- QCJMGH5T2gv3BG2UL0ul+BYn/Ce/KjwAIHWgKsWO7lpAMI6ezYaV1VVu+IuI6J8UERAU
- jlLg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+5gZHqx8SnAvIW8JM53Ymrdw3o3YNm56fcSGz2692njNdTMf2gsY4475SR7okKiS31oE6TGc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzn3yWzKBEIPIVcywqJHJmnzES7ImkbODns0Q0ac3lscfT2vG6v
- tCDwjGWZ2eqZ3Ro/MwX1Jol7ubSfMzgWicc/aYU0hl79lDJqQSx9cIjWc8s4yyMGesaU3WngKkj
- ppQAK5vAaxczDAY9T4QmHDbGLheiwyMrusomjJL+g
-X-Gm-Gg: ASbGncup9qLZTVZRMgViHNXcVzR7aK3GoeDAUIezRk8emi0r8zaFj7Pq7UqhlFVzbOM
- 1sQ9uFGLZS8zVeXCdmdr3L+YCMffe3SBjcMEBN4IMFIxEOYqC07qh6Y8drxs9VdW5CQkdGkw7B7
- Snxha8kZIK3a5DTNXO/9wxaTZm6VHmBHw=
-X-Google-Smtp-Source: AGHT+IHZ4gNlsUeoY2ZdWLMfknT4sT04kgQ4RApUHqX4TWXpl3/nf1bYJJKZ5OJftWB88gTMv6KnWzWFm7D6k9jw2YM=
-X-Received: by 2002:a05:6402:51cb:b0:600:1167:7333 with SMTP id
- 4fb4d7f45d1cf-6057c1c291emr2521702a12.10.1748619754487; Fri, 30 May 2025
- 08:42:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748620004; x=1749224804;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aG0TIYbXwjvRiIfdPyGfIIae5cHhspyEXX2jr3YIVpw=;
+ b=boeY/S3ojpWAMpT6aZa/RbZqJ33XHFGbU8Bl5oeBv1ExPm0smT1Hxw1J8ank8Jck1K
+ HP//hc2mzHhLxNydxZ57VQSkERUwsjrs4h/w9xCRjnSx+7iBo8+UPmx4hc4iTu/gzEmZ
+ f0d7GsH9uNoUOgJc3yRuw5W0ULDXSsNiiomvLK4kKuzKbQGF+EfHMtc+vAXMZ6rX15Hj
+ RzslA/uQN3jBo6kqG+QV5nCRobrnEqBKO5ACgntckPih4LNbYpIH3VF/YaHQXxlwZ0vU
+ Fx1NMGpa7UkKwP77s0/gtUhHjLxaGdj6bX5121B8VZI7YSc2bTjj48QFP1HIWqnfKXel
+ Ve1A==
+X-Gm-Message-State: AOJu0YwvXcaDVDv3M/WyLiKFhQAMTdUI9m6yOXxs66bdqx8lvkySfG9v
+ x+czdEjH3z42NFLoTrNFZc+7b3HL7N7zu/EYKwJGQIofKrp1f29f1gzqAbr6uUK55NsohaQDUDN
+ 5/PjJNGUQMjPSGkQLxQwHDfpEtMdJO4Tzx9zPov1EkA==
+X-Gm-Gg: ASbGncuYOLSRlWCe0mWIeWyRWRoDCV0VMT5JLO//3Q6AvWkBD4nLk4G+FBwL3JYIVFD
+ yERGczfIJs5FYpqOayrYUqYXzeiZJHX37wvnGOffiEWe/5TR/x88iOqWm6zDtFttifUCdLTlOg6
+ 4G2gkhVjvEmuw98w9vuU/sBrJ6A2qAu+NP
+X-Google-Smtp-Source: AGHT+IEjL2M+e3dksbE0WhIW/BcMEzYmzQCwjRmU6G2TaEkFma3k47e+1zBHKBeolQxGtfkywrqrayEqSwNU7zoJ0AU=
+X-Received: by 2002:a05:690c:4485:b0:6fb:1c5a:80ea with SMTP id
+ 00721157ae682-70f97ff9266mr56743637b3.32.1748620004301; Fri, 30 May 2025
+ 08:46:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
- <174861631032.4033567.15353362577510384054.b4-ty@konsulko.com>
- <CAC_iWjK2q0nUU3homG4hxp31dYBq-g_VO6xzkS-nGF+JcagJpQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjK2q0nUU3homG4hxp31dYBq-g_VO6xzkS-nGF+JcagJpQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 30 May 2025 16:42:20 +0100
-X-Gm-Features: AX0GCFtCmE02cvSkhldgE8hoz652rsNMJPoqYCHjAK4Zp09qlRry-OHIcBSqMBI
-Message-ID: <CAFLszTjhM0-EwrQKdq028c45LMEiKhrsZq4NoxgkA3Lc_y4SHw@mail.gmail.com>
-Subject: Re: [PATCH 00/24] Update kbuild
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Prasad Kummari <prasad.kummari@amd.com>,
- Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Sam Edwards <cfsworks@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de
+References: <20250521151516.16729-1-jerome.forissier@linaro.org>
+In-Reply-To: <20250521151516.16729-1-jerome.forissier@linaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 30 May 2025 08:46:33 -0700
+X-Gm-Features: AX0GCFscfLdYHD2uBtjWmFQC23-bAQGV_iZ-I_gqNRZawy9a5slHL2-nz_akHRo
+Message-ID: <CAJ+vNU08-=eWAceEedRg7RabqB-BKO_1F+8EkDHB8zHg79VK3g@mail.gmail.com>
+Subject: Re: [PATCH 0/3] sntp for NET_LWIP
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,87 +102,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-On Fri, 30 May 2025 at 15:51, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Wed, May 21, 2025 at 8:15=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Thanks Tom.
+> Implement the sntp command with lwIP (CONFIG_NET_LWIP=3Dy). SNTP is
+> supported as an app in lib/lwip/lwip/src/apps/sntp/sntp.c so this is
+> mainly about adding that file to the build and writing do_sntp() to use
+> the sntp_*() API and run the receive & timer loop. There is a patch to
+> extract a small bit of common code from net/sntp.c to avoid duplication.
+> The QEMU arm64 lwIP defconfig is updated to provide the sntp command by
+> default for convenience.
+> I could not test the case when the NTP server IP is provided by DHCP. If
+> someone has access right away to such a configuration and in case it
+> does not work, please let me know.
 >
-> I got another (shorter) series, that I'll send later today. Once this
-> is reviewed/applied I got a single patch that brings on par with 5.1.
-> Then bumping to 6.x should be easier.
 >
-> /Ilias
+> Jerome Forissier (3):
+>   net: extract function net_sntp_set_rtc() from sntp_handler()
+>   net: lwip: add sntp command
+>   configs: qemu_arm64_lwip_defconfig: enable CMD_SNTP
 >
-> On Fri, 30 May 2025 at 17:45, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, 20 May 2025 08:21:11 +0300, Ilias Apalodimas wrote:
-> >
-> > > Last time the kbuild scripts were synced with the Linux kernel was on the
-> > > 4.20 release. Updating directly to 6.x makes the diff difficult to read, so
-> > > let's do the changes incrementally and bump to 5.1 first.
-> > >
-> > > Since the number of comits is bug, I am splitting this in multiple series.
-> > > This one includes most of the commits for Makefile.build,
-> > > Makefile.lib and some from Makefile.
-> > >
-> > > [...]
-> >
-> > Applied to u-boot/next, thanks!
-> >
-> > [01/24] kbuild: de-duplicate fixdep usage
-> >         commit: afba83ad89d5b17fc49f47df3a8c031a23815d1a
-> > [02/24] kbuild: disable dtc simple_bus_reg warnings by default
-> >         commit: 31811fbb6b164ad7be63cb34146a63334b3689b8
-> > [03/24] kbuild: Enable dtc graph_port warning by default
-> >         commit: 1ecfa813bb2d8793e80f55278fea293e2329353b
-> > [04/24] kbuild: remove redundant 'set -e' from filechk_offsets
-> >         commit: 14795eba8bb3e138314d10313e95cc0862f98736
-> > [05/24] kbuild: remove redundant target cleaning on failure
-> >         commit: cfccf25100c26cb98d537106f0756363cb0647c6
-> > [06/24] kbuild: skip 'addtree' and 'flags' magic for external module build
-> >         commit: 3d21332c2f3e299836fc55d69887aa88168ac567
-> > [07/24] kbuild: simplify rules of data compression with size appending
-> >         commit: 39160c5fbf7b724b4113a8918b9fa3790d080a5c
-> > [08/24] kbuild: add real-prereqs shorthand for $(filter-out FORCE, $^)
-> >         commit: a73c41c398a1cbbe9aa7ffb644729e6cf7595845
-> > [09/24] kbuild: remove unnecessary in-subshell execution
-> >         commit: 603a4ade16069851b6005591426e36edd9c465cc
-> > [10/24] kbuild: move archive command to scripts/Makefile.lib
-> >         commit: 47a4770c7a2f6dab7ada9ba77b12bd41939db551
-> > [11/24] kbuild: let fixdep directly write to .*.cmd files
-> >         commit: cc571e29a8ecbba909cbb04ba062db026f70ae8b
-> > [12/24] kbuild: remove redundant 'set -e' from sub_cmd_record_mcount
-> >         commit: 2c180949ec3e924020edbff00884f206e120b028
-> > [13/24] kbuild: refactor modversions build rules
-> >         commit: 3679f24373d609b59e6434afb5253fd8c7af730a
-> > [14/24] kbuild: change if_changed_rule for multi-line recipe
-> >         commit: daf8f5af4c9e542ac75b2ddf7f2831b73833b49d
-> > [15/24] kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule
-> >         commit: 82f75d890d7af1cecd30e6e9f675889b915e68ed
-> > [16/24] kbuild: remove redundant 'set -e' from cmd_* defines
-> >         commit: 919bd66ca8c966a30448d8befc7b59d58ba8d22d
-> > [17/24] kbuild: remove redundant quiet_modtag for $(obj-m)
-> >         commit: 47b6ab973728bd99247c1bc31d9608304417dd9b
-> > [18/24] kbuild: refactor quiet_modtag
-> >         commit: 88067ffc0c6f8c4f5142a1f8d08a206f3ed49083
-> > [19/24] kbuild: generate modules.order only when CONFIG_MODULES=y
-> >         commit: 1a59e6d3ba8a2f63a27a1e69286affd0bdc66dbf
-> > [20/24] kbuild: hardcode genksyms path and remove GENKSYMS variable
-> >         commit: bb08767f12795ba72a93948aa2b5477ad548c511
-> > [21/24] kbuild: strip whitespace in cmd_record_mcount findstring
-> >         commit: 25ab30f1c46efc8d2c11b01013449c09815a3f65
-> > [22/24] kbuild: remove unused archmrproper
-> >         commit: 0719c79e09de41aaba0ee5d86dcd578828d4aad3
-> > [23/24] kbuild: make -r/-R effective in top Makefile for old Make versions
-> >         commit: af1a9935708a30614e3dbf4a33e5fe90e846f598
-> > [24/24] kbuild: add -Werror=strict-prototypes flag unconditionally
-> >         commit: 0128b2cf4da8bd69c695d56743a666faf159d2d5
-> > --
-> > Tom
+>  cmd/Kconfig                       |  13 +--
+>  cmd/net-lwip.c                    |   5 ++
+>  configs/qemu_arm64_lwip_defconfig |   1 +
+>  include/net-common.h              |  13 +++
+>  lib/lwip/Makefile                 |   1 +
+>  lib/lwip/u-boot/arch/cc.h         |   4 +
+>  lib/lwip/u-boot/lwipopts.h        |   4 +
+>  net/lwip/Makefile                 |   1 +
+>  net/lwip/sntp.c                   | 128 ++++++++++++++++++++++++++++++
+>  net/net-common.c                  |  28 +++++++
+>  net/sntp.c                        |  23 +-----
+>  11 files changed, 195 insertions(+), 26 deletions(-)
+>  create mode 100644 net/lwip/sntp.c
+>
 
-This is fantastic, thank you Ilias!
+Hi Jerome,
 
+Thanks for the continued work on lwIP!
 
-- Simon
+For the series:
+Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+
+Note that if this is merged before my series we'll want to have a
+followup that removes the sys_check_timeouts() after net_lwip_rx(udev,
+netif), or if it is merged before my series I can send a v3 that does
+it.
+
+Do you have a list of lwIP features you're still working on? I'm going
+to be moving the Gateworks venice boards to it as things look pretty
+good. The only thing I saw that was missing was TFTPPUT which I don't
+really care about.
+
+Best Regards,
+
+Tim
