@@ -4,52 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7222C5B552
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 10:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DACC5B549
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 11:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F6D6830D9;
-	Fri, 30 May 2025 12:56:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 79AE482D2B;
+	Fri, 30 May 2025 13:18:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="bupsSr0w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R084VeX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08565831F5; Fri, 30 May 2025 12:56:41 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8312F82E0A; Fri, 30 May 2025 13:18:16 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E47DA82B3D
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 12:56:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 828C682B8E
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 13:18:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 7762226123;
- Fri, 30 May 2025 12:56:38 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rBsa3UHz5EAQ; Fri, 30 May 2025 12:56:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1748602597; bh=s/r4MfSgpnvRhshnuFvCcvz3LgqyfY7NR3gx8CVD5U8=;
- h=From:To:Cc:Subject:Date;
- b=bupsSr0wFN0aa0ZddHJWnPXW8AcKlvG5bre+An/c5jLzXbTJftOh/Mocvc/XdVKFH
- CNzgEaU2rCRm5vXdKYtTiu/d44s2HqQPO9Liuh/CckXPU8I22kNRXpMD2jx/kG2F3m
- Gl7FtQoD8ZWTgTOqZXRtuDACJ9r2yBStLRImhsTyh0pgslurpll88ERE+obZ2OM8lJ
- x3ee22MDDNaDGVeUgLemTiP/zL4d5nlo5dSlKMVpdPmCoqaBLDW2Ds21lc4nxdNt70
- lXC0+pxhRh6qTf5R/GSU1IzTUeUDQetbK+oQpAfFbC5X2vnZkksdQwEFF2SXuudahr
- kWmuczGsnY1Ow==
-From: Yao Zi <ziyao@disroot.org>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Yao Zi <ziyao@disroot.org>
-Subject: [PATCH] MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer
-Date: Fri, 30 May 2025 10:56:22 +0000
-Message-ID: <20250530105622.58634-1-ziyao@disroot.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-60461fc88d7so3714348a12.0
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 04:18:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1748603894; x=1749208694; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+6+cjXuInXhum2Y3c9zwwy6V3uYcejxsijaHGZTBP1E=;
+ b=R084VeX1NtNX25Ev7AsJD9yWcxKkJEYqvO6JNzivHgDnCAvzWcA16a+vWLLFdxwYjh
+ fG86giwl02/STyRSqI8NXYZs3cJCzbJ5GEIXFPwkPngPm+2aHxSgYkU0f+VwGbWbx+sF
+ XOGFExgBmgnD/34RJ7LxDyi4QXAF6Ra3kU8ZM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748603894; x=1749208694;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+6+cjXuInXhum2Y3c9zwwy6V3uYcejxsijaHGZTBP1E=;
+ b=Cmly+fkjhNmZ7ZlGsX8NrQex5yEaIqZ6eROK3Q2cNrlvfUOjJdecU8uKYEcHD9NjI3
+ 9IzrW9AagNrAfD6u+Zw9DNQnhblN5aWbfVPe5R5qDVKnbHSG+1t4jNZohxZ0rn8VpVIg
+ gJB3bZUePvZEfib9beAT1etvrm5ABteh81rCgvA9oo+3vJbStR3X0uqlS9Z0U2m88qQW
+ GRnfLrICsXtFfnCPA/CsyeC/TCSV8NIuuk4IwaWFBv9i9P23PY2aJgVjS6Uynq32CyLC
+ yAcrawSPXUa3UuBVk63CR/SA/mPPtXkCEXjY+v8qZsRi16vC/PRk5JvML0P0E6yOlVB1
+ yTTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW1sTDbaGDbCSnl6yV5vcZLRRQOQLKOdPZzunHESf+JStjd/8rQ1OSfMWP4w2DPVVtn6rp006w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2gfstZbQ5XqunXuC1S9US4zfyxQhp+8EC9ar/6ahrVZka/45f
+ 7V+HDIgd5NkPyMsoCXG1J6QTessw5tYdn1x2f9Ekz0N6oPsFuLmN1L2OvSQdBYbPAgYutHl4aVp
+ awO96RgKa5KOTd2pUxaUZAg1pKQ59BGL2zO6iPu2p
+X-Gm-Gg: ASbGnct3x5wp799nekpPPviM5CNeI7W4htUypdd0LJZAc4deoHscfiUu7nMeeg8F7kC
+ I2T1ySdPN3gIMspu5XV4FZ5dSRPkPfLMJrqXtWhSiwwm9SAbttQI5/t9y5Fd1X2KxZFPzYoE96A
+ F8kU/mxS2uO7LkRrdxu1WUCa7fcZEQ7Wq+6NBC2GzFfw==
+X-Google-Smtp-Source: AGHT+IGreT8QkGLkjwE0Jx4jQ64ftqSnmVKUuAZQogliPHYVPQQbg0kSn0jdHLjME/J1CahoDmyiAFMBlWf1xkw0oyQ=
+X-Received: by 2002:aa7:d155:0:b0:604:7931:90a1 with SMTP id
+ 4fb4d7f45d1cf-6056f4cc460mr1879628a12.30.1748603893840; Fri, 30 May 2025
+ 04:18:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250527-binman_faked_optional-v2-0-3362ab897581@phytec.de>
+ <20250527-binman_faked_optional-v2-2-3362ab897581@phytec.de>
+In-Reply-To: <20250527-binman_faked_optional-v2-2-3362ab897581@phytec.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 30 May 2025 12:18:01 +0100
+X-Gm-Features: AX0GCFuh4gb8JHLizQm1wHv5hcI-WbWk8RxynGCLS3NE8AeRRzKSskjLqBueoUY
+Message-ID: <CAFLszTitvF-3Cc2qSLATsJU9sG3LshNEPQvEgqGFbBtsT-m38A@mail.gmail.com>
+Subject: Re: [PATCH RFC v2 2/8] tools: binman: drop "faked" return value from
+ check_fake_fname
+To: Yannic Moog <y.moog@phytec.de>
+Cc: upstream@lists.phytec.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,32 +89,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Assign myself to develop U-Boot port of T-Head TH1520 SoC, and help
-maintain related code and review patches.
+Hi Yannic,
 
-Signed-off-by: Yao Zi <ziyao@disroot.org>
----
- MAINTAINERS | 7 +++++++
- 1 file changed, 7 insertions(+)
+On Tue, 27 May 2025 at 14:24, Yannic Moog <y.moog@phytec.de> wrote:
+>
+> check_fake_fname sets the faked member of the entry. Use that member
+> to get the faked status instead of a returned value indicating the same.
+> Add type annotations to the modified functions while at it.
+>
+> Signed-off-by: Yannic Moog <y.moog@phytec.de>
+> ---
+>  tools/binman/entry.py               | 11 +++++------
+>  tools/binman/etype/blob.py          |  7 +++----
+>  tools/binman/etype/blob_ext_list.py |  4 ++--
+>  3 files changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d62dd35a385..4d79fa457c4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1569,6 +1569,13 @@ F:	drivers/clk/clk_k210.c
- F:	drivers/pinctrl/pinctrl-k210.c
- F:	include/k210/
- 
-+RISC-V T-HEAD TH1520
-+M:	Yao Zi <ziyao@disroot.org>
-+S:	Maintained
-+F:	arch/riscv/cpu/th1520/
-+F:	drivers/clk/thead/clk-th1520-ap.c
-+F:	drivers/ram/thead/th1520_ddr.c
-+
- RNG
- M:	Sughosh Ganu <sughosh.ganu@linaro.org>
- R:	Heinrich Schuchardt <xypron.glpk@gmx.de>
--- 
-2.49.0
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
+For the commit message, single quotes and <=60 chars are preferred. How about:
+
+tools: binman: Don't return 'faked' from check_fake_fname()
