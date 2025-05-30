@@ -4,68 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58043C5B543
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 11:54:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3512C5B543
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 12:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9685B82A36;
-	Fri, 30 May 2025 13:54:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C26082BF6;
+	Fri, 30 May 2025 14:09:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ud8VQJIz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f1EBdYkg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BC9B82A59; Fri, 30 May 2025 13:54:56 +0200 (CEST)
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
+ id 1ACEE82C44; Fri, 30 May 2025 14:09:26 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7B78829F5
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 13:54:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1302582AB9
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 14:09:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x544.google.com with SMTP id
- 4fb4d7f45d1cf-604bff84741so3534633a12.2
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 04:54:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-54e98f73850so2226773e87.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 05:09:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748606092; x=1749210892; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=a5TPOIU+oJIAATuabdIVnH14eeg8heY3Tlk+JiEGc7g=;
- b=Ud8VQJIzOb9V9rGAvMFu8FwXyGIzKU+SAyuWI/t0SUwXviJYWxrVG0m5SAW64zuF3M
- QknXAR6QYYitMelybPHvxlZfGICGp/LUFQ8h/BiP07RCdAuPDDdptMFhiWprGpJTuJ9U
- 6GnW9x+KDlIHLq/WHW3g2wTNBCH15VC3WlJz0=
+ d=gmail.com; s=20230601; t=1748606963; x=1749211763; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b7BNuZGaMCe9AfFzPVh9BmC9FrdeMZ7pJoYGuB7G/eE=;
+ b=f1EBdYkgGTGitaPSRdy+I4y3Kr8LdXCBObgpYgCnM/7zV/q8Qgnd+5bvLt6KNh2LS/
+ oytgiZhd2aii6mcVnAw7vJUxnHh5YeSlMC7DKS/l/hLbpvQ0g3ZORfmTSyv7VAvoyOn9
+ aqnxY+IAh6uuaEo/rkl1NR+x5WBM6IU0cXPAQj10D0bfFU7EHOxJmt/3OiSPq0UIWTtk
+ IUpMMUehSuuatcSjvNuxahTdYZ/TLo3QDXmyaREFPSUkIC7jaYXFnmGhBaaBCi2BpZkj
+ E6z43siHD8XG0Xz8KGY4xs9oQwv9z4B39gUcp2iyOnhyMDfEU9NXwc7mZcqVWlZWJH66
+ rHPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748606092; x=1749210892;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=a5TPOIU+oJIAATuabdIVnH14eeg8heY3Tlk+JiEGc7g=;
- b=QbTQ9H/60HOZkapPOM88S624yMFyk1JQMy5NxFJifdb99T8CWQdorB/YaLAfm18iWD
- 5eFDbXDP0qq88P+VoFNRIVkaJGZdrFnm0gVkVEm7kBwHxWocq1m8FFJyDPInQDoXJhJ4
- EE7EqSG4JsbuPPrfcJyepUR15PEGS+VGpQCkj1Km5ceATwsSuyfJ9tG0OUuG+/XkoTQ2
- 10Cdf0cPurY2FuFDqLWMxizTz0esPjcxhVEC4PTXcFR7g1bb9bdfHlo3zEcSwQ2RUKhj
- /aTgprbQRFDNhKJjM5Y4K92xACO8P1tZs5I6+E2+P7NsQdqa/9x/ABp8NT0zVjLxv/6p
- TGSw==
-X-Gm-Message-State: AOJu0YzXH7lqLtRD0nFrTg/iyhVo8gEhwVctn2YirsLn43SYWZy5en9m
- Id7r36KUSQUnG5p8kwGV0urAxb0NVSYObXiiZAsJylM98G+w3r1FV+HQfdyw46RORZDAgapIFWT
- nvS8/1A02pNS6iTHwN7F1IYMaSvIVSPoDN64s6kO/wODTfhePh4Y2hI4gmwo=
-X-Gm-Gg: ASbGncubsaLCMcyvWzrBc98TOqPKiCF5XO8XibuL0v9zZpAl3G0ohtDVQnYNkiYNpvr
- rVjlgfGn2Wx8KzG9jixf6O/WeHSCQ/F/j6dgQ6esEjkGwvmbr+Piwlw4dD7y0heDZrLIWHmgq7a
- 6DVmftOfIBgDU22j9rdVUM+U9a70u9W1Y=
-X-Google-Smtp-Source: AGHT+IFDqxrfOjyRYHjMseOnbGo/lXG0yM8ad4EffW+QfRDHoGAELrA5sQv2arIOiVRU9TE4rH/onCYqxjK1DWnKVZs=
-X-Received: by 2002:a05:6402:845:b0:5fb:f708:2a7f with SMTP id
- 4fb4d7f45d1cf-6057c63d4b2mr1652775a12.32.1748606092293; Fri, 30 May 2025
- 04:54:52 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748606963; x=1749211763;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=b7BNuZGaMCe9AfFzPVh9BmC9FrdeMZ7pJoYGuB7G/eE=;
+ b=Hjm8cVYhYmY6aRr65sErzqLzJLva5VTajnzUGac/gJtCySZLo7jxL8U6F7g116gLBR
+ nB6yMo2niT+yofJQoeCZ/wXtHbZViZE+UOtTl9rJHOL5v4wOiNGpO/7joPQqcORYnjw9
+ LkAkSEsXxOMI3W0VM9gcCOB2549Kr9egLIsxLkcg4jod0WhjYaTeQNE6ZNrHwB61HY+y
+ Njd4BUmQw4W/6u7XuB5g4ZAq3pCNPY3yygdql7iwhdBmgT9yUjmwAQVe885wPjMqmUkA
+ ijyJFxzvjDk1BWM+ZL5Ce6vpsQh/DASy7OOCiL1Nlo7dkGCR23FHZcdEjFN1i0DAAqD5
+ 2xvw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVER1+NSsOVeDWRt9LKtYblaPBn1DjuTPZOZoP0S4ZcbctuOvKE7ki61TyIm6RXr0ynq32Q8xE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwO+apO1/Nyz8MwmxE9LcDzUP9Q992Apg2oaCp5pTkTZ7lHtWPd
+ dd0XRaxkwebqtGXnQVRSBoXVbA7c6oDcvh4OlS2nb1gz3aysN1Fy+oadFyTDsctYp9dEmZzsXzz
+ F2calsVCpZk+Jpo6f3T/iKt2wsYCjNLzSCtHh
+X-Gm-Gg: ASbGnct12OGDFA33MtdebiyllMkT0wDVVGoxaCkE2ew5V3B41PZ8qRh8v9B0/Qz7Fro
+ BHeZNbxrTFJj5g8sayflQqF2bgypmYdnQ18DJPcPFHx1uICcXBmdFhCvrZWWxa2nOE9+/Vby5Ll
+ H5dlpMGYA1EJE9+PzzbjfHWhDklU9UIecOB2XC/LtHkdn/qKUvkNSzZoM2yjhjXvvA
+X-Google-Smtp-Source: AGHT+IGmSRc9OiAx367JBbtT+LRoTWagX3AG2buktdVYpR/n2hDJtwZLpRCPUsLfGFgEwu49rSsRQvHpZUFECI1v0Co=
+X-Received: by 2002:ac2:4c4a:0:b0:553:2438:8d02 with SMTP id
+ 2adb3069b0e04-5533b93b6cfmr1088397e87.47.1748606962973; Fri, 30 May 2025
+ 05:09:22 -0700 (PDT)
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 30 May 2025 12:54:41 +0100
-X-Gm-Features: AX0GCFvGHS39yH-10BnbTO5mLZAQO-Lu1nfGvJUet1X1bRjBhlbCMeDZocY7tCc
-Message-ID: <CAFLszTi==8DGQfUkPhdm0wBkKvHmh43R2+kzPH2LLkMC_ac4Kg@mail.gmail.com>
-Subject: Please pull u-boot-dm into -next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
+References: <20250520084120.4175862-1-olaf.baehring@draeger.com>
+ <CAJ+vNU1Ge_s4mEFYCn0TPhuKW5X1J-jcV3GyZqc_70GjgsqRtA@mail.gmail.com>
+In-Reply-To: <CAJ+vNU1Ge_s4mEFYCn0TPhuKW5X1J-jcV3GyZqc_70GjgsqRtA@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 30 May 2025 09:09:11 -0300
+X-Gm-Features: AX0GCFtajnQqGwlEqWkjK9Aboa3yjIPAzr94EMIA1SVk7gVjzYVRiFiBY5XecPY
+Message-ID: <CAOMZO5CtK=Z4-60Ny+H8TQqAAT7B3jyqkPs75M7GrtGiq6tfqw@mail.gmail.com>
+Subject: Re: [PATCH v2] caam: bugfix CAAM error on startup
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Olaf Baehring <olaf.baehring@draeger.com>, u-boot@lists.denx.de, 
+ Gaurav Jain <gaurav.jain@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,114 +97,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Tim,
 
-This is for -next
+On Thu, May 29, 2025 at 6:39=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/26422
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=80&view=results
+> I've found that this patch causes a regression on an imx8mm board
+> (imx8mm_venice_defconfig) where the first call to caam_rng_read fails
+> here in jr_dequeue but if you call it again it works. With some
+> debugging added:
+> SEC0:  RNG instantiated
+> ...
+> Hit any key to stop autoboot:  0
+> u-boot=3D> rng list
+> RNG #0 - caam-rng
+> u-boot=3D> rng 0 10
+> caam_rng_read caam-rng len=3D16
+> run_descriptor_jr_idx idx=3D0
+> Error in SEC deq: -1
+> caam_rng_read_one run_descriptor_jr failed: -1
+> caam_rng_read caam-rng caam_rng_read_one failed: -5
+> Reading RNG failed
+> u-boot=3D> rng 0 10
+> caam_rng_read caam-rng len=3D16
+> run_descriptor_jr_idx idx=3D0
+> 00000000: ad 2e ad c0 2a 12 27 c4 65 82 66 19 be ef f6 07  ....*.'.e.f...=
+..
+>
+> If I revert your patch caam_rng_read works initially and on subsequent ca=
+lls.
 
-The following changes since commit a619c4410956f446510749b6dc3989849616b7a0:
+Thanks for the report.
 
-  Merge patch series "Enable env in SCSI" (2025-05-29 18:36:51 -0600)
+On an imx8mm_evk board, I see:
 
-are available in the Git repository at:
+u-boot=3D> rng 0 10
+Reading RNG failed
+u-boot=3D> rng 0 10
+00000000: 27 42 f0 b8 92 c8 ca 29 6f 6a c3 98 ff 61 2b ae  'B.....)oj...a+.
+u-boot=3D> rng 0 10
+00000000: 48 fb 52 44 29 ea 83 f9 a4 1d 68 20 82 c5 af b5  H.RD).....h ....
+u-boot=3D> rng 0 10
+00000000: 92 63 76 fc 1c 12 4b cd 68 50 8c fa 2b 51 21 50  .cv...K.hP..+Q!P
+u-boot=3D> rng 0 10
 
-  git://git.denx.de/u-boot-dm.git tags/dm-pull-30may25
+(always hang in the fifth attempt)
 
-for you to fetch changes up to 44fc287387c06946d3c8f1a62e641ab35ba65eea:
+With the path reverted, it always works:
 
-  expo: Drop the special theme code for bootflow_menu (2025-05-30
-09:49:33 +0100)
+u-boot=3D> rng 0 10
+00000000: b4 14 26 f8 1f 78 65 b2 8f 0a a6 c4 6b 47 f5 61  ..&..xe.....kG.a
+u-boot=3D> rng 0 10
+00000000: 6e 5f 7c fa 13 d2 b7 b5 cf 5d 3d e6 82 c7 a6 3e  n_|......]=3D...=
+.>
+u-boot=3D> rng 0 10
+00000000: 25 84 1b 86 89 ae 20 a8 a2 53 9a 7a 8a a5 6d 45  %..... ..S.z..mE
+u-boot=3D> rng 0 10
+00000000: 94 05 b6 7c a4 38 5a 89 0b 5b 38 86 61 ba d0 32  ...|.8Z..[8.a..2
+u-boot=3D> rng 0 10
+00000000: 57 c2 36 dc eb 68 3b c3 f5 1b f9 76 3c a6 1b d5  W.6..h;....v<...
+u-boot=3D> rng 0 10
+00000000: 2a 34 95 03 27 75 d3 9e 75 1b 99 0d 25 87 78 1a  *4..'u..u...%.x.
+u-boot=3D> rng 0 10
+00000000: 4e e4 b8 ca 97 91 c8 53 67 85 28 51 a1 11 39 3d  N......Sg.(Q..9=
+=3D
+u-boot=3D> rng 0 10
+00000000: 30 fb 41 d7 a7 18 63 64 8a 9f 37 84 b3 bd 57 dc  0.A...cd..7...W.
+u-boot=3D> rng 0 10
+00000000: 9b 5e 46 89 5c 59 5c 85 30 e4 58 be 56 7b 20 31  .^F.\Y\.0.X.V{ 1
+u-boot=3D> rng 0 10
+00000000: c9 41 27 73 f8 8e 33 65 ca bb bb c1 b1 b7 7b a3  .A's..3e......{.
+u-boot=3D> rng 0 10
+00000000: f2 9f 8e 26 b6 93 4e 24 71 18 3f 72 2a 19 20 ef  ...&..N$q.?r*. .
+u-boot=3D> rng 0 10
+00000000: 1d c2 5e 55 ec 27 d7 5f 2b 65 a1 46 e4 2a 55 a5  ..^U.'._+e.F.*U.
+u-boot=3D>
 
-----------------------------------------------------------------
-Bring in recent expo enhancements:
-- multi-line text
-- highlighting of menu items
-- rationalisation of menu and expo code
-- support for object alignment
-- editable strings
-- various bug fixes and tweaks
+I will wait for Olaf to submit a fix for this issue.
 
-This also includes some required abuf improvements.
-
-----------------------------------------------------------------
-Simon Glass (46):
-      abuf: Add a helper for initing and allocating a buffer
-      abuf: Add a function to copy a buffer
-      abuf: Add a way to printf() into a buffer
-      expo: Add CLI context to the expo
-      expo: Add a function to poll for input
-      expo: Destroy the cedit expo when done
-      expo: Create a rendering test for cedit
-      expo: Move cedit-state fields into expo
-      expo: Test some cedit actions
-      expo: Pass in the video device for cedit_prepare()
-      expo: Test rendering a lineedit
-      expo: Provide access to the current menu item
-      expo: Adjust how menu items are highlighted
-      expo: Test editing a lineedit
-      expo: Split bootflow_menu_run() into two pieces
-      expo: Split bootflow_menu_new() into two pieces
-      expo: Allow adding a single bootflow to a menu
-      expo: Rename scene_dim to scene_obj_bbox
-      expo: Rename x and y in struct scene_obj_bbox
-      expo: Use an abuf to hold strings
-      expo: Separate dimensions from the bounding box
-      expo: Make bounding-box calculation more flexible
-      expo: Support setting the size and bounds of an object
-      expo: Line up all menu objects
-      expo: Create a struct for generic text attributes
-      expo: Move text-rendering into its own function
-      expo: Tidy up scene_txt_render()
-      expo: Allow strings to be editable
-      expo: Check the screen contents after rendering
-      expo: Support rendering multiple lines of text
-      expo: Support white-on-black in the theme
-      expo: Implement a box
-      expo: Support object alignment
-      expo: Begin implementation of a text editor
-      expo: Use a simpler name for USB media
-      expo: Drop the gap between groups of menu items
-      expo: Add forward declarations to scene_internal.h
-      expo: Support highlighting menu items
-      expo: Adjust expo_poll() to avoid looping forever
-      expo: Drop the render from expo_poll()
-      expo: Provide a way to position things relative to display
-      expo: Improve the visual appearance of the menu
-      expo: Update bootflow_menu_poll() to return a sequence ID
-      expo: Split setting up the menu from adding items
-      expo: Set up menu fully in bootflow_menu_start()
-      expo: Drop the special theme code for bootflow_menu
-
- boot/Makefile            |   2 +-
- boot/bootflow_internal.h |  11 ++-
- boot/bootflow_menu.c     | 382
-++++++++++++++++++++++++++++++++++++++++++++------------------------------------
- boot/cedit.c             | 163 +++++++++++++++++-----------------
- boot/expo.c              |  72 ++++++++++++++-
- boot/scene.c             | 477
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---------------------
- boot/scene_internal.h    |  71 +++++++++++++--
- boot/scene_menu.c        | 166 +++++++++++++++++++++++++----------
- boot/scene_textedit.c    |  61 +++++++++++++
- boot/scene_textline.c    |  47 +++++-----
- cmd/bootflow.c           |  43 ++++++---
- cmd/cedit.c              |   2 +
- doc/develop/expo.rst     |  34 ++++++++
- include/abuf.h           |  43 +++++++++
- include/bootflow.h       |  77 +++++++++++++---
- include/cedit.h          |  17 +++-
- include/expo.h           | 293
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
- lib/abuf.c               |  58 +++++++++++++
- lib/of_live.c            |   3 +-
- test/boot/bootflow.c     |   9 +-
- test/boot/cedit.c        | 217 +++++++++++++++++++++++++++++++++++++++++++++-
- test/boot/expo.c         | 214 ++++++++++++++++++++++++++++++++++++---------
- test/lib/abuf.c          | 105 ++++++++++++++++++++++
- 23 files changed, 2035 insertions(+), 532 deletions(-)
- create mode 100644 boot/scene_textedit.c
-
-Regards,
-Simon
+Otherwise, we will have to revert the patch.
