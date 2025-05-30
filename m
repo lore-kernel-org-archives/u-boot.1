@@ -4,81 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC800C3ABB2
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:47:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7481C5B549
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:48:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD1A8319F;
-	Fri, 30 May 2025 09:47:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 298B08312C;
+	Fri, 30 May 2025 09:48:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="suXWhqHD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n5hRVP/A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4655830D9; Fri, 30 May 2025 09:47:18 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id E86128319C; Fri, 30 May 2025 09:48:02 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB8278312C
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:47:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED658830EA
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:48:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-70df67e1b17so17206757b3.1
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:47:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso13817375e9.2
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:48:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748591235; x=1749196035; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ehgyfEbIuRe8Kg4MV1G7hkUcQEXr/1/96+v6YgoRz0A=;
- b=suXWhqHDljvgNKvs4EYaeDM6ozlea1vlA66EChF3jQwnSbeq1HKQBqTfXP7Lq12uAA
- 3J9ZOH5OIUM+zU2k8ZwdyQfclkbQcuoTT3lhs5yVojpbnA/lHGfc7gjb7WGyY4Y8xi00
- dotCj6FaOBGOn18QaGJ+ekGGmfCJ9Knd0QZEJUN5iVwdFWTAwseTRIiByXAmYuHxSpEB
- x9RXjAt/rYlOqGdEB6OJHcDhiBGCDAJpXrVDcka1kCrXLgXWmV2FPwQ4Nc0BeYbZXEQv
- gi7bcA9tUUVV1uiA8mNAHBY566hdNJIKnml1Hmgss58nQWJrn4Y6WSSm1b7rP4BVy84s
- L4qQ==
+ d=linaro.org; s=google; t=1748591280; x=1749196080; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=p7cM6c4TnpzNIVO+LSRx5tzBKbS2gnr0tegm+noAr54=;
+ b=n5hRVP/AcBP0Yy+BpSGzpgD12oIS0peV8eL959YS9y2sUaEykTHm4CrJsx5VXZxmVu
+ IG8qG+CikEY2FH7DjCcyJFLRi/YeokELOfURuYl7Dy/V80/7eB+b5yWxwQ5ukgMzT40c
+ 8sBzoVFHnU8OQJ+p1T+XruAh1RrgTIViQQw6t1YxsmE57I+/0jnGg2/0n9t7yB12K7fO
+ X1HUlghJFSA8KYCK50VlVf9p5M6iUKPYLt5VtctRoKYkER14mVGIUJXg7M+o1FYyx8wC
+ l5yprh2pLTVmkwfGB8zUgbXIu0lqmRlGLeEQ2tOGPmwwmsoUPb0OaEKqY4E9LaL5vZ6c
+ cEJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748591235; x=1749196035;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ehgyfEbIuRe8Kg4MV1G7hkUcQEXr/1/96+v6YgoRz0A=;
- b=WzqFHZvGOpN8YmUOZniB7+Mt6YgoVKWuDpmuDB3od0fDwzvkSKyfOWkKH3UpyEFvWk
- p/LpcxoNcLuALRuyXa48jGMHZmSWK+WIcGEsRnwSO8XhJ0fNi9mH//sMDTZICO20bGeK
- exuwTewTorWikQeLFPJ0oK0NRe9IBlLFmturwbvla/7ha0J1DtGSsfF3YU/RaRgmeTIY
- 3Bomye3WttA+syI7zdwUnpJ/TMK7atTSqi+QR9KeTyiFPL7WLSDEhN7dMlYdFxEOjdsl
- LJ+JwHp0+xJOhFcy1pibTNJjpfP0O1MqDdvd+UvJsvAh6F0kFRwjp/yM0aMN19W8TJJ7
- UHfw==
-X-Gm-Message-State: AOJu0YzJ9OYfGC/KmZHvie5YoVK9cM+Pew4nYISpKj82ZU/JJWgOD2or
- obQXisAELR4qck/Pywma+gyf4tuZn8Xjirb5DXxFkemCnNMQYQiYWk4YDB6UcbInftLcLzRHm6+
- BCGea7OmJjCmp8Dyzh2030tpwffMdQuOyHn6Oy8hFRQ==
-X-Gm-Gg: ASbGncsj0Co0FK31X8btUwyRZOuF1pjxneyxZSfbjVndgbQuI1xV1XxojTmgQMv0xLb
- j7T8dBcez0NsGQO5/1JaMhBylXPOcDlJOBMm9ABamAk4xqTYXwM2jVjb4WzMhbkXjpvrsvryHgu
- pByHIIO3NfXIGoZ/2bdXuMrz+tIOSpeMlnVw==
-X-Google-Smtp-Source: AGHT+IGEXIDzQcEdImauDIualR93svelqKDjq5At5sgmu5cXiiwJczsKtVYBCM6dN0YAeMaluB6f85WNlf6eKFgbOmc=
-X-Received: by 2002:a05:690c:6f07:b0:709:ad9e:e651 with SMTP id
- 00721157ae682-70f97fb72bamr37051497b3.27.1748591235638; Fri, 30 May 2025
- 00:47:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748591280; x=1749196080;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=p7cM6c4TnpzNIVO+LSRx5tzBKbS2gnr0tegm+noAr54=;
+ b=dBPFWlsYo49ynWSoAwgNGpVQS3WFvijLwqJJzpm62Nf4ro0I1wzAzJyVj8fp43O3Mc
+ wr2nzW/rroPAi26NSMAxtc8CGYWUOl2BlJW7zLU+HQEbISQYuaIzZkKgbMHpFMSKIN/s
+ E/8PKdZuL1VDORf25/q8Wlp9lYvgEVtdLVNWkkullF7FH/j4GAfVPVwSW69cmcRhJJgZ
+ ApTjUBb+5MwJedwf0R54Z6KMhDBnHNNGKoJVpMDcmRuquLJ77xWWqO+WLx2uNCFNpzG7
+ M75hi+3AdAxvM8Bk5G03J98bbaQoNT3ZlYOstAS0JzL5zaUmJYf/dfNpmDSMhKF2h21m
+ XKxw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlw1SMkeJ9bj9dg+kaWMqoTIzhG5V5usq3cO/ZsIKw1fKV2GCZbPzKOagM624Leo6zYyB/4fg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBCWUktjyjgi/3vtMKwuegcHyhBacjeOFLVUfubr0yhm53Ow50
+ yoNBpoz1c8Nx+4kV+68X+g/vlSv71i0teXPjxaBkOpgSe1WOm/dZJnGmu8Jm3VR3wh0=
+X-Gm-Gg: ASbGncvDOx2SEI0wFxxndXln3gk0J33UhYHhRUWWkfpkfr2J4Zry2nrmZW+O2ZHBtSk
+ 8qG/G1ZInNaMyebFeL+wE8PA3VLr2txQYlViK/CheoLk7rSr1+WalN0GxKko+lSZuPkfzKhZH1n
+ N42gNyQPbIUQ5dAh/7tQa7LNIIFQ9Og1sTsJHZckNpv1U9NsC7ywVRb94Pkd3nKctmWObkF445Q
+ lH08fclrZskSuFALWREb7CtMA4UeOPXGSPIvNQTZvAdgsddTsX5ZN+6ZGNAeI8u+jfSh7qSpjln
+ erXEwj6xqwCC6hqWrimDBFEhnbHDllOcuDXuBT8syeGIT8eMHUsfKGAYGJSHnTG3+OFhpuHw/lY
+ 6dzIakKOEFtJRkv3b0oVqmKOULzKALWzC5UbkQRWvmg==
+X-Google-Smtp-Source: AGHT+IFr6BfBizTF3LFJYFyj4Rf+h5cApFtSS6Tcv/LWsouXu8Rd1HDHsEZetA4u+MDAfgjUe8o7+g==
+X-Received: by 2002:a05:600c:5250:b0:43c:fd27:a216 with SMTP id
+ 5b1f17b1804b1-450d8875db2mr8672505e9.23.1748591280354; 
+ Fri, 30 May 2025 00:48:00 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4?
+ ([2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4f009748fsm4041701f8f.80.2025.05.30.00.47.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 30 May 2025 00:48:00 -0700 (PDT)
+Message-ID: <ae5f24b5-f339-46ce-8d25-9823c5cbe9e9@linaro.org>
+Date: Fri, 30 May 2025 09:47:59 +0200
 MIME-Version: 1.0
-References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
- <20250526091253.400802-3-sughosh.ganu@linaro.org>
-In-Reply-To: <20250526091253.400802-3-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 30 May 2025 10:46:38 +0300
-X-Gm-Features: AX0GCFsQ_UTYCpY4VY40LZ4avGXZwqwuId_P_KcdcwkzfPLCgfFYPrKzhn3IzPU
-Message-ID: <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
- API's
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] net: lwip: enable IP_FRAG and IP_REASSEMBLY
+To: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250529214910.984024-1-tharvey@gateworks.com>
+ <20250529214910.984024-2-tharvey@gateworks.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250529214910.984024-2-tharvey@gateworks.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,64 +107,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> +static phys_addr_t lmb_alloc(phys_size_t size)
-> +{
-> +       int ret;
-> +       phys_addr_t addr;
-> +
-> +       /* All memory regions allocated with a 2MiB alignment */
-> +       ret = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr, size, LMB_NONE);
-> +       if (ret)
-> +               return 0;
-> +
-> +       return addr;
-> +}
-> +
-
-I think we  need a better naming for these. Right now we have
-lmb_alloc() here and in tests, addr_alloc() in snapdragon code.
-I'd say either export them as API if you think they would be useful,
-or get rid of the wrappers.
-
-[...]
-
-> +static phys_addr_t lmb_alloc(phys_size_t size, ulong align)
-> +{
-> +       int err;
-> +       phys_addr_t addr;
-> +
-> +       err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, align, &addr, size, LMB_NONE);
-> +       if (err)
-> +               return 0;
 
 
-This tends to blow up in random ways. See
-commit 67be24906fe. TL;DR 0 is a valid address in some systems.
+On 5/29/25 23:49, Tim Harvey wrote:
+> Enable IP_FRAG and IP_REASSEMBLY to allow packets larger than MTU.
+> 
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+>  lib/lwip/u-boot/lwipopts.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+> index edac74ff7a21..1818a445dc5e 100644
+> --- a/lib/lwip/u-boot/lwipopts.h
+> +++ b/lib/lwip/u-boot/lwipopts.h
+> @@ -72,8 +72,8 @@
+>  
+>  #define IP_FORWARD                      0
+>  #define IP_OPTIONS_ALLOWED              1
+> -#define IP_REASSEMBLY                   0
+> -#define IP_FRAG                         0
+> +#define IP_REASSEMBLY                   1
+> +#define IP_FRAG                         1
+>  #define IP_REASS_MAXAGE                 3
+>  #define IP_REASS_MAX_PBUFS              4
+>  #define IP_FRAG_USES_STATIC_BUF         0
 
-> +
-> +       return addr;
-> +}
-> +
-> +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
-> +                                 phys_addr_t max_addr, u32 flags)
-> +{
-> +       int err;
-> +       phys_addr_t addr;
-> +
-> +       addr = max_addr;
-> +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
-> +       if (err)
-> +               return 0;
-> +
-> +       return addr;
-> +}
-> +
->  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
->
->  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
-> --
-> 2.34.1
->
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-Cheers
-/Ilias
+Thanks,
+-- 
+Jerome
