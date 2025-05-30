@@ -4,92 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32914C5B549
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:47:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC800C3ABB2
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 07:47:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7447D830EA;
-	Fri, 30 May 2025 09:47:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BAD1A8319F;
+	Fri, 30 May 2025 09:47:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="flMGrXPn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="suXWhqHD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1F848318F; Fri, 30 May 2025 09:47:17 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id D4655830D9; Fri, 30 May 2025 09:47:18 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCC59830D9
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:47:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB8278312C
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:47:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-442ea341570so11476695e9.1
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:47:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-70df67e1b17so17206757b3.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:47:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1748591235; x=1749196035; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Qcc/obqeArgDmsg7H32qm8bgtYgAH64jUaF78FmfDfU=;
- b=flMGrXPnaHp0P12LoaNWMgG/qbdB5gSfVj9Bo0/3dFqIRGL/wWhoulwbH0vEdhO0Pc
- OiETfBjtJ1mjvuhbMoNCfkxOjoQ7NzpaTDPQHW4VFPhF3ief5YiFzHaYm2Q7A2jEdOQX
- TvM2hEMKpryM/Dmyi8No6ZL3D5CLiLPp6LpGt61l95fLAop287PooJ0eSP1aR/c4Nh/H
- S2zV+DdHy086PSEFtiBLUQBUPm6x5yNrve/outGyJiAQi+5m2ArllL75YbJn+SgWHcfp
- q8jFGikZ4Wp7tTluDOP2vX7tpPM8kE5kb6NMXwEpdTCG/pfD1sDI0QFz6mERK/piyDpY
- ipgg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ehgyfEbIuRe8Kg4MV1G7hkUcQEXr/1/96+v6YgoRz0A=;
+ b=suXWhqHDljvgNKvs4EYaeDM6ozlea1vlA66EChF3jQwnSbeq1HKQBqTfXP7Lq12uAA
+ 3J9ZOH5OIUM+zU2k8ZwdyQfclkbQcuoTT3lhs5yVojpbnA/lHGfc7gjb7WGyY4Y8xi00
+ dotCj6FaOBGOn18QaGJ+ekGGmfCJ9Knd0QZEJUN5iVwdFWTAwseTRIiByXAmYuHxSpEB
+ x9RXjAt/rYlOqGdEB6OJHcDhiBGCDAJpXrVDcka1kCrXLgXWmV2FPwQ4Nc0BeYbZXEQv
+ gi7bcA9tUUVV1uiA8mNAHBY566hdNJIKnml1Hmgss58nQWJrn4Y6WSSm1b7rP4BVy84s
+ L4qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1748591235; x=1749196035;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Qcc/obqeArgDmsg7H32qm8bgtYgAH64jUaF78FmfDfU=;
- b=kQwPHo6dVOW8DB8233rVRUVNCdZ9un7G9oIDEPghSN+5t9Tfi3hZfMWHWyQdkb5eQj
- DFho+WSYH0jDgbtzbBDzR35HMOt/eWN1lJo/Mm2g8/Bh0lzaXmQLlDGUibDFh1WSIjKc
- PMYI2hKCraWEskfxthbXBlrNLugY1M/M631H5Pci0x5D7srzBx7yOOA8i3qGYNf0ecur
- nNV+p50dvn8tA2THpRac+0tDn7m12Lu1faX9oH3EyBqsrGYigKZRJJp336MaVBW67oHO
- En5w+HwluIw4BUODPe6vlevJ25uHmY8p8P+979fcrwhoCJaypFE8/yNFRmeyZFiO1i99
- KSrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXkltWjaMy11UrVD7UDqupVy2sJzZVEZxtAwE6QfOSMRBa+5SRcnrTYre7dqK4LkTZWxxRBGXI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyh3JVL+mPuVAjWIHceFhUKjeMVywihQ9BF/XFL0NmaAuGZzPOV
- +eJGQLykGDX/2oMqd3gw7tQarwng22HUkN4PozJ6vixkE0e2z7YPMYWAxVg6+e9COOw=
-X-Gm-Gg: ASbGncsDLZ1XIqp4yliT+Kf+VbR04k6dLj1drWSKgpL8xDUVIfgDrDveDbtlobFbH9I
- xh/qIPQP/YWBoD+ELbnA0ripLvouks/mogvh1KjhYtF/X+i1o4ecdb/dZkeCud4ZfghGpwQbrkD
- o7XIQiGCn0qOQRbTdxOSBFGxbUkyE/HdHUSKMfbydCtUfkVYm5aXafcx7TAwHki58riz6eH1jMF
- IiYF/Q2Hnq93/dWqtXPQTeHqMzYYjR+kc3uGxVZluL8KHFUSjrEODLhuUA+UxoSv1/fKKtNeNJp
- xWzqeZwmMr1uzCxbM07sFM9wTkUnnZYTOh/Dus4lwwiDJZWGnDRANamTTrL+0BtGrZZtsGfymAe
- IpAwSH4/3A77sImhH8BNM2neDGU4gxyw=
-X-Google-Smtp-Source: AGHT+IG+4ejC6BFcLEz8qclSmwf79OC49S3lJaT00TmRRPmOudHtXvGC3a9w8nG2uo0rq/JR3wW7Bg==
-X-Received: by 2002:a05:6000:40c7:b0:3a4:ead4:5ea4 with SMTP id
- ffacd0b85a97d-3a4f89ab616mr991703f8f.24.1748591235286; 
- Fri, 30 May 2025 00:47:15 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4?
- ([2a01:e0a:3cb:7bb0:7f33:7a3a:e910:a0c4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4f00a13fasm4097170f8f.98.2025.05.30.00.47.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 May 2025 00:47:14 -0700 (PDT)
-Message-ID: <e9f4cad1-81f1-4cd6-8689-a343635fe9cc@linaro.org>
-Date: Fri, 30 May 2025 09:47:14 +0200
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ehgyfEbIuRe8Kg4MV1G7hkUcQEXr/1/96+v6YgoRz0A=;
+ b=WzqFHZvGOpN8YmUOZniB7+Mt6YgoVKWuDpmuDB3od0fDwzvkSKyfOWkKH3UpyEFvWk
+ p/LpcxoNcLuALRuyXa48jGMHZmSWK+WIcGEsRnwSO8XhJ0fNi9mH//sMDTZICO20bGeK
+ exuwTewTorWikQeLFPJ0oK0NRe9IBlLFmturwbvla/7ha0J1DtGSsfF3YU/RaRgmeTIY
+ 3Bomye3WttA+syI7zdwUnpJ/TMK7atTSqi+QR9KeTyiFPL7WLSDEhN7dMlYdFxEOjdsl
+ LJ+JwHp0+xJOhFcy1pibTNJjpfP0O1MqDdvd+UvJsvAh6F0kFRwjp/yM0aMN19W8TJJ7
+ UHfw==
+X-Gm-Message-State: AOJu0YzJ9OYfGC/KmZHvie5YoVK9cM+Pew4nYISpKj82ZU/JJWgOD2or
+ obQXisAELR4qck/Pywma+gyf4tuZn8Xjirb5DXxFkemCnNMQYQiYWk4YDB6UcbInftLcLzRHm6+
+ BCGea7OmJjCmp8Dyzh2030tpwffMdQuOyHn6Oy8hFRQ==
+X-Gm-Gg: ASbGncsj0Co0FK31X8btUwyRZOuF1pjxneyxZSfbjVndgbQuI1xV1XxojTmgQMv0xLb
+ j7T8dBcez0NsGQO5/1JaMhBylXPOcDlJOBMm9ABamAk4xqTYXwM2jVjb4WzMhbkXjpvrsvryHgu
+ pByHIIO3NfXIGoZ/2bdXuMrz+tIOSpeMlnVw==
+X-Google-Smtp-Source: AGHT+IGEXIDzQcEdImauDIualR93svelqKDjq5At5sgmu5cXiiwJczsKtVYBCM6dN0YAeMaluB6f85WNlf6eKFgbOmc=
+X-Received: by 2002:a05:690c:6f07:b0:709:ad9e:e651 with SMTP id
+ 00721157ae682-70f97fb72bamr37051497b3.27.1748591235638; Fri, 30 May 2025
+ 00:47:15 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] net: lwip: call sys_check_timeouts and schedule on rx
-To: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250529214910.984024-1-tharvey@gateworks.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250529214910.984024-1-tharvey@gateworks.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
+ <20250526091253.400802-3-sughosh.ganu@linaro.org>
+In-Reply-To: <20250526091253.400802-3-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 30 May 2025 10:46:38 +0300
+X-Gm-Features: AX0GCFsQ_UTYCpY4VY40LZ4avGXZwqwuId_P_KcdcwkzfPLCgfFYPrKzhn3IzPU
+Message-ID: <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
+Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
+ API's
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,53 +95,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
-
-On 5/29/25 23:49, Tim Harvey wrote:
-> Call sys_check_timeouts to service lwIP timers and schedule to service
-> U-Boot tasks and actions during packet rx.
-> 
-> This resolves the issue of an active watchdog resetting the board on
-> long network activities.
-> 
-> Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> ---
->  net/lwip/net-lwip.c | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> index f05c4cd3f64f..e8d4cc542ed8 100644
-> --- a/net/lwip/net-lwip.c
-> +++ b/net/lwip/net-lwip.c
-> @@ -13,8 +13,10 @@
->  #include <lwip/etharp.h>
->  #include <lwip/init.h>
->  #include <lwip/prot/etharp.h>
-> +#include <lwip/timeouts.h>
->  #include <net.h>
->  #include <timer.h>
-> +#include <u-boot/schedule.h>
->  
->  /* xx:xx:xx:xx:xx:xx\0 */
->  #define MAC_ADDR_STRLEN 18
-> @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
->  	int len;
->  	int i;
->  
-> +	/* lwIP timers */
-> +	sys_check_timeouts();
-> +	/* Other tasks and actions */
-> +	schedule();
+> +static phys_addr_t lmb_alloc(phys_size_t size)
+> +{
+> +       int ret;
+> +       phys_addr_t addr;
 > +
->  	if (!eth_is_active(udev))
->  		return -EINVAL;
->  
+> +       /* All memory regions allocated with a 2MiB alignment */
+> +       ret = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr, size, LMB_NONE);
+> +       if (ret)
+> +               return 0;
+> +
+> +       return addr;
+> +}
+> +
 
-With that, there is no need for calling sys_check_timeouts() in the
-callers of net_lwip_rx(). Please simplify the dhcp/dns/ping/tftp/wget
-loops.
+I think we  need a better naming for these. Right now we have
+lmb_alloc() here and in tests, addr_alloc() in snapdragon code.
+I'd say either export them as API if you think they would be useful,
+or get rid of the wrappers.
 
-Thanks, 		
--- 
-Jerome
+[...]
+
+> +static phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+> +{
+> +       int err;
+> +       phys_addr_t addr;
+> +
+> +       err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, align, &addr, size, LMB_NONE);
+> +       if (err)
+> +               return 0;
+
+
+This tends to blow up in random ways. See
+commit 67be24906fe. TL;DR 0 is a valid address in some systems.
+
+> +
+> +       return addr;
+> +}
+> +
+> +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
+> +                                 phys_addr_t max_addr, u32 flags)
+> +{
+> +       int err;
+> +       phys_addr_t addr;
+> +
+> +       addr = max_addr;
+> +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
+> +       if (err)
+> +               return 0;
+> +
+> +       return addr;
+> +}
+> +
+>  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
+>
+>  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
+> --
+> 2.34.1
+>
+
+Cheers
+/Ilias
