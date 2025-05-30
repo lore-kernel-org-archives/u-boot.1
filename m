@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91179C5AD49
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42CADC5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:22:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B07A683303;
-	Fri, 30 May 2025 17:17:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id BAFB78323A;
+	Fri, 30 May 2025 17:22:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QUummnCz";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="NIlrJpNw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFCBE83291; Fri, 30 May 2025 17:17:08 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 91CA88323A; Fri, 30 May 2025 17:22:26 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DA098331B
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:17:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id F3AC382CB6
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:22:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ad857db4f52so275812966b.3
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 08:17:06 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-708d90aa8f9so20749457b3.3
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 08:22:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1748618225; x=1749223025;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1748618543; x=1749223343; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0N85FxVBxmedtGwBQrtiL6p2XFcDCxFvfeLydJZAri4=;
- b=QUummnCzVFVndjX1RqZ+fTa9bIYqxO/fFzMLCmYGlN0Bjk9oqFe2VO0M4n9TbYzqah
- Jn0RUTOmpMOADbXXUTOi2UIrFQYXBbhV6ExIfirsIJHuJGr5h/olonmRqXoRMlbcBrwd
- IZ6c0rvnV2YAKX6IeAvLNNv/AqUS31GZSVsfk=
+ bh=eVNND72ylskTzxN7xzuzx1l9EaZCstG0vawsFPWIN9E=;
+ b=NIlrJpNwTPuWlZSPErgMwf5yN8k0U+9kd0ZldVKQTeRCm3KvuOcmKENXc4rz5bzJRg
+ ldqXS388vyFi1Blogvhn3zU/1/n7Ntfx22PZ7afAv0r9Ir+55TAKSDnJOkCN8/bK6U92
+ 1BsfLHgsImRcNoY+RbjdmKBQox3IB/XxKRTFfHTn5j2KDwLlk5rAcAdTlIFFz5LNaq9B
+ mKSU8Hx5a0/LEFRqZZYWlqt4UAvQf6oLKRpn/4LIyCCpmU1LDfwM9kHNbEU1UGfNSUuV
+ 7Qr2pPym9EIXjxqP8EytD8ygRZvLfDmarBub+yTudUjyEwK6v1R4539h+yeoAF1XH9VI
+ IjKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748618225; x=1749223025;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1748618543; x=1749223343;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0N85FxVBxmedtGwBQrtiL6p2XFcDCxFvfeLydJZAri4=;
- b=jErIbEgN2uzNraWXmYLmEHHenIQKWAGmNTO03XzM5oBDj5h02I8vWBM/C3EGQAIs16
- RBcB7512ca16inUZgYDFzV4oQ/GWoNekT6DwTMXwf5Erd1uNvrCWD1doalsfWmiY4agE
- h+m/9Dn9cFquBtJM8E30sKQmPtdN1vRe0dLym9VTKof5pTs/g+cHB4qPJsRbnmnnRV8v
- u56TvkWQ4qm58LVhDFHJ+CpzQV8iVpi5wTKL2KPdOogZUj5k+K4j0QBI3RmwlQwkG1e1
- u+8J3kpK+vxJ0lNnFSMGVetUBUziFJ0WEVg4P4rx0nkcGC0Er9wk3jLSkXLNkWaSG6sl
- gWJg==
-X-Gm-Message-State: AOJu0YxcY8axQ6BvJ29A7BCqrn7mNfx0axAgoY9GIdG4VvM7WSTl4DZG
- dDBbeO6iEbeh1sv/6ICN8CRNbECJEsYOwKq8o8uwhZKQviy4k0myBdYF7h594oWJcupwtPW3GcI
- v627knok=
-X-Gm-Gg: ASbGncsgfBDjip6cCt6ceCSO+aRznaPSKEDjMEZ4ssmRJOb2ilxJ0ABhWSoB/ccn1gp
- Vuiv3HaEURp8wtdbIdTdIMFFfqrKq+9Fww4nmITOniD6qsc2yC9icdvCKPBRbMBklPsbymLF5Hq
- +XaJbEzhdDxNj6o0jSSopDn2+1pxZQkjoguYyS3pYRauOkSwoBVoJFdCiJKmYPvqxaVHcmLMXvC
- 46ORPKSjiye6ONVjgroLXxPTdoWmAX/sAs5RojJAhomNlsVgIgNfj4Z8EkmROdYZsbhnyRoi6LK
- tkuG6PTSZe5SbzDxu2Y+PH1OIqRVem/k40mFdEYsMNj6eZsHmaZMXVnmLw15u9/47DaJJhGWKhl
- ZKdDnPW265ZRVwJiDir8p4kV6hxjwMJuaMu4=
-X-Google-Smtp-Source: AGHT+IGbZrMMXZDry5fuID7BYs53JpDCpgjOy514qHOlc+yvdY58bmpJkBW9sAcZigs92MF7Vr5Y9A==
-X-Received: by 2002:a17:907:2cc4:b0:ad5:430b:9013 with SMTP id
- a640c23a62f3a-adb36c0b29fmr255354366b.42.1748618225282; 
- Fri, 30 May 2025 08:17:05 -0700 (PDT)
-Received: from panicking.. (mob-176-245-161-96.net.vodafone.it.
- [176.245.161.96]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ada5d82dd12sm345507966b.58.2025.05.30.08.17.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 08:17:04 -0700 (PDT)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com, cniedermaier@dh-electronics.com,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 4/4] configs/imx6ulz_smm_m2_defconfig: Enable clock
- framework
-Date: Fri, 30 May 2025 17:16:46 +0200
-Message-ID: <20250530151653.3695020-4-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250530151653.3695020-1-michael@amarulasolutions.com>
-References: <20250530151653.3695020-1-michael@amarulasolutions.com>
+ bh=eVNND72ylskTzxN7xzuzx1l9EaZCstG0vawsFPWIN9E=;
+ b=fl0owts8J6TEEY0XeOZAbB+0xmFST4r86L1QI0zDX0EPCSa1XKCRyEbteSzQGQcgz0
+ Wp0Wv5G4Cq5pewjkMr/uNR+4bAJ8+uNQmJvMz/DeM3ygeDc71sEYZn7sv6qEz6EIC+VD
+ s2wppaJSmMUO6upkYI10bXcKdyYMl+KHcdwrzi3YU/r8nA6GifBJaRyE1E+tLk2Wjbie
+ QfldC+jTfL8I7zd3gd69xnh9wGMFiZ/j8fEwKi/nw3Sj9OKDya9L50BMiqx18cKguj4I
+ Dbg0UPvhulUnBRA66EPsnnWCvTy1XI7JIoQGdBFYtxM7FA7OCrqM1Qricv8kioV6v9S5
+ MRrA==
+X-Gm-Message-State: AOJu0Yy146EQ8FwjMyBr6PtOsZTT/w/QBKey+e50uIUeQw4QpuiHzQnJ
+ 5b89QtCtOljkjHktkt2bjLvBMpT0sV3X9caNZ75SLdt57X/AX6Xqc04qaGZIsbBCUwbv9BIzwU6
+ DS/7XCvAqJ7Xknmkbpl5sIue0E7Eatjn7tZFfvAMrbw==
+X-Gm-Gg: ASbGncvJxLiv2iKFYJegoU7UCzmML+eV4D/GVF9drf0gM1LcNj9y1FNrGQNtRI8/uPx
+ qYGK0PA615VfUama149SDKnxy3VHPd3cGZWXmoGQPdCpjwgXIlIyHUcclRoILj4pH+KiIo1X/Fg
+ yV7sqx8xLPguw/sEOW1sz0Y3NPl6W8cBWf
+X-Google-Smtp-Source: AGHT+IGk5/s+fLNKGajJiZ3oJCtH6YbTOCeND4MVMutnBN4OrG0+Yprk8efYO4AnFbwgr7DPraxoli90rxMYEm2nDDw=
+X-Received: by 2002:a05:690c:ed4:b0:70d:f47a:7e3f with SMTP id
+ 00721157ae682-70f97ea6787mr56780867b3.20.1748618542652; Fri, 30 May 2025
+ 08:22:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250529214910.984024-1-tharvey@gateworks.com>
+ <20250529214910.984024-6-tharvey@gateworks.com>
+ <b19493e1-b79a-494c-a150-300969eaee5d@linaro.org>
+In-Reply-To: <b19493e1-b79a-494c-a150-300969eaee5d@linaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 30 May 2025 08:22:10 -0700
+X-Gm-Features: AX0GCFtQVWozE__rRoqM505JI8kLOc-djCNkWmp1KWPjU6crpVbPvgmIq0JTcPQ
+Message-ID: <CAJ+vNU2j7yniHBoZ942KNJSLHhN=P4ahkmaKa+KJ8Og1fTqomw@mail.gmail.com>
+Subject: Re: [PATCH 6/6] net: lwip: wget: use loadaddr env var for default
+ address
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,40 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the clock framework on the m2 platform.
-This helps to increase the NAND controller performance.
+On Fri, May 30, 2025 at 1:03=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+>
+>
+> On 5/29/25 23:49, Tim Harvey wrote:
+> > The loadAddress is optional and defaults to image_load_address
+> > which should be initialized to the 'loadaddr' env variable like the
+> > legacy stack (CONFIG_NET) does.
+> >
+> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > ---
+> >  net/lwip/wget.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> > index 76401991bde6..ff8dbdc08d9b 100644
+> > --- a/net/lwip/wget.c
+> > +++ b/net/lwip/wget.c
+> > @@ -579,7 +579,7 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int ar=
+gc, char * const argv[])
+> >                       return CMD_RET_USAGE;
+> >               url =3D argv[2];
+> >       } else {
+> > -             dst_addr =3D image_load_addr;
+> > +             dst_addr =3D env_get_ulong("loadaddr", 16, image_load_add=
+r);
+> >               url =3D argv[1];
+> >       }
+> >
+>
+> image_load_addr is initialized in initr_env() (common/board_r.c) so this
+> should not be necessary.
+>
 
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+Hi Jerome,
 
----
+You are correct - not sure how I missed this. I'll drop it from v2.
 
-Changes in v4:
-- None
+Thanks,
 
-Changes in v3:
-- None
-
-Changes in v2:
-- Ajust commit message
-- drop CONFIG_DM_MTD selected already by MXS_NAND_DT
-
- configs/imx6ulz_smm_m2_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/imx6ulz_smm_m2_defconfig b/configs/imx6ulz_smm_m2_defconfig
-index 436bfb78cc2..6e425d6e52d 100644
---- a/configs/imx6ulz_smm_m2_defconfig
-+++ b/configs/imx6ulz_smm_m2_defconfig
-@@ -43,6 +43,8 @@ CONFIG_ENV_IS_IN_NAND=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NO_NET=y
- CONFIG_BOUNCE_BUFFER=y
-+CONFIG_CLK_COMPOSITE_CCF=y
-+CONFIG_CLK_IMX6UL=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0x82000000
- CONFIG_FASTBOOT_FLASH=y
--- 
-2.43.0
-
-base-commit: df2ed552f0b05591090369a7fe7ddc92439dea5c
+Tim
