@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 829EAC5AD49
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 14:14:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36092C5B543
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 14:45:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF65A82B70;
-	Fri, 30 May 2025 16:14:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 89A5D82B7E;
+	Fri, 30 May 2025 16:45:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L1pXbST8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JxGQ6dH4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D844A82B97; Fri, 30 May 2025 16:14:07 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id BD6A482C03; Fri, 30 May 2025 16:45:15 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A52D782B5B
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 16:14:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 868488277D
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 16:45:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-476977848c4so22708861cf.1
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 07:14:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-60634f82d1aso642994eaf.3
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 07:45:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748614444; x=1749219244; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jbBk605LBpO2MVpcEITJYH6Erm2Ghk4/ILepjslkfMU=;
- b=L1pXbST8EwHpI4hD56YKav0CTxYKDLGq0zGK7eCe9iN+m2+jISy3ZlpbotCmqA42qF
- RvWa3UlrNWxwxvxsHB7EuFNsTzZMY4fw+3JmXmN6q8UUM3E6tqzJuWt2VKyxEBS+HzMc
- wSjEgOz/r8O7qhHjITnA8Wqe+0USJRDTcYKzhOzIUcQCf1aQae3uBI36CENAqz4WbSar
- 6Xq0pVe/8SBgbZqNVQBPJlUS71AxPXG3mgCHKbo5ggHFmgsBL5dyo/CtknVZp8BojAOC
- +gtAwZuABnnqboaVc7ZvuvKNhXaDt29t+rZPkFiraeBNQOOElxtjo82NKuwI8Hwvb5c7
- brMw==
+ d=konsulko.com; s=google; t=1748616312; x=1749221112; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uP7htRpcBt3rFMqCXwuazYXoO0mI8kW6kupbYDbjYog=;
+ b=JxGQ6dH40li9WTMNezodz5UOAnmmYg6SYISxY9Gg6zwfU9o9pzf2/Lg/aEaSCxAEQr
+ aVXHosGJ7GtMIW4dvHVEo8A4R35pJaj6RhK4vyxUi/Eq11GCOEj+yhNfaexWuuavO/e2
+ 4fNyDiElCStA+7hnQYtNrphFDG+TLl14QHyok=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748614444; x=1749219244;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jbBk605LBpO2MVpcEITJYH6Erm2Ghk4/ILepjslkfMU=;
- b=gkjiGNrO72N0zvT+95CKiknsicC6Yr7q1IH5iUfiUnug/Lg2XwYT5nO0n1oA7b4frF
- S1+EgvMjLeAc4dT7yZrzpBKYTEO4fc2AzengMGzyYpmyRAzzxYXGNoUeXjGWZ0nRuk8Z
- vPVRvMoSol6GulpizlDC9SgR10tOxR9OWQRjPvUCH/9Mfe0P/MyAd/AzK3F+N0G8DB44
- FHS+okLSehMqNtpSe37O/j8ByejK37VH7m3cNqqnaEXam7OOpE557BylF9MBfR8U/WyS
- zrg+LD/UxJSFXzfTMbLReI8Hmkw1tRe1BPa6h4Hwv62QPju8D6D7VmdbexN+zaTw7Xls
- fuUA==
-X-Gm-Message-State: AOJu0YyxC9IycHowx6cHuAjHbNmSC3RLmfXNoQWE+CGs/fpUM+FB8vqk
- tyxEn8E8WykqpLZQxg4jQgLZOFCICOp3iPqiggGFgFfkL+9z0WbJ8E62lciYmq784PYwNGnKq3C
- WDzJxnp3IohHvlZ3Pq+FBgVv1SZN8y8EWmSmI7spXUTHpkifVFYc8kMw=
-X-Gm-Gg: ASbGncuRbf/o42kNJObp1NyGiaFLzMJaPEuuuiiUR1z89RSN614qrXEv7zEYZfKD8NR
- uM4K1MlPrZOzn74rhbvkUrAwxhCUlr4YH3UYWk925fSPZpZ1HITl8SUs92sT5kgmKjaHKxcexQk
- hfHiCEH97TJ7dM5XvVDV+c9WylVuX2/xpOOvNeGszC/FPR
-X-Google-Smtp-Source: AGHT+IG4oGFjWwie4fQO0N0X2lNPOAzNT/UGRfimEPhMcf+2v/wgIU6yg06Dqps7Dmri+94J1IIyZtdA6QYaS8OU6kI=
-X-Received: by 2002:a05:690c:6813:b0:70f:8883:eb1a with SMTP id
- 00721157ae682-70f97e2eae1mr54826567b3.6.1748614433844; Fri, 30 May 2025
- 07:13:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250527210436.1488428-1-raymond.mao@linaro.org>
-In-Reply-To: <20250527210436.1488428-1-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 30 May 2025 17:13:18 +0300
-X-Gm-Features: AX0GCFv_UfMZjEhfhcv1wAhzKdt7983Sbt-Tw0cIJOmoXNDlqi4ivc3Fxo3SEFE
-Message-ID: <CAC_iWj+rSHWdhXk9rP_Y7SQxM1a3UbtQGJ0a=Zza0wMndYR6zg@mail.gmail.com>
-Subject: Re: [PATCH] armv8: fix Clang warning on writing 32-bit variable to a
- 64-bit register
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ d=1e100.net; s=20230601; t=1748616312; x=1749221112;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uP7htRpcBt3rFMqCXwuazYXoO0mI8kW6kupbYDbjYog=;
+ b=GI2XxT8a1LQ5/lkTjscgv97NMbR3EReH/C+BRdQ9UC9aFjkFfzX9NeTKJxVd+Q0A6k
+ /sZ5HwYGv2/QuK1hxv/J8cA+1PL1kZYL577jQQ7D4zzXaPw7Bz2BQZwqBkHK5wnQjXjd
+ IFJ156KRCdetVqfsY4Ht/krSkDkV9bm0Bw7R7bbV7KD7f3R7ueficw1V63yk/ky40yqx
+ kEl0fq1zss0JrGfcJX7928E6EIvKqJW0sp/PsfmXCOutE9erjrbBCpFRQiwpD4hSlGwl
+ z+VANCq3LyPnqx0POqSo3eBysV8Op/r1nICTkUXHqTU7qgx0MpGM3EQyTs9Lh2AYS2Jy
+ PMAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5ZHUFJnT/H6gIPRmmdXTImbE8BJSqJsE+YO2Lg6rrYOZ7mKasqTkxpeDERQwUJoM+ItmmBuI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWwW4wY617sbGus9Sm1XGRY2mp7YAgZT9+SvLiMFkruXDsDvYo
+ jQaZWEABfaswCBt0KIM6WgZezTTRGlU4QsaBJInxu453YfmEdKKGHQ9LUXeFPIBoL/g=
+X-Gm-Gg: ASbGncsRULYoGJEfKv7SvoyvmV04hwElSKjypKZBOH7EGTvnPLJbZaDEmk7RGN7vTxm
+ 4EM2EYPFGYM5mWFgOElubC/D/OsWy/E782pzM3xEhs2fzYyHflZSvwKpnys+nKK/3ew8Ige/9f7
+ 7IqAgqbTR4QD4nE05A8+8G1OU7VqP0AdEX7N3D5fCvGHfUgsNAzl007JsP2dOg9N1FeQpm6IyWb
+ eqCUMCZkroY/u0EpXL/M5vYexAbzxqYfRxsGVnpdSjZmpBl5tvZ5v0o5z44aNo3fi0/2hwRlxvZ
+ 6dQINBokeiko+JG4EAfEHJLohjAmpeIPhnqZ9rS91u41N74AniXTXJ9+tpZlb/2+RTvTBkm+7hF
+ PjC8kJ9aoB+Y=
+X-Google-Smtp-Source: AGHT+IF7hWLTyFMd98BYi15iS9INIz90g6v0LYzKw5ldNGboLyouNX5j1Z1hZcsjlkKREqfjwNsZag==
+X-Received: by 2002:a4a:ee86:0:b0:605:f34d:7e00 with SMTP id
+ 006d021491bc7-60c4d755a17mr2443409eaf.7.1748616312196; 
+ Fri, 30 May 2025 07:45:12 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-60c1eb9c13fsm389899eaf.35.2025.05.30.07.45.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 May 2025 07:45:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Peter Robinson <pbrobinson@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Michal Simek <michal.simek@amd.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Prasad Kummari <prasad.kummari@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+ Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+In-Reply-To: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
+References: <20250520052153.307194-1-ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 00/24] Update kbuild
+Message-Id: <174861631032.4033567.15353362577510384054.b4-ty@konsulko.com>
+Date: Fri, 30 May 2025 08:45:10 -0600
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +104,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 May 2025 at 00:04, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Clang is stricter than GCC when it comes to inline assembly and expects the
-> register to be written with explicitly same type of variable.
->
-> Fixes: c0e1775a867c ("armv8: Add arch-specific sysinfo platform driver")
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  arch/arm/cpu/armv8/sysinfo.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/cpu/armv8/sysinfo.c b/arch/arm/cpu/armv8/sysinfo.c
-> index 850142da37d..ff0abee4c6b 100644
-> --- a/arch/arm/cpu/armv8/sysinfo.c
-> +++ b/arch/arm/cpu/armv8/sysinfo.c
-> @@ -134,7 +134,7 @@ int sysinfo_get_cache_info(u8 level, struct cache_info *cinfo)
->
->         /* Select cache level */
->         csselr_el1 = (level << 1);
-> -       asm volatile("msr csselr_el1, %0" : : "r" (csselr_el1));
-> +       asm volatile("msr csselr_el1, %0" : : "r" ((u64)csselr_el1));
->
->         /* Read CCSIDR_EL1 */
->         asm volatile("mrs %0, ccsidr_el1" : "=r" (creg.data));
-> --
-> 2.25.1
->
+On Tue, 20 May 2025 08:21:11 +0300, Ilias Apalodimas wrote:
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Last time the kbuild scripts were synced with the Linux kernel was on the
+> 4.20 release. Updating directly to 6.x makes the diff difficult to read, so
+> let's do the changes incrementally and bump to 5.1 first.
+> 
+> Since the number of comits is bug, I am splitting this in multiple series.
+> This one includes most of the commits for Makefile.build,
+> Makefile.lib and some from Makefile.
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+[01/24] kbuild: de-duplicate fixdep usage
+        commit: afba83ad89d5b17fc49f47df3a8c031a23815d1a
+[02/24] kbuild: disable dtc simple_bus_reg warnings by default
+        commit: 31811fbb6b164ad7be63cb34146a63334b3689b8
+[03/24] kbuild: Enable dtc graph_port warning by default
+        commit: 1ecfa813bb2d8793e80f55278fea293e2329353b
+[04/24] kbuild: remove redundant 'set -e' from filechk_offsets
+        commit: 14795eba8bb3e138314d10313e95cc0862f98736
+[05/24] kbuild: remove redundant target cleaning on failure
+        commit: cfccf25100c26cb98d537106f0756363cb0647c6
+[06/24] kbuild: skip 'addtree' and 'flags' magic for external module build
+        commit: 3d21332c2f3e299836fc55d69887aa88168ac567
+[07/24] kbuild: simplify rules of data compression with size appending
+        commit: 39160c5fbf7b724b4113a8918b9fa3790d080a5c
+[08/24] kbuild: add real-prereqs shorthand for $(filter-out FORCE, $^)
+        commit: a73c41c398a1cbbe9aa7ffb644729e6cf7595845
+[09/24] kbuild: remove unnecessary in-subshell execution
+        commit: 603a4ade16069851b6005591426e36edd9c465cc
+[10/24] kbuild: move archive command to scripts/Makefile.lib
+        commit: 47a4770c7a2f6dab7ada9ba77b12bd41939db551
+[11/24] kbuild: let fixdep directly write to .*.cmd files
+        commit: cc571e29a8ecbba909cbb04ba062db026f70ae8b
+[12/24] kbuild: remove redundant 'set -e' from sub_cmd_record_mcount
+        commit: 2c180949ec3e924020edbff00884f206e120b028
+[13/24] kbuild: refactor modversions build rules
+        commit: 3679f24373d609b59e6434afb5253fd8c7af730a
+[14/24] kbuild: change if_changed_rule for multi-line recipe
+        commit: daf8f5af4c9e542ac75b2ddf7f2831b73833b49d
+[15/24] kbuild: remove trailing semicolon from cmd_* passed to if_changed_rule
+        commit: 82f75d890d7af1cecd30e6e9f675889b915e68ed
+[16/24] kbuild: remove redundant 'set -e' from cmd_* defines
+        commit: 919bd66ca8c966a30448d8befc7b59d58ba8d22d
+[17/24] kbuild: remove redundant quiet_modtag for $(obj-m)
+        commit: 47b6ab973728bd99247c1bc31d9608304417dd9b
+[18/24] kbuild: refactor quiet_modtag
+        commit: 88067ffc0c6f8c4f5142a1f8d08a206f3ed49083
+[19/24] kbuild: generate modules.order only when CONFIG_MODULES=y
+        commit: 1a59e6d3ba8a2f63a27a1e69286affd0bdc66dbf
+[20/24] kbuild: hardcode genksyms path and remove GENKSYMS variable
+        commit: bb08767f12795ba72a93948aa2b5477ad548c511
+[21/24] kbuild: strip whitespace in cmd_record_mcount findstring
+        commit: 25ab30f1c46efc8d2c11b01013449c09815a3f65
+[22/24] kbuild: remove unused archmrproper
+        commit: 0719c79e09de41aaba0ee5d86dcd578828d4aad3
+[23/24] kbuild: make -r/-R effective in top Makefile for old Make versions
+        commit: af1a9935708a30614e3dbf4a33e5fe90e846f598
+[24/24] kbuild: add -Werror=strict-prototypes flag unconditionally
+        commit: 0128b2cf4da8bd69c695d56743a666faf159d2d5
+-- 
+Tom
+
+
