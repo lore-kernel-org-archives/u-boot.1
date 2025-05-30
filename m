@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BB4C5AD49
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 15:49:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF60C5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 16:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF13282CB6;
-	Fri, 30 May 2025 17:49:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id A0F368334D;
+	Fri, 30 May 2025 18:59:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="XLS8stCN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F2ndKaXq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C34A78334D; Fri, 30 May 2025 17:49:36 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id C3231833AD; Fri, 30 May 2025 18:59:15 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8607D82B0F
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 17:49:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F8E983303
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 18:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e7dc5f8148bso3186497276.0
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 08:49:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-735b9d558f9so513890a34.2
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 09:59:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1748620173; x=1749224973; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2NT0CxEh38T/gkl1ANZuoBZ0VM7efgk4Mlv8Dw/PcN8=;
- b=XLS8stCN/hOlMI/3fku9o6DsLMwSiieKIlIfiR9osGHSeiROXtu0IQqNWZb2QY9fXl
- fEo5z0a913VQ6n82P4ywi9bdzP/3vvrWJc5V7pFPlhFMMzgBfBEZTf3uQ4m5daQYR21n
- LVq+3P6cARwsSQIc1JboPa/VRV2wWH5N8vj8p6ZBMwyZsw+9N5bEMU+9uiDp6eYyxNc/
- PVt1rbmkMN2F342xX8j/17Rfs6mHGS1SAiLeVSK4rCkfiN/67Z8LC1Hu0cMdQeuXgSqG
- wY5bBwCEcFyAAz62jBuQC8vg7KNAHCjjCteYCD/ejbE7CtWTaaN3/1H/oW+wfdFDJXET
- 5AEg==
+ d=konsulko.com; s=google; t=1748624352; x=1749229152; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gYXmn41v6UANtg0ZHcJAXfZpsSU0px56pdASlXhcZs8=;
+ b=F2ndKaXq1zFqe0JaxGSUj6q4pTZ1lUJOM4OXlpwFbe+fMU5m2p2Tp0565YHIEmwDmB
+ 6E6FUx7HM56BH9abxwof8H8ERVMromsFLcWZGmeyzrU1TqDOKFtknJtZ2G8eNRo5g0pI
+ 3qpWQhO+xoveO75c/8r05vXK3r/5n6FNZWx1k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748620173; x=1749224973;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2NT0CxEh38T/gkl1ANZuoBZ0VM7efgk4Mlv8Dw/PcN8=;
- b=uVj+NSl1+B0QBr8t42T8Oc1MOfIQkKVDQ48pH5XPC9A+ifds8PlH8OUmWfvGkAosP3
- t+QhtDTl0FpAN3F8V19VgTrwU8HOnY6PeoKWwYW4YgggXlOA+KFRompa8HwsQhgPpyGu
- VwbIcT4BVwrBtOUnP1vMoR99tfHnNlv5eMaYtbmiDjC0Vd9ux0YEjsC+xLt0QhgaaEvL
- y06bDtRvMTIR2MAavEIV/1Xe+V0r26L+CQz3fiaqqJlL0DqAXqPeyDhPuzb7nzw/FmoC
- Dm53oNBZZAPUYTZ9gv7B/y67oNe1hWqoPy6hMPa2FtD12B1AAJPsiwZIPd7Wn8iZkfbP
- uBZQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6mIhWsBiRUbdCyE31RfwbNMffq2PUUIPuqmHl2BWp8nDBIz1kOatufZlC/uOyZP0SJwCALaY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLnB/sOCtEZoBDprCaoZlTSbbBMcEMjaxuhVvk15kaUEFA8dOU
- blCfH4K/FTmLlwp+iHxSAR6uxqAvWwIZ48D85IiM8FtZNcC+ahQLxNG27+ckap1AyeadSq3JSt6
- VzVsW9XXi6dJqNW5Wbq3eKASl+T1h0uEVQtC46UEJ6A==
-X-Gm-Gg: ASbGncvQEDpLNenz2cTiK8L0dHPJbDYCAeGX4GwTVPON2egwv1aQVGSTBh8kQCJNkvh
- YNbTDAYQ4tjFi6IHNOWwsLYh19cxqQtcErHn0Il9tbSxhlYE4M70dlzz7pWe4g/FFEBTfaFpSWA
- j34roSqnxaZizE7cwKYWOdJD+4FOvtkiqnsghZz2tqINY=
-X-Google-Smtp-Source: AGHT+IFd/JZfj5Sz4LC+QIt6tIdgOaPdrxXRNwj2uJRMpzfXleLnmxCe/aeKyA39Oewr+3v7iJeWie81/DsKkHpgPrw=
-X-Received: by 2002:a05:690c:670f:b0:703:b47a:7312 with SMTP id
- 00721157ae682-70f9812ca0emr56275457b3.15.1748620173245; Fri, 30 May 2025
- 08:49:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748624352; x=1749229152;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gYXmn41v6UANtg0ZHcJAXfZpsSU0px56pdASlXhcZs8=;
+ b=TIVY5V16JcGPN1hiS6wVwDFaHEE43MipBJT49kld4NhVZHUlvIM/t4gB1dObbEkSpT
+ tU2ffJ3Z9MXjWbxrAh+kJl3uf3jr4M5RRBZA+umvJQnKwryNGO9d2UU46Oje27Xx7Dzd
+ pLaO2uymmZaiyjhLzJy6Ub9n+Yn4JFuNQdwB46ew2SNJOx7uvtYLPTAzLHgzbSOyQA5+
+ Om6/+KXlMNnpBPISQRKsdkJjF+EQL7EjHKarUWevZRFXQUQcyDbaCMnGZI71lFbudUGx
+ log8b0iLDVSQHwu7A6F5vVvGsCZ6k24XE0E3vihmxcY7eZHGGPnFjvTtF5K+0aH3AxJG
+ /Qdw==
+X-Gm-Message-State: AOJu0YwVbop4DJJYWjNqgmhWugD5Pqu/qjr1Sc6cApoBXZClUE0fg+ew
+ nB1zYySKWKYzuprAJMBBLg9dVN/ZtgWr/q5oiiPONVBDKg3Cc1ZtBSgh2BdrNSltomE=
+X-Gm-Gg: ASbGnctLpekt+PkkkKp0gLK+rFEoBCxZIkIUo8Py4ezbyxx25ZudQzfxzTc/gfhjQ5S
+ u6XAnPs/TsLWf9DEJ6q4QVYsU7RNnopVLAI2NJiarzLFAcbBjez7lH+SNJqoHU2cfa1eq3x26uW
+ cMYYrsu23dl/srZ0+cySPIF08Z5phyH7lZA6llcgooCPae5Akq5Z+vUYj+xzwyVUxM5GlxLmMjE
+ LWWKnKrBmCTpjpfQNqJYeKzJhYFgaKtu/pf/4QIwy9Em8wFYXNzEQdTy7rEjrbVbWs/zuw84j8W
+ zO9RuEY9iM8DGrge/XTuRwktuHvZDX796vOAZcZhjTvSwS5eSF2NI3f2vliQ8kW4QCvwmlHv7Xo
+ Ekr9uw24+boUL
+X-Google-Smtp-Source: AGHT+IHEHf4FX23tiSFWegs+VDr7tGYqwuYDWOGwpreD5gpckzRBCoSdRF+dMC+nqJQMd2efK0MlaQ==
+X-Received: by 2002:a05:6830:3744:b0:72f:ff8b:e123 with SMTP id
+ 46e09a7af769-736709f3a8cmr2595718a34.12.1748624351897; 
+ Fri, 30 May 2025 09:59:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-735af855e77sm645095a34.23.2025.05.30.09.59.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 May 2025 09:59:11 -0700 (PDT)
+Date: Fri, 30 May 2025 10:59:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Azure runners
+Message-ID: <20250530165909.GU100073@bill-the-cat>
+References: <CAFLszTiFLpYoJnu65CWgqKgq6=ffXpWh4kcXqSaBjAwgkoP6vw@mail.gmail.com>
+ <20250530140650.GT100073@bill-the-cat>
+ <CAFLszThB6uWQuAM2e3UP1_x1qRWjBU24cLYApjs8RSN7oSHHTQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250520084120.4175862-1-olaf.baehring@draeger.com>
- <CAJ+vNU1Ge_s4mEFYCn0TPhuKW5X1J-jcV3GyZqc_70GjgsqRtA@mail.gmail.com>
- <CAOMZO5CtK=Z4-60Ny+H8TQqAAT7B3jyqkPs75M7GrtGiq6tfqw@mail.gmail.com>
- <CAOMZO5BiPP9-S9sUsa6quR_gUgo4zwHZH-H81Y=wgpi8uBdWng@mail.gmail.com>
-In-Reply-To: <CAOMZO5BiPP9-S9sUsa6quR_gUgo4zwHZH-H81Y=wgpi8uBdWng@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 30 May 2025 08:49:21 -0700
-X-Gm-Features: AX0GCFv1-sOvY9UrrYyWdyYEyDkS_ud5y6CYJopH2rbQcAFdodk4kOoYX-DC9AU
-Message-ID: <CAJ+vNU3hfouc0zJ63zjU1rqH0_i+BO=a+Htd_UgwiuM9Kxhc1g@mail.gmail.com>
-Subject: Re: [PATCH v2] caam: bugfix CAAM error on startup
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Olaf Baehring <olaf.baehring@draeger.com>, u-boot@lists.denx.de, 
- Gaurav Jain <gaurav.jain@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XXmd1pnaaHOgpdox"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThB6uWQuAM2e3UP1_x1qRWjBU24cLYApjs8RSN7oSHHTQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,41 +97,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 30, 2025 at 5:13=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> On Fri, May 30, 2025 at 9:09=E2=80=AFAM Fabio Estevam <festevam@gmail.com=
-> wrote:
->
-> > u-boot=3D> rng 0 10
-> > Reading RNG failed
-> > u-boot=3D> rng 0 10
-> > 00000000: 27 42 f0 b8 92 c8 ca 29 6f 6a c3 98 ff 61 2b ae  'B.....)oj..=
-.a+.
-> > u-boot=3D> rng 0 10
-> > 00000000: 48 fb 52 44 29 ea 83 f9 a4 1d 68 20 82 c5 af b5  H.RD).....h =
-....
-> > u-boot=3D> rng 0 10
-> > 00000000: 92 63 76 fc 1c 12 4b cd 68 50 8c fa 2b 51 21 50  .cv...K.hP..=
-+Q!P
-> > u-boot=3D> rng 0 10
+
+--XXmd1pnaaHOgpdox
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, May 30, 2025 at 04:42:18PM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 30 May 2025 at 15:06, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > (always hang in the fifth attempt)
->
-> Correction: it does not hang in the fifth attempt. It works on all
-> subsequent calls, as Tim reported.
+> > On Fri, May 30, 2025 at 02:31:13PM +0100, Simon Glass wrote:
+> >
+> > > Hi Tom,
+> > >
+> > > I have always found the azure pipeline to be slow, but I found that it
+> > > actually does support having your own runners / agents. I set up 8 of
+> > > them on ruru:
+> >
+> > I had not seen that before, can you please send a link to the
+> > documentation you're working from? Thanks.
+>=20
+> Hmm, actually I used Gemini, but here is a link I found which looks
+> like the source:
+>=20
+> https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-age=
+nt?view=3Dazure-devops&tabs=3DIP-V4
 
-Fabio,
+Oh right. I think it wasn't clear last time I looked if you could mix
+pools, and we also didn't have enough resources to replace or augment
+the Azure agents along with Gitlab agents.
 
-Thanks for verifying from your end. I ran into this when I was testing
-lwIP HTTPS as it causes anything that uses dm_rng to fail the first
-time (such as HTTPS).
+--=20
+Tom
 
-I have never seen the error Olaf reports 'SEC0:  RNG4 SH0
-instantiation failed with error 0xffffffff' and I'm not clear what SoC
-he saw that on or how rare it was. From the commit log it seemed like
-a theoretical fix that may have not been the right thing to do.
+--XXmd1pnaaHOgpdox
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Best regards,
+-----BEGIN PGP SIGNATURE-----
 
-Tim
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg549YACgkQFHw5/5Y0
+tyyT4wv9GdFn4lCMQ1fyyEItnZPU1MU+SO6dbOfniv0eFe2623JjJOs5Vmd0twol
+K5iTxocZYFP77f9o/63raBlYG1u607yIjEXjeBzaSGQhTt6XtoM07QZgOM1udBmI
+Vyfgp5KsPNjBD67Q784J0+PysiaxFLi1YyPd2309iRminDfe2kUgEhqG7DveudQ+
+b5DXc76Z+Yd6KQXdED0K0fUoKfUHTzKW/8AHoU1NAu5p22IOyYnVOBhf5SEN1QsP
+EI4cudZ+z84ubQRZMWvBYukjv31ZQjQ+WsTbgL1JOAkAe3Okn3UxAxIUUXutjI9Y
+zrY+RThUA7yodcZ6wxmsslM7KQZxkMmtJ/PHvaSm7DPg1QCr+jRVa0Fq2u2q8KeX
+Qrkjm4QKyunZ0jqE/wv8EYJGl/BEl7oEAoDyAP+9v5pwk0OBjaFCtO7M+I/amL02
+DjCGL4xU5GJw3tTscD9JiH1bVOByK+d2pu4G99rvYaX1QwVoTidlXqAsEPqd7D1I
+REPKFmLE
+=W75a
+-----END PGP SIGNATURE-----
+
+--XXmd1pnaaHOgpdox--
