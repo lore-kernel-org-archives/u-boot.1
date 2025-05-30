@@ -4,73 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB14C5B549
-	for <u-boot@archiver.kernel.org>; Thu, 29 May 2025 22:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9812C54FB3
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 00:37:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CCFB82E2D;
-	Fri, 30 May 2025 00:59:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 76B9382E76;
+	Fri, 30 May 2025 02:37:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tNhyY6kZ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YPvKsexk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6551D82E76; Fri, 30 May 2025 00:59:05 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id E8D868301F; Fri, 30 May 2025 02:36:59 +0200 (CEST)
+Received: from mail-m32100.qiye.163.com (mail-m32100.qiye.163.com
+ [220.197.32.100])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F01BF82E26
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 00:59:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+smelamud.redhat.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id B6D2D60010;
- Thu, 29 May 2025 22:59:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 11349C4CEE7;
- Thu, 29 May 2025 22:59:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1748559541;
- bh=QUZiAxG9pS2u6y1jpe0xZxajjwcV0mXAv3sjcALMWfo=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=tNhyY6kZB+u/Vg6aLZcvII3R9oH3xYwhi+DkXbhCJrze9abKXQmuerpMeOMGIdIpy
- Bs8MLgJUgQT59FJH9qJjZoxow7HSbhDEXotCXZuEWOojvvNgqRy6vMk09jYMNP3BdJ
- IuSFfi8ieZIshQtXBh3PqaTUVFn9H/uWJXphkJbsNEuBE+IPMlAZ40t2gdQr4WKqO+
- fI+Nes1Xladbfncebylnhoi1W4F27DOXJht33v0oGLmrLpuxLR9a25kk89KNIWggGD
- nlETeyMhTrU2CG4hUrTk3Z2Fs2FBFkQjYkIDN4egeObWi+iPd2srdjgfQ+E39peFDN
- q3DnfSBRe75kg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id F0F78C54FB3;
- Thu, 29 May 2025 22:59:00 +0000 (UTC)
-From: Shmuel Melamud via B4 Relay <devnull+smelamud.redhat.com@kernel.org>
-Date: Fri, 30 May 2025 01:58:57 +0300
-Subject: [PATCH v2] renesas: Renesas R-Car Gen4 watchdog driver
+ by phobos.denx.de (Postfix) with ESMTPS id 7A17582E26
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 02:36:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.60.65] (unknown [103.29.142.67])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 16e6a4868;
+ Fri, 30 May 2025 08:36:48 +0800 (GMT+08:00)
+Message-ID: <9d02e0bf-0910-4efc-b4ef-e25023e7efad@rock-chips.com>
+Date: Fri, 30 May 2025 08:36:46 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/4] rockchip: Update rng compatible for RK356x and
+ RK3588
+To: Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250408221151.2762853-1-jonas@kwiboo.se>
+ <CALeDE9N+9ki7OtCqG9U0FU4FXP-z-WSTuPQkonWYGTQkMuynzw@mail.gmail.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <CALeDE9N+9ki7OtCqG9U0FU4FXP-z-WSTuPQkonWYGTQkMuynzw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250530-us-renesas-watchdog-v2-1-b0d8f96c64dc@redhat.com>
-X-B4-Tracking: v=1; b=H4sIALDmOGgC/x3MSwqFMAxA0a1IxgZKpIhuRRzUJmomVRo/D8S9v
- +LwDO59wCSrGPTVA1kuNd1SAdUVxDWkRVC5GMiRd75xeBpmSWLB8A5HXHlbkGLb8TSxj0xQyj3
- LrL/vOozv+wfIwWnGZQAAAA==
-X-Change-ID: 20250530-us-renesas-watchdog-2c79dbbd5cd2
-To: Tom Rini <trini@konsulko.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Stefan Roese <sr@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, Shmuel Leib Melamud <smelamud@redhat.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1748559539; l=8194;
- i=smelamud@redhat.com; s=20250530; h=from:subject:message-id;
- bh=gfsCbLyHoxkKtDbS5e2d9TDnTRSSLkd3c2DT0B21lx4=;
- b=/JTp5yGS4+BEg3GxKPxh3vWIkzwnhwdu83SZiLdU0UEN63Ac5mYR/jiEy0pYrHJGL8VPgeQ0j
- JA5SjPbq0ikDybs9BoxxxQK3Eu9xopYh/Tkc+jlA1nU9QKCKC618LN9
-X-Developer-Key: i=smelamud@redhat.com; a=ed25519;
- pk=B1DFtpdxDPQudtnqMHSFRRSJziu3zB49J6oZUBo0qI8=
-X-Endpoint-Received: by B4 Relay for smelamud@redhat.com/20250530 with
- auth_id=418
-X-Original-From: Shmuel Melamud <smelamud@redhat.com>
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHx0YVhpNShlITkNMSUJCQlYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ VKQktLWQY+
+X-HM-Tid: 0a971e9eb8c603afkunmd8cc80b8e9925
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nwg6LQw*EDE3SUITDz8JIxEv
+ AhwaCyNVSlVKTE9DTk1OT0tCSUtDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlCT043Bg++
+DKIM-Signature: a=rsa-sha256;
+ b=YPvKsexkfcuwklVJBAYjGEgbkVYjwPAmrXS0SZnk0YkMlr3BpvYjnV17qvixJyMWK8vqzXSM7wwNJXyy7OkaYv6OcA9Pvcq6U2yMCu1xObv6fW/o9G4VMOU+tb4fUHxegkd6SpT4j0zsPmbRUEhO8dXI0EFuoujFdFaludEZH+s=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=g053DyogsM4kq6QyRyKYuTDNnwxj+s72/CCM8OPcu/E=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,275 +71,71 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: smelamud@redhat.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Shmuel Melamud <smelamud@redhat.com>
+Hi Peter,
 
-Add support of Renesas R-Car Gen4 watchdog timer. Timeouts up to
-8184.0s are supported (CKS1 register is not involved). The watchdog
-uses the clock type CLK_TYPE_GEN4_MDSEL, so handling of this constant
-is added to gen3_clk_get_rate64() function.
+On 2025/5/29 19:11, Peter Robinson wrote:
+> Hi Jonas,
+>
+> Sorry for the late reply here.
+>
+> On Tue, 8 Apr 2025 at 23:37, Jonas Karlman <jonas@kwiboo.se> wrote:
+>> This series adds support for and updates the random generator compatible
+>> used for RK356x and RK3588.
+>>
+>> The RK356x rng node is already part of dts/upstream so the rng node in
+>> u-boot.dtsi is removed, and because it is not enabled for rk3566 it gets
+>> enabled in u-boot.dtsi to restore its use in U-Boot.
+> It's explicitly disabled in the upstream kernel because it doesn't
+> produce actual random data
 
-The timeout is set in
-dts/upstream/src/arm64/renesas/r8a779f0-spider-cpu.dtsi section &rwdt.
+rockchip trng module is able to pass the third party RNG test, should be 
+"actual random data",
 
-This patch was tested on real Renesas R8A779F0 hardware. If the watchdog
-driver is enabled at the build time, the watchdog timer is initialized
-when U-Boot starts. Under normal circumstances, U-Boot loads the kernel,
-it starts systemd and systemd continues to pet the watchdog. If systemd
-is not started before the timeout expires, the watchdog resets the
-board.
+so no idea why kernel people think it doesn't produce actual random data.
 
-Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
----
- drivers/clk/renesas/clk-rcar-gen3.c |   4 +-
- drivers/watchdog/Kconfig            |   8 ++
- drivers/watchdog/Makefile           |   1 +
- drivers/watchdog/renesas_wdt.c      | 172 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 184 insertions(+), 1 deletion(-)
+> and hence upstream believe it shouldn't be
+> used, there's a couple of threads on it.
+>
+> Have we tested to see if the data produced in U-Boot from the HW
+> exhibits a different outcome? I wonder if Kever is aware of the kernel
+> issue and can provide input.
 
-diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/clk-rcar-gen3.c
-index 375cc4a4930873ad0d5509c19ad04a0ea5545aa0..5745acf4023c9114f6fa13b5e4baa306c5b57d33 100644
---- a/drivers/clk/renesas/clk-rcar-gen3.c
-+++ b/drivers/clk/renesas/clk-rcar-gen3.c
-@@ -68,7 +68,7 @@ static int gen3_clk_get_parent(struct gen3_clk_priv *priv, struct clk *clk,
- 		if (ret)
- 			return ret;
- 
--		if (core->type == CLK_TYPE_GEN3_MDSEL) {
-+		if (core->type == CLK_TYPE_GEN3_MDSEL || core->type == CLK_TYPE_GEN4_MDSEL) {
- 			shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
- 			parent->dev = clk->dev;
- 			parent->id = core->parent >> shift;
-@@ -318,6 +318,8 @@ static u64 gen3_clk_get_rate64(struct clk *clk)
- 						"FIXED");
- 
- 	case CLK_TYPE_GEN3_MDSEL:
-+		fallthrough;
-+	case CLK_TYPE_GEN4_MDSEL:
- 		shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
- 		div = (core->div >> shift) & 0xffff;
- 		rate = gen3_clk_get_rate64(&parent) / div;
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 1bb67f5035231df9f6ce01adb08d074855393143..a0f2948335f9c3b74b7823f039e578ff4030e97c 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -335,6 +335,14 @@ config WDT_K3_RTI_FW_FILE
- 
- endif
- 
-+config WDT_RENESAS
-+	bool "Renesas watchdog timer support"
-+	depends on WDT && R8A779F0
-+	select CLK
-+	select CLK_RENESAS
-+	help
-+	  Enables Renesas SoC R8A779F0 watchdog timer support.
-+
- config WDT_SANDBOX
- 	bool "Enable Watchdog Timer support for Sandbox"
- 	depends on SANDBOX && WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index e6bd4c587af6133c405dde6dbada8050debc781c..c4467d6e126d0c3e119bf8014b302e5b1432f541 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -43,6 +43,7 @@ obj-$(CONFIG_WDT_MTK) += mtk_wdt.o
- obj-$(CONFIG_WDT_NPCM) += npcm_wdt.o
- obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
- obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
-+obj-$(CONFIG_WDT_RENESAS) += renesas_wdt.o
- obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
- obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
- obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
-diff --git a/drivers/watchdog/renesas_wdt.c b/drivers/watchdog/renesas_wdt.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..97550794a2e7108ee63aa0011f55c8c0fa77adb9
---- /dev/null
-+++ b/drivers/watchdog/renesas_wdt.c
-@@ -0,0 +1,172 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+// Copyright 2025 Red Hat, Inc., Shmuel Leib Melamud <smelamud@redhat.com>
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <wdt.h>
-+#include <asm/io.h>
-+#include <dm/device_compat.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+
-+#define usleep_range(a, b) udelay((b))
-+
-+struct renesas_wdt {
-+	u32 cnt;
-+	u32 csra;
-+	u32 csrb;
-+};
-+
-+#define RWTCSRA_WOVF	BIT(4)
-+#define RWTCSRA_WRFLG	BIT(5)
-+#define RWTCSRA_TME		BIT(7)
-+
-+#define CSR_MASK	0xA5A5A500
-+#define CNT_MASK	0x5A5A0000
-+
-+/*
-+ * In probe, clk_rate is checked to be not more than 16 bit * biggest clock
-+ * divider (12 bits). d is only a factor to fully utilize the WDT counter and
-+ * will not exceed its 16 bits. Thus, no overflow, we stay below 32 bits.
-+ */
-+#define MUL_BY_CLKS_PER_SEC(p, d) \
-+	DIV_ROUND_UP((d) * (p)->clk_rate, clk_divs[(p)->cks])
-+
-+/* d is 16 bit, clk_divs 12 bit -> no 32 bit overflow */
-+#define DIV_BY_CLKS_PER_SEC(p, d) ((d) * clk_divs[(p)->cks] / (p)->clk_rate)
-+
-+static const unsigned int clk_divs[] = { 1, 4, 16, 32, 64, 128, 1024, 4096 };
-+
-+struct renesas_wdt_priv {
-+	struct renesas_wdt __iomem *wdt;
-+	unsigned long clk_rate;
-+	u8 cks;
-+	struct clk clk;
-+};
-+
-+static void rwdt_wait_cycles(struct renesas_wdt_priv *priv, unsigned int cycles)
-+{
-+	unsigned int delay;
-+
-+	delay = DIV_ROUND_UP(cycles * 1000000, priv->clk_rate);
-+
-+	usleep_range(delay, 2 * delay);
-+}
-+
-+static int renesas_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
-+{
-+	struct renesas_wdt_priv *priv = dev_get_priv(dev);
-+	u64 max_timeout;
-+	u8 val;
-+
-+	max_timeout = DIV_BY_CLKS_PER_SEC(priv, 65536);
-+	timeout = min(max_timeout, timeout / 1000);
-+
-+	/* Stop the timer before we modify any register */
-+	val = readb_relaxed(&priv->wdt->csra) & ~RWTCSRA_TME;
-+	writel_relaxed(val | CSR_MASK, &priv->wdt->csra);
-+	/* Delay 2 cycles before setting watchdog counter */
-+	rwdt_wait_cycles(priv, 2);
-+
-+	while (readb_relaxed(&priv->wdt->csra) & RWTCSRA_WRFLG)
-+		cpu_relax();
-+
-+	writel_relaxed((65536 - MUL_BY_CLKS_PER_SEC(priv, timeout)) | CNT_MASK,
-+		       &priv->wdt->cnt);
-+
-+	writel_relaxed(priv->cks | RWTCSRA_TME | CSR_MASK, &priv->wdt->csra);
-+
-+	return 0;
-+}
-+
-+static int renesas_wdt_stop(struct udevice *dev)
-+{
-+	struct renesas_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel_relaxed(priv->cks | CSR_MASK, &priv->wdt->csra);
-+
-+	return 0;
-+}
-+
-+static int renesas_wdt_reset(struct udevice *dev)
-+{
-+	struct renesas_wdt_priv *priv = dev_get_priv(dev);
-+	u8 val;
-+
-+	/* Stop the timer before we modify any register */
-+	val = readb_relaxed(&priv->wdt->csra) & ~RWTCSRA_TME;
-+	writel_relaxed(val | CSR_MASK, &priv->wdt->csra);
-+	/* Delay 2 cycles before setting watchdog counter */
-+	rwdt_wait_cycles(priv, 2);
-+
-+	writel_relaxed(0xffff | CNT_MASK, &priv->wdt->cnt);
-+	/* smallest divider to reboot soon */
-+	writel_relaxed(0 | CSR_MASK, &priv->wdt->csra);
-+
-+	readb_poll_timeout(&priv->wdt->csra, val, !(val & RWTCSRA_WRFLG), 100);
-+
-+	writel_relaxed(RWTCSRA_TME | CSR_MASK, &priv->wdt->csra);
-+
-+	/* wait 2 cycles, so watchdog will trigger */
-+	rwdt_wait_cycles(priv, 2);
-+
-+	return 0;
-+}
-+
-+static int renesas_wdt_probe(struct udevice *dev)
-+{
-+	struct renesas_wdt_priv *priv = dev_get_priv(dev);
-+	unsigned long clks_per_sec;
-+	int ret, i;
-+
-+	priv->wdt = dev_remap_addr(dev);
-+	if (!priv->wdt)
-+		return -EINVAL;
-+
-+	ret = clk_get_by_index(dev, 0, &priv->clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_enable(&priv->clk);
-+	if (ret)
-+		return ret;
-+
-+	priv->clk_rate = clk_get_rate(&priv->clk);
-+	if (!priv->clk_rate)
-+		return -ENOENT;
-+
-+	for (i = ARRAY_SIZE(clk_divs) - 1; i >= 0; i--) {
-+		clks_per_sec = priv->clk_rate / clk_divs[i];
-+		if (clks_per_sec && clks_per_sec < 65536) {
-+			priv->cks = i;
-+			break;
-+		}
-+	}
-+
-+	/* can't find a suitable clock divider */
-+	if (i < 0)
-+		return -ERANGE;
-+
-+	return 0;
-+}
-+
-+static const struct wdt_ops renesas_wdt_ops = {
-+	.start = renesas_wdt_start,
-+	.reset = renesas_wdt_reset,
-+	.stop = renesas_wdt_stop,
-+};
-+
-+static const struct udevice_id renesas_wdt_ids[] = {
-+	{ .compatible = "renesas,r8a779f0-wdt" },
-+	{ .compatible = "renesas,rcar-gen4-wdt" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(wdt_renesas) = {
-+	.name = "wdt_renesas",
-+	.id = UCLASS_WDT,
-+	.of_match = renesas_wdt_ids,
-+	.ops = &renesas_wdt_ops,
-+	.probe	= renesas_wdt_probe,
-+	.priv_auto = sizeof(struct renesas_wdt_priv),
-+};
-
----
-base-commit: 3b6760ddeb4ef940226921017cd9088c89784b01
-change-id: 20250530-us-renesas-watchdog-2c79dbbd5cd2
-
-Best regards,
--- 
-Shmuel Leib Melamud <smelamud@redhat.com>
+I only follow linux-rockchip mailing list, so didn't notice the the 
+kernel issue.
 
 
+Thanks,
+- Kever
+>
+> Peter
+>
+>> The RK3588 rng node is added into dts/upstream DT by picking a commit
+>> from devicetree-rebasing v6.15-rc1-dts and the rng node in u-boot.dtsi
+>> is removed.
+>>
+>> Changes in v2:
+>> - Split rng driver and DT change into separate patches for RK356x
+>> - Pick RK3588 rng node commit from devicetree-rebasing v6.15-rc1-dts
+>>
+>> Jonas Karlman (3):
+>>    rng: rockchip_rng: Add compatible for RK3568
+>>    rockchip: rk356x: Remove rng node from u-boot.dtsi
+>>    rng: rockchip_rng: Update compatible for RK3588
+>>
+>> Nicolas Frattaroli (1):
+>>    arm64: dts: rockchip: Add rng node to RK3588
+>>
+>>   arch/arm/dts/rk356x-u-boot.dtsi                  | 9 ++++-----
+>>   arch/arm/dts/rk3588s-u-boot.dtsi                 | 5 -----
+>>   drivers/rng/rockchip_rng.c                       | 6 +++++-
+>>   dts/upstream/src/arm64/rockchip/rk3588-base.dtsi | 8 ++++++++
+>>   4 files changed, 17 insertions(+), 11 deletions(-)
+>>
+>> --
+>> 2.49.0
+>>
