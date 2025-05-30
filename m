@@ -4,88 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C55CC5AD49
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 21:23:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 136A5C5B543
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 22:05:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14AD382BD6;
-	Fri, 30 May 2025 23:23:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ADE482B0E;
+	Sat, 31 May 2025 00:05:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="h1SmJida";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cEj8XMis";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uwuMEOkA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D2C98343B; Fri, 30 May 2025 23:23:14 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DCFF182BD9; Sat, 31 May 2025 00:04:58 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81AFF82BBF
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 23:23:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A465A82B07
+ for <u-boot@lists.denx.de>; Sat, 31 May 2025 00:04:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sbellary@baylibre.com
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-739b3fe7ce8so1939322b3a.0
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 14:23:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1748640190; x=1749244990;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aney/x7kUlMrfzZZ4cbOD4Vj89ZX1X3VPdMXvUjaJaw=;
- b=h1SmJidabK//kMMVB74NzFrJEQ7ayILe3KNheFB1R2RcLnLzvtwd+ih/fr6S9SQrbw
- +WTYPx2g39UC+xYEB9WjsVnS7flLWEFdGo+sER/I/UrDYhk4hWsgDv/DbWZBnAkQWM0x
- mplzc19l7spdlv8yzP/QglDKdtInuFS9+CLO4vOnWzijcUOCP1j1mTe0rTrnU/L3O9o+
- Xbq2Ban4HLBV93AygfBn0E7kH6375IRaFxZTfANn5ZKO7G17rNfqbE0HhvhA1tWqeL1a
- CMMMeSEhPELYkpHSO102s45thpPlSsS2By3MRTuOy9elSbAefsRf0+uoJEIO8dMsko18
- UMlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748640190; x=1749244990;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aney/x7kUlMrfzZZ4cbOD4Vj89ZX1X3VPdMXvUjaJaw=;
- b=ne9JwT603HRi2Ih9SNZNvFd0hdJPTPGhLraoJdgKicTvhE+SA19YXLSw4CcAeucLw8
- zWi8zEbpEvbZXAUHdIiZChQHpCG43K6wg/M4jdHLSpSHKV83QY/oOnkn5AP9+oZ8pm6S
- TQua8/VSHh0mPU2X5yfoYOc2aVWBH/+H2ZbQrWbsK28PN81K6ykfoAQ2qUiiKlfp9M0A
- xgTHZ2eqRG7LUYtBEAZQSflksAjleFeBwHGGQm3m9pYnQpbw1ItCFTfCZAhzWl+RSmwx
- Qy+WicKir8Z2fsWcBQU1LfKVlkZOmjs1xVxHFwHwHmsOIYDQ1+VadS0IxdxIr/mw4LC0
- i61w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW0J+hGTJY3zDJL703Kwt6pCkZTalHo6zYuUiMN51Neg/TAhenlgrVrtwANHesDPwIxDEfL9Oo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzEd5kcG7+ICxVU+ATHtoV6xy3uQ4DtMTIsvR4k5M/yMzxgyIcE
- opuUrGy7dYXfhI8K+g+WwRoGvk5FE+PVqRNRh1A6MBMQ1AH1p4aHSgEsA+4rXUszw64=
-X-Gm-Gg: ASbGncuL3G3CVD9su9YGZysngKiJC0iJlMLDsaLA5cdQT6eLVfIy7LEu0Cm2H9v9+p8
- 1K/VQzyKjTJnpcrS4KSUyhrGaQ0b4q3MqptU7eWw1+17AQ3TALCv1fL0RB/6ucp4exxRQmoib2J
- ujjUOO2uBUZDbGpRltvEizb52s89xN2tYVTI4ZXhekRsABMipZ/lfEt4sk/YYH5VOnEKDWN8y1/
- xNJvTJgoni3bUHsvwp3wZ8LvsaNIJjOD6ZdZUWvIVN10hbjRok35L4XiNbH6Um+8ET/ezZZ3S6W
- S/L3VNhA7ShjTeh8bAjrKqThhL26nqJzp8dtqfxWeJktHIfOQgMgXtHGNQjOhBkCCF/0gEzmiEj
- vAGnAjARuWrYN2Q==
-X-Google-Smtp-Source: AGHT+IGxlrHRzE/v9sqIVc8grepJ0rhHD+0VSUhNCYIZBzKiGZnzNhp8/SpvCvo+6j8kLuctkxgNvw==
-X-Received: by 2002:a05:6a00:3d4f:b0:736:a7ec:a366 with SMTP id
- d2e1a72fcca58-747bd9711e1mr6974426b3a.9.1748640190022; 
- Fri, 30 May 2025 14:23:10 -0700 (PDT)
-Received: from dev-linux.. (syn-076-088-115-008.res.spectrum.com.
- [76.88.115.8]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-747affadf7bsm3594039b3a.108.2025.05.30.14.23.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 14:23:09 -0700 (PDT)
-From: Sukrut Bellary <sbellary@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Sukrut Bellary <sbellary@baylibre.com>,
- Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
- Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/3] board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
-Date: Fri, 30 May 2025 14:22:32 -0700
-Message-Id: <20250530212232.1686613-4-sbellary@baylibre.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250530212232.1686613-1-sbellary@baylibre.com>
-References: <20250530212232.1686613-1-sbellary@baylibre.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4b8HN83CWBz9t96;
+ Sat, 31 May 2025 00:04:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1748642696;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dVr4+mmZ+B+wX2eaXJMi9J6DxI/k5EbgXwjhq5Ox85o=;
+ b=cEj8XMisn92W6rV2NjEKC/3kyEudF8UAqzEJB1D3xAKB3gOn3ndOA3ckPibdohm2WZeQQS
+ gskHmRNh7FuTI5RCvcVKYYVCTyftiaRIZ4Qlc79FwUqYFqO/8Pt5up3G+X+l6ptyC0tOS0
+ VzS2Wjb1TwGaoAEnkNE7qKq9zXNncsJAtwfM6XpJVo68KFAjWbu9pwWERz0vA1yb0Dpky5
+ 6YkS6Sctxz2ZYoQNpPxj0P+mY0XFpQS552r2paLf5VShmBW5pch6AGYN1ogUnl4Usf36eK
+ 0o05FmzlNkr3D/mHnDo8hLrCyf37zztQO/PiZ8IEll5CxQ3opwouzfVMeCMxTg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1748642694;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dVr4+mmZ+B+wX2eaXJMi9J6DxI/k5EbgXwjhq5Ox85o=;
+ b=uwuMEOkA7SA2vciZgogkiyOzLbPfA/YbYCKU1nLYEm24Rm8IrYGhkA6VqACK1dH3yL1iRF
+ ithy9CrreVqX+fPTPXC2PvDdo+nDLjmolXzSuEY6irhaEhc5HO0q0S1GWqIqLlaVfpzPtW
+ eFMyvi9Um6g26KvAdEhxhQ5ex9CgGbPexBDutdvgPQyu0U+JPFZBnfot3o0FIaN7XmMZaw
+ REuMKqwhSukeHuPMQ30Wd5+edhyhSoDsnFm+bbTCfmr2wgAURI7xAPu2wTdrBQNT6yCISe
+ D59Hc92AfoUVp4pa8u2KvbtkmBZXyMBN8IqpqWIXs25YXKjJ6vkkKHqi+5XjQw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] arm64: renesas: Introduce renesas_dram_init_banksize()
+Date: Sat, 31 May 2025 00:03:39 +0200
+Message-ID: <20250530220420.26891-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 4woyo1b6g48nzsowbhpuwifqp4zphfui
+X-MBO-RS-ID: b50141908cbee0ab2f1
+X-Rspamd-Queue-Id: 4b8HN83CWBz9t96
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,89 +83,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On AM335x EVM[1],
-1. pin AM335X_ECAP0_IN_PWM0_OUT is used to enable the
-backlight. ECAP0 can be configured in single channel PWM mode.
-If CONFIG_PWM_TI_ECAP is enabled, perform eCAP0 pin muxing.
+Introduce weak renesas_dram_init_banksize() function which is meant
+to be used to adjust DRAM bank sizes after the common Renesas board
+DRAM bank handling code finished. This is mainly meant for boards
+which ship with multiple DRAM size options, which can be detected
+at runtime. This allows such boards to ship with single U-Boot
+binary on all boards.
 
-2. Pins LCD_DATA0 - LCD_DATA15, gpmc_ad8 - gpmc_ad15 and
-lcd_vsync, lcd_sync, lcd_ac_bias_en, lcd_pclk are used for driving LCD.
-If CONFIG_AM335X_LCD is enabled, perform the LCD pin muxing.
-
-This is required to enable splash screen support on AM335x EVM.
-[1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
-
-Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- board/ti/am335x/mux.c | 48 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ board/renesas/common/rcar64-common.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
-index 960de15398f8..d416d88c1a19 100644
---- a/board/ti/am335x/mux.c
-+++ b/board/ti/am335x/mux.c
-@@ -274,6 +274,47 @@ static struct module_pin_mux uart3_icev2_pin_mux[] = {
- 	{-1},
- };
+diff --git a/board/renesas/common/rcar64-common.c b/board/renesas/common/rcar64-common.c
+index 69229ea3cb0..bcb03792494 100644
+--- a/board/renesas/common/rcar64-common.c
++++ b/board/renesas/common/rcar64-common.c
+@@ -36,6 +36,8 @@ int dram_init(void)
+ 	return ret;
+ }
  
-+#if (IS_ENABLED(CONFIG_AM335X_LCD))
-+static struct module_pin_mux lcd_pin_mux[] = {
-+	{OFFSET(lcd_data0), (MODE(0))},		/* LCD-Data(0) */
-+	{OFFSET(lcd_data1), (MODE(0))},		/* LCD-Data(1) */
-+	{OFFSET(lcd_data2), (MODE(0))},		/* LCD-Data(2) */
-+	{OFFSET(lcd_data3), (MODE(0))},		/* LCD-Data(3) */
-+	{OFFSET(lcd_data4), (MODE(0))},		/* LCD-Data(4) */
-+	{OFFSET(lcd_data5), (MODE(0))},		/* LCD-Data(5) */
-+	{OFFSET(lcd_data6), (MODE(0))},		/* LCD-Data(6) */
-+	{OFFSET(lcd_data7), (MODE(0))},		/* LCD-Data(7) */
-+	{OFFSET(lcd_data8), (MODE(0))},		/* LCD-Data(8) */
-+	{OFFSET(lcd_data9), (MODE(0))},		/* LCD-Data(9) */
-+	{OFFSET(lcd_data10), (MODE(0))},	/* LCD-Data(10) */
-+	{OFFSET(lcd_data11), (MODE(0))},	/* LCD-Data(11) */
-+	{OFFSET(lcd_data12), (MODE(0))},	/* LCD-Data(12) */
-+	{OFFSET(lcd_data13), (MODE(0))},	/* LCD-Data(13) */
-+	{OFFSET(lcd_data14), (MODE(0))},	/* LCD-Data(14) */
-+	{OFFSET(lcd_data15), (MODE(0))},	/* LCD-Data(15) */
-+	{OFFSET(gpmc_ad15), (MODE(1))},		/* LCD-Data(16) */
-+	{OFFSET(gpmc_ad14), (MODE(1))},		/* LCD-Data(17) */
-+	{OFFSET(gpmc_ad13), (MODE(1))},		/* LCD-Data(18) */
-+	{OFFSET(gpmc_ad12), (MODE(1))},		/* LCD-Data(19) */
-+	{OFFSET(gpmc_ad11), (MODE(1))},		/* LCD-Data(20) */
-+	{OFFSET(gpmc_ad10), (MODE(1))},		/* LCD-Data(21) */
-+	{OFFSET(gpmc_ad9), (MODE(1))},		/* LCD-Data(22) */
-+	{OFFSET(gpmc_ad8), (MODE(1))},		/* LCD-Data(23) */
-+	{OFFSET(lcd_vsync), (MODE(0))},		/* LCD-VSync */
-+	{OFFSET(lcd_hsync), (MODE(0))},		/* LCD-HSync */
-+	{OFFSET(lcd_ac_bias_en), (MODE(0))},	/* LCD-DE */
-+	{OFFSET(lcd_pclk), (MODE(0))},		/* LCD-CLK */
-+	{-1},
-+};
-+#endif
++__weak void renesas_dram_init_banksize(void) { }
 +
-+#if (IS_ENABLED(CONFIG_PWM_TI_ECAP))
-+static struct module_pin_mux ecap_pin_mux[] = {
-+	{OFFSET(ecap0_in_pwm0_out), (MODE(0))},         /* ecap0_in_pwm0_out */
-+	{-1},
-+};
-+#endif
-+
- #if defined(CONFIG_NOR_BOOT)
- void enable_norboot_pin_mux(void)
+ int dram_init_banksize(void)
  {
-@@ -389,6 +430,13 @@ void enable_board_pin_mux(void)
- 			configure_module_pin_mux(mmc1_pin_mux);
- 			configure_module_pin_mux(spi0_pin_mux);
- 		}
-+		#if IS_ENABLED(CONFIG_AM335X_LCD)
-+			configure_module_pin_mux(lcd_pin_mux);
-+		#endif
+ 	int bank;
+@@ -58,6 +60,8 @@ int dram_init_banksize(void)
+ 		break;
+ 	}
+ 
++	renesas_dram_init_banksize();
 +
-+		#if IS_ENABLED(CONFIG_PWM_TI_ECAP)
-+			configure_module_pin_mux(ecap_pin_mux);
-+		#endif
- 	} else if (board_is_idk()) {
- 		/* Industrial Motor Control (IDK) */
- 		configure_module_pin_mux(mii1_pin_mux);
+ 	return 0;
+ }
+ 
 -- 
-2.34.1
+2.47.2
 
