@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0743C5AD49
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 17:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B7BC5B543
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 17:36:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A8F8833D1;
-	Fri, 30 May 2025 19:22:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0348C833D1;
+	Fri, 30 May 2025 19:36:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="efmUs25x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O7nnALfd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9578F833D3; Fri, 30 May 2025 19:22:41 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id CF740833D3; Fri, 30 May 2025 19:36:14 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63F64833CA
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 19:22:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 740DC833CA
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 19:36:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-735ae79a44bso1725824a34.2
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 10:22:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6045b95d1feso4319783a12.1
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 10:36:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748625758; x=1749230558; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Qei5PI4ZFH/hFBUwmBOQ5Q61t+woKOmGxigbiz4aEm8=;
- b=efmUs25xe5RjOCdyTKHr/jPI3CxFv7H9MREqqr254vQ5PgvqKFDRAD/FaQhwiXfEKi
- KUPjnvDhv3NXT5VwxfncsQDXv5q9pSgOMS733dXJ6/mtVhupKe7VMWBgjGOUBeYCu6fx
- oxPsd2IcOHcmUp3Y+ORSDpVOak2zYcP77zEDY=
+ d=chromium.org; s=google; t=1748626572; x=1749231372; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IW6VDCRAjQpMY5l3FYaem/aRsXjw5wcVyKpg08w09X0=;
+ b=O7nnALfdIbpA+27gj12Ou+J8r8MqAbL5mqMqGIPGb3lY+/WcZET4Ir0Twox06U6+nn
+ NfSMPfokgwLmkMbAPFULdsGiUTMt3JW+CRbCJm9VN8yYtNq0Wbc6a9pjfeGkqczq4SlZ
+ wZv1qCxuz+s1ODvrtNbd7t6lPyWWsmtfqMoIc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748625758; x=1749230558;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Qei5PI4ZFH/hFBUwmBOQ5Q61t+woKOmGxigbiz4aEm8=;
- b=mukpFfB7YHNuFcC8r+5tg4VB8ZaN4WlEPcZSDzysohjb3mQzb/RhrsMie3+IO/A+mw
- OHX8H37t38iTzInzfpX32zqdKyFekk6Yq5+2B9oa9xQaAaddL6oQbN5Z9Fw3MQbAT7N3
- RLr1xL+XhKaTDK7yUzQzkxYRiSjOoGAMMYmI8PCmNWIphsrTYJ3t6lZ2yorofk5J06FQ
- IdQiyWSyzSxgDBrPi92Flujgb3Qs1pncuJ//tx53MbkiGVer7fUw3C6wXqFLXPIBlC/0
- LVXOyzvVwRJf7Kxme5DyPSiFRR5pfJxwTSRJkGXFEvUkr3oZexo6YXdOKGLIiVNH9m18
- O1FQ==
-X-Gm-Message-State: AOJu0YwllKl6l+sdUG4AC+EwGC2ZeyOSrxOQkkhDEC5gpRp4yE6UE5ZL
- 1kOBRWBXz31pdpOqjU/7fpr8GLYhDIH4EBWEMZ5SIdBsBnQIty3QfRm7bFfO84l4VlE=
-X-Gm-Gg: ASbGncsESwOTAlzCCMeYhCa3/W2IGyVtsxcpwECygMdoX7brFpW7eap3QQXVFLfwdi9
- oedQkY62pb9fINDPVJ4JiPuOq/9yGictQCjuwYsdU3cccOFXwyxOrNO/Hxm4l7JenLezjOUhNG3
- 8X24i+nkXzS0896V2rAU18otqxaR+ndWSEuO7CObA/gNuJs/YQxUruopVKqjhTYMQsmInaWmLf7
- ESNAxmcf1Z0jabnAVuibd8GNdSnmo8tt5dEotzLuj4hQHlVIwErqCbDSk61nbVqrM2XQ9buTRBJ
- XK1yM1qZQxaf6By3KZ/QN2U1UpE/sSqRIcqhrv74qFVLfp/AhDggRgzTNutQ41/ldLZDTLUV5Ws
- 1q+qJ3fdI6LHc
-X-Google-Smtp-Source: AGHT+IFUavDTlw8gCzdQyd+iO7b3tQLD+fTtVhMjR5iVpS1s710cINecWIRf7QeX83M59eIA4F0xzA==
-X-Received: by 2002:a05:6830:710d:b0:72b:992b:e50 with SMTP id
- 46e09a7af769-73670a1038emr3235988a34.21.1748625758130; 
- Fri, 30 May 2025 10:22:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-735af9bc8f6sm658383a34.50.2025.05.30.10.22.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 10:22:37 -0700 (PDT)
-Date: Fri, 30 May 2025 11:22:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- sjg@chromium.org, jerome.forissier@linaro.org, rfried.dev@gmail.com,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH v4 1/2] CI testing: add http server to CI tests
-Message-ID: <20250530172235.GA4050067@bill-the-cat>
-References: <20250516085256.30386-1-adriano.cordova@canonical.com>
- <20250516085256.30386-2-adriano.cordova@canonical.com>
+ d=1e100.net; s=20230601; t=1748626572; x=1749231372;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IW6VDCRAjQpMY5l3FYaem/aRsXjw5wcVyKpg08w09X0=;
+ b=vTNWAcAVOpHZ+LeYSsYhEdpeYOenmvGmRh3Ad446op874WJ/kr0W7ujJ8Tcbsarkdq
+ bpVuxa42pZV55RViovIpGB2sjNc6Vqvjru42lKx02MnY4Zoj85WlNz9SPh867ofFrXWG
+ yK6qljVeTks3Fn9tvTZEyJnVmV49Ep8lX36BN32XSzwe5aVjRBUPvvNawDqXAAfbrvo8
+ Q1WP/LddnbjFtlXvSyObv0jbB6gmFtYaI7mwOmMyGI/Yk/GmG5Na5tSgO6XTU4zHSg7U
+ 62r4ZT1hBdgBxTAj1E4tG4+GPhMR54AdBmLf+wspCJiijAF2+yCPYze6Dxm/M/pJTupX
+ PBiA==
+X-Gm-Message-State: AOJu0YzVo1bi6bKgTm6XBou7fZleOv23x8jMgn5ch9XnLrazSjjPYiYF
+ G0EjATMHO4J5JbHhfq/RqoAICeeKk/v5Tqx9duxfoRlDsUnSiSJQvrmDKm0K/cvHggcBjkgq1XP
+ wn+JCNHqnyRLaGgw3yihtCu4If0UAqYzmRDyoAIUExRyY1mECouVleg==
+X-Gm-Gg: ASbGncvfmJ+Mt+vfiXCntJDwyWo+yKLK9q9VSbt9ov7uRQv+jBml6Prw4+G+PPW3CM4
+ CbDWoCv9oVLd1wBmzbu76BrjX4Kuk7jDnueftSMcvzo1IDFbOfLZIf/6UAb1Tolp75SAl7HditP
+ Z7b20u+uoCBGtTUMqmM6c9LWnJfUOs4DY=
+X-Google-Smtp-Source: AGHT+IFUskaPn1aKaM3c2Iu5acpgB4cCNBYPoxLKRJEQDMnG9i1tgBrd9/4IKocE8aXv+EkRg+AJqUgMchzae1mIDOI=
+X-Received: by 2002:a05:6402:5c8:b0:5fd:c426:9d17 with SMTP id
+ 4fb4d7f45d1cf-6057c63e5a9mr2780370a12.34.1748626571841; Fri, 30 May 2025
+ 10:36:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tKcrADl4zemM6dlV"
-Content-Disposition: inline
-In-Reply-To: <20250516085256.30386-2-adriano.cordova@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAFLszTiFLpYoJnu65CWgqKgq6=ffXpWh4kcXqSaBjAwgkoP6vw@mail.gmail.com>
+ <20250530140650.GT100073@bill-the-cat>
+ <CAFLszThB6uWQuAM2e3UP1_x1qRWjBU24cLYApjs8RSN7oSHHTQ@mail.gmail.com>
+ <20250530165909.GU100073@bill-the-cat>
+In-Reply-To: <20250530165909.GU100073@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 30 May 2025 18:36:00 +0100
+X-Gm-Features: AX0GCFulMqCFCc04mxkda0vlV5hYvsEQvwxsIWFWAzGyAU-dJ8wdkrAJzDrCL-g
+Message-ID: <CAFLszTjij_jndT1Y=UTusSXQ0ybG=tPNThwdAQZZ0cO_NT45bg@mail.gmail.com>
+Subject: Re: Azure runners
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,55 +88,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---tKcrADl4zemM6dlV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 30 May 2025 at 17:59, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, May 30, 2025 at 04:42:18PM +0100, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 30 May 2025 at 15:06, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, May 30, 2025 at 02:31:13PM +0100, Simon Glass wrote:
+> > >
+> > > > Hi Tom,
+> > > >
+> > > > I have always found the azure pipeline to be slow, but I found that it
+> > > > actually does support having your own runners / agents. I set up 8 of
+> > > > them on ruru:
+> > >
+> > > I had not seen that before, can you please send a link to the
+> > > documentation you're working from? Thanks.
+> >
+> > Hmm, actually I used Gemini, but here is a link I found which looks
+> > like the source:
+> >
+> > https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-agent?view=azure-devops&tabs=IP-V4
+>
+> Oh right. I think it wasn't clear last time I looked if you could mix
+> pools, and we also didn't have enough resources to replace or augment
+> the Azure agents along with Gitlab agents.
 
-On Fri, May 16, 2025 at 04:52:55AM -0400, Adriano Cordova wrote:
+OK, well ruru is mostly idle so I thought it could be good target. I'm
+just not sure why it doesn't quite work.
 
-> Add an http server to CI tests so that HTTP booting and
-> loading can be tested.
->=20
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> ---
->=20
-> changes in v2:
->   - Remove HTTP_SERVER argument for test.py
->=20
-> changes in v4:
->   - Remove comment in .gitlab-ci.yml that was preventing
->     parsing
->=20
->  .azure-pipelines.yml | 11 +++++++++++
->  .gitlab-ci.yml       | 11 +++++++++++
->  2 files changed, 22 insertions(+)
-
-So, I have a concern. Did you confirm the tests run? Since we're firing
-up the webserver on port 80, and that requires extra permissions, I'm
-not sure if it's working.
-
---=20
-Tom
-
---tKcrADl4zemM6dlV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg56VIACgkQFHw5/5Y0
-tyyszQwAnZp3nqgy5mkQzYEhUGGpZ2WJHY7UeNMNWpfjp9MJRZQ+ONUhHdNDc547
-PZVSUnhV+r3wj7y944dkjJbs8dkM4pyi2D3OjF/YaOffir3OmvvWL35j4MPOwusA
-2p66Knu7d7ENmi6CkzlJ2iaquUTJyKsuhu8zeUqtEkbRjCaM8qdXMnEFhQH0j7SK
-yaB1v3rvBtAEKWjRL4EEMwCJddLUQS3kgH8EcpPX9bcE0W9v2W9PqtPnB0fm41lI
-1xIjSQwwR4gRJticRZZtHd6ZpeJS4pAqLSkjBFttJg7/UyAlYi+8Q7A3OwinJFQs
-U+bVb5zhG2Eq5MwPcBeb4gkmZF078RRY6QwRSKGzosXojVK5RkQwhIazgaAv/zza
-ktx61uYxH2M18QiZ/3C2SyE0VHacyndhY3sjNmd8QGVx7vRcXwxZCc/Jn93BOwAX
-GESUI7mlcCfS7hj5KFAy0TrBnoRQpbkA4ly24gJVooCoUJu5whqe9S5PlHr8lolA
-hmXoZHUT
-=YcPc
------END PGP SIGNATURE-----
-
---tKcrADl4zemM6dlV--
+- Simon
