@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3766C5B543
-	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 21:23:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C55CC5AD49
+	for <u-boot@archiver.kernel.org>; Fri, 30 May 2025 21:23:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0FBF83423;
-	Fri, 30 May 2025 23:23:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14AD382BD6;
+	Fri, 30 May 2025 23:23:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ajLMp4OU";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="h1SmJida";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A695682C38; Fri, 30 May 2025 23:23:12 +0200 (CEST)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id 8D2C98343B; Fri, 30 May 2025 23:23:14 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5677082C79
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 23:23:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81AFF82BBF
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 23:23:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sbellary@baylibre.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-74068f95d9fso1882694b3a.0
- for <u-boot@lists.denx.de>; Fri, 30 May 2025 14:23:10 -0700 (PDT)
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-739b3fe7ce8so1939322b3a.0
+ for <u-boot@lists.denx.de>; Fri, 30 May 2025 14:23:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1748640189; x=1749244989;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1748640190; x=1749244990;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iLsFYPH2khHUqePmW+Ge2L46nZ/PjuntPgRWN8z55Ow=;
- b=ajLMp4OUeteGw2jv4b/GmrdBT6DWOZpMSgNjFCWnSw/+Q1AuKBESWd9dfBu5ZytCfw
- aqjOHJbNV5vF6DpcQ1Cl4vx1Hf7t66cNbky7qybYNZ6/H8mtohCTVDb99HZRbuT93WpV
- VJQMtSS5KQFf+I3zchEnEHscdg5Pbyg+8dfTbNnjlKD2/y3vPmnNNb1HP1C6o9wXLt7V
- A3577oDptcn/1PGTE07g1HAY6f2lf3i3VE4xF2IbFXTbQbmIn6zjLM791RvD67gx/me+
- p9eOBLA7QzaOs1c58fFtc31HuBmuGHrpFJr4xmJmUUUpc/AiGtDFcDDNrb58Y7GnWyNS
- hqcw==
+ bh=aney/x7kUlMrfzZZ4cbOD4Vj89ZX1X3VPdMXvUjaJaw=;
+ b=h1SmJidabK//kMMVB74NzFrJEQ7ayILe3KNheFB1R2RcLnLzvtwd+ih/fr6S9SQrbw
+ +WTYPx2g39UC+xYEB9WjsVnS7flLWEFdGo+sER/I/UrDYhk4hWsgDv/DbWZBnAkQWM0x
+ mplzc19l7spdlv8yzP/QglDKdtInuFS9+CLO4vOnWzijcUOCP1j1mTe0rTrnU/L3O9o+
+ Xbq2Ban4HLBV93AygfBn0E7kH6375IRaFxZTfANn5ZKO7G17rNfqbE0HhvhA1tWqeL1a
+ CMMMeSEhPELYkpHSO102s45thpPlSsS2By3MRTuOy9elSbAefsRf0+uoJEIO8dMsko18
+ UMlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748640189; x=1749244989;
+ d=1e100.net; s=20230601; t=1748640190; x=1749244990;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iLsFYPH2khHUqePmW+Ge2L46nZ/PjuntPgRWN8z55Ow=;
- b=Zk/mgHbAgJKvWMC2GousCmsLJywyRR1ZVGyCLQKAmIHjadT1Atidyv8YIGsZZGOgyT
- QoGyW7P43mYJ96xo67OqbEZuE1KmQgG6pYnpQlJQc2/uEwPyIJJFrh9AZ/v/JYCKubhT
- S6d3IVFbXKmhOse/jskctKRntAO0ZaZreW97KQcJb4QKRQ6j5HfJxh+WK+RtCox4HC+9
- C7n1CFr8qBABaEbYWuKxnvL9AyMBMuf/49xT5pkgultLxsU8ve7PzTvV0cSawmSKGgGC
- DQlKlWOcn50Uyxa4b6M1PrLCKA9uE2iaFPAv2wUYxYhpDW1hU0gHHx8ETydoQqwgZJky
- +i1w==
+ bh=aney/x7kUlMrfzZZ4cbOD4Vj89ZX1X3VPdMXvUjaJaw=;
+ b=ne9JwT603HRi2Ih9SNZNvFd0hdJPTPGhLraoJdgKicTvhE+SA19YXLSw4CcAeucLw8
+ zWi8zEbpEvbZXAUHdIiZChQHpCG43K6wg/M4jdHLSpSHKV83QY/oOnkn5AP9+oZ8pm6S
+ TQua8/VSHh0mPU2X5yfoYOc2aVWBH/+H2ZbQrWbsK28PN81K6ykfoAQ2qUiiKlfp9M0A
+ xgTHZ2eqRG7LUYtBEAZQSflksAjleFeBwHGGQm3m9pYnQpbw1ItCFTfCZAhzWl+RSmwx
+ Qy+WicKir8Z2fsWcBQU1LfKVlkZOmjs1xVxHFwHwHmsOIYDQ1+VadS0IxdxIr/mw4LC0
+ i61w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX4DaW4gbrAhMVOZ7snLpU3bWWmwM2+O0/4iZOKDUSxtgfvNfh04l1AQF7rW+kkXCWix870ORw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1TS8tV+sEH2jUVWQZUU4Btbbyi7iDgdWdrO9wytx+O+61wJ1j
- wynGEj3LoVRpaBrNJJ8NEY/cCZD4c4wYxkvkLzX5iahVOF1gVXGR/bMLAkIy/kUaWFc=
-X-Gm-Gg: ASbGnctyJ9l/0UQd0eioHaJ5SU/QGRoPDPfSQVQ0R7dUE7FzzH4i66Hfx2WFAuYHMRH
- shBqDGYkwWgubtVtUaRlOoxtEpv7VkxyWP2GqjlDwg/dDYO+ehbIl++cL92gNUrc+51JoZAEcY/
- B++VM3nVszzxhNwvoQD7/6dgBb16CeZaPynaqSWwl1vQBeJI5gSmh8YpK6bn7gqi2zLL47K8oaQ
- BKcLs0bI7z0hWR41/oL3KnvLl5q4V8xPRUskPoydKcVMp7vbL/zQiyJM7LKN6EexHJgIVouv/n9
- 8AnFCNNUc+CyMCSmHbPhENwO6NRSDzoKTy6JNDkg4afW/Ys3MYoKqafPVLa1L3sGco8FWn70JV1
- B00ZxPPtAryTlZ2sY9345V4RgXcrEYh+K0KE=
-X-Google-Smtp-Source: AGHT+IGrLpdY84/PdRjtJsJyyKYcnXriJqRlZ8qlxpFnBQLPztru8DpbYcoG6/79lO3orLVoL703aA==
-X-Received: by 2002:a05:6a00:1304:b0:736:4d05:2e2e with SMTP id
- d2e1a72fcca58-747c1a83646mr4601147b3a.6.1748640188834; 
- Fri, 30 May 2025 14:23:08 -0700 (PDT)
+ AJvYcCW0J+hGTJY3zDJL703Kwt6pCkZTalHo6zYuUiMN51Neg/TAhenlgrVrtwANHesDPwIxDEfL9Oo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzEd5kcG7+ICxVU+ATHtoV6xy3uQ4DtMTIsvR4k5M/yMzxgyIcE
+ opuUrGy7dYXfhI8K+g+WwRoGvk5FE+PVqRNRh1A6MBMQ1AH1p4aHSgEsA+4rXUszw64=
+X-Gm-Gg: ASbGncuL3G3CVD9su9YGZysngKiJC0iJlMLDsaLA5cdQT6eLVfIy7LEu0Cm2H9v9+p8
+ 1K/VQzyKjTJnpcrS4KSUyhrGaQ0b4q3MqptU7eWw1+17AQ3TALCv1fL0RB/6ucp4exxRQmoib2J
+ ujjUOO2uBUZDbGpRltvEizb52s89xN2tYVTI4ZXhekRsABMipZ/lfEt4sk/YYH5VOnEKDWN8y1/
+ xNJvTJgoni3bUHsvwp3wZ8LvsaNIJjOD6ZdZUWvIVN10hbjRok35L4XiNbH6Um+8ET/ezZZ3S6W
+ S/L3VNhA7ShjTeh8bAjrKqThhL26nqJzp8dtqfxWeJktHIfOQgMgXtHGNQjOhBkCCF/0gEzmiEj
+ vAGnAjARuWrYN2Q==
+X-Google-Smtp-Source: AGHT+IGxlrHRzE/v9sqIVc8grepJ0rhHD+0VSUhNCYIZBzKiGZnzNhp8/SpvCvo+6j8kLuctkxgNvw==
+X-Received: by 2002:a05:6a00:3d4f:b0:736:a7ec:a366 with SMTP id
+ d2e1a72fcca58-747bd9711e1mr6974426b3a.9.1748640190022; 
+ Fri, 30 May 2025 14:23:10 -0700 (PDT)
 Received: from dev-linux.. (syn-076-088-115-008.res.spectrum.com.
  [76.88.115.8]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-747affadf7bsm3594039b3a.108.2025.05.30.14.23.07
+ d2e1a72fcca58-747affadf7bsm3594039b3a.108.2025.05.30.14.23.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 14:23:08 -0700 (PDT)
+ Fri, 30 May 2025 14:23:09 -0700 (PDT)
 From: Sukrut Bellary <sbellary@baylibre.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Sukrut Bellary <sbellary@baylibre.com>,
  Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
  Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/3] pwm: ti: am33xx: Fix build warnings in dev_dbg()
-Date: Fri, 30 May 2025 14:22:31 -0700
-Message-Id: <20250530212232.1686613-3-sbellary@baylibre.com>
+Subject: [PATCH v2 3/3] board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
+Date: Fri, 30 May 2025 14:22:32 -0700
+Message-Id: <20250530212232.1686613-4-sbellary@baylibre.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250530212232.1686613-1-sbellary@baylibre.com>
 References: <20250530212232.1686613-1-sbellary@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,32 +102,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG_PWM_TI_EHRPWM is enabled, it throws the build warning in
-dev_dbg() due to incorrect format specifier as,
+On AM335x EVM[1],
+1. pin AM335X_ECAP0_IN_PWM0_OUT is used to enable the
+backlight. ECAP0 can be configured in single channel PWM mode.
+If CONFIG_PWM_TI_ECAP is enabled, perform eCAP0 pin muxing.
 
-"warning: format ‘%lx’ expects argument of type ‘long unsigned int’, but
-argument 4 has type ‘fdt_addr_t’ {aka ‘unsigned int’}".
+2. Pins LCD_DATA0 - LCD_DATA15, gpmc_ad8 - gpmc_ad15 and
+lcd_vsync, lcd_sync, lcd_ac_bias_en, lcd_pclk are used for driving LCD.
+If CONFIG_AM335X_LCD is enabled, perform the LCD pin muxing.
 
-Fix this with the correct format specifier.
+This is required to enable splash screen support on AM335x EVM.
+[1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
 
 Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
 ---
- drivers/pwm/pwm-ti-ehrpwm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/ti/am335x/mux.c | 48 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
 
-diff --git a/drivers/pwm/pwm-ti-ehrpwm.c b/drivers/pwm/pwm-ti-ehrpwm.c
-index 563109ef0f80..135ea3b43212 100644
---- a/drivers/pwm/pwm-ti-ehrpwm.c
-+++ b/drivers/pwm/pwm-ti-ehrpwm.c
-@@ -399,7 +399,7 @@ static int ti_ehrpwm_of_to_plat(struct udevice *dev)
- 		return -EINVAL;
- 	}
+diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
+index 960de15398f8..d416d88c1a19 100644
+--- a/board/ti/am335x/mux.c
++++ b/board/ti/am335x/mux.c
+@@ -274,6 +274,47 @@ static struct module_pin_mux uart3_icev2_pin_mux[] = {
+ 	{-1},
+ };
  
--	dev_dbg(dev, "regs=0x%08lx\n", priv->regs);
-+	dev_dbg(dev, "regs=0x%08x\n", priv->regs);
- 	return 0;
- }
- 
++#if (IS_ENABLED(CONFIG_AM335X_LCD))
++static struct module_pin_mux lcd_pin_mux[] = {
++	{OFFSET(lcd_data0), (MODE(0))},		/* LCD-Data(0) */
++	{OFFSET(lcd_data1), (MODE(0))},		/* LCD-Data(1) */
++	{OFFSET(lcd_data2), (MODE(0))},		/* LCD-Data(2) */
++	{OFFSET(lcd_data3), (MODE(0))},		/* LCD-Data(3) */
++	{OFFSET(lcd_data4), (MODE(0))},		/* LCD-Data(4) */
++	{OFFSET(lcd_data5), (MODE(0))},		/* LCD-Data(5) */
++	{OFFSET(lcd_data6), (MODE(0))},		/* LCD-Data(6) */
++	{OFFSET(lcd_data7), (MODE(0))},		/* LCD-Data(7) */
++	{OFFSET(lcd_data8), (MODE(0))},		/* LCD-Data(8) */
++	{OFFSET(lcd_data9), (MODE(0))},		/* LCD-Data(9) */
++	{OFFSET(lcd_data10), (MODE(0))},	/* LCD-Data(10) */
++	{OFFSET(lcd_data11), (MODE(0))},	/* LCD-Data(11) */
++	{OFFSET(lcd_data12), (MODE(0))},	/* LCD-Data(12) */
++	{OFFSET(lcd_data13), (MODE(0))},	/* LCD-Data(13) */
++	{OFFSET(lcd_data14), (MODE(0))},	/* LCD-Data(14) */
++	{OFFSET(lcd_data15), (MODE(0))},	/* LCD-Data(15) */
++	{OFFSET(gpmc_ad15), (MODE(1))},		/* LCD-Data(16) */
++	{OFFSET(gpmc_ad14), (MODE(1))},		/* LCD-Data(17) */
++	{OFFSET(gpmc_ad13), (MODE(1))},		/* LCD-Data(18) */
++	{OFFSET(gpmc_ad12), (MODE(1))},		/* LCD-Data(19) */
++	{OFFSET(gpmc_ad11), (MODE(1))},		/* LCD-Data(20) */
++	{OFFSET(gpmc_ad10), (MODE(1))},		/* LCD-Data(21) */
++	{OFFSET(gpmc_ad9), (MODE(1))},		/* LCD-Data(22) */
++	{OFFSET(gpmc_ad8), (MODE(1))},		/* LCD-Data(23) */
++	{OFFSET(lcd_vsync), (MODE(0))},		/* LCD-VSync */
++	{OFFSET(lcd_hsync), (MODE(0))},		/* LCD-HSync */
++	{OFFSET(lcd_ac_bias_en), (MODE(0))},	/* LCD-DE */
++	{OFFSET(lcd_pclk), (MODE(0))},		/* LCD-CLK */
++	{-1},
++};
++#endif
++
++#if (IS_ENABLED(CONFIG_PWM_TI_ECAP))
++static struct module_pin_mux ecap_pin_mux[] = {
++	{OFFSET(ecap0_in_pwm0_out), (MODE(0))},         /* ecap0_in_pwm0_out */
++	{-1},
++};
++#endif
++
+ #if defined(CONFIG_NOR_BOOT)
+ void enable_norboot_pin_mux(void)
+ {
+@@ -389,6 +430,13 @@ void enable_board_pin_mux(void)
+ 			configure_module_pin_mux(mmc1_pin_mux);
+ 			configure_module_pin_mux(spi0_pin_mux);
+ 		}
++		#if IS_ENABLED(CONFIG_AM335X_LCD)
++			configure_module_pin_mux(lcd_pin_mux);
++		#endif
++
++		#if IS_ENABLED(CONFIG_PWM_TI_ECAP)
++			configure_module_pin_mux(ecap_pin_mux);
++		#endif
+ 	} else if (board_is_idk()) {
+ 		/* Industrial Motor Control (IDK) */
+ 		configure_module_pin_mux(mii1_pin_mux);
 -- 
 2.34.1
 
