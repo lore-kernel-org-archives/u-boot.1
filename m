@@ -4,60 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99B8C5B543
-	for <u-boot@archiver.kernel.org>; Sat, 31 May 2025 12:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31C39C5B549
+	for <u-boot@archiver.kernel.org>; Sat, 31 May 2025 13:10:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F292E82AE1;
-	Sat, 31 May 2025 14:51:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kde.org
+	by phobos.denx.de (Postfix) with ESMTP id 69D5B82116;
+	Sat, 31 May 2025 15:10:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=kde.org header.i=@kde.org header.b="D/LF7UZr";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SaDgKSLW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9ACE81F32; Sat, 31 May 2025 12:40:58 +0200 (CEST)
-Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
+ id 34E8A82B0F; Sat, 31 May 2025 15:10:24 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90DF480F0E
- for <u-boot@lists.denx.de>; Sat, 31 May 2025 12:40:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=kde.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bogdan@kde.org
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46]) (Authenticated sender: vatra)
- by letterbox.kde.org (Postfix) with ESMTPSA id EDE2332C37E
- for <u-boot@lists.denx.de>; Sat, 31 May 2025 11:40:55 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
- t=1748688056; bh=dOwcbFZXbjTTLtTgPdbgDKpTKxwZzhaGlnG+l4e9rGM=;
- h=From:Date:Subject:To:From;
- b=D/LF7UZr1CCPVzFPjMCBHgVL3W2uXjoHiV36tnxy9LYLt7+cU9ZK/xyW2P2nwCLv0
- dZUoYgNipdiNqWfEkatyS9QoohpiOoNrVUsJzvGnVy2PSp6DP98Hl/GBAqRJbWkiCQ
- aFhyMJRPHPVJZcWI5KwuDd5sS6ugR3mexWU54KlEu4yM9zmn6jwuQxxY0lYoPqtgkg
- Ilcb7BOkTBsc4RwDTURrT9+/Kur92EwgjQzd2XB+C3zayX4B0N0vKhDJGgbsFOCeGB
- QBYR6yeN80egongubV6pTUfMhS/3MIAFSNp7u+MfS+u8XuTkljwePdOtEKy9mgYJW8
- 4OEBtynlPSO9A==
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-60497d07279so5722179a12.3
- for <u-boot@lists.denx.de>; Sat, 31 May 2025 03:40:55 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yzk83voV+5G1LOiB1AWga45wSXX4AG+fnoIaRYvQKKtpWq7yMlQ
- Yo1zt/tGTcQWKCb3nX71U3Sbwg+Ut725VZ4OQwCrjsHd1qdozyY8ZYj+1HLftoAxDDCB7TDawaQ
- g7IC4nEP/+TUWtweYGabhNzb5bDhwHK0=
-X-Google-Smtp-Source: AGHT+IHs8a2QaGJsYgdAhQcykLmwHSiBLwV+UvL0a/Yy6EvQVa6jwouJo1k00OOYun9Lcv3GhMcquRRFMTwyPk4x0yc=
-X-Received: by 2002:a05:6402:520e:b0:602:1337:43fd with SMTP id
- 4fb4d7f45d1cf-6057c1c1ec6mr4763828a12.13.1748688055521; Sat, 31 May 2025
- 03:40:55 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id BB2CA82B07
+ for <u-boot@lists.denx.de>; Sat, 31 May 2025 15:10:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7A5925C552A;
+ Sat, 31 May 2025 13:08:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 17206C4CEE3;
+ Sat, 31 May 2025 13:10:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1748697021;
+ bh=J6wkmFfInW7sCuAc23x3i6ek8Bjdyzz/1bK11sB27nc=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=SaDgKSLWduBkPmd6uX16CuOrWzDT2vx6CHGh45frDoZoEoZ1FAJiKF3GPbgrJOHMZ
+ iEvS/5BeW7szqoscKax64Go9/Bt01k/DHoMrs7+JUnnP8BzxrTw87aSEMKv3XvBqeY
+ eXG+T8dU14GUVq7fdY0ZB7Y4T8Tb/0J79uoWHRqbOVhu2ZtVclbVgTXNBAIB9ZpIqB
+ DOVh7iXC++Nwz1/81UeMZwVOsjQKI+yQ1eEPIwGC6KLIEOnSkAn+ocStZrqr9NYIpA
+ +aKCRfbPRUxLNszXc1AVXP4dSRBFjJpzsTrm2dXb5TWnby7yf53nI8wBQTNdTaVwW3
+ AxhVCbE6bZsIw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 0EB4CC5AE59;
+ Sat, 31 May 2025 13:10:21 +0000 (UTC)
+From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
+Subject: [PATCH 0/2] arm: armv7: fix a bug that prevents CONFIG_BLOBLIST
+ and CONFIG_POSITION_INDEPENDENT to be enabled together
+Date: Sat, 31 May 2025 21:10:01 +0800
+Message-Id: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
 MIME-Version: 1.0
-From: BogDan Vatra <bogdan@kde.org>
-Date: Sat, 31 May 2025 13:40:19 +0300
-X-Gmail-Original-Message-ID: <CAG9QW4GCbF1ctRXkcm0zvf3MBCRUaep7qdP2+4348xLhHRL=dg@mail.gmail.com>
-X-Gm-Features: AX0GCFu3uTRnP3bPPsEiHYdvmoQne-itM2VaFxZ80fuVSlc2blu-ByHl46emq-A
-Message-ID: <CAG9QW4GCbF1ctRXkcm0zvf3MBCRUaep7qdP2+4348xLhHRL=dg@mail.gmail.com>
-Subject: Adding AMD GPU support via Linux ATOM BIOS emulator port
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Sat, 31 May 2025 14:51:08 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKn/OmgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDUyNL3YLM1PiknPyk+LTMCt1EM0MjI8tki7TkZDMloJaColSgMNi46Nj
+ aWgD34gdsXgAAAA==
+To: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1748697019; l=599;
+ i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
+ bh=J6wkmFfInW7sCuAc23x3i6ek8Bjdyzz/1bK11sB27nc=;
+ b=mJa2pGoYHUF9D8ixQXjkTEDmNwABLppxunfYU5k59XybeIAMVyvVOeks4zWxYsNIbforoBURT
+ CXf28k/4RSoB3jZ6376k/PTiOfG+Pal0q1BDvE/UhBZb0A494c19+DW
+X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
+ pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
+X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
+ auth_id=67
+X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,39 +82,30 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello there,
+This patchset also enables CONFIG_POSITION_INDEPENDENT for qemu boards
+to avoid similar issues to happen again in the future.
 
-  I'd like to *try* to port the Linux ATOM BIOS emulator to U-Boot to
-enable AMD GPU initialization and basic display support across all
-platforms, eliminating the dependency on option ROMs.
-  Linux already successfully uses this approach on platforms without option
-ROM support. Newer AMD GPUs work on older PowerPC Macs (like the G5) that
-lack OpenFirmware GPU support, demonstrating the viability of ATOM BIOS
-emulation for cross-platform GPU initialization.
+Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+---
+Yang Xiwen (2):
+      arm: armv7: restore section to .text after saved_args
+      arm: qemu: Add imply CONFIG_POSITION_INDEPENDENT
 
-The goal would be to provide:
- - basic AMD GPU detection and initialization.
- - simple framebuffer/display output capability.
-
-Before starting this effort, I'd like to get your input on:
- - feasibility: Does U-Boot's current PCI subsystem provide sufficient
-support for tasks like mapping and reading the VBIOS from an AMD GPU, and
-accessing its BARs for register I/O, which would be essential for an ATOM
-BIOS interpreter? Are there any architectural limitations that would
-prevent this integration?
-
- - prior work: Has anyone already started working on AMD GPU support in
-U-Boot? If so, what's the current status and are there opportunities to
-collaborate?
-
-
-Any guidance, concerns, or suggestions would be greatly appreciated before
-I dive into the implementation.
+ arch/arm/Kconfig           | 1 +
+ arch/arm/cpu/armv7/start.S | 2 ++
+ 2 files changed, 3 insertions(+)
+---
+base-commit: 93905ab6e7564089f5d7b703b660464d675e5ab0
+change-id: 20250529-pie_blob_fix-a61229c8fcc6
 
 Best regards,
-BogDan.
+-- 
+Yang Xiwen <forbidden405@outlook.com>
+
+
