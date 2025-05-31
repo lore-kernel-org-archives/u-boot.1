@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A8BC5B549
-	for <u-boot@archiver.kernel.org>; Sat, 31 May 2025 13:10:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABA7C5B549
+	for <u-boot@archiver.kernel.org>; Sat, 31 May 2025 13:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B08DA82B0F;
-	Sat, 31 May 2025 15:10:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 00C2B82B37;
+	Sat, 31 May 2025 15:10:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZvDsSSO5";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fTEjVJ2W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AD5282AE1; Sat, 31 May 2025 15:10:25 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 5A6D182102; Sat, 31 May 2025 15:10:25 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D470782102
- for <u-boot@lists.denx.de>; Sat, 31 May 2025 15:10:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21AEB82AE1
+ for <u-boot@lists.denx.de>; Sat, 31 May 2025 15:10:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9D2DF5C557B;
- Sat, 31 May 2025 13:08:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 35011C4CEEE;
+ by tor.source.kernel.org (Postfix) with ESMTP id D1DBD6111F;
+ Sat, 31 May 2025 13:10:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2D04AC4CEEF;
  Sat, 31 May 2025 13:10:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1748697021;
- bh=oqtgR9Ttm29fv2XsmgYLt8RYqWSEnXj/XUuDIAYCV6A=;
+ bh=Z54a9U4uKb9N8e6Ikkjm4ImrdBA90F03K4ieE05Uodg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=ZvDsSSO59Ut7Z/WNsc3PNphRQe2T/lyHXiF+UqslNG/w7yUgYCVkoL5cZWMh9zeKL
- PlgxEQx5/Nkcyfg5rqHgfHmYtwmujtkgrVzKK1IhmMmtBvwtEuHFeHFLCOv1dLeMZX
- t+p/JK5MrVMCroUm5CtsDSjPwAIAGxQcP67vL3s+h8+u0v509Zn2ZlqWsho5xHjVoX
- whzcOMUNXkoSmWJMga2GnM7epd2n8P3iWW/Cn1SWYxtURf6Tcxr/K8RgHev4Xz3Km7
- AbB14PCcIe16xvtiu0NufuCqeJ1Ufmm52m77KUnSPWV0MH6Cfhd/CUehYBLqO4k31b
- V05LWFHUkVotw==
+ b=fTEjVJ2Wy+ag+NaU45Rn1hHUMpbu0kgZ6tF8bvN8OcKuDfEyy4TwjLry6lVsOxtPc
+ HjKYX/b4gnCmdgGx/Yr0V/H9W938YwZ7XKvccl45YGpf4pXDXgBj0CFeJTruo6Jens
+ QMnrxmGjLGdsm2BrGDs/wJN4E0uv2oTkZO5Pfop71xrf9UyAWajbsALspp7cN9LzTb
+ m8S31MrCBJrW2xGNs3vpcKKqJ/w2VbT3F2HWqhO8K3y5UwUySlHDF7BWwv/wM5Ui8/
+ GoUBZvUvkDoYpwdjvhKKEX25cQgwtvzmTIYauxSYhEfdi71NgOSx50sfoeNUAHWS1H
+ /Jsfgx5ZhVNBg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 29310C5B559;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 1C46AC5B549;
  Sat, 31 May 2025 13:10:21 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Sat, 31 May 2025 21:10:03 +0800
-Subject: [PATCH 2/2] arm: qemu: Add imply CONFIG_POSITION_INDEPENDENT
+Date: Sat, 31 May 2025 21:10:02 +0800
+Subject: [PATCH 1/2] arm: armv7: restore section to .text after saved_args
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250531-pie_blob_fix-v1-2-7b4a37987dbc@outlook.com>
+Message-Id: <20250531-pie_blob_fix-v1-1-7b4a37987dbc@outlook.com>
 References: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
 In-Reply-To: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -59,11 +59,11 @@ To: Tom Rini <trini@konsulko.com>,
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1748697019; l=834;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1748697019; l=787;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=tmfpcKi7hSRAY+ZRTdHYSRSCz90BoQaXCuM3tnV10mM=;
- b=bslIUZLubvHfstdqGLkBVv0YZM9ELaZDqmAcUZghxEfADLEKlamBa9K4fzMcjSk9kSZOmuuDY
- VoTrLKGBUX2Aa33klr7f//foJGRqrxr4hSSEq94L46pIkX6REl5FvkI
+ bh=jpS30FhFq7BpJW0prlSwZ9UeWyw3m/sRYRuGCarZRng=;
+ b=6g3n8LEXd5CF2RoHf/TZY2u8HdHXE0/xdLGXiVGwfCb+q7qz1Fn22/1hkLOTqAwYI73JrcA0a
+ BL0AfPouGZnBeK67jql2ZnRkW9JqPdb4aEGHiPx1+PLwpva8auBD6jD
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -88,32 +88,31 @@ X-Virus-Status: Clean
 
 From: Yang Xiwen <forbidden405@outlook.com>
 
-Add 'imply CONFIG_POSITION_INDEPENTDENT' for QEMU arm arch. This allows
-qemu arm boards to load u-boot.bin at any address. It is skipped by
-default when u-boot is loaded by either --bios or --kernel.
+when CONFIG_BLOBLIST is enabled, the section is switched to .data but is
+not switched back to .text. It makes all the code below placed in .data
+section, also breaks CONFIG_POSITION_INDEPENDENT.
 
-To load u-boot.bin at a different address, one can use u-boot
-chain-loading or qemu loader device[1].
+Fix it by adding `.section .text` to switch the section back to .text.
 
-[1] https://www.qemu.org/docs/master/system/generic-loader.html
-
+Fixes: 5103e69344d6 ("arm: armv7: save boot arguments")
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- arch/arm/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/cpu/armv7/start.S | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 79f60eb3f349..6ff3f2750ea8 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1091,6 +1091,7 @@ config ARCH_QEMU
- 	imply USB_XHCI_PCI
- 	imply USB_KEYBOARD
- 	imply CMD_USB
-+	imply POSITION_INDEPENDENT
+diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
+index 959251957de4..833486817f84 100644
+--- a/arch/arm/cpu/armv7/start.S
++++ b/arch/arm/cpu/armv7/start.S
+@@ -182,6 +182,8 @@ saved_args:
+ 	.word 0
+ 	.endr
+ END(saved_args)
++
++	.section .text
+ #endif
  
- config ARCH_RENESAS
- 	bool "Renesas ARM SoCs"
+ #ifdef CONFIG_ARMV7_LPAE
 
 -- 
 2.43.0
