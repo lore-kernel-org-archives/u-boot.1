@@ -4,110 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99046C54FB3
-	for <u-boot@archiver.kernel.org>; Sun,  1 Jun 2025 21:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE1DEC54FB3
+	for <u-boot@archiver.kernel.org>; Sun,  1 Jun 2025 22:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1027F8296B;
-	Sun,  1 Jun 2025 23:32:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1351C82045;
+	Mon,  2 Jun 2025 00:14:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rl6XRznX";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pzCw2uHV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2C6E82991; Sun,  1 Jun 2025 23:32:10 +0200 (CEST)
+ id 8528C8296B; Mon,  2 Jun 2025 00:14:54 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9E548294C
- for <u-boot@lists.denx.de>; Sun,  1 Jun 2025 23:32:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3366382012
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 00:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1748813527; x=1749418327; i=xypron.glpk@gmx.de;
- bh=mnTypxN98x1Bi9qT2hJkokCAqikhSPaLHRlL6vLWAfY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
+ s=s31663417; t=1748816061; x=1749420861; i=xypron.glpk@gmx.de;
+ bh=vNXTqGbF8TfYyRwKLltXVGBlFgF7UqZ7FLa3POIntdk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=rl6XRznXNkbpY0n3kxOTk+TD/uOaCdc7JXP+m4NthhgiUNl2QESaYhZO4yfNA0Ar
- RatO3Twkfo/ApTlkE3pCJVtuv0Os2c4ghu6ENm9D8K/ZjbMIgBDFks4pkqwqTP8Gy
- ynSXrFg1Tk6O+B7P/iNuAYmH5XITG6ejuuh67dCjWpsYoLsMiJjC+H/H6F1p1GUC2
- zIWde75oMPFlBNhN21NF5z7fifUvNo/RxOxMY6ZOULP29Omr7U3L0itdIwFgVJ+kz
- H+GB2ZzqRVDY3/SewXqhIURHfJGIQCbVUg5/5C+qNsqJhuyvSuiUpeIj4/3FX/qqh
- 2Ce1qZledFzoo/gSBg==
+ b=pzCw2uHV60WSYwwJd7/S8F7eLlW2K9WRUv7m+CRPwhNUJFEei/a2PpuEtruynM+5
+ E63t8BgO1IgPWGXSqHvoDLlqD0L/iX4Ek3rPO+h7NzBjAHhSjyg1JnfzB0b8k8EjM
+ wRP9044y6MFZn2IU8nY2Ehe3mZYVS0sphF3yOv+uuOvYkXUGmeGJO5T1sSsyGheUy
+ qlPWAOZ1sJ+93mILdqpSCg+zGs2yp/vQbwN6lUnQExXGDHxO2kqye/29LZq2TLo3G
+ kghDP+MBjZ8/G3I9SzAUGKoFGHAeAbxbH7fvjCQd6+QMDUax5/X/FDg7Bq4xQhYeJ
+ Mh0alC0POzZt8bdjxA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MVeMA-1uTVFT1p6i-00Ulec; Sun, 01
- Jun 2025 23:32:07 +0200
-Message-ID: <2ea82a25-9265-4f99-b6ac-83aff3a955d1@gmx.de>
-Date: Sun, 1 Jun 2025 23:32:02 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N4QwW-1v38OJ0g58-013H6V; Mon, 02
+ Jun 2025 00:14:21 +0200
+Message-ID: <22d48966-26d0-4a2e-9e13-3d28215cc234@gmx.de>
+Date: Mon, 2 Jun 2025 00:14:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] doc: efi_loader: Tidy up the bootefi-command docs
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250601120406.2106-1-sjg@chromium.org>
+Subject: Re: [PATCH v4 1/5] disk: part: implement generic function
+ part_get_info_by_uuid()
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+References: <20250513091710.3719292-1-quic_varada@quicinc.com>
+ <20250513091710.3719292-2-quic_varada@quicinc.com>
 Content-Language: en-US
+Cc: u-boot-qcom@groups.io, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ joe.hershberger@ni.com, avromanov@salutedevices.com,
+ michael@amarulasolutions.com, sjg@chromium.org, hs@denx.de,
+ michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
+ venkatesh.abbarapu@amd.com, ansuelsmth@gmail.com,
+ cniedermaier@dh-electronics.com, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250601120406.2106-1-sjg@chromium.org>
+In-Reply-To: <20250513091710.3719292-2-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:u5mk6H34Q5hhg9DnfsbP1U5YBnEc7Ilg0M3Ls/NOPZeDIhTer+I
- CMdJXOOsRM5GcOxt7VKpeT90i1iBERFpUhszLPSKp+LUuuhwQwMyN+ok0FO2gwctRcZW/+s
- b4s6gPS2/MPACMra2GMAhPBKR0FKPNN/x4dHZKQlZMqSXeoJ8etUx5RIlb8ax0uMghSElIp
- oTHuo4tGRmGjqIlh7LUhA==
-UI-OutboundReport: notjunk:1;M01:P0:U5hHOP/m9eU=;cRR/XFhuRDvakFLKZtGDzTKRizv
- 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
- vFxna8uvH2GbyxRK
+X-Provags-ID: V03:K1:iBB08YBoA8cyLHshrgL9GTYdr6jRod1U/5Sxllm+Bi13Ug9J8ix
+ /OYh1SY57rgDW11ILgGx8bUeWMEQuhJDHhVLEkPdAVvXOdTmSstx8a1mi6zl4rfLnbmUfGy
+ vyCSQkAYIBUBJUD+bieKZSH7urfhEZZdEcWlSO8yoN0IozFE1cpwtwx8zPujYdGtvi976ic
+ 96bLlrq43MMVoe2mEUCdA==
+UI-OutboundReport: notjunk:1;M01:P0:QTk0wWN1XGI=;75ggilvp5kGENTJ8HlQ3vv0I0gx
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,96 +132,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/1/25 14:04, Simon Glass wrote:
-> There are backslashes in some of the tags which seems to be unnecessary.
-> Remove then.
+On 5/13/25 11:17, Varadarajan Narayanan wrote:
+> Add function to search for a partition by UUID as partition
+> names may not be unique.
 >=20
-> Change the word 'either' to 'any' since there are three options.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 > ---
+> v4: Use if (!CONFIG_IS_ENABLED(PARTITION_UUIDS)) instead of '#if'
 >=20
->   doc/usage/cmd/bootefi.rst | 20 ++++++++++----------
->   1 file changed, 10 insertions(+), 10 deletions(-)
+>      Not breaking from the for loop if '->get_info()' returns non-zero
+>      to have similar behaviour as in part_get_info_by_name().
+> ---
+>   disk/part.c    | 39 +++++++++++++++++++++++++++++++++++++++
+>   include/part.h | 20 ++++++++++++++++++++
+>   2 files changed, 59 insertions(+)
 >=20
-> diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-> index 3efe9e9df57..d6e4e62e383 100644
-> --- a/doc/usage/cmd/bootefi.rst
-> +++ b/doc/usage/cmd/bootefi.rst
-> @@ -20,19 +20,19 @@ Synopsis
->   Description
->   -----------
+> diff --git a/disk/part.c b/disk/part.c
+> index 303178161c0..8eefda39d7b 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -698,6 +698,45 @@ int part_get_info_by_name(struct blk_desc *desc, co=
+nst char *name,
+>   	return -ENOENT;
+>   }
 >  =20
-> -The *bootefi* command is used to launch a UEFI binary which can be eith=
-er of
-> +The *bootefi* command is used to launch a UEFI binary which can be any =
-of
+> +int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+> +			  struct disk_partition *info)
+> +{
+> +	struct part_driver *part_drv;
+> +	int ret;
+> +	int i;
+> +
+> +	if (!CONFIG_IS_ENABLED(PARTITION_UUIDS))
+> +		return -ENOENT;
+> +
+> +	part_drv =3D part_driver_lookup_type(desc);
+> +	if (!part_drv)
+> +		return -1;
+> +
+> +	if (!part_drv->get_info) {
+> +		log_debug("## Driver %s does not have the get_info() method\n",
+> +			  part_drv->name);
+> +		return -ENOSYS;
+> +	}
+> +
+> +	for (i =3D 1; i < part_drv->max_entries; i++) {
+> +		ret =3D part_drv->get_info(desc, i, info);
+> +		if (ret !=3D 0) {
+> +			/*
+> +			 * Partition with this index can't be obtained, but
+> +			 * further partitions might be, so keep checking.
+> +			 */
+> +			continue;
+> +		}
+> +
+> +		if (!strncasecmp(uuid, disk_partition_uuid(info), UUID_STR_LEN)) {
+> +			/* matched */
+> +			return i;
+> +		}
+> +	}
+> +
+> +	return -ENOENT;
+> +}
+> +
+>   /**
+>    * Get partition info from device number and partition name.
+>    *
+> diff --git a/include/part.h b/include/part.h
+> index fcb3c13dea4..3e6eb0ec33f 100644
+> --- a/include/part.h
+> +++ b/include/part.h
+> @@ -315,6 +315,20 @@ int blk_get_device_part_str(const char *ifname, con=
+st char *dev_part_str,
+>   int part_get_info_by_name(struct blk_desc *desc, const char *name,
+>   			  struct disk_partition *info);
 >  =20
->   * UEFI application
->   * UEFI boot services driver
->   * UEFI run-time services driver
+> +/**
+> + * part_get_info_by_uuid() - Search for a partition by uuid
+> + *                           among all available registered partitions
+
+When I read this I don't know if you mean:
+
+* "partition type GUID" or
+* "unique partition GUID".
+
+The terms "partition type GUID" and "partition unique GUID" are defined=20
+in the UEFI specification.
+
+https://uefi.org/specs/UEFI/2.11/05_GUID_Partition_Table_Format.html#gpt-p=
+artition-entry-array
+
+Please, provide a concise description.
+
+> + *
+> + * @desc:	block device descriptor
+> + * @uuid:	the specified table entry uuid
+
+Every parameter is "specified". "Table entry uuid" isn't getting to the=20
+point, either. Please, use one of the established terms.
+
+Calling a parameter "uuid" when the specification calls it "GUID" looks=20
+inconsistent.
+
+Best regards
+
+Heinrich
+
+> + * @info:	the disk partition info
+> + *
+> + * Return: the partition number on match (starting on 1), -ENOENT on no=
+ match,
+> + * otherwise error
+> + */
+> +int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+> +			  struct disk_partition *info);
+> +
+>   /**
+>    * part_get_info_by_dev_and_name_or_num() - Get partition info from de=
+v number
+>    *					    and part name, or dev number and
+> @@ -386,6 +400,12 @@ static inline int part_get_info_by_name(struct blk_=
+desc *desc, const char *name,
+>   	return -ENOENT;
+>   }
 >  =20
->   An operating system requires a hardware description which can either b=
-e
-> -presented as ACPI table (CONFIG\_GENERATE\_ACPI\_TABLE=3Dy) or as devic=
-e-tree.
-> -The load address of the device-tree may be provided as parameter *fdt\_=
-addr*. If
-> +presented as ACPI table (CONFIG_GENERATE_ACPI_TABLE=3Dy) or as device-t=
-ree.
-> +The load address of the device-tree may be provided as parameter *fdt_a=
-ddr*. If
->   this address is not specified, the bootefi command will try to fall ba=
-ck in
->   sequence to:
->  =20
-> -* the device-tree specified by environment variable *fdt\_addr*
-> +* the device-tree specified by environment variable *fdt_addr*
->   * the device-tree specified by environment variable *fdtcontroladdr*
->  =20
->   The load address of the binary is specified by parameter *image_addres=
-s*. A
-> @@ -110,7 +110,7 @@ U-Boot can be compiled with UEFI unit tests. These u=
-nit tests are invoked using
->   the *bootefi selftest* sub-command.
->  =20
->   Which unit test is executed is controlled by the environment variable
-> -*efi\_selftest*. If this variable is not set, all unit tests that are n=
-ot marked
-> +*efi_selftest*. If this variable is not set, all unit tests that are no=
-t marked
->   as 'on request' are executed.
->  =20
->   To show a list of the available unit tests the value *list* can be use=
-d
-> @@ -126,7 +126,7 @@ To show a list of the available unit tests the value=
- *list* can be used
->       'configuration tables'
->       ...
->  =20
-> -A single test is selected for execution by setting the *efi\_selftest*
-> +A single test is selected for execution by setting the *efi_selftest*
->   environment variable to match one of the listed identifiers
->  =20
->   ::
-> @@ -140,10 +140,10 @@ return to the command line but require a board res=
-et.
->   Configuration
->   -------------
->  =20
-> -To use the *bootefi* command you must specify CONFIG\_CMD\_BOOTEFI=3Dy.
-> -The *bootefi bootmgr* sub-command requries CMD\_BOOTEFI\_BOOTMGR=3Dy.
-> -The *bootefi hello* sub-command requries CMD\_BOOTEFI\_HELLO=3Dy.
-> -The *bootefi selftest* sub-command depends on CMD\_BOOTEFI\_SELFTEST=3D=
-y.
-> +To use the *bootefi* command you must specify CONFIG_CMD_BOOTEFI=3Dy.
-> +The *bootefi bootmgr* sub-command requries CMD_BOOTEFI_BOOTMGR=3Dy.
-> +The *bootefi hello* sub-command requries CMD_BOOTEFI_HELLO=3Dy.
-> +The *bootefi selftest* sub-command depends on CMD_BOOTEFI_SELFTEST=3Dy.
->  =20
->   See also
->   --------
+> +static inline int part_get_info_by_uuid(struct blk_desc *desc, const ch=
+ar *uuid,
+> +					struct disk_partition *info)
+> +{
+> +	return -ENOENT;
+> +}
+> +
+>   static inline int
+>   part_get_info_by_dev_and_name_or_num(const char *dev_iface,
+>   				     const char *dev_part_str,
 
