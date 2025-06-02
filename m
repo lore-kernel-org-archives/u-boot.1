@@ -4,40 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CA5C5B555
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9B0FC54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:56:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C4B681F32;
-	Mon,  2 Jun 2025 18:25:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id DB39581FEE;
+	Mon,  2 Jun 2025 18:56:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YJLw52hF";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8505681FEE; Mon,  2 Jun 2025 18:25:22 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FFAD80F9C
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:25:20 +0200 (CEST)
+ id A3EF681FFC; Mon,  2 Jun 2025 18:56:34 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 113B381D6A
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:56:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1uM7yQ-007UhY-1Q;
- Mon, 02 Jun 2025 16:25:18 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Vincent Fazio <vfazio@xes-inc.com>, Michal Simek <michal.simek@amd.com>,
- Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] rtc: add ds1672 driver
-Date: Mon,  2 Jun 2025 09:25:15 -0700
-Message-Id: <20250602162515.1316263-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552GuTdP3281815;
+ Mon, 2 Jun 2025 11:56:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748883389;
+ bh=N4mSY6giGokzjCiAgKcPfq5MJrrOZmEVcTfdxjSp6vw=;
+ h=From:Subject:Date:To:CC;
+ b=YJLw52hF/F2Dxib9aadsEhG2SwAxSfB1fKvnerRa/9e/YiMYtUt418TE+45JaxR2S
+ KOwjwyb9AMkMJHeqFOi+72tOZkwu3FO7UKOGUfYpk5respvaZXSMtsRziVtgo+RrJk
+ RfNMvY/G0Qh/ZJ3VCMzlVe24HaSMEiDMwuDSTEZ8=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552GuTjr3104079
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 2 Jun 2025 11:56:29 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Jun 2025 11:56:28 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Jun 2025 11:56:28 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552GuTSr3252355;
+ Mon, 2 Jun 2025 11:56:29 -0500
+From: Bryan Brattlof <bb@ti.com>
+Subject: [PATCH tiU2025.01 0/2] binman: openssl: x509 entry cleanups
+Date: Mon, 2 Jun 2025 11:56:25 -0500
+Message-ID: <20250602-am62xsip-v1-0-ae8aa62b4b6e@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALnXPWgC/x2MQQqAIBAAvyJ7ztAFo/pHp+hgttUeMtGIIPp71
+ nFgZm5IFJkStOKGSCcn3n0GXQhwq/ULSZ4yAyo0SmMt7VbhlThIdGQaUhXqcYash0gzX/+qh4O
+ 7ryiVhuF5XrB2Qd5mAAAA
+X-Change-ID: 20250128-am62xsip-2ce59e0621bf
+To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>, Bryan Brattlof
+ <bb@ti.com>
+X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,169 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for Dallas/Maxim ds1672 32bit counter RTC.
+Hello everyone,
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+While digging through binman a little I noticed a few x509 extensions 
+that should probably need a little adjusting before the release.
+
+Happy Hacking
+~Bryan
+
+Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- drivers/rtc/Kconfig  |   7 +++
- drivers/rtc/Makefile |   1 +
- drivers/rtc/ds1672.c | 117 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 125 insertions(+)
- create mode 100644 drivers/rtc/ds1672.c
+Bryan Brattlof (2):
+      binman: openssl: remove unused encryption extension
+      binman: openssl: disable JTAG access by default
 
-diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-index 6467f20422be..79b879d68d1b 100644
---- a/drivers/rtc/Kconfig
-+++ b/drivers/rtc/Kconfig
-@@ -94,6 +94,13 @@ config RTC_DS1374
- 	  Support for Dallas Semiconductor (now Maxim) DS1374 and compatible
- 	  Real Time Clock devices.
- 
-+config RTC_DS1672
-+	bool "Enable DS1672 driver"
-+	depends on DM_RTC
-+	help
-+	  Support for Dallas Semiconductor (now Maxim) DS1672 compatible
-+	  Real Time Clock devices.
-+
- config RTC_DS3231
- 	bool "Enable DS3231 driver"
- 	help
-diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
-index 99b5a2a346a9..a4ede413cd17 100644
---- a/drivers/rtc/Makefile
-+++ b/drivers/rtc/Makefile
-@@ -12,6 +12,7 @@ obj-$(CONFIG_RTC_DS1307) += ds1307.o
- obj-$(CONFIG_RTC_DS1338) += ds1307.o
- obj-$(CONFIG_RTC_DS1337) += ds1337.o
- obj-$(CONFIG_RTC_DS1374) += ds1374.o
-+obj-$(CONFIG_RTC_DS1672) += ds1672.o
- obj-$(CONFIG_RTC_DS3231) += ds3231.o
- obj-$(CONFIG_RTC_DS3232) += ds3232.o
- obj-$(CONFIG_RTC_EMULATION) += emul_rtc.o
-diff --git a/drivers/rtc/ds1672.c b/drivers/rtc/ds1672.c
-new file mode 100644
-index 000000000000..4705e5abc932
---- /dev/null
-+++ b/drivers/rtc/ds1672.c
-@@ -0,0 +1,117 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Analog Devices DS1672 I2C RTC driver
-+ *
-+ * Copyright 2025 Gateworks Corporation.
-+ */
-+#include <dm.h>
-+#include <i2c.h>
-+#include <rtc.h>
-+#include <dm/device_compat.h>
-+
-+/* Registers */
-+#define DS1672_REG_CNT_BASE	0
-+#define DS1672_REG_CONTROL	4
-+#define DS1672_REG_TRICKLE	5
-+
-+#define DS1672_REG_CONTROL_EOSC	0x80
-+
-+static int ds1672_read_time(struct udevice *dev, struct rtc_time *tm)
-+{
-+	time64_t secs;
-+	u8 regs[4];
-+	int ret;
-+
-+	ret = dm_i2c_read(dev, DS1672_REG_CONTROL, regs, 1);
-+	if (ret)
-+		return ret;
-+
-+	if (regs[0] & DS1672_REG_CONTROL_EOSC) {
-+		dev_err(dev, "Oscillator not enabled. Set time to enable.\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = dm_i2c_read(dev, DS1672_REG_CNT_BASE, regs, 4);
-+	if (ret)
-+		return ret;
-+	dev_dbg(dev, "raw read: 0x%02x 0x%02x 0x%02x 0x%02x\n",
-+		regs[0], regs[1], regs[2], regs[3]);
-+	secs = ((unsigned long)regs[3] << 24) | (regs[2] << 16) | (regs[1] << 8) | regs[0];
-+	rtc_to_tm(secs, tm);
-+
-+	dev_dbg(dev, "read %lld %4d-%02d-%02d (wday=%d) %2d:%02d:%02d\n", secs,
-+		tm->tm_year, tm->tm_mon, tm->tm_mday,
-+		tm->tm_wday, tm->tm_hour, tm->tm_min, tm->tm_sec);
-+
-+	return 0;
-+}
-+
-+static int ds1672_set_time(struct udevice *dev, const struct rtc_time *tm)
-+{
-+	time64_t secs = rtc_mktime(tm);
-+	u8 regs[5];
-+
-+	dev_dbg(dev, "set %4d-%02d-%02d (wday=%d) %2d:%02d:%02d %lld\n",
-+		tm->tm_year, tm->tm_mon, tm->tm_mday,
-+		tm->tm_wday, tm->tm_hour, tm->tm_min, tm->tm_sec,
-+		secs);
-+
-+	if (tm->tm_year < 2000) {
-+		dev_err(dev, "year %d (before 2000) not supported\n",
-+			tm->tm_year);
-+		return -EINVAL;
-+	}
-+
-+	regs[0] = secs & 0x000000ff;
-+	regs[1] = (secs & 0x0000ff00) >> 8;
-+	regs[2] = (secs & 0x00ff0000) >> 16;
-+	regs[3] = (secs & 0xff000000) >> 24;
-+	regs[4] = 0; /* set control reg to enable counting */
-+
-+	return dm_i2c_write(dev, DS1672_REG_CNT_BASE, regs, 5);
-+}
-+
-+static int ds1672_reset(struct udevice *dev)
-+{
-+	u8 regs[5] = { 0 };
-+
-+	return dm_i2c_write(dev, DS1672_REG_CNT_BASE, regs, 5);
-+}
-+
-+static int ds1672_read8(struct udevice *dev, unsigned int reg)
-+{
-+	return  dm_i2c_reg_read(dev, reg);
-+}
-+
-+static int ds1672_write8(struct udevice *dev, unsigned int reg, int val)
-+{
-+	return dm_i2c_reg_write(dev, reg, val);
-+}
-+
-+static const struct rtc_ops ds1672_rtc_ops = {
-+	.get	= ds1672_read_time,
-+	.set	= ds1672_set_time,
-+	.reset  = ds1672_reset,
-+	.read8	= ds1672_read8,
-+	.write8	= ds1672_write8,
-+};
-+
-+static int ds1672_probe(struct udevice *dev)
-+{
-+	i2c_set_chip_flags(dev, DM_I2C_CHIP_RD_ADDRESS | DM_I2C_CHIP_WR_ADDRESS);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id ds1672_of_id[] = {
-+	{ .compatible = "dallas,ds1672" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(rtc_max313xx) = {
-+	.name	= "rtc-ds1672",
-+	.id     = UCLASS_RTC,
-+	.probe  = ds1672_probe,
-+	.of_match = ds1672_of_id,
-+	.ops    = &ds1672_rtc_ops,
-+};
+ tools/binman/btool/openssl.py       | 23 ++++++++++++-----------
+ tools/binman/etype/ti_secure.py     |  1 +
+ tools/binman/etype/ti_secure_rom.py |  1 +
+ tools/binman/etype/x509_cert.py     |  7 +++++--
+ 4 files changed, 19 insertions(+), 13 deletions(-)
+---
+base-commit: b22a276f039f818d5564bec6637071cfc8a7e432
+change-id: 20250128-am62xsip-2ce59e0621bf
+
+Best regards,
 -- 
-2.25.1
+Bryan Brattlof <bb@ti.com>
 
