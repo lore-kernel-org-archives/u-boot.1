@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A079C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D50BC54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:57:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32AC6800D7;
-	Mon,  2 Jun 2025 16:50:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BF8BD803DF;
+	Mon,  2 Jun 2025 16:57:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EMkYqPVL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GwPNkP5l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 955688006D; Mon,  2 Jun 2025 16:50:36 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E1CB82A8B
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:50:33 +0200 (CEST)
+ id A4EE580BAE; Mon,  2 Jun 2025 16:57:23 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 361828006D
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:57:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552EoW1p3227601;
- Mon, 2 Jun 2025 09:50:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748875832;
- bh=laVBBZlIuO4us69SFeJGRElqdQmGixJkHSx0zdSHiag=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=EMkYqPVLyx46cCect+5hLpDRxoS34gJtGxJ1ibF8q5H2vcTKFxskEDQsbWu3IwURP
- bH2cLcxpUxKMx7AEOyQX0HCQTYXTqG0gmy3u+6t6xFiIebtHmxclyihmZdQxEsQqoL
- pqY2XClUc7oHsfNsmGpoiomVppC7C71efMnI/BMQ=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552EoWY7677930
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 2 Jun 2025 09:50:32 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
- Jun 2025 09:50:32 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 2 Jun 2025 09:50:31 -0500
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552EoGpN3118869;
- Mon, 2 Jun 2025 09:50:29 -0500
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
- <jm@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>, <b-padhi@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH v2 4/4] board: ti: j7*: Add firmware for MCU R5 core1
-Date: Mon, 2 Jun 2025 20:20:15 +0530
-Message-ID: <20250602145015.1274726-5-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250602145015.1274726-1-b-padhi@ti.com>
-References: <20250602145015.1274726-1-b-padhi@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-408d7e2ad03so596616b6e.1
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 07:57:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1748876240; x=1749481040; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+1q7J03xLWWtK3Tkt3J8MLQp7MQfsLIEhfCN6N7FrO8=;
+ b=GwPNkP5lt/JsQTkeGu+7wt5s0MmGmbgmWz00nAMIEwN395kw1E5umiERxGMYI2cPpl
+ R0a8uKsCpA+N7wfitMAlo6Glg3uXtjxxY3uPO90FR9Jw4CJu7Tv9PKQX8TTNdP6FoFHH
+ c1LoVLcBvX1TR0D/wT0wnj9tmwVt6fT1RYpJ4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748876240; x=1749481040;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+1q7J03xLWWtK3Tkt3J8MLQp7MQfsLIEhfCN6N7FrO8=;
+ b=GL3LDX2EkusVjyiPzhykkihtDAwCmU0zkb8nt8T3EWASl20f7fxyn8yRGxsPi5xoIH
+ oAFXD0Rgc3cU3IXTMAWMy6v2Kom5TEvwSW1zs3Jud34fR8c1hDeS6onpmojdt711aegK
+ JK7pLValpo4VfPvbrvHtOOiUrUM6UEe8ELecYWtZ9oqRHRw9vtNwSr6tR5/96wdbLBGx
+ 163k8QgrbqbtYsUZzO2SYZCdBT8okj1OAQ31uJIPIhRKdpH1xavGtK2cwmnKIcuyMuUa
+ cdFLDyrJBX2XRUbCO7nNL0Yxn0fvLmpBH+HauQPCU0hXN5TMjtZBaXVcRc9B3y9WDnpE
+ Eb8w==
+X-Gm-Message-State: AOJu0YwXSstQcPwhmYxbZd/tOq/hh9b6DXn4MyANEZIOOH8JiPjmvJFZ
+ /e33E7rtKB67QfmpLUa12n6mlviz6H8BNISd31cJwvPQkl8MIHSygXg5IvZJkkxxLO0=
+X-Gm-Gg: ASbGnctfWq7wtqQdB74eup37Gimh/nlF2zdzxN0L9haw/i/qxj/mGHGtI4B7L9sNBxW
+ dRDASeBwrZxJgfU/SbAB+6iD1aVvDpsKwBun4Chy9faZHulOfcOSrlatQiZeSzVVZww2mUi1j+/
+ /YWqW30CVB134fwDPwWL0BCLNIMoTYjdSnGU0TZ8e2zQmIQ4SuC/Z857TApHX0w36b2sdt0iYHP
+ uEq21oA8xuhXKwkBYq1iA7610hOvtSARntSb2+wxfEn9HU8PScVa+89eLJvIauprOmzDXR9el5a
+ 6L8bt9gOhVHo8VqUUvMDI7D2t2vGvyb0wUSm4Xrcyqk1NELTOVC5AHAsJARU9WjSD1uadHgfZQh
+ C5b53oMQu95RNRH9glxxsNs6dI9bur/9oGg==
+X-Google-Smtp-Source: AGHT+IFysSINy98RCaHRVbFcWV6Q+LXk6XWKlUPHIN3tdJHTqiwOnIqsXfV5/ASg/lD/ZI/a3vTXLw==
+X-Received: by 2002:a05:6808:6b89:b0:407:a47e:6e5c with SMTP id
+ 5614622812f47-407a47e7654mr6703863b6e.5.1748876239880; 
+ Mon, 02 Jun 2025 07:57:19 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40678ce8fedsm1466395b6e.34.2025.06.02.07.57.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Jun 2025 07:57:19 -0700 (PDT)
+Date: Mon, 2 Jun 2025 08:57:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: u-boot@lists.denx.de, Mihai Sain <mihai.sain@microchip.com>
+Subject: Re: [PATCH] atmel: Remove local <dt-bindings/pinctrl/at91.h>
+Message-ID: <20250602145716.GX100073@bill-the-cat>
+References: <20250528000118.3002916-1-trini@konsulko.com>
+ <72a265ca-d5e7-40ca-b05f-5a3cf8f0f0c8@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3VYLsGOqUsyqKEiN"
+Content-Disposition: inline
+In-Reply-To: <72a265ca-d5e7-40ca-b05f-5a3cf8f0f0c8@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,65 +96,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Link the default firmware in the environment variable for MCU R5 core1
-for all J7 platforms.
 
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
----
- board/ti/j7200/j7200.env   | 2 +-
- board/ti/j721e/j721e.env   | 2 +-
- board/ti/j721s2/j721s2.env | 2 +-
- board/ti/j784s4/j784s4.env | 4 ++--
- 4 files changed, 5 insertions(+), 5 deletions(-)
+--3VYLsGOqUsyqKEiN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/board/ti/j7200/j7200.env b/board/ti/j7200/j7200.env
-index 6cc92bf0d8d..292fc72fd58 100644
---- a/board/ti/j7200/j7200.env
-+++ b/board/ti/j7200/j7200.env
-@@ -36,5 +36,5 @@ main_cpsw0_qsgmii_phyinit=
- #endif
- 
- #if CONFIG_TARGET_J7200_A72_EVM
--rproc_fw_binaries=2 /lib/firmware/j7200-main-r5f0_0-fw 3 /lib/firmware/j7200-main-r5f0_1-fw
-+rproc_fw_binaries= 1 /lib/firmware/j7200-mcu-r5f0_1-fw 2 /lib/firmware/j7200-main-r5f0_0-fw 3 /lib/firmware/j7200-main-r5f0_1-fw
- #endif
-diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
-index e5b4225b3ce..ead7fbdb212 100644
---- a/board/ti/j721e/j721e.env
-+++ b/board/ti/j721e/j721e.env
-@@ -38,5 +38,5 @@ main_cpsw0_qsgmii_phyinit=
- #endif
- 
- #if CONFIG_TARGET_J721E_A72_EVM
--rproc_fw_binaries=2 /lib/firmware/j7-main-r5f0_0-fw 3 /lib/firmware/j7-main-r5f0_1-fw 4 /lib/firmware/j7-main-r5f1_0-fw 5 /lib/firmware/j7-main-r5f1_1-fw 6 /lib/firmware/j7-c66_0-fw 7 /lib/firmware/j7-c66_1-fw 8 /lib/firmware/j7-c71_0-fw
-+rproc_fw_binaries= 1 /lib/firmware/j7-mcu-r5f0_1-fw 2 /lib/firmware/j7-main-r5f0_0-fw 3 /lib/firmware/j7-main-r5f0_1-fw 4 /lib/firmware/j7-main-r5f1_0-fw 5 /lib/firmware/j7-main-r5f1_1-fw 6 /lib/firmware/j7-c66_0-fw 7 /lib/firmware/j7-c66_1-fw 8 /lib/firmware/j7-c71_0-fw
- #endif
-diff --git a/board/ti/j721s2/j721s2.env b/board/ti/j721s2/j721s2.env
-index a6b22550809..abd4faea6ee 100644
---- a/board/ti/j721s2/j721s2.env
-+++ b/board/ti/j721s2/j721s2.env
-@@ -24,6 +24,6 @@ name_mcur5f0_0fw=/lib/firmware/j7-mcu-r5f0_0-fw
- #endif
- rd_spec=-
- 
--rproc_fw_binaries= 2 /lib/firmware/j721s2-main-r5f0_0-fw 3 /lib/firmware/j721s2-main-r5f0_1-fw 4 /lib/firmware/j721s2-main-r5f1_0-fw 5 /lib/firmware/j721s2-main-r5f1_1-fw 6 /lib/firmware/j721s2-c71_0-fw 7 /lib/firmware/j721s2-c71_1-fw
-+rproc_fw_binaries= 1 /lib/firmware/j721s2-mcu-r5f0_1-fw 2 /lib/firmware/j721s2-main-r5f0_0-fw 3 /lib/firmware/j721s2-main-r5f0_1-fw 4 /lib/firmware/j721s2-main-r5f1_0-fw 5 /lib/firmware/j721s2-main-r5f1_1-fw 6 /lib/firmware/j721s2-c71_0-fw 7 /lib/firmware/j721s2-c71_1-fw
- 
- 
-diff --git a/board/ti/j784s4/j784s4.env b/board/ti/j784s4/j784s4.env
-index 9e1741be424..2f1a5f549d1 100644
---- a/board/ti/j784s4/j784s4.env
-+++ b/board/ti/j784s4/j784s4.env
-@@ -21,7 +21,7 @@ bootdir=/boot
- rd_spec=-
- 
- #if CONFIG_TARGET_J784S4_A72_EVM
--rproc_fw_binaries= 2 /lib/firmware/j784s4-main-r5f0_0-fw 3 /lib/firmware/j784s4-main-r5f0_1-fw 4 /lib/firmware/j784s4-main-r5f1_0-fw 5 /lib/firmware/j784s4-main-r5f1_1-fw 6 /lib/firmware/j784s4-main-r5f2_0-fw 7 /lib/firmware/j784s4-main-r5f2_1-fw 8 /lib/firmware/j784s4-c71_0-fw 9 /lib/firmware/j784s4-c71_1-fw 10 /lib/firmware/j784s4-c71_2-fw 11 /lib/firmware/j784s4-c71_3-fw
-+rproc_fw_binaries= 1 /lib/firmware/j784s4-mcu-r5f0_1-fw 2 /lib/firmware/j784s4-main-r5f0_0-fw 3 /lib/firmware/j784s4-main-r5f0_1-fw 4 /lib/firmware/j784s4-main-r5f1_0-fw 5 /lib/firmware/j784s4-main-r5f1_1-fw 6 /lib/firmware/j784s4-main-r5f2_0-fw 7 /lib/firmware/j784s4-main-r5f2_1-fw 8 /lib/firmware/j784s4-c71_0-fw 9 /lib/firmware/j784s4-c71_1-fw 10 /lib/firmware/j784s4-c71_2-fw 11 /lib/firmware/j784s4-c71_3-fw
- #elif CONFIG_TARGET_J742S2_A72_EVM
--rproc_fw_binaries= 2 /lib/firmware/j742s2-main-r5f0_0-fw 3 /lib/firmware/j742s2-main-r5f0_1-fw 4 /lib/firmware/j742s2-main-r5f1_0-fw 5 /lib/firmware/j742s2-main-r5f1_1-fw 6 /lib/firmware/j742s2-main-r5f2_0-fw 7 /lib/firmware/j742s2-main-r5f2_1-fw 8 /lib/firmware/j742s2-c71_0-fw 9 /lib/firmware/j742s2-c71_1-fw 10 /lib/firmware/j742s2-c71_2-fw
-+rproc_fw_binaries= 1 /lib/firmware/j742s2-mcu-r5f0_1-fw 2 /lib/firmware/j742s2-main-r5f0_0-fw 3 /lib/firmware/j742s2-main-r5f0_1-fw 4 /lib/firmware/j742s2-main-r5f1_0-fw 5 /lib/firmware/j742s2-main-r5f1_1-fw 6 /lib/firmware/j742s2-main-r5f2_0-fw 7 /lib/firmware/j742s2-main-r5f2_1-fw 8 /lib/firmware/j742s2-c71_0-fw 9 /lib/firmware/j742s2-c71_1-fw 10 /lib/firmware/j742s2-c71_2-fw
- #endif
--- 
-2.34.1
+On Mon, Jun 02, 2025 at 03:04:54PM +0300, Eugen Hristev wrote:
+>=20
+>=20
+> On 5/28/25 03:01, Tom Rini wrote:
+> > We have this binding file in both include/dt-bindings/ and
+> > dts/upstream/include/dt-bindings. These files are identical save for the
+> > fact that we do not have commit adb2424d0d05 ("dt-bindings: clock: add
+> > clock definitions for Ralink SoCs") from the kernel applied. However,
+> > this change is rather important and should not have been omitted here
+> > most likely. Remove our local copy to get in sync with upstream now.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Eugen Hristev <eugen.hristev@linaro.org>
+> > Cc: Mihai Sain <mihai.sain@microchip.com>
+> >=20
+> > The full kernel commit log is at
+> > https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
+commit/?id=3D0b3292852863215825f88905b9dbafc3101e1d7e
+> > and so this sounds very important. Please let me know if this should go
+> > in master for v2025.07 (or Eugen, please pick it and send a PR). Thanks!
+>=20
+> Hi Tom,
+>=20
+> I do not see the connection with the Ralink SoCs. Maybe wrong commit
+> referenced ?
 
+Erm, the kernel link for me is "pinctrl: at91: Enable slewrate by
+default on SAM9X60".
+
+> Anyway, on the slewrate bits, as of today we have DIS=3D=3D0 and ENA=3D=
+=3D1 and
+> the driver treats them the same way. Hence DTs with DIS flag will have
+> the bit erased in the register
+>=20
+> With the kernel bindings file, DIS=3D=3D1 and ENA=3D=3D0, but the driver =
+still
+> considers DIS=3D=3D0 and ENA=3D=3D1 , so the DTs that have DIS as flags w=
+ill get
+> the bit written in the register.
+>=20
+> If we also port the driver patch then the driver will also consider
+> DIS=3D=3D1 and ENA=3D=3D0 , so the DTs with DIS flag will get the bit wri=
+tten in
+> the register.
+>=20
+> So there is an important change by changing the bits values, as the
+> register eventually ends up with a different value.
+> The driver patch apparently just interprets the DIS/ENA bits
+> differently, but the end result is the same
+>=20
+> Please correct me if my logic is wrong.
+>=20
+> I would also believe testing on the sam9x60 would be required for the
+> slew rate change. From what I remember back then, slew rate change was
+> not needed in Uboot, but I might be wrong.
+
+So, there's I guess two parts to all of this. First, yes it would be
+good to test this change on real hardware and make sure things work as
+expected. Second, yes, it looks like we need to make the parallel change
+in drivers/pinctrl/pinctrl-at91.c (to match what the kernel did at the
+time too) and we can't just remove the old binding file we need to
+update them at the same time (since long term we need to remove all of
+the old kernel dts stuff).  The final thing is that it really is
+important to get them in sync as it's valid to pass our device tree to
+the kernel to use. Can you take care of the changes here?  I don't have
+hardware to test on, thanks.
+
+--=20
+Tom
+
+--3VYLsGOqUsyqKEiN
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg9u8wACgkQFHw5/5Y0
+tyx3MQv/UhItx5yrd2F59ikik+XCR7ueMNlTOvFsdpz0hSW5OoQCuyr4Xn9xkQBX
+Pd3d8/GuYHxbOnfaRvAS9CEo0QgvjMUpGqzYIh+mNEOIjxTtQuaIRxhbflh4Mqob
+JeTJyFV7kFct7K2mm6oHZF8vsnSAkx2CjUIm0h1xzeJguF8Au2/nMYAcQve1XH/X
+AjPZ393mwz1X5Q3IWdBtG/3tYOm2Oef26Ve2d82/a7ficFlsWodXVKfY2k3W6BIS
+SwIdBuP+C4N076ODemdcQcC0KtUk4scrCh7BA3YXr9192F4qpP2wNlkzqcw63Bho
+8kk4NMcdPdKyXbe69dohQPHLTDIyZs307qh1YPJpnETqLpKgPsr2+GOu7+IqFcI9
+LFuR1xsSm5JptFNQs+mfjt9lW+w41KWhGkgqCyskee8xwainrF8qYpx7o3vDBTZ0
+cuP7n7qk7eX6RgJo1nwlwcx9owezzxS4PsSvmo1bZy4jgMTRqzbWbldGN23Xu3gW
+1K+8xYNO
+=/DWW
+-----END PGP SIGNATURE-----
+
+--3VYLsGOqUsyqKEiN--
