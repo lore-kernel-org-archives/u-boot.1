@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7743C5B549
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 22:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4505EC5B549
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 22:37:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD99382CB9;
-	Tue,  3 Jun 2025 00:36:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3897681E72;
+	Tue,  3 Jun 2025 00:36:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cpHr2Ted";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bHC/PC7l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A90C782C7C; Tue,  3 Jun 2025 00:36:46 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 28CA582CCF; Tue,  3 Jun 2025 00:36:48 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A1C382C7C
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 00:36:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DC6880F9C
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 00:36:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-401f6513cb2so3499133b6e.0
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 15:36:44 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-407aac76036so1385440b6e.1
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 15:36:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748903803; x=1749508603; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748903805; x=1749508605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vAqLxPNctgCZ8U1UFIVKUu9xfoyZGj5rsIaEcM1W0U4=;
- b=cpHr2TedGX0VhgeC20tvl+Rpx4lQh3dQVWI/F90h3rbU88E8HocVVEdnJcgs+UeF0b
- jndc+e1cMdMoloYJEnEyXdtjLteXIKaSb+SB+S8khCkRHF1vq++Xkp978uYsNbqDEf/U
- 4f33+GAL7j1U4dU02/VA8l+qBSN/ArNRozzlA=
+ bh=bV0f/p6Rc1Q9McGV6yfkhbwfdEpWdSmQehG3xm76MQY=;
+ b=bHC/PC7lSjGYNDcaYWkd9g4NvK64dO+j6AVyk/hnxOFM1Sf1YkHjoTL329OvLhXc3i
+ Eet1SatyHZnhkiukGof4GNYNeyNbpmx4FCLDAOTkCGzV4YgG8RHuOTvdhzm4TN3zZuUK
+ G7mYT4fBRp4SFZ6GCxTl0IANo/bdxv6UQ6dz8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748903803; x=1749508603;
+ d=1e100.net; s=20230601; t=1748903805; x=1749508605;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vAqLxPNctgCZ8U1UFIVKUu9xfoyZGj5rsIaEcM1W0U4=;
- b=VEglJJprYaGZ2ulFVGZtiQdgLzZrA+8NYGO4ObyjSriUO2FMzs4DYzJ2UpMj53c3Y1
- VAPjNZO28LcVGU2GnLkRwjPIpLGTXtyR/yf+8jq4YvXfa2TKVPiW6Va4/1kXM+GA6Iuw
- dWHbE5nC6A0j2uoHZ4PkR+csl0d914UPpZ3GmWna7jLMo3yY2zQXlvqsNO+K1k0S/hAU
- 5oymtZNy8ySrJ9hG81R/9RGCdUCznh/rt6brF09a6FmQNeJqbZbtWsZnokwED1SqoBjE
- V1oTjDSo42shHhOXdGTPZqoKne8/L4ffJtdy6gzTBCykfMowCAVYkfDq7P/qur+LEQvk
- DpMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkCbVlalMUcekAAr38XiftY+ueN2YroR1ahU9B7xlVrlkBUEUsYRaYsboEfqxLrSh/4u/2GIw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTitoh+ouLjQ+7xyKRdf/raL92BcuSPo3iZL4TCsOkroTAociy
- 4RAF8srWNScOrrgDnOV2c4v1J6vBSz7xt+qug/xmRqFALWzsJ1kEIG7jWurbCwf5RjDV432AO0L
- XJyeWGK8=
-X-Gm-Gg: ASbGnctdQgCBjUmCwQo0LidWDeMEDAUQlEvX14Y/QZEKzWlbswM9vabeB1uJpqt2mTh
- pduZ5AsVLWpUPC9PiJMBKPTO3A6XLO7eG2TxNVBB26kxhbZCaKi+N0cq+NAxDxezGtU997agDDK
- sPzfFBqeQsCa5O/5ZFdlue8PrHwkSI+3VuFdcVjNo7XhL/Bq4M+IWJzf7jh22TZjqKAesTslNVa
- ra+ipBuSmKmWQXOLnhVKwlGICHJ8+3ysceANOEarM1WIIbL/UWm9Vd4xdBiQKcGiinv1QpoO/+v
- ucf3BgOs5TnFMF8E/x3QMgRWySXIZ0eR+WBSEPw6Ru7w5FtxS179UsKrV+E+xnZr2pah4gpn/fN
- By1FESV1H5oI=
-X-Google-Smtp-Source: AGHT+IHjVZc5rkHf6H4vesKypDBDJsECpcc8Qp4XQZK8WDvcmwztp/7jsUgel2Sis4RnZjx5L7PHWw==
-X-Received: by 2002:a05:6808:3319:b0:406:4e0c:9aab with SMTP id
- 5614622812f47-408e35a35d2mr196461b6e.11.1748903803017; 
- Mon, 02 Jun 2025 15:36:43 -0700 (PDT)
+ bh=bV0f/p6Rc1Q9McGV6yfkhbwfdEpWdSmQehG3xm76MQY=;
+ b=AyYnmg+aePjSXAO4M3tcvGzFUEewXnQdczPspkjHJn1LFRgLZlqW8IiHNT2sPorWk0
+ X8eHvltzq9GpLeY2rV3iT/XNLN2awF9DORW2U8lPmHUAtqJvcZ18HrzKoVKJfmoLwtAc
+ KFPuLgGmgL+XlEWJWpdfqMbXbgTzTJG1waAAppvbO9hQzx7ENs9eiuSA+7SY30C2tixt
+ hIvovWVREhnnFFmy88kQ5DgmMXcBMLWPcDUAQ6VB91hwlUkoj601BG6nMzd0RNFRw884
+ VYEJKrjWnDiyfIpdwtN698Yka/zhhuOhR5qnqr3XOmlvnd1LTNveUwi6zfOpYeejTltu
+ 9vVQ==
+X-Gm-Message-State: AOJu0YyhP1VdoiHq3Kd5fNJncOHaIbxIglIqzPCznNewedLAFH0jBJCw
+ zweAng4VdDZ5Yuwr1IOhJi2nbpdGx41W+TCqQlBiL0fKQ/Q/8DF18eRkIy9KrKn0j2o=
+X-Gm-Gg: ASbGncs+AoSZUzQqXGU1YJ4JtFQbS2Ht6vDizEDbtoXyLi7eaECSl6Hse1iAnmJwx3S
+ Djv5TEg6lDh0xrE82Dk9sgahXFkEcVR56k41PifMD5btP4/pERi1OB3VO9kFbATIx1ZMSa7OF6/
+ vcy7eGyLWe2epWYnahPVT+19w831WRasEinZKtBc7QIpFlYeM9kaMp8+6lYMa5cuCv9JCAMsCVy
+ XSLajIXmCGkhV/8GtpRxF9vv2AS/mEYxQ3TH5H2WeocMC3nTX4Loom1qNxG7qfUZOA+WT+WoURP
+ qpt0Wxx5w7X/VmPrDmMCl9jKm/OKPExm1Pu+N949rhb5TxqdWW0F/C/g0d0+pJHCueYCl3XfFK7
+ JJlK8jscTWc/oKbSZ2UBSyA==
+X-Google-Smtp-Source: AGHT+IGYSBQUVj04GfW069moBasDhSHoDtnbO9iGSuspG0qxxoB1+c4AviYibATLV9Jwfrwhswz/iA==
+X-Received: by 2002:a05:6808:2f19:b0:3fe:aecb:5c49 with SMTP id
+ 5614622812f47-407a65e4084mr6725171b6e.21.1748903804762; 
+ Mon, 02 Jun 2025 15:36:44 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40678c1b622sm1584145b6e.11.2025.06.02.15.36.41
+ 5614622812f47-40678c1b622sm1584145b6e.11.2025.06.02.15.36.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 15:36:42 -0700 (PDT)
+ Mon, 02 Jun 2025 15:36:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: Wojciech Szamocki <wojciech.szamocki@nokia.com>, u-boot@lists.denx.de
-In-Reply-To: <e23cecfa-7b2c-64fd-5850-e85326e69e22@denx.de>
-References: <e23cecfa-7b2c-64fd-5850-e85326e69e22@denx.de>
-Subject: Re: Please pull u-boot-i2c master
-Message-Id: <174890380159.1382323.16537379481632515225.b4-ty@konsulko.com>
-Date: Mon, 02 Jun 2025 16:36:41 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Yao Zi <ziyao@disroot.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250530140548.4030025-1-trini@konsulko.com>
+References: <20250530140548.4030025-1-trini@konsulko.com>
+Subject: Re: [PATCH] scripts/spelling.txt: Sync script with kernel v6.15
+Message-Id: <174890380329.1382323.9161387094399607366.b4-ty@konsulko.com>
+Date: Mon, 02 Jun 2025 16:36:43 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,20 +95,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 02 Jun 2025 14:40:39 +0200, Heiko Schocher wrote:
+On Fri, 30 May 2025 08:05:48 -0600, Tom Rini wrote:
 
-> The following changes since commit b22a276f039f818d5564bec6637071cfc8a7e432:
+> Keep spelling.txt in sync with the version from kernel v6.15.
 > 
->    image: android: fix ramdisk default address (2025-05-30 13:44:05 -0600)
 > 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2cfixes-for-2025.07-rc4
-> 
-> [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] scripts/spelling.txt: Sync script with kernel v6.15
+      commit: afb3ab64cb7df90a2c6fd54f1639ff3f807f1e86
 -- 
 Tom
 
