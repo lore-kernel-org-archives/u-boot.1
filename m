@@ -4,106 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D09C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 19:25:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D5CC5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 19:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68994811AC;
-	Mon,  2 Jun 2025 21:25:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 36BA581F32;
+	Mon,  2 Jun 2025 21:47:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="H2ZnqNDY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TxKKpDbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0436E8144A; Mon,  2 Jun 2025 21:25:23 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 23BD381F0D; Mon,  2 Jun 2025 21:47:06 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13B8580F9C
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 21:25:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9A0E80F9C
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 21:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1748892320; x=1749497120; i=xypron.glpk@gmx.de;
- bh=ThKomgKzFF8grbkRXWl7S71nwsU4ceQG7UEAsP+OYwU=;
- h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=H2ZnqNDYDViluJTHIoVKy8aSl9/JwtKjxJ4I0IDwwher4bs+fdU/WcJVZZh37n1J
- v91tRt1hcol94kYPRqTfW/QAtVTilMpCABaEyeIBJBDwvWpggc5m1yLA7l0kTq+ZM
- 1V6GY5GhD4quUWIhctqVx+0C7PJNc5rsSZD6zN/fKyX88tUC3udPqN7p2MU8gFatl
- niU829LR9ZBqzHtbSFwyb+s3X7EaNZAN7diznI/KjISK5sHpGM1qUPQRruedySf9j
- 6Cqh+EVgxmBRU7VjaK0pS2h14/6jseNVCb8PUEyDnNWQOWbCImDOqhOjPvFhLAQc1
- beOe9phOx5kf9fLZZw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MwQXH-1vBOSb15Rl-00szYU; Mon, 02
- Jun 2025 21:25:20 +0200
-Date: Mon, 02 Jun 2025 21:25:17 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Behrad Elmi <behradelmi1@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] doc: build: fix typo in gcc.rst
-User-Agent: Thunderbird for Android
-In-Reply-To: <CAFUnUVBZG5eV5f4sypeBrUhgJQGeYiHNKqx18p4N9o2c2_mL8w@mail.gmail.com>
-References: <CAFUnUVBZG5eV5f4sypeBrUhgJQGeYiHNKqx18p4N9o2c2_mL8w@mail.gmail.com>
-Message-ID: <73E1BE7F-3DBE-4971-A364-45EED7173C8A@gmx.de>
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-70f86c9e3e7so46457487b3.1
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 12:47:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1748893622; x=1749498422; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9ouYo/U5ISqilRG9vmjCjc+RBGzGwJ8snqtNBAxluiE=;
+ b=TxKKpDbnxwyK/Accr/9m+3+zHj6zuipPy/tQD0+218HFDQxFmkRtZK1RwH1WKl8cu0
+ amsU9USk+l0J1Rtd2GEDwvHOBbIa4WsRXgOSCE4hYuSXg/UuY+9aXP+/EIj/wsib5hL9
+ 8kKRWTCc0LHSrgx3/9LoH8EMYYh2w+EpOsuXJod4R0aCNaFOnfGciq2uycVdZSfcEzqy
+ FJMwO+TG9EszLrmzSjPDd4xPGx2pfVJHKsYMNqVwvX2KY6BamSsmBtGEJNnyVkMYu0c/
+ 5tELlz68GzosQfHfLPzT/gt5vWFwUYIE8YR3JA4VHTToVhDhoftTVmT6HWyJBgOIRPvl
+ hqig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748893622; x=1749498422;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9ouYo/U5ISqilRG9vmjCjc+RBGzGwJ8snqtNBAxluiE=;
+ b=toTdxErNUsvgoWLtjgMa4v0E/juzsVyXRVhGie7qlRwIxxBemJCX6g+XM3lgpQfuUJ
+ Fu9thN6PPeFwRKUBgNpnU2J4Pbbax2KAsSJJsLOmSVEJWqc36zc7RWw8fAgvG0G+C7wp
+ zXkyI/VfBd9VQdAHkZzMblpFN238aI50AO9PtvhVshg3GVNkFabNXkSyIY+uxB9haNP7
+ 9NeviRzr5rTub7o3AmvK9ne7fUKC37UrHsb+ylpgZy65zuTJNx5Wor6KZ0GxNMWr6Bmu
+ ZMUvBMMrWphx42Bvnp6wdoam95ULIC/l49AxGD4vJWuQzC+gggnbVOXyoKlV2g8VTZWX
+ WlMg==
+X-Gm-Message-State: AOJu0YzpDFiFkfRfTY2eWNSXTQLOkCZj/7SP2MI1jQJk+D3J7aqOvA/i
+ 5nXR34CuK51zSZNqLGVZrta60C0HtN8j8BGrFdVu+dy1tC/n8PjwNzgVnlmo
+X-Gm-Gg: ASbGncvXdXpjrppk3yRToBDGj0eO5u2hg/kftt+3o5p1gSjrLZ6pJqRNIqd6x0HAmDj
+ +H4azM5dvV1lRqD6CglktYVLDwCfYIFn/TnHGgqx6nsecElxtRbsD+2eBEcFYxMTBALw0pkvcvY
+ IDmG4CrXEkHcSNQR/yjMAlSxYI2F1UBvxXcreUz8sLNgwcGVXiku/A9Du2MA52QmE1urE/CGzcO
+ Gb6v2QuWDBXyhrIuTtYwDVqC/pKgBSYPDqZroH4kcYavpvWTPoQEu7GR0/G+MxX1RxL4zPHYeW/
+ ZaIH2R7LkJZxpyqNSroCPhKlSHUGlNHdYTthIcGMcvoq1Uv3OBp4I3ZtNDptO3N2Paw=
+X-Google-Smtp-Source: AGHT+IE+DhGnA2YtxQb14BbaXCCMFZGGSwp8faxTwDBHj9pTqWemHiQxiXnkoIdIHsjv7oJVzexcrw==
+X-Received: by 2002:a05:690c:4c02:b0:70e:195:e926 with SMTP id
+ 00721157ae682-70f97e58c85mr203204947b3.9.1748893621423; 
+ Mon, 02 Jun 2025 12:47:01 -0700 (PDT)
+Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-70f8ac0f452sm21902867b3.51.2025.06.02.12.47.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Jun 2025 12:47:01 -0700 (PDT)
+From: Greg Malysa <malysagreg@gmail.com>
+To: u-boot@lists.denx.de
+Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Subject: [PATCH 00/10] sc5xx: Add complete board support for all ADI SC5xx
+ boards
+Date: Mon,  2 Jun 2025 15:44:38 -0400
+Message-ID: <20250602194507.15159-1-malysagreg@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KiM4pcvTYSKUX9IO/LskFvR6e2AeEwbf4cxqVw+wYH3iE03lrnY
- BUmDtYiG2Q14CJao+REduIjCgsdDUVRIVilxBZUqf+UaYuOnBhY/s0W+2dVhre6Stpzbsfe
- trTYtLdv/e4stOMXR4x+TqtyDzYd0ITDGbyfrtp2D0yzcIDdkl86XYHdJeI+kB2ZhJNziWf
- JFxp2RrhJjsF5ccpu1+cQ==
-UI-OutboundReport: notjunk:1;M01:P0:NowcoSIua5I=;3T858TDJOUAenonGIsDs4h54x+O
- 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
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,37 +109,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 2=2E Juni 2025 20:57:17 MESZ schrieb Behrad Elmi <behradelmi1@gmail=2Eco=
-m>:
->From babe445ec1e08a9bd6d313980371c4b64494ac89 Mon Sep 17 00:00:00 2001
->From: BehradElmi <behradelmi1@gmail=2Ecom>
->Date: Mon, 2 Jun 2025 20:54:16 +0330
->Subject: [PATCH] doc: build: fix typo in gcc=2Erst
->
->Fix a typo error in gcc=2Erst, changing "out-out-tree" to
->"out-of-tree" in the Out-of-tree section=2E
->
->Signed-off-by: BehradElmi <behradelmi1@gmail=2Ecom>
-
-Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+This series adds the final pieces to enable mainline U-Boot to build and
+boot all Analog Devices SC5xx SoCs and supports the associated carrier
+board options. At this point it should be viable for new users for these
+platforms to start with the latest version of U-Boot rather than our
+vendor fork, however some features (such as OSPI support and falcon
+boot) remain unavailable until we are able to unify our implementations
+with the mainline implementations.
 
 
->---
-> doc/build/gcc=2Erst | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/doc/build/gcc=2Erst b/doc/build/gcc=2Erst
->index c76a7fbd732=2E=2E1fef718ceec 100644
->--- a/doc/build/gcc=2Erst
->+++ b/doc/build/gcc=2Erst
->@@ -122,7 +122,7 @@ Out-of-tree building
-> ~~~~~~~~~~~~~~~~~~~~
->
-> By default building is performed locally and the objects are saved in
->the source
->-directory=2E To build out-out-tree use one of the two methods below:
->+directory=2E To build out-of-tree use one of the two methods below:
->
-> Add O=3D parameter to the make command line:
->
+Greg Malysa (8):
+  docker: add ADI build-related tools to docker image
+  board: adi: Add SOMCRR infrastructure
+  board: adi: Add support for SC573-ezkit
+  board: adi: Add support for SC589 boards
+  board: adi: Add support for SC584
+  board: adi: Add support for SC598
+  board: adi: Add support for SC594
+  MAINTAINERS: Update ADI entries for new boards
 
+Utsav Agarwal (2):
+  mach-sc5xx: Introduce Kconfig symbols for image addresses
+  mach-sc5xx: Add binman support
+
+ MAINTAINERS                                   |   1 +
+ arch/arm/dts/sc573-ezkit.dts                  | 227 +++++++++++++++++
+ arch/arm/dts/sc57x.dtsi                       | 123 ++++++++-
+ arch/arm/dts/sc584-ezkit.dts                  | 230 +++++++++++++++++
+ arch/arm/dts/sc589-ezkit.dts                  | 198 +++++++++++++++
+ arch/arm/dts/sc589-mini.dts                   |  18 +-
+ arch/arm/dts/sc58x.dtsi                       | 153 ++++++++++-
+ arch/arm/dts/sc594-som-ezkit.dts              | 126 ++++++++++
+ arch/arm/dts/sc594-som-ezlite.dts             |  83 ++++++
+ arch/arm/dts/sc594-som.dtsi                   | 184 +++++++++++++-
+ arch/arm/dts/sc598-som-ezkit.dts              | 166 ++++++++++++
+ arch/arm/dts/sc598-som-ezlite.dts             |  82 ++++++
+ arch/arm/dts/sc598-som.dtsi                   | 237 +++++++++++++++++-
+ arch/arm/dts/sc59x.dtsi                       | 183 ++++++++++++++
+ arch/arm/dts/sc5xx.dtsi                       | 189 +++++++++++++-
+ arch/arm/mach-sc5xx/Kconfig                   |  63 +++++
+ board/adi/carriers/Makefile                   |   8 +
+ board/adi/carriers/somcrr.h                   |  14 ++
+ board/adi/carriers/somcrr_common.c            |  19 ++
+ board/adi/carriers/somcrr_ezkit.c             |  38 +++
+ board/adi/carriers/somcrr_ezlite.c            |  24 ++
+ board/adi/common-sc594-som/sc594-som.c        |  34 +++
+ board/adi/common-sc598-som/sc598-som.c        |  34 +++
+ board/adi/sc573-ezkit/Makefile                |   6 +
+ board/adi/sc573-ezkit/sc573-ezkit.c           |  21 ++
+ board/adi/sc573-ezkit/sc573-ezkit.env         |  17 +-
+ board/adi/sc584-ezkit/Makefile                |   6 +
+ board/adi/sc584-ezkit/sc584-ezkit.c           |  21 ++
+ board/adi/sc584-ezkit/sc584-ezkit.env         |  16 +-
+ board/adi/sc589-ezkit/Makefile                |   6 +
+ board/adi/sc589-ezkit/sc589-ezkit.c           |  21 ++
+ board/adi/sc589-ezkit/sc589-ezkit.env         |  17 +-
+ board/adi/sc589-mini/Makefile                 |   6 +
+ board/adi/sc589-mini/sc589-mini.c             |  21 ++
+ board/adi/sc589-mini/sc589-mini.env           |  17 +-
+ board/adi/sc594-som-ezkit/Makefile            |   8 +
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  18 +-
+ board/adi/sc594-som-ezlite/Makefile           |   8 +
+ .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  18 +-
+ board/adi/sc598-som-ezkit/Makefile            |   8 +
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  18 +-
+ board/adi/sc598-som-ezlite/Makefile           |   8 +
+ .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  12 +-
+ configs/sc573-ezkit_defconfig                 | 102 ++++++++
+ configs/sc584-ezkit_defconfig                 | 108 ++++++++
+ configs/sc589-ezkit_defconfig                 | 113 +++++++++
+ configs/sc589-mini_defconfig                  | 109 ++++++++
+ configs/sc594-som-ezkit-spl_defconfig         |  90 +++++++
+ configs/sc594-som-ezlite-spl_defconfig        |  98 ++++++++
+ configs/sc598-som-ezkit-spl_defconfig         | 123 +++++++++
+ configs/sc598-som-ezlite-spl_defconfig        | 123 +++++++++
+ tools/docker/Dockerfile                       |   8 +
+ 52 files changed, 3508 insertions(+), 73 deletions(-)
+ create mode 100644 arch/arm/dts/sc59x.dtsi
+ create mode 100644 board/adi/carriers/Makefile
+ create mode 100644 board/adi/carriers/somcrr.h
+ create mode 100644 board/adi/carriers/somcrr_common.c
+ create mode 100644 board/adi/carriers/somcrr_ezkit.c
+ create mode 100644 board/adi/carriers/somcrr_ezlite.c
+ create mode 100644 board/adi/common-sc594-som/sc594-som.c
+ create mode 100644 board/adi/common-sc598-som/sc598-som.c
+ create mode 100644 board/adi/sc573-ezkit/Makefile
+ create mode 100644 board/adi/sc573-ezkit/sc573-ezkit.c
+ create mode 100644 board/adi/sc584-ezkit/Makefile
+ create mode 100644 board/adi/sc584-ezkit/sc584-ezkit.c
+ create mode 100644 board/adi/sc589-ezkit/Makefile
+ create mode 100644 board/adi/sc589-ezkit/sc589-ezkit.c
+ create mode 100644 board/adi/sc589-mini/Makefile
+ create mode 100644 board/adi/sc589-mini/sc589-mini.c
+ create mode 100644 board/adi/sc594-som-ezkit/Makefile
+ create mode 100644 board/adi/sc594-som-ezlite/Makefile
+ create mode 100644 board/adi/sc598-som-ezkit/Makefile
+ create mode 100644 board/adi/sc598-som-ezlite/Makefile
+ create mode 100644 configs/sc573-ezkit_defconfig
+ create mode 100644 configs/sc584-ezkit_defconfig
+ create mode 100644 configs/sc589-ezkit_defconfig
+ create mode 100644 configs/sc589-mini_defconfig
+ create mode 100644 configs/sc594-som-ezkit-spl_defconfig
+ create mode 100644 configs/sc594-som-ezlite-spl_defconfig
+ create mode 100644 configs/sc598-som-ezkit-spl_defconfig
+ create mode 100644 configs/sc598-som-ezlite-spl_defconfig
+
+-- 
+2.45.2
+
+base-commit: 2f3766949bbea7aa5a472157561d387fd94205d2
+branch: dev/sc5xx-boards-v1
