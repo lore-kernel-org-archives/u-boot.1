@@ -4,110 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDACBC5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 20:11:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2268C5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 20:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B16F81FEE;
-	Mon,  2 Jun 2025 22:11:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 101D781E72;
+	Mon,  2 Jun 2025 22:37:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="harGOOyx";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iNf9VJxt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09E888205A; Mon,  2 Jun 2025 22:11:22 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id BF13B81F0D; Mon,  2 Jun 2025 22:37:22 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0AE281E72
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 22:11:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B381280F0E
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 22:37:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1748895076; x=1749499876; i=xypron.glpk@gmx.de;
- bh=y3fau1a0OhNhpfkq7ap3cKvZ6vvAgFuoRwtDtxkFjv4=;
+ s=s31663417; t=1748896635; x=1749501435; i=xypron.glpk@gmx.de;
+ bh=8Qgmt1YzGnl365mVbRblAS0UCliakD99I8qtng+SOdc=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=harGOOyxPBq5p7/pWi4k9g4d6fy0Zy7NEjzZ3WWSsFOG6hu9yNOlu6L4Mif8dMVp
- 0Yukb1j8se64SCUhztWaTLjMNsFsW8VrOwuRFZuICoRaOnVOzZuWlC3XXTgrpJOk4
- E9gRZLuv79MykOKAsX7l8cseJP36SRrpfF4nwyu1fn2xyrqCxg9/YHfx5nLqLnOTq
- 7/5JI/ZuYoO9CdrvExNRq37iPrDP5gZTPT7AjHKdc7/HttG/2aDIgpQyaERk7VQog
- JICLeSNoqwcpnxTTcCCD0larVAk4bDR/GBFtZuFelBWQd9JXlsU5Tw1+i73M8UTGd
- 9wfmHQ2yEENBUK4nQA==
+ b=iNf9VJxtHgjd5XjzYFJxKiTG4JdnYtM0bWfnWcGya3S6qpj7A+A7lRSAzZHaAwxP
+ yKBgvuGAh0Vp3td+JMs1Q//fFHVDp0NuyIB5d2RFwHwueRhHW0w4X+nA0n1Liwj44
+ H3B5oI0dDjzUt7Hbis25CFg0isZ4tsXSVp2UWcWlMhlJvPwtdzpIMDZdDby8ujARe
+ qQvUMM/VAwJ/Tt4WVwZNP/57uoLHIdnh/l8zsLD6Yb5m/mstF27+opXP0prwgzPS6
+ DBtojN+c0ajZ3jBQTQ9mvnxpq7WlYOFjun6jn1fhrXv8qSZ1+Nh8sbwdXFwiboXke
+ wp29Xy1u516MjWn2gA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MybGh-1v5me11Ycf-00wwBJ; Mon, 02
- Jun 2025 22:11:16 +0200
-Date: Mon, 02 Jun 2025 22:11:12 +0200
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MuUnK-1vCdrs3r8M-012P34; Mon, 02
+ Jun 2025 22:37:15 +0200
+Date: Mon, 02 Jun 2025 22:37:11 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Greg Malysa <malysagreg@gmail.com>, u-boot@lists.denx.de
-CC: adsp-linux@analog.com, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 03/10] docker: add ADI build-related tools to docker image
+To: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
+CC: Tom Rini <trini@konsulko.com>, Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH] cmd: smbios: Fix header for type 3 entries
 User-Agent: Thunderbird for Android
-In-Reply-To: <20250602194507.15159-4-malysagreg@gmail.com>
-References: <20250602194507.15159-1-malysagreg@gmail.com>
- <20250602194507.15159-4-malysagreg@gmail.com>
-Message-ID: <EB8928C9-E912-4F52-B080-B7EACBA89740@gmx.de>
+In-Reply-To: <20250602201009.90885-1-kettenis@openbsd.org>
+References: <20250602201009.90885-1-kettenis@openbsd.org>
+Message-ID: <902988B0-EA7C-451F-9A1F-154D34675386@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HrKuirwJOgmtDYBypZQk2N1UybTmCV2sBlmr2szx1GeTaiawDNs
- 7mU8JyoeHIBXpuvame8GvnsasKEwLjVpn9IqinCa4C3LvwvIgj6qRAIcg7hCqHHREL+fMHF
- 9Umyl1PxLrbrzfRXdNDXDSNq/9do1d/e6hKOP6b7F21rzq/nSL5Ga33h8P7H4BI2mG8S/09
- LaZKnb6RKw+wSxySanKzQ==
-UI-OutboundReport: notjunk:1;M01:P0:j1eX09NmWcQ=;M9xuXmfdGTNyW2etGJ/E2fAFi3+
- MZaoawcNXr6hWXbB8o/FNOZWaVa19x7W+92wV5nfmyUlmLgqe3O7ag0gyjzwOriEGmNRnP2Xl
- ksPh+nBWe5+ZFNniOht/Siqny2I6b+HvSHw0JxjhANYFB2HhbLlWkXHvqfYtUOO6oKs6EGAuh
- BUAi05CXCOOJ+d+boe28OvliWl6bQwZmg793vd/2Mt3YkyAVKCXuK05ckz23xLuVhLzs7hrHY
- c+qM1rjNRBlojlA0qFzTIRAqeZdpFv9P/DbpElZGbn3QfFk5L+bjGhG1WmJ4Vr9+ta2j8MQiZ
- dsJfCnChCrWTFZll3V/QoXyE5krNSPxGnj3H7c9t5PgiwIYZRrpHliif+pDIIprSWv3AYxxW+
- 4I1DEmqITt8bL3aIPFOBT3oMcFSJ2cU1mpD9Lk7rQcnzVn5zQvr89xZukOEpcBbreWHSRCLcM
- rXdjCgRCc7/igb+SXkAyIQeLHpKC7bMbJUKbGKW7/r5sXChpWs9SctIKKL7O29+B97W8fYtcA
- cbRjKPr3Q9T5QnweL4mOTEn7lHFr5RFLAmwZar6uV5ck5/oKcjfaopslTwt/4ohMox1y0JK6q
- dv8Va7Xhz+8mzhM6mIOLtXpbmCmZ7acVCtfKvCN8k9XQukveCQ0HopVGtyjqOznJKMJco/iEc
- +fTBv2KV5DWR7lzsOn0aLWThfd9IFQDP+SpKCxTSnnIRjlahkcJznfVyMyb+G6HhvnGZZTXKd
- e6Et8Y6j3/o4lSep02ijoBpQ5HutDNj/WFUN4ZRw1tUI0Dx9S0E6B4kM/KthMQPBWs0DMLUJp
- h9rXHOmGpCrLPadyVir2Zbz5CllmZkr5/7z6FETEV8/3B0at+XPKvwM7iK5rr7aPLLwIkjbNZ
- 9U2eWCeyADH9h3ekeoMnc+eAqGhQnT8M6WmYbV3j6G2SX2e4HOOqih+ErcoHV8AIUQxEyiB+S
- DrG1137ToGYQYn5N0lw3B3qCZBIPaJAryTXT6KairD518kQBPD91zSNbMcQuSfBWV9z312AKd
- bknHOMnH2H2YXECKUlGrRddiduFNJHm/IJ7Bu/rk/Hpww1IL0OAj4mH/c83fnOIeANHs5Vhj0
- JVR3Waw+aay3nfgdzdLi5Dp7M5teZwr3Rn/jqfcAZoTdq5fmpsVsnnjq8uDiR3kdPPGCevV2w
- VZBlXBPT1gSIbHgghuLjzzKicLgKZAOQLZ5MhGy/HPxA4+FOhIV6Qzr5VbnjopyjWUoQ3X9XS
- KcSJX3UAinl6M/diksIHBVwjVtuktyFztRuvqY0pKN55//7c/WKJmH9ZKD+WtYaMxsIIKzq9K
- tvcHHQbqonL1MnJlB76ht3ER9z5XP+mEJc2VYxwsbwQjQJMS7lK/nCYR/wwQmi1c4V1a9qv1E
- mwDR+7PIDr2a84fnlE0eZkFjX5XhZlAQS978QzhjrgHLp8LYsty9OesEtNlJsE4KTZ57GCJSG
- /XJvr9JEQJnckIYGLxByCJawjUwH/Xtbq8VrcrAkRw6L2ZCAneL7B+9iisF/5Dt7yu34jHsIt
- 3rw9R6tQHprIhTo4+TZdjg/HKtWvyEvyH5bPGHUfTWossjUwHH8UAj7H7Oe1YV8VW9iVWeZKY
- ct1DvnCiECFxUvPQVUO9Tz2cvLbInKwMWn4xDYOZ0hgm9329ffo21wjfRVEBqcMsWOiT8TAoQ
- puMSmc7O5eB0zRtLOq/CRWZsPbTwFdXZDST/2z3Sj0Y7BXIZ0H9G9/skWqJw27P2DKPy68J59
- 7cXqV2fHVw9bDb8JsNwHxW2Mt9moMZ5F7drw+7DVqwAC3cIYWS7eRoXO4/Nh83D2Y7RFuCq0L
- 7Vs7629oG5I5S5KyiOsS/XFOLO8QNG9Xyzs5woyGnN6yhpe1u0WX4S/xgaMFj/pJOVz1QbAsf
- bmjGjysnYdlLOrNoHjsFEH4WkdkDeIJkAZw553yZpKeDyUh5JRqdUFgcIaBh843CyivVlCGbc
- 28wh7pyq/Jd4Xp9fcIc2iZxWv8t/ixLAZec7sybX/2OhuWc0huIYCdkReM1Axfr5H0QZ8N3NN
- AbRI6+hGMFDT/iChQmNVesNXvGRRi3+t6Wzr3+ruPu5B3tlnyv5avHhUfgUHr7OZcHPlJXy8s
- OLazjm3CJpcjJbWbkbPslUDuSnisF4gWlhS68vtXAOK9dwEHFwbk2oNVc+Nlte0mz1QJbZGlF
- 7yqwk4mZFGchgGmdDVmJbNSVHZ9DXvnJal4FjDRb34xhEF2JN2VpN2EV1tMDNxh+h22Dw9Ed0
- TGyf04RSeP+TLnvIiHuAxhdH2am8y4/IWLg7eKdY4GMK+sIORL8f9A82kFHdgnuMVQhHne0F/
- VhDO+Hm3HuYeMoUD+S4yUfoohM6XrZDxLmjaarMYWB02e9JWhbdMf5jYkRoXkgi4WaeCyTULT
- EXZFt4S0kMbn36ILAYKinV/MZXO7sKSc8qZNERqFgQhhDiYQ51jsHDpzI8iMojqfmvm479Bny
- rjKI0XHSKBDarfNdl1eNWek8GTpvfXncJHlHhZY38F07sR1XHbosoE4iBZP91PNoEeFFL4D/l
- APp97BIzmOg3oTA4UfOYDlBG/JM61tVCSMEbEmR9/9/6Z9LCckTDlk9OOXlCRqdXYYHdhE+WW
- MLgHuGyLxmfsTgenCpWK55gH2BC2qdfn2rQcdA6zkM/vhmJNvWEyys7dAO/Nejqbp+mHDjhs3
- kTynWrOldgPYHrgCG5uc+1VHJyNo/1YLYk2rK7jdMORtUIPdDpJtUrhnELDzwl+R0/xl/RZCw
- K6oGDZsxXTgWE9ZDV6O4KVUP8/410KCJBAVTs6wPjbwI1fEBItgD3viYzVNUdIWEtxP87A4Cf
- wK+UIgpOT8BMdDtIWFwXSOb8PDmXGNA4fXzIe/22eCAOkkpBotY293ko4Qggjp6q9YAweRWfH
- Y/feAB78PxSCIQ41dpoip92aUpgJoiVuorJuQ5DiqQCYyvc2FPoHBU9wwzXjeyhGMdkbRVIup
- /X92r/oi12raDf2R/Iz8CHj4UozM1Dvch8YdVuivX33QmOhsPdB6hvAoXKLGMxGSQJ3ItH1k/
- ykGV9mUxtNxwlBn2Z5XtYnYuHiiODqfFEk3TLfIjfpWYia6nR6lhzVc14qYtIfuW8xes1DGos
- kpqnKKtAFCT4LVnORjmWXa5cPrWTZWGi1W2c5MICyDCArN1RnHbV3lwiKXtGh6hGAH/xwNi6I
- 6wKVIsXI49Zjm8DOI9fU2qAiE0TrkC6SNUBTsYt18LiqTJweVG0yNTKueCsgCedb912Nd8Svj
- ivsG+cwGjrJNKDZ6w+F7sRudZZaGlDuQChgOAw==
+X-Provags-ID: V03:K1:EbwirQzx3C3S5h9hI2kMVZJgvHRfggzusZlJ2xGKAAlcgwDSxSW
+ cj/pE1S9M6dtuvIU0Pch+35z4YvVH8AaN7a5p7Tc0ZErez1TpZvvdjcKUzR4rUPqmEAXyy8
+ xUlv+hfbiaNlXefmR5g4h15Oom99G6wZhIrVGr5vJKzrfMMJbiSUeZbId3zE9a2q/evOEKM
+ qA3dOggw4FhaUwXbG5z4g==
+UI-OutboundReport: notjunk:1;M01:P0:6UFnJlI1s2Q=;U63OW1I15KHrlvsz1CFGOqtmJwX
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,57 +121,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 2=2E Juni 2025 21:44:41 MESZ schrieb Greg Malysa <malysagreg@gmail=2Ecom=
->:
->ADI processors require packaging with the ldr utility for bootrom
-
-"ADI processors" is not self explanatory=2E Can we add a sentence like
-
-"LDR files are the executable format for the Analog Devices ADSP-SCxxx on-=
-chip Boot ROM=2E Provide the ldr compiler for ARMv7 and ARMv8=2E"
-
-
-
->compatibility=2E Normally this is available as part of our yocto-derived
->toolchain but it is not a part of any other premade toolchain, so it is
->otherwise unavailable in the docker image for CI=2E This patch adds a
->source build from the ADI maintained github repository=2E The same ldr
->tool is used for arm and arm64 for all of our boards with names adjusted
->to match the expected $(CROSS_COMPILE) for these boards=2E
+Am 2=2E Juni 2025 22:10:08 MESZ schrieb Mark Kettenis <kettenis@openbsd=2Eo=
+rg>:
+>Change from "Baseboard Information" to "Chassis information"=2E
 >
->Signed-off-by: Greg Malysa <malysagreg@gmail=2Ecom>
+>Signed-off-by: Mark Kettenis <kettenis@openbsd=2Eorg>
+
+Shouldn't we replace all terms in the output with what we find in the SMBI=
+OS specification?
+
+E=2Eg=2E the type 1 output should refer to "firmware" and not to "BIOS"=2E
+
+Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
 >---
+> cmd/smbios=2Ec | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> tools/docker/Dockerfile | 8 ++++++++
-> 1 file changed, 8 insertions(+)
->
->diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
->index ceb7a25ad4d=2E=2E1c4a169e079 100644
->--- a/tools/docker/Dockerfile
->+++ b/tools/docker/Dockerfile
->@@ -308,6 +308,14 @@ RUN wget -O - https://coreboot=2Eorg/releases/corebo=
-ot-24=2E08=2Etar=2Exz | tar -C /tmp
->     sudo cp build/coreboot=2Erom build/cbfstool /opt/coreboot/ && \
->     rm -rf /tmp/coreboot-24=2E08
+>diff --git a/cmd/smbios=2Ec b/cmd/smbios=2Ec
+>index 562dd7959be=2E=2Eed419f19028 100644
+>--- a/cmd/smbios=2Ec
+>+++ b/cmd/smbios=2Ec
+>@@ -280,7 +280,7 @@ static void smbios_print_type3(struct smbios_type3 *t=
+able)
+> 	int i;
+> 	u8 *addr =3D (u8 *)table + offsetof(struct smbios_type3, sku_number);
 >=20
->+# Build ldr tool for ADI boards and install to match expected abi name
->+RUN git clone https://github=2Ecom/analogdevicesinc/lnxdsp-arm-poky-linu=
-x-gnueabi-ldr=2Egit /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr && \
->+	cd /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr/src/ldr && \
->+	=2E/configure && \
->+	make -j $(nproc) && \
->+	cp ldr /usr/bin/arm-linux-gnueabi-ldr && \
->+	cp ldr /usr/bin/aarch64-linux-ldr
-
-In the Docker image we tend to put such tools into a directory in /opt=2E
-
-Best regards
-
-Heinrich
-
-
->+
-> # Create our user/group
-> RUN echo uboot ALL=3DNOPASSWD: ALL > /etc/sudoers=2Ed/uboot
-> RUN useradd -m -U uboot
+>-	printf("Baseboard Information\n");
+>+	printf("Chassis Information\n");
+> 	smbios_print_str("Manufacturer", table, table->manufacturer);
+> 	printf("\tType: 0x%02x\n", table->chassis_type);
+> 	smbios_print_str("Version", table, table->version);
 
