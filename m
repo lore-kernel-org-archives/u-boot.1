@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56510C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 19:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30ECC5B555
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 19:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28FD482A8B;
+	by phobos.denx.de (Postfix) with ESMTP id 812AF82AB2;
 	Mon,  2 Jun 2025 21:47:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hys1aViQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="itOOJ6BQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58CFC8212B; Mon,  2 Jun 2025 21:47:10 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 48F5A8212B; Mon,  2 Jun 2025 21:47:11 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7ECE81F0D
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 21:47:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9B6482103
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 21:47:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-70e3c6b88dbso33005287b3.0
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 12:47:07 -0700 (PDT)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e7da03bb0cdso3392698276.3
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 12:47:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748893626; x=1749498426; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1748893627; x=1749498427; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vxfgR/cfPeLSK8oKHFzkupipCo3MGxFFfqVmuIwaVcw=;
- b=hys1aViQaVBASwIC7vWgluM4LtXSVFPz6LvkTVDLFfs+Bwal7lxAyd9pi0e7v0xCc2
- 5ZC2gO8DkA7ATaA76+H5AxoLQXlnawTALJBf0tKIWmLSQiZ0Ad5nfkzPsXMBxkddpWa0
- ecOo4Yu/1iHSS4Jm7Rib+gHezaQe/NflBZ0rzyC4uxxdKYwgyTQrNG7pg34g2IIxNxXF
- wJXDHNRsP3fw/d3mSsuSJFILpvAHwx94gZTOLh0eWO+wJstaatFpb4Zk6/Ah13j9nXPG
- JNpOE8FKOzmL8zeQj1IzzSHm5xIuW4m7dR1IcVJzv/1lEMUWYF0frGP2bEiM/L/ZKwDo
- vViA==
+ bh=jtOzLP2QL5A65ulegfZg4JrecjDV0HsGTVpYOrej1HE=;
+ b=itOOJ6BQZ81q6I4spqmvxqMEblcyGxOuO9PuZy6VJIxQe60CqpRRZoz/Zk5ZO/Z6X9
+ IozdE/nXVNS5IryZsOovPePHReB0yAoOwsOPEMS66/RrctVXDS94T8OsFQjzoz0pIQrL
+ k/82kRl0XDh8UwCR+rg2Ab3rxqmD/VnMGoSKXl0IfQQfCjT3sP4y+u6zLSV7gXHPS6f9
+ ZyfsaeizNXPSakHsO8kcXlI8pmALmqWLAYlkwnijxgq4TiYmGL/+My8NK5Iny2+3aKFs
+ oXRNOlgGyg9zp1Q100E6YsOPk6d5kJT1LRiw/ti/hpFI2IFKmeE35I7Y7efdymZtgo8D
+ 51jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748893626; x=1749498426;
+ d=1e100.net; s=20230601; t=1748893627; x=1749498427;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vxfgR/cfPeLSK8oKHFzkupipCo3MGxFFfqVmuIwaVcw=;
- b=q+11dFemlZeixRpn88m7wQQuPZqv8y2kBEw4754oK/KdOhQ2Ok9WUAx4Tt7Ry/EXZ3
- aFs3nuRAVN3T9mMGBDVa5gd+f/saJPiTBv8+Q0tVIpKDhicoQZ9IjS0jxp/aYif39AMF
- bSLhvPRxfi/5hHUBbjHWSrT2omVmBkdKC7Ugwpn3rU/DFoqrg/4wsEr7L7/r828bZlzX
- OWi4HLz/HmxRWyANme83ShBbuK0UL8HrR1fjBov1u9rjZAagX+uu5GY54Q3lPP6XB3ew
- sxbs1P1j1oZ5OXkZqh72Zxp1dXuGPhFZmyioRBbmTGpH1pmy+xGvbBxi5zrAswxCAEoh
- HYzw==
-X-Gm-Message-State: AOJu0YyJ0gY+dnRohkdc6MtdfYi+XMzLguuZT7QuLEu2Wt6Fp1uyWqLH
- qmsjdsy+RBJl++hq3BGTt2InyjUHvjxgYlt9NtC7u74rLvDjxa4VLZODD1UV
-X-Gm-Gg: ASbGncs6F59bWX9ND/J4k2k28B+lj9HYcVVx/+UaABrAhdgV0L+yJ16F8B3GeBSUM/2
- ozTVcmI+JjBoXSYet1NH2x3N55Jxoe5rclBu9OgiBrjJ3yli9RLpWhB1PBA0lBOojpUd4O2Yf1Z
- 2TbdMRgYtFZ9TVIqNmI9h3/isAfIZTfLcvYchkH+MfoJxgwMnop04J52VH2KYGR/xiOPCVMs/Mc
- /9Gz1f8tNESciHceh2lVBYk40nGl5rAumeH9EArMCbv0hJY7jgKGU4xz/A/Wc/G/ohspPhZpWFQ
- jCaiVD0mILC8prlFzQq8NxvUiRPxlQTun19GEywkt2dRcoWZnBULkCZ9agkkfRT9Ai2S/CyCsZ5
- 5Jg==
-X-Google-Smtp-Source: AGHT+IEyN23dCyZ7hmsjVtXSLr9LMhSH27yw/pC3BNsoaJiwoRlLM1PGTVaNAYar/Rkl+VIepecNwA==
-X-Received: by 2002:a05:690c:4d42:b0:70e:185b:356d with SMTP id
- 00721157ae682-70f97e7c491mr210783637b3.14.1748893626065; 
- Mon, 02 Jun 2025 12:47:06 -0700 (PDT)
+ bh=jtOzLP2QL5A65ulegfZg4JrecjDV0HsGTVpYOrej1HE=;
+ b=ubVcaL0hUbebtTCnEwXzy1qTWWdxHXO+gNI2ae7M3aaaYoAqtYojuYQOoA27Va/gKR
+ bcmVEGX3tGhPJiL//HHum9tj8AaNo3WRYcPcYQdWFl9+YDDGGr3myvO288qlJkWsKgCp
+ qtEz1U9i6PwQbtEIIQR7z5yjHjhp8vK+oAW8lddMkyx4YDRKnBw7K4Hcjx7JRkvQ6IQl
+ H8tySLSklHVr32INCLqlXdGBLh+tm52Zk5eLwnSRBNoLSW9MeAnPUrgR05PfLtd+ImIp
+ PpD3FIBR4KARJbU792Oja+nfTs07qCn8oyT3Y2kknT/A1ypUIt5ugloNl/X4rOVAeNBM
+ jTbw==
+X-Gm-Message-State: AOJu0YzUBXnQGJ0UV7dsjroExjIzSoUtohqmbOUXYwijhRA+UOHuRX5a
+ 1hK72A5p/0Fwa+xqdIO0rvtxMaTDvlH09w46Zz4eMsNSWCXVO0LzcRuR7hG+
+X-Gm-Gg: ASbGnctO+sMcLjhdrWBFiv4jioAp1C+We6fPHI3BLab+uooQV1lNEIS5APXUBtW3SVi
+ mOZ9TacQNPTyHjZUsjrCEkMqjJ7n1UH13R647A0QQHroCyt/R7W/7KyMsfdaP72Y0JsN5L8prES
+ ekKI/6AFiZwGjAEtjUEPRbZCEbqOH+QSQOhb71hg/qUSHDWByzs+/rd1GKN/kNq4J4TxrFDeUqt
+ mwQ+zzDaO25aoY6qfocdHFlvtXsXXmSvLx09Jk8YljlPvQx0Zql6AVPafVpnTmjrq8JU968KCW2
+ OnVxo0Wj3e4GLknWHzQCio1+EQ5zzE0MgHjq1XJWHBDPHsspoIBnn7hVCxcMeyYGt759fBfqOth
+ ohA==
+X-Google-Smtp-Source: AGHT+IEKuX/UeNAgt7aA2735EGiSqprkDtoYL6q75WiF+Htd4WjDVrkNqO8ZF7m6UH1Kr9N9yEB8Tg==
+X-Received: by 2002:a05:690c:6c0b:b0:70d:f29e:9527 with SMTP id
+ 00721157ae682-71097c2a803mr142814257b3.6.1748893627198; 
+ Mon, 02 Jun 2025 12:47:07 -0700 (PDT)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-70f8ac0f452sm21902867b3.51.2025.06.02.12.47.05
+ 00721157ae682-70f8ac0f452sm21902867b3.51.2025.06.02.12.47.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 12:47:05 -0700 (PDT)
+ Mon, 02 Jun 2025 12:47:06 -0700 (PDT)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 03/10] docker: add ADI build-related tools to docker image
-Date: Mon,  2 Jun 2025 15:44:41 -0400
-Message-ID: <20250602194507.15159-4-malysagreg@gmail.com>
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 04/10] board: adi: Add SOMCRR infrastructure
+Date: Mon,  2 Jun 2025 15:44:42 -0400
+Message-ID: <20250602194507.15159-5-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250602194507.15159-1-malysagreg@gmail.com>
 References: <20250602194507.15159-1-malysagreg@gmail.com>
@@ -99,39 +102,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ADI processors require packaging with the ldr utility for bootrom
-compatibility. Normally this is available as part of our yocto-derived
-toolchain but it is not a part of any other premade toolchain, so it is
-otherwise unavailable in the docker image for CI. This patch adds a
-source build from the ADI maintained github repository. The same ldr
-tool is used for arm and arm64 for all of our boards with names adjusted
-to match the expected $(CROSS_COMPILE) for these boards.
+This adds infrastructure and shared library code for building targets
+that use the ADI SOMCRR-EZKIT and SOMCRR-EZLITE carrier boards. These
+are not used directly as board targets in their own right.
 
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
+Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
 ---
 
- tools/docker/Dockerfile | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ board/adi/carriers/Makefile        |  8 +++++++
+ board/adi/carriers/somcrr.h        | 14 +++++++++++
+ board/adi/carriers/somcrr_common.c | 19 +++++++++++++++
+ board/adi/carriers/somcrr_ezkit.c  | 38 ++++++++++++++++++++++++++++++
+ board/adi/carriers/somcrr_ezlite.c | 24 +++++++++++++++++++
+ 5 files changed, 103 insertions(+)
+ create mode 100644 board/adi/carriers/Makefile
+ create mode 100644 board/adi/carriers/somcrr.h
+ create mode 100644 board/adi/carriers/somcrr_common.c
+ create mode 100644 board/adi/carriers/somcrr_ezkit.c
+ create mode 100644 board/adi/carriers/somcrr_ezlite.c
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index ceb7a25ad4d..1c4a169e079 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -308,6 +308,14 @@ RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp
-     sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/ && \
-     rm -rf /tmp/coreboot-24.08
- 
-+# Build ldr tool for ADI boards and install to match expected abi name
-+RUN git clone https://github.com/analogdevicesinc/lnxdsp-arm-poky-linux-gnueabi-ldr.git /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr && \
-+	cd /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr/src/ldr && \
-+	./configure && \
-+	make -j $(nproc) && \
-+	cp ldr /usr/bin/arm-linux-gnueabi-ldr && \
-+	cp ldr /usr/bin/aarch64-linux-ldr
+diff --git a/board/adi/carriers/Makefile b/board/adi/carriers/Makefile
+new file mode 100644
+index 00000000000..cefd2cc837f
+--- /dev/null
++++ b/board/adi/carriers/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# (C) Copyright 2024 - Analog Devices, Inc.
++#
 +
- # Create our user/group
- RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
- RUN useradd -m -U uboot
++obj-y += somcrr_common.o
++obj-$(CONFIG_ADI_CARRIER_SOMCRR_EZKIT) += somcrr_ezkit.o
++obj-$(CONFIG_ADI_CARRIER_SOMCRR_EZLITE) += somcrr_ezlite.o
+diff --git a/board/adi/carriers/somcrr.h b/board/adi/carriers/somcrr.h
+new file mode 100644
+index 00000000000..01e908c67f8
+--- /dev/null
++++ b/board/adi/carriers/somcrr.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * (C) Copyright 2025 - Analog Devices, Inc.
++ *
++ */
++
++#ifndef BOARD_ADI_CARRIERS_SOMCRR_H
++#define BOARD_ADI_CARRIERS_SOMCRR_H
++
++void adi_somcrr_init_ethernet(void);
++void adi_somcrr_enable_ethernet(void);
++void adi_somcrr_disable_ethernet(void);
++
++#endif
+diff --git a/board/adi/carriers/somcrr_common.c b/board/adi/carriers/somcrr_common.c
+new file mode 100644
+index 00000000000..34ae48f31d2
+--- /dev/null
++++ b/board/adi/carriers/somcrr_common.c
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2025 - Analog Devices, Inc.
++ */
++
++#include <asm/arch-adi/sc5xx/sc5xx.h>
++#include <linux/delay.h>
++
++#include "somcrr.h"
++
++void adi_somcrr_init_ethernet(void)
++{
++	adi_somcrr_enable_ethernet();
++	mdelay(20);
++	adi_somcrr_disable_ethernet();
++	mdelay(90);
++	adi_somcrr_enable_ethernet();
++	mdelay(20);
++}
+diff --git a/board/adi/carriers/somcrr_ezkit.c b/board/adi/carriers/somcrr_ezkit.c
+new file mode 100644
+index 00000000000..34572ba847e
+--- /dev/null
++++ b/board/adi/carriers/somcrr_ezkit.c
+@@ -0,0 +1,38 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2025 - Analog Devices, Inc.
++ */
++
++#include <asm/gpio.h>
++
++#include "somcrr.h"
++
++void adi_somcrr_enable_ethernet(void)
++{
++	struct gpio_desc *eth1;
++	struct gpio_desc *eth1_reset;
++	struct gpio_desc *gige_reset;
++
++	gpio_hog_lookup_name("~eth1-en", &eth1);
++	gpio_hog_lookup_name("~eth1-reset", &eth1_reset);
++	gpio_hog_lookup_name("~gige-reset", &gige_reset);
++
++	dm_gpio_set_value(eth1, 1);
++	dm_gpio_set_value(eth1_reset, 0);
++	dm_gpio_set_value(gige_reset, 1);
++}
++
++void adi_somcrr_disable_ethernet(void)
++{
++	struct gpio_desc *eth1;
++	struct gpio_desc *eth1_reset;
++	struct gpio_desc *gige_reset;
++
++	gpio_hog_lookup_name("~eth1-en", &eth1);
++	gpio_hog_lookup_name("~eth1-reset", &eth1_reset);
++	gpio_hog_lookup_name("~gige-reset", &gige_reset);
++
++	dm_gpio_set_value(eth1, 1);
++	dm_gpio_set_value(eth1_reset, 0);
++	dm_gpio_set_value(gige_reset, 0);
++}
+diff --git a/board/adi/carriers/somcrr_ezlite.c b/board/adi/carriers/somcrr_ezlite.c
+new file mode 100644
+index 00000000000..010f36823ea
+--- /dev/null
++++ b/board/adi/carriers/somcrr_ezlite.c
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2025 - Analog Devices, Inc.
++ */
++
++#include <asm/gpio.h>
++
++#include "somcrr.h"
++
++void adi_somcrr_enable_ethernet(void)
++{
++	struct gpio_desc *gige_reset;
++
++	gpio_hog_lookup_name("~eth0-reset", &gige_reset);
++	dm_gpio_set_value(gige_reset, 1);
++}
++
++void adi_somcrr_disable_ethernet(void)
++{
++	struct gpio_desc *gige_reset;
++
++	gpio_hog_lookup_name("~eth0-reset", &gige_reset);
++	dm_gpio_set_value(gige_reset, 0);
++}
 -- 
 2.45.2
 
