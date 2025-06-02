@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D021CC5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:03:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243E1C54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:03:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 347E98212B;
-	Mon,  2 Jun 2025 16:03:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9052E8205A;
+	Mon,  2 Jun 2025 16:03:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="sGmhdOJI";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="x8hxHfxx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AA26828A2; Mon,  2 Jun 2025 16:03:15 +0200 (CEST)
+ id 26E178291D; Mon,  2 Jun 2025 16:03:25 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A2FB82102
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:03:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 243928070C
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:03:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=8248ff287b=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 552AAU9s025610;
- Mon, 2 Jun 2025 16:03:05 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 552AARZC025694;
+ Mon, 2 Jun 2025 16:03:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- v5GyFzQceapKCSm5ibFdyTZdfkUgywizYmwANcC6TE0=; b=sGmhdOJIgSKJ738d
- 179eB3AyMAbSw4eTP03ZUQ7jtCYOPzLwh87APtJIbvIADAvD2MUEnNctTEUx9JTz
- QpViurc0yR7WJKcTdNzJsyQ9JcpD8qvHeOHzy3gGd82xXbZTl7ZC+J/m7Ujufgzm
- P7RPgdY41IELVpqnyeoej6NPSVYO17KSOzR1st4SYbpCyJcPIpZ1Y2Gq0lLvNgwy
- fYsH8oh7nJ73koL/L0rSR4osn1NT/5jDUVqN2/BYHkni811x3XG+YTYl5rLaRElb
- 1esDj15d3ZWqQ//IgSI166ClLY83OAl4B/LsL3K2fy5qJSN5jvxsUn/qkrkj7CRH
- 09RFoA==
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=aOVwHK6vXZ4LJjfDH/gEGg
+ mfu0yJJn2npVOuo1RlFkw=; b=x8hxHfxxS7sn2aY7Ahki1MQy4RJHr/DSivDSFX
+ fvGj5F9T9KKWecNc+eg6QmOZxmwMZ+eKI7lxGiWMix2PCA4rUQenlhFmhTZT0WBh
+ AtyZTL/gUq3xdhr2hCIvVmynxO98LvCvkNlwh8+Izkwfb3R/+TI6rzJA5/fISGn9
+ +aaNsIL3W9TFFGwkMBxIXcpwjWqmqvwYnTpDA3/XNFbBEZTuQXDwAgUe95n/eZoz
+ kVyZtDwcbZ2NjFbWP9DvEwqAONFLW6D389O79WE312dcLBuITZzHPYydYYGyWv3W
+ tiVcHkfTHNMwiqlHLZOvQ63WONP6PJh07kkkoxr5FJFQFf5g==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46ypw9f5xj-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46yrngxx4c-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 02 Jun 2025 16:03:05 +0200 (MEST)
+ Mon, 02 Jun 2025 16:03:09 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 06FB240082;
- Mon,  2 Jun 2025 16:01:35 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 843E840098;
+ Mon,  2 Jun 2025 16:01:42 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B4829B54911;
- Mon,  2 Jun 2025 15:59:44 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 98E68B5327F;
+ Mon,  2 Jun 2025 15:59:41 +0200 (CEST)
 Received: from localhost (10.48.86.182) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Jun
- 2025 15:59:44 +0200
+ 2025 15:59:41 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: <caleb.connolly@linaro.org>, <ilias.apalodimas@linaro.org>,
  <jerome.forissier@linaro.org>, <patrice.chotard@foss.st.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v3 3/3] test/py: tests: gpt: add test_gpt_write_part_type
-Date: Mon, 2 Jun 2025 15:59:34 +0200
-Message-ID: <20250602155908.v3.3.Iba2791fee8410d60ed4d60a7850521e29ba23a57@changeid>
+ Delaunay <patrick.delaunay@foss.st.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH v3 0/3] Restore support of short name for type UUID parameter
+Date: Mon, 2 Jun 2025 15:59:31 +0200
+Message-ID: <20250602135935.232370-1-patrick.delaunay@foss.st.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250602135935.232370-1-patrick.delaunay@foss.st.com>
-References: <20250602135935.232370-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -92,55 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add sandbox test on gpt command with partition type for known type.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+V3 version solve issue for "ESP" support when
+CONFIG_CMD_EFIDEBUG and CONFIG_EFI is not activated
+for example for test with qemu-arm-sbsa defconfig
 
-(no changes since v1)
+Fix and add documentation/tests for selection by string for known
+partition type GUID introduced by bcb41dcaefac ("uuid: add
+selection by string for known partition type GUID"):
 
- test/py/tests/test_gpt.py | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+- split list_guid for short name (used also for partiton
+  description with type parameter) and full name to display
+  information
 
-diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-index cfc8f1319a9b..e6d8792ac1fc 100644
---- a/test/py/tests/test_gpt.py
-+++ b/test/py/tests/test_gpt.py
-@@ -330,6 +330,33 @@ def test_gpt_write(state_disk_image, ubman):
-     output = ubman.run_command('gpt guid host 0')
-     assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
- 
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_gpt')
-+@pytest.mark.buildconfigspec('cmd_part')
-+@pytest.mark.buildconfigspec('partition_type_guid')
-+@pytest.mark.requiredtool('sgdisk')
-+def test_gpt_write_part_type(state_disk_image, ubman):
-+    """Test the gpt command with part type uuid."""
-+
-+    output = ubman.run_command('gpt write host 0 "name=part1,type=data,size=1M;name=part2,size=512K,type=system;name=part3,size=65536,type=u-boot-env;name=part4,size=65536,type=375a56f7-d6c9-4e81-b5f0-09d41ca89efe;name=part5,size=-,type=linux"')
-+    assert 'Writing GPT: success!' in output
-+    output = ubman.run_command('part list host 0')
-+    assert '1\t0x00000022\t0x00000821\t"part1"' in output
-+    assert 'ebd0a0a2-b9e5-4433-87c0-68b6b72699c7' in output
-+    assert '(data)' in output
-+    assert '2\t0x00000822\t0x00000c21\t"part2"' in output
-+    assert 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b' in output
-+    assert '(EFI System Partition)' in output
-+    assert '3\t0x00000c22\t0x00000ca1\t"part3"' in output
-+    assert '3de21764-95bd-54bd-a5c3-4abe786f38a8' in output
-+    assert '(u-boot-env)' in output
-+    assert '4\t0x00000ca2\t0x00000d21\t"part4"' in output
-+    assert 'ebd0a0a2-b9e5-4433-87c0-68b6b72699c7' in output
-+    assert '(375a56f7-d6c9-4e81-b5f0-09d41ca89efe)' in output
-+    assert '5\t0x00000d22\t0x00001fde\t"part5"' in output
-+    assert '0fc63daf-8483-4772-8e79-3d69d8477de4' in output
-+    assert '(linux)' in output
-+
- @pytest.mark.buildconfigspec('cmd_gpt')
- @pytest.mark.buildconfigspec('cmd_gpt_rename')
- @pytest.mark.buildconfigspec('cmd_part')
+- as the function are uuid_str_to_bin() / uuid_guid_get_str()
+  are no more under CONFIG_PARTITION_TYPE_GUID,  since commit
+  31ce367cd100 ("lib/uuid.c: change prototype of uuid_guid_get_str()")
+  and commit c1528f324c60 ("lib: compile uuid_guid_get_str if
+  CONFIG_LIB_UUID=y") move the content of array under EFI_PARTITION
+  and linker will remove it is not used it (in SPL)
+
+- Add and fix documentation for gpt command
+
+- Add test test_gpt_write_part_type to test "type=" parameters
+
+This first patch solves an issue for the "system" shortcut for ESP,
+removed by commit d54e1004b8b1 ("lib/uuid.c: use unique name
+for PARTITION_SYSTEM_GUID") but used in 2 location (at least):
+
+1- board/samsung/e850-96/e850-96.env:10:
+
+partitions=name=esp,start=512K,size=128M,bootable,type=system;
+partitions+=name=rootfs,size=-,bootable,type=linux
+
+2- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c:1151
+
+			case PART_ESP:
+				/* EFI System Partition */
+				type_str = "system"
+....
+			offset += snprintf(buf + offset,
+					   buflen - offset,
+					   ",type=%s", type_str);
+
+
+Changes in v3:
+- The definition for ESP = "system" partition in list_guid[]
+  is no more under CONFIG_CMD_EFIDEBUG or CONFIG_EFI flags,
+  and restore the initial level (always support for display)
+  as it is done for MBR partition or when U-Boot is a UEFI
+  loader (CONFIG_CMD_BOOTEFI).
+
+Changes in v2:
+- change 'string' to 'type' in struct for list_guid[]
+- clarify the usage of struct field 'type' and 'description' in
+  comment and in commit message
+- use 'type' for EFI_XXX description as these string have
+  no space and size is lower than 36 characters.
+
+Patrick Delaunay (3):
+  lib/uuid.c: restore support of system partition type for ESP
+  doc: cmd: gpt: add information on type partition
+  test/py: tests: gpt: add test_gpt_write_part_type
+
+ doc/usage/cmd/gpt.rst     |  93 +++++++++++++++++++---
+ lib/uuid.c                | 158 ++++++++++++++++++++------------------
+ test/py/tests/test_gpt.py |  27 +++++++
+ 3 files changed, 196 insertions(+), 82 deletions(-)
+
 -- 
 2.25.1
 
+base-commit: cf37480bc8335494cf88b7180dc3f1eb8cf63a9d
