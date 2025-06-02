@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B295C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 329F3C54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:11:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7568E82145;
-	Mon,  2 Jun 2025 18:11:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C3C682A8D;
+	Mon,  2 Jun 2025 18:11:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F+jCzTt8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iRyMGrIj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B28682A76; Mon,  2 Jun 2025 18:11:08 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 502B681F32; Mon,  2 Jun 2025 18:11:08 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11DC081F32
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:11:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B8E5828F8
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:11:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3a4f71831abso3251164f8f.3
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 09:11:05 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a361b8a66cso2766573f8f.2
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 09:11:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748880664; x=1749485464; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748880666; x=1749485466; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rjkBUkbdrkfPyxmrFas5fmLkp4Yd0oQxCzCxiath/cM=;
- b=F+jCzTt84aNitL23p5EypgDa4lmX8bTEZiH3jmvR1ma4EwiIVkE+vGGCdWlup8dxjN
- PcF06vcG0N5bx/zFoHsP8Qn38DzuS3jeqLpuOZmdjgamDN54mD/FUUt7MlK761DstjhK
- /XChm2902v1vkZZZ/d9f6YQxpmgo7DKGc7gCCOcMOv+XeXiMqmTKRBwla4cYAWV1uR8a
- QC2mKF3ivVBt1Vw5GbACByUGe8KQWVdStsusxocD6H/CrxQOSqvojCmgasJGYUYkrE6G
- nM2E5XHpMYCDV1Pxy/MANxaFZVpk6/tkreI2Rycjzqe7QPsRnabWmI/kztI1E0t6hMok
- FEfA==
+ :reply-to; bh=3rBlczCLDuJeJVfwlHqjHo9naPJLzz7NV2CUVDyqSTk=;
+ b=iRyMGrIjYxR6kMPny7Om5Fk0bCwZtQcZzvEh2JH7tn0qZbYcB8bes9/oCJX9zsmLKH
+ 5LeuZ7p2xXxDYEH2X9+XooXKR/jUH/BMZPazV1Ak7BD/Zb7imOQOamsdL4znP7LRvVCp
+ GDdNi5/3PI/GPfrbegD1ny2jAl1KIMuv4ghGVK12Ox+xssmCtisZKH9x6X190mpL3vDj
+ EghBDEatm35oxwRSPCPqSoKAIjtUBBu5VLwzk2w5tkKJuD/s/OaXHOTuRs0e1kech8E1
+ Z7I0yuVN7ybOY5xBZxJBfhLIF+VxuTsaOQKD2i4heDz1FkFaUZ97187od3pmqVxcaHDu
+ 3LsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748880664; x=1749485464;
+ d=1e100.net; s=20230601; t=1748880666; x=1749485466;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rjkBUkbdrkfPyxmrFas5fmLkp4Yd0oQxCzCxiath/cM=;
- b=gOtiZ1X/fjz1Gj/cZuwxdHgbwxlWPHRm3i60FdolGGm2MEak27zR3UcJvahQqprPSs
- WYrj/L4a6IO6nCWUu/CeHchNG7hs2KKUMRd+v8VsrGNcyjDa7/5cB9dJshWjR0TIt/77
- RdPnepIneyJ5Nb/X6yVq6EzP00bxV9d1qA4kayw3mJLTCbLEeBOlnCfQ40UZRaBGcfPc
- uVFHcUN44Qhjupxgteic59Fwr7Q0srZPT4t7SKJzEsyxrvufSiDkAgoOLp+mBlxbZ9+c
- sbFI+KyYyEf4JFBBc6IK7s+2JfrYuVfQ5dVLs1Y4SpzXLw4Rq8+3mGstzFBHXLFwacpI
- el+w==
-X-Gm-Message-State: AOJu0YyfRWo3sfdfIvLa750MKWEKQMEFdDr5yDAZbbQnYKKg8UgJaiBw
- keBqhuyl43ERC0sHj8QWr1k6/XWvcZ7VzJyfHqxVUIMf7tHNR7o9tWWK6d3V1biuY4c=
-X-Gm-Gg: ASbGncs/L3u1j0Xh1ps9hhFjtWzjafgg+0x2YTIa1JmFrSX7uNmF0rdx4CoiGzaXX/P
- Em2+zjTUFbUnlJpWcf0gNyt6mJIGrEU7+18lvsxjJWB2hEfG2ITTVM63UKegLMDhqgCIRVNEozz
- LZmAvuEvXniBujW0mAhCaRYtQrFqEDxFsh+rOWTqcXU+J/3YPF4B6EdCZgmacSZEWnPhV4I/0mW
- dPtWcEm0Dq6Bc9A2nTXyEE93ZYR0x4N09uAKb4bKykfc/ucpDSgVJqk1wIWXu8R1wV1/PCeq6xU
- 3mx7WubNYn1Mffa51VC95pmj2D8vckCv6tq4qFrui5FAr9Vho1PMOJRJtdpkBKeXZCzHZJSW5FY
- s5la0Dxmh78dX
-X-Google-Smtp-Source: AGHT+IHvP8AQ07yFms+NTznORF/ero4hGBL5tU0AQbGDEfK7poMqej3xImJ1AtsoIblBNg3Qmnwjhg==
-X-Received: by 2002:a5d:5606:0:b0:3a4:ee36:ee4b with SMTP id
- ffacd0b85a97d-3a4f89a4800mr8256748f8f.11.1748880664253; 
- Mon, 02 Jun 2025 09:11:04 -0700 (PDT)
+ bh=3rBlczCLDuJeJVfwlHqjHo9naPJLzz7NV2CUVDyqSTk=;
+ b=wuWDOYD7eKV1k6QP3PH5/7HtJlANIhqHjRtibstLTQy+hiyIAtscw+dV/A3n26KvSV
+ GIX3tTX4RC1N6eLYClZ5NXk/moA6y7+IJJHcV9S34IzUPhzPbr/MQHqDi0vDjAk4eqzF
+ QNjlz1Bvv6E2jvKnkiPwHuOvvpNz9xBOMhkzdU5QNx+wyLDqOL1evUU1tR+J0Lk+kSPj
+ hu10bG7c46L4ty+txvri9poRn4+MuTavNwWx8ovTKyUchWw7YNth86x1CJs24gNUoeZK
+ LqkU8ovzKKvFh53Z8k/QtGbSgHBEw/kYWxIy0+gCdja09PzErhQEfBru6KTvqLdjaTFr
+ 9K8Q==
+X-Gm-Message-State: AOJu0YymI3LZGpEE9kerQh2mqjppxlbzcpdzVJ+hEks4w3PBVRb4Eau/
+ S8/0R75FbreBv24uAsSMGAY1C1oJyfT+snS/FNRxY/ThHm61CcUqteLu2aaQKu2qPos=
+X-Gm-Gg: ASbGncvRZezeOF36xSwljocG4+F4V2tx+7s7FCHsh9zcLmUjzEtPfOA4ffFepJHopUn
+ EXNXno6cKiMB+ZeA+rNJxdjsohuFQ1ta+qXdjtq81mPdlMivHzq3juQXxDrFoPNg7nK6j/QEik0
+ T4w3gE8JcbSkAsYWPjtym2IiVV8+084KLv4AOQUuE5k6hu1Puiy3jsUyR0Mjnj8opjpMJ6z8J99
+ GuXbEzxc57uXhBJl/t+YE5DDdQrejYtZjy/b8pFDNIbMU/oYHiDRMB8Dg4BNc8gE9nqB7RPha5e
+ a0OxD9bN6bkGeIgOgmZsQpcT/kDK61ayPd4xR+0HtptS4Zvw/dQpxqWev4ieQrvlo7Ux6iJVOdG
+ NdkLZhwyxvcUA
+X-Google-Smtp-Source: AGHT+IEUEq+f/HfKMO2FxLpDveuT6O0Ko/F4NedjdiPur7fGv19htHvFm2/nwhTG+ScZZ2EVO7YNXw==
+X-Received: by 2002:a05:6000:26d0:b0:3a4:dfaa:df8d with SMTP id
+ ffacd0b85a97d-3a4fe1617famr6934666f8f.9.1748880665647; 
+ Mon, 02 Jun 2025 09:11:05 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a01:170:117e:fc:3688:a9e2:523f:a049])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4efe5b962sm15212138f8f.7.2025.06.02.09.11.02
+ ffacd0b85a97d-3a4efe5b962sm15212138f8f.7.2025.06.02.09.11.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 09:11:03 -0700 (PDT)
+ Mon, 02 Jun 2025 09:11:04 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 02 Jun 2025 18:10:54 +0200
-Subject: [PATCH v2 3/7] tools: add mkmbn tool for Qualcomm
+Date: Mon, 02 Jun 2025 18:10:55 +0200
+Subject: [PATCH v2 4/7] binman: add support for building Qualcomm signed
+ MBN ELF images
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250602-b4-qcom-tooling-improvements-v2-3-c7d19c0d4a8b@linaro.org>
+Message-Id: <20250602-b4-qcom-tooling-improvements-v2-4-c7d19c0d4a8b@linaro.org>
 References: <20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org>
 In-Reply-To: <20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,21 +89,21 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=34136;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3365;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=dnJZjI0pPoL7pi8nN1ZG06fQLmhQ5XSMndK+QSPLybY=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoPc0RRWa5BiydYfF5MnZdGk5fgCj2U0+G01ln7
- b000ZVQdUSJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaD3NEQAKCRAFgzErGV9k
- tof5D/9AVpID0/bYRIaR/0c18pGFbSM67F90RmCMjuI5CZTEKgIigBA2ZzpKCKr14nq3EgTPmCQ
- QuS78R3L4IMQTNnZ9DqEai8SItZya0Hw6XQJctc4EWQ3b7z9qnNmHSJxdPKvjC5Fk3Ermozxuzq
- E+kQswo6z5+QPBOEH6gxcfnbtlLhUtkT1Mfg+t7kvnrZ6qibsP9BGxDH758adXScF1dAFk4mUoW
- 59dOAuIvJynWDnppCqtiHNUxk52hUpP2pF2HmBdJ22A7rX9A/a3fxrAfXADiQ0pDf1o9vqfY1wc
- qCZGcIHqsc1zw3xocbYghJGmatYyIfDP51VeJZTO06xSsEo97e5iYf22yfmRvxQc2Ay0tdsH3F2
- vwj+QQdHeHAR3mrHzqifxmdNGcRszRwCLqnkY04sw7lvh/ydzRDQJTSmL8yfudYZislKUlrgfQv
- mwusbm3mz5JLmKlVhLIXEN+fvDTY7NfcxR/77MZLkvxp9P0NMSMpiD1eJNzfzDZxUI2jJDd9OhQ
- xaxHVOds1ZXN0NOQm/WTJ44/UprYwnAItDGSsFLu+jEEDANpu3ZBAQfUqRadNa3UDA09+tVKid6
- V4eclNMTyso+p89PtFRViuqcbaEoRypE9FjV6BgJP5RT4wxKpvsHfQFmrpnk+hFL+0EfhOyhZvD
- nbs7dwfRm+Wj97g==
+ bh=TXFHSBTqflb6f6NfX7pRRs+cU+8UjpId/6G4GiI9qEA=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoPc0Sh8BgoInbtYhUtLqewa4qCFkS+5r0h1XpA
+ w0phKsx/hWJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaD3NEgAKCRAFgzErGV9k
+ tllgD/9rRT1p9fLV5lot/8yeOAmRSHlBT/zM0MRM8HXIt8JFGgpkBkGM1xPHVVNwoHNR4pb/ZBU
+ 0nZ+5/JgkTNX7CuCoklpBTHxMDz0X+oMl4s2fhJq7kZALzVXC3xExOKeJ4rMKGo1ieR+6k6arny
+ zV8yzMA//PiHxPE9dbSFUtjYeFOf2S3T0DgPse8EBhdiNgrZQ2O+7r+UXlzacXYhMMmUlMoxEt/
+ 9OxNsst4HF7SkDAINdy2tm2QrjAfKWnkWmDFJkm6D8IWYCuZ5AAM7MC+3KiJgf4PWfnTQyanPGp
+ Y8fjGGKBjlKeYt1QhjzjtIo1Z1N4d4w1xMoXvdluEEU5ko8M7v7ewPalgVgp6OtL13vkA0aTqET
+ VjejYKxkdPXNnAYd66KukiWMjDZ8dWic4S7pDsuXpfnGg+fDALCP0pY3EvrAjQ1C1zTujoEk7TJ
+ LqXL03xfsBD9Mfw24p0nAJ1SCviyqTZgihEfcLF6wm9B8qO3qH04fDt5JfB7uTecnmgcG+qBwo2
+ +S+zzQi0EUw/gD55eGJUfhIqbVuZni5ZN2MCQ4HTutEv8zZ+FcE1F2DwnjzPmF2H/wrqPt7Voq8
+ haVAKGGTAy//lWYXzzvHn/Ie/wopcfEDZiT9npVDzcrRy+T5y6U0Jtsxr+QZ5iETHQ6zHZKvqCi
+ CVGDuQig3pi0viQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -121,940 +122,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a fork of qtestsign[1] with modifications to integrate with the
-U-Boot build system.
-
-New Qualcomm dev boards flash U-Boot to the "uefi" partition, the format
-is a standard ELF file with custom program headers containing Qualcomm
-signatures, hashes and other metadata.
-
-Since different boards require different load addresses, the traditional
-CONFIG_REMAKE_ELF with CONFIG_TEXT_BASE requires introducing a new
-defconfig for each platform, even though the binary is otherwise
-identical.
-
-Since we already need to process the ELF file to produce a valid "MBN"
-which sbl1 will accept, mkmbn additionally inspects the U-Boot binary,
-finding the DTB and then checking for known compatible strings to
-identify the board or platform.
-
-With this, one can build U-Boot with qcom_defconfig:
-
-$ make DEVICE_TREE=qcom/qcs6490-rb3gen2
-
-Then build an MBN with
-
-$ ./tools/qcom/mkmbn/mkmbn.py u-boot.bin
-
-The resulting u-boot.mbn will have the correct load address and can be
-directly flashed to the board from the bootROM with edl.py
-
-[1]: https://github.com/msm8916-mainline/qtestsign
+Implement support for building u-boot.mbn files using the new mkmbn
+tool.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- tools/mkmbn                 |   1 +
- tools/qcom/mkmbn/cert.py    | 158 +++++++++++++++++++++++
- tools/qcom/mkmbn/elf.py     | 243 ++++++++++++++++++++++++++++++++++
- tools/qcom/mkmbn/hashseg.py | 308 ++++++++++++++++++++++++++++++++++++++++++++
- tools/qcom/mkmbn/mkmbn.py   | 154 ++++++++++++++++++++++
- 5 files changed, 864 insertions(+)
+ tools/binman/btool/mkmbn.py      | 29 +++++++++++++++++++++++
+ tools/binman/etype/u_boot_mbn.py | 51 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 80 insertions(+)
 
-diff --git a/tools/mkmbn b/tools/mkmbn
-new file mode 120000
-index 0000000000000000000000000000000000000000..a7b2096756f76c07ca21e73c63f3b8be28a4cf59
---- /dev/null
-+++ b/tools/mkmbn
-@@ -0,0 +1 @@
-+qcom/mkmbn/mkmbn.py
-\ No newline at end of file
-diff --git a/tools/qcom/mkmbn/cert.py b/tools/qcom/mkmbn/cert.py
+diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
 new file mode 100644
-index 0000000000000000000000000000000000000000..2fb195dce0d59f739bf40249e1fcf04e7546f315
+index 0000000000000000000000000000000000000000..232e2b442a166f9e86a4d4eb5f55f624eee0dc62
 --- /dev/null
-+++ b/tools/qcom/mkmbn/cert.py
-@@ -0,0 +1,158 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+# Copyright (C) 2021-2022 Stephan Gerhold
-+# See https://www.qualcomm.com/media/documents/files/secure-boot-and-image-authentication-technical-overview-v1-0.pdf
-+# Somewhat based on code snippets from https://cryptography.io/en/latest/x509/tutorial.html
-+from __future__ import annotations
++++ b/tools/binman/btool/mkmbn.py
+@@ -0,0 +1,29 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2025, Linaro Ltd.
++#
++"""Bintool implementation for mkmbn"""
 +
-+from datetime import datetime
-+from typing import List
++from binman import bintool
++from u_boot_pylib.command import CommandResult
 +
-+from cryptography import x509
-+from cryptography.hazmat.primitives import hashes, serialization
-+from cryptography.x509.oid import NameOID
++class Bintoolmkmbn(bintool.Bintool):
++    """Qualcomm MBN generator for U-Boot
++    """
++    def __init__(self, name):
++        super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
 +
-+# NOTE: The certificate chain generated by qtestsign is NOT meant
-+# to be secure. The private keys are listed here to make the
-+# resulting files reproducible. THESE KEYS SHOULD ONLY BE USED
-+# FOR TESTING AND NOT FOR A PROPER SECURE BOOT SETUP.
-+
-+ROOT_KEY = serialization.load_pem_private_key(
-+    b"""
-+-----BEGIN PRIVATE KEY-----
-+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCjZqF/BwggY4Rs
-+Q1/wSNPLEKQEROZ9i/d+7CXZCukWph+SKHlv652oiAp+TgzIGQQXDlaA+qUoXUjp
-+g2KTmoulfQjrgc5CSCk6yA01VxNBqR81JorJx8aD9ApOFVoERlmWhZcR3B/LsVyd
-+vYgwFNNkqUh7fyywyy1Z1ijk4SyJVak1VxfdkTTeb1wr5Awjvh82PrdRQfOvctFH
-+mVITqdMckdRD3Sx7y8EvypAYpAUiWklNgditetXFjMoV6XyXTPCRkH9zzskrXP6i
-+neCyS7xUfEYPYNpabzhpdvkx9Is2PlCJA1fZ1ERZsWcag5vDZa3SHslH5Kh9+ssH
-+ps0Ul1j5AgMBAAECggEAHUEzOdBy+oWGwHFhnF4VmT4t91u0npawJYe3EQBckgMF
-+FQBtGYYoMHPG2S01KaAc9NnK0AXQCwWEl9Y/kGizhtn3fl67pG9R/mWxw7KGzpMu
-+dLAlWhIL7zUCoU8+UhScVpAtZ3OvN6NWDyHPX7hizptmUEIJKM//mx12LeBIvn+P
-+8tSiBXxoDGl0JZ+QMzmshOUXLLnxKITgBGL+G9A1qTZHIs6VV7HWH1ptfObulBZf
-+yEBK1YBzI6GnBGzLOWnZqGsSbQ717SObQo5rCoRDZB7z4bXNWDEvuH+rqzcs5liu
-+af4gmBHNOLGh+Ta5HJ0XeoqU5ANOWlUi95/n2dJufwKBgQDNaMlT1937SHPv/eBq
-+Be3MobllTx4vMYh6CtfP8QozTE+sTcmCyvaWVfXwLnQTl//+siefoWsvzW43LaNU
-+3A18nCxVFSSbWosBN+0Zo4K9bSpEFGgUrJM5O98zv4+/SzCKFe2562usDzaRiEUW
-+iSJkzIUnSlcNc+XCY1rhG9HLXwKBgQDLpS6ATtMDSP9p+XYVMEN2CF8M3xvL	roOT
-+6wPYfp9fuagMgzNv9GB9SRyM/dM6mN+fkBqLp3EbDZT0UorHsg+YChoyBmctNqpW
-+j5/SrVyYe2xoRRgOzUbDstN44/LAhJLQnOXB7S2amo35zZ4FY6sw2w3QfkCildkB
-+mY3VhvESpwKBgErLtUPKfxJZN55UG7t/nS++U/wH6z3UE5YdDKizZLt5NinPyWjO
-+7yue8Ycb4zifSKA9zx/Zb2Zgr5l4DNmBp4eQdrQklsfbGHLBIp0LZTgE4DcaFyww
-+Cwv0OTpmrrlBb9NYWNAyYWqtv3kO3dlu5g8+Sd4cu8YyRZ+a/iSqNKKRAoGBAIPf
-+QICYCq8a60Lt5xiLe3QIsbx9EdvQ86Wqz3+3Z28uo3MO1xVNc9pNqO5oRAuzCUSj
-+pXz//g9duTKJ7RKp7M0w5Yu1d8TgnGeXdBCScN7RNf9DlvOm3IdH2wdy3TTr5MKw
-+h1wQQbLXGM9F5mlpBGeLwqNbznE6hh8yF5XJX30LAoGBAJqaa+yeZskti5ickNTF
-+vBBIXyYYBymdxfkf9vDSW1XcZEIVqo3+AGV+qHyTjURaty3QuEhSJEXem/obH5uE
-+y37+bnx8Se1IyJ/phYBLwOmtgZoBJALFhvjkFiGTF6naI8E/i4sbi5j/OEyShfWr
-+YFZuEKQJhiiMQznfNgthHU6H
-+-----END PRIVATE KEY-----
-+""",
-+    password=None,
-+)
-+
-+ATT_KEY = serialization.load_pem_private_key(
-+    b"""
-+-----BEGIN PRIVATE KEY-----
-+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDT449phHltY2aV
-+QIvaT4PUgNS7wDybnnjVO88NGB5PjfUaWY99oDQgOLJlejyVVqRO2wHxLaUMsbuc
-+oe0XbgSFJgrnGvG6yPbjSXeIfV5k2dJG60S4Fg2mZ1ieSabuPVKLA03frhbATmIf
-+Q+VTMlWLgLVxcT04iqph6VpjehnYke0VPMuN7OM6RsIOEhLcje0bvL4YjTYXH5j4
-+mPquc/ZEj/n6WJ6VsS27QygOBbaiGqHs54QnQi4gcgIgUmkR/bl2wL5s+729RBzS
-+v1FZfA5gdM9uEG3ogLHOC2uk+1Nuqcdk/tQxd30/2ulXubqDku/nNY2RSJrwD	att
-+qcyCliANAgMBAAECggEAK3Z7HVbKHZENIsJZrY8v6HAAsv5ssDMicALTpsjytrjU
-+tPH4B/nLl2xp03zuXmemTnKIBHOrbl4qsKdaXbr4fGNgSyVwvjKoydhxB3NH4IH5
-+qwhpUSVc6Ww7dkR/VFEJ1G/6Ek7AZfPuFqGzsYwalgHxtfJXb3iqGGloXA1Yrd5p
-+W2cTEhtSFZP/PQIEK773wYd3aYMw8OCqG2V5bw9N3xwY6KTC0Px8zyBlmAcUBPAj
-+QZL/DTGlMdD9+PJ3Ft3Zl2uS7ORn7xfXftvxv5IQdD+JBxV5zUIympKK/7KIVUfH
-+dfi93R7rqjL9EOP6bVQkg/WzYRLeVf/8km8HRGqtIQKBgQDxFxQ77t4EQqLPFofN
-+oRV7P3lvFqlJDTzAGBnjIT/ujT3SgoFUjRtfG27nWd1lycxv3tE0GTIw0LjJwvmg
-+VSFbQbPsmdp+f0jnNIiJayiG591j9Afmw06mnDodaQuSTp7K9idgpnFRGDQzwJHK
-+0DwSQzlzEXsPhGnXxpv+2Q+ANQKBgQDg/itVFBw3e5wC8boffi1AgnM97Qa/Y+5B
-+I2J9+cZD9iBkvE7kTwVUOI2Rr+XkQmSf+pT6L0yFXhQjIed004rpKVqzTvGL9VXJ
-+nBeADS4bxl1jsfkfvq9e6eNUK8vzyLoYQpS5/LK1oG5MPq3+30yzGIHM8JxxaOQ9
-+VdKQrUdLeQKBgAh35RAN3eKMbKeVhQOmCtkfa6aJRzz3qBCfSBmAS3yXnXpNdzl/
-+E10N26FouKwgoHu1eee4ktjAHB2KKbaGBvvrnORMqy4STn9AiyM4jl3euxoNslFa
-+vuJ/TlNGI0/qTw2WA+ATOJu+m+bNdtGG6vVBQz1VedsbrZQUt9oFydOZAoGAMlCk
-+4CHfLYk3GnF0bhaJiCOkIfUfzS1L2sVPAV0aOZiRJfX2rpf9WRhMkIgFoUY3uo8P
-+QePR+QFQ/4pVeIrWRc45ul+tJN94j92YY8qOxSdXOzRRwgeisFcdv3UL5zi8ZTB+
-+khkw3e1CvUpHHvhQ7rxMSsiEM9iBMjY/IJuflgECgYEAqiN3eg8cZjVrYEMcPLGx
-+wXknCG0KPc8EpDi1moNwS3z/TcUbfP8vnmT2lFHTAbvVBn+4fcLffkQBoGG3AaSH
-+3kc0HXLdy+rFcsXpX7hk9BM/Uey9dqBOAusLS6XxYhcAJ1xOI0kYWoeOhO8fcjNa
-+tf26cJGzfbbwf8kfisbv4Uk=
-+-----END PRIVATE KEY-----
-+""",
-+    password=None,
-+)
++    # pylint: disable=R0913
++    def run(self, infile: str) -> CommandResult:
++        """Run mkmbn.py
++        """
++        args = [infile]
++        return self.run_cmd_result(*args, raise_on_error=False)
 +
 +
-+def _begin_cert() -> x509.CertificateBuilder:
-+    return (
-+        x509.CertificateBuilder()
-+        .serial_number(1)
-+        .not_valid_before(datetime(2023, 1, 1))
-+        .not_valid_after(datetime(9999, 12, 31, 23, 59, 59))
-+    )  # no well-defined expiration date, see RFC5280 4.1.2.5.
++    def get_path(self):
++        path = super().get_path()
++        return path
 +
 +
-+def generate_chain(ou_fields: List[str]) -> bytes:
-+    # First, create the root CA
-+    root_name = x509.Name(
-+        [
-+            x509.NameAttribute(NameOID.COMMON_NAME, "qtestsign Root CA - NOT SECURE"),
-+        ]
-+    )
-+    # only key_cert_sign=True
-+    root_usage = x509.KeyUsage(
-+        False, False, False, False, False, True, False, False, False
-+    )
-+    root_ski = x509.SubjectKeyIdentifier.from_public_key(ROOT_KEY.public_key())
-+    root_cert_der = (
-+        _begin_cert()
-+        .subject_name(root_name)
-+        .issuer_name(root_name)
-+        .public_key(ROOT_KEY.public_key())
-+        .add_extension(x509.BasicConstraints(ca=True, path_length=0), critical=True)
-+        .add_extension(root_usage, critical=True)
-+        .add_extension(root_ski, critical=False)
-+        .sign(ROOT_KEY, hashes.SHA256())
-+        .public_bytes(serialization.Encoding.DER)
-+    )
-+
-+    # Now, create the attestation certificate
-+    att_name = x509.Name(
-+        [
-+            x509.NameAttribute(
-+                NameOID.COMMON_NAME, "qtestsign Attestation CA - NOT SECURE"
-+            ),
-+            *[
-+                x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, ou)
-+                for ou in ou_fields
-+            ],
-+        ]
-+    )
-+    # only digital_signature=True
-+    att_usage = x509.KeyUsage(
-+        True, False, False, False, False, False, False, False, False
-+    )
-+    att_cert_der = (
-+        _begin_cert()
-+        .subject_name(att_name)
-+        .issuer_name(root_name)
-+        .public_key(ATT_KEY.public_key())
-+        .add_extension(x509.BasicConstraints(ca=False, path_length=None), critical=True)
-+        .add_extension(att_usage, critical=True)
-+        .add_extension(
-+            x509.SubjectKeyIdentifier.from_public_key(ATT_KEY.public_key()),
-+            critical=False,
-+        )
-+        .add_extension(
-+            x509.AuthorityKeyIdentifier.from_issuer_subject_key_identifier(root_ski),
-+            critical=False,
-+        )
-+        .sign(ROOT_KEY, hashes.SHA256())
-+        .public_bytes(serialization.Encoding.DER)
-+    )
-+
-+    # The certificate chain is the attestation and root certificate concatenated
-+    # in DER format. Note: The order (first attestation, then root) is important!
-+    return att_cert_der + root_cert_der
-diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
++    def fetch(self, _method):
++        return True
+diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
 new file mode 100644
-index 0000000000000000000000000000000000000000..38e145b6f62bf482bcd8161c90dab569c525b288
+index 0000000000000000000000000000000000000000..35c271a45e3ce75f10d1852eb0ac290b38913d84
 --- /dev/null
-+++ b/tools/qcom/mkmbn/elf.py
-@@ -0,0 +1,243 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+# Copyright (C) 2021 Stephan Gerhold
-+# Data classes are based on the header definitions in the ELF(5) man page.
-+# Also see: https://en.wikipedia.org/wiki/Executable_and_Linkable_Format
-+from __future__ import annotations
-+
-+import dataclasses
-+from dataclasses import dataclass
-+from struct import Struct
-+from typing import List, BinaryIO
-+
-+
-+@dataclass
-+class Ehdr:
-+    ei_magic: bytes
-+    ei_class: int
-+    ei_data: int
-+    ei_version: int
-+    ei_os_abi: int
-+    ei_abi_version: int
-+    e_type: int
-+    e_machine: int
-+    e_version: int
-+    # Address size specific part
-+    e_entry: int = 0
-+    e_phoff: int = 0
-+    e_shoff: int = 0
-+    # End part
-+    e_flags: int = 0
-+    e_ehsize: int = 0
-+    e_phentsize: int = 0
-+    e_phnum: int = 0
-+    e_shentsize: int = 0
-+    e_shnum: int = 0
-+    e_shstrndx: int = 0
-+
-+    START_FORMAT = Struct("<4s5B7xHHL")
-+    START_COUNT = 9
-+    MEM_FORMAT32 = Struct("<LLL")
-+    MEM_FORMAT64 = Struct("<QQQ")
-+    MEM_COUNT = 3
-+    END_FORMAT = Struct("<L6H")
-+    END_COUNT = 7
-+
-+    CLASS32 = 1
-+    CLASS64 = 2
-+
-+    # Init a qcom XBL style ELF header
-+    def __init__(self):
-+        self.ei_magic = b"\x7fELF"
-+        self.ei_class = 2
-+        self.ei_data = 1
-+        self.ei_version = 1
-+        self.ei_os_abi = 0
-+        self.ei_abi_version = 0
-+        self.e_type = 2
-+        self.e_machine = 183
-+        self.e_version = 1
-+
-+        self.e_ehsize = 64
-+        self.e_phoff = 64
-+        self.e_phentsize = 56
-+
-+    @staticmethod
-+    def parse(b: bytes) -> Ehdr:
-+        hdr_unpack = Ehdr.START_FORMAT.unpack_from(b)
-+        hdr = Ehdr(*hdr_unpack)
-+        assert hdr.ei_magic == b"\x7fELF", f"Invalid ELF header magic: {hdr.ei_magic}"
-+        assert hdr.ei_data == 1, "Only little endian supported at the moment"
-+        assert hdr.ei_version == 1, f"Unexpected ei_version: {hdr.ei_version}"
-+        assert hdr.e_version == 1, f"Unexpected e_version: {hdr.e_version}"
-+
-+        if hdr.ei_class == Ehdr.CLASS32:
-+            mem_format = Ehdr.MEM_FORMAT32
-+        else:
-+            assert hdr.ei_class == Ehdr.CLASS64, f"Unexpected ei_class: {hdr.ei_class}"
-+            mem_format = Ehdr.MEM_FORMAT64
-+
-+        mem_unpack = mem_format.unpack_from(b, Ehdr.START_FORMAT.size)
-+        end_unpack = Ehdr.END_FORMAT.unpack_from(
-+            b, Ehdr.START_FORMAT.size + mem_format.size
-+        )
-+        return Ehdr(*hdr_unpack, *mem_unpack, *end_unpack)
-+
-+    def save(self, f: BinaryIO) -> int:
-+        unpack = dataclasses.astuple(self)
-+        written = f.write(Ehdr.START_FORMAT.pack(*unpack[: Ehdr.START_COUNT]))
-+
-+        if self.ei_class == Ehdr.CLASS32:
-+            mem_format = Ehdr.MEM_FORMAT32
-+        else:
-+            mem_format = Ehdr.MEM_FORMAT64
-+        written += f.write(
-+            mem_format.pack(
-+                *unpack[Ehdr.START_COUNT : Ehdr.START_COUNT + Ehdr.MEM_COUNT]
-+            )
-+        )
-+        written += f.write(Ehdr.END_FORMAT.pack(*unpack[-Ehdr.END_COUNT :]))
-+        return written
-+
-+
-+@dataclass
-+class Phdr:
-+    p_type: int
-+    p_offset: int
-+    p_vaddr: int
-+    p_paddr: int
-+    p_filesz: int
-+    p_memsz: int
-+    p_flags: int
-+    p_align: int
-+
-+    data = None
-+
-+    FORMAT32 = Struct("<8L")
-+    FORMAT64 = Struct("<LL6Q")
-+
-+    @staticmethod
-+    def parse(b: bytes, offset: int, ei_class: int) -> Phdr:
-+        if ei_class == Ehdr.CLASS32:
-+            unpack = Phdr.FORMAT32.unpack_from(b, offset)
-+        else:
-+            unpack = list(Phdr.FORMAT64.unpack_from(b, offset))
-+
-+            # ELFCLASS64 has flags directly before offset for alignment
-+            flags = unpack.pop(1)
-+            unpack.insert(-1, flags)
-+
-+        return Phdr(*unpack)
-+
-+    @staticmethod
-+    def from_bin(b: bytes, loadaddr: int) -> Phdr:
-+        # p_offset is fixed later
-+        phdr = Phdr(
-+            p_type=1,
-+            p_offset=0xFFFFFFFF,
-+            p_vaddr=loadaddr,
-+            p_paddr=loadaddr,
-+            p_filesz=len(b),
-+            p_memsz=len(b),
-+            p_flags=7,
-+            p_align=0x1000,
-+        )
-+        phdr.data = memoryview(b)
-+        return phdr
-+
-+    def save(self, f: BinaryIO, ei_class: int) -> int:
-+        unpack = dataclasses.astuple(self)
-+
-+        if ei_class == Ehdr.CLASS32:
-+            return f.write(Phdr.FORMAT32.pack(*unpack))
-+        else:
-+            unpack = list(unpack)
-+
-+            # ELFCLASS64 has flags directly before offset for alignment
-+            flags = unpack.pop(-2)
-+            unpack.insert(1, flags)
-+
-+            return f.write(Phdr.FORMAT64.pack(*unpack))
-+
-+
-+def _pad(f: BinaryIO, offset: int, pos: int) -> int:
-+    assert offset >= pos, f"{offset} >= {pos}"
-+    pad = offset - pos
-+    if pad:
-+        assert f.write(b"\0" * pad) == pad
-+    return offset
-+
-+
-+def _align(i: int, alignment: int) -> int:
-+    mask = max(alignment - 1, 0)
-+    return (i + mask) & ~mask
-+
-+
-+@dataclass
-+class Elf:
-+    ehdr: Ehdr
-+    phdrs: List[Phdr]
-+
-+    def __init__(self):
-+        self.ehdr = Ehdr()
-+        self.phdrs: List[Phdr] = []
-+
-+    def total_header_size(self):
-+        return self.ehdr.e_phoff + len(self.phdrs) * self.ehdr.e_phentsize
-+
-+    @staticmethod
-+    def parse(b: bytes) -> Elf:
-+        ehdr = Ehdr.parse(b)
-+        view = memoryview(b)
-+
-+        # Parse program headers
-+        phdrs = []
-+        offset = ehdr.e_phoff
-+        for i in range(ehdr.e_phnum):
-+            phdr = Phdr.parse(b, offset, ehdr.ei_class)
-+            phdrs.append(phdr)
-+
-+            # Store data if necessary
-+            if phdr.p_filesz and phdr.p_offset:
-+                phdr.data = view[phdr.p_offset : phdr.p_offset + phdr.p_filesz]
-+
-+            offset += ehdr.e_phentsize
-+
-+        return Elf(ehdr, phdrs)
-+
-+    def update(self):
-+        # Rearrange all segments according to their alignment
-+        pos = self.total_header_size()
-+        for phdr in sorted(self.phdrs, key=lambda phdr: phdr.p_offset):
-+            if phdr.p_offset and phdr.p_filesz:
-+                phdr.p_offset = _align(pos, phdr.p_align)
-+                pos = phdr.p_offset + phdr.p_filesz
-+
-+        # Ensure program header count is correct
-+        self.ehdr.e_phnum = len(self.phdrs)
-+
-+        # TODO: Clear out sections for now. Those are not read at the moment.
-+        # Also, I don't think the Qualcomm firmware loader has any use for these.
-+        self.ehdr.e_shoff = 0
-+        self.ehdr.e_shnum = 0
-+        self.ehdr.e_shstrndx = 0
-+
-+    def save_header(self, f: BinaryIO) -> int:
-+        pos = self.ehdr.save(f)
-+        pos = _pad(f, self.ehdr.e_phoff, pos)
-+
-+        # Write program headers
-+        for phdr in self.phdrs:
-+            pos += phdr.save(f, self.ehdr.ei_class)
-+
-+        return pos
-+
-+    def save(self, f: BinaryIO) -> int:
-+        pos = self.save_header(f)
-+
-+        # Write segment data
-+        for phdr in sorted(self.phdrs, key=lambda phdr: phdr.p_offset):
-+            if phdr.data:
-+                pos = _pad(f, phdr.p_offset, pos)
-+                pos += f.write(phdr.data)
-+
-+        return pos
-diff --git a/tools/qcom/mkmbn/hashseg.py b/tools/qcom/mkmbn/hashseg.py
-new file mode 100644
-index 0000000000000000000000000000000000000000..f85504655a8c6396951f778a36a3ce384ca6f217
---- /dev/null
-+++ b/tools/qcom/mkmbn/hashseg.py
-@@ -0,0 +1,308 @@
-+# SPDX-License-Identifier: GPL-2.0-only AND BSD-3-Clause
-+# Copyright (C) 2021-2023 Stephan Gerhold (GPL-2.0-only)
-+# MBN header format adapted from:
-+#   - signlk: https://git.linaro.org/landing-teams/working/qualcomm/signlk.git
-+#   - coreboot (util/qualcomm/mbn_tools.py)
-+# Copyright (c) 2016, 2018, The Linux Foundation. All rights reserved. (BSD-3-Clause)
-+# See also:
-+#   - https://www.qualcomm.com/media/documents/files/secure-boot-and-image-authentication-technical-overview-v1-0.pdf
-+#   - https://www.qualcomm.com/media/documents/files/secure-boot-and-image-authentication-technical-overview-v2-0.pdf
-+from __future__ import annotations
-+
-+import dataclasses
-+import hashlib
-+from dataclasses import dataclass
-+from io import BytesIO
-+from struct import Struct
-+
-+import cert
-+import elf
-+
-+# A typical Qualcomm firmware might have the following program headers:
-+#     LOAD off    0x00000800 vaddr 0x86400000 paddr 0x86400000 align 2**11
-+#          filesz 0x00001000 memsz 0x00001000 flags rwx
++++ b/tools/binman/etype/u_boot_mbn.py
+@@ -0,0 +1,51 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2025 Linaro Ltd
++# Authored by Casey Connolly <casey.connolly@linaro.org>
 +#
-+# The signed version will then look like:
-+#     NULL off    0x00000000 vaddr 0x00000000 paddr 0x00000000 align 2**0
-+#          filesz 0x000000e8 memsz 0x00000000 flags --- 7000000
-+#     NULL off    0x00001000 vaddr 0x86401000 paddr 0x86401000 align 2**12
-+#          filesz 0x00000988 memsz 0x00001000 flags --- 2200000
-+#     LOAD off    0x00002000 vaddr 0x86400000 paddr 0x86400000 align 2**11
-+#          filesz 0x00001000 memsz 0x00001000 flags rwx
++# Entry-type module for 'u-boot.mbn'
 +#
-+# The second NULL program header with off 0x1000 and filesz 0x988 is the actual
-+# "hash table segment" or shortly "hash segment" (see Figure 2 on page 6 in the PDF).
-+# It contains the MBN header specified below, then a couple of hashes (e.g. SHA256):
-+#   1. Hash of ELF header and program headers
-+#   2. Empty hash for hash segment
-+#   3. Hashes for data of each memory segment (described by program header)
-+# Finally, it contains an RSA signature and the concatenated certificate chain.
-+#
-+# The first NULL program header is never loaded anywhere, because
-+# vaddr = paddr = memsz = 0. However, the "off" and "filesz" cover exactly
-+# the ELF header (including all program headers). It is a placeholder so that
-+# each hash covers the data of exactly one program header.
 +
-+PHDR_FLAGS_HDR_PLACEHOLDER = 0x7000000  # placeholder for hash over ELF header
-+PHDR_FLAGS_HASH_SEGMENT = 0x2200000  # hash table segment
-+
-+EXTRA_PHDRS = 2  # header placeholder + hash segment
-+
-+# Note: None of the alignments seem to be truly required,
-+# this could probably be reduced to get smaller file sizes.
-+HASH_SEG_ALIGN = 0x1000
-+CERT_CHAIN_ALIGN = 16
-+
-+# According to the v2.0 PDF the metadata is 128 bytes long, but this does not
-+# seem to work. All official firmware seems to use 120 bytes instead.
-+METADATA_SIZE = 120
-+
-+
-+def _align(i: int, alignment: int) -> int:
-+    mask = max(alignment - 1, 0)
-+    return (i + mask) & ~mask
-+
-+
-+@dataclass
-+class _HashSegment:
-+    image_id: int = 0  # Type of image (unused?)
-+    version: int = 0  # Header version number
-+
-+    hash_size = 0
-+    signature_size = 0
-+    cert_chain_size = 0
-+    total_size = 0
-+
-+    hashes = []
-+    signature = b""
-+    cert_chain = b""
-+
-+    FORMAT = Struct("<10L")
-+    Hash = hashlib.sha256
-+
-+    @property
-+    def size_with_header(self):
-+        return self.FORMAT.size + self.total_size
-+
-+    def update(self, dest_addr: int):
-+        self.hash_size = len(self.hashes) * self.Hash().digest_size
-+        self.signature_size = len(self.signature)
-+        self.cert_chain_size = len(self.cert_chain)
-+        self.total_size = self.hash_size + self.signature_size + self.cert_chain_size
-+
-+    def check(self):
-+        assert len(self.hashes) * self.Hash().digest_size == self.hash_size
-+        assert len(self.signature) == self.signature_size
-+        assert len(self.cert_chain) == self.cert_chain_size
-+
-+    def pack_header(self):
-+        self.check()
-+        return self.FORMAT.pack(*dataclasses.astuple(self))
-+
-+    def pack(self):
-+        return (
-+            self.pack_header()
-+            + b"".join(self.hashes)
-+            + self.signature
-+            + self.cert_chain
-+        )
-+
-+
-+@dataclass
-+class HashSegmentV3(_HashSegment):
-+    version: int = 3  # Header version number
-+
-+    flash_addr: int = 0  # Location of image in flash (historical)
-+    dest_addr: int = 0  # Physical address of loaded hash segment data
-+    total_size: int = 0  # = hash_size + signature_size + cert_chain_size
-+    hash_size: int = 0  # Size of hashes for all program segments
-+    signature_addr: int = 0  # Physical address of loaded attestation signature
-+    signature_size: int = 0  # Size of attestation signature
-+    cert_chain_addr: int = 0  # Physical address of loaded certificate chain
-+    cert_chain_size: int = 0  # Size of certificate chain
-+
-+    def update(self, dest_addr: int):
-+        super().update(dest_addr)
-+        self.dest_addr = dest_addr + self.FORMAT.size
-+        self.signature_addr = self.dest_addr + self.hash_size
-+        self.cert_chain_addr = self.signature_addr + self.signature_size
-+
-+
-+@dataclass
-+class HashSegmentV5(_HashSegment):
-+    version: int = 5  # Header version number
-+
-+    signature_size_qcom: int = 0  # Size of signature from Qualcomm
-+    cert_chain_size_qcom: int = 0  # Size of certificate chain from Qualcomm
-+    total_size: int = 0  # = hash_size + signature_size + cert_chain_size
-+    hash_size: int = 0  # Size of hashes for all program segments
-+    signature_addr: int = 0xFFFFFFFF  # unused?
-+    signature_size: int = 0  # Size of attestation signature
-+    cert_chain_addr: int = 0xFFFFFFFF  # unused?
-+    cert_chain_size: int = 0  # Size of certificate chain
-+
-+    signature_qcom = b""
-+    cert_chain_qcom = b""
-+
-+    def update(self, dest_addr: int):
-+        super().update(dest_addr)
-+        self.signature_size_qcom = len(self.signature_qcom)
-+        self.cert_chain_size_qcom = len(self.cert_chain_qcom)
-+        self.total_size += self.signature_size_qcom + self.cert_chain_size_qcom
-+
-+    def check(self):
-+        super().check()
-+        assert len(self.signature_qcom) == self.signature_size_qcom
-+        assert len(self.cert_chain_qcom) == self.cert_chain_size_qcom
-+
-+    def pack(self):
-+        return (
-+            self.pack_header()
-+            + b"".join(self.hashes)
-+            + self.signature_qcom
-+            + self.cert_chain_qcom
-+            + self.signature
-+            + self.cert_chain
-+        )
-+
-+
-+@dataclass
-+class HashSegmentV6(HashSegmentV5):
-+    version: int = 6  # Header version number
-+
-+    metadata_size_qcom: int = 0  # Size of metadata from Qualcomm
-+    metadata_size: int = 0  # Size of metadata
-+
-+    metadata_qcom = b""
-+    metadata = b""
-+
-+    FORMAT = Struct("<12L")
-+    Hash = hashlib.sha384
-+
-+    def update(self, dest_addr: int):
-+        super().update(dest_addr)
-+        self.metadata_size_qcom = len(self.metadata_qcom)
-+        self.metadata_size = len(self.metadata)
-+        self.total_size += self.metadata_size_qcom + self.metadata_size
-+
-+    def check(self):
-+        super().check()
-+        assert len(self.metadata_qcom) == self.metadata_size_qcom
-+        assert len(self.metadata) == self.metadata_size
-+
-+    def pack(self):
-+        return (
-+            self.pack_header()
-+            + self.metadata_qcom
-+            + self.metadata
-+            + b"".join(self.hashes)
-+            + self.signature_qcom
-+            + self.cert_chain_qcom
-+            + self.signature
-+            + self.cert_chain
-+        )
-+
-+
-+HashSegment = {
-+    3: HashSegmentV3,
-+    5: HashSegmentV5,
-+    6: HashSegmentV6,
-+}
-+
-+
-+def drop(elff: elf.Elf):
-+    # Drop existing hash segments
-+    elff.phdrs = [
-+        phdr
-+        for phdr in elff.phdrs
-+        if phdr.p_type != 0
-+        or phdr.p_flags not in [PHDR_FLAGS_HASH_SEGMENT, PHDR_FLAGS_HDR_PLACEHOLDER]
-+    ]
-+
-+
-+def generate(elff: elf.Elf, version: int, sw_id: int):
-+    drop(elff)
-+    assert elff.phdrs, "Need at least one program header"
-+
-+    hash_seg = HashSegment[version]()
-+
-+    if version >= 6:
-+        # TODO: Figure out metadata format and fill this with useful data
-+        hash_seg.metadata = b"\0" * METADATA_SIZE
-+
-+    # Generate hash for all existing segments with data
-+    digest_size = hash_seg.Hash().digest_size
-+    hash_seg.hashes = [b"\0" * digest_size] * (len(elff.phdrs) + EXTRA_PHDRS)
-+    for i, phdr in enumerate(elff.phdrs, start=EXTRA_PHDRS):
-+        if phdr.data:
-+            hash_seg.hashes[i] = hash_seg.Hash(phdr.data).digest()
-+    total_hashes_size = len(hash_seg.hashes) * digest_size
-+
-+    # Generate certificate chain with specified OU fields (for < v6)
-+    # on >= v6 this is part of the metadata instead
-+    ou_fields = []
-+    if version < 6:
-+        ou_fields = [
-+            # Note: The SW_ID is checked by the firmware on some platforms (even if secure boot
-+            # is disabled), so it must match the firmware type being signed. Everything else seems
-+            # to be mostly ignored when secure boot is off and is just added here to match the
-+            # documentation and better mimic the official firmware.
-+            "01 %016X SW_ID" % sw_id,
-+            "02 %016X HW_ID" % 0,
-+            "03 %016X DEBUG" % 2,  # DISABLED
-+            "04 %04X OEM_ID" % 0,
-+            "05 %08X SW_SIZE" % (hash_seg.FORMAT.size + total_hashes_size),
-+            "06 %04X MODEL_ID" % 0,
-+            "07 %04X SHA256" % 1,
-+        ]
-+    hash_seg.cert_chain = cert.generate_chain(ou_fields)
-+    hash_seg.cert_chain = hash_seg.cert_chain.ljust(
-+        _align(len(hash_seg.cert_chain), CERT_CHAIN_ALIGN), b"\xff"
-+    )
-+    # hash_seg.cert_chain = b''  # uncomment this to omit the certificate chain in the signed image
-+
-+    # TODO: Generate actual signature with our generated attestation certificate!
-+    # There are different signature schemes that could be implemented (RSASSA-PKCS#1 v1.5
-+    # RSASSA-PSS, ECDSA over P-384) but it's not entirely clear yet which chipsets supports/
-+    # uses which. The signature does not seem to be checked on devices without secure boot,
-+    # so just use a dummy value for now.
-+    hash_seg.signature = b"\xff" * (cert.ATT_KEY.key_size // 8)
-+    # hash_seg.signature = b''  # uncomment this to omit the signature in the signed image
-+
-+    # Align maximum end address to get address for hash table header, then update header
-+    hash_addr = _align(
-+        max(phdr.p_paddr + phdr.p_memsz for phdr in elff.phdrs), HASH_SEG_ALIGN
-+    )
-+    hash_seg.update(hash_addr)
-+    # print(hash_seg)
-+
-+    # Insert new hash NULL segment
-+    hash_phdr = elf.Phdr(
-+        0,
-+        HASH_SEG_ALIGN,
-+        hash_addr,
-+        hash_addr,
-+        hash_seg.size_with_header,
-+        _align(hash_seg.size_with_header, HASH_SEG_ALIGN),
-+        PHDR_FLAGS_HASH_SEGMENT,
-+        HASH_SEG_ALIGN,
-+    )
-+    elff.phdrs.insert(0, hash_phdr)
-+
-+    # Insert new ELF header placeholder program header
-+    hdr_hash_phdr = elf.Phdr(0, 0, 0, 0, 0, 0, PHDR_FLAGS_HDR_PLACEHOLDER, 0)
-+    elff.phdrs.insert(0, hdr_hash_phdr)
-+
-+    # Now determine size of ELF header (including program headers)
-+    hdr_hash_phdr.p_filesz = elff.total_header_size()
-+
-+    # Recompute attributes to match final output (e.g. adjust e_phnum)
-+    elff.update()
-+
-+    # Compute the hash for the ELF header
-+    with BytesIO() as hdr_io:
-+        elff.save_header(hdr_io)
-+        hash_seg.hashes[0] = hash_seg.Hash(hdr_io.getbuffer()).digest()
-+
-+    # And finally, assemble the hash segment
-+    hash_phdr.data = hash_seg.pack()
-diff --git a/tools/qcom/mkmbn/mkmbn.py b/tools/qcom/mkmbn/mkmbn.py
-new file mode 100755
-index 0000000000000000000000000000000000000000..94d85275c19c01c1e0aa64a61b615d14c10c0468
---- /dev/null
-+++ b/tools/qcom/mkmbn/mkmbn.py
-@@ -0,0 +1,154 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0-only
-+# Copyright (C) 2024 Stephan Gerhold
-+# Copyright (C) 2025 Casey Connolly
-+from __future__ import annotations
-+
-+import argparse
-+from pathlib import Path
-+
-+from elf import Elf, Phdr
-+import hashseg
-+import sys
-+from enum import Enum
-+
-+verbose = False
-+
-+def log(*args, **kwargs):
-+    if verbose:
-+        print(args, kwargs, file=sys.stderr)
-+
-+def error(*args, **kwargs):
-+    print("mkmbn: ", file=sys.stderr, end='')
-+    print(*args, *kwargs, file=sys.stderr)
-+
-+
-+
-+class SwId(Enum):
-+    sbl1 = 0x00
-+    mba = 0x01
-+    modem = 0x02
-+    prog = 0x03
-+    adsp = 0x04
-+    devcfg = 0x05
-+    tz = 0x07
-+    aboot = 0x09
-+    rpm = 0x0A
-+    tz_app = 0x0C
-+    wcnss = 0x0D
-+    venus = 0x0E
-+    wlanmdsp = 0x12
-+    gpu = 0x14
-+    hyp = 0x15
-+    cdsp = 0x17
-+    slpi = 0x18
-+    abl = 0x1C
-+    cmnlib = 0x1F
-+    aop = 0x21
-+    qup = 0x24
-+    xbl_config = 0x25
-+
-+class MbnData:
-+
-+    # sw_id 0x9 is aboot/uefi, the most common
-+    def __init__(self, loadaddr: int, version: int, sw_id: SwId = SwId.aboot):
-+        self.loadaddr = loadaddr
-+        self.version = version
-+        self.sw_id = sw_id
-+
++from binman.entry import Entry
++from binman.etype.blob import Entry_blob
++from u_boot_pylib import tout
++from u_boot_pylib import tools
++from binman.btool.mkmbn import Bintoolmkmbn
 +
 +"""
-+This dictionary is used to map a board or platform to the appropriate load address and
-+other MBN metadata. When adding support for a new platform to U-Boot, the appropriate
-+data should be filled out here. The load address can typically be determined by looking
-+at the uefi.elf or xbl.elf for the platform. For the uefi.elf it is the load address, and
-+for xbl.elf it is typically the RWX section in the middle, just BEFORE the section loaded
-+at 0x1495xxxx or similar. Looking at similar platforms in the table below may help.
++Casey TODO:
++
++* move qcom-binman.dts back to arch/arm/dts and figure out how to make it build...
++* set CONFIG_BINMAN_DTB in qcom_defconfig
++* update docs
++
 +"""
-+boards: dict[bytes, MbnData] = {
-+    # Exact matches for boards, these are preferred
-+    b"qcom,qcs6490-rb3gen2\0": MbnData(0x9FC00000, 6, SwId.aboot),
-+    b"qcom,qcs9100-ride-r3\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ9
-+    b"qcom,qcs8300-ride\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ8
-+    b"qcom,qcs615-ride\0": MbnData(0x9FC00000, 6, SwId.aboot),  # Dragonwing IQ6
-+    # Fallback/generic matches since most boards for a platform will
-+    # use the same load address
-+    b"qcom,qcm6490\0": MbnData(0x9FC00000, 6, SwId.aboot),  # rb3gen2, rubikpi3
-+    b"qcom,qcs9100\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ9
-+    b"qcom,qcs8300\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ8
-+    b"qcom,qcs615\0": MbnData(0x9FC00000, 6, SwId.aboot),  # Dragonwing IQ6
-+    b"qcom,ipq9574\0": MbnData(0x4A240000, 6, SwId.aboot),
 +
-+    # msm8916/apq8016 has an "aboot" partition but the process is the same
-+    # They use header version 3.
-+    b"qcom,apq8016\0": MbnData(0x8f600000, 3, SwId.aboot),
-+    b"qcom,msm8916\0": MbnData(0x8f600000, 3, SwId.aboot),
-+}
++class Entry_u_boot_mbn(Entry_blob):
++    """U-Boot Qualcomm signed MBN ELF image
 +
-+parser = argparse.ArgumentParser(
-+    description="""
-+	Create a signed Qualcomm "uefi" ELF image
-+"""
-+)
-+parser.register("type", "hex", lambda s: int(s, 16))
-+parser.add_argument(
-+    "-o", "--output", type=Path, default="u-boot.mbn", help="Output file"
-+)
-+parser.add_argument(
-+    "-v", dest="verbose", action="store_true", default=False, help="Verbose"
-+)
-+parser.add_argument(
-+    "bin", type=argparse.FileType("rb"), help="Binary to embed (e.g. u-boot.bin)"
-+)
-+args = parser.parse_args()
++    This is an ELF file with custom program headers containing Qualcomm
++    specific hashes, signatures and other metadata. It contains the
++    u-boot.bin image.
++    """
++    mkmbn: Bintoolmkmbn
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
 +
-+elf = Elf()
++    def ObtainContents(self):
++        self._pathname = tools.get_input_filename('u-boot.bin')
++        res = self.mkmbn.run(self._pathname)
++        if res is None:
++            self.Raise('mkmbn not found or failed!')
++        # Exit code 61 (ENODATA) indicates that an MBN file can't be built
++        # for this board. This is non-fatal since it may not be required.
++        # however we print the stderr which indicates how to add MBN support
++        # if it is actually needed for this platform.
++        if res.return_code == 61:
++            print(res.stderr, end='')
++        return self.ReadBlobContents()
 +
-+data: bytes = args.bin.read()
++    def GetDefaultFilename(self):
++        return 'u-boot.mbn'
 +
-+# dtb is at the end, so find the last match
-+dtb_off = 0
-+off = 0
-+while True:
-+    off = data.find(b"\xd0\x0d\xfe\xed", dtb_off + 1)
-+    if off == -1:
-+        break
-+    dtb_off = off
-+
-+if not dtb_off:
-+    print("Couldn't find DTB in provided binary!")
-+    exit(1)
-+
-+log(f"Found FDT at {dtb_off:#x}")
-+
-+mbn: MbnData|None = None
-+
-+for match, mbndata in boards.items():
-+    if data.find(match, dtb_off) != -1:
-+        mbn = mbndata
-+        break
-+
-+if not mbn:
-+    error(
-+        "Not building an MBN file for this board, see tools/qcom/mkmbn/mkmbn.py for details"
-+    )
-+    # Bailing out would fail the build, and it's not possible to know if an MBN
-+    # is actually needed for the board we're building for. Minimise confusion by removing
-+    # any file that might exist from a previous build and exit with a known code.
-+    args.output.unlink(missing_ok=True)
-+    exit(61)
-+
-+log(f"Detected board {match.decode('UTF-8')} with load address {mbn.loadaddr:#x}")
-+
-+elf.phdrs.append(Phdr.from_bin(data, mbn.loadaddr))
-+elf.ehdr.e_entry = mbn.loadaddr
-+elf.update()
-+
-+# QLI boards use v6 sw_id is "aboot"
-+hashseg.generate(elf, mbn.version, mbn.sw_id.value)
-+# print(f"after: {elf}")
-+
-+with open(args.output, "wb") as f:
-+    elf.save(f)
-+
-+log(f"Built signed MBN: {args.output.resolve()}")
++    def AddBintools(self, btools):
++        self.mkmbn = self.AddBintool(btools, 'mkmbn')
 
 -- 
 2.49.0
