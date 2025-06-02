@@ -4,81 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E07BC5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C232AC54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D86181E06;
-	Mon,  2 Jun 2025 16:03:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E8D5482012;
+	Mon,  2 Jun 2025 16:36:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Askk+Wqa";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QOspEwOP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6605D8205A; Mon,  2 Jun 2025 16:03:53 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 70D4282045; Mon,  2 Jun 2025 16:36:58 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 480118070C
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:03:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9E3081FFC
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:36:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72c27166ab3so3054379a34.1
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 07:03:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748873030; x=1749477830; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N/u4PylPfzY8UfQKD/qEnKsdQl1lDpRpq0OpcR67kac=;
- b=Askk+WqaTbPoJB1+A4w2P1tx5a//wjCQDCqCjdAUAUODGB9uDLX+leMK6hXPvVUiBz
- sMvStowVKbusJN286xJ1tQMVtxDATF8BXStNQfzDKGI65oNEw48cdSRG+HxNE/OZ2d0J
- KjMy7J3iJZNKJ1aFLuQddV5SV1Dz/kzOIBHrs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748873030; x=1749477830;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=N/u4PylPfzY8UfQKD/qEnKsdQl1lDpRpq0OpcR67kac=;
- b=PdNdek6J+LIXtENR83zhcgJgPN1C1eR8RJKQ97puMvCEj9RMVqA0ox7CpNZDBizpdc
- 0GbIfw1PDe+neSVm6KIK3joPyrh0TqW5891yw+vi0nr3CGFBs5rwYVsF0CNcLwUVPaSt
- lHauGKd2WThtkiwBEz8KJS/5I31XytjK5dJblxvAqSRLFOQlwd/XzVsoMxVoahTUsmYp
- IytltvirdX+SxOBHeVoeD8sSC5HKrUGJcLq1vmWlsX3svtJvb5Sed6BoqCbC6TJ1a0dN
- 2iggdhXOLJFxwleXbvUlFI/g/9tN+WR8wi6p95TMdcOxQGvP1ziY7HhvLF74pYSco4zv
- Db/w==
-X-Gm-Message-State: AOJu0YyWIv1llPd1yxE05MTcJdeqMiYVFkyPM8T3oa7rxFCTeS/x2OV7
- pAoL+mzKT/VTmn51jvdnYrGHqapQTsclZJ1ki1DrkcoOmBSm2KhVImPwmeDn8uQj82o=
-X-Gm-Gg: ASbGncuyzPT7lV+MZPOj16CNmrqsTcpnf1lOOpsNc8uVibzgmH4WNKkV9Z4f8bZa7ev
- q6KNSiOizvt3Ey1bj/9YkugWLNm5ig4qQdulwvx36qOTQH66e9wdy+yepVjD0emgu4hWFEvDcl4
- X0wCTs/MpLYzu5E1f5T5q3XIuWnbybQb1y3gsveSgBA2jCqAuIGs0iDiS7bfG0hU85AY7pT5pFW
- FYmxR2V3gdF7bwq+AS5HlfaFaW1p29/BtToPraMwDVAR7CwWM/aUCUr0yUwEJtNJ+Elj/EJgevF
- ztxA8b+Me73wDQ3RVnnCbM0sQGrARHXwsRAte/G8gg1eOqaUhUJGINuhVEfvEWQvIUSzNYauYIh
- IpIEc4tjYnsg=
-X-Google-Smtp-Source: AGHT+IEd+r5F3mgUhay2ezpm87X1GMGN5FQ2H5H6QwGrFjWPkyQZW5Jl+vl7EMWa196WfVyuJ1a9TA==
-X-Received: by 2002:a05:6830:f88:b0:72b:87bd:ad47 with SMTP id
- 46e09a7af769-736ecdde740mr8916036a34.3.1748873029937; 
- Mon, 02 Jun 2025 07:03:49 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-735af82d2b8sm1540153a34.3.2025.06.02.07.03.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 07:03:49 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250601133022.1461652-1-festevam@gmail.com>
-References: <20250601133022.1461652-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250601
-Message-Id: <174887302865.1219081.18151554706720762138.b4-ty@konsulko.com>
-Date: Mon, 02 Jun 2025 08:03:48 -0600
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 4A04849B98;
+ Mon,  2 Jun 2025 14:36:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3846C4CEEE;
+ Mon,  2 Jun 2025 14:36:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1748875014;
+ bh=+sS4hGl97kfhDWr8RISJbTi3zp33uZ2oCetVcBhBguk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QOspEwOPxGXBpibV5J8py4MijuSgtAmmJZG0SMB5PQ4/O8XyVhgtZd9Q8e/5fjlMU
+ SRJ6BABZ0h3dhhDDkJDfexDICHjD6/LBf5FhPJlBGsGblMYoaALRIl1ehgL0uZPrDL
+ 3rNJ+daJLG2nxu7twgZKqpLW9pLvdU5AL/LnOT8UF2aQe5x6rC92ep2GwwVDbcdq98
+ qRAAweQkEOJQrINb5bpPRYXthvNRY5aNXClW2kthwE8U8IR4OZGmqrHALgWs9q3EA5
+ HyfDHam9dKUuAXyhVi+8IkgAVAmu8XpGQXWSk7xvMQ7U7BtGQ35Fib3B1S11Pma2u8
+ QkQK3B1kLHKMA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Junhui Liu <junhui.liu@pigmoral.tech>
+Subject: [GIT PULL] Please pull u-boot-dfu-next-20250602 into next
+Date: Mon, 02 Jun 2025 16:36:51 +0200
+Message-ID: <87ldqamcqk.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +65,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 01 Jun 2025 10:30:22 -0300, Fabio Estevam wrote:
+Hi Tom,
 
-> Please pull from u-boot-imx/next, thanks.
-> 
-> The following changes since commit 5eb1b7843811e3e87b0e677212a9145f07552a60:
-> 
->   Merge patch series "test/py: enable HTTP testing" (2025-05-30 11:19:45 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
+Please find the following developments for next:
 
-Merged into u-boot/next, thanks!
+Usb gadget:
+- dwc2: Fix incorrect ULPI_UTMI_SEL bit setting
+- dwc2: Fix HBstLen setting for external DMA mode
+- dwc2: Various refactors to get the code closer to Linux
+- dwc2: Support reset logic for v4.20a
 
--- 
-Tom
+CI Job:
+- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/26466
 
+Thanks,
+Mattijs
 
+The following changes since commit 6e03ca240945ebf78d72e6839e9972c8e3893e54:
+
+  Merge tag 'dm-pull-30may25' of git://git.denx.de/u-boot-dm into next (2025-05-30 13:53:50 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-next-20250602
+
+for you to fetch changes up to 42911f61b776cda40ba2b8c9e57988a84ad359a5:
+
+  usb: dwc2: Refactor register operations with clrsetbits macros (2025-06-02 10:02:46 +0200)
+
+----------------------------------------------------------------
+u-boot-dfu-20250602
+
+Usb gadget:
+dwc2: Fix incorrect ULPI_UTMI_SEL bit setting
+dwc2: Fix HBstLen setting for external DMA mode
+dwc2: Various refactors to get the code closer to Linux
+dwc2: Support reset logic for v4.20a
+
+----------------------------------------------------------------
+Junhui Liu (2):
+      usb: dwc2: Fix incorrect ULPI_UTMI_SEL bit setting
+      usb: dwc2: Refactor register operations with clrsetbits macros
+
+Kongyang Liu (7):
+      usb: dwc2: Extract register definitions to common header file
+      usb: dwc2: Fix HBstLen setting for external DMA mode
+      usb: dwc2: Clean up with bitfield macros
+      usb: dwc2: Align macros with Linux kernel definitions
+      usb: dwc2: Extract macro definitions to common header
+      usb: dwc2: Unify flush and reset logic with v4.20a support
+      usb: dwc2: Replace uint<x>_t types with u<x>
+
+ drivers/usb/common/Makefile                |   2 +
+ drivers/usb/common/dwc2_core.c             | 131 +++++
+ drivers/usb/common/dwc2_core.h             | 560 +++++++++++++++++++++
+ drivers/usb/gadget/dwc2_udc_otg.c          | 119 +++--
+ drivers/usb/gadget/dwc2_udc_otg_phy.c      |  33 +-
+ drivers/usb/gadget/dwc2_udc_otg_regs.h     | 289 ++---------
+ drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 311 ++++++------
+ drivers/usb/host/dwc2.c                    | 494 ++++++++-----------
+ drivers/usb/host/dwc2.h                    | 750 +----------------------------
+ 9 files changed, 1145 insertions(+), 1544 deletions(-)
+ create mode 100644 drivers/usb/common/dwc2_core.c
+ create mode 100644 drivers/usb/common/dwc2_core.h
