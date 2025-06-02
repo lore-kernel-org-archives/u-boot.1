@@ -4,81 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19DFBC54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 10:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F3D0C5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 10:37:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77809820EB;
-	Mon,  2 Jun 2025 12:28:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8A190820EB;
+	Mon,  2 Jun 2025 12:37:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n67KjldQ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="VHGap//K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 536B98212B; Mon,  2 Jun 2025 12:28:44 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A122482A0A; Mon,  2 Jun 2025 12:37:16 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::628])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1BA782045
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 12:28:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4932A82045
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 12:37:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-55329bd977aso5296514e87.1
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 03:28:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748860121; x=1749464921; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eZdwMTCOnYHESSt2W7ityqntdOkwLvMaMXx3F/rHI1M=;
- b=n67KjldQhWWgbaIuI44pJ+dhyDMydqz0+1CZ+2em2K/izDKsC+nPZGa4HvoeZ5F2xm
- I7eUPXr65BA0l84fxC2gCs2nOsC6WaOgtX0DPJCdc6H8J5pACcR0L5zqiilNOuVr87TD
- aDc7DujD/HrrBDJELrmaMD4wUD21FP+G1ZsI7lZV1EQFMriXcnnqTp8edz+jb5B1RCwh
- oaDnHAd5xhX9InX7956Jol02pLlhHZTcPcEFdnumdbmE3PcxbbZ2puxW3IGqvtSRdcJn
- h4lDpDBz8FKQwIM/n/kfe7iYKU18H0MVMRQ2eBRjrS0ncl2ffuzED3VtOggiuEJC9naU
- g/1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748860121; x=1749464921;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=eZdwMTCOnYHESSt2W7ityqntdOkwLvMaMXx3F/rHI1M=;
- b=faPWvAX/I/CfHy6eC/m/t0vKD2yFwvW8poVWCD4pHr6ukVQu5m+1jBLim/v8V2bbO3
- Xs2lEuvMR8tNtuWWQu3lbge2W87HtoQJodzeNzvwV77tPlsESpcgIbEZxEbrEAmO1ZYl
- ECPkh/wAwSAEitKFBkl5QWfB1/Izpo0p3AoqcE9kxqFbs/gkA8y7QIT1hcelPV3TxED+
- w8fwME/pMRAbZkDvi73ZOsUEA0DapKAnbX9I72wU6sKWkv0h+mFjUZdpWnjyNAu2duYD
- IYZ64SDZiIXsiTJTLp108R3q1DoE6MNNuTkVL7g7KxjiO4S6fBxytcnq6bAMwSZ+Oe7p
- MOzg==
-X-Gm-Message-State: AOJu0YyFk3TX6kePSXot2TlvAAAjQjAxZlBhZoJmjkcvxm3Brzi5SAoW
- oUDrezKoTU6/tFAwJnQvZ84E7DBHGvbUZeUzbmPRp/uu87zuSs8Se3EDt8kiuxXI4j5viwMfxe6
- ZSCQ3KxQ=
-X-Gm-Gg: ASbGnctMzppT0OhclOQ5YDmBYXDSxLYr7qKZ/roAFfkHWp1rfyFlC5MSMyT6sPMbcYw
- s3oexyeK446Tp7+beYYmhr8p8M6q/qAIs10GECgC5X0RVlQOiZTZjylIurpsoP+4S9dEJROccz/
- CT/GzzOi+5TxIXAxsWDFajOtmZh6Rov/H2oAe9BIm8ZJ9EsAa6U8Vxu7KDSygDglEITLuaInlcd
- vrQhAGM67LtCZJFi3g5wtz0sAiDUhLCIzSIPl0HQeRi0IAW38YPFu+h07AgzQoTA4OJEIQmYSx9
- glGLYGKFQ4omEZ2NNr6re7oJYtF5LtHL7vejgTBRz6bJP+DLdDYRBLi63+zQQwYNXguUEFSPv/Y
- zUba4v6Jev8R/OjNFUAM=
-X-Google-Smtp-Source: AGHT+IHBs8sEoVxBMEvsUVXS1wVdfwPvMj2r942eqboZt4Mw4yOn6AnN4BiOEJWZEUqJ08SBQvfIHQ==
-X-Received: by 2002:a05:6512:6c5:b0:553:2760:e82c with SMTP id
- 2adb3069b0e04-55335b468b8mr5606621e87.25.1748860120883; 
- Mon, 02 Jun 2025 03:28:40 -0700 (PDT)
-Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5533791cfc3sm1537502e87.201.2025.06.02.03.28.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 03:28:40 -0700 (PDT)
-Date: Mon, 2 Jun 2025 13:28:38 +0300
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?iso-8859-1?B?Suly9G1l?= Forissier <jerome.forissier@linaro.org>
-Subject: aarch64 u-boot reset loop with qemu USB and KVM
-Message-ID: <aD181pYGA_0AqWdz@nuoska>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dme8+phRZVeP39s3R6lqW+TQa838itESMGv+E/cVttJZcnCl8IGUSKOV5tMkv2KZZz9cJlRXSuxBR/qiq6xj8giZQn9x4X8kEWbPd2ONLHINAOTvlUWGFx3WBccnmXRlIv1mfVxkQRE/CMboOhU/0Q1KGtB5KH6i5vKIvheOaZAlhgPr/9dEojFlDdud7MoUD/9ng4+t6k9FRvVQbCWgIhLYWjhnf+jWkWyEltL5LaVS/LxRxC6vLWFHgw+hGZVkdQ9F1aQYSMkO1O2NnvLA5+H8TR5j0jy8mFgou90wLVnHzXl2NTezojuEJw1fwQ90rUuPLyNi73TV4fOYUfFjHQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=e7qBYoloEOwVJDuQjvtRiVy7cSszjWq1VNlZ8iU/618=;
+ b=mx1s2t+QiCLqSOo65S0SqTNhoPvX5kNCqyGkGsGBHNyHfh8/NZQs4zfp+TDdYo7esHoAMmAhDalg+oyBpynCvsfHyX1pyeOeE5SaRqV74O8GkT/NpkHVb4lFN+tG18bBUW0WtOsH//ZPthmeYYcFGsiYTpE45h0q/QeImWosIgOnGr0TpI4+T4Ru2RC9qdwqV1HMYRjF2IdeThK2au4VkT3RS1BygRqsIjPj+qYGK9R81addqPJ7/OPEAoFZRSH0PjGeZPR1OeL5Cchoc6G+RPpRIWJS/utTQn0FNLOqRl1xE/fiXUdYi1KW72hXvQbIl2Dy0hjU32XDD0SIBPHEsg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=e7qBYoloEOwVJDuQjvtRiVy7cSszjWq1VNlZ8iU/618=;
+ b=VHGap//Kje35gn8T5sFA07fgdHBcjWh77JEdCfv3OIXZZdSOcybP6XrweHywR21ikICLJdfpkWo6ytth3komzdQM5cjI18WmJLyrQ4h0L2CJKcb+h/hHRllBMcdpbKJ3Ud1qWZahsQoDkOxLBm89Ja3u/JvBNTK6G4OQyMTjReU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PR3PR04MB7228.eurprd04.prod.outlook.com (2603:10a6:102:8c::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.33; Mon, 2 Jun
+ 2025 10:37:12 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8769.037; Mon, 2 Jun 2025
+ 10:37:11 +0000
+Message-ID: <b80d6fe8-d477-430b-bf21-eb7662541c28@cherry.de>
+Date: Mon, 2 Jun 2025 12:37:10 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] arm: armv7: fix a bug that prevents CONFIG_BLOBLIST
+ and CONFIG_POSITION_INDEPENDENT to be enabled together
+To: forbidden405@outlook.com, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Cc: u-boot@lists.denx.de, Mikko Rapeli <mikko.rapeli@linaro.org>
+References: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: DUZPR01CA0077.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:46a::15) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PR3PR04MB7228:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0a56832f-7de0-4a8c-526e-08dda1c16ed7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UkMzc0h2S0Zncy80S2dma2xuOUNVeFZFcVY5NnFHaXRkTlFFbFN3WUp1MXRv?=
+ =?utf-8?B?RFNsUHlhMWdPWk9LdGFrNjljVzB3UFl2VlppR2t3bzZQNUFURTlFcXg0UXdD?=
+ =?utf-8?B?NGZJMDUwd2ZON3ByZDZvZDVKOWordGRwK0FHZHAwTUFKWll1NXA2azlNQlNR?=
+ =?utf-8?B?N1hZZkVnK2xzN2FRN0loUHZUV29UQkNUcUgrMk8vYzhSV3l1amladjd3Tml2?=
+ =?utf-8?B?VmlMMUdHMDMveU1kcVBOeVJuVHVHdkYxaHlnRjE5V2Rid1dSMld3bUp2bWVT?=
+ =?utf-8?B?RjNYRmFHTUJaSm1tV3VTS2FYSlNMc1FDQUdzRlFMa2Jxc1B6NzNEZGg4RXpj?=
+ =?utf-8?B?WVg1Uis0SFVMS05nV2R2NGg3NTM1dS93WTJZSW9IZGZBME00dmhrSHJZMzZz?=
+ =?utf-8?B?TnVnMkVZYUw5dGRjejBqZ01ZaXMrZ0dsUnVTOVp6NTAwaE0yUnZBK2tSdEt3?=
+ =?utf-8?B?L1FLQTZ6NkQ5ZXZVQlA0d3cweWY4em9wS2NlbEdkSjNoMWJBVFRRK1NRbEZD?=
+ =?utf-8?B?UG9kdXJ0RVZ5Y05JQXk0L202MkIrSWdPQ0tYTkY4eFJPSlZFODhSak8zdlNl?=
+ =?utf-8?B?MHArTEMxTEFWS0U5Rm5WbkR3eEh2RklFZGJkMW9XNklQMWRQUUxqU0t1K0JP?=
+ =?utf-8?B?TlBzYzdmakl4OUoxaTJlRFEwNVFmZU5KRW1pckYzOHhDQ2Q5SnZEQnlGK1M3?=
+ =?utf-8?B?SVVTT0dWb1lMVGJ4T0svL0NzbkpUOWRxVEZ3dnVjZWpqS0w5UnE0NkNYZHd3?=
+ =?utf-8?B?b2hsUGM1Z0wvc2VLaHFBZVRubnRrOW1YYlVtcnlNNTYxeGszSDR6VjI5WmlZ?=
+ =?utf-8?B?aExZQVNyUUpTUUZYd1puN2g4Rlhib2VVUnBTbDJNY29yV1ZNeE5TWnM2ZVJ3?=
+ =?utf-8?B?OW9iYmxXYVhmNlRzeSsxWmRYUW5NMEJlYnlqRGJYbHB5cGt6TkRCVlVoRjBF?=
+ =?utf-8?B?WkdkWmZhMG9MOEVOQXdLcVJ5bHBQRXB1Yit4b2JWUlR6ajJmbzgvL01sWUpG?=
+ =?utf-8?B?Mzcva1I3UnJqUzRjcVZEVXkxV1JJTjRENW41aVU0eEN3RUVvZEtybTdyemll?=
+ =?utf-8?B?Y1U1cUd5c0x2SWsvL2M1RkZwYTIyN0k4ZGc0VndmZGt0OWEwS3dYa0pMTWIv?=
+ =?utf-8?B?NHY3Ymc5U0huVk5uNE1TbzRqbkJBZ0w4b3AxV05RQzVma1c0dDVSWjJsTVMx?=
+ =?utf-8?B?OVpwY0Q2Q0V2RGtweXowV0J1cDZJbWVreHFETmM5MmQ3RVc2SFl0N0VMaTJB?=
+ =?utf-8?B?aXE1MlhleC9zNUp2WkkrTW9zQWpyNjdCTEthd252bSs0T0pSUnVwOGZvZFFk?=
+ =?utf-8?B?eEp3RWlyaXRvdU01Z0NSSEZiem1DVEV0cjJLUDVZRHc4MTlBTXB6NkptM1RW?=
+ =?utf-8?B?RThkYXBkRDlnV1hRMHk2Q0laWGQ1RVRGYkRmMXlTNVVFLzFuOWx6UVRPczc1?=
+ =?utf-8?B?S2YzQ0thMTZ1dVY4TFFWUHhCN0RCRWEreEF3YjRSRVd6YzhZdkRYVUNxWGQ0?=
+ =?utf-8?B?L042UzZHZVU2NnVNeDJTOTZ6ZkV2ci9iaXNmZXVaR2FHcHd6OWRPeFZwVFl6?=
+ =?utf-8?B?bXhwQlJqaHR6NThYYThuTjR0VGROaWpTVkpWYjY5SXFiN1h2MVhkd3ErVjNi?=
+ =?utf-8?B?bEdGeVYreDAvakZVUTNDN0RaV2l0YmZVZUFCS0t3VERWUjJqbVhaMVVxNGlw?=
+ =?utf-8?B?ckdocHlVcTFXeTljencxZHNBWWVKNGpFSTl6SkJ3WGdYUVM5bllaYm1uU3lE?=
+ =?utf-8?B?QzJYVlBsa2tpdXdBYjlRLy9DcG80WVhXRW1xUXk4aVI4bTkvSTNyWXhSU1Bl?=
+ =?utf-8?B?ZXRVMEFVVFp0TVAxQTZCWWIxVzE4ckRwUTUydWdMM0R4TG0wUVFpOTNZL3ky?=
+ =?utf-8?B?aFlLekxVOWs1MmVaQ0I5NE5LNDcyV2RMZ3JBTnY0emhkcWxPdWlUTGVQZ1kw?=
+ =?utf-8?Q?F4As6hTc9TY=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MnBvWThWamsranlRVllmakEzTkVwQUNBbTZEKzBVWXJjeEY5T0l0UTVNaU5z?=
+ =?utf-8?B?V2V1a2NBb1JGeWc1WnBRL2ZFQjRmTkJmUWpNVVJOT3o4b2Y2RnJ1WjFOMEJE?=
+ =?utf-8?B?MnNWTHB6MzI0QXB3ZGtRZXRSZVNzN2pZeHpSb21VU0c4aVp5cTdvSXRiQjZw?=
+ =?utf-8?B?Q2JBMG54MDFmSytCUnhXd0tZYUlXZkpKR0Y1aTlWS3NHZlNqS0tvKzB5VFhN?=
+ =?utf-8?B?ZHRWbnpZci91R3VMejNEenp3TWd0UmgvOXVhR0JRbVBqZThsQU5haTBtVTdt?=
+ =?utf-8?B?VkkxMk0xVTVIVlh5NlVOQmVQNlJOdEJiMFQrdGQ1Tjh3VGtpQTVqU0FJVFFY?=
+ =?utf-8?B?eDVQbHVFVmJXYlFBbFdVcURzUGlZdWRHQ085RFNoVC90YzlFSnY2dWpGR0ZM?=
+ =?utf-8?B?blZ3elAyNWxwc1RaRHEvclVkQUs1N0JxbURhcktDUCs2VThieDN0SzNXdWR0?=
+ =?utf-8?B?YTFsRHhtRjl3YUxSdWlOK1NkR1AzT3drVUNXSE5tZXAzWW0wR1dUTDJIOGF2?=
+ =?utf-8?B?S1FqUGpnWTVZS0VZYVVVSm5IbE9RSkFwNTUyenVOZ2lUZDV0a1gzeGFwSUxo?=
+ =?utf-8?B?cnBJK0RLSldQV01QRVMzSFZPUEwvbXhSSnRFdVEyTTNZNERQNUY0a0hIazdF?=
+ =?utf-8?B?UklPb1pFa0NwV0tBSklCaGIxY3NyaytRT1ErMzRvVFpNb2k2S01nVG01ekZK?=
+ =?utf-8?B?UHp4Y0d4emxJSVV3RFlRWEpXbHQwWllueEFzQldmY1BjL0d2WVpPRHlvcFkr?=
+ =?utf-8?B?OEdkbWNnM3VqeVQ4Yk54dmNwdE5HVnBwVkF5RnJzcmcxOW9xSVlmODllM0lz?=
+ =?utf-8?B?dm9nSkNXT1RBd2ttdzRYODBZcFJwQlhKNEJ6dExGVXZJM3YydGxoNjZocjNL?=
+ =?utf-8?B?cWZNVkdYWFRqOHAvNFlBWEVCWDNucnU1aGFOVFVzQ2V3bDVKdXpiQ0tkK1Iv?=
+ =?utf-8?B?M2V3WlBGYWtxL0lWT1hzZlBzaUx0TW5oMncyZXZTKytlcy9UNVlhOUVRQk1T?=
+ =?utf-8?B?bTYzZ0FDTndzMCtqenpyZUlqQVlqNFNvMTBSUjJ4bUQ5RWxXU0R6dW5Jb0th?=
+ =?utf-8?B?cXF6Z0hUcjRCOVkrRjZITEZvNEx5WkVKR1k3Skgyaml0WnowOW0xeUlNZnd3?=
+ =?utf-8?B?aExaTzgweUZ0YUk1WjE3cFk3ZlV4b1Q1YUJ2LzV2c2F0ZGl5Q01LMVB0Rzg5?=
+ =?utf-8?B?QUh5b2xmTW1CUzZ1SUg3NVJZY3VXazkvcjdlc2NKYlBjZkNBYWJsU29uYzZj?=
+ =?utf-8?B?RUNMSldPdXRTWkc0eG5EZ0FCZTl3THlwQkpKbFNTWVhHVkhtNDNMamNXUHpy?=
+ =?utf-8?B?QkltQjQzZzVOMDc0b1grSFVOcncya3l0MlhkRHNzc1hmUlpOLzUzak9VVDVZ?=
+ =?utf-8?B?MGViNUI2a2Y3YVNFdUNQNkhaQkVKQ0lENWQ1M1FWWWRpcjJsYVU5VjZwMmZZ?=
+ =?utf-8?B?QjNnMlphT1VwVy94RkVwcUhNblA5YWZlcXk1eGhNZXNXSzhJSE1pbnJCaVAy?=
+ =?utf-8?B?bEVtNzJYYzdJaTNyalB4dlFHaTAyclloWEJOUllDeW42TVZXMVJoNGRnWFVI?=
+ =?utf-8?B?K0hjTUpJT0UrWHNrRVRmOVdqeGhoY2RIWmhqbi92ZFN5NDg4MkRNdmI2UlhX?=
+ =?utf-8?B?VFQwTExsQVdVQ3QyOGhUMVFEUkxOMFRGdWpmQnM2QW8rRzJqeGlWTTRZNUpI?=
+ =?utf-8?B?VHFPT2FaQ3oyV3VzQmV5alhwZDVycnpaTFZPN2VvUTQzdVFkb3VMeTZTdW9H?=
+ =?utf-8?B?cytBZGg3SXhzOHVPam9SNUdRa3lyaG9PSUZWMGMwZlNCekdvenV5RGxtNVlS?=
+ =?utf-8?B?dVhubU1MQzBOU0hZbWFlVk5mNkFKTm5UZTF0SkhqK3pxOEF5UDNxcEFvaGhH?=
+ =?utf-8?B?Mk01dnpGMFBZZmJxVk1tbll1M3RyRE51cU13OXJEaHBHUGtrdk9UWGh0VmVY?=
+ =?utf-8?B?VFUrNzA2ajFIcWF5MHhUL0wrZjcxcllsTVBjR2U0TlRHQUV4a2RJUHkwckxl?=
+ =?utf-8?B?SVhDUjlmY29HakpqZVM0OWM0UFVYeGxPelVzcnZlYnFBM3FBdGRrNWRuTWRr?=
+ =?utf-8?B?TFJJZktMNkVhb25WYXd1bFBobGlsL2tXVGVLeGFGNnY0dXY1Ukl5cDZpT2V4?=
+ =?utf-8?B?cHhUY3ltNTVzUkJ1ZUhVWmF6T09tRTFhak5QTGxXYkExc3lIWmEwL1hXQ3dn?=
+ =?utf-8?B?UXc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a56832f-7de0-4a8c-526e-08dda1c16ed7
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 10:37:11.8205 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qyevr3oWtwdh0SgzkReZJ7+wNU3lH8ZqunHDep0uv+xGoXRPo0kiy9DjOlDANzrDONmjEeDzhq6p+cT+SH4QLNrm1wZ55du3dkb8JqkpmOM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7228
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,69 +178,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey,
++Cc Mikko Rapeli who's attempting to patch this in OpenEmbedded-Core
 
-As was discussed over yocto/OE-Core mailing list
-https://lists.openembedded.org/g/openembedded-core/topic/113306017#msg217258
-qemu machine with USB and KVM enabled goes into reset loop with
-u-boot. I've tested u-boot 2025.04 and latest master branch 2025.07-rc3
-( b22a276f039f818d5564bec6637071cfc8a7e432 ) with qemu_arm64_defconfig
-from tree and CONFIG_BLOBLIST disabled since that to has issues with KVM
-( https://lists.denx.de/pipermail/u-boot/2025-May/590101.html )-
+On 5/31/25 3:10 PM, Yang Xiwen via B4 Relay wrote:
+> [You don't often get email from devnull+forbidden405.outlook.com@kernel.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> This patchset also enables CONFIG_POSITION_INDEPENDENT for qemu boards
+> to avoid similar issues to happen again in the future.
+> 
+> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+> ---
+> Yang Xiwen (2):
+>        arm: armv7: restore section to .text after saved_args
+>        arm: qemu: Add imply CONFIG_POSITION_INDEPENDENT
+> 
+>   arch/arm/Kconfig           | 1 +
+>   arch/arm/cpu/armv7/start.S | 2 ++
+>   2 files changed, 3 insertions(+)
+> ---
+> base-commit: 93905ab6e7564089f5d7b703b660464d675e5ab0
+> change-id: 20250529-pie_blob_fix-a61229c8fcc6
+> 
+> Best regards,
+> --
+> Yang Xiwen <forbidden405@outlook.com>
+> 
+> 
 
-To reproduce:
-
- * qemu 10 or 8.2.2, version does not seem to matter
-
- * aarch64 native machine with KVM support
-
- * qemu-system-aarch64 command line:
-
-$ qemu-system-aarch64 -machine virt -cpu host -machine gic-version=3 -smp 1 -enable-kvm \
-  -m 256 -serial mon:stdio -serial null -nographic -vga none \
-  -bios u-boot.bin \
-  -device qemu-xhci -device usb-tablet -device usb-kbd
-
-U-Boot 2025.07-rc3 (May 30 2025 - 19:44:05 +0000)
-
-DRAM:  256 MiB
-using memory 0x4e662000-0x4f6a2000 for malloc()
-Core:  51 devices, 14 uclasses, devicetree: board
-Flash: 64 MiB
-Loading Environment from Flash... *** Warning - bad CRC, using default environment
-
-In:    serial,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Register 8001040 NbrPorts 8
-Starting the controller
-"Synchronous Abort" handler, esr 0x96000010, far 0x10100040
-elr: 000000000005a360 lr : 000000000005a344 (reloc)
-elr: 000000004f6fc360 lr : 000000004f6fc344
-x0 : 0000000010100040 x1 : 0000000000000001
-x2 : 0000000000000000 x3 : 0000000000003e80
-x4 : 0000000000000038 x5 : 000000004e66fed2
-x6 : 0000000000000000 x7 : 0000000000000000
-x8 : 0000000000000000 x9 : 000000000001869f
-x10: 000000000000000d x11: 0000000000000006
-x12: 000000004e561a68 x13: 000000004e561dd0
-x14: 0000000000000002 x15: 0000000000000000
-x16: 000000004f6ee774 x17: 0000000000000000
-x18: 000000004e661dd0 x19: 000000004e670480
-x20: 0000000000000000 x21: 0000000010100040
-x22: 0000000010100000 x23: 0000000000000000
-x24: 0000000000000000 x25: 0000000000000000
-x26: 0000000000000000 x27: 0000000000000000
-x28: 0000000000000000 x29: 000000004e670360
-
-Code: d5033fbf aa1503e0 5287d003 52800002 (b8004401)
-Resetting CPU ...
-
-resetting ...
-
-With KVM disabled, or the qemu USB devices disabled, boot with u-boot prompt and
-to full target system works.
-
-Cheers,
-
--Mikko
