@@ -4,68 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAD2C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 17:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7B3C5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 18:06:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 857B781E06;
-	Mon,  2 Jun 2025 19:28:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BAB180F9C;
+	Mon,  2 Jun 2025 20:06:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CACQVe4x";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75F8781E25; Mon,  2 Jun 2025 19:28:40 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3613C80BAE
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 19:28:38 +0200 (CEST)
+ id D2B0E811AC; Mon,  2 Jun 2025 20:06:15 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C33AC80AE1
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 20:06:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552HSZ9S303088;
- Mon, 2 Jun 2025 12:28:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748885315;
- bh=6yw9Pvc80mc4oWcXqUvYlZYV9w2VAUu3BDZcf4xBNEI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=CACQVe4xaUnz0KWtSPjAjTOd9J5iKNQRkATv6r4p2B/fR8/015+LshF9Q7tSmHz7g
- pI2jrH5IPuMto1HilgToG1qZQjUQIFfV9l8uX+N73SsrU4sqhZHgTJC0jaiVazcnJP
- XpcAyhdF2NecLvIQ0RTK7oLEa58QOsPzcbwNuhzs=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552HSZYA3125923
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 2 Jun 2025 12:28:35 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
- Jun 2025 12:28:35 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 2 Jun 2025 12:28:35 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552HSZov3288213;
- Mon, 2 Jun 2025 12:28:35 -0500
-Message-ID: <d347cb7e-4b59-4f3e-8dc4-307db7027b63@ti.com>
-Date: Mon, 2 Jun 2025 12:28:35 -0500
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.35] (unknown [98.97.63.165])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 2246DB4C34F9;
+ Mon,  2 Jun 2025 20:06:09 +0200 (CEST)
+Message-ID: <a3ee52c2-0ee9-48b0-9cfc-a0efcb02907a@freeshell.de>
+Date: Mon, 2 Jun 2025 11:06:08 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH tiU2025.01 2/2] binman: openssl: disable JTAG access by
- default
-To: Bryan Brattlof <bb@ti.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
- Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-References: <20250602-am62xsip-v1-0-ae8aa62b4b6e@ti.com>
- <20250602-am62xsip-v1-2-ae8aa62b4b6e@ti.com>
+Subject: Re: [PATCH 0/3] sntp for NET_LWIP
+To: Jerome Forissier <jerome.forissier@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+References: <20250521151516.16729-1-jerome.forissier@linaro.org>
+ <CAJ+vNU08-=eWAceEedRg7RabqB-BKO_1F+8EkDHB8zHg79VK3g@mail.gmail.com>
+ <af397cfc-e222-4ed6-b8d7-802d9080dbfa@linaro.org>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250602-am62xsip-v1-2-ae8aa62b4b6e@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <af397cfc-e222-4ed6-b8d7-802d9080dbfa@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,136 +67,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/2/25 11:56 AM, Bryan Brattlof wrote:
-> Typically for boards operating in production environments will not be
-> monitored and so will not need JTAG access unlocked. Disable the debug
-> extension unless asked for in the binman configs.
+
+
+On 6/2/25 01:11, Jerome Forissier wrote:
+> Hi Tim,
 > 
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-> ---
->   tools/binman/btool/openssl.py       | 16 ++++++++++++----
->   tools/binman/etype/ti_secure.py     |  1 +
->   tools/binman/etype/ti_secure_rom.py |  1 +
->   tools/binman/etype/x509_cert.py     |  7 +++++--
->   4 files changed, 19 insertions(+), 6 deletions(-)
+> On 5/30/25 17:46, Tim Harvey wrote:
+>> On Wed, May 21, 2025 at 8:15 AM Jerome Forissier
+>> <jerome.forissier@linaro.org> wrote:
+>>>
+>>> Implement the sntp command with lwIP (CONFIG_NET_LWIP=y). SNTP is
+>>> supported as an app in lib/lwip/lwip/src/apps/sntp/sntp.c so this is
+>>> mainly about adding that file to the build and writing do_sntp() to use
+>>> the sntp_*() API and run the receive & timer loop. There is a patch to
+>>> extract a small bit of common code from net/sntp.c to avoid duplication.
+>>> The QEMU arm64 lwIP defconfig is updated to provide the sntp command by
+>>> default for convenience.
+>>> I could not test the case when the NTP server IP is provided by DHCP. If
+>>> someone has access right away to such a configuration and in case it
+>>> does not work, please let me know.
+>>>
+>>>
+>>> Jerome Forissier (3):
+>>>   net: extract function net_sntp_set_rtc() from sntp_handler()
+>>>   net: lwip: add sntp command
+>>>   configs: qemu_arm64_lwip_defconfig: enable CMD_SNTP
+>>>
+>>>  cmd/Kconfig                       |  13 +--
+>>>  cmd/net-lwip.c                    |   5 ++
+>>>  configs/qemu_arm64_lwip_defconfig |   1 +
+>>>  include/net-common.h              |  13 +++
+>>>  lib/lwip/Makefile                 |   1 +
+>>>  lib/lwip/u-boot/arch/cc.h         |   4 +
+>>>  lib/lwip/u-boot/lwipopts.h        |   4 +
+>>>  net/lwip/Makefile                 |   1 +
+>>>  net/lwip/sntp.c                   | 128 ++++++++++++++++++++++++++++++
+>>>  net/net-common.c                  |  28 +++++++
+>>>  net/sntp.c                        |  23 +-----
+>>>  11 files changed, 195 insertions(+), 26 deletions(-)
+>>>  create mode 100644 net/lwip/sntp.c
+>>>
+>>
+>> Hi Jerome,
+>>
+>> Thanks for the continued work on lwIP!
 > 
-> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
-> index 2e128e477bce87568b6d9647bbf2666f9770d732..c91d8990a1dc9151bb8fc831c0f1bff2d91b014e 100644
-> --- a/tools/binman/btool/openssl.py
-> +++ b/tools/binman/btool/openssl.py
-> @@ -153,7 +153,7 @@ numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
->   
->       def x509_cert_rom(self, cert_fname, input_fname, key_fname, sw_rev,
->                     config_fname, req_dist_name_dict, cert_type, bootcore,
-> -                  bootcore_opts, load_addr, sha):
-> +                  bootcore_opts, load_addr, sha, debug):
->           """Create a certificate
->   
->           Args:
-> @@ -214,9 +214,13 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
->    [ swrv ]
->    swrv = INTEGER:{sw_rev}
->   
-> + # When debugging low level boot firmware it can be useful to have ROM or TIFS
-> + # unlock JTAG access to the misbehaving CPUs. However in a production setting
-> + # this can lead to code modification after it's been authenticated by outside
-> + # parties. To gain JTAG access add the 'debug' flag to the binman configuration
-
-Stating that adding the debug flag gets you JTAG access seems a bit misleading.
-Having the debugType is a necessary but not sufficient condition for JTAG unlock.
-
-This only sets the upper-bound on what a later supplied JTAG unlock certificate
-can do, unless coreDbg* is set this should not by itself open JTAG on HS-SE
-devices. For HS-FS devices I'll have to double check and if it does we should
-decide if we want this unlocked by default or not.
-
-Andrew
-
->    [ debug ]
->    debugUID = FORMAT:HEX,OCT:0000000000000000000000000000000000000000000000000000000000000000
-> - debugType = INTEGER:4
-> + debugType = INTEGER:{ "4" if debug else "0" }
->    coreDbgEn = INTEGER:0
->    coreDbgSecEn = INTEGER:0
->   ''', file=outf)
-> @@ -231,7 +235,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
->                     imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
->                     hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
->                     hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
-> -                  dm_data_ext_boot_block, bootcore_opts):
-> +                  dm_data_ext_boot_block, bootcore_opts, debug):
->           """Create a certificate
->   
->           Args:
-> @@ -317,9 +321,13 @@ compSize = INTEGER:{imagesize_sysfw_data}
->   shaType  = OID:{sha_type}
->   shaValue = FORMAT:HEX,OCT:{hashval_sysfw_data}
->   
-> +# When debugging low level boot firmware it can be useful to have ROM or TIFS
-> +# unlock JTAG access to the misbehaving CPUs. However in a production setting
-> +# this can lead to code modification after it's been authenticated by outside
-> +# parties. To gain JTAG access add the 'debug' flag to the binman configuration
->   [ debug ]
->   debugUID = FORMAT:HEX,OCT:0000000000000000000000000000000000000000000000000000000000000000
-> -debugType = INTEGER:4
-> +debugType = INTEGER:{ "4" if debug else "0" }
->   coreDbgEn = INTEGER:0
->   coreDbgSecEn = INTEGER:0
->   
-> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
-> index 420ee263e4f92727657d949d45a63c99809ecafa..f6caa0286d97c774fa4f2931f82ee9a98677b8d4 100644
-> --- a/tools/binman/etype/ti_secure.py
-> +++ b/tools/binman/etype/ti_secure.py
-> @@ -124,6 +124,7 @@ class Entry_ti_secure(Entry_x509_cert):
->                   'OU': 'Processors',
->                   'CN': 'TI Support',
->                   'emailAddress': 'support@ti.com'}
-> +        self.debug = fdt_util.GetBool(self._node, 'debug', False)
->   
->       def ReadFirewallNode(self):
->           self.firewall_cert_data['certificate'] = ""
-> diff --git a/tools/binman/etype/ti_secure_rom.py b/tools/binman/etype/ti_secure_rom.py
-> index f6fc3f90f84ab1b0a9c806a966d508abfd6f3eee..7e90c655940902b266507cf142680d984b8d22d4 100644
-> --- a/tools/binman/etype/ti_secure_rom.py
-> +++ b/tools/binman/etype/ti_secure_rom.py
-> @@ -87,6 +87,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
->                       'OU': 'Processors',
->                       'CN': 'TI Support',
->                       'emailAddress': 'support@ti.com'}
-> +        self.debug = fdt_util.GetBool(self._node, 'debug', False)
->   
->       def NonCombinedGetCertificate(self, required):
->           """Generate certificate for legacy boot flow
-> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-> index 25e6808b7f94cee76e18e2b5de22c09f91e3afd3..b6e8b0b4fb099871d8e7f731ee3e7c5d52e98b85 100644
-> --- a/tools/binman/etype/x509_cert.py
-> +++ b/tools/binman/etype/x509_cert.py
-> @@ -52,6 +52,7 @@ class Entry_x509_cert(Entry_collection):
->           self.sysfw_inner_cert_ext_boot_block = None
->           self.dm_data_ext_boot_block = None
->           self.firewall_cert_data = None
-> +        self.debug = False
->   
->       def ReadNode(self):
->           super().ReadNode()
-> @@ -114,7 +115,8 @@ class Entry_x509_cert(Entry_collection):
->                   bootcore=self.bootcore,
->                   bootcore_opts=self.bootcore_opts,
->                   load_addr=self.load_addr,
-> -                sha=self.sha
-> +                sha=self.sha,
-> +                debug=self.debug
->               )
->           elif type == 'rom-combined':
->               stdout = self.openssl.x509_cert_rom_combined(
-> @@ -140,7 +142,8 @@ class Entry_x509_cert(Entry_collection):
->                   hashval_sysfw_data=self.hashval_sysfw_data,
->                   sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
->                   dm_data_ext_boot_block=self.dm_data_ext_boot_block,
-> -                bootcore_opts=self.bootcore_opts
-> +                bootcore_opts=self.bootcore_opts,
-> +                debug=self.debug
->               )
->           if stdout is not None:
->               data = tools.read_file(output_fname)
+> Sure. Thank you for testing and fixing bugs :)
+>  
+>> For the series:
+>> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+>>
+>> Note that if this is merged before my series we'll want to have a
+>> followup that removes the sys_check_timeouts() after net_lwip_rx(udev,
+>> netif), or if it is merged before my series I can send a v3 that does
+>> it.
 > 
+> Both series are in my patchwork queue, so I'll take care of that. Thanks
+> for the heads up.
+> 
+>> Do you have a list of lwIP features you're still working on? I'm going
+>> to be moving the Gateworks venice boards to it as things look pretty
+>> good. The only thing I saw that was missing was TFTPPUT which I don't
+>> really care about.
+> 
+> I don't have any thing left in my to-do list for lwIP at the moment. There
+> are several U-Boot features that are still not supported with NET_LWIP. As
+> you said TFTP PUT but also IPv6, the bootp command, as well as ncsi, ethsw,
+> and wol (those are found in cmd/Kconfig). Maybe other things, I don't know.
+> 
+> BR,
+
+Getting data off from the U-Boot device under test is missing some
+similar function today. It would be enough to re-implement tftpput but I
+rather like the convenience of "wget" to do everything from host and
+from U-Boot device.
+
+Before LwIP and missing tftpput I did use tftpput:
+
+1. Send data from memory address range read from some flash peripheral
+
+2. Send data from files on attached storage filesystem (repeat
+intermediate step to read each file to memory address).
+
+The tftpput command is useful for (1) and is a problem for (2).
+
+Suggestion is an HTTP server command to respond with data from a memory
+address range or device filesystem i.e.:
+
+httpd <[<address> <size>]|[<interface> [<dev[:part]>]> [filename]
+
+The command responds to HTTP GET requests until a simple timeout in
+seconds (default 0 no timeout), probably as an environment variable.
+There might also be an environment variable to limit the maximum number
+of requests handled (default 0 for unlimited) so that you could use this
+in a script as a kind of network operated trigger or automation.
+
+When first parameter is a valid memory address (default $loadaddr) then
+second parameter (default $filesize) is the size. A size of 0 is valid
+and does not read from the memory address also returns no data. Optional
+third parameter unspecified or default responds to any GET request. If
+third parameter is specified then only respond to GET request for that
+filename with any leading pathname stripped from the parameter.
+
+This would allow to simply command `httpd` after some other memory read
+operation which has set env variables for us, and optionally `httpd - -
+"filename"` if we want to be selective about the GET request that will
+read our data. For an HTTP request viewer specify `httpd - 0` or in a
+script for example if you want to hold up script execution until a
+certain number of valid network requests for "secret" resource but don't
+care about the return data, something like `httpd - 0 "secret"` and the
+appropriate environment variable to limit successful responses before exit.
+
+If first parameter not a valid memory address, then we assume a similar
+invocation as `ls`. When responding to a request if filename parameter
+is then a valid directory respond with a directory listing, else serve
+that file. File not found is 404 response but does not exit.
+
+This overloading of both memory address and device filesystem works if
+there are not any devices that are named with address values. If that is
+too much then split to `httpd` and `httpdmem` i.e. two commands.
+
+Overall with LwIP adding HTTP `wget` command we are able to simply start
+a host HTTP server to get files from, and this is easy on most host
+systems that have Python lang:
+
+$ python3 -m http.server 8080
+
+I hope this description is useful?
+
+- E Shattow
