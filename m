@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45158C54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997B1C5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF0D381FEE;
-	Mon,  2 Jun 2025 18:16:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DFB481FEE;
+	Mon,  2 Jun 2025 18:16:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="so6/fCWw";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="RW0phDzR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3C0382045; Mon,  2 Jun 2025 18:16:11 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 91A9B81E72; Mon,  2 Jun 2025 17:45:30 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 213E981F32
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:16:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80E0F81E06
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 17:45:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-60657f417c4so2004565eaf.0
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 09:16:09 -0700 (PDT)
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-450cfb790f7so33659705e9.0
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 08:45:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748880968; x=1749485768; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=77/xjSiSua3+DJ+3hA/AhjjUrFZycuAJdHSaJ44WT1g=;
- b=so6/fCWwhoWrBxlZXHx6nDK+QdziWUCh/Wb/qisBa65pMhZt/tXoIUEB3u7c6gIAfg
- laPpk+yi3nc8z7oi7adHNh16neJoV0DNSKzbbFquFQnB717hU8yNHiI8+VpId/0dXvkU
- hIMcQDfjz18JHjX5JYLLWnsv3WcqI3ngaMU4A=
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1748879128; x=1749483928;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t0e+SfJHKuu9n47kWHPigsybqp6o1gVcGQ7yXtPbIN8=;
+ b=RW0phDzRTlP8DJYy3T84VwQyA/YzSWa+sedMgXZsaMnSi7J6ilXDx7v0sGsJ/tCe8Q
+ LVZEmCQA8IrPxPa/m/NTqn8mRs+fbe5TZO4FnbNYkyE4sjxlv/MLft8JRV71coqiw3cf
+ VtFPAu/F871h7CurgqXupxwIe9jyyuKmRZr6JMcqqqarTMly1GybhYUGqpN7d9Cib7xu
+ 3FjufBSmLia37lpo5sjMCE1q1TijmvOSbQyzCFuCXREYGnOMZUNU0rE7BjbeNLTsYQSF
+ NvZp4E0gjBHVghOVxMjQGufA7L3ZD89xPPrxcNg9L8lpK55LuIay00tzZK6Vp/qKKMqA
+ FAYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748880968; x=1749485768;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=77/xjSiSua3+DJ+3hA/AhjjUrFZycuAJdHSaJ44WT1g=;
- b=dDumvJCKUuVDfpMfa6PG8TB6STcIhkaM6BUnHK/flUDYptwlr1K8rxplgdeE/rLc8C
- fZB7dQRi38fek9dLisKNwEri1twRAlvVlmBpO7u4yxbkFh2IfE1k9YFsDJykRf5rFO9b
- QcoTeWp625WOdQb4G4Nc4mgLYvJiwrxVbJEoBolKgRolvDb4tg2f6h3HKWAwdMZEWT1M
- 37VvPBanXnBInsPA4R8YvfiJHxdY6y/yPbgst6jtNBnYdc5v/y3HUinGYucCp2z5FFT2
- 3+aRBFCLhDzbEfXcmf/ViWkH/LgshSnXDJGYs8vi6B1/mJypy1aVXSOjC5Xl6dd8W3c6
- 9TEA==
-X-Gm-Message-State: AOJu0YzqvfuM/VrORESFzB7K6Te/wflpbUUg0c6umd9bAUdXA1deKJKb
- xOcYtaCODipW3iBqNjkPJGhXg/r63gBUZmWtMvimOnKx52MpbK/321mC9LPOG6xfFoI=
-X-Gm-Gg: ASbGnctu6gXYCknxrKBRv+hx1Z6VE1uvesBraXm7J3Xh5L6xqakJRM3mmXzuPf8DVRC
- 8KHsyekpMXyq5Da42Y7h11v+7XsS2pXoJGgVAY4iYKKIGqGSWQU70+UOM6C+Wu9uWu4TEz17FaJ
- bnHd1hyIouOmhExPJmSWuc0Grg90pjD2hCWyKuCWZMhGR9Mcc5kMtqI4WANjZ6qSEv14AdJYveZ
- aGSOx+rA/0tH5FVlzSxVLrri2N+WTY8GozohNKaIFObOQPOFxpQQS26l50X5pScdO5K8KpAvvS7
- K8j+uhRAQFYRA8k1pgj4+I96yeZdgzYLI4sbV4eVFgbG7N6jsFa2B9WyBXa4JjF1QP3rKmPWlkV
- hxDMULpT+TU7RDPs/s4J7RZbywYUPYHu1Gg==
-X-Google-Smtp-Source: AGHT+IFPzU2yhvKj2A9BfTEvvnxc5DRuTlrDuH+zpHGApNS8t4d329jESxMTF33Af+JFhDZitRT9Fw==
-X-Received: by 2002:a05:6820:c8c:b0:60b:ca08:a746 with SMTP id
- 006d021491bc7-60db9e4d416mr6264501eaf.3.1748880967633; 
- Mon, 02 Jun 2025 09:16:07 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60c1eb71a27sm1459796eaf.31.2025.06.02.09.16.06
+ d=1e100.net; s=20230601; t=1748879128; x=1749483928;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t0e+SfJHKuu9n47kWHPigsybqp6o1gVcGQ7yXtPbIN8=;
+ b=MsLKahrlMVF/WjujCQ0iQYrzB6ckt3dXLelRgc0oHtXPfr5+8TegSCaDH/OjMOP54N
+ DR40C56db761EimIHccHeLEfFvnHWuFsaIt7mS19a2XV7Zjhjt2UEZttuDji33sLzy22
+ RJRPSdVySNHQP4PpYAFAb8ynN6dXu872vJMiL7kolokAMaY2MzUdFTeAVUIEf/IRXKpy
+ FVzKvSwjfVMpT0l3ZVXMHWh8onP2lvou+iecl2Uk9MC+Hp42bPEPdjUejB2xolI/MqXb
+ 3BD6VZvakj8J4V3H3N2wrLVdQ/l1elSXpqoV3xdh7KeWCoKXauvYASzbicWccIqxdPz6
+ RRfA==
+X-Gm-Message-State: AOJu0YwDmuVnbUeC4l0+rxD1Q1jELju3B3baIbh4iY4zmctNAKR6nHqj
+ o/8G4QV2yacST9hDE4+k6Fd4GED1UPwtA2HH3BUYZkwPDfuDYyvHwH+CVFzF2i4ARjY=
+X-Gm-Gg: ASbGnctt05YJ9F49wQ9kpcHrt3XfyQEmM5AMxNfck390g2VsAtTNDluAHtKRBV8eKvG
+ WODwnQGYKp0m1QKyornddKeV31FUI5/BXEMzZj6OgFOjAV0YxMoozSDayquP02qIqqv1Kd3IYh/
+ NRPJ7jIihYDZa1POyfy5u3TV7Ha5hTBl0aRVUgdosJlf8g+ipr3UpGQ8zcb4V8Vu0d0gGGLBFzb
+ 6mGuy/pFHNjFaJmKujsdcOEAWPD6QsxBpeNL/HAq7ddr1c54ba9AcE7P2HyJcsJp/XV9LRnYip0
+ aC/9tvymejQDCI581PuighgZNYD/XvveIzqFxsaMtB1WZQzziA==
+X-Google-Smtp-Source: AGHT+IEQayuicv4jss2GPYMnKATvOEv19u3sXTjM6MXxG1LcYZ6DL0HNFNAQhQHm5kdMsmKrz7MDNA==
+X-Received: by 2002:a05:600c:1c96:b0:43c:fc04:6d35 with SMTP id
+ 5b1f17b1804b1-450d64e2a8amr128556195e9.4.1748879127644; 
+ Mon, 02 Jun 2025 08:45:27 -0700 (PDT)
+Received: from [127.0.1.1] ([78.199.60.143])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-450d7fa2247sm129407665e9.10.2025.06.02.08.45.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 09:16:07 -0700 (PDT)
-Date: Mon, 2 Jun 2025 10:16:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Philip Oberfichtner <pro@denx.de>
-Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/2] spl: Add size check for u-boot-with-spl.bin
-Message-ID: <20250602161604.GA100073@bill-the-cat>
-References: <20250527121049.106825-1-pro@denx.de>
- <20250527121049.106825-2-pro@denx.de>
- <20250527134906.GI100073@bill-the-cat> <aD2EflR9DRYG-MY5@antares>
+ Mon, 02 Jun 2025 08:45:27 -0700 (PDT)
+From: Zixun LI <admin@hifiphile.com>
+Date: Mon, 02 Jun 2025 17:45:08 +0200
+Subject: [PATCH] usb: gadget: atmel: reliably generate disconnect by
+ disabling controller instead of toggling PULLD_DIS
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Z8zZeMBcAQE3oQeY"
-Content-Disposition: inline
-In-Reply-To: <aD2EflR9DRYG-MY5@antares>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
+X-B4-Tracking: v=1; b=H4sIAAPHPWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDMwMj3YLSnJzSAl0L42RTUxODlCTT5BQloOKCotS0zAqwQdGxtbUARuZ
+ pkVgAAAA=
+X-Change-ID: 20250602-pullup-83c5540db5cd
+To: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Mon, 02 Jun 2025 18:16:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,74 +103,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Contrary to the datasheet, setting both DETACH and PULLD_DIS bits to 1
+does not always drive the DP and DM lines to high-impedance. This
+prevents the host from reliably detecting a USB disconnect and subsequent
+reconnect.
 
---Z8zZeMBcAQE3oQeY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The symptom is that the first gadget command (e.g., dhcp) succeeds, while
+subsequent commands (e.g., nfs) fail.
 
-On Mon, Jun 02, 2025 at 01:01:18PM +0200, Philip Oberfichtner wrote:
-> Hi Tom,
->=20
-> On Tue, May 27, 2025 at 07:49:06AM -0600, Tom Rini wrote:
-> > On Tue, May 27, 2025 at 02:10:48PM +0200, Philip Oberfichtner wrote:
-> >=20
-> > > Introduce another SIZE_CHECK macro for u-boot-with-spl.bin.
-> > >=20
-> > > Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> > > ---
-> > >=20
-> > > Notes:
-> > >     Changes in v2: none
-> > >=20
-> > >  Makefile           | 7 +++++++
-> > >  common/spl/Kconfig | 7 +++++++
-> > >  2 files changed, 14 insertions(+)
-> >=20
-> > So, for u-boot-with-spl.imx we use BOARD_SIZE_CHECK and
-> > CONFIG_BOARD_SIZE_LIMIT. I think for consistency it would be better to
-> > re-use that option here and expand the help text on
-> > CONFIG_BOARD_SIZE_LIMIT to note which build targets make use of it.
->=20
-> Thanks for the feedback! I've tried that, but I have the following
-> issue:
-> 	- 402K for u-boot-nodtb.bin
-> 	- 152K for u-boot-lzma.img
-> 	- 191K for u-boot-with-spl.bin
->=20
-> The end result, u-boot-with-spl.bin, meets the size restriction of 192K.
-> Nevertheless, an intermediary (uncompressed) artifact, u-boot-nodtb.bin,
-> causes the build to fail.
->=20
->=20
-> Instead of introducing a new Kconfig option, it should be fine to reuse=
-=20
-> CONFIG_SPL_SIZE_LIMIT for u-boot-with-spl.bin. I'm not sure which way is
-> better. What do you think?
+Disabling and re-enabling the controller entirely, instead of toggling the
+PULLD_DIS bit, reliably generates a disconnect event.
 
-Ah, OK, I wasn't quite sure and it's unfortunate that the various size
-check options are all slightly differently named. Yes, if you can use
-SPL_SIZE_LIMIT here to catch the problem, that's the right one.
+The Linux driver works correctly because gadget_disconnect/gadget_connect
+are always followed by gadget_udc_start/gadget_udc_stop. In U-Boot
+pullup() is used solely.
 
---=20
-Tom
+This behavior has been observed on the SAM9X60-Curiosity and
+AT91SAM9G25-EK boards and has been reported to Microchip.
 
---Z8zZeMBcAQE3oQeY
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+---
+ drivers/usb/gadget/atmel_usba_udc.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+index f9326f0a7e7d913bcf201ba3e4aeca9a099e7be7..a38e70957402fb3ade3de611d73e29b990d00703 100644
+--- a/drivers/usb/gadget/atmel_usba_udc.c
++++ b/drivers/usb/gadget/atmel_usba_udc.c
+@@ -521,16 +521,11 @@ usba_udc_set_selfpowered(struct usb_gadget *gadget, int is_selfpowered)
+ static int usba_udc_pullup(struct usb_gadget *gadget, int is_on)
+ {
+ 	struct usba_udc *udc = to_usba_udc(gadget);
+-	u32 ctrl;
+-
+-	ctrl = usba_readl(udc, CTRL);
+ 
+ 	if (is_on)
+-		ctrl &= ~USBA_DETACH;
++		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
+ 	else
+-		ctrl |= USBA_DETACH;
+-
+-	usba_writel(udc, CTRL, ctrl);
++		usba_writel(udc, CTRL, USBA_DISABLE_MASK);
+ 
+ 	return 0;
+ }
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg9zj0ACgkQFHw5/5Y0
-tyyRDgwAkliNOm2equKMzlDB5VKYMENAls+4iM3dR/HgsQJGCqNLpyoDTZriMdmn
-BvlnbIxi/NQI6CC0AG7MrJ6AUqfy0YxyNmiAMKSyM4tY9M2FMO6+gkAz9il9jcmS
-RMPJ5sI1C0GA1YUiQAm9dco6oxGy2z40mgD0b3Zg71G8VaElcZl4XF6mZH/ED8WT
-XKkAvqXOh+UBmoD0O+2nCgL1w6SbZhUMt3+vjQXzt7aIVFLJ6zIm9fsBJ41nY8BK
-adWG5e67L7DNJ9MNsEYZrXUSE7x/3+onmtLIrT066jzjLNLtVMBazePe2zKq5M8g
-NfB1nfaBQ0NDxj7L0TApdqimQD39tTt+7UubL2oLribJf2wvlKhPad0f/KGekjWZ
-N/omp7tWFyemRlkHKdcGA2bS+TTHpURkRNgtc3lkt8n/Hrn9Gr1k/P40MuXTGASx
-CiqzYSfzcUPSoFPPP0ohx6e0wDTEAiZKLgCecDSMLgd5/xw8UANw6AIt1sASkMBF
-XC8o6L2y
-=J04j
------END PGP SIGNATURE-----
+---
+base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
+change-id: 20250602-pullup-83c5540db5cd
 
---Z8zZeMBcAQE3oQeY--
+Best regards,
+-- 
+Zixun LI <admin@hifiphile.com>
+
