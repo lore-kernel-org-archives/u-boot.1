@@ -4,84 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CC5C54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 11:24:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E0B3C54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 11:32:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D782D81FEE;
-	Mon,  2 Jun 2025 13:24:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 02B4481F6B;
+	Mon,  2 Jun 2025 13:32:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sZzbHrWM";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Vu8Cgzaa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55D688205A; Mon,  2 Jun 2025 13:24:28 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BC41B8205A; Mon,  2 Jun 2025 13:32:27 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20720.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::720])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 917C081F6B
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 13:24:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E64680050
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 13:32:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-55324062ea8so5651671e87.3
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 04:24:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748863465; x=1749468265; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xaU4Um61VbIXV94t2a01Ezm10qlb2RX2pWb/TCsLfSI=;
- b=sZzbHrWM7lXIY5pS5BKxzotqBWfDitlf8SkhiZ7ogZVMsJQy+9/kqG71BAl+BvPzCe
- pp/XT5Y31OsJiUW3CUfzxMCMO3JAvXRdmxUryvQl5RHJdo4QXrYyqZYQ6GWd+X40Pd+q
- 2NH3mAjQbVyfj6YyQ7jyeWqYqPEOOT0Zk87myZ9AvMwCMOwKNRGtLUVcBv9rpuae3u3m
- V/IeO6trbkUZ3aCL5/TfhsqdPa71DALuffptMCV1O4ChKKfVNIpQ4+zDfoIvt0GMIbUp
- eTI8J/UTByZMO13BZVIpSqo1zB01qq5tLKZDWseLMjnDSpRR6QNPTtID1NqDskWzx8aV
- qeRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748863465; x=1749468265;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xaU4Um61VbIXV94t2a01Ezm10qlb2RX2pWb/TCsLfSI=;
- b=fqGAyNyspKlEXWLnVFSHtKVLCjY4Ci0I4dW38RDpD25H//fKO9qvZg39NPaO+LLyoi
- t2xxf+quDRULrv14ONdK6FLQI1IuPgcP0THskZLExKrVRfgOie/4n27PTys00OuBVB7h
- pa/SDN4P4m/aH1OYc7gbWM0VmaOlaRTiFh50SOe8NOPNS1w6vJsVu1trUdPSjnTjEmOJ
- +40GUeulDBsm58Bi5d7er+g9F7OqZXZMzSC5VKIEaOzEmhfHzgOfclcKxt9oYTVkah8X
- 20z75takjoUh1wFFCrMfyuMmTaxxGu4Ue3AA9kbk/ZKdcwm4iE5mcfWPq0LxUS3KPNtA
- oVCg==
-X-Gm-Message-State: AOJu0YzsSHtysXAPZKwNvQ+lHh8EjU5L86NQ6rZoUe/mZ614pgxTynts
- KHm81I9NW5NLxrZFSXlIO1dGr+dxz4cTGPJczWUcxn9PJAC+LSa8G1kLundVu4nyK7ghK90x10U
- u8/Tx9X8=
-X-Gm-Gg: ASbGncv9X0Sf9I0zQziw0RbdYciVNFErKNAUZ6GTfOjbhk3IVjWDemeW/RErX4M7pD5
- WVOPS9T945RxxtkvB3axHe4oZAkcmDzJ/PHYJzrcvFkOnlkQGbkF78nKX+Yp43PS3yvISKGv2ZJ
- nGdUxFdY+SE0N4qWTJmj4eAUEnBdAGWbB5QZ54XSvlR5I3QCwtQDJBJPGAhiSZ6csrwncN8hl8m
- aRwNnLCYXvir5rPPmBS2Y5kFuL2/mWTWZGUS3UeDc0SpynRqRZzoOlDnifX0nH3S33RF5uXG6Xt
- /2zjVPzubgtfzEiJjMPJIPvs9z4ihL0DOOwmwBbfYGGCQ/BEN4g6FljsydJQa0eBy35moiwe326
- UNSNG69mc8rtiSImx1G8=
-X-Google-Smtp-Source: AGHT+IEQjlrq725BxJx2bolwltp8jtl2FKt09iQgukKZNMxWOekebvaoG21wEPuJVixkZEX1/Wen5A==
-X-Received: by 2002:a05:6512:ad0:b0:553:2438:8d02 with SMTP id
- 2adb3069b0e04-55343183d27mr1949626e87.47.1748863464643; 
- Mon, 02 Jun 2025 04:24:24 -0700 (PDT)
-Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-55337937858sm1583435e87.224.2025.06.02.04.24.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 04:24:24 -0700 (PDT)
-Date: Mon, 2 Jun 2025 14:24:22 +0300
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?iso-8859-1?B?Suly9G1l?= Forissier <jerome.forissier@linaro.org>
-Subject: Re: aarch64 u-boot reset loop with qemu USB and KVM
-Message-ID: <aD2J5kMOdaMOpRda@nuoska>
-References: <aD181pYGA_0AqWdz@nuoska>
+ spf=pass smtp.mailfrom=M.Schwan@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mSNzPR8vDH/JlkURLLTrkCzh10GM/zlNcKsae53h5ZLKQ8QplZwY2DAog1U+wk/iit95ffesFohBQQl6vF/m4ypAnj7QcdFhHzVeSNxWNAHe6HeAnzqtqJI7SH9YA7+pZV9yU/UAs21UqgGe0d9qN891E426x6ZpCzzVkLqIGmsLnhsDT4rnJOTqEBR7jPu/G07r6lgDW1M/f5St0sxmHS8fwdG03if/ssfQ087TdAzYDfQR7jTtL0cSDKzGdDyXnoXGQgL/Y1M5ctbFXVwlvwbdSnhAc2H4vYUD/Sn5kDkyIa1LI/tK70m1VdiVQRVPFJvntm5x2h5Ry4J9P9KKZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=s0qbH14LAgtO4VBOZn1ptEjwsPQLn04HqxBbsdIZDrE=;
+ b=V9rEYAkjjv3sVwUKXaTbH4JJ3geBvdh8nuPFhlIRRVRXBnzLiQ5F2OPCRY7VeU+etxWTxjZ0yWsd1HOP340TRq/KZS5/wltH58tK7z81biSMnzdjJ0nbrF1hfyj4OV9qR+/qqwF7LURVEOad0QORY8sRpWS5g589zFpM/RJmWRusa1PyyBd+pt5T+PhTPlqpG24DSH/zcX/wilxMfr7S4zagG4DEuNYnRtCI9piXSnVs5QO/9VB74LhpUZuw/P0YiJihVswjYgQZe4boGCmtQ60cx+Lz9YREfpmoWQ3hwcEE8P15n3ZMOohido0QJWQOPlGgVJXFk0NERCZ9CA5H0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=s0qbH14LAgtO4VBOZn1ptEjwsPQLn04HqxBbsdIZDrE=;
+ b=Vu8CgzaaHHnVS44xwFee2Vi8WLVxQ6vQN/JOAfUuRoUGlLhtV0hulOZGSiaLo7wRXEcWNCUfMn2iEEGctmEf3Axi/u6qvmbUNSgkAK4hNGvB3DGowS9ZlsWQmVBjEJGXnAuojNckdf58r5QlDt4PzPrR3/27lfsNrrxWsJzXKcfSnsbtidSI/+yBrURbca5OlfPq/XCIJEsTk7u6UNTmLgrVFrpfPn0fhKZ41NwXDyRvlK0sQGabkxxhpbPeTRWXeI2T8L0XsOITJmRPv/XQU3YBGQuXUsNV20DFVINb3WO22fyAOroxupu5JhO9nEK115VRuZEqOptUvgwmLcNwjQ==
+Received: from PR1P264CA0113.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2cd::14)
+ by GV1P195MB2055.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:a1::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.24; Mon, 2 Jun
+ 2025 11:32:06 +0000
+Received: from AM1PEPF000252E0.eurprd07.prod.outlook.com
+ (2603:10a6:102:2cd:cafe::59) by PR1P264CA0113.outlook.office365.com
+ (2603:10a6:102:2cd::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.23 via Frontend Transport; Mon,
+ 2 Jun 2025 11:32:06 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AM1PEPF000252E0.mail.protection.outlook.com (10.167.16.58) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8792.29 via Frontend Transport; Mon, 2 Jun 2025 11:32:06 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 2 Jun
+ 2025 13:32:05 +0200
+Received: from lws-schwan.phytec.de (172.25.32.67) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 2 Jun
+ 2025 13:32:05 +0200
+From: Martin Schwan <m.schwan@phytec.de>
+Subject: [PATCH v2 0/2] bootstd: New bootmeth for RAUC A/B systems
+Date: Mon, 2 Jun 2025 13:31:33 +0200
+Message-ID: <20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aD181pYGA_0AqWdz@nuoska>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJWLPWgC/32NTQ6CMBBGr0Jm7Zj+gKIr72FYQDvYWUhJW6uEc
+ HcrB3D5XvK9b4VIgSnCtVohUObIfiqgDhUY108PQraFQQnVCKku+OYZB+/Tk5LD0L8MCj00pKx
+ t27GGspsDjfzZm/eusOOYfFj2iyx/9l8tSxR40qKls1ajlvVtdksic7QE3bZtX3MjZ+CyAAAA
+X-Change-ID: 20250129-wip-bootmeth-rauc-03b5e2dd88f4
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, Martin Schwan <m.schwan@phytec.de>
+X-Mailer: b4 0.14.2
+X-Originating-IP: [172.25.32.67]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM1PEPF000252E0:EE_|GV1P195MB2055:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e513862-0071-4ed1-5aa6-08dda1c91a78
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eWQ2cnBFZGhaNUFyRTJ5c3huY2trNjdJU3VTa1RIVVhkV0dkbHYrd0xmM3V0?=
+ =?utf-8?B?V2c5RHloZndnWkFBL3JNOEMwZm1tUTdFUldnK2o2VmFSVk96UTkwTEVWRmRT?=
+ =?utf-8?B?aFVnZ0F3bzRFYnZGNXN2T3BQUXNmVDdLQ0JaUTU5eFozNWNVekEyc3VpWDlk?=
+ =?utf-8?B?NXU4Q2hrVys3RU5kM2M4UlBpZllVdGZ4a0lReFhHWkhSK3RmSVU5TmxFVEE0?=
+ =?utf-8?B?N0dPOFpaa2tOQmhwQ0QyNVVIdHA3dm40bit1cWF5ckt2Z0FsNUdMN05Sdm5W?=
+ =?utf-8?B?cDFxeiswMnRvV1B2Rmx2ZjBiRkRLbmJPUDlQMDc2KytESzkrbGJleXllWU1R?=
+ =?utf-8?B?SUpWR0VmcDNWSTNSd1NFT2VXMm9KaTBJc1F3TlgxbnVneGg3aXc3S3RKMFky?=
+ =?utf-8?B?Zm4rTjBsOGxtdHY0OUl3MHpReWNJdGhiRmcvOEdIVWQwc3pjd0VxYmVqOU11?=
+ =?utf-8?B?YjdYSktjYnF1czVBR3JHWTQ4WlZ5Nzc0RE5RY1JPbDkzcWMyR3hPRk5mUWZv?=
+ =?utf-8?B?dXhwQncrbXBzWUNJcDduZ3JTV0dVWElvMW9LV0NmMEZvSGc0VmY5TjJwelJS?=
+ =?utf-8?B?cHlBejZMTU91OGVxaE55TVdGb29ad0dhS0tCNXVYK0p2Vk9tOGV1RWEzTGtE?=
+ =?utf-8?B?ZXk4bmgrQ0RETkhDVWVQNHRNWThQcjdLV0tkLzJObzdkMXB1bWFaQ2RaZDBm?=
+ =?utf-8?B?TGkzaEx2TTdncitLRUhhckZwM0FlRjJUWFIxbklXc1I4bHdBNElLTlNPR3VL?=
+ =?utf-8?B?dmE1T0ZLZmN3N09GWjYwU2JyQUpaSU5TVGFtc3BMU0w4bldrUTZHemFqZm9C?=
+ =?utf-8?B?VkNocHVlMkZNNC9icEtKdnBBTk1GWFhsNlBjcTc3STVrWEkrbUF6WlEzb0l5?=
+ =?utf-8?B?WG0xaDR1a1l5bkg5VGpQSTdvNE52WXR6M3prS0dLaGh2VUZ3bFo4WUpnN3R1?=
+ =?utf-8?B?aXBHSnMxM09pVEsreE5CVlljcVNqcmJibW1taTVseTV6RzVSTEI4Y1NuWU43?=
+ =?utf-8?B?SkNPNUszZjYwdExjWXhlZnJtaW1Zd1dDcERyL3paOUlqdUZFUGlqeXB3bUJp?=
+ =?utf-8?B?MGZRTEl4OS81enFEU2ladnlPMDllK2puemNINjBoYThmWDVUZzZpRTQvL0Fo?=
+ =?utf-8?B?ZHhrYzhDczlRaFlxTVNUcTBJdmxZZnlFSlQvbWROSmNzNlh2S2JadGgwYng4?=
+ =?utf-8?B?RWlQek1VS08rRXZ6Y2lSTEVjVGxEc01WUEJhTkJUMm1oTnFhMlRmZ2xMZHNU?=
+ =?utf-8?B?TUFacVh4dGNicW1jZ2tXL1U5WUtvdU8wZ2FXYkd1NGJHVk1EeThzV3VlVzhJ?=
+ =?utf-8?B?emNhSzBzWks0WE1SQmpGTXVNZ3pFWXpmNEtENnJKSUl3QkE4bWdub1ZKcmhz?=
+ =?utf-8?B?R3V0QlF0T0tLbmZuYjBvbStLd0pRbDUyS1prNnY0eTFqVTBmZU9VaXVXaFZK?=
+ =?utf-8?B?SFhQRGNkekxIaHMyNDlWWVp3bWFRS0V1WENkY1U3ODBScm9nUHp4a2ZRYmFs?=
+ =?utf-8?B?R2ZXdkc1Q0o1bk8zQURURFFHdEkweGxEaWp6ekF6djJEcnZSL056eUVTQjBk?=
+ =?utf-8?B?NjJXakJxVGZjNFMzVWhCSWg2citHUHZkVk5FbUcveDN1OWp4M3NIbVBNVEg0?=
+ =?utf-8?B?eHhVbFJaVmFTelovNnBjdURCQWlRV2cvT0VOVWt5c0RZeEdTM3J6M3R1NUQ0?=
+ =?utf-8?B?Z3oxelI1dW1ucnNIRmpkSjZpQUYzSTNsWFZnck15eVlwcFJEdlRxRWxjc3lL?=
+ =?utf-8?B?K2E2UTRpQkV6RFd0c2l1L3hITDlVRUwvajFmZUE1dmRyU0V3NHhxem9FcmV2?=
+ =?utf-8?B?QjhLb1BtWXJnKytFcFFMYWRYU3lNcEdjR1dwQ3VLRlpqSW9pQTczVVdyZktQ?=
+ =?utf-8?B?UExReUtudENjbG5GNlV6dVRXT3FEQ0F6aDQxT2Qxd0U2MXF4Vy81KzFnRDdM?=
+ =?utf-8?B?SGk3Sk1LL0pCOElpZTNPamdVaDRJczdiVFJOSUpwNkxZa1Q0UFlhSk96cmhF?=
+ =?utf-8?B?ZHIvY0szdGxnPT0=?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013)(13003099007);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 11:32:06.0625 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e513862-0071-4ed1-5aa6-08dda1c91a78
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM1PEPF000252E0.eurprd07.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB2055
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,98 +159,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This series implements a new bootmeth for RAUC A/B systems. RAUC (Robust
+Auto Update Controller) is a lightweight update client, providing "Safe
+and Secure OTA Updates for Embedded Linux". See the following links for
+more information about RAUC:
 
-On Mon, Jun 02, 2025 at 01:28:38PM +0300, Mikko Rapeli wrote:
-> As was discussed over yocto/OE-Core mailing list
-> https://lists.openembedded.org/g/openembedded-core/topic/113306017#msg217258
-> qemu machine with USB and KVM enabled goes into reset loop with
-> u-boot. I've tested u-boot 2025.04 and latest master branch 2025.07-rc3
-> ( b22a276f039f818d5564bec6637071cfc8a7e432 ) with qemu_arm64_defconfig
-> from tree and CONFIG_BLOBLIST disabled since that to has issues with KVM
-> ( https://lists.denx.de/pipermail/u-boot/2025-May/590101.html )-
-> 
-> To reproduce:
-> 
->  * qemu 10 or 8.2.2, version does not seem to matter
-> 
->  * aarch64 native machine with KVM support
-> 
->  * qemu-system-aarch64 command line:
-> 
-> $ qemu-system-aarch64 -machine virt -cpu host -machine gic-version=3 -smp 1 -enable-kvm \
->   -m 256 -serial mon:stdio -serial null -nographic -vga none \
->   -bios u-boot.bin \
->   -device qemu-xhci -device usb-tablet -device usb-kbd
-> 
-> U-Boot 2025.07-rc3 (May 30 2025 - 19:44:05 +0000)
-> 
-> DRAM:  256 MiB
-> using memory 0x4e662000-0x4f6a2000 for malloc()
-> Core:  51 devices, 14 uclasses, devicetree: board
-> Flash: 64 MiB
-> Loading Environment from Flash... *** Warning - bad CRC, using default environment
-> 
-> In:    serial,usbkbd
-> Out:   serial,vidconsole
-> Err:   serial,vidconsole
-> Register 8001040 NbrPorts 8
-> Starting the controller
-> "Synchronous Abort" handler, esr 0x96000010, far 0x10100040
-> elr: 000000000005a360 lr : 000000000005a344 (reloc)
-> elr: 000000004f6fc360 lr : 000000004f6fc344
-> x0 : 0000000010100040 x1 : 0000000000000001
-> x2 : 0000000000000000 x3 : 0000000000003e80
-> x4 : 0000000000000038 x5 : 000000004e66fed2
-> x6 : 0000000000000000 x7 : 0000000000000000
-> x8 : 0000000000000000 x9 : 000000000001869f
-> x10: 000000000000000d x11: 0000000000000006
-> x12: 000000004e561a68 x13: 000000004e561dd0
-> x14: 0000000000000002 x15: 0000000000000000
-> x16: 000000004f6ee774 x17: 0000000000000000
-> x18: 000000004e661dd0 x19: 000000004e670480
-> x20: 0000000000000000 x21: 0000000010100040
-> x22: 0000000010100000 x23: 0000000000000000
-> x24: 0000000000000000 x25: 0000000000000000
-> x26: 0000000000000000 x27: 0000000000000000
-> x28: 0000000000000000 x29: 000000004e670360
-> 
-> Code: d5033fbf aa1503e0 5287d003 52800002 (b8004401)
-> Resetting CPU ...
-> 
-> resetting ...
-> 
-> With KVM disabled, or the qemu USB devices disabled, boot with u-boot prompt and
-> to full target system works.
+  https://rauc.io/
+  https://rauc.readthedocs.io/en/latest/
 
-I've bisected this now and first breaking commit is:
+PHYTEC uses RAUC in its Yocto based distribution "Ampliphy" as the
+default way of updating embedded devices based on PHYTEC hardware. So
+far, the logic selecting the correct partitions and files to boot was
+being implemented in the U-Boot environment. While this is a
+straightforward way to do it, adding and supporting new platforms became
+somewhat tedious and is platform-specific. The introduction of U-Boot's
+"Standard Boot" provided a convincing alternative, promising a simpler
+and more portable way of booting, even for RAUC systems. This led me to
+implement a new bootmeth supporting RAUC A/B systems. Note, that this
+new bootmeth is not proprietary to PHYTEC products and is designed to
+work on other hardware with a RAUC A/B system, too.
 
-05e2fa79310ab30dd3e3fe522333aef3cfb1c421 is the first bad commit
-commit 05e2fa79310ab30dd3e3fe522333aef3cfb1c421
-Author: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Date:   Mon Aug 14 20:39:43 2023 +0300
+The bootmeth currently only supports symmetric A/B partitioning layouts.
+E.g. A/rescue is not (yet) supported. The partition indexes and default
+slot tries can be specified via configuration options.
 
-    arm: qemu: Enable usb keyboard as an input device
-    
-    Commit 02be57caf730 ("riscv: qemu: Enable usb keyboard as an input
-    device") adds PCI xHCI support to QEMU RISC-V virtual machines and
-    enables using a USB keyboard as one of the input devices. Similarly,
-    enable those for ARM virtual machines as well.
+For now, the bootmeth_rauc uses a similar approach for loading the
+Kernel and device tree as the bootmeth_script, in that it requires a FIT
+containing a U-Boot script loading the desired distro. It could be
+possible to support booting without a script and load the Kernel and DT
+directly with this bootmeth, but I found the script method to be very
+flexible for now, in letting the distro decide what to load.
 
-    Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-    Reviewed-by: Simon Glass <sjg@chromium.org>
-    Reviewed-by: Bin Meng <bmeng@tinylab.org>
+The bootmeth_rauc was tested on a phyBOARD-Pollux i.MX8M Plus [1] with
+BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2 [2].
 
- arch/arm/Kconfig                      | 5 +++++
- board/emulation/qemu-arm/qemu-arm.c   | 5 +++++
- board/emulation/qemu-arm/qemu-arm.env | 2 +-
- configs/qemu_arm64_defconfig          | 2 --
- configs/qemu_arm_defconfig            | 2 --
- doc/board/emulation/qemu-arm.rst      | 4 ++++
- 6 files changed, 15 insertions(+), 5 deletions(-)
+Supported boot devices are currently only MMC devices, but it should be
+possible to add SPI flashes in the future.
 
-So looks like with KVM, CONFIG_USB=y triggers the reset loop.
+To test this patch stack with PHYTEC's phyBOARD-Pollux i.MX8M Plus
+board, you need to adjust the boot files to include the boot.scr.uimg
+containing the distro's boot script and set "optargs" to "${raucargs}"
+in it. Also disable any legacyboot in the U-Boot environment and simply
+boot with Standard Boot:
 
-Cheers,
+  bootmeth order rauc
+  bootflow scan -lb
 
--Mikko
+Regards,
+Martin
+
+[1]: https://www.phytec.eu/en/produkte/single-board-computer/phyboard-pollux/
+[2]: https://download.phytec.de/Software/Linux/BSP-Yocto-i.MX8MP/BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2/
+
+---
+Changes in v2:
+- Remove LOG_DEBUG from boot/bootmeth_rauc.c
+- Reorder asm/cache.h include to be last
+- Do not check for RAUC-specific files in the rootfs anymore. This does
+  not work on encrypted root filesystems and is not a stable indicator
+  for a functioning RAUC system.
+- Add a description of the term "slot" in the corresponding private
+  struct.
+- Remove boot tries left from struct distro_rauc_slot. The boot tries
+  are read directly from the environment, as that's the only correct
+  source RAUC is relying on.
+- Remove the current boot_order from struct distro_rauc_priv, for the
+  same reason as above (env is correct source).
+- Add function for retrieving a slot struct, to ease finding the right
+  one when e.g. iterating or getting by name.
+- Fix multiline comments.
+- Fix various if-statements which were explicitly comparing to 0 or
+  NULL.
+- Free various, temporary instances of allocated string lists.
+- Set default env values for BOOT_ORDER and associated BOOT_*_LEFT
+  variables. These variables are mandatory for RAUC to work.
+- Use calloc() instead of malloc() for allocating the private slots.
+- Use config options for configuring the partitions and default boot
+  order, instead of setting them via the U-Boot env.
+- Use bootstd_get_prefixes()'s return value and check all available
+  prefixes for the boot script.
+- Add a proper boot order selection logic for the rauc bootmeth, similar
+  to the previous environment scripting, with fallbacks and slot try
+  checks.
+- Introduce config option for resetting all slot tries in case they are
+  all zero. This may prevent a system from locking up in the bootloader.
+- Rename env variable "mmcroot" to "distro_rootpart", to be in line with
+  "distro_bootpart".
+- Change the bootmeth flag to "global", as the rauc bootmeth does not
+  work for individual partitions.
+- Update documentation accordingly.
+- Link to v1: https://lore.kernel.org/r/20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de
+
+---
+Martin Schwan (2):
+      bootstd: Add implementation for bootmeth rauc
+      doc: Add description for bootmeth rauc
+
+ boot/Kconfig                     |  51 +++++
+ boot/Makefile                    |   1 +
+ boot/bootmeth_rauc.c             | 432 +++++++++++++++++++++++++++++++++++++++
+ doc/develop/bootstd/index.rst    |   1 +
+ doc/develop/bootstd/overview.rst |   1 +
+ doc/develop/bootstd/rauc.rst     |  56 +++++
+ 6 files changed, 542 insertions(+)
+---
+base-commit: b22a276f039f818d5564bec6637071cfc8a7e432
+change-id: 20250129-wip-bootmeth-rauc-03b5e2dd88f4
+
+Best regards,
+-- 
+Martin Schwan <m.schwan@phytec.de>
+
