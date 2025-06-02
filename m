@@ -4,86 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB663C54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 12:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32985C54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 12:09:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 051C882116;
-	Mon,  2 Jun 2025 14:05:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 918A982116;
+	Mon,  2 Jun 2025 14:09:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n5YTW98m";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="UfT4gLeq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 325F082145; Mon,  2 Jun 2025 14:05:01 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2619082145; Mon,  2 Jun 2025 14:09:26 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20617.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::617])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C01CD81F6B
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 14:04:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9819E81F6B
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 14:09:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-450ccda1a6eso38405875e9.2
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 05:04:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748865898; x=1749470698; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JMC5Aa0hcyUDnsHEKEMMj64uYSfKeEj9X7MtI7TKWMw=;
- b=n5YTW98m1fnGDJuuDCkmMKNdr85tV937ppBxP4scQEkYCMUlbTMMyOqfocMfOi1ZvF
- c1Us4smCJSGlcR5x/Wy92K0lDMGUiSejV1s/42YniPOmIRBxTWwOYJc/Rrt8miCbLYX8
- aiAWNWwy0uDobWJI0fyyjeYOhkdX6TEsXeuvfWhK2MISEVsTSdIMcEN/qrczJrPW0Uhf
- y61zWZy5mIW2GeApMRKO/ucjxdkrJix//jdcr79UDL0Pl98YvtQxS86o4EkKQn649xdF
- Umx0i2pD9EnWHtuGY6z/jaKiEj5YokuzaIsLTojWUP8MzqIV2hLaJ9/B2iGOakOf+me5
- RMVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748865898; x=1749470698;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JMC5Aa0hcyUDnsHEKEMMj64uYSfKeEj9X7MtI7TKWMw=;
- b=S9KPuGP6ZQyDkjv2Vn06MNtF6JpEZ6VogevkXYYxJSwS+Q9NVMK8MoomHT0OdVydV+
- Y5ypGXZaq0JLo2K0Re/UEGO0KIDP+DxTwIHCsG93yakAdeddKfadmZL0USu5Ncv/NIhE
- BKUJV2L/sT/RC8Btik9TXMIx5DrdnqK59Ee/nmMfXIBjZ8KfQFCqwLvfnwQDKUwQV6PS
- 0d4Iusuc2H1Ek1kGwkjmMhgLPGeAvSfncnUcwu7NU8XjAfWvkYDR0ZcXaQNqUPb3KGmD
- dAs2QSa849KIrAM/ryArahYUbqM17WpHdBDngq5cYXgeU4wYZ97IZF8ijMeHmgR76oC4
- h2Jg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsDt8G9a71JRmF/adOoIVinikX5roVF14xEnZ5Bqb+q0gM7ScLcZ4Y4NTA20ti3xtSTi/JMYs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1i26ApGrcxtBQEZQGjJolwSIlD0QYxCjwvBfh50CBpI6rA4sB
- JKYQBqPs+zR8vKP5d/kA79gGsEytEB7uc60qVlju8bTh6IvNvArO1N0wf/Wf9PVAizQ=
-X-Gm-Gg: ASbGncuarjuo5aS4cWFStz2SwbZ05lW33F3NvbYENBJ386yeuh2m/Kh4ZHkPXaMDP6V
- PyAuOuRp3lx/CqeuEp/uc6U73BCBM05weIu1wEdpxFAt/xfliw7CTmIv1mLspz1/3bzdf7FmwSK
- gsLeFgru22leKZVgtv4gp65H6PWQJJcNIz9n9ZGcV7rVdi7ZdYVfd0jlkhJS78icdLYnbAlxwLQ
- OZPRGIQe0CY9wJkEhQebpnj20nGlDSC2Uvjt0Z6s9hf2EboNeXs1yy0NrSGh6kNqLGYU7rY3xtL
- mlwmfsnkHmiDi/K+9ui4XEdjjzEgSXva/Vovqk1EiYvazJYUvuWdmQHq02n43wR/pvvQ+Q==
-X-Google-Smtp-Source: AGHT+IHJF7pFn7fs6sVMQNgK6bWcZAyr/TBniebAb4lvyS2yfXakQ4N7Wf0vsdgPsLGJRnskOrHBTg==
-X-Received: by 2002:a05:600c:3b97:b0:43c:f87c:24ce with SMTP id
- 5b1f17b1804b1-450d885e52emr97945685e9.21.1748865898002; 
- Mon, 02 Jun 2025 05:04:58 -0700 (PDT)
-Received: from [192.168.1.221] ([5.30.189.74])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-450d7fb0467sm120321135e9.19.2025.06.02.05.04.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Jun 2025 05:04:57 -0700 (PDT)
-Message-ID: <72a265ca-d5e7-40ca-b05f-5a3cf8f0f0c8@linaro.org>
-Date: Mon, 2 Jun 2025 15:04:54 +0300
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VEqhEM/UuwkzUW7RC0VDuS8T0aImQK1zj3Ftph0e2bNM1OURHw+XY+cX5Q0VPB/rWbJTKRu4q3pZXaqB5VkeFCOXkWkfhPjPhJ8eTHZ0+kdEN6lf3s3/bjrlST645GMXYL4gFQ42YV6/xNVCkAsyRYB2Yxwm9wryjRfiwlzG0yu/m+KybNG7AEXhLCApKuaPrOtTopf3rzZxQJga9wGhFWuzfGgFz3iqAburHEkrBEVGh4ZizMxoEUGREgl34bKsVb5vS4+ZcCs5cLeqZ866KjX8bqvlw1amjsN35n+bKfSxXlEx5idR8fKiIFz4GboojQ7FjA9uG7lAu09NyV2b6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DXv+fy4FbqWttjuPPzkEG7PSJsAh9dnuZDx3v9hBXvA=;
+ b=o9foVF+4gqwmWW4q8bO12Xba5mP7ah1FEWM4ft8mpTiHnRgJF9nuV1kJWpS5rOUnlm+01EmoBAxfVIRjxgSumgbG5+kW85SXZe5TiSngr+KiM02C06DR9X0lO8x8PRrMhqOeBKjYA8fWcXh0T7yYtZkzfs1551ASkYQ8toF7m8bI8qcDJvyMhchzS3QA/P14/KO0vWp8BNcp3yBxnB5zJJQfEMeFTN5FvE6cNYukeYbvYOkR9jjmrCtiF3cISLRkCfcDo9Q12FJl/lTkGUDsy/hZ0ALVK6D3d2IhX5HArTB9AfiULqelRBmpDQTKZ9s3ceuLzbMm5KEAckv5kjK6jw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DXv+fy4FbqWttjuPPzkEG7PSJsAh9dnuZDx3v9hBXvA=;
+ b=UfT4gLeqHd8kZ0NmKxHFvf5dIhoIZW1b5aMXNS4IyL9kvP1wwq7al5lMuMYOLPrsxJLrKIL4LljSbnH7O7pJCGf2Jfo+ovlnTXCL1nixvDoZirg5jQZUEkMqnRxlTMngi1ydL8WZwbmiglUxBSitEFCUCFv0GvK5cb77IJ6QkLo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VI2PR04MB10691.eurprd04.prod.outlook.com (2603:10a6:800:26d::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.30; Mon, 2 Jun
+ 2025 12:09:20 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%4]) with mapi id 15.20.8769.037; Mon, 2 Jun 2025
+ 12:09:20 +0000
+Message-ID: <25cd60e2-5585-4c43-8914-8d763123f319@cherry.de>
+Date: Mon, 2 Jun 2025 14:09:18 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] atmel: Remove local <dt-bindings/pinctrl/at91.h>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Mihai Sain <mihai.sain@microchip.com>
-References: <20250528000118.3002916-1-trini@konsulko.com>
+Subject: Re: [PATCH] Revert "booti/bootm: riscv: Verify image arch type"
+To: Mayuresh Chitale <mchitale@ventanamicro.com>, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+References: <20250529033052.399573-1-mchitale@ventanamicro.com>
 Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250528000118.3002916-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250529033052.399573-1-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PA7P264CA0469.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:3dc::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI2PR04MB10691:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c8935f1-c6b5-41e0-8a12-08dda1ce4de6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MSthYmRlR2k5U3Uvd08vUDBzSzl1UlBxbXRSQnBDZkhGZmxMNS9xaUxFMllq?=
+ =?utf-8?B?anR5UFFaN0lTZGV2cFRiVERHYUhHbU90eklkdXdBQ1c1cnZFY3kvNUIyaXh1?=
+ =?utf-8?B?UzBGMmNtQnNxQW00V1VzR1dVemk0SjNQTlVzcFdLSXh5c0dnNVdBQUlwSWpY?=
+ =?utf-8?B?b3EzWFJFZGxqY2hqL25OalVKMFBOK3JaSC96TzdZb2ZEdGh0d25iVHZ6UTBn?=
+ =?utf-8?B?V1hWZ0JseFl0UkdkZzNiZ1Fyc1NxSG1waE1TUm9idHU2dzdHVTJCa3FPN3lL?=
+ =?utf-8?B?cUs1K0h3WXA2TWxVd1BNWFhYTERmSlRCQktneVlHaGlVdGZHRHduWnNyZ1Yw?=
+ =?utf-8?B?WTdjTTV6N0ptUHBmdjMwZm5teE9TUHI2OHlqMGJ5S29jaThkYWtYekJGdjlu?=
+ =?utf-8?B?aTZkVzJ6NTJpNTJHZDRnWGo3RldyM2duV1lBWTBES2hDR0diWkdWQm8vWUV1?=
+ =?utf-8?B?SDltZUZTYUhXZUhieTlyUklsY3FrT1ZZSXNEY0oyVW5EaVFnTGtqY3ZGcm1X?=
+ =?utf-8?B?YTZhaFpFTlZhVXFKVWk5aVB6akhXNUJyRGRvdjdqcnJid3ZsbndvMlVMdjFt?=
+ =?utf-8?B?YXpmd1RLa21YcE1FWmc4QXYrQmxNdzJCQncwZDZNL2tpM3BNZHBaZEhmYW9t?=
+ =?utf-8?B?NnZVLzBVcTRRbnNjS0hXRjcwVzl0emZvWDRBQ0RKQi95L3VsZUFad05xZnBr?=
+ =?utf-8?B?eWhhNU9IckdYY1BNS1lZcmNZMG9TSlB4Z3F3V3BZNmdaemozT0FFVUR3dnAv?=
+ =?utf-8?B?bkJFbmNiYzJnNEd0VUJmeWtmOEVJd05ZdlYrcUxIUWJkZ3ExcEYyM2dnVnN0?=
+ =?utf-8?B?Uk9haVRHb0RFVWlGNnFGS1BxWUM1SmZ4KzJKc3FSc2VTT3h4QytQaEpkaEww?=
+ =?utf-8?B?T3BnTndkaEdXTHBTSTJSeW9Fa1I3VEZXVzVHOTZJenZrbktRYWZGWndCSndp?=
+ =?utf-8?B?eWtTOTRFS0wxL3FDMmNBZDkwZDM3cG1sdUZVU0lDWWhJQ3dFUkVpWElLYVJz?=
+ =?utf-8?B?TmpXTFppdVJtbnpBS0txYmJ2Z2QwdDhLcXZURXpNVFgxSlh5T0xpWENSYnVj?=
+ =?utf-8?B?cmZMbHJETFR0UzVEV1l2NlJJanB5dVFFMlJSc2Exak1pZ1pDNlZ1RjBXU2xC?=
+ =?utf-8?B?WTFKanFNbnB0ZWdMMnJtVDNPSGxabjFqcUFINHJLYXhBaUxGMW1Dc25zWXpn?=
+ =?utf-8?B?bE9VVUg1K2U3OVg2UWRMaGM3SmtBSmJtZmRDbG95ZUZqOXNIOEtWdmcyWjM3?=
+ =?utf-8?B?ZWM0NVVpc2FXQ3Z1bHM3dERSMkZUa0NRazN6elB4Q2FuS1VzaEJYbnhndml6?=
+ =?utf-8?B?N2dvRFo3NHYvY0I4TWdZSUFldGVaaHhOMmZ5NXJOYjJ2WWRMRE85T0YwcXoy?=
+ =?utf-8?B?WGVvSjhGbG9yaXU2d3ovbHY0TWYrQjFYRmhaREk1Y1d2ZDYvazlNcHhKcTZ0?=
+ =?utf-8?B?VUN4dEhPaGlEZXpYZEcrYzAwbEsvd0EwTkVNYnJ2OWhrVHdUYzE2WkdSVk5O?=
+ =?utf-8?B?YkFOUEZXaXlLeFNXV1BwNTJXVFYzangvUXJjK3pOdVlwelZJeUluOXBrdHo3?=
+ =?utf-8?B?bDhxU3Bray9wVjV5YnZjbkRVYUR4d1VKbzducjV4ZmVOUHpsVGxkR0FMNHRX?=
+ =?utf-8?B?QzFnSWNteFV1akJRcmtkUnNJWER1R3grRmloQ0dVTjh0NUUvUDZwbjZXQXpn?=
+ =?utf-8?B?RWxxQzUremxOMmpGZG9OSHVwUzY3RThKdFU5RTlBVDFRcjRrYjYzZWhzeDli?=
+ =?utf-8?B?RWU2YlRVeGxMa0d3d2ltcXRWcE15ZFBkdXlCekdSQmYwK3pKYUtGUXVISjgw?=
+ =?utf-8?Q?PDOm9M7aGEcCQ27KVVyuJNVR8ON2w2eGVmuYU=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MitVUkU1aEgycmxnTUcvNVRKYjM2UUlSeUtoVEhzVXlaSXJJRk0wMHdzb212?=
+ =?utf-8?B?MTRjNTRjemlvUUtDZ0IzQTRzejdGclp6U1h0V3Z0K0pxQkpvdlJza1Y5K29B?=
+ =?utf-8?B?UjlBVXlmY3JHUFhYM2p6R05FK1I4RDB5L0Zhc3hMb3JwTERBS24vREVsaEZO?=
+ =?utf-8?B?OUVNaEs0Um0wVzcrY3BjTlpCUGI1NjZFZVBEdlpJOVhENnpZcEVVcTJ6WXho?=
+ =?utf-8?B?L0Y5Vnh4eFlsUEl6SW9nZ2FUeXNObll5V3pwUHhjZ1VEQVpLQ3VMcVk4OGc3?=
+ =?utf-8?B?RHMvMS9mN2xPT0lLYTlweWxtcTM1L0FaQmcwVHhWVEJGZ3NJOXBqMUJBVzNN?=
+ =?utf-8?B?Sk0rcmI5SXVYdUFsbDVzMTZ6MGhpSlU4b3ZsSnIvVUZHcWZGTVh2TzIrQ295?=
+ =?utf-8?B?Y0F4Y2JoTlA1L29OQm1jVE53YVhqNXA2eWJHSTlMN3ZLZUhCeFdiWUF4VDNy?=
+ =?utf-8?B?aFo1MjU2NWlxZlhjdDk4aE9DZWt4S1grUStIa3d2UVNtSktRV0w3dUdnMGpU?=
+ =?utf-8?B?SlpQbU9FSWV1Q2ZZbTZOTytoWmhHVnF3aHdaWlRQSEE4eDhSaTNCTjhoU2VH?=
+ =?utf-8?B?MlQrRG1ZL0NmUUR0MjZSWFVQZjNXMHMvb09raytjaTE5Qm93SW9OampwbEFy?=
+ =?utf-8?B?cnVPdlU2QkFRUGxZcHhNdkRtaTBjbU5WQWk1UDBKbzVCUkl0N3NhT1AySllC?=
+ =?utf-8?B?UER3SUl6QXRqK3VDYW1vaEtJaWNTa2lOUUZmTHNxQmpVMnVmaFI3NW8xaGdm?=
+ =?utf-8?B?SXhMOUI2V3haU2FXZWVyamU3S3pZcHI3MzBxMys0cTh2MGpQcERLZmJyckc0?=
+ =?utf-8?B?T3UzaHN4UGQ3K1lPQmdGUUN3cG1uQ3dzUldxODNCY1dnR0VMY0F2cGVuU3N6?=
+ =?utf-8?B?QlpyekV2S2N4U2JRRE04OHlIYk5YRTM3WENBaloxU2VoT2xIN2lQa01sU2JN?=
+ =?utf-8?B?N3k0QkNoa2NjeW12MFJIRExxRXpPNG40eld4V3dTZ2FaVVFmZGNzd3BNYXV0?=
+ =?utf-8?B?cjlraE5nUVJUOEgyUWlQUllONWIxTjBBTm9kK3F3UEZpTERjR095M3EvVHhU?=
+ =?utf-8?B?aEhjN2h0dmxkN3UwcGJZQXlhdExKSHNjWHlTQVJ6OEYrSmltb1JQaEQrTE05?=
+ =?utf-8?B?Mmdnd3FzMXRYMHlqNzdnbHdLQlF0TXFia2lDMUhOQWRGdy9hd01wWTlpcTNh?=
+ =?utf-8?B?MERTbDU0d2R2dlZWM2h1NGlnQWhhcUlkMVc4MVJDSjlsSE9rcEhJQ01mV3Bu?=
+ =?utf-8?B?bURFL1FudG1QdnNLU2RTRjFCdUs4cmlQRFhQdmxWejdsQUVtamFubm5Zc01x?=
+ =?utf-8?B?S3l0cEMyOHJScVRrVjBUV1hSczM5Zk0xNHlSbnQxczJlaFZpKzhwcEF6ZHlm?=
+ =?utf-8?B?THNUeDhmeVBhZjA1NGRNRXFuREExbTBRTG9reG9BdUwwWGl6WU96V25FUjlS?=
+ =?utf-8?B?Y2RPTlRIdHloS3gwaWozODgySElhQUl5amJyS25aQUVPS1N2a1VRRklKTWJH?=
+ =?utf-8?B?OVlqQVVYU0p2di9uOTRLNmlObDBoTzdYdGptWG9nZ0xJZSt6cjNvSXJhcjVs?=
+ =?utf-8?B?UjFBZjI5Qmw1cWNIWGM4a0kvNTVuSWJ2QXl4Um5OUHVWR1d3Mm1QZGFMR3Rw?=
+ =?utf-8?B?d3MzN1hzdVRaSW44WEpDaVpJVWd5RW5yZmFkejY4MlkwaTQ5WEsvNlIyVmx5?=
+ =?utf-8?B?M0hJOW5RREp1YkxONzhMR0xVOFZoL3JHTm10UXRUTmIrck5nSVhtU3A5b0lD?=
+ =?utf-8?B?MW5rLzQ4MXFuQkNmUU9wSjdyOXJTR0Z4RlJFS20yYnBvKy9mdnBITklGd3pT?=
+ =?utf-8?B?RTZydDJzL1c5VGpBRnZaeXhieE8yQzZKSjFRWno3UWNUaVNMTmllcU02ZmhT?=
+ =?utf-8?B?WCtMdkZyVUYxQldGdzB5d1E3Mi9GZWFsQ093REwzRXh0cnZ4WmxNdXl0QlM1?=
+ =?utf-8?B?TTVrS1RRZ2dYMDI3dFZLdDAxTkVSZTVNREFScG1Uc0x3cE9OWFN0R1dRa2tj?=
+ =?utf-8?B?dngyd1RTbHNVWDVuWW9yZmJJbW9xZHpQQTU1eFpQM3pZTmpaTjBiQ0xlS0tz?=
+ =?utf-8?B?Z0d6eWx4Vzkxa1hlZmdiS0FQNUhPajNJcEtnR1gvSEkveHAwRVUyS3dVQkxE?=
+ =?utf-8?B?WFVxdFgxTkkzbTB0dGJtZE0xQUliOEoxL0EyakpFRFN3eUhpU2pyZnhLSFNv?=
+ =?utf-8?B?U3c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c8935f1-c6b5-41e0-8a12-08dda1ce4de6
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 12:09:20.0197 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2wAV+K2OScKBuFalNw3ALo6gXPWhG8/LGBBqz3i6AfadwEKTnbzyi6pbzLEbgeJAhg1k2Gq8RjNpspwZxlN13QF9gGU8V5wjVSkgSrLMSGA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10691
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,114 +172,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Mayuresh,
 
-
-On 5/28/25 03:01, Tom Rini wrote:
-> We have this binding file in both include/dt-bindings/ and
-> dts/upstream/include/dt-bindings. These files are identical save for the
-> fact that we do not have commit adb2424d0d05 ("dt-bindings: clock: add
-> clock definitions for Ralink SoCs") from the kernel applied. However,
-> this change is rather important and should not have been omitted here
-> most likely. Remove our local copy to get in sync with upstream now.
+On 5/29/25 5:30 AM, Mayuresh Chitale wrote:
+> This reverts commit 37b0b22d8b7bbed6aa95b6daed06dcbf4a66f211 as
+> discussed in [1].
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Eugen Hristev <eugen.hristev@linaro.org>
-> Cc: Mihai Sain <mihai.sain@microchip.com>
+> [1] https://lists.denx.de/pipermail/u-boot/2025-May/590841.html
 > 
-> The full kernel commit log is at
-> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=0b3292852863215825f88905b9dbafc3101e1d7e
-> and so this sounds very important. Please let me know if this should go
-> in master for v2025.07 (or Eugen, please pick it and send a PR). Thanks!
 
-Hi Tom,
+I would recommend to add a little bit of context instead of simply 
+pointing at some mail (which also is only Tom saying it's fine to revert 
+as people shouldn't have shipped anything with this patch, not the 
+reasons for reverting it). Also because links notoriously disappears or 
+get broken (though I do have faith lists.denx.de is probably here to 
+stay :) ).
 
-I do not see the connection with the Ralink SoCs. Maybe wrong commit
-referenced ?
+Same remark for the other patches. No other feedback from me, I'm not 
+involved with RISC-V architecture.
 
-Anyway, on the slewrate bits, as of today we have DIS==0 and ENA==1 and
-the driver treats them the same way. Hence DTs with DIS flag will have
-the bit erased in the register
-
-With the kernel bindings file, DIS==1 and ENA==0, but the driver still
-considers DIS==0 and ENA==1 , so the DTs that have DIS as flags will get
-the bit written in the register.
-
-If we also port the driver patch then the driver will also consider
-DIS==1 and ENA==0 , so the DTs with DIS flag will get the bit written in
-the register.
-
-So there is an important change by changing the bits values, as the
-register eventually ends up with a different value.
-The driver patch apparently just interprets the DIS/ENA bits
-differently, but the end result is the same
-
-Please correct me if my logic is wrong.
-
-I would also believe testing on the sam9x60 would be required for the
-slew rate change. From what I remember back then, slew rate change was
-not needed in Uboot, but I might be wrong.
-
-Eugen
-
-> ---
->  include/dt-bindings/pinctrl/at91.h | 49 ------------------------------
->  1 file changed, 49 deletions(-)
->  delete mode 100644 include/dt-bindings/pinctrl/at91.h
-> 
-> diff --git a/include/dt-bindings/pinctrl/at91.h b/include/dt-bindings/pinctrl/at91.h
-> deleted file mode 100644
-> index 3831f91fb3ba..000000000000
-> --- a/include/dt-bindings/pinctrl/at91.h
-> +++ /dev/null
-> @@ -1,49 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0-only */
-> -/*
-> - * This header provides constants for most at91 pinctrl bindings.
-> - *
-> - * Copyright (C) 2013 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
-> - */
-> -
-> -#ifndef __DT_BINDINGS_AT91_PINCTRL_H__
-> -#define __DT_BINDINGS_AT91_PINCTRL_H__
-> -
-> -#define AT91_PINCTRL_NONE		(0 << 0)
-> -#define AT91_PINCTRL_PULL_UP		(1 << 0)
-> -#define AT91_PINCTRL_MULTI_DRIVE	(1 << 1)
-> -#define AT91_PINCTRL_DEGLITCH		(1 << 2)
-> -#define AT91_PINCTRL_PULL_DOWN		(1 << 3)
-> -#define AT91_PINCTRL_DIS_SCHMIT		(1 << 4)
-> -#define AT91_PINCTRL_OUTPUT		(1 << 7)
-> -#define AT91_PINCTRL_OUTPUT_VAL(x)	((x & 0x1) << 8)
-> -#define AT91_PINCTRL_SLEWRATE		(1 << 9)
-> -#define AT91_PINCTRL_DEBOUNCE		(1 << 16)
-> -#define AT91_PINCTRL_DEBOUNCE_VAL(x)	(x << 17)
-> -
-> -#define AT91_PINCTRL_PULL_UP_DEGLITCH	(AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DEGLITCH)
-> -
-> -#define AT91_PINCTRL_DRIVE_STRENGTH_DEFAULT		(0x0 << 5)
-> -#define AT91_PINCTRL_DRIVE_STRENGTH_LOW			(0x1 << 5)
-> -#define AT91_PINCTRL_DRIVE_STRENGTH_MED			(0x2 << 5)
-> -#define AT91_PINCTRL_DRIVE_STRENGTH_HI			(0x3 << 5)
-> -
-> -#define AT91_PINCTRL_SLEWRATE_DIS	(0x0 << 9)
-> -#define AT91_PINCTRL_SLEWRATE_ENA	(0x1 << 9)
-> -
-> -#define AT91_PIOA	0
-> -#define AT91_PIOB	1
-> -#define AT91_PIOC	2
-> -#define AT91_PIOD	3
-> -#define AT91_PIOE	4
-> -
-> -#define AT91_PERIPH_GPIO	0
-> -#define AT91_PERIPH_A		1
-> -#define AT91_PERIPH_B		2
-> -#define AT91_PERIPH_C		3
-> -#define AT91_PERIPH_D		4
-> -
-> -#define ATMEL_PIO_DRVSTR_LO	1
-> -#define ATMEL_PIO_DRVSTR_ME	2
-> -#define ATMEL_PIO_DRVSTR_HI	3
-> -
-> -#endif /* __DT_BINDINGS_AT91_PINCTRL_H__ */
-
+Cheers,
+Quentin
