@@ -4,144 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F102DC5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 11:32:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE17C5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 12:01:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2AE982A46;
-	Mon,  2 Jun 2025 13:32:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 6064C82116;
+	Mon,  2 Jun 2025 14:01:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="tX1/h4H4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AeKbmJu0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E0FE80050; Mon,  2 Jun 2025 13:32:44 +0200 (CEST)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20729.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::729])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9015882A8B
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 13:32:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ id 6F4D38212B; Mon,  2 Jun 2025 14:01:36 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B2DEB81F6B
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 14:01:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=M.Schwan@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nZoxP4SGziuWiWrOwPRGyf8Alm7FKlQknBCbI42esf5Fk9hQgrw/gMTaEWrNjMs1ckEt9UFnPQ0/n2v6DpeGW5xICWJGrsJ8ZSunyCep4b31jf5iWXfQ4u5oIR5ZN3UgYUNb+EKDBQT8JkFEFuEvEepO9j/hB4hY0EwAjqz7v3rA+XGen10lMxiravn+XirwypICaCNzAoXij7be+IfTbZFxc2P4u0pgxQ/td4UaQesCqKRHI2ddhQn/PdgAUFoWC3uatWrrxWGmPBoB5fKVIPy+dbwT6+xiTOB2akndUfwNDzRn+uB1AoQjjFKtQAehlvhb74TmaMpO/alVfqSe+A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tmgaSRaG0X03HTH8zLUSxGXeqRO0BHN71E5OvlVWM/M=;
- b=PppxFJROYMgluibOTIkDSR5fFgTh9w01v637HqvLqFr70IYelaHXG7xGYLRLcVNMHvTGWobT3jid8nKhrPieNpLMa02MWUpSgUwVYMD7idjbDyMNIkFbutWsxCtgbw+fDBiRu8v20qUqdbQKPtiu2lm8jQqSq6rRA5cURpq+Dv1kaG4Lib66A0274hqNCSQXrdlITpE3c1Urks6nAOG7eP4XMJmK62ldsPTvx74hZGmUmU43/YgyDl+gWThdo23UJ4kCit6a3miMZQFOVbY4IIBuNVJluWyzz9YbTCRimTO7Z+FroWj8a/rsCedLmGj4nqjoTI9pW/zNyb6A4rVYuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tmgaSRaG0X03HTH8zLUSxGXeqRO0BHN71E5OvlVWM/M=;
- b=tX1/h4H4HxVCsXcaHVHv3K6Wuo1o0CHKV0Ny9OrJDLgt6ItxrtrWAlyqL9AlSxVmmVffwhe4NEXkW2zaZ+GoHbtrezLz90JQAb+0SSNHws+jNCV2130zfus0tJUWWkjBomupRNUK1QlcA/1x8EGKqXgiA1u33igcwopxh0zzvnYzj+g8r+4xYuqOS7UEcNyUV98xXS2o/1xdrK7YWWlJOXmKNuevn4D7e3ujj3LSgnBSandzk9QCr7c9c0hUd1perreBnBL+5CB2MeAA0VHdbHNW+MUWetSqtAQwjIqlkrnogSxl4qWcW7wjcRuQ6vLMwvQ6115UCauK4OUCeVBxiA==
-Received: from PR1P264CA0121.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2cd::15)
- by PR3P195MB0816.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:a5::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.27; Mon, 2 Jun
- 2025 11:32:07 +0000
-Received: from AM1PEPF000252E0.eurprd07.prod.outlook.com
- (2603:10a6:102:2cd:cafe::29) by PR1P264CA0121.outlook.office365.com
- (2603:10a6:102:2cd::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.21 via Frontend Transport; Mon,
- 2 Jun 2025 11:32:07 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AM1PEPF000252E0.mail.protection.outlook.com (10.167.16.58) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8792.29 via Frontend Transport; Mon, 2 Jun 2025 11:32:07 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 2 Jun
- 2025 13:32:06 +0200
-Received: from lws-schwan.phytec.de (172.25.32.67) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 2 Jun
- 2025 13:32:05 +0200
-From: Martin Schwan <m.schwan@phytec.de>
-Date: Mon, 2 Jun 2025 13:31:35 +0200
-Subject: [PATCH v2 2/2] doc: Add description for bootmeth rauc
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552C1W563193571
+ for <u-boot@lists.denx.de>; Mon, 2 Jun 2025 07:01:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748865692;
+ bh=ZCveLpN9xXdJ+i14pZjbE4Yc2oKVC52pzQXqNXh3gR4=;
+ h=From:To:CC:Subject:Date;
+ b=AeKbmJu0H2QrdCcITZ3y1SVHhbjqZmqhcDh4rbXEN8k2OAfOBm9ApvtM/mtxSNMb6
+ iyM13cyqVTKIMIEYNTjjRi5VyUJshU/XB8Vaf8/XDnbTbvlWb39kc7wnSlrkUGcNfu
+ d49i/MUIZd7jgG7F/CkToE2U42ksQgIadGiGpfSE=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552C1WkO2946807
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
+ for <u-boot@lists.denx.de>; Mon, 2 Jun 2025 07:01:32 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Jun 2025 07:01:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Jun 2025 07:01:31 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552C1Vrc2989482;
+ Mon, 2 Jun 2025 07:01:31 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <bb@ti.com>,
+ <n-francis@ti.com>, <u-kumar1@ti.com>, <nm@ti.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>
+Subject: [RFC PATCH v1] mach-k3: mmu: add dynamic carveouts for MMU table
+Date: Mon, 2 Jun 2025 17:30:53 +0530
+Message-ID: <20250602120054.1466951-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250602-wip-bootmeth-rauc-v2-2-9d2384131486@phytec.de>
-References: <20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de>
-In-Reply-To: <20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, Martin Schwan <m.schwan@phytec.de>
-X-Mailer: b4 0.14.2
-X-Originating-IP: [172.25.32.67]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM1PEPF000252E0:EE_|PR3P195MB0816:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95cfebf5-8c80-45ad-a50f-08dda1c91b38
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UlZybFFJcC94ZFl6KzdrMU8yNW9McHFRcmNKbm5RV1FJZVlmeHgwWkVuS2ZP?=
- =?utf-8?B?a1BiTTRRRVVSTDlWek56aHZYUlphZXd1VVdYWTRXdTU3OWdKVTRwTEJtZWpt?=
- =?utf-8?B?ajhNdXpidmZwSHEwc1VFMVROUFNYNktWaWVndlBsRFFLRUphRktFNEw4T1dC?=
- =?utf-8?B?YWI0SnN4YUxBZHRFMG5EcjhmV3NOUkhESUJnMDRBenRGUE85TVBUcm1MNkNN?=
- =?utf-8?B?QzZuR3RWZVdiZ3ZlT0dhQk9iaG02YU9rUWJJUWlCVjB3YXNQUEp0aTU0dWRC?=
- =?utf-8?B?NXdNYVljaXJYTTloSmx3dHg1cVlMT3kvU0JMcW5JWWJPWkRxazJLb0hUY3JC?=
- =?utf-8?B?YTkyTHNtdFM1RDlCUEZCV2lsNVEwc2pGcld5VEQySlJ0aCtMUlVqRDVlYU8x?=
- =?utf-8?B?RVRFVlk1dGtYNFVxTDhBVjZTMXFEbEt1bThWekhZcnlCVXhlS2VVbURKbXRM?=
- =?utf-8?B?QURkYm9tVVg0S2d4ZWt5QWJTRFByY0JseEJVVzBKeUV0MTE0aEQwd1RWcnZy?=
- =?utf-8?B?a3RjVEZNdU5jVXBnYVN0RUh5NlZ6end1cm9lWHF1TlJ0b2x2czFSbEN4a0ZO?=
- =?utf-8?B?OExEdzJaMHp0NHZKU1pFOUd1OGV2cVM4NlFacWZvajhFTTNPdTRkRmlkTVV6?=
- =?utf-8?B?d1FlUFVYNXR5NlAwMGpiYkk1VlRNSy85U1dJVGFwUVZFcU9WYzMrNFlNaDNC?=
- =?utf-8?B?akxzN21sbkZZRDd6MTFwS3pCUE1Zd2JnYTJ2TmhJak4xU0Y2anJHdnJWR29r?=
- =?utf-8?B?aW54Y2ExQ2N3bWJDTVFtcm9DeUNYc2UxSHlRb3B4b29TMFd4d2s5QkVTVlZC?=
- =?utf-8?B?WnFJZHMvM1JHbjUxdVRaMU5XanVHMnJnZmZya3FhNnpucGJZNEVkR2tweWhK?=
- =?utf-8?B?b3pWL2JpRTg5TG5sY0I5SGtTMFZwUnVjTmUyMCszTVUyeXpnYU40alRFVUhw?=
- =?utf-8?B?ZFUxWU84U2o1Z0k5UWlsZ2lqU2NyVW52SHBtRXBRTFYyd3hDeThlRHZ1WGE1?=
- =?utf-8?B?R0UzQ2N0UWh5N1VPT3Fvb3N0eVQ2VERWMlBVV2J5Z3pqUHpIM3YyWmV3c1JO?=
- =?utf-8?B?dTdLTWxUbmR4djFRNWJGQW9NbWFLVHpPMXdFMEdnd09pQXVXd0FYcnpwcWRF?=
- =?utf-8?B?cHh0NnVvcHRIcEVJeDlSV2JIcXRubHhpU3JCZzJhVk9XMGpxODJFZW1FT0hi?=
- =?utf-8?B?dExEU2oxK2tqeEJNQXFaVDVRb3ozaG5rSEgvUmFZd25aNExYN2FMZGIwSmty?=
- =?utf-8?B?RDBaTmtYeUFIR3RVWkdSa0tmRUpzVzNlamdFQm52Z20rVmo2czVkaUFDZmtk?=
- =?utf-8?B?dGFSVllwYWloSk9YMVkwS3pjNHRSanR0NEk5QUxrRlNRdFU0Yzk4cUJIMy90?=
- =?utf-8?B?OE0vRms0b2xFREkvYjZudFN4SkQzblJFS1Jwa2ZDMkVWSEQwRklvQ045ei9U?=
- =?utf-8?B?cE8vakl5ZXpjN2tSSzkyVWpOR1Q4WFQ4MVB6YlRQNGFUa0xzWlJWcWtyUmk5?=
- =?utf-8?B?dlo2MHppUDlBUW84cnZJZE5TZDVXcmJraXNieG1DSHhYU3BvSGNSYWhCbHRX?=
- =?utf-8?B?L1RPeTBGNjhpL3NrSXVGMERlYzhIUTZZK2k5Y1FpdmN4WGR2Y0JkQThzczRk?=
- =?utf-8?B?TlEyRS9FSFdBMm4rYUlqaXdrdEtQZUE1eTdaQjZtZXFDK3M0azVmNHhKa2dp?=
- =?utf-8?B?eXVKWWo4KzRmYVJVcWJZMVdSZmc5QWp2R0ZsRW0xWk9PQjhLMElacTF4MHh1?=
- =?utf-8?B?cmJXU3lVZ3Yyb3lnZFk1WXh4dG9iQ0R6UWlwblFlSFJUS3FIMWdEckNiQ01U?=
- =?utf-8?B?dHVPN1lObjJ3Mlk4RFBDSmNuTVhnTG1zM3lFaGhkYWl1c0NnVDZuQmkzTU5L?=
- =?utf-8?B?eStlRHg1UXVqVTJlY0Q0U0plVDgrTHI4VTg0M080QWo4YU1DVGJFeCsrNDNG?=
- =?utf-8?B?cjBRRUVScHU1M2loNzVtOWNzbjVDUU53bjczMFV1UUNOakhMYlROSkxoSWpl?=
- =?utf-8?B?L1pZZWdJZ0Fudnc2SjlLQzdLRDFzbDcwaDkwRm5OOTVZOGVnbmRkdmU2MGZq?=
- =?utf-8?Q?8BIIxn?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 11:32:07.3233 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95cfebf5-8c80-45ad-a50f-08dda1c91b38
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM1PEPF000252E0.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB0816
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,102 +78,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the bootmeth "rauc", which boots an A/B system
-with RAUC from MMC.
+Currently in upstream u-boot we only provide a single MMU table for
+all k3 platforms, this does not scale for devices with reserved memory
+outside the range 0x9e780000 - 0xa0000000 (eg j722s[1]) or for devices
+with < 2GiB of memory (eg am62sip).
 
-Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+To properly configure the MMU on various k3 platforms, the
+reserved-memory regions need to be queried at runtime from the
+device-tree and the MMU table should be updated accordingly.
+
+This patch adds the required fixups to the MMU table (during proper
+U-boot stage) by marking the reserved regions as non cacheable and
+keeping the remaining area as cacheable.
+
+For the A-core SPL, the DDR is divided into three areas as follows:
+
+  0x80000000  +------------------+ CFG_SYS_SDRAM_BASE
+              |                  |
+    512KiB    | #1 Non cacheable | reserved for ATF/OP-TEE
+              |                  |
+  0x80080000  |------------------| CONFIG_SPL_TEXT_BASE
+              |                  |
+    128MiB    | #2 Cacheable     | for runtime usage by the A-core SPL
+              |                  |
+  0x88080000  |------------------|
+              |                  |
+    1.9GiB    | #3 Non cacheable | reserved for DM/tifs-stub etc.
+              |                  |
+  0x100000000 +------------------+ End of DDR
+
+The 128MiB size is chosen to allow for future use cases such as falcon
+boot from the A-Core SPL which would require loading kernel image from
+the SPL stage. This change also ensures the reserved memory regions that
+all exist past 0x88080000 are non cacheable preventing speculative
+accesses to those addresses.
+
+[1]:
+https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/arch/arm/mach-k3/arm64/arm64-mmu.c?h=ti-u-boot-2025.01-next#n54
+
+Depends on:
+  [PATCH v1] ti: k3: abstract common fdt api for reserved mem fixups
+  https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- doc/develop/bootstd/index.rst    |  1 +
- doc/develop/bootstd/overview.rst |  1 +
- doc/develop/bootstd/rauc.rst     | 56 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 58 insertions(+)
+ arch/arm/mach-k3/arm64/arm64-mmu.c     | 222 +++++++++++++++++++++++--
+ arch/arm/mach-k3/include/mach/k3-ddr.h |   9 +
+ board/ti/common/k3-ddr.c               |  10 ++
+ 3 files changed, 228 insertions(+), 13 deletions(-)
 
-diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
-index 4c4e26ccdb707e55f88660395f23d7e7cda6b78d..ec74fc2fb9d7cccc48f3d16e781537190b5b6ced 100644
---- a/doc/develop/bootstd/index.rst
-+++ b/doc/develop/bootstd/index.rst
-@@ -12,5 +12,6 @@ Standard Boot
-    qfw
-    android
-    cros
-+   rauc
-    script
-    sandbox
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index 9fe5630ab16c2dd62ee18f6fc98bdf6373486ab5..0a237359575579c7d6df7b4ef900bdc4204ea48d 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -443,6 +443,7 @@ Bootmeth drivers are provided for booting from various media:
-    - :doc:`extlinux / syslinux <extlinux>` boot from a storage device
-    - :doc:`extlinux / syslinux <extlinux>` boot from a network (PXE)
-    - :doc:`sandbox <sandbox>` used only for testing
-+   - :doc:`RAUC distro <rauc>`: A/B system with RAUC from MMC
-    - :doc:`U-Boot scripts <script>` from disk, network or SPI flash
-    - :doc:`QFW <qfw>`: QEMU firmware interface
-    - :doc:`VBE </develop/vbe>`: Verified Boot for Embedded
-diff --git a/doc/develop/bootstd/rauc.rst b/doc/develop/bootstd/rauc.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..b2661d18da46a745d4fc6eb65e45d1202f2e2a21
---- /dev/null
-+++ b/doc/develop/bootstd/rauc.rst
-@@ -0,0 +1,56 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 0e07b1b7ce0..5221d6e9a32 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -11,9 +11,15 @@
+ 
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
++#include <mach/k3-ddr.h>
+ 
+-struct mm_region k3_mem_map[] = {
++#include "../common_fdt.h"
 +
-+RAUC Bootmeth
-+=============
++DECLARE_GLOBAL_DATA_PTR;
 +
-+This bootmeth provides a way to locate and run an A/B system with RAUC as its
-+update client. The booted distro must supply a script on an MMC device
-+containing the final boot instructions necessary.
++struct mm_region k3_mem_map[K3_MMU_REGIONS_COUNT] = {
+ 	{
++		/* Peripherals */
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+ 		.size = 0x80000000UL,
+@@ -21,30 +27,41 @@ struct mm_region k3_mem_map[] = {
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+-		.virt = 0x80000000UL,
+-		.phys = 0x80000000UL,
+-		.size = 0x1e780000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
+-		.virt = 0xa0000000UL,
+-		.phys = 0xa0000000UL,
+-		.size = 0x60000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
++		/* Higher DDR banks */
+ 		.virt = 0x880000000UL,
+ 		.phys = 0x880000000UL,
+ 		.size = 0x80000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+ 			 PTE_BLOCK_INNER_SHARE
+ 	}, {
++		/* Flash peripherals */
+ 		.virt = 0x500000000UL,
+ 		.phys = 0x500000000UL,
+ 		.size = 0x380000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Memory before SPL is reserved for ATF/OPTEE */
++		.virt = CFG_SYS_SDRAM_BASE,
++		.phys = CFG_SYS_SDRAM_BASE,
++		.size = CONFIG_SPL_TEXT_BASE - CFG_SYS_SDRAM_BASE,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* Map SPL load region and the next 128MiB as cacheable */
++		.virt = CONFIG_SPL_TEXT_BASE,
++		.phys = CONFIG_SPL_TEXT_BASE,
++		.size = SZ_128M,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* Expect SPL to only use 128MiB, keep rest uncacheable */
++		.virt = CONFIG_SPL_TEXT_BASE + SZ_128M,
++		.phys = CONFIG_SPL_TEXT_BASE + SZ_128M,
++		.size = SZ_2G - (CONFIG_SPL_TEXT_BASE + SZ_128M),
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+ 		/* List terminator */
+ 		0,
+@@ -52,3 +69,182 @@ struct mm_region k3_mem_map[] = {
+ };
+ 
+ struct mm_region *mem_map = k3_mem_map;
 +
-+This bootmeth assumes a symmetric A/B partition layout, with a separate boot
-+partition containing the kernel image and another partition for the root
-+filesystem each. The partition numbers must be specified with
-+``CONFIG_BOOTMETH_RAUC_PARTITIONS``. The content must be a list of pairs, with
-+the following syntax: ``1,2 3,4``, where 1 and 3 are the slots' boot partition
-+and 2 and 4 the slots' root partition.
++int k3_mem_map_init(void)
++{
++	fdt_addr_t mem_base, dt_reserved_start[K3_MMU_REGIONS_COUNT],
++		coalesced_start[K3_MMU_REGIONS_COUNT];
++	fdt_size_t mem_size, dt_reserved_end[K3_MMU_REGIONS_COUNT],
++		coalesced_end[K3_MMU_REGIONS_COUNT];
++	int k3_map_idx = -EINVAL, ret, nodeoffset, subnode;
++	void *blob = (void *)gd->fdt_blob;
++	unsigned int carveout_len, i, j;
 +
-+Each pair of boot and rootfs partition form a "slot". The default order in which
-+available slots are tried is set through ``CONFIG_BOOTMETH_RAUC_BOOT_ORDER``,
-+with the left one tried first.
++	ret = fdt_fixup_reserved(blob);
++	if (ret) {
++		pr_err("%s: Failed to perform reserved node fdt fixups [%d]\n",
++		       __func__, ret);
++		return ret;
++	}
 +
-+The default number of boot tries of each slot is set by
-+``CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES``.
++	nodeoffset = fdt_subnode_offset(blob, 0, "memory");
++	if (nodeoffset < 0) {
++		pr_err("%s: Failed to get memory data: %s\n", __func__,
++		       fdt_strerror(nodeoffset));
++		return nodeoffset;
++	}
 +
-+In case no valid slot can be found and/or all slots have zero tries left, the
-+boot order and slot tries are reset to their default values, if
-+``CONFIG_BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES`` is enabled. This prevents a system
-+from locking up in the bootloader and tries booting again after a specified
-+number of tries.
++	mem_base = fdtdec_get_addr_size(blob, nodeoffset, "reg", &mem_size);
++	if (mem_base == FDT_ADDR_T_NONE || mem_base != CFG_SYS_SDRAM_BASE)
++		return -EINVAL;
 +
-+The boot script must be located in each boot partition. The bootmeth searches
-+for "boot.scr.uimg" first, then "boot.scr" if not found.
++	for (i = 0; i < K3_MMU_REGIONS_COUNT; i++) {
++		if (k3_mem_map[i].virt == mem_base) {
++			k3_map_idx = i;
++			break;
++		}
++	}
 +
-+When the bootflow is booted, the bootmeth sets these environment variables:
++	if (k3_map_idx == -EINVAL) {
++		pr_err("%s: Failed to find DDR region in MMU memory map\n",
++		       __func__);
++		return -EINVAL;
++	}
 +
-+devtype
-+    device type (e.g. "mmc")
++	i = 0;
++	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
++	fdt_for_each_subnode(subnode, blob, nodeoffset) {
++		const char *name;
++		fdt_addr_t addr, end_addr;
++		fdt_size_t size;
 +
-+devnum
-+    device number, corresponding to the device 'sequence' number
-+    ``dev_seq(dev)``
++		if (i >= K3_MMU_REGIONS_COUNT) {
++			/*
++			 * This is a recoverable error if the regions can be
++			 * coalesced, the required logic can be implemented once
++			 * requirement arises.
++			 */
++			pr_err("%s: Not enough space in MMU map for carveouts\n",
++			       __func__);
++			return -ENOMEM;
++		}
 +
-+distro_bootpart
-+    partition number of the boot partition on the device (numbered from 1)
++		name = fdt_get_name(blob, subnode, NULL);
++		addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
 +
-+distro_rootpart
-+    partition number of the rootfs partition on the device (numbered from 1)
++		if (addr == FDT_ADDR_T_NONE)
++			continue;
 +
-+raucargs
-+    kernel command line arguments needed for RAUC to detect the currently booted
-+    slot
++		if (!fdtdec_get_bool(blob, subnode, "no-map"))
++			continue;
 +
-+The script file must be a FIT or a legacy uImage. It is loaded into memory and
-+executed.
++		if (addr >= mem_base + mem_size)
++			continue;
 +
-+The compatible string "u-boot,distro-rauc" is used for the driver. It is present
-+if ``CONFIG_BOOTMETH_RAUC`` is enabled.
-
++		end_addr = addr + size;
++
++		if (end_addr <= mem_base)
++			continue;
++
++		debug("Added memory carveout at 0x%llx, size: 0x%llx for '%s'\n",
++		      addr, size, name);
++
++		addr = max(addr, mem_base);
++		end_addr = min(end_addr, mem_base + mem_size);
++		size = end_addr - addr;
++		dt_reserved_start[i] = addr;
++		dt_reserved_end[i] = end_addr;
++		i++;
++	}
++	carveout_len = i;
++
++	if (!carveout_len)
++		return 0;
++
++	/* sort carveout regions by address required for creating carveouts */
++	for (i = 0; i < carveout_len; i++) {
++		for (j = i; j < carveout_len; j++) {
++			if (dt_reserved_start[j] < dt_reserved_start[i]) {
++				swap(dt_reserved_start[j],
++				     dt_reserved_start[i]);
++				swap(dt_reserved_end[j], dt_reserved_end[i]);
++			}
++		}
++	}
++
++	/* coalesce regions */
++	fdt_addr_t coalescing_temp_start = dt_reserved_start[0];
++	fdt_addr_t coalescing_temp_end = dt_reserved_end[0];
++
++	j = 0;
++	for (i = 1; i < carveout_len; i++) {
++		fdt_addr_t current_start = dt_reserved_start[i];
++		fdt_addr_t current_end = dt_reserved_end[i];
++
++		if (coalescing_temp_end >= current_start) {
++			coalescing_temp_end = current_end;
++			continue;
++		}
++		coalesced_start[j] = coalescing_temp_start;
++		coalesced_end[j] = coalescing_temp_end;
++		coalescing_temp_start = current_start;
++		coalescing_temp_end = current_end;
++		j++;
++	}
++
++	coalesced_start[j] = coalescing_temp_start;
++	coalesced_end[j] = coalescing_temp_end;
++	carveout_len = j + 1;
++
++	if (coalesced_start[0] != mem_base) {
++		k3_mem_map[k3_map_idx].virt = mem_base;
++		k3_mem_map[k3_map_idx].phys = mem_base;
++		k3_mem_map[k3_map_idx].size = coalesced_start[0] - mem_base;
++		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++					       PTE_BLOCK_INNER_SHARE;
++		k3_map_idx++;
++	}
++
++	for (i = 1; i < carveout_len; i++) {
++		k3_mem_map[k3_map_idx].virt = coalesced_end[i - 1];
++		k3_mem_map[k3_map_idx].phys = coalesced_end[i - 1];
++		k3_mem_map[k3_map_idx].size =
++			coalesced_start[i] - coalesced_end[i - 1];
++		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++					       PTE_BLOCK_INNER_SHARE;
++		k3_map_idx++;
++	}
++
++	k3_mem_map[k3_map_idx].virt = coalesced_end[carveout_len - 1];
++	k3_mem_map[k3_map_idx].phys = coalesced_end[carveout_len - 1];
++	k3_mem_map[k3_map_idx].size =
++		mem_base + mem_size - coalesced_end[carveout_len - 1];
++	k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++				       PTE_BLOCK_INNER_SHARE;
++	k3_map_idx++;
++
++	/* map reserved memory as non cachable */
++	for (i = 0; i < carveout_len; i++) {
++		k3_mem_map[k3_map_idx].virt = coalesced_start[i];
++		k3_mem_map[k3_map_idx].phys = coalesced_start[i];
++		k3_mem_map[k3_map_idx].size =
++			coalesced_end[i] - coalesced_start[i];
++		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++					       PTE_BLOCK_INNER_SHARE;
++		k3_map_idx++;
++	}
++
++	k3_mem_map[k3_map_idx] = (const struct mm_region){ 0 };
++
++	debug("%s: MMU Table configured as:\n", __func__);
++	debug("   |virt start\t\t|virt end\t|phys\t\t|size\t\t|attrs:\n");
++	for (i = 0; i < k3_map_idx; i++) {
++		debug("%2d: 0x%-12llx\t0x%-12llx\t0x%-12llx\t0x%-12llx\t0x%llx\n",
++		      i, k3_mem_map[i].virt,
++		      k3_mem_map[i].virt + k3_mem_map[i].size,
++		      k3_mem_map[i].phys, k3_mem_map[i].size,
++		      k3_mem_map[i].attrs);
++	}
++
++	return 0;
++}
+diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+index 39e6725bb9b..0b164ebf5e6 100644
+--- a/arch/arm/mach-k3/include/mach/k3-ddr.h
++++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
+@@ -8,10 +8,19 @@
+ 
+ #include <spl.h>
+ 
++/* Number of mappable regions in the MMU page table */
++#define K3_MMU_REGIONS_COUNT 32
++
+ int dram_init(void);
+ int dram_init_banksize(void);
+ 
+ void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
+ void fixup_memory_node(struct spl_image_info *spl_image);
+ 
++/*
++ * Modifies the MMU memory map based on DDR size and reserved-memory
++ * nodes in DT
++ */
++int k3_mem_map_init(void);
++
+ #endif /* _K3_DDR_H_ */
+diff --git a/board/ti/common/k3-ddr.c b/board/ti/common/k3-ddr.c
+index a8425da8de5..ee882f62109 100644
+--- a/board/ti/common/k3-ddr.c
++++ b/board/ti/common/k3-ddr.c
+@@ -7,6 +7,7 @@
+ #include <dm/uclass.h>
+ #include <k3-ddrss.h>
+ #include <spl.h>
++#include <mach/k3-ddr.h>
+ 
+ #include "k3-ddr.h"
+ 
+@@ -14,6 +15,15 @@ int dram_init(void)
+ {
+ 	s32 ret;
+ 
++	if (IS_ENABLED(CONFIG_ARM64) && xpl_phase() != PHASE_SPL) {
++		ret = k3_mem_map_init();
++		if (ret) {
++			printf("%s: Error fixing up MMU memory map: %d\n",
++			       __func__, ret);
++			return ret;
++		}
++	}
++
+ 	ret = fdtdec_setup_mem_size_base_lowest();
+ 	if (ret)
+ 		printf("Error setting up mem size and base. %d\n", ret);
 -- 
 2.49.0
 
