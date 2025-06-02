@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CF6C54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 08:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3773C54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 09:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B707180584;
-	Mon,  2 Jun 2025 10:48:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F0C5F82102;
+	Mon,  2 Jun 2025 11:15:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB08180E9A; Mon,  2 Jun 2025 10:48:16 +0200 (CEST)
+ id BBB6282103; Mon,  2 Jun 2025 11:15:11 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17B3B803DF
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 10:48:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50B2C82AA7
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 11:15:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 5528m2oT063299
+ by Atcsqr.andestech.com with ESMTPS id 5529Erko076437
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 2 Jun 2025 16:48:02 +0800 (+08)
+ Mon, 2 Jun 2025 17:14:54 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Jun
- 2025 16:48:02 +0800
-Date: Mon, 2 Jun 2025 16:47:58 +0800
+ 2025 17:14:53 +0800
+Date: Mon, 2 Jun 2025 17:14:53 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Yao Zi <ziyao@disroot.org>
-CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] MAINTAINERS: riscv: cpu: th1520: Assign myself as
- maintainer
-Message-ID: <aD1lMEvr3KwTBVee@swlinux02>
-References: <20250530105622.58634-1-ziyao@disroot.org>
+To: Eoin Dickson <Eoin.Dickson@microchip.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <conor.dooley@microchip.com>,
+ <jamie.gibbons@microchip.com>, <praveen.kumar@microchip.com>,
+ <cyril.jean@microchip.com>, <jagan@amarulasolutions.com>
+Subject: Re: [PATCH v1 3/4] configs: beaglev_fire: Enable GPIO and MMC_SPI
+Message-ID: <aD1rjeUa0zC8o9Ua@swlinux02>
+References: <20250522141002.1212408-1-Eoin.Dickson@microchip.com>
+ <20250522141002.1212408-4-Eoin.Dickson@microchip.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250530105622.58634-1-ziyao@disroot.org>
+In-Reply-To: <20250522141002.1212408-4-Eoin.Dickson@microchip.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 5528m2oT063299
+X-MAIL: Atcsqr.andestech.com 5529Erko076437
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,13 +69,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 30, 2025 at 10:56:22AM +0000, Yao Zi wrote:
-> Assign myself to develop U-Boot port of T-Head TH1520 SoC, and help
-> maintain related code and review patches.
-> 
-> Signed-off-by: Yao Zi <ziyao@disroot.org>
-> ---
->  MAINTAINERS | 7 +++++++
->  1 file changed, 7 insertions(+)
+Hi Eoin,
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+On Thu, May 22, 2025 at 07:40:01PM +0530, Eoin Dickson wrote:
+> [EXTERNAL MAIL]
+> 
+> From: Eoin Dickson <eoin.dickson@microchip.com>
+> 
+> Enable CONFIG_MPFS_GPIO, CONFIG_CMD_GPIO and CONFIG_DM_GPIO and
+> CONFIG_MMC_SPI in the beaglev_fire_defconfig.
+> 
+> Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
+> ---
+>  configs/beaglev_fire_defconfig | 4 ++++
+>  1 file changed, 4 insertions(+)
+
+configs/beaglev_fire_defconfig does not exist in upstream repo yet.
+Is this config a out-of-tree config?
+
+Best regards,
+Leo
