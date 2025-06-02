@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42444C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:11:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82E3AC5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 16:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7423D82012;
+	by phobos.denx.de (Postfix) with ESMTP id C44B382102;
 	Mon,  2 Jun 2025 18:11:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vEU1LmDV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cX7l+Eye";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E5D9820EB; Mon,  2 Jun 2025 18:11:03 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 165CA81F32; Mon,  2 Jun 2025 18:11:04 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C923581F32
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:11:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19FEE81FFC
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 18:11:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3a503d9ef59so1232013f8f.3
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 09:11:00 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so49881395e9.1
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 09:11:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748880660; x=1749485460; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=51HRknQg+ur4nkTsVqREK+QuhkzKDjRaJls54EBkv7U=;
- b=vEU1LmDV7uGK6rw455UovyJvpXLZ+hsS6XAPnijrKHleL8XBueGwKT0HcKHKeR7Nvx
- 7CW2R/MVL9S1f5t2Kny2Im93KrwhwqqCUpuNMcnq0bOZz5rUVIDndf0+5PK+LtCIhmzL
- zdpKSE4jOySDabZk/PXo1+JlCAyqV9KpJ+E3IEl0HCkD1EQEFTWMkOHe/sJvP0sX1xZl
- he8PbDJKU0FGBL/v3wBNECfzWedLieLZw6u29Wg01u5OTCGDl19VJNK//1Uzz1CcP1zk
- +sMqBsQtZkssN1ip2wC/pJtDOVHXNn5ugAtFbx6Z0pSOGJnjjkrEbP8wM8BTWUr5ToTp
- bcRQ==
+ d=linaro.org; s=google; t=1748880661; x=1749485461; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=50CAZ1nwXXohebWwr0AtOMYCD7l/eFrtv1zFi45Opeg=;
+ b=cX7l+Eye2t13S070zYLlyyr5LcXuJk6dakIFb+CRFJ0Uq+rGTAJmQQlJB7ZRZPmaoO
+ Nlhy6f7B9p+QjJ3Bm4/6wMVOhwOSOvZB3fV0tYyMvRz2WVHW/MbDRmll1eNunl63tlV+
+ mmIbFY9Npqk/vc+xFQdiPZrAgKJMWyh1LS/u+6PJz5jlIDV046zTRmA+RygstzkAy6sr
+ VZbduo+MvsGf9e4f/NfkzkTALLug5UWUupIzBwKK0tvrjqpS7ZTZi+CGS97s6V7TLG6K
+ jpSYSDoIQV9fCdBAEdx3hs+tOFpF0GOCwgGM7yA/OyljyvjBl74VwOAm57OhiBaBiLyx
+ F5aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748880660; x=1749485460;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=51HRknQg+ur4nkTsVqREK+QuhkzKDjRaJls54EBkv7U=;
- b=wcmtA33NBkjzziLHuJNe+p1PjlSFkE1btAqke7Tdg6WZJgIKFAlPwtBcWLeMnKRd/0
- IDyNmEuiVgy6Yt7KmSqIjN/A4lD+BbsIr4X51I3nsPo3dAQxN11ttFGt6imNhqe1s1Xm
- AuHEEqqpgBXDe3TXbpECB5ErUwc/S2wqeIpNxkennW+XK5EIXhrUxWwwifN6Z8DCP3gE
- tb1jiVsEO/dtepNWkzuGAHwvFlVl+hGUwL7FdF/K75IXzaafJp1G4IgVCv+eYNHgSlsF
- llqfkgT3/13FTs/eVJgKrILyS4DzxLicFDoMFYfVneT4Q3y7KdNNfy5RUUKWV58UiwFO
- MMtA==
-X-Gm-Message-State: AOJu0YwT7Ai1lhGk/TUBVjRkS4TPkmwFdsmP++ZC3/PyqM9gMh4cgdCK
- Zr7jkqEBXROBdW+9ac7u70rpHpvwTrHJRkuOWTj7LXZlVuPrz9nh48ZMJUH0h6T9738=
-X-Gm-Gg: ASbGncsD5jMujWhwDmfkXjT7vAX6W+ZQWphryJQjPrpSY4svX7ec04nTr4r1aO7Edmr
- D70iwfDHEYhzYfIst4Xz/zryLbZ98a8Gm1bgFKjvApf077XHKSP46wqdWAJUJxG5+mit0yUmME8
- PbaX97EZr34WMLmf0SOueXqz3hoN9UWVaaRZhCSyQiBTLp+PP/9SIutizFAhlsowLyVJVhiPQ09
- 3DsoVoxsdJls47jgcRT8BFgACMQm32ZCXpElLhPL90Iozx4Ujh+fZgG5nrgCDlLW21qGKS9H3Tk
- hkmSv1Fe74VGZet9v20te0EhFW2mBYwwme14XaT5ndHpcUH8sOozKBDDy8BYRl9KwQLlCog4f3n
- XooQPco5J87Ux
-X-Google-Smtp-Source: AGHT+IGQGtk+ahzgnq6YNj/ZiTAwLPUArBlPgYKhw2/Mxl3315u4Bxs1lI11coSgoBwNhLdA29LHvg==
-X-Received: by 2002:a05:6000:2313:b0:3a4:efc0:c90b with SMTP id
- ffacd0b85a97d-3a4fe17961cmr7139647f8f.15.1748880659859; 
- Mon, 02 Jun 2025 09:10:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748880661; x=1749485461;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=50CAZ1nwXXohebWwr0AtOMYCD7l/eFrtv1zFi45Opeg=;
+ b=Ce0lvV+X2zH9um8V7GiS/1FKsQkxAKY4+hN4N/PMyxGnN//0uTuFEUPiv0fFO5v5Qz
+ HDDbKORahC9Uh+vjbdOAxE27Ny6Aj+YliIvEFo3Pc30jTIdC8YHFbr9Q0PRkejrB/0AJ
+ MysN9LA4aLKzAIc+fLQi0NnmOd/y+g0uv3sGlJAqUvsSnOtvfsrt+crVwMbITwL2Cq+N
+ z4DahuPv93cgdulOL/L66ej8EiGMY4DBo/ZC/pajr1rhfiMP1nApAbuHhfwSvrC6xFTM
+ iy6aaycYEfDpkS8CMD2mj1j1EjnFv0BQv22OQbEvGzCk0B7WZPEvm5J6lmUvH29mtbdb
+ obiA==
+X-Gm-Message-State: AOJu0YyK6LQw4/sikUlBsPQms5eZ8SPmQ+yS1adCO2Jv2kZEAYtsinEQ
+ vIf/olkwV4zM1PKJr66DPpoTidvh6fmTvrsmSkcOKQM80rkltmULo+s4JiFJuWKpFxY=
+X-Gm-Gg: ASbGncvNGSuwbhgpwNn1GbXwuVLEdNh74hJHVjGrFtahisdTiODoNfOXk/c8ln4e/wv
+ 7nu0anks8DxqiQRduOXyfYTSdDpsOMULKHUkMrMA8WOWE+YCG54LB0udXaYQ/l2OQMtC21jTrB5
+ sDZLslGb+OJB5uxrFTFOzOo33g4n1mY5fRdlCbdmC9vARztPtf+Q8Mg5Q5Q6YGhB9LFW59ZkRdj
+ C3sgvHEBURgt2r0802gHhJ2ilSOou9yoK4vA0yHSI8/jJnZUlpSRKcu4Uh6LC1lSFZS6oKtDXLa
+ 5HOR5FR2/SxqqI7N+zCazw2NddxFDXStOXzoRSrwUUeVekgx0QVgJr9dahYIF5uxCJaFPhAVL4Y
+ 0FA==
+X-Google-Smtp-Source: AGHT+IHfBmR8RMaH7+w7HXhS+A7/LCrTnrX2WZzLCETUDQLFrJYetaQ5bLFTSOtIH1Wp0swgOhal1A==
+X-Received: by 2002:a05:6000:3105:b0:3a4:d722:5278 with SMTP id
+ ffacd0b85a97d-3a4f7a9d552mr12538826f8f.39.1748880661365; 
+ Mon, 02 Jun 2025 09:11:01 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a01:170:117e:fc:3688:a9e2:523f:a049])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4efe5b962sm15212138f8f.7.2025.06.02.09.10.58
+ ffacd0b85a97d-3a4efe5b962sm15212138f8f.7.2025.06.02.09.10.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 09:10:59 -0700 (PDT)
+ Mon, 02 Jun 2025 09:11:00 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH v2 0/7] Qualcomm: teach the build system to emit signed ELF
- images
-Date: Mon, 02 Jun 2025 18:10:51 +0200
-Message-Id: <20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org>
+Date: Mon, 02 Jun 2025 18:10:52 +0200
+Subject: [PATCH v2 1/7] binman: add $(srctree)/tools to toolpath
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAvNPWgC/42NQQrCMBBFr1KydiQTGqiuvId0kdRpO2AzNQlBK
- b27sSdw+R6f9zeVKDIldW02FalwYgkVzKlRw+zCRMCPyspoY7U1BnwLr0EWyCJPDhPwskYptFD
- ICZxvte2sR3SoamKNNPL7yN/7yjOnLPFzvBX82T/DBUFDhy367mLtMPpb3bgoZ4mT6vd9/wIuW
- 7DPyQAAAA==
-X-Change-ID: 20250522-b4-qcom-tooling-improvements-ab40585b11a1
+Message-Id: <20250602-b4-qcom-tooling-improvements-v2-1-c7d19c0d4a8b@linaro.org>
+References: <20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org>
+In-Reply-To: <20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@kernel.org>
@@ -92,21 +88,21 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4370;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=825;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=1gr4LYNBGLjGhZMfvzXrw6l0Xgl9d4DD0KD+WH6Kamo=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoPc0R1KzLkHGWKKVgcbN7hIP6P5u84QS9jXKxL
- XQSy/Vb/qOJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaD3NEQAKCRAFgzErGV9k
- tkrcD/9XRR4c+NLzsOXsz32grw8sl/MsxX8E6uBgFzXlTB+5G6wwkBccdKoSgyemqmxOtgb4BUG
- VNt4zH/4h5zvQUd16bG5rW6HbCbIo3Nhi3pOQF6XnkUctRtoLKTyrQJn3+oTP8307VpgAifNYtr
- 8Sn57D9offIlyFAoKBYDnXOy3YVdFq4jcnb7ZTcpOvMELZ/PaWvwilomMY7GAZzyXoP7pVrQMXD
- ihmt97WX26PwEVWoe6ItKao4JwH963OUpGkG4B8V367euMm1xzL63HoOo1kFmkdUNIS3qvPdT29
- OPtwovq2KWcZ1H6B9d6Ad6VilJqozu//sdIVNGWYApwM1KE+nIpYZq6FAMUTMg/eSZ4WDYBdolS
- 73gxxfxX3gWB2H8DLWG9tDRhMwsJMj5txTH3SDjBc77CdLlce9mHev+7q+2WM3wCBKkJUUV3RLG
- IpyVdf6ps3HX7rG7MOiIEi+xWj9XIcdZkJ/anMLreQBNDfoLIe+QnqxeFobNYXXVcNLisNh5A5P
- hzM8Fq7JHN1rhURfVz+Ah/KbSH3XgsrjhAga5+M4GLth0mazJqCYBjk5YO7vCOCmh+GEo4jE8xZ
- N+3JK+MEb7J+7mEEdVqPq1QKhMVYZvTO856EIVwmgPy6pXJ3LRUsHiclO6PDk6e8vaGrF79YNme
- nuDvUL4HW99jjBA==
+ bh=6D15FNpAk5uavzJSwe+BXnfnrFpizR4Xo+uL6UaCRfQ=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoPc0RuWfzJtPuIBJFFf3I7jnwegp0FZnsmkgNa
+ TwkfVQ5IqCJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaD3NEQAKCRAFgzErGV9k
+ tnzDD/0QpoCMeZu5Wh5X6L5Vj26+f2/Jd7lrqLZmV1XqmiwEtDab7fbl9SBFtUILhatH8M/n1ic
+ 1iZiSvQEbPFJLPaJf8lQ/OFOA7kN6liNcxFnkj/Ul81zIwCW0MmYSZf9VnbXE7HgORaKd8s/yyX
+ 9ELGQH0J3oxT0r9LQqOo9qatqIU6ck8kSmPlPjea3QZnuavkD0uEzx4lGb/SGPQQCB32Vp0d2/a
+ zsfHKEI1lyFGXDHVIQpwPgRLVMY4toIHgkInUfdpzVG+dzqj1n/VA7FmEljWRwwEO/jmufKcovS
+ 8MeN9Aoj72Z0PtIyB9ohDYgAthxnVQjKBsOcsA7oWHPOOiuJ4hzNAwxFyMmjthhPVhJ9jxz7faX
+ El0l5U8J0MDLtlcVHTRSw6Aq6Gh8E1mehmLy3ChoPpWPLTFaiV2CDq0smeQ0mPoG4R6yuny3Mif
+ R+sU506FPBYKFe87DLqSKOgbICPGV1XN4HMfnvUoT8pLkKy0aMIa+oO6EBsEu+Z1sOmSi8DRk80
+ wY0hx+aclTlLMtbMQ4BG1/4D8XY7ztxxgA47NLWmdbHjq6trUNZDKXGuYDlG1C39kYeZ9K/Wg2S
+ HZasN+KVsz5m8C6sIB8quRyVIUUh9kjkBkeAE8oblYq6nZLISAuuTyuCHTBzYJ5X8Q2KQQ4emqE
+ IwFVcPvVNzYy1tg==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -125,93 +121,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With several new Qualcomm platforms appearing on the mailing list, all
-of which build U-Boot as an ELF, sign it, and then flash it to some
-partition on the board, we're getting a lot of defconfigs which just
-contain a debug UART and a TEXT_BASE address. This leads to needless
-rebuilds in CI of effectively the same image, and needless duplication
-of build instructions.
-
-To address this, let's introduce a new tool "mkmbn.py", this is based
-on the existing qtestsign[1] tool but is (currently) hardcoded to
-only handle the Dragonwing and IPQ boards which use MBN header v6.
-Additionally, the tool contains a lookup table that maps from a boards
-DT compatible property to the load address it needs. Since it's highly
-unusual for different boards using the same SoC to have different load
-addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
-
-With this tool in place, we teach binman to use it and introduce
-a qcom-binman.dts file to describe the image. The tool will emit a
-u-boot.mbn file for supported platforms, for unsupported platforms the
-u-boot MBN etype in binman will print a notice explaining that no mbn
-file is built and to look at tools/qcom/mkmbn/mkmbn.py
-
-Finally, the defconfigs are cleaned up by moving the debug UART
-definitions to config fragments (since it doesn't make sense to have
-them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
-the qcs9100_defconfig is removed entirely since the same binary can
-be created with just make arguments. This platform entirely lacked
-documentation to begin with, which should be addressed by future
-patches.
-
-The Qualcomm documentation is also cleaned up, a new "signing" page
-is added to briefly cover the what and why of MBN signing, and board
-specific pages are updated to explain the new build process.
-
-These patches have been tested on the RB3 Gen 2, but additional
-testing for other platforms would be super useful.
-
-[1]: https://github.com/msm8916-mainline/qtestsign
-
-To: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de
-Cc: u-boot-qcom@groups.io
-Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Not all tools need building, look in the srctree toolpath as well as
+the objtree.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
-Changes in v2:
-- Reworked to use binman with a plugin to build the u-boot.mbn file
-- Added some fixes for binman to work with OF_UPSTREAM and with tools
-  in the srctree toolpath rather than objtree for out of tree builds.
-- Link to v1: https://lore.kernel.org/r/20250522-b4-qcom-tooling-improvements-v1-0-8141b8955cfb@linaro.org
+ Makefile | 5 +++++
+ 1 file changed, 5 insertions(+)
 
----
-Casey Connolly (7):
-      binman: add $(srctree)/tools to toolpath
-      binman: support building binman dtb when OF_UPSTREAM is enabled
-      tools: add mkmbn tool for Qualcomm
-      binman: add support for building Qualcomm signed MBN ELF images
-      configs: qualcomm: use fragments for debug UART
-      configs: qualcomm: use mkmbn and stop creating ELF files
-      doc: board/qualcomm: update docs for new u-boot.mbn target
+diff --git a/Makefile b/Makefile
+index f88684947ee55fbc28768eeae159432649cc9ec6..719f7f6ba5161f9ae08fcfeec21b45629ef4bb3e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1402,8 +1402,13 @@ else
+ binman_dtb = ./u-boot.dtb
+ endif
+ endif
+ 
++# Not all tools are in the output dir, use the srctree toolpath as well
++ifneq ($(srctree),$(objtree))
++BINMAN_TOOLPATHS += $(srctree)/tools
++endif
++
+ quiet_cmd_binman = BINMAN  $@
+ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		$(foreach f,$(BINMAN_TOOLPATHS),--toolpath $(f)) \
+                 --toolpath $(objtree)/tools \
 
- Makefile                            |   5 +
- board/qualcomm/debug-qcm6490.config |   5 +
- board/qualcomm/debug-qcs9100.config |   5 +
- configs/qcm6490_defconfig           |  10 --
- configs/qcom_ipq9574_mmc_defconfig  |   1 -
- configs/qcs9100_defconfig           |  18 ---
- doc/board/qualcomm/index.rst        |   1 +
- doc/board/qualcomm/rb3gen2.rst      |  27 ++--
- doc/board/qualcomm/rdp.rst          |  16 +-
- doc/board/qualcomm/signing.rst      |  29 ++++
- dts/Makefile                        |  19 ++-
- tools/binman/btool/mkmbn.py         |  29 ++++
- tools/binman/etype/u_boot_mbn.py    |  51 ++++++
- tools/mkmbn                         |   1 +
- tools/qcom/mkmbn/cert.py            | 158 ++++++++++++++++++
- tools/qcom/mkmbn/elf.py             | 243 ++++++++++++++++++++++++++++
- tools/qcom/mkmbn/hashseg.py         | 308 ++++++++++++++++++++++++++++++++++++
- tools/qcom/mkmbn/mkmbn.py           | 154 ++++++++++++++++++
- 18 files changed, 1024 insertions(+), 56 deletions(-)
----
-base-commit: b22a276f039f818d5564bec6637071cfc8a7e432
-change-id: 20250522-b4-qcom-tooling-improvements-ab40585b11a1
-
-Casey Connolly <casey.connolly@linaro.org>
+-- 
+2.49.0
 
