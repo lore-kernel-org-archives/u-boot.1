@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E59FC54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B89B4C5AD49
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 14:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED41E803DF;
-	Mon,  2 Jun 2025 16:50:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4477082045;
+	Mon,  2 Jun 2025 16:50:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rhchD5Vm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eRcCb50I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79B26803DF; Mon,  2 Jun 2025 16:50:24 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 05F7082045; Mon,  2 Jun 2025 16:50:27 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE9C8006D
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:50:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1FA08006D
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 16:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552EoKJM3227575;
- Mon, 2 Jun 2025 09:50:20 -0500
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552EoNLW187689;
+ Mon, 2 Jun 2025 09:50:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748875820;
- bh=kC5Y29+Mv2xGZ5RP9Mqr7MgtADU4ykc90jabWtDtHhQ=;
- h=From:To:CC:Subject:Date;
- b=rhchD5VmzR5A7Hg/UW6dweQ4Xcj4I68hBG/vCawhqt3H2Y41iW6mrYB0kOZlUVzOg
- xvjJ6PbTW+rwhOA9iR8pVXCt0VWtG4AmsSQrcIXG2Sfe0sWpWgAoWLk37bkT/j8IaF
- O9SluCBhuTW9aO0v2HSIhETi5JxhDDqsqp1y+RFI=
+ s=ti-com-17Q1; t=1748875823;
+ bh=BWDeKyliuwVF0gNC7+3hz+R+xkxCm0Um0YXEkP6sQRA=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=eRcCb50Ip2BycYHoEG8aAZhhzc5c8ta3MiqcXMBkYKc/2m/CwiGMxb5g6JVR74d3N
+ iGo+wCx8uvgfDAUtoQpmciLD4/tMpN8wqcNHd/XHmzR2a+AXHO/MH02j4i0ctQRIuR
+ aAcOhcXuAzguhamlT+wRgFb1WTB2q0pkSQZGFJfM=
 Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552EoKpk677811
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552EoNwS677844
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 2 Jun 2025 09:50:20 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE102.ent.ti.com
+ Mon, 2 Jun 2025 09:50:23 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE102.ent.ti.com
  (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
- Jun 2025 09:50:19 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 09:50:22 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 2 Jun 2025 09:50:19 -0500
+ Frontend Transport; Mon, 2 Jun 2025 09:50:22 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552EoGpJ3118869;
- Mon, 2 Jun 2025 09:50:16 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552EoGpK3118869;
+ Mon, 2 Jun 2025 09:50:20 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>
 CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
  <jm@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>, <b-padhi@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH v2 0/4] Add IPC support on MCU R5F cluster in Split Mode
-Date: Mon, 2 Jun 2025 20:20:11 +0530
-Message-ID: <20250602145015.1274726-1-b-padhi@ti.com>
+Subject: [PATCH v2 1/4] arm: mach-k3: {am6/j7}*_hardware.h: Expose MCU R5 proc
+ and device ids
+Date: Mon, 2 Jun 2025 20:20:12 +0530
+Message-ID: <20250602145015.1274726-2-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250602145015.1274726-1-b-padhi@ti.com>
+References: <20250602145015.1274726-1-b-padhi@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -78,70 +81,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds remoteproc support on MCU R5F in Split mode.
+Currently the MCU R5 processor ids and device ids are only defined for
+R5 SPL Stage. Expose these ids always so that A72 SPL can utilize this
+information to shutdown MCU R5 Core 1 when booted in Split mode.
 
-During boot, ROM can bring up the boot R5F cores in either lockstep or
-split mode based on X509 certificate flags. If booted in lockstep mode,
-the MCU R5F cores will run first the R5 SPL, and then once A72 comes up,
-will run the Device Manager (DM) firmware. But if booted in split mode, core
-0 will run DM firmware and second core sits in WFI. Shut it down so that
-other firmwares can later be loaded on them.
+Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+---
+ arch/arm/mach-k3/include/mach/am62_hardware.h   | 4 ++--
+ arch/arm/mach-k3/include/mach/am62a_hardware.h  | 4 ++--
+ arch/arm/mach-k3/include/mach/am62p_hardware.h  | 4 ++--
+ arch/arm/mach-k3/include/mach/am64_hardware.h   | 9 +++++----
+ arch/arm/mach-k3/include/mach/am6_hardware.h    | 9 +++++----
+ arch/arm/mach-k3/include/mach/j721e_hardware.h  | 9 +++++----
+ arch/arm/mach-k3/include/mach/j721s2_hardware.h | 9 +++++----
+ arch/arm/mach-k3/include/mach/j722s_hardware.h  | 4 ++--
+ arch/arm/mach-k3/include/mach/j784s4_hardware.h | 9 +++++----
+ 9 files changed, 33 insertions(+), 28 deletions(-)
 
-The shutdown of MCU R5 Core 1 is invoked at A72 SPL init, as by that
-time Device Manager (DM) is up and running on R5 Core 0. The shutdown
-of MCU R5 Core 1 is handled by Device Manager itself.
-
-The devicetree patch [PATCH 6/6] need not be merged here, as it will be sent to
-the Linux Upstream list.
-
-v2: Changelog:
-1. Dropped patches 5 and 6 from v1. v2 only aims to add the infrastructure to
-boot R5 in split mode. [Tom/Nishanth]
-2. Used "__maybe_unused" macro for shutdown_mcu_r5_core1() in [PATCH v2 2/4]
-(Neha).
-
-Link to v1:
-https://lore.kernel.org/all/20250522071828.285462-1-b-padhi@ti.com/
-
-Testing done:
-1. Build test on all existing TI K3 platforms.
-2. Tested U-Boot and Linux load of MCU R5F core in split mode on all applicable
-boards (AM68-SK, AM69-SK, J7200-EVM, J721E-EVM, J721S2-EVM, J784S4-evm,
-J742S2-EVM)
-
-Test logs:
-https://gist.github.com/3V3RYONE/ee8e3cb9aa5f4c5c00b059b9c14bfa98
-
-Thanks,
-Beleswar
-
-Beleswar Padhi (4):
-  arm: mach-k3: {am6/j7}*_hardware.h: Expose MCU R5 proc and device ids
-  arch: mach-k3: common: Add support to shutdown MCU R5 Core 1
-  remoteproc: k3-r5: Acquire processor control before reset ops
-  board: ti: j7*: Add firmware for MCU R5 core1
-
- arch/arm/mach-k3/common.c                     | 55 +++++++++++++++++++
- arch/arm/mach-k3/common.h                     |  1 +
- arch/arm/mach-k3/include/mach/am62_hardware.h |  4 +-
- .../arm/mach-k3/include/mach/am62a_hardware.h |  4 +-
- .../arm/mach-k3/include/mach/am62p_hardware.h |  4 +-
- arch/arm/mach-k3/include/mach/am64_hardware.h |  9 +--
- arch/arm/mach-k3/include/mach/am6_hardware.h  |  9 +--
- .../arm/mach-k3/include/mach/j721e_hardware.h |  9 +--
- .../mach-k3/include/mach/j721s2_hardware.h    |  9 +--
- .../arm/mach-k3/include/mach/j722s_hardware.h |  4 +-
- .../mach-k3/include/mach/j784s4_hardware.h    |  9 +--
- arch/arm/mach-k3/j721e/j721e_init.c           |  9 ++-
- arch/arm/mach-k3/j721s2/j721s2_init.c         |  7 +++
- arch/arm/mach-k3/j784s4/j784s4_init.c         |  7 +++
- board/ti/j7200/j7200.env                      |  2 +-
- board/ti/j721e/j721e.env                      |  2 +-
- board/ti/j721s2/j721s2.env                    |  2 +-
- board/ti/j784s4/j784s4.env                    |  4 +-
- drivers/remoteproc/ti_k3_r5f_rproc.c          |  6 ++
- 19 files changed, 122 insertions(+), 34 deletions(-)
-
+diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
+index c33362696c4..2f5655bf24a 100644
+--- a/arch/arm/mach-k3/include/mach/am62_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
+@@ -177,8 +177,8 @@ static inline int k3_has_gpu(void)
+ 
+ static const u32 put_device_ids[] = {};
+ 
+-static const u32 put_core_ids[] = {};
+-
+ #endif
+ 
++static const u32 put_core_ids[] = {};
++
+ #endif /* __ASM_ARCH_AM62_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+index cd61abe0185..f3fd736f31b 100644
+--- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+@@ -90,8 +90,8 @@
+ 
+ static const u32 put_device_ids[] = {};
+ 
+-static const u32 put_core_ids[] = {};
+-
+ #endif
+ 
++static const u32 put_core_ids[] = {};
++
+ #endif /* __ASM_ARCH_AM62A_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
+index 95af5c5c547..a310b52b45d 100644
+--- a/arch/arm/mach-k3/include/mach/am62p_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
+@@ -141,8 +141,8 @@ static inline int k3_get_a53_max_frequency(void)
+ 
+ static const u32 put_device_ids[] = {};
+ 
+-static const u32 put_core_ids[] = {};
+-
+ #endif
+ 
++static const u32 put_core_ids[] = {};
++
+ #endif /* __ASM_ARCH_AM62P_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/am64_hardware.h b/arch/arm/mach-k3/include/mach/am64_hardware.h
+index 44df887d5df..105b42986de 100644
+--- a/arch/arm/mach-k3/include/mach/am64_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am64_hardware.h
+@@ -50,19 +50,20 @@
+ 
+ #define AM64X_DEV_RTI8			127
+ #define AM64X_DEV_RTI9			128
+-#define AM64X_DEV_R5FSS0_CORE0		121
+-#define AM64X_DEV_R5FSS0_CORE1		122
+ 
+ static const u32 put_device_ids[] = {
+ 	AM64X_DEV_RTI9,
+ 	AM64X_DEV_RTI8,
+ };
+ 
++#endif
++
++#define AM64X_DEV_R5FSS0_CORE0		121
++#define AM64X_DEV_R5FSS0_CORE1		122
++
+ static const u32 put_core_ids[] = {
+ 	AM64X_DEV_R5FSS0_CORE1,
+ 	AM64X_DEV_R5FSS0_CORE0, /* Handle CPU0 after CPU1 */
+ };
+ 
+-#endif
+-
+ #endif /* __ASM_ARCH_DRA8_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/am6_hardware.h b/arch/arm/mach-k3/include/mach/am6_hardware.h
+index 9913964c46b..8169584a372 100644
+--- a/arch/arm/mach-k3/include/mach/am6_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am6_hardware.h
+@@ -43,19 +43,20 @@
+ 
+ #define AM6_DEV_MCU_RTI0			134
+ #define AM6_DEV_MCU_RTI1			135
+-#define AM6_DEV_MCU_ARMSS0_CPU0			159
+-#define AM6_DEV_MCU_ARMSS0_CPU1			245
+ 
+ static const u32 put_device_ids[] = {
+ 	AM6_DEV_MCU_RTI0,
+ 	AM6_DEV_MCU_RTI1,
+ };
+ 
++#endif
++
++#define AM6_DEV_MCU_ARMSS0_CPU0			159
++#define AM6_DEV_MCU_ARMSS0_CPU1			245
++
+ static const u32 put_core_ids[] = {
+ 	AM6_DEV_MCU_ARMSS0_CPU1,
+ 	AM6_DEV_MCU_ARMSS0_CPU0,	/* Handle CPU0 after CPU1 */
+ };
+ 
+-#endif
+-
+ #endif /* __ASM_ARCH_AM6_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/j721e_hardware.h b/arch/arm/mach-k3/include/mach/j721e_hardware.h
+index 2b5ec771e18..5bef309af0a 100644
+--- a/arch/arm/mach-k3/include/mach/j721e_hardware.h
++++ b/arch/arm/mach-k3/include/mach/j721e_hardware.h
+@@ -41,19 +41,20 @@
+ 
+ #define J721E_DEV_MCU_RTI0			262
+ #define J721E_DEV_MCU_RTI1			263
+-#define J721E_DEV_MCU_ARMSS0_CPU0		250
+-#define J721E_DEV_MCU_ARMSS0_CPU1		251
+ 
+ static const u32 put_device_ids[] = {
+ 	J721E_DEV_MCU_RTI0,
+ 	J721E_DEV_MCU_RTI1,
+ };
+ 
++#endif
++
++#define J721E_DEV_MCU_ARMSS0_CPU0		250
++#define J721E_DEV_MCU_ARMSS0_CPU1		251
++
+ static const u32 put_core_ids[] = {
+ 	J721E_DEV_MCU_ARMSS0_CPU1,
+ 	J721E_DEV_MCU_ARMSS0_CPU0,	/* Handle CPU0 after CPU1 */
+ };
+ 
+-#endif
+-
+ #endif /* __ASM_ARCH_J721E_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/j721s2_hardware.h b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+index 8daea82a77e..82f076a45e0 100644
+--- a/arch/arm/mach-k3/include/mach/j721s2_hardware.h
++++ b/arch/arm/mach-k3/include/mach/j721s2_hardware.h
+@@ -41,19 +41,20 @@
+ 
+ #define J721S2_DEV_MCU_RTI0			295
+ #define J721S2_DEV_MCU_RTI1			296
+-#define J721S2_DEV_MCU_ARMSS0_CPU0		284
+-#define J721S2_DEV_MCU_ARMSS0_CPU1		285
+ 
+ static const u32 put_device_ids[] = {
+ 	J721S2_DEV_MCU_RTI0,
+ 	J721S2_DEV_MCU_RTI1,
+ };
+ 
++#endif
++
++#define J721S2_DEV_MCU_ARMSS0_CPU0		284
++#define J721S2_DEV_MCU_ARMSS0_CPU1		285
++
+ static const u32 put_core_ids[] = {
+ 	J721S2_DEV_MCU_ARMSS0_CPU1,
+ 	J721S2_DEV_MCU_ARMSS0_CPU0,	/* Handle CPU0 after CPU1 */
+ };
+ 
+-#endif
+-
+ #endif /* __ASM_ARCH_J721S2_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/j722s_hardware.h b/arch/arm/mach-k3/include/mach/j722s_hardware.h
+index 8d0bec22068..0c695134c28 100644
+--- a/arch/arm/mach-k3/include/mach/j722s_hardware.h
++++ b/arch/arm/mach-k3/include/mach/j722s_hardware.h
+@@ -76,8 +76,8 @@
+ 
+ static const u32 put_device_ids[] = {};
+ 
+-static const u32 put_core_ids[] = {};
+-
+ #endif
+ 
++static const u32 put_core_ids[] = {};
++
+ #endif /* __ASM_ARCH_J722S_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+index 0ffe238cdae..29a894baed3 100644
+--- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
++++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
+@@ -41,19 +41,20 @@
+ 
+ #define J784S4_DEV_MCU_RTI0			367
+ #define J784S4_DEV_MCU_RTI1			368
+-#define J784S4_DEV_MCU_ARMSS0_CPU0		346
+-#define J784S4_DEV_MCU_ARMSS0_CPU1		347
+ 
+ static const u32 put_device_ids[] = {
+ 	J784S4_DEV_MCU_RTI0,
+ 	J784S4_DEV_MCU_RTI1,
+ };
+ 
++#endif
++
++#define J784S4_DEV_MCU_ARMSS0_CPU0		346
++#define J784S4_DEV_MCU_ARMSS0_CPU1		347
++
+ static const u32 put_core_ids[] = {
+ 	J784S4_DEV_MCU_ARMSS0_CPU1,
+ 	J784S4_DEV_MCU_ARMSS0_CPU0,     /* Handle CPU0 after CPU1 */
+ };
+ 
+-#endif
+-
+ #endif /* __ASM_ARCH_J784S4_HARDWARE_H */
 -- 
 2.34.1
 
