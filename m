@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753BFC5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 21:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FEE8C5B549
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 22:22:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B2B8810EB;
-	Mon,  2 Jun 2025 23:57:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9402C80F9C;
+	Tue,  3 Jun 2025 00:22:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A3Q+K6e+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cg5/9o2p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 384DE81E72; Mon,  2 Jun 2025 23:57:01 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6707A80F0E
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 23:56:58 +0200 (CEST)
+ id BC22F8144A; Mon,  2 Jun 2025 20:57:33 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C39588070C
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 20:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552Lut323316834;
- Mon, 2 Jun 2025 16:56:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748901415;
- bh=uRTilhILYahW+oh0BdXA84ID8ACkffDNkOIZoIPaRGs=;
- h=From:Date:Subject:To:CC;
- b=A3Q+K6e+knQvkg2Csc0JKEl5AoM9Hk3J/AzZDELk66sASmFcQP005WhIL/MnixSXt
- F0FqwH64myynjrsPV6wsfE1BHYvIwILHEuCFOXMryPA4jsP17WR4MiWbTchnBFJmKD
- N/mOIsdef8RgSNpaMqqkl3PmmGEASEcfgj5oihNI=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552LutV93154253
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 2 Jun 2025 16:56:55 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
- Jun 2025 16:56:54 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 2 Jun 2025 16:56:54 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552LusDj3574039;
- Mon, 2 Jun 2025 16:56:54 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Mon, 2 Jun 2025 16:56:52 -0500
-Subject: [PATCH v2] binman: openssl: disable JTAG access by default
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=behradelmi1@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-32a806ef504so43077521fa.3
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 11:57:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1748890651; x=1749495451; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=O6y7swCNA6ODNLbvdPI8+xngRE6DNsKyCd0xpyTFpqQ=;
+ b=Cg5/9o2pGFun/4+mAAOUiIU9uAkgDs74ukNKT3lUf9p15KYpH7aBFRvYVI7dtNJTBk
+ +p65sXUbRKol/0yJLDOQt+mFmnGm8+4JLp8/+w+R+npmeo2bPvoSV82Mr0t8h+L0yTl3
+ zDQiu9TZHooG4b0tvF7dHxSoUtq7hlfuc73XxgSTZpa1IppADLqpD7Po56hmcSr50365
+ +EkEw7E7EgTDqHSm9P07K58kEa8fb1LKQ2bdqq/JDdbejoBLa9HKrsCqDiDmZJSU9Wcr
+ CWykZ/+4jRu0X7Xh5JF4WHsYRs4iI5Cv6SSVvnehGT7F5RAbeoV6LNcBuQIrH6eNm7pL
+ KUKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748890651; x=1749495451;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=O6y7swCNA6ODNLbvdPI8+xngRE6DNsKyCd0xpyTFpqQ=;
+ b=AFRpFQxeMsM1hrcc8qROe9RAjfSZkHnz6khE7kxTnHxkaLVfmrcwFDESQjXbhKG52x
+ 6bZEPWID1l6tLPv2YDGpfADJ956U6fQIcBcPrl+HGNEs2UQwyKyq8NisnPwOydtcxeqR
+ bL7E9UUeuRtuUfc+YnfzkbSRHG0OnA5URtNIweBPqjQgyW05iSnTXZbBJ+/c1a5CZlgg
+ HRWPFdnPhEd3PdjFWORfSwdsmz5/CpHiNi38adX9pgs00fW+AOhegKoSBqqpikjWqoau
+ GGerb4l3wYNb5FebRSe+aKm9fAStsyKPFHa4FNd7c6V1wIwrmncnkKE9EtbRxW6vek3J
+ TEWg==
+X-Gm-Message-State: AOJu0YwoVmZh4Adg/NjtfOTG02xPwJipg61SRCDj02L1DVf65HX1ABPv
+ j1NpOZo2EbddmOgP7p9YcNZwiKoMAya4U4uZzMdBwOMyRvmlzQgxawDwz3Wx1pU94bbhmw7swP3
+ UaiV4kvzTaRgUJ9pty6r/8woBVpa3fP9ABxQJH0OnuqmF
+X-Gm-Gg: ASbGncutV2bfLlDXsCdOJ6OvvPFtbQrK2XLPVUBUczjNC3VXOepkQS7VG9Ekx6+lE+I
+ xICdxCCrF+B66QDvfBrrFtcFfMWgLr1hMIxj8c9uwRqXnDw4tb25sFpe8ZIV9aqRorQVHSxUwmm
+ TtJWz+S9wBhymAPUi52eBnVbZ1pJNA5H7VbQ+A4g2Set0O
+X-Google-Smtp-Source: AGHT+IHm/GByPbMwKbb/tx/cY+U7yWW7l3o6rMZOJz9FiPm86FeZE+2eO4UxPZ5EkQLMkxFd7ISkvrcmMBiPBvtYUSI=
+X-Received: by 2002:a2e:b887:0:b0:329:1916:7a88 with SMTP id
+ 38308e7fff4ca-32a9e9b2df7mr23473181fa.6.1748890650553; Mon, 02 Jun 2025
+ 11:57:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250602-am62xsip-v2-1-c652cab47d40@ti.com>
-X-B4-Tracking: v=1; b=H4sIACMePmgC/0XMQQ6CMBCF4auQWVvTTqRBV97DsGjrILOAkg5pM
- KR3t+LC5f/y8u0glJgEbs0OiTILx7kGnhoIo5tfpPhZG1Bjqw12yk0WN+FFYaD2Stqi8QPU+5J
- o4O2gHn3tkWWN6X3I2XzXH2I1/pFslFaOOucs+ou3dF/5HOIEfSnlA/u1IrqdAAAA
-X-Change-ID: 20250128-am62xsip-2ce59e0621bf
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>, Bryan Brattlof
- <bb@ti.com>
-X-Mailer: b4 0.14.2
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Behrad Elmi <behradelmi1@gmail.com>
+Date: Mon, 2 Jun 2025 22:27:17 +0330
+X-Gm-Features: AX0GCFsUD55Fn5iICZewFystM8_HLYKI3xoCx_cXZglKgrcQkW-8e4RbdRQRCNw
+Message-ID: <CAFUnUVBZG5eV5f4sypeBrUhgJQGeYiHNKqx18p4N9o2c2_mL8w@mail.gmail.com>
+Subject: [PATCH] doc: build: fix typo in gcc.rst
+To: u-boot@lists.denx.de
+Cc: xypron.glpk@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Tue, 03 Jun 2025 00:22:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,148 +87,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Typically boards operating in production environments will not be
-monitored and so will not need JTAG access unlocked. Disable the debug
-extension by default (set debugType = 0) unless we add the 'debug'
-property in the binman configs.
+From babe445ec1e08a9bd6d313980371c4b64494ac89 Mon Sep 17 00:00:00 2001
+From: BehradElmi <behradelmi1@gmail.com>
+Date: Mon, 2 Jun 2025 20:54:16 +0330
+Subject: [PATCH] doc: build: fix typo in gcc.rst
 
-Acked-by: Andrew Davis <afd@ti.com>
-Signed-off-by: Bryan Brattlof <bb@ti.com>
+Fix a typo error in gcc.rst, changing "out-out-tree" to
+"out-of-tree" in the Out-of-tree section.
+
+Signed-off-by: BehradElmi <behradelmi1@gmail.com>
 ---
-Hello everyone,
+ doc/build/gcc.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-While digging through binman a little I noticed a few x509 extensions
-that should probably need a little adjusting before the release.
+diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
+index c76a7fbd732..1fef718ceec 100644
+--- a/doc/build/gcc.rst
++++ b/doc/build/gcc.rst
+@@ -122,7 +122,7 @@ Out-of-tree building
+ ~~~~~~~~~~~~~~~~~~~~
 
-Happy Hacking
-~Bryan
----
-Changes in v2:
-- removed subject prefix for SDK backporting
-- reworded note about the debug extension for the x509 certificate
-- dropped encryption extension patch as it's completely independent
-- Link to v1: https://lore.kernel.org/r/20250602-am62xsip-v1-0-ae8aa62b4b6e@ti.com
----
- tools/binman/btool/openssl.py       | 16 ++++++++++++----
- tools/binman/etype/ti_secure.py     |  1 +
- tools/binman/etype/ti_secure_rom.py |  1 +
- tools/binman/etype/x509_cert.py     |  7 +++++--
- 4 files changed, 19 insertions(+), 6 deletions(-)
+ By default building is performed locally and the objects are saved in
+the source
+-directory. To build out-out-tree use one of the two methods below:
++directory. To build out-of-tree use one of the two methods below:
 
-diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
-index c6df64c5316d53735fb147858b24185096254ec2..b26f087c44706f7b321347cb5014b8193b011935 100644
---- a/tools/binman/btool/openssl.py
-+++ b/tools/binman/btool/openssl.py
-@@ -153,7 +153,7 @@ numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
- 
-     def x509_cert_rom(self, cert_fname, input_fname, key_fname, sw_rev,
-                   config_fname, req_dist_name_dict, cert_type, bootcore,
--                  bootcore_opts, load_addr, sha):
-+                  bootcore_opts, load_addr, sha, debug):
-         """Create a certificate
- 
-         Args:
-@@ -221,9 +221,13 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
- # iterationCnt = INTEGER:TEST_IMAGE_KEY_DERIVE_INDEX
- # salt = FORMAT:HEX,OCT:TEST_IMAGE_KEY_DERIVE_SALT
- 
-+ # When debugging low level boot firmware it can be useful to have ROM or TIFS
-+ # unlock JTAG access to the misbehaving CPUs. However in a production setting
-+ # this can lead to code modification by outside parties after it's been
-+ # authenticated. To gain JTAG access add the 'debug' flag to the binman config
-  [ debug ]
-  debugUID = FORMAT:HEX,OCT:0000000000000000000000000000000000000000000000000000000000000000
-- debugType = INTEGER:4
-+ debugType = INTEGER:{ "4" if debug else "0" }
-  coreDbgEn = INTEGER:0
-  coreDbgSecEn = INTEGER:0
- ''', file=outf)
-@@ -238,7 +242,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
-                   imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
-                   hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
-                   hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
--                  dm_data_ext_boot_block, bootcore_opts):
-+                  dm_data_ext_boot_block, bootcore_opts, debug):
-         """Create a certificate
- 
-         Args:
-@@ -324,9 +328,13 @@ compSize = INTEGER:{imagesize_sysfw_data}
- shaType  = OID:{sha_type}
- shaValue = FORMAT:HEX,OCT:{hashval_sysfw_data}
- 
-+# When debugging low level boot firmware it can be useful to have ROM or TIFS
-+# unlock JTAG access to the misbehaving CPUs. However in a production setting
-+# this can lead to code modification by outside parties after it's been
-+# authenticated. To gain JTAG access add the 'debug' flag to the binman config
- [ debug ]
- debugUID = FORMAT:HEX,OCT:0000000000000000000000000000000000000000000000000000000000000000
--debugType = INTEGER:4
-+debugType = INTEGER:{ "4" if debug else "0" }
- coreDbgEn = INTEGER:0
- coreDbgSecEn = INTEGER:0
- 
-diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
-index 420ee263e4f92727657d949d45a63c99809ecafa..f6caa0286d97c774fa4f2931f82ee9a98677b8d4 100644
---- a/tools/binman/etype/ti_secure.py
-+++ b/tools/binman/etype/ti_secure.py
-@@ -124,6 +124,7 @@ class Entry_ti_secure(Entry_x509_cert):
-                 'OU': 'Processors',
-                 'CN': 'TI Support',
-                 'emailAddress': 'support@ti.com'}
-+        self.debug = fdt_util.GetBool(self._node, 'debug', False)
- 
-     def ReadFirewallNode(self):
-         self.firewall_cert_data['certificate'] = ""
-diff --git a/tools/binman/etype/ti_secure_rom.py b/tools/binman/etype/ti_secure_rom.py
-index f6fc3f90f84ab1b0a9c806a966d508abfd6f3eee..7e90c655940902b266507cf142680d984b8d22d4 100644
---- a/tools/binman/etype/ti_secure_rom.py
-+++ b/tools/binman/etype/ti_secure_rom.py
-@@ -87,6 +87,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
-                     'OU': 'Processors',
-                     'CN': 'TI Support',
-                     'emailAddress': 'support@ti.com'}
-+        self.debug = fdt_util.GetBool(self._node, 'debug', False)
- 
-     def NonCombinedGetCertificate(self, required):
-         """Generate certificate for legacy boot flow
-diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-index 25e6808b7f94cee76e18e2b5de22c09f91e3afd3..b6e8b0b4fb099871d8e7f731ee3e7c5d52e98b85 100644
---- a/tools/binman/etype/x509_cert.py
-+++ b/tools/binman/etype/x509_cert.py
-@@ -52,6 +52,7 @@ class Entry_x509_cert(Entry_collection):
-         self.sysfw_inner_cert_ext_boot_block = None
-         self.dm_data_ext_boot_block = None
-         self.firewall_cert_data = None
-+        self.debug = False
- 
-     def ReadNode(self):
-         super().ReadNode()
-@@ -114,7 +115,8 @@ class Entry_x509_cert(Entry_collection):
-                 bootcore=self.bootcore,
-                 bootcore_opts=self.bootcore_opts,
-                 load_addr=self.load_addr,
--                sha=self.sha
-+                sha=self.sha,
-+                debug=self.debug
-             )
-         elif type == 'rom-combined':
-             stdout = self.openssl.x509_cert_rom_combined(
-@@ -140,7 +142,8 @@ class Entry_x509_cert(Entry_collection):
-                 hashval_sysfw_data=self.hashval_sysfw_data,
-                 sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
-                 dm_data_ext_boot_block=self.dm_data_ext_boot_block,
--                bootcore_opts=self.bootcore_opts
-+                bootcore_opts=self.bootcore_opts,
-+                debug=self.debug
-             )
-         if stdout is not None:
-             data = tools.read_file(output_fname)
+ Add O= parameter to the make command line:
 
----
-base-commit: b22a276f039f818d5564bec6637071cfc8a7e432
-change-id: 20250128-am62xsip-2ce59e0621bf
-
-Best regards,
 -- 
-Bryan Brattlof <bb@ti.com>
-
+2.46.2.windows.1
