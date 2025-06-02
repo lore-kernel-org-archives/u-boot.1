@@ -4,45 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91D05C54FB3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 00:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DC74C54FB3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 06:25:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AB5F82A25;
-	Mon,  2 Jun 2025 02:41:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 71A608291D;
+	Mon,  2 Jun 2025 08:25:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OYCM4h+w";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ABC382A59; Mon,  2 Jun 2025 02:41:28 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B6E648291D
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 02:41:25 +0200 (CEST)
+ id 244D08296B; Mon,  2 Jun 2025 04:18:57 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E5876828F8
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 04:18:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B09791515;
- Sun,  1 Jun 2025 17:41:08 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 48CF93F673;
- Sun,  1 Jun 2025 17:41:24 -0700 (PDT)
-Date: Mon, 2 Jun 2025 01:40:43 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Paul Kocialkowski <contact@paulk.fr>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Icenowy Zheng <icenowy@aosc.xyz>,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 6/6] net: sun8i-emac: Add support for active-low leds
- with internal PHY
-Message-ID: <20250602014043.42c96b4f@minigeek.lan>
-In-Reply-To: <20250601153943.2690123-7-contact@paulk.fr>
-References: <20250601153943.2690123-1-contact@paulk.fr>
- <20250601153943.2690123-7-contact@paulk.fr>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2352400344aso24503355ad.2
+ for <u-boot@lists.denx.de>; Sun, 01 Jun 2025 19:18:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1748830733; x=1749435533; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wzrrr4ey8IEQUWzl1L7GG68Ms/RzhVaVjAS1jgn+uxY=;
+ b=OYCM4h+w0k4H2yhxUcACbRjMfHc8aVgiutHGu9TWahSODGxTvhW5inGWSrTAkRqSz1
+ NPOr+J/eReFVoTrVi5FBVuJXgOMotxhJP5tiueYECtiOXnYfbvZFQzeLs+KzhOkvP57c
+ uo4rOSQK8YtBPc46phdpkSIQkDBTNxUn7RcZ5q3WItR5fTThczkQUE4lvArEHdEYyOmA
+ vIaoCM786Bjr/AyGKax2sPaPUm4onKf7MJ9oblNMAhGOQhMKcrXl6uPdsZcBCSlFN1r1
+ cCPHLhlCrHnq6d3MeYX/8cwWMHJuu4NchfzGrB9V+/BT9rWuQp/IvTfxPKFFJ8wNMoCw
+ qusQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748830733; x=1749435533;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wzrrr4ey8IEQUWzl1L7GG68Ms/RzhVaVjAS1jgn+uxY=;
+ b=iUwgJRDH/AIA+Gq4zbFDDQmG6+qanRGyngfXdEacH8TEf9PIfsbYRRyvyF9uyGdZJx
+ 1ZK8qfCkzqja8k2ZSkzVFNkUJvOhgcQXsL8RsfqkP279W02AQAkcL3E8KHuxruZBpZga
+ TOgUX6wGVcKuIz9u4mbkVKBE8mOaxL9AJSMrjpfuOt3BndgQv6lYxgzFxrPYzTH59SQ0
+ zbsFoqfAPFQiJDbVIHmtOWox5cOy/mBvIPu+ub8w3+Bo0IJWvvxrSGah8fNQxKy4CAN1
+ e4Ejdngb+JAiM6Nlxqrtz0YsLdWLfIWJDYxJG8WZcJRkX49E0isljfRIPiZ1+H1+Qe62
+ XjHQ==
+X-Gm-Message-State: AOJu0YzxWd5GK4IBV1DtAUPxGj6s+U3Zg/Rqjl9SyIUJESHCYCrDAofg
+ iyaVbAVhzocB4qjeTqixMrFTlkwFZrC4HvM2FI2XcwNY1roH6aGH0wau0KORBqAM
+X-Gm-Gg: ASbGncvVhol1Z9KnLpeLyCMnjeEWfpDXxn5OMvOzBPHsh/ndoTIfg4Qj/37ONeq+hmI
+ yKrXWiQfNbqmOGDAKazBXWxMIjUJWlnh7i1agSMtNbK4Av31shGNjH98Kj7bJZAi98hacxC0NMC
+ 32wTJ8Vjs6MAj9P2pnBzvwGlKDp1h00KUsCuSj9xOusChGGoZ7es6+3Q77AvATfnGB0ToqvPD8Y
+ ccl9QBJ36ZvUfZ9+wH7wtSY5C6WaWeqItJsen2I/j6V5xgmM9Tah1xJebH3JJSWaPWjtVcoA9l/
+ 9PFEXhXnVF0l5/DhbZMBq/UfXHCOl/8yNqd2JOq02VRP+88ST0iowakPPP5CrYOF8F0vP/H4bmM
+ IMVF8FbUK4dxlU0UlEspJHPrMwlJiQ1rZa1JiJZ/e0AQ2GYM=
+X-Google-Smtp-Source: AGHT+IGivylE04Gc+ZYwgMRNxnFragSUqqpaMA5pTFxFoDUuqY1lvupt2C4waFa+fXGswaUkTZA/0A==
+X-Received: by 2002:a17:902:c94c:b0:223:653e:eb09 with SMTP id
+ d9443c01a7336-23528fedb5cmr149908935ad.7.1748830733137; 
+ Sun, 01 Jun 2025 19:18:53 -0700 (PDT)
+Received: from noble-leuven.tail872496.ts.net
+ (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23506bd94a7sm60885525ad.93.2025.06.01.19.18.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 01 Jun 2025 19:18:52 -0700 (PDT)
+From: Aristo Chen <jj251510319013@gmail.com>
+X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, richard@nod.at,
+ aristo.chen@canonical.com
+Subject: [PATCH 1/1] bootstage: Fix typo
+Date: Mon,  2 Jun 2025 02:18:02 +0000
+Message-ID: <20250602021818.2277-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 02 Jun 2025 08:25:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,82 +98,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun,  1 Jun 2025 17:39:43 +0200
-Paul Kocialkowski <contact@paulk.fr> wrote:
+Fix typo from heder to header
 
-Hi,
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ include/bootstage.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> A device-tree property is already defined to indicate that the internal
-> PHY should be used with active-low leds, which corresponds to a
-> specific bit in the dedicated syscon register.
-> 
-> Add support for setting this bit when the property is present.
-> 
-> Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
-> ---
->  drivers/net/sun8i_emac.c | 14 ++++++++++++--
->  1 file changed, 12 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
-> index 8433e7db2654..990a184e4b1f 100644
-> --- a/drivers/net/sun8i_emac.c
-> +++ b/drivers/net/sun8i_emac.c
-> @@ -176,6 +176,7 @@ struct sun8i_eth_pdata {
->  	u32 reset_delays[3];
->  	int tx_delay_ps;
->  	int rx_delay_ps;
-> +	bool leds_active_low;
->  };
->  
->  static int sun8i_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
-> @@ -287,7 +288,8 @@ static void sun8i_adjust_link(struct emac_eth_dev *priv,
->  	writel(v, priv->mac_reg + EMAC_CTL0);
->  }
->  
-> -static u32 sun8i_emac_set_syscon_ephy(struct emac_eth_dev *priv, u32 reg)
-> +static u32 sun8i_emac_set_syscon_ephy(struct sun8i_eth_pdata *pdata,
-> +				      struct emac_eth_dev *priv, u32 reg)
->  {
->  	if (priv->use_internal_phy) {
->  		/* H3 based SoC's that has an Internal 100MBit PHY
-> @@ -295,6 +297,10 @@ static u32 sun8i_emac_set_syscon_ephy(struct emac_eth_dev *priv, u32 reg)
->  		*/
->  		reg &= ~H3_EPHY_DEFAULT_MASK;
->  		reg |=  H3_EPHY_DEFAULT_VALUE;
-> +
-> +		if (pdata->leds_active_low)
-> +			reg |= H3_EPHY_LED_POL;
-
-That might be nitpicking, since it worked before, but I wonder if we
-should either explicitly clear the bit in an else branch, or follow the
-recent Linux change to build the register up from scratch:
-https://lore.kernel.org/linux-sunxi/20250423095222.1517507-1-andre.przywara@arm.com/
-
-Cheers,
-Andre
-
-> +
->  		reg |= priv->phyaddr << H3_EPHY_ADDR_SHIFT;
->  		reg &= ~H3_EPHY_SHUTDOWN;
->  		return reg | H3_EPHY_SELECT;
-> @@ -314,7 +320,7 @@ static int sun8i_emac_set_syscon(struct sun8i_eth_pdata *pdata,
->  
->  	reg = readl(priv->sysctl_reg);
->  
-> -	reg = sun8i_emac_set_syscon_ephy(priv, reg);
-> +	reg = sun8i_emac_set_syscon_ephy(pdata, priv, reg);
->  
->  	reg &= ~(SC_ETCS_MASK | SC_EPIT);
->  	if (priv->variant->support_rmii)
-> @@ -859,6 +865,10 @@ static int sun8i_emac_eth_of_to_plat(struct udevice *dev)
->  		printf("%s: Invalid RX delay value %d\n", __func__,
->  		       sun8i_pdata->rx_delay_ps);
->  
-> +	sun8i_pdata->leds_active_low =
-> +		fdtdec_get_bool(gd->fdt_blob, dev_of_offset(dev),
-> +				"allwinner,leds-active-low");
-> +
->  	if (fdtdec_get_bool(gd->fdt_blob, dev_of_offset(dev),
->  			    "snps,reset-active-low"))
->  		reset_flags |= GPIOD_ACTIVE_LOW;
+diff --git a/include/bootstage.h b/include/bootstage.h
+index 3300ca0248a..528d0ca0614 100644
+--- a/include/bootstage.h
++++ b/include/bootstage.h
+@@ -73,7 +73,7 @@ enum bootstage_id {
+ 	BOOTSTAGE_ID_CHECK_RAMDISK = 9,	/* Checking ram disk */
+ 
+ 	BOOTSTAGE_ID_RD_MAGIC,		/* Checking ram disk magic */
+-	BOOTSTAGE_ID_RD_HDR_CHECKSUM,	/* Checking ram disk heder checksum */
++	BOOTSTAGE_ID_RD_HDR_CHECKSUM,	/* Checking ram disk header checksum */
+ 	BOOTSTAGE_ID_RD_CHECKSUM,	/* Checking ram disk checksum */
+ 	BOOTSTAGE_ID_COPY_RAMDISK = 12,	/* Copying ram disk into place */
+ 	BOOTSTAGE_ID_RAMDISK,		/* Checking for valid ramdisk */
+-- 
+2.43.0
 
