@@ -4,114 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33082C5B559
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 21:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF634C5B555
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 21:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BA7B810EB;
-	Mon,  2 Jun 2025 23:13:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 36C52810EB;
+	Mon,  2 Jun 2025 23:21:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QjkPr1cM";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YDTNYaQB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58E8A81E72; Mon,  2 Jun 2025 23:13:49 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37FEE8006D
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 23:13:47 +0200 (CEST)
+ id F1A3A81E72; Mon,  2 Jun 2025 23:21:57 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 958C280BAE
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 23:21:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1748898825; x=1749503625; i=xypron.glpk@gmx.de;
- bh=B3P5PDgg1fBhhTiFzZ6WJ6av1Hry5NTAfGlsae2XAKc=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=QjkPr1cMhg27O69l5JAzPFFLYX03/wvcZo6NDHfh4YelkeVrAi+8ULZcAzt5vK/h
- w/KVTKPA7Wj2X7YzR538OxMJsk2ijraNq7fAty07fxHNGHVNS4ps6w5K6xg4Kl821
- J1ulHETxmUR966YhR2v92VKgFA95fGh2/IqgAEeBRTjra+VrYW60BjCahUY9MQN/p
- xzQ8HON7SqQTdMMqnEEwSKxxvnzH38BdnS1bsoXOIjbRNVNC/J4WV08hFskO9u0sM
- jbd0DwH560ejabMhEhYFUoSXUSbf91/3yxAbJ90CHVvC1SA37jUDmFcpnalcq4TDR
- fH0wpoRvv0fiT4LU/Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEFvp-1uCbhl1usv-003nuQ; Mon, 02
- Jun 2025 23:13:44 +0200
-Date: Mon, 02 Jun 2025 23:13:39 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Jerome Forissier <jerome.forissier@linaro.org>,
- U-Boot mailing list <u-boot@lists.denx.de>
-CC: Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_1/3=5D_net=3A_extract_function_?=
- =?US-ASCII?Q?net=5Fsntp=5Fset=5Frtc=28=29_from_sntp=5Fhandler=28=29?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250521151516.16729-2-jerome.forissier@linaro.org>
-References: <20250521151516.16729-1-jerome.forissier@linaro.org>
- <20250521151516.16729-2-jerome.forissier@linaro.org>
-Message-ID: <EC613C0A-90A2-4F7E-A9BE-4598BEF2023E@gmx.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 552LLrfm3308146;
+ Mon, 2 Jun 2025 16:21:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748899313;
+ bh=Hv1DwmS2txu+CdymUuvULIOQ1d9EDb8CuA7ZWwxvBGc=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=YDTNYaQBJsMVLJ2JdN3Dg/2LL/QxeWz3TJnI/R0QnYW65DzVzL/DEpU/sSGjA7Qi9
+ eqUTcfrYdtoqmj1LU2LXFjbW0AxTDDS974uBs5zhGWqMFE0Cg0cC91xHYiYci9Tdww
+ jj4gE24ZCVCvDwyLo6RLznLu50q0naGMYDyLAsvI=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 552LLr1O3065302
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 2 Jun 2025 16:21:53 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Jun 2025 16:21:53 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Jun 2025 16:21:53 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 552LLqSW3539766;
+ Mon, 2 Jun 2025 16:21:52 -0500
+Message-ID: <b1214fad-72b9-4055-b368-de2bc05130e5@ti.com>
+Date: Mon, 2 Jun 2025 16:21:52 -0500
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KlhNbi/usSYMdVoFpUIAvlypS14+te/FGf5beb0XB3VIHef6NII
- 7krAJdMttSMN1XptsnIW18bn5DonBfSIDZIw2uJ7VkEk1wVFfyD6nUDNo9WbQZ1+vSVSiZT
- q7Q1B+YbjZn5guCwzB6/DU5LvXzo85l3IejTlleMMd2QJ6M/7lXItiIFaUTqDmwYP7p/ROM
- WPclBIfCVICtQY+pEJruA==
-UI-OutboundReport: notjunk:1;M01:P0:VOtu1UF6LVY=;rDVZ9NJnED5HmsDwayp/JIS+P6E
- 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
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH tiU2025.01 2/2] binman: openssl: disable JTAG access by
+ default
+From: Andrew Davis <afd@ti.com>
+To: Bryan Brattlof <bb@ti.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
+ Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20250602-am62xsip-v1-0-ae8aa62b4b6e@ti.com>
+ <20250602-am62xsip-v1-2-ae8aa62b4b6e@ti.com>
+ <d347cb7e-4b59-4f3e-8dc4-307db7027b63@ti.com>
+Content-Language: en-US
+In-Reply-To: <d347cb7e-4b59-4f3e-8dc4-307db7027b63@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,124 +83,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 21=2E Mai 2025 17:14:41 MESZ schrieb Jerome Forissier <jerome=2Eforissie=
-r@linaro=2Eorg>:
->Extract the code that sets the RTC clock from sntp_handler() in
->net/sntp=2Ec and make it a new function net_sntp_set_rtc() in
->net/net-common=2Ec=2E This will allow re-use with NET_LWIP=2E
->
->Signed-off-by: Jerome Forissier <jerome=2Eforissier@linaro=2Eorg>
->---
->
-> include/net-common=2Eh |  2 ++
-> net/net-common=2Ec     | 28 ++++++++++++++++++++++++++++
-> net/sntp=2Ec           | 23 +++--------------------
-> 3 files changed, 33 insertions(+), 20 deletions(-)
->
->diff --git a/include/net-common=2Eh b/include/net-common=2Eh
->index e536968a92b=2E=2Ea021bf503ff 100644
->--- a/include/net-common=2Eh
->+++ b/include/net-common=2Eh
->@@ -586,4 +586,6 @@ extern struct wget_http_info default_wget_info;
-> extern struct wget_http_info *wget_info;
-> int wget_request(ulong dst_addr, char *uri, struct wget_http_info *info)=
-;
->=20
->+void net_sntp_set_rtc(u32 seconds);
->+
-> #endif /* __NET_COMMON_H__ */
->diff --git a/net/net-common=2Ec b/net/net-common=2Ec
->index e01b0da7d7b=2E=2E30d04323d4a 100644
->--- a/net/net-common=2Ec
->+++ b/net/net-common=2Ec
->@@ -1,5 +1,9 @@
-> // SPDX-License-Identifier: GPL-2=2E0
->+
->+#include <dm/uclass=2Eh>
-> #include <net-common=2Eh>
->+#include <linux/time=2Eh>
->+#include <rtc=2Eh>
->=20
-> void copy_filename(char *dst, const char *src, int size)
-> {
->@@ -25,3 +29,27 @@ int wget_request(ulong dst_addr, char *uri, struct wge=
-t_http_info *info)
-> 	wget_info =3D info ? info : &default_wget_info;
-> 	return wget_do_request(dst_addr, uri);
-> }
->+
->+void net_sntp_set_rtc(u32 seconds)
->+{
->+	struct rtc_time tm;
->+#ifdef CONFIG_DM_RTC
+On 6/2/25 12:28 PM, Andrew Davis wrote:
+> On 6/2/25 11:56 AM, Bryan Brattlof wrote:
+>> Typically for boards operating in production environments will not be
+>> monitored and so will not need JTAG access unlocked. Disable the debug
+>> extension unless asked for in the binman configs.
+>>
+>> Signed-off-by: Bryan Brattlof <bb@ti.com>
+>> ---
+>>   tools/binman/btool/openssl.py       | 16 ++++++++++++----
+>>   tools/binman/etype/ti_secure.py     |  1 +
+>>   tools/binman/etype/ti_secure_rom.py |  1 +
+>>   tools/binman/etype/x509_cert.py     |  7 +++++--
+>>   4 files changed, 19 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
+>> index 2e128e477bce87568b6d9647bbf2666f9770d732..c91d8990a1dc9151bb8fc831c0f1bff2d91b014e 100644
+>> --- a/tools/binman/btool/openssl.py
+>> +++ b/tools/binman/btool/openssl.py
+>> @@ -153,7 +153,7 @@ numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
+>>       def x509_cert_rom(self, cert_fname, input_fname, key_fname, sw_rev,
+>>                     config_fname, req_dist_name_dict, cert_type, bootcore,
+>> -                  bootcore_opts, load_addr, sha):
+>> +                  bootcore_opts, load_addr, sha, debug):
+>>           """Create a certificate
+>>           Args:
+>> @@ -214,9 +214,13 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+>>    [ swrv ]
+>>    swrv = INTEGER:{sw_rev}
+>> + # When debugging low level boot firmware it can be useful to have ROM or TIFS
+>> + # unlock JTAG access to the misbehaving CPUs. However in a production setting
+>> + # this can lead to code modification after it's been authenticated by outside
+>> + # parties. To gain JTAG access add the 'debug' flag to the binman configuration
+> 
+> Stating that adding the debug flag gets you JTAG access seems a bit misleading.
+> Having the debugType is a necessary but not sufficient condition for JTAG unlock.
+> 
 
-Are there really RTC drivers that have not been converted to the driver mo=
-del=2E If yes, shouldn't we drop these?
+I have to walk this back a little, this might only be true for TIFS which processes
+the debug certificates after it takes over the SMS from secure ROM. Secure ROM may
+have a different set of rules. Since this patch is updating both ROM and TIFS
+certificates boot images we should focus on the ROM side.
 
-Best regards
+> This only sets the upper-bound on what a later supplied JTAG unlock certificate
+> can do, unless coreDbg* is set this should not by itself open JTAG on HS-SE
+> devices. For HS-FS devices I'll have to double check and if it does we should
+> decide if we want this unlocked by default or not.
+> 
 
-Heinrich
+Seems HS-FS devices are default unlocked, and so I'm not sure why we set this to
+unlock for the rest of the device types here in the first place. It only seems
+to be a really big foot-gun for HS-SE users :/
 
->+	struct udevice *dev;
->+	int ret;
->+#endif
->+
->+	rtc_to_tm(seconds, &tm);
->+
->+#ifdef CONFIG_DM_RTC
->+	ret =3D uclass_get_device(UCLASS_RTC, 0, &dev);
->+	if (ret)
->+		printf("SNTP: cannot find RTC: err=3D%d\n", ret);
->+	else
->+		dm_rtc_set(dev, &tm);
->+#elif defined(CONFIG_CMD_DATE)
->+	rtc_set(&tm);
->+#endif
->+	printf("Date: %4d-%02d-%02d Time: %2d:%02d:%02d\n",
->+	       tm=2Etm_year, tm=2Etm_mon, tm=2Etm_mday,
->+	       tm=2Etm_hour, tm=2Etm_min, tm=2Etm_sec);
->+}
->diff --git a/net/sntp=2Ec b/net/sntp=2Ec
->index 73d1d87d38b=2E=2E77cee0046bd 100644
->--- a/net/sntp=2Ec
->+++ b/net/sntp=2Ec
->@@ -57,8 +57,7 @@ static void sntp_handler(uchar *pkt, unsigned dest, str=
-uct in_addr sip,
-> 			 unsigned src, unsigned len)
-> {
-> 	struct sntp_pkt_t *rpktp =3D (struct sntp_pkt_t *)pkt;
->-	struct rtc_time tm;
->-	ulong seconds;
->+	u32 seconds;
->=20
-> 	debug("%s\n", __func__);
->=20
->@@ -69,24 +68,8 @@ static void sntp_handler(uchar *pkt, unsigned dest, st=
-ruct in_addr sip,
-> 	 * As the RTC's used in U-Boot support second resolution only
-> 	 * we simply ignore the sub-second field=2E
-> 	 */
->-	memcpy(&seconds, &rpktp->transmit_timestamp, sizeof(ulong));
->-
->-	rtc_to_tm(ntohl(seconds) - 2208988800UL + net_ntp_time_offset, &tm);
->-#ifdef CONFIG_DM_RTC
->-	struct udevice *dev;
->-	int ret;
->-
->-	ret =3D uclass_get_device(UCLASS_RTC, 0, &dev);
->-	if (ret)
->-		printf("SNTP: cannot find RTC: err=3D%d\n", ret);
->-	else
->-		dm_rtc_set(dev, &tm);
->-#elif defined(CONFIG_CMD_DATE)
->-	rtc_set(&tm);
->-#endif
->-	printf("Date: %4d-%02d-%02d Time: %2d:%02d:%02d\n",
->-	       tm=2Etm_year, tm=2Etm_mon, tm=2Etm_mday,
->-	       tm=2Etm_hour, tm=2Etm_min, tm=2Etm_sec);
->+	memcpy(&seconds, &rpktp->transmit_timestamp, sizeof(seconds));
->+	net_sntp_set_rtc(ntohl(seconds) - 2208988800UL + net_ntp_time_offset);
->=20
-> 	net_set_state(NETLOOP_SUCCESS);
-> }
+Let's flip the default,
 
+Acked-by: Andrew Davis <afd@ti.com>
+
+Also could you send v2 of this as a stand-alone patch? This change should be
+independent of the encryption extension in patch [1/2].
+
+Andrew
+
+> Andrew
+> 
+>>    [ debug ]
+>>    debugUID = FORMAT:HEX,OCT:0000000000000000000000000000000000000000000000000000000000000000
+>> - debugType = INTEGER:4
+>> + debugType = INTEGER:{ "4" if debug else "0" }
+>>    coreDbgEn = INTEGER:0
+>>    coreDbgSecEn = INTEGER:0
+>>   ''', file=outf)
+>> @@ -231,7 +235,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+>>                     imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
+>>                     hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
+>>                     hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
+>> -                  dm_data_ext_boot_block, bootcore_opts):
+>> +                  dm_data_ext_boot_block, bootcore_opts, debug):
+>>           """Create a certificate
+>>           Args:
+>> @@ -317,9 +321,13 @@ compSize = INTEGER:{imagesize_sysfw_data}
+>>   shaType  = OID:{sha_type}
+>>   shaValue = FORMAT:HEX,OCT:{hashval_sysfw_data}
+>> +# When debugging low level boot firmware it can be useful to have ROM or TIFS
+>> +# unlock JTAG access to the misbehaving CPUs. However in a production setting
+>> +# this can lead to code modification after it's been authenticated by outside
+>> +# parties. To gain JTAG access add the 'debug' flag to the binman configuration
+>>   [ debug ]
+>>   debugUID = FORMAT:HEX,OCT:0000000000000000000000000000000000000000000000000000000000000000
+>> -debugType = INTEGER:4
+>> +debugType = INTEGER:{ "4" if debug else "0" }
+>>   coreDbgEn = INTEGER:0
+>>   coreDbgSecEn = INTEGER:0
+>> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
+>> index 420ee263e4f92727657d949d45a63c99809ecafa..f6caa0286d97c774fa4f2931f82ee9a98677b8d4 100644
+>> --- a/tools/binman/etype/ti_secure.py
+>> +++ b/tools/binman/etype/ti_secure.py
+>> @@ -124,6 +124,7 @@ class Entry_ti_secure(Entry_x509_cert):
+>>                   'OU': 'Processors',
+>>                   'CN': 'TI Support',
+>>                   'emailAddress': 'support@ti.com'}
+>> +        self.debug = fdt_util.GetBool(self._node, 'debug', False)
+>>       def ReadFirewallNode(self):
+>>           self.firewall_cert_data['certificate'] = ""
+>> diff --git a/tools/binman/etype/ti_secure_rom.py b/tools/binman/etype/ti_secure_rom.py
+>> index f6fc3f90f84ab1b0a9c806a966d508abfd6f3eee..7e90c655940902b266507cf142680d984b8d22d4 100644
+>> --- a/tools/binman/etype/ti_secure_rom.py
+>> +++ b/tools/binman/etype/ti_secure_rom.py
+>> @@ -87,6 +87,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>>                       'OU': 'Processors',
+>>                       'CN': 'TI Support',
+>>                       'emailAddress': 'support@ti.com'}
+>> +        self.debug = fdt_util.GetBool(self._node, 'debug', False)
+>>       def NonCombinedGetCertificate(self, required):
+>>           """Generate certificate for legacy boot flow
+>> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+>> index 25e6808b7f94cee76e18e2b5de22c09f91e3afd3..b6e8b0b4fb099871d8e7f731ee3e7c5d52e98b85 100644
+>> --- a/tools/binman/etype/x509_cert.py
+>> +++ b/tools/binman/etype/x509_cert.py
+>> @@ -52,6 +52,7 @@ class Entry_x509_cert(Entry_collection):
+>>           self.sysfw_inner_cert_ext_boot_block = None
+>>           self.dm_data_ext_boot_block = None
+>>           self.firewall_cert_data = None
+>> +        self.debug = False
+>>       def ReadNode(self):
+>>           super().ReadNode()
+>> @@ -114,7 +115,8 @@ class Entry_x509_cert(Entry_collection):
+>>                   bootcore=self.bootcore,
+>>                   bootcore_opts=self.bootcore_opts,
+>>                   load_addr=self.load_addr,
+>> -                sha=self.sha
+>> +                sha=self.sha,
+>> +                debug=self.debug
+>>               )
+>>           elif type == 'rom-combined':
+>>               stdout = self.openssl.x509_cert_rom_combined(
+>> @@ -140,7 +142,8 @@ class Entry_x509_cert(Entry_collection):
+>>                   hashval_sysfw_data=self.hashval_sysfw_data,
+>>                   sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
+>>                   dm_data_ext_boot_block=self.dm_data_ext_boot_block,
+>> -                bootcore_opts=self.bootcore_opts
+>> +                bootcore_opts=self.bootcore_opts,
+>> +                debug=self.debug
+>>               )
+>>           if stdout is not None:
+>>               data = tools.read_file(output_fname)
+>>
