@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4EE0C5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 22:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8055DC5B549
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 22:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 425EC80F9C;
-	Tue,  3 Jun 2025 00:27:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD0E780F9C;
+	Tue,  3 Jun 2025 00:31:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rb3zrpHZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RxYBuX1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B0A681E72; Tue,  3 Jun 2025 00:27:45 +0200 (CEST)
+ id 9BC5181E72; Tue,  3 Jun 2025 00:31:07 +0200 (CEST)
 Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
  [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D503080F0E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 00:27:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6ED0F80F0E
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 00:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4033c70577fso2677993b6e.0
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 15:27:42 -0700 (PDT)
+ 5614622812f47-4067ac8f6cdso2875728b6e.2
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 15:31:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748903261; x=1749508061; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=K3KOkA9vcnExGBorB0SCPlKWiacPgYEEy8cK7DGADqQ=;
- b=Rb3zrpHZwol+LU9bb8oMP3MUxWKo9Tzvk+tStgrIl6S3CWWSWOJRWcMLcMT4TFQoOD
- dSTqvd2HDOXwe76NiqG/Gg+eZuKlPWy5/Atituup2QX1qhE0FnPJwwdKoxAFlqtxeRPL
- 2X69pbJ4we1Mda+krwOSCfL9QpekBiLrAxyGI=
+ d=konsulko.com; s=google; t=1748903464; x=1749508264; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DDy2KwzBjWZGIQ0UpqTC32mLkLGZ19lRxV2bCnxeBsk=;
+ b=RxYBuX1yuo+UM9d/1Lljb5bQ6QDwdaipFg+n8x+1O42PwBllkFxhrXaWWrqNV/ylU7
+ P6W6pb5uxADp8swVN6dee7De4YQPPeqyWrKM+MxOYnG6QI4tZ4Zwt/nG7RDSVeHZRo6+
+ O8lNcITpDs42Clel0mnZQz/0JfBEswiFqIWSE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748903261; x=1749508061;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=K3KOkA9vcnExGBorB0SCPlKWiacPgYEEy8cK7DGADqQ=;
- b=EEfQvqCYnbj28ntMybekhGmXhrU54EQRtzGr0w+vY4/65aEIKaFTpZJOfdxxejAE9R
- fOeqD6PqGGxzlzFicisvmjqD/eTlC9Id7dHSnX40X4QubecHYp2UixQGpoysuuaKSqeL
- Ant5kwVBsPT34ni18atDERc1ZyhY3mMFtJ/Qqw03baMtaR8XdU+fUC7atzLRHSUuWQ3I
- PaWp5mbu7ID474QJULU+C7LIj8UflCl2ZJTyCvqRgoOtBi8xrdCBSOTExXmYNniFAJXh
- /LmFlSH9Ct23HYFHD6vc2S35TB0QY3+hdtaUNGF0JLcsts1Unec4oscXEScG2dEHOSmr
- Hg9g==
-X-Gm-Message-State: AOJu0YxBjRtPF139w+S13PSogIGj6VHI0N8MykXTTkowwgEMCAULkp1P
- ycCaZHJkBCe9abrt3eMrJ5l0AggOc0RyOoNdiUPupXx+fJ1QPV5Y5YFvfhuc5ba2t7/kOfgyyGD
- dQDlepPM=
-X-Gm-Gg: ASbGncspF4WCTGYGlVuXhpTmAENUAEM2clrgTqtT1sej503kNT4zw1dF99P2b6T9I91
- JqKn4K/heVDRUkm6AFu7VkdEhFY4ylfcUooJI5S2vQumpPWMtoN+1SDNO7aCO1PKakvVch0n0o7
- wexzNO3DH46djtex0Oc87vIrdbKCHexwOY3XKOee8bMqDq5Ytdy3OlT3fIELyC86f9fMsCmPMZo
- zm4LJ9Z5dTdpk+jA3J+ux62IfgYAMvEESWC9f2jSn7eSjC+4XSv+ED3GsogaBVk4z5KoBjn2rwh
- D38t2zsQlr5G03WIzACByYbKnja35t1wGYTSlbpwRtZ11rZYOPxLBZmfbFZFe4xQYwD0oCXbEh1
- xMoRBmLJptg4o
-X-Google-Smtp-Source: AGHT+IEucUnL6gUaABkLk2OHbVzZiLUil5GjTYUWa/dCUYiuwXX78h91ThNoNtOhdmKNMO74tovX4A==
-X-Received: by 2002:a05:6808:2116:b0:404:a09a:dc0d with SMTP id
- 5614622812f47-407a662416dmr5692579b6e.33.1748903261519; 
- Mon, 02 Jun 2025 15:27:41 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748903464; x=1749508264;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DDy2KwzBjWZGIQ0UpqTC32mLkLGZ19lRxV2bCnxeBsk=;
+ b=cyBeknyZ3WpGHyfy/mTllMJewnkUJGQva3juZ9WcryvrNYrLqjYSL3ilnT8TcrOItz
+ fG1ZOGwBo4x0saOqj29H/GoWfUou8geRXkfBP0aory+gDYcgO9Em+CEOFSvAikLjxwoU
+ 4bESv/1QrRtuO6jhFdfW5khbBeBCFKewl48Nn21ajfDX9h2/J+fMEfiPIbbtL4MZN4f/
+ 54Zr54cBiG1Z8if3GL7TZYtsH7Zf8PqWiS2fn0b8ec0NmSwB67Egg20JcLRvcYMPQScu
+ zyOfUMssRmTYz8u6tqdkYUEYhrgib1WZtkk5t/mDi7E0X9ll+ZEut0qi8BVOz41FmMSn
+ iKCQ==
+X-Gm-Message-State: AOJu0YwMXz39xVjI0GSoCjyR/gNuSEgEG2muYnnZFvH/LSq7kJ6z2ZWE
+ ZHiAOkoJUfX3VU2cOM/TYkY3G7+jaFnEt/HAFYzyOEj16AVvj+hDAg7Fo1QOhbr2XKanrSjyu8J
+ 4deC9DZk=
+X-Gm-Gg: ASbGncstlY8p4uBDy07rnGM7BBtNdbuGJypXM/6mkQjjvDGIS0YQrBKfsweGBfKp7ZI
+ lMNJwqe95xCwVgseB+EWqyBZQZ971uJ9GThk+gpTddY2aoVD/KTvQnP8YccrHJZuBpv2O9C2+Oo
+ TMOHH+w44H/Dqr97qlNE3ihkWJ+6c8L52p7rZ7Qo3yyGYvpgLdS9C0miofJTs0peUok/W+A1xpH
+ 6N1OtaPzIqqoYF1oU8QX+evhK9yrwsZKp/zFhcWvZLNJYvM6Yx7KX4qPqc/zkx2eAgiMg/0VGdm
+ 76YQgTlPfBHkjM1hUBPLkhCX2SAKxcFwtPKsWuzmFkiFB1LepM6v1v/BjpNHm1qaaux0KIbpZKh
+ N1onjQxEBtncv
+X-Google-Smtp-Source: AGHT+IG6LDWwdw6yO0wkLHLQMZbs7S7FRJVBv8xX4GVVG6J+n5Iwjv4idCbiFtW8shXM2RO5TlK48A==
+X-Received: by 2002:a05:6808:6b89:b0:407:9d24:aef7 with SMTP id
+ 5614622812f47-407a65d8712mr6004875b6e.18.1748903464126; 
+ Mon, 02 Jun 2025 15:31:04 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40678ce8fedsm1600309b6e.34.2025.06.02.15.27.40
- for <u-boot@lists.denx.de>
+ 46e09a7af769-735af82cffdsm1676998a34.14.2025.06.02.15.31.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 15:27:40 -0700 (PDT)
-Date: Mon, 2 Jun 2025 16:27:38 -0600
+ Mon, 02 Jun 2025 15:31:03 -0700 (PDT)
+Date: Mon, 2 Jun 2025 16:31:01 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [RFH] Future direction of the U-Boot project
-Message-ID: <20250602222738.GC100073@bill-the-cat>
+To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] dtc: Add Kconfig option to pad device tree blob
+Message-ID: <20250602223101.GA1230232@bill-the-cat>
+References: <20250520182305.3819776-1-eric.schikschneit@novatechautomation.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+HRbEPrvfdoriO+B"
+ protocol="application/pgp-signature"; boundary="eAIk0U3stO4UI7ik"
 Content-Disposition: inline
+In-Reply-To: <20250520182305.3819776-1-eric.schikschneit@novatechautomation.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,87 +97,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+HRbEPrvfdoriO+B
+--eAIk0U3stO4UI7ik
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+On Tue, May 20, 2025 at 01:23:05PM -0500, Eric Schikschneit wrote:
 
-Something I've talked about in release emails earlier this year, and
-promised a follow-up on but hadn't gotten to yet, was how to manage the
-project moving forward. The email I made last week about Simon also I
-believe highlighted some of the problems that we as a project and
-community face.
+> This will allow arch(s) that use device tree blobs to pad the end of the
+> device tree so they can be modified by board files at run time. This will
+> help prevent errors such as FDT_ERR_NOSPACE from occuring.
+>=20
+> Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.co=
+m>
 
-As a starting point, I want to thank all of the people (and companies)
-that have been working on the project and doing the less visible but
-important and expensive things that need doing. DENX has been running
-much of the project infrastructure since inception. Currently, all of
-the fast AMD64 build machines are from Simon. Linaro has been providing
-two of the 3 fast ARM64 build machines (the other is from Simon). Our
-patchwork project is on OzLabs group. A number of years ago, Simon
-picked up the u-boot.org domain. There's likely other things I'm
-unintentionally forgetting here.
+I was testing merging this and I found a few problems, sorry.
 
-So, what are the problems I see and would like to get some help and
-guidance in working on resolving? Well, in a lot of ways it all stems
-=66rom one root cause. The project was founded on the "BDFL" model,
-which was quite common at the time, and a relatively reasonable option
-too.
+> ---
+>  arch/Kconfig                   | 7 +++++++
+>  arch/arc/dts/Makefile          | 2 +-
+>  arch/m68k/dts/Makefile         | 2 +-
+>  arch/microblaze/dts/Makefile   | 2 +-
+>  arch/nios2/dts/Makefile        | 2 +-
+>  arch/riscv/dts/Makefile        | 2 +-
+>  arch/sandbox/dts/Makefile      | 2 +-
+>  arch/x86/dts/Makefile          | 2 +-
+>  doc/board/broadcom/bcm7xxx.rst | 6 ++----
+>  doc/develop/makefiles.rst      | 5 ++++-
+>  scripts/Makefile.dts           | 4 ++++
+>  11 files changed, 24 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index ea33d07c086..a683af3d591 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -63,6 +63,13 @@ config SYS_CACHELINE_SIZE
+>  	default 64 if RISCV
+>  	default 32 if MIPS
+> =20
+> +config SYS_DTC_PAD_BYTES
+> +	int "Size in bytes to pad device tree blob"
+> +	default 4096 if ARC || ARM || M68K || MICROBLAZE || NIOS2 \
+> +		|| RISCV || SANDBOX || X86
+> +	default 32768 if X86 && EFI_APP
+> +	default 0
 
-But now? It makes getting resources harder. There are a number of people
-working in the background now trying to get things donated to the
-project (thank you, again) but I also know historically it's been a
-challenge not having some distinct entity for U-Boot. Individual
-contributions are best done as "I have a server" or similar. Conferences
-are a strictly individual thing.
+I believe this is the logic I suggested and so the problem is on me. For
+ARM && ARM64, this is right. But for 32bit ARM, we should be 0 and let
+individual boards set this as needed (none today but your board does
+need it). This leads to size growth and then failure on a few platforms
+is how I noticed this.
 
-Then there's the day to day parts of the project. I feel like I
-shouldn't complain about taking vacations where I just handle pull
-requests and not patchwork stuff too, or only doing a few things on the
-weekend. But it also means there's no real way to handle contentious
-issues other than what I say goes. Which isn't ideal.
-
-What to do about it? Well, I've talked with the Software Freedom
-Conservancy (https://sfconservancy.org/) (SFC) earlier in the year (and
-before that, years ago at conferences). There are number of open source
-and community focused projects that they provide a legal entity for and
-help with administrative things. I've personally been a fan of what they
-do, and donated yearly for a long time. I think they would be a good fit
-for the project because they do this kind of work for a number of other
-big and important and community centric projects. I would encourage
-anyone interested to look at their website and look around.
-
-But that is something like step two or step three. The first step is
-that I'm hoping some members of the community would like to formalize
-helping with the project. SFC can help us with creating some
-organizational structure for the project itself, but we need a few
-people to do it. And before we even get that far, help with the mailing
-list moderation queue and triaging patchwork assignments would be great.
-
-Thanks for reading this, I look forward to finding a sustainable path
-forward for the project and the community at large.
+The second problem is that the Makefiles in dts/upstream are confusingly
+not 100% upstream things and so also need to have -p 0x1000 taken out of
+them as they'll get the value this way instead.
 
 --=20
 Tom
 
---+HRbEPrvfdoriO+B
+--eAIk0U3stO4UI7ik
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg+JUIACgkQFHw5/5Y0
-tyx3gAwAhbZ+unxyuO4A+rgEXGyGbDrreI/bwrd+hCPwGN1mKyK1BFu8zTEIKBhJ
-sOKCwj4ydiuRCua+rtY12Ohud/RsIaNHBYnCz6+PKCssYe3mYXtTb28AHvaKkmKu
-3qso2NnymshmZfxqZV/iNq5PJx8NetclKgHcIZlrItNsVhT1qB31SbIPgpFPn/2d
-0O/QXyp7l1fW6QzCCPHzgvRJ9V+31am3XscMSQGg/4x6JGJoRSANcqUWIK7qTsyX
-gKpPkvDrl8oUzHctx+DrUQikLa8HrgsTBFgIdDbgVTkYpiVsrW905lKMp2vrDIYB
-lmk+G8OP/LzawPeQow+1FRWI8fVOTz5eYuS7Tw6bhQ0nqNKpVHvJd5Sca8iJkXJn
-zRTN5nSXsDF8XJ4WkjermfBTNtqpyrGauXG4Th4DilDrLXmOg/GlsdvtiwzjDi6y
-WeEcaPqhEcJCoosuxUzK9R6gfou0yvebCSFm2U/kvXbyoFm+9izHMlK5YD2JHaj/
-szw+/DqA
-=If8r
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg+JiUACgkQFHw5/5Y0
+tyy8sAv7BE3kdAgql0Tukew7ezX+wDcTQD6pKRcNI3qRax+TfCIwbW3XfmthBiCc
+gyiEdEyOYwomKh43FEgE7SNAxcPvV3wih26lm599xrhLdgVR0Mqv1UH96kh9/kan
+xHMD/i6VUwPkVGi/ro7EKa7iZpfBEcqZArV7uitZ5TNi03/jQqzIYqcZ6wSa6ikH
+ZpsrgyywO+l+iuULTiEDm6zJsuceW6dOX9+WPTSQ0qSiS9D7wx34+AL3i5fSEqJL
+QKHIkfKWWbldE3QfcieR61j6VejNeH+Mxvi05hFMWXOBZiV2xoPGEDT09WV9tTm0
+scR5U2gt1mrwYf3FwQe+YZqWpb+dJmZQraWR0tW9DQJZG3dvmDaRjuLTEkRZsArh
+3K0vsbakIiNkiGSncY00feVl32GIvYkKH45b0tDJ6kHYRV/tvtcc4fKdiL7MH8/L
+PzTZSeQ0zlAArTZt/hsOl2Dhn0zgV9SoLltxby+pnwIq1g8b3rxksEVlMTXCiroc
+s1luINUD
+=wdIn
 -----END PGP SIGNATURE-----
 
---+HRbEPrvfdoriO+B--
+--eAIk0U3stO4UI7ik--
