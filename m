@@ -4,93 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D5CC5AD49
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 19:47:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1FCC5B555
+	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 19:47:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36BA581F32;
+	by phobos.denx.de (Postfix) with ESMTP id 85FAC8205A;
 	Mon,  2 Jun 2025 21:47:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TxKKpDbn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J70H7iwu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23BD381F0D; Mon,  2 Jun 2025 21:47:06 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 072C081E25; Mon,  2 Jun 2025 21:47:08 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9A0E80F9C
- for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 21:47:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B49F381E25
+ for <u-boot@lists.denx.de>; Mon,  2 Jun 2025 21:47:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-70f86c9e3e7so46457487b3.1
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 12:47:03 -0700 (PDT)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-70a57a8ffc3so48649707b3.0
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 12:47:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748893622; x=1749498422; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9ouYo/U5ISqilRG9vmjCjc+RBGzGwJ8snqtNBAxluiE=;
- b=TxKKpDbnxwyK/Accr/9m+3+zHj6zuipPy/tQD0+218HFDQxFmkRtZK1RwH1WKl8cu0
- amsU9USk+l0J1Rtd2GEDwvHOBbIa4WsRXgOSCE4hYuSXg/UuY+9aXP+/EIj/wsib5hL9
- 8kKRWTCc0LHSrgx3/9LoH8EMYYh2w+EpOsuXJod4R0aCNaFOnfGciq2uycVdZSfcEzqy
- FJMwO+TG9EszLrmzSjPDd4xPGx2pfVJHKsYMNqVwvX2KY6BamSsmBtGEJNnyVkMYu0c/
- 5tELlz68GzosQfHfLPzT/gt5vWFwUYIE8YR3JA4VHTToVhDhoftTVmT6HWyJBgOIRPvl
- hqig==
+ d=gmail.com; s=20230601; t=1748893624; x=1749498424; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mXd0i+ohwa0+I1NyqIlPJSL9OP15vEzOLM1JmWxHOL8=;
+ b=J70H7iwuVm/ImMyl8uzXqsR86YBRI/nusddprUbpN8hHQjFe7zxKyOh0Kkp0mQk2Ha
+ 2NJPvoD0/txbITg1z89N0lxKYLPU/C4F15HmgR0MTCLXjmeB8589jgPy7TnEuK8unjED
+ c7PHJr2n02Wsrvm0CZhA564MyzrZABbHyTJ1x/sKmv/LyM96msTt6ngpVCTPoj9YWE0M
+ 0Y+7NpRqGoad0sYej3JBZq1+9PIb+LEFdvBCHQV1uVu2JAvbC7bZ34nuzoN1GPyX3ZrS
+ KmOcl3IjWP7ObgXDAicfz2SUqmQ4Tra2F72s4GXvqho+Pye9wkFXYd6XMHmjQzmjn+46
+ XD/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748893622; x=1749498422;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9ouYo/U5ISqilRG9vmjCjc+RBGzGwJ8snqtNBAxluiE=;
- b=toTdxErNUsvgoWLtjgMa4v0E/juzsVyXRVhGie7qlRwIxxBemJCX6g+XM3lgpQfuUJ
- Fu9thN6PPeFwRKUBgNpnU2J4Pbbax2KAsSJJsLOmSVEJWqc36zc7RWw8fAgvG0G+C7wp
- zXkyI/VfBd9VQdAHkZzMblpFN238aI50AO9PtvhVshg3GVNkFabNXkSyIY+uxB9haNP7
- 9NeviRzr5rTub7o3AmvK9ne7fUKC37UrHsb+ylpgZy65zuTJNx5Wor6KZ0GxNMWr6Bmu
- ZMUvBMMrWphx42Bvnp6wdoam95ULIC/l49AxGD4vJWuQzC+gggnbVOXyoKlV2g8VTZWX
- WlMg==
-X-Gm-Message-State: AOJu0YzpDFiFkfRfTY2eWNSXTQLOkCZj/7SP2MI1jQJk+D3J7aqOvA/i
- 5nXR34CuK51zSZNqLGVZrta60C0HtN8j8BGrFdVu+dy1tC/n8PjwNzgVnlmo
-X-Gm-Gg: ASbGncvXdXpjrppk3yRToBDGj0eO5u2hg/kftt+3o5p1gSjrLZ6pJqRNIqd6x0HAmDj
- +H4azM5dvV1lRqD6CglktYVLDwCfYIFn/TnHGgqx6nsecElxtRbsD+2eBEcFYxMTBALw0pkvcvY
- IDmG4CrXEkHcSNQR/yjMAlSxYI2F1UBvxXcreUz8sLNgwcGVXiku/A9Du2MA52QmE1urE/CGzcO
- Gb6v2QuWDBXyhrIuTtYwDVqC/pKgBSYPDqZroH4kcYavpvWTPoQEu7GR0/G+MxX1RxL4zPHYeW/
- ZaIH2R7LkJZxpyqNSroCPhKlSHUGlNHdYTthIcGMcvoq1Uv3OBp4I3ZtNDptO3N2Paw=
-X-Google-Smtp-Source: AGHT+IE+DhGnA2YtxQb14BbaXCCMFZGGSwp8faxTwDBHj9pTqWemHiQxiXnkoIdIHsjv7oJVzexcrw==
-X-Received: by 2002:a05:690c:4c02:b0:70e:195:e926 with SMTP id
- 00721157ae682-70f97e58c85mr203204947b3.9.1748893621423; 
- Mon, 02 Jun 2025 12:47:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748893624; x=1749498424;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mXd0i+ohwa0+I1NyqIlPJSL9OP15vEzOLM1JmWxHOL8=;
+ b=DKc5uVIbxCrjWtGzlGfSL7q4lzFB4zIyi/k9Zw+SKWg8SJLWT7vxe/ybJyPZul9WJb
+ xFZro2YbTHsnZ9f7vBc5uhhBPIob7iDH2Z9V4J5iGmWV6gRtuC+LveIUTUzPwWMAGKyA
+ 0hmJID29sNwpRbyVqP+MNDpjJ8yMnOVtwgoQVVf9KH3LgrOcTdwz/igG1PgZsjGjdU22
+ xXeWwoMcp+OVsd5MzkCjkwUV4p0B3G26hMLqpfBRSEr9yFKc0PR4b27h5FKKEUrl0lxo
+ ITzAH/ffU5wl7jkD6RgSdIU9ZtgqEjL2ROeAR3mRyxgc8RMfu5AbfTtcvX9APmYaPfaI
+ Fnaw==
+X-Gm-Message-State: AOJu0Yy9mK8NByRkHdudU8X318L6iMyEYvajSfRXxs2mfXum+rwD9yFK
+ 7DlltwBuF6B917geqz3LHdy8weIlM0Tajc4X+9sAMR33wf6TwmzpSpBB4ut3
+X-Gm-Gg: ASbGncsDV+8mxJoDU3qRJ/6TsIE3iXOcl7aRPj5tiAon6K4Iofv9XJ1azKxt+T4FeH6
+ nCwUjdkjH53j8SFcmUfFMbff3YI3cE92FRUxP9Wq3dW5v41mGWhRwj1xCwHu3l1t2546RVknuSX
+ mk21yigQNYTzaRJ+7jKaEpKm/A7GF+SQzslfW+UYVlubZk/a2BiNMmQufvkuQIb01FxpeUlFIuZ
+ /ExGC9OEJH2aLSrIvHEUWp/TlXE3DFGFNHPOMfaIFa/tLriA+HN6mrdSBXgDv0/KShsZ2+gmOrm
+ Kz2JSKJTjwSNXsNdshCpav+UZfoubl9OynNDBjz2SAocjTn9qIOAP9ho2jJYtHPiFC/1qVVZnzv
+ +/Q==
+X-Google-Smtp-Source: AGHT+IEHJcrruKX/5ERlNjUYoAtQdg3V3bgA7TK8AaEpjUlsqpKuOEQJptiXFSMBbzIgZiKhRr+o5g==
+X-Received: by 2002:a05:690c:67c5:b0:70d:f673:1412 with SMTP id
+ 00721157ae682-7104ed509admr192932737b3.0.1748893624036; 
+ Mon, 02 Jun 2025 12:47:04 -0700 (PDT)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-70f8ac0f452sm21902867b3.51.2025.06.02.12.47.00
+ 00721157ae682-70f8ac0f452sm21902867b3.51.2025.06.02.12.47.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 12:47:01 -0700 (PDT)
+ Mon, 02 Jun 2025 12:47:03 -0700 (PDT)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
-Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
+Cc: adsp-linux@analog.com, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ian Roberts <ian.roberts@timesys.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Tom Rini <trini@konsulko.com>,
+ Trevor Woerner <twoerner@gmail.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH 00/10] sc5xx: Add complete board support for all ADI SC5xx
- boards
-Date: Mon,  2 Jun 2025 15:44:38 -0400
-Message-ID: <20250602194507.15159-1-malysagreg@gmail.com>
+Subject: [PATCH 01/10] mach-sc5xx: Introduce Kconfig symbols for image
+ addresses
+Date: Mon,  2 Jun 2025 15:44:39 -0400
+Message-ID: <20250602194507.15159-2-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20250602194507.15159-1-malysagreg@gmail.com>
+References: <20250602194507.15159-1-malysagreg@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,113 +105,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds the final pieces to enable mainline U-Boot to build and
-boot all Analog Devices SC5xx SoCs and supports the associated carrier
-board options. At this point it should be viable for new users for these
-platforms to start with the latest version of U-Boot rather than our
-vendor fork, however some features (such as OSPI support and falcon
-boot) remain unavailable until we are able to unify our implementations
-with the mainline implementations.
+From: Utsav Agarwal <utsav.agarwal@analog.com>
+
+Add Kconfig symbols to parameterize the SPI flash layout used in a
+default-ish configuration. This adds more flexibility to the default ADI
+environment, enabling customers with boards based on but not identical
+to an ezkit to reuse more of the infrastructure. Furthermore it allows
+for yocto (the expected default) or binman (to be introduced in this
+series) to configure or use the flash layout based on a single
+definition of all of the parameters when creating an image.
+
+Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
+
+---
 
 
-Greg Malysa (8):
-  docker: add ADI build-related tools to docker image
-  board: adi: Add SOMCRR infrastructure
-  board: adi: Add support for SC573-ezkit
-  board: adi: Add support for SC589 boards
-  board: adi: Add support for SC584
-  board: adi: Add support for SC598
-  board: adi: Add support for SC594
-  MAINTAINERS: Update ADI entries for new boards
+---
+ arch/arm/mach-sc5xx/Kconfig | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-Utsav Agarwal (2):
-  mach-sc5xx: Introduce Kconfig symbols for image addresses
-  mach-sc5xx: Add binman support
-
- MAINTAINERS                                   |   1 +
- arch/arm/dts/sc573-ezkit.dts                  | 227 +++++++++++++++++
- arch/arm/dts/sc57x.dtsi                       | 123 ++++++++-
- arch/arm/dts/sc584-ezkit.dts                  | 230 +++++++++++++++++
- arch/arm/dts/sc589-ezkit.dts                  | 198 +++++++++++++++
- arch/arm/dts/sc589-mini.dts                   |  18 +-
- arch/arm/dts/sc58x.dtsi                       | 153 ++++++++++-
- arch/arm/dts/sc594-som-ezkit.dts              | 126 ++++++++++
- arch/arm/dts/sc594-som-ezlite.dts             |  83 ++++++
- arch/arm/dts/sc594-som.dtsi                   | 184 +++++++++++++-
- arch/arm/dts/sc598-som-ezkit.dts              | 166 ++++++++++++
- arch/arm/dts/sc598-som-ezlite.dts             |  82 ++++++
- arch/arm/dts/sc598-som.dtsi                   | 237 +++++++++++++++++-
- arch/arm/dts/sc59x.dtsi                       | 183 ++++++++++++++
- arch/arm/dts/sc5xx.dtsi                       | 189 +++++++++++++-
- arch/arm/mach-sc5xx/Kconfig                   |  63 +++++
- board/adi/carriers/Makefile                   |   8 +
- board/adi/carriers/somcrr.h                   |  14 ++
- board/adi/carriers/somcrr_common.c            |  19 ++
- board/adi/carriers/somcrr_ezkit.c             |  38 +++
- board/adi/carriers/somcrr_ezlite.c            |  24 ++
- board/adi/common-sc594-som/sc594-som.c        |  34 +++
- board/adi/common-sc598-som/sc598-som.c        |  34 +++
- board/adi/sc573-ezkit/Makefile                |   6 +
- board/adi/sc573-ezkit/sc573-ezkit.c           |  21 ++
- board/adi/sc573-ezkit/sc573-ezkit.env         |  17 +-
- board/adi/sc584-ezkit/Makefile                |   6 +
- board/adi/sc584-ezkit/sc584-ezkit.c           |  21 ++
- board/adi/sc584-ezkit/sc584-ezkit.env         |  16 +-
- board/adi/sc589-ezkit/Makefile                |   6 +
- board/adi/sc589-ezkit/sc589-ezkit.c           |  21 ++
- board/adi/sc589-ezkit/sc589-ezkit.env         |  17 +-
- board/adi/sc589-mini/Makefile                 |   6 +
- board/adi/sc589-mini/sc589-mini.c             |  21 ++
- board/adi/sc589-mini/sc589-mini.env           |  17 +-
- board/adi/sc594-som-ezkit/Makefile            |   8 +
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  18 +-
- board/adi/sc594-som-ezlite/Makefile           |   8 +
- .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  18 +-
- board/adi/sc598-som-ezkit/Makefile            |   8 +
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  18 +-
- board/adi/sc598-som-ezlite/Makefile           |   8 +
- .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  12 +-
- configs/sc573-ezkit_defconfig                 | 102 ++++++++
- configs/sc584-ezkit_defconfig                 | 108 ++++++++
- configs/sc589-ezkit_defconfig                 | 113 +++++++++
- configs/sc589-mini_defconfig                  | 109 ++++++++
- configs/sc594-som-ezkit-spl_defconfig         |  90 +++++++
- configs/sc594-som-ezlite-spl_defconfig        |  98 ++++++++
- configs/sc598-som-ezkit-spl_defconfig         | 123 +++++++++
- configs/sc598-som-ezlite-spl_defconfig        | 123 +++++++++
- tools/docker/Dockerfile                       |   8 +
- 52 files changed, 3508 insertions(+), 73 deletions(-)
- create mode 100644 arch/arm/dts/sc59x.dtsi
- create mode 100644 board/adi/carriers/Makefile
- create mode 100644 board/adi/carriers/somcrr.h
- create mode 100644 board/adi/carriers/somcrr_common.c
- create mode 100644 board/adi/carriers/somcrr_ezkit.c
- create mode 100644 board/adi/carriers/somcrr_ezlite.c
- create mode 100644 board/adi/common-sc594-som/sc594-som.c
- create mode 100644 board/adi/common-sc598-som/sc598-som.c
- create mode 100644 board/adi/sc573-ezkit/Makefile
- create mode 100644 board/adi/sc573-ezkit/sc573-ezkit.c
- create mode 100644 board/adi/sc584-ezkit/Makefile
- create mode 100644 board/adi/sc584-ezkit/sc584-ezkit.c
- create mode 100644 board/adi/sc589-ezkit/Makefile
- create mode 100644 board/adi/sc589-ezkit/sc589-ezkit.c
- create mode 100644 board/adi/sc589-mini/Makefile
- create mode 100644 board/adi/sc589-mini/sc589-mini.c
- create mode 100644 board/adi/sc594-som-ezkit/Makefile
- create mode 100644 board/adi/sc594-som-ezlite/Makefile
- create mode 100644 board/adi/sc598-som-ezkit/Makefile
- create mode 100644 board/adi/sc598-som-ezlite/Makefile
- create mode 100644 configs/sc573-ezkit_defconfig
- create mode 100644 configs/sc584-ezkit_defconfig
- create mode 100644 configs/sc589-ezkit_defconfig
- create mode 100644 configs/sc589-mini_defconfig
- create mode 100644 configs/sc594-som-ezkit-spl_defconfig
- create mode 100644 configs/sc594-som-ezlite-spl_defconfig
- create mode 100644 configs/sc598-som-ezkit-spl_defconfig
- create mode 100644 configs/sc598-som-ezlite-spl_defconfig
-
+diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
+index 30444f04fc4..70c7e5e0631 100644
+--- a/arch/arm/mach-sc5xx/Kconfig
++++ b/arch/arm/mach-sc5xx/Kconfig
+@@ -117,6 +117,36 @@ endchoice
+ 
+ endif
+ 
++config SC5XX_UBOOT_SPL_OFFSET
++	hex "SPL offset"
++	default 0x0
++	help
++	  The default offset where the SPL is located.
++
++config SC5XX_UBOOT_OFFSET
++	hex "U-Boot offset"
++	default 0x40000
++	help
++	  The default offset where u-boot is located.
++
++config SC5XX_FITIMAGE_OFFSET
++	hex "FitImage offset"
++	default 0x1a0000
++	help
++	  The default offset where the fitImage is located.
++
++config SC5XX_ROOTFS_OFFSET
++	hex "RootFS offset"
++	default 0x102000
++	help
++	  The default offset where the rootfs is located.
++
++config SC5XX_LOADADDR
++	hex "Load address"
++	default 0x90000000
++	help
++	  The default load address for u-boot.
++
+ config ADI_IMAGE
+ 	string "ADI fitImage type"
+ 	help
 -- 
 2.45.2
 
-base-commit: 2f3766949bbea7aa5a472157561d387fd94205d2
-branch: dev/sc5xx-boards-v1
