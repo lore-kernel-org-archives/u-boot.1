@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DCFC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 15:47:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF88DC5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:01:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92C5582A76;
-	Tue,  3 Jun 2025 17:47:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA0C482AA7;
+	Tue,  3 Jun 2025 18:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oKZVrhXt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LFn/+Sf6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB7D1828BC; Tue,  3 Jun 2025 17:47:56 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id ACDD582AAA; Tue,  3 Jun 2025 18:01:50 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DF0482AAF
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:47:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AC0182A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:01:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-2e95ab2704fso1926268fac.3
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 08:47:53 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4067ac8f6cdso3482438b6e.2
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:01:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748965672; x=1749570472; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748966507; x=1749571307; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yivoI+IMcT4oYe/RiNrB9Yjs804Uzz0Y27arrMQUZNQ=;
- b=oKZVrhXtVZiOlqWdX8/3Pn30O4jRFionSPVy6GJqn7Eq0qRTUbPi+qzFnTCCmNjsJe
- zzMeE/nC2CplQ6WCVIDuGe38qpehnyfdUsDhhf8pAVCGqaGP5TZEWx9Mof1ZbLxjWL4u
- 5vg3FlgxeTIUXuX1eqlyBynB6zf7lwg7t2E+4=
+ bh=5e/kJctgdXUddJxdujCaW69110h6Mkb4klyzLq/rQT4=;
+ b=LFn/+Sf6HrEC2bLcGFsnqvPye8JUGfxe/vbg9O8ItNehS643lHa4a/omRGpmVPWQll
+ inkG2eCdI0jYDXTcKnJfmB99x1UP1hzrtUO4DtfWSNLAgxzAS+9Yu8kitsAW0vKg7kv5
+ 6gUgj0yMvswAuV553RG90oCQtQmoJGXYuLhdk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748965672; x=1749570472;
+ d=1e100.net; s=20230601; t=1748966507; x=1749571307;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yivoI+IMcT4oYe/RiNrB9Yjs804Uzz0Y27arrMQUZNQ=;
- b=ewMLYsbg2qhDMiA+sEiB981LfXRzLXO0wUz1WFUmrjOXIlpesWLtA5lQV3AeTKLU+l
- JNTqJd6BQkDM5zwSo7z6vKiGHbx4JZDUSyvodze9EWjo2F/FsXukZ4aiZYqdOne+8kdt
- 253GsSHExZP3Gu2SaJNGI9FgPNNaMTtH9AzTtalX3nNShxl7dL7O7afhhYRnb2/HbBlU
- S4uMbdKD+61Mb5NnF/SX6xk1CpZI7tXmciydQk6FYPwh9h4kATyHZedPkiI3Pte6nYoo
- Qjz6D9uyfrCvXXxpJWwOwRIEQDwa0I6dj/yzWmRluaqr55h9lWWX2Y1YKB1EWgAZbX3e
- u13Q==
-X-Gm-Message-State: AOJu0Yzac5zwVswVKf8jjymSRRYT814sMWD0yb6uwxslLZporB8+/iZf
- 8Qyat4xDRiK1xj95Yb0/zHUcLe4/qqz2dKVFLtFbyrCOQzV3LM7XzZJROzStS+PF2ZA=
-X-Gm-Gg: ASbGncuVan21qVl6PcVHFh+Q3xeBiT31fVgnr9vfAjLjcUenxvybKlebXRlf5JKn6m8
- DbmR3z1NWrWJg3exWyV8vDTkHJXbBk3BtQuQPrFr0i+JwHVVSga0RZYBZbbYwkGd/fI6GqzTHIi
- C+qswDDcc8MjzB/i/CD8ZoZPZ2tj9uIH1splt+gVb/fWQOWZuhrn0meWPXlZCLg8+FTgU+gm7xy
- dz7zUQCpcKs0E375X3U9SIo2h0OdlOKC6EYL/KAq9oUJlkF9deMqwQ077fDdb39n+Tcz+95TqoH
- ccb9V7EyQbM/KmbMBqL5gXR6FVQvls7DTBdI8FeArMW3MnDlrIG7dWOqU642HnMRuJjFkkLIClM
- mXJy1ZPMjpgDI
-X-Google-Smtp-Source: AGHT+IHoVIaqpYArXOYhf9zM05W3CM/Hiy7CqAtHyurlaxRS0qPVmxOmJDY11DVOuccS9rDsE9d1mg==
-X-Received: by 2002:a05:6871:6b08:b0:2d6:6639:52d9 with SMTP id
- 586e51a60fabf-2e92a487d3bmr11658161fac.32.1748965671948; 
- Tue, 03 Jun 2025 08:47:51 -0700 (PDT)
+ bh=5e/kJctgdXUddJxdujCaW69110h6Mkb4klyzLq/rQT4=;
+ b=uD8wxrgaTs/tO0EwWlCiOhjWxHBPU+9zg7ZGN1p3dwAJpIJ69U/xt+7bF86aGkHJXb
+ kYRNZ0m8NC1uf6bEKHSn7kVP/DrQzHrQ78hMWwgqb8flffzVskEGv2mT4ADDdL4pRH++
+ ACem/LPihvpm8WR+FvP5cQXI0q7PdJlAH7jVeP5E0Lj+9S8hF1hzA2d9Rh1vO3fD9pBd
+ BZqhKLjNhR5w3pNsWs9OtSvhZyJIKw0U8J0xQ1/s/V77X5cPGQeLl4jI9PUc6XH7YMY1
+ d3P48YvUfFnnVZf+oloyArfVCgFfjVU4cmu0Kvur8ckz5Yf1q95Xc6v8qaOyBnQA8lYh
+ 88fw==
+X-Gm-Message-State: AOJu0YwYpIOLG/0rZ7ad9I/03ZYNSy2i7zrHxNj+/kQd0uQWmVEDmaCk
+ FJ6FstUwQMRq3/ZB81kkTYF6KAV1AAs7nffxbQ0a+szGbHYWF5sd/la0RDD6ObZ9sa8=
+X-Gm-Gg: ASbGncsWyXZ0HnoLPYvx9VvW6I1f6MQBs0MJjdaX1n9Q6K5o2z+6zEo/KKmkwyCFKhi
+ 7nQx1I2VVdTn3zVFIwf4uKXYMHP3HXOEgzTsAZZ+PaVvZTF6kgf6TRfuUkq4bNJd4zcXx4C3SMX
+ aifVNFdNI7z16FFIXm37oGI/A6fVqtJ3spfwbNTMJyt0hLu+Q9HeAs9gnTldrgWIbMMQ1h42wW7
+ qRTDJg4KFqtr47fGHc2FxvxiQHWaRQVa0xN0oXDW5vLJuq8oH5CMoa/smI52VVuyrKH7NYiP8iM
+ oppIVLIdO5xELZWZww8w7hIHweSo1/A1WIobr/SjqRO2r+2Rd0Z0yug6xtRsLSTvf78pvdJCYFu
+ VKPQii1MGoW+8
+X-Google-Smtp-Source: AGHT+IEhrzDMz/TMXUh5zT9DhfLwGi2bIhN5JOmzXdUXUssv3QTHcUuzFtnLnLte6FUY4PKspxsF+g==
+X-Received: by 2002:a05:6808:2f0e:b0:403:3c95:3683 with SMTP id
+ 5614622812f47-407a65d85edmr9392372b6e.19.1748966507145; 
+ Tue, 03 Jun 2025 09:01:47 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e906c0a87asm2290039fac.42.2025.06.03.08.47.50
+ 5614622812f47-40678c40ad2sm1833734b6e.25.2025.06.03.09.01.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Jun 2025 08:47:51 -0700 (PDT)
-Date: Tue, 3 Jun 2025 09:47:48 -0600
+ Tue, 03 Jun 2025 09:01:46 -0700 (PDT)
+Date: Tue, 3 Jun 2025 10:01:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
- Prasad Kummari <prasad.kummari@amd.com>
-Subject: Re: [PATCH] sandbox: solve undefined reference to pthread_kill symbol
-Message-ID: <20250603154748.GG1382132@bill-the-cat>
-References: <20250603151401.1709532-1-raymond.mao@linaro.org>
+To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] dtc: Add Kconfig option to pad device tree blob
+Message-ID: <20250603160144.GH1382132@bill-the-cat>
+References: <20250520182305.3819776-1-eric.schikschneit@novatechautomation.com>
+ <20250602223101.GA1230232@bill-the-cat>
+ <SJ2PR07MB9711838697E12AB9B1A53015816DA@SJ2PR07MB9711.namprd07.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qX38x6OjcmIMlVpy"
+ protocol="application/pgp-signature"; boundary="GVlGOPxvGZOySh8C"
 Content-Disposition: inline
-In-Reply-To: <20250603151401.1709532-1-raymond.mao@linaro.org>
+In-Reply-To: <SJ2PR07MB9711838697E12AB9B1A53015816DA@SJ2PR07MB9711.namprd07.prod.outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,49 +98,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qX38x6OjcmIMlVpy
+--GVlGOPxvGZOySh8C
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 03, 2025 at 08:13:58AM -0700, Raymond Mao wrote:
+On Tue, Jun 03, 2025 at 01:57:14PM +0000, Eric Schikschneit wrote:
 
-> This patch is to solve the sandbox building error:
-> $ make O=3Dbuild-sandbox -s sandbox_defconfig
-> $ make O=3Dbuild-sandbox -s -j2
-> /usr/bin/ld: /tmp/u-boot.27rzOu.ltrans58.ltrans.o: undefined reference to=
- symbol 'pthread_kill@@GLIBC_2.2.5'
-> /usr/bin/ld: /lib/x86_64-linux-gnu/libpthread.so.0: error adding symbols:=
- DSO missing from command line
-> collect2: error: ld returned 1 exit status
-> [...]
+> Tom,
 >=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  arch/sandbox/config.mk | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> I think I understand the problems you stated. Obviously, we do not want t=
+o cause any regressions,
+> and I am happy to modify my patch as you suggest. I am unsure what to do =
+about your dts/upstream
+> Issue though being that portion gets synced from the linux kernel source =
+tree, correct? As far as the
+> ARM / ARM64 issue I could change the default lines to something similar t=
+o:
+>=20
+> default  4096 if ARC || ARM64 || M68K.....
+> default 32768 if X86 && EFI_APP
+> default 0
+>=20
+> That should allow 64-bit ARM platforms to be 4096, but 32-bit ARM platfor=
+ms to still default to 0.
 
-OK, but how do you get this failure to start with? What host?
+The Kconfig fragment looks fine, yes. What I mean about
+dts/upstream/.../Makefile is that you should modify those too as they're
+the small part of the infrastructure there that's what we modified.
 
 --=20
 Tom
 
---qX38x6OjcmIMlVpy
+--GVlGOPxvGZOySh8C
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg/GSAACgkQFHw5/5Y0
-tyzjQAwAplVs0/Xuqs9wzo9b9rzZ56bSX5DtugF7p4CFiaTZZzq90mBljVqAK7AZ
-zQt4PDZY5RcsTUR1YAF+WdrXFoQ8SO8lPX8LuRkOr3u0Cy9Bh/fqpEXBtcM8WWeM
-QtmrbXF4Rs+xmqe5w6lBrf1z/heyoYNhCsIltGynF+sHP7u7aXboU4T7jR0B+B1a
-AH4abzk9gMJCCbTkP8E1uB8UAyk3yEkmtlIdUinilEf0gTDSsf2jNeGq0tFB9b89
-ujyqv+AEe4u8RmArTz7ku14pnqHVFmelGz2+QIqZnlqmoA5szYS4dCAoizxLzoFn
-0hm7MDTqYhe3DErPHjEVumsvx9y4tYRy2O0KjRST6/1qqwpPIeFAyvILLd8BPg4U
-LCzm8DjOVPoUlAfipUFUm8hJtdmtt2VIFGsSTKuXCCyHAoaDrRjAipL8dZwPqlr/
-pmbEowYRTxHt1CXDl7Lss53h78yFisZ8jE9nU70ASArH6Xlxb6ylN5MXOx6k4qC3
-jk5djWHV
-=19JJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg/HF0ACgkQFHw5/5Y0
+tyxxiQv9E3IJuAquKCmwdbKuOy0+jBjsusQ0+PDP47Tto6Fa0Cy4VkEXuxZnhrii
+AH6/l0MTfD4UV5dATDYHrHMQBM7EVOAjPsGDwk2cjh0qZ018OCSrop0skfBhoAua
+atrWSmVS6LXF4GOmp3ys+2Rk6xPgA37HAMACvncKIHzKmO75KgynRpMrsrgTw7OR
+cm7FTJKRuPr/BsVX7ujpoQoBN7uho1QJ6+s47SU8LfGJMo8vLe+AOlXXK0Kv1+Np
+jVKdmKsK3JtMj82xrfLp+bORHypQQw6ORVxt2X0KsHXh54uNtmODqnrYjiSnTzCo
+dIaIvbW9mv74xYEqrHSMLiia+2v3A44az+oSOR/meFUbDIU87do1ycRWiqsYtEEd
+r7BSxj+qhANU7A8wZlrN8bFNMS3+JGL0c5wKas5RK/wvx7BrRG8l6Ij1my9tGBR3
+e+/AGfscrJBKvht1SwI3ayAMS7aMRjRJ7nlAyEv4SttbjrR6O3bG6YsRvdqZsPEO
+O7W49XGO
+=Ye/B
 -----END PGP SIGNATURE-----
 
---qX38x6OjcmIMlVpy--
+--GVlGOPxvGZOySh8C--
