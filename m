@@ -4,63 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C834C5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 13:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DBB7C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 13:38:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B097B80F9C;
-	Tue,  3 Jun 2025 15:38:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 99F6B80F9C;
+	Tue,  3 Jun 2025 15:38:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="tHQ8kfTx";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="mJINohNP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="MUtp2OAJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F9EA82145; Tue,  3 Jun 2025 15:38:06 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 96E8E82145; Tue,  3 Jun 2025 15:38:51 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6026380AE1
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 15:38:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BB4F80AE1
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 15:38:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigeasy@linutronix.de
-Date: Tue, 3 Jun 2025 15:38:02 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1748957884;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=APUDEcMzhF5VQylUW/tOF6ir7we8KWNTMBB9e7rnoh8=;
- b=tHQ8kfTxstKVo8VsYMCWRVeuPKgbsRgzAwwRtASfqjSBdE2P4EIR4+Q8p/ZBVyghZOYN3s
- vsNIftxK1lhUnP1YzLCDsG0/+92WU/0niaKwKCQskR2mTu4ibfmFoHS/n4aX4CmY19vodQ
- M30tPBIpBLoPNpVidEPVf32Y74Nrfk2qG+snzf4Y++sxKXTxcpYcerzDKX2HhaMhYpXy5T
- jAenLkCWPeC8guh1DAG3LOA2kx/4MUEBy1rM8R+DpsN5QtT+l1QKApfzR5+wGe1wC0xqmB
- TxXXBS/toFrLr0WiEwlPhqrF6GM4wjLb+3Aj+prFEnpDKwSdVw5L3bILtuUDAA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1748957884;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=APUDEcMzhF5VQylUW/tOF6ir7we8KWNTMBB9e7rnoh8=;
- b=mJINohNPfTce34Beg4EUXJNdqhfyTeZ/Cr6sUinAt5l0atNTyOkvTmMQRg76oM9OMi+5Ck
- 8iFQsrboO4o82tAw==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, Manuel Traut <manuel.traut@mt.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Fabio Estevam <festevam@gmail.com>
-Subject: Re: [PATCH v6] arm: imx: Add support for Mettler-Toledo snowflake
- board
-Message-ID: <20250603133802.t1Ui2-vu@linutronix.de>
-References: <20250603120223.292889-1-Wojciech.Dubowik@mt.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=82493dba10=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 553CjL2v003007;
+ Tue, 3 Jun 2025 15:38:40 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ PtsTy9Kfj6xQFbn9tj0DaQhEFEjw5B57cHmGRldsG1Y=; b=MUtp2OAJkfi58RMM
+ W7n7zCR5pFGMF4/b/Xxpq6FE9agzK/kD1etMfy42zIstVyNks5EaAosFW1+fQRML
+ uRbhQ+nHYGWmNNoStBKn1OIqa9TAl3t86v2KAXxiGDIkxPANeT/S3WYoNCPi1VDY
+ ew8R9H7F6KOYP+en2o5hEuZu2IqU7WkRS8bDkbQDDorlbwLCmcd1KGIquwv17WE1
+ zIgZ7+K2JrroXIhulKPdLhaSrlp0L/kpcDk5YR2uXWvh4J6Gy0yAk+i5igMBNEe8
+ 67MiGf+NIDWABakzKZg+2GVHtstUsUsx4EBw7s9YrYHVzKryewlSf0QdGegu9ABk
+ coDPaw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g934943-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 03 Jun 2025 15:38:39 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id F383940073;
+ Tue,  3 Jun 2025 15:37:35 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0761FB1F3D0;
+ Tue,  3 Jun 2025 15:37:03 +0200 (CEST)
+Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Jun
+ 2025 15:37:01 +0200
+Message-ID: <2e65615b-6b87-4bc8-b349-d7ce585bc23c@foss.st.com>
+Date: Tue, 3 Jun 2025 15:37:00 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20250603120223.292889-1-Wojciech.Dubowik@mt.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 03/10] ARM: stm32: Limit early cache enablement in SPL to
+ STM32MP15xx
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: Cheick Traore <cheick.traore@foss.st.com>, Fabrice Gasnier
+ <fabrice.gasnier@foss.st.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>,
+ Pascal Zimmermann <pzimmermann@dh-electronics.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250512172149.150214-1-marek.vasut@mailbox.org>
+ <20250512172149.150214-4-marek.vasut@mailbox.org>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20250512172149.150214-4-marek.vasut@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.182]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-03_01,2025-06-02_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,23 +97,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-06-03 14:02:23 [+0200], Wojciech Dubowik wrote:
-> The board is similar to "Kontron SL i.MX 8M Mini" SoM.
-> There are two variants. Snowflake_v2 has an external SDCard Interface.
-> LEIG is the same but without display and with emmc card only.
-> Both variants support 1GiB of main memory.
-> 
-> [ bigeasy: porting and a bit of cleanup ]
-> 
-> Signed-off-by: Manuel Traut <manuel.traut@mt.com>
-> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-> Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
 
-The Signed-off-by chain looks broken. I had Manuel in From: since he was
-the Author. This has been dropped.
-Your Signed-off-by should come last, not in the middle. You are the last
-one touching it.
+On 5/12/25 19:21, Marek Vasut wrote:
+> The STM32MP13xx SRAM size is half that the SRAM size on STM32MP15xx,
+> disable early dcache start on STM32MP13xx as the TLB itself takes
+> about a quarter of the SPL size. The dcache will be enabled later,
+> once DRAM is available and TLB can be placed in DRAM.
+>
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+> ---
+> Cc: Cheick Traore <cheick.traore@foss.st.com>
+> Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> Cc: Gatien Chevallier <gatien.chevallier@foss.st.com>
+> Cc: Lionel Debieve <lionel.debieve@foss.st.com>
+> Cc: Pascal Zimmermann <pzimmermann@dh-electronics.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>   arch/arm/mach-stm32mp/stm32mp1/cpu.c | 9 ++++++---
+>   arch/arm/mach-stm32mp/stm32mp1/spl.c | 3 ++-
+>   2 files changed, 8 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> index 9ab5a3ede52..1ae82489a4b 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> @@ -28,7 +28,9 @@
+>    * early TLB into the .data section so that it not get cleared
+>    * with 16kB allignment (see TTBR0_BASE_ADDR_MASK)
+>    */
+> +#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
+>   u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
+> +#endif
+>   
+>   u32 get_bootmode(void)
+>   {
+> @@ -95,18 +97,19 @@ void dram_bank_mmu_setup(int bank)
+>    */
+>   static void early_enable_caches(void)
+>   {
+> +#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
 
-Sebastian
+
+can you replace #if, if it possible?
+
+
+if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
+
+	return;
+
+
+>   	/* I-cache is already enabled in start.S: cpu_init_cp15 */
+> -
+>   	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+>   		return;
+>   
+>   #if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> -		gd->arch.tlb_size = PGTABLE_SIZE;
+> -		gd->arch.tlb_addr = (unsigned long)&early_tlb;
+> +	gd->arch.tlb_size = PGTABLE_SIZE;
+> +	gd->arch.tlb_addr = (unsigned long)&early_tlb;
+>   #endif
+>   
+>   	/* enable MMU (default configuration) */
+>   	dcache_enable();
+> +#endif
+>   }
+>   
+>   /*
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> index 9c4fafbf478..e63bdaaf42f 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+> @@ -220,10 +220,11 @@ void board_init_f(ulong dummy)
+>   	 * activate cache on DDR only when DDR is fully initialized
+>   	 * to avoid speculative access and issue in get_ram_size()
+>   	 */
+> -	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> +	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && !IS_ENABLED(CONFIG_STM32MP13X)) {
+>   		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
+>   						CONFIG_DDR_CACHEABLE_SIZE,
+>   						DCACHE_DEFAULT_OPTION);
+> +	}
+>   }
+>   
+>   void spl_board_prepare_for_boot(void)
