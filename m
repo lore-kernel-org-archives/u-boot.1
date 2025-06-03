@@ -4,59 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF8B4C5B549
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 03:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B46A3C5B549
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 03:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 874D282103;
-	Tue,  3 Jun 2025 05:06:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CB5A82145;
+	Tue,  3 Jun 2025 05:06:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X9od6WWZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="S0ShXRzC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEB1B81F0D; Tue,  3 Jun 2025 05:06:25 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 8F1ED82116; Tue,  3 Jun 2025 05:06:27 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CEC281E72
+ by phobos.denx.de (Postfix) with ESMTPS id 2CE8280F9C
  for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 05:06:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+smelamud.redhat.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D1DB95C5428;
- Tue,  3 Jun 2025 03:04:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5817CC4CEED;
+ by nyc.source.kernel.org (Postfix) with ESMTP id D7FB2A48E0E;
+ Tue,  3 Jun 2025 03:06:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 80AEFC4CEF1;
  Tue,  3 Jun 2025 03:06:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1748919980;
- bh=1jLyNp9OLZlEl3G2bx9eOEVl4koCn3TPWeSL6l4fnbQ=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=X9od6WWZvebvBpEov3AkjRWQpfuftREMcNTYdDhsFZtaCJCc/eTPXG1wfYVtSQCa+
- dSOa8luy9TrpclnbiVnLOYgNequaz3rsfbWNcXrKu4qHnAvOYI8OPCKZdw70hL9T9d
- naOSvYlSpSc2PLbK5mjM00EnVoaUwbt14t/flaH89qLxLgBSuI6DBpJCD/59WrYaR9
- ygHBc85710G3wp0A6fWyn98LB/pyBzId4E1IzIW7ZFNULJmUBuANI4bkCgIzyQHNPO
- erjMsEZ9xIirQ21S6wRqDDO2wNyZMYCHJtiydNxrI+v6MNdFYRdHSUHDd+Rb7oo9tR
- e3oKRgod894og==
+ bh=6+CryjzVuXZfZVdlRa4yxlM5zkLQHVaaHY3yMZCduTo=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=S0ShXRzCfto3XZzpQqYPRV5XKAMzA1WQuvjssQLpCkz5Si2KJtgD36NVCKCI615ss
+ oW/qOinvMG7lY5qiRX0xQcsG2P1rZXqj4JFfm1VXopYOwHZmsP4pU1djugrHmzpk+g
+ pOXW/woi+nMKiTgTtGjjC+5bSWZ6ZXLIzq2viNdaceepj9LvDvldJs7nA1aokwuE1D
+ Qvqlb7NE/2+30vpqA4fdsueIFBopJ5/ZwVAKtMj2gayeQY6+mjII9fSeVGS3QJoCmr
+ sQpkYOu5rZHC+4EERYTi1XWUYag7L4RWHjmL/DfYt9j7u5Tyxs0lK+jF0saPITmUt9
+ CCbJJARgk8r/A==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 3082EC5AD49;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6E5CEC61CE5;
  Tue,  3 Jun 2025 03:06:20 +0000 (UTC)
 From: Shmuel Leib Melamud via B4 Relay <devnull+smelamud.redhat.com@kernel.org>
-Subject: [PATCH v3 0/2] renesas: Renesas R-Car Gen4 watchdog driver
-Date: Tue, 03 Jun 2025 06:06:03 +0300
-Message-Id: <20250603-us-renesas-watchdog-v3-0-af3a65afd03e@redhat.com>
+Date: Tue, 03 Jun 2025 06:06:05 +0300
+Subject: [PATCH v3 2/2] renesas: Renesas R-Car Gen4 watchdog driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJtmPmgC/32NQQ6CMBBFr0Jm7ZhaBMWV9zAsysxAu5CaDqKGc
- HcrB3D5XvLfX0AlBVG4FAskmYOGOGYodwWQd+MgGDgzWGMrU5UGn4pJRlGn+HITeY4DWjo13HV
- cEVvIy0eSPry36q3N7INOMX22k9n+7P/ebPGAneFz39RUH5muSdi7aU/xDu26rl9bqop8twAAA
- A==
-X-Change-ID: 20250530-us-renesas-watchdog-2c79dbbd5cd2
+Message-Id: <20250603-us-renesas-watchdog-v3-2-af3a65afd03e@redhat.com>
+References: <20250603-us-renesas-watchdog-v3-0-af3a65afd03e@redhat.com>
+In-Reply-To: <20250603-us-renesas-watchdog-v3-0-af3a65afd03e@redhat.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
@@ -64,11 +60,11 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 Cc: u-boot@lists.denx.de, Shmuel Leib Melamud <smelamud@redhat.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1748919978; l=1660;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1748919978; l=6707;
  i=smelamud@redhat.com; s=20250530; h=from:subject:message-id;
- bh=1jLyNp9OLZlEl3G2bx9eOEVl4koCn3TPWeSL6l4fnbQ=;
- b=JWLFX1cWBEAfQb+hiMKFVfIicYofSQHtIkxZz2ZYBzpa2jVakZ0KA1sY0OKwFNSlcokBdY43o
- 8UzEeCQ0YL0C4NX+Ob7zTw5IowNekl6wTVjyh1ubuLUtS/vK43/ExWJ
+ bh=M84lGBKzusPrU66hMGIM/BxdGeyibzjDZh1dn75PnTk=;
+ b=cQGAMSsuaStmGNSQucMdyZPmZP51BDyK6iTFbeN5lnagJqnNdm7JyF+k6GrFYonbmh2fVSTFD
+ 2jRXvI3CwhSCAymsYKTNqESk0G342r1JLWJcQcpiiukKBQOTAIqWg+q
 X-Developer-Key: i=smelamud@redhat.com; a=ed25519;
  pk=B1DFtpdxDPQudtnqMHSFRRSJziu3zB49J6oZUBo0qI8=
 X-Endpoint-Received: by B4 Relay for smelamud@redhat.com/20250530 with
@@ -91,45 +87,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These series add support of Renesas R-Car Gen4 watchdog timer.
-Timeouts up to 8184.0s are supported (CKS1 register is not involved).
-The watchdog uses the clock type CLK_TYPE_GEN4_MDSEL, so a separate
-patch adds handling of this constant to gen3_clk_get_rate64() function.
+From: Shmuel Leib Melamud <smelamud@redhat.com>
 
-The series were tested on real Renesas R8A779F0 hardware. If the
-watchdog driver is enabled at the build time, the watchdog timer is
-initialized when U-Boot starts. Under normal circumstances, U-Boot loads
-the kernel, it starts systemd and systemd continues to pet the watchdog.
-If systemd is not started before the timeout expires, the watchdog
-resets the board.
+Add support of Renesas R-Car Gen4 watchdog timer. Timeouts up to
+8184.0s are supported (CKS1 register is not involved). The watchdog
+uses the clock of type CLK_TYPE_GEN4_MDSEL.
+
+The timeout is set in
+dts/upstream/src/arm64/renesas/r8a779f0-spider-cpu.dtsi section &rwdt.
+
+This driver is based on upstream linux commit:
+e70140ba0d2b("Get rid of 'remove_new' relic from platform driver struct")
 
 Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
-
 ---
-Changes in v3:
-- Reference to the Linux driver added.
-- Clock driver change moved to a separate patch.
-- rwdt_ prefix used everywhere instead of renesas_wdt_.
-- Disable the clock if rwdt_probe() fails.
-- List of compatibles updated.
-- Link to v2: https://lore.kernel.org/r/20250530-us-renesas-watchdog-v2-1-b0d8f96c64dc@redhat.com
+ drivers/watchdog/Kconfig       |   8 ++
+ drivers/watchdog/Makefile      |   1 +
+ drivers/watchdog/renesas_wdt.c | 182 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 191 insertions(+)
 
----
-Shmuel Leib Melamud (2):
-      renesas: Handle CLK_TYPE_GEN4_MDSEL in gen3_clk_get_rate64()
-      renesas: Renesas R-Car Gen4 watchdog driver
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 1bb67f5035231df9f6ce01adb08d074855393143..a0f2948335f9c3b74b7823f039e578ff4030e97c 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -335,6 +335,14 @@ config WDT_K3_RTI_FW_FILE
+ 
+ endif
+ 
++config WDT_RENESAS
++	bool "Renesas watchdog timer support"
++	depends on WDT && R8A779F0
++	select CLK
++	select CLK_RENESAS
++	help
++	  Enables Renesas SoC R8A779F0 watchdog timer support.
++
+ config WDT_SANDBOX
+ 	bool "Enable Watchdog Timer support for Sandbox"
+ 	depends on SANDBOX && WDT
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index e6bd4c587af6133c405dde6dbada8050debc781c..c4467d6e126d0c3e119bf8014b302e5b1432f541 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -43,6 +43,7 @@ obj-$(CONFIG_WDT_MTK) += mtk_wdt.o
+ obj-$(CONFIG_WDT_NPCM) += npcm_wdt.o
+ obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
+ obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
++obj-$(CONFIG_WDT_RENESAS) += renesas_wdt.o
+ obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
+ obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
+ obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
+diff --git a/drivers/watchdog/renesas_wdt.c b/drivers/watchdog/renesas_wdt.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..5dc5b0b51e0d19589ea96e7a66d4b790d377e7f8
+--- /dev/null
++++ b/drivers/watchdog/renesas_wdt.c
+@@ -0,0 +1,182 @@
++// SPDX-License-Identifier: GPL-2.0+
++// Copyright 2025 Red Hat, Inc., Shmuel Leib Melamud <smelamud@redhat.com>
++
++#include <clk.h>
++#include <dm.h>
++#include <wdt.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/delay.h>
++#include <linux/iopoll.h>
++
++#define usleep_range(a, b) udelay((b))
++
++struct rwdt {
++	u32 cnt;
++	u32 csra;
++	u32 csrb;
++};
++
++#define RWTCSRA_WOVF	BIT(4)
++#define RWTCSRA_WRFLG	BIT(5)
++#define RWTCSRA_TME		BIT(7)
++
++#define CSR_MASK	0xA5A5A500
++#define CNT_MASK	0x5A5A0000
++
++/*
++ * In probe, clk_rate is checked to be not more than 16 bit * biggest clock
++ * divider (12 bits). d is only a factor to fully utilize the WDT counter and
++ * will not exceed its 16 bits. Thus, no overflow, we stay below 32 bits.
++ */
++#define MUL_BY_CLKS_PER_SEC(p, d) \
++	DIV_ROUND_UP((d) * (p)->clk_rate, clk_divs[(p)->cks])
++
++/* d is 16 bit, clk_divs 12 bit -> no 32 bit overflow */
++#define DIV_BY_CLKS_PER_SEC(p, d) ((d) * clk_divs[(p)->cks] / (p)->clk_rate)
++
++static const unsigned int clk_divs[] = { 1, 4, 16, 32, 64, 128, 1024, 4096 };
++
++struct rwdt_priv {
++	struct rwdt __iomem *wdt;
++	unsigned long clk_rate;
++	u8 cks;
++	struct clk clk;
++};
++
++static void rwdt_wait_cycles(struct rwdt_priv *priv, unsigned int cycles)
++{
++	unsigned int delay;
++
++	delay = DIV_ROUND_UP(cycles * 1000000, priv->clk_rate);
++
++	usleep_range(delay, 2 * delay);
++}
++
++static int rwdt_start(struct udevice *dev, u64 timeout, ulong flags)
++{
++	struct rwdt_priv *priv = dev_get_priv(dev);
++	u64 max_timeout;
++	u8 val;
++
++	max_timeout = DIV_BY_CLKS_PER_SEC(priv, 65536);
++	timeout = min(max_timeout, timeout / 1000);
++
++	/* Stop the timer before we modify any register */
++	val = readb_relaxed(&priv->wdt->csra) & ~RWTCSRA_TME;
++	writel_relaxed(val | CSR_MASK, &priv->wdt->csra);
++	/* Delay 2 cycles before setting watchdog counter */
++	rwdt_wait_cycles(priv, 2);
++
++	while (readb_relaxed(&priv->wdt->csra) & RWTCSRA_WRFLG)
++		cpu_relax();
++
++	writel_relaxed((65536 - MUL_BY_CLKS_PER_SEC(priv, timeout)) | CNT_MASK,
++		       &priv->wdt->cnt);
++
++	writel_relaxed(priv->cks | RWTCSRA_TME | CSR_MASK, &priv->wdt->csra);
++
++	return 0;
++}
++
++static int rwdt_stop(struct udevice *dev)
++{
++	struct rwdt_priv *priv = dev_get_priv(dev);
++
++	writel_relaxed(priv->cks | CSR_MASK, &priv->wdt->csra);
++
++	return 0;
++}
++
++static int rwdt_reset(struct udevice *dev)
++{
++	struct rwdt_priv *priv = dev_get_priv(dev);
++	u8 val;
++
++	/* Stop the timer before we modify any register */
++	val = readb_relaxed(&priv->wdt->csra) & ~RWTCSRA_TME;
++	writel_relaxed(val | CSR_MASK, &priv->wdt->csra);
++	/* Delay 2 cycles before setting watchdog counter */
++	rwdt_wait_cycles(priv, 2);
++
++	writel_relaxed(0xffff | CNT_MASK, &priv->wdt->cnt);
++	/* smallest divider to reboot soon */
++	writel_relaxed(0 | CSR_MASK, &priv->wdt->csra);
++
++	readb_poll_timeout(&priv->wdt->csra, val, !(val & RWTCSRA_WRFLG), 100);
++
++	writel_relaxed(RWTCSRA_TME | CSR_MASK, &priv->wdt->csra);
++
++	/* wait 2 cycles, so watchdog will trigger */
++	rwdt_wait_cycles(priv, 2);
++
++	return 0;
++}
++
++static int rwdt_probe(struct udevice *dev)
++{
++	struct rwdt_priv *priv = dev_get_priv(dev);
++	unsigned long clks_per_sec;
++	int ret, i;
++
++	priv->wdt = dev_remap_addr(dev);
++	if (!priv->wdt)
++		return -EINVAL;
++
++	ret = clk_get_by_index(dev, 0, &priv->clk);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_enable(&priv->clk);
++	if (ret)
++		return ret;
++
++	priv->clk_rate = clk_get_rate(&priv->clk);
++	if (!priv->clk_rate) {
++		ret = -ENOENT;
++		goto err_clk_disable;
++	}
++
++	for (i = ARRAY_SIZE(clk_divs) - 1; i >= 0; i--) {
++		clks_per_sec = priv->clk_rate / clk_divs[i];
++		if (clks_per_sec && clks_per_sec < 65536) {
++			priv->cks = i;
++			break;
++		}
++	}
++
++	/* can't find a suitable clock divider */
++	if (i < 0) {
++		ret = -ERANGE;
++		goto err_clk_disable;
++	}
++
++	return 0;
++
++err_clk_disable:
++	clk_disable(&priv->clk);
++
++	return ret;
++}
++
++static const struct wdt_ops rwdt_ops = {
++	.start = rwdt_start,
++	.reset = rwdt_reset,
++	.stop = rwdt_stop,
++};
++
++static const struct udevice_id rwdt_ids[] = {
++	{ .compatible = "renesas,rcar-gen2-wdt" },
++	{ .compatible = "renesas,rcar-gen3-wdt" },
++	{ .compatible = "renesas,rcar-gen4-wdt" },
++	{}
++};
++
++U_BOOT_DRIVER(wdt_renesas) = {
++	.name = "wdt_renesas",
++	.id = UCLASS_WDT,
++	.of_match = rwdt_ids,
++	.ops = &rwdt_ops,
++	.probe	= rwdt_probe,
++	.priv_auto = sizeof(struct rwdt_priv),
++};
 
- drivers/clk/renesas/clk-rcar-gen3.c |   4 +-
- drivers/watchdog/Kconfig            |   8 ++
- drivers/watchdog/Makefile           |   1 +
- drivers/watchdog/renesas_wdt.c      | 182 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 194 insertions(+), 1 deletion(-)
----
-base-commit: 3b6760ddeb4ef940226921017cd9088c89784b01
-change-id: 20250530-us-renesas-watchdog-2c79dbbd5cd2
-
-Best regards,
 -- 
-Shmuel Leib Melamud <smelamud@redhat.com>
+2.49.0
 
 
