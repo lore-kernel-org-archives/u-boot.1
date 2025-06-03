@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB0D7C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 05:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7467BC5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 05:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D75B282102;
-	Tue,  3 Jun 2025 07:06:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3769C82045;
+	Tue,  3 Jun 2025 07:06:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="LiFxwidn";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="EIAiFxOI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23C8480BAE; Tue,  3 Jun 2025 07:06:49 +0200 (CEST)
+ id 4CC098212B; Tue,  3 Jun 2025 07:06:50 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA25081E72
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 07:06:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9518F81FFC
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 07:06:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,16 +31,16 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  t=1748927207; x=1780463207;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=/lF+C0s3vgY5Xc8Ftjw12gqZhjWeXGlf2lEz590QW50=;
- b=LiFxwidnmNhgRQnVqJn2deFb/2mK8ufYzfvsD13XhMpmmQ1Gre626puS
- ypiI6jCUbbeixhmUrET6bLDMOi1O3VeT8oALsK7VC+IObhq9OzoXc/qzu
- AavjrZtcPndAbRG5V2zX0sOhGT/lVbylLBEnVA2PyRE0qq0vNO2e/6SN7
- sWgShZVZM1Al8hPfXW7Q6/6BCCuOO2c8S6YYXQ/yKAr8Nx67/nbemkZGn
- qrmoXt+edgcwdxvdQ6HE/BsG9IRufm8SC2sGZSLbnoB0fnqaFMn2H0KhP
- EJkXBhNlPppBbeEJo7I6C16GrjQqPbLq1XwRi28jFfLm5q/gXtjI6eykQ Q==;
+ bh=e6h3HBK/Z0eq8U5knHp8+29ylNguOwIOBMGSB5giDFw=;
+ b=EIAiFxOIwO0ppJJBmTRsYMcZ7DSTjo8vWZ0ieiEhkZYl6GkEzsJ8vU7p
+ 13BNJHLZzPjAZClH5qiD2KnW3+B/tmd2bGzRWZ4m7jpszn/KzNXxBk8qT
+ WbJ1go+YNipmdkQXTGRukNnR+sya0TyeTPsZB/0Q5jkgZK7y1818NQ/dO
+ 3hvCQy6tTTelnePUBwWgQ3Hw8ErpkblxpeeuVv3+2RG/z1e4Gz9GLFbID
+ M62ucEcLSlFtuoBTUTv8N8gwwIjd7vo6ycYJ8QqmrSpiS9FkwMeb1XtA7
+ GQL0VXA+ZxVxrmYwEje5R3uyGUo2me6H6O4y0ktLTRMwDncE+thi6lJDk w==;
 X-CSE-ConnectionGUID: 1XF8A2VYROKM/ET8yAvjUw==
-X-CSE-MsgGUID: 3KJ30YYIQ+C7Z5nDJa49Pw==
-X-IronPort-AV: E=Sophos;i="6.16,205,1744095600"; d="scan'208";a="273727169"
+X-CSE-MsgGUID: ENqSt5tEQ7S277RcAPaLHw==
+X-IronPort-AV: E=Sophos;i="6.16,205,1744095600"; d="scan'208";a="273727171"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
@@ -48,10 +48,10 @@ Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
 Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Mon, 2 Jun 2025 22:06:22 -0700
+ 15.1.2507.44; Mon, 2 Jun 2025 22:06:37 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Mon, 2 Jun 2025 22:06:16 -0700
+ 15.1.2507.44 via Frontend Transport; Mon, 2 Jun 2025 22:06:30 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sjg@chromium.org>, <Oliver.Gaskell@analog.com>,
@@ -61,10 +61,12 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <duje.mihanovic@skole.hr>, <sumit.garg@kernel.org>,
  <patrice.chotard@foss.st.com>, <nicolas.ferre@microchip.com>,
  <u-boot@lists.denx.de>
-CC: <manikandan.m@microchip.com>
-Subject: [PATCH v6 1/9] dt-bindings: drop at91.h from clock includes
-Date: Tue, 3 Jun 2025 10:35:48 +0530
-Message-ID: <20250603050556.80851-2-manikandan.m@microchip.com>
+CC: <manikandan.m@microchip.com>, Varshini Rajendran
+ <varshini.rajendran@microchip.com>
+Subject: [PATCH v6 3/9] clk: at91: sam9x60-pll: add support for HW PLL freq
+ dividers
+Date: Tue, 3 Jun 2025 10:35:50 +0530
+Message-ID: <20250603050556.80851-4-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250603050556.80851-1-manikandan.m@microchip.com>
 References: <20250603050556.80851-1-manikandan.m@microchip.com>
@@ -87,58 +89,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove clock/at91.h file as it is subset of
-dts/upstream/include/dt-bindings/clock/at91.h.
-The constants defined in this header are being used only in dts
+From: Varshini Rajendran <varshini.rajendran@microchip.com>
 
-Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+Add support for hardware dividers for PLL IDs.In sam9x7 SoC,
+PLL_ID_PLLA and PLL_ID_PLLA_DIV2 has /2 hardware dividers
+each.
+
+fcorepllack -----> HW Div = 2 -+--> fpllack
+                               |
+                               +--> HW Div = 2 ---> fplladiv2ck
+
+Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
 ---
- MAINTAINERS                      |  1 -
- include/dt-bindings/clock/at91.h | 23 -----------------------
- 2 files changed, 24 deletions(-)
- delete mode 100644 include/dt-bindings/clock/at91.h
+ drivers/clk/at91/clk-sam9x60-pll.c | 38 +++++++++++++++++++++++++++++-
+ drivers/clk/at91/pmc.h             |  1 +
+ 2 files changed, 38 insertions(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d62dd35a385..883169e3dee 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -468,7 +468,6 @@ F:	drivers/memory/atmel-ebi.c
- F:	drivers/misc/microchip_flexcom.c
- F:	drivers/timer/atmel_tcb_timer.c
- F:	include/dt-bindings/clk/at91.h
--F:	include/dt-bindings/clock/at91.h
- F:	include/dt-bindings/dma/at91.h
- F:	include/dt-bindings/mfd/at91-usart.h
- F:	include/dt-bindings/mfd/atmel-flexcom.h
-diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
-deleted file mode 100644
-index ab3ee241d10..00000000000
---- a/include/dt-bindings/clock/at91.h
-+++ /dev/null
-@@ -1,23 +0,0 @@
--/*
-- * This header provides constants for AT91 pmc status.
-- *
-- * The constants defined in this header are being used in dts.
-- *
-- * Licensed under GPLv2 or later.
-- */
--
--#ifndef _DT_BINDINGS_CLK_AT91_H
--#define _DT_BINDINGS_CLK_AT91_H
--
--#define AT91_PMC_MOSCS		0		/* MOSCS Flag */
--#define AT91_PMC_LOCKA		1		/* PLLA Lock */
--#define AT91_PMC_LOCKB		2		/* PLLB Lock */
--#define AT91_PMC_MCKRDY		3		/* Master Clock */
--#define AT91_PMC_LOCKU		6		/* UPLL Lock */
--#define AT91_PMC_PCKRDY(id)	(8 + (id))	/* Programmable Clock */
--#define AT91_PMC_MOSCSELS	16		/* Main Oscillator Selection */
--#define AT91_PMC_MOSCRCS	17		/* Main On-Chip RC */
--#define AT91_PMC_CFDEV		18		/* Clock Failure Detector Event */
--#define AT91_PMC_GCKRDY		24		/* Generated Clocks */
--
--#endif
+diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
+index 676ad8294a6..df8172bccac 100644
+--- a/drivers/clk/at91/clk-sam9x60-pll.c
++++ b/drivers/clk/at91/clk-sam9x60-pll.c
+@@ -22,6 +22,7 @@
+ 
+ #define UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL	"at91-sam9x60-div-pll-clk"
+ #define UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL	"at91-sam9x60-frac-pll-clk"
++#define UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL	"at91-sam9x60-fixed-div-pll-clk"
+ 
+ #define	PMC_PLL_CTRL0_DIV_MSK	GENMASK(7, 0)
+ #define	PMC_PLL_CTRL1_MUL_MSK	GENMASK(31, 24)
+@@ -140,6 +141,7 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
+ 	void __iomem *base = pll->base;
+ 	ulong parent_rate = clk_get_parent_rate(clk);
+ 	u32 mul, frac, val;
++	ulong pll_rate;
+ 
+ 	if (!parent_rate)
+ 		return 0;
+@@ -149,8 +151,12 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
+ 	pmc_read(base, AT91_PMC_PLL_CTRL1, &val);
+ 	mul = (val & pll->layout->mul_mask) >> pll->layout->mul_shift;
+ 	frac = (val & pll->layout->frac_mask) >> pll->layout->frac_shift;
++	pll_rate = (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
+ 
+-	return (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
++	if (pll->layout->div2)
++		pll_rate >>= 1;
++
++	return pll_rate;
+ }
+ 
+ static int sam9x60_frac_pll_enable(struct clk *clk)
+@@ -359,6 +365,16 @@ static ulong sam9x60_div_pll_get_rate(struct clk *clk)
+ 	return parent_rate / (div + 1);
+ }
+ 
++static ulong sam9x60_fixed_div_pll_get_rate(struct clk *clk)
++{
++	ulong parent_rate = clk_get_parent_rate(clk);
++
++	if (!parent_rate)
++		return 0;
++
++	return parent_rate >> 1;
++}
++
+ static const struct clk_ops sam9x60_div_pll_ops = {
+ 	.enable = sam9x60_div_pll_enable,
+ 	.disable = sam9x60_div_pll_disable,
+@@ -366,6 +382,12 @@ static const struct clk_ops sam9x60_div_pll_ops = {
+ 	.get_rate = sam9x60_div_pll_get_rate,
+ };
+ 
++static const struct clk_ops sam9x60_fixed_div_pll_ops = {
++	.enable = sam9x60_div_pll_enable,
++	.disable = sam9x60_div_pll_disable,
++	.get_rate = sam9x60_fixed_div_pll_get_rate,
++};
++
+ static struct clk *
+ sam9x60_clk_register_pll(void __iomem *base, const char *type,
+ 			 const char *name, const char *parent_name, u8 id,
+@@ -406,6 +428,13 @@ sam9x60_clk_register_div_pll(void __iomem *base, const char *name,
+ 			     const struct clk_pll_characteristics *characteristics,
+ 			     const struct clk_pll_layout *layout, bool critical)
+ {
++	if (layout->div2) {
++		return sam9x60_clk_register_pll(base,
++			UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL, name, parent_name,
++			id, characteristics, layout,
++			CLK_GET_RATE_NOCACHE | (critical ? CLK_IS_CRITICAL : 0));
++	}
++
+ 	return sam9x60_clk_register_pll(base,
+ 		UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL, name, parent_name, id,
+ 		characteristics, layout,
+@@ -431,6 +460,13 @@ U_BOOT_DRIVER(at91_sam9x60_div_pll_clk) = {
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
+ 
++U_BOOT_DRIVER(at91_sam9x60_fixed_div_pll_clk) = {
++	.name = UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL,
++	.id = UCLASS_CLK,
++	.ops = &sam9x60_fixed_div_pll_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
++
+ U_BOOT_DRIVER(at91_sam9x60_frac_pll_clk) = {
+ 	.name = UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL,
+ 	.id = UCLASS_CLK,
+diff --git a/drivers/clk/at91/pmc.h b/drivers/clk/at91/pmc.h
+index 49134531564..580c9964ff4 100644
+--- a/drivers/clk/at91/pmc.h
++++ b/drivers/clk/at91/pmc.h
+@@ -54,6 +54,7 @@ struct clk_pll_layout {
+ 	u8 frac_shift;
+ 	u8 div_shift;
+ 	u8 endiv_shift;
++	u8 div2;
+ };
+ 
+ struct clk_programmable_layout {
 -- 
 2.25.1
 
