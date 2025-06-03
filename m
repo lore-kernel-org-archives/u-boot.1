@@ -4,80 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B0D7C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 07:08:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4587EC5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 08:28:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB47F81E72;
-	Tue,  3 Jun 2025 09:08:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A0E3881F0D;
+	Tue,  3 Jun 2025 10:28:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V/RXjeQS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Y4szpuy7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A613B81F0D; Tue,  3 Jun 2025 09:08:04 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 495C780F0E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 09:08:02 +0200 (CEST)
+ id 39DAB81FFC; Tue,  3 Jun 2025 10:28:47 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 47A9181E72
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 10:28:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-60462e180e2so11104316a12.2
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 00:08:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748934481; x=1749539281; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ITGMP7hln6IWw5uRG9ZzXb1NKBfxeXxsD+QAjMgM4/U=;
- b=V/RXjeQSiNBh4ke6KOigy2vXSD/b8KIDD24KIwbqaEWKDkjRt3+acoQeqb1KBCoDSp
- 5mLKCxH9+UDRqpnayQBkzcUMVxuQfCUPgRBhucw6vp2g/4ZWGJW7HTQWudB5JibtnBrC
- XOedY2dOM3IpAXO3ASMNEQa5T43bJn57qa29n/ZwpAuV8HZC6NoLRiWAU1G4Z7Z3Xt1d
- BuV8yKNSct7Z+aBFJi8Gj7AlHl/cZraJNxMQobcjUf/EV1h02LBjgLElTstta+Dov18C
- hbwiVzJlBou9wH0lfe4rTn1lqgbxWb9DgsvIKy2omsWhIBx2Ks2yyOyu619eHN0z9nTl
- Y52g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748934481; x=1749539281;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ITGMP7hln6IWw5uRG9ZzXb1NKBfxeXxsD+QAjMgM4/U=;
- b=FGcjEjjlG3yAtrmCb429EfQ7PLEmln/u0KrcoFoRpkhXfykuhi6Yuizedt7iyuyrls
- HcNYFlhz9hOprJImPE3lmyU9r9NGKFgXNYdmuooWzgLo2xiiu7AbZ9MJ//52XO7VNjS4
- vnf/wnHSAUNfssWo9UBxrTUDLGzcoCgjGDhqYJV1lp8z3SrDWSFk5OWHuE31MCuQXuwD
- tlhs5GmSOWfvTD4BszvhJaZvkOQ2akzJ0HPwof05WJQ/mLFmU4YRrp86t/muflO85kim
- OLmad4Vgz6+DwyUklplIxTYkmExec9emWA5BxRViBGoBXiy//Nki7ROwb/H+1+7CwGCU
- DZ2w==
-X-Gm-Message-State: AOJu0YxoJjQVETKmUOaT0upM4cMaDqd6M9vs6BKusa3EsUPLIBDF8vgr
- 79X2qDCEXDSK6q/7ygux8gRUYnDSGOqKH9SfBKvWOPUMmAdHHyPAvLtVke+krwq0tsDdjSF9Qar
- 6KZSQSYjFCOsiaqfW9FZ4d2FDniBAQOzu
-X-Gm-Gg: ASbGnctfu4h7NbHScSCT7Vs4bwSa7x2tfeeDOMUwFL19E5napYVU3lFrUpZHglBgJil
- 2dJL6RezFExYrF7NQZWpTHQ/71HPXX+jUb8f0+SqTUe0mSqm0gtkbA2TO/0g35Re6gdWbIx3mOO
- 5mmGukMaA+ZK+tx7Su7wI2V560PQINQZ4Io5x7ojpqpR78rfM45gAUrGlgc5KAeb7a
-X-Google-Smtp-Source: AGHT+IHG1ZHVCFMejJQ4kVCjHSLVeDH61tC36N/IG0KEt6JwetfT5P/gZ+WXupogbgNyGBup5U8IONvUA0Qi9anAAiU=
-X-Received: by 2002:a05:6402:35c2:b0:601:f3f1:f10e with SMTP id
- 4fb4d7f45d1cf-6057c1a503dmr13583680a12.5.1748934481209; Tue, 03 Jun 2025
- 00:08:01 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5538SffJ3450948;
+ Tue, 3 Jun 2025 03:28:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748939321;
+ bh=hPOmetAt8isBV4aPjRaj1FTcUCNDZj9bF/A26oPmuNI=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Y4szpuy78ZZOiOaa1m9fqjUlUu/QqgUlfQtjictHXsqoEKHU0kklZKLtFbdgx7mDX
+ JX30EQVrxy878wqJp292l59SnV6JTudxsUilZgW07ft5IMj/dRO427mwwO3aDydgXJ
+ b56GYjTcPGu0i4mSHVNcZPRiZ3e/oMXqptHV6A7Y=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5538Sfda1190878
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 3 Jun 2025 03:28:41 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
+ Jun 2025 03:28:41 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 3 Jun 2025 03:28:41 -0500
+Received: from localhost (lcpd911.dhcp.ti.com [172.24.227.226])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5538Se5Y155935;
+ Tue, 3 Jun 2025 03:28:40 -0500
+Date: Tue, 3 Jun 2025 13:58:39 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Moteen Shah <m-shah@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <m-chawdhry@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>
+Subject: Re: [PATCH 1/6] ti_sci_*: Add utility to access tisci firmware and
+ SOC capability
+Message-ID: <20250603082839.z554qglc35gh4zxc@lcpd911>
+References: <20250528080519.677750-1-m-shah@ti.com>
+ <20250528080519.677750-2-m-shah@ti.com>
 MIME-Version: 1.0
-References: <20250602194507.15159-1-malysagreg@gmail.com>
- <20250602194507.15159-4-malysagreg@gmail.com>
- <EB8928C9-E912-4F52-B080-B7EACBA89740@gmx.de>
- <CABdDSeV0D2n223hu+2pAp0x_UksGU=15m09pwY7edgpP5kZ9_w@mail.gmail.com>
-In-Reply-To: <CABdDSeV0D2n223hu+2pAp0x_UksGU=15m09pwY7edgpP5kZ9_w@mail.gmail.com>
-From: Greg Malysa <malysagreg@gmail.com>
-Date: Tue, 3 Jun 2025 03:06:05 -0400
-X-Gm-Features: AX0GCFtt4Q0s18Zm4exjkfCeFGJ4vwyJeGF7xG0I_Nq82uwN-l6IN-b_6cfcPL4
-Message-ID: <CABdDSeUaKVPYO5YvZqVe-eUiEYA0470QA40hH8FYc4FmUJv6Kg@mail.gmail.com>
-Subject: [PATCH 03/10] docker: add ADI build-related tools to docker image
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, adsp-linux@analog.com,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250528080519.677750-2-m-shah@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +81,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-My apologies, I accidentally didn't hit reply to all, please see below.
+On May 28, 2025 at 13:35:14 +0530, Moteen Shah wrote:
+> Introduce response and request structs for receiving information
+> regarding FW/SOC capability from DM. The received capability can
+> further be used to call API's based on the feature supported by
+> the DM firmware.
+> 
+> Signed-off-by: Moteen Shah <m-shah@ti.com>
+> ---
 
----------- Forwarded message ---------
-From: Greg Malysa <malysagreg@gmail.com>
-Date: Tue, Jun 3, 2025 at 3:04=E2=80=AFAM
-Subject: Re: [PATCH 03/10] docker: add ADI build-related tools to docker im=
-age
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-
-Hi Heinrich,
-
-On Mon, Jun 2, 2025 at 4:11=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gmx=
-.de> wrote:
->
-> Am 2. Juni 2025 21:44:41 MESZ schrieb Greg Malysa <malysagreg@gmail.com>:
-> >ADI processors require packaging with the ldr utility for bootrom
->
-> "ADI processors" is not self explanatory. Can we add a sentence like
->
-> "LDR files are the executable format for the Analog Devices ADSP-SCxxx on=
--chip Boot ROM. Provide the ldr compiler for ARMv7 and ARMv8."
-
-Yes I can update the message with text like this for v2.
-
->
-> >
-> >+# Build ldr tool for ADI boards and install to match expected abi name
-> >+RUN git clone https://github.com/analogdevicesinc/lnxdsp-arm-poky-linux=
--gnueabi-ldr.git /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr && \
-> >+      cd /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr/src/ldr && \
-> >+      ./configure && \
-> >+      make -j $(nproc) && \
-> >+      cp ldr /usr/bin/arm-linux-gnueabi-ldr && \
-> >+      cp ldr /usr/bin/aarch64-linux-ldr
->
-> In the Docker image we tend to put such tools into a directory in /opt.
-
-I will make this change as well and run through CI again on my runner.
-I'll wait a week or so for feedback on the rest of the series before
-resubmitting. Thanks for the feedback!
-
-Thanks,
-Greg
+-- 
+Best regards,
+Dhruva Gole
+Texas Instruments Incorporated
