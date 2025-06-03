@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CFFFC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:26:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8D7C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7802E82C30;
-	Tue,  3 Jun 2025 16:25:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2636F829B2;
+	Tue,  3 Jun 2025 16:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="unxcbjvW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PJRayMbP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C626E82BA7; Tue,  3 Jun 2025 16:25:43 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id B5AB682AE1; Tue,  3 Jun 2025 16:25:46 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B85F482C15
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 16:25:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3CF382B8E
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 16:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 553EPeTX491620;
- Tue, 3 Jun 2025 09:25:40 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 553EPfDB3536198;
+ Tue, 3 Jun 2025 09:25:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748960740;
- bh=qHNEPLL3RrWS8p6pLMTYjTe1PXVu2iZ5/JIMj3tHEek=;
+ s=ti-com-17Q1; t=1748960741;
+ bh=4Ytt4lIBbZj6a3/JrbFn5v8jUpVPkngIoeAHIO50Yao=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=unxcbjvWloEPAeICKBO6zXwZ6YQrmL+qQC/L4kfjgxF3IG4efT29ToB7iChUc32gG
- p6EHlzIg9l6qDlmICoymDaMYv/XUdtpr4T7f9Sc0DCbBz/hDBBh28moJv70gXPSMcP
- QEqypWqy+poodgZ90RKBoc11kXqM1AOzCtMvWGSU=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 553EPeCK1372048
+ b=PJRayMbPubgU9GOm+snipeAN3DCVPV/vvTovdzsYKXlkr9GCU21mAMtIQlIxXnvQm
+ Wu73NUamPoxIIKI4pa/lX7D+vV6JULrYXVfxMk+T9mjiobfcH4hpPN43EQdx9cCWwh
+ Rx3hIO8EFYzjS/5AuOp5ivqIs95xokz5MsuIVGCY=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 553EPfIj3585500
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 3 Jun 2025 09:25:40 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 3 Jun 2025 09:25:41 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Jun 2025 09:25:39 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 09:25:41 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Jun 2025 09:25:39 -0500
+ Frontend Transport; Tue, 3 Jun 2025 09:25:41 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 553EPc9q559572;
- Tue, 3 Jun 2025 09:25:39 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 553EPeBT559592;
+ Tue, 3 Jun 2025 09:25:40 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
  <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH v7 09/10] Makefile: update tispl regex to also clean falcon spl
-Date: Tue, 3 Jun 2025 19:54:49 +0530
-Message-ID: <20250603142452.2707171-10-anshuld@ti.com>
+Subject: [PATCH v7 10/10] doc: ti: am62: add falcon mode documentation
+Date: Tue, 3 Jun 2025 19:54:50 +0530
+Message-ID: <20250603142452.2707171-11-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250603142452.2707171-1-anshuld@ti.com>
 References: <20250603142452.2707171-1-anshuld@ti.com>
@@ -80,28 +80,838 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Build for A53 on am62 platforms now generates tispl_falcon.bin alongside
-tispl.bin, edit the regex for `make clean` so that both files are
-removed.
+This patch adds user documentation for falcon boot for am62 platforms.
+The main section is added to am62x_sk.rst and other documents just
+include the section. Steps to build falcon support, usage and the
+modified R5 memory map have been documented.
+
+Two svg images have also been added for reference, one for the modified
+tispl_falcon.bin and other for the falcon specific fitImage format.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ doc/board/ti/am62ax_sk.rst                    |   7 +
+ doc/board/ti/am62px_sk.rst                    |   7 +
+ doc/board/ti/am62x_sk.rst                     | 289 ++++++++++++++++++
+ doc/board/ti/img/fitImage_falcon.svg          | 180 +++++++++++
+ .../ti/img/tifsstub_dm_tispl_falcon.bin.svg   | 285 +++++++++++++++++
+ 5 files changed, 768 insertions(+)
+ create mode 100644 doc/board/ti/img/fitImage_falcon.svg
+ create mode 100644 doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
 
-diff --git a/Makefile b/Makefile
-index f88684947ee..af53e4fa6bb 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2225,7 +2225,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       include/config.h include/generated/env.* drivers/video/u_boot_logo.S \
- 	       tools/version.h u-boot* MLO* SPL System.map fit-dtb.blob* \
- 	       u-boot-ivt.img.log u-boot-dtb.imx.log SPL.log u-boot.imx.log \
--	       lpc32xx-* bl31.c bl31.elf bl31_*.bin image.map tispl.bin* \
-+	       lpc32xx-* bl31.c bl31.elf bl31_*.bin image.map tispl*.bin* \
- 	       idbloader.img flash.bin flash.log defconfig keep-syms-lto.c \
- 	       mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
+diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
+index 43a1db68873..01e252ed1b9 100644
+--- a/doc/board/ti/am62ax_sk.rst
++++ b/doc/board/ti/am62ax_sk.rst
+@@ -192,6 +192,13 @@ https://www.ti.com/lit/pdf/spruj16 under the `Boot Mode Pins` section.
+ 
+ For SW2 and SW1, the switch state in the "ON" position = 1.
+ 
++Falcon Mode
++-----------
++
++AM62A platforms support falcon mode, bypassing A-core SPL and u-boot to reduce
++boot times. See :ref:`falcon mode<am62x_evm_falcon_mode_start>` section on AM62 platforms page for detailed build
++information.
++
+ Debugging U-Boot
+ ----------------
+ 
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index a07d6a4da45..917e3b904a0 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -290,6 +290,13 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
+ 
+ For SW2 and SW1, the switch state in the "ON" position = 1.
+ 
++Falcon Mode
++-----------
++
++AM62P platforms support falcon mode, bypassing A-core SPL and u-boot to reduce
++boot times. See :ref:`falcon mode<am62x_evm_falcon_mode_start>` section on AM62 platforms page for detailed build
++information.
++
+ Debugging U-Boot
+ ----------------
+ 
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index dab2970a85c..49c5fc8e06d 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -526,6 +526,295 @@ Next, based on NET_VCI_STRING string mentioned in respective defconfig file `tib
+ fetches `tispl.bin` and then `tispl.bin` fetches `u-boot.img` from TFTP server which
+ completes Ethernet boot on the device.
+ 
++.. _am62x_evm_falcon_mode_start:
++
++Falcon Mode
++-----------
++
++Falcon boot flow on am62 platforms bypasses the A-core SPL and u-boot with the
++overall boot flow as below:
++
++**Normal boot flow:**
++
++* R5 SPL -> ATF -> OP-TEE -> Cortex-A SPL -> U-Boot -> Kernel
++
++**With falcon mode:**
++
++* R5 SPL -> ATF -> OP-TEE -> Kernel
++
++Build Process
++^^^^^^^^^^^^^
++
++Enabling falcon mode requires re-building ATF, U-boot and the kernel fitImage
++as follows:
++
++0. Setup environment variables:
++"""""""""""""""""""""""""""""""
++
++Refer to the :ref:`build procedure<Build Procedure>` above for setting up the
++environment variables.
++
++1. Trusted Firmware-A:
++""""""""""""""""""""""
++
++The R5 SPL in falcon mode loads the kernel at ``0x82000000`` and the
++corresponding DTB at ``0x88000000``. Therefore ATF needs to be rebuild with
++changes to the respective addresses.
++
++.. prompt:: bash $
++
++ # Change load addresses for the kernel and DTB
++ export TFA_EXTRA_ARGS="PRELOADED_BL33_BASE=0x82000000 K3_HW_CONFIG_BASE=0x88000000"
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_tfa
++    :end-before: .. k3_rst_include_end_build_steps_tfa
++
++2. U-Boot:
++""""""""""
++
++* **2.1 R5:**
++
++.. prompt:: bash $
++
++ # use the common falcon config fragment for am62 platforms
++ export $UBOOT_FALCON_CFG_FRAGMENTR="am62x_r5_falcon.config"
++ export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} ${UBOOT_FALCON_CFG_FRAGMENTR}"
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_spl_r5
++    :end-before: .. k3_rst_include_end_build_steps_spl_r5
++
++* **2.2 A53:**
++
++After rebuilding ATF, the binary needs to be repackaged inside the tispl
++binaries:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_uboot
++    :end-before: .. k3_rst_include_end_build_steps_uboot
++
++3. fitImage:
++""""""""""""
++
++.. warning::
++
++    The ``fitImage`` available by default under ``boot/fitImage`` in rootfs of
++    the standard SDK release is not compatible with falcon mode.
++
++For secure boot in falcon mode, the compute heavy authentication required for
++the ``fitImage`` is offloaded from the slower R5 core to TIFS. This requires
++``fitImage`` to package the necessary binaries (kernel and dtb) with a
++pre-signed x509 certificate.
++
++**fitImage for falcon mode:**
++
++.. image:: img/fitImage_falcon.svg
++  :alt: fitImage for falcon boot image format
++
++* **Sources**
++
++  * **Core Secdev K3**
++
++    | **source:** https://git.ti.com/cgit/security-development-tools/core-secdev-k3
++    | **branch:** master
++
++**Follow the steps below to create a falcon compatible fitImage:**
++
++**3.1 Environment setup**
++
++.. prompt:: bash $
++
++  export DTB=path/to/dtb
++  export IMAGE=path/to/kernel-image
++
++**3.2 fitImage creation**
++
++  An Image tree source (*its*) file describes the structure and contents of the
++  final image produced by the mkimage tool.
++
++  To create the ``fitImage`` for falcon mode, create a file ``fitImage.its``
++  with the following contents inside the ``core-secdev-k3`` source directory,:
++
++.. code-block:: dts
++
++    /dts-v1/;
++
++    / {
++        description = "Kernel fitImage for falcon mode";
++        #address-cells = <1>;
++
++        images {
++            kernel-1 {
++                description = "Linux kernel";
++                data = /incbin/("Image.sec");
++                type = "kernel";
++                arch = "arm64";
++                os = "linux";
++                compression = "none";
++                load = <0x82000000>;
++                entry = <0x82000000>;
++            };
++            falcon.dtb {
++                description = "Flattened Device Tree blob";
++                data = /incbin/("falcon.dtb.sec");
++                type = "flat_dt";
++                arch = "arm64";
++                compression = "none";
++                load = <0x88000000>;
++                entry = <0x88000000>;
++            };
++        };
++
++        configurations {
++            default = "conf-falcon";
++            conf-falcon {
++                description = "Pre-signed Kernel and DTB";
++                kernel = "kernel-1";
++                fdt = "falcon.dtb";
++            };
++        };
++    };
++
++Sign the kernel and dtb using ``secure-binary-image.sh`` and create the
++``fitImage`` using mkimage:
++
++.. prompt:: bash $
++
++  # inside core-secdev-k3 source
++  cp $IMAGE Image
++  cp $DTB falcon.dtb
++  ./scripts/secure-binary-image.sh Image Image.sec
++  ./scripts/secure-binary-image.sh falcon.dtb falcon.dtb.sec
++  mkimage -f fitImage.its fitImage
++
++Usage
++^^^^^
++
++Falcon mode makes use of a cut down variant of the tispl binary called
++``tispl_falcon.bin`` with the Cortex-A SPL and it's corresponding DTBs removed.
++This file should be present alongside the existing ``tispl.bin`` after building
++U-Boot for the Cortex-A cores.
++
++- **tispl_falcon.bin**
++
++.. image:: img/tifsstub_dm_tispl_falcon.bin.svg
++  :alt: tispl_falcon.bin image format
++
++1. eMMC/SD Boot:
++""""""""""""""""
++
++Falcon mode for K3 devices only supports SD and eMMC in FS boot. The R5 SPL
++once loaded from the ``tiboot3.bin`` file from the boot partition looks for
++``tispl_falcon.bin``, the DTB and fitImage (or kernel image for unauthenticated
++boot) inside the boot directory of the second partition (rootfs).
++
++.. list-table::
++   :widths: 8 8 8 25
++   :header-rows: 1
++
++   * - File
++     - Copy path on SD/eMMC
++     - Partition
++     - Description
++
++   * - ``tiboot3.bin``
++     - ``/tiboot3.bin``
++     - boot (fat)
++     - R5 SPL with falcon support
++
++   * - ``tispl_falcon.bin``
++     - ``/boot/tispl_falcon.bin``
++     - rootfs (ext4)
++     - tispl binary without SPL for the A core and DTB
++
++   * - ``fitImage``
++     - ``/boot/fitImage``
++     - rootfs (ext4)
++     - kernel and dtb fitImage with pre-signed binaries
++
++2. OSPI Boot:
++"""""""""""""
++
++For OSPI boot, the ``tiboot3.bin`` and ``tispl_falcon.bin`` files should be
++flashed to the same addresses in flash as regular boot flow but the DTB and the
++fitImage (or kernel image for unauthenticated boot) are read from the rootfs's
++boot directory.
++
++Below commands can be used to download ``tiboot3.bin`` and ``tispl_falcon.bin``
++over tftp and then flash those to OSPI at their respective addresses.
++
++.. prompt:: bash =>
++
++  sf probe
++  tftp ${loadaddr} tiboot3.bin
++  sf update $loadaddr 0x0 $filesize
++  tftp ${loadaddr} tispl_falcon.bin
++  sf update $loadaddr 0x80000 $filesize
++
++R5 SPL Memory Map:
++^^^^^^^^^^^^^^^^^^
++
++Standard boot:
++""""""""""""""
++
++.. code-block::
++
++    0x80000000 +-------------------------------+ Start of DDR
++      512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
++               |                               |
++    0x80080000 +-------------------------------+ PRELOADED_BL33_BASE in ATF
++     29.5MiB   |         A53 SPL + DTB +       | CONFIG_SPL_LOAD_FIT_ADDRESS
++               | Download region for FIT in DFU|
++    0x81e00000 +-------------------------------+
++               |  R5 U-Boot SPL Stack + Heap   |
++        2MiB   |       (size defined by        |
++               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
++    0x82000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
++      112MiB   |            Unused             |
++    0x89000000 +-------------------------------+
++      331MiB   | Device Manager (DM) Load Addr |
++    0x9db00000 +-------------------------------+
++       12MiB   |          DM Reserved          |
++    0x9e700000 +-------------------------------+
++        1MiB   |            Unused             |
++    0x9e800000 +-------------------------------+ BL32_BASE in ATF
++       24MiB   |             OPTEE             |
++    0xa0000000 +-------------------------------+ End of DDR (512MiB)
++
++Falcon mode:
++""""""""""""
++
++.. code-block::
++
++    0x80000000 +-------------------------------+ Start of DDR
++      512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
++    0x80080000 +-------------------------------+
++     31.5MiB   |            Unused             |
++    0x82000000 +-------------------------------+ PRELOADED_BL33_BASE in ATF
++               |                               | CONFIG_SYS_LOAD_ADDR
++       57MiB   |   Kernel + initramfs Image    | CONFIG_SPL_LOAD_FIT_ADDRESS
++               |                               |
++    0x85900000 +-------------------------------+
++               |                               |
++               |  R5 U-Boot SPL Stack + Heap   |
++       39MiB   |       (size defined by        |
++               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
++               |                               |
++    0x88000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
++               |                               | K3_HW_CONFIG_BASE in ATF
++       16MiB   |          Kernel DTB           | CONFIG_SPL_PAYLOAD_ARGS_ADDR
++               |                               |
++    0x89000000 +-------------------------------+
++      331MiB   | Device Manager (DM) Load Addr |
++    0x9db00000 +-------------------------------+
++       12MiB   |          DM Reserved          |
++    0x9e700000 +-------------------------------+
++        1MiB   |            Unused             |
++    0x9e800000 +-------------------------------+ BL32_BASE in ATF
++       24MiB   |             OPTEE             |
++    0xa0000000 +-------------------------------+ End of DDR (512MiB)
++
+ Debugging U-Boot
+ ----------------
+ 
+diff --git a/doc/board/ti/img/fitImage_falcon.svg b/doc/board/ti/img/fitImage_falcon.svg
+new file mode 100644
+index 00000000000..a22e0f6564e
+--- /dev/null
++++ b/doc/board/ti/img/fitImage_falcon.svg
+@@ -0,0 +1,180 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
++
++<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
++
++<svg
++   version="1.1"
++   width="231"
++   height="220"
++   viewBox="-0.5 -0.5 231 220"
++   id="svg72"
++   sodipodi:docname="fitImage_falcon.svg"
++   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg">
++  <sodipodi:namedview
++     id="namedview74"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageshadow="2"
++     inkscape:pageopacity="0.0"
++     inkscape:pagecheckerboard="0"
++     showgrid="false"
++     inkscape:zoom="2.9"
++     inkscape:cx="83.62069"
++     inkscape:cy="131.72414"
++     inkscape:window-width="1918"
++     inkscape:window-height="1078"
++     inkscape:window-x="0"
++     inkscape:window-y="0"
++     inkscape:window-maximized="0"
++     inkscape:current-layer="g62"
++     inkscape:showpageshadow="2"
++     inkscape:deskcolor="#d1d1d1" />
++  <defs
++     id="defs2">
++    <inkscape:perspective
++       sodipodi:type="inkscape:persp3d"
++       inkscape:vp_x="0 : 104.5 : 1"
++       inkscape:vp_y="0 : 1000 : 0"
++       inkscape:vp_z="231 : 104.5 : 1"
++       inkscape:persp3d-origin="115.5 : 46 : 1"
++       id="perspective1" />
++  </defs>
++  <g
++     id="g62">
++    <rect
++       x="-0.06279549"
++       y="-0.062792346"
++       width="230.12561"
++       height="219.12558"
++       rx="34.518837"
++       ry="27.33382"
++       fill="#d5e8d4"
++       stroke="#82b366"
++       pointer-events="all"
++       id="rect4"
++       style="display:inline;fill:#dbe4f4;fill-opacity:1;stroke:#8166b3;stroke-width:0.888796;stroke-dasharray:none;stroke-opacity:1" />
++    <text
++       x="115.15599"
++       y="156.49472"
++       fill="#000000"
++       font-family="Helvetica"
++       font-size="12px"
++       text-anchor="middle"
++       id="text8-8-7-6-6"
++       style="display:inline"
++       inkscape:label="x509 cert">x509 Certificate</text>
++    <text
++       x="115.15598"
++       y="85.615631"
++       fill="#000000"
++       font-family="Helvetica"
++       font-size="12px"
++       text-anchor="middle"
++       id="text8-8-7-6-6-1"
++       style="display:inline"
++       inkscape:label="x509 cert">x509 Certificate</text>
++    <text
++       x="114.532"
++       y="42.263863"
++       fill="#000000"
++       font-family="Helvetica"
++       font-size="12px"
++       text-anchor="middle"
++       id="text8-8-7-6-6-5"
++       style="display:inline"
++       inkscape:label="x509 cert">Fit Header</text>
++    <text
++       x="114.78398"
++       y="106.884"
++       fill="#000000"
++       font-family="Helvetica"
++       font-size="12px"
++       text-anchor="middle"
++       id="text8-8-7-6-6-5-5"
++       style="display:inline"
++       inkscape:label="x509 cert">Kernel Image</text>
++    <rect
++       style="display:none;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"
++       id="rect1"
++       width="171.46796"
++       height="210.89911"
++       x="36.799908"
++       y="21.652758"
++       transform="translate(-7.533886,15.237117)" />
++    <text
++       xml:space="preserve"
++       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
++       x="90.327087"
++       y="177.15775"
++       id="text1"><tspan
++         sodipodi:role="line"
++         id="tspan1"
++         x="90.327087"
++         y="177.15775" /></text>
++    <text
++       xml:space="preserve"
++       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
++       x="106.45526"
++       y="214.93161"
++       id="text2"><tspan
++         sodipodi:role="line"
++         id="tspan2"
++         x="106.45526"
++         y="214.93161" /></text>
++    <g
++       id="g62-6"
++       transform="translate(-5.6022949,-9.676433)">
++      <text
++         x="120.33229"
++         y="188.7475"
++         fill="#000000"
++         font-family="Helvetica"
++         font-size="12px"
++         text-anchor="middle"
++         id="text8-8-7-6-6-5-2"
++         style="display:inline"
++         inkscape:label="x509 cert">DTB</text>
++    </g>
++    <rect
++       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386"
++       id="rect2"
++       width="82.644012"
++       height="17.6518"
++       x="73.677986"
++       y="94.992081" />
++    <rect
++       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386;stroke-dasharray:none"
++       id="rect2-7"
++       width="32.336376"
++       height="18.068098"
++       x="98.83181"
++       y="165.66302" />
++    <rect
++       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
++       id="rect3"
++       width="152.43475"
++       height="70.500725"
++       x="38.782627"
++       y="127.54861" />
++    <rect
++       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
++       id="rect3-9"
++       width="152.43475"
++       height="70.500732"
++       x="38.782623"
++       y="56.777336" />
++    <rect
++       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.78506;stroke-dasharray:none"
++       id="rect5"
++       width="152.41736"
++       height="36.60006"
++       x="38.791306"
++       y="20.211617" />
++  </g>
++</svg>
+diff --git a/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg b/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
+new file mode 100644
+index 00000000000..7e2793c2ed9
+--- /dev/null
++++ b/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
+@@ -0,0 +1,285 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
++
++<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
++
++<svg
++   version="1.1"
++   width="231"
++   height="280"
++   viewBox="-0.5 -0.5 231 280"
++   id="svg72"
++   sodipodi:docname="tifsstub_dm_tispl_falcon.bin.svg"
++   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:xlink="http://www.w3.org/1999/xlink"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns:xhtml="http://www.w3.org/1999/xhtml">
++  <sodipodi:namedview
++     id="namedview74"
++     pagecolor="#ffffff"
++     bordercolor="#666666"
++     borderopacity="1.0"
++     inkscape:pageshadow="2"
++     inkscape:pageopacity="0.0"
++     inkscape:pagecheckerboard="0"
++     showgrid="false"
++     inkscape:zoom="2.3561254"
++     inkscape:cx="175.5"
++     inkscape:cy="151.30774"
++     inkscape:window-width="1920"
++     inkscape:window-height="1080"
++     inkscape:window-x="0"
++     inkscape:window-y="0"
++     inkscape:window-maximized="0"
++     inkscape:current-layer="g62"
++     inkscape:showpageshadow="2"
++     inkscape:deskcolor="#d1d1d1" />
++  <defs
++     id="defs2">
++    <inkscape:perspective
++       sodipodi:type="inkscape:persp3d"
++       inkscape:vp_x="0 : 104.5 : 1"
++       inkscape:vp_y="0 : 1000 : 0"
++       inkscape:vp_z="231 : 104.5 : 1"
++       inkscape:persp3d-origin="115.5 : 46 : 1"
++       id="perspective1" />
++  </defs>
++  <g
++     id="g62">
++    <rect
++       x="-0.0064085587"
++       y="-0.0064054145"
++       width="230.01283"
++       height="278.39682"
++       rx="34.501923"
++       ry="34.727341"
++       fill="#d5e8d4"
++       stroke="#82b366"
++       pointer-events="all"
++       id="rect4"
++       style="stroke-width:1.00331" />
++    <rect
++       x="40"
++       y="30"
++       width="160"
++       height="60"
++       fill="none"
++       stroke="#000000"
++       pointer-events="all"
++       id="rect6" />
++    <g
++       transform="translate(-0.5,-0.5)"
++       id="g12">
++      <switch
++         id="switch10">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 60px; margin-left: 41px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">FIT Header</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="120"
++           y="64"
++           fill="#000000"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text8">FIT Header</text>
++      </switch>
++    </g>
++    <rect
++       x="40"
++       y="160"
++       width="160"
++       height="50"
++       fill="none"
++       stroke="#000000"
++       pointer-events="all"
++       id="rect14" />
++    <g
++       transform="translate(-0.5,-0.5)"
++       id="g20">
++      <switch
++         id="switch18">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 185px; margin-left: 41px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TIFS Stub<xhtml:br />
++
++(GP, HS-FS, HS-SE)</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="120"
++           y="189"
++           fill="#000000"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text16">TIFS Stub...</text>
++      </switch>
++    </g>
++    <rect
++       x="40"
++       y="90"
++       width="160"
++       height="30"
++       fill="none"
++       stroke="#000000"
++       pointer-events="all"
++       id="rect22" />
++    <g
++       transform="translate(-0.5,-0.5)"
++       id="g28">
++      <switch
++         id="switch26">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 105px; margin-left: 41px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TF-A</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="120"
++           y="109"
++           fill="#000000"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text24">TF-A</text>
++      </switch>
++    </g>
++    <rect
++       x="40"
++       y="120"
++       width="160"
++       height="40"
++       fill="none"
++       stroke="#000000"
++       pointer-events="all"
++       id="rect30" />
++    <g
++       transform="translate(-0.5,-0.5)"
++       id="g36">
++      <switch
++         id="switch34">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 140px; margin-left: 41px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">OP-TEE</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="120"
++           y="144"
++           fill="#000000"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text32">OP-TEE</text>
++      </switch>
++    </g>
++    <rect
++       x="40"
++       y="210"
++       width="160"
++       height="40"
++       fill="none"
++       stroke="#000000"
++       pointer-events="all"
++       id="rect38" />
++    <g
++       transform="translate(-0.5,-0.5)"
++       id="g44">
++      <switch
++         id="switch42">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 230px; margin-left: 41px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">R5 DM FW</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="120"
++           y="234"
++           fill="#000000"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text40">R5 DM FW</text>
++      </switch>
++    </g>
++  </g>
++  <switch
++     id="switch70">
++    <g
++       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
++       id="g64" />
++    <a
++       transform="translate(0,-5)"
++       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
++       target="_blank"
++       id="a68">
++      <text
++         text-anchor="middle"
++         font-size="10px"
++         x="50%"
++         y="100%"
++         id="text66">Text is not SVG - cannot display</text>
++    </a>
++  </switch>
++</svg>
 -- 
 2.49.0
 
