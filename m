@@ -4,90 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65820C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D6EC5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A940682AA7;
-	Tue,  3 Jun 2025 18:06:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 886B682AA7;
+	Tue,  3 Jun 2025 18:10:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="Lk6Yh9ky";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E7u19Roc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7ED582AAA; Tue,  3 Jun 2025 18:06:48 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id A415B82AAA; Tue,  3 Jun 2025 18:10:21 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8733D82A76
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:06:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 631E482A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ad51ef2424bso1113048666b.0
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:06:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-406e31162c6so1171341b6e.2
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:10:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1748966806; x=1749571606;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Ct4FxFzzPHpAI9LG6njc3kcBmDVJbpSAeFh/sAtvSto=;
- b=Lk6Yh9kyJ30+4Pf7TxM6XoEm9ihq8H6jSP9GjOhEtDEmTdectuLnDhA9nzXOqMVGlb
- ls0/3ZHChdLkHoLBS057jdX9gX/mtjP20ODwVAX/NxNEaa8NY16iFba37BOmRLz2DF6O
- KIwGSN/UUd03iOQ1J5wS29ILfmhWDVFZI9Cdlq993uu+iSUW1DgdMlFXszoTSXViG8ll
- kQfPhzQFZUWXT/a8WOdy125w5fp5azTQ2cGYwecb3Ij+9g8gL5cyiD2J1GVx6DQvnqWU
- pX+npqzdk5tmNnIjYeYcWmMG2ATcLn55NhK2zpKdqr6yAw5REHf1QvqSD+CIKxcitsNq
- vh3A==
+ d=konsulko.com; s=google; t=1748967018; x=1749571818; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6erOBOweNBxcu2j4sQGNwPRgfUuR/e4YaD0gskGly3I=;
+ b=E7u19RocYqewlg8nxkL22hnT9oDLyiUOdDtJL9GdxdjX7jId36LVAvdYU+SLfOfDD6
+ nPlB53cRgUA1jzmsZkzWM6EOv90KWBZho6KSKW2I/WDVQDY6MwgC5DVK1wTqP0ABcNUN
+ hf59MVhlnnTh56f/V2RxkhIZMQtRl/KQ6FXd4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748966806; x=1749571606;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ct4FxFzzPHpAI9LG6njc3kcBmDVJbpSAeFh/sAtvSto=;
- b=kTtwjtFVIgD1k2ykp7tASaPxUlnRKNneXwbs6czt8X4412cTG9Xa5XlGOesmPyJKjC
- jmhM5z9GM7dUtdCqCvsZRoT6Z7U6M8mK7Z3eraoe7TNSqgs8c0neJQyYQXy/8rEghe6E
- +EWZ4eE7FncWGyivV27qkV0vgGPbnULc8DEHNSDslZPUO85D5afvAFAOjyC/x3XrRgk9
- 0GK0vBtkT1RTP3vK+GSFApBOzQdROWHABVVSOJxZTeaUVv3TO7NbhquFIGuHntLkONg5
- PTgkP5xfZbgai5EU0lESwdWiQSvkajhpuaZIka1BHea5JHo1Q9ETKkDtA4VLHzq3/l3/
- bJzw==
+ d=1e100.net; s=20230601; t=1748967018; x=1749571818;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6erOBOweNBxcu2j4sQGNwPRgfUuR/e4YaD0gskGly3I=;
+ b=On4ScBuvzSHn2Bu3lWLD+nOobu5E06KyA3IaJpgM3ehYCm9n5VjJwRxPnl0IkFGP8Z
+ meu125gsIXm+YQ0mYUgVH2uH5+nxniN9ohKa+mAed6d7vNnGYquHVRPlakquiJREG8H3
+ X4odS4nZYjUGNnOtKPhLFldnoP+P8hDsRHSHXhxiSFOh4zm288EWuUqFWjPpM/fkYIiK
+ gNKumeG525jbuTsk1YA9edD24jeLAFj3HPdoBvRgJV6BUR61EBXoII8LwaeI5sx0GV14
+ 6u+k6dRW8z5A5skaGuAxxe8cmfDsXcTpx3AbelvsAv7uA/ATVKDE6R/rt7jNXN6KAH+y
+ 87zw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUn2MZ12tS953dDBuSHfzItabqHb8IkRTBH07nldv6v28Ab/lyxVvFWSkR3JJTit/hoBx3jSo8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxxqX5VVvLFh2cR0UD8As4imuQ3yZ82TOvCgKcMS4H40MC4qB9X
- GjkN/deQRkPyYloibD95EWcEzaDWRM36T5YKIHnsp1iDTPaQe7byAcbSBZN8IC2sUQ==
-X-Gm-Gg: ASbGncvC3SzSKwjnE3X37VXcdySXUBitPxsWabAwPZ1Rux/alOBlgZZs98bKmRicCMX
- 2T/EMCsrzBdvBwPEQB8E6DSLVio+anopfZkZ9Z7aP5Q/PTZL4LeH7CswwB+bBz6e39WPxlnU0Wf
- 34sQ374OYF1yESG4k0OybAzN6/j1Y8zYOVpkZxYKxwxlmjzxXW929TXin9mOVk41msIdcHlBOLb
- dHXw+p0VRm/qnijVwJwl8g5vFNQkSUYpmrqcjRFuIGKfYhWP6avTi9A2adnh2ab9ACmnl8Shswz
- kkFuKjkxhiaMB2esGMuZYEUMxP/ZSPlFXg6K1eGr96sdZWLTdKDM6/BfJGceGihP
-X-Google-Smtp-Source: AGHT+IGGkxQY4tSAjD5uWSkzI+TYcWxL5N8TjtHxp4/L3TPVW5JFsERmOgVdnEOwt1qE6rxUMes9oQ==
-X-Received: by 2002:a17:907:72ce:b0:ad5:6b8a:a0a6 with SMTP id
- a640c23a62f3a-adb4960fa6cmr1270289566b.58.1748966805504; 
- Tue, 03 Jun 2025 09:06:45 -0700 (PDT)
-Received: from [10.254.183.223] ([149.199.62.131])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ada6ad3d7ebsm969962266b.159.2025.06.03.09.06.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Jun 2025 09:06:45 -0700 (PDT)
-Message-ID: <79190e2c-4a6d-4a7f-967d-1d316ca4d733@monstr.eu>
-Date: Tue, 3 Jun 2025 18:06:38 +0200
+ AJvYcCUSwr8z2n047mTPAgROa+oijcBV9dN3aJPxoYueaClA0COc/BjQpI8fGGb4RxEkahcPpoimK+Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzw6G4zdKLC+sCVmrRl7CSHI3VMsm8qVymtV1qjByxmciMhKYUm
+ zr5IycVI1yrQiat5cRrbYEOODXRf4DX8kvXWDLdY842kYTgjpP3MS2ACTJVMUOOG4DcetO3BJjx
+ CUFX3t/Q=
+X-Gm-Gg: ASbGncu86Dp1l4+DgWm8j2IKRXR6Gci/TllYtsdc0M2G44hB/pj4IuvZqXtt9AnRfVs
+ Q+6Mq6HgAc7kJ9p0b4RLDwotz0/ffPCS6QFgjq/DzZRHq8dQKHzb430/zYeb910g4VgVm1XrDx2
+ qpZwXmhpCNr7kQs4Jr0dTAErdsWBwl/7NaCP7friiFt5birTiThQjvVBUUZJdiWw8ReEvo4eeWJ
+ ti3NhoGyMJFo0AFXh3vqUUfot2SmazYv+2EYTTsEJL7FhP7ZJMNSmOZFqkHB70Is6uPT/p79L8k
+ 2Bh5gqZvfL411nX7zcLFL21qwPryps63ITw925sqTuwuj70kSu0Gsm1R62urpc4lqO7mv7Xhazz
+ MNZ7fsrrZsiSr
+X-Google-Smtp-Source: AGHT+IEJXDwcfmBqhu3eNfmWuSLDxmk1OyPwT9ZsAmgNzO220Orl3rXxA+Q4b0ZitFy+YklTYAJOog==
+X-Received: by 2002:a05:6808:9bc:b0:3fa:daa:dd8e with SMTP id
+ 5614622812f47-4067974c755mr9551298b6e.35.1748967018048; 
+ Tue, 03 Jun 2025 09:10:18 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40678d04057sm1853150b6e.48.2025.06.03.09.10.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Jun 2025 09:10:16 -0700 (PDT)
+Date: Tue, 3 Jun 2025 10:10:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: Re: [PATCH v6 2/3] common: board: make initcalls static
+Message-ID: <20250603161014.GI1382132@bill-the-cat>
+References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
+ <20250404135038.2134570-3-jerome.forissier@linaro.org>
+ <CAFLszThkuPyy+Z3gt1oo7ZDPo+60tzdqwevSD2HjA7KjLeNcQw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/11] pci: xilinx: Add probe function and improve memory
- region handling
-To: Uros Stajic <uros.stajic@htecgroup.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>,
- Chao-ying Fu <cfu@mips.com>
-References: <20250603133744.278790-1-uros.stajic@htecgroup.com>
- <20250603133744.278790-4-uros.stajic@htecgroup.com>
-Content-Language: en-US
-From: Michal Simek <monstr@monstr.eu>
-In-Reply-To: <20250603133744.278790-4-uros.stajic@htecgroup.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="G/3fQ24g7Z63d5la"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThkuPyy+Z3gt1oo7ZDPo+60tzdqwevSD2HjA7KjLeNcQw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,99 +109,97 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--G/3fQ24g7Z63d5la
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 6/3/25 15:39, Uros Stajic wrote:
-> From: Chao-ying Fu <cfu@mips.com>
-> 
-> This patch adds a `.probe` implementation to the Xilinx PCIe driver
-> to initializ bridge registers and determine the ECAM region size
-> at runtime.
-> 
-> Additionally, writing the PCI memory base and limit registers is skipped
-> for the root bridge (bus 0, device 0). On platforms such as the MIPS
-> Boston board, writing these fields results in incorrect values being
-> reported (e.g. base = 0x0, limit = 0x1600), causing Linux to fail
-> memory space assignment for the bridge.
-> 
-> This workaround allows a MIPS Boston board to boot Linux & let Linux
-> successfully probe the PCIe bus & all devices connected to it.
-> 
-> Signed-off-by: Chao-ying Fu <cfu@mips.com>
-> Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
-> ---
->   drivers/pci/pcie_xilinx.c | 35 +++++++++++++++++++++++++++++++++++
->   1 file changed, 35 insertions(+)
-> 
-> diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-> index 63058e8e7c5..3b6a8ced848 100644
-> --- a/drivers/pci/pcie_xilinx.c
-> +++ b/drivers/pci/pcie_xilinx.c
-> @@ -132,6 +132,15 @@ static int pcie_xilinx_write_config(struct udevice *bus, pci_dev_t bdf,
->   				    uint offset, ulong value,
->   				    enum pci_size_t size)
->   {
-> +	if (bdf == PCI_BDF(bus->seq_, 0, 0)) {
-> +		switch (offset) {
-> +		case PCI_MEMORY_BASE:
-> +		case PCI_MEMORY_LIMIT:
-> +			/* Writing the memory base or limit causes problems */
-> +			return 0;
-> +		}
-> +	}
-> +
->   	return pci_generic_mmap_write_config(bus, pcie_xilinx_config_address,
->   					     bdf, offset, value, size);
->   }
-> @@ -186,6 +195,31 @@ static int pci_xilinx_probe(struct udevice *dev)
->   	return 0;
->   }
->   
-> +static int pcie_xilinx_probe(struct udevice *dev)
-> +{
-> +	struct xilinx_pcie *pcie = dev_get_priv(dev);
-> +	u32 bridge_info, ecam_sz, rpsc;
-> +
-> +	/* Disable all interrupts */
-> +	writel(0, pcie->cfg_base + XILINX_PCIE_REG_INT_MASK);
-> +
-> +	/* Enable the bridge */
-> +	rpsc = readl(pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-> +	rpsc |= XILINX_PCIE_REG_RPSC_BEN;
-> +	writel(rpsc, pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-> +
-> +	/* Discover the size of the ECAM region */
-> +	bridge_info = readl(pcie->cfg_base + XILINX_PCIE_REG_BRIDGE_INFO);
-> +	ecam_sz = bridge_info & XILINX_PCIE_REG_BRIDGE_INFO_ECAMSZ_MASK;
-> +	ecam_sz >>= XILINX_PCIE_REG_BRIDGE_INFO_ECAMSZ_SHIFT;
-> +
-> +	/* Enable access to all possible subordinate buses */
-> +	writel((0 << 0) | (1 << 8) | (GENMASK(ecam_sz - 1, 0) << 16),
-> +	       pcie->cfg_base + PCI_PRIMARY_BUS);
-> +
-> +	return 0;
-> +}
-> +
->   static const struct dm_pci_ops pcie_xilinx_ops = {
->   	.read_config	= pcie_xilinx_read_config,
->   	.write_config	= pcie_xilinx_write_config,
-> @@ -204,4 +238,5 @@ U_BOOT_DRIVER(pcie_xilinx) = {
->   	.of_to_plat	= pcie_xilinx_of_to_plat,
->   	.probe			= pci_xilinx_probe,
->   	.priv_auto	= sizeof(struct xilinx_pcie),
-> +	.probe			= pcie_xilinx_probe,
->   };
+On Tue, Jun 03, 2025 at 09:22:01AM -0600, Simon Glass wrote:
+> Hi Jerome,
+>=20
+> On Fri, 4 Apr 2025 at 07:50, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+> >
+> > Change board_init_f(), board_init_f_r() and board_init_r() to make
+> > static calls instead of iterating over the init_sequence_f,
+> > init_sequence_f_r and init_sequence_r arrays, respectively. This makes
+> > the code a simpler (and even more so when initcall_run_list() is
+> > later removed) and it reduces the binary size as well. Tested with
+> > xilinx_zynqmp_kria_defconfig; bloat-o-meter results:
+> >
+> > - With LTO
+> > add/remove: 106/196 grow/shrink: 10/28 up/down: 31548/-33829 (-2281)
+> > Total: Before=3D1070471, After=3D1068190, chg -0.21%
+> > - Without LTO
+> > add/remove: 0/54 grow/shrink: 3/0 up/down: 2322/-2832 (-510)
+> > Total: Before=3D1121723, After=3D1121213, chg -0.05%
+> >
+> > Execution time does not change in a noticeable way.
+> >
+> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > ---
+> >  arch/sh/lib/board.c         |   9 +-
+> >  common/board_f.c            | 223 ++++++++++++++++----------------
+> >  common/board_r.c            | 247 ++++++++++++++++++------------------
+> >  include/initcall.h          |  27 ++++
+> >  test/py/tests/test_trace.py |   8 +-
+> >  5 files changed, 273 insertions(+), 241 deletions(-)
+> >
+> [..]
+> > diff --git a/common/board_f.c b/common/board_f.c
+> > index baf98fb8ec8..a1bb8a01be5 100644
+> > --- a/common/board_f.c
+> > +++ b/common/board_f.c
+> [..]
+> > @@ -1049,8 +1056,8 @@ void board_init_f(ulong boot_flags)
+> >  /*
+> >   * For now this code is only used on x86.
+> >   *
+> > - * init_sequence_f_r is the list of init functions which are run when
+> > - * U-Boot is executing from Flash with a semi-limited 'C' environment.
+> > + * Run init functions which are run when U-Boot is executing from Flas=
+h with a
+> > + * semi-limited 'C' environment.
+> >   * The following limitations must be considered when implementing an
+> >   * '_f_r' function:
+> >   *  - 'static' variables are read-only
+> > @@ -1063,18 +1070,16 @@ void board_init_f(ulong boot_flags)
+> >   * NOTE: At present only x86 uses this route, but it is intended that
+> >   * all archs will move to this when generic relocation is implemented.
+> >   */
+> > -static const init_fnc_t init_sequence_f_r[] =3D {
+> > -#if !CONFIG_IS_ENABLED(X86_64)
+> > -       init_cache_f_r,
+> > +static void initcall_run_f_r(void)
+> > +{
+> > +#if CONFIG_IS_ENABLED(X86_64)
+>=20
+> This is reversing the condition, which breaks link and coral in my lab.
+>=20
+> > +       INITCALL(init_cache_f_r);
 
-NACK. Defining second probe to overwrite original one is definitely not a good 
-approach.
+The most helpful thing to do here would be to post a patch correcting
+the logic and providing a Fixes tag, thanks.
 
-Thanks,
-Michal
+--=20
+Tom
 
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+--G/3fQ24g7Z63d5la
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg/HmYACgkQFHw5/5Y0
+tyy51Qv+OW3VqzF8cjNncsHrKqBv/YAJgv24EgZRSCwGpVrASE551++6Fri5qr+a
+X2nzNPVNO2nwiLgXCUMi0HjVdcMhdlh5U9LMamOPDD/cdBi2PEiYuKU9v32ITazs
+GgPkYpAM0d6YM+4ddrZBFJd03t35ho5rMdaB25vrF/jdlsJ8qZQkQGXYk0JpKTc2
+iCKgng2Sc1I0uDT7hIO8mfx7sgLGiPLU2JYa1KE1UQAwrptLID9awUOx4iQKhdwu
+aObchVcXUj/EqynqEe3HJCVh3otL9vW+Iie+CKTfi/lVP9AuSXXrT2SV3IC2XXUR
+wc/IBXQhm1ow51UglM/AN4Gplr4Gp1mSVMxiU6RCbLysudFxpI+DIR99AwOEfZ3e
+YbhQdCnH0GzbKtr+fLRpoUk87b3CIqVip8/ue5RRpRiHkRpyVEhO85JxOakLLEEk
+YKY41QuVPG61PZ+eva9ry7ej86qWoJBiqkPQvQqfJGiNS1MwEDIxVTe9Dwv+tgV/
+uW/EszD/
+=V5pU
+-----END PGP SIGNATURE-----
+
+--G/3fQ24g7Z63d5la--
