@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D6EC5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D822C5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 886B682AA7;
-	Tue,  3 Jun 2025 18:10:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E302C82AA7;
+	Tue,  3 Jun 2025 18:11:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E7u19Roc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yxpc/sSw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A415B82AAA; Tue,  3 Jun 2025 18:10:21 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 20D5082AAA; Tue,  3 Jun 2025 18:10:59 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 631E482A76
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:10:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A08E682A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:10:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-406e31162c6so1171341b6e.2
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:10:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3a3673e12c4so3898530f8f.2
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748967018; x=1749571818; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6erOBOweNBxcu2j4sQGNwPRgfUuR/e4YaD0gskGly3I=;
- b=E7u19RocYqewlg8nxkL22hnT9oDLyiUOdDtJL9GdxdjX7jId36LVAvdYU+SLfOfDD6
- nPlB53cRgUA1jzmsZkzWM6EOv90KWBZho6KSKW2I/WDVQDY6MwgC5DVK1wTqP0ABcNUN
- hf59MVhlnnTh56f/V2RxkhIZMQtRl/KQ6FXd4=
+ d=linaro.org; s=google; t=1748967056; x=1749571856; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=SpSs5UNpTZLdtjvHXgHzyw77vfpE9v/y6yc/rWtb2Sk=;
+ b=yxpc/sSwR0/YVhbItF40G/TEmIwNSwPxEpstXZY371T1/tctWJ/aVdBBe0Ji0SpXV7
+ 4cZgMHzVQEADI8mT0u+MLzQCok1TOrixfBtq+jof5Uy6Hb3GigpsDgFLNGZOD14fUD8A
+ Kw8vlQKrImJLV1dE0BV2Wh0vmkueeVRD0XQZ+rCgxjSI4epWzLFVfydZNK/Gy6tIpA0Y
+ SBNKFNLQwdyq5nfDLwstW4y5yFWU8ENAY1SRmcePERq1wDOr+ugwOOw1XlYWZCefyYVB
+ 2NJOBAmeo5JwDjGEO7WCqTNZk/UkHFT/DwVM5D+V+k87RttwFQ5tRGVZtBtgIEbC7WLG
+ 5BdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748967018; x=1749571818;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6erOBOweNBxcu2j4sQGNwPRgfUuR/e4YaD0gskGly3I=;
- b=On4ScBuvzSHn2Bu3lWLD+nOobu5E06KyA3IaJpgM3ehYCm9n5VjJwRxPnl0IkFGP8Z
- meu125gsIXm+YQ0mYUgVH2uH5+nxniN9ohKa+mAed6d7vNnGYquHVRPlakquiJREG8H3
- X4odS4nZYjUGNnOtKPhLFldnoP+P8hDsRHSHXhxiSFOh4zm288EWuUqFWjPpM/fkYIiK
- gNKumeG525jbuTsk1YA9edD24jeLAFj3HPdoBvRgJV6BUR61EBXoII8LwaeI5sx0GV14
- 6u+k6dRW8z5A5skaGuAxxe8cmfDsXcTpx3AbelvsAv7uA/ATVKDE6R/rt7jNXN6KAH+y
- 87zw==
+ d=1e100.net; s=20230601; t=1748967056; x=1749571856;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SpSs5UNpTZLdtjvHXgHzyw77vfpE9v/y6yc/rWtb2Sk=;
+ b=azDJ02zJLWy+FrPVsiiA8/OM7XX/4L+0cqYphvplOZpf6+KPnmYHnobRKWXGuk4dF6
+ XDbpe8emW9Y702ZTGlLIytmir5rfrXijUuZd155aCq16GlMfBLKAT4cVfelKWDYil/i7
+ NRy+8PuHTT77g3WCF7iLCYYdCulP9Gapf4/AC4SMS9OaFh9ZsoprFt7qJMduS8VKP7jd
+ UBmpzENQYs2hv332qMwEaBJQreUaFsPk9ylJInAHuyuCU7edktAKvvGQJv/d6rEmRmcV
+ A/39QUPn2q8FAuMP310nITViKMEWT1EHPkjq/MqSwvcfzgzZTTzNGiMoK2EeGMoPWFGA
+ af7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSwr8z2n047mTPAgROa+oijcBV9dN3aJPxoYueaClA0COc/BjQpI8fGGb4RxEkahcPpoimK+Y=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzw6G4zdKLC+sCVmrRl7CSHI3VMsm8qVymtV1qjByxmciMhKYUm
- zr5IycVI1yrQiat5cRrbYEOODXRf4DX8kvXWDLdY842kYTgjpP3MS2ACTJVMUOOG4DcetO3BJjx
- CUFX3t/Q=
-X-Gm-Gg: ASbGncu86Dp1l4+DgWm8j2IKRXR6Gci/TllYtsdc0M2G44hB/pj4IuvZqXtt9AnRfVs
- Q+6Mq6HgAc7kJ9p0b4RLDwotz0/ffPCS6QFgjq/DzZRHq8dQKHzb430/zYeb910g4VgVm1XrDx2
- qpZwXmhpCNr7kQs4Jr0dTAErdsWBwl/7NaCP7friiFt5birTiThQjvVBUUZJdiWw8ReEvo4eeWJ
- ti3NhoGyMJFo0AFXh3vqUUfot2SmazYv+2EYTTsEJL7FhP7ZJMNSmOZFqkHB70Is6uPT/p79L8k
- 2Bh5gqZvfL411nX7zcLFL21qwPryps63ITw925sqTuwuj70kSu0Gsm1R62urpc4lqO7mv7Xhazz
- MNZ7fsrrZsiSr
-X-Google-Smtp-Source: AGHT+IEJXDwcfmBqhu3eNfmWuSLDxmk1OyPwT9ZsAmgNzO220Orl3rXxA+Q4b0ZitFy+YklTYAJOog==
-X-Received: by 2002:a05:6808:9bc:b0:3fa:daa:dd8e with SMTP id
- 5614622812f47-4067974c755mr9551298b6e.35.1748967018048; 
- Tue, 03 Jun 2025 09:10:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40678d04057sm1853150b6e.48.2025.06.03.09.10.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Jun 2025 09:10:16 -0700 (PDT)
-Date: Tue, 3 Jun 2025 10:10:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Michal Simek <michal.simek@amd.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: Re: [PATCH v6 2/3] common: board: make initcalls static
-Message-ID: <20250603161014.GI1382132@bill-the-cat>
-References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
- <20250404135038.2134570-3-jerome.forissier@linaro.org>
- <CAFLszThkuPyy+Z3gt1oo7ZDPo+60tzdqwevSD2HjA7KjLeNcQw@mail.gmail.com>
+ AJvYcCWfJJzd63+EjJsveRxV7OEzNtO/mLiDXYOXIPeoM9wiLPvjEcBANZJTT5nZKIfFmPpqnoT/2G0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyxMJNBb1er9m7w+KeTy3pRmSlZ8Pr5OVJWinriz/EeJ6hsLdXn
+ puhLVf31cIFLxquK2EAPg/UF3sR8Zl9k7Acpm6Tf/oarAHMwmmIrZDGukaK7tVyN1PU=
+X-Gm-Gg: ASbGncsmAPgJaCBy8PqF9OWgWDM/8wEpt4XfwwK2TPlzXhK7WAcgIxtJsVplSI15oJ9
+ 7Zqh7Njwia/kwStWSX26xOKFFyWOYNtw3M6uImbY3kuyYvkjYYBKOGRCyelX0W4oYe0fLsPB6ea
+ OHlxoAlA5AkzepcGzGpu0o2aEJgaV9N4kuQN2SDafJCvSedcrjTWIlbTWSzYLOEz4XkLb5pcpKI
+ vg1GglY3XPSCji79axg7SvkuinWCbWqP6h8rXb3FC49SEA8YnSm7Lbj2LVWH+tT/V/hlQje0F4q
+ Ro8L2fSHp8LOlKDM1y2N4/1XHom57dp28adOrBf4Had/pjy/96RS4w97KsQQaTuqAGHAYIusZ7f
+ ElBXYIywfA0Yxsexbtk/2wstR+Q==
+X-Google-Smtp-Source: AGHT+IGN/rrodV1t1j+Jw0eS2LlTj+8lPLVu0/XsXuLiTC3kqErc1sUDp38RxAK0ai0hxJY3Mx2FzA==
+X-Received: by 2002:a05:6000:40dc:b0:3a5:1f2:68f3 with SMTP id
+ ffacd0b85a97d-3a501f26b0emr8833396f8f.46.1748967055986; 
+ Tue, 03 Jun 2025 09:10:55 -0700 (PDT)
+Received: from ?IPV6:2a01:170:117e:fc:e089:f4a9:4c4d:e359?
+ ([2a01:170:117e:fc:e089:f4a9:4c4d:e359])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-450d7f8f188sm168355945e9.3.2025.06.03.09.10.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Jun 2025 09:10:55 -0700 (PDT)
+Message-ID: <912ff2fb-194f-4924-babd-6ac134709630@linaro.org>
+Date: Tue, 3 Jun 2025 18:10:53 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="G/3fQ24g7Z63d5la"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThkuPyy+Z3gt1oo7ZDPo+60tzdqwevSD2HjA7KjLeNcQw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/5] clk/qcom: qcs615: Add GCC clock driver for QCS615
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@denx.de,
+ seanga2@gmail.com, ilias.apalodimas@linaro.org, me@samcday.com,
+ christopher.obbard@linaro.org, quic_varada@quicinc.com,
+ sughosh.ganu@linaro.org, sjg@chromium.org, lehmanju@devpi.de,
+ bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250521035324.1182833-1-aswin.murugan@oss.qualcomm.com>
+ <20250521035324.1182833-4-aswin.murugan@oss.qualcomm.com>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250521035324.1182833-4-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,97 +108,231 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---G/3fQ24g7Z63d5la
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 03, 2025 at 09:22:01AM -0600, Simon Glass wrote:
-> Hi Jerome,
->=20
-> On Fri, 4 Apr 2025 at 07:50, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> > Change board_init_f(), board_init_f_r() and board_init_r() to make
-> > static calls instead of iterating over the init_sequence_f,
-> > init_sequence_f_r and init_sequence_r arrays, respectively. This makes
-> > the code a simpler (and even more so when initcall_run_list() is
-> > later removed) and it reduces the binary size as well. Tested with
-> > xilinx_zynqmp_kria_defconfig; bloat-o-meter results:
-> >
-> > - With LTO
-> > add/remove: 106/196 grow/shrink: 10/28 up/down: 31548/-33829 (-2281)
-> > Total: Before=3D1070471, After=3D1068190, chg -0.21%
-> > - Without LTO
-> > add/remove: 0/54 grow/shrink: 3/0 up/down: 2322/-2832 (-510)
-> > Total: Before=3D1121723, After=3D1121213, chg -0.05%
-> >
-> > Execution time does not change in a noticeable way.
-> >
-> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > ---
-> >  arch/sh/lib/board.c         |   9 +-
-> >  common/board_f.c            | 223 ++++++++++++++++----------------
-> >  common/board_r.c            | 247 ++++++++++++++++++------------------
-> >  include/initcall.h          |  27 ++++
-> >  test/py/tests/test_trace.py |   8 +-
-> >  5 files changed, 273 insertions(+), 241 deletions(-)
-> >
-> [..]
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index baf98fb8ec8..a1bb8a01be5 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> [..]
-> > @@ -1049,8 +1056,8 @@ void board_init_f(ulong boot_flags)
-> >  /*
-> >   * For now this code is only used on x86.
-> >   *
-> > - * init_sequence_f_r is the list of init functions which are run when
-> > - * U-Boot is executing from Flash with a semi-limited 'C' environment.
-> > + * Run init functions which are run when U-Boot is executing from Flas=
-h with a
-> > + * semi-limited 'C' environment.
-> >   * The following limitations must be considered when implementing an
-> >   * '_f_r' function:
-> >   *  - 'static' variables are read-only
-> > @@ -1063,18 +1070,16 @@ void board_init_f(ulong boot_flags)
-> >   * NOTE: At present only x86 uses this route, but it is intended that
-> >   * all archs will move to this when generic relocation is implemented.
-> >   */
-> > -static const init_fnc_t init_sequence_f_r[] =3D {
-> > -#if !CONFIG_IS_ENABLED(X86_64)
-> > -       init_cache_f_r,
-> > +static void initcall_run_f_r(void)
-> > +{
-> > +#if CONFIG_IS_ENABLED(X86_64)
->=20
-> This is reversing the condition, which breaks link and coral in my lab.
->=20
-> > +       INITCALL(init_cache_f_r);
+On 5/21/25 05:53, Aswin Murugan wrote:
+> Port Linux's gcc-qcs615.c driver to U-Boot for basic bring-up.
+> 
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - Replaced the "1" with BIT(0) in GATE_CLK()
+> ---
+>   drivers/clk/qcom/Kconfig        |   8 ++
+>   drivers/clk/qcom/Makefile       |   1 +
+>   drivers/clk/qcom/clock-qcs615.c | 163 ++++++++++++++++++++++++++++++++
+>   3 files changed, 172 insertions(+)
+>   create mode 100644 drivers/clk/qcom/clock-qcs615.c
+> 
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 3ea01f3c969..eaac4a97376 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -55,6 +55,14 @@ config CLK_QCOM_QCS404
+>   	  on the Snapdragon QCS404 SoC. This driver supports the clocks
+>   	  and resets exposed by the GCC hardware block.
+>   
+> +config CLK_QCOM_QCS615
+> +        bool "Qualcomm QCS615 GCC"
+> +        select CLK_QCOM
+> +        help
+> +          Say Y here to enable support for the Global Clock Controller
+> +          on the Snapdragon QCS615 SoC. This driver supports the clocks
+> +          and resets exposed by the GCC hardware block.
 
-The most helpful thing to do here would be to post a patch correcting
-the logic and providing a Fixes tag, thanks.
+FYI your formatting is wrong here, this should be tab indented. I'll fix 
+this while applying. In future please run checkpatch, I recommend using 
+the b4 tool which can do it all for you with "b4 prep --check" before 
+sending.
 
---=20
-Tom
+Kind regards,
 
---G/3fQ24g7Z63d5la
-Content-Type: application/pgp-signature; name="signature.asc"
+> +
+>   config CLK_QCOM_SA8775P
+>   	bool "Qualcomm SA8775 GCC"
+>   	select CLK_QCOM
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index e13fc8c1071..8f749487246 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -10,6 +10,7 @@ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+>   obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+>   obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+>   obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+> +obj-$(CONFIG_CLK_QCOM_QCS615) += clock-qcs615.o
+>   obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
+>   obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
+>   obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
+> diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
+> new file mode 100644
+> index 00000000000..4700baba8c9
+> --- /dev/null
+> +++ b/drivers/clk/qcom/clock-qcs615.c
+> @@ -0,0 +1,163 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Clock drivers for Qualcomm qcs615
+> + *
+> + * (C) Copyright 2024 Linaro Ltd.
+> + */
+> +
+> +#include <linux/types.h>
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+> +#include <linux/bug.h>
+> +#include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,qcs615-gcc.h>
+> +#include "clock-qcom.h"
+> +
+> +#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0xf034
+> +#define USB30_PRIM_MASTER_CLK_CMD_RCGR		0xf01c
+> +#define USB3_PRIM_PHY_AUX_CMD_RCGR		0xf060
+> +
+> +#define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
+> +#define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
+> +#define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
+> +#define GCC_QUPV3_WRAP0_S3_CLK_ENA_BIT BIT(13)
+> +#define GCC_QUPV3_WRAP0_S4_CLK_ENA_BIT BIT(14)
+> +#define GCC_QUPV3_WRAP0_S5_CLK_ENA_BIT BIT(15)
+> +
+> +#define GCC_QUPV3_WRAP1_S0_CLK_ENA_BIT BIT(22)
+> +#define GCC_QUPV3_WRAP1_S1_CLK_ENA_BIT BIT(23)
+> +#define GCC_QUPV3_WRAP1_S2_CLK_ENA_BIT BIT(24)
+> +#define GCC_QUPV3_WRAP1_S3_CLK_ENA_BIT BIT(25)
+> +#define GCC_QUPV3_WRAP1_S4_CLK_ENA_BIT BIT(26)
+> +#define GCC_QUPV3_WRAP1_S5_CLK_ENA_BIT BIT(27)
+> +
+> +static ulong qcs615_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	if (clk->id < priv->data->num_clks)
+> +		debug("%s: %s, requested rate=%ld\n", __func__,
+> +		      priv->data->clks[clk->id].name, rate);
+> +
+> +	switch (clk->id) {
+> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
+> +		WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
+> +		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
+> +		return rate;
+> +	case GCC_USB30_PRIM_MASTER_CLK:
+> +		WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
+> +		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
+> +				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
+> +		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
+> +		return rate;
+> +	default:
+> +		return 0;
+> +	}
+> +}
+> +
+> +static const struct gate_clk qcs615_clks[] = {
+> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0xf078, BIT(0)),
+> +	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0xf010, BIT(0)),
+> +	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0xf07c, BIT(0)),
+> +	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0xf014, BIT(0)),
+> +	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0xf018, BIT(0)),
+> +	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, BIT(0)),
+> +	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, BIT(0)),
+> +	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf058, BIT(0)),
+> +	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x5200c, GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x5200c, GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK, 0x5200c, GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK, 0x5200c, GCC_QUPV3_WRAP0_S3_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK, 0x5200c, GCC_QUPV3_WRAP0_S4_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK, 0x5200c, GCC_QUPV3_WRAP0_S5_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK, 0x5200c, GCC_QUPV3_WRAP1_S0_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK, 0x5200c, GCC_QUPV3_WRAP1_S1_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP1_S2_CLK, 0x5200c, GCC_QUPV3_WRAP1_S2_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK, 0x5200c, GCC_QUPV3_WRAP1_S3_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK, 0x5200c, GCC_QUPV3_WRAP1_S4_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK, 0x5200c, GCC_QUPV3_WRAP1_S5_CLK_ENA_BIT),
+> +	GATE_CLK(GCC_DISP_HF_AXI_CLK, 0xb038, BIT(0)),
+> +	GATE_CLK(GCC_DISP_AHB_CLK, 0xb032, BIT(0))
+> +};
+> +
+> +static int qcs615_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	if (priv->data->num_clks < clk->id) {
+> +		debug("%s: unknown clk id %lu\n", __func__, clk->id);
+> +		return 0;
+> +	}
+> +
+> +	debug("%s: clk %ld: %s\n", __func__, clk->id, qcs615_clks[clk->id].name);
+> +
+> +	switch (clk->id) {
+> +	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
+> +		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
+> +		fallthrough;
+> +	case GCC_USB30_PRIM_MASTER_CLK:
+> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
+> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
+> +		break;
+> +	}
+> +
+> +	qcom_gate_clk_en(priv, clk->id);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct qcom_reset_map qcs615_gcc_resets[] = {
+> +	[GCC_EMAC_BCR] = { 0x6000 },
+> +	[GCC_QUSB2PHY_PRIM_BCR] = { 0xd000 },
+> +	[GCC_QUSB2PHY_SEC_BCR] = { 0xd004 },
+> +	[GCC_USB30_PRIM_BCR] = { 0xf000 },
+> +	[GCC_USB2_PHY_SEC_BCR] = { 0x50018 },
+> +	[GCC_USB3_DP_PHY_SEC_BCR] = { 0x50020 },
+> +	[GCC_USB3PHY_PHY_SEC_BCR] = { 0x5001c },
+> +	[GCC_PCIE_0_BCR] = { 0x6b000 },
+> +	[GCC_PCIE_0_PHY_BCR] = { 0x6c01c },
+> +	[GCC_PCIE_PHY_BCR] = { 0x6f000 },
+> +	[GCC_PCIE_PHY_COM_BCR] = { 0x6f010 },
+> +	[GCC_UFS_PHY_BCR] = { 0x77000 },
+> +	[GCC_USB20_SEC_BCR] = { 0xa6000 },
+> +	[GCC_USB3PHY_PHY_PRIM_SP0_BCR] = { 0x50008 },
+> +	[GCC_USB3_PHY_PRIM_SP0_BCR] = { 0x50000 },
+> +	[GCC_SDCC1_BCR] = { 0x12000 },
+> +	[GCC_SDCC2_BCR] = { 0x14000 }
+> +};
+> +
+> +static const struct qcom_power_map qcs615_gdscs[] = {
+> +	[UFS_PHY_GDSC] = { 0x77004 },
+> +	[USB30_PRIM_GDSC] = { 0xf004 },
+> +};
+> +
+> +static struct msm_clk_data sa8775_gcc_data = {
+> +	.resets = qcs615_gcc_resets,
+> +	.num_resets = ARRAY_SIZE(qcs615_gcc_resets),
+> +	.clks = qcs615_clks,
+> +	.num_clks = ARRAY_SIZE(qcs615_clks),
+> +
+> +	.power_domains = qcs615_gdscs,
+> +	.num_power_domains = ARRAY_SIZE(qcs615_gdscs),
+> +
+> +	.enable = qcs615_enable,
+> +	.set_rate = qcs615_set_rate,
+> +};
+> +
+> +static const struct udevice_id gcc_qcs615_of_match[] = {
+> +	{
+> +		.compatible = "qcom,qcs615-gcc",
+> +		.data = (ulong)&sa8775_gcc_data,
+> +	},
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_qcs615) = {
+> +	.name		= "gcc_qcs615",
+> +	.id		= UCLASS_NOP,
+> +	.of_match	= gcc_qcs615_of_match,
+> +	.bind		= qcom_cc_bind,
+> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
 
------BEGIN PGP SIGNATURE-----
+-- 
+Casey (she/they)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg/HmYACgkQFHw5/5Y0
-tyy51Qv+OW3VqzF8cjNncsHrKqBv/YAJgv24EgZRSCwGpVrASE551++6Fri5qr+a
-X2nzNPVNO2nwiLgXCUMi0HjVdcMhdlh5U9LMamOPDD/cdBi2PEiYuKU9v32ITazs
-GgPkYpAM0d6YM+4ddrZBFJd03t35ho5rMdaB25vrF/jdlsJ8qZQkQGXYk0JpKTc2
-iCKgng2Sc1I0uDT7hIO8mfx7sgLGiPLU2JYa1KE1UQAwrptLID9awUOx4iQKhdwu
-aObchVcXUj/EqynqEe3HJCVh3otL9vW+Iie+CKTfi/lVP9AuSXXrT2SV3IC2XXUR
-wc/IBXQhm1ow51UglM/AN4Gplr4Gp1mSVMxiU6RCbLysudFxpI+DIR99AwOEfZ3e
-YbhQdCnH0GzbKtr+fLRpoUk87b3CIqVip8/ue5RRpRiHkRpyVEhO85JxOakLLEEk
-YKY41QuVPG61PZ+eva9ry7ej86qWoJBiqkPQvQqfJGiNS1MwEDIxVTe9Dwv+tgV/
-uW/EszD/
-=V5pU
------END PGP SIGNATURE-----
-
---G/3fQ24g7Z63d5la--
