@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1990FC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:44:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E60DC5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:44:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EA9982BA7;
+	by phobos.denx.de (Postfix) with ESMTP id AD65082CA4;
 	Tue,  3 Jun 2025 16:44:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="lLHJ3+Yr";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="ptnKjFti";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DECC82145; Tue,  3 Jun 2025 15:38:28 +0200 (CEST)
+ id 80F3B82145; Tue,  3 Jun 2025 15:38:39 +0200 (CEST)
 Received: from AS8PR03CU001.outbound.protection.outlook.com
  (mail-westeuropeazlp170120005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93AAB80AE1
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 15:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EF9E80AE1
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 15:38:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VtAdsVATNLU77bHsF+WQAx8ycpGbNm9MP6QGAVV6KThF/qM2F1LneOT2MVRcenspbQxlJG71PvLcQqllNU7Q3nMq1R7f7fNkuWHXmOYCVyIuHlZXoNXtR+/0vmOCP1R/DssO5Ran0a0tEuOsVrdEIP+3EKvWEGFhLuWvAkD5KUYcibumyYAdemJ0xtGVlpLKNJR7YAoDcdDC2fdnznN5H/xd4j1L6Qa45SCPTQoadu6Q+cREbwVLOUw1B6BTR4I275d/B65fL6Mnjw2RbevXx4d0mQ03alcpahmzPNy5ohBn4rWCFShkNLf5xoa4jSFmI1uSja104eZ13gIvLwMvZQ==
+ b=GLMcPyrNOCEFQPbVf1b9fsgn7ujB9o1ViJ+XtwrmIy5MtTd9XehGcY1uDYs2ICpPpOCf1DYu0uz8pcdCXoUjc4MMq9Z8hZ4+cyHZh3+2AXnbwZBO8GGubr9tczVAiVVeXlfFmCG2tSFIgD9YaiW8cZGBlRXms+YMlW8GeYvSxcmSBuHQRTGqMHWaxEdwQqgYboM7ysgk2dmlz+SWU6MsERRyUf59RqIbIs6ZBuENTcWDBCRvAPLj9DkqJU+dB3lf/aPNlQ4vnfHj++p26cWURhDlzzSC7QwASMmoxiOlIbmcUdmFNBXZiJwX7Ih7JRD7MSA+UsxcpXUiwNzWavLrNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s0WwUvPwtEy3jT2bResxdQQr0AvawAPXju2eCb8zOJ4=;
- b=wxsdBoeWULi2L27B2j6uaK+8hPOz2fzx0JWZFxxSoe35/MzzyKKtjUle6yCpOnhBHXex0+2QOLukLaIkHUVHsRm3jAOXpv5VCe7fHG+0to4xgsvBkeLQobAofoyRvh6ZkT+4kpjoaTpJjPf893aY7oRMqtoEXPpxfO8FTCIzenCqBYfsg4lYnXTxIQYl8qQ5np3jf/HXdzBTUGyk5p/P9cSWS4SltNrIo1U74cDKztJuXKgRQSnixHZyv5k4t/ZWGwBud9tEcftmvjciApYkINHRAoHok2qinAaEQ/80B2MoTuczRUtn7pxAN8TGzWREjaoWy8IZQmviuswb3riobQ==
+ bh=8uTznaV1B6/F1Shg6Bz8x38BeITRynE4mWaRhcp8xyc=;
+ b=ODTqBExeHMZ7hwu4YTiPG7DMjUZ03IsZCI0z7yIHa2dULfihICDCO86I0Uz7FVWoJi3vyRDnsRB2yn+zac8YsAS6GMM2nowAx1AfRfK9AaYfmfwxJytKAOcqXgg4tNI03sSkQmC47132dur7dHnoEiqfxjBogdbrMmMM9+gCTRSx61Nr1Pj0NUkFnRA9vORyAzcOuzb4XPjuRg2uFamRCSY9bnSErPHG2DxgaBBTPctOnpT4edOmxrwdTS7QlSeAW+S8cWF/P9c+oyc8/yHdt0fEdjmImAj1GUmRtTkQnLtAqNnuWhndPUSVP9+449RheKdZ0b/jckQ8MH1peVsq/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s0WwUvPwtEy3jT2bResxdQQr0AvawAPXju2eCb8zOJ4=;
- b=lLHJ3+YrTCav8lrA16f8S6xqctH6EYcDQtsE95bUti3Av3VU7lQuSgBMa6IQGLnlWYMbqleBWEZTR4pyxOl2SZH2f3/lyI71Y9qQLomLEQ+ypdNVW3EwjjHA7EKL86qj7Ym2oBwwxZvfzy0vGbmcH9dpl2BNdN7G+pGy+1+AkipfmhItY5MUBalQ2lcy+6BFpgjfjQjY2oF8VPfZp6uPtKUZwgYrBCRn81Gc+6SoHCkgGum8IxZuYVwGrp2Q4ND8zMUqHhtayC9AqqgOvQyYC9Kr3elY9NjcTUF4UPeCjB/jdBdXtBoW7OvLMoxvv5rNR0FWMJFTJf18bGFNTcX6rA==
+ bh=8uTznaV1B6/F1Shg6Bz8x38BeITRynE4mWaRhcp8xyc=;
+ b=ptnKjFti2VpcUrMfjfzEttpyD9uB9ztXX+egC8VFa4S2HT3LuFoTxd3U4nr73cSbTIESl6PEPBMw1RwmPHSbjTDZaZlxJsWc9bcMNaQyoBXgG+7m1Nnds11uxT91bjuqoYkdK6LiGtBHT+qQnPRhhkowIfTlSrgaAj1hHXr85iCDP5iF7MjQ5wmRrKvPImGj34osiLKuURliMAjcFmV/bvxgWqUYYVFRcf/mGrSb7Y4SaPCJRpvwlz/moT73sdSZTJChazt3ONSU6sbW0SSJw48M37vm0GJD/tvAAPyM44m/lW++Ach0Qye0GXaNfTxeZR3GpHWhFuU4sLl3Ym5isw==
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
  by DB4PR09MB6623.eurprd09.prod.outlook.com (2603:10a6:10:3f9::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.34; Tue, 3 Jun
- 2025 13:38:23 +0000
+ 2025 13:38:34 +0000
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8769.037; Tue, 3 Jun 2025
- 13:38:23 +0000
+ 13:38:34 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu
  <cfu@mips.com>, Uros Stajic <uros.stajic@htecgroup.com>
-Subject: [PATCH 01/11] riscv: Add initial support for P8700 SoC
-Thread-Topic: [PATCH 01/11] riscv: Add initial support for P8700 SoC
-Thread-Index: AQHb1IzGspw9l7bGO0SffCEhQCB0YQ==
-Date: Tue, 3 Jun 2025 13:38:23 +0000
-Message-ID: <20250603133744.278790-2-uros.stajic@htecgroup.com>
+Subject: [PATCH 02/11] gpio: Add GPIO driver for Intel EG20T
+Thread-Topic: [PATCH 02/11] gpio: Add GPIO driver for Intel EG20T
+Thread-Index: AQHb1IzNBsr9g4BjMEypCFBieXzCWQ==
+Date: Tue, 3 Jun 2025 13:38:34 +0000
+Message-ID: <20250603133744.278790-3-uros.stajic@htecgroup.com>
 References: <20250603133744.278790-1-uros.stajic@htecgroup.com>
 In-Reply-To: <20250603133744.278790-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
@@ -70,68 +70,69 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|DB4PR09MB6623:EE_
-x-ms-office365-filtering-correlation-id: 777a0c28-72bd-4761-4547-08dda2a3e95f
+x-ms-office365-filtering-correlation-id: 1f30ed57-0320-4af5-3efa-08dda2a3f00a
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?0ENATwY+PxvBgQ8UZixit6rq3x9UQ77pXiKhaidLk0+yzWvjk80p8/QHBz?=
- =?iso-8859-1?Q?ODJP4GLOPI1/jkqvuYapPgniQdj+Slg4b3K3o5fydMK7s0+2LFddGguS05?=
- =?iso-8859-1?Q?9N/vYVjn+Wba7S7Bcybql+Mi5GbR/R+7Ur7DdtTQAMiLanf4zGkC70QMpc?=
- =?iso-8859-1?Q?hosAc62FHoosu5NPLg6ATn4VtWjcGZmMff4SzYnDG8za0GFMeCA42a6kfz?=
- =?iso-8859-1?Q?rtOD647IXCzFmuLnX1BCwp/tnaeZcIy52FH1C60sNKBPluAfc/TxTFsMJ6?=
- =?iso-8859-1?Q?y7hVkrlL1X+BDKhb3u3pj6CrSI0HSHhbejMC+7pBM897fQ70Duz1CosnTx?=
- =?iso-8859-1?Q?5DStLNq9lr2ffW452mGoVdg88s7snghGZCgB6DszUROmFCcntJb22dSVXy?=
- =?iso-8859-1?Q?qmAe/pb8JQc8KB+tBTmW30taHYw4J5CoRf8D49cLEv3LizPVP8SEdGd6pz?=
- =?iso-8859-1?Q?ZUO1SwTpSc4VgNOoug+96Wcd50BaIrRIsDwnv5FieW+KejOiEAUUDvpcmj?=
- =?iso-8859-1?Q?xDZM9IBz9JGMGgWdwhaoCaMvBkdS6YDOlVajwFj5ZTqNlfuKG8ZGBKgH4m?=
- =?iso-8859-1?Q?kroxrIB5lK58yYydgQm2fMB5M2h9dH03TYvIBJHsrYSWXxzT4G0DbiP+yY?=
- =?iso-8859-1?Q?DqDUcQCV4fZR1AsUWUEQDhSWFb+WNp0ghL2sqQ6uVTupp0DTe3iLhRcm49?=
- =?iso-8859-1?Q?/TZk2jLDz+0k22yKVliOXnAinyNaJeWR8XGNuA6FqLw8JN1acbyuQUsvgq?=
- =?iso-8859-1?Q?tbZuhFXWDpXuT57g7iq4K07Kki5eRUqtQcR0nZ8nAhvbX93D88DQ4SysOB?=
- =?iso-8859-1?Q?KFUsSPy+Z9vCWigBJBXTli3WqSOib2g5ob4A2j9zMjKkmfeqJxT1BvATKi?=
- =?iso-8859-1?Q?1+ny5sM9+OfwxW8cSEWTsRSmE5U1SQ3/y8yIQzvwvTs9iO9FjHr31lxd7i?=
- =?iso-8859-1?Q?FbyHtv60IwLGbXMvagB/DEwu4HPOJ2e0aTPWEvgK8fkaEc+zp0GnS/Kf/L?=
- =?iso-8859-1?Q?ntErgyYapqvQgG5sS1bo2QOqZ6D3vimussKQA3GRjNOFnvbg4cwYvGQyVU?=
- =?iso-8859-1?Q?CHD9kkRF2iUY/2RqyiY6uFmbqIYvxTxGFIQRk1ilKiMqTdwvQo/6N7EPHk?=
- =?iso-8859-1?Q?DUjarhg+1bv9VE/g0AVz8Jc+u5qVs4OtpWNlzendItp5hXIFcokKdkKrjB?=
- =?iso-8859-1?Q?vSy7jZeCrBdkJjU1zAIatJHmlozt/MIodZSvx2tO7KjCaArafhFp8SaAhb?=
- =?iso-8859-1?Q?xoguOAwYMJ2I6swh9NUa9w0aq5Pq5IMoGeSQckdir0vlO/GsVXmdmW8u8+?=
- =?iso-8859-1?Q?Jq+EOXnWQ+P3l5vUQSncC/d8Lof19uRMheLY4xpVvTOhtTSAam0p313pH2?=
- =?iso-8859-1?Q?mVrTS7BgCj4y/S612THXmUuL8S6EgvWPy4GnQWUjhNowTEW+0jmVzTRetV?=
- =?iso-8859-1?Q?AKZhcH7WURgb3JF5yG8i06CsAPi8k09hVt85jCOa3uGrbhpWZo31U9J12D?=
- =?iso-8859-1?Q?EPCAGu3fwZJ+jFbQWsXNG05FOpAFBo9DYT1OUPFoS1nA=3D=3D?=
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?Xjmrw9yJxMYGb2LOEj2wpzfp1M5hWn1/o4dptOoFgF5laJz30ow+JZCrAa?=
+ =?iso-8859-1?Q?7ma83oP/pWuxYTbFVU7wctt2VsoIMmZTYnFKAJadzg5WR9Kjlkp8YvIKQi?=
+ =?iso-8859-1?Q?xMeaGgkWpMD3Bc3mJ9nH0N8DAr5uUcu+JP/96n5mxsFQt9klAXiRqRKY+6?=
+ =?iso-8859-1?Q?QLswXR2j1QZRSM3S44HyxmZZHgkF3nMXP/XTCl06UUHALUcLG5loQs7hwr?=
+ =?iso-8859-1?Q?wo/uLijowsLnPzMuDl3zuexAL7CwkHzXNY1e5XXiX5VksAwWyPgm0C6VpN?=
+ =?iso-8859-1?Q?7iBPUizOuwKId4kJ5K1Xcdi2kOm8UoJ6QKU5IftUPWVEy3lgLTi27JmbUp?=
+ =?iso-8859-1?Q?0/HvgH8/QD5f32jnKu1yji071XS4U129/RB7Vj7DONyqXsgJoUBZ34RM4q?=
+ =?iso-8859-1?Q?MAlv+N1TcrYZKW3tTdULOfszUHTaaS86U5piFk+T56WXpWOQc76ifr4ipZ?=
+ =?iso-8859-1?Q?FaJm5iSylNJ8yiC1Av9BNWIToIicL+ixRLLUd8saVVV5f8G/2ZDzhORvDp?=
+ =?iso-8859-1?Q?rBOWcTiTWq3sLeSSFB5wUKcC4fndtJCSnCuCN/zlcARw4ZoSz4ozpSEYAs?=
+ =?iso-8859-1?Q?R17BuSJ6sc7vH5eR4OtbjOx588+t9mtV1yfvxXyIlU6DmbGkJnyLe2uQfA?=
+ =?iso-8859-1?Q?eo40DJ+qECDCMyCQl+9UTngmftNMHJLdJUafXLDLllwMvCZoZ5OCgaCKcW?=
+ =?iso-8859-1?Q?AATjBwhp1FIyYR8uVUdcB0YIz2o+RImN4BC6rV4rt2AM/OOwPoayrG0Vps?=
+ =?iso-8859-1?Q?vsJZPDEV67VmAwu3NZky/CGlRTib6ORl5ugyJE9LRxmCcGVhr0MplCBlix?=
+ =?iso-8859-1?Q?Kr2ZxRaq5z50at0XRonmeNOsqedygYV6g3ufPlzHFuIqUWgam2FedU85iE?=
+ =?iso-8859-1?Q?xTp+68iebT/tkkR4DLJVEYdFSv3ShRZVfQZku1pPaO75VfdOquiR1WTYLH?=
+ =?iso-8859-1?Q?Q8AnRleZWUY9Xf+BVYSnVxozVqCIuWVQYViiXfD9R4VQhLcYCFv/pz6FBM?=
+ =?iso-8859-1?Q?rogSboLazqAUyRBItNsHaz2YgqKkxU4euXVTyiozMvbcfHrMp9/mVQ2NXk?=
+ =?iso-8859-1?Q?FEVSMigqDkophRsB7HviALd/PGuZ64TuHT3jQqMmSxMvkF1eAviuyuiSWU?=
+ =?iso-8859-1?Q?6P2iY7V4kKxnJyrsDcBlGQmxZmsEmQ67SHVO7DMSqfdEbfwIovS5zursyd?=
+ =?iso-8859-1?Q?HWRR1wM1IHhDMUz+2iiz5dGD5/QDXkUhsbegaZDGOf9dyIwLpc0BqpU38J?=
+ =?iso-8859-1?Q?mkCCUjt5gNYaaZ74SvAZAAJJAdShPJ7lE/csXLnq4JtRmWmv0lajDzDAsx?=
+ =?iso-8859-1?Q?x+y5sVoKVCESe2EiyLrq83cWieT88fbSJtoi6HX2cNe4jbaxUxj1mMNrGZ?=
+ =?iso-8859-1?Q?0pvz+tnsVN59zpEKm5LyE1VeoAul8eANMVFSnA4P1qmiWpqYs3sGNDtDCT?=
+ =?iso-8859-1?Q?6vvmRoeYexmzQUdyygkxdJJai2D9CSOH16ov/2Dna3ZdA33D1YyIxLmE3Q?=
+ =?iso-8859-1?Q?4UA97TOKQVDECAONvXoa9NaxqIhe+O+xiuD1jK8dMHOBHwvCfsAIWyx0l7?=
+ =?iso-8859-1?Q?NrnTRg4=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?Ow12YrDODITdQq131tyI2f0+JFs5WpWnxk+ZXwChQHj/3+bqfKr2r6OjRu?=
- =?iso-8859-1?Q?bxG5ft+aVRpTiPZovUWBbMWRNLdH+1c60q70Y+ymFRGhrJUKSL89opzTrk?=
- =?iso-8859-1?Q?V2NFfcmv1SobI3+CxdGb1TcP7H2iUm75qrLolYelsV9RuR+hxXPmBgxDRh?=
- =?iso-8859-1?Q?BGHF1r6H+wSl++k131++b0FlIKZT5mQM1yiMKKQ2tgJkbaBUF6rEY2QU/Z?=
- =?iso-8859-1?Q?bqoBMcTz44ObXlyWCoL5dY9b57nKwCk+y3lqWMnWAt5GsMaaE879vo2YVX?=
- =?iso-8859-1?Q?d3h7mToxTmEi37ILzu7SDWJZ+q2IFKvMUzz1Czvdko4gX8aQeaiQoFnmHn?=
- =?iso-8859-1?Q?Q8POv75vfCrlAXdrgN0KykyBwSWoIN50t9BOUqMheGkaOpD71JQPCKQ0ba?=
- =?iso-8859-1?Q?Cu/8AxWY2NP/93B7VR97WDuXDnBUjWYPeTlGaDd6dJxq+qxxdr97PhyV6D?=
- =?iso-8859-1?Q?woXsCYaXN+ww07KN4Bm57+y+V5H2DVDlCNJhe+qgeGAsh1s0zN/pCrZYRX?=
- =?iso-8859-1?Q?RBp/9IvNvPLCCFS2atBH+q+ygQaNMgGJqwTM4t8Hk0WDG7Frxz40oY5Lo6?=
- =?iso-8859-1?Q?kaIvTpigLkbSzG0dE/dGmhNxv1e85p5XGeKTeq82TH7EDcna6tp7Kj+Bv3?=
- =?iso-8859-1?Q?bSo7v73ZrR20EnjmXT6jqQ8vMjDModvis2T7rI7g/WIXVLFX7PMPT5ITzj?=
- =?iso-8859-1?Q?qAlkq6ItHeef8WiF5iDrseG5w5KoFpNYblFmza4/gV4Uw8zPuT01HJTTyn?=
- =?iso-8859-1?Q?rtlWCOZozNqUdoQt0spwzLMwtvauGYeLqvEMsFREUeb1GlFuU3C8XD09DN?=
- =?iso-8859-1?Q?ug+ehF/LG9Uu7yWBkGxt/gihVz6KobTUF1KAkHo/Q2bJpunxSFfW/IEwhM?=
- =?iso-8859-1?Q?t6pCXXQprUvg3ASBwVFDGr1nupsccmOViDGrTu01tlayt9+ixwV0h5PSpV?=
- =?iso-8859-1?Q?CrCQhbYCCuuwnmTfbwn9eQ+h5AZM1KhMlwvEY7Shwuy6O52wkt2v4r9NeM?=
- =?iso-8859-1?Q?CYCDe1DUkPURzHwCtdUdafDr0UviYNqt54boeCIX5LV0sX0uoc6UQVivF+?=
- =?iso-8859-1?Q?M0pTC8oxfYygVc4dxUyvC1qQ615vxrrT4CPOrn4R4z36H3vpinEz/mZuBz?=
- =?iso-8859-1?Q?aljxBd5cAO3Pc2EhchVNdsmgR/vqgmeSoTWIZLDMkR4mdurF9SPwW//xzb?=
- =?iso-8859-1?Q?C+V32ycETi9st5uOetZkPVtqodjw2qRh5lH1vqXmK7ka7rwdsO3j1q8udq?=
- =?iso-8859-1?Q?6x/Cyv/PwKcriDr5D7VIXq1sxx1Zrs0rRCDOsH/8apvZYKUmUOQ6CaP0Ye?=
- =?iso-8859-1?Q?t7WmSzPBiMeWv+fxf5S5mdwdrrgsBsxBc7tb2Rv2WsQdgZSun7T7Li5sWa?=
- =?iso-8859-1?Q?51FHaFuRQOZxaAPFl6i81z7LDWw6DM94pXrFYiDogBieaZtwB/dJAYVX5L?=
- =?iso-8859-1?Q?egAgHvDSBmRPrKQQvoIcOvwnQ1LhgJaV3Rf0MhB++OHfhsarQt9h5NBewq?=
- =?iso-8859-1?Q?flFxyN6s1//vacbdaqDQyRPFhliUYUAeKJt0x2ITv8jTtcsdrPgD7YjlVE?=
- =?iso-8859-1?Q?8oLZ4h/bkGjUJGvxCCOpTUbSWTlZ/L6k9w2PSuraE/SA65OW31y3zQS1HB?=
- =?iso-8859-1?Q?IheIJJrtpo+EYl8752PpgAi2+bYhaIKYNhk3EsmPrfk3Qjw3SjkyOgZA?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?/1eCARBTlN57RLhIUw2sE0MoP1U5mSTsXO2e6Q2/9Gu0pDopTedLGhvgMS?=
+ =?iso-8859-1?Q?aC5lcO/EAxvRUJEQ5YK6KsDB90UpqDAunUnVzfFioKYryZcDGPg5u3oLPQ?=
+ =?iso-8859-1?Q?TzPYERuCmWqRf+YASYKUdrz3k8u+h9jN06BtQy6EeVOd9GpS3jEzx7lpAy?=
+ =?iso-8859-1?Q?KVNW4F04ZoV7S9UxFTM5EkfA64veDiiA06jkLuYPPNWlq55puuMRXkPF5j?=
+ =?iso-8859-1?Q?7XE0XLJnub4O+1aqKI97szYnCrjgqALW3TYio+xdLZCof04rl6/21zyWw7?=
+ =?iso-8859-1?Q?j7DKW8CQSuUi+E0q+HZFtm1dsEufSuv5271UiZQ6ZaA5/F09aGvt12p3h9?=
+ =?iso-8859-1?Q?rZ0T9u+Zotak7Fcbufq5xhZ6yxxH9To+iVGA+vExzrsabhqH3X1md+Yo/J?=
+ =?iso-8859-1?Q?lYHEtBIDxUPntukRPVoLAxxGXWEFFlwrdPu0Oih+r2Z/Dzpi3TvBbQfAgm?=
+ =?iso-8859-1?Q?zXIJPLbH60CMZXOZCv9g3dXcuk8hEw4ZDl0shFJeurhCsf88670Qj9VTfJ?=
+ =?iso-8859-1?Q?JdKwDOchCLNy/+SLrIYF5zgla3IAlFen/JCDQ4hb/u/ZkTGLqqzx+Kzj8v?=
+ =?iso-8859-1?Q?xDUFTPIVRbP1KlJMV+V4TLziTObL80313BHwuqqs3j2puhAkcPl9lbKqd8?=
+ =?iso-8859-1?Q?syEAm31/LpUwS8asIDhbKZ+gep2nJJrrmhKjn6I/SeHHSEmA5CISOd+zMU?=
+ =?iso-8859-1?Q?Vtbzeslx8jRbtu8c2b6QpBtCKuo7KGpDa8SWw3RfvRlNlYsOWuXqrAoRFt?=
+ =?iso-8859-1?Q?aIXPlwUWAYcYKS0KK5JeKx8OtIQ07VHm1Dc5VK7Ti4sCFwf/7U78r/E7A0?=
+ =?iso-8859-1?Q?kW+kHQStHz2YbpngnCabXNwwZTufUjS7jFxOnTGvVXDnLQIAz5f/u53wA4?=
+ =?iso-8859-1?Q?8yOP1jAcGUKLkcWzDqzcHRb2aJigZ70qwAXCz5ZXWMGWSqijzbvuO0HK5g?=
+ =?iso-8859-1?Q?4uqKYsnklRP3BFmGEGf4Xc9XVqPomHCWehIF6eDzDXzREzm8bhZFh8krfp?=
+ =?iso-8859-1?Q?xbE2WRk2j4R3u2xpNCyWxO4sZeM57Xkac489ffY6GF/59IFWFTgxSqZmV7?=
+ =?iso-8859-1?Q?gv4XLoiATXf5OMeZQGuRehY3aOjPWk8IqA3XmTJx072g7XEt6VQJTF07DE?=
+ =?iso-8859-1?Q?bCpIQuXioVUWYqpfy6ovRYGymxGb9ZIM4+nm4aKK3flRTJwttrMp+Yy8o4?=
+ =?iso-8859-1?Q?IppAIIUH/Hz5ISE9sWeGp1T4tZpMT5kjdpJSbf3rWg26rclp69bCVtKa/o?=
+ =?iso-8859-1?Q?vbCoyp9x+5IRWEWzG5nBeT5yNMxr8tBJ0cMV43wEIn7P0hk++8tAb8BS1C?=
+ =?iso-8859-1?Q?2xOutNTjLJLxlnxnQckaMkDcEHbiB8ow4A5l95L42cKm1D0A4gZ41Pi2qI?=
+ =?iso-8859-1?Q?xrcNiXEovbzPLarsH2IxlQU8rMzJyAqeJTfJJmnCDnFcUnsKKnz3PXLCuP?=
+ =?iso-8859-1?Q?F78set4bldxwzUkfcbf2fqOnEb3hS8THq2V63wQ2gTGNSOSn8dJjkLduyM?=
+ =?iso-8859-1?Q?0q+JLyTSsBgK4dYIQOIiXULgcbkByM3KIp9rO8NeJaPTTDPxvn/PTIRK1g?=
+ =?iso-8859-1?Q?TM03nt+faXpfxN+uJlHKQQZEQ83rHztLGI/9M838gcqrSMzN++15xYJgXR?=
+ =?iso-8859-1?Q?rwv2JjfUUyGvngg9fKNtPVkoOtPxS+4+BvT2QMrQLhujGXYtZJaFigGQ?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -139,12 +140,12 @@ MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 777a0c28-72bd-4761-4547-08dda2a3e95f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2025 13:38:23.5162 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f30ed57-0320-4af5-3efa-08dda2a3f00a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2025 13:38:34.6444 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jEnyUlQIzxkAxOXrr0dvWmrIyxYj+CwZtx3bzZTrDZf8GE8UrOyvYF0qQLqWlvwSVpGKTr7VncVOCoJjN3x0mQkJyvJ1r9znt0GII8dRwsQ=
+X-MS-Exchange-CrossTenant-userprincipalname: 55Nijz+NzIS7+uIpzvrH1TXc8gwj6ZeiG1lm8aOz/QG1Uo6Ou81QgNVWne6qii6D665ueKPsdrljg/Ov2dU4aK2fZwCUrCN35z+0FMJG8NU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR09MB6623
 X-Mailman-Approved-At: Tue, 03 Jun 2025 16:44:26 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -165,1316 +166,208 @@ X-Virus-Status: Clean
 
 From: Chao-ying Fu <cfu@mips.com>
 
-Add initial platform support for the P8700-F, a high-performance
-multi-core RV64GC SoC with optional multi-cluster configuration and
-hardware multithreading.
+Add a GPIO driver for the Intel EG20T Platform Controller Hub, which
+exposes a set of 12 GPIOs via PCI MMIO.
 
-This patch implements initial support required for U-Boot to run on
-the P8700-based Boston board.
+The driver implements basic GPIO operations (input/output direction,
+value read/write, and function query) using the U-Boot driver model
+infrastructure. It maps the required BAR1 region via `dm_pci_map_bar`
+and uses internal registers to control pin state and direction.
+
+This driver is required for platforms using EG20T, such as P8700-based
+systems, to access GPIOs through the standard U-Boot DM GPIO framework.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
 ---
- arch/riscv/Kconfig                          |  11 +
- arch/riscv/cpu/Makefile                     |   2 +
- arch/riscv/cpu/p8700/Kconfig                |  15 ++
- arch/riscv/cpu/p8700/Makefile               |   7 +
- arch/riscv/cpu/p8700/cache.c                |  74 ++++++
- arch/riscv/cpu/p8700/cpu.c                  |  22 ++
- arch/riscv/cpu/p8700/dram.c                 |  37 +++
- arch/riscv/cpu/p8700/p8700_platform_setup.S | 155 ++++++++++++
- arch/riscv/cpu/start.S                      |   8 +
- arch/riscv/dts/Makefile                     |   1 +
- arch/riscv/dts/boston-p8700.dts             | 253 ++++++++++++++++++++
- arch/riscv/include/asm/arch-p8700/p8700.h   | 110 +++++++++
- board/mips/boston-riscv/Kconfig             |  43 ++++
- board/mips/boston-riscv/MAINTAINERS         |   9 +
- board/mips/boston-riscv/Makefile            |   8 +
- board/mips/boston-riscv/boston-lcd.h        |  20 ++
- board/mips/boston-riscv/boston-regs.h       |  38 +++
- board/mips/boston-riscv/boston-riscv.c      |   9 +
- board/mips/boston-riscv/checkboard.c        |  43 ++++
- board/mips/boston-riscv/config.mk           |  15 ++
- board/mips/boston-riscv/lowlevel_init.S     |  18 ++
- board/mips/boston-riscv/reset.c             |  15 ++
- configs/boston-p8700_defconfig              |  94 ++++++++
- drivers/clk/Kconfig                         |   2 +-
- include/asm-generic/global_data.h           |   5 +
- include/configs/boston-riscv.h              |  11 +
- 26 files changed, 1024 insertions(+), 1 deletion(-)
- create mode 100644 arch/riscv/cpu/p8700/Kconfig
- create mode 100644 arch/riscv/cpu/p8700/Makefile
- create mode 100644 arch/riscv/cpu/p8700/cache.c
- create mode 100644 arch/riscv/cpu/p8700/cpu.c
- create mode 100644 arch/riscv/cpu/p8700/dram.c
- create mode 100644 arch/riscv/cpu/p8700/p8700_platform_setup.S
- create mode 100644 arch/riscv/dts/boston-p8700.dts
- create mode 100644 arch/riscv/include/asm/arch-p8700/p8700.h
- create mode 100644 board/mips/boston-riscv/Kconfig
- create mode 100644 board/mips/boston-riscv/MAINTAINERS
- create mode 100644 board/mips/boston-riscv/Makefile
- create mode 100644 board/mips/boston-riscv/boston-lcd.h
- create mode 100644 board/mips/boston-riscv/boston-regs.h
- create mode 100644 board/mips/boston-riscv/boston-riscv.c
- create mode 100644 board/mips/boston-riscv/checkboard.c
- create mode 100644 board/mips/boston-riscv/config.mk
- create mode 100644 board/mips/boston-riscv/lowlevel_init.S
- create mode 100644 board/mips/boston-riscv/reset.c
- create mode 100644 configs/boston-p8700_defconfig
- create mode 100644 include/configs/boston-riscv.h
+ board/mips/boston-riscv/MAINTAINERS |   1 +
+ drivers/gpio/Kconfig                |   7 ++
+ drivers/gpio/Makefile               |   1 +
+ drivers/gpio/eg20t-gpio.c           | 138 ++++++++++++++++++++++++++++
+ 4 files changed, 147 insertions(+)
+ create mode 100644 drivers/gpio/eg20t-gpio.c
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 8c6feae5735..b05e0622908 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -58,6 +58,15 @@ config TARGET_XILINX_MBV
- config TARGET_ASPEED_AST2700_IBEX
- 	bool "Support Ibex RISC-V cores on Aspeed AST2700 SoC"
-=20
-+config TARGET_MIPS_BOSTON
-+	bool "Support Mips Boston Board"
-+	select DM
-+	select DM_GPIO
-+	select DM_SERIAL
-+	select OF_CONTROL
-+	select DISTRO_DEFAULTS
-+	imply CMD_DM
-+
- endchoice
-=20
- config SYS_ICACHE_OFF
-@@ -115,6 +124,7 @@ source "board/spacemit/bananapi-f3/Kconfig"
- source "board/starfive/visionfive2/Kconfig"
- source "board/thead/th1520_lpi4a/Kconfig"
- source "board/xilinx/mbv/Kconfig"
-+source "board/mips/boston-riscv/Kconfig"
-=20
- # platform-specific options below
- source "arch/riscv/cpu/andes/Kconfig"
-@@ -127,6 +137,7 @@ source "arch/riscv/cpu/jh7110/Kconfig"
- source "arch/riscv/cpu/k1/Kconfig"
- source "arch/riscv/cpu/k230/Kconfig"
- source "arch/riscv/cpu/th1520/Kconfig"
-+source "arch/riscv/cpu/p8700/Kconfig"
-=20
- # architecture-specific options below
-=20
-diff --git a/arch/riscv/cpu/Makefile b/arch/riscv/cpu/Makefile
-index 6bf6f911c67..38894861694 100644
---- a/arch/riscv/cpu/Makefile
-+++ b/arch/riscv/cpu/Makefile
-@@ -5,3 +5,5 @@
- extra-y =3D start.o
-=20
- obj-y +=3D cpu.o mtrap.o
-+
-+obj-$(CONFIG_P8700_RISCV) +=3D p8700/p8700_platform_setup.o
-diff --git a/arch/riscv/cpu/p8700/Kconfig b/arch/riscv/cpu/p8700/Kconfig
-new file mode 100644
-index 00000000000..0e5e4c9eda6
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/Kconfig
-@@ -0,0 +1,15 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+
-+config P8700_RISCV
-+	bool
-+	select ARCH_EARLY_INIT_R
-+	imply CPU
-+	imply CPU_RISCV
-+	imply RISCV_TIMER
-+	imply SIFIVE_CLINT if (RISCV_MMODE || SPL_RISCV_MMODE)
-+	imply CMD_CPU
-+	imply SPL_CPU_SUPPORT
-+	imply SPL_OPENSBI
-+	imply SPL_LOAD_FIT
-diff --git a/arch/riscv/cpu/p8700/Makefile b/arch/riscv/cpu/p8700/Makefile
-new file mode 100644
-index 00000000000..ecdd232da6f
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+
-+obj-y +=3D dram.o
-+obj-y +=3D cpu.o
-+obj-y +=3D cache.o
-diff --git a/arch/riscv/cpu/p8700/cache.c b/arch/riscv/cpu/p8700/cache.c
-new file mode 100644
-index 00000000000..27641035d80
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/cache.c
-@@ -0,0 +1,74 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+ */
-+
-+#include <cpu_func.h>
-+#include <asm/global_data.h>
-+#include <asm/arch-p8700/p8700.h>
-+
-+/* NOTE: We force to use a0 in mcache to encode via .word. */
-+#define cache_loop(start, end, lsize, op) do {				\
-+	const __typeof__(lsize) __lsize =3D (lsize);			\
-+	const register void *addr asm("a0") =3D (const void *)((start) & ~(__lsiz=
-e - 1));	\
-+	const void *aend =3D (const void *)(((end) - 1) & ~(__lsize - 1));	\
-+	for (; addr <=3D aend; addr +=3D __lsize)				\
-+		asm volatile (".word 0xec0500f3|%0 # force to use %1" \
-+								::"i"((op) << 20), "r"(addr));	\
-+} while (0)
-+
-+static unsigned long lsize;
-+static unsigned long l1d_total_size;
-+static unsigned long slsize;
-+
-+static void probe_cache_config(void)
-+{
-+	lsize =3D 64;
-+	l1d_total_size =3D 64 * 1024;
-+
-+	int l2_config =3D 0;
-+	long address =3D GCR_L2_CONFIG;
-+
-+	asm volatile ("lw %0,0(%1)" : "=3Dr"(l2_config) : "r"(address) : "memory"=
-);
-+	int l2_line_size_info =3D (l2_config >> L2_LINE_SIZE_SHIFT)
-+				& L2_LINE_SIZE_MASK;
-+	slsize =3D (l2_line_size_info =3D=3D 0) ? 0 : 1 << (l2_line_size_info + 1=
-);
-+}
-+
-+void flush_dcache_range(unsigned long start, unsigned long end)
-+{
-+	if (lsize =3D=3D 0)
-+		probe_cache_config();
-+
-+	/* aend will be miscalculated when size is zero, so we return here */
-+	if (start >=3D end)
-+		return;
-+
-+	cache_loop(start, end, lsize, HIT_WRITEBACK_INV_D);
-+
-+	/* flush L2 cache */
-+	if (slsize)
-+		cache_loop(start, end, slsize, HIT_WRITEBACK_INV_SD);
-+
-+	/* ensure cache ops complete before any further memory access */
-+	asm volatile ("slli x0,x0,1 # ihb");
-+}
-+
-+void invalidate_dcache_range(unsigned long start, unsigned long end)
-+{
-+	if (lsize =3D=3D 0)
-+		probe_cache_config();
-+
-+	/* aend will be miscalculated when size is zero, so we return here */
-+	if (start >=3D end)
-+		return;
-+
-+	/* invalidate L2 cache */
-+	if (slsize)
-+		cache_loop(start, end, slsize, HIT_INVALIDATE_SD);
-+
-+	cache_loop(start, end, lsize, HIT_INVALIDATE_D);
-+
-+	/* ensure cache ops complete before any further memory access */
-+	asm volatile ("slli x0,x0,1 # ihb");
-+}
-diff --git a/arch/riscv/cpu/p8700/cpu.c b/arch/riscv/cpu/p8700/cpu.c
-new file mode 100644
-index 00000000000..f13c18942f3
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/cpu.c
-@@ -0,0 +1,22 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-+ */
-+
-+#include <irq_func.h>
-+#include <asm/cache.h>
-+
-+/*
-+ * cleanup_before_linux() is called just before we call linux
-+ * it prepares the processor for linux
-+ *
-+ * we disable interrupt and caches.
-+ */
-+int cleanup_before_linux(void)
-+{
-+	disable_interrupts();
-+
-+	cache_flush();
-+
-+	return 0;
-+}
-diff --git a/arch/riscv/cpu/p8700/dram.c b/arch/riscv/cpu/p8700/dram.c
-new file mode 100644
-index 00000000000..2b54326be39
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/dram.c
-@@ -0,0 +1,37 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-+ */
-+
-+#include <fdtdec.h>
-+#include <init.h>
-+#include <linux/sizes.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-+
-+phys_size_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+	if (IS_ENABLED(CONFIG_64BIT)) {
-+		/*
-+		 * Ensure that we run from first 4GB so that all
-+		 * addresses used by U-Boot are 32bit addresses.
-+		 *
-+		 * This in-turn ensures that 32bit DMA capable
-+		 * devices work fine because DMA mapping APIs will
-+		 * provide 32bit DMA addresses only.
-+		 */
-+		if (gd->ram_top > SZ_4G)
-+			return SZ_4G;
-+	}
-+	return gd->ram_top;
-+}
-diff --git a/arch/riscv/cpu/p8700/p8700_platform_setup.S b/arch/riscv/cpu/p=
-8700/p8700_platform_setup.S
-new file mode 100644
-index 00000000000..c2999045175
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/p8700_platform_setup.S
-@@ -0,0 +1,155 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+ */
-+
-+#include <asm-offsets.h>
-+#include <config.h>
-+#include <elf.h>
-+#include <system-constants.h>
-+#include <asm/encoding.h>
-+#include <generated/asm-offsets.h>
-+#include <asm/arch-p8700/p8700.h>
-+
-+.global p8700_platform_setup
-+.global set_flash_uncached
-+
-+p8700_platform_setup:
-+	move s6, ra
-+	li	x1,0
-+	li	x2,0
-+	li	x3,0
-+	li	x4,0
-+	li	x5,0
-+	li	x6,0
-+	li	x7,0
-+	li	x8,0
-+	li	x9,0
-+	li	x10,0
-+	li	x11,0
-+	li	x12,0
-+	li	x13,0
-+	li	x14,0
-+	li	x15,0
-+	li	x16,0
-+	li	x17,0
-+	li	x18,0
-+	li	x19,0
-+	li	x20,0
-+	li	x21,0
-+	li	x23,0
-+	li	x24,0
-+	li	x25,0
-+	li	x26,0
-+	li	x27,0
-+	li	x28,0
-+	li	x29,0
-+	li	x30,0
-+	li	x31,0
-+
-+	/* a0 has mhartid */
-+	csrr	a0, CSR_MHARTID
-+
-+	li	t0, BOSTON_PLAT_DDR3STAT
-+1:	lw	t1, 0(t0)
-+	andi	t1, t1, BOSTON_PLAT_DDR3STAT_CALIB
-+	beqz	t1, 1b
-+
-+	/* Test mhartid lowest 4 bits */
-+	andi	t0, a0, 0xf
-+	bne	t0, zero, setup_pmp
-+
-+	li	s0, CM_BASE
-+	li	t0, 0x1fb80000
-+	/* Get cluster number to update CM_BASE */
-+	srl	t1, a0, MHARTID_CLUSTER_SHIFT
-+	andi	t1, t1, MHARTID_CLUSTER_MASK
-+	sll	t1, t1, CM_BASE_CLUSTER_SHIFT
-+	add	s0, s0, t1
-+	move	t1, s0
-+
-+	/* Test mhartid lowest 16 bits */
-+	li	t2, 0xffff
-+	and	t2, a0, t2
-+	bne	t2, zero, cm_relocate_done
-+	sd	t1, GCR_BASE_OFFSET(t0)
-+cm_relocate_done:
-+
-+	li	t0, GCR_CL_COH_EN_EN
-+
-+	/* Get core number to update CM_BASE */
-+	srl	t1, a0, MHARTID_CORE_SHIFT
-+	andi	t1, t1, MHARTID_CORE_MASK
-+	sll	t1, t1, CM_BASE_CORE_SHIFT
-+	add	s0, s0, t1
-+	INDEXED(sd, t0, t1, P8700_GCR_C0_COH_EN, s0)
-+3:
-+
-+	/* Test mhartid */
-+	bne	a0, zero, setup_pmp
-+
-+	/* Map all PCIe DMA access to its default, non-IOCU, target */
-+	li	t0,BOSTON_PLAT_NOCPCIE0ADDR
-+	sw	zero, 0(t0)
-+	li	t0,BOSTON_PLAT_NOCPCIE1ADDR
-+	sw	zero, 0(t0)
-+	li	t0,BOSTON_PLAT_NOCPCIE2ADDR
-+	sw	zero, 0(t0)
-+
-+setup_pmp:
-+	/* Setup PMP */
-+	li	t0, 0x2fffffff # 2G from 0x80000000
-+	csrw	pmpaddr1, t0
-+	li	t0, 0x07ff7fff # 0x40000 from 0x1ffc0000
-+	csrw	pmpaddr2, t0
-+	li	t0, 0x07f3ffff # 2M from 0x1fc00000
-+	csrw	pmpaddr3, t0
-+	li	t0, 0x1fffffffffffffff # All from 0x0
-+	csrw	pmpaddr4, t0
-+	li	t0, ((PMP_NAPOT | PMP_R | PMP_W | PMP_X) << 32) | \
-+			((PMP_NAPOT | PMP_R | PMP_X) << 24) | \
-+			((PMP_NAPOT | PMP_R | PMP_W | PMP_X) << 16) | \
-+			((PMP_NAPOT | PMP_R | PMP_W | PMP_X) << 8)
-+	csrw	pmpcfg0, t0
-+
-+	/* Test mhartid */
-+	bne	a0, zero, 2f
-+	/* HART 0: Set cacheable for pmp0, pmp1, pmp3, uncacheable for pmp2, pmp4=
- */
-+	li	t0, (CCA_CACHE_DISABLE << 32) | (CCA_CACHE_ENABLE << 24) | \
-+			(CCA_CACHE_DISABLE << 16) | (CCA_CACHE_ENABLE << 8) | CCA_CACHE_ENABLE
-+	j	3f
-+2:	/* HART 1 or above: Set cacheable for pmp0, pmp1, uncacheable for pmp2,=
- pmp3, pmp4 */
-+	li	t0, (CCA_CACHE_DISABLE << 32) | (CCA_CACHE_DISABLE << 24) | \
-+			(CCA_CACHE_DISABLE << 16) | (CCA_CACHE_ENABLE << 8) | CCA_CACHE_ENABLE
-+3:
-+	csrw	CSR_PMACFG0, t0
-+	fence
-+
-+	/* Test mhartid */
-+	beq	a0, zero, 1f
-+	/* Jump to 0x80000000 */
-+	li	t0, 0x80000000
-+	jr	t0
-+1:
-+	move ra, s6
-+	li s6, 0
-+	ret
-+
-+set_flash_uncached:
-+	addi	sp, sp, -16
-+	sd	 s6, 0(sp)
-+	move s6, ra
-+
-+	/* Set flash uncached at pmp3 */
-+	csrr	t0, CSR_PMACFG0
-+	li	t1, 0xffffffffffffffff - (0xff << 24)
-+	and	t0, t0, t1
-+	li	t1, (CCA_CACHE_DISABLE << 24)
-+	or	t0, t0, t1
-+	csrw	CSR_PMACFG0, t0
-+	fence
-+
-+	move ra, s6
-+	ld	s6, 0(sp)
-+	addi	sp, sp, 16
-+	ret
-diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
-index 7bafdfd390a..e36abb5957b 100644
---- a/arch/riscv/cpu/start.S
-+++ b/arch/riscv/cpu/start.S
-@@ -39,6 +39,10 @@ secondary_harts_relocation_error:
- .section .text
- .globl _start
- _start:
-+#ifdef CONFIG_P8700_RISCV
-+	call p8700_platform_setup
-+#endif
-+
- #if CONFIG_IS_ENABLED(RISCV_MMODE)
- 	csrr	a0, CSR_MHARTID
- #endif
-@@ -416,6 +420,10 @@ call_board_init_r:
- 	mv	a1, s4			/* dest_addr */
- 	mv	s0, zero		/* fp =3D=3D NULL */
-=20
-+#ifdef CONFIG_P8700_RISCV
-+	call set_flash_uncached
-+#endif
-+
- /*
-  * jump to it ...
-  */
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index cf1872f3fdc..60a8c8f93b1 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -15,6 +15,7 @@ dtb-$(CONFIG_TARGET_TH1520_LPI4A) +=3D th1520-lichee-pi-4=
-a.dtb
- dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-mbv32.dtb
- dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-mbv64.dtb
- dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) +=3D ast2700-ibex.dtb
-+dtb-$(CONFIG_TARGET_MIPS_BOSTON) +=3D boston-p8700.dtb
-=20
- include $(srctree)/scripts/Makefile.dts
-=20
-diff --git a/arch/riscv/dts/boston-p8700.dts b/arch/riscv/dts/boston-p8700.=
-dts
-new file mode 100644
-index 00000000000..6d700a5675c
---- /dev/null
-+++ b/arch/riscv/dts/boston-p8700.dts
-@@ -0,0 +1,253 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/clock/boston-clock.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/interrupt-controller/mips-gic.h>
-+
-+/ {
-+	#address-cells =3D <1>;
-+	#size-cells =3D <1>;
-+	model =3D "p8700";
-+	compatible =3D "img,boston";
-+
-+	chosen {
-+		stdout-path =3D &uart0;
-+		bootargs =3D "root=3D/dev/sda rw earlycon console=3DttyS0,115200n8r";
-+	};
-+
-+	cpus {
-+		#address-cells =3D <1>;
-+		#size-cells =3D <0>;
-+		timebase-frequency =3D <20000000>;
-+
-+		cpu@0 {
-+			device_type =3D "cpu";
-+			compatible =3D "riscv";
-+			mmu-type =3D "riscv,sv39";
-+			riscv,isa =3D "rv64imafdcsu";
-+			status =3D "okay";
-+			reg =3D <0>;
-+			clocks =3D <&clk_boston BOSTON_CLK_CPU>;
-+			clock-frequency =3D <20000000>;
-+			bootph-all;
-+		};
-+	};
-+
-+	memory@0 {
-+		device_type =3D "memory";
-+		reg =3D <0x80000000 0x80000000>;
-+	};
-+
-+	gic: interrupt-controller {
-+		compatible =3D "mti,gic";
-+
-+		interrupt-controller;
-+		#interrupt-cells =3D <3>;
-+
-+		timer {
-+			compatible =3D "mti,gic-timer";
-+			interrupts =3D <GIC_LOCAL 1 IRQ_TYPE_NONE>;
-+			clocks =3D <&clk_boston BOSTON_CLK_CPU>;
-+		};
-+	};
-+
-+	pci0: pci@10000000 {
-+		status =3D "disabled";
-+		compatible =3D "xlnx,axi-pcie-host-1.00.a";
-+		device_type =3D "pci";
-+		reg =3D <0x10000000 0x2000000>;
-+
-+		#address-cells =3D <3>;
-+		#size-cells =3D <2>;
-+		#interrupt-cells =3D <1>;
-+
-+		interrupt-parent =3D <&gic>;
-+		interrupts =3D <GIC_SHARED 2 IRQ_TYPE_LEVEL_HIGH>;
-+
-+		ranges =3D <0x02000000 0 0x40000000
-+			  0x40000000 0 0x40000000>;
-+
-+		bus-range =3D <0x00 0xff>;
-+
-+		interrupt-map-mask =3D <0 0 0 7>;
-+		interrupt-map =3D <0 0 0 1 &pci0_intc 1>,
-+				<0 0 0 2 &pci0_intc 2>,
-+				<0 0 0 3 &pci0_intc 3>,
-+				<0 0 0 4 &pci0_intc 4>;
-+
-+		pci0_intc: interrupt-controller {
-+			interrupt-controller;
-+			#address-cells =3D <0>;
-+			#interrupt-cells =3D <1>;
-+		};
-+	};
-+
-+	pci1: pci@12000000 {
-+		status =3D "disabled";
-+		compatible =3D "xlnx,axi-pcie-host-1.00.a";
-+		device_type =3D "pci";
-+		reg =3D <0x12000000 0x2000000>;
-+
-+		#address-cells =3D <3>;
-+		#size-cells =3D <2>;
-+		#interrupt-cells =3D <1>;
-+
-+		interrupt-parent =3D <&gic>;
-+		interrupts =3D <GIC_SHARED 1 IRQ_TYPE_LEVEL_HIGH>;
-+
-+		ranges =3D <0x02000000 0 0x20000000
-+			  0x20000000 0 0x20000000>;
-+
-+		bus-range =3D <0x00 0xff>;
-+
-+		interrupt-map-mask =3D <0 0 0 7>;
-+		interrupt-map =3D <0 0 0 1 &pci1_intc 1>,
-+				<0 0 0 2 &pci1_intc 2>,
-+				<0 0 0 3 &pci1_intc 3>,
-+				<0 0 0 4 &pci1_intc 4>;
-+
-+		pci1_intc: interrupt-controller {
-+			interrupt-controller;
-+			#address-cells =3D <0>;
-+			#interrupt-cells =3D <1>;
-+		};
-+	};
-+
-+	pci2: pci@14000000 {
-+		status =3D "disabled";
-+		compatible =3D "xlnx,axi-pcie-host-1.00.a";
-+		device_type =3D "pci";
-+		reg =3D <0x14000000 0x2000000>;
-+
-+		#address-cells =3D <3>;
-+		#size-cells =3D <2>;
-+		#interrupt-cells =3D <1>;
-+
-+		interrupt-parent =3D <&gic>;
-+		interrupts =3D <GIC_SHARED 0 IRQ_TYPE_LEVEL_HIGH>;
-+
-+		ranges =3D <0x02000000 0 0x16000000
-+			  0x16000000 0 0x100000>;
-+
-+		bus-range =3D <0x00 0xff>;
-+
-+		interrupt-map-mask =3D <0 0 0 7>;
-+		interrupt-map =3D <0 0 0 1 &pci2_intc 1>,
-+				<0 0 0 2 &pci2_intc 2>,
-+				<0 0 0 3 &pci2_intc 3>,
-+				<0 0 0 4 &pci2_intc 4>;
-+
-+		pci2_intc: interrupt-controller {
-+			interrupt-controller;
-+			#address-cells =3D <0>;
-+			#interrupt-cells =3D <1>;
-+		};
-+
-+		pci2_root@0,0,0 {
-+			compatible =3D "pci10ee,7021", "pci-bridge";
-+			reg =3D <0x00000000 0 0 0 0>;
-+
-+			#address-cells =3D <3>;
-+			#size-cells =3D <2>;
-+			#interrupt-cells =3D <1>;
-+
-+			eg20t_bridge@1,0,0 {
-+				compatible =3D "pci8086,8800", "pci-bridge";
-+				reg =3D <0x00010000 0 0 0 0>;
-+
-+				#address-cells =3D <3>;
-+				#size-cells =3D <2>;
-+				#interrupt-cells =3D <1>;
-+
-+				eg20t_mac@2,0,1 {
-+					compatible =3D "pci8086,8802", "intel,pch-gbe";
-+					reg =3D <0x00020100 0 0 0 0>;
-+					phy-reset-gpios =3D <&eg20t_gpio 6 GPIO_ACTIVE_LOW>;
-+				};
-+
-+				eg20t_gpio: eg20t_gpio@2,0,2 {
-+					compatible =3D "pci8086,8803", "intel,eg20t-gpio";
-+					reg =3D <0x00020200 0 0 0 0>;
-+
-+					gpio-controller;
-+					#gpio-cells =3D <2>;
-+				};
-+
-+				mmc0: mmc@2,4,0 {
-+					compatible =3D "intel,apl-sd";
-+					reg =3D <0x00022000 0 0 0 0>;
-+				};
-+
-+				mmc1: mmc@2,4,1 {
-+					compatible =3D "intel,apl-sd";
-+					reg =3D <0x00022100 0 0 0 0>;
-+				};
-+
-+				eg20t_i2c@2,12,2 {
-+					compatible =3D "pci8086,8817";
-+					reg =3D <0x00026200 0 0 0 0>;
-+
-+					#address-cells =3D <1>;
-+					#size-cells =3D <0>;
-+
-+					rtc@0x68 {
-+						compatible =3D "st,m41t81s";
-+						reg =3D <0x68>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	plat_regs: system-controller@17ffd000 {
-+		compatible =3D "img,boston-platform-regs", "syscon";
-+		reg =3D <0x17ffd000 0x1000>;
-+		bootph-all;
-+	};
-+
-+	clk_boston: clock {
-+		compatible =3D "img,boston-clock";
-+		#clock-cells =3D <1>;
-+		regmap =3D <&plat_regs>;
-+		bootph-all;
-+	};
-+
-+	reboot: syscon-reboot {
-+		compatible =3D "syscon-reboot";
-+		regmap =3D <&plat_regs>;
-+		offset =3D <0x10>;
-+		mask =3D <0x10>;
-+	};
-+
-+	uart0: uart@17ffe000 {
-+		compatible =3D "ns16550a";
-+		reg =3D <0x17ffe000 0x1000>;
-+		reg-shift =3D <2>;
-+		reg-io-width =3D <4>;
-+
-+		interrupt-parent =3D <&gic>;
-+		interrupts =3D <GIC_SHARED 3 IRQ_TYPE_LEVEL_HIGH>;
-+
-+		clocks =3D <&clk_boston BOSTON_CLK_SYS>;
-+		clock-frequency =3D <20000000>;
-+
-+		bootph-all;
-+	};
-+
-+	lcd: lcd@17fff000 {
-+		compatible =3D "img,boston-lcd";
-+		reg =3D <0x17fff000 0x8>;
-+	};
-+
-+	flash@18000000 {
-+		compatible =3D "cfi-flash";
-+		reg =3D <0x18000000 0x8000000>;
-+		bank-width =3D <2>;
-+	};
-+};
-diff --git a/arch/riscv/include/asm/arch-p8700/p8700.h b/arch/riscv/include=
-/asm/arch-p8700/p8700.h
-new file mode 100644
-index 00000000000..5ca9b4b9497
---- /dev/null
-+++ b/arch/riscv/include/asm/arch-p8700/p8700.h
-@@ -0,0 +1,110 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+ */
-+
-+#ifndef __P8700_H__
-+#define __P8700_H__
-+
-+#define CSR_MIPSCONFIG7		0x7d7
-+#define CSR_PMACFG0			0x7e0
-+
-+#define MHARTID_HART_SHIFT	0
-+#define MHARTID_HART_MASK	0xf
-+#define MHARTID_CORE_SHIFT	4
-+#define MHARTID_CORE_MASK	0xff
-+#define MHARTID_CLUSTER_SHIFT	16
-+#define MHARTID_CLUSTER_MASK	0xf
-+
-+#define MARCHID_UARCH_SHIFT	0
-+#define MARCHID_UARCH_MASK	0xff
-+#define MARCHID_CLASS_SHIFT	8
-+#define MARCHID_CLASS_MASK	0xff
-+#define MARCHID_CLASS_M		0
-+#define MARCHID_CLASS_I		1
-+#define MARCHID_CLASS_P		2
-+
-+#define CM_BASE_CORE_SHIFT	8
-+#define CM_BASE_CLUSTER_SHIFT	19
-+
-+#define P8700_TIMER_ADDR	0x16108050
-+
-+#define CCA_CACHE_ENABLE	0
-+#define CCA_BUFFER_CACHE	1
-+#define CCA_CACHE_DISABLE	2
-+#define CCA_UNCACHE_ACC		3
-+#define PMA_SPECULATION		(0x1 << 3)
-+
-+#define L1_I_CACHE      0
-+#define L1_D_CACHE      1
-+#define L3_CACHE        2
-+#define L2_CACHE        3
-+
-+#define HIT_INVALIDATE          4
-+#define HIT_WRITEBACK_INV       5
-+
-+#define HIT_INVALIDATE_D        ((HIT_INVALIDATE << 2) | L1_D_CACHE)
-+#define HIT_INVALIDATE_SD       ((HIT_INVALIDATE << 2) | L2_CACHE)
-+#define HIT_WRITEBACK_INV_D     ((HIT_WRITEBACK_INV << 2) | L1_D_CACHE)
-+#define HIT_WRITEBACK_INV_SD    ((HIT_WRITEBACK_INV << 2) | L2_CACHE)
-+
-+#define L1D_LINE_SIZE_SHIFT	10
-+#define L1D_LINE_SIZE_MASK	0x7
-+
-+#define GCR_L2_CONFIG	0x16100130
-+#define L2_LINE_SIZE_SHIFT	8
-+#define L2_LINE_SIZE_MASK	0xf
-+
-+#define PMP_R			0x01
-+#define PMP_W			0x02
-+#define PMP_X			0x04
-+#define PMP_TOR			0x8
-+#define PMP_NA4			0x10
-+#define PMP_NAPOT		0x18
-+
-+#define CM_BASE			0x16100000
-+#define CPC_BASE		(CM_BASE + 0x8000)
-+
-+/* CPC Block offsets */
-+#define CPC_OFF_LOCAL		0x2000
-+
-+#define CPC_PWRUP_CTL		0x0030
-+
-+#define CPC_SYS_CONFIG		0x0140
-+
-+#define CPC_Cx_CMD		0x0000
-+#define CPC_Cx_CMD_RESET	0x4
-+
-+#define P8700_GCR_C0_COH_EN	0x20f8
-+#define P8700_GCR_C1_COH_EN	0x21f8
-+#define P8700_GCR_C2_COH_EN	0x22f8
-+#define P8700_GCR_C3_COH_EN	0x23f8
-+#define P8700_GCR_C4_COH_EN	0x24f8
-+#define P8700_GCR_C5_COH_EN	0x25f8
-+
-+#define GCR_CL_COH_EN		0x2008
-+#define GCR_CL_COH_EN_EN	(0x1 << 0)
-+#define GCR_BASE_OFFSET		0x0008
-+#define GIC_BASE_OFFSET		0x0080
-+#define CPC_BASE_OFFSET		0x0088
-+#define ENABLE			0x1
-+#define COUNT_STOP		(0x1 << 28)
-+#define GIC_LOCAL_SECTION_OFS	0x8000
-+#define GIC_VL_MASK		0x08
-+#define GIC_VL_RMASK		0x0c
-+#define GIC_VL_SMASK		0x10
-+#define GIC_VL_COMPARE_MAP	0x44
-+
-+#define INDEXED(op, reg, idx, offset, base) \
-+	li	idx, offset	;\
-+	add	idx, idx, base	;\
-+	op	reg, (idx)
-+
-+#define BOSTON_PLAT_BASE	0x17ffd000
-+#define BOSTON_PLAT_DDR3STAT	(BOSTON_PLAT_BASE + 0x14)
-+#define BOSTON_PLAT_DDR3STAT_CALIB	(0x1 << 2)
-+#define BOSTON_PLAT_NOCPCIE0ADDR        (BOSTON_PLAT_BASE + 0x3c)
-+#define BOSTON_PLAT_NOCPCIE1ADDR        (BOSTON_PLAT_BASE + 0x40)
-+#define BOSTON_PLAT_NOCPCIE2ADDR        (BOSTON_PLAT_BASE + 0x44)
-+
-+#endif /* __P8700_H__ */
-diff --git a/board/mips/boston-riscv/Kconfig b/board/mips/boston-riscv/Kcon=
-fig
-new file mode 100644
-index 00000000000..68c5fc50489
---- /dev/null
-+++ b/board/mips/boston-riscv/Kconfig
-@@ -0,0 +1,43 @@
-+if TARGET_MIPS_BOSTON
-+
-+config SYS_BOARD
-+	default "boston-riscv"
-+
-+config SYS_VENDOR
-+	default "mips"
-+
-+config SYS_CONFIG_NAME
-+	default "boston-riscv"
-+
-+config SYS_CPU
-+	default "p8700"
-+
-+config BOARD_SPECIFIC_OPTIONS
-+    def_bool y
-+    select P8700_RISCV
-+    imply SYS_NS16550
-+
-+config SYS_CACHELINE_SIZE
-+    default 64
-+
-+config SYS_SDRAM_BASE
-+    hex
-+    default 0x80000000
-+
-+config SYS_INIT_SP_ADDR
-+    hex
-+    default 0x80200000
-+
-+config STANDALONE_LOAD_ADDR
-+    hex
-+    default 0x80200000
-+
-+config SYS_MAX_FLASH_BANKS_DETECT
-+    bool
-+    default y
-+
-+config PHY_REALTEK
-+    bool
-+    default y
-+
-+endif
 diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/=
 MAINTAINERS
-new file mode 100644
-index 00000000000..e350121395e
---- /dev/null
+index e350121395e..bc59a628c79 100644
+--- a/board/mips/boston-riscv/MAINTAINERS
 +++ b/board/mips/boston-riscv/MAINTAINERS
-@@ -0,0 +1,9 @@
-+BOSTON-RISCV BOARD
-+M:	Chao-ying Fu <cfu@mips.com>
-+S:	Maintained
-+F:	board/mips/boston-riscv/
-+F:	include/configs/boston-riscv.h
-+F:  arch/riscv/cpu/p8700/
-+F:  arch/riscv/include/asm/arch-p8700/
-+F:  configs/boston-p8700_defconfig
-+F:  arch/riscv/dts/boston-p8700.dts
-diff --git a/board/mips/boston-riscv/Makefile b/board/mips/boston-riscv/Mak=
-efile
-new file mode 100644
-index 00000000000..9032e2ad6bb
---- /dev/null
-+++ b/board/mips/boston-riscv/Makefile
-@@ -0,0 +1,8 @@
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Copyright (C) 2016 Imagination Technologies
+@@ -7,3 +7,4 @@ F:  arch/riscv/cpu/p8700/
+ F:  arch/riscv/include/asm/arch-p8700/
+ F:  configs/boston-p8700_defconfig
+ F:  arch/riscv/dts/boston-p8700.dts
++F:  drivers/gpio/eg20t-gpio.c
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index e11109fb56d..3a45c1e1158 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -731,3 +731,10 @@ config SPL_ADP5585_GPIO
+ 	  Support ADP5585 GPIO expander in SPL.
+=20
+ endif
 +
-+obj-y +=3D checkboard.o
-+obj-y +=3D lowlevel_init.o
-+obj-y +=3D boston-riscv.o
-+obj-y +=3D reset.o
-diff --git a/board/mips/boston-riscv/boston-lcd.h b/board/mips/boston-riscv=
-/boston-lcd.h
++config EG20T_GPIO
++        bool "Intel EG20T GPIO driver"
++        depends on DM_GPIO && DM_PCI
++        help
++          Enable this to support the GPIO controller found in the Intel EG=
+20T
++          Platform Controller Hub.
+diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+index d64c14db5cf..23b18401f9a 100644
+--- a/drivers/gpio/Makefile
++++ b/drivers/gpio/Makefile
+@@ -81,3 +81,4 @@ obj-$(CONFIG_SLG7XL45106_I2C_GPO)	+=3D gpio_slg7xl45106.o
+ obj-$(CONFIG_FTGPIO010)		+=3D ftgpio010.o
+ obj-$(CONFIG_$(PHASE_)ADP5585_GPIO)	+=3D adp5585_gpio.o
+ obj-$(CONFIG_RZG2L_GPIO)	+=3D rzg2l-gpio.o
++obj-$(CONFIG_EG20T_GPIO)	+=3D eg20t-gpio.o
+diff --git a/drivers/gpio/eg20t-gpio.c b/drivers/gpio/eg20t-gpio.c
 new file mode 100644
-index 00000000000..5f5cd0fe126
+index 00000000000..d41ca4bfb17
 --- /dev/null
-+++ b/board/mips/boston-riscv/boston-lcd.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/drivers/gpio/eg20t-gpio.c
+@@ -0,0 +1,138 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2016 Imagination Technologies
 + */
 +
-+#ifndef __BOARD_BOSTON_LCD_H__
-+#define __BOARD_BOSTON_LCD_H__
++#include <dm.h>
++#include <errno.h>
++#include <pci.h>
++#include <asm/io.h>
++#include <asm/gpio.h>
++#include <log.h>
 +
-+/**
-+ * lowlevel_display() - Display a message on Boston's LCD
-+ * @msg: The string to display
-+ *
-+ * Display the string @msg on the 7 character LCD display of the Boston bo=
-ard.
-+ * This is typically used for debug or to present some form of status
-+ * indication to the user, allowing faults to be identified when things go
-+ * wrong early enough that the UART isn't up.
-+ */
-+void lowlevel_display(const char msg[static 8]);
++enum {
++	REG_IEN		=3D 0x00,
++	REG_ISTATUS	=3D 0x04,
++	REG_IDISP	=3D 0x08,
++	REG_ICLR	=3D 0x0c,
++	REG_IMASK	=3D 0x10,
++	REG_IMASKCLR	=3D 0x14,
++	REG_PO		=3D 0x18,
++	REG_PI		=3D 0x1c,
++	REG_PM		=3D 0x20,
++};
 +
-+#endif /* __BOARD_BOSTON_LCD_H__ */
-diff --git a/board/mips/boston-riscv/boston-regs.h b/board/mips/boston-risc=
-v/boston-regs.h
-new file mode 100644
-index 00000000000..4d5ea8833ab
---- /dev/null
-+++ b/board/mips/boston-riscv/boston-regs.h
-@@ -0,0 +1,38 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2016 Imagination Technologies
-+ */
++struct eg20t_gpio_priv {
++	void *base;
++};
 +
-+#ifndef __BOARD_BOSTON_REGS_H__
-+#define __BOARD_BOSTON_REGS_H__
-+
-+#ifndef BOSTON_PLAT_BASE
-+#define BOSTON_PLAT_BASE		(0x17ffd000)
-+#endif
-+#define BOSTON_LCD_BASE			(0x17fff000)
-+
-+/*
-+ * Platform Register Definitions
-+ */
-+#define BOSTON_PLAT_CORE_CL		(BOSTON_PLAT_BASE + 0x04)
-+
-+#define BOSTON_PLAT_SOFT_RST		(BOSTON_PLAT_BASE + 0x10)
-+#define BOSTON_PLAT_SOFT_RST_SYSTEM	(0x1 << 4)
-+
-+#define BOSTON_PLAT_DDR3STAT		(BOSTON_PLAT_BASE + 0x14)
-+#define BOSTON_PLAT_DDR3STAT_CALIB	(0x1 << 2)
-+
-+#define BOSTON_PLAT_BUILDCFG0           (BOSTON_PLAT_BASE + 0x34)
-+#define BOSTON_PLAT_BUILDCFG0_IOCU     (0x1 << 0)
-+#define BOSTON_PLAT_BUILDCFG0_PCIE0    (0x1 << 1)
-+#define BOSTON_PLAT_BUILDCFG0_PCIE1    (0x1 << 2)
-+#define BOSTON_PLAT_BUILDCFG0_PCIE2    (0x1 << 3)
-+#define BOSTON_PLAT_BUILDCFG0_CFG_LTR  (0xf << 4)
-+#define BOSTON_PLAT_BUILDCFG0_CFG_NUM  (0xff << 8)
-+#define BOSTON_PLAT_BUILDCFG0_DP       (0x1 << 24)
-+#define BOSTON_PLAT_BUILDCFG0_DP_MULT  (0xf << 28)
-+
-+#define BOSTON_PLAT_DDRCONF0		(BOSTON_PLAT_BASE + 0x38)
-+#define BOSTON_PLAT_DDRCONF0_SIZE	(0xf << 0)
-+
-+#endif /* __BOARD_BOSTON_REGS_H__ */
-diff --git a/board/mips/boston-riscv/boston-riscv.c b/board/mips/boston-ris=
-cv/boston-riscv.c
-new file mode 100644
-index 00000000000..e5cd6c42cf7
---- /dev/null
-+++ b/board/mips/boston-riscv/boston-riscv.c
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2016 Imagination Technologies
-+ */
-+
-+int board_init(void)
++static int eg20t_gpio_get_value(struct udevice *dev, unsigned int offset)
 +{
++	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
++	u32 pm, pval;
++
++	pm =3D readl(priv->base + REG_PM);
++	if ((pm >> offset) & 0x1)
++		pval =3D readl(priv->base + REG_PO);
++	else
++		pval =3D readl(priv->base + REG_PI);
++
++	return (pval >> offset) & 0x1;
++}
++
++static int eg20t_gpio_set_value(struct udevice *dev, unsigned int offset,
++				int value)
++{
++	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
++	u32 po;
++
++	po =3D readl(priv->base + REG_PO);
++	if (value)
++		po |=3D 1 << offset;
++	else
++		po &=3D ~(1 << offset);
++	writel(po, priv->base + REG_PO);
 +	return 0;
 +}
-diff --git a/board/mips/boston-riscv/checkboard.c b/board/mips/boston-riscv=
-/checkboard.c
-new file mode 100644
-index 00000000000..cc04bc47803
---- /dev/null
-+++ b/board/mips/boston-riscv/checkboard.c
-@@ -0,0 +1,43 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2016 Imagination Technologies
-+ */
 +
-+#include <init.h>
-+#include <asm/io.h>
-+#include "boston-lcd.h"
-+#include "boston-regs.h"
-+#include <asm/arch-p8700/p8700.h>
-+
-+int checkboard(void)
++static int eg20t_gpio_direction_input(struct udevice *dev, unsigned int of=
+fset)
 +{
-+	u32 changelist, cfg, core, uarch;
-+	u64 marchid;
++	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
++	u32 pm;
 +
-+	lowlevel_display("U-boot  ");
++	pm =3D readl(priv->base + REG_PM);
++	pm &=3D ~(1 << offset);
++	writel(pm, priv->base + REG_PM);
++	return 0;
++}
 +
-+	printf("Board: Mips Boston RISC-V\n");
++static int eg20t_gpio_direction_output(struct udevice *dev, unsigned int o=
+ffset,
++				       int value)
++{
++	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
++	u32 pm;
 +
-+	changelist =3D __raw_readl((uint32_t *)BOSTON_PLAT_CORE_CL);
-+	if (changelist > 1) {
-+		asm volatile ("csrr %0, marchid" : "=3Dr"(marchid)::);
-+		core =3D (marchid >> MARCHID_CLASS_SHIFT) & MARCHID_CLASS_MASK;
-+		uarch =3D (marchid >> MARCHID_UARCH_SHIFT) & MARCHID_UARCH_MASK;
++	pm =3D readl(priv->base + REG_PM);
++	pm |=3D 1 << offset;
++	writel(pm, priv->base + REG_PM);
 +
-+		printf("Core:  class%x uarch%x cl%x", core, uarch, changelist);
++	return eg20t_gpio_set_value(dev, offset, value);
++}
 +
-+		cfg =3D __raw_readl((uint32_t *)BOSTON_PLAT_BUILDCFG0);
-+		if (cfg & BOSTON_PLAT_BUILDCFG0_CFG_NUM)
-+			printf(" config %u",
-+			       (cfg & BOSTON_PLAT_BUILDCFG0_CFG_NUM) >> 8);
-+		if (cfg & BOSTON_PLAT_BUILDCFG0_CFG_LTR)
-+			printf("%c",
-+			       'a' + ((cfg & BOSTON_PLAT_BUILDCFG0_CFG_LTR) >> 4) - 1);
-+		if (cfg & BOSTON_PLAT_BUILDCFG0_DP)
-+			printf(", x%u debug port",
-+			       (cfg & BOSTON_PLAT_BUILDCFG0_DP_MULT) >> 28);
-+		printf("\n");
++static int eg20t_gpio_get_function(struct udevice *dev, unsigned int offse=
+t)
++{
++	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
++	u32 pm;
++
++	pm =3D readl(priv->base + REG_PM);
++
++	if ((pm >> offset) & 0x1)
++		return GPIOF_OUTPUT;
++
++	return GPIOF_INPUT;
++}
++
++static const struct dm_gpio_ops eg20t_gpio_ops =3D {
++	.direction_input	=3D eg20t_gpio_direction_input,
++	.direction_output	=3D eg20t_gpio_direction_output,
++	.get_value		=3D eg20t_gpio_get_value,
++	.set_value		=3D eg20t_gpio_set_value,
++	.get_function		=3D eg20t_gpio_get_function,
++};
++
++static int eg20t_gpio_probe(struct udevice *dev)
++{
++	struct eg20t_gpio_priv *priv =3D dev_get_priv(dev);
++	struct gpio_dev_priv *uc_priv =3D dev->uclass_priv;
++
++	priv->base =3D dm_pci_map_bar(dev, PCI_BASE_ADDRESS_1, PCI_REGION_MEM);
++	if (!priv->base) {
++		debug("failed to map GPIO registers\n");
++		return -EINVAL;
 +	}
 +
++	uc_priv->gpio_count =3D 12;
++	uc_priv->bank_name =3D "eg20t";
 +	return 0;
 +}
-diff --git a/board/mips/boston-riscv/config.mk b/board/mips/boston-riscv/co=
-nfig.mk
-new file mode 100644
-index 00000000000..c1e242f1088
---- /dev/null
-+++ b/board/mips/boston-riscv/config.mk
-@@ -0,0 +1,15 @@
-+# SPDX-License-Identifier: GPL-2.0+
 +
-+quiet_cmd_srec_cat =3D SRECCAT $@
-+      cmd_srec_cat =3D srec_cat -output $@ -$2 \
-+			$< -binary \
-+			-fill 0x00 -within $< -binary -range-pad 16 \
-+			-offset $3
++static const struct udevice_id eg20t_gpio_ids[] =3D {
++	{ .compatible =3D "intel,eg20t-gpio" },
++	{ }
++};
 +
-+u-boot.mcs: u-boot.bin
-+	$(call cmd,srec_cat,intel,0x7c00000)
++U_BOOT_DRIVER(eg20t_gpio) =3D {
++	.name	=3D "eg20t-gpio",
++	.id	=3D UCLASS_GPIO,
++	.of_match =3D eg20t_gpio_ids,
++	.probe	=3D eg20t_gpio_probe,
++	.priv_auto_alloc_size =3D sizeof(struct eg20t_gpio_priv),
++	.ops	=3D &eg20t_gpio_ops,
++};
 +
-+# if srec_cat is present build u-boot.mcs by default
-+has_srec_cat =3D $(call try-run,srec_cat -VERSion,y,n)
-+INPUTS-$(has_srec_cat) +=3D u-boot.mcs
-+CLEAN_FILES +=3D u-boot.mcs
-diff --git a/board/mips/boston-riscv/lowlevel_init.S b/board/mips/boston-ri=
-scv/lowlevel_init.S
-new file mode 100644
-index 00000000000..8fa85749e40
---- /dev/null
-+++ b/board/mips/boston-riscv/lowlevel_init.S
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2016 Imagination Technologies
-+ */
++static struct pci_device_id eg20t_gpio_supported[] =3D {
++	{ PCI_VENDOR_ID_INTEL, 0x8803 },
++	{ },
++};
 +
-+#include "boston-regs.h"
-+
-+.data
-+
-+msg_ddr_cal:	.ascii "DDR Cal "
-+msg_ddr_ok:	.ascii "DDR OK  "
-+
-+.text
-+
-+	.globl lowlevel_display
-+lowlevel_display:
-+	li	t0, BOSTON_LCD_BASE
-+	jr	ra
-diff --git a/board/mips/boston-riscv/reset.c b/board/mips/boston-riscv/rese=
-t.c
-new file mode 100644
-index 00000000000..911a051c3d3
---- /dev/null
-+++ b/board/mips/boston-riscv/reset.c
-@@ -0,0 +1,15 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2017 Imagination Technologies
-+ */
-+
-+#include <asm/io.h>
-+#include <linux/delay.h>
-+#include "boston-regs.h"
-+
-+void _machine_restart(void)
-+{
-+	writel(BOSTON_PLAT_SOFT_RST_SYSTEM, (void __iomem *)BOSTON_PLAT_SOFT_RST)=
-;
-+
-+	udelay(1000);
-+}
-diff --git a/configs/boston-p8700_defconfig b/configs/boston-p8700_defconfi=
-g
-new file mode 100644
-index 00000000000..3df7ffe50b3
---- /dev/null
-+++ b/configs/boston-p8700_defconfig
-@@ -0,0 +1,94 @@
-+CONFIG_RISCV=3Dy
-+CONFIG_SYS_TEXT_BASE=3D0x1fc00000
-+CONFIG_ENV_SIZE=3D0x40000
-+CONFIG_ENV_SECT_SIZE=3D0x40000
-+CONFIG_TARGET_MIPS_BOSTON=3Dy
-+CONFIG_DEFAULT_DEVICE_TREE=3D"boston-p8700"
-+
-+CONFIG_DISTRO_DEFAULTS=3Dy
-+CONFIG_FIT=3Dy
-+CONFIG_FIT_VERBOSE=3Dy
-+CONFIG_FIT_BEST_MATCH=3Dy
-+CONFIG_OF_STDOUT_VIA_ALIAS=3Dy
-+CONFIG_SYS_PROMPT=3D"boston # "
-+CONFIG_CMD_GREPENV=3Dy
-+CONFIG_CMD_MEMTEST=3Dy
-+CONFIG_SYS_MEMTEST_START=3D0x80000000
-+CONFIG_SYS_MEMTEST_END=3D0x90000000
-+CONFIG_BOOTDELAY=3D-1
-+
-+CONFIG_NR_DRAM_BANKS=3D1
-+CONFIG_ARCH_RV64I=3Dy
-+CONFIG_DISPLAY_CPUINFO=3Dy
-+CONFIG_DISPLAY_BOARDINFO=3Dy
-+#CONFIG_CMD_BOOTEFI_SELFTEST=3Dy
-+#CONFIG_CMD_NVEDIT_EFI=3Dy
-+CONFIG_CMD_MII=3Dy
-+# CONFIG_OF_PRIOR_STAGE=3Dy
-+CONFIG_DM_MTD=3Dy
-+CONFIG_SMP=3Dn
-+CONFIG_XIP=3Dy
-+CONFIG_CLK_BOSTON=3Dy
-+CONFIG_RISCV_ISA_C=3Dn
-+CONFIG_SHOW_REGS=3Dy
-+CONFIG_SYS_NS16550=3Dy
-+
-+CONFIG_CMD_PCI=3Dy
-+CONFIG_CMD_SNTP=3Dy
-+CONFIG_CMD_DNS=3Dy
-+CONFIG_CMD_LINK_LOCAL=3Dy
-+CONFIG_CMD_TIME=3Dy
-+CONFIG_CMD_EXT4_WRITE=3Dy
-+CONFIG_ENV_IS_IN_FLASH=3Dy
-+CONFIG_ENV_ADDR=3D0x1ffc0000
-+CONFIG_NET_RANDOM_ETHADDR=3Dy
-+CONFIG_MTD=3Dy
-+CONFIG_MTD_NOR_FLASH=3Dy
-+CONFIG_FLASH_CFI_DRIVER=3Dy
-+CONFIG_CFI_FLASH=3Dy
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=3Dy
-+CONFIG_SYS_FLASH_USE_PROTECTION=3Dy
-+CONFIG_SYS_FLASH_CFI=3Dy
-+CONFIG_SYS_FLASH_PROTECTION=3Dy
-+CONFIG_DM_ETH=3Dy
-+CONFIG_PCH_GBE=3Dy
-+CONFIG_PCI=3Dy
-+CONFIG_DM_PCI=3Dy
-+CONFIG_PCI_XILINX=3Dy
-+CONFIG_LZ4=3Dy
-+CONFIG_CLK=3Dy
-+CONFIG_EG20T_GPIO=3Dy
-+
-+CONFIG_MMC=3Dy
-+CONFIG_HUSH_PARSER=3Dy
-+CONFIG_CMD_CPU=3Dy
-+CONFIG_CMD_MMC=3Dy
-+CONFIG_CMD_DHCP=3Dy
-+CONFIG_CMD_PING=3Dy
-+CONFIG_CMD_EXT4=3Dy
-+CONFIG_CMD_FAT=3Dy
-+CONFIG_CMD_FS_GENERIC=3Dy
-+CONFIG_OF_EMBED=3Dy
-+CONFIG_CPU=3Dy
-+CONFIG_MMC_SDHCI=3Dy
-+CONFIG_MMC_PCI=3Dy
-+
-+CONFIG_UNIT_TEST=3Dy
-+CONFIG_UT_LIB=3Dn
-+CONFIG_UT_LIB_ASN1=3Dn
-+CONFIG_UT_LOG=3Dn
-+CONFIG_UT_TIME=3Dy
-+CONFIG_UT_UNICODE=3Dn
-+CONFIG_UT_ENV=3Dn
-+CONFIG_UT_OVERLAY=3Dn
-+
-+CONFIG_SYS_LOAD_ADDR=3D0x80000000
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
-+CONFIG_TEXT_BASE=3D0x1fc00000
-+CONFIG_SYS_MALLOC_LEN=3D0x00800000
-+CONFIG_SYS_BOOTM_LEN=3D0x04000000
-+CONFIG_SYS_MAX_FLASH_SECT=3D1024
-+CONFIG_PHY_ANEG_TIMEOUT=3D40000
-+CONFIG_NET_RETRY_COUNT=3D10
-+CONFIG_ENV_CALLBACK_LIST_STATIC=3D"io.coherent:io_coherent,"
-diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-index 19aa2ffa539..449e72daa23 100644
---- a/drivers/clk/Kconfig
-+++ b/drivers/clk/Kconfig
-@@ -49,7 +49,7 @@ config CLK_BCM6345
- 	  clocks on BCM6345 SoCs. HW has no rate changing capabilities.
-=20
- config CLK_BOSTON
--	def_bool y if TARGET_BOSTON
-+	def_bool y if TARGET_BOSTON || TARGET_MIPS_BOSTON
- 	depends on CLK
- 	select REGMAP
- 	select SYSCON
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global=
-_data.h
-index 506ee51cdb0..7b25de7bb68 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -702,6 +702,11 @@ enum gd_flags {
- 	 * drivers shall not be called.
- 	 */
- 	GD_FLG_HAVE_CONSOLE =3D 0x8000000,
-+	/**
-+	 * @GD_FLG_COHERENT_DMA: DMA is cache-coherent.
-+	 *
-+	 */
-+	GD_FLG_COHERENT_DMA =3D 0x10000000,
- };
-=20
- #endif /* __ASSEMBLY__ */
-diff --git a/include/configs/boston-riscv.h b/include/configs/boston-riscv.=
-h
-new file mode 100644
-index 00000000000..3b3e2567214
---- /dev/null
-+++ b/include/configs/boston-riscv.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+ */
-+
-+#ifndef __CONFIG_BOSTON_RISCV_H
-+#define __CONFIG_BOSTON_RISCV_H
-+
-+#include <linux/sizes.h>
-+
-+#endif /* __CONFIG_BOSTON_RISCV_H */
++U_BOOT_PCI_DEVICE(eg20t_gpio, eg20t_gpio_supported);
 --=20
 2.34.1
