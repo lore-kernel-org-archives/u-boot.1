@@ -4,90 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AFFFC5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:25:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0485C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01E0482A76;
-	Tue,  3 Jun 2025 18:25:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6C8082AA7;
+	Tue,  3 Jun 2025 18:42:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YObWiMtM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oPi/aZNd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4909582AA7; Tue,  3 Jun 2025 18:25:28 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 27B6C82AAA; Tue,  3 Jun 2025 18:42:36 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CEE7803DF
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:25:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D688682A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:42:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a363d15c64so4078083f8f.3
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:25:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-441d437cfaaso40543525e9.1
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:42:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748967925; x=1749572725; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5hRt/RjB7GRkqQ+XHHtbd2Ug8yK5MWx+ahcN8suezMA=;
- b=YObWiMtMI3OCjdyZaqOXIMOXNwxBZHIKWXkDGVCiaxjUSN7soxe4VdmnFnm3KJSNc6
- SCy3SSmJDH+9xbgPNQgCEDSIj/79HEzbVxZk/jIpjxHtpNw/GruD/MZCs0wS0zwqfZNL
- Uc+nrPklCvNqt6aowpA45/lRmsC3S1aVdauEKW69hfElC999cUDkTXH8rW2qY+VtcnQn
- 99l4CbkalsKUWUMuNuKdDs8UpGND+NJKyIgOVRn0LhTZWPk08KzrcYZTz5MduEdfOcyU
- 6vCN9VNiKT+5uCsEZWyvwgRt1p4BEW5zOYUlidskAKCP3b1OnW+rtxABZOsBVNaLnSf+
- n9ig==
+ d=linaro.org; s=google; t=1748968953; x=1749573753; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=RRErAR5/zSrj4R4AkHstbTsf2/iJCIAeBQ7xXGpYcxk=;
+ b=oPi/aZNdxc3Jvm8mumtCgeb2LO4jZKZIw3KompENLEW+3j5cWDenVIEj1YtL0miPwi
+ B0NmBSh65hk0d2qzsT2/pQ99VqPma742DWU8rLPEqABrTD+xrjAvGI4zSxhUMpSJwwNh
+ Y/k6fNl6qlc54EnAo6LEPi++ibQM0RL/LuXnr8XwEEOZyD+il0uvrQCNKVPHwjk+XHRy
+ Cxv3/BKlbLPdz3hjxFtGgllse9ACHHIOjZ9TWEy+jZ919XfhKcJxs8Gkusa0KFIMsXT6
+ DLrfAsqfdvhMXvK5m137gQbcA6STmhRh5tvs7X/zwrXCLv2bH6pRZ8FErWQnID9efCoB
+ sGXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748967925; x=1749572725;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5hRt/RjB7GRkqQ+XHHtbd2Ug8yK5MWx+ahcN8suezMA=;
- b=UODJrVKJoORjak9nRhx6m5/r31dXfO3ebBwnmjVTRI+0OGnu+3/mV2/NBeL3FpUGj5
- cGSToDl4u5a89kbgBg+kh8O2NajawWToX4PCTX/e43jYp9iBoz2jLxUwFFSC2JY9gMFO
- z9jofshTo2YgH/8i5FjfqF4N7nioifneexDvoPDcozcItc5vTCwNaMM89oWItx/cGo+M
- s2fGPMpku9bfdBZtJEjXYLsriAMg/hQyM7mh6+qiTehSWYO1912eJwOVlkacO0n0jefo
- iNB4jgCxXqqpkgwI+B1EiiOTJVO3zH1DedBxBcidkMPRfErJpEjEmWA5GRkDiF93Zxcr
- IjSA==
+ d=1e100.net; s=20230601; t=1748968953; x=1749573753;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=RRErAR5/zSrj4R4AkHstbTsf2/iJCIAeBQ7xXGpYcxk=;
+ b=R+c9YPp0sd25M+wtChYAZGLsnFvJsGa33H4JvPrWPu36o2vmK2zspqPrPLs2JtgpLu
+ +vDpDhSDBpJPov58Ef/xAB9pM7Sc6wnzoj5y6pE4cuK2mLUffAS9Wg3WZB7RQ2VN6HPw
+ lD6tAUA5xxftQOMgGVKq1yl6ymD1ovXBt3KI1brIu8rA2/6PGa8QifWO8DphUAMEoZEh
+ Anp0qcY3QAkUrE/FEXSX+dtZse/lebN6IdvR9/O5MHlzEZqiovbsPD61XuWtGtS9sEq6
+ 8uZmmTMqW4AHoXCTWxz3ip3gZ3Y50fzEPtANs2NARC3o2gtKKdUMTwnZr7Ed5/hA0g1s
+ VRMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPll4G4THGX+0uJdot8og+wd3Qtmw6ciKKaZObj2VFkpb+k7bInZ0b6NvfZV6RlKc42XldRgY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzp7C1DjTqOhZDaS47byYJsWcWqwTzhkFqjFN9SFYTwDRS4SlSD
- QHrM2KfW3zldTZr7T4Bi0dpH1I8HRXvikuDRL9g45OpEy8TFrkQA7i6g37NeSqzH1YY=
-X-Gm-Gg: ASbGncs3+bbmvIxNaLrjTHx1b2I6M5h4Dujcj2Z/XkDQM1VW4QAt/EtuwOdDpdKTmnw
- An8DNUBEy3m8hwP/bNeOOgkb6D8xpuvbPzbciYnz7LwUfg64qV6C2GvOh+tw7R28iwq1+j1Sdjv
- g//qRjqPOhU1dHedTHcBQ7RsCqlx97CzhaH+xuZCfFo6uXRZQF3ugiSNwXCengFImTo9zp2tws4
- q8GSyO0k/XEKUaGC4Gt4WkOfr2SVPnZv/g48olnm0wt/hSXPz7kjqg3GONlCWk9835TCmfZnqgv
- lx84aFVx7LQB8hFBAFlhjQq1f4NcHY+tKaRu7dlKQ8Oqm4xpTJGypx2GffQYVp88O7Aa1Wod38L
- z/nAjwaN7uuS+HK+kbwjToT7UXg==
-X-Google-Smtp-Source: AGHT+IEiVb2Nj36H58mBUMEMpoWGf5Evgk8IaD6/SEmoAz1ueF1fwaO3dABCRLektPMcsvPzCxwn4w==
-X-Received: by 2002:a05:6000:188b:b0:3a4:e393:11e2 with SMTP id
- ffacd0b85a97d-3a4f7a366bbmr15108172f8f.34.1748967924938; 
- Tue, 03 Jun 2025 09:25:24 -0700 (PDT)
-Received: from ?IPV6:2a01:170:117e:fc:e089:f4a9:4c4d:e359?
- ([2a01:170:117e:fc:e089:f4a9:4c4d:e359])
+ AJvYcCWz/LPe9NN4O3voXErOzgzVbOoMX3JwVanhvCVlYewYwsbzVNZa3UhV1J0+JL7+HLBzL/myQO4=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywidy0JepHPzJ0IYlo8B2obIL3HJSmJXqZxV+vQ2GjRuP/NYLf1
+ ckCqkKfK188ZrT+QZcWt5cx09QGishFFIuP8bCN3tGUDUgW8WWq8+xAAOgdKumzpHaLQYmo0483
+ +6pQP
+X-Gm-Gg: ASbGncsFwO3ZC3BA6yL3BpTnWhBlm3Pndamp2WSfPSEZKcx5Ye0EDQ/1HtyE3A8IPz8
+ rvXkgriJrv7PtJxUBNDFHFLzj0Vev3kSvExLnExfnCpA6fACpcJhRyCk9XYE0D3CyHLM3pQ0nr4
+ t6VlyUxHDuzj39gQd382NM2WMdOMG/SisfC855YFuZh2tu6D1X7LAWPkZqqhEULbWJ2xC8LzWbp
+ Lss+TRd1SjuJFpDSydNnNaB4w4fr3qTTnr8dWfzcd21buqYlArAmbn3WVSjAgQ1KmLtLxhLXYnX
+ q2vFY7/wx31+gL+5zjDSSJErH1hccFpiAyab9tw6VQ/3qp+NuE00l72OZLsTYkG3cWSFn8QWSwP
+ lYHViDKZYsvXCQfBN/vPLoAcbHA==
+X-Google-Smtp-Source: AGHT+IG899CwTbJU5TaPRH42acCwhIGkTWy5QeLc1ph+V4zrJeBBCNwPVDK+QccZHroq6k9XKdIatA==
+X-Received: by 2002:a05:600c:3b8b:b0:442:e9eb:1b48 with SMTP id
+ 5b1f17b1804b1-450d8876132mr146327415e9.24.1748968953279; 
+ Tue, 03 Jun 2025 09:42:33 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:563:3654:17de:c930?
+ ([2a01:e0a:3d9:2080:563:3654:17de:c930])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4efe6c8b4sm19163360f8f.36.2025.06.03.09.25.23
+ 5b1f17b1804b1-451ee4efc29sm2417235e9.12.2025.06.03.09.42.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Jun 2025 09:25:24 -0700 (PDT)
-Message-ID: <e6bd9135-3ab2-4eef-81c2-f08f1197247b@linaro.org>
-Date: Tue, 3 Jun 2025 18:25:22 +0200
+ Tue, 03 Jun 2025 09:42:32 -0700 (PDT)
+Message-ID: <46e481a8-7347-43d9-9aac-0f5ecc8b5e24@linaro.org>
+Date: Tue, 3 Jun 2025 18:42:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/5] Introduce support for QCS615 SoC based Platform
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, quic_varada@quicinc.com,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- lukma@denx.de, seanga2@gmail.com, ilias.apalodimas@linaro.org,
- me@samcday.com, christopher.obbard@linaro.org, sughosh.ganu@linaro.org,
- sjg@chromium.org, lehmanju@devpi.de, bhupesh.linux@gmail.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250521035324.1182833-1-aswin.murugan@oss.qualcomm.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250521035324.1182833-1-aswin.murugan@oss.qualcomm.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2] pinctrl: qcom: handle reserved ranges
+To: Tom Rini <trini@konsulko.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250410-topic-sm8x50-pinctrl-reserved-ranges-v2-1-654488392b9a@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250410-topic-sm8x50-pinctrl-reserved-ranges-v2-1-654488392b9a@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,74 +125,26 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aswin, Varadaraja,
-
-Since we're expecting to do some more cleanup after adding all these 
-dragonwing platforms, would you be up for adding MAINTAINERS entries for 
-them? This way you'll actually get emails when there are changes 
-affecting them.
-
-My suggestion would be to add a MAINTAINERS file inside board/qualcomm 
-with something like the following:
-
-QUALCOMM DRAGONWING QCS615
-M:	Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-R:	Varadarajan Narayanan <quic_varada@quicinc.com>
-S:	Maintained
-F:	arch/arm/dts/qcs615-ride-u-boot.dtsi
-F:	configs/qcom_qcs615_defconfig
-F:	drivers/clk/qcom/clock-qcs615.c
-
-And repeat for each platform, set the maintainers and reviewers entries 
-as you see fit.
-
-I'll invite folks with an interest in other platforms to do the same.
-
-Thanks and regards,
-
-On 5/21/25 05:53, Aswin Murugan wrote:
-> These patches introduce the initial support code needed
-> for the Qualcomm QCS615 SoC IQ6 based Platform.
+On 10/04/2025 10:52, neil.armstrong@linaro.org wrote:
+> From: Caleb Connolly <caleb.connolly@linaro.org>
 > 
-> Please see [1] for SoC related details
+> Some Qualcomm boards feature reserved ranges of pins which are protected
+> by firmware. Attempting to read or write any registers associated with
+> these pins results the board resetting.
 > 
-> Thanks
-> Aswin
+> Add support for parsing these ranges from devicetree and ensure that the
+> pinctrl and GPIO drivers don't try to interact with these pins.
 > 
-> 1 - https://docs.qualcomm.com/bundle/publicresource/87-83838-1_REV_A_Qualcomm_IQ6_Series_Product_Brief.pdf
-> 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
-> Changes in v2:
-> - Replaced the "1" with BIT(0) in drivers/clk/qcom/clock-qcs615.c
-> - Link to v1: https://lore.kernel.org/u-boot/20250513110213.330495-1-aswin.murugan@oss.qualcomm.com/
-> ---
-> 
-> Aswin Murugan (5):
->    dts: qcs615-ride-u-boot.dtsi: Add memory entry to bootup
->    phy: qcom: Enable QMP UFS PHY driver for QCS615
->    clk/qcom: qcs615: Add GCC clock driver for QCS615
->    qcom_defconfig: Enable QCS615 clock driver
->    configs: add qcs615_defconfig
-> 
->   arch/arm/dts/qcs615-ride-u-boot.dtsi |  14 +++
->   configs/qcom_defconfig               |   1 +
->   configs/qcom_qcs615_defconfig        |  22 ++++
->   drivers/clk/qcom/Kconfig             |   8 ++
->   drivers/clk/qcom/Makefile            |   1 +
->   drivers/clk/qcom/clock-qcs615.c      | 163 +++++++++++++++++++++++++++
->   drivers/phy/qcom/phy-qcom-qmp-ufs.c  | 127 +++++++++++++++++++++
->   7 files changed, 336 insertions(+)
->   create mode 100644 arch/arm/dts/qcs615-ride-u-boot.dtsi
->   create mode 100644 configs/qcom_qcs615_defconfig
->   create mode 100644 drivers/clk/qcom/clock-qcs615.c
-> 
 
--- 
-Casey (she/they)
+Gentle ping !
 
+Neil
