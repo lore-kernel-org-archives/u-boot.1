@@ -4,83 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A18C5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 06:45:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2084AC5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 06:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B35B581E06;
-	Tue,  3 Jun 2025 08:45:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 409B381E06;
+	Tue,  3 Jun 2025 08:45:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a/xfPTBl";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08FA81E72; Tue,  3 Jun 2025 08:44:58 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ACE0281E72; Tue,  3 Jun 2025 08:45:42 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4643180F0E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 08:44:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F84880F0E
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 08:45:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4a43972dcd7so62795391cf.3
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 23:44:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748933095; x=1749537895; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Fnt5TX0MApGX2obe/HoAgCeNBh6hN4/g9EBMGOD5Ngg=;
- b=a/xfPTBlUDbP5g/CvWanf3v7DOsYRodAr+8Ti1uPDh9X2ZL8bIZsTVsCp6//ytz3At
- EuZFK3TRhMc6b070xSM1cr2cCcchtKowRFlFx9zKdpFAWQd4aK1HWAz5Q4SlwJSfo0tm
- wRGt0jtPMdHXQBBwXX1W3zWhchkZcyvQCRHU11gcSpW//zN1BqfRz4tcsVuG7O584wCw
- yv+5hYbiCgB8LyrN/bJyFvZ/InuUulDZIJVJxmXScmUvGnJXTqxUsSBeJTiuPxnWcL+6
- 9thoRAMg96A2iF1pqLZXwfDhTRgiuYYeqqLdh4K3XDSQkKp3HplIQ+YbozMtg3HNTNPE
- 1pcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748933095; x=1749537895;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Fnt5TX0MApGX2obe/HoAgCeNBh6hN4/g9EBMGOD5Ngg=;
- b=HP7UKwGx/Pp1pxO+11dGGrC14rNxuh9yX71sumCiWD1twfGKXMW1p8l+x8NFMSCqtP
- 0JyP+pEDni4dWyOER2lcdxGG3LFD4Qw41FfCrjsWQHsvu0/H6E5as9PZI9NfbLYzpQvO
- CX9huAnbKsbT5jniL4xmyoi/t9k41KM/aPnuzCna74PXc4TH/PEW+C4BPxInkOYUhKpn
- rQbIyNIlrofyHV0KXAHv6N71ygJ7DmsFSrsatl4wiuRuz38k42+J0Oupwwvkzpw8u7q+
- X8dcJsTwI6Fc3LyFd2a0lV9gu8w2Rzhz8PJrSJbEvSgyOxuRnPH4OaiMrVml7dHFhR36
- OZAQ==
-X-Gm-Message-State: AOJu0Yyw60G7s2hEbhXPkMJYcNZCKRb47WvoWH8BVy24EJ+G3DiEjzlE
- XtHPgxY2xHAJmdrYKeMvh2N3KfCSMiib9RVsB63oNoOuODJJm8ixJe0gHYQtp2C4uBDaXZ145Af
- 3oWzCVIglKmkBHouFkJl8YbkvVbTZh5+AV1JR9zs1+w==
-X-Gm-Gg: ASbGncvtdIeu7fGXhR6HSPOT0HwjChgmpDcKhAxt+1CBPy50Nhax61hQcrjUMhMtliG
- 7jmQV2Ic9MVUBsbnp7c7tcgqm7rWOWEE3u95PYhH0qnD9KbPHz8Ixt6O0ErVXp97vUEnb8ehtSh
- BKokj6NtyFdPHDkpcM17FxhyzKH/UD0+Gqzu5UefW9QCJFymY/0pEtQN4=
-X-Google-Smtp-Source: AGHT+IG0ZHkPWlrRr+yYFFwf7d11AipAtZiXWSB6C8DZwONQTRLEEYgCW89RX7x7PNw5Sq6BEJvtK43ZKDNpddMv62Y=
-X-Received: by 2002:a05:622a:17cc:b0:4a4:41e9:738e with SMTP id
- d75a77b69052e-4a4a5e8d9a2mr155028531cf.6.1748933095143; Mon, 02 Jun 2025
- 23:44:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 5536jTjq052659
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Tue, 3 Jun 2025 14:45:29 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Jun
+ 2025 14:45:29 +0800
+Date: Tue, 3 Jun 2025 14:45:21 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
+Subject: [PULL] u-boot-riscv/next
+Message-ID: <aD6aAdsMpatCgcIn@swlinux02>
 MIME-Version: 1.0
-References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
- <20250526091253.400802-3-sughosh.ganu@linaro.org>
- <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
- <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
-In-Reply-To: <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 3 Jun 2025 12:14:44 +0530
-X-Gm-Features: AX0GCFtOlCL81Dj4FYLUiGg7yBODLfhYlY0pxyObuignIl0C2rhLrglbslkYoUU
-Message-ID: <CADg8p977sXJRS1CM6Lnmep0_gc3jc9b3yFg1A-qkVn5Gswr_=Q@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
- API's
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 5536jTjq052659
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,98 +64,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 30 May 2025 at 15:41, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Fri, 30 May 2025 at 13:17, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > > +static phys_addr_t lmb_alloc(phys_size_t size)
-> > > +{
-> > > +       int ret;
-> > > +       phys_addr_t addr;
-> > > +
-> > > +       /* All memory regions allocated with a 2MiB alignment */
-> > > +       ret = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr, size, LMB_NONE);
-> > > +       if (ret)
-> > > +               return 0;
-> > > +
-> > > +       return addr;
-> > > +}
-> > > +
-> >
-> > I think we  need a better naming for these. Right now we have
-> > lmb_alloc() here and in tests, addr_alloc() in snapdragon code.
-> > I'd say either export them as API if you think they would be useful,
-> > or get rid of the wrappers.
->
-> I kept these functions as is to reduce the amount of change resulting
-> from introducing the API. Also, the newly introduced API has
-> parameters which are common across all the callers, which also was why
-> I kept a wrapper. This is especially true in the tests, where it would
-> be required to change the function names in a bunch of places without
-> much benefit.
->
-> >
-> > [...]
-> >
-> > > +static phys_addr_t lmb_alloc(phys_size_t size, ulong align)
-> > > +{
-> > > +       int err;
-> > > +       phys_addr_t addr;
-> > > +
-> > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, align, &addr, size, LMB_NONE);
-> > > +       if (err)
-> > > +               return 0;
-> >
-> >
-> > This tends to blow up in random ways. See
-> > commit 67be24906fe. TL;DR 0 is a valid address in some systems.
->
-> Yes, I see your point. I think the calling function will have to be
-> re-written such that the env variables get stored only when the API
-> returns successfully. Then at least the platform will not have an env
-> variable with some junk value.
+Hi Tom,
 
-Thinking about this a bit, I think in these two instances, returning a
-value of 0 might not be an issue if the DRAM memory does not start at
-0x0. Don't get me wrong, what you are suggesting is definitely
-correct. I am only thinking about increasing code size on these
-platforms if 0x0 is not a valid address, and moreover since the
-platforms were already setting 0x0 in case of an error. If it is okay
-to increase code size on these platforms, I will change the calling
-function, such that the variable does not get set in case of an error.
-Maybe Casey and Mark can comment? Thanks.
+The following changes since commit d45b1d4ac94710f88902adc2173d7930700e2869:
 
--sughosh
+  Merge tag 'u-boot-dfu-next-20250602' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next (2025-06-02 08:43:10 -0600)
 
->
-> -sughosh
->
-> >
-> > > +
-> > > +       return addr;
-> > > +}
-> > > +
-> > > +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
-> > > +                                 phys_addr_t max_addr, u32 flags)
-> > > +{
-> > > +       int err;
-> > > +       phys_addr_t addr;
-> > > +
-> > > +       addr = max_addr;
-> > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
-> > > +       if (err)
-> > > +               return 0;
-> > > +
-> > > +       return addr;
-> > > +}
-> > > +
-> > >  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
-> > >
-> > >  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
-> > > --
-> > > 2.34.1
-> > >
-> >
-> > Cheers
-> > /Ilias
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+
+for you to fetch changes up to b911af6d60d3be570469b92df751874dc376336b:
+
+  MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer (2025-06-03 14:17:46 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26483
+----------------------------------------------------------------
+- board: Convert Lichee Pi 4A to use S-Mode proper U-Boot
+- RISC-V: configs: Raise SPL_SYS_MALLOC_SIZE to 8 MiB
+- driver: Add SD card support to the Beagle-V-Fire
+- MAINTAINERS: Add Yao Zi as maintainer for th1520
+----------------------------------------------------------------
+Eoin Dickson (2):
+      gpio: add PolarFire SoC GPIO and Core GPIO driver
+      spi: coreqspi: add xfer function for PolarFire SoC
+
+Heinrich Schuchardt (1):
+      configs: raise SPL_SYS_MALLOC_SIZE to 8 MiB on RISC-V
+
+Yao Zi (6):
+      riscv: cpu: th1520: Build spl.c for SPL only
+      riscv: cpu: th1520: Support cache enabling/disabling in M mode only
+      riscv: dts: th1520: Prepare binman configuration for loading OpenSBI
+      board: thead: licheepi4a: Run proper U-Boot in S-Mode
+      doc: thead: lpi4a: Update for S-Mode proper U-Boot support
+      MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer
+
+ MAINTAINERS                             |   7 ++
+ arch/riscv/cpu/th1520/Makefile          |   2 +-
+ arch/riscv/cpu/th1520/cache.c           |   2 +
+ arch/riscv/dts/thead-th1520-binman.dtsi |  32 +++++-
+ common/spl/Kconfig                      |   2 +-
+ configs/starfive_visionfive2_defconfig  |   1 -
+ configs/th1520_lpi4a_defconfig          |   2 +-
+ configs/xilinx_mbv32_defconfig          |   1 -
+ configs/xilinx_mbv32_smode_defconfig    |   1 -
+ configs/xilinx_mbv64_defconfig          |   1 -
+ configs/xilinx_mbv64_smode_defconfig    |   1 -
+ doc/board/thead/lpi4a.rst               | 125 ++++++--------------
+ drivers/gpio/Kconfig                    |   5 +
+ drivers/gpio/Makefile                   |   1 +
+ drivers/gpio/mpfs_gpio.c                | 198 ++++++++++++++++++++++++++++++++
+ drivers/spi/microchip_coreqspi.c        | 113 +++++++++++++++++-
+ 16 files changed, 391 insertions(+), 103 deletions(-)
+ create mode 100644 drivers/gpio/mpfs_gpio.c
+
+Best regards,
+Leo
