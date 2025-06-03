@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1939FC5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 08:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7EB9C5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 08:39:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98373820EB;
-	Tue,  3 Jun 2025 10:38:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4ED28820EB;
+	Tue,  3 Jun 2025 10:39:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VZCAS4oV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v2bgvfPn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B7382103; Tue,  3 Jun 2025 10:38:27 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 5EA54820EB; Tue,  3 Jun 2025 10:39:24 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70E1481E72
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 10:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2029B82103
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 10:39:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5538cNKi416881;
- Tue, 3 Jun 2025 03:38:23 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5538dJ3N470568;
+ Tue, 3 Jun 2025 03:39:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748939903;
- bh=4od1tSt4cHptgx4LaxI5yzgLviJPD55eoMcTwDyyjkY=;
+ s=ti-com-17Q1; t=1748939959;
+ bh=cRrYyusGrYShWauCYoN/dBEOKqrDsN8/rWr1rnN74S4=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=VZCAS4oVI8eEJCvpcGootdoVUpajxsKwVAS2EX4kfgzm90sNJvV8QXS2UXnYbJ/Md
- V93EHJf0ttiY8XycRFBj2MNOU73wl0t/lVP/1Y1rQHVUT5srtH9F6bq5SwREeJ4MXW
- 53TH+98B2w532y0/rzHCVIOCmPl+FZaUF7CZMpS4=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5538cNnb3614470
+ b=v2bgvfPnzEvBURFLv8h20Khsk0B4naJ748z0GrymRzMZ5TShJLdbFUe8U6Y/MEqnW
+ NQbwVzHoOGnsFgeyH+DicrgPDKju7oLEWSHgQf/P/wYz5eLRj3RLFO2BkMH3Q+9XPc
+ GZ7OXEKcK4EwayRL7wC4N7dZAoLp13gY2DmA4fjo=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5538dJsG3483842
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 3 Jun 2025 03:38:23 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 3 Jun 2025 03:39:19 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Jun 2025 03:38:22 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 03:39:19 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Jun 2025 03:38:22 -0500
+ Frontend Transport; Tue, 3 Jun 2025 03:39:19 -0500
 Received: from [10.24.69.37]
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
  (may be forged))
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5538cKVI080951;
- Tue, 3 Jun 2025 03:38:20 -0500
-Message-ID: <50971a76-0bdb-4fea-b22e-488ac3b7f9f1@ti.com>
-Date: Tue, 3 Jun 2025 14:08:19 +0530
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5538dG4x082315;
+ Tue, 3 Jun 2025 03:39:17 -0500
+Message-ID: <f6f648a9-8c60-4423-a0c1-6a01ed7e0549@ti.com>
+Date: Tue, 3 Jun 2025 14:09:16 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] firmware: ti_sci.c: Add a function to request DM
- metadata using ti_sci* calls
+Subject: Re: [PATCH 5/6] arm: mach-k3: Add a function for printing DM version
 To: Moteen Shah <m-shah@ti.com>, <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <d-gole@ti.com>,
  <m-chawdhry@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>
 References: <20250528080519.677750-1-m-shah@ti.com>
- <20250528080519.677750-5-m-shah@ti.com>
+ <20250528080519.677750-6-m-shah@ti.com>
 Content-Language: en-US
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250528080519.677750-5-m-shah@ti.com>
+In-Reply-To: <20250528080519.677750-6-m-shah@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -85,86 +84,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28/05/25 13:35, Moteen Shah wrote:
-> Add a function to retrieve information of the DM firmware's ABI versions,
-> RM/PM HAL, firmware version, etc using TI_SCI protocol.
+> Add a function to print version of the DM firmware in use.
+> The function queries the firmware capabilities first and if
+> DM split mode bit is set, sends a request to TISCI for
+> retrieving the version information.
+> 
+> The DM split mode bit indicates that DM is a separate binary
+> altogether and hence it will have its own versioning.
 > 
 > Signed-off-by: Moteen Shah <m-shah@ti.com>
 > ---
->  drivers/firmware/ti_sci.c | 54 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 54 insertions(+)
+>  arch/arm/mach-k3/common.c | 29 +++++++++++++++++++++++++++++
+>  arch/arm/mach-k3/common.h |  1 +
+>  2 files changed, 30 insertions(+)
 > 
-> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-> index bb9738efa81..8a8edc97e85 100644
-> --- a/drivers/firmware/ti_sci.c
-> +++ b/drivers/firmware/ti_sci.c
-> @@ -320,6 +320,59 @@ static int ti_sci_cmd_query_dm_cap(struct ti_sci_handle *handle, u64 *fw_caps)
->  	return 0;
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index fa8cd93d664..524bb1da1a0 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -68,6 +68,35 @@ void k3_sysfw_print_ver(void)
+>  	       ti_sci->version.firmware_revision, fw_desc);
 >  }
 >  
-> +/**
-> + * ti_sci_cmd_get_dm_version() - command to get the DM version of the SCI
-> + *				 entity
-> + * @handle:	Pointer to TI SCI handle
-> + * @dm_info:	Pointer to DM version information structure
-> + *
-> + * Return: 0 if all went fine, else return appropriate error.
-> + */
-> +
-> +static int ti_sci_cmd_get_dm_version(struct ti_sci_handle *handle,
-> +				     struct ti_sci_dm_version_info *dm_info)
+> +void __maybe_unused k3_dm_print_ver(void)
 > +{
-> +	struct ti_sci_msg_dm_resp_version *ver_info;
-> +	struct ti_sci_msg_hdr hdr;
-> +	struct ti_sci_info *info;
-> +	struct ti_sci_xfer *xfer;
+> +	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
+> +	struct ti_sci_firmware_ops *fw_ops = &ti_sci->ops.fw_ops;
+> +	struct ti_sci_dm_version_info dm_info = {0};
+> +	u64 fw_caps;
 > +	int ret;
 > +
-> +	if (IS_ERR(handle))
-> +		return PTR_ERR(handle);
-> +	if (!handle || !dm_info)
-> +		return -EINVAL;
-> +
-> +	info = handle_to_ti_sci_info(handle);
-> +
-> +	xfer = ti_sci_setup_one_xfer(info, TI_SCI_MSG_DM_VERSION,
-> +				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-> +				     (u32 *)&hdr, sizeof(struct ti_sci_msg_hdr),
-> +				     sizeof(*ver_info));
-> +	if (IS_ERR(xfer)) {
-> +		ret = PTR_ERR(xfer);
-> +		return ret;
+> +	ret = fw_ops->query_dm_cap(ti_sci, &fw_caps);
+> +	if (ret) {
+> +		printf("Failed to query DM firmware capability %d\n", ret);
+> +		return;
 > +	}
 > +
-> +	ret = ti_sci_do_xfer(info, xfer);
-> +	if (ret)
-> +		return ret;
+> +	if (!(fw_caps & TI_SCI_MSG_FLAG_FW_CAP_DM))
+> +		return;
 > +
-> +	ver_info = (struct ti_sci_msg_dm_resp_version *)xfer->tx_message.buf;
+> +	ret = fw_ops->get_dm_version(ti_sci, &dm_info);
+> +	if (ret) {
+> +		printf("Failed to fetch DM firmware version %d\n", ret);
+> +		return;
+> +	}
 > +
-> +	dm_info->abi_major = ver_info->abi_major;
-> +	dm_info->abi_minor = ver_info->abi_minor;
-> +	dm_info->dm_ver = ver_info->version;
-> +	dm_info->patch_ver = ver_info->patch_version;
-> +	dm_info->sub_ver = ver_info->sub_version;
-> +	strlcpy(dm_info->sci_server_version, ver_info->sci_server_version,
-> +		sizeof(ver_info->sci_server_version));
-> +	strlcpy(dm_info->rm_pm_hal_version, ver_info->rm_pm_hal_version,
-> +		sizeof(ver_info->rm_pm_hal_version));
-> +
-> +	return 0;
+> +	printf("DM ABI: %d.%d (firmware ver 0x%04x '%s--%s' "
+> +	       "patch_ver: %d)\n", dm_info.abi_major, dm_info.abi_minor,
+> +	       dm_info.dm_ver, dm_info.sci_server_version,
+> +	       dm_info.rm_pm_hal_version, dm_info.patch_ver);
 > +}
 > +
->  /**
->   * ti_sci_cmd_get_revision() - command to get the revision of the SCI entity
->   * @handle:	pointer to TI SCI handle
-> @@ -2738,6 +2791,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
->  	fwl_ops->get_fwl_region = ti_sci_cmd_get_fwl_region;
->  	fwl_ops->change_fwl_owner = ti_sci_cmd_change_fwl_owner;
->  
-> +	fw_ops->get_dm_version = ti_sci_cmd_get_dm_version;
->  	fw_ops->query_dm_cap = ti_sci_cmd_query_dm_cap;
->  }
->  
+>  void mmr_unlock(uintptr_t base, u32 partition)
+>  {
+>  	/* Translate the base address */
+> diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+> index 7bd72da1de8..487291697d9 100644
+> --- a/arch/arm/mach-k3/common.h
+> +++ b/arch/arm/mach-k3/common.h
+> @@ -38,6 +38,7 @@ void disable_linefill_optimization(void);
+>  void remove_fwl_configs(struct fwl_data *fwl_data, size_t fwl_data_size);
+>  int load_firmware(char *name_fw, char *name_loadaddr, u32 *loadaddr);
+>  void k3_sysfw_print_ver(void);
+> +void k3_dm_print_ver(void);
+>  void spl_enable_cache(void);
+>  void mmr_unlock(uintptr_t base, u32 partition);
+>  bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data);
 
 Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
