@@ -4,76 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEDCC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 15:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DCFC5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 15:47:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CB3F82BD6;
-	Tue,  3 Jun 2025 17:22:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 92C5582A76;
+	Tue,  3 Jun 2025 17:47:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mjnCzAbl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oKZVrhXt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A30BF82B48; Tue,  3 Jun 2025 17:22:22 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id CB7D1828BC; Tue,  3 Jun 2025 17:47:56 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACCF382AA7
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:22:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DF0482AAF
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:47:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-606bbe60c01so1494480a12.2
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 08:22:20 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2e95ab2704fso1926268fac.3
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 08:47:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1748964140; x=1749568940; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nbllBhmzSx5V1PAyGr0qyNbVTqw8c9k+pvlIfcxRzFI=;
- b=mjnCzAbl0YINK+rl1ZYgOGlxIWc3Xu9YxylQRoJS0y7dI5dogzFtXPGPPYZb+iJOY/
- KKWusZAMNMsiAKDdQmNkA456zn4P5g2ZU6t+cO0I/J76GnQyVDPprAjUWXljk6sT+p3+
- AJjOySn+c8+l2TrmdLgsqxYY5KDt0WIEl0+Pk=
+ d=konsulko.com; s=google; t=1748965672; x=1749570472; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yivoI+IMcT4oYe/RiNrB9Yjs804Uzz0Y27arrMQUZNQ=;
+ b=oKZVrhXtVZiOlqWdX8/3Pn30O4jRFionSPVy6GJqn7Eq0qRTUbPi+qzFnTCCmNjsJe
+ zzMeE/nC2CplQ6WCVIDuGe38qpehnyfdUsDhhf8pAVCGqaGP5TZEWx9Mof1ZbLxjWL4u
+ 5vg3FlgxeTIUXuX1eqlyBynB6zf7lwg7t2E+4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748964140; x=1749568940;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nbllBhmzSx5V1PAyGr0qyNbVTqw8c9k+pvlIfcxRzFI=;
- b=TW1Y20zzufnZece3Kx0Zs+u5RXSAd4hK2IWqAA6hRap6/KDzcJRo9Z208FgIVTFTTK
- JWb/YuFxetURutvtkXagfdDiP0EJwm9MlFp98yIKuhLx9vPBmcXrGcAlaYHLXWAO76Uw
- 1Z2JUxZAfTXRJ/rRYDVKlEVu8YfWmE1JVy/dNaiJmUytJ+mS4fjPQ/j4gf+eseqlSS2y
- lcrm/N0K+XaEnHLKKIIQW3Gu5FSwFmwQKSTcREJ1wV0Wnqv/jL83F5aPAvu0KIAX+zbe
- yaZc3vZhlVdzgH2mXpEXM4lNAeKBCg+wjeLg3eA8hjPQlhO57W4dfIUa/vFjIJk7OXLx
- xNAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7HTIm1BgWpykCIszrXA3Q5AG9UE9e56DXoT0ft1/ZEOYrz3KZ7/7IB0zP+DLxYZcoYD2Ovis=@lists.denx.de
-X-Gm-Message-State: AOJu0YyfQ14Pcq25WX5qO3kSzxcU5S4+BmjqU6FeW5BDR0me2voK9Y4R
- CEYPxMjFBGURukhhpMAjnFoQVNYXnKXwuGu0mL2Tktu3jioGN9Y0o9zYsAKL8CYTA5SjdJT1ffM
- GhSY7KgjgGx6swkqZ+3H23Afk9v1YyrI0TgSqznl76Z6V2dKBtNM=
-X-Gm-Gg: ASbGncvDbmG/JLIdaxo/i4EgZCgjsWCVcmBVkZUWgADJjLd6sIEpZzwoAckQaesV1EA
- ZOHSo49X3qmFtfsJawF/EGhxOkSAWywnHDnUk9b3bjfQOC4IxFgjX+UVxu2P8DQx+TKTiML4mXC
- upwcGb5qPbvVrwOFvuv0W8DsiKYrERQ/qrAw==
-X-Google-Smtp-Source: AGHT+IGQpceKsBHuKCCf/OmorslqoJ6C3SMr/Llkdqi39wu1II5jzgi71jYeliRXdL9L5lHg4CVp3hCvxCjoB/XxoY0=
-X-Received: by 2002:a05:6402:3593:b0:601:6c34:5ed2 with SMTP id
- 4fb4d7f45d1cf-605b77213d4mr11919526a12.4.1748964140037; Tue, 03 Jun 2025
- 08:22:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1748965672; x=1749570472;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yivoI+IMcT4oYe/RiNrB9Yjs804Uzz0Y27arrMQUZNQ=;
+ b=ewMLYsbg2qhDMiA+sEiB981LfXRzLXO0wUz1WFUmrjOXIlpesWLtA5lQV3AeTKLU+l
+ JNTqJd6BQkDM5zwSo7z6vKiGHbx4JZDUSyvodze9EWjo2F/FsXukZ4aiZYqdOne+8kdt
+ 253GsSHExZP3Gu2SaJNGI9FgPNNaMTtH9AzTtalX3nNShxl7dL7O7afhhYRnb2/HbBlU
+ S4uMbdKD+61Mb5NnF/SX6xk1CpZI7tXmciydQk6FYPwh9h4kATyHZedPkiI3Pte6nYoo
+ Qjz6D9uyfrCvXXxpJWwOwRIEQDwa0I6dj/yzWmRluaqr55h9lWWX2Y1YKB1EWgAZbX3e
+ u13Q==
+X-Gm-Message-State: AOJu0Yzac5zwVswVKf8jjymSRRYT814sMWD0yb6uwxslLZporB8+/iZf
+ 8Qyat4xDRiK1xj95Yb0/zHUcLe4/qqz2dKVFLtFbyrCOQzV3LM7XzZJROzStS+PF2ZA=
+X-Gm-Gg: ASbGncuVan21qVl6PcVHFh+Q3xeBiT31fVgnr9vfAjLjcUenxvybKlebXRlf5JKn6m8
+ DbmR3z1NWrWJg3exWyV8vDTkHJXbBk3BtQuQPrFr0i+JwHVVSga0RZYBZbbYwkGd/fI6GqzTHIi
+ C+qswDDcc8MjzB/i/CD8ZoZPZ2tj9uIH1splt+gVb/fWQOWZuhrn0meWPXlZCLg8+FTgU+gm7xy
+ dz7zUQCpcKs0E375X3U9SIo2h0OdlOKC6EYL/KAq9oUJlkF9deMqwQ077fDdb39n+Tcz+95TqoH
+ ccb9V7EyQbM/KmbMBqL5gXR6FVQvls7DTBdI8FeArMW3MnDlrIG7dWOqU642HnMRuJjFkkLIClM
+ mXJy1ZPMjpgDI
+X-Google-Smtp-Source: AGHT+IHoVIaqpYArXOYhf9zM05W3CM/Hiy7CqAtHyurlaxRS0qPVmxOmJDY11DVOuccS9rDsE9d1mg==
+X-Received: by 2002:a05:6871:6b08:b0:2d6:6639:52d9 with SMTP id
+ 586e51a60fabf-2e92a487d3bmr11658161fac.32.1748965671948; 
+ Tue, 03 Jun 2025 08:47:51 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2e906c0a87asm2290039fac.42.2025.06.03.08.47.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Jun 2025 08:47:51 -0700 (PDT)
+Date: Tue, 3 Jun 2025 09:47:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
+ Prasad Kummari <prasad.kummari@amd.com>
+Subject: Re: [PATCH] sandbox: solve undefined reference to pthread_kill symbol
+Message-ID: <20250603154748.GG1382132@bill-the-cat>
+References: <20250603151401.1709532-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
-References: <20250520203515.25839-1-dev@benjarobin.fr>
- <CAFLszTigMGxSjxPZ44BUx4WoWqVdNY3p6AeQwy3xK3gJ+VccTw@mail.gmail.com>
- <20250523140801.GR100073@bill-the-cat>
-In-Reply-To: <20250523140801.GR100073@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Jun 2025 09:22:06 -0600
-X-Gm-Features: AX0GCFvP_LgFKLuZIMm77ovxHD3DNUkDjK2Souh8XtYq02dJ4SuXQED_QqE7WEw
-Message-ID: <CAFLszThXfsaQ=7qoSBwhNyAmcFeHLac6Fx_w34b3PS5NcfwO6Q@mail.gmail.com>
-Subject: Re: [PATCH v2] bootm: Fix bmi->images pointer not initialized in some
- cases
-To: Tom Rini <trini@konsulko.com>
-Cc: Benjamin ROBIN <dev@benjarobin.fr>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qX38x6OjcmIMlVpy"
+Content-Disposition: inline
+In-Reply-To: <20250603151401.1709532-1-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,60 +107,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Fri, 23 May 2025 at 08:08, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, May 23, 2025 at 02:48:15PM +0100, Simon Glass wrote:
-> > Hi Benjamin,
-> >
-> > On Tue, 20 May 2025 at 22:35, Benjamin ROBIN <dev@benjarobin.fr> wrote:
-> > >
-> > > When building with only bootz command, without bootm, images pointer
-> > > inside bootm_info structure is not initialized. And since this structure
-> > > is stored in stack, the generated error is kind of random, but most of
-> > > the time this will generate: "ramdisk - allocation error".
-> > >
-> > > Also, after analysis, this problem could occur with the command booti,
-> > > if the command bootm is disabled.
-> > >
-> > > Currently bootm_init() is called by: do_bootz(), do_bootm(), do_booti()
-> > > and by do_stm32prog(). And all of these commands execute bootm_run_states()
-> > > which access the images pointer stored into bootm_info structure.
-> > >
-> > > So, to fix this issue, just do the assignment unconditionally.
-> > >
-> > > Fixes: c2211ff65136 ("bootm: Add more fields to bootm_info")
-> > > Signed-off-by: Benjamin ROBIN <dev@benjarobin.fr>
-> > > ---
-> > >  boot/bootm.c | 3 +--
-> > >  1 file changed, 1 insertion(+), 2 deletions(-)
-> > >
-> > > diff --git a/boot/bootm.c b/boot/bootm.c
-> > > index f6aa32746b7e..108ca7fb472e 100644
-> > > --- a/boot/bootm.c
-> > > +++ b/boot/bootm.c
-> > > @@ -1169,8 +1169,7 @@ void bootm_init(struct bootm_info *bmi)
-> > >  {
-> > >         memset(bmi, '\0', sizeof(struct bootm_info));
-> > >         bmi->boot_progress = true;
-> > > -       if (IS_ENABLED(CONFIG_CMD_BOOTM))
-> > > -               bmi->images = &images;
-> > > +       bmi->images = &images;
-> >
-> > In my tree I have:
-> >
-> > if (IS_ENABLED(CONFIG_CMD_BOOTM) || IS_ENABLED(CONFIG_CMD_BOOTZ) ||
-> >     IS_ENABLED(CONFIG_CMD_BOOTI) || IS_ENABLED(CONFIG_PXE_UTILS))
-> >
-> > but it seems that the few boards that didn't include boot/bootm.c have
-> > been dropped, so your patch is fine.
->
-> Yes, looking at the code, we should have always been doing the
-> assignment as there's a few places where we reference bmi->images and
-> not the global images, FYI.
+--qX38x6OjcmIMlVpy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-My intent is to eventually drop the global, but that is a ways off.
+On Tue, Jun 03, 2025 at 08:13:58AM -0700, Raymond Mao wrote:
 
-Regards,
-Simon
+> This patch is to solve the sandbox building error:
+> $ make O=3Dbuild-sandbox -s sandbox_defconfig
+> $ make O=3Dbuild-sandbox -s -j2
+> /usr/bin/ld: /tmp/u-boot.27rzOu.ltrans58.ltrans.o: undefined reference to=
+ symbol 'pthread_kill@@GLIBC_2.2.5'
+> /usr/bin/ld: /lib/x86_64-linux-gnu/libpthread.so.0: error adding symbols:=
+ DSO missing from command line
+> collect2: error: ld returned 1 exit status
+> [...]
+>=20
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  arch/sandbox/config.mk | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+OK, but how do you get this failure to start with? What host?
+
+--=20
+Tom
+
+--qX38x6OjcmIMlVpy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmg/GSAACgkQFHw5/5Y0
+tyzjQAwAplVs0/Xuqs9wzo9b9rzZ56bSX5DtugF7p4CFiaTZZzq90mBljVqAK7AZ
+zQt4PDZY5RcsTUR1YAF+WdrXFoQ8SO8lPX8LuRkOr3u0Cy9Bh/fqpEXBtcM8WWeM
+QtmrbXF4Rs+xmqe5w6lBrf1z/heyoYNhCsIltGynF+sHP7u7aXboU4T7jR0B+B1a
+AH4abzk9gMJCCbTkP8E1uB8UAyk3yEkmtlIdUinilEf0gTDSsf2jNeGq0tFB9b89
+ujyqv+AEe4u8RmArTz7ku14pnqHVFmelGz2+QIqZnlqmoA5szYS4dCAoizxLzoFn
+0hm7MDTqYhe3DErPHjEVumsvx9y4tYRy2O0KjRST6/1qqwpPIeFAyvILLd8BPg4U
+LCzm8DjOVPoUlAfipUFUm8hJtdmtt2VIFGsSTKuXCCyHAoaDrRjAipL8dZwPqlr/
+pmbEowYRTxHt1CXDl7Lss53h78yFisZ8jE9nU70ASArH6Xlxb6ylN5MXOx6k4qC3
+jk5djWHV
+=19JJ
+-----END PGP SIGNATURE-----
+
+--qX38x6OjcmIMlVpy--
