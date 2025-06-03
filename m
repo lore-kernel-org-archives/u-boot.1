@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E66C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 18:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F76C5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 18:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7A9E81E72;
-	Tue,  3 Jun 2025 20:38:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BFFD82A46;
+	Tue,  3 Jun 2025 20:38:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=paulk.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8D7C82C15; Tue,  3 Jun 2025 19:37:41 +0200 (CEST)
+ id E66F182C87; Tue,  3 Jun 2025 19:40:22 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B0882A76
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 19:37:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7CAC82A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 19:40:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=paulk.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=contact@paulk.fr
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 797991F0004D
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:37:37 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 210DB1F0004D
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:40:18 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id E599DAC3548; Tue,  3 Jun 2025 17:37:35 +0000 (UTC)
+ id 2322EAC3549; Tue,  3 Jun 2025 17:40:17 +0000 (UTC)
 Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id A30A0AC3543;
- Tue,  3 Jun 2025 17:37:34 +0000 (UTC)
-Date: Tue, 3 Jun 2025 19:37:32 +0200
+ by laika.paulk.fr (Postfix) with ESMTPSA id 30826AC3544;
+ Tue,  3 Jun 2025 17:40:16 +0000 (UTC)
+Date: Tue, 3 Jun 2025 19:40:13 +0200
 From: Paul Kocialkowski <contact@paulk.fr>
 To: Andre Przywara <andre.przywara@arm.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Icenowy Zheng <icenowy@aosc.xyz>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 2/6] sunxi: Add support for the Lichee Pi Zero with Dock
-Message-ID: <aD8y3JiXF6ATCWTS@collins>
+Subject: Re: [PATCH 6/6] net: sun8i-emac: Add support for active-low leds
+ with internal PHY
+Message-ID: <aD8zfRmfZP1K3ZFk@collins>
 References: <20250601153943.2690123-1-contact@paulk.fr>
- <20250601153943.2690123-3-contact@paulk.fr>
- <20250602014014.0664e6fe@minigeek.lan>
+ <20250601153943.2690123-7-contact@paulk.fr>
+ <20250602014043.42c96b4f@minigeek.lan>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4IBd5vSnfAoqLdZU"
+ protocol="application/pgp-signature"; boundary="TIScoYkSaWaRw0xm"
 Content-Disposition: inline
-In-Reply-To: <20250602014014.0664e6fe@minigeek.lan>
+In-Reply-To: <20250602014043.42c96b4f@minigeek.lan>
 X-Mailman-Approved-At: Tue, 03 Jun 2025 20:38:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -63,78 +64,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---4IBd5vSnfAoqLdZU
+--TIScoYkSaWaRw0xm
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Andre,
+Hi,
 
 Le Mon 02 Jun 25, 01:40, Andre Przywara a =C3=A9crit :
-> On Sun,  1 Jun 2025 17:39:39 +0200
+> On Sun,  1 Jun 2025 17:39:43 +0200
 > Paul Kocialkowski <contact@paulk.fr> wrote:
 >=20
-> Hi Paul,
+> Hi,
 >=20
-> > This adds a U-Boot config and device-tree build for the Lichee Pi Zero
-> > with Dock. Compared to the Lichee Pi Zero, it has an ethernet port
-> > (with internal PHY) so the EMAC driver and network support are enabled.
->=20
-> I just realised that there is no difference between the U-Boot versions
-> of the DT and the kernel ones, so can you please use the opportunity to
-> upgrade the V3x systems to OF_UPSTREAM (in a separate patch)? This would
-> involve removing all the redundant .dts* files from arch/arm/dts, see
-> dc2dd2de0f782860 for an example.
-
-Yes definitely! I wasn't sure whether there was some specific reason why
-it hadn't been done yet.
-
-> Regardless the defconfig looks alright, but one comment:
->=20
+> > A device-tree property is already defined to indicate that the internal
+> > PHY should be used with active-low leds, which corresponds to a
+> > specific bit in the dedicated syscon register.
+> >=20
+> > Add support for setting this bit when the property is present.
+> >=20
 > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
 > > ---
-> >  arch/arm/dts/Makefile                | 3 ++-
-> >  configs/LicheePi_Zero_Dock_defconfig | 7 +++++++
-> >  2 files changed, 9 insertions(+), 1 deletion(-)
-> >  create mode 100644 configs/LicheePi_Zero_Dock_defconfig
+> >  drivers/net/sun8i_emac.c | 14 ++++++++++++--
+> >  1 file changed, 12 insertions(+), 2 deletions(-)
 > >=20
-> > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> > index 32b698a7f411..be6867ceae0e 100644
-> > --- a/arch/arm/dts/Makefile
-> > +++ b/arch/arm/dts/Makefile
-> > @@ -650,7 +650,8 @@ dtb-$(CONFIG_MACH_SUN8I_V3S) +=3D \
-> >  	sun8i-s3-elimo-initium.dtb \
-> >  	sun8i-s3-pinecube.dtb \
-> >  	sun8i-v3-sl631-imx179.dtb \
-> > -	sun8i-v3s-licheepi-zero.dtb
-> > +	sun8i-v3s-licheepi-zero.dtb \
-> > +	sun8i-v3s-licheepi-zero-dock.dtb
-> >  dtb-$(CONFIG_MACH_SUN8I_R528) +=3D \
-> >  	sun8i-t113s-mangopi-mq-r-t113.dtb
-> >  dtb-$(CONFIG_MACH_SUN50I_H5) +=3D \
-> > diff --git a/configs/LicheePi_Zero_Dock_defconfig b/configs/LicheePi_Ze=
-ro_Dock_defconfig
-> > new file mode 100644
-> > index 000000000000..ec172d98b65e
-> > --- /dev/null
-> > +++ b/configs/LicheePi_Zero_Dock_defconfig
-> > @@ -0,0 +1,7 @@
-> > +CONFIG_ARM=3Dy
-> > +CONFIG_ARCH_SUNXI=3Dy
-> > +CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-v3s-licheepi-zero-dock"
-> > +CONFIG_SPL=3Dy
-> > +CONFIG_MACH_SUN8I_V3S=3Dy
-> > +# CONFIG_HAS_ARMV7_SECURE_BASE is not set
+> > diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+> > index 8433e7db2654..990a184e4b1f 100644
+> > --- a/drivers/net/sun8i_emac.c
+> > +++ b/drivers/net/sun8i_emac.c
+> > @@ -176,6 +176,7 @@ struct sun8i_eth_pdata {
+> >  	u32 reset_delays[3];
+> >  	int tx_delay_ps;
+> >  	int rx_delay_ps;
+> > +	bool leds_active_low;
+> >  };
+> > =20
+> >  static int sun8i_mdio_read(struct mii_dev *bus, int addr, int devad, i=
+nt reg)
+> > @@ -287,7 +288,8 @@ static void sun8i_adjust_link(struct emac_eth_dev *=
+priv,
+> >  	writel(v, priv->mac_reg + EMAC_CTL0);
+> >  }
+> > =20
+> > -static u32 sun8i_emac_set_syscon_ephy(struct emac_eth_dev *priv, u32 r=
+eg)
+> > +static u32 sun8i_emac_set_syscon_ephy(struct sun8i_eth_pdata *pdata,
+> > +				      struct emac_eth_dev *priv, u32 reg)
+> >  {
+> >  	if (priv->use_internal_phy) {
+> >  		/* H3 based SoC's that has an Internal 100MBit PHY
+> > @@ -295,6 +297,10 @@ static u32 sun8i_emac_set_syscon_ephy(struct emac_=
+eth_dev *priv, u32 reg)
+> >  		*/
+> >  		reg &=3D ~H3_EPHY_DEFAULT_MASK;
+> >  		reg |=3D  H3_EPHY_DEFAULT_VALUE;
+> > +
+> > +		if (pdata->leds_active_low)
+> > +			reg |=3D H3_EPHY_LED_POL;
 >=20
-> IIUC, the V3S does not have (secure) SRAM A2, and no ARISC? Can we
-> express this in the Kconfig file then, since it's not a board config
-> option?
+> That might be nitpicking, since it worked before, but I wonder if we
+> should either explicitly clear the bit in an else branch, or follow the
+> recent Linux change to build the register up from scratch:
+> https://lore.kernel.org/linux-sunxi/20250423095222.1517507-1-andre.przywa=
+ra@arm.com/
 
-Indeed I cannot find any mention of SRAM A2 and ARISC. Makes sense given the
-low-end target for this chip.
+Yeah I found it pretty odd that the implementation insists on read+write in=
+stead
+of just normally building up the register. I'll do that in the next version.
 
-Sure it's better to move it to the Kconfig too. Will do in the next revisio=
-n.
+And indeed with this version there would be a corner case where the bit is =
+not
+cleared. Even if it's unlikely, it's not good programming.
 
 All the best,
 
@@ -143,7 +143,32 @@ Paul
 > Cheers,
 > Andre
 >=20
-> > +CONFIG_SUN8I_EMAC=3Dy
+> > +
+> >  		reg |=3D priv->phyaddr << H3_EPHY_ADDR_SHIFT;
+> >  		reg &=3D ~H3_EPHY_SHUTDOWN;
+> >  		return reg | H3_EPHY_SELECT;
+> > @@ -314,7 +320,7 @@ static int sun8i_emac_set_syscon(struct sun8i_eth_p=
+data *pdata,
+> > =20
+> >  	reg =3D readl(priv->sysctl_reg);
+> > =20
+> > -	reg =3D sun8i_emac_set_syscon_ephy(priv, reg);
+> > +	reg =3D sun8i_emac_set_syscon_ephy(pdata, priv, reg);
+> > =20
+> >  	reg &=3D ~(SC_ETCS_MASK | SC_EPIT);
+> >  	if (priv->variant->support_rmii)
+> > @@ -859,6 +865,10 @@ static int sun8i_emac_eth_of_to_plat(struct udevic=
+e *dev)
+> >  		printf("%s: Invalid RX delay value %d\n", __func__,
+> >  		       sun8i_pdata->rx_delay_ps);
+> > =20
+> > +	sun8i_pdata->leds_active_low =3D
+> > +		fdtdec_get_bool(gd->fdt_blob, dev_of_offset(dev),
+> > +				"allwinner,leds-active-low");
+> > +
+> >  	if (fdtdec_get_bool(gd->fdt_blob, dev_of_offset(dev),
+> >  			    "snps,reset-active-low"))
+> >  		reset_flags |=3D GPIOD_ACTIVE_LOW;
 >=20
 
 --=20
@@ -154,24 +179,24 @@ Independent contractor - sys-base - https://www.sys-base.io/
 
 Contributor to fully free software support for selected hardware.
 
---4IBd5vSnfAoqLdZU
+--TIScoYkSaWaRw0xm
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmg/MtwACgkQhP3B6o/u
-lQxmWxAAgIAxp7XvnXKyiQhRKT7PAqehl0Vj0Jt3ygxjtF836Sk6UiORnQ7DI0M3
-oOZPrys3G9ndZiKCBt3JM7mGhrRyEvURvzV7TDucfVIYg33Wa45oW02HCKXdgVIW
-OM45t+7L1nK90pF+s1c/erNbtEZKoFz+wuzPYht/E0JnUmeh5WmKyrqBffkPJOLu
-kng2Cvn4T5ffSo4E3tlN+1Por93mK9iKDDXliyImq4SzCzS32Ui0vCxq73LumiwV
-iGpg4fzkVLC6x3E90MSPHi7iiITk/W/LK51aQeUG1HHt3SEilXykv9v2ypIOc14H
-ktXwZ3zd27e5YHqZuLjRVSlkW3i93dSHfrBKc6UP6hCvixu1k+u+VkXIuIErVkD4
-MGMpuu83ZhfLk4Iv0BymW6VE9Um4bdtgEhft7PiDlDhfUiP1Gr+TvMvBVDQni+kg
-MJxOP2PjzGTd08Hqj1au+YU6Y0NIJpBs7kf7RWyRS4ERzERZCWkf3nsMwScDf1tW
-CXbBrMWQgrMoeSxg6yjHjXj8t3koAY6f+plapuy22XOz1kPpqvuJOaFGe6Qwnh42
-zoukJa/oYa0ulnTmA/GyZWrYH3bkJ9GW/Qs0Bfr0W8MIKP9S/7x+j3lxTEX20Lbj
-1s/P9cERmSLRDtx/9b6FryonO1vTB/1BUdMXgwYQCXpQiToXLmY=
-=JiZQ
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmg/M30ACgkQhP3B6o/u
+lQzTqw//et09IA+lc8TlZInrf6g4ZND5tluG5Xe2YP76avNAbEPwFH8amwlDhtt3
+mX/ci3CAusdjBQXmnvgL+UwKyVO0Y2CNtNDEYQlTgH9qpMDnU3lHJmdnwGVLF/Xc
+v97tqFAIiYdHebcpeHpZkc135lGHhGikeSwNnKIciaxqaa2av6HCvhSJ3SiMPRyd
+dcVOx0FIi8K4gRbCZDXiU3/BmQ3mU0ndqMfnMpGaV7KvUQXGe4BUURnwuT7sI1QS
+cwkUrtVeGNFZXAxKMWeMTwd5swr8CA83EKY1QQifkF06TzzazRrqZkrebKWjSa8+
+CQh8dBLkhcfz2AOJVqPXleP04ZI0YT2Xi5rnEnwe/k57MIrScUceze4LzxmN3J3l
+p/8fcoW5d+VR4ervmZTcRyOd/sifUxhw8O06DJhkU6jmrBEcIUUJwLit8w/kugAr
+OZa2spqj+bQzujyz3bQl8ps0AocKCinvXti0gT2DTJrnpiA8hDInP8HENLCYssz7
+w+Q08kszMxV9/TSl4cKAB2r7uoDUIN8c6RZFsi2sQg0uEgh3pZcH6WAhDYegQ1G6
+Wzx1d34opn3VDtzzZNXV8WS3The9TqJ0gNvE9ztRPuzZRPfrX3si1PgPQfo6wX3g
+lB8VJ7WRkD8fGcvvUnmEGGEwqaLIgoJ0czaGTnSZMrZD9z6mGAo=
+=G5K7
 -----END PGP SIGNATURE-----
 
---4IBd5vSnfAoqLdZU--
+--TIScoYkSaWaRw0xm--
