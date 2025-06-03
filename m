@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4752FC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 15:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01549C5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 15:01:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9F2580F9C;
+	by phobos.denx.de (Postfix) with ESMTP id F2E2182B3D;
 	Tue,  3 Jun 2025 17:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wDDCJjnq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jpyLCevQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51A0A82A8B; Tue,  3 Jun 2025 17:00:49 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 8188482AFC; Tue,  3 Jun 2025 17:00:50 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1614E82A76
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:00:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 432C98091A
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 17:00:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3a5123c1533so845009f8f.2
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 08:00:47 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3a4fdc27c4aso1916478f8f.3
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 08:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748962846; x=1749567646; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748962848; x=1749567648; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lqlD5asc+Ldi1WeA4I+E1YyvT/lZwqFVGFKtiX7LU2I=;
- b=wDDCJjnqsKK/QYy8j5XXiIN/sNVmfKsxIdQMgDFDOkjYOpeCR3G0CKkBLTg3VS+JBW
- JWxTr+nELBhCasolWvXnIn/PjZVrIbDyYKxtdA7IoRKAqGCFO1c5+GbQMB7VKi81/Mz+
- 87pUZdQmmoSKeHjVnKnaCqXSkHXXKAMyb+k50za0we5qoLjzKQDzs/zTvMKa39y1v1dr
- PhgP5K39ftibigs4/227Tq6/17GsY4Qs5/IpDNC2hbb+VsxD5PEQEcFGvBSAxWRNYTu7
- d0jUJf7NH9qDK8t/pWa4RUqwmm6+DGRg7yL9TUTAG15di46E6AvqatkzsjJsQgacuKzZ
- tl1w==
+ bh=YZf1V44IzkbYOH3/wqkpxfMXAK8kX10gXlzj4UDd9AE=;
+ b=jpyLCevQocfclOEwyFNs02J5zrIOTH00RGMN4Yrlw/zfOeSVIUYk6lKOpvtWugGVyB
+ CfqV5eGsQeQehpsphzmWFP+vtlXQTAtavx+V4fzJi273/9dXL5OyQ2AfqD3uee5lF2Ti
+ WOaBKHLkEjuDFYnmNshlmWB4YPmQv/rI75NzohQDfle/OdS8Wd9owh/keQnNeqj2vUG1
+ atKL0F3QzwShqMIcbw+EUybH+BgQiqwfFWWivCxGLt8mSwHopeBM5Ok5YkSSxHZ9Vg2k
+ pGra8Dhng1p00gcx3OYydGQeTy2BwadE9VxMJJ5yhKiHO7n55TtpbY/1oSwq9ZdvkLo+
+ dipg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748962846; x=1749567646;
+ d=1e100.net; s=20230601; t=1748962848; x=1749567648;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lqlD5asc+Ldi1WeA4I+E1YyvT/lZwqFVGFKtiX7LU2I=;
- b=xHuzfhH1RJux4MjoQvjBDl/coJ1q9qYlmon6Hdd9jcl9/rYA6Vch/+3DH4sEFvGly+
- aGTPfgWFU400l6fav/cEPD3uBkv1qQ9C03lxJnXlsH8ifnohwUW5kjAnOjfoWRe7DVja
- a0q2AXmFT6hWy+t2VJwonP6GN2n/tVz/DbM4W6ODmvI9JIwQvpKM9VuJ/5u9fPvlHatM
- MDXzpYk5G6sqi3gEmdAls9UxIU933Khcit2g22C1GhsytsfUvMTGBkWpTqzZBFX7mxq2
- up2+D4Wv1gADAUQoTFziUAYnSvkN1N2wK/5AIaQcjMHgryCZaB88lWCly5/QTvrsSy2O
- uczA==
+ bh=YZf1V44IzkbYOH3/wqkpxfMXAK8kX10gXlzj4UDd9AE=;
+ b=cUHmQ3C3rU5lyM7lp3kKsv2dGS0vKWNgHqCXut4goOWbTPnpOYreHYf631QDTSBmBr
+ N/bKmJK92OsSeD/qfxXQJeQaKyW4lUHzLO8ORZU6J5GacQhpo/vtJaEA5zSkpcACjOvX
+ mU2zOVwBmO7TTDLHjYpoRKcoNsqM/4pwoUEXKnteH8QNyhDaa3N1uC7sVHbhdCD1V3NB
+ gFgboAjzZAuDgv2UEXZq8hAtvbDSDCbtgZOEGKHBspyjOKy2tbSTIrbyi0AHzPOnG6rw
+ cVt3bd9c0I5U9CtNPsnw23cB66yf6ko4Q6fEfc10GKOvpFot6kgYt5f0Ry5D/8+yUB7D
+ 6HXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0tnjnLf2aJqhIwPhl20zV5pHHYAGwpDSQPHUsJPoq7e9X2V/qbgU8aZYMl/DfBUlvQ9woNvc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0jNUs75/DIt/aXMNAIowaw3kForQf01wOaQZe8izr8yuL8qzh
- 75Xeql24Hn8Iiu6IkPFV0SxFPLRf7zWkzZ3PmdXztWyHhPbqbr8DqXeiLiZLX7cUJbc=
-X-Gm-Gg: ASbGncs9D4l7bnsgFnrE0NZ2ejV3aitIy3bBIR66EKwS4QM6EByNUU9Pt1KnGf7SAup
- Yvb+n+D3MnPx5VLU16xOy1yFb0QEqQU0CrAZ7uad1x/yaZ2Ksf3V775q7u7SHE95+MX54zqqRpx
- XX4B6GCK2AmSfD5OAj+258xupEaLR/bcLBj8OffEB4c1Xace4WTwm19gQ/CI0W205hH714w2mpP
- l8IyMkImtoNMKbwuQIOf+g9pn+ovqnXbKzF/cm5Z293DtS9qV7KQl96Ead23FXq39/JD8RW83Cr
- i6rkBtmkYq0qzwlSaByUwFOcfzB2LpomPB7e2IEmiV+Am+JULGl295MxnS38zFuGm/VazWfXhki
- Z
-X-Google-Smtp-Source: AGHT+IHEv80YPTP9UlMDNfKP73ghw6sa/KLr71ujmW7GNJVgxWkAs6FmQsP/EOXX4nS+FAHTfmcAKQ==
-X-Received: by 2002:a05:6000:2c10:b0:3a4:d6ed:8df7 with SMTP id
- ffacd0b85a97d-3a4f89e2536mr11438795f8f.59.1748962846050; 
- Tue, 03 Jun 2025 08:00:46 -0700 (PDT)
+ AJvYcCXm7DwZGuLvEddcrFjg4hpiAMGRcCLVb8yAcDaGdgRemOEefjh7JbsPb4hQaFuKB6ijHR7Uic8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiHJhsh4fd/MPZJ2WsBEEbSqtjtI+feZ4JXCxKMzh7rprB4s3k
+ WY2IvYAOU+PNqrj0TKcrBHon1baYJ4GIzsIgcZYWgK4hlVO35j9hEyFLfM6VduZlkxaRy1yisLZ
+ i9a73
+X-Gm-Gg: ASbGncsSnrW2gOTJNSVUAs/PciZ6gIKR50R/UVzYHfAJ9gTsiU1U7bbwTTmTTdyIsuY
+ DmXCbZU86IQnw52afKNgN5669Tki75wpviXLmsSmhSaLLr2t+U5HJy9ifrD6xxZ7gFG9Fb7nxBF
+ esCNzsrQxOw8Tf9Sh7Km3/fL/glsmRjEkXX+oniH98SWHQ84kaBSJ/CkyXteqUqB2nhKeyMB8D5
+ phgnZTyDH5HO5TM6H1OG5zDJAkOJ+Ge0mCvhVF4N8gKSjPCXxqH6AEGB513axl/a8fsCDGx1ihL
+ eklFOCC6vbRdDqFKIDtjHzGZFhwKsiOT0D+cBEPfweDK2iw/HjyRa3lKwkRuAAwCNBKW6+pEd71
+ x8edbgoVldaU=
+X-Google-Smtp-Source: AGHT+IHwomGusfr7kL1BPBw+m/cbxNLYmOj5Mesb4r9mKW9+hE+L0eEU9AIc2//v5oUs4+lGdqBFYg==
+X-Received: by 2002:a5d:64e7:0:b0:3a1:fed3:7108 with SMTP id
+ ffacd0b85a97d-3a4f89e2c02mr13105604f8f.40.1748962847524; 
+ Tue, 03 Jun 2025 08:00:47 -0700 (PDT)
 Received: from toyger.tail248178.ts.net
  ([2a01:170:117e:fc:e089:f4a9:4c4d:e359])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-451e5496282sm19845165e9.1.2025.06.03.08.00.44
+ 5b1f17b1804b1-451e5496282sm19845165e9.1.2025.06.03.08.00.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Jun 2025 08:00:45 -0700 (PDT)
+ Tue, 03 Jun 2025 08:00:46 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- Alexey Minnekhanov <alexeymin@minlexx.ru>
-Cc: Tom Rini <trini@konsulko.com>, 
- Alexey Minnekhanov <alexeymin@postmarketos.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de
-In-Reply-To: <20250424014811.3809818-1-alexeymin@minlexx.ru>
-References: <20250424014811.3809818-1-alexeymin@minlexx.ru>
-Subject: Re: [PATCH] button: qcom-pmic: allow to specify code in devicetree
-Message-Id: <174896284487.1020546.3989003067631934343.b4-ty@linaro.org>
-Date: Tue, 03 Jun 2025 17:00:44 +0200
+To: neil.armstrong@linaro.org, Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, trini@konsulko.com, 
+ loic.minier@oss.qualcomm.com, Sumit Garg <sumit.garg@oss.qualcomm.com>
+In-Reply-To: <20250505124333.12344-1-sumit.garg@kernel.org>
+References: <20250505124333.12344-1-sumit.garg@kernel.org>
+Subject: Re: [PATCH v2] mach-snapdragon: Update fdtfile logic to work for
+ RB1 and RB2
+Message-Id: <174896284621.1020546.12888859517240124285.b4-ty@linaro.org>
+Date: Tue, 03 Jun 2025 17:00:46 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -106,23 +105,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 24 Apr 2025 04:48:11 +0300, Alexey Minnekhanov wrote:
-> Most device vendors put "Volume Down" button onto PMIC RESIN.
-> But Sony is special: see
-> dts/upstream/src/arm64/qcom/sdm630-sony-xperia-nile.dtsi or [1].
-> They put "Volume Down" on PMIC GPIO 7 where others usually put
-> "Volume Up", and KEY_VOLUMEUP is inside &pon_resin.
+On Mon, 05 May 2025 18:13:33 +0530, Sumit Garg wrote:
+> RB1 and RB2 have three root compatibles where the last one can't be used
+> to decode fdtfile name (qcm* vs qrb*). So rather just rely on the first
+> compatible to retrieve the SoC name.
 > 
-> Currently if you boot U-Boot on such Sony device, you end up
-> with 2 "Volume Down" buttons, and no "Volume Up", which makes
-> navigating menu problematic.
 > 
-> [...]
 
 Applied, thanks!
 
-[1/1] button: qcom-pmic: allow to specify code in devicetree
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c92bf21e731a
+[1/1] mach-snapdragon: Update fdtfile logic to work for RB1 and RB2
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/14315b73a8e7
 
 Best regards,
 -- 
