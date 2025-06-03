@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0485C5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB70DC5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 16:43:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6C8082AA7;
-	Tue,  3 Jun 2025 18:42:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4918882AA7;
+	Tue,  3 Jun 2025 18:43:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oPi/aZNd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qtPnAKWc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27B6C82AAA; Tue,  3 Jun 2025 18:42:36 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 2307182AAA; Tue,  3 Jun 2025 18:43:23 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D688682A76
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:42:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32B2F82A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 18:43:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-441d437cfaaso40543525e9.1
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:42:33 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-450caff6336so36131125e9.3
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 09:43:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748968953; x=1749573753; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748969001; x=1749573801; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=RRErAR5/zSrj4R4AkHstbTsf2/iJCIAeBQ7xXGpYcxk=;
- b=oPi/aZNdxc3Jvm8mumtCgeb2LO4jZKZIw3KompENLEW+3j5cWDenVIEj1YtL0miPwi
- B0NmBSh65hk0d2qzsT2/pQ99VqPma742DWU8rLPEqABrTD+xrjAvGI4zSxhUMpSJwwNh
- Y/k6fNl6qlc54EnAo6LEPi++ibQM0RL/LuXnr8XwEEOZyD+il0uvrQCNKVPHwjk+XHRy
- Cxv3/BKlbLPdz3hjxFtGgllse9ACHHIOjZ9TWEy+jZ919XfhKcJxs8Gkusa0KFIMsXT6
- DLrfAsqfdvhMXvK5m137gQbcA6STmhRh5tvs7X/zwrXCLv2bH6pRZ8FErWQnID9efCoB
- sGXg==
+ :reply-to; bh=5pclwUCy0d4E2/0ZUsStu9N6qNXeSZ7bJklkJFQhIZg=;
+ b=qtPnAKWc7Akow4tZYDQByeG7HemWh6zY2ATt2wT4wU/x0yE18+g3dALZxsXiyo+NYu
+ yerNxSIePanouSG+HzpJ7Qu+4o1ciftLpulg2HLl/I4W6lH2dI0dwxcXhQbzbTz5Ewx2
+ UBNxGoIqEbXpFXb/TlKr0OJVuIhWKa+deUxgMId8CqOKo0RItMmUHDvyh4S3Pepw0b0w
+ x5Es0xBaSZs3vWFSVcUBqMAw0L9fh9KakyH7IOe7g9oAuNlDDvGdt+k0YbBl7BDjewTs
+ hguSmAKfnPLz0Pmy76P0cHkmrQZaSUyu7/2r0cTEAvEFfQQ7AkB06u7Oc3arx3KVYVKj
+ VFDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748968953; x=1749573753;
+ d=1e100.net; s=20230601; t=1748969001; x=1749573801;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=RRErAR5/zSrj4R4AkHstbTsf2/iJCIAeBQ7xXGpYcxk=;
- b=R+c9YPp0sd25M+wtChYAZGLsnFvJsGa33H4JvPrWPu36o2vmK2zspqPrPLs2JtgpLu
- +vDpDhSDBpJPov58Ef/xAB9pM7Sc6wnzoj5y6pE4cuK2mLUffAS9Wg3WZB7RQ2VN6HPw
- lD6tAUA5xxftQOMgGVKq1yl6ymD1ovXBt3KI1brIu8rA2/6PGa8QifWO8DphUAMEoZEh
- Anp0qcY3QAkUrE/FEXSX+dtZse/lebN6IdvR9/O5MHlzEZqiovbsPD61XuWtGtS9sEq6
- 8uZmmTMqW4AHoXCTWxz3ip3gZ3Y50fzEPtANs2NARC3o2gtKKdUMTwnZr7Ed5/hA0g1s
- VRMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWz/LPe9NN4O3voXErOzgzVbOoMX3JwVanhvCVlYewYwsbzVNZa3UhV1J0+JL7+HLBzL/myQO4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywidy0JepHPzJ0IYlo8B2obIL3HJSmJXqZxV+vQ2GjRuP/NYLf1
- ckCqkKfK188ZrT+QZcWt5cx09QGishFFIuP8bCN3tGUDUgW8WWq8+xAAOgdKumzpHaLQYmo0483
- +6pQP
-X-Gm-Gg: ASbGncsFwO3ZC3BA6yL3BpTnWhBlm3Pndamp2WSfPSEZKcx5Ye0EDQ/1HtyE3A8IPz8
- rvXkgriJrv7PtJxUBNDFHFLzj0Vev3kSvExLnExfnCpA6fACpcJhRyCk9XYE0D3CyHLM3pQ0nr4
- t6VlyUxHDuzj39gQd382NM2WMdOMG/SisfC855YFuZh2tu6D1X7LAWPkZqqhEULbWJ2xC8LzWbp
- Lss+TRd1SjuJFpDSydNnNaB4w4fr3qTTnr8dWfzcd21buqYlArAmbn3WVSjAgQ1KmLtLxhLXYnX
- q2vFY7/wx31+gL+5zjDSSJErH1hccFpiAyab9tw6VQ/3qp+NuE00l72OZLsTYkG3cWSFn8QWSwP
- lYHViDKZYsvXCQfBN/vPLoAcbHA==
-X-Google-Smtp-Source: AGHT+IG899CwTbJU5TaPRH42acCwhIGkTWy5QeLc1ph+V4zrJeBBCNwPVDK+QccZHroq6k9XKdIatA==
-X-Received: by 2002:a05:600c:3b8b:b0:442:e9eb:1b48 with SMTP id
- 5b1f17b1804b1-450d8876132mr146327415e9.24.1748968953279; 
- Tue, 03 Jun 2025 09:42:33 -0700 (PDT)
+ bh=5pclwUCy0d4E2/0ZUsStu9N6qNXeSZ7bJklkJFQhIZg=;
+ b=MMdf/PCvsHKqoeNCO4EgK2hcBNHYp3qJecEvDnbjWb5eaqJb5qH2xck9rcS9Izd8E3
+ wcpYEUCHLRPHhPVCQbScv02H1DnyOyxPeZzTSFF/byL4y1SDlGlY5cyfEl4DpAiu9oOA
+ yY37fceXxUj7MIyW/i93cL3jj3L2JuAGV+q+9Ltqb8ClVaWB1Q7WgXIieLUtMvujs+eC
+ lGc8sE8zDYgDOj1t8rrn8ZEfSPZrUV2xPHGQITNLDg9OEfhomfBU+AMqaumnRD7R4Gnp
+ +RIAl7T8hbaqz6bF0yNWNfOrhCNaLl4vsoW5dqPI8cXslLUw3tYuu8gf9cfKhiHFIapE
+ +fjQ==
+X-Gm-Message-State: AOJu0YwS5VRjz5TWh/ps6dZ/3sBjqikemOW6+rrkDaYICv9c0m1S7McO
+ YNu2CdheN+qg5WQ2g1D1K8WEzJqkHKGfBXTrbcve4UtJ9Kglw8P3CrrWyeg6llvpW4Q=
+X-Gm-Gg: ASbGncvlZANV4fXzaEytJ+7jaEyDIsBucV3PVRaKczCKYTx8gxpSPY/O3CK9YOLyi68
+ BzJCLweW1cN1lJKo1lqoxRU/iC+RP0K5UmPGBdq+NbpiOXZgAyISlZyKryW4YRX9ZD+5xjlJM7V
+ UhX7uF9jvC2Ik9uoW0XokOFiG0Yc07DXEmvIaCvGvCwEOgjK9MS2DkOpVTRQqYp+PIkQN43ccJH
+ 6sc3bk1/7Cbem+IWWV6NX/GVIY6VYYLmrcjFntK7np3RjN9vx5tnJqVys1I8pBN4xQBeUUNE/XN
+ t5bGXbbcl9anBT0hjvWA8pl5bVuRLwNuKckxKF3wqBgvKrEBnh38E0GNxuOKmiUA8wQhE4v9Zyp
+ NN3qtUUC6hdRtZyLU5kKtjsBFTg==
+X-Google-Smtp-Source: AGHT+IE92KZDZaq/UX59f2o41XTVBVaMWgtV4rZA3H/GseJo9B0zD2h91xk9Og7b5P08i8hhsZTjoA==
+X-Received: by 2002:a05:6000:1447:b0:3a4:d6aa:1277 with SMTP id
+ ffacd0b85a97d-3a4f89d3557mr13147277f8f.37.1748969000613; 
+ Tue, 03 Jun 2025 09:43:20 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:563:3654:17de:c930?
  ([2a01:e0a:3d9:2080:563:3654:17de:c930])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-451ee4efc29sm2417235e9.12.2025.06.03.09.42.32
+ ffacd0b85a97d-3a4efe5b89dsm19040246f8f.19.2025.06.03.09.43.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Jun 2025 09:42:32 -0700 (PDT)
-Message-ID: <46e481a8-7347-43d9-9aac-0f5ecc8b5e24@linaro.org>
-Date: Tue, 3 Jun 2025 18:42:32 +0200
+ Tue, 03 Jun 2025 09:43:20 -0700 (PDT)
+Message-ID: <cebc988b-de5b-45af-92ba-08ee7998aaef@linaro.org>
+Date: Tue, 3 Jun 2025 18:43:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2] pinctrl: qcom: handle reserved ranges
+Subject: Re: [PATCH RFC/RFT 0/2] gpio: qcom: rewritte SPMI gpio driver from
+ Linux driver
 To: Tom Rini <trini@konsulko.com>, Caleb Connolly
  <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250410-topic-sm8x50-pinctrl-reserved-ranges-v2-1-654488392b9a@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -111,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250410-topic-sm8x50-pinctrl-reserved-ranges-v2-1-654488392b9a@linaro.org>
+In-Reply-To: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -131,20 +129,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/04/2025 10:52, neil.armstrong@linaro.org wrote:
-> From: Caleb Connolly <caleb.connolly@linaro.org>
+On 01/04/2025 11:47, Neil Armstrong wrote:
+> The current SPMI gpio driver is very old and doesn't support
+> pin state tracking to fully support the whole pinconf calls.
 > 
-> Some Qualcomm boards feature reserved ranges of pins which are protected
-> by firmware. Attempting to read or write any registers associated with
-> these pins results the board resetting.
+> The simplest is to rewritte the driver using the v6.14 Linux
+> driver and fully implement pinctrl, pinmux, pinconf and gpio
+> support using all the newer interfaces.
 > 
-> Add support for parsing these ranges from devicetree and ensure that the
-> pinctrl and GPIO drivers don't try to interact with these pins.
+> The goal is to deprecate the old one it has been validated
+> on currently supported hardware.
 > 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
+> Neil Armstrong (2):
+>        gpio: qcom: add new driver for SPMI gpios
+>        gpio: qcom: move pm8550 gpio to new driver
+> 
+>   drivers/gpio/Makefile         |    2 +-
+>   drivers/gpio/qcom_pmic_gpio.c |   20 +-
+>   drivers/gpio/qcom_spmi_gpio.c | 1035 +++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 1037 insertions(+), 20 deletions(-)
+> ---
+> base-commit: 5ca70325b64f760bf4190f206a0e88dda495e3d2
+> change-id: 20250401-topic-sm8x50-pmic-gpio-pinctrl-new-2588c35a461c
+> 
+> Best regards,
 
-Gentle ping !
+How should we go forward ?
 
 Neil
