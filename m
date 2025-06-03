@@ -4,84 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43BC1C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 04:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C79C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 05:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 927B382045;
-	Tue,  3 Jun 2025 06:50:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8730481E06;
+	Tue,  3 Jun 2025 07:06:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fIsvbyCM";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="kWDOvdN5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED01480BAE; Tue,  3 Jun 2025 06:50:52 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5926B820EB; Tue,  3 Jun 2025 07:06:48 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB82082045
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 06:50:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-735b9d558f9so1171704a34.2
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 21:50:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748926249; x=1749531049; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZgazYEwJSPKBvGHA0lxVinHebhRnoYlSEdlqnODI3gI=;
- b=fIsvbyCMPQh/5sZQF43KEmfP+pAhywdSoFwWJv+SYTT6f7KC/6sZBXbH6QySYo7cfq
- uHxR35nmntIA9jHICfIJ50mjHKQ6GavlqHULTYSFBpVu7ZlbeU9i+PT9B1bBTvX41FMw
- FsnZ6z7SKnp+ILU/08neo4h/bcXDE49g1kS0j7JC0Pg0sm7F1nZzfrBfieWWrA3/qQGD
- i29oayJDE/CBf2XZsaoLDWlt6qolnakuBqqlgy/bL8OU+fD0uPkOclV8xF/V3PL4gKNo
- /skmdLcgAZWeMOqiXvtOZ1E+7nXgDpuNZNlvhEyxTFltQkSwytBs9aoOVkx/uT6LiHz9
- N8+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748926249; x=1749531049;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZgazYEwJSPKBvGHA0lxVinHebhRnoYlSEdlqnODI3gI=;
- b=vOeWXUXTzLcPHZLa301VfqW3WaJi/XgrwyBptjWGqT47kVm/rz06Juw+HS1IyUzzBP
- PGuohdlNhwK/P9b2yn+YNQsb9udq4vPzNAUdWwQW8OVc9pDAGnt27kmPP3qj0hMblkJc
- L7FEPs3NTY1REoiGfrN9rqES7/KNHjhlT9zPyIDIR8q31fjEq2RPNBols5SQfvm6M5ie
- 7afBxhefN9kGzt63HLeqG1Cwn3xwuCOYmjzJNZmpApA6Tpv+8LjqLPmVHAR8Iiqg+yxL
- ZtyAmhT168fFpFVpqY3Gru+Tr20ZEWrsRb0OVIHwHiQqrWU6ielVf83qGyB2yDZPm7IP
- ffnw==
-X-Gm-Message-State: AOJu0YynE78VaAlGs+U/6z92QWYzNFvEhHYZPZVCdAcpVMsVviqm0W9g
- fb2qXaWaMXD4rKJ5HldJhVGGoEQYy6PMvPZDhve5AkH6DHbuW5UudtgCgfhZqQ==
-X-Gm-Gg: ASbGncue7zNFQNPVEM+xEqXZjb5K6sLSpzhINTqwZBu52PBcGzE++dmjf+e/cB4Vqxi
- aIfLRYaMUmVwBTtJ8+wCOCgIMv+eMn7ZLyfYRDlvX1lTTJyuq7CXxf4T8XQeo2qjHnQc3kxcpGf
- ixeqtZZ2UDhMqEoxhkwaoXSdqQ/fa6zLMNMSeyfcVoxi5Prg8e1TfBGPeYOdFVz13f7s4K/cWIs
- DIZQRWf8vRmifYm3BVfYpYf/QQD34tNkBEXhT643KMNJC/sKGfaWN+90GNiA+Sz2Qd37mIxbwHg
- rrHxVfMLV/LG4IiegnERJbSW2O3bYQoqYpZUQPtxQj2smcEHyZP1ZIOmZ0JUpwbAcyiYHqVLYvJ
- G2gaPv1iQNuHusDQXZHm8AyNDBfrD3yBNj3O3Ykc=
-X-Google-Smtp-Source: AGHT+IE+x/8TiyMDfRxf5uT4OhryVaJ9GJtAHRbek3xWmWA/hig4UQeN8fnYhuNNzYBoYxsk/+Nv9Q==
-X-Received: by 2002:a05:6830:6f4c:b0:72b:84a7:47e0 with SMTP id
- 46e09a7af769-7366b051cb8mr9912499a34.1.1748926249341; 
- Mon, 02 Jun 2025 21:50:49 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-735af878f0bsm1767897a34.39.2025.06.02.21.50.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 21:50:48 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH 1/1] fs: ext4fs: Fix: Data abort in ext4fs_log_gdt()
-Date: Mon,  2 Jun 2025 21:50:22 -0700
-Message-Id: <20250603045023.29630-2-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250603045023.29630-1-mibodhi@gmail.com>
-References: <20250603045023.29630-1-mibodhi@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id C72F780BAE
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 07:06:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=2426dda6b=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1748927206; x=1780463206;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=sGOVXGI1vEduDWvYYTZLhFSSQ2Oi7ZjZlfbSQgJElbM=;
+ b=kWDOvdN5lrTtjQJSiTGX1ykNooLegfqBDYOll29CIJFtSrYjGImDsVRp
+ EERnrXB2C+ioMq5VFNT3hegKvDWfyZTM5J0LZEIhStZlf6GUGu8Tbfyr+
+ c8qIJ8m+O22XVaxzZsZuRWzcIFn7/vviNul8vpBrIr2nsGRaVEcS8+Lvh
+ BNhaGrAEfMUEapT9zzTl9fYUsBUF4ynEM8mN8+P1ZCWP0JJS4GuDdXzh/
+ xjVkeH9MnZ8tQC8usKgphgZHeMQn+8/lZAmH9gc4/CBV6ndlzuEdnNrHY
+ whAGgrg8AQfHg7SRUv04dHod++HN2/5pVQPRUeVCi6yrdU39BVUonv87/ g==;
+X-CSE-ConnectionGUID: 1XF8A2VYROKM/ET8yAvjUw==
+X-CSE-MsgGUID: cavTeZ4dQ5uQMzz4vWyHLQ==
+X-IronPort-AV: E=Sophos;i="6.16,205,1744095600"; d="scan'208";a="273727166"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 02 Jun 2025 22:06:43 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Mon, 2 Jun 2025 22:06:16 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
+ 15.1.2507.44 via Frontend Transport; Mon, 2 Jun 2025 22:06:10 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
+ <seanga2@gmail.com>, <sjg@chromium.org>, <Oliver.Gaskell@analog.com>,
+ <malysagreg@gmail.com>, <nathan.morrison@timesys.com>,
+ <mkorpershoek@kernel.org>, <robert.marko@sartura.hr>,
+ <jerome.forissier@linaro.org>, <sebastian.reichel@collabora.com>,
+ <duje.mihanovic@skole.hr>, <sumit.garg@kernel.org>,
+ <patrice.chotard@foss.st.com>, <nicolas.ferre@microchip.com>,
+ <u-boot@lists.denx.de>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH v6 0/9] Add support for sam9x7 SoC and SAM9X75 Curiosity board
+Date: Tue, 3 Jun 2025 10:35:47 +0530
+Message-ID: <20250603050556.80851-1-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,33 +85,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Return ENOMEM in ext4fs_log_gdt when number of blocks per gdt is more than
-number of allocated journal entries.
+This patch series adds support for the new SoC family - sam9x7.
+ - sam9x7 SoC is added
+ - Clock driver for sam9x7 is added
+ - Target board SAM9X75 Curiosity is added with its differences in DT
+ and MMC config support 
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+----
+changes in v6:
+- 1/4 - New addition to this series
+- 5/8 - Parse NULL in at91_clk_main_rc() call for parent_name
+- 7/8 - Remove main_rc node from DT
 
- fs/ext4/ext4_journal.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+changes in v5:
+- 4/8 - Define ID_MAIN_RC name in sam9x7 clock driver thus dropping
+	the main_rc clock from DT and Alinging it with Linux
+- 6/8 - Drop main_rc clock for pmc node in DT
 
-diff --git a/fs/ext4/ext4_journal.c b/fs/ext4/ext4_journal.c
-index 02c4ac2cb93..868a2c1804a 100644
---- a/fs/ext4/ext4_journal.c
-+++ b/fs/ext4/ext4_journal.c
-@@ -131,6 +131,13 @@ int ext4fs_log_gdt(char *gd_table)
- 	struct ext_filesystem *fs = get_fs();
- 	short i;
- 	long int var = fs->gdtable_blkno;
-+
-+	/* Make sure there is enough journal entries */
-+	if (fs->no_blk_pergdt > MAX_JOURNAL_ENTRIES) {
-+		log_err("*** Not enough journal entries allocated\n");
-+		return -ENOMEM;
-+	}
-+
- 	for (i = 0; i < fs->no_blk_pergdt; i++) {
- 		journal_ptr[gindex]->buf = zalloc(fs->blksz);
- 		if (!journal_ptr[gindex]->buf)
+changes in v4:
+- 1/8 - Drop the local include file clock/at91.h and the update
+	the MAINTAINERS respectively.
+
+changes in v3:
+- 1/8 - rename at91.h to at91-pmc-status.h, update the SoC DTs
+	and MAINTAINERS file respectively
+- 4/8 - update header from clk/at91.h to clock/at91.h 
+
+changes in v2:
+- 1/8 - add additional PMC clock definition to support the sam9x7 upstream
+	DT
+- 6/8 - Remove support for SoC DT and board DTS as they are already available
+        in dts/upstream
+      - add the differences in DT files between upstream Linux DT and U-Boot
+      	DT to at91-sam9x75_curiosity-u-boot.dtsi
+- 7/8 - Add OF_UPSTREAM support for sam9x75 curiosity board
+- 8/8 - update the DEFAULT_DEVICE_TREE config to <vendor/name>
+
+----
+
+
+Manikandan Muralidharan (5):
+  dt-bindings: drop at91.h from clock includes
+  clk: at91: clk-main: drop parent_name check when registering main_rc
+    oscillator
+  ARM: dts: at91: sam9x75_curiosity: add tweaks for sam9x75 curiosity
+    board
+  board: sam9x75_curiosity: Add support for sam9x75 curiosity
+  configs: sam9x75_curiosity: Add initial mmc default config
+
+Varshini Rajendran (4):
+  clk: at91: sam9x60-pll: add support for core clock frequency inputs
+  clk: at91: sam9x60-pll: add support for HW PLL freq dividers
+  clk: at91: sam9x7: add pmc driver for sam9x7 SoC family
+  ARM: at91: Add sam9x7 soc
+
+ MAINTAINERS                                   |    1 -
+ .../dts/at91-sam9x75_curiosity-u-boot.dtsi    |   95 ++
+ arch/arm/mach-at91/Kconfig                    |   12 +
+ arch/arm/mach-at91/arm926ejs/Makefile         |    1 +
+ arch/arm/mach-at91/arm926ejs/sam9x7_devices.c |   49 +
+ arch/arm/mach-at91/include/mach/hardware.h    |    2 +
+ arch/arm/mach-at91/include/mach/sam9x7.h      |  172 +++
+ board/atmel/sam9x75_curiosity/Kconfig         |   15 +
+ board/atmel/sam9x75_curiosity/MAINTAINERS     |    7 +
+ board/atmel/sam9x75_curiosity/Makefile        |    7 +
+ .../sam9x75_curiosity/sam9x75_curiosity.c     |   66 +
+ configs/sam9x75_curiosity_mmc_defconfig       |   73 ++
+ drivers/clk/at91/Makefile                     |    1 +
+ drivers/clk/at91/clk-main.c                   |    2 +-
+ drivers/clk/at91/clk-sam9x60-pll.c            |   55 +-
+ drivers/clk/at91/pmc.h                        |    2 +
+ drivers/clk/at91/sam9x60.c                    |    7 +
+ drivers/clk/at91/sam9x7.c                     | 1085 +++++++++++++++++
+ drivers/clk/at91/sama7g5.c                    |    6 +
+ include/configs/sam9x75_curiosity.h           |   23 +
+ include/dt-bindings/clock/at91.h              |   23 -
+ 21 files changed, 1669 insertions(+), 35 deletions(-)
+ create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+ create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+ create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
+ create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
+ create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
+ create mode 100644 board/atmel/sam9x75_curiosity/Makefile
+ create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+ create mode 100644 configs/sam9x75_curiosity_mmc_defconfig
+ create mode 100644 drivers/clk/at91/sam9x7.c
+ create mode 100644 include/configs/sam9x75_curiosity.h
+ delete mode 100644 include/dt-bindings/clock/at91.h
+
 -- 
-2.39.5
+2.25.1
 
