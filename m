@@ -4,152 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 410FBC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:46:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22D4C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A23D882D66;
-	Tue,  3 Jun 2025 16:44:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F8CA80F9C;
+	Tue,  3 Jun 2025 16:59:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="TBTP7F0W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xg7WNyMf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41A2881E72; Tue,  3 Jun 2025 15:41:22 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 23D1182145; Tue,  3 Jun 2025 16:59:42 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A20F80F9C
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 15:41:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=htecgroup.com
+ by phobos.denx.de (Postfix) with ESMTPS id 49C118091A
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 16:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QTXeIrN8/yahIWjdIh8PgSh6Q10XGFiyhO/6HBNcm4c8W4RTVWfklI6H2Rz3QUQQOE8meVYIKzAlJTx0p9bXUR0DlIxoAjSfXUxSfwdlxp91dox3pOSf7CapnxT4X0vRe627F2yIGT5eI0r3Ye0MjaxBYPz+VQ3gTmuPvBqie5F4N6D+QvaMPWJhepqO0yZG1Gza4MAvvexACKrJAPADiLZ0+/t2xc405zjGetkZkANBIngatISdJUzeBXdsTdFzKWHDcdzJnMReK7YUkuA6+jzjg/3AH+j7Yg1PuCHMQvT8kEWF0/mQfjQO/Sn/pqzArVC+mUKQUr2GUlrx9Sm09w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LkQtx4vpxlyHWCXNRYujjyY816IXKC8SGnPFiNk2JDg=;
- b=lrptoEhjv6cGR6xRC2vG/r159HN6Ex4KZ56FKgpe0v51k6i6w4LNiVSpfpfCb+XcjCmUFQ33iCN5/W07wVFxcSMEEL21Knvs0d7dfjHuzT6Mw9YJP67GD0ZVA8AXG3InbxodBviS2W3fyeFJtrKGTNLGMnqp4eNzcZxWO3B9eFXodDl2lYWvw4VDPkH6cTqcRNCqSCXeykiXIm7RaGudcPeZJrtgSYeoOOQR0J/yJdvamnKrIRjd5xfxBX5998uxCR5Gp31f4KdC5oQM1PtpZjtELlPQ7t4q3Fu56jZP2ToOkLpdlNDybvGmyYREpI7usMs9racz/BGvvIVssQPKJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=htecgroup.com; dmarc=pass action=none
- header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LkQtx4vpxlyHWCXNRYujjyY816IXKC8SGnPFiNk2JDg=;
- b=TBTP7F0WET9MIWvUwj7YeVSu0AyPDMqAnmDGsjklpCBZqT8E9ukSg/y7gSR39F48tq0FGfqYhb8iO5hN8ZK5tRFDgQwaA+QuNDfFttXTEan9FOjfOj+SgnfEj1p07G56dTq2G1dAmVYh/H2YgPiV4GU3kFmah5IvnLfXJOS+CZOnQikqMNkf1MicyJcm7QUxYsQPG/z4i4504yFp0wwpgx3oh+OLJL9i1xGrWl0JuJFboedJrDK6ztWdMJxXXMA4jVvnYTLCg5GBU3UiQhcWuUNl0DxZfHNNGmO/bpWcAj3xbS6llmpFi5dsaVM+2Hdbqf66T45/NjxbijL1HxusIg==
-Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
- by VI2PR09MB7303.eurprd09.prod.outlook.com (2603:10a6:800:223::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.37; Tue, 3 Jun
- 2025 13:41:17 +0000
-Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
- ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
- ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8769.037; Tue, 3 Jun 2025
- 13:41:17 +0000
-From: Uros Stajic <uros.stajic@htecgroup.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Uros Stajic
- <uros.stajic@htecgroup.com>
-Subject: [PATCH 11/11] timer: p8700: Add support for reading time from
- memory-mapped mtime
-Thread-Topic: [PATCH 11/11] timer: p8700: Add support for reading time from
- memory-mapped mtime
-Thread-Index: AQHb1I0u1p86RKGsekGfXpRDltLhPQ==
-Date: Tue, 3 Jun 2025 13:41:17 +0000
-Message-ID: <20250603133744.278790-12-uros.stajic@htecgroup.com>
-References: <20250603133744.278790-1-uros.stajic@htecgroup.com>
-In-Reply-To: <20250603133744.278790-1-uros.stajic@htecgroup.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=htecgroup.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|VI2PR09MB7303:EE_
-x-ms-office365-filtering-correlation-id: 57c46a97-3855-40f0-9ccf-08dda2a45121
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?BwzJ2YA18FzlIbQzfgvmRE7AYuyH82feQrOuIeyLKd5acTxkDwOAg9T2gz?=
- =?iso-8859-1?Q?GHRuzkbQj0VOl5MtEiwQH3oa5Pm517DRfAweQW6F5Gbd6pILGHvXlIof6k?=
- =?iso-8859-1?Q?N0fcbu7USuzT5nvTu4m3iqAlUmJVuk/zzLOrXGFKw9OvMaglz+HxG30yBr?=
- =?iso-8859-1?Q?mIA75mzuwS5uJBE3RIeGL+DN0aNcK/xu/Csg6jV9DLiAzECe+GiyAXe9cR?=
- =?iso-8859-1?Q?KqR86FfLmj0OqI7Qfr5A5vfip8iZiNs1aX1exEnXP4IY/qGvVNCe4izxZR?=
- =?iso-8859-1?Q?SuypU5DBOv2MUShz3SNufiLeX1H/cxCUF2q+QoxFBatLWuXkcWtEa7AGqk?=
- =?iso-8859-1?Q?A00XLQRWn7SecOjRDPvu8O8HqsN5x5N5uJY/VyEx1nHKnh6gYJsxXhmlVk?=
- =?iso-8859-1?Q?Fr0H/2a/cBYPScTR6pmdiU18bphzoZl7wh7h3vw4L6352cJl0BDD/nCXtS?=
- =?iso-8859-1?Q?2twO54zROgUN8EWh4oM69WO+rv4w0vW4Ickht//Y3b71qklF8Ua9ZiXgIJ?=
- =?iso-8859-1?Q?/QqgR0u1Hv5rOQpzNsWT6/gEjfEYf3rpz1RIjeQ0L4RR/XL2rXF2DIccdC?=
- =?iso-8859-1?Q?srxLoDGGwp+lrZE49IJtkfdLhiYbZmiavcwSWvpvtRdqvhforJcK37xvxf?=
- =?iso-8859-1?Q?bR/cce7J3+p+mMp3aBWy+e8xlkymluwTf4PY0GlRlF4MQ+Co7s3/1sNBGm?=
- =?iso-8859-1?Q?kUxTuodWc0rChVsi5c/1g6CGgaVNSJzJ/r5bfy0zEAUEPTVNREN4tOQUYu?=
- =?iso-8859-1?Q?rgkvRKa9NZ6oCdGyZg1bfi6Utvv3JPv6iHZfUmBmb2gnglb9PK+OCONNUA?=
- =?iso-8859-1?Q?8dgABhxWu3wNcmK3SvnRkT3OzO4/uaOegU+ZlwFCpmbyt6/qq7uuzpUy4e?=
- =?iso-8859-1?Q?grp3GwxdYQLxkLn6OdkX8Qz4eA9lMyUrLOlSFc5ypTkUt1agJxXW96vY5o?=
- =?iso-8859-1?Q?XqKXHYrSdn2QCk5+zkN2lbm0oy+LvW+T88/dzm5qzgeA1TFZ4tfsP+Dx6Y?=
- =?iso-8859-1?Q?lPAKidN8Du3Y1gqQKyBP5D9G5/PjjCYGwn7XPMnIv04RdqRluA+AIETOUj?=
- =?iso-8859-1?Q?O+OSqd2ifX8G9gW6fPASsLDwA/xJgufcevvs5biDXjAfsBAR3GCPXyTDbj?=
- =?iso-8859-1?Q?QepUuhGIsThLDt9oq0QKA11wyBW4lc5frENgWVrUMxYqzB6pwTikPqgcQJ?=
- =?iso-8859-1?Q?uKJ6nq3fKfAQM9l48vmhJRiydw+5CB9agpSZRO8g8dDbcbwAeNHqVQXfVL?=
- =?iso-8859-1?Q?D+MBMDOCCcded91dQBBHn9KauioBh6Q/wgvfVm/Q7/1SoE0LRFKusR2p95?=
- =?iso-8859-1?Q?EvWFYcTfitATjMfsI231kfM53yduivEHHx+NNDBqVLS6dDhWGYFBWoTJb+?=
- =?iso-8859-1?Q?UG+GmpsTTcOmO4fByf1ohyHPFKTRd4IxCFX4UAXr4Mn7159vQ9mqhcgGS2?=
- =?iso-8859-1?Q?JzoDuojIm6YFv+vO8G91b18P7BvLaYWCmbUrWY7Wep0gxvYq1eDnU2tuSj?=
- =?iso-8859-1?Q?zK/RGJhyx0TOFst/kzzJQ2KH3sMYLO4AIYGik6LYwYWdBS6QiuDkX/UqH9?=
- =?iso-8859-1?Q?Dyq9KbU=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?C4AB1rup8TbFWOeVMCKFIQrgFQE86pcXTCyKGz+25/B7KQDe+YVZbkBH7Z?=
- =?iso-8859-1?Q?o1pUqkRwPvn8YTXShchbdqGKbok+zm8AFpON7EnQDYuxQppdPTUpwEAw96?=
- =?iso-8859-1?Q?SN0lI63/txkIUP1BAobkHWTqnTi1Ewhc8MfATWFSKX9pSqcWGfxZyyHkb8?=
- =?iso-8859-1?Q?j1XMA7vIPh7julFDLInJvCgjCeglvpFAqcHOnLA/wExpJUb/xMwWvHB8za?=
- =?iso-8859-1?Q?Vd4V/1yMu6qSkw3QghnRMilfCcJM6pGA8ojoyK7HBqax1kMd2naZXWSVf1?=
- =?iso-8859-1?Q?KCP6XLC60ileoQfSgrXlNy9qbggZEZab3tq5zwu0+7MaLtqkk/Pm8cjUNb?=
- =?iso-8859-1?Q?DBv7gUqE0bKColMjZIFeeRXgVM9xokfApi7HCaPTfi5ZJw+5JZ7iisl0/s?=
- =?iso-8859-1?Q?C+mrFtuSztcyO5Kv3ka/KQHKx+ZpS0yP2AtXSMgV1V+feUp6tWRZ26XlmU?=
- =?iso-8859-1?Q?fcJOal+yRgv3aNXZIQ/ng5deyMaZ6JDzJ88JQp63CnAf5o4VBpZCGnikLm?=
- =?iso-8859-1?Q?fniTmQouMhw5AokYRqHw82Lrp8UESHso4bXsGB5ztTdOApMOqELRQ580S6?=
- =?iso-8859-1?Q?4MRk+RpxA/xbQPgwq4naswvjSSF11UuVMcL2nwxfM1E/uCO4KahO9zGkqo?=
- =?iso-8859-1?Q?Om+BRMArcuAhuFP8f49q4pq7UA+svz+K850+nvi+sl3wmdLkwVlhEv5YH3?=
- =?iso-8859-1?Q?NQvQbEUDqEI60eCWfkL896T0ubceIuYVM3g2ap7L8Inwtsw5G8Qoc7Hulo?=
- =?iso-8859-1?Q?MZ8/4rZOfVbw77y4odEjnACUQBBPIvg+W6/n+4ojmYnJyzr0MXwBRjgtFA?=
- =?iso-8859-1?Q?kHaKRlI1Gl+Gxtq26InraSCiJTfSg036Ae/dEZX0qRD2nIVbdQgQd6zvGB?=
- =?iso-8859-1?Q?jJg0Do+Aj7YJKlRhSiYO83z5s0Vl068AlSZdakJWjaIzw/VDWrt75E39rf?=
- =?iso-8859-1?Q?41TZBq2rKAvZ76y9rp8lnZxGOKpipwo7AxShq28NqFiIzAbMOexbDDvyND?=
- =?iso-8859-1?Q?8x9Y5McVM/qkh8Lrus+bSwZIGmmteh09hRoaKgaO5MM+53KjGjglNdR0p/?=
- =?iso-8859-1?Q?pWrWs/rkQSWS2hI4YKkJbfz4R5BYYIJVHhdW8LQrcCAQuTtB4tpMXC+3EA?=
- =?iso-8859-1?Q?Td3MHJpP2dq6jMsU99zlXqRiZwr+Iw0Zrtr6pxTQHQF3BW1K4zC+2Lt8/O?=
- =?iso-8859-1?Q?GrikmSAEo6Ak50+cx2IuSBlfzBj1oH7xDKKSJADzg/mdQO0MLNPpWEMqna?=
- =?iso-8859-1?Q?3MMsF+c8FJnIRl01L+zYO9gmlUqL2zCnsk3rbJTAxVefRYzapk990HC1zf?=
- =?iso-8859-1?Q?96HqTisQNK5o7lr1YseH/mTnswSOh8uHdHSMaU/KICZpjgnfULsqRBO52g?=
- =?iso-8859-1?Q?7Pkj633AwXAbpBzJRSmByHlGwgiCSpXYPmT/5ZTQcxK13GCKtb+HLOB09G?=
- =?iso-8859-1?Q?P8vPfEioSF9An127m0oORSLN9M65E4NU0iv+EJln1nVRu3dWXalTZc/+tX?=
- =?iso-8859-1?Q?MY37TpHm8Q9RApeaWRhBz/EADzEXwMo98MMGElm+scL7esMR7dB5mJnjFW?=
- =?iso-8859-1?Q?1vQy8l1xHW4m7Kc0+e9v/dX40vd0/DZwAXuo7tSdZXLaabBTjBzLZGbwTG?=
- =?iso-8859-1?Q?M4t8mxo0O/oeQMcAk0Uy5iI3UNxGB2Sy/fbDrlxzAz/uXXZuTaRlBrfg?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-451d6ade159so23837035e9.1
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 07:59:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748962779; x=1749567579; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ghbq20KWg/2fiOO7u2YgPXi2yIDX9kvPYsxOddFF9Gg=;
+ b=Xg7WNyMfPj3dn3FyTjzcrs9SHb351/w45ocucXAEjhlsy/4oc4NeQ7ll+ubwdXr33i
+ 9xorNLbw0SmnYEZeqlIQxVGlIZ4drIzk4OA01CQ9vsBFOQMaH/idDfTWZJLHpLQvJoLj
+ pySgiAx2/yLn+thVmcEHoMV1w/VwNTTMDoCJxwg9mzMBgM5KWq66P7tmjEMvIZbiNiOO
+ y43DUoa/vTmIRg3Q86Bu9e/etBnvHH3C1ZgyYzSJuZvUdwC6eg9dhDSCqVIQEDCT4Xxd
+ JI5D3Ek161ItLZE2KQEFCG75WDez4P1b+ojwAL3jKqJ2B8+3IGInsG/fQp2pZxMINbh/
+ H7GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748962779; x=1749567579;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ghbq20KWg/2fiOO7u2YgPXi2yIDX9kvPYsxOddFF9Gg=;
+ b=JJjxyj+BXR2G7HA4XadR0Ro36nhuhZG7bUh+FxfmnNDzYsqRmfKdwmPg1wTll88jX4
+ Rn0sDEPk2KaviKsLJa55lEnfN/ZtSicDLAUw734LdkShGcw7LoT5kYcD3Hg1BANVaVag
+ gUuwMqgXZlQe461Wb9SNc/QNB8XeSgCwl2lNcNNmw3xfDC4zaJSfp1L2IxEhleJzno83
+ i3FlhPOTj0yMRJ4DXwxOvKBTGaI35CDKN38kfEkiOY6gacBhrHIL5im9ga8UaYH8PtVU
+ U7gI5tJ4UQpaPcRBZl2YgkfHI6YvudRz/k9yH865WQQ6p/oJKeFK6s+ywsZOh4v2bBPb
+ xrEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVY0ETWRX7NJLsYHofvDw52qFRtblhoJnX/kSJ/hC1qbshj1KyfxaKkmbc5LDl8+tZwdRpWuoA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyr09iUORwhhogK767L3pddxxxMnh6a0OPMYLA2S1mhPicsS76r
+ ioj3g+65mvTCxsTi7+c2AK196Aw93kuHOP4OQbDZNDTLDYmMWQ/bQLtoaW0W09ZHtj0=
+X-Gm-Gg: ASbGnctzH2GsWw/UA1g1Nq88pgVVVZm0Jx2adQdA5ybHaFKg3QI8JCgIATaK1I4YZxt
+ l0pgJL4QqG0NaQX+RRUQ3WfjttENLB/zTJK65mZuGHm+YnEhSH9FvoNV5tQXnxT/bMNdPjTfDlv
+ 3qSmTTff5ongQF5xjrfOD5W+g77ZFYtMTEs1eqRh8Dp7Pg35ic0i5F+PlBvHr1GEc3H4duM4IUv
+ x6WFnwCRYAa2ccpsO0StDRjSXHFTYn8DgkUTaIaPgdZVNlID2XpwAiNfy8aYPUhgiWQEQR9MSsC
+ sMIrEPx+ai2Sirv4dXMAdCI2z08UYqB5CNF/LTnZ/lszOey2+0TnRfNykAGHVfyt+RYRKD8+DWr
+ b
+X-Google-Smtp-Source: AGHT+IE8NF36+ggdk8Efpg5QEJEujVgjyV0rf5f0zgU4mTOs15Nk+hXkFOJXG290VUsAW5FL4ts11g==
+X-Received: by 2002:a05:6000:4012:b0:3a4:f435:5801 with SMTP id
+ ffacd0b85a97d-3a4fe17b831mr10110860f8f.17.1748962778536; 
+ Tue, 03 Jun 2025 07:59:38 -0700 (PDT)
+Received: from toyger.tail248178.ts.net
+ ([2a01:170:117e:fc:e089:f4a9:4c4d:e359])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4f009f865sm18489369f8f.81.2025.06.03.07.59.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Jun 2025 07:59:37 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Alexey Minnekhanov <alexeymin@postmarketos.org>,
+ Rui Miguel Silva <rui.silva@linaro.org>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-more-for-2025.07
+Date: Tue,  3 Jun 2025 16:58:11 +0200
+Message-ID: <20250603145933.1019742-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-OriginatorOrg: htecgroup.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 57c46a97-3855-40f0-9ccf-08dda2a45121
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2025 13:41:17.5405 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: rO2EFP3gR/k0rWSPg80vdIGQdU6XCZ5e0h0B7gqV6VciAwNcJ9UMXP7jSbfQGWWcmAILYHjA2/szAOM77FWwfcGlhcp0pEy3mByAktrEQUo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR09MB7303
-X-Mailman-Approved-At: Tue, 03 Jun 2025 16:44:26 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,35 +102,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The P8700 core does not support reading the time CSR directly and
-raises an illegal instruction exception. This patch adds support for
-reading the timer value via its memory-mapped address at 0x16108050
-when running on a P8700 processor.
+Hi Tom,
 
-Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
----
- drivers/timer/riscv_timer.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+Some late fixes for 2025.07.
 
-diff --git a/drivers/timer/riscv_timer.c b/drivers/timer/riscv_timer.c
-index 1f4980ceb38..5138236a028 100644
---- a/drivers/timer/riscv_timer.c
-+++ b/drivers/timer/riscv_timer.c
-@@ -18,8 +18,15 @@
- #include <timer.h>
- #include <asm/csr.h>
-=20
-+#define P8700_TIMER_ADDR 0x16108050
-+
- static u64 notrace riscv_timer_get_count(struct udevice *dev)
- {
-+	if (IS_ENABLED(CONFIG_P8700_RISCV)) {
-+		u32 *mtime_addr =3D (u32 *)P8700_TIMER_ADDR;
-+		return *mtime_addr;
-+	}
-+
- 	__maybe_unused u32 hi, lo;
-=20
- 	if (IS_ENABLED(CONFIG_64BIT))
---=20
-2.34.1
+CI run is here (just has vexpress_fvp disabled)
+
+https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/26489
+
+The following changes since commit b22a276f039f818d5564bec6637071cfc8a7e432:
+
+  image: android: fix ramdisk default address (2025-05-30 13:44:05 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-more-for-2025.07
+
+for you to fetch changes up to 14315b73a8e7aef9125c7c1aa28ebe3f0725a202:
+
+  mach-snapdragon: Update fdtfile logic to work for RB1 and RB2 (2025-06-02 18:20:40 +0200)
+
+----------------------------------------------------------------
+More Qualcomm fixes for 2025.07
+
+* Adjust fdtfile logic to support more boards
+* Support linux,code variable in qcom-pmic button driver
+* Minor CLK API adjustments and apq8096/msm8916 fixes
+* vbus regulator register fixes
+* dragonboard410c KASLR support and other fixes
+
+----------------------------------------------------------------
+Alexey Minnekhanov (1):
+      button: qcom-pmic: allow to specify code in devicetree
+
+Rui Miguel Silva (1):
+      power: qcom_vbus_regulator: add and fix support for pmic variants
+
+Stephan Gerhold (9):
+      board: dragonboard410c: Fix button cmd name
+      board: dragonboard410c: Drop custom reduced malloc size
+      board: dragonboard410c: Enable support for KASLR in Linux
+      clk: qcom: apq8016: Fix SDCC clock addresses
+      clk: qcom: Move qcom_gate_clk_en() to C file
+      clk: qcom: Use setbits_le32() for qcom_gate_clk_en()
+      clk: qcom: Allow polling for clock status in qcom_gate_clk_en()
+      clk: qcom: apq8016: Convert GATE_CLK() to GATE_CLK_POLLED()
+      clk: qcom: apq8016: Fix SDCC clock warnings
+
+Sumit Garg (1):
+      mach-snapdragon: Update fdtfile logic to work for RB1 and RB2
+
+ arch/arm/mach-snapdragon/board.c                   | 63 ++++++++++++----------
+ board/qualcomm/dragonboard410c/dragonboard410c.env |  2 +-
+ configs/dragonboard410c_defconfig                  |  3 +-
+ drivers/button/button-qcom-pmic.c                  | 15 ++++++
+ drivers/clk/qcom/clock-apq8016.c                   | 17 +++---
+ drivers/clk/qcom/clock-qcom.c                      | 27 ++++++++++
+ drivers/clk/qcom/clock-qcom.h                      | 26 ++++-----
+ drivers/power/regulator/qcom_usb_vbus_regulator.c  | 37 ++++++++++---
+ 8 files changed, 129 insertions(+), 61 deletions(-)
