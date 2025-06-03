@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9520C5B555
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 23:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C27C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 23:19:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF5E981FEE;
-	Wed,  4 Jun 2025 01:19:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05DFE82B37;
+	Wed,  4 Jun 2025 01:19:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P4Kp8DAU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LHAIbxsj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5746681FEE; Wed,  4 Jun 2025 01:19:22 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 76B0980F9C; Wed,  4 Jun 2025 01:19:23 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E90782103
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 01:19:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57A5882B81
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 01:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-735a6c02a96so215697a34.0
- for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 16:19:19 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-40667dc8a62so2915357b6e.0
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 16:19:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748992758; x=1749597558; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1748992760; x=1749597560; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ehfTv7aVI1QyA9WxiCwasgGoDgbbTPqvP9Z2V6pr17A=;
- b=P4Kp8DAU3LeBWnZUZsB34n4NUuJEIp0Qg4x3wlc9grTeDzeblnJUkyxEBG1eFpTWni
- zIL6ZsBMVsnW72S+dVbLhWADJf0ltv5HKoI31EVA4XAo93T8ZpxSqLRFlaD2t+AbH9Vb
- moXILTlsSA+vydUsna4FsVvNmhASUma85suh0=
+ bh=48CKNYsofTusMZDmrMAPy6GJswrY8feTEx0bO5IFpCk=;
+ b=LHAIbxsjlpCUdjielLczy0Z6NNs3TxnV3T8FyaMCPnlz3kjXVQBDaCyaM/2AxGppAR
+ df6uO9deRSqPEBilI8tt+GnSEg3Q+1x8Iof9SLFyYcB6/Yv4AJqbQ1y+Gg10xgDAMdnR
+ wJQa0R+dmKURrA/4qZ+2KGYPIoJTITqRXbB8A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748992758; x=1749597558;
+ d=1e100.net; s=20230601; t=1748992760; x=1749597560;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ehfTv7aVI1QyA9WxiCwasgGoDgbbTPqvP9Z2V6pr17A=;
- b=PDLtNF9m5LGrFX3Wdh++SD+df3fOdkhzHMkPd/m5In69UhAgog8x7phw8FUD/x/bSb
- 5HF/3/Z2UDlcGAyUzev37MaFWN7oPT2J+tiWpPsPVo+bMAJdzXpwFD4jNViQdfZWqGk8
- VtXHgjlWKoL0m2gTxjbkhE7tWwdWOhgoewFFH2BrRRANFaq1dNVlhTndXCZCLutayKM2
- mje/UBRorJ9EyKvm73Y2U4mT4YRk86WJq/7kDNe1x8nY6vMCsbYDN7WctVMXmqmhRJLw
- UMre1tTWVvBLvhNtsFFJVYGtGd94CVyHG34XMRm6nuuEL/QrWkSVKGWT5vKhruRqBNgy
- vCCQ==
+ bh=48CKNYsofTusMZDmrMAPy6GJswrY8feTEx0bO5IFpCk=;
+ b=MjWcaee4eNwVXtSMg6cy9Fqw+lvRl7db2+1bIthqkoHnYW78FYiIjfblLtugit9wRO
+ g97V4e11G9c9R353xuZ2rGwziuCYmO9b0hYnumuwdjvbGu8tz9AJrLrccB7xaAy///ln
+ R1vLIsZTgH7tbbaFZuWyKeOC3DAXyjevMuODVHX4wuV76J3r5zwlkFh0Uc0J9hysxXr2
+ mGPoteohe2kvBf1QqOaDQH/U+Z2JpWANDEFQrcwQ7RuXhCwQmxaOWxWH8us8dS7w1PXA
+ deUOP7vADtr6fA0E40ayhAX5yBIGJzPBJuZzlpJO3dfBhoUBeqxwYn+qdfvz2eedyncP
+ WUzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVP2Dab+pXIwlvpv7zqcPcv7ubc2+Dj+I+NhCt9+q33dRtAuhfaU47crejOWfvBz61sucKg5GY=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywf6YAXnqRY73wcNpERwX3YU0um7kMIU+6Q3YGjT6zriqhHmWGb
- LVl53gXD5jeeKbDxPcmuZTz1tbCqjJZQBtq6SHSrN3/J3RizXaFvS1H56cWWVBt31HRvXPCoNsO
- dkL+kJfA=
-X-Gm-Gg: ASbGncs+MN6GlRPRAQ0y7Ur+TcwGu3pyGdEXL5iux+crvTvgKPoDCmC0T6bI19ozGfP
- MfvYiS89b8KieC8HI6saKwQDFeIHmPS7usQCRy/M+kc0PjyIWef+8AdnPiEsk5m1yqyQjEnUcI5
- GQ5+bDLI3E5aV8PWr1mb5Vh4RCw3+stnuyc6YMLEAWKq4coMXM3n1u0JmdB9V4JGh0ZwsN7UuzC
- s3ie84KtVj9BCnyOlEys1KRB4JMoP62vOZnDS6WNvPryq5Ul4ID2oAp7xJ6eXTvEhWTy229Wg8R
- /+Vfo+lgNsE1Sr0LfV3Idywujt3vxPyEF5mjHEE0n+SOINUIiWn8lyiWNpT95v3snSzymaryt+k
- 84NOaaXJYfFU=
-X-Google-Smtp-Source: AGHT+IEbB2oRANuu/S/PMbgqIdPyjUKX1+qyx4tfCtCsMKZbg/uFNahAARvXwo1txacRCGe+657yng==
-X-Received: by 2002:a05:6808:4486:b0:407:39f1:ac80 with SMTP id
- 5614622812f47-408e352914amr3506573b6e.5.1748992758243; 
- Tue, 03 Jun 2025 16:19:18 -0700 (PDT)
+ AJvYcCUaNj0WnP1dRlG1SZUpxO9Rh/Kqi49pYZsGnq+5Yke8UEaFPSP56CE6TPasB+N/BzSK6XkBP4Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyw/use9W+WvIAOG+M4cExnxs5pHCkAEeh1RrFx8xtIwiNbPQah
+ ea9UT0hqrc5uOCYkuYKLjiZO7v0h4uT64BeO9I8VEhK3RqojSX8cRt2btl8Ph+KLXGQ=
+X-Gm-Gg: ASbGncul+PenQRYk3IAjc94etPJ0jO2EtCbJRFVJNYv3zsYfhmz6II8f9gdPigpeWt/
+ +d0OkAvjiffVdtqR0YL6xUY4ko8fcLa1D43QOUtqDK/HHhI5XKAuxkIQ90vGvt5lxVsOMr82EW/
+ PJvX+aU2H0j7YDYGmA4JjV3QEds6iGisAA3dHmFpU2HsYzUQqdBsx3tVyKbsYT+9ceEx/2wzCDP
+ rCZiQNhpd/82fNqhQrl9cCIJn8DnJJEuOpXp7KTt9OrPGq9kgjuD0MH+ClQ4x1O+20g9VeEiKxL
+ 2zQMe0mO4blcM+Ol+0k/TSBkRZJTSIamLWtDGNmURucDtKqs9uDdhP/XLnBjkdd8yDvv4C71jex
+ jNpC66safcRw=
+X-Google-Smtp-Source: AGHT+IE+D0RftDANGeGH9ep2/a9fCdNGhroIe/XnUgA+dIPpReeFSv3JyMEyJ6odWjWrl64DRuYPcw==
+X-Received: by 2002:a05:6808:228d:b0:408:eec4:eb2 with SMTP id
+ 5614622812f47-408f0f1408amr767265b6e.1.1748992760061; 
+ Tue, 03 Jun 2025 16:19:20 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40678c1db4asm1990941b6e.12.2025.06.03.16.19.16
+ 5614622812f47-40678c1db4asm1990941b6e.12.2025.06.03.16.19.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Jun 2025 16:19:17 -0700 (PDT)
+ Tue, 03 Jun 2025 16:19:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Vitor Soares <ivitro@gmail.com>
-Cc: Parth Pancholi <parth.pancholi@toradex.com>, u-boot@lists.denx.de, 
- Vitor Soares <vitor.soares@toradex.com>
-In-Reply-To: <20250519154745.429751-1-ivitro@gmail.com>
-References: <20250519154745.429751-1-ivitro@gmail.com>
-Subject: Re: [PATCH v1] board: toradex: add verdin am62p support
-Message-Id: <174899275664.1527530.17358325352075388123.b4-ty@konsulko.com>
-Date: Tue, 03 Jun 2025 17:19:16 -0600
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>
+In-Reply-To: <20250520090924.2638187-1-ghidoliemanuele@gmail.com>
+References: <20250520090924.2638187-1-ghidoliemanuele@gmail.com>
+Subject: Re: [PATCH v1] linux/sizes.h: sync from kernel
+Message-Id: <174899275836.1527530.11834601508574132867.b4-ty@konsulko.com>
+Date: Tue, 03 Jun 2025 17:19:18 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,23 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 May 2025 16:47:45 +0100, Vitor Soares wrote:
+On Tue, 20 May 2025 11:09:17 +0200, Emanuele Ghidoli wrote:
 
-> This adds initial support for the Toradex Verdin AM62P module.
+> The kernel added new size definitions and substituted the
+> boilerplate/reference to the license with a SPDX identifier.
 > 
-> The module consists of an TI AM62P family SoC, a TPS65219 PMIC, a
-> Gigabit Ethernet PHY, up to 8GB of LPDDR4 RAM, an eMMC, a TLA2024 ADC,
-> an I2C EEPROM, an RX8130 RTC, plus an optional Bluetooth/Wi-Fi module.
+> Drop a local SZ_8G definition in MediaTek MT7988 SoC board file.
 > 
-> These specific changes adds support for Toradex Verdin AM62P Quad 2GB WB
-> IT module.
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] board: toradex: add verdin am62p support
-      commit: b8c43968b801c568b66b1d2985e8542275d9d49a
+[1/1] linux/sizes.h: sync from kernel
+      commit: 422222f5170ac399f0e5fd39290f8508ad777fcc
 -- 
 Tom
 
