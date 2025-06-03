@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D59BC5B549
-	for <u-boot@archiver.kernel.org>; Mon,  2 Jun 2025 22:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A549C5B549
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 03:06:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6E1680F9C;
-	Tue,  3 Jun 2025 00:38:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 353FA81F0D;
+	Tue,  3 Jun 2025 05:06:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eEbb+MBZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GzYUvSET";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44244810EB; Tue,  3 Jun 2025 00:38:21 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8487D820EB; Tue,  3 Jun 2025 05:06:25 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AFAB80F0E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 00:38:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-735b2699d5dso2623486a34.0
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 15:38:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1748903898; x=1749508698; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9v/EABmZl1N5dRyKNJEJIorpuCX2nfqiTJVOIhpo2Kw=;
- b=eEbb+MBZp5zcaGy1/RHhSD5favgUAA53a2lv5ajQA3gg7pxaRAa2DqE7Ehi4xM9UQ4
- 5bySAk1U84YDYJacQXyp7Ezx4wDlXL9T0zB+l8r1nsTURaH9aCFn2umNjA8gCKVcCehM
- xt/O+DMzCVVHbZ6GoHi3kZmc/n7gmxcr3p/mQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748903898; x=1749508698;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9v/EABmZl1N5dRyKNJEJIorpuCX2nfqiTJVOIhpo2Kw=;
- b=ZGxCyHYh7XOgI9SKYOikbwK5jPMzMXI0K9wgGpW51/4qHajwb/bvTF/LRJgn7prbzz
- 9q/1ZSFSHNgF3R8I/Uc0V15vKLpW1dVHPHtKw2kziRpIubC2y7yYjfGEw/1x6ZO5mX0Y
- BTrIPX4/vFTNYE15GBUpBSefD2t6js0+vdxHpEcGIfnk4QrqH2OyEcamVyk6JeeyWsbf
- xKFlrySssnx9yvPNtj0jFr6CoDwwotzVsvzYE8/vaA6VQPZ/kdnpGc4i3rjjTWRPpP1M
- s2DFpp33LSlSsfYa4JavGR59cUiwKZPBVMbsFzSkJI+LepbGY/q5HuiPjhzTUlTm6+pF
- 7MJQ==
-X-Gm-Message-State: AOJu0Yywz1E2BktHZAsjE+YPfguDwb6l46sQO2ZOtseFd+JNiUVab1Pt
- Ybv3B2enGzWyaXnBV6y2fZyBo2IdxR3TK4eNJQxWRyfQhQN9Tl6DIpXtOJZuFouCiWs=
-X-Gm-Gg: ASbGncvnAxrTGKgQHy7oRsF1RKR5ZL3BeahqCaGNpIdRUE7RCnAOQt98iw8EJyfUDrP
- qgAoGqAkPl37laH2XE7kvePsRMwdM9rvcvPweu61ufriynMQ2K9STrUKs+qltHNPtRlkTQmsOJG
- aqtGB2Ufn75N4ASEBXOu3SZeD2xLOPeWtJeNLnVsoiXr/5RBIYn0AlbU4+5V9mLlUc9eHDt7Lyz
- Bls7WfV6kQsNc8xbmRXZLgprSbCKHqMX0XgnxEukNv/Qe7AShzfqY9Den/hMUEp4w6M+l8Yb4t7
- ygYAJVL8Rd4bRzrBosm6QdvzSo8k236H3nouJXI6uCkXFK+NvPzPOJPmSQ/N8IHRJj7F/Yb2JUS
- ZiLbEKZpY7FrlSLhvyPfCYA==
-X-Google-Smtp-Source: AGHT+IGI/hQjPSRFGqgQzgyG9q+7Q0VLX4IypT5jZ1fFgji76S7urqQsYG97atYgGXv6+kqCItQweQ==
-X-Received: by 2002:a05:6830:368a:b0:735:b29a:cac1 with SMTP id
- 46e09a7af769-73758b8af88mr6536778a34.1.1748903897769; 
- Mon, 02 Jun 2025 15:38:17 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-735af9f3bc5sm1677631a34.63.2025.06.02.15.38.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jun 2025 15:38:17 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Junhui Liu <junhui.liu@pigmoral.tech>
-In-Reply-To: <87ldqamcqk.fsf@kernel.org>
-References: <87ldqamcqk.fsf@kernel.org>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20250602 into next
-Message-Id: <174890389684.1382550.12707390201312505395.b4-ty@konsulko.com>
-Date: Mon, 02 Jun 2025 16:38:16 -0600
+ by phobos.denx.de (Postfix) with ESMTPS id 2CED681F0D
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 05:06:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+smelamud.redhat.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id E878F5C55AB;
+ Tue,  3 Jun 2025 03:04:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6BB6CC4CEF2;
+ Tue,  3 Jun 2025 03:06:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1748919980;
+ bh=hnJD60pbiKuANBVVM2KSHq+2NxrQ89F9kQaZn8eeh7c=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=GzYUvSETqfNnhs54doxvKodruY9PogLsYi3AlKXKzqo9KAZcIFRsTjXxLpS8vDIUt
+ ocsKa/prTIZ1aqM+iEpK1+5ygg8dfHvvluH3SrXlihPnCyD0gI2zwDNes9Fa1Naavu
+ fg6Lyj+h3ta0v/me1pGLEI4j+3L2ZYx91zRyLDJ5v6olQRELQJJ253AbBDEBf67TSS
+ yP0G72gD5ebNKP+TUmN7TCks2MEA+LP6kSYNj9bEgS+FA1v+0KatF3ALwXtoN+xaww
+ bTKroKp7I9o1oLuZ2f9XqCzzAJqVzVex7O3YvdxEgTOKonkQjwoPtaU6AR3ZNjOI4R
+ hpjcTDGdqajmg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5309EC5B549;
+ Tue,  3 Jun 2025 03:06:20 +0000 (UTC)
+From: Shmuel Leib Melamud via B4 Relay <devnull+smelamud.redhat.com@kernel.org>
+Date: Tue, 03 Jun 2025 06:06:04 +0300
+Subject: [PATCH v3 1/2] renesas: Handle CLK_TYPE_GEN4_MDSEL in
+ gen3_clk_get_rate64()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250603-us-renesas-watchdog-v3-1-af3a65afd03e@redhat.com>
+References: <20250603-us-renesas-watchdog-v3-0-af3a65afd03e@redhat.com>
+In-Reply-To: <20250603-us-renesas-watchdog-v3-0-af3a65afd03e@redhat.com>
+To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, Shmuel Leib Melamud <smelamud@redhat.com>
 X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1748919978; l=1352;
+ i=smelamud@redhat.com; s=20250530; h=from:subject:message-id;
+ bh=TxMVq0eIAmC8l9yovMVlzhsHwTLSzEIVpm0vVdAlpI4=;
+ b=EStyr0On6O4zvvZ65JiHXqwvPrOdglzy2nOEFuIn330AFASFfYiPSrfzanD/zsTEZ3iZk3YsL
+ LB/0WGZ4YsPCBJNnIWmZX9lZ4D3IYwMJdDbxpINNzX1rvQJUcPZi/MJ
+X-Developer-Key: i=smelamud@redhat.com; a=ed25519;
+ pk=B1DFtpdxDPQudtnqMHSFRRSJziu3zB49J6oZUBo0qI8=
+X-Endpoint-Received: by B4 Relay for smelamud@redhat.com/20250530 with
+ auth_id=418
+X-Original-From: Shmuel Leib Melamud <smelamud@redhat.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,26 +82,47 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: smelamud@redhat.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 02 Jun 2025 16:36:51 +0200, Mattijs Korpershoek wrote:
+From: Shmuel Leib Melamud <smelamud@redhat.com>
 
-> Please find the following developments for next:
-> 
-> Usb gadget:
-> - dwc2: Fix incorrect ULPI_UTMI_SEL bit setting
-> - dwc2: Fix HBstLen setting for external DMA mode
-> - dwc2: Various refactors to get the code closer to Linux
-> - dwc2: Support reset logic for v4.20a
-> 
-> [...]
+Add support of CLK_TYPE_GEN4_MDSEL clock type to gen3_clk_get_rate64()
+function. In particular, this type of clock is used by Renesas R-Car
+Gen4 watchdog. It operates similarly to CLK_TYPE_GEN3_MDSEL clock.
 
-Merged into u-boot/next, thanks!
+Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
+---
+ drivers/clk/renesas/clk-rcar-gen3.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/clk-rcar-gen3.c
+index 375cc4a4930873ad0d5509c19ad04a0ea5545aa0..5745acf4023c9114f6fa13b5e4baa306c5b57d33 100644
+--- a/drivers/clk/renesas/clk-rcar-gen3.c
++++ b/drivers/clk/renesas/clk-rcar-gen3.c
+@@ -68,7 +68,7 @@ static int gen3_clk_get_parent(struct gen3_clk_priv *priv, struct clk *clk,
+ 		if (ret)
+ 			return ret;
+ 
+-		if (core->type == CLK_TYPE_GEN3_MDSEL) {
++		if (core->type == CLK_TYPE_GEN3_MDSEL || core->type == CLK_TYPE_GEN4_MDSEL) {
+ 			shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
+ 			parent->dev = clk->dev;
+ 			parent->id = core->parent >> shift;
+@@ -318,6 +318,8 @@ static u64 gen3_clk_get_rate64(struct clk *clk)
+ 						"FIXED");
+ 
+ 	case CLK_TYPE_GEN3_MDSEL:
++		fallthrough;
++	case CLK_TYPE_GEN4_MDSEL:
+ 		shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
+ 		div = (core->div >> shift) & 0xffff;
+ 		rate = gen3_clk_get_rate64(&parent) / div;
 
 -- 
-Tom
+2.49.0
 
 
