@@ -4,163 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBC1C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 12:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD02C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 12:28:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C41D81E25;
-	Tue,  3 Jun 2025 14:28:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DE4282145;
+	Tue,  3 Jun 2025 14:28:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="lI40Tf5F";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wvvxIJZE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D74081E72; Tue,  3 Jun 2025 08:56:58 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64DE980F0E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 08:56:55 +0200 (CEST)
+ id 6270481FFC; Tue,  3 Jun 2025 12:57:56 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E7F0B81E72
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 12:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=acnHs0ve6iklY2W+uPhxr0mDD0gxtcrG1etHkskhkX7/wcB5hzho4cs10ir+/n6hG3VLEm9o+8yd2gx/mR50rqC6t5dJLn2wfzgyQmZAie4sSJduQPPN8AK2TcFa3cRSXfMFQ/imX8qYBwKOACULKyntexoLVUs2vUmhE52e3zEdrBw4DbbAXoV3vPHk9rxlgYgIOJVhayZLH3DhZwgcWwqJAEjwjFWrS7duf56Rc9+jB4bd00QthyuKgh1dx/C6iivbuKPAg1/6lvPb98R1znz7qKfrYI75ioLLESAV9nctv/CcWSHJL5qJfvG1xm+PWKVOp7LOqqA9wnJIqAVm5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K5ouLXkcHslnAsRULzTYq58y9knqUp85ktB6KgI/1fk=;
- b=C8opHB5W1PqbvL+ROLvuiBij3W1FKEZ0Epc9bs1WOlm3YKFrU1y+lHIjD808M1ZKKp3crcIPbTBlgZi4PLsk00aSPhd+QDGsaeMtxQDQ9PtADqcJUx6kM/TkiFFDmuHQpAri+J046Yj4GC1N/KstO720vYLygy/EnUjJO0ldGddB9bDJbz5OaqUsWBwxltqwIksEvXgQ5TXbIdyZVBXX5cPz39KOnnLqchdwwYxnSmVPM4kiRbrmrbSEWwnss0t4MxX0dcezCeCT2vDNRlg32VqXP9ybBRb3TcSfd9pqaQSUn0n1v+KNNZG0QSkesMStGgLIqX9FhMu28KZAmt9HoQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K5ouLXkcHslnAsRULzTYq58y9knqUp85ktB6KgI/1fk=;
- b=lI40Tf5FdsF7Kgnm23PzP2XIGqkZdiS9Y/V8rnJ2mKdVNJLpzTM11W9XdXAydb8nS3HWiq9cFB2saK3U9Obwr6WCL9WmF5LogMCYZNbX2QUDfK2e6aFiU9/3oc97yDxFhBTk470f7faGfdF0he91gZ+KsuuBSXG7cI1fw0nEZXfxOMbSubQ5ZJxM/4TO8/AUoxQSQmtG6xjm2e3e2ZdxBqEGTH0mvf9dkOtTlL9IRkEFg7sVTx6Wgt3FHHdyqulydMhfxgnaUm0APpr/iHgDkFO9wr1ha4UU4vp0zR6Xe+816ozNcs3DrzNMJOCOfpBbQPy9P/sv9aPVWBMRtlIi/w==
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by BLAPR03MB5601.namprd03.prod.outlook.com (2603:10b6:208:293::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.34; Tue, 3 Jun
- 2025 06:56:52 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::c861:d54b:e055:49dd]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::c861:d54b:e055:49dd%4]) with mapi id 15.20.8792.034; Tue, 3 Jun 2025
- 06:56:51 +0000
-From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Dmitry Rokosov
- <ddrokosov@salutedevices.com>, Jonas Karlman <jonas@kwiboo.se>, Sebastian
- Reichel <sebastian.reichel@collabora.com>, "Meng, Tingting"
- <tingting.meng@altera.com>, "Chee, Tien Fong" <tien.fong.chee@altera.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@altera.com>, "Ng, Boon Khai"
- <boon.khai.ng@altera.com>, "Yuslaimi, Alif Zakuan"
- <alif.zakuan.yuslaimi@altera.com>, "Zamri, Muhammad Hazim Izzat"
- <muhammad.hazim.izzat.zamri@altera.com>, "Lim, Jit Loon"
- <jit.loon.lim@altera.com>
-Subject: RE: [PATCH v5 00/12] Add Synopsys MIPI I3C Driver support
-Thread-Topic: [PATCH v5 00/12] Add Synopsys MIPI I3C Driver support
-Thread-Index: AQHbw/CSN284PFykdUGl0oG8ydVDwbPxIMmw
-Date: Tue, 3 Jun 2025 06:56:51 +0000
-Message-ID: <PH7PR03MB69428AC3ADC4EF7381A11678F76DA@PH7PR03MB6942.namprd03.prod.outlook.com>
-References: <20250513101913.30880-1-dinesh.maniyam@altera.com>
-In-Reply-To: <20250513101913.30880-1-dinesh.maniyam@altera.com>
-Accept-Language: en-MW, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH7PR03MB6942:EE_|BLAPR03MB5601:EE_
-x-ms-office365-filtering-correlation-id: 470e83fd-1088-452c-68c7-08dda26bd186
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|7416014|10070799003|376014|1800799024|7053199007|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?a5V2iFv34nSk5c7SbF4i2EaSwcvbKt1mwZs1Hx3AJcuB1t0oVinIUH1EVu2V?=
- =?us-ascii?Q?c7nb7f0TR0oLeo3Bf/HgnMZk4HVLanxSGo2R61oVB0dIFenvt8nW2nMxUy+u?=
- =?us-ascii?Q?Yed00zshHrLWIOfDWbKuRvAzDYjTYDtLocW41x8mpEKCxVvKeIqBBFrwYLm3?=
- =?us-ascii?Q?eRNpyaZkMTl2AkZkfpDlA/iQpWMpUhT9rjEhCYAHyeLRdCNiY1WT6HwPpi3q?=
- =?us-ascii?Q?ff8DIUSsXMT1lM1PftHhPmajhjA9jRiEQ4bbPzQexe+gKhAFnsCHp6/UHl2D?=
- =?us-ascii?Q?df+CvzrsCBmNUqzv9j4A7h6uhAonvbfivAPbNgN+ZH06i6RjzmG8GVRfiQnh?=
- =?us-ascii?Q?jHpYwsROl4lS20qHkMwPkZvk9GJEr0X/YjoTMH8O+rPENDxB0/0lWWrDC0c0?=
- =?us-ascii?Q?9U5+/73SQ9tM2rKGZpu9G1aBPiZ3znPSXSiqGC4bMA46aUXogkIR6zzVdYl5?=
- =?us-ascii?Q?+rzGXh7qEWZp7i2UVgKeL1eCysVSZaVpB9FBRf5oy1kuoXc49BIKjT4HDCxH?=
- =?us-ascii?Q?Jrz9lK2l99pSMhaVyXXnpnrudstiih/5Abt6JvnQcZYNi6mUMwoA1nJo0WL5?=
- =?us-ascii?Q?AMWf2UQx4t+MU64B65yiqcsQ0g6O1nkD+ybzav9WbvSxU/ZXr2Unyz5gxVQd?=
- =?us-ascii?Q?UVSerzmhlRowOPWEUt0k3xgtXVDnG4nClN6Pfofd0X2roVmtqqApIsJjGeuo?=
- =?us-ascii?Q?mU/XEyWjGSUe3zXilM5+FPLptqmj5UnnDKaf2/1vKki+qvOYFFyzENBHfMAn?=
- =?us-ascii?Q?yzXnT+efIdRO6dRE553UuEmYrwBbjuSW7ZRznBJNS6ZfKoLU/BYQxb5E01yG?=
- =?us-ascii?Q?nWuaMXj1qjL1e3wI3v8L+pDhBWYqiqPY/RCLx6u0OTABRzKeOx4htSmGMDhM?=
- =?us-ascii?Q?6K4RB0dCtc7sbJ5E6kyoRfLHDgtw8fQlQgE1738KbA0vtf0oia28Qxf4XhW+?=
- =?us-ascii?Q?yr1iqaTA2ThGpPiasJj+mDvfPIsqHnJ4WMt8JSWO8LQ5beYua1gORN58vZMB?=
- =?us-ascii?Q?U+M68NyWeqhVDn2x5GhJ9DAT1sw6VI7KySb/kqgFzMVL/pHlkWMsIA679Qw1?=
- =?us-ascii?Q?jSZ1rZdXrltYqgVWC9uTfd6CYkh3g4X/i9GnTD2/ojSLgW6cOS8AVIKWu45v?=
- =?us-ascii?Q?/NxkbjfcDWI9pzVxzP29Tam8eRQYgRw6Iqitm3tytuJbGJXT+XdwDh0J2uQY?=
- =?us-ascii?Q?tN5ZnP0tiTTcrilr4WU9qg8HQ3NrWmQ4XlJCgkrBjmDgApMsBgRvHn5MekCi?=
- =?us-ascii?Q?jk8CUmr8vjmEZua1Gqvc8Ew4Ud/VN+985rSKkmhQYyZyhzlFVGRNdQrIbIuT?=
- =?us-ascii?Q?GqCfe3A9a0N/n1WeasRRL8uNIdzv1AoqOlyWTeaX0aZutRVTV5CaxdtH/RuV?=
- =?us-ascii?Q?lWUhszZj8WHESB1cWb58d5P4ggdIiwVVgC0+a6K48cLVGp9CB4g0HOGkOHx4?=
- =?us-ascii?Q?XfXvJ6jZcMlcEAMvEOQbZUgxOssCoEty1mMlOp0XtJRHeIsDEqQp3zRxp1zh?=
- =?us-ascii?Q?1aWMBlCCnfrel2Y=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(10070799003)(376014)(1800799024)(7053199007)(38070700018);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Nq3nVABrEoNueQX1luoPW639jekhNd6rD3CHmZS6St2OjOwam6M+zUFo1uHq?=
- =?us-ascii?Q?p7qe4TprzctXsmOw04lRJj8W84VMRTzTAVC4CzqJUyvncwH63IylrFq3bdil?=
- =?us-ascii?Q?AJWgmZz4oPRFkJr+mDejxwv8wTSRomZA2u3fPL0eCVssr+ugpaTyIidCi1/+?=
- =?us-ascii?Q?5mu+F7yMxSoYVOEde3RsKRfhkIHKbiuKauYLvCuRnIoRDOuguTKuilzastEu?=
- =?us-ascii?Q?wb4vd16BNZzbPRaE96la3oZ0r4F0n4XDYdmnilvNqoRT5hbhAA7E6c7dFq1R?=
- =?us-ascii?Q?31/0sVenZysviqXIdO/w2Unr3ZD6GDftSPq3WXadsaAt0R+cKbm4ceUooJln?=
- =?us-ascii?Q?OBOmzrn9lUGTYOcnT031y/930+AMIyOphq+k9VK2om6EGrX3Nc3bYZlbdw5p?=
- =?us-ascii?Q?ch2ukrbhXpPFpBdSMR/07XvHPetcoowNlZxHFSTClZGVjg6kUFO5hm3H+nBz?=
- =?us-ascii?Q?lK6G6euN3df/Gtfl79Uk4kLTsKo87aWdTNg3koOnftDBWIq9/C0+1b+PUyLq?=
- =?us-ascii?Q?VDG9c3+M+ZALjc+th3FfgedfKuwoT3bWw7PXAOgX8nx+nb404LgNyQkt9TOp?=
- =?us-ascii?Q?/M/8waIjWKyGWzgliven8I4O8uTLUswYxG+7C1Prxb4FoJp2prpek3dwX8dQ?=
- =?us-ascii?Q?1npSXaVjr/YI4k3wpDFsr16g+FFIc4m+ven2XamBe+NwpYYA7PQCW/PMrE0m?=
- =?us-ascii?Q?tshr/JmRbzUdMnAW0mp4Azux9nUyYvL7YOfskc/OgtrfIcFAnRjZaicOoKwL?=
- =?us-ascii?Q?ynzfYZPFzRbmwFPbxknWe+hlmop+P1bjmolp4PDxRa8y680PygxvyBh8urss?=
- =?us-ascii?Q?vx8E6FenB5MsgIGtUuxjauAsC7spl7jzoIrkcIvd0CMlFUELsnVsgD/OzHbR?=
- =?us-ascii?Q?Sr6ViCwwDQmAkZ+OPBf+ugBE/XNj0f2agg1U4Hu0mCFXLimOmCZfLMpEWk60?=
- =?us-ascii?Q?NPN6l4uRi+xVt4PDhg5tsixAxfrrrZqyqbdau3FyulIZ/Ou0i88ohrhMQIiM?=
- =?us-ascii?Q?kA4oxCzr9GHwi+BqrtRKSqVn0wttTlK/Z/viQ1k0Bth/NeG/QamK2zmYHa1w?=
- =?us-ascii?Q?qbn8+HsSbLboJyVIDvgVnsa98XzBKfzIlE5XM/1ARSnMZuLlU2/ebETR63GK?=
- =?us-ascii?Q?r843dicCWGOGZ+iUSaJy+oe9mjvby5CfZwCmHpadztaHAXvarvkery9+uOa+?=
- =?us-ascii?Q?KvASFDYJfnUz6bKPDRZ2ETQCAFyPw+O3meOFaHGVsj7Jcqo58kiPXwoj6sYe?=
- =?us-ascii?Q?v++uOzaFwz32nKLlQTdJ2Rao/ObfEBL2Wpa5Opgdio+uwS7I9JWQGMRT8yWS?=
- =?us-ascii?Q?2gg/jlB0fz+7/o+HsHygTEAd95d89QuljotuBMg3uhJ48r3fMnooH+iew5E5?=
- =?us-ascii?Q?9QWrAtHrvnCewynrMSVxOvHKJ9I3VZfPyrx1ESHMgqBcfYtDK3+2O2FfXraa?=
- =?us-ascii?Q?UZI3ywMViUwkQL2hdBkkES9fGb3ptUsZWlO4XDNJGpTjvqQbiPH83bTAd5+n?=
- =?us-ascii?Q?DY5V2NGGWIl9ooKyKV1wNvxHq0rPDsUD9d8bWt71vgL74Iptx5aug1pYTL7u?=
- =?us-ascii?Q?q2Ffh8QohuQQAZvG1EeiCrpYMY43Oy+m89gLuR5wclRkf9kLGBQ3X/BUR1vC?=
- =?us-ascii?Q?uvi7qN1GbVT9+IwH+vhvKk9NHklFGkiQ0Tlen4a2W0hQ?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 553AvfOJ444504;
+ Tue, 3 Jun 2025 05:57:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1748948261;
+ bh=RHmk3Egjs2LPVnPJdFwxhluC7UAYI1SteDZcjelQ0ic=;
+ h=From:To:CC:Subject:Date;
+ b=wvvxIJZEfrLbkymGSZ3W0vEQCm4dsNrqpktO2qM+/J53cRZzNQeAVrSSLBhrKBOIN
+ 0VcTFIexRF48Ua7GOprhRdL9sF7qhmJNZrsq9XnZ41a1MbRjQ6fbCEXbeFAocs6FAE
+ EXLaG9frtWHcqZICeTOT3ol+yHzqsexjrEyHVkcU=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 553AvfRE3556912
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 3 Jun 2025 05:57:41 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
+ Jun 2025 05:57:40 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 3 Jun 2025 05:57:40 -0500
+Received: from a0512632.dhcp.ti.com (a0512632.dhcp.ti.com [172.24.227.22])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 553AvaQB234957;
+ Tue, 3 Jun 2025 05:57:36 -0500
+From: Swamil Jain <s-jain1@ti.com>
+To: <devarsht@ti.com>, <aradhya.bhatia@intel.com>, <n-jain1@ti.com>,
+ <tomi.valkeinen@ideasonboard.com>
+CC: <vigneshr@ti.com>, <praneeth@ti.com>, <h-shenoy@ti.com>,
+ <j-choudhary@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <trini@konsulko.com>, <agust@denx.de>, <u-boot@lists.denx.de>,
+ <s-jain1@ti.com>
+Subject: [PATCH] drivers: video: tidss: Refactor tidss_drv
+Date: Tue, 3 Jun 2025 16:27:35 +0530
+Message-ID: <20250603105735.4038240-1-s-jain1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 470e83fd-1088-452c-68c7-08dda26bd186
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2025 06:56:51.6692 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 01VQUbuv++/pcC73NFtfRt2WDfB9It2XdlL8ZT2DpfhzbskT/wJ/4zRvJ8Ydx6zAfREYcRSTR952Fo8Rr7jEwpc8yuvlPd8zX/yaAmxnLP8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR03MB5601
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-Mailman-Approved-At: Tue, 03 Jun 2025 14:28:11 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -178,184 +81,679 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+- Refactor tidss_drv to improve modularity, enabling support for more
+  display interfaces beyond OLDI in the future
+- Add detection and initialization of active OLDI panels using the DT
+- Port tidss_oldi.c from the upstream Linux kernel oldi series[0] and
+  derive several APIs from it to determine the dual link pixel order
+- Add tidss_oldi_init() and helper routines to handle OLDI-specific
+  setup and move related helper routines to tidss_oldi.c
 
+[0]: https://lore.kernel.org/all/20250528122544.817829-1-aradhya.bhatia@linux.dev/
 
-> -----Original Message-----
-> From: Maniyam, Dinesh <dinesh.maniyam@altera.com>
-> Sent: Tuesday, 13 May 2025 6:19 pm
-> To: u-boot@lists.denx.de
-> Cc: Marek <marex@denx.de>; Simon <simon.k.r.goldschmidt@gmail.com>;
-> Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>; Dario
-> Binacchi <dario.binacchi@amarulasolutions.com>; Ilias Apalodimas
-> <ilias.apalodimas@linaro.org>; Heinrich Schuchardt <xypron.glpk@gmx.de>;
-> Jerome Forissier <jerome.forissier@linaro.org>; Mattijs Korpershoek
-> <mkorpershoek@baylibre.com>; Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>;
-> Michal Simek <michal.simek@amd.com>; Dmitry Rokosov
-> <ddrokosov@salutedevices.com>; Jonas Karlman <jonas@kwiboo.se>; Sebastian
-> Reichel <sebastian.reichel@collabora.com>; Meng, Tingting
-> <tingting.meng@altera.com>; Chee, Tien Fong <tien.fong.chee@altera.com>;
-> Hea, Kok Kiang <kok.kiang.hea@altera.com>; Maniyam, Dinesh
-> <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>;
-> Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Zamri, Muhammad
-> Hazim Izzat <muhammad.hazim.izzat.zamri@altera.com>; Lim, Jit Loon
-> <jit.loon.lim@altera.com>
-> Subject: [PATCH v5 00/12] Add Synopsys MIPI I3C Driver support
->=20
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
->=20
-> This patchset add Synopsys MIPI I3C Driver support for Intel Agilex5 devi=
-ces.
->=20
-> The i3c driver is leveraged from the master/dw-i3c-master.c, i3c/device.c=
- and
-> i3c/master.c Linux version 6.6.37 LTS And few header files included to be=
- part of
-> the migration; i3c/internals.h, include/linux/i3c/ccc.h, include/linux/i3=
-c/device.h
-> and include/linux/i3c/master.h.
-> Additional i3c uclass driver and command files added to support i3c read =
-and
-> write in U-Boot.
->=20
-> Patch status:
->=20
-> Detail changelog can find in commit message.
->=20
-> v5->v4:
-> --------
-> - Add header file to doc/api/i3c
-> - Rephrase function description for i3c.h
-> - Separated subcommand as a function for cmd/i3c.c
-> - Used memory address to transfer msgs from i3c
-> - Rephrase description in cmd/i3c.rst file
-> - Replaced int with unsigned for positive variables.
->=20
-> v4->v3:
-> --------
-> Resolve ci test:
-> - Add i3c node in index.rst
-> - Formating error in i3c.rst
-> - Resolve cpu_relax undefined for sandbox
->=20
-> v3->v2:
-> --------
-> - Squash commit 10 to commit 9
-> - Resolve index for new files to pass the checkpatch
->=20
-> Commit: sandbox_defconfig: Enable configs for sandbox i3c
-> Commit: agilex5_defconfig: Enable i3c configs for agilex5
-> - use savedefconfig
->=20
-> drivers: Enabled Kconfig and Makefile for i3c support
-> - Add maintainer for i3c
->=20
-> drivers: i3c: Enabled Kconfig and Makefile for DWI3C
-> - Add empty lines for if/endif
->=20
-> drivers: i3c: Add i3c sandbox simple test.
-> - Removed DECLARE_GLOBAL_DATA_PTR
->=20
-> v1->v2:
-> --------
-> Reorder commits.
->=20
-> Added commits:
-> - drivers: i3c: Add i3c sandbox simple test.
-> - test: cmd: Add simple test for i3c
-> - configs: sandbox_defconfig: Enable configs for sandbox i3c
-> - configs: agilex5_defconfig: Enable i3c configs for agilex5
->=20
-> History:
-> --------
-> [v1]:
-> https://patchwork.ozlabs.org/project/uboot/cover/20250218025705.50051-1-
-> dinesh.maniyam@intel.com/
-> [v2]:
-> https://patchwork.ozlabs.org/project/uboot/cover/20250314040902.43621-1-
-> dinesh.maniyam@altera.com/
-> [v3]:
-> https://patchwork.ozlabs.org/project/uboot/cover/20250324083704.26259-1-
-> dinesh.maniyam@altera.com/
-> [v4]: https://patchwork.ozlabs.org/project/uboot/cover/20250417021840.621=
-2-
-> 1-dinesh.maniyam@altera.com/
->=20
-> Dinesh Maniyam (12):
->   drivers: i3c: Add new i3c uclass id
->   drivers: i3c: Add driver for MIPI DWI3C
->   drivers: i3c: Add i3c uclass driver.
->   drivers: Enabled Kconfig and Makefile for i3c support
->   drivers: i3c: Enabled Kconfig and Makefile for DWI3C
->   drivers: i3c: Add i3c sandbox simple test.
->   drivers: i3c: master: Enable probe i3c without slave device
->   i3c: master: dw-i3c-master: Fix OD_TIMING for spike filter
->   cmd: Add i3c command support.
->   test: cmd: Add simple test for i3c
->   configs: sandbox_defconfig: Enable configs for sandbox i3c
->   configs: agilex5_defconfig: Enable i3c configs for agilex5
->=20
->  MAINTAINERS                        |    7 +
->  arch/sandbox/dts/test.dts          |    8 +
->  cmd/Kconfig                        |    6 +
->  cmd/Makefile                       |    1 +
->  cmd/i3c.c                          |  261 ++++
->  configs/sandbox_defconfig          |    4 +
->  configs/socfpga_agilex5_defconfig  |    3 +
->  doc/api/i3c.rst                    |    8 +
->  doc/api/index.rst                  |    1 +
->  doc/usage/cmd/i3c.rst              |  146 ++
->  doc/usage/index.rst                |    1 +
->  drivers/Kconfig                    |    2 +
->  drivers/Makefile                   |    1 +
->  drivers/i3c/Kconfig                |   27 +
->  drivers/i3c/Makefile               |    5 +
->  drivers/i3c/device.c               |  262 ++++
->  drivers/i3c/i3c-uclass.c           |   38 +
->  drivers/i3c/internals.h            |   26 +
->  drivers/i3c/master.c               | 2070 ++++++++++++++++++++++++++++
->  drivers/i3c/master/Kconfig         |   11 +
->  drivers/i3c/master/Makefile        |    3 +
->  drivers/i3c/master/dw-i3c-master.c | 1062 ++++++++++++++
->  drivers/i3c/sandbox_i3c.c          |   56 +
->  include/dm/device.h                |    2 +
->  include/dm/uclass-id.h             |    1 +
->  include/dw-i3c.h                   |  252 ++++
->  include/i3c.h                      |   93 ++
->  include/linux/i3c/ccc.h            |  385 ++++++
->  include/linux/i3c/device.h         |  286 ++++
->  include/linux/i3c/master.h         |  698 ++++++++++
->  test/cmd/Makefile                  |    1 +
->  test/cmd/i3c.c                     |   50 +
->  test/dm/Makefile                   |    1 +
->  test/dm/i3c.c                      |   34 +
->  34 files changed, 5812 insertions(+)
->  create mode 100644 cmd/i3c.c
->  create mode 100644 doc/api/i3c.rst
->  create mode 100644 doc/usage/cmd/i3c.rst  create mode 100644
-> drivers/i3c/Kconfig  create mode 100644 drivers/i3c/Makefile  create mode
-> 100644 drivers/i3c/device.c  create mode 100644 drivers/i3c/i3c-uclass.c =
- create
-> mode 100644 drivers/i3c/internals.h  create mode 100644 drivers/i3c/maste=
-r.c
-> create mode 100644 drivers/i3c/master/Kconfig  create mode 100644
-> drivers/i3c/master/Makefile  create mode 100644 drivers/i3c/master/dw-i3c=
+Signed-off-by: Swamil Jain <s-jain1@ti.com>
+---
+ drivers/video/tidss/Makefile     |   2 +-
+ drivers/video/tidss/tidss_drv.c  | 122 +++++++++----
+ drivers/video/tidss/tidss_drv.h  |  14 +-
+ drivers/video/tidss/tidss_oldi.c | 298 +++++++++++++++++++++++++++++++
+ drivers/video/tidss/tidss_oldi.h |  67 +++++++
+ 5 files changed, 461 insertions(+), 42 deletions(-)
+ create mode 100644 drivers/video/tidss/tidss_oldi.c
+ create mode 100644 drivers/video/tidss/tidss_oldi.h
+
+diff --git a/drivers/video/tidss/Makefile b/drivers/video/tidss/Makefile
+index 3381a5fec57..846c19c5a7b 100644
+--- a/drivers/video/tidss/Makefile
++++ b/drivers/video/tidss/Makefile
+@@ -9,4 +9,4 @@
+ # Author: Tomi Valkeinen <tomi.valkeinen@ti.com>
+ 
+ 
+-obj-${CONFIG_$(PHASE_)VIDEO_TIDSS} = tidss_drv.o
++obj-${CONFIG_$(PHASE_)VIDEO_TIDSS} = tidss_drv.o tidss_oldi.o
+diff --git a/drivers/video/tidss/tidss_drv.c b/drivers/video/tidss/tidss_drv.c
+index 865d4bddb7f..93081ed1dc0 100644
+--- a/drivers/video/tidss/tidss_drv.c
++++ b/drivers/video/tidss/tidss_drv.c
+@@ -32,6 +32,7 @@
+ #include <dm/of_access.h>
+ #include <dm/device_compat.h>
+ #include <dm/device-internal.h>
++#include <dm/ofnode_graph.h>
+ 
+ #include <linux/bug.h>
+ #include <linux/err.h>
+@@ -40,6 +41,7 @@
+ 
+ #include "tidss_drv.h"
+ #include "tidss_regs.h"
++#include "tidss_oldi.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -253,7 +255,7 @@ static void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power)
+ {
+ 	u32 val;
+ 
+-	if (WARN_ON(!priv->oldi_io_ctrl))
++	if (WARN_ON(!priv->oldis[0]->io_ctrl))
+ 		return;
+ 
+ 	if (priv->feat->subrev == DSS_AM625) {
+@@ -275,7 +277,7 @@ static void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power)
+ 		} else {
+ 			val = OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX;
+ 		}
+-		regmap_update_bits(priv->oldi_io_ctrl, OLDI_PD_CTRL,
++		regmap_update_bits(priv->oldis[0]->io_ctrl, OLDI_PD_CTRL,
+ 				   OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX, val);
+ 	}
+ }
+@@ -562,7 +564,7 @@ int dss_vp_enable_clk(struct tidss_drv_priv *priv, u32 hw_videoport)
+ void dss_vp_prepare(struct tidss_drv_priv *priv, u32 hw_videoport)
+ {
+ 	dss_vp_set_gamma(priv, hw_videoport, NULL, 0);
+-	dss_vp_set_default_color(priv, 0, 0);
++	dss_vp_set_default_color(priv, hw_videoport, 0);
+ 
+ 	if (priv->feat->vp_bus_type[hw_videoport] == DSS_VP_OLDI) {
+ 		dss_oldi_tx_power(priv, true);
+@@ -734,27 +736,72 @@ static void dss_vp_init(struct tidss_drv_priv *priv)
+ 		VP_REG_FLD_MOD(priv, i, DSS_VP_CONFIG, 1, 2, 2);
+ }
+ 
+-static int dss_init_am65x_oldi_io_ctrl(struct udevice *dev,
+-				       struct tidss_drv_priv *priv)
++static bool is_panel_enabled(ofnode endpoint)
+ {
+-	struct udevice *syscon;
+-	struct regmap *regmap;
+-	int ret = 0;
++	ofnode port_parent = ofnode_graph_get_remote_port_parent(endpoint);
+ 
+-	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "ti,am65x-oldi-io-ctrl",
+-					   &syscon);
+-	if (ret) {
+-		debug("unable to find ti,am65x-oldi-io-ctrl syscon device (%d)\n", ret);
+-		return ret;
+-	}
++	/* ports_parent is the bridge connected in between */
++	ofnode ports_parent = ofnode_get_parent(port_parent);
++
++	/* Checking for both port_parent and ports_parent node, as if any
++	 * bridge is there then it should also be enabled for the panel to
++	 * show output.
++	 */
++	return ofnode_is_enabled(port_parent) && ofnode_is_enabled(ports_parent);
++}
++
++static int tidss_attach_active_panels(struct tidss_drv_priv *priv)
++{
++	ofnode dss_node = dev_ofnode(priv->dev);
++	ofnode dss_ports = ofnode_find_subnode(dss_node, "ports");
++	ofnode port, remote_port, local_endpoint;
++	int hw_videoport;
++	int active_panels = 0;
++	int ret;
+ 
+-	/* get grf-reg base address */
+-	regmap = syscon_get_regmap(syscon);
+-	if (!regmap) {
+-		debug("unable to find rockchip grf regmap\n");
+-		return -ENODEV;
++	ofnode_for_each_subnode(port, dss_ports) {
++		if (strncmp(ofnode_get_name(port), "port", 4))
++			continue;
++
++		ofnode_for_each_subnode(local_endpoint, port) {
++			if (strncmp(ofnode_get_name(local_endpoint), "endpoint", 8))
++				continue;
++
++			if (!is_panel_enabled(local_endpoint))
++				continue;
++
++			/* Get videoport id*/
++			ret = ofnode_read_u32(port, "reg", &hw_videoport);
++			if (ret) {
++				dev_warn(priv->dev,
++					 "Failed to read videoport id, reg property not found for node: %s\n",
++					 ofnode_get_name(local_endpoint));
++				/* Check for other video ports */
++				continue;
++			}
++
++			remote_port = ofnode_graph_get_remote_port_parent(local_endpoint);
++			if (strstr(ofnode_get_name(remote_port), "oldi")) {
++				/* Initialize oldi */
++				ret = tidss_oldi_init(priv->dev);
++				if (ret) {
++					if (ret != -ENODEV)
++						dev_warn(priv->dev, "oldi panel error %d\n", ret);
++					break;
++				}
++
++				active_panels++;
++				priv->active_hw_videoport_id = hw_videoport;
++				/* Only one dual-link oldi panel supported at a time so
++				 * initialize it only and then check for other videoports
++				 */
++				break;
++			}
++		}
+ 	}
+-	priv->oldi_io_ctrl = regmap;
++	priv->active_panels = active_panels;
++	if (active_panels == 0)
++		return -1;
+ 	return 0;
+ }
+ 
+@@ -772,7 +819,6 @@ static int tidss_drv_probe(struct udevice *dev)
+ 	priv->dev = dev;
+ 
+ 	priv->feat = &dss_am625_feats;
 -
-> master.c
->  create mode 100644 drivers/i3c/sandbox_i3c.c  create mode 100644
-> include/dw-i3c.h  create mode 100644 include/i3c.h  create mode 100644
-> include/linux/i3c/ccc.h  create mode 100644 include/linux/i3c/device.h  c=
-reate
-> mode 100644 include/linux/i3c/master.h  create mode 100644 test/cmd/i3c.c
-> create mode 100644 test/dm/i3c.c
->=20
-> --
-> 2.26.2
+     /*
+      * set your plane format based on your bmp image
+      * Supported 24bpp and 32bpp bmpimages
+@@ -782,6 +828,13 @@ static int tidss_drv_probe(struct udevice *dev)
+ 
+ 	dss_common_regmap = priv->feat->common_regs;
+ 
++	ret = tidss_attach_active_panels(priv);
++	if (ret) {
++		if (ret == -1)
++			dev_warn(priv->dev, "NO active panels detected, check status of panel nodes\n");
++		return ret;
++	}
++
+ 	ret = uclass_first_device_err(UCLASS_PANEL, &panel);
+ 	if (ret) {
+ 		if (ret != -ENODEV)
+@@ -829,7 +882,7 @@ static int tidss_drv_probe(struct udevice *dev)
+ 	dss_vid_write(priv, 0, DSS_VID_BA_1, uc_plat->base & 0xffffffff);
+ 	dss_vid_write(priv, 0, DSS_VID_BA_EXT_1, (u64)uc_plat->base >> 32);
+ 
+-	ret = dss_plane_setup(priv, 0, 0);
++	ret = dss_plane_setup(priv, 0, priv->active_hw_videoport_id);
+ 	if (ret) {
+ 		dss_plane_enable(priv, 0, false);
+ 			return ret;
+@@ -844,34 +897,27 @@ static int tidss_drv_probe(struct udevice *dev)
+ 		priv->base_vp[i] = dev_remap_addr_name(dev, priv->feat->vp_name[i]);
+ 	}
+ 
+-	ret = clk_get_by_name(dev, "vp1", &priv->vp_clk[0]);
++	ret = clk_get_by_name(dev,
++			      dss_am625_feats.vpclk_name[priv->active_hw_videoport_id],
++			      &priv->vp_clk[priv->active_hw_videoport_id]);
+ 	if (ret) {
+ 		dev_err(dev, "video port %d clock enable error %d\n", i, ret);
+ 		return ret;
+ 	}
+ 
+-	dss_ovr_set_plane(priv, 1, 0, 0, 0, 0);
+-	dss_ovr_enable_layer(priv, 0, 0, true);
++	dss_ovr_set_plane(priv, 1, priv->active_hw_videoport_id, 0, 0, 0);
++	dss_ovr_enable_layer(priv, priv->active_hw_videoport_id, 0, true);
+ 
+ 	/* Video Port cloks */
+-	dss_vp_enable_clk(priv, 0);
++	dss_vp_enable_clk(priv, priv->active_hw_videoport_id);
+ 
+-	dss_vp_set_clk_rate(priv, 0, timings.pixelclock.typ * 1000);
++	dss_vp_set_clk_rate(priv, priv->active_hw_videoport_id, timings.pixelclock.typ * 1000);
+ 
+-	priv->oldi_mode = OLDI_MODE_OFF;
+ 	uc_priv->xsize = timings.hactive.typ;
+ 	uc_priv->ysize = timings.vactive.typ;
+-	if (priv->feat->subrev == DSS_AM65X || priv->feat->subrev == DSS_AM625) {
+-		priv->oldi_mode = OLDI_DUAL_LINK;
+-		if (priv->oldi_mode) {
+-			ret = dss_init_am65x_oldi_io_ctrl(dev, priv);
+-			if (ret)
+-				return ret;
+-		}
+-	}
+ 
+-	dss_vp_prepare(priv, 0);
+-	dss_vp_enable(priv, 0, &timings);
++	dss_vp_prepare(priv, priv->active_hw_videoport_id);
++	dss_vp_enable(priv, priv->active_hw_videoport_id, &timings);
+ 	dss_vp_init(priv);
+ 
+ 	ret = clk_get_by_name(dev, "fck", &priv->fclk);
+diff --git a/drivers/video/tidss/tidss_drv.h b/drivers/video/tidss/tidss_drv.h
+index e229d975ff4..0431f41ae95 100644
+--- a/drivers/video/tidss/tidss_drv.h
++++ b/drivers/video/tidss/tidss_drv.h
+@@ -13,9 +13,12 @@
+ #define __TIDSS_DRV_H__
+ 
+ #include <media_bus_format.h>
++#include <syscon.h>
++#include <regmap.h>
+ 
+ #define TIDSS_MAX_PORTS 4
+ #define TIDSS_MAX_PLANES 4
++#define TIDSS_MAX_OLDI_TXES 2
+ 
+ enum dss_vp_bus_type {
+ 	DSS_VP_DPI,		/* DPI output */
+@@ -31,6 +34,8 @@ enum dss_oldi_modes {
+ 	OLDI_DUAL_LINK,				/* Combined Output over OLDI 0 and 1. */
+ };
+ 
++enum oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
++
+ struct dss_features_scaling {
+ 	u32 in_width_max_5tap_rgb;
+ 	u32 in_width_max_3tap_rgb;
+@@ -96,13 +101,11 @@ struct dss_features {
+ 	u32 vid_order[TIDSS_MAX_PLANES];
+ };
+ 
+-enum dss_oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
+-
+ struct dss_bus_format {
+ 	u32 bus_fmt;
+ 	u32 data_width;
+ 	bool is_oldi_fmt;
+-	enum dss_oldi_mode_reg_val oldi_mode_reg_val;
++	enum oldi_mode_reg_val oldi_mode_reg_val;
+ };
+ 
+ static struct dss_bus_format dss_bus_formats[] = {
+@@ -132,6 +135,11 @@ struct tidss_drv_priv {
+ 	struct dss_bus_format *bus_format;
+ 	u32 pixel_format;
+ 	u32 memory_bandwidth_limit;
++	unsigned int num_oldis;
++	struct tidss_oldi *oldis[TIDSS_MAX_OLDI_TXES];
++	int active_hw_videoport_id;
++	int active_panels;
+ };
+ 
++struct tidss_oldi;
+ #endif
+diff --git a/drivers/video/tidss/tidss_oldi.c b/drivers/video/tidss/tidss_oldi.c
+new file mode 100644
+index 00000000000..a2f232b3e3d
+--- /dev/null
++++ b/drivers/video/tidss/tidss_oldi.c
+@@ -0,0 +1,298 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
++ * Swamil Jain <s-jain1@ti.com>
++ *
++ * based on the linux tidss_oldi.c, which is
++ *
++ * Copyright (C) 2024 - Texas Instruments Incorporated
++ * Author: Aradhya Bhatia <a-bhatia1@ti.com>
++ */
++
++#include <dm.h>
++#include <dm/ofnode_graph.h>
++#include <dm/ofnode.h>
++#include <malloc.h>
++#include <syscon.h>
++#include <clk.h>
++#include <regmap.h>
++#include <dm/device_compat.h>
++
++#include "tidss_oldi.h"
++
++enum tidss_oldi_pixels {
++	OLDI_PIXELS_EVEN = BIT(0),
++	OLDI_PIXELS_ODD = BIT(1),
++};
++
++/**
++ * enum tidss_oldi_dual_link_pixels - Pixel order of an OLDI dual-link connection
++ * @TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS: Even pixels are expected to be generated
++ *    from the first port, odd pixels from the second port
++ * @TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS: Odd pixels are expected to be generated
++ *    from the first port, even pixels from the second port
++ */
++enum tidss_oldi_dual_link_pixels {
++	TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS = 0,
++	TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS = 1,
++};
++
++static const struct oldi_bus_format oldi_bus_formats[] = {
++	{ MEDIA_BUS_FMT_RGB666_1X7X3_SPWG,	18, SPWG_18,	MEDIA_BUS_FMT_RGB666_1X18 },
++	{ MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,	24, SPWG_24,	MEDIA_BUS_FMT_RGB888_1X24 },
++	{ MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA,	24, JEIDA_24,	MEDIA_BUS_FMT_RGB888_1X24 },
++};
++
++static int tidss_oldi_get_port_pixels_type(ofnode port_node)
++{
++	bool even_pixels =
++		ofnode_has_property(port_node, "dual-lvds-even-pixels");
++	bool odd_pixels =
++		ofnode_has_property(port_node, "dual-lvds-odd-pixels");
++	return (even_pixels ? OLDI_PIXELS_EVEN : 0) |
++	       (odd_pixels ? OLDI_PIXELS_ODD : 0);
++}
++
++static int tidss_oldi_get_remote_pixels_type(ofnode port_node)
++{
++	ofnode endpoint = ofnode_null();
++	int pixels_type = -EPIPE;
++
++	ofnode_for_each_subnode(endpoint, port_node) {
++		ofnode remote_port;
++		int current_pt;
++
++		if (!ofnode_name_eq(endpoint, "endpoint"))
++			continue;
++
++		remote_port = ofnode_graph_get_remote_port(endpoint);
++		if (!ofnode_valid(remote_port))
++			return -EPIPE;
++
++		current_pt = tidss_oldi_get_port_pixels_type(remote_port);
++		if (pixels_type < 0)
++			pixels_type = current_pt;
++
++		if (!current_pt || pixels_type != current_pt)
++			return -EINVAL;
++	}
++
++	return pixels_type;
++}
++
++int tidss_oldi_get_dual_link_pixel_order(ofnode port1, ofnode port2)
++{
++	int remote_p1_pt, remote_p2_pt;
++
++	if (!ofnode_valid(port1) || !ofnode_valid(port2))
++		return -EINVAL;
++
++	remote_p1_pt = tidss_oldi_get_remote_pixels_type(port1);
++	if (remote_p1_pt < 0)
++		return remote_p1_pt;
++
++	remote_p2_pt = tidss_oldi_get_remote_pixels_type(port2);
++	if (remote_p2_pt < 0)
++		return remote_p2_pt;
++
++	/*
++	 * A valid dual-lVDS bus is found when one remote port is marked with
++	 * "dual-lvds-even-pixels", and the other remote port is marked with
++	 * "dual-lvds-odd-pixels", bail out if the markers are not right.
++	 */
++	if (remote_p1_pt + remote_p2_pt != OLDI_PIXELS_EVEN + OLDI_PIXELS_ODD)
++		return -EINVAL;
++
++	return remote_p1_pt == OLDI_PIXELS_EVEN ?
++		TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS :
++		TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS;
++}
++
++static int get_oldi_mode(ofnode oldi_tx, u32 *companion_instance)
++{
++	ofnode companion;
++	ofnode port0, port1;
++	int pixel_order;
++	int ret;
++	/*
++	 * Find if the OLDI is paired with another OLDI for combined OLDI
++	 * operation (dual-lvds or clone).
++	 */
++	companion = ofnode_parse_phandle(oldi_tx, "ti,companion-oldi", 0);
++	if (!ofnode_valid(companion)) {
++		/*
++		 * OLDI TXes in Single Link mode do not have companion
++		 * OLDI TXes and, Secondary OLDI nodes don't need this
++		 * information.
++		 */
++		if (ofnode_has_property(oldi_tx, "ti,secondary-oldi"))
++			return OLDI_MODE_SECONDARY;
++
++		/*
++		 * The OLDI TX does not have a companion, nor is it a
++		 * secondary OLDI. It will operate independently.
++		 */
++		return OLDI_MODE_SINGLE_LINK;
++	}
++
++	ret = ofnode_read_u32(companion, "reg", companion_instance);
++	if (ret)
++		return OLDI_MODE_UNSUPPORTED;
++
++	/*
++	 * We need to work out if the sink is expecting us to function in
++	 * dual-link mode. We do this by looking at the DT port nodes we are
++	 * connected to, if they are marked as expecting even pixels and
++	 * odd pixels than we need to enable vertical stripe output.
++	 */
++	port0 = ofnode_graph_get_port_by_id(oldi_tx, 1);
++	port1 = ofnode_graph_get_port_by_id(companion, 1);
++	pixel_order = tidss_oldi_get_dual_link_pixel_order(port0, port1);
++	switch (pixel_order) {
++	case -EINVAL:
++		/*
++		 * The dual link properties were not found in at least
++		 * one of the sink nodes. Since 2 OLDI ports are present
++		 * in the DT, it can be safely assumed that the required
++		 * configuration is Clone Mode.
++		 */
++		return OLDI_MODE_CLONE_SINGLE_LINK;
++
++	case TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS:
++		return OLDI_MODE_DUAL_LINK;
++
++	/* Unsupported OLDI Modes */
++	case TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS:
++	default:
++		return OLDI_MODE_UNSUPPORTED;
++	}
++}
++
++static int get_parent_dss_vp(ofnode oldi_tx, u32 *parent_vp)
++{
++	ofnode ep, dss_port;
++	int ret;
++
++	ep = ofnode_graph_get_endpoint_by_regs(oldi_tx, 0, -1);
++	if (ofnode_valid(ep)) {
++		dss_port = ofnode_graph_get_remote_port(ep);
++		if (!ofnode_valid(dss_port))
++			ret = -ENODEV;
++
++		ret = ofnode_read_u32(dss_port, "reg", parent_vp);
++		if (ret)
++			return -ENODEV;
++		return 0;
++	}
++
++	return -ENODEV;
++}
++
++static int tidss_init_oldi_io_ctrl(struct udevice *dev, struct tidss_oldi *tidss_oldi)
++{
++	struct udevice *syscon;
++	struct regmap *regmap = NULL;
++	int ret = 0;
++
++	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "ti,am65x-oldi-io-ctrl",
++					   &syscon);
++	if (ret) {
++		debug("unable to find ti,am65x-oldi-io-ctrl syscon device (%d)\n", ret);
++		return ret;
++	}
++
++	/* get grf-reg base address */
++	regmap = syscon_get_regmap(syscon);
++	if (!regmap) {
++		debug("unable to find rockchip grf regmap\n");
++		return -ENODEV;
++	}
++	tidss_oldi->io_ctrl = regmap;
++	return 0;
++}
++
++int tidss_oldi_init(struct udevice *dev)
++{
++	struct tidss_drv_priv *priv = dev_get_priv(dev);
++	u32 parent_vp, oldi_instance, companion_instance;
++	int ret, tidss_oldi_panel_count = 0;
++	enum tidss_oldi_link_type link_type;
++	struct tidss_oldi *tidss_oldi;
++	struct clk *serial;
++	ofnode child;
++	ofnode oldi_parent = ofnode_find_subnode(dev_ofnode(dev), "oldi-transmitters");
++
++	if (!ofnode_valid(oldi_parent))
++		/* Return gracefully */
++		return 0;
++
++	ofnode_for_each_subnode(child, oldi_parent) {
++		priv->oldis[tidss_oldi_panel_count] = NULL;
++
++		ret = get_parent_dss_vp(child, &parent_vp);
++		if (ret == -ENODEV) {
++			/*
++			 * ENODEV means that this particular OLDI node
++			 * is not connected with the DSS, which is not
++			 * a harmful case. There could be another OLDI
++			 * which may still be connected.
++			 * Continue to search for that.
++			 */
++			ret = 0;
++			continue;
++		}
++
++		ret = ofnode_read_u32(child, "reg", &oldi_instance);
++		if (ret) {
++			ret = -ENODEV;
++			break;
++		}
++
++		link_type = get_oldi_mode(child, &companion_instance);
++		if (link_type == OLDI_MODE_UNSUPPORTED) {
++			dev_warn(dev, "OLDI%u: Unsupported OLDI connection.\n", oldi_instance);
++
++			ret = OLDI_MODE_UNSUPPORTED;
++			/* Return gracefully, no supported OLDI panel found */
++			break;
++		} else if (link_type == OLDI_MODE_SECONDARY) {
++			/*
++			 * This is the secondary OLDI node, which serves as a
++			 * companinon to the primary OLDI, when it is configured
++			 * for the dual-lvds mode. Since the primary OLDI will
++			 * be a part of bridge chain, no need to put this one
++			 * too. Continue onto the next OLDI node.
++			 */
++			continue;
++		}
++
++		serial = malloc(sizeof(struct clk));
++		ret = clk_get_by_name_nodev(child, "serial", serial);
++		if (ret) {
++			dev_err(dev, "video port %d clock enable error %d\n", parent_vp, ret);
++			free(serial);
++			return ret;
++		}
++
++		tidss_oldi = malloc(sizeof(struct tidss_oldi));
++		ret = tidss_init_oldi_io_ctrl(dev, tidss_oldi);
++		if (ret) {
++			debug("tidss could not initialize oldi_io_ctrl\n");
++			free(serial);
++			free(tidss_oldi);
++			return ret;
++		}
++
++		tidss_oldi->dev = dev;
++		tidss_oldi->parent_vp = parent_vp;
++		tidss_oldi->oldi_instance = oldi_instance;
++		tidss_oldi->companion_instance = companion_instance;
++		tidss_oldi->link_type = link_type;
++		tidss_oldi->serial = serial;
++		priv->oldis[tidss_oldi_panel_count] = tidss_oldi;
++		priv->oldi_mode = link_type;
++		tidss_oldi_panel_count++;
++	}
++	priv->num_oldis = tidss_oldi_panel_count;
++	return 0;
++}
+diff --git a/drivers/video/tidss/tidss_oldi.h b/drivers/video/tidss/tidss_oldi.h
+new file mode 100644
+index 00000000000..82dcd72fc0e
+--- /dev/null
++++ b/drivers/video/tidss/tidss_oldi.h
+@@ -0,0 +1,67 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
++ * Swamil Jain <s-jain1@ti.com>
++ *
++ * based on the linux tidss_oldi.h, which is
++ *
++ * Copyright (C) 2024 - Texas Instruments Incorporated
++ * Author: Aradhya Bhatia <a-bhatia1@ti.com>
++ */
++
++#ifndef __TIDSS_OLDI_H__
++#define __TIDSS_OLDI_H__
++
++#include <dm/ofnode.h>
++#include <dm/of_access.h>
++#include <media_bus_format.h>
++
++#include "tidss_drv.h"
++
++/* OLDI PORTS */
++#define OLDI_INPUT_PORT    0
++#define OLDI_OURPUT_PORT   1
++
++/* Control MMR Registers */
++
++/* Register offsets */
++#define OLDI_PD_CTRL            0x100
++#define OLDI_LB_CTRL            0x104
++
++/* Power control bits */
++#define OLDI_PWRDOWN_TX(n)	BIT(n)
++
++/* LVDS Bandgap reference Enable/Disable */
++#define OLDI_PWRDN_BG		BIT(8)
++
++enum tidss_oldi_link_type {
++	OLDI_MODE_UNSUPPORTED,
++	OLDI_MODE_SINGLE_LINK,
++	OLDI_MODE_CLONE_SINGLE_LINK,
++	OLDI_MODE_DUAL_LINK,
++	OLDI_MODE_SECONDARY,
++};
++
++struct oldi_bus_format {
++	u32 bus_fmt;
++	u32 data_width;
++	enum oldi_mode_reg_val oldi_mode_reg_val;
++	u32 input_bus_fmt;
++};
++
++struct tidss_oldi {
++	struct udevice *dev;
++
++	enum tidss_oldi_link_type link_type;
++	const struct oldi_bus_format *bus_format;
++	u32 oldi_instance;
++	u32 companion_instance;
++	u32 parent_vp;
++
++	struct clk *serial;
++	struct regmap *io_ctrl;
++};
++
++int tidss_oldi_init(struct udevice *dev);
++
++#endif /* __TIDSS_OLDI_H__ */
+-- 
+2.34.1
 
-Hi,
-
-I have reworked the commits based on the previous comments and suggestions.
-Please help to review the commits.
-
-Thanks for your time.
-
-Dinesh
