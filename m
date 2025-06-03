@@ -4,50 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2084AC5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 06:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B0D7C5AE59
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 07:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 409B381E06;
-	Tue,  3 Jun 2025 08:45:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id AB47F81E72;
+	Tue,  3 Jun 2025 09:08:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id ACE0281E72; Tue,  3 Jun 2025 08:45:42 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F84880F0E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 08:45:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 5536jTjq052659
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 3 Jun 2025 14:45:29 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Jun
- 2025 14:45:29 +0800
-Date: Tue, 3 Jun 2025 14:45:21 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [PULL] u-boot-riscv/next
-Message-ID: <aD6aAdsMpatCgcIn@swlinux02>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V/RXjeQS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A613B81F0D; Tue,  3 Jun 2025 09:08:04 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 495C780F0E
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 09:08:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-60462e180e2so11104316a12.2
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 00:08:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1748934481; x=1749539281; darn=lists.denx.de;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ITGMP7hln6IWw5uRG9ZzXb1NKBfxeXxsD+QAjMgM4/U=;
+ b=V/RXjeQSiNBh4ke6KOigy2vXSD/b8KIDD24KIwbqaEWKDkjRt3+acoQeqb1KBCoDSp
+ 5mLKCxH9+UDRqpnayQBkzcUMVxuQfCUPgRBhucw6vp2g/4ZWGJW7HTQWudB5JibtnBrC
+ XOedY2dOM3IpAXO3ASMNEQa5T43bJn57qa29n/ZwpAuV8HZC6NoLRiWAU1G4Z7Z3Xt1d
+ BuV8yKNSct7Z+aBFJi8Gj7AlHl/cZraJNxMQobcjUf/EV1h02LBjgLElTstta+Dov18C
+ hbwiVzJlBou9wH0lfe4rTn1lqgbxWb9DgsvIKy2omsWhIBx2Ks2yyOyu619eHN0z9nTl
+ Y52g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748934481; x=1749539281;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ITGMP7hln6IWw5uRG9ZzXb1NKBfxeXxsD+QAjMgM4/U=;
+ b=FGcjEjjlG3yAtrmCb429EfQ7PLEmln/u0KrcoFoRpkhXfykuhi6Yuizedt7iyuyrls
+ HcNYFlhz9hOprJImPE3lmyU9r9NGKFgXNYdmuooWzgLo2xiiu7AbZ9MJ//52XO7VNjS4
+ vnf/wnHSAUNfssWo9UBxrTUDLGzcoCgjGDhqYJV1lp8z3SrDWSFk5OWHuE31MCuQXuwD
+ tlhs5GmSOWfvTD4BszvhJaZvkOQ2akzJ0HPwof05WJQ/mLFmU4YRrp86t/muflO85kim
+ OLmad4Vgz6+DwyUklplIxTYkmExec9emWA5BxRViBGoBXiy//Nki7ROwb/H+1+7CwGCU
+ DZ2w==
+X-Gm-Message-State: AOJu0YxoJjQVETKmUOaT0upM4cMaDqd6M9vs6BKusa3EsUPLIBDF8vgr
+ 79X2qDCEXDSK6q/7ygux8gRUYnDSGOqKH9SfBKvWOPUMmAdHHyPAvLtVke+krwq0tsDdjSF9Qar
+ 6KZSQSYjFCOsiaqfW9FZ4d2FDniBAQOzu
+X-Gm-Gg: ASbGnctfu4h7NbHScSCT7Vs4bwSa7x2tfeeDOMUwFL19E5napYVU3lFrUpZHglBgJil
+ 2dJL6RezFExYrF7NQZWpTHQ/71HPXX+jUb8f0+SqTUe0mSqm0gtkbA2TO/0g35Re6gdWbIx3mOO
+ 5mmGukMaA+ZK+tx7Su7wI2V560PQINQZ4Io5x7ojpqpR78rfM45gAUrGlgc5KAeb7a
+X-Google-Smtp-Source: AGHT+IHG1ZHVCFMejJQ4kVCjHSLVeDH61tC36N/IG0KEt6JwetfT5P/gZ+WXupogbgNyGBup5U8IONvUA0Qi9anAAiU=
+X-Received: by 2002:a05:6402:35c2:b0:601:f3f1:f10e with SMTP id
+ 4fb4d7f45d1cf-6057c1a503dmr13583680a12.5.1748934481209; Tue, 03 Jun 2025
+ 00:08:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 5536jTjq052659
+References: <20250602194507.15159-1-malysagreg@gmail.com>
+ <20250602194507.15159-4-malysagreg@gmail.com>
+ <EB8928C9-E912-4F52-B080-B7EACBA89740@gmx.de>
+ <CABdDSeV0D2n223hu+2pAp0x_UksGU=15m09pwY7edgpP5kZ9_w@mail.gmail.com>
+In-Reply-To: <CABdDSeV0D2n223hu+2pAp0x_UksGU=15m09pwY7edgpP5kZ9_w@mail.gmail.com>
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Tue, 3 Jun 2025 03:06:05 -0400
+X-Gm-Features: AX0GCFtt4Q0s18Zm4exjkfCeFGJ4vwyJeGF7xG0I_Nq82uwN-l6IN-b_6cfcPL4
+Message-ID: <CABdDSeUaKVPYO5YvZqVe-eUiEYA0470QA40hH8FYc4FmUJv6Kg@mail.gmail.com>
+Subject: [PATCH 03/10] docker: add ADI build-related tools to docker image
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, adsp-linux@analog.com,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,60 +94,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+My apologies, I accidentally didn't hit reply to all, please see below.
 
-The following changes since commit d45b1d4ac94710f88902adc2173d7930700e2869:
+---------- Forwarded message ---------
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Tue, Jun 3, 2025 at 3:04=E2=80=AFAM
+Subject: Re: [PATCH 03/10] docker: add ADI build-related tools to docker im=
+age
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-  Merge tag 'u-boot-dfu-next-20250602' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next (2025-06-02 08:43:10 -0600)
 
-are available in the Git repository at:
+Hi Heinrich,
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+On Mon, Jun 2, 2025 at 4:11=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gmx=
+.de> wrote:
+>
+> Am 2. Juni 2025 21:44:41 MESZ schrieb Greg Malysa <malysagreg@gmail.com>:
+> >ADI processors require packaging with the ldr utility for bootrom
+>
+> "ADI processors" is not self explanatory. Can we add a sentence like
+>
+> "LDR files are the executable format for the Analog Devices ADSP-SCxxx on=
+-chip Boot ROM. Provide the ldr compiler for ARMv7 and ARMv8."
 
-for you to fetch changes up to b911af6d60d3be570469b92df751874dc376336b:
+Yes I can update the message with text like this for v2.
 
-  MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer (2025-06-03 14:17:46 +0800)
+>
+> >
+> >+# Build ldr tool for ADI boards and install to match expected abi name
+> >+RUN git clone https://github.com/analogdevicesinc/lnxdsp-arm-poky-linux=
+-gnueabi-ldr.git /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr && \
+> >+      cd /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr/src/ldr && \
+> >+      ./configure && \
+> >+      make -j $(nproc) && \
+> >+      cp ldr /usr/bin/arm-linux-gnueabi-ldr && \
+> >+      cp ldr /usr/bin/aarch64-linux-ldr
+>
+> In the Docker image we tend to put such tools into a directory in /opt.
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26483
-----------------------------------------------------------------
-- board: Convert Lichee Pi 4A to use S-Mode proper U-Boot
-- RISC-V: configs: Raise SPL_SYS_MALLOC_SIZE to 8 MiB
-- driver: Add SD card support to the Beagle-V-Fire
-- MAINTAINERS: Add Yao Zi as maintainer for th1520
-----------------------------------------------------------------
-Eoin Dickson (2):
-      gpio: add PolarFire SoC GPIO and Core GPIO driver
-      spi: coreqspi: add xfer function for PolarFire SoC
+I will make this change as well and run through CI again on my runner.
+I'll wait a week or so for feedback on the rest of the series before
+resubmitting. Thanks for the feedback!
 
-Heinrich Schuchardt (1):
-      configs: raise SPL_SYS_MALLOC_SIZE to 8 MiB on RISC-V
-
-Yao Zi (6):
-      riscv: cpu: th1520: Build spl.c for SPL only
-      riscv: cpu: th1520: Support cache enabling/disabling in M mode only
-      riscv: dts: th1520: Prepare binman configuration for loading OpenSBI
-      board: thead: licheepi4a: Run proper U-Boot in S-Mode
-      doc: thead: lpi4a: Update for S-Mode proper U-Boot support
-      MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer
-
- MAINTAINERS                             |   7 ++
- arch/riscv/cpu/th1520/Makefile          |   2 +-
- arch/riscv/cpu/th1520/cache.c           |   2 +
- arch/riscv/dts/thead-th1520-binman.dtsi |  32 +++++-
- common/spl/Kconfig                      |   2 +-
- configs/starfive_visionfive2_defconfig  |   1 -
- configs/th1520_lpi4a_defconfig          |   2 +-
- configs/xilinx_mbv32_defconfig          |   1 -
- configs/xilinx_mbv32_smode_defconfig    |   1 -
- configs/xilinx_mbv64_defconfig          |   1 -
- configs/xilinx_mbv64_smode_defconfig    |   1 -
- doc/board/thead/lpi4a.rst               | 125 ++++++--------------
- drivers/gpio/Kconfig                    |   5 +
- drivers/gpio/Makefile                   |   1 +
- drivers/gpio/mpfs_gpio.c                | 198 ++++++++++++++++++++++++++++++++
- drivers/spi/microchip_coreqspi.c        | 113 +++++++++++++++++-
- 16 files changed, 391 insertions(+), 103 deletions(-)
- create mode 100644 drivers/gpio/mpfs_gpio.c
-
-Best regards,
-Leo
+Thanks,
+Greg
