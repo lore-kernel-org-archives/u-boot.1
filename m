@@ -4,51 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47453C5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 17:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 588E0C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 17:11:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8715D82AA7;
-	Tue,  3 Jun 2025 19:06:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=novatechautomation.com
+	by phobos.denx.de (Postfix) with ESMTP id B7AB882AA7;
+	Tue,  3 Jun 2025 19:11:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=novatechautomation.com header.i=@novatechautomation.com header.b="HQbeihZJ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Pl2LFfkR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E152582AAA; Tue,  3 Jun 2025 19:06:36 +0200 (CEST)
-Received: from gw2.cammew.com (gw2.cammew.com [64.182.209.149])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 63D0182C15; Tue,  3 Jun 2025 19:11:16 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1335582A76
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 19:06:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=novatechautomation.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3AA7382A76
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 19:11:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=eric.schikschneit@novatechautomation.com
-Received: from eric-Desktop.novatech-llc.local (unknown [38.62.160.128])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by gw2.cammew.com (Postfix) with ESMTPSA id 34AE1EDCCA;
- Tue,  3 Jun 2025 13:06:32 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 gw2.cammew.com 34AE1EDCCA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=novatechautomation.com; s=relay; t=1748970392;
- bh=RRuy2vKPUTXqqyovYK+WSgMX6fKr43rY9XrSk/MZZb8=;
- h=From:To:Cc:Subject:Date:From;
- b=HQbeihZJp2g117cQ3bnL1DQvZ4StkwnwUL4xCHtI9XWd8ceDbFjrOxVVw2m3MGsBd
- ojRCu3s6HtoNTKyC9G0oeXMyRtsJQl5GJUTk5olW83FOkFOl4u02vqOwlsVlKtwggI
- npidsfMnXe3cJwX02tcqDJWkPY4xhYcFIArlAVZE=
-From: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Subject: [PATCH] dtc: Add Kconfig option to pad device tree blob
-Date: Tue,  3 Jun 2025 12:06:24 -0500
-Message-Id: <20250603170624.93376-1-eric.schikschneit@novatechautomation.com>
-X-Mailer: git-send-email 2.34.1
+ smtp.mailfrom=prvs=82493dba10=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 553Eku1l019273;
+ Tue, 3 Jun 2025 19:11:06 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ VFVKWDrPk83FtjRoIKBdH/bRWviOxuFy7J4F47cP2vU=; b=Pl2LFfkRT5O3g6wh
+ hKKbNo7wcLs2gQVKl4GaIiF8FBEavUlobLUG1pUY408GB1vnNE7iK5hqhwGUUyLM
+ eg9TVC+RQhdozCXp0ntsWCjVHhXVdX6u9IElaCVtQ+5Wm2kSAciGnT1gPI72LcZC
+ aS/npcfMQE12TAn6oN0DPdKLbjfZYpFlzisFBeBoz6vLbWHwmtgrPJsJeaqxyZXy
+ +u0nh5CbMrs1lrfkqFBJnRm+jS5J/QjcrXkveQfw2LCKz7ln6SYCQ8wXq9o6q907
+ 9viHRfimH1xiBfW9qkMO4KVbBrKeJFzuoPbvRXHtAKT/zKQ7ZCmRrDfqoezMY5CK
+ S+MgGA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g93daej-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 03 Jun 2025 19:11:06 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3721C40046;
+ Tue,  3 Jun 2025 19:09:57 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 14CF3B54CF1;
+ Tue,  3 Jun 2025 19:09:20 +0200 (CEST)
+Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Jun
+ 2025 19:09:19 +0200
+Message-ID: <f6c0f2c3-8998-4837-85f0-9d25c75037a2@foss.st.com>
+Date: Tue, 3 Jun 2025 19:09:18 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/13] clk: scmi: add compatibility with clock protocol
+ 2.0
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>,
+ Etienne Carriere <etienne.carriere@foss.st.com>, Valentin Caron
+ <valentin.caron@foss.st.com>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Alice Guo
+ <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>, Peng Fan
+ <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
+References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
+ <20250527132755.2169508-2-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20250527132755.2169508-2-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.182]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-03_02,2025-06-02_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,188 +95,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This will allow arch(s) that use device tree blobs to pad the end of the
-device tree so they can be modified by board files at run time. This will
-help prevent errors such as FDT_ERR_NOSPACE from occuring.
+Hi,
 
-Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
----
- arch/Kconfig                    | 7 +++++++
- arch/arc/dts/Makefile           | 2 +-
- arch/m68k/dts/Makefile          | 2 +-
- arch/microblaze/dts/Makefile    | 2 +-
- arch/nios2/dts/Makefile         | 2 +-
- arch/riscv/dts/Makefile         | 2 +-
- arch/sandbox/dts/Makefile       | 2 +-
- arch/x86/dts/Makefile           | 2 +-
- doc/board/broadcom/bcm7xxx.rst  | 6 ++----
- doc/develop/makefiles.rst       | 5 ++++-
- dts/upstream/src/arm64/Makefile | 2 +-
- dts/upstream/src/riscv/Makefile | 2 +-
- scripts/Makefile.dts            | 4 ++++
- 13 files changed, 26 insertions(+), 14 deletions(-)
+On 5/27/25 15:27, Patrice Chotard wrote:
+> From: Valentin Caron <valentin.caron@foss.st.com>
+>
+> Since clock protocol 2.0, SCMI specification add an option field
+> "clock_enable_delay" to CLOCK_ATTRIBUTES command.
+>
+> scmi_read_resp_from_smt() will return an error ("Buffer too small") as
+> the message length coming from the SCMI server is not the same as expected.
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index ea33d07c086..bf4c2c80891 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -63,6 +63,13 @@ config SYS_CACHELINE_SIZE
- 	default 64 if RISCV
- 	default 32 if MIPS
- 
-+config SYS_DTC_PAD_BYTES
-+	int "Size in bytes to pad device tree blob"
-+	default 4096 if ARC || ARM64 || M68K || MICROBLAZE || NIOS2 \
-+		|| RISCV || SANDBOX || X86
-+	default 32768 if X86 && EFI_APP
-+	default 0
-+
- config LINKER_LIST_ALIGN
- 	int
- 	default 32 if SANDBOX
-diff --git a/arch/arc/dts/Makefile b/arch/arc/dts/Makefile
-index fe6ad7b849a..87c627c01c8 100644
---- a/arch/arc/dts/Makefile
-+++ b/arch/arc/dts/Makefile
-@@ -11,4 +11,4 @@ dtb-$(CONFIG_TARGET_IOT_DEVKIT) +=  iot_devkit.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/m68k/dts/Makefile b/arch/m68k/dts/Makefile
-index 8b354b9c570..0f06109aa06 100644
---- a/arch/m68k/dts/Makefile
-+++ b/arch/m68k/dts/Makefile
-@@ -21,4 +21,4 @@ dtb-$(CONFIG_TARGET_STMARK2) += stmark2.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
-index 9be902d3bb1..0f3a7472a67 100644
---- a/arch/microblaze/dts/Makefile
-+++ b/arch/microblaze/dts/Makefile
-@@ -5,4 +5,4 @@ dtb-y += $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/nios2/dts/Makefile b/arch/nios2/dts/Makefile
-index d77db9762a1..75951164978 100644
---- a/arch/nios2/dts/Makefile
-+++ b/arch/nios2/dts/Makefile
-@@ -5,4 +5,4 @@ dtb-y += $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%).dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index cf1872f3fdc..2b10c2d6c01 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -19,4 +19,4 @@ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += ast2700-ibex.dtb
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/sandbox/dts/Makefile b/arch/sandbox/dts/Makefile
-index 1c9fb4a4566..0d7b0b80e21 100644
---- a/arch/sandbox/dts/Makefile
-+++ b/arch/sandbox/dts/Makefile
-@@ -11,4 +11,4 @@ dtb-$(CONFIG_CMD_EXTENSION) += overlay0.dtbo overlay1.dtbo
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
-diff --git a/arch/x86/dts/Makefile b/arch/x86/dts/Makefile
-index 9a46726e026..725991e2629 100644
---- a/arch/x86/dts/Makefile
-+++ b/arch/x86/dts/Makefile
-@@ -24,4 +24,4 @@ dtb-y += bayleybay.dtb \
- 
- include $(srctree)/scripts/Makefile.dts
- 
--DTC_FLAGS += -R 4 -p $(if $(CONFIG_EFI_APP),0x8000,0x1000)
-+DTC_FLAGS += -R 4
-diff --git a/doc/board/broadcom/bcm7xxx.rst b/doc/board/broadcom/bcm7xxx.rst
-index f1994d9f975..f559d5c290a 100644
---- a/doc/board/broadcom/bcm7xxx.rst
-+++ b/doc/board/broadcom/bcm7xxx.rst
-@@ -149,10 +149,8 @@ and with a generic ARMv7 root file system.
- 				 * to the Linux source tree as a .dts file.
- 				 *
- 				 * To support modifications to the device tree
--				 * in-place in U-Boot, add to Linux's
--				 * arch/arm/boot/dts/Makefile:
--				 *
--				 * DTC_FLAGS ?= -p 4096
-+				 * in-place in U-Boot, set the config variable
-+				 * CONFIG_SYS_DTC_PAD_BYTES as needed.
- 				 *
- 				 * This will leave some padding in the DTB and
- 				 * thus reserve room for node additions.
-diff --git a/doc/develop/makefiles.rst b/doc/develop/makefiles.rst
-index 37a7deaca92..593556f4dd5 100644
---- a/doc/develop/makefiles.rst
-+++ b/doc/develop/makefiles.rst
-@@ -1430,10 +1430,13 @@ When kbuild executes, the following steps are followed (roughly):
- 	A central rule exists to create `$(obj)/%.dtb` from `$(src)/%.dts`;
- 	architecture Makefiles do no need to explicitly write out that rule.
- 
-+        The device tree can now be padded by the specified number of bytes
-+        by setting CONFIG_SYS_DTC_PAD_BYTES instead of explicitly setting
-+        DTC_FLAGS with the -p option.
-+
- 	Example::
- 
- 		targets += $(dtb-y)
--		DTC_FLAGS ?= -p 1024
- 
- 7.9 Preprocessing linker scripts
- --------------------------------
-diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
-index b6db0dc6b26..01a5265114e 100644
---- a/dts/upstream/src/arm64/Makefile
-+++ b/dts/upstream/src/arm64/Makefile
-@@ -6,5 +6,5 @@ include $(srctree)/scripts/Makefile.dts
- DTC_FLAGS += -a 0x8
- 
- ifdef CONFIG_RCAR_64
--DTC_FLAGS += -R 4 -p 0x1000
-+	DTC_FLAGS += -R 4
- endif
-diff --git a/dts/upstream/src/riscv/Makefile b/dts/upstream/src/riscv/Makefile
-index 980617e6de3..43351f801db 100644
---- a/dts/upstream/src/riscv/Makefile
-+++ b/dts/upstream/src/riscv/Makefile
-@@ -2,5 +2,5 @@
- 
- include $(srctree)/scripts/Makefile.dts
- 
--DTC_FLAGS += -R 4 -p 0x1000
-+DTC_FLAGS += -R 4
- 
-diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-index 685e3371bc6..3871a4ad412 100644
---- a/scripts/Makefile.dts
-+++ b/scripts/Makefile.dts
-@@ -16,6 +16,10 @@ dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
- 
- endif
- 
-+ifneq ($(CONFIG_SYS_DTC_PAD_BYTES),0)
-+DTC_FLAGS += -p $(CONFIG_SYS_DTC_PAD_BYTES)
-+endif
-+
- targets += $(dtb-y)
- 
- PHONY += dtbs
--- 
-2.34.1
+
+For me it is more a workaround for current SCMI implementation in U-Boot
+
+normally the message in SCMI protocol are backward compatible to avoid 
+this kind of issue
+
+=> the added properties are always optional, with default NULL value
+
+
+And the scmi_read_resp_from_smt() should
+
+- truncated the answer at the provided buffer size when the buffer is 
+larger than expected
+
+and no more response "Buffer too small"
+
+- fill the buffer with zero if the answer if lower than buffer size
+
+
+but this modification need more modifications and tests....
+
+
+>
+> So implement a condition to SCMI clock protocol version to change the
+> length of the expected message.
+>
+> Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> ---
+>
+> (no changes since v1)
+>
+>   drivers/clk/clk_scmi.c   | 54 +++++++++++++++++++++++++++++-----------
+>   include/scmi_protocols.h | 15 +++++++++++
+>   2 files changed, 54 insertions(+), 15 deletions(-)
+>
+> diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+> index af69850cdd8..e323a948780 100644
+> --- a/drivers/clk/clk_scmi.c
+> +++ b/drivers/clk/clk_scmi.c
+> @@ -84,26 +84,47 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
+>   static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+>   				 u32 *attr)
+>   {
+> +	struct scmi_clock_priv *priv = dev_get_priv(dev);
+>   	struct scmi_clk_attribute_in in = {
+>   		.clock_id = clkid,
+>   	};
+> -	struct scmi_clk_attribute_out out;
+> -	struct scmi_msg msg = {
+> -		.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
+> -		.message_id = SCMI_CLOCK_ATTRIBUTES,
+> -		.in_msg = (u8 *)&in,
+> -		.in_msg_sz = sizeof(in),
+> -		.out_msg = (u8 *)&out,
+> -		.out_msg_sz = sizeof(out),
+> -	};
+>   	int ret;
+>   
+> -	ret = devm_scmi_process_msg(dev, &msg);
+> -	if (ret)
+> -		return ret;
+> -
+> -	*name = strdup(out.clock_name);
+> -	*attr = out.attributes;
+> +	if (priv->version >= 0x20000) {
+> +		struct scmi_clk_attribute_out_v2 out;
+> +		struct scmi_msg msg = {
+> +			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
+> +			.message_id = SCMI_CLOCK_ATTRIBUTES,
+> +			.in_msg = (u8 *)&in,
+> +			.in_msg_sz = sizeof(in),
+> +			.out_msg = (u8 *)&out,
+> +			.out_msg_sz = sizeof(out),
+> +		};
+> +
+> +		ret = devm_scmi_process_msg(dev, &msg);
+> +		if (ret)
+> +			return ret;
+> +
+> +		*name = strdup(out.clock_name);
+> +		*attr = out.attributes;
+> +	} else {
+> +		struct scmi_clk_attribute_out out;
+> +		struct scmi_msg msg = {
+> +			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
+> +			.message_id = SCMI_CLOCK_ATTRIBUTES,
+> +			.in_msg = (u8 *)&in,
+> +			.in_msg_sz = sizeof(in),
+> +			.out_msg = (u8 *)&out,
+> +			.out_msg_sz = sizeof(out),
+> +		};
+> +
+> +		ret = devm_scmi_process_msg(dev, &msg);
+> +		if (ret)
+> +			return ret;
+> +
+> +		*name = strdup(out.clock_name);
+> +		*attr = out.attributes;
+> +	}
+>   
+>   	return 0;
+>   }
+> @@ -257,6 +278,9 @@ static int scmi_clk_probe(struct udevice *dev)
+>   	if (!CONFIG_IS_ENABLED(CLK_CCF))
+>   		return 0;
+>   
+> +	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
+> +					    &priv->version);
+> +
+>   	/* register CCF children: CLK UCLASS, no probed again */
+>   	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
+>   		return 0;Even
+> diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+> index 9046de7e3e7..762a1032c37 100644
+> --- a/include/scmi_protocols.h
+> +++ b/include/scmi_protocols.h
+> @@ -782,6 +782,21 @@ struct scmi_clk_attribute_out {
+>   	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
+>   };
+>   
+> +/**
+> + * struct scmi_clk_get_nb_out_v2 - Response payload for SCMI_CLOCK_ATTRIBUTES command
+> + * Clock management Protocol 2.0
+> + * @status:	SCMI command status
+> + * @attributes:	clock attributes
+> + * @clock_name:	name of the clock
+> + * @clock_enable_delay: delay incurred by the platform to enable the clock
+> + */
+> +struct scmi_clk_attribute_out_v2 {
+> +	s32 status;
+> +	u32 attributes;
+> +	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
+> +	u32 clock_enable_delay;
+> +};
+> +
+
+see previous remark
+
+=> So no need to create a new struct for each version of message
+
+if SCMI correctly handle answer size for backward compatibility
+
+
+>   /**
+>    * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
+>    * @clock_id:	SCMI clock ID
+
+
+Even with previous remarks,
+
+the patch is functional today as short term solution for clk message v2
+
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
 
