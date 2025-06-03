@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04F17C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 06:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A18C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 06:45:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AB4B81F0D;
-	Tue,  3 Jun 2025 08:21:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B35B581E06;
+	Tue,  3 Jun 2025 08:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="atMDdur3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a/xfPTBl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB4AB82045; Tue,  3 Jun 2025 08:21:24 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id C08FA81E72; Tue,  3 Jun 2025 08:44:58 +0200 (CEST)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74CDF80AE1
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 08:21:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4643180F0E
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 08:44:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-70f94fe1e40so40069087b3.1
- for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 23:21:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-4a43972dcd7so62795391cf.3
+ for <u-boot@lists.denx.de>; Mon, 02 Jun 2025 23:44:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748931680; x=1749536480; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1748933095; x=1749537895; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Wll8+V+bemA+garjY8TKeTPFJcTkz6aRX1ODqlne6bQ=;
- b=atMDdur3/Rb5xu3DqouA+PVArzfvq3f/HDrkHqmovSJSDEZg3g18P0UN/VYZlCc385
- lWgMDp7M0aud4kjM2E2MirBg0Lz3U5k61ok3q32g2m8sti64YEygsXkLfqLS3/R6k2sB
- pYvb3J6J6GZ4dKgHshAkgDpzVOzLi2Vh+i7i6jgU9t5eTz1kgHdQAJVGwYCpZXDTLS2d
- 5yABz2C3gQ7QOBqHh7i4nbJyptbWs1GS86efkJuqIuHBJ7WfUZuCUzT7lHCpf2AClK04
- CKHJMDzJq0jP+ZoOuo10W5iL06B1K/S7cokOj3gG8wTHqcypmy4Ef5yMD9qN0wY436Za
- dxBg==
+ bh=Fnt5TX0MApGX2obe/HoAgCeNBh6hN4/g9EBMGOD5Ngg=;
+ b=a/xfPTBlUDbP5g/CvWanf3v7DOsYRodAr+8Ti1uPDh9X2ZL8bIZsTVsCp6//ytz3At
+ EuZFK3TRhMc6b070xSM1cr2cCcchtKowRFlFx9zKdpFAWQd4aK1HWAz5Q4SlwJSfo0tm
+ wRGt0jtPMdHXQBBwXX1W3zWhchkZcyvQCRHU11gcSpW//zN1BqfRz4tcsVuG7O584wCw
+ yv+5hYbiCgB8LyrN/bJyFvZ/InuUulDZIJVJxmXScmUvGnJXTqxUsSBeJTiuPxnWcL+6
+ 9thoRAMg96A2iF1pqLZXwfDhTRgiuYYeqqLdh4K3XDSQkKp3HplIQ+YbozMtg3HNTNPE
+ 1pcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748931680; x=1749536480;
+ d=1e100.net; s=20230601; t=1748933095; x=1749537895;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Wll8+V+bemA+garjY8TKeTPFJcTkz6aRX1ODqlne6bQ=;
- b=id4Y3bqXU2h32jgTJlO7zPclFHND53xopxdJWqcijqKn/MZ+Mqft+ySldZXfQwuQxl
- BrRjr+z5eS7YxM+Y9RvgBlJCPPzKN46dLFkXa4kajmNMLhVv0duMMT+ZzJEPyQIJlgBd
- p/AKqce/VtcabA8mAHwTU59/MdPoRxV8hLevO/5RvtayJrQm7JZswV6hMqxdD9Qld2oB
- 6BWCwLN6YxDW+CrVOy4XpqJ9dqyBb6kMV8Ekag/QCKwmIhIZstWPesxfaKQtWuJ9VYax
- 8uGGDM6Mrf4KyUWCpQLm1ml8ajmzG73twLrx3+t6pK0lm9Zd+U0nTOeqD+eQkOwiBoZe
- 4O0A==
-X-Gm-Message-State: AOJu0YxILsByPrFmd0K3y+l9bNgNJ5DdZ2bZy6d8aDYmhKBdNn/uYaz8
- +6mA5HzwkLevnfv6mJn28C/Sq3Ucxj2DPM2VCcigVhpC/kHCG5S1FYEfNe303WfFOTkOmDdztgI
- bTiSjwp6rcz+UTw1jz7W/7tjJGA4+R3Tn7ahV+sw/mw8K3TZMRRHO
-X-Gm-Gg: ASbGncuvESaQUr46JRQvFRTEEDAxO3mNMIIm4Vr1fUsXXCxNrrDqYADlj3UF4110nSK
- 7NaGGvDLryM9jhn3ml8F65cK9CndFx/NSQViyT7YiRYViCStqhaCEtI+ppzC2nc8CYnoWd7akWd
- 87y8Et75wiZ/PaJ3VubLqEp3GBiP0wXE7Nbg==
-X-Google-Smtp-Source: AGHT+IGUEX4OcC6LkIfpiMq0vnqw+qo3kYCpQThI7E9nKYwHI4tfShnmBs2EmDFx4/mgWSTb1nwLP9lHB9bxC28rqvs=
-X-Received: by 2002:a05:690c:6207:b0:70c:ceba:16 with SMTP id
- 00721157ae682-710c99a4cfemr19162717b3.17.1748931680259; Mon, 02 Jun 2025
- 23:21:20 -0700 (PDT)
+ bh=Fnt5TX0MApGX2obe/HoAgCeNBh6hN4/g9EBMGOD5Ngg=;
+ b=HP7UKwGx/Pp1pxO+11dGGrC14rNxuh9yX71sumCiWD1twfGKXMW1p8l+x8NFMSCqtP
+ 0JyP+pEDni4dWyOER2lcdxGG3LFD4Qw41FfCrjsWQHsvu0/H6E5as9PZI9NfbLYzpQvO
+ CX9huAnbKsbT5jniL4xmyoi/t9k41KM/aPnuzCna74PXc4TH/PEW+C4BPxInkOYUhKpn
+ rQbIyNIlrofyHV0KXAHv6N71ygJ7DmsFSrsatl4wiuRuz38k42+J0Oupwwvkzpw8u7q+
+ X8dcJsTwI6Fc3LyFd2a0lV9gu8w2Rzhz8PJrSJbEvSgyOxuRnPH4OaiMrVml7dHFhR36
+ OZAQ==
+X-Gm-Message-State: AOJu0Yyw60G7s2hEbhXPkMJYcNZCKRb47WvoWH8BVy24EJ+G3DiEjzlE
+ XtHPgxY2xHAJmdrYKeMvh2N3KfCSMiib9RVsB63oNoOuODJJm8ixJe0gHYQtp2C4uBDaXZ145Af
+ 3oWzCVIglKmkBHouFkJl8YbkvVbTZh5+AV1JR9zs1+w==
+X-Gm-Gg: ASbGncvtdIeu7fGXhR6HSPOT0HwjChgmpDcKhAxt+1CBPy50Nhax61hQcrjUMhMtliG
+ 7jmQV2Ic9MVUBsbnp7c7tcgqm7rWOWEE3u95PYhH0qnD9KbPHz8Ixt6O0ErVXp97vUEnb8ehtSh
+ BKokj6NtyFdPHDkpcM17FxhyzKH/UD0+Gqzu5UefW9QCJFymY/0pEtQN4=
+X-Google-Smtp-Source: AGHT+IG0ZHkPWlrRr+yYFFwf7d11AipAtZiXWSB6C8DZwONQTRLEEYgCW89RX7x7PNw5Sq6BEJvtK43ZKDNpddMv62Y=
+X-Received: by 2002:a05:622a:17cc:b0:4a4:41e9:738e with SMTP id
+ d75a77b69052e-4a4a5e8d9a2mr155028531cf.6.1748933095143; Mon, 02 Jun 2025
+ 23:44:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <aD181pYGA_0AqWdz@nuoska> <aD2J5kMOdaMOpRda@nuoska>
-In-Reply-To: <aD2J5kMOdaMOpRda@nuoska>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 3 Jun 2025 09:20:44 +0300
-X-Gm-Features: AX0GCFs7HExe_OigG5_snjTn47SDAq-bEn2PNmiB_ueEJb5cqL6tjzoJIMmuV88
-Message-ID: <CAC_iWj+DRSwzvUNuy5dUhiuAcZDgcM5YG_ENO=+Wui_B6GFoag@mail.gmail.com>
-Subject: Re: aarch64 u-boot reset loop with qemu USB and KVM
-To: Mikko Rapeli <mikko.rapeli@linaro.org>
-Cc: u-boot@lists.denx.de,
- =?UTF-8?B?SsOpcsO0bWUgRm9yaXNzaWVy?= <jerome.forissier@linaro.org>
+References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
+ <20250526091253.400802-3-sughosh.ganu@linaro.org>
+ <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
+ <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
+In-Reply-To: <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 3 Jun 2025 12:14:44 +0530
+X-Gm-Features: AX0GCFtOlCL81Dj4FYLUiGg7yBODLfhYlY0pxyObuignIl0C2rhLrglbslkYoUU
+Message-ID: <CADg8p977sXJRS1CM6Lnmep0_gc3jc9b3yFg1A-qkVn5Gswr_=Q@mail.gmail.com>
+Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
+ API's
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,109 +97,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikko
+On Fri, 30 May 2025 at 15:41, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Fri, 30 May 2025 at 13:17, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > > +static phys_addr_t lmb_alloc(phys_size_t size)
+> > > +{
+> > > +       int ret;
+> > > +       phys_addr_t addr;
+> > > +
+> > > +       /* All memory regions allocated with a 2MiB alignment */
+> > > +       ret = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr, size, LMB_NONE);
+> > > +       if (ret)
+> > > +               return 0;
+> > > +
+> > > +       return addr;
+> > > +}
+> > > +
+> >
+> > I think we  need a better naming for these. Right now we have
+> > lmb_alloc() here and in tests, addr_alloc() in snapdragon code.
+> > I'd say either export them as API if you think they would be useful,
+> > or get rid of the wrappers.
+>
+> I kept these functions as is to reduce the amount of change resulting
+> from introducing the API. Also, the newly introduced API has
+> parameters which are common across all the callers, which also was why
+> I kept a wrapper. This is especially true in the tests, where it would
+> be required to change the function names in a bunch of places without
+> much benefit.
+>
+> >
+> > [...]
+> >
+> > > +static phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+> > > +{
+> > > +       int err;
+> > > +       phys_addr_t addr;
+> > > +
+> > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, align, &addr, size, LMB_NONE);
+> > > +       if (err)
+> > > +               return 0;
+> >
+> >
+> > This tends to blow up in random ways. See
+> > commit 67be24906fe. TL;DR 0 is a valid address in some systems.
+>
+> Yes, I see your point. I think the calling function will have to be
+> re-written such that the env variables get stored only when the API
+> returns successfully. Then at least the platform will not have an env
+> variable with some junk value.
 
-On Mon, 2 Jun 2025 at 14:24, Mikko Rapeli <mikko.rapeli@linaro.org> wrote:
->
-> Hi,
->
-> On Mon, Jun 02, 2025 at 01:28:38PM +0300, Mikko Rapeli wrote:
-> > As was discussed over yocto/OE-Core mailing list
-> > https://lists.openembedded.org/g/openembedded-core/topic/113306017#msg217258
-> > qemu machine with USB and KVM enabled goes into reset loop with
-> > u-boot. I've tested u-boot 2025.04 and latest master branch 2025.07-rc3
-> > ( b22a276f039f818d5564bec6637071cfc8a7e432 ) with qemu_arm64_defconfig
-> > from tree and CONFIG_BLOBLIST disabled since that to has issues with KVM
-> > ( https://lists.denx.de/pipermail/u-boot/2025-May/590101.html )-
-> >
-> > To reproduce:
-> >
-> >  * qemu 10 or 8.2.2, version does not seem to matter
-> >
-> >  * aarch64 native machine with KVM support
-> >
-> >  * qemu-system-aarch64 command line:
-> >
-> > $ qemu-system-aarch64 -machine virt -cpu host -machine gic-version=3 -smp 1 -enable-kvm \
-> >   -m 256 -serial mon:stdio -serial null -nographic -vga none \
-> >   -bios u-boot.bin \
-> >   -device qemu-xhci -device usb-tablet -device usb-kbd
-> >
-> > U-Boot 2025.07-rc3 (May 30 2025 - 19:44:05 +0000)
-> >
-> > DRAM:  256 MiB
-> > using memory 0x4e662000-0x4f6a2000 for malloc()
-> > Core:  51 devices, 14 uclasses, devicetree: board
-> > Flash: 64 MiB
-> > Loading Environment from Flash... *** Warning - bad CRC, using default environment
-> >
-> > In:    serial,usbkbd
-> > Out:   serial,vidconsole
-> > Err:   serial,vidconsole
-> > Register 8001040 NbrPorts 8
-> > Starting the controller
-> > "Synchronous Abort" handler, esr 0x96000010, far 0x10100040
-> > elr: 000000000005a360 lr : 000000000005a344 (reloc)
-> > elr: 000000004f6fc360 lr : 000000004f6fc344
-> > x0 : 0000000010100040 x1 : 0000000000000001
-> > x2 : 0000000000000000 x3 : 0000000000003e80
-> > x4 : 0000000000000038 x5 : 000000004e66fed2
-> > x6 : 0000000000000000 x7 : 0000000000000000
-> > x8 : 0000000000000000 x9 : 000000000001869f
-> > x10: 000000000000000d x11: 0000000000000006
-> > x12: 000000004e561a68 x13: 000000004e561dd0
-> > x14: 0000000000000002 x15: 0000000000000000
-> > x16: 000000004f6ee774 x17: 0000000000000000
-> > x18: 000000004e661dd0 x19: 000000004e670480
-> > x20: 0000000000000000 x21: 0000000010100040
-> > x22: 0000000010100000 x23: 0000000000000000
-> > x24: 0000000000000000 x25: 0000000000000000
-> > x26: 0000000000000000 x27: 0000000000000000
-> > x28: 0000000000000000 x29: 000000004e670360
-> >
-> > Code: d5033fbf aa1503e0 5287d003 52800002 (b8004401)
-> > Resetting CPU ...
-> >
-> > resetting ...
-> >
-> > With KVM disabled, or the qemu USB devices disabled, boot with u-boot prompt and
-> > to full target system works.
->
-> I've bisected this now and first breaking commit is:
+Thinking about this a bit, I think in these two instances, returning a
+value of 0 might not be an issue if the DRAM memory does not start at
+0x0. Don't get me wrong, what you are suggesting is definitely
+correct. I am only thinking about increasing code size on these
+platforms if 0x0 is not a valid address, and moreover since the
+platforms were already setting 0x0 in case of an error. If it is okay
+to increase code size on these platforms, I will change the calling
+function, such that the variable does not get set in case of an error.
+Maybe Casey and Mark can comment? Thanks.
 
-Thanks for looking into this.
-The commit just enables the support for a usb keyboard, so I think the
-root cause was always there.
+-sughosh
 
-Cheers
-/Ilias
 >
-> 05e2fa79310ab30dd3e3fe522333aef3cfb1c421 is the first bad commit
-> commit 05e2fa79310ab30dd3e3fe522333aef3cfb1c421
-> Author: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> Date:   Mon Aug 14 20:39:43 2023 +0300
+> -sughosh
 >
->     arm: qemu: Enable usb keyboard as an input device
->
->     Commit 02be57caf730 ("riscv: qemu: Enable usb keyboard as an input
->     device") adds PCI xHCI support to QEMU RISC-V virtual machines and
->     enables using a USB keyboard as one of the input devices. Similarly,
->     enable those for ARM virtual machines as well.
->
->     Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->     Reviewed-by: Simon Glass <sjg@chromium.org>
->     Reviewed-by: Bin Meng <bmeng@tinylab.org>
->
->  arch/arm/Kconfig                      | 5 +++++
->  board/emulation/qemu-arm/qemu-arm.c   | 5 +++++
->  board/emulation/qemu-arm/qemu-arm.env | 2 +-
->  configs/qemu_arm64_defconfig          | 2 --
->  configs/qemu_arm_defconfig            | 2 --
->  doc/board/emulation/qemu-arm.rst      | 4 ++++
->  6 files changed, 15 insertions(+), 5 deletions(-)
->
-> So looks like with KVM, CONFIG_USB=y triggers the reset loop.
->
-> Cheers,
->
-> -Mikko
+> >
+> > > +
+> > > +       return addr;
+> > > +}
+> > > +
+> > > +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
+> > > +                                 phys_addr_t max_addr, u32 flags)
+> > > +{
+> > > +       int err;
+> > > +       phys_addr_t addr;
+> > > +
+> > > +       addr = max_addr;
+> > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
+> > > +       if (err)
+> > > +               return 0;
+> > > +
+> > > +       return addr;
+> > > +}
+> > > +
+> > >  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
+> > >
+> > >  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
+> > > --
+> > > 2.34.1
+> > >
+> >
+> > Cheers
+> > /Ilias
