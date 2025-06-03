@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435D2C5AE59
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 05:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7CE3C5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 05:07:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D7E6829B2;
+	by phobos.denx.de (Postfix) with ESMTP id C28E382AA7;
 	Tue,  3 Jun 2025 07:07:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="hqWxIEtO";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="tUsRIUez";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BE7B82045; Tue,  3 Jun 2025 07:07:30 +0200 (CEST)
+ id 21EF682045; Tue,  3 Jun 2025 07:07:31 +0200 (CEST)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB96481E06
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 07:07:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A26D082A8D
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 07:07:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2426dda6b=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1748927247; x=1780463247;
+ t=1748927248; x=1780463248;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Fkt3G1quOYZInKTqErG2GeUtPGnzWLVuGqKsMKpni2c=;
- b=hqWxIEtOnAgrdx/+q+zHXQsUVbuCEOKpWmIp0Jp65PxBtuneDZKqMDF6
- VdewJGEbE6L/AwFyccfqOpcKOKEevVwOhFYGzCq7Hjtyoh3HFwH4Yu+w/
- veJzsJCnEGLqJ0Zln4zJqMSFvFc/mTSpTqTVhdEwlXKfVJGYfiXN9TjIQ
- Mm4ehgpSpp/hhJAbmQlyLE8tHufWJ/LqnwDvguxoJOWO1LKboQOT2pqda
- 2PmYbTrkG3NrhFCvplHZ50VcYnn/gCAmJFqk1zQr+UeTNItqN9JchirM5
- MIXxy7dJXR8V8jIM/87eNxQ0CAF8284NmODJSjvgcPLOdozUUsviaAjQC g==;
+ bh=gItp/JYH6NFA5bJ4OAgeKFwZ47VFJEP5banvA+Ekhkk=;
+ b=tUsRIUezaxXFg2abXuQBQEzdYoySeFwk3FRGc8k2PFX5dx/z3TybmWIG
+ C/DLr0dtRzTnSPkwOiXuaIEyDTN9DKsB1kGdYTHZ/l35p5A9tYZMNW22G
+ 9itJAsDb34FWKCgWaFYFF01N4rKeUzxaoDj5vEGHsJylcwz2UpKXq6XuF
+ 4ZBBnwpQc4P8JnRheB51Od6qeRHzMqtf/j/TZZ79wy7T1M/hMgUtSkTx6
+ nrMIcsEkkwMDcsAIiVbfX/1C62uWDlRPxr1eosEZmvr52TQM6HNxDa1xL
+ I6825Ffnzayl69r7000a9Kn+oaz7zCbcOwZwBIenMBDE55sJFsUfZmTSS g==;
 X-CSE-ConnectionGUID: +NE9MtRQQNiKu5EdIbgrNA==
-X-CSE-MsgGUID: T16UsZvVQsaxipBf+PuBEA==
-X-IronPort-AV: E=Sophos;i="6.16,205,1744095600"; d="scan'208";a="41891734"
+X-CSE-MsgGUID: 5K0c+zGhR4+3tfrBJRwCNA==
+X-IronPort-AV: E=Sophos;i="6.16,205,1744095600"; d="scan'208";a="41891735"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 02 Jun 2025 22:07:25 -0700
+ 02 Jun 2025 22:07:26 -0700
 Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Mon, 2 Jun 2025 22:07:05 -0700
+ 15.1.2507.44; Mon, 2 Jun 2025 22:07:19 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Mon, 2 Jun 2025 22:06:59 -0700
+ 15.1.2507.44 via Frontend Transport; Mon, 2 Jun 2025 22:07:13 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sjg@chromium.org>, <Oliver.Gaskell@analog.com>,
@@ -62,10 +62,10 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <patrice.chotard@foss.st.com>, <nicolas.ferre@microchip.com>,
  <u-boot@lists.denx.de>
 CC: <manikandan.m@microchip.com>
-Subject: [PATCH v6 7/9] ARM: dts: at91: sam9x75_curiosity: add tweaks for
- sam9x75 curiosity board
-Date: Tue, 3 Jun 2025 10:35:54 +0530
-Message-ID: <20250603050556.80851-8-manikandan.m@microchip.com>
+Subject: [PATCH v6 9/9] configs: sam9x75_curiosity: Add initial mmc default
+ config
+Date: Tue, 3 Jun 2025 10:35:56 +0530
+Message-ID: <20250603050556.80851-10-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250603050556.80851-1-manikandan.m@microchip.com>
 References: <20250603050556.80851-1-manikandan.m@microchip.com>
@@ -88,116 +88,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the SoC and board DT are already available in dts/upstream,
-add the difference from upstream DTS to at91-sam9x75_curiosity-u-boot.dtsi
+Add default configuration for sd-card to boot the linux kernel.
 
 Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- .../dts/at91-sam9x75_curiosity-u-boot.dtsi    | 95 +++++++++++++++++++
- 1 file changed, 95 insertions(+)
- create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+ board/atmel/sam9x75_curiosity/MAINTAINERS |  1 +
+ configs/sam9x75_curiosity_mmc_defconfig   | 73 +++++++++++++++++++++++
+ 2 files changed, 74 insertions(+)
+ create mode 100644 configs/sam9x75_curiosity_mmc_defconfig
 
-diff --git a/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+diff --git a/board/atmel/sam9x75_curiosity/MAINTAINERS b/board/atmel/sam9x75_curiosity/MAINTAINERS
+index a175053418f..f0dfdbe8d5c 100644
+--- a/board/atmel/sam9x75_curiosity/MAINTAINERS
++++ b/board/atmel/sam9x75_curiosity/MAINTAINERS
+@@ -4,3 +4,4 @@ S:	Maintained
+ F:	board/atmel/sam9x75_curiosity/
+ F:	include/configs/sam9x75_curiosity.h
+ F:	arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
++F:	configs/sam9x75_curiosity_mmc_defconfig
+diff --git a/configs/sam9x75_curiosity_mmc_defconfig b/configs/sam9x75_curiosity_mmc_defconfig
 new file mode 100644
-index 00000000000..94585ee0232
+index 00000000000..76b85448285
 --- /dev/null
-+++ b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
-@@ -0,0 +1,95 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * at91-sam9x75_curiosity-u-boot.dtsi - Device Tree file for SAM9X75
-+ * CURIOSITY board.
-+ *
-+ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
-+ */
-+
-+/ {
-+	cpus {
-+		cpu@0 {
-+			clocks = <&pmc PMC_TYPE_CORE 25>, <&pmc PMC_TYPE_CORE 17>, <&main_xtal>;
-+			clock-names = "cpu", "master", "xtal";
-+		};
-+	};
-+
-+	clocks {
-+		slow_rc_osc: slow_rc_osc {
-+			compatible = "fixed-clock";
-+			#clock-cells = <0>;
-+			clock-frequency = <18500>;
-+		};
-+	};
-+
-+	ahb {
-+		bootph-all;
-+
-+		apb {
-+			bootph-all;
-+
-+			pinctrl {
-+				bootph-all;
-+			};
-+		};
-+	};
-+
-+	chosen {
-+		bootph-all;
-+	};
-+};
-+
-+&clk32k {
-+	bootph-all;
-+	clocks = <&slow_rc_osc>, <&slow_xtal>;
-+};
-+
-+&dbgu {
-+	bootph-all;
-+};
-+
-+&gmac {
-+	compatible = "microchip,sam9x7-gem", "cdns,sama7g5-gem";
-+};
-+
-+&main_xtal {
-+	bootph-all;
-+};
-+
-+&pinctrl_dbgu_default {
-+	bootph-all;
-+};
-+
-+&pinctrl_sdmmc0_default {
-+	bootph-all;
-+};
-+
-+&pioA {
-+	bootph-all;
-+};
-+
-+&pioB {
-+	bootph-all;
-+};
-+
-+&pit64b0 {
-+	bootph-all;
-+};
-+
-+&pmc {
-+	bootph-all;
-+};
-+
-+&sdmmc0 {
-+	bootph-all;
-+};
-+
-+&slow_xtal {
-+	bootph-all;
-+};
-+
-+&slow_rc_osc {
-+	bootph-all;
-+};
++++ b/configs/sam9x75_curiosity_mmc_defconfig
+@@ -0,0 +1,73 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_ARCH_AT91=y
++CONFIG_TEXT_BASE=0x23f00000
++CONFIG_SYS_MALLOC_LEN=0x81000
++CONFIG_SYS_MALLOC_F_LEN=0x12000
++CONFIG_TARGET_SAM9X75_CURIOSITY=y
++CONFIG_ATMEL_LEGACY=y
++CONFIG_NR_DRAM_BANKS=8
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20015f00
++CONFIG_ENV_SIZE=0x4000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="microchip/at91-sam9x75_curiosity"
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_LOAD_ADDR=0x22000000
++CONFIG_DEBUG_UART_BASE=0xfffff200
++CONFIG_DEBUG_UART_CLOCK=266666666
++CONFIG_DEBUG_UART_BOARD_INIT=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_SD_BOOT=y
++CONFIG_BOOTDELAY=3
++CONFIG_USE_BOOTARGS=y
++CONFIG_BOOTARGS="mem=256M console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="fatload mmc 0:1 0x21000000 at91-sam9x75_curiosity.dtb; fatload mmc 0:1 0x22000000 zImage; bootz 0x22000000 - 0x21000000"
++CONFIG_SYS_CBSIZE=256
++CONFIG_SYS_PBSIZE=281
++CONFIG_SYS_CONSOLE_IS_IN_ENV=y
++# CONFIG_DISPLAY_BOARDINFO is not set
++CONFIG_HUSH_PARSER=y
++CONFIG_SYS_PROMPT="U-Boot> "
++CONFIG_CMD_BOOTZ=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_BOOTFILESIZE=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_HASH=y
++CONFIG_HASH_VERIFY=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_ENV_IS_IN_FAT=y
++CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_CLK=y
++CONFIG_CLK_CCF=y
++CONFIG_CLK_AT91=y
++CONFIG_AT91_GENERIC_CLK=y
++CONFIG_AT91_SAM9X60_PLL=y
++CONFIG_CPU=y
++CONFIG_AT91_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_AT91=y
++CONFIG_I2C_EEPROM=y
++CONFIG_MICROCHIP_FLEXCOM=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ATMEL=y
++CONFIG_MTD=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_AT91=y
++CONFIG_DM_SERIAL=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_ATMEL_USART=y
++CONFIG_TIMER=y
++CONFIG_MCHP_PIT64B_TIMER=y
++CONFIG_PHANDLE_CHECK_SEQ=y
 -- 
 2.25.1
 
