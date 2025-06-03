@@ -4,66 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8D7C5AD49
-	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A0AC5AD49
+	for <u-boot@archiver.kernel.org>; Tue,  3 Jun 2025 14:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2636F829B2;
-	Tue,  3 Jun 2025 16:25:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A7BA582B7C;
+	Tue,  3 Jun 2025 16:27:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PJRayMbP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xi24gzx/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5AB682AE1; Tue,  3 Jun 2025 16:25:46 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3CF382B8E
- for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 16:25:43 +0200 (CEST)
+ id B707482B3D; Tue,  3 Jun 2025 16:27:11 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C1F8782B3D
+ for <u-boot@lists.denx.de>; Tue,  3 Jun 2025 16:27:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 553EPfDB3536198;
- Tue, 3 Jun 2025 09:25:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1748960741;
- bh=4Ytt4lIBbZj6a3/JrbFn5v8jUpVPkngIoeAHIO50Yao=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=PJRayMbPubgU9GOm+snipeAN3DCVPV/vvTovdzsYKXlkr9GCU21mAMtIQlIxXnvQm
- Wu73NUamPoxIIKI4pa/lX7D+vV6JULrYXVfxMk+T9mjiobfcH4hpPN43EQdx9cCWwh
- Rx3hIO8EFYzjS/5AuOp5ivqIs95xokz5MsuIVGCY=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 553EPfIj3585500
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 3 Jun 2025 09:25:41 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Jun 2025 09:25:41 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Jun 2025 09:25:41 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 553EPeBT559592;
- Tue, 3 Jun 2025 09:25:40 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
- <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH v7 10/10] doc: ti: am62: add falcon mode documentation
-Date: Tue, 3 Jun 2025 19:54:50 +0530
-Message-ID: <20250603142452.2707171-11-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250603142452.2707171-1-anshuld@ti.com>
-References: <20250603142452.2707171-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-addda47ebeaso363161466b.1
+ for <u-boot@lists.denx.de>; Tue, 03 Jun 2025 07:27:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748960828; x=1749565628; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PK32CMY2q/HItRYlTR+smrL178OPSbX5ddcq/X2hBuc=;
+ b=Xi24gzx/ifqFGjLU9v6/QFjUraXob/rBMUnteHTd8zL96ySN+2pVM5UnAh0UgR3xcF
+ qnAka1p24Bp5sLfQZepOlIUONam8VMWXCMRqcdYTYBU+UWac07y+e7WqN9kWSBTKU1uF
+ jx1nkKQrKN17uhJlzNnH+BUQ1yCC0Kb66hsOdnejtU+X1NNQWuPj6FvLsGy/B3JwS2og
+ 1xgm8QGFbM+SmYRvNCkVz9lzQLhnlQTuqMmCDAdsKMzBvomcMAmmMI1nE9T6GX6u1Vnt
+ +Zse1e2aAVDIIiU5TZjgYmqjX92nOzK6QRP7EEmxIZn78jEA+k/L45v6PjLGlmZODFDB
+ JteA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748960828; x=1749565628;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PK32CMY2q/HItRYlTR+smrL178OPSbX5ddcq/X2hBuc=;
+ b=T+Fhm4qk8PnMFuYN0OTy5gmp0q4HTjZlfKztQ8ASSojePn6RaXas4QkqQUq/ImBLMY
+ qYa0/B/YjeHCJH0UlXY2ocf6cCkCav70m6Kv8nasPlGwejepzZBuDOTGPcdF+EMYrU25
+ FUXG8/wslNk+O3bErXvuNPgUa4m0683n54D57TPxwIJC80QT0iOkdJudWtJn5NZG5CL2
+ xwHezxO9FaVvechWB+04dNDaDo7RsDMDs/CCkKEULGKzcsi39Qp1dnQuSoWgV7LMIxnE
+ 6kDLD1k5oaYEfK30qS9MN20HNBjIGUpS+bAeYpu1yXaFCIT2pqt12d7gKGTVKYN5Nuk8
+ wXgg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWlr7PHdhRSslXrYR2/BstD2p1AcOSTd+ZFec8H7p+8XAHbZ2j6LVNH8IbpqB5WywzEqZJ2KFg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCUT7U3Lx4v7EQNdfyWvOG4/dTpD1wAfGmOFiyeAN3KdUSvOaW
+ CTlHaSTOaxWlCSl3jLjn5z6j2kIgis1uFS6cEVVCYIZRUIkeOL2vy5Z/BJlRHLf5DDI=
+X-Gm-Gg: ASbGnctgs54Y25KfSE8x1rA3Tq7lkz7wYB7iaFrEcOOdpN0szXikvI4tI+hafwlWch2
+ tz9SnZ8Bf9rNwA3Rnc5//lJQH7F1Ztpu2uowp9oLEiVaRCG5uwFRbe38FVEgrprYjd+B7ZsP7y5
+ 2khHdrWJ/iMaHKvYuznG83Z+bYgYd9g3XugQI714arF8TcUnztQUaMBCOFXrcweFvBSq9Mq2Z/0
+ GOBWtU3T4ZD2u6JNI+GhohA8AF8DojUWzNVgbCcH9pfFaVxogMunuXB4Bmpo+mEJYmZ24gkaMdZ
+ wzlotNmElf0Fd4bpquXYRDDBL+5tvmuVaFQyE3fV+0kfB+MKWcUOko4HzDOFIEByzBrxeg==
+X-Google-Smtp-Source: AGHT+IGVSWtBy22NYDLyNexyAH17NKlEK2mP2F7VHaDd58xTWyQIK+HgP4I59WONTruvkOFyQqgW5g==
+X-Received: by 2002:a17:907:970a:b0:ad2:1f65:8562 with SMTP id
+ a640c23a62f3a-adb36b2306dmr1680727866b.14.1748960828036; 
+ Tue, 03 Jun 2025 07:27:08 -0700 (PDT)
+Received: from [10.5.0.2] ([194.15.111.82]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ada6ad6aa9asm969913966b.179.2025.06.03.07.27.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Jun 2025 07:27:07 -0700 (PDT)
+Message-ID: <cf37c00f-dd73-4380-a3df-a196bb5f7446@linaro.org>
+Date: Tue, 3 Jun 2025 16:27:06 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] net: lwip: add sntp command
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Adriano Cordova <adrianox@gmail.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250521151516.16729-1-jerome.forissier@linaro.org>
+ <20250521151516.16729-3-jerome.forissier@linaro.org>
+ <C092D71D-1A30-44D5-8043-07EE04DA571B@gmx.de>
+ <7714D96D-245B-4A97-B7AE-B1D669DCE1DA@gmx.de>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <7714D96D-245B-4A97-B7AE-B1D669DCE1DA@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,838 +110,317 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds user documentation for falcon boot for am62 platforms.
-The main section is added to am62x_sk.rst and other documents just
-include the section. Steps to build falcon support, usage and the
-modified R5 memory map have been documented.
 
-Two svg images have also been added for reference, one for the modified
-tispl_falcon.bin and other for the falcon specific fitImage format.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- doc/board/ti/am62ax_sk.rst                    |   7 +
- doc/board/ti/am62px_sk.rst                    |   7 +
- doc/board/ti/am62x_sk.rst                     | 289 ++++++++++++++++++
- doc/board/ti/img/fitImage_falcon.svg          | 180 +++++++++++
- .../ti/img/tifsstub_dm_tispl_falcon.bin.svg   | 285 +++++++++++++++++
- 5 files changed, 768 insertions(+)
- create mode 100644 doc/board/ti/img/fitImage_falcon.svg
- create mode 100644 doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
+On 6/3/25 07:51, Heinrich Schuchardt wrote:
+> Am 2. Juni 2025 23:23:08 MESZ schrieb Heinrich Schuchardt <xypron.glpk@gmx.de>:
+>> Am 21. Mai 2025 17:14:42 MESZ schrieb Jerome Forissier <jerome.forissier@linaro.org>:
+>>> Implement the sntp command when NET_LWIP=y.
+> 
+> https://datatracker.ietf.org/doc/rfc5905/ describes that on Feb 7th, 2036 the 32 bit seconds field wraps around and era 1 starts.
+> 
+> Does our code consider this?
 
-diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
-index 43a1db68873..01e252ed1b9 100644
---- a/doc/board/ti/am62ax_sk.rst
-+++ b/doc/board/ti/am62ax_sk.rst
-@@ -192,6 +192,13 @@ https://www.ti.com/lit/pdf/spruj16 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+Falcon Mode
-+-----------
-+
-+AM62A platforms support falcon mode, bypassing A-core SPL and u-boot to reduce
-+boot times. See :ref:`falcon mode<am62x_evm_falcon_mode_start>` section on AM62 platforms page for detailed build
-+information.
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index a07d6a4da45..917e3b904a0 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -290,6 +290,13 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
- 
- For SW2 and SW1, the switch state in the "ON" position = 1.
- 
-+Falcon Mode
-+-----------
-+
-+AM62P platforms support falcon mode, bypassing A-core SPL and u-boot to reduce
-+boot times. See :ref:`falcon mode<am62x_evm_falcon_mode_start>` section on AM62 platforms page for detailed build
-+information.
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index dab2970a85c..49c5fc8e06d 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -526,6 +526,295 @@ Next, based on NET_VCI_STRING string mentioned in respective defconfig file `tib
- fetches `tispl.bin` and then `tispl.bin` fetches `u-boot.img` from TFTP server which
- completes Ethernet boot on the device.
- 
-+.. _am62x_evm_falcon_mode_start:
-+
-+Falcon Mode
-+-----------
-+
-+Falcon boot flow on am62 platforms bypasses the A-core SPL and u-boot with the
-+overall boot flow as below:
-+
-+**Normal boot flow:**
-+
-+* R5 SPL -> ATF -> OP-TEE -> Cortex-A SPL -> U-Boot -> Kernel
-+
-+**With falcon mode:**
-+
-+* R5 SPL -> ATF -> OP-TEE -> Kernel
-+
-+Build Process
-+^^^^^^^^^^^^^
-+
-+Enabling falcon mode requires re-building ATF, U-boot and the kernel fitImage
-+as follows:
-+
-+0. Setup environment variables:
-+"""""""""""""""""""""""""""""""
-+
-+Refer to the :ref:`build procedure<Build Procedure>` above for setting up the
-+environment variables.
-+
-+1. Trusted Firmware-A:
-+""""""""""""""""""""""
-+
-+The R5 SPL in falcon mode loads the kernel at ``0x82000000`` and the
-+corresponding DTB at ``0x88000000``. Therefore ATF needs to be rebuild with
-+changes to the respective addresses.
-+
-+.. prompt:: bash $
-+
-+ # Change load addresses for the kernel and DTB
-+ export TFA_EXTRA_ARGS="PRELOADED_BL33_BASE=0x82000000 K3_HW_CONFIG_BASE=0x88000000"
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+2. U-Boot:
-+""""""""""
-+
-+* **2.1 R5:**
-+
-+.. prompt:: bash $
-+
-+ # use the common falcon config fragment for am62 platforms
-+ export $UBOOT_FALCON_CFG_FRAGMENTR="am62x_r5_falcon.config"
-+ export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} ${UBOOT_FALCON_CFG_FRAGMENTR}"
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* **2.2 A53:**
-+
-+After rebuilding ATF, the binary needs to be repackaged inside the tispl
-+binaries:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+
-+3. fitImage:
-+""""""""""""
-+
-+.. warning::
-+
-+    The ``fitImage`` available by default under ``boot/fitImage`` in rootfs of
-+    the standard SDK release is not compatible with falcon mode.
-+
-+For secure boot in falcon mode, the compute heavy authentication required for
-+the ``fitImage`` is offloaded from the slower R5 core to TIFS. This requires
-+``fitImage`` to package the necessary binaries (kernel and dtb) with a
-+pre-signed x509 certificate.
-+
-+**fitImage for falcon mode:**
-+
-+.. image:: img/fitImage_falcon.svg
-+  :alt: fitImage for falcon boot image format
-+
-+* **Sources**
-+
-+  * **Core Secdev K3**
-+
-+    | **source:** https://git.ti.com/cgit/security-development-tools/core-secdev-k3
-+    | **branch:** master
-+
-+**Follow the steps below to create a falcon compatible fitImage:**
-+
-+**3.1 Environment setup**
-+
-+.. prompt:: bash $
-+
-+  export DTB=path/to/dtb
-+  export IMAGE=path/to/kernel-image
-+
-+**3.2 fitImage creation**
-+
-+  An Image tree source (*its*) file describes the structure and contents of the
-+  final image produced by the mkimage tool.
-+
-+  To create the ``fitImage`` for falcon mode, create a file ``fitImage.its``
-+  with the following contents inside the ``core-secdev-k3`` source directory,:
-+
-+.. code-block:: dts
-+
-+    /dts-v1/;
-+
-+    / {
-+        description = "Kernel fitImage for falcon mode";
-+        #address-cells = <1>;
-+
-+        images {
-+            kernel-1 {
-+                description = "Linux kernel";
-+                data = /incbin/("Image.sec");
-+                type = "kernel";
-+                arch = "arm64";
-+                os = "linux";
-+                compression = "none";
-+                load = <0x82000000>;
-+                entry = <0x82000000>;
-+            };
-+            falcon.dtb {
-+                description = "Flattened Device Tree blob";
-+                data = /incbin/("falcon.dtb.sec");
-+                type = "flat_dt";
-+                arch = "arm64";
-+                compression = "none";
-+                load = <0x88000000>;
-+                entry = <0x88000000>;
-+            };
-+        };
-+
-+        configurations {
-+            default = "conf-falcon";
-+            conf-falcon {
-+                description = "Pre-signed Kernel and DTB";
-+                kernel = "kernel-1";
-+                fdt = "falcon.dtb";
-+            };
-+        };
-+    };
-+
-+Sign the kernel and dtb using ``secure-binary-image.sh`` and create the
-+``fitImage`` using mkimage:
-+
-+.. prompt:: bash $
-+
-+  # inside core-secdev-k3 source
-+  cp $IMAGE Image
-+  cp $DTB falcon.dtb
-+  ./scripts/secure-binary-image.sh Image Image.sec
-+  ./scripts/secure-binary-image.sh falcon.dtb falcon.dtb.sec
-+  mkimage -f fitImage.its fitImage
-+
-+Usage
-+^^^^^
-+
-+Falcon mode makes use of a cut down variant of the tispl binary called
-+``tispl_falcon.bin`` with the Cortex-A SPL and it's corresponding DTBs removed.
-+This file should be present alongside the existing ``tispl.bin`` after building
-+U-Boot for the Cortex-A cores.
-+
-+- **tispl_falcon.bin**
-+
-+.. image:: img/tifsstub_dm_tispl_falcon.bin.svg
-+  :alt: tispl_falcon.bin image format
-+
-+1. eMMC/SD Boot:
-+""""""""""""""""
-+
-+Falcon mode for K3 devices only supports SD and eMMC in FS boot. The R5 SPL
-+once loaded from the ``tiboot3.bin`` file from the boot partition looks for
-+``tispl_falcon.bin``, the DTB and fitImage (or kernel image for unauthenticated
-+boot) inside the boot directory of the second partition (rootfs).
-+
-+.. list-table::
-+   :widths: 8 8 8 25
-+   :header-rows: 1
-+
-+   * - File
-+     - Copy path on SD/eMMC
-+     - Partition
-+     - Description
-+
-+   * - ``tiboot3.bin``
-+     - ``/tiboot3.bin``
-+     - boot (fat)
-+     - R5 SPL with falcon support
-+
-+   * - ``tispl_falcon.bin``
-+     - ``/boot/tispl_falcon.bin``
-+     - rootfs (ext4)
-+     - tispl binary without SPL for the A core and DTB
-+
-+   * - ``fitImage``
-+     - ``/boot/fitImage``
-+     - rootfs (ext4)
-+     - kernel and dtb fitImage with pre-signed binaries
-+
-+2. OSPI Boot:
-+"""""""""""""
-+
-+For OSPI boot, the ``tiboot3.bin`` and ``tispl_falcon.bin`` files should be
-+flashed to the same addresses in flash as regular boot flow but the DTB and the
-+fitImage (or kernel image for unauthenticated boot) are read from the rootfs's
-+boot directory.
-+
-+Below commands can be used to download ``tiboot3.bin`` and ``tispl_falcon.bin``
-+over tftp and then flash those to OSPI at their respective addresses.
-+
-+.. prompt:: bash =>
-+
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl_falcon.bin
-+  sf update $loadaddr 0x80000 $filesize
-+
-+R5 SPL Memory Map:
-+^^^^^^^^^^^^^^^^^^
-+
-+Standard boot:
-+""""""""""""""
-+
-+.. code-block::
-+
-+    0x80000000 +-------------------------------+ Start of DDR
-+      512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-+               |                               |
-+    0x80080000 +-------------------------------+ PRELOADED_BL33_BASE in ATF
-+     29.5MiB   |         A53 SPL + DTB +       | CONFIG_SPL_LOAD_FIT_ADDRESS
-+               | Download region for FIT in DFU|
-+    0x81e00000 +-------------------------------+
-+               |  R5 U-Boot SPL Stack + Heap   |
-+        2MiB   |       (size defined by        |
-+               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-+    0x82000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
-+      112MiB   |            Unused             |
-+    0x89000000 +-------------------------------+
-+      331MiB   | Device Manager (DM) Load Addr |
-+    0x9db00000 +-------------------------------+
-+       12MiB   |          DM Reserved          |
-+    0x9e700000 +-------------------------------+
-+        1MiB   |            Unused             |
-+    0x9e800000 +-------------------------------+ BL32_BASE in ATF
-+       24MiB   |             OPTEE             |
-+    0xa0000000 +-------------------------------+ End of DDR (512MiB)
-+
-+Falcon mode:
-+""""""""""""
-+
-+.. code-block::
-+
-+    0x80000000 +-------------------------------+ Start of DDR
-+      512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-+    0x80080000 +-------------------------------+
-+     31.5MiB   |            Unused             |
-+    0x82000000 +-------------------------------+ PRELOADED_BL33_BASE in ATF
-+               |                               | CONFIG_SYS_LOAD_ADDR
-+       57MiB   |   Kernel + initramfs Image    | CONFIG_SPL_LOAD_FIT_ADDRESS
-+               |                               |
-+    0x85900000 +-------------------------------+
-+               |                               |
-+               |  R5 U-Boot SPL Stack + Heap   |
-+       39MiB   |       (size defined by        |
-+               | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-+               |                               |
-+    0x88000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR
-+               |                               | K3_HW_CONFIG_BASE in ATF
-+       16MiB   |          Kernel DTB           | CONFIG_SPL_PAYLOAD_ARGS_ADDR
-+               |                               |
-+    0x89000000 +-------------------------------+
-+      331MiB   | Device Manager (DM) Load Addr |
-+    0x9db00000 +-------------------------------+
-+       12MiB   |          DM Reserved          |
-+    0x9e700000 +-------------------------------+
-+        1MiB   |            Unused             |
-+    0x9e800000 +-------------------------------+ BL32_BASE in ATF
-+       24MiB   |             OPTEE             |
-+    0xa0000000 +-------------------------------+ End of DDR (512MiB)
-+
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/img/fitImage_falcon.svg b/doc/board/ti/img/fitImage_falcon.svg
-new file mode 100644
-index 00000000000..a22e0f6564e
---- /dev/null
-+++ b/doc/board/ti/img/fitImage_falcon.svg
-@@ -0,0 +1,180 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231"
-+   height="220"
-+   viewBox="-0.5 -0.5 231 220"
-+   id="svg72"
-+   sodipodi:docname="fitImage_falcon.svg"
-+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.9"
-+     inkscape:cx="83.62069"
-+     inkscape:cy="131.72414"
-+     inkscape:window-width="1918"
-+     inkscape:window-height="1078"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="0"
-+     inkscape:current-layer="g62"
-+     inkscape:showpageshadow="2"
-+     inkscape:deskcolor="#d1d1d1" />
-+  <defs
-+     id="defs2">
-+    <inkscape:perspective
-+       sodipodi:type="inkscape:persp3d"
-+       inkscape:vp_x="0 : 104.5 : 1"
-+       inkscape:vp_y="0 : 1000 : 0"
-+       inkscape:vp_z="231 : 104.5 : 1"
-+       inkscape:persp3d-origin="115.5 : 46 : 1"
-+       id="perspective1" />
-+  </defs>
-+  <g
-+     id="g62">
-+    <rect
-+       x="-0.06279549"
-+       y="-0.062792346"
-+       width="230.12561"
-+       height="219.12558"
-+       rx="34.518837"
-+       ry="27.33382"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4"
-+       style="display:inline;fill:#dbe4f4;fill-opacity:1;stroke:#8166b3;stroke-width:0.888796;stroke-dasharray:none;stroke-opacity:1" />
-+    <text
-+       x="115.15599"
-+       y="156.49472"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6"
-+       style="display:inline"
-+       inkscape:label="x509 cert">x509 Certificate</text>
-+    <text
-+       x="115.15598"
-+       y="85.615631"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-1"
-+       style="display:inline"
-+       inkscape:label="x509 cert">x509 Certificate</text>
-+    <text
-+       x="114.532"
-+       y="42.263863"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-5"
-+       style="display:inline"
-+       inkscape:label="x509 cert">Fit Header</text>
-+    <text
-+       x="114.78398"
-+       y="106.884"
-+       fill="#000000"
-+       font-family="Helvetica"
-+       font-size="12px"
-+       text-anchor="middle"
-+       id="text8-8-7-6-6-5-5"
-+       style="display:inline"
-+       inkscape:label="x509 cert">Kernel Image</text>
-+    <rect
-+       style="display:none;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"
-+       id="rect1"
-+       width="171.46796"
-+       height="210.89911"
-+       x="36.799908"
-+       y="21.652758"
-+       transform="translate(-7.533886,15.237117)" />
-+    <text
-+       xml:space="preserve"
-+       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
-+       x="90.327087"
-+       y="177.15775"
-+       id="text1"><tspan
-+         sodipodi:role="line"
-+         id="tspan1"
-+         x="90.327087"
-+         y="177.15775" /></text>
-+    <text
-+       xml:space="preserve"
-+       style="font-size:21.3333px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#db8c8c;fill-opacity:1;stroke:#000000;stroke-width:1.13386"
-+       x="106.45526"
-+       y="214.93161"
-+       id="text2"><tspan
-+         sodipodi:role="line"
-+         id="tspan2"
-+         x="106.45526"
-+         y="214.93161" /></text>
-+    <g
-+       id="g62-6"
-+       transform="translate(-5.6022949,-9.676433)">
-+      <text
-+         x="120.33229"
-+         y="188.7475"
-+         fill="#000000"
-+         font-family="Helvetica"
-+         font-size="12px"
-+         text-anchor="middle"
-+         id="text8-8-7-6-6-5-2"
-+         style="display:inline"
-+         inkscape:label="x509 cert">DTB</text>
-+    </g>
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386"
-+       id="rect2"
-+       width="82.644012"
-+       height="17.6518"
-+       x="73.677986"
-+       y="94.992081" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.13386;stroke-dasharray:none"
-+       id="rect2-7"
-+       width="32.336376"
-+       height="18.068098"
-+       x="98.83181"
-+       y="165.66302" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
-+       id="rect3"
-+       width="152.43475"
-+       height="70.500725"
-+       x="38.782627"
-+       y="127.54861" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.77036;stroke-dasharray:none"
-+       id="rect3-9"
-+       width="152.43475"
-+       height="70.500732"
-+       x="38.782623"
-+       y="56.777336" />
-+    <rect
-+       style="fill:#db8c8c;fill-opacity:0;stroke:#000000;stroke-width:1.78506;stroke-dasharray:none"
-+       id="rect5"
-+       width="152.41736"
-+       height="36.60006"
-+       x="38.791306"
-+       y="20.211617" />
-+  </g>
-+</svg>
-diff --git a/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg b/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
-new file mode 100644
-index 00000000000..7e2793c2ed9
---- /dev/null
-+++ b/doc/board/ti/img/tifsstub_dm_tispl_falcon.bin.svg
-@@ -0,0 +1,285 @@
-+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-+<!-- SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause -->
-+
-+<!-- Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/ -->
-+
-+<svg
-+   version="1.1"
-+   width="231"
-+   height="280"
-+   viewBox="-0.5 -0.5 231 280"
-+   id="svg72"
-+   sodipodi:docname="tifsstub_dm_tispl_falcon.bin.svg"
-+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
-+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-+   xmlns:xlink="http://www.w3.org/1999/xlink"
-+   xmlns="http://www.w3.org/2000/svg"
-+   xmlns:svg="http://www.w3.org/2000/svg"
-+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-+  <sodipodi:namedview
-+     id="namedview74"
-+     pagecolor="#ffffff"
-+     bordercolor="#666666"
-+     borderopacity="1.0"
-+     inkscape:pageshadow="2"
-+     inkscape:pageopacity="0.0"
-+     inkscape:pagecheckerboard="0"
-+     showgrid="false"
-+     inkscape:zoom="2.3561254"
-+     inkscape:cx="175.5"
-+     inkscape:cy="151.30774"
-+     inkscape:window-width="1920"
-+     inkscape:window-height="1080"
-+     inkscape:window-x="0"
-+     inkscape:window-y="0"
-+     inkscape:window-maximized="0"
-+     inkscape:current-layer="g62"
-+     inkscape:showpageshadow="2"
-+     inkscape:deskcolor="#d1d1d1" />
-+  <defs
-+     id="defs2">
-+    <inkscape:perspective
-+       sodipodi:type="inkscape:persp3d"
-+       inkscape:vp_x="0 : 104.5 : 1"
-+       inkscape:vp_y="0 : 1000 : 0"
-+       inkscape:vp_z="231 : 104.5 : 1"
-+       inkscape:persp3d-origin="115.5 : 46 : 1"
-+       id="perspective1" />
-+  </defs>
-+  <g
-+     id="g62">
-+    <rect
-+       x="-0.0064085587"
-+       y="-0.0064054145"
-+       width="230.01283"
-+       height="278.39682"
-+       rx="34.501923"
-+       ry="34.727341"
-+       fill="#d5e8d4"
-+       stroke="#82b366"
-+       pointer-events="all"
-+       id="rect4"
-+       style="stroke-width:1.00331" />
-+    <rect
-+       x="40"
-+       y="30"
-+       width="160"
-+       height="60"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect6" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g12">
-+      <switch
-+         id="switch10">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 60px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">FIT Header</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="64"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text8">FIT Header</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="160"
-+       width="160"
-+       height="50"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect14" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g20">
-+      <switch
-+         id="switch18">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 185px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TIFS Stub<xhtml:br />
-+
-+(GP, HS-FS, HS-SE)</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="189"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text16">TIFS Stub...</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="90"
-+       width="160"
-+       height="30"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect22" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g28">
-+      <switch
-+         id="switch26">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 105px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">TF-A</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="109"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text24">TF-A</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="120"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect30" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g36">
-+      <switch
-+         id="switch34">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 140px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">OP-TEE</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="144"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text32">OP-TEE</text>
-+      </switch>
-+    </g>
-+    <rect
-+       x="40"
-+       y="210"
-+       width="160"
-+       height="40"
-+       fill="none"
-+       stroke="#000000"
-+       pointer-events="all"
-+       id="rect38" />
-+    <g
-+       transform="translate(-0.5,-0.5)"
-+       id="g44">
-+      <switch
-+         id="switch42">
-+        <foreignObject
-+           style="overflow: visible; text-align: left;"
-+           pointer-events="none"
-+           width="100%"
-+           height="100%"
-+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
-+          <xhtml:div
-+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 230px; margin-left: 41px;">
-+            <xhtml:div
-+               style="box-sizing: border-box; font-size: 0px; text-align: center;"
-+               data-drawio-colors="color: rgb(0, 0, 0); ">
-+              <xhtml:div
-+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">R5 DM FW</xhtml:div>
-+            </xhtml:div>
-+          </xhtml:div>
-+        </foreignObject>
-+        <text
-+           x="120"
-+           y="234"
-+           fill="#000000"
-+           font-family="Helvetica"
-+           font-size="12px"
-+           text-anchor="middle"
-+           id="text40">R5 DM FW</text>
-+      </switch>
-+    </g>
-+  </g>
-+  <switch
-+     id="switch70">
-+    <g
-+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-+       id="g64" />
-+    <a
-+       transform="translate(0,-5)"
-+       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
-+       target="_blank"
-+       id="a68">
-+      <text
-+         text-anchor="middle"
-+         font-size="10px"
-+         x="50%"
-+         y="100%"
-+         id="text66">Text is not SVG - cannot display</text>
-+    </a>
-+  </switch>
-+</svg>
+I don't know. The lwIP code seems to somewhat take care of the year 2036
+issue [1] but I need to spend more time understanding what's happening
+here to be certain.
+
+[1] https://github.com/u-boot/u-boot/blob/d1555de5fa21c06118540dcd4a627a1af29bbb40/lib/lwip/lwip/src/apps/sntp/sntp.c#L141
+
+Thanks,
 -- 
-2.49.0
+Jerome
 
+> 
+> Best regards 
+> 
+> Heinrich
+> 
+> 
+> 
+>>>
+>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>> ---
+>>>
+>>> cmd/Kconfig                |  13 ++--
+>>> cmd/net-lwip.c             |   5 ++
+>>> include/net-common.h       |  11 ++++
+>>> lib/lwip/Makefile          |   1 +
+>>> lib/lwip/u-boot/arch/cc.h  |   4 ++
+>>> lib/lwip/u-boot/lwipopts.h |   4 ++
+>>> net/lwip/Makefile          |   1 +
+>>> net/lwip/sntp.c            | 128 +++++++++++++++++++++++++++++++++++++
+>>> 8 files changed, 161 insertions(+), 6 deletions(-)
+>>> create mode 100644 net/lwip/sntp.c
+>>>
+>>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>>> index f21d27cb27f..58f629e1c34 100644
+>>> --- a/cmd/Kconfig
+>>> +++ b/cmd/Kconfig
+>>> @@ -2061,12 +2061,6 @@ config CMD_CDP
+>>> 	  and to retrieve configuration data including the VLAN id using the
+>>> 	  proprietary Cisco Discovery Protocol (CDP).
+>>>
+>>> -config CMD_SNTP
+>>> -	bool "sntp"
+>>> -	select PROT_UDP
+>>> -	help
+>>> -	  Synchronize RTC via network
+>>> -
+>>> config CMD_LINK_LOCAL
+>>> 	bool "linklocal"
+>>> 	depends on (LIB_RAND || LIB_HW_RAND)
+>>> @@ -2144,6 +2138,13 @@ config CMD_PING
+>>> 	help
+>>> 	  Send ICMP ECHO_REQUEST to network host
+>>>
+>>> +config CMD_SNTP
+>>
+>> The command should depend on RTC support.
+>>
+>>> +	bool "sntp"
+>>> +	select PROT_UDP if NET
+>>> +	select PROT_UDP_LWIP if NET_LWIP
+>>> +	help
+>>> +	  Synchronize RTC via network
+>>> +
+>>> config CMD_TFTPBOOT
+>>> 	bool "tftp"
+>>> 	select PROT_UDP_LWIP if NET_LWIP
+>>> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+>>> index cecf8d02555..2ffee64f97e 100644
+>>> --- a/cmd/net-lwip.c
+>>> +++ b/cmd/net-lwip.c
+>>
+>> Please, put every command into a separate file instead of duplicating the #ifdef chaos of the old network stack.
+>>
+>>> @@ -21,6 +21,11 @@ U_BOOT_CMD(tftpboot, 3, 0, do_tftpb,
+>>> 	   "[loadAddress] [[hostIPaddr:]bootfilename]");
+>>> #endif
+>>>
+>>> +#if defined(CONFIG_CMD_SNTP)
+>>> +U_BOOT_CMD(sntp, 2, 1, do_sntp, "synchronize RTC via network",
+>>> +	   "[NTP server IP]");
+>>> +#endif
+>>
+>> Why wouldn't we support server names ( e.g.  0.de.pool.ntp.org) here if we have DNS enabled?
+>>
+>> Please, add the missing documentation change for the commands.
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>
+>>> +
+>>> #if defined(CONFIG_CMD_DNS)
+>>> U_BOOT_CMD(dns, 3, 1, do_dns, "lookup the IP of a hostname",
+>>> 	   "hostname [envvar]");
+>>> diff --git a/include/net-common.h b/include/net-common.h
+>>> index a021bf503ff..b06cafb497e 100644
+>>> --- a/include/net-common.h
+>>> +++ b/include/net-common.h
+>>> @@ -505,6 +505,17 @@ int dhcp_run(ulong addr, const char *fname, bool autoload);
+>>>  */
+>>> int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>>>
+>>> +/**
+>>> + * do_sntp - Run the sntp command
+>>> + *
+>>> + * @cmdtp: Unused
+>>> + * @flag: Command flags (CMD_FLAG_...)
+>>> + * @argc: Number of arguments
+>>> + * @argv: List of arguments
+>>> + * Return: result (see enum command_ret_t)
+>>> + */
+>>> +int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>>> +
+>>> /**
+>>>  * do_tftpb - Run the tftpboot command
+>>>  *
+>>> diff --git a/lib/lwip/Makefile b/lib/lwip/Makefile
+>>> index e9e8caee93a..c3f0e916f66 100644
+>>> --- a/lib/lwip/Makefile
+>>> +++ b/lib/lwip/Makefile
+>>> @@ -13,6 +13,7 @@ obj-y += \
+>>> 	lwip/src/api/sockets.o \
+>>> 	lwip/src/api/tcpip.o \
+>>> 	lwip/src/apps/http/http_client.o \
+>>> +	lwip/src/apps/sntp/sntp.o \
+>>> 	lwip/src/apps/tftp/tftp.o \
+>>> 	lwip/src/core/altcp_alloc.o \
+>>> 	lwip/src/core/altcp.o \
+>>> diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
+>>> index 6104c296f6f..f91127ac565 100644
+>>> --- a/lib/lwip/u-boot/arch/cc.h
+>>> +++ b/lib/lwip/u-boot/arch/cc.h
+>>> @@ -43,4 +43,8 @@
+>>> #define BYTE_ORDER BIG_ENDIAN
+>>> #endif
+>>>
+>>> +#define SNTP_STARTUP_DELAY 0
+>>> +void sntp_set_system_time(uint32_t sec);
+>>> +#define SNTP_SET_SYSTEM_TIME(sec) sntp_set_system_time(sec)
+>>> +
+>>> #endif /* LWIP_ARCH_CC_H */
+>>> diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+>>> index edac74ff7a2..14ba7bd7ae2 100644
+>>> --- a/lib/lwip/u-boot/lwipopts.h
+>>> +++ b/lib/lwip/u-boot/lwipopts.h
+>>> @@ -162,4 +162,8 @@
+>>> #define LWIP_ALTCP_TLS_MBEDTLS          1
+>>> #endif
+>>>
+>>> +#if defined(CONFIG_CMD_SNTP)
+>>> +#define LWIP_DHCP_GET_NTP_SRV 1
+>>> +#endif
+>>> +
+>>> #endif /* LWIP_UBOOT_LWIPOPTS_H */
+>>> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+>>> index 5df222589b8..5bb98dc4d98 100644
+>>> --- a/net/lwip/Makefile
+>>> +++ b/net/lwip/Makefile
+>>> @@ -4,6 +4,7 @@ obj-$(CONFIG_$(PHASE_)DM_ETH) += net-lwip.o
+>>> obj-$(CONFIG_CMD_DHCP) += dhcp.o
+>>> obj-$(CONFIG_CMD_DNS) += dns.o
+>>> obj-$(CONFIG_CMD_PING) += ping.o
+>>> +obj-$(CONFIG_CMD_SNTP) += sntp.o
+>>> obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+>>> obj-$(CONFIG_WGET) += wget.o
+>>>
+>>> diff --git a/net/lwip/sntp.c b/net/lwip/sntp.c
+>>> new file mode 100644
+>>> index 00000000000..3b2bc3c679d
+>>> --- /dev/null
+>>> +++ b/net/lwip/sntp.c
+>>> @@ -0,0 +1,128 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/* Copyright (C) 2025 Linaro Ltd. */
+>>> +
+>>> +#include <command.h>
+>>> +#include <console.h>
+>>> +#include <dm/device.h>
+>>> +#include <lwip/apps/sntp.h>
+>>> +#include <lwip/timeouts.h>
+>>> +#include <net.h>
+>>> +
+>>> +#define SNTP_TIMEOUT 10000
+>>> +
+>>> +static enum done_state {
+>>> +	NOT_DONE = 0,
+>>> +	SUCCESS,
+>>> +	ABORTED,
+>>> +	TIMED_OUT
+>>> +} sntp_state;
+>>> +
+>>> +static void no_response(void *arg)
+>>> +{
+>>> +	sntp_state = TIMED_OUT;
+>>> +}
+>>> +
+>>> +/* Called by lwIP via the SNTP_SET_SYSTEM_TIME() macro */
+>>> +void sntp_set_system_time(uint32_t seconds)
+>>> +{
+>>> +	char *toff;
+>>> +	int net_ntp_time_offset = 0;
+>>> +
+>>> +	toff = env_get("timeoffset");
+>>> +	if (toff)
+>>> +		net_ntp_time_offset = simple_strtol(toff, NULL, 10);
+>>> +
+>>> +	net_sntp_set_rtc(seconds + net_ntp_time_offset);
+>>> +	sntp_state = SUCCESS;
+>>> +}
+>>> +
+>>> +static bool ntp_server_known(void)
+>>> +{
+>>> +	int i;
+>>> +
+>>> +	for (i = 0; i < SNTP_MAX_SERVERS; i++) {
+>>> +		const ip_addr_t *ip = sntp_getserver(i);
+>>> +
+>>> +		if (ip && ip->addr)
+>>> +			return true;
+>>> +	}
+>>> +
+>>> +	return false;
+>>> +}
+>>> +
+>>> +static int sntp_loop(struct udevice *udev, ip_addr_t *srvip)
+>>> +{
+>>> +	struct netif *netif;
+>>> +
+>>> +	netif = net_lwip_new_netif(udev);
+>>> +	if (!netif)
+>>> +		return -1;
+>>> +
+>>> +	sntp_state = NOT_DONE;
+>>> +
+>>> +	sntp_setoperatingmode(SNTP_OPMODE_POLL);
+>>> +	sntp_servermode_dhcp(CONFIG_IS_ENABLED(CMD_DHCP));
+>>> +	if (srvip) {
+>>> +		sntp_setserver(0, srvip);
+>>> +	} else {
+>>> +		if (!ntp_server_known()) {
+>>> +			log_err("error: ntpserverip not set\n");
+>>> +			return -1;
+>>> +		}
+>>> +	}
+>>> +	sntp_init();
+>>> +
+>>> +	sys_timeout(SNTP_TIMEOUT, no_response, NULL);
+>>> +	while (sntp_state == NOT_DONE) {
+>>> +		net_lwip_rx(udev, netif);
+>>> +		sys_check_timeouts();
+>>> +		if (ctrlc()) {
+>>> +			printf("\nAbort\n");
+>>> +			sntp_state = ABORTED;
+>>> +			break;
+>>> +		}
+>>> +	}
+>>> +	sys_untimeout(no_response, NULL);
+>>> +
+>>> +	sntp_stop();
+>>> +	net_lwip_remove_netif(netif);
+>>> +
+>>> +	if (sntp_state == SUCCESS)
+>>> +		return 0;
+>>> +
+>>> +	return -1;
+>>> +}
+>>> +
+>>> +int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>> +{
+>>> +	ip_addr_t *srvip = NULL;
+>>> +	char *server_ip = NULL;
+>>> +	ip_addr_t ipaddr;
+>>> +
+>>> +	switch (argc) {
+>>> +	case 1:
+>>> +		server_ip = env_get("ntpserverip");
+>>> +		break;
+>>> +	case 2:
+>>> +		server_ip = argv[1];
+>>> +		break;
+>>> +	default:
+>>> +		return CMD_RET_USAGE;
+>>> +	}
+>>> +
+>>> +	if (server_ip) {
+>>> +		if (!ipaddr_aton(server_ip, &ipaddr)) {
+>>> +			log_err("error: ipaddr_aton\n");
+>>> +			return CMD_RET_FAILURE;
+>>> +		}
+>>> +		srvip = &ipaddr;
+>>> +	}
+>>> +
+>>> +	if (net_lwip_eth_start() < 0)
+>>> +		return CMD_RET_FAILURE;
+>>> +
+>>> +	if (sntp_loop(eth_get_dev(), srvip) < 0)
+>>> +		return CMD_RET_FAILURE;
+>>> +
+>>> +	return CMD_RET_SUCCESS;
+>>> +}
+>>
+> 
