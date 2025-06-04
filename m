@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34289C5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 17:03:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACF95C5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 17:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43A9280BAE;
-	Wed,  4 Jun 2025 19:03:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E159C801BE;
+	Wed,  4 Jun 2025 19:07:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WnZCYIfG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hBd4y017";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EED98006D; Wed,  4 Jun 2025 19:03:15 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 25AF180584; Wed,  4 Jun 2025 19:07:16 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CCBC80584
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 19:03:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 264828006D
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 19:07:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a375e72473so34269f8f.0
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 10:03:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-553246e975fso36163e87.0
+ for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 10:07:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749056593; x=1749661393; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=nVfoGVeQ6qCGbS7DSKuaCP6Umf2tK3Lq50KWIm8F4ho=;
- b=WnZCYIfGwFo+l98BReCXEsHqULWBfBJ9qvMP5BAhziiCal9WMYxM7aM8E0VCtR94FD
- voTVxUdM2gP+fF149v2mXKR7uwUXrz+IU9uN/kr6AjnWnc4Fwpv2gSflBo5HL0t2a0pd
- FkXrvLzhu2d5655salNPfs+gckBJcLsC596snYi/Erz/DtyRGpTihj0ZPKZSRxXSyGYP
- M8eoXH03yn1LghIoIH6y7un7xM6TA38wk2dTqKcXfEqDGPCPQRatI420oNn2RsC519oI
- Ab6Ffw7ccNNBAUY7WEnO+3tT1hl6andQE8iF4Pzr9hIkxKkHrIQpNV7h8PBCAsX2Cez+
- yNKA==
+ d=gmail.com; s=20230601; t=1749056833; x=1749661633; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N6Fkbpb5rWzzY6Tu5LuabyhObjhgLsT4+OY7HLMhoPo=;
+ b=hBd4y0173/0VMxrz9H4jWc6ciABsATyrqhzQMIYjUKBOl8Hcm1P38wtVMzgQTqgaXW
+ 0im5D2kfaBIPe1fI19zZYk79hjvN8+syDW18iHx7JYJ5cg6XpZAMJWWQrqbSw8RlzlK6
+ f0Inqz++WikLZPhHyFh24imp9kiaORHoEqbbQcUQaguYlEELhC4Sh+J3W3zIYayZrd/Q
+ EulKKTkDXHVLmMBaMGXUoSZKDQliE7cAkr3IuK/+kOtsZOR348U/XTV4vQ0ASuuR66om
+ 1rMuIH3sdxe9eBSGA+/JD0UPe34+Mpch5/pUcupCu7E2zDO8stnoTRxSO51/7FyYepKx
+ Hl8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749056593; x=1749661393;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1749056833; x=1749661633;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nVfoGVeQ6qCGbS7DSKuaCP6Umf2tK3Lq50KWIm8F4ho=;
- b=egWRqNehCH3xVqjmpbl0aKEXmTfHlD2b0RkFLXwL49z1j1PEfsetcp3WJFF6hrBrF+
- JpnYUUEoSLqJuQrjot835ngPFu1rsaK9r8HcVHxW4j/z3c2kyNnM4p9imXd7TikBQvDY
- tR1zUwb4rKJVWg4uRlwOtdNsf1KFOH+W6Nq0AV7JeXVT4jD8fHdVKygYcVrAby9U+uNm
- Wx23agkl6EQPXRpSlBogBk2gcxaymctCK1RVGLeycov1jB2X14IbyI/2PK5ARP0WfIyp
- zctHg78E8Vg1AYUcs7g3N9XT6oRz99Sg1ahLpzYcNxXz3whkSSJ9+fbaFDQMEG2SqXz/
- eEqA==
+ bh=N6Fkbpb5rWzzY6Tu5LuabyhObjhgLsT4+OY7HLMhoPo=;
+ b=v1BB1sofP4yLA5bXq9CIxd1UZOm1rw5DSLhPjs7rLnIXpRKLi6PjQ2l40Z5yol+jkW
+ wer9uffIEMddCDpaXtpmR2ZyzUCvt+scHCc34ZpZzeYO7GZ/cIlHz7WoADCQqfYmhiGV
+ vlO7wbR3buAvWyhNCYU5FRQK7sEJraoymfbgAge+7xRfqxKrLt7SwGR0BiqKfvWtH1bo
+ d8VNcgixOlEsF/puE9oKHsHFO53j+dAdu6gY1B1P3ke0G+pNqdBA/2dp/YF9Bf1zXWgA
+ D+pOl9/d7dfUQZnDW/8/xgcHHm9VgpA5vZ3SCaPziTGD+rFWos+OLcpQgci71Y9wMda2
+ EGkg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTLDH4/znU3Fhn2SzNVXtgVQqoAYoicDL3Ih5DWasBLFr8z5vbo96Af903CrzVtPwawv9Hc88=@lists.denx.de
-X-Gm-Message-State: AOJu0YwiX8bt8K9LZwipJyg0jsG964tfNcvXHZiRaWwPJn5Pw5M95ljM
- /4kDZrwq1A/hY157W6MCuXgw9KDlyqrgQRQbIVrA9vTXXf8mHU4iyAAK
-X-Gm-Gg: ASbGncuR4Eg+F66SF9Nhmnl4X7+Ja+NJ8YfgXY4oacDSgqqofVeEPPS4k8XLAM9X2XB
- dQ599gFasKTw4/9I6xqVqyv7BxNfSjnTVoI9UuSJIBwF57TFbczUkk62aZhl2LP/+kzcatWKaoz
- dhWbh8U1HLRfS9npKSMb3ovpUk0IublKo/3vJHP+bwovJYR4NNk7ymSZHy/le78mzYtuuVKnmFJ
- HDqIhpO601bRkoIeDfh0MVwfpoJbdIfVXAkiM+Lr50/LwaEOPUf3d98eztYlVBT23LiRwZXYfOz
- 2rKXPULibr6QDYlmlFCvQEjOv+GQFNXOIwUAs4byDn7VEAGGeE/zXqD7mZVBXsoTrwYY9k7RrLD
- Q5jliV2gfYuTDRabv9fEsZDmDlvL6JvM=
-X-Google-Smtp-Source: AGHT+IEXczcJEmFMKYFo4ZdNRlN9done/eXpG2XBl0mZufVNIKDoi7IRvAgh4J8IHFbP6IsdccS5Hw==
-X-Received: by 2002:a05:6000:250d:b0:3a4:dfc2:2a3e with SMTP id
- ffacd0b85a97d-3a51dc316a7mr3359748f8f.39.1749056592337; 
- Wed, 04 Jun 2025 10:03:12 -0700 (PDT)
-Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
- [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3a4f00a13fasm22608825f8f.98.2025.06.04.10.03.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jun 2025 10:03:11 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] mtd: spinand: winbond: add Winbond W25N04KV flash
- support
-Date: Wed,  4 Jun 2025 19:02:39 +0200
-Message-ID: <20250604170246.5354-2-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250604170246.5354-1-ansuelsmth@gmail.com>
-References: <20250604170246.5354-1-ansuelsmth@gmail.com>
+ AJvYcCUVbL2UH3m/eZaTpfwaxkBuWF+baS5m/BgIxBCx/pqmigr6zmlbBeTsuiKYPENUK6Q5DJm+FxA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbXF/1GgzV7O7daQlBS89lRVIXr2IG0EvuAflkfzh6hguBV5H+
+ gbkBswesoR93+oYzofW6rrPiHSX+WCb2Rao9Wfk1PdJ0h97uJaY9w2h9zeLFJe7jSHlOXC7oOyo
+ DSPWrfdqUQ5UNRB+kNrNcWCNq60+hA5c=
+X-Gm-Gg: ASbGncvX56eGzI/Rbvc5TQQ3FopFoiVVaL4PhD9QpJd2acSCsVeQ+kca6Za1SEdRKxx
+ jj8ybjzjFgijCcoaEVlFAM/J1D49TC9JLQakfPiiv6KZVaOLCuHna5zkzL94ATxuml86HydHkxw
+ SuiHKQQOOV3jp9qY5fESDEsNEZzSgtOVMLrNur71pB87+dLFlnQoeeGsuv3hyIq0Vf+oRHata2V
+ Ew=
+X-Google-Smtp-Source: AGHT+IEjAfeCsOXI5vokQy2+R7DBpWcmkkfPK1Qq4MsQWw0wT0C5yhLo7Sc59SkN9O/TfVJdOCu6SPLl4DkdY3LFcpk=
+X-Received: by 2002:a05:6512:108e:b0:553:50f6:ebcd with SMTP id
+ 2adb3069b0e04-55356ae56a2mr1190492e87.10.1749056833068; Wed, 04 Jun 2025
+ 10:07:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250604112507.11358-2-Wojciech.Dubowik@mt.com>
+ <20250604140949.GO1382132@bill-the-cat>
+In-Reply-To: <20250604140949.GO1382132@bill-the-cat>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 4 Jun 2025 14:07:01 -0300
+X-Gm-Features: AX0GCFu0Yk7jQxROnHvKWLLGBU8F9zpxCJiaZiR6mCRZo2YG52xLR5cTd3AsE5E
+Message-ID: <CAOMZO5Dw4s9+omhVR-FHp2Z1boRioyrPStYEeft9ThycMr2tHQ@mail.gmail.com>
+Subject: Re: [PATCH v7] arm: imx: Add support for Mettler-Toledo snowflake
+ board
+To: Tom Rini <trini@konsulko.com>
+Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, Manuel Traut <manuel.traut@mt.com>, 
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,59 +99,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Winbond W25N04KV flash support that use a different value to detect
-ECC bitflip.
+Hi Wojciech,
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- drivers/mtd/nand/spi/winbond.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+On Wed, Jun 4, 2025 at 11:09=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Wed, Jun 04, 2025 at 01:25:05PM +0200, Wojciech Dubowik wrote:
+>
+> > From: Manuel Traut <manuel.traut@mt.com>
+> >
+> > The board is similar to "Kontron SL i.MX 8M Mini" SoM.
 
-diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
-index dd4ed257a83..16abf89dbbf 100644
---- a/drivers/mtd/nand/spi/winbond.c
-+++ b/drivers/mtd/nand/spi/winbond.c
-@@ -11,6 +11,7 @@
- #include <linux/device.h>
- #include <linux/kernel.h>
- #endif
-+#include <linux/bitfield.h>
- #include <linux/bug.h>
- #include <linux/mtd/spinand.h>
- 
-@@ -18,6 +19,8 @@
- 
- #define WINBOND_CFG_BUF_READ		BIT(3)
- 
-+#define W25N04KV_STATUS_ECC_5_8_BITFLIPS FIELD_PREP_CONST(STATUS_ECC_MASK, 0x3)
-+
- static SPINAND_OP_VARIANTS(read_cache_variants,
- 		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
- 		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
-@@ -121,6 +124,7 @@ static int w25n02kv_ecc_get_status(struct spinand_device *spinand,
- 		return -EBADMSG;
- 
- 	case STATUS_ECC_HAS_BITFLIPS:
-+	case W25N04KV_STATUS_ECC_5_8_BITFLIPS:
- 		/*
- 		 * Let's try to retrieve the real maximum number of bitflips
- 		 * in order to avoid forcing the wear-leveling layer to move
-@@ -172,6 +176,15 @@ static const struct spinand_info winbond_spinand_table[] = {
- 					      &update_cache_variants),
- 		     0,
- 		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
-+	SPINAND_INFO("W25N04KV",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x23),
-+		     NAND_MEMORG(1, 2048, 128, 64, 4096, 40, 2, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
- };
- 
- static int winbond_spinand_init(struct spinand_device *spinand)
--- 
-2.48.1
+I think you meant that the snowflake board is a carrier board that
+uses the "Kontron SL i.MX 8M Mini" SoM, right?
 
+> > There are two variants. Snowflake_v2 has an external SDCard Interface.
+> > LEIG is the same but without display and with emmc card only.
+> > Both variants support 1GiB of main memory.
+> >
+> > [ bigeasy: porting and a bit of cleanup ]
+> >
+> > Signed-off-by: Manuel Traut <manuel.traut@mt.com>
+> > Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> > Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> > Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+> [snip]
+> >  arch/arm/dts/imx8mm-mt-snowflake-v2.dts       |  127 ++
+>
+> What's the upstream status of this dts?
+
+To expand on this, in U-Boot, we are migrating to OF_UPSTREAM, which
+means that U-Boot will utilize an upstream version of the device tree.
+
+It is OK to use a temporary dts in U-Boot while the dts is still not in Lin=
+ux.
+
+When the dts is accepted in Linux, and U-Boot dts repo syncs with
+upstream kernel, then the board can migrate to OF_UPSTREAM.
+
+Please submit the imx8mm-mt-snowflake-v2.dts to Linux, wait for some
+feedback, and then resend this U-Boot patch with a reference to the
+Linux dts submission.
+
+As Tom mentioned, the bootph-* properties are valid upstream, so you
+can submit the dts with these nodes and get rid of the -u-boot.dtsi.
