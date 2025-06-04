@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D840C5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 19:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30864C5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 19:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00D3C82B7C;
-	Wed,  4 Jun 2025 21:56:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C87A82AAA;
+	Wed,  4 Jun 2025 21:56:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="FmSkpdlW";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="KXeWuhSo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BD6A820EB; Wed,  4 Jun 2025 21:56:31 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
+ id 5420382BAF; Wed,  4 Jun 2025 21:56:32 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4532B81FEE
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 21:56:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6ED2282B5B
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 21:56:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HX75AEyag/B4lMsK9ewhbdIF66WnHqaGLjQcMkF0nVVRJITEFJHxaOAWWLegsK4RFbUIi6TUub1yXk6CLbDb3a0hALwWre5x25Ta9zSU+52gDQOaUtPdqtZda8vUfFD9onFnzQe33/0dsDxCJAoj6vtWKTOhhQesiB9jm52tBMLv1yLNwVcZHf6Hdr9sWZhavqodrATuBwPxc/269fm2r2rOybRELsPvaIvPCkVNbVTcHnB/dOsI4JJW/F5Vvlz+/6tATKJoew6fhl0gvP96oJ9t+4pojsm1xZ5dBmP4CPPqZc4ck/KwCl6qAUV4xi45bs3RgfoadQdXDnBHuYF0iw==
+ b=dtsw3pGmwnZMULRnOCKXEMnL4adfRy20Reo5RWa/vL0P/ZPPwmFq/9xhL/s4uwhj7KNkGeQ9Ql8ORAiiqnuKwTbL7uWA/0+AwXQEAGmFuVyo0EtFlSYrHbConcGdTmma0eSMN1R2fptQfwc1pF5fjA0wzRGPDpRccT2whTzp8R6c7jHQGuCK/CGmZi+tVfapXzqCbSY6eiWwXD6hTdBRzwlk7FKb20rGf0JrYwKNKpOglczesm5kx+sgMY1tJwj2OybLMwmpNvMm/mCkzP3xTBD7Ck0/f1z5PMB+hXlv4dJXEYPu9Vtgc/PRr9rNwAsw2loUJ6lwzvypnB8PAuOK4Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dkhVUxdZGM200CHt0vUHmfOsei8N9YtECSNOzSHX53A=;
- b=sRpCbZKrW0jrH8AxSEMMLddMJsx029WP3PfX2rbh0512kZc1TVTNvdLKPb66wNoZvIn0PKAd/jUFsUiWSLUySGUahvA6fAWOc8IchHwk94ucp9aFIFIke2aqEuvfQF+H3k0E1PWPp8FkNtdrBDKjFtnHZZmWIRcHefVOREkLYrG8LHFS0UBASakYgS64EQxofKOWCu0f1eWgkICvUW0tVuwwd5H4kbT09XJcxg7ZVDHOBSGri2v3uzPSZPNLMgid/SY/0NklF9SeIj9zDvMCRIvHhPbHZ0s5I950vxLtPrmJN0Avwn63M3SKWpRjRL8xfPFLEKDYWt0feaVnvVbeng==
+ bh=5RNojcPvUIYg47qUW4Lrlrdm/psqr0+NG9dmFgZzwEk=;
+ b=qHvGmgUHYUFks4xo1f67wDSy9JZnz4Hz0InKfkc4giCJlaxPUqJ3FcRz/DttGcCMlWfxWZYPwkaQ52toncEYmqo8NQKDqexoOkzZiFpn3aux6/SNsOznWmKxjxi5nDwWeyhnpCcNePK4Ra0mSn+FiZVfvPzT+ibWTOWAXjZda3nyBfEyohOSVK/DLlLaYRxVg0MQ6H81sTDXCx/Jv7rNDZhQJo7/8xNKoo5xGpMyIXC4yEH1p67ov10ZZSGNoUJ8UbMB506c1xyVcekZAILadwTRpPtLw30AtpwYpR36ofEqGLbUpEl8heUzgzc1ozK+vAe5U5b7DtiNfsntg/PwLg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dkhVUxdZGM200CHt0vUHmfOsei8N9YtECSNOzSHX53A=;
- b=FmSkpdlWkmkG2smMa/q/u6rwZsi3i+bVFmpl1rMECwx8SK5LtdPo6ohPtRLlSbP+mZtfex4hA+z4lggZTEAUtqN+v4U82HnqrsG3WFSmtYa7UirzmnBR8gCaxXdF0XcThTVuBndveLej8K0VGoMemJZhxVcOqVilEnHLoJrJYa4=
+ bh=5RNojcPvUIYg47qUW4Lrlrdm/psqr0+NG9dmFgZzwEk=;
+ b=KXeWuhSoWEIEV4eWnulrloC5L3HCg4MRDuyEB9iFZVrr/Rf7OHVQJeKslHpCrwR/ecjbVU+6FNV2+uPZEmyM+byYHHItWnu+2wXh4k2vCfiuspkTjTKIphC0gap+H/jUvL8to0l4FH+doSSW8K3bsoV9Mn4xd9odwwd4jvXxsR4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by PAVPR10MB6940.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:30b::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.20; Wed, 4 Jun
- 2025 19:56:28 +0000
+ 2025 19:56:29 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.8769.025; Wed, 4 Jun 2025
- 19:56:28 +0000
+ 19:56:29 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
@@ -62,92 +62,92 @@ Cc: Tom Rini <trini@konsulko.com>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Rick Chen <rick@andestech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  uboot-snps-arc@synopsys.com, Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH 11/12] arm: remove volatile from set_gd prototype
-Date: Wed,  4 Jun 2025 21:56:11 +0200
-Message-ID: <20250604195612.2312979-12-ravi@prevas.dk>
+Subject: [PATCH 12/12] riscv: remove volatile from set_gd prototype
+Date: Wed,  4 Jun 2025 21:56:12 +0200
+Message-ID: <20250604195612.2312979-13-ravi@prevas.dk>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250604195612.2312979-1-ravi@prevas.dk>
 References: <20250604195612.2312979-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0082.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::11) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: MM0P280CA0117.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:9::32) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PAVPR10MB6940:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d57ae66-e166-440a-514d-08dda3a1e4b9
+X-MS-Office365-Filtering-Correlation-Id: c4ffeb89-42ca-4d2e-2207-08dda3a1e560
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|376014|1800799024|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8g0EbAURaNX1DApt2pJC7TBVxdociA6kghrzDyat2rrok4wbphQfw3VBYzix?=
- =?us-ascii?Q?YqLkdan8aGsrOPH/8KFkydV8lwjEsscI7PNIkgHfRnXWG6OjilXIHQ3UiC+C?=
- =?us-ascii?Q?20VbJwBWU5tv7Q0TPn3seLZ86CdulZl7/feBvfoL+V3+f5gXQXR9/qqleh2O?=
- =?us-ascii?Q?5qOpS1srLb225sbtNQ/rwSc2LEb12xXRmJ7Lj1DlYhvTEuNw3CkZIacL4kg4?=
- =?us-ascii?Q?bk1weTCA95D9uarzPkYkt9pNmMPPSb7L41pg+u1//m2+r+dOOWlznqT6Kbqu?=
- =?us-ascii?Q?nE6iugMgso7yeov+usggYIKg/iULZZV30TjtAsJg5dnS0m451nlGw7SzvKX+?=
- =?us-ascii?Q?UtUEl2c5ByRVE2UccDAByZALMNBLGkZWVfoSpAUn7iX498k3+2nuSp5Lyych?=
- =?us-ascii?Q?mgMynDWhlGSblBg0ku3vLT1ccU5u5ZuZTaWopJc/4GyzT1/GkgjEanpPzm18?=
- =?us-ascii?Q?/HsYqUhaPPBjdEmg6Rk7MfSN0SACDYgtLUTTtQpVFxupJJtPMqWXGUlLRruK?=
- =?us-ascii?Q?03yg1tGxv4eBUusNDNweAlt48JBX5K1Xa4Q2DKUwQ7qiTmlm0cRlKG7I//5e?=
- =?us-ascii?Q?jwP2hUvvRyMX5IQzsSmro3akJRy2lKmwopHM6YeBk8JLIHee/dkVnOjycv1W?=
- =?us-ascii?Q?TF8QtHzWzRwIv4aO0aPeknNfGZe7aEykOkrruKHU7UMOkggP36xl5+cpBCMt?=
- =?us-ascii?Q?LfoqzGuvU3d01YL5s5UcIv9uW/yzWEAx+advYb1SSpP94XsyISgiIaCm2FOD?=
- =?us-ascii?Q?TAnkSUBDhakBj8TQgmSCshf4yvyj6s/5/delht8NMbSvN1+vXIej0uoZPXE7?=
- =?us-ascii?Q?elXetwH9TQAJiHwnroTD+zAs78V/2t60K8DkIXddmB8Fk7J7ftA3mgHTfUnT?=
- =?us-ascii?Q?C+v4sTg12FWwh+56pKwXTIzoVCWjoixrXpgqDZpJbuZjXeO6bPnJjWAVxg8Y?=
- =?us-ascii?Q?4pDjZkCAiqFeS6MZ50YYALfxud4nPvqihTjLimLlok+q2c+Je3ivxDV/ljJ7?=
- =?us-ascii?Q?m959ItAQUZJDAk7B9AUZ51VO+/K9Wfb/8dgvu1juATVhdTHV1Kj5OifjJD+J?=
- =?us-ascii?Q?l0y1yIXUve0+JUe6UzjUiKEUD2ubVmqGA56XCt++cUwlHpT9G4Vx9wnNXV/c?=
- =?us-ascii?Q?SCvvFSGMYyM0h/6ifA7bAVTKooXCSOp43UmWI6SIYF/e0Q6HPuVPFwklQNA/?=
- =?us-ascii?Q?bNZ8ELo/ufuWOdxHdpASU1GOIdPvRgCSEOz80CAj/c9gD52U8jVFCICXx+5e?=
- =?us-ascii?Q?mHIo/q6QeG+dZuJBvzOCTAO1Wnnm5A5dyUoE6hdLc4bftNTa5yD0+Asym8j8?=
- =?us-ascii?Q?tWD4UzQj67eDBXWK1QlU//GXruykYKOpNyvDhoopakHb3laN3SIePKYZ7npK?=
- =?us-ascii?Q?tBx6rfB/wyCeIhhulqSTsH+lXAhE8klImO4vUg6m/w9G/rMJNvsYSD/bhC1m?=
- =?us-ascii?Q?wd0xfi78dSlBYws0A5RLsQdroRTl3LWg1GrOQtHBUH+vwfehbSwRXw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0QNNSF1/ynqVuVgQypkXGkWHrg0VKhss9S4YMAv8yiq2clxW5LbGNogkVoEs?=
+ =?us-ascii?Q?Xm3pVanwMi8h3hea4/qmM1xjbASoxzbmoZvlCRCJI99xUTge9NnEqgfd4dk3?=
+ =?us-ascii?Q?hXHtwSrR4Kdzb513R3KeK7czhAvdNB8gdZhi809IGqQCg0P0UidpJfjISQuk?=
+ =?us-ascii?Q?6A0uYi9GxJzcAARcn6MY/1JzIYLyDJPmirEJm4vco5FOTj8UZWpynIRH1sd4?=
+ =?us-ascii?Q?NGA0vFmDz73TqtwZbHzrZs8UChOUUqQZ1WH0dB3S9jcftw8ZgpjrOVceI7C8?=
+ =?us-ascii?Q?3kivfnlASCbko0JThtOvcq0bHPFnC4CSFeOvMvuKQMgismJ2TrIhvZHhFVCV?=
+ =?us-ascii?Q?l4GDAN/wk6QVWmWXUGCxmv/htzpjZXM4Lf4+xLT9BnhFIdNuQZ7uv87NokA1?=
+ =?us-ascii?Q?PKdzuTHZ9sEOYjHTtBvU6tTDNOXqmC41BBnJMCFKLNxrGTIKps7IMzeSXSdV?=
+ =?us-ascii?Q?jhWXcpgNg1PFq4HY2za1XodWfoluww23tFk0LA6RWMSa3EwjcG5smvxhmCm4?=
+ =?us-ascii?Q?Bk+FE6CEMw/A/Y6O2TAjv7eRGYdq8QWMMFrTg2eZD7SmcJINI1niKr6MQGmj?=
+ =?us-ascii?Q?MM0UjrkhSXe5iHzFw92WjpXEEPsbtM5/xCKLO9G7odJND0mFnUUl/GwEuNMV?=
+ =?us-ascii?Q?0Ii93V9sXWhjftS0kls7GTNsgwnpbKN0LkHidJHl5NKyPCI8zukzHaudFqWh?=
+ =?us-ascii?Q?4THpoS64bpQrKUrFp5TzPfo8VmSSiAtAMOt7ctFdP/0cdqLm3nLGFPw/qpOO?=
+ =?us-ascii?Q?D0hNaViO+K4N4flS2Oz5OPto9dv3tkB+nJJD8qF7cWB0pNaIFQ2DDCLoAmLh?=
+ =?us-ascii?Q?0yC6sRBOy9xUegbHUMDd2iQmPDYKAib3HJwYJAvOFIEkcKZ/F9Tod/C/tAxN?=
+ =?us-ascii?Q?Zj30Fvs5+1bmkodSwdl3F8EGfSwSA6wxdN3/+qRRJfSvyZ4xfMRpCrMnDeaN?=
+ =?us-ascii?Q?HIcejFEA0xnWbUl8Sz1eFPtdY/HUhPMxysJeJH1zzzaftrUI1rcNGc16tz/4?=
+ =?us-ascii?Q?Hj2yeJeHGZ1USzXNNkSZxy61VgAj15m0KhanILEtg4ZMjLa+wqESd22fNVcx?=
+ =?us-ascii?Q?Tw1nWtMmUWglZHBEGXmR06Ajp+5YnfMNlRPl9BlkdIKTIRG3xT3A2RiXgg8O?=
+ =?us-ascii?Q?pQ3s5lKhf6Jcuki6lLT6wfBf3VuLaDEuaG7NEKSXMlJpdnNZC6qMXrOPy9lW?=
+ =?us-ascii?Q?WWTFGzqeQf/uo5McoghMk4cx3MfIOi+PCYU7YXPVLv6TTwpzCF7Tqm20D4cp?=
+ =?us-ascii?Q?99MFiZPnIugPZqSesu12KKNbFJgij7xF7mZNarzL1lsYTjJBIs428UbFBok/?=
+ =?us-ascii?Q?2YBD4FpxPMDM4oWSMsbe6WNgSDiVjdnDqCK0Sbb5gesJ0BG8QnAvkKAfGGcr?=
+ =?us-ascii?Q?w5lbusK7y2m5XHxQdV/kUaUKi+Wp7mW03mPni6wj4bsPEoaUBQAj5PZx+QnA?=
+ =?us-ascii?Q?0GYzJs/expVSBsZA43O6dbjclML7oic1k57BeQrOX5SFxgVIvPkNPw=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(376014)(1800799024)(52116014)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?AhXLuAGS1oThf3PkgzqFHoTCDvMvucoaZ45DjwNRB0SzwM7ubm5uDvqxcc1P?=
- =?us-ascii?Q?MNkhj1GyGQsDsZCRvzAOBjKQamsJHDiwt+LWD7TNvY7+hlai1Xn4oI9YTiRi?=
- =?us-ascii?Q?nCuCvQzzZfnHgRjW1MBffNI11rbqr1tzMX/U/j8pvaWj3YfumnSCJZ/f4IgK?=
- =?us-ascii?Q?McUnL/rhuOP6jKE63lSN8MT2cCDmINrcmTDRkJZI3unIU/2FtLOmt4JvUtwl?=
- =?us-ascii?Q?HITX6mYKgQbigdH6/sgs8cN8vr/24j02cuOtvWiGL/pByybA+rf1pKR9bsn6?=
- =?us-ascii?Q?2ptLD8b9UYUypfKgs/fQrr0qCCkwV/7WAD6e/mkEZ7WIBKufeVKlQK2RYlL/?=
- =?us-ascii?Q?66HfPCFvtjMGLOQMl7gj3Ie4ZKMBIbJhkznipU5PCleYH1rr46A5f1S5XutG?=
- =?us-ascii?Q?gPD5+1Qf6B5sAVhpbvQPCikqikfEsu0k1JUe3nMvJ/8xeZVUIpJFSaDVgvuE?=
- =?us-ascii?Q?ERc3Tsr8u/YmHT+Nuw9NWSayl66OgwrsP+jErrhMtHdUVBcXGbt2XbZ6XX5V?=
- =?us-ascii?Q?Y7GkcNzSJCRjyiUn55aTFUAj2jHpPwj2OjsfxwI5ZrRJ2UZ58k5NSRf2HWYS?=
- =?us-ascii?Q?HFQi4QUhfJGuqtFO9KYhSzns59xVay4GQKxkRgoT+u5ooGzip8trmJ6SVazA?=
- =?us-ascii?Q?fajxWU4rJOXPEzOFeVL9/4qe4p1GExb7ux06i8FrawJ7cvq0VX+ftju9VrLR?=
- =?us-ascii?Q?XMDNbb816TuvrjvZpgoa4qC3ewdLAJPi+Y77ee99bgARQ4kNB9RvIEevcdmC?=
- =?us-ascii?Q?YuE4+v/nDxqE6KZtbgc7wlLzCqpzZ3/HXOpLTofyG02lyEMVg7uzwQES2ZDD?=
- =?us-ascii?Q?/08oRzuvZr9JItryiq0HovuEhUtn5ovdo6q16t6KCx9UHyGYi+dw8TiDhGb5?=
- =?us-ascii?Q?rlZGdWpp5HAep8g3T3L2unM3Zo5fQrgmiJhSTzF7iY9qgFHKKE5RPMqnI3Ry?=
- =?us-ascii?Q?amsKq9t31Id3Wm+HwT7zIO5F5ewV4z5imBznx0uv57VayX36XBRAAxshTM3c?=
- =?us-ascii?Q?v92tKNkfAARYIv4EmGfPw09GFt5sEWypuV21krY4TuaIDo5ofRWv/gaSXuQo?=
- =?us-ascii?Q?N+zFsq4iKYwgTTDOfMNAjtrD73EI+DOV/fKTQ1ikyouj+j2cbMhLMbq4Ppeb?=
- =?us-ascii?Q?QIcbLvDsPPb2S2nSJ1p51CvWeAIkq/Wy4PDPQHZv6BMrLUEVQlIW8pR/3F0F?=
- =?us-ascii?Q?mgThysiD81yyTsA0fKQikon5OJJcQnSnEVGrf1+CwxOnRSLGmlwrBeZHAcs8?=
- =?us-ascii?Q?xYZbF1c91tbPImWg+QkH3zt8bwRiHzSt8cFXB7KSzv6tJHJ24cd2AxPPa3sp?=
- =?us-ascii?Q?lu5XtadetY8MvjCITSCRErTcOKVex3LwP/FSSnmRaN+tDyAdOlk5zrXSnX/l?=
- =?us-ascii?Q?dKMmW7Dn1KcNCnoySSjHTVkqxVuTj9yG7P/ctU8vZYavyVlOjyAclSapy9Qk?=
- =?us-ascii?Q?Sz5/4yQqCv/zHErSx9WucFTI3etIJ7ldJ4wTdmJs07n/uXq6aiJQGH5LrUgS?=
- =?us-ascii?Q?Q4LbyvFvZm/K/kbxvKi9C6rexENAqpizvzNawGJFXAIjQmZwCVQwceer0JUK?=
- =?us-ascii?Q?OuS3GZRBhEibUBJFUROZ3XBEhzB4YrGAR243OJT7LlXmemIZKvFO8M1MlPBW?=
- =?us-ascii?Q?PQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yMR0CW0hbfMztxHSyGybzK0q+9hY/Nm2n3R5v8iCuLuB0V/XzY6frKr+QTxB?=
+ =?us-ascii?Q?6JNaCluStuzO12ACs4LfDJrrU/rVIZPH/XoDIHH68PYlE+pzSgqfpkHtIqXx?=
+ =?us-ascii?Q?4n6kIg4uPfCnXGdfImhlhLgRnpym7exLebkRiHH4+pXEpqHwWyVzyAZc+3LT?=
+ =?us-ascii?Q?SYpuahvjlDjHVd599tpuHGDfRmRhR2X9wOAtp7PkgabEx0G5prHxuGFkuSOO?=
+ =?us-ascii?Q?e+a7s/LrE20XMx9CmXAxKAQnZ+18pIAkm/VaL5SNJ25JiGdAMhNcPHe2Viux?=
+ =?us-ascii?Q?N42BCfpVOmsbJxT2eauGt2aJ3AQVgQO+mDkYeUnjlB1Dj2fEH2ZPnGiEap75?=
+ =?us-ascii?Q?W4lMsitB45AYn8EWHQFj7v9Gq27EBJaK7n4xZ2Z5iAEkXThTsBWVb53bqzsL?=
+ =?us-ascii?Q?To2hWOG177eg8ba95Y/G3G0/P4immlnbJjseD6468deBV6J3jlHrrO1lsgaS?=
+ =?us-ascii?Q?A0Xi9I6XRylICGb55aYWSbkKU4F3zKm2JsRAr+rz0Nz6ed92PhsR1AzbqtvR?=
+ =?us-ascii?Q?SVwTkLUoW/NK2ZvYGQtdrfhUZGeafqUWZWCsp9kBDM8qjGiWMfHjkcH5FDoz?=
+ =?us-ascii?Q?Hl25GmRI50YYXgZDzmucwl2v5G+TgIefhiguIhbkswPSlMi8hy3FmxLU610v?=
+ =?us-ascii?Q?rGm1N7FYcwW2Jvt2OkpSWSm58QYDF3EHoRmsAxNTkXvuFu0U3ZzrfjKZpqMG?=
+ =?us-ascii?Q?mByyzSz/FF8hFWcCQreFdFVSnC2ne+gAAfOX060K+LGaRZDKixuwQ6QKPDzn?=
+ =?us-ascii?Q?vSuOKHf2TMFVcEDAmv9UCRYc1v4FdyKIkT5zLSZ24XHuFB7Wml0QNu4ZAHVD?=
+ =?us-ascii?Q?RkfZArKVis5e4dqM9GJKzanr42miUgrsbSptt1roIaQiAklbzUE5WWMrWHfO?=
+ =?us-ascii?Q?xZT5VvEyP5qhR6af4hvdrWwFN/1cBhbOdE2lOkU3EvANmRbl6PadC0nEkMDH?=
+ =?us-ascii?Q?xbISOq6zzeu7G3706nUhPrTsvxFUfG1eMbyLwRK7y6x14I9jQXjB28idhI7Z?=
+ =?us-ascii?Q?p3Y1A7pY3qpU3KuOomvP/C1a9WkLbjPqm783EP8+7afENQMaLBtcAIS8SQKk?=
+ =?us-ascii?Q?ViCV4uXQ3WTPp5Q4PwZiOKbvx5BkjZfxSLRKcfrb+fNnTJj7U61pGMbDNZzV?=
+ =?us-ascii?Q?Kot2mld684OcruGyXG25AhHqnbi8uthY52MjVzAC8F1zBqQzH/6Qb4XHk83n?=
+ =?us-ascii?Q?Sf71f+eqwABlS84kvAok4q/6jn53CQk4cmUi/JrzHSBnhz/suidZFbwjgb7p?=
+ =?us-ascii?Q?1Sr0e9GKNKMFbjc7L0EH705z8F0hxKXV9jOkv3df2GixYUkbMX+5kJcA1CI5?=
+ =?us-ascii?Q?488YZnHdOWtuZ8ZPs72GWddQxubK4ROgWjqPEMLUbxWbhfCRzL/5BX6yw444?=
+ =?us-ascii?Q?CTGpu5XJJJEX3OiuCVArtQmv96kQOmQpTVbMbwhU+QhP6FFs3YYV5xbl7YGv?=
+ =?us-ascii?Q?JUGjb5BIYgBCRfLB6wMpRMm9p84EBaB6B+p8iy1H/GjjfMw4Pif0AxNwqcI5?=
+ =?us-ascii?Q?GO/dOdvliT78vIM8Tp83cGjapY+ZDU+QvTccEz9BwplLo+AK2IwxgtVJIDLU?=
+ =?us-ascii?Q?/89UE9lpX/71NxwtUHHYryWdvBPmnpvasbrRgQUyDkFc00Vd8enrx6KyACXA?=
+ =?us-ascii?Q?0w=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d57ae66-e166-440a-514d-08dda3a1e4b9
+X-MS-Exchange-CrossTenant-Network-Message-Id: c4ffeb89-42ca-4d2e-2207-08dda3a1e560
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 19:56:27.9837 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 19:56:29.1159 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qn/Yzdlf04t01o8LxJHXp9wYZ+G0sPKYk9ElVfNmFVn3dNlEnl8zkYQT1vJYiqgo54ooYiDzNh6myeuzjyTt4KKfanZ+nO/OO2TB9KZilKo=
+X-MS-Exchange-CrossTenant-UserPrincipalName: tJmXXMEloNGBgm8XMWjxPY2aOjn+qW0a+2lCmMiAXkeIGLgqQUCnd8XCltjyldqwXAMjv10dA9IyucaFDP39kVqiTT1YYDPKiobC3sfMvpg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB6940
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,28 +165,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The global gd pointer is no longer volatile-qualified. Callers of this
-helper function have been updated to no longer use volatile-qualifed
-temporary variables, so update the prototype accordingly.
+It's slightly ironic that riscv at very first had the gd pointer
+volatile qualified [6020faf62c3 ("riscv: nx25: include: Add header
+files to support RISC-V")], removed that back in 2018
+[40717eb849c ("riscv: checkpatch: Fix use of volatile")], and then in
+2020 this helper was added [6b9966e1aa3 ("riscv: define function
+set_gd()")] which needlessly had volatile in the prototype.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- arch/arm/include/asm/global_data.h | 2 +-
+ arch/riscv/include/asm/global_data.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
-index f7a47204b7c..b2ec450f900 100644
---- a/arch/arm/include/asm/global_data.h
-+++ b/arch/arm/include/asm/global_data.h
-@@ -139,7 +139,7 @@ static inline gd_t *get_gd(void)
- #endif
+diff --git a/arch/riscv/include/asm/global_data.h b/arch/riscv/include/asm/global_data.h
+index 47b5e2cfc8f..33f2b5ec5c8 100644
+--- a/arch/riscv/include/asm/global_data.h
++++ b/arch/riscv/include/asm/global_data.h
+@@ -68,7 +68,7 @@ static inline gd_t *get_gd(void)
+ 
  #endif
  
 -static inline void set_gd(volatile gd_t *gd_ptr)
 +static inline void set_gd(gd_t *gd_ptr)
  {
- #ifdef CONFIG_ARM64
- 	__asm__ volatile("ldr x18, %0\n" : : "m"(gd_ptr));
+ #ifdef CONFIG_64BIT
+ 	asm volatile("ld gp, %0\n" : : "m"(gd_ptr));
 -- 
 2.49.0
 
