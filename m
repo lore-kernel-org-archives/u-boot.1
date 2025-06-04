@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E868C5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 11:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 175BEC5B549
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 11:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F90381FEE;
-	Wed,  4 Jun 2025 13:14:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D01481FEE;
+	Wed,  4 Jun 2025 13:17:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QtUQKFPn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TrOPQA5A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F87682B07; Wed,  4 Jun 2025 13:14:36 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 4EA3182B07; Wed,  4 Jun 2025 13:17:22 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ED3680F9C
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 13:14:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1236480F9C
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 13:17:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a367ec7840so4701757f8f.2
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 04:14:33 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a361b8a66cso4095711f8f.2
+ for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 04:17:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749035673; x=1749640473; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749035839; x=1749640639; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=5dGG6edBfY1EOBp33nV1wsMr7MLOPvGgxZHSuE46qsQ=;
- b=QtUQKFPnbfB0+0juUFqEWIaKb/j2nJEhwA1V70z3qnOWv1nIKqpYjosyz/24wS/ioL
- ukpuBTLKOJfU/SGNq6F++oCQ17VgDfvS73WpZbBCbaxLceeh5sAcCeL+/KPPsvpReAkm
- CkYAgfwn1eY6q1qLNp4rgJM85gE+wavdLlad9diTv+aNUKgqC/4T/1SoZ/NUCoGIGE1z
- QjzN41qJGcdjlcWsEapLzmKMUYkwsUMhzOzVHYpCL4kGgaviBifTQayCfSt1hmWzAbTA
- ++rug5Qil6Q+CCeH+Zed4AGDVwKAIMq6epeu4y0txz3VQSvN3c6hk3bke/yXb/P23665
- ANJA==
+ bh=0LiP5DRjZCg5x1Vm4Ep+cml6LWzh98Z+ZLCAEex0BaM=;
+ b=TrOPQA5ANtZzQCwlZB4OrHwdFkYLO6qMaZSWFEcf3kbSF3ACTxeuEPxxrZxeovsG9I
+ IqaO2GPCwpJkWFhw6Pon12TBF67Ydru7w/eDA1L/51Bu6OyFRxYs7AOMEXsovBOXpOkj
+ ZBZv7TpY7vt31usRH4hUGuSiVdQ17yL6cdVrL6q9eLY2A0mRABPjvcACbt4CMrND3zoV
+ aAZnFGnigTNGlJu47p8TkPydaBMcRhlfIUhqGBlKMPmd6TxLEmxEFkcqkZCVxPQUp05n
+ AEwfhO2LVZ6YpdR8ELeTTh5+WIVqo5wYGEy2+kW/X/+ueclCT5Hcj0XyUon9gsOa1XaV
+ 6GMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749035673; x=1749640473;
+ d=1e100.net; s=20230601; t=1749035839; x=1749640639;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5dGG6edBfY1EOBp33nV1wsMr7MLOPvGgxZHSuE46qsQ=;
- b=BarPlxmWvyRy68YpnoQOhsBCpHha8r1KzjWw32NutAfVjJx+RBCiLgWS5xoED9U/9h
- 1PnbvqGHCu8igJWZUxkB8iR3Zw79gZt/nsIPAJDiw2tpjIUhF7zzICUjD89duPCnhn05
- OWNIZ4rOwnJb8iBF/nP0I64qjf0Ch7eE77yP0aNP3oA4jA47dsdNOc56tNCgw51mvRsG
- jE2nz5OvY5UzJprYfKDvi1uJb8xyzQvtkQ751SbE1Fruq+nL31A2ch6mP4G+w3fMFIYP
- gYQEnYDYRe55fyUdseu0dtNMEfpq3njnljYql73aFlQfoS1PZI6wXrDsGktUuPJ+asO5
- vEzg==
+ bh=0LiP5DRjZCg5x1Vm4Ep+cml6LWzh98Z+ZLCAEex0BaM=;
+ b=nBwL3xmn1w8SMVdoughX5URmAmsFPrfgiZD21zV5xAVcYpggxJsoUPXHwXN+GUiekA
+ vBi0sGOWeAX2DuG3y2T7LFUh6aBqOS+iz+eo5Gi+fRawV0HoVqA3vo27qSEDWQIqjWid
+ YJVPi02x1NnHy68A9cgCA4XJ6cPKmwHbWvxpkRo1Ma3bcfHs7rA1LVKqKga1IrIJP0Hq
+ BxfRfcfNaiUDhwTJsaV6b8HVL+HmjZpo8lOY1FIpFclvbEc92m1E1b+QG293PpAFk4cs
+ zqbG1dPNyzTW23qKeTnu/os8apC0QDdAeC+zJN4W2EXXFde0ALPCv9MruUZItzCiA1DA
+ aq9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVgEPr4gFb1fLGuBDpJeY3ImlG0J3TCBzBDyC14NdePwoF1n7LZXMwmoTAVXsOeheS5iOtzCpU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMqxjwSEhMIID0KTI9FnpRa8YeBiypwR9mzunB9m9WgGF9CWV4
- NcdRgeDuuMhDI9zOS35hK88YurYpXywZ6HrFFdjygprsMcuO+7kRELKENkRdFXhoh/w=
-X-Gm-Gg: ASbGncs3ka2piB7PhjxobOTYkWKPkAsTLw/So5qPuxXSpj7OPOZpmnJdTtk3V+G6Cz2
- 0+m4yVOK9bsbKGq3gzFH+ry0+sEVxaGGu/OkRI1fDX3Q8wFFRHVVWwRDbesNAmWudN+b7q1bP3L
- A0/+K3R5N1Az3YiZ2DkUAdu4LwugWquX4WfwuxB8JXepXj6zk7nq7RKgdeWEMX/yvY7y475nrRB
- YLk9Pm450FaPNofFh5XMhqMxUL1TiWVEpB0qtd7tlfL6EpV9VjJ/GqmAezCZgeUkjnQg+j2un9p
- UkXDfF0bzulEJGP7uG10wMCnkinwbZXn1RXJfWiNf6mcyKQwuKEIk4FZzFL4NCOaFDbY39I0J9J
- YUOnOhVLPAaSlOzpTnfljpK5Xrw==
-X-Google-Smtp-Source: AGHT+IE0ZaXsr2c3cmIdLZkD0wPvqjlDry350RRoSTwFx+y7HVqzV3trUfmh9kTjKtjFLMywEHrI6g==
-X-Received: by 2002:a05:6000:18ab:b0:3a4:f41d:6973 with SMTP id
- ffacd0b85a97d-3a51d91b9d8mr1949559f8f.13.1749035672951; 
- Wed, 04 Jun 2025 04:14:32 -0700 (PDT)
+ AJvYcCVlPwVdeFvnOcupaulTlG6PSlw+CZ4JWy5AOQ2quxpkZKEpaPpsjvbEjsabTjavAMKnRGRprmU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyvo2jQUomOYzd5e7OiR5SuIBTEjlw/sRLAUkbDzz9kDr28f317
+ umAHGH6w3NAxdLlU5sHRwBAVDWeAxjLNRReShUQnSQj8DdJtWhTwuSAgZsYPIywn+t8=
+X-Gm-Gg: ASbGncuEr15aWMrqtGB54v46rIaV//p2geDNxIKMC7q3SFxWFfv4JOZ6gNtq0Fk8p0u
+ 0Hcgf3yzCiDLRVzpjigQlEzNWe+Gcjfa2ULLHYkVVxf5ak0kMDqDTpMj/xwOgq4r+ICNXAk2Tc9
+ xJsguEXoQ8Yn3LKGTdU+YMptcR7N+Csa73TRSqyPwxQ3gKYr8E65hAs2yKGTYuYj83Akd0gIjQW
+ z1Yf6BJB+117Z1of5xDIYiTtbnERefHK0zUuvF4RC61+f5MqqTW4Ov93yc41ggZhoM7XnagzBoJ
+ yvHLMZfkyJ5z5mvU0y3+BcmnUQNyioYYuQBk545pf7mDMcmg27ZSvveOUCQbnYlswp2xDF0DqkB
+ /Nk2SNRU/GEowylsVP49Y7AlweA==
+X-Google-Smtp-Source: AGHT+IH3YbkGWe0e1tgmG4FWfAECu4O0bGJB73JrNz/N09MoyZtrqLfbKOabOYCiExmjqstb989j2A==
+X-Received: by 2002:a05:6000:2085:b0:3a4:f72a:b19d with SMTP id
+ ffacd0b85a97d-3a51d8f9e5amr1797112f8f.8.1749035839475; 
+ Wed, 04 Jun 2025 04:17:19 -0700 (PDT)
 Received: from ?IPV6:2a01:170:117e:fc:968c:2df3:c75e:5a31?
  ([2a01:170:117e:fc:968c:2df3:c75e:5a31])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4f009748fsm21115303f8f.80.2025.06.04.04.14.31
+ 5b1f17b1804b1-450d7fa2566sm191451705e9.13.2025.06.04.04.17.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Jun 2025 04:14:32 -0700 (PDT)
-Message-ID: <faeaffdc-cac1-480e-b1ea-671cea446a2e@linaro.org>
-Date: Wed, 4 Jun 2025 13:14:30 +0200
+ Wed, 04 Jun 2025 04:17:18 -0700 (PDT)
+Message-ID: <5a57ecbf-c6e8-416f-962a-5518ad6b2e34@linaro.org>
+Date: Wed, 4 Jun 2025 13:17:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] tools: add mkmbn tool for Qualcomm
+Subject: Re: [PATCH v2 6/7] configs: qualcomm: use mkmbn and stop creating ELF
+ files
 To: Stephan Gerhold <stephan.gerhold@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
  <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
@@ -86,11 +87,11 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 References: <20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org>
- <20250602-b4-qcom-tooling-improvements-v2-3-c7d19c0d4a8b@linaro.org>
- <aEAOoYg_wFvkI66Y@linaro.org>
+ <20250602-b4-qcom-tooling-improvements-v2-6-c7d19c0d4a8b@linaro.org>
+ <aEAQMapUyEQsTQeV@linaro.org>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aEAOoYg_wFvkI66Y@linaro.org>
+In-Reply-To: <aEAQMapUyEQsTQeV@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,35 +110,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stephan
 
-On 6/4/25 11:15, Stephan Gerhold wrote:
-> On Mon, Jun 02, 2025 at 06:10:54PM +0200, Casey Connolly wrote:
->> This is a fork of qtestsign[1] with modifications to integrate with the
->> U-Boot build system.
+
+On 6/4/25 11:21, Stephan Gerhold wrote:
+> On Mon, Jun 02, 2025 at 06:10:57PM +0200, Casey Connolly wrote:
+>> Remove qcs9100_defconfig since it is now identical to qcom_defconfig.
+>> Additionally remove the load address and REMAKE_ELF from other Qualcomm
+>> defconfigs.
+>>
+>> For these platforms you should explicitly build the u-boot.mbn target
+>> which will have the correct load address and Qualcomm MBN signatures.
 > 
-> I think it would be good if the "library" part of qtestsign (cert.py,
-> elf.py, hashseg.py) would stay unmodified if possible, and you only add
-> a new frontend on top (mkmbn.py). This would simplify syncing upstream
-> changes in the future, e.g. should the v7 support get introduced at some
-> point.
+> What is the motivation to require explicitly building the u-boot.mbn
+> target? Couldn't we do that automatically like before with REMAKE_ELF
+> (i.e. add u-boot.mbn to INPUTS-y)? Or is this because of the additional
+> Python dependencies (the cryptography module)?
 
-Ack, I thought about this but way too late...>
-> Have you changed anything meaningful inside these three files? Copying
-> the original files back in I mostly see re-formatting at the moment,
-> which makes it hard to see what is different.
+Oops, the wording here needs updating. This was how it worked in v1, but 
+v2 uses binman and spits out the u-boot.mbn automagically when building 
+with qcom_defconfig for a target that mkmbn.py recognises.
 
-Yes, I made some changes so that I can construct an ELF header out of 
-thin air, since the original code only lets you parse one from a file.
-
-Sucks about the formatting changes, not sure when that happened.
-
-I will open a PR to qtestsign adding the features I need so hopefully we 
-can keep them aligned.
-
+> 
+> BTW: We should probably document the Python "cryptography" requirement
+> somewhere so people don't get confused? qtestsign is Python 3.7+ and
+> cryptography 3.1+.
 > 
 > Thanks,
-> StephanKind regards,
+> Stephan
 
 -- 
 Casey (she/they)
