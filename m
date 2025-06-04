@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E85C5B552
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 06:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E528AC5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 06:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8DF681F0D;
-	Wed,  4 Jun 2025 08:02:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15E6482CCF;
+	Wed,  4 Jun 2025 08:02:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xYWtKDMk";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="I9FAhUuQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B615C82BD6; Wed,  4 Jun 2025 08:02:12 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 1408D81FEE; Wed,  4 Jun 2025 08:02:19 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD79D81E72
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 08:02:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25B3D82BD9
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 08:02:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=8250fb800b=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5540rnIA011439;
- Wed, 4 Jun 2025 08:02:05 +0200
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5542DoTX018186;
+ Wed, 4 Jun 2025 08:02:14 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- CFVmDe99q8X6OzbAF3bTTXYT1J5EhUE2x5kxWHJe81g=; b=xYWtKDMkagXB2XRZ
- igGeRUDZjajNfiXxEqNEpybE/F/fDluo4pTHyT8hixny7ADWRfEeJehsUvqPLFjX
- hyOdyKvqAfY8seBVKo6Xt9dSGdS4X2VMv7TwW3fCvR7beVs0AW+FcmX/lwUmUb1m
- T3kGBCqu9YUKDgy3OjFJKJLQ79vERAN5PpGJ2Hngpe6LnP6/tR9m1R7qc/kVvqRW
- 4tBSi53QfrcV8wl3FDQj/rpH5yKzFz5Ue6ljtdecs9KWVGHp/ZbmffbRKLpYT3f1
- L/TNxAhM5aCOxbwBV19YNCq42UgBrMAh/Gy2rWpwXKqJHcal1pyDm8ZfTS7haiWr
- vicxaw==
+ GDZTcepxYUdLU2K8Ug3H7+UpDZoDayNPMUR1nMLDqzQ=; b=I9FAhUuQQJ1tvjsO
+ /N9o2uhufn5a+ow3zGL2lBqM1Cign5zEsS3r5YZDf3qc8EYm8cFywsx/wc5QYlb1
+ kcjclGYYSqPBuAgYZstVcpU/QDxer6ZLM25QlpF3UgXIlXEh04vf2c6tXCurGpFv
+ 1r7Djzkl/EwfkD7nuft1TySaX9GB+3NE6SVheVjEGr/Z2Jvh2pQYhrrrXiyceWv9
+ 7/7/MuPtbPRXEyf+P99LUsg/1eGN3xLEt/G0PJpcpsO36i4WOOZRGy8wkoOC2fWr
+ JJSEHpI/VgZlplwidfA+4WN2PGJ+YvwdS26dMOhtqTgeOIq+iInj4vkngjoUnHFW
+ +3UTSg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g90fhrh-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g8syd66-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 04 Jun 2025 08:02:05 +0200 (MEST)
+ Wed, 04 Jun 2025 08:02:14 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2300640079;
- Wed,  4 Jun 2025 08:00:39 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1DB54400A2;
+ Wed,  4 Jun 2025 08:00:58 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 059E9A6896F;
- Wed,  4 Jun 2025 07:59:39 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2A6CAAF0C01;
+ Wed,  4 Jun 2025 08:00:14 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Jun
- 2025 07:59:38 +0200
-Message-ID: <77516412-ecaf-4281-b683-ec9bcc2b109c@foss.st.com>
-Date: Wed, 4 Jun 2025 07:59:38 +0200
+ 2025 08:00:13 +0200
+Message-ID: <3d1b2140-8512-4487-a9be-dc57e09585e7@foss.st.com>
+Date: Wed, 4 Jun 2025 08:00:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/13] clk: fixed_rate: configure clock ID with
- CONFIG_CLK_AUTO_ID
+Subject: Re: [PATCH v2 10/13] clk: stm32: fix clock counter
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
 References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
- <20250527132755.2169508-8-patrice.chotard@foss.st.com>
+ <20250527132755.2169508-11-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250527132755.2169508-8-patrice.chotard@foss.st.com>
+In-Reply-To: <20250527132755.2169508-11-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -96,13 +95,14 @@ X-Virus-Status: Clean
 
 
 On 5/27/25 15:27, Patrice Chotard wrote:
-> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> From: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
 > 
-> Update CLK ID to avoid 0 id, used for dummy clock with CCF
-> and to allow selection by clk_get_by_id, used to
-> get private data associated to the UCLASS_CLK device
+> In RCC the ops of the CCF registered CLK device can be called directly,
+> this patch avoid recursive call of clk_ function done by CCF clock
+> framework which update the clock information, for example
+> clk_enable is called 2 times, clkp->enable_count is increased 2 times.
 > 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Cc: Lukasz Majewski <lukma@denx.de>
 > Cc: Sean Anderson <seanga2@gmail.com>
@@ -110,21 +110,89 @@ On 5/27/25 15:27, Patrice Chotard wrote:
 > 
 > (no changes since v1)
 > 
->  drivers/clk/clk_fixed_rate.c | 1 +
->  1 file changed, 1 insertion(+)
+>  drivers/clk/stm32/clk-stm32-core.c | 68 ++++++++++++++++++++++++++++--
+>  1 file changed, 64 insertions(+), 4 deletions(-)
 > 
-> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
-> index d1da05cc18a..95a77d2e041 100644
-> --- a/drivers/clk/clk_fixed_rate.c
-> +++ b/drivers/clk/clk_fixed_rate.c
-> @@ -44,6 +44,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
->  	dev_set_uclass_priv(dev, clk);
->  
->  	clk->dev = dev;
-> +	clk->id = CLK_ID(dev, 0);
->  	clk->enable_count = 0;
+> diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
+> index df3b35b1003..a0ae89d0912 100644
+> --- a/drivers/clk/stm32/clk-stm32-core.c
+> +++ b/drivers/clk/stm32/clk-stm32-core.c
+> @@ -70,11 +70,71 @@ ulong clk_stm32_get_rate_by_name(const char *name)
+>  	return 0;
 >  }
 >  
+> +static const struct clk_ops *clk_dev_ops(struct udevice *dev)
+> +{
+> +	return (const struct clk_ops *)dev->driver->ops;
+> +}
+> +
+> +static int stm32_clk_endisable(struct clk *clk, bool enable)
+> +{
+> +	const struct clk_ops *ops;
+> +	struct clk *c = NULL;
+> +
+> +	if (!clk->id || clk_get_by_id(clk->id, &c))
+> +		return -ENOENT;
+> +
+> +	ops = clk_dev_ops(c->dev);
+> +	if (!ops->enable || !ops->disable)
+> +		return 0;
+> +
+> +	return enable ? ops->enable(c) : ops->disable(c);
+> +}
+> +
+> +static int stm32_clk_enable(struct clk *clk)
+> +{
+> +	return stm32_clk_endisable(clk, true);
+> +}
+> +
+> +static int stm32_clk_disable(struct clk *clk)
+> +{
+> +	return stm32_clk_endisable(clk, false);
+> +}
+> +
+> +static ulong stm32_clk_get_rate(struct clk *clk)
+> +{
+> +	const struct clk_ops *ops;
+> +	struct clk *c = NULL;
+> +
+> +	if (!clk->id || clk_get_by_id(clk->id, &c))
+> +		return -ENOENT;
+> +
+> +	ops = clk_dev_ops(c->dev);
+> +	if (!ops->get_rate)
+> +		return -ENOSYS;
+> +
+> +	return ops->get_rate(c);
+> +}
+> +
+> +static ulong stm32_clk_set_rate(struct clk *clk, unsigned long clk_rate)
+> +{
+> +	const struct clk_ops *ops;
+> +	struct clk *c = NULL;
+> +
+> +	if (!clk->id || clk_get_by_id(clk->id, &c))
+> +		return -ENOENT;
+> +
+> +	ops = clk_dev_ops(c->dev);
+> +	if (!ops->set_rate)
+> +		return -ENOSYS;
+> +
+> +	return ops->set_rate(c, clk_rate);
+> +}
+> +
+>  const struct clk_ops stm32_clk_ops = {
+> -	.enable = ccf_clk_enable,
+> -	.disable = ccf_clk_disable,
+> -	.get_rate = ccf_clk_get_rate,
+> -	.set_rate = ccf_clk_set_rate,
+> +	.enable = stm32_clk_enable,
+> +	.disable = stm32_clk_disable,
+> +	.get_rate = stm32_clk_get_rate,
+> +	.set_rate = stm32_clk_set_rate,
+>  };
+>  
+>  #define RCC_MP_ENCLRR_OFFSET	4
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
