@@ -4,90 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61485C5B549
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 12:32:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73BF9C5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 12:33:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 864FD800D7;
-	Wed,  4 Jun 2025 14:32:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 028EE800D7;
+	Wed,  4 Jun 2025 14:33:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oJwkCChs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="izkK+pAz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42C9D803DF; Wed,  4 Jun 2025 14:32:00 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id D8EBA803DF; Wed,  4 Jun 2025 14:33:19 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A585E80050
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 14:31:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5BE780050
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 14:33:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-32abd926858so24247161fa.2
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 05:31:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-addda47ebeaso592205566b.1
+ for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 05:33:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749040316; x=1749645116; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3Nc1cRZLMag0Ju5NwtUeWMhT6Grtor2A+m7KdOaENuc=;
- b=oJwkCChswbZmVYs/HgfQcdTFNAXWotFoixnEHOL1tuSAz97X8abobMg3wZdSJPIzhB
- YTCkPdENYiNBK5E746LLEJ5UOW4eCbMiMTNDF5NNaTn2njvp+LYW/LsXu+dkrWwMs5fA
- NbSeXEt9PbWFyrnlrNBu+1urk87Hxt/cEwV0Ito5ScP63IS2y5DCPu+f2pgJXCgCl1Ot
- DsJ97LWoPJfLge+/yWSWFLsu0jLJJ+9Dlx+kpb4wyQPsOafu+WzFkgMitz+ZvWzFEv9P
- Urm7QGdc1nJ0Z9aUoeZ4iq0BqrX72rbgq166TI8JrOqaAUp92fzqQkPBvtnY1kpC7FDS
- UEvA==
+ d=linaro.org; s=google; t=1749040397; x=1749645197; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=SEVfxqOV0wXJXE42NG4zPYPud7wXVlDhd2ZFA14yEsA=;
+ b=izkK+pAzNASyewfpgGe7lbKockG29ACEZicTxJbJG/ytF9sHpXIU1C20UbWYOtDJz4
+ VP3tNJLW5jB2xBZBT6+9ICXdmMn0aIm0sgZcC5yNlhB8IpNkh1KB2wCqwP9dTvfmnrhE
+ FxBgRLwfG9kb4cKRaG8s5SvGBtQct+pRXsI6gAu5JPV5enrtULTBQxSP4Rw2Fh/Dii5r
+ P+oIlTaGvaNKv3gAFfaQdQbc+hL/YulxxehqV0+h1Uv1QMerMIDmSSXb+4L0zTZaeBAq
+ ystUOW5VvyIg8J8l4DzLLx7aWg00cvGqmhFsYv7/hWR8Krj9/XvFnNV++iY9DWTvkBg/
+ cLGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749040316; x=1749645116;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3Nc1cRZLMag0Ju5NwtUeWMhT6Grtor2A+m7KdOaENuc=;
- b=Xu8zW0QAuIzL9+Sii28BYJ7Hu3wPTl6RTwjONxzARMvB3Os2Y2osTfsYZl0oSclRJj
- 8lZhKiOoigl5ZVKNvem+xURiIXyU9BIpwLZNnlBrbo/XYupKVneb4SNnQemDWRbRxpxu
- LvFeq0/EVtKnry5/Diu1/mxAnEYSlI3XxunB/Z9d91H/rzZmNeuj5ClYYSzocSRYlxCK
- fka9N3BCoG9yO7dHiPx86rrN3jkPhCYetRZSyisnf6qJkyCStAcE2Uf873lGBHr4X/qT
- /A6DewsZLRPwxuL9ii1KzhI7P9COObFtnSTC9sMeVnAHLHNM0gkEo7k56+f+lcJcZRl+
- 1+Sg==
+ d=1e100.net; s=20230601; t=1749040397; x=1749645197;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=SEVfxqOV0wXJXE42NG4zPYPud7wXVlDhd2ZFA14yEsA=;
+ b=DmcjNhiC0ZTBotXXCd3Pg3mtGvl/R/dqYmQoVcmOtKsNU8VYfsaGPAHL4ZCBrKTXvJ
+ 1M3xXQHbdYGbsbZDRuntN033R2KLD5YWYp40FSDy1gAPKeQ7KpmZypOvGZltLKutLmD+
+ pUY76eBZSP213qK/fkvSVlY6baWQfcAYcLP6A4hJsY8NV5hrhevzYeHofvDESYtYzYyH
+ 1aKH2NFYrKQcUfi0S3dMPRH7PCYsfzH/dO8+ziBcmUbQHFNLGdSvquXdZpyo/NVXGHLd
+ p6RVrqgDqXzbhFf2SmlvijTmeA2kFaHXJxB05KRioFiq9dwYdE6ipIbDukZm5mVy3e1j
+ rS4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX6d+5U1Pju8UENjM189qO4XNXquOxQOGiZon/1KsjaU3tVYaG7GDNvYMgw1Xi1WmP0nld/uWA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzpbI/DxDRHEvHCyElMTpL6ESt/Wlw+fO87vxjqZ8Vi04LzOZef
- aCaws5kLp9kBR5CYy+ke6yp9OUHUg6CmLD91WihYm0d0CyW7j8DnQRT92Zet7xbhGH0=
-X-Gm-Gg: ASbGnctcHY2YDnWYtjGDNIQQb8lf28bDxD2+Y+e3UXhF2IMLcLK0NU6kes8ihsyr562
- JbAmL8HquUiPK/Ox1FelIKi7qlG9GWV3+rOlBtnCUspaUSyKFJU0k/z99dQvicZ6mieYpTNVBoV
- mSBbhuyxaAfPcbjx9UdN5xGdIUHMUDYqlCI8VNQ3CwDgTf42XK7SDhOcxEhGxJJPXjn115/EC/b
- FV/fJOpLRSIyctx5/yrLyrp34EvP0pFfA4PbuJcu1mZOYxpmjLmLK5pQNW9W8xISqg4tvQgDT5r
- xeyDFYTfE8akZnxWJkIce2JoYlmjAsdGY51BHUjtwAJ2GcrXdDBaQ5h+Ypuwsb6x7/iY0Q9slI5
- n3/b5
-X-Google-Smtp-Source: AGHT+IFPFkyIxlOE0NRztLatOIPYLVnMk9vh+e01bngjkVOyokpUC55hXC7DmoODs36VWMiMC3tcpA==
-X-Received: by 2002:a05:651c:30cc:b0:327:eb55:a7fe with SMTP id
- 38308e7fff4ca-32ac795a86emr7051791fa.20.1749040315864; 
- Wed, 04 Jun 2025 05:31:55 -0700 (PDT)
-Received: from nuoska (2001-14ba-48e-3a00--193.rev.dnainternet.fi.
- [2001:14ba:48e:3a00::193]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-32a85b1a86csm22001851fa.12.2025.06.04.05.31.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jun 2025 05:31:55 -0700 (PDT)
-Date: Wed, 4 Jun 2025 15:31:53 +0300
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: forbidden405@outlook.com, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] arm: armv7: fix a bug that prevents CONFIG_BLOBLIST
- and CONFIG_POSITION_INDEPENDENT to be enabled together
-Message-ID: <aEA8uXoptzUQ03Xc@nuoska>
-References: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
- <b80d6fe8-d477-430b-bf21-eb7662541c28@cherry.de>
+ AJvYcCX6h/LMnWtfTQcMfjvDtjKgXoSs1R2XDfKV1wiryBcdHO1h8MqdugQGZtW5s9LO+2uAwXTVVMw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdYJfZkpA+SaSRpZ3bz/BA3aIDyYNSvxoQHdvNWIZ/TxNOHqLZ
+ Rswo5P5/RH6zW+hf7JygmerQS88JMWyvwNVQwo7i+/kyzFzjgh3BafZZM8szAAsyUfk=
+X-Gm-Gg: ASbGncseQ2WkWWplogVuTgio2OCTbds7C8NwE7G96s4NfNbMg1mcr6TTlpPY4ukrWbS
+ o0ZZJDnDpJXx4b0PAWBFmqnk4N2uNe8r2z3vzrYYCWstbuhnwZdkJzLeVEAXNcq9FZX0xrWOncm
+ Np8gqJsY0E/7aS8he2ZSS5tU8W+8p68kbTPSyreZ2wRecCygwmGmARW5bQcdY5irjUftCKy2uzm
+ JMsic8EWBb3h92h+ORtGRWZrWGBXn+HeAFJu6rYJncd/9u2N4ZZjeClcCKMHbmZ0alYVhjhthZj
+ IAsgBNcTbrLc0jk6h8XkrtLQvHVUow8JfHgu00RxxFTrfuuPx4FyC/2959cpY5mGu4J1ewRi3Lt
+ bKVMw6gqwuZ5bZa9NwraeACcdiw==
+X-Google-Smtp-Source: AGHT+IHNbu9PmoR74eEOPrtD5aPjguW1sXxnje7AgkEkA9n5l1w+JHHMB3uM7CEtoWzL2wJ7HqLsLA==
+X-Received: by 2002:a17:906:c145:b0:ad8:8883:9fef with SMTP id
+ a640c23a62f3a-addf8d8fcf3mr224480066b.26.1749040397228; 
+ Wed, 04 Jun 2025 05:33:17 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:fef9:cf1c:18f:2ab8?
+ ([2a01:e0a:3d9:2080:fef9:cf1c:18f:2ab8])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-adb2ead829csm961984866b.79.2025.06.04.05.33.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Jun 2025 05:33:16 -0700 (PDT)
+Message-ID: <e06612b5-7bfb-48d3-afcc-227b12348ebb@linaro.org>
+Date: Wed, 4 Jun 2025 14:33:16 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b80d6fe8-d477-430b-bf21-eb7662541c28@cherry.de>
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] board: qualcomm: add a MAINTAINERS file
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250604113452.1075503-2-casey.connolly@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250604113452.1075503-2-casey.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,77 +124,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Mon, Jun 02, 2025 at 12:37:10PM +0200, Quentin Schulz wrote:
-> +Cc Mikko Rapeli who's attempting to patch this in OpenEmbedded-Core
+On 04/06/2025 13:34, Casey Connolly wrote:
+> Add a MAINTAINERS file for assigning maintainership of a particular
+> Qualcomm platform or board (if board specific files exist). It is
+> intended to supplement the treewide ARM SNAPDRAGON maintainers with
+> folks who have a more specific interest.
 > 
-> On 5/31/25 3:10 PM, Yang Xiwen via B4 Relay wrote:
-> > [You don't often get email from devnull+forbidden405.outlook.com@kernel.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> > 
-> > This patchset also enables CONFIG_POSITION_INDEPENDENT for qemu boards
-> > to avoid similar issues to happen again in the future.
-> > 
-> > Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-> > ---
-> > Yang Xiwen (2):
-> >        arm: armv7: restore section to .text after saved_args
-> >        arm: qemu: Add imply CONFIG_POSITION_INDEPENDENT
-> > 
-> >   arch/arm/Kconfig           | 1 +
-> >   arch/arm/cpu/armv7/start.S | 2 ++
-> >   2 files changed, 3 insertions(+)
-> > ---
-> > base-commit: 93905ab6e7564089f5d7b703b660464d675e5ab0
-> > change-id: 20250529-pie_blob_fix-a61229c8fcc6
+> Add an initial entry for the QCS6490 platform which powers the RB3 Gen 2 board.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>   board/qualcomm/MAINTAINERS | 9 +++++++++
+>   1 file changed, 9 insertions(+)
+>   create mode 100644 board/qualcomm/MAINTAINERS
+> 
+> diff --git a/board/qualcomm/MAINTAINERS b/board/qualcomm/MAINTAINERS
+> new file mode 100644
+> index 000000000000..0c07ea2df728
+> --- /dev/null
+> +++ b/board/qualcomm/MAINTAINERS
+> @@ -0,0 +1,9 @@
+> +# This MAINTAINERS file is for folks with an interest in a particular platform
+> +# or board under ARM SNAPDRAGON
+> +
+> +# RB3 Gen 2 and similar boards
+> +QUALCOMM DRAGONWING QCS6490
+> +M:	Casey Connolly <casey.connolly@linaro.org>
+> +S:	Maintained
+> +N:	qcs6490
+> +N:	sc7280
 
-I tried adding this series and similar armv8 change to u-boot master
-branch at commit fdc0dcbb2c84c4c but this does not fix the boot hang
-with qemu kvm. Patch applied was:
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 79f60eb3f349..6ff3f2750ea8 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1091,6 +1091,7 @@ config ARCH_QEMU
-        imply USB_XHCI_PCI
-        imply USB_KEYBOARD
-        imply CMD_USB
-+       imply POSITION_INDEPENDENT
- 
- config ARCH_RENESAS
-        bool "Renesas ARM SoCs"
-diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
-index 959251957de4..833486817f84 100644
---- a/arch/arm/cpu/armv7/start.S
-+++ b/arch/arm/cpu/armv7/start.S
-@@ -182,6 +182,8 @@ saved_args:
-        .word 0
-        .endr
- END(saved_args)
-+
-+       .section .text
- #endif
- 
- #ifdef CONFIG_ARMV7_LPAE
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index 829a620faeb6..1d0b59889e78 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -409,4 +409,6 @@ saved_args:
-        .dword 0
-        .endr
- END(saved_args)
-+
-+       .section .text
- #endif
-
-
-Cheers,
-
--Mikko
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
