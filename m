@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FF5C5B552
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 07:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB4A6C5B552
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 08:20:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC74882B07;
-	Wed,  4 Jun 2025 09:24:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D97BD82B07;
+	Wed,  4 Jun 2025 10:20:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KqryCmnB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HeEkDTz1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EFBD82BD9; Wed,  4 Jun 2025 09:24:02 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 504AA82BD9; Wed,  4 Jun 2025 10:20:20 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AEA982103
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 09:24:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B518481FEE
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 10:20:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-70f862dbeaeso65993107b3.1
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 00:23:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749021839; x=1749626639; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=plXigEB8XPHg7SzkYjPXa2VEaf/yqERRT6co2ayw/0s=;
- b=KqryCmnBRGFqJd0eC1OMUR1pV56IuFOFeAGwypotxsSgdjCVVBJ36H2SvMXNrFppSq
- xlXFX7t1BvgRPmZniVt9uAlTuGppjZ5yeC0P0nNs8C/aehh/Dn+YmfXnXYAvV5fEz+iF
- 8Db3PtW3mFkzNnW3p3KJJOy2qhrqbIxjFG4L38N6dEbhWwpqqq2O82SeHcK+Fl7b8iwR
- 9FetipwfFO0dIpshAvIKsP8XnCqtctjHBgg8qKiyndjW6DRCgUCqO9CI20TrIcqMkKtX
- Ch0VSutFVLkeAOPRWEmbFoCoy76vEsuunyTG1qRnAwctFhYbNHwCkd83a36kYeUnpoTZ
- nwjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749021839; x=1749626639;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=plXigEB8XPHg7SzkYjPXa2VEaf/yqERRT6co2ayw/0s=;
- b=f57IFFsx6j6OttZJ7vZi8/Mh/5sdwaeUvJa8eU8L48rHx6i/Hbnrq3KXpD4K33jWCJ
- VI77FfWXhZBRbssIMAmTmJKhCW2+7XM4TUW/n6LqyV2Xs04PJx81xwWd1fMzRD1n13u5
- w1x7rO2KvBkxp4905l4dydaCBDpwThqIYJIbVtom5rglHHTKaq+qbXnHj76O2dw8sLnq
- xZB1osSIm9i5fI7YVxD/NAfyy+SNFSg0dnQcs8yN8/zUHXJoCAsVjhGUGirjBL9OSuyR
- bKGl5JnZgU/4dWlJ7mz22xTmWbdnlPASDSya3zsynD4m+CZyNd5pK4KxnHwPGSn+V73j
- baZA==
-X-Gm-Message-State: AOJu0YzFyZdia+YF/alEPKoV3gJ/sHtqzGKf9cIw40Mefdr1yjejGfMk
- lCBivcGw3DJcRDHu2cSBV5+bIhGqUgVU3wj8sAGKgNR7VRxuDQ0Mn3VtlmFeiiHuxOwyBbXHl+k
- Ttd6NHxTgtEGbIUYS7dpjujZ+ofq7WUoSPgfCpk+prA==
-X-Gm-Gg: ASbGncvaLIWVndOsm2SKT0nZ9yH3r798YionXDOXmfo9d/PXt49YbezwJ36QcCCNn/8
- 3M1+aBcNy4cO7C2yYcKIQqBHrbO0BBukL2S24dNFe0KVSeG9MY0RO08NZXvfvmgIaewCkG3K6t+
- t8e35ra4tAkOwTvD2dMr2XJoUlB0GYhChj9w==
-X-Google-Smtp-Source: AGHT+IGWWodvE8lcvp4ZgvByC2un5Kqpyfk522JwGwNF6GC+CpYtI9rtfDqfvMUrG9lknmJxXH1QkF5FdvE+km4RjJY=
-X-Received: by 2002:a05:690c:28b:b0:708:2604:4a10 with SMTP id
- 00721157ae682-710d9dac0bdmr22386837b3.18.1749021838824; Wed, 04 Jun 2025
- 00:23:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id C4A6AA4FD5F;
+ Wed,  4 Jun 2025 08:20:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D12C1C4CEE7;
+ Wed,  4 Jun 2025 08:20:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1749025216;
+ bh=1noa4RNjqcJ+T4WV+VKTN7pirZ//syCJi21iHztyeVg=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=HeEkDTz16sjcN7N54QQcl9OBS/cshyppjnTUz2VW4BqDjGlMkptQC4K36N6qPLSMZ
+ 3QdXPvcSOz5uGBgHgbfrdLkhla+1od/0jvbjxddA4zAuUvhFm32GtgzMrTAk4eyedQ
+ iH8AqOWwEuZ5TpGoX9W/n/75Aacm50IWbuYIDOWjbCgjyjFb8I8LHW0RNazS7k/RFs
+ 88FeXucF3+5tpo+kCjqUr0h1g8qKjfdPVcLt0zrLTOJaoEDmbWQhKTkcq781mvI1oM
+ FBa0qf6BrSXT+Bf/mg4QUDegtwaw8Z7W22q7sSMIpt6BLWMt5WMHWnCGs/dSxB1RsA
+ IilrpGoBq3CiQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom
+ Rini <trini@konsulko.com>, Eugen Hristev <eugen.hristev@linaro.org>
+Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
+Subject: Re: [PATCH] usb: gadget: atmel: reliably generate disconnect by
+ disabling controller instead of toggling PULLD_DIS
+In-Reply-To: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
+References: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
+Date: Wed, 04 Jun 2025 10:20:13 +0200
+Message-ID: <87iklbuddu.fsf@kernel.org>
 MIME-Version: 1.0
-References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
- <20250526091253.400802-3-sughosh.ganu@linaro.org>
- <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
- <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
- <CADg8p977sXJRS1CM6Lnmep0_gc3jc9b3yFg1A-qkVn5Gswr_=Q@mail.gmail.com>
- <CAC_iWj+Mzskthf1dLSX6NPyzWiRGzfbcekCs_c_mT3GpFH6gTg@mail.gmail.com>
- <CADg8p95CnQnj2_Wh6D05hCtZh75PDU-S-_MkSvzBdGFAgKJiug@mail.gmail.com>
-In-Reply-To: <CADg8p95CnQnj2_Wh6D05hCtZh75PDU-S-_MkSvzBdGFAgKJiug@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 4 Jun 2025 10:23:20 +0300
-X-Gm-Features: AX0GCFtzEuX0Esc5nYojER7EZ9xkr0kPSQ6NhW-UokDjrt3PwBbDvP3OWsApb9c
-Message-ID: <CAC_iWjK9ZQoSx8a_nmbJ-R-FUak=N+r5Vy7VPLZHFNqwnzO1Tw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
- API's
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,83 +69,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
+Hi Zixun,
 
-> > > > >
-> > > > >
-> > > > > This tends to blow up in random ways. See
-> > > > > commit 67be24906fe. TL;DR 0 is a valid address in some systems.
-> > > >
-> > > > Yes, I see your point. I think the calling function will have to be
-> > > > re-written such that the env variables get stored only when the API
-> > > > returns successfully. Then at least the platform will not have an env
-> > > > variable with some junk value.
-> > >
-> > > Thinking about this a bit, I think in these two instances, returning a
-> > > value of 0 might not be an issue if the DRAM memory does not start at
-> > > 0x0. Don't get me wrong, what you are suggesting is definitely
-> > > correct. I am only thinking about increasing code size on these
-> > > platforms if 0x0 is not a valid address, and moreover since the
-> > > platforms were already setting 0x0 in case of an error.
-> >
-> > what kind of code size increase are we talking about?
->
-> Let me check the actual size impact with the changes and get back to you.
->
-> > It's returning
-> > na int instead of a physical address so that should be close to zero?
->
-> Sorry, I do not understand what you are suggesting, but even the above
-> static function is returning a phys_addr_t value, which is 0 in case
-> of an error. And I have kept this to mimic the existing behaviour.
-> Thanks.
+Thank you for the patch.
 
-I am saying that changing the return type from phys_addr_t to an int
-should have a negligible size impact.
+On Mon, Jun 02, 2025 at 17:45, Zixun LI <admin@hifiphile.com> wrote:
 
-Thanks
-/Ilias
+I'm surprised that checkpatch.pl does not catch this, but the subject
+(title) is too long (it should be less than 70 chars):
+https://docs.u-boot.org/en/latest/develop/sending_patches.html#commit-message-conventions
+
+> Contrary to the datasheet, setting both DETACH and PULLD_DIS bits to 1
+> does not always drive the DP and DM lines to high-impedance. This
+> prevents the host from reliably detecting a USB disconnect and subsequent
+> reconnect.
 >
-> -sughosh
+> The symptom is that the first gadget command (e.g., dhcp) succeeds, while
+> subsequent commands (e.g., nfs) fail.
 >
-> >
-> > Thanks
-> > /Ilias
-> > > If it is okay
-> > > to increase code size on these platforms, I will change the calling
-> > > function, such that the variable does not get set in case of an error.
-> > > Maybe Casey and Mark can comment? Thanks.
-> > >
-> > > -sughosh
-> > >
-> > > >
-> > > > -sughosh
-> > > >
-> > > > >
-> > > > > > +
-> > > > > > +       return addr;
-> > > > > > +}
-> > > > > > +
-> > > > > > +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
-> > > > > > +                                 phys_addr_t max_addr, u32 flags)
-> > > > > > +{
-> > > > > > +       int err;
-> > > > > > +       phys_addr_t addr;
-> > > > > > +
-> > > > > > +       addr = max_addr;
-> > > > > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
-> > > > > > +       if (err)
-> > > > > > +               return 0;
-> > > > > > +
-> > > > > > +       return addr;
-> > > > > > +}
-> > > > > > +
-> > > > > >  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
-> > > > > >
-> > > > > >  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
-> > > > > > --
-> > > > > > 2.34.1
-> > > > > >
-> > > > >
-> > > > > Cheers
-> > > > > /Ilias
+> Disabling and re-enabling the controller entirely, instead of toggling the
+> PULLD_DIS bit, reliably generates a disconnect event.
+>
+> The Linux driver works correctly because gadget_disconnect/gadget_connect
+> are always followed by gadget_udc_start/gadget_udc_stop. In U-Boot
+> pullup() is used solely.
+>
+> This behavior has been observed on the SAM9X60-Curiosity and
+> AT91SAM9G25-EK boards and has been reported to Microchip.
+
+I'm not against this, but the driver supports multiple gadget
+families according to the compatible.
+
+I'm wondering if this issue is reproduced on other atmel
+boards that are supported in U-Boot.
+
+Eugen, have you noticed the above limitation on a different
+board family that you maintain?
+
+If this issue is chip specific, I think we should test for compatible in
+usba_udc_pullup() to only use USBA_ENABLE/USBA_DISABLE for this
+particular compatible (microchip,sam9x60-udc).
+
+>
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+> ---
+>  drivers/usb/gadget/atmel_usba_udc.c | 9 ++-------
+>  1 file changed, 2 insertions(+), 7 deletions(-)
+>
+> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+> index f9326f0a7e7d913bcf201ba3e4aeca9a099e7be7..a38e70957402fb3ade3de611d73e29b990d00703 100644
+> --- a/drivers/usb/gadget/atmel_usba_udc.c
+> +++ b/drivers/usb/gadget/atmel_usba_udc.c
+> @@ -521,16 +521,11 @@ usba_udc_set_selfpowered(struct usb_gadget *gadget, int is_selfpowered)
+>  static int usba_udc_pullup(struct usb_gadget *gadget, int is_on)
+>  {
+>  	struct usba_udc *udc = to_usba_udc(gadget);
+> -	u32 ctrl;
+> -
+> -	ctrl = usba_readl(udc, CTRL);
+>  
+>  	if (is_on)
+> -		ctrl &= ~USBA_DETACH;
+> +		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
+
+Could we add a comment in the function as well? Something similar to
+what's in the commit message:
+
+/* Some chips don't reliably drive DP/DM lines to high impedance when
+ * using the DETACH/PULLD_DIS bits.
+ * To ensure a reliable disconnect, power cycle the controller instead
+ */
+
+Feel free to rephrase your preference.
+
+>  	else
+> -		ctrl |= USBA_DETACH;
+> -
+> -	usba_writel(udc, CTRL, ctrl);
+> +		usba_writel(udc, CTRL, USBA_DISABLE_MASK);
+>  
+>  	return 0;
+>  }
+>
+> ---
+> base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
+> change-id: 20250602-pullup-83c5540db5cd
+>
+> Best regards,
+> -- 
+> Zixun LI <admin@hifiphile.com>
