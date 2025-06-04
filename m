@@ -4,53 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB4A6C5B552
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 08:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA21C5B555
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 08:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D97BD82B07;
-	Wed,  4 Jun 2025 10:20:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2079481FEE;
+	Wed,  4 Jun 2025 10:39:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HeEkDTz1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cUhkYGVy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 504AA82BD9; Wed,  4 Jun 2025 10:20:20 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 0564B82B07; Wed,  4 Jun 2025 10:39:37 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B518481FEE
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 10:20:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84D7081E72
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 10:39:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C4A6AA4FD5F;
- Wed,  4 Jun 2025 08:20:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D12C1C4CEE7;
- Wed,  4 Jun 2025 08:20:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B906E44EDF;
+ Wed,  4 Jun 2025 08:39:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29221C4CEED;
+ Wed,  4 Jun 2025 08:39:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749025216;
- bh=1noa4RNjqcJ+T4WV+VKTN7pirZ//syCJi21iHztyeVg=;
+ s=k20201202; t=1749026372;
+ bh=G0gnWJy2YQETzA9i/45hJpNqJoVc+L4WIaj12Rbr1mM=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=HeEkDTz16sjcN7N54QQcl9OBS/cshyppjnTUz2VW4BqDjGlMkptQC4K36N6qPLSMZ
- 3QdXPvcSOz5uGBgHgbfrdLkhla+1od/0jvbjxddA4zAuUvhFm32GtgzMrTAk4eyedQ
- iH8AqOWwEuZ5TpGoX9W/n/75Aacm50IWbuYIDOWjbCgjyjFb8I8LHW0RNazS7k/RFs
- 88FeXucF3+5tpo+kCjqUr0h1g8qKjfdPVcLt0zrLTOJaoEDmbWQhKTkcq781mvI1oM
- FBa0qf6BrSXT+Bf/mg4QUDegtwaw8Z7W22q7sSMIpt6BLWMt5WMHWnCGs/dSxB1RsA
- IilrpGoBq3CiQ==
+ b=cUhkYGVyqdZoyeGNLHwHQXsoi0+rp+ZwwAbSltftAn1d+5n4nUq85PHCDWDc4km2u
+ +Dm5uuNJUsQ/vtlT1sUvojB6A4roHoe0/O7iCOwsM6meeDMhW1qT/LeXiARd0pfEiF
+ iHPfSSQ9iEWwt9MjMzAWKIsnZnWtcelky+F6F5LRjtdYn+i1FjGKRQElp2aeK2Z7Xn
+ u7Spt90lJE+3ZqVIFaGmQ6ViyEA9NP3dA6KAoGYMx4VcjE5DfLIHO+UYcdyn+XgQ6K
+ zokvpMgMrKU/lAkQzTkCOulWUFTuv3hH8SnSPgldrozZ/kmbVFa57QpPyLUR3B5pEI
+ OvfVjLypAtRQw==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
- Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom
- Rini <trini@konsulko.com>, Eugen Hristev <eugen.hristev@linaro.org>
-Cc: u-boot@lists.denx.de, Zixun LI <admin@hifiphile.com>
-Subject: Re: [PATCH] usb: gadget: atmel: reliably generate disconnect by
- disabling controller instead of toggling PULLD_DIS
-In-Reply-To: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
-References: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
-Date: Wed, 04 Jun 2025 10:20:13 +0200
-Message-ID: <87iklbuddu.fsf@kernel.org>
+To: Shmuel Leib Melamud via B4 Relay
+ <devnull+smelamud.redhat.com@kernel.org>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
+ Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, Shmuel Leib Melamud <smelamud@redhat.com>
+Subject: Re: [PATCH v3 1/2] renesas: Handle CLK_TYPE_GEN4_MDSEL in
+ gen3_clk_get_rate64()
+In-Reply-To: <20250603-us-renesas-watchdog-v3-1-af3a65afd03e@redhat.com>
+References: <20250603-us-renesas-watchdog-v3-0-af3a65afd03e@redhat.com>
+ <20250603-us-renesas-watchdog-v3-1-af3a65afd03e@redhat.com>
+Date: Wed, 04 Jun 2025 10:39:29 +0200
+Message-ID: <87frgfuchq.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -69,92 +73,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zixun,
+Hi Shmuel,
 
 Thank you for the patch.
 
-On Mon, Jun 02, 2025 at 17:45, Zixun LI <admin@hifiphile.com> wrote:
+On Tue, Jun 03, 2025 at 06:06, Shmuel Leib Melamud via B4 Relay <devnull+smelamud.redhat.com@kernel.org> wrote:
 
-I'm surprised that checkpatch.pl does not catch this, but the subject
-(title) is too long (it should be less than 70 chars):
-https://docs.u-boot.org/en/latest/develop/sending_patches.html#commit-message-conventions
-
-> Contrary to the datasheet, setting both DETACH and PULLD_DIS bits to 1
-> does not always drive the DP and DM lines to high-impedance. This
-> prevents the host from reliably detecting a USB disconnect and subsequent
-> reconnect.
+> From: Shmuel Leib Melamud <smelamud@redhat.com>
 >
-> The symptom is that the first gadget command (e.g., dhcp) succeeds, while
-> subsequent commands (e.g., nfs) fail.
+> Add support of CLK_TYPE_GEN4_MDSEL clock type to gen3_clk_get_rate64()
+> function. In particular, this type of clock is used by Renesas R-Car
+> Gen4 watchdog. It operates similarly to CLK_TYPE_GEN3_MDSEL clock.
 >
-> Disabling and re-enabling the controller entirely, instead of toggling the
-> PULLD_DIS bit, reliably generates a disconnect event.
->
-> The Linux driver works correctly because gadget_disconnect/gadget_connect
-> are always followed by gadget_udc_start/gadget_udc_stop. In U-Boot
-> pullup() is used solely.
->
-> This behavior has been observed on the SAM9X60-Curiosity and
-> AT91SAM9G25-EK boards and has been reported to Microchip.
+> Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
 
-I'm not against this, but the driver supports multiple gadget
-families according to the compatible.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-I'm wondering if this issue is reproduced on other atmel
-boards that are supported in U-Boot.
+nitpick: for a future submission, consider looking at the commit title
+for a particular file to have the same subject.
 
-Eugen, have you noticed the above limitation on a different
-board family that you maintain?
+$ git log --oneline -- drivers/clk/renesas/clk-rcar-gen3.c
 
-If this issue is chip specific, I think we should test for compatible in
-usba_udc_pullup() to only use USBA_ENABLE/USBA_DISABLE for this
-particular compatible (microchip,sam9x60-udc).
+Shows that most titles start with "clk: renesas", not "renesas:"
 
->
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
 > ---
->  drivers/usb/gadget/atmel_usba_udc.c | 9 ++-------
->  1 file changed, 2 insertions(+), 7 deletions(-)
+>  drivers/clk/renesas/clk-rcar-gen3.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-> index f9326f0a7e7d913bcf201ba3e4aeca9a099e7be7..a38e70957402fb3ade3de611d73e29b990d00703 100644
-> --- a/drivers/usb/gadget/atmel_usba_udc.c
-> +++ b/drivers/usb/gadget/atmel_usba_udc.c
-> @@ -521,16 +521,11 @@ usba_udc_set_selfpowered(struct usb_gadget *gadget, int is_selfpowered)
->  static int usba_udc_pullup(struct usb_gadget *gadget, int is_on)
->  {
->  	struct usba_udc *udc = to_usba_udc(gadget);
-> -	u32 ctrl;
-> -
-> -	ctrl = usba_readl(udc, CTRL);
+> diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/clk-rcar-gen3.c
+> index 375cc4a4930873ad0d5509c19ad04a0ea5545aa0..5745acf4023c9114f6fa13b5e4baa306c5b57d33 100644
+> --- a/drivers/clk/renesas/clk-rcar-gen3.c
+> +++ b/drivers/clk/renesas/clk-rcar-gen3.c
+> @@ -68,7 +68,7 @@ static int gen3_clk_get_parent(struct gen3_clk_priv *priv, struct clk *clk,
+>  		if (ret)
+>  			return ret;
 >  
->  	if (is_on)
-> -		ctrl &= ~USBA_DETACH;
-> +		usba_writel(udc, CTRL, USBA_ENABLE_MASK);
-
-Could we add a comment in the function as well? Something similar to
-what's in the commit message:
-
-/* Some chips don't reliably drive DP/DM lines to high impedance when
- * using the DETACH/PULLD_DIS bits.
- * To ensure a reliable disconnect, power cycle the controller instead
- */
-
-Feel free to rephrase your preference.
-
->  	else
-> -		ctrl |= USBA_DETACH;
-> -
-> -	usba_writel(udc, CTRL, ctrl);
-> +		usba_writel(udc, CTRL, USBA_DISABLE_MASK);
+> -		if (core->type == CLK_TYPE_GEN3_MDSEL) {
+> +		if (core->type == CLK_TYPE_GEN3_MDSEL || core->type == CLK_TYPE_GEN4_MDSEL) {
+>  			shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
+>  			parent->dev = clk->dev;
+>  			parent->id = core->parent >> shift;
+> @@ -318,6 +318,8 @@ static u64 gen3_clk_get_rate64(struct clk *clk)
+>  						"FIXED");
 >  
->  	return 0;
->  }
+>  	case CLK_TYPE_GEN3_MDSEL:
+> +		fallthrough;
+> +	case CLK_TYPE_GEN4_MDSEL:
+>  		shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
+>  		div = (core->div >> shift) & 0xffff;
+>  		rate = gen3_clk_get_rate64(&parent) / div;
 >
-> ---
-> base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
-> change-id: 20250602-pullup-83c5540db5cd
->
-> Best regards,
 > -- 
-> Zixun LI <admin@hifiphile.com>
+> 2.49.0
