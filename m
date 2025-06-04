@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2FF4C5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 14:49:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA69C5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 15:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00A7580584;
-	Wed,  4 Jun 2025 16:49:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 881768006D;
+	Wed,  4 Jun 2025 17:07:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="wB2q2tH4";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="V8EWpGxE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81D0D81E72; Wed,  4 Jun 2025 16:10:17 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2C91D80584; Wed,  4 Jun 2025 17:07:03 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160918070C
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 16:10:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB79B8004F
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 17:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-32a63ff3bdfso56697411fa.3
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 07:10:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1749046214; x=1749651014;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PUGb1zK+ThkpFEVHlex6qRblXBh2QTdAJDi79j8L+Bw=;
- b=wB2q2tH4V5lX8YlTp931DRw6eSKnlU9pxeOBYnFYKOpuukS47tECz7vYRlVcaP1f/f
- 9pBmT7OLKt/dFb59InK2hbzVkgktKxypLhPi/N8XqPUH439rKV7uAWvaBSyg9tyN62FC
- v0ULJ5qUpNhY0l6mrXVDVA4G9hxMpVvNrJFIbTUbqwN4/ep0B30nOpnehdH8JwDrbLsO
- jad9Tt/j++pgT7sikASrGMheMqorkytNAIqb/MAgaeaKQbvks8RGQqKIzHUC8evDrqq4
- HzrlBBP6SAkGrHeLnbyEGWLixfW8/WeA6VakdxvkWRFICI3ca61sae2dCOx0BePeXt8D
- xfng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749046214; x=1749651014;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PUGb1zK+ThkpFEVHlex6qRblXBh2QTdAJDi79j8L+Bw=;
- b=OgE6wVijW03oYSeeg2mS/+S6K+Y2IkoRAl7Q9DRbvBs44meC1JwABppYMvPChqB47b
- QMUKYltHypTm/HI8LDl+HDnPQaa68gT2Si0JVsxNCTZI8DOUDEx0z85fzJGagO8VE4VN
- M0z+Vuxvb/XobZNbwoIO2v0uyP9pr68oO1sMXq6qvcguOhRDvzhKIHbC0xlFKZK88o8K
- gM6yL/Awzb1RmUE1zeP1Mb0G14HZ9IiwOcBWzYiUJOpIynusmkuOsCuCD3WZRSlEKWyc
- yh2KOhmvhX1DiIukGnNoVN2eEvPsvTFIo0WF787WA0PhAYDUuCGDHvsTbLhgHgqeym8q
- GqUA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDsX5psvi8tFtgNaFYH1x1fvOn3alZWSS3akOwMPU3MePadpoP9bHSIxFEh5OyebPnrBX5xEE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzeqFTpWL5M1nEghXV27erSNvN+B8U/q7WloOK7mWegoSfBqRuD
- z+HhwxUvdTyCaS5whQ73NmZU3P+Q5r5cjxzX5kZaijjZbxiqv45xymbhPAoo0z6oVeTCzVbw3Ua
- Pq4XSfqT8mnf9JXRBBdb5LuY0peLmkvBOIN7FWoDZ0w==
-X-Gm-Gg: ASbGncs3MQblLBY8iZNw82A0wA0KpfYpBVczQqIQ4ya97gwsGhcQes/KWulsq3Omge+
- BhVQ+tso2ldD4KMUx8NF8lUdKJMXGx6PY/LcQTImelzxLAE0WB8AJYQkgBVxMnYwg+UlQI28ous
- ZBwPt54+Yz1h2W0gS0hvIER1kVMvbjY0K9
-X-Google-Smtp-Source: AGHT+IE2Jlt+85e0sr9lnX+AZP3rLtakUz72ITGMoEJI0QwdgcDieWrEe3jJVHHxNndJnhXYKoCsT42kEvjETq7xSHE=
-X-Received: by 2002:a2e:ad89:0:b0:32a:778d:be76 with SMTP id
- 38308e7fff4ca-32ac7268bfbmr10163401fa.26.1749046213944; Wed, 04 Jun 2025
- 07:10:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=8250fb800b=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 554ECtla014517;
+ Wed, 4 Jun 2025 17:06:51 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ xVsfdyy9zTvtGRsWTfOv8o9Yiiey14qPYk+JDzIdzsQ=; b=V8EWpGxEejcbVpH3
+ sLTVWbuisiQ40bGgPnO7Coob0c+IxEV7c/5nJ/EIlsC2SMBdHRmUSIHwris15SHe
+ 1UJsXuZc/Z28GjHRFGIsr2qQmoe4BtiEXR1KbHTal+OgmXmjfrziP6Wa02GcMUkP
+ Vi2g5ye9fkUgAhYI4ANDCK+SvvIcbskwK31KGR0NSbKsZp12VBKYzj8dFAdE+ASV
+ vDnT6RRFmAcjeioEJwy+zGzVP5w7/datnaTDSIB8lCDVLq/vcplu4E27ctMC9MZb
+ bmkaramCZeoYIx61Qm8C1VrN+OcyxuCTMnE+czPUy0U9KAXwp5GbNLNWN6ugFcE8
+ OdqQ0A==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g8vaax1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 04 Jun 2025 17:06:51 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AA1054002D;
+ Wed,  4 Jun 2025 17:05:05 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 335D3B272BD;
+ Wed,  4 Jun 2025 17:03:46 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Jun
+ 2025 17:03:45 +0200
+Message-ID: <6c8b029d-a4a0-43e6-a229-89c6f0583553@foss.st.com>
+Date: Wed, 4 Jun 2025 17:03:44 +0200
 MIME-Version: 1.0
-References: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
- <87iklbuddu.fsf@kernel.org> <dd3a3cad-75df-43b7-862f-a51cacda3de6@linaro.org>
-In-Reply-To: <dd3a3cad-75df-43b7-862f-a51cacda3de6@linaro.org>
-From: Zixun LI <admin@hifiphile.com>
-Date: Wed, 4 Jun 2025 16:10:06 +0200
-X-Gm-Features: AX0GCFuYIeto-10NjSqw2ClHBXu4a2CKphmGP9lQFucKR0Ecm3SDDpLPKLxk6FU
-Message-ID: <CA+GyqeaPEiwu7b3E-Gm+QMntGgcAVufAhy3jXZ4DzL9O9GANLw@mail.gmail.com>
-Subject: Re: [PATCH] usb: gadget: atmel: reliably generate disconnect by
- disabling controller instead of toggling PULLD_DIS
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Mihai Sain <mihai.sain@microchip.com>,
- u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sandbox: solve undefined reference to pthread_kill symbol
+To: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, Raymond Mao
+ <raymond.mao@linaro.org>
+CC: <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Richard Henderson
+ <richard.henderson@linaro.org>, Adriano Cordova <adrianox@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, Jonathan Humphreys <j-humphreys@ti.com>, Sam
+ Edwards <cfsworks@gmail.com>, Prasad Kummari <prasad.kummari@amd.com>
+References: <20250603151401.1709532-1-raymond.mao@linaro.org>
+ <20250603154748.GG1382132@bill-the-cat>
+ <CAEfUkU+7BaEcmQ1NL2TSMLpHYQt1DhPLKZPtkB_Fd6u_Oq4qEA@mail.gmail.com>
+ <20250603192345.GL1382132@bill-the-cat>
+ <CAEfUkULmB2PckAKf+euT8Mj3ehirw-TjmNT20-+AfVy6SpRB=Q@mail.gmail.com>
+ <DADNW2131HYB.V2UGC24FOJJO@ti.com> <20250604135612.GN1382132@bill-the-cat>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250604135612.GN1382132@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 04 Jun 2025 16:49:31 +0200
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-04_03,2025-06-03_02,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,141 +105,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
 
-The case has been reported with No.01589331.
 
-In brief line high-impedance is not observed when both PULLD_DIS &
-DETACH bits are 1:
-- In unenumerated state (no cable attached) DP is still pulled up
-- In enumerated state, disconnection is not detected by host [1] [2]
-only by [3].
+On 6/4/25 15:56, Tom Rini wrote:
+> On Wed, Jun 04, 2025 at 03:33:31PM +0530, Anshul Dalal wrote:
+>> Hi Raymond,
+>>
+>> On Wed Jun 4, 2025 at 2:30 AM IST, Raymond Mao wrote:
+>>> Hi Tom,
+>>>
+>>> On Tue, 3 Jun 2025 at 15:23, Tom Rini <trini@konsulko.com> wrote:
+>>>>
+>>>> On Tue, Jun 03, 2025 at 02:00:23PM -0400, Raymond Mao wrote:
+>>>>> Hi Tom,
+>>>>>
+>>>>> On Tue, 3 Jun 2025 at 11:47, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>
+>>>>>> On Tue, Jun 03, 2025 at 08:13:58AM -0700, Raymond Mao wrote:
+>>>>>>
+>>>>>>> This patch is to solve the sandbox building error:
+>>>>>>> $ make O=build-sandbox -s sandbox_defconfig
+>>>>>>> $ make O=build-sandbox -s -j2
+>>>>>>> /usr/bin/ld: /tmp/u-boot.27rzOu.ltrans58.ltrans.o: undefined reference to symbol 'pthread_kill@@GLIBC_2.2.5'
+>>>>>>> /usr/bin/ld: /lib/x86_64-linux-gnu/libpthread.so.0: error adding symbols: DSO missing from command line
+>>>>>>> collect2: error: ld returned 1 exit status
+>>>>>>> [...]
+>>>>>>>
+>>>>>>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>>>>>>> ---
+>>>>>>>  arch/sandbox/config.mk | 2 +-
+>>>>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>>>
+>>>>>> OK, but how do you get this failure to start with? What host?
+>>>>> It failed when I started any sandbox unit test like:
+>>>>> ./test/py/test.py --bd sandbox --build -k <any_test>
+>>>>> My local host: Ubuntu v20.04, x86_64
+>>>>
+>>>> We don't see that normally, is there something odd about your compilers?
+>>>> This is the kind of thing which should be failing everywhere, but isn't.
+>>>> Thanks.
+>>>>
+>>> This failure occured in my host since v2025.07-rc1, but with the same
+>>> host, same setup and same instructions it worked fine in v2025.04-rc5.
+>>> Seems that some impacts were introduced during v2025.04-rc5 ~
+>>> v2025.07-rc1, which might be worth investigating.
+>>>
+>>
+>> I am unable to reproduce the issue on gcc 15.1.1 and glibc 2.41. I think
+>> the issue is likely on your host end.  What compiler and libc are you
+>> using for the build?
+> 
+> This feels like if it's generic, CI should be blowing up too, even if
+> it's Ubuntu 22.04 not 20.04 these days. Please bisect down to the
+> failure, since you have known good/bad commits and 'git bisect run' can
+> use the test case you have.
+> 
+Hi 
 
-The test has been done in 3 ways on SAM9X60-Curiosity and AT91SAM9G25-EK boards:
-- Modify UDPHS_CTRL on u-boot-at91 with mw command
-- Modify UDPHS_CTRL on
-linux4sam-poky-sam9x60_curiosity-headless-2024.10 with devmem2 utils
-- On linux-mchp 6.6, comment out gadget_udc_start/stop in
-soft_connect_store() of drivers/usb/gadget/udc/core.c,
-leaving only gadget_connect/disconnect. Then run echo disconnect >
-/sys/class/udc/500000.gadget/soft_connect
+I got exactly the same issue on my Ubuntu 20.04 when trying to compile sandbox.
+b989f9ed9fe1 ("test: lib: add initjmp() test") is the the commit which is causing this issue.
 
-Host used:
-1. AMD Ryzen 5800H native port, Linux 6.14
-2. Intel i7-8750H native port, Windows 10
-3. Genesys GL3523 hub attached to [1]
+Until now, i am still using the default gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0.
 
-Zixun LI
+Thanks
+Patrice
 
-On Jun 4, 2025, at 11:51, Eugen Hristev <eugen.hristev@linaro.org> wrote:
->
->
->
-> On 6/4/25 11:20, Mattijs Korpershoek wrote:
->>
->>  Hi Zixun,
->>
->>  Thank you for the patch.
->>
->>  On Mon, Jun 02, 2025 at 17:45, Zixun LI <admin@hifiphile.com> wrote:
->>
->>  I'm surprised that checkpatch.pl does not catch this, but the subject
->>  (title) is too long (it should be less than 70 chars):
->>  https://docs.u-boot.org/en/latest/develop/sending_patches.html#commit-message-conventions
->>
->>>
->>>  Contrary to the datasheet, setting both DETACH and PULLD_DIS bits to 1
->>>  does not always drive the DP and DM lines to high-impedance. This
->>>  prevents the host from reliably detecting a USB disconnect and subsequent
->>>  reconnect.
->>>
->>>  The symptom is that the first gadget command (e.g., dhcp) succeeds, while
->>>  subsequent commands (e.g., nfs) fail.
->>>
->>>  Disabling and re-enabling the controller entirely, instead of toggling the
->>>  PULLD_DIS bit, reliably generates a disconnect event.
->>>
->>>  The Linux driver works correctly because gadget_disconnect/gadget_connect
->>>  are always followed by gadget_udc_start/gadget_udc_stop. In U-Boot
->>>  pullup() is used solely.
->>>
->>>  This behavior has been observed on the SAM9X60-Curiosity and
->>>  AT91SAM9G25-EK boards and has been reported to Microchip.
->>
->>
->>  I'm not against this, but the driver supports multiple gadget
->>  families according to the compatible.
->>
->>  I'm wondering if this issue is reproduced on other atmel
->>  boards that are supported in U-Boot.
->>
->>  Eugen, have you noticed the above limitation on a different
->>  board family that you maintain?
->
->
-> I have not seen this before, or don't remember about it.
->
-> Adding Mihai from Microchip team to see if we can get more info, whether
-> this is a general gadget thing or it's specific to these chipsets. If it
-> was reported to Microchip it would be interesting to see the response.
->
-> Eugen
->
->>
->>  If this issue is chip specific, I think we should test for compatible in
->>  usba_udc_pullup() to only use USBA_ENABLE/USBA_DISABLE for this
->>  particular compatible (microchip,sam9x60-udc).
->>
->>>
->>>
->>>  Signed-off-by: Zixun LI <admin@hifiphile.com>
->>>  ---
->>>   drivers/usb/gadget/atmel_usba_udc.c | 9 ++-------
->>>   1 file changed, 2 insertions(+), 7 deletions(-)
->>>
->>>  diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
->>>  index f9326f0a7e7d913bcf201ba3e4aeca9a099e7be7..a38e70957402fb3ade3de611d73e29b990d00703 100644
->>>  --- a/drivers/usb/gadget/atmel_usba_udc.c
->>>  +++ b/drivers/usb/gadget/atmel_usba_udc.c
->>>  @@ -521,16 +521,11 @@ usba_udc_set_selfpowered(struct usb_gadget *gadget, int is_selfpowered)
->>>   static int usba_udc_pullup(struct usb_gadget *gadget, int is_on)
->>>   {
->>>    struct usba_udc *udc = to_usba_udc(gadget);
->>>  - u32 ctrl;
->>>  -
->>>  - ctrl = usba_readl(udc, CTRL);
->>>
->>>    if (is_on)
->>>  -  ctrl &= ~USBA_DETACH;
->>>  +  usba_writel(udc, CTRL, USBA_ENABLE_MASK);
->>
->>
->>  Could we add a comment in the function as well? Something similar to
->>  what's in the commit message:
->>
->>  /* Some chips don't reliably drive DP/DM lines to high impedance when
->>   * using the DETACH/PULLD_DIS bits.
->>   * To ensure a reliable disconnect, power cycle the controller instead
->>   */
->>
->>  Feel free to rephrase your preference.
->>
->>>
->>>    else
->>>  -  ctrl |= USBA_DETACH;
->>>  -
->>>  - usba_writel(udc, CTRL, ctrl);
->>>  +  usba_writel(udc, CTRL, USBA_DISABLE_MASK);
->>>
->>>    return 0;
->>>   }
->>>
->>>  ---
->>>  base-commit: 4d3b5c679bc9d5c6cbbeedcc1e4a186f1cc35541
->>>  change-id: 20250602-pullup-83c5540db5cd
->>>
->>>  Best regards,
->>>  --
->>>  Zixun LI <admin@hifiphile.com>
->
->
