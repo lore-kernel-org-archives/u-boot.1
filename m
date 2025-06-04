@@ -4,67 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1F8C5B559
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 14:25:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FCD9C5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 14:27:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98AC482116;
-	Wed,  4 Jun 2025 16:25:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 32EE68091A;
+	Wed,  4 Jun 2025 16:27:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1749047150;
-	bh=awamhgP8oDY21kSVeNfREYPDJwFRoyo//2W96II1Nbg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Hgy/TIs/c9Y1v1ZZY0jfPNQzELm5ENrDk7NYfbtct7jRO7TFkRb1gAjnkcKIPVrDr
-	 mrFI8KkSQLlPUold7Kfy2i9nHbaA8bwv/SBek3l4pnmoGrYbCNJ3/XnY4kyXi/nqKF
-	 FJEq+3XiuUFOtByJkbarnQHTLPeMk/XXd4hDZqaDoR2tlcOinzWKUtvKNohrVPN4vs
-	 aykim+nMTBto3TEQoQqiztzyEnOjjjQydVlfBdz0HfBPJPWVb/6bBPVBqnfKXyblIz
-	 C67GKWOvwCCJRUmgfRDhtZdGr3voktY0/oNWOuUyKsGYxWsuv1j24kAbmANUATYKqc
-	 Cg3J5sHTiz5EQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="PZAMvhpw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42A0D81E72; Wed,  4 Jun 2025 16:25:49 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id DC17481E25; Wed,  4 Jun 2025 16:27:35 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2070e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::70e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01EB080584
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 16:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 189998070C
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 16:27:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="csA44+gr"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 18DD710397298; 
- Wed,  4 Jun 2025 16:25:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1749047146; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=awamhgP8oDY21kSVeNfREYPDJwFRoyo//2W96II1Nbg=;
- b=csA44+grA5TOXRXsLRY0EtrzoPh+8CW6XixG26ep+IC86PW4rjMTsC3k3D9CXzz0yafcgB
- LV1BNmo3zybk6J/zRNbtR5Wsm87hBBIwne0ZHwBovfNFOJrCb8vOUkhOu8SNlWSieSO31I
- k80XXSMPEIhF3Z75JdDQpr9QSufUoYrox6Nami3PuRHagvRydGwcqHYWUNo6JC1lEJMhfr
- wHLBtZ43/63jZht2227wyFJME6x+GBk7mtnXfa0MTEMfMVaESPmfM3j6hv55PG2lh1haW9
- lPAm2K9XO9X5R7SzfDeaMMKeWDO0FwU6n81ZxcB4KfnLtVnic+qUrafosFrhmA==
-Date: Wed, 4 Jun 2025 16:25:42 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Anshul Dalal
- <anshuld@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] ARM: imx: mxs: Add support for imx287 based BTT devices
-Message-ID: <20250604162542.34cccdeb@wsk>
-In-Reply-To: <CAOMZO5BXe_vPSf5iK6q3CP8=UqOU3YtYabE6SXBGuF+qhOUvYg@mail.gmail.com>
-References: <20250604115437.169451-1-lukma@denx.de>
- <CAOMZO5BXe_vPSf5iK6q3CP8=UqOU3YtYabE6SXBGuF+qhOUvYg@mail.gmail.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Sp5gi3lIwfByI6DkNygcmMijf0q2FWlVczS6+tOXRRhCxH/M6kWpvaeeP92/oSaQW4QC8LaVt6cnUHCJunqcPnC63yq/DnB2RNsRUz2xUwYRKO+YY+a/WJr6AVlOvQFZcTELS+MEnjPwUwWEkg6FYcE5DasEzYiVlzKkCUtAbemRo1T0izIsyIR3WSlQU/ZnbRwEy376vdNh8RyhoTbTbCp07yt8oFi+aIhxXW4t9yaPwIz92TDI0u8vJ7Lysy0t4hmg+8QxF6osaaQbQAwOYGTm8dZBdr8LziBgOs8LQ9DCMp4EKA2CAraUWSeMWM3p449Mzte1ghMsy5UYWpxwXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=00AUNZL6c0GngA+JiXFGVdgqzqfVS+1xVxwDiAVbHso=;
+ b=G+pqEf3Ed/eGs8BZCB2w4N1kCzumgt8HoklcjH07HzlAKZJAN8AdfbpgSz49ycOOe+FNSKuLFPvz7RQ3gznmaj8f/g8CuJ901TBT5gi91c8GA6nJwVEgovXAlyoP7mH32OoNQXQ6xJeR/2ta3CrfdPrNYhCvCVTgTnPaMBYtSAn3pFb2BeZ/ofbPgf8Jrb8tegMprRnOwUX+FGFMQAnkjuzJfCDqVrFs7Q8+JLjZr1wE71LmUX0wz+z4cGBDtOifvLGTUd9HUM7i2p3SqtaoZTDP3kXqyad2kWwf1BSQtY0Tr+SBeeSCB7rTT7fvxzHr37AXu1rvjfBWUqiKaBFZaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=00AUNZL6c0GngA+JiXFGVdgqzqfVS+1xVxwDiAVbHso=;
+ b=PZAMvhpwYSP9kgZZW0p4aYzrALqMNeqK+jE4vJg3r0MBiQBe9NYwGDzI9tsrt+DcVsrhrnhfQ7G2J7OeU6eD1Z19G7GCUQg4pNUmKjajrF8mXfVI0Laa3cRqUzUwvfJgNj0BGy9n4YjCP4QSoqS/f2N0IVFc4nJFGVM5tGmYDwJqO3tU0RZ0bk7HtNfNlw2ul3UKK5Z4VxjGqO/tDQodKZRoJ/E5n5CtQwAcKGLM9iGnTaX4ixvkL7klwKpit8Hn0o0nTn6ObNKqPrhwidr1PWImeh0Hp+H79cY3I8kdknzkkarHmYZPemgxIzMUCtjZ/ImpJ/Ny7DcJ33iddzKzPQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by GV1P195MB1972.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:9b::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.32; Wed, 4 Jun
+ 2025 14:27:29 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%4]) with mapi id 15.20.8792.034; Wed, 4 Jun 2025
+ 14:27:29 +0000
+Message-ID: <1853ec06-ee58-4593-915f-aa900eee6cac@phytec.de>
+Date: Wed, 4 Jun 2025 17:27:27 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] bootstd: Add implementation for bootmeth rauc
+To: Martin Schwan <m.schwan@phytec.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20250604-wip-bootmeth-rauc-v3-0-f9fad913c57e@phytec.de>
+ <20250604-wip-bootmeth-rauc-v3-1-f9fad913c57e@phytec.de>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250604-wip-bootmeth-rauc-v3-1-f9fad913c57e@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P195CA0059.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:5a::48) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/6248uRpuZy4M8VKbl_OaNe6";
- protocol="application/pgp-signature"; micalg=pgp-sha512
-X-Last-TLS-Session-Version: TLSv1.3
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|GV1P195MB1972:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72a7e6ff-e241-4956-3c36-08dda373ef62
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YTh2Zld0MExtUEdzMnJaR1BnVkdlQ3Y4YTI0VTJ3UmpMdDVKbmRRWnVCNjZm?=
+ =?utf-8?B?enFBTnFiRVdYWWRldXBndS9Tc24va2toWnJETzdiWStBZ1JNOWl4bHVQSDVN?=
+ =?utf-8?B?QjU1LzhiVXZLTVllTGs3MDlITW1JTmJVa3ZmZENkeVpWT1h4WUxQV0NtRExT?=
+ =?utf-8?B?QlZCdnVrR1p5YVBGSnJKa3hCK2JQZ0poQ3NSem13and6ZncxUHlSUm9sSXQz?=
+ =?utf-8?B?VnZwTld3czZ5cGJEWjdNL2R6VXYrUGJDTFp2dzNwbXdFc0kyMzNybXMzYlF1?=
+ =?utf-8?B?SXZKL09sNmpDUUhGSUYxQ3VXQjRKSTdQei84L0ZuMmdQelBNSFhqYWhnZURl?=
+ =?utf-8?B?MjE2eVJqQ3lFUDZ1UWhLcmhWZ2NrWG8xQ253Q0tha1dRcDR4d25PdFVWc1R3?=
+ =?utf-8?B?eVd3NGM2SHZETDJLZXJMMUUwWWFwWW5uVDRTTFd2Qm1ZM3pSelVQeEF6dk9h?=
+ =?utf-8?B?U2ROaGRrWUVnRkxCMXVUb09JS1FjT1VOVnRaRWFTRGczTEMxVUJWbmhUZVB5?=
+ =?utf-8?B?UzJGanA1eXBSMmZUckJ4d0Q1YU1lNzA1U3A0UjdSTGRkZnRUZmMrU1RPTWVQ?=
+ =?utf-8?B?TG4za0hvbUh3RDY4bm9JUWNxSUlHcEljQTFlZWdRN3hNd0Y5T2tNeUUxQjg4?=
+ =?utf-8?B?aWk0elFxNnh0MzJ2NWp0MGViNlVWN3RVVldTeHJPK3gwWkVhS28rR0JGcHJ0?=
+ =?utf-8?B?eEErWGpSTHZiMzFoQ1FFbXNPNDhna2tJZGFucWdPQlJOa1owTnRhNWtDQXI0?=
+ =?utf-8?B?ZUF4b2NUdlB3czBkZnZraGpaOUozcnFwRVdnT3JDQVZ4VUFkWTh5b1ZpeVdV?=
+ =?utf-8?B?emZvckt1M1VlZGsxc1pLcG81YUNZcWVHTXQrZDMyRFhIUE00L2Z6VmNGRUtY?=
+ =?utf-8?B?WVdIUW9vcld2MDcrdi9JOElCZGhiVlk2aTlJZDRiaUNTRGlncmtDbG02amh5?=
+ =?utf-8?B?OHZlRUJ1ZlJuWnlDS3VPWGFHaWxTU0Z2c3lBK1BtVG9XNVRHTHdNY3VabzRj?=
+ =?utf-8?B?QVlhdmdYNjN5MDVnYldGdTZ2SVMyTTk5bWdZY1g4QjdJOStXRzdlQllHOXRH?=
+ =?utf-8?B?Z3NiMU9zMDYrSFl2V0h5NU5QWCtPU3dOOFlQWmRoaDdINGQyUFJJQWpJcVEy?=
+ =?utf-8?B?SFR1R3BCdHVmMXhBM2RReFlEU1RsaHhyVWpDQytUQU9hc2dNK2ZQTU9xYlU2?=
+ =?utf-8?B?Rm5sYkJEODM4TmJHdVRwZnpsMTRZOWN0SGV4Y1doNlNuSkxKTUNwU2dDQnBX?=
+ =?utf-8?B?K1M3REZxRFNUZjR3WXNVekdCQTlZTTR3UWp0TyszZzBPVUdoa1VQUVRTTmFx?=
+ =?utf-8?B?MXM5TE00WVFrSHUvbEorSnRmSlFnMDNGOHVQZzl5NDF4NkxtRSs3OHZtYnJv?=
+ =?utf-8?B?NDlod2ZNV2tHUXg0cEtmd3VxVXJzUUIxWjlVamVBakFKbjRGT3ptaVprV1N2?=
+ =?utf-8?B?Y3lPWnVJOHk4NUdGN0VGYW9oSmRGWDFRUHZMYXhMb3ZrL1lqNlZKc2dxMDA5?=
+ =?utf-8?B?NVN6S2lBUXBXQ3R2NTV3NXM2UkRPa25wd2dmaitPYU0vL1hUa0RqK3l0NzZF?=
+ =?utf-8?B?VWhkOEhJY1gxUlBNUTZJcVBMMXdNNzR2MGV3b0o2NnU3TTVWekpSM0ROUDhM?=
+ =?utf-8?B?M0lLWUlqOU5Nc2dFcUd0UWRRWTZOMHpVc21LVE91WlRwSGtOcFNIZ0ZEQ3V2?=
+ =?utf-8?B?WDZNYktlL2xrbW4xMXI5QnR0Rm04V3R6Sk1HWWRwQnBxb1czTG8vazZONldK?=
+ =?utf-8?B?Y2pVRzdwczlBWkc3Q0s1YWJmbzU3Yk5KcEttejNadEdoOGFoQXczOWdZK0dh?=
+ =?utf-8?Q?6/qWlLTEa4eG/TmdszOqrkH4rem7TOOQ6RWoE=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dktQbE81aUtWTXNlNXhQNnRCUkE2ZFg4bWkrdzJLUzQ4OEorY3c0QXRKaEZ2?=
+ =?utf-8?B?ZnhXRUNVN29iT0tGMTY5bytvSmNGcWlrL3hPWTZ6QUNhd3VURjlMSDhFaW4w?=
+ =?utf-8?B?QWNXSjZKRGVkdHZ0dzYrOS9WcWtLeWtKTUttS2xnbWpkOEhjMUJBcStkY3BY?=
+ =?utf-8?B?Z3RvS1V2bjQraTF3NE9nSDVSZGhSVG5rZWpXbkVBWVFNSDRXMTBrMXJ0QnFI?=
+ =?utf-8?B?ekpuWWNQci8zMHBUY2tTbEtWL2xOUUlLWWY4YStpMkdoYXZiSVBFS3lPeUE4?=
+ =?utf-8?B?bWlIckN6aVZsQ2ZlWXRIaTVmdlpiT25aMm9xNXdXbGJOemJ5TnZvYjRGSzFp?=
+ =?utf-8?B?RS9ZMzY0aUkybnRxV0VsdHZQRnRFb1pzak1jQnM1V3huT2JIMmlxTmtycEJz?=
+ =?utf-8?B?N09nL3pBV0pZTFlIbXJYUmpqcjJOSEFtQzlNQ2VuQlVaUUlldWJHWWswYXRj?=
+ =?utf-8?B?Nm02UDVRVUxGZzRkc0xBY3pGdERQdFpLZzhoRCtTZTlpNFp1UzFLNDhTUWwv?=
+ =?utf-8?B?RVFCUTVlYWxIVm4vWnM5eCsxb2VmVStVeHdVeUNnZnVlWTEzZ2J5L09JS243?=
+ =?utf-8?B?SVRzNFNNb2FyMGlaMUMwQ1VlN2NaSmpmK3NSYlZyQVBwYUpNaExsbWZVTGxk?=
+ =?utf-8?B?VFB3RjZMZ21MUnd5Q3o2a1JtVHRxMVBFbEZuMSttTmpBS3ZYWHJPZjNCdW80?=
+ =?utf-8?B?dXJWcGluZ3B3UXVYVEJpR3ZwZk1RbnBwMzNwV2ZtZWpyUmt4Yy9qdHZWbWFi?=
+ =?utf-8?B?MysyYnFQdHp2UFVENkJJTktkdTV4N1NqWlZkSHltNU04N3ZobXpBWEhSRmV2?=
+ =?utf-8?B?akFGWEtyUEwwcFh0UERmYzk0SjdoSzVBNmltZ0tPOGlEODd3YzgzaEh3Vm8v?=
+ =?utf-8?B?TC9Fbk5JYzM0cXpkZFRkZlpveklWWXZaMWxyVTFPQ09BcGpKL0xHeXhvUjdv?=
+ =?utf-8?B?WmZYenBSa29TK2xMdmk2clh1NWxiQmFEZFhHTWRBMDBrUlJITWg3d2tIMEcv?=
+ =?utf-8?B?SlRBSlloN2s1OEt6TmdaeXNad0dSZnJHRVVVbjYwTFcxSHBtcjJWTk04MjVi?=
+ =?utf-8?B?aXN2ai9oVTBKVTFJL05wcENjeTBPVXdXZHRhYmREQjJWUmhmWndsZTQvaUhU?=
+ =?utf-8?B?cmVMVUhnQXVmc3RKdklSWFVuYjZ1ZHNIcnUyZVF3aUhaMXB1L1I5dFV3Unkv?=
+ =?utf-8?B?YTVuQmlJa2ozallGZ2V4emtheUhwYytDSXFITnVqZkp6SDhUNE1jVEwwanFo?=
+ =?utf-8?B?WVpQWW1LVXEraC9JM2NBUGxoL1A1cUQvOVJtMEwrTFh0cjduTzBlMFBBNmFH?=
+ =?utf-8?B?L01GR3VFZzVVLy85VmdmUDI3Z0J3NFpLdlBzNkp1cTJod3hscVIwSnlBQ3Nr?=
+ =?utf-8?B?dzJPWjM0dWdMTHpMY1VkMzZRcFdoY3oxWG9nUGkwdmtNTFBzaWNnb2dRVGhR?=
+ =?utf-8?B?djVsd1o5VitYTVp3dUx1aU9yUDlZdXJKT2dqSWczQjgwRitaY2hEWGJySy9I?=
+ =?utf-8?B?SFNHQ3F0QnNKbHk1WGtDenNUVkhHRXRINUg5Tlo1ZTVLUlpHcHVQa1VUOTNB?=
+ =?utf-8?B?a3YvOC9YVFZIaTNVYkhHZjYrODNiRktOK0UzSFpiRElUMk5YbGg4eTVCRWN1?=
+ =?utf-8?B?eGR5dUNyNHpxdHl1bzArVHEyUzQva2htUVVrKzNQRU9ZWlNTQ0lmRTZiQWo2?=
+ =?utf-8?B?TnVzbGRMNlg4Y05kN0MzZ1R2RGJlMTM4ZHB0WkZOM09kRzVDZDYybEFuNGV3?=
+ =?utf-8?B?ZjBzNjkxS1pxaEx4R05CdVBwamhIYllEUVFxZjJ3YmJMaGdvSmJmSTMyL3VQ?=
+ =?utf-8?B?UnBTVTVqbFZmbXhYTHdaMU15MHpuL3QrUS9nU296eXUveHdCWGdyUVp6ckx0?=
+ =?utf-8?B?TU9VMkhZOEdMZ3UvZUFIYzhrc0loTGcyTUw3bEVwWTFScC9zaWtZRlh3Nno1?=
+ =?utf-8?B?dU0wcW9PNERxRkhvcjVLOS9iSjNSZHpWdkU4aFpMQjUrS2JuZjdjMHpBcmUw?=
+ =?utf-8?B?bjU5VUtwVDFvTndaQjBBTGlvbFU4YWxOU29iUnBER1pRUi84cXV5MWNxaGU1?=
+ =?utf-8?B?YnV6MExSYTNsUWpvNjFFcDhudTlKOU45NTBvcHh1Ump5UmY2ckNBV25JekVH?=
+ =?utf-8?Q?0zBxvL+UHSIN90hhBsiDwGF7e?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72a7e6ff-e241-4956-3c36-08dda373ef62
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 14:27:29.1747 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: GywsOzVy6HJSiJG6ebjMDP3z4jXj6PKlqQ+LDdkqI+luTon07i618cMJ+Y6NNGsXhtvKhyJ9Io01+Kk+itcmOg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB1972
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,518 +173,533 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/6248uRpuZy4M8VKbl_OaNe6
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Am 04.06.25 um 15:15 schrieb Martin Schwan:
+> Add a bootmeth driver which supports booting A/B system with RAUC as
+> their update client.
+> 
+> Signed-off-by: Martin Schwan <m.schwan@phytec.de>
 
-Hi Fabio,
+Tested-by: Wadim Egorov <w.egorov@phytec.de>
 
-> Hi Lukasz,
->=20
-> On Wed, Jun 4, 2025 at 8:55=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
-ote:
->=20
-> > +source "board/liebherr/btt/Kconfig"
-> >  source "board/freescale/mx28evk/Kconfig"
-> >  source "board/liebherr/xea/Kconfig" =20
->=20
-> Please keep the entries sorted.
+phycore-am62x log: https://pastebin.ubuntu.com/p/Sh9rXqPbgX
 
-Ok.
+> ---
+>   boot/Kconfig         |  51 ++++++
+>   boot/Makefile        |   1 +
+>   boot/bootmeth_rauc.c | 432 +++++++++++++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 484 insertions(+)
+> 
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 30eb5b328d7ad8a73a2e84812dd7853b66039164..a610cf9faf99cd5480f94dcac89c3401cca394ae 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -855,6 +855,57 @@ config EXPO
+>   	  The expo can be presented in graphics form using a vidconsole, or in
+>   	  text form on a serial console.
+>   
+> +config BOOTMETH_RAUC
+> +	bool "Bootdev support for RAUC A/B systems"
+> +	default y if BOOTSTD_FULL
+> +	depends on CMDLINE
+> +	select BOOTMETH_GLOBAL
+> +	select HUSH_PARSER
+> +	help
+> +	  Enables support for booting RAUC A/B systems from MMC devices. This
+> +	  makes the bootdevs look for a 'boot.scr.uimg' or 'boot.scr' in the
+> +	  respective boot partitions, describing how to boot the distro.
+> +
+> +if BOOTMETH_RAUC
+> +
+> +config BOOTMETH_RAUC_BOOT_ORDER
+> +	string "RAUC boot order"
+> +	default "A B"
+> +	help
+> +	  Sets the default boot order. This must be list of space-separated
+> +	  strings naming the individual boot slots. Each entry in this string
+> +	  should correspond to an existing slot on the target's flash device.
+> +
+> +config BOOTMETH_RAUC_PARTITIONS
+> +	string "RAUC boot and root partitions indexes"
+> +	default "1,2 3,4"
+> +	help
+> +	  Sets the partition indexes of boot and root slots. This must be a list
+> +	  of comma-separated pair values, which in turn are separated by spaces.
+> +	  The first value in pair is for the boot partition and second for the
+> +	  root partition.
+> +
+> +config BOOTMETH_RAUC_DEFAULT_TRIES
+> +	int "RAUC slot default tries"
+> +	default 3
+> +	help
+> +	  Sets how many times a slot should be tried booting, before considering
+> +	  it to be bad.
+> +
+> +config BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES
+> +	bool "Reset slot tries when all RAUC slots have zero tries left"
+> +	default y
+> +	help
+> +	  When all slots have zero tries left or no valid slot was found, reset
+> +	  to the default boot order set by BOOTMETH_RAUC_BOOT_ORDER and set the
+> +	  slot tries to their default value specified by
+> +	  BOOTMETH_RAUC_DEFAULT_TRIES.
+> +
+> +	  This prevents a system from remaining in an unbootable state, after
+> +	  all slot tries were decremented to zero.
+> +
+> +endif # BOOTMETH_RAUC
+> +
+>   config BOOTMETH_SANDBOX
+>   	def_bool y
+>   	depends on SANDBOX
+> diff --git a/boot/Makefile b/boot/Makefile
+> index 71dafaefa76bca7896741dd896829575bd9e8f10..46f27e71856c598a866424cb93ee01444ea6a19a 100644
+> --- a/boot/Makefile
+> +++ b/boot/Makefile
+> @@ -32,6 +32,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_QFW) += bootmeth_qfw.o
+> +obj-$(CONFIG_$(PHASE_)BOOTMETH_RAUC) += bootmeth_rauc.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+>   obj-$(CONFIG_$(PHASE_)BOOTMETH_SCRIPT) += bootmeth_script.o
+>   obj-$(CONFIG_$(PHASE_)CEDIT) += cedit.o
+> diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..fc60e6e355dabef4d58bf1203997b41d99c536f9
+> --- /dev/null
+> +++ b/boot/bootmeth_rauc.c
+> @@ -0,0 +1,432 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Bootmethod for distro boot with RAUC
+> + *
+> + * Copyright 2025 PHYTEC Messtechnik GmbH
+> + * Written by Martin Schwan <m.schwan@phytec.de>
+> + */
+> +
+> +#define LOG_CATEGORY UCLASS_BOOTSTD
+> +
+> +#include <blk.h>
+> +#include <bootflow.h>
+> +#include <bootmeth.h>
+> +#include <bootstd.h>
+> +#include <dm.h>
+> +#include <env.h>
+> +#include <fs.h>
+> +#include <malloc.h>
+> +#include <mapmem.h>
+> +#include <string.h>
+> +#include <asm/cache.h>
+> +
+> +/* Length of env var "BOOT_*_LEFT" */
+> +#define BOOT_LEFT_LEN	(5 + 32 + 5)
+> +
+> +static const char * const script_names[] = { "boot.scr", "boot.scr.uimg", NULL };
+> +
+> +/**
+> + * struct distro_rauc_slot - Slot information
+> + *
+> + * A slot describes the unit of a bootable system consisting of one or multiple
+> + * partitions. This usually includes a root filesystem, kernel and potentially other
+> + * files, like device trees and boot scripts for that particular distribution.
+> + *
+> + * @name	The slot name
+> + * @boot_part	The boot partition number on disk
+> + * @root_part	The root partition number on disk
+> + */
+> +struct distro_rauc_slot {
+> +	char *name;
+> +	int boot_part;
+> +	int root_part;
+> +};
+> +
+> +/**
+> + * struct distro_rauc_priv - Private data
+> + *
+> + * @slots	All slots of the device in default order
+> + * @boot_order	String of the current boot order containing the active slot names
+> + */
+> +struct distro_rauc_priv {
+> +	struct distro_rauc_slot **slots;
+> +};
+> +
+> +static struct distro_rauc_slot *get_slot(struct distro_rauc_priv *priv,
+> +					 const char *slot_name)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; priv->slots[i]->name; i++) {
+> +		if (!strcmp(priv->slots[i]->name, slot_name))
+> +			return priv->slots[i];
+> +	}
+> +
+> +	return NULL;
+> +}
+> +
+> +static int distro_rauc_check(struct udevice *dev, struct bootflow_iter *iter)
+> +{
+> +	/*
+> +	 * This distro only works on whole MMC devices, as multiple partitions
+> +	 * are needed for an A/B system.
+> +	 */
+> +	if (bootflow_iter_check_mmc(iter))
+> +		return log_msg_ret("mmc", -EOPNOTSUPP);
+> +	if (iter->part)
+> +		return log_msg_ret("part", -EOPNOTSUPP);
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_scan_boot_part(struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc;
+> +	struct distro_rauc_priv *priv;
+> +	char *boot_order;
+> +	const char **boot_order_list;
+> +	bool exists;
+> +	int ret;
+> +	int i;
+> +	int j;
+> +
+> +	desc = dev_get_uclass_plat(bflow->blk);
+> +
+> +	priv = bflow->bootmeth_priv;
+> +	if (!priv || !priv->slots)
+> +		return log_msg_ret("priv", -EINVAL);
+> +
+> +	boot_order = env_get("BOOT_ORDER");
+> +	boot_order_list = str_to_list(boot_order);
+> +	for (i = 0; boot_order_list[i]; i++) {
+> +		exists = false;
+> +		for (j = 0; script_names[j]; j++) {
+> +			const struct distro_rauc_slot *slot;
+> +
+> +			slot = get_slot(priv, boot_order_list[i]);
+> +			if (!slot)
+> +				return log_msg_ret("env", -ENOENT);
+> +			ret = fs_set_blk_dev_with_part(desc, slot->boot_part);
+> +			if (ret)
+> +				return log_msg_ret("blk", ret);
+> +			exists |= fs_exists(script_names[j]);
+> +		}
+> +		if (!exists)
+> +			return log_msg_ret("fs", -ENOENT);
+> +	}
+> +	str_free_list(boot_order_list);
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	struct distro_rauc_priv *priv;
+> +	int ret;
+> +	char *slot;
+> +	int i;
+> +	char *partitions;
+> +	char *boot_order;
+> +	const char *default_boot_order;
+> +	const char **default_boot_order_list;
+> +	char *boot_order_copy;
+> +	char boot_left[BOOT_LEFT_LEN];
+> +	char *parts;
+> +
+> +	/* Get RAUC variables or set their default values */
+> +	boot_order = env_get("BOOT_ORDER");
+> +	if (!boot_order) {
+> +		log_debug("BOOT_ORDER did not exist yet, setting default value\n");
+> +		if (env_set("BOOT_ORDER", CONFIG_BOOTMETH_RAUC_BOOT_ORDER))
+> +			return log_msg_ret("env", -EPERM);
+> +		boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+> +	}
+> +	default_boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+> +	default_boot_order_list = str_to_list(default_boot_order);
+> +	for (i = 0; default_boot_order_list[i]; i++) {
+> +		sprintf(boot_left, "BOOT_%s_LEFT", default_boot_order_list[i]);
+> +		if (!env_get(boot_left)) {
+> +			log_debug("%s did not exist yet, setting default value\n",
+> +				  boot_left);
+> +			if (env_set_ulong(boot_left, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES))
+> +				return log_msg_ret("env", -EPERM);
+> +		}
+> +	}
+> +	str_free_list(default_boot_order_list);
+> +
+> +	priv = calloc(1, sizeof(struct distro_rauc_priv));
+> +	if (!priv)
+> +		return log_msg_ret("buf", -ENOMEM);
+> +	priv->slots = calloc(1, sizeof(struct distro_rauc_slot));
+> +
+> +	/* Copy default boot_order, so we can leave the original unmodified */
+> +	boot_order_copy = strdup(default_boot_order);
+> +	partitions = strdup(CONFIG_BOOTMETH_RAUC_PARTITIONS);
+> +
+> +	for (i = 1;
+> +	     (parts = strsep(&partitions, " ")) &&
+> +	     (slot = strsep(&boot_order_copy, " "));
+> +	     i++) {
+> +		struct distro_rauc_slot *s;
+> +
+> +		s = calloc(1, sizeof(struct distro_rauc_slot));
+> +		s->name = strdup(slot);
+> +		s->boot_part = simple_strtoul(strsep(&parts, ","), NULL, 10);
+> +		s->root_part = simple_strtoul(strsep(&parts, ","), NULL, 10);
+> +		priv->slots = realloc(priv->slots, (i + 1) *
+> +				      sizeof(struct distro_rauc_slot));
+> +		priv->slots[i - 1] = s;
+> +		priv->slots[i]->name = NULL;
+> +	}
+> +
+> +	bflow->bootmeth_priv = priv;
+> +
+> +	ret = distro_rauc_scan_boot_part(bflow);
+> +	if (ret < 0) {
+> +		for (i = 0; priv->slots[i]->name; i++) {
+> +			free(priv->slots[i]->name);
+> +			free(priv->slots[i]);
+> +		}
+> +		free(priv);
+> +		free(boot_order_copy);
+> +		bflow->bootmeth_priv = NULL;
+> +		return ret;
+> +	}
+> +
+> +	bflow->state = BOOTFLOWST_READY;
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_read_file(struct udevice *dev, struct bootflow *bflow,
+> +				 const char *file_path, ulong addr,
+> +				 enum bootflow_img_t type, ulong *sizep)
+> +{
+> +	/*
+> +	 * Reading individual files is not supported since we only operate on
+> +	 * whole MMC devices (because we require multiple partitions).
+> +	 */
+> +	return log_msg_ret("Unsupported", -ENOSYS);
+> +}
+> +
+> +static int distro_rauc_load_boot_script(struct bootflow *bflow,
+> +					const struct distro_rauc_slot *slot)
+> +{
+> +	struct blk_desc *desc;
+> +	struct distro_rauc_priv *priv;
+> +	struct udevice *bootstd;
+> +	const char *const *prefixes;
+> +	int ret;
+> +	int i;
+> +	int j;
+> +
+> +	ret = uclass_first_device_err(UCLASS_BOOTSTD, &bootstd);
+> +	if (ret)
+> +		return log_msg_ret("std", ret);
+> +	prefixes = bootstd_get_prefixes(bootstd);
+> +
+> +	desc = dev_get_uclass_plat(bflow->blk);
+> +	priv = bflow->bootmeth_priv;
+> +	if (!priv || !priv->slots)
+> +		return log_msg_ret("priv", -EINVAL);
+> +
+> +	bflow->part = slot->boot_part;
+> +	if (!bflow->part)
+> +		return log_msg_ret("part", -ENOENT);
+> +
+> +	ret = bootmeth_setup_fs(bflow, desc);
+> +	if (ret)
+> +		return log_msg_ret("set", ret);
+> +
+> +	for (i = 0; prefixes[i] && bflow->state != BOOTFLOWST_FILE; i++) {
+> +		for (j = 0; script_names[j] && bflow->state != BOOTFLOWST_FILE; j++) {
+> +			if (!bootmeth_try_file(bflow, desc, prefixes[i], script_names[j])) {
+> +				log_debug("Found file '%s%s' in %s.part_%x\n",
+> +					  prefixes[i], script_names[j],
+> +					  bflow->dev->name, bflow->part);
+> +				bflow->subdir = strdup(prefixes[i]);
+> +			}
+> +		}
+> +	}
+> +	if (bflow->state != BOOTFLOWST_FILE)
+> +		return log_msg_ret("file", -ENOENT);
+> +
+> +	ret = bootmeth_alloc_file(bflow, 0x10000, ARCH_DMA_MINALIGN,
+> +				  (enum bootflow_img_t)IH_TYPE_SCRIPT);
+> +	if (ret)
+> +		return log_msg_ret("read", ret);
+> +
+> +	return 0;
+> +}
+> +
+> +static int find_active_slot(char **slot_name, ulong *slot_tries)
+> +{
+> +	ulong tries;
+> +	char boot_left[BOOT_LEFT_LEN];
+> +	char *boot_order;
+> +	const char **boot_order_list;
+> +	bool slot_found = false;
+> +	int ret;
+> +	int i;
+> +
+> +	boot_order = env_get("BOOT_ORDER");
+> +	if (!boot_order)
+> +		return log_msg_ret("env", -ENOENT);
+> +	boot_order_list = str_to_list(boot_order);
+> +	for (i = 0; boot_order_list[i] && !slot_found; i++) {
+> +		sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
+> +		tries = env_get_ulong(boot_left, 10, ULONG_MAX);
+> +		if (tries == ULONG_MAX)
+> +			return log_msg_ret("env", -ENOENT);
+> +
+> +		if (tries) {
+> +			ret = env_set_ulong(boot_left, tries - 1);
+> +			if (ret)
+> +				return log_msg_ret("env", ret);
+> +			*slot_name = strdup(boot_order_list[i]);
+> +			*slot_tries = tries;
+> +			slot_found = true;
+> +		}
+> +	}
+> +	str_free_list(boot_order_list);
+> +
+> +	if (!slot_found) {
+> +		if (IS_ENABLED(CONFIG_BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES)) {
+> +			log_warning("WARNING: No valid slot found\n");
+> +			log_info("INFO: Resetting boot order and all slot tries\n");
+> +			boot_order_list = str_to_list(CONFIG_BOOTMETH_RAUC_BOOT_ORDER);
+> +			for (i = 0; boot_order_list[i]; i++) {
+> +				sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
+> +				ret = env_set_ulong(boot_left, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES);
+> +				if (ret)
+> +					return log_msg_ret("env", ret);
+> +			}
+> +			str_free_list(boot_order_list);
+> +			ret = env_save();
+> +			if (ret)
+> +				return log_msg_ret("env", ret);
+> +			do_reset(NULL, 0, 0, NULL);
+> +		}
+> +		log_err("ERROR: No valid slot found\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	struct blk_desc *desc;
+> +	struct distro_rauc_priv *priv;
+> +	const struct distro_rauc_slot *slot;
+> +	char *boot_order;
+> +	const char **boot_order_list;
+> +	char *active_slot;
+> +	ulong active_slot_tries;
+> +	char raucargs[64];
+> +	char boot_left[BOOT_LEFT_LEN];
+> +	ulong addr;
+> +	int ret = 0;
+> +	int i;
+> +
+> +	desc = dev_get_uclass_plat(bflow->blk);
+> +	if (desc->uclass_id != UCLASS_MMC)
+> +		return log_msg_ret("blk", -EINVAL);
+> +	priv = bflow->bootmeth_priv;
+> +
+> +	/* Device info variables */
+> +	ret = env_set("devtype", blk_get_devtype(bflow->blk));
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	ret = env_set_hex("devnum", desc->devnum);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Find active, valid slot */
+> +	ret = find_active_slot(&active_slot, &active_slot_tries);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Kernel command line arguments */
+> +	sprintf(raucargs, "rauc.slot=%s", active_slot);
+> +	ret = env_set("raucargs", raucargs);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Active slot info */
+> +	slot = get_slot(priv, active_slot);
+> +	if (!slot)
+> +		return log_msg_ret("env", -ENOENT);
+> +	ret = env_set_hex("distro_bootpart", slot->boot_part);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +	ret = env_set_hex("distro_rootpart", slot->root_part);
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +	ret = env_save();
+> +	if (ret)
+> +		return log_msg_ret("env", ret);
+> +
+> +	/* Load distro boot script */
+> +	ret = distro_rauc_load_boot_script(bflow, slot);
+> +	if (ret)
+> +		return log_msg_ret("load", ret);
+> +
+> +	log_info("INFO: Booting slot %s, %lu of %d tries left\n",
+> +		 active_slot, active_slot_tries, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES);
+> +
+> +	log_debug("devtype: %s\n", env_get("devtype"));
+> +	log_debug("devnum: %s\n", env_get("devnum"));
+> +	log_debug("distro_bootpart: %s\n", env_get("distro_bootpart"));
+> +	log_debug("distro_rootpart: %s\n", env_get("distro_rootpart"));
+> +	log_debug("raucargs: %s\n", env_get("raucargs"));
+> +	boot_order = env_get("BOOT_ORDER");
+> +	if (!boot_order)
+> +		return log_msg_ret("env", -EPERM);
+> +	log_debug("BOOT_ORDER: %s\n", boot_order);
+> +	boot_order_list = str_to_list(boot_order);
+> +	for (i = 0; boot_order_list[i]; i++) {
+> +		sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
+> +		log_debug("%s: %s\n", boot_left, env_get(boot_left));
+> +	}
+> +	str_free_list(boot_order_list);
+> +
+> +	/* Run distro boot script */
+> +	addr = map_to_sysmem(bflow->buf);
+> +	ret = cmd_source_script(addr, NULL, NULL);
+> +	if (ret)
+> +		return log_msg_ret("boot", ret);
+> +
+> +	return 0;
+> +}
+> +
+> +static int distro_rauc_bootmeth_bind(struct udevice *dev)
+> +{
+> +	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	plat->desc = "RAUC distro boot from MMC";
+> +	plat->flags = BOOTMETHF_GLOBAL;
+> +
+> +	return 0;
+> +}
+> +
+> +static struct bootmeth_ops distro_rauc_bootmeth_ops = {
+> +	.check		= distro_rauc_check,
+> +	.read_bootflow	= distro_rauc_read_bootflow,
+> +	.read_file	= distro_rauc_read_file,
+> +	.boot		= distro_rauc_boot,
+> +};
+> +
+> +static const struct udevice_id distro_rauc_bootmeth_ids[] = {
+> +	{ .compatible = "u-boot,distro-rauc" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(bootmeth_rauc) = {
+> +	.name		= "bootmeth_rauc",
+> +	.id		= UCLASS_BOOTMETH,
+> +	.of_match	= distro_rauc_bootmeth_ids,
+> +	.ops		= &distro_rauc_bootmeth_ops,
+> +	.bind		= distro_rauc_bootmeth_bind,
+> +};
+> 
 
->=20
-> > --- /dev/null
-> > +++ b/board/liebherr/btt/btt.c
-> > @@ -0,0 +1,449 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * BTT[3C] iMX28 board
-> > + *
-> > + * Copyright (C) 2025 DENX Software Engineering
-> > + * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-> > + */
-> > +
-> > +#include <fdt_support.h>
-> > +#include <init.h>
-> > +#include <log.h>
-> > +#include <net.h>
-> > +#include <asm/global_data.h>
-> > +#include <asm/gpio.h>
-> > +#include <asm/io.h>
-> > +#include <asm/arch/imx-regs.h>
-> > +#include <asm/arch/iomux-mx28.h>
-> > +#include <asm/arch/clock.h>
-> > +#include <asm/arch/sys_proto.h>
-> > +#include <linux/delay.h>
-> > +#include <linux/mii.h>
-> > +#include <miiphy.h>
-> > +#include <netdev.h>
-> > +#include <errno.h>
-> > +#include <usb.h> =20
->=20
-> Please double-check if all these are necessary. USB seems not to be
-> used on this file.
-
-Ok.
-
->=20
-> > +void spl_board_init(void)
-> > +{
-> > +       struct gpio_desc phy_rst, boot, rescue, wifi_en, bt_en;
-> > +       int ret, i;
-> > +
-> > +       /*
-> > +        * On the new HW version of BTTC/3 (with LAN8720ai PHY) the
-> > !RST pin
-> > +        * (15) is pulled LOW by external resistor. As a result it
-> > needs to be
-> > +        * set HIGH as soon as possible to allow correct generation
-> > of RESET
-> > +        * pulse.
-> > +        *
-> > +        * In the old BTTC (with TLK105 PHY) the RC circuit was
-> > used instead
-> > +        * to set the RESET pin to HIGH after 100us, so there was
-> > no need to
-> > +        * set it explicitly.
-> > +        */
-> > +       ret =3D dm_gpio_lookup_name("GPIO4_12", &phy_rst);
-> > +       if (ret)
-> > +               printf("Cannot get GPIO4_12\n");
-> > +
-> > +       ret =3D dm_gpio_request(&phy_rst, "phy-rst");
-> > +       if (ret)
-> > +               printf("Cannot request GPIO4_12\n");
-> > +
-> > +       dm_gpio_set_dir_flags(&phy_rst, GPIOD_IS_OUT |
-> > GPIOD_IS_OUT_ACTIVE); +
-> > +       /*
-> > +        * Explicitly set GPIO, which controls WL_EN (wifi) to LOW.
-> > On the BTT3
-> > +        * it is directly connected to Jody module without any
-> > externa pull up
-> > +        * down register.
-> > +        */
-> > +       ret =3D dm_gpio_lookup_name("GPIO0_27", &wifi_en);
-> > +       if (ret)
-> > +               printf("Cannot get GPIO0_27\n");
-> > +
-> > +       ret =3D dm_gpio_request(&wifi_en, "wifi-en");
-> > +       if (ret)
-> > +               printf("Cannot request GPIO0_27\n");
-> > +
-> > +       dm_gpio_set_dir_flags(&wifi_en, GPIOD_IS_OUT |
-> > GPIOD_ACTIVE_LOW |
-> > +                             GPIOD_IS_OUT_ACTIVE);
-> > +
-> > +       /*
-> > +        * Explicitly set GPIO, which controls BT_EN (Bluetooth) to
-> > LOW. On the
-> > +        * BTT3 it is connected to Jody module via RC circuit
-> > (after some R*C
-> > +        * time this pin is set to HIGH). However, the manual
-> > recommends setting
-> > +        * it high from LOW state.
-> > +        */
-> > +       ret =3D dm_gpio_lookup_name("GPIO3_27", &bt_en);
-> > +       if (ret)
-> > +               printf("Cannot get GPIO3_27\n");
-> > +
-> > +       ret =3D dm_gpio_request(&bt_en, "bt-en");
-> > +       if (ret)
-> > +               printf("Cannot request GPIO3_27\n");
-> > +
-> > +       dm_gpio_set_dir_flags(&bt_en, GPIOD_IS_OUT |
-> > GPIOD_ACTIVE_LOW |
-> > +                             GPIOD_IS_OUT_ACTIVE); =20
->=20
-> Since U-Boot does not support Wi-Fi/Bluetooth, should these pins be
-> configured in U-Boot?
->=20
-> Why can't the kernel take care of them instead?
-
-This board (and XEA also) uses falcon boot.
-
-In short - we use SPL, and then the Linux is called (uImage + dts).
-
-What I'm trying to solve here is to have _always_, no matter if we
-execute Linux from u-boot proper or directly from SPL, the same HW
-state.
-
-That is why some pins needs to be setup in SPL. Please also be aware,
-that there also can be a "recovery" system run from net or USB, which
-can also reboot the board (and we would need consistent state).
-
->=20
-> > +
-> > +       /* Address of boot parameters */
-> > +       gd->bd->bi_boot_params =3D PHYS_SDRAM_1 + 0x100;
-> > +
-> > +       cpu_eth_init(NULL);
-> > +
-> > +       /* PHY INT#/PWDN# */
-> > +       ret =3D dm_gpio_lookup_name("GPIO4_13", &phy_rst);
-> > +       if (ret) {
-> > +               printf("Cannot get GPIO4_13\n");
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret =3D dm_gpio_request(&phy_rst, "phy-rst");
-> > +       if (ret) {
-> > +               printf("Cannot request GPIO4_13\n");
-> > +               return ret; =20
->=20
-> Can't U-Boot DM handle the Ethernet PHY reset instead?
-
-Please see the above remark.
-
->=20
-> > + * NOTE:
-> > + *
-> > + * IMX28 clock "stub" DM driver!
-> > + *
-> > + * Only used for SPL stage, which is NOT using DM; serial and
-> > + * eMMC configuration.
-> > + */
-> > +static const struct udevice_id imx28_clk_ids[] =3D {
-> > +       { .compatible =3D "fsl,imx28-clkctrl", },
-> > +       { }
-> > +};
-> > +
-> > +U_BOOT_DRIVER(fsl_imx28_clkctrl) =3D {
-> > +       .name           =3D "fsl_imx28_clkctrl",
-> > +       .id             =3D UCLASS_CLK,
-> > +       .of_match       =3D imx28_clk_ids,
-> > +}; =20
->=20
-> A separate patch should add this.
-
-This shall stay IMHO, as this is a CLK stub for u-boot.sb (which in
-fact is very constrained in terms of size - IIRC < 40KiB). It is
-required for proper of_platform generation (*.c and *.h files) for SPL.
-
->=20
-> > +#define        MUX_CONFIG_LCD  (MXS_PAD_3V3 | MXS_PAD_4MA |
-> > MXS_PAD_NOPULL) +#define        MUX_CONFIG_BOOT (MXS_PAD_3V3)
-> > +#define        MUX_CONFIG_TSC  (MXS_PAD_3V3 | MXS_PAD_8MA |
-> > MXS_PAD_PULLUP) +#define        MUX_CONFIG_SSP0 (MXS_PAD_3V3 |
-> > MXS_PAD_12MA | MXS_PAD_PULLUP) +#define        MUX_CONFIG_SSP2
-> > (MXS_PAD_3V3 | MXS_PAD_4MA | MXS_PAD_PULLUP) +#define
-> > MUX_CONFIG_ENET (MXS_PAD_3V3 | MXS_PAD_8MA | MXS_PAD_NOPULL)
-> > +#define        MUX_CONFIG_EMI  (MXS_PAD_3V3 | MXS_PAD_12MA |
-> > MXS_PAD_NOPULL) =20
->=20
-> Indentation looks strange here.
-
-Ok, I will look on that.
-
->=20
-> > +
-> > +const iomux_cfg_t iomux_setup[] =3D { =20
->=20
-> static?
-
-Ok.
-
->=20
-> > +       /* AUART0 IRDA */
-> > +       MX28_PAD_AUART0_RX__AUART0_RX,
-> > +       MX28_PAD_AUART0_TX__AUART0_TX,
-> > +
-> > +       /* AUART 4 RS422 */
-> > +       MX28_PAD_AUART0_CTS__AUART4_RX,
-> > +       MX28_PAD_AUART0_RTS__AUART4_TX,
-> > +
-> > +       /* USB0 */
-> > +       MX28_PAD_AUART1_CTS__USB0_OVERCURRENT,
-> > +       MX28_PAD_AUART1_RTS__USB0_ID,
-> > +       MX28_PAD_LCD_VSYNC__GPIO_1_28, /* PRW_On */
-> > +
-> > +       /* USB1 */
-> > +       MX28_PAD_PWM2__USB1_OVERCURRENT,
-> > +
-> > +       /* eMMC */
-> > +       MX28_PAD_SSP0_CMD__SSP0_CMD | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA0__SSP0_D0 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA1__SSP0_D1 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA2__SSP0_D2 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA3__SSP0_D3 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA4__SSP0_D4 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA5__SSP0_D5 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA6__SSP0_D6 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DATA7__SSP0_D7 | MUX_CONFIG_SSP0,
-> > +       MX28_PAD_SSP0_DETECT__GPIO_2_9, /* Reset for eMMC */
-> > +       MX28_PAD_SSP0_SCK__SSP0_SCK | MUX_CONFIG_SSP0,
-> > +
-> > +       /* DIG Keys */
-> > +       MX28_PAD_GPMI_D00__GPIO_0_0,
-> > +       MX28_PAD_GPMI_D01__GPIO_0_1,
-> > +       MX28_PAD_GPMI_D02__GPIO_0_2,
-> > +       MX28_PAD_GPMI_D03__GPIO_0_3,
-> > +       MX28_PAD_GPMI_D04__GPIO_0_4,
-> > +       MX28_PAD_GPMI_D05__GPIO_0_5,
-> > +       MX28_PAD_GPMI_D06__GPIO_0_6,
-> > +       MX28_PAD_GPMI_D07__GPIO_0_7,
-> > +
-> > +       /* ADR_0-2 */
-> > +       MX28_PAD_GPMI_CE1N__GPIO_0_17,
-> > +       MX28_PAD_GPMI_CE2N__GPIO_0_18,
-> > +       MX28_PAD_GPMI_CE3N__GPIO_0_19,
-> > +
-> > +       /* Read Keys */
-> > +       MX28_PAD_GPMI_RDY0__GPIO_0_20,
-> > +
-> > +       /* LATCH_EN */
-> > +       MX28_PAD_GPMI_RDY1__GPIO_0_21,
-> > +
-> > +       /* Power off */
-> > +       MX28_PAD_GPMI_RDN__GPIO_0_24,
-> > +
-> > +       /* WIFI EN */
-> > +       MX28_PAD_GPMI_CLE__GPIO_0_27,
-> > +
-> > +       /* I2C1 Touch */
-> > +       MX28_PAD_AUART2_CTS__GPIO_3_10,
-> > +       MX28_PAD_AUART2_RTS__GPIO_3_11,
-> > +       MX28_PAD_GPMI_RDY2__GPIO_0_22, /* Touch Reset */
-> > +       MX28_PAD_GPMI_RDY3__GPIO_0_23, /* Touch INT */
-> > +
-> > +       /* TIVA */
-> > +       MX28_PAD_AUART1_RX__SSP2_CARD_DETECT,
-> > +       MX28_PAD_SSP2_MISO__SSP2_D0,
-> > +       MX28_PAD_SSP2_MOSI__SSP2_CMD,
-> > +       MX28_PAD_SSP2_SCK__SSP2_SCK,
-> > +       MX28_PAD_SSP2_SS0__SSP2_D3,
-> > +       MX28_PAD_SSP2_SS1__GPIO_2_20,
-> > +       MX28_PAD_SSP2_SS2__GPIO_2_21,
-> > +
-> > +       /* SPI3 NOR-Flash */
-> > +       MX28_PAD_AUART1_TX__SSP3_CARD_DETECT,
-> > +       MX28_PAD_AUART2_RX__SSP3_D1,
-> > +       MX28_PAD_AUART2_TX__SSP3_D2,
-> > +       MX28_PAD_SSP3_MISO__SSP3_D0,
-> > +       MX28_PAD_SSP3_MOSI__SSP3_CMD,
-> > +       MX28_PAD_SSP3_SCK__SSP3_SCK,
-> > +       MX28_PAD_SSP3_SS0__SSP3_D3,
-> > +
-> > +       /* NOR-Flash CMD */
-> > +       MX28_PAD_LCD_RS__GPIO_1_26, /* Hold */
-> > +       MX28_PAD_LCD_WR_RWN__GPIO_1_25, /* write protect */
-> > +
-> > +       /* I2C0 Codec */
-> > +       MX28_PAD_I2C0_SCL__I2C0_SCL,
-> > +       MX28_PAD_I2C0_SDA__I2C0_SDA,
-> > +
-> > +       /* I2S Codec */
-> > +       MX28_PAD_SAIF0_BITCLK__SAIF0_BITCLK,
-> > +       MX28_PAD_SAIF0_LRCLK__SAIF0_LRCLK,
-> > +       MX28_PAD_SAIF0_MCLK__SAIF0_MCLK,
-> > +       MX28_PAD_SAIF0_SDATA0__SAIF0_SDATA0,
-> > +       MX28_PAD_SAIF1_SDATA0__SAIF1_SDATA0,
-> > +
-> > +       /* BT_EN */
-> > +       MX28_PAD_SPDIF__GPIO_3_27,
-> > +
-> > +       /* EMI */
-> > +       MX28_PAD_EMI_D00__EMI_DATA0 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D01__EMI_DATA1 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D02__EMI_DATA2 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D03__EMI_DATA3 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D04__EMI_DATA4 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D05__EMI_DATA5 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D06__EMI_DATA6 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D07__EMI_DATA7 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D08__EMI_DATA8 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D09__EMI_DATA9 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D10__EMI_DATA10 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D11__EMI_DATA11 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D12__EMI_DATA12 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D13__EMI_DATA13 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D14__EMI_DATA14 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_D15__EMI_DATA15 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_ODT0__EMI_ODT0 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_DQM0__EMI_DQM0 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_ODT1__EMI_ODT1 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_DQM1__EMI_DQM1 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_DDR_OPEN_FB__EMI_DDR_OPEN_FEEDBACK |
-> > MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_CLK__EMI_CLK | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_DQS0__EMI_DQS0 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_DQS1__EMI_DQS1 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_DDR_OPEN__EMI_DDR_OPEN | MUX_CONFIG_EMI,
-> > +
-> > +       MX28_PAD_EMI_A00__EMI_ADDR0 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A01__EMI_ADDR1 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A02__EMI_ADDR2 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A03__EMI_ADDR3 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A04__EMI_ADDR4 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A05__EMI_ADDR5 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A06__EMI_ADDR6 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A07__EMI_ADDR7 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A08__EMI_ADDR8 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A09__EMI_ADDR9 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A10__EMI_ADDR10 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A11__EMI_ADDR11 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A12__EMI_ADDR12 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A13__EMI_ADDR13 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_A14__EMI_ADDR14 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_BA0__EMI_BA0 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_BA1__EMI_BA1 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_BA2__EMI_BA2 | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_CASN__EMI_CASN | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_RASN__EMI_RASN | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_WEN__EMI_WEN | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_CE0N__EMI_CE0N | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_CE1N__EMI_CE1N | MUX_CONFIG_EMI,
-> > +       MX28_PAD_EMI_CKE__EMI_CKE | MUX_CONFIG_EMI,
-> > +
-> > +       /* Uart3 Bluetooth-Interface */
-> > +       MX28_PAD_AUART3_CTS__AUART3_CTS,
-> > +       MX28_PAD_AUART3_RTS__AUART3_RTS,
-> > +       MX28_PAD_AUART3_RX__AUART3_RX,
-> > +       MX28_PAD_AUART3_TX__AUART3_TX,
-> > +
-> > +       /* framebuffer */
-> > +       MX28_PAD_LCD_CS__LCD_CS | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D00__LCD_D0 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D01__LCD_D1 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D02__LCD_D2 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D03__LCD_D3 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D04__LCD_D4 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D05__LCD_D5 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D06__LCD_D6 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D07__LCD_D7 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D08__LCD_D8 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D09__LCD_D9 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D10__LCD_D10 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D11__LCD_D11 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D12__LCD_D12 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D13__LCD_D13 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D14__LCD_D14 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D15__LCD_D15 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D16__LCD_D16 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D17__LCD_D17 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D18__LCD_D18 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D19__LCD_D19 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D20__LCD_D20 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D21__LCD_D21 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D22__LCD_D22 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_D23__LCD_D23 | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_DOTCLK__LCD_DOTCLK | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_ENABLE__LCD_ENABLE | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_HSYNC__LCD_HSYNC | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_RD_E__LCD_VSYNC | MUX_CONFIG_LCD,
-> > +       MX28_PAD_LCD_RESET__LCD_RESET | MUX_CONFIG_LCD,
-> > +
-> > +       /* DUART RS232 */
-> > +       MX28_PAD_PWM0__DUART_RX,
-> > +       MX28_PAD_PWM1__DUART_TX,
-> > +
-> > +       /* Backlight */
-> > +       MX28_PAD_PWM3__PWM_3,
-> > +
-> > +       /* FEC Ethernet */
-> > +       MX28_PAD_ENET_CLK__CLKCTRL_ENET | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_COL__ENET1_TX_EN | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_CRS__ENET1_RX_EN | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_MDC__ENET0_MDC | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_MDIO__ENET0_MDIO | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_RX_CLK__GPIO_4_13, /* Phy Interrupt */
-> > +       MX28_PAD_ENET0_RX_EN__ENET0_RX_EN | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_RXD0__ENET0_RXD0 | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_RXD1__ENET0_RXD1 | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_RXD3__ENET1_RXD1 | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_TX_CLK__GPIO_4_5, /* n.c. */
-> > +       MX28_PAD_ENET0_TX_EN__ENET0_TX_EN | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_TXD0__ENET0_TXD0 | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_TXD1__ENET0_TXD1 | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_TXD3__ENET1_TXD1 | MUX_CONFIG_ENET,
-> > +       MX28_PAD_ENET0_TXD3__GPIO_4_12, /* PHY reset */
-> > +
-> > +       /* boot/rescue pins */
-> > +       MX28_PAD_ENET0_RXD2__GPIO_4_9,
-> > +       MX28_PAD_ENET0_TXD2__GPIO_4_11,
-> > +
-> > +       /* HW revision setup pins - by default pullup DISABLED */
-> > +       MX28_PAD_ENET0_RXD3__GPIO_4_10,
-> > +       MX28_PAD_ENET0_TX_CLK__GPIO_4_5,
-> > +       MX28_PAD_ENET0_COL__GPIO_4_14,
-> > +       MX28_PAD_ENET0_CRS__GPIO_4_15, =20
->=20
-> What is the reason for doing a complete pinctrl configuration inside
-> SPL?
->=20
-> Can't you configure only the pins that SPL needs?
-
-The reason is as I've mentioned above.
-
->=20
-> > +#ifndef CONFIG_SPL_FRAMEWORK
-> > +void board_init_ll(const u32 arg, const uint32_t *resptr)
-> > +{
-> > +       mxs_common_spl_init(arg, resptr, iomux_setup,
-> > ARRAY_SIZE(iomux_setup)); +}
-> > +#else
-> > +void lowlevel_init(void)
-> > +{
-> > +       struct mxs_pinctrl_regs *pinctrl_regs =3D
-> > +               (struct mxs_pinctrl_regs *)MXS_PINCTRL_BASE;
-> > +
-> > +       /* Set EMI drive strength */
-> > +       writel(0x00003fff,
-> > &pinctrl_regs->hw_pinctrl_emi_ds_ctrl_clr);
-> > +       writel(0x00002aaa,
-> > &pinctrl_regs->hw_pinctrl_emi_ds_ctrl_set); =20
->=20
-> Please use defines instead of hardcoded values.
-
-To be honest - this is probably took from first imx28-evk ports....
-Probably people who wrote them are now retired :-)
-
->=20
-> > @@ -0,0 +1,17 @@
-> > +/* SPDX-License-Identifier: GPL-2.0+ */
-> > +/*
-> > + * Copyright (C) 2025 DENX Software Engineering
-> > + * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-> > + */
-> > +#ifndef __CONFIGS_BTT_H__
-> > +#define __CONFIGS_BTT_H__
-> > +
-> > +/* Memory configuration */
-> > +#define PHYS_SDRAM_1                   0x40000000      /* Base
-> > address */ +#define PHYS_SDRAM_1_SIZE              0x10000000
-> > /* Max 256 MB RAM */ =20
->=20
-> You could use SZ_256M and remove the comment.
-
-Ok.
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/6248uRpuZy4M8VKbl_OaNe6
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmhAV2YACgkQAR8vZIA0
-zr1JeAf/c9t4ir3lTdiuoguYSVv/x4zIbsAHSRdJH64sSPxl1UkEdFjGzzQ53P2/
-X5EIDkTkJ/KDETcvvtRsESlOzVvlWjzVYGrItEiaxj6kgii3nmIml5Rk2CjfgOLb
-acHwJ7uDNR8x9577VbSXEmlqRM9vpLelh78YYDyuinfYgGJDBI3fTTC4mrh5yjiY
-GJM27q9B273BiNEe3CDsavt/qpMWkWLwddE+oL89dmV+PLZ3lS3o+skIzRoTkGPH
-FwDqVyID9WM4u51vVAXStUZ97YehRWqS9h9aawX4qA3n3/eR5RpJ3JtSBdRX9Vsk
-p6p7H20pCeo9IhfkCAW3iNAdZkna9A==
-=rJ/a
------END PGP SIGNATURE-----
-
---Sig_/6248uRpuZy4M8VKbl_OaNe6--
