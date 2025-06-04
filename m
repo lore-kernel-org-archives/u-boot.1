@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 053E5C5B549
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 17:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB6FC5B543
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 17:57:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 590DB801BE;
-	Wed,  4 Jun 2025 19:23:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55EAF801BE;
+	Wed,  4 Jun 2025 19:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ti3RGvb5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EPlyfx5S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2204B8070C; Wed,  4 Jun 2025 19:23:11 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 0DC258006D; Wed,  4 Jun 2025 19:57:48 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8D058006D
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 19:23:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF9F48006D
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 19:57:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-40791b696a2so57351b6e.2
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 10:23:08 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-408d7e2b040so110327b6e.2
+ for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 10:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749057787; x=1749662587; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749059864; x=1749664664; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wjgs39QMKT/UalFd6i/IUJlg+e3xdtze+1wWJNGq0Uc=;
- b=Ti3RGvb5TxVwrddLtDgZJPwCA4mmrhylRQjMGjE86tzLLOX+0+cNo1yGUTLKytKlxs
- FaqhnOChqIDHPFONBh3jIBsJjIgHZiEVLKbMwuzbdq6vY3JCMEagvpRFl54AjGaOCpcd
- xt1WpKhV2wth9MM8TRk+UrplTq3i0R7OiSWbM=
+ bh=VlFpcr87Qil3V9MqydMz+kuPvo98xfCO7s5HjUEOjz0=;
+ b=EPlyfx5SY5cklQql0QpGgYxxOqqmkPqLvcYLoT47QALY4is/7dz76lvQtFYLi/oh/+
+ MAD9CYQdDxirD9ZByY5KIsLdktQEUetUFgk1H4VQHTL97IDrOqGnTjDidh6fOqGgs8g3
+ FITqcDwCctD+yb9w+VEPXpYaumZ9KU3mpd80E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749057787; x=1749662587;
+ d=1e100.net; s=20230601; t=1749059864; x=1749664664;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wjgs39QMKT/UalFd6i/IUJlg+e3xdtze+1wWJNGq0Uc=;
- b=j2vsNvpjZiNaCazFLYQwofhHj6Ib5QCIoCUPtxAdcPmfcOD6w+3XUg2cUg17QXYDd/
- vjQh8y9Mb/vzmSJenQk4M2RfUl55ustdqp8V0XRYZcrxWrRqXg5NU3LF2VxtV+TvKT5I
- ixvKfR23op5QXObWnSdKMbZAdlqP/b7cYN7jcjFBSPjVjFS0u0NTqW0k2jc4gKUXFCQ8
- g5N13imW0kSquaAJQLTEAA4Unll3CFJtYNtJZVO1pS1XhvmBYeGnBXds6ggBWOQtuEnx
- nuenQGXdTWB9CZmuSFhlNCMk0YCW6PbH++FBVfZZiuxJEDfpC4nhLa2idkcPHIBMCQxj
- 8mNA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUnwco5GXRoHe1hljaHcz1Zt2B0TFLEZsSdFM/DGkER7MWxLaMXP7bDSTqFWnWDjuFLlwSjxVQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwE7KaLkkBqKYsHDLvVVzEsVkZ5kVv7inN9/GS2wD0Hb7Fi4+OD
- XB+DrS1QA3UOIU7dYBy02CS/0SmCh4+uju8So1TwSjSTIXRAraah9H6LMu8eckWrW8w=
-X-Gm-Gg: ASbGncthr52j12o2qwP6tBSwIlQ6I1J+4sXIaXOg9XiArT1HAc5tACWddKkVTiJbbLc
- A90AkM1aJ/NeKAaUmMySf0SR3PIPcWyXlcBH8hNyoqFcq8aqbqcH+UsPbuopjTPOpR+PNLstrYD
- L4XYlBmAW3qKJ1lBIvd4Lqhwlf66tfGzhvxGt58D7/S7ECbY/qltQdAQIoZM+jattxTBJwfkuXl
- tfgFJ0q+TLEV0jI7swGgknz29PtI/gwMjTQxXTVudtHdzq0Pn/kHoEZCnYRkm0tzSWKYr+OZ0R1
- KZgSN2P1pHdiiYQrAz2doF2bOhHC4jty2RADRYkcMM2tysnJCUhJWQBSGMxA72CWv7qi/RSxWr8
- XeVDhC5le6c4u9EYnhfzA6mI=
-X-Google-Smtp-Source: AGHT+IEPK0jsiCr9bQ8MGKaHHXU1+iqFg+blftkqwJM8CahFxALHMGf9sF0+fYfXU2+lpsxnhOYeDw==
-X-Received: by 2002:a05:6870:e6d4:b0:2c6:72d3:fc93 with SMTP id
- 586e51a60fabf-2e9bf3a4b1dmr2540830fac.12.1749057787498; 
- Wed, 04 Jun 2025 10:23:07 -0700 (PDT)
+ bh=VlFpcr87Qil3V9MqydMz+kuPvo98xfCO7s5HjUEOjz0=;
+ b=GFpBOVaXFj+y3ASQnquhROZ8KSf1GU5RkJ0iGJVUpFUCkjcO6HTjHpL/gF39WCtX5z
+ ErPQjcoAHGoXLgCZYtaJIVOrcx7efJXc/Cf4gOq0GJ8XEHMZvYcqoJ5Gr0ZcfESvkKg6
+ PWN+oBClpQ1Dm+8p9y0jkDe5dka3D1gitJZI0U2edFiFZnrGVyWO0PAbRQe+8YAvmImX
+ RSzM0MKOlLkUfUiQrDWi2vwz1FW8JkJoXSXLq8QLQ++zj2j8jEyHPwXxWOgF1yUlz2sq
+ h3YjjuquC4Qv/DjbYK95Xl5bT909Ymapm0+IPNqi7Oemc0x+CMjNmAy4nWyllRLEvxya
+ txKw==
+X-Gm-Message-State: AOJu0YynumEqP48CqJvnEHPAdwrOlIhu73qjQuWtXKV88BwE9dTArAAb
+ qLQWBKCIz+XMEDwS12rST2G1pUdZyU9nhl4x7itRnP7qmcoS/Daa0/gmMDXJJUMmpCs=
+X-Gm-Gg: ASbGncsCNFpkbFsb1EZtAHzs39LynoIoivyRH9VEbNUOFAYvxMvHemqSAEeE8/IkwwF
+ MH5agmmmUuYQgznQVtqKQgMykUvQeDQCNK8hfj8lPdt+Vhv5IGcROVm72gb50ULJ8NnHIUsxkLP
+ O7Yw7lsGW+YTwLUdzr+zCCUEaUATU2vXQcsMqRTksLOLe54KZlg8GVENCl55abeB3EDicviGIrH
+ AxaU52WYF/+P0P2usJhz2HEQPLkoAaSHPvkY17HAO3h2cn3b1JU67Wd519Xu0w+ICEZU+nvljuI
+ rRQfMilmgwr++b0GZ9d/vnPM6hA2lZ0NK1g7LF+zrSqd+8N9fQtbLqlrhPOCafeByHoST27H0BG
+ 8NIMlZdj4wvoA
+X-Google-Smtp-Source: AGHT+IFvUMoYDWKF7oWfaDcrCxoetclG/VXilaxVjPeRGKUh5s44vijW3pttbE0i/m7SUQvJnZFIHQ==
+X-Received: by 2002:a05:6808:4493:b0:403:31f8:44c6 with SMTP id
+ 5614622812f47-408f0f915e6mr3287163b6e.26.1749059864394; 
+ Wed, 04 Jun 2025 10:57:44 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60f229406afsm123200eaf.0.2025.06.04.10.23.05
+ 5614622812f47-40678d038c0sm2273230b6e.46.2025.06.04.10.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jun 2025 10:23:06 -0700 (PDT)
-Date: Wed, 4 Jun 2025 11:23:04 -0600
+ Wed, 04 Jun 2025 10:57:43 -0700 (PDT)
+Date: Wed, 4 Jun 2025 11:57:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: Re: [PATCH] x86: Correct condition for init_cache_f_r()
-Message-ID: <20250604172304.GQ1382132@bill-the-cat>
-References: <20250604130923.1484873-1-sjg@chromium.org>
- <4d363f54-63b1-441f-b64b-a10c47a85edb@linaro.org>
- <CAFLszTi9yEz_JH9uXz8wmfsGJr8cKX2-zN1seX9cDTd+iqSEMQ@mail.gmail.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com
+Subject: Re: [PATCH v1] ti: k3: abstract common fdt api for reserved mem fixups
+Message-ID: <20250604175741.GA1940110@bill-the-cat>
+References: <20250522150941.563959-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ujbqfFpC+xcNgg7N"
+ protocol="application/pgp-signature"; boundary="psW0rYvKJJoYEc7W"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi9yEz_JH9uXz8wmfsGJr8cKX2-zN1seX9cDTd+iqSEMQ@mail.gmail.com>
+In-Reply-To: <20250522150941.563959-1-anshuld@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,75 +96,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ujbqfFpC+xcNgg7N
+--psW0rYvKJJoYEc7W
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 04, 2025 at 10:17:32AM -0600, Simon Glass wrote:
-> Hi Jerome,
->=20
-> On Wed, 4 Jun 2025 at 07:15, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> > On 6/4/25 15:09, Simon Glass wrote:
-> > > The condition here is reversed, which makes link and coral very slow,
-> > > leading to lab failures.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > Fixes 6c171f7a184 ("common: board: make initcalls static")
-> > > ---
-> > >
-> > >  common/board_f.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/common/board_f.c b/common/board_f.c
-> > > index bff465d9cb2..c8a612d6070 100644
-> > > --- a/common/board_f.c
-> > > +++ b/common/board_f.c
-> > > @@ -1079,7 +1079,7 @@ void board_init_f(ulong boot_flags)
-> > >   */
-> > >  static void initcall_run_f_r(void)
-> > >  {
-> > > -#if CONFIG_IS_ENABLED(X86_64)
-> > > +#if !CONFIG_IS_ENABLED(X86_64)
-> > >       INITCALL(init_cache_f_r);
-> > >  #endif
-> > >  }
-> >
-> > Sorry for that mistake.
-> >
-> > Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
->=20
-> It's fine. I only noticed it because the lab tests started failing (I
-> have a short boot timeout on one of the boards).
->=20
-> Do you think some of the conditions could use if() instead of #if now?
+On Thu, May 22, 2025 at 08:39:40PM +0530, Anshul Dalal wrote:
 
-I'm not sure the readability nor code coverage will be improved by that
-in this file. And please find the time to reply to my thread about your
-future in the project before making further suggestions about the
-overall code base, thanks.
+> The usage of fdt_fixup_reserved is repeated for ATF and OP-TEE for
+> multiple platforms, this patch creates a single fdt API for fixing up
+> the reserved-memory node with added error handling.
+>=20
+> All k3 platforms already share a common tispl template which ensures
+> binaries are loaded as per the respective CONFIG_*_LOAD_ADDR. And the
+> provided new_size for the fixup is overridden by the size from fdt node
+> anyways. This allows for safe abstraction of the reserved memory fixups
+> for all current platforms.
+>=20
+> fdt_fixup_reserved now abstracts the ATF and OP-TEE fixups by calling
+> the renamed static fdt_fixup_reserved_memory function with the required
+> parameters.
+>=20
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+[snip]
+
+I think this shows the start of fixing up some problems, but that we
+need to do more.
+
+> diff --git a/arch/arm/mach-k3/am62ax/am62a7_fdt.c b/arch/arm/mach-k3/am62=
+ax/am62a7_fdt.c
+> index 7f764ab36b5..9a4599432ff 100644
+> --- a/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+> +++ b/arch/arm/mach-k3/am62ax/am62a7_fdt.c
+> @@ -10,8 +10,5 @@
+> =20
+>  int ft_system_setup(void *blob, struct bd_info *bd)
+>  {
+> -	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+> -	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+> -
+> -	return 0;
+> +	return fdt_fixup_reserved(blob);
+>  }
+
+This is good.
+
+> diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62=
+px/am62p5_fdt.c
+> index 2c40fa5a594..9f4b1663864 100644
+> --- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
+> +++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+> @@ -92,8 +92,5 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+>  	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
+>  	fdt_fixup_thermal_zone_nodes_am62p(blob, k3_get_max_temp());
+>  	fdt_fixup_cpu_freq_nodes_am62p(blob, k3_get_a53_max_frequency());
+
+Is it really OK for any of the above fixups to fail to happen and be
+silently ignored? fdt_fixup_thermal_zone_nodes_am62p() for example looks
+like it throws away error conditions from functions it calls. And other
+boards are doing similar things.
+
+[sniip]
+> +int fdt_fixup_reserved(void *blob)
+> +{
+> +	int ret;
+> +
+> +	ret =3D fdt_fixup_reserved_memory(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
+> +					0x80000);
+> +	if (ret)
+> +		return ret;
+
+Good.
+
+> +	ret =3D fdt_fixup_reserved_memory(blob, "optee",
+> +					CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return 0;
+
+But we can just return fdt_fixup_reserved_memory(...) here.
 
 --=20
 Tom
 
---ujbqfFpC+xcNgg7N
+--psW0rYvKJJoYEc7W
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhAgPEACgkQFHw5/5Y0
-tywfIgv/a/wvwPuoBPwxXTV4g1rUamAeyAV1Jwl01r9x1n7YMLZTu5+dkfq1QZFC
-NhEMSnE5XKL9fvR72CAM+s/3xXtUG1iOmh1Kvpo11oe+d0i3gM43WzJJLuO0Auby
-VpFVV+s/hFJVw2vsKI5AQYvC/EnfQ7X1/q6016VxObMZXUrr+26HazS7aByFArKO
-OSfJ5GhGCchFJwWQ7JSFZTLAXX5mmvkzXJsLKbzFBXjimjwED1tDl4GJ9QT+aZan
-6NiXSNeFRbpLJhjfqJvrD1VU3070q4kuLuJ2whPCcJwnlXnS4h8SXLOxoUMGgGH+
-BMfVuUSGLJHu+iDqou6d97JS5tLZHq7xHWVGK6MnGN42klRprr89zHWNhEudCZ7G
-ABP5zUK+ZgSSuBK9IlRna0KyPua/AeyZeK5M9yti6bRch2AsXRMspLqW3vXKexIF
-TYEYbHhV12zo1XOTmfichWYOa4s4Vkq61TXvMk1LH7nMdZBPEYmNJ6ZGij4yU0oL
-9jdRstXB
-=SVk2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhAiRIACgkQFHw5/5Y0
+tyydqwwAo4RmvSBNtfaS0ESnUnPFYyUGEqtYvXx2TR+arTmv3aFkkg22C6bX/fEe
+qFciFCLacVqupfRvOSQi6OywC4RF7TbWspLRSkXdBW3ycOzYCWz06xpmFQizpdwt
+3GZ9lvgMPXHnwwrICYOCUahMVJmeidzMgMxDGMmzscRsf66ab35QPOqN8HOeAo7X
+vixxbKuQ+DG1FUpRNPQ+DuqpUSLUr4vw6AShpYbxQMvrSFdk/M4vp8cBLG+B7z26
+qE1gg9w/ffUqcfQkHM9vwW+kMZ50/fTzcyL+6/LhQcpKBPA77RHSozDjYqjd294d
+8VvqybMWDI0zWEsSAnqNH2aQQcHK7Ta9rKvYJWtHGfTKj3exr7X/okWAeI8bdGT0
+5rAQzGzBVS2fmD3dZf+y60v4KeZFia62imyw5ZbOLbrso+dOFcmR3dk3LvVvNRZd
+S3dMuStnghfU8vIWIqmil/0jQj4na8r1LWeV2QC0yrmk0yy6ZBunkEFYos/0Ku1s
+Ef4AbEIx
+=3ldM
 -----END PGP SIGNATURE-----
 
---ujbqfFpC+xcNgg7N--
+--psW0rYvKJJoYEc7W--
