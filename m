@@ -4,92 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E230DC5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 07:06:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FF5C5B552
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 07:24:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BD7282BD9;
-	Wed,  4 Jun 2025 09:06:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id AC74882B07;
+	Wed,  4 Jun 2025 09:24:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="O1w+LQmO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KqryCmnB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 913B082C8A; Wed,  4 Jun 2025 09:06:08 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7EFBD82BD9; Wed,  4 Jun 2025 09:24:02 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B98C082B07
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 09:06:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AEA982103
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 09:24:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=8250fb800b=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5546LeSk029853;
- Wed, 4 Jun 2025 09:05:56 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- +vnvyFrWsq+TqI/EBxhTjT2bDkUF1GXEbilnWIHwJ2w=; b=O1w+LQmOqiui8A/H
- cabtr6Kd1nBcL63uBgWIU5RbzFQbHW05rmoj5yK2uSFai/XvAeg9BtfNRljLg6uB
- FWtuVgfGPxgZ3tMi+tYlfH+myj1FKvNPnhaub2OYQRjMTSuPzKg+4Zli0l5abFAM
- syynz+vahgWKvUSnKmQDmBaV43wZDIUiuR1v/DC7mXQj5/f8l3gKoWrq1tyJqF+I
- 1fXw8+hVzeeUF0LlcAILk9FN5rzAO5EqALaAosWj2zmGbZBUMB2SEQ+EDUSIeE+y
- YYt+h/NJdVCvNK7tWwTBBz4t6nqmCxXkliezx8U100sQfB25lRJB5DLrsjOEHnKd
- WyOWTQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g8syr1w-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 04 Jun 2025 09:05:56 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C75E24005C;
- Wed,  4 Jun 2025 09:02:08 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EC6DBB054CA;
- Wed,  4 Jun 2025 09:01:55 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Jun
- 2025 09:01:55 +0200
-Message-ID: <f319bd79-6d65-4bd0-af12-4a62f96566e1@foss.st.com>
-Date: Wed, 4 Jun 2025 09:01:54 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-70f862dbeaeso65993107b3.1
+ for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 00:23:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749021839; x=1749626639; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=plXigEB8XPHg7SzkYjPXa2VEaf/yqERRT6co2ayw/0s=;
+ b=KqryCmnBRGFqJd0eC1OMUR1pV56IuFOFeAGwypotxsSgdjCVVBJ36H2SvMXNrFppSq
+ xlXFX7t1BvgRPmZniVt9uAlTuGppjZ5yeC0P0nNs8C/aehh/Dn+YmfXnXYAvV5fEz+iF
+ 8Db3PtW3mFkzNnW3p3KJJOy2qhrqbIxjFG4L38N6dEbhWwpqqq2O82SeHcK+Fl7b8iwR
+ 9FetipwfFO0dIpshAvIKsP8XnCqtctjHBgg8qKiyndjW6DRCgUCqO9CI20TrIcqMkKtX
+ Ch0VSutFVLkeAOPRWEmbFoCoy76vEsuunyTG1qRnAwctFhYbNHwCkd83a36kYeUnpoTZ
+ nwjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749021839; x=1749626639;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=plXigEB8XPHg7SzkYjPXa2VEaf/yqERRT6co2ayw/0s=;
+ b=f57IFFsx6j6OttZJ7vZi8/Mh/5sdwaeUvJa8eU8L48rHx6i/Hbnrq3KXpD4K33jWCJ
+ VI77FfWXhZBRbssIMAmTmJKhCW2+7XM4TUW/n6LqyV2Xs04PJx81xwWd1fMzRD1n13u5
+ w1x7rO2KvBkxp4905l4dydaCBDpwThqIYJIbVtom5rglHHTKaq+qbXnHj76O2dw8sLnq
+ xZB1osSIm9i5fI7YVxD/NAfyy+SNFSg0dnQcs8yN8/zUHXJoCAsVjhGUGirjBL9OSuyR
+ bKGl5JnZgU/4dWlJ7mz22xTmWbdnlPASDSya3zsynD4m+CZyNd5pK4KxnHwPGSn+V73j
+ baZA==
+X-Gm-Message-State: AOJu0YzFyZdia+YF/alEPKoV3gJ/sHtqzGKf9cIw40Mefdr1yjejGfMk
+ lCBivcGw3DJcRDHu2cSBV5+bIhGqUgVU3wj8sAGKgNR7VRxuDQ0Mn3VtlmFeiiHuxOwyBbXHl+k
+ Ttd6NHxTgtEGbIUYS7dpjujZ+ofq7WUoSPgfCpk+prA==
+X-Gm-Gg: ASbGncvaLIWVndOsm2SKT0nZ9yH3r798YionXDOXmfo9d/PXt49YbezwJ36QcCCNn/8
+ 3M1+aBcNy4cO7C2yYcKIQqBHrbO0BBukL2S24dNFe0KVSeG9MY0RO08NZXvfvmgIaewCkG3K6t+
+ t8e35ra4tAkOwTvD2dMr2XJoUlB0GYhChj9w==
+X-Google-Smtp-Source: AGHT+IGWWodvE8lcvp4ZgvByC2un5Kqpyfk522JwGwNF6GC+CpYtI9rtfDqfvMUrG9lknmJxXH1QkF5FdvE+km4RjJY=
+X-Received: by 2002:a05:690c:28b:b0:708:2604:4a10 with SMTP id
+ 00721157ae682-710d9dac0bdmr22386837b3.18.1749021838824; Wed, 04 Jun 2025
+ 00:23:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/13] clk: add CONFIG_CLK_AUTO_ID
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom Rini
- <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Alexander Dahl
- <ada@thorsis.com>, Casey Connolly <casey.connolly@linaro.org>, Gabriel
- Fernandez <gabriel.fernandez@foss.st.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, Jonas
- Karlman <jonas@kwiboo.se>, Kongyang Liu <seashell11234455@gmail.com>, Marek
- Vasut <marex@denx.de>, Miquel Raynal <miquel.raynal@bootlin.com>, Neil
- Armstrong <neil.armstrong@linaro.org>, Sam Protsenko
- <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
- <20250527132755.2169508-5-patrice.chotard@foss.st.com>
- <156e1773-fa76-4b22-80e7-cf26cb7bf7b3@foss.st.com>
- <CAOf5uwmNz3JRoEoEVxMYk1Mb5PnYEMSWKbbh=kMXp=tqufPB2g@mail.gmail.com>
- <05a41190-87a4-4d32-b3d9-44e3101ea858@foss.st.com>
- <CAOf5uwkpj9HA+nhiOTPFz8WTGihyiVgZoCfZDKyCPu68zrRe9A@mail.gmail.com>
- <CAOf5uwn0VBV_swPt=JVJEazWrLh6hzhXDn8P2RSN34dmuu_aNA@mail.gmail.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CAOf5uwn0VBV_swPt=JVJEazWrLh6hzhXDn8P2RSN34dmuu_aNA@mail.gmail.com>
+References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
+ <20250526091253.400802-3-sughosh.ganu@linaro.org>
+ <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
+ <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
+ <CADg8p977sXJRS1CM6Lnmep0_gc3jc9b3yFg1A-qkVn5Gswr_=Q@mail.gmail.com>
+ <CAC_iWj+Mzskthf1dLSX6NPyzWiRGzfbcekCs_c_mT3GpFH6gTg@mail.gmail.com>
+ <CADg8p95CnQnj2_Wh6D05hCtZh75PDU-S-_MkSvzBdGFAgKJiug@mail.gmail.com>
+In-Reply-To: <CADg8p95CnQnj2_Wh6D05hCtZh75PDU-S-_MkSvzBdGFAgKJiug@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 4 Jun 2025 10:23:20 +0300
+X-Gm-Features: AX0GCFtzEuX0Esc5nYojER7EZ9xkr0kPSQ6NhW-UokDjrt3PwBbDvP3OWsApb9c
+Message-ID: <CAC_iWjK9ZQoSx8a_nmbJ-R-FUak=N+r5Vy7VPLZHFNqwnzO1Tw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
+ API's
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-04_02,2025-06-03_02,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,268 +100,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+[...]
 
+> > > > >
+> > > > >
+> > > > > This tends to blow up in random ways. See
+> > > > > commit 67be24906fe. TL;DR 0 is a valid address in some systems.
+> > > >
+> > > > Yes, I see your point. I think the calling function will have to be
+> > > > re-written such that the env variables get stored only when the API
+> > > > returns successfully. Then at least the platform will not have an env
+> > > > variable with some junk value.
+> > >
+> > > Thinking about this a bit, I think in these two instances, returning a
+> > > value of 0 might not be an issue if the DRAM memory does not start at
+> > > 0x0. Don't get me wrong, what you are suggesting is definitely
+> > > correct. I am only thinking about increasing code size on these
+> > > platforms if 0x0 is not a valid address, and moreover since the
+> > > platforms were already setting 0x0 in case of an error.
+> >
+> > what kind of code size increase are we talking about?
+>
+> Let me check the actual size impact with the changes and get back to you.
+>
+> > It's returning
+> > na int instead of a physical address so that should be close to zero?
+>
+> Sorry, I do not understand what you are suggesting, but even the above
+> static function is returning a phys_addr_t value, which is 0 in case
+> of an error. And I have kept this to mimic the existing behaviour.
+> Thanks.
 
-On 6/4/25 08:50, Michael Nazzareno Trimarchi wrote:
-> Hi
-> 
-> On Wed, Jun 4, 2025 at 8:48 AM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->>
->> Hi Patrice
->>
->> On Wed, Jun 4, 2025 at 8:46 AM Patrice CHOTARD
->> <patrice.chotard@foss.st.com> wrote:
->>>
->>>
->>>
->>> On 6/4/25 08:14, Michael Nazzareno Trimarchi wrote:
->>>> Hi
->>>>
->>>> On Wed, Jun 4, 2025 at 8:02 AM Patrice CHOTARD
->>>> <patrice.chotard@foss.st.com> wrote:
->>>>>
->>>>>
->>>>>
->>>>> On 5/27/25 15:27, Patrice Chotard wrote:
->>>>>> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>>>>>
->>>>>> Add a new config CONFIG_CLK_AUTO_ID to support a unique clk id
->>>>>> for all the clock providers, managed by clk uclass, when the clock
->>>>>> reference arg[0] is the same.
->>>>>>
->>>>>> When the CONFIG is activated, the clock id is limited to the lower
->>>>>> CLK_ID_SZ = 24 bits in default clock xlate function
->>>>>> and the sequence number + 1 of the clk provider device is
->>>>>> added for the 8 higher bits.
->>>>>>
->>>>>> We use sequence number + 1 to avoid the "dummy" clock id = 0,
->>>>>> used for invalid clock when CCF is activated.
->>>>>>
->>>>>> When this config is activated, the new function clk_get_id()
->>>>>> should be used to get back the internal reference to clock
->>>>>> for the each clock provider.
->>>>>>
->>>>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>>>>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>>>>> Cc: Lukasz Majewski <lukma@denx.de>
->>>>>> Cc: Sean Anderson <seanga2@gmail.com>
->>>>>> ---
->>>>>>
->>>>>> (no changes since v1)
->>>>>>
->>>>>>  drivers/clk/Kconfig                | 10 ++++++++++
->>>>>>  drivers/clk/clk-uclass.c           |  9 +++++++--
->>>>>>  drivers/clk/stm32/clk-stm32-core.c |  3 ++-
->>>>>>  include/clk.h                      | 24 ++++++++++++++++++++++++
->>>>>>  include/linux/clk-provider.h       |  9 ++++++++-
->>>>>>  5 files changed, 51 insertions(+), 4 deletions(-)
->>>>>>
->>>>>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
->>>>>> index 18bd640a68b..b2e53fe325e 100644
->>>>>> --- a/drivers/clk/Kconfig
->>>>>> +++ b/drivers/clk/Kconfig
->>>>>> @@ -10,6 +10,16 @@ config CLK
->>>>>>         feed into other clocks in a tree structure, with multiplexers to
->>>>>>         choose the source for each clock.
->>>>>>
->>>>>> +config CLK_AUTO_ID
->>>>>> +     bool "Enable support of an unique clock id with several provider"
->>>>>> +     depends on CLK
->>>>>> +     help
->>>>>> +       Add the uclass sequence number of clock provider in the 8 higher bits
->>>>>> +       of the clk id to guaranty an unique clock identifier in clk uclass
->>>>>> +       when several clock providers are present on the device and when
->>>>>> +       default xlate are used.
->>>>>> +       This feature limit each identifier for each clock providers (24 bits).
->>>>>> +
->>>>>>  config SPL_CLK
->>>>>>       bool "Enable clock support in SPL"
->>>>>>       depends on CLK && SPL && SPL_DM
->>>>>> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
->>>>>> index 2167cd5ad0f..7262e89b512 100644
->>>>>> --- a/drivers/clk/clk-uclass.c
->>>>>> +++ b/drivers/clk/clk-uclass.c
->>>>>> @@ -34,6 +34,11 @@ struct clk *dev_get_clk_ptr(struct udevice *dev)
->>>>>>       return (struct clk *)dev_get_uclass_priv(dev);
->>>>>>  }
->>>>>>
->>>>>> +ulong clk_get_id(const struct clk *clk)
->>>>>> +{
->>>>>> +     return (ulong)(clk->id & CLK_ID_MSK);
->>>>>> +}
->>>>>> +
->>>>>>  #if CONFIG_IS_ENABLED(OF_PLATDATA)
->>>>>>  int clk_get_by_phandle(struct udevice *dev, const struct phandle_1_arg *cells,
->>>>>>                      struct clk *clk)
->>>>>> @@ -43,7 +48,7 @@ int clk_get_by_phandle(struct udevice *dev, const struct phandle_1_arg *cells,
->>>>>>       ret = device_get_by_ofplat_idx(cells->idx, &clk->dev);
->>>>>>       if (ret)
->>>>>>               return ret;
->>>>>> -     clk->id = cells->arg[0];
->>>>>> +     clk->id = CLK_ID(dev, cells->arg[0]);
->>>>>>
->>>>>>       return 0;
->>>>>>  }
->>>>>> @@ -61,7 +66,7 @@ static int clk_of_xlate_default(struct clk *clk,
->>>>>>       }
->>>>>>
->>>>>>       if (args->args_count)
->>>>>> -             clk->id = args->args[0];
->>>>>> +             clk->id = CLK_ID(clk->dev, args->args[0]);
->>>>>>       else
->>>>>>               clk->id = 0;
->>>>>>
->>>>>> diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
->>>>>> index 358ee56682a..df3b35b1003 100644
->>>>>> --- a/drivers/clk/stm32/clk-stm32-core.c
->>>>>> +++ b/drivers/clk/stm32/clk-stm32-core.c
->>>>>> @@ -46,7 +46,8 @@ int stm32_rcc_init(struct udevice *dev,
->>>>>>
->>>>>>               if (cfg->setup) {
->>>>>>                       clk = cfg->setup(dev, cfg);
->>>>>> -                     clk->id = cfg->id;
->>>>>> +                     /* set identifier of clock provider*/
->>>>>> +                     dev_clk_dm(dev, cfg->id, clk);
->>>>>>               } else {
->>>>>>                       dev_err(dev, "failed to register clock %s\n", cfg->name);
->>>>>>                       return -ENOENT;
->>>>>> diff --git a/include/clk.h b/include/clk.h
->>>>>> index a6ef4e02692..f94135ff778 100644
->>>>>> --- a/include/clk.h
->>>>>> +++ b/include/clk.h
->>>>>> @@ -13,6 +13,15 @@
->>>>>>  #include <linux/errno.h>
->>>>>>  #include <linux/types.h>
->>>>>>
->>>>>> +#ifdef CONFIG_CLK_AUTO_ID
->>>>>> +#define CLK_ID_SZ    24
->>>>>> +#define CLK_ID_MSK   GENMASK(23, 0)
->>>>>> +#define CLK_ID(dev, id)      (((dev_seq(dev) + 1) << CLK_ID_SZ) | ((id) & CLK_ID_MSK))
->>>>>> +#else
->>>>>> +#define CLK_ID_MSK   (~0UL)
->>>>>> +#define CLK_ID(dev, id)      id
->>>>>> +#endif
->>>>>> +
->>>>>>  /**
->>>>>>   * DOC: Overview
->>>>>>   *
->>>>>> @@ -570,6 +579,16 @@ int clk_get_by_id(ulong id, struct clk **clkp);
->>>>>>   */
->>>>>>  bool clk_dev_binded(struct clk *clk);
->>>>>>
->>>>>> +/**
->>>>>> + * clk_get_id - get clk id
->>>>>> + *
->>>>>> + * @clk:     A clock struct
->>>>>> + *
->>>>>> + * Return: the clock identifier as it is defined by the clock provider in
->>>>>> + * device tree or in platdata
->>>>>> + */
->>>>>> +ulong clk_get_id(const struct clk *clk);
->>>>>> +
->>>>>>  #else /* CONFIG_IS_ENABLED(CLK) */
->>>>>>
->>>>>>  static inline int clk_request(struct udevice *dev, struct clk *clk)
->>>>>> @@ -641,6 +660,11 @@ static inline bool clk_dev_binded(struct clk *clk)
->>>>>>  {
->>>>>>       return false;
->>>>>>  }
->>>>>> +
->>>>>> +static inline ulong clk_get_id(const struct clk *clk)
->>>>>> +{
->>>>>> +     return 0;
->>>>>> +}
->>>>>>  #endif /* CONFIG_IS_ENABLED(CLK) */
->>>>>>
->>>>>>  /**
->>>>>> diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
->>>>>> index 267757939e0..2d754fa4287 100644
->>>>>> --- a/include/linux/clk-provider.h
->>>>>> +++ b/include/linux/clk-provider.h
->>>>>> @@ -15,10 +15,17 @@
->>>>>>
->>>>>>  struct udevice;
->>>>>>
->>>>>> +/* update clock ID for the dev = clock provider, compatible with CLK_AUTO_ID */
->>>>>> +static inline void dev_clk_dm(const struct udevice *dev, ulong id, struct clk *clk)
->>>>>> +{
->>>>>> +     if (!IS_ERR(clk))
->>>>>> +             clk->id = CLK_ID(dev, id);
->>>>>> +}
->>>>>> +
->>>>>>  static inline void clk_dm(ulong id, struct clk *clk)
->>>>>>  {
->>>>>>       if (!IS_ERR(clk))
->>>>>> -             clk->id = id;
->>>>>> +             clk->id = CLK_ID(clk->dev, id);
->>>>>>  }
->>>>>>
->>>>>>  /*
->>>>> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>>>>
->>>>
->>>> I think you should ask to be picked by Tom. I don't have objection on this patch
->>>>
->>>> Michael
->>>
->>> Hi Michael
->>>
->>> For which reason ?
->>> For information, this series has been submitted to CI test : https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/26358
->>> without any issue.
->>
->> Because I haven't seen activity on the clock maintainer for months.
->>
-> 
-> I think you misread it (or my english was really bad). Anyway I'm fine
-> with this change
-
-No worries, your english is correct ;-)
-I just wondered why you requested me to ask to Tom to pick up this patch.
-
-You are right, no one else reacted to this patch.
-
-Tom, 
-
-Will you pick this patch and also patches 5/6/7 to be coherent on your side ?
-If not, i expect to submit a STM32 pull request before end of this week included these patches ?
+I am saying that changing the return type from phys_addr_t to an int
+should have a negligible size impact.
 
 Thanks
-Patrice
-
-> 
-> Michael
-> 
-> 
->> Michael
->>
->>
->>>
->>> Thanks
->>> Patrice
->>>
->>>>
->>>>> Thanks
->>>>> Patrice
->>>>
->>>>
->>>>
->>
->>
->>
->> --
->> Michael Nazzareno Trimarchi
->> Co-Founder & Chief Executive Officer
->> M. +39 347 913 2170
->> michael@amarulasolutions.com
->> __________________________________
->>
->> Amarula Solutions BV
->> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
->> T. +31 (0)85 111 9172
->> info@amarulasolutions.com
->> www.amarulasolutions.com
-> 
-> 
-> 
+/Ilias
+>
+> -sughosh
+>
+> >
+> > Thanks
+> > /Ilias
+> > > If it is okay
+> > > to increase code size on these platforms, I will change the calling
+> > > function, such that the variable does not get set in case of an error.
+> > > Maybe Casey and Mark can comment? Thanks.
+> > >
+> > > -sughosh
+> > >
+> > > >
+> > > > -sughosh
+> > > >
+> > > > >
+> > > > > > +
+> > > > > > +       return addr;
+> > > > > > +}
+> > > > > > +
+> > > > > > +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
+> > > > > > +                                 phys_addr_t max_addr, u32 flags)
+> > > > > > +{
+> > > > > > +       int err;
+> > > > > > +       phys_addr_t addr;
+> > > > > > +
+> > > > > > +       addr = max_addr;
+> > > > > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
+> > > > > > +       if (err)
+> > > > > > +               return 0;
+> > > > > > +
+> > > > > > +       return addr;
+> > > > > > +}
+> > > > > > +
+> > > > > >  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
+> > > > > >
+> > > > > >  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
+> > > > > > --
+> > > > > > 2.34.1
+> > > > > >
+> > > > >
+> > > > > Cheers
+> > > > > /Ilias
