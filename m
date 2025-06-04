@@ -4,63 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 395CBC5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 11:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AA2C5B559
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 12:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DB2582116;
-	Wed,  4 Jun 2025 13:55:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 22D0E80050;
+	Wed,  4 Jun 2025 14:16:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1749038127;
-	bh=gXFB2Bx2/M8g1v5NmvdGAtU0WJcqxWGDMv2aIACr8r8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Vb3Pc2Y5ggxNuYemvg7Y9vI5nBgC0M2aQkOWCyEF9KLZW1FTYrS4f+OhyWUrM0yxi
-	 MMw86RxyPJRasobpxMneB61HubArU0LrKwD3FG8Hr365l6pgo9bUDaOESLfg5YIe6K
-	 G5xf/4L4WplGeSdjUdn6Y7kGZ1mLlZoivQF4PJl7wQIPHeH82JGMzRtltgqjVrRn8a
-	 m4q5g4Pygg3ACn0/9a5QYnODG7e9Di9CtXkLuBAk4UiF+mFfvzXXGmAWuP+9Y5ULRz
-	 XnZTk+KGtXve/sVoVQKRF2C+DCg/TnbMlEwyOhFA54Kee/B60AYqgAwTUP4Z4ah2R3
-	 uZFLP7nwcOAYg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ikThl4KE";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE272828BC; Wed,  4 Jun 2025 13:55:26 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id B28F480AE1; Wed,  4 Jun 2025 14:16:45 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20723.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::723])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E46E781E25
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 13:55:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C4C780050
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 14:16:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="cqJxeg+W"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2A3741039729B; 
- Wed,  4 Jun 2025 13:55:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1749038122; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=gXFB2Bx2/M8g1v5NmvdGAtU0WJcqxWGDMv2aIACr8r8=;
- b=cqJxeg+WHeqgKrQfQzHegv8NdTpwnzDeCBcIrFbVX0DBK9+7LcWY0wb61qrz95cLnjDvWv
- LPNOHfA826cO+9Ps2wZwZu5BD1/rAPSoDs7ErhfrxbHVxnByUAwoJH/jnbpfDbY0APh2fs
- 7hc9750WdMbCxMbVUPnx8R2/ZA8f9M7P4GcQhx0N/yktMd9TW3Dc/nv03ZFcQsYXP9Zv8T
- XeMiT0twkPSQ+dA7mvn4gs07bPUpk0TB0S7B+Qy4tccHG1Iox25dg2DJBtIRpdHscn1OQ+
- q7fZf4xgnXSelPDb62+Ckgg5KyFSUiu0pysqwom3AU5kkBZDK/rRGhb8ZVtPBw==
-From: Lukasz Majewski <lukma@denx.de>
-To: Stefano Babic <sbabic@nabladev.com>,
-	Fabio Estevam <festevam@gmail.com>
-Cc: uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v2] ARM: imx: mxs: Add support for imx287 based BTT devices
-Date: Wed,  4 Jun 2025 13:54:37 +0200
-Message-Id: <20250604115437.169451-1-lukma@denx.de>
-X-Mailer: git-send-email 2.39.5
+ spf=pass smtp.mailfrom=M.Schwan@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gztgmwVpTuXgNc+1UP+Qxg8ravbNLglh98VJ0FAHTmurm/8HUF7KALkSvHGd93DNqgOjx2rm6Ev1XiAXLISglfW+PAHVJvt/U6wuBfI8W/YVlXzzUTzzzbO57P1SvevWVoRd1BZY5gDIHqJmAbiqaOYmdWqvxO0NMkoxBZC3Lpe20CGlSa21iASuxVsR5zXjpK/HJQkr1753a6uMsYH2Jfdj9wKuXHaB2CDcSrqVHilkwOHwnXjw0VTuvQbhbD/f8tjPlD3Z4k8LnqAy4HoaApLGXGaafH98A828mwI3TRAN9mjmdfz7elcho0jj9R8lJGGjCGm5J9I5gB2ixncfpw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ibbB5xcU88ZPs7qmNZ/6WAiew35er7iHkvuVn2sKqlo=;
+ b=nb6SiDcme1GLlaSxOFXnZd1eSDtyf9rPinDu/PQA6mP9kLF/OtGUvxVovq1KZlGPKJC2VergnlFLD9x1UcVa7VvuS42c1X8WEk4HEthZwO/T4E0Ej+CmH2UtaJzPlHlZsL9S9EPcSf4CLSoDfVLmfHrQIYTrytrm1CGwJPPJaN4w/bz19JOT9YIiSxuOlnFaMiiWnHH1GplwbMRQcc4CaRvr93qIsWUIB3gKX36R834EvrWgi8bZyOfTcn3CgZVmDBUIjYgh6Dr7L5IAF/bVrvwmaQx0hUNnWFiW5XGLa7oASp/Z7pDLluf+LR0bRbQwzoiTps1w6/n7TIO/9ppT9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=chromium.org smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ibbB5xcU88ZPs7qmNZ/6WAiew35er7iHkvuVn2sKqlo=;
+ b=ikThl4KENQVU10J4vhnbv/ot11RJKU9KyxK9OklghaMn1hnHJJvKABFotPE86rAfXySYLfVsYE9V14APEzsBzipbm6lbjYeRxGYrukz1/gKEXT9D5ofSm1X3WHSws/DjndcI/WAHs3omp+roLpSbEM72iSUeKtyBIvV4Zb9+YRtzb6qJgrB+FNP0V/tVru080FHLt+rY+z6ByKS+dENtjumDmfXkPuq78saz/z7Yi6gqoyn7EVHb8BKYopmz6/HV2fdVMxCgOnKM+nxb2yo7tfQdx4+mCZQ71k4lMkBCGviWACJcQ79LafRVU2cC07PPw3ikjBWHNTqypukQR3mJ0w==
+Received: from PA7P264CA0182.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:376::16)
+ by AM8P195MB0978.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1ed::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.33; Wed, 4 Jun
+ 2025 12:16:40 +0000
+Received: from DB5PEPF00014B93.eurprd02.prod.outlook.com
+ (2603:10a6:102:376:cafe::c) by PA7P264CA0182.outlook.office365.com
+ (2603:10a6:102:376::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.24 via Frontend Transport; Wed,
+ 4 Jun 2025 12:16:40 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ DB5PEPF00014B93.mail.protection.outlook.com (10.167.8.231) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8792.29 via Frontend Transport; Wed, 4 Jun 2025 12:16:40 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 4 Jun
+ 2025 14:16:39 +0200
+Received: from lws-schwan.phytec.de (172.25.32.87) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 4 Jun
+ 2025 14:16:39 +0200
+From: Martin Schwan <m.schwan@phytec.de>
+Subject: [PATCH v3 0/2] bootstd: New bootmeth for RAUC A/B systems
+Date: Wed, 4 Jun 2025 14:15:28 +0200
+Message-ID: <20250604-wip-bootmeth-rauc-v3-0-f9fad913c57e@phytec.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOA4QGgC/33NsQ6CMBDG8VcxN1vTXgGLk+9hHIAetoOUtLVKC
+ O9uYdHBOP4v+X43QyBvKcBpN4OnZIN1Qw6530FnmuFGzOrcgBxLLrBmTzuy1rl4p2iYbx4d47I
+ tCbVWqi8g70ZPvX1t5uWa29gQnZ+2F0ms139aEoyzSnJFR4m9FMV5NFOk7qAJVi3hR6g4/hIwC
+ 7VGqQqR96r6FpZleQPb3D6Q9AAAAA==
+X-Change-ID: 20250129-wip-bootmeth-rauc-03b5e2dd88f4
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, Wadim Egorov <w.egorov@phytec.de>, Martin Schwan
+ <m.schwan@phytec.de>
+X-Mailer: b4 0.14.2
+X-Originating-IP: [172.25.32.87]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B93:EE_|AM8P195MB0978:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0100eb60-1460-40c7-d859-08dda361a93b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEhJNlVwQUZTNStyTkZSRzZ1M0hNNnZnTDgxdHl1L0VXZ0ZNZXFvaFNaQ3Mw?=
+ =?utf-8?B?ZHNJQWtZbmswSitGcjZMalhVem5QdzM0eC9jSmxZcklId20yUnRxUW1uaFlM?=
+ =?utf-8?B?SGFYVU01V25sM2k3U0hoWVNHbDU1a2VwTHFubjRtWGwvR0paVXVFQkVjbVZz?=
+ =?utf-8?B?Wno0YU54UzJLQ09ub1dnS1pCMjF4WU5taWpsNnM1N3VEaHVsS3ByVEwvTzBu?=
+ =?utf-8?B?TUh5Z3R4ZGpWdVVRbE1WOFpmSVdNYVdpQlB4SjBtQzcyQnpucko5ZEhKN2F4?=
+ =?utf-8?B?RjRUUDFPLzFBdDlScWZ3cDFEQTlYMi8wRXI1ckJpVW9TcW4rb0tUL1pRVktj?=
+ =?utf-8?B?OWU0dXpxaTVWZUdtemU3SGkzdS9NV1FnYUkwTWxyY3M1WnJCTXlCdkNMUGQx?=
+ =?utf-8?B?aGwwbVo2Nmw5MGxnaUVsR0JBSHpxcUJvNk5TZWZKWjcwRW90cmV2UnFpR0hS?=
+ =?utf-8?B?Qm8wZFgySmVKdk5UZWlyK0RJUGYrNzZpL0tBY0Z2eFdQYTB4ME1tby9XTXFR?=
+ =?utf-8?B?UTlxcUE1YmxrRnpMUXpLOW1EOHV4UFY2RGJOK2lja1NkWFh3dFQwTE9ralgr?=
+ =?utf-8?B?VjUyaU1rNEYxWHhhR01GWm5yQlFndFZ3bVVYVEovK2czUDdvb1FtTFdpVDFj?=
+ =?utf-8?B?U2ZFeDg3ODFWYUFKd2NodzBIYm5JZ2RvMHd3Tml2alRRY2xodXBtMGQ0NEoz?=
+ =?utf-8?B?QnQ4dmZhY2RxZEVkR0lwYXErNTRwb0VEaVErRW1SQ3RHUnBxZHh1eWFnZWF2?=
+ =?utf-8?B?czZ3R2JWK0pReGhRdiswaFJ2Nm5HYU9uSmxpTFhTUzRWeGpJZU9qUjdXNU9o?=
+ =?utf-8?B?QzVKRmlJYUFjQTBsS3lIWEhuNnROVXR1dE9XWWw1bWlmbmRObUIwL2VFSW9E?=
+ =?utf-8?B?K2JQMURvNUxZeXhvdGlQSFhuUUhxZythTjk1R2Y5YUwxQ0hGQWs0VW9qYkFs?=
+ =?utf-8?B?M0xBVnlTMExlYlBQcU80Z3ZPS2pHT2xGMmJmVndxSWpLQ1AwOXh2b3ZNcWI4?=
+ =?utf-8?B?dUR1RDR2R0VLVVdiZVBkd1FlL0FQUGpQd0ZKSS93c1AvcUgrbmsxNGFUOEF6?=
+ =?utf-8?B?OVJyS25qZjJIOCtsY1NaKytianNGWUtEQWpCejB0S3M5S0NYTjJYTjRNV1Zx?=
+ =?utf-8?B?YnR1djVMd2h1Skl5TnVhNmtNcXU2RUw5bFJxM0dST2ZYMEpXeU5KNUk5clFr?=
+ =?utf-8?B?WEI2b0RRenYzcjlSMlhTS0ltYi9jOExHTUN2NklFUWRPTXhpNW5GbndaTnkz?=
+ =?utf-8?B?b3RpcFkrTGkwUTVtcmp4bUI5eVZWakdma0xhakNEVDFTYTZXVUpzQ2NTTDFT?=
+ =?utf-8?B?VitnMUFNZHVCM3VWdGxuYjVhMi9EQmlKQWx0TmJJbG52ajQ4NDcrZ2RQa3dT?=
+ =?utf-8?B?dlJVbDkzTVFwN3pkQ0luSHVGcXA0cjFIcGdBTG5qWXp5VEwyTmVJVW1QYzdx?=
+ =?utf-8?B?Q1lnUVhGb21KckdNeWJPQW1xWkNiQ2lqN2R4R2RvTnFBK3JubkJLSjIwYldk?=
+ =?utf-8?B?YWNnekFFaGxWYmdjdnhQN1BNdHhXaCtNaDBkZnBrdW1rU2NUaGhYMzlNelJ4?=
+ =?utf-8?B?Mmg2b3dwU2piK3FCKzlRM2F3bklRdkp5TGp5S2U1bWVhZmkwandKMWxkb3Jr?=
+ =?utf-8?B?R2QyRTZMMUNiYVgwTHg2OURQTlE1Ny96TlZTS1I0S28xTGlKQTJVZ0RzNVhi?=
+ =?utf-8?B?WENCdEttZm5uNzUyTU9yT1dLcm1hOFZnanZVeC9XR21aOFhKODRaUWRHVFlw?=
+ =?utf-8?B?WDJTZ3FiV3k2a3lFT21FeFlXTkQrQVJVOWx3QnBQaS8yalVHTjVMa2YxMi9v?=
+ =?utf-8?B?QlVIUjdjMEJCZWNleitxa2RwWDN6ay9MRkUycVE2R3JRNjUvS3lZcksyTWcr?=
+ =?utf-8?B?SUZtcHFsUXJHRHZRc1lqaFlFZnZ6YTVlUFZpNzZYVG96RmplNTF4NVhxMUx2?=
+ =?utf-8?B?dVA2TW05dFM4bjNKQTJVNC85NnNqTGh3Q2RuWDBpajdMelBYNHR3VTYvcFla?=
+ =?utf-8?B?cE51Z1FUZEVRPT0=?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 12:16:40.2195 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0100eb60-1460-40c7-d859-08dda361a93b
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B93.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8P195MB0978
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,1476 +161,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The btt[c3] devices are based on imx287 SoC.
+This series implements a new bootmeth for RAUC A/B systems. RAUC (Robust
+Auto Update Controller) is a lightweight update client, providing "Safe
+and Secure OTA Updates for Embedded Linux". See the following links for
+more information about RAUC:
 
-U-Boot SPL 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
-Trying to boot from MMC1
+  https://rauc.io/
+  https://rauc.readthedocs.io/en/latest/
 
-U-Boot 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+PHYTEC uses RAUC in its Yocto based distribution "Ampliphy" as the
+default way of updating embedded devices based on PHYTEC hardware. So
+far, the logic selecting the correct partitions and files to boot was
+being implemented in the U-Boot environment. While this is a
+straightforward way to do it, adding and supporting new platforms became
+somewhat tedious and is platform-specific. The introduction of U-Boot's
+"Standard Boot" provided a convincing alternative, promising a simpler
+and more portable way of booting, even for RAUC systems. This led me to
+implement a new bootmeth supporting RAUC A/B systems. Note, that this
+new bootmeth is not proprietary to PHYTEC products and is designed to
+work on other hardware with a RAUC A/B system, too.
 
-CPU:   Freescale i.MX28 rev1.2 at 454 MHz
-BOOT:  SSP SPI #3, master, 3V3 NOR
-Model: BTT3
-Board: LWE BTT SoM HW rev 0
-DRAM:  256 MiB
-Core:  86 devices, 15 uclasses, devicetree: separate
-MMC:   MXS MMC: 0
-Loading Environment from SPIFlash... SF: Detected is25lp128 with page
-                    size 256 Bytes, erase size 64 KiB, total 16 MiB
-OK
-In:    serial@80074000
-Out:   serial@80074000
-Err:   serial@80074000
-Net:   eth0: ethernet@800f0000
-Hit any key to stop autoboot:  0
+The bootmeth currently only supports symmetric A/B partitioning layouts.
+E.g. A/rescue is not (yet) supported. The partition indexes and default
+slot tries can be specified via configuration options.
 
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
+For now, the bootmeth_rauc uses a similar approach for loading the
+Kernel and device tree as the bootmeth_script, in that it requires a FIT
+containing a U-Boot script loading the desired distro. It could be
+possible to support booting without a script and load the Kernel and DT
+directly with this bootmeth, but I found the script method to be very
+flexible for now, in letting the distro decide what to load.
+
+The bootmeth_rauc was tested on a phyBOARD-Pollux i.MX8M Plus [1] with
+BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2 [2].
+
+Supported boot devices are currently only MMC devices, but it should be
+possible to add SPI flashes in the future.
+
+To test this patch stack with PHYTEC's phyBOARD-Pollux i.MX8M Plus
+board, you need to adjust the boot files to include the boot.scr.uimg
+containing the distro's boot script and set "optargs" to "${raucargs}"
+in it. Also disable any legacyboot in the U-Boot environment and simply
+boot with Standard Boot:
+
+  bootmeth order rauc
+  bootflow scan -lb
+
+Regards,
+Martin
+
+[1]: https://www.phytec.eu/en/produkte/single-board-computer/phyboard-pollux/
+[2]: https://download.phytec.de/Software/Linux/BSP-Yocto-i.MX8MP/BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2/
 
 ---
-Changes for v2:
-- Replace README with entry in doc/boards (*.rst files)
----
- arch/arm/dts/imx28-btt3-0-u-boot.dtsi |   7 +
- arch/arm/dts/imx28-btt3-1-u-boot.dtsi |   7 +
- arch/arm/dts/imx28-btt3-2-u-boot.dtsi |   7 +
- arch/arm/dts/imx28-btt3-u-boot.dtsi   |  90 ++++++
- arch/arm/mach-imx/mxs/Kconfig         |   6 +
- board/liebherr/btt/Kconfig            |  24 ++
- board/liebherr/btt/MAINTAINERS        |   6 +
- board/liebherr/btt/Makefile           |   9 +
- board/liebherr/btt/boot_img_scr.h     |  27 ++
- board/liebherr/btt/btt.c              | 449 ++++++++++++++++++++++++++
- board/liebherr/btt/btt.env            | 139 ++++++++
- board/liebherr/btt/spl_btt.c          | 316 ++++++++++++++++++
- configs/imx28_btt3_defconfig          | 140 ++++++++
- doc/board/index.rst                   |   1 +
- doc/board/liebherr/btt.rst            |  34 ++
- doc/board/liebherr/index.rst          |   9 +
- include/configs/btt.h                 |  17 +
- 17 files changed, 1288 insertions(+)
- create mode 100644 arch/arm/dts/imx28-btt3-0-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-btt3-1-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-btt3-2-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-btt3-u-boot.dtsi
- create mode 100644 board/liebherr/btt/Kconfig
- create mode 100644 board/liebherr/btt/MAINTAINERS
- create mode 100644 board/liebherr/btt/Makefile
- create mode 100644 board/liebherr/btt/boot_img_scr.h
- create mode 100644 board/liebherr/btt/btt.c
- create mode 100644 board/liebherr/btt/btt.env
- create mode 100644 board/liebherr/btt/spl_btt.c
- create mode 100644 configs/imx28_btt3_defconfig
- create mode 100644 doc/board/liebherr/btt.rst
- create mode 100644 doc/board/liebherr/index.rst
- create mode 100644 include/configs/btt.h
+Changes in v3:
+- Invert if-statement check for setting default value of BOOT_*_LEFT env
+  variables. This would falsely trigger an error message before.
+- Link to v2: https://lore.kernel.org/r/20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de
 
-diff --git a/arch/arm/dts/imx28-btt3-0-u-boot.dtsi b/arch/arm/dts/imx28-btt3-0-u-boot.dtsi
-new file mode 100644
-index 00000000000..b128eef9e17
---- /dev/null
-+++ b/arch/arm/dts/imx28-btt3-0-u-boot.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+#include "imx28-btt3-u-boot.dtsi"
-diff --git a/arch/arm/dts/imx28-btt3-1-u-boot.dtsi b/arch/arm/dts/imx28-btt3-1-u-boot.dtsi
-new file mode 100644
-index 00000000000..b128eef9e17
---- /dev/null
-+++ b/arch/arm/dts/imx28-btt3-1-u-boot.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+#include "imx28-btt3-u-boot.dtsi"
-diff --git a/arch/arm/dts/imx28-btt3-2-u-boot.dtsi b/arch/arm/dts/imx28-btt3-2-u-boot.dtsi
-new file mode 100644
-index 00000000000..b128eef9e17
---- /dev/null
-+++ b/arch/arm/dts/imx28-btt3-2-u-boot.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+#include "imx28-btt3-u-boot.dtsi"
-diff --git a/arch/arm/dts/imx28-btt3-u-boot.dtsi b/arch/arm/dts/imx28-btt3-u-boot.dtsi
-new file mode 100644
-index 00000000000..3569d29a737
---- /dev/null
-+++ b/arch/arm/dts/imx28-btt3-u-boot.dtsi
-@@ -0,0 +1,90 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+/*
-+ * The minimal augmentation DTS U-Boot file to allow eMMC driver
-+ * configuration in SPL for falcon boot.
-+ */
-+#include "imx28-u-boot.dtsi"
-+/ {
-+	aliases {
-+		/delete-property/ saif0;
-+		/delete-property/ saif1;
-+		/delete-property/ spi0;
-+		/delete-property/ spi1;
-+		/delete-property/ usbphy0;
-+		/delete-property/ usbphy1;
-+	};
-+	apb@80000000 {
-+		bootph-pre-ram;
-+
-+		apbh@80000000 {
-+			bootph-pre-ram;
-+		};
-+
-+		apbx@80040000 {
-+			bootph-pre-ram;
-+		};
-+	};
-+
-+	/delete-node/ keypad;
-+	/delete-node/ panel;
-+	/delete-node/ sdio-pwrseq;
-+	/delete-node/ sound;
-+};
-+
-+&clks {
-+	bootph-pre-ram;
-+	status = "disable";
-+};
-+
-+&duart {
-+	/delete-property/ clocks;
-+	bootph-pre-ram;
-+	type = <1>; /* TYPE_PL011 */
-+};
-+
-+&gpio0 {
-+	bootph-pre-ram;
-+};
-+
-+&gpio3 {
-+	bootph-pre-ram;
-+};
-+
-+&gpio4 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl {
-+	/delete-property/ pinctrl-names;
-+	/delete-property/ pinctrl-0;
-+	bootph-pre-ram;
-+};
-+
-+&ssp0 {
-+	bootph-pre-ram;
-+};
-+
-+&ssp3 {
-+	num-cs = <2>;
-+	spi-max-frequency = <40000000>;
-+	bootph-pre-ram;
-+};
-+
-+/delete-node/ &hog_pins_a;
-+/delete-node/ &keypad_pins_bttc;
-+/delete-node/ &lcdif;
-+/delete-node/ &lcdif_sync_pins_bttc;
-+/delete-node/ &pwm;
-+/delete-node/ &saif0;
-+/delete-node/ &saif1;
-+/delete-node/ &ssp1;
-+/delete-node/ &ssp2;
-+/delete-node/ &usb0;
-+/delete-node/ &usb1;
-+/delete-node/ &usbphy0;
-+/delete-node/ &usbphy1;
-diff --git a/arch/arm/mach-imx/mxs/Kconfig b/arch/arm/mach-imx/mxs/Kconfig
-index d2e4205c5ce..6d466868fe4 100644
---- a/arch/arm/mach-imx/mxs/Kconfig
-+++ b/arch/arm/mach-imx/mxs/Kconfig
-@@ -38,6 +38,11 @@ choice
- 	prompt "MX28 board select"
- 	optional
- 
-+config TARGET_BTT
-+	bool "Support BTT"
-+	select PL01X_SERIAL
-+	imply OF_UPSTREAM
-+
- config TARGET_MX28EVK
- 	bool "Support mx28evk"
- 	select PL01X_SERIAL
-@@ -69,6 +74,7 @@ config SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR
- 	  This option enables the 4P2 linear regulator (derived
- 	  from VDD5V) - so the VDD4P2 power source is operational.
- 
-+source "board/liebherr/btt/Kconfig"
- source "board/freescale/mx28evk/Kconfig"
- source "board/liebherr/xea/Kconfig"
- 
-diff --git a/board/liebherr/btt/Kconfig b/board/liebherr/btt/Kconfig
-new file mode 100644
-index 00000000000..ff35dd04532
---- /dev/null
-+++ b/board/liebherr/btt/Kconfig
-@@ -0,0 +1,24 @@
-+if TARGET_BTT
-+
-+config SYS_BOARD
-+	default "btt"
-+
-+config SYS_VENDOR
-+	default "liebherr"
-+
-+config SYS_SOC
-+	default "mxs"
-+
-+config SYS_CONFIG_NAME
-+	default "btt"
-+
-+config ENV_SIZE
-+	default 0x2000
-+
-+config ENV_SECT_SIZE
-+	default 0x10000 if ENV_IS_IN_SPI_FLASH
-+
-+config ENV_OFFSET
-+	default 0x80000 if ENV_IS_IN_SPI_FLASH
-+
-+endif
-diff --git a/board/liebherr/btt/MAINTAINERS b/board/liebherr/btt/MAINTAINERS
-new file mode 100644
-index 00000000000..b4afed5aaeb
---- /dev/null
-+++ b/board/liebherr/btt/MAINTAINERS
-@@ -0,0 +1,6 @@
-+BTT BOARD
-+M:	Lukasz Majewski <lukma@denx.de>
-+S:	Maintained
-+F:	board/liebherr/btt/
-+F:	include/configs/btt.h
-+F:	configs/imx28_btt3_defconfig
-diff --git a/board/liebherr/btt/Makefile b/board/liebherr/btt/Makefile
-new file mode 100644
-index 00000000000..a8ab657a9e0
---- /dev/null
-+++ b/board/liebherr/btt/Makefile
-@@ -0,0 +1,9 @@
-+#
-+# (C) Copyright 2025
-+# Lukasz Majewski, DENX Software Engineering, lukma@denx.de.
-+#
-+# SPDX-License-Identifier:	GPL-2.0+
-+#
-+
-+obj-y	:= btt.o
-+obj-$(CONFIG_XPL_BUILD) += spl_btt.o
-diff --git a/board/liebherr/btt/boot_img_scr.h b/board/liebherr/btt/boot_img_scr.h
-new file mode 100644
-index 00000000000..baa3072b49c
---- /dev/null
-+++ b/board/liebherr/btt/boot_img_scr.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier:     GPL-2.0+ */
-+/*
-+ * Struct for boot image source description for placing in last
-+ * two SPI NOR flash sectors on legcom.
-+ */
-+
-+struct boot_img_src {
-+	u8 magic;	/* Must be 'B' = 0x42 */
-+	u8 flags;	/* flags to specify mmcblk[0|1] boot[0|1] */
-+	u8 crc8;	/* CRC-8 over above two bytes */
-+} __packed;
-+
-+/*
-+ * Bit definition in boot_img_src.flags:
-+ *  Bit 0: mmcblk device 0 or 1 (1 - if this bit set)
-+ *  Bit 1: mmcblk boot partition 0 or 1.
-+ *         for eMMC: boot0 if this bit is cleared, boot1 - if set
-+ *         for SD-card the boot partition value will always be 0
-+ *         (independent of the value of this bit)
-+ *
-+ */
-+#define BOOT_SRC_MMC1	BIT(0)
-+#define BOOT_SRC_PART1	BIT(1)
-+
-+/* Offset of the first boot image source descriptor in SPI NOR */
-+#define SPI_FLASH_BOOT_SRC_OFFS	0xFE0000
-+#define SPI_FLASH_SECTOR_SIZE	0x10000
-diff --git a/board/liebherr/btt/btt.c b/board/liebherr/btt/btt.c
-new file mode 100644
-index 00000000000..c6b7e379b05
---- /dev/null
-+++ b/board/liebherr/btt/btt.c
-@@ -0,0 +1,449 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * BTT[3C] iMX28 board
-+ *
-+ * Copyright (C) 2025 DENX Software Engineering
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+#include <fdt_support.h>
-+#include <init.h>
-+#include <log.h>
-+#include <net.h>
-+#include <asm/global_data.h>
-+#include <asm/gpio.h>
-+#include <asm/io.h>
-+#include <asm/arch/imx-regs.h>
-+#include <asm/arch/iomux-mx28.h>
-+#include <asm/arch/clock.h>
-+#include <asm/arch/sys_proto.h>
-+#include <linux/delay.h>
-+#include <linux/mii.h>
-+#include <miiphy.h>
-+#include <netdev.h>
-+#include <errno.h>
-+#include <usb.h>
-+#include <serial.h>
-+#include <u-boot/crc.h>
-+#include "boot_img_scr.h"
-+
-+#include <spi.h>
-+#include <spi_flash.h>
-+
-+#ifdef CONFIG_XPL_BUILD
-+#include <spl.h>
-+#endif
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/*
-+ * Functions
-+ */
-+
-+static void init_clocks(void)
-+{
-+	/* IO0 clock at 480MHz */
-+	mxs_set_ioclk(MXC_IOCLK0, 480000);
-+	/* IO1 clock at 480MHz */
-+	mxs_set_ioclk(MXC_IOCLK1, 480000);
-+
-+	/* SSP0 clock at 96MHz */
-+	mxs_set_sspclk(MXC_SSPCLK0, 96000, 0);
-+	/* SSP2 clock at 160MHz */
-+	mxs_set_sspclk(MXC_SSPCLK2, 160000, 0);
-+	/* SSP3 clock at 96MHz */
-+	mxs_set_sspclk(MXC_SSPCLK3, 96000, 0);
-+}
-+
-+#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_FRAMEWORK)
-+void board_init_f(ulong arg)
-+{
-+	init_clocks();
-+	spl_early_init();
-+	preloader_console_init();
-+}
-+
-+static struct boot_img_src img_src[2];
-+static int spi_load_boot_info(void)
-+{
-+	struct spi_flash *flash;
-+	int err;
-+
-+	flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS,
-+				CONFIG_SF_DEFAULT_CS,
-+				CONFIG_SF_DEFAULT_SPEED,
-+				CONFIG_SF_DEFAULT_MODE);
-+	if (!flash) {
-+		printf("%s: SPI probe err\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	/*
-+	 * Load both boot info structs from SPI flash
-+	 */
-+	err = spi_flash_read(flash, SPI_FLASH_BOOT_SRC_OFFS,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[0]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	err = spi_flash_read(flash,
-+			     SPI_FLASH_BOOT_SRC_OFFS + SPI_FLASH_SECTOR_SIZE,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[1]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	debug("%s: BI0 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[0].magic, img_src[0].flags, img_src[0].crc8);
-+
-+	debug("%s: BI1 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[1].magic, img_src[1].flags, img_src[1].crc8);
-+
-+	return 0;
-+}
-+
-+#define BTT_MONITORING_DEVICE_TIMEOUT 100
-+static int rescue_val;
-+
-+void spl_board_init(void)
-+{
-+	struct gpio_desc phy_rst, boot, rescue, wifi_en, bt_en;
-+	int ret, i;
-+
-+	/*
-+	 * On the new HW version of BTTC/3 (with LAN8720ai PHY) the !RST pin
-+	 * (15) is pulled LOW by external resistor. As a result it needs to be
-+	 * set HIGH as soon as possible to allow correct generation of RESET
-+	 * pulse.
-+	 *
-+	 * In the old BTTC (with TLK105 PHY) the RC circuit was used instead
-+	 * to set the RESET pin to HIGH after 100us, so there was no need to
-+	 * set it explicitly.
-+	 */
-+	ret = dm_gpio_lookup_name("GPIO4_12", &phy_rst);
-+	if (ret)
-+		printf("Cannot get GPIO4_12\n");
-+
-+	ret = dm_gpio_request(&phy_rst, "phy-rst");
-+	if (ret)
-+		printf("Cannot request GPIO4_12\n");
-+
-+	dm_gpio_set_dir_flags(&phy_rst, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-+
-+	/*
-+	 * Explicitly set GPIO, which controls WL_EN (wifi) to LOW. On the BTT3
-+	 * it is directly connected to Jody module without any externa pull up
-+	 * down register.
-+	 */
-+	ret = dm_gpio_lookup_name("GPIO0_27", &wifi_en);
-+	if (ret)
-+		printf("Cannot get GPIO0_27\n");
-+
-+	ret = dm_gpio_request(&wifi_en, "wifi-en");
-+	if (ret)
-+		printf("Cannot request GPIO0_27\n");
-+
-+	dm_gpio_set_dir_flags(&wifi_en, GPIOD_IS_OUT | GPIOD_ACTIVE_LOW |
-+			      GPIOD_IS_OUT_ACTIVE);
-+
-+	/*
-+	 * Explicitly set GPIO, which controls BT_EN (Bluetooth) to LOW. On the
-+	 * BTT3 it is connected to Jody module via RC circuit (after some R*C
-+	 * time this pin is set to HIGH). However, the manual recommends setting
-+	 * it high from LOW state.
-+	 */
-+	ret = dm_gpio_lookup_name("GPIO3_27", &bt_en);
-+	if (ret)
-+		printf("Cannot get GPIO3_27\n");
-+
-+	ret = dm_gpio_request(&bt_en, "bt-en");
-+	if (ret)
-+		printf("Cannot request GPIO3_27\n");
-+
-+	dm_gpio_set_dir_flags(&bt_en, GPIOD_IS_OUT | GPIOD_ACTIVE_LOW |
-+			      GPIOD_IS_OUT_ACTIVE);
-+
-+	/* 'boot' and 'rescue' pins */
-+	ret = dm_gpio_lookup_name("GPIO4_9", &boot);
-+	if (ret)
-+		printf("Cannot get GPIO4_9\n");
-+
-+	ret = dm_gpio_request(&boot, "boot");
-+	if (ret)
-+		printf("Cannot request GPIO4_9\n");
-+
-+	dm_gpio_set_dir_flags(&boot, GPIOD_IS_IN);
-+
-+	ret = dm_gpio_lookup_name("GPIO4_11", &rescue);
-+	if (ret)
-+		printf("Cannot get GPIO4_11\n");
-+
-+	ret = dm_gpio_request(&rescue, "rescue");
-+	if (ret)
-+		printf("Cannot request GPIO4_11\n");
-+
-+	dm_gpio_set_dir_flags(&rescue, GPIOD_IS_IN);
-+
-+	/* Wait for ready signal from system "monitoring" device */
-+	for (i = 0; i < BTT_MONITORING_DEVICE_TIMEOUT; i++) {
-+		if (dm_gpio_get_value(&boot))
-+			break;
-+		mdelay(10);
-+	}
-+
-+	rescue_val = dm_gpio_get_value(&rescue);
-+}
-+
-+int spl_mmc_emmc_boot_partition(struct mmc *mmc)
-+{
-+	int i, src_idx = -1, ret;
-+
-+	ret = spi_load_boot_info();
-+	if (ret) {
-+		printf("%s: Cannot read BTT boot info! [%d]\n", __func__, ret);
-+		/* To avoid bricking board - by default boot from boot0 eMMC */
-+		return 1;
-+	}
-+
-+	for (i = 0; i < 2; i++) {
-+		if (img_src[i].magic == 'B' &&
-+		    img_src[i].crc8 == crc8(0, &img_src[i].magic, 2)) {
-+			src_idx = i;
-+			break;
-+		}
-+	}
-+
-+	debug("%s: src idx: %d\n", __func__, src_idx);
-+
-+	if (src_idx < 0)
-+		/*
-+		 * Always use eMMC (mmcblkX) boot0 if no
-+		 * valid image source description found
-+		 */
-+		return 1;
-+
-+	if (img_src[src_idx].flags & BOOT_SRC_PART1)
-+		return 2;
-+
-+	return 1;
-+}
-+
-+void board_boot_order(u32 *spl_boot_list)
-+{
-+	spl_boot_list[0] = BOOT_DEVICE_MMC1;
-+	spl_boot_list[1] = BOOT_DEVICE_SPI;
-+	spl_boot_list[2] = BOOT_DEVICE_UART;
-+}
-+
-+int spl_start_uboot(void)
-+{
-+	/* break into full u-boot on 'c' */
-+	if (serial_tstc() && serial_getc() == 'c')
-+		return 1;
-+
-+	debug("%s: rescue: %d\n", __func__, rescue_val);
-+	return rescue_val;
-+}
-+#else
-+
-+/*
-+ * Providing proper board name - i.e. 'bttc' vs 'btt3'
-+ * The distinction is made on the size of DRAM memory - i.e.
-+ * bttc has only 128 MiB, whereas btt3 has 256 MiB.
-+ */
-+#define STR_BTTC "bttc"
-+#define STR_BTT3 "btt3"
-+
-+static const char *get_board_name(void)
-+{
-+	if (gd->bd->bi_dram[0].size == SZ_128M)
-+		return STR_BTTC;
-+
-+	return STR_BTT3;
-+}
-+
-+/*
-+ * Reading the HW ID number for BTT3 device
-+ *
-+ * GPIOs from Port 4:
-+ * E0: GPIO4_10
-+ * E1: GPIO4_5
-+ * E2: GPIO4_14
-+ * E3: GPIO4_15
-+ * are used on BTT3 to store HW revision information.
-+ *
-+ * From rev 1+ the REV GPIOs are properly connected on the PCB, so PULL UPs
-+ * shall be disabled (as they are by default on pins' SPL configuration)
-+ *.
-+ * Rev 0: - read all '1' (first production version without HW rev set)
-+ * Rev 1: - read 0x1 (E0 set)
-+ * Rev 2: - read 0x2 (E1 set)
-+ *
-+ */
-+#define BTT3_HW_ID_GPIO_PORT (MXS_PINCTRL_BASE + (0x0900 + ((4) * 0x10)))
-+#define BTT3_HW_ID_E0 BIT(10)
-+#define BTT3_HW_ID_E1 BIT(5)
-+#define BTT3_HW_ID_E2 BIT(14)
-+#define BTT3_HW_ID_E3 BIT(15)
-+
-+static u8 get_som_rev(void)
-+{
-+	struct mxs_register_32 *reg =
-+		(struct mxs_register_32 *)BTT3_HW_ID_GPIO_PORT;
-+	u32 tmp = ~readl(&reg->reg);
-+	u8 id = 0;
-+
-+	if (tmp & BTT3_HW_ID_E0)
-+		id += 1;
-+
-+	if (tmp & BTT3_HW_ID_E1)
-+		id += 2;
-+
-+	if (tmp & BTT3_HW_ID_E2)
-+		id += 4;
-+
-+	if (tmp & BTT3_HW_ID_E3)
-+		id += 8;
-+
-+	/*
-+	 * Special case for first production BTT3 version, without HW
-+	 * revision support (so it reads 0x0s as pullups are disabled
-+	 * and hence 0xF is set for ID)
-+	 */
-+	if (id == 0xF)
-+		id = 0;
-+
-+	return id;
-+}
-+
-+int board_early_init_f(void)
-+{
-+	init_clocks();
-+
-+	return 0;
-+}
-+
-+int board_init(void)
-+{
-+	struct gpio_desc phy_rst;
-+	int ret;
-+
-+	/* Address of boot parameters */
-+	gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
-+
-+	cpu_eth_init(NULL);
-+
-+	/* PHY INT#/PWDN# */
-+	ret = dm_gpio_lookup_name("GPIO4_13", &phy_rst);
-+	if (ret) {
-+		printf("Cannot get GPIO4_13\n");
-+		return ret;
-+	}
-+
-+	ret = dm_gpio_request(&phy_rst, "phy-rst");
-+	if (ret) {
-+		printf("Cannot request GPIO4_13\n");
-+		return ret;
-+	}
-+
-+	dm_gpio_set_dir_flags(&phy_rst, GPIOD_IS_IN);
-+	udelay(1000);
-+
-+	return 0;
-+}
-+
-+#if defined(CONFIG_BOARD_LATE_INIT)
-+int board_late_init(void)
-+{
-+	int ret = env_set_ulong("board_som_rev", get_som_rev());
-+
-+	if (ret)
-+		printf("Cannot set BTT's SoM revision env variable!\n");
-+
-+	ret = env_set("arch", get_board_name());
-+	if (ret)
-+		printf("Cannot set SoM 'arch' env variable!\n");
-+
-+	return 0;
-+}
-+#endif
-+
-+#if defined(CONFIG_DISPLAY_BOARDINFO)
-+int checkboard(void)
-+{
-+	printf("Board: LWE BTT SoM HW rev %d\n", get_som_rev());
-+
-+	return 0;
-+}
-+#endif
-+
-+int dram_init(void)
-+{
-+	return mxs_dram_init();
-+}
-+
-+#if defined(CONFIG_OF_BOARD)
-+int board_fdt_blob_setup(void **fdtp)
-+{
-+	/*
-+	 * The only purpose of this function is the specific BTT's DTB
-+	 * setup in u-boot proper. To be more specific - the SPL
-+	 * cannot support DTB selection due to size constraints
-+	 * (SPL < 50 KiB).
-+	 *
-+	 * Hence, the DTB selection is done in u-boot, which due to
-+	 * board's partition sizes (and backward compatibility) has also
-+	 * size constrain (~448 KiB).
-+	 *
-+	 * To support multiple DTBs appended, the compression has been used
-+	 * for them. Unfortunately, the initf_malloc() is called
-+	 * after the DTB needs to be selected. To fix this problem for this
-+	 * particular setup (i.e. BTT board) the initf_malloc() is called here.
-+	 */
-+	initf_malloc();
-+
-+	return -EEXIST;
-+}
-+#endif
-+
-+#if defined(CONFIG_MULTI_DTB_FIT)
-+int board_fit_config_name_match(const char *name)
-+{
-+	u8 rev_id = get_som_rev();
-+	char board[12];
-+
-+	sprintf(board, "imx28-btt3-%d", rev_id);
-+
-+	if (!strncmp(name, board, sizeof(board)))
-+		return 0;
-+
-+	return -EINVAL;
-+}
-+#endif
-+
-+/*
-+ * NOTE:
-+ *
-+ * IMX28 clock "stub" DM driver!
-+ *
-+ * Only used for SPL stage, which is NOT using DM; serial and
-+ * eMMC configuration.
-+ */
-+static const struct udevice_id imx28_clk_ids[] = {
-+	{ .compatible = "fsl,imx28-clkctrl", },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(fsl_imx28_clkctrl) = {
-+	.name           = "fsl_imx28_clkctrl",
-+	.id             = UCLASS_CLK,
-+	.of_match       = imx28_clk_ids,
-+};
-+#endif	/* CONFIG_XPL_BUILD */
-diff --git a/board/liebherr/btt/btt.env b/board/liebherr/btt/btt.env
-new file mode 100644
-index 00000000000..aaf0b8415d1
---- /dev/null
-+++ b/board/liebherr/btt/btt.env
-@@ -0,0 +1,139 @@
-+bootmode=update
-+bootpri=mmc_mmc
-+bootsec=sf_swu
-+consdev=ttyAMA0
-+baudrate=115200
-+dtbfile=imx28-btt3-1.dtb
-+rootdev=/dev/mmcblk0p2
-+netdev=eth0
-+swufile=swupdate-image-btt3-upd.itb
-+sf_kernel_offset=0xA0000
-+sf_swu_size=0xF40000
-+ethact=FEC
-+arch=btt3
-+lwe_env=
-+	if dhcp ${loadaddr} ${hostname}/${lwe_uenv} ; then
-+	source ${loadaddr};
-+	fi
-+lwe_uenv=env_uboot_btt3.bin
-+do_update_mmc=
-+	if mmc rescan ; then
-+	mmc dev 0 ${update_mmc_part} ;
-+	if dhcp ${hostname}/${update_filename} ; then
-+	setexpr fw_sz ${filesize} / 0x200 ;
-+	setexpr fw_sz ${fw_sz} + 1 ;
-+	mmc write ${loadaddr} ${update_offset} ${fw_sz} ;
-+	fi ;
-+	fi
-+do_update_sf=
-+	if sf probe ; then
-+	if dhcp ${hostname}/${update_filename} ; then
-+	sf erase ${update_offset} +${filesize} ;
-+	sf write ${loadaddr} ${update_offset} ${filesize} ;
-+	fi ;
-+	fi
-+factory_reset=
-+	if sf probe ; then
-+	run update_swu ;
-+	setenv bootmode update ;
-+	saveenv ;
-+	fi
-+update_spl_filename=u-boot.sb
-+update_spl=
-+	setenv update_filename ${update_spl_filename} ;
-+	setenv update_offset 0 ;
-+	run do_update_sf
-+update_uboot_filename=u-boot.img
-+update_uboot=
-+	setenv update_filename ${update_uboot_filename} ;
-+	setenv update_offset 0x10000 ;
-+	run do_update_sf ;
-+	setenv update_mmc_part 1 ;
-+	setenv update_offset 0 ;
-+	run do_update_mmc ;
-+	setenv update_mmc_part 2 ;
-+	run do_update_mmc
-+update_kernel_filename=uImage
-+update_kernel=
-+	setenv update_mmc_part 1 ;
-+	setenv update_filename ${update_kernel_filename} ;
-+	setenv update_offset 0x800 ;
-+	run do_update_mmc ;
-+	setenv update_filename ${dtbfile} ;
-+	setenv update_offset 0x400 ;
-+	run do_update_mmc
-+update_swu=
-+	setenv update_filename ${swufile} ;
-+	setenv update_offset ${sf_kernel_offset} ;
-+	run do_update_sf
-+addcons=
-+	setenv bootargs ${bootargs}
-+	console=${consdev},${baudrate}
-+addip=
-+	setenv bootargs ${bootargs}
-+	ip=${ipaddr}:${serverip}:${gatewayip}:
-+		${netmask}:${hostname}:${netdev}:off
-+addmisc=
-+	setenv bootargs ${bootargs} ${miscargs}
-+addargs=run addcons addmisc
-+mmcload=
-+	mmc rescan ;
-+	mmc dev 0 1 ;
-+	mmc read ${loadaddr} 0x800 0x2000 ;
-+	mmc read ${dtbaddr} 0x400 0x80
-+netload=
-+	dhcp ${loadaddr} ${hostname}/${bootfile} ;
-+	tftp ${dtbaddr} ${hostname}/${dtbfile}
-+usbload=
-+	usb start ;
-+	load usb 0:1 ${loadaddr} ${bootfile}
-+miscargs=panic=1
-+mmcargs=setenv bootargs root=${rootdev} rw rootwait
-+nfsargs=
-+	setenv bootargs root=/dev/nfs rw
-+		nfsroot=${serverip}:${rootpath},v3,tcp
-+mmc_mmc=
-+	if run mmcload mmcargs addargs ; then
-+	bootm ${loadaddr} - ${dtbaddr} ;
-+	fi
-+mmc_nfs=
-+	if run mmcload nfsargs addip addargs ; then
-+	bootm ${loadaddr} - ${dtbaddr} ;
-+	fi
-+sf_mmc=
-+	if run sfload mmcargs addargs ; then
-+	bootm ${loadaddr} - ${dtbaddr} ;
-+	fi
-+sf_swu=
-+	if sf probe ; then
-+	sf read ${loadaddr} ${sf_kernel_offset} ${sf_swu_size} ;
-+	setenv bootargs root=/dev/ram0 rw ;
-+	run addargs ;
-+	bootm ${loadaddr}#conf-imx28-${arch}-${board_som_rev}.dtb ;
-+	fi
-+net_mmc=
-+	if run netload mmcargs addargs ; then
-+	bootm ${loadaddr} - ${dtbaddr} ;
-+	fi
-+net_nfs=
-+	if run netload nfsargs addip addargs ; then
-+	bootm ${loadaddr} - ${dtbaddr} ;
-+	fi
-+prebootcmd=
-+	if test ${envsaved} != y ; then ;
-+	setenv envsaved y ;
-+	saveenv ;
-+	fi ;
-+	if test ${bootmode} = normal ; then
-+	setenv bootdelay 0 ;
-+	setenv bootpri mmc_mmc ;
-+	elif test ${bootmode} = devel ; then
-+	setenv bootdelay 3 ;
-+	setenv bootpri net_mmc ;
-+	else
-+	if test ${bootmode} != update ; then
-+	echo Warning: unknown bootmode ${bootmode} ;
-+	fi ;
-+	setenv bootdelay 1 ;
-+	setenv bootpri sf_swu ;
-+	fi
-diff --git a/board/liebherr/btt/spl_btt.c b/board/liebherr/btt/spl_btt.c
-new file mode 100644
-index 00000000000..492120f627c
---- /dev/null
-+++ b/board/liebherr/btt/spl_btt.c
-@@ -0,0 +1,316 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * DENX M28 Boot setup
-+ *
-+ * Copyright (C) 2025 DENX Software Engineering
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+#include <config.h>
-+#include <asm/io.h>
-+#include <asm/arch/iomux-mx28.h>
-+#include <asm/arch/imx-regs.h>
-+#include <asm/arch/sys_proto.h>
-+
-+#define	MUX_CONFIG_LCD	(MXS_PAD_3V3 | MXS_PAD_4MA | MXS_PAD_NOPULL)
-+#define	MUX_CONFIG_BOOT	(MXS_PAD_3V3)
-+#define	MUX_CONFIG_TSC	(MXS_PAD_3V3 | MXS_PAD_8MA | MXS_PAD_PULLUP)
-+#define	MUX_CONFIG_SSP0	(MXS_PAD_3V3 | MXS_PAD_12MA | MXS_PAD_PULLUP)
-+#define	MUX_CONFIG_SSP2	(MXS_PAD_3V3 | MXS_PAD_4MA | MXS_PAD_PULLUP)
-+#define	MUX_CONFIG_ENET	(MXS_PAD_3V3 | MXS_PAD_8MA | MXS_PAD_NOPULL)
-+#define	MUX_CONFIG_EMI	(MXS_PAD_3V3 | MXS_PAD_12MA | MXS_PAD_NOPULL)
-+
-+const iomux_cfg_t iomux_setup[] = {
-+	/* AUART0 IRDA */
-+	MX28_PAD_AUART0_RX__AUART0_RX,
-+	MX28_PAD_AUART0_TX__AUART0_TX,
-+
-+	/* AUART 4 RS422 */
-+	MX28_PAD_AUART0_CTS__AUART4_RX,
-+	MX28_PAD_AUART0_RTS__AUART4_TX,
-+
-+	/* USB0 */
-+	MX28_PAD_AUART1_CTS__USB0_OVERCURRENT,
-+	MX28_PAD_AUART1_RTS__USB0_ID,
-+	MX28_PAD_LCD_VSYNC__GPIO_1_28, /* PRW_On */
-+
-+	/* USB1 */
-+	MX28_PAD_PWM2__USB1_OVERCURRENT,
-+
-+	/* eMMC */
-+	MX28_PAD_SSP0_CMD__SSP0_CMD | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA0__SSP0_D0 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA1__SSP0_D1 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA2__SSP0_D2 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA3__SSP0_D3 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA4__SSP0_D4 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA5__SSP0_D5 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA6__SSP0_D6 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DATA7__SSP0_D7 | MUX_CONFIG_SSP0,
-+	MX28_PAD_SSP0_DETECT__GPIO_2_9, /* Reset for eMMC */
-+	MX28_PAD_SSP0_SCK__SSP0_SCK | MUX_CONFIG_SSP0,
-+
-+	/* DIG Keys */
-+	MX28_PAD_GPMI_D00__GPIO_0_0,
-+	MX28_PAD_GPMI_D01__GPIO_0_1,
-+	MX28_PAD_GPMI_D02__GPIO_0_2,
-+	MX28_PAD_GPMI_D03__GPIO_0_3,
-+	MX28_PAD_GPMI_D04__GPIO_0_4,
-+	MX28_PAD_GPMI_D05__GPIO_0_5,
-+	MX28_PAD_GPMI_D06__GPIO_0_6,
-+	MX28_PAD_GPMI_D07__GPIO_0_7,
-+
-+	/* ADR_0-2 */
-+	MX28_PAD_GPMI_CE1N__GPIO_0_17,
-+	MX28_PAD_GPMI_CE2N__GPIO_0_18,
-+	MX28_PAD_GPMI_CE3N__GPIO_0_19,
-+
-+	/* Read Keys */
-+	MX28_PAD_GPMI_RDY0__GPIO_0_20,
-+
-+	/* LATCH_EN */
-+	MX28_PAD_GPMI_RDY1__GPIO_0_21,
-+
-+	/* Power off */
-+	MX28_PAD_GPMI_RDN__GPIO_0_24,
-+
-+	/* WIFI EN */
-+	MX28_PAD_GPMI_CLE__GPIO_0_27,
-+
-+	/* I2C1 Touch */
-+	MX28_PAD_AUART2_CTS__GPIO_3_10,
-+	MX28_PAD_AUART2_RTS__GPIO_3_11,
-+	MX28_PAD_GPMI_RDY2__GPIO_0_22, /* Touch Reset */
-+	MX28_PAD_GPMI_RDY3__GPIO_0_23, /* Touch INT */
-+
-+	/* TIVA */
-+	MX28_PAD_AUART1_RX__SSP2_CARD_DETECT,
-+	MX28_PAD_SSP2_MISO__SSP2_D0,
-+	MX28_PAD_SSP2_MOSI__SSP2_CMD,
-+	MX28_PAD_SSP2_SCK__SSP2_SCK,
-+	MX28_PAD_SSP2_SS0__SSP2_D3,
-+	MX28_PAD_SSP2_SS1__GPIO_2_20,
-+	MX28_PAD_SSP2_SS2__GPIO_2_21,
-+
-+	/* SPI3 NOR-Flash */
-+	MX28_PAD_AUART1_TX__SSP3_CARD_DETECT,
-+	MX28_PAD_AUART2_RX__SSP3_D1,
-+	MX28_PAD_AUART2_TX__SSP3_D2,
-+	MX28_PAD_SSP3_MISO__SSP3_D0,
-+	MX28_PAD_SSP3_MOSI__SSP3_CMD,
-+	MX28_PAD_SSP3_SCK__SSP3_SCK,
-+	MX28_PAD_SSP3_SS0__SSP3_D3,
-+
-+	/* NOR-Flash CMD */
-+	MX28_PAD_LCD_RS__GPIO_1_26, /* Hold */
-+	MX28_PAD_LCD_WR_RWN__GPIO_1_25, /* write protect */
-+
-+	/* I2C0 Codec */
-+	MX28_PAD_I2C0_SCL__I2C0_SCL,
-+	MX28_PAD_I2C0_SDA__I2C0_SDA,
-+
-+	/* I2S Codec */
-+	MX28_PAD_SAIF0_BITCLK__SAIF0_BITCLK,
-+	MX28_PAD_SAIF0_LRCLK__SAIF0_LRCLK,
-+	MX28_PAD_SAIF0_MCLK__SAIF0_MCLK,
-+	MX28_PAD_SAIF0_SDATA0__SAIF0_SDATA0,
-+	MX28_PAD_SAIF1_SDATA0__SAIF1_SDATA0,
-+
-+	/* BT_EN */
-+	MX28_PAD_SPDIF__GPIO_3_27,
-+
-+	/* EMI */
-+	MX28_PAD_EMI_D00__EMI_DATA0 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D01__EMI_DATA1 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D02__EMI_DATA2 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D03__EMI_DATA3 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D04__EMI_DATA4 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D05__EMI_DATA5 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D06__EMI_DATA6 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D07__EMI_DATA7 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D08__EMI_DATA8 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D09__EMI_DATA9 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D10__EMI_DATA10 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D11__EMI_DATA11 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D12__EMI_DATA12 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D13__EMI_DATA13 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D14__EMI_DATA14 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_D15__EMI_DATA15 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_ODT0__EMI_ODT0 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_DQM0__EMI_DQM0 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_ODT1__EMI_ODT1 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_DQM1__EMI_DQM1 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_DDR_OPEN_FB__EMI_DDR_OPEN_FEEDBACK | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_CLK__EMI_CLK | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_DQS0__EMI_DQS0 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_DQS1__EMI_DQS1 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_DDR_OPEN__EMI_DDR_OPEN | MUX_CONFIG_EMI,
-+
-+	MX28_PAD_EMI_A00__EMI_ADDR0 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A01__EMI_ADDR1 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A02__EMI_ADDR2 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A03__EMI_ADDR3 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A04__EMI_ADDR4 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A05__EMI_ADDR5 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A06__EMI_ADDR6 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A07__EMI_ADDR7 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A08__EMI_ADDR8 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A09__EMI_ADDR9 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A10__EMI_ADDR10 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A11__EMI_ADDR11 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A12__EMI_ADDR12 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A13__EMI_ADDR13 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_A14__EMI_ADDR14 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_BA0__EMI_BA0 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_BA1__EMI_BA1 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_BA2__EMI_BA2 | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_CASN__EMI_CASN | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_RASN__EMI_RASN | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_WEN__EMI_WEN | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_CE0N__EMI_CE0N | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_CE1N__EMI_CE1N | MUX_CONFIG_EMI,
-+	MX28_PAD_EMI_CKE__EMI_CKE | MUX_CONFIG_EMI,
-+
-+	/* Uart3 Bluetooth-Interface */
-+	MX28_PAD_AUART3_CTS__AUART3_CTS,
-+	MX28_PAD_AUART3_RTS__AUART3_RTS,
-+	MX28_PAD_AUART3_RX__AUART3_RX,
-+	MX28_PAD_AUART3_TX__AUART3_TX,
-+
-+	/* framebuffer */
-+	MX28_PAD_LCD_CS__LCD_CS | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D00__LCD_D0 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D01__LCD_D1 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D02__LCD_D2 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D03__LCD_D3 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D04__LCD_D4 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D05__LCD_D5 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D06__LCD_D6 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D07__LCD_D7 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D08__LCD_D8 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D09__LCD_D9 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D10__LCD_D10 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D11__LCD_D11 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D12__LCD_D12 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D13__LCD_D13 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D14__LCD_D14 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D15__LCD_D15 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D16__LCD_D16 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D17__LCD_D17 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D18__LCD_D18 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D19__LCD_D19 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D20__LCD_D20 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D21__LCD_D21 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D22__LCD_D22 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_D23__LCD_D23 | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_DOTCLK__LCD_DOTCLK | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_ENABLE__LCD_ENABLE | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_HSYNC__LCD_HSYNC | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_RD_E__LCD_VSYNC | MUX_CONFIG_LCD,
-+	MX28_PAD_LCD_RESET__LCD_RESET | MUX_CONFIG_LCD,
-+
-+	/* DUART RS232 */
-+	MX28_PAD_PWM0__DUART_RX,
-+	MX28_PAD_PWM1__DUART_TX,
-+
-+	/* Backlight */
-+	MX28_PAD_PWM3__PWM_3,
-+
-+	/* FEC Ethernet */
-+	MX28_PAD_ENET_CLK__CLKCTRL_ENET | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_COL__ENET1_TX_EN | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_CRS__ENET1_RX_EN | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_MDC__ENET0_MDC | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_MDIO__ENET0_MDIO | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_RX_CLK__GPIO_4_13, /* Phy Interrupt */
-+	MX28_PAD_ENET0_RX_EN__ENET0_RX_EN | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_RXD0__ENET0_RXD0 | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_RXD1__ENET0_RXD1 | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_RXD3__ENET1_RXD1 | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_TX_CLK__GPIO_4_5, /* n.c. */
-+	MX28_PAD_ENET0_TX_EN__ENET0_TX_EN | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_TXD0__ENET0_TXD0 | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_TXD1__ENET0_TXD1 | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_TXD3__ENET1_TXD1 | MUX_CONFIG_ENET,
-+	MX28_PAD_ENET0_TXD3__GPIO_4_12, /* PHY reset */
-+
-+	/* boot/rescue pins */
-+	MX28_PAD_ENET0_RXD2__GPIO_4_9,
-+	MX28_PAD_ENET0_TXD2__GPIO_4_11,
-+
-+	/* HW revision setup pins - by default pullup DISABLED */
-+	MX28_PAD_ENET0_RXD3__GPIO_4_10,
-+	MX28_PAD_ENET0_TX_CLK__GPIO_4_5,
-+	MX28_PAD_ENET0_COL__GPIO_4_14,
-+	MX28_PAD_ENET0_CRS__GPIO_4_15,
-+};
-+
-+u32 mxs_dram_vals[] = {
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000100, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00010101, 0x01010101,
-+	0x000f0f01, 0x0f02010a, 0x00000000, 0x00010101,
-+	0x00000100, 0x00000100, 0x00000000, 0x00000002,
-+	0x01010000, 0x07080403, 0x07005303, 0x0b0000c8,
-+	0x0200a0c1, 0x0002040c, 0x0038430a, 0x04290322,
-+	0x02040203, 0x00c8002b, 0x00000000, 0x00000000,
-+	0x00012100, 0xffff0303, 0x00012100, 0xffff0303,
-+	0x00012100, 0xffff0303, 0x00012100, 0xffff0303,
-+	0x00000003, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000612, 0x01000102,
-+	0x06120612, 0x00000200, 0x00020007, 0xf4004a27,
-+	0xf4004a27, 0xf4004a27, 0xf4004a27, 0x07400300,
-+	0x07400300, 0x07400300, 0x07400300, 0x00000005,
-+	0x00000000, 0x00000000, 0x01000000, 0x00000000,
-+	0x00000001, 0x000f1133, 0x00000000, 0x00001f04,
-+	0x00001f04, 0x00001f04, 0x00001f04, 0x00001f04,
-+	0x00001f04, 0x00001f04, 0x00001f04, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00010000, 0x00030404,
-+	0x00000002, 0x00000000, 0x00000000, 0x00000000,
-+	0x00000000, 0x00000000, 0x00000000, 0x01010000,
-+	0x01000000, 0x03030000, 0x00010303, 0x01020202,
-+	0x00000000, 0x02040101, 0x21002103, 0x00061200,
-+	0x06120612, 0x00000642, 0x00000000, 0x00000004,
-+	0x00000000, 0x00000080, 0x00000000, 0x00000000,
-+	0x00000000, 0xffffffff
-+};
-+
-+#ifndef CONFIG_SPL_FRAMEWORK
-+void board_init_ll(const u32 arg, const uint32_t *resptr)
-+{
-+	mxs_common_spl_init(arg, resptr, iomux_setup, ARRAY_SIZE(iomux_setup));
-+}
-+#else
-+void lowlevel_init(void)
-+{
-+	struct mxs_pinctrl_regs *pinctrl_regs =
-+		(struct mxs_pinctrl_regs *)MXS_PINCTRL_BASE;
-+
-+	/* Set EMI drive strength */
-+	writel(0x00003fff, &pinctrl_regs->hw_pinctrl_emi_ds_ctrl_clr);
-+	writel(0x00002aaa, &pinctrl_regs->hw_pinctrl_emi_ds_ctrl_set);
-+
-+	mxs_common_spl_init(0, NULL, iomux_setup, ARRAY_SIZE(iomux_setup));
-+}
-+#endif
-diff --git a/configs/imx28_btt3_defconfig b/configs/imx28_btt3_defconfig
-new file mode 100644
-index 00000000000..a84327df922
---- /dev/null
-+++ b/configs/imx28_btt3_defconfig
-@@ -0,0 +1,140 @@
-+CONFIG_ARM=y
-+CONFIG_SPL_SYS_THUMB_BUILD=y
-+CONFIG_ARCH_MX28=y
-+CONFIG_TEXT_BASE=0x40002000
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=40000000
-+CONFIG_IMX_CONFIG=""
-+CONFIG_DM_GPIO=y
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/mxs/imx28-btt3-1"
-+CONFIG_TARGET_BTT=y
-+CONFIG_SPL_MXS_PMU_MINIMAL_VDD5V_CURRENT=y
-+CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=y
-+# CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR is not set
-+CONFIG_MULTI_DTB_FIT_UNCOMPRESS_SZ=0x80000
-+CONFIG_MULTI_DTB_FIT_USER_DEF_ADDR=0x43000000
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK=0x20000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x1000
-+CONFIG_SPL_TEXT_BASE=0x1000
-+CONFIG_SYS_LOAD_ADDR=0x42000000
-+CONFIG_SF_DEFAULT_BUS=2
-+CONFIG_SPL_SIZE_LIMIT=0xa000
-+CONFIG_SPL=y
-+CONFIG_ENV_OFFSET_REDUND=0x90000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SPL_PAYLOAD="u-boot.img"
-+CONFIG_HAS_BOARD_SIZE_LIMIT=y
-+CONFIG_BOARD_SIZE_LIMIT=458752
-+CONFIG_TIMESTAMP=y
-+CONFIG_FIT=y
-+# CONFIG_BOOTMETH_EXTLINUX is not set
-+# CONFIG_BOOTMETH_VBE is not set
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyAMA0,115200n8"
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="run ${bootpri} ; run ${bootsec}"
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="run prebootcmd"
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SPL_NO_BSS_LIMIT=y
-+CONFIG_SPL_BOARD_INIT=y
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0
-+CONFIG_SUPPORT_EMMC_BOOT_OVERRIDE_PART_CONFIG=y
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_MMC_TINY=y
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_OS_BOOT=y
-+CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x44000000
-+CONFIG_SPL_FALCON_BOOT_MMCSD=y
-+CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x800
-+CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x400
-+CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x40
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x10000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x100000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x80000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x8000
-+CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_MAXARGS=32
-+CONFIG_CMD_SPL=y
-+CONFIG_CMD_ASKENV=y
-+CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+# CONFIG_CMD_PINMUX is not set
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_DOS_PARTITION=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_BOARD=y
-+CONFIG_OF_LIST="nxp/mxs/imx28-btt3-0 nxp/mxs/imx28-btt3-1 nxp/mxs/imx28-btt3-2"
-+CONFIG_MULTI_DTB_FIT_GZIP=y
-+CONFIG_MULTI_DTB_FIT_USER_DEFINED_AREA=y
-+CONFIG_MULTI_DTB_FIT=y
-+CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent interrupts"
-+CONFIG_SPL_OF_PLATDATA=y
-+# CONFIG_SPL_OF_PLATDATA_PARENT is not set
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_USE_BOOTFILE=y
-+CONFIG_BOOTFILE="uImage"
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="btt3"
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_DM=y
-+CONFIG_DEVRES=y
-+CONFIG_MXS_GPIO=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_MMC_MXS=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHYLIB=y
-+CONFIG_PHY_ADDR_ENABLE=y
-+CONFIG_PHY_ADDR=1
-+CONFIG_PHY_FIXED=y
-+CONFIG_FEC_MXC=y
-+CONFIG_MII=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_MXS=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_SPECIFY_CONSOLE_INDEX=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_MXS_SPI=y
-+CONFIG_SPL_CRC8=y
-+# CONFIG_SPL_OF_LIBFDT is not set
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index 3c5a2c7d1cf..e084c7fb1df 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -38,6 +38,7 @@ Board-specific doc
-    kontron/index
-    lenovo/index
-    lg/index
-+   liebherr/index
-    mediatek/index
-    microchip/index
-    microsoft/index
-diff --git a/doc/board/liebherr/btt.rst b/doc/board/liebherr/btt.rst
-new file mode 100644
-index 00000000000..d22ffa205bd
---- /dev/null
-+++ b/doc/board/liebherr/btt.rst
-@@ -0,0 +1,34 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Lukasz Majewski <lukma@denx.de>
-+
-+BTT devices
-+===========
-+
-+Those devices are based on IMX's IMX287 SoC. The description regarding the
-+**btt** family of boards (i.e. `btt3` and `bttc`) is identical as the one for
-+the already supported **xea** board.
-+
-+Building
-+--------
-+
-+Make sure that `CROSS_COMPILE` is set appropriately:
-+
-+.. code-block:: text
-+
-+ $ make imx28_btt3_defconfig
-+ $ make -j4 u-boot.sb u-boot.img
-+
-+Now you should see `u-boot.sb` and `u-boot.img` files in the build directory.
-+
-+For initial bringup - one can use `uuu` utulity to boot till u-boot prompt
-+(USB connection with the board is required).
-+
-+Flashing
-+--------
-+
-+Via U-Boot:
-+
-+.. code-block:: text
-+
-+ => run update_spl
-+ => run update_uboot
-diff --git a/doc/board/liebherr/index.rst b/doc/board/liebherr/index.rst
-new file mode 100644
-index 00000000000..d8db6bd188c
---- /dev/null
-+++ b/doc/board/liebherr/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Liebherr
-+========
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   btt
-diff --git a/include/configs/btt.h b/include/configs/btt.h
-new file mode 100644
-index 00000000000..0e15e7299fb
---- /dev/null
-+++ b/include/configs/btt.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2025 DENX Software Engineering
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+#ifndef __CONFIGS_BTT_H__
-+#define __CONFIGS_BTT_H__
-+
-+/* Memory configuration */
-+#define PHYS_SDRAM_1			0x40000000	/* Base address */
-+#define PHYS_SDRAM_1_SIZE		0x10000000	/* Max 256 MB RAM */
-+#define CFG_SYS_SDRAM_BASE		PHYS_SDRAM_1
-+
-+/* The rest of the configuration is shared */
-+#include <configs/mxs.h>
-+
-+#endif /* __CONFIGS_BTT_H__ */
+Changes in v2:
+- Remove LOG_DEBUG from boot/bootmeth_rauc.c
+- Reorder asm/cache.h include to be last
+- Do not check for RAUC-specific files in the rootfs anymore. This does
+  not work on encrypted root filesystems and is not a stable indicator
+  for a functioning RAUC system.
+- Add a description of the term "slot" in the corresponding private
+  struct.
+- Remove boot tries left from struct distro_rauc_slot. The boot tries
+  are read directly from the environment, as that's the only correct
+  source RAUC is relying on.
+- Remove the current boot_order from struct distro_rauc_priv, for the
+  same reason as above (env is correct source).
+- Add function for retrieving a slot struct, to ease finding the right
+  one when e.g. iterating or getting by name.
+- Fix multiline comments.
+- Fix various if-statements which were explicitly comparing to 0 or
+  NULL.
+- Free various, temporary instances of allocated string lists.
+- Set default env values for BOOT_ORDER and associated BOOT_*_LEFT
+  variables. These variables are mandatory for RAUC to work.
+- Use calloc() instead of malloc() for allocating the private slots.
+- Use config options for configuring the partitions and default boot
+  order, instead of setting them via the U-Boot env.
+- Use bootstd_get_prefixes()'s return value and check all available
+  prefixes for the boot script.
+- Add a proper boot order selection logic for the rauc bootmeth, similar
+  to the previous environment scripting, with fallbacks and slot try
+  checks.
+- Introduce config option for resetting all slot tries in case they are
+  all zero. This may prevent a system from locking up in the bootloader.
+- Rename env variable "mmcroot" to "distro_rootpart", to be in line with
+  "distro_bootpart".
+- Change the bootmeth flag to "global", as the rauc bootmeth does not
+  work for individual partitions.
+- Update documentation accordingly.
+- Link to v1: https://lore.kernel.org/r/20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de
+
+---
+Martin Schwan (2):
+      bootstd: Add implementation for bootmeth rauc
+      doc: Add description for bootmeth rauc
+
+ boot/Kconfig                     |  51 +++++
+ boot/Makefile                    |   1 +
+ boot/bootmeth_rauc.c             | 432 +++++++++++++++++++++++++++++++++++++++
+ doc/develop/bootstd/index.rst    |   1 +
+ doc/develop/bootstd/overview.rst |   1 +
+ doc/develop/bootstd/rauc.rst     |  56 +++++
+ 6 files changed, 542 insertions(+)
+---
+base-commit: b22a276f039f818d5564bec6637071cfc8a7e432
+change-id: 20250129-wip-bootmeth-rauc-03b5e2dd88f4
+
+Best regards,
 -- 
-2.39.5
+Martin Schwan <m.schwan@phytec.de>
 
