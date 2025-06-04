@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E528AC5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 06:02:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AE48C5B552
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 06:02:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15E6482CCF;
-	Wed,  4 Jun 2025 08:02:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C44A82BD6;
+	Wed,  4 Jun 2025 08:02:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="I9FAhUuQ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="C4KHhEA0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1408D81FEE; Wed,  4 Jun 2025 08:02:19 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id E35A382CFA; Wed,  4 Jun 2025 08:02:20 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25B3D82BD9
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 08:02:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6842182BD6
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 08:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=8250fb800b=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5542DoTX018186;
- Wed, 4 Jun 2025 08:02:14 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5545vdkY015944;
+ Wed, 4 Jun 2025 08:02:13 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- GDZTcepxYUdLU2K8Ug3H7+UpDZoDayNPMUR1nMLDqzQ=; b=I9FAhUuQQJ1tvjsO
- /N9o2uhufn5a+ow3zGL2lBqM1Cign5zEsS3r5YZDf3qc8EYm8cFywsx/wc5QYlb1
- kcjclGYYSqPBuAgYZstVcpU/QDxer6ZLM25QlpF3UgXIlXEh04vf2c6tXCurGpFv
- 1r7Djzkl/EwfkD7nuft1TySaX9GB+3NE6SVheVjEGr/Z2Jvh2pQYhrrrXiyceWv9
- 7/7/MuPtbPRXEyf+P99LUsg/1eGN3xLEt/G0PJpcpsO36i4WOOZRGy8wkoOC2fWr
- JJSEHpI/VgZlplwidfA+4WN2PGJ+YvwdS26dMOhtqTgeOIq+iInj4vkngjoUnHFW
- +3UTSg==
+ QpGN2MCB976VV+s2qPbKpvPaM2wMtRPXD/WlHAk5Zl8=; b=C4KHhEA0E2GH7csI
+ /ytZY7QOnq03aTtTJvNIoCkErcb6kvRbvqgtf0Fb8s9mCfF9gaPzILSR7X3QBa/j
+ lufsyuw5WMDmJmY1fC+UELLuVNzJ7NnBMnxbWo2U2CmPhUkMI4newfv6rfntpL4C
+ fxsAt7Yls2qezID1GNJPc1Db68SzNkroaP41GSzim6XtADVZWzxmtO3iSo/LYED7
+ DrwtYyWZDSndxsFW/JZ6wtZNEJgxMYI3QMq3mAS2KnPLY0Km7yVz178Gn1SGXFjg
+ iPZhCDPfqVXIEizTbOGpMaNBvweYSqGXtlCrRSMog2SPZI01oTU9S8VxqcMAPaJA
+ XQcXCw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g8syd66-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g8v7cqd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 04 Jun 2025 08:02:14 +0200 (MEST)
+ Wed, 04 Jun 2025 08:02:12 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1DB54400A2;
- Wed,  4 Jun 2025 08:00:58 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DCB6940078;
+ Wed,  4 Jun 2025 08:00:38 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2A6CAAF0C01;
- Wed,  4 Jun 2025 08:00:14 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0ADAAA36328;
+ Wed,  4 Jun 2025 07:59:28 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Jun
- 2025 08:00:13 +0200
-Message-ID: <3d1b2140-8512-4487-a9be-dc57e09585e7@foss.st.com>
-Date: Wed, 4 Jun 2025 08:00:13 +0200
+ 2025 07:59:27 +0200
+Message-ID: <a8755dc7-2e93-45a8-9864-2ddb082e8e6a@foss.st.com>
+Date: Wed, 4 Jun 2025 07:59:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/13] clk: stm32: fix clock counter
+Subject: Re: [PATCH v2 06/13] sandbox: test: update for CONFIG_CLK_AUTO_ID
+ support
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Gabriel Fernandez
- <gabriel.fernandez@foss.st.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
- <20250527132755.2169508-11-patrice.chotard@foss.st.com>
+ <20250527132755.2169508-7-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250527132755.2169508-11-patrice.chotard@foss.st.com>
+In-Reply-To: <20250527132755.2169508-7-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -95,14 +96,11 @@ X-Virus-Status: Clean
 
 
 On 5/27/25 15:27, Patrice Chotard wrote:
-> From: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
+> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
-> In RCC the ops of the CCF registered CLK device can be called directly,
-> this patch avoid recursive call of clk_ function done by CCF clock
-> framework which update the clock information, for example
-> clk_enable is called 2 times, clkp->enable_count is increased 2 times.
+> Update the existing test dm_test_clk_ccf() with new CLK_ID macro.
 > 
-> Signed-off-by: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Cc: Lukasz Majewski <lukma@denx.de>
 > Cc: Sean Anderson <seanga2@gmail.com>
@@ -110,89 +108,135 @@ On 5/27/25 15:27, Patrice Chotard wrote:
 > 
 > (no changes since v1)
 > 
->  drivers/clk/stm32/clk-stm32-core.c | 68 ++++++++++++++++++++++++++++--
->  1 file changed, 64 insertions(+), 4 deletions(-)
+>  test/dm/clk_ccf.c | 30 +++++++++++++++---------------
+>  1 file changed, 15 insertions(+), 15 deletions(-)
 > 
-> diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
-> index df3b35b1003..a0ae89d0912 100644
-> --- a/drivers/clk/stm32/clk-stm32-core.c
-> +++ b/drivers/clk/stm32/clk-stm32-core.c
-> @@ -70,11 +70,71 @@ ulong clk_stm32_get_rate_by_name(const char *name)
->  	return 0;
->  }
+> diff --git a/test/dm/clk_ccf.c b/test/dm/clk_ccf.c
+> index ac56f17b775..64c21b10c3e 100644
+> --- a/test/dm/clk_ccf.c
+> +++ b/test/dm/clk_ccf.c
+> @@ -32,13 +32,13 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test", &test_dev));
 >  
-> +static const struct clk_ops *clk_dev_ops(struct udevice *dev)
-> +{
-> +	return (const struct clk_ops *)dev->driver->ops;
-> +}
-> +
-> +static int stm32_clk_endisable(struct clk *clk, bool enable)
-> +{
-> +	const struct clk_ops *ops;
-> +	struct clk *c = NULL;
-> +
-> +	if (!clk->id || clk_get_by_id(clk->id, &c))
-> +		return -ENOENT;
-> +
-> +	ops = clk_dev_ops(c->dev);
-> +	if (!ops->enable || !ops->disable)
-> +		return 0;
-> +
-> +	return enable ? ops->enable(c) : ops->disable(c);
-> +}
-> +
-> +static int stm32_clk_enable(struct clk *clk)
-> +{
-> +	return stm32_clk_endisable(clk, true);
-> +}
-> +
-> +static int stm32_clk_disable(struct clk *clk)
-> +{
-> +	return stm32_clk_endisable(clk, false);
-> +}
-> +
-> +static ulong stm32_clk_get_rate(struct clk *clk)
-> +{
-> +	const struct clk_ops *ops;
-> +	struct clk *c = NULL;
-> +
-> +	if (!clk->id || clk_get_by_id(clk->id, &c))
-> +		return -ENOENT;
-> +
-> +	ops = clk_dev_ops(c->dev);
-> +	if (!ops->get_rate)
-> +		return -ENOSYS;
-> +
-> +	return ops->get_rate(c);
-> +}
-> +
-> +static ulong stm32_clk_set_rate(struct clk *clk, unsigned long clk_rate)
-> +{
-> +	const struct clk_ops *ops;
-> +	struct clk *c = NULL;
-> +
-> +	if (!clk->id || clk_get_by_id(clk->id, &c))
-> +		return -ENOENT;
-> +
-> +	ops = clk_dev_ops(c->dev);
-> +	if (!ops->set_rate)
-> +		return -ENOSYS;
-> +
-> +	return ops->set_rate(c, clk_rate);
-> +}
-> +
->  const struct clk_ops stm32_clk_ops = {
-> -	.enable = ccf_clk_enable,
-> -	.disable = ccf_clk_disable,
-> -	.get_rate = ccf_clk_get_rate,
-> -	.set_rate = ccf_clk_set_rate,
-> +	.enable = stm32_clk_enable,
-> +	.disable = stm32_clk_disable,
-> +	.get_rate = stm32_clk_get_rate,
-> +	.set_rate = stm32_clk_set_rate,
->  };
+>  	/* Test for clk_get_by_id() */
+> -	ret = clk_get_by_id(SANDBOX_CLK_ECSPI_ROOT, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_ECSPI_ROOT), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("ecspi_root", clk->dev->name);
+>  	ut_asserteq(CLK_SET_RATE_PARENT, clk->flags);
 >  
->  #define RCC_MP_ENCLRR_OFFSET	4
+>  	/* Test for clk_get_parent_rate() */
+> -	ret = clk_get_by_id(SANDBOX_CLK_ECSPI1, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_ECSPI1), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("ecspi1", clk->dev->name);
+>  	ut_asserteq(CLK_SET_RATE_PARENT, clk->flags);
+> @@ -47,7 +47,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ut_asserteq(rate, 20000000);
+>  
+>  	/* test the gate of CCF */
+> -	ret = clk_get_by_id(SANDBOX_CLK_ECSPI0, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_ECSPI0), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("ecspi0", clk->dev->name);
+>  	ut_asserteq(CLK_SET_RATE_PARENT, clk->flags);
+> @@ -56,7 +56,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ut_asserteq(rate, 20000000);
+>  
+>  	/* Test the mux of CCF */
+> -	ret = clk_get_by_id(SANDBOX_CLK_USDHC1_SEL, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_USDHC1_SEL), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("usdhc1_sel", clk->dev->name);
+>  	ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
+> @@ -70,7 +70,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	rate = clk_get_rate(clk);
+>  	ut_asserteq(rate, 60000000);
+>  
+> -	ret = clk_get_by_id(SANDBOX_CLK_PLL3_80M, &pclk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_80M), &pclk);
+>  	ut_assertok(ret);
+>  
+>  	ret = clk_set_parent(clk, pclk);
+> @@ -79,7 +79,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	rate = clk_get_rate(clk);
+>  	ut_asserteq(rate, 80000000);
+>  
+> -	ret = clk_get_by_id(SANDBOX_CLK_USDHC2_SEL, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_USDHC2_SEL), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("usdhc2_sel", clk->dev->name);
+>  	ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
+> @@ -97,7 +97,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	rate = clk_get_rate(clk);
+>  	ut_asserteq(rate, 80000000);
+>  
+> -	ret = clk_get_by_id(SANDBOX_CLK_PLL3_60M, &pclk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_60M), &pclk);
+>  	ut_assertok(ret);
+>  
+>  	ret = clk_set_parent(clk, pclk);
+> @@ -107,7 +107,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ut_asserteq(rate, 60000000);
+>  
+>  	/* Test the composite of CCF */
+> -	ret = clk_get_by_id(SANDBOX_CLK_I2C, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("i2c", clk->dev->name);
+>  	ut_asserteq(CLK_SET_RATE_UNGATE, clk->flags);
+> @@ -124,12 +124,12 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ret = clk_get_by_index(test_dev, SANDBOX_CLK_TEST_ID_I2C_ROOT, &clk_ccf);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("clk-ccf", clk_ccf.dev->name);
+> -	ut_asserteq(clk_ccf.id, SANDBOX_CLK_I2C_ROOT);
+> +	ut_asserteq(clk_ccf.id, CLK_ID(clk_ccf.dev, SANDBOX_CLK_I2C_ROOT));
+>  
+> -	ret = clk_get_by_id(SANDBOX_CLK_I2C_ROOT, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C_ROOT), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("i2c_root", clk->dev->name);
+> -	ut_asserteq(clk->id, SANDBOX_CLK_I2C_ROOT);
+> +	ut_asserteq(clk_get_id(clk), SANDBOX_CLK_I2C_ROOT);
+>  
+>  	ret = clk_enable(&clk_ccf);
+>  	ut_assertok(ret);
+> @@ -137,7 +137,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ret = sandbox_clk_enable_count(clk);
+>  	ut_asserteq(ret, 1);
+>  
+> -	ret = clk_get_by_id(SANDBOX_CLK_I2C, &pclk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C), &pclk);
+>  	ut_assertok(ret);
+>  
+>  	ret = sandbox_clk_enable_count(pclk);
+> @@ -153,7 +153,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ut_asserteq(ret, 0);
+>  
+>  	/* Test clock re-parenting. */
+> -	ret = clk_get_by_id(SANDBOX_CLK_USDHC1_SEL, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_USDHC1_SEL), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("usdhc1_sel", clk->dev->name);
+>  
+> @@ -167,7 +167,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  		clkid = SANDBOX_CLK_PLL3_60M;
+>  	}
+>  
+> -	ret = clk_get_by_id(clkid, &pclk);
+> +	ret = clk_get_by_id(CLK_ID(dev, clkid), &pclk);
+>  	ut_assertok(ret);
+>  	ret = clk_set_parent(clk, pclk);
+>  	ut_assertok(ret);
+> @@ -176,7 +176,7 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+>  	ut_asserteq_str(clkname, pclk->dev->name);
+>  
+>  	/* Test disabling critical clock. */
+> -	ret = clk_get_by_id(SANDBOX_CLK_I2C_ROOT, &clk);
+> +	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C_ROOT), &clk);
+>  	ut_assertok(ret);
+>  	ut_asserteq_str("i2c_root", clk->dev->name);
+>  
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
