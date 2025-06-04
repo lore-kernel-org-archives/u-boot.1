@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AA2C5B559
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 12:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 564EFC5B549
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 12:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22D0E80050;
-	Wed,  4 Jun 2025 14:16:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7584A828BC;
+	Wed,  4 Jun 2025 14:16:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ikThl4KE";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ub2TTYW5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B28F480AE1; Wed,  4 Jun 2025 14:16:45 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20723.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::723])
+ id 1FF09803DF; Wed,  4 Jun 2025 14:16:47 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20717.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::717])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C4C780050
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 14:16:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13F3D803DF
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 14:16:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=M.Schwan@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gztgmwVpTuXgNc+1UP+Qxg8ravbNLglh98VJ0FAHTmurm/8HUF7KALkSvHGd93DNqgOjx2rm6Ev1XiAXLISglfW+PAHVJvt/U6wuBfI8W/YVlXzzUTzzzbO57P1SvevWVoRd1BZY5gDIHqJmAbiqaOYmdWqvxO0NMkoxBZC3Lpe20CGlSa21iASuxVsR5zXjpK/HJQkr1753a6uMsYH2Jfdj9wKuXHaB2CDcSrqVHilkwOHwnXjw0VTuvQbhbD/f8tjPlD3Z4k8LnqAy4HoaApLGXGaafH98A828mwI3TRAN9mjmdfz7elcho0jj9R8lJGGjCGm5J9I5gB2ixncfpw==
+ b=ufi7tEEZfxpMeWllAAfBjad/p76ZkSmAjQ8/efvgHADtGT5L247zxUA47lqUndBQfJAmJ1cpkR1D0mePj0cuSiCxbxYRfVKwZvv16m1FspDR+k59ypTn4q2Uc/uqXIttnlyXZ0Km8vWtb0wym5yesAiZQWEYQVAEEH0gZLwYB4OajXiiA+h9iJtwEDsZO62DHCK1E320XjU80cwpPQUaSHyqqZjSpTPZpwKO8G1qa3RHnLhKUMoKUlHKeRpOydPUe4gd9lwlGqvyir74xyJ5eo7bvQlfY9SVlDQ/Ps5gmb2+fT+ll+hjStHnDjZZ+7aN1tB1aBmyV1dKNftg3uFi1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ibbB5xcU88ZPs7qmNZ/6WAiew35er7iHkvuVn2sKqlo=;
- b=nb6SiDcme1GLlaSxOFXnZd1eSDtyf9rPinDu/PQA6mP9kLF/OtGUvxVovq1KZlGPKJC2VergnlFLD9x1UcVa7VvuS42c1X8WEk4HEthZwO/T4E0Ej+CmH2UtaJzPlHlZsL9S9EPcSf4CLSoDfVLmfHrQIYTrytrm1CGwJPPJaN4w/bz19JOT9YIiSxuOlnFaMiiWnHH1GplwbMRQcc4CaRvr93qIsWUIB3gKX36R834EvrWgi8bZyOfTcn3CgZVmDBUIjYgh6Dr7L5IAF/bVrvwmaQx0hUNnWFiW5XGLa7oASp/Z7pDLluf+LR0bRbQwzoiTps1w6/n7TIO/9ppT9g==
+ bh=tmgaSRaG0X03HTH8zLUSxGXeqRO0BHN71E5OvlVWM/M=;
+ b=kzmTCGScNb1rs2HEZyXHbS2I1+iHVsZcCITZYufzZcl0OCoPtEXTE++W2AErYr9qI9uKctRsaac++Z9/PkdLCce4XOI1V08j9kY1CyTuBygW8rjFB2W4d39JYNEF22sg3zXXBIPy+wRDDrn5mLYNjukJs45UigDKZ8j+xcA3KRECLg0eJ8qge0KF0WiXLGJly6m0LHHASx9CpvqD6vecS9ArsqFDb2WySb1hZdbE3IMEB3mis9wBF6RbzkC+sR32iHvYNs/HKUZd45rTsR3aGx+ZpogxhE06E+3296C8KJVYxfJsOnhZ3XYE34whYouI0e4tRozMuJT25PU8dgWrFA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=chromium.org smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibbB5xcU88ZPs7qmNZ/6WAiew35er7iHkvuVn2sKqlo=;
- b=ikThl4KENQVU10J4vhnbv/ot11RJKU9KyxK9OklghaMn1hnHJJvKABFotPE86rAfXySYLfVsYE9V14APEzsBzipbm6lbjYeRxGYrukz1/gKEXT9D5ofSm1X3WHSws/DjndcI/WAHs3omp+roLpSbEM72iSUeKtyBIvV4Zb9+YRtzb6qJgrB+FNP0V/tVru080FHLt+rY+z6ByKS+dENtjumDmfXkPuq78saz/z7Yi6gqoyn7EVHb8BKYopmz6/HV2fdVMxCgOnKM+nxb2yo7tfQdx4+mCZQ71k4lMkBCGviWACJcQ79LafRVU2cC07PPw3ikjBWHNTqypukQR3mJ0w==
+ bh=tmgaSRaG0X03HTH8zLUSxGXeqRO0BHN71E5OvlVWM/M=;
+ b=ub2TTYW5T9ITH/CPGupHl68zLwZlDLOhZB7xogNUM0lBN64+aDBL7AalKNVNMjiy17gEvHCsDsxewmpAOcq7XYPceGVztF2MpZQ/yUUqRxdDKj0bpXVsX9a6rtIadhHnbfDW5gvxM1xjoVf/FFS+xivO2qm6pD25730a6Pvys5BTy5eZsd5eKe3ruaqATXF2qTlUvd6yigoyJdIvskTddxOzNyn7bJna1+II87cnfB4Avm+F5IsttmozLw3uImlfFh6iGF+2nNe3ExpI9zs5T+SWAg3B8xdbUHl1Bt6ekubQ82ZvGI+v11egNwaiQ9OgO18GuNMn2jZseyzZiRSIXA==
 Received: from PA7P264CA0182.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:376::16)
- by AM8P195MB0978.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1ed::8) with
+ by PAXP195MB1534.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:277::6) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.33; Wed, 4 Jun
- 2025 12:16:40 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.37; Wed, 4 Jun
+ 2025 12:16:41 +0000
 Received: from DB5PEPF00014B93.eurprd02.prod.outlook.com
- (2603:10a6:102:376:cafe::c) by PA7P264CA0182.outlook.office365.com
+ (2603:10a6:102:376:cafe::ed) by PA7P264CA0182.outlook.office365.com
  (2603:10a6:102:376::16) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.24 via Frontend Transport; Wed,
- 4 Jun 2025 12:16:40 +0000
+ 4 Jun 2025 12:16:41 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -61,7 +61,7 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  DB5PEPF00014B93.mail.protection.outlook.com (10.167.8.231) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8792.29 via Frontend Transport; Wed, 4 Jun 2025 12:16:40 +0000
+ 15.20.8792.29 via Frontend Transport; Wed, 4 Jun 2025 12:16:41 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 4 Jun
@@ -71,17 +71,14 @@ Received: from lws-schwan.phytec.de (172.25.32.87) by Florix.phytec.de
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 4 Jun
  2025 14:16:39 +0200
 From: Martin Schwan <m.schwan@phytec.de>
-Subject: [PATCH v3 0/2] bootstd: New bootmeth for RAUC A/B systems
-Date: Wed, 4 Jun 2025 14:15:28 +0200
-Message-ID: <20250604-wip-bootmeth-rauc-v3-0-f9fad913c57e@phytec.de>
+Date: Wed, 4 Jun 2025 14:15:30 +0200
+Subject: [PATCH v3 2/2] doc: Add description for bootmeth rauc
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOA4QGgC/33NsQ6CMBDG8VcxN1vTXgGLk+9hHIAetoOUtLVKC
- O9uYdHBOP4v+X43QyBvKcBpN4OnZIN1Qw6530FnmuFGzOrcgBxLLrBmTzuy1rl4p2iYbx4d47I
- tCbVWqi8g70ZPvX1t5uWa29gQnZ+2F0ms139aEoyzSnJFR4m9FMV5NFOk7qAJVi3hR6g4/hIwC
- 7VGqQqR96r6FpZleQPb3D6Q9AAAAA==
-X-Change-ID: 20250129-wip-bootmeth-rauc-03b5e2dd88f4
+Message-ID: <20250604-wip-bootmeth-rauc-v3-2-f9fad913c57e@phytec.de>
+References: <20250604-wip-bootmeth-rauc-v3-0-f9fad913c57e@phytec.de>
+In-Reply-To: <20250604-wip-bootmeth-rauc-v3-0-f9fad913c57e@phytec.de>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
 CC: <u-boot@lists.denx.de>, Wadim Egorov <w.egorov@phytec.de>, Martin Schwan
  <m.schwan@phytec.de>
@@ -91,60 +88,61 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B93:EE_|AM8P195MB0978:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0100eb60-1460-40c7-d859-08dda361a93b
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B93:EE_|PAXP195MB1534:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8aaed84-ae95-463e-2859-08dda361aa17
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEhJNlVwQUZTNStyTkZSRzZ1M0hNNnZnTDgxdHl1L0VXZ0ZNZXFvaFNaQ3Mw?=
- =?utf-8?B?ZHNJQWtZbmswSitGcjZMalhVem5QdzM0eC9jSmxZcklId20yUnRxUW1uaFlM?=
- =?utf-8?B?SGFYVU01V25sM2k3U0hoWVNHbDU1a2VwTHFubjRtWGwvR0paVXVFQkVjbVZz?=
- =?utf-8?B?Wno0YU54UzJLQ09ub1dnS1pCMjF4WU5taWpsNnM1N3VEaHVsS3ByVEwvTzBu?=
- =?utf-8?B?TUh5Z3R4ZGpWdVVRbE1WOFpmSVdNYVdpQlB4SjBtQzcyQnpucko5ZEhKN2F4?=
- =?utf-8?B?RjRUUDFPLzFBdDlScWZ3cDFEQTlYMi8wRXI1ckJpVW9TcW4rb0tUL1pRVktj?=
- =?utf-8?B?OWU0dXpxaTVWZUdtemU3SGkzdS9NV1FnYUkwTWxyY3M1WnJCTXlCdkNMUGQx?=
- =?utf-8?B?aGwwbVo2Nmw5MGxnaUVsR0JBSHpxcUJvNk5TZWZKWjcwRW90cmV2UnFpR0hS?=
- =?utf-8?B?Qm8wZFgySmVKdk5UZWlyK0RJUGYrNzZpL0tBY0Z2eFdQYTB4ME1tby9XTXFR?=
- =?utf-8?B?UTlxcUE1YmxrRnpMUXpLOW1EOHV4UFY2RGJOK2lja1NkWFh3dFQwTE9ralgr?=
- =?utf-8?B?VjUyaU1rNEYxWHhhR01GWm5yQlFndFZ3bVVYVEovK2czUDdvb1FtTFdpVDFj?=
- =?utf-8?B?U2ZFeDg3ODFWYUFKd2NodzBIYm5JZ2RvMHd3Tml2alRRY2xodXBtMGQ0NEoz?=
- =?utf-8?B?QnQ4dmZhY2RxZEVkR0lwYXErNTRwb0VEaVErRW1SQ3RHUnBxZHh1eWFnZWF2?=
- =?utf-8?B?czZ3R2JWK0pReGhRdiswaFJ2Nm5HYU9uSmxpTFhTUzRWeGpJZU9qUjdXNU9o?=
- =?utf-8?B?QzVKRmlJYUFjQTBsS3lIWEhuNnROVXR1dE9XWWw1bWlmbmRObUIwL2VFSW9E?=
- =?utf-8?B?K2JQMURvNUxZeXhvdGlQSFhuUUhxZythTjk1R2Y5YUwxQ0hGQWs0VW9qYkFs?=
- =?utf-8?B?M0xBVnlTMExlYlBQcU80Z3ZPS2pHT2xGMmJmVndxSWpLQ1AwOXh2b3ZNcWI4?=
- =?utf-8?B?dUR1RDR2R0VLVVdiZVBkd1FlL0FQUGpQd0ZKSS93c1AvcUgrbmsxNGFUOEF6?=
- =?utf-8?B?OVJyS25qZjJIOCtsY1NaKytianNGWUtEQWpCejB0S3M5S0NYTjJYTjRNV1Zx?=
- =?utf-8?B?YnR1djVMd2h1Skl5TnVhNmtNcXU2RUw5bFJxM0dST2ZYMEpXeU5KNUk5clFr?=
- =?utf-8?B?WEI2b0RRenYzcjlSMlhTS0ltYi9jOExHTUN2NklFUWRPTXhpNW5GbndaTnkz?=
- =?utf-8?B?b3RpcFkrTGkwUTVtcmp4bUI5eVZWakdma0xhakNEVDFTYTZXVUpzQ2NTTDFT?=
- =?utf-8?B?VitnMUFNZHVCM3VWdGxuYjVhMi9EQmlKQWx0TmJJbG52ajQ4NDcrZ2RQa3dT?=
- =?utf-8?B?dlJVbDkzTVFwN3pkQ0luSHVGcXA0cjFIcGdBTG5qWXp5VEwyTmVJVW1QYzdx?=
- =?utf-8?B?Q1lnUVhGb21KckdNeWJPQW1xWkNiQ2lqN2R4R2RvTnFBK3JubkJLSjIwYldk?=
- =?utf-8?B?YWNnekFFaGxWYmdjdnhQN1BNdHhXaCtNaDBkZnBrdW1rU2NUaGhYMzlNelJ4?=
- =?utf-8?B?Mmg2b3dwU2piK3FCKzlRM2F3bklRdkp5TGp5S2U1bWVhZmkwandKMWxkb3Jr?=
- =?utf-8?B?R2QyRTZMMUNiYVgwTHg2OURQTlE1Ny96TlZTS1I0S28xTGlKQTJVZ0RzNVhi?=
- =?utf-8?B?WENCdEttZm5uNzUyTU9yT1dLcm1hOFZnanZVeC9XR21aOFhKODRaUWRHVFlw?=
- =?utf-8?B?WDJTZ3FiV3k2a3lFT21FeFlXTkQrQVJVOWx3QnBQaS8yalVHTjVMa2YxMi9v?=
- =?utf-8?B?QlVIUjdjMEJCZWNleitxa2RwWDN6ay9MRkUycVE2R3JRNjUvS3lZcksyTWcr?=
- =?utf-8?B?SUZtcHFsUXJHRHZRc1lqaFlFZnZ6YTVlUFZpNzZYVG96RmplNTF4NVhxMUx2?=
- =?utf-8?B?dVA2TW05dFM4bjNKQTJVNC85NnNqTGh3Q2RuWDBpajdMelBYNHR3VTYvcFla?=
- =?utf-8?B?cE51Z1FUZEVRPT0=?=
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cmgrT0RTQTNaRGFibndkaHpOOVc2eXNnMnFGTnMrbmxHU0pkelFPWkFCNnVv?=
+ =?utf-8?B?KzQvUE1zMStQYjE5TXA3dFJQQnhWMitFSEpIR3gwUFl2QWx6aEJZVGlJbVZN?=
+ =?utf-8?B?ZmVyZW5OVWRvSW9yWjNpOW9LOENtMFJ6bUYxMzU5SGFvOWNraFhTMFE2K0VX?=
+ =?utf-8?B?dTdmSDBVTWVQYXlxWnM0YW1qbThCM0kvcnJYWVUzcFlVQXRCZjhBNzdWOWRI?=
+ =?utf-8?B?WUxQbTlYZjYwSnJtOU1LVkVyTlRqcmg5RXJTR0FzRmZ1Uzdja0RwN01DeEpp?=
+ =?utf-8?B?c0xYdVJia3BldUFPbzByMWxqV0p0akhsbHRtWHl3MEpPVWZRVGZOd0RVUlNh?=
+ =?utf-8?B?MUxZR3ZhOGZMaEw4d2ZUY1hlb0RZbFJISUlWWFVXUzZqdGZKWkhZSkpmUkFm?=
+ =?utf-8?B?VWxpZE0rMmExQlJncFJWQlJWRFFES09PUjh2OVlmWlNDT0VLNThyQmsxM2pq?=
+ =?utf-8?B?Wm5GRDE2aTBBeTN3K3RNR1hIMXpYMm4xOE14OUtLOGVvd2xKMDNsbytSM0d6?=
+ =?utf-8?B?VDFLRDVYS1dSNWxxeUo2RlVhY08zRlg1WVZ5VC9CVU9zdkVFeXA0Q0NHSE9M?=
+ =?utf-8?B?ZldvcHhYcnhMc2ZSaUJnKzVsWVZVSG1Dc3U2YzdoMUJFNlorZmpVMnp4UjFz?=
+ =?utf-8?B?ajVZS1BRUytFeW1makd1QmRBZGhKZGw2ZVYyd0xLdEx5cnh6bWd5dWZxZjY4?=
+ =?utf-8?B?SGR6a1p6MW85N2dWNTFUaUp1TWFsZWhBTXVSU3lQd3IreFhBNzIvWm1vdkx3?=
+ =?utf-8?B?bTZzWGNYdUVWY0R3RlplMmhvd29XdDdLWUZRVWkwU3VaZ041TXlXOVNsMlRI?=
+ =?utf-8?B?OHF6OHQrZk40VThLNmU0QTBrbkxFMTgyMUk4QisxQ21ob2lkK3FydkhQamZB?=
+ =?utf-8?B?K1o3dWluM1U1NmNPVU5VNGMvRU56a1pJNU1LR3Baajh2VmRuWHRHa3Y1UUZZ?=
+ =?utf-8?B?Z0VKQ1hTa1MvZG55cHordHU3YnVxVUJ2dXhaMUlnNEE4dllieHF2SVBxVEI2?=
+ =?utf-8?B?T3NDbTA3SVZLaHpVL0VEbmR2QU52Q3dUYUd3TkZRRFVUaWNHUDBMV2FPZGx3?=
+ =?utf-8?B?bklpcVFuTjBaUVlPVnNUa2R3RnZoUmlESmRuM24xRWpDRzlYUXpCcEIyb1ox?=
+ =?utf-8?B?eW13TDhna21VZXAzVU80a0JSN0lRR082WENrTi81d1QwbFY1dUYwT1ZqdUhl?=
+ =?utf-8?B?eUhsd2VRTlJSV3ZWbTRXYUZHbUtYS2RHanY2K2dSZSt4ODJzMlFsLzFNN09i?=
+ =?utf-8?B?bXpvdWw5TjU5eEsrajZoYVZXUXFzWlNjeTJ5STh6ZXk3VDQvMHNUOUZyQ1Yx?=
+ =?utf-8?B?TEEvcS8rNjlwWGpQV3RYc0ZKdm9pa09YSWkxbVN1b2ljL1hBdEV3QVEweEx3?=
+ =?utf-8?B?aEpSV3p0Y3JqU1JleE03SXJQc2JUdXpZekFSYmRGUCtpdkIrb2Jra0U0ZjhU?=
+ =?utf-8?B?VmRnTmFoZ2Q1SFAxMFVjeExaMFFKRUhaazZZYmRXR2FvNUFhMHVBWlhrUmZ0?=
+ =?utf-8?B?VEd1NUF0WE0wUWR1YVZpVSsvelFuUWw3c3FLQVNuQ2JHb0ZTdHlEaTVXQzNZ?=
+ =?utf-8?B?QWt1SklBVkZ3WEtHeExsQzk0bjE0aWI0SUEzRkVVU2FtSFMvaTltRnExS2U3?=
+ =?utf-8?B?VFE3Q1JvY045dURPeVZreTRSVzl0N051TC9GQTZVU3VIUjhrOEl2aDBZayt0?=
+ =?utf-8?B?ekEzQXV0Yy9ndDV6R0hjOHEzUkhZWEVQRmc4bWthOXBKREc2eTRtZTV3bksx?=
+ =?utf-8?B?dXRQZVpEVExkTER2aUlFaGo0U1oybUR3RytydU42Q1lhQ2V4d2c2WTlKK2Fo?=
+ =?utf-8?B?NUhoZ0pxVm9HaklRY3NsUHZNREdxZ3NSZloyTGs0a3lIM0ErcWpxVFNudzQ3?=
+ =?utf-8?B?ditrMk5vYnpMRm12S2FFV1Q1MTdBWlRVYU4yeVdrdE9zSXdsRUIrUktNdVRV?=
+ =?utf-8?B?THAzWDk1STlhM3BNTnFCN0lIM3Z1Wk5Ya3lpT1dmVk44WEVwWEt1cGZDdHRN?=
+ =?utf-8?B?OUpINUxnc1ZFOXFia01WbWgyTWszS3hMZDkzL2U5azl6OGtFeitpclpxQ1Ft?=
+ =?utf-8?Q?KkWcQM?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 12:16:40.2195 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0100eb60-1460-40c7-d859-08dda361a93b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2025 12:16:41.6571 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8aaed84-ae95-463e-2859-08dda361aa17
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B93.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8P195MB0978
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP195MB1534
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,119 +159,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series implements a new bootmeth for RAUC A/B systems. RAUC (Robust
-Auto Update Controller) is a lightweight update client, providing "Safe
-and Secure OTA Updates for Embedded Linux". See the following links for
-more information about RAUC:
+Add documentation for the bootmeth "rauc", which boots an A/B system
+with RAUC from MMC.
 
-  https://rauc.io/
-  https://rauc.readthedocs.io/en/latest/
-
-PHYTEC uses RAUC in its Yocto based distribution "Ampliphy" as the
-default way of updating embedded devices based on PHYTEC hardware. So
-far, the logic selecting the correct partitions and files to boot was
-being implemented in the U-Boot environment. While this is a
-straightforward way to do it, adding and supporting new platforms became
-somewhat tedious and is platform-specific. The introduction of U-Boot's
-"Standard Boot" provided a convincing alternative, promising a simpler
-and more portable way of booting, even for RAUC systems. This led me to
-implement a new bootmeth supporting RAUC A/B systems. Note, that this
-new bootmeth is not proprietary to PHYTEC products and is designed to
-work on other hardware with a RAUC A/B system, too.
-
-The bootmeth currently only supports symmetric A/B partitioning layouts.
-E.g. A/rescue is not (yet) supported. The partition indexes and default
-slot tries can be specified via configuration options.
-
-For now, the bootmeth_rauc uses a similar approach for loading the
-Kernel and device tree as the bootmeth_script, in that it requires a FIT
-containing a U-Boot script loading the desired distro. It could be
-possible to support booting without a script and load the Kernel and DT
-directly with this bootmeth, but I found the script method to be very
-flexible for now, in letting the distro decide what to load.
-
-The bootmeth_rauc was tested on a phyBOARD-Pollux i.MX8M Plus [1] with
-BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2 [2].
-
-Supported boot devices are currently only MMC devices, but it should be
-possible to add SPI flashes in the future.
-
-To test this patch stack with PHYTEC's phyBOARD-Pollux i.MX8M Plus
-board, you need to adjust the boot files to include the boot.scr.uimg
-containing the distro's boot script and set "optargs" to "${raucargs}"
-in it. Also disable any legacyboot in the U-Boot environment and simply
-boot with Standard Boot:
-
-  bootmeth order rauc
-  bootflow scan -lb
-
-Regards,
-Martin
-
-[1]: https://www.phytec.eu/en/produkte/single-board-computer/phyboard-pollux/
-[2]: https://download.phytec.de/Software/Linux/BSP-Yocto-i.MX8MP/BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2/
-
+Signed-off-by: Martin Schwan <m.schwan@phytec.de>
 ---
-Changes in v3:
-- Invert if-statement check for setting default value of BOOT_*_LEFT env
-  variables. This would falsely trigger an error message before.
-- Link to v2: https://lore.kernel.org/r/20250602-wip-bootmeth-rauc-v2-0-9d2384131486@phytec.de
+ doc/develop/bootstd/index.rst    |  1 +
+ doc/develop/bootstd/overview.rst |  1 +
+ doc/develop/bootstd/rauc.rst     | 56 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 58 insertions(+)
 
-Changes in v2:
-- Remove LOG_DEBUG from boot/bootmeth_rauc.c
-- Reorder asm/cache.h include to be last
-- Do not check for RAUC-specific files in the rootfs anymore. This does
-  not work on encrypted root filesystems and is not a stable indicator
-  for a functioning RAUC system.
-- Add a description of the term "slot" in the corresponding private
-  struct.
-- Remove boot tries left from struct distro_rauc_slot. The boot tries
-  are read directly from the environment, as that's the only correct
-  source RAUC is relying on.
-- Remove the current boot_order from struct distro_rauc_priv, for the
-  same reason as above (env is correct source).
-- Add function for retrieving a slot struct, to ease finding the right
-  one when e.g. iterating or getting by name.
-- Fix multiline comments.
-- Fix various if-statements which were explicitly comparing to 0 or
-  NULL.
-- Free various, temporary instances of allocated string lists.
-- Set default env values for BOOT_ORDER and associated BOOT_*_LEFT
-  variables. These variables are mandatory for RAUC to work.
-- Use calloc() instead of malloc() for allocating the private slots.
-- Use config options for configuring the partitions and default boot
-  order, instead of setting them via the U-Boot env.
-- Use bootstd_get_prefixes()'s return value and check all available
-  prefixes for the boot script.
-- Add a proper boot order selection logic for the rauc bootmeth, similar
-  to the previous environment scripting, with fallbacks and slot try
-  checks.
-- Introduce config option for resetting all slot tries in case they are
-  all zero. This may prevent a system from locking up in the bootloader.
-- Rename env variable "mmcroot" to "distro_rootpart", to be in line with
-  "distro_bootpart".
-- Change the bootmeth flag to "global", as the rauc bootmeth does not
-  work for individual partitions.
-- Update documentation accordingly.
-- Link to v1: https://lore.kernel.org/r/20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de
+diff --git a/doc/develop/bootstd/index.rst b/doc/develop/bootstd/index.rst
+index 4c4e26ccdb707e55f88660395f23d7e7cda6b78d..ec74fc2fb9d7cccc48f3d16e781537190b5b6ced 100644
+--- a/doc/develop/bootstd/index.rst
++++ b/doc/develop/bootstd/index.rst
+@@ -12,5 +12,6 @@ Standard Boot
+    qfw
+    android
+    cros
++   rauc
+    script
+    sandbox
+diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+index 9fe5630ab16c2dd62ee18f6fc98bdf6373486ab5..0a237359575579c7d6df7b4ef900bdc4204ea48d 100644
+--- a/doc/develop/bootstd/overview.rst
++++ b/doc/develop/bootstd/overview.rst
+@@ -443,6 +443,7 @@ Bootmeth drivers are provided for booting from various media:
+    - :doc:`extlinux / syslinux <extlinux>` boot from a storage device
+    - :doc:`extlinux / syslinux <extlinux>` boot from a network (PXE)
+    - :doc:`sandbox <sandbox>` used only for testing
++   - :doc:`RAUC distro <rauc>`: A/B system with RAUC from MMC
+    - :doc:`U-Boot scripts <script>` from disk, network or SPI flash
+    - :doc:`QFW <qfw>`: QEMU firmware interface
+    - :doc:`VBE </develop/vbe>`: Verified Boot for Embedded
+diff --git a/doc/develop/bootstd/rauc.rst b/doc/develop/bootstd/rauc.rst
+new file mode 100644
+index 0000000000000000000000000000000000000000..b2661d18da46a745d4fc6eb65e45d1202f2e2a21
+--- /dev/null
++++ b/doc/develop/bootstd/rauc.rst
+@@ -0,0 +1,56 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++RAUC Bootmeth
++=============
++
++This bootmeth provides a way to locate and run an A/B system with RAUC as its
++update client. The booted distro must supply a script on an MMC device
++containing the final boot instructions necessary.
++
++This bootmeth assumes a symmetric A/B partition layout, with a separate boot
++partition containing the kernel image and another partition for the root
++filesystem each. The partition numbers must be specified with
++``CONFIG_BOOTMETH_RAUC_PARTITIONS``. The content must be a list of pairs, with
++the following syntax: ``1,2 3,4``, where 1 and 3 are the slots' boot partition
++and 2 and 4 the slots' root partition.
++
++Each pair of boot and rootfs partition form a "slot". The default order in which
++available slots are tried is set through ``CONFIG_BOOTMETH_RAUC_BOOT_ORDER``,
++with the left one tried first.
++
++The default number of boot tries of each slot is set by
++``CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES``.
++
++In case no valid slot can be found and/or all slots have zero tries left, the
++boot order and slot tries are reset to their default values, if
++``CONFIG_BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES`` is enabled. This prevents a system
++from locking up in the bootloader and tries booting again after a specified
++number of tries.
++
++The boot script must be located in each boot partition. The bootmeth searches
++for "boot.scr.uimg" first, then "boot.scr" if not found.
++
++When the bootflow is booted, the bootmeth sets these environment variables:
++
++devtype
++    device type (e.g. "mmc")
++
++devnum
++    device number, corresponding to the device 'sequence' number
++    ``dev_seq(dev)``
++
++distro_bootpart
++    partition number of the boot partition on the device (numbered from 1)
++
++distro_rootpart
++    partition number of the rootfs partition on the device (numbered from 1)
++
++raucargs
++    kernel command line arguments needed for RAUC to detect the currently booted
++    slot
++
++The script file must be a FIT or a legacy uImage. It is loaded into memory and
++executed.
++
++The compatible string "u-boot,distro-rauc" is used for the driver. It is present
++if ``CONFIG_BOOTMETH_RAUC`` is enabled.
 
----
-Martin Schwan (2):
-      bootstd: Add implementation for bootmeth rauc
-      doc: Add description for bootmeth rauc
-
- boot/Kconfig                     |  51 +++++
- boot/Makefile                    |   1 +
- boot/bootmeth_rauc.c             | 432 +++++++++++++++++++++++++++++++++++++++
- doc/develop/bootstd/index.rst    |   1 +
- doc/develop/bootstd/overview.rst |   1 +
- doc/develop/bootstd/rauc.rst     |  56 +++++
- 6 files changed, 542 insertions(+)
----
-base-commit: b22a276f039f818d5564bec6637071cfc8a7e432
-change-id: 20250129-wip-bootmeth-rauc-03b5e2dd88f4
-
-Best regards,
 -- 
-Martin Schwan <m.schwan@phytec.de>
+2.49.0
 
