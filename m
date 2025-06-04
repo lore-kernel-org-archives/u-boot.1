@@ -4,97 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A36C5B543
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 13:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B05CC5B549
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 14:09:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5407480584;
-	Wed,  4 Jun 2025 15:56:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 94CF780584;
+	Wed,  4 Jun 2025 16:09:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PScOUiqD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DeWpsCtD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF6338070C; Wed,  4 Jun 2025 15:56:19 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 9B3788070C; Wed,  4 Jun 2025 16:09:55 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B37C580050
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 15:56:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FB068006D
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 16:09:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-407a6c6a6d4so1233921b6e.1
- for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 06:56:17 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-72bc3987a05so649225a34.1
+ for <u-boot@lists.denx.de>; Wed, 04 Jun 2025 07:09:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749045376; x=1749650176; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749046192; x=1749650992; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Qke/eKawxonuPqjcK9s5tvKNYsyKNURklO8Iv25niCk=;
- b=PScOUiqD0eDF0GcK9SE7AolriwFBFRc7XLIHpfF9OUm8nndkFJq3eSxlIVJfEDSIJ1
- BKIeDFe10fPxAeW5GqaudLL45wqBM+6hzdZwpTr5WWS6t05EvIwenj6a2FPNz/CCMj3d
- mDHyXbbBg4vF5Rbt6Nk/ws0ak/OnmO8cz9y+8=
+ bh=c9nZonbRnnxCw3wRFLbYuoqaI40metgX+wBZ5r0sAds=;
+ b=DeWpsCtDbWWldMaBobBmTylpDKAhfuqV2N+Yu8G32rMuQ5Cxc/AZ138VUsOYcYWbLs
+ RBJY7F2rXJO8lWVAwlYBgPZkkA31f3nTqo/3NGrBnAT60MWS0iZT8G5FTPJeC6Q8gHH4
+ UAXqT54MeBZwUI9s7IzVx4mmOUr8/AIHMk5VU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749045376; x=1749650176;
+ d=1e100.net; s=20230601; t=1749046192; x=1749650992;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Qke/eKawxonuPqjcK9s5tvKNYsyKNURklO8Iv25niCk=;
- b=E9woICyyxO9+uJirxvKOZUN7nwGTi1sN3+NFT8TOihDS6MiwlxKt/FQ+ms54fkaYHT
- 5MP9KvHIugUgoPraQZkLEe+E7jVPrnIqUuw9C/ZihqBcvgvzeIiHcM912RRUg9Tu4vfU
- hPvzl44TYR7Cq1tPTO6ORpJnlhP5IU1sLgIC4dRgBrVbqJKsdJ0KIcttsnFgXnKaC8IL
- KudIDykRmQFRisl4Hfhb9JXee8elVHXNEV+Rs6MMpZ9siPw6+mrpnXIx9lCZX/tGQ/xd
- 2grcY+qm5CCO46EPfEVeRzQfsThcnxydxYCyEHo32dsaQcA6UoEaTfRPRW+jLd4KGCui
- BIYw==
-X-Gm-Message-State: AOJu0YyngBtQsaA0avL0TBJv7g8yj1J1CKzobOqmEor5Owa/S5SvEZW6
- lhQyZQMve/5RYnhXWw2facIhhzB5uviRGxI0SyTubVzE5y/YKK662nln0K+Ymaji1Gc=
-X-Gm-Gg: ASbGncua6zlhBzMqQLR72vvC51MePJCYnCekklRnFdjsFG16zAEIKvbgG7omzO2XEm7
- aEBNr2gZR4plj+PXBrD1OsdZtrAPGaHG4NreTL91ABp7xC72hX5CTdhg2EKpiIcYVKVKCSWvc/W
- D252mF2H54B9fm8yDbXq/eEBXz0ZZU2ChRSoAnHkjAM8WxqtX20QWs98+Q3izuYbHF+EAO3hGrM
- 5pX/hhVRgGfmafJcZA78k9O1LtwMlDIX3ORjs5SAQXzt2tBx3g2ZFhYgeRSialXNph7RBUZ+FCY
- L5VVc7GS31pC9I8B9+gYbaXBMSq8kXsx+xh80EaIhb6XxDcvKsjbpEf7fzsWwUgKTc9jzWE1d2q
- ++s5b97hfgmAn
-X-Google-Smtp-Source: AGHT+IF2eFR5N0zq3JYw7QkzwGXWYlMsvnViZWEU/EjYlq1qsrxkhZFFs5UJwoHRS5qntOy6kMWGEQ==
-X-Received: by 2002:a05:6870:3d85:b0:2d5:ba2d:80da with SMTP id
- 586e51a60fabf-2e9bf48b7bcmr1964994fac.36.1749045376340; 
- Wed, 04 Jun 2025 06:56:16 -0700 (PDT)
+ bh=c9nZonbRnnxCw3wRFLbYuoqaI40metgX+wBZ5r0sAds=;
+ b=kahx7Qq5VCnp0myeKsVdnENs2EfIoPF9FgGv2U2N2N63f8NcCjAYbqKnawIlTOy32g
+ qhkXugLpdoDhDWIqFzRQuZJ+phiIIJOook+sZlkv3OFxT8vUbes+vz4ZwXfYUaw47aAo
+ UCtAEWaozn4obUL9FUE6Q+ahElr9vrAJYqDo6xNW6hBPEGj5IcY0U50KyXSVIz6HLt4H
+ f0JGO/JMaICCFTdqj7BunxdA0+d/mcmwiOsnYzQOwrEUycBVXK2SLebVvAATJIdUd7Sf
+ UQ9hkJT8YKjqJPL85Byq+UY9DCfbuXRwtz5UPKAkbcoDHPfm/gP78GNQKzq0As99dA2l
+ EeyQ==
+X-Gm-Message-State: AOJu0Yw2eTX9aMeZiX1NLCjtHvfSIBlxpdV/kMfKE0vAo+0lzDrWBW4O
+ /7W5aPNmxrFng0HRc5xbW9req2Vc+zSDQ6wYXrTj12GOdwc0TLsI06T70zpxqFaiYVKd0tI9Nue
+ Wq7MFiZ0=
+X-Gm-Gg: ASbGncsh2u3RU4ahOIQnfOgxFgG9ulonyniiULdCsS1iPE4K5cfNbt2DEWl4wk1wEKt
+ AMJ2HRI+MhrnfSShIQdj7dlFbIP7n6cQ3217+6ewl7wM/0IEF+awA0/N0aAUcbtAVhWxNfeLO89
+ faSEYIO/xeuM8HoeTgxyZ2URaHDFqAbG61aTWpbyKuker9wQ6yORIpVv6SNWI8YarkIZM0iYaSg
+ ZU86/Kpgev3pN75lBpI/N3X5KnHJBbgK13MjjgoLpJ7N34keWPfxeo4y4Oj/dkYDd32P4ldk+Xv
+ 2bDKlDCCdZcXbcosNXKR/seVJUZSQthQvHhO3P7qGIm/R5wgYSMXwmxtxCct32pKAaskzSrKO79
+ C0fHMm/YeeCouQINZwPmtSZg=
+X-Google-Smtp-Source: AGHT+IHQ4JOzOHo6N0DjImBXputIueciNEW1pQvnc3+uq2qcTEHUqR8Ryq/ZyU4ADAboL8ZOrvVeug==
+X-Received: by 2002:a05:6830:4981:b0:72b:9140:f6d9 with SMTP id
+ 46e09a7af769-7386a07a780mr2781026a34.4.1749046192003; 
+ Wed, 04 Jun 2025 07:09:52 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2e9058cbfebsm2659878fac.0.2025.06.04.06.56.14
+ 46e09a7af769-735af8780b1sm2205858a34.35.2025.06.04.07.09.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Jun 2025 06:56:15 -0700 (PDT)
-Date: Wed, 4 Jun 2025 07:56:12 -0600
+ Wed, 04 Jun 2025 07:09:51 -0700 (PDT)
+Date: Wed, 4 Jun 2025 08:09:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>, Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>, Sam Edwards <cfsworks@gmail.com>,
- Prasad Kummari <prasad.kummari@amd.com>
-Subject: Re: [PATCH] sandbox: solve undefined reference to pthread_kill symbol
-Message-ID: <20250604135612.GN1382132@bill-the-cat>
-References: <20250603151401.1709532-1-raymond.mao@linaro.org>
- <20250603154748.GG1382132@bill-the-cat>
- <CAEfUkU+7BaEcmQ1NL2TSMLpHYQt1DhPLKZPtkB_Fd6u_Oq4qEA@mail.gmail.com>
- <20250603192345.GL1382132@bill-the-cat>
- <CAEfUkULmB2PckAKf+euT8Mj3ehirw-TjmNT20-+AfVy6SpRB=Q@mail.gmail.com>
- <DADNW2131HYB.V2UGC24FOJJO@ti.com>
+To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
+ Manuel Traut <manuel.traut@mt.com>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Fabio Estevam <festevam@gmail.com>
+Subject: Re: [PATCH v7] arm: imx: Add support for Mettler-Toledo snowflake
+ board
+Message-ID: <20250604140949.GO1382132@bill-the-cat>
+References: <20250604112507.11358-2-Wojciech.Dubowik@mt.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VUY0LixEcEAVzrMa"
+ protocol="application/pgp-signature"; boundary="qX7QXnX/I6d6oDR6"
 Content-Disposition: inline
-In-Reply-To: <DADNW2131HYB.V2UGC24FOJJO@ti.com>
+In-Reply-To: <20250604112507.11358-2-Wojciech.Dubowik@mt.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,86 +102,129 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VUY0LixEcEAVzrMa
+--qX7QXnX/I6d6oDR6
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 04, 2025 at 03:33:31PM +0530, Anshul Dalal wrote:
-> Hi Raymond,
->=20
-> On Wed Jun 4, 2025 at 2:30 AM IST, Raymond Mao wrote:
-> > Hi Tom,
-> >
-> > On Tue, 3 Jun 2025 at 15:23, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Tue, Jun 03, 2025 at 02:00:23PM -0400, Raymond Mao wrote:
-> >> > Hi Tom,
-> >> >
-> >> > On Tue, 3 Jun 2025 at 11:47, Tom Rini <trini@konsulko.com> wrote:
-> >> > >
-> >> > > On Tue, Jun 03, 2025 at 08:13:58AM -0700, Raymond Mao wrote:
-> >> > >
-> >> > > > This patch is to solve the sandbox building error:
-> >> > > > $ make O=3Dbuild-sandbox -s sandbox_defconfig
-> >> > > > $ make O=3Dbuild-sandbox -s -j2
-> >> > > > /usr/bin/ld: /tmp/u-boot.27rzOu.ltrans58.ltrans.o: undefined ref=
-erence to symbol 'pthread_kill@@GLIBC_2.2.5'
-> >> > > > /usr/bin/ld: /lib/x86_64-linux-gnu/libpthread.so.0: error adding=
- symbols: DSO missing from command line
-> >> > > > collect2: error: ld returned 1 exit status
-> >> > > > [...]
-> >> > > >
-> >> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >> > > > ---
-> >> > > >  arch/sandbox/config.mk | 2 +-
-> >> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >> > >
-> >> > > OK, but how do you get this failure to start with? What host?
-> >> > It failed when I started any sandbox unit test like:
-> >> > ./test/py/test.py --bd sandbox --build -k <any_test>
-> >> > My local host: Ubuntu v20.04, x86_64
-> >>
-> >> We don't see that normally, is there something odd about your compiler=
-s?
-> >> This is the kind of thing which should be failing everywhere, but isn'=
-t.
-> >> Thanks.
-> >>
-> > This failure occured in my host since v2025.07-rc1, but with the same
-> > host, same setup and same instructions it worked fine in v2025.04-rc5.
-> > Seems that some impacts were introduced during v2025.04-rc5 ~
-> > v2025.07-rc1, which might be worth investigating.
-> >
->=20
-> I am unable to reproduce the issue on gcc 15.1.1 and glibc 2.41. I think
-> the issue is likely on your host end.  What compiler and libc are you
-> using for the build?
+On Wed, Jun 04, 2025 at 01:25:05PM +0200, Wojciech Dubowik wrote:
 
-This feels like if it's generic, CI should be blowing up too, even if
-it's Ubuntu 22.04 not 20.04 these days. Please bisect down to the
-failure, since you have known good/bad commits and 'git bisect run' can
-use the test case you have.
+> From: Manuel Traut <manuel.traut@mt.com>
+>=20
+> The board is similar to "Kontron SL i.MX 8M Mini" SoM.
+> There are two variants. Snowflake_v2 has an external SDCard Interface.
+> LEIG is the same but without display and with emmc card only.
+> Both variants support 1GiB of main memory.
+>=20
+> [ bigeasy: porting and a bit of cleanup ]
+>=20
+> Signed-off-by: Manuel Traut <manuel.traut@mt.com>
+> Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+[snip]
+>  arch/arm/dts/imx8mm-mt-snowflake-v2.dts       |  127 ++
+
+What's the upstream status of this dts?
+
+[snip]
+> +&i2c1 {
+> +	status =3D "okay";
+> +	bootph-all;
+> +	bootph-pre-ram;
+> +};
+
+The bootph properties have been upstreamed and can go in the main dts
+file. Also, you don't need both.
+
+[snip]
+> diff --git a/include/configs/snowflake_v2.h b/include/configs/snowflake_v=
+2.h
+> new file mode 100644
+> index 000000000000..eccd01fc8ecd
+> --- /dev/null
+> +++ b/include/configs/snowflake_v2.h
+> @@ -0,0 +1,117 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2019 Kontron Electronics GmbH
+> + * Copyright (C) 2020 Mettler-Toledo GmbH
+> + *
+> + * Configuration settings for the MT Snowflake v2 Terminal, based on Kon=
+tron
+> + * "Kontron SL i.MX 8M Mini" SoM.
+> + */
+> +#ifndef __SNOWFLAKE_V2_IMX8M_MINI_H
+> +#define __SNOWFLAKE_V2_IMX8M_MINI_H
+> +
+> +#include <asm/arch/imx-regs.h>
+> +#include <linux/sizes.h>
+> +
+> +#ifdef CONFIG_XPL_BUILD
+> +#include <config.h>
+> +#endif
+
+That's not allowed / valid. This file here is config.h.
+
+> +
+> +/*
+> + * #######################################
+> + * ### RAM                             ###
+> + * #######################################
+> + */
+> +#define CFG_SYS_INIT_RAM_ADDR		0x40000000
+> +#define CFG_SYS_INIT_RAM_SIZE		SZ_2M
+> +
+> +#if defined(CONFIG_ENV_IS_IN_MMC)
+> +/* Environment in eMMC, before config block at the end of 1st "boot sect=
+or" */
+> +#endif
+
+Please clean that up.
+
+> +
+> +#define CFG_SYS_SDRAM_BASE		0x40000000
+> +
+> +/* SDRAM configuration */
+> +#define PHYS_SDRAM			0x40000000
+> +#define PHYS_SDRAM_SIZE			SZ_1G /* 1GB DDR */
+> +
+> +/* GUID for capsule updatable firmware image */
+> +#define MT_SNOWFLAKE_V2_FIT_IMAGE_GUID \
+> +	EFI_GUID(0x3EEAE649, 0x202d, 0x5feb, 0xb6, 0x94, \
+> +		 0x2d, 0x75, 0x06, 0x52, 0xc6, 0x40)
+> +
+> +#ifndef CONFIG_XPL_BUILD
+
+That's not allowed and..
+
+> +
+> +#define MEM_LAYOUT_ENV_SETTINGS \
+
+Please move to using a plain text environment (board/foo/bar/bar.env).
+
+Thanks.
 
 --=20
 Tom
 
---VUY0LixEcEAVzrMa
+--qX7QXnX/I6d6oDR6
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhAUHgACgkQFHw5/5Y0
-tyx6twv+NGPl6HpaNMPgLgVmiEwUlqAZy/9S3CI3K9LBU/iK0DF0w8vVK3R26qL3
-Ts0gQ6rrMyU5Q6iPJSGUctH5i+NFO5DbQcClRDKy3IabHxe8icgnr9N7zDmFh0gD
-1+NBV1IbgEducNgXf/2RYQPD0b/uhi1oAE2XvlkFV02bkvkuRsbQsxqFD5Z6vAaI
-68pQL7jdDmvctyzar3dlMHpoIhW4JpxLS/RagAJXgQ0xJCbfCKAPu/wvz42hFQ0H
-59Bga70Q5oVDLNHvjQHENnL3sCF2oBwU1L32Wrso6fo0iMJpeT3kz0/ktpUrxJhG
-SH8QxHd18ZXz1o//BhcPF/jxz+kySPQHbButYzf3XCglmZ9wFj4Vxuu2mZQxg9Cj
-0nGkqu/B5ndlIOxvLsADG2DJGficzj3U/DaSR+hDfQDWiZSscoejDr57o1ptf5wx
-IIY53OndujVkSPK8IYk66v9pvabHUtHHXiuzNlc/yFVb3NkyeSceUcaYjwdUEM1R
-btcHJ4vA
-=On0q
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhAU6YACgkQFHw5/5Y0
+tyzhkQv9EutqLx7gJOKAQ0EpDBEbub0k8+vlz5vlR6cK0WRwBe5F109nFxxFWSa+
+9pKazKTGinFs+q/Y8J6D1CkuNdsLu+Ycuv0Yb0dWuF2LMuY3kGx0912h9ptiMbJe
+P/dbLdIscK9F+CmJwcNCrNKw9sI7aM90k3b1z0z+msAtpYdIzp22CZYSqG00CP2g
+DNOyi3pbQacBegrrrxjTGZAmYekFM4/T3VpubS8ktnA0u4L/uvt1dtTHJBrbCpRF
+3EEA/zjHHEQsG7OveN9uawyATUsEjF3EFmbSHZObAPjf6j8a65Q0aNO5OUv2VCad
+hiEWZAr/+zqyCuvKDd+T/UQ/l9Edfn7cqERzkhz4efKpuXiFp+ie94GzkHCPlDtu
+aVmPu7vEK1QHNDkYrmC3NP4ystT8hclWLFAGyJcHbHJOO5wW+Vt9z+Rh2Vr0kn82
+PMRH1pm/6YyY9q2d2a2+AVI1FZmpJi4d8Je1ykk1AvhL0ELBz78vR2tJG6TdgR4V
+O2446+HV
+=17Cl
 -----END PGP SIGNATURE-----
 
---VUY0LixEcEAVzrMa--
+--qX7QXnX/I6d6oDR6--
