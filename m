@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E62CC5B552
-	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 06:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E85C5B552
+	for <u-boot@archiver.kernel.org>; Wed,  4 Jun 2025 06:02:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5550181F0D;
-	Wed,  4 Jun 2025 08:00:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8DF681F0D;
+	Wed,  4 Jun 2025 08:02:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="C1tXINHi";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xYWtKDMk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A20D581FEE; Wed,  4 Jun 2025 08:00:52 +0200 (CEST)
+ id B615C82BD6; Wed,  4 Jun 2025 08:02:12 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 856EE81E72
- for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 08:00:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD79D81E72
+ for <u-boot@lists.denx.de>; Wed,  4 Jun 2025 08:02:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=8250fb800b=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5543NkHf000605;
- Wed, 4 Jun 2025 08:00:42 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5540rnIA011439;
+ Wed, 4 Jun 2025 08:02:05 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- XXHQAVuLoCECI1NvioB3V5cYvI8XEGJRgSKIMg5hlBE=; b=C1tXINHia9NWGHFN
- fzwyRPDdctBj9X7SJ2BWo35/2i8NmplWcPGWMZqhJOl/31p/JNSF7YKatQjRHC9e
- XD8eAKdat65dFjV44S2QReOqBKIGfi9/8TSNB6bdz11DxSRonO2z0kNfijbEnC0x
- ljpV895k88pytZSTqXOKA5acpkQl4yJzmIKmd23FpBfQgFtUVurrq3Z0N6YsF+91
- 55tcGJMwGaOtNEmZsHh6lr4UdmlWH1meCYO2pWdPnmExJ8+Y+OgqyYMc5yCpXN5O
- crhL0NNtpiASeU15SvzlqJsTDTe+t+j5bJFWZ7mD0BzLchMqLq+kT6pYhmtDWyNe
- gAkP+w==
+ CFVmDe99q8X6OzbAF3bTTXYT1J5EhUE2x5kxWHJe81g=; b=xYWtKDMkagXB2XRZ
+ igGeRUDZjajNfiXxEqNEpybE/F/fDluo4pTHyT8hixny7ADWRfEeJehsUvqPLFjX
+ hyOdyKvqAfY8seBVKo6Xt9dSGdS4X2VMv7TwW3fCvR7beVs0AW+FcmX/lwUmUb1m
+ T3kGBCqu9YUKDgy3OjFJKJLQ79vERAN5PpGJ2Hngpe6LnP6/tR9m1R7qc/kVvqRW
+ 4tBSi53QfrcV8wl3FDQj/rpH5yKzFz5Ue6ljtdecs9KWVGHp/ZbmffbRKLpYT3f1
+ L/TNxAhM5aCOxbwBV19YNCq42UgBrMAh/Gy2rWpwXKqJHcal1pyDm8ZfTS7haiWr
+ vicxaw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g90fhbx-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g90fhrh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 04 Jun 2025 08:00:42 +0200 (MEST)
+ Wed, 04 Jun 2025 08:02:05 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8B1C840044;
- Wed,  4 Jun 2025 07:59:43 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2300640079;
+ Wed,  4 Jun 2025 08:00:39 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BD96A5D7088;
- Wed,  4 Jun 2025 07:59:19 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 059E9A6896F;
+ Wed,  4 Jun 2025 07:59:39 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Jun
- 2025 07:59:19 +0200
-Message-ID: <876b8578-67f7-4b32-a1cf-5ad37727c9eb@foss.st.com>
-Date: Wed, 4 Jun 2025 07:59:18 +0200
+ 2025 07:59:38 +0200
+Message-ID: <77516412-ecaf-4281-b683-ec9bcc2b109c@foss.st.com>
+Date: Wed, 4 Jun 2025 07:59:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/13] clk: sandbox: update driver for
- CONFIG_CLK_AUTO_ID support
+Subject: Re: [PATCH v2 07/13] clk: fixed_rate: configure clock ID with
+ CONFIG_CLK_AUTO_ID
 To: <u-boot@lists.denx.de>
 CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
  <uboot-stm32@st-md-mailman.stormreply.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>
 References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
- <20250527132755.2169508-6-patrice.chotard@foss.st.com>
+ <20250527132755.2169508-8-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250527132755.2169508-6-patrice.chotard@foss.st.com>
+In-Reply-To: <20250527132755.2169508-8-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -98,11 +98,9 @@ X-Virus-Status: Clean
 On 5/27/25 15:27, Patrice Chotard wrote:
 > From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
-> Update the sandbox driver to allow support of the
-> CONFIG_CLK_AUTO_ID by using the new API clk_get_id()
-> to get the internal SANDBOX identifier.
-> 
-> With CONFIG_CLK_AUTO_ID, clk->id have the also seq identifier.
+> Update CLK ID to avoid 0 id, used for dummy clock with CCF
+> and to allow selection by clk_get_by_id, used to
+> get private data associated to the UCLASS_CLK device
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
@@ -112,194 +110,21 @@ On 5/27/25 15:27, Patrice Chotard wrote:
 > 
 > (no changes since v1)
 > 
->  drivers/clk/clk_sandbox.c     | 30 +++++++++++++---------
->  drivers/clk/clk_sandbox_ccf.c | 48 +++++++++++++++++------------------
->  2 files changed, 42 insertions(+), 36 deletions(-)
+>  drivers/clk/clk_fixed_rate.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/clk/clk_sandbox.c b/drivers/clk/clk_sandbox.c
-> index 8dd77f18d90..c8c5a88c52d 100644
-> --- a/drivers/clk/clk_sandbox.c
-> +++ b/drivers/clk/clk_sandbox.c
-> @@ -13,24 +13,26 @@
->  static ulong sandbox_clk_get_rate(struct clk *clk)
->  {
->  	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
-> +	ulong id = clk_get_id(clk);
+> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
+> index d1da05cc18a..95a77d2e041 100644
+> --- a/drivers/clk/clk_fixed_rate.c
+> +++ b/drivers/clk/clk_fixed_rate.c
+> @@ -44,6 +44,7 @@ void clk_fixed_rate_ofdata_to_plat_(struct udevice *dev,
+>  	dev_set_uclass_priv(dev, clk);
 >  
->  	if (!priv->probed)
->  		return -ENODEV;
->  
-> -	if (clk->id >= SANDBOX_CLK_ID_COUNT)
-> +	if (id >= SANDBOX_CLK_ID_COUNT)
->  		return -EINVAL;
->  
-> -	return priv->rate[clk->id];
-> +	return priv->rate[id];
+>  	clk->dev = dev;
+> +	clk->id = CLK_ID(dev, 0);
+>  	clk->enable_count = 0;
 >  }
 >  
->  static ulong sandbox_clk_round_rate(struct clk *clk, ulong rate)
->  {
->  	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
-> +	ulong id = clk_get_id(clk);
->  
->  	if (!priv->probed)
->  		return -ENODEV;
->  
-> -	if (clk->id >= SANDBOX_CLK_ID_COUNT)
-> +	if (id >= SANDBOX_CLK_ID_COUNT)
->  		return -EINVAL;
->  
->  	if (!rate)
-> @@ -43,18 +45,19 @@ static ulong sandbox_clk_set_rate(struct clk *clk, ulong rate)
->  {
->  	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
->  	ulong old_rate;
-> +	ulong id = clk_get_id(clk);
->  
->  	if (!priv->probed)
->  		return -ENODEV;
->  
-> -	if (clk->id >= SANDBOX_CLK_ID_COUNT)
-> +	if (id >= SANDBOX_CLK_ID_COUNT)
->  		return -EINVAL;
->  
->  	if (!rate)
->  		return -EINVAL;
->  
-> -	old_rate = priv->rate[clk->id];
-> -	priv->rate[clk->id] = rate;
-> +	old_rate = priv->rate[id];
-> +	priv->rate[id] = rate;
->  
->  	return old_rate;
->  }
-> @@ -62,14 +65,15 @@ static ulong sandbox_clk_set_rate(struct clk *clk, ulong rate)
->  static int sandbox_clk_enable(struct clk *clk)
->  {
->  	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
-> +	ulong id = clk_get_id(clk);
->  
->  	if (!priv->probed)
->  		return -ENODEV;
->  
-> -	if (clk->id >= SANDBOX_CLK_ID_COUNT)
-> +	if (id >= SANDBOX_CLK_ID_COUNT)
->  		return -EINVAL;
->  
-> -	priv->enabled[clk->id] = true;
-> +	priv->enabled[id] = true;
->  
->  	return 0;
->  }
-> @@ -77,14 +81,15 @@ static int sandbox_clk_enable(struct clk *clk)
->  static int sandbox_clk_disable(struct clk *clk)
->  {
->  	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
-> +	ulong id = clk_get_id(clk);
->  
->  	if (!priv->probed)
->  		return -ENODEV;
->  
-> -	if (clk->id >= SANDBOX_CLK_ID_COUNT)
-> +	if (id >= SANDBOX_CLK_ID_COUNT)
->  		return -EINVAL;
->  
-> -	priv->enabled[clk->id] = false;
-> +	priv->enabled[id] = false;
->  
->  	return 0;
->  }
-> @@ -92,11 +97,12 @@ static int sandbox_clk_disable(struct clk *clk)
->  static int sandbox_clk_request(struct clk *clk)
->  {
->  	struct sandbox_clk_priv *priv = dev_get_priv(clk->dev);
-> +	ulong id = clk_get_id(clk);
->  
-> -	if (clk->id >= SANDBOX_CLK_ID_COUNT)
-> +	if (id >= SANDBOX_CLK_ID_COUNT)
->  		return -EINVAL;
->  
-> -	priv->requested[clk->id] = true;
-> +	priv->requested[id] = true;
->  	return 0;
->  }
->  
-> diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/clk_sandbox_ccf.c
-> index f96a15c30b3..9b8036d41aa 100644
-> --- a/drivers/clk/clk_sandbox_ccf.c
-> +++ b/drivers/clk/clk_sandbox_ccf.c
-> @@ -235,47 +235,47 @@ static int sandbox_clk_ccf_probe(struct udevice *dev)
->  	void *base = NULL;
->  	u32 reg;
->  
-> -	clk_dm(SANDBOX_CLK_PLL3,
-> -	       sandbox_clk_pllv3(SANDBOX_PLLV3_USB, "pll3_usb_otg", "osc",
-> -				 base + 0x10, 0x3));
-> +	dev_clk_dm(dev, SANDBOX_CLK_PLL3,
-> +		   sandbox_clk_pllv3(SANDBOX_PLLV3_USB, "pll3_usb_otg", "osc",
-> +				     base + 0x10, 0x3));
->  
-> -	clk_dm(SANDBOX_CLK_PLL3_60M,
-> -	       sandbox_clk_fixed_factor("pll3_60m",  "pll3_usb_otg",   1, 8));
-> +	dev_clk_dm(dev, SANDBOX_CLK_PLL3_60M,
-> +		   sandbox_clk_fixed_factor("pll3_60m", "pll3_usb_otg",   1, 8));
->  
-> -	clk_dm(SANDBOX_CLK_PLL3_80M,
-> -	       sandbox_clk_fixed_factor("pll3_80m",  "pll3_usb_otg",   1, 6));
-> +	dev_clk_dm(dev, SANDBOX_CLK_PLL3_80M,
-> +		   sandbox_clk_fixed_factor("pll3_80m", "pll3_usb_otg",   1, 6));
->  
->  	/* The HW adds +1 to the divider value (2+1) is the divider */
->  	reg = (2 << 19);
-> -	clk_dm(SANDBOX_CLK_ECSPI_ROOT,
-> -	       sandbox_clk_divider("ecspi_root", "pll3_60m", &reg, 19, 6));
-> +	dev_clk_dm(dev, SANDBOX_CLK_ECSPI_ROOT,
-> +		   sandbox_clk_divider("ecspi_root", "pll3_60m", &reg, 19, 6));
->  
->  	reg = 0;
-> -	clk_dm(SANDBOX_CLK_ECSPI0,
-> -	       sandbox_clk_gate("ecspi0", "ecspi_root", &reg, 0, 0));
-> +	dev_clk_dm(dev, SANDBOX_CLK_ECSPI0,
-> +		   sandbox_clk_gate("ecspi0", "ecspi_root", &reg, 0, 0));
->  
-> -	clk_dm(SANDBOX_CLK_ECSPI1,
-> -	       sandbox_clk_gate2("ecspi1", "ecspi_root", base + 0x6c, 0));
-> +	dev_clk_dm(dev, SANDBOX_CLK_ECSPI1,
-> +		   sandbox_clk_gate2("ecspi1", "ecspi_root", base + 0x6c, 0));
->  
->  	/* Select 'pll3_60m' */
->  	reg = 0;
-> -	clk_dm(SANDBOX_CLK_USDHC1_SEL,
-> -	       sandbox_clk_mux("usdhc1_sel", &reg, 16, 1, usdhc_sels,
-> -			       ARRAY_SIZE(usdhc_sels)));
-> +	dev_clk_dm(dev, SANDBOX_CLK_USDHC1_SEL,
-> +		   sandbox_clk_mux("usdhc1_sel", &reg, 16, 1, usdhc_sels,
-> +				   ARRAY_SIZE(usdhc_sels)));
->  
->  	/* Select 'pll3_80m' */
->  	reg = BIT(17);
-> -	clk_dm(SANDBOX_CLK_USDHC2_SEL,
-> -	       sandbox_clk_mux("usdhc2_sel", &reg, 17, 1, usdhc_sels,
-> -			       ARRAY_SIZE(usdhc_sels)));
-> +	dev_clk_dm(dev, SANDBOX_CLK_USDHC2_SEL,
-> +		   sandbox_clk_mux("usdhc2_sel", &reg, 17, 1, usdhc_sels,
-> +				   ARRAY_SIZE(usdhc_sels)));
->  
->  	reg = BIT(28) | BIT(24) | BIT(16);
-> -	clk_dm(SANDBOX_CLK_I2C,
-> -	       sandbox_clk_composite("i2c", i2c_sels, ARRAY_SIZE(i2c_sels),
-> -				     &reg, CLK_SET_RATE_UNGATE));
-> +	dev_clk_dm(dev, SANDBOX_CLK_I2C,
-> +		   sandbox_clk_composite("i2c", i2c_sels, ARRAY_SIZE(i2c_sels),
-> +					 &reg, CLK_SET_RATE_UNGATE));
->  
-> -	clk_dm(SANDBOX_CLK_I2C_ROOT,
-> -	       sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
-> +	dev_clk_dm(dev, SANDBOX_CLK_I2C_ROOT,
-> +		   sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
->  
->  	return 0;
->  }
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
