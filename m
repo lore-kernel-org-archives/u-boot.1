@@ -4,119 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87152C5AE59
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 17:48:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6180BC5B543
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 18:04:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 172BF8091A;
-	Thu,  5 Jun 2025 19:48:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B37AD803DF;
+	Thu,  5 Jun 2025 20:04:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qs9t/aAH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N9TbEy7N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2273481E25; Thu,  5 Jun 2025 19:48:36 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 06FAD8091A; Thu,  5 Jun 2025 20:04:39 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 857E3803DF
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 19:48:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03F7D80050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 20:04:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-450cfb790f7so9954655e9.0
- for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 10:48:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-55351af2fc6so1635568e87.0
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 11:04:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749145713; x=1749750513; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=wBXazXCDbfujYYxUBnjAdBoxahdicgL+S4DbuaH678A=;
- b=Qs9t/aAHDbRavvdZ0PeAd4N7FD/JS0DuaOOynBpAEQ0abED6Zzu9j5UGB2U7DMO2qf
- WS4c5TwfI1Vk/JacAh12BL5kya4DwytmpuSwCSHffvpUu81l8soPTXSl4Ebg2FAH5tt/
- j43tV+j8sTIfXe/juyGhKT3CxseytV4mLJmtmmzw2XEfaZ7hXbDs4BlzyE+qWtl+deyl
- nLqeICzPPAhb4cSC/af7FtCT5rLZxRRC1G9pKnQJtbCz3UnJyby1PzBbsWMvQk30BHYV
- CkKsLnkZLVPeGGeXdmCUD8P3VeVZrHripoHbl/4e2OdWwE8bKAclCYuqIE7j/FO0Rf8a
- oflQ==
+ d=gmail.com; s=20230601; t=1749146676; x=1749751476; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Fi6hM8ksM13B4Ub4gK5GbzJ9ASUCHOg0/6RHAqiRPqw=;
+ b=N9TbEy7NzCG/xm4jVf3/QhENrrGeDJ1PnT7R+eqtqRKhBFdzkVnhjp6D64tQztSyYB
+ W/BTkZTRRxQi3H6tqOWiJ++u4VCwd6tsEQOwKVhaZfLZ0nWUbpibCzWtNkodO5/0OHhb
+ nWuSd8QzsYlq0XCvS/fNw/QQqelrOGnpxw2aZ7hEjeH0zj3eK1BKEM7rDLzJYc9lC019
+ X+uMp9CG7gSr5NiuL4tEGFGLnl0Q+vrc9TAdZbdwlXjdf3K1UalNOMxuUA1z1CCL2q3x
+ lRBFaIXU5bx2o9TfxhvNJM72Y7WNPtgtq2jirp/NNW24uDNaQFusnvvSCMLSTWH/YGL0
+ Agpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749145713; x=1749750513;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wBXazXCDbfujYYxUBnjAdBoxahdicgL+S4DbuaH678A=;
- b=sv9BaKZ2fvToE1FnOc4zsivuCoYiM27Xi3Vi/sEaIPeHL+bmhFMPMb/y0DAmVE7vbV
- CPmse31wkdMSapR3ZMQc+8172Pwg8It5tiCTkAHma6H5PUImjkFp9Z0C/yIIVr/kGTHu
- gnHkbSlzQeoO/GkZ9v9Yd0AmxwfT6uhg+iHgU/2e6dUFi24gMbkwnyD3X6k5uSMM1xAu
- zd5f8lPzjFFDKJmMl6VqdKANvqDAYSKsKWUQh3bjvEsbYvJociejEWpEGZtoGKtuPYtz
- ksO+bHeKK4mPEVCaadZZWhfEldEMOaS+WoYIp9FOo8xLpXUnkYnc6rvTXa8MUsYCqXhf
- RAxg==
+ d=1e100.net; s=20230601; t=1749146676; x=1749751476;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Fi6hM8ksM13B4Ub4gK5GbzJ9ASUCHOg0/6RHAqiRPqw=;
+ b=u0pei1xU1KLgrmFkh3W3YHhBmPvg0D30vssiIolYGZogSpO7bN+9q4FxZE7GNnzW2P
+ tAfAwbd1G6/NSdXsMi9XAKU/wzyFWofkdA1wWncrOwoKnVsCmzfeqzVW3ATeCBgRnOkv
+ gA4O5mVLheIG183x1hs6ZTd6To3RGABnNObGW1d+1DhIgCyQ3u4LZG3uymA61Iu+YKWI
+ wylBai70pvWjT9wP+BDK7+xiNO9PUjt+/XB1nAAr9tJjWfFZJ60iRDQg5UYvJxvDGKd9
+ wcJN2Tnt+AhFszV9botu9pPaJXE0YE1F7S2yNrjSL9f2JezC/KkA6lBu/hl+88IAUDhe
+ 2Zbw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUO0DAcUILVW+utlEKfDlslPQyspRQybzcMbiv/ceF19JoIfIpgVKJjrJU4BdmHDEl2nt5k5c=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbxA2r1UpUArVa5tF0l04FAwtbp1AsqvQojkEJG1xjNpN/gtJG
- Z+xgCVHFIF9zaSZS1M863kS5T/JA+FehZDpvKX9mCBt2M5hlfWex0uIKUqF/LWC/lB8=
-X-Gm-Gg: ASbGncsJ2hA3vNOu71lMxPCM0m3CDGrv1kg71/maD/tr/61XrxczDj5bDBcQy7lHb2J
- BxOWL7JXFC5s6El5Mgqn8yddKx9jxQ5iyJffaVNdrdNqEk0G4jp1dFbk7/VUluX5R2NrUrmBTgH
- yddQ7WkvRCLmIS+FDPjbHkRQzZZSKyguacJhi/xlIMm8ULIWp2WVLQzyXqMw7trGsZq4x/ZXi/O
- 85An/eIAQJtJEDqC0s4KaWef+LenbHN2V5MZUYnwkkEi4fKuE2FmvPildTTnmA/zp7EJwhP5vsE
- 3N3iduWpKsh9DWh2RUDzTEHICb3JO2KxQaVsbiMbw1NL+lLbuFl4wMn4I+4jTvxHMOnUmB3HMIT
- h4rHcoeFwOf6GbIRp4U4igAc9ldX+a1F6waTdpdI=
-X-Google-Smtp-Source: AGHT+IFwNP0MuXPMYXFzImniVLTc/yQY4IPc58WMYquxxNDXIUtlXCh9WMaLghgoVUMw7qXnsL/I9A==
-X-Received: by 2002:a05:600c:3e85:b0:43d:300f:fa1d with SMTP id
- 5b1f17b1804b1-45201427814mr2848175e9.31.1749145712943; 
- Thu, 05 Jun 2025 10:48:32 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:a613:826b:6813:c968?
- ([2a01:e0a:3d9:2080:a613:826b:6813:c968])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45209bc6d6dsm253645e9.3.2025.06.05.10.48.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jun 2025 10:48:32 -0700 (PDT)
-Message-ID: <3d86cf5f-028c-4858-b292-5233b7194c60@linaro.org>
-Date: Thu, 5 Jun 2025 19:48:31 +0200
+ AJvYcCWH5JDo4Krr0ZB8Tio5L3oG2uXi8H7Ds5CYLGhKc21LSJAv1AE4e2BTkFMg42d24k71RyxseDY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYl12QXoGqYWVEmbkzXZMFvTT2Es5QMTVA08RiEOXMY6whfrQv
+ wV+2YeY4/ZwYtF0PVaCZZq+Sd420q29jF910rp5+HU4WcGWyz/p0KjlLJAch2+UaLzh0LcE71wL
+ KFyop6bzR1CRdhUFMpPaW+Miwof68Kmc=
+X-Gm-Gg: ASbGncsk5/2P8z4Rfpv1WggK6m9CgwwG9npxnfQ3lwmzemKRCqitJ61kNvetztH+Uo1
+ 0LGUEliplG63S+quV+dzmG6nnwksfwlhmSmObCtpt4jVYrBC/eo6Ob3/Feq081PxJHzzL9pNLJ/
+ p0IOpWunAUjq3e+EAM3qgzwC2TBMht7d90Wd5ruA7BSk33Wrxp7AZjTfKYIOPt95Qk
+X-Google-Smtp-Source: AGHT+IEhXlYFYswn49NyBjD5nydcWDfSM7otOb5iDsO4SnoBuWEq756b+wdBygKTh6KvzlO6hfv+riedVLYhLIcYZbw=
+X-Received: by 2002:a05:6512:2247:b0:54f:c10b:7290 with SMTP id
+ 2adb3069b0e04-55366bff443mr31209e87.26.1749146675918; Thu, 05 Jun 2025
+ 11:04:35 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFT v4 3/3] fastboot: integrate block flashing back-end
-To: Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Dmitrii Merkurev <dimorinny@google.com>
-References: <20250522-topic-fastboot-blk-v4-0-af7f7f30564d@linaro.org>
- <20250522-topic-fastboot-blk-v4-3-af7f7f30564d@linaro.org>
- <20250522143958.GJ100073@bill-the-cat>
- <b83cfc3a-39e6-4710-a6ac-c24c878052cc@linaro.org>
- <20250605142126.GV1382132@bill-the-cat>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250605142126.GV1382132@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250605123657.1083000-1-lukma@denx.de>
+In-Reply-To: <20250605123657.1083000-1-lukma@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 5 Jun 2025 15:04:24 -0300
+X-Gm-Features: AX0GCFu8-p_mOFaAuImo9edwAyn_LN8nL2LACHYEIqTJviU9rdDblCPy8LIwfpY
+Message-ID: <CAOMZO5DpMpK-JYcK-dHjRjAQb+y48C30pz7th23isxsrv9C8QQ@mail.gmail.com>
+Subject: Re: [PATCH v3] ARM: imx: mxs: Add support for imx287 based BTT devices
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,86 +91,57 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05/06/2025 16:21, Tom Rini wrote:
-> On Thu, Jun 05, 2025 at 10:16:54AM +0200, Neil Armstrong wrote:
->> On 22/05/2025 16:39, Tom Rini wrote:
->>> On Thu, May 22, 2025 at 02:37:07PM +0200, Neil Armstrong wrote:
->>>
->>>> From: Dmitrii Merkurev <dimorinny@google.com>
->>>>
->>>> 1. Get partition info/size
->>>> 2. Erase partition
->>>> 3. Flash partition
->>>> 4. BCB
->>>>
->>>> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
->>>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->>>> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>>> ---
->>>>    drivers/fastboot/Kconfig      | 29 +++++++++++++++++++++++++++++
->>>>    drivers/fastboot/Makefile     |  1 +
->>>>    drivers/fastboot/fb_command.c |  8 ++++++++
->>>>    drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
->>>>    drivers/fastboot/fb_getvar.c  |  8 +++++++-
->>>>    5 files changed, 63 insertions(+), 5 deletions(-)
->>>
->>> I know this was posted before I replied with more feedback moments ago.
->>>
->>> [snip]
->>>> @@ -193,6 +197,31 @@ config FASTBOOT_MMC_USER_NAME
->>>>    	  defined here.
->>>>    	  The default target name for erasing EMMC_USER is "mmc0".
->>>> +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
->>>> +	string "Define FASTBOOT block interface name"
->>>> +	depends on FASTBOOT_FLASH_BLOCK
->>>> +	default ""
->>>> +	help
->>>> +	  The fastboot "flash" and "erase" commands support operations
->>>> +	  on any Block device, this should specify the block device name
->>>> +	  like ide, scsi, usb, sata, nvme, virtio, blkmap, mtd...
->>>> +	  The mmc block device type can be used but most of the features
->>>> +	  available in the FASTBOOT_MMC will be missing.
->>>> +	  Consider using FASTBOOT_MMC on a MMC block device until all
->>>> +	  features are migrated.
->>>
->>> A default like "" in order to un-stick configs that are now here and
->>> enabling the option is wrong. If we're enabling new functionality for
->>> platforms, it needs to be configured correctly. This leads to building
->>> code on platforms that won't be used on the platform so we've likely
->>> added run-time bloat for no benefit.
->>
->> I agree but what's the solution ? I'll prefer having no default as it was initially.
-> 
-> No defaults is correct here, yes. It's just that the primary
-> dependencies need to be fixed so that platforms don't get stuck on the
-> prompt on features they won't actually use either.
-> 
-> Seeing what boards get stuck, and then having an idea on what
-> dependencies trip them up is tricky. What I usually do in this
-> situation, to see what platform is stuck on the prompt is:
-> - In one terminal, fire off tools/qconfig -sC. Then wait for it to
->    seemingly be stuck with just one or two platforms left to finish
->    syncing.
-> - In another terminal, 'ps uxwwww | grep make' to see what the build
->    directory of one of those stuck platforms is, then manually save off
->    the .config file, begin investigation.
-> 
-> That should provide what platform is asking this question and not having
-> a reasonable answer. Then it's a matter of seeing if it makes sense for
-> this platform to be here and so just needs to be migrated to this
-> functionality or if it's here because of some dependency problem, for
-> example what I was talking about in the previous part of this series.
-> 
+Hi Lukasz,
 
-Ok I can't reproduce the crash with the last version, somehow v4 fixed it,
-and the changes I did still work:
-https://source.denx.de/u-boot/custodians/u-boot-ufs/-/pipelines/26523
+On Thu, Jun 5, 2025 at 9:37=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
+e:
+>
+> The btt[c3] devices are based on imx287 SoC.
+>
+> U-Boot SPL 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+> Trying to boot from MMC1
+>
+> U-Boot 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+>
+> CPU:   Freescale i.MX28 rev1.2 at 454 MHz
+> BOOT:  SSP SPI #3, master, 3V3 NOR
+> Model: BTT3
+> Board: LWE BTT SoM HW rev 0
+> DRAM:  256 MiB
+> Core:  86 devices, 15 uclasses, devicetree: separate
+> MMC:   MXS MMC: 0
+> Loading Environment from SPIFlash... SF: Detected is25lp128 with page
+>                     size 256 Bytes, erase size 64 KiB, total 16 MiB
+> OK
+> In:    serial@80074000
+> Out:   serial@80074000
+> Err:   serial@80074000
+> Net:   eth0: ethernet@800f0000
+> Hit any key to stop autoboot:  0
+>
+> Signed-off-by: Lukasz Majewski <lukma@denx.de>
 
-Neil
+I ran this patch through CI, and the following error is seen:
+
++board/liebherr/btt/btt.c: In function 'board_late_init':
++board/liebherr/btt/btt.c:362:19: error: implicit declaration of
+function 'env_set_ulong'; did you mean 'env_get_vlan'?
+[-Wimplicit-function-declaration]
++  362 |         int ret =3D env_set_ulong("board_som_rev", get_som_rev());
++      |                   ^~~~~~~~~~~~~
++      |                   env_get_vlan
++board/liebherr/btt/btt.c:367:15: error: implicit declaration of
+function 'env_set' [-Wimplicit-function-declaration]
++  367 |         ret =3D env_set("arch", get_board_name());
++      |               ^~~~~~~
++make[2]: *** [scripts/Makefile.build:249: board/liebherr/btt/btt.o] Error =
+1
++make[1]: *** [Makefile:1923: board/liebherr/btt] Error 2
++make: *** [Makefile:185: sub-make] Error 2
+
+Please run v4 through CI and make sure it passes.
