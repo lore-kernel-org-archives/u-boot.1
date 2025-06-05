@@ -4,85 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F02C8C5B543
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 21:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF18C5B543
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 22:10:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6658081E25;
-	Thu,  5 Jun 2025 23:52:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=yahoo.com
+	by phobos.denx.de (Postfix) with ESMTP id 59FF881E25;
+	Fri,  6 Jun 2025 00:10:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="gGTJaoMr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dCkpN9gR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B00F81F0D; Thu,  5 Jun 2025 23:52:54 +0200 (CEST)
-Received: from sonic312-20.consmr.mail.sg3.yahoo.com
- (sonic312-20.consmr.mail.sg3.yahoo.com [106.10.244.210])
+ id 9AED881F0D; Fri,  6 Jun 2025 00:10:43 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7127D8091A
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 23:52:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFC888091A
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 00:10:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=yahoo.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jjvazha@yahoo.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1749160368; bh=pMGMZBRYqNHKaWbPLd2bIMvhTNCSS5WBWpUWLECXIbk=;
- h=Date:From:To:In-Reply-To:References:Subject:From:Subject:Reply-To;
- b=gGTJaoMryBAjK40hBbWl+Qb08PSjP+QILZz9b46J/aXit5acTmzsY8CN//4GpJk6sNyBCZfng9y3TtlqL+H33uFopljHvFwSm99SbAUho/qqGkdcCoIlYtS2BmTMBgl4EYGBYq6kL69C2sdcV9LynwFO6mOhdi6AwBWK0svE5ZELRjc1pq+ijnKMqrsitiLGw5CgUoRngrKn8c0wwe45Lh6saMWFR2jmhHxp96VryCwvcrat76r8b9yhGGE5nDjhRj31YfP/k7ryI69oSWUQq6SPcFU6xOjUVRJF50cuvuhqohtX68YYGu9kuuvkA5Q8IZFuEpOZvpVGHzxX2CLgDw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1749160368; bh=PM/fJubDErg+iAwEpT3VPMI0Vonx95VV0UHLKROEj8j=;
- h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
- b=uF+idfUEJA8KJRENVlLcS+hrZv+9KXrGxJeNzAvApVTCjkEdP7CREip5Ge3ay31PCeeFMQOXlxGQX3wfyYDpWpypT14bdBVbqO1ipb2jpZ0yb3aRZ4xrYCpyWMaXycAVxulIkeu0rbWd6YWzw3UfpWzqtan1LTOrGUywrWHutKKYOCsMoPewtdZur3NfVtT3L8WrEjuHhslfFjwDxHjMCCbME8TQUf73vUj1apYi/WzCGviobSfMRJOabE+VIVAWGtyhXoTx0quA73Pa761hwH1KYFrn0PZn5e9U9ZHhvXqwJ67FB3SmNy/OpiTMuDVy2L9lb283Lq4NWVi2fdiVmg==
-X-YMail-OSG: KnxEVTwVM1luOP60DtpOTTPTLaBJdigEJdWS74J3upHOZRdACbK1LREQ1C41W3Q
- U6JJ9tFW8hixGRuHDaqyb_tc8y3i59hibFQxsks7_d7hR0ZcLshS1U8BfCjadNXSv4k7vRf2ZDqO
- dxpbTRc9_hO7mDu9mHHa377ovUF5hFb060u34dTgxLMoUFOxZun4jiuCvVHRBbYMoPIgRtOCTO9L
- KdZsZqsAAdQEXIg4GeDkq3VCa1pGAws_Xdlufw6XhI0PtY4CZMx8OFkV.9hxzBpl5mn._i1wILfF
- InQIt9fUQtIC7g_5suRYBdw0gaIM6a7JisVPsigDWRK6WhBycZRioYzHd6xZBGTjzMIZfordc9wj
- H9Fjz.N1Gt6byeruh97QTFGihAOC2rt16LsijBjtqukfeXiHz.kzsI1_pXaZVj8SfVI0lxSkB3L4
- U9.M3kjuu.7TD2M4MXKj99gSrSi9jHA4YJeC18jYMlNTSi1C_uLbLqbelpqJQIF7DzPKGNJ6Y8qB
- NuIikgdYS6eLYs1vBY.gfcLi2AWUfqIAyLpLI1phoS_xauwTA0riM99.Xnk4SHk2OK4Yz0OwImsR
- DdzNGaHoPZJB63RNGSOI1n3wIVR3e4763vqh_zKb0f2Hb9g.6q01YdwHL552iQ_GBkSpmf.V8SQM
- G1LxWf7uHyT_ggaRByyaY1QBUAnVoESMNCoi0ee3.JxxTNexGaUUClEZxCz_KjDRKxn2vRB8hn9n
- hS1fhHJ8NkPcWXfVaAC5JHqASkKHirXwbRWk2d4nN6K4Mf_fl7jny0rttozMUqD3sOAxQ3151Tl8
- TKAr_KbLtRlOBGyQoJhpBYyu6CndByy9h1pv3ZR_.2AFc8aG17g.T8pp1gmI4kfUOXohq5m62rMU
- fOYPPXKqGgfF9ah1wq2kAuKQzYo_UrCt45cuGO17aS9DPgpoKz27svlpJud7buh7z.67BAbErvd4
- hU9g8lXZ_yWSxVKzeqdY_DjeeaecbfCHi26M07ajJJ6rSkl2qQ6GLsAoMbWz2V7INI0rE7ZYao2f
- Mc._AUUjQ.yc5ZpRDwHXamoroV7K1IqDYf77Ax.lr_ZgSUL0gHVJgA3ypeaK0_Q.i.8vO_RJAbjW
- JZTExxctsq36.uRgfmFGY2eCjQq8UNsIQsF_tSsLFQL5kcWZPqQrITvSKdVr6fbKDr3ZRZr1F8Bp
- hUUS0kOhcpPH44RLDtOZ8yF873KKbSkuqgVQqmbc6MymUmZiPCUPXJzk1enlcQduoqtt9jiYqcJo
- UD1E5XQ7CCt41Le1Y7xotmXS9JliPfyerEyoIdGXC9NWNq_Vac9EBW.IRwge1tvSHAe9_Ldhvmiy
- iaHQh_WEUyZ_MstZ5Pr8YwKM37rpc2aVrZettA4bfikjZykQT8378FNih1ZNnwSE.zNznk3YavbI
- zICAAiFEl37z9wv96gY0XpMnHdy7gq2JZqCGB8XuhcpIS0XM7LEgRFo.r34kmtoBIfmyFc8oBMgI
- cp4kxTcQupNBOZc6WuyACMTqrDitfwNYm3H90rsmbFJBtd4VnWvZnyYbGvKS3gZJcs9lq4_8LS5R
- IysDvCrw79wnA8.aZ_aZ9eeh3GsPcfkgvzYHWR8vdWP474sQzelWPsBqhK3.n7Th2r7BT8JyJjLg
- klAq.K4Z9ZVkgJK1OUXc2A6FVEI4N2MwdvAvffxfN_gZY2xO9xk_7bcJ4ccaJ5RvvSAKB40lU4zG
- lrK6tsL2dz5Ln.gLBUiRDUTBuVhgIscpl2ycRy.ckVnzkiZEWiLu_o0onDbBd.RWwMJPhyni0R7X
- 3qqAg1zl8.f4UwpryBoD8KgRIUAlvVYmLC0Ekm9QRMY0OhX7eH2f6doqobDTboB3dWYQZYrlsBGm
- NiYWV.MZ0hqQ6n5zI0qjXR5qaL9xB3EfwH7rOZnTEjlnzV5iJFPoLigSDHQhddHpoLotyFDtTHy.
- QkVxkVEVu3CpW9c4b6OpvYN6wBB2_atSOGJXiH3nVZ0t.IKcomNiD_SjQJ97cgexQ22r1DXMFoc2
- kAdvqwP6B5g6DKf_w6NuDbyrn9k08fVg9_Xs2m6xAb2C33fg_GIPTbuu6ha_QXJgd.KQd3qk1qgk
- mKaT7xAOygsy9FnsQ0DpbqKYJDfToOP5Dd7vsAbeWo2_qfm2TThUE2tbM4M9kNWidGgLscwwp33C
- yrRliXY02yqbdTXKL5nXPEPjH1.80fVDKO2khDxWaXkehkhjFv7nnMddNKYpvXIVpnG_MtCRfKsb
- YEOl.gs0Tw.6vXLLzSgs6MuJHT66REzpSIIOa_d22mbNTmiGSALf1H6G.nU5fb563q74YObGnkTg
- -
-X-Sonic-MF: <jjvazha@yahoo.com>
-X-Sonic-ID: 654e3dfb-9349-4a8a-ba7e-a0fae2909170
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic312.consmr.mail.sg3.yahoo.com with HTTP; Thu, 5 Jun 2025 21:52:48 +0000
-Date: Thu, 5 Jun 2025 21:52:47 +0000 (UTC)
-From: Jojan <jjvazha@yahoo.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- Jonas Kvinge <jonaski@opensuse.org>
-Message-ID: <851157797.299472.1749160367219@mail.yahoo.com>
-In-Reply-To: <294e9037fe8b9502b41a06e9ac9363f2d5204b07.camel@opensuse.org>
-References: <294e9037fe8b9502b41a06e9ac9363f2d5204b07.camel@opensuse.org>
-Subject: Re: Raspberry Pi Compute Module 5 support
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-3122368d7c4so1240531a91.1
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 15:10:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749161439; x=1749766239; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ODjNJFmzqDf/vskXpdeuulFyq4spe9Sdn6KI3YEQUZ0=;
+ b=dCkpN9gR6FNpeAo4YR0GKt7802Q1eBadJOHxGI1fn15kMK9sMez88UxCEqJIz6p61V
+ ccHTkXDFhtoZU5PE56OQceEHVJDk3EXetEgbVApbV1vX7ZoQnf0fQ0d1IbVI0fIMDP9l
+ iwPs5L6FOrRtxH/vBbOHQUlZ+i0ZUsDSmnZ0qre4DuDzh87PFGRSNul8wq0XBxOqiILs
+ 9hHPAqTXj/eMbWVo7fpywZ7YoPJmJa293RAMrobvHUso3xa2lyv+v/PQf8GR3CKG9o4M
+ Y9SEOFLE4TQVveydbOp3VHEpSWy0X/sQFX3H4FaOZBr9cVBBzJZHD6ykWLXQ84HldwI8
+ p83g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749161439; x=1749766239;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ODjNJFmzqDf/vskXpdeuulFyq4spe9Sdn6KI3YEQUZ0=;
+ b=kQZ18jKUl1PRT44jG+DoLC+BISMa5MGSWuYP5X7OrDe/8G3ly6cAlF3ti8KDNpPxvG
+ 5jNrcUWeFZLk7pyOs5eGkaiaNMXHewncrFpropNfCV/VaxhPcQe/uvvvQE7rQqnyUgzI
+ OyQ1Xd7gsx8OGzcZYQbpgfmiN68TdarGFIpRJLsbVKlXXDQZ8V68+J6OmPDBUoVcWCPC
+ ZACIXPrkyyEpcLNIz4SQblgiPISnTIOOA8qNcgj+YHtk84aquL4oVY5C2VA/BfXeU3jO
+ GbgDhXi2BFX5sib/iKf9uKVJM96pLhaU6A0Le+dQ4KEiGqKuiWO+NeqiL/QJ7+gipJ51
+ PLYQ==
+X-Gm-Message-State: AOJu0YyIP3fB2DKlvzpCKJ2i6F/66bORxuin7T5h/bl8LfI10g4pPjv8
+ E8KUxwF0VUjxQaOughGq7Y6AmP2IfTdASA5jO+7BlsX6wxII7nsAjd3bFzSst29YNYLxxsNXov+
+ Mq5mRrBXqFa6NSvVMiUn/2rbTZHU2PADAVwOne7Gxyw==
+X-Gm-Gg: ASbGncvID6pLt5vJ5s2iT5VOMMJ41aALL185pJICW1/LSwAHvgAlaQEZpEBKU+FzYOz
+ ogXc9b/KNlkeiXJZHUX/3ISVkIXz+L44QhS5vrWsZ/a2/k3ggOmLeYeDhxFPq9cZzWBFo8C87Xa
+ g9NybWgz9/kEYgdF5MOfYQyOJHoV4HKs3y54HIguQ3aZ9z
+X-Google-Smtp-Source: AGHT+IEPj/PSCUx6RxvFk4uyGBERacbpF9K1HGAlLJv2Eb6buB4b10pYrjHRdVlAkB9zkfZV5zsc4yR6M5z6mN9ZZMQ=
+X-Received: by 2002:a17:90b:5383:b0:313:220c:b63b with SMTP id
+ 98e67ed59e1d1-3134769f727mr1673311a91.35.1749161439401; Thu, 05 Jun 2025
+ 15:10:39 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: WebService/1.1.23956 YMailNorrin
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+References: <20250603144258.1701265-1-raymond.mao@linaro.org>
+ <20250605171538.GC1382132@bill-the-cat>
+ <CAEfUkU+Xp1bkHRWkBSzbF+S5VewB2E4_dXr+LU-+WAtOgvPLLQ@mail.gmail.com>
+ <20250605200117.GD1382132@bill-the-cat>
+ <CAEfUkU+ns2XGb7J8WP+uD5SuxkQfdzZxPD+axN-J-xoLVzndyA@mail.gmail.com>
+ <20250605214655.GG1382132@bill-the-cat>
+In-Reply-To: <20250605214655.GG1382132@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 5 Jun 2025 18:10:26 -0400
+X-Gm-Features: AX0GCFuW_ra9AWyiqjgnPfFl6Euuobz68vEkQFgKkUnqdVeAYhHvbaI96nz1ppc
+Message-ID: <CAEfUkUKR-zZ124VsOX31KNer6EiDKyXgO=oF2L2YwUOgf40CEg@mail.gmail.com>
+Subject: Re: [PATCH v2] makefile: fix Clang link error when
+ RSA_PUBLIC_KEY_PARSER is selected
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Prasad Kummari <prasad.kummari@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,40 +107,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-You need to take raspberry=C2=A0 ( custodian version)
+Hi Tom,
 
-Making sure you're not a bot!
+On Thu, 5 Jun 2025 at 17:46, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Jun 05, 2025 at 04:52:20PM -0400, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Thu, 5 Jun 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jun 05, 2025 at 03:45:00PM -0400, Raymond Mao wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 5 Jun 2025 at 13:15, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Jun 03, 2025 at 07:42:55AM -0700, Raymond Mao wrote:
+> > > > >
+> > > > > > MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> > > > > > function provided by the compiler runtime, typically libgcc for GCC or
+> > > > > > clang_rt.builtins for Clang.
+> > > > > > Thus 'clang_rt.builtins' library is required when building using Clang.
+> > > > > >
+> > > > > > This patch supports the location layout of clang_rt.builtins libraries
+> > > > > > from both LLVM pre-15 pattern [1] and post-15(up to 20) pattern [2].
+> > > > > >
+> > > > > > As a fact that starts from LLVM 20, no official prebuilt multi-targets
+> > > > > > are included and users might need to cross-built it from source. [3] is
+> > > > > > an example of instructions for building.
+> > > > > >
+> > > > > > [1] <INST_DIR>/lib/clang/<REV>/lib/linux/libclang_rt.builtins-<ARCH>.a
+> > > > > > E.g.
+> > > > > > lib/clang/14.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+> > > > > > lib/clang/14.0.0/lib/linux/libclang_rt.builtins-x86_64.a
+> > > > > >
+> > > > > > [2] <INST_DIR>/lib/clang/<REV_MAJOR>/lib/<CROSSTOOL>/libclang_rt.builtins.a
+> > > > > > E.g.
+> > > > > > lib/clang/20/lib/aarch64-none-linux-gnu/libclang_rt.builtins.a
+> > > > > > lib/clang/20/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
+> > > > > >
+> > > > > > [3]
+> > > > > > git clone https://github.com/llvm/llvm-project.git
+> > > > > > cd llvm-project
+> > > > > > git checkout -b llvmorg-20.1.6 llvmorg-20.1.6
+> > > > > > mkdir build-builtin && cd build-builtin
+> > > > > > cmake -G Ninja ../llvm \
+> > > > > >   -DCMAKE_BUILD_TYPE=Release \
+> > > > > >   -DCMAKE_C_COMPILER=clang \
+> > > > > >   -DLLVM_ENABLE_PROJECTS="clang" \
+> > > > > >   -DLLVM_ENABLE_RUNTIMES="compiler-rt" \
+> > > > > >   -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
+> > > > > >   -DLLVM_BUILTIN_TARGETS=\
+> > > > > >     "x86_64-unknown-linux-gnu;aarch64-none-linux-gnu" \
+> > > > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSTEM_NAME=Linux \
+> > > > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_C_COMPILER=\
+> > > > > >     <YOUR_TOOLCHAIN_GCC> \
+> > > > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_ASM_COMPILER=\
+> > > > > >     <YOUR_TOOLCHAIN_GCC> \
+> > > > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSROOT=\
+> > > > > >     <YOUR_TOOLCHAIN_LIBC_DIR> \
+> > > > > >   -DCOMPILER_RT_BUILD_BUILTINS=ON \
+> > > > > >   -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+> > > > > >   -DCOMPILER_RT_BUILD_XRAY=OFF \
+> > > > > >   -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+> > > > > >   -DCOMPILER_RT_BUILD_PROFILE=OFF \
+> > > > > >   -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> \
+> > > > > >   -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
+> > > > > > ninja builtins
+> > > > > > sudo ninja install
+> > > > > >
+> > > > > > Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > >
+> > > > > I think that newer versions don't even ship this moves us further away
+> > > > > from a solution here as all of the logic. I think we need to look at the
+> > > > > suggestion of just importing the assembly version of the function.
+> > > >
+> > > > But, the assembly versions are architecture-specific, do you want a
+> > > > portable C code for it?
+> > >
+> > > Is it easily done in C? If not, we can just try and make it clear what
+> > > needs to be pulled out of LLVM sources if/when another platform
+> > > encounters the problem.
+> > >
+> > But maybe we can ask the LLVM project owner why they removed the
+> > prebuilt multi-targets since 20.0.0.
+> > May current patch can support multiple target layouts of pre-15 and
+> > post-15 patterns (I believe they will keep the one of post-15 for the
+> > future), if they can provide the prebuilt multi-targets via package
+> > managers or release tarballs then it is the best solution.
+> > In the future we might need other functions from those libraries and
+> > implementing it in U-Boot is not a good choice IMO.
+>
+> I think adding all of that logic to the Makefile is taking us down the
+> wrong path. Looking at the kernel, they're working with LLVM to be able
+> to disable these 128bit intrinsics currently (as part of rust support).
+> So hopefully we just need some temporary workaround until things get
+> fixed upstream.
+>
+I will try to implement a C code function as a temporary solution and
+be back shortly.
 
-|=20
-|=20
-|  |=20
-Making sure you're not a bot!
+Raymond
 
-
- |
-
- |
-
- |
-
-=C2=A0But it is still missing the device tree fro bcm7712 ( RPI 5 is bcm771=
-2)But you can Dow load the dtb file from the pre built dtb file from raspbe=
-rry pi images
-and=C2=A0 use those=C2=A0 device tree sources ( using a dtc )
-
-
-    On Thursday, June 5, 2025 at 02:13:24 PM PDT, Jonas Kvinge <jonaski@ope=
-nsuse.org> wrote: =20
-=20
- Hi,
-I'm trying to boot openSUSE Linux on an CM5 using a sourcekit io board
-(https://sourcekit.cc/#/).
-u-boot seem to be stuck with the logo on the upper right corner, no
-text.
-I re-built u-boot using the latest source from git from the next branch
-and also set CONFIG_LOG in make menuconfig, but still no text.
-
-Is the CM5 supported by u-boot?
-
-Jonas
- =20
+> --
+> Tom
