@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD09C5B543
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 08:40:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D25C5B543
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 08:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBC7B8091A;
-	Thu,  5 Jun 2025 10:40:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id BAD628091A;
+	Thu,  5 Jun 2025 10:46:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="b1nkPeIm";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="wp6sfU98";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="qeozFeBK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83A8C81E25; Thu,  5 Jun 2025 10:40:07 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5442981E25; Thu,  5 Jun 2025 10:46:20 +0200 (CEST)
+Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 603A380050
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 10:40:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6408C80050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 10:46:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=8251505e0d=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5557liCA012116;
- Thu, 5 Jun 2025 10:39:57 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- C56qMulXSgR/kF4dB8UbR+kDncp9oQpjlRAOw5NknKc=; b=b1nkPeImIDyEVIYZ
- 8K9OW5GEf3lqrAqUgE5AERW5TDzXkKgLWV4jtultbTYvn2ENYi0bqQACoQDiPkKt
- ubP/BwHaMHX1CH5kZGwe9YITI52ucSQMKLSIK6YnMiF/1XSZCSVVCgngXAohgw21
- fnF7NZf+HPL2u/LwAdfbvBaPy6WX7nQfb2CXNtcSxXdTzYBlOkq3TiknahVMz7ib
- l+XYIBCLK/pZAhOiYZdyJutn5YyKuwOgjE3a0twlTfQf3dUhFxlOTfnerW9iGE1t
- oANlZYLhSiInNKDjoqWJPKk2LJKcj7ENKDJSrdEX2APLkUql6XkoRYnv66BhzJD/
- UTRklQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 471g93dfe6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 05 Jun 2025 10:39:56 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AC3D440049;
- Thu,  5 Jun 2025 10:38:08 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C7184B93FD0;
- Thu,  5 Jun 2025 10:36:46 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 5 Jun
- 2025 10:36:45 +0200
-Message-ID: <ab4f5f31-feee-401c-9444-77b8a06b4676@foss.st.com>
-Date: Thu, 5 Jun 2025 10:36:44 +0200
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id 25cf9eeb;
+ Thu, 5 Jun 2025 08:46:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=date
+ :from:to:cc:subject:message-id:in-reply-to:references
+ :mime-version:content-type:content-transfer-encoding; s=s1; bh=j
+ MxEZQMaq2BsOLrHHtCevByCBMQ=; b=wp6sfU98+E5ANiqOQ/PyeDWt+CwKleSyo
+ YaQFvwk4rqGBN0VvR1s0NLKWOBOIbJ3d6U837BFlR/AtYiygoXIr1baS4HTDgIDt
+ okuJgL2TSUQNp18xa/tIMbolamIF5YavhEibLur39WOi7P9JyZG+HzXHM5v5hlqp
+ 21YcLAV9hc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=date
+ :from:to:cc:subject:message-id:in-reply-to:references
+ :mime-version:content-type:content-transfer-encoding; q=dns; s=
+ s1; b=gF1nCtEeOxUF1JjnQcc71aOl/Mo+V+8/qfkVhHNHvm1UFn/w9oVdr8TsP8
+ ubl3mHXGetVRG5We/7F3KIz00TqQXvabYmOiq39EIjs6JSVYtAlzLTujjAk6RUs/
+ 3DVxd43mOGwu9Lp+1Py5CRDPfFzRdj30Sebh6ZXequN7+4nRk=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1749113169;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kG8yW7TZ3ToTqo1IyLZrEk4eLG21E1XTeexOxAauAnY=;
+ b=qeozFeBKKi4laZ3FfIkrRiTekW9E98tc3+Er+ER8S01WeIILu7uiS3I+2RpRKwg6yWVwJW
+ 2lGzqVdDpkqKt0gjvx4g8mk85g1Zn9i9bLK3DKilPNBIbxBvDzVXGJTpW7Q4Xoygib5aUn
+ +JaWvvkRFxA6U18j2rMDoDfD3MPQGlA=
+Received: from archlinux (host-80-116-51-117.pool80116.interbusiness.it
+ [80.116.51.117])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 6e61dc0a
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Thu, 5 Jun 2025 08:46:09 +0000 (UTC)
+Date: Thu, 5 Jun 2025 10:45:02 +0200
+From: Angelo Dureghello <angelo@kernel-space.org>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Alexey Brodkin
+ <alexey.brodkin@synopsys.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
+ <daniel.schwierzeck@gmail.com>, Rick Chen <rick@andestech.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, uboot-snps-arc@synopsys.com
+Subject: Re: [PATCH 06/12] m68k: drop pointless #if 0 block
+Message-ID: <20250605104502.54e16e7a@archlinux>
+In-Reply-To: <20250604195612.2312979-7-ravi@prevas.dk>
+References: <20250604195612.2312979-1-ravi@prevas.dk>
+ <20250604195612.2312979-7-ravi@prevas.dk>
+Organization: kernelspace
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] sandbox: solve undefined reference to pthread_kill
- symbol
-To: Raymond Mao <raymond.mao@linaro.org>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Richard Henderson
- <richard.henderson@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Adriano Cordova <adrianox@gmail.com>, Michal
- Simek <michal.simek@amd.com>, Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Sam Edwards <cfsworks@gmail.com>, Jonathan
- Humphreys <j-humphreys@ti.com>, Prasad Kummari <prasad.kummari@amd.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, Philippe Reynes
- <philippe.reynes@softathome.com>, Daniel Golle <daniel@makrotopia.org>
-References: <20250604154814.1856244-1-raymond.mao@linaro.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250604154814.1856244-1-raymond.mao@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-05_02,2025-06-03_02,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,44 +92,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+thanks,
 
-On 6/4/25 17:48, Raymond Mao wrote:
-> This patch is to solve the sandbox building error:
-> $ make O=build-sandbox -s sandbox_defconfig
-> $ make O=build-sandbox -s -j2
-> /usr/bin/ld: /tmp/u-boot.27rzOu.ltrans58.ltrans.o: undefined reference to symbol 'pthread_kill@@GLIBC_2.2.5'
-> /usr/bin/ld: /lib/x86_64-linux-gnu/libpthread.so.0: error adding symbols: DSO missing from command line
-> collect2: error: ld returned 1 exit status
-> [...]
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
+
+On Wed,  4 Jun 2025 21:56:06 +0200
+
+Rasmus Villemoes <ravi@prevas.dk> wrote:
+
+> The way DECLARE_GLOBAL_DATA_PTR is used, the stuff under #if 0 can
+> never compile as you cannot have a non-constant initializer at global
+> scope (and one would get linker errors as well because the 'gd' symbol
+> would be defined in multiple TUs).
 > 
-> Fixes: b989f9ed9fe1 ("test: lib: add initjmp() test")
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 > ---
-> Changes in v2:
-> - update fixes tag in commit message.
+>  arch/m68k/include/asm/global_data.h | 5 -----
+>  1 file changed, 5 deletions(-)
 > 
->  arch/sandbox/config.mk | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
+> index 29b46645676..aea2ccabe08 100644
+> --- a/arch/m68k/include/asm/global_data.h
+> +++ b/arch/m68k/include/asm/global_data.h
+> @@ -32,11 +32,6 @@ struct arch_global_data {
+>  
+>  #include <asm-generic/global_data.h>
+>  
+> -#if 0
+> -extern gd_t *global_data;
+> -#define DECLARE_GLOBAL_DATA_PTR     gd_t *gd = global_data
+> -#else
+>  #define DECLARE_GLOBAL_DATA_PTR     register gd_t *gd asm ("d7")
+> -#endif
+>  
+>  #endif /* __ASM_GBL_DATA_H */
+> -- 
+> 2.49.0
 > 
-> diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
-> index dd9b7473fa9..9a61e803a57 100644
-> --- a/arch/sandbox/config.mk
-> +++ b/arch/sandbox/config.mk
-> @@ -3,7 +3,7 @@
->  
->  PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
->  PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
-> -PLATFORM_LIBS += -lrt
-> +PLATFORM_LIBS += -lrt -lpthread
->  SDL_CONFIG ?= sdl2-config
->  
->  # Define this to avoid linking with SDL, which requires SDL libraries
-
-Hi
-
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-On Ubuntu 20.04 with default gcc (Ubuntu 10.5.0-1ubuntu1~20.04) 10.5.0
-
-Thanks
-Patrice
