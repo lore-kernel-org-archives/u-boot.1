@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6180BC5B543
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 18:04:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8362C5AE59
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 19:45:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B37AD803DF;
-	Thu,  5 Jun 2025 20:04:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 223928091A;
+	Thu,  5 Jun 2025 21:45:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N9TbEy7N";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZbgdJ2IF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06FAD8091A; Thu,  5 Jun 2025 20:04:39 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id D553581E25; Thu,  5 Jun 2025 21:45:17 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03F7D80050
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 20:04:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A89DF80050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 21:45:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-55351af2fc6so1635568e87.0
- for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 11:04:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-b2c4331c50eso1124831a12.3
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 12:45:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749146676; x=1749751476; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Fi6hM8ksM13B4Ub4gK5GbzJ9ASUCHOg0/6RHAqiRPqw=;
- b=N9TbEy7NzCG/xm4jVf3/QhENrrGeDJ1PnT7R+eqtqRKhBFdzkVnhjp6D64tQztSyYB
- W/BTkZTRRxQi3H6tqOWiJ++u4VCwd6tsEQOwKVhaZfLZ0nWUbpibCzWtNkodO5/0OHhb
- nWuSd8QzsYlq0XCvS/fNw/QQqelrOGnpxw2aZ7hEjeH0zj3eK1BKEM7rDLzJYc9lC019
- X+uMp9CG7gSr5NiuL4tEGFGLnl0Q+vrc9TAdZbdwlXjdf3K1UalNOMxuUA1z1CCL2q3x
- lRBFaIXU5bx2o9TfxhvNJM72Y7WNPtgtq2jirp/NNW24uDNaQFusnvvSCMLSTWH/YGL0
- Agpw==
+ d=linaro.org; s=google; t=1749152713; x=1749757513; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=z33tAkVGkQEJ7Vgt3eRRW40wOYYdZf+0fg4ntPLKDiw=;
+ b=ZbgdJ2IF66nTE+KfIUX7nIOVRUjToLRkTH8BSVsxEpX6GjTvnnYZheaNjq6Kb6AkRQ
+ 7e7ZbzgsOoedYF9G291v4hdtvLyMm4hMi2niTbYqPTHoudPDZDgIyG9cZVXvs46qgWiY
+ 6Fs68xUf06b9SBViGDvfHsoChExdyGos5npQAWoxZddp6MC2V5NRCo0QDpZ3tV58euSd
+ PbadFGW3CABXUPFmvQNyRI9ynWlPgFMMq7EdgnBBOIfIOAn1AhzNilOua1PhL62MMZac
+ VSuceTpFx5/XkSoKWIlGSWjtbnERY7slrYar3tsXNVwJsYQUAG+FBclcA0RhaxJ9sT3p
+ HHLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749146676; x=1749751476;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Fi6hM8ksM13B4Ub4gK5GbzJ9ASUCHOg0/6RHAqiRPqw=;
- b=u0pei1xU1KLgrmFkh3W3YHhBmPvg0D30vssiIolYGZogSpO7bN+9q4FxZE7GNnzW2P
- tAfAwbd1G6/NSdXsMi9XAKU/wzyFWofkdA1wWncrOwoKnVsCmzfeqzVW3ATeCBgRnOkv
- gA4O5mVLheIG183x1hs6ZTd6To3RGABnNObGW1d+1DhIgCyQ3u4LZG3uymA61Iu+YKWI
- wylBai70pvWjT9wP+BDK7+xiNO9PUjt+/XB1nAAr9tJjWfFZJ60iRDQg5UYvJxvDGKd9
- wcJN2Tnt+AhFszV9botu9pPaJXE0YE1F7S2yNrjSL9f2JezC/KkA6lBu/hl+88IAUDhe
- 2Zbw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWH5JDo4Krr0ZB8Tio5L3oG2uXi8H7Ds5CYLGhKc21LSJAv1AE4e2BTkFMg42d24k71RyxseDY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYl12QXoGqYWVEmbkzXZMFvTT2Es5QMTVA08RiEOXMY6whfrQv
- wV+2YeY4/ZwYtF0PVaCZZq+Sd420q29jF910rp5+HU4WcGWyz/p0KjlLJAch2+UaLzh0LcE71wL
- KFyop6bzR1CRdhUFMpPaW+Miwof68Kmc=
-X-Gm-Gg: ASbGncsk5/2P8z4Rfpv1WggK6m9CgwwG9npxnfQ3lwmzemKRCqitJ61kNvetztH+Uo1
- 0LGUEliplG63S+quV+dzmG6nnwksfwlhmSmObCtpt4jVYrBC/eo6Ob3/Feq081PxJHzzL9pNLJ/
- p0IOpWunAUjq3e+EAM3qgzwC2TBMht7d90Wd5ruA7BSk33Wrxp7AZjTfKYIOPt95Qk
-X-Google-Smtp-Source: AGHT+IEhXlYFYswn49NyBjD5nydcWDfSM7otOb5iDsO4SnoBuWEq756b+wdBygKTh6KvzlO6hfv+riedVLYhLIcYZbw=
-X-Received: by 2002:a05:6512:2247:b0:54f:c10b:7290 with SMTP id
- 2adb3069b0e04-55366bff443mr31209e87.26.1749146675918; Thu, 05 Jun 2025
- 11:04:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1749152713; x=1749757513;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z33tAkVGkQEJ7Vgt3eRRW40wOYYdZf+0fg4ntPLKDiw=;
+ b=ZhhDvSvJWIB1y9YS4bSN10B8OmsW+WLUATonA8enKS7qhdHJNCo2BN2PadGrTsU27O
+ b4HdnypyUVejRxudD6rddPw0ZSpWSfZrs20o30QHqFfuSL6glUXh1VIha7EIAcwU60R9
+ UPnU4MbJXD4WXJovqmhdvfXqLNh0u3xB3WPWZzsoF84qL3AIf75vESl1sAgq1zeKmVDJ
+ LfUiK7Xzeo+Frihui2rXCJTMyLdJhWw3HJjK/2XSIsMwRN66EFLmA/EZplo0l7y8ODPf
+ fcktHgm6J6W1nik5PbUUTbsiuSgLwvriUYXjA+2t9L8sGTstzPRPZX3T/sA/aEJ+FsZg
+ H0SA==
+X-Gm-Message-State: AOJu0YyyoTwvBwjnh3j5y+pQCK6+XnhuDS0+h4qMnwZsmrGEVPS0vlfj
+ b7/CZX0UcUerPf3phseGl+CQ0mM4nN07HKoe13H4W9/jMYVBNQrZupbBXk2A5AXEON+XsgLwkOd
+ 2PCY3mr89xPWIbAZgYvSk31GPN9HBKpk6F0k2HMatRg==
+X-Gm-Gg: ASbGncu9L+LuJKPF3Ag0h6nWpyJsdG6gZ/tCEpK/obhztr11wF1om4XJHuGbWsFXwTm
+ 8AKp2HDC+BCdUvDn+IXu9VBF0iUqk/xaRjU0J2Wmm7joeTxw3X3gb8mCTOafSPDBSzKjPNTuYGV
+ QkeP/DvGBZyabTZDH+mCxpmfoLBZzc5uWy7xsA/mfFxC16
+X-Google-Smtp-Source: AGHT+IE7ecsUsGJgnqfH+41i5DHNU3ESHvC27ryQ4VJph8umIIa9HQX0AJwXKJzDBR5FXZrYH4LzoXxu57WAv7oZthg=
+X-Received: by 2002:a17:90b:1f8a:b0:310:8d4a:a246 with SMTP id
+ 98e67ed59e1d1-31346b03cbbmr1114472a91.1.1749152713065; Thu, 05 Jun 2025
+ 12:45:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250605123657.1083000-1-lukma@denx.de>
-In-Reply-To: <20250605123657.1083000-1-lukma@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 5 Jun 2025 15:04:24 -0300
-X-Gm-Features: AX0GCFu8-p_mOFaAuImo9edwAyn_LN8nL2LACHYEIqTJviU9rdDblCPy8LIwfpY
-Message-ID: <CAOMZO5DpMpK-JYcK-dHjRjAQb+y48C30pz7th23isxsrv9C8QQ@mail.gmail.com>
-Subject: Re: [PATCH v3] ARM: imx: mxs: Add support for imx287 based BTT devices
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20250603144258.1701265-1-raymond.mao@linaro.org>
+ <20250605171538.GC1382132@bill-the-cat>
+In-Reply-To: <20250605171538.GC1382132@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 5 Jun 2025 15:45:00 -0400
+X-Gm-Features: AX0GCFvWQeKpQE-NZQqrfJ4xW-AJDbF3zuChVgP74-4SIIycOcEm9Vz444oVMTM
+Message-ID: <CAEfUkU+Xp1bkHRWkBSzbF+S5VewB2E4_dXr+LU-+WAtOgvPLLQ@mail.gmail.com>
+Subject: Re: [PATCH v2] makefile: fix Clang link error when
+ RSA_PUBLIC_KEY_PARSER is selected
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Prasad Kummari <prasad.kummari@amd.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,52 +103,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+Hi Tom,
 
-On Thu, Jun 5, 2025 at 9:37=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
-e:
+On Thu, 5 Jun 2025 at 13:15, Tom Rini <trini@konsulko.com> wrote:
 >
-> The btt[c3] devices are based on imx287 SoC.
+> On Tue, Jun 03, 2025 at 07:42:55AM -0700, Raymond Mao wrote:
 >
-> U-Boot SPL 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
-> Trying to boot from MMC1
+> > MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> > function provided by the compiler runtime, typically libgcc for GCC or
+> > clang_rt.builtins for Clang.
+> > Thus 'clang_rt.builtins' library is required when building using Clang.
+> >
+> > This patch supports the location layout of clang_rt.builtins libraries
+> > from both LLVM pre-15 pattern [1] and post-15(up to 20) pattern [2].
+> >
+> > As a fact that starts from LLVM 20, no official prebuilt multi-targets
+> > are included and users might need to cross-built it from source. [3] is
+> > an example of instructions for building.
+> >
+> > [1] <INST_DIR>/lib/clang/<REV>/lib/linux/libclang_rt.builtins-<ARCH>.a
+> > E.g.
+> > lib/clang/14.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+> > lib/clang/14.0.0/lib/linux/libclang_rt.builtins-x86_64.a
+> >
+> > [2] <INST_DIR>/lib/clang/<REV_MAJOR>/lib/<CROSSTOOL>/libclang_rt.builtins.a
+> > E.g.
+> > lib/clang/20/lib/aarch64-none-linux-gnu/libclang_rt.builtins.a
+> > lib/clang/20/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
+> >
+> > [3]
+> > git clone https://github.com/llvm/llvm-project.git
+> > cd llvm-project
+> > git checkout -b llvmorg-20.1.6 llvmorg-20.1.6
+> > mkdir build-builtin && cd build-builtin
+> > cmake -G Ninja ../llvm \
+> >   -DCMAKE_BUILD_TYPE=Release \
+> >   -DCMAKE_C_COMPILER=clang \
+> >   -DLLVM_ENABLE_PROJECTS="clang" \
+> >   -DLLVM_ENABLE_RUNTIMES="compiler-rt" \
+> >   -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
+> >   -DLLVM_BUILTIN_TARGETS=\
+> >     "x86_64-unknown-linux-gnu;aarch64-none-linux-gnu" \
+> >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSTEM_NAME=Linux \
+> >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_C_COMPILER=\
+> >     <YOUR_TOOLCHAIN_GCC> \
+> >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_ASM_COMPILER=\
+> >     <YOUR_TOOLCHAIN_GCC> \
+> >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSROOT=\
+> >     <YOUR_TOOLCHAIN_LIBC_DIR> \
+> >   -DCOMPILER_RT_BUILD_BUILTINS=ON \
+> >   -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+> >   -DCOMPILER_RT_BUILD_XRAY=OFF \
+> >   -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+> >   -DCOMPILER_RT_BUILD_PROFILE=OFF \
+> >   -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> \
+> >   -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
+> > ninja builtins
+> > sudo ninja install
+> >
+> > Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 >
-> U-Boot 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+> I think that newer versions don't even ship this moves us further away
+> from a solution here as all of the logic. I think we need to look at the
+> suggestion of just importing the assembly version of the function.
 >
-> CPU:   Freescale i.MX28 rev1.2 at 454 MHz
-> BOOT:  SSP SPI #3, master, 3V3 NOR
-> Model: BTT3
-> Board: LWE BTT SoM HW rev 0
-> DRAM:  256 MiB
-> Core:  86 devices, 15 uclasses, devicetree: separate
-> MMC:   MXS MMC: 0
-> Loading Environment from SPIFlash... SF: Detected is25lp128 with page
->                     size 256 Bytes, erase size 64 KiB, total 16 MiB
-> OK
-> In:    serial@80074000
-> Out:   serial@80074000
-> Err:   serial@80074000
-> Net:   eth0: ethernet@800f0000
-> Hit any key to stop autoboot:  0
->
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+But, the assembly versions are architecture-specific, do you want a
+portable C code for it?
 
-I ran this patch through CI, and the following error is seen:
+Regards,
+Raymond
 
-+board/liebherr/btt/btt.c: In function 'board_late_init':
-+board/liebherr/btt/btt.c:362:19: error: implicit declaration of
-function 'env_set_ulong'; did you mean 'env_get_vlan'?
-[-Wimplicit-function-declaration]
-+  362 |         int ret =3D env_set_ulong("board_som_rev", get_som_rev());
-+      |                   ^~~~~~~~~~~~~
-+      |                   env_get_vlan
-+board/liebherr/btt/btt.c:367:15: error: implicit declaration of
-function 'env_set' [-Wimplicit-function-declaration]
-+  367 |         ret =3D env_set("arch", get_board_name());
-+      |               ^~~~~~~
-+make[2]: *** [scripts/Makefile.build:249: board/liebherr/btt/btt.o] Error =
-1
-+make[1]: *** [Makefile:1923: board/liebherr/btt] Error 2
-+make: *** [Makefile:185: sub-make] Error 2
-
-Please run v4 through CI and make sure it passes.
+> --
+> Tom
