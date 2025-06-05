@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBC9BC5AE59
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 06:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 577C0C5AE59
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 06:13:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C7AE8091A;
-	Thu,  5 Jun 2025 08:11:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C3E88091A;
+	Thu,  5 Jun 2025 08:13:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ri9QbLsY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rHXo3lAO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAB8881E25; Thu,  5 Jun 2025 08:11:53 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 6764081E25; Thu,  5 Jun 2025 08:13:38 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A1AC8003E
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 08:11:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2CA98003E
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 08:13:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5556BhfY1027106;
- Thu, 5 Jun 2025 01:11:43 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5556DXed4003811;
+ Thu, 5 Jun 2025 01:13:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749103903;
- bh=OzqxXAM+BLw7C05KuKPej9QJGvy8Wk6RWs64v03gbwU=;
+ s=ti-com-17Q1; t=1749104013;
+ bh=RFtMYtgm8hxZb9/OznCYJp9G5IvRRX/zG8DK1mUjrcE=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ri9QbLsYmwIxmps7UKr0cwzFCLlOYoLms1no18g0w4g/mv2GhLg/z7cgbOPUUkjKU
- pi9EZrPY8uUqKBX7F9HMi6hqBa3eiCn30LAUn3G4aKZRcUD4znevpAXS58TAqsX2XQ
- ZGc0cX2zg5utbOLBMvng18Zm2FWmGuy25vF6eivw=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5556BgZV610096
+ b=rHXo3lAODp6x1aFdVD8KvCij7xBJj20Mmjg8BMW3k5YP2ru+lhZXsv5rna9cAvlGI
+ UovWuLcv9sVGwc+0tL/6BKKJOtjbAeEtbq5Fs6LxYwmgfue3i0GrOeuYeNTkK13jRh
+ aynqelS/QoZvWC0Di9ntafUCPF5MxA1xUzfKc5jI=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5556DXsB936424
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 5 Jun 2025 01:11:43 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 5 Jun 2025 01:13:33 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Jun 2025 01:11:42 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 01:13:32 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Jun 2025 01:11:42 -0500
+ Frontend Transport; Thu, 5 Jun 2025 01:13:32 -0500
 Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
  [172.24.227.136] (may be forged))
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5556Bd873142415;
- Thu, 5 Jun 2025 01:11:40 -0500
-Message-ID: <6945b450-dce4-49af-a7ad-eeaf5d6e1fac@ti.com>
-Date: Thu, 5 Jun 2025 11:41:39 +0530
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5556DTau3143950;
+ Thu, 5 Jun 2025 01:13:30 -0500
+Message-ID: <f7a6cdaa-c224-40d3-9f2d-d658690b5298@ti.com>
+Date: Thu, 5 Jun 2025 11:43:29 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/6] arm: mach-k3: Print version of DM firmware during
- boot process
+Subject: Re: [PATCH 2/6] ti_sci_* : Add capability to access DM firmware's
+ metadata
 To: Neha Malcom Francis <n-francis@ti.com>, <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <d-gole@ti.com>,
  <m-chawdhry@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>
 References: <20250528080519.677750-1-m-shah@ti.com>
- <20250528080519.677750-7-m-shah@ti.com>
- <ea157631-8855-423a-9fee-7b46a1edd330@ti.com>
+ <20250528080519.677750-3-m-shah@ti.com>
+ <d64404e9-bb12-4c85-b547-13631b5c21b8@ti.com>
 Content-Language: en-US
 From: Moteen Shah <m-shah@ti.com>
-In-Reply-To: <ea157631-8855-423a-9fee-7b46a1edd330@ti.com>
+In-Reply-To: <d64404e9-bb12-4c85-b547-13631b5c21b8@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -86,165 +86,120 @@ X-Virus-Status: Clean
 
 Hey Neha,
 
-On 03/06/25 11:34, Neha Malcom Francis wrote:
+On 03/06/25 11:43, Neha Malcom Francis wrote:
 > On 28/05/25 13:35, Moteen Shah wrote:
->> Print DM firmware's version in the boot up process of K3 devices.
+>> Introduce response and request structs to receive and request
+>> information regarding DM version, etc from TI SCI.
 >>
 >> Signed-off-by: Moteen Shah <m-shah@ti.com>
-> This patch does not apply cleanly on the latest master, you may have to
-> rebase.
+>> ---
+>>   drivers/firmware/ti_sci.h              | 29 ++++++++++++++++++++++++++
+>>   include/linux/soc/ti/ti_sci_protocol.h | 26 +++++++++++++++++++++++
+>>   2 files changed, 55 insertions(+)
+>>
+>> diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
+>> index f3d9eb453b4..6ef77d83114 100644
+>> --- a/drivers/firmware/ti_sci.h
+>> +++ b/drivers/firmware/ti_sci.h
+>> @@ -19,6 +19,7 @@
+>>   #define TI_SCI_MSG_ENABLE_WDT		0x0000
+>>   #define TI_SCI_MSG_WAKE_RESET		0x0001
+>>   #define TI_SCI_MSG_VERSION		0x0002
+>> +#define TI_SCI_MSG_DM_VERSION		0x000F
+>>   #define TI_SCI_MSG_WAKE_REASON		0x0003
+>>   #define TI_SCI_MSG_GOODBYE		0x0004
+>>   #define TI_SCI_MSG_SYS_RESET		0x0005
+>> @@ -135,6 +136,34 @@ struct ti_sci_msg_resp_version {
+>>   	u8 abi_minor;
+>>   } __packed;
+>>   
+>> +/**
+>> + * struct ti_sci_msg_dm_resp_version - Response for a message
+>> + * @hdr:		Generic header
+>> + * @version:		Version number of the firmware
+>> + * @sub_version:	Sub-version number of the firmware
+>> + * @patch_version:	Patch version number of the firmware
+>> + * @abi_major:		Major version of the ABI that firmware supports
+>> + * @abi_minor:		Minor version of the ABI that firmware supports
+>> + * @sci_server_version:	String describing the SCI server version
+>> + * @rm_pm_hal_version:	String describing the RM PM HAL version
+>> + *
+>> + * In general, ABI version changes follow the rule that minor version increments
+>> + * are backward compatible. Major revision changes in ABI may not be
+>> + * backward compatible.
+>> + *
+>> + * Response to a message with message type TI_SCI_MSG_DM_VERSION
+>> + */
+>> +struct ti_sci_msg_dm_resp_version {
+>> +	struct ti_sci_msg_hdr hdr;
+>> +	u16	version;
+>> +	u8	sub_version;
+>> +	u8	patch_version;
+>> +	u8	abi_major;
+>> +	u8	abi_minor;
+>> +	char rm_pm_hal_version[12];
+>> +	char sci_server_version[26];
+>> +} __packed;
+>> +
+>>   /**
+>>    * struct ti_sci_query_fw_caps_resp - Response for a message
+>>    * @hdr:	Generic header
+>> diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
+>> index 05a19a8d86c..3f13a980433 100644
+>> --- a/include/linux/soc/ti/ti_sci_protocol.h
+>> +++ b/include/linux/soc/ti/ti_sci_protocol.h
+>> @@ -30,6 +30,28 @@ struct ti_sci_version_info {
+>>   	char firmware_description[32];
+>>   };
+>>   
+>> +/**
+>> + * struct ti_sci_dm_version_info - version information structure
+>> + * @abi_major:		Major ABI version. Change here implies risk of backward
+>> + *			compatibility break.
+>> + * @abi_minor:		Minor ABI version. Change here implies new feature addition,
+>> + *			or compatible change in ABI.
+>> + * @patch_ver:		Patch version of the firmware.
+>> + * @sub_ver:		Sub-version of the firmware.
+>> + * @dm_ver:		DM version.
+>> + * @sci_server_version:	Version string of the SCI server.
+>> + * @rm_pm_hal_version:	Version string of the RM PM HAL.
+>> + */
+>> +struct ti_sci_dm_version_info {
+>> +	u8 abi_major;
+>> +	u8 abi_minor;
+>> +	u8 patch_ver;
+>> +	u8 sub_ver;
+>> +	u16 dm_ver;
+>> +	char rm_pm_hal_version[12];
+>> +	char sci_server_version[26];
+>> +};
+>> +
+>>   struct ti_sci_handle;
+>>   
+>>   /**
+>> @@ -264,10 +286,14 @@ struct ti_sci_core_ops {
+>>   /**
+>>    * struct ti_sci_firmware_ops - DM firmware operations
+>>    * @query_dm_cap: Query the DM capabilities
+>> + * @get_dm_version: Get the DM version.
+>> + *		    Return 0 for successful query else appropriate error value.
+> nitpick: Alignment?
 
-I will do a rebase and send a revision for this.
-Thanks for the review.
+The checkpatch didn't raise an alarm, I'll recheck once and fix it if 
+required in the revision.
 
 Regards,
 Moteen
 
 >
->> ---
->>   arch/arm/mach-k3/am62ax/am62a7_init.c | 4 ++++
->>   arch/arm/mach-k3/am62px/am62p5_init.c | 4 ++++
->>   arch/arm/mach-k3/am62x/am625_init.c   | 4 ++++
->>   arch/arm/mach-k3/am64x/am642_init.c   | 4 ++++
->>   arch/arm/mach-k3/am65x/am654_init.c   | 4 ++++
->>   arch/arm/mach-k3/j721e/j721e_init.c   | 4 ++++
->>   arch/arm/mach-k3/j721s2/j721s2_init.c | 4 ++++
->>   arch/arm/mach-k3/j722s/j722s_init.c   | 4 ++++
->>   arch/arm/mach-k3/j784s4/j784s4_init.c | 4 ++++
->>   9 files changed, 36 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
->> index 52a21277227..5bee04c5c31 100644
->> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
->> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
->> @@ -172,6 +172,10 @@ void board_init_f(ulong dummy)
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
+>>    */
+>>   struct ti_sci_firmware_ops {
+>>   	int (*query_dm_cap)(struct ti_sci_handle *handle,
+>>   			    u64 *dm_cap);
+>> +	int (*get_dm_version)(struct ti_sci_handle *handle,
+>> +			      struct ti_sci_dm_version_info *get_dm_version);
+>>   };
 >>   
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->> +
->>   	if (IS_ENABLED(CONFIG_ESM_K3)) {
->>   		/* Probe/configure ESM0 */
->>   		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@420000", &dev);
->> diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
->> index 01e47deca94..304fdc75736 100644
->> --- a/arch/arm/mach-k3/am62px/am62p5_init.c
->> +++ b/arch/arm/mach-k3/am62px/am62p5_init.c
->> @@ -224,6 +224,10 @@ void board_init_f(ulong dummy)
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->>   
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->> +
->>   	if (IS_ENABLED(CONFIG_K3_AM62A_DDRSS)) {
->>   		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
->>   		if (ret)
->> diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
->> index 595fc391ac5..5bcce365790 100644
->> --- a/arch/arm/mach-k3/am62x/am625_init.c
->> +++ b/arch/arm/mach-k3/am62x/am625_init.c
->> @@ -261,6 +261,10 @@ void board_init_f(ulong dummy)
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->>   
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->> +
->>   	if (IS_ENABLED(CONFIG_ESM_K3)) {
->>   		/* Probe/configure ESM0 */
->>   		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@420000", &dev);
->> diff --git a/arch/arm/mach-k3/am64x/am642_init.c b/arch/arm/mach-k3/am64x/am642_init.c
->> index 41812b7dbf7..7a317632e5b 100644
->> --- a/arch/arm/mach-k3/am64x/am642_init.c
->> +++ b/arch/arm/mach-k3/am64x/am642_init.c
->> @@ -242,6 +242,10 @@ void board_init_f(ulong dummy)
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->>   
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->> +
->>   	do_dt_magic();
->>   
->>   #if defined(CONFIG_ESM_K3)
->> diff --git a/arch/arm/mach-k3/am65x/am654_init.c b/arch/arm/mach-k3/am65x/am654_init.c
->> index a4f038029d7..774ad7feb1d 100644
->> --- a/arch/arm/mach-k3/am65x/am654_init.c
->> +++ b/arch/arm/mach-k3/am65x/am654_init.c
->> @@ -244,6 +244,10 @@ void board_init_f(ulong dummy)
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->>   
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->> +
->>   	/* Perform board detection */
->>   	do_board_detect();
->>   
->> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
->> index f31c20f7ed6..498243485f5 100644
->> --- a/arch/arm/mach-k3/j721e/j721e_init.c
->> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
->> @@ -374,6 +374,10 @@ void board_init_f(ulong dummy)
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->>   
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->> +
->>   	/* Perform board detection */
->>   	do_board_detect();
->>   
->> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> index 5941fa26a95..528590f0434 100644
->> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
->> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> @@ -232,6 +232,10 @@ void k3_spl_init(void)
->>   
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->> +
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->>   }
->>   
->>   bool check_rom_loaded_sysfw(void)
->> diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
->> index af211377e7c..d8123f282ee 100644
->> --- a/arch/arm/mach-k3/j722s/j722s_init.c
->> +++ b/arch/arm/mach-k3/j722s/j722s_init.c
->> @@ -150,6 +150,10 @@ static void k3_spl_init(void)
->>   
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->> +
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->>   }
->>   
->>   static void k3_mem_init(void)
->> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> index 787cf6261e4..ccf29810849 100644
->> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
->> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> @@ -208,6 +208,10 @@ void k3_spl_init(void)
->>   
->>   	/* Output System Firmware version info */
->>   	k3_sysfw_print_ver();
->> +
->> +	/* Output DM Firmware version info */
->> +	if (IS_ENABLED(CONFIG_ARM64))
->> +		k3_dm_print_ver();
->>   }
->>   
->>   void k3_mem_init(void)
+>>   #define TI_SCI_MSG_FLAG_FW_CAP_DM	0x100
+> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+>
