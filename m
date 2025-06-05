@@ -4,52 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4AAC5B543
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 14:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B742C5B543
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 14:48:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC7F18091A;
-	Thu,  5 Jun 2025 16:30:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 13C85803DF;
+	Thu,  5 Jun 2025 16:48:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="QPG5bJJB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HXRkA2wd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98B9081FEE; Thu,  5 Jun 2025 16:30:17 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E1E968091A; Thu,  5 Jun 2025 16:48:10 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CEC480050
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 16:30:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8112B80050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 16:48:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 4840E25BB6;
- Thu,  5 Jun 2025 16:30:15 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OOoiP4Hp9lwV; Thu,  5 Jun 2025 16:30:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1749133814; bh=OUlfHbpMMf9h2s4u27JwUSmr/YUsFWnl/zxFXPeNi6g=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=QPG5bJJBZe/rRX/OvBg04oOukm3uAFBjb2LpQEsiqdR4eYhfjS35K66OHxdxotifE
- SZGfdRRKtwJpEwPqMlt05JrpZdSURCMAQxnH7HXZovjZWTfWFNxLK89vh4VIOPHyLe
- ZdJzdMSbs65EkhnegkEQlmxkFESXUMHAjV7KGFiHA51pwQCu3X34lU1CabC9BMxq1g
- 9sJhRQ5pLBF0rDL4GN+qovJqKXqGWVBLAm+iEoqaJnHaQNPnYQgjiE3cdef/zpw/Vq
- Y/4XYDeUpM61GWdfPlcrxQOWk6rcNtrtt5L30RU49uHrMnXmhKTWpeneuudTWoUIi3
- 93SU8e8wcgGqQ==
-Date: Thu, 5 Jun 2025 14:29:52 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-86d013c5e79so85767239f.0
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 07:48:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749134887; x=1749739687; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vgPATjooB6aJw7VoJu4+rOPOjzqxhUuHcM9p8NoTAfE=;
+ b=HXRkA2wdfHhf4GWJYkQ5xxO+PE2hqw1Cycfl1v4AuCR4Fip7UXF1ybLaASXSknZHmh
+ IsjFapwyxdzsPPukRf7tP8DGb56boKJYxT1koWYRoI40YHZzSVG6UwVP0AZjWwRbr7Gk
+ 6mancEq0PsXz2W8tBWPMRW11UCryDuoNYmVxo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749134887; x=1749739687;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vgPATjooB6aJw7VoJu4+rOPOjzqxhUuHcM9p8NoTAfE=;
+ b=HpxZlzj9Bu4lTr49wt7WOv+kSZ2kWn82+Zuw1YEsth19w+mMSgO+bDA8mMSs0+PFi9
+ 0YVfPnFmODTOIFdptzp8xMqHd/x0R0mT6dMfqOEUEDVk+QI+eNjpn4d+aC3gzef8ejgJ
+ z3J23Wz0v+e/noN8Cm7DsWUxvOr1tkfn7Xoi805G0GzmZn8Dz4dllvxUCX0TjlsF+yp8
+ y23Oxef3xQCUGLhi2agsZPpBrgJS7itQjPdFMyumLxlC35G3XjJLWDvfIIo2fn3IyizE
+ PMHz+Iu5CG7tcK6KuLNurMSHbOHO3uTXA8IZG/0HUctdTUNd7SwcP9VndCZXxBoTs01s
+ /dXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMD1R2ymezhxvskgVgB8RDKA5qql5wS4Ef2b7vYQ29/rUdbbozQ39i6m3vCkdQ3SYO7evbAuc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6wsd+OmScNWYtT6q9AREYvLwu+t/4u6VkrQLjjK4sbplAtbb7
+ MUsbjoV/Iafckkx1rIlNp2L79Js2EiuZrhXB/uoywPvqVU/aAyNSJV6vsV/v1MugdCdSWLVQIsm
+ s9x2ANUI=
+X-Gm-Gg: ASbGncu4D9+X7SaNmaqEI8eGyCLRI7CXSGh3oo6FeKvMlQ+GVDy5KrXEAkbJrfYOTIo
+ WJH6vMB9BKioHkcQ9hiUO8k7/orGred8O8bUvzgzuqI1VpVnEjwvoPMj42YGuyIHrCoZQPd9G3T
+ jlyql3CinI2oRep2VId+r4R1YlPhgTdfDvCf91qJAhEmVJEilMHjqMaxa4fjkZdMBGCd8goapkS
+ u1gCiK8+3yGto6yYiaH6nHHzsXiXorhDCUZCabLfhyAvhwYKWwYm21JVe0u6mYDd94hLzyFLtQF
+ ll6bnNBAiem/cRg+GSlYuw4wLEQGTLXxsalNItpm15uRc82Gwhx1NCjsHLMwmJSHPu31RXf4F+p
+ 7CJlnn2nxFwUs
+X-Google-Smtp-Source: AGHT+IGzerX0TePYvlPkLZpDu02PuVL87czto43XjwJzbgFj7J3ISJGw2AEPQm3wB58YQPnw5WG05A==
+X-Received: by 2002:a05:6871:5b22:b0:2d4:ce45:6985 with SMTP id
+ 586e51a60fabf-2e9bf21adc6mr4939533fac.11.1749134876748; 
+ Thu, 05 Jun 2025 07:47:56 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2e9064615e0sm3103483fac.6.2025.06.05.07.47.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Jun 2025 07:47:56 -0700 (PDT)
+Date: Thu, 5 Jun 2025 08:47:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>
 Subject: Re: =?utf-8?B?5Zue5aSNOiDlm57lpI06IFtQQVRD?= =?utf-8?Q?H=5D_bootm?=
  =?utf-8?Q?=3A?= Pass SMP core ID and DTB address for ELF-formatted kernels
-Message-ID: <aEGp4KEprzOSyOF8@pie.lan>
+Message-ID: <20250605144754.GY1382132@bill-the-cat>
 References: <ME0P300MB13096732AF44AC5409B9D0D49F96A@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
  <CAFLszTgpYgVfrf4P189tcNM7xOvoiVjMu_sP1nrP+FGfAYHYSw@mail.gmail.com>
  <28BD711D-9449-46DA-AD38-8142B0CAF7AB@gmx.de>
@@ -59,10 +87,11 @@ References: <ME0P300MB13096732AF44AC5409B9D0D49F96A@ME0P300MB1309.AUSP300.PROD.O
  <20250529154923.GL100073@bill-the-cat>
  <ME0P300MB13099B02B4C316E4784D23529F6FA@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="A4AoYS07TYGw7xwq"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 In-Reply-To: <ME0P300MB13099B02B4C316E4784D23529F6FA@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,67 +108,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 05, 2025 at 08:04:28AM +0000, 牛 志宏 wrote:
-> Yes, this is a new OS currently being developed with plans to support Linux compatibility.
-> Registers a0 and a1 pass the boot core ID and DTB address respectively, following a de facto standard shared by both the SBI (RISC-V Supervisor Binary Interface) specification and the Linux implementation.
-> My rationale is: if U-Boot supports the combination of kernel + ELF loading, why shouldn't we implement this capability as well?
 
-Do you mean passing arguments according to the convention of Linux even
-when booting ELF stuff?
+--A4AoYS07TYGw7xwq
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-TBH, it should be easy to turn your ELF into an Linux-style Image...
+On Thu, Jun 05, 2025 at 08:04:28AM +0000, =E7=89=9B =E5=BF=97=E5=AE=8F wrot=
+e:
 
-> 
-> ________________________________
-> 发件人: Tom Rini
-> 已发送: 2025 年 5 月 29 日 星期四 23:49
-> 收件人: 牛 志宏
-> 抄送: Heinrich Schuchardt; Simon Glass; u-boot@lists.denx.de; Leo Yu-Chi Liang; Rick Chen
-> 主题: Re: 回复: [PATCH] bootm: Pass SMP core ID and DTB address for ELF-formatted kernels
-> 
-> On Thu, May 29, 2025 at 09:33:56AM +0000, 牛 志宏 wrote:
-> > hi team,
-> >
-> > The ITS file looks something like the following, and the kernel is not a standard Linux kernel:
-> > ```
-> > /dts-v1/;
-> >
-> > / {
-> >     ...
-> >     images {
-> >         kernel {
-> >             type = "kernel";
-> >             arch = "riscv";
-> >             os = "elf";
-> >             ...
-> >         };
-> >
-> >         fdt {
-> >             type = "flat_dt";
-> >             arch = "riscv";
-> >             ...
-> >         };
-> >     };
-> >     ...
-> > };
-> > ```
-> >
-> > To handle this scenario, we need to:
-> >
-> >   1.
-> > Access the values of the `type`, os, and arch fields stored in bootm_headers->image_info to determine the current context.
-> >   2.
-> > Access the boot_hart and ft_addr stored in the gd variable to update argc and argv.
-> >
-> > Not sure whether accessing the bootm_headers and gd variables in lib/elf.c is allowed or safe.
-> So this is why I was asking if there's some more generalized
-> specification we can reference. Is the OS you're using something
-> pre-existing and so we need to do what it already expect from some other
-> loader? Or is it something you're also creating and if so, why not
-> follow the linux kernel convention for compatibility?
-> 
-> --
-> Tom
+> Yes, this is a new OS currently being developed with plans to support Lin=
+ux compatibility.
+> Registers a0 and a1 pass the boot core ID and DTB address respectively, f=
+ollowing a de facto standard shared by both the SBI (RISC-V Supervisor Bina=
+ry Interface) specification and the Linux implementation.
+> My rationale is: if U-Boot supports the combination of kernel + ELF loadi=
+ng, why shouldn't we implement this capability as well?
 
-Regards,
-Yao Zi
+Thanks. I see this is spelled out in
+https://www.kernel.org/doc/html/latest/arch/riscv/boot.html as well. Can
+you please do a v2 with an expanded commit message and a Link: to that
+URL as well so it's clearer that isn't just an ad-hoc decision?
+
+--=20
+Tom
+
+--A4AoYS07TYGw7xwq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhBrhUACgkQFHw5/5Y0
+tyzukQv+O8G98AcrOd14/H7fWsanuhxXWdBG+9O+3HGyYu4qfN+yCWxC1SfojOcr
+1wZj/utvpWF9OY44T+1gdl38sPOg5fO+/nzh+46cjqe42FM71I+JByBX9TDxl3V2
+Ql7ym9dod6fSEFsc7gcRrHDPIPi89ySppCxKU+O0uGlfildKBDz9bESuaBGK4r6v
+O+skOd+ucjiXK8cj1N9DYKiBONAjPvJFLXkvx9AW9zVS97s+0ybnUD1/+kvIWG1N
+0MDjBd/yAvPuFuTpKAzCPiw9IfJ5V707t9WP2twMImKw40odbdsw6bTVbAX27K6L
+WOTw4bow3RNhHM4oTqeRkF+1OEx2Mdk71DEadtpmUE48PvZ+9I5Wxozdu3cZzeXq
+td09CiIu0cdHTmg2eRvbg/3glUGCSEY+SvHPTsz/XRSkkU4kMXCOHCxETl/2Xzpm
+NutXSZ6jmm85gShhIGnbJDZi1btFFeXnKXNMJVKqUFdQAvrYO2LXmB6Nx31huTq9
+NnH6eCnv
+=NcJz
+-----END PGP SIGNATURE-----
+
+--A4AoYS07TYGw7xwq--
