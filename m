@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5DBC5AE59
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 07:46:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF82C5AE59
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 07:51:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6200981E25;
-	Thu,  5 Jun 2025 09:46:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0310B8091A;
+	Thu,  5 Jun 2025 09:51:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gCv8Nio9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X9bZLryu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C530D81E25; Thu,  5 Jun 2025 09:46:49 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 8C3D881E25; Thu,  5 Jun 2025 09:51:35 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8636C82145
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 09:46:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EEF080050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 09:51:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3a51d552de4so353371f8f.0
- for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 00:46:47 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-45024721cbdso5305285e9.2
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 00:51:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749109607; x=1749714407; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749109893; x=1749714693; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=XbXXBprpZ31uyW48O5ikP2TZZYfKoO/Xf4btv/M3gJw=;
- b=gCv8Nio9kZ97T6IebiE8kf/dMxRrtnY+Z/m8ZGrq9zniiYpNvHwFTV3PK+vu6Yc8Eb
- LtWzqou+AsxKslNab2pR7DULTaLechLDNc3NTQFLnAWMgS1jTgPdCSOAnY75Awnxk7db
- N5HXbP8CYQN3lyMJ1oOPyBKeXaqWl5yRxLI69gmMcJGzE+vbfKVt5lGjBE82QtaJvbNR
- yoFl7nmDNvub5ek/8/gg+QX8uwX6DQVQEsJwajEoR7B5xhcoGUrcXIynWEyfKMMsK1my
- UEXSpjdvvHIipXgYAdk7SKdMhLtSovNPC80hXAT3o05IRz3iqdNZY+U8niXWVlS8byza
- 45rA==
+ :reply-to; bh=jBQB1lb2I/Al3lfGQMEBgk9DkW9/PALEFZjrOBdHTUk=;
+ b=X9bZLryu4QJVLdP/kdMKAzoY2AwxERsbQzCAQeP48coy/3mhYghZFuC/mketv4xFRN
+ nktT095d31Bg0uOfv7aHqnHCcwx/kUirf76Mn2Z04KXrygvdaDh8IcBhTOzH059//iHF
+ W6AtISsRwqE5LFuB/ZUMLwN6nlruN4g8YNHgIw5TAJ9Y1M/54fQ3RM71bOwNCchy0Sqd
+ W1On/9kAlZcUlF+rQj973GldiQ97QrbbkotI8AGaAIhfnkNJnqrlUP9mSmMGIVF1QsKh
+ JZoc4jSm7krWKaETjnWwi1+gYFQQsFKvXNUc37HmWW527ZYrZIgbo6uUSHQL02PyyPG0
+ Ojng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749109607; x=1749714407;
+ d=1e100.net; s=20230601; t=1749109893; x=1749714693;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=XbXXBprpZ31uyW48O5ikP2TZZYfKoO/Xf4btv/M3gJw=;
- b=pTaopPoxErYNWU74LFjWF0wcM4ywrtUvtbdwxArb5gP88dBgnvHq/1qpaNTII7qNHR
- n6bliiO4Z8tlj2bxpAUYQESeyy/9OhJY8ex2afCrCimkt3AlqGL7jBHKLH8sZc7C6KK8
- XRC3NoUHKL+c4XsY5tXlF7maMcLFbAu6zXDBOPTjUQeFs6Ia+uSJt7ZuRcZex1MK9P3y
- 08EQQEc/X6dHX/xdviiUMxPLpWpgKloJt+DiXOR0tw46asAEHuFXuEuOR8ffgB6V4t9C
- 9P0ALc7tDXBGNKN2PASFaLCLrgu9xe/vyA//hX7D+z/+h7YbEaYeq/LmSlkVVe7fL3XG
- qPkg==
-X-Gm-Message-State: AOJu0Yxmz7O3Yc4cVdJMRsS2UPSfEgQOo2z83C963g7UH28BxIa81UyY
- o1gBQBHzToS/UuScL0mFn8AyjYIiFkthkdAA3VdjjZYC5Nqf5zEQE0mATNt0FVmSJv2L+lUw2kE
- QhmHw
-X-Gm-Gg: ASbGnct7nRtizhMFiuiS6YPBlPgW8tCX1gpxGM3usD5bvTiZ/NPt+gfW8yFGly5DWEG
- 44mfELMOk30vxBuKBcCshkGG7AX+YpsTM77f/5KBRXOudC93kXG1HS6/xkFfS5KIxL+CmOLDCHd
- ZFld0bjAN10jTQuy8X3rkKigVo0EiBb2BdUBnNEiW4BzURUkAPj1tgR7lmYlgPh5KwDwu4fm/J/
- Uh3MnJIezkBCZcxfaNtdDARXbCO9TGJNAEgolHRGAeIQtYwTcJPFlYk1v1kEfqJhquIcGWBmf6P
- xabUuWjbCnpHJsNXjS6peW2l6h5QDswzqqnnSlzna7kv4iotsoRvqoI05q1d6C7ZucwyVSLvwDf
- SLPv/ziN2m0/jSg6AbV9vkPTjKm0f
-X-Google-Smtp-Source: AGHT+IH7spiy+L4u4RXq1s8Fgd+PCyHSD4m48r7EuNNTuFoC89VQbcNdmRGUdV8Wgmb76J6uF8rnsQ==
-X-Received: by 2002:a5d:5f42:0:b0:3a4:e6b4:9c4b with SMTP id
- ffacd0b85a97d-3a51d8f6bbfmr4174738f8f.1.1749109606873; 
- Thu, 05 Jun 2025 00:46:46 -0700 (PDT)
+ bh=jBQB1lb2I/Al3lfGQMEBgk9DkW9/PALEFZjrOBdHTUk=;
+ b=nWtO/czuhs6N0l8na4Xl6/uvf8zDFfEuFj23PeCeIAJccS3IKn3azwRbp5mD+g4fXK
+ 4AHryEapq/gV+1guTvzkmBv/D30Dj2V3cBbhGa6oIL4PUC4rXchPQRUZiD2Jr2k4EmK6
+ l1fM4YgxWtH1i55F/hmFA7e+dM8aMa2Wm4YztcDLZqdLHvAzdJE9f+FKesEPFZ4WjYaS
+ UOug/rOJjF/OYfCMaUikXSdVV277ONqsu1HH3cZR/80arDxaRcL3hF0BwdC7F8LYETUT
+ kniQdSPGvfisX/dAYDNss30ld+l9+FECHQjmKzNFHexx+0g1XG7/GC1RDs6toilHHszV
+ akOQ==
+X-Gm-Message-State: AOJu0YxqQ8YbFWWRKW3o9BKAyq6f6/Sl5VPhLBZFraY3R5MGfVM5UsHm
+ ASX7oww2rq1PFjSONU+T6VNP0qX5AU159InGf/K73M6L0PBjK5cNNxoSgggEALK+Dt+D727/RI0
+ 1hty/
+X-Gm-Gg: ASbGncuP6m1m4dmngz/clkjKZD9Y7cFa3bTMyds7bjnlmdu1lup6kUDzuVxRvMyW9pm
+ dPlzW5Hs6+FnG2Dm6ArY9+DmvFZsVw96wG7MAw8TxzRF61q4tLiifoUUQqChrpFN+bzhXy/TQx/
+ FJvc0W5FDHAcm5NBGqhLhWndiF/SFbLGLkSYTImNJphohqbTV7BH6aCyfWg6ywD620tEAWSVG1H
+ kKfgmqySvb3gAwTT6k7O34MylI/i7kbb4/N6+5IuYZYN7IhWHS8jvRN/5b6/M27WActnUBdCJOj
+ 3fDMiic+ee1Yef9Qod2e67nYZJpM10aRaKBw1hmFjt4+AZ6wHeVoA9NW5OJ2zUzvNinS+g7Gq+m
+ Wcy/hk+LDeOFGRhbWyXiDKsNuDdIY
+X-Google-Smtp-Source: AGHT+IGn1GRVoG7SmOHqCyn8alXx9N6hEbl7RP4xMOypm0vzvXpDvHhtRjZS+HDtk4gnLn7QTVfKaw==
+X-Received: by 2002:a05:600c:4f14:b0:442:e9eb:cba2 with SMTP id
+ 5b1f17b1804b1-451f09b845cmr53581685e9.0.1749109892556; 
+ Thu, 05 Jun 2025 00:51:32 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:53e5:f2b3:9ac1:62cd?
  ([2a01:e0a:3d9:2080:53e5:f2b3:9ac1:62cd])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4f009745esm23982246f8f.71.2025.06.05.00.46.46
+ 5b1f17b1804b1-451f9816cf0sm15817675e9.16.2025.06.05.00.51.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jun 2025 00:46:46 -0700 (PDT)
-Message-ID: <18fa55c7-e04a-4086-8a7d-1e73d997cca6@linaro.org>
-Date: Thu, 5 Jun 2025 09:46:45 +0200
+ Thu, 05 Jun 2025 00:51:32 -0700 (PDT)
+Message-ID: <3874c4bc-0e9f-4b8d-8217-5c3958925e47@linaro.org>
+Date: Thu, 5 Jun 2025 09:51:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFC/RFT 0/2] gpio: qcom: rewritte SPMI gpio driver from
- Linux driver
-To: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
- <cebc988b-de5b-45af-92ba-08ee7998aaef@linaro.org>
- <724196e1-a409-4b03-8145-3dbb473e3949@linaro.org>
+From: neil.armstrong@linaro.org
+Subject: Re: Determining Simon Glass's future in the U-Boot project
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20250528175901.GG100073@bill-the-cat>
+ <CAC_iWjJ88yhfFpWk0YYxh7n+RNOYNuvUDEBghdqvS-yLTatuqA@mail.gmail.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -113,9 +110,9 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <724196e1-a409-4b03-8145-3dbb473e3949@linaro.org>
+In-Reply-To: <CAC_iWjJ88yhfFpWk0YYxh7n+RNOYNuvUDEBghdqvS-yLTatuqA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,47 +130,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 04/06/2025 14:40, Casey Connolly wrote:
+On 30/05/2025 14:15, Ilias Apalodimas wrote:
+> Hi Tom,
 > 
 > 
-> On 6/3/25 18:43, Neil Armstrong wrote:
->> On 01/04/2025 11:47, Neil Armstrong wrote:
->>> The current SPMI gpio driver is very old and doesn't support
->>> pin state tracking to fully support the whole pinconf calls.
->>>
->>> The simplest is to rewritte the driver using the v6.14 Linux
->>> driver and fully implement pinctrl, pinmux, pinconf and gpio
->>> support using all the newer interfaces.
->>>
->>> The goal is to deprecate the old one it has been validated
->>> on currently supported hardware.
->>>
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>> Neil Armstrong (2):
->>>        gpio: qcom: add new driver for SPMI gpios
->>>        gpio: qcom: move pm8550 gpio to new driver
->>>
->>>   drivers/gpio/Makefile         |    2 +-
->>>   drivers/gpio/qcom_pmic_gpio.c |   20 +-
->>>   drivers/gpio/qcom_spmi_gpio.c | 1035 +++++++++++++++++++++++++++++++ ++++++++++
->>>   3 files changed, 1037 insertions(+), 20 deletions(-)
->>> ---
->>> base-commit: 5ca70325b64f760bf4190f206a0e88dda495e3d2
->>> change-id: 20250401-topic-sm8x50-pmic-gpio-pinctrl-new-2588c35a461c
->>>
->>> Best regards,
+> On Wed, 28 May 2025 at 20:59, Tom Rini <trini@konsulko.com> wrote:
 >>
->> How should we go forward ?
+>> Hey all,
+>>
+>> First, I am not happy to be writing this email. But at this point, I
+>> feel I have no other choice, for the good of the overall project and
+>> community.
+>>
+>> Back in January[0] of this year I made a post with almost this same
+>> subject line. At that point there had already been a number of problems
+>> working with Simon and the overall community. I did not include a list
+>> of links. At that point the easiest answer would be to go to the mailing
+>> list archive, pick any thread that Simon and I had and see the long
+>> disagreements. This trend has fundamentally not changed. And while I
+>> started this out with some threads and my summaries of them, instead I
+>> want to point to this email I sent this mornig:
+>> https://lore.kernel.org/u-boot/20250528170533.GE100073@bill-the-cat/
+>>
+>> And to repeat what I said there, Simon needs to decide if it's more
+>> important to work with the community or have his way every time. Simon
+>> cannot have both.
 > 
-> Unless you have any concerns let's pull this into -next and see what happens. I'm preparing a PR atm>
+> +1.
+> 
+> Since I was involved in enough ... I don't mind reviewing patches and
+> giving feedback. That's what I signed up for. Reading the same 30+
+> series patches though with only 10% of the feedback addressed is just
+> not working.
+> 
+>> Simon needs to accept that some things he think are
+>> good ideas have been rejected or he needs to fork off from U-Boot. Or he
+>> can ask the community to take over as the project head. If the community
+>> wants Simon to run things, I will step down and just be an individual
+>> contributor again. Five months of this experiment shows me that it's not
+>> working at all and will only be a bigger problem as time goes on.
+> 
+> FWIW I think you are doing an excellent job and I'd like the situation
+> to remain as is.
 
-For me it's all good, once it's merge I'll migrate to the new one and add all the other compatible
-from the Linux driver.
+I'm backing Ilias and Casey here, you're doing an excellent job, maintaining
+such project is difficult and you do the job.
 
-Thanks !
 Neil
 
->> Neil
 > 
+>>
+>> And, I mean it. I cannot take the additional stress of what new problems
+>> await me every morning. I do not take the above lightly, but I do not
+>> think the project can become healthy moving forward without some
+>> resolution here and quickly. While I won't claim my time as the head of
+>> the project has been perfect, I have tried my best to always be honest
+>> and fair and to seek compromise.
+>>
+>> With respect to voting, would anyone volunteer to run a poll from
+>> https://civs1.civs.us/ (which is used by the Yocto Project /
+>> OpenEmbedded and likely other FOSS projects/communities) ?
+> 
+> Thanks
+> /Ilias
+>>
+>> --
+>> Tom
 
