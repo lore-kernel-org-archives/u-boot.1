@@ -4,91 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FA67C5B543
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 20:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE4FC5AE59
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 20:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3569F8091A;
-	Thu,  5 Jun 2025 22:52:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 607748091A;
+	Thu,  5 Jun 2025 22:57:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CU2pK0hZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QMwXnTdt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DD0381E25; Thu,  5 Jun 2025 22:52:37 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 4F39581E25; Thu,  5 Jun 2025 22:57:03 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2458080050
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 22:52:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99E1A80050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 22:57:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-311a6236effso1115261a91.2
- for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 13:52:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3a365a6804eso1009912f8f.3
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 13:57:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749156752; x=1749761552; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I3W/WgYeRNny8k0qSYHyyi6ePasZQeUGAybQqAzVRnA=;
- b=CU2pK0hZZZdMTmimcQykxysKqj4TJl9wtYHK0lo23xY5a+RPqgvYdY6xprUOlbPCUv
- 7YG7OPFoY608DR5tVXjhnHnhMfRs0n1Y2f8uiovldn6L5l9KgSf/xECfsi1XXlXxkoXg
- 5DWeHNZig2HxowpDhmPKfzzfbmMJhNvZDaOAo0qonc1RMCpawM8fgBgvo9ty4EW411QO
- YDAYdL8NDy4bgWy+2pJu8reO6qKz19fw0sKNlT3zbHNv5BTr9IT3Dd/o8cnAiOHeP+F7
- SwkG9PD/NQhXx0fVpuELI7TgDmDvWphzLeeHSd8pwyD2yh8wEcYJaL7w6FSkLhU7ZkLm
- vxMQ==
+ d=linaro.org; s=google; t=1749157020; x=1749761820; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=/ORrgJb0n4BR3EZiqZsyjAYU7wjvjal66253yYuQ//I=;
+ b=QMwXnTdthNjxAiq3rWlraM1TJyVQ/ZeAXcfPCgtMhvh+rJSKkI/t5tgS9AKmzcUEli
+ 3mVNTuhN4o77Lb+fr3RZ5mO3BscyqZUuBR19eU4PBXdiiqCEidXd3CsrTwWxBVR75RSr
+ 0799iiCt6Dz3wCrAebMZhJ3IqzsjTSx6Qt1U86aOBUb7XObta1Yg6C5F2pvmRjZvtPv8
+ SAGsZ1XhVMp1hYe6/l/iWLw+Ce4BTJ/HPlvYaLXqZeJ7Fr80rX5DbXP7pOipQUgvdjS8
+ Qls4257W0+aJyCPYWAl5XkeW73AW9WvfmW61HV5n/3KSfVeopBTebhHE1r7DuyVoZXLu
+ R9iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749156752; x=1749761552;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I3W/WgYeRNny8k0qSYHyyi6ePasZQeUGAybQqAzVRnA=;
- b=rs6MZMKdVg2kJ7vU5tg9u4eIbEZ7RXX7KGry1sO7+dOJautX6W3WDEeh4HzyaWz9Yn
- 1wCm0bhgk5is4FziBXOGDoGITZZ3yIkxRzWb/Q9kQtudGlN28znqqqq3dQwRNEIMMMdQ
- DZufWsn9eyzvTD1Hbl6bDhPebUoFG77GlejYwwXfgJgGVryF7Dvvq6YBnTtn55n6YP9e
- 7GTGRmFdCW9taBlrkxe7jJqxxuS3rkVT9p9y6ypZy3Tvlqy4JFj/bUqCJ8iunJNemblu
- YuvA7bJBoV/G9eMmsuRNx24PZMBajmhh+tXxVFRcfVoy6k4pZPJRnO9mWv/0zrl/Hsrf
- Fouw==
-X-Gm-Message-State: AOJu0YwbZ31HX2L1irCxYA3x8RdMhKfpqt+04jMLBGot0gH3yo1Jc+++
- 7NETxvVeGzGiurMwWqUlSEP4Kk9yZNbrQU/CKU1zRAZHsqSZ5reo6m59mEd+0nD6h5mHiAx8xft
- WJyMnwC4etseYe5yaXsfd5UNRceMz309Iz1OVa5F0ZQ==
-X-Gm-Gg: ASbGncucUv6hDqWxdFVDizKaxSLxK9pfeaSQBD8Lv3CcRlXJEU0L2aACd8DNgEai9mV
- ZNoTxajDeVYLm2xdlOPMv+Q471Bf55pjGyM12leWavuh2EHlXDnyBzRcL620yX9vOM6wv0WsChS
- LKQFVr0rai3PEr2UxtbKlx+y/DmfzLUAA5MA==
-X-Google-Smtp-Source: AGHT+IGnAZ1q5ZUE6ZliCiot3zZzTKIR/wG3uomZLmzpJ7KRTD2dJxVNU/fTwNtj8UgtS1eqKjZcYDKxOrEVHuPj/FI=
-X-Received: by 2002:a17:90a:d88d:b0:311:b0ec:1360 with SMTP id
- 98e67ed59e1d1-3134706d56bmr1763730a91.29.1749156752605; Thu, 05 Jun 2025
- 13:52:32 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1749157020; x=1749761820;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=/ORrgJb0n4BR3EZiqZsyjAYU7wjvjal66253yYuQ//I=;
+ b=fTKhVlY6gRq7LOQnfN4TZ16k9u9zxiyMTQV33jRqQOm4Um637eUs39oJRqsG/ssNxv
+ tX3yRgypTrFNpPGi8j4vUdvwvpqubdF+OXZeoudtBGnZSjqRzP9BqkqY7byXaT9R96BM
+ UifpatouvV27Y8ekGza6maheq3t3oTf5C7aOgy4QoZ2ymxjzyXr1/3L7A1CkXmUZFmZx
+ mZV2QLjI02hh739392lvOGSDMeT/jok9PDb6dLhlVwgnygq/9VSpq8zVWxPCF6mxrx1E
+ AkSOZ33UXO/2c1Gx8qVV0Oa+oAxsF3DxandOjgYX5pyANHQuHWTa/lIM9Ug1eJFkYX2s
+ r8VQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUfBO+kjMpfIG5lrTNL3RxoqbyzYriPL70qEN28HGwYspU8L+eyseKicKsjgmDvDNaSQKTYPk4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzIEakr7UUS0wl72OLiQHIbO4GxbO0YGyHEziF6ChmN3RY7X9T
+ 9j5F8xkWf+BKF+81cgnHw4QvkeZ1Htq+m1Gvtwztw63fyxXDMZAi+AFecRyYYXLry9M=
+X-Gm-Gg: ASbGncvE+W4kTLaOy6CMBPrJS+p2vcwkwUuwNl1AVCMX7n0avgbTfWPjGbE0Q39Ubho
+ vfp+fkY+B4u8QFXZVE7NkaMhtFkWeHbOUV4HvvLtSmI3GSNM3JDft9HMbYsllXFyynEZbxl6pOj
+ 3c5qk57R0xd4Jgu3uBHOsOvlWUXJPfgKgx0op/yB6fQBR7FaV6w42/xylnjbZ1Az8iz7RbNoTaq
+ E0GTye6jcNowaTI7JKiRDgoI8UU48iqdtUyjfdG2UqEAuZShLhi4VEveON44F2qw5HdLe4hefn/
+ NS0bHNy7UpUCICm6SxnSpcmqzsOP5GjJrLIb3IUO3TeMwcldwHyU+VoypkrSaUH457xqS+J/g5a
+ g7Eu0HWfCqm8lUwADmKBLmFjx5mIS
+X-Google-Smtp-Source: AGHT+IEPSI60qu6dYKec3UDtOYIjbUcd76KvO9wlM3yY0QxjsJZoDShiOzO+dBlg+9/M+ZmdOaJizw==
+X-Received: by 2002:a05:6000:2913:b0:3a4:e8c4:7a78 with SMTP id
+ ffacd0b85a97d-3a531cf542bmr503620f8f.52.1749157019931; 
+ Thu, 05 Jun 2025 13:56:59 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:a613:826b:6813:c968?
+ ([2a01:e0a:3d9:2080:a613:826b:6813:c968])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a53244f0cbsm181009f8f.81.2025.06.05.13.56.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Jun 2025 13:56:59 -0700 (PDT)
+Message-ID: <db594851-3e08-420a-a8d2-291eabe64a98@linaro.org>
+Date: Thu, 5 Jun 2025 22:56:58 +0200
 MIME-Version: 1.0
-References: <20250603144258.1701265-1-raymond.mao@linaro.org>
- <20250605171538.GC1382132@bill-the-cat>
- <CAEfUkU+Xp1bkHRWkBSzbF+S5VewB2E4_dXr+LU-+WAtOgvPLLQ@mail.gmail.com>
- <20250605200117.GD1382132@bill-the-cat>
-In-Reply-To: <20250605200117.GD1382132@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 5 Jun 2025 16:52:20 -0400
-X-Gm-Features: AX0GCFsHtq4qgf4vpAxVogvb2XXFFwgzHtYjz-71EmTGsnYWmy1hJBiTi3np0Oo
-Message-ID: <CAEfUkU+ns2XGb7J8WP+uD5SuxkQfdzZxPD+axN-J-xoLVzndyA@mail.gmail.com>
-Subject: Re: [PATCH v2] makefile: fix Clang link error when
- RSA_PUBLIC_KEY_PARSER is selected
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v3 0/2] bootstd: New bootmeth for RAUC A/B systems
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Prasad Kummari <prasad.kummari@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Martin Schwan <m.schwan@phytec.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Wadim Egorov <w.egorov@phytec.de>
+References: <20250604-wip-bootmeth-rauc-v3-0-f9fad913c57e@phytec.de>
+ <5621cd82-042a-48be-a708-a29ea96d4f7b@linaro.org>
+ <20250605200238.GE1382132@bill-the-cat>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250605200238.GE1382132@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,100 +126,65 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 05/06/2025 22:02, Tom Rini wrote:
+> On Thu, Jun 05, 2025 at 07:46:54PM +0200, neil.armstrong@linaro.org wrote:
+>> Hi,
+>>
+>> On 04/06/2025 14:15, Martin Schwan wrote:
+>>> This series implements a new bootmeth for RAUC A/B systems. RAUC (Robust
+>>> Auto Update Controller) is a lightweight update client, providing "Safe
+>>> and Secure OTA Updates for Embedded Linux". See the following links for
+>>> more information about RAUC:
+>>>
+>>>     https://rauc.io/
+>>>     https://rauc.readthedocs.io/en/latest/
+>>>
+>>> PHYTEC uses RAUC in its Yocto based distribution "Ampliphy" as the
+>>> default way of updating embedded devices based on PHYTEC hardware. So
+>>> far, the logic selecting the correct partitions and files to boot was
+>>> being implemented in the U-Boot environment. While this is a
+>>> straightforward way to do it, adding and supporting new platforms became
+>>> somewhat tedious and is platform-specific. The introduction of U-Boot's
+>>> "Standard Boot" provided a convincing alternative, promising a simpler
+>>> and more portable way of booting, even for RAUC systems. This led me to
+>>> implement a new bootmeth supporting RAUC A/B systems. Note, that this
+>>> new bootmeth is not proprietary to PHYTEC products and is designed to
+>>> work on other hardware with a RAUC A/B system, too.
+>>>
+>>> The bootmeth currently only supports symmetric A/B partitioning layouts.
+>>> E.g. A/rescue is not (yet) supported. The partition indexes and default
+>>> slot tries can be specified via configuration options.
+>>>
+>>> For now, the bootmeth_rauc uses a similar approach for loading the
+>>> Kernel and device tree as the bootmeth_script, in that it requires a FIT
+>>> containing a U-Boot script loading the desired distro. It could be
+>>> possible to support booting without a script and load the Kernel and DT
+>>> directly with this bootmeth, but I found the script method to be very
+>>> flexible for now, in letting the distro decide what to load.
+>>>
+>>> The bootmeth_rauc was tested on a phyBOARD-Pollux i.MX8M Plus [1] with
+>>> BSP-Yocto-Ampliphy-i.MX8MP-PD24.1.2 [2].
+>>>
+>>> Supported boot devices are currently only MMC devices, but it should be
+>>> possible to add SPI flashes in the future.
+>>
+>> It's quite a late comment, but this implementation has really nothing
+>> specific to do with MMC, you could just support any block device.
+>>
+>> So if you could just add a config selecting the block type, defaulting
+>> to mmc, this could be used on any block like USB, UFS, NVMe, ... with
+>> almost 0 changes.
+> 
+> I raised this with v1. The challenge is that RAUC itself doesn't yet
+> support non-MMC options. If/when that changes it's easy to update here.
+> 
 
-On Thu, 5 Jun 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Jun 05, 2025 at 03:45:00PM -0400, Raymond Mao wrote:
-> > Hi Tom,
-> >
-> > On Thu, 5 Jun 2025 at 13:15, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Jun 03, 2025 at 07:42:55AM -0700, Raymond Mao wrote:
-> > >
-> > > > MbedTLS bignum module needs '__udivti3' which is a 128-bit division
-> > > > function provided by the compiler runtime, typically libgcc for GCC or
-> > > > clang_rt.builtins for Clang.
-> > > > Thus 'clang_rt.builtins' library is required when building using Clang.
-> > > >
-> > > > This patch supports the location layout of clang_rt.builtins libraries
-> > > > from both LLVM pre-15 pattern [1] and post-15(up to 20) pattern [2].
-> > > >
-> > > > As a fact that starts from LLVM 20, no official prebuilt multi-targets
-> > > > are included and users might need to cross-built it from source. [3] is
-> > > > an example of instructions for building.
-> > > >
-> > > > [1] <INST_DIR>/lib/clang/<REV>/lib/linux/libclang_rt.builtins-<ARCH>.a
-> > > > E.g.
-> > > > lib/clang/14.0.0/lib/linux/libclang_rt.builtins-aarch64.a
-> > > > lib/clang/14.0.0/lib/linux/libclang_rt.builtins-x86_64.a
-> > > >
-> > > > [2] <INST_DIR>/lib/clang/<REV_MAJOR>/lib/<CROSSTOOL>/libclang_rt.builtins.a
-> > > > E.g.
-> > > > lib/clang/20/lib/aarch64-none-linux-gnu/libclang_rt.builtins.a
-> > > > lib/clang/20/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
-> > > >
-> > > > [3]
-> > > > git clone https://github.com/llvm/llvm-project.git
-> > > > cd llvm-project
-> > > > git checkout -b llvmorg-20.1.6 llvmorg-20.1.6
-> > > > mkdir build-builtin && cd build-builtin
-> > > > cmake -G Ninja ../llvm \
-> > > >   -DCMAKE_BUILD_TYPE=Release \
-> > > >   -DCMAKE_C_COMPILER=clang \
-> > > >   -DLLVM_ENABLE_PROJECTS="clang" \
-> > > >   -DLLVM_ENABLE_RUNTIMES="compiler-rt" \
-> > > >   -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
-> > > >   -DLLVM_BUILTIN_TARGETS=\
-> > > >     "x86_64-unknown-linux-gnu;aarch64-none-linux-gnu" \
-> > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSTEM_NAME=Linux \
-> > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_C_COMPILER=\
-> > > >     <YOUR_TOOLCHAIN_GCC> \
-> > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_ASM_COMPILER=\
-> > > >     <YOUR_TOOLCHAIN_GCC> \
-> > > >   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSROOT=\
-> > > >     <YOUR_TOOLCHAIN_LIBC_DIR> \
-> > > >   -DCOMPILER_RT_BUILD_BUILTINS=ON \
-> > > >   -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
-> > > >   -DCOMPILER_RT_BUILD_XRAY=OFF \
-> > > >   -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
-> > > >   -DCOMPILER_RT_BUILD_PROFILE=OFF \
-> > > >   -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> \
-> > > >   -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
-> > > > ninja builtins
-> > > > sudo ninja install
-> > > >
-> > > > Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
-> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > >
-> > > I think that newer versions don't even ship this moves us further away
-> > > from a solution here as all of the logic. I think we need to look at the
-> > > suggestion of just importing the assembly version of the function.
-> >
-> > But, the assembly versions are architecture-specific, do you want a
-> > portable C code for it?
->
-> Is it easily done in C? If not, we can just try and make it clear what
-> needs to be pulled out of LLVM sources if/when another platform
-> encounters the problem.
->
-But maybe we can ask the LLVM project owner why they removed the
-prebuilt multi-targets since 20.0.0.
-May current patch can support multiple target layouts of pre-15 and
-post-15 patterns (I believe they will keep the one of post-15 for the
-future), if they can provide the prebuilt multi-targets via package
-managers or release tarballs then it is the best solution.
-In the future we might need other functions from those libraries and
-implementing it in U-Boot is not a good choice IMO.
+Ack thx, indeed the code change would be minimal
 
-Regards,
-Raymond
-
-
-> --
-> Tom
+Neil
