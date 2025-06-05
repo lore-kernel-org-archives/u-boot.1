@@ -4,114 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF82C5AE59
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 07:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5874C5AE59
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 08:12:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0310B8091A;
-	Thu,  5 Jun 2025 09:51:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ECA928091A;
+	Thu,  5 Jun 2025 10:12:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X9bZLryu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zwBtRxVy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C3D881E25; Thu,  5 Jun 2025 09:51:35 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 24FE881FEE; Thu,  5 Jun 2025 10:12:08 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EEF080050
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 09:51:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EFE281E25
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 10:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-45024721cbdso5305285e9.2
- for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 00:51:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-45024721cbdso5467325e9.2
+ for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 01:12:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749109893; x=1749714693; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=jBQB1lb2I/Al3lfGQMEBgk9DkW9/PALEFZjrOBdHTUk=;
- b=X9bZLryu4QJVLdP/kdMKAzoY2AwxERsbQzCAQeP48coy/3mhYghZFuC/mketv4xFRN
- nktT095d31Bg0uOfv7aHqnHCcwx/kUirf76Mn2Z04KXrygvdaDh8IcBhTOzH059//iHF
- W6AtISsRwqE5LFuB/ZUMLwN6nlruN4g8YNHgIw5TAJ9Y1M/54fQ3RM71bOwNCchy0Sqd
- W1On/9kAlZcUlF+rQj973GldiQ97QrbbkotI8AGaAIhfnkNJnqrlUP9mSmMGIVF1QsKh
- JZoc4jSm7krWKaETjnWwi1+gYFQQsFKvXNUc37HmWW527ZYrZIgbo6uUSHQL02PyyPG0
- Ojng==
+ d=linaro.org; s=google; t=1749111125; x=1749715925; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GvLVsUaF7nBPuc/gPvJzboIi5CIm9vkThd/tXjw/R+E=;
+ b=zwBtRxVyH+/7lbIY+bmbYa/z4LhZ2ei+AdYl92Tr37DZNH5pHk3024llSwUEcHqgem
+ /D7Dn/5aqFya39IUIB3eu9ZgwuC+fDrEcjvyKBVzyCQ9/iUZ1p3xH5daNfRHewgc6wVP
+ 0f1YY59078kEVW+LMk2zG2JY8T4TCfR+H7pqBaBG54IaHlnDDMSrtNQnESrXSZzzQZNM
+ YsgEpxhOWoWCMDW8UuyRo5n/irPicSMfbDW4NUb7EgXibrQPUY9O4x6LdspwgHXc1lc4
+ mQwcRTrCv0iWBbwOkvhFeggpkhbrAdzphMiwEtfG/wS2hziK2J3v50Lb8RcSGPDzr0Mk
+ d/xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749109893; x=1749714693;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=jBQB1lb2I/Al3lfGQMEBgk9DkW9/PALEFZjrOBdHTUk=;
- b=nWtO/czuhs6N0l8na4Xl6/uvf8zDFfEuFj23PeCeIAJccS3IKn3azwRbp5mD+g4fXK
- 4AHryEapq/gV+1guTvzkmBv/D30Dj2V3cBbhGa6oIL4PUC4rXchPQRUZiD2Jr2k4EmK6
- l1fM4YgxWtH1i55F/hmFA7e+dM8aMa2Wm4YztcDLZqdLHvAzdJE9f+FKesEPFZ4WjYaS
- UOug/rOJjF/OYfCMaUikXSdVV277ONqsu1HH3cZR/80arDxaRcL3hF0BwdC7F8LYETUT
- kniQdSPGvfisX/dAYDNss30ld+l9+FECHQjmKzNFHexx+0g1XG7/GC1RDs6toilHHszV
- akOQ==
-X-Gm-Message-State: AOJu0YxqQ8YbFWWRKW3o9BKAyq6f6/Sl5VPhLBZFraY3R5MGfVM5UsHm
- ASX7oww2rq1PFjSONU+T6VNP0qX5AU159InGf/K73M6L0PBjK5cNNxoSgggEALK+Dt+D727/RI0
- 1hty/
-X-Gm-Gg: ASbGncuP6m1m4dmngz/clkjKZD9Y7cFa3bTMyds7bjnlmdu1lup6kUDzuVxRvMyW9pm
- dPlzW5Hs6+FnG2Dm6ArY9+DmvFZsVw96wG7MAw8TxzRF61q4tLiifoUUQqChrpFN+bzhXy/TQx/
- FJvc0W5FDHAcm5NBGqhLhWndiF/SFbLGLkSYTImNJphohqbTV7BH6aCyfWg6ywD620tEAWSVG1H
- kKfgmqySvb3gAwTT6k7O34MylI/i7kbb4/N6+5IuYZYN7IhWHS8jvRN/5b6/M27WActnUBdCJOj
- 3fDMiic+ee1Yef9Qod2e67nYZJpM10aRaKBw1hmFjt4+AZ6wHeVoA9NW5OJ2zUzvNinS+g7Gq+m
- Wcy/hk+LDeOFGRhbWyXiDKsNuDdIY
-X-Google-Smtp-Source: AGHT+IGn1GRVoG7SmOHqCyn8alXx9N6hEbl7RP4xMOypm0vzvXpDvHhtRjZS+HDtk4gnLn7QTVfKaw==
-X-Received: by 2002:a05:600c:4f14:b0:442:e9eb:cba2 with SMTP id
- 5b1f17b1804b1-451f09b845cmr53581685e9.0.1749109892556; 
- Thu, 05 Jun 2025 00:51:32 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:53e5:f2b3:9ac1:62cd?
- ([2a01:e0a:3d9:2080:53e5:f2b3:9ac1:62cd])
+ d=1e100.net; s=20230601; t=1749111125; x=1749715925;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GvLVsUaF7nBPuc/gPvJzboIi5CIm9vkThd/tXjw/R+E=;
+ b=ERr2mH8rl/ZJhirQ2HiYD1mBvqfNvQlMO9krFdalZMoL/XzOz4J2/+wCCX6dIAY1BZ
+ znfpJLm55O3bulBcu/LaRxibfB5R1MWW3ivMWqJlY0WyJTyvRhWDCGHb5WKfg5CX55r9
+ qF/OE9B9EquhcWqYTqohrA0WRDYHCKJrpvYOWttzUtcjdZP/ZmdBkwUn7VaqzOoxbbbn
+ 06bXFfjeO5hXUquUPc41Gq9SCu38Lh2UmizrvlrLbMPZQxIy1woB41AebfRjwi71SXeR
+ RRfHghK1r7wXkSNUg7WyPrCRpxu+t2jrSqmIH6dRFK3/OZ+o4TobCm0taTXcQ2B8qwpY
+ aljw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2MSavfx7spv1WeS2tIB0yFfbozCWFegNpwRZhxgPiSNYSBizIRUdefQWB6FwzQ5VmXqLMFH4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzBZsayrnvroOVyHZhzR+wpNhDAf93NVLtCsiGBVkk7jw0dqxUz
+ ek/JkC+Q6xa9kA06cjISpu9jiJMdtHFLgqa4/tZO8FuwhNgDrtQw1LObdRYDEO1ohkoESwCTRjv
+ 4FsHS
+X-Gm-Gg: ASbGncsQy8g6HjUxHxxuDCpVZGLv5AdPlaHXNEF9jqYmavAzjaQFO7UVYKq4t7+Sec6
+ ecqD2ta1h4jSwW5zpTnYBP4eONHcada/6q+gbsuTsMNQuvF5M4VVPXxmZRAa7jbCFtSWBasawZL
+ 0yMDBtyYrDchEG0rIh78WJq7JN75+ZnMyc3zXCE6JObIbWhva4SnBISYMt5RREnNhovyfRSGqfV
+ P/5u7ODIQ4ZTyqrT1seTednEJe5+f1+7wpy9dwtf8qsFQ9YBvHDzWkWeYydV7v+W3Ot3T8jiEpI
+ QdFI5ZX2345twJL2AxoBPcMmHz92yzWGL8gBfC9FmiOD+f+0xY2XwGXUkHqItYd2k8D2NfUsQJS
+ IH0qv4w7xYVkTOmdurCGlPkW9xKl+8tuQQxHv17+1Fg==
+X-Google-Smtp-Source: AGHT+IGpFa4tOSPMdc15l+Im84k5Lf700jGrlHDl5ZP7S3IY8BqjbV0MFFPe2b0KMNQIfRjnmbpdFQ==
+X-Received: by 2002:a05:600c:4f47:b0:43c:efed:733e with SMTP id
+ 5b1f17b1804b1-451f0a7c52emr57623945e9.14.1749111125574; 
+ Thu, 05 Jun 2025 01:12:05 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:37f7:19bf:f6b3:6381?
+ ([2a01:e0a:3cb:7bb0:37f7:19bf:f6b3:6381])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-451f9816cf0sm15817675e9.16.2025.06.05.00.51.31
+ 5b1f17b1804b1-451fb2213f1sm9827985e9.32.2025.06.05.01.12.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jun 2025 00:51:32 -0700 (PDT)
-Message-ID: <3874c4bc-0e9f-4b8d-8217-5c3958925e47@linaro.org>
-Date: Thu, 5 Jun 2025 09:51:31 +0200
+ Thu, 05 Jun 2025 01:12:05 -0700 (PDT)
+Message-ID: <bc826ef7-2691-4223-9512-dfa1b3a23113@linaro.org>
+Date: Thu, 5 Jun 2025 10:12:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: Determining Simon Glass's future in the U-Boot project
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20250528175901.GG100073@bill-the-cat>
- <CAC_iWjJ88yhfFpWk0YYxh7n+RNOYNuvUDEBghdqvS-yLTatuqA@mail.gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <CAC_iWjJ88yhfFpWk0YYxh7n+RNOYNuvUDEBghdqvS-yLTatuqA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH v2] sandbox: solve undefined reference to pthread_kill
+ symbol
+To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Daniel Golle <daniel@makrotopia.org>
+References: <20250604154814.1856244-1-raymond.mao@linaro.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250604154814.1856244-1-raymond.mao@linaro.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -124,76 +113,47 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 30/05/2025 14:15, Ilias Apalodimas wrote:
-> Hi Tom,
-> 
-> 
-> On Wed, 28 May 2025 at 20:59, Tom Rini <trini@konsulko.com> wrote:
->>
->> Hey all,
->>
->> First, I am not happy to be writing this email. But at this point, I
->> feel I have no other choice, for the good of the overall project and
->> community.
->>
->> Back in January[0] of this year I made a post with almost this same
->> subject line. At that point there had already been a number of problems
->> working with Simon and the overall community. I did not include a list
->> of links. At that point the easiest answer would be to go to the mailing
->> list archive, pick any thread that Simon and I had and see the long
->> disagreements. This trend has fundamentally not changed. And while I
->> started this out with some threads and my summaries of them, instead I
->> want to point to this email I sent this mornig:
->> https://lore.kernel.org/u-boot/20250528170533.GE100073@bill-the-cat/
->>
->> And to repeat what I said there, Simon needs to decide if it's more
->> important to work with the community or have his way every time. Simon
->> cannot have both.
-> 
-> +1.
-> 
-> Since I was involved in enough ... I don't mind reviewing patches and
-> giving feedback. That's what I signed up for. Reading the same 30+
-> series patches though with only 10% of the feedback addressed is just
-> not working.
-> 
->> Simon needs to accept that some things he think are
->> good ideas have been rejected or he needs to fork off from U-Boot. Or he
->> can ask the community to take over as the project head. If the community
->> wants Simon to run things, I will step down and just be an individual
->> contributor again. Five months of this experiment shows me that it's not
->> working at all and will only be a bigger problem as time goes on.
-> 
-> FWIW I think you are doing an excellent job and I'd like the situation
-> to remain as is.
 
-I'm backing Ilias and Casey here, you're doing an excellent job, maintaining
-such project is difficult and you do the job.
 
-Neil
-
+On 6/4/25 17:48, Raymond Mao wrote:
+> This patch is to solve the sandbox building error:
+> $ make O=build-sandbox -s sandbox_defconfig
+> $ make O=build-sandbox -s -j2
+> /usr/bin/ld: /tmp/u-boot.27rzOu.ltrans58.ltrans.o: undefined reference to symbol 'pthread_kill@@GLIBC_2.2.5'
+> /usr/bin/ld: /lib/x86_64-linux-gnu/libpthread.so.0: error adding symbols: DSO missing from command line
+> collect2: error: ld returned 1 exit status
+> [...]
 > 
->>
->> And, I mean it. I cannot take the additional stress of what new problems
->> await me every morning. I do not take the above lightly, but I do not
->> think the project can become healthy moving forward without some
->> resolution here and quickly. While I won't claim my time as the head of
->> the project has been perfect, I have tried my best to always be honest
->> and fair and to seek compromise.
->>
->> With respect to voting, would anyone volunteer to run a poll from
->> https://civs1.civs.us/ (which is used by the Yocto Project /
->> OpenEmbedded and likely other FOSS projects/communities) ?
+> Fixes: b989f9ed9fe1 ("test: lib: add initjmp() test")
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2:
+> - update fixes tag in commit message.
 > 
-> Thanks
-> /Ilias
->>
->> --
->> Tom
+>  arch/sandbox/config.mk | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
+> index dd9b7473fa9..9a61e803a57 100644
+> --- a/arch/sandbox/config.mk
+> +++ b/arch/sandbox/config.mk
+> @@ -3,7 +3,7 @@
+>  
+>  PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
+>  PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
+> -PLATFORM_LIBS += -lrt
+> +PLATFORM_LIBS += -lrt -lpthread
+>  SDL_CONFIG ?= sdl2-config
+>  
+>  # Define this to avoid linking with SDL, which requires SDL libraries
 
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+Thanks,
+-- 
+Jerome
