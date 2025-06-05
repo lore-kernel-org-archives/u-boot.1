@@ -4,84 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B1D0C5AE59
-	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 14:29:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4AAC5B543
+	for <u-boot@archiver.kernel.org>; Thu,  5 Jun 2025 14:30:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83393803DF;
-	Thu,  5 Jun 2025 16:29:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id DC7F18091A;
+	Thu,  5 Jun 2025 16:30:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="yjkunNmo";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="QPG5bJJB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FD618091A; Thu,  5 Jun 2025 16:29:40 +0200 (CEST)
-Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
- [IPv6:2a00:1450:4864:20::541])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98B9081FEE; Thu,  5 Jun 2025 16:30:17 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1507B80050
- for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 16:29:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CEC480050
+ for <u-boot@lists.denx.de>; Thu,  5 Jun 2025 16:30:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ed1-x541.google.com with SMTP id
- 4fb4d7f45d1cf-604f26055c6so4387147a12.1
- for <u-boot@lists.denx.de>; Thu, 05 Jun 2025 07:29:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1749133777; x=1749738577;
- darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1aQQeMzxMcH4UxpGxGdpd5cR/uT/3UYR49rcQndKx7k=;
- b=yjkunNmohFh0VpePsnFsgxTxHccuEQnJY9Yh8llvwuC9AGcLpY6yXHrGUizPqEx/r+
- S/ApdXELS4XsSLacyIFmMmqrjt8yBwA2Jx9dURu152ZK523ryOu6h/iBWfT7EBWq6IUT
- se6XqxZtnxu7tSTRpgvzhp65GrjGzpljF0SnjUFw6gxHvU5t51XCsU/ExulKQ5Kx2Cyx
- ggufctx7yheb6k9udPKFXn2knH5oFEyZWMNa6N9LKbDL+lrUlSq4EOCWZkssevHZS9QJ
- vtZsvaWyPc2+NyaGczWKUevtmwI4mY5AjAqOWHCIwVtgXp3vPYQl7Zzf2Gg3AqBG0Ajd
- qCyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749133777; x=1749738577;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=1aQQeMzxMcH4UxpGxGdpd5cR/uT/3UYR49rcQndKx7k=;
- b=WDxUQQ15MRWAGUXbWuXjzx45R6A/qmt7rHpHnGyD3ZDyvpsLmtU0Dh5md59m0toB3u
- Weu9An2342ivQE8FXYVvbiCt2Aec88hFv/lUwbTsDhBpEKbG+p2YGdEOBgWUM84KWmGm
- jwZInNVw2LBHkJJyBUPXvObb1b+vrutLI8itqK7FX6MouFBngsP2JmFutE/K0qdwuGmZ
- j3WqU+TAq6Z6fpWzktYlneRSQIN89Ao4y5EieL6dPOS0GZ9hGRB5QFW/IQ1R3GJ2UuLY
- ZDjVJdbuKx3+HBmne/JSnv63t/bQN0PoscIaRogTzBZ1yRb2IZLagUc2Ss8CYPx3/iEr
- K1vQ==
-X-Gm-Message-State: AOJu0Yyquissb2GNhK8uLL/TzrPvIC8U/+cp6KYv+TydQ53DlGH5HoCJ
- XbjeJ5s6WzNVCid64ALu39HsS6Ap3ZxpCqwZNw42tOwBJjerf4UZZWHtSc9CJplJme1rYoqk+pV
- SclAWNfLCV7uWsg==
-X-Gm-Gg: ASbGncvGbhl6Cbr1uTLyBhq5tmfwi6zlrzxAfs4RvSZ1LjBmAxZt4LVfxG8l8vgiE76
- BwgMwKk+LZgHMJzr9Ur4im1thsTS9XUriEGuagcYrdsze+4ndWoAAgUr/d5Wv1xhT6CNF+Ip+40
- saU5lNujM0qC9Sn8VpxVbjUUh0Zm7sXH8yqya/6Z8libl5fgz+6zwoxzXCheStMwC4IeQR0ents
- xC1vDku/qTM4m/yxiom9OI5ECphSFaFbzC1H/nOZZ8FqGQqusqwCjgzf/Pvl+DdIlv9GEcLpSNf
- sc+EtAPHM/XZAAqXyjoaakoVjV+WnbZA0Mpf9nSI+0/JowgrIyDVDpZQsEpg8sdRFmBg+25ydHN
- zRA==
-X-Google-Smtp-Source: AGHT+IG3TwlAjPJfYIj7aGV1CNb9UbnbaZQbD0SuCkHedtpw/75DlJkG8wymgzKq+y4Kp2D15ZHOHg==
-X-Received: by 2002:a17:907:3d05:b0:add:fa4e:8a6a with SMTP id
- a640c23a62f3a-ade07606d5emr368738566b.10.1749133777237; 
- Thu, 05 Jun 2025 07:29:37 -0700 (PDT)
-Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ada5d7ff080sm1287825166b.11.2025.06.05.07.29.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jun 2025 07:29:36 -0700 (PDT)
-Message-ID: <8ab256b6-7469-4d14-878c-ec379943fa3e@monstr.eu>
-Date: Thu, 5 Jun 2025 16:29:35 +0200
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 4840E25BB6;
+ Thu,  5 Jun 2025 16:30:15 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OOoiP4Hp9lwV; Thu,  5 Jun 2025 16:30:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1749133814; bh=OUlfHbpMMf9h2s4u27JwUSmr/YUsFWnl/zxFXPeNi6g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=QPG5bJJBZe/rRX/OvBg04oOukm3uAFBjb2LpQEsiqdR4eYhfjS35K66OHxdxotifE
+ SZGfdRRKtwJpEwPqMlt05JrpZdSURCMAQxnH7HXZovjZWTfWFNxLK89vh4VIOPHyLe
+ ZdJzdMSbs65EkhnegkEQlmxkFESXUMHAjV7KGFiHA51pwQCu3X34lU1CabC9BMxq1g
+ 9sJhRQ5pLBF0rDL4GN+qovJqKXqGWVBLAm+iEoqaJnHaQNPnYQgjiE3cdef/zpw/Vq
+ Y/4XYDeUpM61GWdfPlcrxQOWk6rcNtrtt5L30RU49uHrMnXmhKTWpeneuudTWoUIi3
+ 93SU8e8wcgGqQ==
+Date: Thu, 5 Jun 2025 14:29:52 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>
+Subject: Re: =?utf-8?B?5Zue5aSNOiDlm57lpI06IFtQQVRD?= =?utf-8?Q?H=5D_bootm?=
+ =?utf-8?Q?=3A?= Pass SMP core ID and DTB address for ELF-formatted kernels
+Message-ID: <aEGp4KEprzOSyOF8@pie.lan>
+References: <ME0P300MB13096732AF44AC5409B9D0D49F96A@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
+ <CAFLszTgpYgVfrf4P189tcNM7xOvoiVjMu_sP1nrP+FGfAYHYSw@mail.gmail.com>
+ <28BD711D-9449-46DA-AD38-8142B0CAF7AB@gmx.de>
+ <20250523222926.GZ100073@bill-the-cat>
+ <fbe649de-dc78-4ef3-8204-95020ff2cf45@gmx.de>
+ <SY3PPF5E5ED63A94E67F10470722CA5B3529F66A@SY3PPF5E5ED63A9.AUSP300.PROD.OUTLOOK.COM>
+ <20250529154923.GL100073@bill-the-cat>
+ <ME0P300MB13099B02B4C316E4784D23529F6FA@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] amd/xilinx patches for v2025.07-rc4
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ME0P300MB13099B02B4C316E4784D23529F6FA@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,74 +79,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Jun 05, 2025 at 08:04:28AM +0000, 牛 志宏 wrote:
+> Yes, this is a new OS currently being developed with plans to support Linux compatibility.
+> Registers a0 and a1 pass the boot core ID and DTB address respectively, following a de facto standard shared by both the SBI (RISC-V Supervisor Binary Interface) specification and the Linux implementation.
+> My rationale is: if U-Boot supports the combination of kernel + ELF loading, why shouldn't we implement this capability as well?
 
-please pull these fixes to your tree. CI is not showing me any issue with them.
+Do you mean passing arguments according to the convention of Linux even
+when booting ELF stuff?
 
-Thanks,
-Michal
+TBH, it should be easy to turn your ELF into an Linux-style Image...
 
+> 
+> ________________________________
+> 发件人: Tom Rini
+> 已发送: 2025 年 5 月 29 日 星期四 23:49
+> 收件人: 牛 志宏
+> 抄送: Heinrich Schuchardt; Simon Glass; u-boot@lists.denx.de; Leo Yu-Chi Liang; Rick Chen
+> 主题: Re: 回复: [PATCH] bootm: Pass SMP core ID and DTB address for ELF-formatted kernels
+> 
+> On Thu, May 29, 2025 at 09:33:56AM +0000, 牛 志宏 wrote:
+> > hi team,
+> >
+> > The ITS file looks something like the following, and the kernel is not a standard Linux kernel:
+> > ```
+> > /dts-v1/;
+> >
+> > / {
+> >     ...
+> >     images {
+> >         kernel {
+> >             type = "kernel";
+> >             arch = "riscv";
+> >             os = "elf";
+> >             ...
+> >         };
+> >
+> >         fdt {
+> >             type = "flat_dt";
+> >             arch = "riscv";
+> >             ...
+> >         };
+> >     };
+> >     ...
+> > };
+> > ```
+> >
+> > To handle this scenario, we need to:
+> >
+> >   1.
+> > Access the values of the `type`, os, and arch fields stored in bootm_headers->image_info to determine the current context.
+> >   2.
+> > Access the boot_hart and ft_addr stored in the gd variable to update argc and argv.
+> >
+> > Not sure whether accessing the bootm_headers and gd variables in lib/elf.c is allowed or safe.
+> So this is why I was asking if there's some more generalized
+> specification we can reference. Is the OS you're using something
+> pre-existing and so we need to do what it already expect from some other
+> loader? Or is it something you're also creating and if so, why not
+> follow the linux kernel convention for compatibility?
+> 
+> --
+> Tom
 
-The following changes since commit b22a276f039f818d5564bec6637071cfc8a7e432:
-
-   image: android: fix ramdisk default address (2025-05-30 13:44:05 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2025.07-rc4
-
-for you to fetch changes up to 77b053502f396e83f6a0ea38d747d6836dc501f0:
-
-   usb: onboard-hub: Fix return type for regulator APIs (2025-06-04 10:24:16 +0200)
-
-----------------------------------------------------------------
-AMD/Xilinx/FPGA changes for v2025.07-rc4
-
-usb:
-- Fix regulator handling
-
-net:
-- Fix MII clock handling
-
-phy:
-- Fix GTR line logic for sgmii
-
-pci:
-- Fix pcireg_base logic
-
-fpga:
-- Fix change handling in intel_sdm_mb driver
-
-----------------------------------------------------------------
-Frantisek Bohacek (1):
-       phy: zynqmp: Fix sgmii clk ctrl GTR lane bit shift
-
-Martin Kaistra (1):
-       net: gem: ignore tx_clk if MII is used
-
-Naresh Kumar Ravulapalli (1):
-       drivers: fpga: intel_sdm_mb: Flush cache before FPGA configuration
-
-Padmarao Begari (1):
-       usb: onboard-hub: Fix return type for regulator APIs
-
-Venkatesh Yadav Abbarapu (1):
-       pci: zynqmp: Fix the pcireg base
-
-  common/usb_onboard_hub.c      | 12 +++++++-----
-  drivers/fpga/intel_sdm_mb.c   |  7 +++++++
-  drivers/net/zynq_gem.c        | 14 ++++++++------
-  drivers/pci/pcie-xilinx-nwl.c |  7 +++++++
-  drivers/phy/phy-zynqmp.c      |  6 ++++--
-  5 files changed, 33 insertions(+), 13 deletions(-)
-
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
-
+Regards,
+Yao Zi
