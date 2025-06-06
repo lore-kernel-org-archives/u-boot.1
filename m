@@ -4,102 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F170C5B559
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 09:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D2EC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 09:45:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4107A82AFC;
-	Fri,  6 Jun 2025 11:33:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 027E181FEE;
+	Fri,  6 Jun 2025 11:45:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AQSd7LKy";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IAmWfcNt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A338082AE9; Fri,  6 Jun 2025 11:33:16 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0FD2E828F8; Fri,  6 Jun 2025 11:45:20 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4594882AA7
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 11:33:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F157803DF
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 11:45:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a50fc819f2so1497467f8f.2
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 02:33:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749202392; x=1749807192; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EEjue6a//58KimZBKjkj7bMaZyR7hvKl1178M90j21k=;
- b=AQSd7LKyTAxhOyDu9TFEUWK9pk+8oJJsGtvIG7ONbLitF7lSBKpuzc+qzJdtzovbmW
- gzeWfFs8XvHloonLSEhmNAefgv4s3+gPzt5VmgHMTjdTEErINPmanvM+NQcNGKFdXZYn
- wxiLLOZAIfOQJr0TZVHfmNasmOXKK6by/eiBTOTBD1kCvglq1etRjKg5Fti0q8YZblqf
- 5bMT5Oa18y/5ElAPz5+0hBqQ6df7+doOvM9Ro3V9hwR790xellfF3YfihqxvCNtDh66y
- nq0YWAQwpWtLymj8NvH9LaGTzOgF2jArbtbbUIU+oPN9Bh2MU7CXZGsRp3eHLlaxx7Us
- Zqpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749202392; x=1749807192;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EEjue6a//58KimZBKjkj7bMaZyR7hvKl1178M90j21k=;
- b=NdbJKExGDi3B8+pJUylaM6yfKEPx/kM8MjD58IOBN7iVHwuhSlhd7oZC0Gv0UM0u8f
- Bv4hOwS1vE/J6W1AEuJc+wRolLDxX8aA5MeWoBgFW0reFvy+2cVjd6gfyiDHfDskKzPn
- W9VgNg675AmM4pNA71gxKcN407tXTuPkENRbAW2pPUlv6tGF67N7B9/KVsnRMVRAHYlA
- KWUItqZs349wiEsSegNqlWqGYAse0ARtM11fd2McFRlcR7BslvFo0KVLbw1U6bRAaRSB
- PjN/T41TPqUXJ0eluPZczgxewPvhMynHyMHhCc/dnbn0CK2Vir7bYvLlWbQbjbfMU/wh
- 20Lg==
-X-Gm-Message-State: AOJu0YyB7awZrOMIBUR3y2RPG1T6jwSMaUNBT3oY03CixVl8hNLTBAXQ
- j9RaTZMPD8KJCHUjGQWvCgghM4vsJj0/MyqYKaoI/kygUT80M1qRbM11AFo2CaSk6lQ=
-X-Gm-Gg: ASbGncu1U1lO2Dc4RSuX4C4C946CW5HG57FfcnrZMgA0GzBAcmi4DDxBr00Fa2lm51g
- fYpkxqlbF0U70EKz2VXQDRk45ni+nFqoYX+UOj7T0yLfMOgvSRAYTOzqb333rRY+6RY1OeolJ2C
- AIAlCKenjXKKQ051qdqGb6yygTQ+AnSThn+uMvTsBW85RTj3Yq4XbtIqOiqUz2p62mhk/IYRrQS
- oMHFSHe+odn5N/b80EPGf4THuQ+xzcU4MD/7TMYl2rraA8iZnAHTFsAao2GUzXnUiBLB7BX5kUy
- YPh6hmyrAjcdv4lFHI7rActbJ75IC2g2bL8Ae66+E3+QUbjwEUoQg0zgAcAJkxuGjepFd/Td8Oy
- FTtwR2Wpx7ab5iXqPdg==
-X-Google-Smtp-Source: AGHT+IGqbCXELRvv/zPcoiuQDu/8ArQiUtzYi4ymZ8Zhnxifqato5cNm95lwvJQ5f+jzrJHJQTbhMA==
-X-Received: by 2002:a05:6000:288c:b0:3a4:f7e6:2b29 with SMTP id
- ffacd0b85a97d-3a53188d91emr2516776f8f.5.1749202391555; 
- Fri, 06 Jun 2025 02:33:11 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a532452d7esm1302439f8f.85.2025.06.06.02.33.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 02:33:11 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 06 Jun 2025 11:33:08 +0200
-Subject: [PATCH RFT v5 2/3] fastboot: blk: switch emmc to use the block helpers
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=b4ttrw8qoWJL+GKF0RrEdSgcQpS+D9rJaZk40bUUOM98JxMwRPtggGjSyzdpDNbxDzZkROl+tnbqeEePgLA2Axwj+Tav/ur7y1nnMQCpPi0gf74BmCgBgNOo1PO/1uYuux9A2Hamk//jourht1AF3dbn6JX4/wu7UBGM4SY5+njw/UDa2JFUgnJ04my4c0JVVw4lelYOSucxD/AyNwEFR3kdRvmRm0n8f8wx8HgFnTy6qUH2NmOJ4sCwOBJIjrFgLlONNG/sZXe9c1W56D4F4GtXXUlpSfDcRda7g7iwFlnlgjtFg+eHsh7tQKdAgZqjgGJ1HAgz046A0YdGVO1xjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tlA6FQnbl4Gi9LpOcYVs48LvMDbFzOfy8DRTdt1XTYQ=;
+ b=jlP5I5VCfVZSfU7cei7D6ZtKBO4F7OBC1i1eg01mwjVsoEZq1AJfvcb8VMsvlN1aubNtPx7+cAXEx26yWe+nVGTmoeZ6NQdUJRhrm2JDE421gaTeTwpCOPf+GSkVxiHUNPngGiDwwpa+IRRYgsVwlcRtZfs5DUP7d2+I23SiPBvpb24mr8ga+lic0llTSvRPlQWmqHArmcuG6asRi5nKhSF1WAaVL4BpdKRSbHOjZJQYBHYbF8kACtTWcme778QiMWohROInhIXhZKIWxhBVvPaImqpU7YvtVKSxMwsfHPAIj1C8haP0FqRp+DYIO3XttvQ3g160VsbUvTn/hj9Rdw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tlA6FQnbl4Gi9LpOcYVs48LvMDbFzOfy8DRTdt1XTYQ=;
+ b=IAmWfcNtrzuDQn4e07Hh5P/nWnVA3+R8G4Roqj7mx6OFc3pz1PX27QWjSuYxWju+H7xcO1QF79q9Kx0Doc1kGXL9BSGu+zWey9m0+ML4AllhU6CzY81PEGtLNhm47LgFwhNRl0Dc1fmrxY2dhp7GImJF8wHPt/F6EwDe3W87gMA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DBBPR04MB7962.eurprd04.prod.outlook.com (2603:10a6:10:1e7::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.22; Fri, 6 Jun
+ 2025 09:45:12 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8813.020; Fri, 6 Jun 2025
+ 09:45:12 +0000
+Message-ID: <a2f93b49-aea5-4bc2-881a-11d3d85e4dc3@cherry.de>
+Date: Fri, 6 Jun 2025 11:45:11 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] env: mmc: fix offsets relative to the end of the
+ partition
+To: Michael Walle <mwalle@kernel.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250605074610.1424953-1-mwalle@kernel.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250605074610.1424953-1-mwalle@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250606-topic-fastboot-blk-v5-2-203538ec5b32@linaro.org>
-References: <20250606-topic-fastboot-blk-v5-0-203538ec5b32@linaro.org>
-In-Reply-To: <20250606-topic-fastboot-blk-v5-0-203538ec5b32@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>, 
- Dmitrii Merkurev <dimorinny@google.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9409;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=i00E8Gtz4m/2fVqy2mO1ocM94d9KHU3NlieYR42vMkk=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoQrXVLpt6ojtulDyuOFQhgBTD5/r9ZbxDX/NYN1xk
- bDjirQuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaEK11QAKCRB33NvayMhJ0V6UD/
- 47veE8LWE2Z9YvK3QgMwsb3Mr/dywTFzhjlfjSGtwY9NIAeyltwF7sR40mpbH0ZCDai8lrcZFSa1MW
- igczZIaJrcQh7WRkJVkj1uzGiwXIfqEDcX999kaBJDBLJLFJDYIYhdAdJ4U85HL8PdHHlWgh9yV4l3
- 1ttCDTOKhQVm2dqWr9hip9QwyLhEusFy8CvzjkldpF+cJyCVjqnFi9j/nUo4xtoaTt/aXtd6CpGvH7
- rNWCcSrAYxJRKPCb5OjCzIRGLE3oA6U3iRLd4TruDOA/X/i1hEQKODGlx+fz0OiI5+2rFNyHsArNY+
- 8kRuW0h5A16LY6XLed8kXiIAuUPDwXyL/vJmj4jqRXnY/x1hS/2Ics0bWBr8wGhtoe3fDcmQJe9zi9
- rtEBdgAqn5iH50LwwxvJ2Rhd0hr5TN5VoECKCEhaJ4YYBs3C+HTeXbHzjrNKW0+/tfV0RgFXF9SRuu
- psfWYDglat8wjDIVGGDldUhjONbfy8PV/p+R07nCCyMO2bTL8xBesXI+pz0SkUaPzcqM8woW+fhpV1
- QzRVKmwyHOJBH0ucZdpb2yxWmhKyg5jk28RS5WZsjEhJgcQjbMrMSjrvG/a04gawM2jg1tZ5Fq6M2Z
- ZTnEfNu2EE7n12gFhZLwHAbANzZwfrT0nPSbPKgVVuX2gAm/68Uv1gV+8FdQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-ClientProxiedBy: LO4P123CA0547.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:319::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBBPR04MB7962:EE_
+X-MS-Office365-Filtering-Correlation-Id: ba115775-9a4c-49b7-1074-08dda4ded547
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WnNmOUZvN0FFbnJpNXR2NnpOellQUTZzcEFJN1krSmc3NCtvNTU0ZFRBUE1L?=
+ =?utf-8?B?WVgrQ21ZZXp6d2tpN2dJdFd3S2RtMDVOTzltdDJWVXZ3cFczcURoOG5USmw5?=
+ =?utf-8?B?RnMvdVJ1bWRvd3p0S3ova0ZRQVRCdUhtMXJaTHRnWnhYNjBFSlpKdG1jYWxv?=
+ =?utf-8?B?NWlzVXgwQ2kzWTVGQkNTQTZyZ0I1d3NEUmM1VHRoVHl3d3BUaTl2MTNxd1Ux?=
+ =?utf-8?B?RUNTM0d6Zmhkdzkwd2ZYTjJCamtJaFpEbmVaSUIrN3NRSU1sZHdxZFlOL2ZB?=
+ =?utf-8?B?UUh2SGIvbG9OVjNWMEk0YndSdTlLRkVRQVBzNFZTTXdkRXBPN3NSaDgzOWFK?=
+ =?utf-8?B?b1gwN0lvd2JHclFpdVZCM0Z4ZkZKTmk1S2NJOEY2U2lPLzIvc0hudGNtOVFT?=
+ =?utf-8?B?cFAvL0dHSXl2MDBSRlA5dDA4VTczc2NrL2NpM0FYbC8xb0s1d1laZUZoOFp1?=
+ =?utf-8?B?Q29XMTZXWlVOcVdXLzNKU0dDckJPSnpJa1FhZVQxUUNOTlRabVozQjB4bis0?=
+ =?utf-8?B?S2ZLOU55TzErWG9aNXVETWxHSDUvTTdxUUFLSFI5aFl5eHkzVElHRmhJQVUr?=
+ =?utf-8?B?YXo5UDIycEVSMEZRSjAvOVA1bUtvRTJOT2ZLeW1xY2orZ3JCYXFLeEliUFRy?=
+ =?utf-8?B?WFpmRnRCV3cwQWJIUE84TzNoVGkzZmR5TmQwcmYvemVyQkM5ei9GZWlYRUsz?=
+ =?utf-8?B?U2ZYdllFTXZIRDZTSVl1M1FnMlNZT25rVUdrRWkwOWordTUxNU41V3FqUWNU?=
+ =?utf-8?B?NVFpWE04MkNIMFg5dEhrVmZKT0lrQVgvTEpMcTljdEdwWjRwb3BvbnhPbXBN?=
+ =?utf-8?B?aW5LRGxheXVuUnJLd2JrUFA2eHBFQXBKV0p1WXdXMXNHZ29MZGQ0NGhCVXpw?=
+ =?utf-8?B?QmJWdDFGOVQramh6RFBDc2s1NHROMVFtVGphU1E0TkVpRy9SdCtHa0JDSGRj?=
+ =?utf-8?B?NWM3MVNVazZYS3NSb3FKWEZuWHMyakZQdUdxUXVwMDdtdWttWU55MzY2anJQ?=
+ =?utf-8?B?MUdrSjZuZHZkMXlBVUdqYU5HREVzcFJMWDVHQ21WVmtyRjk5QzR3RG1WV2xD?=
+ =?utf-8?B?a25hemZZYjZtcitMbXN5TlhQU3BiRW1XK1h5WWh3WmxOTFJHYUl5ZUhGeTV5?=
+ =?utf-8?B?YkJpWEdXdGZ6TkNKUU5HNmcyYkpWNVVoOUxKWm1nMG5xdytmMS9kZ1VaUXgw?=
+ =?utf-8?B?cU5mdVNpTGlhSUNOL2kwOWxucjM5UDJBVWpEZkxwd1pHTzc3ZFdwbktkVW9T?=
+ =?utf-8?B?THVHMUdEK2JSdzk4bllnK0szWWVyYWZFN0JRYTJXeWhrRkt4ZW1Wd011ZmlF?=
+ =?utf-8?B?Z1A5d3hKTnI1RnI4U3JCZEVrWkIySjF4QVpWSU90WmZwTlNGQ3BZWmkvRHNm?=
+ =?utf-8?B?cDllREFEL1h1cVFVWjd6ZXdaZ2M0emJJemx3M2V3UVpJWEZyR0Q1bjV0ZkhI?=
+ =?utf-8?B?T2hrblQ2QkZCc3RJN0tPYU9UV3libVdxQm1mUTBha2JKQnI5Lzc0QXdYVkVz?=
+ =?utf-8?B?RE5aalNhSXlzQ2tJVExZMEZmeUIrRXVCWE5uMDVGcytBZTNTdGtlc3F3M2dp?=
+ =?utf-8?B?Qnh4aHFTS2w0ZzlaTDJYV1EwS2l4SWdiR1prNFZMTG1BY25XWmxBUVVrRTBT?=
+ =?utf-8?B?QUVPaVVoUmRHUXF6bFBKR1owWDBab1RBNFVQT0dRMjdZUDZ6TVExUnYwS1V6?=
+ =?utf-8?B?Q0ZlWFpMTS9HcXBSUmFXeE9TWUM4UHVvK21nLzEzenVpNmFVQU9IOHFsM1Vr?=
+ =?utf-8?B?WmFXV284T0hDSmpieTQycWxlc1M0bkpNejV3WWhpVm96UWErekpORlRUSURK?=
+ =?utf-8?B?WmQ5TXBUQnlublpubTFwYlcwdkFWNDA1YUIyMlQ4blV3RUZHUnBHZ3NiYjFU?=
+ =?utf-8?B?QlhjdVhqRi9UY3VIYjZaZ1NvcTN5Z2dHZVhwTzg3R1NMN3FNVHJUVUFZVC9Z?=
+ =?utf-8?Q?r1rsCv5ZTVo=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TTEvL0FXdE1icWtWZmtRampTUExsVXNMRXRCbTRrenBhUDE1KzBSWnJZZC9m?=
+ =?utf-8?B?SEphREk0OEdKVmJIN3NNcXcrM3F3VGNrKzlJaEJWWHcxS0hLMUllWDZ3S1lX?=
+ =?utf-8?B?VjQ0QWRKSU5rOUVFa0g4ZG9ZazIwWVRHem01QXpSRDJieHFRZ3JKUE8rOUNo?=
+ =?utf-8?B?SEw4dHN5clp2enprS2M3dXp5NndtdVppVGhjUUNzbXdtaGpjUmZrdys1ME1P?=
+ =?utf-8?B?cHZZaVhSWGpPTG9ROUhuUW82OEY3Z2JYOGVGdHlUOXNaRmQzbkR6aDlIV24r?=
+ =?utf-8?B?ZUFSRTAvNzFpMGVXZloyRG1DamVvendYUlRYTlpKV1ZkTlN0NjhBMWEwdEh1?=
+ =?utf-8?B?MFoxVXR5S3NIVmtucDhqMUVrQkRMNjlZSmU0RmVnWHF0YWx4QlowdW9wV3VI?=
+ =?utf-8?B?TXppS2xxU1RyTkVpMzFueS83Z0I5YjdUOWQ1STl6TkxOcVNvenB6cW9ENnNv?=
+ =?utf-8?B?M3p0S0tCaTNycW5lejZiU3M0dE8xc3NIdHZJRnVQMldWUkJlU2VDaVZDdWFa?=
+ =?utf-8?B?ZEJyM20va1pZNzFUL0JUWi9UZThCNkJIME1TWTh3RkM1Mzk4bXp3Z0RYZlps?=
+ =?utf-8?B?TEpSNGFpME52U00ycGZ4SXRveXdycUVxVGY5ZG95ZDJkWDNYd280QzNkK3FO?=
+ =?utf-8?B?MXZ5TVVtNWtwYzN4VzR2Y25WZDB2NnhHRGN1cW94UU9rNi9uT3NYd25YWWVz?=
+ =?utf-8?B?R0wxZ1dpbiszZXlqUS9zeEJJVEQ2SzQwTGZHeThPcnNqZnNVRXRHVm9NbVJF?=
+ =?utf-8?B?a1BXckRqNkZZaVFHQlJXY1BZb3ErZGN5UktPQ09MczRQQXJDd3lIdmFtekJQ?=
+ =?utf-8?B?czJCeE1NMUsySTFEV2ZUbFEyQzRPbXZzWWVKSkZXRnk3Rm0rbWJFYk9hSlNw?=
+ =?utf-8?B?NzNRRDVnSzcwRUkvSTNxNEd6SHFvZzBpMVRSSGRyYWIrZzdlTHRoaVM5MnlL?=
+ =?utf-8?B?dk9nazBwTVJ3cmtDcjJzOWNWL2IxSHZDZnpjaFBxdXBjS3NFdEdSWUh0S291?=
+ =?utf-8?B?TERDT016KzhRaDIrOEZkY3lJOVNFSHBYZzRHT1l4a05yTzYraXlQOHl2Q0J4?=
+ =?utf-8?B?dFFKMDZ1WThLdFExOUR3RXdkWUU3MTdvT3plc0xuSSt2VjJTUm83S0tBb1J1?=
+ =?utf-8?B?TlU1dUNYRlpUYXZKYlRBa09XU0hhUkIxd2NuUW1qZk1LMTJBRExCbklGVXFL?=
+ =?utf-8?B?VDUxL2hWOUtWRDAxYVZpMXA4aVNZdzlYditmTUpxb0dWYU5KNk9weUhkOTQ2?=
+ =?utf-8?B?RU5EbG5tTVhaWnpjV2Jjd0ZqTFlvVnB5cE5YNm1BbWZhb2VqSy9lcGx0M0pZ?=
+ =?utf-8?B?SjQyM3YzcGVmell4L3JLdHkrY1FObWowM3Z4V2pqa2JxL3Q0OVI1Vy9rYlRu?=
+ =?utf-8?B?OHkvMXhxMnZPdDgwczdUa2pvakVMV2pZcXBPR0lqRHVnSmRUaHpERjJqSE00?=
+ =?utf-8?B?YVMxVFBUbUtjVm9Ubi8vZTZtN0JkYThPWlNIQUJFVkt3UHBsT1Q5WExFR2ow?=
+ =?utf-8?B?c1RmckJoWGlXMkFvUEljajIvaHFvY2xoOVhLWVloU05JMCs5VzhhU0NkZ3M2?=
+ =?utf-8?B?djc0S05wc0FQalV1NkVTVS9VZWtLQ0VkUWFuSjJZRm0yY2tlNS9BdTZPdXk4?=
+ =?utf-8?B?T2NGalBmQ2JaYUVXaEh3ZmNrbUdPend4V1c1bEdFTlpJeVhXcTcvYW5uRGRS?=
+ =?utf-8?B?VkdidU5VQ0wrblR1cUllS0N1QzNOcUNNTVh5am1YMGpROGJuSStBM256ZXZK?=
+ =?utf-8?B?TmRTVDJLazRJV3ZEekl4aTNiT3R4U2dNd1M2L0l4TzZ3Vm5jMUdUYUJMRzVY?=
+ =?utf-8?B?ZGxPK01TdFpQYmRucnJISVNFUTJnYk1nZkdyU2gxZTFpNlVSbGhoN0tUUkMx?=
+ =?utf-8?B?QmNoUGNkeFpIVGNER2ZLQ3JKek95Rlo4ektsZ1RrdGtFdkhsQ2Z0UEd4TElV?=
+ =?utf-8?B?WEp2ZXlUWm9uNnVRekszN0tXbkowVmlUcGV5aDJhR1dIUXBjZW5POG01dVRE?=
+ =?utf-8?B?N0UyMDVEZzIzcGIyamZVd215OHRlSS8xTjhEZFlzZHNyb0FDTEtka3prQ0J2?=
+ =?utf-8?B?S3RkNmU2cjNCdEx4K0hHT1lIbitKSVl4SzNyTTNKOENsNUM1UWZGRUtQNTZx?=
+ =?utf-8?B?aUYyYWh4Njd5NmRteURqUENITEJObUpYaFpGZ2JHY0IxbUlzbm1tSktnL2RU?=
+ =?utf-8?B?eGc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ba115775-9a4c-49b7-1074-08dda4ded547
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 09:45:12.5781 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /8LuuDJq05ezjyltVbsmDZlaLgWts+Qav8JR8nRRj6XDl9RijK7POvLnS0YVLwxN48O67tzIlZ/M3b28uK+iQT7H5NpyJYDRuhbg7P7IAHk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7962
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,306 +176,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dmitrii Merkurev <dimorinny@google.com>
+Hi Michael,
 
-Switch the mmc backend to this new shared block helpers,
-reducing block logic and only leaving MMC specific logic.
+On 6/5/25 9:46 AM, Michael Walle wrote:
+> According to the help text, you can set negative offsets to indicated
 
-Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/fastboot/Makefile |   3 +-
- drivers/fastboot/fb_mmc.c | 210 +++-------------------------------------------
- 2 files changed, 14 insertions(+), 199 deletions(-)
+s/indicated/indicate/
 
-diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-index 048af5aa823436956142a536c5f7dcf1a8948726..c2214c968ab357371f5d3d27ecc9c1a3e9404e89 100644
---- a/drivers/fastboot/Makefile
-+++ b/drivers/fastboot/Makefile
-@@ -3,5 +3,6 @@
- obj-y += fb_common.o
- obj-y += fb_getvar.o
- obj-y += fb_command.o
--obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
-+# MMC reuses block implementation
-+obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
- obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
-diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
-index dca7c222f35659b22d327541b245760a6a6d7b35..11d9c8e84602c7434733c060b84c91c38772ac9f 100644
---- a/drivers/fastboot/fb_mmc.c
-+++ b/drivers/fastboot/fb_mmc.c
-@@ -8,6 +8,7 @@
- #include <env.h>
- #include <fastboot.h>
- #include <fastboot-internal.h>
-+#include <fb_block.h>
- #include <fb_mmc.h>
- #include <image-sparse.h>
- #include <image.h>
-@@ -20,10 +21,6 @@
- 
- #define BOOT_PARTITION_NAME "boot"
- 
--struct fb_mmc_sparse {
--	struct blk_desc	*dev_desc;
--};
--
- static int raw_part_get_info_by_name(struct blk_desc *dev_desc,
- 				     const char *name,
- 				     struct disk_partition *info)
-@@ -114,118 +111,10 @@ static int part_get_info_by_name_or_alias(struct blk_desc **dev_desc,
- 	return do_get_part_info(dev_desc, name, info);
- }
- 
--/**
-- * fb_mmc_blk_write() - Write/erase MMC in chunks of FASTBOOT_MAX_BLK_WRITE
-- *
-- * @block_dev: Pointer to block device
-- * @start: First block to write/erase
-- * @blkcnt: Count of blocks
-- * @buffer: Pointer to data buffer for write or NULL for erase
-- */
--static lbaint_t fb_mmc_blk_write(struct blk_desc *block_dev, lbaint_t start,
--				 lbaint_t blkcnt, const void *buffer)
--{
--	lbaint_t blk = start;
--	lbaint_t blks_written;
--	lbaint_t cur_blkcnt;
--	lbaint_t blks = 0;
--	int i;
--
--	for (i = 0; i < blkcnt; i += FASTBOOT_MAX_BLK_WRITE) {
--		cur_blkcnt = min((int)blkcnt - i, FASTBOOT_MAX_BLK_WRITE);
--		if (buffer) {
--			if (fastboot_progress_callback)
--				fastboot_progress_callback("writing");
--			blks_written = blk_dwrite(block_dev, blk, cur_blkcnt,
--						  buffer + (i * block_dev->blksz));
--		} else {
--			if (fastboot_progress_callback)
--				fastboot_progress_callback("erasing");
--			blks_written = blk_derase(block_dev, blk, cur_blkcnt);
--		}
--		blk += blks_written;
--		blks += blks_written;
--	}
--	return blks;
--}
--
--static lbaint_t fb_mmc_sparse_write(struct sparse_storage *info,
--		lbaint_t blk, lbaint_t blkcnt, const void *buffer)
--{
--	struct fb_mmc_sparse *sparse = info->priv;
--	struct blk_desc *dev_desc = sparse->dev_desc;
--
--	return fb_mmc_blk_write(dev_desc, blk, blkcnt, buffer);
--}
--
--static lbaint_t fb_mmc_sparse_reserve(struct sparse_storage *info,
--		lbaint_t blk, lbaint_t blkcnt)
--{
--	return blkcnt;
--}
--
--static void write_raw_image(struct blk_desc *dev_desc,
--			    struct disk_partition *info, const char *part_name,
--			    void *buffer, u32 download_bytes, char *response)
--{
--	lbaint_t blkcnt;
--	lbaint_t blks;
--
--	/* determine number of blocks to write */
--	blkcnt = ((download_bytes + (info->blksz - 1)) & ~(info->blksz - 1));
--	blkcnt = lldiv(blkcnt, info->blksz);
--
--	if (blkcnt > info->size) {
--		pr_err("too large for partition: '%s'\n", part_name);
--		fastboot_fail("too large for partition", response);
--		return;
--	}
--
--	puts("Flashing Raw Image\n");
--
--	blks = fb_mmc_blk_write(dev_desc, info->start, blkcnt, buffer);
--
--	if (blks != blkcnt) {
--		pr_err("failed writing to device %d\n", dev_desc->devnum);
--		fastboot_fail("failed writing to device", response);
--		return;
--	}
--
--	printf("........ wrote " LBAFU " bytes to '%s'\n", blkcnt * info->blksz,
--	       part_name);
--	fastboot_okay(NULL, response);
--}
--
--#if defined(CONFIG_FASTBOOT_MMC_BOOT_SUPPORT) || \
--	defined(CONFIG_FASTBOOT_MMC_USER_SUPPORT)
--static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
--{
--	lbaint_t blks;
--
--	debug("Start Erasing mmc hwpart[%u]...\n", dev_desc->hwpart);
--
--	blks = fb_mmc_blk_write(dev_desc, 0, dev_desc->lba, NULL);
--
--	if (blks != dev_desc->lba) {
--		pr_err("Failed to erase mmc hwpart[%u]\n", dev_desc->hwpart);
--		return 1;
--	}
--
--	printf("........ erased %llu bytes from mmc hwpart[%u]\n",
--	       (u64)(dev_desc->lba * dev_desc->blksz), dev_desc->hwpart);
--
--	return 0;
--}
--#endif
--
- #ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
- static void fb_mmc_boot_ops(struct blk_desc *dev_desc, void *buffer,
- 			    int hwpart, u32 buff_sz, char *response)
- {
--	lbaint_t blkcnt;
--	lbaint_t blks;
--	unsigned long blksz;
--
- 	// To operate on EMMC_BOOT1/2 (mmc0boot0/1) we first change the hwpart
- 	if (blk_dselect_hwpart(dev_desc, hwpart)) {
- 		pr_err("Failed to select hwpart\n");
-@@ -233,42 +122,11 @@ static void fb_mmc_boot_ops(struct blk_desc *dev_desc, void *buffer,
- 		return;
- 	}
- 
--	if (buffer) { /* flash */
--
--		/* determine number of blocks to write */
--		blksz = dev_desc->blksz;
--		blkcnt = ((buff_sz + (blksz - 1)) & ~(blksz - 1));
--		blkcnt = lldiv(blkcnt, blksz);
--
--		if (blkcnt > dev_desc->lba) {
--			pr_err("Image size too large\n");
--			fastboot_fail("Image size too large", response);
--			return;
--		}
--
--		debug("Start Flashing Image to EMMC_BOOT%d...\n", hwpart);
--
--		blks = fb_mmc_blk_write(dev_desc, 0, blkcnt, buffer);
--
--		if (blks != blkcnt) {
--			pr_err("Failed to write EMMC_BOOT%d\n", hwpart);
--			fastboot_fail("Failed to write EMMC_BOOT part",
--				      response);
--			return;
--		}
--
--		printf("........ wrote %llu bytes to EMMC_BOOT%d\n",
--		       (u64)(blkcnt * blksz), hwpart);
--	} else { /* erase */
--		if (fb_mmc_erase_mmc_hwpart(dev_desc)) {
--			pr_err("Failed to erase EMMC_BOOT%d\n", hwpart);
--			fastboot_fail("Failed to erase EMMC_BOOT part",
--				      response);
--			return;
--		}
--	}
--
--	fastboot_okay(NULL, response);
-+	if (buffer) /* flash */
-+		fastboot_block_write_raw_disk(dev_desc, "EMMC_BOOT",
-+					      buffer, buff_sz, response);
-+	else /* erase */
-+		fastboot_block_raw_erase_disk(dev_desc, "EMMC_BOOT", response);
- }
- #endif
- 
-@@ -609,30 +467,11 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
- 		return;
- 
- 	if (is_sparse_image(download_buffer)) {
--		struct fb_mmc_sparse sparse_priv;
--		struct sparse_storage sparse;
--		int err;
--
--		sparse_priv.dev_desc = dev_desc;
--
--		sparse.blksz = info.blksz;
--		sparse.start = info.start;
--		sparse.size = info.size;
--		sparse.write = fb_mmc_sparse_write;
--		sparse.reserve = fb_mmc_sparse_reserve;
--		sparse.mssg = fastboot_fail;
--
--		printf("Flashing sparse image at offset " LBAFU "\n",
--		       sparse.start);
--
--		sparse.priv = &sparse_priv;
--		err = write_sparse_image(&sparse, cmd, download_buffer,
--					 response);
--		if (!err)
--			fastboot_okay(NULL, response);
-+		fastboot_block_write_sparse_image(dev_desc, &info, cmd,
-+						  download_buffer, response);
- 	} else {
--		write_raw_image(dev_desc, &info, cmd, download_buffer,
--				download_bytes, response);
-+		fastboot_block_write_raw_image(dev_desc, &info, cmd, download_buffer,
-+					       download_bytes, response);
- 	}
- }
- 
-@@ -646,7 +485,6 @@ void fastboot_mmc_erase(const char *cmd, char *response)
- {
- 	struct blk_desc *dev_desc;
- 	struct disk_partition info;
--	lbaint_t blks, blks_start, blks_size, grp_size;
- 	struct mmc *mmc = find_mmc_device(CONFIG_FASTBOOT_FLASH_MMC_DEV);
- 
- #ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
-@@ -673,10 +511,7 @@ void fastboot_mmc_erase(const char *cmd, char *response)
- 		if (!dev_desc)
- 			return;
- 
--		if (fb_mmc_erase_mmc_hwpart(dev_desc))
--			fastboot_fail("Failed to erase EMMC_USER", response);
--		else
--			fastboot_okay(NULL, response);
-+		fastboot_block_raw_erase_disk(dev_desc, "EMMC_USER", response);
- 		return;
- 	}
- #endif
-@@ -685,26 +520,5 @@ void fastboot_mmc_erase(const char *cmd, char *response)
- 		return;
- 
- 	/* Align blocks to erase group size to avoid erasing other partitions */
--	grp_size = mmc->erase_grp_size;
--	blks_start = (info.start + grp_size - 1) & ~(grp_size - 1);
--	if (info.size >= grp_size)
--		blks_size = (info.size - (blks_start - info.start)) &
--				(~(grp_size - 1));
--	else
--		blks_size = 0;
--
--	printf("Erasing blocks " LBAFU " to " LBAFU " due to alignment\n",
--	       blks_start, blks_start + blks_size);
--
--	blks = fb_mmc_blk_write(dev_desc, blks_start, blks_size, NULL);
--
--	if (blks != blks_size) {
--		pr_err("failed erasing from device %d\n", dev_desc->devnum);
--		fastboot_fail("failed erasing from device", response);
--		return;
--	}
--
--	printf("........ erased " LBAFU " bytes from '%s'\n",
--	       blks_size * info.blksz, cmd);
--	fastboot_okay(NULL, response);
-+	fastboot_block_raw_erase(dev_desc, &info, cmd, mmc->erase_grp_size, response);
- }
+> that the offset is relative to the end of the parition. But kconfig
 
--- 
-2.34.1
+s/parition/partition/
 
+> doesn't let you specify negative hex values. I think this fell through
+> the cracks when converting the symbol from a '#define' to a kconfig
+> option.
+> 
+
+Maybe a Fixes: tag would be nice there, but since we don't have stable 
+releases like the kernel, not sure it matters much :)
+
+> Introduce a new boolean kconfig option to switch on the "relative to the
+> end" behavior.
+> 
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
+
+Not sure about the ramifications, but the change looks reasonable to me, so:
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Maybe we should have some test for that to make sure it works as 
+expected and keeps working as expected?
+
+Thanks!
+Quentin
