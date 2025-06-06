@@ -4,92 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278E1C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 14:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E05BC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 14:26:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BBBE82A65;
-	Fri,  6 Jun 2025 16:25:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C87F82B07;
+	Fri,  6 Jun 2025 16:26:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YGUst84M";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xyFwCRvG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75C5382A8D; Fri,  6 Jun 2025 16:25:10 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id AF36082B0E; Fri,  6 Jun 2025 16:26:08 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCBEE800C1
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 16:25:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C981782A8D
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 16:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-4067b7d7e52so607326b6e.2
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 07:25:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-3109f106867so2638994a91.1
+ for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 07:26:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749219906; x=1749824706; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=B42cbZ4QB8q4O2fqZti/XpRi8fngdKbrfsce0JXm98E=;
- b=YGUst84MoRzEbAq/BYovE4d6/6Djslke43v8K70GeTym2vGriKrNvLDEPD3sefB+2c
- Zn9k/2n0sSppZxxATOKW4s8tRpuMpxsRBajlPMcU0zdGvsKRwClbTZvDgaTXd4u0AJ9C
- xmkAcFnJghlcFf0jpPWJfGynJC534mu1IGFqw=
+ d=linaro.org; s=google; t=1749219963; x=1749824763; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ebw1QUtu7m8c9W2vxW/FFrks2UkZHIyBWJQRROhJNPA=;
+ b=xyFwCRvGDW9VrWojSdmx5eNz2uDNdIsb96w1t68MaQhzjf/nRiHnTy9ecGJW0j32qS
+ seQqas5ss6mS/MUBWWLvDuMWR175NKnhCmIV5gEx7vFUHnRHfxJ76Uu9y9tzsxAELJkS
+ otX0wMmqBkJCWkvuL+3NtNfQ8tA9uKGSBt/Rd0kE2rWldBQ4Qkt0ItyJ2NP/7kD21s5t
+ 1sD9fNabnw+8h99DvgI9P2WiG0yXXpccls14R9+eFhRStIm1jkhThdQEiRkiTdiYu0+e
+ 3fDaltEZ7uuwBCACKM8aAoEyUUQ1uAV0HmMl0C1udS3UUWEg9GxgUXQx/OJwxejIkGqm
+ qQPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749219906; x=1749824706;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B42cbZ4QB8q4O2fqZti/XpRi8fngdKbrfsce0JXm98E=;
- b=Aa8W2+ivYOc6D25nGaJGNytXvB30gXe7H0VfNP0Dg5elHz6xTkeXj4hDN596ZAe2T7
- NPMQ3bZR46Z2yviCkwVq/vGex0nCMlp9WX32WHoWPoZct4Y5wGKBcu7QX+pet3tToXE3
- FYFXGzHDoG4rlBlrX2HpSX7vE4gRnhwgWzW6l53NTvJaa/OctL8dSuBszhLL/bZH+0jk
- /9VJGe2yRfyquw1juV5me6Q+Q3UBFdsnQM0aXTKFVqoU3IdW3ptj4kNU9eUIF7Zox8+5
- ZitKj8av8U5sAL+Ae7TZj+X0xMkE7oVnbUBrEfirv9LX/Esh5GHr7qmlMs50tvXvVnxs
- syMA==
+ d=1e100.net; s=20230601; t=1749219963; x=1749824763;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ebw1QUtu7m8c9W2vxW/FFrks2UkZHIyBWJQRROhJNPA=;
+ b=B9QbLUoeAok6QG5TAggfX1/aktTBtYHlFDt1lqcuk+LghUtCA7HlaW8UOlGL0sOY1m
+ UWqD+8PbSDlbQBpSYU1C5Z67ns01Krmjo3YYUrhITT8IblTeNe8u5/Moc44qipWrtwDo
+ l42iy5atP1dkYgV/ySh3PKbnJSeooi/Pufms1bYknJFdW3U1XH0+i4P0YnGKc+24OKmD
+ dxKWqy2LfJuaxFsCNmvWoHysdILsemR1g4RKS3xxkcqlz5qZENtV7bvyeUOlnivlWEwM
+ Ju8uY3945Jn/4n6FllJ73KWDhfVjkVTOCwAZKrBHquFtWVe7T7TaFyxku2YFizvH3v2r
+ 47sQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV72jHeWNfTqKjOxt3DDtY1yIYlg8NaWPkGqYBW1P74UL/CwFQXleyrOJPehATgd56DnZ1b7uE=@lists.denx.de
-X-Gm-Message-State: AOJu0YztqkwhjQaqW71eyQfEHZTmLDa9AQH5WHMBicYo6xTWc4tlNxto
- kI7Vkydj31rgn5RyIdt8vVx90GcPJPx1EJ9xCGQFpSfzWxpoiquYyAPIecUzeEaBg1Y=
-X-Gm-Gg: ASbGnctY/J8FiFQNXiVGMMgzJXYi6C6EUPvQhzYvlqulfp/Ao8PHYQB01Jl6w4hAzFD
- 0Dd3gT/NkHcsHLsKULX6hcIgeoNq+3j9plm/De492zHV88Zx1b8SHkLv6r2ltceMxjBoAdFg+LP
- W68uwwh7EX3FWBwNWiCWKxlIQzH2MBw/tSL4U6KH+I/VW4QQ8KYPri1w+KKtic0xWfAOYnewPev
- IRAXe8+aykC3hQHIhYVxuNHA3jI6UCjP7L80dTm9++Fx6gWJUg5D3fCmaONg45j30HL1NUJ3FTQ
- O7gWK2u8COlw1PkNLkZaxADlTLD0jAnmxS4FrSnd5uF9U7FofCaugPcVkRNUMMJ6tMVzMcKrGAG
- cPlwN5CZZDzaS
-X-Google-Smtp-Source: AGHT+IGktLSbKySCx3uwzGmEP7BqE5gzAJkW/YcOh7mgmUei+2L8korxAlIWqbjUcufhej2eCgtt+g==
-X-Received: by 2002:a05:6808:640e:b0:404:dad4:f95f with SMTP id
- 5614622812f47-40905220eefmr2618401b6e.31.1749219906266; 
- Fri, 06 Jun 2025 07:25:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4090692dfffsm313462b6e.2.2025.06.06.07.25.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 07:25:05 -0700 (PDT)
-Date: Fri, 6 Jun 2025 08:25:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Mattijs Korpershoek <mkorpershoek@redhat.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Dmitrii Merkurev <dimorinny@google.com>
-Subject: Re: [PATCH RFT v4 3/3] fastboot: integrate block flashing back-end
-Message-ID: <20250606142503.GR1382132@bill-the-cat>
-References: <20250522-topic-fastboot-blk-v4-0-af7f7f30564d@linaro.org>
- <20250522-topic-fastboot-blk-v4-3-af7f7f30564d@linaro.org>
- <20250522143958.GJ100073@bill-the-cat>
- <b83cfc3a-39e6-4710-a6ac-c24c878052cc@linaro.org>
- <20250605142126.GV1382132@bill-the-cat>
- <3d86cf5f-028c-4858-b292-5233b7194c60@linaro.org>
- <877c1ptjvp.fsf@kernel.org>
- <78f0a868-bc30-4a7b-817e-2e1618d46736@linaro.org>
+ AJvYcCXTL46hDt4yTiRHyFk+JrBk3gK72nKrbt9T5EUp0kx+x3frk87ljggcdz4vk9suxBx+Vq9yMdQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0i7g9bdu4wb2m1WJEmOq/VVDDyuiGFw1erb88tpXBiTiLmoFR
+ JUNa1SHLtzP/9z9rykG1tc/jDWwVYmPjp+7Yi7N9KOpIMlNYWBobzbcTEEq7rsulrmmNIXNirKf
+ MNGiK0a4quTclxzBqLBKFHisxQ9hIyH4MvReQLwHc6gMahD8hTqm1YbM=
+X-Gm-Gg: ASbGnct2ZQDmbABB13I+sCeGhy4/KzdjVwCwtHfaDLed1vDjQ35xwL+0qQ39GXHlJK+
+ p0FbYxSyZNzmkkHmSsYSP7LMWSt4JysTRSngRC6lXrWZu6eyEdzHPX6VsHwmnyR/IZJR3Te0QaZ
+ A+sb/FarkSS17e65NsHORqOh+3nBJti0c5ig==
+X-Google-Smtp-Source: AGHT+IHxTKTyeQ9TOOLO09/K3rvE8KbmSDZKg3vBdkhkbzB7ybfXUJ1raOm0GDHpfcVjJL/p0IDCM/jBlcrcGc25ErY=
+X-Received: by 2002:a17:90b:55ce:b0:311:abba:53d2 with SMTP id
+ 98e67ed59e1d1-31346b56c43mr6287696a91.17.1749219963235; Fri, 06 Jun 2025
+ 07:26:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XrNPX9gr/9svpDqa"
-Content-Disposition: inline
-In-Reply-To: <78f0a868-bc30-4a7b-817e-2e1618d46736@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250603144258.1701265-1-raymond.mao@linaro.org>
+ <20250605171538.GC1382132@bill-the-cat>
+ <CAEfUkU+Xp1bkHRWkBSzbF+S5VewB2E4_dXr+LU-+WAtOgvPLLQ@mail.gmail.com>
+ <20250605200117.GD1382132@bill-the-cat>
+ <CAEfUkU+ns2XGb7J8WP+uD5SuxkQfdzZxPD+axN-J-xoLVzndyA@mail.gmail.com>
+ <20250605214655.GG1382132@bill-the-cat>
+ <CAEfUkUKR-zZ124VsOX31KNer6EiDKyXgO=oF2L2YwUOgf40CEg@mail.gmail.com>
+ <c114ac9f-bcce-4dbb-bf32-1825d455240d@linaro.org>
+In-Reply-To: <c114ac9f-bcce-4dbb-bf32-1825d455240d@linaro.org>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 6 Jun 2025 10:25:50 -0400
+X-Gm-Features: AX0GCFvX74V1t45w2xkOt5iJGX_oWiTXC8E4RB5bBGqskyTElmzipdOTqodjz2E
+Message-ID: <CAEfUkULJ0_MzuDHecAHPL6zEb6yuEkajagTEqa8cLef56osf5g@mail.gmail.com>
+Subject: Re: [PATCH v2] makefile: fix Clang link error when
+ RSA_PUBLIC_KEY_PARSER is selected
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Sam Edwards <cfsworks@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Prasad Kummari <prasad.kummari@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,146 +111,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jerome,
 
---XrNPX9gr/9svpDqa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 6 Jun 2025 at 02:58, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+>
+>
+> On 6/6/25 00:10, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Thu, 5 Jun 2025 at 17:46, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Thu, Jun 05, 2025 at 04:52:20PM -0400, Raymond Mao wrote:
+> >>> Hi Tom,
+> >>>
+> >>> On Thu, 5 Jun 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
+> >>>>
+> >>>> On Thu, Jun 05, 2025 at 03:45:00PM -0400, Raymond Mao wrote:
+> >>>>> Hi Tom,
+> >>>>>
+> >>>>> On Thu, 5 Jun 2025 at 13:15, Tom Rini <trini@konsulko.com> wrote:
+> >>>>>>
+> >>>>>> On Tue, Jun 03, 2025 at 07:42:55AM -0700, Raymond Mao wrote:
+> >>>>>>
+> >>>>>>> MbedTLS bignum module needs '__udivti3' which is a 128-bit division
+> >>>>>>> function provided by the compiler runtime, typically libgcc for GCC or
+> >>>>>>> clang_rt.builtins for Clang.
+> >>>>>>> Thus 'clang_rt.builtins' library is required when building using Clang.
+> >>>>>>>
+> >>>>>>> This patch supports the location layout of clang_rt.builtins libraries
+> >>>>>>> from both LLVM pre-15 pattern [1] and post-15(up to 20) pattern [2].
+> >>>>>>>
+> >>>>>>> As a fact that starts from LLVM 20, no official prebuilt multi-targets
+> >>>>>>> are included and users might need to cross-built it from source. [3] is
+> >>>>>>> an example of instructions for building.
+> >>>>>>>
+> >>>>>>> [1] <INST_DIR>/lib/clang/<REV>/lib/linux/libclang_rt.builtins-<ARCH>.a
+> >>>>>>> E.g.
+> >>>>>>> lib/clang/14.0.0/lib/linux/libclang_rt.builtins-aarch64.a
+> >>>>>>> lib/clang/14.0.0/lib/linux/libclang_rt.builtins-x86_64.a
+> >>>>>>>
+> >>>>>>> [2] <INST_DIR>/lib/clang/<REV_MAJOR>/lib/<CROSSTOOL>/libclang_rt.builtins.a
+> >>>>>>> E.g.
+> >>>>>>> lib/clang/20/lib/aarch64-none-linux-gnu/libclang_rt.builtins.a
+> >>>>>>> lib/clang/20/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
+> >>>>>>>
+> >>>>>>> [3]
+> >>>>>>> git clone https://github.com/llvm/llvm-project.git
+> >>>>>>> cd llvm-project
+> >>>>>>> git checkout -b llvmorg-20.1.6 llvmorg-20.1.6
+> >>>>>>> mkdir build-builtin && cd build-builtin
+> >>>>>>> cmake -G Ninja ../llvm \
+> >>>>>>>   -DCMAKE_BUILD_TYPE=Release \
+> >>>>>>>   -DCMAKE_C_COMPILER=clang \
+> >>>>>>>   -DLLVM_ENABLE_PROJECTS="clang" \
+> >>>>>>>   -DLLVM_ENABLE_RUNTIMES="compiler-rt" \
+> >>>>>>>   -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
+> >>>>>>>   -DLLVM_BUILTIN_TARGETS=\
+> >>>>>>>     "x86_64-unknown-linux-gnu;aarch64-none-linux-gnu" \
+> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSTEM_NAME=Linux \
+> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_C_COMPILER=\
+> >>>>>>>     <YOUR_TOOLCHAIN_GCC> \
+> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_ASM_COMPILER=\
+> >>>>>>>     <YOUR_TOOLCHAIN_GCC> \
+> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSROOT=\
+> >>>>>>>     <YOUR_TOOLCHAIN_LIBC_DIR> \
+> >>>>>>>   -DCOMPILER_RT_BUILD_BUILTINS=ON \
+> >>>>>>>   -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+> >>>>>>>   -DCOMPILER_RT_BUILD_XRAY=OFF \
+> >>>>>>>   -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
+> >>>>>>>   -DCOMPILER_RT_BUILD_PROFILE=OFF \
+> >>>>>>>   -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> \
+> >>>>>>>   -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
+> >>>>>>> ninja builtins
+> >>>>>>> sudo ninja install
+> >>>>>>>
+> >>>>>>> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
+> >>>>>>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> >>>>>>
+> >>>>>> I think that newer versions don't even ship this moves us further away
+> >>>>>> from a solution here as all of the logic. I think we need to look at the
+> >>>>>> suggestion of just importing the assembly version of the function.
+> >>>>>
+> >>>>> But, the assembly versions are architecture-specific, do you want a
+> >>>>> portable C code for it?
+> >>>>
+> >>>> Is it easily done in C? If not, we can just try and make it clear what
+> >>>> needs to be pulled out of LLVM sources if/when another platform
+> >>>> encounters the problem.
+> >>>>
+> >>> But maybe we can ask the LLVM project owner why they removed the
+> >>> prebuilt multi-targets since 20.0.0.
+> >>> May current patch can support multiple target layouts of pre-15 and
+> >>> post-15 patterns (I believe they will keep the one of post-15 for the
+> >>> future), if they can provide the prebuilt multi-targets via package
+> >>> managers or release tarballs then it is the best solution.
+> >>> In the future we might need other functions from those libraries and
+> >>> implementing it in U-Boot is not a good choice IMO.
+> >>
+> >> I think adding all of that logic to the Makefile is taking us down the
+> >> wrong path. Looking at the kernel, they're working with LLVM to be able
+> >> to disable these 128bit intrinsics currently (as part of rust support).
+>
+> Good to know.
+>
+> >> So hopefully we just need some temporary workaround until things get
+> >> fixed upstream.
+> >>
+> > I will try to implement a C code function as a temporary solution and
+> > be back shortly.
+>
+> To solve a similar issue in OP-TEE we decided to import a few files
+> unmodified from the LLVM compiler-rt tree, and that's plain C [1]. OTOH if
+> it's only a temporary solution, maybe a single C file can be put together.
+>
+Sounds good. I can put the same stuff under
+'<u-boot>/lib/mbedtls/port/compiler-rt'.
+Thanks for sharing.
 
-On Fri, Jun 06, 2025 at 11:23:54AM +0200, Neil Armstrong wrote:
-> On 06/06/2025 09:22, Mattijs Korpershoek wrote:
-> > On jeu., juin 05, 2025 at 19:48, Neil Armstrong <neil.armstrong@linaro.=
-org> wrote:
-> >=20
-> > > On 05/06/2025 16:21, Tom Rini wrote:
-> > > > On Thu, Jun 05, 2025 at 10:16:54AM +0200, Neil Armstrong wrote:
-> > > > > On 22/05/2025 16:39, Tom Rini wrote:
-> > > > > > On Thu, May 22, 2025 at 02:37:07PM +0200, Neil Armstrong wrote:
-> > > > > >=20
-> > > > > > > From: Dmitrii Merkurev <dimorinny@google.com>
-> > > > > > >=20
-> > > > > > > 1. Get partition info/size
-> > > > > > > 2. Erase partition
-> > > > > > > 3. Flash partition
-> > > > > > > 4. BCB
-> > > > > > >=20
-> > > > > > > Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> > > > > > > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > > > > > > Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> > > > > > > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> > > > > > > ---
-> > > > > > >     drivers/fastboot/Kconfig      | 29 ++++++++++++++++++++++=
-+++++++
-> > > > > > >     drivers/fastboot/Makefile     |  1 +
-> > > > > > >     drivers/fastboot/fb_command.c |  8 ++++++++
-> > > > > > >     drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
-> > > > > > >     drivers/fastboot/fb_getvar.c  |  8 +++++++-
-> > > > > > >     5 files changed, 63 insertions(+), 5 deletions(-)
-> > > > > >=20
-> > > > > > I know this was posted before I replied with more feedback mome=
-nts ago.
-> > > > > >=20
-> > > > > > [snip]
-> > > > > > > @@ -193,6 +197,31 @@ config FASTBOOT_MMC_USER_NAME
-> > > > > > >     	  defined here.
-> > > > > > >     	  The default target name for erasing EMMC_USER is "mmc0=
-".
-> > > > > > > +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
-> > > > > > > +	string "Define FASTBOOT block interface name"
-> > > > > > > +	depends on FASTBOOT_FLASH_BLOCK
-> > > > > > > +	default ""
-> > > > > > > +	help
-> > > > > > > +	  The fastboot "flash" and "erase" commands support operati=
-ons
-> > > > > > > +	  on any Block device, this should specify the block device=
- name
-> > > > > > > +	  like ide, scsi, usb, sata, nvme, virtio, blkmap, mtd...
-> > > > > > > +	  The mmc block device type can be used but most of the fea=
-tures
-> > > > > > > +	  available in the FASTBOOT_MMC will be missing.
-> > > > > > > +	  Consider using FASTBOOT_MMC on a MMC block device until a=
-ll
-> > > > > > > +	  features are migrated.
-> > > > > >=20
-> > > > > > A default like "" in order to un-stick configs that are now her=
-e and
-> > > > > > enabling the option is wrong. If we're enabling new functionali=
-ty for
-> > > > > > platforms, it needs to be configured correctly. This leads to b=
-uilding
-> > > > > > code on platforms that won't be used on the platform so we've l=
-ikely
-> > > > > > added run-time bloat for no benefit.
-> > > > >=20
-> > > > > I agree but what's the solution ? I'll prefer having no default a=
-s it was initially.
-> > > >=20
-> > > > No defaults is correct here, yes. It's just that the primary
-> > > > dependencies need to be fixed so that platforms don't get stuck on =
-the
-> > > > prompt on features they won't actually use either.
-> > > >=20
-> > > > Seeing what boards get stuck, and then having an idea on what
-> > > > dependencies trip them up is tricky. What I usually do in this
-> > > > situation, to see what platform is stuck on the prompt is:
-> > > > - In one terminal, fire off tools/qconfig -sC. Then wait for it to
-> > > >     seemingly be stuck with just one or two platforms left to finish
-> > > >     syncing.
-> > > > - In another terminal, 'ps uxwwww | grep make' to see what the build
-> > > >     directory of one of those stuck platforms is, then manually sav=
-e off
-> > > >     the .config file, begin investigation.
-> > > >=20
-> > > > That should provide what platform is asking this question and not h=
-aving
-> > > > a reasonable answer. Then it's a matter of seeing if it makes sense=
- for
-> > > > this platform to be here and so just needs to be migrated to this
-> > > > functionality or if it's here because of some dependency problem, f=
-or
-> > > > example what I was talking about in the previous part of this serie=
-s.
-> > > >=20
-> > >=20
-> > > Ok I can't reproduce the crash with the last version, somehow v4 fixe=
-d it,
-> > > and the changes I did still work:
-> > > https://source.denx.de/u-boot/custodians/u-boot-ufs/-/pipelines/26523
-> >=20
-> > Hmm, maybe v4 "fixed" it because we have:
-> >=20
-> > default 0 for FASTBOOT_FLASH_BLOCK_DEVICE_ID
-> >=20
-> > If you drop that, do you still not reproduce? (note that we don't care
-> > as much since we agreed upon using "default 0" for device id, but it's
-> > odd that the build issue is no longer there.
->=20
-> Yes confirmed I removed the "default 0" and it failed again.
+Raymond
 
-So the question is where does it fail, and are those platforms which
-want this feature (and a default of 0 is correct) or is this covering up
-an error (platform doesn't want / use this, but now builds it anyways
-and it's not configured correctly or usefully for the platform) ?
-
---=20
-Tom
-
---XrNPX9gr/9svpDqa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhC+j8ACgkQFHw5/5Y0
-tyznYwv4gaC1afYLxyyB/VC0RrFk3OrhkUWHXkMRAX9KkZeNrw2L9SnytX/nO3xy
-99Lw/le9+HY0LvPA24Oaqaw1odynllGlknKWN+lifYeDsmfq8An0FfUj+SvmmKZQ
-xHeJg9anulurvCnHefWlVe2JOn/8kshi8zt/KFguHlNJPGHxCq6+TgZzJn8DSrE6
-CL7eHPeJzjKt05hN/Dq19xvu5a6TMtdpt387DId4dEcdhm+KKqRZq5yWRWLT0196
-NOSDe648qwQszorYlPupzmbQIoEQpq+gSuM9AI0MUVU61b91rFJhp+n9vnRVHTGF
-JRnLlHvUjBI5PaqRSMvgsBsorHbZL6uzNJ6C4siAPlvfXBMwjYwXWdz0gr52qdmy
-S7POwW30fU9NLsJNLwWOWLr32BprdOQFNvQkt1RBwItJMsweCWDg1gfYUtsQxv7F
-ENBIFXfnngLDZoDNJM5+uSOQvgi1HqjNMsHzWJkHPm6a4YU0D4jXESVxaukANRRC
-KwWXvTM=
-=34Kz
------END PGP SIGNATURE-----
-
---XrNPX9gr/9svpDqa--
+> [1] https://github.com/OP-TEE/optee_os/commit/48952fd403d867dbf13675e062cd8a7d2e5260a9
+>
+> HTH,
+> --
+> Jerome
