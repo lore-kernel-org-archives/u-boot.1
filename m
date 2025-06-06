@@ -4,97 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E05BC5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 14:26:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EB8C5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 14:36:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C87F82B07;
-	Fri,  6 Jun 2025 16:26:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EC0B481F0D;
+	Fri,  6 Jun 2025 16:36:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xyFwCRvG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FijJd5kF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF36082B0E; Fri,  6 Jun 2025 16:26:08 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 9244382977; Fri,  6 Jun 2025 16:36:45 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C981782A8D
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 16:26:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61E8C800C1
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 16:36:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-3109f106867so2638994a91.1
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 07:26:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-4074997ce2bso621153b6e.3
+ for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 07:36:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749219963; x=1749824763; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ebw1QUtu7m8c9W2vxW/FFrks2UkZHIyBWJQRROhJNPA=;
- b=xyFwCRvGDW9VrWojSdmx5eNz2uDNdIsb96w1t68MaQhzjf/nRiHnTy9ecGJW0j32qS
- seQqas5ss6mS/MUBWWLvDuMWR175NKnhCmIV5gEx7vFUHnRHfxJ76Uu9y9tzsxAELJkS
- otX0wMmqBkJCWkvuL+3NtNfQ8tA9uKGSBt/Rd0kE2rWldBQ4Qkt0ItyJ2NP/7kD21s5t
- 1sD9fNabnw+8h99DvgI9P2WiG0yXXpccls14R9+eFhRStIm1jkhThdQEiRkiTdiYu0+e
- 3fDaltEZ7uuwBCACKM8aAoEyUUQ1uAV0HmMl0C1udS3UUWEg9GxgUXQx/OJwxejIkGqm
- qQPA==
+ d=konsulko.com; s=google; t=1749220601; x=1749825401; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nSEgG8R1Xf709JHRIV0dZqNc64Lv1jvHPK4q+Hl0KUc=;
+ b=FijJd5kF7Gku0jjJoW38DM51vXGYrBW7KqXLnEfbl9pE36EeZxj7iVXPeP4g8K+bNY
+ 6SyfJJnljPw8lz9ubl+wjGm9MDmzthvSkH2Tz/xWrmetmj8Z4DO990pbq6QFsw62uN2U
+ YxPPD9+CfD+IWmk128pH9tXSiyYrWGs9CysM8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749219963; x=1749824763;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ebw1QUtu7m8c9W2vxW/FFrks2UkZHIyBWJQRROhJNPA=;
- b=B9QbLUoeAok6QG5TAggfX1/aktTBtYHlFDt1lqcuk+LghUtCA7HlaW8UOlGL0sOY1m
- UWqD+8PbSDlbQBpSYU1C5Z67ns01Krmjo3YYUrhITT8IblTeNe8u5/Moc44qipWrtwDo
- l42iy5atP1dkYgV/ySh3PKbnJSeooi/Pufms1bYknJFdW3U1XH0+i4P0YnGKc+24OKmD
- dxKWqy2LfJuaxFsCNmvWoHysdILsemR1g4RKS3xxkcqlz5qZENtV7bvyeUOlnivlWEwM
- Ju8uY3945Jn/4n6FllJ73KWDhfVjkVTOCwAZKrBHquFtWVe7T7TaFyxku2YFizvH3v2r
- 47sQ==
+ d=1e100.net; s=20230601; t=1749220601; x=1749825401;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nSEgG8R1Xf709JHRIV0dZqNc64Lv1jvHPK4q+Hl0KUc=;
+ b=N1+U6uNfNpTsQbURJpcUs65yeX863F0GdU5zu5DyjfzJ41UN92Qvd9B3vod7PBTVeF
+ OmXvJPjL8FcO3mdPOUygprhrr0hh4MxbkrhgnqWN/sLkudo+xBWiS1h4tyt2C/SoBS7O
+ tFynACAHvi9tQd/24zPp8s3UOx212UYFTr4Hwz0/S618wZ0m347YfTd2UfKtrJTRd7kG
+ jyu4GE+UOtSAKpW1X6xYdO5X4yw/KNWPYJd1IhOV/EOG4m45DZmNX3Yaf9LfDcFQp6u3
+ EmtuFRwvP9AnKARoYwxkxap/Oz+yg7aRE2Iib6pnyz7+S72bEhrfxDmiqfWOLkH8+FwS
+ DDNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXTL46hDt4yTiRHyFk+JrBk3gK72nKrbt9T5EUp0kx+x3frk87ljggcdz4vk9suxBx+Vq9yMdQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0i7g9bdu4wb2m1WJEmOq/VVDDyuiGFw1erb88tpXBiTiLmoFR
- JUNa1SHLtzP/9z9rykG1tc/jDWwVYmPjp+7Yi7N9KOpIMlNYWBobzbcTEEq7rsulrmmNIXNirKf
- MNGiK0a4quTclxzBqLBKFHisxQ9hIyH4MvReQLwHc6gMahD8hTqm1YbM=
-X-Gm-Gg: ASbGnct2ZQDmbABB13I+sCeGhy4/KzdjVwCwtHfaDLed1vDjQ35xwL+0qQ39GXHlJK+
- p0FbYxSyZNzmkkHmSsYSP7LMWSt4JysTRSngRC6lXrWZu6eyEdzHPX6VsHwmnyR/IZJR3Te0QaZ
- A+sb/FarkSS17e65NsHORqOh+3nBJti0c5ig==
-X-Google-Smtp-Source: AGHT+IHxTKTyeQ9TOOLO09/K3rvE8KbmSDZKg3vBdkhkbzB7ybfXUJ1raOm0GDHpfcVjJL/p0IDCM/jBlcrcGc25ErY=
-X-Received: by 2002:a17:90b:55ce:b0:311:abba:53d2 with SMTP id
- 98e67ed59e1d1-31346b56c43mr6287696a91.17.1749219963235; Fri, 06 Jun 2025
- 07:26:03 -0700 (PDT)
+ AJvYcCV8NG81R8AAXrMXH2dI7Upz5oTU7quhCfBv5T7ToFyI8JaX1/rGb6Vs67DJNqL1n7Q1b35lwmc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyCxVJuq8+cXUVOEFbD/UCpbtnRECdbVLFhtfai4MDKvdSiUPlv
+ tGMjb3WAxX0l7MvY7BthXPvjkL+Fvo1/baVncxO9eX+TdtLIV5xwrsOL0RyhdLe2gV4=
+X-Gm-Gg: ASbGncuZMnHeYz0PERatw/QDB5/wKrA6lvXJeb4UMQ7D7Av14QN3tL7of+b/1wF2uI6
+ EvbtquRPmZUW094n4zy9eVTCQB+vWDT9v1ZoH8T4oW1mbE0N82byaWb9L/dhNoKImJ4UlQrLcu9
+ wo4D3N13/BHaxuzNln8UfKHgTz0QejtyT3IsKoME4qPTzLopoAHf1ufnK34Fq7khsRt2NofiOVO
+ C6WkI1zeh4mgPXuSElma9rHljBEzPgfJfoFP8WlVhh8W1cYYf7E1jUwbbaoInIOaxFnIRgByv1/
+ sEYHIXQHM2vH+vHAbnWMUD7VlVquAiD0ayebGnQf3t29MO4uC4YLjZzZ/Cx+mAuWN4266gN+ZDF
+ xb7LgWdtn6aAe
+X-Google-Smtp-Source: AGHT+IHcEnst4V0h+W3HA0zlq/BK8dRcv0gamf+x+xU2b5FbuBiXepYVS4Z3OSBnRG6qVA3EjkK5zg==
+X-Received: by 2002:a05:6808:3a0e:b0:3f9:aeb6:6eac with SMTP id
+ 5614622812f47-4090521fcdemr2324166b6e.30.1749220601270; 
+ Fri, 06 Jun 2025 07:36:41 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-409069f59absm314327b6e.23.2025.06.06.07.36.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Jun 2025 07:36:40 -0700 (PDT)
+Date: Fri, 6 Jun 2025 08:36:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
+ Dmitrii Merkurev <dimorinny@google.com>
+Subject: Re: [PATCH RFT v5 3/3] fastboot: integrate block flashing back-end
+Message-ID: <20250606143638.GS1382132@bill-the-cat>
+References: <20250606-topic-fastboot-blk-v5-0-203538ec5b32@linaro.org>
+ <20250606-topic-fastboot-blk-v5-3-203538ec5b32@linaro.org>
 MIME-Version: 1.0
-References: <20250603144258.1701265-1-raymond.mao@linaro.org>
- <20250605171538.GC1382132@bill-the-cat>
- <CAEfUkU+Xp1bkHRWkBSzbF+S5VewB2E4_dXr+LU-+WAtOgvPLLQ@mail.gmail.com>
- <20250605200117.GD1382132@bill-the-cat>
- <CAEfUkU+ns2XGb7J8WP+uD5SuxkQfdzZxPD+axN-J-xoLVzndyA@mail.gmail.com>
- <20250605214655.GG1382132@bill-the-cat>
- <CAEfUkUKR-zZ124VsOX31KNer6EiDKyXgO=oF2L2YwUOgf40CEg@mail.gmail.com>
- <c114ac9f-bcce-4dbb-bf32-1825d455240d@linaro.org>
-In-Reply-To: <c114ac9f-bcce-4dbb-bf32-1825d455240d@linaro.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 6 Jun 2025 10:25:50 -0400
-X-Gm-Features: AX0GCFvX74V1t45w2xkOt5iJGX_oWiTXC8E4RB5bBGqskyTElmzipdOTqodjz2E
-Message-ID: <CAEfUkULJ0_MzuDHecAHPL6zEb6yuEkajagTEqa8cLef56osf5g@mail.gmail.com>
-Subject: Re: [PATCH v2] makefile: fix Clang link error when
- RSA_PUBLIC_KEY_PARSER is selected
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Sam Edwards <cfsworks@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Prasad Kummari <prasad.kummari@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="P5jxo07+BunoDheW"
+Content-Disposition: inline
+In-Reply-To: <20250606-topic-fastboot-blk-v5-3-203538ec5b32@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,129 +99,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
 
-On Fri, 6 Jun 2025 at 02:58, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
->
->
-> On 6/6/25 00:10, Raymond Mao wrote:
-> > Hi Tom,
-> >
-> > On Thu, 5 Jun 2025 at 17:46, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Thu, Jun 05, 2025 at 04:52:20PM -0400, Raymond Mao wrote:
-> >>> Hi Tom,
-> >>>
-> >>> On Thu, 5 Jun 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
-> >>>>
-> >>>> On Thu, Jun 05, 2025 at 03:45:00PM -0400, Raymond Mao wrote:
-> >>>>> Hi Tom,
-> >>>>>
-> >>>>> On Thu, 5 Jun 2025 at 13:15, Tom Rini <trini@konsulko.com> wrote:
-> >>>>>>
-> >>>>>> On Tue, Jun 03, 2025 at 07:42:55AM -0700, Raymond Mao wrote:
-> >>>>>>
-> >>>>>>> MbedTLS bignum module needs '__udivti3' which is a 128-bit division
-> >>>>>>> function provided by the compiler runtime, typically libgcc for GCC or
-> >>>>>>> clang_rt.builtins for Clang.
-> >>>>>>> Thus 'clang_rt.builtins' library is required when building using Clang.
-> >>>>>>>
-> >>>>>>> This patch supports the location layout of clang_rt.builtins libraries
-> >>>>>>> from both LLVM pre-15 pattern [1] and post-15(up to 20) pattern [2].
-> >>>>>>>
-> >>>>>>> As a fact that starts from LLVM 20, no official prebuilt multi-targets
-> >>>>>>> are included and users might need to cross-built it from source. [3] is
-> >>>>>>> an example of instructions for building.
-> >>>>>>>
-> >>>>>>> [1] <INST_DIR>/lib/clang/<REV>/lib/linux/libclang_rt.builtins-<ARCH>.a
-> >>>>>>> E.g.
-> >>>>>>> lib/clang/14.0.0/lib/linux/libclang_rt.builtins-aarch64.a
-> >>>>>>> lib/clang/14.0.0/lib/linux/libclang_rt.builtins-x86_64.a
-> >>>>>>>
-> >>>>>>> [2] <INST_DIR>/lib/clang/<REV_MAJOR>/lib/<CROSSTOOL>/libclang_rt.builtins.a
-> >>>>>>> E.g.
-> >>>>>>> lib/clang/20/lib/aarch64-none-linux-gnu/libclang_rt.builtins.a
-> >>>>>>> lib/clang/20/lib/x86_64-unknown-linux-gnu/libclang_rt.builtins.a
-> >>>>>>>
-> >>>>>>> [3]
-> >>>>>>> git clone https://github.com/llvm/llvm-project.git
-> >>>>>>> cd llvm-project
-> >>>>>>> git checkout -b llvmorg-20.1.6 llvmorg-20.1.6
-> >>>>>>> mkdir build-builtin && cd build-builtin
-> >>>>>>> cmake -G Ninja ../llvm \
-> >>>>>>>   -DCMAKE_BUILD_TYPE=Release \
-> >>>>>>>   -DCMAKE_C_COMPILER=clang \
-> >>>>>>>   -DLLVM_ENABLE_PROJECTS="clang" \
-> >>>>>>>   -DLLVM_ENABLE_RUNTIMES="compiler-rt" \
-> >>>>>>>   -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
-> >>>>>>>   -DLLVM_BUILTIN_TARGETS=\
-> >>>>>>>     "x86_64-unknown-linux-gnu;aarch64-none-linux-gnu" \
-> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSTEM_NAME=Linux \
-> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_C_COMPILER=\
-> >>>>>>>     <YOUR_TOOLCHAIN_GCC> \
-> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_ASM_COMPILER=\
-> >>>>>>>     <YOUR_TOOLCHAIN_GCC> \
-> >>>>>>>   -DBUILTINS_aarch64-none-linux-gnu_CMAKE_SYSROOT=\
-> >>>>>>>     <YOUR_TOOLCHAIN_LIBC_DIR> \
-> >>>>>>>   -DCOMPILER_RT_BUILD_BUILTINS=ON \
-> >>>>>>>   -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
-> >>>>>>>   -DCOMPILER_RT_BUILD_XRAY=OFF \
-> >>>>>>>   -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
-> >>>>>>>   -DCOMPILER_RT_BUILD_PROFILE=OFF \
-> >>>>>>>   -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> \
-> >>>>>>>   -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF
-> >>>>>>> ninja builtins
-> >>>>>>> sudo ninja install
-> >>>>>>>
-> >>>>>>> Fixes: 13de8483388c ("mbedtls: add mbedtls into the build system")
-> >>>>>>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >>>>>>
-> >>>>>> I think that newer versions don't even ship this moves us further away
-> >>>>>> from a solution here as all of the logic. I think we need to look at the
-> >>>>>> suggestion of just importing the assembly version of the function.
-> >>>>>
-> >>>>> But, the assembly versions are architecture-specific, do you want a
-> >>>>> portable C code for it?
-> >>>>
-> >>>> Is it easily done in C? If not, we can just try and make it clear what
-> >>>> needs to be pulled out of LLVM sources if/when another platform
-> >>>> encounters the problem.
-> >>>>
-> >>> But maybe we can ask the LLVM project owner why they removed the
-> >>> prebuilt multi-targets since 20.0.0.
-> >>> May current patch can support multiple target layouts of pre-15 and
-> >>> post-15 patterns (I believe they will keep the one of post-15 for the
-> >>> future), if they can provide the prebuilt multi-targets via package
-> >>> managers or release tarballs then it is the best solution.
-> >>> In the future we might need other functions from those libraries and
-> >>> implementing it in U-Boot is not a good choice IMO.
-> >>
-> >> I think adding all of that logic to the Makefile is taking us down the
-> >> wrong path. Looking at the kernel, they're working with LLVM to be able
-> >> to disable these 128bit intrinsics currently (as part of rust support).
->
-> Good to know.
->
-> >> So hopefully we just need some temporary workaround until things get
-> >> fixed upstream.
-> >>
-> > I will try to implement a C code function as a temporary solution and
-> > be back shortly.
->
-> To solve a similar issue in OP-TEE we decided to import a few files
-> unmodified from the LLVM compiler-rt tree, and that's plain C [1]. OTOH if
-> it's only a temporary solution, maybe a single C file can be put together.
->
-Sounds good. I can put the same stuff under
-'<u-boot>/lib/mbedtls/port/compiler-rt'.
-Thanks for sharing.
+--P5jxo07+BunoDheW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Raymond
+On Fri, Jun 06, 2025 at 11:33:09AM +0200, Neil Armstrong wrote:
 
-> [1] https://github.com/OP-TEE/optee_os/commit/48952fd403d867dbf13675e062cd8a7d2e5260a9
->
-> HTH,
-> --
-> Jerome
+> From: Dmitrii Merkurev <dimorinny@google.com>
+>=20
+> 1. Get partition info/size
+> 2. Erase partition
+> 3. Flash partition
+> 4. BCB
+>=20
+> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  drivers/fastboot/Kconfig      | 29 ++++++++++++++++++++++++++++-
+>  drivers/fastboot/Makefile     |  1 +
+>  drivers/fastboot/fb_command.c |  8 ++++++++
+>  drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
+>  drivers/fastboot/fb_getvar.c  |  8 +++++++-
+>  5 files changed, 62 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+> index 70207573de2bd0d56b4b7fa6f7e17fdc5803ba15..75911468ba4980d9b96e2af9e=
+708f08b9ef16ac8 100644
+> --- a/drivers/fastboot/Kconfig
+> +++ b/drivers/fastboot/Kconfig
+> @@ -91,7 +91,7 @@ config FASTBOOT_USB_DEV
+>  config FASTBOOT_FLASH
+>  	bool "Enable FASTBOOT FLASH command"
+>  	default y if ARCH_SUNXI || ARCH_ROCKCHIP
+> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
+> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
+
+This is what's tricky. The symbol FASTBOOT_FLASH is default y for all
+ARCH_SUNXI and ARCH_ROCKCHIP platforms where FASTBOOT is enabled. Since
+looking in to effects here isn't super well documented, I'm going to be
+a bit more verbose here than I might otherwise just to have a post to
+refer back to later (possibly for adding to something under
+doc/develop/).
+
+So, tools/qconfig.py can be helpful here. If we use -b to first build
+the database of boards and CONFIG sybmols enabled, we can then do:
+$ tools/qconfig.py -f FASTBOOT ARCH_SUNXI BLK
+to get everything that is FASTBOOT and ARCH_SUNXI and BLK.
+We can also do:
+$ tools/qconfig.py -f FASTBOOT ARCH_SUNXI BLK ~FASTBOOT_FLASH
+To get the same as the above, but do not enable FASTBOOT_FLASH. This
+gives us the CHIP platform. This is going to be the one that now enables
+the new functionality. If we do the same but for ARCH_ROCKCHIP we get
+zero matches. So this is our culprit.
+
+This means the series, and this patch here needs to also disable the new
+functionality on the CHIP defconfig.
+
+--=20
+Tom
+
+--P5jxo07+BunoDheW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhC/O4ACgkQFHw5/5Y0
+tyzS7gv9HlfUZ3rY2XQj4vAqtmhX7Qx4vpYw4zJHORSyd0VV4wRx+CpT4PU8814N
++UO4mVjQt1SLQjXp17iMKjYCqeIISOZqK9rouY3lAk3do/bt2YHHCjSljFRm6WVO
+OPhKKuKpmgfiYVhvpsKMqayRGSTs+wR5GK/oANPrK/vqtJvJh+jwETcEL3MvReCQ
+kb8rKsKvzsEhDIcFTPfTY65SJWShMWo+Kzj3W2MmUnotfeG9UEtdJBzq0l6Nobn3
+sNN+3TdP6J6CZBPRVFdECFxkN04CTsKfhtEGsZGJNhGpKz8ExXovbJyTYlE38L5x
+cm7te76ROi9m+KFRZmeiBwGP2wRXMzYXuLV9jOhw8WjhfGa2f2iVagMut3kqJcz4
+SAmtWC51DU6Vv1qfnywrBkNHFbVwoM7OaDaBHhi2tnGd/fr8zVAIECF5Uet3LiDN
+LTN0NAShf8G2LJEKLyk5QJnCX69C98h7YXQx5Ol8uooxI3npT/9T5gpJdETxgbEb
+eoJ/PCHI
+=XFCQ
+-----END PGP SIGNATURE-----
+
+--P5jxo07+BunoDheW--
