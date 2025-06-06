@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6758C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 14:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B0DC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 14:21:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 346D381FEE;
+	by phobos.denx.de (Postfix) with ESMTP id 8824F82AF6;
 	Fri,  6 Jun 2025 16:21:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aBHRnmx7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CC6INXjo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 325DF81FEE; Fri,  6 Jun 2025 16:21:03 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 907A5800C1; Fri,  6 Jun 2025 16:21:04 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2733800C1
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 16:21:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91BD682A9E
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 16:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72ecb4d9a10so1971564a34.3
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 07:21:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-54d98aa5981so2700245e87.0
+ for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 07:21:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749219659; x=1749824459; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1fTuTViddeKQQA5qJyUZREIxCQig8NSdJWnG+0Qq988=;
- b=aBHRnmx73YNXm4tjw9vfMY6OEXRVpPJ+QK9y2bQp0Y4sOqKEJPCOTx/1cCsaWazADc
- zUEt/ItEbiySSM3Ao28eh3JdKxx3MU7WIbrjjMDq83jTJLh1WRRx4poRmYj4DnKvQYuN
- mE2B3M54dtAXBpc2fCpcI7j5pthJ/4cI81wC4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749219659; x=1749824459;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1749219662; x=1749824462; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1fTuTViddeKQQA5qJyUZREIxCQig8NSdJWnG+0Qq988=;
- b=aELQqApwQ5lsknUytTGuETPW01zTavvjLYxQleRr+if4gwc7eH8aEv0W6izf5G4Qt2
- 3A/Dcit3qdQI9VnCHplCdk7nZ+6QNgx2xvltIpLKuhBEryV6rXmU66yKX/Uv45wuVPrq
- XduJERE0jzWwnPtcqiJeF1MC2iupNncJaP47aEwcowXzqBISLOH0gmC5l87dH1WyfMCu
- 5k75zYe+TWgnk+E7ZdGprfQar3KpweWSCebfcG1XvfDWJCC39qd9MXzK6P5KTcl/r8aT
- oxHlLQRoErzRIUsSDGrtKQlEbx+dvGAEe+MDp+P68EYSSbLm0FoiXeJS+GIYmPn1dW7G
- jM7w==
-X-Gm-Message-State: AOJu0YwYoEecv+4DHogFEHZ0UX6UjuHdgo+/PUR/9WSaba0UJmYqXBxa
- PycUpW+S3E2EvkXImBPIP1opBzsFkFfxU8sGvo92+d6qOeJ3nn8jRU1eYJLjr5hg5u8/jQICZkc
- dun/9YfM=
-X-Gm-Gg: ASbGnct8dqyUNseYd9O0ZPPz0alayVV1Gm33xwsQewVQet4oZsubSH9piykMUN4HWED
- l/lVRUH5M6OJJYo0pw0H/WiQJaR/WC72i4wiTvPqj2Y/hXD5W/1De6lZrW7DWjzSikNa/xbY1mZ
- VcVDE++No84HLXfXKZksFt+W7BhTmgAtmIMCr2Y15tfBdLGPJjX03mAWlDbuYLCF0lpK6CVHq8o
- 0lg5I5U+tOCurPkDir/pyKnzm/xVVZu7XugLSaQloBbQT9WXtM9nBLp4tUd197jElgQD7R9N/+M
- cG+CPZYV0zSuqfUb4tA/TUp9s0cc+/Ryi3ryt2t2PIJEPZeN33dWwTR+ZWYOdHueYjgV0XVsT8C
- AVhBV2uMuErRz
-X-Google-Smtp-Source: AGHT+IFSBDkF9l+RG0mDjA6NlBaBD+R6iLrhC7RE543gD+RHxGMpXpe146VF5ekqAdYZ5nuO3miDNg==
-X-Received: by 2002:a05:6830:2a06:b0:72b:9506:8db1 with SMTP id
- 46e09a7af769-73888db98c7mr2204421a34.4.1749219659531; 
- Fri, 06 Jun 2025 07:20:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7388a0899f7sm287624a34.65.2025.06.06.07.20.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 07:20:58 -0700 (PDT)
-Date: Fri, 6 Jun 2025 08:20:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: U-Boot mailing list <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 12/13] Update doc/README.SNTP
-Message-ID: <20250606142056.GP1382132@bill-the-cat>
-References: <20250606064211.3091237-1-jerome.forissier@linaro.org>
- <20250606064211.3091237-13-jerome.forissier@linaro.org>
+ bh=3hHzJBek+Y5AAe1R2Vzeq2TVrcp0evPBhqLarJz83a8=;
+ b=CC6INXjo5DldfG6KvY3mHyqUIZx7BgG479fFY7HBsP3Fx39+hRBFDCLZgiKHlouRjD
+ E3xp3RijOBhVEZFvfiNkUNmH656pOZVpBMB2vgfmb1xfv3JfLVoRH+C6EKZoAuShLk/f
+ LhWwjlzc/VlDZugg7DuX82OwOjZpd6wBihzy2036FMlIuyS9XhRjbmlIiEheYi6kxvY9
+ t2BJ7FQ/6JXEXsnyvRCXR19WKc6vFOjcOeInY5Y0x4VnJzYNJBIDTDkasdpwEZZ/WxRM
+ WsSULnpNTSp7MFjsq7fGVdiVRly1/YIwcueJNl99L6KIlGhLwHg7JQ/me1mEX0wVWdam
+ fL0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749219662; x=1749824462;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3hHzJBek+Y5AAe1R2Vzeq2TVrcp0evPBhqLarJz83a8=;
+ b=pmllBjo+UD0Lgx94fljaT9FltYEd3xskCH0iMC6RFXuKQFLxUMR1pY7UiqvNWLKTRM
+ C3yR8+N9Vp4OeRObVmIYwohSdnghT41ANrWYopCUQ3KzEVyMXimNxEwmj5Cf13RJKMpQ
+ kDV/cDqVvSSj6CQgL3P8CE1bakKefpWEedB1jJUgqrzqvVyPwKewi7YXI8Z213Opn+0f
+ aJJHAmh7q7rB+DQcZ891cRzgVJ5d5gOTvj9KkpB54Hs6qC9m0fBZIh3mwsxfc6M5H6mZ
+ ycdAB9UsCNOm4sAt3gFtry4FoH9gMHXWxyATejJIC2knSThkZjbjg9an3BdPPyxSsOtT
+ lzFQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVR1hTMVRyNeH0lIPq/LqfwLQ936Wen4ZG7Fv7V14MApDClvqV9FxnLxaz+29EPtrmoxNVCx7I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFGfFrBkeXKeQJzM9eIHk88pxyAH8TqLCJ29JmycXCrwC6U1pt
+ oIpgwBu0rmH9X3e7EUtLxGkILkHvsp8IUou2VOfFvSGkYbTU49U7Sfar3Yw4YOskIWrr82SzL+d
+ gjT13A985OVtvtL7X9No1iZxfCYrs5yAwdg==
+X-Gm-Gg: ASbGncuNwIi935b66tbYeuKrr0L7i3aj9SV3ezCgmanXz+Zi6wJj4RkDjodVvVrR+4i
+ TeSVif/YzoxhuTuXMxQHXtHn7O8tvHfRPIz8/nZLncxJ1rwC0NSkk/gSy+BMXUC5hk1FcoIpq2a
+ Sq/j/Ou3/CJjUyMBgsa8+P4jqHbwbaM40rqmX0mDegejRaUTWFsYN+WK0j0RisEMwb
+X-Google-Smtp-Source: AGHT+IEmU5llVPAqLYYzrx5gS3AaN4ilVhF0ZoTDBxPxL+PONzzJafZcSX32ZLE65akGIayRAZ8J88AhsBLfd9AMBi4=
+X-Received: by 2002:ac2:5d2c:0:b0:553:3892:5ec6 with SMTP id
+ 2adb3069b0e04-55366c30478mr789643e87.35.1749219661678; Fri, 06 Jun 2025
+ 07:21:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="C4zoTxfgmLIpFXZG"
-Content-Disposition: inline
-In-Reply-To: <20250606064211.3091237-13-jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250606103838.1862928-1-lukma@denx.de>
+In-Reply-To: <20250606103838.1862928-1-lukma@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 6 Jun 2025 11:20:50 -0300
+X-Gm-Features: AX0GCFspQiALaxtSAdYSuNSTMWK4HuwvaNJj7KoRJFsW5FidL-J6wDr4yb_1e4Y
+Message-ID: <CAOMZO5DVh+YqspbbeupVJiE08Uv5rgcE920BQFVrk6ygbB8mng@mail.gmail.com>
+Subject: Re: [PATCH v4] ARM: imx: mxs: Add support for imx287 based BTT devices
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,48 +96,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Jun 6, 2025 at 7:39=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
+e:
+>
+> The btt[c3] devices are based on imx287 SoC.
+>
+> U-Boot SPL 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+> Trying to boot from MMC1
+>
+> U-Boot 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+>
+> CPU:   Freescale i.MX28 rev1.2 at 454 MHz
+> BOOT:  SSP SPI #3, master, 3V3 NOR
+> Model: BTT3
+> Board: LWE BTT SoM HW rev 0
+> DRAM:  256 MiB
+> Core:  86 devices, 15 uclasses, devicetree: separate
+> MMC:   MXS MMC: 0
+> Loading Environment from SPIFlash... SF: Detected is25lp128 with page
+>                     size 256 Bytes, erase size 64 KiB, total 16 MiB
+> OK
+> In:    serial@80074000
+> Out:   serial@80074000
+> Err:   serial@80074000
+> Net:   eth0: ethernet@800f0000
+> Hit any key to stop autoboot:  0
+>
+> Signed-off-by: Lukasz Majewski <lukma@denx.de>
 
---C4zoTxfgmLIpFXZG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jun 06, 2025 at 08:41:48AM +0200, Jerome Forissier wrote:
-
-> Fix an error in doc/README.SNTP ("timeoffset") and clarify the
-> differences between CONFIG_NET=3Dy and CONFIG_NET_LWIP=3Dy.
->=20
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->=20
-> Changes in v2:
-> - New patch
->=20
->  doc/README.SNTP | 23 ++++++++++++++++-------
->  1 file changed, 16 insertions(+), 7 deletions(-)
-
-Thanks for touching the docs. But, can you please convert this to rst
-and then update it?
-
---=20
-Tom
-
---C4zoTxfgmLIpFXZG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhC+UgACgkQFHw5/5Y0
-tyzWgQwAgpnRBP+gT14PHRmbHdNBoyomrd2EgjAsmYwxRb07tuiXjovnVJC2FU8V
-ZbQjial5fX9DZ5C68rzB9FDZG/DoLj51nLzlE7JhWFkJYp9iPrWWj3lWI5YgtWvu
-iZi1bRzfqhj0OePWVDvWE3CQ6xXae7oBjTMDsKH3fYEjNmWPCAdtAOq7GHYxs7UL
-TVffRi9Qonp/AnWGrEMIavxIEZvnDXQpoSGFAq/fYq8JVO4qs0V1uThWH9ffijhZ
-DMyYob8f83Oe02nhlNYOswp4eq4KY0lGUqATWK2SVgazSOpdQEFYy0kJdnm4DTv6
-ihQlzEhxSlYs4JBkWZSD7OvVSM2g/OXx3qM2ZRpVYWc9LRY1FkfAGVGN+hyLNWA0
-iwB9icc/cB0pQWdSdKlc1GVA6O2aczbYute6g8/ieut1EaxwdaqbU5/rsjzWiN3O
-cMg864WuVb9fNWXgbbIcknDdx32lMwq+zfqw0B9rCLjAZflQVibHICpuqdNF1lfm
-Vcg3TS5T
-=PKWt
------END PGP SIGNATURE-----
-
---C4zoTxfgmLIpFXZG--
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
