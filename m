@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA3F6C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 16:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1CEC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 16:47:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2AD581F0D;
-	Fri,  6 Jun 2025 18:47:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B77F82AFC;
+	Fri,  6 Jun 2025 18:47:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J1TV7QOp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r7rFciX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4160E82B26; Fri,  6 Jun 2025 18:47:04 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 302FF81F0D; Fri,  6 Jun 2025 18:47:05 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 219EB81FEE
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 18:47:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17A3F807B1
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 18:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-401e77e5443so1395121b6e.3
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 09:47:02 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-4080548891fso893460b6e.3
+ for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 09:47:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749228421; x=1749833221; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749228422; x=1749833222; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bY4AfgwhH05q2INLoa+p0dd3wL+ISY4s8ik+Qmh3jQ0=;
- b=J1TV7QOpciZdtSY0PTUCCgex7YcU2ucquxIQ7jH6qYTDkZQDsN59vsYSP0UPZvSxps
- VQd6z/T+NHmtUs4i1/qbwEk1VTqzf9Bn1LuGdyY5MQKsBIRpH25jvbQvsNbix5LpUTri
- WC6J3KjvyT5BCojgDhfnw6tHtW8OQR5ZC9cZU=
+ bh=TEn1csrU0bnbbTGvUuHK2BOSBAVgPRoNYaukJSfGHh0=;
+ b=r7rFciX4MKQUac0+10mcSDHUAHK3pGLOizRB8Ehcu2cjk8aoI6RHEp0vsVU7YHrNC9
+ IPCKkLZHomd9MVCyUqIjPwsDT+Xo69VTln+DJHHxGd40b5H6BXRcvitwEnId57A+GFBg
+ E1LvWwB0WOBIskOwQ6lzj9YYvwHByc1o2bb2w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749228421; x=1749833221;
+ d=1e100.net; s=20230601; t=1749228422; x=1749833222;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bY4AfgwhH05q2INLoa+p0dd3wL+ISY4s8ik+Qmh3jQ0=;
- b=ef6/ooIbX7DEHTqwQXgnEK+wlPp97G7Vo+XUrcUbnbB4H0gXaVad5EiVFuZrAQSvZz
- DeJLZ2VzEBLjul0l/uFJLmmEAlu3oawGtyPYq6Caj/QvNsau//Is7OYD4nP9MR8mGpQd
- i5neMsIoQgLVwCREK2xt11wKL+4Zdj1IF+MGCC+KNuUDXLP2h8rqRwzKdgBbHmWc/07H
- PZ0BlpDEZCN0aO1K8LkP8WXstXvTDphoE58g65sFm8o5IGGJPKzvvKwNfAMBXPSUz5M3
- STHGAeZFK6DxamDy9KkgKgLZ2oRzYkR+CfDT5iMqfy9djb8yCiTTXh2RcwhhraNJVVHu
- NN0Q==
-X-Gm-Message-State: AOJu0Yy9pDGhK4M6wnnU4v8YE8dZOrG7skzndjgCq8bvNuLxV17Sapri
- Lx7xmzinA+NbrNiM605/UTx2xCacisZGe2ee6j5lvFSc7iHx6i/6qembI5GT/0Pc4dg=
-X-Gm-Gg: ASbGncuwvwmUQWGGcWrY3o20V0DfBuLFOZ90HE1sc/FEYnxmsPf2QFRyshg/N+5LZSi
- PtIYmvrlOqhUwWV00MAPc/oIOGtEjfVpoPyo7gCsPSYSYan/T3tD7fqthNYWR9aKL81UJpkvrq2
- TJWuhN19Lx0nYA7cgV0UV+F+/abAkIpf73Jvztl7DPex0H7fCldpcdmohu/xseoOTNdHKx8Rbyy
- POJJtyfbthnjqec8zEiVp/hAL9PIfaqPbyMT6XRFprmiLfi3IaIht0ZzYS31iCXCxfLeS6Ibe2g
- fTMaZKdwKlT6Z8xAsRskfFnIBd/vmvGKF6MD7ovpHzjVTrfh5qDh+yHseOKD7De5JZ2AOrg1dUv
- lWedacK2du+GRY/U81MRKww==
-X-Google-Smtp-Source: AGHT+IEqnPnQylG+uz7A0YUuwekQNUJkAKekAjo07Bu7u9YdWVWhKAJ6CmorT/H/aacqLRdorzw+VA==
-X-Received: by 2002:a05:6808:22a6:b0:407:a501:19cd with SMTP id
- 5614622812f47-40905136fcfmr2931250b6e.29.1749228420861; 
- Fri, 06 Jun 2025 09:47:00 -0700 (PDT)
+ bh=TEn1csrU0bnbbTGvUuHK2BOSBAVgPRoNYaukJSfGHh0=;
+ b=i2tisYReFHb8YvN/VU8qIfq8zsA+VyMD5FRelgKG9AZYEvFfhQTen+GAhBazuI0iWq
+ TXOFXfPdkRGXjjKvLHqGxzbUWcZok9VdCncrTMrBdbP4PfUbRM0HsoR8xcTHqIxoLbdK
+ ABKpKE7ElajoFtltlC3VnF9QPbUkFzDMNeiCyWDPaqaynhGh06wV8bAhAM49hMShsSLu
+ 1LS0yNjJE0OiYxybc48h5x5E8ja2H/1Mdtc4+XqsRF04GKH1fljQvOCJALdJ0rm3LB03
+ 7klA8JIj7Mubv7T9C4QcYQugXElu+sha6a1DrL2Ioy2USRMOaou2kuZzuQnqQz7QCQb/
+ We1g==
+X-Gm-Message-State: AOJu0YxY9PjH+UcGFBKYJdDoQ2AdzQxXT1HBfo4DLVCkW2pbUSIN86aS
+ Q8vuHjCoDoGqPHKDSr9TPD7uvpcUn8uRnmPe7nNsI9h0nue2NUi2cjGEcJOSKCCaqHQ=
+X-Gm-Gg: ASbGnct10i/r4XP3KC0YIJPGthwKyc/lwC2c+ubYqbwgJCIhthaoPLlIbEvHxdhfPLG
+ qlUUO79nZBS4Orny5lglR6imiO0HjkQN9XxIB7W+bxbGMj3jq/kXWvKoUwgg4Dn887B/NB3gaHM
+ NciL12Q6HLL3jjGDHDVy+LXOCr5i1dWe2HQen4t7J5HVD6V40/f77i4xCUtPGwUMwCXFcSL6o1y
+ CUkRYBRqS5d+JmIlHeO5oCYksLeonRc99EyD018W/UwYQtzufk71v2+dXuX1wC2Nq6SX0dfsV7b
+ N3g/SZSpHxLbUhpgrAyrNVTTfErqOmQZRVO6/GPCh6H87bXEaNIir6YlEByNnGJsxBo+jZk+C6W
+ ZiECBmZFcBqE=
+X-Google-Smtp-Source: AGHT+IFSz0wni0crbSxx1iYlDvMbAJO04Q/tOGlmj90lzp0JmwKa6peubZr3lQiHI3fJkqjZbkKA6g==
+X-Received: by 2002:a05:6808:80b3:b0:403:51ac:2400 with SMTP id
+ 5614622812f47-409050b0d2fmr3207111b6e.11.1749228421907; 
+ Fri, 06 Jun 2025 09:47:01 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-409069418a9sm377808b6e.11.2025.06.06.09.46.59
+ 5614622812f47-409069418a9sm377808b6e.11.2025.06.06.09.47.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 09:47:00 -0700 (PDT)
+ Fri, 06 Jun 2025 09:47:01 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sam Edwards <cfsworks@gmail.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Prasad Kummari <prasad.kummari@amd.com>
-In-Reply-To: <20250527210436.1488428-1-raymond.mao@linaro.org>
-References: <20250527210436.1488428-1-raymond.mao@linaro.org>
-Subject: Re: [PATCH] armv8: fix Clang warning on writing 32-bit variable to
- a 64-bit register
-Message-Id: <174922841914.3195369.9627584360250138208.b4-ty@konsulko.com>
-Date: Fri, 06 Jun 2025 10:46:59 -0600
+To: u-boot@lists.denx.de, Heiko Thiery <heiko.thiery@gmail.com>
+Cc: =?utf-8?q?Thomas_Sch=C3=A4fer?= <thomas.schaefer@kontron.com>, 
+ Michael Walle <mwalle@kernel.org>, Bryan Brattlof <bb@ti.com>
+In-Reply-To: <20250528090536.765499-1-heiko.thiery@gmail.com>
+References: <20250528090536.765499-1-heiko.thiery@gmail.com>
+Subject: Re: [PATCH] arm: dts: remove k3-serdes.h
+Message-Id: <174922842100.3195369.3719203386236764407.b4-ty@konsulko.com>
+Date: Fri, 06 Jun 2025 10:47:01 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -108,17 +96,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 27 May 2025 14:04:31 -0700, Raymond Mao wrote:
+On Wed, 28 May 2025 11:05:37 +0200, Heiko Thiery wrote:
 
-> Clang is stricter than GCC when it comes to inline assembly and expects the
-> register to be written with explicitly same type of variable.
+> This file is a duplicate and also comes with the sync of the linux
+> mainline dts files. By removing this the one from the dts folder should
+> be taken that is more up-to-date.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] armv8: fix Clang warning on writing 32-bit variable to a 64-bit register
-      commit: 85683bd1959cb7f3c870c9da12217f5a4ba0e922
+[1/1] arm: dts: remove k3-serdes.h
+      commit: a822b95da4b799bdc2a42c06923af4359238dc9e
 -- 
 Tom
 
