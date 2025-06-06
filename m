@@ -4,176 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19262C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 08:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38911C5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 09:10:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F26F82977;
-	Fri,  6 Jun 2025 10:07:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A0DB81FEE;
+	Fri,  6 Jun 2025 11:10:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="tasrKWS8";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="F+VCGRN5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D58E81FEE; Fri,  6 Jun 2025 10:07:42 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20617.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::617])
+ id D3C768291D; Fri,  6 Jun 2025 11:10:10 +0200 (CEST)
+Received: from mail-m15599.qiye.163.com (mail-m15599.qiye.163.com
+ [101.71.155.99])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2DC7803DF
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 10:07:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 562F0803DF
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 11:10:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Manikandan.M@microchip.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tTn06ryndIjZU/sidxz99OqPXFALXJAIiwujDJBrAyAqNrPzgy0SFsNZY9dkVZ0BZjUAigOhO57griK8MyjW0JZCNUsvlhuHfTCBO9620LQSgUY2U+Bm3WRAvXNefgVlamZ8jHKv1ENor7ZOLN+UVCYcJW7KTzvnannjtJyz5Lfl6c4B0W2bFECjT9NsC1TEdpPtfl4Ng/InXZgSeW7Nnb/MM0nECIQD/r5VR9qEpEdLV+XCHJyhTMc6k5725+WJ/RtoFWXlNq9u9giV8BTYZBoStYin0Uu61fqBZED4RhXZOshRvG2wIH+xAiwVlztA2/Rp+w653V5dwqcOp+wt7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QRK2otHoZOUGiyazX2srW3wSNaVgRweCQ86e2XLOixc=;
- b=kGGkLeKLqVmfI3RPA/gk0ggltmsbvWtv+xdf/KBSiVDcAcw2VnYhpPUbHdJ2vSnBGOVxPj0ESXy8zFY54y1uF/M04YK5uHMX8I4in6AfMbPqgBddxC3ey9x80Vjjn6JSljnIqZBgXnkXgz2y2IbIC2UKn2U+eIdvCTCCQM0UlDByyP0nBT7753KApZlu1ta0GouMfp7Ho1MsZqniK3yYnQ+poE7VlH6ikSvn7C354ExsbV2uas0ZrVlSFJUMTxzHoO33C8yLJ9CZbLATPVjgE07aM6TKBaREYQXLEL0u/yiWVncEOdlYApY06SKJuIO11aUswk1vOJNBPbwnn1610Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QRK2otHoZOUGiyazX2srW3wSNaVgRweCQ86e2XLOixc=;
- b=tasrKWS8y8YbRs5VFPmfkOo2H1VKDQ5Vu/zTu7Nt+yoaKTp3XcEKy7MlvvJZL4S2ubc9sr8/GyoN5R0ZDGzVFjRiIF5iqT0MUhbf9jcExUDyijBsCG5Bxrh1jR89AxIdrm1T+ikkivWHAGG1TbUItnfjrFEvFEhiqgdclmkxbZhAucNAq+5RBKOpOCzr0xfm2e71OrFZZbXEvRLeJMU37nCZnY6me5YWutXJrkVXBLLiET4CBzIVR0JU71f5p9wazOou37iNFQcDWuV2ovk20gR3aHu5508D7Sojtn5z5jvx0JkKi6+ArNuG4VTk7JPflwTG2Lc+8p8YWZOJTQPQcw==
-Received: from DM3PPF9623118BD.namprd11.prod.outlook.com
- (2603:10b6:f:fc00::f3a) by SN7PR11MB7066.namprd11.prod.outlook.com
- (2603:10b6:806:299::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.21; Fri, 6 Jun
- 2025 08:07:34 +0000
-Received: from DM3PPF9623118BD.namprd11.prod.outlook.com
- ([fe80::a7eb:da5d:125c:3345]) by DM3PPF9623118BD.namprd11.prod.outlook.com
- ([fe80::a7eb:da5d:125c:3345%5]) with mapi id 15.20.8813.021; Fri, 6 Jun 2025
- 08:07:34 +0000
-From: <Manikandan.M@microchip.com>
-To: <eugen.hristev@linaro.org>, <lukma@denx.de>, <seanga2@gmail.com>,
- <sjg@chromium.org>, <Oliver.Gaskell@analog.com>, <malysagreg@gmail.com>,
- <nathan.morrison@timesys.com>, <mkorpershoek@kernel.org>,
- <robert.marko@sartura.hr>, <jerome.forissier@linaro.org>,
- <sebastian.reichel@collabora.com>, <duje.mihanovic@skole.hr>,
- <sumit.garg@kernel.org>, <patrice.chotard@foss.st.com>,
- <Nicolas.Ferre@microchip.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 4/9] clk: at91: clk-main: drop parent_name check when
- registering main_rc oscillator
-Thread-Topic: [PATCH v6 4/9] clk: at91: clk-main: drop parent_name check when
- registering main_rc oscillator
-Thread-Index: AQHb1EVlXv2zBj5FhUyvhv5GWbBMjLP0H4+AgAFyq4CAABjigIAAIHIA
-Date: Fri, 6 Jun 2025 08:07:34 +0000
-Message-ID: <6dfff6ad-4cd4-4ebe-b15b-4f417e16beb6@microchip.com>
-References: <20250603050556.80851-1-manikandan.m@microchip.com>
- <20250603050556.80851-5-manikandan.m@microchip.com>
- <8d7091fb-b07b-4b4c-ba73-fefe574b8fd9@linaro.org>
- <b01bea7a-8c91-46a8-b09a-084b8330d7db@microchip.com>
- <7e70dffd-78d3-4339-b644-495294b72fff@linaro.org>
-In-Reply-To: <7e70dffd-78d3-4339-b644-495294b72fff@linaro.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM3PPF9623118BD:EE_|SN7PR11MB7066:EE_
-x-ms-office365-filtering-correlation-id: 34537042-f51a-4e33-901b-08dda4d131a3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|1800799024|366016|376014|921020|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?TUhYWUNFektWU2c5S1ZhYS9UNlFnb1cxUU83anhkRnNZcHlsSFFmVTNsdmJX?=
- =?utf-8?B?MUd4RmUrMEtjeTBRT0pSR1MyQitOeWhyQ00rZnZjODZHUHZHQXQybHhMVzla?=
- =?utf-8?B?WCtORy9pdDdwcFBHY0M2NSt1ai9GYVl6Y01PRVc3bWRwQWE5c3YyNTNueC9u?=
- =?utf-8?B?Y0ZNS3ZnQlR5MzIrbmhIL0gxY01aUElDYUNjTHkxME5LRHZZRjFpUjZCdVRT?=
- =?utf-8?B?MmVNYmg2ZGJVd0RSVFgwMjRBWmNjQk5UaE1qdy9NVjkvQVdOM0prVlppZ0xW?=
- =?utf-8?B?WHhuU243VERzUUxGN1BNLzk1SllvQ29xL3luK2ZEVnBhMGZ4ejVMcnpUTDdo?=
- =?utf-8?B?VUxTOTNkeWdFMXpZNHlxMWxwRW93Mmx0TUkwaGlwN053amlscno1Qkplbldz?=
- =?utf-8?B?clhwL1FhVUNIMElHQTgxaUREK090dVhlL1g5SFFpbUc4Z3BoMXpLdW9qUEFB?=
- =?utf-8?B?b0NBTEpvV3BpdndVbXhxaWlTaEJ4Wlg3MHExa3k0djVybG9RSGJaMytDbVVa?=
- =?utf-8?B?ZUxiT3JBc1lwZGZOK1Nmc2Z4a1FIMjkzYlpCWUhpV3dsandhMnE1S1Y2VTgr?=
- =?utf-8?B?TmdwODZINkMwZS9aVUxrZVE3LzV0cmdCRnh2R2dvMUhZVUxVUWdtMmhGY1E0?=
- =?utf-8?B?Y0JiV0F0Vkx1ZitLekxoREU2U1BndS92Nk5XbnhMSWdjOWtFVkdWK3pyUkp5?=
- =?utf-8?B?QldJZkNBTkErS0tGNTFEQzRqMFY3TEVYdGpkbURSamdheldEczJ1blVrTDJM?=
- =?utf-8?B?VDFmdHZVT3dzRnM1S1BjU1RMNWlHY2gwWlFxL0hvTC81OWRKSUgvdWdRa00z?=
- =?utf-8?B?V204UnUvWHBSejBaaWEvdWU2WGZCZkZTY1hsYXFaWDNNOG5EN1g3MHVsczNO?=
- =?utf-8?B?RVBuK3NVS2YyOTlQK1VPcHp1bm5MRE9YdDNBSlE1ODh4SWJmTW54L0hWM2lq?=
- =?utf-8?B?U1dVVjBIUDFnWi9neGY2R3pBVVZ6SC80dEprUHpXRnpRenZLZFZ4d0J1b01C?=
- =?utf-8?B?TTZkSm5DSGtpeWtvT1lkQnFXKzdkV0lUSUtiRGJpbmNrRzMvbFYrc2pqb0ZD?=
- =?utf-8?B?dTVpUFUvUDExYitlNEI5U0NUS0Y1UnlhZHNMQTBUMFdzQ21xRUtObk5kdnhW?=
- =?utf-8?B?akpUbHJVZGs1MHhsSlRXc2oxYXNpQWRSZGJuUjJocUlVNUR3V0FlMzhGMjZx?=
- =?utf-8?B?NFVXMXdmMzR0N09sTkorRllMd2V5YjEyVWpHTi93NW52dGI4WDFTaEdHL1pC?=
- =?utf-8?B?R2Y0cGpZNHdwcU1JZWN0SzBPU1pla2hKNVVRRlV4NmlzVEJBc2FhRENMOVIr?=
- =?utf-8?B?VHpmZTNWS1dMZlVCUGIxZmV0U2ZJbXNOSitwT3dQNTlBdDlqanJRVU11QWJK?=
- =?utf-8?B?SWU5MEhjdEE5RzZ4MHBMamtzTDlIc0w2dERMRHJOcWk4bTdObnNHbmo5b0RB?=
- =?utf-8?B?eWNxUlpnTDRmd1hELzFldCtVU3RpRFovU0pHUDF6clZhMEdrblF4cllOdjQ5?=
- =?utf-8?B?TFIrcmFKVzYzVExSVWN4enVYN2o0bVVnS0hDWW5lNjNuUWVBeUkrdE8xK1U4?=
- =?utf-8?B?aEM2YnBIc1U4c2pOdDZNQTIrU01OeGg5VFNjSVdrdVRoSVQrMUg5dURwVWNW?=
- =?utf-8?B?RW0yUGNxa2VQSDIzRmdxN1lnU3Y0NzJFZzJQUW9KWWpGak5SMTlMZ2gvUmZV?=
- =?utf-8?B?dWlhZW94b05KZ1FuZ3ZmWFk0S2xUdDdhVnlJM3QyMlN5Unc1bjdiK0NTTnBM?=
- =?utf-8?B?UERMNTl2Y0taK0NRdmFuanBENElySFFabkY2VDhRbThDcU1Bcyt6VWx5NGJD?=
- =?utf-8?B?NndxTDQzNXk2MnZyVm9ySUxWVmJOOThhVjdLZTdPT1ZjRytGOGhzdVo1YlVU?=
- =?utf-8?B?VU0ybUVxVkFIYzNMQ1A3b01GS1oyM3RwalI0NU1relA2Nm9oNUJFK1IvVnBa?=
- =?utf-8?B?VkZ6ZlFBcmNNR3VJakg5SGc3OG1rd3FmSUVKKzc5bFR3alBZUEUydFhCMllK?=
- =?utf-8?Q?KjQ7I07S42+8f2v+sJRTWSk9sZssoA=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM3PPF9623118BD.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(1800799024)(366016)(376014)(921020)(38070700018);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RngyYTM5bUV2YUVubkdmQmhqV05zcTZRdkw2VDgveUQwT0srTThOL1Vic2J4?=
- =?utf-8?B?VFVRWm5xK0dTd2NlMFF6WDI1ZjcvRHVyM0VCbmVXRzMzL3B2SjJUbVRqYW5p?=
- =?utf-8?B?eUFOOHFpOEZyTTlZSWUzRlhVeWQyUGtzZ25nek1WTzl0LzZoN3VzcnNudEk5?=
- =?utf-8?B?VkU0VWxJTUNjcnpFMitpSzRxTCtwM0hjdFJzMHFhL0c1OGlZcXpCWVFNUWQr?=
- =?utf-8?B?QVVmT3FIY3I4U0hRM1J2bzFuNlZGVmRpNUVJTWhZbm10UXlXUlhNOVNIRlYy?=
- =?utf-8?B?Y2FPWXdOL3N5aEdOeXYxdVdKL3F4Y25uMG5xZXhKVjRrc3Fvbk9pbmhqRHF6?=
- =?utf-8?B?VFBsbUhEVGRsNzRHZkxRT3kzS2dBN2E0SXlkVDg4RnNPVUxIVnJabFJKLzdB?=
- =?utf-8?B?eklQbDNQalV1TitsYnVGOUE2RUNLMXdIUkloSm96UE0rYnc0R0hKaWZBQWFO?=
- =?utf-8?B?TkNqTU91cTJpTjc3ZmtnU1owdjZkTi81b3JjVjk0Y0poNHJPamFzK3lyZlJy?=
- =?utf-8?B?emlIZHBzWEI1TGFMeEY4NlhjcnBnMy91QVk5RkNJbkplWWt3ZWF5NjUyTmE3?=
- =?utf-8?B?SHZqVGNnSWp1UnoyY3E4ZEs1aHRpdERPNUI3WlVtNmxXTDFjV0QrSVJheFRY?=
- =?utf-8?B?d2ozL1pNWi8rUEI5SmlnRGR6RHFpTEVnQXVUNFNIKytSK3FkRTFSVTMwUFNT?=
- =?utf-8?B?RGdlYzNnYkJhdERybTV6OG1nejgxb2hpNkVDc3FzT0w5bEx5MTh5L2xqZys1?=
- =?utf-8?B?OTljMVIxdTFQU0VMNUM4SGZvNE4rK082NSs3N2lpTHE3K3ZzcGNuLyt1b3hs?=
- =?utf-8?B?d3JQV2ZPdk5pcHliY2tmbW9DQXZ0YkpHT0c2R005ei9PNVVORDVvUmJIeXhQ?=
- =?utf-8?B?Vmt6RlZCMGh3Qm9SWEV3S2g5UkJaODkweU44TFlPa0grVUtLZFdSV3dNVDhF?=
- =?utf-8?B?Rm9KbTFZMk5aeTE3UDU1SVhjY3dPQ3VTbGRWTTJQMStUb1VCeHdRSFoyUTd0?=
- =?utf-8?B?WlFjUng1WmVWbnZ3cHZUWU1TaWtYU3ZCN3FPWFpaSTRKaHJyaEpDcEJnMnMx?=
- =?utf-8?B?aTBNd3BMUEpHT1dDenJCdlNZdWdFYWlrR0V4SFJpMVN5VDdScUoyR1FtOW15?=
- =?utf-8?B?dkM2WU04SzhJTytwc1d1UlZUdjlTeks0OU54Zys1VlBHN0tldDgxNVlBdlNS?=
- =?utf-8?B?RllEVTU1amwzVnVCQ0VFT0EzNnV4VERZN05rZjlHaU9PVXlXcm41NUlMOFJ5?=
- =?utf-8?B?T1I1eW5XM0lIU1o5dUt5eGR3T2krNnNNeGdvS0IwZUUwcXdVNWtvaTlMem5Q?=
- =?utf-8?B?NVphR21QeVFRKzJZaUk1ejdwdG01WXBxWkZWNURzZS9CRE55Mm92alBvQ29G?=
- =?utf-8?B?OHJjQjdGbU5xbWRXRHlMbXBqOEI1aWxudTRzek1SUWhQUWtBbExuK1FEN0VN?=
- =?utf-8?B?a0hzc0ZxTkNTWmRXTEVPdlBacm41NEUrb01sd24yNkpxQ0JFUEt0YklGZFNh?=
- =?utf-8?B?R1VYMHVsRVNjWCs2WXpnd0k0UlV6eDk2b2hUSytpMlVGR0RveGxndlJidisw?=
- =?utf-8?B?aGRhQTNlYmJiazAwSEV0KytydEU5bE1QMzBSaVJnby9vWDVkWGJTT1hGNXVs?=
- =?utf-8?B?dU92WmxNZDVLS1IxeG80YWc4S1R6UUFrWVh2a0xvYnNBcERDbExZZkprRmp4?=
- =?utf-8?B?Mk15YitaVkhnbjVFcFQ0dUsrRDRhMWtnZGpMUVo0Vm1XeDJWNTBxR2lkdkdT?=
- =?utf-8?B?VHdFMk9MMTRKeWVDWS9KaDQwMGxOdFlMeVNVZWhRck5Wblk2Q3E4ZEh0ZHR5?=
- =?utf-8?B?K2k3N3FaY1N2bS9QSzZwUVdZcFJSY1NuVjBQSGJYc3BGNEQ3YkR6MXdwY2lj?=
- =?utf-8?B?ZWVuMDZCZjJFSzRLdGJ4b204Y1Y3Ykt2Q1VCaUIvZnhGMDFYaXp0enlOa2tQ?=
- =?utf-8?B?Tm9MbDhaY3hhVk9RL1JFL1JIV1hMN0FpV1BRQkRyRDI2VWhUTGYyQzk0bDJp?=
- =?utf-8?B?S1lCUkFWWkF4TS9qRE5pUlpXY1AraExFT1labVJ5TmlaenVDVFZScDdRakhH?=
- =?utf-8?B?WmtFZ3RLWEVYSUc0MHBVUy9xd3VpTEdpeWIxblU3UkNqL2RRRDhFVEx1NWF0?=
- =?utf-8?Q?QFLXOxTZ2bMgyFuqpEqOMDLYw?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <6DA6CB3571324246947B526B66F6132F@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.60.65] (unknown [103.29.142.67])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 17c2f7691;
+ Fri, 6 Jun 2025 17:10:00 +0800 (GMT+08:00)
+Message-ID: <b9a85c5c-ddbc-4c67-ba29-52a4cb7bcbe3@rock-chips.com>
+Date: Fri, 6 Jun 2025 17:09:59 +0800
 MIME-Version: 1.0
-X-OriginatorOrg: microchip.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM3PPF9623118BD.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34537042-f51a-4e33-901b-08dda4d131a3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Jun 2025 08:07:34.4242 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: PtxzTX9hzGSfWX7Noekr44W+VFOZIEqqY14CidbxEs0rtXojdF1r99wSJRuouME7NEdQPvwPDXZqXHOtVC+A4k1C8bmZ83JoARPhWpIn5gk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB7066
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: px30: Implement checkboard() to print SoC
+ variant
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20250528-px30-identify-variant-v1-1-4ea69c527a0d@cherry.de>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20250528-px30-identify-variant-v1-1-4ea69c527a0d@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTBhKVktKTx1LTU5NTR9NQ1YVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ VKQktLWQY+
+X-HM-Tid: 0a974481196203afkunm0889e70a1e63e5
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6M006Fio4STEwLRkeNUpDMRco
+ TBQwCSpVSlVKTE9CSUtKS0tJTU5PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU5DSU83Bg++
+DKIM-Signature: a=rsa-sha256;
+ b=F+VCGRN5X/J+PVEUQpenSZv5XbKm348Cqw2PkrjVYKyrEW97uYousqB2DogDGQ1ijy2b/LpgiNuGXZ0PyFwMJDLh2xoIhhpMT0BHl8OHZb9q6jj3b5TPKt1aXeNhv5aVWPNA9lZj1Spvm8gBXJXlKhnfFc10U2cDZD7G/jvpo6I=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=iOMMr2eFzXg/vRw2JLudb5SnVL9Bvg8Tb8GWLn/1++E=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -190,43 +75,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMDYvMDYvMjUgMTE6NDEgYW0sIEV1Z2VuIEhyaXN0ZXYgd3JvdGU6DQo+IEVYVEVSTkFMIEVN
-QUlMOiBEbyBub3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRhY2htZW50cyB1bmxlc3MgeW91IGtu
-b3cgdGhlIGNvbnRlbnQgaXMgc2FmZQ0KPiANCj4gT24gNi82LzI1IDA3OjQyLCBNYW5pa2FuZGFu
-Lk1AbWljcm9jaGlwLmNvbSB3cm90ZToNCj4+IEhpIEV1Z2VuLA0KPj4NCj4+IE9uIDA1LzA2LzI1
-IDEyOjA1IHBtLCBFdWdlbiBIcmlzdGV2IHdyb3RlOg0KPj4+IEVYVEVSTkFMIEVNQUlMOiBEbyBu
-b3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRhY2htZW50cyB1bmxlc3MgeW91IGtub3cgdGhlIGNv
-bnRlbnQgaXMgc2FmZQ0KPj4+DQo+Pj4gT24gNi8zLzI1IDA4OjA1LCBNYW5pa2FuZGFuIE11cmFs
-aWRoYXJhbiB3cm90ZToNCj4+Pj4gVGhlIGNsa19yZWdpc3RlciBmdW5jdGlvbiBsb2dzIGFuIGVy
-cm9yIGlmIHBhcmVudF9uYW1lIGlzIG1pc3NpbmcgZnJvbSB0aGUNCj4+Pj4gRGV2aWNlIFRyZWUu
-T24gdGhlIFNBTTlYNywgdGhlIG1haW5fcmMgbm9kZSBpcyBvbWl0dGVkIHRvIHN0YXkgYWxpZ25l
-ZCB3aXRoDQo+Pj4+IHRoZSBMaW51eCBEZXZpY2UgVHJlZS5SZW1vdmUgdGhlIHBhcmVudF9uYW1l
-IGNoZWNrIGluIGF0OTFfY2xrX21haW5fcmMoKQ0KPj4+PiB0byBhbGxvdyBpdCB0byBwYXNzIE5V
-TEwgd2hlbiB0aGUgcGFyZW50IGlzIG5vdCBzcGVjaWZpZWQuDQo+Pj4NCj4+PiBIZWxsbyBNYW5p
-a2FuZGFuLA0KPj4+DQo+Pj4gQ2FuIHlvdSBleHBsYWluIGEgYml0PyBwYXJlbnRfbmFtZSBpcyBh
-IGZpZWxkIGluc2lkZSBhIHN0cnVjdCwgbm90IGluDQo+Pj4gRFQsIHNvIHdoZXJlIGlzIHRoaXMg
-cGFyZW50X25hbWUgdGFrZW4gZnJvbSA/DQo+Pj4gSWYgdGhlIG1haW5fcmMgaXMgbm93IGdvbmUs
-IHdoaWNoIGNsb2NrIGZhaWxzIHdpdGhvdXQgdGhpcyBwYXRjaCA/DQo+Pj4NCj4+DQo+PiB1Y2xh
-c3NfZ2V0X2RldmljZV9ieV9uYW1lKCkgZmFpbHMgaWYgdGhlIG1haW5fcmMgbm9kZSBpcyBvbWl0
-dGVkIGZyb20NCj4+IHRoZSBEZXZpY2UgVHJlZSwgcmVzdWx0aW5nIGluIGFuIGVycm9yIG1lc3Nh
-Z2UgYmVpbmcgcHJpbnRlZCB0byB0aGUNCj4+IGNvbnNvbGUgZnJvbSBjbGtfcmVnaXN0ZXIoKS4g
-VGhpcyBwYXRjaCBzdXBwcmVzc2VzIHRoYXQgbWVzc2FnZS4NCj4gDQo+IFdoaWNoIGRldmljZSBp
-cyBsb29rZWQgdXAgPw0KPiBGb3Igd2hpY2ggY2xvY2sgPw0KbWFpbl9yYyBub2RlIGlzIGxvb2tl
-ZCB1cCB3aGljaCBpcyByZW1vdmVkIGZyb20gdGhlIERULg0KVG8gcmVnaXN0ZXIgdGhlIG1haW5f
-cmNfb3NjIGNsb2NrIHRoZSBtYWluX3JjIGlzIHRyZWF0ZWQgYXMgYSBwYXJlbnQgDQpoZXJlIGlu
-IGRyaXZlcnMvY2xrL2F0OTEvc2FtOXg3LmMgdXNpbmcgYXQ5MV9jbGtfbWFpbl9yYygpDQo+IA0K
-Pj4NCj4+PiBFdWdlbg0KPj4+Pg0KPj4+PiBTaWduZWQtb2ZmLWJ5OiBNYW5pa2FuZGFuIE11cmFs
-aWRoYXJhbiA8bWFuaWthbmRhbi5tQG1pY3JvY2hpcC5jb20+DQo+Pj4+IC0tLQ0KPj4+PiAgICBk
-cml2ZXJzL2Nsay9hdDkxL2Nsay1tYWluLmMgfCAyICstDQo+Pj4+ICAgIDEgZmlsZSBjaGFuZ2Vk
-LCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPj4+Pg0KPj4+PiBkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy9jbGsvYXQ5MS9jbGstbWFpbi5jIGIvZHJpdmVycy9jbGsvYXQ5MS9jbGstbWFpbi5j
-DQo+Pj4+IGluZGV4IDA5ZGFhZTk3Njc2Li5hNTE4NmY4ODVmMCAxMDA2NDQNCj4+Pj4gLS0tIGEv
-ZHJpdmVycy9jbGsvYXQ5MS9jbGstbWFpbi5jDQo+Pj4+ICsrKyBiL2RyaXZlcnMvY2xrL2F0OTEv
-Y2xrLW1haW4uYw0KPj4+PiBAQCAtMTEwLDcgKzExMCw3IEBAIHN0cnVjdCBjbGsgKmF0OTFfY2xr
-X21haW5fcmModm9pZCBfX2lvbWVtICpyZWcsIGNvbnN0IGNoYXIgKm5hbWUsDQo+Pj4+ICAgICAg
-ICAgc3RydWN0IGNsayAqY2xrOw0KPj4+PiAgICAgICAgIGludCByZXQ7DQo+Pj4+DQo+Pj4+IC0g
-ICAgIGlmICghcmVnIHx8ICFuYW1lIHx8ICFwYXJlbnRfbmFtZSkNCj4+Pj4gKyAgICAgaWYgKCFy
-ZWcgfHwgIW5hbWUpDQo+Pj4+ICAgICAgICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRUlOVkFM
-KTsNCj4+Pj4NCj4+Pj4gICAgICAgICBtYWluX3JjID0ga3phbGxvYyhzaXplb2YoKm1haW5fcmMp
-LCBHRlBfS0VSTkVMKTsNCj4+Pg0KPj4NCj4gDQoNCi0tIA0KVGhhbmtzIGFuZCBSZWdhcmRzLA0K
-TWFuaWthbmRhbiBNLg0KDQo=
+Hi Quentin,
+
+On 2025/5/28 20:00, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> This implements checkboard() to print the current SoC model used by a
+> board, e.g. one of:
+>
+> SoC: PX30
+> SoC: PX30K
+>
+> when U-Boot proper is running.
+>
+> The information is read from the OTP. There's no public information as
+> far as I know about the layout and stored information but this was
+> provided by Rockchip themselves through their support channel.
+>
+> I'm aware of at least one other variant, the PX30S/PX30-S but I have
+> neither a board with that SoC nor the information of what the value in
+> the OTP is supposed to be. If it follows what was done for RK3588
+> variants, where the letter is derived from some offset added to the
+> value read from the OTP, PX30S could be represented by 0x33 in the
+> OTP. I'm assuming this is correct and simply printing the char
+> represented by this offset added to the value in the OTP instead of
+> checking whether it's 0x21 (PX30) or 0x28 (PX30K) or bailing out.
+>
+> Also add the OTP node to the pre-relocation phase of U-Boot proper so
+> that the SoC variant can be printed when DISPLAY_BOARDINFO is enabled.
+> This is not required if DISPLAY_BOARDINFO_LATE is enabled because this
+> happens after relocation. If both are enabled, then the SoC variant will
+> be printed twice in the boot log, e.g.:
+>
+> U-Boot 2025.07-rc3-00014-g7cb731574ae6-dirty (May 28 2025 - 13:52:47 +0200)
+>
+> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
+> SoC:   PX30  <---- due to DISPLAY_BOARDINFO
+> DRAM:  2 GiB
+> PMIC:  RK809 (on=0x40, off=0x00)
+> Core:  293 devices, 27 uclasses, devicetree: separate
+> MMC:   mmc@ff370000: 1, mmc@ff390000: 0
+> Loading Environment from MMC... Reading from MMC(1)... OK
+>
+> In:    serial@ff030000
+> Out:   serial@ff030000
+> Err:   serial@ff030000
+> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
+> SoC:   PX30  <----- due to DISPLAY_BOARDINFO_LATE
+> Net:   eth0: ethernet@ff360000
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Tested on a PX30 Ringneck and PX30K Ringneck. Would be nice if anyone
+> had a device with a PX30S or any other variant so we could verify it
+> prints what it should :) Or maybe Kever knows :)?
+
+PX30S has the same id with PX30 in byte 6.
+
+For PX30, there should not have other variant now.
+
+
+Thanks,
+
+- Kever
+
+>
+> Heavily based on work done by Jonas for RK3588 variant identification.
+> ---
+>   arch/arm/dts/px30-u-boot.dtsi      |  4 ++++
+>   arch/arm/mach-rockchip/px30/px30.c | 39 ++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 43 insertions(+)
+>
+> diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
+> index 157d0ea6930c55cc067560bd795249a39c3249ab..2f726b0aaba358c8fb3bf6f8ed2f9afca416aabe 100644
+> --- a/arch/arm/dts/px30-u-boot.dtsi
+> +++ b/arch/arm/dts/px30-u-boot.dtsi
+> @@ -27,6 +27,10 @@
+>   	};
+>   };
+>   
+> +&otp {
+> +	bootph-some-ram;
+> +};
+> +
+>   &uart2 {
+>   	clock-frequency = <24000000>;
+>   	bootph-all;
+> diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
+> index 8ce9ac561f0213fd4db933fdb9e1edde61ac39ca..4203029f2b695b244ea1165160ce48981c333615 100644
+> --- a/arch/arm/mach-rockchip/px30/px30.c
+> +++ b/arch/arm/mach-rockchip/px30/px30.c
+> @@ -2,10 +2,14 @@
+>   /*
+>    * Copyright (c) 2017 Rockchip Electronics Co., Ltd
+>    */
+> +
+> +#define LOG_CATEGORY LOGC_ARCH
+> +
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <fdt_support.h>
+>   #include <init.h>
+> +#include <misc.h>
+>   #include <spl.h>
+>   #include <asm/armv8/mmu.h>
+>   #include <asm/arch-rockchip/bootrom.h>
+> @@ -442,3 +446,38 @@ void board_debug_uart_init(void)
+>   #endif /* CONFIG_DEBUG_UART_BASE && CONFIG_DEBUG_UART_BASE == ... */
+>   }
+>   #endif /* CONFIG_DEBUG_UART_BOARD_INIT */
+> +
+> +#define PX30_OTP_SPECIFICATION_OFFSET		0x06
+> +
+> +int checkboard(void)
+> +{
+> +	struct udevice *dev;
+> +	u8 specification;
+> +	char suffix[2];
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
+> +		return 0;
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+> +	if (ret) {
+> +		log_debug("Could not find otp device, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* specification: SoC variant, e.g. 0x21 for PX30 and 0x2b for PX30K */
+> +	ret = misc_read(dev, PX30_OTP_SPECIFICATION_OFFSET, &specification, 1);
+> +	if (ret < 0) {
+> +		log_debug("Could not read specification, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* for PX30K i.e. 0x20 + 0x2b = 'K' */
+> +	suffix[0] = specification > 0x21 ? 0x20 + specification : '\0';
+> +	suffix[1] = '\0';
+> +
+> +	printf("SoC:   PX30%s\n", suffix);
+> +
+> +	return 0;
+> +}
+>
+> ---
+> base-commit: 11b8bcd7005ff24b2114dcc4d1061e083e4c9e6c
+> change-id: 20250528-px30-identify-variant-ae39c772155b
+>
+> Best regards,
