@@ -4,84 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7171C61CE7
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 19:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28DAEC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 19:35:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A23B81F0D;
-	Fri,  6 Jun 2025 21:15:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B9F181F0D;
+	Fri,  6 Jun 2025 21:35:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ov1pqNMG";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="ZnYB+vE+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A7D782A53; Fri,  6 Jun 2025 21:15:09 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4041782AA7; Fri,  6 Jun 2025 21:35:38 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54160807B1
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 21:15:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09A05807B1
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 21:35:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-404e580bf09so635877b6e.1
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 12:15:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749237306; x=1749842106; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BIN4AeTWuTIQ5ekPVoPfJHK3tAPhoLd9dozw8o2wzGQ=;
- b=Ov1pqNMGnaTf44TFIZbvqr9oBVpZqPmjmOH2otFxC9DonZpr4QQx5/F1A28FyvMqvA
- QNmoAdAp8w0qnuUS0+79kS6MYNaha5xuKIAX3OMGG8H7EMGUjIVlf5eC/TsrfU/IdFpC
- qvOIzpd9ab4wGqLR8UGpL3xEWVcX3TXis6Pvw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749237306; x=1749842106;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BIN4AeTWuTIQ5ekPVoPfJHK3tAPhoLd9dozw8o2wzGQ=;
- b=SdizqaCj5NQuG4QYA6vuqzToEADKdxs4cyuZq/I+9KgI64WU9/CCula7k9Xv1/NHpT
- QkG4/xsamWfNbhc3rTTod1YjvgKyaWw5XFjZvmvSqoCCwhgvRR/vxYiIfKtDWWyC2tq3
- RhEuh5v9TlPYsXTqfUYwS7MkBGUpghyQJuIJbgdOe7iy5vuV8j5hUvhz1scPe75wDNKL
- 45gEGaCFSWHfIuCSPUNG5zMW9w3kehTKuGFJB8Tz3nVH3CvTWYbwHeBrbnCFRymBtU9T
- 2Vm1Ka0ad9o3EV2gTa4ilQM0f8aVOXlwygIQSLTxitiLsuYdSPyEXOGR8oTQNOPe5jTO
- zIfg==
-X-Gm-Message-State: AOJu0YxBtsPqU57ovZYlZLRK8HdPhTIgpkU7gDuwOf5lG3HhEZHj/0EL
- 7Onys8LhLQSpi6p7yPr6ugYHx++78/rVt5tfxywYHPslypKhn4pXuBCcqEFPKCLGaFo=
-X-Gm-Gg: ASbGncs7Jf/VisTDea9zKLgj0HbSyR2ORcTziIzxdW2Hl8XJEJlLNIiw68Ez4m0DqLU
- JebQ97EUkNIbJ28/34DC9gfIfaeW2l0xLq/hwsWywUWst9fiRKaiTHaDLo17ez8pA3Qda3lVOlE
- H43oefqF9l8GMBxhg/AH3/QrVnf+8F0EuFNbuSDGzef/RmlQSZSxgEHc4pY5RH7ws+ErZZYbmnJ
- QLRHFtnupy0n7xZuX88l9urWhd7MD0J5rTlxD0rtEDLvJ3en0ljaR9o//MKtZzKqgAjN4MNjjjQ
- 26Lt2ZlY/5RFcbXWwcQ892/vJYIqv+rz7LSVNU/2DRNjncE8ewKrt8w43PLXJ63vsE8JjHliyzb
- 7dFk0uWl2Abs6O1BQoKNRvcTYweBlMLvO9g==
-X-Google-Smtp-Source: AGHT+IHBbV1vEXOIi7L8aZMHNFXwTrKUtWC8BZ8BWPcKzQxrFY8eJZSqkNVhVMD7hXTJdNz+nzzT/g==
-X-Received: by 2002:a05:6808:2e49:b0:401:ea99:533 with SMTP id
- 5614622812f47-4090521feaamr3571365b6e.26.1749237305916; 
- Fri, 06 Jun 2025 12:15:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40906a2cb38sm451843b6e.44.2025.06.06.12.15.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 12:15:04 -0700 (PDT)
-Date: Fri, 6 Jun 2025 13:15:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
- n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
-Subject: Re: [PATCH v7 08/10] mach-k3: common: enable falcon mode for 62
- platform
-Message-ID: <20250606191502.GB1382132@bill-the-cat>
-References: <20250603142452.2707171-1-anshuld@ti.com>
- <20250603142452.2707171-9-anshuld@ti.com>
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PaC2sNzR5nkbOa7xdlznGG2IVwyzkkitPhtAJBoyOfJWX5bDveVylAGtDrCRfCaxK/FGhE19LDeN7MiUSnCkqZ0TUJBXrWE3ULdOrov0gBJIjR9R/NG2j/7M09PXAx4wWL0MBc72JVhsNm1zP5FKMl9xj0p/ZHI8G+R/SuVV2iNkS9zdG1aQj5ISPzP1aIutWLWlcNzQLJp11PKlMXzdswngTpCUY6NUAzVu850LsOZ0FtHUhEg+YUBgymwm/m/6ba5G3vAaAEzHFPLYFzTwR9G1ApdMnyLpwUt4dt4y1T9zQ45bYqFI+fTuWnOZID81oOerWd/f2hDGyVqBlOxE5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0Lb+ycOFmQ7vI4bQ24stu0Np4rwrQi/A03+jZdl5JAs=;
+ b=qxj/IkAiFA2oUjNbwDnRXOP18ElAl4IKSfRyA+bQFW6cAzmwnp7dWhfDVWGyGfMU3OYUuaQiaudGs3BzY1EtnAdmCzjTlokr34x6AE4VwQClMoELSCB8CDgOZVu7SUaE/CvJ4ckyOLQV59YyVodLsz4BiIFI36gBVhqo3VAMK/6IyLDC5pwOl1Yhf2pzR6i3J46bvvoRRM7xEAl7N8FnogKXsfikM3EvhTNzLddqrWFOuKneJ86bDMMk+lqMbO2zWDJ+m8UeSGXXDIKmQTCkpDW+iaZtMvfQb1iYJuK/W0p/gzJA+oj3EaOn1o8NlJsUYNWtzeFh3ZScWCkoJFpmsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0Lb+ycOFmQ7vI4bQ24stu0Np4rwrQi/A03+jZdl5JAs=;
+ b=ZnYB+vE+i1pJGgUq6pMyIs/6mjMqLoSJAjxW4+r3ztZYf1vzjx1Zvw7/8EeRGkLR6K3nmFZdiN1O1i5HJ1gpH+nUXTRobRgX8FJ3EgA9TmTOfvwsfDdnw7Mmtw9ejdpThpb74gVfNtBVpr0U4RRYFUUe9gfhgh5j+9uYD3OJVdhuN8wrbbi1/93rqIK9rY8EMydTcRhmVCipvKEGUXifjJ+p5wD+y3Zj38bCarsmSBQr483vWxqwxCJ6Y4lN/CYcllz8/8CLJTZUPcfIumw9aJizA4lq85vrm9gLF91ZRPQ7AEMCBS0TOcFTbspquwxHR2KTQmMI2dRFXsDfadoFPg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by PAXPR08MB7623.eurprd08.prod.outlook.com (2603:10a6:102:241::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.34; Fri, 6 Jun
+ 2025 19:35:33 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8769.037; Fri, 6 Jun 2025
+ 19:35:33 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Edwards <cfsworks@gmail.com>,
+ u-boot@lists.denx.de
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: common/spl fixes
+Date: Fri,  6 Jun 2025 22:35:21 +0300
+Message-ID: <20250606193524.458095-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.47.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: GVX0EPF00014AEE.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:401::318) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5nDbO3Mn0Gom6omu"
-Content-Disposition: inline
-In-Reply-To: <20250603142452.2707171-9-anshuld@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAXPR08MB7623:EE_
+X-MS-Office365-Filtering-Correlation-Id: 35ee2639-0acf-4189-75fc-08dda5314d0c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|52116014|376014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?p2aWTo5dEqBEzPNUi6m/CHccsb2qgCM4mRO76sDqzOLBLQ5cnn3d1NGR6oqo?=
+ =?us-ascii?Q?W8TH3ciGvZmK5GacM4wMb4VGUSkWuqoPi/5C2J+8k73P5ABDo9WceDZajH56?=
+ =?us-ascii?Q?j6kHT+2Am1iSlORPwwk2nKYy6yEqU3WSv+jIc5HDKaOcFVp+8O80L/sMFwiM?=
+ =?us-ascii?Q?SS0ExkI6WSh00GJGBMmz25J+4pKdNvzWiHeM/uDfIsx5PruRLQPFyD4UD+HC?=
+ =?us-ascii?Q?Xk1pyYmFt65oRwO75ylZ4XkqXtDvqRABq/7b7DrQDxms0LzZAtFRtj2G2P4X?=
+ =?us-ascii?Q?Z7hdZVfKkTl13n3oPHGTU95M1ZGqMlOr0ldWtiNlmR1+aruxk0pAmzH3fUt4?=
+ =?us-ascii?Q?cSm9dolGmppvJNLhPcI7FV/Jt7WQeQ/jCqEb+5CDSWhcGXlwFXa2jw5JzPUy?=
+ =?us-ascii?Q?loMhVu2mft9muOU/qkTa5bN9r8sq4MmJ5rrDIYmuTbxhMabwQ8nz8gU5CkTV?=
+ =?us-ascii?Q?081wWZpMN4nsvotSpoIN0iUOv62UZgcPxB09ITrl6PXhlPx2LrYh2yCpj+Xu?=
+ =?us-ascii?Q?bsazmvrorB4xR6hKd/A0fib4u4eYwL1swnrgTjjr0wCFS+mN99vESAUf2p/c?=
+ =?us-ascii?Q?VsxsBKEaWVgqqatlJkMt7CRWMRMf8owZOTAPjWksEIKMDy/PrmMgNO4pIQJp?=
+ =?us-ascii?Q?51O+Dvuk3YfW31pqWHPB7v9sVsiSOEPOOBzmEu/tEG1gbysssfSiQo3gSxFg?=
+ =?us-ascii?Q?JoUYk7Cg77vGKvmvcTejSRQmJ4My/VdWdJnqkMOZrKNT1n1xmRyCVXWFyMPD?=
+ =?us-ascii?Q?nGynHzuAMAcVxtfeEo/KIq/vZGmCnUWeMqGjs07BtYNNyee/bUXLdhqKisSR?=
+ =?us-ascii?Q?BDNmVbxVPLWxqVBNy1MVsyNkkwSOQtXI8Pgc2r0Q1/+WPiNSLnNPCYjenZ9R?=
+ =?us-ascii?Q?splpE2Ul7/Oa2d4JJjAV255ke3JSxh3PqeXqkC/PzIg0eEuzP/JLgCT64YTT?=
+ =?us-ascii?Q?wb0Ep6DEWdrwDY2Y47mf2cOUcolZFdV+nqw0v0MzcNCGSmvXoVtF9YNE/1xB?=
+ =?us-ascii?Q?3CcW5MPdyTSHtook9nZ/3hPUtyWF8SWrvYF2N1K2UBFVFMqVB8d0sLpNYL/W?=
+ =?us-ascii?Q?3cMHwwkbZi/h/z/D0r+flInI7lsHRbdMG86WP/JOval1VRNButN2ndFOSOof?=
+ =?us-ascii?Q?5YIjm8o/+XCyWrQ1cRb4xQ6aMKISR08YhN1+MlqDt6na/5cUwtShsW23xHBW?=
+ =?us-ascii?Q?c9Pres43pu8CLJuv/R4nkGtYjtn4ySYq/iWIgyO7Wptmjg5jrfHrILBRL/eU?=
+ =?us-ascii?Q?fgaiKMs7oamUHb4Z4AZKFAts4ewgOTnRfkm9w67P6K3oNKH4Ra/rV0Xe+KhC?=
+ =?us-ascii?Q?Q5J9vENov/wux81EqGHmOG/j0wCkcJbAwU8eOZi94btQ3Ws/0g2RMKG66LLU?=
+ =?us-ascii?Q?D9IprsnX5wnxaeb2ElSbK+EeBiDGLFy4Vd3tziHTLalgEEH7rQ2dR7yaTfim?=
+ =?us-ascii?Q?IrA60rpRm6P6WwcntAiuJ7VM0WaxD9AmStkmNlCApzXuuSfndWGYTA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?JHzDUpbl0MUadDPf5kRXPtuoBo3qdr+VkPdPdjh5IPHFAMOfqAcQSZDmUT/2?=
+ =?us-ascii?Q?9Fh8q//oJWz0wDcz6DUIyv46TGbNG/vzCPjOHXrwBJjzIRFe1fyci32YYXt7?=
+ =?us-ascii?Q?YNQn8scQJECzlq8zYGFmhgnjLNqV/8CNJb4dibXZlCY98nE7lIlt4MlrM2Fa?=
+ =?us-ascii?Q?ol8VeFjtwg+XNn4FojOPPq4E6VkjJN+eGWOnWvLXhhzbH1qeIyWfbveaGyvC?=
+ =?us-ascii?Q?HPUvMnz+UkVzWJvDjOpaFwrKodv6JvJONalmm8/ol35+P4iPIXIUBvGstpdk?=
+ =?us-ascii?Q?5/wfGXbteADy0ATjG2D+GfAVk8mCN4VY6FaC+iNNSzHcjeW2VPtMsqHXk19t?=
+ =?us-ascii?Q?+b7qp4XuuyRxr97ONWM0PGC5oB7HOerrO6UFLD+HLKjpUyWoigGJOKI4BrN0?=
+ =?us-ascii?Q?Ps+pLfxPygtQePL/CfCeR20R+GmlZ9X/lxvCsXRzjoE54fuNcJzaIz7g25tJ?=
+ =?us-ascii?Q?8CN4KSZDFWuVN339JLpPaPL+DuI3+qkcPbmzM5i6XK8+DncAj8EjEQqc9rN8?=
+ =?us-ascii?Q?h8OYzyCIieXNy3FYVUsyQjSNcL6DYqKV2sWDLw/NQNgWPFJRXHzm382IxYWo?=
+ =?us-ascii?Q?xJaV89uSy7PU3Z6b8x9PAVRBcPSnkkpEMo78PMsF4bAd3a+GvjLWzj9ltj9I?=
+ =?us-ascii?Q?fvniGWYcBmk2wT5LEbTKFURxmopb5p24x4DeeUL97eaBKzMiRZyeqUX7Iixs?=
+ =?us-ascii?Q?arVhRpBUNFHTNQkbWbRZn5S7xzYt9b7K5f5ka02Fp/dFy+oTqdzMju1PpysA?=
+ =?us-ascii?Q?NNKX7hdnDIB1oYhDawmIwx+CxxUozuyc9OtaIcJEh7Wt1gHhsmrpjjPt1Sbf?=
+ =?us-ascii?Q?sISv7VfbAqvRcjDmA3mIfPHfeETqil3RalByKJw17FSwakGXr7kOBAFniTrm?=
+ =?us-ascii?Q?e/WPqhxXNptzXSALLWYEjb4wvQ+CDCTvdoZcb1K+/bSET+633HnfiN814YG3?=
+ =?us-ascii?Q?IK75Svv5PNklE0S4zT27MVaQ90LQwwlRixKtyWO5JqFLZoySPfsF0ZLKpgjx?=
+ =?us-ascii?Q?r2H+1J63pSeWHUE5ddU6wSMwP7gp/2ZiIlcxD8g346xrZFD52GUlYdSVsudk?=
+ =?us-ascii?Q?yabuOfRdcaydwUV0zUT1sx1Xnc1vt6Jwm1aCP8O9ZWfy80wpGDFxonxphl9T?=
+ =?us-ascii?Q?8TlJmOXbrXtPmB0k0LoSIulVoH+rv1ginvegUgGsex2+BxULQuVG1Bmu/DyI?=
+ =?us-ascii?Q?n1s3o0YOTc72arbfL0a13T2ikzSgHlNbjkY8IlMJMXKfETh5WByQhGiAPwAC?=
+ =?us-ascii?Q?8xLvNnBSYJarFUbRoL233o7sE0S84RYFKvdMds72KAPPHjVtr+E2YA4u6oBc?=
+ =?us-ascii?Q?qy2EpsrWd2QPiVQ9NIqyl1l68a1ZljhMxLSBhiZqVNVtNYuY0g+7C+GbfSzi?=
+ =?us-ascii?Q?ZOMifLE7bAn9BcQEBSHNOb7EZiwEBH+TWIQA0+r1Ys+SPdfp8DtM18Ztspl5?=
+ =?us-ascii?Q?604r0eJScs+cLtesxDqBrqrywrdfV2xcmgV/pI98hBsOLg4KMof0e7iaGb7g?=
+ =?us-ascii?Q?mC4q+l9cdKhLLzlg1byL9UeZ/c3XLBcM226nzv3gYYVtTEWxZmqI5n9sraZ8?=
+ =?us-ascii?Q?X/WQhQD6UnbJVcVj8FJHmj0IIzUfeAj8Wn7uw72NKB0ujxhIWHRICkLcMQ+Y?=
+ =?us-ascii?Q?71W/kgyYBuxDlsxA8oB0LxM=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35ee2639-0acf-4189-75fc-08dda5314d0c
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 19:35:32.8801 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +wIgHwfV4FrEtBVT7JE7RyXymC0tkkE8c5CPbl/+R14FGrQn528Jb5mKLW7BCpehySTXIcqHErxZ1Pa3AlF8/URp2Ujll734Nw5IQbYdg4k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7623
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,98 +158,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+patches for various bugs in the spl code
 
---5nDbO3Mn0Gom6omu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Mikhail Kshevetskiy (3):
+  common/spl: fix potential out of buffer access in
+    spl_fit_get_image_name function
+  common/spl: handle properly images with bad checksum
+  common/spl: improve error handling in spl_fit
 
-On Tue, Jun 03, 2025 at 07:54:48PM +0530, Anshul Dalal wrote:
-> We use the spl_board_prepare_for_boot hook to call k3_falcon_prep which
-> is ran after tispl is loaded but before jump_to_image.
->=20
-> In here, we find the boot media and load the image just as std falcon
-> flow (since spl_start_uboot returns 0 now). Once the kernel and args are
-> loaded, we perform fdt fixups on the fdt accompanying the kernel (if
-> loaded as FIT) or the loaded up args and return.
->=20
-> Now when the flow goes to jump_to_image, we do the regular pre-jump
-> procedure and jump to ATF which jumps to the kernel directly since we
-> have already loaded the kernel and dtb at their respective addresses
-> (PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE).
->=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  arch/arm/mach-k3/common.c | 107 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 107 insertions(+)
->=20
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index fc230f180d0..70317fec19c 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -259,8 +259,115 @@ static __maybe_unused void k3_dma_remove(void)
->  		pr_warn("DMA Device not found (err=3D%d)\n", rc);
->  }
-> =20
-> +#if IS_ENABLED(CONFIG_SPL_OS_BOOT) && !IS_ENABLED(CONFIG_ARM64)
-> +static bool tispl_loaded;
-> +
-> +int spl_start_uboot(void)
-> +{
-> +	if (!tispl_loaded)
-> +		return 1;
-> +	return 0;
-> +}
-> +
-> +static int k3_falcon_fdt_fixup(void *fdt)
-> +{
-> +	struct disk_partition info;
-> +	struct blk_desc *dev_desc;
-> +	char bootmedia[32];
-> +	char bootpart[32];
-> +	char str[256];
-> +	int ret;
-> +
-> +	strcpy(bootmedia, env_get("boot"));
-> +	strcpy(bootpart, env_get("bootpart"));
+ common/spl/spl_fit.c | 25 +++++++++++++++++++++----
+ 1 file changed, 21 insertions(+), 4 deletions(-)
 
-Since we're talking secure parts, strncpy is even more important, and
-being aware of:
- * Note that unlike userspace strncpy, this does not %NUL-pad the buffer.
- * However, the result is not %NUL-terminated if the source exceeds
- * @count bytes.
-=66rom lib/string.c
+-- 
+2.47.2
 
-> +	ret =3D blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, =
-0);
-> +	if (ret < 0)
-> +		printf("Failed to get part details for %s %s [%d]\n", bootmedia,
-> +		       bootpart, ret);
-
-=2E.. and bail out?
-
-I feel like all the changes here need a read with "and on failure in secure
-mode what can someone abuse this to do" in mind.
-
---=20
-Tom
-
---5nDbO3Mn0Gom6omu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhDPjYACgkQFHw5/5Y0
-tywrOAwAlKGNMynw9nWanDSnfNNo7iV6QqRAXRf/25hh3oK715Jmi5RXpIk54a0G
-omk7q70cqLrxLsHtTHQKR5/30lhhh91X/PYdiGuuNro6CgEPVaOsWOrPBjh472fx
-3ULfDDL7C9tWMVcMc2EdJuhwWOT86t4tedT+iYTLxdSGG4gaJWWkllAjoWmRbvn5
-fHHDM2IlgT5xrZk8F1MDmywx9Lqh4Sj1yFwQ7WgozAmlW9t8Z9EotF8EY6g4PMOG
-HDBpQNw9izw51r5XU0mEDFOjDb1ZwOPqeiEC4oc4PoNUnDO5I/tXoCWPwpkrJey2
-qdNc70Ddy0gqObv8Qi/EAkeFolVVdWC+n/c3+atP1fhTkk/oVUQF9rqPlV/pvjoZ
-TFPV5pR3iG2ZVqWj1Tn3h53pcNLnBJ9TsLSZeBMI8qKi+G3IXC0uv1c0nIx087wY
-JfVdOMnX3MitWAdNupeCsjZoz9ei+4X/XDk8NgB1SSzxueUXLIxlysqomocktInk
-uOZpRmv4
-=aGDX
------END PGP SIGNATURE-----
-
---5nDbO3Mn0Gom6omu--
