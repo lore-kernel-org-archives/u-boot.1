@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1FD9C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 04:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B09CC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 04:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 227A3807B1;
-	Fri,  6 Jun 2025 06:28:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 73D7B828F8;
+	Fri,  6 Jun 2025 06:28:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="FZebYn7g";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="hprwHNyH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5305E81E25; Fri,  6 Jun 2025 06:28:24 +0200 (CEST)
+ id 0CE5182977; Fri,  6 Jun 2025 06:28:27 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78BAD800C1
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 06:28:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30940828A2
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 06:28:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 2FEFF25F3F;
- Fri,  6 Jun 2025 06:28:21 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id F03ED25EA8;
+ Fri,  6 Jun 2025 06:28:24 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LnJoK8uu3zf2; Fri,  6 Jun 2025 06:28:20 +0200 (CEST)
+ id AWbcTC2ET6Av; Fri,  6 Jun 2025 06:28:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1749184100; bh=9gYBFAaQXGCtqxgFKAQ0UDg9cQzDSsYV+4pFfp4M65c=;
- h=From:To:Cc:Subject:Date;
- b=FZebYn7gBpNkYG2033igEYyNPMWdhcBEPlv+eeIfP38x+nN+t7MQH6dMqLsGp0tQz
- vL9yQ1yfrQX27WbLokmLOUMCW+1YUyqZ68XMF+tPJaD3H0i9djWS+cTz7KmHrPZuND
- QRWpb7yPl2T8ETT5a2uacvHaocwT2/qt+kXnVBzCtN9tuJwCEh5DABVCPR6LnLkcoN
- Q+l6bIBSZ5xgBpgYSbaN6viplGRddlYDYt+WfkqJLy+RlLnuMhJowpNpmK7KsKYlSY
- TSdW9WbWaQSyEj/s1Upr7jbdg7o/sa17Vx+njowR3/Gpu2A19jKkMccuJGk1070qf5
- XWXRUFbPcJmyw==
+ t=1749184104; bh=vvbvvzGbzfxe02v3Fo7d1NSqGrnQD/frqKIR4Nbhb1U=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=hprwHNyHUAe5GW9gWj0UccAUT2EYfdjuj3tm3eMcnKlj+ph9dqTUKooVURe203s1d
+ WFdNZMYL/xfc3ONzGg79codqtESjH9NjC0BGktblRszX4kg7cnj1uWiAPBvAhCnOq2
+ U7TOVY3hKVm2IIoyN2UfciKEFYkVRjW/v4CuHYu3gaghWAbfacU+xkujElwppBR3u7
+ 91udCmnf1mrBACEfwLInCoWclY3tIjxC0HQ4qdXEzlkUuQfXzAsDJPrxjwHW0q4Nmu
+ VcCIDqD7L4lICWa6gCC4gkoyY+/pzur2NScnBAbNXN7W6Xh93H4DdBzsNYbnzsbdS9
+ wp/XDQH6b8z4A==
 From: Yao Zi <ziyao@disroot.org>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>,
  Yao Zi <ziyao@disroot.org>, Maksim Kiselev <bigunclemax@gmail.com>
 Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
  Han Gao <gaohan@iscas.ac.cn>
-Subject: [PATCH 0/5] Bring up secondary cores on Lichee Pi 4A
-Date: Fri,  6 Jun 2025 04:27:59 +0000
-Message-ID: <20250606042804.64311-1-ziyao@disroot.org>
+Subject: [PATCH 1/5] riscv: aclint_ipi: Support T-Head C900 CLINT
+Date: Fri,  6 Jun 2025 04:28:00 +0000
+Message-ID: <20250606042804.64311-2-ziyao@disroot.org>
+In-Reply-To: <20250606042804.64311-1-ziyao@disroot.org>
+References: <20250606042804.64311-1-ziyao@disroot.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -67,37 +69,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TH1520 ships four Xuantie C910 cores, but only one of them is
-automatically brought up by hardware on coldboot. This series adds IPI
-support with T-Head C900 CLINT, setup CPU features to prepare for SMP
-operation, and finally bring the rest three cores up.
+Although timer component of the CLINT isn't fully compatible with the
+generic RISC-V ACLINT, the IPI component behaves the same.
 
-Booted with the series, Linux kernel correctly shows and makes use of
-four available cores,
+As the CLINT doesn't have corresponding riscv_aclint_timer driver
+available, let's try looking for a compatible SYSCON device directly
+when no riscv_aclint_timer device could be found on IPI initialization.
 
-	[    0.042371] smp: Bringing up secondary CPUs ...
-	[    0.052448] smp: Brought up 1 node, 4 CPUs
+Signed-off-by: Yao Zi <ziyao@disroot.org>
+---
+ arch/riscv/lib/aclint_ipi.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-This depends on v1 of series "Convert Lichee Pi 4A to use S-Mode proper
-U-Boot"[1] to function correctly.
-
-[1]: https://lore.kernel.org/all/20250530094851.57198-1-ziyao@disroot.org/
-
-Yao Zi (5):
-  riscv: aclint_ipi: Support T-Head C900 CLINT
-  riscv: cpu: th1520: Setup CPU feature CSRs in harts_early_init
-  riscv: cpu: th1520: Add a routine to bring up secondary cores
-  riscv: dts: th1520: Preserve CLINT node for SPL
-  board: thead: licheepi4a: Bring up secondary cores in SPL
-
- arch/riscv/cpu/th1520/cpu.c              | 29 ++++++++-
- arch/riscv/cpu/th1520/spl.c              | 83 ++++++++++++++++++++++++
- arch/riscv/dts/th1520.dtsi               |  1 +
- arch/riscv/include/asm/arch-th1520/cpu.h |  1 +
- arch/riscv/lib/aclint_ipi.c              |  5 ++
- board/thead/th1520_lpi4a/spl.c           |  3 +
- 6 files changed, 121 insertions(+), 1 deletion(-)
-
+diff --git a/arch/riscv/lib/aclint_ipi.c b/arch/riscv/lib/aclint_ipi.c
+index dcd7e5e6b34..1c9a2d70301 100644
+--- a/arch/riscv/lib/aclint_ipi.c
++++ b/arch/riscv/lib/aclint_ipi.c
+@@ -29,6 +29,10 @@ int riscv_init_ipi(void)
+ 
+ 	ret = uclass_get_device_by_driver(UCLASS_TIMER,
+ 					  DM_DRIVER_GET(riscv_aclint_timer), &dev);
++	if (ret == -ENODEV)
++		ret = uclass_get_device_by_driver(UCLASS_SYSCON,
++						  DM_DRIVER_GET(riscv_aclint_swi), &dev);
++
+ 	if (ret)
+ 		return ret;
+ 
+@@ -66,6 +70,7 @@ int riscv_get_ipi(int hart, int *pending)
+ 
+ static const struct udevice_id riscv_aclint_swi_ids[] = {
+ 	{ .compatible = "riscv,aclint-mswi", .data = RISCV_SYSCON_ACLINT },
++	{ .compatible = "thead,c900-clint", .data = RISCV_SYSCON_ACLINT },
+ 	{ }
+ };
+ 
 -- 
 2.49.0
 
