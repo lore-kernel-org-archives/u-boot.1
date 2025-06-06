@@ -4,64 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A326C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 09:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5404CC5B559
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 09:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83AEF81FEE;
-	Fri,  6 Jun 2025 11:47:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id A80CD81FEE;
+	Fri,  6 Jun 2025 11:51:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XD4ZPUka";
+	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="BKpawqhJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFDAB828F8; Fri,  6 Jun 2025 11:47:15 +0200 (CEST)
-Received: from mail-m155105.qiye.163.com (mail-m155105.qiye.163.com
- [101.71.155.105])
+ id 9320D828F8; Fri,  6 Jun 2025 11:51:07 +0200 (CEST)
+Received: from mxout4.routing.net (mxout4.routing.net [IPv6:2a03:2900:1:a::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AE02803DF
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 11:47:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 92F4E803DF
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 11:51:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 17c46c1be;
- Fri, 6 Jun 2025 17:47:07 +0800 (GMT+08:00)
-Message-ID: <ef361244-b5ec-4125-8539-bd7fd83cd747@rock-chips.com>
-Date: Fri, 6 Jun 2025 17:47:04 +0800
+ dmarc=none (p=none dis=none) header.from=fw-web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
+Received: from mxbulk.masterlogin.de (unknown [192.168.10.85])
+ by mxout4.routing.net (Postfix) with ESMTP id 2949D10001E;
+ Fri,  6 Jun 2025 09:51:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
+ s=20200217; t=1749203465;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Yg6xzIcUsTBsc/YaJiNmkcrlLnhfdulS7B33swcSuuM=;
+ b=BKpawqhJCZ1atMfQmN+FdCU+umZ7Xl0/bVZAamt/yS1ymykf+MktMONm+gVPSMDY7b4M6R
+ qoX9eNblwLZmBcndWsfGnl6vbXSVjNWvqy2sPOeEgxFpr0wTdSq54qnVMM8vBT/DXZnsL0
+ qS6f7yWMK0ogWLy2SbWjIGpIdmBXDM8=
+Received: from frank-u24.. (fttx-pool-194.15.80.120.bambit.de [194.15.80.120])
+ by mxbulk.masterlogin.de (Postfix) with ESMTPSA id 06EA01226D4;
+ Fri,  6 Jun 2025 09:51:05 +0000 (UTC)
+From: Frank Wunderlich <linux@fw-web.de>
+To: Michal Simek <michal.simek@amd.com>, Heiko Schocher <hs@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Cc: Frank Wunderlich <frank-w@public-files.de>,
+ Maksim Kiselev <bigunclemax@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v1] i2c: muxes: pca954x: add pca9545 support
+Date: Fri,  6 Jun 2025 11:50:54 +0200
+Message-ID: <20250606095056.22082-1-linux@fw-web.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: px30: Implement checkboard() to print SoC
- variant
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>,
- u-boot@lists.denx.de
-References: <20250528-px30-identify-variant-v1-1-4ea69c527a0d@cherry.de>
- <b9a85c5c-ddbc-4c67-ba29-52a4cb7bcbe3@rock-chips.com>
- <55c63b2e-baac-457d-b6d5-b03eba4d30c8@cherry.de>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <55c63b2e-baac-457d-b6d5-b03eba4d30c8@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCGE5KVk0YGEwYH0JCGBlCGlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a9744a3102e03afkunm89869c9e1f9c3c
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mhw6GRw4HzErAxhIORQIMkgJ
- HxQwCj5VSlVKTE9CSUtISUlCSUpOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU9PSU83Bg++
-DKIM-Signature: a=rsa-sha256;
- b=XD4ZPUkas/4uGCxiNzGpxTPwV2dT5MhTjJ2nOrJ+4n9blQ588qdaOJqwxFwXRMzkpObArmzrIidPmZPT07lVbWnpOocHOV4O+kL/IsMo+JJUIcKdYLyLYP9lIn8oQKekCsIAA9yekYWTZGMBBS8o7fN6JI4Gfm8c+gIS6Ks+JQw=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=2INFFGw2K4rVnlE2PY3su0gA82SW0MFwNTGKnyz+crs=;
- h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,105 +66,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+From: Frank Wunderlich <frank-w@public-files.de>
 
-On 2025/6/6 17:15, Quentin Schulz wrote:
-> Hi Kever,
->
-> On 6/6/25 11:09 AM, Kever Yang wrote:
->> Hi Quentin,
->>
->> On 2025/5/28 20:00, Quentin Schulz wrote:
->>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>
->>> This implements checkboard() to print the current SoC model used by a
->>> board, e.g. one of:
->>>
->>> SoC: PX30
->>> SoC: PX30K
->>>
->>> when U-Boot proper is running.
->>>
->>> The information is read from the OTP. There's no public information as
->>> far as I know about the layout and stored information but this was
->>> provided by Rockchip themselves through their support channel.
->>>
->>> I'm aware of at least one other variant, the PX30S/PX30-S but I have
->>> neither a board with that SoC nor the information of what the value in
->>> the OTP is supposed to be. If it follows what was done for RK3588
->>> variants, where the letter is derived from some offset added to the
->>> value read from the OTP, PX30S could be represented by 0x33 in the
->>> OTP. I'm assuming this is correct and simply printing the char
->>> represented by this offset added to the value in the OTP instead of
->>> checking whether it's 0x21 (PX30) or 0x28 (PX30K) or bailing out.
->>>
->>> Also add the OTP node to the pre-relocation phase of U-Boot proper so
->>> that the SoC variant can be printed when DISPLAY_BOARDINFO is enabled.
->>> This is not required if DISPLAY_BOARDINFO_LATE is enabled because this
->>> happens after relocation. If both are enabled, then the SoC variant 
->>> will
->>> be printed twice in the boot log, e.g.:
->>>
->>> U-Boot 2025.07-rc3-00014-g7cb731574ae6-dirty (May 28 2025 - 13:52:47 
->>> +0200)
->>>
->>> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
->>> SoC:   PX30  <---- due to DISPLAY_BOARDINFO
->>> DRAM:  2 GiB
->>> PMIC:  RK809 (on=0x40, off=0x00)
->>> Core:  293 devices, 27 uclasses, devicetree: separate
->>> MMC:   mmc@ff370000: 1, mmc@ff390000: 0
->>> Loading Environment from MMC... Reading from MMC(1)... OK
->>>
->>> In:    serial@ff030000
->>> Out:   serial@ff030000
->>> Err:   serial@ff030000
->>> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
->>> SoC:   PX30  <----- due to DISPLAY_BOARDINFO_LATE
->>> Net:   eth0: ethernet@ff360000
->>>
->>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->>> ---
->>> Tested on a PX30 Ringneck and PX30K Ringneck. Would be nice if anyone
->>> had a device with a PX30S or any other variant so we could verify it
->>> prints what it should :) Or maybe Kever knows :)?
->>
->> PX30S has the same id with PX30 in byte 6.
->>
->> For PX30, there should not have other variant now.
->>
->
-> Thanks for the info.
->
-> Is there a way to differentiate PX30 from PX30S from the OTP maybe?
+Add support for 4 channel pca9545 found on Bananapi R4.
 
-This is the code from vendor kernel for identify PX30 and PX30S:
+Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+---
+ drivers/i2c/muxes/pca954x.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-drivers/soc/rockchip/rockchip-cpuinfo.c
+diff --git a/drivers/i2c/muxes/pca954x.c b/drivers/i2c/muxes/pca954x.c
+index 9dd269727036..d13947a0d9cc 100644
+--- a/drivers/i2c/muxes/pca954x.c
++++ b/drivers/i2c/muxes/pca954x.c
+@@ -22,6 +22,7 @@ enum pca_type {
+ 	MAX7369,
+ 	PCA9543,
+ 	PCA9544,
++	PCA9545,
+ 	PCA9546,
+ 	PCA9547,
+ 	PCA9548,
+@@ -79,6 +80,10 @@ static const struct chip_desc chips[] = {
+ 		.muxtype = pca954x_ismux,
+ 		.width = 4,
+ 	},
++	[PCA9545] = {
++		.muxtype = pca954x_isswi,
++		.width = 4,
++	},
+ 	[PCA9546] = {
+ 		.muxtype = pca954x_isswi,
+ 		.width = 4,
+@@ -141,6 +146,7 @@ static const struct udevice_id pca954x_ids[] = {
+ 	{ .compatible = "maxim,max7369", .data = MAX7369 },
+ 	{ .compatible = "nxp,pca9543", .data = PCA9543 },
+ 	{ .compatible = "nxp,pca9544", .data = PCA9544 },
++	{ .compatible = "nxp,pca9545", .data = PCA9545 },
+ 	{ .compatible = "nxp,pca9546", .data = PCA9546 },
+ 	{ .compatible = "nxp,pca9547", .data = PCA9547 },
+ 	{ .compatible = "nxp,pca9548", .data = PCA9548 },
+-- 
+2.43.0
 
-         rockchip_soc_id = ROCKCHIP_SOC_PX30;
-#define PX30_DDR_GRF_BASE 0xFF630000
-#define PX30_DDR_GRF_CON1 0x04
-         base = ioremap(PX30_DDR_GRF_BASE, SZ_4K);
-         if (base) {
-                 unsigned int val = readl_relaxed(base + 
-PX30_DDR_GRF_CON1);
-
-                 if (((val >> 14) & 0x03) == 0x03)
-                         rockchip_soc_id = ROCKCHIP_SOC_PX30S;
-iounmap(base);
-         }
-
-
-Thanks,
-- Kever
->
-> If not, do you want to show
->
-> PX30/PX30S
->
-> when byte 6 is 0x21?
->
-> Cheers,
-> Quentin
->
