@@ -4,162 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 612F7C5B559
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 10:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC197C5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 10:50:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A38AE81FEE;
-	Fri,  6 Jun 2025 12:49:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 03EED81FEE;
+	Fri,  6 Jun 2025 12:50:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Nvws4MiN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S6YY55Ot";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12A5382977; Fri,  6 Jun 2025 12:49:10 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5AFF682977; Fri,  6 Jun 2025 12:50:04 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26EF781F0D
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 12:49:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id DA0CC81F0D
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 12:50:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=npt9cVgkgd27AxAA+HxjAG6Jlp0m6//WPx18Uwdp+4x3JRPsUVyFZCx2J7P4M7FKW5KZ6ZfFmT0PMgmViuQx/c446JClo9WUy88+C09Be5R2aEUmvYGjI8UnkuQy1hwuMhqVFt39lkl74A8gUGT8oWi7DdNAxZfWe8WJB4HmH3kr61BC9dv+U1FL3L5qd+puDIhDyxl/TLdrFYZgmRqDM6RgHKV+epFR7HwNjrP9Qkcx6MCvPsDCV4YfEcph3bVtxjSe/f3+lIpspu0fpQwtOfvDBnF3354OY4nnOBPpUNBJC6dRubyppg6mS83dfAr/by1wMhEqrA6Z19D9E8Q7rA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EHSR83bQ+WRipycbi9qzYpI8YpgoV0qrigAaDOljo60=;
- b=QmW0nf9flecqWoD5c0Mg9/pA7GJ9oLsA89TSN5o4TmSbt2YY6ikhCjfGgt68Jjfg+JzCns77qfwneQWxzkzWb5oZWforpkSexSJCZWna2abkKjprItJtTsNkltWZ20x1Z9tQXWDUfyy86PV9x6MYtyAW+VyO7wIPijSoaR/AGAaynQKNicKVUZFiqnubzr5o0BcYmh+3mdT71O5ldkVmanlykgse+oq+yrvpihkLpxPJk8YPhcZTbDZAC87wkVqwscPcuVIOb3dSpQ+e3T2AFeMN83dpZxBFsaR/NrzEsKk/N7oXzC3V6WOPodVfF2BeqZRMYl7SE03zr2MgTfzB6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EHSR83bQ+WRipycbi9qzYpI8YpgoV0qrigAaDOljo60=;
- b=Nvws4MiNo35SKzwceIqi2VanApoEjxJmcM0oxB1nnGTE0uPU7Y2hAxUOB22j/DZU0X4uDqrMpEUT/aihz+MAxkNQvm2sDswFLgnml5Erh351wl1uzhSRk9d16X1xsU+mBJYt9qTYebDPpFV+I6Zr90TVahqQUttioa3HmeJJ0zw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA4PR04MB7694.eurprd04.prod.outlook.com (2603:10a6:102:e7::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.20; Fri, 6 Jun
- 2025 10:49:06 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8813.020; Fri, 6 Jun 2025
- 10:49:06 +0000
-Message-ID: <8040c469-5132-4186-9774-857f49f4f076@cherry.de>
-Date: Fri, 6 Jun 2025 12:49:04 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-442f4a3a4d6so11343145e9.0
+ for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 03:50:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749207000; x=1749811800; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=oEcpeNgV0KNuAcACVLBZU+URhNncHip8VZ8ec5sxrs8=;
+ b=S6YY55OtdoCXPiUO2+PfWVI85pONsrbksrwpF+tdXCgUxtxl6jQ9Qd3pKNj2Wvn63k
+ UmCf0HlNxAkPMGLG3Nd4D9z2nPRNWNw/MPIGQw+iQ2Fmwh/R8tHKBxUpx1LQA20Zhx/H
+ 0XX/3CHYtjVe5AMBj2ufVl8YfbxzxwD92Ss2Ed91BZI/CvbEx6x8TcmBeKrAVe7mLv5z
+ B5nXX3ZZvOP60mkDAS61Vj583YTeOPoQiMGRdvYvjGWp8C8hTzU2iY5pJeEdvTVkLC6O
+ Q+Fq9m9lqmDonz2u+Zp8M2oxUKnhls2EM2dDECw96bfe32BaAPa3PYzh5t68PUHJoLTh
+ AsLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749207000; x=1749811800;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oEcpeNgV0KNuAcACVLBZU+URhNncHip8VZ8ec5sxrs8=;
+ b=hC/jPHnYLyZh9ne0J/Jq7V/IIFU6f6vL9MULmwi0kj06FoL5nnzAv26QBL9p35biAI
+ QnhBxEe4rA/3ep6oYOzGpuka3Jw+lZzX1ljdGdTARVnAXfoW7jVUpP8rejXwUsYcyBD4
+ e04U14OoFg4Mzsimee0dP4Gnz+IW68Qxy43ik06AXgtwyEYtBBL+ssvl+OYsQYtGC3w6
+ y9kHvBd0cTVULKkJc9DzZqX5Tw/1pYw6dWFyuOC6Hc8o+i+ALAjzYMYMwAuiE8J5wrrL
+ 5G84CCzmtUmMH7KmW3c5HpDdWBAv9mCRGThMQkXIRCU/F4FWl1udov9Mr3Z1WNG4DnR5
+ u9sg==
+X-Gm-Message-State: AOJu0YzRj4yW+MfxgbfD3IpTIbT6Xzf6qp2iwPo2tnrwS8+xpHydY6EW
+ qd4mdtaWRHuRyv5e9YNcuGJs2cdtQdzO/TtekWzUQHzbR1unk2Yyv2iY32BJXn1rFQG+Msbpi5N
+ zmGyIuKU=
+X-Gm-Gg: ASbGncuWVgn5AbcpKomyse30HV41bLPKZF1J3v5SbuiE3I2wMHiPho5mM8Dy1a1AFIv
+ azhp+V2fyNp7gQYfG4VlPn+odcsPnL+Qp8MwFUmSmCQF56syNHHpv7FtMON4x76ejyUlNn4YCVN
+ WHlmdUiFG4kGyKIOrJoGB3M2Qn6h7ObJpDLJEUpvKU+xFcwK7tA/MhuGllD9AojwiseahP4IaZB
+ eq3gjGbZdPcyArCAOFghJtcVIAAIktlN56zn5jeVyGkVSSw3nHgiC7Ym08V29QWibrnprw6ow8z
+ RacGwqcnUFUQ9r+5+d534JbdtN2vEtbFxL37Ez/ty+DJiCSksTGrqXOo3gP371lMOOEqxd6IEAo
+ GoV+jJnnW4M2F4LHUz/nDOoaAID0DM1Q=
+X-Google-Smtp-Source: AGHT+IH8r3ayLLEBVUGAaAQPxxgMp+ukuzkBnuhrfM3oCQ6gOBQjWbq+CPEW/78u7o7Cln8RnDe9xQ==
+X-Received: by 2002:a05:600c:4e4f:b0:450:d79d:3b16 with SMTP id
+ 5b1f17b1804b1-4520159c111mr30731395e9.14.1749207000325; 
+ Fri, 06 Jun 2025 03:50:00 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:ee3:2301:c625:7937:4718:437f?
+ ([2a0a:ef40:ee3:2301:c625:7937:4718:437f])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4521375a392sm19526435e9.36.2025.06.06.03.49.59
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Jun 2025 03:49:59 -0700 (PDT)
+Message-ID: <10d4a4b3-2737-4908-92ef-af8c1dc09305@linaro.org>
+Date: Fri, 6 Jun 2025 11:49:59 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] usb: onboard-hub: Use devm API do automatically
- free the reset GPIO
-To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20250526-usb_onboard_hub_cypress_hx3-v2-0-f382415da84f@thaumatec.com>
- <20250526-usb_onboard_hub_cypress_hx3-v2-2-f382415da84f@thaumatec.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250526-usb_onboard_hub_cypress_hx3-v2-2-f382415da84f@thaumatec.com>
+Subject: Re: [PATCH v2] env: mmc: fix offsets relative to the end of the
+ partition
+To: u-boot@lists.denx.de
+References: <20250605074610.1424953-1-mwalle@kernel.org>
+ <a2f93b49-aea5-4bc2-881a-11d3d85e4dc3@cherry.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <a2f93b49-aea5-4bc2-881a-11d3d85e4dc3@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR5P281CA0047.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f0::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA4PR04MB7694:EE_
-X-MS-Office365-Filtering-Correlation-Id: b07bafa6-de21-41db-ce4f-08dda4e7c231
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?K1d1alBMdGs1UGNKSWk2SWV3N00xRTJGVjJ6NGszK2VqNzlwVDBMUHRzam82?=
- =?utf-8?B?THZtTkdMS2xIZUNQNzBOQjQ5WXpBZHR2aUE1blVsY1Vra3hTQjk4T2tjMFdn?=
- =?utf-8?B?QUhlSlQ3cksrV0VENi9sQjhYK09SZ1lDZlVEMmltdElIMXlzMlduajB0TVNK?=
- =?utf-8?B?aHJnUWpHTzdGcktsanp6TXZtakQwckhaUkxLcWZ5clZqaitwWW5KOTRxZ0p3?=
- =?utf-8?B?cW5RMXM3UWpZT3NSMUZ5L0xKZmFSKzl4Tk5XTUVVRGhJUEFISldxeTJYdWNI?=
- =?utf-8?B?VnM1elZZZU0vdHlBeXJjSmQ5SkdNempVbEYzdEl0aURRM0NuOEhyTVdZMStT?=
- =?utf-8?B?TldhcjQrTWFDTEVWMlJzNGdDRnVXZzVNL1IxV21BWU5JejE5aWh1SC84NTlH?=
- =?utf-8?B?a2x2WXBiYW54TlpuUEEvY1lXM1NwNXhDUzJpcjFlTXFiV3M5QW5iYUZEU0g0?=
- =?utf-8?B?VUZ2dVFwMHEydVZQWHFCMm8veWxNelJBNS82OGFvaDNkc1RDa3BsODM2Rkwy?=
- =?utf-8?B?cDM1UXRKdUtqZjFCT1JOU01YQUJVSndFR2psSmJ4MGgranJPMHVNOGYvT0JE?=
- =?utf-8?B?OFhPZ08xRk1BSXk3QmRCd1RJTzFVai9tQUhJUW82dDJENmYreElNSEptVTNv?=
- =?utf-8?B?ckxTQTVWYnA2cHJ5a3pLYnYraGx4VjVrbktpUDZ0eHhCcitjR2FJR0pjNUEw?=
- =?utf-8?B?SkpmdnE4eXBGZnFMRGtzQVhQaUk4aFpSbzVGZ3JnaEtwMExPNnBnOTRqL2tE?=
- =?utf-8?B?WkZtbCtxQjdwUEV4aytFNjcwTmowZW1LdHZNWVNMNVJTSy9PT2NYZ0JCZENy?=
- =?utf-8?B?ekovcHFnV2sycUFuVXNYMytQMlpaYldkaldlN01DTlY2K0NqNlI2b1FaZTV4?=
- =?utf-8?B?VEpvbTdOQUpUd2orUExPNzlFbmg2dzdSQXpBL0FvRytXVzl4bWpzRzdMQVBL?=
- =?utf-8?B?bStjeGM1bkZVRXJBbWhZU2dwKzR5MG5VUWNxNUN2Mk40ZGlMRXRHc3VKcDBR?=
- =?utf-8?B?YTVzam85TGxlVS9HOVVpRHNKVzBDcld3dmhaNDlrNGg0QXZqZTRZbWZJMFpH?=
- =?utf-8?B?NG1SRHIxY1VodVlJSjNnVkhvMWdsalR4ZW4zWTNXUlBnbDVBUEFhMHpLWEw2?=
- =?utf-8?B?UmxPYlhjTU5vd2U5NHN0TFczbmxPMUVtQXlBWExuZjFsRTMrSTY3YmZrN1V2?=
- =?utf-8?B?b1JTbW9ZM3FPaTVITURtUFdzVHVSajVtTnZhaGlpSDBXZHR6TGFLVVhJZFNL?=
- =?utf-8?B?WkhOVnd0TTFIalhoNWtsMEpsclkxdFh2V0lkWXJMWElHT01PN0JxZDFmeVA3?=
- =?utf-8?B?THVHUTMwV0tDSkdoNzRiMmt0bEF0Mno5RUNteVV3NEx0WWxUUCs0OWUyK0g1?=
- =?utf-8?B?MDlrVzdqajBCaUkrc3M5MkhKUkFVS0t3YlEwR1dGNHVrSmNtUzJjTzA3S3lG?=
- =?utf-8?B?TTYvKzBKbnBpVy8xMmo0aE5BVUUzYzYxYk1yNHRCZFpNMFVrTHU3enFwanpS?=
- =?utf-8?B?blIyZGUvZU95OW5wN1FtcTBpZU54UnQ1YTYrYmp2b0lJTTJkUHRLcHBNcWJk?=
- =?utf-8?B?QUZlZ3FqcVhOSk1EWUM1UisydDJUQVVTaWU5TlZLNmJvQytIZDI1YXhnZzdj?=
- =?utf-8?B?RzFTN3M4ZlJNWWJmSW5vWUxBVjRLeXdzTm1wb0V1T3hOUmYxSDhEcnU5R0Z6?=
- =?utf-8?B?M3hzd0VqcWxJTlc5Y00zVGsxM1Z3Nm5DSHk1SzJwYmhKdFdjVzhDbnlxQlJI?=
- =?utf-8?B?SWhJamh5MzI1WStEbW13bVlvS0p1L1owaXp4WTBpSTJjT2lQSnlNK29mS1Nq?=
- =?utf-8?B?SVVHUk84am51Tk5LQzNCdDVnL0pnQ0hiUy9ISis5VUd2Mmg0Y1puOGg5UUli?=
- =?utf-8?B?bWU1cGFUaDRlYWNBUE9GL0I4NjJNWDlkT1pOOG8yY0ZpL0NZL0IwM0dMSTBy?=
- =?utf-8?Q?xr6Bva+3khQ=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RldoQmFCL3FYYlBmMCtpZzFqTnp4bjc4YWhzcFVabmNRd3ZWMUxhTFphN0Jp?=
- =?utf-8?B?SC9ocmpVdXF4OWdQWHUybnhKeGxvZ3ZyZHd1ZlZOdCtCdXZ4amYrT2tUM2o2?=
- =?utf-8?B?RGZwUEVVL1pCZUZpanRDNS9nQnFCa3Z1UjBLNkp1R2ZkY3JxUnh5cUlpY0JF?=
- =?utf-8?B?cmo4eXZjcERSdmM3UkF5TFpvTU0rVGV2TERjWnl1NlprRitCUUZlK0EvcG9S?=
- =?utf-8?B?blU3N0I1czJLam80U3dGamgxWkhwekpoekt6YVVpY00zVzY0VVpqOGllTzE3?=
- =?utf-8?B?R2ZmdmlRMGwwbE5wVzNaV3RsN0Fma2x6akpUUGliUmZRb1hjdWRzSHoveUpj?=
- =?utf-8?B?T2tyb2dRa3Q2NmNJQmowRmdkM2wvTHRCb2ljSGxPM3dBTE0ycllOMk1KaDF4?=
- =?utf-8?B?K0ZNRGNPam5lNnVKRVBHOW9LS3FrMlEvekdHRk5pUnd4cXFaMUZ1R1dNZEIw?=
- =?utf-8?B?Q3lFbTd2dEJtbDhOM1F3ZXJISU50Y3lQelMyVUY0YzlzTVRvMVhaMTI1TUJO?=
- =?utf-8?B?MHpqeFNITVZraCt6TDNDeGNYbUt3UGRKZG4vTkRVdmNDNnk5TElKanVDY1lF?=
- =?utf-8?B?SmtvRHRnZGNrVHk5ZVcyamhsMWNDVmxnTWViWGNsWXlUT0RXczhtYTVoYlR0?=
- =?utf-8?B?RmtqWmJyMXZvaFpVbTJ4YzNHb1l0WEVmUnp5c2oyMS9pK0Y0L2VYT0hvT2l4?=
- =?utf-8?B?UmVXYWdZWVliY1VUMnh5L2x2Smd3RDdqWEx0b1JLQ2ZsNmpySndFQVJXREly?=
- =?utf-8?B?anpYYTg1S0JtcllTR3RuOXNBUDJnQ25jZ2IwSlpqRm9DUkR0d2hPbW1TU2Vp?=
- =?utf-8?B?ekt1b3ZVSHdsRHh1aHFYcmlXL1ZRVVVRZ3RLK2R1SCsxT0tudUIvaGdzVHBX?=
- =?utf-8?B?c2RuTDA5akJTTWZyMlBXYnVZRXh0WFVwbGZiYUFUdnVxd1d0bHU1Q0xIdzR5?=
- =?utf-8?B?OFVOMnRlMVdWTnIzZkNWQW83SEpiQVR3NzVMUThFd3M1R0YrSXRuLzhOOXFX?=
- =?utf-8?B?c2Q4Z0ZRLytuRlpuK3l2T1ZNbk45Uy9hb1VvNExBUXY2Sy93KzZLd29RbFVD?=
- =?utf-8?B?QkZ3Y0JKcUtHK0RZNFl0SWtXWEJGWENNRTBUUUxaMUxFdDBKMHNTK2Jnallm?=
- =?utf-8?B?aVk4ei9tblA0VFZCb0VQSC9FZ1RGS0NvV2l5Z05PNHVFZGZwejZEeEQxVWN6?=
- =?utf-8?B?MU5oZHBjOGxhRmlNSUQySTVzSXUvd1V3UFlJV3lGdXJZcVg4NHZnR2dzYTBC?=
- =?utf-8?B?OVM0SE1OL0FhL2xzMEVkd1NJUkwvRUVyMFFiQTVKTkVaVTR2RFd6RHFnQkpB?=
- =?utf-8?B?VStPRTBsT3N1ZFB6SldiSk90SGg4WkpPbGw3cjlCT2Y5MTl1djVCeHRsVlZB?=
- =?utf-8?B?YTRvQ0dJMHJqazFYOGZndWZ4aTFROWNuczZRNHhIbHZZVDRqcHU0SWlPblo3?=
- =?utf-8?B?WVVxanhyTjgwaWxlMFhHYXRxMEpwbGYyc3NSSnNMMnU4YXR6SW9tUmpXMUMw?=
- =?utf-8?B?QnE2SFBjaUNBaHBWaG1WMFczNnB6TGJHbDdRZ0xXYlM5VE4wbm5YNFZTVTZm?=
- =?utf-8?B?dHArOEtISXdpWHBrNTdVblIxeUovelMzMmg5b0IwNjJkZ29nWlVteXVDZnRV?=
- =?utf-8?B?aytXb2JYYjhzNHlPYzV2OEU0bXJhVGJnTTB1VlJQUE5WRmhmcEdtK25XWTVp?=
- =?utf-8?B?c1U3VHQrQXlCY1ZOTEQyUTlQTnMyY09ndCt0TG1xTW43VCtTdUhCTjlWemJN?=
- =?utf-8?B?SkhlcU92eCtzb0diNGZCQi93YUtrdmQxUEpLQ2hKa014ZVVuNTk1SFBjNTlx?=
- =?utf-8?B?QTljenh3NmFWYnVZK24wcmZPVGlnWUdIdEJwK28rK1ZhQnF5alhCNTVuUnB5?=
- =?utf-8?B?VStqMzNtSTU0cStXbStQSWR0RWFzTU45ZzEyMWFBdGZBVTZ3N0xKMDIwM1RY?=
- =?utf-8?B?V25WUE5GWUsrVzFWdnAwLzl2WVhkMlU1eTQvcnVxaWR0L1QxRitTS2VSeDFX?=
- =?utf-8?B?VVhtRHZMTTFQeGNQdmFiM1dXZlpqS2NtblAzL2I5ZUNMd1E4ajhQdlk3ejRJ?=
- =?utf-8?B?Wm53Zm1JSjg1R2ZkZmw5dmdwT1hFTlkwc2dSMElPbDAydi9kZExzeEJVZTlM?=
- =?utf-8?B?QUpZMHhIcGpRaWNKOFV6Y3Jldjg2dzFXUWtPR2N5Sk9vMXdHOXVHWWR4RzVX?=
- =?utf-8?B?bWc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b07bafa6-de21-41db-ce4f-08dda4e7c231
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 10:49:06.0400 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: klsNPGk54MliB92hpp0CvYR/1PzefPljd5qL/ROrlIyY1xrDdmRsHzMAnIhzeuHCGd3jw6TdL8ecz7uDb8MoNmCFmHOBVPuDh5PHnwkas+o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7694
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,25 +103,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
-
-On 5/26/25 4:24 PM, Lukasz Czechowski wrote:
-> The reset GPIO is obtained during driver probing by the function
-> devm_gpiod_get_optional, which means the GPIO will be automatically
-> freed when the device is removed. Because of this, explicit call
-> to free the reset GPIO in hub remove function is not needed.
-> To support the Managed device resources, the DEVRES config must
-> be enabled, otherwise the devres functions fall back to non-managed
-> variants. Set the necessary dependency to DEVRES in Kconfig.
+On 06/06/2025 10:45, Quentin Schulz wrote:
+> Hi Michael,
 > 
+> On 6/5/25 9:46 AM, Michael Walle wrote:
+>> According to the help text, you can set negative offsets to indicated
+> 
+> s/indicated/indicate/
+> 
+>> that the offset is relative to the end of the parition. But kconfig
+> 
+> s/parition/partition/
+> 
+>> doesn't let you specify negative hex values. I think this fell through
+>> the cracks when converting the symbol from a '#define' to a kconfig
+>> option.
+>>
+> 
+> Maybe a Fixes: tag would be nice there, but since we don't have stable 
+> releases like the kernel, not sure it matters much :)
 
-Good catch, but that is a terrifying find.
+Please always include a Fixes tag when appropriate.
 
-Unfortunately, this patch and the next ones aren't applying cleanly on 
-master anymore because of 77b053502f39 ("usb: onboard-hub: Fix return 
-type for regulator APIs"), please rebase.
+Thank you,
+Andrew
 
-This patch once the conflict is resolved is fine though :)
+>> Introduce a new boolean kconfig option to switch on the "relative to the
+>> end" behavior.
+>>
+>> Signed-off-by: Michael Walle <mwalle@kernel.org>
+> 
+> Not sure about the ramifications, but the change looks reasonable to me, 
+> so:
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> Maybe we should have some test for that to make sure it works as 
+> expected and keeps working as expected?
+> 
+> Thanks!
+> Quentin
 
-Cheers,
-Quentin
