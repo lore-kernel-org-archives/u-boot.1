@@ -4,91 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA963C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 19:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E23C61CE7
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 20:03:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37ACA81FEE;
-	Fri,  6 Jun 2025 21:57:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DDC5C81FEE;
+	Fri,  6 Jun 2025 22:03:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K6PZzjAR";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="MZ/rNzdj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09D5E82977; Fri,  6 Jun 2025 21:57:01 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2164082145; Fri,  6 Jun 2025 22:03:33 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0F2C81F0D
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 21:56:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E78481F0D
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 22:03:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3a51d552de4so1392992f8f.0
- for <u-boot@lists.denx.de>; Fri, 06 Jun 2025 12:56:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749239818; x=1749844618; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:subject:cc:to:from:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=vY/7HB1YXWIndUBf6dBJWi63zQa44cW1TBXM4yvxV2w=;
- b=K6PZzjARwtj3levQaunOImrtv9GccQYPXY9JaJBWf837fn/Jka+5lSfTuva44uBi9E
- ecgFW9o5Om4LlR4KCpEbug7cgSchYY6qcPQ+sTeNsGbn1E2mblaulJ1/hehJmg2CJLll
- XL76cF+nunkoTeN6XzeMXLJU5UnQKBx82AjWBLQx9uTwRUpxSH12fHi97vdSCI0PB6qq
- Bt0CVrexHPHkow//gCJZw4i7ECAri5C21xn4PH7PayMml+I0MK2wrt6xZfTqXzZdCk19
- x5let0CLHLVHvoXnTForWmUK+9g3shZRwrNQv/1J2JLjbzy8A2kDwOoYJ1sk4b+Clgfc
- vt9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749239818; x=1749844618;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:subject:cc:to:from:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vY/7HB1YXWIndUBf6dBJWi63zQa44cW1TBXM4yvxV2w=;
- b=ukPrdQmJY8xfBABcQ3DePrOAJbd8nekoynz5fO8D39ublzdInkL6IF14rMk7y+8dvW
- xeL2DSIcmaQDgsN4D+yQojfRmXfRhkhMs+sJciP9WzknuElkl0kpwtgCghyriCXCSV+E
- Abm6bTBCV+ADNK13eov6RDDn09LoQfZekVaPAistTF7RUKaEwIUnYRFtKsdMur4eI4Ma
- BOZR6TsS28xWAPmVp2PpHnVs9OFj1WMQZ6mRn4tdRW0LwdN6Br5lPGfk/aIQmvXeuOeA
- uJcTesabyKPMJEeV4YW4v5PCzCs7ScADVpXtN8pVoYKd1/N9Qsi2pdGj9+vXqjbcoLEY
- dp8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWFboJAsMOXRgF5LXdlwRNWILWbtkFYAToA+DM+IzGY9tnIJ61dqaQlDpPmNOGTUwoTqPVhnrI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1mPD550A6Js3YWMGIHuIa/NA61Zik878Ptyv+ohy4VbcDg3c1
- 05oG7CJqm5Hc0wjjdI6chuJ9/TUNs4yzRAEmyKPckv4esleKzFiwFAffdZcUtQ==
-X-Gm-Gg: ASbGnctrcnwPTwoOFHg8zhxbekTHGi+FmzE99uVzRzff1t3NtaWArm257x2MFArsaQj
- lqEK8GJtKA6GrC8FIvsMdi0PHWBadydLlMU9m4A+oG3wz7BYA/RHrzkxDeGUX9rZzyMDxKrkIjH
- MCF268cQcGXu85t9e77x4FuA9Ssyu9BVzKcvRlCv8nRTDcHdpfiaMm5s8TGS4rDS6abgnRpOj1W
- kSOTlyw+Gt55PH4vy0Qzh9k1OMJ1GHSK867qeTM8/vvGSn+LFiLuP5RvGIs/1z42Apy3FyAbund
- HjX929duSG9xS1Uc6Xv3KFu8TAGKwsVK/haKyAfwwJ6Nps2+gpv3Mmfi3YRNNx6CgHyJX77639F
- IMheAYlA=
-X-Google-Smtp-Source: AGHT+IFvKEIUn4SrRpBabvck8V+PbLXFIEh3rtL1iZTeNeeznUNulGI1yjD1f9UDTMNOEvEsOO4KKg==
-X-Received: by 2002:a05:6000:430a:b0:3a4:dd02:f565 with SMTP id
- ffacd0b85a97d-3a53178497cmr3999855f8f.3.1749239818297; 
- Fri, 06 Jun 2025 12:56:58 -0700 (PDT)
-Received: from Ansuel-XPS. (93-34-88-225.ip49.fastwebnet.it. [93.34.88.225])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a53243664fsm2771865f8f.65.2025.06.06.12.56.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jun 2025 12:56:57 -0700 (PDT)
-Message-ID: <68434809.050a0220.27a8f6.a476@mx.google.com>
-X-Google-Original-Message-ID: <aENIB1r0YYuULd81@Ansuel-XPS.>
-Date: Fri, 6 Jun 2025 21:56:55 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ljOwY9Dch6liXHMugJJk6RqJqHFjb+B3+4CfFtgGjlrHAe2aypZuFD5lRoodu0NohKqf50W5L5PzDkyxxhqxW/pQnwrlnnd9mR370JS6hgswrcvwRZHqjhcAnSlkWzZrHO8wd+FsDB2OU8aQ7cY7Qc12slrSqxsd3T5kacmFL5kRgKDA9iJA8JLfVHbjHxh9/I0y3Ue1tm5V9V/wGaSQ1V8dAl7RLzh1VyRd/c9UgqKFKSyE2g+grQceHp8YjPYPguMKGGaMlcgvsqqYg5eSKkIB2jJTgRSvBCIkowP25202zsLF9AkPS6iZw0Ad3Sb+wdmkOsHjjF/quluTTWu3aw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=umeSZzMBIX7dzW8FTHsRSANFR9ed1yqHnL0pEG6cRyE=;
+ b=qQK5P6EHu0VD/Jp2IEnRwTJdlLFMF3AJBLhgKJi65fvdRx6rkYrFLWTQz1/1DNmpHOq8qG200+wGc5sm8tgpMn5zUJ5yrp42pT09AsQVm35Q+zCz9lokxJg/8y0yI1yfHpfDQ0sMEjo44yfyC5HmFDoIww2e3AnpOjvTgPM7v0Xqf4/v4vcvyc4JAla6NUqxgtNvjyX8SyixHquPF93OyFszmGCzbHNBY88TUkom+1s2Tn+4Skg47HdkuZgvH+ShUR/m0r+Y9GpFtJkXlGS2ZOQnpHpWBXN3gZ/XCzKuPRK8+PFhE+TFYO1+JZIG53XILq0GYukwWBVFpP5HKw3yKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=umeSZzMBIX7dzW8FTHsRSANFR9ed1yqHnL0pEG6cRyE=;
+ b=MZ/rNzdji6yh8FZC6QBfYloUk3Lwoy7ClkaPS6ahRREvAAi7l/h4dNYRyQftxXmXaeFF12nYlJmaIkunm5THEl2RYmbA8JDAJHLWnvr7Vb7FGsdjIDiYWVAXPV37SXgB73WlQTrM3SB4pw/5GU6MYpSaiCiBHFp1NT+22R2T/4Beub+lEDdF5nW1RQ/Z8xi7iER0VO0Dk4Qw22Sn0De+p4j71oKU4xLbXl02ndqqVv8X6z5Pd5ws9UYKcH1k60d4iEfwViQlCAnP/w/v+FB4Iy2srAxhx6KwY5Lo2m35Col98gXG5ZAYSwxB8aEa+NleWyw97TD0xccSKf5fZB1WBQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS8PR08MB8325.eurprd08.prod.outlook.com (2603:10a6:20b:536::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.21; Fri, 6 Jun
+ 2025 20:03:29 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8769.037; Fri, 6 Jun 2025
+ 20:03:29 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] drivers/net/airoha_eth: fix stalling in package
- receiving
-References: <20250606194903.459732-1-mikhail.kshevetskiy@iopsys.eu>
- <20250606194903.459732-4-mikhail.kshevetskiy@iopsys.eu>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH] arm/airoha: reset_cpu() does not take any params
+Date: Fri,  6 Jun 2025 23:03:21 +0300
+Message-ID: <20250606200321.461248-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.47.2
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250606194903.459732-4-mikhail.kshevetskiy@iopsys.eu>
+Content-Type: text/plain
+X-ClientProxiedBy: GVZP280CA0061.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:270::11) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB8325:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b59418c-a0f8-4e9b-9c78-08dda535344d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ysvHDLKSwFIWIZhQJ4UQ9/IKUNvwov8EPOnV0UvjuYx+sSNghVXdRmVVBAZI?=
+ =?us-ascii?Q?i4AyfvlZtEf966brVtZKmc3dFzWkRAt7yqgQM9/NMM9msFIujCi8LPfUaYA5?=
+ =?us-ascii?Q?T14OH2S39TfTYDctgCZUf7GkIibjO6zoJnFGaYIV+dyuqe70KIhgSFgVjpK6?=
+ =?us-ascii?Q?prUQaBaT+/ZCzpaMPW4uaLFsF1vmwTSMadalAnBbR9KoaRUS9gHNzxVOomS+?=
+ =?us-ascii?Q?J8dkgdqu13q1Kts2OObPRcGGjrIaSlvmnDuocGxAj7VR0/3RFC/S9Dja7UVq?=
+ =?us-ascii?Q?wRn8OBEA3u6NRsOpcYkM+Ry5RWBkV1pbPN3VsHuPK5JLdKS5RMTf6cfZ4Kwi?=
+ =?us-ascii?Q?dV+kOHUYd+DkiqTv+v+hAvv/eJOapCwLy8Jed5oiXH0K1ldalhnaozWjsO2/?=
+ =?us-ascii?Q?vhuFwFZnmTG69EcFNNvQ/7BH+IhAnhTK9XepdODM5zByMoE2ojyTUIiFGTTs?=
+ =?us-ascii?Q?MdfrtHSG7vcWR9EuiuSfHB/Ok9/G229j/13QLUafEj7u5z6irp342ympkMtA?=
+ =?us-ascii?Q?PVEz6Ru6fq53PQYh72qv7tGuH13/dPPmlzWFhJCOx73Yx9yI/9/6Rvt6xKBq?=
+ =?us-ascii?Q?4CAOlOQRX83ytAvbCQzVdHX3DvvuNmNRJiTOfABXWeD+O35oH1VGLfuCU2NE?=
+ =?us-ascii?Q?xm27Df3JpaashalJSvxAKC361g1FKptdMY85YzKkHxJIsob07rCIVssBmBcM?=
+ =?us-ascii?Q?WQvzRC+CbXfXFT3AW8nLmM1k1NBZL2vwF7WvQj9MdYI6TWWnt7jKqfboSTkx?=
+ =?us-ascii?Q?wn/8CZ84OyXjU2OFxRO/Ne+77zwweEZjGQ9XPqz98wEBszDEuGYdTM5mj49t?=
+ =?us-ascii?Q?GMVKverMACcVZqmfwcv4+s5KzyyOPOC/Csqye07+qICW4e7tv6w61iFm8f9Q?=
+ =?us-ascii?Q?hjYBekMpEwPtuvwbA8LbT8o07jJipzGSjwOfYTd3/J8emptN084YXB+w3BQS?=
+ =?us-ascii?Q?Nwet6GhocofiOkRCiTLAKCLouFGOBgdIevYU1bZBPNmwwXhwAg3gdnJgOOVd?=
+ =?us-ascii?Q?SbB33yVJlNb5NaqplKqq6JK38rBxHr68nxuEuSRfoEarbnZiPda/53PTpsgF?=
+ =?us-ascii?Q?cR0IjLMPbJEDqodAFg/uMHfc05JPZ5IuT8+o0IWT3nCwXUQjREXsplCeqw2r?=
+ =?us-ascii?Q?fSQa1JDZeaBB0cPaRZuW9IEfN5Cy3dTzCifa9r/ury/3AFnwtA3tpWv4k9xr?=
+ =?us-ascii?Q?ixF2D7p7fp9/zBhrxFpcIF7IKZwySCnsSYir3iyhGxDufNS9OJOpIAG+uwF4?=
+ =?us-ascii?Q?lDFxAWxYugj8kn8yy/kcJagAw++bbafN6RfAelOgaE4xOTlItuEDjGOzHRx5?=
+ =?us-ascii?Q?q2RqLl7zteFIOQGYWULxQnruUi8GdZre8p61tz7kG24UkrXO+aP8cZizU9N0?=
+ =?us-ascii?Q?r6luuAOX4wQU+/f/ab1DBytR8LkG0DERB5G0TUD8wHEiLps8fEmhRbfWBykG?=
+ =?us-ascii?Q?dWhrRoMxt0OPdZQI5QVYPV2AI77pmLZaUx8otV11sR5GRUt6IOgdgg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iQOY7KXcxUBacSaNK6nxZLX/mt7DyP0g2nCM8IzV9VnOYJbDcfpLHn/a1dFm?=
+ =?us-ascii?Q?/zN0EoY8yHG4+G4dekaTgyvbx7AYY0DL4iFpJ0rgD4BPT7cffIAUkfIs2e7d?=
+ =?us-ascii?Q?bz2eKwALHSR120cgmG3youvzzULmBCsWDnQPs/+GnRY2Rvm93O6l706p+U8b?=
+ =?us-ascii?Q?IZljA5JfbYxiJ3vT6skXrtR8N3FU3/9dXRLyLH7kFkHlGvcqL75B+wWhyzuK?=
+ =?us-ascii?Q?z5XagARwOtONqrmUtvYuaWseZghtPA5p8SE1llkgEIHYCTZGvDAX9GIbRadv?=
+ =?us-ascii?Q?AdGTrjOjSqRL0PosR/pvGSCJ5c7WyDR/OK7oXhUHiHhtYcyHTFChhzBN3TiG?=
+ =?us-ascii?Q?U0T1ji1zMQSHst6F8bjjAiA9KpZfEbwlQpD4bRJpcc7cbreu3klzIayky7e0?=
+ =?us-ascii?Q?hLK5CE9fdIpG+Hj7lV8oc6VPXSVqt9FqCdoTsRzeHgleNqFqvVcWvP+JZ7cx?=
+ =?us-ascii?Q?cStKxsB/PzvroPsZaoh8NqNwiH7LgaJNtaDiycHSj743SksuXZnwpZVb5uey?=
+ =?us-ascii?Q?36Vq5IYoIYyMfEYhfthg0oz5QVKMWwtho54I6GNnY4aUbMhr48FBiZ4cF4w+?=
+ =?us-ascii?Q?wVlR8lM+SfLKiERec0qM2x8jZGKGJiNmIYaLzforzMg3gTV+m552Vrnyy8ex?=
+ =?us-ascii?Q?g5Gq/2mtgoStynCEpREf5YGobeDFvDDIQoXdSZ0tIeCapVmMfW7AB5eCGN3c?=
+ =?us-ascii?Q?f/rojtE3/oJTups3hcvt6CTtsbXab4iMXXQdY8J5h1Fnw6ZZxEL6tWrNBubE?=
+ =?us-ascii?Q?nktp5IJ1vQ9oimcTBlnq07mqYJNGOAYYHa6a9D5+QxrQk2PTLUsfN4IyVJNz?=
+ =?us-ascii?Q?Aw1WQX75ZAtsNKKaFLam5Yt4xAh8N5AfNRvrYnhIwq2HkGh3ocZO+lcg9Vg8?=
+ =?us-ascii?Q?vgN+p9wBRwCMvpGXa4gjNfbYSR6m7HZBdM/oi6BQRuasz6elBXu7Cqib68e1?=
+ =?us-ascii?Q?F9Hp981b7y19zho2QLRWrmyoYoawUFIC4eKIpAbjDbCTQWlV4Aumjg6ifAWj?=
+ =?us-ascii?Q?C1IVj8xhb2UyJu8dMzN5bKxMlI+NAYEnHlVd1a2Kfz8/xmGSHkh7++my8MRU?=
+ =?us-ascii?Q?xlj5tgr/1HgnShA5c0psPX/5Q0zvcPusljZsXFJVQa5LxmM7LD7lDryuikOd?=
+ =?us-ascii?Q?JYUBzCL1wNXKxyQN0SvmYLmTpViUr7SIf7Gk+faZimtE+8I8GISJdRTNyiKm?=
+ =?us-ascii?Q?Vc/2nW8YIyL1qeb2e/GsDZS68tizhD8vwP8GPxydbgQkxauXY9I5xEu3q8c0?=
+ =?us-ascii?Q?LgYw/clu8NIopy8J/6LRfvZMCQoH3nolz461os7dqOf3OYt51eU8P9fc0jyp?=
+ =?us-ascii?Q?z3DjYxefwyVrs/PJOD7W1h28GGqx9HceErInjtgF5vcDVoNF5zkOu9HYfgFA?=
+ =?us-ascii?Q?kJcQOuQ4YKl4WioCb2qnI45awvAx732LoWzqu6tC5Qh16IluGKn6x7dTXkWh?=
+ =?us-ascii?Q?ejzL9xzy5OXOhmH5uuvRoRt8KBBQTnXniGnmDVAR3BeSohFkMDjKD1bt5LPi?=
+ =?us-ascii?Q?sHnHEl320Xd7qSPj+oplxxRdqBNTxo6bKXAsMypmKSxzM1OEZkOFcatRUp1M?=
+ =?us-ascii?Q?6critauuUC5V67o9F/QRtY3/zNJHn7IpBlymX+qLKpK2/SS1SExzCZFdI6AZ?=
+ =?us-ascii?Q?+ItDX3rZLFNkAoU7Tm+/sy8=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b59418c-a0f8-4e9b-9c78-08dda535344d
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 20:03:28.8606 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5A6oeR3HP+P3JfI9EoXgg0VYPmi044wIc6GoaIlHkh1pxJO5daO6lc5YDe/RosbVirJTi/zfSbSCDzQfoDPlpMzKLIzf9NGOAw9DxvAB9oQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB8325
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,163 +157,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 06, 2025 at 10:49:03PM +0300, Mikhail Kshevetskiy wrote:
-> ARCH_DMA_MINALIGN is 64 for ARMv7a/ARMv8a architectures, but RX/TX
-> descriptors are 32 bytes long. So they may not be aligned on an
-> ARCH_DMA_MINALIGN boundary. In case of RX path, this may cause the
-> following problem
-> 
-> 1) Assume that a packet has arrived and the EVEN rx descriptor has been
->    updated with the incoming data. The driver will invalidate and check
->    the corresponding rx descriptor.
-> 
-> 2) Now suppose the next descriptor (ODD) has not yet completed.
-> 
->    Please note that all even descriptors starts on 64-byte boundary,
->    and the odd ones are NOT aligned on 64-byte boundary.
-> 
->    Inspecting even descriptor, we will read the entire CPU cache line
->    (64 bytes). So we read and sore in СЗГ cache also the next (odd)
->    descriptor.
-> 
-> 3) Now suppose the next packet (for the odd rx descriptor) arrived
->    while the first packet was being processed. So we have new data
->    in memory but old data in cache.
-> 
-> 4) After packet processing (in arht_eth_free_pkt() function) we will
->    cleanup the descriptor and put it back to rx queue.
-> 
->    This will call flush_dcache_range() function for the even descriptor,
->    so the odd one will be flushed as well (it is in the same cache line).
->    So the old data will be written to the next rx descriptor.
-> 
-> 5) We get a freeze. The next descriptor is empty (so the driver is
->    waiting for packets), but the hardware will continue to receive
->    packets on other available descriptors. This will continue until
->    the last available rx descriptor is full. Then the hardware will
->    also freeze.
-> 
-> The problem will be solved if the previous descriptor will be put back
-> to the queue instead of the current one.
-> 
-> If the current descriptor is even (starts on a 64-byte boundary),
-> then putting the previous descriptor to the rx queue will affect
-> the previous cache line. To be 100% ok, we must make sure that the
-> previous and the one before the previous descriptor cannot be used
-> for receiving at this moment.
-> 
-> If the current descriptor is odd, then the previous descriptor is on
-> the same cache line. Both (current and previous) descriptors are not
-> currently in use, so issue will not arrise.
-> 
-> WARNING: The following restrictions on PKTBUFSRX must be held:
->   * PKTBUFSRX is even,
->   * PKTBUFSRX >= 4.
-> 
-> The bug appears on 32-bit airoha platform, but should be present on
-> 64-bit as well.
->
+According to include/sysreset.h the reset_cpu() function does not take any args
 
-Thanks a lot for bisecting this! I had indded some report of the driver
-getting stuck sometime but I had them sorted by making the CPU IDX
-handling more dynamic (by reading the register every time, maybe this
-was I was indirectly invalidating cache???)
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+---
+ arch/arm/mach-airoha/an7581/init.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Anyway will test if this works correctly on an7581 and then I will add
-my ack tag.
-
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> ---
->  drivers/net/airoha_eth.c | 35 ++++++++++++++++++++++++++---------
->  1 file changed, 26 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
-> index e8565be9b3c..d168dda1b62 100644
-> --- a/drivers/net/airoha_eth.c
-> +++ b/drivers/net/airoha_eth.c
-> @@ -392,13 +392,14 @@ static int airoha_fe_init(struct airoha_eth *eth)
->  	return 0;
->  }
->  
-> -static void airoha_qdma_reset_rx_desc(struct airoha_queue *q, int index,
-> -				      uchar *rx_packet)
-> +static void airoha_qdma_reset_rx_desc(struct airoha_queue *q, int index)
->  {
->  	struct airoha_qdma_desc *desc;
-> +	uchar *rx_packet;
->  	u32 val;
->  
->  	desc = &q->desc[index];
-> +	rx_packet = net_rx_packets[index];
->  	index = (index + 1) % q->ndesc;
->  
->  	dma_map_single(rx_packet, PKTSIZE_ALIGN, DMA_TO_DEVICE);
-> @@ -420,7 +421,7 @@ static void airoha_qdma_init_rx_desc(struct airoha_queue *q)
->  	int i;
->  
->  	for (i = 0; i < q->ndesc; i++)
-> -		airoha_qdma_reset_rx_desc(q, i, net_rx_packets[i]);
-> +		airoha_qdma_reset_rx_desc(q, i);
->  }
->  
->  static int airoha_qdma_init_rx_queue(struct airoha_queue *q,
-> @@ -444,10 +445,14 @@ static int airoha_qdma_init_rx_queue(struct airoha_queue *q,
->  			RX_RING_SIZE_MASK,
->  			FIELD_PREP(RX_RING_SIZE_MASK, ndesc));
->  
-> +	/*
-> +	 * See arht_eth_free_pkt() for the reasons used to fill
-> +	 * REG_RX_CPU_IDX(qid) register.
-> +	 */
->  	airoha_qdma_rmw(qdma, REG_RX_RING_SIZE(qid), RX_RING_THR_MASK,
->  			FIELD_PREP(RX_RING_THR_MASK, 0));
->  	airoha_qdma_rmw(qdma, REG_RX_CPU_IDX(qid), RX_RING_CPU_IDX_MASK,
-> -			FIELD_PREP(RX_RING_CPU_IDX_MASK, q->ndesc - 1));
-> +			FIELD_PREP(RX_RING_CPU_IDX_MASK, q->ndesc - 3));
->  	airoha_qdma_rmw(qdma, REG_RX_DMA_IDX(qid), RX_RING_DMA_IDX_MASK,
->  			FIELD_PREP(RX_RING_DMA_IDX_MASK, q->head));
->  
-> @@ -906,6 +911,7 @@ static int arht_eth_free_pkt(struct udevice *dev, uchar *packet, int length)
->  	struct airoha_qdma *qdma = &eth->qdma[0];
->  	struct airoha_queue *q;
->  	int qid;
-> +	u16 prev, pprev;
->  
->  	if (!packet)
->  		return 0;
-> @@ -913,13 +919,24 @@ static int arht_eth_free_pkt(struct udevice *dev, uchar *packet, int length)
->  	qid = 0;
->  	q = &qdma->q_rx[qid];
->  
-> -	dma_map_single(packet, length, DMA_TO_DEVICE);
-> -
-> -	airoha_qdma_reset_rx_desc(q, q->head, packet);
-> +	/*
-> +	 * Due to cpu cache issue the airoha_qdma_reset_rx_desc() function
-> +	 * will always touch 2 descriptors:
-> +	 *   - if current descriptor is even, then the previous and the one
-> +	 *     before previous descriptors will be touched (previous cacheline)
-> +	 *   - if current descriptor is odd, then only current and previous
-> +	 *     descriptors will be touched (current cacheline)
-> +	 *
-> +	 * Thus, to prevent possible destroying of rx queue, only (q->ndesc - 2)
-> +	 * descriptors might be used for packet receiving.
-> +	 */
-> +	prev  = (q->head + q->ndesc - 1) % q->ndesc;
-> +	pprev = (q->head + q->ndesc - 2) % q->ndesc;
-> +	q->head = (q->head + 1) % q->ndesc;
->  
-> +	airoha_qdma_reset_rx_desc(q, prev);
->  	airoha_qdma_rmw(qdma, REG_RX_CPU_IDX(qid), RX_RING_CPU_IDX_MASK,
-> -			FIELD_PREP(RX_RING_CPU_IDX_MASK, q->head));
-> -	q->head = (q->head + 1) % q->ndesc;
-> +			FIELD_PREP(RX_RING_CPU_IDX_MASK, pprev));
->  
->  	return 0;
->  }
-> -- 
-> 2.47.2
-> 
-
+diff --git a/arch/arm/mach-airoha/an7581/init.c b/arch/arm/mach-airoha/an7581/init.c
+index cefe9c6db9e..e127ab2ad68 100644
+--- a/arch/arm/mach-airoha/an7581/init.c
++++ b/arch/arm/mach-airoha/an7581/init.c
+@@ -21,7 +21,7 @@ int dram_init_banksize(void)
+ 	return fdtdec_setup_memory_banksize();
+ }
+ 
+-void reset_cpu(ulong addr)
++void reset_cpu(void)
+ {
+ 	psci_system_reset();
+ }
 -- 
-	Ansuel
+2.47.2
+
