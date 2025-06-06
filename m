@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 777A1C5AD49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 19:49:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20BF2C61CE7
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 19:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1794D82AE9;
-	Fri,  6 Jun 2025 21:49:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 784E982A8D;
+	Fri,  6 Jun 2025 21:49:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="tIuhBmLu";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="fVe9a2zX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8EBC807B1; Fri,  6 Jun 2025 21:49:16 +0200 (CEST)
+ id 70AA382B07; Fri,  6 Jun 2025 21:49:18 +0200 (CEST)
 Received: from DU2PR03CU002.outbound.protection.outlook.com
  (mail-northeuropeazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2F9181FEE
+ by phobos.denx.de (Postfix) with ESMTPS id D330782A65
  for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 21:49:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TJsW1pbykf0quBDvPlb78qs2ojxFLUjOKh24Sy5xU9+byzt2kxCbJutl6fzXc+1DuVexSUuNcytjKq0nuM/mWZWteAcLFmq1yN/CMwBx96O6N11VdUlp9rT3xnLuZ9IgzF5akMj+ENCbVrBthSnAjlr+/goBoI14X59rpxoBc5goVx/2IJMq3M8bJMV6kmpe4G/Calie+f+pUxTR2qQr4bmZe8ToxvISg4dPRK3JlUODukVxi01P9Op5omITky0qOYJUa4LLyKo0126XYM8GhLT9oyXhys7h5h5Nd7MUrHKadnuAgmByWRJTSjXV6dEOpUNHXkmvl4RlHF/B8HmwFw==
+ b=HmFMVJq98r+oSJ3tD7uD8viwLiGN5u4LpXPIeXB45fXWa7x1hkWw7JBt/+9a1W0YPUUKZHfa+Bpt8cal/CZ5lXTQ43/D0+4JnTFm0lMBEOI6OgvLCY6wdZhbuXgufjnSduvOR4vqzzBdwfk6xHfAkNTjJVfp3wdu1oFwMPCxM1BOYAXpepaq1aVvbUdlu4r7rRQ/I8YPVmqcM2fW9XzrRrD68sFymSgiUGlV7Z25KpcJmaMzuUV4xqiJuoUSbRalFINrAIBd3Vt/c4bhHWnGIteQPJGxgaSYg7B3ppyNhnvIDccXG+D6OpD7ZXvLo9h/hwz8obZQmvUNDDwuyePDyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x9fETcPtL5YQiOBzBCZmIIn3RTy+V/qG3xrwTzkQbDo=;
- b=tYOEZhk8aiMcFCpKL39woI8cB2WblC7JHqVyq8TzqbyWRbrgaFPVZcafRo3cfamFja3Kdtn1lEvGM+bg3fyh2lBu3fd9w9zEO/WFJQddMDUbxCLO9nKKfClIBMmPn3o6uzDZcR2J59IzdDesDmmgOvwI13wgPRmuTqEOgAd3QGB2fcJXruAGmZRnRg5uZSpleTeB6BzhqplGHI76KWtWu3bFsLarD/s3w5S9BCtWxKmYKZfhmBdj+drvpihFr2DPyeEbFXoYa5bL+iAEnkOkq9kKx7xjPSKGOLD0252CxaSUH0yH956aMH+/AablamwI/qKmCBP8fVYXkpcYQJahhA==
+ bh=EvefBjeCtU8gikCv18AnHTfB5aMLZftoz+kYi0HlkjY=;
+ b=KHo44SthIswNG3DjxY6PAYEFtIV9X+/BOwgJf19YVpJ9YnYOCQSC+lp63yeYn9K2dWMr/WrpKIpJ/ekJiy5hwmKQRBKiEoFTiF8Qjp/hSOmaQwx3OUJpfKWNlcub9WBYZUQ9D0NAtNvFKPom0PfkmZA1IHQ45DIOPV6nwjFW2s0iuVzMCukJ3RDkR6SzHfoi4wlQ6ppxW6tEbF2gjR5OQE7g/vU6iOLzLh3WcYTZZZdvczYvtauLKusQrwoKXk6LqMsOA6lCypmEswV4Vvyhsg/kck618lTKo6SGT0lCDISCgOJ/CGc+5KZbYiJnJlA91+1lgqig3b0pKG5w+pTTdg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x9fETcPtL5YQiOBzBCZmIIn3RTy+V/qG3xrwTzkQbDo=;
- b=tIuhBmLu3WeF4P1fcU67MDRAWddMszWXuT+lbhjMCOJ21jw/Zb+VR7Bl5FwrSXXbf+1E4n0HLgBLSCbh6GhU/SlwVw7B8Sjd9DhxE+xSjSMSBVsrX2ogYdPc9X+8KrsfOpzpF30b9YqdwHJF3xf4yksURqpvY5PTQS0oPgJUfbhVaO/6Wii1unPHEUPf3xzBHvteVbnnEL5TcBEeOJj8K0i1FlnS53LaoK8KJ0yE+dFXasAEaJdOTuu3fXSq8WVJmWec4g9NiBbxhTIs/R8dwgFCvpshanasQYQ5JPNlsXiyAX1+l6zud2XU02TyNC9WL7YVwBcE42Qwe/txs+Ng9Q==
+ bh=EvefBjeCtU8gikCv18AnHTfB5aMLZftoz+kYi0HlkjY=;
+ b=fVe9a2zX5cp1nB5E9fCBjvVpUlTGHSzgorOVi9vSEgo+jpWawiKF1PGyTvMYIq/kFA1TCDSjFjq42PLi7W78ubkQWw6kAhSR4KkZsNg2PBkegZZzaXA1x6GXiK0No/BVwej2y42aeUfYJs0mfQMSWgNR7deBPzeNHdQu2pmqx0rhNeABTFRsc4l+UHQ60ZhxdxmtsXvJhKsJx84ldLctV7YhtbAFfAp77A8/xi0C4VlLYd3T972pznyiaftTTALQOEGtRkjECVgJ1e8xI4rNh+FQxa+zcoxEUpNF0UnPO1br+uq9aMBP4VWc9uPiuVpLcVnEogBt3ab/FEVEhNqW8A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PAVPR08MB8992.eurprd08.prod.outlook.com (2603:10a6:102:325::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.22; Fri, 6 Jun
- 2025 19:49:12 +0000
+ 2025 19:49:13 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8769.037; Fri, 6 Jun 2025
- 19:49:12 +0000
+ 19:49:13 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH 1/3] drivers/net/airoha_eth: add missed terminator for
- compatible devices list
-Date: Fri,  6 Jun 2025 22:49:01 +0300
-Message-ID: <20250606194903.459732-2-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 2/3] drivers/net/airoha_eth: fix packet transmission errors
+Date: Fri,  6 Jun 2025 22:49:02 +0300
+Message-ID: <20250606194903.459732-3-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250606194903.459732-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20250606194903.459732-1-mikhail.kshevetskiy@iopsys.eu>
@@ -73,78 +72,78 @@ X-ClientProxiedBy: GVX0EPF00011B62.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAVPR08MB8992:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7457f14c-675b-4852-6f4c-08dda53335a2
+X-MS-Office365-Filtering-Correlation-Id: 78c675ac-99ff-410c-47b6-08dda533364f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fVb3I+1Sgo3iqxwPy+mwT8g6vIWrjdjVuEymzu4UdG8fm7BGgw/46Fpv2A4w?=
- =?us-ascii?Q?9NUt7xVJHoWI0xqY0c+5bxiP8+l3mqIe+5yQ2cXYC8D56Es1bJNTnhnWnkCW?=
- =?us-ascii?Q?PLmDMPHAaXIN0WJsdpXchpCGJnMWH9Mr7SDtusZD6JaA+KosHpRG++WoMglI?=
- =?us-ascii?Q?xiSi2jQ0/c3bgWSkQPL/gE0Vcz8AGGdfEcfqlksq8NAIzF1Q7N2Py+BRK/Uh?=
- =?us-ascii?Q?hulNzNcuSsJI1OmPy0IWWcw3BM8RTRskILLJL9DVkyWdwNsgBXjMq9X+56Pg?=
- =?us-ascii?Q?F2wdrp2xuP0YDTuuqFjW1BHUywj7TYhQ1GaF9AYDg8qPUgAtsCP/cdN2dC1f?=
- =?us-ascii?Q?kn2RDgpeFKHEFtNTE95avPKFmBGXXYYTAdxqhk1XxWk4MGslteVueiRHDa+h?=
- =?us-ascii?Q?DJt6tw7zKaHJqCZPdpjm/sDJySEPRM7UTfPhnL2xhp1OsKdUEM535KK7PRxH?=
- =?us-ascii?Q?C/DOjdhp19tQ5IgmmHZR8zBycNFEpaEAVD5JJwR50YfK6pBk1cgBowARyHcP?=
- =?us-ascii?Q?X76vkR5V6px0w6rKHZdxBmYgsrZEb0sRkrhUza+v+Qe8gATLv2HC9Gj8rAI/?=
- =?us-ascii?Q?l8sDxcDHM9h/grVyEe6Nd/RXNgnFdHAze/B7p+xbOH62Q7UxZkC70vB/ttVF?=
- =?us-ascii?Q?7XbA4dcZIf24YxSaKaTe7GMymkvunBcNn95A/ISr5p8SYII4pNv4XCRy76jQ?=
- =?us-ascii?Q?5xvmfrYrwDXFTwmzNW+pTWp0G+PgkLcTSrr4gaMBbJmysYXk9swxi4FoPgxL?=
- =?us-ascii?Q?MfbiHNNoANKO1J/VvyYaPxZvFB+as7CIL/L6Gt2L1jNlvkGdaClZQLbJUdH/?=
- =?us-ascii?Q?0PKtJSTYnxZG0uWr3PeKrdO7eZtRXWpAHdTISTR2MfLUq6X7GIDYggmUFoBP?=
- =?us-ascii?Q?OS/yWiOfYkj7vdq8lrLDcu+1C4KJqnSdc0SaEvaDBe7nWOMd7P0RGOSF1DeU?=
- =?us-ascii?Q?iej6XFmIoeKkrUsPgvTsUH9ulYfZkJ1IWHbiKvhOLa+J5P3k/nchfDZOQotf?=
- =?us-ascii?Q?Dg3Id0eaz2MQgF0e03dzFdKi+T+TD2njCah4e2eF7wFMYODuNxlccloPOrKU?=
- =?us-ascii?Q?RBkrlk/WB4f/+Xyv4hwK1NoIOxQnE5rg/+deSltFX0bHfIDPcJqpnFw5beYR?=
- =?us-ascii?Q?YBJ6VzCQpmklOLH+mdWuUnnBphA//KETLqF2YkYStw5dwpAOcfDFEakHWN4r?=
- =?us-ascii?Q?MPmJDaNYcasnDXGSql1hb1eSMZyHbPT2rndYOq/7NxtXv15X35bTTiENmoAr?=
- =?us-ascii?Q?rU4gBm7M+AUEuNuhvC+EE+UdJaAt+X3wAjqJ0gjcwLtQrAXvuzsZ0LJdx0c1?=
- =?us-ascii?Q?yCd5wYg8KCB6uzm8+MFQR6rgKgy/OnDDXl5mHPZX0LeTdxGdaypnVSZ9ZeyG?=
- =?us-ascii?Q?XBM+Ngx1q3AIwTFW4I4iYXrd5tGz0o4Wx1nhWiBPvd+AFH/aRGZzt1aJeNyS?=
- =?us-ascii?Q?SKBnNmk7SpCKzGTQcgQO+6oLXWPdKzR5av3PadrvkL3SZVxsN4A38Q=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hy20nmuVdd7GPMDUfQOdJZy68tqGIBVLxTafdzAVf7lGYkbdut8DDO57ycaU?=
+ =?us-ascii?Q?JVgSbHFICOuucPKyYhaBkb6G0LHhRG682ahz3bVIVJSo9QgIvpCcsO2941PK?=
+ =?us-ascii?Q?T+XlTDw5Jfjr8hc3XdYjcqiplMM4fWxxMWf62SYKtE5PFHYUDIWAU9/qBKQx?=
+ =?us-ascii?Q?EIGmZPm90jV48C22RGTSfp39LlmQCpdJsAu2ky88rcRESGjsuW38X89UFIOn?=
+ =?us-ascii?Q?Grpgq4M+KBvWyak3OYKe4TE6TY4u7IFPY06Rl3u5l/axq2EwCQFzSCXJBZno?=
+ =?us-ascii?Q?jT7ZhxwyNMGt/ls/+c6wpsPsJFw5lF1rT+nA8MBr7ouwXIXn39kjpeG76cTS?=
+ =?us-ascii?Q?vO8hMlvK28YiP7nVEfgR3I3KsOOr78HRrXuwLjAxkG/1im0M+o+sjmZhiQn2?=
+ =?us-ascii?Q?L3VASnYxT21s/stOcOuy19VnddbVe9VyqIw6dG3b7BzwDgw5EqvrnCY3/3r5?=
+ =?us-ascii?Q?/2pAeJzHk7LEu7uExYKQBJgE/EOzcTYF8fOtD+4plFdGqw7RLYIw7U92TV4i?=
+ =?us-ascii?Q?MdTiP/gjluJO4WJmWTr8yKSbNISMp6g8QdhEeLPvfHKkFsjHyU8xdO8iFSnX?=
+ =?us-ascii?Q?XLKYUpLvaIr/OyPx225QiUX1jpTvCx93VpsAk3MuevaCNAEYxu5HYA/Hf/uk?=
+ =?us-ascii?Q?/v5nifxV5vXQestvvwYeL7CHyhAJkxS8UjRpiysIzpGmULG3FC9u7a8vmnwe?=
+ =?us-ascii?Q?kXxtV+QP1k+adBxBeXIqLqyxu3+HXkVqQhSS8AjI4S6qIGdRimmPMt1Io2kS?=
+ =?us-ascii?Q?Pcpkl7QHrYMaUEFe+ueiBdiA+El3i8zObCuZ/AZ4yHNmOyUi2XygWhAtC8Tu?=
+ =?us-ascii?Q?EwHFpbqcSQhyFncz+cUyN1TSKAMO9mNyiiQVExAJ6/wvAqcH5kwI4gwjYvNu?=
+ =?us-ascii?Q?RLF0V+Ga4KHdgFGABbHsq35R+tYuZYy2vv80REhwqO+KBFWs3Uj5Vh2Xh4mw?=
+ =?us-ascii?Q?zZD0wlbFc5lgw/mOIJ7iostAS5DinN0aAmBo/QSp1yqKaXDH8bsdWj9xtGZe?=
+ =?us-ascii?Q?ko/TE/5aQkHJnU9/GxJWJtUEyPuEcaqhscERtTO0NgFTfNRIKjUtfzn9/9PB?=
+ =?us-ascii?Q?eLmgC/UwWsblgc5n8XGIUgA+tGWeBWnnGlAFqaagQNi7w6o1JhBntdVDjjk0?=
+ =?us-ascii?Q?UzIs9kQv85gox0bwJ2haN1ndnvVIQuO7Ao1rpZ24jZW64gZIWvSTmASMcyOa?=
+ =?us-ascii?Q?x6YwIigxQDPN4D/mP+3Gf9miG8rMpmquNd5kkoBSrZZitfQW8yYzNFZno3Kj?=
+ =?us-ascii?Q?SJ8s6t12Bup+IEzc5YsDKpW4XnzP8ST0dYOpZ6/X7Y2bexMho0zCh8EGBs5Q?=
+ =?us-ascii?Q?jWZ4ZAhUT7OBvVJOiNJDFr617+2bOJBLj4S9oct88xf/P+439ZweA9GhxmTd?=
+ =?us-ascii?Q?ry5+3V+e3+MKy4a3LtXRNUBfgS83Xp5MvPBIVoSeue27V3Ja717KPB9WSsMM?=
+ =?us-ascii?Q?85YgqHrT+M93ytvuu37voPAdLZ/VMYhvMGbAhWQWNJtvEo+JjqK70g=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lU6lMzeBhY1CwgAHLkmBEEpfGVTzcBSV+8sjBY4O77FQ0fH/sUtRNGfQ2OTa?=
- =?us-ascii?Q?8RjbRqY5TU8CjkIY9lgmm0LAp1psSxFd9ymGcOUPebrDbXhTiQIIb5ogV5v7?=
- =?us-ascii?Q?V1HW5Y6Ht27R6VtqZeWp1P+4REVBW3Rrr3v6MqzeEZa0/637jOEuDm5xYyjC?=
- =?us-ascii?Q?W9GKvG5aas+3cb2/0c7CeMyb0DO7eYseQrM17V9yf4hCEBp6gdJdV7OhvDPF?=
- =?us-ascii?Q?dz+CiuMHHfY4+Yq3qvwLyykU+e42Z3bJDoohsRpcYwaM8CKb30vtzBCEGLZ5?=
- =?us-ascii?Q?SH6Uh+IUtXR9uMvS4SN5Hff+Fo9Fl4OGmZC192THCuFjytGheSqO0mvu1a3g?=
- =?us-ascii?Q?qi8wFJIpGaE9G5hmwuYExT0/UHzxF3kEO6aVw7MZ+4LO+a0due/y7w+aCkH5?=
- =?us-ascii?Q?t71Dqz/YtCD9cQ5b4nwqDKFEoRmkxvvY7t5tMUmhSND+baDlOYUPJaqhHfJP?=
- =?us-ascii?Q?78Fh+0t2PZ8xmUEMtdeSiZ+7EQtiEEnAxbbFDm2XpgBo8yCEAFeuzN5LtZCS?=
- =?us-ascii?Q?vPVV0G/YSZ+/W0mEQabKvdhqTxylt80Dm9sIj+tkdikXthpSfLLLcdz3eEpV?=
- =?us-ascii?Q?7Do327A2LGHNjDHvZT6Ne5h/jRRgPt+GjxSV7EP+yUFQa9KtAuQIn5a8OYny?=
- =?us-ascii?Q?aNsXjOwrJFK5ss0vGj8wyfk1CSQTCAI3vQI4/dSM5zpqA8psmBGryreYyngA?=
- =?us-ascii?Q?Y/ONqRJkC0mSABEDCMgbnVlAVNPF3V3zP2Znn/S1aoJQx2JRqpioC7TC4480?=
- =?us-ascii?Q?6NtqfKp3ZdUu3/RB9ekRi2zT5lOs1ev1P9pAEZ8JBH7DqujJ3JKyZbzONA3c?=
- =?us-ascii?Q?ov0heHHjj6rQBXhgyuqimdj0H7oKd63DAAN2qQBWhZ9Ad+Gri/LJd6W+AOi2?=
- =?us-ascii?Q?6NyHDKC+hfTalwX4ZZWS1SNa40psA36sf+oqeg21xlkfBnuk6ZqxHDnR7C9G?=
- =?us-ascii?Q?OwhRSFVd1K2Xq5GPcO8NVvfab9ENmOcwx4SrLcsTeMD5DE4GFmiKllYzB9kp?=
- =?us-ascii?Q?zLx2zK1rc7DM6DQeSpEjuPML2fmHSLkkXUSFibGsinhdnKTFauTQU3aY4p29?=
- =?us-ascii?Q?zT67NNZxsl6DdvU9N9c7DosbJfI9Dq3RSPlkHI0la70362bhok9mgSBIIEkM?=
- =?us-ascii?Q?HFqUNQ4rcegL5AdA9Eao75B0R7kPMLNfO765g48z8qn2K6HvwCykZzQOcWW1?=
- =?us-ascii?Q?a+DYyZ98W2KwyvqMwhNSVFIeq9u8UdapTyZfTf3E25azhq/dCVnd9NM/CN4E?=
- =?us-ascii?Q?24JbglOuiSfYEpvlmgyq5/mNaMswdXGnFOPXtavc/0jJcfa66fR+YmLCzgDx?=
- =?us-ascii?Q?eNfQ61sWiQosxK68724G4Tsy/zCi8Vu8COQ4sw0eP7ClW1HcfFTvISKERHXN?=
- =?us-ascii?Q?O1EhTmI4V9NXqyDRui52jr+XKjPWgPLswh4lhVRZ3K4cOO67wwgbRfyWtFlR?=
- =?us-ascii?Q?PdBL/ZynwrezrAMLKFt+HX/BQy771IQyhO9kZ0JhB9Ge3F3IKTHfixBFMxSC?=
- =?us-ascii?Q?xqVHPF8vk+EOxH6eEWrixLwa1W0cqcG1aL3CDwWyKSX3MSbO5NVCSXCx2BJg?=
- =?us-ascii?Q?Xbeo3ZIOONk8/CYFTsZdNVArO9uF05vH8gXGR8Fa9cycrHoSChJKQC1j+wDi?=
- =?us-ascii?Q?PywShdAb/5+nT8OG/Xke+Q8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TDXlQ1sawxxLM7i/dvxwyvcrJRaP/MJWcXLurHxRvdG0g1aXj9xGlL29aC8h?=
+ =?us-ascii?Q?KfG8PKGx8e0aQRd4rgfftQsc3QVKV+oxDCfh797CNHZqAlQpldLQfbq2n+Wk?=
+ =?us-ascii?Q?tfIv0h+DPT3dWNntC4zMecdqAL48yzoH8U+XDtr0YcdzGA+DH/he1EgimCkF?=
+ =?us-ascii?Q?ZIgssWDR1l2fr4obzy37gn/JTCNKjdC1LGv+ohDAIzp2KmgMOw6V9AdpipZV?=
+ =?us-ascii?Q?dNOu1pAPM06ZgWxf/xTZfd9vEzUwsa+PswZgXqpjC6vrAXQbm0s6vAIqlfcf?=
+ =?us-ascii?Q?rVG2/QYHMgxLovQc0eYOuds3LvD+s8kRrlSHsUFSZ5z1E2BwkCdqYr1j7KW7?=
+ =?us-ascii?Q?56cSL75cJnykkCr9zlywyg6aXWqZIL4L2b6ADeaxwlYW78Yzkv/TVhi2psZ4?=
+ =?us-ascii?Q?99PAPVE+8iyaX3IDUVx5JSf88Nl/V7AJFCQB7QALpn7mruO5qdIxIk1bZw+r?=
+ =?us-ascii?Q?KxHKVgN+vJCjVotiNbN7QxqGaJ7G0cxuPiReWfJCYaPTur5JL/hvAwWU1+h2?=
+ =?us-ascii?Q?cTMDhqv13aD+FJ0Kse8szrhVPRkkMTjOrgGOpDtxWw7P6PM+jxmZcnotoQAl?=
+ =?us-ascii?Q?IKJ4DjQ0Vg2jx1rI4v8e1Zt51GqlED8L+Wkj4cXHpWQjtR0B7O6jNiorbI2Z?=
+ =?us-ascii?Q?z4OsOUBAj2DtiUR/HWOC7SkWYrbWJl4pJDa/a+qmO5QbJqPlHioT7LYLnFI8?=
+ =?us-ascii?Q?mBoa3cnynChmjFLJVHRAGNzigYnY9hOaEUO8PBYQ3/i/F7NJpc4pFt+hveGG?=
+ =?us-ascii?Q?AqwNmSdutyTrQuOcqhYM9rH21UVHeCWRHKOYwVuDDz5nF1Ow9OscPl76RwJh?=
+ =?us-ascii?Q?Jqd83z/TyL8aP7FRATgCzM7Iihs5IaFE2ChoFNHyZIxQ/5uou/4x3jFzsYYE?=
+ =?us-ascii?Q?ZAV+RP67XxLQvlZl0PafLMhkc50PsMVHw+AKaLFdkC9yHlTzcgXXNZY9fn6c?=
+ =?us-ascii?Q?7FkQaKbjTuTaIUCTZ12TvUoCAORGlU4sjvrFxAHocMtKpp+qrrog9bKjfdOE?=
+ =?us-ascii?Q?b8rj1IQ9ARmYH0Z4WwSoDUkA9Al3tVTGd+y/XdPBVD3VoqSwdToA/fHSQvhO?=
+ =?us-ascii?Q?kZPaq06qNrNEtx+GrTaUz0uxk5RdpJY+gP4IFKJx5X3S+KGFv4nOz8a4BSRG?=
+ =?us-ascii?Q?uDJ6mkwB0iZVqefDLtMa4c/DVypbKJfVvGOdNOTWsYBYoF2IFYppaPy29v64?=
+ =?us-ascii?Q?zuGiy0xBJ8x3BRDkg1JeYNDqEd3XuRDZD7H6vN8o7owzyFrki4xSQ7+Olmz4?=
+ =?us-ascii?Q?6plc70L6Zre/8yl1IhVJRRJ5dHsr1IAnEcnqpbRnhcSQb8NvojSQl03CBdlj?=
+ =?us-ascii?Q?Dp4513ho1CH5sL2nY7PSjxW9Tjaaeoe+KlnAbDgQ6Ah4qm8vXRHP7n89/g6U?=
+ =?us-ascii?Q?qRRxAplIsw7OcJDVK8xKfN/n68St/plJ81tkOhP6t2f8CzUplpdE9byRkl6M?=
+ =?us-ascii?Q?6y06uJluMwVzeTBxdLBsGFxSkslMs1Xi675s39c78Vapg0vrdVluRFbnKLjG?=
+ =?us-ascii?Q?20tB2DTONnt0iQpImUQIhG4tGXkxPVv4ZqwQaScjiPRk9YQlpdt0PkaY5qsG?=
+ =?us-ascii?Q?/MueFvVD3WVK0KqRX2Q1TTGZlj/1/UYpx7lPUzrjRNA+fwoA2wRR6wctatKp?=
+ =?us-ascii?Q?ijxkrLpsHdFbGn2CPOVVpfo=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7457f14c-675b-4852-6f4c-08dda53335a2
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78c675ac-99ff-410c-47b6-08dda533364f
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 19:49:12.3506 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2025 19:49:13.1780 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kstE6INHvKHMshcGRy7kLP5pyxkASFyDAkty3KW8XSJp+NEIm4f3XZf/ctToEVcZBOlwMoGxojmxhptj9/sUfJVuyGyUC1LeXmQwkvWLFCs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4MTeIPSSruUtcZCOCIPIhRV8Df4YIbvEkDQBfVkwPHKNbSkv9uTYx14roh2joglLfiLInSAn0V7M/5zSjC7mXY4P1wssE+KmPYiE8Q7oqic=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB8992
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,25 +161,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-list must be terminated
+The dma_map_single() function calls one of the functions
+  * invalidate_dcache_range(),
+  * flush_dcache_range().
+Both of them expect that 'vaddr' is aligned to the ARCH_DMA_MINALIGN
+boundary. Unfortunately, RX/TX descriptors are 32-byte long. Thus they
+might not be aligned to the ARCH_DMA_MINALIGN boundary. Data flushing
+(or invalidating) might do nothing in this case.
+
+The same applies to dma_unmap_single() function.
+
+In the TX path case the issue might prevent package transmission (filled
+TX descriptor was not flushed).
+
+To fix an issue a special wrappers for
+  * dma_map_single(),
+  * dma_unmap_single()
+functions were created. The patch fix flushing/invalidatiog for the
+RX path as well.
+
+The bug appears on 32-bit airoha platform, but should be present on
+64-bit as well.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/net/airoha_eth.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/net/airoha_eth.c | 33 +++++++++++++++++++++++++++------
+ 1 file changed, 27 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
-index 7e35e1fd41d..86fd1616da2 100644
+index 86fd1616da2..e8565be9b3c 100644
 --- a/drivers/net/airoha_eth.c
 +++ b/drivers/net/airoha_eth.c
-@@ -926,6 +926,7 @@ static int arht_eth_write_hwaddr(struct udevice *dev)
+@@ -354,6 +354,27 @@ static u32 airoha_rmw(void __iomem *base, u32 offset, u32 mask, u32 val)
+ #define airoha_switch_wr(eth, offset, val)			\
+ 	airoha_wr((eth)->switch_regs, (offset), (val))
  
- static const struct udevice_id airoha_eth_ids[] = {
- 	{ .compatible = "airoha,en7581-eth" },
-+	{}
- };
++static inline dma_addr_t dma_map_unaligned(void *vaddr, size_t len,
++					   enum dma_data_direction dir)
++{
++	uintptr_t start, end;
++
++	start = ALIGN_DOWN((uintptr_t)vaddr, ARCH_DMA_MINALIGN);
++	end = ALIGN((uintptr_t)(vaddr + len), ARCH_DMA_MINALIGN);
++
++	return dma_map_single((void *)start, end - start, dir);
++}
++
++static inline void dma_unmap_unaligned(dma_addr_t addr, size_t len,
++				       enum dma_data_direction dir)
++{
++	uintptr_t start, end;
++
++	start = ALIGN_DOWN((uintptr_t)addr, ARCH_DMA_MINALIGN);
++	end = ALIGN((uintptr_t)(addr + len), ARCH_DMA_MINALIGN);
++	dma_unmap_single(start, end - start, dir);
++}
++
+ static void airoha_fe_maccr_init(struct airoha_eth *eth)
+ {
+ 	int p;
+@@ -391,7 +412,7 @@ static void airoha_qdma_reset_rx_desc(struct airoha_queue *q, int index,
+ 	val = FIELD_PREP(QDMA_DESC_LEN_MASK, PKTSIZE_ALIGN);
+ 	WRITE_ONCE(desc->ctrl, cpu_to_le32(val));
  
- static const struct eth_ops airoha_eth_ops = {
+-	dma_map_single(desc, sizeof(*desc), DMA_TO_DEVICE);
++	dma_map_unaligned(desc, sizeof(*desc), DMA_TO_DEVICE);
+ }
+ 
+ static void airoha_qdma_init_rx_desc(struct airoha_queue *q)
+@@ -826,14 +847,14 @@ static int airoha_eth_send(struct udevice *dev, void *packet, int length)
+ 	WRITE_ONCE(desc->msg1, cpu_to_le32(msg1));
+ 	WRITE_ONCE(desc->msg2, cpu_to_le32(0xffff));
+ 
+-	dma_map_single(desc, sizeof(*desc), DMA_TO_DEVICE);
++	dma_map_unaligned(desc, sizeof(*desc), DMA_TO_DEVICE);
+ 
+ 	airoha_qdma_rmw(qdma, REG_TX_CPU_IDX(qid), TX_RING_CPU_IDX_MASK,
+ 			FIELD_PREP(TX_RING_CPU_IDX_MASK, index));
+ 
+ 	for (i = 0; i < 100; i++) {
+-		dma_unmap_single(virt_to_phys(desc), sizeof(*desc),
+-				 DMA_FROM_DEVICE);
++		dma_unmap_unaligned(virt_to_phys(desc), sizeof(*desc),
++				    DMA_FROM_DEVICE);
+ 		if (desc->ctrl & QDMA_DESC_DONE_MASK)
+ 			break;
+ 
+@@ -864,8 +885,8 @@ static int airoha_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+ 	q = &qdma->q_rx[qid];
+ 	desc = &q->desc[q->head];
+ 
+-	dma_unmap_single(virt_to_phys(desc), sizeof(*desc),
+-			 DMA_FROM_DEVICE);
++	dma_unmap_unaligned(virt_to_phys(desc), sizeof(*desc),
++			    DMA_FROM_DEVICE);
+ 
+ 	if (!(desc->ctrl & QDMA_DESC_DONE_MASK))
+ 		return -EAGAIN;
 -- 
 2.47.2
 
