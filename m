@@ -4,67 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FFC3C61CE8
-	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 11:57:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F96AC5AD49
+	for <u-boot@archiver.kernel.org>; Fri,  6 Jun 2025 12:22:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7728181FEE;
-	Fri,  6 Jun 2025 13:57:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 59DAF81FEE;
+	Fri,  6 Jun 2025 14:22:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iM9wu7OY";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qngEXYqA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A279982977; Fri,  6 Jun 2025 13:57:24 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3951381F0D
- for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 13:57:22 +0200 (CEST)
+ id E4B4981FEE; Fri,  6 Jun 2025 14:22:22 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 15AF181F0D
+ for <u-boot@lists.denx.de>; Fri,  6 Jun 2025 14:22:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 556BvKIE164945;
- Fri, 6 Jun 2025 06:57:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749211040;
- bh=Jyd+f4pV3RcfB31xMzSvyhzVYKKddvq9OtvgtJVzdko=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=iM9wu7OY62AotufL3X5me2zFoUjdoNqcLmmSplAR1cy8npjPYD9HOft30n2X/hRtF
- wKa8GXct91MvxhbWIVVA62IpekXvgNcq8eGonkwcJzCc4Y/JcVePJXxmSlSGiYRak7
- TeISZtV4qhhYg0d+To/MK+xsxIg5Jnk67AUNTXIk=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 556BvK9q1645817
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 6 Jun 2025 06:57:20 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
- Jun 2025 06:57:19 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 6 Jun 2025 06:57:19 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 556BvJOA909857;
- Fri, 6 Jun 2025 06:57:19 -0500
-Date: Fri, 6 Jun 2025 06:57:19 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
- <nm@ti.com>
-Subject: Re: [PATCH v7 04/10] arch: arm: k3-binman: add fit for falcon boot
-Message-ID: <20250606115719.eyu2vk3zdwygzmc2@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20250603142452.2707171-1-anshuld@ti.com>
- <20250603142452.2707171-5-anshuld@ti.com>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 023F75C5A75;
+ Fri,  6 Jun 2025 12:20:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E11FC4CEEB;
+ Fri,  6 Jun 2025 12:22:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1749212538;
+ bh=EX5sAfZ05NqgJtIYwp8/2mYlo/VRmth1IrKnqIlBJTs=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=qngEXYqAiIrVY1FZ95AUAMUPBIDuiGh653Op0uPb7n266ky51kTL8qxpc0iveLu62
+ zL+I7UFtTIB4UTKvtuffnPIoJUO1J3ocxbtmPQl7gn82JHiVGzT67U+xQCK/Bu9NKV
+ A0FOVo44G030K2gKi1lm+Zf4n8MrdUSZSDhqL4aK1a72q2L7UdfT2+SO0hbPPrymAv
+ lgKAmZbiHO1pOV3AymZ/a9/FN1Z3OjHyUeF4iK08Xxuds0GOACeA/fNoa0HQEu2y1f
+ 1LzxqgxrDXvQetess8iPcjXtATEteeKT7PrM4m6pBt4M+1b8Ti+kmgzCyEhiPgCFL7
+ dy7qhip+JgM+g==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>,
+ Dmitrii Merkurev <dimorinny@google.com>
+Subject: Re: [PATCH RFT v5 0/3] fastboot: add support for generic block
+ flashing
+In-Reply-To: <20250606-topic-fastboot-blk-v5-0-203538ec5b32@linaro.org>
+References: <20250606-topic-fastboot-blk-v5-0-203538ec5b32@linaro.org>
+Date: Fri, 06 Jun 2025 14:22:15 +0200
+Message-ID: <875xh9kqko.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20250603142452.2707171-5-anshuld@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,120 +69,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On June  3, 2025 thus sayeth Anshul Dalal:
-> This adds creation of tispl_falcon.bin for the am62a, 62p and 62x.
-> 
-> The contents are the same as the existing tispl.bin but A53's spl and
-> the fdt have been removed as they are not needed in falcon boot.
-> 
-> This reduces boot time since the payload size is smaller and we also
-> aren't authenticating the spl and fdt in secure boot.
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Hi Neil,
+
+On ven., juin 06, 2025 at 11:33, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+
+> This serie permits using any block device as target
+> for fastboot by moving the generic block logic into
+> a common set of helpers and also use them as generic
+> backend.
+>
+> The erase logic has been extended to support software
+> erase since only 2 block drivers exposes the erase
+> operation.
+>
+> Tests are welcome to make sure this series doesn't
+> introduce any regressions on the emmc backend.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Thanks for the changes in v5. I will pick up the series (for next) in
+the following week, to give some time for last-minute reviews.
+
+Regards
+Mattijs
+
 > ---
->  arch/arm/dts/k3-am625-sk-binman.dtsi | 64 ++++++++++++++++++++++++++++
->  arch/arm/dts/k3-am62a-sk-binman.dtsi | 64 ++++++++++++++++++++++++++++
->  arch/arm/dts/k3-am62p-sk-binman.dtsi | 51 ++++++++++++++++++++++
->  arch/arm/dts/k3-binman.dtsi          | 54 +++++++++++++++++++++++
->  4 files changed, 233 insertions(+)
-> 
-> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-> index cc619f5920e..9544b9d1134 100644
-> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-
-...
-
-> +				dm {
-> +					ti-secure {
-> +						content = <&dm_falcon>;
-> +						keyfile = "custMpk.pem";
-> +					};
-> +					dm_falcon: ti-dm {
-> +						filename = "ti-dm.bin";
-> +					};
-
-When you build this are you using the TI_DM argument? Or are you using 
-BINMAN_INDIRS to point to all the firmware? I think this will only look 
-for "${BINMAN_INDIRS}/ti-dm.bin" and error out now that DM is mandatory 
-unless you use TI_DM which will break a few distro builders' recipes
-
-...
-
-> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> index 5163161b94d..a678379dae9 100644
-> --- a/arch/arm/dts/k3-binman.dtsi
-> +++ b/arch/arm/dts/k3-binman.dtsi
-> @@ -489,6 +489,60 @@
->  		end_address = <0x0 0x9fffffff>;
->  	};
->  
-> +	ti_falcon_template: template-9 {
-> +		filename = "tispl_falcon.bin";
-
-Small nitpick: We could probably just call this tifalcon.bin or 
-something shorter. It's not really an SPL now.
-
-The bigger issue here (in my mind) is this requires our falcon.config 
-fragment to work properly. I don't think it is wise of use to produce 
-this image if that fragment isn't applied. It would be a debugging 
-nightmare for others outside of the U-Boot space.
-
-> +		pad-byte = <0xff>;
-> +
-> +		fit {
-> +			description = "Configuration without SPL and FDT";
-> +			#address-cells = <1>;
-> +
-> +			images {
-> +				atf {
-> +					description = "ARM Trusted Firmware";
-> +					type = "firmware";
-> +					arch = "arm64";
-> +					compression = "none";
-> +					os = "arm-trusted-firmware";
-> +					load = <CONFIG_K3_ATF_LOAD_ADDR>;
-> +					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
-> +					ti-secure {
-> +						content = <&atf_falcon>;
-> +						keyfile = "custMpk.pem";
-> +					};
-> +					atf_falcon: atf-bl31 {
-> +					};
-> +				};
-> +				tee {
-> +					description = "OP-TEE";
-> +					type = "tee";
-> +					arch = "arm64";
-> +					compression = "none";
-> +					os = "tee";
-> +					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
-> +					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
-> +					ti-secure {
-> +						content = <&tee_falcon>;
-> +						keyfile = "custMpk.pem";
-> +					};
-> +					tee_falcon: tee-os {
-> +						optional;
-> +					};
-> +				};
-> +				dm {
-> +					description = "DM binary";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "DM";
-> +					load = <0x89000000>;
-> +					entry = <0x89000000>;
-> +				};
-> +
-> +			};
-> +		};
-> +	};
-> +
->  };
->  
->  #endif
+> Changes in v5:
+> - Removed BLK dependency on FASTBOOT_FLASH_MMC
+> - Removed BLK dependency on FASTBOOT_FLASH in patch 2
+> - Added back BLK dependency on FASTBOOT_FLASH in patch 3
+> - Rewrote FASTBOOT_FLASH_BLOCK_INTERFACE_ID help text with Tom suggestions
+> - Removed default for FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+> - CI test run is fixed with FASTBOOT_FLASH_BLOCK_INTERFACE_ID default to 0
+> - Link to v4: https://lore.kernel.org/r/20250522-topic-fastboot-blk-v4-0-af7f7f30564d@linaro.org
+>
+> Changes in v4:
+> - Rebase on next
+> - Fixup Kconfig default values & description
+> - Link to v3: https://lore.kernel.org/r/20250506-topic-fastboot-blk-v3-0-d94be5829f46@linaro.org
+>
+> Changes in v3:
+> - Move Kconfig/Makefile changes over the 2 patches
+> - Relicence to GPL2 with Dmitrii approval
+> - Move soft erase in a separate function
+> - Update help text of Kconfig BLOCK entries
+> - Add warning at init if MMC was selected with BLOCK backend
+> - Link to v2: https://lore.kernel.org/r/20250409-topic-fastboot-blk-v2-0-c676f21d414f@linaro.org
+>
+> Changes in v2:
+> - Dropped applied virtio erase patch
+> - Reorganize patches, introducing helpers first, using them in mmc afterwards
+> - Added soft-erase logic
+> - Added move helpers to handle the partitions erase & flash from emmc
+> - Fixed const var on last patch
+> - Link to v1: https://lore.kernel.org/all/20240306185921.1854109-1-dimorinny@google.com/
+>
+> ---
+> Dmitrii Merkurev (3):
+>       fastboot: blk: introduce fastboot block flashing support
+>       fastboot: blk: switch emmc to use the block helpers
+>       fastboot: integrate block flashing back-end
+>
+>  drivers/fastboot/Kconfig      |  29 +++-
+>  drivers/fastboot/Makefile     |   4 +-
+>  drivers/fastboot/fb_block.c   | 323 ++++++++++++++++++++++++++++++++++++++++++
+>  drivers/fastboot/fb_command.c |   8 ++
+>  drivers/fastboot/fb_common.c  |  22 ++-
+>  drivers/fastboot/fb_getvar.c  |   8 +-
+>  drivers/fastboot/fb_mmc.c     | 210 ++-------------------------
+>  include/fb_block.h            | 105 ++++++++++++++
+>  8 files changed, 504 insertions(+), 205 deletions(-)
+> ---
+> base-commit: bed3b33e732f2f2d9ce93801f7dbe09a02b52c3a
+> change-id: 20250408-topic-fastboot-blk-c5e14cd59224
+>
+> Best regards,
 > -- 
-> 2.49.0
-> 
+> Neil Armstrong <neil.armstrong@linaro.org>
