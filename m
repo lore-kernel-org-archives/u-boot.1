@@ -4,89 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17034C61CE8
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 20:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 829E6C5B543
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 20:29:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33682807B1;
-	Sat,  7 Jun 2025 22:27:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=yahoo.com
+	by phobos.denx.de (Postfix) with ESMTP id E1189807B1;
+	Sat,  7 Jun 2025 22:29:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=yahoo.com header.i=@yahoo.com header.b="VGcc0NFQ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="y/8DLsbr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85515811AC; Sat,  7 Jun 2025 22:27:16 +0200 (CEST)
-Received: from sonic305-21.consmr.mail.sg3.yahoo.com
- (sonic305-21.consmr.mail.sg3.yahoo.com [106.10.241.84])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CC22811AC; Sat,  7 Jun 2025 22:29:28 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA8D38059D
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 22:27:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B0988059D
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 22:29:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jjvazha@yahoo.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1749328031; bh=CdtdT0AMSJfiWDnehEC982GxNtHtyszwMRvi8HbRl6Y=;
- h=Date:From:To:In-Reply-To:References:Subject:From:Subject:Reply-To;
- b=VGcc0NFQtb9lxtWSHgAs4Vsk7Knd4WmdUry3NWXQ6Ys9qU6L4qQTJz6Gkd0CBbriMBj6CtIz+mlCW3M47ZMI2t/YCJWAO0zBGcOPPGLVQWm7CUZeGdsCCWARDbWpnuLkmGRUHVMwuUE9MKWTIGoVo09Ai+lxGm8gwif4MQAlNwx9bbtfsMEfSXNofSHIGJhitA9Hxm1KeWJcQCIqm4tyxC8ngTADqY+UoupN8hWkI7oLo2Fbhn9J0lw62AXfA9oHqU4/bJTAQ/O9zjwaODsWDMfk6jMC/kuaQdzBk7Abh3CVX/iaDB87vrX1vMit/jXl63PM6sg08DWPvNU02ivF+w==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1749328031; bh=sIfOOONUHbOvHTYRGzVG9y2BeCaQo2THgfilfj6epyu=;
- h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
- b=SbpwG24wJJ/334awFnrI31l76CkMUK4+5JflZuEfkOflnQyxcFN91ue8v7plfcCmV8fWdUReXGKq6pxoSuGCR4yTEnpopDtwh3oiKGaJ7i7K2Nk0p83cHlIXIvXRcLPB6ISdL7IuaRcwfQQem/5Th5MlwiVK7uSSWHLJNwrg3491D6P5UUVP9qdD8IypeUBjCIbDJ7RV7NAUDcIDozz9/pjJjOPJnDaxApzrgwLyIqM18fcY5EVo8sXEsv+XpA6P44AJjN/Dk/dCqxK0UIQzKm00IH9PCuo2bitoDrkUT4+NAgXQLH9DknI2g9pmUBpFJBRtm0/7C7uCdgncixZuKQ==
-X-YMail-OSG: wfElr7YVM1meY0iIyzfTL.cyY6MHuWhfLypB1lg4zDWcqzFoYKfmK8UDeJRpT6r
- a.n7pnDb18Jszpb_ufsYBEKhV2AOnPx2D9jOwFxhDrQKcaHES8avMWnZXsNuti_zMLxzCVc.qKb5
- 9pMk29q3cyGGIV0hWejNLfjG6UxrNsUP8.mjme.5Lecmx3aQahu40veoiij87AAkNrPs1zWAtIR5
- xQ6a_6XwRJs.bDcku3mSa8XdvMyJflr7ahYEs3LUgv3r4oUhCKKG5x3lqlclMsozWnf9TKB5aCPb
- F4jxuJGUxKTyXSXluUCkH4UA2QfKZxJytim4_u6QdwIBAyOZCQB2Eh0Iuu9cVY.zvV.GXeHRbIsd
- 1PisA6i_3yP3ygcbsMkOs6oJimnBCsFCrq5jxFgEd8cCpfvXrG08A3l6ljkx6tjg2HhPNSFxdEJe
- o.16JeE.W6QLImJFgmcFwVXvQa799PFRxkyhhQWAyJOfpx4ivY2W2a5Ks9o69qeKKnjaTY3Aj8Q8
- YEa9fIbduw4P7V.0Eg_5ty2UD1fxdGjhIvxLA.fP.NiE6Ua6T0U4L.s9RaTX0EjbuA2kAxEX0jX5
- wnzk1l04y5rPbBJAHy78m0wr21nhd.TRz2vH8y8qaB25_ReWdsHVQqaD4ipeQTrevAmCqGdP5vlz
- JKX7kj6aD3Y.LsER5Clb72gF8dISQvBMG4q05uwbIXB81SK_WiGdFhRWDrYLLbbyYBaE7vC5HCEx
- 1PscNfd1xEkaS0DxsGXQB.BkDzNnQTp9zlHcWY2V0sxpuv17p6yw2iSycbYw9Gb6IIFa.zsmT6bA
- ct6B01YfpTW5tEYiMKIn9DeeaW37EYT9xS0mLkEMcZu3VA2pt.w5MGUmd7Elen.hw01oZlwJ8r3c
- Mg5TKUs0IDWL__Cg.dKRI0qVDOCFjy87HSjCikWKcrqhSC0F5o8zWsyT7OGedLA9bMfBkp2iF5Yi
- e.E_z7zcZQqs5gM4ugr4hiANVdbEvDZ3dQISpl8Tw4hDm3HAeGFgMpjQfaq1jHFiutT4pKDwIPhI
- 9jcUNcPsXs_FJhIzW.9l501CznYBR1aE7WHn8LiPGHN5x6tcc4zNB96GBeU0pFJUf9e.FZ7merUa
- 9n2aNrv_IIw0YI2Hr7w8SKuTCbUktm7H9L7OfIPYC_bSv05hS7stuyEKzGIH5JF2g8Y.7MTfawzS
- LgYSnuV_J7tsb2thcS0YHGRneWPsOJm4XsQQ47Qar46CAIIE0FVAGi_4JuW1c6i8YEVjTFer60Md
- GXA3QRISkWi0yYff5GloPt8ArpVW5VVE1LvMctGpQniq1AHH_.aqzAwIJfd8eKwQzZdEtjX.8b6X
- M4ue.JfhC.QEfSNQP19uLamrjdnwZx95ChclDwL28jt8RzHXvn7P96TU3anDWRZ7gpN9x_KDwKRY
- 8Sxkpf96vzS_EWf9308cLY2tyCQwRgEfMPwuhy44dwNV6DnPKQfyZaiBhra7dfV6Ta_1806OAYP.
- cYkCjMZQBu2EZxI3Wx_oX2Wsi4EuFmlMQEs6FxF0_dbOF_MMNQdu9DJU58M9Mm7JelNShDXG8Een
- mhQRe4jkAc5h7GxzTIcah4LIawUkyF7o1AVNxEbzJv6ngqjr3DlIw3IeWN.QqojK9MkxXuik2H_6
- cCByVSMgTj93tNKS7BOgqUQdNAkfREchVEBdHJ419N2DweWQKHvrr0Swt1aF6eedieyWybrm8T2t
- oVmLB5nTnnh4G6gJKqnZDegMH14CIO7GPls2XpD9nPouWKk8XrjWsnynFX2H2LR3RMrguPOiayPj
- CR_rx9ynCnMD6lE.GYgrY9PeY8CwRcRHsBFeAss1pEDHBCkGvfTaqVwP6CWOWnqcc5K8pxYX5WPw
- Xe428hphMdaopc.0GQyX4oKZ0H8zc.NP9bhFQrUh3tvTN9Vob0RL16TfBzemEaX1wjcwQJZu4RPe
- J83WNKWqyqTs.zhTC8CRj5rNlugq3z1z1arlZCkr..O.TuTHQ12A6y3dLq9CtTsiPlnEL.Z0qDQs
- gmUXBiaTSzqpBzFe9oXN3RppsJyE6r0QCPwWLryUibQof.VjhISefYAW_tJady9tAC8bPPXx3Bv4
- gQ1wWoAIQs7QrNI2tpODn6sa7Wxu0fJV1l3FRbv8Kdb7RZLsgG1Khe_zl4tO02N8T5tt8l6kg5jp
- _2p6ruXE96zWxhBebzkCEFwjTdWInQ9TQ1km4mWw.Idtm3x.ules8mOfsPSUOx545O1lx3jt_PWL
- 57ln6d1uPE68JRjxLzn68WNDaN7uC1goMwnm6Ve.vacfTLH.W9kHN8v1NeSoEayU7xDM36LDMs4m
- hXEbIUQ--
-X-Sonic-MF: <jjvazha@yahoo.com>
-X-Sonic-ID: 41cd1e2b-9d7f-4507-b7cc-2670e27c1fc5
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic305.consmr.mail.sg3.yahoo.com with HTTP; Sat, 7 Jun 2025 20:27:11 +0000
-Date: Sat, 7 Jun 2025 20:27:09 +0000 (UTC)
-From: Jojan <jjvazha@yahoo.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- Jonas Kvinge <jonaski@opensuse.org>
-Message-ID: <1287835630.661385.1749328029886@mail.yahoo.com>
-In-Reply-To: <3b7988777abfb62a51cd2afa92764dfcb9f4a134.camel@opensuse.org>
-References: <294e9037fe8b9502b41a06e9ac9363f2d5204b07.camel@opensuse.org>
- <851157797.299472.1749160367219@mail.yahoo.com>
- <da35020455a4a086617a0588ba913b5ad3d2dcd9.camel@opensuse.org>
- <1801521580.655864.1749318986908@mail.yahoo.com>
- <3b7988777abfb62a51cd2afa92764dfcb9f4a134.camel@opensuse.org>
-Subject: Re: Raspberry Pi Compute Module 5 support
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=e58b=YX=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: References: Cc:
+ To: Subject: From: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1749328164;
+ bh=wNUgNuu4EUw921hSwFzQiHB+oAJzQzat0b0zOu5jsKs=;
+ b=y/8DLsbr/0/+UX2xe1gwy2EfVPKWi1FIGXQRzmATZ/lAwC80H4OhzCXenvPhPHOiHMuyoeRTe
+ nXF0oK6EvDrKs2SbFvt2EFd7K6kFFvNta0VgHSBwtccawUJtzigxOsc1y1p4C4a0JgeWuXwGCys
+ LXA4cHvNPGQC+D5CK06tuU1vV0Qo4mHZlOSgSWUZk5rp/VlnVphTsyUfu3aBaBWltGPL69hEDmX
+ zO5HEh6pNUVbkigzjV1GIX46h8DTA3RxkfEnS3mbvz6xpbDZuezIRshhwRTNLp0JNgAXu0t76Jx
+ MHgDFaHKaBQR+QE196htPBYF/r2wxhYiqmqNSpokvjmw==
+X-Forward-Email-ID: 6844a11af98500a27c5028b5
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.3
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <205074ef-0cea-44a0-beb5-8e5f8f435ee7@kwiboo.se>
+Date: Sat, 7 Jun 2025 22:29:10 +0200
 MIME-Version: 1.0
-X-Mailer: WebService/1.1.23956 YMailNorrin
+User-Agent: Mozilla Thunderbird
+From: Jonas Karlman <jonas@kwiboo.se>
+Subject: Re: [PATCH v2] rockchip: px30: Implement checkboard() to print SoC
+ variant
+To: Quentin Schulz <foss+uboot@0leil.net>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20250606-px30-identify-variant-v2-1-624d34ccc381@cherry.de>
+Content-Language: en-US
+In-Reply-To: <20250606-px30-identify-variant-v2-1-624d34ccc381@cherry.de>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,101 +77,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Sorry I mean 2712Raspebrry -P 4 , that the U-boot support as of now includ=
-es , bcm2711.dtsi
-bcm2711-rpi-4-b.dts:#include "bcm2711.dtsi"
+Hi Quentin,
 
-However RPi-5 uses broadcom 2712 chips.These dts files are not available in=
- u-boot.Howver you can get it from other places and modify / inroduce in yo=
-ur device tree source and configure correctly.
+On 2025-06-06 12:21, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> This implements checkboard() to print the current SoC model used by a
+> board, e.g. one of:
+> 
+> SoC: PX30
+> SoC: PX30S
+> SoC: PX30K
+> 
+> when U-Boot proper is running.
+> 
+> The information is read from the OTP and also the DDR_GRF. There's no
+> public information as far as I know about the layout and stored
+> information on OTP but this was provided by Rockchip themselves through
+> their support channel.
+> 
+> The OTP stores the information of whether the SoC is PX30/PX30S or
+> PX30K. To differentiate between PX30 and PX30S, one needs to read some
+> undocumented bitfield in a DDR_GRF register as done in vendor kernel,
+> c.f. https://github.com/armbian/linux-rockchip/blob/rk-6.1-rkr5.1/drivers/soc/rockchip/rockchip-cpuinfo.c#L118-L133
+> 
+> I do not own a PX30S so cannot test it works properly.
+> 
+> Also add the OTP node to the pre-relocation phase of U-Boot proper so
+> that the SoC variant can be printed when DISPLAY_BOARDINFO is enabled.
+> This is not required if DISPLAY_BOARDINFO_LATE is enabled because this
+> happens after relocation. If both are enabled, then the SoC variant will
+> be printed twice in the boot log, e.g.:
+> 
+> U-Boot 2025.07-rc3-00014-g7cb731574ae6-dirty (May 28 2025 - 13:52:47 +0200)
+> 
+> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
+> SoC:   PX30  <---- due to DISPLAY_BOARDINFO
+> DRAM:  2 GiB
+> PMIC:  RK809 (on=0x40, off=0x00)
+> Core:  293 devices, 27 uclasses, devicetree: separate
+> MMC:   mmc@ff370000: 1, mmc@ff390000: 0
+> Loading Environment from MMC... Reading from MMC(1)... OK
+> 
+> In:    serial@ff030000
+> Out:   serial@ff030000
+> Err:   serial@ff030000
+> Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
+> SoC:   PX30  <----- due to DISPLAY_BOARDINFO_LATE
+> Net:   eth0: ethernet@ff360000
+> 
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Tested on a PX30 Ringneck and PX30K Ringneck. Would be nice if anyone
+> had a device with a PX30S so we could verify it prints what it should :)
+> ---
+> Changes in v2:
+> - added (theoretical, untested) support for PX30S based on feedback from
+>   Kever,
+> - Link to v1: https://lore.kernel.org/r/20250528-px30-identify-variant-v1-1-4ea69c527a0d@cherry.de
+> ---
+>  arch/arm/dts/px30-u-boot.dtsi      |  4 +++
+>  arch/arm/mach-rockchip/px30/px30.c | 50 ++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 54 insertions(+)
+> 
+> diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
+> index 157d0ea6930c55cc067560bd795249a39c3249ab..2f726b0aaba358c8fb3bf6f8ed2f9afca416aabe 100644
+> --- a/arch/arm/dts/px30-u-boot.dtsi
+> +++ b/arch/arm/dts/px30-u-boot.dtsi
+> @@ -27,6 +27,10 @@
+>  	};
+>  };
+>  
+> +&otp {
+> +	bootph-some-ram;
+> +};
+> +
+>  &uart2 {
+>  	clock-frequency = <24000000>;
+>  	bootph-all;
+> diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
+> index 8ce9ac561f0213fd4db933fdb9e1edde61ac39ca..ee0f788a21063a0c36259ac4ce95f809e164e9cd 100644
+> --- a/arch/arm/mach-rockchip/px30/px30.c
+> +++ b/arch/arm/mach-rockchip/px30/px30.c
+> @@ -2,10 +2,14 @@
+>  /*
+>   * Copyright (c) 2017 Rockchip Electronics Co., Ltd
+>   */
+> +
+> +#define LOG_CATEGORY LOGC_ARCH
+> +
+>  #include <clk.h>
+>  #include <dm.h>
+>  #include <fdt_support.h>
+>  #include <init.h>
+> +#include <misc.h>
+>  #include <spl.h>
+>  #include <asm/armv8/mmu.h>
+>  #include <asm/arch-rockchip/bootrom.h>
+> @@ -15,6 +19,7 @@
+>  #include <asm/arch-rockchip/clock.h>
+>  #include <asm/arch-rockchip/cru_px30.h>
+>  #include <dt-bindings/clock/px30-cru.h>
+> +#include <linux/bitfield.h>
+>  
+>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff390000",
+> @@ -442,3 +447,48 @@ void board_debug_uart_init(void)
+>  #endif /* CONFIG_DEBUG_UART_BASE && CONFIG_DEBUG_UART_BASE == ... */
+>  }
+>  #endif /* CONFIG_DEBUG_UART_BOARD_INIT */
+> +
+> +#define PX30_OTP_SPECIFICATION_OFFSET		0x06
+> +
+> +#define DDR_GRF_BASE_ADDR               0xff630000
+> +#define DDR_GRF_CON(n)                  (0 + (n) * 4)
+> +
+> +int checkboard(void)
+> +{
+> +	struct udevice *dev;
+> +	u8 specification;
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
+> +		return 0;
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+> +	if (ret) {
+> +		log_debug("Could not find otp device, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* SoC variant, e.g. 0x21 for PX30/PX30S and 0x2b for PX30K */
+> +	ret = misc_read(dev, PX30_OTP_SPECIFICATION_OFFSET, &specification, 1);
+> +	if (ret < 0) {
+> +		log_debug("Could not read specification, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	if (specification == 0x2b) {
+> +		printf("SoC:   PX30K\n");
+> +		return 0;
+> +	}
+> +
+> +	/* From vendor kernel: drivers/soc/rockchip/rockchip-cpuinfo.c */
+> +	specification = FIELD_GET(GENMASK(15, 14),
+> +				  readl(DDR_GRF_BASE_ADDR + DDR_GRF_CON(1)));
+> +	log_debug("DDR specification is %d\n", specification);
+> +	if (specification == 0x3)
+> +		printf("SoC:   PX30S\n");
+> +	else
+> +		printf("SoC:   PX30\n");
 
+ROCKCHIP_PX30 is also used for RK3326, so that is probably something to
+take into consideration here.
 
-    On Saturday, June 7, 2025 at 11:19:28 AM PDT, Jonas Kvinge <jonaski@ope=
-nsuse.org> wrote: =20
-=20
- I've never heard of=C2=A0bcm7712, it's not
-on=C2=A0https://github.com/raspberrypi/firmware/tree/master/boot
-Or do you mean bcm2712?
+Typically the cpu-code is located at 0x02 or the first 4 bytes of OTP,
+that could possible be used to determine if it is a PX30 or RK3326.
 
-I managed to get u-boot v2025.04 to load=C2=A0 by setting boot delay to -2,
-same issue as described here:
-https://lists.denx.de/pipermail/u-boot/2024-December/576043.html
+Here is a dump of OTP from my RK3326 board:
 
-What are the changes does the custodian version have that are needed?
-It seems like it's not up to date with the new version u-boot.
+=> dump_otp
+00000000: 52 4b 33 26  RK3&
+00000004: 91 fe 21 55  ..!U
+00000008: 52 4b 56 33  RKV3
+0000000c: 32 30 31 34  2014
+00000010: 00 00 00 00  ....
+00000014: 12 28 1f 0d  .(..
+00000018: 08 00 00 00  ....
+0000001c: 00 00 00 00  ....
+00000020: 00 01 00 00  ....
+00000024: 00 00 00 00  ....
+00000028: 00 00 00 00  ....
+0000002c: 00 00 00 00  ....
+00000030: 00 00 00 00  ....
+00000034: 00 00 00 00  ....
+00000038: 00 00 00 00  ....
+0000003c: 00 00 00 00  ....
 
+Regards,
 Jonas
 
-On Sat, 2025-06-07 at 17:56 +0000, Jojan wrote:
->=20
-> =C2=A0
-> Master is ok. But it won=E2=80=99t work as is. You need to have rpi5
-> configuration and the dts files. I did it a year back. But since =C2=A0di=
-d
-> not have bcm7712 dts files, I took the dtb file from the raspberry pi
-> images ( it has a pre built dtb file, and extracted dts)
->=20
-> dtc -I dtb -O dts -o <output.dts> -i< input.dtb>
->=20
-> =C2=A0
-> =C2=A0
-> =C2=A0
-> =C2=A0On Saturday, June 7, 2025 at 03:26:31 AM PDT, Jonas Kvinge
-> <jonaski@opensuse.org> wrote:=20
-> =C2=A0
->=20
-> =C2=A0
->=20
-> =C2=A0
-> Which branch? The master branch is 1 year old.
->=20
-> On Thu, 2025-06-05 at 21:52 +0000, Jojan wrote:
-> >=20
-> > You need to take raspberry=C2=A0 ( custodian version)
-> >=20
-> >=20
-> > Making sure you're not a bot!
-> >=20
-> > Making sure you're not a bot!
-> >=20
-> >=20
-> >=20
-> > =C2=A0
-> > But it is still missing the device tree fro bcm7712 ( RPI 5 is
-> > bcm7712)
-> > But you can Dow load the dtb file from the pre built dtb file from
-> > raspberry pi images
-> >=20
-> > and=C2=A0 use those=C2=A0 device tree sources ( using a dtc )
-> >=20
-> >=20
-> >=20
-> > =C2=A0
-> > =C2=A0
-> > =C2=A0
-> > =C2=A0On Thursday, June 5, 2025 at 02:13:24 PM PDT, Jonas Kvinge
-> > <jonaski@opensuse.org> wrote:=20
-> > =C2=A0
-> >=20
-> > =C2=A0
-> >=20
-> > =C2=A0
-> > Hi,
-> > I'm trying to boot openSUSE Linux on an CM5 using a sourcekit io
-> > board
-> > (https://sourcekit.cc/#/).
-> > u-boot seem to be stuck with the logo on the upper right corner, no
-> > text.
-> > I re-built u-boot using the latest source from git from the next
-> > branch
-> > and also set CONFIG_LOG in make menuconfig, but still no text.
-> >=20
-> > Is the CM5 supported by u-boot?
-> >=20
-> > Jonas
-> > =C2=A0
-> > =C2=A0
->=20
-> =C2=A0
-> =C2=A0
- =20
+> +
+> +	return 0;
+> +}
+> 
+> ---
+> base-commit: 11b8bcd7005ff24b2114dcc4d1061e083e4c9e6c
+> change-id: 20250528-px30-identify-variant-ae39c772155b
+> 
+> Best regards,
+
+
