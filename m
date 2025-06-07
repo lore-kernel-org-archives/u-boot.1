@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A4FFC5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 13:29:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31118C5B543
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 13:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 641A580E9A;
-	Sat,  7 Jun 2025 15:29:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 53E8280E9A;
+	Sat,  7 Jun 2025 15:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="j8WWbwyh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FkbGR+zo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5235081F0D; Sat,  7 Jun 2025 15:29:46 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 09E6781F0D; Sat,  7 Jun 2025 15:59:21 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C41D807B1
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 15:29:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17DD1807B1
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 15:59:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (adsl-178-39-61-184.adslplus.ch [178.39.61.184])
- by mail11.truemail.it (Postfix) with ESMTPA id 8B1BC20ADA;
- Sat,  7 Jun 2025 15:29:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1749302982;
- bh=Gag/5prgXaPqs251dF3nIxjpEDzJaZO80LabzyOevxk=; h=From:To:Subject;
- b=j8WWbwyhpYF0j07ZCW8rgz+C3EP7MvkJWkia3jLceD5oDvNXTJyxdEIi/6cSdBIXe
- /Gz1GBa9JflqBN6tMbSiqCAbv3RjVN9eocKdwKRdKqzxca0z/KuH7Cx+tmVjjCxgrG
- eCPSBT34zV8Ls47AkRZ6XHp4+v64mygzbU95GSIgm97nj+TS3GVmcXDCwcgqpgQGE9
- sOrwF55xUH3QL4s0dVGDYZaDkda+98cR49SUuUrhNw6WMQWM/PKilPfkqsjZSlSiDH
- i1Ov2uZXwdpEGuPA4jSeVlMArcdD2EKOKLK++6M4lOpUzQqtEc9SzEn26YFEavO6tz
- t7VciPX+Po0EQ==
-Date: Sat, 7 Jun 2025 15:29:32 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Vitor Soares <vitor.soares@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Bryan Brattlof <bb@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] verdin-am62p: include linux/sizes.h
-Message-ID: <20250607132932.GA4145@francesco-nb>
-References: <20250607120303.210990-1-heinrich.schuchardt@canonical.com>
- <20250607120303.210990-2-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-60727e46168so5177211a12.0
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 06:59:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1749304757; x=1749909557; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Brz1IMk4Dobn3Xtca4Vas1OoCM08TPLFE8Phhk69LVw=;
+ b=FkbGR+zodlUCprpkQ1KYfBmNJ9uB/yVae9S2NyecBpnajJrWrVxvVA2VTvVEnWW047
+ NJ12ktmWwmJfmVaQDpZEzljGm23a9sDfzT6ItD2Ddqj/WDMBwpaprXGk1sMBuXsg5ZDq
+ /NsoRg5fiVD9zhA/uiCwsB4E5TghP4XF5wTvs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749304757; x=1749909557;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Brz1IMk4Dobn3Xtca4Vas1OoCM08TPLFE8Phhk69LVw=;
+ b=ZStL27Hgsl0bq0nodh9rXRMTrz91J7xMGRY7S582BJJzh60WrlhbAxG6baxi6rxgL0
+ BmwDJujFXgZbQjfzbQ4aQ5VjshiXcR54Tq9ODU0TLk4kQ5NgHaCRALuLT/lYnXhau+qa
+ IOJgtP9OFnK/jM65aY8ZwS5RH3rmMngYe9ghHZgx2OKw0mFrKWfv4WsV2ktI+tLNy7Ny
+ mQE2d2OdJPm7X9lw1LCZc/q4h39xgT/HxCpzY/W36n0r12RrIrm+mHhVQEvm5YeDwqjL
+ TkS4OVGhGb8nYRcXDNGl96WbriE4m8EG3U9twZRz7WmpiuvX4m7cDqagwl1nvysI52WI
+ ning==
+X-Gm-Message-State: AOJu0Yyz9nWjvZ19pa+3G9XFVopkv5cE6pprzHtLaarTZxqXPFf/l/Bd
+ L4XG0WkgpWP9iGAbi+sSQFdn1g3jjChA3OZIST1Fvlixv8IbM7GM14h/rwz5/56TBEOfFJKI4ZD
+ YW0rLRi4fA3gkjOjGvNrwzVYdl6i4DHb+lH+7c5GW/LkOZHpSOu4znQ==
+X-Gm-Gg: ASbGncvTt9GQPbAXJLY/FAU6+1I0ytD8BdPJ9TK5qZ0F/owCCDGqI0rbF6saX95M4M/
+ O+JRH534OiZH0cuUvnc75LJTeTaD/m+XKyjITEn0t7tpFZLixS4/S1T0m5MX2EkM7jXbxsEERtl
+ 3WzuicGsXNn/tHt5gwyqCcHEJzhB19sAlwtafT5/YXZX0HDqOyjbDPrGg=
+X-Google-Smtp-Source: AGHT+IFbSRduQdSnQTTgGRlzlYuGV6bv4d9PZEuT+7OdP1BSGcUlfTPcUWvfxBH9xxKBQuZWB07t5R6LyVNuVMmlqgo=
+X-Received: by 2002:a05:6402:1ed4:b0:602:10b6:c982 with SMTP id
+ 4fb4d7f45d1cf-607735137b9mr5706859a12.12.1749304757558; Sat, 07 Jun 2025
+ 06:59:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250607120303.210990-2-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 7 Jun 2025 07:59:06 -0600
+X-Gm-Features: AX0GCFse9WBMpqeO3XxrJooxTWnozRHy2DM9XILw5FmY_QEpSNyrlBmACUSoPeY
+Message-ID: <CAFLszTht55_Wv4se6NT-zkVgMseeSEpnxZqpfz1N2RC7bxVQ5w@mail.gmail.com>
+Subject: Away for a while
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,40 +81,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jun 07, 2025 at 02:03:01PM +0200, Heinrich Schuchardt wrote:
-> Avoid build failures
-> 
-> In file included from include/config.h:3,
->                  from board/toradex/verdin-am62p/verdin-am62p.c:9:
-> board/toradex/verdin-am62p/verdin-am62p.c: In function 'dram_init':
-> include/configs/verdin-am62p.h:13:33: error: 'SZ_2G' undeclared (first use in this function)
->    13 | #define CFG_SYS_SDRAM_SIZE      SZ_2G /* Maximum supported size */
->       |                                 ^~~~~
-> board/toradex/verdin-am62p/verdin-am62p.c:63:65: note: in expansion of macro 'CFG_SYS_SDRAM_SIZE'
->    63 |         gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, CFG_SYS_SDRAM_SIZE);
->       |                                                                 ^~~~~~~~~~~~~~~~~~
-> include/configs/verdin-am62p.h:13:33: note: each undeclared identifier is reported only once for each function it appears in
-> board/toradex/verdin-am62p/verdin-am62p.c:65:28: error: 'SZ_1G' undeclared (first use in this function)
->    65 |         if (gd->ram_size < SZ_1G)
->       |                            ^~~~~
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  board/toradex/verdin-am62p/verdin-am62p.c | 1 +
->  include/configs/verdin-am62p.h            | 2 ++
->  2 files changed, 3 insertions(+)
-> 
-> diff --git a/board/toradex/verdin-am62p/verdin-am62p.c b/board/toradex/verdin-am62p/verdin-am62p.c
-> index 8b246e9d304..5ca4f8ee21d 100644
-> --- a/board/toradex/verdin-am62p/verdin-am62p.c
-> +++ b/board/toradex/verdin-am62p/verdin-am62p.c
-> @@ -15,6 +15,7 @@
->  #include <fdt_support.h>
->  #include <init.h>
->  #include <k3-ddrss.h>
-> +#include <linux/sizes.h>
->  #include <spl.h>
->  #include <linux/sizes.h>
-You are including sizes.h twice, remove this change?
+Hi,
 
-Francesco
+Just a note to say that I'll be disengaging from the mailing list and
+irc for a while I work on some specific areas. Please send me a direct
+email / irc message if needed, but no promises!
+
+Regards,
+Simon
