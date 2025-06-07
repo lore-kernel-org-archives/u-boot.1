@@ -4,72 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00CA8C5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 12:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD2DC5B543
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 12:19:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4155182B0E;
-	Sat,  7 Jun 2025 14:03:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CB7581F0D;
+	Sat,  7 Jun 2025 14:19:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QFKZ2eSE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kQBAKIq6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68FA082B18; Sat,  7 Jun 2025 14:03:35 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7EB64826AA; Sat,  7 Jun 2025 14:19:23 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10D9582AF6
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 14:03:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9F2280E9A
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 14:19:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-175-200.46.114.pool.telefonica.de
- [46.114.175.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id BF7664B66D; 
- Sat,  7 Jun 2025 12:03:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1749297812;
- bh=JnZgTLmE2VIqKXb7xUTxxUVlrbBG8lz5+JUBZIutomc=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=QFKZ2eSEUVIVytqScOPCh7k+o3yai5xupuXcUFe5DR4pmmmqqVcE+9+eyV26/wjim
- rU77sQKjCkWAJRZ+77C+bQuXhlLc7AjX7V4BEjKd1IAYNc6dea/ygM7wtA6mJzXr1U
- DPVpO2VPz0LUDbseqltaBaGYE53ALdhMR/o4lktjZYgiz19mk3nGL7PdCdyYxJ9R65
- X6ZL6kgik4ZqCPm3dRoGQg/oXltJKMheHgoB8g3HNF+LrGyuP5poF/Yiim3sTrWTg1
- NuGrzwYw1dYRIFkQIQ3td8rPHFafe0lzZenSVwj1guKVW32IXlNLy36dldhup+CM/8
- bgq40z8dv0Rtg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Vitor Soares <vitor.soares@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Casey Connolly <casey.connolly@linaro.org>, Bryan Brattlof <bb@ti.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/3] net: consolidate PXE processor architecture type Kconfig
-Date: Sat,  7 Jun 2025 14:03:03 +0200
-Message-ID: <20250607120303.210990-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250607120303.210990-1-heinrich.schuchardt@canonical.com>
-References: <20250607120303.210990-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3db6ddcef4eso26516415ab.2
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 05:19:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749298759; x=1749903559; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SyUwk4OZKt5Soi+7k3U8DpeEIX414y4hhw52ZbpuxqQ=;
+ b=kQBAKIq6u7pCmmP/lAigFeSFs12Yh5fqY4B5ba7IQyUMQzS+VhGw+euPL+JX7jog4Y
+ WGZ/TFGOj/6MOXfTYsYMavMPVnfwi9YHkjhd/t5xJjDWFluGL88bySbKUlewKVP3VLMq
+ qvogn5lTUtHvyLqxaIbA7ujrp8EYq49OcNfrGyTKS872/ZtfV1ePympXHOa0+DzMAK6b
+ CuBl4gefo7sx9DCT59Rf25TDL4rq8ZekcJsH/xN/YRVpTGGyeNYFaYalOs5dw3quGLMX
+ oW5sssPIqFTttpXRWO+h1ar/WQkpkCCWsznlweckmfEXqBQHxgxL2OtMFNUrtWqni1Lk
+ Tamw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749298759; x=1749903559;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SyUwk4OZKt5Soi+7k3U8DpeEIX414y4hhw52ZbpuxqQ=;
+ b=byl+JGldJDwgvN2IVjljNfY6TjIo1AE08uIONBdq9IAJX0DJqShzgWscFf6FqifS6E
+ ytmfC3tz9VNeCzMeMRrcRe+QfDtNq0LFS/YbwGTwhbh3IY+e0zq3BY2zVqCShHdlElHr
+ 8wZEFq2DvsfNn1FyKHPGIKfPmYVeehbOMSSNUqsJwNtgftjU2feBaJxhrfKuwAY+QLa1
+ I2d4LM/nGDSvcylU+EJfkgShRwb8sn5EbFuJti8ZL6WsgW/80/E8qD4QzQpmCqq57c8c
+ +RDjYLSKYT24tH4jYuFRCnKqpuXACsiqg0SHnmNIlycPVAuz5/HDglD86dHCwghCBt9I
+ Y94w==
+X-Gm-Message-State: AOJu0YxcQwDgwm3uZlwtdlWFT+uxcKEC0HXk3vEtPHyv5vijtohbHN75
+ voe7Db6yozVBaXCyCb9NCVydW1kuSjRvzDEeu4NibLeaIBobdbFTvxMU3lfM7eMqKZv8qIZpg5d
+ JXieHwM+mIgWr0xyUPAGEjxwTFOWXv2V+lcFpFac=
+X-Gm-Gg: ASbGncuPzTs973kUM+MCpQE4GaMGqr6wUpfOwxJ3DU7pLrXN+1x72uKN71/ZAEGGv9K
+ OhkIE90T3JdN7k+7tzJnekLniDywi+BQVuwsAOtyNoIE2ctRIw9ta9tRJgQCOsBVGAr/0EThYBf
+ OW1GS4gxxa8BK3G2g6BA4Hio9WacpGtxw=
+X-Google-Smtp-Source: AGHT+IFlIjejp2Q4U/HgR9+ZW8x82QiMHencOkmGaBaARI68M8yEg3LwkKrkHqUTwvAuIZX2Vrs8YNxsjMPmWUZogCA=
+X-Received: by 2002:a05:6871:d409:b0:29d:c85f:bc8c with SMTP id
+ 586e51a60fabf-2ea01565c0cmr4191685fac.36.1749298749267; Sat, 07 Jun 2025
+ 05:19:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250524142258.297397-1-alexthreed@gmail.com>
+ <65b2368d-fed5-4633-b9e6-25ab9d151d1e@kwiboo.se>
+ <5aecf685-07fd-4cc5-88f4-9624c78aac03@kwiboo.se>
+ <CAF4oh-O2WnVt-U6M=vo8O=ms1WN7iUHFca8gc9nYpLYPSs6XQA@mail.gmail.com>
+In-Reply-To: <CAF4oh-O2WnVt-U6M=vo8O=ms1WN7iUHFca8gc9nYpLYPSs6XQA@mail.gmail.com>
+From: Alex Shumsky <alexthreed@gmail.com>
+Date: Sat, 7 Jun 2025 15:18:57 +0300
+X-Gm-Features: AX0GCFvV6FCaqdAUj_jLKpQh-BFKOvrczsfeZkeI2tn08WT0KClDQrKKpbkZVaQ
+Message-ID: <CAF4oh-M7AgDoy-=cuxwQEPh8F+iKmTkoh47tu0eXkzpcfWpepw@mail.gmail.com>
+Subject: Re: [PATCH] rockchip: rk3328: Fix Synchronous Abort on usb start
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,123 +97,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DHCP and DHCPv6 use the same value defined in
-https://www.iana.org/assignments/dhcpv6-parameters#processor-architecture
-to encode the processor architecture type. We should only use a single
-Kconfig symbol for both protocols.
+On Sun, May 25, 2025 at 8:35=E2=80=AFPM Alex Shumsky <alexthreed@gmail.com>=
+ wrote:
+>
+> Oops, I forgot Reply-All and some messages missed list. Sorry about that.
+>
+> Jonas and I have found NULL pointer dereference in rockchip_usb2phy_clkou=
+t_ctl:
+> https://github.com/u-boot/u-boot/blob/df2ed552f0b05591090369a7fe7ddc92439=
+dea5c/drivers/phy/rockchip/phy-rockchip-inno-usb2.c#L177
+>
+> Here rockchip_usb2phy_clkout_ctl tries to read from
+> `dev_get_priv(parent)->phy_cfg`
+> but it is NULL because rockchip_usb2phy_probe is not yet called.
+>
+> Johnas, I have dug the problem a little further and found something inter=
+esting.
+> We have circular dependency between rockchip-inno-usb2 clock/phy initiali=
+sation
+> here. The rockchip-inno-usb2 phy node also acts as a parent clock for its=
+elf.
+> Parent clocks now are enabled as part of the probe process before dev->pr=
+obe
+> call, but this particular clock depends on phy. Here is relevant code:
+> https://github.com/u-boot/u-boot/blob/df2ed552f0b05591090369a7fe7ddc92439=
+dea5c/drivers/core/device.c#L572
+>
+> Quick and dirty solution would be to just ignore rockchip_usb2phy_clk_ena=
+ble
+> when the phy node is not yet probed. USB works fine with this check added=
+,
+> exactly as before the recent parent clock enablement commit that introduc=
+ed
+> this issue:
+> ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparentin=
+g").
+>
+> Clean solution would probably be to break dependency cycle, but I'm not
+> proficient enough with uboot codebase to propose such solution.
+> I've tried to move some of rockchip_usb2phy_probe initialisation code to
+> rockchip_usb2phy_of_to_plat to make it run before clock initialisation.
+> But I have failed on `priv->reg_base =3D syscon_get_regmap(dev_get_parent=
+(dev))`
+> which needs a parent node to be probed (I unsure is it OK to probe parent=
+ from
+> of_to_plat).
+>
+> If we settle on a quick fix, I propose to add to rockchip_usb2phy_clk_ena=
+ble
+> something like (Johnas, please let me know if it have some flaw over your
+> patch):
+>   struct rockchip_usb2phy *parent_priv =3D dev_get_priv(dev_get_parent(cl=
+k->dev));
+>   if (!parent_priv->phy_cfg) {
+>       return 0;
+>   }
+>
+>
 
-Furthermore we should make the value customizable. This allows for instance
-to choose between "x86 BIOS" or "x64 UEFI".
+Kindly ping Jonas and Kever.
+How can we proceed with this issue to apply fix before the 2025.07 release?
+Do some of my ideas from the previous message make sense to you?
 
-As "x86 BIOS" is encoded as 0, we should not use this value to switch
-off transmission of the DHCP option. Use 0xFF instead.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/Kconfig  | 28 ++++++++++++++++------------
- net/bootp.c  |  6 +++---
- net/dhcpv6.c |  6 +++---
- 3 files changed, 22 insertions(+), 18 deletions(-)
-
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index c335eceea63..4eb0140c10a 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1864,12 +1864,6 @@ config CMD_DHCP6
- 
- if CMD_DHCP6
- 
--config DHCP6_PXE_CLIENTARCH
--	hex
--	default 0x16 if ARM64
--	default 0x15 if ARM
--	default 0xFF
--
- config DHCP6_PXE_DHCP_OPTION
- 	bool "Request & store 'pxe_configfile' from DHCP6 server"
- 
-@@ -1977,12 +1971,22 @@ config BOOTP_PXE
- 	help
- 	  Supported for ARM, ARM64, and x86 for now.
- 
--config BOOTP_PXE_CLIENTARCH
--	hex
--	depends on BOOTP_PXE
--	default 0x16 if ARM64
--	default 0x15 if ARM
--	default 0x0 if X86
-+config DHCP_PXE_CLIENTARCH
-+	hex "DCHCP client system architecture type"
-+	depends on BOOTP_PXE || CMD_DHCP6
-+	default 0x16 if ARM64 # arm 64 uboot
-+	default 0x15 if ARM   # arm 32 uboot
-+	default 0x0 if X86    # x86 BIOS
-+	default 0xFF          # DHCP option not sent
-+	help
-+	  DHCP option 93 (defined in RFC4578) or DHCPv6 option 61 (defined in
-+	  RFC 5970) is used to transmit the client system architecture type
-+	  to the DHCP server. The DHCP server may use this information to
-+	  choose the boot file. For a complete list of assigned values see
-+	  https://www.iana.org/assignments/dhcpv6-parameters#processor-architecture.
-+
-+	  If the value is set to the reserved value 0xFF, the DHCP option will
-+	  not be sent by U-Boot.
- 
- config BOOTP_PXE_DHCP_OPTION
- 	bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
-diff --git a/net/bootp.c b/net/bootp.c
-index f22921ed388..95d906e3b2d 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -545,14 +545,14 @@ static int dhcp_extended(u8 *e, int message_type, struct in_addr server_ip,
- 	}
- #endif
- 
--#ifdef CONFIG_BOOTP_PXE_CLIENTARCH
--	clientarch = CONFIG_BOOTP_PXE_CLIENTARCH;
-+#ifdef CONFIG_DHCP_PXE_CLIENTARCH
-+	clientarch = CONFIG_DHCP_PXE_CLIENTARCH;
- #endif
- 
- 	if (env_get("bootp_arch"))
- 		clientarch = env_get_ulong("bootp_arch", 16, clientarch);
- 
--	if (clientarch > 0) {
-+	if (clientarch != 0xff) {
- 		*e++ = 93;	/* Client System Architecture */
- 		*e++ = 2;
- 		*e++ = (clientarch >> 8) & 0xff;
-diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-index 0c2de75ba1d..5bf935cb6a3 100644
---- a/net/dhcpv6.c
-+++ b/net/dhcpv6.c
-@@ -128,7 +128,7 @@ static int dhcp6_add_option(int option_id, uchar *pkt)
- 		break;
- 	case DHCP6_OPTION_CLIENT_ARCH_TYPE:
- 		client_arch_opt = (struct dhcp6_option_client_arch *)dhcp_option_start;
--		client_arch_opt->arch_type[num_client_arch++] = htons(CONFIG_DHCP6_PXE_CLIENTARCH);
-+		client_arch_opt->arch_type[num_client_arch++] = htons(CONFIG_DHCP_PXE_CLIENTARCH);
- 
- 		opt_len = sizeof(__be16) * num_client_arch;
- 		break;
-@@ -194,7 +194,7 @@ static void dhcp6_send_solicit_packet(void)
- 	pkt += dhcp6_add_option(DHCP6_OPTION_ELAPSED_TIME, pkt);
- 	pkt += dhcp6_add_option(DHCP6_OPTION_IA_NA, pkt);
- 	pkt += dhcp6_add_option(DHCP6_OPTION_ORO, pkt);
--	if (CONFIG_DHCP6_PXE_CLIENTARCH != 0xFF)
-+	if (CONFIG_DHCP_PXE_CLIENTARCH != 0xFF)
- 		pkt += dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);
- 	pkt += dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
- 	pkt += dhcp6_add_option(DHCP6_OPTION_NII, pkt);
-@@ -244,7 +244,7 @@ static void dhcp6_send_request_packet(void)
- 		memcpy(pkt, sm_params.server_uid.uid_ptr, sm_params.server_uid.uid_size);
- 		pkt += sm_params.server_uid.uid_size;
- 	}
--	if (CONFIG_DHCP6_PXE_CLIENTARCH != 0xFF)
-+	if (CONFIG_DHCP_PXE_CLIENTARCH != 0xFF)
- 		pkt += dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);
- 	pkt += dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
- 	pkt += dhcp6_add_option(DHCP6_OPTION_NII, pkt);
--- 
-2.48.1
-
+>
+> On Sat, May 24, 2025 at 8:43=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> w=
+rote:
+> >
+> > On 2025-05-24 18:02, Jonas Karlman wrote:
+> > > Hi Alex,
+> > >
+> > > On 2025-05-24 16:20, Alex Shumsky wrote:
+> > >> Remove incorrect assigned-clock-parents in rk3328-u-boot.dtsi.
+> > >> This incorrect parent has become a problem since recent commit with =
+parent
+> > >> clock enablement.
+> > >>
+> > >> Currently assigned-clock-parents is not a CLK node, but rk3328-usb2p=
+hy.
+> > >> It looks like a mistake in dts made a long time ago (~8 years ago).
+> > >
+> > > No, this is very much correct, u2phy is a clk provider as can be seen
+> > > by the use of the '#clock-cells' prop so being able to use it as a
+> > > parent clk is allowed and the device tree is correct.
+> > >
+> > >>
+> > >>   =3D> usb start
+> > >>   starting USB...
+> > >>   Bus usb@ff580000: "Synchronous Abort" handler, esr 0x96000210, far=
+ 0x4
+> >
+> > I have now tried to re-create this issue using latest master branch on =
+a
+> > rk3328 board, however I was only able to re-create a different issue.
+> >
+> > On what board and U-Boot version/commit are you seeing this issue?
+> >
+> > The issue I faced was due to only enable usb20_otg and not u2phy_otg,
+> > something that could be fixed with following diff:
+> >
+> > diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/ph=
+y/rockchip/phy-rockchip-inno-usb2.c
+> > index 88b33de1b2a0..d6ce12b5e83d 100644
+> > --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> > +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> > @@ -538,7 +538,7 @@ U_BOOT_DRIVER(rockchip_usb2phy_clock) =3D {
+> >
+> >  U_BOOT_DRIVER(rockchip_usb2phy) =3D {
+> >         .name   =3D "rockchip_usb2phy",
+> > -       .id     =3D UCLASS_PHY,
+> > +       .id     =3D UCLASS_NOP,
+> >         .of_match =3D rockchip_usb2phy_ids,
+> >         .probe =3D rockchip_usb2phy_probe,
+> >         .bind =3D rockchip_usb2phy_bind,
+> >
+> > Regards,
+> > Jonas
+> >
+> > >>
+> > >> Linux dts source reference:
+> > >> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/c=
+ommit/?id=3Dc60c0373a5e85d8bd0bb026cd5440576249d2299
+> > >>
+> > >> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled whil=
+e reparenting")
+> > >> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> > >> ---
+> > >>
+> > >>  arch/arm/dts/rk3328-u-boot.dtsi | 4 ++++
+> > >>  1 file changed, 4 insertions(+)
+> > >>
+> > >> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u=
+-boot.dtsi
+> > >> index b0e50a973a..39dcc2313b 100644
+> > >> --- a/arch/arm/dts/rk3328-u-boot.dtsi
+> > >> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
+> > >> @@ -150,6 +150,10 @@
+> > >>      bootph-all;
+> > >>  };
+> > >>
+> > >> +&u2phy {
+> > >> +    /delete-property/ assigned-clock-parents;
+> > >> +};
+> > >
+> > > We should fix the driver code and not modify the device tree to fit t=
+he
+> > > code.
+> > >
+> > > The u2phy ofnode is tied to multiple uclass drivers so is it possible
+> > > that the parent clock lookup from commit ac30d90f3367 ("clk: Ensure t=
+he
+> > > parent clocks are enabled while reparenting") is not getting the
+> > > UCLASS_CLK driver?
+> > >
+> > > Regards,
+> > > Jonas
+> > >
+> > >> +
+> > >>  #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+> > >>  &binman {
+> > >>      simple-bin-spi {
+> > >
+> >
