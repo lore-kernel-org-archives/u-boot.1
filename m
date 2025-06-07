@@ -4,88 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598F7C5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 14:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194D2C5B543
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 15:02:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B354982958;
-	Sat,  7 Jun 2025 16:22:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3027480E9A;
+	Sat,  7 Jun 2025 17:02:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZM5eI/Ar";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="VtDPr1v0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3FD682A0A; Sat,  7 Jun 2025 16:22:34 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 07DCB81F0D; Sat,  7 Jun 2025 17:02:38 +0200 (CEST)
+Received: from SEYPR02CU001.outbound.protection.outlook.com
+ (mail-koreacentralazolkn190130003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d40f::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C77EB80E9A
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 16:22:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 731AC8003E
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 17:02:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-40356cb3352so1931149b6e.1
- for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 07:22:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749306151; x=1749910951; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vbO6fNIJAeUChfp4xQUJp2QrQ0lxGOP39WAedl2Jz8g=;
- b=ZM5eI/Army+tp00/EfzjhMRhmNnDNK88/KldJxf/eS/zyqjx8/qBZL/kFlVD+O2dT7
- s1MdHQKbhaXM7SUh63KJ0Edz70ReEoe75w9NCVgkt9ioIwJYXnFzWvg33ULRG+6FnGi/
- CG/9UJZiq/BifHmzQ4zzseg3D/lcQGihdEOvY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749306151; x=1749910951;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vbO6fNIJAeUChfp4xQUJp2QrQ0lxGOP39WAedl2Jz8g=;
- b=D1qrONKJ4DYhtKfzdm5jIQ3IKyakuZ4KcT0o/W2lcefx97a5rfQeloLjVB6+FU+km8
- FR0mPsyAo9QP9gzKZOReu3oDpoeJKZT0Ku0sIBIMo29UNVH9YHG1Q5k1WqV4Ei3/lZY0
- A9rW4X1rSDWDdW8eKEmARZ1NyIQ3ZunKTUGxFEpsO6TxZIOQke8N6VP0fuqRTH9vaxLA
- ehbEshwKWyTYE5jHSEjRF8FAchgjZiDY8YiLhjrgFaFZvnngu2G/U9GDu8rL2ocKC6ZQ
- y3PgY6i2fRVhjJf7ZTJD/znI818jGwRJbk7aAQ5Fqhnrb74Cy8Lvjt/Sgq45xd0nMl8c
- I1zA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4yqtdUIlW9nVnVJhetYQjAN4hpDeMKXu7k8Rj0iDIisdZSne1I+k0/JwI/F7M/8lMBThosUs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYIrd53TBP40lbeLi8N2dJDckzlRyss8e3Q3KfBLOgF+lXoTSZ
- IDJbmXgiiudOOL81WJCF3FJj3bE0QNow//xBzN3JOW7gTqTJ1PVEqZGQR7AeJKxwCO8=
-X-Gm-Gg: ASbGncvZKt6sBEkX9oD7n4UCtZ/Ch6q09d+VKxJHaXGh0Vv6ZlqSX4Q/zx/oapi4kkD
- P+vsK6frN5MvB8208rAezqKuARAMtdI4pwvOdXw9LrITR0srHODFQ+r+D1wN7aEDnMnQk96YRCm
- 130heQcfQIvTgvp6sE53W5gQJVL9LmLNSLhrJZuQMk8Yo6hhtajfGJv+kNiFS7MGITB5bYRfagJ
- EULZMT0IYUcXbNITBbbpOWRfthdTqj2udotsIfoAG22L4FOGjGnM0OM/NYqMpi4u/XZlxhEVmO3
- Ab6Fj2VyLrrglvaWPGePlC2v4usOMVsJJpsLFmJGgdwFtRbmVnle0NUFelvc58KN05JDTb4OF8l
- bhGcoFU5K6fZg
-X-Google-Smtp-Source: AGHT+IESTeDrH41S2luM8IysftTosvvnfoX1g3Y3n+bPZo4sN1C+BD5Y4Q0cvlXb2523aGDc/WAv9Q==
-X-Received: by 2002:a05:6808:2025:b0:403:4807:3770 with SMTP id
- 5614622812f47-409120e6ddbmr1537094b6e.9.1749306151606; 
- Sat, 07 Jun 2025 07:22:31 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ea072e5ae4sm957762fac.32.2025.06.07.07.22.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 07:22:30 -0700 (PDT)
-Date: Sat, 7 Jun 2025 08:22:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KyKNtEyUU2ICf+s1r1+SQ1oPehuGhOyoU2m6/094aiKjuzZ7TqGtplnkzXJT38EoZPBl1CyyW6Ioqz7Nem+UiFrk0FDP3wm5dEJzvesmhZgeE2owJIJS3qug3fajkyBBrcLvK6b2q7hxh6PGDijuA3s1eSDwQoz8ABqN9T2B0Plbl/dqVCq4yEesPfY5tyhSVL/QxZ3HAj5dxgMzgk5vw0lgWttz8cKkSmpLlrCpZphs4wiNQOJScEm3Oy2U7YxEYa0X4IcN0t2Y/22KVPetOSIILkuAcNMuAio9JOhCJmzP+e3rMw9CS/cQSfoysLtAoIIcjjyW1dnz9n6s2NGn2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hXi/mUP0qyw24EY92Jie+uvvRWB4xJK6elzWhchp6ko=;
+ b=wbLc+4lYiOVreRf/TG5uHqu935NF+nW7/r90WnbAPLmX7CF9OuTklQwDfgvk15wTzIwEaljCE3jZpgrh9Rja6qAVjG3Yxru1Gits/UpLG126bourgVDvPBvf3WgHO96qo9UzZAUaOt7CAO9RZj8zt/RhlcfEtgCtp7TWrvNWSwPikmQaRhIF4ol0caTxzU6tfdqxPgfKWBh77p48cAFr6nGpA/HY6EbrBB7xOIcU1EE2sqd14Gen/GonVdO8AcELpj4z+qHc9QWhEMLzLJZLUbJ0UFsaP7TqdZkDSzGYDIB4aMgyFxCIgr5D0DesMcdzCJVO+2LH+CpVvvA4qMWVWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hXi/mUP0qyw24EY92Jie+uvvRWB4xJK6elzWhchp6ko=;
+ b=VtDPr1v0x1w2r2JnYzFSmEQMQ7wQdo2vJnFWDpIuEoar3GdhVH3gwRwwGrk9tpgbhcjvjJQr3opieT0wWVviNHYunSgUabUR5kxXBByT3a6NSSUZQdifg0bKkcHBb/DaRZG6w02j9qm4EazQlbDCqZo+jRts7FPfHesxTS3N3oPEqJKfo5pKvNWG+ZNAFM7wd3qUyXuNonN/cy8eJmSnrt5q9xtgpNi2DnSdnk6DfMC2no473Nv0JIuh0dOCrbuM+ZsVX8Un4FzUUK6XX8swFyXa/g92SfGR6fy+hbZC6KJwSym4sppsmENrNnkiFXjUznyJlKg7XECVZy2V4K/itA==
+Received: from SEYPR02MB5557.apcprd02.prod.outlook.com (2603:1096:101:52::6)
+ by OSQPR02MB7958.apcprd02.prod.outlook.com (2603:1096:604:298::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.34; Sat, 7 Jun
+ 2025 15:02:31 +0000
+Received: from SEYPR02MB5557.apcprd02.prod.outlook.com
+ ([fe80::cb39:3489:a58d:107f]) by SEYPR02MB5557.apcprd02.prod.outlook.com
+ ([fe80::cb39:3489:a58d:107f%4]) with mapi id 15.20.8769.031; Sat, 7 Jun 2025
+ 15:02:27 +0000
+Message-ID: <SEYPR02MB555756B5B864E71D805658469669A@SEYPR02MB5557.apcprd02.prod.outlook.com>
+Date: Sat, 7 Jun 2025 23:02:22 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] arm: armv7: fix a bug that prevents CONFIG_BLOBLIST
+ and CONFIG_POSITION_INDEPENDENT to be enabled together
+To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mario Six <mario.six@gdsys.cc>, Casey Connolly <casey.connolly@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] sandbox: align LMB memory
-Message-ID: <20250607142228.GI1382132@bill-the-cat>
-References: <20250607114906.209959-1-heinrich.schuchardt@canonical.com>
- <20250607114906.209959-3-heinrich.schuchardt@canonical.com>
+ Raymond Mao <raymond.mao@linaro.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Cc: u-boot@lists.denx.de, Mikko Rapeli <mikko.rapeli@linaro.org>
+References: <20250531-pie_blob_fix-v1-0-7b4a37987dbc@outlook.com>
+ <b80d6fe8-d477-430b-bf21-eb7662541c28@cherry.de>
+Content-Language: en-US
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <b80d6fe8-d477-430b-bf21-eb7662541c28@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SGXP274CA0024.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::36)
+ To SEYPR02MB5557.apcprd02.prod.outlook.com
+ (2603:1096:101:52::6)
+X-Microsoft-Original-Message-ID: <97045e16-c265-402a-bbc7-5c78170a875d@outlook.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HuDkiIPWTwXTY8Sa"
-Content-Disposition: inline
-In-Reply-To: <20250607114906.209959-3-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEYPR02MB5557:EE_|OSQPR02MB7958:EE_
+X-MS-Office365-Filtering-Correlation-Id: faf32186-57d6-4522-c359-08dda5d45147
+X-MS-Exchange-SLBlob-MailProps: YfhX3sd/0TXLgAZ3D7SN5ouXXOSMMCC3F2KfGSeO1Nz49qwZaUOZGRGXugqdxY+y/HfRdwea99VJO+ySOj8rZvCeUcxs6suLBE7DDaRlPPYVuaZQrLkQ1G7+8Atu9rhWmZkkOghKPyb2UkCT4f+Mlous/PW0w4krZS5YGyUbU8o69ykMr3HhKVU93Y+p+81fyorUPdJfySGo6pIqcoUfqVdEvT5xzslfCmvYCXYkzzhxjCOLLOenhp6cF3CGMiEvFbldc93o4B7NydlV2tYXe+NNOAXPcjPef8xpgxjUTwBmF9ABdg04sLM148nleejZMqrfsruR/hPFpdiIt2RCtgkkYFKQiWCTL8Fcxp6lPxzKbI9mJSlRqO+tQBLMaF5CYehsfW8OIA51YYtX44+Gc6iCANU1SHIDkO/kPiQche7M3eDHg5l0ghkuE4CCQqrNJncMMeu5bqr/2cKqiszVZUliyA/PA4wkgqmylqJOYrmbjGZVsH4/ps9wDESw3sKCRF61fiWL3rm5/e/VBEwaLWb1JZtCNZbWU8Aq1J42YbrKN08tuPrDMT3XtkP2M0Mob/AhSiRW06RzmiqpBLW2gYNQYKGj2ed0gyykXO4tRPb7h2k/xveXD/sGd3qwFj3BpTAvmDJ3l9wzULxn7aNGQacBLRPDbIGnoSaOFwpRODKhoZeVVaHk3Zklr2sPjY/kh/ymv3zrJjiaOtnxvhscEE1bJ+eumQvuL5Qi7VCzp2MIJR4Qu3w0Z4f1EF5RGz22A48rF5l2abyYeuw8bqNV8c1Zw9mpz9SsogHurawDn8k=
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|8060799009|19110799006|15080799009|461199028|6090799003|5072599009|440099028|4302099013|3412199025|10035399007|1602099012;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V29aQUxoZzJybUx5MlRxTkxhQlU3bVE3NWVBL3UzOVl4cHZoNHgyV3lrbmkw?=
+ =?utf-8?B?SnZYd0N6U3QzdWE3WGE5dmo4K0thRC84cTJ6S0tOUUFrTVlrNmVOYlRGYng1?=
+ =?utf-8?B?aHJNQ01ISjZaNmxQZ1lZNEhLVGZpOUl1U2hRNVhtL3A4c2ZjcS9ZQzRUMWhB?=
+ =?utf-8?B?U0xHQmdLYXNtQ3NraGRGUTVjNkY2Q00wOC9QTWZ6aWx6YlNrbk1zOWJCenZL?=
+ =?utf-8?B?cXNJdWw4RzU5cHdLdCtLVjdsWk04dzk3bUNGMVVqb0kyOVIxdHFBbTFMdSsv?=
+ =?utf-8?B?WmtVT3ducThFQXZsSDdGeGgyTWJnaDR3K05XMWNuUXk1Skk3ZUxhU1M0Tk9J?=
+ =?utf-8?B?MTcxNmRkR2dHRXFXbmpieGJaRVJDS3k5OUIrOHROUjdQWjFUem1ST2UvWXcr?=
+ =?utf-8?B?SmhKanA0VDU3UDlNZDdoM2t2dTlUcUVobStNU2JaaGVaaU4xWmVrQjlxR0V6?=
+ =?utf-8?B?d2EwdEk2Vm5OWVkzYUx3Kytua0tVZjdPazY1aDJvWk4zOUxMOEZITDVQMzE3?=
+ =?utf-8?B?dVNuWUEwbWJBRjhOWEdnWVk3M29tZVc3WTBLM2tuV0dtUys1UEpOWWpSMUpn?=
+ =?utf-8?B?QWN2dGNvNTk5aWlSK0ZtTThCOGllUEQxeHRmcFpMeGpiTkFRc0g1ZlM0cSt5?=
+ =?utf-8?B?OUJXMXNpcWk4UUphOS9ZWkdXNHJJRFRsOGk4QnNDR3JWbER3T2FVbFd6UzNt?=
+ =?utf-8?B?THNOMUFaSE41aGtydHRoMXR0RU9aaTlPUEUrb01tWmYxYlRYZUNmaldRc3lO?=
+ =?utf-8?B?bWs5OTVoWmpScTc2YlZqNENVQVVrKzJJZ2RHdWRvSnRiMllnaHpQMC9PcUI2?=
+ =?utf-8?B?UnJMbzBZMURiYzZ3aytDbDllNnI2WDlpUkJRdzk0b3hTcnJEYTBXdnYyUzV1?=
+ =?utf-8?B?QUxSUC9rdEpiZ0dBSWtFNllnTFBSTjlIZUp2UkJndE80cmltd2dMamJ2dFBm?=
+ =?utf-8?B?K2I3RGNMejVVQU1uNnRNRFpVd3l5NmtEY3dOekdudTlqSzVtcURpdHluM1Ru?=
+ =?utf-8?B?YXlBSHV2aFUxeHdmNnB6K1RHbkZ0TEViY0xVNXFwcDM4Sm5ZaVFhaDRaUHJt?=
+ =?utf-8?B?aFNMOGVVMUZWeUZLUTRZd0JvUE1mY2FsaTBQRTNidWdKenpqQWJKRlAya2Jq?=
+ =?utf-8?B?MlhmM283L3dDTkNnNGVqMFRhaktFbytXdnZkMEExTGIwd1lxbTBKYnB4SWgw?=
+ =?utf-8?B?VHgwTXN0c0liT251SG5WSm81UUFBRXZtZWdNeFZnclRXYlA2OFcxNFRzV0FP?=
+ =?utf-8?B?UWxKRGlNWE50ZlBCT3gwTDVmb1ArTmlvcmtHYjdxeTVlUDZUZTI0RFVGWnlj?=
+ =?utf-8?B?anFZSWJuUWpjUzFCMUFaSEp1UFFZU0Y0bGFGVEVPMEZmc3JUSDRiQ1hXZVNq?=
+ =?utf-8?B?ZzdOemRJS3AwYW9pQXp4VE54OWZsYTdMUmhzNURudUJBV0kraXZ1ajJZY29x?=
+ =?utf-8?B?R2xWU1BHK0EwVzl2S210eTZwbHdYcTB2Q2Zid1FGNGJRUlY3M1hIaksvOHhS?=
+ =?utf-8?B?SVRqdVJxUldPN3FvWEhnVGtKb3QzdFQ5aEN4dGUwUEVmWm8rdzVCbHR3aGxN?=
+ =?utf-8?B?RFFQM05YQ0tqNlNCNGJsakdSN2ZyNUpzM3p2S2ZSTkFRQ0RtNUIvaWZvM2xJ?=
+ =?utf-8?B?d0Y2aGFKczE4Q01JcXdZRU1VYWlqYUFJaDBUbGVTMWNmK1dHRTJyOUtMMzhk?=
+ =?utf-8?B?UUEvNkNaYzlqdG9VQ2xFVEZDSCtSRVhPN2RYdGVzR0xrSlJ2LzcyR3dBPT0=?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aTE0WmxaRmxBOGxjZGQwemRac01LWXFGbnFpZC92aGI3eCtod2VsN1JGNTdL?=
+ =?utf-8?B?UGg2REJjYVM2elYzNzllUmFlY21MNExCZlA0cXFVdTdYbG1UdHdzNy9SMWxs?=
+ =?utf-8?B?VHVmUXlZR1hhcWFEV1ptSWpmZjY0eDZZU2piUHRGVkE4aDM5ZkRRNHJVSnVZ?=
+ =?utf-8?B?RmRHU01FeFduTW1LN3RDd3VCRi84M2NIaU9JTFBhc2tYMERnTG5MOWtyVlp1?=
+ =?utf-8?B?bnh1Zk9aT0hGUURCNXZKUEdFdWthUHBBdGlXZ2xZdnZEZHFFaVFjWmt6dFJU?=
+ =?utf-8?B?NWI4UHdxSnJ5bGo5cW1zeXk1OTYrQjBXdnluMGVlNXRnUWZkNzQwZmlXWHhF?=
+ =?utf-8?B?YVd0VkhuKytQVkdoSzJKblQ4dCtzODlLWXd3NG5lMVhpem9xSU83bW1OOERh?=
+ =?utf-8?B?OXBGejU3Y0RsdWx2V0xuQmJaOHlhWDdJK2M4cVZ3bFVUcWR2eHVrd2xaQUVP?=
+ =?utf-8?B?NFJERUwxY1ErdzliV3NoS3l2S0V1ZXhYcWJJd3lZNndFcmxEVks3eUpzMkkr?=
+ =?utf-8?B?ckpCeDdZQU80bmRreVlrUC9FMjI1b3ZUYVpYUkJKQzNsT3F2NG9Xb0lGWGw1?=
+ =?utf-8?B?TG00UEM1R01kbzFFQjRzc0ZUTWttdUVNaVZvbVVZVlpNNUw2dkhKVXVWbkZS?=
+ =?utf-8?B?M2N3MWYrNklUZ3puWWxTSjgvZ21LMCtKd1M0Y0loRWhXdUtZQ1hwbjhGKzRm?=
+ =?utf-8?B?Sll3S3gzcTVSL1doZXFhQU1oR29wWkxqSnJybElmMVJWcE1HZzg1RVZ3aGFG?=
+ =?utf-8?B?RjlFQlQ4ckVjQmU0V2FEY2h6QTlTWEkwV2U3Yy9yMHhsL3VBaHFRdWFmZ3M2?=
+ =?utf-8?B?ZXUwU0E1Yms5cFl3b2dlc2p6clJwRzloL1ZVa2N6Z0diUDBFNWNwOE5BMFg1?=
+ =?utf-8?B?YUptM0JGN2ZvalQ0YnU4bE93dStFeWdRQkV0Qkc0TEtTZDd0TE9Fc2lwOUow?=
+ =?utf-8?B?bW9BbHQvdVhsSmkzWWtYQVY0YTVNTWQzb2M5aTVRTkhBZ1ZORk5ob2o3b2xN?=
+ =?utf-8?B?V3NrSFZzcEEram9YWFhZUklpWDZTMGRqN2NWWEo2bFFSZi9maDNvdXFDdnBL?=
+ =?utf-8?B?enVwcWIzbVlrejJUQ0Rlc0JKT3hUcDJBR1grTHpjSlNBcE4vTTQ3K3pheCto?=
+ =?utf-8?B?ZlI2VS9sWnRDR0pEWjFxUFZidjlRR254VTFKS1I3aWZ6d3JzYVJFV0c3U3hI?=
+ =?utf-8?B?eHlrYmFFM1ZRMEJ0R1pkcWFBUzdyN0tERms0aFNBN1UxZWJ3RUUxTDNOMHQv?=
+ =?utf-8?B?NHNwd09xTEhadlZwaGl5OGZveWtEWjlDcVBpNkhBcXAzZFp3UkxiVjNKeWE5?=
+ =?utf-8?B?R01WcEV0b0xBdXVKYlJpZWhPRlhnKzB2cGpvODgrM0hsS2Rtck1HVDd4bFlK?=
+ =?utf-8?B?TkwzQUZlV3hxeUhYbGpuTGkyL3lnS0syUjZSSmJKalZieTJvaGNtWkhoa256?=
+ =?utf-8?B?U1U1OEZiMzE5MHZRMzJib3ZmTkhSZ1I5OEtrK0xzSC85Vk9UU1pNcXFTcDl1?=
+ =?utf-8?B?MDEvN0VsTElseGZiVjI5T2IxM3F4TlRZbW4zQllTWm5XZXZ5TUJtSlNYUllx?=
+ =?utf-8?B?SUJsNEdHVmMxUHdORmRRL0R3OWtEZ0RrYSt1VDdqNzZURlhFZG80TFdVZzQ3?=
+ =?utf-8?B?U3BUNUZvNndjZk5INXY0RklVemIwY3JjNjRsbTNDL2tHQVRMMnI3T0JibnJS?=
+ =?utf-8?Q?LVzYKgYoXzuW7U0hWfC2?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: faf32186-57d6-4522-c359-08dda5d45147
+X-MS-Exchange-CrossTenant-AuthSource: SEYPR02MB5557.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2025 15:02:27.6409 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSQPR02MB7958
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,71 +163,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 6/2/2025 6:37 PM, Quentin Schulz wrote:
+> +Cc Mikko Rapeli who's attempting to patch this in OpenEmbedded-Core
+>
+> On 5/31/25 3:10 PM, Yang Xiwen via B4 Relay wrote:
+>> [You don't often get email from 
+>> devnull+forbidden405.outlook.com@kernel.org. Learn why this is 
+>> important at https://aka.ms/LearnAboutSenderIdentification ]
+>>
+>> This patchset also enables CONFIG_POSITION_INDEPENDENT for qemu boards
+>> to avoid similar issues to happen again in the future.
+>>
+>> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+>> ---
+>> Yang Xiwen (2):
+>>        arm: armv7: restore section to .text after saved_args
+>>        arm: qemu: Add imply CONFIG_POSITION_INDEPENDENT
+>>
+>>   arch/arm/Kconfig           | 1 +
+>>   arch/arm/cpu/armv7/start.S | 2 ++
+>>   2 files changed, 3 insertions(+)
+>> ---
+>> base-commit: 93905ab6e7564089f5d7b703b660464d675e5ab0
+>> change-id: 20250529-pie_blob_fix-a61229c8fcc6
+>>
+>> Best regards,
+>> -- 
+>> Yang Xiwen <forbidden405@outlook.com>
+>>
+>>
+>
+Hi, someone please review this? This patch is so small that anyone can 
+review it in 1 minute.
 
---HuDkiIPWTwXTY8Sa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-- 
+Regards,
+Yang Xiwen
 
-On Sat, Jun 07, 2025 at 01:49:04PM +0200, Heinrich Schuchardt wrote:
-
-> To implement the EFI_SYSTEM_TABLE_POINTER we need 4 MiB aligned
-> memory.
->=20
-> On the sandbox LMB uses addresses relative to the start of a page aligned
-> RAM buffer allocated with mmap(). This leads to a mismatch of alignment
-> between EFI which uses pointers and LMB which uses phys_addr_t.
->=20
-> Ensure that the RAM buffer used for LMB is 4 MiB aligned.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/sandbox/cpu/state.c         | 6 ++++--
->  arch/sandbox/include/asm/state.h | 1 +
->  include/configs/sandbox.h        | 2 ++
->  3 files changed, 7 insertions(+), 2 deletions(-)
-[snip]
-> diff --git a/include/configs/sandbox.h b/include/configs/sandbox.h
-> index db2ac7f83bb..ee1ad21fd8d 100644
-> --- a/include/configs/sandbox.h
-> +++ b/include/configs/sandbox.h
-> @@ -14,6 +14,8 @@
->  #define CFG_SYS_SDRAM_BASE		0
->  #define CFG_SYS_SDRAM_SIZE \
->  		(SB_TO_UL(CONFIG_SANDBOX_RAM_SIZE_MB) << 20)
-> +/** define CFG_SYS_SDRAM_ALIGN - Alignment of emulated RAM */
-> +#define CFG_SYS_SDRAM_ALIGN		0x400000
-> =20
->  #define CFG_SYS_BAUDRATE_TABLE	{4800, 9600, 19200, 38400, 57600,\
->  					115200}
-
-Can we avoid adding something to the CFG_SYS namespace? Since this is
-sandbox centric is there something under arch/sandbox/include/asm we can
-drop this in to instead? Thanks.
-
-> --=20
-> 2.48.1
->=20
-
---=20
-Tom
-
---HuDkiIPWTwXTY8Sa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhESyQACgkQFHw5/5Y0
-tyzrXAwAlwqXB+oGiNotrKYKKjqMZPthprCO0Xwr/ksq/AWOANFb3AWNgmGJ7f25
-rVabPhrW737IUtGXWZY2d5oUtGxFfuDuHnaB6fUGzTfEq2wq4BmMag+426yL4RxT
-RDCUrtZcE6HCgoLL6U+Qtj9xQffcD0DS8uvk+t3EF4CyB5ozTnl4/+m1NvBJmoD7
-o8UA7iEJeeNX2bDL9vEmqYRJPehCMNsYNoOZppNnorhUNuchi0yhqfTQeolp38jG
-eDss7rahkYSFbYQEOIaID9IyqqgSp2gXZ6z3xV+JMtYLolgiWid5fi0Y0yoYy6Z0
-l7tUtAy4XuEW35jnrmXw2WBhGJOMxO07MP9ttfRf3sX7tx5cazZW8orOZOil/ze6
-wtLld2M20Uj92Z6W3MGtCu47tMDo5OkMh9jBoMCByWn+clWvhw1GnqoNUQTcAdX0
-bS0GZL4d0KajprytMp6wAZuNvNX8Lqq2iqAdR+cyYesj/FgT3rahs/94NSSJrzFJ
-/DG9v8h+
-=gDY0
------END PGP SIGNATURE-----
-
---HuDkiIPWTwXTY8Sa--
