@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE78C5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 11:49:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 767C1C5B543
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 11:49:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A74980E9A;
-	Sat,  7 Jun 2025 13:49:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 897D082B00;
+	Sat,  7 Jun 2025 13:49:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="atd1FbFb";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IQFEeMKg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A36A828F8; Sat,  7 Jun 2025 13:49:32 +0200 (CEST)
+ id 5FF5C807B1; Sat,  7 Jun 2025 13:49:32 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41990807B1
+ by phobos.denx.de (Postfix) with ESMTPS id 8304681F0D
  for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 13:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,18 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-175-200.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6295A4B670; 
- Sat,  7 Jun 2025 11:49:28 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6B3293FAC5; 
+ Sat,  7 Jun 2025 11:49:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1749296969;
- bh=Rf2UQsgBhgrsIN4Yv2PWZIbps9qluhvsXGNZHqQVaHI=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=atd1FbFbJkNyYGLLEkEG5qhbGM4xvydnO80c5qdpQEiJXuKtE0c4gvMtPvMwQnG27
- ZseNIOQ1pWusTJcPLrxcqEwEIgLExFaBd6NUEk5ISe8tZoHZEywjyX7A4ZocQv0jpB
- Ql6R0yyJKqEE9F37pR2gNUdTjuK+NCgAmTLp1Y/IpdCFHPLXo5qL5g59YRYUZnSdhB
- PpEZels+7+dtxo2cucLZQZ0zQT8AKJS35CJ0Vj+Bb5OfjG8wo5QQvCtvDlM2H5lSxD
- ihUV3fyX5SKXvrxmQsATYeshCijITbTJZRD08OvIlrTM7+oBl3fIaGBxIyU2/XvGGs
- RpBUDLqvJFiog==
+ s=20210705; t=1749296970;
+ bh=WoMbB2zyn7vWBPYbb5TYuN6gcojieNOF0NTrXFnvlOI=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=IQFEeMKghpIW7NRr7hKtFTmVGoofJCSsG1PZvT6Da2U7PrN4mC+X28S6qeE5yJmZP
+ WReiAWP7srNi21rzAF4BYgxDbGEDyT/wJ2JcwW3IBiFbcSqusrobNH3YB0KosT1rXd
+ /OmTAwhPOik9C73zdMI6OSR0lqxNitxju3g4kT6ynaI8SmFEEOYi1Q7CNI22wK+isr
+ D+q6QXdHIpw0qjM0dkr6PJPeoL7UsCqSXtdvZp0t10Sm5K7AkULJ9uMXeuZx9hLhRq
+ DvT9X5wIqL95ANB0gxITXQF1omEMnHfBP5n2nxNX0w8MxPky+sHT69YuSh8bEadzYy
+ JBsXt0IBtwebg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -51,10 +52,12 @@ Cc: Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Ying-Chun Liu <paul.liu@linaro.org>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/3] sandbox: align LMB memory
-Date: Sat,  7 Jun 2025 13:49:02 +0200
-Message-ID: <20250607114906.209959-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/3] sandbox: fix dram_init()
+Date: Sat,  7 Jun 2025 13:49:03 +0200
+Message-ID: <20250607114906.209959-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250607114906.209959-1-heinrich.schuchardt@canonical.com>
+References: <20250607114906.209959-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,33 +76,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To implement the EFI_SYSTEM_TABLE_POINTER we need 4 MiB aligned
-memory.
+dram_init() must not overwrite the value of gd->ram_buf set by
+setup_ram_buf() for main U-Boot or board_init_f() for SPL.
 
-On the sandbox LMB uses addresses relative to the start of a page aligned
-RAM buffer allocated with mmap(). This leads to a mismatch of alignment
-between EFI which uses pointers and LMB which uses phys_addr_t.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ board/sandbox/sandbox.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Ensure that the RAM buffer used for LMB is 4 MiB aligned.
-
-Provide a unit test for efi_alloc_aligned_pages() verifying this alignment.
-
-Do not overwrite RAM size in dram_init().
-
-Heinrich Schuchardt (3):
-  sandbox: fix dram_init()
-  sandbox: align LMB memory
-  test: unit test for efi_alloc_aligned_pages()
-
- arch/sandbox/cpu/state.c         |  6 ++-
- arch/sandbox/include/asm/state.h |  1 +
- board/sandbox/sandbox.c          |  1 -
- include/configs/sandbox.h        |  2 +
- test/lib/Makefile                |  2 +-
- test/lib/efi_memory.c            | 63 ++++++++++++++++++++++++++++++++
- 6 files changed, 71 insertions(+), 4 deletions(-)
- create mode 100644 test/lib/efi_memory.c
-
+diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+index d97945e58fc..43f4edc39e9 100644
+--- a/board/sandbox/sandbox.c
++++ b/board/sandbox/sandbox.c
+@@ -101,7 +101,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 
+ int dram_init(void)
+ {
+-	gd->ram_size = CFG_SYS_SDRAM_SIZE;
+ 	return 0;
+ }
+ 
 -- 
 2.48.1
 
