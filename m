@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AD3AC61CE7
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 12:03:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11738C61CE7
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 12:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C87A82A65;
-	Sat,  7 Jun 2025 14:03:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE98482B18;
+	Sat,  7 Jun 2025 14:03:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="utaLzvoG";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="X4BvkfI2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25C7382AF6; Sat,  7 Jun 2025 14:03:32 +0200 (CEST)
+ id 7BD1881F0D; Sat,  7 Jun 2025 14:03:34 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B3781F0D
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 14:03:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4240481F0D
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 14:03:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-175-200.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 3230D4B65C; 
- Sat,  7 Jun 2025 12:03:28 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6449F4B66C; 
+ Sat,  7 Jun 2025 12:03:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1749297809;
- bh=ZS1cuKzmnhqH90BlNoHn85PAkfY6KVR6vjFscq31fdo=;
+ s=20210705; t=1749297811;
+ bh=CESkNIe1xIzpMv76k8Lbwa9JcW8V3fAoxIyg1DjjCxM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=utaLzvoGK2itnCb2Qr7QotWIyLWq1lid32xv05Or7iDN5n9XXOuih+7hM8x9uckKB
- hXMbn8KTCnFIy9yu6WHN5fy90PPU+rAZ0uBFCiNwAJx2lP7gk0kT8w6MmWQ0j7HXsR
- aXE5fMwU2+scGuly0EG4wkb2I3qU2JE1yUBe20Df43ZUqwrMgi3JjIjplb5hLVCqMF
- As/gZxc+xRXzg8Hxds4fsoQoJI+iWWPPcDcCKjUP3Gm1rYgxR8eGueVj8K6HT4z48s
- ILvCHYr/JgbOWQuO9PlqCLHGjdSW9wtfGvb2/DhGxRItOq419OaOfsp578PnQzCCoF
- trWwzz++IMw+A==
+ b=X4BvkfI2JDfz0f049xkDn8rkoOZPZkxw+mFqVlyQHFXK2u3/MfwJeWA6EoDEQOuiF
+ 9JrtgLc+n1GVpO574r/jQvm1v8gDLRMXZNysOr3pdwCD7KNqQR1mNQqtTSSM0JzPwb
+ QyDfMux2AW/ZjyySXs++m3CUrukghVTdctikqvad3fKE7wYNZeDmFTjslPGyuOOGF+
+ 6pkCLnO7c8Naw3ItvnZboo36XRRJM8WW4oxcUKJchuecdzRR7Rv0Vp6Ms1xUS+FGB7
+ RQor0bKp5vI2zRVAMyiqvOCD2tG+S5fd2gn9Z6XcMes+Wo7D7rbdiujLaBRtzQvIcn
+ ZDs/4ngix1E4Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -62,9 +62,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Casey Connolly <casey.connolly@linaro.org>, Bryan Brattlof <bb@ti.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/3] verdin-am62p: include linux/sizes.h
-Date: Sat,  7 Jun 2025 14:03:01 +0200
-Message-ID: <20250607120303.210990-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/3] cmd: remove duplicate DHCPv6 Kconfig definitions
+Date: Sat,  7 Jun 2025 14:03:02 +0200
+Message-ID: <20250607120303.210990-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250607120303.210990-1-heinrich.schuchardt@canonical.com>
 References: <20250607120303.210990-1-heinrich.schuchardt@canonical.com>
@@ -86,53 +86,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Avoid build failures
+Remove duplicate definition of
 
-In file included from include/config.h:3,
-                 from board/toradex/verdin-am62p/verdin-am62p.c:9:
-board/toradex/verdin-am62p/verdin-am62p.c: In function 'dram_init':
-include/configs/verdin-am62p.h:13:33: error: 'SZ_2G' undeclared (first use in this function)
-   13 | #define CFG_SYS_SDRAM_SIZE      SZ_2G /* Maximum supported size */
-      |                                 ^~~~~
-board/toradex/verdin-am62p/verdin-am62p.c:63:65: note: in expansion of macro 'CFG_SYS_SDRAM_SIZE'
-   63 |         gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, CFG_SYS_SDRAM_SIZE);
-      |                                                                 ^~~~~~~~~~~~~~~~~~
-include/configs/verdin-am62p.h:13:33: note: each undeclared identifier is reported only once for each function it appears in
-board/toradex/verdin-am62p/verdin-am62p.c:65:28: error: 'SZ_1G' undeclared (first use in this function)
-   65 |         if (gd->ram_size < SZ_1G)
-      |                            ^~~~~
+* DHCP6_PXE_CLIENTARCH
+* DHCP6_PXE_DHCP_OPTION
+* DHCP6_ENTERPRISE_ID
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- board/toradex/verdin-am62p/verdin-am62p.c | 1 +
- include/configs/verdin-am62p.h            | 2 ++
- 2 files changed, 3 insertions(+)
+ cmd/Kconfig | 17 -----------------
+ 1 file changed, 17 deletions(-)
 
-diff --git a/board/toradex/verdin-am62p/verdin-am62p.c b/board/toradex/verdin-am62p/verdin-am62p.c
-index 8b246e9d304..5ca4f8ee21d 100644
---- a/board/toradex/verdin-am62p/verdin-am62p.c
-+++ b/board/toradex/verdin-am62p/verdin-am62p.c
-@@ -15,6 +15,7 @@
- #include <fdt_support.h>
- #include <init.h>
- #include <k3-ddrss.h>
-+#include <linux/sizes.h>
- #include <spl.h>
- #include <linux/sizes.h>
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index ed741d43cea..c335eceea63 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2004,23 +2004,6 @@ config BOOTP_RANDOM_XID
+ 	  Selecting this will allow for a random transaction ID to get
+ 	  selected for each BOOTP/DHCPv4 exchange.
  
-diff --git a/include/configs/verdin-am62p.h b/include/configs/verdin-am62p.h
-index eef360ee9b6..c3464bdb838 100644
---- a/include/configs/verdin-am62p.h
-+++ b/include/configs/verdin-am62p.h
-@@ -8,6 +8,8 @@
- #ifndef __VERDIN_AM62P_H
- #define __VERDIN_AM62P_H
- 
-+#include <linux/sizes.h>
-+
- /* DDR Configuration */
- #define CFG_SYS_SDRAM_BASE	0x80000000
- #define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size */
+-if CMD_DHCP6
+-
+-config DHCP6_PXE_CLIENTARCH
+-	hex
+-	default 0x16 if ARM64
+-	default 0x15 if ARM
+-	default 0xFF
+-
+-config DHCP6_PXE_DHCP_OPTION
+-	bool "Request & store 'pxe_configfile' from DHCP6 server"
+-
+-config DHCP6_ENTERPRISE_ID
+-	int "Enterprise ID to send in DHCPv6 Vendor Class Option"
+-	default 0
+-
+-endif
+-
+ config CMD_TFTPPUT
+ 	bool "tftp put"
+ 	depends on CMD_TFTPBOOT
 -- 
 2.48.1
 
