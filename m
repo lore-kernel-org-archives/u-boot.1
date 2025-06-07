@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A231C61CE7
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 09:38:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 016C6C61CE7
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 09:38:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1763382B3D;
+	by phobos.denx.de (Postfix) with ESMTP id 65CE382B97;
 	Sat,  7 Jun 2025 11:37:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MAGgAVZ8";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="T1NuMkBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEEB582AFC; Sat,  7 Jun 2025 11:37:41 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id ED3E382B70; Sat,  7 Jun 2025 11:37:42 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 924EA82B00
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 11:37:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C420682AF6
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 11:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5efe8d9ebdfso5079128a12.3
- for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 02:37:39 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-607c2b96b29so914245a12.1
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 02:37:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1749289059; x=1749893859;
+ d=amarulasolutions.com; s=google; t=1749289060; x=1749893860;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ttmUHLY08fh/FuLq2G6mP6MFdpRwEDRrcgYPXrhNizk=;
- b=MAGgAVZ8cW00pHgetYzXZzBxXAx3AdwdFVbIHiEfJA85wg6qgJVFfyofnjOlbXD7XN
- qN6e/jaJ9rlnvA/3O7RnM2NFyoVpJeFc8kgerv5G8HlklUSyHiunJFde6kizqwkM4tp8
- iSf6JPfukywMj213cKx7qkGjXRWoIeVtwpT3k=
+ bh=tbVZTpqHnxGSfG31CEf3LRpU+FuZj/pllfnfJuL/RqU=;
+ b=T1NuMkBs8F3qc9BHd43Ii7MDHuoJzBa9RYLP/WVFqUaKAF4H9NkEez2Vxtoix8yK7i
+ ogIuu/8iy4PEgjdcOK1cLWHds0hVCiOtbGHMalLbKASqDCudysH71zIuwoSQ6pYoBIZM
+ 7lT14FCKWtwjAJA0VE4OrdQ19u5D/wI5rJlMU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749289059; x=1749893859;
+ d=1e100.net; s=20230601; t=1749289060; x=1749893860;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ttmUHLY08fh/FuLq2G6mP6MFdpRwEDRrcgYPXrhNizk=;
- b=Zx8BWc72YzGrjGux2rEdU6nD46lYKCSlUqM7geVUZwjyh6TH8hwxQ1dgmJG/GbW0cL
- tMDnbbyZkOIam3I4uDrAic8l0EZ8kycLp2j8XN26BlB+D8tjq3om/Q99hdmzM/wGeEun
- xoNRb04QljzIABk9C5492SECSZSOSQ5H1QaCiawqzyz+gKEYCNS7D+ig1V/uDQr6qr/s
- KhwolGVemkCXJzv6F6tnRtXWqdLD3k1h29yTr9d09gULbBP1mtn4v2Y8sljszjofO/IQ
- s/Z6Ey1bc5qUHjh8BrFU2XPNxVhy/r4RKkL8d+KmCH4Z5F89qYcyRu4VhW8Q/kIDYtlh
- bHyw==
-X-Gm-Message-State: AOJu0YyVi1yo6Xl8NJiGYOMkKtZKBppM4W2/FDxWV2AXo3AwVskjiHWV
- 48nZCq++G4TVJ0RaJ05HbGChlvOfC4Igo7M6I1ijH4RIt/qpPHLhHNHXvlPvcN1WZd4ECQKmYs4
- 649MX
-X-Gm-Gg: ASbGnctAoEwWeYacu0N7gthtjDiqW4Uu7ToD90/IRlcKqvACccsk2q41zBFf4QXB5uf
- 7MeLNMxIRpjVkHIEM2cYZOHmFxKqvVgEtbwoKDEliJIlvpqz/TtUPnuoxr/fMyW23m1k0ruKs18
- 7AFzj62jQQiVwjVzzBCtklruYKaAZJVt6iqgqoN+oWSq6bdmindY0bKgK3r5GP4LlzTXLMY6IDG
- iEX2mz2E/ThS1suSPajJV+Yjp1oPD7sfrxcYmW3lFoFzNpxusxaenYo89/BzGq+Mhf1FMJzWbjq
- jxG4WWRxDFvi7qbQhjO/MjRrGVMvN2flLSqomMlTZ5tse+R/ZxxfcC5/gwLHaJyEZ2xWUvMDqIQ
- FJHf9ZFiKaIP0HQesJdCLURYaHWqwOxv0WOAdYhCttgnXGEtwif9Ryg6zDCPrCVTqel59KOjgdS
- S0Q55+W3vdinXe
-X-Google-Smtp-Source: AGHT+IGGJA2vZQ+atvf90Rrht2amcxYEugiItPRofnasHL712epb6JRjIOyADmJAEGQ9pzJjAjtX2Q==
-X-Received: by 2002:a17:907:94cc:b0:adb:3345:7594 with SMTP id
- a640c23a62f3a-ade1a9e22camr495051466b.9.1749289058886; 
- Sat, 07 Jun 2025 02:37:38 -0700 (PDT)
+ bh=tbVZTpqHnxGSfG31CEf3LRpU+FuZj/pllfnfJuL/RqU=;
+ b=c1ynrzj4rv8sOau+TJ4FFIn5itcVthW8+XZ5RMRDprgjiYBYNLhoIKyeA/R/DaCvKL
+ RhMPVMdQmCT6Nm24JIhyKEP5Ux7UgsU/u5w//K6SAKJugGNlOT1bsLLPWn5SUrM+3DKw
+ jFRLQSo6LMFXetud3A4JV2uq2ZhtTb4q77bTPmFeyxB8y9Sb97qln9eUoVGvyxBbTb75
+ YZoScT5Cftgrn8Lwz0XHvYQOirUx5Wu5oTbosUhcVM78kzxvOdGxJIATYZOh40GSwfHR
+ 7JjqyPf6AbBHsE03BAeGd5cJYvFv5vFEVmjvgMuKxp/sDSGN2xqKqJVcqj5PH+p/GxPX
+ oZ1g==
+X-Gm-Message-State: AOJu0YyEMSYoYSSS5Q9MUwP9Er1auZLslKJVBCDqE3/VXVPfsgg0Z9fn
+ a03popQhssKFYVGjESFPk8jVkLIpW5XckzHhFda6hilyp6zN9CxIdsz6hISQ4oPdGp1XYkSqGTE
+ JrXqB
+X-Gm-Gg: ASbGnctNmwBcajevT6su0RNqBrsmr5d0sqCyAkoUBUK7MfgSV0noypNdUfTdpjR960s
+ 56ZWuTV76dlwuWH9jHDxswTul3AvOTH+KMBgSJ127nMP/PtgwvFpwY2mghz1n+7UZN+yXYQT4dT
+ 4R4DW7RG+bUyDstFSoMNZ/UyvrZ4yoH+GCgcqQRhcYwcrhp+PJei4CeLnWdBWNnL3oeRBMkPU5p
+ RcbW//dZr1rfcCKXxxWECTtAPSQAmOMkOWwtco7ge1bMiwReiVhKOmcdDTtyLY9KMCu5/we/9Nz
+ d1Xrhnr9cpM9awKOMT45KY3/YJ8bRiUgeLGv8kjKMRJrKrsk0wCmAUyClyQM5qQ1jGskWGf32wL
+ HDLp69UYqQOOiQMQqMsdKIoTVA+R+D2WItXIfjtDQkYVF6XnapLbBeld1VNz44qo8I1nJwi7WIl
+ kold6RRRNNydVmeFB9ABgYBaU=
+X-Google-Smtp-Source: AGHT+IHRmly90CF17mit3Opcizty27WODVU8ooPwCNDfcI3PXQ0FjS1SrU5q298TxhVHYipdKQHOLg==
+X-Received: by 2002:a17:907:3eaa:b0:ade:6e9:8ad4 with SMTP id
+ a640c23a62f3a-ade1aa8eff5mr602044866b.33.1749289060102; 
+ Sat, 07 Jun 2025 02:37:40 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-5-95-99.retail.telecomitalia.it. [87.5.95.99])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.37
+ a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 02:37:38 -0700 (PDT)
+ Sat, 07 Jun 2025 02:37:39 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
@@ -80,9 +80,10 @@ Cc: linux-amarula@amarulasolutions.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 4/9] ARM: dts: stm32: add uart8 node for stm32h743 MCU
-Date: Sat,  7 Jun 2025 11:37:12 +0200
-Message-ID: <20250607093730.2249536-5-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 5/9] ARM: dts: stm32: add pin map for UART8 controller on
+ stm32h743
+Date: Sat,  7 Jun 2025 11:37:13 +0200
+Message-ID: <20250607093730.2249536-6-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
 References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
@@ -104,39 +105,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for UART8 by applying the settings specified in the
-reference manual RM0433.
+Add a pin map configuration for using the UART8 controller on the
+stm32h743 MCU.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20250427074404.3278732-6-dario.binacchi@amarulasolutions.com
+Link: https://lore.kernel.org/r/20250427074404.3278732-7-dario.binacchi@amarulasolutions.com
 Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 
-[ upstream commit: 07aa43adae2363c3734055aeba0789536fa0f8f2 ]
+[ upstream commit: 47d16ab94b8e5e85aedba3cd22cfdf3877bf1dfb ]
 
 ---
 
- dts/upstream/src/arm/st/stm32h743.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/dts/upstream/src/arm/st/stm32h743.dtsi b/dts/upstream/src/arm/st/stm32h743.dtsi
-index b8d4c44c8a82..2f19cfbc57ad 100644
---- a/dts/upstream/src/arm/st/stm32h743.dtsi
-+++ b/dts/upstream/src/arm/st/stm32h743.dtsi
-@@ -211,6 +211,14 @@
- 			};
+diff --git a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
+index ad00c1080a96..96022afd0168 100644
+--- a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
++++ b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
+@@ -211,6 +211,19 @@
  		};
+ 	};
  
-+		uart8: serial@40007c00 {
-+			compatible = "st,stm32h7-uart";
-+			reg = <0x40007c00 0x400>;
-+			interrupts = <83>;
-+			status = "disabled";
-+			clocks = <&rcc UART8_CK>;
++	uart8_pins_a: uart8-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX('J', 8, AF8)>; /* UART8_TX */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <0>;
 +		};
++		pins2 {
++			pinmux = <STM32_PINMUX('J', 9, AF8)>; /* UART8_RX */
++			bias-disable;
++		};
++	};
 +
- 		usart1: serial@40011000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x40011000 0x400>;
+ 	usart1_pins_a: usart1-0 {
+ 		pins1 {
+ 			pinmux = <STM32_PINMUX('B', 14, AF4)>; /* USART1_TX */
 -- 
 2.43.0
 
