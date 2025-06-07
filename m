@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D60BC5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 14:09:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE56C61CE7
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 14:20:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7499882AF6;
-	Sat,  7 Jun 2025 16:09:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C282580E9A;
+	Sat,  7 Jun 2025 16:20:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p7bfQnXH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="edOYD5gx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 109FE82B0F; Sat,  7 Jun 2025 16:09:55 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 36A1182A0A; Sat,  7 Jun 2025 16:20:00 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB75E82ADA
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 16:09:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A28C3807B1
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 16:19:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-4067ac8f6cdso2475814b6e.2
- for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 07:09:52 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-2d4f8c42f49so2537852fac.1
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 07:19:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749305391; x=1749910191; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749305996; x=1749910796; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e5OVg5F6vVIJPQydXLf01aHs+ZA8KcgffZpJ/hMxsgI=;
- b=p7bfQnXHG7TVbcgYrUgagngbtxm5FFBWUD+eKM2bl3UfT4xS/u692j8yV1QigWt390
- K49tTxZdiu+T2MKdD62D/StTWk5qlfWObGuWcAp0AVNtwCUeNrth67cYohOMKMz+7tL7
- BSabiUGTNOex35/quERspxbKFp5MpEGTtbD9c=
+ bh=ks4LgYhG51/HvQunIYK/q4U9x7FLbJGc7HfYeMb3K+M=;
+ b=edOYD5gx/0Std736Jb6We0edNjHBBlX1BnVDo9jQNXE28sKRQwDZos1ongdxwB/Zz2
+ +j0s+euhRoZj1xc0rcwlO4RMxUOINb2ZnccFRmNNosz8sBqh1aXpIe/PWoyuYwEJKZCj
+ 7f4y3CJngSRbeuji7Vs5caBF5X+71EpLm99y4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749305391; x=1749910191;
+ d=1e100.net; s=20230601; t=1749305996; x=1749910796;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e5OVg5F6vVIJPQydXLf01aHs+ZA8KcgffZpJ/hMxsgI=;
- b=ipKdsEeukKBEzcH9oEluShcIQbXeJNA7jz3MkZObwK/WbSIaCsruj/VyS5Fux7mHEh
- B0YNKX1NF5/68GSUu5xLb7uTqoC7XbIUY4Ofio5HJjraRZy+I4DYgANuJNzVtKpfX3iA
- 17vqVAXWAxVTW7eEmSpt9o3JUtB7CCAm366jJtJksakES9C1e/72MArgGAOxudXWD0RN
- h1i4esx4PQnmhLaGEPhS4+fDNUBTDptL0+MQrT+S/1162agAjdjAknt8s0ukeqlkPtng
- nDEPYmten7ed37iEaHcPAmb6LvMNjnqpP2UgyMvnyc6Um+PiYR5YuD8mLvkcZ9ow2rNa
- uGfg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUUykJjvqLiJBmeKeV+OUk7Zn7Gv4Q+A3acubD4hwDXne60NcIDIZLcYWSKOtqj1EibfVP9rd0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyfXCnLVf/m+t9nQyqwkjasyMy4qJYiolq0cEPMt8MSfBBAiIF1
- hGKNfDWLN7dHxTLF2eJ0ijFxdrg65NdGFBUXSYULlYliVkYw/JoJzuehFlajNzntg4o=
-X-Gm-Gg: ASbGncudoLhWVAlkw+QfiLcX+Cj+ENzdWdQqC779lY7JNA4qbRt4JrnYDVZOpNjPoBd
- 2Fu0LvDTuB7dkPHwHW+zRVl/v25DbDTSUEyYzZQ5wbuVNPDJqCHwPZFRmKlNejnRBjudCrTqI7v
- ti6CTXuuobJ9SXq2jJtPTKd5qn6JOELkFo1qA7whRNsp/B27Lb6svy84f45AKTt+rbFB8kg27n/
- z2+vm3p+chTZ66hs+rlsAq94Ca1wlfU9uYPEp7c4jGTHAJPZ1GrEIuZWjhwl+Dl2gv/LCI9p8/V
- Q6jb8SD6TmuqkWzjVwOn+54ibHJ4NQlIpXR8vQ/9ioIa3qZe9sIp7vjfVv4xAyT95Qi/HzekPdF
- LwvUetbSaSThV8Qwk+k8+VOI=
-X-Google-Smtp-Source: AGHT+IFPjYgsSsxHDeNEHM5pPxZC8BBe0YJsc2YFg2FePcax+8j8ozPUA0ndpLyTq/+Nl3WHaUOqIw==
-X-Received: by 2002:a05:6808:6c8e:b0:3f8:e55c:16ea with SMTP id
- 5614622812f47-40905232edamr5143731b6e.24.1749305391657; 
- Sat, 07 Jun 2025 07:09:51 -0700 (PDT)
+ bh=ks4LgYhG51/HvQunIYK/q4U9x7FLbJGc7HfYeMb3K+M=;
+ b=t8EM7rRLdGj/qWf1n1AimoQg9eQ/0J8xlU+jz/wxTHrkkwyFgxDQ0kpBYC24OcqfnQ
+ CrSeBT2hO4+VXSZy07u50loP25aQE9klw307CXKzvAcbMXPn4NxHxcxFkw8RCSp1RQpp
+ unMhPLlOw64P8ZsXGyMGyube+6bRwrSVrsw/4eXTjWbr4mwWZRiC1gPkJWcSwBfj2p9f
+ CaerkjeqTPZkmxTS7Euy+KwdTh4yuu89G18nIRUTtW+hwvUjITAwiPvQoMvb1BDbSZ9l
+ kvSuDPf5047RAwxIzbxsatnuCx+9MGNtGpT4DPJpiiBKx7qXOpXwCKzN7Z+wk9CwrqOk
+ GXeQ==
+X-Gm-Message-State: AOJu0YyowDFh4ugVOLI2xWGHccEZCAYq2FKW77gtA1UoO+uunPUsOw3V
+ M7HqVd1WfS9bPJHNl40Da7y2Uhzg674T1xyMZSgv065GuE+V8pPr5vRm5cIk+obeLGkLWDQ+Z8h
+ 1fbCX4hA=
+X-Gm-Gg: ASbGncv1yhuPaLuwXtoUmW00ITuGtp0++EmmCWQaGpp45De++Et6GVxAYZKtjWsZlj+
+ p7kyIIkUTa067Sddnjg099w0a4SS3pjADsTQuPqndbxaUOHMaX3Ct0R8mmLrHmPGA2wA2kzuecg
+ 8+v/7AYqMxffGqa6nrgXpKJQE3v53Q3L9CIZ7P1nFLF6KRq3DAYL/VxRTGzFjUms1SbgV17PvLX
+ qKCCgncM6+D8J0T0c3htM4uKiwPbVv72/qivs8Xy9nTmVF+aQ47oFLCkcDcVgSfK2MHzI0McN4A
+ To69lLFpj8/0L5i0S/MaXiDxshD1w41QTOv8P6hElFg8BGfFROo0QnfhhfigZ7scy/K21RRS/4u
+ fWhv+XOsGH2FQtsyAF0ZQZwI=
+X-Google-Smtp-Source: AGHT+IGTU3+LvZindSRKvmxCoDqT2qVvg6fAXFGfWQb+/jGG6WGNwZ9KfLRQTvvGlBrHBlOIsTgMhw==
+X-Received: by 2002:a05:6871:228b:b0:2d4:e101:13f1 with SMTP id
+ 586e51a60fabf-2ea04431a73mr4466939fac.13.1749305996187; 
+ Sat, 07 Jun 2025 07:19:56 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40906a2e0f8sm910511b6e.50.2025.06.07.07.09.49
+ 586e51a60fabf-2ea073406c7sm956862fac.36.2025.06.07.07.19.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 07:09:50 -0700 (PDT)
-Date: Sat, 7 Jun 2025 08:09:48 -0600
+ Sat, 07 Jun 2025 07:19:55 -0700 (PDT)
+Date: Sat, 7 Jun 2025 08:19:53 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] arm/airoha: reset_cpu() does not take any params
-Message-ID: <20250607140948.GG1382132@bill-the-cat>
-References: <20250606210805.GE1382132@bill-the-cat>
- <20250606223923.503086-1-mikhail.kshevetskiy@iopsys.eu>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] pylibfdt: correct license information
+Message-ID: <20250607141953.GH1382132@bill-the-cat>
+References: <20250607113218.208923-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uacazjHF+EesptxJ"
+ protocol="application/pgp-signature"; boundary="g6Txj+z1MaBlU7vU"
 Content-Disposition: inline
-In-Reply-To: <20250606223923.503086-1-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20250607113218.208923-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,39 +97,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uacazjHF+EesptxJ
+--g6Txj+z1MaBlU7vU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jun 07, 2025 at 01:39:23AM +0300, Mikhail Kshevetskiy wrote:
+On Sat, Jun 07, 2025 at 01:32:17PM +0200, Heinrich Schuchardt wrote:
 
-> According to include/sysreset.h the reset_cpu() function does not take an=
-y args
+> Setuptools 78.1.1 shows warnings:
 >=20
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> * Pattern 'GPL' did not match any files.
+> * Pattern 'BSD-2-Clause' did not match any files.
+> * SetuptoolsDeprecationWarning: License classifiers are deprecated.
+>=20
+> Cf. https://packaging.python.org/en/latest/guides/writing-pyproject-toml/=
+#license
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---uacazjHF+EesptxJ
+--g6Txj+z1MaBlU7vU
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhESCwACgkQFHw5/5Y0
-tyxlYAv/fHycd9hM/zhy12EtfnaWFAuZkx5Kg6yXiob6aTnCeH40Lzqz5m7exfsf
-+pS2aN6rAQLCJh5FKAT/6BDhkIUZ+S5WUHcHVtZOERptJY8CGbYmh/rw/adqZyxZ
-tzTDIDNdnhDpKtiHrnOuiimn3lrxq9YWRuT9dRxjYch61/DiwLQ+PiHeGWDE4pGn
-ckS1EhZBptZ6x7lwuFO9DoWv0hm7gUPnnsc0Qt+RepGZHdvu2YOfg0yKC2C5JFS2
-74Y1eANJ1a1YL9RRZNy7povE+24Axct+pYvsaGjvkqXRHHMZYkGAujeArIsagA0b
-R0amV0KX1/utDk6jHnuqZvD2MW4ErLiba07jIe5jkri9ubLS94h4tcpsS19Bp04p
-BE7UpIB1rk+FyVk3fCdJ4uXm6vJt0LvT3+1oj+bxUKX4kdc5V0xhePGNHNCrQHqV
-tGM0bPZBsLESmFFDm9D9mPM51w6t8PrSY7n3K3F4DNyDQcC5jH1tzIhEViqdGQVW
-hdiQRshb
-=j/72
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhESoUACgkQFHw5/5Y0
+tyyFUQwAuT3b8pBzCOFgtROKdBGPzZcX7VEGsGXNcLKdvKuii66CrIq9WKzAYn2/
+n6+8vIEsxxuKyKd3Ig16O7qZJ1HuTShah2YbhkC9tXrG4yrRsf1l8lCAqzRaW6VG
+oPtF0JsSRMVcsQHbTK5igaqjJFyhjUipQ0NkSiib8dp/LBmSvGbF5RqZVAWREjY9
+ZuV8yL+GRob36SXdXRzmzZkJwPMCSJUv2+QrGzhpmaUwEO0Fg7FawVjmkpfKwdaQ
+bRHa3R7SVxxzQpnGjz8kFEvpq65lruYFffopZH4FpRw/F1ksrzGoOwoSzU1I/FYW
+7jznxeLO4ePqkeUtwXBJnv+Qye01OZ8z6UAZ9AlMP42Jy6nxwfUztLQNGVyLIL2v
+S08glDYYw+2SQkXeuLFVQxalWu3vzedIh2QVpesReQcAe81NuH751O4uVcuhdhKe
+xbGCahhgzFo2Q15tSa1mOedLDHZm4BNG/90OK/DnSeb8NZbULt82lxRsqkSDvCZ8
+Yj6JQ5pN
+=bexZ
 -----END PGP SIGNATURE-----
 
---uacazjHF+EesptxJ--
+--g6Txj+z1MaBlU7vU--
