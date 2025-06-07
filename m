@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B418C61CE7
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 09:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 940DAC5B543
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 09:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9088581F0D;
-	Sat,  7 Jun 2025 11:37:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DFD0882B00;
+	Sat,  7 Jun 2025 11:37:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="oLCBUUWg";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="APC6v6xs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11F7482AA7; Sat,  7 Jun 2025 11:37:38 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 6A45D82B00; Sat,  7 Jun 2025 11:37:39 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ED8782A7B
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 11:37:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39D1C80E9A
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 11:37:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-607cc1a2bd8so268143a12.2
- for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 02:37:35 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-606ddbda275so5267500a12.1
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 02:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1749289055; x=1749893855;
+ d=amarulasolutions.com; s=google; t=1749289056; x=1749893856;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=196XwIhnfIqqa04ABS763WeYWWcEyx5/YdJgVh0ydIs=;
- b=oLCBUUWg9BlG9M2R3bbV24BSg8cWPOqkMxGUr1uSyG9ECD6AFm6O1WGb1oVX8xJn9J
- piGOABiQyXUSPW3cDd6z67u61PmKfa0fSkBDrMzVklc25T5XcS1JrGkGu3AbL9ArqETE
- rBnqM/MNuHOnnuZxjrdJSXsuYir6Qu5KAeIvk=
+ bh=vIZOBsaFYYEjxcHR9lV+uTimm4H/Ly/1YE4Yh6CRGkY=;
+ b=APC6v6xsYU4TGis0M+dmd1eym4/7QoDT70pouCcC4S8ePr8GJ7YH14VpD2DZojtn2p
+ C1UqX2KdSjYz2B0DMdPfGOY9pWaqd807fUhB3tLg7IGsY8AgKviM7SnjAevgPmZ6kLWH
+ XmTDfVta0llP7s836kF+a234sKo8gF6zgtEb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749289055; x=1749893855;
+ d=1e100.net; s=20230601; t=1749289056; x=1749893856;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=196XwIhnfIqqa04ABS763WeYWWcEyx5/YdJgVh0ydIs=;
- b=Mz+fOK5rQCU+jlB2NHoGp6QGzRqeZnm8vy30DkV6XU5dhNXRj91Hv1MvP1yB9Ct79x
- a95G3Ulxo/KKdSst0i1KHfFrIn2ETjpmxiRVvQnp6dXq3Vh35wBNTjASNu+30hDFZmPR
- WTmS3COoRUGxzJAwu33P9rk9FruHQeUO+dhraKyRfYe3DHsqhs3H9M5P2tJdCdmLZnfg
- SE4OWyMVGre14rvtjq1tYOjlmECwGf/4f4cHsR0tZvGm8zEvuEN1KdKEzKSZSrOws4bC
- Nhe0pal+dm+auOvhSmm9pHJe7d5QHM9XcEoC6eVBLlOHrWXIhJNmZ1O6us6jlLvkJCyi
- 4N8w==
-X-Gm-Message-State: AOJu0YznGRbGMDTKMN3S6o3ClTq7JE2xxIxnah2odEmrYxTrQEF3bagK
- zI7yMV6VFyapR+YAzQi44RXsWYz2LC10uWwN2vzlRsu2tznjFZlkwCYqMjR+bJ9IF04SY6UTho0
- qH74R
-X-Gm-Gg: ASbGncslY6v6sMcIJD/PGqkFHd0otdWjeTn6vrhk8Peb/tbpphQtB/QtEawVy2zhsdg
- pE8hrRK+oT6wed5py1wY/fAQsm6dnHiQ6QmHA0nbFXv6LKgR+vOyAAqLVBLPcGSm3IPusS9I3S5
- 6oP5j51+d40x9ZFT3Yd5T9rF3d+iDgeAYqaXAFYmgLUihywHQ0oEzGng+qk2jSTJQAP5OZJ3y05
- TkMocToa22rFWot/2MjFjJ+mArenBOptFaoP8eObY5X9+4x4TFqCDyS7tOABTX5Y4pmAZJ95YR7
- /fwaxDH4fajphKHnoeBN3+abA/t9aZHExzCilTkE+o6EPg1dbg9Q3qHPgf90rn4fhPtCaNc1Ux3
- MSR3WLQLdwIKcjE34iqt5p9MX2bplLo/F0liNK7bV0NLIeCZiu4v6/ctjxCITDCJpRrHJ3nBL5I
- Lw38FlTO0Dvatb3clFBkCIO0I=
-X-Google-Smtp-Source: AGHT+IHCRM8R992urxlcF9Y8ZcPT1WWN4d6I/ioXN+pQWVUhTmQa/th8GUa6u3Ek4wr+JF5Q/ANaNQ==
-X-Received: by 2002:a17:907:9728:b0:ad5:3e27:ebc with SMTP id
- a640c23a62f3a-ade1aa47135mr624430266b.57.1749289054884; 
- Sat, 07 Jun 2025 02:37:34 -0700 (PDT)
+ bh=vIZOBsaFYYEjxcHR9lV+uTimm4H/Ly/1YE4Yh6CRGkY=;
+ b=S7XM68h/Cyi0VoE0N8ZFjXQV3fjqv1tBzc5TPWqdmGJMIsuCrzh5rYT3LJp0uGglca
+ KOQId0cEQlpQe5leJ76KMi6iuUuBeCVNn7/3+NOBVMVDzyXjLSKHwBGPz8hIrz5qq+KM
+ Chqp1Lb6sWCa9FxbPTG8ZFVMwPiO3ifI1b97o4AKYRYI7xs8bvuw+8iGuZvhH+7m6MUM
+ eWbfC9vW/HXqeKezp7aOWaMmrA5OLcQdFaEw1ynUZ5b5DHG6tOg+jQpmXc542l0ors5W
+ AmySjfjazPoWT+F7c1w43BNBEYpfMcTZI+stFc8qH7LtVgueCLYuw8CrInJrodBMcrYm
+ BnDg==
+X-Gm-Message-State: AOJu0Yx28cq/vm8BpPjwhYeSde8wibI4rIPXwzbUHipY3UBfROxW3i/v
+ ehb8W7UU4xTL9rjdEsCsIKDZ4WlZf9YN7Yny4FWodcN8qBWXZsbx19e/rO00VvARfM/BJLefxZy
+ IFCum
+X-Gm-Gg: ASbGnctFiuWY4U+L2yUozPXd5oCcUJpalu6s6v3ukBP18N0A2TVApvJUdw6HyyxYBR4
+ ZcJD+KApZMfFhRXjoJvSkV0u4DH0NgMCyNv6EvWbEygLbQWQ8VPxqtMKJdDsBPLeBirz/FJqEdQ
+ ewTX5I+XeuyGttf8cyRURTAEh4djj36Bf5MmLFNLhKHdRh3Slo9EkXOSLbJ+k/RTMWJXMrSAu09
+ G1ER9f52IHBK0FHhynMyfljvZ/B/wwn3NIot1LY9rz250QMa88EooOyCY8QEpBkfiXQQwnO83YY
+ EZZAjrLA39pxn2L2yNOGcPYemm++DIX5v2FPqn0xMzTEbz+y9eJfb2I8VqCevtWA9cRnYnAQGlW
+ OeS9g5azGRz+5dufeOpxBNV7kEFmBksuTsWYgyPOQ43tnfzXGgHwZTfQxD5iBFkBLWsFunDShkW
+ pxQRqWYCEMTpM9
+X-Google-Smtp-Source: AGHT+IFAdqnB+dLeUsyPjUsfpZI5jwFPAUcSwSLXQx8GQZPR2e3lgnPNhna3Qs6fUHoedNIahRsZhQ==
+X-Received: by 2002:a17:907:805:b0:ade:3bec:ea40 with SMTP id
+ a640c23a62f3a-ade3becfd3bmr193018566b.10.1749289056123; 
+ Sat, 07 Jun 2025 02:37:36 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-5-95-99.retail.telecomitalia.it. [87.5.95.99])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.33
+ a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 02:37:34 -0700 (PDT)
+ Sat, 07 Jun 2025 02:37:35 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 1/9] ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]art_pins
- phandles
-Date: Sat,  7 Jun 2025 11:37:09 +0200
-Message-ID: <20250607093730.2249536-2-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 2/9] dt-bindings: arm: stm32: add compatible for
+ stm32h747i-disco board
+Date: Sat,  7 Jun 2025 11:37:10 +0200
+Message-ID: <20250607093730.2249536-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
 References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
@@ -105,119 +106,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow expanding possible configurations for the same peripheral,
-consistent with the scheme adopted in Linux.
+The board includes an STM32H747XI SoC with the following resources:
+ - 2 Mbytes Flash
+ - 1 MByte SRAM
+ - LCD-TFT controller
+ - MIPI-DSI interface
+ - FD-CAN
+ - USB 2.0 high-speed/full-speed
+ - Ethernet MAC
+ - camera interface
+
+Detailed information can be found at:
+https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20250427074404.3278732-2-dario.binacchi@amarulasolutions.com
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Link: https://lore.kernel.org/r/20250427074404.3278732-3-dario.binacchi@amarulasolutions.com
 Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 
-[ upstream commit: 6a36dca4375fce51b627f5a985a79fc8b8bd7f55 ]
+[upstream commit: 815d49f61ea049075482161f897aa13e1ae30cbb ]
 
 ---
 
- dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi  | 8 ++++----
- dts/upstream/src/arm/st/stm32h743i-disco.dts  | 2 +-
- dts/upstream/src/arm/st/stm32h743i-eval.dts   | 2 +-
- dts/upstream/src/arm/st/stm32h750i-art-pi.dts | 6 +++---
- 4 files changed, 9 insertions(+), 9 deletions(-)
+ dts/upstream/Bindings/arm/stm32/stm32.yaml | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-index 7f1d234e1024..ad00c1080a96 100644
---- a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-+++ b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-@@ -198,7 +198,7 @@
- 		};
- 	};
- 
--	uart4_pins: uart4-0 {
-+	uart4_pins_a: uart4-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('A', 0, AF8)>; /* UART4_TX */
- 			bias-disable;
-@@ -211,7 +211,7 @@
- 		};
- 	};
- 
--	usart1_pins: usart1-0 {
-+	usart1_pins_a: usart1-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('B', 14, AF4)>; /* USART1_TX */
- 			bias-disable;
-@@ -224,7 +224,7 @@
- 		};
- 	};
- 
--	usart2_pins: usart2-0 {
-+	usart2_pins_a: usart2-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('D', 5, AF7)>; /* USART2_TX */
- 			bias-disable;
-@@ -237,7 +237,7 @@
- 		};
- 	};
- 
--	usart3_pins: usart3-0 {
-+	usart3_pins_a: usart3-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('B', 10, AF7)>, /* USART3_TX */
- 				 <STM32_PINMUX('D', 12, AF7)>; /* USART3_RTS_DE */
-diff --git a/dts/upstream/src/arm/st/stm32h743i-disco.dts b/dts/upstream/src/arm/st/stm32h743i-disco.dts
-index 2b452883a708..8451a54a9a08 100644
---- a/dts/upstream/src/arm/st/stm32h743i-disco.dts
-+++ b/dts/upstream/src/arm/st/stm32h743i-disco.dts
-@@ -105,7 +105,7 @@
- };
- 
- &usart2 {
--	pinctrl-0 = <&usart2_pins>;
-+	pinctrl-0 = <&usart2_pins_a>;
- 	pinctrl-names = "default";
- 	status = "okay";
- };
-diff --git a/dts/upstream/src/arm/st/stm32h743i-eval.dts b/dts/upstream/src/arm/st/stm32h743i-eval.dts
-index 5c5d8059bdc7..4b0ced27b80e 100644
---- a/dts/upstream/src/arm/st/stm32h743i-eval.dts
-+++ b/dts/upstream/src/arm/st/stm32h743i-eval.dts
-@@ -145,7 +145,7 @@
- };
- 
- &usart1 {
--	pinctrl-0 = <&usart1_pins>;
-+	pinctrl-0 = <&usart1_pins_a>;
- 	pinctrl-names = "default";
- 	status = "okay";
- };
-diff --git a/dts/upstream/src/arm/st/stm32h750i-art-pi.dts b/dts/upstream/src/arm/st/stm32h750i-art-pi.dts
-index 44c307f8b09c..00d195d52a45 100644
---- a/dts/upstream/src/arm/st/stm32h750i-art-pi.dts
-+++ b/dts/upstream/src/arm/st/stm32h750i-art-pi.dts
-@@ -197,14 +197,14 @@
- };
- 
- &usart2 {
--	pinctrl-0 = <&usart2_pins>;
-+	pinctrl-0 = <&usart2_pins_a>;
- 	pinctrl-names = "default";
- 	status = "disabled";
- };
- 
- &usart3 {
- 	pinctrl-names = "default";
--	pinctrl-0 = <&usart3_pins>;
-+	pinctrl-0 = <&usart3_pins_a>;
- 	dmas = <&dmamux1 45 0x400 0x05>,
- 	       <&dmamux1 46 0x400 0x05>;
- 	dma-names = "rx", "tx";
-@@ -221,7 +221,7 @@
- };
- 
- &uart4 {
--	pinctrl-0 = <&uart4_pins>;
-+	pinctrl-0 = <&uart4_pins_a>;
- 	pinctrl-names = "default";
- 	status = "okay";
- };
+diff --git a/dts/upstream/Bindings/arm/stm32/stm32.yaml b/dts/upstream/Bindings/arm/stm32/stm32.yaml
+index b6c56d4ce6b9..a0660a0b494f 100644
+--- a/dts/upstream/Bindings/arm/stm32/stm32.yaml
++++ b/dts/upstream/Bindings/arm/stm32/stm32.yaml
+@@ -42,6 +42,10 @@ properties:
+               - st,stm32h743i-disco
+               - st,stm32h743i-eval
+           - const: st,stm32h743
++      - items:
++          - enum:
++              - st,stm32h747i-disco
++          - const: st,stm32h747
+       - items:
+           - enum:
+               - st,stm32h750i-art-pi
 -- 
 2.43.0
 
