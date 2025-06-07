@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E197DC5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 05:44:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C679C61CE8
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 05:45:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A02E982B0F;
-	Sat,  7 Jun 2025 07:43:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F412D82BAF;
+	Sat,  7 Jun 2025 07:43:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="NPi1/fbp";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="b317hxly";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EEC982BBF; Sat,  7 Jun 2025 07:43:50 +0200 (CEST)
-Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
+ id DE793807B1; Sat,  7 Jun 2025 07:43:53 +0200 (CEST)
+Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23CCB807B1
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 07:43:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D259082BAF
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 07:43:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de;
@@ -29,25 +29,25 @@ Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx0.riseup.net (Postfix) with ESMTPS id 4bDnDL2b7Hz9twc;
- Sat,  7 Jun 2025 05:43:46 +0000 (UTC)
+ by mx1.riseup.net (Postfix) with ESMTPS id 4bDnDP6H2xzDqJm;
+ Sat,  7 Jun 2025 05:43:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1749275026; bh=nOZ0TDdGzVKba0pk9+xGpYVheWNq3taP8oml9pcpCfI=;
+ t=1749275030; bh=1MBJCGjq3/4ZxIDIo8yMDhPsDqXqM/tEt3dUeXYVB7o=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=NPi1/fbpPi1EVA9r0U86hz8d7+APS8SuWtICo27AGmcikLlEfeKpDJsYfZxDI9I5Y
- DIsjT7Xvp3rj7qIEOXbg+vdCLqQhed7i9PY/Nscgtf1KKcUVwH6dgr7PatOaUrAB4d
- 5t8W6FdSFTp63093xgUGf6JOiGoHCRqKpT5TuN2Q=
-X-Riseup-User-ID: 7D06E8D6096118C3D9C12E30A55B8E94CC3AD9BBA8EE5DE89464FECB29BB6AE3
+ b=b317hxlywzb55QGrnEPpJFa/HuYD1d7LDBqK9/FSgSHZ9d1u1yScaHBAQ2/PfAwlw
+ FIpAnCWTltEXkbbjNYnfJtWNcvXC8BTwPWmy9o+J4WutjDfWSFrPSzCQXIlGKj47wW
+ zhAJy1WuIHOeqOdUF7zdqd+KhKobnfVxvH65eEJI=
+X-Riseup-User-ID: 09B754164FC8E830847ED52EC1B652F90B9B7F8A4E1F0DE938A966EE2996A87E
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4bDnDH0qYHzJn3g;
- Sat,  7 Jun 2025 05:43:42 +0000 (UTC)
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4bDnDL4844zJn12;
+ Sat,  7 Jun 2025 05:43:46 +0000 (UTC)
 From: Dang Huynh <danct12@riseup.net>
-Date: Sat, 07 Jun 2025 12:43:08 +0700
-Subject: [PATCH v5 09/12] configs: quartz64: Enable vidconsole
+Date: Sat, 07 Jun 2025 12:43:09 +0700
+Subject: [PATCH v5 10/12] video: rockchip: Add HDMI support for RK3568
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250607-vop2-pt2-v5-9-1d52f7a2cf3c@riseup.net>
+Message-Id: <20250607-vop2-pt2-v5-10-1d52f7a2cf3c@riseup.net>
 References: <20250607-vop2-pt2-v5-0-1d52f7a2cf3c@riseup.net>
 In-Reply-To: <20250607-vop2-pt2-v5-0-1d52f7a2cf3c@riseup.net>
 To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
@@ -75,29 +75,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have VOP2 support, we should enable vidconsole.
+HDMI on RK3568 is mostly simplified, all this does is enabling
+DDC for display timings and HPD.
 
 Signed-off-by: Dang Huynh <danct12@riseup.net>
 ---
- include/configs/quartz64_rk3566.h | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/video/rockchip/Makefile      |  1 +
+ drivers/video/rockchip/rk3568_hdmi.c | 71 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 72 insertions(+)
 
-diff --git a/include/configs/quartz64_rk3566.h b/include/configs/quartz64_rk3566.h
-index dfe0fee94cdb043cbca558e90fb203245534509a..bf391458219b4f2371626d0ccf98af2a3bc279ce 100644
---- a/include/configs/quartz64_rk3566.h
-+++ b/include/configs/quartz64_rk3566.h
-@@ -3,7 +3,10 @@
- #ifndef __QUARTZ64_RK3566_H
- #define __QUARTZ64_RK3566_H
- 
--#define ROCKCHIP_DEVICE_SETTINGS
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdin=serial,usbkbd\0" \
-+		"stdout=serial,vidconsole\0" \
-+		"stderr=serial,vidconsole\0"
- 
- #include <configs/rk3568_common.h>
- 
+diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
+index 2f89a979a2848733be5a6d05817ad76ce3ad3a34..b751c969b46f1933e91a6c0434f31227a709d8e5 100644
+--- a/drivers/video/rockchip/Makefile
++++ b/drivers/video/rockchip/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
+ obj-hdmi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_hdmi.o
+ obj-hdmi-$(CONFIG_ROCKCHIP_RK3328) += rk3328_hdmi.o
+ obj-hdmi-$(CONFIG_ROCKCHIP_RK3399) += rk3399_hdmi.o
++obj-hdmi-$(CONFIG_ROCKCHIP_RK3568) += rk3568_hdmi.o
+ obj-$(CONFIG_DISPLAY_ROCKCHIP_HDMI) += rk_hdmi.o $(obj-hdmi-y)
+ obj-mipi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_mipi.o
+ obj-mipi-$(CONFIG_ROCKCHIP_RK3399) += rk3399_mipi.o
+diff --git a/drivers/video/rockchip/rk3568_hdmi.c b/drivers/video/rockchip/rk3568_hdmi.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..104b734eeada92d1574b1ff6e7a314990fb732c7
+--- /dev/null
++++ b/drivers/video/rockchip/rk3568_hdmi.c
+@@ -0,0 +1,71 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Dang Huynh <danct12@riseup.net>
++ */
++
++#include <display.h>
++#include <dm.h>
++#include <dw_hdmi.h>
++#include <edid.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <asm/arch-rockchip/grf_rk3568.h>
++#include "rk_hdmi.h"
++
++#define RK3568_IO_DDC_IN_MSK             ((3 << 14) | (3 << (14 + 16)))
++
++static int rk3568_hdmi_enable(struct udevice *dev, int panel_bpp,
++			      const struct display_timing *edid)
++{
++	struct rk_hdmi_priv *priv = dev_get_priv(dev);
++
++	return dw_hdmi_enable(&priv->hdmi, edid);
++}
++
++static int rk3568_hdmi_of_to_plat(struct udevice *dev)
++{
++	struct rk_hdmi_priv *priv = dev_get_priv(dev);
++	struct dw_hdmi *hdmi = &priv->hdmi;
++
++	hdmi->i2c_clk_high = 0x6c;
++	hdmi->i2c_clk_low = 0x7d;
++
++	return rk_hdmi_of_to_plat(dev);
++}
++
++static const char * const rk3568_hdmi_reg_names[] = {
++	"avdd-0v9",
++	"avdd-1v8"
++};
++
++static int rk3568_hdmi_probe(struct udevice *dev)
++{
++	struct rk_hdmi_priv *priv = dev_get_priv(dev);
++	struct rk3568_grf *grf = priv->grf;
++
++	rk_hdmi_probe_regulators(dev, rk3568_hdmi_reg_names,
++				 ARRAY_SIZE(rk3568_hdmi_reg_names));
++
++	writel(RK3568_IO_DDC_IN_MSK, &grf->vo_con1);
++
++	return rk_hdmi_probe(dev);
++}
++
++static const struct dm_display_ops rk3568_hdmi_ops = {
++	.read_edid = rk_hdmi_read_edid,
++	.enable = rk3568_hdmi_enable,
++};
++
++static const struct udevice_id rk3568_hdmi_ids[] = {
++	{ .compatible = "rockchip,rk3568-dw-hdmi" },
++	{ }
++};
++
++U_BOOT_DRIVER(rk3568_hdmi_rockchip) = {
++	.name = "rk3568_hdmi_rockchip",
++	.id = UCLASS_DISPLAY,
++	.of_match = rk3568_hdmi_ids,
++	.ops = &rk3568_hdmi_ops,
++	.of_to_plat = rk3568_hdmi_of_to_plat,
++	.probe = rk3568_hdmi_probe,
++	.priv_auto = sizeof(struct rk_hdmi_priv),
++};
 
 -- 
 2.49.0
