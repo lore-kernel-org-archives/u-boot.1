@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DAECC5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 11:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A63C61CE7
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 11:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEE5881F0D;
-	Sat,  7 Jun 2025 13:49:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BB3782AF6;
+	Sat,  7 Jun 2025 13:49:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cEclL8o7";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="geKbP93h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2102A807B1; Sat,  7 Jun 2025 13:49:38 +0200 (CEST)
+ id 503F8807B1; Sat,  7 Jun 2025 13:49:38 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE59382A65
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 13:49:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1919582AA7
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 13:49:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-175-200.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 710504B65C; 
- Sat,  7 Jun 2025 11:49:30 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 192D74B66C; 
+ Sat,  7 Jun 2025 11:49:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1749296971;
- bh=YocOdDhRQzqT6kfS4xeLQ7Py6KBeLJrPhTpmvvUYNMw=;
+ s=20210705; t=1749296972;
+ bh=nkLNuBumC2WhPCVvJ78mYp6ynB1gXHQWnkmaCuyI/jw=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=cEclL8o71xzwR5gSRJifTIcRcnqP+TmT+a8IywCoCQcAw3dtIYxePd3nftU75pyIc
- rD5teRadoysgbq/ZLDibG6ipmFBuRq12C5n35RQv3ZwqUZdRVNEHIhfKPJeMjCK4tA
- y06n0AS/O0iuY4Uh6rI9yhdWKq/u9P9WCXwZE6QdW4jHcfCrF896XMhwXnY5MyZMyv
- YmAqMSw0Os4ayFQqii7FhgAh+bOU51xcFjLsB/KIa1gC+WaQxf22tos3kezw3K8bae
- JPuym8AiZ8Zp9Xobo5I9TKBP8bfEJAQ6BRMQELWp8XKMsnnmfOwAyYxDhjx0XI3RAR
- QxLRQZmildH8A==
+ b=geKbP93hG2TgSIi9aNebw7qjrZViRITl07xwTp6Dc9IQoUdhuCxrrSIuiX6wJgB5t
+ JowdoP3L/BCIhGXefLJLqTz4L3U/bSgbbK2M1M32Keh1JHIbWIoJUWLyGbG4n5CK9t
+ ujXs6z/5LYHl5LThz30sgDN/NI51E6Pgm+wHdZBPzX4sbL1TkiZT1bcw+lbkQoIxaS
+ L8uzuK48XKw13k+wApzPoG2LR6DebjGrd4aDo9NhqAS8PJbJEAgZ3UBTSEQQI/dHrO
+ NbttQ8HB63fp73qf4lt2NuMBMXNPIpuseletPBtoeZ/dJi+sNjqs3fm6zCHsnC+VFj
+ ZalNbmlkQ88pw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -52,9 +52,9 @@ Cc: Tom Rini <trini@konsulko.com>, Mario Six <mario.six@gdsys.cc>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Ying-Chun Liu <paul.liu@linaro.org>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/3] sandbox: align LMB memory
-Date: Sat,  7 Jun 2025 13:49:04 +0200
-Message-ID: <20250607114906.209959-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 3/3] test: unit test for efi_alloc_aligned_pages()
+Date: Sat,  7 Jun 2025 13:49:05 +0200
+Message-ID: <20250607114906.209959-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250607114906.209959-1-heinrich.schuchardt@canonical.com>
 References: <20250607114906.209959-1-heinrich.schuchardt@canonical.com>
@@ -76,71 +76,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To implement the EFI_SYSTEM_TABLE_POINTER we need 4 MiB aligned
-memory.
-
-On the sandbox LMB uses addresses relative to the start of a page aligned
-RAM buffer allocated with mmap(). This leads to a mismatch of alignment
-between EFI which uses pointers and LMB which uses phys_addr_t.
-
-Ensure that the RAM buffer used for LMB is 4 MiB aligned.
+Provide unit tests for efi_alloc_aligned_pages() and
+efi_allocate_pages().
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/sandbox/cpu/state.c         | 6 ++++--
- arch/sandbox/include/asm/state.h | 1 +
- include/configs/sandbox.h        | 2 ++
- 3 files changed, 7 insertions(+), 2 deletions(-)
+ test/lib/Makefile     |  2 +-
+ test/lib/efi_memory.c | 63 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 64 insertions(+), 1 deletion(-)
+ create mode 100644 test/lib/efi_memory.c
 
-diff --git a/arch/sandbox/cpu/state.c b/arch/sandbox/cpu/state.c
-index 49236db99c2..1d6e04d0327 100644
---- a/arch/sandbox/cpu/state.c
-+++ b/arch/sandbox/cpu/state.c
-@@ -480,7 +480,9 @@ int state_init(void)
- 	state = &main_state;
- 
- 	state->ram_size = CFG_SYS_SDRAM_SIZE;
--	state->ram_buf = os_malloc(state->ram_size);
-+	state->mmap_addr = os_malloc(state->ram_size + CFG_SYS_SDRAM_ALIGN);
-+	state->ram_buf = (uint8_t *)ALIGN((uintptr_t)state->mmap_addr,
-+					  CFG_SYS_SDRAM_ALIGN);
- 	if (!state->ram_buf) {
- 		printf("Out of memory\n");
- 		os_exit(1);
-@@ -533,7 +535,7 @@ int state_uninit(void)
- 		trace_set_enabled(0);
- 
- 	os_free(state->state_fdt);
--	os_free(state->ram_buf);
-+	os_free(state->mmap_addr);
- 	memset(state, '\0', sizeof(*state));
- 
- 	return 0;
-diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
-index dc21a623106..9dea0980bfc 100644
---- a/arch/sandbox/include/asm/state.h
-+++ b/arch/sandbox/include/asm/state.h
-@@ -75,6 +75,7 @@ struct sandbox_state {
- 	char **argv;			/* Command line arguments */
- 	const char *jumped_fname;	/* Jumped from previous U-Boot */
- 	const char *prog_fname;		/* U-Boot executable filename */
-+	uint8_t *mmap_addr;		/* Memory allocated via mmap */
- 	uint8_t *ram_buf;		/* Emulated RAM buffer */
- 	unsigned long ram_size;		/* Size of RAM buffer */
- 	const char *ram_buf_fname;	/* Filename to use for RAM buffer */
-diff --git a/include/configs/sandbox.h b/include/configs/sandbox.h
-index db2ac7f83bb..ee1ad21fd8d 100644
---- a/include/configs/sandbox.h
-+++ b/include/configs/sandbox.h
-@@ -14,6 +14,8 @@
- #define CFG_SYS_SDRAM_BASE		0
- #define CFG_SYS_SDRAM_SIZE \
- 		(SB_TO_UL(CONFIG_SANDBOX_RAM_SIZE_MB) << 20)
-+/** define CFG_SYS_SDRAM_ALIGN - Alignment of emulated RAM */
-+#define CFG_SYS_SDRAM_ALIGN		0x400000
- 
- #define CFG_SYS_BAUDRATE_TABLE	{4800, 9600, 19200, 38400, 57600,\
- 					115200}
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index ff4ff63270d..35b40b584c4 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -8,7 +8,7 @@ obj-$(CONFIG_$(PHASE_)UT_COMPRESSION) += compression.o
+ ifeq ($(CONFIG_XPL_BUILD),)
+ obj-y += abuf.o
+ obj-y += alist.o
+-obj-$(CONFIG_EFI_LOADER) += efi_device_path.o
++obj-$(CONFIG_EFI_LOADER) += efi_device_path.o efi_memory.o
+ obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
+ obj-y += hexdump.o
+ obj-$(CONFIG_SANDBOX) += kconfig.o
+diff --git a/test/lib/efi_memory.c b/test/lib/efi_memory.c
+new file mode 100644
+index 00000000000..d2e1ab6b4a3
+--- /dev/null
++++ b/test/lib/efi_memory.c
+@@ -0,0 +1,63 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Test memory functions
++ *
++ * Copyright (c) 2025 Heinrich Schuchardt <xypron.glpk@gmx.de>
++ */
++
++#include <efi_loader.h>
++#include <test/lib.h>
++#include <test/test.h>
++#include <test/ut.h>
++
++static int lib_test_efi_alloc_aligned_pages(struct unit_test_state *uts)
++{
++	efi_status_t ret;
++
++	void *addr;
++	unsigned long align = 0x400000;
++
++	addr = efi_alloc_aligned_pages(4096, EFI_PERSISTENT_MEMORY_TYPE,
++				       EFI_PAGE_SIZE);
++	ut_asserteq_ptr(NULL, addr);
++
++	addr = efi_alloc_aligned_pages(4096, 0x6FFFFFFF, EFI_PAGE_SIZE);
++	ut_asserteq_ptr(NULL, addr);
++
++	align = 0x200;
++	addr = efi_alloc_aligned_pages(4096, EFI_ACPI_RECLAIM_MEMORY, align);
++	ut_assertnonnull(addr);
++	ut_asserteq_64(0, (uintptr_t)addr & (align - 1));
++
++	ret = efi_free_pages((uintptr_t) addr, 1);
++	ut_asserteq_64(ret, EFI_SUCCESS);
++
++	align = 0x400000;
++	addr = efi_alloc_aligned_pages(4096, EFI_ACPI_RECLAIM_MEMORY, align);
++	ut_assertnonnull(addr);
++	ut_asserteq_64(0, (uintptr_t)addr & (align - 1));
++
++	ret = efi_free_pages((uintptr_t) addr, 1);
++	ut_asserteq_64(ret, EFI_SUCCESS);
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_alloc_aligned_pages, 0);
++
++static int lib_test_efi_allocate_pages(struct unit_test_state *uts)
++{
++	efi_status_t ret;
++	u64 memory;
++
++	ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
++				 EFI_ACPI_RECLAIM_MEMORY,
++				 1, &memory);
++	ut_asserteq_64(ret, EFI_SUCCESS);
++	ut_asserteq_64(0, memory & EFI_PAGE_MASK);
++
++	ret = efi_free_pages(memory, 1);
++	ut_asserteq_64(ret, EFI_SUCCESS);
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_allocate_pages, 0);
 -- 
 2.48.1
 
