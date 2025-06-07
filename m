@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABB5C5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 05:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A043BC61CE8
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 05:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4418B82AF6;
-	Sat,  7 Jun 2025 07:43:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 95AB881F0D;
+	Sat,  7 Jun 2025 07:43:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="W8n9fB/v";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="izOhlhvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A24CB81F0D; Sat,  7 Jun 2025 07:43:29 +0200 (CEST)
+ id 5502382AA7; Sat,  7 Jun 2025 07:43:33 +0200 (CEST)
 Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A046182AF6
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 07:43:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1378B807B1
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 07:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de;
@@ -29,26 +29,26 @@ Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.riseup.net (Postfix) with ESMTPS id 4bDnCx36SrzDqJt;
- Sat,  7 Jun 2025 05:43:25 +0000 (UTC)
+ by mx1.riseup.net (Postfix) with ESMTPS id 4bDnD06Z7xzDqKg;
+ Sat,  7 Jun 2025 05:43:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1749275006; bh=cDlZefonY2oTHG8Ic78LMfFv11lg069bj/xG63/OaI0=;
+ t=1749275009; bh=9Yfml+4kksTn2mC8dXhVGcok0o9zkNq8rRZ0ZcUOASM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=W8n9fB/vsBtvtS/oeXKCUV05O2MFRBP4XoAYE2w1r0y83cDhy2T/kn3NiywYfE8JV
- 66r3TNS2YTC7+Oy6t3di8twKaDPOCyVwbShmacIFhWy3JBaPA9Nt3J3ow+r4uTtmYq
- hV/C18XMR7s8v2kLTv6cBsxiElAbhePa0XqP7BEU=
-X-Riseup-User-ID: A7B6721642C0EEA6BF0A0FD1BF885EC0156B09F68AD5715DAE6FE1696444994F
+ b=izOhlhvfxpa//Wkhr2H8B2TnsxRgRiypjbp8jZZe5sI1amvSrCFoGn72NB6i2H1j0
+ lnZ+iukRerEHsIhsZb7FHn+tuX7J7eqfKDvBF5JNhGOMDjYQYyMDYQFG0bZVfSAqUU
+ hJ4K/0cSCoWmYNahYmAOtCjT2v3QxvdeYTimP3iU=
+X-Riseup-User-ID: 7FFD85ACCC7B8A8B4F0C59842D2162EE0BA84F9CF96F78B1EDBD49921BA89B30
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4bDnCt0xbPzJn3g;
- Sat,  7 Jun 2025 05:43:21 +0000 (UTC)
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4bDnCx4HphzJn12;
+ Sat,  7 Jun 2025 05:43:25 +0000 (UTC)
 From: Dang Huynh <danct12@riseup.net>
-Date: Sat, 07 Jun 2025 12:43:02 +0700
-Subject: [PATCH v5 03/12] video: rockchip: dw_mipi_dsi: Proceed when
- external PHY is not defined
+Date: Sat, 07 Jun 2025 12:43:03 +0700
+Subject: [PATCH v5 04/12] video: rockchip: dw-mipi-dsi: Add
+ get_display_timing support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250607-vop2-pt2-v5-3-1d52f7a2cf3c@riseup.net>
+Message-Id: <20250607-vop2-pt2-v5-4-1d52f7a2cf3c@riseup.net>
 References: <20250607-vop2-pt2-v5-0-1d52f7a2cf3c@riseup.net>
 In-Reply-To: <20250607-vop2-pt2-v5-0-1d52f7a2cf3c@riseup.net>
 To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
@@ -76,30 +76,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ondrej Jirman <megi@xff.cz>
+This allows video drivers to obtain display timings from the video
+bridge.
 
-In this case the DM returns ENOENT, not ENODATA.
-
-Signed-off-by: Ondrej Jirman <megi@xff.cz>
 Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Signed-off-by: Dang Huynh <danct12@riseup.net>
 ---
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-index c47992dfb133cda029eba82e842ac824ceead64b..95e825eb3d6de7ef2836fa029927034394486e9c 100644
+index 95e825eb3d6de7ef2836fa029927034394486e9c..d21ea7953a6003fa49da3e22220d3312109f600c 100644
 --- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
 +++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-@@ -839,7 +839,7 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
- 	 * NULL if it's not initialized.
- 	 */
- 	ret = generic_phy_get_by_name(dev, "dphy", &priv->phy);
--	if (ret && ret != -ENODATA) {
-+	if (ret && ret != -ENOENT) {
- 		dev_err(dev, "failed to get mipi dphy: %d\n", ret);
+@@ -224,6 +224,7 @@ struct dw_rockchip_dsi_priv {
+ 	struct mipi_dsi_device device;
+ 	void __iomem *base;
+ 	struct udevice *panel;
++	struct display_timing timings;
+ 	void __iomem *grf;
+ 
+ 	/* Optional external dphy */
+@@ -709,7 +710,7 @@ static int dw_mipi_dsi_rockchip_attach(struct udevice *dev)
+ 	struct dw_rockchip_dsi_priv *priv = dev_get_priv(dev);
+ 	struct mipi_dsi_device *device = &priv->device;
+ 	struct mipi_dsi_panel_plat *mplat;
+-	struct display_timing timings;
++	struct display_timing *timings = &priv->timings;
+ 	int ret;
+ 
+ 	ret = uclass_first_device_err(UCLASS_PANEL, &priv->panel);
+@@ -724,10 +725,10 @@ static int dw_mipi_dsi_rockchip_attach(struct udevice *dev)
+ 	device->format = mplat->format;
+ 	device->mode_flags = mplat->mode_flags;
+ 
+-	ret = panel_get_display_timing(priv->panel, &timings);
++	ret = panel_get_display_timing(priv->panel, timings);
+ 	if (ret) {
+ 		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
+-						   0, &timings);
++						   0, timings);
+ 		if (ret) {
+ 			dev_err(dev, "decode display timing error %d\n", ret);
+ 			return ret;
+@@ -740,7 +741,7 @@ static int dw_mipi_dsi_rockchip_attach(struct udevice *dev)
  		return ret;
  	}
+ 
+-	ret = dsi_host_init(priv->dsi_host, device, &timings, 4,
++	ret = dsi_host_init(priv->dsi_host, device, timings, 4,
+ 			    &dsi_rockchip_phy_ops);
+ 	if (ret) {
+ 		dev_err(dev, "failed to initialize mipi dsi host\n");
+@@ -902,9 +903,19 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static int dw_mipi_dsi_rockchip_get_dt(struct udevice *dev,
++				       struct display_timing *timings)
++{
++	struct dw_rockchip_dsi_priv *priv = dev_get_priv(dev);
++
++	memcpy(timings, &priv->timings, sizeof(*timings));
++	return 0;
++}
++
+ struct video_bridge_ops dw_mipi_dsi_rockchip_ops = {
+ 	.attach = dw_mipi_dsi_rockchip_attach,
+ 	.set_backlight = dw_mipi_dsi_rockchip_set_bl,
++	.get_display_timing = dw_mipi_dsi_rockchip_get_dt,
+ };
+ 
+ static const struct rockchip_dw_dsi_chip_data rk3399_chip_data[] = {
 
 -- 
 2.49.0
