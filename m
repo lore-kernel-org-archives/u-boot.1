@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D366C61CE8
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 21:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 509E7C61CE8
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 21:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A82218144A;
-	Sat,  7 Jun 2025 23:12:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 025DA82ADA;
+	Sat,  7 Jun 2025 23:12:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AYcEfBcI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X9KSSeTf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22B3582B07; Sat,  7 Jun 2025 23:12:07 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 01E9B82B18; Sat,  7 Jun 2025 23:12:09 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B845D80E9A
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 23:12:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7FC7811AC
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 23:12:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-450cb2ddd46so20903775e9.2
- for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 14:12:04 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-442fda876a6so27343985e9.0
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 14:12:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749330724; x=1749935524; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=UbLcTvddLuKXVk4m8+CyxJDGFtOXvUDZoHzzTJ22pkI=;
- b=AYcEfBcIE/Jzc77Xr70Olb6fD+TshCOG7wpSpgw8oCSf1dO8gP2SOo00lUogOS4WRv
- f/MEpR7RtA0mrfyR8c6srQPExeK0qC+8JKiAaieGUd/5NGh1EuEmLFNiE4DsM90XrZvV
- CUQAigNk8nztjrt29/lNpzC3rZ7TQHXRqxRgqfMED/lda0lLjFEFdPxNtZH5KQNwzSOy
- Ivr5f3kDY4K4pUgmssHGQAN9aYiMltUPxRPvM06JZGstuk0y2TJp7wr1TjHpfMPZotEI
- SxMOJUuQeBgtVk85MKB1nejNQCT8JRJkbP6Jz87Xd6FyQMM+euZZCMP02VVGbvtwcqTN
- O/rA==
+ d=gmail.com; s=20230601; t=1749330725; x=1749935525; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=8mr3lfpkS4r0H9ltZR9KgPqZLmg+PTTo9+IqkIqJwWM=;
+ b=X9KSSeTfgjI5tu7kfAT6dxQW8wojgdY7ybcBaEfQeWwNTsmHaMhGcF1Y//qhqIi245
+ tz9wLkz8eoNzi/C1ufnAygf3xUQYcw6BnNylVrTb1u9ARE+t9mq1Nt53+gmCyKpwjws1
+ zAvEfjs8jdqUh4OL1OBPAtLLs4ZgwyjRIQeqWJ3g0eigIcXM9LCY+IRk40Iy37YHkjXM
+ rZWzM4QmlCcj6Rnzs/Teyt3QtkCpv07uABApWdVxBDf3IRZDtkLhSGB9sJES5Zy6kL52
+ is2vBfnCB19vo7IHjrcjHeYMiMR6ejeBpxPl6Hii+OwyU0vhYgohldEhHsD0yFvW+Cp1
+ y5Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749330724; x=1749935524;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UbLcTvddLuKXVk4m8+CyxJDGFtOXvUDZoHzzTJ22pkI=;
- b=BmJbd2sMGdtn0CoUk6Cat2/nIP8kuh31Q5LEiBN/y7uCRXWxcWjn3PBdIaVh4xxecC
- HpNi1oxlfRIGgwgudp9j27NaG95LMNmtstlbKKV6r9dxP7E4E8eZNtdpsbx5AX/AH3g0
- Cx7ItjWqT7rsdyzdPUMzobKPrET4xzNzQQ57m+aJYkF0Eb8yPKRDLacvmsjyL5ADo4hb
- NVwLqUza2ety4nPIH8wGpUlGT5xu4YWsHXj0gwGMZRBTVDM+qhAA5a54pzF7/n5v7udU
- omhRJiWzf0tuNepjr3TePZE/sf2VF22xhS7BlmYvkFMYBQfld3AR+eQXzPUMw47S5vDN
- /J/Q==
+ d=1e100.net; s=20230601; t=1749330725; x=1749935525;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8mr3lfpkS4r0H9ltZR9KgPqZLmg+PTTo9+IqkIqJwWM=;
+ b=ionpDdswfp/HJGSoEwlQMfeUc/INj8eiv9O9FNyGK+P8BxQwPhmutAIGm7LKSlE1T5
+ KOFHcNG30wJNskA5ISkEavAfPGWtXy0Go4OFmAAyiH83HSMJDkJnAWx+BovN9H13GjZI
+ ayVM/w9jqyTksY/LiHyiw2cQ5KhllrYzWhMJKW0e2ZNQ17YGyjIuqd5w7jvU+VQ7KpIh
+ zikIvRw+HHKhPKzXm0SUy0a73IPghCxEfYgfTJM5dT2ar3K/5M2ll8olkWhoeb9TTrzQ
+ fp+w4KsZpQIaxQ0golyjvbENludg8WT+Fby/WV6xFD56uXK0xhJk/jnrW6wxFbHrgs/Z
+ eDyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdNrNbwVv4kYG699LzzCmAiXS8e7W+HgSvca0hHxRNvqPd1MnhBLfTmwny+QCxJAxZ39jJ5e4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzAkYVZYu89dCEAJ+JoO2kMAbuhy9c18L/1JWIKgC8Rlhz/74p2
- y4fD6UPhbc7lqEdU6AYxCo+i6pumgltshg5F9BKRotT5NWx7eRN37K6W
-X-Gm-Gg: ASbGncv87hUpQbQ1Of1e7L0WE+xjudGJz6OcVV1I4BYIBZVDTJNEl/jTGnmu/nJ8Qlk
- uv3Ea/AuXaNM+c0sl+CdqQxOsEzqy8lDQoiXcjFDSbuptER1h+sFjvGu518cWQ1xJvH9jZEDwQZ
- VB4rVioSbYiNKXwsyByiD+T5oW6i2ee/vhzTNJMCsjsIin6XdzU5J+Wla678fvPch6i/uHsp6t9
- KG8Y1wErJgdLJ3sHHnRORqwwsQVc9DJF0i0uXCNpCnoSsabHk6FW/LrlS2Mw55z6u96clS42cOR
- BU94TfLbTCzWrxg9O3LWzlzEc8Lx1IaZYrEgtMeEcOqohXFV9mdpenNs7RzBxNUbLqto6IEmmDA
- Xsi7QQnvRSKwGBN+t3dPI
-X-Google-Smtp-Source: AGHT+IGWZ/FMxYR0CAA94ZF4XG/1ewPjlm0HRoR6CwNq2/A6hFwY9i1zBqpNBhCAX/Y0Kb9jNWuNbw==
-X-Received: by 2002:a05:600c:3b25:b0:451:dee4:cd08 with SMTP id
- 5b1f17b1804b1-452013d1b4fmr73202615e9.23.1749330723794; 
- Sat, 07 Jun 2025 14:12:03 -0700 (PDT)
+ AJvYcCWR6SzDtsG3hiY2GSTgv6KpEcEnY2j4apAYVw0yHFpSK1aNrtKhIAEFT3VC9fCP4hT2H7uFukA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyrqmwFPnn9PXTGcbhva6xsigzIhw6VzBfTwMDfrIgw/VXCUYM0
+ PGSDrOZrFOe8PQ8NnxB26ZeIctqantexreHezzt7YxaJXx2IeTtomv/V
+X-Gm-Gg: ASbGncvLSj1Al4HoPUbgXnjZ5UufUtZuLcgEKouPK6HLGRj2dpj1lMQfFF2rR6JGCBq
+ vevZcoRY8f494GxdzlZXcua4dev7PJcMU0nQJ7jtKFD+sjjVywx/QTGar0niaMRNAPgOjxBatS2
+ WpcqxVAAZ3jdStMqNl6K7opPLwbo9DdnVsbrJOYMSLBihSuX/wv84m4s0OGVZcKqsZEeMZFK5h0
+ aYStnHfDFDKTz0L3Xu0B6uHu5qa9G6BEg9dfc/sPWh+Ca74OycajZ924ogL27eOSjujNKfCUATK
+ +pp6in5ii6/DtzaxfL3oUjLRPd82ScfE/dr4CLOic2oEYMdWwFn7fwmhuzp1o4dUr8RLjpKfSpW
+ OeZatQMRJ9apwPWeagEKQFPKe60ksUUA=
+X-Google-Smtp-Source: AGHT+IEzCaip7vLdhZHl9Y3iX1621JOU/vedcnlUFEjPB10bwKtXyhXU9+OEnJulaDOYz9gJI/+5nQ==
+X-Received: by 2002:a05:6000:430c:b0:3a4:eec8:c9b3 with SMTP id
+ ffacd0b85a97d-3a531ca80f8mr6614619f8f.23.1749330724889; 
+ Sat, 07 Jun 2025 14:12:04 -0700 (PDT)
 Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
  [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4526e155ce7sm64368245e9.10.2025.06.07.14.12.02
+ 5b1f17b1804b1-4526e155ce7sm64368245e9.10.2025.06.07.14.12.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 14:12:03 -0700 (PDT)
+ Sat, 07 Jun 2025 14:12:04 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -81,11 +82,12 @@ To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v4 0/5] linux/bitfield.h: sync <linux/bitfield.h> from Linux
- 6.15 + winbond
-Date: Sat,  7 Jun 2025 23:11:16 +0200
-Message-ID: <20250607211133.2005-1-ansuelsmth@gmail.com>
+Subject: [PATCH v4 1/5] clk: imx: add missing linux/bug.h header for WARN
+Date: Sat,  7 Jun 2025 23:11:17 +0200
+Message-ID: <20250607211133.2005-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250607211133.2005-1-ansuelsmth@gmail.com>
+References: <20250607211133.2005-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,36 +106,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This small series sync linux/bitfield.h from Linux 6.15 and fix all
-the compilation error due to a change in the header include.
+The WARN macro requires inclusion of linux/bug.h header. It does
+currently work as bitfield.h includes it indirectly but this will
+change when bitfield.h will be synced with new Linux version.
 
-The sync is needed to make it easier to support the winbond changes.
+Explicitly include the header to fix future compilation error.
 
-The changes are CI test with [1]
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/clk/imx/clk-fracn-gppll.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-[1] https://github.com/u-boot/u-boot/pull/777
-
-Changes v4:
-- Reorder patch for better bisectability
-Changes v3:
-- Fix compilation error for remaining drivers
-Changes v2:
-- Copy the full file instead of cherry-pick Changes
-
-Christian Marangi (5):
-  clk: imx: add missing linux/bug.h header for WARN
-  iommu: qcom-smmu: add missing linux/bug.h header for WARN_ON
-  arm: apple: rtkit: add missing header linux/bug.h and linux/bitops.h
-  linux/bitfield.h: sync <linux/bitfield.h> from Linux 6.15
-  mtd: spinand: winbond: add Winbond W25N04KV flash support
-
- arch/arm/mach-apple/rtkit.c       |   2 +
- drivers/clk/imx/clk-fracn-gppll.c |   1 +
- drivers/iommu/qcom-hyp-smmu.c     |   1 +
- drivers/mtd/nand/spi/winbond.c    |  13 ++++
- include/linux/bitfield.h          | 103 ++++++++++++++++++++++--------
- 5 files changed, 92 insertions(+), 28 deletions(-)
-
+diff --git a/drivers/clk/imx/clk-fracn-gppll.c b/drivers/clk/imx/clk-fracn-gppll.c
+index 81e19d393cf..b3926564a22 100644
+--- a/drivers/clk/imx/clk-fracn-gppll.c
++++ b/drivers/clk/imx/clk-fracn-gppll.c
+@@ -10,6 +10,7 @@
+ #include <dm/devres.h>
+ #include <linux/bitfield.h>
+ #include <linux/bitops.h>
++#include <linux/bug.h>
+ #include <linux/clk-provider.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
 -- 
 2.48.1
 
