@@ -4,114 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 262DCC5B543
-	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 09:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E561BC61CE7
+	for <u-boot@archiver.kernel.org>; Sat,  7 Jun 2025 09:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4435E80E9A;
-	Sat,  7 Jun 2025 11:33:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3FFE882A9E;
+	Sat,  7 Jun 2025 11:37:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MXei67m1";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="R3Foeedm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53E8E81F0D; Sat,  7 Jun 2025 11:33:10 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC0A682AA7; Sat,  7 Jun 2025 11:37:36 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4CC8807B1
- for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 11:33:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1749288785; x=1749893585; i=xypron.glpk@gmx.de;
- bh=S9aF4mRfXSVNgr10mVc8eVHPKi2domeB5/9VaVEmAvI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=MXei67m1BSD7qtc1gMbzVrDTxN6NZ3tfTP4Vvarbz1e4nqyC/JLeI+xr9s+G/Pj1
- ejP7fOMaJ/fu0Ces6I/l0CvkrwLDeTRcm6RDWb/jRGEabH39Xsl37ehM9FZTOy3Ee
- u9Z60XahfBNcO2v8xhM5fErq8hJss8qO5S266jW9NYbefpDJZs+lZYwtQU/r3zYCE
- /CjGrm/L+8uPGMAZAvMTe0hm1avouJ/FvC5jI99Blk8YaPxJvl8d/ZaZgk7cWZQhd
- 7UnJ0r5ZU+CUPj2asUj6ODjJp/9v6RnBXe0pqAjQ99EXknfWblOOVeiNRDFurlvEw
- cikttd4PoOwrXLdzsw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.175.200]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MwQTF-1ueoNQ0YTt-013Drf; Sat, 07
- Jun 2025 11:33:05 +0200
-Message-ID: <c23ef643-5505-4dc1-b105-fd4207e57e5f@gmx.de>
-Date: Sat, 7 Jun 2025 11:32:59 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/4] efi: add EFI_DEBUG_IMAGE_INFO for debug
-To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ by phobos.denx.de (Postfix) with ESMTPS id 497F580E9A
+ for <u-boot@lists.denx.de>; Sat,  7 Jun 2025 11:37:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-adb2bd27c7bso454693566b.2
+ for <u-boot@lists.denx.de>; Sat, 07 Jun 2025 02:37:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1749289053; x=1749893853;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q7iZhfZu/6LdWUyPZRXqfVRj8cwkrg8FELa16XUwObA=;
+ b=R3FoeedmMu2AqjpclIoEjyUlo2JRV11yOsq7DgmHkyVKMPM1j3+QL4OdtsZrqhwvGX
+ xCd416iM/Penx5RNZu36RJB3nVDw5U/cHSohQGPoB9IhxLZ8jCnonwSyrlnC5j2YMQ4G
+ zkaA31oB7ZZyoYPucqiCdizGAujywq3SauFDk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749289053; x=1749893853;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q7iZhfZu/6LdWUyPZRXqfVRj8cwkrg8FELa16XUwObA=;
+ b=mtXxzrKvos1peH/BN3jVhOWZPSr2l5uwTGpyJOvae+I4J4OgX18rvfW9f5brPXqvf6
+ xBThT7x0za6pTyyxbJw7LNtIILYCVwYJpZX/P6ImvY/1p+orzlGXsezH+CjwYABn9cju
+ Nx7lYbUwOGeW4WS0/WjCCMB5ipFNcYyc6vc44UIB9R7SZ9t2JfpU/G6Pk+FK8Aclc/32
+ 1Ljy4GshXQhTLS6hO2FfP6u1rRbt6XtEry1vUyFQNsIvKDkyJcwdbfM8RfyfEWviaC1n
+ KLyQEQ42DUYjKHCzhGlG3r2GMCijzLCiS8zElAjw/E81ZZIThkgYTrWZPLwXpzZiOKLF
+ rLBg==
+X-Gm-Message-State: AOJu0Ywh69l//tZs5+j7LmaTZXZEPdNuiRsOEH9NT2tyWF3sStB1wElc
+ CPvA+Lb/qtsQ06qBUDOJhpNnJbER9TQ7Uc5yW9Hzc2LesTf6nSOKiHP+iWrLo4seFhTL35u+h8C
+ yEfh0
+X-Gm-Gg: ASbGncs+u8humnxXgRNMPOPdITZJu2sZ0isFizzdQMQCXORIYP4XBlr81AnhShSKFo2
+ X2EevYq3sMcEVbF/KhVfHPHJPT0QbZ4iU/ZqqTsckmyqHptf3hDT9I4lr0r7j64x/9ySRT9Eule
+ rv8+f1SbsCb5WegkpGjbTopNnA8Y1cwhps3GqJvyOdxhXT3mM/JTRPVl3GGJVbqV19bCiI/B+uO
+ lbzluTxvQm7av24fiuwaKhcahT4eAFuo9LeS/Nn6PbUhiR1J7oQTGfDLsJudC+I6wCrQezoPDBW
+ 9oTY185q9xLIJZB6dHWfioMXHQtspaGYAFAXnn794d4NTBl/b57raOgxrzKWKUGFUbzQBHvCuBo
+ L51hsvBtZXCPbLJRWaxHV4p6JsqbtR3e0GlJRaK2oeAQ8+U9um47dP9M2C+eCeTL6jb/Bdk5IE9
+ YvpheR+iozHyMe
+X-Google-Smtp-Source: AGHT+IHCHmiyr8xJvNhCJDBYz1sYrsppokqIspjZobF4ber5shjX4BVLyyksEbfA+shSeeaBnhkgpw==
+X-Received: by 2002:a17:907:8687:b0:ad8:9257:573f with SMTP id
+ a640c23a62f3a-ade1a916fd8mr516661766b.7.1749289053553; 
+ Sat, 07 Jun 2025 02:37:33 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
+ (host-87-5-95-99.retail.telecomitalia.it. [87.5.95.99])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Jun 2025 02:37:33 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Dillon Min <dillon.minfei@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20250529040520.3799600-1-paulliu@debian.org>
- <20250529040520.3799600-5-paulliu@debian.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250529040520.3799600-5-paulliu@debian.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SynRmmegvFF/+UCPHVdhcD9ST2Rl0ktFjDPBB0kDph+4PcT3+e/
- S0mGG0uoswQyRm3rXtJw6dcNtkjEnzEGxN9nxD5nq2ptkprz0H1oEB4MgEJ3n6Y5A8axRCD
- J+TARQSWiJN052vQ0V5K22RVJ7zu6tcuGy8YoUrtiZqxkNgNuO3CU40eYdoeGCIhbYisunP
- tr128qFaBfEyHF4prFTgA==
-UI-OutboundReport: notjunk:1;M01:P0:+3/jnGPA5/A=;su5BohV37G1LDI0a9DmrIXKIVS7
- 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
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 0/9] Support stm32h747-discovery board
+Date: Sat,  7 Jun 2025 11:37:08 +0200
+Message-ID: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,246 +107,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/29/25 06:05, Ying-Chun Liu (PaulLiu) wrote:
-> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
->=20
-> This commit adds the functionality of generate EFI_DEBUG_IMAGE_INFO
-> while loading the image.
->=20
-> This feature is described in UEFI Spec 2.10. Section 18.4.3.
-> The implementation ensures support for hardware-assisted debugging and
-> provides a standardized mechanism for debuggers to discover the load
-> address of an EFI application.
->=20
-> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
-> V2: use Kconfig options to turn on/off this feature.
-> V3: Use efi_realloc to realloc the tables. Move tables to boot time.
-> V4: Use new efi_realloc().
-> ---
->   include/efi_api.h             |   2 +
->   include/efi_loader.h          |   5 ++
->   lib/efi_loader/efi_boottime.c | 137 ++++++++++++++++++++++++++++++++++
->   3 files changed, 144 insertions(+)
->=20
-> diff --git a/include/efi_api.h b/include/efi_api.h
-> index 8da0a350ce3..77a05f752e5 100644
-> --- a/include/efi_api.h
-> +++ b/include/efi_api.h
-> @@ -581,6 +581,8 @@ struct efi_loaded_image {
->   #define EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS 0x01
->   #define EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED     0x02
->  =20
-> +#define EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL  0x01
-> +
->   /**
->    * struct efi_debug_image_info_normal - Store Debug Information for no=
-rmal
->    * image.
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 13ca2ec9a4e..22440b842e3 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -650,6 +650,11 @@ efi_status_t efi_root_node_register(void);
->   efi_status_t efi_initialize_system_table(void);
->   /* Called by bootefi to initialize debug */
->   efi_status_t efi_initialize_system_table_pointer(void);
-> +/* Called by efi_load_image for register debug info */
-> +efi_status_t efi_core_new_debug_image_info_entry(u32 image_info_type,
-> +						 struct efi_loaded_image *loaded_image,
-> +						 efi_handle_t image_handle);
-> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle);
->   /* efi_runtime_detach() - detach unimplemented runtime functions */
->   void efi_runtime_detach(void);
->   /* efi_convert_pointer() - convert pointer to virtual address */
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index 16e921781e9..ebd2dab6e41 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -2129,6 +2129,14 @@ efi_status_t EFIAPI efi_load_image(bool boot_poli=
-cy,
->   		*image_handle =3D NULL;
->   		free(info);
->   	}
-> +
-> +	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
-> +		if (*image_handle) {
-> +			efi_core_new_debug_image_info_entry(EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL=
-,
-> +							    info,
-> +							    *image_handle);
-> +		}
-> +	}
->   error:
->   	return EFI_EXIT(ret);
->   }
-> @@ -3359,6 +3367,9 @@ efi_status_t EFIAPI efi_unload_image(efi_handle_t =
-image_handle)
->   		ret =3D EFI_INVALID_PARAMETER;
->   		goto out;
->   	}
-> +	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT_TABLE)) {
-> +		efi_core_remove_debug_image_info_entry(image_handle);
-> +	}
->   	switch (efiobj->type) {
->   	case EFI_OBJECT_TYPE_STARTED_IMAGE:
->   		/* Call the unload function */
-> @@ -4038,6 +4049,13 @@ efi_status_t efi_initialize_system_table(void)
->   	return ret;
->   }
->  =20
-> +/* efi_m_max_table_entries is the maximum entries allocated for
-> + * the efi_m_debug_info_table_header.efi_debug_image_info_table.
-> + */
-> +static u32 efi_m_max_table_entries;
-> +
-> +#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(union efi_debug_image_info =
-*))
-> +
->   /**
->    * efi_initialize_system_table() - Initialize system table pointer
->    *
-> @@ -4072,3 +4090,122 @@ efi_status_t efi_initialize_system_table_pointer=
-(void)
->  =20
->   	return EFI_SUCCESS;
->   }
-> +
-> +/**
+The series adds support for stm32h747-discovery board.
 
-This is not a valid function description. See:
-https://docs.kernel.org/doc-guide/kernel-doc.html#function-documentation
+Detailed information can be found at:
+https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
 
-Please, run `make htmldocs` for testing.
 
-Best regards
+Dario Binacchi (9):
+  ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]art_pins phandles
+  dt-bindings: arm: stm32: add compatible for stm32h747i-disco board
+  dt-bindings: clock: stm32h7: rename USART{7,8}_CK to UART{7,8}_CK
+  ARM: dts: stm32: add uart8 node for stm32h743 MCU
+  ARM: dts: stm32: add pin map for UART8 controller on stm32h743
+  ARM: dts: stm32: add an extra pin map for USART1 on stm32h743
+  ARM: dts: stm32: support STM32h747i-disco board
+  ARM: dts: stm32: add stm32h747i-disco-u-boot DTS file
+  board: stm32: add stm32h747-discovery board support
 
-Heinrich
+ arch/arm/dts/stm32h747i-disco-u-boot.dtsi     | 104 ++++++++++++++
+ arch/arm/mach-stm32/stm32h7/Kconfig           |   4 +
+ board/st/stm32h747-disco/Kconfig              |  15 ++
+ board/st/stm32h747-disco/MAINTAINERS          |   7 +
+ board/st/stm32h747-disco/Makefile             |   6 +
+ board/st/stm32h747-disco/stm32h747-disco.c    |  42 ++++++
+ configs/stm32h747-disco_defconfig             |  35 +++++
+ drivers/clk/stm32/clk-stm32h7.c               |   5 +
+ dts/upstream/Bindings/arm/stm32/stm32.yaml    |   4 +
+ .../include/dt-bindings/clock/stm32h7-clks.h  |   4 +-
+ dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi  |  34 ++++-
+ dts/upstream/src/arm/st/stm32h743.dtsi        |   8 ++
+ dts/upstream/src/arm/st/stm32h743i-disco.dts  |   2 +-
+ dts/upstream/src/arm/st/stm32h743i-eval.dts   |   2 +-
+ dts/upstream/src/arm/st/stm32h747i-disco.dts  | 136 ++++++++++++++++++
+ dts/upstream/src/arm/st/stm32h750i-art-pi.dts |   6 +-
+ include/configs/stm32h747-disco.h             |  32 +++++
+ 17 files changed, 435 insertions(+), 11 deletions(-)
+ create mode 100644 arch/arm/dts/stm32h747i-disco-u-boot.dtsi
+ create mode 100644 board/st/stm32h747-disco/Kconfig
+ create mode 100644 board/st/stm32h747-disco/MAINTAINERS
+ create mode 100644 board/st/stm32h747-disco/Makefile
+ create mode 100644 board/st/stm32h747-disco/stm32h747-disco.c
+ create mode 100644 configs/stm32h747-disco_defconfig
+ create mode 100644 dts/upstream/src/arm/st/stm32h747i-disco.dts
+ create mode 100644 include/configs/stm32h747-disco.h
 
-> + * Add a new efi_loaded_image structure to the efi_debug_image_info Tab=
-le.
-> + * Re-Allocates the table if it's not large enough to accomidate anothe=
-r
-> + * entry.
-> + *
-> + * @param image_info_type  type of debug image information
-> + * @param loaded_image     pointer to the loaded image protocol for the=
- image
-> + *                         being loaded
-> + * @param image_handle     image handle for the image being loaded
-> + * @return                 status code
-> + **/
-> +efi_status_t efi_core_new_debug_image_info_entry(u32 image_info_type,
-> +						 struct efi_loaded_image *loaded_image,
-> +						 efi_handle_t image_handle)
-> +{
-> +	union efi_debug_image_info **table;
-> +	u32 index;
-> +	u32 table_size;
-> +	efi_status_t ret;
-> +
-> +	/* Set the flag indicating that we're in the process of updating
-> +	 * the table.
-> +	 */
-> +	efi_m_debug_info_table_header.update_status |=3D
-> +		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +
-> +	table =3D &efi_m_debug_info_table_header.efi_debug_image_info_table;
-> +
-> +	if (efi_m_debug_info_table_header.table_size >=3D efi_m_max_table_entr=
-ies) {
-> +		/* table is full, re-allocate the buffer increasing the size
-> +		 * by 4 KiB.
-> +		 */
-> +		table_size =3D efi_m_max_table_entries * EFI_DEBUG_TABLE_ENTRY_SIZE;
-> +
-> +		ret =3D efi_realloc((void **)table, table_size + EFI_PAGE_SIZE);
-> +
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_m_debug_info_table_header.update_status &=3D
-> +				~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +			return ret;
-> +		}
-> +
-> +		/* Enlarge the max table entries and set the first empty
-> +		 * entry index to be the original max table entries.
-> +		 */
-> +		efi_m_max_table_entries +=3D
-> +			EFI_PAGE_SIZE / EFI_DEBUG_TABLE_ENTRY_SIZE;
-> +	}
-> +
-> +	/* We always put the next entry at the end of the currently consumed
-> +	 * table (i.e. first free entry)
-> +	 */
-> +	index =3D efi_m_debug_info_table_header.table_size;
-> +
-> +	/* Allocate data for new entry. */
-> +	efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
-> +			  sizeof(union efi_debug_image_info),
-> +			  (void **)(&(*table)[index].normal_image));
-> +	if ((*table)[index].normal_image) {
-> +		/* Update the entry. */
-> +		(*table)[index].normal_image->image_info_type =3D image_info_type;
-> +		(*table)[index].normal_image->loaded_image_protocol_instance =3D
-> +			loaded_image;
-> +		(*table)[index].normal_image->image_handle =3D image_handle;
-> +
-> +		/* Increase the number of EFI_DEBUG_IMAGE_INFO elements and
-> +		 * set the efi_m_debug_info_table_header in modified status.
-> +		 */
-> +		efi_m_debug_info_table_header.table_size++;
-> +		efi_m_debug_info_table_header.update_status |=3D
-> +			EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
-> +	}
-> +
-> +	efi_m_debug_info_table_header.update_status &=3D
-> +		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +
-> +	return EFI_SUCCESS;
-> +}
-> +
-> +void efi_core_remove_debug_image_info_entry(efi_handle_t image_handle)
-> +{
-> +	union efi_debug_image_info *table;
-> +	u32 index;
-> +
-> +	efi_m_debug_info_table_header.update_status |=3D
-> +		EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +
-> +	table =3D efi_m_debug_info_table_header.efi_debug_image_info_table;
-> +
-> +	for (index =3D 0; index < efi_m_max_table_entries; index++) {
-> +		if (table[index].normal_image &&
-> +		    table[index].normal_image->image_handle =3D=3D image_handle) {
-> +			/* Found a match. Free up the table entry.
-> +			 * Move the tail of the table one slot to the front.
-> +			 */
-> +			efi_free_pool(table[index].normal_image);
-> +
-> +			memcpy(&table[index],
-> +			       &table[index + 1],
-> +			       (efi_m_debug_info_table_header.table_size -
-> +				index - 1) * EFI_DEBUG_TABLE_ENTRY_SIZE);
-> +
-> +			/* Decrease the number of EFI_DEBUG_IMAGE_INFO
-> +			 * elements and set the efi_m_debug_info_table_header
-> +			 * in modified status.
-> +			 */
-> +			efi_m_debug_info_table_header.table_size--;
-> +			table[efi_m_debug_info_table_header.table_size].normal_image =3D
-> +				NULL;
-> +			efi_m_debug_info_table_header.update_status |=3D
-> +				EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
-> +			break;
-> +		}
-> +	}
-> +
-> +	efi_m_debug_info_table_header.update_status &=3D
-> +		~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
-> +}
+-- 
+2.43.0
 
+base-commit: b3f69c14187d413610abbc2b82d1a3752cb342c1
+branch: stm32h747i-disco
