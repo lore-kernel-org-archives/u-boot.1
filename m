@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E778FC61CE8
-	for <u-boot@archiver.kernel.org>; Sun,  8 Jun 2025 07:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EAC4C5AD49
+	for <u-boot@archiver.kernel.org>; Sun,  8 Jun 2025 07:43:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E55B8811AC;
-	Sun,  8 Jun 2025 09:42:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37CD3810EB;
+	Sun,  8 Jun 2025 09:42:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="it+9kOFh";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eTWjzhCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 430AB807B1; Sun,  8 Jun 2025 09:42:39 +0200 (CEST)
+ id 8D84F82AE9; Sun,  8 Jun 2025 09:42:43 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61EC380C93
- for <u-boot@lists.denx.de>; Sun,  8 Jun 2025 09:42:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2FA7826AA
+ for <u-boot@lists.denx.de>; Sun,  8 Jun 2025 09:42:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8E61044704
- for <u-boot@lists.denx.de>; Sun,  8 Jun 2025 07:42:36 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 55AF54470D
+ for <u-boot@lists.denx.de>; Sun,  8 Jun 2025 07:42:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1749368556;
- bh=7D2hFo94hyg1WwY2QpeaWAVPYAnGh4FPMqTtnKSqWKM=;
+ s=20210705; t=1749368558;
+ bh=CESkNIe1xIzpMv76k8Lbwa9JcW8V3fAoxIyg1DjjCxM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=it+9kOFhjt6flju/vcQeqwhUMi5fw0TfwBhDBlWE520Gu2AonKqunQP5mAdTK4w38
- PE1gxsW2+jZa2v/UWjexJSVsGTU5o/Hw6gPTuitzeB0XhDO+HbGkpPlIJGRg/Kfz71
- FhUwAPamBWOOHPL/X8k+kl+ZZhSxvCdyIanA1H558j86hb+LnYw5MDwQfLqpoP99Rj
- vGkoMmupdTai5wArbaU8SPUAS2MOagnL2BvBoZ+rn7ThNpbHLWgHPUPsfCrsCqcpju
- bZsFtSk3NbnuArQp5OUi58E9hY2UyUJ/9qSItFqxsoKQZMuLRkIgY57Oauj69jqNjv
- MFd4J8qDM3HRA==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-451d7de4ae3so22141935e9.2
- for <u-boot@lists.denx.de>; Sun, 08 Jun 2025 00:42:36 -0700 (PDT)
+ b=eTWjzhCYil45gTi+PGXHokPYqD6dtcQOXkzZ1+p/nIPF9HBajB7w7D4kSJ4KND2WL
+ UNVvzSr2C5KYu8KFzn6sJ6qIIz1GpO4fnY1qVdxYY39dJuHx4ffNcjLgAIVLxHUSrn
+ ZMhAsYV6mdEG2VLMrwgXhMmdShSwG/TQRNYWwK41C3oQA56V/Qlv0V7ExRtEAZRXNq
+ Be+ijlEzaePL1qt/v+ztvwbJRTJxeSl5vql+/t6uL05nWKQCYfGFsium3TMbHD1uti
+ 1XSfYu2zEfiPY79NuPdBv4WM2zIeGntBsHpEgCH2LZIYV5k1ZKVralCZJ/WIkQaDqq
+ xN0wh1azYsmuw==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3a52cb5684dso1683537f8f.3
+ for <u-boot@lists.denx.de>; Sun, 08 Jun 2025 00:42:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749368556; x=1749973356;
+ d=1e100.net; s=20230601; t=1749368557; x=1749973357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7D2hFo94hyg1WwY2QpeaWAVPYAnGh4FPMqTtnKSqWKM=;
- b=Op/tHfxB86Ax2cHuv825U9gdWwijNH0M9gfereEO6F5gDZIAKq0JmW1A4CyogH+WUJ
- 2/2l+ECPuvfsmkTq5rbN5h72Eh7+tbUzX9XUcXyPrQH6c+cwBPGyY3rJ8lLDmq/nkKvZ
- PfCVuJX5l+We0Lu+keAmi7mbY4N0iR4UOYY2U49uZR+H0ZqnUGMYSfse+1zONw0TLr91
- cbOqOvlX7R3pyDIS/Bw8jRcqS8hAH+soE0pXPkdGa5XlK/ZcIIz3sEyOpuZ0dssHULOy
- ETHfW62UfbyYBFr1vDuZsWUMQy31vLlo3OCSD9fUEpCEHpXjVEj5qPbPT/e0jtl/tgGV
- LJ2A==
+ bh=CESkNIe1xIzpMv76k8Lbwa9JcW8V3fAoxIyg1DjjCxM=;
+ b=MnarjuB6u75/Rg8oWq2VXhQSFUTUJfU7h9bNbCEKl/BSJA2+8A0l5fyHrD/XG2oMW1
+ 964Q6ychjOrcwuWy/xwkP1h63kCpb9ZZZr0NIlU6+1vdzQgdncEORre4BjDszak98eaR
+ le9hRbrKg4vXcaxGcmC3gn151+mIJUbB8/mGzjuUUjVgMbp5DuCHuxZXg26rT9J+vIny
+ BGxdKYr16gipJyl3Oe8tAP90tfDm1hgm0Ad20LP3ufT8WiQcAKEO4NjomkBnD44Wh33Q
+ yWfJpQNBfHgLTBVtpAYe5Kuk+9GaliF6C+Jq1sOVxVSW7953F+rDMBdYXN2WM+U3U69h
+ ZgSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoAEFzWSBMhtqEB1wkFUNe/jHRVOpcM2QBn+Oh4UODi0G8Knh10b8/ytANO/vRohbocO+j5x0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwnFmZqKY6hTFL6naS4buOqNRXXTGZJr7Q43TQt+LMPiv57XvCA
- v3cJ1IbJv93zc43eKwGB3WpP0TYjhxAEemR8/0a0t8GlFXrP8I6eIpIXSsZ3dm8yhsZvwN3cfkn
- lfQdeTmWqhk35nSUvRnQcxJVEwOWya4VE0jPp4d2W9/kxlSJK+8KJL+WQm/pGrMgPyLUbLUM=
-X-Gm-Gg: ASbGnctymLbYrQr1EDfme1nT9gxonTpYGc8vvf5Dp2H6xrUnkIrBbSc2BHchHAGwd5u
- HnZfOI5Mn1Kv5fiHVRq3TlkJw30QRFMhUQHhir8EdsJ5lBGpi4KTHvXDVxN6tVaIZQFjShzJaMZ
- Zu6ZdjA/dBMu9R9G7tPLxrBXFHPkKZQ2ZWOXzvSkC10+YNcc1IrIHy7PsLnOsd99nVa0oP5SRlF
- wFyD3xkYA98sv49fucMamDRj35dVCNuMO/StjltYkP309P38rsFzlAlomSXXb+xqCHtkDL6X+yi
- 1COMOP3xAfGHpHukM/KOQDoAfNVjAEAAWc4Yfd0Bvncnr+WmHyC0DCisJVHr64C+ETK1wZxXWwv
- 1CciZBMRxpR4ucwqpAB5oJEzJ
-X-Received: by 2002:a05:600c:8b08:b0:440:9b1a:cd78 with SMTP id
- 5b1f17b1804b1-4520141635bmr108131605e9.10.1749368556029; 
- Sun, 08 Jun 2025 00:42:36 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEl8Epae6L2cNb+VsotSaHIbdEDr3c09BeV6dYZNlA7bAoqEmYVoMKHo+CyZVAKaZFR7nLKZg==
-X-Received: by 2002:a05:600c:8b08:b0:440:9b1a:cd78 with SMTP id
- 5b1f17b1804b1-4520141635bmr108131365e9.10.1749368555609; 
- Sun, 08 Jun 2025 00:42:35 -0700 (PDT)
+ AJvYcCVFIElsSnaYVcLiFfYgwXVYMPbmUaM6AuzwepBc42U9m17c3cn7i8oQkMTvj1tN4hlk1umjEzw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWMl2dXFsRYsuOXXEScZf+9eYBmzHhu5/zHdAa5Z4+SG2fAtwr
+ QCwLMGRtETjK2vxza8TQfya0AglhGJyH3ke2B1ZNq+DXOZM/QKQ7ZU9UHLSj21uLFz0U/LPSM6K
+ Y5TYOTm5No1IfbPkDlWt3Dz5pl19qE03eU9zpl4b1P+yrXxXLlH/kYZ7sDkn1nbOVir0kwt0=
+X-Gm-Gg: ASbGncuSsUKTKKNYa2mTYLWWX7gY2GVEb4p+o+wvJfIwcth2JcLPZWrkTzbQC+fzFrs
+ 69WYi7AMSe1EEIMlKEZs2YKJtZej/TbnTkbjt2Rs3kFYkByKkumjdFR0dd0oIhTA6ljOWPA5nND
+ mIf4eGUDEHjJnYYtVsvS5NQCA4t9aCGNXQNMp5ApKVWaoTLVzhoaHCdbYsgtI11WHPE0pjUCCBc
+ HNhUv4moi5bpindueDc5RiitvzsgMY28CyElE09hIohmVPJP1trrfDAL7X/efP84hNqxCGqZWcC
+ ah2o/kv4wxwg+CWrp21Wdy3H66R00OAAeJAM+OwuhPf0dtMSdGFRWx4sUpFbz2oOTulAeQ5cspQ
+ FX2gQ0XKIkN98h4ogQ/Fpe7Yx
+X-Received: by 2002:a05:6000:25c2:b0:3a4:f50a:bd5f with SMTP id
+ ffacd0b85a97d-3a5319a2a11mr7487523f8f.31.1749368557333; 
+ Sun, 08 Jun 2025 00:42:37 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFKUg5SZs56u2misE0JRDpuniyEYK+2FooIkOBkCzuWJNklp6ZIATGXTDYZ/NbR/KWQUW+6kQ==
+X-Received: by 2002:a05:6000:25c2:b0:3a4:f50a:bd5f with SMTP id
+ ffacd0b85a97d-3a5319a2a11mr7487508f8f.31.1749368557012; 
+ Sun, 08 Jun 2025 00:42:37 -0700 (PDT)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45209bc6c6csm78285635e9.2.2025.06.08.00.42.34
+ 5b1f17b1804b1-45209bc6c6csm78285635e9.2.2025.06.08.00.42.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Jun 2025 00:42:34 -0700 (PDT)
+ Sun, 08 Jun 2025 00:42:36 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -100,9 +100,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Casey Connolly <casey.connolly@linaro.org>, Bryan Brattlof <bb@ti.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/3] verdin-am62p: include linux/sizes.h
-Date: Sun,  8 Jun 2025 09:42:26 +0200
-Message-ID: <20250608074228.12407-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/3] cmd: remove duplicate DHCPv6 Kconfig definitions
+Date: Sun,  8 Jun 2025 09:42:27 +0200
+Message-ID: <20250608074228.12407-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250608074228.12407-1-heinrich.schuchardt@canonical.com>
 References: <20250608074228.12407-1-heinrich.schuchardt@canonical.com>
@@ -124,43 +124,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Avoid build failures
+Remove duplicate definition of
 
-In file included from include/config.h:3,
-                 from board/toradex/verdin-am62p/verdin-am62p.c:9:
-board/toradex/verdin-am62p/verdin-am62p.c: In function 'dram_init':
-include/configs/verdin-am62p.h:13:33: error: 'SZ_2G' undeclared (first use in this function)
-   13 | #define CFG_SYS_SDRAM_SIZE      SZ_2G /* Maximum supported size */
-      |                                 ^~~~~
-board/toradex/verdin-am62p/verdin-am62p.c:63:65: note: in expansion of macro 'CFG_SYS_SDRAM_SIZE'
-   63 |         gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, CFG_SYS_SDRAM_SIZE);
-      |                                                                 ^~~~~~~~~~~~~~~~~~
-include/configs/verdin-am62p.h:13:33: note: each undeclared identifier is reported only once for each function it appears in
-board/toradex/verdin-am62p/verdin-am62p.c:65:28: error: 'SZ_1G' undeclared (first use in this function)
-   65 |         if (gd->ram_size < SZ_1G)
-      |                            ^~~~~
+* DHCP6_PXE_CLIENTARCH
+* DHCP6_PXE_DHCP_OPTION
+* DHCP6_ENTERPRISE_ID
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-v2:
-	drop change in board/toradex/verdin-am62p/verdin-am62p.c
----
- include/configs/verdin-am62p.h | 2 ++
- 1 file changed, 2 insertions(+)
+ cmd/Kconfig | 17 -----------------
+ 1 file changed, 17 deletions(-)
 
-diff --git a/include/configs/verdin-am62p.h b/include/configs/verdin-am62p.h
-index eef360ee9b6..c3464bdb838 100644
---- a/include/configs/verdin-am62p.h
-+++ b/include/configs/verdin-am62p.h
-@@ -8,6 +8,8 @@
- #ifndef __VERDIN_AM62P_H
- #define __VERDIN_AM62P_H
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index ed741d43cea..c335eceea63 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2004,23 +2004,6 @@ config BOOTP_RANDOM_XID
+ 	  Selecting this will allow for a random transaction ID to get
+ 	  selected for each BOOTP/DHCPv4 exchange.
  
-+#include <linux/sizes.h>
-+
- /* DDR Configuration */
- #define CFG_SYS_SDRAM_BASE	0x80000000
- #define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size */
+-if CMD_DHCP6
+-
+-config DHCP6_PXE_CLIENTARCH
+-	hex
+-	default 0x16 if ARM64
+-	default 0x15 if ARM
+-	default 0xFF
+-
+-config DHCP6_PXE_DHCP_OPTION
+-	bool "Request & store 'pxe_configfile' from DHCP6 server"
+-
+-config DHCP6_ENTERPRISE_ID
+-	int "Enterprise ID to send in DHCPv6 Vendor Class Option"
+-	default 0
+-
+-endif
+-
+ config CMD_TFTPPUT
+ 	bool "tftp put"
+ 	depends on CMD_TFTPBOOT
 -- 
 2.48.1
 
