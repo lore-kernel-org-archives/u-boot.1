@@ -4,68 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091BDC5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 12:26:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195DCC5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 12:32:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68AE2826AA;
-	Mon,  9 Jun 2025 14:26:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5938382B0E;
+	Mon,  9 Jun 2025 14:32:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kgxaMimM";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="o7A1sOTv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DEB782B00; Mon,  9 Jun 2025 14:26:53 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3990C811AC
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 14:26:51 +0200 (CEST)
+ id 720268144A; Mon,  9 Jun 2025 10:58:10 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8070082B3D
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 559CQnmn766433;
- Mon, 9 Jun 2025 07:26:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749472009;
- bh=4S+qYZ7c0af+btyRvUTEQiryQyZjm7UV4o0H+Tqsh+Y=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=kgxaMimM6iOYZK+vyQm4JhE4RIHb/fWr95RroiIWQ5qXUm59LSJK/rwyAcuD8T3qV
- pqmcAdf0Jon/C0E5LhwAMYlpa4lFCPo5ECJbNf9nIJIaR+GTtKYR01vpxmlSl0FNTg
- r5LoA4t2dbYmh+FE7R5Xi0rdNpFWoehZPkElGR4I=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 559CQnbA075565
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 9 Jun 2025 07:26:49 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
- Jun 2025 07:26:48 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 9 Jun 2025 07:26:48 -0500
-Received: from localhost (uda0497581-hp.dhcp.ti.com [172.24.227.253])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 559CQlSg1396121;
- Mon, 9 Jun 2025 07:26:48 -0500
-Date: Mon, 9 Jun 2025 17:56:47 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <b-padhi@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
- <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <j-keerthy@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 2/3] arm: mach-k3: j784s4_init: Trigger LBIST and
- PBIST on MAIN R5 2_0
-Message-ID: <20250609122647.bogodkb7qm3jwqt4@uda0497581-HP>
-References: <20250609102706.2434495-1-n-francis@ti.com>
- <20250609102706.2434495-3-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=82553fdf62=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m31r016958;
+ Mon, 9 Jun 2025 10:57:37 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ SkBf+Ze/ezVc5esXxcX/rRlv6cQiZAprx3PjoXX3thE=; b=o7A1sOTvNL5STJjp
+ yugzCNIzDSe8CemA0apQhsLt9+0hETw7EJ73wA6pzPgmcx95Gr/kNbuEaXGgycrP
+ 2vddRGI110F96rpUvlM4fB0plHXEJII2OK3ND0raqeGoPBrTVhTMGkCTV00ur9cs
+ kiQ+jNrSLXM2oXrnXD48kqY8u2SWIsb5fXb6DURDaJ5JZZFaUvWsasByXaKWVG1L
+ LD/xljzrJNNFy2MwQMUnO4Lb/Czbg7SJV7pMwhoHGy3Cn2K6SrTXQAjSMGuEaErm
+ H4VBw7A8pOomU8m6ahiRn/Q5PcN1Y06rDq/noC5NPUKgqj1lcGi8boa0o0uy2yBa
+ ILMGUQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474cahe6k8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 09 Jun 2025 10:57:36 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D47754002D;
+ Mon,  9 Jun 2025 10:54:22 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6CE74B6F70E;
+ Mon,  9 Jun 2025 10:53:10 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
+ 2025 10:53:08 +0200
+Message-ID: <6dde0043-3331-4596-8597-7773341c2dd1@foss.st.com>
+Date: Mon, 9 Jun 2025 10:53:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250609102706.2434495-3-n-francis@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/13] stm32mp25: Add clock and reset drivers support
+To: <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Alexander Dahl <ada@thorsis.com>, Alice Guo <alice.guo@nxp.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Elaine Zhang
+ <zhangqing@rock-chips.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Huan Zhou <me@per1cycle.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jan
+ Kiszka <jan.kiszka@siemens.com>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>, Kever
+ Yang <kever.yang@rock-chips.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Paul Barker
+ <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, Robert Marko
+ <robert.marko@sartura.hr>, Sam Protsenko <semen.protsenko@linaro.org>, Sean
+ Anderson <seanga2@gmail.com>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>, Simon Glass <sjg@chromium.org>, Sughosh
+ Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Valentin Caron <valentin.caron@foss.st.com>, Ye Li <ye.li@nxp.com>
+References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-09_03,2025-06-05_01,2025-03-28_01
+X-Mailman-Approved-At: Mon, 09 Jun 2025 14:32:39 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,102 +117,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
 
-On 15:57-20250609, Neha Malcom Francis wrote:
-> Trigger all tests of PBIST and LBIST using appropriate calls to set the
-> core under test (MAIN R5 2_0) to it's required state.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
-> No change since v3
-> 
->  arch/arm/mach-k3/j784s4/j784s4_init.c | 52 +++++++++++++++++++++++++++
->  1 file changed, 52 insertions(+)
-> 
-> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> index 787cf6261e4..6e21d057fb8 100644
-> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> @@ -17,6 +17,7 @@
->  #include <dm/pinctrl.h>
->  #include <mmc.h>
->  #include <remoteproc.h>
-> +#include <k3_bist.h>
->  
->  #include "../sysfw-loader.h"
->  #include "../common.h"
-> @@ -122,6 +123,48 @@ static void setup_navss_nb(void)
->  	writel(NB_THREADMAP_BIT2, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
->  }
->  
-> +/* Execute and check results of BIST executed on MCU1_x and MCU4_O */
-> +static void run_bist_j784s4(struct udevice *dev)
-> +{
-> +	struct bist_ops *ops;
-> +	struct ti_sci_handle *handle;
-> +	int ret;
-> +
-> +	ops = (struct bist_ops *)device_get_ops(dev);
-> +	handle = get_ti_sci_handle();
-> +
-> +	/* get status of HW POST PBIST on MCU1_x */
-> +	if (ops->run_pbist_post())
-> +		panic("HW POST LBIST on MCU1_x failed\n");
-> +
-> +	/* trigger PBIST tests on MCU4_0 */
-> +	ret = prepare_pbist(handle);
-> +	ret |= ops->run_pbist_neg();
-> +	ret |= deprepare_pbist(handle);
-> +
-> +	ret |= prepare_pbist(handle);
-> +	ret |= ops->run_pbist();
-> +	ret |= deprepare_pbist(handle);
-> +
-> +	ret |= prepare_pbist(handle);
-> +	ret |= ops->run_pbist_rom();
-> +	ret |= deprepare_pbist(handle);
-> +
-> +	if (ret)
-> +		panic("PBIST on MCU4_0 failed: %d\n", ret);
-> +
-> +	/* get status of HW POST PBIST on MCU1_x */
-> +	if (ops->run_lbist_post())
-> +		panic("HW POST LBIST on MCU1_x failed\n");
-> +
-> +	/* trigger LBIST tests on MCU1_x */
-> +	ret = prepare_lbist(handle);
-> +	ret |= ops->run_lbist();
-> +	ret |= deprepare_lbist(handle);
-> +	if (ret)
-> +		panic("LBIST on MCU4_0 failed: %d\n", ret);
-> +}
-> +
->  /*
->   * This uninitialized global variable would normal end up in the .bss section,
->   * but the .bss is cleared between writing and reading this variable, so move
-> @@ -251,6 +294,15 @@ void board_init_f(ulong dummy)
->  			printf("AVS init failed: %d\n", ret);
->  	}
->  
-> +	if (!IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_BIST)) {
-> +		ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +						  DM_DRIVER_GET(k3_bist),
-> +						  &dev);
-> +		if (ret)
-> +			panic("Failed to get BIST device: %d\n", ret);
 
-nit: Add "\n" here
-
-> +		run_bist_j784s4(dev);
-> +	}
-> +
->  	if (IS_ENABLED(CONFIG_CPU_V7R))
->  		setup_navss_nb();
->  
-> -- 
-> 2.34.1
+On 5/27/25 15:27, Patrice Chotard wrote:
+> 
+> Add clock and reset drivers support for STM32MP2 platforms:
+>   - add SCMI clock protocol v2.0 support
+>   - introduce CONFIG_CLK_AUTO_ID flag to support unique clk ID
+>     when several clock providers are in use.
+>   - add STM32MP2 clock  driver
+>   - add STM32MP2 reset driver
+>   - fix clock counter
+> 
+> Tested with following components:
+>   _ TF-A lts-v2.12.2.
+>   _ SCP-firmware main branch (commit c914b3f0c756 "fwk: Refactor fwk_module_get_sub_element_count").
+>   _ OP-TEE 4.6.0 + pull request https://github.com/OP-TEE/optee_os/pull/7324
+> 
+> 
+> Changes in v2:
+>     - Rename GATE_USB2 into GATE_USBH
+>     - Rename RCC_USB2CFGR to RCC_USBHCFGR
+> 
+> Gabriel Fernandez (4):
+>   clk: stm32mp25: Add clock driver support
+>   clk: stm32mp25: implement clock check security function
+>   clk: stm32: fix clock counter
+>   reset: stm32mp25: add stm32mp25 reset driver
+> 
+> Patrice Chotard (2):
+>   ARM: dts: stm32: switch from fixed to scmi clocks for stm32mp257f-ev1
+>   configs: stm32mp25: increase SYS_MALLOC_F_LEN to 0x60000
+> 
+> Patrick Delaunay (6):
+>   clk: add CONFIG_CLK_AUTO_ID
+>   clk: sandbox: update driver for CONFIG_CLK_AUTO_ID support
+>   sandbox: test: update for CONFIG_CLK_AUTO_ID support
+>   clk: fixed_rate: configure clock ID with CONFIG_CLK_AUTO_ID
+>   clk: scmi: manage properly the clk identifier with CCF
+>   phy: stm32-usbphyc: manage properly the clk identifier with CCF
+> 
+> Valentin Caron (1):
+>   clk: scmi: add compatibility with clock protocol 2.0
+> 
+>  MAINTAINERS                              |   3 +-
+>  arch/arm/dts/stm32mp25-u-boot.dtsi       |   8 +
+>  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  74 ---
+>  configs/stm32mp25_defconfig              |   2 +-
+>  drivers/clk/Kconfig                      |  11 +
+>  drivers/clk/clk-uclass.c                 |   9 +-
+>  drivers/clk/clk_fixed_rate.c             |   1 +
+>  drivers/clk/clk_sandbox.c                |  30 +-
+>  drivers/clk/clk_sandbox_ccf.c            |  48 +-
+>  drivers/clk/clk_scmi.c                   |  62 +-
+>  drivers/clk/stm32/Kconfig                |   9 +
+>  drivers/clk/stm32/Makefile               |   1 +
+>  drivers/clk/stm32/clk-stm32-core.c       |  73 ++-
+>  drivers/clk/stm32/clk-stm32-core.h       |   2 +-
+>  drivers/clk/stm32/clk-stm32mp13.c        |   2 +-
+>  drivers/clk/stm32/clk-stm32mp25.c        | 782 +++++++++++++++++++++++
+>  drivers/misc/stm32_rcc.c                 |  66 +-
+>  drivers/phy/phy-stm32-usbphyc.c          |  19 +
+>  drivers/reset/Kconfig                    |   9 +-
+>  drivers/reset/Makefile                   |   4 +-
+>  drivers/reset/stm32-reset.c              |  97 ---
+>  drivers/reset/stm32/Kconfig              |  23 +
+>  drivers/reset/stm32/Makefile             |   9 +
+>  drivers/reset/stm32/stm32-reset-core.c   |  92 +++
+>  drivers/reset/stm32/stm32-reset-core.h   |  31 +
+>  drivers/reset/stm32/stm32-reset-mp1.c    |  55 ++
+>  drivers/reset/stm32/stm32-reset-mp25.c   | 159 +++++
+>  drivers/reset/stm32/stm32-reset.c        |  43 ++
+>  include/clk.h                            |  24 +
+>  include/linux/clk-provider.h             |   9 +-
+>  include/scmi_protocols.h                 |  15 +
+>  include/stm32_rcc.h                      |   7 +-
+>  include/stm32mp25_rcc.h                  | 712 +++++++++++++++++++++
+>  test/dm/clk_ccf.c                        |  30 +-
+>  34 files changed, 2227 insertions(+), 294 deletions(-)
+>  create mode 100644 drivers/clk/stm32/clk-stm32mp25.c
+>  delete mode 100644 drivers/reset/stm32-reset.c
+>  create mode 100644 drivers/reset/stm32/Kconfig
+>  create mode 100644 drivers/reset/stm32/Makefile
+>  create mode 100644 drivers/reset/stm32/stm32-reset-core.c
+>  create mode 100644 drivers/reset/stm32/stm32-reset-core.h
+>  create mode 100644 drivers/reset/stm32/stm32-reset-mp1.c
+>  create mode 100644 drivers/reset/stm32/stm32-reset-mp25.c
+>  create mode 100644 drivers/reset/stm32/stm32-reset.c
+>  create mode 100644 include/stm32mp25_rcc.h
 > 
 
-Regards,
-Manorit
+
+For the whole series; 
+
+Applied to u-boot-stm32/next
+
+Thanks
+Patrice
