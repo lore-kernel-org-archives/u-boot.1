@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FFABC61CE8
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 19:27:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA4CC5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 19:28:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A3FD82B45;
-	Mon,  9 Jun 2025 21:27:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F5F682BBF;
+	Mon,  9 Jun 2025 21:27:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UGtLqi5T";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="UymX6WbH";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WtxP9GAR";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XpTUBr5B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CD2E82BF6; Mon,  9 Jun 2025 21:27:26 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 8216A82C7C; Mon,  9 Jun 2025 21:27:29 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64C8182B18
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 21:27:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 800B982BAA
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 21:27:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bGMPk14pvz9swJ;
- Mon,  9 Jun 2025 21:27:22 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bGMPn2RJGz9swN;
+ Mon,  9 Jun 2025 21:27:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1749497242;
+ s=mail20150812; t=1749497245;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=U0mRePZ4OmEzFQydCDTXum/KagZz19Q2IUGm25uBuyM=;
- b=UGtLqi5TcP4rSIbDEsbZOBq30fATODmWBJ6/Pu1Kd25Wln/DSpFkKsrDm/5xmh0lQlk1JM
- KuQzqaJJluQDcRyczbe9aYqfG63/Vz5QaowvJ6EXKFkGxRv/LFs4Ebgn1bl+ez/VwqoeVR
- Rt40LtydfoVaCGbwpyZL2aCUDlOspsx0RGaMsfVErf2B+WOdAG1QJEbmBrzEiNdcBl/3Sb
- eZ2NreRceNUR5Md7XxAhZSAuzcfpv6pKq89fSm1ibujDatJBRmLxfJRHj960MKt3A+3FWD
- 7woIOvcMZve5qMSPrezzFY7uIcZ6T6nHypPnE0VIY8tP5R4he42DTMqb0MRVqQ==
+ bh=pL1J/E/XuOjPbBe2pTPSutS7zoYb+d6Ad/iXC8pRPNM=;
+ b=WtxP9GARnUXm+ZVoFfXWD0E9a2mgf1ZMjclNGp0sCe+9if0FL8g01Cwcg7kF7fYAHAQXVy
+ Y0wkLsA8Jn4YeiC3U2942CA2AsBej76x21YQd+zPgjcC/mNYLYUJdtpBYeWUDxyHE2yjx1
+ PO2LFY/V7KavEGSNsIsvAsBJGz+fXvnYsDOM3Lka99da5iyxQYck3gXL61ptCNc7hk1wqP
+ lkKFEevWRCrnS2L/3rUnIM1MQg96WEswaxQuYwnkHh7RjI/JNVGwYH2zVgWwYj5W8BQMcQ
+ Szc3oDC7F7qEmVIBOKtdx+0z39wCiYWUaG7aTjLB8BRQ3yhLogBEoNO1pBAwLw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1749497240;
+ s=mail20150812; t=1749497243;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=U0mRePZ4OmEzFQydCDTXum/KagZz19Q2IUGm25uBuyM=;
- b=UymX6WbHsqXXbHlNf+/VKT+vz4WQFiMPDDiEKrTsOiZZWKXL55WEbckShn9mMzMv96EaU/
- sPvszxailJddwpuo11Vu1reLLjYpovD9nSN80aNQSH4jpNiKL39fdhQ3DeKV/F3dX5SMeo
- MBFNLk8cR+S4AfyqTSfS2cYd9ngZo9e181QxwKIyDVivD0B4QY82YZXiTjFVGghYUoJ1Rf
- Hq1M+t1321jzTWZjk3vo1eq/uf7qcaGHIhd+sQJ2PIK6jWxyN+BNZXey9cJdDCgV51pB/Q
- O4hme5sgIjnp8KR1CpDFyOPX8GO7MmwDStQu7FmAdeKvqG5roanAGug/Sumc1A==
+ bh=pL1J/E/XuOjPbBe2pTPSutS7zoYb+d6Ad/iXC8pRPNM=;
+ b=XpTUBr5BEGO7gFVsrdT8Fw95rwKYXvD27H2HyNA96ucl4zhJVDVibGGHVTCgV0dcZGXyUE
+ jhxqEkViN1WIAbiu8c0mrLovDvzVH035X/byaQWKUz682ZNUfTkM8K+/Ec3CivnhOcZKLq
+ 0PWkhclo7hUvopD/X1cxQleYbR8ItxPoW5OtP5o6PhHqVRtqN3B0/rdXt1vISkd/EhPvGm
+ uwh+O+rgaG+WEMlgJpkyeEcooHkhFbOQbcBhvPhjRWKFI8vP/UTaRlhFAglBPHigRu2VDo
+ B1fKKXgWSWm8n9Ww9Ho8+/WHBe2bibTS6XzAr0KcKYLHVbXrpLiDG8Cd1L16Aw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/8] env: Rename SYS_REDUNDAND_ENVIRONMENT to ENV_REDUNDANT
-Date: Mon,  9 Jun 2025 21:26:37 +0200
-Message-ID: <20250609192701.20260-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 4/8] env: Rename SYS_MMC_ENV_DEV to ENV_MMC_DEVICE_INDEX
+Date: Mon,  9 Jun 2025 21:26:39 +0200
+Message-ID: <20250609192701.20260-5-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250609192701.20260-1-marek.vasut+renesas@mailbox.org>
 References: <20250609192701.20260-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: u8waw74wathiixd4bei5faxn3hhkf4nw
-X-MBO-RS-ID: 8f58f80d7fae91156ea
+X-MBO-RS-META: kd98yg3ezbmyqifo1jsaxxmfqafkhbrz
+X-MBO-RS-ID: 8fc725dd85190db499f
+X-Rspamd-Queue-Id: 4bGMPn2RJGz9swN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,6 +94,10 @@ Rename the variable and add ENV_ prefix, so that all configuration
 options which are related to environment would have an CONFIG_ENV_
 prefix. No functional change.
 
+Use ENV_MMC_DEVICE_INDEX to clarify this is the SD/MMC device
+index, a number, as enumerated by U-Boot. Update the help text
+accordingly.
+
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
@@ -98,2540 +105,2495 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 ---
-V2: Replace ENV_REDUNDAND_ENVIRONMENT with ENV_REDUNDANT to fix
-    typo and abbreviate the symbol name
+V2: Rename to ENV_MMC_DEVICE_INDEX
 ---
- configs/am335x_guardian_defconfig                |  2 +-
- configs/am335x_igep003x_defconfig                |  2 +-
- configs/am335x_shc_defconfig                     |  2 +-
- configs/am335x_shc_ict_defconfig                 |  2 +-
- configs/am335x_shc_netboot_defconfig             |  2 +-
- configs/am335x_shc_sdboot_defconfig              |  2 +-
- configs/am335x_sl50_defconfig                    |  2 +-
- configs/am43xx_evm_qspiboot_defconfig            |  2 +-
- configs/am43xx_hs_evm_qspi_defconfig             |  2 +-
- configs/am57xx_evm_defconfig                     |  2 +-
- configs/am57xx_hs_evm_defconfig                  |  2 +-
- configs/am57xx_hs_evm_usb_defconfig              |  2 +-
- configs/am65x_evm_a53_defconfig                  |  2 +-
- configs/amd_versal2_virt_defconfig               |  2 +-
- configs/aristainetos2c_defconfig                 |  2 +-
- configs/aristainetos2ccslb_defconfig             |  2 +-
- configs/at91sam9260ek_nandflash_defconfig        |  2 +-
- configs/at91sam9261ek_nandflash_defconfig        |  2 +-
- configs/at91sam9263ek_nandflash_defconfig        |  2 +-
- configs/at91sam9263ek_norflash_boot_defconfig    |  2 +-
- configs/at91sam9263ek_norflash_defconfig         |  2 +-
- configs/at91sam9g10ek_nandflash_defconfig        |  2 +-
- configs/at91sam9g20ek_2mmc_nandflash_defconfig   |  2 +-
- configs/at91sam9g20ek_nandflash_defconfig        |  2 +-
- configs/at91sam9m10g45ek_nandflash_defconfig     |  2 +-
- configs/at91sam9n12ek_nandflash_defconfig        |  2 +-
- configs/at91sam9rlek_nandflash_defconfig         |  2 +-
- configs/at91sam9x5ek_nandflash_defconfig         |  2 +-
- configs/at91sam9xeek_nandflash_defconfig         |  2 +-
- configs/axm_defconfig                            |  2 +-
- configs/bcm7260_defconfig                        |  2 +-
- configs/bcm7445_defconfig                        |  2 +-
- configs/bk4r1_defconfig                          |  2 +-
- configs/brcp150_defconfig                        |  2 +-
- configs/brcp170_defconfig                        |  2 +-
- configs/brcp1_1r_defconfig                       |  2 +-
- configs/brcp1_1r_switch_defconfig                |  2 +-
- configs/brcp1_2r_defconfig                       |  2 +-
- configs/brppt1_mmc_defconfig                     |  2 +-
- configs/brsmarc1_defconfig                       |  2 +-
- configs/brsmarc2_defconfig                       |  2 +-
- configs/brxre1_defconfig                         |  2 +-
- configs/chiliboard_defconfig                     |  2 +-
- configs/corvus_defconfig                         |  2 +-
- configs/display5_defconfig                       |  2 +-
- configs/display5_factory_defconfig               |  2 +-
- configs/dra7xx_evm_defconfig                     |  2 +-
- configs/dra7xx_hs_evm_defconfig                  |  2 +-
- configs/dra7xx_hs_evm_usb_defconfig              |  2 +-
- configs/draco-etamin_defconfig                   |  2 +-
- configs/draco-rastaban_defconfig                 |  2 +-
- configs/draco-thuban_defconfig                   |  2 +-
- configs/e850-96_defconfig                        |  2 +-
- configs/edison_defconfig                         |  2 +-
- configs/gardena-smart-gateway-at91sam_defconfig  |  2 +-
- configs/gardena-smart-gateway-mt7688_defconfig   |  2 +-
- configs/gazerbeam_defconfig                      |  2 +-
- configs/gwventana_emmc_defconfig                 |  2 +-
- configs/gwventana_nand_defconfig                 |  2 +-
- configs/gxp_defconfig                            |  2 +-
- configs/igep00x0_defconfig                       |  2 +-
- configs/imx28_xea_defconfig                      |  2 +-
- configs/imx28_xea_sb_defconfig                   |  2 +-
- configs/imx6q_bosch_acc_defconfig                |  2 +-
- configs/imx8m_data_modul.config                  |  2 +-
- configs/imx8mm-cl-iot-gate_defconfig             |  2 +-
- configs/imx8mm-mx8menlo_defconfig                |  2 +-
- configs/imx8mm-phygate-tauri-l_defconfig         |  2 +-
- configs/imx8mm_phg_defconfig                     |  2 +-
- configs/imx8mm_venice_defconfig                  |  2 +-
- configs/imx8mn_venice_defconfig                  |  2 +-
- configs/imx8mp_venice_defconfig                  |  2 +-
- configs/imx8qxp_capricorn.config                 |  2 +-
- configs/imx93-phycore_defconfig                  |  2 +-
- configs/imx_dhsom.config                         |  2 +-
- configs/iot2050_defconfig                        |  2 +-
- configs/j7200_evm_a72_defconfig                  |  2 +-
- configs/j721e_beagleboneai64_a72_defconfig       |  2 +-
- configs/j721e_evm_a72_defconfig                  |  2 +-
- configs/j721s2_evm_a72_defconfig                 |  2 +-
- configs/j784s4_evm_a72_defconfig                 |  2 +-
- configs/kmcent2_defconfig                        |  2 +-
- configs/kmcoge5ne_defconfig                      |  2 +-
- configs/kmeter1_defconfig                        |  2 +-
- configs/kmopti2_defconfig                        |  2 +-
- configs/kmsupx5_defconfig                        |  2 +-
- configs/kmtepr2_defconfig                        |  2 +-
- configs/kontron-sl-mx8mm_defconfig               |  2 +-
- configs/kontron_sl28_defconfig                   |  2 +-
- configs/kp_imx53_defconfig                       |  2 +-
- configs/kp_imx6q_tpc_defconfig                   |  2 +-
- configs/lxr2_defconfig                           |  2 +-
- configs/m53menlo_defconfig                       |  2 +-
- configs/mccmon6_nor_defconfig                    |  2 +-
- configs/mccmon6_sd_defconfig                     |  2 +-
- configs/microblaze-generic_defconfig             |  2 +-
- configs/msc_sm2s_imx8mp_defconfig                |  2 +-
- configs/mscc_jr2_defconfig                       |  2 +-
- configs/mscc_luton_defconfig                     |  2 +-
- configs/mscc_ocelot_defconfig                    |  2 +-
- configs/mscc_serval_defconfig                    |  2 +-
- configs/mscc_servalt_defconfig                   |  2 +-
- configs/novena_defconfig                         |  2 +-
- configs/opos6uldev_defconfig                     |  2 +-
- configs/pcm052_defconfig                         |  2 +-
- configs/pcm058_defconfig                         |  2 +-
- configs/pg_wcom_expu1_defconfig                  |  2 +-
- configs/pg_wcom_expu1_update_defconfig           |  2 +-
- configs/pg_wcom_seli8_defconfig                  |  2 +-
- configs/pg_wcom_seli8_update_defconfig           |  2 +-
- configs/phycore-imx8mm_defconfig                 |  2 +-
- configs/phycore-imx8mp_defconfig                 |  2 +-
- configs/phycore_am62ax_a53_defconfig             |  2 +-
- configs/phycore_am62x_a53_defconfig              |  2 +-
- configs/phycore_am64x_a53_defconfig              |  2 +-
- configs/pm9g45_defconfig                         |  2 +-
- configs/sam9x60ek_nandflash_defconfig            |  2 +-
- configs/sama5d2_ptc_ek_nandflash_defconfig       |  2 +-
- configs/sama5d36ek_cmp_nandflash_defconfig       |  2 +-
- configs/sama5d3_xplained_nandflash_defconfig     |  2 +-
- configs/sama5d3xek_nandflash_defconfig           |  2 +-
- configs/sama5d4_xplained_nandflash_defconfig     |  2 +-
- configs/sama5d4ek_nandflash_defconfig            |  2 +-
- configs/smartweb_defconfig                       |  2 +-
- configs/smegw01_defconfig                        |  2 +-
- configs/socfpga_secu1_defconfig                  |  2 +-
- configs/socfpga_sr1500_defconfig                 |  2 +-
- configs/socfpga_vining_fpga_defconfig            |  2 +-
- configs/socrates_defconfig                       |  2 +-
- configs/stm32mp13_defconfig                      |  2 +-
- .../stm32mp15-icore-stm32mp1-ctouch2_defconfig   |  2 +-
- .../stm32mp15-icore-stm32mp1-edimm2.2_defconfig  |  2 +-
- ...p15-microgea-stm32mp1-microdev2-of7_defconfig |  2 +-
- ...m32mp15-microgea-stm32mp1-microdev2_defconfig |  2 +-
- configs/stm32mp15-odyssey_defconfig              |  2 +-
- configs/stm32mp15_basic_defconfig                |  2 +-
- configs/stm32mp15_defconfig                      |  2 +-
- configs/stm32mp15_trusted_defconfig              |  2 +-
- configs/stm32mp25_defconfig                      |  2 +-
- configs/stm32mp_dhsom.config                     |  2 +-
- configs/taurus_defconfig                         |  2 +-
- ...dorable-x86-conga-qa3-e3845-pcie-x4_defconfig |  2 +-
- .../theadorable-x86-conga-qa3-e3845_defconfig    |  2 +-
- configs/theadorable-x86-dfi-bt700_defconfig      |  2 +-
- configs/tqma6dl_mba6_spi_defconfig               |  2 +-
- configs/tqma6q_mba6_spi_defconfig                |  2 +-
- configs/tqma6s_mba6_spi_defconfig                |  2 +-
- configs/tuge1_defconfig                          |  2 +-
- configs/tuxx1_defconfig                          |  2 +-
- configs/vining_2000_defconfig                    |  2 +-
- configs/work_92105_defconfig                     |  2 +-
- configs/xilinx_versal_net_virt_defconfig         |  2 +-
- configs/xilinx_versal_virt_defconfig             |  2 +-
- configs/xilinx_zynq_virt_defconfig               |  2 +-
- configs/xilinx_zynqmp_kria_defconfig             |  2 +-
- configs/xilinx_zynqmp_virt_defconfig             |  2 +-
- env/Kconfig                                      | 10 +++++-----
- env/common.c                                     |  6 +++---
- env/fat.c                                        |  8 ++++----
- env/mmc.c                                        | 14 +++++++-------
- env/sf.c                                         |  6 +++---
- env/ubi.c                                        | 16 ++++++++--------
- include/env_default.h                            |  2 +-
- include/env_internal.h                           |  4 ++--
- tools/envcrc.c                                   |  2 +-
- 165 files changed, 190 insertions(+), 190 deletions(-)
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c                |  2 +-
+ arch/arm/mach-imx/imx8/cpu.c                           |  4 ++--
+ arch/arm/mach-imx/imx8ulp/soc.c                        |  4 ++--
+ arch/arm/mach-imx/imx9/scmi/soc.c                      |  4 ++--
+ arch/arm/mach-imx/imx9/soc.c                           |  4 ++--
+ arch/arm/mach-imx/mmc_env.c                            |  4 ++--
+ arch/arm/mach-imx/mx6/soc.c                            |  4 ++--
+ arch/arm/mach-imx/mx7ulp/soc.c                         |  4 ++--
+ arch/arm/mach-mvebu/armada8k/cpu.c                     |  2 +-
+ arch/arm/mach-rockchip/board.c                         |  4 ++--
+ .../advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env  |  2 +-
+ board/freescale/imx8mm_evk/imx8mm_evk.env              |  2 +-
+ board/freescale/imx8mn_evk/imx8mn_evk.env              |  2 +-
+ board/freescale/imx8mp_evk/imx8mp_evk.env              |  2 +-
+ board/freescale/imx8mq_evk/imx8mq_evk.env              |  2 +-
+ board/freescale/imx91_evk/imx91_evk.env                |  2 +-
+ board/freescale/imx93_evk/imx93_evk.env                |  2 +-
+ board/freescale/imx93_qsb/imx93_qsb.env                |  2 +-
+ board/freescale/imx95_evk/imx95_19x19_evk.env          |  2 +-
+ board/grinn/liteboard/board.c                          |  2 +-
+ board/phytec/common/k3/board.c                         |  2 +-
+ board/phytec/phycore_imx8mm/phycore_imx8mm.env         |  2 +-
+ board/phytec/phycore_imx8mp/phycore_imx8mp.env         |  2 +-
+ board/phytec/phycore_imx93/phycore_imx93.env           |  2 +-
+ board/st/stm32mp1/stm32mp1.c                           |  2 +-
+ board/st/stm32mp2/stm32mp2.c                           |  2 +-
+ board/sunxi/board.c                                    |  4 ++--
+ cmd/mvebu/bubt.c                                       |  4 ++--
+ configs/am335x_shc_defconfig                           |  2 +-
+ configs/am335x_shc_ict_defconfig                       |  2 +-
+ configs/am335x_sl50_defconfig                          |  2 +-
+ configs/am57xx_hs_evm_usb_defconfig                    |  2 +-
+ configs/brppt1_mmc_defconfig                           |  2 +-
+ configs/brxre1_defconfig                               |  2 +-
+ configs/cgtqmx8_defconfig                              |  2 +-
+ configs/dra7xx_evm_defconfig                           |  2 +-
+ configs/dra7xx_hs_evm_defconfig                        |  2 +-
+ configs/dra7xx_hs_evm_usb_defconfig                    |  2 +-
+ configs/evb-rk3328_defconfig                           |  2 +-
+ configs/ficus-rk3399_defconfig                         |  2 +-
+ configs/hihope_rzg2_defconfig                          |  2 +-
+ configs/imx6dl_mamoj_defconfig                         |  2 +-
+ configs/imx8mm-cl-iot-gate-optee_defconfig             |  2 +-
+ configs/imx8mm-cl-iot-gate_defconfig                   |  2 +-
+ configs/imx8mm-icore-mx8mm-ctouch2_defconfig           |  2 +-
+ configs/imx8mm-icore-mx8mm-edimm2.2_defconfig          |  2 +-
+ configs/imx8mm-phygate-tauri-l_defconfig               |  2 +-
+ configs/imx8mm_beacon_defconfig                        |  2 +-
+ configs/imx8mm_beacon_fspi_defconfig                   |  2 +-
+ configs/imx8mm_evk_defconfig                           |  2 +-
+ configs/imx8mm_evk_fspi_defconfig                      |  2 +-
+ configs/imx8mm_venice_defconfig                        |  2 +-
+ configs/imx8mn_beacon_2g_defconfig                     |  2 +-
+ configs/imx8mn_beacon_defconfig                        |  2 +-
+ configs/imx8mn_beacon_fspi_defconfig                   |  2 +-
+ configs/imx8mn_ddr4_evk_defconfig                      |  2 +-
+ configs/imx8mn_var_som_defconfig                       |  2 +-
+ configs/imx8mn_venice_defconfig                        |  2 +-
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig          |  2 +-
+ configs/imx8mp_beacon_defconfig                        |  2 +-
+ configs/imx8mp_debix_model_a_defconfig                 |  2 +-
+ configs/imx8mp_evk_defconfig                           |  2 +-
+ configs/imx8mp_navqp_defconfig                         |  2 +-
+ configs/imx8mp_rsb3720a1_4G_defconfig                  |  2 +-
+ configs/imx8mp_rsb3720a1_6G_defconfig                  |  2 +-
+ configs/imx8mp_venice_defconfig                        |  2 +-
+ configs/imx8mq_cm_defconfig                            |  2 +-
+ configs/imx8mq_evk_defconfig                           |  2 +-
+ configs/imx8mq_phanbell_defconfig                      |  2 +-
+ configs/imx8mq_reform2_defconfig                       |  2 +-
+ configs/imx8qm_dmsse20a1_defconfig                     |  2 +-
+ configs/imx8qm_mek_defconfig                           |  2 +-
+ configs/imx8qm_rom7720_a1_4G_defconfig                 |  2 +-
+ configs/imx8qxp_mek_defconfig                          |  2 +-
+ configs/imx91_11x11_evk_defconfig                      |  2 +-
+ configs/imx91_11x11_evk_inline_ecc_defconfig           |  2 +-
+ configs/imx93-phycore_defconfig                        |  2 +-
+ configs/imx93_11x11_evk_defconfig                      |  2 +-
+ configs/imx93_9x9_qsb_defconfig                        |  2 +-
+ configs/imx93_9x9_qsb_inline_ecc_defconfig             |  2 +-
+ configs/imx93_var_som_defconfig                        |  2 +-
+ configs/imx95_19x19_evk_defconfig                      |  2 +-
+ configs/khadas-vim3_android_ab_defconfig               |  2 +-
+ configs/khadas-vim3_android_defconfig                  |  2 +-
+ configs/khadas-vim3l_android_ab_defconfig              |  2 +-
+ configs/khadas-vim3l_android_defconfig                 |  2 +-
+ configs/kp_imx6q_tpc_defconfig                         |  2 +-
+ configs/mvebu_crb_cn9130_defconfig                     |  2 +-
+ configs/mvebu_db_cn9130_defconfig                      |  2 +-
+ configs/mx6sabresd_defconfig                           |  2 +-
+ configs/mx6sxsabresd_defconfig                         |  2 +-
+ configs/mx6ul_14x14_evk_defconfig                      |  2 +-
+ configs/mx6ul_9x9_evk_defconfig                        |  2 +-
+ configs/mx6ull_14x14_evk_defconfig                     |  2 +-
+ configs/mx6ull_14x14_evk_plugin_defconfig              |  2 +-
+ configs/mx6ulz_14x14_evk_defconfig                     |  2 +-
+ configs/nanopi-r2c-plus-rk3328_defconfig               |  2 +-
+ configs/nanopi-r2c-rk3328_defconfig                    |  2 +-
+ configs/nanopi-r2s-rk3328_defconfig                    |  2 +-
+ configs/orangepi-r1-plus-lts-rk3328_defconfig          |  2 +-
+ configs/orangepi-r1-plus-rk3328_defconfig              |  2 +-
+ configs/phycore-imx8mm_defconfig                       |  2 +-
+ configs/phycore-imx8mp_defconfig                       |  2 +-
+ configs/phycore-rk3288_defconfig                       |  2 +-
+ configs/phycore_am62ax_a53_defconfig                   |  2 +-
+ configs/phycore_am62x_a53_defconfig                    |  2 +-
+ configs/phycore_am64x_a53_defconfig                    |  2 +-
+ configs/pico-imx8mq_defconfig                          |  2 +-
+ configs/puma-rk3399_defconfig                          |  2 +-
+ configs/riotboard_defconfig                            |  2 +-
+ configs/roc-cc-rk3328_defconfig                        |  2 +-
+ configs/rock-pi-e-rk3328_defconfig                     |  2 +-
+ configs/rock-pi-e-v3-rk3328_defconfig                  |  2 +-
+ configs/rock64-rk3328_defconfig                        |  2 +-
+ configs/rock960-rk3399_defconfig                       |  2 +-
+ configs/s5p4418_nanopi2_defconfig                      |  2 +-
+ configs/sei510_defconfig                               |  2 +-
+ configs/sei610_defconfig                               |  2 +-
+ configs/smegw01_defconfig                              |  2 +-
+ configs/somlabs_visionsom_6ull_defconfig               |  2 +-
+ configs/stm32mp13_defconfig                            |  2 +-
+ configs/stm32mp13_dhcor_defconfig                      |  2 +-
+ configs/stm32mp15-odyssey_defconfig                    |  2 +-
+ configs/stm32mp15_basic_defconfig                      |  2 +-
+ configs/stm32mp15_defconfig                            |  2 +-
+ configs/stm32mp15_trusted_defconfig                    |  2 +-
+ configs/stm32mp25_defconfig                            |  2 +-
+ configs/tbs2910_defconfig                              |  2 +-
+ configs/tinker-rk3288_defconfig                        |  2 +-
+ configs/tinker-s-rk3288_defconfig                      |  2 +-
+ configs/udoo_defconfig                                 |  2 +-
+ configs/udoo_neo_defconfig                             |  2 +-
+ configs/verdin-imx8mp_defconfig                        |  2 +-
+ configs/vyasa-rk3288_defconfig                         |  2 +-
+ configs/x250_defconfig                                 |  2 +-
+ doc/device-tree-bindings/config.txt                    |  2 +-
+ drivers/mmc/mmc.c                                      |  4 ++--
+ drivers/net/fm/fm.c                                    |  8 ++++----
+ drivers/net/phy/cortina.c                              |  8 ++++----
+ drivers/qe/qe.c                                        |  8 ++++----
+ env/Kconfig                                            | 10 ++++++----
+ env/mmc.c                                              |  2 +-
+ include/configs/cgtqmx8.h                              |  2 +-
+ include/configs/imx7-cm.h                              |  2 +-
+ include/configs/imx8mm-cl-iot-gate.h                   |  2 +-
+ include/configs/imx8mp_rsb3720.h                       |  2 +-
+ include/configs/imx8mq_phanbell.h                      |  2 +-
+ include/configs/imx8qm_mek.h                           |  2 +-
+ include/configs/imx8qm_rom7720.h                       |  2 +-
+ include/configs/imx8qxp_mek.h                          |  2 +-
+ include/configs/imx93_evk.h                            |  4 ++--
+ include/configs/liteboard.h                            |  2 +-
+ include/configs/mx6cuboxi.h                            |  2 +-
+ include/configs/mx6sabre_common.h                      |  2 +-
+ include/configs/mx6sllevk.h                            |  2 +-
+ include/configs/mx6ul_14x14_evk.h                      |  2 +-
+ include/configs/mx6ullevk.h                            |  2 +-
+ include/configs/mx7ulp_com.h                           |  2 +-
+ include/configs/mx7ulp_evk.h                           |  2 +-
+ include/configs/pico-imx6.h                            |  2 +-
+ include/configs/pico-imx8mq.h                          |  2 +-
+ include/configs/tqma6.h                                |  2 +-
+ include/configs/vf610twr.h                             |  2 +-
+ include/configs/wandboard.h                            |  2 +-
+ include/configs/warp7.h                                |  2 +-
+ include/configs/xpress.h                               |  2 +-
+ 166 files changed, 192 insertions(+), 190 deletions(-)
 
-diff --git a/configs/am335x_guardian_defconfig b/configs/am335x_guardian_defconfig
-index c550e5e121e..7bfc39ed653 100644
---- a/configs/am335x_guardian_defconfig
-+++ b/configs/am335x_guardian_defconfig
-@@ -66,7 +66,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_SPL_ENV_IS_NOWHERE=y
-diff --git a/configs/am335x_igep003x_defconfig b/configs/am335x_igep003x_defconfig
-index 19943881973..580b8fbb291 100644
---- a/configs/am335x_igep003x_defconfig
-+++ b/configs/am335x_igep003x_defconfig
-@@ -65,7 +65,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="UBI"
- CONFIG_ENV_UBI_VOLUME="config"
- CONFIG_ENV_UBI_VOLUME_REDUND="config_r"
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+index d2d3e346a36..cfbaa475701 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+@@ -802,7 +802,7 @@ enum boot_src get_boot_src(void)
+ int mmc_get_env_dev(void)
+ {
+ 	enum boot_src src = get_boot_src();
+-	int dev = CONFIG_SYS_MMC_ENV_DEV;
++	int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 	switch (src) {
+ 	case BOOT_SOURCE_SD_MMC:
+diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
+index 37a5473ac7c..0e112af661c 100644
+--- a/arch/arm/mach-imx/imx8/cpu.c
++++ b/arch/arm/mach-imx/imx8/cpu.c
+@@ -451,7 +451,7 @@ void get_board_serial(struct tag_serialnr *serialnr)
+ #ifdef CONFIG_ENV_IS_IN_MMC
+ __weak int board_mmc_get_env_dev(int devno)
+ {
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ }
+ 
+ int mmc_get_env_dev(void)
+@@ -473,7 +473,7 @@ int mmc_get_env_dev(void)
+ 		break;
+ 	default:
+ 		/* If not boot from sd/mmc, use default value */
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 	}
+ 
+ 	return board_mmc_get_env_dev(devno);
+diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/soc.c
+index b5dc45296d1..ab1e1bc12bd 100644
+--- a/arch/arm/mach-imx/imx8ulp/soc.c
++++ b/arch/arm/mach-imx/imx8ulp/soc.c
+@@ -56,7 +56,7 @@ int mmc_get_env_dev(void)
+ 
+ 	if (ret != ROM_API_OKAY) {
+ 		puts("ROMAPI: failure at query_boot_info\n");
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 	}
+ 
+ 	boot_type = boot >> 16;
+@@ -64,7 +64,7 @@ int mmc_get_env_dev(void)
+ 
+ 	/* If not boot from sd/mmc, use default value */
+ 	if (boot_type != BOOT_TYPE_SD && boot_type != BOOT_TYPE_MMC)
+-		return env_get_ulong("mmcdev", 10, CONFIG_SYS_MMC_ENV_DEV);
++		return env_get_ulong("mmcdev", 10, CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 	return board_mmc_get_env_dev(boot_instance);
+ }
+diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+index d2b0455bff9..8338527d24f 100644
+--- a/arch/arm/mach-imx/imx9/scmi/soc.c
++++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+@@ -84,7 +84,7 @@ int mmc_get_env_dev(void)
+ 		ret = scmi_get_rom_data(rdata);
+ 		if (ret != 0) {
+ 			puts("SCMI: failure at rom_boot_info\n");
+-			return CONFIG_SYS_MMC_ENV_DEV;
++			return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 		}
+ 	}
+ 	boot_type = rdata->boot_dev_type;
+@@ -95,7 +95,7 @@ int mmc_get_env_dev(void)
+ 
+ 	/* If not boot from sd/mmc, use default value */
+ 	if (boot_type != BOOT_TYPE_SD && boot_type != BOOT_TYPE_MMC)
+-		return env_get_ulong("mmcdev", 10, CONFIG_SYS_MMC_ENV_DEV);
++		return env_get_ulong("mmcdev", 10, CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 	return board_mmc_get_env_dev(boot_instance);
+ }
+diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
+index bb13ca742e3..02db7cc97ba 100644
+--- a/arch/arm/mach-imx/imx9/soc.c
++++ b/arch/arm/mach-imx/imx9/soc.c
+@@ -48,8 +48,8 @@ __weak int board_mmc_get_env_dev(int devno)
+ 	return devno;
+ }
+ 
+-#ifdef CONFIG_SYS_MMC_ENV_DEV
+-#define IMX9_MMC_ENV_DEV CONFIG_SYS_MMC_ENV_DEV
++#ifdef CONFIG_ENV_MMC_DEVICE_INDEX
++#define IMX9_MMC_ENV_DEV CONFIG_ENV_MMC_DEVICE_INDEX
+ #else
+ #define IMX9_MMC_ENV_DEV 0
+ #endif
+diff --git a/arch/arm/mach-imx/mmc_env.c b/arch/arm/mach-imx/mmc_env.c
+index 34a7d1706f3..2ec8ddf4d59 100644
+--- a/arch/arm/mach-imx/mmc_env.c
++++ b/arch/arm/mach-imx/mmc_env.c
+@@ -10,7 +10,7 @@
+ 
+ __weak int board_mmc_get_env_dev(int devno)
+ {
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ }
+ 
+ int mmc_get_env_dev(void)
+@@ -22,7 +22,7 @@ int mmc_get_env_dev(void)
+ 
+ 	/* If not boot from sd/mmc, use default value */
+ 	if ((boot_type != BOOT_TYPE_SD) && (boot_type != BOOT_TYPE_MMC))
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 	return board_mmc_get_env_dev(devno);
+ }
+diff --git a/arch/arm/mach-imx/mx6/soc.c b/arch/arm/mach-imx/mx6/soc.c
+index d4a61731a67..90fe9e7c19b 100644
+--- a/arch/arm/mach-imx/mx6/soc.c
++++ b/arch/arm/mach-imx/mx6/soc.c
+@@ -502,7 +502,7 @@ int arch_cpu_init(void)
+ #ifdef CONFIG_ENV_IS_IN_MMC
+ __weak int board_mmc_get_env_dev(int devno)
+ {
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ }
+ 
+ static int mmc_get_boot_dev(void)
+@@ -535,7 +535,7 @@ int mmc_get_env_dev(void)
+ 
+ 	/* If not boot from sd/mmc, use default value */
+ 	if (devno < 0)
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 	return board_mmc_get_env_dev(devno);
+ }
+diff --git a/arch/arm/mach-imx/mx7ulp/soc.c b/arch/arm/mach-imx/mx7ulp/soc.c
+index 61d331e0181..5306e76223f 100644
+--- a/arch/arm/mach-imx/mx7ulp/soc.c
++++ b/arch/arm/mach-imx/mx7ulp/soc.c
+@@ -362,7 +362,7 @@ static char *get_reset_cause(char *ret)
+ #ifdef CONFIG_ENV_IS_IN_MMC
+ __weak int board_mmc_get_env_dev(int devno)
+ {
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ }
+ 
+ int mmc_get_env_dev(void)
+@@ -372,7 +372,7 @@ int mmc_get_env_dev(void)
+ 
+ 	/* If not boot from sd/mmc, use default value */
+ 	if (get_boot_mode() == LOW_POWER_BOOT)
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 	bt1_cfg = readl(CMC1_RBASE + 0x40);
+ 	devno = (bt1_cfg >> 9) & 0x7;
+diff --git a/arch/arm/mach-mvebu/armada8k/cpu.c b/arch/arm/mach-mvebu/armada8k/cpu.c
+index 7908f75809c..3eb93c82387 100644
+--- a/arch/arm/mach-mvebu/armada8k/cpu.c
++++ b/arch/arm/mach-mvebu/armada8k/cpu.c
+@@ -109,5 +109,5 @@ int mmc_get_env_dev(void)
+ 		return 1;
+ 	}
+ 
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ }
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 75d6693e28a..2e6bb38b923 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -512,8 +512,8 @@ int mmc_get_env_dev(void)
+ 	const char *boot_device;
+ 	struct udevice *dev;
+ 
+-#ifdef CONFIG_SYS_MMC_ENV_DEV
+-	devnum = CONFIG_SYS_MMC_ENV_DEV;
++#ifdef CONFIG_ENV_MMC_DEVICE_INDEX
++	devnum = CONFIG_ENV_MMC_DEVICE_INDEX;
+ #else
+ 	devnum = 0;
+ #endif
+diff --git a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env
+index 0c9f9c4178a..90861e622ed 100644
+--- a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env
++++ b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env
+@@ -6,7 +6,7 @@ earlycon=lpuart32,0x5a060000
+ fdt_addr=0x83000000
+ boot_fdt=try
+ fdt_file=imx8qm-dmsse20-a1.dtb
+-mmcdev= __stringify(CONFIG_SYS_MMC_ENV_DEV)
++mmcdev= __stringify(CONFIG_ENV_MMC_DEVICE_INDEX)
+ mmcpart= __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART)
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ mmcautodetect=yes
+diff --git a/board/freescale/imx8mm_evk/imx8mm_evk.env b/board/freescale/imx8mm_evk/imx8mm_evk.env
+index 29690e75b15..299b8472c74 100644
+--- a/board/freescale/imx8mm_evk/imx8mm_evk.env
++++ b/board/freescale/imx8mm_evk/imx8mm_evk.env
+@@ -14,7 +14,7 @@ ip_dyn=yes
+ kernel_addr_r=0x42000000
+ loadaddr=CONFIG_SYS_LOAD_ADDR
+ mmcautodetect=yes
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ prepare_mcore=setenv mcore_clk clk-imx8mm.mcore_booted;
+diff --git a/board/freescale/imx8mn_evk/imx8mn_evk.env b/board/freescale/imx8mn_evk/imx8mn_evk.env
+index 16a6543ffc6..487893f9287 100644
+--- a/board/freescale/imx8mn_evk/imx8mn_evk.env
++++ b/board/freescale/imx8mn_evk/imx8mn_evk.env
+@@ -14,7 +14,7 @@ ip_dyn=yes
+ kernel_addr_r=0x42000000
+ loadaddr=CONFIG_SYS_LOAD_ADDR
+ mmcautodetect=yes
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ prepare_mcore=setenv mcore_clk clk-imx8mn.mcore_booted;
+diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.env b/board/freescale/imx8mp_evk/imx8mp_evk.env
+index f70e18fa9d9..18cdf3da056 100644
+--- a/board/freescale/imx8mp_evk/imx8mp_evk.env
++++ b/board/freescale/imx8mp_evk/imx8mp_evk.env
+@@ -10,7 +10,7 @@ fdt_addr=0x43000000
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+ image=Image
+ ip_dyn=yes
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ mmcautodetect=yes
+diff --git a/board/freescale/imx8mq_evk/imx8mq_evk.env b/board/freescale/imx8mq_evk/imx8mq_evk.env
+index dcfe1c2f2d4..cab8c6b70bf 100644
+--- a/board/freescale/imx8mq_evk/imx8mq_evk.env
++++ b/board/freescale/imx8mq_evk/imx8mq_evk.env
+@@ -12,7 +12,7 @@ ip_dyn=yes
+ kernel_addr_r=CONFIG_SYS_LOAD_ADDR
+ loadaddr=CONFIG_SYS_LOAD_ADDR
+ mmcautodetect=yes
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ prepare_mcore=setenv mcore_clk clk-imx8mq.mcore_booted;
+diff --git a/board/freescale/imx91_evk/imx91_evk.env b/board/freescale/imx91_evk/imx91_evk.env
+index c972d3eb251..6c10784cf61 100644
+--- a/board/freescale/imx91_evk/imx91_evk.env
++++ b/board/freescale/imx91_evk/imx91_evk.env
+@@ -10,7 +10,7 @@ fdt_addr_r=0x83000000
+ fdt_addr=0x83000000
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+ image=Image
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ mmcautodetect=yes
+diff --git a/board/freescale/imx93_evk/imx93_evk.env b/board/freescale/imx93_evk/imx93_evk.env
+index 8c3aef6b557..d5ed216f54b 100644
+--- a/board/freescale/imx93_evk/imx93_evk.env
++++ b/board/freescale/imx93_evk/imx93_evk.env
+@@ -10,7 +10,7 @@ fdt_addr_r=0x83000000
+ fdt_addr=0x83000000
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+ image=Image
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ mmcautodetect=yes
+diff --git a/board/freescale/imx93_qsb/imx93_qsb.env b/board/freescale/imx93_qsb/imx93_qsb.env
+index c972d3eb251..6c10784cf61 100644
+--- a/board/freescale/imx93_qsb/imx93_qsb.env
++++ b/board/freescale/imx93_qsb/imx93_qsb.env
+@@ -10,7 +10,7 @@ fdt_addr_r=0x83000000
+ fdt_addr=0x83000000
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+ image=Image
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=/dev/mmcblk1p2 rootwait rw
+ mmcautodetect=yes
+diff --git a/board/freescale/imx95_evk/imx95_19x19_evk.env b/board/freescale/imx95_evk/imx95_19x19_evk.env
+index a002767e874..a7309d734b0 100644
+--- a/board/freescale/imx95_evk/imx95_19x19_evk.env
++++ b/board/freescale/imx95_evk/imx95_19x19_evk.env
+@@ -14,7 +14,7 @@ cntr_file=os_cntr_signed.bin
+ boot_fit=no
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+ bootm_size=0x10000000
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcautodetect=yes
+ mmcargs=setenv bootargs console=${console} root=${mmcroot}
+ loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
+diff --git a/board/grinn/liteboard/board.c b/board/grinn/liteboard/board.c
+index c2a44b4aa2d..492d1dc1d8c 100644
+--- a/board/grinn/liteboard/board.c
++++ b/board/grinn/liteboard/board.c
+@@ -84,7 +84,7 @@ static int mmc_get_env_devno(void)
+ 
+ 	/* If not boot from sd/mmc, use default value */
+ 	if (bootsel != 1)
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 	/* BOOT_CFG2[3] and BOOT_CFG2[4] */
+ 	dev_no = (soc_sbmr & 0x00001800) >> 11;
+diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+index d9aec16b090..7f34d71d530 100644
+--- a/board/phytec/common/k3/board.c
++++ b/board/phytec/common/k3/board.c
+@@ -94,7 +94,7 @@ int mmc_get_env_dev(void)
+ 		return 1;
+ 	};
+ 
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ }
+ #endif
+ 
+diff --git a/board/phytec/phycore_imx8mm/phycore_imx8mm.env b/board/phytec/phycore_imx8mm/phycore_imx8mm.env
+index a7d14e774a0..402d967ab7d 100644
+--- a/board/phytec/phycore_imx8mm/phycore_imx8mm.env
++++ b/board/phytec/phycore_imx8mm/phycore_imx8mm.env
+@@ -34,7 +34,7 @@ mmcboot=
+ 			echo WARN: Cannot load the DT;
+ 		fi;
+ 	fi;
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=2
+ netargs=
+diff --git a/board/phytec/phycore_imx8mp/phycore_imx8mp.env b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
+index 2c12fc65432..69690aa92e4 100644
+--- a/board/phytec/phycore_imx8mp/phycore_imx8mp.env
++++ b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
+@@ -51,7 +51,7 @@ mmcboot=
+ 	else
+ 		echo WARN: Cannot load the DT;
+ 	fi;
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=2
+ netargs=
+diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
+index 3b2f30118e7..7b0a90e6447 100644
+--- a/board/phytec/phycore_imx93/phycore_imx93.env
++++ b/board/phytec/phycore_imx93/phycore_imx93.env
+@@ -23,7 +23,7 @@ bootenv_addr_r=0x90500000
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+ ip_dyn=yes
+ prepare_mcore=setenv optargs "${optargs} clk-imx93.mcore_booted"
+-mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
+ mmcpart=1
+ mmcroot=2
+ mmcautodetect=yes
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 15fb9e4b062..ab7af69d472 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -828,7 +828,7 @@ const char *env_ext4_get_dev_part(void)
+ 
+ int mmc_get_env_dev(void)
+ {
+-	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_SYS_MMC_ENV_DEV), (-1));
++	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_ENV_MMC_DEVICE_INDEX), (-1));
+ 
+ 	if (mmc_env_dev >= 0)
+ 		return mmc_env_dev;
+diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
+index 2547f2e4bb7..a72056e12d6 100644
+--- a/board/st/stm32mp2/stm32mp2.c
++++ b/board/st/stm32mp2/stm32mp2.c
+@@ -183,7 +183,7 @@ int mmc_get_boot(void)
+ 
+ int mmc_get_env_dev(void)
+ {
+-	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_SYS_MMC_ENV_DEV), (-1));
++	const int mmc_env_dev = CONFIG_IS_ENABLED(ENV_IS_IN_MMC, (CONFIG_ENV_MMC_DEVICE_INDEX), (-1));
+ 
+ 	if (mmc_env_dev >= 0)
+ 		return mmc_env_dev;
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index ac9cefc6eac..feec95658a2 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -516,7 +516,7 @@ int board_mmc_init(struct bd_info *bis)
+ 	return 0;
+ }
+ 
+-#ifdef CONFIG_SYS_MMC_ENV_DEV
++#ifdef CONFIG_ENV_MMC_DEVICE_INDEX
+ int mmc_get_env_dev(void)
+ {
+ 	switch (sunxi_get_boot_device()) {
+@@ -525,7 +525,7 @@ int mmc_get_env_dev(void)
+ 	case BOOT_DEVICE_MMC2:
+ 		return 1;
+ 	default:
+-		return CONFIG_SYS_MMC_ENV_DEV;
++		return CONFIG_ENV_MMC_DEVICE_INDEX;
+ 	}
+ }
+ #endif
+diff --git a/cmd/mvebu/bubt.c b/cmd/mvebu/bubt.c
+index 6b7d9ee061d..2755c26cdf7 100644
+--- a/cmd/mvebu/bubt.c
++++ b/cmd/mvebu/bubt.c
+@@ -185,7 +185,7 @@ static int mmc_burn_image(size_t image_size)
+ 	lbaint_t	blk_count;
+ 	ulong		blk_written;
+ 	int		err;
+-	const u8	mmc_dev_num = CONFIG_SYS_MMC_ENV_DEV;
++	const u8	mmc_dev_num = CONFIG_ENV_MMC_DEVICE_INDEX;
+ #ifdef CONFIG_BLK
+ 	struct blk_desc *blk_desc;
+ #endif
+@@ -290,7 +290,7 @@ static size_t mmc_read_file(const char *file_name)
+ 	loff_t		act_read = 0;
+ 	int		rc;
+ 	struct mmc	*mmc;
+-	const u8	mmc_dev_num = CONFIG_SYS_MMC_ENV_DEV;
++	const u8	mmc_dev_num = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 	mmc = find_mmc_device(mmc_dev_num);
+ 	if (!mmc) {
 diff --git a/configs/am335x_shc_defconfig b/configs/am335x_shc_defconfig
-index 2dfcd182cca..32790e852bc 100644
+index 94fe4d7df8d..0e1fef8b722 100644
 --- a/configs/am335x_shc_defconfig
 +++ b/configs/am335x_shc_defconfig
-@@ -58,7 +58,7 @@ CONFIG_CMD_CACHE=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
+@@ -60,7 +60,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_NET_RETRY_COUNT=10
 diff --git a/configs/am335x_shc_ict_defconfig b/configs/am335x_shc_ict_defconfig
-index 61527e2724a..82532c9e20b 100644
+index 02dd6a96623..65d17598a02 100644
 --- a/configs/am335x_shc_ict_defconfig
 +++ b/configs/am335x_shc_ict_defconfig
-@@ -56,7 +56,7 @@ CONFIG_CMD_CACHE=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
+@@ -58,7 +58,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/am335x_shc_netboot_defconfig b/configs/am335x_shc_netboot_defconfig
-index da9c1b3d753..dc8582b9b18 100644
---- a/configs/am335x_shc_netboot_defconfig
-+++ b/configs/am335x_shc_netboot_defconfig
-@@ -60,7 +60,7 @@ CONFIG_CMD_CACHE=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/am335x_shc_sdboot_defconfig b/configs/am335x_shc_sdboot_defconfig
-index 46e9e49a377..88b1a9fefb2 100644
---- a/configs/am335x_shc_sdboot_defconfig
-+++ b/configs/am335x_shc_sdboot_defconfig
-@@ -59,7 +59,7 @@ CONFIG_CMD_CACHE=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_VERSION_VARIABLE=y
+ CONFIG_NET_RETRY_COUNT=10
 diff --git a/configs/am335x_sl50_defconfig b/configs/am335x_sl50_defconfig
-index 1a48c05f06e..1e0e1fd66cc 100644
+index 906f02ee576..4887bf7b181 100644
 --- a/configs/am335x_sl50_defconfig
 +++ b/configs/am335x_sl50_defconfig
-@@ -55,7 +55,7 @@ CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
+@@ -57,7 +57,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_SYS_MMC_ENV_PART=2
-diff --git a/configs/am43xx_evm_qspiboot_defconfig b/configs/am43xx_evm_qspiboot_defconfig
-index d6c21869372..d735af9674b 100644
---- a/configs/am43xx_evm_qspiboot_defconfig
-+++ b/configs/am43xx_evm_qspiboot_defconfig
-@@ -35,7 +35,7 @@ CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/am43xx_hs_evm_qspi_defconfig b/configs/am43xx_hs_evm_qspi_defconfig
-index f7ae7f51077..dd346d23946 100644
---- a/configs/am43xx_hs_evm_qspi_defconfig
-+++ b/configs/am43xx_hs_evm_qspi_defconfig
-@@ -36,7 +36,7 @@ CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
-index ab45f5f7f10..8eb25f090a0 100644
---- a/configs/am57xx_evm_defconfig
-+++ b/configs/am57xx_evm_defconfig
-@@ -57,7 +57,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIST="am57xx-beagle-x15 am57xx-beagle-x15-revb1 am57xx-beagle-x15-revc am5729-beagleboneai am572x-idk am571x-idk am574x-idk"
- # CONFIG_ENV_IS_IN_FAT is not set
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
-index e1fd680803f..2b10fb50698 100644
---- a/configs/am57xx_hs_evm_defconfig
-+++ b/configs/am57xx_hs_evm_defconfig
-@@ -50,7 +50,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIST="am57xx-beagle-x15 am57xx-beagle-x15-revb1 am57xx-beagle-x15-revc am5729-beagleboneai am572x-idk am571x-idk am574x-idk"
- # CONFIG_ENV_IS_IN_FAT is not set
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_VERSION_VARIABLE=y
 diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
-index d865b123b90..579e8d58734 100644
+index e38929e940c..c3b6eb8c897 100644
 --- a/configs/am57xx_hs_evm_usb_defconfig
 +++ b/configs/am57xx_hs_evm_usb_defconfig
-@@ -54,7 +54,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIST="am57xx-beagle-x15 am57xx-beagle-x15-revb1 am57xx-beagle-x15-revc am572x-idk am571x-idk am574x-idk"
- CONFIG_ENV_OVERWRITE=y
+@@ -56,7 +56,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
-index a41f67a43fe..4ee406b8347 100644
---- a/configs/am65x_evm_a53_defconfig
-+++ b/configs/am65x_evm_a53_defconfig
-@@ -72,7 +72,7 @@ CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_PART=1
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 6ec7dd317fd..88e8fbd1566 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -66,7 +66,7 @@ CONFIG_OF_BOARD=y
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_LWIP=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/aristainetos2c_defconfig b/configs/aristainetos2c_defconfig
-index b6e259b490b..09cab1b3513 100644
---- a/configs/aristainetos2c_defconfig
-+++ b/configs/aristainetos2c_defconfig
-@@ -60,7 +60,7 @@ CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SPI_EARLY=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_WRITEABLE_LIST=y
- CONFIG_ENV_ACCESS_IGNORE_FORCE=y
-diff --git a/configs/aristainetos2ccslb_defconfig b/configs/aristainetos2ccslb_defconfig
-index 0ea13d46f31..61fa5011385 100644
---- a/configs/aristainetos2ccslb_defconfig
-+++ b/configs/aristainetos2ccslb_defconfig
-@@ -60,7 +60,7 @@ CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SPI_EARLY=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_WRITEABLE_LIST=y
- CONFIG_ENV_ACCESS_IGNORE_FORCE=y
-diff --git a/configs/at91sam9260ek_nandflash_defconfig b/configs/at91sam9260ek_nandflash_defconfig
-index 4ee101ff641..bb5930cfbcd 100644
---- a/configs/at91sam9260ek_nandflash_defconfig
-+++ b/configs/at91sam9260ek_nandflash_defconfig
-@@ -39,7 +39,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9261ek_nandflash_defconfig b/configs/at91sam9261ek_nandflash_defconfig
-index f53bf3c0450..07d7a792da5 100644
---- a/configs/at91sam9261ek_nandflash_defconfig
-+++ b/configs/at91sam9261ek_nandflash_defconfig
-@@ -39,7 +39,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=20
- CONFIG_CLK=y
-diff --git a/configs/at91sam9263ek_nandflash_defconfig b/configs/at91sam9263ek_nandflash_defconfig
-index e51581848ac..284bf22c95e 100644
---- a/configs/at91sam9263ek_nandflash_defconfig
-+++ b/configs/at91sam9263ek_nandflash_defconfig
-@@ -42,7 +42,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9263ek_norflash_boot_defconfig b/configs/at91sam9263ek_norflash_boot_defconfig
-index 488c370581a..dcf6b417990 100644
---- a/configs/at91sam9263ek_norflash_boot_defconfig
-+++ b/configs/at91sam9263ek_norflash_boot_defconfig
-@@ -41,7 +41,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x107D0000
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9263ek_norflash_defconfig b/configs/at91sam9263ek_norflash_defconfig
-index d8c490d80de..337ba577fd9 100644
---- a/configs/at91sam9263ek_norflash_defconfig
-+++ b/configs/at91sam9263ek_norflash_defconfig
-@@ -42,7 +42,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x107D0000
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9g10ek_nandflash_defconfig b/configs/at91sam9g10ek_nandflash_defconfig
-index 580960e8181..3b53a17b693 100644
---- a/configs/at91sam9g10ek_nandflash_defconfig
-+++ b/configs/at91sam9g10ek_nandflash_defconfig
-@@ -39,7 +39,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=20
- CONFIG_CLK=y
-diff --git a/configs/at91sam9g20ek_2mmc_nandflash_defconfig b/configs/at91sam9g20ek_2mmc_nandflash_defconfig
-index c4d12524282..58a75830bb0 100644
---- a/configs/at91sam9g20ek_2mmc_nandflash_defconfig
-+++ b/configs/at91sam9g20ek_2mmc_nandflash_defconfig
-@@ -41,7 +41,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9g20ek_nandflash_defconfig b/configs/at91sam9g20ek_nandflash_defconfig
-index e68f5036ca7..15378f5e128 100644
---- a/configs/at91sam9g20ek_nandflash_defconfig
-+++ b/configs/at91sam9g20ek_nandflash_defconfig
-@@ -39,7 +39,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9m10g45ek_nandflash_defconfig b/configs/at91sam9m10g45ek_nandflash_defconfig
-index e57bd2c8296..62f2a46425b 100644
---- a/configs/at91sam9m10g45ek_nandflash_defconfig
-+++ b/configs/at91sam9m10g45ek_nandflash_defconfig
-@@ -44,7 +44,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9n12ek_nandflash_defconfig b/configs/at91sam9n12ek_nandflash_defconfig
-index e7b4107f1e5..30470b5f450 100644
---- a/configs/at91sam9n12ek_nandflash_defconfig
-+++ b/configs/at91sam9n12ek_nandflash_defconfig
-@@ -40,7 +40,7 @@ CONFIG_MTDIDS_DEFAULT="nand0=atmel_nand"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=atmel_nand:256k(bootstrap)ro,512k(uboot)ro,256k(env),256k(env_redundant),256k(spare),512k(dtb),6M(kernel)ro,-(rootfs)"
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9rlek_nandflash_defconfig b/configs/at91sam9rlek_nandflash_defconfig
-index c40e99817b9..7e31d11d0f2 100644
---- a/configs/at91sam9rlek_nandflash_defconfig
-+++ b/configs/at91sam9rlek_nandflash_defconfig
-@@ -38,7 +38,7 @@ CONFIG_CMD_NAND=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NO_NET=y
- CONFIG_CLK=y
-diff --git a/configs/at91sam9x5ek_nandflash_defconfig b/configs/at91sam9x5ek_nandflash_defconfig
-index 3f593953140..c6fa5a01359 100644
---- a/configs/at91sam9x5ek_nandflash_defconfig
-+++ b/configs/at91sam9x5ek_nandflash_defconfig
-@@ -46,7 +46,7 @@ CONFIG_CMD_MTDPARTS=y
- CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/at91sam9xeek_nandflash_defconfig b/configs/at91sam9xeek_nandflash_defconfig
-index 4ee101ff641..bb5930cfbcd 100644
---- a/configs/at91sam9xeek_nandflash_defconfig
-+++ b/configs/at91sam9xeek_nandflash_defconfig
-@@ -39,7 +39,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/axm_defconfig b/configs/axm_defconfig
-index 6098e5caf5b..bc54795395e 100644
---- a/configs/axm_defconfig
-+++ b/configs/axm_defconfig
-@@ -75,7 +75,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_SPL_OF_PLATDATA=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SPL_DM=y
- CONFIG_CLK=y
-diff --git a/configs/bcm7260_defconfig b/configs/bcm7260_defconfig
-index ed026e58617..83008602004 100644
---- a/configs/bcm7260_defconfig
-+++ b/configs/bcm7260_defconfig
-@@ -34,7 +34,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_DOS_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NO_NET=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/bcm7445_defconfig b/configs/bcm7445_defconfig
-index 07294451100..7f940e58339 100644
---- a/configs/bcm7445_defconfig
-+++ b/configs/bcm7445_defconfig
-@@ -36,7 +36,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_DOS_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NO_NET=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/bk4r1_defconfig b/configs/bk4r1_defconfig
-index 2b72ec91632..511c86313c3 100644
---- a/configs/bk4r1_defconfig
-+++ b/configs/bk4r1_defconfig
-@@ -54,7 +54,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ARP_TIMEOUT=500
- CONFIG_NETCONSOLE=y
-diff --git a/configs/brcp150_defconfig b/configs/brcp150_defconfig
-index badde918f41..a3e7fc664b3 100644
---- a/configs/brcp150_defconfig
-+++ b/configs/brcp150_defconfig
-@@ -74,7 +74,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
+ CONFIG_VERSION_VARIABLE=y
  CONFIG_NET_RETRY_COUNT=10
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FPGA_XILINX=y
-diff --git a/configs/brcp170_defconfig b/configs/brcp170_defconfig
-index 209c4dfcec2..60b623bbdbe 100644
---- a/configs/brcp170_defconfig
-+++ b/configs/brcp170_defconfig
-@@ -73,7 +73,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FPGA_XILINX=y
-diff --git a/configs/brcp1_1r_defconfig b/configs/brcp1_1r_defconfig
-index f4a7071e8eb..023665566bb 100644
---- a/configs/brcp1_1r_defconfig
-+++ b/configs/brcp1_1r_defconfig
-@@ -73,7 +73,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FPGA_XILINX=y
-diff --git a/configs/brcp1_1r_switch_defconfig b/configs/brcp1_1r_switch_defconfig
-index c15033db9ee..2077b73c47e 100644
---- a/configs/brcp1_1r_switch_defconfig
-+++ b/configs/brcp1_1r_switch_defconfig
-@@ -73,7 +73,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FPGA_XILINX=y
-diff --git a/configs/brcp1_2r_defconfig b/configs/brcp1_2r_defconfig
-index ead2f1f5450..a881d5d4803 100644
---- a/configs/brcp1_2r_defconfig
-+++ b/configs/brcp1_2r_defconfig
-@@ -73,7 +73,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FPGA_XILINX=y
 diff --git a/configs/brppt1_mmc_defconfig b/configs/brppt1_mmc_defconfig
-index d96fdaa2887..743c3255e46 100644
+index 2f336d3b64f..2bdd0f9c40b 100644
 --- a/configs/brppt1_mmc_defconfig
 +++ b/configs/brppt1_mmc_defconfig
-@@ -79,7 +79,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clocks clock-names interrupt-parent interrupt-controller interrupt-cells dma-names dmas "
- CONFIG_ENV_OVERWRITE=y
+@@ -81,7 +81,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_SYS_MMC_ENV_PART=2
-diff --git a/configs/brsmarc1_defconfig b/configs/brsmarc1_defconfig
-index ee70220ebad..a31049d1f6b 100644
---- a/configs/brsmarc1_defconfig
-+++ b/configs/brsmarc1_defconfig
-@@ -83,7 +83,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
  CONFIG_VERSION_VARIABLE=y
  CONFIG_NET_RETRY_COUNT=10
-diff --git a/configs/brsmarc2_defconfig b/configs/brsmarc2_defconfig
-index 5fdc669a12c..2bef76a3521 100644
---- a/configs/brsmarc2_defconfig
-+++ b/configs/brsmarc2_defconfig
-@@ -73,7 +73,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_FPGA_XILINX=y
 diff --git a/configs/brxre1_defconfig b/configs/brxre1_defconfig
-index 245e4a582f2..030ce1a3158 100644
+index 9bbe6bf447c..fdb7b8b5db2 100644
 --- a/configs/brxre1_defconfig
 +++ b/configs/brxre1_defconfig
-@@ -73,7 +73,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS=""
- CONFIG_ENV_OVERWRITE=y
+@@ -75,7 +75,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_SYS_MMC_ENV_PART=2
-diff --git a/configs/chiliboard_defconfig b/configs/chiliboard_defconfig
-index 8cb6b34ce76..3b4b04c9c88 100644
---- a/configs/chiliboard_defconfig
-+++ b/configs/chiliboard_defconfig
-@@ -46,7 +46,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=8000000.nand:128k(NAND.SPL),128k(NAND.SPL.back
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_BOOTP_SEND_HOSTNAME=y
-diff --git a/configs/corvus_defconfig b/configs/corvus_defconfig
-index 85cd4623c48..729ebf7a6c8 100644
---- a/configs/corvus_defconfig
-+++ b/configs/corvus_defconfig
-@@ -67,7 +67,7 @@ CONFIG_CMD_MTDPARTS=y
- CONFIG_DOS_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=20
- CONFIG_CLK=y
-diff --git a/configs/display5_defconfig b/configs/display5_defconfig
-index a00a042ada6..950e4c5d84d 100644
---- a/configs/display5_defconfig
-+++ b/configs/display5_defconfig
-@@ -95,7 +95,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=02008000.spi.1:128k(SPL),1m(u-boot),64k(env1),
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_BOUNCE_BUFFER=y
- CONFIG_BOOTCOUNT_LIMIT=y
-diff --git a/configs/display5_factory_defconfig b/configs/display5_factory_defconfig
-index 9965e00a1d0..3e545e5e12c 100644
---- a/configs/display5_factory_defconfig
-+++ b/configs/display5_factory_defconfig
-@@ -93,7 +93,7 @@ CONFIG_PARTITION_TYPE_GUID=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_BOUNCE_BUFFER=y
- CONFIG_DFU_MMC=y
-diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
-index f9cb732357c..ee4c91a2ed2 100644
---- a/configs/dra7xx_evm_defconfig
-+++ b/configs/dra7xx_evm_defconfig
-@@ -63,7 +63,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clocks clock-names interrupt-parent"
- CONFIG_ENV_OVERWRITE=y
- # CONFIG_ENV_IS_IN_FAT is not set
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
-index f6f00454aaa..930abba1c84 100644
---- a/configs/dra7xx_hs_evm_defconfig
-+++ b/configs/dra7xx_hs_evm_defconfig
-@@ -55,7 +55,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clocks clock-names interrupt-parent"
- CONFIG_ENV_OVERWRITE=y
- # CONFIG_ENV_IS_IN_FAT is not set
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/dra7xx_hs_evm_usb_defconfig b/configs/dra7xx_hs_evm_usb_defconfig
-index 850ccd934b7..9589d796464 100644
---- a/configs/dra7xx_hs_evm_usb_defconfig
-+++ b/configs/dra7xx_hs_evm_usb_defconfig
-@@ -51,7 +51,7 @@ CONFIG_SPL_MULTI_DTB_FIT_UNCOMPRESS_SZ=0x9000
- CONFIG_OF_SPL_REMOVE_PROPS="clocks clock-names interrupt-parent"
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/draco-etamin_defconfig b/configs/draco-etamin_defconfig
-index 6c175dd73b9..7fd2d87dfb9 100644
---- a/configs/draco-etamin_defconfig
-+++ b/configs/draco-etamin_defconfig
-@@ -69,7 +69,7 @@ CONFIG_OF_EMBED=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_RANGE=0x200000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_BOOTP_SEND_HOSTNAME=y
-diff --git a/configs/draco-rastaban_defconfig b/configs/draco-rastaban_defconfig
-index 521a090e376..9d8b5aff7a1 100644
---- a/configs/draco-rastaban_defconfig
-+++ b/configs/draco-rastaban_defconfig
-@@ -66,7 +66,7 @@ CONFIG_OF_EMBED=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_RANGE=0x80000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_BOOTP_SEND_HOSTNAME=y
-diff --git a/configs/draco-thuban_defconfig b/configs/draco-thuban_defconfig
-index 2c16db237f8..84fdd247c55 100644
---- a/configs/draco-thuban_defconfig
-+++ b/configs/draco-thuban_defconfig
-@@ -66,7 +66,7 @@ CONFIG_OF_EMBED=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_RANGE=0x80000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=10
- CONFIG_BOOTP_SEND_HOSTNAME=y
-diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-index 5facd418260..5f2009ca1f2 100644
---- a/configs/e850-96_defconfig
-+++ b/configs/e850-96_defconfig
-@@ -33,7 +33,7 @@ CONFIG_CMD_RNG=y
- CONFIG_PARTITION_TYPE_GUID=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_PART=2
- CONFIG_NO_NET=y
-diff --git a/configs/edison_defconfig b/configs/edison_defconfig
-index 1294577ea8f..7e85a91898e 100644
---- a/configs/edison_defconfig
-+++ b/configs/edison_defconfig
-@@ -34,7 +34,7 @@ CONFIG_CMD_EXT4_WRITE=y
- CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CPU=y
- CONFIG_DFU_TIMEOUT=y
-diff --git a/configs/gardena-smart-gateway-at91sam_defconfig b/configs/gardena-smart-gateway-at91sam_defconfig
-index fbcc84da9ae..e62e6ed397d 100644
---- a/configs/gardena-smart-gateway-at91sam_defconfig
-+++ b/configs/gardena-smart-gateway-at91sam_defconfig
-@@ -78,7 +78,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clocks clock-names interrupts interrupt-parent interrupts-extended dmas dma-names"
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="ubi"
- CONFIG_ENV_UBI_VOLUME="uboot_env0"
- CONFIG_ENV_UBI_VOLUME_REDUND="uboot_env1"
-diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
-index 109e7d0fc6c..d9ccf35afa3 100644
---- a/configs/gardena-smart-gateway-mt7688_defconfig
-+++ b/configs/gardena-smart-gateway-mt7688_defconfig
-@@ -71,7 +71,7 @@ CONFIG_MTDIDS_DEFAULT="spi-nand0=spi0.1,nor0=spi0.0"
- CONFIG_MTDPARTS_DEFAULT="spi0.0:640k(uboot),64k(uboot_env0),64k(uboot_env1),64k(factory),-(unused);spi0.1:-(nand)"
- CONFIG_CMD_UBI=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/gazerbeam_defconfig b/configs/gazerbeam_defconfig
-index 1fe7d2fc40b..a7a04bfa206 100644
---- a/configs/gazerbeam_defconfig
-+++ b/configs/gazerbeam_defconfig
-@@ -133,7 +133,7 @@ CONFIG_DOS_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_OF_LIVE=y
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xFE090000
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="uImage"
-diff --git a/configs/gwventana_emmc_defconfig b/configs/gwventana_emmc_defconfig
-index 95d5b1172ff..cf1b3b6fa66 100644
---- a/configs/gwventana_emmc_defconfig
-+++ b/configs/gwventana_emmc_defconfig
-@@ -91,7 +91,7 @@ CONFIG_OF_LIST="imx6q-gw51xx imx6dl-gw51xx imx6q-gw52xx imx6dl-gw52xx imx6q-gw53
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_PART=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/gwventana_nand_defconfig b/configs/gwventana_nand_defconfig
-index 1d8af5ce103..2bc28f6203c 100644
---- a/configs/gwventana_nand_defconfig
-+++ b/configs/gwventana_nand_defconfig
-@@ -95,7 +95,7 @@ CONFIG_OF_LIST="imx6q-gw51xx imx6dl-gw51xx imx6q-gw52xx imx6dl-gw52xx imx6q-gw53
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_NETCONSOLE=y
-diff --git a/configs/gxp_defconfig b/configs/gxp_defconfig
-index ec05c2572e8..9578468bc48 100644
---- a/configs/gxp_defconfig
-+++ b/configs/gxp_defconfig
-@@ -37,7 +37,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_MISC=y
- CONFIG_CMD_FAT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_NETCONSOLE=y
- CONFIG_MISC=y
- # CONFIG_MMC is not set
-diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
-index 0855081c9be..c2ece13e2a1 100644
---- a/configs/igep00x0_defconfig
-+++ b/configs/igep00x0_defconfig
-@@ -53,7 +53,7 @@ CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="clocks clock-names interrupt-parent"
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="UBI"
- CONFIG_ENV_UBI_VOLUME="config"
- CONFIG_ENV_UBI_VOLUME_REDUND="config_r"
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index bf80a19bd96..8715893bbcc 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -94,7 +94,7 @@ CONFIG_SPL_OF_PLATDATA=y
- # CONFIG_SPL_OF_PLATDATA_PARENT is not set
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="uImage"
- CONFIG_USE_HOSTNAME=y
-diff --git a/configs/imx28_xea_sb_defconfig b/configs/imx28_xea_sb_defconfig
-index c7751b5dc93..d7b54baa749 100644
---- a/configs/imx28_xea_sb_defconfig
-+++ b/configs/imx28_xea_sb_defconfig
-@@ -62,7 +62,7 @@ CONFIG_SPL_OF_PLATDATA=y
- # CONFIG_SPL_OF_PLATDATA_PARENT is not set
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="uImage"
- CONFIG_USE_HOSTNAME=y
-diff --git a/configs/imx6q_bosch_acc_defconfig b/configs/imx6q_bosch_acc_defconfig
-index 017c27479d2..b6cbd9fbb66 100644
---- a/configs/imx6q_bosch_acc_defconfig
-+++ b/configs/imx6q_bosch_acc_defconfig
-@@ -76,7 +76,7 @@ CONFIG_MULTI_DTB_FIT=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clocks clock-names interrupt-parent"
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_PART=1
- CONFIG_ENV_WRITEABLE_LIST=y
- CONFIG_ENV_ACCESS_IGNORE_FORCE=y
-diff --git a/configs/imx8m_data_modul.config b/configs/imx8m_data_modul.config
-index 37e11e518a8..ab883259f09 100644
---- a/configs/imx8m_data_modul.config
-+++ b/configs/imx8m_data_modul.config
-@@ -202,7 +202,7 @@ CONFIG_SYS_MMC_ENV_PART=1
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SYS_PBSIZE=2081
- CONFIG_SYS_PROMPT="u-boot=> "
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_TEXT_BASE=0x40200000
- CONFIG_TFTP_TSIZE=y
-diff --git a/configs/imx8mm-cl-iot-gate_defconfig b/configs/imx8mm-cl-iot-gate_defconfig
-index ea6a8789eea..064293c0f51 100644
---- a/configs/imx8mm-cl-iot-gate_defconfig
-+++ b/configs/imx8mm-cl-iot-gate_defconfig
-@@ -79,7 +79,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_NET_RETRY_COUNT=10
+diff --git a/configs/cgtqmx8_defconfig b/configs/cgtqmx8_defconfig
+index 93366dbc603..94020c8c1a7 100644
+--- a/configs/cgtqmx8_defconfig
++++ b/configs/cgtqmx8_defconfig
+@@ -68,7 +68,7 @@ CONFIG_CMD_FAT=y
  CONFIG_SPL_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=2
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/imx8mm-mx8menlo_defconfig b/configs/imx8mm-mx8menlo_defconfig
-index 8a4bb896663..32063bc9280 100644
---- a/configs/imx8mm-mx8menlo_defconfig
-+++ b/configs/imx8mm-mx8menlo_defconfig
-@@ -91,7 +91,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_PART=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
-index 2b3c0969cfd..c57b63c1e75 100644
---- a/configs/imx8mm-phygate-tauri-l_defconfig
-+++ b/configs/imx8mm-phygate-tauri-l_defconfig
-@@ -73,7 +73,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=2
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/imx8mm_phg_defconfig b/configs/imx8mm_phg_defconfig
-index 58dd8eb83f6..e6d0f41f418 100644
---- a/configs/imx8mm_phg_defconfig
-+++ b/configs/imx8mm_phg_defconfig
-@@ -62,7 +62,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_SPL_DM=y
+ CONFIG_SPL_CLK=y
+diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
+index 6e5cfa92ef1..53e7a33af3a 100644
+--- a/configs/dra7xx_evm_defconfig
++++ b/configs/dra7xx_evm_defconfig
+@@ -65,7 +65,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_NET_RETRY_COUNT=10
+diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
+index e4d5b117996..9b308548951 100644
+--- a/configs/dra7xx_hs_evm_defconfig
++++ b/configs/dra7xx_hs_evm_defconfig
+@@ -57,7 +57,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_NET_RETRY_COUNT=10
+diff --git a/configs/dra7xx_hs_evm_usb_defconfig b/configs/dra7xx_hs_evm_usb_defconfig
+index d81e1fc7ad6..f80cfde75ab 100644
+--- a/configs/dra7xx_hs_evm_usb_defconfig
++++ b/configs/dra7xx_hs_evm_usb_defconfig
+@@ -53,7 +53,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_NET_RETRY_COUNT=10
+diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
+index 4f76c0fefdd..e1e59d38294 100644
+--- a/configs/evb-rk3328_defconfig
++++ b/configs/evb-rk3328_defconfig
+@@ -41,7 +41,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
+index d2f999b48e2..1bbc03ffb82 100644
+--- a/configs/ficus-rk3399_defconfig
++++ b/configs/ficus-rk3399_defconfig
+@@ -31,7 +31,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
+index 5169b089687..88ce24c6572 100644
+--- a/configs/hihope_rzg2_defconfig
++++ b/configs/hihope_rzg2_defconfig
+@@ -24,7 +24,7 @@ CONFIG_MULTI_DTB_FIT_LZO=y
+ CONFIG_MULTI_DTB_FIT_USER_DEFINED_AREA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=0
++CONFIG_ENV_MMC_DEVICE_INDEX=0
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_PCA953X=y
+diff --git a/configs/imx6dl_mamoj_defconfig b/configs/imx6dl_mamoj_defconfig
+index 255bd611d12..87e8d2ac5b3 100644
+--- a/configs/imx6dl_mamoj_defconfig
++++ b/configs/imx6dl_mamoj_defconfig
+@@ -39,7 +39,7 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DFU_MMC=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+diff --git a/configs/imx8mm-cl-iot-gate-optee_defconfig b/configs/imx8mm-cl-iot-gate-optee_defconfig
+index b52341c1a49..5cb7ffd48c5 100644
+--- a/configs/imx8mm-cl-iot-gate-optee_defconfig
++++ b/configs/imx8mm-cl-iot-gate-optee_defconfig
+@@ -78,7 +78,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+diff --git a/configs/imx8mm-cl-iot-gate_defconfig b/configs/imx8mm-cl-iot-gate_defconfig
+index ede02659a8f..be0add6c176 100644
+--- a/configs/imx8mm-cl-iot-gate_defconfig
++++ b/configs/imx8mm-cl-iot-gate_defconfig
+@@ -81,7 +81,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+diff --git a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
+index bb90dee583a..544fcbf5d68 100644
+--- a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
++++ b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
+@@ -59,7 +59,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
+index d1540de3b84..c27bdaa15d1 100644
+--- a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
++++ b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
+@@ -59,7 +59,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
+index 7a7ee935f03..7c8a2060b1a 100644
+--- a/configs/imx8mm-phygate-tauri-l_defconfig
++++ b/configs/imx8mm-phygate-tauri-l_defconfig
+@@ -75,7 +75,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_CLK_COMPOSITE_CCF=y
+diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
+index fda40e1269d..52c9f007892 100644
+--- a/configs/imx8mm_beacon_defconfig
++++ b/configs/imx8mm_beacon_defconfig
+@@ -75,7 +75,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+diff --git a/configs/imx8mm_beacon_fspi_defconfig b/configs/imx8mm_beacon_fspi_defconfig
+index 7d1772c5d09..77db48da38f 100644
+--- a/configs/imx8mm_beacon_fspi_defconfig
++++ b/configs/imx8mm_beacon_fspi_defconfig
+@@ -78,7 +78,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
+index 02264e91b4e..0e0f764d2c7 100644
+--- a/configs/imx8mm_evk_defconfig
++++ b/configs/imx8mm_evk_defconfig
+@@ -61,7 +61,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+diff --git a/configs/imx8mm_evk_fspi_defconfig b/configs/imx8mm_evk_fspi_defconfig
+index a194eeb7dc5..f364e17bab2 100644
+--- a/configs/imx8mm_evk_fspi_defconfig
++++ b/configs/imx8mm_evk_fspi_defconfig
+@@ -63,7 +63,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
 diff --git a/configs/imx8mm_venice_defconfig b/configs/imx8mm_venice_defconfig
-index cc7dfcb1400..979c7b9d7f4 100644
+index 979c7b9d7f4..c7e630335f3 100644
 --- a/configs/imx8mm_venice_defconfig
 +++ b/configs/imx8mm_venice_defconfig
-@@ -89,7 +89,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
+@@ -90,7 +90,7 @@ CONFIG_OF_LIVE=y
  CONFIG_OF_LIST="freescale/imx8mm-venice-gw71xx-0x freescale/imx8mm-venice-gw72xx-0x freescale/imx8mm-venice-gw73xx-0x freescale/imx8mm-venice-gw7901 freescale/imx8mm-venice-gw7902 freescale/imx8mm-venice-gw7903 freescale/imx8mm-venice-gw7904 freescale/imx8mm-venice-gw75xx-0x"
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_DEV=2
+ CONFIG_ENV_REDUNDANT=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth0"
+diff --git a/configs/imx8mn_beacon_2g_defconfig b/configs/imx8mn_beacon_2g_defconfig
+index 0f9bf8586bd..0fd446c6e36 100644
+--- a/configs/imx8mn_beacon_2g_defconfig
++++ b/configs/imx8mn_beacon_2g_defconfig
+@@ -83,7 +83,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+diff --git a/configs/imx8mn_beacon_defconfig b/configs/imx8mn_beacon_defconfig
+index bb3ef43fa3f..860d1a9bd27 100644
+--- a/configs/imx8mn_beacon_defconfig
++++ b/configs/imx8mn_beacon_defconfig
+@@ -84,7 +84,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+diff --git a/configs/imx8mn_beacon_fspi_defconfig b/configs/imx8mn_beacon_fspi_defconfig
+index f340cb1b7c5..4fb7cfded51 100644
+--- a/configs/imx8mn_beacon_fspi_defconfig
++++ b/configs/imx8mn_beacon_fspi_defconfig
+@@ -83,7 +83,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+diff --git a/configs/imx8mn_ddr4_evk_defconfig b/configs/imx8mn_ddr4_evk_defconfig
+index 4edcda0dc85..f871bf1653d 100644
+--- a/configs/imx8mn_ddr4_evk_defconfig
++++ b/configs/imx8mn_ddr4_evk_defconfig
+@@ -66,7 +66,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_CLK_IMX8MN=y
+diff --git a/configs/imx8mn_var_som_defconfig b/configs/imx8mn_var_som_defconfig
+index cfa07c59901..3b41cdddddf 100644
+--- a/configs/imx8mn_var_som_defconfig
++++ b/configs/imx8mn_var_som_defconfig
+@@ -61,7 +61,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_USE_ETHPRIME=y
 diff --git a/configs/imx8mn_venice_defconfig b/configs/imx8mn_venice_defconfig
-index a7a838b61bb..2d9b716c862 100644
+index 2d9b716c862..3cdbcec1eed 100644
 --- a/configs/imx8mn_venice_defconfig
 +++ b/configs/imx8mn_venice_defconfig
-@@ -88,7 +88,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
+@@ -89,7 +89,7 @@ CONFIG_SPL_OF_CONTROL=y
  CONFIG_OF_LIVE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_DEV=2
+ CONFIG_ENV_REDUNDANT=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth0"
+diff --git a/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig b/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
+index 0679d041a6e..0649d746907 100644
+--- a/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
++++ b/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
+@@ -67,7 +67,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
+index 88cc025bd23..51b547c448f 100644
+--- a/configs/imx8mp_beacon_defconfig
++++ b/configs/imx8mp_beacon_defconfig
+@@ -82,7 +82,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx8mp_debix_model_a_defconfig b/configs/imx8mp_debix_model_a_defconfig
+index 9654a45d1db..2d3aca92e33 100644
+--- a/configs/imx8mp_debix_model_a_defconfig
++++ b/configs/imx8mp_debix_model_a_defconfig
+@@ -60,7 +60,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
+index 4ddb4f2683e..d3b51134ee6 100644
+--- a/configs/imx8mp_evk_defconfig
++++ b/configs/imx8mp_evk_defconfig
+@@ -68,7 +68,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx8mp_navqp_defconfig b/configs/imx8mp_navqp_defconfig
+index f7ae8c0a5b0..552665d27ca 100644
+--- a/configs/imx8mp_navqp_defconfig
++++ b/configs/imx8mp_navqp_defconfig
+@@ -59,7 +59,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx8mp_rsb3720a1_4G_defconfig b/configs/imx8mp_rsb3720a1_4G_defconfig
+index 000c536c9b7..b7a0b0533ba 100644
+--- a/configs/imx8mp_rsb3720a1_4G_defconfig
++++ b/configs/imx8mp_rsb3720a1_4G_defconfig
+@@ -96,7 +96,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx8mp_rsb3720a1_6G_defconfig b/configs/imx8mp_rsb3720a1_6G_defconfig
+index c7623f23aa7..1e2fad98b7d 100644
+--- a/configs/imx8mp_rsb3720a1_6G_defconfig
++++ b/configs/imx8mp_rsb3720a1_6G_defconfig
+@@ -96,7 +96,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
 diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_defconfig
-index 2e4cacf166d..bb43cf7ebfe 100644
+index bb43cf7ebfe..526a954aa85 100644
 --- a/configs/imx8mp_venice_defconfig
 +++ b/configs/imx8mp_venice_defconfig
-@@ -91,7 +91,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
+@@ -92,7 +92,7 @@ CONFIG_OF_LIVE=y
  CONFIG_OF_LIST="freescale/imx8mp-venice-gw71xx-2x freescale/imx8mp-venice-gw72xx-2x freescale/imx8mp-venice-gw73xx-2x freescale/imx8mp-venice-gw74xx freescale/imx8mp-venice-gw75xx-2x freescale/imx8mp-venice-gw82xx-2x"
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_DEV=2
+ CONFIG_ENV_REDUNDANT=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_IP_DEFRAG=y
-diff --git a/configs/imx8qxp_capricorn.config b/configs/imx8qxp_capricorn.config
-index 463e584530f..7b034d5ff1e 100644
---- a/configs/imx8qxp_capricorn.config
-+++ b/configs/imx8qxp_capricorn.config
-@@ -10,7 +10,7 @@ CONFIG_NR_DRAM_BANKS=3
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x2000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_PART=2
- 
- CONFIG_DM_GPIO=y
+ CONFIG_PROT_TCP_SACK=y
+diff --git a/configs/imx8mq_cm_defconfig b/configs/imx8mq_cm_defconfig
+index ac65565009e..8efbd61f9e3 100644
+--- a/configs/imx8mq_cm_defconfig
++++ b/configs/imx8mq_cm_defconfig
+@@ -57,7 +57,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
+index 6be4b95148e..a9262833486 100644
+--- a/configs/imx8mq_evk_defconfig
++++ b/configs/imx8mq_evk_defconfig
+@@ -68,7 +68,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+diff --git a/configs/imx8mq_phanbell_defconfig b/configs/imx8mq_phanbell_defconfig
+index ab53f90093e..42c9c8c3de7 100644
+--- a/configs/imx8mq_phanbell_defconfig
++++ b/configs/imx8mq_phanbell_defconfig
+@@ -71,7 +71,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+diff --git a/configs/imx8mq_reform2_defconfig b/configs/imx8mq_reform2_defconfig
+index 9cd1bb5e4e9..40e7bce9815 100644
+--- a/configs/imx8mq_reform2_defconfig
++++ b/configs/imx8mq_reform2_defconfig
+@@ -70,7 +70,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+diff --git a/configs/imx8qm_dmsse20a1_defconfig b/configs/imx8qm_dmsse20a1_defconfig
+index ddf6f0376a6..e066c2bcb58 100644
+--- a/configs/imx8qm_dmsse20a1_defconfig
++++ b/configs/imx8qm_dmsse20a1_defconfig
+@@ -64,7 +64,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/imx8qm_mek_defconfig b/configs/imx8qm_mek_defconfig
+index b73338299f7..113e0e0284a 100644
+--- a/configs/imx8qm_mek_defconfig
++++ b/configs/imx8qm_mek_defconfig
+@@ -74,7 +74,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_CLK=y
+diff --git a/configs/imx8qm_rom7720_a1_4G_defconfig b/configs/imx8qm_rom7720_a1_4G_defconfig
+index 588c398dec4..d95d10a6080 100644
+--- a/configs/imx8qm_rom7720_a1_4G_defconfig
++++ b/configs/imx8qm_rom7720_a1_4G_defconfig
+@@ -56,7 +56,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/imx8qxp_mek_defconfig b/configs/imx8qxp_mek_defconfig
+index 18fa27115fe..951d73fefd5 100644
+--- a/configs/imx8qxp_mek_defconfig
++++ b/configs/imx8qxp_mek_defconfig
+@@ -75,7 +75,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/imx91_11x11_evk_defconfig b/configs/imx91_11x11_evk_defconfig
+index 77681e547fd..e5168273197 100644
+--- a/configs/imx91_11x11_evk_defconfig
++++ b/configs/imx91_11x11_evk_defconfig
+@@ -81,7 +81,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx91_11x11_evk_inline_ecc_defconfig b/configs/imx91_11x11_evk_inline_ecc_defconfig
+index 29b0b54dbe8..9b1c5f8b0f1 100644
+--- a/configs/imx91_11x11_evk_inline_ecc_defconfig
++++ b/configs/imx91_11x11_evk_inline_ecc_defconfig
+@@ -81,7 +81,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
 diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
-index 66a431244b0..fc6f4c77df2 100644
+index 1c7a0a4c954..6210be64672 100644
 --- a/configs/imx93-phycore_defconfig
 +++ b/configs/imx93-phycore_defconfig
-@@ -85,7 +85,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
+@@ -87,7 +87,7 @@ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+ CONFIG_NET_RANDOM_ETHADDR=y
+diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
+index c1203508bc7..ba2da308705 100644
+--- a/configs/imx93_11x11_evk_defconfig
++++ b/configs/imx93_11x11_evk_defconfig
+@@ -77,7 +77,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_NOWHERE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_USE_ETHPRIME=y
-diff --git a/configs/imx_dhsom.config b/configs/imx_dhsom.config
-index d166b2cda2b..e293d61a488 100644
---- a/configs/imx_dhsom.config
-+++ b/configs/imx_dhsom.config
-@@ -25,7 +25,7 @@ CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SECT_SIZE_AUTO=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- 
- CONFIG_REGMAP=y
-diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
-index 5bb692ef3ad..55477c85807 100644
---- a/configs/iot2050_defconfig
-+++ b/configs/iot2050_defconfig
-@@ -83,7 +83,7 @@ CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_OF_LIST="ti/k3-am6528-iot2050-basic"
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SPL_DM=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SPL_REGMAP=y
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index a446074ad5d..2ae1743ac7b 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -78,7 +78,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM=y
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index e3cd59343f0..25d2302bf1f 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -79,7 +79,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM=y
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 99461cf6007..8aeeeb8bdc6 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -83,7 +83,7 @@ CONFIG_OF_LIST="ti/k3-j721e-common-proc-board"
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM=y
-diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
-index 084deea28d0..1f216ffdf25 100644
---- a/configs/j721s2_evm_a72_defconfig
-+++ b/configs/j721s2_evm_a72_defconfig
-@@ -75,7 +75,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM=y
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index 56af0230860..4589629c9ad 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -65,7 +65,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM=y
-diff --git a/configs/kmcent2_defconfig b/configs/kmcent2_defconfig
-index 76e98c9b2a4..1668ce51883 100644
---- a/configs/kmcent2_defconfig
-+++ b/configs/kmcent2_defconfig
-@@ -55,7 +55,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xebf00000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="fm1-mac5"
-diff --git a/configs/kmcoge5ne_defconfig b/configs/kmcoge5ne_defconfig
-index cf50e2d27d8..69ef6cf3b9b 100644
---- a/configs/kmcoge5ne_defconfig
-+++ b/configs/kmcoge5ne_defconfig
-@@ -158,7 +158,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/kmeter1_defconfig b/configs/kmeter1_defconfig
-index 7638fc2f5cf..267bbff81ae 100644
---- a/configs/kmeter1_defconfig
-+++ b/configs/kmeter1_defconfig
-@@ -137,7 +137,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/kmopti2_defconfig b/configs/kmopti2_defconfig
-index 1c750455fc6..803eae06696 100644
---- a/configs/kmopti2_defconfig
-+++ b/configs/kmopti2_defconfig
-@@ -144,7 +144,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/kmsupx5_defconfig b/configs/kmsupx5_defconfig
-index 5dd98175cd3..cd9bbc91e52 100644
---- a/configs/kmsupx5_defconfig
-+++ b/configs/kmsupx5_defconfig
-@@ -129,7 +129,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/kmtepr2_defconfig b/configs/kmtepr2_defconfig
-index 2b240b3380d..f3bec1d569f 100644
---- a/configs/kmtepr2_defconfig
-+++ b/configs/kmtepr2_defconfig
-@@ -143,7 +143,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
-index 9d37280138f..cdf8e406483 100644
---- a/configs/kontron-sl-mx8mm_defconfig
-+++ b/configs/kontron-sl-mx8mm_defconfig
-@@ -80,7 +80,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIST="imx8mm-kontron-bl imx8mm-kontron-bl-osm-s"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_USE_HOSTNAME=y
- CONFIG_HOSTNAME="kontron-mx8mm"
-diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
-index c5f145aadc1..6ddd21bd295 100644
---- a/configs/kontron_sl28_defconfig
-+++ b/configs/kontron_sl28_defconfig
-@@ -82,7 +82,7 @@ CONFIG_OF_UPSTREAM=y
- CONFIG_OF_LIST="freescale/fsl-ls1028a-kontron-sl28 freescale/fsl-ls1028a-kontron-sl28-var1 freescale/fsl-ls1028a-kontron-sl28-var2 freescale/fsl-ls1028a-kontron-sl28-var3 freescale/fsl-ls1028a-kontron-sl28-var4"
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RX_ETH_BUFFER=8
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SATA=y
-diff --git a/configs/kp_imx53_defconfig b/configs/kp_imx53_defconfig
-index 25edee32462..54cfc855f1e 100644
---- a/configs/kp_imx53_defconfig
-+++ b/configs/kp_imx53_defconfig
-@@ -39,7 +39,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth0"
+diff --git a/configs/imx93_9x9_qsb_defconfig b/configs/imx93_9x9_qsb_defconfig
+index 632e2290cf3..99c349a9295 100644
+--- a/configs/imx93_9x9_qsb_defconfig
++++ b/configs/imx93_9x9_qsb_defconfig
+@@ -79,7 +79,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ARP_TIMEOUT=200
- CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx93_9x9_qsb_inline_ecc_defconfig b/configs/imx93_9x9_qsb_inline_ecc_defconfig
+index 485452e7135..0966f166ec6 100644
+--- a/configs/imx93_9x9_qsb_inline_ecc_defconfig
++++ b/configs/imx93_9x9_qsb_inline_ecc_defconfig
+@@ -79,7 +79,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/imx93_var_som_defconfig b/configs/imx93_var_som_defconfig
+index 6811a6f58f5..1f7ff269487 100644
+--- a/configs/imx93_var_som_defconfig
++++ b/configs/imx93_var_som_defconfig
+@@ -88,7 +88,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/imx95_19x19_evk_defconfig b/configs/imx95_19x19_evk_defconfig
+index ad2e35b52c6..814570ee2ae 100644
+--- a/configs/imx95_19x19_evk_defconfig
++++ b/configs/imx95_19x19_evk_defconfig
+@@ -87,7 +87,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth0"
+diff --git a/configs/khadas-vim3_android_ab_defconfig b/configs/khadas-vim3_android_ab_defconfig
+index ef68e1cf1f5..e763f564ad1 100644
+--- a/configs/khadas-vim3_android_ab_defconfig
++++ b/configs/khadas-vim3_android_ab_defconfig
+@@ -57,7 +57,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ADC=y
+ CONFIG_SARADC_MESON=y
+diff --git a/configs/khadas-vim3_android_defconfig b/configs/khadas-vim3_android_defconfig
+index 3ad82c9afff..af34a379e84 100644
+--- a/configs/khadas-vim3_android_defconfig
++++ b/configs/khadas-vim3_android_defconfig
+@@ -56,7 +56,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ADC=y
+ CONFIG_SARADC_MESON=y
+diff --git a/configs/khadas-vim3l_android_ab_defconfig b/configs/khadas-vim3l_android_ab_defconfig
+index 8e439cad3c1..c95cd2831d6 100644
+--- a/configs/khadas-vim3l_android_ab_defconfig
++++ b/configs/khadas-vim3l_android_ab_defconfig
+@@ -57,7 +57,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ADC=y
+ CONFIG_SARADC_MESON=y
+diff --git a/configs/khadas-vim3l_android_defconfig b/configs/khadas-vim3l_android_defconfig
+index 56b4086ee3f..d1141cd8cb9 100644
+--- a/configs/khadas-vim3l_android_defconfig
++++ b/configs/khadas-vim3l_android_defconfig
+@@ -56,7 +56,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=2
+ CONFIG_ADC=y
+ CONFIG_SARADC_MESON=y
 diff --git a/configs/kp_imx6q_tpc_defconfig b/configs/kp_imx6q_tpc_defconfig
-index 7fd2bfb0efa..abc7f9fa3fe 100644
+index 88063a37e32..84cef56706b 100644
 --- a/configs/kp_imx6q_tpc_defconfig
 +++ b/configs/kp_imx6q_tpc_defconfig
-@@ -47,7 +47,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents interrupts dmas dma-names"
- CONFIG_ENV_OVERWRITE=y
+@@ -49,7 +49,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ARP_TIMEOUT=200
-diff --git a/configs/lxr2_defconfig b/configs/lxr2_defconfig
-index 0bc4ae0c7a5..a54f4ecbbef 100644
---- a/configs/lxr2_defconfig
-+++ b/configs/lxr2_defconfig
-@@ -71,7 +71,7 @@ CONFIG_EFI_PARTITION=y
- CONFIG_OF_CONTROL=y
+ CONFIG_BOUNCE_BUFFER=y
+ # CONFIG_BLOCK_CACHE is not set
+diff --git a/configs/mvebu_crb_cn9130_defconfig b/configs/mvebu_crb_cn9130_defconfig
+index 75b7f95be77..8a1e27287a3 100644
+--- a/configs/mvebu_crb_cn9130_defconfig
++++ b/configs/mvebu_crb_cn9130_defconfig
+@@ -43,7 +43,7 @@ CONFIG_MAC_PARTITION=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_AHCI_GENERIC=y
+diff --git a/configs/mvebu_db_cn9130_defconfig b/configs/mvebu_db_cn9130_defconfig
+index 000e5d3f3eb..81466f75cae 100644
+--- a/configs/mvebu_db_cn9130_defconfig
++++ b/configs/mvebu_db_cn9130_defconfig
+@@ -44,7 +44,7 @@ CONFIG_MAC_PARTITION=y
  CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_AHCI_GENERIC=y
+diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
+index c29f38fa49e..e8109fbe6c0 100644
+--- a/configs/mx6sabresd_defconfig
++++ b/configs/mx6sabresd_defconfig
+@@ -69,7 +69,7 @@ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_ARP_TIMEOUT=200
-diff --git a/configs/m53menlo_defconfig b/configs/m53menlo_defconfig
-index cc6ef49b1d0..a3333c2280c 100644
---- a/configs/m53menlo_defconfig
-+++ b/configs/m53menlo_defconfig
-@@ -70,7 +70,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_RANGE=0x80000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="fitImage"
-diff --git a/configs/mccmon6_nor_defconfig b/configs/mccmon6_nor_defconfig
-index 682ce3035b5..d9192617812 100644
---- a/configs/mccmon6_nor_defconfig
-+++ b/configs/mccmon6_nor_defconfig
-@@ -48,7 +48,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=8000000.nor:32m@0x0(mccmon6-image.nor),256k@0x
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x8060000
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_BOUNCE_BUFFER=y
-diff --git a/configs/mccmon6_sd_defconfig b/configs/mccmon6_sd_defconfig
-index 665dc9ee45a..41ae748c97e 100644
---- a/configs/mccmon6_sd_defconfig
-+++ b/configs/mccmon6_sd_defconfig
-@@ -46,7 +46,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=8000000.nor:32m@0x0(mccmon6-image.nor),256k@0x
+diff --git a/configs/mx6sxsabresd_defconfig b/configs/mx6sxsabresd_defconfig
+index 0dc2e2595f1..d28880797dc 100644
+--- a/configs/mx6sxsabresd_defconfig
++++ b/configs/mx6sxsabresd_defconfig
+@@ -42,7 +42,7 @@ CONFIG_CMD_FS_GENERIC=y
  CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x8060000
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_BOUNCE_BUFFER=y
-diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
-index 7497d20ee64..07612ef5e93 100644
---- a/configs/microblaze-generic_defconfig
-+++ b/configs/microblaze-generic_defconfig
-@@ -52,7 +52,7 @@ CONFIG_CMD_TFTPPUT=y
- CONFIG_CMD_CACHE=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_EMBED=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_USE_HOSTNAME=y
- CONFIG_HOSTNAME="microblaze-generic"
- CONFIG_NETCONSOLE=y
-diff --git a/configs/msc_sm2s_imx8mp_defconfig b/configs/msc_sm2s_imx8mp_defconfig
-index 6b2bb716293..9b0c529b3b2 100644
---- a/configs/msc_sm2s_imx8mp_defconfig
-+++ b/configs/msc_sm2s_imx8mp_defconfig
-@@ -65,7 +65,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
  CONFIG_USE_ETHPRIME=y
-diff --git a/configs/mscc_jr2_defconfig b/configs/mscc_jr2_defconfig
-index 0577b12d17f..dc509426162 100644
---- a/configs/mscc_jr2_defconfig
-+++ b/configs/mscc_jr2_defconfig
-@@ -52,7 +52,7 @@ CONFIG_OF_LIST="jr2_pcb110 jr2_pcb111 serval2_pcb112"
- CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
-diff --git a/configs/mscc_luton_defconfig b/configs/mscc_luton_defconfig
-index dfd6bc08873..c4fe30c5255 100644
---- a/configs/mscc_luton_defconfig
-+++ b/configs/mscc_luton_defconfig
-@@ -55,7 +55,7 @@ CONFIG_OF_LIST="luton_pcb090 luton_pcb091"
- CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
-diff --git a/configs/mscc_ocelot_defconfig b/configs/mscc_ocelot_defconfig
-index 23aff7ea462..9c978201ee1 100644
---- a/configs/mscc_ocelot_defconfig
-+++ b/configs/mscc_ocelot_defconfig
-@@ -54,7 +54,7 @@ CONFIG_OF_LIST="ocelot_pcb120 ocelot_pcb123"
- CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
-diff --git a/configs/mscc_serval_defconfig b/configs/mscc_serval_defconfig
-index 6ddcbe1efee..c6835153066 100644
---- a/configs/mscc_serval_defconfig
-+++ b/configs/mscc_serval_defconfig
-@@ -49,7 +49,7 @@ CONFIG_OF_LIST="serval_pcb106 serval_pcb105"
- CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
-diff --git a/configs/mscc_servalt_defconfig b/configs/mscc_servalt_defconfig
-index 629b55561a1..0979143e4a3 100644
---- a/configs/mscc_servalt_defconfig
-+++ b/configs/mscc_servalt_defconfig
-@@ -47,7 +47,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=spi_flash:1m(UBoot),256k(Env),256k(Env.bk)"
- CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
-diff --git a/configs/novena_defconfig b/configs/novena_defconfig
-index bf8fec5566f..dbd04b16786 100644
---- a/configs/novena_defconfig
-+++ b/configs/novena_defconfig
-@@ -54,7 +54,7 @@ CONFIG_CMD_EXT4_WRITE=y
- # CONFIG_SPL_PARTITION_UUIDS is not set
+ CONFIG_ETHPRIME="FEC"
+diff --git a/configs/mx6ul_14x14_evk_defconfig b/configs/mx6ul_14x14_evk_defconfig
+index 15709a1fcc7..0e35e5e6af5 100644
+--- a/configs/mx6ul_14x14_evk_defconfig
++++ b/configs/mx6ul_14x14_evk_defconfig
+@@ -57,7 +57,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="fitImage"
-diff --git a/configs/opos6uldev_defconfig b/configs/opos6uldev_defconfig
-index f7ed9e49359..1c96fd01eb8 100644
---- a/configs/opos6uldev_defconfig
-+++ b/configs/opos6uldev_defconfig
-@@ -73,7 +73,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/mx6ul_9x9_evk_defconfig b/configs/mx6ul_9x9_evk_defconfig
+index 127a64f6af9..e1482081493 100644
+--- a/configs/mx6ul_9x9_evk_defconfig
++++ b/configs/mx6ul_9x9_evk_defconfig
+@@ -55,7 +55,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_PART=1
- CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/pcm052_defconfig b/configs/pcm052_defconfig
-index d0d558ab11a..550e45b52ee 100644
---- a/configs/pcm052_defconfig
-+++ b/configs/pcm052_defconfig
-@@ -42,7 +42,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/mx6ull_14x14_evk_defconfig b/configs/mx6ull_14x14_evk_defconfig
+index 17f46e06627..0422edeb53d 100644
+--- a/configs/mx6ull_14x14_evk_defconfig
++++ b/configs/mx6ull_14x14_evk_defconfig
+@@ -38,7 +38,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_VYBRID_GPIO=y
- CONFIG_DM_I2C=y
-diff --git a/configs/pcm058_defconfig b/configs/pcm058_defconfig
-index 8ab2c1c069e..789c4c0f5ba 100644
---- a/configs/pcm058_defconfig
-+++ b/configs/pcm058_defconfig
-@@ -57,7 +57,7 @@ CONFIG_CMD_UBI=y
- CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/mx6ull_14x14_evk_plugin_defconfig b/configs/mx6ull_14x14_evk_plugin_defconfig
+index 2a9f85c1313..36d1f96f25d 100644
+--- a/configs/mx6ull_14x14_evk_plugin_defconfig
++++ b/configs/mx6ull_14x14_evk_plugin_defconfig
+@@ -39,7 +39,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SPL_DM=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth1"
+diff --git a/configs/mx6ulz_14x14_evk_defconfig b/configs/mx6ulz_14x14_evk_defconfig
+index a01bff6d8a8..9db0251a8a0 100644
+--- a/configs/mx6ulz_14x14_evk_defconfig
++++ b/configs/mx6ulz_14x14_evk_defconfig
+@@ -34,7 +34,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NO_NET=y
  CONFIG_BOUNCE_BUFFER=y
-diff --git a/configs/pg_wcom_expu1_defconfig b/configs/pg_wcom_expu1_defconfig
-index 4b82b077ea7..321e46e8c52 100644
---- a/configs/pg_wcom_expu1_defconfig
-+++ b/configs/pg_wcom_expu1_defconfig
-@@ -64,7 +64,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x60040000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="ethernet@2d90000"
-diff --git a/configs/pg_wcom_expu1_update_defconfig b/configs/pg_wcom_expu1_update_defconfig
-index 53d54789687..b53af5be52c 100644
---- a/configs/pg_wcom_expu1_update_defconfig
-+++ b/configs/pg_wcom_expu1_update_defconfig
-@@ -62,7 +62,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x60200000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="ethernet@2d90000"
-diff --git a/configs/pg_wcom_seli8_defconfig b/configs/pg_wcom_seli8_defconfig
-index 731ca435089..561df3ee009 100644
---- a/configs/pg_wcom_seli8_defconfig
-+++ b/configs/pg_wcom_seli8_defconfig
-@@ -64,7 +64,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x60040000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="ethernet@2d90000"
-diff --git a/configs/pg_wcom_seli8_update_defconfig b/configs/pg_wcom_seli8_update_defconfig
-index 2598e477ed5..2a631176095 100644
---- a/configs/pg_wcom_seli8_update_defconfig
-+++ b/configs/pg_wcom_seli8_update_defconfig
-@@ -62,7 +62,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0x60200000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="ethernet@2d90000"
+diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+index 16d22a0837e..5c6be8b85a7 100644
+--- a/configs/nanopi-r2c-plus-rk3328_defconfig
++++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+@@ -43,7 +43,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
+index 4195979f8ea..fa2b348f2e5 100644
+--- a/configs/nanopi-r2c-rk3328_defconfig
++++ b/configs/nanopi-r2c-rk3328_defconfig
+@@ -43,7 +43,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
+index a0530117e7d..bedcda2622c 100644
+--- a/configs/nanopi-r2s-rk3328_defconfig
++++ b/configs/nanopi-r2s-rk3328_defconfig
+@@ -43,7 +43,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+index 7d562be867f..7e40d9d91f8 100644
+--- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+@@ -48,7 +48,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+index c27b718bd63..36977865ad4 100644
+--- a/configs/orangepi-r1-plus-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-rk3328_defconfig
+@@ -48,7 +48,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
 diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
-index 8f52ec2ab90..4558bf89c12 100644
+index 6509471614a..96eacec1d23 100644
 --- a/configs/phycore-imx8mm_defconfig
 +++ b/configs/phycore-imx8mm_defconfig
-@@ -79,7 +79,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
+@@ -81,7 +81,7 @@ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=2
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_CLK_COMPOSITE_CCF=y
 diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index ed2171540af..9c88d53b8e4 100644
+index 24afa93b4bb..cb38898a245 100644
 --- a/configs/phycore-imx8mp_defconfig
 +++ b/configs/phycore-imx8mp_defconfig
-@@ -92,7 +92,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
+@@ -94,7 +94,7 @@ CONFIG_ENV_IS_IN_MMC=y
  CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=2
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+diff --git a/configs/phycore-rk3288_defconfig b/configs/phycore-rk3288_defconfig
+index bedcb960e3a..ee9cc2bd822 100644
+--- a/configs/phycore-rk3288_defconfig
++++ b/configs/phycore-rk3288_defconfig
+@@ -52,7 +52,7 @@ CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SYSCON=y
 diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
-index 11aaec67e2e..dd55893bddd 100644
+index dd55893bddd..35d693a17ed 100644
 --- a/configs/phycore_am62ax_a53_defconfig
 +++ b/configs/phycore_am62ax_a53_defconfig
-@@ -89,7 +89,7 @@ CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_NOWHERE=y
+@@ -90,7 +90,7 @@ CONFIG_ENV_IS_NOWHERE=y
  CONFIG_ENV_IS_IN_MMC=y
  CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_NET_RANDOM_ETHADDR=y
  CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_DEVICE_REMOVE=y
 diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index 5f91ca647fd..6a811ca4e7e 100644
+index 6a811ca4e7e..5e89076774e 100644
 --- a/configs/phycore_am62x_a53_defconfig
 +++ b/configs/phycore_am62x_a53_defconfig
-@@ -92,7 +92,7 @@ CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_NOWHERE=y
+@@ -93,7 +93,7 @@ CONFIG_ENV_IS_NOWHERE=y
  CONFIG_ENV_IS_IN_MMC=y
  CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_NET_RANDOM_ETHADDR=y
  CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
 diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-index 8b508d011e0..11482223247 100644
+index 11482223247..a8bf7d7339b 100644
 --- a/configs/phycore_am64x_a53_defconfig
 +++ b/configs/phycore_am64x_a53_defconfig
-@@ -92,7 +92,7 @@ CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_NOWHERE=y
+@@ -93,7 +93,7 @@ CONFIG_ENV_IS_NOWHERE=y
  CONFIG_ENV_IS_IN_MMC=y
  CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_REDUNDANT=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_NET_RANDOM_ETHADDR=y
  CONFIG_SPL_DM=y
-diff --git a/configs/pm9g45_defconfig b/configs/pm9g45_defconfig
-index fa8b53848b4..6d8ff63ba6c 100644
---- a/configs/pm9g45_defconfig
-+++ b/configs/pm9g45_defconfig
-@@ -44,7 +44,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_CLK=y
-diff --git a/configs/sam9x60ek_nandflash_defconfig b/configs/sam9x60ek_nandflash_defconfig
-index c1754e80dd1..2fab32b51d0 100644
---- a/configs/sam9x60ek_nandflash_defconfig
-+++ b/configs/sam9x60ek_nandflash_defconfig
-@@ -54,7 +54,7 @@ CONFIG_CMD_FAT=y
- CONFIG_CMD_UBI=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_REGMAP=y
- CONFIG_SYSCON=y
-diff --git a/configs/sama5d2_ptc_ek_nandflash_defconfig b/configs/sama5d2_ptc_ek_nandflash_defconfig
-index 0729cad701b..320be1be89f 100644
---- a/configs/sama5d2_ptc_ek_nandflash_defconfig
-+++ b/configs/sama5d2_ptc_ek_nandflash_defconfig
-@@ -47,7 +47,7 @@ CONFIG_CMD_EXT4=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_CLK=y
- CONFIG_CLK_AT91=y
-diff --git a/configs/sama5d36ek_cmp_nandflash_defconfig b/configs/sama5d36ek_cmp_nandflash_defconfig
-index 595cb9cb17f..91fcd73f01e 100644
---- a/configs/sama5d36ek_cmp_nandflash_defconfig
-+++ b/configs/sama5d36ek_cmp_nandflash_defconfig
-@@ -44,7 +44,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_CLK=y
-diff --git a/configs/sama5d3_xplained_nandflash_defconfig b/configs/sama5d3_xplained_nandflash_defconfig
-index 0e3eb7d7b01..831fccc485e 100644
---- a/configs/sama5d3_xplained_nandflash_defconfig
-+++ b/configs/sama5d3_xplained_nandflash_defconfig
-@@ -69,7 +69,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-parent dmas dma-names"
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SPL_DM=y
  CONFIG_SPL_DM_SEQ_ALIAS=y
-diff --git a/configs/sama5d3xek_nandflash_defconfig b/configs/sama5d3xek_nandflash_defconfig
-index 995c9de1c80..4eefe091c90 100644
---- a/configs/sama5d3xek_nandflash_defconfig
-+++ b/configs/sama5d3xek_nandflash_defconfig
-@@ -67,7 +67,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-parent dmas dma-names"
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_SPL_DM=y
-diff --git a/configs/sama5d4_xplained_nandflash_defconfig b/configs/sama5d4_xplained_nandflash_defconfig
-index 5401f34adc6..43a40d370ad 100644
---- a/configs/sama5d4_xplained_nandflash_defconfig
-+++ b/configs/sama5d4_xplained_nandflash_defconfig
-@@ -65,7 +65,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-parent dma-names dmas"
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SPL_DM=y
- CONFIG_CLK=y
-diff --git a/configs/sama5d4ek_nandflash_defconfig b/configs/sama5d4ek_nandflash_defconfig
-index b22e0dd18a3..268e04676a5 100644
---- a/configs/sama5d4ek_nandflash_defconfig
-+++ b/configs/sama5d4ek_nandflash_defconfig
-@@ -64,7 +64,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-parent dma-names dmas"
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SPL_DM=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
-diff --git a/configs/smartweb_defconfig b/configs/smartweb_defconfig
-index 7253c997b24..cca9cb8f6e7 100644
---- a/configs/smartweb_defconfig
-+++ b/configs/smartweb_defconfig
-@@ -71,7 +71,7 @@ CONFIG_OF_EMBED=y
+diff --git a/configs/pico-imx8mq_defconfig b/configs/pico-imx8mq_defconfig
+index 0e14944eed7..63feb839c17 100644
+--- a/configs/pico-imx8mq_defconfig
++++ b/configs/pico-imx8mq_defconfig
+@@ -71,7 +71,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_RANGE=0x80000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RETRY_COUNT=20
- CONFIG_CLK=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index 4e12900d279..90d8313723e 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -56,7 +56,7 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_SPI_MAX_HZ=50000000
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_BUTTON=y
+ CONFIG_BUTTON_GPIO=y
+diff --git a/configs/riotboard_defconfig b/configs/riotboard_defconfig
+index b3f6498d528..2ed3eb546c9 100644
+--- a/configs/riotboard_defconfig
++++ b/configs/riotboard_defconfig
+@@ -45,7 +45,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
+index 812dd9f3ccc..fc79cfb6e15 100644
+--- a/configs/roc-cc-rk3328_defconfig
++++ b/configs/roc-cc-rk3328_defconfig
+@@ -41,7 +41,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
+index 67edcb35dc5..4b84223be33 100644
+--- a/configs/rock-pi-e-rk3328_defconfig
++++ b/configs/rock-pi-e-rk3328_defconfig
+@@ -39,7 +39,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/rock-pi-e-v3-rk3328_defconfig b/configs/rock-pi-e-v3-rk3328_defconfig
+index 053a964c667..39bbed8fdbe 100644
+--- a/configs/rock-pi-e-v3-rk3328_defconfig
++++ b/configs/rock-pi-e-v3-rk3328_defconfig
+@@ -40,7 +40,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+index d7cedbfc925..12cdf2e9e21 100644
+--- a/configs/rock64-rk3328_defconfig
++++ b/configs/rock64-rk3328_defconfig
+@@ -46,7 +46,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_TPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
+index 298f4ee0df0..db121f03ae6 100644
+--- a/configs/rock960-rk3399_defconfig
++++ b/configs/rock960-rk3399_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+diff --git a/configs/s5p4418_nanopi2_defconfig b/configs/s5p4418_nanopi2_defconfig
+index 548963c933f..0b265f104e4 100644
+--- a/configs/s5p4418_nanopi2_defconfig
++++ b/configs/s5p4418_nanopi2_defconfig
+@@ -48,7 +48,7 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_CMD_FAT=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_NO_NET=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_NEXELL=y
+diff --git a/configs/sei510_defconfig b/configs/sei510_defconfig
+index b9bedcc4baf..65f7e8c212c 100644
+--- a/configs/sei510_defconfig
++++ b/configs/sei510_defconfig
+@@ -52,7 +52,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_DFU_RAM=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+diff --git a/configs/sei610_defconfig b/configs/sei610_defconfig
+index 770a487398f..90f7a6fbf27 100644
+--- a/configs/sei610_defconfig
++++ b/configs/sei610_defconfig
+@@ -52,7 +52,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_DFU_RAM=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
 diff --git a/configs/smegw01_defconfig b/configs/smegw01_defconfig
-index ae6c9b60cd5..fe7cbc765b7 100644
+index b3acec921df..529836e7bdd 100644
 --- a/configs/smegw01_defconfig
 +++ b/configs/smegw01_defconfig
-@@ -49,7 +49,7 @@ CONFIG_CMD_SQUASHFS=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
+@@ -51,7 +51,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_WRITEABLE_LIST=y
-diff --git a/configs/socfpga_secu1_defconfig b/configs/socfpga_secu1_defconfig
-index f7ae13c891b..5fe35fe6eb8 100644
---- a/configs/socfpga_secu1_defconfig
-+++ b/configs/socfpga_secu1_defconfig
-@@ -67,7 +67,7 @@ CONFIG_CMD_UBI=y
- # CONFIG_EFI_PARTITION is not set
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="zImage"
- CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/socfpga_sr1500_defconfig b/configs/socfpga_sr1500_defconfig
-index 820b935b70a..39126d38d2b 100644
---- a/configs/socfpga_sr1500_defconfig
-+++ b/configs/socfpga_sr1500_defconfig
-@@ -54,7 +54,7 @@ CONFIG_CMD_UBI=y
- # CONFIG_ISO_PARTITION is not set
- # CONFIG_EFI_PARTITION is not set
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_VERSION_VARIABLE=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
-diff --git a/configs/socfpga_vining_fpga_defconfig b/configs/socfpga_vining_fpga_defconfig
-index b4e303ed6dd..031a0f25086 100644
---- a/configs/socfpga_vining_fpga_defconfig
-+++ b/configs/socfpga_vining_fpga_defconfig
-@@ -61,7 +61,7 @@ CONFIG_CMD_UBI=y
- # CONFIG_ISO_PARTITION is not set
- # CONFIG_EFI_PARTITION is not set
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="fitImage"
-diff --git a/configs/socrates_defconfig b/configs/socrates_defconfig
-index 93d2736ba89..d17b86b344d 100644
---- a/configs/socrates_defconfig
-+++ b/configs/socrates_defconfig
-@@ -68,7 +68,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=fe000000.nor_flash:13312k(system1),13312k(syst
- # CONFIG_CMD_IRQ is not set
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xFFF00000
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
  CONFIG_ENV_WRITEABLE_LIST=y
  CONFIG_ENV_ACCESS_IGNORE_FORCE=y
+ CONFIG_USE_BOOTFILE=y
+diff --git a/configs/somlabs_visionsom_6ull_defconfig b/configs/somlabs_visionsom_6ull_defconfig
+index d487a2e728e..852d7b984ba 100644
+--- a/configs/somlabs_visionsom_6ull_defconfig
++++ b/configs/somlabs_visionsom_6ull_defconfig
+@@ -39,7 +39,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="eth0"
 diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-index 530f6aa6380..a327d792579 100644
+index 2eab305cc5d..6ca6bd1261c 100644
 --- a/configs/stm32mp13_defconfig
 +++ b/configs/stm32mp13_defconfig
-@@ -50,7 +50,7 @@ CONFIG_CMD_UBI=y
- CONFIG_OF_LIVE=y
- CONFIG_ENV_IS_NOWHERE=y
+@@ -52,7 +52,7 @@ CONFIG_ENV_IS_NOWHERE=y
  CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=-1
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=-1
++CONFIG_ENV_MMC_DEVICE_INDEX=-1
  CONFIG_ENV_MMC_USE_DT=y
-diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-index fc095ac0de1..ff7afa02789 100644
---- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-@@ -57,7 +57,7 @@ CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- # CONFIG_SPL_ENV_IS_NOWHERE is not set
- CONFIG_USE_SERVERIP=y
-diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-index b243c45d690..0828e0cccb5 100644
---- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-@@ -57,7 +57,7 @@ CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- # CONFIG_SPL_ENV_IS_NOWHERE is not set
- CONFIG_USE_SERVERIP=y
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-index e635c726459..da37b553367 100644
---- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-@@ -57,7 +57,7 @@ CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- # CONFIG_SPL_ENV_IS_NOWHERE is not set
- CONFIG_USE_SERVERIP=y
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-index 9e7849ff8f0..90962431ce4 100644
---- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-@@ -57,7 +57,7 @@ CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- # CONFIG_SPL_ENV_IS_NOWHERE is not set
- CONFIG_USE_SERVERIP=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_BUTTON=y
+diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
+index 2da9287ea7b..2357692c4c4 100644
+--- a/configs/stm32mp13_dhcor_defconfig
++++ b/configs/stm32mp13_dhcor_defconfig
+@@ -34,7 +34,7 @@ CONFIG_ENV_SPI_MAX_HZ=50000000
+ CONFIG_CLK_SCMI=y
+ CONFIG_SET_DFU_ALT_INFO=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+-CONFIG_SYS_MMC_ENV_DEV=0
++CONFIG_ENV_MMC_DEVICE_INDEX=0
+ CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_REGULATOR_SCMI=y
 diff --git a/configs/stm32mp15-odyssey_defconfig b/configs/stm32mp15-odyssey_defconfig
-index 74fd2fb8e63..6c7cbc82c67 100644
+index 636a777f106..a317a6cae11 100644
 --- a/configs/stm32mp15-odyssey_defconfig
 +++ b/configs/stm32mp15-odyssey_defconfig
-@@ -59,7 +59,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="UBI"
+@@ -64,7 +64,7 @@ CONFIG_ENV_UBI_PART="UBI"
  CONFIG_ENV_UBI_VOLUME="uboot_config"
  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=-1
++CONFIG_ENV_MMC_DEVICE_INDEX=-1
+ CONFIG_ENV_MMC_USE_DT=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_USE_SERVERIP=y
 diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index e3090ec2a50..89735f5f5c6 100644
+index 856311e076d..4c8ad87e72b 100644
 --- a/configs/stm32mp15_basic_defconfig
 +++ b/configs/stm32mp15_basic_defconfig
-@@ -88,7 +88,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="UBI"
+@@ -93,7 +93,7 @@ CONFIG_ENV_UBI_PART="UBI"
  CONFIG_ENV_UBI_VOLUME="uboot_config"
  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=-1
++CONFIG_ENV_MMC_DEVICE_INDEX=-1
+ CONFIG_ENV_MMC_USE_DT=y
+ # CONFIG_SPL_ENV_IS_NOWHERE is not set
+ # CONFIG_SPL_ENV_IS_IN_SPI_FLASH is not set
 diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-index 5ddec18b520..af5f30509a6 100644
+index c99c5af3cd7..b3ec3898861 100644
 --- a/configs/stm32mp15_defconfig
 +++ b/configs/stm32mp15_defconfig
-@@ -60,7 +60,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="UBI"
+@@ -65,7 +65,7 @@ CONFIG_ENV_UBI_PART="UBI"
  CONFIG_ENV_UBI_VOLUME="uboot_config"
  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=-1
++CONFIG_ENV_MMC_DEVICE_INDEX=-1
+ CONFIG_ENV_MMC_USE_DT=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_USE_SERVERIP=y
 diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index f0e6b64ffde..56a76e226ff 100644
+index 6788e932224..09383ed4824 100644
 --- a/configs/stm32mp15_trusted_defconfig
 +++ b/configs/stm32mp15_trusted_defconfig
-@@ -61,7 +61,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_UBI_PART="UBI"
+@@ -66,7 +66,7 @@ CONFIG_ENV_UBI_PART="UBI"
  CONFIG_ENV_UBI_VOLUME="uboot_config"
  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=-1
++CONFIG_ENV_MMC_DEVICE_INDEX=-1
+ CONFIG_ENV_MMC_USE_DT=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_USE_SERVERIP=y
 diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index 317a6d5ecd6..f87812fa080 100644
+index f87812fa080..ade9daf7474 100644
 --- a/configs/stm32mp25_defconfig
 +++ b/configs/stm32mp25_defconfig
-@@ -43,7 +43,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_IS_IN_UBI=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
+@@ -47,7 +47,7 @@ CONFIG_ENV_REDUNDANT=y
  CONFIG_ENV_UBI_PART="UBI"
  CONFIG_ENV_UBI_VOLUME="uboot_config"
  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
-diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
-index 01d65cfd893..2e69a047ba9 100644
---- a/configs/stm32mp_dhsom.config
-+++ b/configs/stm32mp_dhsom.config
-@@ -83,7 +83,7 @@ CONFIG_SYS_DISABLE_AUTOLOAD=y
- CONFIG_SYS_I2C_STM32F7=y
- CONFIG_SYS_LOAD_ADDR=0xc2000000
- CONFIG_SYS_PROMPT="STM32MP> "
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_TFTP_TSIZE=y
- CONFIG_USB=y
-diff --git a/configs/taurus_defconfig b/configs/taurus_defconfig
-index 29fa4ea42af..dab30ce295e 100644
---- a/configs/taurus_defconfig
-+++ b/configs/taurus_defconfig
-@@ -81,7 +81,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_SPL_OF_PLATDATA=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SPL_DM=y
- CONFIG_CLK=y
-diff --git a/configs/theadorable-x86-conga-qa3-e3845-pcie-x4_defconfig b/configs/theadorable-x86-conga-qa3-e3845-pcie-x4_defconfig
-index fed54bc8207..393284fa5c4 100644
---- a/configs/theadorable-x86-conga-qa3-e3845-pcie-x4_defconfig
-+++ b/configs/theadorable-x86-conga-qa3-e3845-pcie-x4_defconfig
-@@ -49,7 +49,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_ISO_PARTITION=y
- CONFIG_AMIGA_PARTITION=y
+-CONFIG_SYS_MMC_ENV_DEV=-1
++CONFIG_ENV_MMC_DEVICE_INDEX=-1
+ CONFIG_NO_NET=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_BUTTON=y
+diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
+index 57d452f960c..efc3f195c1b 100644
+--- a/configs/tbs2910_defconfig
++++ b/configs/tbs2910_defconfig
+@@ -68,7 +68,7 @@ CONFIG_OF_REMOVE_PROPS="dmas dma-names interrupt-parent interrupts interrupts-ex
  CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="bzImage"
-diff --git a/configs/theadorable-x86-conga-qa3-e3845_defconfig b/configs/theadorable-x86-conga-qa3-e3845_defconfig
-index af81e78ccf5..803152b0b59 100644
---- a/configs/theadorable-x86-conga-qa3-e3845_defconfig
-+++ b/configs/theadorable-x86-conga-qa3-e3845_defconfig
-@@ -48,7 +48,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_MAC_PARTITION=y
- CONFIG_ISO_PARTITION=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DWC_AHSATA=y
+diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
+index 77c9567a27a..afbb394228f 100644
+--- a/configs/tinker-rk3288_defconfig
++++ b/configs/tinker-rk3288_defconfig
+@@ -46,7 +46,7 @@ CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
+index 1388212f18a..876086573d3 100644
+--- a/configs/tinker-s-rk3288_defconfig
++++ b/configs/tinker-s-rk3288_defconfig
+@@ -46,7 +46,7 @@ CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+diff --git a/configs/udoo_defconfig b/configs/udoo_defconfig
+index cb9ae022c99..db0d9e2c789 100644
+--- a/configs/udoo_defconfig
++++ b/configs/udoo_defconfig
+@@ -39,7 +39,7 @@ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="bzImage"
-diff --git a/configs/theadorable-x86-dfi-bt700_defconfig b/configs/theadorable-x86-dfi-bt700_defconfig
-index 0c9e6090617..9b64b6ef9d0 100644
---- a/configs/theadorable-x86-dfi-bt700_defconfig
-+++ b/configs/theadorable-x86-dfi-bt700_defconfig
-@@ -46,7 +46,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_MAC_PARTITION=y
- CONFIG_ISO_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="bzImage"
-diff --git a/configs/tqma6dl_mba6_spi_defconfig b/configs/tqma6dl_mba6_spi_defconfig
-index 953ceba6626..c2bd47359ab 100644
---- a/configs/tqma6dl_mba6_spi_defconfig
-+++ b/configs/tqma6dl_mba6_spi_defconfig
-@@ -41,7 +41,7 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DWC_AHSATA=y
+diff --git a/configs/udoo_neo_defconfig b/configs/udoo_neo_defconfig
+index 517313be9a5..d4fb271e03a 100644
+--- a/configs/udoo_neo_defconfig
++++ b/configs/udoo_neo_defconfig
+@@ -42,7 +42,7 @@ CONFIG_CMD_EXT4_WRITE=y
  CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="FEC"
-diff --git a/configs/tqma6q_mba6_spi_defconfig b/configs/tqma6q_mba6_spi_defconfig
-index 28b1bfc41f4..1a1248f2314 100644
---- a/configs/tqma6q_mba6_spi_defconfig
-+++ b/configs/tqma6q_mba6_spi_defconfig
-@@ -41,7 +41,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
+index abb64e8cd04..c2f78a9e90f 100644
+--- a/configs/verdin-imx8mp_defconfig
++++ b/configs/verdin-imx8mp_defconfig
+@@ -96,7 +96,7 @@ CONFIG_SPL_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="FEC"
-diff --git a/configs/tqma6s_mba6_spi_defconfig b/configs/tqma6s_mba6_spi_defconfig
-index 0af80d5c2e1..39d2d8ab5e1 100644
---- a/configs/tqma6s_mba6_spi_defconfig
-+++ b/configs/tqma6s_mba6_spi_defconfig
-@@ -41,7 +41,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="FEC"
-diff --git a/configs/tuge1_defconfig b/configs/tuge1_defconfig
-index ab0fd12bc48..dad17b39436 100644
---- a/configs/tuge1_defconfig
-+++ b/configs/tuge1_defconfig
-@@ -129,7 +129,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/tuxx1_defconfig b/configs/tuxx1_defconfig
-index e5a99b24dab..1ef7a472ace 100644
---- a/configs/tuxx1_defconfig
-+++ b/configs/tuxx1_defconfig
-@@ -143,7 +143,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=boot:768k(u-boot),128k(env),128k(envred),-(ubi
- CONFIG_CMD_UBI=y
- # CONFIG_CMD_UBIFS is not set
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_ADDR_REDUND=0xF00E0000
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="UEC0"
-diff --git a/configs/vining_2000_defconfig b/configs/vining_2000_defconfig
-index 5842916fbdb..e6de7431788 100644
---- a/configs/vining_2000_defconfig
-+++ b/configs/vining_2000_defconfig
-@@ -62,7 +62,7 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_EFI_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=2
++CONFIG_ENV_MMC_DEVICE_INDEX=2
  CONFIG_SYS_MMC_ENV_PART=1
  CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-diff --git a/configs/work_92105_defconfig b/configs/work_92105_defconfig
-index 0b4989ca002..0091a897ab6 100644
---- a/configs/work_92105_defconfig
-+++ b/configs/work_92105_defconfig
-@@ -50,7 +50,7 @@ CONFIG_CMD_MII=y
- CONFIG_CMD_PING=y
- CONFIG_DOS_PARTITION=y
- CONFIG_ENV_IS_IN_NAND=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="uImage"
- CONFIG_VERSION_VARIABLE=y
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index a82ccdc9a0c..2dce60298ef 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -66,7 +66,7 @@ CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_FAT=y
+ CONFIG_USE_ETHPRIME=y
+diff --git a/configs/vyasa-rk3288_defconfig b/configs/vyasa-rk3288_defconfig
+index 00935608bbb..c9de6f8ad26 100644
+--- a/configs/vyasa-rk3288_defconfig
++++ b/configs/vyasa-rk3288_defconfig
+@@ -56,7 +56,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SYSCON=y
+diff --git a/configs/x250_defconfig b/configs/x250_defconfig
+index 628ce40fc91..35bef079fd1 100644
+--- a/configs/x250_defconfig
++++ b/configs/x250_defconfig
+@@ -46,7 +46,7 @@ CONFIG_MAC_PARTITION=y
+ CONFIG_ENV_OVERWRITE=y
  CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_LWIP=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index ba4519ce303..82e346f5ba4 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -70,7 +70,7 @@ CONFIG_OF_BOARD=y
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_LWIP=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
-index 6859e24b731..9a058d5bc15 100644
---- a/configs/xilinx_zynq_virt_defconfig
-+++ b/configs/xilinx_zynq_virt_defconfig
-@@ -93,7 +93,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_LWIP=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index ae79f101701..3c9fcf59400 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -117,7 +117,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names interrupt-parent interrupts
- CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_FAT_DEVICE_AND_PART=":auto"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_LWIP=y
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index 29aa5891b23..f736f17466d 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -116,7 +116,7 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_FAT_DEVICE_AND_PART=":auto"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_LWIP=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
++CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_IPV6=y
+diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
+index f50c68bbdc3..a617e7f84f8 100644
+--- a/doc/device-tree-bindings/config.txt
++++ b/doc/device-tree-bindings/config.txt
+@@ -70,7 +70,7 @@ u-boot,mmc-env-offset-redundant (int)
+ u-boot,mmc-env-partition (int)
+ 	if present, the environment shall be placed at the last
+ 	CONFIG_ENV_SIZE blocks of the partition on the
+-	CONFIG_SYS_MMC_ENV_DEV.
++	CONFIG_ENV_MMC_DEVICE_INDEX.
+ 
+ 	if u-boot,mmc-env-offset* is present, this setting will take
+ 	precedence. In that case, only if the partition is not found,
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 9421a846e45..2c1f4f9c336 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -3278,8 +3278,8 @@ int mmc_set_bkops_enable(struct mmc *mmc, bool autobkops, bool enable)
+ 
+ __weak int mmc_get_env_dev(void)
+ {
+-#ifdef CONFIG_SYS_MMC_ENV_DEV
+-	return CONFIG_SYS_MMC_ENV_DEV;
++#ifdef CONFIG_ENV_MMC_DEVICE_INDEX
++	return CONFIG_ENV_MMC_DEVICE_INDEX;
+ #else
+ 	return 0;
+ #endif
+diff --git a/drivers/net/fm/fm.c b/drivers/net/fm/fm.c
+index a8caa0f0927..146f3f1fbd3 100644
+--- a/drivers/net/fm/fm.c
++++ b/drivers/net/fm/fm.c
+@@ -410,12 +410,12 @@ int fm_init_common(int index, struct ccsr_fman *reg, const char *firmware_name)
+ 			spi_flash_free(ucode_flash);
+ 		}
+ 	} else if (src == BOOT_SOURCE_SD_MMC) {
+-		int dev = CONFIG_SYS_MMC_ENV_DEV;
++		int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 
+ 		addr = malloc(CONFIG_SYS_QE_FMAN_FW_LENGTH);
+ 		u32 cnt = CONFIG_SYS_QE_FMAN_FW_LENGTH / 512;
+ 		u32 blk = CONFIG_SYS_FMAN_FW_ADDR / 512;
+-		struct mmc *mmc = find_mmc_device(CONFIG_SYS_MMC_ENV_DEV);
++		struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 		if (!mmc) {
+ 			printf("\nMMC cannot find device for ucode\n");
+@@ -514,11 +514,11 @@ int fm_init_common(int index, struct ccsr_fman *reg, const char *firmware_name)
+ 		spi_flash_free(ucode_flash);
+ 	}
+ #elif defined(CONFIG_SYS_QE_FMAN_FW_IN_MMC)
+-	int dev = CONFIG_SYS_MMC_ENV_DEV;
++	int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 	void *addr = malloc(CONFIG_SYS_QE_FMAN_FW_LENGTH);
+ 	u32 cnt = CONFIG_SYS_QE_FMAN_FW_LENGTH / 512;
+ 	u32 blk = CONFIG_SYS_FMAN_FW_ADDR / 512;
+-	struct mmc *mmc = find_mmc_device(CONFIG_SYS_MMC_ENV_DEV);
++	struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 	if (!mmc)
+ 		printf("\nMMC cannot find device for ucode\n");
+diff --git a/drivers/net/phy/cortina.c b/drivers/net/phy/cortina.c
+index d043e859bad..be480ecef6c 100644
+--- a/drivers/net/phy/cortina.c
++++ b/drivers/net/phy/cortina.c
+@@ -170,10 +170,10 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 			spi_flash_free(ucode_flash);
+ 		}
+ 	} else if (src == BOOT_SOURCE_SD_MMC) {
+-		int dev = CONFIG_SYS_MMC_ENV_DEV;
++		int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 		u32 cnt = CONFIG_CORTINA_FW_LENGTH / 512;
+ 		u32 blk = cortina_fw_addr / 512;
+-		struct mmc *mmc = find_mmc_device(CONFIG_SYS_MMC_ENV_DEV);
++		struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 		if (!mmc) {
+ 			puts("Failed to find MMC device for Cortina ucode\n");
+@@ -223,10 +223,10 @@ void cs4340_upload_firmware(struct phy_device *phydev)
+ 		spi_flash_free(ucode_flash);
+ 	}
+ #elif defined(CONFIG_SYS_CORTINA_FW_IN_MMC)
+-	int dev = CONFIG_SYS_MMC_ENV_DEV;
++	int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 	u32 cnt = CONFIG_CORTINA_FW_LENGTH / 512;
+ 	u32 blk = cortina_fw_addr / 512;
+-	struct mmc *mmc = find_mmc_device(CONFIG_SYS_MMC_ENV_DEV);
++	struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 	if (!mmc) {
+ 		puts("Failed to find MMC device for Cortina ucode\n");
+diff --git a/drivers/qe/qe.c b/drivers/qe/qe.c
+index 9631337b8d9..69b7de084e5 100644
+--- a/drivers/qe/qe.c
++++ b/drivers/qe/qe.c
+@@ -243,7 +243,7 @@ void u_qe_init(void)
+ 				CFG_SYS_FSL_QSPI_BASE);
+ 
+ 	if (src == BOOT_SOURCE_SD_MMC) {
+-		int dev = CONFIG_SYS_MMC_ENV_DEV;
++		int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 		u32 cnt = CONFIG_SYS_QE_FMAN_FW_LENGTH / 512;
+ 		u32 blk = CONFIG_SYS_QE_FW_ADDR / 512;
+ 
+@@ -252,7 +252,7 @@ void u_qe_init(void)
+ 			return;
+ 		}
+ 		addr = malloc(CONFIG_SYS_QE_FMAN_FW_LENGTH);
+-		struct mmc *mmc = find_mmc_device(CONFIG_SYS_MMC_ENV_DEV);
++		struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 		if (!mmc) {
+ 			free(addr);
+@@ -277,7 +277,7 @@ void u_qe_init(void)
+ 
+ 	void *addr = (void *)CONFIG_SYS_QE_FW_ADDR;
+ #ifdef CONFIG_SYS_QE_FMAN_FW_IN_MMC
+-	int dev = CONFIG_SYS_MMC_ENV_DEV;
++	int dev = CONFIG_ENV_MMC_DEVICE_INDEX;
+ 	u32 cnt = CONFIG_SYS_QE_FMAN_FW_LENGTH / 512;
+ 	u32 blk = CONFIG_SYS_QE_FW_ADDR / 512;
+ 
+@@ -286,7 +286,7 @@ void u_qe_init(void)
+ 		return;
+ 	}
+ 	addr = malloc(CONFIG_SYS_QE_FMAN_FW_LENGTH);
+-	struct mmc *mmc = find_mmc_device(CONFIG_SYS_MMC_ENV_DEV);
++	struct mmc *mmc = find_mmc_device(CONFIG_ENV_MMC_DEVICE_INDEX);
+ 
+ 	if (!mmc) {
+ 		printf("\nMMC cannot find device for ucode\n");
 diff --git a/env/Kconfig b/env/Kconfig
-index ee47b565213..414db543b82 100644
+index e551ffe45c3..1decdd89648 100644
 --- a/env/Kconfig
 +++ b/env/Kconfig
-@@ -489,7 +489,7 @@ config ENV_IS_IN_UBI
- 	  the environment in.  This will enable redundant environments in UBI.
- 	  It is assumed that both volumes are in the same MTD partition.
+@@ -215,7 +215,7 @@ config ENV_IS_IN_MMC
+ 	  Define this if you have an MMC device which you want to use for the
+ 	  environment.
  
--config SYS_REDUNDAND_ENVIRONMENT
-+config ENV_REDUNDANT
- 	bool "Enable redundant environment support"
+-	  CONFIG_SYS_MMC_ENV_DEV:
++	  CONFIG_ENV_MMC_DEVICE_INDEX:
+ 
+ 	  Specifies which MMC device the environment is stored in.
+ 
+@@ -698,13 +698,15 @@ config ENV_MTD_DEV
  	help
- 	  Normally, the environemt is stored in a single location.  By
-@@ -543,7 +543,7 @@ config ENV_FAT_FILE
+ 	  MTD device name on the platform where the environment is stored.
  
- config ENV_FAT_FILE_REDUND
- 	string "Name of the FAT file to use for the environment"
--	depends on ENV_IS_IN_FAT && SYS_REDUNDAND_ENVIRONMENT
-+	depends on ENV_IS_IN_FAT && ENV_REDUNDANT
- 	default "uboot-redund.env"
+-config SYS_MMC_ENV_DEV
+-	int "mmc device number"
++config ENV_MMC_DEVICE_INDEX
++	int "SD/MMC device index"
+ 	depends on ENV_IS_IN_MMC || ENV_IS_IN_FAT || ENV_IS_IN_EXT4 || \
+ 		CMD_MVEBU_BUBT || FMAN_ENET || QE || PHY_CORTINA
+ 	default 0
  	help
- 	  It's a string of the FAT file name. This file use to store the
-@@ -595,7 +595,7 @@ config ENV_ADDR
+-	  MMC device number on the platform where the environment is stored.
++	  SD/MMC device index on the platform where the environment is stored.
++	  The index is often derived from DT aliases mmcN node ordering, and
++	  matches the 'mmc list' command output.
  
- config ENV_ADDR_REDUND
- 	hex "Redundant environment address"
--	depends on ENV_IS_IN_FLASH && SYS_REDUNDAND_ENVIRONMENT
-+	depends on ENV_IS_IN_FLASH && ENV_REDUNDANT
- 	help
- 	  Offset from the start of the device (or partition) of the redundant
- 	  environment location.
-@@ -625,7 +625,7 @@ config ENV_OFFSET
- config ENV_OFFSET_REDUND
- 	hex "Redundant environment offset"
- 	depends on (ENV_IS_IN_EEPROM || ENV_IS_IN_MMC || ENV_IS_IN_NAND || \
--		    ENV_IS_IN_SPI_FLASH) && SYS_REDUNDAND_ENVIRONMENT
-+		    ENV_IS_IN_SPI_FLASH) && ENV_REDUNDANT
- 	default 0x10C0000 if MICROBLAZE
- 	default 0x0
- 	help
-@@ -675,7 +675,7 @@ config ENV_UBI_VOLUME
- 
- config ENV_UBI_VOLUME_REDUND
- 	string "UBI redundant volume name"
--	depends on ENV_IS_IN_UBI && SYS_REDUNDAND_ENVIRONMENT
-+	depends on ENV_IS_IN_UBI && ENV_REDUNDANT
- 	help
- 	  Name of the redundant volume that you want to store the environment in.
- 
-diff --git a/env/common.c b/env/common.c
-index 86122582bc1..1e23c5de436 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -466,7 +466,7 @@ int env_import(const char *buf, int check, int flags)
- 	return -EIO;
- }
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- static unsigned char env_flags;
- 
- int env_check_redund(const char *buf1, int buf1_read_fail,
-@@ -543,7 +543,7 @@ int env_import_redund(const char *buf1, int buf1_read_fail,
- 
- 	return env_import((char *)ep, 0, flags);
- }
--#endif /* CONFIG_SYS_REDUNDAND_ENVIRONMENT */
-+#endif /* CONFIG_ENV_REDUNDANT */
- 
- /* Export the environment and generate CRC for it. */
- int env_export(env_t *env_out)
-@@ -560,7 +560,7 @@ int env_export(env_t *env_out)
- 
- 	env_out->crc = crc32(0, env_out->data, ENV_SIZE);
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	env_out->flags = ++env_flags; /* increase the serial */
- #endif
- 
-diff --git a/env/fat.c b/env/fat.c
-index 1ad301eaaff..65ee1c8e086 100644
---- a/env/fat.c
-+++ b/env/fat.c
-@@ -86,7 +86,7 @@ static int env_fat_save(void)
- 		return 1;
- 	}
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	if (gd->env_valid == ENV_VALID)
- 		file = CONFIG_ENV_FAT_FILE_REDUND;
- #endif
-@@ -101,7 +101,7 @@ static int env_fat_save(void)
- 		return 1;
- 	}
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	gd->env_valid = (gd->env_valid == ENV_REDUND) ? ENV_VALID : ENV_REDUND;
- #endif
- 
-@@ -112,7 +112,7 @@ static int env_fat_save(void)
- static int env_fat_load(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf1, CONFIG_ENV_SIZE);
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf2, CONFIG_ENV_SIZE);
- 	int err2;
- #endif
-@@ -153,7 +153,7 @@ static int env_fat_load(void)
- 	}
- 
- 	err1 = file_fat_read(CONFIG_ENV_FAT_FILE, buf1, CONFIG_ENV_SIZE);
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	err2 = file_fat_read(CONFIG_ENV_FAT_FILE_REDUND, buf2, CONFIG_ENV_SIZE);
- 
- 	err1 = (err1 >= 0) ? 0 : -1;
+ config SYS_MMC_ENV_PART
+ 	int "mmc partition number"
 diff --git a/env/mmc.c b/env/mmc.c
-index 8848371eb4f..5451f914027 100644
+index 5451f914027..dba99bd4d3d 100644
 --- a/env/mmc.c
 +++ b/env/mmc.c
-@@ -186,7 +186,7 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
- 	defvalue = ENV_MMC_OFFSET;
- 	propname = dt_prop.offset;
- 
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT) && copy) {
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT) && copy) {
- 		defvalue = ENV_MMC_OFFSET_REDUND;
- 		propname = dt_prop.offset_redund;
- 	}
-@@ -198,7 +198,7 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
- {
- 	s64 offset = ENV_MMC_OFFSET;
- 
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT) && copy)
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT) && copy)
- 		offset = ENV_MMC_OFFSET_REDUND;
- 
- 	return offset;
-@@ -213,7 +213,7 @@ static bool mmc_env_is_redundant_in_both_boot_hwparts(struct mmc *mmc)
- 	 * identical, store the environment and redundant environment in both
- 	 * eMMC boot partitions, one copy in each.
- 	 */
--	if (!IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
-+	if (!IS_ENABLED(CONFIG_ENV_REDUNDANT))
- 		return false;
- 
- 	if (CONFIG_SYS_MMC_ENV_PART != 1)
-@@ -337,7 +337,7 @@ static int env_mmc_save(void)
- 	if (ret)
- 		goto fini;
- 
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT)) {
- 		if (gd->env_valid == ENV_VALID)
- 			copy = 1;
- 
-@@ -362,7 +362,7 @@ static int env_mmc_save(void)
- 
- 	ret = 0;
- 
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT))
- 		gd->env_valid = gd->env_valid == ENV_REDUND ? ENV_VALID : ENV_REDUND;
- 
- fini:
-@@ -411,7 +411,7 @@ static int env_mmc_erase(void)
- 	printf("\n");
- 	ret = erase_env(mmc, CONFIG_ENV_SIZE, offset);
- 
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT)) {
- 		copy = 1;
- 
- 		if (mmc_env_is_redundant_in_both_boot_hwparts(mmc)) {
-@@ -555,7 +555,7 @@ static int env_mmc_load(void)
- {
- 	if (IS_ENABLED(ENV_IS_EMBEDDED))
- 		return 0;
--	else if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
-+	else if (IS_ENABLED(CONFIG_ENV_REDUNDANT))
- 		return env_mmc_load_redundant();
- 	else
- 		return env_mmc_load_singular();
-diff --git a/env/sf.c b/env/sf.c
-index eb4c8d5ec95..0b70e18b9af 100644
---- a/env/sf.c
-+++ b/env/sf.c
-@@ -380,7 +380,7 @@ static int env_sf_init_early(void)
- 
- 	tmp_env1 = (env_t *)memalign(ARCH_DMA_MINALIGN,
- 			CONFIG_ENV_SIZE);
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT))
- 		tmp_env2 = (env_t *)memalign(ARCH_DMA_MINALIGN,
- 					     CONFIG_ENV_SIZE);
- 
-@@ -394,7 +394,7 @@ static int env_sf_init_early(void)
- 	read1_fail = spi_flash_read(env_flash, CONFIG_ENV_OFFSET,
- 				    CONFIG_ENV_SIZE, tmp_env1);
- 
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT)) {
- 		read2_fail = spi_flash_read(env_flash,
- 					    CONFIG_ENV_OFFSET_REDUND,
- 					    CONFIG_ENV_SIZE, tmp_env2);
-@@ -429,7 +429,7 @@ err_read:
- 	spi_flash_free(env_flash);
- 
- 	free(tmp_env1);
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT))
- 		free(tmp_env2);
- out:
- 	/* env is not valid. always return 0 */
-diff --git a/env/ubi.c b/env/ubi.c
-index 2f4ca571edb..f424b1a16e8 100644
---- a/env/ubi.c
-+++ b/env/ubi.c
-@@ -27,14 +27,14 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--#if CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#if CONFIG_ENV_REDUNDANT
- #define ENV_UBI_VOLUME_REDUND CONFIG_ENV_UBI_VOLUME_REDUND
+@@ -164,7 +164,7 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
+ #if defined(CONFIG_ENV_MMC_PARTITION)
+ 	str = CONFIG_ENV_MMC_PARTITION;
  #else
- #define ENV_UBI_VOLUME_REDUND "invalid"
+-	/* look for the partition in mmc CONFIG_SYS_MMC_ENV_DEV */
++	/* look for the partition in mmc CONFIG_ENV_MMC_DEVICE_INDEX */
+ 	str = ofnode_conf_read_str(dt_prop.partition);
  #endif
  
- #ifdef CONFIG_CMD_SAVEENV
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- static int env_ubi_save(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(env_t, env_new, 1);
-@@ -76,7 +76,7 @@ static int env_ubi_save(void)
- 
- 	return 0;
- }
--#else /* ! CONFIG_SYS_REDUNDAND_ENVIRONMENT */
-+#else /* ! CONFIG_ENV_REDUNDANT */
- static int env_ubi_save(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(env_t, env_new, 1);
-@@ -102,10 +102,10 @@ static int env_ubi_save(void)
- 	puts("done\n");
- 	return 0;
- }
--#endif /* CONFIG_SYS_REDUNDAND_ENVIRONMENT */
-+#endif /* CONFIG_ENV_REDUNDANT */
- #endif /* CONFIG_CMD_SAVEENV */
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- static int env_ubi_load(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, env1_buf, CONFIG_ENV_SIZE);
-@@ -149,7 +149,7 @@ static int env_ubi_load(void)
- 	return env_import_redund((char *)tmp_env1, read1_fail, (char *)tmp_env2,
- 				 read2_fail, H_EXTERNAL);
- }
--#else /* ! CONFIG_SYS_REDUNDAND_ENVIRONMENT */
-+#else /* ! CONFIG_ENV_REDUNDANT */
- static int env_ubi_load(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, CONFIG_ENV_SIZE);
-@@ -180,7 +180,7 @@ static int env_ubi_load(void)
- 
- 	return env_import(buf, 1, H_EXTERNAL);
- }
--#endif /* CONFIG_SYS_REDUNDAND_ENVIRONMENT */
-+#endif /* CONFIG_ENV_REDUNDANT */
- 
- static int env_ubi_erase(void)
- {
-@@ -202,7 +202,7 @@ static int env_ubi_erase(void)
- 		       CONFIG_ENV_UBI_VOLUME);
- 		ret = 1;
- 	}
--	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
-+	if (IS_ENABLED(CONFIG_ENV_REDUNDANT)) {
- 		if (ubi_volume_write(ENV_UBI_VOLUME_REDUND,
- 				     (void *)env_buf, 0, CONFIG_ENV_SIZE)) {
- 			printf("\n** Unable to erase env to %s:%s **\n",
-diff --git a/include/env_default.h b/include/env_default.h
-index 60c39f9853f..6e8f2ea90e7 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -16,7 +16,7 @@
- #ifdef DEFAULT_ENV_INSTANCE_EMBEDDED
- env_t embedded_environment __UBOOT_ENV_SECTION__(environment) = {
- 	ENV_CRC,	/* CRC Sum */
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	1,		/* Flags: valid */
+diff --git a/include/configs/cgtqmx8.h b/include/configs/cgtqmx8.h
+index 0d338389cb9..c27b504a95d 100644
+--- a/include/configs/cgtqmx8.h
++++ b/include/configs/cgtqmx8.h
+@@ -64,7 +64,7 @@
+ 	"fdt_addr=0x83000000\0"			\
+ 	"boot_fdt=try\0" \
+ 	"fdt_file=imx8qm-cgt-qmx8.dtb\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx7-cm.h b/include/configs/imx7-cm.h
+index 36c4c5b8b50..d305c566239 100644
+--- a/include/configs/imx7-cm.h
++++ b/include/configs/imx7-cm.h
+@@ -28,7 +28,7 @@
+ 	"console=ttymxc0\0" \
+ 	"fdt_file=imx7-cm.dtb\0" \
+ 	"fdt_addr=0x83000000\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"mmcargs=setenv bootargs console=${console},${baudrate} " \
+diff --git a/include/configs/imx8mm-cl-iot-gate.h b/include/configs/imx8mm-cl-iot-gate.h
+index 6ed4a6fd3fc..d5cdfaeed8b 100644
+--- a/include/configs/imx8mm-cl-iot-gate.h
++++ b/include/configs/imx8mm-cl-iot-gate.h
+@@ -76,7 +76,7 @@
+ 	"fdtfile=sb-iotgimx8.dtb\0" \
+ 	"initrd_addr=0x43800000\0"		\
+ 	"bootm_size=0x10000000\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx8mp_rsb3720.h b/include/configs/imx8mp_rsb3720.h
+index 8b96f7fd1e4..b0833171404 100644
+--- a/include/configs/imx8mp_rsb3720.h
++++ b/include/configs/imx8mp_rsb3720.h
+@@ -77,7 +77,7 @@
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"initrd_addr=0x43800000\0"		\
+ 	"bootm_size=0x10000000\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx8mq_phanbell.h b/include/configs/imx8mq_phanbell.h
+index 3bc4b0034e8..a30d0da5050 100644
+--- a/include/configs/imx8mq_phanbell.h
++++ b/include/configs/imx8mq_phanbell.h
+@@ -39,7 +39,7 @@
+ 	"fdt_file=imx8mq-phanbell.dtb\0" \
+ 	"initrd_addr=0x43800000\0"		\
+ 	"initrd_high=0xffffffffffffffff\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx8qm_mek.h b/include/configs/imx8qm_mek.h
+index 842184bcae2..24e7aa96ec1 100644
+--- a/include/configs/imx8qm_mek.h
++++ b/include/configs/imx8qm_mek.h
+@@ -34,7 +34,7 @@
+ 	"fdt_file=undefined\0" \
+ 	"initrd_addr=0x83800000\0"		\
+ 	"initrd_high=0xffffffffffffffff\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx8qm_rom7720.h b/include/configs/imx8qm_rom7720.h
+index df2cb8d9ced..cc94778bb65 100644
+--- a/include/configs/imx8qm_rom7720.h
++++ b/include/configs/imx8qm_rom7720.h
+@@ -58,7 +58,7 @@
+ 	"boot_fdt=try\0" \
+ 	"fdt_file=imx8qm-rom7720-a1.dtb\0" \
+ 	"initrd_addr=0x83800000\0"		\
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk2p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx8qxp_mek.h b/include/configs/imx8qxp_mek.h
+index 1b6eb2b81cf..abc3603bacf 100644
+--- a/include/configs/imx8qxp_mek.h
++++ b/include/configs/imx8qxp_mek.h
+@@ -34,7 +34,7 @@
+ 	"fdt_file=undefined\0" \
+ 	"initrd_addr=0x83800000\0"		\
+ 	"initrd_high=0xffffffffffffffff\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
+index eb40a69d20c..94355cf61e4 100644
+--- a/include/configs/imx93_evk.h
++++ b/include/configs/imx93_evk.h
+@@ -17,8 +17,8 @@
+ #define CFG_MALLOC_F_ADDR		0x204D0000
  #endif
- 	{
-diff --git a/include/env_internal.h b/include/env_internal.h
-index 75b46d0bcb0..0589c435e84 100644
---- a/include/env_internal.h
-+++ b/include/env_internal.h
-@@ -53,7 +53,7 @@ extern unsigned long nand_env_oob_offset;
  
- #include "compiler.h"
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- # define ENV_HEADER_SIZE	(sizeof(uint32_t) + 1)
+-#ifdef CONFIG_SYS_MMC_ENV_DEV
+-#define IMX93_EVK_MMC_ENV_DEV CONFIG_SYS_MMC_ENV_DEV
++#ifdef CONFIG_ENV_MMC_DEVICE_INDEX
++#define IMX93_EVK_MMC_ENV_DEV CONFIG_ENV_MMC_DEVICE_INDEX
  #else
- # define ENV_HEADER_SIZE	(sizeof(uint32_t))
-@@ -77,7 +77,7 @@ extern unsigned long nand_env_oob_offset;
- 
- typedef struct environment_s {
- 	uint32_t	crc;		/* CRC32 over data bytes	*/
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- 	unsigned char	flags;		/* active/obsolete flags ENVF_REDUND_ */
+ #define IMX93_EVK_MMC_ENV_DEV 0
  #endif
- 	unsigned char	data[ENV_SIZE]; /* Environment data		*/
-diff --git a/tools/envcrc.c b/tools/envcrc.c
-index 09051800364..7f680fb8a95 100644
---- a/tools/envcrc.c
-+++ b/tools/envcrc.c
+diff --git a/include/configs/liteboard.h b/include/configs/liteboard.h
+index fc6bc6b28ba..2934c76a662 100644
+--- a/include/configs/liteboard.h
++++ b/include/configs/liteboard.h
+@@ -30,7 +30,7 @@
+ 	"fdt_addr=0x83000000\0" \
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/mx6cuboxi.h b/include/configs/mx6cuboxi.h
+index 068b9e4d25f..711e2303c9c 100644
+--- a/include/configs/mx6cuboxi.h
++++ b/include/configs/mx6cuboxi.h
+@@ -33,7 +33,7 @@
+ 	"ip_dyn=yes\0" \
+ 	"console=ttymxc0\0" \
+ 	"bootm_size=0x10000000\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"finduuid=part uuid mmc 1:1 uuid\0" \
+ 	"update_sd_firmware=" \
+ 		"if test ${ip_dyn} = yes; then " \
+diff --git a/include/configs/mx6sabre_common.h b/include/configs/mx6sabre_common.h
+index 9c61350a33b..c8e5757d0bb 100644
+--- a/include/configs/mx6sabre_common.h
++++ b/include/configs/mx6sabre_common.h
+@@ -50,7 +50,7 @@
+ 	"fdt_high=0xffffffff\0"	  \
+ 	"initrd_high=0xffffffff\0" \
+ 	"splashimage=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"mmcpart=1\0" \
+ 	"finduuid=part uuid mmc ${mmcdev}:2 uuid\0" \
+ 	"update_sd_firmware=" \
+diff --git a/include/configs/mx6sllevk.h b/include/configs/mx6sllevk.h
+index 0ba4054bbe4..1ffad5931c4 100644
+--- a/include/configs/mx6sllevk.h
++++ b/include/configs/mx6sllevk.h
+@@ -23,7 +23,7 @@
+ 	"fdt_addr=0x83000000\0" \
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/mx6ul_14x14_evk.h b/include/configs/mx6ul_14x14_evk.h
+index 3716dc75b96..203a037e342 100644
+--- a/include/configs/mx6ul_14x14_evk.h
++++ b/include/configs/mx6ul_14x14_evk.h
+@@ -42,7 +42,7 @@
+ 	"ip_dyn=yes\0" \
+ 	"splashimage=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+ 	"videomode=video=ctfb:x:480,y:272,depth:24,pclk:108695,le:8,ri:4,up:2,lo:4,hs:41,vs:10,sync:0,vmode:0\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/mx6ullevk.h b/include/configs/mx6ullevk.h
+index 910140ab4b7..353267dddec 100644
+--- a/include/configs/mx6ullevk.h
++++ b/include/configs/mx6ullevk.h
+@@ -34,7 +34,7 @@
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
+ 	"videomode=video=ctfb:x:480,y:272,depth:24,pclk:108695,le:8,ri:4,up:2,lo:4,hs:41,vs:10,sync:0,vmode:0\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/mx7ulp_com.h b/include/configs/mx7ulp_com.h
+index f8e3950fa32..139536547de 100644
+--- a/include/configs/mx7ulp_com.h
++++ b/include/configs/mx7ulp_com.h
+@@ -35,7 +35,7 @@
+ 	"initrd_high=0xffffffff\0" \
+ 	"fdt_file=imx7ulp-com.dtb\0" \
+ 	"fdt_addr=0x63000000\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"mmcargs=setenv bootargs console=${console},${baudrate} " \
+diff --git a/include/configs/mx7ulp_evk.h b/include/configs/mx7ulp_evk.h
+index d1c1202d061..654537684ba 100644
+--- a/include/configs/mx7ulp_evk.h
++++ b/include/configs/mx7ulp_evk.h
+@@ -38,7 +38,7 @@
+ 	"boot_fdt=try\0" \
+ 	"earlycon=lpuart32,0x402D0010\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+diff --git a/include/configs/pico-imx6.h b/include/configs/pico-imx6.h
+index 500dd8c069a..f6a7ccfe87c 100644
+--- a/include/configs/pico-imx6.h
++++ b/include/configs/pico-imx6.h
+@@ -42,7 +42,7 @@
+ 	"initrd_high=0xffffffff\0" \
+ 	"fdt_addr_r=0x18000000\0" \
+ 	"fdt_addr=0x18000000\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	CFG_DFU_ENV_SETTINGS \
+ 	"finduuid=part uuid mmc 0:1 uuid\0" \
+ 	"findfdt="\
+diff --git a/include/configs/pico-imx8mq.h b/include/configs/pico-imx8mq.h
+index 3012f64c0ae..f80773f2bc1 100644
+--- a/include/configs/pico-imx8mq.h
++++ b/include/configs/pico-imx8mq.h
+@@ -33,7 +33,7 @@
+ 	"fdt_file=imx8mq-pico-pi.dtb\0"					\
+ 	"initrd_addr=0x43800000\0"					\
+ 	"initrd_high=0xffffffffffffffff\0"				\
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0"		\
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0"		\
+ 	"mmcpart=1\0"	\
+ 	"mmcroot=/dev/mmcblk1p2 rootwait rw\0"			\
+ 	"mmcautodetect=yes\0"						\
+diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
+index fd4d170456a..329fe3c86ed 100644
+--- a/include/configs/tqma6.h
++++ b/include/configs/tqma6.h
+@@ -54,7 +54,7 @@
+ 	"fdt_size="__stringify(TQMA6_FDT_SECTOR_COUNT)"\0"                     \
+ 	"kernel_start="__stringify(TQMA6_KERNEL_SECTOR_START)"\0"              \
+ 	"kernel_size="__stringify(TQMA6_KERNEL_SECTOR_COUNT)"\0"               \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0"                       \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0"                       \
+ 	"loadimage=mmc dev ${mmcdev}; "                                        \
+ 		"mmc read ${loadaddr} ${kernel_start} ${kernel_size};\0"       \
+ 	"loadfdt=mmc dev ${mmcdev}; "                                          \
+diff --git a/include/configs/vf610twr.h b/include/configs/vf610twr.h
+index d10b88f1575..072fdce7e90 100644
+--- a/include/configs/vf610twr.h
++++ b/include/configs/vf610twr.h
+@@ -52,7 +52,7 @@
+ 	"fdt_file=vf610-twr.dtb\0" \
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"update_sd_firmware_filename=u-boot.imx\0" \
+diff --git a/include/configs/wandboard.h b/include/configs/wandboard.h
+index b5b342b3538..7f764b90098 100644
+--- a/include/configs/wandboard.h
++++ b/include/configs/wandboard.h
+@@ -26,7 +26,7 @@
+ 	"fdt_addr_r=0x18000000\0" \
+ 	"fdt_addr=0x18000000\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
++	"mmcdev=" __stringify(CONFIG_ENV_MMC_DEVICE_INDEX) "\0" \
+ 	"finduuid=part uuid mmc 0:1 uuid\0" \
+ 	"update_sd_firmware_filename=u-boot.imx\0" \
+ 	"update_sd_firmware=" \
+diff --git a/include/configs/warp7.h b/include/configs/warp7.h
+index a5278d1cb9b..c79c4e5bafe 100644
+--- a/include/configs/warp7.h
++++ b/include/configs/warp7.h
+@@ -42,7 +42,7 @@
+ 	"fdtovaddr=0x83100000\0" \
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"rootpart=" __stringify(CONFIG_WARP7_ROOT_PART) "\0" \
+ 	"finduuid=part uuid mmc 0:${rootpart} uuid\0" \
+diff --git a/include/configs/xpress.h b/include/configs/xpress.h
+index 8efebf77c3d..aa4dd3e9b8d 100644
+--- a/include/configs/xpress.h
++++ b/include/configs/xpress.h
 @@ -40,7 +40,7 @@
- # endif
- #endif	/* CONFIG_ENV_IS_IN_FLASH */
- 
--#ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
-+#ifdef CONFIG_ENV_REDUNDANT
- # define ENV_HEADER_SIZE	(sizeof(uint32_t) + 1)
- #else
- # define ENV_HEADER_SIZE	(sizeof(uint32_t))
+ 	"fdt_addr=0x83000000\0" \
+ 	"boot_fdt=try\0" \
+ 	"ip_dyn=yes\0" \
+-	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
+ 	"mmcpart=1\0" \
+ 	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
 -- 
 2.47.2
 
