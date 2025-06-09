@@ -4,71 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4C5CC5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A460C61DB2
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:04:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56E4182B07;
-	Mon,  9 Jun 2025 10:02:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E329E82A36;
+	Mon,  9 Jun 2025 10:04:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gJgru6av";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97B1A82B0E; Mon,  9 Jun 2025 10:02:51 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1006F82A65
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:02:43 +0200 (CEST)
+ id EAF9A82A36; Mon,  9 Jun 2025 10:04:47 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 79FD380E9A
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:04:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55982WOE736299;
- Mon, 9 Jun 2025 03:02:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749456152;
- bh=lUBnHal8NYeeCB1jWF/YDGiiupteMM5F8PpMj1ORW5Q=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=gJgru6av/EskQSIBuBf/u2yPKqYEkz4pBk/R89PMbrevhjyeicTr0RZ1AzCQEdteM
- ONBUF9vfX133MgegOBNONr9404h6n+w/flr5Bg1a2Y10oa4V8t+guzB5FKPnE3lqdz
- tQTxtoCeiBxJUUFyDQVVYDQkoWNlalDwUEgL1W3M=
-Received: from DFLE20.ent.ti.com (dfle20.ent.ti.com [10.64.6.57])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55982WJd4118044
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 9 Jun 2025 03:02:32 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE20.ent.ti.com
- (10.64.6.57) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.1748.24; Mon, 9 Jun
- 2025 03:02:32 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 9 Jun 2025 03:02:31 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55982VBW944715;
- Mon, 9 Jun 2025 03:02:31 -0500
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 55984RC9027768
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Mon, 9 Jun 2025 16:04:27 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
+ 2025 16:04:27 +0800
+Date: Mon, 9 Jun 2025 16:04:23 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Yao Zi <ziyao@disroot.org>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, <rick@andestech.com>
+Subject: Re: [PULL] u-boot-riscv/next
+Message-ID: <aEaVh-cM9jVoKYAa@swlinux02>
+References: <aD6aAdsMpatCgcIn@swlinux02>
+ <20250605200506.GF1382132@bill-the-cat> <aET27PdD0VwuzOAB@pie>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 9 Jun 2025 13:31:57 +0530
-Message-ID: <DAHUFPAGK5AM.1RQ2R5MRYQUZN@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Rasmus Villemoes <ravi@prevas.dk>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Alexey Brodkin
- <alexey.brodkin@synopsys.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>, Michal Simek
- <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Rick Chen <rick@andestech.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- <uboot-snps-arc@synopsys.com>
-Subject: Re: [PATCH 08/12] arm: imx: remove unnecessary volatile qualifiers
- from "save gd" variables
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250604195612.2312979-1-ravi@prevas.dk>
- <20250604195612.2312979-9-ravi@prevas.dk>
-In-Reply-To: <20250604195612.2312979-9-ravi@prevas.dk>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <aET27PdD0VwuzOAB@pie>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 55984RC9027768
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,11 +67,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Jun 5, 2025 at 1:26 AM IST, Rasmus Villemoes wrote:
-> Now that the global gd pointer is no longer volatile-qualified,
-> there's no reason for the temporary variables used for
-> saving/restoring it to have that qualifier.
->
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+On Sun, Jun 08, 2025 at 02:37:04AM +0000, Yao Zi wrote:
+> [EXTERNAL MAIL]
+> 
+> On Thu, Jun 05, 2025 at 02:05:06PM -0600, Tom Rini wrote:
+> > On Tue, Jun 03, 2025 at 02:45:21PM +0800, Leo Liang wrote:
+> >
+> > > Hi Tom,
+> > >
+> > > The following changes since commit d45b1d4ac94710f88902adc2173d7930700e2869:
+> > >
+> > >   Merge tag 'u-boot-dfu-next-20250602' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next (2025-06-02 08:43:10 -0600)
+> > >
+> > > are available in the Git repository at:
+> > >
+> > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+> > >
+> > > for you to fetch changes up to b911af6d60d3be570469b92df751874dc376336b:
+> > >
+> > >   MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer (2025-06-03 14:17:46 +0800)
+> > >
+> > > CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26483
+> > > ----------------------------------------------------------------
+> > > - board: Convert Lichee Pi 4A to use S-Mode proper U-Boot
+> > > - RISC-V: configs: Raise SPL_SYS_MALLOC_SIZE to 8 MiB
+> > > - driver: Add SD card support to the Beagle-V-Fire
+> > > - MAINTAINERS: Add Yao Zi as maintainer for th1520
+> > > ----------------------------------------------------------------
+> >
+> > This introduces a failure to build on microchip_mpfs_icicle currently in
+> > -next.
+> 
+> microchip_mpfs_icicle_defconfig fails to build in u-boot-riscv/next as
+> well. Reverting b73971dea9fed ("spi: coreqspi: add xfer function for
+> PolarFire SoC") fixes it.
+> 
+> Seems the patch doesn't adapt the multiple-cs-capable definition of
+> dm_slave_plat, which was introduced in commit 34da258bb04 ("spi:
+> spi-uclass: Read chipselect and restrict capabilities") in the last
+> year. Thus I doubt whether the patch has been built and tested against a
+> recent version of U-Boot.
+> 
 
-Tested-by: Anshul Dalal <anshuld@ti.com>
+Sorry for the negligence.
+I will respin a PR for next and 
+ask the submitter to send a fixed patch set.
+
+Best regards,
+Leo
+
+> > --
+> > Tom
+> 
+> Regards,
+> Yao Zi
