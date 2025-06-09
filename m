@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920D9C61CE8
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 14:56:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4DA2C5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 14:57:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1FDB826AA;
-	Mon,  9 Jun 2025 16:56:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47AD88144A;
+	Mon,  9 Jun 2025 16:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jHb86qjB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gmtoarBQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4297282B18; Mon,  9 Jun 2025 16:56:38 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 311F1826AA; Mon,  9 Jun 2025 16:57:23 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 311C2811AC
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 16:56:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F64A811AC
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 16:57:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7c5b8d13f73so482735385a.0
- for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 07:56:36 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7300069c447so2912642a34.2
+ for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 07:57:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749480995; x=1750085795; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749481040; x=1750085840; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=W/EwFGGn6nHlwN8+gBC9ohFrEOlmibp+VjmeTfo/4yQ=;
- b=jHb86qjByWk4REM7BPpvl90/qG9htK4N/UbDhv8L79P/9NFnwqZXkrUxLfoRmKLsLj
- AKrLlugBGFCSd0oNi9eXbBauj+y0QtYBQR7yUzbdRaG8gm6xDFPXjsb5PSEhE4YiDf2u
- EMRg1yb7X5eCBeUWvE4oFOzG8iQ7qmZL6lS1E=
+ bh=+LJnwA+EyCzcO+arv32mgrh1AsXGYudSVkEaEFC+C+U=;
+ b=gmtoarBQZC2zpURaTGP7fBn8On93zmYW5jIljt2XdYcFHdVdAU2imzD81ac9ulEN90
+ 4ZNd6Stro+DE/Tx9eyNU50HdjcuVkjwSMeSdCH8LbSYaJ6mxHD22hjaxPSsWSIeuqMzT
+ Kq9jeIyn2IHtwPM1pM3IBbDTaYY8PdwNMK9KQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749480995; x=1750085795;
+ d=1e100.net; s=20230601; t=1749481040; x=1750085840;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W/EwFGGn6nHlwN8+gBC9ohFrEOlmibp+VjmeTfo/4yQ=;
- b=Z5rlI1zJvHj9gHS+n5D1pBeUkyrcTqiE0QkJrJ/SbmRH+0pc9ivrXAGXW/xhg6g009
- 3WRakU+41cl48UbDx+Ml15VFEet2lUavaN8MFnyT14TxFNWi9XZlnnit4XF60Iz3Yamk
- 1VrROftfOFwwbmmHxh4zMus5Xz1lmSn/UTZmJZwmcPS/f1b711X0eVCMarDaoZvMxJGA
- EHTajGkn2Hr+4z4MMKcu5Ssft5/nXnbVxnX8TVyb8d5xFzfkPwnTbamaslix061EbjDa
- 5cbFtreMLCufsXTl6fJa3nxYfyrQF2Kv4m1u5IKadGsg1TuNlgRSe9FN4pN+8Tkfssm/
- GfSA==
-X-Gm-Message-State: AOJu0YyOXSmbG9hkdzZOBewEXA3wOlM8CfjcWv84MBkuWiv/O4vIbSSp
- MkNJI4G2GBBU4a+DisgE5mB+Md0qMfPa5ogMhK2lnGwzAezGfLelITXFE0eJhGC73hahE2A6qW7
- s16GA2rA=
-X-Gm-Gg: ASbGncsMala7q355bwaFUQGts3NT7pU/NylBzkEFs8E9/BmMpHTo8IhHdPWH+bsfbtA
- IoFgTpSj3jOc7op+j7qYaEVFXR0NgCle5Bmj/KmTBwl2pVb+ndy4Mae9nfZQC4pYq0aqY64knNH
- w33DOGxE9/+bhRWiMcmpOsQtDPjZFeCI/NozVuLuUH5LoV7aWUaGQP9v7NE8/CbSPRh2l3yRW66
- UL/nEJdfWdrpZxS+/nj2sC+m68wN4OkKvYp/EC9BcvmPQFBuscAmzgvEOI1ep8GOoBHTyhcO5ir
- lbTRVjsCt4AZG8cPzZyx5q25YXaCyBvSpOenJZ5x7vXUfq9qQk187FfkJQIMAnSkfTEsitmBu/n
- lybRoW9QBVPv6PULUTNQ6aM4=
-X-Google-Smtp-Source: AGHT+IGA6AWOW9DstgBUEdid9dwkES2OF/rOUMZPLBzPXjeRkOMZisqCa+DJMT3D7QB4iVBPDPjF7g==
-X-Received: by 2002:a05:6870:219b:b0:2c1:461f:309a with SMTP id
- 586e51a60fabf-2ea00633ba1mr8040799fac.8.1749480983230; 
- Mon, 09 Jun 2025 07:56:23 -0700 (PDT)
+ bh=+LJnwA+EyCzcO+arv32mgrh1AsXGYudSVkEaEFC+C+U=;
+ b=U3Pf44ImdFssMnNFGP8fKRxrzWXjeoRSg8QVdFI0yhVs6b1kvMDqSoj3BD8JkxmBhm
+ rOMN8bXCh+vGcGksFtqU3GRk4OzXioYPHdcvGLUacAW0SjQTem4glcwjcK7DjWWb/oDJ
+ r+2YiD8QyJTGzNZylM3GTzxTRROjryOeIiwg9vlbC6EWYqXtlihn9EllZdSVVtm9AsTC
+ 4+fm1r8Z7mg5H8HwQNahV2J0ooN8xckM1HeMBdhH11kNZCqNtiCAQhaRQ+zGhyVBf6wh
+ BjelpnSzB3xWU/2Qf6GSzmWC4N1RwaoPlUFYOiXlSC2CxdHUZvucsRjv5Jl0PsMDwkMY
+ XHCg==
+X-Gm-Message-State: AOJu0Yyi00UpW9+y1PINQC4iWjugfZ6egCDec379HkQT2wn4Yzsj3DG/
+ u7dTgjwuRoRTFdX65wECnGPK+flwvxZLG5qM7dbD0BNrOKxhP5M+7WdY/WD4hIsTMDo=
+X-Gm-Gg: ASbGncswH0LVCeXHEQy5B/Syu9SaA2IeWuyuTsVj63ZZ5mmjLMZu/cpqy+FKnmlYcIc
+ C+EQbUE6WeD46Yegm7Bp2lAZxBQSnj6TZ0tYDCOQ+KxP55tcyfsUDZRwZvV0t23XrVpA2dbUebF
+ fEoIeHmKXX/5lkfKwhpcGpW8SZNNY5VFXmL1R+Ydu1gnkrNUzf5Z6FDu+yQ/9QjzVPGkZAvLYug
+ wdKFhoVFahw7j4zHf5IUhP3WAeBwpFwhGsqRMFWcf51JoMI9fGtVKlPSGm2EKBqIGyMODIbeCuf
+ 47mIK6DzAQZsHABjT8chhXOb/TjZUlOQOPEdCvZg9zph+tk7yElFSJ1tW4kSJ/029Va0BxxjIfP
+ 8iw74/i0cDPbE7qEfDyrk0xY=
+X-Google-Smtp-Source: AGHT+IHYPndHFVE1i5pp8do56YI2gecu11qk0/9IkFwbbBZeNMZLCC33YNWQKpGpgblaRkjGB68l8A==
+X-Received: by 2002:a05:6830:3896:b0:735:ac82:1ac8 with SMTP id
+ 46e09a7af769-73888f0d470mr9864707a34.17.1749481039777; 
+ Mon, 09 Jun 2025 07:57:19 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ea06fe57d0sm1908840fac.9.2025.06.09.07.56.22
+ 46e09a7af769-73889f2d220sm1591059a34.11.2025.06.09.07.57.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Jun 2025 07:56:22 -0700 (PDT)
-Date: Mon, 9 Jun 2025 08:56:20 -0600
+ Mon, 09 Jun 2025 07:57:19 -0700 (PDT)
+Date: Mon, 9 Jun 2025 08:57:16 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, Heiko Thiery <heiko.thiery@gmail.com>
-Subject: Re: [PATCH 1/7] scripts/Makefile.lib: Rework upstream_dtsi_include
- to use find
-Message-ID: <20250609145620.GL1382132@bill-the-cat>
-References: <20250528233050.3820722-1-trini@konsulko.com>
- <20250528233050.3820722-2-trini@konsulko.com>
- <aEbcfbPTLl7zZh1G@sumit-X1>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
+ n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
+Subject: Re: [PATCH v7 07/10] board: ti: add default dtb for am62 in falcon
+ mode
+Message-ID: <20250609145716.GM1382132@bill-the-cat>
+References: <20250603142452.2707171-1-anshuld@ti.com>
+ <20250603142452.2707171-8-anshuld@ti.com>
+ <20250606190956.GA1382132@bill-the-cat>
+ <DAHTVJ8QOH6P.1VUE8A6ES0CRJ@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IGM1abN/IKrdmmUy"
+ protocol="application/pgp-signature"; boundary="6Zp0b080Rn9RQrxE"
 Content-Disposition: inline
-In-Reply-To: <aEbcfbPTLl7zZh1G@sumit-X1>
+In-Reply-To: <DAHTVJ8QOH6P.1VUE8A6ES0CRJ@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,52 +101,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---IGM1abN/IKrdmmUy
+--6Zp0b080Rn9RQrxE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 09, 2025 at 02:07:09PM +0100, Sumit Garg wrote:
-> Hi Tom,
+On Mon, Jun 09, 2025 at 01:05:36PM +0530, Anshul Dalal wrote:
+> On Sat Jun 7, 2025 at 12:39 AM IST, Tom Rini wrote:
+> > On Tue, Jun 03, 2025 at 07:54:47PM +0530, Anshul Dalal wrote:
+> >
+> >> The SPL_FS_LOAD_ARGS_NAME config is used for the arguments to the kern=
+el
+> >> (dtb in our case) in falcon boot.
+> >>=20
+> >> Setting it in board specific Kconfig allows us to reuse the same config
+> >> fragment 'am62x_r5_falcon.config' for all 3 platforms for enabling
+> >> falcon boot.
+> >>=20
+> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> >> ---
+> >>  board/ti/am62ax/Kconfig | 3 +++
+> >>  board/ti/am62px/Kconfig | 3 +++
+> >>  board/ti/am62x/Kconfig  | 3 +++
+> >>  3 files changed, 9 insertions(+)
+> >
+> > Why can't whatever is using the fragment also set this? Is it because
+> > you're only using this as part of say:
+> > make am62ax_evm_r5_defconfig am62x_falcon.config
+> > ?
 >=20
-> Apologies for the delayed reply as I was on a vacation followed with a
-> business travel.
->=20
-> On Wed, May 28, 2025 at 05:27:04PM -0600, Tom Rini wrote:
-> > A problem with the logic in upstream_dtsi_include currently is that it
-> > does not list directories such as dts/upstream/src/arm/nxp/imx and so
-> > will not findi "imx6ul-pinfunc.h" for example as it is normally and
-> > correctly included without vendor sub-paths.
->=20
-> I can see the problem you are trying to solve here but I fear in future
-> we might see some header collisions when going too deeper into
-> sub-vendor paths include. But let's not worry too much about that at
-> this point until we see a collision as it's atleast provides a way to
-> drop redundant DT bindings headers. Thanks for working on this.
+> Correct, having three different config fragments with only changes to the
+> dtb path doesn't seem very useful imo.
 
-Yeah, I worry a little about this and wonder how this is handled
-upstream, but perhaps that will be clearer too once Ilias finishes
-upgrading our Kbuild logic to be modern again.
+Then these belong back in the main defconfig itself I think.
 
 --=20
 Tom
 
---IGM1abN/IKrdmmUy
+--6Zp0b080Rn9RQrxE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhG9hQACgkQFHw5/5Y0
-tyyuZQwAnR1cOMaBewIrLjJDniyHMuWdDsouD13Q8ECdPCmcmnmP9hxh0sbPJpjB
-kpoH5o8jyhj+zPx8c5Z69rHejEOdRrYWrC+2gD+WESTvYs5L/CRF/IrFTjfyCmRX
-UYGAJoArVaLVOZjR3zspZC2yS3f1C6geH4syJmOWnjtsJPH7IuyAvVE5lbUJVL0k
-Bq1+kWaELKEl+ReEGV57f4x/jGcYwGoAOUia65pLN4fvpy6kM3l6hPGUgfA3afnM
-9zxMXl4jXNRBTs7T7Rx4hTMso+83rkNrlzFllf8pQ5fc+U3SMlxr/fMk9hjM8l6I
-tmoqSMQGgbMGtP5zeIpda9Do8JVGZkruFx24HTb+gcJWjYNrB+j5/lD5d6lsoz88
-4O8CF7e4vl+pfzKRp5ksoroxePQn618Q2PH/f15IkK/skk4357/7JkOPqPGZFF0s
-N+dQrXGaMhx+Ea3gqVyw1K3SHzZsNO26H18yzokDeWZB3k8r7opMZwTjASfTiaNg
-2GCvn+xf
-=LJRv
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhG9kwACgkQFHw5/5Y0
+tyyDYgv+I5xmCctfOnYFVvqNxJXzTxzHfoFBcrjqYQFXYmXNsptR9qcU7nRkg9ob
+xVm3uOoB89f3n7LxUcqMxuNZa2n61sd0TmtkJgvyQ4KnFD57pU7Winnl78KsOVpF
+ALl9EgOn5yKsFUaiUZtFCFraf8UOuhA3JFRiUFZsLxLaA4n9l7KPrR2LJYwBoA6W
+9sa/tAukf7hLJFSTdLkn4nnxG0m4otwYI8dJVZTzp5iOaKe5FjEZMF26kFg9VAYd
+4/kthThMTl0zxuvPG68TSw5gYILmawme6wkVS5Z55xQcw/WXmvAApI6Y2XHEqsDN
+JjGOQPTXO1ZXwWV0IchsPS3FjNGNzwJwodQBLPWD2RlNIKdyQCZwYM5oz9UBjevk
+0YRPGSY0k60WsYDI2s2rFp2pDjwDeGqjr3sI2w3AX1lp536vDjU4guG00x3pYMUd
+c8uYAJy6sx5PUtJv+2Vtm7jCQn0iJTN8MCQ7fPLf3dM+2tckwxrT8dF9Mx/Pxx/r
+xp3iOdhX
+=EV+j
 -----END PGP SIGNATURE-----
 
---IGM1abN/IKrdmmUy--
+--6Zp0b080Rn9RQrxE--
