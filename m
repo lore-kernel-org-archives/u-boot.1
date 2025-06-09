@@ -4,64 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB576C5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE5DC61DB2
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34B7682A65;
-	Mon,  9 Jun 2025 10:27:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AAE6082A65;
+	Mon,  9 Jun 2025 10:30:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M6Z70yka";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YTYuuT09";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268E782B07; Mon,  9 Jun 2025 10:27:06 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF7D082A36
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:27:03 +0200 (CEST)
+ id 74F8782B07; Mon,  9 Jun 2025 10:30:31 +0200 (CEST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AE8B882A36
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:30:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5598R2Bt719076;
- Mon, 9 Jun 2025 03:27:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749457622;
- bh=a5xdj02mjraT9VZNoyK3OS5iWHBUOdVp4Zq7oHNaPoQ=;
- h=Date:Subject:From:To:References:In-Reply-To;
- b=M6Z70ykaqLNMAu63ck4UDzP7ZufUlQ/InMz5upxpZSCQoSGnwGCtEdIGf8SDk7sR3
- RQP6wVjXA/P0KahvHP5xvuGXKFilDz08YN//7VQYvVS/0pjTO/AC7pfBzm1Y5KjKL6
- CHAiOB2o0BJ4rlCbB9xrSecAiHw7b5q6rWCyXZnI=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5598R1c13669825
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 9 Jun 2025 03:27:02 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
- Jun 2025 03:27:01 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 9 Jun 2025 03:27:01 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5598R0xf975343;
- Mon, 9 Jun 2025 03:27:01 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-4a4312b4849so50122931cf.1
+ for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 01:30:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749457827; x=1750062627; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bml/OffESHrlZuoGt+xRCeEaRwYGBtCArhIBHvoYaOw=;
+ b=YTYuuT09vEKzDB+Nqc+7PnZZAwWYW2GcaXGBcxj3wdQrygnCGVbuJOAt7QOyVSgrTz
+ NnWoW6avs9UgrBWDO4e/hHEwXVu4t/l4RwQxW49SzarUqIagcgaaV3d96Nuvj+G83RXs
+ k1vz1bAbpnNdLoCdCgPck6p+RTWIC3Ydfuq89o69sGSMCc9bBUvFjgemKA03otgHJHBW
+ Q5kxrTir+eKG3UlrI053lfJVU80EolntswZ9H64q2ZX7XQvbSa6Aj2yWRi/nu3N02xLm
+ vf7ZDRTt0qhSk1CK5bjEu6L0NjC56hfrkYNWY779Tm6szzNNCllEAQQ2CogxXxS4jZTU
+ stLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749457827; x=1750062627;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bml/OffESHrlZuoGt+xRCeEaRwYGBtCArhIBHvoYaOw=;
+ b=ZzH/1VKz0/97aOAIYbEzCTa3fZt5XKwi/1bxhCYnLA1F8WwbsDMfBNWezba8dA3IAF
+ SuKTvswWXJXxXDbcAa0XBdCjYPs60ONN2IGYfSdS40sMlRXkphcsR6Fsh3KFhTY+WLjV
+ HVpAoWD8mPZgyCJhHvMqEnrAFO0JhtmD0FUhHYNEiVU6X1csgmMt7K9PryiH9q7xcluv
+ 2W5tFXhJGTy+xGTzJqqo857BpJOLSI5jN/KF56rtjCBEi7ifUa3zP5hXoQuwP61U7j3A
+ O86xU6rXFrAqkTh5DrwUTuTyjx52P5Grt3TgP0z/CNaXYDmMDAU2TeJP9MWL+Of6w8Ft
+ u/Gw==
+X-Gm-Message-State: AOJu0Yyoy8l8ikxUnKHGsAsblV0vN6cByFK1IhTCp4XnhgmcoBn+t1L2
+ SyW+Jun5fBDt++mJY8VWaDiXCMCQnGQBdeohHEg6EGgmyZ+G7dsI/LOFYOEu1cAuJdGAPlHiGwo
+ k/1rIzwL2vLIXHIJgZsmCJFTttlOmF0gQDPHY5lXuKA==
+X-Gm-Gg: ASbGncv5W5hUnSnLYQZVS9oNaFexlJhO6nyxglFBz9ZjapC5u+t4blTkTMSAsraAKQ+
+ lV7sO5aqrV3cQMWyLpZsU2eCXaL1TlQd1mZGQQRLX2oJ4AV4FTErgzkJsyjiUfzcBBZ3Ypg0cc7
+ FyrdeiVDw5i4ZV5vOEwGO+85CUwHh9kvN1hAk+hQ2EQSEt
+X-Google-Smtp-Source: AGHT+IGieVz2CSzWEgpAyq3tBzBUYvtOLns4auYlwEj9a4CtvKzOZaI/ULJZJUyHNBViq5Yrb0Nb8D7oW6KSi7+g4gI=
+X-Received: by 2002:ad4:5c81:0:b0:6fa:9d4b:fa10 with SMTP id
+ 6a1803df08f44-6fb08eeef5emr211550826d6.0.1749457827544; Mon, 09 Jun 2025
+ 01:30:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
+ <20250526091253.400802-3-sughosh.ganu@linaro.org>
+ <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
+ <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
+ <CADg8p977sXJRS1CM6Lnmep0_gc3jc9b3yFg1A-qkVn5Gswr_=Q@mail.gmail.com>
+ <CAC_iWj+Mzskthf1dLSX6NPyzWiRGzfbcekCs_c_mT3GpFH6gTg@mail.gmail.com>
+ <CADg8p95CnQnj2_Wh6D05hCtZh75PDU-S-_MkSvzBdGFAgKJiug@mail.gmail.com>
+ <CAC_iWjK9ZQoSx8a_nmbJ-R-FUak=N+r5Vy7VPLZHFNqwnzO1Tw@mail.gmail.com>
+ <CADg8p95y-CLyHC7wxSUn7md61ayn=RsDxfj9EopVoOOKqT=f0w@mail.gmail.com>
+In-Reply-To: <CADg8p95y-CLyHC7wxSUn7md61ayn=RsDxfj9EopVoOOKqT=f0w@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 9 Jun 2025 14:00:16 +0530
+X-Gm-Features: AX0GCFtmCf8zC0gLOgjttkPU5UheWIoWlyzzJ5AxaCdQx305ZjRDOfZQhF8MKlI
+Message-ID: <CADg8p96Dok-xzfEYQcynr=L_t1uETGKeBqc7ahXCVWUT8yi7Kg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
+ API's
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 9 Jun 2025 13:56:26 +0530
-Message-ID: <DAHUYGE5YBJM.2DQMLH5VCAPKX@ti.com>
-Subject: Re: [PATCH] dtc: Add Kconfig option to pad device tree blob
-From: Anshul Dalal <anshuld@ti.com>
-To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- <u-boot@lists.denx.de>, <trini@konsulko.com>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250603170624.93376-1-eric.schikschneit@novatechautomation.com>
-In-Reply-To: <20250603170624.93376-1-eric.schikschneit@novatechautomation.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,65 +102,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Jun 3, 2025 at 10:36 PM IST, Eric Schikschneit wrote:
-> This will allow arch(s) that use device tree blobs to pad the end of the
-> device tree so they can be modified by board files at run time. This will
-> help prevent errors such as FDT_ERR_NOSPACE from occuring.
+On Wed, 4 Jun 2025 at 16:08, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.co=
-m>
-> ---
->  arch/Kconfig                    | 7 +++++++
->  arch/arc/dts/Makefile           | 2 +-
->  arch/m68k/dts/Makefile          | 2 +-
->  arch/microblaze/dts/Makefile    | 2 +-
->  arch/nios2/dts/Makefile         | 2 +-
->  arch/riscv/dts/Makefile         | 2 +-
->  arch/sandbox/dts/Makefile       | 2 +-
->  arch/x86/dts/Makefile           | 2 +-
->  doc/board/broadcom/bcm7xxx.rst  | 6 ++----
->  doc/develop/makefiles.rst       | 5 ++++-
->  dts/upstream/src/arm64/Makefile | 2 +-
->  dts/upstream/src/riscv/Makefile | 2 +-
->  scripts/Makefile.dts            | 4 ++++
->  13 files changed, 26 insertions(+), 14 deletions(-)
+> On Wed, 4 Jun 2025 at 12:53, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > [...]
+> >
+> > > > > > >
+> > > > > > >
+> > > > > > > This tends to blow up in random ways. See
+> > > > > > > commit 67be24906fe. TL;DR 0 is a valid address in some systems.
+> > > > > >
+> > > > > > Yes, I see your point. I think the calling function will have to be
+> > > > > > re-written such that the env variables get stored only when the API
+> > > > > > returns successfully. Then at least the platform will not have an env
+> > > > > > variable with some junk value.
+> > > > >
+> > > > > Thinking about this a bit, I think in these two instances, returning a
+> > > > > value of 0 might not be an issue if the DRAM memory does not start at
+> > > > > 0x0. Don't get me wrong, what you are suggesting is definitely
+> > > > > correct. I am only thinking about increasing code size on these
+> > > > > platforms if 0x0 is not a valid address, and moreover since the
+> > > > > platforms were already setting 0x0 in case of an error.
+> > > >
+> > > > what kind of code size increase are we talking about?
+> > >
+> > > Let me check the actual size impact with the changes and get back to you.
+> > >
+> > > > It's returning
+> > > > na int instead of a physical address so that should be close to zero?
+> > >
+> > > Sorry, I do not understand what you are suggesting, but even the above
+> > > static function is returning a phys_addr_t value, which is 0 in case
+> > > of an error. And I have kept this to mimic the existing behaviour.
+> > > Thanks.
+> >
+> > I am saying that changing the return type from phys_addr_t to an int
+> > should have a negligible size impact.
 >
-> diff --git a/arch/Kconfig b/arch/Kconfig
-> index ea33d07c086..bf4c2c80891 100644
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -63,6 +63,13 @@ config SYS_CACHELINE_SIZE
->  	default 64 if RISCV
->  	default 32 if MIPS
-> =20
-> +config SYS_DTC_PAD_BYTES
-> +	int "Size in bytes to pad device tree blob"
-> +	default 4096 if ARC || ARM64 || M68K || MICROBLAZE || NIOS2 \
-> +		|| RISCV || SANDBOX || X86
-> +	default 32768 if X86 && EFI_APP
-> +	default 0
-> +
->  config LINKER_LIST_ALIGN
->  	int
->  	default 32 if SANDBOX
-> diff --git a/arch/arc/dts/Makefile b/arch/arc/dts/Makefile
-> index fe6ad7b849a..87c627c01c8 100644
-> --- a/arch/arc/dts/Makefile
-> +++ b/arch/arc/dts/Makefile
-> @@ -11,4 +11,4 @@ dtb-$(CONFIG_TARGET_IOT_DEVKIT) +=3D  iot_devkit.dtb
->  include $(srctree)/scripts/Makefile.dts
-> =20
->  # Add any required device tree compiler flags here
-> -DTC_FLAGS +=3D -R 4 -p 0x1000
-> +DTC_FLAGS +=3D -R 4
+> Yes, that will not have a size impact, but there would have to be a
+> check for whether the env variable has to be set [1], and that adds to
+> the size. That check might be superfluous if the address 0x0 is not
+> valid for the memory map of the platform. Fwiw, adding this check adds
+> about 256 bytes to the binary -- I can incorporate the check if an
+> addition of 256 bytes is fine.
 
-Thanks for the patch Eric, the changes to padding size look good to me
-although I wonder if we should expose the -R flag for configuring the
-number of /reserved-memory to user under Kconfig as well.
+Can we arrive at a decision on this please. If I don't get any
+response by tomorrow, I will incorporate Ilias's comment, and will put
+a check for setting the env variable. Thanks.
 
-We have it hardcoded to 4 everywhere now, might be useful to expose it
-as CONFIG_SYS_DTC_RSVD or similar for users looking to create compact
-DTBs (-R 0) or where more reserved regions need to be added at runtime.
+-sughosh
 
-Regards,
-Anshul
+>
+> -sughosh
+>
+> [1] - https://gist.github.com/sughoshg/3ec45f2a8942db7bf5872efc8d373928
+>
+> >
+> > Thanks
+> > /Ilias
+> > >
+> > > -sughosh
+> > >
+> > > >
+> > > > Thanks
+> > > > /Ilias
+> > > > > If it is okay
+> > > > > to increase code size on these platforms, I will change the calling
+> > > > > function, such that the variable does not get set in case of an error.
+> > > > > Maybe Casey and Mark can comment? Thanks.
+> > > > >
+> > > > > -sughosh
+> > > > >
+> > > > > >
+> > > > > > -sughosh
+> > > > > >
+> > > > > > >
+> > > > > > > > +
+> > > > > > > > +       return addr;
+> > > > > > > > +}
+> > > > > > > > +
+> > > > > > > > +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
+> > > > > > > > +                                 phys_addr_t max_addr, u32 flags)
+> > > > > > > > +{
+> > > > > > > > +       int err;
+> > > > > > > > +       phys_addr_t addr;
+> > > > > > > > +
+> > > > > > > > +       addr = max_addr;
+> > > > > > > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
+> > > > > > > > +       if (err)
+> > > > > > > > +               return 0;
+> > > > > > > > +
+> > > > > > > > +       return addr;
+> > > > > > > > +}
+> > > > > > > > +
+> > > > > > > >  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
+> > > > > > > >
+> > > > > > > >  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
+> > > > > > > > --
+> > > > > > > > 2.34.1
+> > > > > > > >
+> > > > > > >
+> > > > > > > Cheers
+> > > > > > > /Ilias
