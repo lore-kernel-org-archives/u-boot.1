@@ -4,69 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA684C61CE8
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 16:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC45C61CE8
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 16:10:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D61482998;
-	Mon,  9 Jun 2025 18:07:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F087482998;
+	Mon,  9 Jun 2025 18:10:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="adBcC2rY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ch/sIEor";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 163B482AA7; Mon,  9 Jun 2025 18:07:53 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD54682B00; Mon,  9 Jun 2025 18:10:16 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85246826AA
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 18:07:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3C0DC826AA
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 18:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 66B9E5C49BF;
- Mon,  9 Jun 2025 16:05:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2AA8DC4CEEB;
- Mon,  9 Jun 2025 16:07:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749485268;
- bh=VE4KYsfrrUSqUuDGGN5S6RtpApe/nEvN7R2vqN/eZ8U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=adBcC2rYf331GDWr0c2Oe0QTkVYBjK5p1uM3PyJIC1wyLBS8QBV391X195fO0lXxV
- Ohp5MgZTqxe5oFIZXReI5wbWuUQf78SoQwn+JkpSKRuoZIDWPalHpveFuOuSHRWOsk
- ZJLpp0MOw+pfemT3J/nRmofUqp2zx20DGwzAS1qMkTFwwYbe/U41of7bFlXcFRLrDu
- AVooXTrSKhuaJlktHMU9u3byzemkqzg4dU5XrVVqiL6nQGV/FRNm+mc5k7jSH9wU50
- xtjArsl9ltOZwykVHdtfOJLvOgyMPmJVTU/gY8evUsM+MdQWPG1D+6WIdrE2Vnxs1W
- znnEYhlFJDT9A==
-Date: Mon, 9 Jun 2025 17:07:40 +0100
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de,
- linux-amarula@amarulasolutions.com,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Dillon Min <dillon.minfei@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 0/9] Support stm32h747-discovery board
-Message-ID: <aEcGzCbZXajCthrh@sumit-X1>
-References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
- <dc8bb4a3-c465-4ae0-a61d-bb2f74a42b64@foss.st.com>
- <aEbgxo0WUDPd-S8Z@sumit-X1>
- <CABGWkvox-1a1VSGjX8toQ=WsVTma0JcL8su=MGWaAwq4UZFkrQ@mail.gmail.com>
- <aEcAe80kh66cf0_c@sumit-X1> <20250609155019.GR1382132@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-6060a70ba80so2434220eaf.2
+ for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 09:10:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749485413; x=1750090213; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cssr8twv2thAnVgYUmdX7j+fU0KKEL8FgHtsQqWplQo=;
+ b=Ch/sIEorbUZqlbcYXWQztUnQR3C3BUQU6h5/iX4sGvBMv8okHCFJYfbYyB9mmmkirv
+ hAIY+k5/4FSFXjmnnjq1QPxcOeaVTlAiP/X6cM3L1lVG6n7gWd5tO/MVzzsz49gp8aco
+ P/9V9PoTbw0vHypom+3WYIfVYcEuCfmYB1u0I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749485413; x=1750090213;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cssr8twv2thAnVgYUmdX7j+fU0KKEL8FgHtsQqWplQo=;
+ b=r1wsyhKZg4O56Xrpr+9+JlyR85qq0EYt6QL7kFHQ0CEyEXf/IsETh8bm6ieNa4Ua1V
+ /TcQDybYuP/eNcqyHh5FzOnTbcb04T6cVn23dipNde43Ki95r3xsmPc94F5qZ7gQcSR1
+ 0VMB65F2D728puDnXsjVDmDDNfAoAeh8TenHRBLXRh6tX1gP6pdghWGZ1ygzbAuIJHRv
+ 0krkeGFS83Z8Ib95FahDOQN+9xQxv7KTeoFokYGpZILZTLsZ3XiAJvujt2VnOn0evTOA
+ 7TqzGyhX+wrkToMhK35jmtAtitx8NBeF9LcVUboSE1tYUBcEMjds6tWyD0jR+HSIElmW
+ CuFQ==
+X-Gm-Message-State: AOJu0YzjsnWTqOvGqUvkRyHr8N2nMzZVpi3aubFsXCb2iBvh8RbnFwhc
+ ITOjQGy/fDF0UrGzIK5lYJ2HIoyr34LIlgsMPjpY2S8oUt+KUnG33URDj0G4lDXnJl9Pu+BOABZ
+ 6LSj7R7o=
+X-Gm-Gg: ASbGncvTrzFBfzSgE62LXbbWYMfAaEWtDIITdefKBmnZ4FU3o7W/iZOf28Em13mP07+
+ e2fuwl3Db1cNRyABg015F35dhojRAFHLr6swaal6xuaZ7DEaGdAboYM76wOM1CvwTxHpGG6j/QY
+ 0W/eyfT8/Hcy5AYUtXwO38bEqINrCFHYsjXtCnuzccWYlSidkkDDZtTYOD0gTsEX6Auqn2t4kBg
+ BVTZdv0I0kMw4TFSS+VYaaEWd2vXiz5aJWdHJBhP1zygUDXSwrlXMioaWcL9wE1NrXMqcsts3cq
+ 8e1HtCaKaORJll8rsj+XEN2zjBi60G8OXnmePwUZZq/ii35dIOCG6GHT7yaCo5t1BAfbtWaO4W3
+ fAG4qeyHcYYN4KL0=
+X-Google-Smtp-Source: AGHT+IGiJCSeend+QDtjSNdJxS+ZmdnANQubB4jaGjLFabUrAJDGUDq9t07EE1nLSg7UWEISstXoMQ==
+X-Received: by 2002:a4a:e5d0:0:b0:610:ce80:d9fa with SMTP id
+ 006d021491bc7-610ce816774mr2324428eaf.4.1749485412833; 
+ Mon, 09 Jun 2025 09:10:12 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-60f3e826c0esm1366114eaf.28.2025.06.09.09.10.12
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Jun 2025 09:10:12 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Gitlab: Allow running sandbox test.py jobs on more hosts
+Date: Mon,  9 Jun 2025 10:10:11 -0600
+Message-ID: <20250609161011.674524-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250609155019.GR1382132@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,83 +91,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jun 09, 2025 at 09:50:19AM -0600, Tom Rini wrote:
-> On Mon, Jun 09, 2025 at 04:40:43PM +0100, Sumit Garg wrote:
-> > On Mon, Jun 09, 2025 at 03:46:27PM +0200, Dario Binacchi wrote:
-> > > Hi Sumit,
-> > > 
-> > > On Mon, Jun 9, 2025 at 3:25 PM Sumit Garg <sumit.garg@kernel.org> wrote:
-> > > >
-> > > > Hi Patrice,
-> > > >
-> > > > On Mon, Jun 09, 2025 at 03:15:14PM +0200, Patrice CHOTARD wrote:
-> > > > >
-> > > > >
-> > > > > On 6/7/25 11:37, Dario Binacchi wrote:
-> > > > > > The series adds support for stm32h747-discovery board.
-> > > > > >
-> > > > > > Detailed information can be found at:
-> > > > > > https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
-> > > > > >
-> > > > > >
-> > > > > > Dario Binacchi (9):
-> > > > > >   ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]art_pins phandles
-> > > > > >   dt-bindings: arm: stm32: add compatible for stm32h747i-disco board
-> > > > > >   dt-bindings: clock: stm32h7: rename USART{7,8}_CK to UART{7,8}_CK
-> > > > > >   ARM: dts: stm32: add uart8 node for stm32h743 MCU
-> > > > > >   ARM: dts: stm32: add pin map for UART8 controller on stm32h743
-> > > > > >   ARM: dts: stm32: add an extra pin map for USART1 on stm32h743
-> > > > > >   ARM: dts: stm32: support STM32h747i-disco board
-> > > > > >   ARM: dts: stm32: add stm32h747i-disco-u-boot DTS file
-> > > > > >   board: stm32: add stm32h747-discovery board support
-> > > > >
-> > > > >
-> > > > > Hi Dario
-> > > > >
-> > > > > For the whole series
-> > > > > Applied to u-boot-stm32/next
-> > > >
-> > > > Please give some time for other maintainers to review this patch-set.
-> > > > The dts/upstream patches in this series aren't clean cherry pick from
-> > > > upstream.
-> > > 
-> > > All the commits are already in the mainline Linux kernel, specifically
-> > > in v6.16-rc1.
-> > > If you're referring to the fact that the patches can't be applied
-> > > cleanly, I believe it's
-> > > because the target path in the Linux kernel doesn't match the one in U-Boot.
-> > > In fact, the DTS files are located in two different relative paths.
-> > 
-> > That's exactly why we have (refer here [1]):
-> > 
-> > ./tools/update-subtree.sh pick dts <commit-id-to-be-picked>
-> > 
-> > You should have waited v6.16-rc1 tag to be synced into
-> > devicetree-rebasing [2] for the cherry-picks to work. This way of
-> > manually patching dts/upstream is not allowed since it is going to break
-> > DT syncs in one way or another.
-> > 
-> > So I would suggest you to wait for v6.16-rc1 to land in DT rebasing tree
-> > and then send v2 with proper cherry picked patches.
-> > 
-> > [1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing-with-devicetree-rebasing
-> > [2] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
-> 
-> To be honest, I don't think this is a big deal. Git will be merging
-> based on content and not specific hashes. And in the case of conflicts I
-> just copy the file from the tag to our tree.
+With a test investigation of how long each of our current build machines
+can take to run the sandbox test.py job, we can see that the longest
+running hosts are any of the arm64 machines. In some cases this may be a
+matter of overall system load, but in others it's hard to say. The
+challenge with these tests is that the run itself is single threaded and
+covers a large number of tests. There may be gains made in looking in to
+optimizing some individual tests. For now however we will likely gain
+the most by removing potential bottle necks here and allow any amd64 or
+arm64 host to run the test instead of trying to ensure they only run on
+one of the few "fast" machines.
 
-The essential problem here to me is we are going to allow manual
-patching of dts/upstream tree given this example? How do we keep track
-if all that manual patching landed in Linux DT mainline? The cherry
-picks ensured that we always keep in sync with mainline.
+Link: https://source.denx.de/u-boot/u-boot/-/pipelines/26533/test_report
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .gitlab-ci.yml | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-Lets take an example what if Git automatically resolved a merge conflict
-for you with duplicated content or if manually patching a DTS file
-diverged from upstream and get unnoticed during DT syncs?
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 18afc03b4600..2dfeda9985d7 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -264,8 +264,8 @@ Check packing of Python tools:
+ sandbox test.py:
+   parallel:
+     matrix:
+-      - HOST: "fast arm64"
+-      - HOST: "fast amd64"
++      - HOST: "arm64"
++      - HOST: "amd64"
+   tags:
+     - ${HOST}
+   variables:
+@@ -276,8 +276,8 @@ sandbox test.py:
+ sandbox with clang test.py:
+   parallel:
+     matrix:
+-      - HOST: "fast arm64"
+-      - HOST: "fast amd64"
++      - HOST: "arm64"
++      - HOST: "amd64"
+   tags:
+     - ${HOST}
+   variables:
+@@ -288,8 +288,8 @@ sandbox with clang test.py:
+ sandbox64 test.py:
+   parallel:
+     matrix:
+-      - HOST: "fast arm64"
+-      - HOST: "fast amd64"
++      - HOST: "arm64"
++      - HOST: "amd64"
+   tags:
+     - ${HOST}
+   variables:
+@@ -299,8 +299,8 @@ sandbox64 test.py:
+ sandbox64 with clang test.py:
+   parallel:
+     matrix:
+-      - HOST: "fast arm64"
+-      - HOST: "fast amd64"
++      - HOST: "arm64"
++      - HOST: "amd64"
+   tags:
+     - ${HOST}
+   variables:
+@@ -311,8 +311,8 @@ sandbox64 with clang test.py:
+ sandbox64_lwip test.py:
+   parallel:
+     matrix:
+-      - HOST: "fast arm64"
+-      - HOST: "fast amd64"
++      - HOST: "arm64"
++      - HOST: "amd64"
+   tags:
+     - ${HOST}
+   variables:
+-- 
+2.43.0
 
-IMHO, we should try to avoid manual patching of DT subtree otherwise it
-is hard to set a policy as to what level of manual patching is allowed
-or not.
-
--Sumit
