@@ -4,76 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA63C5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 19:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84324C61CE8
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 19:36:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81D2D82CB6;
-	Mon,  9 Jun 2025 21:27:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 13ECF82B07;
+	Mon,  9 Jun 2025 21:36:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cqwj062C";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fHxoRGtI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dVLLy/nV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E41A282C7D; Mon,  9 Jun 2025 21:27:31 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07CF08144A
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 21:27:30 +0200 (CEST)
+ id D33C882B0E; Mon,  9 Jun 2025 21:36:12 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 785F08144A
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 21:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bGMPs6J13z9svm;
- Mon,  9 Jun 2025 21:27:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1749497249;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=B+7PWodyPBqymz4YT5RqK5TvMbqb2zic6vuSFXAh+M0=;
- b=cqwj062C/JrnPWhu/s3gxnYN6QlN+gnmgl7JLlBK0jw6bk6OOssy44CZl0zmHW9SIPTkfc
- Q9gMkp3Fi77PdhPCDB+YASWB2dFIv5qJonOO0bt1F7jjhEoedojYqdcfDQ3o6bA7bmHjdn
- bc7jxgvgzfJgU33hiDadeu9C0kpAUmvivbptz/d4X9HRZ3Ft7bylAGYXuYlQLjmjewi4mN
- 7/CIKCJLjG9NffyR6Jgin5baRg3L3O1Jsc/vklappXQ9uSGTpg80r0gVkn6ftg3OhNXX0a
- MMysGdYh5IaDXlWnFEru5MdN8Xz2QVsgQZbvyzmGipecXDcqawLbu5rbtyp76A==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1749497248;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=B+7PWodyPBqymz4YT5RqK5TvMbqb2zic6vuSFXAh+M0=;
- b=fHxoRGtIPWEKngQkyiA6SuVM6NPOoTZTePvGOeREJjsytQGDF32lVaokaA2o9uCdLIzdW0
- 07Bzvfo1RNcrSNxvJJ1yPO9lfNetexuoOX11uKuo05dqgzMZddwfzou/TifwbVPMyI2wm3
- PS2NRSOQhYntX/BvCw1ea/0nJ8lwp8v+PaFa9anr9P32zYs9G7JkJmbNbEvjz7QfWhjl0I
- 7d8/zLbf/h3F5FOk5lQyTHkJSXGoTdVmp/v5hgj//vX0Z9j24Brtt8uPVimV5MHUsisiHa
- kDLxoMqitEf6rRb1SnCJWucNZi+UGpg8AxZwC93R8wln2TYQzlIPxEUZZisLrA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 8/8] env: Drop DELAY_ENVIRONMENT
-Date: Mon,  9 Jun 2025 21:26:43 +0200
-Message-ID: <20250609192701.20260-9-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250609192701.20260-1-marek.vasut+renesas@mailbox.org>
-References: <20250609192701.20260-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 559Ja5vC870783;
+ Mon, 9 Jun 2025 14:36:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1749497765;
+ bh=pIdebP0qcNlXlfeMxLSwYpGhSNQtw64uGTwFHl/54yI=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=dVLLy/nVbO27BZ5ldfcV2J8kn0LB2ZvBt+KCyj5latGxN6Qo8SH8UtV5EjEoc2YKf
+ dVLgawaQN6eJmXbn38uMZeMlHFgIS5KJO89lqmCpsD9eKubeW/gR7kKJbW0rWC5OH8
+ B9Q6IbV30OuAkux54MdpiFmLbECESrpvikGIh2tE=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 559Ja52k3908784
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 9 Jun 2025 14:36:05 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
+ Jun 2025 14:36:05 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 9 Jun 2025 14:36:04 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 559Ja4OR1891974;
+ Mon, 9 Jun 2025 14:36:04 -0500
+Date: Mon, 9 Jun 2025 14:36:04 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] pylibfdt: correct license information
+Message-ID: <20250609193604.igslo7j2iyruo6nh@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250607113218.208923-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 9ur7qjqogb9xt47kpub9hzceaa9khggc
-X-MBO-RS-ID: 601e0705641785e58f8
-X-Rspamd-Queue-Id: 4bGMPs6J13z9svm
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20250607113218.208923-1-heinrich.schuchardt@canonical.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,82 +78,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are no users of DELAY_ENVIRONMENT and the same effect can
-be achieved either using DT /config/load-environment property,
-or by using ENV_IS_NOWHERE . Remove this configuration option
-and matching functionality.
+On June  7, 2025 thus sayeth Heinrich Schuchardt:
+> Setuptools 78.1.1 shows warnings:
+> 
+> * Pattern 'GPL' did not match any files.
+> * Pattern 'BSD-2-Clause' did not match any files.
+> * SetuptoolsDeprecationWarning: License classifiers are deprecated.
+> 
+> Cf. https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
----
-V2: Rebase on u-boot/next
----
- README           |  9 ---------
- common/board_r.c |  3 ---
- env/Kconfig      | 12 ------------
- 3 files changed, 24 deletions(-)
+Reviewed-by: Bryan Brattlof <bb@ti.com>
 
-diff --git a/README b/README
-index 88b6e6f2772..40326ef3547 100644
---- a/README
-+++ b/README
-@@ -950,15 +950,6 @@ The following options need to be configured:
- 		the environment like the "source" command or the
- 		boot command first.
- 
--		CONFIG_DELAY_ENVIRONMENT
--
--		Normally the environment is loaded when the board is
--		initialised so that it is available to U-Boot. This inhibits
--		that so that the environment is not available until
--		explicitly loaded later by U-Boot code. With CONFIG_OF_CONTROL
--		this is instead controlled by the value of
--		/config/load-environment.
--
- - Automatic software updates via TFTP server
- 		CONFIG_UPDATE_TFTP
- 		CONFIG_UPDATE_TFTP_CNT_MAX
-diff --git a/common/board_r.c b/common/board_r.c
-index 8ee2a4790bb..143d51d0633 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -442,9 +442,6 @@ static int should_load_env(void)
- 	if (IS_ENABLED(CONFIG_OF_CONTROL))
- 		return ofnode_conf_read_int("load-environment", 1);
- 
--	if (IS_ENABLED(CONFIG_DELAY_ENVIRONMENT))
--		return 0;
--
- 	return 1;
- }
- 
-diff --git a/env/Kconfig b/env/Kconfig
-index 65ab8b6392d..58a0666cd49 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -774,18 +774,6 @@ config ENV_VARS_UBOOT_RUNTIME_CONFIG
- 	  run-time determined information about the hardware to the
- 	  environment.  These will be named board_name, board_rev.
- 
--config DELAY_ENVIRONMENT
--	bool "Delay environment loading"
--	depends on !OF_CONTROL
--	help
--	  Enable this to inhibit loading the environment during board
--	  initialization. This can address the security risk of untrusted data
--	  being used during boot. Normally the environment is loaded when the
--	  board is initialised so that it is available to U-Boot. This inhibits
--	  that so that the environment is not available until explicitly loaded
--	  later by U-Boot code. With CONFIG_OF_CONTROL this is instead
--	  controlled by the value of /config/load-environment.
--
- config ENV_IMPORT_FDT
- 	bool "Amend environment by FDT properties"
- 	depends on OF_CONTROL
--- 
-2.47.2
-
+~Bryan
