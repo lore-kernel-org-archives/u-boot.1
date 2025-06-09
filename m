@@ -4,87 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3004DC61CE8
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 17:36:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69798C5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 19:27:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55C9682998;
-	Mon,  9 Jun 2025 19:36:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A7A382B07;
+	Mon,  9 Jun 2025 21:27:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="MJ4f4QR6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uCxdYv1b";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xVuL83SK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6FA782AA7; Mon,  9 Jun 2025 19:36:00 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A964D82B33; Mon,  9 Jun 2025 21:27:22 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07330826AA
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 19:35:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE3358144A
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 21:27:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e81b44fb54fso2389360276.2
- for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 10:35:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1749490557; x=1750095357; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J4Gc7l2pUsSXEN/qSDoqYa87qp58qNlNtdouOoXY45Y=;
- b=MJ4f4QR6Gym3GncZojRxq4ZayNGFFSc9RV+pXrhxmSJVY8jMAqfRdq3lZmeGz3ViUy
- cUkmQqQ0AxWXU+HIyGatMZsjr3aZh30B/Zi84i897jYjZld8sACok3MRafruggH4N8Au
- P19BQr0Q0ufoTsYKrtn3/0vIPdc/uq10ugJGILdjdzRGy4I7BNUajCCsWO0tll4Hgf3M
- kbSc2h1a1alEXk7wa095Rdb7oeEOEhO6EWMPBl/tQ5I7DYDhRJ0PTMpDLJngdwLNYfJq
- NaOSWp9pG53A6i05ge9EfP2HJq9uahAfbBdt4qcMpifEh6BwM77tZIjom4Z6cDJaCzyU
- GiTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749490557; x=1750095357;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=J4Gc7l2pUsSXEN/qSDoqYa87qp58qNlNtdouOoXY45Y=;
- b=mNT6Ji/hsDlOZwqgzHmR1zVzKdMiskaBzEUJJ8FWqakELf8vAfX6lAE6cbab06LwQo
- gaRCqnlQKDv4MrALwRM8ir9MGGU49vDU8yh8LKTbB2gNHeQvWrNpawnRimKQack+BVLx
- ONkD3Wq2seZ9OgPdhpXyJ4/DHhtz6v8TpzCy23RCETJqLOk66sSHnmq/nmfitMbkhPKY
- xITXj2o16M46Dq+xZK8wuzM/sUmLZrN/UR2gFNkVCPGg37x+KlOfU/rsQIXIo5OwKZxW
- yV6jZZn1phg+kR0697bjuh9NbKsjoR96vzbm4rHgtlQEfxJyoA1Osoa1iu5KtGkU9Iu5
- Wv1g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXnJJM7qNmT19i+Zm/DSg4kngtE9EXZ4VJ040GNnSk/11nK0ZhCG5TNDMa6h27iCYkB7YhtvdQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywlgca6g4vK+u3lpl6MFThVv4DrqJTXFsFqeiB5PnJqa1pmTSBn
- qdqlbcz5S7fzhQqAoVRxGhBuEQHBFIjlGfKbyYN+IUg/WwOm/R4YQruJghxm4PQwWjAFcUZ4Cmn
- 34m3q5Z6+FE2sBdmjDWcOxrKtTEBDy648rOcwZbhuTQ==
-X-Gm-Gg: ASbGncs2T7IZfWo8pLBNYmppFdy1amxGRs1CTePgPGYaBFSSuRon89ARkmNBetSLBgD
- yDauOrZag4XM8tM27K701FxbFHi1Sy6BzDXj5NULlPYdvsz7ZdK2bROoTNem43cATtItP5KUdAp
- ch6H6srB0Xie196XD34/JB0HNU9kdw/znH
-X-Google-Smtp-Source: AGHT+IHi0DtuMBqV37WMWSYmbGi5NkYn0ZFT5VHMNCcrtIgAKMZjlG96cASPK73scGgaN7NVxsAvS/Dem5r68bPkWgU=
-X-Received: by 2002:a05:690c:f0f:b0:70d:f47a:7e21 with SMTP id
- 00721157ae682-710f76300bamr190632257b3.1.1749490556748; Mon, 09 Jun 2025
- 10:35:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bGMPg3rmwz9srm;
+ Mon,  9 Jun 2025 21:27:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1749497239;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=hsuu8JU8vdVSGJLe+HAbpwhWDdM3tivgHR9vHUKluTo=;
+ b=uCxdYv1b2YThPwIWL2yzFzflA/gcybwLHQZIqUGLRdjG/GwEUca0A37ZJ42axaSY2aW4pX
+ S3vxlcXFB5v9SSFe5kkvsgkQrvVv4HcKEnX7hJu2oYcClR/dnIhkP6xCfvqbELVWWIIilt
+ 3khw0CaZSSGdP3DcclLgFyx02lT7GaqdUq9LcfDZ71iycD/a9eB4cqPpVWwqXhlLR0GwFs
+ q2ftda9IVc3vRW+bkeUKzSnT7FnCgsQ23VOU/6kknY6r5yIVhTp5pNrkNmS6pwlB3rnNoC
+ Zs1fszmcABUJIBHCJeT12YOpg28sRPN2qR8iMrZScZ8TncuH9SBsw22hwoAdQg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1749497237;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=hsuu8JU8vdVSGJLe+HAbpwhWDdM3tivgHR9vHUKluTo=;
+ b=xVuL83SKo9FEx0yVnh8/CQfaib6S8vw9JkvAOgPXsSTbxdTZQUdz7aZNmDOY3QkeCKXvnd
+ PWxHuCcSTvWhUh6F+r6EMmeQYHH2o72O/r2PredKUPzRNwUXO06CywV2jaUd/7SvR02aAx
+ PcQ+oWWdb0AWWly1rimjMU3KNRcCJ1pO9FNhKQ3ArHhhnocEI4pCz+TYTI6XcUa82WOlmK
+ PJIgdji/zhxRJt8Hdef+efLXYMWhl6kuPcWH0mDklsO4Xw89Ew6kSSIxSZIR30sDAgHUbY
+ P3AzhbUQaXKZN/FuzIC+x9F91YrUDsK68b0+ODAucCDKaE1Z+xcH9EYrbmA7jg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/8] Consistent Kconfig environment options CONFIG_ENV_
+ prefix
+Date: Mon,  9 Jun 2025 21:26:35 +0200
+Message-ID: <20250609192701.20260-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20250530153826.1057407-1-tharvey@gateworks.com>
- <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
- <CAJ+vNU2UfSVHvo=_HsCKbWH5AFsYV=SnVGru4ZBWHrGnAVBcRw@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2UfSVHvo=_HsCKbWH5AFsYV=SnVGru4ZBWHrGnAVBcRw@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 9 Jun 2025 10:35:43 -0700
-X-Gm-Features: AX0GCFvuuWU3DOH8kFIJweYJevXLySyOFkietfneJQ_OXnmPAsvYJbB01xkbbcA
-Message-ID: <CAJ+vNU2trStWN_7jG5OxvvKtodz=qq9JVMaYHPWdpzUDJYiU=Q@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
- rx
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de, 
- Anatolij Gustschin <agust@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: xjhh6xy441q6cbaiz16yqnef9af87d89
+X-MBO-RS-ID: b955c1aa3aa50c8d4d9
+X-Rspamd-Queue-Id: 4bGMPg3rmwz9srm
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,123 +86,1022 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 3, 2025 at 5:04=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
-rote:
->
-> On Sun, Jun 1, 2025 at 2:07=E2=80=AFPM Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > On 5/30/25 17:38, Tim Harvey wrote:
-> > > Call schedule() in net_lwip_rx() to service U-Boot tasks and
-> > > actions during packet rx.
-> > >
-> > > As a cleanup also move sys_check_timeouts() here and remove it from t=
-he
-> > > functions that call net_lwip_rx().
-> > >
-> > > This resolves the issue of an active watchdog resetting the board on
-> > > long network activities.
-> > >
-> > > Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > > ---
-> > > v2:
-> > >   - remove duplication of sys_check_timeouts() from functions that ca=
-ll
-> > >     net_lwip_rx()
-> > > ---
-> > >   net/lwip/dhcp.c     | 1 -
-> > >   net/lwip/dns.c      | 1 -
-> > >   net/lwip/net-lwip.c | 7 +++++++
-> > >   net/lwip/ping.c     | 1 -
-> > >   net/lwip/tftp.c     | 1 -
-> > >   net/lwip/wget.c     | 1 -
-> > >   6 files changed, 7 insertions(+), 5 deletions(-)
-> > >
-> > > diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> > > index 92bd7067a7fb..b79b746db390 100644
-> > > --- a/net/lwip/dhcp.c
-> > > +++ b/net/lwip/dhcp.c
-> > > @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
-> > >       /* Wait for DHCP to complete */
-> > >       do {
-> > >               net_lwip_rx(udev, netif);
-> > > -             sys_check_timeouts();
-> > >               bound =3D dhcp_supplied_address(netif);
-> > >               if (bound)
-> > >                       break;
-> > > diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-> > > index 19172ac959ac..738f8bf3196b 100644
-> > > --- a/net/lwip/dns.c
-> > > +++ b/net/lwip/dns.c
-> > > @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const cha=
-r *name, const char *var)
-> > >                       net_lwip_rx(udev, netif);
-> > >                       if (dns_cb_arg.done)
-> > >                               break;
-> > > -                     sys_check_timeouts();
-> > >                       if (ctrlc()) {
-> > >                               printf("\nAbort\n");
-> > >                               break;
-> > > diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> > > index f05c4cd3f64f..e8d4cc542ed8 100644
-> > > --- a/net/lwip/net-lwip.c
-> > > +++ b/net/lwip/net-lwip.c
-> > > @@ -13,8 +13,10 @@
-> > >   #include <lwip/etharp.h>
-> > >   #include <lwip/init.h>
-> > >   #include <lwip/prot/etharp.h>
-> > > +#include <lwip/timeouts.h>
-> > >   #include <net.h>
-> > >   #include <timer.h>
-> > > +#include <u-boot/schedule.h>
-> > >
-> > >   /* xx:xx:xx:xx:xx:xx\0 */
-> > >   #define MAC_ADDR_STRLEN 18
-> > > @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct net=
-if *netif)
-> > >       int len;
-> > >       int i;
-> > >
-> > > +     /* lwIP timers */
-> > > +     sys_check_timeouts();
-> > > +     /* Other tasks and actions */
-> > > +     schedule(
-> >
-> > Some scheduled tasks have a long duration, specifically video_sync_all(=
-)
-> > called via video_idle(). This change will lead to lost packages.
-> >
-> >
-> > @Tom, Simon
-> >
-> > The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule()
-> > instead of WATCHDOG_RESET()"). This added schedule() calls to EFI
-> > networking. Package losses can expected if schedule() takes more than 1
-> > =C2=B5s. This is much shorter than the time needed for synchronizing a =
-1 MiB
-> > frame buffer. The cyclic framework was explicitly meant for short
-> > duration function calls, not for long duration tasks like syncing the
-> > video frame buffer.
-> >
-> >
-> > I think we should remove video_idle() from the cyclic framework.
-> > video_sync_all() should only be triggered if there is video output.
-> >
->
-> Hi Heinrich,
->
-> It makes sense what you are saying but I don't have the hardware to
-> test your scenario. Can you submit a patch for discussion with a fixes
-> tag?
+Rename the environment related variables and add ENV_ prefix, so that
+all configuration options which are related to environment would have
+an CONFIG_ENV_ prefix. No functional change.
 
-Gentle ping here.
+Marek Vasut (8):
+  env: Rename OVERWRITE_ETHADDR_ONCE to ENV_OVERWRITE_ETHADDR_ONCE
+  env: Rename SYS_REDUNDAND_ENVIRONMENT to ENV_REDUNDANT
+  env: Rename SYS_RELOC_GD_ENV_ADDR to ENV_RELOC_GD_ENV_ADDR
+  env: Rename SYS_MMC_ENV_DEV to ENV_MMC_DEVICE_INDEX
+  env: Rename SYS_MMC_ENV_PART to ENV_MMC_EMMC_HW_PARTITION
+  env: Rename ENV_MMC_PARTITION to ENV_MMC_SW_PARTITION
+  env: Rename DEFAULT_ENV_FILE to ENV_DEFAULT_ENV_TEXT_FILE
+  env: Drop DELAY_ENVIRONMENT
 
-Can we get some discussion on the point Heinrich brings up about
-video_idle in cyclic? Without my patch here which this discussion is
-blocking, large lwIP network transfers are quite broken on boards with
-watchdogs.
+ Makefile                                      |  4 +-
+ README                                        |  9 ---
+ arch/arm/Kconfig                              |  4 +-
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |  2 +-
+ arch/arm/lib/crt0.S                           |  2 +-
+ arch/arm/lib/crt0_64.S                        |  2 +-
+ arch/arm/mach-imx/imx8/cpu.c                  |  4 +-
+ arch/arm/mach-imx/imx8ulp/soc.c               |  4 +-
+ arch/arm/mach-imx/imx9/scmi/soc.c             |  4 +-
+ arch/arm/mach-imx/imx9/soc.c                  |  4 +-
+ arch/arm/mach-imx/mmc_env.c                   |  4 +-
+ arch/arm/mach-imx/mx6/soc.c                   | 10 +--
+ arch/arm/mach-imx/mx7ulp/soc.c                |  4 +-
+ arch/arm/mach-mvebu/armada8k/cpu.c            |  2 +-
+ arch/arm/mach-rockchip/Kconfig                |  4 +-
+ arch/arm/mach-rockchip/board.c                |  4 +-
+ .../imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env   |  2 +-
+ board/freescale/imx8mm_evk/imx8mm_evk.env     |  2 +-
+ board/freescale/imx8mn_evk/imx8mn_evk.env     |  2 +-
+ board/freescale/imx8mp_evk/imx8mp_evk.env     |  2 +-
+ board/freescale/imx8mq_evk/imx8mq_evk.env     |  2 +-
+ board/freescale/imx91_evk/imx91_evk.env       |  2 +-
+ board/freescale/imx93_evk/imx93_evk.env       |  2 +-
+ board/freescale/imx93_qsb/imx93_qsb.env       |  2 +-
+ board/freescale/imx95_evk/imx95_19x19_evk.env |  2 +-
+ board/grinn/liteboard/board.c                 |  2 +-
+ board/phytec/common/k3/board.c                |  2 +-
+ .../phytec/phycore_imx8mm/phycore_imx8mm.env  |  2 +-
+ .../phytec/phycore_imx8mp/phycore_imx8mp.env  |  2 +-
+ board/phytec/phycore_imx93/phycore_imx93.env  |  2 +-
+ board/qualcomm/qcom-phone.config              |  2 +-
+ board/st/stm32mp1/stm32mp1.c                  |  2 +-
+ board/st/stm32mp2/stm32mp2.c                  |  2 +-
+ board/sunxi/board.c                           |  4 +-
+ boot/Kconfig                                  |  6 +-
+ cmd/mvebu/bubt.c                              |  4 +-
+ common/board_r.c                              |  5 +-
+ configs/M5208EVBE_defconfig                   |  2 +-
+ configs/M5235EVB_Flash32_defconfig            |  2 +-
+ configs/M5235EVB_defconfig                    |  2 +-
+ configs/M5249EVB_defconfig                    |  2 +-
+ configs/M5253DEMO_defconfig                   |  4 +-
+ configs/M5272C3_defconfig                     |  2 +-
+ configs/M5275EVB_defconfig                    |  4 +-
+ configs/M5282EVB_defconfig                    |  2 +-
+ configs/M5329AFEE_defconfig                   |  2 +-
+ configs/M5329BFEE_defconfig                   |  2 +-
+ configs/M5373EVB_defconfig                    |  2 +-
+ configs/MCR3000_defconfig                     |  2 +-
+ configs/P1010RDB-PA_36BIT_NAND_defconfig      |  2 +-
+ configs/P1010RDB-PA_36BIT_SDCARD_defconfig    |  2 +-
+ configs/P1010RDB-PA_36BIT_SPIFLASH_defconfig  |  2 +-
+ configs/P1010RDB-PA_NAND_defconfig            |  2 +-
+ configs/P1010RDB-PA_SDCARD_defconfig          |  2 +-
+ configs/P1010RDB-PA_SPIFLASH_defconfig        |  2 +-
+ configs/P1010RDB-PB_36BIT_NAND_defconfig      |  2 +-
+ configs/P1010RDB-PB_36BIT_SDCARD_defconfig    |  2 +-
+ configs/P1010RDB-PB_36BIT_SPIFLASH_defconfig  |  2 +-
+ configs/P1010RDB-PB_NAND_defconfig            |  2 +-
+ configs/P1010RDB-PB_SDCARD_defconfig          |  2 +-
+ configs/P1010RDB-PB_SPIFLASH_defconfig        |  2 +-
+ configs/P1020RDB-PC_36BIT_NAND_defconfig      |  2 +-
+ configs/P1020RDB-PC_36BIT_SDCARD_defconfig    |  2 +-
+ configs/P1020RDB-PC_36BIT_SPIFLASH_defconfig  |  2 +-
+ configs/P1020RDB-PC_NAND_defconfig            |  2 +-
+ configs/P1020RDB-PC_SDCARD_defconfig          |  2 +-
+ configs/P1020RDB-PC_SPIFLASH_defconfig        |  2 +-
+ configs/P1020RDB-PD_NAND_defconfig            |  2 +-
+ configs/P1020RDB-PD_SDCARD_defconfig          |  2 +-
+ configs/P1020RDB-PD_SPIFLASH_defconfig        |  2 +-
+ configs/P2020RDB-PC_36BIT_NAND_defconfig      |  2 +-
+ configs/P2020RDB-PC_36BIT_SDCARD_defconfig    |  2 +-
+ configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig  |  2 +-
+ configs/P2020RDB-PC_NAND_defconfig            |  2 +-
+ configs/P2020RDB-PC_SDCARD_defconfig          |  2 +-
+ configs/P2020RDB-PC_SPIFLASH_defconfig        |  2 +-
+ configs/P2041RDB_NAND_defconfig               |  2 +-
+ configs/P2041RDB_SDCARD_defconfig             |  2 +-
+ configs/P2041RDB_SPIFLASH_defconfig           |  2 +-
+ configs/SBx81LIFKW_defconfig                  |  2 +-
+ configs/SBx81LIFXCAT_defconfig                |  2 +-
+ configs/T2080QDS_SECURE_BOOT_defconfig        |  2 +-
+ configs/ae350_rv32_defconfig                  |  2 +-
+ configs/ae350_rv32_xip_defconfig              |  2 +-
+ configs/ae350_rv64_defconfig                  |  2 +-
+ configs/ae350_rv64_xip_defconfig              |  2 +-
+ configs/am335x_baltos_defconfig               |  2 +-
+ configs/am335x_evm_defconfig                  |  2 +-
+ configs/am335x_evm_spiboot_defconfig          |  2 +-
+ configs/am335x_guardian_defconfig             |  4 +-
+ configs/am335x_hs_evm_defconfig               |  2 +-
+ configs/am335x_hs_evm_uart_defconfig          |  2 +-
+ configs/am335x_igep003x_defconfig             |  4 +-
+ configs/am335x_pdu001_defconfig               |  2 +-
+ configs/am335x_shc_defconfig                  |  6 +-
+ configs/am335x_shc_ict_defconfig              |  6 +-
+ configs/am335x_shc_netboot_defconfig          |  4 +-
+ configs/am335x_shc_sdboot_defconfig           |  4 +-
+ configs/am335x_sl50_defconfig                 |  8 +--
+ configs/am43xx_evm_defconfig                  |  2 +-
+ configs/am43xx_evm_qspiboot_defconfig         |  4 +-
+ configs/am43xx_evm_rtconly_defconfig          |  2 +-
+ configs/am43xx_evm_usbhost_boot_defconfig     |  2 +-
+ configs/am43xx_hs_evm_defconfig               |  2 +-
+ configs/am43xx_hs_evm_qspi_defconfig          |  4 +-
+ configs/am57xx_evm_defconfig                  |  4 +-
+ configs/am57xx_hs_evm_defconfig               |  4 +-
+ configs/am57xx_hs_evm_usb_defconfig           |  6 +-
+ configs/am62ax_evm_r5_defconfig               |  2 +-
+ configs/am62px_evm_r5_defconfig               |  2 +-
+ configs/am62x_beagleplay_r5_defconfig         |  2 +-
+ configs/am62x_evm_r5_defconfig                |  2 +-
+ configs/am64x_evm_r5_defconfig                |  2 +-
+ configs/am65x_evm_a53_defconfig               |  6 +-
+ configs/am65x_evm_r5_defconfig                |  2 +-
+ configs/am65x_evm_r5_usbmsc_defconfig         |  2 +-
+ configs/am67a_beagley_ai_r5_defconfig         |  2 +-
+ configs/amd_versal2_mini_defconfig            |  2 +-
+ configs/amd_versal2_mini_emmc_defconfig       |  2 +-
+ configs/amd_versal2_mini_ospi_defconfig       |  2 +-
+ configs/amd_versal2_mini_qspi_defconfig       |  2 +-
+ configs/amd_versal2_virt_defconfig            |  4 +-
+ configs/aml-a311d-cc_defconfig                |  2 +-
+ configs/aml-s905d3-cc_defconfig               |  2 +-
+ configs/an7581_evb_defconfig                  |  2 +-
+ configs/ap121_defconfig                       |  2 +-
+ configs/ap143_defconfig                       |  2 +-
+ configs/ap152_defconfig                       |  2 +-
+ configs/apalis-imx8_defconfig                 |  4 +-
+ configs/apalis-tk1_defconfig                  |  4 +-
+ configs/apalis_imx6_defconfig                 |  4 +-
+ configs/apalis_t30_defconfig                  |  4 +-
+ configs/aristainetos2c_defconfig              |  4 +-
+ configs/aristainetos2ccslb_defconfig          |  4 +-
+ configs/arndale_defconfig                     |  2 +-
+ configs/at91sam9260ek_dataflash_cs0_defconfig |  2 +-
+ configs/at91sam9260ek_dataflash_cs1_defconfig |  2 +-
+ configs/at91sam9260ek_nandflash_defconfig     |  4 +-
+ configs/at91sam9261ek_dataflash_cs0_defconfig |  2 +-
+ configs/at91sam9261ek_dataflash_cs3_defconfig |  2 +-
+ configs/at91sam9261ek_nandflash_defconfig     |  4 +-
+ configs/at91sam9263ek_dataflash_cs0_defconfig |  2 +-
+ configs/at91sam9263ek_dataflash_defconfig     |  2 +-
+ configs/at91sam9263ek_nandflash_defconfig     |  4 +-
+ configs/at91sam9263ek_norflash_boot_defconfig |  2 +-
+ configs/at91sam9263ek_norflash_defconfig      |  2 +-
+ configs/at91sam9g10ek_dataflash_cs0_defconfig |  2 +-
+ configs/at91sam9g10ek_dataflash_cs3_defconfig |  2 +-
+ configs/at91sam9g10ek_nandflash_defconfig     |  4 +-
+ configs/at91sam9g20ek_2mmc_defconfig          |  2 +-
+ .../at91sam9g20ek_2mmc_nandflash_defconfig    |  4 +-
+ configs/at91sam9g20ek_dataflash_cs0_defconfig |  2 +-
+ configs/at91sam9g20ek_dataflash_cs1_defconfig |  2 +-
+ configs/at91sam9g20ek_nandflash_defconfig     |  4 +-
+ configs/at91sam9m10g45ek_mmc_defconfig        |  2 +-
+ configs/at91sam9m10g45ek_nandflash_defconfig  |  4 +-
+ configs/at91sam9n12ek_mmc_defconfig           |  2 +-
+ configs/at91sam9n12ek_nandflash_defconfig     |  4 +-
+ configs/at91sam9n12ek_spiflash_defconfig      |  2 +-
+ configs/at91sam9rlek_dataflash_defconfig      |  2 +-
+ configs/at91sam9rlek_mmc_defconfig            |  2 +-
+ configs/at91sam9rlek_nandflash_defconfig      |  4 +-
+ configs/at91sam9x5ek_dataflash_defconfig      |  2 +-
+ configs/at91sam9x5ek_mmc_defconfig            |  2 +-
+ configs/at91sam9x5ek_nandflash_defconfig      |  4 +-
+ configs/at91sam9x5ek_spiflash_defconfig       |  2 +-
+ configs/at91sam9xeek_dataflash_cs0_defconfig  |  2 +-
+ configs/at91sam9xeek_dataflash_cs1_defconfig  |  2 +-
+ configs/at91sam9xeek_nandflash_defconfig      |  4 +-
+ configs/axm_defconfig                         |  4 +-
+ configs/axs101_defconfig                      |  2 +-
+ configs/axs103_defconfig                      |  2 +-
+ configs/bananapi-cm4-cm4io_defconfig          |  2 +-
+ configs/bananapi-m2-pro_defconfig             |  2 +-
+ configs/bananapi-m2s_defconfig                |  2 +-
+ configs/bananapi-m5_defconfig                 |  2 +-
+ configs/bayleybay_defconfig                   |  2 +-
+ configs/bcm7260_defconfig                     |  4 +-
+ configs/bcm7445_defconfig                     |  4 +-
+ configs/bcm968380gerg_ram_defconfig           |  2 +-
+ configs/beaver_defconfig                      |  4 +-
+ configs/beelink-gsking-x_defconfig            |  2 +-
+ configs/beelink-gt1-ultimate_defconfig        |  2 +-
+ configs/beelink-gtking_defconfig              |  2 +-
+ configs/beelink-gtkingpro_defconfig           |  2 +-
+ configs/bitmain_antminer_s9_defconfig         |  2 +-
+ configs/bk4r1_defconfig                       |  4 +-
+ configs/brcp150_defconfig                     |  2 +-
+ configs/brcp170_defconfig                     |  2 +-
+ configs/brcp1_1r_defconfig                    |  2 +-
+ configs/brcp1_1r_switch_defconfig             |  2 +-
+ configs/brcp1_2r_defconfig                    |  2 +-
+ configs/brppt1_mmc_defconfig                  |  8 +--
+ configs/brppt2_defconfig                      |  2 +-
+ configs/brsmarc1_defconfig                    |  4 +-
+ configs/brsmarc2_defconfig                    |  2 +-
+ configs/brxre1_defconfig                      |  8 +--
+ configs/cardhu_defconfig                      |  4 +-
+ configs/cei-tk1-som_defconfig                 |  4 +-
+ configs/cgtqmx8_defconfig                     |  2 +-
+ configs/cherryhill_defconfig                  |  2 +-
+ configs/chiliboard_defconfig                  |  4 +-
+ configs/chromebit_mickey_defconfig            |  2 +-
+ configs/chromebook_bob_defconfig              |  2 +-
+ configs/chromebook_jerry_defconfig            |  2 +-
+ configs/chromebook_kevin_defconfig            |  2 +-
+ configs/chromebook_link64_defconfig           |  2 +-
+ configs/chromebook_link_defconfig             |  2 +-
+ configs/chromebook_minnie_defconfig           |  2 +-
+ configs/chromebook_samus_defconfig            |  2 +-
+ configs/chromebook_samus_tpl_defconfig        |  2 +-
+ configs/chromebook_speedy_defconfig           |  2 +-
+ configs/chromebox_panther_defconfig           |  2 +-
+ configs/ci20_mmc_defconfig                    |  2 +-
+ configs/cl-som-imx7_defconfig                 |  2 +-
+ configs/clearfog_gt_8k_defconfig              |  2 +-
+ configs/cm3588-nas-rk3588_defconfig           |  2 +-
+ configs/cm_fx6_defconfig                      |  2 +-
+ configs/cm_t43_defconfig                      |  2 +-
+ configs/cobra5272_defconfig                   |  2 +-
+ configs/colibri-imx6ull-emmc_defconfig        |  4 +-
+ configs/colibri-imx6ull_defconfig             |  2 +-
+ configs/colibri-imx8x_defconfig               |  4 +-
+ configs/colibri_imx6_defconfig                |  4 +-
+ configs/colibri_imx7_defconfig                |  2 +-
+ configs/colibri_imx7_emmc_defconfig           |  4 +-
+ configs/colibri_t20_defconfig                 |  2 +-
+ configs/colibri_t30_defconfig                 |  4 +-
+ configs/colibri_vf_defconfig                  |  2 +-
+ configs/comtrend_ar5315u_ram_defconfig        |  2 +-
+ configs/comtrend_ar5387un_ram_defconfig       |  2 +-
+ configs/comtrend_ct5361_ram_defconfig         |  2 +-
+ configs/comtrend_vr3032u_ram_defconfig        |  2 +-
+ configs/comtrend_wap5813n_ram_defconfig       |  2 +-
+ ...-qeval20-qa3-e3845-internal-uart_defconfig |  2 +-
+ configs/conga-qeval20-qa3-e3845_defconfig     |  2 +-
+ configs/controlcenterdc_defconfig             |  2 +-
+ configs/coreboot64-no-spl_defconfig           |  2 +-
+ configs/coreboot64_defconfig                  |  2 +-
+ configs/coreboot_defconfig                    |  2 +-
+ configs/corvus_defconfig                      |  4 +-
+ configs/cougarcanyon2_defconfig               |  2 +-
+ configs/crownbay_defconfig                    |  2 +-
+ configs/crs305-1g-4s-bit_defconfig            |  2 +-
+ configs/crs305-1g-4s_defconfig                |  2 +-
+ configs/crs326-24g-2s-bit_defconfig           |  2 +-
+ configs/crs326-24g-2s_defconfig               |  2 +-
+ configs/crs328-4c-20s-4s-bit_defconfig        |  2 +-
+ configs/crs328-4c-20s-4s_defconfig            |  2 +-
+ configs/da850evm_defconfig                    |  2 +-
+ configs/da850evm_nand_defconfig               |  2 +-
+ configs/dalmore_defconfig                     |  4 +-
+ configs/db-88f6720_defconfig                  |  2 +-
+ configs/db-88f6820-amc_defconfig              |  2 +-
+ configs/db-88f6820-amc_nand_defconfig         |  2 +-
+ configs/db-88f6820-gp_defconfig               |  2 +-
+ configs/db-mv784mp-gp_defconfig               |  2 +-
+ configs/db-xc3-24g4xg_defconfig               |  2 +-
+ configs/devkit8000_defconfig                  |  2 +-
+ configs/dfi-bt700-q7x-151_defconfig           |  2 +-
+ configs/display5_defconfig                    |  4 +-
+ configs/display5_factory_defconfig            |  4 +-
+ configs/dra7xx_evm_defconfig                  |  6 +-
+ configs/dra7xx_hs_evm_defconfig               |  6 +-
+ configs/dra7xx_hs_evm_usb_defconfig           |  6 +-
+ configs/draco-etamin_defconfig                |  4 +-
+ configs/draco-rastaban_defconfig              |  4 +-
+ configs/draco-thuban_defconfig                |  4 +-
+ configs/dragonboard410c_defconfig             |  4 +-
+ configs/dragonboard820c_defconfig             |  2 +-
+ configs/ds116_defconfig                       |  2 +-
+ configs/ds414_defconfig                       |  2 +-
+ configs/durian_defconfig                      |  2 +-
+ configs/e850-96_defconfig                     |  6 +-
+ configs/eDPU_defconfig                        |  2 +-
+ configs/eaidk-610-rk3399_defconfig            |  2 +-
+ configs/eb_cpu5282_defconfig                  |  2 +-
+ configs/eb_cpu5282_internal_defconfig         |  2 +-
+ configs/edison_defconfig                      |  4 +-
+ configs/efi-x86_app32_defconfig               |  2 +-
+ configs/efi-x86_app64_defconfig               |  2 +-
+ configs/efi-x86_payload32_defconfig           |  2 +-
+ configs/efi-x86_payload64_defconfig           |  2 +-
+ configs/elgin-rv1108_defconfig                |  2 +-
+ configs/emsdp_defconfig                       |  2 +-
+ configs/endeavoru_defconfig                   |  4 +-
+ configs/espresso7420_defconfig                |  2 +-
+ configs/evb-ast2500_defconfig                 |  2 +-
+ configs/evb-ast2600_defconfig                 |  2 +-
+ configs/evb-px30_defconfig                    |  2 +-
+ configs/evb-px5_defconfig                     |  2 +-
+ configs/evb-rk3036_defconfig                  |  2 +-
+ configs/evb-rk3128_defconfig                  |  2 +-
+ configs/evb-rk3229_defconfig                  |  2 +-
+ configs/evb-rk3288_defconfig                  |  2 +-
+ configs/evb-rk3308_defconfig                  |  2 +-
+ configs/evb-rk3328_defconfig                  |  4 +-
+ configs/evb-rk3399_defconfig                  |  2 +-
+ configs/evb-rv1108_defconfig                  |  2 +-
+ configs/ficus-rk3399_defconfig                |  4 +-
+ configs/firefly-px30_defconfig                |  2 +-
+ configs/firefly-rk3288_defconfig              |  2 +-
+ configs/firefly-rk3399_defconfig              |  2 +-
+ configs/galileo_defconfig                     |  2 +-
+ .../gardena-smart-gateway-at91sam_defconfig   |  4 +-
+ .../gardena-smart-gateway-mt7688_defconfig    |  4 +-
+ configs/gazerbeam_defconfig                   |  2 +-
+ configs/ge_bx50v3_defconfig                   |  2 +-
+ configs/geekbox_defconfig                     |  2 +-
+ configs/generic-rk3328_defconfig              |  2 +-
+ configs/generic-rk3399_defconfig              |  2 +-
+ configs/generic-rk3568_defconfig              |  2 +-
+ configs/generic-rk3588_defconfig              |  2 +-
+ configs/grouper_defconfig                     |  4 +-
+ configs/grpeach_defconfig                     |  2 +-
+ configs/gurnard_defconfig                     |  2 +-
+ configs/guruplug_defconfig                    |  2 +-
+ configs/gwventana_emmc_defconfig              |  6 +-
+ configs/gwventana_nand_defconfig              |  4 +-
+ configs/gxp_defconfig                         |  2 +-
+ configs/harmony_defconfig                     |  2 +-
+ configs/hc2910_2aghd05_defconfig              |  2 +-
+ configs/hihope_rzg2_defconfig                 |  6 +-
+ configs/hikey960_defconfig                    |  2 +-
+ configs/hikey_defconfig                       |  4 +-
+ configs/hmibsc_defconfig                      |  4 +-
+ configs/hsdk_4xd_defconfig                    |  2 +-
+ configs/hsdk_defconfig                        |  2 +-
+ configs/huawei_hg556a_ram_defconfig           |  2 +-
+ configs/ib62x0_defconfig                      |  2 +-
+ configs/ibex-ast2700_defconfig                |  2 +-
+ configs/ibm-sbp1_defconfig                    |  2 +-
+ configs/iconnect_defconfig                    |  2 +-
+ configs/ideapad-yoga-11_defconfig             |  4 +-
+ configs/igep00x0_defconfig                    |  4 +-
+ configs/imgtec_xilfpga_defconfig              |  2 +-
+ configs/imx28_xea_defconfig                   |  2 +-
+ configs/imx28_xea_sb_defconfig                |  2 +-
+ configs/imx6dl_icore_nand_defconfig           |  2 +-
+ configs/imx6dl_mamoj_defconfig                |  4 +-
+ configs/imx6dl_sielaff_defconfig              |  2 +-
+ configs/imx6q_bosch_acc_defconfig             |  4 +-
+ configs/imx6q_icore_nand_defconfig            |  2 +-
+ configs/imx6q_logic_defconfig                 |  2 +-
+ configs/imx6qdl_icore_mipi_defconfig          |  2 +-
+ configs/imx6qdl_icore_mmc_defconfig           |  2 +-
+ configs/imx6qdl_icore_nand_defconfig          |  2 +-
+ configs/imx6qdl_icore_rqs_defconfig           |  2 +-
+ configs/imx6ul_geam_mmc_defconfig             |  2 +-
+ configs/imx6ul_geam_nand_defconfig            |  2 +-
+ configs/imx6ul_isiot_emmc_defconfig           |  2 +-
+ configs/imx6ul_isiot_nand_defconfig           |  2 +-
+ configs/imx6ulz_smm_m2_defconfig              |  2 +-
+ configs/imx6ulz_smm_m2b_defconfig             |  2 +-
+ configs/imx7_cm_defconfig                     |  2 +-
+ configs/imx8m_data_modul.config               |  6 +-
+ configs/imx8mm-cl-iot-gate-optee_defconfig    |  4 +-
+ configs/imx8mm-cl-iot-gate_defconfig          |  6 +-
+ configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |  4 +-
+ configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |  4 +-
+ configs/imx8mm-mx8menlo_defconfig             |  6 +-
+ configs/imx8mm-phygate-tauri-l_defconfig      |  6 +-
+ configs/imx8mm_beacon_defconfig               |  6 +-
+ configs/imx8mm_beacon_fspi_defconfig          |  6 +-
+ configs/imx8mm_evk_defconfig                  |  4 +-
+ configs/imx8mm_evk_fspi_defconfig             |  4 +-
+ configs/imx8mm_phg_defconfig                  |  4 +-
+ configs/imx8mm_venice_defconfig               |  4 +-
+ configs/imx8mn_beacon_2g_defconfig            |  6 +-
+ configs/imx8mn_beacon_defconfig               |  6 +-
+ configs/imx8mn_beacon_fspi_defconfig          |  6 +-
+ configs/imx8mn_bsh_smm_s2_defconfig           |  2 +-
+ configs/imx8mn_bsh_smm_s2pro_defconfig        |  2 +-
+ configs/imx8mn_ddr4_evk_defconfig             |  4 +-
+ configs/imx8mn_evk_defconfig                  |  2 +-
+ configs/imx8mn_var_som_defconfig              |  6 +-
+ configs/imx8mn_venice_defconfig               |  4 +-
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |  4 +-
+ configs/imx8mp_beacon_defconfig               |  6 +-
+ configs/imx8mp_debix_model_a_defconfig        |  4 +-
+ configs/imx8mp_evk_defconfig                  |  4 +-
+ configs/imx8mp_navqp_defconfig                |  4 +-
+ configs/imx8mp_rsb3720a1_4G_defconfig         |  4 +-
+ configs/imx8mp_rsb3720a1_6G_defconfig         |  4 +-
+ configs/imx8mp_venice_defconfig               |  4 +-
+ configs/imx8mq_cm_defconfig                   |  4 +-
+ configs/imx8mq_evk_defconfig                  |  4 +-
+ configs/imx8mq_phanbell_defconfig             |  4 +-
+ configs/imx8mq_reform2_defconfig              |  4 +-
+ configs/imx8qm_dmsse20a1_defconfig            |  2 +-
+ configs/imx8qm_mek_defconfig                  |  4 +-
+ configs/imx8qm_rom7720_a1_4G_defconfig        |  4 +-
+ configs/imx8qxp_capricorn.config              |  4 +-
+ configs/imx8qxp_mek_defconfig                 |  4 +-
+ configs/imx91_11x11_evk_defconfig             |  4 +-
+ configs/imx91_11x11_evk_inline_ecc_defconfig  |  4 +-
+ configs/imx93-phycore_defconfig               |  6 +-
+ configs/imx93_11x11_evk_defconfig             |  4 +-
+ configs/imx93_9x9_qsb_defconfig               |  4 +-
+ configs/imx93_9x9_qsb_inline_ecc_defconfig    |  4 +-
+ configs/imx93_var_som_defconfig               |  4 +-
+ configs/imx95_19x19_evk_defconfig             |  4 +-
+ configs/imx_dhsom.config                      |  4 +-
+ configs/imxrt1020-evk_defconfig               |  2 +-
+ configs/imxrt1050-evk_defconfig               |  2 +-
+ configs/imxrt1050-evk_fspi_defconfig          |  2 +-
+ configs/imxrt1170-evk_defconfig               |  2 +-
+ configs/integratorap_cm720t_defconfig         |  2 +-
+ configs/integratorap_cm920t_defconfig         |  2 +-
+ configs/integratorap_cm926ejs_defconfig       |  2 +-
+ configs/integratorap_cm946es_defconfig        |  2 +-
+ configs/inteno_xg6846_ram_defconfig           |  2 +-
+ configs/iot2050_defconfig                     |  2 +-
+ configs/iot_devkit_defconfig                  |  2 +-
+ configs/j7200_evm_a72_defconfig               |  4 +-
+ configs/j7200_evm_r5_defconfig                |  2 +-
+ configs/j721e_beagleboneai64_a72_defconfig    |  4 +-
+ configs/j721e_beagleboneai64_r5_defconfig     |  2 +-
+ configs/j721e_evm_a72_defconfig               |  4 +-
+ configs/j721e_evm_r5_defconfig                |  2 +-
+ configs/j721s2_evm_a72_defconfig              |  4 +-
+ configs/j721s2_evm_r5_defconfig               |  2 +-
+ configs/j722s_evm_r5_defconfig                |  4 +-
+ configs/j784s4_evm_a72_defconfig              |  4 +-
+ configs/j784s4_evm_r5_defconfig               |  2 +-
+ configs/jaguar-rk3588_defconfig               |  2 +-
+ configs/jethub_j100_defconfig                 |  2 +-
+ configs/jethub_j80_defconfig                  |  2 +-
+ configs/jetson-tk1_defconfig                  |  4 +-
+ configs/k2e_evm_defconfig                     |  2 +-
+ configs/k2e_hs_evm_defconfig                  |  2 +-
+ configs/k2g_evm_defconfig                     |  2 +-
+ configs/k2g_hs_evm_defconfig                  |  2 +-
+ configs/k2hk_evm_defconfig                    |  2 +-
+ configs/k2hk_hs_evm_defconfig                 |  2 +-
+ configs/k2l_evm_defconfig                     |  2 +-
+ configs/k2l_hs_evm_defconfig                  |  2 +-
+ configs/khadas-edge-captain-rk3399_defconfig  |  2 +-
+ configs/khadas-edge-rk3399_defconfig          |  2 +-
+ configs/khadas-edge-v-rk3399_defconfig        |  2 +-
+ configs/khadas-vim2_defconfig                 |  2 +-
+ configs/khadas-vim3_android_ab_defconfig      |  6 +-
+ configs/khadas-vim3_android_defconfig         |  6 +-
+ configs/khadas-vim3_defconfig                 |  2 +-
+ configs/khadas-vim3l_android_ab_defconfig     |  6 +-
+ configs/khadas-vim3l_android_defconfig        |  6 +-
+ configs/khadas-vim3l_defconfig                |  2 +-
+ configs/khadas-vim_defconfig                  |  2 +-
+ configs/kmcent2_defconfig                     |  2 +-
+ configs/kmcoge5ne_defconfig                   |  2 +-
+ configs/kmeter1_defconfig                     |  2 +-
+ configs/kmopti2_defconfig                     |  2 +-
+ configs/kmsupx5_defconfig                     |  2 +-
+ configs/kmtepr2_defconfig                     |  2 +-
+ configs/kontron-sl-mx8mm_defconfig            |  2 +-
+ configs/kontron_pitx_imx8m_defconfig          |  2 +-
+ configs/kontron_sl28_defconfig                |  2 +-
+ configs/kp_imx53_defconfig                    |  4 +-
+ configs/kp_imx6q_tpc_defconfig                |  6 +-
+ configs/kylin-rk3036_defconfig                |  2 +-
+ configs/lckfb-tspi-rk3566_defconfig           |  2 +-
+ configs/leez-rk3399_defconfig                 |  2 +-
+ configs/legoev3_defconfig                     |  2 +-
+ configs/librem5_defconfig                     |  2 +-
+ configs/libretech-ac_defconfig                |  2 +-
+ configs/libretech-cc_defconfig                |  2 +-
+ configs/libretech-cc_v2_defconfig             |  2 +-
+ configs/linkit-smart-7688_defconfig           |  2 +-
+ configs/liteboard_defconfig                   |  2 +-
+ configs/ls1012a2g5rdb_tfa_defconfig           |  2 +-
+ configs/ls1012afrdm_tfa_defconfig             |  2 +-
+ configs/ls1012afrwy_tfa_defconfig             |  2 +-
+ configs/ls1012aqds_tfa_SECURE_BOOT_defconfig  |  2 +-
+ configs/ls1012aqds_tfa_defconfig              |  2 +-
+ configs/ls1012ardb_tfa_SECURE_BOOT_defconfig  |  2 +-
+ configs/ls1012ardb_tfa_defconfig              |  2 +-
+ configs/ls1021aiot_qspi_defconfig             |  2 +-
+ configs/ls1021aiot_sdcard_defconfig           |  2 +-
+ configs/ls1021aqds_nand_defconfig             |  2 +-
+ configs/ls1021aqds_qspi_defconfig             |  2 +-
+ configs/ls1021aqds_sdcard_ifc_defconfig       |  2 +-
+ configs/ls1021aqds_sdcard_qspi_defconfig      |  2 +-
+ configs/ls1021atsn_qspi_defconfig             |  2 +-
+ configs/ls1021atsn_sdcard_defconfig           |  2 +-
+ configs/ls1021atwr_qspi_defconfig             |  2 +-
+ ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |  2 +-
+ configs/ls1021atwr_sdcard_ifc_defconfig       |  2 +-
+ configs/ls1021atwr_sdcard_qspi_defconfig      |  2 +-
+ configs/ls1043aqds_tfa_defconfig              |  2 +-
+ configs/ls1046afrwy_tfa_SECURE_BOOT_defconfig |  2 +-
+ configs/ls1046afrwy_tfa_defconfig             |  2 +-
+ configs/ls1046aqds_tfa_defconfig              |  2 +-
+ configs/ls1046ardb_tfa_defconfig              |  2 +-
+ configs/ls1088aqds_tfa_defconfig              |  2 +-
+ configs/ls1088ardb_tfa_defconfig              |  2 +-
+ configs/ls2080aqds_nand_defconfig             |  2 +-
+ configs/ls2080aqds_qspi_defconfig             |  2 +-
+ configs/ls2080ardb_nand_defconfig             |  2 +-
+ configs/ls2088aqds_tfa_defconfig              |  2 +-
+ configs/lschlv2_defconfig                     |  2 +-
+ configs/lsxhl_defconfig                       |  2 +-
+ configs/lxr2_defconfig                        |  4 +-
+ configs/m53menlo_defconfig                    |  4 +-
+ configs/marsboard_defconfig                   |  2 +-
+ configs/maxbcm_defconfig                      |  2 +-
+ configs/mccmon6_nor_defconfig                 |  2 +-
+ configs/mccmon6_sd_defconfig                  |  2 +-
+ configs/medcom-wide_defconfig                 |  2 +-
+ configs/meerkat96_defconfig                   |  2 +-
+ configs/meesc_dataflash_defconfig             |  2 +-
+ configs/meesc_defconfig                       |  2 +-
+ configs/microblaze-generic_defconfig          |  2 +-
+ configs/microchip_mpfs_icicle_defconfig       |  2 +-
+ configs/minnowmax_defconfig                   |  2 +-
+ configs/miqi-rk3288_defconfig                 |  2 +-
+ configs/mk808_defconfig                       |  2 +-
+ configs/mocha_defconfig                       |  4 +-
+ configs/mot_defconfig                         |  4 +-
+ configs/msc_sm2s_imx8mp_defconfig             |  4 +-
+ configs/mscc_jr2_defconfig                    |  4 +-
+ configs/mscc_luton_defconfig                  |  4 +-
+ configs/mscc_ocelot_defconfig                 |  4 +-
+ configs/mscc_serval_defconfig                 |  4 +-
+ configs/mscc_servalt_defconfig                |  4 +-
+ configs/mt7620_mt7530_rfb_defconfig           |  2 +-
+ configs/mt7620_rfb_defconfig                  |  2 +-
+ configs/mt7621_nand_rfb_defconfig             |  2 +-
+ configs/mt7621_rfb_defconfig                  |  2 +-
+ configs/mt7623a_unielec_u7623_02_defconfig    |  2 +-
+ configs/mt7623n_bpir2_defconfig               |  2 +-
+ configs/mt7628_rfb_defconfig                  |  2 +-
+ configs/mt7629_rfb_defconfig                  |  2 +-
+ configs/mt8183_pumpkin_defconfig              |  2 +-
+ configs/mt8516_pumpkin_defconfig              |  2 +-
+ configs/mvebu_crb_cn9130_defconfig            |  4 +-
+ configs/mvebu_db-88f3720_defconfig            |  2 +-
+ configs/mvebu_db_armada8k_defconfig           |  2 +-
+ configs/mvebu_db_cn9130_defconfig             |  4 +-
+ configs/mvebu_espressobin-88f3720_defconfig   |  2 +-
+ .../mvebu_espressobin_ultra-88f3720_defconfig |  2 +-
+ configs/mvebu_mcbin-88f8040_defconfig         |  2 +-
+ configs/mvebu_puzzle-m801-88f8040_defconfig   |  2 +-
+ configs/mx23_olinuxino_defconfig              |  2 +-
+ configs/mx23evk_defconfig                     |  2 +-
+ configs/mx28evk_defconfig                     |  2 +-
+ configs/mx51evk_defconfig                     |  2 +-
+ configs/mx53cx9020_defconfig                  |  2 +-
+ configs/mx53loco_defconfig                    |  2 +-
+ configs/mx53ppd_defconfig                     |  2 +-
+ configs/mx6cuboxi_defconfig                   |  2 +-
+ configs/mx6memcal_defconfig                   |  2 +-
+ configs/mx6qsabrelite_defconfig               |  2 +-
+ configs/mx6sabreauto_defconfig                |  2 +-
+ configs/mx6sabresd_defconfig                  |  4 +-
+ configs/mx6slevk_defconfig                    |  2 +-
+ configs/mx6sllevk_defconfig                   |  2 +-
+ configs/mx6sllevk_plugin_defconfig            |  2 +-
+ configs/mx6sxsabreauto_defconfig              |  2 +-
+ configs/mx6sxsabresd_defconfig                |  4 +-
+ configs/mx6ul_14x14_evk_defconfig             |  4 +-
+ configs/mx6ul_9x9_evk_defconfig               |  4 +-
+ configs/mx6ull_14x14_evk_defconfig            |  4 +-
+ configs/mx6ull_14x14_evk_plugin_defconfig     |  4 +-
+ configs/mx6ulz_14x14_evk_defconfig            |  4 +-
+ configs/mx7dsabresd_defconfig                 |  2 +-
+ configs/mx7dsabresd_qspi_defconfig            |  2 +-
+ configs/mx7ulp_evk_defconfig                  |  2 +-
+ configs/mx7ulp_evk_plugin_defconfig           |  2 +-
+ configs/myir_mys_6ulx_defconfig               |  2 +-
+ configs/n2350_defconfig                       |  2 +-
+ configs/nanopc-t4-rk3399_defconfig            |  2 +-
+ configs/nanopc-t6-rk3588_defconfig            |  2 +-
+ configs/nanopi-k2_defconfig                   |  2 +-
+ configs/nanopi-m4-2gb-rk3399_defconfig        |  2 +-
+ configs/nanopi-m4-rk3399_defconfig            |  2 +-
+ configs/nanopi-m4b-rk3399_defconfig           |  2 +-
+ configs/nanopi-neo4-rk3399_defconfig          |  2 +-
+ configs/nanopi-r2c-plus-rk3328_defconfig      |  4 +-
+ configs/nanopi-r2c-rk3328_defconfig           |  4 +-
+ configs/nanopi-r2s-plus-rk3328_defconfig      |  2 +-
+ configs/nanopi-r2s-rk3328_defconfig           |  4 +-
+ configs/nanopi-r4s-rk3399_defconfig           |  2 +-
+ configs/nas220_defconfig                      |  2 +-
+ configs/netgear_cg3100d_ram_defconfig         |  2 +-
+ configs/netgear_dgnd3700v2_ram_defconfig      |  2 +-
+ configs/neu2-io-rv1126_defconfig              |  2 +-
+ configs/nitrogen6dl2g_defconfig               |  2 +-
+ configs/nitrogen6dl_defconfig                 |  2 +-
+ configs/nitrogen6q2g_defconfig                |  2 +-
+ configs/nitrogen6q_defconfig                  |  2 +-
+ configs/nitrogen6s1g_defconfig                |  2 +-
+ configs/nitrogen6s_defconfig                  |  2 +-
+ configs/novena_defconfig                      |  4 +-
+ configs/nsa310s_defconfig                     |  2 +-
+ configs/nsim_700_defconfig                    |  2 +-
+ configs/nsim_700be_defconfig                  |  2 +-
+ configs/nsim_hs38_defconfig                   |  2 +-
+ configs/nsim_hs38be_defconfig                 |  2 +-
+ configs/nyan-big_defconfig                    |  4 +-
+ configs/odroid-c2_defconfig                   |  2 +-
+ configs/odroid-c4_defconfig                   |  2 +-
+ configs/odroid-go-ultra_defconfig             |  2 +-
+ configs/odroid-hc4_defconfig                  |  2 +-
+ configs/odroid-m1s-rk3566_defconfig           |  2 +-
+ configs/odroid-m2-rk3588s_defconfig           |  2 +-
+ configs/odroid-n2_defconfig                   |  2 +-
+ configs/odroid-n2l_defconfig                  |  2 +-
+ configs/odroid-xu3_defconfig                  |  2 +-
+ configs/odroid_defconfig                      |  2 +-
+ configs/omap3_evm_defconfig                   |  2 +-
+ configs/omapl138_lcdk_defconfig               |  2 +-
+ configs/openrd_base_defconfig                 |  2 +-
+ configs/openrd_client_defconfig               |  2 +-
+ configs/openrd_ultimate_defconfig             |  2 +-
+ configs/opos6uldev_defconfig                  |  6 +-
+ configs/orangepi-3b-rk3566_defconfig          |  2 +-
+ configs/orangepi-r1-plus-lts-rk3328_defconfig |  4 +-
+ configs/orangepi-r1-plus-rk3328_defconfig     |  4 +-
+ configs/orangepi-rk3399_defconfig             |  2 +-
+ configs/origen_defconfig                      |  2 +-
+ configs/ouya_defconfig                        |  4 +-
+ configs/p200_defconfig                        |  2 +-
+ configs/p201_defconfig                        |  2 +-
+ configs/p212_defconfig                        |  2 +-
+ configs/p2371-0000_defconfig                  |  4 +-
+ configs/p2371-2180_defconfig                  |  4 +-
+ configs/p2571_defconfig                       |  4 +-
+ configs/p2771-0000-000_defconfig              |  4 +-
+ configs/p2771-0000-500_defconfig              |  4 +-
+ configs/paz00_defconfig                       |  4 +-
+ configs/pcm051_rev3_defconfig                 |  2 +-
+ configs/pcm052_defconfig                      |  4 +-
+ configs/pcm058_defconfig                      |  4 +-
+ configs/pe2201_defconfig                      |  2 +-
+ configs/peach-pi_defconfig                    |  2 +-
+ configs/peach-pit_defconfig                   |  2 +-
+ configs/pg_wcom_expu1_defconfig               |  2 +-
+ configs/pg_wcom_expu1_update_defconfig        |  2 +-
+ configs/pg_wcom_seli8_defconfig               |  2 +-
+ configs/pg_wcom_seli8_update_defconfig        |  2 +-
+ configs/phycore-am335x-r2-regor_defconfig     |  2 +-
+ configs/phycore-am335x-r2-wega_defconfig      |  2 +-
+ configs/phycore-imx8mm_defconfig              |  6 +-
+ configs/phycore-imx8mp_defconfig              |  6 +-
+ configs/phycore-rk3288_defconfig              |  4 +-
+ configs/phycore_am62ax_a53_defconfig          |  4 +-
+ configs/phycore_am62ax_r5_defconfig           |  4 +-
+ configs/phycore_am62x_a53_defconfig           |  4 +-
+ configs/phycore_am62x_r5_defconfig            |  2 +-
+ configs/phycore_am64x_a53_defconfig           |  4 +-
+ configs/phycore_am64x_r5_defconfig            |  2 +-
+ configs/phycore_pcl063_defconfig              |  2 +-
+ configs/phycore_pcl063_ull_defconfig          |  2 +-
+ configs/pic32mzdask_defconfig                 |  2 +-
+ configs/picasso_defconfig                     |  4 +-
+ configs/pico-dwarf-imx6ul_defconfig           |  2 +-
+ configs/pico-dwarf-imx7d_defconfig            |  2 +-
+ configs/pico-hobbit-imx6ul_defconfig          |  2 +-
+ configs/pico-hobbit-imx7d_defconfig           |  2 +-
+ configs/pico-imx6_defconfig                   |  2 +-
+ configs/pico-imx6ul_defconfig                 |  2 +-
+ configs/pico-imx7d_bl33_defconfig             |  2 +-
+ configs/pico-imx7d_defconfig                  |  2 +-
+ configs/pico-imx8mq_defconfig                 |  4 +-
+ configs/pico-nymph-imx7d_defconfig            |  2 +-
+ configs/pico-pi-imx6ul_defconfig              |  2 +-
+ configs/pico-pi-imx7d_defconfig               |  2 +-
+ configs/pinebook-pro-rk3399_defconfig         |  2 +-
+ configs/pinephone-pro-rk3399_defconfig        |  2 +-
+ configs/plutux_defconfig                      |  2 +-
+ configs/pm9g45_defconfig                      |  4 +-
+ configs/pogo_e02_defconfig                    |  2 +-
+ configs/pomelo_defconfig                      |  2 +-
+ configs/poplar_defconfig                      |  2 +-
+ configs/popmetal-rk3288_defconfig             |  2 +-
+ configs/puma-rk3399_defconfig                 |  4 +-
+ configs/px30-core-ctouch2-of10-px30_defconfig |  2 +-
+ configs/px30-core-ctouch2-px30_defconfig      |  2 +-
+ configs/px30-core-edimm2.2-px30_defconfig     |  2 +-
+ configs/pxm2_defconfig                        |  2 +-
+ configs/qc750_defconfig                       |  4 +-
+ configs/qcom_defconfig                        |  4 +-
+ configs/qcom_ipq9574_mmc_defconfig            |  4 +-
+ configs/qemu-ppce500_defconfig                |  2 +-
+ configs/qemu-riscv32_defconfig                |  2 +-
+ configs/qemu-riscv32_smode_defconfig          |  2 +-
+ configs/qemu-riscv32_spl_defconfig            |  2 +-
+ configs/qemu-riscv64_defconfig                |  2 +-
+ configs/qemu-riscv64_smode_defconfig          |  2 +-
+ configs/qemu-riscv64_spl_defconfig            |  2 +-
+ configs/qemu-x86_64_defconfig                 |  2 +-
+ configs/qemu-x86_defconfig                    |  2 +-
+ configs/qnap-ts433-rk3568_defconfig           |  2 +-
+ configs/r8a77970_eagle_defconfig              |  2 +-
+ configs/r8a77970_v3msk_defconfig              |  2 +-
+ configs/r8a77980_condor_defconfig             |  2 +-
+ configs/r8a77980_v3hsk_defconfig              |  2 +-
+ configs/r8a77990_ebisu_defconfig              |  4 +-
+ configs/r8a77995_draak_defconfig              |  4 +-
+ configs/r8a779g0_whitehawk_defconfig          |  2 +-
+ configs/r8a779h0_grayhawk_defconfig           |  2 +-
+ configs/radxa-zero-3-rk3566_defconfig         |  2 +-
+ configs/radxa-zero2_defconfig                 |  2 +-
+ configs/radxa-zero_defconfig                  |  2 +-
+ configs/rcar3_salvator-x_defconfig            |  4 +-
+ configs/rcar3_ulcb_defconfig                  |  4 +-
+ configs/renesas_rcar4.config                  |  2 +-
+ configs/renesas_rzg2l_smarc_defconfig         |  4 +-
+ configs/ringneck-px30_defconfig               |  2 +-
+ configs/riotboard_defconfig                   |  4 +-
+ configs/roc-cc-rk3308_defconfig               |  2 +-
+ configs/roc-cc-rk3328_defconfig               |  4 +-
+ configs/roc-pc-mezzanine-rk3399_defconfig     |  2 +-
+ configs/roc-pc-rk3399_defconfig               |  2 +-
+ configs/rock-3b-rk3568_defconfig              |  2 +-
+ configs/rock-3c-rk3566_defconfig              |  2 +-
+ configs/rock-4c-plus-rk3399_defconfig         |  2 +-
+ configs/rock-4se-rk3399_defconfig             |  2 +-
+ configs/rock-5-itx-rk3588_defconfig           |  2 +-
+ configs/rock-pi-4-rk3399_defconfig            |  2 +-
+ configs/rock-pi-4c-rk3399_defconfig           |  2 +-
+ configs/rock-pi-e-rk3328_defconfig            |  4 +-
+ configs/rock-pi-e-v3-rk3328_defconfig         |  4 +-
+ configs/rock-pi-n10-rk3399pro_defconfig       |  2 +-
+ configs/rock-pi-n8-rk3288_defconfig           |  2 +-
+ configs/rock-pi-s-rk3308_defconfig            |  2 +-
+ configs/rock-s0-rk3308_defconfig              |  2 +-
+ configs/rock2_defconfig                       |  2 +-
+ configs/rock64-rk3328_defconfig               |  4 +-
+ configs/rock960-rk3399_defconfig              |  4 +-
+ configs/rock_defconfig                        |  2 +-
+ configs/rockpro64-rk3399_defconfig            |  2 +-
+ configs/rpi_0_w_defconfig                     |  2 +-
+ configs/rpi_2_defconfig                       |  2 +-
+ configs/rpi_3_32b_defconfig                   |  2 +-
+ configs/rpi_3_b_plus_defconfig                |  2 +-
+ configs/rpi_3_defconfig                       |  2 +-
+ configs/rpi_4_32b_defconfig                   |  2 +-
+ configs/rpi_4_defconfig                       |  2 +-
+ configs/rpi_defconfig                         |  2 +-
+ configs/rut_defconfig                         |  2 +-
+ configs/rzg2_beacon_defconfig                 |  2 +-
+ configs/s400_defconfig                        |  2 +-
+ configs/s5p4418_nanopi2_defconfig             |  2 +-
+ configs/s5p_goni_defconfig                    |  2 +-
+ configs/s5pc210_universal_defconfig           |  2 +-
+ configs/sagem_f@st1704_ram_defconfig          |  2 +-
+ configs/sam9x60_curiosity_mmc1_defconfig      |  2 +-
+ configs/sam9x60_curiosity_mmc_defconfig       |  2 +-
+ configs/sam9x60ek_mmc_defconfig               |  2 +-
+ configs/sam9x60ek_nandflash_defconfig         |  4 +-
+ configs/sam9x60ek_qspiflash_defconfig         |  2 +-
+ configs/sama5d27_som1_ek_mmc1_defconfig       |  2 +-
+ configs/sama5d27_som1_ek_mmc_defconfig        |  2 +-
+ configs/sama5d27_som1_ek_qspiflash_defconfig  |  2 +-
+ configs/sama5d27_wlsom1_ek_mmc_defconfig      |  2 +-
+ .../sama5d27_wlsom1_ek_qspiflash_defconfig    |  2 +-
+ configs/sama5d29_curiosity_mmc1_defconfig     |  2 +-
+ configs/sama5d29_curiosity_mmc_defconfig      |  2 +-
+ .../sama5d29_curiosity_qspiflash_defconfig    |  2 +-
+ configs/sama5d2_icp_mmc_defconfig             |  2 +-
+ configs/sama5d2_icp_qspiflash_defconfig       |  2 +-
+ configs/sama5d2_ptc_ek_mmc_defconfig          |  2 +-
+ configs/sama5d2_ptc_ek_nandflash_defconfig    |  4 +-
+ configs/sama5d2_xplained_emmc_defconfig       |  2 +-
+ configs/sama5d2_xplained_mmc_defconfig        |  2 +-
+ configs/sama5d2_xplained_qspiflash_defconfig  |  2 +-
+ configs/sama5d2_xplained_spiflash_defconfig   |  2 +-
+ configs/sama5d36ek_cmp_mmc_defconfig          |  2 +-
+ configs/sama5d36ek_cmp_nandflash_defconfig    |  4 +-
+ configs/sama5d36ek_cmp_spiflash_defconfig     |  2 +-
+ configs/sama5d3_xplained_mmc_defconfig        |  2 +-
+ configs/sama5d3_xplained_nandflash_defconfig  |  4 +-
+ configs/sama5d3xek_mmc_defconfig              |  2 +-
+ configs/sama5d3xek_nandflash_defconfig        |  4 +-
+ configs/sama5d3xek_spiflash_defconfig         |  2 +-
+ configs/sama5d4_xplained_mmc_defconfig        |  2 +-
+ configs/sama5d4_xplained_nandflash_defconfig  |  4 +-
+ configs/sama5d4_xplained_spiflash_defconfig   |  2 +-
+ configs/sama5d4ek_mmc_defconfig               |  2 +-
+ configs/sama5d4ek_nandflash_defconfig         |  4 +-
+ configs/sama5d4ek_spiflash_defconfig          |  2 +-
+ configs/sama7g54_curiosity_mmc_defconfig      |  2 +-
+ .../sama7g54_curiosity_nandflash_defconfig    |  2 +-
+ .../sama7g54_curiosity_qspiflash_defconfig    |  2 +-
+ configs/sama7g5ek_mmc1_defconfig              |  2 +-
+ configs/sama7g5ek_mmc_defconfig               |  2 +-
+ configs/seaboard_defconfig                    |  4 +-
+ configs/seeed_npi_imx6ull_defconfig           |  2 +-
+ configs/sei510_defconfig                      |  6 +-
+ configs/sei610_defconfig                      |  6 +-
+ configs/sfr_nb4-ser_ram_defconfig             |  2 +-
+ configs/sheep-rk3368_defconfig                |  2 +-
+ configs/sifive_unleashed_defconfig            |  2 +-
+ configs/sifive_unmatched_defconfig            |  2 +-
+ configs/silinux_ek874_defconfig               |  2 +-
+ configs/slimbootloader_defconfig              |  2 +-
+ configs/smartweb_defconfig                    |  4 +-
+ configs/smdk5250_defconfig                    |  2 +-
+ configs/smdk5420_defconfig                    |  2 +-
+ configs/smdkv310_defconfig                    |  2 +-
+ configs/smegw01_defconfig                     |  6 +-
+ configs/sniper_defconfig                      |  2 +-
+ configs/snow_defconfig                        |  2 +-
+ configs/socfpga_agilex5_defconfig             |  2 +-
+ configs/socfpga_arria10_defconfig             |  2 +-
+ configs/socfpga_arria5_defconfig              |  2 +-
+ configs/socfpga_cyclone5_defconfig            |  2 +-
+ configs/socfpga_dbm_soc1_defconfig            |  2 +-
+ configs/socfpga_de0_nano_soc_defconfig        |  2 +-
+ configs/socfpga_de10_nano_defconfig           |  2 +-
+ configs/socfpga_de10_standard_defconfig       |  2 +-
+ configs/socfpga_de1_soc_defconfig             |  2 +-
+ configs/socfpga_is1_defconfig                 |  2 +-
+ configs/socfpga_mcvevk_defconfig              |  2 +-
+ configs/socfpga_secu1_defconfig               |  2 +-
+ configs/socfpga_sockit_defconfig              |  2 +-
+ configs/socfpga_socrates_defconfig            |  2 +-
+ configs/socfpga_sr1500_defconfig              |  4 +-
+ configs/socfpga_stratix10_atf_defconfig       |  2 +-
+ configs/socfpga_stratix10_defconfig           |  2 +-
+ configs/socfpga_vining_fpga_defconfig         |  4 +-
+ configs/socrates_defconfig                    |  2 +-
+ configs/som-db5800-som-6867_defconfig         |  2 +-
+ configs/somlabs_visionsom_6ull_defconfig      |  4 +-
+ configs/sonoff-ihost-rv1126_defconfig         |  2 +-
+ configs/spring_defconfig                      |  2 +-
+ configs/star_defconfig                        |  4 +-
+ configs/starfive_visionfive2_defconfig        |  2 +-
+ configs/stih410-b2260_defconfig               |  2 +-
+ configs/stm32746g-eval_defconfig              |  2 +-
+ configs/stm32746g-eval_spl_defconfig          |  2 +-
+ configs/stm32f429-evaluation_defconfig        |  2 +-
+ configs/stm32f469-discovery_defconfig         |  2 +-
+ configs/stm32f746-disco_defconfig             |  2 +-
+ configs/stm32f746-disco_spl_defconfig         |  2 +-
+ configs/stm32f769-disco_defconfig             |  2 +-
+ configs/stm32f769-disco_spl_defconfig         |  2 +-
+ configs/stm32h743-disco_defconfig             |  2 +-
+ configs/stm32h743-eval_defconfig              |  2 +-
+ configs/stm32h750-art-pi_defconfig            |  2 +-
+ configs/stm32mp13_defconfig                   |  6 +-
+ configs/stm32mp13_dhcor_defconfig             |  4 +-
+ ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  4 +-
+ ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  4 +-
+ ...-microgea-stm32mp1-microdev2-of7_defconfig |  4 +-
+ ...mp15-microgea-stm32mp1-microdev2_defconfig |  4 +-
+ configs/stm32mp15-odyssey_defconfig           |  6 +-
+ configs/stm32mp15_basic_defconfig             |  6 +-
+ configs/stm32mp15_defconfig                   |  6 +-
+ configs/stm32mp15_trusted_defconfig           |  6 +-
+ configs/stm32mp25_defconfig                   |  4 +-
+ configs/stm32mp_dhsom.config                  |  4 +-
+ configs/stmark2_defconfig                     |  2 +-
+ configs/surface-rt_defconfig                  |  4 +-
+ configs/syzygy_hub_defconfig                  |  2 +-
+ configs/taurus_defconfig                      |  4 +-
+ configs/tb100_defconfig                       |  2 +-
+ configs/tbs2910_defconfig                     |  6 +-
+ configs/tec-ng_defconfig                      |  4 +-
+ configs/tec_defconfig                         |  2 +-
+ configs/tegratab_defconfig                    |  4 +-
+ configs/tf701t_defconfig                      |  4 +-
+ configs/th1520_lpi4a_defconfig                |  2 +-
+ ...able-x86-conga-qa3-e3845-pcie-x4_defconfig |  4 +-
+ .../theadorable-x86-conga-qa3-e3845_defconfig |  4 +-
+ configs/theadorable-x86-dfi-bt700_defconfig   |  4 +-
+ configs/theadorable_debug_defconfig           |  2 +-
+ configs/thunderx_88xx_defconfig               |  2 +-
+ configs/tiger-rk3588_defconfig                |  2 +-
+ configs/tinker-rk3288_defconfig               |  4 +-
+ configs/tinker-s-rk3288_defconfig             |  4 +-
+ configs/tools-only_defconfig                  |  2 +-
+ configs/topic_miami_defconfig                 |  2 +-
+ configs/topic_miamilite_defconfig             |  2 +-
+ configs/topic_miamiplus_defconfig             |  2 +-
+ configs/toradex-smarc-imx8mp_defconfig        |  4 +-
+ configs/tplink_wdr4300_defconfig              |  2 +-
+ configs/tqma6dl_mba6_mmc_defconfig            |  2 +-
+ configs/tqma6dl_mba6_spi_defconfig            |  4 +-
+ configs/tqma6q_mba6_mmc_defconfig             |  2 +-
+ configs/tqma6q_mba6_spi_defconfig             |  4 +-
+ configs/tqma6s_mba6_mmc_defconfig             |  2 +-
+ configs/tqma6s_mba6_spi_defconfig             |  4 +-
+ configs/transformer_t20_defconfig             |  4 +-
+ configs/transformer_t30_defconfig             |  4 +-
+ configs/trats2_defconfig                      |  2 +-
+ configs/trats_defconfig                       |  2 +-
+ configs/trimslice_defconfig                   |  2 +-
+ configs/tuge1_defconfig                       |  2 +-
+ configs/turris_1x_nor_defconfig               |  2 +-
+ configs/turris_1x_sdcard_defconfig            |  2 +-
+ configs/turris_mox_defconfig                  |  4 +-
+ configs/turris_omnia_defconfig                |  2 +-
+ configs/tuxx1_defconfig                       |  2 +-
+ configs/u200_defconfig                        |  2 +-
+ configs/uDPU_defconfig                        |  2 +-
+ configs/udoo_defconfig                        |  4 +-
+ configs/udoo_neo_defconfig                    |  4 +-
+ configs/uniphier_ld4_sld8_defconfig           |  2 +-
+ configs/uniphier_v7_defconfig                 |  2 +-
+ configs/uniphier_v8_defconfig                 |  2 +-
+ configs/usb_a9263_dataflash_defconfig         |  2 +-
+ configs/usbarmory_defconfig                   |  2 +-
+ configs/variscite_dart6ul_defconfig           |  2 +-
+ configs/venice2_defconfig                     |  4 +-
+ configs/ventana_defconfig                     |  4 +-
+ configs/verdin-am62_a53_defconfig             |  4 +-
+ configs/verdin-am62_r5_defconfig              |  2 +-
+ configs/verdin-am62p_a53_defconfig            |  4 +-
+ configs/verdin-am62p_r5_defconfig             |  2 +-
+ configs/verdin-imx8mm_defconfig               |  4 +-
+ configs/verdin-imx8mp_defconfig               |  6 +-
+ configs/vf610twr_defconfig                    |  2 +-
+ configs/vf610twr_nand_defconfig               |  2 +-
+ configs/videostrong-kii-pro_defconfig         |  2 +-
+ configs/vinco_defconfig                       |  2 +-
+ configs/vining_2000_defconfig                 |  6 +-
+ configs/vocore2_defconfig                     |  2 +-
+ configs/vyasa-rk3288_defconfig                |  4 +-
+ configs/wandboard_defconfig                   |  2 +-
+ configs/warp7_bl33_defconfig                  |  2 +-
+ configs/warp7_defconfig                       |  2 +-
+ configs/wetek-core2_defconfig                 |  2 +-
+ configs/wetek-hub_defconfig                   |  2 +-
+ configs/wetek-play2_defconfig                 |  2 +-
+ configs/work_92105_defconfig                  |  2 +-
+ configs/x250_defconfig                        |  4 +-
+ configs/x3_t30_defconfig                      |  4 +-
+ configs/xilinx_mbv32_defconfig                |  2 +-
+ configs/xilinx_mbv32_smode_defconfig          |  2 +-
+ configs/xilinx_mbv64_defconfig                |  2 +-
+ configs/xilinx_mbv64_smode_defconfig          |  2 +-
+ configs/xilinx_versal_mini_defconfig          |  2 +-
+ configs/xilinx_versal_mini_emmc0_defconfig    |  2 +-
+ configs/xilinx_versal_mini_emmc1_defconfig    |  2 +-
+ configs/xilinx_versal_net_mini_defconfig      |  2 +-
+ configs/xilinx_versal_net_mini_emmc_defconfig |  2 +-
+ configs/xilinx_versal_net_virt_defconfig      |  4 +-
+ configs/xilinx_versal_virt_defconfig          |  4 +-
+ configs/xilinx_zynq_virt_defconfig            |  4 +-
+ configs/xilinx_zynqmp_kria_defconfig          |  4 +-
+ configs/xilinx_zynqmp_mini_defconfig          |  2 +-
+ configs/xilinx_zynqmp_mini_emmc0_defconfig    |  2 +-
+ configs/xilinx_zynqmp_mini_emmc1_defconfig    |  2 +-
+ configs/xilinx_zynqmp_mini_nand_defconfig     |  2 +-
+ .../xilinx_zynqmp_mini_nand_single_defconfig  |  2 +-
+ configs/xilinx_zynqmp_mini_qspi_defconfig     |  2 +-
+ configs/xilinx_zynqmp_r5_defconfig            |  2 +-
+ configs/xilinx_zynqmp_virt_defconfig          |  4 +-
+ configs/zynq_cse_nand_defconfig               |  2 +-
+ configs/zynq_cse_nor_defconfig                |  2 +-
+ configs/zynq_cse_qspi_defconfig               |  2 +-
+ doc/device-tree-bindings/config.txt           |  4 +-
+ doc/usage/environment.rst                     |  4 +-
+ drivers/mmc/mmc.c                             |  4 +-
+ drivers/net/fm/fm.c                           |  8 +--
+ drivers/net/phy/cortina.c                     |  8 +--
+ drivers/qe/qe.c                               |  8 +--
+ env/Kconfig                                   | 69 +++++++++----------
+ env/common.c                                  |  6 +-
+ env/fat.c                                     |  8 +--
+ env/mmc.c                                     | 28 ++++----
+ env/sf.c                                      |  6 +-
+ env/ubi.c                                     | 16 ++---
+ include/configs/cgtqmx8.h                     |  2 +-
+ include/configs/imx7-cm.h                     |  2 +-
+ include/configs/imx8mm-cl-iot-gate.h          |  2 +-
+ include/configs/imx8mp_rsb3720.h              |  2 +-
+ include/configs/imx8mq_phanbell.h             |  2 +-
+ include/configs/imx8qm_mek.h                  |  2 +-
+ include/configs/imx8qm_rom7720.h              |  2 +-
+ include/configs/imx8qxp_mek.h                 |  2 +-
+ include/configs/imx93_evk.h                   |  4 +-
+ include/configs/liteboard.h                   |  2 +-
+ include/configs/mx6cuboxi.h                   |  2 +-
+ include/configs/mx6sabre_common.h             |  2 +-
+ include/configs/mx6sllevk.h                   |  2 +-
+ include/configs/mx6ul_14x14_evk.h             |  2 +-
+ include/configs/mx6ullevk.h                   |  2 +-
+ include/configs/mx7ulp_com.h                  |  2 +-
+ include/configs/mx7ulp_evk.h                  |  2 +-
+ include/configs/pico-imx6.h                   |  2 +-
+ include/configs/pico-imx8mq.h                 |  2 +-
+ include/configs/tqma6.h                       |  2 +-
+ include/configs/vf610twr.h                    |  2 +-
+ include/configs/wandboard.h                   |  2 +-
+ include/configs/warp7.h                       |  2 +-
+ include/configs/xpress.h                      |  2 +-
+ include/env_default.h                         |  6 +-
+ include/env_flags.h                           |  2 +-
+ include/env_internal.h                        |  4 +-
+ include/mmc.h                                 |  2 +-
+ tools/envcrc.c                                |  2 +-
+ 994 files changed, 1389 insertions(+), 1408 deletions(-)
 
-Best Regards,
+---
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
 
-Tim
+-- 
+2.47.2
+
