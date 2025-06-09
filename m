@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B714CC5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99EAAC61DB2
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:15:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A37F582B07;
+	by phobos.denx.de (Postfix) with ESMTP id F036982C03;
 	Mon,  9 Jun 2025 10:14:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="grXi+OCI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eV+ZZSOI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8D7C8007D; Mon,  9 Jun 2025 10:14:44 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 9EB6C82BD9; Mon,  9 Jun 2025 10:14:46 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B209D82BA7
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:14:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3150D82B18
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:14:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5598Ef881947693;
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5598EfXa717039;
  Mon, 9 Jun 2025 03:14:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1749456881;
- bh=Koh9r6XOoYfjJ+avdEQhET8KPFyw49Hg7yhqAe8xt/8=;
+ bh=SG14UaolSeQ7Uwv5kuKJ3e6oIlGKkxDyvYb037SLdmA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=grXi+OCIQsMGMS03waGWfllmLW5/imyRPQha4AuqCnuJhdspObWtcbB/ayONJd/Gr
- pZRZeJISNTtt5FTG4MwQVIAA3Z0rqwdn71maam/4F1IeJHT7fBqEUjvu1Lzo2wXjpc
- pwQR+hnrF6Kcjh9cokvpOqQzCrwbgu/K4V/44RNA=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5598Ef6B4125663
+ b=eV+ZZSOILmUuqXhEb5QSRp9xnNEjnhgyjrw5UhPMvtYTs6tY7tqp/l1FEIxZjLNqL
+ xwiH7zxvGnD1m50H3tP8X7KyHz9o17rJdEIzDgvvzcEEX3ls+ndqyzlhur06eMQEDE
+ 4jFDoI/iQQ4B+12peDulUz9J0afQyMXvpG7FLkF8=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5598EfuI3552454
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
  Mon, 9 Jun 2025 03:14:41 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
- Jun 2025 03:14:40 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 03:14:41 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 9 Jun 2025 03:14:40 -0500
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5598EUT01101082;
- Mon, 9 Jun 2025 03:14:37 -0500
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>
-CC: <afd@ti.com>, <nm@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
- <jm@ti.com>, <u-kumar1@ti.com>, <m-shah@ti.com>, <b-padhi@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH v3 2/4] arch: mach-k3: common: Add support to shutdown MCU R5
- Core 1
-Date: Mon, 9 Jun 2025 13:44:27 +0530
-Message-ID: <20250609081429.1724643-3-b-padhi@ti.com>
+ Frontend Transport; Mon, 9 Jun 2025 03:14:41 -0500
+Received: from moteen-ubuntu-desk.dhcp.ti.com (moteen-ubuntu-desk.dhcp.ti.com
+ [172.24.227.136] (may be forged))
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5598EYqo1101163;
+ Mon, 9 Jun 2025 03:14:38 -0500
+From: Moteen Shah <m-shah@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <d-gole@ti.com>,
+ <m-chawdhry@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <m-shah@ti.com>
+Subject: [PATCH v2 1/6] ti_sci_*: Add utility to access tisci firmware and SOC
+ capability
+Date: Mon, 9 Jun 2025 13:44:29 +0530
+Message-ID: <20250609081434.1000377-2-m-shah@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250609081429.1724643-1-b-padhi@ti.com>
-References: <20250609081429.1724643-1-b-padhi@ti.com>
+In-Reply-To: <20250609081434.1000377-1-m-shah@ti.com>
+References: <20250609081434.1000377-1-m-shah@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,185 +82,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During boot, ROM can bring up the MCU R5F cores in either lockstep or
-split mode based on X509 certificate flags. If booted in split mode,
-core 0 will run DM firmware and second core sits in WFI. Add support to
-shut down core 1 so that other firmwares can later be loaded on them.
+Introduce response and request structs for receiving information
+regarding FW/SOC capability from DM. The received capability can
+further be used to call certain API's based on the feature supoorted
+by the DM firmware.
 
-The shutdown of MCU R5 Core 1 is invoked at A72 SPL init, as by that
-time Device Manager (DM) is up and running on R5 Core 0. The shutdown
-request of Core 1 is handled by Device Manager itself.
-
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+Signed-off-by: Moteen Shah <m-shah@ti.com>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 ---
- arch/arm/mach-k3/common.c             | 69 +++++++++++++++++++++++++++
- arch/arm/mach-k3/common.h             |  1 +
- arch/arm/mach-k3/j721e/j721e_init.c   |  9 +++-
- arch/arm/mach-k3/j721s2/j721s2_init.c |  7 +++
- arch/arm/mach-k3/j784s4/j784s4_init.c |  7 +++
- 5 files changed, 92 insertions(+), 1 deletion(-)
+ drivers/firmware/ti_sci.h              | 13 +++++++++++++
+ include/linux/soc/ti/ti_sci_protocol.h | 13 +++++++++++++
+ 2 files changed, 26 insertions(+)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index fc230f180d0..43ff114678a 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -31,6 +31,11 @@
- #include <dm/uclass-internal.h>
- #include <dm/device-internal.h>
+diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
+index bb8bc7beead..292f7cd578a 100644
+--- a/drivers/firmware/ti_sci.h
++++ b/drivers/firmware/ti_sci.h
+@@ -27,6 +27,7 @@
+ #define TI_SCI_MSG_BOARD_CONFIG_SECURITY  0x000d
+ #define TI_SCI_MSG_BOARD_CONFIG_PM	0x000e
+ #define TISCI_MSG_QUERY_MSMC		0x0020
++#define TI_SCI_MSG_QUERY_FW_CAPS	0x0022
  
-+#define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
-+#define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
-+#define PROC_ID_MCU_R5FSS0_CORE1		0x02
-+#define PROC_BOOT_CFG_FLAG_R5_LOCKSTEP		0x00000100
-+
- #include <asm/arch/k3-qos.h>
+ /* Device requests */
+ #define TI_SCI_MSG_SET_DEVICE_STATE	0x0200
+@@ -134,6 +135,18 @@ struct ti_sci_msg_resp_version {
+ 	u8 abi_minor;
+ } __packed;
  
- struct ti_sci_handle *get_ti_sci_handle(void)
-@@ -328,3 +333,67 @@ void setup_qos(void)
- 		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
- }
- #endif
++/**
++ * struct ti_sci_query_fw_caps_resp - Response for a message
++ * @hdr:	Generic header
++ * @fw_caps:	64-bit value representing the FW/SOC capabilities.
++ *
++ * Response to a message with message type TI_SCI_MSG_QUERY_FW_CAPS
++ */
++struct ti_sci_query_fw_caps_resp {
++	struct ti_sci_msg_hdr hdr;
++	u64    fw_caps;
++} __packed;
 +
-+int __maybe_unused shutdown_mcu_r5_core1(void)
-+{
-+	struct ti_sci_handle *ti_sci = get_ti_sci_handle();
-+	struct ti_sci_dev_ops *dev_ops = &ti_sci->ops.dev_ops;
-+	struct ti_sci_proc_ops *proc_ops = &ti_sci->ops.proc_ops;
-+	u32 dev_id_mcu_r5_core1 = put_core_ids[0];
-+	u64 boot_vector;
-+	u32 cfg, ctrl, sts, halted;
-+	int cluster_mode_lockstep, ret;
-+	bool r_state = false, c_state = false;
-+
-+	ret = proc_ops->proc_request(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
-+	if (ret) {
-+		printf("Unable to request processor control for MCU1_1 core, %d\n",
-+		       ret);
-+		return ret;
-+	}
-+
-+	ret = dev_ops->is_on(ti_sci, dev_id_mcu_r5_core1, &r_state, &c_state);
-+	if (ret) {
-+		printf("Unable to get device status for MCU1_1 core, %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = proc_ops->get_proc_boot_status(ti_sci, PROC_ID_MCU_R5FSS0_CORE1,
-+					     &boot_vector, &cfg, &ctrl, &sts);
-+	if (ret) {
-+		printf("Unable to get Processor boot status for MCU1_1 core, %d\n",
-+		       ret);
-+		goto release_proc_ctrl;
-+	}
-+
-+	halted = !!(sts & PROC_BOOT_STATUS_FLAG_R5_WFI);
-+	cluster_mode_lockstep = !!(cfg & PROC_BOOT_CFG_FLAG_R5_LOCKSTEP);
-+
-+	/*
-+	 * Shutdown MCU R5F Core 1 only if:
-+	 *	- cluster is booted in SplitMode
-+	 *	- core is powered on
-+	 *	- core is in WFI (halted)
-+	 */
-+	if (cluster_mode_lockstep || !c_state || !halted) {
-+		ret = -EINVAL;
-+		goto release_proc_ctrl;
-+	}
-+
-+	ret = proc_ops->set_proc_boot_ctrl(ti_sci, PROC_ID_MCU_R5FSS0_CORE1,
-+					   PROC_BOOT_CTRL_FLAG_R5_CORE_HALT, 0);
-+	if (ret) {
-+		printf("Unable to Halt MCU1_1 core, %d\n", ret);
-+		goto release_proc_ctrl;
-+	}
-+
-+	ret = dev_ops->put_device(ti_sci, dev_id_mcu_r5_core1);
-+	if (ret) {
-+		printf("Unable to assert reset on MCU1_1 core, %d\n", ret);
-+		return ret;
-+	}
-+
-+release_proc_ctrl:
-+	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
-+	return ret;
-+}
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index 02c74731fea..6e33f578151 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -49,6 +49,7 @@ enum k3_device_type get_device_type(void);
- struct ti_sci_handle *get_ti_sci_handle(void);
- void do_board_detect(void);
- void ti_secure_image_check_binary(void **p_image, size_t *p_size);
-+int shutdown_mcu_r5_core1(void);
+ /**
+  * struct ti_sci_msg_req_reboot - Reboot the SoC
+  * @hdr:	Generic Header
+diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
+index aa4d105ee98..f967077b756 100644
+--- a/include/linux/soc/ti/ti_sci_protocol.h
++++ b/include/linux/soc/ti/ti_sci_protocol.h
+@@ -261,6 +261,18 @@ struct ti_sci_core_ops {
+ 			  u64 *msmc_start, u64 *msmc_end);
+ };
  
- #if (IS_ENABLED(CONFIG_K3_QOS))
- void setup_qos(void);
-diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-index f31c20f7ed6..edca2634fb9 100644
---- a/arch/arm/mach-k3/j721e/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e/j721e_init.c
-@@ -296,9 +296,9 @@ void do_dt_magic(void)
- 
- void board_init_f(ulong dummy)
- {
-+	int ret;
- #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
- 	struct udevice *dev;
--	int ret;
- #endif
- 	/*
- 	 * Cannot delay this further as there is a chance that
-@@ -371,6 +371,13 @@ void board_init_f(ulong dummy)
- 	preloader_console_init();
- #endif
- 
-+	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
-+	if (IS_ENABLED(CONFIG_ARM64)) {
-+		ret = shutdown_mcu_r5_core1();
-+		if (ret)
-+			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
-+	}
++/**
++ * struct ti_sci_firmware_ops - DM firmware operations
++ * @query_dm_cap: Query the DM capabilities
++ *                Return 0 for successful query else appropriate error value.
++ */
++struct ti_sci_firmware_ops {
++	int (*query_dm_cap)(struct ti_sci_handle *handle,
++			    u64 *dm_cap);
++};
 +
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-index 5941fa26a95..6342161f830 100644
---- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-+++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-@@ -230,6 +230,13 @@ void k3_spl_init(void)
- 		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
- 	}
- 
-+	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
-+	if (IS_ENABLED(CONFIG_ARM64)) {
-+		ret = shutdown_mcu_r5_core1();
-+		if (ret)
-+			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
-+	}
++#define TI_SCI_MSG_FLAG_FW_CAP_DM	0x100
 +
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- }
-diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-index 787cf6261e4..2756accbe12 100644
---- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-+++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-@@ -206,6 +206,13 @@ void k3_spl_init(void)
- 
- 	writel(AUDIO_REFCLK1_DEFAULT, (uintptr_t)CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL);
- 
-+	/* Shutdown MCU_R5 Core 1 in Split mode at A72 SPL Stage */
-+	if (IS_ENABLED(CONFIG_ARM64)) {
-+		ret = shutdown_mcu_r5_core1();
-+		if (ret)
-+			printf("Unable to shutdown MCU R5 core 1, %d\n", ret);
-+	}
-+
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- }
+ /**
+  * struct ti_sci_proc_ops - Processor specific operations.
+  *
+@@ -609,6 +621,7 @@ struct ti_sci_ops {
+ 	struct ti_sci_dev_ops dev_ops;
+ 	struct ti_sci_clk_ops clk_ops;
+ 	struct ti_sci_core_ops core_ops;
++	struct ti_sci_firmware_ops fw_ops;
+ 	struct ti_sci_proc_ops proc_ops;
+ 	struct ti_sci_rm_core_ops rm_core_ops;
+ 	struct ti_sci_rm_ringacc_ops rm_ring_ops;
 -- 
 2.34.1
 
