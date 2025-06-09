@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE5DC61DB2
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E57C5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 08:37:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAE6082A65;
-	Mon,  9 Jun 2025 10:30:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6F84E811AC;
+	Mon,  9 Jun 2025 10:37:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YTYuuT09";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="PNIHG63R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74F8782B07; Mon,  9 Jun 2025 10:30:31 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DFDEE82A36; Mon,  9 Jun 2025 10:37:52 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE8B882A36
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:30:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67CC78007D
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 10:37:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-4a4312b4849so50122931cf.1
- for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 01:30:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749457827; x=1750062627; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bml/OffESHrlZuoGt+xRCeEaRwYGBtCArhIBHvoYaOw=;
- b=YTYuuT09vEKzDB+Nqc+7PnZZAwWYW2GcaXGBcxj3wdQrygnCGVbuJOAt7QOyVSgrTz
- NnWoW6avs9UgrBWDO4e/hHEwXVu4t/l4RwQxW49SzarUqIagcgaaV3d96Nuvj+G83RXs
- k1vz1bAbpnNdLoCdCgPck6p+RTWIC3Ydfuq89o69sGSMCc9bBUvFjgemKA03otgHJHBW
- Q5kxrTir+eKG3UlrI053lfJVU80EolntswZ9H64q2ZX7XQvbSa6Aj2yWRi/nu3N02xLm
- vf7ZDRTt0qhSk1CK5bjEu6L0NjC56hfrkYNWY779Tm6szzNNCllEAQQ2CogxXxS4jZTU
- stLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749457827; x=1750062627;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bml/OffESHrlZuoGt+xRCeEaRwYGBtCArhIBHvoYaOw=;
- b=ZzH/1VKz0/97aOAIYbEzCTa3fZt5XKwi/1bxhCYnLA1F8WwbsDMfBNWezba8dA3IAF
- SuKTvswWXJXxXDbcAa0XBdCjYPs60ONN2IGYfSdS40sMlRXkphcsR6Fsh3KFhTY+WLjV
- HVpAoWD8mPZgyCJhHvMqEnrAFO0JhtmD0FUhHYNEiVU6X1csgmMt7K9PryiH9q7xcluv
- 2W5tFXhJGTy+xGTzJqqo857BpJOLSI5jN/KF56rtjCBEi7ifUa3zP5hXoQuwP61U7j3A
- O86xU6rXFrAqkTh5DrwUTuTyjx52P5Grt3TgP0z/CNaXYDmMDAU2TeJP9MWL+Of6w8Ft
- u/Gw==
-X-Gm-Message-State: AOJu0Yyoy8l8ikxUnKHGsAsblV0vN6cByFK1IhTCp4XnhgmcoBn+t1L2
- SyW+Jun5fBDt++mJY8VWaDiXCMCQnGQBdeohHEg6EGgmyZ+G7dsI/LOFYOEu1cAuJdGAPlHiGwo
- k/1rIzwL2vLIXHIJgZsmCJFTttlOmF0gQDPHY5lXuKA==
-X-Gm-Gg: ASbGncv5W5hUnSnLYQZVS9oNaFexlJhO6nyxglFBz9ZjapC5u+t4blTkTMSAsraAKQ+
- lV7sO5aqrV3cQMWyLpZsU2eCXaL1TlQd1mZGQQRLX2oJ4AV4FTErgzkJsyjiUfzcBBZ3Ypg0cc7
- FyrdeiVDw5i4ZV5vOEwGO+85CUwHh9kvN1hAk+hQ2EQSEt
-X-Google-Smtp-Source: AGHT+IGieVz2CSzWEgpAyq3tBzBUYvtOLns4auYlwEj9a4CtvKzOZaI/ULJZJUyHNBViq5Yrb0Nb8D7oW6KSi7+g4gI=
-X-Received: by 2002:ad4:5c81:0:b0:6fa:9d4b:fa10 with SMTP id
- 6a1803df08f44-6fb08eeef5emr211550826d6.0.1749457827544; Mon, 09 Jun 2025
- 01:30:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=82553fdf62=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m8Kd000428;
+ Mon, 9 Jun 2025 10:37:38 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ L0RnS1U7mCVoGU6dJfAB6lg1L6dl6hL0+B207dI5NEI=; b=PNIHG63RoxosSsyL
+ YXk4BKiUa+RBciBGyoJCxvQuqP7HmpWyzYaoPwaxHwJeFFmccGP4o//BwLu05Xjn
+ uNgC+EbPJRQiXfbsUr1gY+x6LjIAIV2sRI14FKTqS/vh/iP0/nDSUgqyWPt8aOGM
+ DXqF2H+oAHA6g0bppD4uklSp3Jk9AhwdRWuQBo41umlF2Ac4T6sEDnN3AVTNbBaS
+ hSK7ZbIFTXt8nm7Jif32Ye9moWD0NTfpgMjOoeZNLOz2P84RJ7Z324Grw23Q2Nkd
+ U0NkCLPCZMEJXudy+/uE8T9gpVQm7giy2k7k0zwzD9tTiF5d58gg97x2+aJ69/ck
+ NF61ug==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474aum6wfm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 09 Jun 2025 10:37:37 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A665940048;
+ Mon,  9 Jun 2025 10:36:24 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D8D3CB64606;
+ Mon,  9 Jun 2025 10:34:40 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
+ 2025 10:34:40 +0200
+Message-ID: <830e3e26-1936-45c0-9768-82d65757fcdc@foss.st.com>
+Date: Mon, 9 Jun 2025 10:34:39 +0200
 MIME-Version: 1.0
-References: <20250526091253.400802-1-sughosh.ganu@linaro.org>
- <20250526091253.400802-3-sughosh.ganu@linaro.org>
- <CAC_iWjL+0bwPS9eXfvnFjN8UcAta+zgHz8vfDWz5YvVwoE9tsA@mail.gmail.com>
- <CADg8p96yFhzabfzZEhNzWX+kEwBuOsih0kVL+0d=ZLt=F2JNDQ@mail.gmail.com>
- <CADg8p977sXJRS1CM6Lnmep0_gc3jc9b3yFg1A-qkVn5Gswr_=Q@mail.gmail.com>
- <CAC_iWj+Mzskthf1dLSX6NPyzWiRGzfbcekCs_c_mT3GpFH6gTg@mail.gmail.com>
- <CADg8p95CnQnj2_Wh6D05hCtZh75PDU-S-_MkSvzBdGFAgKJiug@mail.gmail.com>
- <CAC_iWjK9ZQoSx8a_nmbJ-R-FUak=N+r5Vy7VPLZHFNqwnzO1Tw@mail.gmail.com>
- <CADg8p95y-CLyHC7wxSUn7md61ayn=RsDxfj9EopVoOOKqT=f0w@mail.gmail.com>
-In-Reply-To: <CADg8p95y-CLyHC7wxSUn7md61ayn=RsDxfj9EopVoOOKqT=f0w@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 9 Jun 2025 14:00:16 +0530
-X-Gm-Features: AX0GCFtmCf8zC0gLOgjttkPU5UheWIoWlyzzJ5AxaCdQx305ZjRDOfZQhF8MKlI
-Message-ID: <CADg8p96Dok-xzfEYQcynr=L_t1uETGKeBqc7ahXCVWUT8yi7Kg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] lmb: replace the lmb_alloc() and lmb_alloc_base()
- API's
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 9/9] board: stm32: add stm32h747-discovery board support
+To: Lukasz Majewski <lukma@denx.de>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>, <linux-amarula@amarulasolutions.com>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, Sean Anderson <seanga2@gmail.com>, Tom Rini
+ <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
+ <20250607093730.2249536-10-dario.binacchi@amarulasolutions.com>
+ <316dd0c7-c7b8-407d-b34a-b5b90f056b94@foss.st.com>
+ <20250609100727.56d7de7b@wsk>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250609100727.56d7de7b@wsk>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-09_03,2025-06-05_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,107 +97,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 4 Jun 2025 at 16:08, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Wed, 4 Jun 2025 at 12:53, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > [...]
-> >
-> > > > > > >
-> > > > > > >
-> > > > > > > This tends to blow up in random ways. See
-> > > > > > > commit 67be24906fe. TL;DR 0 is a valid address in some systems.
-> > > > > >
-> > > > > > Yes, I see your point. I think the calling function will have to be
-> > > > > > re-written such that the env variables get stored only when the API
-> > > > > > returns successfully. Then at least the platform will not have an env
-> > > > > > variable with some junk value.
-> > > > >
-> > > > > Thinking about this a bit, I think in these two instances, returning a
-> > > > > value of 0 might not be an issue if the DRAM memory does not start at
-> > > > > 0x0. Don't get me wrong, what you are suggesting is definitely
-> > > > > correct. I am only thinking about increasing code size on these
-> > > > > platforms if 0x0 is not a valid address, and moreover since the
-> > > > > platforms were already setting 0x0 in case of an error.
-> > > >
-> > > > what kind of code size increase are we talking about?
-> > >
-> > > Let me check the actual size impact with the changes and get back to you.
-> > >
-> > > > It's returning
-> > > > na int instead of a physical address so that should be close to zero?
-> > >
-> > > Sorry, I do not understand what you are suggesting, but even the above
-> > > static function is returning a phys_addr_t value, which is 0 in case
-> > > of an error. And I have kept this to mimic the existing behaviour.
-> > > Thanks.
-> >
-> > I am saying that changing the return type from phys_addr_t to an int
-> > should have a negligible size impact.
->
-> Yes, that will not have a size impact, but there would have to be a
-> check for whether the env variable has to be set [1], and that adds to
-> the size. That check might be superfluous if the address 0x0 is not
-> valid for the memory map of the platform. Fwiw, adding this check adds
-> about 256 bytes to the binary -- I can incorporate the check if an
-> addition of 256 bytes is fine.
 
-Can we arrive at a decision on this please. If I don't get any
-response by tomorrow, I will incorporate Ilias's comment, and will put
-a check for setting the env variable. Thanks.
 
--sughosh
+On 6/9/25 10:07, Lukasz Majewski wrote:
+> Hi Patrice,
+> 
+>> On 6/7/25 11:37, Dario Binacchi wrote:
+>>> The board includes an STM32H747XI SoC with the following resources:
+>>>  - 2 Mbytes Flash
+>>>  - 1 Mbyte SRAM
+>>>  - LCD-TFT controller
+>>>  - MIPI-DSI interface
+>>>  - FD-CAN
+>>>  - USB 2.0 high-speed/full-speed
+>>>  - Ethernet MAC
+>>>  - camera interface
+>>>
+>>> Detailed information can be found at:
+>>> https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
+>>>
+>>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>>
+>>> ---
+>>>
+>>>  arch/arm/mach-stm32/stm32h7/Kconfig        |  4 +++
+>>>  board/st/stm32h747-disco/Kconfig           | 15 ++++++++
+>>>  board/st/stm32h747-disco/MAINTAINERS       |  7 ++++
+>>>  board/st/stm32h747-disco/Makefile          |  6 ++++
+>>>  board/st/stm32h747-disco/stm32h747-disco.c | 42
+>>> ++++++++++++++++++++++ configs/stm32h747-disco_defconfig          |
+>>> 35 ++++++++++++++++++ drivers/clk/stm32/clk-stm32h7.c            |
+>>> 5 +++ include/configs/stm32h747-disco.h          | 32
+>>> +++++++++++++++++ 8 files changed, 146 insertions(+)
+>>>  create mode 100644 board/st/stm32h747-disco/Kconfig
+>>>  create mode 100644 board/st/stm32h747-disco/MAINTAINERS
+>>>  create mode 100644 board/st/stm32h747-disco/Makefile
+>>>  create mode 100644 board/st/stm32h747-disco/stm32h747-disco.c
+>>>  create mode 100644 configs/stm32h747-disco_defconfig
+>>>  create mode 100644 include/configs/stm32h747-disco.h
+>>>
+>>> diff --git a/arch/arm/mach-stm32/stm32h7/Kconfig
+>>> b/arch/arm/mach-stm32/stm32h7/Kconfig index
+>>> 70233a4b23cd..72f20c477d04 100644 ---
+>>> a/arch/arm/mach-stm32/stm32h7/Kconfig +++
+>>> b/arch/arm/mach-stm32/stm32h7/Kconfig @@ -6,11 +6,15 @@ config
+>>> TARGET_STM32H743_DISCO config TARGET_STM32H743_EVAL
+>>>  	bool "STM32H743 Evaluation board"
+>>>  
+>>> +config TARGET_STM32H747_DISCO
+>>> +	bool "STM32H747 Discovery board"
+>>> +
+>>>  config TARGET_STM32H750_ART_PI
+>>>  	bool "STM32H750 ART Pi board"
+>>>  
+>>>  source "board/st/stm32h743-eval/Kconfig"
+>>>  source "board/st/stm32h743-disco/Kconfig"
+>>> +source "board/st/stm32h747-disco/Kconfig"
+>>>  source "board/st/stm32h750-art-pi/Kconfig"
+>>>  
+>>>  endif
+>>> diff --git a/board/st/stm32h747-disco/Kconfig
+>>> b/board/st/stm32h747-disco/Kconfig new file mode 100644
+>>> index 000000000000..a7b2c09a327f
+>>> --- /dev/null
+>>> +++ b/board/st/stm32h747-disco/Kconfig
+>>> @@ -0,0 +1,15 @@
+>>> +if TARGET_STM32H747_DISCO
+>>> +
+>>> +config SYS_BOARD
+>>> +	default "stm32h747-disco"
+>>> +
+>>> +config SYS_VENDOR
+>>> +	default "st"
+>>> +
+>>> +config SYS_SOC
+>>> +	default "stm32h7"
+>>> +
+>>> +config SYS_CONFIG_NAME
+>>> +	default "stm32h747-disco"
+>>> +
+>>> +endif
+>>> diff --git a/board/st/stm32h747-disco/MAINTAINERS
+>>> b/board/st/stm32h747-disco/MAINTAINERS new file mode 100644
+>>> index 000000000000..d48649f773f3
+>>> --- /dev/null
+>>> +++ b/board/st/stm32h747-disco/MAINTAINERS
+>>> @@ -0,0 +1,7 @@
+>>> +STM32H747 DISCOVERY BOARD
+>>> +M:	Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>> +S:	Maintained
+>>> +F:	board/st/stm32h747-disco
+>>> +F:	include/configs/stm32h747-disco.h
+>>> +F:	configs/stm32h747-disco_defconfig
+>>> +F:	arch/arm/dts/stm32h747*
+>>> diff --git a/board/st/stm32h747-disco/Makefile
+>>> b/board/st/stm32h747-disco/Makefile new file mode 100644
+>>> index 000000000000..e11f052cc88f
+>>> --- /dev/null
+>>> +++ b/board/st/stm32h747-disco/Makefile
+>>> @@ -0,0 +1,6 @@
+>>> +# SPDX-License-Identifier: GPL-2.0+
+>>> +#
+>>> +# Copyright (c) 2025 Dario Binacchi
+>>> <dario.binacchi@amarulasolutions.com> +#
+>>> +
+>>> +obj-y	:= stm32h747-disco.o
+>>> diff --git a/board/st/stm32h747-disco/stm32h747-disco.c
+>>> b/board/st/stm32h747-disco/stm32h747-disco.c new file mode 100644
+>>> index 000000000000..be0884bdeb4d
+>>> --- /dev/null
+>>> +++ b/board/st/stm32h747-disco/stm32h747-disco.c
+>>> @@ -0,0 +1,42 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * stm32h747i-disco support
+>>> + *
+>>> + * Copyright (C) 2025 Dario Binacchi
+>>> <dario.binacchi@amarulasolutions.com>
+>>> + */
+>>> +
+>>> +#include <dm.h>
+>>> +#include <init.h>
+>>> +#include <log.h>
+>>> +#include <asm/global_data.h>
+>>> +
+>>> +DECLARE_GLOBAL_DATA_PTR;
+>>> +
+>>> +int dram_init(void)
+>>> +{
+>>> +	struct udevice *dev;
+>>> +	int ret;
+>>> +
+>>> +	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>>> +	if (ret) {
+>>> +		debug("DRAM init failed: %d\n", ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	if (fdtdec_setup_mem_size_base() != 0)
+>>> +		ret = -EINVAL;
+>>> +
+>>> +	return ret;
+>>> +}
+>>> +
+>>> +int dram_init_banksize(void)
+>>> +{
+>>> +	fdtdec_setup_memory_banksize();
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>> +int board_init(void)
+>>> +{
+>>> +	return 0;
+>>> +}
+>>> diff --git a/configs/stm32h747-disco_defconfig
+>>> b/configs/stm32h747-disco_defconfig new file mode 100644
+>>> index 000000000000..8a0c72450d1e
+>>> --- /dev/null
+>>> +++ b/configs/stm32h747-disco_defconfig
+>>> @@ -0,0 +1,35 @@
+>>> +CONFIG_ARM=y
+>>> +CONFIG_ARCH_STM32=y
+>>> +CONFIG_TEXT_BASE=0x08000000
+>>> +CONFIG_SYS_MALLOC_LEN=0x100000
+>>> +CONFIG_NR_DRAM_BANKS=1
+>>> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>>> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x24040000
+>>> +CONFIG_ENV_SIZE=0x2000
+>>> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32h747i-disco"
+>>> +CONFIG_OF_LIBFDT_OVERLAY=y
+>>> +CONFIG_SYS_LOAD_ADDR=0xd0400000
+>>> +CONFIG_STM32H7=y
+>>> +CONFIG_TARGET_STM32H747_DISCO=y
+>>> +CONFIG_DISTRO_DEFAULTS=y
+> 
+> I'm just wondering if there is any plan to move forward to use the new
+> approach?
+> 
+> As fair as I remember this is the "deprecated" option...
 
->
-> -sughosh
->
-> [1] - https://gist.github.com/sughoshg/3ec45f2a8942db7bf5872efc8d373928
->
-> >
-> > Thanks
-> > /Ilias
-> > >
-> > > -sughosh
-> > >
-> > > >
-> > > > Thanks
-> > > > /Ilias
-> > > > > If it is okay
-> > > > > to increase code size on these platforms, I will change the calling
-> > > > > function, such that the variable does not get set in case of an error.
-> > > > > Maybe Casey and Mark can comment? Thanks.
-> > > > >
-> > > > > -sughosh
-> > > > >
-> > > > > >
-> > > > > > -sughosh
-> > > > > >
-> > > > > > >
-> > > > > > > > +
-> > > > > > > > +       return addr;
-> > > > > > > > +}
-> > > > > > > > +
-> > > > > > > > +static phys_addr_t lmb_alloc_base(phys_size_t size, ulong align,
-> > > > > > > > +                                 phys_addr_t max_addr, u32 flags)
-> > > > > > > > +{
-> > > > > > > > +       int err;
-> > > > > > > > +       phys_addr_t addr;
-> > > > > > > > +
-> > > > > > > > +       addr = max_addr;
-> > > > > > > > +       err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, align, &addr, size, flags);
-> > > > > > > > +       if (err)
-> > > > > > > > +               return 0;
-> > > > > > > > +
-> > > > > > > > +       return addr;
-> > > > > > > > +}
-> > > > > > > > +
-> > > > > > > >  #define lmb_alloc_addr(addr, size, flags) lmb_reserve(addr, size, flags)
-> > > > > > > >
-> > > > > > > >  static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
-> > > > > > > > --
-> > > > > > > > 2.34.1
-> > > > > > > >
-> > > > > > >
-> > > > > > > Cheers
-> > > > > > > /Ilias
+Hi Lukasz
+
+I was not aware of deprecation of CONFIG_DISTRO_DEFAULTS .
+Can you point to me the other alternative ?
+
+Thanks
+Patrice
+
+> 
+>>> +CONFIG_BOOTDELAY=3
+>>> +CONFIG_AUTOBOOT_KEYED=y
+>>> +CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop
+>>> autoboot.\n" +CONFIG_AUTOBOOT_STOP_STR=" "
+>>> +CONFIG_DEFAULT_FDT_FILE="stm32h747i-disco"
+>>> +CONFIG_SYS_CBSIZE=256
+>>> +CONFIG_SYS_PBSIZE=282
+>>> +# CONFIG_DISPLAY_CPUINFO is not set
+>>> +CONFIG_SYS_PROMPT="U-Boot > "
+>>> +CONFIG_CMD_GPT=y
+>>> +CONFIG_CMD_MMC=y
+>>> +# CONFIG_CMD_SETEXPR is not set
+>>> +CONFIG_CMD_CACHE=y
+>>> +CONFIG_CMD_TIMER=y
+>>> +CONFIG_CMD_EXT4_WRITE=y
+>>> +# CONFIG_ISO_PARTITION is not set
+>>> +CONFIG_OF_CONTROL=y
+>>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>> +CONFIG_NO_NET=y
+>>> +CONFIG_STM32_SDMMC2=y
+>>> +# CONFIG_PINCTRL_FULL is not set
+>>> diff --git a/drivers/clk/stm32/clk-stm32h7.c
+>>> b/drivers/clk/stm32/clk-stm32h7.c index 6acf2ff0a8fb..aa3be414a29f
+>>> 100644 --- a/drivers/clk/stm32/clk-stm32h7.c
+>>> +++ b/drivers/clk/stm32/clk-stm32h7.c
+>>> @@ -114,6 +114,7 @@
+>>>  #define		QSPISRC_PER_CK		3
+>>>  
+>>>  #define PWR_CR3				0x0c
+>>> +#define PWR_CR3_LDOEN			BIT(1)
+>>>  #define PWR_CR3_SCUEN			BIT(2)
+>>>  #define PWR_D3CR			0x18
+>>>  #define PWR_D3CR_VOS_MASK		GENMASK(15, 14)
+>>> @@ -375,7 +376,11 @@ int configure_clocks(struct udevice *dev)
+>>>  	clrsetbits_le32(pwr_base + PWR_D3CR, PWR_D3CR_VOS_MASK,
+>>>  			VOS_SCALE_1 << PWR_D3CR_VOS_SHIFT);
+>>>  	/* Lock supply configuration update */
+>>> +#if IS_ENABLED(CONFIG_TARGET_STM32H747_DISCO)
+>>> +	clrbits_le32(pwr_base + PWR_CR3, PWR_CR3_LDOEN);
+>>> +#else
+>>>  	clrbits_le32(pwr_base + PWR_CR3, PWR_CR3_SCUEN);
+>>> +#endif
+>>>  	while (!(readl(pwr_base + PWR_D3CR) & PWR_D3CR_VOSREADY))
+>>>  		;
+>>>  
+>>> diff --git a/include/configs/stm32h747-disco.h
+>>> b/include/configs/stm32h747-disco.h new file mode 100644
+>>> index 000000000000..393445a8ae1f
+>>> --- /dev/null
+>>> +++ b/include/configs/stm32h747-disco.h
+>>> @@ -0,0 +1,32 @@
+>>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>>> +/*
+>>> + * Copyright (C) 2025 Dario Binacchi
+>>> <dario.binacchi@amarulasolutions.com>
+>>> + */
+>>> +
+>>> +#ifndef __CONFIG_H
+>>> +#define __CONFIG_H
+>>> +
+>>> +#include <config.h>
+>>> +#include <linux/sizes.h>
+>>> +
+>>> +/* For booting Linux, use the first 16MB of memory */
+>>> +#define CFG_SYS_BOOTMAPSZ		SZ_16M
+>>> +
+>>> +#define CFG_SYS_FLASH_BASE		0x08000000
+>>> +
+>>> +#define CFG_SYS_HZ_CLOCK		1000000
+>>> +
+>>> +#define BOOT_TARGET_DEVICES(func) \
+>>> +	func(MMC, mmc, 0)
+>>> +
+>>> +#include <config_distro_bootcmd.h>
+>>> +#define CFG_EXTRA_ENV_SETTINGS				\
+>>> +			"kernel_addr_r=0xD0008000\0"
+>>> 	\
+>>> +			"fdtfile=stm32h747i-disco.dtb\0"	\
+>>> +			"fdt_addr_r=0xD0408000\0"		\
+>>> +			"scriptaddr=0xD0418000\0"		\
+>>> +			"pxefile_addr_r=0xD0428000\0" \
+>>> +			"ramdisk_addr_r=0xD0438000\0"
+>>> 	\
+>>> +			BOOTENV
+>>> +
+>>> +#endif /* __CONFIG_H */  
+>> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>>
+>> Thanks
+>> Patrice
+> 
+> 
+> 
+> 
+> Best regards,
+> 
+> Lukasz Majewski
+> 
+> --
+> 
+> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
