@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD4AC5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 07:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9726AC5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 07:58:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A4AB82B95;
-	Mon,  9 Jun 2025 09:57:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E3D282A36;
+	Mon,  9 Jun 2025 09:58:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="x0poi8Bd";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="SrIHp5ru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4A5382A36; Mon,  9 Jun 2025 09:57:58 +0200 (CEST)
+ id 59FF282BAA; Mon,  9 Jun 2025 09:57:59 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DBDB82A65
+ by phobos.denx.de (Postfix) with ESMTPS id CC5B882B33
  for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 09:57:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=82553fdf62=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m36m024550;
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m3D7016965;
  Mon, 9 Jun 2025 09:57:50 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- VepJEaUSUTxpZwDqJn9HZb8s4eUYgw8MbW8GKGJeqmQ=; b=x0poi8Bd/w765/P1
- jHaK+DZ2WpOA/GKJnlyC3yNB/yy2QamQfhqFbFGPu5BZO+cJIW++Ap4UFfrv+cV6
- x5HZ9XT6xb7ahrQBebqnQi1A2S+0rQKnJxpsxXoeWIkxdcn19zVBYay6XjKxLZ9b
- JOQrF4H9qU86f3+P/YH4ya43BifTCGPdl1KIFYXJkYXj0izqj8kGM1tZBUPciT02
- ztS2Ap6H3agAumRtduH+KqSLZpD7mwPBLzNi3LWtcFW+s8atCHcAQ/7dw617ZKKT
- u73xBYve4fCz260V7Dbwld4JQ7Hf2facuUkNHsEfcK/4lGhhK5pAEImHYP+XXLLW
- PI2a5g==
+ qrq0u2qhxnp8dvHd0+9o7KuYCCfytGDgfOzdZTTrULU=; b=SrIHp5ru/ZVmRnd7
+ Xt39VxACMpdhLrfY44s/2sxFdJfdedobVOb0HXJocdoU2g94y6oEsmnufYuHTV+C
+ R8WM40kqHwJ2bdI4O82Rim6lydCEi5pSmZRxy5ExNY5wG2xHGkOBfzZXSljBsezL
+ bF/LDkpuXcwgTwv6XlX/pS4VPWEQBc4nohWrXxcIWWErnx1K/ndT7AiLMJaFOtpy
+ tVb6mQY7SL9j/a+au8gfT63jlOT6VfxKLvW1FYkg1M4Je/ILn9WeM2e/2akfISj+
+ BGJv8IuGf6igT+/XXF6XVN3Hp80QEOcZEwQWQoQPYIKRqiXWkzptS+uFv7/QhXIw
+ JQNfjQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474aj9x597-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474cahdxc3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Mon, 09 Jun 2025 09:57:50 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4FDC140059;
- Mon,  9 Jun 2025 09:57:01 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 81F4E40057;
+ Mon,  9 Jun 2025 09:56:57 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1AC6BB63A40;
- Mon,  9 Jun 2025 09:56:26 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 76AD1B70F83;
+ Mon,  9 Jun 2025 09:56:06 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
- 2025 09:56:25 +0200
-Message-ID: <d7602de8-a239-4cd3-b539-51250405b4aa@foss.st.com>
-Date: Mon, 9 Jun 2025 09:56:25 +0200
+ 2025 09:56:05 +0200
+Message-ID: <09b29f4e-cdd2-4faf-8b2f-12195d5c27c5@foss.st.com>
+Date: Mon, 9 Jun 2025 09:56:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/9] ARM: dts: stm32: add an extra pin map for USART1 on
- stm32h743
+Subject: Re: [PATCH 4/9] ARM: dts: stm32: add uart8 node for stm32h743 MCU
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  <u-boot@lists.denx.de>
 CC: <linux-amarula@amarulasolutions.com>, Alexandre Torgue
@@ -67,10 +66,10 @@ CC: <linux-amarula@amarulasolutions.com>, Alexandre Torgue
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
- <20250607093730.2249536-7-dario.binacchi@amarulasolutions.com>
+ <20250607093730.2249536-5-dario.binacchi@amarulasolutions.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250607093730.2249536-7-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20250607093730.2249536-5-dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -98,44 +97,39 @@ X-Virus-Status: Clean
 
 
 On 6/7/25 11:37, Dario Binacchi wrote:
-> Add an additional pin map configuration for using the USART1 controller
-> on the stm32h743 MCU.
+> Add support for UART8 by applying the settings specified in the
+> reference manual RM0433.
 > 
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> Link: https://lore.kernel.org/r/20250427074404.3278732-8-dario.binacchi@amarulasolutions.com
+> Link: https://lore.kernel.org/r/20250427074404.3278732-6-dario.binacchi@amarulasolutions.com
 > Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 > 
-> [ upstream commit: 8e71dfe46a4a1e9505b1a327470f879b63388968 ]
+> [ upstream commit: 07aa43adae2363c3734055aeba0789536fa0f8f2 ]
 > 
 > ---
 > 
->  dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
+>  dts/upstream/src/arm/st/stm32h743.dtsi | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 > 
-> diff --git a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-> index 96022afd0168..8a6db484383d 100644
-> --- a/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-> +++ b/dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi
-> @@ -237,6 +237,19 @@
+> diff --git a/dts/upstream/src/arm/st/stm32h743.dtsi b/dts/upstream/src/arm/st/stm32h743.dtsi
+> index b8d4c44c8a82..2f19cfbc57ad 100644
+> --- a/dts/upstream/src/arm/st/stm32h743.dtsi
+> +++ b/dts/upstream/src/arm/st/stm32h743.dtsi
+> @@ -211,6 +211,14 @@
+>  			};
 >  		};
->  	};
 >  
-> +	usart1_pins_b: usart1-1 {
-> +		pins1 {
-> +			pinmux = <STM32_PINMUX('A', 9, AF7)>; /* USART1_TX */
-> +			bias-disable;
-> +			drive-push-pull;
-> +			slew-rate = <0>;
+> +		uart8: serial@40007c00 {
+> +			compatible = "st,stm32h7-uart";
+> +			reg = <0x40007c00 0x400>;
+> +			interrupts = <83>;
+> +			status = "disabled";
+> +			clocks = <&rcc UART8_CK>;
 > +		};
-> +		pins2 {
-> +			pinmux = <STM32_PINMUX('A', 10, AF7)>; /* USART1_RX */
-> +			bias-disable;
-> +		};
-> +	};
 > +
->  	usart2_pins_a: usart2-0 {
->  		pins1 {
->  			pinmux = <STM32_PINMUX('D', 5, AF7)>; /* USART2_TX */
+>  		usart1: serial@40011000 {
+>  			compatible = "st,stm32h7-uart";
+>  			reg = <0x40011000 0x400>;
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
