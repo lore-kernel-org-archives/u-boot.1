@@ -4,98 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D4AAC5B552
-	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 16:22:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6197C5B552
+	for <u-boot@archiver.kernel.org>; Mon,  9 Jun 2025 16:48:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0B9882998;
-	Mon,  9 Jun 2025 18:22:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB8F382B07;
+	Mon,  9 Jun 2025 18:48:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a1PDQ5Vx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lJtwHLbb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 244E282998; Mon,  9 Jun 2025 18:22:47 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 5B8F682AA7; Mon,  9 Jun 2025 18:48:47 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 729B0826AA
- for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 18:22:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E0EA826AA
+ for <u-boot@lists.denx.de>; Mon,  9 Jun 2025 18:48:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-2e95ab2704fso2813555fac.3
- for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 09:22:44 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-72c27166ab3so3089802a34.1
+ for <u-boot@lists.denx.de>; Mon, 09 Jun 2025 09:48:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749486163; x=1750090963; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749487724; x=1750092524; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/HDH5EqaoG2G/SeODK6F9H/o24tlGfFInDKDDAqDRnw=;
- b=a1PDQ5Vx1F+U7HP4k+MvGINV2axlnOGMR9uIFgggqVMDhzqItAop1IqYcHGZLWMulY
- UzJtEKLpsuV3SZuJ9VpyqsvhUh/49tgcOTS4R7AR6hfj+1IzjDTJ6+OANCTRX3a2nl2x
- YuviGunTiKJh8ZMtmwAaQbiVHei4jQOht12t8=
+ bh=j6F5YQVymRSPS/rX0V9X/A9inByf6oQ5kTMB/KfeIbQ=;
+ b=lJtwHLbb/N6aPn0HswyTDfYHeFVc3cn4IZW1suNJ7J/IlYAM91nHMM4BZAD84fmQq8
+ brJr848BMKUszY1RD59VZJIGK0CvJ8YXn9NwA3zIAcXvkDbtVaFT8zM/BgM4391qG9bM
+ Ch44vtA9JRBcha869pc337kq3QYbqw43MQEa8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749486163; x=1750090963;
+ d=1e100.net; s=20230601; t=1749487724; x=1750092524;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/HDH5EqaoG2G/SeODK6F9H/o24tlGfFInDKDDAqDRnw=;
- b=fe0XhAsrDTZVWs5+xCBugEqgQOrRWA0vXCAnE+Hf1FOKOFFkMV8zDuYf6JOm7jGt/c
- Sp2Wv7UlTaXLdeTChoawEZMsxLyg4mI+Aqvjl3AT2+dNAWvx2yc7RhuQtvZBtKzhdcNE
- ukY2jridlBLiWIc6lJujTfAKHRObWfFbNk5TOjCGtQZFYGUUS0oQ0Zjvv3YCkJwtnX1k
- P/46axv98YJTKRAzaHTBwWNGm65jnMefo+ckvobVBE6l1TvTYgXRr9rifKBfO4apRQkz
- y49KZLCfSWTiy+eH9kiP2JQTrLebzhGHbjSJTTU4Lhk4go3ifwlHbA0D/4WlLuRepbQc
- pzdQ==
+ bh=j6F5YQVymRSPS/rX0V9X/A9inByf6oQ5kTMB/KfeIbQ=;
+ b=TMkRBe/HWJq8zKKk+ZCKh6VvgRI5Aw6KCJoEK+tjXy8GVUQQ63apmURCyBv9s6oBup
+ Wz7Jj8Y63Nt5Z8Mwa3OQOG1c/+ab1tEi6be/a+u4NmAXZcmCsdqgrofKYo1ZHv5QUawz
+ yVRnwazc/YJiYh8vVnYwV4PuIPiZULPtlAh4yVYH6+wimBO5IWE6dap0QZY3Lfjr4o8r
+ 7KtzotXvVpBThOpiQQoWms391ZR1X8xkqGFjnYw1gJZPflxYYz6c4Cz4lrlIxeNfmvtU
+ aF8JkoeK9szFsiS7eaokgManJlU0XY9E7Oqk0KNziO4kU08YgMxxYBsRpNnZxAP2gke2
+ bzRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHuLXyEAxsTRqwVNsXabO3F2Ut30KT+DHHimCP8ipkgvniivwOo9WjPLJhbO7YQsbjdHOdKKU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxveGGZ2m01hpr3iyU/hfMq1QVRvCWZknp1dtfc+iSN3K/F3LfV
- mdSLusHx7CByWT8ZNwpU//voHduwdgrK+PFBrvwCZFfIFetJuw67615TDz9HIpNn8SY=
-X-Gm-Gg: ASbGncsMTr4OW7ifgazd139XCQJkvv2uUkuYBEO8831zRW8Fyq8f9BoetG7SgHdqZ8I
- e768Trt0wm9r4my41OeI/pQIjA6thBTiWDLr0gP3VUL7Fk3iIQbVcEi1/FbgR6/VQiSsBqAgq2G
- btZvQRRD6UgTw1btD6OraxnCTTocFU6Lln04Y+fG7xW1Rg4/6iQepbr3b8H++ukJcBcPfLoOUXV
- qh+Euoxb1GTrGrPsnrjRDuQSKGcGWUaHuU/JQ0ujH4vEbHiKgQ/yYg95V7dPj6K3GrKDfVmseVp
- tfkprxc0A0Gr2vIz+eJgwqQW7pMbtu2p+Z04qcULjUCHWGuFZZkWrCq2UacJa+nKZ00NW8Kbala
- Wc5vEk0aSB7kp
-X-Google-Smtp-Source: AGHT+IGmcPgvaeafR4gDWPsdNmoJ3kkB3Pe9rmlI6BjAT/Yj1FLakMcekfw7bqllLknOyjTbPT3gdw==
-X-Received: by 2002:a05:6871:d101:b0:2d8:957a:5163 with SMTP id
- 586e51a60fabf-2ea00817781mr8829799fac.10.1749486162990; 
- Mon, 09 Jun 2025 09:22:42 -0700 (PDT)
+ AJvYcCVneQDSghkFolIDK/hKlh/ZGNpQBFVzTpVDWzuaVW1LX1kLvXVMQWXPzREvKmr8VWlgdkVccDs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy/bNt+vBymr5utMus5dBh0qL4m9x2qvGh7PC4Oj6EIfSbFGI72
+ fEdi3JB0pRCYCkJtLWoLasNrzoBv/SAzxUV6nFblQxtoll2tGH8I6uNqb+tLineaBgU6b5YvkRH
+ FV6uTVdc=
+X-Gm-Gg: ASbGncsfTXp0B42DSO4OVEWorvXX99P3Kgmr+BbtIUNAbQEWHAnv/gDb/aDIj0Up4Iu
+ 6Ir0D/9mII+XpJ8xuoBRUDAUpxhqK1lMou3azve2PXLNhl72SdI4hKQTSPn2aZrAIr71zAwpFOX
+ VDrEN2EWCblbiCKgUKi7x8mNjos+589XXXfMtF/7t9kLrZibKc3wEGjdihRb6Uw+M2tRHKBDowT
+ fUFfcjri8bNW1KIqA46YsEcIMxIo6axMdgz0V+3FOSEOO/DXpj3yLkF+kP0bYhk9rZJicZ4+suz
+ 4j7M2GYlGLZvvQ/dFZX1iJeBkA4WMt/nm1gqSueYuhF/iuyYs0LZWjefk5IgYsLw0SdD2BdnjlR
+ voxBsG6b+tOh9Ll5t7lHMbuE=
+X-Google-Smtp-Source: AGHT+IHxnnFbrKYoxm1hxkFkF+z3rg2KbgbbG4O5OcylnZOmiQRdweKvB/a06TkI8l7YC6AQVWffmw==
+X-Received: by 2002:a05:6830:3c04:b0:735:b4ef:acaf with SMTP id
+ 46e09a7af769-73888f0ec7emr10519325a34.27.1749487723882; 
+ Mon, 09 Jun 2025 09:48:43 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ea642a55b1sm329923fac.7.2025.06.09.09.22.41
+ 46e09a7af769-7388a089f1bsm1638833a34.66.2025.06.09.09.48.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Jun 2025 09:22:42 -0700 (PDT)
-Date: Mon, 9 Jun 2025 10:22:39 -0600
+ Mon, 09 Jun 2025 09:48:43 -0700 (PDT)
+Date: Mon, 9 Jun 2025 10:48:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de,
- linux-amarula@amarulasolutions.com,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Dillon Min <dillon.minfei@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 0/9] Support stm32h747-discovery board
-Message-ID: <20250609162239.GT1382132@bill-the-cat>
-References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
- <dc8bb4a3-c465-4ae0-a61d-bb2f74a42b64@foss.st.com>
- <aEbgxo0WUDPd-S8Z@sumit-X1>
- <CABGWkvox-1a1VSGjX8toQ=WsVTma0JcL8su=MGWaAwq4UZFkrQ@mail.gmail.com>
- <aEcAe80kh66cf0_c@sumit-X1> <20250609155019.GR1382132@bill-the-cat>
- <aEcGzCbZXajCthrh@sumit-X1>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/3] common/spl: handle properly images with bad
+ checksum
+Message-ID: <20250609164841.GU1382132@bill-the-cat>
+References: <20250606205410.GC1382132@bill-the-cat>
+ <20250606223109.502055-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250606223109.502055-3-mikhail.kshevetskiy@iopsys.eu>
+ <82a14d8e-c444-45b1-aa99-ec6ef0fb064b@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O5az6EqOTJVqen05"
+ protocol="application/pgp-signature"; boundary="PEHv/FdNn7Ip4QUj"
 Content-Disposition: inline
-In-Reply-To: <aEcGzCbZXajCthrh@sumit-X1>
+In-Reply-To: <82a14d8e-c444-45b1-aa99-ec6ef0fb064b@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,144 +105,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---O5az6EqOTJVqen05
-Content-Type: text/plain; charset=utf-8
+--PEHv/FdNn7Ip4QUj
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 09, 2025 at 05:07:40PM +0100, Sumit Garg wrote:
-> On Mon, Jun 09, 2025 at 09:50:19AM -0600, Tom Rini wrote:
-> > On Mon, Jun 09, 2025 at 04:40:43PM +0100, Sumit Garg wrote:
-> > > On Mon, Jun 09, 2025 at 03:46:27PM +0200, Dario Binacchi wrote:
-> > > > Hi Sumit,
-> > > >=20
-> > > > On Mon, Jun 9, 2025 at 3:25=E2=80=AFPM Sumit Garg <sumit.garg@kerne=
-l.org> wrote:
-> > > > >
-> > > > > Hi Patrice,
-> > > > >
-> > > > > On Mon, Jun 09, 2025 at 03:15:14PM +0200, Patrice CHOTARD wrote:
-> > > > > >
-> > > > > >
-> > > > > > On 6/7/25 11:37, Dario Binacchi wrote:
-> > > > > > > The series adds support for stm32h747-discovery board.
-> > > > > > >
-> > > > > > > Detailed information can be found at:
-> > > > > > > https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
-> > > > > > >
-> > > > > > >
-> > > > > > > Dario Binacchi (9):
-> > > > > > >   ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]art_pins ph=
-andles
-> > > > > > >   dt-bindings: arm: stm32: add compatible for stm32h747i-disc=
-o board
-> > > > > > >   dt-bindings: clock: stm32h7: rename USART{7,8}_CK to UART{7=
-,8}_CK
-> > > > > > >   ARM: dts: stm32: add uart8 node for stm32h743 MCU
-> > > > > > >   ARM: dts: stm32: add pin map for UART8 controller on stm32h=
-743
-> > > > > > >   ARM: dts: stm32: add an extra pin map for USART1 on stm32h7=
-43
-> > > > > > >   ARM: dts: stm32: support STM32h747i-disco board
-> > > > > > >   ARM: dts: stm32: add stm32h747i-disco-u-boot DTS file
-> > > > > > >   board: stm32: add stm32h747-discovery board support
-> > > > > >
-> > > > > >
-> > > > > > Hi Dario
-> > > > > >
-> > > > > > For the whole series
-> > > > > > Applied to u-boot-stm32/next
-> > > > >
-> > > > > Please give some time for other maintainers to review this patch-=
-set.
-> > > > > The dts/upstream patches in this series aren't clean cherry pick =
-=66rom
-> > > > > upstream.
-> > > >=20
-> > > > All the commits are already in the mainline Linux kernel, specifica=
-lly
-> > > > in v6.16-rc1.
-> > > > If you're referring to the fact that the patches can't be applied
-> > > > cleanly, I believe it's
-> > > > because the target path in the Linux kernel doesn't match the one i=
-n U-Boot.
-> > > > In fact, the DTS files are located in two different relative paths.
-> > >=20
-> > > That's exactly why we have (refer here [1]):
-> > >=20
-> > > ./tools/update-subtree.sh pick dts <commit-id-to-be-picked>
-> > >=20
-> > > You should have waited v6.16-rc1 tag to be synced into
-> > > devicetree-rebasing [2] for the cherry-picks to work. This way of
-> > > manually patching dts/upstream is not allowed since it is going to br=
-eak
-> > > DT syncs in one way or another.
-> > >=20
-> > > So I would suggest you to wait for v6.16-rc1 to land in DT rebasing t=
-ree
-> > > and then send v2 with proper cherry picked patches.
-> > >=20
-> > > [1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html=
-#resyncing-with-devicetree-rebasing
-> > > [2] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/device=
-tree-rebasing.git
+On Sat, Jun 07, 2025 at 10:00:49AM +0200, Jonas Karlman wrote:
+> Hi Mikhail,
+>=20
+> On 2025-06-07 00:31, Mikhail Kshevetskiy wrote:
+> > load_simple_fit() returns -EPERM for the images with broken signatures.
+> > Unfortunately this may conflict with image loaging selection on the base
+> > of boot phase. See commit 873112db9ce68c38984ff25808dde726f8dd5573
+> > ("spl: Support selecting images based on phase in simple FIT").
 > >=20
-> > To be honest, I don't think this is a big deal. Git will be merging
-> > based on content and not specific hashes. And in the case of conflicts I
-> > just copy the file from the tag to our tree.
+> > Thus loading of
+> >=20
+> > 	configurations {
+> > 		uboot {
+> > 			description =3D "u-boot";
+> > 			firmware =3D "atf";
+> > 			loadables =3D "atf", "tee", "uboot";
+> > 		};
+> > 	};
+> >=20
+> > with damaged "tee" image may finish without errors. This may results in
+> > board bricking. This should not happen.
+> >=20
+> > The simplest way to resolve an issue is returning the different error
+> > code for the cases of broken signature.
+> >=20
+> > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> > ---
+> >  common/spl/spl_fit.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> > index ab277bb2baa..783bb84bdb5 100644
+> > --- a/common/spl/spl_fit.c
+> > +++ b/common/spl/spl_fit.c
+> > @@ -322,7 +322,7 @@ static int load_simple_fit(struct spl_load_info *in=
+fo, ulong fit_offset,
+> >  		       fit_get_name(fit, node, NULL));
+> >  		if (!fit_image_verify_with_data(fit, node, gd_fdt_blob(), src,
+> >  						length))
+> > -			return -EPERM;
+> > +			return -EACCES;
 >=20
-> The essential problem here to me is we are going to allow manual
-> patching of dts/upstream tree given this example? How do we keep track
-> if all that manual patching landed in Linux DT mainline? The cherry
-> picks ensured that we always keep in sync with mainline.
+> I think a proper solution would be to fix the bad use of EPERM in the
+> commit 873112db9ce6 ("spl: Support selecting images based on phase in
+> simple FIT").
 >=20
-> Lets take an example what if Git automatically resolved a merge conflict
-> for you with duplicated content or if manually patching a DTS file
-> diverged from upstream and get unnoticed during DT syncs?
->=20
-> IMHO, we should try to avoid manual patching of DT subtree otherwise it
-> is hard to set a policy as to what level of manual patching is allowed
-> or not.
+> That commit should never have used EPERM in the first place, it should
+> be reverted or its use of EPERM could be changed to something that is
+> currently NOT used to block loading images that fail e.g. a signature
+> check.
 
-Part of the problem here is that from the standpoint of applying posted
-patches there's no functional difference between what Dario did here and
-what could be done once v6.16-rc1-dts is tagged (if it's not already).
-It's essentially a "manual patch" either way. We make it clear that
-dts/upstream/ *only* gets changes that are in Linus' tree. If someone
-tries to be sneaky and push something in that's not quite what's
-upstream, it will get stomped on later and there's not going to be any
-sympathy for the now broken platform.
+Instead of EPERM in the case from commit 873112db9ce6 how about
+(skimming linux/errno.h):
+#define EBADSLT         57      /* Invalid slot */
 
-Yes, we document saying to use the cherry-pick script, and that's what
-people should do in general. But I don't think there's value in adding a
-further delay between "in Linus' tree" and "in devicetree-rebasing". In
-the linux kernel, there's thousands of people working on things and so
-strict rules can be understandable (someone will be running a bot to
-look for "(cherry pick from commit $hash)" and fail things where $hash
-doesn't exist, makes sense). Here if the ST custodians are happy just
-verifying the kernel commit, OK, that's fine. Or if they want to wait,
-that's fine too. We can be a little relaxed and let custodians do what
-they see as best.
+And use EBADSLT ?
 
 --=20
 Tom
 
---O5az6EqOTJVqen05
+--PEHv/FdNn7Ip4QUj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhHCksACgkQFHw5/5Y0
-tywD1gwAo7WR+HUndyQw3xkLZTkSqBGtuUl223Tp/5yvx9jT/tsJ+iAnkzMTvSky
-iFfbNkr8g76UyXIg9AXfVlp0yOhJCRZ4YnN2UiPVzGAFeghYFNiIVvqGutY6ih+C
-U/XHgcIj3lGgBPHnr1y+BECtBexI3WWrytRAcUFvG0F3TjT9ETGuOPsPjrElqw1e
-VB7phj0VFuIdwLicVsexZ8hI5fSYs/RO1KRyC9gx/Zznn3taiMPkFUhDEeahWMET
-axv3ERP9nI6eFzXojon/ZFHrk11QKGTf0vSsPjYb/QBCCCTkmExqnGu/Wwohj6o4
-KS4z4wmtPmEWzMpyro3Al5pEVNnWxHmAaRo++ARS79dw7brcy7hg/imrWT3H6U1o
-qvPrc31KXucAE5SdSpAnbW8csOaagQZpHyIVrs4XU5pbqXcle+N0qT/zdGmbErVb
-bRjvLuHuY635+UEJbioRjYhj8WU1kO4O/zpvTDf8lyMn5Uc4ovhEhXp129/Ql2Pu
-8Wx+mcgy
-=Mzi/
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhHEGUACgkQFHw5/5Y0
+tyywkwv/eL4CfNx+HIZClPgVZ+3Qhj2oCS+iwVtm9k+X0fUCy4vs9s5i85MQMheK
+bwZ5UZU9OuBEHncqEZS4Of5W8N6s7J6Zi87OE+LGwsPUMw0XzXjw/TGXQMucd3Fb
+JYwG/la0FLfeIHVOygxdr0kYf+iNkMdhBaEh16uLsmwXSdzKeOBkoUp92p9EImwL
+zJZRhq43FRfbzA4IvS8xnp5K71eQCWFmbpIir5lU3PVWbOWPZS6vRON0GEchR79M
+evFMkZZHypqqQ1251Y5jm2aj3MJAwNhRAXXzyNNfd+78ZjdvE5i7iNqIyPbnNOY3
+W+he+VK4B3eqpenX1pujbeGvPNkFHOXWZA6B2TuzWSNJ3jqEjFXG2AQd/M07vA/t
+za+LPQM0qUaAMw+PgU+ZIfvwKGFiZGAiRjNzvVSNaErs6765LwI9m4YdE9rXR94V
+6RV5vj0zCgeyfPqfQlkcAMx23W2HqInAd9W167D5Gx01Pn6H1OkJEE9YSagpyNGq
+n8SCOiLm
+=zCqC
 -----END PGP SIGNATURE-----
 
---O5az6EqOTJVqen05--
+--PEHv/FdNn7Ip4QUj--
