@@ -4,66 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DB2BC5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 17:23:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3642C677C4
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 18:47:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FC8682B20;
-	Tue, 10 Jun 2025 19:23:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A6FE982B18;
+	Tue, 10 Jun 2025 20:47:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tTZx+Uxr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Iy3ODGX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72B2682B26; Tue, 10 Jun 2025 19:23:46 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B33982B18
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 19:23:43 +0200 (CEST)
+ id 3C61C82B20; Tue, 10 Jun 2025 20:47:46 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 23BD682B07
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 20:47:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55AHNfQP1132261;
- Tue, 10 Jun 2025 12:23:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749576221;
- bh=aq3+H1En+NKYEzPPjvPEQpsgY7RhP10R93yM60EZl5M=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=tTZx+UxrwRoj37GT14lvfAgoDYLco3E7nXS+ZZrWNHw/P8IONnPJZoBVgGVf0NVM3
- lV5x6vZpk0vSd+skbxxuek4FsG4bVSbanLJcZXrEHBkqlskku19Ex45Z56HySfA8eY
- bs5uS90WRY+A7M4CBjz2qjABvsGW5IZQPzICjW4U=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55AHNfQl410557
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 10 Jun 2025 12:23:41 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
- Jun 2025 12:23:40 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 10 Jun 2025 12:23:40 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55AHNeO93393132;
- Tue, 10 Jun 2025 12:23:40 -0500
-Message-ID: <e8a20703-3be9-4429-ba98-6b4751fdc7a8@ti.com>
-Date: Tue, 10 Jun 2025 12:23:40 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3a4f379662cso4809070f8f.0
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 11:47:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749581263; x=1750186063; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=7zkgUk0aPA7oS5zUZiu/PgP8MY1evOgnF8MjscHJ764=;
+ b=Iy3ODGX4OAXgxs7NjRvCLx1yDioz4+MoD6tJfOZkKlSpytKUpwcjrFA7oicGrU3ZQd
+ lIKhW4wAGyUi4Pu5cscbRU7BL5H8cJyIDfIMW1qkVuMBabXLrWrkdESjDyEBeoKti9hW
+ KZ64keQJwMsehufkdSVRjyeVoals/0c977a/aBEs2dxzSmE9nl/8F7YQrbpkaGrae09n
+ mfPERzLE2b5GkPHYQsdK27r4TW+v1Dw7KuFByT79FJxErMpbgGB8hZUish8yIroUbypG
+ H8UfGWQ4lmgCMhdZWqUzw11/IwyAdWafAu3OJB3Gj1YWKmIgK35IIjYshDiqaF7i9x19
+ LaIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749581263; x=1750186063;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=7zkgUk0aPA7oS5zUZiu/PgP8MY1evOgnF8MjscHJ764=;
+ b=eeY536IBtiMvtv0WO3Gjwcwevd8rX4Rk1NLw+y/Vn15Zmxo10Iw7XLIpasflBne43P
+ LstIJ6kb/QEmt4mCMAx7OBjLEwIAVcgXxcMD7I/ZXAoDJzHRCa205epNCb3wHHdg19K4
+ GEWAu3+DRnWFDwvLDJlDdb12AuDvOxna4jIRmDIseRSQRp7mlR9do2JFGAkVfGF8SomS
+ wsPuGw91HtDI1P28Hgg0tMfWAAps23AeH/GaH5WIS0Ihhyq87Xmk7LTkbhL+jcKHqZCP
+ 5p9+jgp+av7Jbgiw8kQI4PABszUY5iayGrr1Zg4IMYPK6nY3S9W+kz+pwLy4hTJuuQ4/
+ z6gw==
+X-Gm-Message-State: AOJu0Yw/rzAwXvP94nvItoyIybzFGj4+/oR10mzqFvqqeOIhmSpXRQNU
+ TrNW+0hYq0I57bWLbFJrE2HwfZUMgnuax9eu52WLYFoY955fF82qBg1uN01PFJ39Ufk=
+X-Gm-Gg: ASbGncsKfaUID/Qme9GUCZQrfziC70mnnPVb9QeYyODJCYOrBUrwERHI+CCK2IgOvvE
+ hKyIUnFLFwlWrYzmyZN4//xJmwARgjwTNFR8M4OaY3lj/C21Fh+PEGJP/dNvVEEKnXFSyMDIlcZ
+ 1LQXuGrQ03EoHbBh9Ib10e8UH8libKIOU+R9s3RBYl/Wu/p4jVPzrcWJov7J0kpbCrwd2aqPYNm
+ 7Kz5ApqZ1JC/SfEJBjUDtdIR1zaeu1F58x37ZUOrTCux7N1OXmwJY/+j/ntOjaNwz7l+u+N3ihA
+ n49ykBf2tjLWyirSCWYAKzC4zfWCc+So6a7rWrWV+azXM904qgt83O3Soq+//CnY+mbRXo8Bv7y
+ +E9h7n44lnpv5lY+ovm8A86stm4LAXJAPIsi8
+X-Google-Smtp-Source: AGHT+IESuY5mudCcEjgT4ZXbD/ayKe/Vsa6BK9Zve+jzvqISEML8ImQJAXdEweqUX9bXmtLDCAhkNg==
+X-Received: by 2002:a05:6000:381:b0:3a5:27ba:47c7 with SMTP id
+ ffacd0b85a97d-3a558a319efmr114086f8f.48.1749581263535; 
+ Tue, 10 Jun 2025 11:47:43 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:f0b:a9b6:d508:9d14?
+ ([2a01:e0a:3d9:2080:f0b:a9b6:d508:9d14])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-453247cbc8dsm1939895e9.12.2025.06.10.11.47.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Jun 2025 11:47:43 -0700 (PDT)
+Message-ID: <77152c78-a719-4310-a354-d829d054787c@linaro.org>
+Date: Tue, 10 Jun 2025 20:47:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mach-k3: mmu: add dynamic carveouts for MMU table
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
- <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>
-References: <20250610160833.1705534-1-anshuld@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250610160833.1705534-1-anshuld@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH] Qualcomm: maintain trogdor so CI passes
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Greg Malysa <malysagreg@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250610165958.152573-1-casey.connolly@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250610165958.152573-1-casey.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,400 +130,39 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/10/25 11:08 AM, Anshul Dalal wrote:
-> In u-boot we only provide a single MMU table for all k3 platforms,
-> this does not scale for devices with reserved memory outside the range
-> 0x9e780000 - 0xa0000000 (eg j722s[1]) or for devices with < 2GiB of
-
-If you look at the patch that added the J722s table[0] it is marked
-as a HACK and shouldn't be needed for the next version.
-
-And for devices with < 2GiB of DRAM, mapping the extra memory doesn't
-hurt anything as long as we do not try to access that memory.
-
-> memory (eg am62-SIP with 512MiB of RAM).
+On 10/06/2025 18:59, Casey Connolly wrote:
+> Add chromebook_trogdor_defconfig to MAINTAINERS. This is a Qualcomm
+> board so for now I'll maintain it under ARM SNAPDRAGON so that we can
+> get these fairly invasive (but very useful) patches in which improve
+> Coreboot for all ARM platforms.
 > 
-> To properly configure the MMU on various k3 platforms, the
-> reserved-memory regions need to be queried at runtime from the
-> device-tree and the MMU table should be updated accordingly.
+> Hopefully someone who owns this device will be willing to take over
+> as MAINTAINER.
 > 
-> This patch adds the required fixups to the MMU table (during proper
-> U-boot stage) by marking the reserved regions as non cacheable and
-> keeping the remaining area as cacheable.
-> 
-> For the A-core SPL, the DDR is divided into three areas as follows:
-> 
->    0x80000000  +------------------+ CFG_SYS_SDRAM_BASE
->                |                  |
->      512KiB    | #1 Non cacheable | reserved for ATF/OP-TEE
->                |                  |
-
-If the region is reserved for ATF/OP-TEE then it will probably be
-firewalled and so should not be mapped as uncached, it should not
-be mapped at all. Just remove that region from the map.
-
-
-
->    0x80080000  |------------------| CONFIG_SPL_TEXT_BASE
->                |                  |
->      128MiB    | #2 Cacheable     | for runtime usage by the A-core SPL
->                |                  |
->    0x88080000  |------------------|
->                |                  |
->      1.9GiB    | #3 Non cacheable | reserved for DM/tifs-stub etc.
->                |                  |
->    0x100000000 +------------------+ End of DDR
-> 
-> The 128MiB size is chosen to allow for future use cases such as falcon
-> boot from the A-Core SPL which would require loading kernel image from
-> the SPL stage. This change also ensures the reserved memory regions that
-> all exist past 0x88080000 are non cacheable preventing speculative
-> accesses to those addresses.
-
-Same as above, if we do not plan to touch those areas the simple
-solution is to not map them at all. And if we do plan to load things
-to them then they need to be mapped as cacheable.
-
-Andrew
-
-[0] https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2025.01-next&id=5eee7e4875d3d615eaa118a72c844c1ec78caf4e
-
-> 
-> [1]:
-> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/arch/arm/mach-k3/arm64/arm64-mmu.c?h=ti-u-boot-2025.01-next#n54
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
-> Changes in v2:
-> - Removed dependency to:
->    https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+>   MAINTAINERS | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
-> ---
->   arch/arm/mach-k3/arm64/arm64-mmu.c     | 229 +++++++++++++++++++++++--
->   arch/arm/mach-k3/include/mach/k3-ddr.h |   9 +
->   board/ti/common/k3-ddr.c               |  10 ++
->   3 files changed, 235 insertions(+), 13 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
-> index 0e07b1b7ce0..bc8d8846537 100644
-> --- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-> +++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-> @@ -11,9 +11,15 @@
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index d62dd35a385b..789e6f0c37b8 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -670,8 +670,9 @@ F:	drivers/serial/serial_msm.c
+>   F:	drivers/serial/serial_msm_geni.c
+>   F:	drivers/smem/msm_smem.c
+>   F:	drivers/spmi/spmi-msm.c
+>   F:	drivers/usb/host/ehci-msm.c
+> +F:	configs/chromebook_trogdor_defconfig
+>   N:	qcom
+>   N:	snapdragon
+>   N:	qualcomm
 >   
->   #include <asm/system.h>
->   #include <asm/armv8/mmu.h>
-> +#include <mach/k3-ddr.h>
->   
-> -struct mm_region k3_mem_map[] = {
-> +#include "../common_fdt.h"
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +struct mm_region k3_mem_map[K3_MMU_REGIONS_COUNT] = {
->   	{
-> +		/* Peripherals */
->   		.virt = 0x0UL,
->   		.phys = 0x0UL,
->   		.size = 0x80000000UL,
-> @@ -21,30 +27,41 @@ struct mm_region k3_mem_map[] = {
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
->   	}, {
-> -		.virt = 0x80000000UL,
-> -		.phys = 0x80000000UL,
-> -		.size = 0x1e780000UL,
-> -		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> -			 PTE_BLOCK_INNER_SHARE
-> -	}, {
-> -		.virt = 0xa0000000UL,
-> -		.phys = 0xa0000000UL,
-> -		.size = 0x60000000UL,
-> -		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> -			 PTE_BLOCK_INNER_SHARE
-> -	}, {
-> +		/* Higher DDR banks */
->   		.virt = 0x880000000UL,
->   		.phys = 0x880000000UL,
->   		.size = 0x80000000UL,
->   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->   			 PTE_BLOCK_INNER_SHARE
->   	}, {
-> +		/* Flash peripherals */
->   		.virt = 0x500000000UL,
->   		.phys = 0x500000000UL,
->   		.size = 0x380000000UL,
->   		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	}, {
-> +		/* Memory before SPL is reserved for ATF/OPTEE */
-> +		.virt = CFG_SYS_SDRAM_BASE,
-> +		.phys = CFG_SYS_SDRAM_BASE,
-> +		.size = CONFIG_SPL_TEXT_BASE - CFG_SYS_SDRAM_BASE,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
-> +		/* Map SPL load region and the next 128MiB as cacheable */
-> +		.virt = CONFIG_SPL_TEXT_BASE,
-> +		.phys = CONFIG_SPL_TEXT_BASE,
-> +		.size = SZ_128M,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
-> +		/* Expect SPL to only use 128MiB, keep rest uncacheable */
-> +		.virt = CONFIG_SPL_TEXT_BASE + SZ_128M,
-> +		.phys = CONFIG_SPL_TEXT_BASE + SZ_128M,
-> +		.size = SZ_2G - (CONFIG_SPL_TEXT_BASE + SZ_128M),
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
-> +			 PTE_BLOCK_INNER_SHARE
->   	}, {
->   		/* List terminator */
->   		0,
-> @@ -52,3 +69,189 @@ struct mm_region k3_mem_map[] = {
->   };
->   
->   struct mm_region *mem_map = k3_mem_map;
-> +
-> +int k3_mem_map_init(void)
-> +{
-> +	fdt_addr_t mem_base, dt_reserved_start[K3_MMU_REGIONS_COUNT],
-> +		coalesced_start[K3_MMU_REGIONS_COUNT];
-> +	fdt_size_t mem_size, dt_reserved_end[K3_MMU_REGIONS_COUNT],
-> +		coalesced_end[K3_MMU_REGIONS_COUNT];
-> +	int k3_map_idx = -EINVAL, ret, nodeoffset, subnode;
-> +	void *blob = (void *)gd->fdt_blob;
-> +	unsigned int carveout_len, i, j;
-> +
-> +	ret = fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
-> +	if (ret) {
-> +		pr_err("%s: Failed to perform reserved node fdt fixups [%d]\n",
-> +		       __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
-> +	if (ret) {
-> +		pr_err("%s: Failed to perform reserved node fdt fixups [%d]\n",
-> +		       __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	nodeoffset = fdt_subnode_offset(blob, 0, "memory");
-> +	if (nodeoffset < 0) {
-> +		pr_err("%s: Failed to get memory data: %s\n", __func__,
-> +		       fdt_strerror(nodeoffset));
-> +		return nodeoffset;
-> +	}
-> +
-> +	mem_base = fdtdec_get_addr_size(blob, nodeoffset, "reg", &mem_size);
-> +	if (mem_base == FDT_ADDR_T_NONE || mem_base != CFG_SYS_SDRAM_BASE)
-> +		return -EINVAL;
-> +
-> +	for (i = 0; i < K3_MMU_REGIONS_COUNT; i++) {
-> +		if (k3_mem_map[i].virt == mem_base) {
-> +			k3_map_idx = i;
-> +			break;
-> +		}
-> +	}
-> +
-> +	if (k3_map_idx == -EINVAL) {
-> +		pr_err("%s: Failed to find DDR region in MMU memory map\n",
-> +		       __func__);
-> +		return -EINVAL;
-> +	}
-> +
-> +	i = 0;
-> +	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
-> +	fdt_for_each_subnode(subnode, blob, nodeoffset) {
-> +		const char *name;
-> +		fdt_addr_t addr, end_addr;
-> +		fdt_size_t size;
-> +
-> +		if (i >= K3_MMU_REGIONS_COUNT) {
-> +			/*
-> +			 * This is a recoverable error if the regions can be
-> +			 * coalesced, the required logic can be implemented once
-> +			 * requirement arises.
-> +			 */
-> +			pr_err("%s: Not enough space in MMU map for carveouts\n",
-> +			       __func__);
-> +			return -ENOMEM;
-> +		}
-> +
-> +		name = fdt_get_name(blob, subnode, NULL);
-> +		addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
-> +
-> +		if (addr == FDT_ADDR_T_NONE)
-> +			continue;
-> +
-> +		if (!fdtdec_get_bool(blob, subnode, "no-map"))
-> +			continue;
-> +
-> +		if (addr >= mem_base + mem_size)
-> +			continue;
-> +
-> +		end_addr = addr + size;
-> +
-> +		if (end_addr <= mem_base)
-> +			continue;
-> +
-> +		debug("Added memory carveout at 0x%llx, size: 0x%llx for '%s'\n",
-> +		      addr, size, name);
-> +
-> +		addr = max(addr, mem_base);
-> +		end_addr = min(end_addr, mem_base + mem_size);
-> +		size = end_addr - addr;
-> +		dt_reserved_start[i] = addr;
-> +		dt_reserved_end[i] = end_addr;
-> +		i++;
-> +	}
-> +	carveout_len = i;
-> +
-> +	if (!carveout_len)
-> +		return 0;
-> +
-> +	/* sort carveout regions by address required for creating carveouts */
-> +	for (i = 0; i < carveout_len; i++) {
-> +		for (j = i; j < carveout_len; j++) {
-> +			if (dt_reserved_start[j] < dt_reserved_start[i]) {
-> +				swap(dt_reserved_start[j],
-> +				     dt_reserved_start[i]);
-> +				swap(dt_reserved_end[j], dt_reserved_end[i]);
-> +			}
-> +		}
-> +	}
-> +
-> +	/* coalesce regions */
-> +	fdt_addr_t coalescing_temp_start = dt_reserved_start[0];
-> +	fdt_addr_t coalescing_temp_end = dt_reserved_end[0];
-> +
-> +	j = 0;
-> +	for (i = 1; i < carveout_len; i++) {
-> +		fdt_addr_t current_start = dt_reserved_start[i];
-> +		fdt_addr_t current_end = dt_reserved_end[i];
-> +
-> +		if (coalescing_temp_end >= current_start) {
-> +			coalescing_temp_end = current_end;
-> +			continue;
-> +		}
-> +		coalesced_start[j] = coalescing_temp_start;
-> +		coalesced_end[j] = coalescing_temp_end;
-> +		coalescing_temp_start = current_start;
-> +		coalescing_temp_end = current_end;
-> +		j++;
-> +	}
-> +
-> +	coalesced_start[j] = coalescing_temp_start;
-> +	coalesced_end[j] = coalescing_temp_end;
-> +	carveout_len = j + 1;
-> +
-> +	if (coalesced_start[0] != mem_base) {
-> +		k3_mem_map[k3_map_idx].virt = mem_base;
-> +		k3_mem_map[k3_map_idx].phys = mem_base;
-> +		k3_mem_map[k3_map_idx].size = coalesced_start[0] - mem_base;
-> +		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +					       PTE_BLOCK_INNER_SHARE;
-> +		k3_map_idx++;
-> +	}
-> +
-> +	for (i = 1; i < carveout_len; i++) {
-> +		k3_mem_map[k3_map_idx].virt = coalesced_end[i - 1];
-> +		k3_mem_map[k3_map_idx].phys = coalesced_end[i - 1];
-> +		k3_mem_map[k3_map_idx].size =
-> +			coalesced_start[i] - coalesced_end[i - 1];
-> +		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +					       PTE_BLOCK_INNER_SHARE;
-> +		k3_map_idx++;
-> +	}
-> +
-> +	k3_mem_map[k3_map_idx].virt = coalesced_end[carveout_len - 1];
-> +	k3_mem_map[k3_map_idx].phys = coalesced_end[carveout_len - 1];
-> +	k3_mem_map[k3_map_idx].size =
-> +		mem_base + mem_size - coalesced_end[carveout_len - 1];
-> +	k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +				       PTE_BLOCK_INNER_SHARE;
-> +	k3_map_idx++;
-> +
-> +	/* map reserved memory as non cachable */
-> +	for (i = 0; i < carveout_len; i++) {
-> +		k3_mem_map[k3_map_idx].virt = coalesced_start[i];
-> +		k3_mem_map[k3_map_idx].phys = coalesced_start[i];
-> +		k3_mem_map[k3_map_idx].size =
-> +			coalesced_end[i] - coalesced_start[i];
-> +		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
-> +					       PTE_BLOCK_INNER_SHARE;
-> +		k3_map_idx++;
-> +	}
-> +
-> +	k3_mem_map[k3_map_idx] = (const struct mm_region){ 0 };
-> +
-> +	debug("%s: MMU Table configured as:\n", __func__);
-> +	debug("   |virt start\t\t|virt end\t|phys\t\t|size\t\t|attrs:\n");
-> +	for (i = 0; i < k3_map_idx; i++) {
-> +		debug("%2d: 0x%-12llx\t0x%-12llx\t0x%-12llx\t0x%-12llx\t0x%llx\n",
-> +		      i, k3_mem_map[i].virt,
-> +		      k3_mem_map[i].virt + k3_mem_map[i].size,
-> +		      k3_mem_map[i].phys, k3_mem_map[i].size,
-> +		      k3_mem_map[i].attrs);
-> +	}
-> +
-> +	return 0;
-> +}
-> diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
-> index 39e6725bb9b..0b164ebf5e6 100644
-> --- a/arch/arm/mach-k3/include/mach/k3-ddr.h
-> +++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
-> @@ -8,10 +8,19 @@
->   
->   #include <spl.h>
->   
-> +/* Number of mappable regions in the MMU page table */
-> +#define K3_MMU_REGIONS_COUNT 32
-> +
->   int dram_init(void);
->   int dram_init_banksize(void);
->   
->   void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
->   void fixup_memory_node(struct spl_image_info *spl_image);
->   
-> +/*
-> + * Modifies the MMU memory map based on DDR size and reserved-memory
-> + * nodes in DT
-> + */
-> +int k3_mem_map_init(void);
-> +
->   #endif /* _K3_DDR_H_ */
-> diff --git a/board/ti/common/k3-ddr.c b/board/ti/common/k3-ddr.c
-> index a8425da8de5..ee882f62109 100644
-> --- a/board/ti/common/k3-ddr.c
-> +++ b/board/ti/common/k3-ddr.c
-> @@ -7,6 +7,7 @@
->   #include <dm/uclass.h>
->   #include <k3-ddrss.h>
->   #include <spl.h>
-> +#include <mach/k3-ddr.h>
->   
->   #include "k3-ddr.h"
->   
-> @@ -14,6 +15,15 @@ int dram_init(void)
->   {
->   	s32 ret;
->   
-> +	if (IS_ENABLED(CONFIG_ARM64) && xpl_phase() != PHASE_SPL) {
-> +		ret = k3_mem_map_init();
-> +		if (ret) {
-> +			printf("%s: Error fixing up MMU memory map: %d\n",
-> +			       __func__, ret);
-> +			return ret;
-> +		}
-> +	}
-> +
->   	ret = fdtdec_setup_mem_size_base_lowest();
->   	if (ret)
->   		printf("Error setting up mem size and base. %d\n", ret);
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
