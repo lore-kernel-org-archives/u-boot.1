@@ -4,51 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281E3C5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 09:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E31C5B543
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 09:56:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85CA180E9A;
-	Tue, 10 Jun 2025 11:43:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id F423980E9A;
+	Tue, 10 Jun 2025 11:56:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="jGJebEnX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3B1782AC4; Tue, 10 Jun 2025 11:43:15 +0200 (CEST)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id EF88582B07; Tue, 10 Jun 2025 11:56:44 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 138538070C
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 11:43:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 500A78070C
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 11:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bGkPD4DwRztx6;
- Tue, 10 Jun 2025 11:43:12 +0200 (CEST)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4bGkPC27nFzTG6; Tue, 10 Jun 2025 11:43:11 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 10 Jun 2025 11:42:50 +0200
-Subject: [PATCH v3] rockchip: px30/rk3326: Implement checkboard() to print
- SoC variant
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=R8VBjErUj4h+0U7rUxH3NvvWoO+WjYs7UGcbFs+RrjuB7HoBKlAOfQtZXelo328AG/ltnko76I9hgzxqCcl8CN7tsgl8NXc0t5wLpd5jOgnbqn9lUcdebDxr8z/ZjBWkUeABZJatNwUXY8aZuy9SVd8axV5kE/e7jDGWEbPjksIqAEzit0YKFbGEeZhPG5gY0GcQUlLj3h1RaAcbf3xx2atk3/YnXrI8pR0yIRBDBy9C4x97yjspgLBHiIAvjcpDe7eDjYJs/ZFxbWyLPQpVyRZD4Jc7fvVqg76xDYtWdjbk1qUKgkZFpNOpSePvhSTSTq/wJpZWxLyPyCoVWZZALQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=agQZ/IYiYw46SXLaN9ipuGDuOIplpqBluHqx2C1k2Mg=;
+ b=fCNkleqPEhhmiivAY/MRVCUJF4kO7rI/0cuXUHHBnp0Uass/8AVMn2JCLB1jTLbDvVlc8MbeZvZtlnw42zO1Bdzf1/u7FeRHl8Vaaxbnyv2RPzerConFqUYWakuuObaTAuuMzyb/0MG5lBUzwmtELYxmNZXh9DrqjbVXrh7iwcoMGK11hKZ8AwVztW/pxqp4KByJ9mvj4PxRN9iXP9QRiia9h71n+6OZzM3J6dDiKnRUI3x4kUuSPYlUDCZBBKf+DuT7wOf6i6WqeanTSCuOyl0vO0eWR13Ig4s6XW6Vd+3ByiBv5PO4AYJs1RXxhQ+MckwUs1h8C9DF6AiazI7SSQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=agQZ/IYiYw46SXLaN9ipuGDuOIplpqBluHqx2C1k2Mg=;
+ b=jGJebEnXbMNXwqlG1OONaTQsBUI1M58J7UtxnPCCnnUjLzSL77cwWAoMBpwd545MQVGTJ+VoZiQV7KXf6QPMwF3JlY1x9fYKjql1ZEUa+tsVsBVWMF5kTPdONAZ+xxrVMlygR0JOAbfe4T5W0MSCFOAGfLhMrENdJpVsQ6TtEbErecvaYiNDlbF7zqr6VVtz71nSgwJAoJ+GiSt7DsftEKBi/W4/0V+V60/lCOha/fcxZlmbwq2Z2q+6WaEDpV8GClmLIZXRg6Ufe4IIJptmxVl40QkqRVKZqjKw+cbQCQXisn8Ig5DY8iI8rFBjMX133K+6EHpJiApuWnAFVcRlww==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS8PR08MB6343.eurprd08.prod.outlook.com (2603:10a6:20b:337::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.29; Tue, 10 Jun
+ 2025 09:56:40 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8769.037; Tue, 10 Jun 2025
+ 09:56:40 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Edwards <cfsworks@gmail.com>,
+ Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v5 0/3] common/spl fixes
+Date: Tue, 10 Jun 2025 12:56:29 +0300
+Message-ID: <20250610095632.1085431-1-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250610045054.1038235-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20250610045054.1038235-1-mikhail.kshevetskiy@iopsys.eu>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: GVZP280CA0010.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:272::9) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250610-px30-identify-variant-v3-1-957d70a8df9e@cherry.de>
-X-B4-Tracking: v=1; b=H4sIABn+R2gC/4XNsQ6DIBDG8VcxzKWBQ9B26ns0HSic9RY0YIjG+
- O5Fl3ZpOv6/5H63soSRMLFrtbKImRINoYQ6Vcz1NryQky/NQIAWGlo+zkqUDcNE3cKzjWTDxC2
- qi2sakFo/WbkdI3Y0H+79UbqnNA1xOd5kua//xCy55DVac3EaGiv8zfUY43L2yHYxw0cxwvxSo
- CgGaq9q55xq5beybdsbCCg54QABAAA=
-X-Change-ID: 20250528-px30-identify-variant-ae39c772155b
-To: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB6343:EE_
+X-MS-Office365-Filtering-Correlation-Id: da0a9930-3dd9-45f0-b094-08dda8051874
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|376014|366016|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vL4YMO3atQWphRb6bsjABpGlbeaMQD1iVhqSjkQaQ+bk4DuQZvX9uIfxd5w5?=
+ =?us-ascii?Q?v0gFhPgjZI57P5yWdTB9MKXtMvE6jnBpwVBegWiuUwTswkl+Uck/s1XyDttm?=
+ =?us-ascii?Q?ZCGwEnpPB+AmZ4Yyx6OnZ52mXiPSKfrNNg9P6OFD4+L3fWCMu71JH2nNJaal?=
+ =?us-ascii?Q?1OuJpuaylGJxUCcJTyBxYAieX2Zrqi6T5CwPPW3ptBma1ds8JxQBpkXtL33N?=
+ =?us-ascii?Q?2rWxmZV+6yB730R+vDmhb2amMM05JHnsd9xqjcJaVCQf0wCstuIU1TPxLlng?=
+ =?us-ascii?Q?vr+34dtR6PQk1kXA9aMImrh6CSSQ6FT9t49RT2ND+Q/6zcCoLFBIuHMOPDJP?=
+ =?us-ascii?Q?WqY1Sr40YoOx7YQlmQjlV27Ga0Gqf1ynattavTtpsWBQlaPVZEd2BjqHdGaT?=
+ =?us-ascii?Q?O1SBgYyKA/etG0v4u4GNnGXUgGdr1tmJ5s1eX5vsboRQVjwJ1jQVse7z2MlV?=
+ =?us-ascii?Q?mQCpMXdf3+uYxW05JW9Hy9usOjbeQgPb1jT6a/ENczEWlugS0JBik170iI+I?=
+ =?us-ascii?Q?31l8zjeINybaz3hqzmNw/1vvfuJh2Xr8Z6vx4fn6IlN/ahcwaE3TfO/MTcAU?=
+ =?us-ascii?Q?6LLegDtzuM1zQ04cA25ORrG/sw4f/eha/mV7aP620OupWYRY8+HSAJGexPun?=
+ =?us-ascii?Q?QZo5zcTOoN4kRJZMc2qSSquVmAY099jFpHlqSCZf9uEbXV10FZ/St5oGKZFp?=
+ =?us-ascii?Q?qO7GYUFKjsnt/8HUMKsCEvgg5zG+Pa4NlLiBHDifXKOGTN+ynyXUFvUzTVrS?=
+ =?us-ascii?Q?iJhhfwOCBs3aZQ1fo3eUG6an7dcOZ/dcgP5iq0BcAIU6tsz9WUbLa0DP9oy0?=
+ =?us-ascii?Q?lXOOKwv7hWHN0A6b88nvUnGQK37OizheP5O1DGnpWqtfWMnqedSW0iEX9FKE?=
+ =?us-ascii?Q?4e9TFKTf1p0jZnIJwbUyoANcI707ZHzkpTxluYG1ImPILWQkXBbrHgjvxudL?=
+ =?us-ascii?Q?QPhEqjSXUUL6nsYuLEToSgCCkL7FXl21wVJ875/rBDEkCYX949MK4QlUcqHS?=
+ =?us-ascii?Q?aefURBZzW3N0KVBxZsnjED/Q6D6fX8GIk0CuHmqvNq+9a6tFYQ/B5YDSE6BF?=
+ =?us-ascii?Q?bdizhjm15szxKl8mtMKOOQShfB/p1eZiTFCBoeKB0xqVOgZ3ESb6Xcmy7bj3?=
+ =?us-ascii?Q?1Vexl8JO3c3oUjVPvCDyHREkn2r3Wu/HB2Go32eOQDePp8Sx95wRv2yXyYJX?=
+ =?us-ascii?Q?Aj0FAiwqIlLpdx0KkQT7YtdMW2pF6RSRMGmVyWu7OhEauDtNqxr5eaDtWpUl?=
+ =?us-ascii?Q?U0t7940ZH+uG0Dtjsz5qHMJ/ZZUxNemoG4s2scfoXpiYcwdIv48E0OlIMUaK?=
+ =?us-ascii?Q?aBq7aXC6aTRVwHXL/NC8ktbcPBfhRCqLj6nWfmfk2vXF5a3yaTDDOApngW6y?=
+ =?us-ascii?Q?nJxhfV+Gc+xkEYhGhgRjDIgJRauHqP4J5r/DEmm2R+4xQxq/USc3zVw62Ykp?=
+ =?us-ascii?Q?TqKQwCi+NF4hprAPyLscJE21x9xRtlv8+YPaTllPWcoNm22bHw0ZsA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?drSoZP++Ggl6QxoqMkg2yH1+JPDPLT2ZJlu6Gk5KsAK9xqwGbyUFl7OaFh20?=
+ =?us-ascii?Q?gjcDCJ4lusFnb2HXd0GP1PhV7vA+rNhcf+OXR20dkHS0y4dG3ayNO+mRzE15?=
+ =?us-ascii?Q?gTDk/NMrqsABXTZqTBlvMSvHXylMUAzOa07pds4cKSncRSNu/4w9p/yFP396?=
+ =?us-ascii?Q?LeebXbTbxtAGuNYwJxyrLlcJDvmtVRr7XNJauw0kYN836WnYFQ2yuznHLXzs?=
+ =?us-ascii?Q?3fQWIBk34DW1LoNAkzTe4xf6M4wuWRahlC3Y/Kce/rrxMgcfSwI3Rw4VP0+7?=
+ =?us-ascii?Q?/y6R1WNynkGQUkh/6JrfeiB0C5Y4TnnAUOnIw9vWI4aMUtSx1MDQ5ZlsPTCs?=
+ =?us-ascii?Q?/upMGbislwbx9h/JLSUtQIcQf0BqbMHKESiBuaJ24ZfExCvlBlCGEgErGGx7?=
+ =?us-ascii?Q?xhpCNleGuln4trZUguZJHB5VEsSUR4p6DnuQ7Hs7XXWhkx+HEdLWEKN3++vE?=
+ =?us-ascii?Q?A+htet2VpLGUy/oI4kR6joKFp7CpunqQ/4rj3NzSoIF+7rZooZEo6YvsJKgt?=
+ =?us-ascii?Q?Dzfyornp/qZ2WEfh2RlKe/ikbDr0GCXiTgIX1t1z8zNjd0F64AOM0mJ/SSSN?=
+ =?us-ascii?Q?Amo9LctyyEPcdTYM9WCnikkVbeX4O6zaviAmz1v5lxsFdSS6ZWfYgW4xFlVD?=
+ =?us-ascii?Q?y9UOxHPu7cr3w1Gcy2eQ1o7fF5euHdSDzviT6xs+rYRz+ZUScxhcw4N1Q9P7?=
+ =?us-ascii?Q?fuighgUs4EoeGvP294A75iKr60cGFKNPeLKMqM8RNoSqi8Ivv428n1Bp98Us?=
+ =?us-ascii?Q?oMJPhfnKAKDutWRq9wZYtzi+HGfjWdLX6/Fb+d7CeFqmih7mc2Theo28t4S6?=
+ =?us-ascii?Q?yjf/uPloqegbyLtLgFUQlUpagH34n8v7na5Gg/w1m1x/Bmst625CIoMbxW2k?=
+ =?us-ascii?Q?0IfmX8Qtpu405NToLzy1S4ztCa2+kj5VwDhNYprGrnm/wuUm7NsSEQsPw4tp?=
+ =?us-ascii?Q?diq7d/jv/eLvGBjFzjbgXAZiH3QTG3Cw9WiOq5SvvrRs7enHhr17Lg12XpJm?=
+ =?us-ascii?Q?43l9H6kSwTFY/3kY3O3IVcToKWEcyfZYLQpW1BnK5I6aszQp9z2LpT2fzFAP?=
+ =?us-ascii?Q?GmiU3xEJa/+gn2clZh5r3aoU3ZVz8W0l/TVAjUmxbL9ilqBZAlZc3sloeC0z?=
+ =?us-ascii?Q?ovIKCtp11ItyGPn4IyzzmNiMli4a5dbczk0+oPsQamztSn4MHks0xUdaePhA?=
+ =?us-ascii?Q?O2/QhhbnbiSvzxDCT1/lyiz5hGi0nvC/spiKbr+Gwab2aFfTGLmQWUqHvHx2?=
+ =?us-ascii?Q?AOIgqBjiblGEFkM+6x+LRGWbLzL0IZt+vIqbKDj5vss6Q+57odaMUZ9hn3K6?=
+ =?us-ascii?Q?U7cN+GnB9uByu+KGex3j/dc+VZs6xa//El/GuFivb5b57UuYCnMYauKynYR1?=
+ =?us-ascii?Q?14Waf2LorofrcIhZ/5c/wfz48qvaQIlaaokdPujgIIMQXc8a+aF6185pJI9E?=
+ =?us-ascii?Q?d5oPQBh78m7vKvnje1ujTs3/JNfU6hIJMBhUADedGqzIfBsGgjiWzV7xrTVv?=
+ =?us-ascii?Q?hDD2weJ2P7+xhdCGoq8+nKEk26sS732B6R18efT1onTvWyjgB2WhS5CRPDiJ?=
+ =?us-ascii?Q?HHoGtPKU9+41NVEkiahVYElaRYtNjpyYHcjaPt8HMPfVDF95P3VzhYJKms6k?=
+ =?us-ascii?Q?RgXX3Wzke6jvYod+8qD3/tI=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: da0a9930-3dd9-45f0-b094-08dda8051874
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2025 09:56:39.9098 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jvOtqB9okSUavstfBTHiNzY7C1BJjO4HntUXch9eq94mOo2fIY82kLR699pneJOn+n751pD5MVcfFGiGCjs2gTgPVezDiCJYQ5WDxEJHUQw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6343
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,184 +161,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Changes v2:
+ * added more details to the patch descriptions.
 
-This implements checkboard() to print the current SoC model used by a
-board, e.g. one of:
+Changes v3:
+ * fix commit 873112db9ce68c38984ff25808dde726f8dd5573
+   ("spl: Support selecting images based on phase in simple FIT")
+   instead of fixing loading of image with bad checksums
+ * add more comments about memory usage by board_spl_fit_buffer_addr().
 
-SoC:   PX30
-SoC:   PX30S
-SoC:   PX30K
-SoC:   RK3326
-SoC:   RK3326S
+Changes v4:
+ * spelling was fixed
 
-when U-Boot proper is running.
+Changes v5:
+ * improve description of regular malloc() case
 
-The information is read from the OTP and also the DDR_GRF. There's no
-public information as far as I know about the layout and stored
-information on OTP but this was provided by Rockchip themselves through
-their support channel.
+Mikhail Kshevetskiy (3):
+  common/spl: fix potential out of buffer access in
+    spl_fit_get_image_name function
+  common/spl: handle properly images with bad checksum
+  common/spl: improve error handling in spl_fit
 
-The OTP stores the information of whether the SoC is PX30K or something
-else. To differentiate between PX30/RK3326 and PX30S/RK3326S, one needs
-to read some undocumented bitfield in a DDR_GRF register as done in
-vendor kernel,
-c.f. https://github.com/armbian/linux-rockchip/blob/rk-6.1-rkr5.1/drivers/soc/rockchip/rockchip-cpuinfo.c#L118-L133.
+ common/spl/spl_fit.c | 53 ++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 46 insertions(+), 7 deletions(-)
 
-I do not own a PX30S, nor RK3326/RK3326S so cannot test it works
-properly.
-
-Also add the OTP node to the pre-relocation phase of U-Boot proper so
-that the SoC variant can be printed when DISPLAY_BOARDINFO is enabled.
-This is not required if DISPLAY_BOARDINFO_LATE is enabled because this
-happens after relocation. If both are enabled, then the SoC variant will
-be printed twice in the boot log, e.g.:
-
-U-Boot 2025.07-rc3-00014-g7cb731574ae6-dirty (May 28 2025 - 13:52:47 +0200)
-
-Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
-SoC:   PX30  <---- due to DISPLAY_BOARDINFO
-DRAM:  2 GiB
-PMIC:  RK809 (on=0x40, off=0x00)
-Core:  293 devices, 27 uclasses, devicetree: separate
-MMC:   mmc@ff370000: 1, mmc@ff390000: 0
-Loading Environment from MMC... Reading from MMC(1)... OK
-
-In:    serial@ff030000
-Out:   serial@ff030000
-Err:   serial@ff030000
-Model: Theobroma Systems PX30-uQ7 SoM on Haikou devkit
-SoC:   PX30  <----- due to DISPLAY_BOARDINFO_LATE
-Net:   eth0: ethernet@ff360000
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-Tested on a PX30 Ringneck and PX30K Ringneck. Would be nice if anyone
-had a device with a PX30S, RK3326 or RK3326S so we could verify it
-prints what it should :)
----
-Changes in v3:
-- added (theoretical, untested) support for RK3326/RK3326S based on
-  feedback from Jonas,
-- Link to v2: https://lore.kernel.org/r/20250606-px30-identify-variant-v2-1-624d34ccc381@cherry.de
-
-Changes in v2:
-- added (theoretical, untested) support for PX30S based on feedback from
-  Kever,
-- Link to v1: https://lore.kernel.org/r/20250528-px30-identify-variant-v1-1-4ea69c527a0d@cherry.de
----
- arch/arm/dts/px30-u-boot.dtsi      |  4 +++
- arch/arm/mach-rockchip/px30/px30.c | 61 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 65 insertions(+)
-
-diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
-index 157d0ea6930c55cc067560bd795249a39c3249ab..2f726b0aaba358c8fb3bf6f8ed2f9afca416aabe 100644
---- a/arch/arm/dts/px30-u-boot.dtsi
-+++ b/arch/arm/dts/px30-u-boot.dtsi
-@@ -27,6 +27,10 @@
- 	};
- };
- 
-+&otp {
-+	bootph-some-ram;
-+};
-+
- &uart2 {
- 	clock-frequency = <24000000>;
- 	bootph-all;
-diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
-index 8ce9ac561f0213fd4db933fdb9e1edde61ac39ca..5a5c119328fb3912af4276b1e1b12640349a7c47 100644
---- a/arch/arm/mach-rockchip/px30/px30.c
-+++ b/arch/arm/mach-rockchip/px30/px30.c
-@@ -2,10 +2,14 @@
- /*
-  * Copyright (c) 2017 Rockchip Electronics Co., Ltd
-  */
-+
-+#define LOG_CATEGORY LOGC_ARCH
-+
- #include <clk.h>
- #include <dm.h>
- #include <fdt_support.h>
- #include <init.h>
-+#include <misc.h>
- #include <spl.h>
- #include <asm/armv8/mmu.h>
- #include <asm/arch-rockchip/bootrom.h>
-@@ -15,6 +19,7 @@
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_px30.h>
- #include <dt-bindings/clock/px30-cru.h>
-+#include <linux/bitfield.h>
- 
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff390000",
-@@ -442,3 +447,59 @@ void board_debug_uart_init(void)
- #endif /* CONFIG_DEBUG_UART_BASE && CONFIG_DEBUG_UART_BASE == ... */
- }
- #endif /* CONFIG_DEBUG_UART_BOARD_INIT */
-+
-+#define PX30_OTP_SPECIFICATION_OFFSET		0x06
-+
-+#define DDR_GRF_BASE_ADDR               0xff630000
-+#define DDR_GRF_CON(n)                  (0 + (n) * 4)
-+
-+int checkboard(void)
-+{
-+	struct udevice *dev;
-+	u8 specification;
-+	u32 base_soc;
-+	int ret;
-+
-+	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
-+		return 0;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(rockchip_otp), &dev);
-+	if (ret) {
-+		log_debug("Could not find otp device, ret=%d\n", ret);
-+		return 0;
-+	}
-+
-+	/* base SoC: 0x26334b52 for RK3326; 0x30335850 for PX30 */
-+	ret = misc_read(dev, 0, &base_soc, 4);
-+	if (ret < 0) {
-+		log_debug("Could not read specification, ret=%d\n", ret);
-+		return 0;
-+	}
-+
-+	if (base_soc != 0x26334b52 && base_soc != 0x30335850) {
-+		log_debug("Could not identify SoC, got 0x%04x in OTP\n", base_soc);
-+		return 0;
-+	}
-+
-+	/* SoC variant: 0x21 for PX30/PX30S/RK3326/RK3326S; 0x2b for PX30K */
-+	ret = misc_read(dev, PX30_OTP_SPECIFICATION_OFFSET, &specification, 1);
-+	if (ret < 0) {
-+		log_debug("Could not read specification, ret=%d\n", ret);
-+		return 0;
-+	}
-+
-+	if (specification == 0x2b) {
-+		printf("SoC:   PX30K\n");
-+		return 0;
-+	}
-+
-+	/* From vendor kernel: drivers/soc/rockchip/rockchip-cpuinfo.c */
-+	specification = FIELD_GET(GENMASK(15, 14),
-+				  readl(DDR_GRF_BASE_ADDR + DDR_GRF_CON(1)));
-+	log_debug("DDR specification is %d\n", specification);
-+	printf("SoC:   %s%s\n", base_soc == 0x26334b52 ? "RK3326" : "PX30",
-+	       specification == 0x3 ? "S" : "");
-+
-+	return 0;
-+}
-
----
-base-commit: 11b8bcd7005ff24b2114dcc4d1061e083e4c9e6c
-change-id: 20250528-px30-identify-variant-ae39c772155b
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.47.2
 
