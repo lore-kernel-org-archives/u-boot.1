@@ -4,104 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE40C5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 16:51:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB61C677C4
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 17:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72D1C82C30;
-	Tue, 10 Jun 2025 18:51:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBC2C82B26;
+	Tue, 10 Jun 2025 19:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="te6RSGjv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OUORnIiO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB7C282B07; Tue, 10 Jun 2025 18:51:18 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id ED4FD82B95; Tue, 10 Jun 2025 19:00:06 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB42982B20
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 18:51:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC45F82B20
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 19:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-442ea341570so37657005e9.1
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 09:51:16 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-451d3f72391so74082665e9.3
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 10:00:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749574276; x=1750179076; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4/ChcbGDY2c0IGn7C4U/oe3atwht945xOB+uopiC8Q8=;
- b=te6RSGjvl8CAAqsuluDGP897LFZ9IxZJYXBJqCCXgwarIa21HXSOqAJYOROfeRWTLu
- 5oI3EGF7jtiSk7Ig++kYwcUhl6y+vovqu+o7tQxT2pUOA7bCaWoWxfG1NuMmTgzdV1wM
- yVEDUK9yAUu5xBdCVNlGPZLcU2yLJYyThhNk4f8iIgcYvO9Z/XTsUKz6n3SmJ3Payz3s
- Li8qaERMtMk7Rnulsko/Sny60Yga9WK/6iOdcLOdSNacWv0KdAWLudxhHu48FvUEUYMP
- n61qT31hRRNWI1wBnzyRtgeIljE2fHsHC9BayZYuBKIXpM0Yn3QkPaJJ5kML+P/WhOF9
- puqg==
+ d=linaro.org; s=google; t=1749574804; x=1750179604; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tZ/sI+r+zEzXCzu/fkbc7Ig9TPW4o7mjamZUfWzxDJU=;
+ b=OUORnIiOk04Gvr+aBLs2hxKLDg9vKuVgeapD5ecIL0FddB8Mfa3UzEB8sqiErA0fG3
+ JqAG+Cy4CVjHPptZCi2ez+INtULAcyaaxM/zpfp//vcYEYtOF779FRIoKLa4mj2MfJFu
+ J2MDgtd5ErJ9V9dYWbdYPWXYodELL1oy1s9rXTxWXANFs7q/X4QdYWW9WiHVsmA6Ofz4
+ FDNmngC7a4U+6aeQ7yM9JMm7ETP0Di8g/HRKl/JSCb+C3nEQEjy1vN6/Mt1B/as8rBVU
+ 8S2XsTdV05eHMsL7H5xwvaEE4ij+Vd+Mv2ej8up+pEjm4yCFo1cHwqSWwVfSvzPndXUY
+ yQAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749574276; x=1750179076;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4/ChcbGDY2c0IGn7C4U/oe3atwht945xOB+uopiC8Q8=;
- b=exKZBNUGj3X9b8CMNsfPolGiGxlwfRWEAAryo4R95gghK8K5faKQgbPQVH1IZ7rFPF
- WqLQ6JvMHMJ3y4hM4nzzf+1DNJinqdA6wDLEmO/LxCvBamw7+7vDOZcQ3eVUjRleiMXU
- H/444gPj+Nx27sT83mfpGhbQKKBHwlf1DWV4QNRzKf0SI0SgxW7wy2ZAn3NMhw4Mi8JD
- rKmXJeMJF+J1HhSGduTB7FA9S351zfPsp2WgwdSUQmcO4ViyoAXak2KWCjw4g+GHqgjc
- Tq5VCvdh/kZSZxhROo93hA/DQnRiIQjSArxZiCpSaKky/7lYHF/0c6Z4kwVj8cuOO06V
- hYgw==
-X-Gm-Message-State: AOJu0YzbbiW9V24xzGTi6kukcUdPUuH7dsVJg7bMFnDLGlZLKrKaxndR
- 2ICo9s6FbvoHrzA5JJFpB3LLNL3FP0mUzYuMt1lGt4bEkTdaJcYwYE07IG/mzBK9A8A=
-X-Gm-Gg: ASbGnctjyw4FASNCsihE0OqZBM7BGi5rmlDB3uYRutnTMM2RNZAxKyJDGuuJ7pobE3W
- YL4KXWvSLVTmgVsE+GpNOON+yXj+eu2ZmY46dzHVA0DBqo/BN5//5KDdtAeQipHot8v/2Uvfb6M
- RNMdrO+X1Exhbz5w5Tb6k7YB4i4B9umP3D4BOul8Y3wkgie5vMrghrKA31Lc662Nl+jK0rA4TaZ
- phnNsv6pP+hPE/CpO58GGeW9WQVV4nfVKXMsyigZFm1TuU7Cqb2d9ESdub/q6Psee7MKSHgY4SL
- VhiaDmD5BS4FjeFk271v8gcF+c/13mcWGLUfzc3D3TL8nnsXWWNcJKRieIJoMH8rpDZDHUeL
-X-Google-Smtp-Source: AGHT+IFLD2h3FFvP9XG/tZ1HHOC8//5De3LLGXlaDhCucl7JGBrOYErwDPH+qlzmkQZqsffob4/AbA==
-X-Received: by 2002:a05:600c:3587:b0:43c:f6c6:578c with SMTP id
- 5b1f17b1804b1-452013ab6b1mr180938635e9.15.1749574275908; 
- Tue, 10 Jun 2025 09:51:15 -0700 (PDT)
-Received: from toyger.local ([2a01:170:117e:fc:3626:366e:4bd3:97c8])
+ d=1e100.net; s=20230601; t=1749574804; x=1750179604;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tZ/sI+r+zEzXCzu/fkbc7Ig9TPW4o7mjamZUfWzxDJU=;
+ b=lQh8i4CajSCjWyzGScx1t1NC0HChcUvsrRTLuUl4B/puyfNC2+C3cqUmVwU/2Qr2N6
+ qchxhvdK/2lfvwp0twDtir39/HRrNggvTugneCRt+Hfiro5wLx/c7zmwBdB3vw0tWH0o
+ wMv8FMRwg6cMRl2b+XZevYxYWnlAMkf1UPfcCqEjvDA2SKkru0JfKfVSyN9rxOa4bQNE
+ fbx5WZX3QUPPTMZZ2m5QcFzBE4fmVRXWBNO48T6bEKSU4EaLIOI2jCl2pohyJu90GOwc
+ P6Jo2eKk2U4nGVBhwwe7py3SNPHZCTm/oKcnNpCt5WXHbwX46AgirgWTxncy5HGTuXtu
+ G5KA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWy1eLyyp7ZaOLhbZIoGcGq9jEviELhG/bk9xZbbsHZBp7MBlBepx39586+RqpsoHgGhdo5pRQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzACwHLTtlzu++b2HRZPWp0gNLnRAAZ/V2hJ2TynFnBFL1ijT4
+ 1vkC6LfgA8tBqfUMPcyOAoFsKUby4Ehh+NQ/NGBL4NOlGyxya3JAFC2THBUQ26S3OG4=
+X-Gm-Gg: ASbGncseg6JktW23rJiALJ/45bxiFBKSP23/vjDbPSmKzbJB1hDqejwsSAHTcwX0ZOc
+ 1FPnD8nNBXyA//JMrDiCgl6G8ACIfqELsZvoLWpuhwIjisKPSBqrMKxpE/SJRrvB8s3+pHoU8sm
+ K//GRED/z2yNGXtwDlCWr0zd/rSkSTIALHaxFlK7Uya+N7M5JKdeYqdpE+Ic3hRch7yHTd3DmWL
+ TTPMLAFoADUPtN/2sUP4/4ehCA11L4JkgANmQTnk71/Wil21GkkL22kXz+yyc5W/rrFJEAhCozA
+ zGzulAXBYeRbDFMcC7/HBrYQq5moQ+37/rHJ2D8Y51mBEfpV5zVfokNrpEL+wRKXjNfswA==
+X-Google-Smtp-Source: AGHT+IHNSJawIxBfL6LXJwe4ZZuBo8QlSzdEGKBAyTWB53W1CWm7aVJ3wPma1JMNn+/p6v4nowETJQ==
+X-Received: by 2002:a05:600c:3ba6:b0:453:9b3:5b67 with SMTP id
+ 5b1f17b1804b1-4531d00c87emr41025655e9.24.1749574804190; 
+ Tue, 10 Jun 2025 10:00:04 -0700 (PDT)
+Received: from toyger.lan ([2a01:170:117e:fc:3626:366e:4bd3:97c8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-452669ada25sm148665345e9.0.2025.06.10.09.51.14
+ 5b1f17b1804b1-452730b92c9sm143597115e9.24.2025.06.10.10.00.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 09:51:15 -0700 (PDT)
+ Tue, 10 Jun 2025 10:00:03 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Tue, 10 Jun 2025 18:50:52 +0200
-Subject: [PATCH v2 3/3] i2c: geni: load firmware if required
+To: Greg Malysa <malysagreg@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH] Qualcomm: maintain trogdor so CI passes
+Date: Tue, 10 Jun 2025 18:59:51 +0200
+Message-ID: <20250610165958.152573-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250610-geni-load-fw-v2-3-7cad6bc18db0@linaro.org>
-References: <20250610-geni-load-fw-v2-0-7cad6bc18db0@linaro.org>
-In-Reply-To: <20250610-geni-load-fw-v2-0-7cad6bc18db0@linaro.org>
-To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Casey Connolly <casey.connolly@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1287;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=C9cV1XlqKOFnv1pfqDdwPR7Q+zPvojzlL4zUYBp01dw=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoSGJ+/gPO04lCUMVfI/YbOMQmOCBwihqULfecp
- m4zm8ynFU+JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaEhifgAKCRAFgzErGV9k
- tiehD/9Gzq+rOUd3kBH6hEQJV5faWvBa12zOKQJrCazLShWqqyD4rya/rsT6TiBZsey/jYKW48w
- DvVPtiBUeDIn63vc/dg/RWeMKeLUNP57Jqff+3vBcbi93ysAi0YxohZTZTRjzrxrsUpl2OMY11T
- an9DHQXdqKkIUCvdLlSQILpEke/lwYAt3VARa83kBXvQ1lV2Koik8aeoCSvO5ky61wEFcfdJ+qc
- knuV99pe5+vStArHyb33DmxwogHyB5TJHoyvgodz/txhYjSgU7fwUUAya+AOweiNlMA8295gn07
- zxRfOQMyBudRXPYK8Dg8L6/8hrz1a+1e/s2p63iJ9/3nRu94Zv1xTxmLPfHMDAJyKp0p3GE0T70
- dESy57cECSek+M4IV1UkONoCzGnSAqiB6Kvh21+ZBytMGqAtTPlyM+ZkjeesQ/6iiGvbd1PAI1A
- MSuTLiC6nue1lnabOnI8tAPFi+ZqhafDCcilRjfFogu2HBZ9dQjRdh3w0KcdyZwyvRIuOP9nl2I
- gRDu96zUw22HoFKT/+cpHKuhQ0gPBeEwZ90IpoWrod+eDJrYXcJLBzz4UY6mUJZ35bH2hwRNGoE
- JgoNqs/CLjU+iGetAI72eLD/EIVF0TGZelDOTvPrkEjKbT+bBTQCDBmMDcoulaOMGd5rDU264gQ
- mV/Pdcd4Kh7SF+Q==
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,45 +104,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Load firmware for the peripheral if necessary.
+Add chromebook_trogdor_defconfig to MAINTAINERS. This is a Qualcomm
+board so for now I'll maintain it under ARM SNAPDRAGON so that we can
+get these fairly invasive (but very useful) patches in which improve
+Coreboot for all ARM platforms.
+
+Hopefully someone who owns this device will be willing to take over
+as MAINTAINER.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/i2c/geni_i2c.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-index 4eb41ba852f7790ca646c8ba38f29fdb727fa804..d29e00fdf41df1d7a95d8d9b3b98f784f5b2a3e1 100644
---- a/drivers/i2c/geni_i2c.c
-+++ b/drivers/i2c/geni_i2c.c
-@@ -21,8 +21,9 @@
- #include <clk.h>
- #include <reset.h>
- #include <time.h>
- #include <soc/qcom/geni-se.h>
-+#include <soc/qcom/qup-fw-load.h>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d62dd35a385b..789e6f0c37b8 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -670,8 +670,9 @@ F:	drivers/serial/serial_msm.c
+ F:	drivers/serial/serial_msm_geni.c
+ F:	drivers/smem/msm_smem.c
+ F:	drivers/spmi/spmi-msm.c
+ F:	drivers/usb/host/ehci-msm.c
++F:	configs/chromebook_trogdor_defconfig
+ N:	qcom
+ N:	snapdragon
+ N:	qualcomm
  
- #define SE_I2C_TX_TRANS_LEN		0x26c
- #define SE_I2C_RX_TRANS_LEN		0x270
- #define SE_I2C_SCL_COUNTERS		0x278
-@@ -498,8 +499,15 @@ static int geni_i2c_probe(struct udevice *dev)
- 	proto = readl(geni->base + GENI_FW_REVISION_RO);
- 	proto &= FW_REV_PROTOCOL_MSK;
- 	proto >>= FW_REV_PROTOCOL_SHFT;
- 
-+	if (proto == GENI_SE_INVALID_PROTO) {
-+		qcom_geni_load_firmware(geni->base, dev);
-+		proto = readl(geni->base + GENI_FW_REVISION_RO);
-+		proto &= FW_REV_PROTOCOL_MSK;
-+		proto >>= FW_REV_PROTOCOL_SHFT;
-+	}
-+
- 	if (proto != GENI_SE_I2C) {
- 		dev_err(dev, "Invalid proto %d\n", proto);
- 		geni_i2c_disable_clocks(dev, geni);
- 		return -ENXIO;
-
 -- 
 2.49.0
 
