@@ -4,69 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD576C5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 12:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71188C5B552
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 12:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F5F88070C;
-	Tue, 10 Jun 2025 14:48:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B1FD58070C;
+	Tue, 10 Jun 2025 14:57:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RaD//4F7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GfWPEJMH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5D4882AC4; Tue, 10 Jun 2025 14:48:56 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E7308007D
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 14:48:54 +0200 (CEST)
+ id 8874780C83; Tue, 10 Jun 2025 09:41:33 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 437A5805D7
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 09:41:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55ACmqQI2290343;
- Tue, 10 Jun 2025 07:48:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749559732;
- bh=xsU+Ludi3xhwPU02I/gHoP9Wamd+8jWWHK9kZYWsca0=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=RaD//4F7oNyvgbPZQ/Mvr6hSiFMDgAGXfKY7uDVCIeuUOfETQcYCMceUTBZxkJgeK
- 5I7hLwJWS62lufaK+kCw6fcrtPflFAD21GhBPRSI1YuFVfC0kzq1lWQu8++z5An1q2
- jEACGGNBEPpIZXm42bZJOGbx0KmgTNwEn2i/OEJU=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55ACmqau2121651
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 10 Jun 2025 07:48:52 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
- Jun 2025 07:48:51 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 10 Jun 2025 07:48:51 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55ACmoAp3069281;
- Tue, 10 Jun 2025 07:48:51 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-7482377b086so2552253b3a.1
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 00:41:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749541289; x=1750146089; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4V6OAXYXgSP+NLjWY239LEJ42BKL3etAUuVpmhMncKo=;
+ b=GfWPEJMHy2ZmGlhYzEcT4VIJjMABRkwrNW5+bebc+TJM3u7PImxvFr4EQmgD/gYuQn
+ EcbnwJkJsS94i3OkYB6fx0nUJl/CjnFp9z2OEv7GEkoAQEPKG/kAkPjG61e73kIXOWKg
+ CoH7Vic9VyxNB9Csyqght/v9JprG8FsofmOf2ZztRGErk4X23qgnETZBLrzlIwmfdvef
+ q1Cd/MF3sa227kXoiif1qu9wNIIS4T+BxLLLHfZR/N2UA4BEdPftJhjL3ldKV/yW3PHH
+ t9U5LCpWtPxTdVigDUb+AZctI86fjfI3pQO+y5qHg+zmRFDnHZ6ZTw/67T0+UT3VtUoW
+ 6Q3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749541289; x=1750146089;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4V6OAXYXgSP+NLjWY239LEJ42BKL3etAUuVpmhMncKo=;
+ b=L80htKRY+AwED3ZS9RJWsaWcA+tUU6vBVNnklGK2HDkjFfzhkkpBGro4mR+h5IxsDR
+ GWct1tEqbtntzoh/lF+ueGirkrnEvYI5VGZfqMJv1pOWI+Ffx98ebIFlnsSIeakqg4Sc
+ 547DKLRr1wZOL/hsrSXwqCnWRIVwaFallsq5eUGcuosX4kNUWBZxEz6q8Ech+KuyNqLE
+ xxphhOU03UUEXKgFEqFyxcf6U0f998aED97VarUiqxza+jmWUpe57NLDPWfgkgYkOc3v
+ c4PLz0L/cEqi7HOkMYDHdMROA6tJXFAnbwZZ91s9w+/Ydhx42mOKceo20eP9cQsR9HdA
+ UkrA==
+X-Gm-Message-State: AOJu0YyVMk6WzGqzfWTXQ5wz3gMzkr/+ZyUu3OoHvxkTmuoQ4qf1Lb0m
+ sEYtKfK6MDx3tQIy20DqPNkwcSzLLog1arLfDAJ8bUek0woEskE69ozE64D+s1Ro
+X-Gm-Gg: ASbGncsuUwh0/QpLmLDz74MJvoqkRbt+IKzWQZ0C2JPcld9Xdvar8H14TXP6cQqKnqW
+ eO7W4nsyrARPgWPyVNpbJPArHblL816S3fA/UcwVIO09fRMJtcjSlPLjDepDCofmciAWdAtmqmt
+ TIubIsQIn+Uc2jk9V7aeRTyk2xg3lnonGX2idY+1LZu/7JReTvrZPcdo44Pztvvvwsdr5ULW5wW
+ 53NlBMl5fRFp8wB576GMp3cm1/aU8vtfnyzDRCPjpd8MhBlORJIlIJ69y3yAWEniaFB1HCYGBi1
+ h3Se6yEz93zE1DifwtFYaN+6AM5algzPHAZpJjezYf4UMQzGmZ8HxJWIcWP/sQkOsBAMGsVtnD1
+ z43C46pNsLPQGXwHdgHI9UWT0nVhEHT8TI8Q=
+X-Google-Smtp-Source: AGHT+IGK+dXDOcPeussjE8F2DeTdn4/WXqxtaXhf0UgHJBbGZgH0XRTQsJbRK0v+iT9e/gDicJ9d7Q==
+X-Received: by 2002:a17:90b:4e8d:b0:311:a561:86f3 with SMTP id
+ 98e67ed59e1d1-313472c046fmr23323717a91.6.1749541289364; 
+ Tue, 10 Jun 2025 00:41:29 -0700 (PDT)
+Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
+ [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23603092640sm65201945ad.54.2025.06.10.00.41.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Jun 2025 00:41:28 -0700 (PDT)
+From: Aristo Chen <jj251510319013@gmail.com>
+X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, carlos.lopezr4096@gmail.com,
+ aristo.chen@canonical.com, quentin.schulz@cherry.de, ada@thorsis.com,
+ paul.henrys_ext@softathome.com, d-gole@ti.com, afd@ti.com,
+ d.schultz@phytec.de, nm@ti.com, n-francis@ti.com, alpernebiyasak@gmail.com
+Subject: [PATCH v4 0/5] mkimage: validate image references in FIT
+ configurations
+Date: Tue, 10 Jun 2025 07:41:16 +0000
+Message-ID: <20250610074121.8308-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: 20250505100852.9364-1-aristo.chen@canonical.com
+References: 
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 10 Jun 2025 18:18:16 +0530
-Message-ID: <DAIV5H1N5ERM.EC24TFII1C1Z@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>
-Subject: Re: [PATCH v7 04/10] arch: arm: k3-binman: add fit for falcon boot
-From: Anshul Dalal <anshuld@ti.com>
-To: Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250603142452.2707171-1-anshuld@ti.com>
- <20250603142452.2707171-5-anshuld@ti.com>
- <20250606115719.eyu2vk3zdwygzmc2@bryanbrattlof.com>
- <DAHTPYAY74YM.1NOHZR0BX3KPD@ti.com>
- <38ae6f7c-0e66-4f27-a5bf-55eef8ba54f1@ti.com>
-In-Reply-To: <38ae6f7c-0e66-4f27-a5bf-55eef8ba54f1@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 10 Jun 2025 14:57:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,110 +103,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon Jun 9, 2025 at 8:53 PM IST, Andrew Davis wrote:
-> On 6/9/25 2:28 AM, Anshul Dalal wrote:
->> On Fri Jun 6, 2025 at 5:27 PM IST, Bryan Brattlof wrote:
->>> On June  3, 2025 thus sayeth Anshul Dalal:
->>>> This adds creation of tispl_falcon.bin for the am62a, 62p and 62x.
->>>>
->>>> The contents are the same as the existing tispl.bin but A53's spl and
->>>> the fdt have been removed as they are not needed in falcon boot.
->>>>
->>>> This reduces boot time since the payload size is smaller and we also
->>>> aren't authenticating the spl and fdt in secure boot.
->>>>
->>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->>>> ---
->>>>   arch/arm/dts/k3-am625-sk-binman.dtsi | 64 ++++++++++++++++++++++++++=
-++
->>>>   arch/arm/dts/k3-am62a-sk-binman.dtsi | 64 ++++++++++++++++++++++++++=
-++
->>>>   arch/arm/dts/k3-am62p-sk-binman.dtsi | 51 ++++++++++++++++++++++
->>>>   arch/arm/dts/k3-binman.dtsi          | 54 +++++++++++++++++++++++
->>>>   4 files changed, 233 insertions(+)
->>>>
->>>> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am=
-625-sk-binman.dtsi
->>>> index cc619f5920e..9544b9d1134 100644
->>>> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
->>>> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
->>>
->>> ...
->>>
->>>> +				dm {
->>>> +					ti-secure {
->>>> +						content =3D <&dm_falcon>;
->>>> +						keyfile =3D "custMpk.pem";
->>>> +					};
->>>> +					dm_falcon: ti-dm {
->>>> +						filename =3D "ti-dm.bin";
->>>> +					};
->>>
->>> When you build this are you using the TI_DM argument? Or are you using
->>> BINMAN_INDIRS to point to all the firmware? I think this will only look
->>> for "${BINMAN_INDIRS}/ti-dm.bin" and error out now that DM is mandatory
->>> unless you use TI_DM which will break a few distro builders' recipes
->>>
->>=20
->> It relies on BINMAN_INDIRS still and I hadn't updated the dm node since
->> c492a55fe4 ("arm: dts: k3: binman: Fix DM firmware selection"). I will
->> fix this in the next revision. Thanks for bringing it to my attention.
->>=20
->>>
->>>> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
->>>> index 5163161b94d..a678379dae9 100644
->>>> --- a/arch/arm/dts/k3-binman.dtsi
->>>> +++ b/arch/arm/dts/k3-binman.dtsi
->>>> @@ -489,6 +489,60 @@
->>>>   		end_address =3D <0x0 0x9fffffff>;
->>>>   	};
->>>>  =20
->>>> +	ti_falcon_template: template-9 {
->>>> +		filename =3D "tispl_falcon.bin";
->>>
->>> Small nitpick: We could probably just call this tifalcon.bin or
->>> something shorter. It's not really an SPL now.
->>>
->>> The bigger issue here (in my mind) is this requires our falcon.config
->>> fragment to work properly. I don't think it is wise of use to produce
->>> this image if that fragment isn't applied. It would be a debugging
->>> nightmare for others outside of the U-Boot space.
->>>
->>=20
->> The fragment applies to r5's defconfig which prevents us from doing a
->> conditional build of tispl or tifalcon at the a53 stage.
->>=20
->
-> You might also be able to add a config fragment that would be applied
-> to the A53 stage. It would only be used for this one binman task,
-> but isn't that all the A53 build does in the falcon boot case anyway?
->
+Hi all,
 
-I don't see much value to such a config fragment, we already create
-unsigned binaries without having a conditional build for it. Existing
-customers can continue using tispl as usual and ignore the tifalcon.bin
-file just like any other binaries binman produces.
+This series introduces a validation step in mkimage to ensure that all image
+names referenced under the /configurations node of a FIT source (ITS) are
+actually defined under the /images node.
 
->> Either we move the tifalcon.bin generation to r5 stage which would
->> require not only changes to the build arguments as we would now have to
->> pass OPTEE/ATF and DM's path at r5 stage but considerable changes to the
->> SDK recipes as we would now have to deploy a binary from r5's build
->> output to rootfs.
->>=20
->
-> I wouldn't worry too much about the SDK, that is something we control
-> and is not the only user of U-Boot.
->
-> Why do we do the A53 build at all in the falcon case? If we move the
-> tifalcon.bin generation to R5 stage we can skip the second build,
-> which might be something worth doing just for that reason. Side benefit
-> is it would fix the above issue with non-functional `tispl_falcon.bin`.
->
+### Motivation
 
-I agree that A53 build is just an overly complicated way to package
-binaries for falcon boot if you only consider OS_BOOT use case but I
-expect most users would have built A53 at least once from where they can
-directly use the tifalcon binary.
+When using mkimage to build FIT images, it's easy to mistakenly reference
+nonexistent image nodes in configurations (e.g., referencing a missing `fdt` or
+`firmware` node). Such issues are often not caught until runtime in U-Boot.
 
-Having tifalcon be part of A53 build also keep the clean separation
-between R5 binaries (tiboot3) and **mostly** A53 ones (optee and atf).
+This series aims to catch these errors early during FIT image creation by
+validating the configuration references in mkimage itself.
+
+### Changes in v4
+
+- The changes in v4 are for fixing errors in CI process
+- In the FIT validation loop, updated image name check from:
+  ```c
+  if (!img_name)
+      continue;
+  ```
+  to:
+  ```c
+  if (!img_name || !*img_name)
+      continue;
+  ```
+  This ensures that both NULL pointers and empty strings ("") are ignored when validating image
+  references in the /configurations node
+- Resolves a regression on the `phycore-am62x` platform where `mkimage` reports an error due to
+  missing image nodes referenced via the `loadables` property (e.g., "tifsstub-hs"). This patch adds
+  the required `tifsstub-hs`, `tifsstub-fs`, and `tifsstub-gp` image nodes in the corresponding binman
+  description, inspired by commit 622f826bf025 ("arm: dts: phycore-am62x: Package TIFS Stub").
+
+### Changes in v3
+
+- Series re-sent correctly as a single thread without code changes
+
+### Changes in v2
+
+- Use `fdt_stringlist_count()` and `fdt_stringlist_get()` to handle stringlist properties cleanly
+- Validate additional properties (`firmware`, `fpga`, `script`)
+- Improve error messages by including the failing configuration and property name
+- Refactor error propagation in `fit_handle_file()` as a separate commit
+- Update all affected binman test DTS files to include the missing `atf` and `uboot` image nodes
+- Add a new Python test case under `test/py/` to ensure mkimage correctly fails when an image is missing
+
+Best regards,
+Aristo Chen
+
+
+Aristo Chen (5):
+  tools: mkimage: propagate error codes from fit_handle_file()
+  tools: mkimage: validate image references in FIT configurations
+  binman: test: Ensure all config references exist in /images node
+  test: py: add mkimage test for undefined image references in FIT
+    configs
+  arm: dts: phycore-am62x: Add missing tifsstub image nodes for FIT
+    loadables
+
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 94 +++++++++++++++++++
+ test/py/tests/test_fit_mkimage_validate.py    | 58 ++++++++++++
+ tools/binman/test/170_fit_fdt.dts             | 14 +++
+ .../binman/test/220_fit_subentry_bintool.dts  |  2 +-
+ tools/binman/test/223_fit_fdt_oper.dts        | 14 +++
+ tools/binman/test/284_fit_fdt_list.dts        | 14 +++
+ tools/binman/test/333_fit_fdt_dir.dts         | 14 +++
+ tools/binman/test/334_fit_fdt_compat.dts      | 14 +++
+ tools/binman/test/335_fit_fdt_phase.dts       | 14 +++
+ tools/binman/test/345_fit_fdt_name.dts        | 14 +++
+ tools/fit_image.c                             | 42 ++++++++-
+ tools/mkimage.c                               |  7 +-
+ 12 files changed, 297 insertions(+), 4 deletions(-)
+ create mode 100644 test/py/tests/test_fit_mkimage_validate.py
+
+-- 
+2.43.0
+
