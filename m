@@ -4,173 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86958C5B543
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 09:00:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1E4C5B543
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 09:00:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AABB48070C;
-	Tue, 10 Jun 2025 11:00:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 9EFE882AFC;
+	Tue, 10 Jun 2025 11:00:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="E+RA+OMh";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GzgZ3HiR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C0A48070C; Tue, 10 Jun 2025 11:00:07 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
+ id 1D60382B07; Tue, 10 Jun 2025 11:00:22 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07E8C805D7
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 11:00:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id A7B7880C83
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 11:00:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RdEcyJWBQMy2I4XgiscK8bM1aacm3P0iiEXF8xMhFoSuZcmMOI03jseq8QCVZuEGo6f0fzZ9IDFV7J2URRI0RS3og63OOdScwNSfJCvSClka/giZJ5BY0B/a8HeiUHBCtqzkr5eNpbq3OcHNMtSRbw3sdYR62YqBrQM17W/RKLwHvh7A/xZppwd5qZXYdEivFoEGXyP8WMyckNXAlamqXntGg2THC4N8jUaDBxKW+8zWqP0RQRosjdRpTPO8FSB1C0VdMfYOzK66ZZKihrrS8gFQ08Bv131BlGLpEgiVoyTRRUn3ryj0BWDhyIpXg4qTco2u+oTydk2ZPP87ZSrVfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l+tErNcGaS/y+ef4zR9htRngeokh+bmV2YIAABHo0hU=;
- b=b0vRNrW9mO166YRINeFt2/YNx1gMH5svlLwkZM3LbBlFsb+ZmjdX/2e4XC7R0083AiA8Ox3wbm4O+pdNbScsMbyOQ+BXsdxM50TtW9CWTkNvZLSpD74wm4+QjMp+xkJdXB7VdSRv83clRyREARimGOkWUm7n2md2Yo3H+nQoz7kink8aKSIQ49DtdZsABGz2EwBxKDpVKTs2kAY1FUw7LvbR/LpNeE0UYhq3Yy33E8Pv8gXRmDUamnB/buJJNst0eo7Bf302uLJLSnHA+btZ7WJd0jRKeW9QxZsIobClU1dsYtO6PMyuFMQPFX7yVozGHxpTF2JGG4u3PfalaeBVsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l+tErNcGaS/y+ef4zR9htRngeokh+bmV2YIAABHo0hU=;
- b=E+RA+OMhPO4gyX1jaz0anYG+IMWPdzzGyREO/OQg7AfVKUCUtmywoDq3DQD76HkqgKQ8IwaSmwLKDUDa5JLhZ1PPn7l2voh1TVupDO0G8ylScy0V6JQT0uPNJt9psaQGWdMAoO7dkD/AXe94JIdMRQg9DhHhuUfFRrszRhLxzOw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA1PR04MB10964.eurprd04.prod.outlook.com (2603:10a6:102:490::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.29; Tue, 10 Jun
- 2025 09:00:01 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8835.018; Tue, 10 Jun 2025
- 09:00:01 +0000
-Message-ID: <e1a6d439-063d-48db-a94e-96cb952abc72@cherry.de>
-Date: Tue, 10 Jun 2025 10:59:57 +0200
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 044AC3F675
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 09:00:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1749546019;
+ bh=uWDi28NJ8Nn0EjsX4JiE1zdfGzOskGnCWl5DSg5ehfI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=GzgZ3HiR9pSb9jaeeAADmhcFmspluyYX/+L/RGlruHTS2qLKjJYYWxg8d3d5BzDYi
+ Q8NPzklGe0wR1G2T+REKqF9F0QVyD2rGFPTbboPbIBPO8DnNIt6f37YVLlv3Y1QH/K
+ EFs266Seds1xo2tIRv710uD2fHc5+7T8/iVqEGnWcEvjJ5ilJ92zN7aCpu843nPsqY
+ 9FKHy9mmccvw90tsfFymELKL29pJ+jktTGjd9kGFPITs6j/y/69BykUVPx3bsRe8kU
+ P68MieFjoeTBs60vWpV08sRRddIBAFsE1TH8Xa7onkJRNgUMsDFaFWucLBPHbhKjwV
+ b9mLhlKD25c5g==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3a3696a0d3aso2135620f8f.2
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 02:00:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749546018; x=1750150818;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=uWDi28NJ8Nn0EjsX4JiE1zdfGzOskGnCWl5DSg5ehfI=;
+ b=ONVx29jTQ411Z0TBibfLO9BTTNwZH+i62g2/1oSFZXLtv9M2haUX2qiCImgmdsUXbB
+ 7Q0Nd+ZrGjbHp+mahImANj3zqLKFrzBl6z9+/JeNnqCFKCi8m5KDaN3UYt5OniDr7Keo
+ B7QSl0aLMcitHGGmcWGJ0BIy1S1kqgq0bLK/i7oUBn0tFNHXvfCVOnjBKrgViTl1tvW7
+ dU70IadWyVcnLXQElv0ZHFZh0pM5NtJNzNOaB6P+R8at2Hy8kpOt4sOjnreprhzj5S1t
+ Zy8ZSyykI45dXKWGEz2BFnpEjY32We2UAnktZeXZgP8f2nthnLuqdvnG8f971/ddU1u+
+ GdLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTsZpRe7SVPGVva/Plr+rHFomeJ5T7IX7piV3l/geRjtJMRkqhIBO0Sc/OVy6CQQvPHdWWIYs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyxoI+kVbkEggxmBZ82qyCJN8lvc2duH2e7umlxAzU2n59Lwr2/
+ jjutppRqlXWmD3GWq1fVmxYbObvMy79bOA2HRJfmApXB4bmbabDkpSSQ/Xocwm/h3/xAa9i1pjq
+ GyUXW4CKDxQDGJO3jHoTo92t4YebH+rw9agff7PqUNmGjRcf3AIkvzt7PTdV3+bX3BkLb1hs=
+X-Gm-Gg: ASbGncuFBGTfoX74rx+J/FQx2P5F1N4youlYYJ78/s+M2WJm60JxMHgvXatffWF/hhh
+ eMQuDYInsIjZLdi732OmaEYerf56XoLof4BmOUwcH05V2BA5B5969/pVlj5JXmXXEm0ObneG+R8
+ mb1yw7UPoHd7pW9bxb3gkQxX2f8IU5oY0g7mA1xX3hzd3enl59CBYXVLN6yYCF6/4W2ekSZbIZr
+ 6fmyy55FbIKgszvbjY3SGIhTle0jpxMtQtIvTD0dEXZ+Tc7nnoN7rjh3DClsRfpvPdEERgLLH52
+ ZkGMDVdB0CATgOs2VP5xlEa46h6oeOmB4eckW/lP9FhsmM9iYLwIMqPeyUdljgGENVwVOhK6b+5
+ on2UW6Nzn8/YIY2mZsX8=
+X-Received: by 2002:a5d:64ed:0:b0:3a3:6a9a:5ebf with SMTP id
+ ffacd0b85a97d-3a531cabb5cmr13012486f8f.20.1749546015782; 
+ Tue, 10 Jun 2025 02:00:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHF0lhezeAful1cUR++GOoVtSXuFEbWXb3Ssrmo7/Eg96SD8IhK93DwzUMXycircDss4fGK8A==
+X-Received: by 2002:a5d:64ed:0:b0:3a3:6a9a:5ebf with SMTP id
+ ffacd0b85a97d-3a531cabb5cmr13012450f8f.20.1749546015367; 
+ Tue, 10 Jun 2025 02:00:15 -0700 (PDT)
+Received: from [192.168.103.102]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a53229d9e9sm11868558f8f.13.2025.06.10.02.00.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Jun 2025 02:00:14 -0700 (PDT)
+Message-ID: <bb122e92-8191-478a-bcbd-b87011d87227@canonical.com>
+Date: Tue, 10 Jun 2025 11:00:13 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] cmd: remove duplicate DHCPv6 Kconfig definitions
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+Subject: Re: [PATCH v2 3/3] net: consolidate PXE processor architecture type
+ Kconfig
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Vitor Soares <vitor.soares@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Simon Glass <sjg@chromium.org>, Mattijs Korpershoek
  <mkorpershoek@kernel.org>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ Sean Edmond <seanedmond@microsoft.com>,
  Casey Connolly <casey.connolly@linaro.org>, Bryan Brattlof <bb@ti.com>,
  u-boot@lists.denx.de
-References: <20250607120303.210990-1-heinrich.schuchardt@canonical.com>
- <20250607120303.210990-3-heinrich.schuchardt@canonical.com>
+References: <20250608074228.12407-1-heinrich.schuchardt@canonical.com>
+ <20250608074228.12407-4-heinrich.schuchardt@canonical.com>
+ <CAC_iWj+7OuZ7ed0ZSD4zmk0TF5JieH26-oce7Ocf3cg22Fg1Sg@mail.gmail.com>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250607120303.210990-3-heinrich.schuchardt@canonical.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAC_iWj+7OuZ7ed0ZSD4zmk0TF5JieH26-oce7Ocf3cg22Fg1Sg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0217.eurprd07.prod.outlook.com
- (2603:10a6:802:58::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA1PR04MB10964:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6227bc6-c71c-40ae-7854-08dda7fd2f22
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NkF5dmhXQ1hwMkltTXd5R0tDYU8vTHZrdGdPaldTdzdtY01XTWNHeUlCR3dy?=
- =?utf-8?B?NTk3VTlnbkV6ZHgzYXUxNW16dmM3dmYrazE3UElmVWxNNDRiamMzRTdNb01I?=
- =?utf-8?B?ZzNGSHdNMytoYXdycmNYRFc4UjZzSllCdkN4RVBmL0RpbDVHMzM1NTJVekxJ?=
- =?utf-8?B?STd1b01Yam5rY290L0hKdGhYMm51N2dnNXhudnZWVDJJSWdGazBpaFVwdHpS?=
- =?utf-8?B?OTg0emYyVkFmU1NXdDI2KzVqTitYLytTUitFSU5haWwzMUxBSXR5citHbnUy?=
- =?utf-8?B?SUZiTDQ4dDRFaVVWWUdtejk2UENocGVIN1ovMHZ2THQ4K2dTTWtQSmxkMHF5?=
- =?utf-8?B?bnloSUl2MnNQY0NLMWhnL3dyQVBRVzhQQUNJR2JkbWJzNWhPNjlOY1RwRENo?=
- =?utf-8?B?OVZVTmQ4bDF4UzhmenZMY0lxa0dQOWJXQytQUDdlVzdsc295OHdQeERWdm9k?=
- =?utf-8?B?UHpHRjlOUXVWTXdmUDY1SU9scU4yQjVGYVUwa2tSOGx6dGVRM1NuM2dyTzRu?=
- =?utf-8?B?cEtwSEJVRTN3NWJUMFFlMFZ4S0xVZ3Z0Z1ZHRWhqZnRaTktpaWhCTUZ0ZVdo?=
- =?utf-8?B?WmpleGVaWUMyT3daY0o3aXU5cWQ2aUgxdEVaS1FURHBwOFd6SGF2WjUvdW1B?=
- =?utf-8?B?RFpkSklWKzhqc2dRSFJLYm9CMTFjUHJFMDJOY1VXT0htTVBEZEZqa2k0RVhN?=
- =?utf-8?B?dkc0QmVsU0JYRDVTRjJTTEt2aEp2aFFoemk2blJVTjAvV1ZhWGRTazBFdlJE?=
- =?utf-8?B?bnhrVXFIaG9mTVJNQStOTERadXEva21oc1NVMVhiWE92ZkJXOUVGdURUa0VX?=
- =?utf-8?B?MFU2b1dsUTF2ZDd3Y1B6OXQwelVjdVViZSt2cnVYVGFJTjJIa1FxZEJTMXZx?=
- =?utf-8?B?MzVXTGdTdHhTVDV1ZU1IQXlGZ0FDZUdrZGI4SzgzSW1pSmhOdTU0cm53U3Jx?=
- =?utf-8?B?UXllNzQrcUROaHAzVEprY24yNDQrdHdQcU54Ym5HV3lZZXNLbmFOMXF1Mm5X?=
- =?utf-8?B?cmFscHl5YTRPRUhvN1hpRzMxWE13bjZ0cEVVWHRocjd0ZjhKSHJvTWdVaFlW?=
- =?utf-8?B?V1dlSW9PbDNQL0xrZ1RYbS84Wi9HMXpqRjNycXQ2aFYvd040Z2hDWFplaUpn?=
- =?utf-8?B?Yk04dVpWTzZrS2t0ZnFVOXpwQnFjeGQ0YkxtSGhMNW9hVGtXSFIzRFZZaFQ4?=
- =?utf-8?B?eVNBR2x4bm94c2pJcjFTWUpSUUYvdTd2NDhGeDZWY0xOWTNiRENxWktkU20w?=
- =?utf-8?B?cXJBMS9Xdk1wNmdBTHpWdFVVREIxME10eGZnb3NaZ0Z6dE1kT2tRanJBUU5t?=
- =?utf-8?B?NS9PaW1KcjZZZ1ZQT1MyK1BpMnRoK2p0WkozbW9EV0NIMEpLL3RSN21FWC9j?=
- =?utf-8?B?ZDNORjltWVdpcnRzZzhqeDZ2Um85OFpVejJZT2VXK2EyQ09GRGRRMGs5RnRi?=
- =?utf-8?B?ZW5PdjVtVnZyYTJNdHZzM2g5L3BzS0hPYWpHZ1QyZWJEY1VBZEV4U3lNWUVo?=
- =?utf-8?B?Wld2Wjlzb2FKT2J2UVBOOTlTVTJEN3JmQm1qTE5zbUdNc2hpL3ZLR1lpSVF0?=
- =?utf-8?B?dDBBNHVFUGdETnpwVXh2TzJlam5PUXhTN291eEhuc1VKY01nRVgyeVU0NEV1?=
- =?utf-8?B?UzMva2Y3MXM4YU1MdHZhK2FkcnE2OVg0RDdrbGwxQmlPRHl6REpmSjBFcWo3?=
- =?utf-8?B?STJkb1lZblZJeTY1NnNXeVkxT3R1K3hLeU5xdmVJaCtyZGZPeDE4dDFLOU9r?=
- =?utf-8?B?K1hUUjY1UFBLcnBGdFRpR3ZkemY3L2dDeHc0NExiMExUWVMvN1ZoS2lwaDE0?=
- =?utf-8?B?dGhpa1FEb2picXhUL0VDZnNQMEdva04yNzZmVkZCd05uLzczQitzcndSbjhU?=
- =?utf-8?B?THdEQUM0YTZYMi9sMDFBKzN5K1ZQalRLazBmVmZQUWdzV0xPUHMvNEl6cm1x?=
- =?utf-8?Q?M7052PUonkE=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cmM4L2RvWkp4VE1TMEFaWHE2emp3bVREMkIzaXJCekxQamNQQlo0MDkwdHFZ?=
- =?utf-8?B?ZTk4cnFBQ3hyU1k1U1dCTE14dzJ3WTJZNWRnaDIyajExRWx5SDM4Vlg1aHl2?=
- =?utf-8?B?SUlnN2NPempDVHdxd0pYcWU1T1lSKzN5d3B0QmpUZ0dDeFdVVEJENW5qVGl5?=
- =?utf-8?B?K25aZzhYenZja1V1MjlDcHYrbnlkaVFzaHJ2ZWt4bXVUZ2pwSlJoQ3JXSWxB?=
- =?utf-8?B?TTJwM2NWcHYzMm92OEU1SkF3NmIreGM4aHpWWG1VR05sai85TlA5Slh5VXBB?=
- =?utf-8?B?RlpjWHE2aVF4elFWS21td21Gb2g1cTZJZ0dRellJY1FXTFQ0dEp6ZnA5Yjdm?=
- =?utf-8?B?eklqMi9vZVRTL0lKaDlyT0dpQjh5NFpBQnZJY3RqT0FXTkNMUVJqOThHZ3cw?=
- =?utf-8?B?LzN0WFlnQnYwbXJsWlNPdFFTbVR3SUcwWk1EcVlMbFpaRmhjZVN1dzcwLzRY?=
- =?utf-8?B?bzRRdkhNN05RQm9SRUlvMmdCdHl3L1Bxck1LaXg4TG9oTjhRUEo1YWZuMWt4?=
- =?utf-8?B?eSs5Q3FaeU1OZGhqckczQjN4aTI1cTluYnV2RDF5OWFvcXlnOS9mVFVUUVY5?=
- =?utf-8?B?dFc3ODhTeVc3eHBLOG5BakhLRkJYckMwWGUrUWpGSStBemtYenAxS2tMU3lN?=
- =?utf-8?B?ZVpwR2dZVDFGTWtlU1NrMWh5SnVOc1FJbmM4OTUwbHlqTmFQUjlSRG12YVkz?=
- =?utf-8?B?R3V6Skd2KzBYWnlXTFhHenFVVyt4WWlWTUgzNzB1a1lKUVVPSXNId2plKzds?=
- =?utf-8?B?N3d4TTJnUFVUdFl4OFFIVG9CZDdXMXAzL2E0bStzRXQ3Z2QwSmJVanBDOGN5?=
- =?utf-8?B?N3RGVk85eUNSS3VZbWMwOWlnRXJOZm9vZ3FtKzlVdFkxVXkycXFoNmZhWlJw?=
- =?utf-8?B?VmtSY2R5eEJlVGsvYzhaTVpuOXl4cW5iVm1aVnUwNzRGZ3kxK0NnMmM2clV3?=
- =?utf-8?B?MlFkVHlCR05Vb3ZFVkRjM1plVmRpa29GbEZqNjJEUy90dEVuR0FRQjN2aHp2?=
- =?utf-8?B?TmM1MnZFZGt6SnA0RVFwU25wUW9xTXlPeGJ3VUgyMGxPV21XZ1B6NWwzblZ3?=
- =?utf-8?B?WUJWM3VEN3FWZVZPVDArWDF4dEs2dFZaam13bzJadzFLbXNDTi81Sm5Ec0or?=
- =?utf-8?B?Wm5kU2dNL0VDSThWeitDVVBacTVKZXRvYzV0d0RoQi9WSjlsZ3ErcHVyMElk?=
- =?utf-8?B?ZFpxa0VGTHFlc1FicWhid2VsSXpmTVp0Wm5DbGtWdDkzSDRsOG1jM25pZ3Bx?=
- =?utf-8?B?ZHZjVTJ0TkxJUThBcVkvS0pnSllCVUR4OEFrSEx0OEtscEJsL00way9nZSt1?=
- =?utf-8?B?L29ac29NNGsySEs2MlNLZTVabGloYXp1ZlpiWkNqZURhM1JoeVNjVjFLcmUv?=
- =?utf-8?B?aExKdm9XMXFJNVk5eXpJS3ZVbkhZdzZpcHYrdkw3V1pPYXQ2ZUVQbUR3aEtI?=
- =?utf-8?B?V2lYem5jTm4vek1NS3FmR2JvWDMzSUtEUWE5bVJNNEMzc2RNSmhMNW91ZS9R?=
- =?utf-8?B?ek8zZy9KK1Qwc2xGWnNsNmhUMmpUWTFGQTNVSjhlV2QzRXlTdzF4VklOTml4?=
- =?utf-8?B?VEtsR2JnbUxUcTJiQ2U3MlA0Rm9JUE4vMmtYZlBLb0dmVHhocXQ5T2RPQlgy?=
- =?utf-8?B?V3JmZHl3YWNHWXVubWlkcDBuUkVBQVBhdTBHcURMSXhBVWtFZFRxMkdMQjNL?=
- =?utf-8?B?bkttbUpvTXZxNU9hMFZ5eUZRcWhveFZhVXN3ZEFkYTBHRExUQmhrdW81UTM5?=
- =?utf-8?B?V2pmQjVCdjN2WG0zZm41VjRzUmNITis4RVJKQm1hSEhxN3NKQ29Ra2FtZDZk?=
- =?utf-8?B?ODdEQXJDNXNoSS9MenBBTkF6S1lSbEhWQWFoRWRyY2E1QmtOd21RK01BWVNv?=
- =?utf-8?B?U0NrTmVQSkE3UHFYYSs5cGtMSG12bSt5TG15UWlFQmdwOUQ5azhPbmVNamNJ?=
- =?utf-8?B?cjluMjV2b1h3cWNCYVhvaGw1dzMxblAyelMyYVd4ZmJSOVFqamJVYlU4Qnpa?=
- =?utf-8?B?STQ1ZzlvNVV6M3psL1pxemZDdStkUDhyajdVSGd4VS9kaTdoM0pwRG8vS3pM?=
- =?utf-8?B?bzV6TkZ3NlhDWmorM3loeDF1UklHdU02UURqdDU2ZUVVSTJvZ2dkUC9vcTQ1?=
- =?utf-8?B?L0F6VSs5V1hselBZTlF4MTd4Uk9uOUpTdEVLVDN2dmFJTjRHR1JzZEpURzBN?=
- =?utf-8?B?VUE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6227bc6-c71c-40ae-7854-08dda7fd2f22
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2025 09:00:01.7817 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: R/TOUPtUXYtdKgdGgOZLaER65shIUn76HGnqYmHnoqiqAtMtiQNNnV3KPZOYpqhjUchBoTKa2o0AwAAAHD+03dSN1fN9FZRlwm8jmcnkHoM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10964
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -187,28 +126,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On 6/7/25 2:03 PM, Heinrich Schuchardt wrote:
-> Remove duplicate definition of
+On 10.06.25 09:16, Ilias Apalodimas wrote:
+> Hi Heinrich
 > 
-> * DHCP6_PXE_CLIENTARCH
-> * DHCP6_PXE_DHCP_OPTION
-> * DHCP6_ENTERPRISE_ID
+> On Sun, 8 Jun 2025 at 10:42, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> DHCP and DHCPv6 use the same value defined in
+>> https://www.iana.org/assignments/dhcpv6-parameters#processor-architecture
+>> to encode the processor architecture type. We should only use a single
+>> Kconfig symbol for both protocols.
+>>
+>> Furthermore we should make the value customizable. This allows for instance
+>> to choose between "x86 BIOS" or "x64 UEFI".
+>>
+>> As "x86 BIOS" is encoded as 0, we should not use this value to switch
+>> off transmission of the DHCP option. Use 0xFF instead.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   cmd/Kconfig  | 28 ++++++++++++++++------------
+>>   net/bootp.c  |  6 +++---
+>>   net/dhcpv6.c |  6 +++---
+>>   3 files changed, 22 insertions(+), 18 deletions(-)
+>>
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index c335eceea63..4eb0140c10a 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -1864,12 +1864,6 @@ config CMD_DHCP6
+>>
+>>   if CMD_DHCP6
+>>
+>> -config DHCP6_PXE_CLIENTARCH
+>> -       hex
+>> -       default 0x16 if ARM64
+>> -       default 0x15 if ARM
+>> -       default 0xFF
+>> -
+>>   config DHCP6_PXE_DHCP_OPTION
+>>          bool "Request & store 'pxe_configfile' from DHCP6 server"
+>>
+>> @@ -1977,12 +1971,22 @@ config BOOTP_PXE
+>>          help
+>>            Supported for ARM, ARM64, and x86 for now.
+>>
+>> -config BOOTP_PXE_CLIENTARCH
+>> -       hex
+>> -       depends on BOOTP_PXE
+>> -       default 0x16 if ARM64
+>> -       default 0x15 if ARM
+>> -       default 0x0 if X86
+>> +config DHCP_PXE_CLIENTARCH
+>> +       hex "DCHCP client system architecture type"
 > 
+> DHCP ?
 
-This doesn't seem to be an issue in master branch, but it does show up 
-in next, so maybe add [next] tag in the mail subject?
+Thanks for pointing out the typo.
 
-Also seems to be added in a merge commit, so maybe add:
+Best regards
 
-Fixes: 5eb1b7843811 ("Merge patch series "test/py: enable HTTP testing"")
+Heinrich
 
-as well?
+> 
+> Other than that
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> 
+>> +       depends on BOOTP_PXE || CMD_DHCP6
+>> +       default 0x16 if ARM64 # arm 64 uboot
+>> +       default 0x15 if ARM   # arm 32 uboot
+>> +       default 0x0 if X86    # x86 BIOS
+>> +       default 0xFF          # DHCP option not sent
+>> +       help
+>> +         DHCP option 93 (defined in RFC4578) or DHCPv6 option 61 (defined in
+>> +         RFC 5970) is used to transmit the client system architecture type
+>> +         to the DHCP server. The DHCP server may use this information to
+>> +         choose the boot file. For a complete list of assigned values see
+>> +         https://www.iana.org/assignments/dhcpv6-parameters#processor-architecture.
+>> +
+>> +         If the value is set to the reserved value 0xFF, the DHCP option will
+>> +         not be sent by U-Boot.
+>>
+>>   config BOOTP_PXE_DHCP_OPTION
+>>          bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
+>> diff --git a/net/bootp.c b/net/bootp.c
+>> index f22921ed388..95d906e3b2d 100644
+>> --- a/net/bootp.c
+>> +++ b/net/bootp.c
+>> @@ -545,14 +545,14 @@ static int dhcp_extended(u8 *e, int message_type, struct in_addr server_ip,
+>>          }
+>>   #endif
+>>
+>> -#ifdef CONFIG_BOOTP_PXE_CLIENTARCH
+>> -       clientarch = CONFIG_BOOTP_PXE_CLIENTARCH;
+>> +#ifdef CONFIG_DHCP_PXE_CLIENTARCH
+>> +       clientarch = CONFIG_DHCP_PXE_CLIENTARCH;
+>>   #endif
+>>
+>>          if (env_get("bootp_arch"))
+>>                  clientarch = env_get_ulong("bootp_arch", 16, clientarch);
+>>
+>> -       if (clientarch > 0) {
+>> +       if (clientarch != 0xff) {
+>>                  *e++ = 93;      /* Client System Architecture */
+>>                  *e++ = 2;
+>>                  *e++ = (clientarch >> 8) & 0xff;
+>> diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+>> index 0c2de75ba1d..5bf935cb6a3 100644
+>> --- a/net/dhcpv6.c
+>> +++ b/net/dhcpv6.c
+>> @@ -128,7 +128,7 @@ static int dhcp6_add_option(int option_id, uchar *pkt)
+>>                  break;
+>>          case DHCP6_OPTION_CLIENT_ARCH_TYPE:
+>>                  client_arch_opt = (struct dhcp6_option_client_arch *)dhcp_option_start;
+>> -               client_arch_opt->arch_type[num_client_arch++] = htons(CONFIG_DHCP6_PXE_CLIENTARCH);
+>> +               client_arch_opt->arch_type[num_client_arch++] = htons(CONFIG_DHCP_PXE_CLIENTARCH);
+>>
+>>                  opt_len = sizeof(__be16) * num_client_arch;
+>>                  break;
+>> @@ -194,7 +194,7 @@ static void dhcp6_send_solicit_packet(void)
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_ELAPSED_TIME, pkt);
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_IA_NA, pkt);
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_ORO, pkt);
+>> -       if (CONFIG_DHCP6_PXE_CLIENTARCH != 0xFF)
+>> +       if (CONFIG_DHCP_PXE_CLIENTARCH != 0xFF)
+>>                  pkt += dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_NII, pkt);
+>> @@ -244,7 +244,7 @@ static void dhcp6_send_request_packet(void)
+>>                  memcpy(pkt, sm_params.server_uid.uid_ptr, sm_params.server_uid.uid_size);
+>>                  pkt += sm_params.server_uid.uid_size;
+>>          }
+>> -       if (CONFIG_DHCP6_PXE_CLIENTARCH != 0xFF)
+>> +       if (CONFIG_DHCP_PXE_CLIENTARCH != 0xFF)
+>>                  pkt += dhcp6_add_option(DHCP6_OPTION_CLIENT_ARCH_TYPE, pkt);
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_VENDOR_CLASS, pkt);
+>>          pkt += dhcp6_add_option(DHCP6_OPTION_NII, pkt);
+>> --
+>> 2.48.1
+>>
 
-With that,
-
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thanks!
-Quentin
