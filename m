@@ -4,60 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42429C5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 15:19:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECAFCC5B543
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 15:22:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90EB882B33;
-	Tue, 10 Jun 2025 17:19:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
+	by phobos.denx.de (Postfix) with ESMTP id 91EA382B0E;
+	Tue, 10 Jun 2025 17:22:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="rvbkyD7S";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IfVR76Iw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66AEE82BBF; Tue, 10 Jun 2025 17:19:12 +0200 (CEST)
-Received: from imap4.hz.codethink.co.uk (imap4.hz.codethink.co.uk
- [188.40.203.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1A3C582B18; Tue, 10 Jun 2025 17:22:36 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2738582B26
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 17:19:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=codethink.co.uk
+ by phobos.denx.de (Postfix) with ESMTPS id 8DABD82B07
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 17:22:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=srv_ts003@codethink.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9yfeUw+Ix4Yhy72iOtwogxpOg7oECbsvT3Otax+5pjY=; b=rvbkyD7Sp461VeGF4h9lAjVp0W
- dFcNF0lrfgtDz3uB22xclTr5UbmEyuo4B5mZDP1pIHKfDVlmeVl/nwTVuviOlOgxmAmIoyB/iEgi/
- a1LD2zyD1AIyxIG/usZ/93PrBPM9z5r71LAKflvP71D2Rh6+TN8MUWOLj8RvkEzIb8B48M5jexBsa
- 6VCp1lwRRfUcZhw5E4uKovfDWRd9Jd6Zd8BgioGn1QtnGcq35UMWe3mygbFfVMp2d41+AQg43ik70
- 6B6QPCxcLjR3A1WaNeARVIl4ngupXYbABuaCS+DiMXndfqx59+8bTqNK9xY0qg9APpKCMQvZbDZkj
- tAR9RMRg==;
-Received: from [167.98.27.226] (helo=rainbowdash)
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1uP0ka-00C1Ev-PZ; Tue, 10 Jun 2025 16:18:56 +0100
-Received: from ben by rainbowdash with local (Exim 4.98.2)
- (envelope-from <ben@rainbowdash>) id 1uP0kV-000000071IG-0qnQ;
- Tue, 10 Jun 2025 16:18:51 +0100
-From: Ben Dooks <ben.dooks@codethink.co.uk>
-To: rick@andestech.com, ycliang@pr-suspensions-neuweb-biz.expedrion.biz,
- u-boot@lists.denx.de
-Cc: nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
- fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk,
- ben.dooks@codethink.co.uk, trini@konsulko.com
-Subject: [PATCH 1/2] riscv: add build support for big-endian
-Date: Tue, 10 Jun 2025 16:18:49 +0100
-Message-Id: <20250610151850.1673111-2-ben.dooks@codethink.co.uk>
-X-Mailer: git-send-email 2.37.2.352.g3c44437643
-In-Reply-To: <20250610151850.1673111-1-ben.dooks@codethink.co.uk>
-References: <20250610151850.1673111-1-ben.dooks@codethink.co.uk>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3a54690d369so2133606f8f.3
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 08:22:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749568953; x=1750173753; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=omMhdXvjQm1hVx3L9qvaGhE4iGp7trBK3T7e0KPw5WU=;
+ b=IfVR76IwHfcJMseVldK29puzUhQ3iQWg65rBzNKV6Qbhs70n+cJSzsIQmDg54wOLX2
+ WIU4aYyQccdZQrxmEar9no/rLiw5t9QwfUlFTbi3tXkrhAHednwi2rOMTpab7z54SA3c
+ zeGeWNtOLI+eIVj4k9siWMRsDLay1PD7WLs/eUvnQ5/199pT2E2dLlL7pebKkLnY/foe
+ 5inWP/AGjPczTGsxfLfFFj1SMbVW4ILoPFEWFHyZ+CIpz7vowblh+RpQfo+BdypUSJ0n
+ Kz2LPChP2p8uwBi8CohAZmWRzgrFCcbObcWynfXscgSxRn1r9ZwsTkgoAn+qgmRnnhXq
+ QO6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749568953; x=1750173753;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=omMhdXvjQm1hVx3L9qvaGhE4iGp7trBK3T7e0KPw5WU=;
+ b=LgKp+BEEFba6mVmyHZAZhWxU/3IGmPqo9AmqM33M9eHPmIVEfO7/BEZXiqllf/UesA
+ OC2AytbfxCBkdB4XIalF7sfDQasQ3k51vKJHlW+EHl6od8MG/X6sVbpzrR7yqPFW751P
+ Dse1I29wdoQ1Utbv7oXILwieMMmTtd5+XtRs3CPaM+YP+v3WM0rA/LV64MzN4FDPSu9f
+ //QnDzm9SJCquv5ksEAQNPGDJReIKxmbmsaywCRrubjLrhFu+6UTsrsQZcpKb2wHruM8
+ u+5Ji76d8Cz0XErxvEuJHtunsFZqRv4eWT4dE3J+4hvppk/HHpiPodJbcx2yB9MuwSRx
+ l87A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWqfZSFl5OhZInU0gzfP9UzR/H+wEJSGvSRAxIU2O9v0whsENBwatLcQLRY9NYDqzRgD+N2+dM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzcZEbelaUR5JWw8FNaPOAIBZCylwAa8SOiQ5KJVdk4DDkf2s5u
+ ph5oI52DdLXJZ4uZKaHrAe2y+7HTpZx7REJXHX3elF5rj11G2yhvpN0QdPL8/Vbcav4=
+X-Gm-Gg: ASbGncsOXCNzUnQlaXCRSXBbrPaP/pksv8/7yCz0WXQLHmfO4mzGkx7JeTUlxlzzKaA
+ 7sUksyR7KdJRDFIAp9KuYZW3xhP7Mr2lpm3onALgiDo+sVyrhQ9uXTaIQsFPe3i8uJUJEEuV5Kq
+ z55aovpjXNMCOBsmTFVZid+nHN2huOkEvuxbPXAo20h5N8rsGVMcK9zi1lZE0Ib1FGpzLOrjauK
+ gp/U54yHrKTaWYXay93cRYb8johLl89BWfx8w1HtWhbeGt9ANp8xpXM7mqlAaaLYohdW3wdEXBo
+ 7SGDUhwBlT1mPNKbRHTeJtxNyBgRqjxf3rWfBe1ndlLD0VYUITAOEtCluDt28Vg9XF9ik56zMAe
+ boeSmnqaafA3YKqt8hcmx80hm5h7CX2cFx+8jaw==
+X-Google-Smtp-Source: AGHT+IFohCY8GkDRiNI3SEkqbT9mnzbbq3BIhwLN77zx80F4ZWi2r89XNBZwHYhTOYn/nw09PnG/og==
+X-Received: by 2002:a05:6000:22c1:b0:3a4:f7d9:3f56 with SMTP id
+ ffacd0b85a97d-3a5319b6a28mr14228528f8f.2.1749568952978; 
+ Tue, 10 Jun 2025 08:22:32 -0700 (PDT)
+Received: from ?IPV6:2a01:170:117e:fc:3626:366e:4bd3:97c8?
+ ([2a01:170:117e:fc:3626:366e:4bd3:97c8])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a53244fceasm12357143f8f.82.2025.06.10.08.22.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Jun 2025 08:22:31 -0700 (PDT)
+Message-ID: <18193912-d05c-4584-bf45-e9f2f97be7f7@linaro.org>
+Date: Tue, 10 Jun 2025 17:22:28 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] board: qualcomm: Add MAINTAINERS entries for
+ Dragonwing platforms
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,53 +104,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to build code big-endian if the board supports
-it. Updates the makefile to pass the correct compiler and
-elf flags.
 
-Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
----
- arch/riscv/config.mk | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/arch/riscv/config.mk b/arch/riscv/config.mk
-index 9f16dda92a0..2eeeb433748 100644
---- a/arch/riscv/config.mk
-+++ b/arch/riscv/config.mk
-@@ -10,19 +10,29 @@
- # Rick Chen, Andes Technology Corporation <rick@andestech.com>
- #
- 
--32bit-emul		:= elf32lriscv
--64bit-emul		:= elf64lriscv
-+ifdef CONFIG_SYS_BIT_ENDIAN
-+small-endian		:= b
-+large-endian		:= big
-+else
-+small-endian		:= b
-+large-endian		:= big
-+PLATFORM_CPPFLAGS       += -mbig-endian
-+KBUILD_LDFLAGS          += -mbig-endian
-+endif
-+
-+32bit-emul		:= elf32$(small-endian)riscv
-+64bit-emul		:= elf64$(small-endian)riscv
- 
- ifdef CONFIG_32BIT
- KBUILD_LDFLAGS		+= -m $(32bit-emul)
- EFI_LDS			:= elf_riscv32_efi.lds
--PLATFORM_ELFFLAGS	+= -B riscv -O elf32-littleriscv
-+PLATFORM_ELFFLAGS	+= -B riscv -O elf32-$(large-endian)riscv
- endif
- 
- ifdef CONFIG_64BIT
- KBUILD_LDFLAGS		+= -m $(64bit-emul)
- EFI_LDS			:= elf_riscv64_efi.lds
--PLATFORM_ELFFLAGS	+= -B riscv -O elf64-littleriscv
-+PLATFORM_ELFFLAGS	+= -B riscv -O elf64-$(large-endian)riscv
- endif
- 
- PLATFORM_CPPFLAGS	+= -ffixed-x3 -fpic
+On 6/10/25 11:37, Aswin Murugan wrote:
+> Added MAINTAINERS entries for the Qualcomm Dragonwing platforms, following
+> the discussion in the referenced thread.
+> https://lore.kernel.org/u-boot/20250603192206.GK1382132@bill-the-cat/
+> 
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+Balaji and Varadarajan can you send Acked-by tags for this?
+
+Kind regards,
+
+> ---
+>   board/qualcomm/MAINTAINERS | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+>   create mode 100644 board/qualcomm/MAINTAINERS
+> 
+> diff --git a/board/qualcomm/MAINTAINERS b/board/qualcomm/MAINTAINERS
+> new file mode 100644
+> index 00000000000..9196310f117
+> --- /dev/null
+> +++ b/board/qualcomm/MAINTAINERS
+> @@ -0,0 +1,14 @@
+> +QUALCOMM DRAGONWING QCS615
+> +M:	Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> +S:	Maintained
+> +N:	qcs615
+> +
+> +QUALCOMM DRAGONWING QCS8300
+> +M:	Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> +S:	Maintained
+> +N:	qcs8300
+> +
+> +QUALCOMM DRAGONWING QCS9100
+> +M:	Varadarajan Narayanan <quic_varada@quicinc.com>
+> +S:	Maintained
+> +N:	qcs9100
+> \ No newline at end of file
+
 -- 
-2.37.2.352.g3c44437643
+Casey (she/they)
 
