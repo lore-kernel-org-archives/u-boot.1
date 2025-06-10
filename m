@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20580C61DB2
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 19:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5266BC677C4
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 19:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8141F82B20;
-	Tue, 10 Jun 2025 21:08:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BE64382B18;
+	Tue, 10 Jun 2025 21:15:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rcl/2sRU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HkGuGuqq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6E7E82B07; Tue, 10 Jun 2025 21:08:31 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id E14EA82B20; Tue, 10 Jun 2025 21:15:09 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC82482B20
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 21:08:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AC5182B07
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 21:15:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christianshewitt@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a548a73ff2so2483920f8f.0
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 12:08:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3a53ee6fcd5so1942521f8f.1
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 12:15:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749582509; x=1750187309; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3hnkAewes4mfprCkoFW1s2NFuezcQSNGjn/5qMZE0lM=;
- b=Rcl/2sRU7/d5usHAw/NBSzBe5DtFW5EnfoQB6WHTKnzlYrS2Et7nREualx+C9bEj3c
- 5HkbsdZ36bsSM+cOFAA45M+nbc4Uh6Y62CEmSwDE+AyLN7JwV4nMWU8cy135M4rHmiFc
- ksKlhz1JfBVsFWbu5V86NwtDnf9Ka02hvhTbzdOPMyMtytmy3pzLxZkX9phbOPdYHasL
- ZsmPH0AooOTgTnnFKAJAgv+NR9vtFb1NXky9m4Nmv7zOVg4iCifsTbM1MqNpGRyzyVZR
- jMVCU54LnA3VEgkrDfmQMxm1sd7+4Injfph78udVaSzK022/7NRXDJW3saYQhjAoJ+WN
- GvHQ==
+ d=linaro.org; s=google; t=1749582906; x=1750187706; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YjAFFsIXA7ruDXqDpQ0i3WJMmJRMTOoW2XMsOK1VMGw=;
+ b=HkGuGuqqSFANl4/7/FIwrv+Zakf9FK4k7EZW1SwbtZOrceFaEOsBZv1g9aLfCFsN1R
+ NGINLv1YRKzWlTO/oYapkl1aJI1flBkViuxHtIutTUUdx/Rozfva0xmWm45K66rEQdBg
+ 9Zhml4WYvbxKR5DMGmqhGy/lQMNHmrcpqeHuOXse+N5idVZSW4W1/2/UJyzIxdSRzdPS
+ w6/69Pr8DpMiKPZVF3ayPDoqOfQgM3xJcXHuEfbIoVVLj6RSXh/aW/V+iAp714H6JVpy
+ ALAxtAxsj32GCgboXhzgqNpW6oke2WvGHhMuGQN3kbCRM9QiGjeM0xa95v2ILJDiaYqs
+ 7R4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749582509; x=1750187309;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3hnkAewes4mfprCkoFW1s2NFuezcQSNGjn/5qMZE0lM=;
- b=AAS7yNYYcaZ5UTgy2rRIIX9ywm0Qri4SgqtYyo+kZ2wX1B7kapnakH6L1MAUQ3CYRg
- oNKBQ/h9+0439osSag/T8TCE0mx3KTJP006+CB+X6zOdfhn53O5pY9dJNX6SRe8ucEnx
- DqxWguV+t8rX4Xz5zLO1usLQ21O2aXJvlUkkN/MJWG3VXvGXUUCYIGptUXYwaEm6dfra
- lrZbk72PQBmcPNMQ45kzl3y7i5475PG9bf1edoa5UzJ6yfHSqPIuhzlRpr9J4MmnQqQP
- 6ghI+2PRruwV8m2pPHTl5oaAHPov9AHsijK/KZl+vNgIECcAGYDrOXM42eCgRu0oCUIi
- 5GGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWmGiBTjreKg5VO3mLkC21+MwF1wJpDV7DpbMM2/BRxU2fhLAxW7AKWgUPHhPBjLGdO0R3JgrU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0f4skSrXZUochG7txm9rJw6bNiJNS4mUgRR4yVpFOOIOkcCm7
- PrQfqbv8Gux9274N2bg6UUI+Nq9OL4CCVwefBD8ezfBF8P7/964lrDJI
-X-Gm-Gg: ASbGnctmnGGDlhQoF4a36xjGjzU9xfMsacm7j2Jio2RARuI5ihLG0/XSNkr/I4i3nY4
- +6wVBTUOVLOvf2JK7E7H3w0ZU0nnb+O8SkiH6uiH47yNBdMc09OzhyZy7InzAgZ3NWqQ5HGKCjc
- J8/Zj4DT/JipLmixUm8F0Kh6Od5ymzS8btKUSZmy2zOYRvg3SugnsvQvhooGwNGboFpy9t5N+zg
- YH36isvA3NNGN+FtFT+KJAdKvvv/9n7HpmawjUZAVwn5eAkYuEg9fgbCH/xDHR58tOVy7XWhQwd
- F8ekSL9MJog2/j0D+RmZs9FNHx+0fTd/
-X-Google-Smtp-Source: AGHT+IHgBeKBuZK+MZh7sPuMUeIZzXIdewT5GB66TuAUPvPe7t375mXq/U3R1VaMUPmxmZ/jJKpDxQ==
-X-Received: by 2002:a05:6000:420c:b0:3a4:e4ee:4c7b with SMTP id
- ffacd0b85a97d-3a5586f27bdmr200604f8f.15.1749582509136; 
- Tue, 10 Jun 2025 12:08:29 -0700 (PDT)
-Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a5323c0819sm12821487f8f.45.2025.06.10.12.08.27
+ d=1e100.net; s=20230601; t=1749582906; x=1750187706;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YjAFFsIXA7ruDXqDpQ0i3WJMmJRMTOoW2XMsOK1VMGw=;
+ b=vw+WexZrzKfLKD/j56OXlp8DDjetWRS9x/Ao1/zayP2F6aftZ6vDNWGz7NB1rx11mT
+ 07lpFKxrvNii+3bPu9pYK0agufmuxP+kIa7xqlW0qQJWvUY+79a8f2oAxYLoB3WMeZsH
+ evTa6yH4WGD0sw1cZL5HceysrytGpokpNcJf57YwNAwgHyniKRF41zHmsIoUdIJojvxm
+ jE/l3yMYoD2oXk6xxJqkVITidCa4Zcy2T0D0OmvXAiGo0bkRhPdPyA3ZqE1IA2MAAEYy
+ uUd4jf/S3baaE1saeAk3X0hYSgAMIaAd5t9BIhX7U/6SW/P/6wBDVcFBABQduTE2Rsqf
+ XLqg==
+X-Gm-Message-State: AOJu0YzoU8/xhAZN6l7pGQj38hDMpi8xMVWmP8LKLf3J83muScrHLqjt
+ 2l1LwixKKi+NSJzOgcl1milC0lFVgSx5VyXbG8c2hefqHqdOWpc5h4Fr9mKDL+OShe/MlJD6EiO
+ 2EHRw
+X-Gm-Gg: ASbGncuWB0IoqeoW1k2WhnZaodewYipPdNz1HKqR2eqt69cqYoSf8FUaufpdriCuM4U
+ KGBQwzADt6+bpbC+QpTwfGNrjNnYqyi+djct0pXdVDuujl8eLyyGeDkkoSPjreiZhxvj00kT3Zr
+ nQd8/w1RMAXobSAneD5p9R6lkoiH4Bub6LWwByTU1eL2hubw5bw6S7TZNs4BOkGMOv55nISaCHO
+ oiFlQQXNa8oKWoXN+zmLN6vgMnwx9Zz1JFv/hana/rJ8MdGwRE84JJNZhLn9BtYriOg5uT7eNR6
+ u3R0FsHdXZs3R88RCh14hYlkSQr6yVcBhqeI+l+hqhbio44GnWwDWCpiYnPM/ZIMBbh7cjOX+an
+ YQik2fRaqI4BPK2FMKMKbVaVpQLqVzblb70jz6TYQyFJMfWBXItA=
+X-Google-Smtp-Source: AGHT+IG8oyX9YHJHC6swuBws4T5rbeCnUuJ+WwKuMesM4uxrDcdm/eRzMZGjIZGXOkf52q+aaqqTSg==
+X-Received: by 2002:a5d:64e3:0:b0:3a0:b84d:60cc with SMTP id
+ ffacd0b85a97d-3a558aa5ab9mr134727f8f.2.1749582905666; 
+ Tue, 10 Jun 2025 12:15:05 -0700 (PDT)
+Received: from localhost.localdomain (ppp089210105145.access.hol.gr.
+ [89.210.105.145]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4521375b5e1sm151958445e9.37.2025.06.10.12.15.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 12:08:28 -0700 (PDT)
-From: Christian Hewitt <christianshewitt@gmail.com>
-X-Google-Original-From: Christian Hewitt <christianshewitt@gmail.com
-To: Loic Devulder <ldevulder@suse.com>, Chen-Yu Tsai <wens@csie.org>,
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Da Xue <da@libre.computer>, u-boot@lists.denx.de
-Cc: Christian Hewitt <christianshewitt@gmail.com>
-Subject: [PATCH 2/2] arm64: dts: rockchip: roc-3328-cc: use 1600 ddr4 timing
-Date: Tue, 10 Jun 2025 19:08:20 +0000
-Message-Id: <20250610190820.1462097-3-christianshewitt@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250610190820.1462097-1-christianshewitt@gmail.com>
-References: <20250610190820.1462097-1-christianshewitt@gmail.com>
+ Tue, 10 Jun 2025 12:15:05 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: ilias.apalodimas@linaro.org,
+	sjg@chromium.org
+Subject: Pull request for tpm-next-10062025
+Date: Tue, 10 Jun 2025 22:15:03 +0300
+Message-ID: <20250610191503.1708064-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,29 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Da Xue <da@libre.computer>
+Hi Tom,
 
-Swap the ROC-3328-CC from DDR4 666 to 1600 timing to boost performance.
+Small updates for testing TPMs for -next
 
-Signed-off-by: Da Xue <da@libre.computer>
-Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
----
- arch/arm/dts/rk3328-roc-cc-u-boot.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The following changes since commit 59d00e20fced23e6463aa09db889dd548baee677:
 
-diff --git a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-index 582d6ba49b4..c47d29c59de 100644
---- a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-@@ -4,7 +4,7 @@
-  */
- 
- #include "rk3328-u-boot.dtsi"
--#include "rk3328-sdram-ddr4-666.dtsi"
-+#include "rk3328-sdram-ddr4-1600.dtsi"
- 
- / {
- 	smbios {
--- 
-2.34.1
+  Merge tag 'v2025.07-rc4' into next (2025-06-09 16:28:28 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-next-10062025
+
+for you to fetch changes up to 693b7a738d6d23001da7c6224449b3d300efd1da:
+
+  test: tpm: Skip failing tests on coral (2025-06-10 19:35:58 +0300)
+
+The CI had no issues
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/26601
+
+Please pull
+/Ilias
+
+----------------------------------------------------------------
+Updates from Simon cleaning up some tests, with the intention of being used
+in sandbox and actual hardware.
+
+----------------------------------------------------------------
+Simon Glass (4):
+      tpm: sandbox: Support self-test continue in emulator
+      tpm: Convert sandbox-focussed tests to C
+      tpm: Drop unwanted special cases for sandbox
+      test: tpm: Skip failing tests on coral
+
+ drivers/tpm/tpm_tis_sandbox.c |  1 +
+ test/dm/tpm.c                 | 77 +++++++++++++++++++++++++++++++++++++-
+ test/py/tests/test_tpm2.py    | 86 +++++++------------------------------------
+ 3 files changed, 89 insertions(+), 75 deletions(-)
