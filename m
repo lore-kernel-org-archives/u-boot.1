@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECAFCC5B543
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 15:22:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 177B0C5B543
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 15:29:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91EA382B0E;
-	Tue, 10 Jun 2025 17:22:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8758982B95;
+	Tue, 10 Jun 2025 17:29:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IfVR76Iw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dTqRI/b2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A3C582B18; Tue, 10 Jun 2025 17:22:36 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id ADD8082C03; Tue, 10 Jun 2025 17:29:40 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DABD82B07
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 17:22:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3775982B0E
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 17:29:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a54690d369so2133606f8f.3
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 08:22:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-406e31162c6so1628849b6e.2
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 08:29:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749568953; x=1750173753; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=omMhdXvjQm1hVx3L9qvaGhE4iGp7trBK3T7e0KPw5WU=;
- b=IfVR76IwHfcJMseVldK29puzUhQ3iQWg65rBzNKV6Qbhs70n+cJSzsIQmDg54wOLX2
- WIU4aYyQccdZQrxmEar9no/rLiw5t9QwfUlFTbi3tXkrhAHednwi2rOMTpab7z54SA3c
- zeGeWNtOLI+eIVj4k9siWMRsDLay1PD7WLs/eUvnQ5/199pT2E2dLlL7pebKkLnY/foe
- 5inWP/AGjPczTGsxfLfFFj1SMbVW4ILoPFEWFHyZ+CIpz7vowblh+RpQfo+BdypUSJ0n
- Kz2LPChP2p8uwBi8CohAZmWRzgrFCcbObcWynfXscgSxRn1r9ZwsTkgoAn+qgmRnnhXq
- QO6w==
+ d=konsulko.com; s=google; t=1749569377; x=1750174177; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=R7mVa/02HWpGIhySFilS99ZMoUeGglCAEVF0ZV+Snfo=;
+ b=dTqRI/b2BwKO/9VOFI4UIVV25qqY2eKSip2pjxDn3hA7nw9NHaJ5NQZy+pw+fa3LY8
+ Cu94dnN/CtBZCp97w49039EI74B9hrpQGm3TpuJ9EdZRjMlQuoUnspg7Vd0n09JhSPwT
+ eoJ6WPgE6fql2RI023MuLKQlWLqyR4zBsPoSY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749568953; x=1750173753;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=omMhdXvjQm1hVx3L9qvaGhE4iGp7trBK3T7e0KPw5WU=;
- b=LgKp+BEEFba6mVmyHZAZhWxU/3IGmPqo9AmqM33M9eHPmIVEfO7/BEZXiqllf/UesA
- OC2AytbfxCBkdB4XIalF7sfDQasQ3k51vKJHlW+EHl6od8MG/X6sVbpzrR7yqPFW751P
- Dse1I29wdoQ1Utbv7oXILwieMMmTtd5+XtRs3CPaM+YP+v3WM0rA/LV64MzN4FDPSu9f
- //QnDzm9SJCquv5ksEAQNPGDJReIKxmbmsaywCRrubjLrhFu+6UTsrsQZcpKb2wHruM8
- u+5Ji76d8Cz0XErxvEuJHtunsFZqRv4eWT4dE3J+4hvppk/HHpiPodJbcx2yB9MuwSRx
- l87A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWqfZSFl5OhZInU0gzfP9UzR/H+wEJSGvSRAxIU2O9v0whsENBwatLcQLRY9NYDqzRgD+N2+dM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcZEbelaUR5JWw8FNaPOAIBZCylwAa8SOiQ5KJVdk4DDkf2s5u
- ph5oI52DdLXJZ4uZKaHrAe2y+7HTpZx7REJXHX3elF5rj11G2yhvpN0QdPL8/Vbcav4=
-X-Gm-Gg: ASbGncsOXCNzUnQlaXCRSXBbrPaP/pksv8/7yCz0WXQLHmfO4mzGkx7JeTUlxlzzKaA
- 7sUksyR7KdJRDFIAp9KuYZW3xhP7Mr2lpm3onALgiDo+sVyrhQ9uXTaIQsFPe3i8uJUJEEuV5Kq
- z55aovpjXNMCOBsmTFVZid+nHN2huOkEvuxbPXAo20h5N8rsGVMcK9zi1lZE0Ib1FGpzLOrjauK
- gp/U54yHrKTaWYXay93cRYb8johLl89BWfx8w1HtWhbeGt9ANp8xpXM7mqlAaaLYohdW3wdEXBo
- 7SGDUhwBlT1mPNKbRHTeJtxNyBgRqjxf3rWfBe1ndlLD0VYUITAOEtCluDt28Vg9XF9ik56zMAe
- boeSmnqaafA3YKqt8hcmx80hm5h7CX2cFx+8jaw==
-X-Google-Smtp-Source: AGHT+IFohCY8GkDRiNI3SEkqbT9mnzbbq3BIhwLN77zx80F4ZWi2r89XNBZwHYhTOYn/nw09PnG/og==
-X-Received: by 2002:a05:6000:22c1:b0:3a4:f7d9:3f56 with SMTP id
- ffacd0b85a97d-3a5319b6a28mr14228528f8f.2.1749568952978; 
- Tue, 10 Jun 2025 08:22:32 -0700 (PDT)
-Received: from ?IPV6:2a01:170:117e:fc:3626:366e:4bd3:97c8?
- ([2a01:170:117e:fc:3626:366e:4bd3:97c8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a53244fceasm12357143f8f.82.2025.06.10.08.22.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Jun 2025 08:22:31 -0700 (PDT)
-Message-ID: <18193912-d05c-4584-bf45-e9f2f97be7f7@linaro.org>
-Date: Tue, 10 Jun 2025 17:22:28 +0200
+ d=1e100.net; s=20230601; t=1749569377; x=1750174177;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R7mVa/02HWpGIhySFilS99ZMoUeGglCAEVF0ZV+Snfo=;
+ b=SagTx69qDtbNUXz1tt9eLRzMuX5+fV1gSICiNytM2AV1QWDd75h5r2mE50Jw78QWEM
+ k12QYm7IThqIX7eeIdfzQlhUkR9Hnse4iKBXQmWTVu1WiziAsUYl07Zs+EO8DvjzdtsK
+ z3mzRGiiao8EG1gGdX2CijDaFasVbgvRy7re5/cBNfOzJ0YpoCISZZYEEGqCs6p/dkf2
+ 7owhdcpc2rlr48xezW2lE/vHS0ggg3uUeBLxpPqr38nQbxDbkkPIiHJwl/mTgHAyH33l
+ NW0BKMf9xkfkWKQTds2TjnWxqZdwCvQ55U5D9Dy/xqBizK1yc1sYyR7VdHx14wjoS+Dj
+ xo7g==
+X-Gm-Message-State: AOJu0YxCjvN/wIVtzKiv9g5AocpzWDMmwjpVRWL6GNDlS5ISe+lmbIr3
+ Za1TRkU7Lcm7ZTnvzgrSo50fwsu5AvS3Tm68u+SItRqMoTjrrVjYQA5xhPmJxMk8wtWnRqDGDTp
+ ChadTVOA=
+X-Gm-Gg: ASbGncs3VvdYaBxsWJPajLimY2lHWeFEkqjo+zm5yMDxjlw/DQyB/fPQJxfL2yXJIA8
+ ODxWb4Uj39HZ9Q3lglYWkJI0n2u/SoozqsZTsVcXzirfcMHL+Zrmtyf7jnda3g/jj+w/eEnagBc
+ yF8GQDua2C8lymePw9imiLVTBmo4ZkyM8HzWIJQZb52BXL+sAfSIKOtej/D/lu2rNFKBYkYxo9o
+ 3ku/4YoM1YzzLYWnedUcAy7lm6+M0qkw3VCcK6iWmXA1LDnstiC7jrkAdGrCMtRDCFpC5yqJVBA
+ Wp0yQL27YZOkEewHJFFUdy2cId0d1gv1mX2TajJrvXhwRgqg3y+UdRZxNGD9y7mHTAC2z+KomS+
+ 0wuGtt16vhtl+kkTOdy9bUrU=
+X-Google-Smtp-Source: AGHT+IGCn//P99D0Xea24Hdpohf5MC3gcfcLgmYrvJiuOjueYzcJ33DjrWEX9JPmmIZfy+t0esqtvw==
+X-Received: by 2002:a05:6808:218c:b0:401:e95b:3b0e with SMTP id
+ 5614622812f47-40a56aa4296mr1784113b6e.12.1749569376936; 
+ Tue, 10 Jun 2025 08:29:36 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-60f3e46bc17sm1644394eaf.0.2025.06.10.08.29.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Jun 2025 08:29:36 -0700 (PDT)
+Date: Tue, 10 Jun 2025 09:29:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: Re: [ANN] U-Boot v2025.07-rc4 released
+Message-ID: <20250610152934.GB1382132@bill-the-cat>
+References: <20250609215536.GX1382132@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] board: qualcomm: Add MAINTAINERS entries for
- Dragonwing platforms
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rDISzrWmHoUxAiqV"
+Content-Disposition: inline
+In-Reply-To: <20250609215536.GX1382132@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,47 +97,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--rDISzrWmHoUxAiqV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 6/10/25 11:37, Aswin Murugan wrote:
-> Added MAINTAINERS entries for the Qualcomm Dragonwing platforms, following
-> the discussion in the referenced thread.
-> https://lore.kernel.org/u-boot/20250603192206.GK1382132@bill-the-cat/
-> 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+On Mon, Jun 09, 2025 at 03:55:36PM -0600, Tom Rini wrote:
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> Hey all,
+>=20
+> So it's release day and first I see that I put the wrong subject in for
+> the last release. We had done -rc3 and now today, really, is -rc4. I
+> have now tagged and pushed out -rc4 and will be syncing that to the next
+> branch shortly. At this point, really, we should be looking at
+> regression fixes or otherwise important bug fixes. New platforms and so
+> forth can go to -next. In that vein, I am currently looking at:
+> https://patchwork.ozlabs.org/project/uboot/list/?series=3D460155&state=3D*
+> as patch two fixes something we introduced in this cycle.
+>=20
+> What I really want to call attention to however is this post I made:
+> https://lore.kernel.org/u-boot/20250602222738.GC100073@bill-the-cat/
+> Where in short, I think for the overall health of the community and the
+> project I need some help from others in the community, on not strictly
+> technical matters.
+>=20
+> We're continuing with a community meeting following the release and is
+> the same time as the previous meeting. The meeting details itself are:
+> https://meet.google.com/btj-wgcg-euw
+> June 10th, 2025. 9am (GMT -06:00)
+>=20
+> To join by phone:
+> https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
 
-Balaji and Varadarajan can you send Acked-by tags for this?
+A very short meeting. I gave the overview of this past release, and
+repeated what I said above about regression fixes. The next branch seems
+to be in good shape. I need to find the time and motivation to break
+down Simon's big series and see how it can be most easily managed, but I
+also want to continue on with the cleanups I've been doing. No one had
+any new topics to raise with the group, so we ended the call early.
 
-Kind regards,
+--=20
+Tom
 
-> ---
->   board/qualcomm/MAINTAINERS | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
->   create mode 100644 board/qualcomm/MAINTAINERS
-> 
-> diff --git a/board/qualcomm/MAINTAINERS b/board/qualcomm/MAINTAINERS
-> new file mode 100644
-> index 00000000000..9196310f117
-> --- /dev/null
-> +++ b/board/qualcomm/MAINTAINERS
-> @@ -0,0 +1,14 @@
-> +QUALCOMM DRAGONWING QCS615
-> +M:	Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> +S:	Maintained
-> +N:	qcs615
-> +
-> +QUALCOMM DRAGONWING QCS8300
-> +M:	Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> +S:	Maintained
-> +N:	qcs8300
-> +
-> +QUALCOMM DRAGONWING QCS9100
-> +M:	Varadarajan Narayanan <quic_varada@quicinc.com>
-> +S:	Maintained
-> +N:	qcs9100
-> \ No newline at end of file
+--rDISzrWmHoUxAiqV
+Content-Type: application/pgp-signature; name="signature.asc"
 
--- 
-Casey (she/they)
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhIT1sACgkQFHw5/5Y0
+tyxVTwv/W7lUhYocJfcSWC8xMclLx2BCzudaBrmcOx0gElX/T6bf4vEtXkXcz246
+jHia0Vo/63hBVfYD0kHguXZ0m5u5rE7BMesd1PSM1FVj2Bb2nJi95S/do36M1ofq
+Ws3B7Emx/9HLCqj+OWjmjGTF9rYSCLTD50+LCLv0FTHRRAzFrlwQk4DUBZObkL7f
+jM2Ji7jh/hKm+LuWsblDzXsb/KmphA9mh7hw7w4mjmC9jDH9hpore+ZbeChGIAFm
+H+PCxVJvIfbBkEaeDcSSZxwwpOOypFni+saEYzVFbJS0icWUu6vGit+bTjoHtRQ6
+FWbXUZygilEtQeITeI42hSaCWZQzfjwr3qcvyCV1p1COHB2NfX3j0vshtUw0P65w
+LAA4z6iNLq+xEPYTXgyNuW3c+Hm5YO11F1NCW0YpI2ga/c+uylipDzvaAlX3lmFI
+++IeMF72CE53Sgg2XsGVSswow3ZpFuU+v+PCiZ3xIuPJs8XSu2xAETe3yidUA/NC
+y5oKf+jn
+=XFY+
+-----END PGP SIGNATURE-----
+
+--rDISzrWmHoUxAiqV--
