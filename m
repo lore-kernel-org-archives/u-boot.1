@@ -4,117 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56212C5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 13:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2415AC5B552
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 14:44:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E2D882B07;
-	Tue, 10 Jun 2025 15:45:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 50DF982B0E;
+	Tue, 10 Jun 2025 16:44:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aQooOWvo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HE6NuBpS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8D1982B0E; Tue, 10 Jun 2025 15:45:42 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id AF07182B07; Tue, 10 Jun 2025 16:44:50 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 694FF80E9A
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 15:45:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72EBB82B07
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 16:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a3798794d3so4697315f8f.1
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 06:45:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-407aac76036so3508903b6e.1
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 07:44:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749563140; x=1750167940; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=bbEA19u7SgvTpqrtzWD/lPTZL9Qebz8zSvBeCiXefUU=;
- b=aQooOWvoVQZvsmANbY7Mqu65GRk7cFGYfyRjIt8dpd2NiuwuYAf0FhMQj1V36/SvUq
- h0opfRmNL6qBfGvFvfwkdi392HBUrZJGyl+WVcm2mo/xIRyTWW7ICZuOwohQQtNojgQL
- LRSpMVI1ms2Y8QM3F5i8+qlsvx9EGoG0FRNwVkqaD0mTloTbvXv0zOsu8+taBtFqcfDP
- Nbn74dYC06QgE/8hLsGgX5AKggVnSeTsB4hg3esP+yB7E/v+OfbcAWUt1IhJODzLxL2T
- C82Z3DlfZGpcpmvN8HkCAsXhj4/DR/VogtZ207A6a5SBLKtXbGOTQPEI3A6n/RXA5dsW
- VGXg==
+ d=konsulko.com; s=google; t=1749566687; x=1750171487; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=62l9YHbJgRXTkT4Fq1uQ2l8yKrji1NfhMz7fVCPR608=;
+ b=HE6NuBpS5wWrTu6itCHI8uf6UoRvs96tmu8rGhlAWycyniOsEbOCnG4KtcZDxFak0T
+ 4jKfcxwxYhr/3YZPRxCR4EeIZT/UlW717k8nko0K/S5IWEccg+0L3oO/LTH0/bMWcVbd
+ u+3Iie/gT4jOxd8a1xJdG+WLexktzAuq/OK4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749563140; x=1750167940;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=bbEA19u7SgvTpqrtzWD/lPTZL9Qebz8zSvBeCiXefUU=;
- b=HO+0fDH4qfnVwS+UF56Pj+ha0fIRFViVEQEIeLrhDkEKbi++SlIf8/9FzDLC1Cu+Wi
- neoohUWmsIlqWsgN3XLy7kyPUJHn2Y/SCnZJvOSbBybN5P7dXcBLzsTwe+d9B9Xffduw
- jU2RqsllYCLJsYhp5MvpNqjpvF7AN+zlWuXfiVw+530sU/jd7GJqEtB90Oe8bGxEi/87
- gUvCt4C9+budNLYgs0jACbo10O5l0ax/YNwBL8GUDzyCLnyMQxUpOcscsOOVd58Mk3b0
- 4PcrL1bjc7H/MPCv5WQNyaEzmZrAMQi/74LLEFJ8HEEgjqdK6n42JcTkPX3ihdI3C4vE
- C42w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWflcIy+trJRzoDquWIe2O6FDicsgJLOovO6m8hibQHrTove6yr+xmoBcpYau2U03eaO1FE5fI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2dCwtsl3j9s4LSSsId2t56XapAKoZwhwH++IEd2MW5CCEqYu5
- 65bsPHwcRH8OA1Zx+va0tqfF2XwRLFG79OaE9kT7TiB9gkFdJKpCqS7tF7cbSOivb2c=
-X-Gm-Gg: ASbGncspnIj1fBNtd58GDNxkdrsv/frVRh4X5jR7MVFDxuz2dOeop3AmC6bKj36RUq1
- TQ9KQoVNMiyEdccEQoBBpXu72Mby8GWuVyaRBKJpq5YxDxnNV++P9RMyK5iL8YbE630T20EoD8k
- PPbJPjIJvxKqa1kggU37UGWqC3dFgHjk0rPJXopRI7kuETBSlPMaXFiQMUQ8e8ntewq9b/4eGpP
- xQZF9/BhiacSJ0PQ2IyvuQJ0+Ywhiaeuj+3kvYa5TanypU400nQtSqBagw7UMZrlSk1tgkGsBRu
- 9lNFyuJO2OIcRugpCRMdl+GMdzTI99L9tNu4See6QpRf4AL8C6rjmhZS2UtXVcRMVG378xt+1tm
- QAJnzaxKfKaghHmhfohInhgOvxiXu+b0Jl1VM
-X-Google-Smtp-Source: AGHT+IERVRHlRqLdphYoLL63hGzqCOxKz2QsWhj84Lk8MosaasNbZ+/mEIwadlcGZYUQph9NbF50GA==
-X-Received: by 2002:a05:6000:2482:b0:3a4:ec32:e4f3 with SMTP id
- ffacd0b85a97d-3a531ab517emr12256255f8f.17.1749563139768; 
- Tue, 10 Jun 2025 06:45:39 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:f0b:a9b6:d508:9d14?
- ([2a01:e0a:3d9:2080:f0b:a9b6:d508:9d14])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a5323be604sm12183732f8f.42.2025.06.10.06.45.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Jun 2025 06:45:39 -0700 (PDT)
-Message-ID: <4476151c-aad5-45b1-8573-a5e5b12cdcc3@linaro.org>
-Date: Tue, 10 Jun 2025 15:45:34 +0200
+ d=1e100.net; s=20230601; t=1749566687; x=1750171487;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=62l9YHbJgRXTkT4Fq1uQ2l8yKrji1NfhMz7fVCPR608=;
+ b=tQpTBTibCOrB3/+WbUt8hit/wePinC8zcNi6u4EosNaxzPBBVRosTcuFW5mwq1LNsD
+ xp2KAuZWqcpkD7YK3SC4pm785SiXrJNi8hgrv1mQ/hdxcEscFQWTQfHiz3nABdvCPGeF
+ DXgeYy2EVPd6YNrjMmxpTERI4otJqhr9hXlXOt8XJB9a5k86Defc/Bcm7biFY7y/Dhmc
+ mu9ZJ4d9f8qqWs3GDbrnXV2dbotD55yUB7gU7xBqiwFRaiortBYNPNJdUDU86PZcqsPF
+ gNh3U2iD/yA7aNvg8+0pqOLu82H+pO7STsuxYSzXwv1V/VlipWSZxdHnXS4Wu7qAsEjJ
+ wG6Q==
+X-Gm-Message-State: AOJu0YwrRwypUxHnUEklMYb68RzMKpguNAdV0hjZPXljE3bMGZupKoHp
+ CxrXDK9uFJszrQRe8Fx3cxEBqpUQeFTB8YkV7ATs4GqFA/pJhZea7wEEC304m+x5KyQ=
+X-Gm-Gg: ASbGncvgpaYoUZKqVBo66wVJ7PO+JmAS3kF80pVy5qIeZBVkVapY3nQdapUHeUNFHvq
+ 3xLfQ7+CRp9POIZ8BJ2ZthO2iNmCTGblQtPQAna8R8MhSgXzb9QUPRNHrKcZ8PTzF2Aj21gzdYk
+ BEZZ7ctFiQWif5a4PRCvb78YroRY2i6U8VpciOtNdDhPvQ/v+Mi5Q0Esw9ABEBTgU3BpcL/ygkf
+ ArPgcBc/ykoj8FX8jz+qKzN+EcReEn1ts1l5qcAZ+zECCJOgbNXiM/iTHySCUQO0j+Z79PBBqNc
+ xurOXOlSqN5yFYtofVWgcGFC/cEfHZJ9BWP8smpZ/+zJ6CxzfUvSsQ7TDSM/qHAGfCF1Qd0ce6a
+ YzIWPHVg4cg3kxrofcJMm20A=
+X-Google-Smtp-Source: AGHT+IEfco55M6BXBOShUFfm/ZcBFiNwbo9k2zMmm1QOh96y4QIBViIHmOx6i9hFI5PBQ9Z2eFciSg==
+X-Received: by 2002:a05:6808:6a98:b0:3f8:3489:d93d with SMTP id
+ 5614622812f47-40905136ff7mr12004885b6e.25.1749566687101; 
+ Tue, 10 Jun 2025 07:44:47 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40a54a668c9sm434563b6e.12.2025.06.10.07.44.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Jun 2025 07:44:46 -0700 (PDT)
+Date: Tue, 10 Jun 2025 08:44:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
+ n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
+Subject: Re: [PATCH v7 01/10] spl: Kconfig: allow K3 devices to use falcon mode
+Message-ID: <20250610144444.GY1382132@bill-the-cat>
+References: <20250603142452.2707171-1-anshuld@ti.com>
+ <20250603142452.2707171-2-anshuld@ti.com>
+ <20250606190625.GZ1382132@bill-the-cat>
+ <DAHZOKDJ7QAM.2MKJ1WRFIJPAD@ti.com>
+ <20250609145919.GN1382132@bill-the-cat>
+ <DAIPP8VS7YQO.3PK5EYRE3D11A@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFT v5 3/3] fastboot: integrate block flashing back-end
-To: Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de,
- Dmitrii Merkurev <dimorinny@google.com>
-References: <20250606-topic-fastboot-blk-v5-0-203538ec5b32@linaro.org>
- <20250606-topic-fastboot-blk-v5-3-203538ec5b32@linaro.org>
- <20250606143638.GS1382132@bill-the-cat>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250606143638.GS1382132@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="niWqx8v8wV3ejlj1"
+Content-Disposition: inline
+In-Reply-To: <DAIPP8VS7YQO.3PK5EYRE3D11A@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,69 +96,110 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06/06/2025 16:36, Tom Rini wrote:
-> On Fri, Jun 06, 2025 at 11:33:09AM +0200, Neil Armstrong wrote:
-> 
->> From: Dmitrii Merkurev <dimorinny@google.com>
->>
->> 1. Get partition info/size
->> 2. Erase partition
->> 3. Flash partition
->> 4. BCB
->>
->> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
->>   drivers/fastboot/Kconfig      | 29 ++++++++++++++++++++++++++++-
->>   drivers/fastboot/Makefile     |  1 +
->>   drivers/fastboot/fb_command.c |  8 ++++++++
->>   drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
->>   drivers/fastboot/fb_getvar.c  |  8 +++++++-
->>   5 files changed, 62 insertions(+), 6 deletions(-)
->>
->> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
->> index 70207573de2bd0d56b4b7fa6f7e17fdc5803ba15..75911468ba4980d9b96e2af9e708f08b9ef16ac8 100644
->> --- a/drivers/fastboot/Kconfig
->> +++ b/drivers/fastboot/Kconfig
->> @@ -91,7 +91,7 @@ config FASTBOOT_USB_DEV
->>   config FASTBOOT_FLASH
->>   	bool "Enable FASTBOOT FLASH command"
->>   	default y if ARCH_SUNXI || ARCH_ROCKCHIP
->> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
->> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
-> 
-> This is what's tricky. The symbol FASTBOOT_FLASH is default y for all
-> ARCH_SUNXI and ARCH_ROCKCHIP platforms where FASTBOOT is enabled. Since
-> looking in to effects here isn't super well documented, I'm going to be
-> a bit more verbose here than I might otherwise just to have a post to
-> refer back to later (possibly for adding to something under
-> doc/develop/).
-> 
-> So, tools/qconfig.py can be helpful here. If we use -b to first build
-> the database of boards and CONFIG sybmols enabled, we can then do:
-> $ tools/qconfig.py -f FASTBOOT ARCH_SUNXI BLK
-> to get everything that is FASTBOOT and ARCH_SUNXI and BLK.
-> We can also do:
-> $ tools/qconfig.py -f FASTBOOT ARCH_SUNXI BLK ~FASTBOOT_FLASH
-> To get the same as the above, but do not enable FASTBOOT_FLASH. This
-> gives us the CHIP platform. This is going to be the one that now enables
-> the new functionality. If we do the same but for ARCH_ROCKCHIP we get
-> zero matches. So this is our culprit.
-> 
-> This means the series, and this patch here needs to also disable the new
-> functionality on the CHIP defconfig.
-> 
 
-Wow thanks for finding that, I didn't imagine this could cause such issues.
+--niWqx8v8wV3ejlj1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-Neil
+On Tue, Jun 10, 2025 at 02:01:59PM +0530, Anshul Dalal wrote:
+> On Mon Jun 9, 2025 at 8:29 PM IST, Tom Rini wrote:
+> > On Mon, Jun 09, 2025 at 05:38:37PM +0530, Anshul Dalal wrote:
+> >> On Sat Jun 7, 2025 at 12:36 AM IST, Tom Rini wrote:
+> >> > On Tue, Jun 03, 2025 at 07:54:41PM +0530, Anshul Dalal wrote:
+> >> >
+> >> >> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
+> >> >> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32=
+-bit
+> >> >> HS devices and can be enabled on K3 devices.
+> >> >>=20
+> >> >> For secure boot, the kernel with x509 headers can be packaged in a =
+fit
+> >> >> container (fitImage) signed with TIFS keys for authentication.
+> >> >>=20
+> >> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> >> >> ---
+> >> >>  common/spl/Kconfig | 2 +-
+> >> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >> >>=20
+> >> >> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> >> >> index 77cf04d38ed..bc5a334a1c5 100644
+> >> >> --- a/common/spl/Kconfig
+> >> >> +++ b/common/spl/Kconfig
+> >> >> @@ -1190,7 +1190,7 @@ config SPL_ONENAND_SUPPORT
+> >> >> =20
+> >> >>  config SPL_OS_BOOT
+> >> >>  	bool "Activate Falcon Mode"
+> >> >> -	depends on !TI_SECURE_DEVICE
+> >> >> +	depends on !TI_SECURE_DEVICE || ARCH_K3
+> >> >>  	help
+> >> >>  	  Enable booting directly to an OS from SPL.
+> >> >>  	  for more info read doc/README.falcon
+> >> >
+> >> > I wonder if overloading ARCH_K3 like this isn't a great idea. Or per=
+haps
+> >> > TI_SECURE_DEVICE is too generic a name. I kind of want to introduce
+> >> > something that means TI Secure Boot is supported but also Falcon is
+> >> > supported, and then use that as how we disable in Kconfig various
+> >> > insecure options. And I assume that it's a matter of effort not
+> >> > technical restrictions for supporting falcon mode on older HS parts?
+> >>=20
+> >> I second your opinion here, the falcon boot flow we do have in K3
+> >> devices is quite different from existing platforms but still enabled by
+> >> the same SPL_OS_BOOT config. Perhaps adding a config like K3_FALCON
+> >> makes sense here.
+> >>=20
+> >> And yes, older HS *K3* parts should be able to support a similar falcon
+> >> style boot flow with not much changes to the k3_falcon_prep function.
+> >
+> > Maybe we need a common symbol for things that are common to all TI
+> > secure devices, and other symbols for K3 or AM33xx (or whatever is most
+> > appropriate for that overall era of parts).
+>=20
+> I was thinking of adding TI_SECURE_DEVICE_(LEGACY|K3) hidden config
+> symbols which TI_SECURE_DEVICE selects as below:
+>=20
+> config TI_SECURE_DEVICE
+> 	bool "HS Device Type Support"
+> 	depends on ARCH_KEYSTONE || ARCH_OMAP2PLUS || ARCH_K3
+> 	select TI_SECURE_DEVICE_LEGACY if ARCH_KEYSTONE || ARCH_OMAP2PLUS
+> 	select TI_SECURE_DEVICE_K3 if ARCH_K3
+>=20
+> We can then use TI_SECURE_DEVICE_LEGACY to disable OS_BOOT for older non
+> K3 platforms instead.
+=20
+The current tech today is the legacy tech tomorrow, so I think a better
+symbol name is needed for ARCH_KEYSTONE || ARCH_OMAP2PLUS, especially
+since the next question is how much do they in fact share in terms of
+tooling and features. But I was also thinking that TI_SECURE_DEVICE
+should be a hidden symbol too, and used for the common-if-any parts, and
+so SPL_OS_BOOT would depend on !TI_SECURE_DEVICE_K2_OMAP2PLUS or
+whatever.
 
+--=20
+Tom
+
+--niWqx8v8wV3ejlj1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhIRNkACgkQFHw5/5Y0
+tyzt+QwAiX9/3LwmCG/af9mF0v6ZmKaUlV8WdeB1ZbFQPzORo5AsXxT3O0FbmOL9
+gguVb6oHhir89fZ8NebRumcjkX8qqjXik81iiZ7/mvkdYDkWXN3Wg2KUqj+0dOfp
+bidMEl8niGvon2XIyEZchNFzpUNC4AVRg7T9qU6FtNXRdoqzH28eYOIQIQZUgRq/
+cZKWQfRKOdPTM/8GT6kHrKfWiB46e32XCKsXxezeo1vCoEvLxQrSwxSXn9SuYs/x
+LBedIpePF+ngjqLkHoUqIvslPSQKf5xRhmYqgMg294V+O3YXz8W6u7rlaIyL7p2I
+toMeqr2St2jKjrKgvCELJxdpjwm/52cz8VL7sWnyEOHdzW25dEn9aGgAT2zNnXaQ
+WdTUp9ySdBggdJIsa/wEL5tenrFcQdn8nTxOJsNs4NcPJ+Tr/txstvvmcLvgNXlK
+w74AT2VVf+nR6daJTyx1ASA5iBXeN9Mxgar+BppLI3A8U48Uzr22vuTD3p1PNLTh
+2NK5bJOV
+=o4lq
+-----END PGP SIGNATURE-----
+
+--niWqx8v8wV3ejlj1--
