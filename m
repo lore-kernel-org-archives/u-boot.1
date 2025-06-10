@@ -4,83 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5266BC677C4
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 19:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19025C677C4
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 22:04:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE64382B18;
-	Tue, 10 Jun 2025 21:15:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A78382B07;
+	Wed, 11 Jun 2025 00:04:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HkGuGuqq";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BbDO54Zm";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="w2oGN7ix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E14EA82B20; Tue, 10 Jun 2025 21:15:09 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A2F3F82B18; Wed, 11 Jun 2025 00:04:46 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AC5182B07
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 21:15:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6198482AE9
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 00:04:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3a53ee6fcd5so1942521f8f.1
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 12:15:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749582906; x=1750187706; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YjAFFsIXA7ruDXqDpQ0i3WJMmJRMTOoW2XMsOK1VMGw=;
- b=HkGuGuqqSFANl4/7/FIwrv+Zakf9FK4k7EZW1SwbtZOrceFaEOsBZv1g9aLfCFsN1R
- NGINLv1YRKzWlTO/oYapkl1aJI1flBkViuxHtIutTUUdx/Rozfva0xmWm45K66rEQdBg
- 9Zhml4WYvbxKR5DMGmqhGy/lQMNHmrcpqeHuOXse+N5idVZSW4W1/2/UJyzIxdSRzdPS
- w6/69Pr8DpMiKPZVF3ayPDoqOfQgM3xJcXHuEfbIoVVLj6RSXh/aW/V+iAp714H6JVpy
- ALAxtAxsj32GCgboXhzgqNpW6oke2WvGHhMuGQN3kbCRM9QiGjeM0xa95v2ILJDiaYqs
- 7R4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749582906; x=1750187706;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YjAFFsIXA7ruDXqDpQ0i3WJMmJRMTOoW2XMsOK1VMGw=;
- b=vw+WexZrzKfLKD/j56OXlp8DDjetWRS9x/Ao1/zayP2F6aftZ6vDNWGz7NB1rx11mT
- 07lpFKxrvNii+3bPu9pYK0agufmuxP+kIa7xqlW0qQJWvUY+79a8f2oAxYLoB3WMeZsH
- evTa6yH4WGD0sw1cZL5HceysrytGpokpNcJf57YwNAwgHyniKRF41zHmsIoUdIJojvxm
- jE/l3yMYoD2oXk6xxJqkVITidCa4Zcy2T0D0OmvXAiGo0bkRhPdPyA3ZqE1IA2MAAEYy
- uUd4jf/S3baaE1saeAk3X0hYSgAMIaAd5t9BIhX7U/6SW/P/6wBDVcFBABQduTE2Rsqf
- XLqg==
-X-Gm-Message-State: AOJu0YzoU8/xhAZN6l7pGQj38hDMpi8xMVWmP8LKLf3J83muScrHLqjt
- 2l1LwixKKi+NSJzOgcl1milC0lFVgSx5VyXbG8c2hefqHqdOWpc5h4Fr9mKDL+OShe/MlJD6EiO
- 2EHRw
-X-Gm-Gg: ASbGncuWB0IoqeoW1k2WhnZaodewYipPdNz1HKqR2eqt69cqYoSf8FUaufpdriCuM4U
- KGBQwzADt6+bpbC+QpTwfGNrjNnYqyi+djct0pXdVDuujl8eLyyGeDkkoSPjreiZhxvj00kT3Zr
- nQd8/w1RMAXobSAneD5p9R6lkoiH4Bub6LWwByTU1eL2hubw5bw6S7TZNs4BOkGMOv55nISaCHO
- oiFlQQXNa8oKWoXN+zmLN6vgMnwx9Zz1JFv/hana/rJ8MdGwRE84JJNZhLn9BtYriOg5uT7eNR6
- u3R0FsHdXZs3R88RCh14hYlkSQr6yVcBhqeI+l+hqhbio44GnWwDWCpiYnPM/ZIMBbh7cjOX+an
- YQik2fRaqI4BPK2FMKMKbVaVpQLqVzblb70jz6TYQyFJMfWBXItA=
-X-Google-Smtp-Source: AGHT+IG8oyX9YHJHC6swuBws4T5rbeCnUuJ+WwKuMesM4uxrDcdm/eRzMZGjIZGXOkf52q+aaqqTSg==
-X-Received: by 2002:a5d:64e3:0:b0:3a0:b84d:60cc with SMTP id
- ffacd0b85a97d-3a558aa5ab9mr134727f8f.2.1749582905666; 
- Tue, 10 Jun 2025 12:15:05 -0700 (PDT)
-Received: from localhost.localdomain (ppp089210105145.access.hol.gr.
- [89.210.105.145]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4521375b5e1sm151958445e9.37.2025.06.10.12.15.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 12:15:05 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bH2rr1DFwz9spj;
+ Wed, 11 Jun 2025 00:04:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1749593084;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=7k4yI6lCmnXztGgsQC0OnZEBzI7p0yzZT7Sxctgh3Rc=;
+ b=BbDO54Zm+Kjt2yAEK/j70/jYlo4S9jNRaRg/O1uRdBihMk/k1Gsw6sTb0z0jZtSucLGoLb
+ 86HYTUU4K7G03qI4WKPBVeGk9nyhUEjVHLisQz3MdIyOspIKMPmVr3mha6dAiKZpUrUvIc
+ bNMM/BOcU3mQTnpn1e+3blNAtwriOEfceUM807JPwX75DL3jAxRIDzmYuOhKR/iGH0S3L2
+ iKJUoGQkV8plJFgF+AxH6Y27FVx2ib+SieqmH4nDWztavvVV1xjSo73MJPY4fZJwhEbni4
+ FLJDsTNdcl7C5pHkoEXp+Op5wcMlY3SEMrSyI8/A8SUPmAvUqxG2rARn6zo+WA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1749593082;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=7k4yI6lCmnXztGgsQC0OnZEBzI7p0yzZT7Sxctgh3Rc=;
+ b=w2oGN7ix74StjL9JQsfwTyJgH41O/k/5+t52jGqFaDRftYDmt3eEotY3nr6K/dw/10OlwI
+ GVUuQwY66Yc2vYK9rCGZtvOQ7vJoDrePH7qLpk6UihkO1wHtz88wkcm2v0jEmqTLUDw9hu
+ z/5X21ES26PCltPtgh13kGf0MVfFNcdQleEyMgXjN6GkCAhLiELKI/OghqBER7Xz2AhXdW
+ c/0RZimqRvBYjKCCaIz8gIIG4mflmIJnYTD/FPK5DgfGTXgUQAYtUUEHfurvur8LI84Ki3
+ zRmbs0yuW9yi4ZgqSiZgbump7z+1WY8zNbZ0DBiCukZVrR+f2tdb/po+lvOsaA==
 To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: ilias.apalodimas@linaro.org,
-	sjg@chromium.org
-Subject: Pull request for tpm-next-10062025
-Date: Tue, 10 Jun 2025 22:15:03 +0300
-Message-ID: <20250610191503.1708064-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.49.0
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Wed, 11 Jun 2025 00:02:52 +0200
+Message-ID: <20250610220432.166527-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: e7dc7bca629821c4644
+X-MBO-RS-META: aztkw6nm6maarr43rqashcg16p9u3381
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,40 +82,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+One more board to support, this time Retronix Sparrow Hawk
+based on Renesas R-Car V4H SoC . This is board support, so
+master branch should be fine. The DT in dts/upstream/ is a
+backport from Linux, and will disappear on next DT sync.
 
-Small updates for testing TPMs for -next
+The following changes since commit d7c449c3d83a986d61e38d1762433c0607caf5c5:
 
-The following changes since commit 59d00e20fced23e6463aa09db889dd548baee677:
-
-  Merge tag 'v2025.07-rc4' into next (2025-06-09 16:28:28 -0600)
+  Prepare v2025.07-rc4 (2025-06-09 15:54:18 -0600)
 
 are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-next-10062025
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
-for you to fetch changes up to 693b7a738d6d23001da7c6224449b3d300efd1da:
+for you to fetch changes up to 55c4a6db549cdad3f185e33f439d130cec7a6bc8:
 
-  test: tpm: Skip failing tests on coral (2025-06-10 19:35:58 +0300)
-
-The CI had no issues
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/26601
-
-Please pull
-/Ilias
+  arm64: dts: renesas: r8a779g3: Add Retronix R-Car V4H Sparrow Hawk board support (2025-06-10 20:50:50 +0200)
 
 ----------------------------------------------------------------
-Updates from Simon cleaning up some tests, with the intention of being used
-in sandbox and actual hardware.
+Marek Vasut (2):
+      arm64: renesas: Introduce renesas_dram_init_banksize()
+      arm64: dts: renesas: r8a779g3: Add Retronix R-Car V4H Sparrow Hawk board support
 
-----------------------------------------------------------------
-Simon Glass (4):
-      tpm: sandbox: Support self-test continue in emulator
-      tpm: Convert sandbox-focussed tests to C
-      tpm: Drop unwanted special cases for sandbox
-      test: tpm: Skip failing tests on coral
-
- drivers/tpm/tpm_tis_sandbox.c |  1 +
- test/dm/tpm.c                 | 77 +++++++++++++++++++++++++++++++++++++-
- test/py/tests/test_tpm2.py    | 86 +++++++------------------------------------
- 3 files changed, 89 insertions(+), 75 deletions(-)
+ arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi     |  50 ++
+ arch/arm/mach-renesas/Kconfig.rcar4                |   7 +
+ board/renesas/common/rcar64-common.c               |   4 +
+ board/renesas/sparrowhawk/Kconfig                  |  15 +
+ board/renesas/sparrowhawk/MAINTAINERS              |   7 +
+ board/renesas/sparrowhawk/Makefile                 |   9 +
+ board/renesas/sparrowhawk/sparrowhawk.c            | 143 +++++
+ configs/r8a779g3_sparrowhawk_defconfig             |  69 +++
+ doc/board/renesas/renesas.rst                      |   6 +
+ .../src/arm64/renesas/r8a779g3-sparrow-hawk.dts    | 666 +++++++++++++++++++++
+ include/configs/sparrowhawk.h                      |  14 +
+ 11 files changed, 990 insertions(+)
+ create mode 100644 arch/arm/dts/r8a779g3-sparrow-hawk-u-boot.dtsi
+ create mode 100644 board/renesas/sparrowhawk/Kconfig
+ create mode 100644 board/renesas/sparrowhawk/MAINTAINERS
+ create mode 100644 board/renesas/sparrowhawk/Makefile
+ create mode 100644 board/renesas/sparrowhawk/sparrowhawk.c
+ create mode 100644 configs/r8a779g3_sparrowhawk_defconfig
+ create mode 100644 dts/upstream/src/arm64/renesas/r8a779g3-sparrow-hawk.dts
+ create mode 100644 include/configs/sparrowhawk.h
