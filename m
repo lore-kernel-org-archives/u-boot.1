@@ -4,87 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79039C5B552
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 15:35:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5B3C5B552
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 15:41:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 059E982B63;
-	Tue, 10 Jun 2025 17:35:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DDDD82B07;
+	Tue, 10 Jun 2025 17:41:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nz3y7ZgB";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="W3bNaY8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F16982B70; Tue, 10 Jun 2025 17:35:50 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 54A6882B0E; Tue, 10 Jun 2025 17:41:51 +0200 (CEST)
+Received: from imap4.hz.codethink.co.uk (imap4.hz.codethink.co.uk
+ [188.40.203.114])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4430C82B07
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 17:35:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF6BA8004F
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 17:41:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2e541e0b974so3899260fac.1
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 08:35:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749569743; x=1750174543; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QXk4Mgg7+JdDZBU9O+7osQCmxiBQvkvP6sWOO8TzT2w=;
- b=Nz3y7ZgBjote5+ALXI4IhSXXhfQ3Qcb4T4QzwHYNLfCG6J2+Qp16dMIW9VGf+3efQq
- mO4PkBe7Y6srQw9alaPXBe2Xg4HZX8ODeC4MMH8XPuVSj97Zqm2o+ctcjU/BM3yJoiHy
- yMbnyy/PNir7yG/ozDVCjoGrU2vBptDrK69Qc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749569743; x=1750174543;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QXk4Mgg7+JdDZBU9O+7osQCmxiBQvkvP6sWOO8TzT2w=;
- b=OozA1AsG4XRWEFQnKRQ07a1i0MLc18uOHl0Sz3FJXd9CojnjtpMP6wG0Fj/l76ZEh+
- VdWAf/nqPqFvHkcweOBl3pZnevJzE9UK+O2ojwnw1gWxmjuEx+kUO8lZ1zl3RjFKbmnK
- 9nVQ3/CwHcp2Q8Csyn6HZqWpPHwRju/vQ7qxWiR0Offij3pIksFteSck3JmWcZ5vHooH
- Fxxu+HXrcUje4DQ5+l8nYWZYjJJd2Q1QVC4LHEWLCFrNzk6whz7PWkeb6X7lRefCHncC
- GWo1Tu+wnjWFSNPyjs6TY4QwLXyi0qg518C3YU55KXXDkLsR3mjg3Ly7PPNcx+w4/q1e
- qAGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpzYrJh9d68nPzyLPdbOjj2OWfzz91xA7NY6XEJJ0J4WJh3YMFPOV2EiHhFkGSx8C8aEQXj3w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwM6e5ZedD5F1WJGed+KaGSK96Zv0XOZAvyzc5ZnyGy2jh1kBfu
- ldi03rKhQNtL84c61QT1kkXgMt7q8JwhbkrWpCC55B/fDwnJa+aMJhZSdkn9Se9usJ8=
-X-Gm-Gg: ASbGnctREy6AIoAI+xfYABFQrITXS4NmdnQWsst9fq1qkf2j3RZu5oxGXJRXLf/1aVd
- j0Wcf+Gisb4jEt/ZyXrxg8iaFid5oSrylenZgnUYt3bUuH2wsJs9r+gHbaWDFhrBdQL+OwJVaLI
- nlBHwLuLy6axJu6kDiZ90x7e3ULYz+PibwqGKkJ4y9pAgp/lf2MQonvkM6oJV8nO/l+5L0kS9Cv
- eaJkpsBe0vU9VnqYst2YR7IAHO3TeKTnMVeT2Ltc+LpvtTt3ACooV/3YQ+phIyJdkLK8w9nKlt2
- fVkw3FT5kGUbn9b3pOU+bTd9o7KMeA46IRB8RJ2KYEVajNmql2JQdMYEVvMHnkepUP4nKF+aTRI
- pn6oKwGWFUkxkkV4gh55TrXSRLmYWTRpjeg==
-X-Google-Smtp-Source: AGHT+IFtkwvkyW6sAXiDj6mP2CF3iUuV5Xq+wOknfGcucs80tzmjyu01t3A1T7OESE2m3y1U0g41Rw==
-X-Received: by 2002:a05:6870:3c0c:b0:2c1:44a9:fc16 with SMTP id
- 586e51a60fabf-2ea01566271mr11129131fac.38.1749569742904; 
- Tue, 10 Jun 2025 08:35:42 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ea072e46fbsm2464704fac.23.2025.06.10.08.35.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Jun 2025 08:35:42 -0700 (PDT)
-Date: Tue, 10 Jun 2025 09:35:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ben Dooks <ben.dooks@codethink.co.uk>
+ spf=pass smtp.mailfrom=ben.dooks@codethink.co.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=f/SDA8qvTFTGy+62t95FhmQSkmJgTJe2hV1Aa95/ZYk=; b=W3bNaY8c1hHKbDxqbpnap7zwQv
+ mYir9itDQiTkaZ4jSIC5PbHH4bFgiMHr6lVPHZm2gj3kZ+vMI6BKo7Sz4oUI5l5wtiml4SnONkGRe
+ m9oxFUOfzedIXmKNiEF3+U+1xM88afwurMj8RAaCgef3LjrO3g4WR0C53FY1DJascuwruQfmiCQjX
+ aGjsSATmbOyorBbrljmcz4QdxkUvyxmzPU/abkx6m3SFcO2SxMkGHKvK8u1rT1oAfmAL8QN/F7KiT
+ l88TiW7HyxGxTYlhn6UnHOZZPDadcXGZNkoOrOM5gRWTCqWFlOGKRtkwViShU8CqiK1fO/w0Gbggo
+ IEVH+mSQ==;
+Received: from [167.98.27.226] (helo=[10.35.6.194])
+ by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uP16U-00C2Nz-NO; Tue, 10 Jun 2025 16:41:34 +0100
+Message-ID: <912f1532-14cc-4959-822a-b69e64aff87c@codethink.co.uk>
+Date: Tue, 10 Jun 2025 16:41:33 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] riscv: byteorder: add test for big-endian
+To: Tom Rini <trini@konsulko.com>
 Cc: rick@andestech.com, ycliang@pr-suspensions-neuweb-biz.expedrion.biz,
  u-boot@lists.denx.de, nazar.kazakov@codethink.co.uk,
  joseph.baker@codethink.co.uk, fran.redondo@codethink.co.uk,
  lawrence.hunter@codethink.co.uk
-Subject: Re: [PATCH 1/2] riscv: add build support for big-endian
-Message-ID: <20250610153540.GD1382132@bill-the-cat>
 References: <20250610151850.1673111-1-ben.dooks@codethink.co.uk>
- <20250610151850.1673111-2-ben.dooks@codethink.co.uk>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JI8FMkfN3Nl1mgRz"
-Content-Disposition: inline
-In-Reply-To: <20250610151850.1673111-2-ben.dooks@codethink.co.uk>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20250610151850.1673111-3-ben.dooks@codethink.co.uk>
+ <20250610153354.GC1382132@bill-the-cat>
+Content-Language: en-GB
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+Organization: Codethink Limited.
+In-Reply-To: <20250610153354.GC1382132@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,66 +76,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/06/2025 16:33, Tom Rini wrote:
+> On Tue, Jun 10, 2025 at 04:18:50PM +0100, Ben Dooks wrote:
+> 
+>> Test for big-endian either via __RISCVEB__ which migth be
+>> rather old, or check the BYTE_ORDER if the compiler defines
+>> it (which should be any modern gcc like v12)
+>>
+>> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+>> ---
+>>   arch/riscv/include/asm/byteorder.h | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/riscv/include/asm/byteorder.h b/arch/riscv/include/asm/byteorder.h
+>> index d26ac5688fa..3140c1f585e 100644
+>> --- a/arch/riscv/include/asm/byteorder.h
+>> +++ b/arch/riscv/include/asm/byteorder.h
+>> @@ -26,7 +26,7 @@
+>>   #  define __SWAB_64_THRU_32__
+>>   #endif
+>>   
+>> -#ifdef __RISCVEB__
+>> +#if  defined(__RISCVEB__) || (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+>>   #include <linux/byteorder/big_endian.h>
+>>   #else
+>>   #include <linux/byteorder/little_endian.h>
+> 
+> What's this look like in the linux kernel? We should likely just mirror
+> that.
 
---JI8FMkfN3Nl1mgRz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We're still looking at the kernel too.
 
-On Tue, Jun 10, 2025 at 04:18:49PM +0100, Ben Dooks wrote:
-> Add support to build code big-endian if the board supports
-> it. Updates the makefile to pass the correct compiler and
-> elf flags.
->=20
-> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
-> ---
->  arch/riscv/config.mk | 18 ++++++++++++++----
->  1 file changed, 14 insertions(+), 4 deletions(-)
->=20
-> diff --git a/arch/riscv/config.mk b/arch/riscv/config.mk
-> index 9f16dda92a0..2eeeb433748 100644
-> --- a/arch/riscv/config.mk
-> +++ b/arch/riscv/config.mk
-> @@ -10,19 +10,29 @@
->  # Rick Chen, Andes Technology Corporation <rick@andestech.com>
->  #
-> =20
-> -32bit-emul		:=3D elf32lriscv
-> -64bit-emul		:=3D elf64lriscv
-> +ifdef CONFIG_SYS_BIT_ENDIAN
+I think we could just drop the __RISCVEB__ test, I don't think anything
+is defining it.
 
-Typo, should be BIG not BIT.
+-- 
+Ben Dooks				http://www.codethink.co.uk/
+Senior Engineer				Codethink - Providing Genius
 
-> +small-endian		:=3D b
-> +large-endian		:=3D big
-> +else
-> +small-endian		:=3D b
-> +large-endian		:=3D big
-> +PLATFORM_CPPFLAGS       +=3D -mbig-endian
-> +KBUILD_LDFLAGS          +=3D -mbig-endian
-> +endif
-
-And then fix it so we can go back to little, too :)
-
---=20
-Tom
-
---JI8FMkfN3Nl1mgRz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhIUMwACgkQFHw5/5Y0
-tyxLnwv/RTHCy8gVcIPfzA2tfSW7gKLDSTr+N9gLpXiZMcY8Fj52xwGifefTOiSr
-X3ass3ZinHx0r4Hlj8C+cC8U/o5m4RHRXi9G9RZtHJSp0pbe+o67zlThKwDNFUnu
-wZcXdJixrU3MvMFhks7ufTvcdIzEEg2T+9onmPB69cniObLfm+A9BEyYBcVE5Cak
-07lXGmftN/fnvPoPl02Da8ya7k7zXCWymA9Bhtecu00dtSDQLQk8uG48z74oWnXD
-1x7TEoIXRUgtKBCY5peomQPCaF3t/ps+/AkKOhx/LfwEb03XWCtnZZR2Ih9m85TH
-LnAlUUGhrVkKhBiuygluy2gM+mqJq0W0/DeSZUkYvFzZT97kDQaB2ZeTsmC/Y51l
-UNXzZwiPyQ0LzotJr+hfzx332XRDTe4MwYFJfoCVtqlx7xMsIq+//VuxGieLJCbW
-Db6u4iTyhqBvUUPkXMFedN+sSIlAPdUy7NbZN4hUPN4L5kt2v/kjUS/kZCK9oNbT
-hACCurMJ
-=f/+O
------END PGP SIGNATURE-----
-
---JI8FMkfN3Nl1mgRz--
+https://www.codethink.co.uk/privacy.html
