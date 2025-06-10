@@ -4,153 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B485C5B543
-	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 12:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB003C5B543
+	for <u-boot@archiver.kernel.org>; Tue, 10 Jun 2025 12:28:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D772880E9A;
-	Tue, 10 Jun 2025 14:26:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 6B22A80E9A;
+	Tue, 10 Jun 2025 14:28:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="EcYlCo9J";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="b81zrVxk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 795C182AC4; Tue, 10 Jun 2025 14:26:28 +0200 (CEST)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20710.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::710])
+ id F0AA582AC4; Tue, 10 Jun 2025 14:28:07 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AE4E8070C
- for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 14:26:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 8E4388070C
+ for <u-boot@lists.denx.de>; Tue, 10 Jun 2025 14:28:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IAmPHwByvPdjsbFFhKASStGjo4VMFLi2A3lIlj5ZMLSyZaxskPtLNC2b4+0HSk2zu1YcKVXiANrNGVIwvWs+he9+O+7lIXv4klrCSvrg0NdJ2aj6EzylrGJJJDoFanEhWrW3EW9emVtUQMG3Nyyf5P/b4EfWOWrzJQWxTOXjgZSK7wBaZxIhby06oP3iMBeX5w7T5yKBiLSvxDITphRI6zL3GKgpbTX6CKrFKKSMIIuUsg6Boyl05L80htWzGfZwmSvcs1+THIVOo2QfXyeALTkNhWN93Yq56BV7SvBqEg+gQUoBCefVip/EzugMCxS5Tj+oUuL8KAYeOF5xSl+g2g==
+ b=CcDrSd/PzJknZqc2ekOYLXLRcQpdSTM/PvYn9+I+T2lWRCQ7Ux3m+AqVpRyORlQUj66uR2M2usC+XyijWC35WjDwlI9dnC4XzWu32bYTD97NE//d9NWYbiQVina+C4Gf2EsqxGxlpfhAbgp5+NPr3V27cEHh/hkEylC5AE/qf4t3IQ2k8+eAn4NwHtlZnjc/wbotMBLUoVx4rbTvlufNEn2xrMbb5WcVI4CElcbunpeMSbg0z0xDBrNmrbRKmSY+T00VTSIf80qmQ4+k4TPZEmuaZMUluQPvl2+rQxLs3hWyUmBX0XZtFkvQC7zaYAtmfcST/XVlDNWGGGP6ARcVow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=I2xZVfLqg2fdhR0CiTtqP1CV0mXGlOjgAhL33Z7VVtI=;
- b=EfXu0cuybZE3BwPbvMdscMUiipBZgmCeXsiIXD4vYzI5kbm1kc6VdW0aHogJ0sGCiK/pWvXcPTW8zcl08RTHTNVsNQwkd1DD1BSAw9hI1NrO0IMiXFh3JFZbyRUnu6JwpQjI0b4SeJpv5oSapD/SqN12cyUgz4pr5+B93LR0xMEe6gsBqn21JEhcgkqV9onq4aVG/d8RhdynD+2UJCMCB9SPhFx1Q+tIkVLpk9FT+NCIvoOCuT4VEmsBFwGBTeBynPZB83TG29rA2oMgp4rpoVvSLVS+RZ7P14XBwq0VDzYnzZaCJh1/9fT8FPW9NuaY84jLm0hdZh1TIzKXIDgFcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=siemens.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ bh=QhQgtVElrLwAfMbu+QuLloQSvth25lxsuEfDuDsI73E=;
+ b=SvkOrvjph4coMJVUeV4skk4K8VA7Mh7Cc+DSF+pw+cWZHTLUJ02Ue2oJXt1JFe4Qd+bM7+1+MXvKDkSxXXa3da2R9MjVbZk2M56UfQU49Ihazc2y+ZvhEtD0vddOxFmQr6wam4vtt2eEOJ+0I+eJ8qU1Mz4G70HzTdt5NgLHAi2dBUPpSv0+NUbQrxzdkI1KcYgkawkW15u+wll+dbaScR+UC9+mmVlIqTH3QSMh66pzpobwWsvjOBgsv+im/ya4OZ4+wf4EUAoPUJZxLXEljeI1rrYlSFHeCPPqbjN56ncO6dAgbWVl5IOyuZRhNxZEoP1J9ZwTJOmB/dNr/7q2cg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I2xZVfLqg2fdhR0CiTtqP1CV0mXGlOjgAhL33Z7VVtI=;
- b=EcYlCo9JHSH37MXzmhw9MTfEpzPgwX+Z/z+SYLj5dUw/b+N0dcTlA7x5Uaq0P7/ihVHg4ZTgqzT48A5DREZb8t9AsDWlBx77FhJh3Z60V0KyCj/mn3QW1KaOA2iISDq3XOcPVBhF4Rwjin0FzlNqnFkmsQ3Mo2Aqh9NFtvpKsrWJbtZXxWsAzuzSX6dAhJ/D1OaEJAjIROwJ2VWK6tcWMz2/D7547f8rcueDe/QrbMbrG0J1oQuLBgMPJYwRqeC4xczJCz61Y4stle7QojREcDsJEzMU1ZjwKkKroonjbNV28dV2+ZpkFMz7w0yLuVsFLRcAt6EwWjocnlJVUi5oAg==
-Received: from DUZPR01CA0053.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:469::11) by DB5P195MB2425.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:10:48f::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.35; Tue, 10 Jun
- 2025 12:26:22 +0000
-Received: from DU6PEPF00009525.eurprd02.prod.outlook.com
- (2603:10a6:10:469:cafe::c0) by DUZPR01CA0053.outlook.office365.com
- (2603:10a6:10:469::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.19 via Frontend Transport; Tue,
- 10 Jun 2025 12:26:35 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DU6PEPF00009525.mail.protection.outlook.com (10.167.8.6) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8835.15 via Frontend Transport; Tue, 10 Jun 2025 12:26:22 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 10 Jun
- 2025 14:26:21 +0200
-Received: from llp-moog.phytec.de (172.25.32.81) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 10 Jun
- 2025 14:26:21 +0200
-From: Yannic Moog <y.moog@phytec.de>
-Date: Tue, 10 Jun 2025 14:26:12 +0200
-Subject: [PATCH] binman: migrate from pkg_resources to importlib
+ bh=QhQgtVElrLwAfMbu+QuLloQSvth25lxsuEfDuDsI73E=;
+ b=b81zrVxkg92dMdIPPT56Q/gU1fIHnDNJMpqmWtbL4aJbcrTCvKR0NLPtQLGiNNHxrvMV4I27milTDONOF2XcxqUn29gRstqs1z0VeUpBUJa4um7CFOV7x6+Iktm/018Ws07nJrC+Y5jCB00d+Eejsp9NneP/s+/mrF0YUe4ITTA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by VI1PR10MB3502.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:13c::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.27; Tue, 10 Jun
+ 2025 12:27:58 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.8769.025; Tue, 10 Jun 2025
+ 12:27:57 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH v2] mkimage: do a rough estimate for the size needed for
+ hashes/signatures
+Date: Tue, 10 Jun 2025 14:27:48 +0200
+Message-ID: <20250610122748.2756616-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.49.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0055.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::18) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250610-pkg_resoures-removal-v1-1-97a269446d35@phytec.de>
-X-B4-Tracking: v=1; b=H4sIAGMkSGgC/x2MSQqAMAwAvyI5W2iDVvQrIiI21eBSSVEE8e8WL
- wNzmHkgkjBFaLIHhC6OHPYkJs9gnId9IsUuOaDGUluj1bFMvVAMZ4IS2sI1rMpUvkZ0SLZwkNJ
- DyPP9b9vufT+Ytg4zZgAAAA==
-X-Change-ID: 20250610-pkg_resoures-removal-17f922d2e64d
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: Jan Kiszka <jan.kiszka@siemens.com>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>, Yannic Moog <y.moog@phytec.de>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1749558381; l=2506;
- i=y.moog@phytec.de; s=20250509; h=from:subject:message-id;
- bh=FUtqLgAp0ymwM2FzvFWW0JPq00vm3Hm6hTwth72lGSs=;
- b=KBtNZykc2VmuIHhnX3ksrBvmN5EWQNZzz6BP1D3bjvxexERALVwYlCZTQuRJlsGKNVZ4tb4Q6
- gYhX1xygRJgA5zUzuV/u/b47XQkmPTqHU9qB7fCOPkTFMdCN8yYDbid
-X-Developer-Key: i=y.moog@phytec.de; a=ed25519;
- pk=rpKoEJ4E7nD9qsrU/rfKVwMTWNWYaTBylZuJUXUiFr8=
-X-Originating-IP: [172.25.32.81]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF00009525:EE_|DB5P195MB2425:EE_
-X-MS-Office365-Filtering-Correlation-Id: 09f623f4-f538-49b1-b606-08dda81a0294
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|VI1PR10MB3502:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0d8d0534-bf00-4e1a-d0b7-08dda81a3af1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NDY2bVZxZmEzZERtcjkxOVc0ZkY0YXJ6RTVZeGdCdC9OalNmTDNKRkg5dFMv?=
- =?utf-8?B?QmNlWnRaNXM2WVBQUDVNZFBlMFcvNm5yUmFMZ01CYURocUl0ZUF5WjQzTFF4?=
- =?utf-8?B?MHRqYWZDSENJSElVL3A0NlN6OEluTFd6UWpBbnJtOFpVcEJycExPTzZBL1Js?=
- =?utf-8?B?ZW0veTNSL2czZWpaMHhlVFlYM3V6N3dFY0pzUlZ6RmxTUFA1K215WTBvc1F2?=
- =?utf-8?B?K2pTa09KclJpT2k5TFNkNjRNZUp5NUdtaVh5Y0lEQTU2c1VEVHp1bll1N1FO?=
- =?utf-8?B?QWR5REZzSElRUHVBTUNnWEQ5M0daU3hSMmU3Q0UzZDdzZ1dPa21heEhlS2pS?=
- =?utf-8?B?WHlST3J0eHo5WkpCNXJ4OS94ampFcityUEZXWHdESEZPZU5GbU9ReDNPR0o5?=
- =?utf-8?B?ajI0dlc1cFpuR3RwSnkzYWZ5UjNrWTB3VEV5K2lsMW1CdmFqVkRlT1pmbVJy?=
- =?utf-8?B?b1JKZnl1YWZIVkRrakltbFJIRE05Y1NsaGVGNHowOER2WmcxWEkxdDl6YzZh?=
- =?utf-8?B?Q1ZYYktUa3BQSGFXZTBPL2g3OFFkM3Z4WmZEKzhSWDFseWREbUYveG5IM21s?=
- =?utf-8?B?Mk1Uemp5aTd4K21JMFZ0N1JLV0xOR2MyUmU1d2lVRlpOVWlxbTdkYUN5LzQx?=
- =?utf-8?B?bUZqM2E2ZzJ6MWQrS3FvbHpVdGRXWVJSYUI0YkRWMFF6VFFPVStRNm5IUUdZ?=
- =?utf-8?B?b1lRSU1GUDRGWDZzTW5pQkd2WVlib2pnaWtET2N2VE8vcjFHOGNhVzBTUng2?=
- =?utf-8?B?SUFrNXpWK013U1piY3BwdkVsWGt3ZWNhSlpPOGdnNmlpYURBQWhJSmxQckxM?=
- =?utf-8?B?ZWExanpxOXRCaGJZZkNwcm5Iazljc3U2U1V1STlQbktPYTdsZjJzNFExVFRQ?=
- =?utf-8?B?R1NsSHhSVHZGMDkyMENraGRpaXRWQlFPQWVwVHowKzJhQnFQMUV6NDZEWlhG?=
- =?utf-8?B?WXpxQzhWN2Y2ZTI4VW1OUHpPM0hnSDlMUTJCWllRMTFaNloyTzB6bmhseGMz?=
- =?utf-8?B?Um1yS09JenFmWEl6bTZWNkwxRW51TjMyTnJZRzAremVTOGZxSWM0b2Z0Q3lv?=
- =?utf-8?B?eDZDYTRYdzQxZzhnOStMbDdscG52NCtxdm1GVzhFZ1g5Z1dITzljWTB1QU5j?=
- =?utf-8?B?aDN4anpBTG5kRC9HQ1loeXVEcDF6K2llenp2aDduNEZNMzU0eU8xbmRMZUNp?=
- =?utf-8?B?QmM4b0FWYnNkamNOUmhNZXN4VG11WVBJZnh3NS9MR2RLd1BLVDQrSEVpS0Zm?=
- =?utf-8?B?cnU4eHM2RjFZOFRiUDRmUFBHQzJpMUdnajBvZVYvOTFBeHdvbFF1Q0lNa1Mz?=
- =?utf-8?B?TlFrS1FDNllIL2tORzlyTGl5aW1la3ZDTEhnenJ6enE2bXJBNWhZd2cvbGpP?=
- =?utf-8?B?NVdGK0liTDZIQWpadDBOME9qdWRleGFUb2V3bjdRRVZYQ2Y3dUJKK2U5d0dO?=
- =?utf-8?B?ejJLUmU4WmhDQlpIQ01zVHBRdE0xUmlKL2dQSWp0WlQ3bmZrQU51Q20yTGZL?=
- =?utf-8?B?dTMweTJFdlZNQmt0Y3czZm5MYWFqTGN3cGhBd0xvN3h3dGhaaW4xbHhaWVNu?=
- =?utf-8?B?NWkyOWY1M2ZVVmFZNEN2WXptbW5qNTVkN3I3NmhJWmFJQ1ZRUCtZbDBObEhP?=
- =?utf-8?B?RlBoelkzdS8yNUVheithNWVFMS9zWFExYlBCUnhZcFBwMUcxamVBL2VMRDJj?=
- =?utf-8?B?SUx3czBvQVJFZytIbXY4NkRXaTg4cCtRVzJpVWpac1RhdzdNTlorWmdsUldn?=
- =?utf-8?B?dFE3Sm5ob2lzaS9iSmdhRTJJR0RTbVR4NExFYnNtZEgrMkVCYVUvcm1kOU9N?=
- =?utf-8?B?WjBKTVRMb2Npc1ZvVzNnY3FrdWh1eWZuOHMvMmFqSXlCZ3ovVlZFWTRrK2lO?=
- =?utf-8?B?NFMzMmZYRGtaNzZnZVpuNHFRWlB0NXRFakVMVHRxUXJyT01kc1NHNEdFUkdw?=
- =?utf-8?B?TnlTY0RCZ09lVUlFKzBCb3BiNndLWTBoTnVocUpJZzRqem43ck1DVlJ6ckQv?=
- =?utf-8?B?ZmZkeXUxcWRRPT0=?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2025 12:26:22.1703 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 09f623f4-f538-49b1-b606-08dda81a0294
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009525.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5P195MB2425
+ ARA:13230040|52116014|366016|376014|10070799003|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2PtuiumUmxY935eG5q+EkSyCZ2fAu05Z4BA8YwW9MiI5PTMeVjUEjIaXw7w5?=
+ =?us-ascii?Q?Arh4bawq/9MC58UYBruoW1jvObdOlO9drXDO2sTvtCQ8/+0C81OFNms7nK+c?=
+ =?us-ascii?Q?k8QPBJUtiPasEKlTh9nczmnr9Sht8n+yfdlyV28Y8SbImTvfH+MA4QQuovCa?=
+ =?us-ascii?Q?A4P9QCXX+HqpVRlIZEmoOpNJ59P5pT7TYIExqtXVmHlk3rcn2f4AgII6ZfOI?=
+ =?us-ascii?Q?4/eL/66r5bVdjD1u7PEWL9WAPffygiFbH6yIgxE/rLUMnDP3ro7WdCRVwVvB?=
+ =?us-ascii?Q?JiYiwFlaTxTnXs0JIoobXVuiPfkAyER/XHRTllVzKTaYbaX7NyjMVmqHaLuO?=
+ =?us-ascii?Q?U27s6mcQ8fKxVv72iDlSqXyrOYqeGo3X+fev2GGBi8h5sUvgE3C70zCSmuJs?=
+ =?us-ascii?Q?kbMc8QMWbP4xRewl5H3hHPS8FOOwruY9/EX761F0A9PfB38L0etFdL302zen?=
+ =?us-ascii?Q?AOGi7polDa8hkLf8CbP+imMtZxiTOPIzcacyJPWShO7Pazv5yVF85VxUWhb9?=
+ =?us-ascii?Q?n+egPJ+RaCgudseb4SizrMBFBAH3hx4YCzD+qGWV1142mtNoA5hZGqIKWvP5?=
+ =?us-ascii?Q?sxrl1YhrLNDoacuGNnpbwnRZe9ZU42bZgDoDeJKaff4ALSPbsnN9676JeZts?=
+ =?us-ascii?Q?xU1zRf4mix4t97yPRcXx8QPl5u8SieKdOoyflE1fOJQwVSg+Fa8YNiqZ+iID?=
+ =?us-ascii?Q?V1yWxPGv0guo+qc2uUKXuZMa6chCDfXBk+Zzm3A8D9gYE+8CVw+mv1624lYG?=
+ =?us-ascii?Q?j3KwPgV3pVB4brMqxQxwxBJ3Ln5d/8uCLNPzfvMvlojcYcsAzJEG35kBjKkd?=
+ =?us-ascii?Q?DEY7xxPRK9N84qskPSG0EQns0UWhm38UUUkWSalTOo4UuC+IDXAm/pY2PRLB?=
+ =?us-ascii?Q?bOcvuF2GJ88iXz2scmd5DQNehzR5sL9+4TrDcWFL1iOhJ96uBgyx50VdqzcN?=
+ =?us-ascii?Q?ZFpth2u+jC7yoWqQMGQzg6z4ECOXiFX8/ePc1QuoY8kpcLlSaB/L6hTjq6w+?=
+ =?us-ascii?Q?iAd6pr+t0KL7FQwjKm/rzPofyxY2j0fpjxDa8f6mjRVxFgpSFdlo44TtXvCM?=
+ =?us-ascii?Q?H6jYres5BW7fBOaEHuynMYBIPU8QvPjR4GyiNlW36dheLgbZjgxccCqiNqUM?=
+ =?us-ascii?Q?usY1rnDESd7Llv/AwkAxWU7kS38YETlCbcXZJfvfi6gGpgY14EvHbs4ORAxq?=
+ =?us-ascii?Q?DvP25B149JkUsDSjUyc39NNWOwfdaRegM9QMwRjYju6MjFZTHpjPbS2VeZGB?=
+ =?us-ascii?Q?HXyn8VBxykY2TadYCzVeyDCsrr6xiWo3xy8JZ9tjQ4VWT40uraLSlKDDjNk3?=
+ =?us-ascii?Q?7Up69PSeCJPCkFhAKKeeBZjFwdLh8+9zsEEAp7kJnWgeK9WnRNedJOdk4H2I?=
+ =?us-ascii?Q?65+v1vDgMMsXxxp7QIZJhdxt31kkCtbGKAppTPL3X2vbr02ts7Y6GlYVwhHG?=
+ =?us-ascii?Q?MrQK5Yczgwc=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(366016)(376014)(10070799003)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gZyMK3IofjC+NozpxLr8e8I+O9zBsCa8UKG09thwUCUk8ONVBevYyCQlT4Z3?=
+ =?us-ascii?Q?QVbbMqAlfcOiYaHjxokMT27+KUQJtiWxDqn6ovUOyEtfngYlQN0Yb5ORI30y?=
+ =?us-ascii?Q?NJQZs9Dlf81+2fQHkP/Td67Z7IR5Akr/ca2IPZpnVVx4e37Mg5443kNDQY4k?=
+ =?us-ascii?Q?+3xHVRf5Lrny0oUE1IINW6GXLq5WTH/C3IfkwbTRi8Ht+J3o4i4WeS9zCSFi?=
+ =?us-ascii?Q?a4FndaAdPy4l+2OsfUkZs8CDPUtbtXjmxgO8Tkg5aX4X/QNdRFRBwVGeLkdu?=
+ =?us-ascii?Q?ZHzAITxaWt725N1BtmhYPy14YvJ6VmN6KU8+33/iak3EB/IV0lFqvLtzg3h4?=
+ =?us-ascii?Q?AbhAPgVogATRAPu+KI4MpCfdlGDjJZj68odG551YiRBeH3ikok+QQbMuRmru?=
+ =?us-ascii?Q?CoxCI6kd8ImZZq81h/GJ4/J8nyNQoybV51ZIiw5o2qsTCOlCQdEbRm3y/uep?=
+ =?us-ascii?Q?9k7kps89pIo+sjUvphPb4zlzUJJfl86FlPJmBrwhYwv0HrRobI8XkuSsju1k?=
+ =?us-ascii?Q?HUVFK41Z21ridF1PC7tOwKjwA+9JFK+k1hhOdHFbE7vz+qshHmJuoPsXLUBY?=
+ =?us-ascii?Q?SmvyUQfRQ3nPwqMKpoQsFlQeMlwo0AYp/0Yl1QA7dFxIygxxIPw712tJppaj?=
+ =?us-ascii?Q?ewI8Tqr9tC/DOHRsNBA0n2Xwcl0ohhdsLzOrceUA655hqRkSxiVzjSh8L12f?=
+ =?us-ascii?Q?fpwo8Ekm8grcgG3KmFmhEW9HJnzFQtYo4y6pa3g72QnydiFIZ45AoiTdc4rv?=
+ =?us-ascii?Q?+lnSDknPPmykhqbvmjck7XlMuOljGZGrvevSpTzu7Fe4S99KE7ng9XMUJytO?=
+ =?us-ascii?Q?h6pZvFJLzQVsnYJ3IA1NasYLsG5SxCxVqEpJ/NTtTpsQahqi4NR55RtIJJyz?=
+ =?us-ascii?Q?vwuUlaHjrmPtaO4TRy7Yba8lMQyTkRpdht8c+Joeo8m8KNshTLU2cHsR2Xf0?=
+ =?us-ascii?Q?ytjSik8X699scFhq0T99K+p1UiZEavGtBgIv/5/F2nzFbzp3gh8I1QAmQA/W?=
+ =?us-ascii?Q?hFGArUmTpyt6rVXOigy8eMZXKzTOMhuqL6gI10pOJBQ9lcq3asHujjFfOVQs?=
+ =?us-ascii?Q?xVgA66IKcQmwnlB82TUtKpSbf/wmtvico5tKTtbx7rP2tkb2607hjIDpmgzF?=
+ =?us-ascii?Q?wWwBSiwifBcCVgHxm1QQuzPiAwjOWE1Yrd1x3PamHz+7BwKzLPN6aM0byE3t?=
+ =?us-ascii?Q?waiWQ1Wit35H8CpPzmjJ8oViiyEtp1hWb8mrmzwIVVOQ+miZ7N+AYqefoaJU?=
+ =?us-ascii?Q?VKcIk3V/qv6jo8OSgHG026QbwuQCnIpaRFvMUingEot/bVOo6W0wuAtck5MM?=
+ =?us-ascii?Q?rDO0uL83Ha3z4jkKshVh8z+tevx41sYY9pKfNVJJRXYHesedtPr+2Spsde2y?=
+ =?us-ascii?Q?buV7QmOc3d5PxVDnWY+Ff1ZQdh1TU83XLF90nnHDCMfOMi3LhQnNr+6r1Wkb?=
+ =?us-ascii?Q?aS4hZYtfHMdadgBGLfMZT0GfsQTCmxfVnm2YXwufaxkRKS5dhFWcxBtXklDx?=
+ =?us-ascii?Q?ePlbqDlTFXb4Rc6hPXYjGTwqcASnRa8EHhWeIySmfy2Y5zybOr/BZRup6Nnj?=
+ =?us-ascii?Q?L436vfPO0h7baLkOR7nzqf+ao1QU6iH/OOfZ3TAfTN1eXffrlEP7Qj6bF5GW?=
+ =?us-ascii?Q?UxiD6Q+ojMsdLLsJL5wbUzyUmiGnWr7bzQpvxjk9BxAc4pxlOL+MYBhusqDU?=
+ =?us-ascii?Q?bLXktw=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0d8d0534-bf00-4e1a-d0b7-08dda81a3af1
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2025 12:27:57.1458 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uzzv7Lw/qvWIALtipHDNO+EF4FQdhmnlAO+zReVGBrtfy22DW+qFYL0yrtXqp66zNgpYiEnVF2a2d5hMDY6720yyIGdeaqPUtrrxxf9233w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3502
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,73 +159,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pkg_resources is deprecated, use migration guide in [1] to migrate to
-importlib.resources.
-Keep the Python 3.6 backwards compatibility.
-This also fixes the binman version test which failed for setuptools
-versions that print the deprecation warning.
+Background:
 
-[1] https://importlib-resources.readthedocs.io/en/latest/migration.html
+I have several customers that will be using a certain remote signing
+service for signing their images, in order that the private keys are
+never exposed outside that company's secure servers. This is done via
+a pkcs#11 interface that talks to the remote signing server, and all
+of that works quite well.
 
-Signed-off-by: Yannic Moog <y.moog@phytec.de>
+However, the way this particular signing service works is that one
+must upfront create a "signing session", where one indicates which
+keys one will use and, importantly, how many times each key will (may)
+be used. Then, depending on the keys requested and the customer's
+configuration, one or more humans must authorize that signing session
+So for example, if official release keys are to be used, maybe two
+different people from upper management must authorize, while if
+development keys are requested, the developer himself can authorize
+the session.
+
+Once authorized, the requester receives a token that must then be used
+for signing via one of the keys associated to that session.
+
+I have that integrated in Yocto in a way that when a CI starts a BSP
+build, it automatically works out which keys will be needed (e.g. one
+for signing U-Boot, another for signing a kernel FIT image) based on
+bitbake metadata, requests an appropriate signing session, and the
+appropriate people are then notified and can then look at the details
+of that CI pipeline and confirm that it is legitimate.
+
+The problem:
+
+The way mkimage does FIT image signing means that the remote server
+can be asked to perform a signature an unbounded number of times, or
+at least a number of times that cannot be determined upfront. This
+means that currently, I need to artificially say that a kernel key
+will be used, say, 10 times, even when only a single FIT image with
+just one configuration node is created.
+
+Part of the security model is that once the number of signings using a
+given key has been depleted, the authorization token becomes useless
+even if somehow leaked from the CI - and _if_ it is leaked/compromised
+and abused before the CI has gotten around to do its signings, the
+build will then fail with a clear indication of the
+compromise. Clearly, having to specify a "high enough" expected use
+count is counter to that part of the security model, because it will
+inevitably leave some allowed uses behind.
+
+While not perfect, we can give a reasonable estimate of an upper bound
+on the necessary extra size by simply counting the number of hash and
+signature nodes in the FIT image.
+
+As indicated in the comments, one could probably make it even more
+precise, and if there would ever be signatures larger than 512 bytes,
+probably one would have to do that. But this works well enough in
+practice for now, and is in fact an improvement in the normal case:
+Currently, starting with size_inc of 0 is guaranteed to fail, so we
+always enter the loop at least twice, even when not doing any signing
+but merely filling hash values.
+
+Just in case I've missed anything, keep the loop incrementing 1024
+bytes at a time, and also, in case the estimate turns out to be over
+64K, ensure that we do at least one attempt by changing to a do-while
+loop.
+
+With a little debug printf, creating a FIT image with three
+configuration nodes previously resulted in
+
+  Trying size_inc=0
+  Trying size_inc=1024
+  Trying size_inc=2048
+  Trying size_inc=3072
+  Succeeded at size_inc=3072
+
+and dumping info from the signing session (where I've artifically
+asked for 10 uses of the kernel key) shows
+
+      "keyid": "kernel-dev-20250218",
+      "usagecount": 9,
+      "maxusagecount": 10
+
+corresponding to 1+2+3+3 signatures requested (so while the loop count
+is roughly linear in the number of config nodes, the number of
+signings is quadratic).
+
+With this, I instead get
+
+  Trying size_inc=3456
+  Succeeded at size_inc=3456
+
+and the expected
+
+      "keyid": "kernel-dev-20250218",
+      "usagecount": 3,
+      "maxusagecount": 10
+
+thus allowing me to set maxusagecount correctly.
+
+Update a binman test case accordingly: With the previous behaviour,
+mkimage would try size_inc=0 and then size_inc=1024 and then
+succeed. With this patch, we first try, and succeed, with 4*128=512
+due to the four hash nodes (and no signature nodes) in 161_fit.dts, so
+the image ends up 512 bytes smaller.
+
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- tools/binman/control.py | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+v2: Update the binman test case.
 
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index 81f61e3e152a9eab558cfc9667131a38082b61a1..e36238c473c564de2e4e48d08229eab5f5e542fb 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -8,12 +8,11 @@
- from collections import OrderedDict
- import glob
- try:
--    import importlib.resources
-+    import importlib.resources as importlib_resources
- except ImportError:  # pragma: no cover
-     # for Python 3.6
-     import importlib_resources
- import os
--import pkg_resources
- import re
- 
- import sys
-@@ -96,7 +95,7 @@ def _ReadMissingBlobHelp():
-             msg = ''
-         return tag, msg
- 
--    my_data = pkg_resources.resource_string(__name__, 'missing-blob-help')
-+    my_data = importlib_resources.files(__name__).joinpath('missing-blob-help').read_bytes()
-     re_tag = re.compile('^([-a-z0-9]+):$')
-     result = {}
-     tag = None
-@@ -151,8 +150,9 @@ def GetEntryModules(include_testing=True):
-     Returns:
-         Set of paths to entry class filenames
-     """
--    glob_list = pkg_resources.resource_listdir(__name__, 'etype')
--    glob_list = [fname for fname in glob_list if fname.endswith('.py')]
-+    entries = importlib_resources.files(__name__).joinpath('etype')
-+    glob_list = [entry.name for entry in entries.iterdir()
-+                 if entry.name.endswith('.py') and entry.is_file()]
-     return set([os.path.splitext(os.path.basename(item))[0]
-                 for item in glob_list
-                 if include_testing or '_testing' not in item])
-@@ -759,7 +759,7 @@ def Binman(args):
-     global state
- 
-     if args.full_help:
--        with importlib.resources.path('binman', 'README.rst') as readme:
-+        with importlib_resources.path('binman', 'README.rst') as readme:
-             tools.print_full_help(str(readme))
-         return 0
- 
+v1: https://lore.kernel.org/u-boot/20250516125430.1361912-1-ravi@prevas.dk/
 
----
-base-commit: d7c449c3d83a986d61e38d1762433c0607caf5c5
-change-id: 20250610-pkg_resoures-removal-17f922d2e64d
+ tools/binman/ftest.py |  8 ++---
+ tools/fit_image.c     | 80 +++++++++++++++++++++++++++++++++++++------
+ 2 files changed, 74 insertions(+), 14 deletions(-)
 
-Best regards,
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index fa174900014..d5ab4de2152 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -4013,7 +4013,7 @@ class TestFunctional(unittest.TestCase):
+         self.assertEqual({
+             'image-pos': 0,
+             'offset': 0,
+-            'size': 1890,
++            'size': 1378,
+ 
+             'u-boot:image-pos': 0,
+             'u-boot:offset': 0,
+@@ -4021,7 +4021,7 @@ class TestFunctional(unittest.TestCase):
+ 
+             'fit:image-pos': 4,
+             'fit:offset': 4,
+-            'fit:size': 1840,
++            'fit:size': 1328,
+ 
+             'fit/images/kernel:image-pos': 304,
+             'fit/images/kernel:offset': 300,
+@@ -4039,8 +4039,8 @@ class TestFunctional(unittest.TestCase):
+             'fit/images/fdt-1/u-boot-spl-dtb:offset': 0,
+             'fit/images/fdt-1/u-boot-spl-dtb:size': 6,
+ 
+-            'u-boot-nodtb:image-pos': 1844,
+-            'u-boot-nodtb:offset': 1844,
++            'u-boot-nodtb:image-pos': 1332,
++            'u-boot-nodtb:offset': 1332,
+             'u-boot-nodtb:size': 46,
+         }, props)
+ 
+diff --git a/tools/fit_image.c b/tools/fit_image.c
+index caed8d5f901..65c83e0b950 100644
+--- a/tools/fit_image.c
++++ b/tools/fit_image.c
+@@ -24,6 +24,65 @@
+ 
+ static struct legacy_img_hdr header;
+ 
++static int fit_estimate_hash_sig_size(struct image_tool_params *params, const char *fname)
++{
++	bool signing = IMAGE_ENABLE_SIGN && (params->keydir || params->keyfile);
++	struct stat sbuf;
++	void *fdt;
++	int fd;
++	int estimate = 0;
++	int depth, noffset;
++	const char *name;
++
++	fd = mmap_fdt(params->cmdname, fname, 0, &fdt, &sbuf, false, true);
++	if (fd < 0)
++		return -EIO;
++
++	/*
++	 * Walk the FIT image, looking for nodes named hash* and
++	 * signature*. Since the interesting nodes are subnodes of an
++	 * image or configuration node, we are only interested in
++	 * those at depth exactly 3.
++	 *
++	 * The estimate for a hash node is based on a sha512 digest
++	 * being 64 bytes, with another 64 bytes added to account for
++	 * fdt structure overhead (the tags and the name of the
++	 * "value" property).
++	 *
++	 * The estimate for a signature node is based on an rsa4096
++	 * signature being 512 bytes, with another 512 bytes to
++	 * account for fdt overhead and the various other properties
++	 * (hashed-nodes etc.) that will also be filled in.
++	 *
++	 * One could try to be more precise in the estimates by
++	 * looking at the "algo" property and, in the case of
++	 * configuration signatures, the sign-images property. Also,
++	 * when signing an already created FIT image, the hash nodes
++	 * already have properly sized value properties, so one could
++	 * also take pre-existence of "value" properties in hash nodes
++	 * into account. But this rather simple approach should work
++	 * well enough in practice.
++	 */
++	for (depth = 0, noffset = fdt_next_node(fdt, 0, &depth);
++	     noffset >= 0 && depth > 0;
++	     noffset = fdt_next_node(fdt, noffset, &depth)) {
++		if (depth != 3)
++			continue;
++
++		name = fdt_get_name(fdt, noffset, NULL);
++		if (!strncmp(name, FIT_HASH_NODENAME, strlen(FIT_HASH_NODENAME)))
++			estimate += 128;
++
++		if (signing && !strncmp(name, FIT_SIG_NODENAME, strlen(FIT_SIG_NODENAME)))
++			estimate += 1024;
++	}
++
++	munmap(fdt, sbuf.st_size);
++	close(fd);
++
++	return estimate;
++}
++
+ static int fit_add_file_data(struct image_tool_params *params, size_t size_inc,
+ 			     const char *tmpfile)
+ {
+@@ -806,16 +865,16 @@ static int fit_handle_file(struct image_tool_params *params)
+ 	rename(tmpfile, bakfile);
+ 
+ 	/*
+-	 * Set hashes for images in the blob. Unfortunately we may need more
+-	 * space in either FDT, so keep trying until we succeed.
+-	 *
+-	 * Note: this is pretty inefficient for signing, since we must
+-	 * calculate the signature every time. It would be better to calculate
+-	 * all the data and then store it in a separate step. However, this
+-	 * would be considerably more complex to implement. Generally a few
+-	 * steps of this loop is enough to sign with several keys.
++	 * Set hashes for images in the blob and compute
++	 * signatures. We do an attempt at estimating the expected
++	 * extra size, but just in case that is not sufficient, keep
++	 * trying adding 1K, with a reasonable upper bound of 64K
++	 * total, until we succeed.
+ 	 */
+-	for (size_inc = 0; size_inc < 64 * 1024; size_inc += 1024) {
++	size_inc = fit_estimate_hash_sig_size(params, bakfile);
++	if (size_inc < 0)
++		goto err_system;
++	do {
+ 		if (copyfile(bakfile, tmpfile) < 0) {
+ 			printf("Can't copy %s to %s\n", bakfile, tmpfile);
+ 			ret = -EIO;
+@@ -824,7 +883,8 @@ static int fit_handle_file(struct image_tool_params *params)
+ 		ret = fit_add_file_data(params, size_inc, tmpfile);
+ 		if (!ret || ret != -ENOSPC)
+ 			break;
+-	}
++		size_inc += 1024;
++	} while (size_inc < 64 * 1024);
+ 
+ 	if (ret) {
+ 		fprintf(stderr, "%s Can't add hashes to FIT blob: %d\n",
 -- 
-Yannic Moog <y.moog@phytec.de>
+2.49.0
 
