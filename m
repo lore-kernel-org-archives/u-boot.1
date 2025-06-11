@@ -4,61 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA26C61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 12:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A3CDC677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 12:13:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D3C582BA7;
-	Wed, 11 Jun 2025 14:13:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F260B82C03;
+	Wed, 11 Jun 2025 14:13:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o3E9EkLt";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="b84P9/C3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6CBF82BA7; Wed, 11 Jun 2025 14:13:31 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id C490C82C4D; Wed, 11 Jun 2025 14:13:43 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55D0582B63
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 14:13:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 9CDBE82B63
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 14:13:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 82957A51741;
- Wed, 11 Jun 2025 12:13:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C76D2C4CEEE;
- Wed, 11 Jun 2025 12:13:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749644008;
- bh=NGd+DBtUtadwQ/XQalgkDLr8mBbjK8TM94J2WriFOdM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=o3E9EkLtXkBM79CJX0n/lbklA1gRdlxXDlxpbbBkOHQDfGqm77+7q9o4IfDS7Cq0m
- WxbdCi25hq/lLBcOXKNKtjbtp3CUFUp6Jh0kBiMfXc1vzzsptE6wTOQJas2ZyonB1j
- OVc5JaEdU6mphSBQKjBYyskjPfIgkfMEsiq8BaHdaM5gqr4XIAs3wUtas1b4cVwmxF
- DyfT0S8+aII0iZrDCSIRj/Q93T3nIgyHNhqbndr20ubcOGsXNfgWuZ4epnDcZEhlHQ
- NQVU94eTYuGmRBSPYahEnJGEDMwS8VfNXD1b9U9LygH/FI6aWgBkpC4qCGnoBEvyJX
- MHrgdz8D1qFnQ==
-Date: Wed, 11 Jun 2025 17:43:22 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Klaus Goger <klaus.goger@cherry.de>,
- Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heiko Stuebner <heiko.stuebner@cherry.de>
-Subject: Re: [PATCH 2/3] arm64: dts: rockchip: move reset to dedicated
- eth-phy node on ringneck
-Message-ID: <aEly4u3IYXAH5o5s@sumit-X1>
-References: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
- <20250611-ringneck-mdio-v1-2-529a40a0f966@cherry.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250611-ringneck-mdio-v1-2-529a40a0f966@cherry.de>
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 4607a68f-46be-11f0-beb8-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 4607a68f-46be-11f0-beb8-005056992ed3;
+ Wed, 11 Jun 2025 14:19:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=JNNWksvpup28uE6IEBYe6/G88BG61POTrbIKLy2t1es=;
+ b=b84P9/C3o7C41yo8Iu2oUnmd60QW/lsFGFPbKRnZ7PEUTD5SWbU92829ryMrfOz/tGmbsaDMV5e7e
+ x8rBRKVVmwdPJ521E5cEgqQbU+xwhWF0qVgUZYXbmpod5emhBNE/zzo/Lmip0sVcqsPrXNIVF2gNX0
+ gYuM+yOTpsW3lQMfK9nn+UIymLjIUfZ7+gPZ2s9oV7Krua+SivdMaC2PD+cnU3jyxHdFlr5ZitbXZE
+ CtnvJ0Ezz9pAldPpeI8+mXBVrQUkOjgRNCV3OSAnzn5QXY/mT3JTP3suZ75Fr5jtmt/TggbtqGj+qy
+ B+PAdhKCBTMrxNExugGDung346TlbZw==
+X-KPN-MID: 33|P6bSVfnigBSpTrWZzWaQuwVlZSEhEBKQPkFBBH6ylLlvsiBE6Hj7gYfZfjNXuYJ
+ SfDcDJNx54c0D5fkJUqSsJ7lzJgfk+lvo+C+QcgH2xrg=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|2iM83+J6ZN3iwyKwvkRLgvw7v4pYRJxGMzculAYElDNZQk2LlwQnKkgcweSKAz1
+ GSdtGyOQn3Mf3z8xhQW5AbQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 82aaa0ac-46bd-11f0-9a2d-00505699772e;
+ Wed, 11 Jun 2025 14:13:40 +0200 (CEST)
+Date: Wed, 11 Jun 2025 14:13:40 +0200
+Message-Id: <8734c679xn.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: trini@konsulko.com, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, casey.connolly@linaro.org
+In-Reply-To: <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
+ (message from Casey Connolly on Tue, 10 Jun 2025 18:23:33 +0200)
+Subject: Re: [PATCH 1/3] dts/upstream: write fdtfile path to /chosen/fdtfile
+References: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
+ <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,80 +77,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 11, 2025 at 10:59:32AM +0200, Quentin Schulz wrote:
-> From: Heiko Stuebner <heiko.stuebner@cherry.de>
+> From: Casey Connolly <casey.connolly@linaro.org>
+> Date: Tue, 10 Jun 2025 18:23:33 +0200
+
+Hi Casey,
+
+> Since we're using the upstream file structure, we know at build time
+> the path to each DTB that we build. These same paths are used relative
+> to some (maybe version specific) dtb directory on the boot partition
+> or ESP.
 > 
-> Using snps,reset-* properties to handle the ethernet-phy resets is
-> deprecated and instead a real phy node should be used.
+> By recording this path at build time and embedding it into the
+> devicetree, we can set the fdtfile environment variable with 100%
+> certainty that it is correct.
 > 
-> Move the Ringneck phy-reset properties to such a node
+> Devicetree file names are already treated as stable kernel API upstream,
+> since they are used by OS loaders extensively.
+
+But when something similar was suggested some time ago, the Linux
+kernel folks explicitly stated that the file names are ~*not*
+considered to be ABI.
+
+So I think this proposal should be discussed in a broader context,
+probably on the devicetree-spec@vger.kernel.org mailing list.
+
+> Embedding the path into the devicetree itself just simplifies the
+> process and allows U-Boot or the OS loader to select a devicetree of a
+> different version for the specific board that U-Boot is running on.
 > 
-> Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Link: https://lore.kernel.org/r/20250514150745.2437804-3-heiko@sntech.de
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> 
-> [ upstream commit: e463625af7f92c4a9f097f7fb87f6baaad6e762a ]
-> 
-> (cherry picked from commit 76d0d8e00c9ac845ca8d6cbe191cf015ca3a8c16)
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 > ---
->  dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi | 22 +++++++++++++++++++---
->  1 file changed, 19 insertions(+), 3 deletions(-)
-
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-
--Sumit
-
+>  scripts/Makefile.lib | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
 > 
-> diff --git a/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi b/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi
-> index e80412abec081f131271be933ee5805ee237b5af..185d5ba22fd5022a94de7a5a8d10bfe05f40ecf2 100644
-> --- a/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi
-> +++ b/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi
-> @@ -83,9 +83,7 @@
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index e89a4a51b74ddccfd9f0a6463cdeded12eaa5235..1f95bda0597c14d2ee785eb8058d607a6c819a56 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -360,16 +360,31 @@ $(obj)/%.dtbo.S: $(obj)/%.dtbo
+>  ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
+>  DTC_FLAGS += -@
+>  endif
 >  
->  /* On-module TI DP83825I PHY but no connector, enable in carrierboard */
->  &gmac {
-> -	snps,reset-gpio = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>;
-> -	snps,reset-active-low;
-> -	snps,reset-delays-us = <0 50000 50000>;
-> +	phy-handle = <&dp83825>;
->  	phy-supply = <&vcc_3v3>;
->  	clock_in_out = "output";
->  };
-> @@ -348,6 +346,18 @@
->  	status = "okay";
->  };
->  
-> +&mdio {
-> +	dp83825: ethernet-phy@0 {
-> +		compatible = "ethernet-phy-ieee802.3-c22";
-> +		reg = <0x0>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&phy_rst>;
-> +		reset-assert-us = <50000>;
-> +		reset-deassert-us = <50000>;
-> +		reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>;
-> +	};
-> +};
+> +ifeq ($(CONFIG_ARM64),y)
+> +dt_dir := dts/upstream/src/arm64
+> +else
+> +dt_dir := dts/upstream/src/$(ARCH)
+> +endif
 > +
->  &pinctrl {
->  	emmc {
->  		emmc_reset: emmc-reset {
-> @@ -355,6 +365,12 @@
->  		};
->  	};
->  
-> +	ethernet {
-> +		phy_rst: phy-rst {
-> +			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
+> +ifeq ($(CONFIG_OF_UPSTREAM),y)
+> +# Embed the upstream path to the DTB into it as /chosen/fdtfile. This property is used
+> +# at runtime to set the fdtfile variable
+> +dt_extra_snippet = / { chosen { fdtfile = "$(subst $(dt_dir)/,,$@)"; }; };
+> +else
+> +dt_extra_snippet =
+> +endif
 > +
->  	leds {
->  		module_led_pin: module-led-pin {
->  			rockchip,pins = <1 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+>  quiet_cmd_dtc = DTC     $@
+>  # Modified for U-Boot
+>  # Bring in any U-Boot-specific include at the end of the file
+>  # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
+>  cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+>  	(cat $< > $(pre-tmp)); \
+>  	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
+>  	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+> +	[[ -z "$(dt_extra_snippet)" ]] || echo '$(dt_extra_snippet)' >> $(pre-tmp); \
+>  	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+>  	$(DTC) -O dtb -o $@ -b 0 \
+>  		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
+>  		-d $(depfile).dtc.tmp $(dtc-tmp) || \
 > 
 > -- 
 > 2.49.0
+> 
 > 
