@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5766FC677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 11:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FF30C61CE7
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 11:59:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 803BE82B63;
-	Wed, 11 Jun 2025 13:55:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBAED82B63;
+	Wed, 11 Jun 2025 13:58:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cOJKc7y1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kSYmzjlY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E461782B70; Wed, 11 Jun 2025 13:55:37 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id C77D582B70; Wed, 11 Jun 2025 13:58:58 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6D9C82B20
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:55:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D269282B20
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:58:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-450dd065828so45692955e9.2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 04:55:35 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-451d41e1ad1so52917385e9.1
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 04:58:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749642935; x=1750247735; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749643136; x=1750247936; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=gaia0H+yIr+UPcT6ie7U8BdpJlOicDvPjiBfSSsfphQ=;
- b=cOJKc7y1qO1Nh1S55CiqyLI5RXrtqiwgrbhQXLgaIE0XXZSO1tUWzswFvO+goaYeQX
- EoQSuQjhjiE6j+FrfA0315vfIfCmPJLmperXGFXaODHMZIutOsiSGkmmvMxHt/kt1xBM
- Uwo/60dJ5Bj/jtwtTFll2Lb5fmVz2RSDyXOMdkrJwIyorjNCq+jvpgG7xx5rgypqgqtW
- 9xR2LcglyXhvJ3adze/3nFFME61SgV5jf5SBOoQaG/jnaKeKn0YmZpFdAZW7D1bp284s
- ApYR5h0R45dz2s20omzPJJOaKanEI+sMef+3AhzHRGND/457UAY3D7MRKIj8pHyDP43l
- hhLw==
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Vha8vSPIAswvCXbWQpvwb9SE9ImFP5FRFBr4KIYgrC0=;
+ b=kSYmzjlYcuIYMXWGKx9lNqJjApyQRP+6/FiAznyKuHKCLW3LJ1npVlKm90hwXRXSE7
+ UCqkl0uh5zEj88tEkf0gPdOhcMO5QWirgVKnvhqgh3BUHiKz3DTJRVv2NuuusRkh85dl
+ oMHqR2fcPft0C0yXgHHBceTJjqu5STaIQdVm5V/QuA9FZsYf+peE9EH67DzzKHl8sTN0
+ CNbeRRpXa7ihu/ea5rgfXdFHeuAmFZwIiJPFuR30kPbBwyZfXXj8xNAobdmZxTnx27Os
+ ubp2Knr0Uki1+qdmnBgKNK8J2VR4Bmy3VK5Tz0g2CUhPmzbzgNqjw7R856MwiGHupe4l
+ KUIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749642935; x=1750247735;
+ d=1e100.net; s=20230601; t=1749643136; x=1750247936;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gaia0H+yIr+UPcT6ie7U8BdpJlOicDvPjiBfSSsfphQ=;
- b=F3+FYLVXlrbc7W+uKMFj+I3zTeBqZE6sRdT19XNZPjcIBSXUmy/aTceYlkZRdbjesq
- uvYWu9lxfbYw2t71i6Orjr2q3oyqLRqZiBgwkkJzWyn7Ps4vYR6IPkU1idB8ClappyeH
- b6MxAr6QtlgVKVL/zFWBb0B9AVFEuuxkPwEvwmIaI4qPLNZhF8n5A8D7WxU48nREQ5Uk
- sNKWyC35mKLJEqZqkxxWjLCCwhJqnbaw6V+ehgBANQ61FZ4V29WRZU8uXcN2hCXttJWN
- IWHhtOfWKGjMa0MzoxO9M4L+JDcGtA+6bbQ06hr25FJ3vEcH8hqGRhv/LSfrK83VF291
- Blkg==
+ bh=Vha8vSPIAswvCXbWQpvwb9SE9ImFP5FRFBr4KIYgrC0=;
+ b=wmvmJQjWGO/EAwcumuND/BnUdNu++y3zbUZlFnvonESsx/s1gl0iCwCmvtnc6sp5dn
+ xldv06NiPcOytnvEJJ+Z7wOVDjI2kCeMtv2qSLPQdiKMlO6GuKPI3vKZnKO7B3DSSXVt
+ nbIiul9zpjyrcCNBMA7XZyqOjrmF95uJHzyO7sis5msq4KyoPs4IV/lvAbBfFmAzCX3p
+ 9nFDtNj9pQZqifX9/DUbvoCEy4wog3/y65dIUN02rPZO9kncwjNxMqwgaFx02OUQHY53
+ wpWQqfjsmqUrNAn97ucnWa6weXWnKzFZCVXUegFNF7lCOsYJ1OiAAAbx0TeLL/wAn9vv
+ 3KyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJUNHrd9ak//SW4h0wrEJfnnyCxEHMYhlhKSZgLXOLbS6TS/WEDNEqtP+BLzX9MILxzTkHB1s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAQlIB2CRsEij5QoLQcEItAkkTuREevgR4K7JgvDQamJm8hWsK
- DNOyNiAvCiiucjlfnssqwKBxiCYVL0QGE/yj9LIiNecnIrFxxz+LNWXzMDqovzBh2eY=
-X-Gm-Gg: ASbGncsIcD9M5nO6M/l9E5F+5qP3ToZsWvS8uKXLKFWqHfuqr8D6n9+EZMH97HL+OtF
- BKEouRSn22+56pZPMR4ZcuNNtHyZtItxDh1tkwQUJqZLWq+dJbTgfqAY3AIj4jMb4pOxJq7KYwi
- Wh/amdX7MPD/lEUauDpaB9rZMTRte+LBk85b7drB+NQJcTEAXDWgXCinfOaPvK7OBec9ABRC33v
- z3AODhDfyzsPlnI32xdoDqNepFcfEoRnFs8W+47Q9Xlj1MYIETPIpwEFvXkKGKSrmtnqZE/lWWM
- lw/0XqVeP1EM1MY5EpCn3wfSmOegO48fFwIQpe8KWoMVfaSlgXiNs1CytkG5h08Y7pYHxJlJ1w6
- WyBZFT2fSosihPZx1mp5kVAe5o3Fi1hky2RkYrA==
-X-Google-Smtp-Source: AGHT+IGgtdzUZwOcgeHt2nwZcTpp+2LaATenIJH1cE3zgfzNgxosGCuYNmFSGuCyNryEgzkdU9cpVA==
-X-Received: by 2002:a05:600c:6218:b0:43c:fd27:a216 with SMTP id
- 5b1f17b1804b1-45324f1ca81mr19339575e9.23.1749642935124; 
- Wed, 11 Jun 2025 04:55:35 -0700 (PDT)
+ AJvYcCUWdFvuVlmjIwup8CoPYzIZ3gqBJiYzkfGnyAuLB/fgVPUaQx+VU/U9sunCKRcbLrXCwJ3+mf4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKfUlg9pi4foTT5OdfFz/tI0z4ZpXxPfS05UfdkI06SuoXciJi
+ mLDbiVLYaMtKnOXGWraYBddHey5JEAMysTkcRmO+vlrJmD7GUKUuwd20IQKjCXU5Fwg=
+X-Gm-Gg: ASbGnctwu31SJ/qQMZ6mzjSoU+K3t/wMuGeZs8B3nkZcL/rdWoCD7Rd/EipH0Y8oxIu
+ 4sxrDgchNBQZ3Id8Q0wlTKwG2iigaMYIYjEpsXUyDpOHMjqSni46b1SGl6aiHVt6c96+R0nGrvr
+ O6+v2vCy2dLwHrMEIXpElyuVS5OI3yLxC7isT5GtWgzCJK8k3Vx4j3S3BU5rXkwvGODmyY5VZgc
+ W/R4bpm/pkIh9DCqurpn7kaCSHevBPhEB0ItT2k9jC1bU5qBX+zpLmeLLBy2VOKdxa3KIN4i3Os
+ xbpssCVftQnB+X6f0ups2GnoQcOu0PZQ9n6BrzuLW321qhYoSZ7tYZOlTQ4ZpnL7ulTug8dW3Cu
+ 2pgM3RR/rs1ZXCCgE+XpWDnmwCmbYbOwU8q/TOw==
+X-Google-Smtp-Source: AGHT+IG2GxXJIS7ix/XMrla2ByZ8QXdNVtsvFy3eRQr62l58Y7Zgw9Pd8fGIIdoQcmVX+5XcXLyLJA==
+X-Received: by 2002:a05:600c:4e4a:b0:445:1984:2479 with SMTP id
+ 5b1f17b1804b1-453248a0a8emr24929565e9.5.1749643136279; 
+ Wed, 11 Jun 2025 04:58:56 -0700 (PDT)
 Received: from ?IPV6:2a01:170:117e:fc:1a1e:c277:1c68:9459?
  ([2a01:170:117e:fc:1a1e:c277:1c68:9459])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532516b934sm18830175e9.15.2025.06.11.04.55.33
+ 5b1f17b1804b1-45325216534sm18505855e9.30.2025.06.11.04.58.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Jun 2025 04:55:34 -0700 (PDT)
-Message-ID: <fb46de68-c969-433c-8f11-2dbc258afeb0@linaro.org>
-Date: Wed, 11 Jun 2025 13:55:32 +0200
+ Wed, 11 Jun 2025 04:58:55 -0700 (PDT)
+Message-ID: <ada6508c-4148-4afa-879a-7fb1b3ee947e@linaro.org>
+Date: Wed, 11 Jun 2025 13:58:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/3] Implement reset to EDL for qcs9100
-To: Varadarajan Narayanan <quic_varada@quicinc.com>,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
- ilias.apalodimas@linaro.org, clamor95@gmail.com, robert.marko@sartura.hr,
- me@samcday.com, sjg@chromium.org, marek.vasut+renesas@mailbox.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250507070733.2871986-1-quic_varada@quicinc.com>
+Subject: Re: [PATCH 0/3] Update Qualcomm generic boards doc page
+To: Luca Weiss <luca.weiss@fairphone.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250611-qualcomm-doc-update-v1-0-5cf8cd94974d@fairphone.com>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250507070733.2871986-1-quic_varada@quicinc.com>
+In-Reply-To: <20250611-qualcomm-doc-update-v1-0-5cf8cd94974d@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,77 +104,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+Hi Luca,
 
-On 5/7/25 09:07, Varadarajan Narayanan wrote:
-> Using the 'reboot edl' command in Linux, the platform can reboot to the
-> Emergency Download mode. Implement the same for U-Boot.
-> 
-> v3: * Introduce a sysreset op that will pass down the 'reset' command
->        arguments to registered handlers
->      * Handle 'reset to edl' alone in qcom-psci driver
-> 
-> v2: * Rebased to recent sources
->      * Dropped the first patch as it is not applicable anymore
->      * Bind the new driver from psci driver
+On 6/11/25 13:51, Luca Weiss wrote:
+> Modify some text which fixes up incomplete instructions, and add an
+> example for packaging up u-boot for newer SoCs, with boot.img header v2.
 
+Thanks! It's great to have someone new run through the instructions and 
+find all the broken stuff heh.
 
-Sorry for the late reply.
-
-This really needs some associated documentation, at least adding the edl 
-arg to doc/usage/cmd/reset.rst and the help output in cmd/boot.c should 
-describe the edl arg if CONFIG_SYSRESET_QCOM_PSCI is enabled.
-
-it also doesn't build?
-
-../drivers/sysreset/sysreset-uclass.c: In function 'sysreset_walk_arg':
-../drivers/sysreset/sysreset-uclass.c:93:63: error: passing argument 3 
-of 'sysreset_request_arg' from incompatible pointer type 
-[-Wincompatible-pointer-types]
-    93 |                         ret = sysreset_request_arg(dev, argc, 
-argv);
-       |                                                               ^~~~
-       |                                                               |
-       | 
-char * const*
-../drivers/sysreset/sysreset-uclass.c:35:69: note: expected 'const char 
-**' but argument is of type 'char * const*'
-    35 | int sysreset_request_arg(struct udevice *dev, int argc, const 
-char *argv[])
-
-ignoring that for a sec, I'm a bit worried still about how this behaves 
-on boards that don't implement this psci call, on sdm845 for example we 
-just hang.
-
-I think psci_system_reset2() should be adjusted to time out (though I 
-can't imagine a psci implementation that would return execution to el1 
-during the reset, so maybe the timeout isn't even needed?) and return an 
-error if the reset didn't happen.
-
-Then qcom_psci_sysreset_request_arg() should print some useful error 
-message ("reset2 not supported on this platform, reset to edl failed") 
-and bubble up the error code to abort the reset entirely.
-
-Kind regards,
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
 > 
+> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+> ---
+> Luca Weiss (3):
+>        doc: board/qualcomm: Fix commands for compilation missing CROSS_COMPILE
+>        doc: board/qualcomm: Replace buildman build instructions
+>        doc: board/qualcomm: Add example for boot image version 2
 > 
-> Varadarajan Narayanan (3):
->    drivers: sysreset: Add sysreset op that can take arguments
->    sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
->    configs: qcs9100_defconfig: Enable SYSRESET
+>   doc/board/qualcomm/board.rst | 21 +++++++++++++--------
+>   1 file changed, 13 insertions(+), 8 deletions(-)
+> ---
+> base-commit: d7c449c3d83a986d61e38d1762433c0607caf5c5
+> change-id: 20250611-qualcomm-doc-update-42f39f3a600c
 > 
->   configs/qcs9100_defconfig             |  2 ++
->   drivers/firmware/psci.c               |  4 +++
->   drivers/sysreset/Kconfig              |  6 ++++
->   drivers/sysreset/Makefile             |  1 +
->   drivers/sysreset/sysreset-uclass.c    | 32 +++++++++++++++++++++
->   drivers/sysreset/sysreset_qcom-psci.c | 40 +++++++++++++++++++++++++++
->   include/sysreset.h                    | 18 ++++++++++++
->   7 files changed, 103 insertions(+)
->   create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
-> 
-
+> Best regards,
 -- 
 Casey (she/they)
 
