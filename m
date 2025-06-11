@@ -4,43 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E24EC677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 08:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 490BAC61CE7
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 08:59:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BB2D82B63;
+	by phobos.denx.de (Postfix) with ESMTP id E6E7C82C44;
 	Wed, 11 Jun 2025 10:59:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC3D382BAA; Wed, 11 Jun 2025 10:59:45 +0200 (CEST)
-Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::190b])
+ id A2F6882BAA; Wed, 11 Jun 2025 10:59:46 +0200 (CEST)
+Received: from smtp-190d.mail.infomaniak.ch (smtp-190d.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::190d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8275C828A2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:59:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D2CD80050
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:7:10::a6b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bHKNZ70RXzt65;
- Wed, 11 Jun 2025 10:59:42 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bHKNc0qVRzrZ9;
+ Wed, 11 Jun 2025 10:59:44 +0200 (CEST)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4bHKNY4vZGzrBd; Wed, 11 Jun 2025 10:59:41 +0200 (CEST)
+ id 4bHKNb0KDyzrsY; Wed, 11 Jun 2025 10:59:43 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 0/3] rockchip: ringneck-px30: anticipate breakage with
- v6.16-rc1 DT
-Date: Wed, 11 Jun 2025 10:59:30 +0200
-Message-Id: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
+Date: Wed, 11 Jun 2025 10:59:31 +0200
+Subject: [PATCH 1/3] arm64: dts: rockchip: add basic mdio node to px30
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAHJFSWgC/x3MQQqAIBBA0avIrBNGs8CuEi1CJxsiDYUIpLsnL
- d/i/wqFMlOBSVTIdHPhFBtUJ8Dtawwk2TeDRj3gqFBmjiGSO+TpOUnrLPbGIRmP0Jor08bP/5u
- X9/0Ant1kNV8AAAA=
-X-Change-ID: 20250610-ringneck-mdio-9c9034c0e4d0
+Message-Id: <20250611-ringneck-mdio-v1-1-529a40a0f966@cherry.de>
+References: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
+In-Reply-To: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
 To: Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
@@ -66,40 +63,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-v6.16-rc1 will bring an incompatible change to the Device Tree of PX30
-Ringneck which will break Ethernet support.
+From: Heiko Stuebner <heiko.stuebner@cherry.de>
 
-Unfortunately, the designware net driver's logic doesn't seem to allow
-having the old Device Tree (without MDIO bus and Ethernet PHY nodes)
-with DM_MDIO and DM_ETH_PHY enabled so there cannot be a smooth
-transition.
+Using snps,reset-* properties for handling the phy-reset is deprecated
+and instead a real phy node should be defined that then contains the
+reset-gpios handling.
 
-Since this is going to bite me in a few months time, let's just break
-and fix it now in a couple of commits so I don't have to think about it
-later :)
+To facilitate this, add the core mdio node under the px30's gmac, similar
+to how the other Rockchip socs already do this.
 
-This can be cleanly applied on master or next, I have absolutely zero
-preference on the branch this should be merged in (my opinion is that
-it's too late in the 2024.07 cycle to bring this in :) ).
+Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Link: https://lore.kernel.org/r/20250514150745.2437804-2-heiko@sntech.de
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+[ upstream commit: ede4837a504ca7e5811217060aa8300b8d0cf7f2 ]
+
+(cherry picked from commit cb54a264ecdb9e95b1529e4542e157cb9acded30)
 ---
-Heiko Stuebner (2):
-      arm64: dts: rockchip: add basic mdio node to px30
-      arm64: dts: rockchip: move reset to dedicated eth-phy node on ringneck
+ dts/upstream/src/arm64/rockchip/px30.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Quentin Schulz (1):
-      configs: ringneck-px30: fix Ethernet
+diff --git a/dts/upstream/src/arm64/rockchip/px30.dtsi b/dts/upstream/src/arm64/rockchip/px30.dtsi
+index 9137dd76e72cedb0cfbf1995032e5852cab80f96..feabdadfa440f96c0134a0bb05e64a0c7b5adf2e 100644
+--- a/dts/upstream/src/arm64/rockchip/px30.dtsi
++++ b/dts/upstream/src/arm64/rockchip/px30.dtsi
+@@ -985,6 +985,12 @@
+ 		resets = <&cru SRST_GMAC_A>;
+ 		reset-names = "stmmaceth";
+ 		status = "disabled";
++
++		mdio: mdio {
++			compatible = "snps,dwmac-mdio";
++			#address-cells = <1>;
++			#size-cells = <0>;
++		};
+ 	};
+ 
+ 	sdmmc: mmc@ff370000 {
 
- configs/ringneck-px30_defconfig                    |  2 ++
- dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi | 22 +++++++++++++++++++---
- dts/upstream/src/arm64/rockchip/px30.dtsi          |  6 ++++++
- 3 files changed, 27 insertions(+), 3 deletions(-)
----
-base-commit: d7c449c3d83a986d61e38d1762433c0607caf5c5
-change-id: 20250610-ringneck-mdio-9c9034c0e4d0
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.49.0
 
