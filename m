@@ -4,58 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D618C677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 06:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FD7C677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 07:14:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAD2A82B63;
-	Wed, 11 Jun 2025 08:39:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 012DC82B63;
+	Wed, 11 Jun 2025 09:14:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1749623945;
-	bh=hW+YsLOrXHfH5fm8vEuRdHnY3eIpdpYPE9KNgk/NzME=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1749626074;
+	bh=y1j5NpUgQHXv5nbLsagzDBhCNyMdpnmG4n9NeYgZuXg=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=k1rfGoGIjMALESlxU4tp27NENQYeaNZTTKCLI8b4duQc6aX6Vn0z7yKFgLMi5NGRB
-	 sV8G1uoCmyhk9kbgnz/leSqKQFpgzC9ghIT2vqQwDf4GiDQBEF8OKJ2DoNmv9IVRTG
-	 dtfUppFqnLpnlYJE3EsfIopxQ1Np6D30lSJkw18VLWZQ/2BE9AafwEHzu2uhb8uI5j
-	 NzJUNzpDwPEUiL0yl1Tsy0zkEr9S1CAdVSEuXehJ0jm3z8jy9i+sjz/KRigYqE+gCx
-	 gGuQgpNzRuX08NjBYLG9wwZ77erSnt4mLcR3U4tKqvCZTNEkWVOmKu8MllNniPzbns
-	 ol4gB6SAz1mJw==
+	b=NEoxgKRm80NFFgoAq55lJRR8QERWe+LimX9u5nkPjR0MW6RndP2/KrY2xWB6j/S20
+	 W71Qifk6XODx1XAmhfMdCh2mOo3M6Rx6brenF7iYQRq1/9gpbrj4LMscCwmcb38+6C
+	 Ud4gcKLfObCHD+LokrJZA2WJZCaIOD6Djw366PEJnyBocaLMr502bUnHPLEZs10ReL
+	 1J7PfFiy1VGYKc9J53HXdpJoLniOLG4lClPLqSCSCHnH5JkN3W+bESzsq0/PUqmqgY
+	 Q2R7YDq8djV8um4fpyVXGfQ9dS/CknryAidoqgZJbTtqSt+vsbDlgQTStb5ulYq6NK
+	 lv75SrJLOMbew==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E07882B7C; Wed, 11 Jun 2025 08:39:04 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 87D9482B70; Wed, 11 Jun 2025 09:14:33 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1E1C82B20
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 08:39:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F29B82B20
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 09:14:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4bHGGF6Zg8z9scL;
- Wed, 11 Jun 2025 08:39:01 +0200 (CEST)
-Message-ID: <6c01e259-6dd9-4c61-94d6-63320ada2e16@denx.de>
-Date: Wed, 11 Jun 2025 08:38:57 +0200
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="BNJvd78/"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E50D71039729E; 
+ Wed, 11 Jun 2025 09:14:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1749626070; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=y1j5NpUgQHXv5nbLsagzDBhCNyMdpnmG4n9NeYgZuXg=;
+ b=BNJvd78/7+jimwTcxWKUotoJZYU+jmPDbKmm3ogCFZh7pokZgCPzH2cccVzNIHbZJ8uulx
+ vKi7HdSc9lxBx1mTQ099nqACYgvceOxd/X/4OB4jr0gOBeiYyyVdpNeyFkMWljuTeBWA1H
+ xcYrHDS522LC4CbRcC0Nt/XSUD5Of2pVfmfWzEb3L55jVxv91GG13ayO3ufEE34vtx0+FQ
+ c4pwdQGf/umWWcLcJqgYPQ2G3I7xF7tieDDsA8KPfhCppteBWJZm1HFUDlY5FRzlKrV2nS
+ Q9v/BmtktNQdZ+9T/fMrP3Pbd8fttr4mzJZ3Y3vZku97ygoWJpDUh0Kffhr4Ig==
+Date: Wed, 11 Jun 2025 09:14:26 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Ivan Pang <ipman@amazon.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, Casey Connolly
+ <casey.connolly@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Tom Rini
+ <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] dfu: fix dev_part_str for file operations
+Message-ID: <20250611091426.2976d2b3@wsk>
+In-Reply-To: <20250611050127.38011-1-ipman@amazon.com>
+References: <20250611050127.38011-1-ipman@amazon.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 1/2] clk: renesas: Handle CLK_TYPE_GEN4_MDSEL in
- gen3_clk_get_rate64()
-To: smelamud@redhat.com, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de
-References: <20250611-us-renesas-watchdog-v4-0-24f1da3e0dc9@redhat.com>
- <20250611-us-renesas-watchdog-v4-1-24f1da3e0dc9@redhat.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250611-us-renesas-watchdog-v4-1-24f1da3e0dc9@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; boundary="Sig_/Kz46/TVi2X5vs.EQvvsPh.n";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,55 +80,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11.06.25 02:25, Shmuel Leib Melamud via B4 Relay wrote:
-> From: Shmuel Leib Melamud <smelamud@redhat.com>
-> 
-> Add support of CLK_TYPE_GEN4_MDSEL clock type to gen3_clk_get_rate64()
-> function. In particular, this type of clock is used by Renesas R-Car
-> Gen4 watchdog. It operates similarly to CLK_TYPE_GEN3_MDSEL clock.
-> 
-> Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+--Sig_/Kz46/TVi2X5vs.EQvvsPh.n
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Hi Ivan,
 
-Thanks,
-Stefan
-
+> The third_arg for a dfu alt is read as an integer and is overloaded
+> for different supported backends. For ext4 and fat, this third_arg
+> represents the partition and forms the dev part string, which should
+> have its partition in hex. This commit fixes dfu ext4/fat usage for
+> devices with ten or more partitions.
+>=20
+> Signed-off-by: Ivan Pang <ipman@amazon.com>
 > ---
->   drivers/clk/renesas/clk-rcar-gen3.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/clk-rcar-gen3.c
-> index 375cc4a4930873ad0d5509c19ad04a0ea5545aa0..5745acf4023c9114f6fa13b5e4baa306c5b57d33 100644
-> --- a/drivers/clk/renesas/clk-rcar-gen3.c
-> +++ b/drivers/clk/renesas/clk-rcar-gen3.c
-> @@ -68,7 +68,7 @@ static int gen3_clk_get_parent(struct gen3_clk_priv *priv, struct clk *clk,
->   		if (ret)
->   			return ret;
->   
-> -		if (core->type == CLK_TYPE_GEN3_MDSEL) {
-> +		if (core->type == CLK_TYPE_GEN3_MDSEL || core->type == CLK_TYPE_GEN4_MDSEL) {
->   			shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
->   			parent->dev = clk->dev;
->   			parent->id = core->parent >> shift;
-> @@ -318,6 +318,8 @@ static u64 gen3_clk_get_rate64(struct clk *clk)
->   						"FIXED");
->   
->   	case CLK_TYPE_GEN3_MDSEL:
-> +		fallthrough;
-> +	case CLK_TYPE_GEN4_MDSEL:
->   		shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
->   		div = (core->div >> shift) & 0xffff;
->   		rate = gen3_clk_get_rate64(&parent) / div;
-> 
+>=20
+>  drivers/dfu/dfu_mmc.c  | 2 +-
+>  drivers/dfu/dfu_scsi.c | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/dfu/dfu_mmc.c b/drivers/dfu/dfu_mmc.c
+> index c19eb919388..a91671755e1 100644
+> --- a/drivers/dfu/dfu_mmc.c
+> +++ b/drivers/dfu/dfu_mmc.c
+> @@ -117,7 +117,7 @@ static int mmc_file_op(enum dfu_op op, struct
+> dfu_entity *dfu, return -1;
+>  	}
+> =20
+> -	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d",
+> +	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%x",
+>  		 dfu->data.mmc.dev, dfu->data.mmc.part);
+> =20
+>  	ret =3D fs_set_blk_dev("mmc", dev_part_str, fstype);
+> diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
+> index 9f95194784c..7ec34a8f7e3 100644
+> --- a/drivers/dfu/dfu_scsi.c
+> +++ b/drivers/dfu/dfu_scsi.c
+> @@ -96,7 +96,7 @@ static int scsi_file_op(enum dfu_op op, struct
+> dfu_entity *dfu, u64 offset, void return -1;
+>  	}
+> =20
+> -	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d",
+> dfu->data.scsi.dev,
+> +	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%x",
+> dfu->data.scsi.dev, dfu->data.scsi.part);
+> =20
+>  	ret =3D fs_set_blk_dev("scsi", dev_part_str, fstype);
 
-Viele Grüße,
-Stefan Roese
+Reviewed-by: Lukasz Majewski <lukma@denx.de>
 
--- 
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
 DENX Software Engineering GmbH,      Managing Director: Erika Unter
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
+--Sig_/Kz46/TVi2X5vs.EQvvsPh.n
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmhJLNIACgkQAR8vZIA0
+zr0+8Af/Tg+gG+482EkcB731glAhbQkZQAkSOdRFwytUmvTdCOLrhH1dJLa0+0aT
+gaF3ps2FdWchxFgUcfx5xjPQAxP373y3PPnBMsifgqY2MjnsxYZeX6H7iOBXvfvb
+Mn/H2jpeQxYCwBRu3ZKJWqdfcBxqKObTyoK45PIi6vM9HHzkJzKRZRm9pwGHB04x
+MSq5+SfKPkyksr4/Vel7NPlklqv76SXc1TNCihvdirwpxohrz2D5gzaEazCNJo+8
+/NcKkd3CkXShO9desJe70amKsIBgqWP8eHSkWEFJrBoHH4bQetbdk4fGBi2U2pQV
+K7qSws3l916+BNIB8eFn67aGY7YuKg==
+=05l6
+-----END PGP SIGNATURE-----
+
+--Sig_/Kz46/TVi2X5vs.EQvvsPh.n--
