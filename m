@@ -4,50 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958CEC61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 09:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA1CC61CE7
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 09:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2DAA82C49;
-	Wed, 11 Jun 2025 10:59:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 6DB00828A2;
+	Wed, 11 Jun 2025 11:16:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bx/FdS1h";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28B8082B20; Wed, 11 Jun 2025 10:59:52 +0200 (CEST)
-Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::190f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DA5F382B20; Wed, 11 Jun 2025 11:16:20 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BA3482B97
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:59:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FFBB80050
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 11:16:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6b])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bHKNd0HJjzpL4;
- Wed, 11 Jun 2025 10:59:45 +0200 (CEST)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4bHKNc1G4LzdxS; Wed, 11 Jun 2025 10:59:44 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 11 Jun 2025 10:59:32 +0200
-Subject: [PATCH 2/3] arm64: dts: rockchip: move reset to dedicated eth-phy
- node on ringneck
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55B9DFKx013448
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 09:16:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=AGX650IkolazgrI4yCnDOK578v598F0A4OT
+ IQHaJEPU=; b=bx/FdS1htAenQUPMm4k3YBh+Fp0GZaxU7KVwTZLj4C4VVg6qC7b
+ IYvxXZW6DT0FFU/NJJipYnrtcyM6Oz/AMP2dULUpX/q7SJb+hUerhumWSs6qErKn
+ WFjTkZTwYpBM/Zds1Tr75CQ8praMwoVQc+Px5JqgTiFqIIHZDmo1yz8fFQuPhQtm
+ 2RiehDQTutfD5UMTJxZIu7CreXbJTCBENAng2Yqh206BknulMoGa5eFtM3DAGH57
+ VnjW9LqQv3qdsiawTJbqFjbbPt7RFZK29Fbhv+VixUjrIgYlJzmHymGlUJ/YfD7f
+ B3D7z8BFvRiClrCcxOeWLWwbmZkUZhQdbVg==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 476fmnc0q1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 09:16:15 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2358ddcb1e3so97368135ad.3
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 02:16:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749633374; x=1750238174;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=AGX650IkolazgrI4yCnDOK578v598F0A4OTIQHaJEPU=;
+ b=Vg7rW3Bk6ZgwVe9E/hI0/Byh3tU/HYRaUx3amzYPv78IKUtEKTbaOibMwfKUb5nYoh
+ J2KHJkzHfO7H5XTTuVZH+RG7SEmXkJw7dmkHyVcP/jkvcZGiudLSBCKsjVXmTJhInAIg
+ uBYscIitKonjDBThCADmZc461U7NT6eVMPiN/EXWNX+cboNp6LoZRhDwc/v6VzBMtUzZ
+ 6riGIjsgUST+pdotk58Va9N+We1BBs2wiEeogPgP7HCBjxA/XGjpR3VOjTn3UnupOIbK
+ lRT8fVnyvsshWS37rI486FwbvI+1G5RXD/4ZJiMEgZjrrKqBm6DZZSpYJuAk2efHNrvI
+ LTfA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMq6w52734s67Ku8TtK/1/5VaHDajc0zIx+fowcUWrDwra+iDNiQgO4g3yQXrJ+vVMgcbF2go=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy8ILXYVli3V5Xd+N6hsq8C00vhkM+UOXVg5yiiNxn8JNJ8ZVTk
+ YFf3FnCAzXICTxPQmnpJe8BRHjOfB0itEk4Ef0SpCiJxXsY2WuGKse2fW3dXtS+OPdRIg26NOWN
+ +fca/r/a8VAEMChIsg/1jERgW5mbTqh/LxtNxCkllFVx3dN0ckCy0h8k+
+X-Gm-Gg: ASbGncs/zHGNvrNkMOIUbgMk8MJiUCl0/gEPTSeWZvDhtR7i/H5K/2DozDUMs/ItojI
+ BrmPdsUmqpqmSUieQPAIpdR45A30gok1WRwjJL6p3K/+dQ29ucnCDHhWjF9xow4st8h6kRIYoSY
+ BbWbPh+x7jYRWNfkEJ9skusHq7IgcjGPoJm1Hjq/E7AsZfGcBD7QYt+QZMMeCFgxyBE2xjzsh+7
+ JRpCpXZDaaddQH7CbDcrLbW1+C5WD6AQ6K5fsdd/HJj04QPiqPSvdZCEiGuNP2CdrLfrC3EOmsg
+ LCoLYBsAEGha5YRBK+DDEeA3f0E2AcjGZxG8Ip5sxQcvMEQHuoHpMfo65tGWYR2gARUIFeTRh0S
+ mOQEsP7vfA7NSJFLt8uMDH35+JMEqwjR/FIULjrMq2w==
+X-Received: by 2002:a17:902:da86:b0:235:cbcb:48b7 with SMTP id
+ d9443c01a7336-236426a012fmr31223645ad.34.1749633374448; 
+ Wed, 11 Jun 2025 02:16:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFDCezctEmj8wV45BqkuMcsv+XTiWpUs7Px7pgshFYd8H7cEUpRKFsTz/YVSfUgMzimXHOCUw==
+X-Received: by 2002:a17:902:da86:b0:235:cbcb:48b7 with SMTP id
+ d9443c01a7336-236426a012fmr31223195ad.34.1749633373882; 
+ Wed, 11 Jun 2025 02:16:13 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23603077f21sm83408595ad.48.2025.06.11.02.16.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Jun 2025 02:16:13 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, quic_varada@quicinc.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v2] board: qualcomm: Add MAINTAINERS entries for Dragonwing
+ platforms
+Date: Wed, 11 Jun 2025 14:46:07 +0530
+Message-Id: <20250611091607.3512332-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250611-ringneck-mdio-v1-2-529a40a0f966@cherry.de>
-References: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
-In-Reply-To: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
-To: Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Klaus Goger <klaus.goger@cherry.de>
-Cc: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: u07vMfTnMKrXTW3i9uLtMxAXSGDGtIW7
+X-Proofpoint-GUID: u07vMfTnMKrXTW3i9uLtMxAXSGDGtIW7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjExMDA3OSBTYWx0ZWRfXwAy6Zp/fS1bW
+ rKyw3z07XEqFn5qpmA8ROlFyMldOjPAeDKSLjmWwbq5z5xccE90IrksbNTAaIrPr9ALu0S0ByF3
+ I74X3lWTjz9RpzMHXDe5md1gayFZZUIKjQWzM0xZj69Dgkjbl0LpETT6A4YbCcjnV9xSFPW+DcG
+ 86cxPR5WNLYA1J7AberSu2ZHZssE31LSXaQufv9krXp6rtcKnVXMrxQtmWV0qSNQ/0msX9Fg9mZ
+ Y3enGsvclDjucrfgHDTG8d85inkXag6KyN8iZKf1G26dO//yBygKxTFZc1NHCHcSUzfe4oX8i9d
+ fuozqjfgZk85t119V2TjJCSeg8/CoMGNe21QaWDOqSBa/Zr9atb6N8J6C/8v5IosA3Y9yn5XbQ7
+ DucX+pY7L9TPEtA2nbVMmwrkumwDHfxpVZiYsrvbadZuT1uCTJiTRlZyfKYmpOzlgu4u6SO3
+X-Authority-Analysis: v=2.4 cv=K8wiHzWI c=1 sm=1 tr=0 ts=6849495f cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=6IFa9wvqVegA:10 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8
+ a=COk6AnOGAAAA:8 a=8PpNXUQT7V2mpWS3gWkA:9 a=uG9DUKGECoFWVXl0Dc02:22
+ a=cvBusfyB2V15izCimMoJ:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-11_03,2025-06-10_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 mlxscore=0 mlxlogscore=790 phishscore=0 lowpriorityscore=0
+ malwarescore=0 adultscore=0 bulkscore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 suspectscore=0 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505280000 definitions=main-2506110079
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,74 +132,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Heiko Stuebner <heiko.stuebner@cherry.de>
+Added MAINTAINERS entries for the Qualcomm Dragonwing platforms, following
+the discussion in the referenced thread.
+https://lore.kernel.org/u-boot/20250603192206.GK1382132@bill-the-cat/
 
-Using snps,reset-* properties to handle the ethernet-phy resets is
-deprecated and instead a real phy node should be used.
-
-Move the Ringneck phy-reset properties to such a node
-
-Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
-Link: https://lore.kernel.org/r/20250514150745.2437804-3-heiko@sntech.de
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: e463625af7f92c4a9f097f7fb87f6baaad6e762a ]
-
-(cherry picked from commit 76d0d8e00c9ac845ca8d6cbe191cf015ca3a8c16)
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+Acked-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi | 22 +++++++++++++++++++---
- 1 file changed, 19 insertions(+), 3 deletions(-)
+Changes in v2:
+- Fixed no newline patch warning
+- Link to v1: https://lore.kernel.org/u-boot/20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com/
+---
+ board/qualcomm/MAINTAINERS | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 board/qualcomm/MAINTAINERS
 
-diff --git a/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi b/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi
-index e80412abec081f131271be933ee5805ee237b5af..185d5ba22fd5022a94de7a5a8d10bfe05f40ecf2 100644
---- a/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi
-@@ -83,9 +83,7 @@
- 
- /* On-module TI DP83825I PHY but no connector, enable in carrierboard */
- &gmac {
--	snps,reset-gpio = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>;
--	snps,reset-active-low;
--	snps,reset-delays-us = <0 50000 50000>;
-+	phy-handle = <&dp83825>;
- 	phy-supply = <&vcc_3v3>;
- 	clock_in_out = "output";
- };
-@@ -348,6 +346,18 @@
- 	status = "okay";
- };
- 
-+&mdio {
-+	dp83825: ethernet-phy@0 {
-+		compatible = "ethernet-phy-ieee802.3-c22";
-+		reg = <0x0>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&phy_rst>;
-+		reset-assert-us = <50000>;
-+		reset-deassert-us = <50000>;
-+		reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>;
-+	};
-+};
+diff --git a/board/qualcomm/MAINTAINERS b/board/qualcomm/MAINTAINERS
+new file mode 100644
+index 00000000000..16b9aac5559
+--- /dev/null
++++ b/board/qualcomm/MAINTAINERS
+@@ -0,0 +1,14 @@
++QUALCOMM DRAGONWING QCS614
++M:	Aswin Murugan <aswin.murugan@oss.qualcomm.com>
++S:	Maintained
++N:	qcs615
 +
- &pinctrl {
- 	emmc {
- 		emmc_reset: emmc-reset {
-@@ -355,6 +365,12 @@
- 		};
- 	};
- 
-+	ethernet {
-+		phy_rst: phy-rst {
-+			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
++QUALCOMM DRAGONWING QCS8300
++M:	Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
++S:	Maintained
++N:	qcs8300
 +
- 	leds {
- 		module_led_pin: module-led-pin {
- 			rockchip,pins = <1 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-
++QUALCOMM DRAGONWING QCS9100
++M:	Varadarajan Narayanan <quic_varada@quicinc.com>
++S:	Maintained
++N:	qcs9100
 -- 
-2.49.0
+2.34.1
 
