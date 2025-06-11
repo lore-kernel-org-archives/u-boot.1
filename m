@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72FCDC678DC
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 14:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5881C677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 14:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC22082B20;
-	Wed, 11 Jun 2025 16:24:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FE1582B20;
+	Wed, 11 Jun 2025 16:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WKQJbymk";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 978BB82B7C; Wed, 11 Jun 2025 16:24:08 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id D90FF82B70; Wed, 11 Jun 2025 16:31:10 +0200 (CEST)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CA2082B0F
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 16:24:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7BB882B0F
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 16:31:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-4a3db0666f2so149712081cf.1
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 07:24:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749651845; x=1750256645; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Tz+gXm3HfyEOxhYW9NbZ4ugd+L9plDKVx59FEiBnuKs=;
- b=WKQJbymkJx5FNo8wdfrJGVykvKuWqLlRV28QyntD/I8yCOkG1Fjnz1xk97oTocFFyg
- oGXl+7/WREmDYkDOAl61IZEDFmUBt0t6X0SmlueoW9itmljWRjbFLHprCPhGhMMAZ7TE
- 7P6EF59gbIQ72FGLvEIfZ4mtvWra4bnEyFD94=
+ spf=pass smtp.mailfrom=wens213@gmail.com
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-5532a30ac41so6861615e87.0
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 07:31:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749651845; x=1750256645;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Tz+gXm3HfyEOxhYW9NbZ4ugd+L9plDKVx59FEiBnuKs=;
- b=QHCFFws+x+lSG90pIaRiyYy+xhkv9P+gM0qkPZVwm4Dwrp2X032UU+8g2dO8YkJ8hR
- 2m4EkiqUAijGKBJFeguddb5+8QemOxaRtMV5AnaLc/21Ccnw8YxgOdciaWTaH2uDXaDX
- LKDVcF1iOEziXcIaiK1s1KddfV+OPVpYJAqW8WINhNW60tkoHv8VjcsLTWXWcjztAwG/
- 8fm/RbDZUeNNEsSAdN7DWcyZua6Rx9uN0PUesTeSEV5Jm7Hkbwm4T7i0cSopk6xyByFe
- bvAKA4EVkCZULAbWrgYALSuZWv50Doo1Zob9mYxfDkdAJ+KT/ohZuDdoFELnczH+rQti
- hNTw==
-X-Gm-Message-State: AOJu0YxXyApUNVqAO3xfXeIzGAlRxEF8Pyp30PjavJtveDLM/Rs6qwXh
- LsOswpTGELfQuP4CZq0Fnbg1IV8qiKZOa15u0yX7cV5XXpbRoydtqi26yJCC8IyJZxiK/CWcdlI
- Vv3OIf9I=
-X-Gm-Gg: ASbGncu+6oozyYyCGoyHaV7wovi/ox+Y6Bpf00Zwx5ettIW2BMNBaI1QqHHWF6+67EC
- CRaeWeS7mKmqh5BV0aZo1j+cu+A17MqIssTa0BJmxg8Pe1iqwmXuCmOXevweLc16kgE9b3GxdLv
- 157Tg/TAMsw1+g2HNFEc8aHSwWBLy4wRiJXfwwK5zIJkzGpX8IoOQc1u7GTQp1ElJvSg6SO25XB
- e0CSJOoes1sLsbLccpmjY5QyZIr/u1KqEHOZk4VyXIo2yV/ELJv1VJCH+P9KKBDPrBkXCzS+qO2
- /doAXniKaUIOZYmNsisNlbSLpioP8IN/drjBrlURBG3Qb/EiJVZkA1MWShfszefOsL03cOCgkMT
- o6ksP5RJDseWFwqPJt2Ti5vm/nw==
-X-Google-Smtp-Source: AGHT+IGOt1Xx4zJ8sHD7PmWMzOGn5uS22V1Cs6STHokFVhsyPbFB97OtzuWSk7+H1oB3EucynhsdHg==
-X-Received: by 2002:a05:6808:3096:b0:409:f8e:72a7 with SMTP id
- 5614622812f47-40a5e196c3fmr1560990b6e.33.1749651833862; 
- Wed, 11 Jun 2025 07:23:53 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a5d95e797sm339823b6e.40.2025.06.11.07.23.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jun 2025 07:23:53 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heiko Thiery <heiko.thiery@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH] mmc: Kconfig: Really correct dependencies SDHCI ADMA options
-Date: Wed, 11 Jun 2025 08:23:52 -0600
-Message-ID: <20250611142352.3990076-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1749652266; x=1750257066;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :reply-to:in-reply-to:references:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Ptd1zsENhoFep/V8Vt8D9b29n7Cx04RXB1UAfv5C+uQ=;
+ b=Uu+IHMy50TDOMDyVhQ794Yskdi6JfT5odf36clIVGRMo7U8GtyLx5h1hZOdNMijigI
+ jq/LGFi4newblCPwN59GW6LhrPYJJUL6e2Kq40n5vM9i1EXFzNn+DIKj0t2T3gjzQhuP
+ Rk9j1rYunDCZBcKruhDFo1qj/NCYMLSPdAYhblW/+N0gO5gBjMjrtch/H+Zjc6wdFVxs
+ yieE8vWzrvCwAi4lYKLtzL5WdcNRDPSDYXnPB8VuZrTp3H1Dmy62AmQ7OOfnRSjNApUT
+ PcQcwl+ZdbvTDI32uH8xGcZvf/FPxX2GM46Ai8+iXaqbvg+PsZHhKhfx67C8Ssez+QkS
+ dtPw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+wEid0Kcf/RX/KTA/an0gmJncQrQW+x0Xe4jKVMQnJ2zj8EAgLzHccjpNabZWwvw10mSuuLE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxs8IZJULZDpn+arGiE1fN95Vtc9mlFkcZlEQoTPfGZtKjoXbnZ
+ gNpPPSDaiFV47//k8rVygFfPts49JsQxeoHhvrDnwWyTLJaqWnaHxIwxifFsgK34
+X-Gm-Gg: ASbGncuzwldP4hAgCPsZ37jLat5Vhbtg1fUkOjduqnNm9x0BNy7EMN3G7XmfGmY/3FZ
+ 0IBWhB+XksDNlMgYTl2wNUOp92khkmybGBKULbrOHU6d3CvNl1KOGtJba/j1yq4F/epFwm7VwDV
+ 6+jwOTKXhLSUiDg00BvnLJBWemZaNVmC5S0/agVHUmgpNUcgIg1WfV0KFNpGQXLSY7uIHtwI/7a
+ /nm5LIobaLexkIqZQLtaj/xwp3OW5odrL/Y+4kRpbHJtTM2Ls9ZR4FqWKOIWqSb1mbZmc0cmXVP
+ DA9G322JY113dDRgqsOBjDz+o1sHM7j7zEi+lW2Ns/lUlqQwxX7gTUT30SVtbUzacAGtY7PlcA9
+ Tx4fhGnw9Sv3bZ+w=
+X-Google-Smtp-Source: AGHT+IFkCAw6JXDiUFo/XX5bVU6hAcBlPEZI1trJ/ZF0oe6+D7Kt+y8Qi9fsRn1Hv1fGcZ5i3bJITA==
+X-Received: by 2002:a05:6512:b1f:b0:553:2421:f5ee with SMTP id
+ 2adb3069b0e04-5539c227676mr1091836e87.29.1749652266146; 
+ Wed, 11 Jun 2025 07:31:06 -0700 (PDT)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com.
+ [209.85.167.54]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-55367733156sm1962423e87.243.2025.06.11.07.31.06
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Jun 2025 07:31:06 -0700 (PDT)
+Received: by mail-lf1-f54.google.com with SMTP id
+ 2adb3069b0e04-5532a30ac41so6861535e87.0
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 07:31:06 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaCy+EMvTzA4uc0IzpjdAN/NRyQqD10L0FYkWBXQTflON/bK5q65Qx8wHNou2ZJn+wxZdKoSs=@lists.denx.de
+X-Received: by 2002:a05:651c:4ca:b0:32a:6c09:2d7a with SMTP id
+ 38308e7fff4ca-32b21dddaa0mr11752111fa.30.1749652265835; Wed, 11 Jun 2025
+ 07:31:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250610190820.1462097-1-christianshewitt@gmail.com>
+In-Reply-To: <20250610190820.1462097-1-christianshewitt@gmail.com>
+From: Chen-Yu Tsai <wens@csie.org>
+Date: Wed, 11 Jun 2025 22:30:52 +0800
+X-Gmail-Original-Message-ID: <CAGb2v64-=p8LCBXT+4axfFWQ+s-5M2HjzMMHYgQNN64CNFqzug@mail.gmail.com>
+X-Gm-Features: AX0GCFtm17odO48T8kJAswQd1BkXOZb0SaShi5T30hrtEXSR-Tt1TIgIjc95BAQ
+Message-ID: <CAGb2v64-=p8LCBXT+4axfFWQ+s-5M2HjzMMHYgQNN64CNFqzug@mail.gmail.com>
+Subject: Re: [PATCH 0/2] arm64: dts: rockchip: roc-3328-cc use 1600 ddr4
+To: Christian Hewitt <christianshewitt@gmail.com>
+Cc: Loic Devulder <ldevulder@suse.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>, Da Xue <da@libre.computer>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 11 Jun 2025 16:58:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,53 +95,29 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When doing the investigation for commit 53bb8fdea12a ("mmc: Kconfig:
-Correct dependencies SDHCI ADMA options") I missed the implications of
-MMC_SDHCI_ADMA_HELPERS. The problem is that FSL_ESDHC via the
-FSL_ESDHC_SUPPORT_ADMA2 option will also enable these helper functions.
-This in turn means the correct dependency here is
-MMC_SDHCI_ADMA_HELPERS and not *MMC_SDHCI_ADMA.
+On Wed, Jun 11, 2025 at 3:08=E2=80=AFAM Christian Hewitt
+<christianshewitt@gmail.com> wrote:
+>
+> From: Christian Hewitt <christianshewitt@gmail.com>
+>
+> This series adds the DDR4 1600 sdram timings for RK3328
+> and then configures the ROC-3328-CC board to use them
+> to give a healthy performance boost.
+>
+> The patches from LibreComputer sources have been tested
+> with v1.0 and v1.3 boards [0] with positive results.
+>
+> [0] https://github.com/LibreELEC/LibreELEC.tv/pull/9590#issuecomment-2571=
+670366
+>
+> Da Xue (2):
+>   ram: rk3328: add ddr4-1600 sdram timing
+>   arm64: dts: rockchip: roc-3328-cc: use 1600 ddr4 timing
 
-Reported-by: Heiko Thiery <heiko.thiery@gmail.com>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-This is a regression vs v2025.04 and so I want to get this in for this
-release. Should I apply it directly or will there be an MMC PR for it?
-Thanks!
-
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
----
- drivers/mmc/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 38867f30a7eb..1c9b6898bff4 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -528,7 +528,7 @@ config SPL_MMC_SDHCI_ADMA
- 
- config MMC_SDHCI_ADMA_FORCE_32BIT
- 	bool "Force 32 bit mode for ADMA on 64 bit platforms"
--	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
-+	depends on MMC_SDHCI_ADMA_HELPERS
- 	help
- 	  This forces SDHCI ADMA to be built for 32 bit descriptors, even
- 	  on a 64 bit platform where they would otherwise be assumed to
-@@ -538,7 +538,7 @@ config MMC_SDHCI_ADMA_FORCE_32BIT
- 
- config MMC_SDHCI_ADMA_64BIT
- 	bool "Use SHDCI ADMA with 64 bit descriptors"
--	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
-+	depends on MMC_SDHCI_ADMA_HELPERS
- 	depends on !MMC_SDHCI_ADMA_FORCE_32BIT
- 	default y if DMA_ADDR_T_64BIT
- 	help
--- 
-2.43.0
-
+Tested-by: Chen-Yu Tsai <wens@csie.org> # boot to shell; no stressing
