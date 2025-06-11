@@ -4,39 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5C4C677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 06:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D618C677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 06:39:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF5D982B20;
-	Wed, 11 Jun 2025 08:35:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id AAD2A82B63;
+	Wed, 11 Jun 2025 08:39:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1749623945;
+	bh=hW+YsLOrXHfH5fm8vEuRdHnY3eIpdpYPE9KNgk/NzME=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=k1rfGoGIjMALESlxU4tp27NENQYeaNZTTKCLI8b4duQc6aX6Vn0z7yKFgLMi5NGRB
+	 sV8G1uoCmyhk9kbgnz/leSqKQFpgzC9ghIT2vqQwDf4GiDQBEF8OKJ2DoNmv9IVRTG
+	 dtfUppFqnLpnlYJE3EsfIopxQ1Np6D30lSJkw18VLWZQ/2BE9AafwEHzu2uhb8uI5j
+	 NzJUNzpDwPEUiL0yl1Tsy0zkEr9S1CAdVSEuXehJ0jm3z8jy9i+sjz/KRigYqE+gCx
+	 gGuQgpNzRuX08NjBYLG9wwZ77erSnt4mLcR3U4tKqvCZTNEkWVOmKu8MllNniPzbns
+	 ol4gB6SAz1mJw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7619082B63; Wed, 11 Jun 2025 08:35:02 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 8E07882B7C; Wed, 11 Jun 2025 08:39:04 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 742A282A4B
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 08:35:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1E1C82B20
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 08:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [143.105.117.26])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 78417B4C47D8
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 08:34:59 +0200 (CEST)
-Message-ID: <1f35b183-1082-47f8-a955-d7cc33e4715a@freeshell.de>
-Date: Tue, 10 Jun 2025 23:34:57 -0700
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4bHGGF6Zg8z9scL;
+ Wed, 11 Jun 2025 08:39:01 +0200 (CEST)
+Message-ID: <6c01e259-6dd9-4c61-94d6-63320ada2e16@denx.de>
+Date: Wed, 11 Jun 2025 08:38:57 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] Set fdtfile variable from DT
-To: u-boot@lists.denx.de
-References: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
+Subject: Re: [PATCH v4 1/2] clk: renesas: Handle CLK_TYPE_GEN4_MDSEL in
+ gen3_clk_get_rate64()
+To: smelamud@redhat.com, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de
+References: <20250611-us-renesas-watchdog-v4-0-24f1da3e0dc9@redhat.com>
+ <20250611-us-renesas-watchdog-v4-1-24f1da3e0dc9@redhat.com>
 Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250611-us-renesas-watchdog-v4-1-24f1da3e0dc9@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,93 +72,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+On 11.06.25 02:25, Shmuel Leib Melamud via B4 Relay wrote:
+> From: Shmuel Leib Melamud <smelamud@redhat.com>
+> 
+> Add support of CLK_TYPE_GEN4_MDSEL clock type to gen3_clk_get_rate64()
+> function. In particular, this type of clock is used by Renesas R-Car
+> Gen4 watchdog. It operates similarly to CLK_TYPE_GEN3_MDSEL clock.
+> 
+> Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-On 6/10/25 09:23, Casey Connolly wrote:
-> This series introduces a new devicetree property in /chosen named
-> "fdtfile". This string array contains the upstream relative path to the
-> devicetree (e.g. "qcom/qcs4690-rb3gen2.dtb") and may in the future also
-> list the overlays in use. It is set at build time for OF_UPSTREAM builds
-> where we know the correct path.
-> 
-> Then we read out this property at runtime and set the fdtfile variable
-> in U-Boots environment.
-> 
-> This provides a fully consistent way to set fdtfile so that U-Boot or
-> another OS Loader could find the correct devicetree file associated with
-> the kernel version being run, since it isn't always preferable to pass
-> to the devicetree from U-Boot.
-> 
-> Currently, U-Boot searches some subdirectories in the ESP for the
-> fdtfile when booting with EFI, and uses it when booting with extlinux.
-> However today with EFI booting it is impossible to find the DTB when
-> there are multiple kernel versions available, for this we need to
-> integrate with the OS loader.
-> 
-> In the future, the fdtfile variable should be exported as an EFI
-> variable which can be appended to a devicetree-directory property in the
-> OS loader configuration to find the correct devicetree for the kernel
-> version being booted.
-> 
-> This will allow users to safely roll back their kernel and devicetree
-> together if there is a bug in a new kernel release.
-> 
-> Ideally devicetree would be stable for all platforms and none of this
-> would be necessary, but this is unfortunately not yet the case. This
-> series attempts to make the best of this bad situation by providing the
-> safest possible user experience.
-> 
-> Feedback is welcome on how to implement the EFI variable part of this,
-> as I'm not sure where it belongs. I didn't want to hold the rest of the
-> series back since I'm sure it will be useful elsewhere.
-> 
+Reviewed-by: Stefan Roese <sr@denx.de>
+
+Thanks,
+Stefan
+
 > ---
-> Casey Connolly (3):
->       dts/upstream: write fdtfile path to /chosen/fdtfile
->       env: set fdtfile environment variable from /chosen/fdtfile
->       mach-snapdragon: skip setting fdtfile if already set
+>   drivers/clk/renesas/clk-rcar-gen3.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
->  arch/arm/mach-snapdragon/board.c |  5 +++++
->  common/board_r.c                 | 35 +++++++++++++++++++++++++++++++++++
->  scripts/Makefile.lib             | 15 +++++++++++++++
->  3 files changed, 55 insertions(+)
-> ---
-> base-commit: 87e02cbb78a2897d43db0f732e926b73d9c0823e
-> change-id: 20250610-b4-fdtfile-from-dt-0bd7930ad62c
+> diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/clk-rcar-gen3.c
+> index 375cc4a4930873ad0d5509c19ad04a0ea5545aa0..5745acf4023c9114f6fa13b5e4baa306c5b57d33 100644
+> --- a/drivers/clk/renesas/clk-rcar-gen3.c
+> +++ b/drivers/clk/renesas/clk-rcar-gen3.c
+> @@ -68,7 +68,7 @@ static int gen3_clk_get_parent(struct gen3_clk_priv *priv, struct clk *clk,
+>   		if (ret)
+>   			return ret;
+>   
+> -		if (core->type == CLK_TYPE_GEN3_MDSEL) {
+> +		if (core->type == CLK_TYPE_GEN3_MDSEL || core->type == CLK_TYPE_GEN4_MDSEL) {
+>   			shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
+>   			parent->dev = clk->dev;
+>   			parent->id = core->parent >> shift;
+> @@ -318,6 +318,8 @@ static u64 gen3_clk_get_rate64(struct clk *clk)
+>   						"FIXED");
+>   
+>   	case CLK_TYPE_GEN3_MDSEL:
+> +		fallthrough;
+> +	case CLK_TYPE_GEN4_MDSEL:
+>   		shift = priv->cpg_mode & BIT(core->offset) ? 0 : 16;
+>   		div = (core->div >> shift) & 0xffff;
+>   		rate = gen3_clk_get_rate64(&parent) / div;
 > 
-> Casey Connolly <casey.connolly@linaro.org>
-> 
 
-Please also adapt for this series the starfive_visionfive2 board target
-(board/starfive/visionfive2/spl.c:board_fit_config_name) which I think
-may help you further develop this idea, and I am more familiar with to
-test and comment about.
+Viele Grüße,
+Stefan Roese
 
-I.E. there is a section of logic in
-board/starfive/visionfive2/starfive_visionfive2.c that I consider
-redundant and troublesome for setting fdtfile env variable. Later in
-main U-Boot or the eventual OS there is no fact of what the dtb search
-path was (one of the CONFIG_OF_LIST items) as when it was determined
-during SPL phase what board model variant is detected. I strongly
-dislike that we even make it a possibility to overwrite this information
-at runtime as-is today. Commands and workflows requiring the dtb search
-path string should drop the use of fdtfile U-Boot env variable and
-instead reference some API call directly and relieve us from the need to
-mess with fdtfile env variable at all.
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
-As for whether there can be some user script to load a dtb, I think we
-are all reaching for a command to load devicetree and that already
-exists in U-Boot so what are we even doing? It is impossible to access
-filesystem in some circumstance and this approach of passing a dtb as
-filesystem search path string is chasing a problem we have invented.
-Perhaps it should be as an alternate memory address or as the concept of
-"overlay without inheriting any parent".
-
-Thanks for taking on the effort to make an improvement, anyway if the
-effect of this series is better or worse or about the same I'm not so
-sure either way because of the wider dislike I mention for what we're
-already doing. I would like to see this approach applied to the many
-JH7110 CPU boards ('starfive_visionfive2' board target) which has (I
-think) the right amount of complexity.
-
--E
