@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4822C71136
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 20:26:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3D6C71136
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 20:27:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D61D082CD5;
-	Wed, 11 Jun 2025 22:25:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21B2882CBB;
+	Wed, 11 Jun 2025 22:25:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KEG+PnAA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bKgWKNS9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9BCB82CF5; Wed, 11 Jun 2025 22:25:21 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id E7B8582D21; Wed, 11 Jun 2025 22:25:24 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF36A82CE7
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:25:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21A7282CE7
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:25:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a4f72cba73so1004854f8f.1
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:25:19 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4508287895dso9010345e9.1
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:25:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749673519; x=1750278319; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749673521; x=1750278321; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yi2f56CKH8KBqCyNPpwoXR98HlpxYUiPmL22p+iKl4w=;
- b=KEG+PnAAzpa621IBYp5v/lrSoGFC6+7LxCJ+eDKSmuYL+x02PaeItyaOJe5k0+XCmY
- YgMhgOq/8KFN581fo/ORcvtr8VWft6LCC/cwBZHch3SxVWho4n3ZUuaGZ2F+JCQTkYNE
- dJjger4QY/cDHztYDhq648tJQ3xq1y008RxrCaIiWvzrfb8EFJtjaonw9TgHcx2JloQ1
- 3fPb+a747p2nCkI1aAkEOA0ppI/HoZXHwnnK3DSnCIspG+Ya0IXHBb+YJbZhDOi86Qzm
- pkmgFEk0/zIf9hUEZnz5+2LoZGZEvAdRE1MgVyFaRxYg61Tp4F9WSn79jcNKkiNA8PfG
- C0vw==
+ bh=NazrwjVIXY0tpunC+kHC+JzNkeztpVpyuL3jYJej9RQ=;
+ b=bKgWKNS9FLj6uOBHn1SmKC8gH7IPPCoqSZsyCqWcI7vOhxMQzW2E0q+n/PNftoaatW
+ li6Lnp6xk+yTBjWEuhit8Mwd/CWy2wLLUTjZ1KP5IBP+FgZ52Ug6b6+jNL//Sf0qr5DX
+ Fty/AG2q9QiYjLUjXxvp33bjDEef+pjdZLGHbBfs3a0Hq1l5dULBi4+7xADJUbpd+2dY
+ LqZo/Ly+5GGR8tyxmHXBAtC0v7Iua4YvbDl6Dy9vjmHm8NYfmgr14oGsLRuhFqV45lqS
+ AWZkHCGP4R5O/T9dw3eKKaxkCYzdB6GLty3Mm01sdfauX/nV9dh3SuH3R3Ca0NH1+FJv
+ mFxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749673519; x=1750278319;
+ d=1e100.net; s=20230601; t=1749673521; x=1750278321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yi2f56CKH8KBqCyNPpwoXR98HlpxYUiPmL22p+iKl4w=;
- b=A8Zs4vKvEycdC9dpSXC0k9iMGxzZZfAUyPdqgD4wOU0jhtYXBmZ+OHGuwYdSWSqcb6
- 43TdfNCFsBXYfHG5EzcNIdrER0J7D+8RvViltBuO6O1lv2qzRgYrtDI7uZcXsMN+OSR2
- JfUznu3zCc5qVrQMgftmZhQCMVPG1XsU04CTmZiTpRTu8cbmTazV8KiLXFHAQG9s+0LF
- aceOUa5gI9fWmjTJXalMsc5Oz53PY0zherV38MSNKdmRuP9zamkYO6XvX5VyQdmEz1Mf
- pMYqaZONzgv4lCY56C7bUEv+8OZXwxRmlidGC/VM2Q5FuPtDkstyyMPFUFYalUqbARmA
- Wlfw==
+ bh=NazrwjVIXY0tpunC+kHC+JzNkeztpVpyuL3jYJej9RQ=;
+ b=QjaDJAQWJlQU+MEMmGqi1R+vvFEn3mbxtZxf94JfvJwgg00kmWgP3DFf5Jew/vGzWA
+ 0SwiXqocAYN9vOP+AADdFl1rHPmM+zAN9BEGK/ySIpOqr0zN/0q/d+/ZgQgPkDyF2JrD
+ QyIvm5oJ4Q1w3tMhPIEptc8Y2ru1epLdJ7+w0VHzWQrHINwQ7bZ8RWr+Z45lEgGyCHwA
+ 0hfpB6WJxKvEFi7saHRfZCO+wSOi1XLSeoztW/RK5n1It70Mpyfo2ygFbjRHZIdeIwH8
+ 9Q4JLXFa3LA0nU8q37oaLSDltVlbnKn+27DQ3mA3Uyg61pKyu6hhN+jGXvLxg9STAze1
+ v/nA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVp90Rom27L29JOeGdJ3y2BzADJOflf4OmwLvoRhmyyef13Y7GJTmN4yOjIIOiopLsiVyHXq74=@lists.denx.de
-X-Gm-Message-State: AOJu0YwANRONYsn7GLv7rcfyjTM7AfB0sDpArHZPszNbmwPbpAJKxW4x
- eyFohWseCAKe9EdyEIBK2+22jTa3F1qQGr3CdNkX6H5y6xCe04JDew1LpF+7K15e6Pk=
-X-Gm-Gg: ASbGncstpz4SmwgDfb7ASlEHQfZDUV+Qs7i4o3tj1zdP6pyysFmbpsCJzq+OYi96zWR
- ydlpwUy+7a8NKTvYDsj3eARb4o9I1u/w5jt7wUdKp1nReMYRNSm5feWlm7xp11NX2yFJ73OrLos
- phtfdMge6TCd4zsv+J996fwa0a1JpcTmCimfY3sGXRW/5v1qe0khcKikvBH9c3oa0iBurvCiJne
- nqaL1XMXsLy3mHh3p4ygjvL/FF5xzQfwIL8mH8a4GI6BePHcWwkpVyAhWmBHRKLwbc/F9MKD2fO
- TpEcSl81M8GoA/zkxcYfIpLG6Mz+mW8qhCTq+fPaiMCHGnaAm+r5tHVAjuuGrcbV03vCjBZO0VT
- XPEhbPryyMQLFgJwM2RGU1yRjYyRkbZgE5EFmhYit
-X-Google-Smtp-Source: AGHT+IE5Jg+XJXrk8mYA6IiTbXZx+QRgRw8d3Iy+78Zb83UPJyaYalL6AS7icaUzNwC8LGLHNrjs1A==
-X-Received: by 2002:a05:6000:4029:b0:3a5:270e:7d3 with SMTP id
- ffacd0b85a97d-3a5607fa06cmr565109f8f.13.1749673519374; 
- Wed, 11 Jun 2025 13:25:19 -0700 (PDT)
+ AJvYcCUCy0Ajyrp+VCTLvD1OHZnFWHVaCRmLnNA6qnODUjWlkiMEQazivjkibVDbuZHt7wgBNquLMg0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJcxnBApg8daWJSIp9hq5nSA1NVk0+lw/sYRQnblYYDL6WbGzO
+ qpvgPS5/6WBwEIdkqD3Ltla+oBiedVAFqLzRQXTEoOhbIKYrrqIIvoo/pAvRmVMd7P4=
+X-Gm-Gg: ASbGncvEW1bhuGzCXdn/Q0UKvE9G4e+sJimuJUB6Inq4O5XF1gvJL5j2bBae1CvWhKa
+ qvJO54vyOmSiCD1pfcHOqbnMYVdsrm0kuk10SgyMqZdQb/igV6JYVGDcGZXszzQm7ufcR3jue/U
+ 0x1kR4Hek5v35DuvYYqYPNJ7XnfBq/RL3aKA6nuLgLJ5cPO36InvBRUvtZBvV3tG50RePeenbhW
+ 2j2IqGmNrafwyMBtaV0FHCHkwXlEAe7AEZNo9Pu0OdvA9RQX3KrhdlwVG6HYQoU7XWMFrkiCTC3
+ OCGVSFf3pEFmsdBmYaUKZffwlnA4C6OpCZ+Mg2PO1ALmgEoUf5cuFClsXyZmZYuNh6zd1H+txsF
+ +iCuvzmKEgqLDx5gzBqVgM1aql/EstbZypgMNNdQn
+X-Google-Smtp-Source: AGHT+IHt7USnRP9JI7XzbZneYrLvHMCgAXWkQyTs6CVAGYzXKVdkz4/46WfHzxsQmtCYzrTcDmBvHQ==
+X-Received: by 2002:a5d:64c8:0:b0:3a5:298a:3214 with SMTP id
+ ffacd0b85a97d-3a5608a0302mr569132f8f.13.1749673521354; 
+ Wed, 11 Jun 2025 13:25:21 -0700 (PDT)
 Received: from localhost.localdomain (ppp089210105145.access.hol.gr.
  [89.210.105.145]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a561a3c538sm12071f8f.50.2025.06.11.13.25.18
+ ffacd0b85a97d-3a561a3c538sm12071f8f.50.2025.06.11.13.25.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jun 2025 13:25:18 -0700 (PDT)
+ Wed, 11 Jun 2025 13:25:20 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -80,10 +80,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
  Prasad Kummari <prasad.kummari@amd.com>, Yao Zi <ziyao@disroot.org>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 11/13] kbuild: mark prepare0 as PHONY to fix external
- module build
-Date: Wed, 11 Jun 2025 23:24:38 +0300
-Message-ID: <20250611202449.2317279-12-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 12/13] kbuild: make 'archprepare' depend on 'scripts'
+Date: Wed, 11 Jun 2025 23:24:39 +0300
+Message-ID: <20250611202449.2317279-13-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
 References: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
@@ -106,34 +105,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backported from kernel
-commit e00d88804814 ("kbuild: mark prepare0 as PHONY to fix external module build")
+commit 059bc9fc375e ("kbuild: make 'archprepare' depend on 'scripts'")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Makefile | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 4e339ef4bb9c..a31e89d77490 100644
+index a31e89d77490..af8129ccc884 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1739,6 +1739,7 @@ u-boot.elf: u-boot.bin u-boot-elf.lds
- u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
- 	$(call if_changed_dep,cpp_lds)
+@@ -1922,7 +1922,7 @@ $(sort $(u-boot-init) $(u-boot-main)): $(u-boot-dirs) ;
+ # Error messages still appears in the original language
  
-+PHONY += prepare0
- # MediaTek's ARM-based u-boot needs a header to contains its load address
- # which is parsed by the BootROM.
- # If the SPL build is enabled, the header will be added to the spl binary,
-@@ -1950,7 +1951,7 @@ include/config/uboot.release: include/config/auto.conf FORCE
- # version.h and scripts_basic is processed / created.
+ PHONY += $(u-boot-dirs)
+-$(u-boot-dirs): prepare scripts
++$(u-boot-dirs): prepare
+ 	$(Q)$(MAKE) $(build)=$@
  
- # Listed in dependency order
--PHONY += prepare archprepare prepare0 prepare1 prepare3
-+PHONY += prepare archprepare prepare1 prepare3
+ tools: prepare
+@@ -1979,7 +1979,7 @@ prepare1: $(defaultenv_h)
+ envtools: $(defaultenv_h)
+ endif
  
- # prepare3 is used to check if we are building in a separate output directory,
- # and if so do:
+-archprepare: prepare1 scripts_basic
++archprepare: prepare1 scripts
+ 
+ prepare0: archprepare FORCE
+ 	$(Q)$(MAKE) $(build)=.
+@@ -2486,31 +2486,31 @@ else
+         target-dir = $(if $(KBUILD_EXTMOD),$(dir $<),$(dir $@))
+ endif
+ 
+-%.s: %.c prepare scripts FORCE
++%.s: %.c prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+-%.i: %.c prepare scripts FORCE
++%.i: %.c prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+-%.o: %.c prepare scripts FORCE
++%.o: %.c prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+-%.lst: %.c prepare scripts FORCE
++%.lst: %.c prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+-%.s: %.S prepare scripts FORCE
++%.s: %.S prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+-%.o: %.S prepare scripts FORCE
++%.o: %.S prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+-%.symtypes: %.c prepare scripts FORCE
++%.symtypes: %.c prepare FORCE
+ 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+ 
+ # Modules
+-/: prepare scripts FORCE
++/: prepare FORCE
+ 	$(cmd_crmodverdir)
+ 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
+ 	$(build)=$(build-dir)
+-%/: prepare scripts FORCE
++%/: prepare FORCE
+ 	$(cmd_crmodverdir)
+ 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1) \
+ 	$(build)=$(build-dir)
+-%.ko: prepare scripts FORCE
++%.ko: prepare FORCE
+ 	$(cmd_crmodverdir)
+ 	$(Q)$(MAKE) KBUILD_MODULES=$(if $(CONFIG_MODULES),1)   \
+ 	$(build)=$(build-dir) $(@:.ko=.o)
 -- 
 2.49.0
 
