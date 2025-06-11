@@ -4,120 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D741C61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 10:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9849DC677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 11:06:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D36638070C;
-	Wed, 11 Jun 2025 12:53:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 03ED18070C;
+	Wed, 11 Jun 2025 13:06:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ne2pROuw";
+	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="XP7pCdFp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D40382B20; Wed, 11 Jun 2025 12:53:04 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2DD2682B20; Wed, 11 Jun 2025 13:06:12 +0200 (CEST)
+Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.37])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6EB480050
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 12:53:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55B9DLI3011142
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:53:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- MWjWZOXgJHNO75H8ZxKMxX81kKL1lydkOQ8H5/xrMyM=; b=Ne2pROuwOeueyMvK
- 1xAjn1tTwalKndhcmXl568/JuKn61uHdIE4nNrfZsdZukzAt9GwAUcO2esH+tAEt
- NodE4E18Q3X64vMtNbWpNXx2yT49AHkIsOli+ne3k0jvPKgwT9ibMYN9GFrU0N44
- GnoAAnxPJY4ZbhttQH/EetZhCxaMIvEo3bWio4Xh0t8OxkLtzk0b+HgpjTdSiuTX
- XACdF70w89UnUrp95AFXZXrVWAGAgHxD+WMgHjBlT4JIQ3pKCzdkPGfiAS4Wqk3Y
- SsAzM8W1kjVJz6O2gq4CgFwiTzmNa41/JDi16ULY6egnPudsi19QIEs5KNfNGt/a
- 0aNXYQ==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 474ekpvbpj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:53:00 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2350804a43eso101867005ad.0
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 03:53:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749639179; x=1750243979;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MWjWZOXgJHNO75H8ZxKMxX81kKL1lydkOQ8H5/xrMyM=;
- b=sMfXQSlvIV2MrqG4fXbSsYQle/V2IXk7aum3IZIGvNeAm590EzEHjbgNB6rH63bIBK
- /u3sHOPC9NyaPWXw1NTtDdfnLCRgaaJZPTdXbMAWxj2hZ+EkbSB1R58qE+ygSfF7sqPZ
- iuDtZZZz8ovfkgDdFM5f6jyxRXdbIHMHJ1jMYAZbJqKknWuQwXkDfr4C06IyJp7oQzN3
- krCgNGi6szIyv6NUVU608J8cY41K/w/v8hqIB3JJF70nQR3IYat0ulg222ojy2lRYUfi
- U4PL+8LjjWiU5CDU1xcbwZkp3I0ah3ro7kUdbiluUx7lZpPxDfGN6IdoShk1rAeCI5rd
- 3E8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUuOJqCylCGA8dLuGHX4s5/xT+EKRwVYu9VbFfhOnk3kOIaakDcUd+W2anXO4/uEg04o7NWlM8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxgVm92CLjroosqmR3PU6C7DeI1pDC8+jEE1/Vx8MFuLTvfZQKM
- +XKMVDKPkEmo8hJvVwDxoYZu85Jq+ltgRm0n4k4X5Qrt5cuHYcATq9FAbC1/sO8HHjn09xAibal
- YcBmJsl++wOBfhRzPRX1edX/R24ANO0FzrW9qSLOoBbJaps/e1GkZOvCN
-X-Gm-Gg: ASbGncuud2rLj8RIvmGsgpeWQhhcnjTJbRKoiYzrKLwAaigxnJ0+SNTngOXFb7jJsG0
- bx0h5f3Ol38xSNHxOJJs96J0PPgIQtP1F6uU+ptsbd3RDYuLwpGM4RGEmKZLPxijnUU5BRrXkDQ
- miv/kUhdM8z0hR1xPS35EDyIvn2v+gyG7DFMrQeMgHWDnjcxxkPjPImD6ZvDEl7i/EDheGQ4/wQ
- IA93S04DGlQE2rSQPh2rj62aUkKxyT0VA31c55gPF3CEQ/oO+9md+xCRXebk/KSl6bqP/awDI2K
- KZ1ZUBtMgiyoygQw70KQgY0ajvWBFWkOoX3zsWs5OEDElA/xuwYj2wA=
-X-Received: by 2002:a17:902:f54c:b0:235:ea0d:ae10 with SMTP id
- d9443c01a7336-23641a9a44amr44907865ad.12.1749639179163; 
- Wed, 11 Jun 2025 03:52:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEb63OuvvP4Ols2HnIZj63pjS5jZBpRvjv+rci+igtomyArihgWJKigIb/NP6LSPYvE897v+g==
-X-Received: by 2002:a17:902:f54c:b0:235:ea0d:ae10 with SMTP id
- d9443c01a7336-23641a9a44amr44907505ad.12.1749639178754; 
- Wed, 11 Jun 2025 03:52:58 -0700 (PDT)
-Received: from [192.168.0.5] ([49.206.97.124])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23603504eb8sm85336185ad.225.2025.06.11.03.52.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Jun 2025 03:52:58 -0700 (PDT)
-Message-ID: <9fb6ab2f-5f61-44a0-bee5-5a429f8d26e6@oss.qualcomm.com>
-Date: Wed, 11 Jun 2025 16:22:53 +0530
+ by phobos.denx.de (Postfix) with ESMTPS id 3914280050
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:06:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=psihoexpert.ro
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
+dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
+ c=relaxed/relaxed; q=dns/txt;
+ h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
+ bh=RsfWOLPruODVYybam1ucMl1su/cuqMudHd7AxKvpe98=;
+ b=XP7pCdFpKseHVelzReDb0IKNbFadJaf2rGlwnTG7w+b7qMkIRxfEwNX4K/JIn6Wd7J8f2x9g8HvCdMBTAgVPKOFLVlaDU64Sym1/FbL8eBT5/7V4VqBAIomEW7+ddVeU7+FgFUb+6IdINH7tNL+kWXGMSIdAoNuMKHBwW46eorx+W0R9TQT1/j43QW3YnPHVhhPqhZCHkyd8OMYQUbmpvHxiMG+VUwWDCsLZ4RDCZh6Pv/w2XdOcKay4ZO
+ 8ZX6MXCJA8HDZ64wEGlTd9fzv7owcbMFd3wrdAgO/bmjnNxA2ScHxx2exoMlgesBRzQrsGWCY/oscJs3oYPWlhmGHfdA==
+Received: from TkB (188-24-194-246.rdsnet.ro [188.24.194.246])
+ by mx1.wiredblade.com with ESMTPSA
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
+ ; Wed, 11 Jun 2025 11:05:55 +0000
+From: Marius Dinu <m95d+git@psihoexpert.ro>
+To: u-boot@lists.denx.de
+Cc: Marius Dinu <m95d+git@psihoexpert.ro>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Subject: [PATCH] rk3288: add fdtoverlay_addr_r to default env
+Date: Wed, 11 Jun 2025 11:04:54 +0000
+Message-ID: <20250611110454.23428-1-m95d+git@psihoexpert.ro>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: qualcomm: Add MAINTAINERS entries for
- Dragonwing platforms
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, casey.connolly@linaro.org, 
- neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
- quic_varada@quicinc.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250611091607.3512332-1-aswin.murugan@oss.qualcomm.com>
-Content-Language: en-US
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20250611091607.3512332-1-aswin.murugan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=JcO8rVKV c=1 sm=1 tr=0 ts=6849600c cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=265LD9mWUadjYELWBiwYpg==:17
- a=IkcTkHD0fZMA:10 a=6IFa9wvqVegA:10 a=EUspDBNiAAAA:8 a=Aa_4p8kJ_L2R_C4o18oA:9
- a=QEXdDO2ut3YA:10 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjExMDA5MiBTYWx0ZWRfX1hfSQkSSf+bk
- iMjg+IGqAKKlnAJE7N6KVY/KDiNDwIKQqaGMvcJlCZ2olg7jPkd9ObjSdOqP7FxUaD8f5clFIi2
- LhyIN8+1yt99HW2oKHIqWURsVj7NrrKeIUV7Yxz8udGG72YNnT8i/0tPbLhyOqCQ0/mMz+C5w+6
- vMdwIPbY58UBIrFqCrj93JgUOynWSk5H51h5CZ7gZZnPCkp6otFMTnMQuLfIpr41x76+OFW8TXX
- oV7+SMReHsgg8jAZDBdJSt4R3AORG5OznUhTCknyfZePydmMnxOtWP/7rdEnfj4N2H7IksTblex
- I16eA9Lx+Sy0xcCGBu9Kds/L7iawX2GTTh1WSkEaCWbe9u39aXXueVggUSuwK/ZwGjf74sCecyM
- vHOE+g4CqrSowUOZOrbXU6x39goOr24bFBqN/ooGgH3mpaTUv48Pm8nhIo4LjY3qD1Dbxbu2
-X-Proofpoint-GUID: W1mZ0sUwgESsMf6LMC_t7ifU47nTVSeO
-X-Proofpoint-ORIG-GUID: W1mZ0sUwgESsMf6LMC_t7ifU47nTVSeO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-11_04,2025-06-10_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxlogscore=649 bulkscore=0 spamscore=0 impostorscore=0 phishscore=0
- priorityscore=1501 mlxscore=0 adultscore=0 clxscore=1015 malwarescore=0
- suspectscore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505280000 definitions=main-2506110092
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,10 +62,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Acked-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com
+rk3288 is missing fdtoverlay_addr_r.
+The new addresses match those used by rk3308.
+Tested on Asus TinkerBoard S.
 
-On 6/11/2025 2:46 PM, Aswin Murugan wrote:
-> +QUALCOMM DRAGONWING QCS8300
-> +M:	Balaji Selvanathan<balaji.selvanathan@oss.qualcomm.com>
-> +S:	Maintained
-> +N:	qcs8300
+Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+---
+ include/configs/rk3288_common.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
+index 0c449e31099..52c3695ff8e 100644
+--- a/include/configs/rk3288_common.h
++++ b/include/configs/rk3288_common.h
+@@ -18,7 +18,8 @@
+ #define ENV_MEM_LAYOUT_SETTINGS \
+ 	"scriptaddr=0x00000000\0" \
+ 	"pxefile_addr_r=0x00100000\0" \
+-	"fdt_addr_r=0x01f00000\0" \
++	"fdt_addr_r=0x01e00000\0" \
++	"fdtoverlay_addr_r=0x01f00000\0" \
+ 	"kernel_addr_r=0x02000000\0" \
+ 	"ramdisk_addr_r=0x04000000\0"
+ 
+-- 
+2.49.0
+
+
