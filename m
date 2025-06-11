@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 522F4C677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 12:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA6DC677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 12:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B96C682C49;
-	Wed, 11 Jun 2025 14:37:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D67282C7C;
+	Wed, 11 Jun 2025 14:37:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="qE9aujrk";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="dXOoCZPO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F72A82B7C; Wed, 11 Jun 2025 13:51:37 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 563F582B20; Wed, 11 Jun 2025 13:51:37 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7776282B20
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:51:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5708782BA7
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:51:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ad89ee255easo1188517766b.3
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 04:51:33 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ad88d77314bso1223654566b.1
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 04:51:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1749642693; x=1750247493; darn=lists.denx.de;
+ d=fairphone.com; s=fair; t=1749642694; x=1750247494; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1aROTCpSUU0aZ02NwtmjKwuatkbaW7YVvzkZ+TI2vzI=;
- b=qE9aujrkGXQlKDzjtAYiqM2mY5Ay5cK+PqXfkeR+7A/SBIzdRfxvIrxZhpj8jeA/zF
- QUuYe5TT10B2X4IiL1j1ClAqLZ09lVwRYAle2L+tdiOt3+wKINtveSTHybTb0owJ9eNy
- EXKrR9LHIQECVkFIJUmJMx1D/lNkKqhX1pGYKMA2eQRAEAQrFr/1jL83EljHNi9294Og
- jhOC/6fQtT3IfrhFdDv1Gu/lTM0790i0YavKfF3YXUbik8I/uAajRgAgAgHLmzzi4zUc
- lW9JTMZXHcUbYUPvrr8kFTrnDMPQbN3JzBB0W2/qXZCqRmz8Ko0/sqe9+sreaudGruO0
- FZXQ==
+ :reply-to; bh=BU6JrNS3Hw7sxFF4AW0dgm67VVbhfufAGh5Oqd3SNjU=;
+ b=dXOoCZPOHTW7vFaPxK7L497qzvAVoh5dmoN4wd8rsIFRK23C5w6Mx8JRxxpuBaqzHz
+ MuC9THk+OwoTm5x9g7Q1IqEnmPTktAAxmv29ueLWEXbJEgyNh4sHGOhtIIcAR0hRBXbl
+ tfCdxDllUmo+9K63ieuTQpuaIieXhUNWt3A5qAVkyq6n+dQjW1XcvwA1CtEdXLWrcDSC
+ uJXO2kCF1FFn5KbFmB8+RPsN+ZVHN3ZT2xfKrYQevmCOfk2x2JguB6lwKX1RStzX4DtE
+ ut+DlYiRexSNGf54r/TbQkhmqYU4Sc80gYN5L5vSvHGPm4iaR3sNBPqWMDkYW5q3uzPy
+ p7Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749642693; x=1750247493;
+ d=1e100.net; s=20230601; t=1749642694; x=1750247494;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1aROTCpSUU0aZ02NwtmjKwuatkbaW7YVvzkZ+TI2vzI=;
- b=A8UwgpmQXasuMwnKWxZmCEEVXaxoPeKzJVu0qcTnA0GoRpSiRJ0lWFDVkg87o5G4D+
- sQ7oi3/3Ai8WGac9hasupkFayvOd/VXY2Y48Nw7nDzFtRjrTwws8CjMrwbqtlWfAhEB4
- coHGjkzcfWvFV7gJyOZcvAiNI2RnHrRFEKjlJ60IIYNfrzKXtD7fLuiOaXsAkd6KnxpJ
- LV0hTDGg4OfjVB+opkX6phhYVEQOr4H3GB2k3CGTtIzE7alTMafPIQJkrktLEdE0lk6K
- p2rAVvLX89VbyMEI4Ys4gHo9Z+/pxYxBMXUKBIRuiuYXbx+CCM11hq5ENNglNjUypcfe
- d3/Q==
+ bh=BU6JrNS3Hw7sxFF4AW0dgm67VVbhfufAGh5Oqd3SNjU=;
+ b=kocJZQOc4ZHmjOrm9wVe55orTDSbGAMwtNP3Zlev5/k0ELRZtoa/EsKoUCj5rGX1Xc
+ jXW3NN6jrNmUaZF1wn56rMYjCXwQ98HvR4yrCCrKBt/owNcDD+tV8JAJoUXBZqg403i0
+ Eqb98Kj55oIGTRUq57RcWQCPL78k0BiPawNhaULzlFKhSyJ84GmSJ97CmKCasSfJZ3Q8
+ RZDjhs8eCOEx9I6hDSJWPLu5lZ1BcDvYDvLKss3bHIgLdw1nRyOh7RQCK5Chkopdp8su
+ WBrxnwWeWk2jE7p41XvCW1IAlr1+tSmf8D/m6Q6WUd86mGDGcOdGxrOR/KJB72itzv9h
+ JXTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXxDsh0rBQSwk7mJiADYaiozIP0TUmEa0aljSBw1c7BiA4yxovnZE3HrB4W71porCXrmm9rczI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzoiDrOKGzWzAvX4wth9yefpkBWiY2AY1iRyxOe/VtoOf8tW1NE
- FM0CfP3iwy4reXKog95Uj26zqs3YFWqmdtZrX7+p8y+OWXSVKOxDZ73Zw2SS3IXn4+U=
-X-Gm-Gg: ASbGncuwMsVbYSVw3N4JV6/wq8X0hpSzyrPsNNdTOpqggVVn5P9xWaIrJab3s6vwU3d
- 2a08xQY5o94opQn0B8qrsym67/mLDoXjsaP8fOfxcfBDLgrHHIDTJUeRH9uzZ/VY7EpWwgRGYXG
- vVmQsv2Pq0txdKuENGZQzk5/t/OGMfG3B2QqFBps5L4A4XZnqTlhfQMIOhQ/zUNdoQSpGm4IPR6
- tGVolrBAodEsmJd0Pq+3wbffNDp89rsZ4jqm+qjj+Cbq11vT18AyLcc0n2BNcE7c5JlKv0M5Q/j
- 9DEgqbh7zYlBQFz+mSJNF1c3kEMwXCrWE+LyeaIuYxiEvkhG3yf3+muuK25Aqb5esoYOS5nNfh5
- BU3nsUBwoNAwt9+j610eUOHdhbDbXYo53
-X-Google-Smtp-Source: AGHT+IGxmtGT3+06bGFGj3+Qxaf+Lv/ZC4eG70o93v6rCizXcVkCtaoT021zUIKBE4kp6ZFM8djd7g==
-X-Received: by 2002:a17:907:6e8e:b0:ad8:9c97:c2dd with SMTP id
- a640c23a62f3a-ade8c72f339mr271301066b.17.1749642692872; 
- Wed, 11 Jun 2025 04:51:32 -0700 (PDT)
+ AJvYcCWRogIwOmqyKur/NyY4ecK1gu8HiIsH8iw/q32melPrKqXowI9pe3Vb7u5pto54Q47ag6F3POI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8pzpUxrV9veyvzbnpP9kqqf5k7E+9B9+2zAFK9MGxhkI9I7Fr
+ qFW2XSpt2bTY+lPzuNoVRu+35eUq2tAZ29ZvjZcr61YAZd7fMc2UkxIjdo9gfF3r3pg=
+X-Gm-Gg: ASbGncsN1Qt/mNPDgIFW0fS435OVKmSYkkhSzU4cQytaDy4jpj4RTzjnqt5GH/3tOlP
+ UpKMceWRzyl1sNC0XDdq31+jfm5bNXx4FKa/bsXeIg0KYzjmLieFhlM6Bs7DgzohyL1SaXI2RX+
+ puGjX3fviFEfL1SVbgl983GvY9UMUc4OEnzO0OV8GFxXAdoNDhWXExNnQ/ls7W4qPlenKWdEvNW
+ z8+9HjLRrW7+Yw2980UklPdSTZ5idBMgp+9JH/l83+34Ndgx2WQw9J+KK+5PUxmuDtaDMC/UlUv
+ yKNMzh7qPp8Syk9juGUFKanvloIZfo3wprQ9M28437J+iUi2PGl0VKJo7rklo+aETcJbUKBx1LV
+ uYlGUJw2A1Hq69xy4OG1dm+gC419KW9wv
+X-Google-Smtp-Source: AGHT+IExxPtpTGtWv2gXKxYc9QYd2YdcsFJKV0CbiqKsS6nwTZHbcHAvOb4P5VY01ufEsWUfmTVnFw==
+X-Received: by 2002:a17:907:1b1b:b0:ad2:4da6:f58c with SMTP id
+ a640c23a62f3a-ade897ab542mr303609566b.46.1749642693663; 
+ Wed, 11 Jun 2025 04:51:33 -0700 (PDT)
 Received: from otso.local (144-178-202-138.static.ef-service.nl.
  [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ade1d75467fsm891666166b.14.2025.06.11.04.51.32
+ a640c23a62f3a-ade1d75467fsm891666166b.14.2025.06.11.04.51.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jun 2025 04:51:32 -0700 (PDT)
+ Wed, 11 Jun 2025 04:51:33 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Wed, 11 Jun 2025 13:51:23 +0200
-Subject: [PATCH 1/3] doc: board/qualcomm: Fix commands for compilation
- missing CROSS_COMPILE
+Date: Wed, 11 Jun 2025 13:51:24 +0200
+Subject: [PATCH 2/3] doc: board/qualcomm: Replace buildman build instructions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250611-qualcomm-doc-update-v1-1-5cf8cd94974d@fairphone.com>
+Message-Id: <20250611-qualcomm-doc-update-v1-2-5cf8cd94974d@fairphone.com>
 References: <20250611-qualcomm-doc-update-v1-0-5cf8cd94974d@fairphone.com>
 In-Reply-To: <20250611-qualcomm-doc-update-v1-0-5cf8cd94974d@fairphone.com>
 To: Casey Connolly <casey.connolly@linaro.org>, 
@@ -87,11 +86,11 @@ To: Casey Connolly <casey.connolly@linaro.org>,
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1749642691; l=1060;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1749642691; l=1243;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=kpK2lsgassTNco1gXQpquNOqPMSTRuciyVe/ijqv1aU=;
- b=zDCFzJvXXlXt9r3cvgIw/ekL0lwxWNLP5Yyoqye+60a79JuYSi4OpmV7STQmfxRTd7Rp9wNUI
- xNjDQDIrPOWClZDERxz29xrwM4ghGvScQh3URBAVzr8Zcl5ygmgB0il
+ bh=MkE7SjZKUL9CTDCG1ZtzpCOu741m8T+vqQiH13c5HhU=;
+ b=QIN6NHTAit8XFM9RkP9Ax6A4zTz4abluCYZW7it3OkaTZm2QRq3HzDU0DMPhHMeElGGqFu5we
+ fxHzy4qE1hPCsrQxx5nN2LHSjKoS+nkkIohT8zH2M41fuCRBXdbS5SS
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Wed, 11 Jun 2025 14:37:25 +0200
@@ -111,32 +110,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-One needs to set CROSS_COMPILE also for the actual compilation, not just
-for the kconfig step, otherwise the host arch compiler would be used.
+This command does not work as described in this doc, so replace it with
+a regular make with qcom_defconfig, as already used for other
+defconfigs.
 
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- doc/board/qualcomm/board.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ doc/board/qualcomm/board.rst | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
-index 003d59a18ebd3f19db568fa59e9fd06906e209f2..64427ba5be793978f54dd51c2b24e55fcd78ea8f 100644
+index 64427ba5be793978f54dd51c2b24e55fcd78ea8f..23159f2091daa0def4cd005c9e413aed6de7d4a7 100644
 --- a/doc/board/qualcomm/board.rst
 +++ b/doc/board/qualcomm/board.rst
-@@ -88,12 +88,12 @@ As above::
+@@ -23,10 +23,7 @@ Installation
+ ------------
+ Build
+ ^^^^^
+-
+-	$ ./tools/buildman/buildman -o .output qcom
+-
+-This will build ``.output/u-boot-nodtb.bin`` using the ``qcom_defconfig``.
++We will build ``u-boot-nodtb.bin`` from the u-boot source tree.
+ 
+ Generate FIT image (optional)
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+@@ -81,9 +78,10 @@ Steps:
+ 
+ - Build u-boot
+ 
+-As above::
++Use the following commands::
+ 
+-	./tools/buildman/buildman -o .output qcom
++	make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig
++	make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc)
+ 
  Or for db410c (and other boards not supported by the generic target)::
- 
- 	make CROSS_COMPILE=aarch64-linux-gnu- O=.output dragonboard410c_defconfig
--	make O=.output -j$(nproc)
-+	make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc)
- 
- Or for smartphones::
- 
- 	make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
--	make O=.output -j$(nproc)
-+	make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc)
- 
- - gzip u-boot::
  
 
 -- 
