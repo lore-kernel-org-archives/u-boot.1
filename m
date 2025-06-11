@@ -4,72 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 735A5C677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 04:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B994DC61CE7
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 04:47:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81C7882A4B;
-	Wed, 11 Jun 2025 06:01:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D583482B18;
+	Wed, 11 Jun 2025 06:47:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1749614482;
-	bh=LDpzoHva7cVKMl1dUcfP2bY9tEveNBxU/zVxc98XUKs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=zb+fTj72dhFdk8tAcaJWvDLw4cYL+hnj2r2Tb/r97bdqNENu30uwEN/Jvfm/TqOZQ
-	 6WS/DdDq+I9fBM+9OMBlfPsr8Vg3NdS/aHs0aXesUtwI1gmRVBBqDgc7B8N9yCzcoa
-	 M+DA1kDTU0eEN0RC4JTzAlMiPL/XWHAJ/YicsGuSF2gpHBp1qAwWopA+k5BvniL2VN
-	 Gcq3ytm6bHLJekPoRzYat0SQ6Wl/m2uQQuze6cVvp1ZHP89/iaLK12ieMR+7bafEhb
-	 jGkfiOniC6oWt66xzvpcZ6kkkgH1qTzxh5zEHEce7tHCRazEoShljGJiq6qqcAY3OQ
-	 v8+U5Ro1m7riQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 02A8082B18; Wed, 11 Jun 2025 06:01:21 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 161018070C
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 06:01:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="SquDgohK"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 021241039729E; 
- Wed, 11 Jun 2025 06:01:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1749614478;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=LDpzoHva7cVKMl1dUcfP2bY9tEveNBxU/zVxc98XUKs=;
- b=SquDgohKle6Gr7BqdroWRv3MCJfMD4/zJ+Gnukc1a56nejvHGQLVsYqO9ph2RlulEpYJli
- K+8MsoMwwW9/YLRaVXZp490ULdirLJtwFLU8ODqXIq0on0Y2ZCCZtqdJNqwtlwkhiCmRBO
- gKLeIvNneW0oUuY8RXFfUOsS/YEpQNh7Dz7e3YPIldlbvxGtj0AW19IjGhSb2T7/trtdE/
- fa9H59436OmxVPBO7Zf5Mn0DUARkWzNfkxjoT6qe+flhpi04yInn54u4AQJauFc3+sH3yO
- Wop7ZeBdLHVa9E3h620iH/S7OUtGbLGNYCA93plo3kyBrgdEwY+tGaggpzvZag==
-Message-ID: <00368ed6-fef6-eb9f-b9f3-b0a6d51d0a23@denx.de>
-Date: Wed, 11 Jun 2025 06:01:49 +0200
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="fB28rjNg";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 083C882B20; Wed, 11 Jun 2025 06:47:42 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 742D08004F
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 06:47:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55AIPtGD028783;
+ Wed, 11 Jun 2025 04:47:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=Sqbgq7SeIGxT4cDMeSmPWmMS
+ wJB/8LkVXRCzxUWHO6Q=; b=fB28rjNg8S5TC9hRc84CbYxOlmBNDTcfbdoGqSIN
+ 6wRz00aycZ1hV4L/IF178b0FqP1vwph7IKHe5L0K/k5RO0bHHdjUcWzzc6B6TTJa
+ 2ZL4tNBu3dvWa8FwXl1Ga4FwxJ8JtvWgtqrbgAnLChWul+h1Dxauc/mvZFWOhr1z
+ HiPWUB5PBzzj7raDssKYlBb21HkweJu/YV883Iuyz3yWz4kLs4kkT+oC5WN0Pd6l
+ 9IpPLfIw8dtbDVGSqbzd+UUf46Dr9aaVKsFLIXxDWzlW5uS0YRzGITzKsvO/q4RA
+ YBGhEprnh9Ii1S7CR9+l/DhfSAuGaiY9//mT7NJQ+WqvBg==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 476jrhancw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 11 Jun 2025 04:47:31 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 55B4lUkd031095
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 11 Jun 2025 04:47:30 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Tue, 10 Jun 2025 21:47:28 -0700
+Date: Wed, 11 Jun 2025 10:17:24 +0530
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+CC: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ <neil.armstrong@linaro.org>, <sumit.garg@kernel.org>,
+ <trini@konsulko.com>, <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] board: qualcomm: Add MAINTAINERS entries for
+ Dragonwing platforms
+Message-ID: <20250611044724.thdcl3ke2dnicgqs@hu-varada-blr.qualcomm.com>
+References: <20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com>
+ <18193912-d05c-4584-bf45-e9f2f97be7f7@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v2 1/3] i2c: geni: fix error message wording in clk_disable
-Content-Language: en-US
-To: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Rayagonda Kokatanur
- <rayagonda.kokatanur@broadcom.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250610-geni-load-fw-v2-0-7cad6bc18db0@linaro.org>
- <20250610-geni-load-fw-v2-1-7cad6bc18db0@linaro.org>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250610-geni-load-fw-v2-1-7cad6bc18db0@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <18193912-d05c-4584-bf45-e9f2f97be7f7@linaro.org>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Authority-Analysis: v=2.4 cv=EovSrTcA c=1 sm=1 tr=0 ts=68490a63 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=kj9zAlcOel0A:10 a=6IFa9wvqVegA:10 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=COk6AnOGAAAA:8 a=6eiW-xrz1GzZlbkjhPwA:9
+ a=CjuIK1q_8ugA:10 a=cvBusfyB2V15izCimMoJ:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-ORIG-GUID: vTN2mMITAMzQQR3kb3y_9W5ukyA3xR8q
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjExMDA0MCBTYWx0ZWRfXzopksna9rsKD
+ k1x1owI2xZOeIFRpA7bCLu664LdiebO6+MLGCoGxbkqHZ+LdWgLwFxA3aMIHJyQtvoOWwXhb067
+ 337mwz0XKSm25IXWIfAgq14B8p1oN19wr7mkQ4DfRfyxFTMfU6yvgUxyN/a4YDo0Kw7Qpw7szie
+ h9ojegwk8sPapiLSTx8DOFyk4Umt1By2+cfFokTUCEEOuOT2MXCKfOCjZv1OLbqgsNyg5aX/jgJ
+ /rqFDditUymhbKX3/+2jtsaUeGPCO4+Kg37jaZ4pXFSp8/+9CeBpdplDLYCixgUzgkwLylKRcSQ
+ KLkGy2R3f+yfqQPnn5yEg7T6jGkH7IHaTpm4Nq7K7Agp6Qv2vBXQjahySwUMGDAwk4695u3e0i2
+ l6Cv25O58I0JGeAcLPpwdEu4jF4FwPaqe5vFsYfZi4yM0kzDOq8h3OxLg9aiDzbPw9ZDwYuZ
+X-Proofpoint-GUID: vTN2mMITAMzQQR3kb3y_9W5ukyA3xR8q
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-11_01,2025-06-10_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 suspectscore=0 priorityscore=1501 mlxlogscore=636
+ mlxscore=0 clxscore=1015 malwarescore=0 adultscore=0 lowpriorityscore=0
+ phishscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
+ definitions=main-2506110040
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,63 +107,56 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Casey,
+On Tue, Jun 10, 2025 at 05:22:28PM +0200, Casey Connolly wrote:
+>
+>
+> On 6/10/25 11:37, Aswin Murugan wrote:
+> > Added MAINTAINERS entries for the Qualcomm Dragonwing platforms, following
+> > the discussion in the referenced thread.
+> > https://lore.kernel.org/u-boot/20250603192206.GK1382132@bill-the-cat/
+> >
+> > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>
+> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+>
+> Balaji and Varadarajan can you send Acked-by tags for this?
 
-On 10.06.25 18:50, Casey Connolly wrote:
-> Correct the error messages so they accurately describe that we failed to
-> disable the clocks, not to enable them.
-> 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->   drivers/i2c/geni_i2c.c | 6 ++----
->   1 file changed, 2 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-> index eabf5c76c21c2bc12c80dbb9fb498a0080928248..4eb41ba852f7790ca646c8ba38f29fdb727fa804 100644
-> --- a/drivers/i2c/geni_i2c.c
-> +++ b/drivers/i2c/geni_i2c.c
-> @@ -330,17 +330,15 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
->   
->   	if (geni->is_master_hub) {
->   		ret = clk_disable(&geni->core);
->   		if (ret) {
-> -			dev_err(dev, "clk_enable core failed %d\n", ret);
-> -			return ret;
-> +			dev_err(dev, "clk_disable core failed %d\n", ret);
+Acked-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 
-Hmm.. why do you remove the return?
-
->   		}
->   	}
->   
->   	ret = clk_disable(&geni->se);
->   	if (ret) {
-> -		dev_err(dev, "clk_enable se failed %d\n", ret);
-> -		return ret;
-> +		dev_err(dev, "clk_disable se failed %d\n", ret);
->   	}
->   
->   	return 0;
->   }
-> 
-
-In case of error, you return now 0 ?
-
-If you intentionally want this change, please describe this in
-your commit message and why you want this...
-
-Thanks!
-
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+> Kind regards,
+>
+> > ---
+> >   board/qualcomm/MAINTAINERS | 14 ++++++++++++++
+> >   1 file changed, 14 insertions(+)
+> >   create mode 100644 board/qualcomm/MAINTAINERS
+> >
+> > diff --git a/board/qualcomm/MAINTAINERS b/board/qualcomm/MAINTAINERS
+> > new file mode 100644
+> > index 00000000000..9196310f117
+> > --- /dev/null
+> > +++ b/board/qualcomm/MAINTAINERS
+> > @@ -0,0 +1,14 @@
+> > +QUALCOMM DRAGONWING QCS615
+> > +M:	Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> > +S:	Maintained
+> > +N:	qcs615
+> > +
+> > +QUALCOMM DRAGONWING QCS8300
+> > +M:	Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> > +S:	Maintained
+> > +N:	qcs8300
+> > +
+> > +QUALCOMM DRAGONWING QCS9100
+> > +M:	Varadarajan Narayanan <quic_varada@quicinc.com>
+> > +S:	Maintained
+> > +N:	qcs9100
+> > \ No newline at end of file
+>
+> --
+> Casey (she/they)
+>
