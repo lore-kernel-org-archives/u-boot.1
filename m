@@ -4,78 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2196C61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 09:58:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 383E3C677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 10:07:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F75C828A2;
-	Wed, 11 Jun 2025 11:58:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C6E6828A2;
+	Wed, 11 Jun 2025 12:07:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MIG5nS+z";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Sm4m7/SE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 995CC82A4B; Wed, 11 Jun 2025 11:58:57 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F29582A4B; Wed, 11 Jun 2025 12:07:08 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A2B480050
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 11:58:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-32add56e9ddso52678971fa.2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 02:58:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749635935; x=1750240735; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cuctOQVMFL9e8poU/sq78JYPAUSHTOuKGWaDiL0rR5s=;
- b=MIG5nS+zM3T59GK6xvXaQFsvtJqEuZre1L3ZmOMzL7KHVEh6MWxGRZJC2a7hP68cN4
- h3BB0fRNF+JPg9rbnyaPjpNVVBG8jHXM/5caK/YoSYsf0DkPhGBnZWRuU5+PwNUyZmCe
- vIm8ZZm6PPS3HyXHWUzh3S65R4/COgl2jM9K2ZVpPKBfEv75mL98tEItD9Ih+d/LIvIo
- sEAKssQm3AaboV3mwe8u6EyFuetHh61xH/C2A3zH9D1xYto0p8ZbkPgvhoxEOBrJad85
- UQcz5OeURmGXfTIo1NFzag9pe6z8eWHhI6rhGRx6xSSSMOY4YSvClirvk7tQOfDvXnPu
- cS7Q==
+ by phobos.denx.de (Postfix) with ESMTPS id B4D1F80050
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 12:07:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55B9DDun029236
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:07:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ pzw6bV+aEqAcL09phPCFbYtLAxgi9UXIozs4/Lpu9aM=; b=Sm4m7/SE39b6xpzz
+ 4hEqKjggLwDq3ApNnJNjE+YM6plVOmK7B+sCFbs5h9Vj2SgXfQU3QQj9kgs+OBVp
+ ftOElZ4xrRB6RxulvfEoQa/EUch3UCchC0ZWgfDvROe+aFer8Krz7xf15cnU0s69
+ zScAY8TBbEFY3pAQMm92v0EjFQnrkVH++UpXpPY9o/vG7Grwg3mqAvehMXz8c+j0
+ ZF1+DBZgqOFZagwqS9+q2oKOgnop5xY960u437KAUpLsaBCciIqjff46c/u9T9UX
+ Cuy43jExEp0qWmRvDCjbjHSj1Rmpahcq0pBda9gBQlOHaOmQsbwj3/SPLbC8eUU1
+ wBjS6Q==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 474dn6cgru-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:07:03 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-b115383fcecso3789688a12.1
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 03:07:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749635935; x=1750240735;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cuctOQVMFL9e8poU/sq78JYPAUSHTOuKGWaDiL0rR5s=;
- b=QU1BbVsVsptF8UPEAN2Xq+8pLbRPree5QKnBJp8GNWPo3crutF7Y6v+TR/RTIUknWa
- lZvD2iltfbVQQAzM9e2g8sr83wuufioL++V7nNiqDwdJDD4X2BpLSNAnWGoYmI4gUsT2
- kxAA3C3+R5hBvlt6D5h80vZNgrAJa0QlHpQ1tddk+qyTfRTVZQGoJgRe4YrGsVmAfm4l
- NMkDxZD3TGpLomK8UY3pI4t/fSUaphFd+LSbZXkVQ+46BcItIoZumdFEbqoaTmCl3MPY
- vW+XuNn1fWUnPiKN8QL270r2umHVIGgPwGztKzCpbLO4MyHqb3/FS6120wbK1blyTOhj
- E82Q==
-X-Gm-Message-State: AOJu0Yx/Ig7yt3DO8KC0pFH7/R+rDD51PVQUKH83NmfMW40TR/AR911K
- NckcyvLPYn2a0salyAwsypO/KhopdCgbIMbebDBKb+0/2fJBEw1+bQBcTMR9aZ+8y1GpHm7vA5q
- WHfiIpC1u+jC5Ozt4ujHztTBS3/gd7ss=
-X-Gm-Gg: ASbGncsKvipkLh/TAjfh3NlDqqRKpE7jdQzcd0Hmqso5JM+12k37enyG+aSc4LXWxwT
- nTzcnVfvtdA1cO36YWsgmW3S/c2HNH3Ns7Wh1G4PvTBQeyCHqu9RhShhNMq6f5IIaIuklcQg9Ff
- iCT9v1gYZChtWtqgx6Nw/IFo+GYfIXmPUMHaUUPYbprPPa
-X-Google-Smtp-Source: AGHT+IGkYVAAKkFivtNkHs5gHKsFpZEKUzrosjupgFn/iJhw4cBdq3zUccLhPTZZ1yBDApM9k9sIAmPR41pPxP609FU=
-X-Received: by 2002:a05:651c:1992:b0:30b:ba06:b6f9 with SMTP id
- 38308e7fff4ca-32b223d1f34mr7271361fa.26.1749635934433; Wed, 11 Jun 2025
- 02:58:54 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1749636423; x=1750241223;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pzw6bV+aEqAcL09phPCFbYtLAxgi9UXIozs4/Lpu9aM=;
+ b=vGz87DqP6CBBgcntdOg2ljaUvXGAlIhBRwCzSt7Uh6ElbJwepX1N6H5vSIrOAvJoF8
+ wQDMqc6HkVaHYfVhbLAmOv6b/bRP6iSUJneWoN9i9/9AHU0Szsw+UUCoO90/cpyj6oVD
+ Js0ypy9Wioitoc0N/LDsm8rby/TfqIOvsTPos36sO6xa0X33GwxJebwtWMsfrcPJ689P
+ y7dFsEJWyhD8B2E/HTZS42g2KAAUUfMvSQU86DvCzKkxS4/OmhPtYynoYUp/LM54VpLg
+ UjfeF02KFmIGgw5C5gDl1QHVGz/7q7a/RAJNR/9sURCrtBWWhlEJ2/vGtt6FekJgeWVc
+ Hcfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVsQD4KG6HlXW062ex1OBQ4iQncu6hMO7BKdfMZltM5VdYMt3BfHcb7okFaHS8EbKMcsEN6+kY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxP+JGlyUSlvL4ffXOk0zdDvW+lNJIgVAeeh18QkVbiTLy2SwMS
+ ChGfHEjGu3u3Q6TX2p6E+g6E2t+/WahF+Ij6zcXIt0cR/jHBAL2P0sTDxtJXcK+66V2zOYOH96r
+ OBxxsi7qpvDa+4RKYop7WsSKP4g2YsDiU+VdM5Foc9ZJ+RxI/9/RS1RJy
+X-Gm-Gg: ASbGncs/LIPWEat+fnC28/uAxWVsAZ7k4orzhpWOZROukgy+ceJbwJiKUaL2lH2p+2N
+ 4yqLr3BHO05286Y7fCr2wft95i2lO7tCVRhKMTVs8/WwzqnBVSjbPcn2t4NiZq/0LgaC4GYvgre
+ 6Y3n6hfbjJ7qJhwdJcdyF+4bUULBbKRvLniFHfpQrOMD4Gn7x181aFFsXrO7Ib+pA2AqwKOY5rY
+ 6zZWIMfgdfmpSMZ3C+r4d5T212rEDu/yWkTUgDiI3jQyQ4StNJsGOq8Rn2nFvmOc06Xu4eBfh8E
+ M8UDMeTsA1r+mX1MTEle0H8pklWO6XCiryZ+yPfNkrx4cU9HKNmd
+X-Received: by 2002:a05:6a20:748b:b0:21f:5adb:52c4 with SMTP id
+ adf61e73a8af0-21f8672610dmr5335470637.30.1749636423112; 
+ Wed, 11 Jun 2025 03:07:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH4gsNb0/x7vxdR+rDUfwJ5FzVyOjkeebXdxWyQ/b9hS1R3dS+wczvpU+yK8UtxtHBpU+TrwA==
+X-Received: by 2002:a05:6a20:748b:b0:21f:5adb:52c4 with SMTP id
+ adf61e73a8af0-21f8672610dmr5335433637.30.1749636422700; 
+ Wed, 11 Jun 2025 03:07:02 -0700 (PDT)
+Received: from [192.168.0.5] ([49.206.97.5]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7482b0c7da0sm9081134b3a.139.2025.06.11.03.07.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Jun 2025 03:07:02 -0700 (PDT)
+Message-ID: <6b4f3eb9-830c-42b5-ab01-ed715c019dc5@oss.qualcomm.com>
+Date: Wed, 11 Jun 2025 15:36:57 +0530
 MIME-Version: 1.0
-References: <20250115020737.230558-1-trini@konsulko.com>
- <174434362339.24440.10543026192875667256.b4-ty@nxp.com>
-In-Reply-To: <174434362339.24440.10543026192875667256.b4-ty@nxp.com>
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Wed, 11 Jun 2025 11:58:42 +0200
-X-Gm-Features: AX0GCFvI1Xxg-8F4lCTZKfSR3ph1ahGHbs7pXZs86Wyx2O6ypF2rqWUMUHQKBKs
-Message-ID: <CAEyMn7Yg5xkanAV+wEiGPwb4X7XqCKpJiMaPB+sdwdmhxbdKXg@mail.gmail.com>
-Subject: Re: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, mwalle@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] board: qualcomm: Add MAINTAINERS entries for
+ Dragonwing platforms
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250610093732.2060702-1-aswin.murugan@oss.qualcomm.com>
+ <18193912-d05c-4584-bf45-e9f2f97be7f7@linaro.org>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <18193912-d05c-4584-bf45-e9f2f97be7f7@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjExMDA4NiBTYWx0ZWRfXxuVdE7T/I8Qu
+ Hht5VKTyQ0mApTDI77d2isEoYNw9KTOV05dJgOdbzDbIEpfEjKISRo3bgwEIzTLnjmUS8mI9ZzW
+ uKjIpKEngcwM/C5Px15gEK4LnhtS/AW+edOg65Stu/k4nbefiS2vLtpHTR543u+zNvJFFyuDXBS
+ X4laTTVJImFDcEqgnWyHfTzYvCuP4nX57kAEllAECB9N5ehAlb/OiBgYb0DTYL5oAmc0d/GJ54Z
+ lDW1EKlr/Fp7A5R61FjZAi1x71lGVnrL2XZqvLw83objr9kSxFH2psI8MMCDvbUPU7aVq6D3PaU
+ a4yQirj7lbXG3iSXSQkF+mME4UX+9Unf7vZFq/HjCJEareygw+GcWva6+cOYDGE+dx7Meoo1hpR
+ EAsxDnz1SWVe6atRb6wgPSGWQtKai3Qui+rrBwmXgrxAM3kl/9ul2yY71jt4M7VZdIsMeOYo
+X-Proofpoint-GUID: LkDtsrzlxrVlGsASB-3bBXqBdRWzWqEo
+X-Authority-Analysis: v=2.4 cv=FaQ3xI+6 c=1 sm=1 tr=0 ts=68495548 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=e5+WE7zD2x3yJ7amfSdP5w==:17
+ a=IkcTkHD0fZMA:10 a=6IFa9wvqVegA:10 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=KKAkSRfTAAAA:8 a=C5fs7dUat4WinGpktmsA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: LkDtsrzlxrVlGsASB-3bBXqBdRWzWqEo
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-11_04,2025-06-10_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 adultscore=0
+ mlxlogscore=788 mlxscore=0 spamscore=0 suspectscore=0 malwarescore=0
+ priorityscore=1501 clxscore=1015 classifier=spam authscore=0 authtc=n/a
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505280000 definitions=main-2506110086
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +136,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng, Hi Tom,
+Acked-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-I figured out that this commit introduces problems on the kontron sl28
-board (kontron_sl28_defconfig). Since this commit accessing SD card does
-not work anymore. I see that the freescale
-has CONFIG_FSL_ESDHC_SUPPORT_ADMA2 support but now we need in
-addition MMC_SDHCI_ADMA or  SPL_MMC_SDHCI_ADMA to get MMC_SDHCI_ADMA_64BIT.
-Is this intentional?
-
-
-
-Am Fr., 11. Apr. 2025 um 04:46 Uhr schrieb Peng Fan (OSS) <
-peng.fan@oss.nxp.com>:
-
-> From: Peng Fan <peng.fan@nxp.com>
+On 6/10/2025 8:52 PM, Casey Connolly wrote:
+> On 6/10/25 11:37, Aswin Murugan wrote:
+>> Added MAINTAINERS entries for the Qualcomm Dragonwing platforms, 
+>> following
+>> the discussion in the referenced thread.
+>> https://lore.kernel.org/u-boot/20250603192206.GK1382132@bill-the-cat/
+>>
+>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 >
+> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 >
-> On Tue, 14 Jan 2025 20:07:36 -0600, Tom Rini wrote:
-> > The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used when
-> > MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And for
-> > MMC_SDHCI_ADMA_64BIT the same is true except we also require
-> > MMC_SDHCI_ADMA_FORCE_32BIT to be disabled.
-> >
-> >
->
-> Applied, thanks!
->
-> [1/1] mmc: Kconfig: Correct dependencies SDHCI ADMA options
->       commit: 53bb8fdea12a346ceda1ac109ebb05d2c9625e5d
->
-> Best regards,
-> --
-> Peng Fan <peng.fan@nxp.com>
->
-
-
-BR,
-Heiko
+> Balaji and Varadarajan can you send Acked-by tags for this? 
