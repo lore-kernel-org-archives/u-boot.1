@@ -4,92 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A16C61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 08:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E24EC677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 08:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10AD282B20;
-	Wed, 11 Jun 2025 10:56:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9BB2D82B63;
+	Wed, 11 Jun 2025 10:59:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nVKw/Z7u";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C18382B63; Wed, 11 Jun 2025 10:56:41 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC3D382BAA; Wed, 11 Jun 2025 10:59:45 +0200 (CEST)
+Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::190b])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89355828A2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:56:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8275C828A2
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:59:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3a50fc819f2so5207871f8f.2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 01:56:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749632199; x=1750236999; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3VAKlOd77pWPBFi58AJndjuaNJynzUYCe+tOVXXstD8=;
- b=nVKw/Z7uGqSiQZnoTZbljHeDu1mJH4FDIYdwjMzml6bbaSIi9NvG61MSoyUeTBAprM
- +t5IOwi5wUzdmD22FgQLfKFdQgxrUp3dcPTalyyqVDv69g0Sazxu+8Mr+uH0yGxh3b+t
- Qeq9PeRskShg4V0InxQrlj22E1GLmdk66SsRz1aRDr8vX7RxLz8pxe/4lRMvcctA0SuP
- nEOI85MG/rQAyfLBL/zhNKoY4irSrxRJxMq+0Y8m7x9j0tWBneyICWSaLXkfrpo2lrdB
- 5Tt5sbsEzh/AOQBzNyun2onT/T9FWBG/hDIzxfU2qUwK0xBZwEWOzY4QWs+hYI4Gv3/K
- hCSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749632199; x=1750236999;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3VAKlOd77pWPBFi58AJndjuaNJynzUYCe+tOVXXstD8=;
- b=NW2ovi+9F58k7EjktHJ8wrKvXXtPCaygrY4QkDvaWjDAVR/JK0E4KBpA4Hu7b4IfLb
- JghOX6CrYb3tPwBBShCwcGoZoxSICTvHbQq27Z5uK+ftcgVZB55326BvqN5u78BXd+YI
- AfX5gVaroKG8Ze212JELPRed2vnNM64V3vXlBon9B7/LBRDPhE/Q4eFDlMGwxZdUocOO
- Mhhm8sTdPMGi9/2jYGyb9MOAF1MMoTSO25UWuaYNw9N2QzAMGMyageTqcEPNJr+QVk0r
- OgI/KmsS+ltfOgqfWT7ABR176sf8XrEywAqwkGzAQLNJ6Q2Ubf6NiUe6zKseOm/kkbda
- NFJA==
-X-Gm-Message-State: AOJu0YxtF5o6niVMSAnH/60nXIaOpUDYetEdN7bMiN5lAWulBHJ7pyvz
- DXYgQbGLZkyjnX2XL8VbtFZiHDY/OZz1MjSh9Jkm9vdb/LSzPkPyn5fA7ycf1Kn9RXs=
-X-Gm-Gg: ASbGnctdwhjXzCiP+ZuMGGesjd9dfBe3Lw5HNU1gBFIIQRdG+bLqXjxHfp8f7O17Tza
- M4Kyuz1bkDHz1itjCGaetQEPqK/acro1RF9LVeKoYidjS9ghrmlMOEcN4+6uiB4OQgr3ZzYgleq
- OaWFzcpz7x2sqIxaYjA8uVs1W4RPpp5qpDY1cdB2ADpIuvYxHnKv04GxKLK3YEQvTQyXjam56a3
- rGCUKRtJn0xMQBzCYr6rCrq30krJMjhsU65ZQHYnpVyaOb3PADfyzU/KWL9xgJ2YTH6x+UzyrXS
- d//c3GrsbO/oqnCU0JyJ4hvYdMWGW1gIfnotY1u5E1jY9WM14F/JXO6xpCWUaczNbVW2KG++lOp
- jlSQipCHs0UOS7Ode2WCIvGpdtWr8qGFWF91KTw==
-X-Google-Smtp-Source: AGHT+IH9Klpxo1QtKdGlOfgIVzONzmYMtpKKmi/FzgE0VLXKnjyRIpQjdc5STLcOLY5bcXYTYTPZlw==
-X-Received: by 2002:a5d:5f89:0:b0:3a5:5270:c38f with SMTP id
- ffacd0b85a97d-3a5586748d6mr1762796f8f.0.1749632198975; 
- Wed, 11 Jun 2025 01:56:38 -0700 (PDT)
-Received: from ?IPV6:2a01:170:117e:fc:1a1e:c277:1c68:9459?
- ([2a01:170:117e:fc:1a1e:c277:1c68:9459])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a5324641c2sm14795196f8f.93.2025.06.11.01.56.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Jun 2025 01:56:38 -0700 (PDT)
-Message-ID: <07517668-b9d7-470a-b385-fae79aef9811@linaro.org>
-Date: Wed, 11 Jun 2025 10:56:36 +0200
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4bHKNZ70RXzt65;
+ Wed, 11 Jun 2025 10:59:42 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4bHKNY4vZGzrBd; Wed, 11 Jun 2025 10:59:41 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 0/3] rockchip: ringneck-px30: anticipate breakage with
+ v6.16-rc1 DT
+Date: Wed, 11 Jun 2025 10:59:30 +0200
+Message-Id: <20250611-ringneck-mdio-v1-0-529a40a0f966@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] usb: gadget: Introduce usb gadget vendor/product
- default id for ARCH_QCOM
-To: gchan9527@gmail.com, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250520-sc7180-android-boot-v1-0-3075a84ea094@gmail.com>
- <20250520-sc7180-android-boot-v1-4-3075a84ea094@gmail.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250520-sc7180-android-boot-v1-4-3075a84ea094@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHJFSWgC/x3MQQqAIBBA0avIrBNGs8CuEi1CJxsiDYUIpLsnL
+ d/i/wqFMlOBSVTIdHPhFBtUJ8Dtawwk2TeDRj3gqFBmjiGSO+TpOUnrLPbGIRmP0Jor08bP/5u
+ X9/0Ant1kNV8AAAA=
+X-Change-ID: 20250610-ringneck-mdio-9c9034c0e4d0
+To: Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Klaus Goger <klaus.goger@cherry.de>
+Cc: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,46 +66,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+v6.16-rc1 will bring an incompatible change to the Device Tree of PX30
+Ringneck which will break Ethernet support.
 
+Unfortunately, the designware net driver's logic doesn't seem to allow
+having the old Device Tree (without MDIO bus and Ethernet PHY nodes)
+with DM_MDIO and DM_ETH_PHY enabled so there cannot be a smooth
+transition.
 
-On 5/20/25 16:25, George Chan via B4 Relay wrote:
-> From: George Chan <gchan9527@gmail.com>
-> 
-> Currently vendor/product id are both 0, and that might not as we want.
-> Set to some arbitary known value that we can make it work more smoothly.
-> 
-> Signed-off-by: George Chan <gchan9527@gmail.com>
+Since this is going to bite me in a few months time, let's just break
+and fix it now in a couple of commits so I don't have to think about it
+later :)
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+This can be cleanly applied on master or next, I have absolutely zero
+preference on the branch this should be merged in (my opinion is that
+it's too late in the 2024.07 cycle to bring this in :) ).
 
-Thanks!
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Heiko Stuebner (2):
+      arm64: dts: rockchip: add basic mdio node to px30
+      arm64: dts: rockchip: move reset to dedicated eth-phy node on ringneck
 
-> ---
->   drivers/usb/gadget/Kconfig | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index 46a83141481..2a56e360b5f 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -60,6 +60,7 @@ config USB_GADGET_VENDOR_NUM
->   	default 0x0955 if ARCH_TEGRA
->   	default 0x1f3a if ARCH_SUNXI
->   	default 0x2207 if ARCH_ROCKCHIP
-> +	default 0x18d1 if ARCH_QCOM
->   	default 0x0
->   	help
->   	  Vendor ID of the USB device emulated, reported to the host device.
-> @@ -86,6 +87,7 @@ config USB_GADGET_PRODUCT_NUM
->   	default 0x350a if ROCKCHIP_RK3568
->   	default 0x350b if ROCKCHIP_RK3588
->   	default 0x350c if ROCKCHIP_RK3528
-> +	default 0x4ee0 if ARCH_QCOM
->   	default 0x0
->   	help
->   	  Product ID of the USB device emulated, reported to the host device.
-> 
+Quentin Schulz (1):
+      configs: ringneck-px30: fix Ethernet
 
+ configs/ringneck-px30_defconfig                    |  2 ++
+ dts/upstream/src/arm64/rockchip/px30-ringneck.dtsi | 22 +++++++++++++++++++---
+ dts/upstream/src/arm64/rockchip/px30.dtsi          |  6 ++++++
+ 3 files changed, 27 insertions(+), 3 deletions(-)
+---
+base-commit: d7c449c3d83a986d61e38d1762433c0607caf5c5
+change-id: 20250610-ringneck-mdio-9c9034c0e4d0
+
+Best regards,
 -- 
-Casey (she/they)
+Quentin Schulz <quentin.schulz@cherry.de>
 
