@@ -4,59 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91CDCC71136
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 17:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73350C71141
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 18:17:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA17982B20;
-	Wed, 11 Jun 2025 19:10:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C468382C2F;
+	Wed, 11 Jun 2025 20:17:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Trc2H9X+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uNTP84pY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9758582B63; Wed, 11 Jun 2025 19:10:38 +0200 (CEST)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2349882B0F
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 19:10:35 +0200 (CEST)
+ id BC16E82C30; Wed, 11 Jun 2025 20:17:43 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5489782B20
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 20:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 41FA41F4F3;
- Wed, 11 Jun 2025 17:10:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1749661834;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Ga/e8DGy4kA9qX7diL/f4Zy+cGN2wKFePIlFuubiYgY=;
- b=Trc2H9X+oXxrvH6GwwdMnjmNl8y5lOxSD+PRPXmSJ5fa8aq7pxUBjOYSFnVRjj/8orc3gi
- nj/AnVx9nXf98O46DiagKu49JScpTAGPomF4Aojj5mnrrflKgj2KTUZTXdwBdo0ZVajnHp
- kWWE7peZGvXghA8ATRgwf/We+YTC4tAu1qjCndnMoMLO8rp9OwWlgSL9AkT8PspDJsT26s
- //h8vzp9ZRII5MHcqwOvAW4+fvEDehkmufMW0mzMJrptV8SVRJ0hWnc4BQSoRja8o6EsBx
- UW42DrewdW4wC2Yj2oZBYnBTePqZnYo/axKbl2GRgm+POGtMXIFeZ8HcJJ3SSA==
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Jean-Jacques Hiblot <jjhiblot@ti.com>,
-	u-boot@lists.denx.de
-Cc: Kory Maincent <kory.maincent@bootlin.com>, thomas.petazzoni@bootlin.com,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH] usb: gadget: musb: Fix duplicate ops assignment in
- ti_musb_peripheral
-Date: Wed, 11 Jun 2025 19:10:30 +0200
-Message-ID: <20250611171031.840277-1-kory.maincent@bootlin.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55BIHcJi2689845;
+ Wed, 11 Jun 2025 13:17:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1749665858;
+ bh=4nh0nwc1k/vfWCFP6OhVEZDR9IdnXb0ru5NMQd9UacE=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=uNTP84pYip0FKI8KKcB3r0sBaQEaZzThjzX60g353Lr2AaGogzyeSs803dXSAU2+L
+ ehntOHl6N9RR8eGVImQ5jNX8n6lUqkjHC7yeR8l6ip9eedIc6Z50mW0oZdWWvu2Sgv
+ OpWmiLJc1vOTf1oq7Obn9lYvc3qS0LO0kmIxOIVA=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55BIHcWX1323479
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 11 Jun 2025 13:17:38 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 11
+ Jun 2025 13:17:38 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 11 Jun 2025 13:17:38 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55BIHcue901678;
+ Wed, 11 Jun 2025 13:17:38 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Wed, 11 Jun 2025 13:17:36 -0500
+Subject: [PATCH -next 5/5] binmain: include ti-fs-enc.bin into
+ missing-blob-help
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugdduvdejhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepmfhorhihucforghinhgtvghnthcuoehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeegudegvdeklefhheefueeiieegteegteeuudegteduvdevffeikefgjeekgfdukeenucfkphepvdgrtddumegtsgduleemkeehkeejmeejuddttdemsgefiegsmeejjehftgemleehkedtmedvkegurgenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpedvrgdtudemtggsudelmeekheekjeemjedutddtmegsfeeisgemjeejfhgtmeelheektdemvdekuggrpdhhvghloheplhhotggrlhhhohhsthdrlhhotggrlhguohhmrghinhdpmhgrihhlfhhrohhmpehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeejpdhrtghpthhtohepjhhjhhhisghlohhtsehtihdrtghomhdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmpdhrtghpthhto
- hepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepmhgrrhgvgiesuggvnhigrdguvgdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehmkhhorhhpvghrshhhohgvkheskhgvrhhnvghlrdhorhhg
-X-GND-Sasl: kory.maincent@bootlin.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250611-missing-blob-help-entries-v1-5-c6de1844117f@ti.com>
+References: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
+In-Reply-To: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
+To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
+X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,29 +80,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove duplicate .ops assignment that was overriding the correct
-ti_musb_gadget_ops with musb_usb_ops (host ops) in the ti_musb_peripheral
-driver. This was causing U-Boot crashes when trying to call the
-handle_interrupts operation since the wrong ops structure was being used.
+Now that the TIFS firmware is marked as a mandatory component to a
+successful build, provide some helpful descriptions to what it is and
+links to more information about how to get this needed firmware.
 
-Fixes: 7d98dbcc3dc ("usb: musb-new: Add support for DM_USB")
-Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- drivers/usb/musb-new/ti-musb.c | 1 -
- 1 file changed, 1 deletion(-)
+ tools/binman/missing-blob-help | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-musb.c
-index ec1baa9337d..967d0953875 100644
---- a/drivers/usb/musb-new/ti-musb.c
-+++ b/drivers/usb/musb-new/ti-musb.c
-@@ -282,7 +282,6 @@ U_BOOT_DRIVER(ti_musb_peripheral) = {
- 	.ops	= &ti_musb_gadget_ops,
- 	.probe = ti_musb_peripheral_probe,
- 	.remove = ti_musb_peripheral_remove,
--	.ops	= &musb_usb_ops,
- 	.plat_auto	= sizeof(struct ti_musb_plat),
- 	.priv_auto	= sizeof(struct ti_musb_peripheral),
- 	.flags = DM_FLAG_PRE_RELOC,
+diff --git a/tools/binman/missing-blob-help b/tools/binman/missing-blob-help
+index fcc989ed757e0d0a8d5bc8238c3d013da98aa390..d6f2de23735f987f9f5e2529b33df111440cc01b 100644
+--- a/tools/binman/missing-blob-help
++++ b/tools/binman/missing-blob-help
+@@ -61,6 +61,17 @@ the DM firmware binary and how to include it in the build.
+ 
+     https://docs.u-boot.org/en/latest/board/ti/k3.html
+ 
++ti-fs-enc.bin:
++You are missing TI's Foundational Security (TIFS) firmware which is
++critical to provide foundational security services like authenticated boot,
++and firewall management for the SoC. Your board will not boot without
++this firmware.
++
++Have a look at your board's documentation to find the latest version of the
++TIFS firmware binary and how to include them in the build.
++
++    https://docs.u-boot.org/en/latest/board/ti/k3.html
++
+ sysfw-inner-cert:
+ You are missing the inner certificate for TI's Foundational Security (TIFS)
+ firmware which is critical to authenticating the TIFS firmware during boot.
+
 -- 
-2.43.0
+2.49.0
 
