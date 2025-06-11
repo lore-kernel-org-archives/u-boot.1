@@ -4,161 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CF9C677C4
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 11:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5766FC677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 11:55:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01E658070C;
-	Wed, 11 Jun 2025 13:15:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 803BE82B63;
+	Wed, 11 Jun 2025 13:55:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mAYQ3lDK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cOJKc7y1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA35782B20; Wed, 11 Jun 2025 13:15:08 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E461782B70; Wed, 11 Jun 2025 13:55:37 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B73080050
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:15:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id C6D9C82B20
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k4deOzH7Gsd1DXcYotn4vALbz92rn6rmyUF9eOpUqI1FibrqWa9Z5cqWZta98gEFgXqcB3hq+54lx6o+uy5saoPEDg+BczB8sUrvBt1OBUTszm9NWYaRfc4+0L+MZT1/+tw54AYJEvA9cHfAMiE+AfPIqxKKzY98qUwptJG6aUISD7TA8bOZmd2dto10PeOPWzqyc3etOrCpacqnS6RjtPl3y/k26N5DO59yDu7NcHKn2kaM3bNVCmXU50T+aMdkB8Mm49Iu16+rIBbEngoiR8LNRhsp//madF1q+R2KhF58tHCwObxXyaTD4NoQzip7YKTmcB870N1IVr2KetK89g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DwZHK+k4CAolidWGa0cnxZkvFpUKyCnn04tcT5HYiAc=;
- b=APXSt7U43g2UtKdd13xLXMO0fwyIGlh3oF70biuGBNgY8CPY0F8zQc0e1A1m6NNKqzm0tU65hYvI5FmoSqPRivC8OiKKBSIgRjG6TrUm6NH51AKNs/n5sTlk4kp1d3wNNsY22+VY/ezuudsKl44flJIH4MV90wYWMt79A0s94v5v4nV8MHIzP49gmfiOtSep3XQQA8WoEqLUNRWXWJ27W3clAirGq9zGRRgyffkIQd+4NYuLzpwr0gwZrincR+XY+9M7yuYMXg4zDGK6GAku90uirzS0SwMkm5tXomqvi9Wdhrf8PMPvYt+wN+JKIW3oLimHtZwwJg8Ry48I6GGzLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DwZHK+k4CAolidWGa0cnxZkvFpUKyCnn04tcT5HYiAc=;
- b=mAYQ3lDKFtHfH9MGGj7Mx6xYYNzyS3euzp4aEIiR4hf0H7S681fuYRER2B1YZDx0y5V9oO8O/1I6nUDEU6XRz1CGdC4npezOXdhN/iySCS7J/4SUOW28d6RCwIjuOgN3Ffk+bu+S3UIetgnm3wjgMbUIUdzdwRQfaWeXR5xtBQQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS8PR04MB8182.eurprd04.prod.outlook.com (2603:10a6:20b:3b2::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.19; Wed, 11 Jun
- 2025 11:15:03 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8835.018; Wed, 11 Jun 2025
- 11:15:03 +0000
-Message-ID: <7504ed9e-7cbf-4b6a-a79f-64540550380e@cherry.de>
-Date: Wed, 11 Jun 2025 13:15:02 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-450dd065828so45692955e9.2
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 04:55:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749642935; x=1750247735; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=gaia0H+yIr+UPcT6ie7U8BdpJlOicDvPjiBfSSsfphQ=;
+ b=cOJKc7y1qO1Nh1S55CiqyLI5RXrtqiwgrbhQXLgaIE0XXZSO1tUWzswFvO+goaYeQX
+ EoQSuQjhjiE6j+FrfA0315vfIfCmPJLmperXGFXaODHMZIutOsiSGkmmvMxHt/kt1xBM
+ Uwo/60dJ5Bj/jtwtTFll2Lb5fmVz2RSDyXOMdkrJwIyorjNCq+jvpgG7xx5rgypqgqtW
+ 9xR2LcglyXhvJ3adze/3nFFME61SgV5jf5SBOoQaG/jnaKeKn0YmZpFdAZW7D1bp284s
+ ApYR5h0R45dz2s20omzPJJOaKanEI+sMef+3AhzHRGND/457UAY3D7MRKIj8pHyDP43l
+ hhLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749642935; x=1750247735;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gaia0H+yIr+UPcT6ie7U8BdpJlOicDvPjiBfSSsfphQ=;
+ b=F3+FYLVXlrbc7W+uKMFj+I3zTeBqZE6sRdT19XNZPjcIBSXUmy/aTceYlkZRdbjesq
+ uvYWu9lxfbYw2t71i6Orjr2q3oyqLRqZiBgwkkJzWyn7Ps4vYR6IPkU1idB8ClappyeH
+ b6MxAr6QtlgVKVL/zFWBb0B9AVFEuuxkPwEvwmIaI4qPLNZhF8n5A8D7WxU48nREQ5Uk
+ sNKWyC35mKLJEqZqkxxWjLCCwhJqnbaw6V+ehgBANQ61FZ4V29WRZU8uXcN2hCXttJWN
+ IWHhtOfWKGjMa0MzoxO9M4L+JDcGtA+6bbQ06hr25FJ3vEcH8hqGRhv/LSfrK83VF291
+ Blkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJUNHrd9ak//SW4h0wrEJfnnyCxEHMYhlhKSZgLXOLbS6TS/WEDNEqtP+BLzX9MILxzTkHB1s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAQlIB2CRsEij5QoLQcEItAkkTuREevgR4K7JgvDQamJm8hWsK
+ DNOyNiAvCiiucjlfnssqwKBxiCYVL0QGE/yj9LIiNecnIrFxxz+LNWXzMDqovzBh2eY=
+X-Gm-Gg: ASbGncsIcD9M5nO6M/l9E5F+5qP3ToZsWvS8uKXLKFWqHfuqr8D6n9+EZMH97HL+OtF
+ BKEouRSn22+56pZPMR4ZcuNNtHyZtItxDh1tkwQUJqZLWq+dJbTgfqAY3AIj4jMb4pOxJq7KYwi
+ Wh/amdX7MPD/lEUauDpaB9rZMTRte+LBk85b7drB+NQJcTEAXDWgXCinfOaPvK7OBec9ABRC33v
+ z3AODhDfyzsPlnI32xdoDqNepFcfEoRnFs8W+47Q9Xlj1MYIETPIpwEFvXkKGKSrmtnqZE/lWWM
+ lw/0XqVeP1EM1MY5EpCn3wfSmOegO48fFwIQpe8KWoMVfaSlgXiNs1CytkG5h08Y7pYHxJlJ1w6
+ WyBZFT2fSosihPZx1mp5kVAe5o3Fi1hky2RkYrA==
+X-Google-Smtp-Source: AGHT+IGgtdzUZwOcgeHt2nwZcTpp+2LaATenIJH1cE3zgfzNgxosGCuYNmFSGuCyNryEgzkdU9cpVA==
+X-Received: by 2002:a05:600c:6218:b0:43c:fd27:a216 with SMTP id
+ 5b1f17b1804b1-45324f1ca81mr19339575e9.23.1749642935124; 
+ Wed, 11 Jun 2025 04:55:35 -0700 (PDT)
+Received: from ?IPV6:2a01:170:117e:fc:1a1e:c277:1c68:9459?
+ ([2a01:170:117e:fc:1a1e:c277:1c68:9459])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4532516b934sm18830175e9.15.2025.06.11.04.55.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Jun 2025 04:55:34 -0700 (PDT)
+Message-ID: <fb46de68-c969-433c-8f11-2dbc258afeb0@linaro.org>
+Date: Wed, 11 Jun 2025 13:55:32 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rk3288: add fdtoverlay_addr_r to default env
-To: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>
-References: <20250611110454.23428-1-m95d+git@psihoexpert.ro>
+Subject: Re: [PATCH v3 0/3] Implement reset to EDL for qcs9100
+To: Varadarajan Narayanan <quic_varada@quicinc.com>,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ ilias.apalodimas@linaro.org, clamor95@gmail.com, robert.marko@sartura.hr,
+ me@samcday.com, sjg@chromium.org, marek.vasut+renesas@mailbox.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250507070733.2871986-1-quic_varada@quicinc.com>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250611110454.23428-1-m95d+git@psihoexpert.ro>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250507070733.2871986-1-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS9PR05CA0122.eurprd05.prod.outlook.com
- (2603:10a6:20b:497::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB8182:EE_
-X-MS-Office365-Filtering-Correlation-Id: 56126c0a-ed09-4e4f-6d2f-08dda8d936a2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V2daa2UyVHhvZjcwb3ViSExOMi8wQnArSEJ6SlJ5RjUxOEVhdkhLZkd5TzVq?=
- =?utf-8?B?cm5qU2FaN3YrclZvclJjdkEwaUl6QmtCK3BEdE5vKzJ1MzYyVmJ3OEcwTFBP?=
- =?utf-8?B?Q1p4dUI3NDBocUNDcDRzSjJrbHNXK1RmejVwR1VueFZaTnlPd1JWZ21Da0ZV?=
- =?utf-8?B?ZjljZE1Ed05nNUZGZkoralpEeGtSNmNzc3BVSmpIZk1xUWZIQnprb3BibWU3?=
- =?utf-8?B?TWZJakE3aUdKbWcxVGEwRlI2bk9RbU5IZ0liY2NnTmxMQ29DbS9kTEZJMXU1?=
- =?utf-8?B?YkhyZENoTlEwV2U2dHhIQjhhUXJ4bFRsaGhGSmxDMXd5NVhBdTRYQ2NzdUVQ?=
- =?utf-8?B?dVdDM1ZsUFhzT0dvR3ZvWW80b0RTVFI4cERrRDJObExxNFdQNDVTY09DdmFF?=
- =?utf-8?B?Q0tGbG1lUDY4VTJXd1pqZUY2OHErY20wTkRQaU1LMUtwMmkyM2tjOU9SVFJh?=
- =?utf-8?B?UDB0clpVdGpOQi95TUlHY1p4dDRVQ1RZUjJxVWl5bXg4elpRSVh3eUNVdzNM?=
- =?utf-8?B?bGozejJ3Y3VJQ2pWbFZ3ckJOdFVHNFRsc1ozM1FmVWE1d3hHN2FWVzRZQngz?=
- =?utf-8?B?OU9yRjBvQkhsVkdvOGtBSE9mRng0QWRQWG5BVEphZG56SVc3UnpUanlDVCtH?=
- =?utf-8?B?Y3grTG9FWjBNWFlJOHJtcThhUmJIYWFoWHVoYnVROG1NQXA0MzV1cGlJaUNk?=
- =?utf-8?B?NENIUkdpWk9BcFovdDRnbkxORkVMbTRKZVdqbXRyZU9FK2pRS1hSV0kwZEk5?=
- =?utf-8?B?d2dUeElvV2NwRHlYTE1ZRmFVcVMrY2txSlhmOGV2L3g3Q1B3T3cxNVk0TThY?=
- =?utf-8?B?UmgyaFdUS1lHd2RzY0RyM2xaSEtDK1dXdm9CSnl2TURmNkE4eG5QSU5SZnpT?=
- =?utf-8?B?UkNuQnF5eEV4MFdUbUhpckNRUWRpdUdXeUkvZHRITDBSdjJLbjUybWUrYTVE?=
- =?utf-8?B?bTZpQnRmUzJvc2FTUmhnRHovMGlwU2tBT1FzRytqV2I0Vm42cVJyTnhEZWxH?=
- =?utf-8?B?QTR4M2ZUOW1WSktaWGZnZzZqZVkwSkt6djNheW9MN2dJaXR2Z3l5STUvNnVL?=
- =?utf-8?B?SHZzWEEzd3MvZTl5MmQ0ajFoTnA3UFdFUmlRUUlyUVVsbXVXcVRPSDNpR2Vo?=
- =?utf-8?B?VncxeElIeXJTS21KL05YMmZBbU52Y2hRRk4rN1ZmQXMvU0NyaVNreUFKWDRT?=
- =?utf-8?B?K3hXeldxdGI1SG5JbEJFWGg2ZWluRTdOcmxpTzBrS3BUNm0wSVY0dXN5dCtJ?=
- =?utf-8?B?VVByQklWQ3hGNk1TaTk2U2hhZTVWenlZdG4xcC9CVFc3L2syeXBlZWt1Q1hv?=
- =?utf-8?B?R3VZa2ZuMkFhSlJhTi96enY4RE9YYnRYN0xTbjZhM3VTYUhZQ0g0RGM0dWxy?=
- =?utf-8?B?L1ZqcklWcVpTbDFWdHVKNGk5eWd6NTNpSE9KbU1qa2h0OUZ3NVBaTGxSczAx?=
- =?utf-8?B?L3lnZEFvWkZKVHo0Y004SSswSVpiMTFIV01pbkQ0TWJHV3VMOGwySFd0Si9z?=
- =?utf-8?B?cHpWaVJsOVIyVUxwQ1QrUDR5MHgxdkFRdksxaElvV2plYU5sNzJrTlJNbEQx?=
- =?utf-8?B?Rmt1Y09COHI4bGJVL09wYW5nWFlQeDhxWEVHaU1ZN21iSWNBbGFkS1VFcDVh?=
- =?utf-8?B?am1mME9pWklyTm1iZjNjVXFHd2QrQlpqSUwzS3E3VGtGTVpLV2NPTVVMUllC?=
- =?utf-8?B?cHpYWjY2S3k1Y1JLSkJib3R5U1Z6T3lyTGFqaFhBWXZuUmQ0UWRzdjQ2L3ha?=
- =?utf-8?B?UG1yT0FURTNuQTJwZ3NJSHYzekRPWkl4QlJrSE11WnBON0ltckM0cUxyc0sx?=
- =?utf-8?B?aUUxdkYzNDh5RDVZK3BTcmY3eXNlc0NlelJTK1JZbXRSRXdrQk1MWjA4RStF?=
- =?utf-8?B?ZjRrSFFFaHF3SXRTc2hQR1o2RVA5MHVCRVpoTHhHZnBXdHlraXZUMWc3bTRx?=
- =?utf-8?Q?Z+VLhwuyctQ=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Zy9EdTBRbm1uQmFYQzVyZk9lKytlSTJNNkdkRnVrbEJTVlNrUGsyeXlxMDJY?=
- =?utf-8?B?S0VXV1NwTlM4SUhPL1VBeDRZS09QTGtGTnJJMjBramtaOFNhT01SSnFZSFk5?=
- =?utf-8?B?c1RXbiswVGhocG9YNm82dmNlV0t4ZGZNdUVwV1FQUEFxMXdMVldYaXRxbUJM?=
- =?utf-8?B?bUlaSTNXbldia1hmNnpKSElVUUphZW5XelZPRTBHRlBobDJraCthdEpqQURy?=
- =?utf-8?B?NWZGd000QTgzdVpoaEJidU9zR3BEenc1RkRBVGVYUDFKK0NhcFpRdTgwUWJ6?=
- =?utf-8?B?WUNVWVAzQnREUTdNZWE5TDNRRVpRdUV5T3I3ZmNTUTJoWVFpY3lVbzhsVkFN?=
- =?utf-8?B?STN2Z2htZ3h0R2s4Ym8rWG1ud0JYYUJNeGQ5QlROei9yd1JHWFhMUmlBWTdk?=
- =?utf-8?B?ZFkyWUxDN2dmQThYSk1OZkNmSVY1bVVRUkI3ZElPUXdnR2MzdUNWanZWQjVX?=
- =?utf-8?B?LzBQMlM0YjVKc1d0WFE2dllLS1pWTk43MVN5emVGbHZrZG55RDhCcFRadld2?=
- =?utf-8?B?QVdsUzl5ano3QmQ3Rzg2cnQ3RFBDNEdMMXRiTlhacURMYnlXM2FxQXQxUkxz?=
- =?utf-8?B?cGpCZ01xejlYaUtLcCtWWS9uK0EydFA0NG9EeFZwVnZucG8wTVlIREUzTHRl?=
- =?utf-8?B?aFBGbWZ2SW1LRk95TEdlbHAybGprczAwWGF5RC9EdTlHMmhQM09zdU83Q29Z?=
- =?utf-8?B?cVVPaVJ3dm5QWGxBWUJKcGZlTWswbXloN0swdnZQOFJzWk5SZUlIcXlQVWZ2?=
- =?utf-8?B?emdQWXV1Q2N3VDNxUmVRZzJ0MHpmemdXQ1dxNUp4dks1dzFYdUJIeHZIQlAy?=
- =?utf-8?B?NlFvMUlQL0xPb1RCZDczbWNnajhHQ0tKOFVqc2RNOHQ4RWVQT0Q4TWRQZlZl?=
- =?utf-8?B?ZWZMU0t4ZGtHa0J6MnpCSGFMRlRIU0ZFYjIrWC92UUxCbGR6a3hwY1J5VERl?=
- =?utf-8?B?dFNPcGx5eFU5ZFp0TDI5S3ZSWHV1NTBIOURCckpwK0tWQWhINlRXRW02REp5?=
- =?utf-8?B?ampmcVJuS2sxQWtSbUxpYWNCQTI2bEhtcDc4QTFvUzBoRFRMbENMa2taRkxE?=
- =?utf-8?B?QkdOcVZwU0tLOWVYUm9lcUFacE5wVyt6M1ZwVkUvb1krMXNWbEtXclQxVDg1?=
- =?utf-8?B?ZjRXTTdLUmYxTFFYZHVlcEJIejRvYXJqM0JINks1L1UwTGR2NHpYenFRTk5C?=
- =?utf-8?B?MGQvcWh4LzREKy9Pbm92RVJPTzlRRjZuRFNLRmpIWVFGOXQyRWh5WVRxdXBQ?=
- =?utf-8?B?Q1ZrVDB1UVRXb0dOUzh5cllmcHl4QlBSWlNyVTdqbFlKQjNQNHEwdGFuWlI1?=
- =?utf-8?B?QjdJRXV6WUVHN1FQeGtpN01xMlZCWWUvQnJhbUFleElYOFV5TGJiZEEwdGty?=
- =?utf-8?B?bWJtdEMvbWFQeGhBd2kyeDZlSlNDakozekg2bmVwbFkyakRvVWxSU3NiREdV?=
- =?utf-8?B?Z0pXVk5wZDBGMlFxZ3IvT3lhVnBaOHVTYnp5TmpGcERBN3A5dFMwYU5ISEli?=
- =?utf-8?B?UEd0RmhHVHVhNlZvQ2k5dHBFMjVaVmZiM1g4N25YNmNoRjZNc3oxWFQ5Snp2?=
- =?utf-8?B?NG5pQ2lvNE1KS3VkaFMrbk1CN0F1K1lqZW14clVCd2FQcmdybWs4WFpnbEtC?=
- =?utf-8?B?R3IyeG5GcTBHU1lwZnA1dmVaWlE5QWRRdDd0b0VBUkQ2bFRtaXZuNVVpSzJx?=
- =?utf-8?B?ZGhPQlhES2hkY0ZXbU9XaFVGRTlhUExzVXlWVThqT1hjanNuSEJUc2d3QXJ5?=
- =?utf-8?B?RGVHaWxxQlhVVDFFM29UV2NmdzFhaE9PUE9qWDR4Z3dCT3ZYbUUySEd4NFZi?=
- =?utf-8?B?QklpNFNvT0ZDaSsrck9NbEl6Nndjb1RGazYrM0pwZFBob1c3K3BZQi9ZSlN4?=
- =?utf-8?B?VWFLVlFqUzdydDY1Z3kra1gra05qUUZ5YklTN0tIZFhDcGZLcDRaVkpNUHho?=
- =?utf-8?B?SEhGMUFjd3c2LzRXQWo4NnJiSzZSWER1UkFMTU5SMnZjQm9YM1hwcjZWaElo?=
- =?utf-8?B?Q1VuQmRRTWdpUnRGQXNYSGR3RkNpbHorQW83YnNLTUpXbkZxTzd2cTNMamx6?=
- =?utf-8?B?UlczU0UrWmx5N0d4a1hSY1RPdllhdXl2RVJzWWtvYW8rOHdLMlg4cHZQNXQr?=
- =?utf-8?B?NFo3dGJFVnMzYkxraEUvZ01Ud3FKdlJJU3dpVTl6UExPdTVlSW9VUWp6NVBo?=
- =?utf-8?B?ZkE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56126c0a-ed09-4e4f-6d2f-08dda8d936a2
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2025 11:15:03.6142 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hRg058nAyKbXW8ItLFJpXJlyfzGDKHeS3puyVj25lvfR5Z4GPGjbLbieg7deGWyc/g4j9v53bM/SyxHtGRvHyzf9yOjoSfo6UxhIaPw7kM0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8182
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,28 +105,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marius,
+Hi Varadarajan,
 
-On 6/11/25 1:04 PM, Marius Dinu wrote:
-> [You don't often get email from m95d+git@psihoexpert.ro. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 5/7/25 09:07, Varadarajan Narayanan wrote:
+> Using the 'reboot edl' command in Linux, the platform can reboot to the
+> Emergency Download mode. Implement the same for U-Boot.
 > 
-> rk3288 is missing fdtoverlay_addr_r.
-> The new addresses match those used by rk3308.
-> Tested on Asus TinkerBoard S.
+> v3: * Introduce a sysreset op that will pass down the 'reset' command
+>        arguments to registered handlers
+>      * Handle 'reset to edl' alone in qcom-psci driver
 > 
-> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
+> v2: * Rebased to recent sources
+>      * Dropped the first patch as it is not applicable anymore
+>      * Bind the new driver from psci driver
 
-Looks reasonable to me,
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Sorry for the late reply.
 
-I'm wondering if and when we'll be able to share all those variables 
-among all/most Rockchip SoC/boards instead of fixing them one by one? It 
-seems like the last few releases we're playing catch-up with less 
-popular (upstream) SoCs (see PX30 for example).
+This really needs some associated documentation, at least adding the edl 
+arg to doc/usage/cmd/reset.rst and the help output in cmd/boot.c should 
+describe the edl arg if CONFIG_SYSRESET_QCOM_PSCI is enabled.
 
-Thanks!
-Quentin
+it also doesn't build?
+
+../drivers/sysreset/sysreset-uclass.c: In function 'sysreset_walk_arg':
+../drivers/sysreset/sysreset-uclass.c:93:63: error: passing argument 3 
+of 'sysreset_request_arg' from incompatible pointer type 
+[-Wincompatible-pointer-types]
+    93 |                         ret = sysreset_request_arg(dev, argc, 
+argv);
+       |                                                               ^~~~
+       |                                                               |
+       | 
+char * const*
+../drivers/sysreset/sysreset-uclass.c:35:69: note: expected 'const char 
+**' but argument is of type 'char * const*'
+    35 | int sysreset_request_arg(struct udevice *dev, int argc, const 
+char *argv[])
+
+ignoring that for a sec, I'm a bit worried still about how this behaves 
+on boards that don't implement this psci call, on sdm845 for example we 
+just hang.
+
+I think psci_system_reset2() should be adjusted to time out (though I 
+can't imagine a psci implementation that would return execution to el1 
+during the reset, so maybe the timeout isn't even needed?) and return an 
+error if the reset didn't happen.
+
+Then qcom_psci_sysreset_request_arg() should print some useful error 
+message ("reset2 not supported on this platform, reset to edl failed") 
+and bubble up the error code to abort the reset entirely.
+
+Kind regards,
+
+> 
+> 
+> Varadarajan Narayanan (3):
+>    drivers: sysreset: Add sysreset op that can take arguments
+>    sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
+>    configs: qcs9100_defconfig: Enable SYSRESET
+> 
+>   configs/qcs9100_defconfig             |  2 ++
+>   drivers/firmware/psci.c               |  4 +++
+>   drivers/sysreset/Kconfig              |  6 ++++
+>   drivers/sysreset/Makefile             |  1 +
+>   drivers/sysreset/sysreset-uclass.c    | 32 +++++++++++++++++++++
+>   drivers/sysreset/sysreset_qcom-psci.c | 40 +++++++++++++++++++++++++++
+>   include/sysreset.h                    | 18 ++++++++++++
+>   7 files changed, 103 insertions(+)
+>   create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
+> 
+
+-- 
+Casey (she/they)
+
