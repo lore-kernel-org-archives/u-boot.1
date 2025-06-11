@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B8BC71141
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 18:18:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56800C71136
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 18:18:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ED9982C8D;
+	by phobos.denx.de (Postfix) with ESMTP id 72DCC82CB6;
 	Wed, 11 Jun 2025 20:17:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EBXM5RcD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OS9S1MEA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF45382B7C; Wed, 11 Jun 2025 20:17:45 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 0D96B82B0F; Wed, 11 Jun 2025 20:17:47 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B46182B70
+ by phobos.denx.de (Postfix) with ESMTPS id 61A8282B63
  for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 20:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55BIHcnp1451919;
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55BIHcKQ2655450;
  Wed, 11 Jun 2025 13:17:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1749665858;
- bh=4GfY+4aDlGRIW1xo6QWETuJlZsY3hl88Nw9dwmehsxE=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=EBXM5RcDMYlRH0hhaPTRbj5zml4XcLjUFzjdwIZOGfoRjzKN+EcioYuVsKsBC2d3T
- oY/SPfOTVWnz41UPgJNpSrAhR0sGJfTfv83jCXAe+OCh0gaceJ598qyFltQAEQelYx
- 7FyxbHTpWCbNRarSn31FbrbeQ129s8CIbuIh/ZJI=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55BIHcgA1203174
+ bh=YzL3Y8wg6lFLfYNBA+GazYwxEIThd6E+wRa0oaobIBo=;
+ h=From:Subject:Date:To:CC;
+ b=OS9S1MEAuToCB/IVldmJQHs3+OD1fqTT5rxbgKSoTCDnqLiyMRGs0OcKTWkIwqmXj
+ Od5Bs7EsGpzp8W4hvtUHw8nlJNB64Dwqd7qXpbdblfEleseh27Y+Rq7ftnRoW8nVAM
+ tZc7H/lpSHjrZLGaOH4wu+EnfjMFx04LItMu9w2s=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55BIHcWW1323479
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
  Wed, 11 Jun 2025 13:17:38 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 11
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 11
  Jun 2025 13:17:38 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
  Frontend Transport; Wed, 11 Jun 2025 13:17:38 -0500
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55BIHcC9901669;
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55BIHcad731484;
  Wed, 11 Jun 2025 13:17:38 -0500
 From: Bryan Brattlof <bb@ti.com>
-Date: Wed, 11 Jun 2025 13:17:32 -0500
-Subject: [PATCH -next 1/5] binman: alphabetize missing-blob entries
+Subject: [PATCH -next 0/5] add a few entries into missing-blob-help
+Date: Wed, 11 Jun 2025 13:17:31 -0500
+Message-ID: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250611-missing-blob-help-entries-v1-1-c6de1844117f@ti.com>
-References: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
-In-Reply-To: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
+X-B4-Tracking: v=1; b=H4sIADvISWgC/x3MwQqDMAyA4VeRnBdIC5uyVxk72JnWgIvSiBTEd
+ 7d6/A7/v4NxFjZ4Nztk3sRk1gr3aOA39poYZagGT/5JL+fwL2aiCcM0Bxx5WpB1vRboQxeJ+tB
+ R20Ltl8xRyv3+ACqXFb7HcQKJwDKIcgAAAA==
+X-Change-ID: 20250611-missing-blob-help-entries-2b8f00ab8077
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
  <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
@@ -79,76 +81,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As the list of entries grows let's alphabetize the list to make
-searching a little easier. No functional changes intended
+Hello everyone,
+
+Now that TIFS and DM firmwares are marked as mandatory items for a 
+successful build[0] we should provide some more descriptive help text on 
+where to get the firmware in the event they are not found and add links 
+to more information about them.
+
+We do need to expand the regex to allow the '.' dot in 'ti-fs-enc.bin' 
+so we can add it to the list which was the lesser number of lines 
+changed than renaming all these entries to 'tifs' or 'ti-fs' which the 
+current regex will match.
+
+Happy Hacking
+~Bryan
+
+[0] https://lore.kernel.org/u-boot/20250506-non-optional-v2-1-f58b12aab913@ti.com
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- tools/binman/missing-blob-help | 36 ++++++++++++++++++------------------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+Bryan Brattlof (5):
+      binman: alphabetize missing-blob entries
+      binman: add ti-dm entry to missing-blob-help
+      binman: add sysfw-inner-cert to missing-blob-help
+      binman: allow '.' to be included in the missing blob tags
+      binmain: include ti-fs-enc.bin into missing-blob-help
 
-diff --git a/tools/binman/missing-blob-help b/tools/binman/missing-blob-help
-index ab0023eb9fb59fb84757770bcec4993d8351e9fb..b73b16f18491c2b45300ee4734d0f57eebb5635b 100644
---- a/tools/binman/missing-blob-help
-+++ b/tools/binman/missing-blob-help
-@@ -14,15 +14,6 @@ atf-bl31-sunxi:
- Please read the section on ARM Trusted Firmware (ATF) in
- board/sunxi/README.sunxi64
- 
--scp-sunxi:
--SCP firmware is required for system suspend, but is otherwise optional.
--Please read the section on SCP firmware in board/sunxi/README.sunxi64
--
--iot2050-seboot:
--See the documentation for IOT2050 board. Your image is missing SEBoot
--which is mandatory for board startup. Prebuilt SEBoot located at
--meta-iot2050/tree/master/recipes-bsp/u-boot/files/prebuild/seboot_pg*.bin.
--
- iot2050-otpcmd:
- See the documentation for IOT2050 board. Your image is missing OTP command data
- block which is used for provisioning the customer keys to the board.
-@@ -31,22 +22,31 @@ meta-iot2050/tree/master/recipes-bsp/secure-boot-otp-provisioning/files/make-otp
- for how to generate this binary. If you are not using secure boot or do not
- intend to provision the keys, disable CONFIG_IOT2050_EMBED_OTPCMD.
- 
-+iot2050-seboot:
-+See the documentation for IOT2050 board. Your image is missing SEBoot
-+which is mandatory for board startup. Prebuilt SEBoot located at
-+meta-iot2050/tree/master/recipes-bsp/u-boot/files/prebuild/seboot_pg*.bin.
-+
- k3-rti-wdt-firmware:
- If CONFIG_WDT_K3_RTI_LOAD_FW is enabled, a firmware image is needed for
- the R5F core(s) to trigger the system reset. One possible source is
- https://github.com/siemens/k3-rti-wdt.
- 
--rockchip-tpl:
--An external TPL is required to initialize DRAM. Get the external TPL
--binary and build with ROCKCHIP_TPL=/path/to/ddr.bin. One possible source
--for the external TPL binary is https://github.com/rockchip-linux/rkbin.
--
--tee-os:
--See the documentation for your board. You may need to build Open Portable
--Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
--
- opensbi:
- See the documentation for your board. The OpenSBI git repo is at
- https://github.com/riscv/opensbi.git
- You may need to build fw_dynamic.bin first and re-build u-boot with
- OPENSBI=/path/to/fw_dynamic.bin
-+
-+rockchip-tpl:
-+An external TPL is required to initialize DRAM. Get the external TPL
-+binary and build with ROCKCHIP_TPL=/path/to/ddr.bin. One possible source
-+for the external TPL binary is https://github.com/rockchip-linux/rkbin.
-+
-+scp-sunxi:
-+SCP firmware is required for system suspend, but is otherwise optional.
-+Please read the section on SCP firmware in board/sunxi/README.sunxi64
-+
-+tee-os:
-+See the documentation for your board. You may need to build Open Portable
-+Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+ tools/binman/control.py        |  2 +-
+ tools/binman/missing-blob-help | 67 ++++++++++++++++++++++++++++++------------
+ 2 files changed, 50 insertions(+), 19 deletions(-)
+---
+base-commit: 59d00e20fced23e6463aa09db889dd548baee677
+change-id: 20250611-missing-blob-help-entries-2b8f00ab8077
 
+Best regards,
 -- 
-2.49.0
+Bryan Brattlof <bb@ti.com>
 
