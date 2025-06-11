@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42285C61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 09:37:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2196C61CE7
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 09:58:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D691828A2;
-	Wed, 11 Jun 2025 11:37:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F75C828A2;
+	Wed, 11 Jun 2025 11:58:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="yxb95gUR";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MIG5nS+z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B1EF82B20; Wed, 11 Jun 2025 11:37:23 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 995CC82A4B; Wed, 11 Jun 2025 11:58:57 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9475380050
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 11:37:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A2B480050
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 11:58:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=8257ebf683=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55B7lawX007268;
- Wed, 11 Jun 2025 11:37:14 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=BceTY9nUrSPTl9cujAJUym
- 8FI6RpH4OVgFf4ubwUoHI=; b=yxb95gURv1D0qxSxpYn5L5/+Zcmjrmvu9WN0z5
- VUPSOLXjAtA798IkUva7h1IxHVc0DYK8sPQKggQjiPWORJf8rcMhd2y+jfPv1kjt
- +ZZQzDpzP6simPBCl5TtBaqSHasLHvsFf0SOQ/IEX5TeJ2/sqgv5Tc0hSkCxDpk0
- ayhesrxHVQdN6mAxFkdXdCrDdh2SAd6g5+D+3WH3e/f3W/Nsq+ByIIQpMPQBSfqE
- JlmjpgZ8mY5kh52lqS7vZVbkZ8ZZD66t4M1RoLJnLa/0ACNMMtfTurWp0VijIv5n
- HvcAUVZf4+u91ib3znhADSY2LNcYQ6TAx0MotZqUVGJc8ucQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4750cnxd3e-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 11 Jun 2025 11:37:14 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AE8B640048;
- Wed, 11 Jun 2025 11:36:14 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5BF7BB1DA7E;
- Wed, 11 Jun 2025 11:35:35 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Jun
- 2025 11:35:34 +0200
-Message-ID: <65e007f8-fe6b-4fc4-ae88-9f6abd4d554b@foss.st.com>
-Date: Wed, 11 Jun 2025 11:35:34 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=heiko.thiery@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-32add56e9ddso52678971fa.2
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 02:58:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749635935; x=1750240735; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cuctOQVMFL9e8poU/sq78JYPAUSHTOuKGWaDiL0rR5s=;
+ b=MIG5nS+zM3T59GK6xvXaQFsvtJqEuZre1L3ZmOMzL7KHVEh6MWxGRZJC2a7hP68cN4
+ h3BB0fRNF+JPg9rbnyaPjpNVVBG8jHXM/5caK/YoSYsf0DkPhGBnZWRuU5+PwNUyZmCe
+ vIm8ZZm6PPS3HyXHWUzh3S65R4/COgl2jM9K2ZVpPKBfEv75mL98tEItD9Ih+d/LIvIo
+ sEAKssQm3AaboV3mwe8u6EyFuetHh61xH/C2A3zH9D1xYto0p8ZbkPgvhoxEOBrJad85
+ UQcz5OeURmGXfTIo1NFzag9pe6z8eWHhI6rhGRx6xSSSMOY4YSvClirvk7tQOfDvXnPu
+ cS7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749635935; x=1750240735;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cuctOQVMFL9e8poU/sq78JYPAUSHTOuKGWaDiL0rR5s=;
+ b=QU1BbVsVsptF8UPEAN2Xq+8pLbRPree5QKnBJp8GNWPo3crutF7Y6v+TR/RTIUknWa
+ lZvD2iltfbVQQAzM9e2g8sr83wuufioL++V7nNiqDwdJDD4X2BpLSNAnWGoYmI4gUsT2
+ kxAA3C3+R5hBvlt6D5h80vZNgrAJa0QlHpQ1tddk+qyTfRTVZQGoJgRe4YrGsVmAfm4l
+ NMkDxZD3TGpLomK8UY3pI4t/fSUaphFd+LSbZXkVQ+46BcItIoZumdFEbqoaTmCl3MPY
+ vW+XuNn1fWUnPiKN8QL270r2umHVIGgPwGztKzCpbLO4MyHqb3/FS6120wbK1blyTOhj
+ E82Q==
+X-Gm-Message-State: AOJu0Yx/Ig7yt3DO8KC0pFH7/R+rDD51PVQUKH83NmfMW40TR/AR911K
+ NckcyvLPYn2a0salyAwsypO/KhopdCgbIMbebDBKb+0/2fJBEw1+bQBcTMR9aZ+8y1GpHm7vA5q
+ WHfiIpC1u+jC5Ozt4ujHztTBS3/gd7ss=
+X-Gm-Gg: ASbGncsKvipkLh/TAjfh3NlDqqRKpE7jdQzcd0Hmqso5JM+12k37enyG+aSc4LXWxwT
+ nTzcnVfvtdA1cO36YWsgmW3S/c2HNH3Ns7Wh1G4PvTBQeyCHqu9RhShhNMq6f5IIaIuklcQg9Ff
+ iCT9v1gYZChtWtqgx6Nw/IFo+GYfIXmPUMHaUUPYbprPPa
+X-Google-Smtp-Source: AGHT+IGkYVAAKkFivtNkHs5gHKsFpZEKUzrosjupgFn/iJhw4cBdq3zUccLhPTZZ1yBDApM9k9sIAmPR41pPxP609FU=
+X-Received: by 2002:a05:651c:1992:b0:30b:ba06:b6f9 with SMTP id
+ 38308e7fff4ca-32b223d1f34mr7271361fa.26.1749635934433; Wed, 11 Jun 2025
+ 02:58:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Gabriel FERNANDEZ
- <gabriel.fernandez@foss.st.com>, Marek Vasut <marex@denx.de>, Patrick
- DELAUNAY <patrick.delaunay@foss.st.com>, <patrice.chotard@foss.st.com>,
- Simeon Marijon <simeon.marijon@foss.st.com>, Valentin Caron
- <valentin.caron@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot next / v2025.10 = u-boot-stm32-20250611
+References: <20250115020737.230558-1-trini@konsulko.com>
+ <174434362339.24440.10543026192875667256.b4-ty@nxp.com>
+In-Reply-To: <174434362339.24440.10543026192875667256.b4-ty@nxp.com>
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Wed, 11 Jun 2025 11:58:42 +0200
+X-Gm-Features: AX0GCFvI1Xxg-8F4lCTZKfSR3ph1ahGHbs7pXZs86Wyx2O6ypF2rqWUMUHQKBKs
+Message-ID: <CAEyMn7Yg5xkanAV+wEiGPwb4X7XqCKpJiMaPB+sdwdmhxbdKXg@mail.gmail.com>
+Subject: Re: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, mwalle@kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-11_04,2025-06-10_01,2025-03-28_01
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,170 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Peng, Hi Tom,
 
-Please pull the STM32 related patches for u-boot/next, v2025.10 = u-boot-stm32-20250611
+I figured out that this commit introduces problems on the kontron sl28
+board (kontron_sl28_defconfig). Since this commit accessing SD card does
+not work anymore. I see that the freescale
+has CONFIG_FSL_ESDHC_SUPPORT_ADMA2 support but now we need in
+addition MMC_SDHCI_ADMA or  SPL_MMC_SDHCI_ADMA to get MMC_SDHCI_ADMA_64BIT.
+Is this intentional?
 
-https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/26607
 
-Thanks
-Patrice
 
-The following changes since commit 59d00e20fced23e6463aa09db889dd548baee677:
+Am Fr., 11. Apr. 2025 um 04:46 Uhr schrieb Peng Fan (OSS) <
+peng.fan@oss.nxp.com>:
 
-  Merge tag 'v2025.07-rc4' into next (2025-06-09 16:28:28 -0600)
+> From: Peng Fan <peng.fan@nxp.com>
+>
+>
+> On Tue, 14 Jan 2025 20:07:36 -0600, Tom Rini wrote:
+> > The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used when
+> > MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And for
+> > MMC_SDHCI_ADMA_64BIT the same is true except we also require
+> > MMC_SDHCI_ADMA_FORCE_32BIT to be disabled.
+> >
+> >
+>
+> Applied, thanks!
+>
+> [1/1] mmc: Kconfig: Correct dependencies SDHCI ADMA options
+>       commit: 53bb8fdea12a346ceda1ac109ebb05d2c9625e5d
+>
+> Best regards,
+> --
+> Peng Fan <peng.fan@nxp.com>
+>
 
-are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250611
-
-for you to fetch changes up to 40c158933307d8977d9d7871ab1c8d1415a6bcde:
-
-  board: stm32: add stm32h747-discovery board support (2025-06-11 09:42:56 +0200)
-
-----------------------------------------------------------------
-Add clock and reset drivers support for STM32MP25
-Add STM32H747-Discovery board support
-Add tamp_nvram driver
-Add SPL support and clock tree init to STM32MP13 RCC driver
-Add STM32MP13xx ram support
-Add support for STM32 Image V2.0 for STM32MP13xx
-Fix SYSRAM size on STM32MP13xx
-Fix DBGMCU macro on STM32MP13xx
-Auto-detect ROM API table on STM32MP15xx
-
-----------------------------------------------------------------
-Dario Binacchi (9):
-      ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]art_pins phandles
-      dt-bindings: arm: stm32: add compatible for stm32h747i-disco board
-      dt-bindings: clock: stm32h7: rename USART{7, 8}_CK to UART{7, 8}_CK
-      ARM: dts: stm32: add uart8 node for stm32h743 MCU
-      ARM: dts: stm32: add pin map for UART8 controller on stm32h743
-      ARM: dts: stm32: add an extra pin map for USART1 on stm32h743
-      ARM: dts: stm32: support STM32h747i-disco board
-      ARM: dts: stm32: add stm32h747i-disco-u-boot DTS file
-      board: stm32: add stm32h747-discovery board support
-
-Gabriel Fernandez (4):
-      clk: stm32mp25: Add clock driver support
-      clk: stm32mp25: implement clock check security function
-      clk: stm32: fix clock counter
-      reset: stm32mp25: add stm32mp25 reset driver
-
-Marek Vasut (8):
-      ARM: stm32: Drop unnecessary space
-      ARM: stm32: Fix SYSRAM size on STM32MP13xx
-      ARM: stm32: Fix DBGMCU macro on STM32MP13xx
-      ARM: stm32: Auto-detect ROM API table on STM32MP15xx
-      clk: stm32mp13: Fix typo in STM32MP13 RCC driver
-      clk: stm32mp13: Add SPL support and clock tree init to STM32MP13 RCC driver
-      ram: stm32mp1: Add STM32MP13xx support
-      tools: stm32image: Add support for STM32 Image V2.0
-
-Patrice Chotard (3):
-      ARM: dts: stm32: switch from fixed to scmi clocks for stm32mp257f-ev1
-      configs: stm32mp13: increase SYS_MALLOC_F_LEN to 0x210000
-      configs: stm32mp25: increase SYS_MALLOC_F_LEN to 0x60000
-
-Patrick Delaunay (6):
-      clk: add CONFIG_CLK_AUTO_ID
-      clk: sandbox: update driver for CONFIG_CLK_AUTO_ID support
-      sandbox: test: update for CONFIG_CLK_AUTO_ID support
-      clk: fixed_rate: configure clock ID with CONFIG_CLK_AUTO_ID
-      clk: scmi: manage properly the clk identifier with CCF
-      phy: stm32-usbphyc: manage properly the clk identifier with CCF
-
-Simeon Marijon (1):
-      stm32mp: Add tamp_nvram driver
-
-Valentin Caron (1):
-      clk: scmi: add compatibility with clock protocol 2.0
-
- MAINTAINERS                                           |    3 +-
- arch/arm/cpu/armv7/Kconfig                            |    3 +-
- arch/arm/dts/stm32h747i-disco-u-boot.dtsi             |  104 +++++++++++++++
- arch/arm/dts/stm32mp25-u-boot.dtsi                    |    8 ++
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi              |   74 -----------
- arch/arm/mach-stm32/stm32h7/Kconfig                   |    4 +
- arch/arm/mach-stm32mp/Kconfig                         |    9 ++
- arch/arm/mach-stm32mp/Makefile                        |    2 +
- arch/arm/mach-stm32mp/include/mach/stm32.h            |    7 +-
- arch/arm/mach-stm32mp/stm32mp1/cpu.c                  |    3 +-
- arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c           |    5 +-
- arch/arm/mach-stm32mp/tamp_nvram.c                    |  666 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- board/st/stm32h747-disco/Kconfig                      |   15 +++
- board/st/stm32h747-disco/MAINTAINERS                  |    7 +
- board/st/stm32h747-disco/Makefile                     |    6 +
- board/st/stm32h747-disco/stm32h747-disco.c            |   42 ++++++
- boot/image.c                                          |    1 +
- configs/stm32h747-disco_defconfig                     |   35 +++++
- configs/stm32mp13_defconfig                           |    2 +-
- configs/stm32mp25_defconfig                           |    2 +-
- drivers/clk/Kconfig                                   |   11 ++
- drivers/clk/clk-uclass.c                              |    9 +-
- drivers/clk/clk_fixed_rate.c                          |    1 +
- drivers/clk/clk_sandbox.c                             |   30 +++--
- drivers/clk/clk_sandbox_ccf.c                         |   48 +++----
- drivers/clk/clk_scmi.c                                |   62 ++++++---
- drivers/clk/stm32/Kconfig                             |    9 ++
- drivers/clk/stm32/Makefile                            |    1 +
- drivers/clk/stm32/clk-stm32-core.c                    |   73 +++++++++-
- drivers/clk/stm32/clk-stm32-core.h                    |    3 +-
- drivers/clk/stm32/clk-stm32h7.c                       |    5 +
- drivers/clk/stm32/clk-stm32mp13.c                     | 1311 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------
- drivers/clk/stm32/clk-stm32mp25.c                     |  782 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/clk/stm32/stm32mp13_rcc.h                     |   93 +++++++++++++
- drivers/misc/stm32_rcc.c                              |   66 +++++----
- drivers/phy/phy-stm32-usbphyc.c                       |   19 +++
- drivers/ram/stm32mp1/stm32mp1_ddr.c                   |   95 ++++++++++---
- drivers/ram/stm32mp1/stm32mp1_ddr.h                   |    6 +
- drivers/ram/stm32mp1/stm32mp1_ram.c                   |    5 +
- drivers/reset/Kconfig                                 |    9 +-
- drivers/reset/Makefile                                |    4 +-
- drivers/reset/stm32-reset.c                           |   97 --------------
- drivers/reset/stm32/Kconfig                           |   23 ++++
- drivers/reset/stm32/Makefile                          |    9 ++
- drivers/reset/stm32/stm32-reset-core.c                |   92 +++++++++++++
- drivers/reset/stm32/stm32-reset-core.h                |   31 +++++
- drivers/reset/stm32/stm32-reset-mp1.c                 |   55 ++++++++
- drivers/reset/stm32/stm32-reset-mp25.c                |  159 ++++++++++++++++++++++
- drivers/reset/stm32/stm32-reset.c                     |   43 ++++++
- dts/upstream/Bindings/arm/stm32/stm32.yaml            |    4 +
- dts/upstream/include/dt-bindings/clock/stm32h7-clks.h |    4 +-
- dts/upstream/src/arm/st/stm32h7-pinctrl.dtsi          |   34 ++++-
- dts/upstream/src/arm/st/stm32h743.dtsi                |    8 ++
- dts/upstream/src/arm/st/stm32h743i-disco.dts          |    2 +-
- dts/upstream/src/arm/st/stm32h743i-eval.dts           |    2 +-
- dts/upstream/src/arm/st/stm32h747i-disco.dts          |  136 +++++++++++++++++++
- dts/upstream/src/arm/st/stm32h750i-art-pi.dts         |    6 +-
- include/clk.h                                         |   24 ++++
- include/configs/stm32h747-disco.h                     |   32 +++++
- include/dt-bindings/clock/stm32mp13-clksrc.h          |  399 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/image.h                                       |    1 +
- include/linux/clk-provider.h                          |    9 +-
- include/scmi_protocols.h                              |   15 +++
- include/stm32_rcc.h                                   |    7 +-
- include/stm32mp25_rcc.h                               |  712 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- test/dm/clk_ccf.c                                     |   30 ++---
- tools/stm32image.c                                    |  215 ++++++++++++++++++++++--------
- 67 files changed, 5347 insertions(+), 442 deletions(-)
- create mode 100644 arch/arm/dts/stm32h747i-disco-u-boot.dtsi
- create mode 100644 arch/arm/mach-stm32mp/tamp_nvram.c
- create mode 100644 board/st/stm32h747-disco/Kconfig
- create mode 100644 board/st/stm32h747-disco/MAINTAINERS
- create mode 100644 board/st/stm32h747-disco/Makefile
- create mode 100644 board/st/stm32h747-disco/stm32h747-disco.c
- create mode 100644 configs/stm32h747-disco_defconfig
- create mode 100644 drivers/clk/stm32/clk-stm32mp25.c
- delete mode 100644 drivers/reset/stm32-reset.c
- create mode 100644 drivers/reset/stm32/Kconfig
- create mode 100644 drivers/reset/stm32/Makefile
- create mode 100644 drivers/reset/stm32/stm32-reset-core.c
- create mode 100644 drivers/reset/stm32/stm32-reset-core.h
- create mode 100644 drivers/reset/stm32/stm32-reset-mp1.c
- create mode 100644 drivers/reset/stm32/stm32-reset-mp25.c
- create mode 100644 drivers/reset/stm32/stm32-reset.c
- create mode 100644 dts/upstream/src/arm/st/stm32h747i-disco.dts
- create mode 100644 include/configs/stm32h747-disco.h
- create mode 100644 include/dt-bindings/clock/stm32mp13-clksrc.h
- create mode 100644 include/stm32mp25_rcc.h
+BR,
+Heiko
