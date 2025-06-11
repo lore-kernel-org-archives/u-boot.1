@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E89C71136
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 20:26:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B091C71136
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 20:26:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB8C682B0F;
-	Wed, 11 Jun 2025 22:25:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3066382CBC;
+	Wed, 11 Jun 2025 22:25:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yBEo6d5a";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qxEG4ywX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD4DC82CBB; Wed, 11 Jun 2025 22:25:12 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id BC2BF82B0F; Wed, 11 Jun 2025 22:25:14 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00DA7828A2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:25:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D96E082CBC
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a525eee2e3so222312f8f.2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:25:10 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a5257748e1so216767f8f.2
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:25:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749673510; x=1750278310; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749673512; x=1750278312; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7iRnpuDsRl+JlIXPKvd8K3Ryaye9eFr4JW/Zljv0tmw=;
- b=yBEo6d5a2CzlNWj2ojENNckUq7ZYhCjVQAmuvqDio2hVFsSP6Cl1lkP/F11llLsWMC
- zwG89mQ4WqtQuJjSUBSxfzczLu2z2ejbEEGg8sNJew4bNiUqbAWvH3sQPwD0wr6DyvXp
- ZNaUyrKJWBCX7w2srPTXozkats3IX+pVU/l9sE86V7KJWcqMMPOfgiY1hZIQGhdcvlK2
- NOkndJUBSdf2qbspqiRW285meOiSq2fU2j7ngpc8CWztVreBC0QzX57XMe+GHKbpM9dP
- ba2Q8cRt1UVKmZIMnTzVh1d6zvMm+R24PPp6bAt2HLJePwJExBrN4Og1KF0Cl/lK2+gc
- Qqug==
+ bh=GdBw1BLSy/tFF/waQ+VEoCTJeCTIQ7FsDYgsbOpsBXI=;
+ b=qxEG4ywX+m4SkpZJP9qCf+I9xRmMIMApae4I0m7jGOv8M+9sPTFlaXdCddjKwx8iJR
+ IVPmZkMilsNfvYXEpOs9w8izCFFX9bwR1Xbrxv/nJAi+tBSI+pmjDVH7S74E5GZ0y2jt
+ nXEiHqeQ8jAmxyD380c5XXHGWeGw5KB97/ApzNvI6cqrfaK8u1wHeaYltYnc9bbzhFh6
+ qfcGqwkNApzXq8XQYsJL8rweaSsIH/M+WMzmD4m5zHAqKJZW3NjX5dRwbq3NWTx+BLjP
+ nGkFHoTltdeHxJbgTQQFS/I9GaQtrxPbg9pErMLSX42uKaWsP6tkTl7PcPPGl3tEdtem
+ /Acw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749673510; x=1750278310;
+ d=1e100.net; s=20230601; t=1749673512; x=1750278312;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7iRnpuDsRl+JlIXPKvd8K3Ryaye9eFr4JW/Zljv0tmw=;
- b=wtlgD/DjWsRdLwU13Mk/Ki+M5/ZxHiirbpKrNsebSgg6Wbyl7VzR7tzsM22hOFBk89
- 1aga2lln37TqMNHlPJLtA4pDZoueJUGPRp3pONYdxvaGq0aJCeOOkdZKsouq0h5QfR6z
- S5qZmRv97exWHmsMQC3wQDil1EtmsBsTwZYJkCyqbQL22gs9hQmtSYU1BjeWvS5A9Gec
- 948wIYGtdnUMGtEy+41/dsxw0DbmJjVHGYMq+t9lKfvJBaeCZbLbhym71qxbgfNYsFlJ
- 2b75NsWIymmkoIv/JfHtFGIR31i/7k4upbEuURHMFng2dxjEX6z4AqZbPzh4fJ4Peiax
- OdVw==
+ bh=GdBw1BLSy/tFF/waQ+VEoCTJeCTIQ7FsDYgsbOpsBXI=;
+ b=vXALJFDoe4rtUeSJJIB7Xarng7Sq1tix+niF/5oO0KTlDQ2uXbZ8LrY0Kej4i6zilf
+ FTRN+5KED9H8QDGCENgQ2e8C2zAGkOGFBBwJuxD+CDAuZp3lRZSZMs2TaoIi6S+5uDpw
+ N/YxWHuXOxg+PZMFEKYNpVEJ7rctsRFDknAg4tnL9BfoGpSXLZRfNQyoi3GBifB0vweu
+ T4Kf4kneJ0gmz2aGVBjwadVIZfyqYlk7xgLN2cMCZ5hmZ7aXREYlSYr0JGhUybRECW0E
+ 0phJM8SRS/B3B8hxjRAY5WLHTinr/ifH4SRqEJRZAX8r5dvMbQcwv4vsS59FIwxvlSpO
+ b84Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVS4NOTrC/vhx0GYW2+RPzuWM8A3TVqKjq4OeNDVLoTatfvNuFt3cYYVl5c0W5u4FS6rm/UxAs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZoBWyP888fftuMzyI02For82QfQOinczONHslF/P8vrk0fgyf
- /s9kGPnyNnN+6Svcrft+eHfdbbS2Hr3UCpKolMLy7aEVSy5DIdg0phv0aJEhTulmiCQ=
-X-Gm-Gg: ASbGncuJNh51W6WW6euXUhCJfnGT45p+44saYtFZ5Sx36+UYzjuLh9PB5zqcWgCQ4CD
- UpIRZ6gBandEvzhhCMiPSdi5vqqaAnRBN73JM2esC/JJ+lW6OTTu/IOSf3oWlxczp4XopeJL8ed
- uZzsGqMQXy958TGPD8C4DiAPxrmRKszyotzpjDtm7xUVlnIeAudjwPqOlfdQCL3yAvhbjBTq9C0
- KDa8BMkXjWH/h/3Z5m3i7HjxDVzoBDMnJ+0fXn3Dj5JiG5/lP3SDuhgU6yELGLDm+g7o1H4R8Wj
- tx8FoTzAraj+8yIczTONB53X03uWturnZpiMTsfQ0pTq8+3IZGLUj/U8KM8MzMjwqkCs9eDdJKZ
- XUjLWCOsHi1IEk4gH7Y0A7aaZn7BuHX2VDaY7w/IH
-X-Google-Smtp-Source: AGHT+IH1eVzmasPFV6WN3OFSln3Xo6eOgbzz6FaEvHL6wzLoiDYfDrM/5GH/dXDyj982TjkIBNGbzA==
-X-Received: by 2002:a05:6000:4023:b0:3a5:39d7:3f17 with SMTP id
- ffacd0b85a97d-3a56077b0e3mr516059f8f.47.1749673510469; 
- Wed, 11 Jun 2025 13:25:10 -0700 (PDT)
+ AJvYcCXECwsA8zJznwgag/ECp253DVGDAteiE/CyJqfxeOUiAVwVnGG+bPOaui+DAWvSilYCNq4lsE8=@lists.denx.de
+X-Gm-Message-State: AOJu0YydcL5ugGW9HwO8oHD5db03PXjfR9wsSoDxwnX7xEwgaPPO7WXN
+ 8jaz80s08uUAI/J8tICq1lHYNGcbFABtVVysYg6iDVvTL6oDLccWJvEANsNrySYpvwg=
+X-Gm-Gg: ASbGncvLQ8bBYkaMm7A2qd2goMiyx8P7ma8U3qwIMQANwARbpHE81ho4rpTneUUHevs
+ b1Kjx1LRvHstSruUlRMqodxLImTzOt/9tmugKquFHkPBDpD+kGXoDTquZaBueDX2DY0hDAmaMmi
+ pa9AapbipxYS3z8LU7w0kb566wRvRLGSyitWJXegTIELbJMvM5hGHUrXcDQpb4D2pzArBtCCogX
+ ujDZBE25LM+TvxyhBh6s0fnLLABNiXk2P8SdXYkvFKM9p17OaymR7lSNoAKz2AcZzXm2+p8ouGM
+ 13VWT/oVXpEVsAjtp5MAucgJD6I3PIAE9yhLnC/QDwA1aZOLP92jPRlI6qcv0yZa8LHzmhm0B6E
+ EaQi3hW01VpZHfHQEOzYfQ+SFWINfXdSlsGIsrek1
+X-Google-Smtp-Source: AGHT+IHWFJbCXtHHUQMvpRIejB4GiYGBdKrULghh/mzrppra0H4Y5vKL4AdkdCCWNRbRnYt5UeWP9A==
+X-Received: by 2002:a05:6000:310c:b0:3a4:f5f6:b4ab with SMTP id
+ ffacd0b85a97d-3a561349f27mr182059f8f.30.1749673512323; 
+ Wed, 11 Jun 2025 13:25:12 -0700 (PDT)
 Received: from localhost.localdomain (ppp089210105145.access.hol.gr.
  [89.210.105.145]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a561a3c538sm12071f8f.50.2025.06.11.13.25.08
+ ffacd0b85a97d-3a561a3c538sm12071f8f.50.2025.06.11.13.25.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jun 2025 13:25:09 -0700 (PDT)
+ Wed, 11 Jun 2025 13:25:11 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Yao Zi <ziyao@disroot.org>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <ziyao@disroot.org>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 07/13] kbuild: remove meaningless prepare2 target
-Date: Wed, 11 Jun 2025 23:24:34 +0300
-Message-ID: <20250611202449.2317279-8-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 08/13] gcc-9: silence 'address-of-packed-member' warning
+Date: Wed, 11 Jun 2025 23:24:35 +0300
+Message-ID: <20250611202449.2317279-9-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
 References: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
@@ -105,38 +105,25 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backported from kernel
-commit 4f1c1008e786 ("kbuild: remove meaningless prepare2 target")
+commit 6f303d60534c ("gcc-9: silence 'address-of-packed-member' warning")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- Makefile | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ Makefile | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 2b9516bf4ff7..bd0866dc4579 100644
+index bd0866dc4579..f05c70073b85 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1949,7 +1949,7 @@ include/config/uboot.release: include/config/auto.conf FORCE
- # version.h and scripts_basic is processed / created.
- 
- # Listed in dependency order
--PHONY += prepare archprepare prepare0 prepare1 prepare2 prepare3
-+PHONY += prepare archprepare prepare0 prepare1 prepare3
- 
- # prepare3 is used to check if we are building in a separate output directory,
- # and if so do:
-@@ -1964,10 +1964,7 @@ ifneq ($(KBUILD_SRC),)
- 	fi;
- endif
- 
--# prepare2 creates a makefile if using a separate output directory
--prepare2: prepare3 outputmakefile cfg
--
--prepare1: prepare2 $(version_h) $(timestamp_h) $(dt_h) $(env_h) \
-+prepare1: prepare3 outputmakefile cfg $(version_h) $(timestamp_h) $(dt_h) $(env_h) \
-                    include/config/auto.conf
- ifeq ($(wildcard $(LDSCRIPT)),)
- 	@echo >&2 "  Could not find linker script."
+@@ -800,7 +800,6 @@ ifdef CONFIG_CC_IS_CLANG
+ KBUILD_CPPFLAGS += $(call cc-option,-Qunused-arguments,)
+ KBUILD_CFLAGS += $(call cc-disable-warning, format-invalid-specifier)
+ KBUILD_CFLAGS += $(call cc-disable-warning, gnu)
+-KBUILD_CFLAGS += $(call cc-disable-warning, address-of-packed-member)
+ # Quiet clang warning: comparison of unsigned expression < 0 is always false
+ KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
+ # CLANG uses a _MergedGlobals as optimization, but this breaks modpost, as the
 -- 
 2.49.0
 
