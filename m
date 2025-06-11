@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56800C71136
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 18:18:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE834C71136
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 18:30:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72DCC82CB6;
-	Wed, 11 Jun 2025 20:17:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 40F4D82B63;
+	Wed, 11 Jun 2025 20:30:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OS9S1MEA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ofKcRQms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D96B82B0F; Wed, 11 Jun 2025 20:17:47 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61A8282B63
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 20:17:41 +0200 (CEST)
+ id 8556082B7C; Wed, 11 Jun 2025 20:30:13 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A89B82B0F
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 20:30:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55BIHcKQ2655450;
- Wed, 11 Jun 2025 13:17:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749665858;
- bh=YzL3Y8wg6lFLfYNBA+GazYwxEIThd6E+wRa0oaobIBo=;
- h=From:Subject:Date:To:CC;
- b=OS9S1MEAuToCB/IVldmJQHs3+OD1fqTT5rxbgKSoTCDnqLiyMRGs0OcKTWkIwqmXj
- Od5Bs7EsGpzp8W4hvtUHw8nlJNB64Dwqd7qXpbdblfEleseh27Y+Rq7ftnRoW8nVAM
- tZc7H/lpSHjrZLGaOH4wu+EnfjMFx04LItMu9w2s=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55BIHcWW1323479
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 11 Jun 2025 13:17:38 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 11
- Jun 2025 13:17:38 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 11 Jun 2025 13:17:38 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55BIHcad731484;
- Wed, 11 Jun 2025 13:17:38 -0500
-From: Bryan Brattlof <bb@ti.com>
-Subject: [PATCH -next 0/5] add a few entries into missing-blob-help
-Date: Wed, 11 Jun 2025 13:17:31 -0500
-Message-ID: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-407a5b577f8so39744b6e.3
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 11:30:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749666610; x=1750271410; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xpaNls+kuViBvKXAkIMAyA89mUlt5GS4+KfJE7tYS5k=;
+ b=ofKcRQmsWGpdbqNK9AudE5+Y/CzbwS+jcqJ8iXsFLXfhNGZOchQHf8Eu+o+Pj2bmNb
+ Els61ZlIPguuDHQx16kl9ZPYK0E/PX80MYjCz3TmwCPYfHubxjBaGjQIGcmFKeZZoaHT
+ LSYmJu5oLUQJ7PoMuFCs/vD2CqpiPY4vJOXlU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749666610; x=1750271410;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xpaNls+kuViBvKXAkIMAyA89mUlt5GS4+KfJE7tYS5k=;
+ b=So9E1OFURq7fRhk/MDSdUecTUt57fwVrW+zEO5/GyA11caFYeoBd6Tf82sLZ5B0q29
+ d4Ea8TBCE2jeDf96Iz0KgL/giqAktV46TCHE/+Rk2Vwmq+zxsUED+muaW/9wnH3FB6+c
+ 5AOZZ+yl8nKvnhtddB1dOWUcTFk8znFlvlQ0jHFqYT/UJ02AbhrhNlVjJBqHi2HRLYvb
+ khUtqI9Pd4OIJsrN5d8GkFQp3JHhjoFR4YeN/jHPjhs5IgzezO5WRyrCfD9nITC6qFNM
+ m7PevMVd4kToQe4CBOHFkh230BL6eGbu6PGdge8yFJ3bQFBhyZP1WYAas6Fcywg9/oV0
+ mT5Q==
+X-Gm-Message-State: AOJu0YyU5t0rX+1tm9J9IK0cL/onKxHcZciA2Az9PqZVEv9/wiPgTWJV
+ PYuwrTCEg5cB3T5cjX4PJRmM3Hz46VqMS7W7OtMeQlxB4cp8SiCnnSu31ZuSYmp03J8GWl2oCRV
+ /jkTi6To=
+X-Gm-Gg: ASbGncs/3REOZ5r3hsxlOou6nYCPA70WB18oqlL7HJb+MskxJNBF96haYhv8tlEMdci
+ b7Z8yjbvmDC6tNUSzdqVR7QjfJtlLLlDHXUdN4SFAbTe698NVYO5URb/v/KWF57OouarR6xqaIa
+ C/ZAzDoArsdLrbQPOv29ZON/ukE48KotmDKLQ7DUiMJbONQxKLzSCjpl4irZWUpIo7ZC1XTv9JE
+ CwoV+xSoFNfqDj3UbqQGkJvUnOUqpPuyu1BWpoDVLEpcE1QY0xu5JAdlAEQTkUsJ+9cZBVBmrnS
+ Jh8TVyzowJkG9JeBEV5ROxISBp5EfvUOp1sxPdY3hyL+2YVvMLuBzZpub8TmpLM8CEfHLnMnBgO
+ 0XFxPf3NPWbe8xGtTY9QiDQEE+A==
+X-Google-Smtp-Source: AGHT+IF4f0bs0l0uQnGtronicoC8fn6H05OWLrYWKlisaA5dSsVa6LtdzUImXBCTGoosofl2S6v7tA==
+X-Received: by 2002:a05:6808:2f15:b0:401:ea7b:e535 with SMTP id
+ 5614622812f47-40a6619aeb8mr310252b6e.22.1749666609825; 
+ Wed, 11 Jun 2025 11:30:09 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40a5d8335e2sm430426b6e.16.2025.06.11.11.30.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Jun 2025 11:30:09 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: [PATCH 2/2] imx: imx91_evk: Remove for now
+Date: Wed, 11 Jun 2025 12:30:06 -0600
+Message-ID: <20250611183006.4044614-2-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250611183006.4044614-1-trini@konsulko.com>
+References: <20250611183006.4044614-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADvISWgC/x3MwQqDMAyA4VeRnBdIC5uyVxk72JnWgIvSiBTEd
- 7d6/A7/v4NxFjZ4Nztk3sRk1gr3aOA39poYZagGT/5JL+fwL2aiCcM0Bxx5WpB1vRboQxeJ+tB
- R20Ltl8xRyv3+ACqXFb7HcQKJwDKIcgAAAA==
-X-Change-ID: 20250611-missing-blob-help-entries-2b8f00ab8077
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-X-Mailer: b4 0.14.2
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,40 +97,321 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello everyone,
+This platform sets OF_UPSTREAM, but has not actually upstreamed the
+device trees. Remove this until the support is sorted out.
 
-Now that TIFS and DM firmwares are marked as mandatory items for a 
-successful build[0] we should provide some more descriptive help text on 
-where to get the firmware in the event they are not found and add links 
-to more information about them.
-
-We do need to expand the regex to allow the '.' dot in 'ti-fs-enc.bin' 
-so we can add it to the list which was the lesser number of lines 
-changed than renaming all these entries to 'tifs' or 'ti-fs' which the 
-current regex will match.
-
-Happy Hacking
-~Bryan
-
-[0] https://lore.kernel.org/u-boot/20250506-non-optional-v2-1-f58b12aab913@ti.com
-
-Signed-off-by: Bryan Brattlof <bb@ti.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Bryan Brattlof (5):
-      binman: alphabetize missing-blob entries
-      binman: add ti-dm entry to missing-blob-help
-      binman: add sysfw-inner-cert to missing-blob-help
-      binman: allow '.' to be included in the missing blob tags
-      binmain: include ti-fs-enc.bin into missing-blob-help
-
- tools/binman/control.py        |  2 +-
- tools/binman/missing-blob-help | 67 ++++++++++++++++++++++++++++++------------
- 2 files changed, 50 insertions(+), 19 deletions(-)
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Stefano Babic <sbabic@nabladev.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 ---
-base-commit: 59d00e20fced23e6463aa09db889dd548baee677
-change-id: 20250611-missing-blob-help-entries-2b8f00ab8077
+ configs/imx91_11x11_evk_defconfig            | 143 ------------------
+ configs/imx91_11x11_evk_inline_ecc_defconfig | 144 -------------------
+ 2 files changed, 287 deletions(-)
+ delete mode 100644 configs/imx91_11x11_evk_defconfig
+ delete mode 100644 configs/imx91_11x11_evk_inline_ecc_defconfig
 
-Best regards,
+diff --git a/configs/imx91_11x11_evk_defconfig b/configs/imx91_11x11_evk_defconfig
+deleted file mode 100644
+index 810a8a8c012f..000000000000
+--- a/configs/imx91_11x11_evk_defconfig
++++ /dev/null
+@@ -1,143 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_ARCH_IMX9=y
+-CONFIG_TEXT_BASE=0x80200000
+-CONFIG_SYS_MALLOC_LEN=0x2000000
+-CONFIG_SYS_MALLOC_F_LEN=0x18000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_SF_DEFAULT_SPEED=40000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x700000
+-CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="freescale/imx91-11x11-evk"
+-CONFIG_TARGET_IMX91_11X11_EVK=y
+-CONFIG_OF_LIBFDT_OVERLAY=y
+-CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x204E0000
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_SPL_TEXT_BASE=0x204A0000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x20498000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-CONFIG_SYS_LOAD_ADDR=0x80400000
+-CONFIG_SPL=y
+-CONFIG_CMD_DEKBLOB=y
+-CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x88000000
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x90000000
+-CONFIG_REMAKE_ELF=y
+-CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_BOOTCOMMAND="bootflow scan -lb; run bsp_bootcmd"
+-CONFIG_DEFAULT_FDT_FILE="imx91-11x11-evk.dtb"
+-CONFIG_SYS_CBSIZE=2048
+-CONFIG_SYS_PBSIZE=2074
+-CONFIG_ARCH_MISC_INIT=y
+-CONFIG_BOARD_LATE_INIT=y
+-CONFIG_SPL_MAX_SIZE=0x26000
+-CONFIG_SPL_BOARD_INIT=y
+-CONFIG_SPL_BOOTROM_SUPPORT=y
+-CONFIG_SPL_LOAD_IMX_CONTAINER=y
+-CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/container.cfg"
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x83200000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_SYS_PROMPT="u-boot=> "
+-CONFIG_CMD_CPU=y
+-CONFIG_CMD_ERASEENV=y
+-CONFIG_CMD_NVEDIT_EFI=y
+-CONFIG_CRC32_VERIFY=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_POWEROFF=y
+-CONFIG_CMD_SNTP=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EFIDEBUG=y
+-CONFIG_CMD_RTC=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_GETTIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_HASH=y
+-CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_NOWHERE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
+-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eth1"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM=y
+-CONFIG_REGMAP=y
+-CONFIG_SYSCON=y
+-CONFIG_ADC=y
+-CONFIG_ADC_IMX93=y
+-CONFIG_CLK_IMX93=y
+-CONFIG_SAVED_DRAM_TIMING_BASE=0x2049C000
+-CONFIG_IMX_RGPIO2P=y
+-CONFIG_DM_PCA953X=y
+-CONFIG_ADP5585_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_IMX_LPI2C=y
+-CONFIG_SUPPORT_EMMC_RPMB=y
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_MMC_IO_VOLTAGE=y
+-CONFIG_MMC_UHS_SUPPORT=y
+-CONFIG_MMC_HS400_ES_SUPPORT=y
+-CONFIG_MMC_HS400_SUPPORT=y
+-CONFIG_FSL_USDHC=y
+-CONFIG_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHY_ANEG_TIMEOUT=20000
+-CONFIG_PHY_REALTEK=y
+-CONFIG_DM_ETH_PHY=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_DWC_ETH_QOS_IMX=y
+-CONFIG_MII=y
+-CONFIG_PINCTRL=y
+-CONFIG_SPL_PINCTRL=y
+-CONFIG_PINCTRL_IMX93=y
+-CONFIG_POWER_DOMAIN=y
+-CONFIG_DM_PMIC=y
+-CONFIG_DM_PMIC_PCA9450=y
+-CONFIG_SPL_DM_PMIC_PCA9450=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_PCA9450=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_EMULATION=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_FSL_LPUART=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_NXP_FSPI=y
+-CONFIG_SYSRESET=y
+-CONFIG_SYSRESET_CMD_POWEROFF=y
+-CONFIG_SYSRESET_PSCI=y
+-CONFIG_ULP_WATCHDOG=y
+-CONFIG_WDT=y
+-CONFIG_SHA384=y
+-CONFIG_LZO=y
+-CONFIG_BZIP2=y
+diff --git a/configs/imx91_11x11_evk_inline_ecc_defconfig b/configs/imx91_11x11_evk_inline_ecc_defconfig
+deleted file mode 100644
+index f330ea694f72..000000000000
+--- a/configs/imx91_11x11_evk_inline_ecc_defconfig
++++ /dev/null
+@@ -1,144 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_ARCH_IMX9=y
+-CONFIG_TEXT_BASE=0x80200000
+-CONFIG_SYS_MALLOC_LEN=0x2000000
+-CONFIG_SYS_MALLOC_F_LEN=0x18000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_SF_DEFAULT_SPEED=40000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x700000
+-CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="freescale/imx91-11x11-evk"
+-CONFIG_TARGET_IMX91_11X11_EVK=y
+-CONFIG_OF_LIBFDT_OVERLAY=y
+-CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x204E0000
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_SPL_TEXT_BASE=0x204A0000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x20498000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-CONFIG_SYS_LOAD_ADDR=0x80400000
+-CONFIG_SPL=y
+-CONFIG_CMD_DEKBLOB=y
+-CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x88000000
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x90000000
+-CONFIG_REMAKE_ELF=y
+-CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_BOOTCOMMAND="bootflow scan -lb; run bsp_bootcmd"
+-CONFIG_DEFAULT_FDT_FILE="imx91-11x11-evk.dtb"
+-CONFIG_SYS_CBSIZE=2048
+-CONFIG_SYS_PBSIZE=2074
+-CONFIG_ARCH_MISC_INIT=y
+-CONFIG_BOARD_LATE_INIT=y
+-CONFIG_SPL_MAX_SIZE=0x26000
+-CONFIG_SPL_BOARD_INIT=y
+-CONFIG_SPL_BOOTROM_SUPPORT=y
+-CONFIG_SPL_LOAD_IMX_CONTAINER=y
+-CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/container.cfg"
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x83200000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_SYS_PROMPT="u-boot=> "
+-CONFIG_CMD_CPU=y
+-CONFIG_CMD_ERASEENV=y
+-CONFIG_CMD_NVEDIT_EFI=y
+-CONFIG_CRC32_VERIFY=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_POWEROFF=y
+-CONFIG_CMD_SNTP=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EFIDEBUG=y
+-CONFIG_CMD_RTC=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_GETTIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_HASH=y
+-CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_NOWHERE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_MMC_ENV_DEV=1
+-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eth1"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM=y
+-CONFIG_REGMAP=y
+-CONFIG_SYSCON=y
+-CONFIG_ADC=y
+-CONFIG_ADC_IMX93=y
+-CONFIG_CLK_IMX93=y
+-CONFIG_SAVED_DRAM_TIMING_BASE=0x2049C000
+-CONFIG_IMX9_DRAM_INLINE_ECC=y
+-CONFIG_IMX_RGPIO2P=y
+-CONFIG_DM_PCA953X=y
+-CONFIG_ADP5585_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_IMX_LPI2C=y
+-CONFIG_SUPPORT_EMMC_RPMB=y
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_MMC_IO_VOLTAGE=y
+-CONFIG_MMC_UHS_SUPPORT=y
+-CONFIG_MMC_HS400_ES_SUPPORT=y
+-CONFIG_MMC_HS400_SUPPORT=y
+-CONFIG_FSL_USDHC=y
+-CONFIG_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHY_ANEG_TIMEOUT=20000
+-CONFIG_PHY_REALTEK=y
+-CONFIG_DM_ETH_PHY=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_DWC_ETH_QOS_IMX=y
+-CONFIG_MII=y
+-CONFIG_PINCTRL=y
+-CONFIG_SPL_PINCTRL=y
+-CONFIG_PINCTRL_IMX93=y
+-CONFIG_POWER_DOMAIN=y
+-CONFIG_DM_PMIC=y
+-CONFIG_DM_PMIC_PCA9450=y
+-CONFIG_SPL_DM_PMIC_PCA9450=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_PCA9450=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_EMULATION=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_FSL_LPUART=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_NXP_FSPI=y
+-CONFIG_SYSRESET=y
+-CONFIG_SYSRESET_CMD_POWEROFF=y
+-CONFIG_SYSRESET_PSCI=y
+-CONFIG_ULP_WATCHDOG=y
+-CONFIG_WDT=y
+-CONFIG_SHA384=y
+-CONFIG_LZO=y
+-CONFIG_BZIP2=y
 -- 
-Bryan Brattlof <bb@ti.com>
+2.43.0
 
