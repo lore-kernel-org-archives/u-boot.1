@@ -4,59 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDA01C61CE7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 07:30:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EB23C677C4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 08:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4448D82B20;
-	Wed, 11 Jun 2025 09:30:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 874BD82A4B;
+	Wed, 11 Jun 2025 10:48:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1749627022;
-	bh=6OeiqPnHfrsTcyO9d1VRp9C/ffLE+TQ4i1wsCik2zho=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DD28D4Dopa3JsF7ZoV4PwSK1/tDX+eZqfcW4EHt9xfADCFxW5h5SuZ0xHJb6Qv/mZ
-	 IaYJxqvLq+vol3VnAoa1ch/ooXlN9VxE2ya2/g2G9owmFmdVxzhLyuP5NQBphptped
-	 2k2SwkaWa+F6eNZgudcroQ1BNX4JOut0hEp48cieV0WOp7Y2bJ1mcSqF6aBH/8chmv
-	 PSRz5gwt49Kv3+3zzK7lhNjfxQsOkrq8LZzdMN4FYl6ikd3LQs35lMma1uL1LKPVSd
-	 hlxM9jhj+44NXr5Lt0062YI1QErIfxcxPIVVyQfJSYg5584de8Vc4OQ0rg1KK7N5Fu
-	 NqWt0fvrWoI1A==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E3D582B63; Wed, 11 Jun 2025 09:30:21 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05A7582A4B
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 09:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qopn944Z";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CE03182B20; Wed, 11 Jun 2025 10:48:33 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4bHHPQ3Mtqz9tNm;
- Wed, 11 Jun 2025 09:30:18 +0200 (CEST)
-Message-ID: <61cf38f6-c70e-416f-aa98-6b84926d12a1@denx.de>
-Date: Wed, 11 Jun 2025 09:30:14 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id BD7AE828A2
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 10:48:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3a54700a46eso2455585f8f.1
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 01:48:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749631711; x=1750236511; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cGdqT2MCjGshRWU+z5Z6/drCawsXoN1jc02smPX8x0g=;
+ b=qopn944ZhGOMaP4GepR34biJjHh6/fKAa+fnT/jIrBnY34g32SJDdstSrpmOeqY+G7
+ GgbA/RZasS/Yne0wEAeUXRV0mVvm24bHBaa5oXLYlAHyOCsy9VFojPU33AhT5wFFLHPo
+ rt5KMixDOU+C3X8UEpjhPGm9itZsGOl3JUlTHXMJaTPp6z23/JLNZtkcLEat0T5Kwt7T
+ XsQwLccCIO5ZrmVUM2MkXHgrYfdtAMX2w+jgBtb5IZYr8Sxpka81yuWIWYU8MG1orrDL
+ 1DXpKnzRCZP+aOa5/6CeaUM5OJfIg12GMUaOyDyVBLAaiXiq/jwizlcnLS2AbP0cwB0h
+ yEYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749631711; x=1750236511;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cGdqT2MCjGshRWU+z5Z6/drCawsXoN1jc02smPX8x0g=;
+ b=D2GlM+3L8iMQV5HsL5QYBmZhlmODBnr7aO2OcZEE8ietPuyKfqBQ1wV+s5IOP9b6Oz
+ jq9qlWo1uL71/LqNO9nzUUufvc8qDwVscwNKR/l/QNH9jMZGnieQbD19v5PM2zKTcRZh
+ pleYOKfhvWlsiCAXKGoRpLnQNvcZqhpg/lBlQgfv5vtvLEbGypoqS/5ipXYw5cNznKqn
+ ZPmpR3zwTwwQAlEQL1rDA+aFGJbAOHw8dns/TC7nsMoZ6+RxMbYnyOxlOkxQLWaF4BjL
+ UEKd5vc1do11IpeW7UwcUM+7LaoLcNFI95Zd6mSD7OCV6YclkHJZ5LGBL13trkp/pevU
+ GYBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVubn6CzuO8T0IcyJTy1kAJY3MnqnnZzdjEZjOV8j45Zy1vTWXccKNUQv8cQ4JLl0onX3A9oEI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxShAcBd43eggqE7O0fW+qRdMnAWmru+EYWkAyQLJtbkChjp8o3
+ cxGslLSIzn/Xir6g++peoz/t+682RCjuBnUts1pgsKh73u3LUzY478C+JLpcQc0c97o=
+X-Gm-Gg: ASbGncuWxR4ZI6nPuIRPTCGW+66HO5jL/7LAnL66juDrMppliXZMdYjj8CkAQ+aECe0
+ PEIHYxj+PELldlfgH7vX2i0jT2mT7bCWOQOwJVdEm3uGP82aD/HhJKf+8VHhz/O6PMzXsEIwhsv
+ ASqyB8LgnlV6ea1HYMc819WsSTGAn2ujLwm8T4W52RU5TUjeO7W4EmEQYVkkQvqdpFuGVWCIhKT
+ sjJwH8RJsS9Bk56l9lFjR45vk4WqMDEdoFEaJAMb4/xYNXxW+vPanp9ZaYCztK9ixVwgtxARrUX
+ 2t4Xgs5adXeiwvH56r/Fklmj4C4RuP3n8yvbOMG3RSyO6h4YknWM7naIjpl8tHEuV/1+JYuiY+B
+ WXZTQVr+RSZLoBMr7i0v8UlgzVv/Kivg/6EmOkQ==
+X-Google-Smtp-Source: AGHT+IHluCsstKcwsAh7fxjPObCMrDwN0Worcjx46NQzxcX/g76xNr1tUnxz15bKUH0Z5aV+l+8MLQ==
+X-Received: by 2002:a05:6000:1a8b:b0:3a4:f8e9:cee0 with SMTP id
+ ffacd0b85a97d-3a5586dfe01mr1753742f8f.40.1749631710951; 
+ Wed, 11 Jun 2025 01:48:30 -0700 (PDT)
+Received: from ?IPV6:2a01:170:117e:fc:1a1e:c277:1c68:9459?
+ ([2a01:170:117e:fc:1a1e:c277:1c68:9459])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4532513e8bcsm14892365e9.3.2025.06.11.01.48.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Jun 2025 01:48:30 -0700 (PDT)
+Message-ID: <72586883-c158-4726-a80e-6770b3fdf705@linaro.org>
+Date: Wed, 11 Jun 2025 10:48:28 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v4 2/2] renesas: Renesas R-Car Gen4 watchdog driver
-To: smelamud@redhat.com, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de
-References: <20250611-us-renesas-watchdog-v4-0-24f1da3e0dc9@redhat.com>
- <20250611-us-renesas-watchdog-v4-2-24f1da3e0dc9@redhat.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] misc: introduce Qcom GENI wrapper
+To: Tom Rini <trini@konsulko.com>
+Cc: Heiko Schocher <hs@denx.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20250610-geni-load-fw-v2-0-7cad6bc18db0@linaro.org>
+ <20250610-geni-load-fw-v2-2-7cad6bc18db0@linaro.org>
+ <20250610225944.GG1382132@bill-the-cat>
 Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250611-us-renesas-watchdog-v4-2-24f1da3e0dc9@redhat.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250610225944.GG1382132@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4bHHPQ3Mtqz9tNm
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,266 +108,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11.06.25 02:25, Shmuel Leib Melamud via B4 Relay wrote:
-> From: Shmuel Leib Melamud <smelamud@redhat.com>
-> 
-> Add support of Renesas R-Car Gen4 watchdog timer. Timeouts up to
-> 8184.0s are supported (CKS1 register is not involved). The watchdog
-> uses the clock of type CLK_TYPE_GEN4_MDSEL.
-> 
-> The timeout is set in
-> dts/upstream/src/arm64/renesas/r8a779f0-spider-cpu.dtsi section &rwdt.
-> 
-> This driver is based on upstream linux commit:
-> e70140ba0d2b("Get rid of 'remove_new' relic from platform driver struct")
-> 
-> Signed-off-by: Shmuel Leib Melamud <smelamud@redhat.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+
+On 6/11/25 00:59, Tom Rini wrote:
+> On Tue, Jun 10, 2025 at 06:50:51PM +0200, Casey Connolly wrote:
+> 
+>> Qualcomm peripherals like UART, SPI, I2C, etc are all exposed under a
+>> common GENI Serial Engine wrapper device. Replace the stub driver we use
+>> for this currently with a full-on misc device and implement support for
+>> loading peripheral firmware.
+>>
+>> Each of the peripherals has it's own protocol-specific firmware, this is
+>> stored on the internal storage of the device with a well-known partition
+>> type GUID.
+>>
+>> To support this, GENI will bind peripherals in two stages. First the
+>> ones that already have firmware loaded (such as the serial port) are
+>> bound in the typical way. But devices that require firmware loading are
+>> deferred until EVT_LAST_STAGE_INIT. At this point we can be sure that
+>> the storage device is available, so we load the firmware and then bind
+>> and probe the remaining children.
+>>
+>> Child devices are expected to determine if firmware loading is necessary
+>> and call qcom_geni_load_firmware().
+>>
+>> Since Linux currently doesn't support loading firmware (and firmware may
+>> not be available), we probe all GENI peripherals to ensure that they
+>> always load firmware if necessary.
+>>
+>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> [snip]
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 579c8acfcb466122c4fe66950ec7ca24c355b43a..5b83e3386be6ab7fa8d7f5306851d90a87fb75c3 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -1124,8 +1124,9 @@ config ARCH_SNAPDRAGON
+>>   	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+>>   	select SYSRESET
+>>   	select SYSRESET_PSCI
+>>   	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>> +	select QCOM_GENI
+>>   	imply OF_UPSTREAM
+>>   	imply CMD_DM
+>>   	imply DM_USB_GADGET
+>>   
+>> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+>> index ffc5868c0dd3e884fddb98b10f4b878d3f08b43a..78aaf003852aab96450963d93678787d30892f1b 100644
+>> --- a/drivers/misc/Kconfig
+>> +++ b/drivers/misc/Kconfig
+>> @@ -82,8 +82,17 @@ config GATEWORKS_SC
+>>   	  Enable access for the Gateworks System Controller used on Gateworks
+>>   	  boards to provide a boot watchdog, power control, temperature monitor,
+>>   	  voltage ADCs, and EEPROM.
+>>   
+>> +config QCOM_GENI
+>> +	bool "Qualcomm Generic Interface (GENI) driver"
+>> +	depends on MISC
+> 
+> So, this can get tricky. In ARCH_SNAPDRAGON you do not select MISC.
+> QCOM_GENI correctly depends on MISC. Therefore there's a possible
+> dependency problem that Kconfig might start complaining about. In fact,
+
+Oh good point... on reflection i don't think it's correct to select 
+QCOM_GENI for ARCH_SNAPDRAGON anyways since some of the older platforms 
+don't use GENI anyway.
+
+I'll rework this so that the GENI peripherals themselves (i2c, spi, 
+uart) depend on QCOM_GENI instead, then all these will be added to the 
+defconfigs.
 
 Thanks,
-Stefan
 
-> ---
->   drivers/watchdog/Kconfig       |   8 ++
->   drivers/watchdog/Makefile      |   1 +
->   drivers/watchdog/renesas_wdt.c | 189 +++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 198 insertions(+)
+> using qconfig to poke at what has which things set:
+> dragonboard410c dragonboard820c hmibsc qcom_ipq9574_mmc
+> should all have some warning? But IIRC, annoyingly, we couldn't
+> figure out how to make those kind of Kconfig warnings fatal in CI.
+
+That's annoying... What about having a script that verifies that all the 
+=y options in the defconfig are also present in the .config? I guess 
+that solves a slightly different problem but may be useful regardless...
+
+Thanks,
+
 > 
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 1bb67f5035231df9f6ce01adb08d074855393143..a0f2948335f9c3b74b7823f039e578ff4030e97c 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -335,6 +335,14 @@ config WDT_K3_RTI_FW_FILE
->   
->   endif
->   
-> +config WDT_RENESAS
-> +	bool "Renesas watchdog timer support"
-> +	depends on WDT && R8A779F0
-> +	select CLK
-> +	select CLK_RENESAS
-> +	help
-> +	  Enables Renesas SoC R8A779F0 watchdog timer support.
-> +
->   config WDT_SANDBOX
->   	bool "Enable Watchdog Timer support for Sandbox"
->   	depends on SANDBOX && WDT
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index e6bd4c587af6133c405dde6dbada8050debc781c..c4467d6e126d0c3e119bf8014b302e5b1432f541 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -43,6 +43,7 @@ obj-$(CONFIG_WDT_MTK) += mtk_wdt.o
->   obj-$(CONFIG_WDT_NPCM) += npcm_wdt.o
->   obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
->   obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
-> +obj-$(CONFIG_WDT_RENESAS) += renesas_wdt.o
->   obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
->   obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
->   obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
-> diff --git a/drivers/watchdog/renesas_wdt.c b/drivers/watchdog/renesas_wdt.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..046e11915b923a661a9ee1d0a586826a1d5068f8
-> --- /dev/null
-> +++ b/drivers/watchdog/renesas_wdt.c
-> @@ -0,0 +1,189 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +// Copyright 2025 Red Hat, Inc., Shmuel Leib Melamud <smelamud@redhat.com>
-> +
-> +#include <asm/io.h>
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/delay.h>
-> +#include <linux/iopoll.h>
-> +#include <wdt.h>
-> +
-> +#define usleep_range(a, b) udelay((a))
-> +
-> +struct rwdt {
-> +	u32 cnt;
-> +	u32 csra;
-> +	u32 csrb;
-> +};
-> +
-> +#define RWTCSRA_WOVF	BIT(4)
-> +#define RWTCSRA_WRFLG	BIT(5)
-> +#define RWTCSRA_TME		BIT(7)
-> +
-> +#define CSR_MASK	0xA5A5A500
-> +#define CNT_MASK	0x5A5A0000
-> +
-> +#define MAX_CNT_VALUE   65536
-> +/*
-> + * In probe, clk_rate is checked to be not more than 16 bit * biggest clock
-> + * divider (12 bits). d is only a factor to fully utilize the WDT counter and
-> + * will not exceed its 16 bits. Thus, no overflow, we stay below 32 bits.
-> + */
-> +#define MUL_BY_CLKS_PER_SEC(p, d) \
-> +	DIV_ROUND_UP((d) * (p)->clk_rate, clk_divs[(p)->cks])
-> +
-> +/* d is 16 bit, clk_divs 12 bit -> no 32 bit overflow */
-> +#define DIV_BY_CLKS_PER_SEC(p, d) ((d) * clk_divs[(p)->cks] / (p)->clk_rate)
-> +
-> +static const unsigned int clk_divs[] = { 1, 4, 16, 32, 64, 128, 1024, 4096 };
-> +
-> +struct rwdt_priv {
-> +	struct rwdt __iomem *wdt;
-> +	unsigned long clk_rate;
-> +	u8 cks;
-> +	struct clk clk;
-> +};
-> +
-> +static void rwdt_wait_cycles(struct rwdt_priv *priv, unsigned int cycles)
-> +{
-> +	unsigned int delay;
-> +
-> +	delay = DIV_ROUND_UP(cycles * 1000000, priv->clk_rate);
-> +
-> +	usleep_range(delay, 2 * delay);
-> +}
-> +
-> +static int rwdt_start(struct udevice *dev, u64 timeout, ulong flags)
-> +{
-> +	struct rwdt_priv *priv = dev_get_priv(dev);
-> +	u64 max_timeout;
-> +	u8 val;
-> +
-> +	max_timeout = DIV_BY_CLKS_PER_SEC(priv, MAX_CNT_VALUE);
-> +	timeout = min(max_timeout, timeout / 1000);
-> +
-> +	/* Stop the timer before we modify any register */
-> +	val = readb_relaxed(&priv->wdt->csra) & ~RWTCSRA_TME;
-> +	writel_relaxed(val | CSR_MASK, &priv->wdt->csra);
-> +	/* Delay 2 cycles before setting watchdog counter */
-> +	rwdt_wait_cycles(priv, 2);
-> +
-> +	while (readb_relaxed(&priv->wdt->csra) & RWTCSRA_WRFLG)
-> +		cpu_relax();
-> +
-> +	writel_relaxed((MAX_CNT_VALUE - MUL_BY_CLKS_PER_SEC(priv, timeout))
-> +		       | CNT_MASK, &priv->wdt->cnt);
-> +
-> +	writel_relaxed(priv->cks | RWTCSRA_TME | CSR_MASK, &priv->wdt->csra);
-> +
-> +	return 0;
-> +}
-> +
-> +static int rwdt_stop(struct udevice *dev)
-> +{
-> +	struct rwdt_priv *priv = dev_get_priv(dev);
-> +
-> +	writel_relaxed(priv->cks | CSR_MASK, &priv->wdt->csra);
-> +
-> +	return 0;
-> +}
-> +
-> +static int rwdt_reset(struct udevice *dev)
-> +{
-> +	struct rwdt_priv *priv = dev_get_priv(dev);
-> +	u8 val;
-> +
-> +	/* Stop the timer before we modify any register */
-> +	val = readb_relaxed(&priv->wdt->csra) & ~RWTCSRA_TME;
-> +	writel_relaxed(val | CSR_MASK, &priv->wdt->csra);
-> +	/* Delay 2 cycles before setting watchdog counter */
-> +	rwdt_wait_cycles(priv, 2);
-> +
-> +	writel_relaxed(0xffff | CNT_MASK, &priv->wdt->cnt);
-> +	/* smallest divider to reboot soon */
-> +	writel_relaxed(0 | CSR_MASK, &priv->wdt->csra);
-> +
-> +	readb_poll_timeout(&priv->wdt->csra, val, !(val & RWTCSRA_WRFLG), 100);
-> +
-> +	writel_relaxed(RWTCSRA_TME | CSR_MASK, &priv->wdt->csra);
-> +
-> +	/* wait 2 cycles, so watchdog will trigger */
-> +	rwdt_wait_cycles(priv, 2);
-> +
-> +	return 0;
-> +}
-> +
-> +static int rwdt_probe(struct udevice *dev)
-> +{
-> +	struct rwdt_priv *priv = dev_get_priv(dev);
-> +	unsigned long clks_per_sec;
-> +	int ret, i;
-> +
-> +	priv->wdt = dev_remap_addr(dev);
-> +	if (!priv->wdt)
-> +		return -EINVAL;
-> +
-> +	ret = clk_get_by_index(dev, 0, &priv->clk);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = clk_enable(&priv->clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	priv->clk_rate = clk_get_rate(&priv->clk);
-> +	if (!priv->clk_rate) {
-> +		ret = -ENOENT;
-> +		goto err_clk_disable;
-> +	}
-> +
-> +	/*
-> +	 * Find the largest possible divider that allows clock rate
-> +	 * (clks_per_sec) to stay within 16 bits. In this case, we can still
-> +	 * measure the smallest timeout (1s) and make the largest allowed
-> +	 * timeout as large as possible.
-> +	 */
-> +	for (i = ARRAY_SIZE(clk_divs) - 1; i >= 0; i--) {
-> +		clks_per_sec = priv->clk_rate / clk_divs[i];
-> +		if (clks_per_sec && clks_per_sec < 65536) {
-> +			priv->cks = i;
-> +			break;
-> +		}
-> +	}
-> +
-> +	/* can't find a suitable clock divider */
-> +	if (i < 0) {
-> +		ret = -ERANGE;
-> +		goto err_clk_disable;
-> +	}
-> +
-> +	return 0;
-> +
-> +err_clk_disable:
-> +	clk_disable(&priv->clk);
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct wdt_ops rwdt_ops = {
-> +	.start = rwdt_start,
-> +	.reset = rwdt_reset,
-> +	.stop = rwdt_stop,
-> +};
-> +
-> +static const struct udevice_id rwdt_ids[] = {
-> +	{ .compatible = "renesas,rcar-gen2-wdt" },
-> +	{ .compatible = "renesas,rcar-gen3-wdt" },
-> +	{ .compatible = "renesas,rcar-gen4-wdt" },
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(wdt_renesas) = {
-> +	.name = "wdt_renesas",
-> +	.id = UCLASS_WDT,
-> +	.of_match = rwdt_ids,
-> +	.ops = &rwdt_ops,
-> +	.probe	= rwdt_probe,
-> +	.priv_auto = sizeof(struct rwdt_priv),
-> +};
-> 
-
-Viele Grüße,
-Stefan Roese
-
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+Casey (she/they)
 
