@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E86C71136
-	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 20:25:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47BF7C71135
+	for <u-boot@archiver.kernel.org>; Wed, 11 Jun 2025 20:25:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EFC782A4B;
-	Wed, 11 Jun 2025 22:25:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E48C382C2F;
+	Wed, 11 Jun 2025 22:25:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MnlYnSLg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QWnqxBTw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 462EA82C7F; Wed, 11 Jun 2025 22:25:03 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 1B6F782B63; Wed, 11 Jun 2025 22:25:05 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 424BC828A2
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:25:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3378E82B0F
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:25:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a3798794d3so305775f8f.1
- for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:25:01 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-45024721cbdso1507715e9.2
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 13:25:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749673501; x=1750278301; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749673503; x=1750278303; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FUloOpiTNLJJ/yDov7BZxm3eQF48L+xD+Qg2LA9++ug=;
- b=MnlYnSLgMqRWJ3SZPd16ODJEL6Kc/thaQ95BfmFWpzSfm1FYgYP/OyZ0karhjiVVl8
- 2zJkcLDewc8iQTvJR1gCadshxyURZ2qQvOR7Krrlxc4jsQf35X+1kRWBegqnUNVaWT5F
- kk2UUGp9tgm82jfK9kxUP/TTE//yt9Or3az9EBkkvyfuLl6hzXJlqNkleYfvD51QohUm
- Wr5T0ghcX04lsiHsEBzJEdM4fHFxJQOXELEWiB4qepshImVhZKpsRoB41HsNgGMJHqfM
- T2FEsocDY0WvyRh0J7UqDlSY/ecqu9ys8w86ac+uOLu50NHiRjn6ZP/CAO5CsvLeh5yN
- lwcw==
+ bh=VBd5IqOqmVtWiDMTCWjmlUBBf+6RSNiOck8S+u2pwEs=;
+ b=QWnqxBTw+JtH5SF5PdQMZPsLPGqfFOehLLEy1yxi9ZNjus6cQXRYnwugS7D5deihrR
+ J6oTEz5H4yWv2XGIHB7Hv/Au0T6gvOxmFQKbfyNghZbCIRL7TSvfCVLr6cv9IObNYU/3
+ gpb2vEoWLcm9B5KQh730hA2IpM3g0UQ1oN6/a+WTkw1F72riIBMj4UjWVNkmw+GDmKsr
+ sSjwO4wHO3jC4WkeYr8kTMY3judZc2+c9ay0TQhfe8x/0ZrCxLGLYTiE5LRU9yScfYDl
+ J7xUh19qzz/XV7+xvPBXQzcxpDAnTIA0/Q5qbYrt9v0WsISyPXdkTEcjefK62ZI75nUi
+ WSEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749673501; x=1750278301;
+ d=1e100.net; s=20230601; t=1749673503; x=1750278303;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FUloOpiTNLJJ/yDov7BZxm3eQF48L+xD+Qg2LA9++ug=;
- b=O4N62WVD4YBpIltNYKgzzG72mb7vAinTFN7ukq0cs9M2HMldjNdn/fze/XPe/wse6g
- qc6sHGCULPodE2HdO/e05avYi+72cvyWVkcK5Uwz4QZPlCzlZt+LzwWzKXuqiRkfv8vK
- JYrrqIg7/0XqBclL65pkl70sxEBaJjYNsDs4FzCrzXrssRhd64eKm3O7O7OZHv9lZMYX
- 2uRf0R1DxiBrqXiCPje8ULjPSTba4N8Kz9svB9QM6/r70LDgJY3pjLDSMkvd4IL0h2dX
- nxZ0eVxTOwgFoV3tsVgrlcD+hQz8LTPWbv4Hs7qLZi9GLATXy9IVlCE7TVnaX+rJxuIo
- m+1A==
+ bh=VBd5IqOqmVtWiDMTCWjmlUBBf+6RSNiOck8S+u2pwEs=;
+ b=V7s/X5Ybb3DkT0/JwNMzhf5Qlzp6BmlhY0WP26NYZ7J4CP+UqiSsHZ7rFMzyuq8N3+
+ lJAHlM2PmfS8meH8kh2/W3GJrFRYwMG2XyyEK3CaHHxzPifiaHpnie5MWfTQNvCTSG48
+ Ht+A6du6qzsmJNxwiI6OKY9arX/ZUTi5oSNvyhxXIrWBg5XONDeqq6SXnOejrB6lLk/+
+ RIfs8TgB0Dv3MvzFHxNBV3Sqs7lt6aIMQxE5rAF9JlwYhloOJZbnb++Pvmhwccsb8slR
+ Ifo2AadfPEyVO48l39CL1TKunOcSk5uaBGCqBTX2z9AICYzxYp26tRFPdQqahpkgFEfI
+ x2jQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDwwG/vn9ru8gnMagS8gDBz1YmYUACaFLWXbe0pzJn8UNrdSkHIgjBBHIb15C3cSbzW96NQrQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHJR9i9hBAQkLmS2OZZNdQfJZ1Q6ZiYVTYHk64CxCLViTAuRMe
- sc/CtQwtHtghPpEXp2esXagSxqgzoRIpNHTmmzWimZEcXsFrhgXVkkhztqujxAhxe+Y=
-X-Gm-Gg: ASbGncuSdO4zzFpJllWcQXlbcOZjcSrfj+OgOPOKFibPIC0qYD5l2BZ92lhReOTnKZ1
- kenghT9eBU2hXEFfzJcZsY/Q1+dJrDat7CL8du+cwV1puJ68IXAoyDk4fhk7OIUc6MlVYcFjPOn
- pJDKEITjUpp++CaZs9gF9yQx0wRFIlOMpO4jIJnZGnq9f5CdYXrgyX+JSwLIfpH/d721Q0pP/NR
- Ei05sgzzhfITCW3fLjzHUBufbuSmibCWdsTlZId8A2C7JgwSlYii1WzeC07ugVd6uTFvAFPI4ps
- ng+6LXaFP4qAE5yXZGNGtby5uobngpmHuzc6xcjbOgqMXZc1I07r5Ny2H8R9ivFggjlOPtwkXtq
- s+VGwC4hPP9LJDps/4S3z/a/R25lo5eU4Jr/7ZTUene/mNj2Xfdo=
-X-Google-Smtp-Source: AGHT+IGMXaDjimcZ3CjlAbqs+vaIRwqN70rI5ZnM9gzlKx2Rz6CTkgzB0GVsgj4V/nbI3Sz+yme6Mw==
-X-Received: by 2002:a05:6000:2912:b0:3a5:300d:ead0 with SMTP id
- ffacd0b85a97d-3a5612f466bmr272280f8f.43.1749673500700; 
- Wed, 11 Jun 2025 13:25:00 -0700 (PDT)
+ AJvYcCXdklSGuXbEXHXASetXwSc57orKDn6AJlaydIyujNnNIbKnN0lUr2Fi6syw8ZG/JpoW7e25qrM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwS230OUv3qEsHX3Qgyubhz0HTtb9uXGEF3+ahD7BBgmHaXYVcK
+ 9oGo55vZQmyrKnLw5qlka3Bsxp3lI4H53+zLUfIz0A79ZjGiruon0GG5cX0ZMxQLY7pUWUdmcSm
+ zbxPE
+X-Gm-Gg: ASbGncvVtBn6DU037nFbGGVQqS/VGSCl3r1eOCXI2+0ssFDit4cdPUJxjvxqWzWOZnh
+ iBBlBnA9sbvxWD22DYwMW2FO/fdI6hkPyBFgoNBj00FMnFkuZHwC52D3VY93ykYdCsCy6VfT4OS
+ c40DaEzW7TJcHdkYbJ2kjGPJ4P8aFYyUS87YDDyKPau31y4uJ0lpwCgxS/7AO2BrS+RPPmpN8K2
+ 7vW2rilzp3/+1/GuAHoTyP8N5x7mxU5QBgU1wurufysL0vSYRFNGrnJRoHqlSJqMUbk8EsPkujs
+ KA7NpZ+ehbcrIKsod4XmKNJAIbDbbpDv1Ax12fhllBzSlZMyElakygUj2oahbwCi1JK2RTRM5bd
+ oEAmTEpKacll0OR5Blcp7E3la/jQcoacPObyCaElH
+X-Google-Smtp-Source: AGHT+IEjWccBL3HYo43X1pdxMr6TEwE/t/DQad6lyw8oAkqQQQOQUrR1uHOz/JM5LxoK6Ngim4fk1A==
+X-Received: by 2002:a05:600c:384a:b0:43d:4686:5cfb with SMTP id
+ 5b1f17b1804b1-453248cc53dmr42321385e9.27.1749673502637; 
+ Wed, 11 Jun 2025 13:25:02 -0700 (PDT)
 Received: from localhost.localdomain (ppp089210105145.access.hol.gr.
  [89.210.105.145]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a561a3c538sm12071f8f.50.2025.06.11.13.24.58
+ ffacd0b85a97d-3a561a3c538sm12071f8f.50.2025.06.11.13.25.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jun 2025 13:24:59 -0700 (PDT)
+ Wed, 11 Jun 2025 13:25:02 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Yao Zi <ziyao@disroot.org>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <ziyao@disroot.org>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 03/13] kbuild: use assignment instead of define ... endef
- for filechk_* rules
-Date: Wed, 11 Jun 2025 23:24:30 +0300
-Message-ID: <20250611202449.2317279-4-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 04/13] kbuild: clang: choose GCC_TOOLCHAIN_DIR not on LD
+Date: Wed, 11 Jun 2025 23:24:31 +0300
+Message-ID: <20250611202449.2317279-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
 References: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
@@ -106,48 +106,26 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Backported from kernel
-commit ba97df45581f ("kbuild: use assignment instead of define ... endef for filechk_* rules")
+commit ad15006cc784 ("kbuild: clang: choose GCC_TOOLCHAIN_DIR not on LD")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- scripts/Kbuild.include   | 7 +++----
- scripts/kconfig/Makefile | 4 +---
- 2 files changed, 4 insertions(+), 7 deletions(-)
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
-index c0d3440a4b3e..fd7a744478fc 100644
---- a/scripts/Kbuild.include
-+++ b/scripts/Kbuild.include
-@@ -49,11 +49,10 @@ kecho := $($(quiet)kecho)
- ###
- # filechk is used to check if the content of a generated file is updated.
- # Sample usage:
--# define filechk_sample
--#	echo $KERNELRELEASE
--# endef
--# version.h : Makefile
-+# filechk_sample = echo $(KERNELRELEASE)
-+# version.h: FORCE
- #	$(call filechk,sample)
-+#
- # The rule defined shall write to stdout the content of the new file.
- # The existing file will be compared with the new one.
- # - If no file exist it is created
-diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
-index ba30652f01aa..f0f93c56bdb5 100644
---- a/scripts/kconfig/Makefile
-+++ b/scripts/kconfig/Makefile
-@@ -220,9 +220,7 @@ $(obj)/gconf.o: $(obj)/.gconf-cfg
- $(obj)/zconf.tab.o: $(obj)/zconf.lex.c
- 
- # check if necessary packages are available, and configure build flags
--define filechk_conf_cfg
--	$(CONFIG_SHELL) $<
--endef
-+filechk_conf_cfg = $(CONFIG_SHELL) $<
- 
- $(obj)/.%conf-cfg: $(src)/%conf-cfg.sh FORCE
- 	$(call filechk,conf_cfg)
+diff --git a/Makefile b/Makefile
+index 7e1b36e78b93..e648f4920cfb 100644
+--- a/Makefile
++++ b/Makefile
+@@ -446,7 +446,7 @@ ifeq ($(cc-name),clang)
+ ifneq ($(CROSS_COMPILE),)
+ CLANG_TARGET	:= --target=$(notdir $(CROSS_COMPILE:%-=%))
+ LDPPFLAGS	+= $(CLANG_TARGET)
+-GCC_TOOLCHAIN_DIR := $(dir $(shell which $(LD)))
++GCC_TOOLCHAIN_DIR := $(dir $(shell which $(CROSS_COMPILE)elfedit))
+ CLANG_PREFIX	:= --prefix=$(GCC_TOOLCHAIN_DIR)
+ GCC_TOOLCHAIN	:= $(realpath $(GCC_TOOLCHAIN_DIR)/..)
+ endif
 -- 
 2.49.0
 
