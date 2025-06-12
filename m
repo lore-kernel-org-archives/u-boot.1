@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 108C8C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 15:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 267C6C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 15:41:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92C0582B70;
-	Thu, 12 Jun 2025 17:33:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8533A82B70;
+	Thu, 12 Jun 2025 17:40:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S+QUQkZ4";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NU/AP0Ec";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yKMVzJ0I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5E9782C4D; Thu, 12 Jun 2025 17:33:27 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4B19D82B97; Thu, 12 Jun 2025 17:40:57 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86F67828A2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 17:33:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F579828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 17:40:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a376ba6f08so694567f8f.1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 08:33:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749742405; x=1750347205; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nC5y3Rt0PtwMsXT1ldZxbgyX4k03P0sXuU7Y2h1B5Fk=;
- b=S+QUQkZ4DU9QBNgzcyFJR5kHYTO8Cz3aKxrP4FOD6cDO/QrNS0jskhEQyjiiE7wg5d
- CPhXNuXOUdjQS7AJ7byMqW5BmeRCv0cWFftkZW9rPdy1gR7fqxMRd2HAW8Tomw6BbwhY
- KbNsbS1FcSBzSsXOW7IFq71h5UbBt+AQYRzCW9AfYOnTBDS1tcR8hmUVTCFBwZXff6IW
- U/Y4NrLvNSIY+EZn1kEQv2dUkZT5fbjo+wbY1yFotd1BW/AU4ektjaVRLHJutf5ijecO
- p8EgDH8lZY/g7LkRu3joc6zcvtB7NM8cd47ztYX6kJkSh5MOxNMVPhv+icFUdtO8Omxk
- R4eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749742405; x=1750347205;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nC5y3Rt0PtwMsXT1ldZxbgyX4k03P0sXuU7Y2h1B5Fk=;
- b=HTvcFi5g7QwthYlstSASYQNVG0vfB1SvYIG+Tf5tcq1sYlfIHgdkbAQOuZIG2vOUiS
- WHUyCUuhQu2x+YqQKvRuOHejWd5nfrl65HGYNVYw/MCii4lQJiB/gXrIh+VOgzUQb0rx
- DeA0M4SV/ZijLzeZngDFSlCG+e3bqAT3Ey6UZn9zYaiTFuPB3RuAcDR5VSHOjREMrJv/
- WIFSCzoo7DXYtvmzSii3Dh4EuOflZozjThfQUA0hsvD6LeTZr6aqidcEyQdocLproxWu
- leI6b2yBbGvvvC/vsGjuMhK2Wkc9zYOoXVRM5Ikv/FG52dyUa5yPfprJBvDmqyDaYl9R
- 62sQ==
-X-Gm-Message-State: AOJu0YyBEraINKP2N8aMMB5sfCUnJcQ9xkj/C4MsNqogbxI0izekne+N
- 8LfxASPQGgddqUFXJpxKQsxRpj811sd5S6xnZh2sD0gSNFhuky9efj5LXa27oYz3A3mvniaI42R
- RsnW9
-X-Gm-Gg: ASbGncuwWap+6Zd6/3q8bVy3h17xG8TxUP+8RTcBCAiqe/dvyqBGkpcrUY4hyyAr5fp
- Us3ZOYWcLpnpyYKsCC9wk/LbE8BuLiB7sCFjHSx9To48T0b3VjoRzTyuMQflR49DL8z8QqN5TOC
- cWjx30fYJNEfKmBhwNhxqZOVO8xy27t+dpe1hZnyd7H2aLfhTmjJblvtVHrvufVsMdLooDGEmdn
- 2ODpG0EitErEAQcsNzsqVyZsHRp4nKLh1Xxo/Ppjh8JQaWiVdMhY7bxkE1Dy0CPWQ3NveSFCFyV
- Sj/rHHq2HE+Bsy5mfJqL6xCvIG1xZQ7TD7nMHnE83Y3DAF9KzjgDZzOK5O+KZpazEG7S+cA=
-X-Google-Smtp-Source: AGHT+IFwimRVpeVXACH8WJIQHc+EJcrvWQ8H9zoyUadZD6V1M2xSqOmhw67AZ3X6Oqa1wHaucjq5kg==
-X-Received: by 2002:a05:6000:2310:b0:3a4:d994:be7d with SMTP id
- ffacd0b85a97d-3a567987a36mr396098f8f.23.1749742404643; 
- Thu, 12 Jun 2025 08:33:24 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:d68f:cef4:37c0:ca3c])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a56199a930sm2330606f8f.35.2025.06.12.08.33.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 08:33:24 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH] tools: zynqmp: add build script and documentation for
- ZynqMP KV260
-Date: Thu, 12 Jun 2025 17:32:41 +0200
-Message-ID: <20250612153311.2379944-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bJ6F225fgz9tN3;
+ Thu, 12 Jun 2025 17:40:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1749742854;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eZoCJV3LwmEKnPARrmaJsi2+ri70pTutnf+EU95VdnU=;
+ b=NU/AP0Ec6if9SqTJ7UOkAQ4pT6cIZpKfc1WELaed7m4BN3bvECPTv+Gz648Wl00AipcqZL
+ NMjlD2WhCqe+R/IrOoh5WtDM9V06Z8vgu4ugQznWCZZ9ejlGiMHRJrI+/pKddcCgM6o5kS
+ mpM1YaQIf5miNillnwy1CzbJHAJer6bQQwUVvWMQ539LtUmwOG6ahyjpRpOO+43ShKggOw
+ srer8/UpkCY7OoR79COJKxOTOBHPKaZjIQo47DjuAzjnwFfBUUJiZNKnXmb7telZK0dIsI
+ /nf3QRpTZ3gEgC7DcNPFO5JPDC6SeIp0W/GmD+IInEcoLr7X8IO3tlGYk+gRwg==
+Message-ID: <c8748620-afad-410a-8888-195161ca38ab@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1749742852;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eZoCJV3LwmEKnPARrmaJsi2+ri70pTutnf+EU95VdnU=;
+ b=yKMVzJ0IjBe2n9svy1iFxtIH6lhh6uH+34A9xaB/W+bxi/o2bzl4T8bHS3AilY5NeSDz43
+ GGbdo+iXonOlI+BP5q6GSclPUhu9FtlD67QEHxSxy543DOEYR8SvtPGEhqvH0stI2J1AY9
+ SOis9Mg+Rie9cHd8DmjyMiQyqFhksw+Zd2bppH7LLncsRjfQyGtnvaT3hURmm0h++dwv49
+ G8h5RXIEfujaO0jSyskXh2huqsJrhw7FIfbAlNrSsGHJXXhGFMQrvxPx98bnUkIPGbkQ3f
+ sGlxHjk19pqnyTwN9LtgD8OMVC0ynday0/vwf2eAI/izFd0moNVkRyI67OyD7g==
+Date: Thu, 12 Jun 2025 17:40:48 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [U-Boot, v1, 1/1] net: phy: Add the Airoha EN8811H PHY driver
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com
+References: <20250511051400.29853-1-lucienzx159@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250511051400.29853-1-lucienzx159@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: xhbxxzei6kodq4i3kfsod8nt7otwt8cc
+X-MBO-RS-ID: 105b3f263136636d757
+X-Rspamd-Queue-Id: 4bJ6F225fgz9tN3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,217 +91,439 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a script to help build a functional U-Boot binary for the ZynqMP
-Kria KV260. Also add some documentation.
+On 5/11/25 7:14 AM, Lucien.Jheng wrote:
+> Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
+> 100/1000/2500 Mbps with auto negotiation only.
+> 
+> The driver uses two firmware files, for which updated versions are added to
+> linux-firmware already.
+> 
+> Locating the AIROHA FW within the filesystem at the designated partition
+> and path will trigger its automatic loading and writing to the PHY via MDIO.
+> If need board specific loading override,
+> please override the en8811h_read_fw function on board or architecture level.
+> 
+> Linux upstream AIROHA EN8811H driver commit:
+> 71e79430117d56c409c5ea485a263bc0d8083390
+> 
+> Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
+> I have modified the relevant process to align with the U-Boot boot sequence.
+> and have validated this on Banana Pi BPI-R3 Mini.
+> 
+> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> ---
+>   drivers/net/phy/Kconfig       |  43 ++
+>   drivers/net/phy/air_en8811h.c | 852 ++++++++++++++++++++++++++++++++++
+>   2 files changed, 895 insertions(+)
+>   create mode 100644 drivers/net/phy/air_en8811h.c
+> 
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 3132718e4f8..384cef845e1 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -79,6 +79,49 @@ config PHY_ADIN
+>   	help
+>   		Add support for configuring RGMII on Analog Devices ADIN PHYs.
+> 
+> +menuconfig PHY_AIROHA
+> +	bool "Airoha Ethernet PHYs support"
+> +
+> +config PHY_AIROHA_EN8811H
+> +	bool "Airoha Ethernet EN8811H support"
+> +	depends on PHY_AIROHA
+> +	help
+> +		AIROHA EN8811H supported.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
+Indent of help text is two spaces right of indent of 'help' Kconfig keyword.
 
- doc/board/xilinx/index.rst        |  1 +
- doc/board/xilinx/zynqmp-kv260.rst | 27 +++++++++
- tools/zynqmp_kv260_build.sh       | 43 ++++++++++++++
- tools/zynqmp_pmufw_elf_convert.py | 96 +++++++++++++++++++++++++++++++
- 4 files changed, 167 insertions(+)
- create mode 100644 doc/board/xilinx/zynqmp-kv260.rst
- create mode 100755 tools/zynqmp_kv260_build.sh
- create mode 100755 tools/zynqmp_pmufw_elf_convert.py
+> +
+> +choice
+> +	prompt "Location of the Airoha PHY firmware"
+> +	default PHY_AIROHA_FW_IN_MMC
+> +	depends on PHY_AIROHA_EN8811H
+> +
+> +config PHY_AIROHA_FW_IN_MMC
+> +	bool "Airoha firmware in MMC partition"
+> +	help
+> +		Airoha PHYs use firmware which can be loaded automatically
+> +		from storage directly attached to the PHY, and then loaded
+> +		via MDIO commands by the boot loader. The firmware is loaded
+> +		from a file specified by the PHY_AIROHA_FW_PART,
+> +		PHY_AIROHA_FW_DM_FILEPATH and PHY_AIROHA_FW_DSP_FILEPATH options.
 
-diff --git a/doc/board/xilinx/index.rst b/doc/board/xilinx/index.rst
-index 2e31fe3f3a4..3f3a85b709c 100644
---- a/doc/board/xilinx/index.rst
-+++ b/doc/board/xilinx/index.rst
-@@ -9,4 +9,5 @@ Xilinx
-    xilinx
-    zynq
-    zynqmp
-+   zynqmp-kv260
-    zynqmp-r5
-diff --git a/doc/board/xilinx/zynqmp-kv260.rst b/doc/board/xilinx/zynqmp-kv260.rst
-new file mode 100644
-index 00000000000..219bbd602e9
---- /dev/null
-+++ b/doc/board/xilinx/zynqmp-kv260.rst
-@@ -0,0 +1,27 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+..  (C) Copyright 2025 Linaro Ltd.
-+
-+ZYNQMP KV260
-+============
-+
-+Building
-+--------
-+
-+To build for the KV260:
-+
-+   $ ./tools/zynqmp_kv260_build.sh
-+
-+The first invocation will fetch and build some required binaries (bl31.bin,
-+pm_cfg_obj.o, pmufw.bin). Subsequently `make` can be invoked directly as
-+follows:
-+
-+   $ export BL31=bl31.bin
-+   # export CROSS_COMPILE=aarch64-linux-gnu-
-+   $ make -j$(nproc) BINMAN_ALLOW_MISSING=1
-+
-+Flashing
-+--------
-+
-+Press the FWUEN button on the carrier board, the press and release the RESET
-+button, then release FWUEN. Connect to the embedded HTTP server and upload
-+`qspi.bin`. Press and release RESET again.
-diff --git a/tools/zynqmp_kv260_build.sh b/tools/zynqmp_kv260_build.sh
-new file mode 100755
-index 00000000000..3cf7147e3a6
---- /dev/null
-+++ b/tools/zynqmp_kv260_build.sh
-@@ -0,0 +1,43 @@
-+#!/bin/bash
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2025 Linaro Ltd.
-+
-+set -ex
-+
-+if [ "$1" == "-c" ]; then
-+  rm -f bl31.bin pmufw.elf pmufw.bin pm_cfg_obj.c pm_cfg_obj.o
-+  exit 0
-+fi
-+[ -e bl31.bin ] || {
-+  ATF_SRC=$(mktemp -d /tmp/arm-trusted-firmware.XXXXXXXXXX)
-+  git clone https://github.com/ARM-software/arm-trusted-firmware ${ATF_SRC}
-+  make -C ${ATF_SRC} -j$(nproc) bl31 CROSS_COMPILE=aarch64-linux-gnu- \
-+	  LOG_LEVEL=40 ZYNQMP_CONSOLE=cadence1 CONSOLE_RUNTIME=cadence1 \
-+	  RESET_TO_BL31=1 PLAT=zynqmp ZYNQMP_ATF_MEM_BASE=0x10000 \
-+	  ZYNQMP_ATF_MEM_SIZE=0x2ffff ENABLE_LTO=1
-+  cp ${ATF_SRC}/build/zynqmp/release/bl31.bin .
-+  rm -rf ${ATF_SRC}
-+}
-+[ -e pmufw.bin ] || {
-+  wget https://github.com/Xilinx/soc-prebuilt-firmware/raw/refs/heads/xlnx_rel_v2023.1/kv260-kria/pmufw.elf
-+  ./tools/zynqmp_pmufw_elf_convert.py pmufw.elf pmufw.bin
-+}
-+[ -e pm_cfg_obj.o ] || {
-+  wget https://github.com/Xilinx/embeddedsw/raw/refs/heads/xlnx_rel_v2023.1/lib/sw_apps/zynqmp_fsbl/misc/pm_cfg_obj.c
-+  ./tools/zynqmp_pm_cfg_obj_convert.py pm_cfg_obj.c pm_cfg_obj.o
-+}
-+[ -e .config ] || {
-+  make xilinx_zynqmp_kria_defconfig
-+  cat << EOF >> .config
-+CONFIG_PMUFW_INIT_FILE="pmufw.bin"
-+CONFIG_ZYNQMP_SPL_PM_CFG_OBJ_FILE="pm_cfg_obj.o"
-+CONFIG_BL31_LOAD_ADDR=0x10000
-+CONFIG_BL32_LOAD_ADDR=0
-+EOF
-+}
-+export BL31=bl31.bin
-+export BL32=
-+export TEE=
-+export CROSS_COMPILE=aarch64-linux-gnu-
-+make -j$(nproc) BINMAN_ALLOW_MISSING=1
-diff --git a/tools/zynqmp_pmufw_elf_convert.py b/tools/zynqmp_pmufw_elf_convert.py
-new file mode 100755
-index 00000000000..b4eb2695831
---- /dev/null
-+++ b/tools/zynqmp_pmufw_elf_convert.py
-@@ -0,0 +1,96 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2025 Linaro Ltd.
-+#
-+# Written by Gemini (Google AI) then reviewed and edited to remove some comments
-+
-+import sys
-+from elftools.elf.elffile import ELFFile
-+from elftools.elf.segments import Segment
-+from elftools.common.exceptions import ELFError
-+
-+def elf_to_bin_with_elftools(elf_path, bin_path):
-+    """
-+    Converts a Microblaze ELF file to a raw binary (.bin)
-+    by extracting LOAD segments using the elftools library.
-+
-+    Args:
-+        elf_path (str): Path to the input .elf file.
-+        bin_path (str): Path for the output .bin file.
-+    """
-+    try:
-+        with open(elf_path, 'rb') as f:
-+            elffile = ELFFile(f)
-+
-+            if elffile.header['e_machine'] not in ('EM_MICROBLAZE', 'EM_MICROBLAZE_OLD'):
-+                print(f"Error: ELF machine type is {elffile.header['e_machine']}, "
-+                      f"not typical Microblaze.")
-+                return
-+
-+            print(f"ELF Header Info:")
-+            print(f"  Entry Point: 0x{elffile.header['e_entry']:08X}")
-+            print(f"  Endianness: {elffile.little_endian and 'Little-endian' or 'Big-endian'}")
-+
-+            load_segments = []
-+            for segment in elffile.iter_segments():
-+                if segment.header['p_type'] == 'PT_LOAD':
-+                    load_segments.append(segment)
-+                    print(f"  Found LOAD segment:")
-+                    print(f"    Offset: 0x{segment.header['p_offset']:08X}, VAddr: 0x{segment.header['p_vaddr']:08X}")
-+                    print(f"    File Size: {segment.header['p_filesz']} bytes, Memory Size: {segment.header['p_memsz']} bytes")
-+
-+            if not load_segments:
-+                print("Error: No LOADable segments found in the ELF file. Cannot create binary.")
-+                return
-+
-+            load_segments.sort(key=lambda seg: seg.header['p_vaddr'])
-+
-+            min_vaddr = load_segments[0].header['p_vaddr']
-+            max_vaddr = 0
-+            for segment in load_segments:
-+                end_vaddr = segment.header['p_vaddr'] + segment.header['p_memsz']
-+                if end_vaddr > max_vaddr:
-+                    max_vaddr = end_vaddr
-+
-+            total_bin_size = max_vaddr - min_vaddr
-+            print(f"Calculated binary memory range: 0x{min_vaddr:08X} to 0x{max_vaddr:08X} (Size: {total_bin_size} bytes)")
-+
-+            output_buffer = bytearray(total_bin_size)
-+
-+            for segment in load_segments:
-+                buffer_start = segment.header['p_vaddr'] - min_vaddr
-+                buffer_end = buffer_start + segment.header['p_memsz'] # Using memsz for bounds check
-+
-+                if buffer_end > total_bin_size:
-+                    print(f"Warning: Segment at 0x{segment.header['p_vaddr']:08X} "
-+                          f"extends beyond calculated total binary size. Truncating.")
-+                    buffer_end = total_bin_size
-+
-+                segment_data = segment.data()
-+
-+                output_buffer[buffer_start : buffer_start + len(segment_data)] = segment_data
-+
-+                # The remaining part of the segment in memory (if p_memsz > p_filesz)
-+                # is already zeroed due to output_buffer initialization.
-+
-+            with open(bin_path, 'wb') as out_f:
-+                out_f.write(output_buffer)
-+
-+            print(f"Successfully created '{bin_path}' (size: {len(output_buffer)} bytes) from '{elf_path}'.")
-+
-+    except FileNotFoundError:
-+        print(f"Error: ELF file not found at '{elf_path}'")
-+    except ELFError as e:
-+        print(f"Error parsing ELF file with elftools: {e}. The file might be malformed or not a valid ELF.")
-+    except Exception as e:
-+        print(f"An unexpected error occurred: {e}")
-+
-+if __name__ == "__main__":
-+    if len(sys.argv) != 3:
-+        print("Usage: python elf_to_bin.py <input_elf_file> <output_bin_file>")
-+        sys.exit(1)
-+
-+    input_elf = sys.argv[1]
-+    output_bin = sys.argv[2]
-+
-+    elf_to_bin_with_elftools(input_elf, output_bin)
+Indent, fix globally.
+
+[...]
+
+> diff --git a/drivers/net/phy/air_en8811h.c b/drivers/net/phy/air_en8811h.c
+
+[...]
+
+> + #define	EN8811H_FW_CTRL_2		0x800000
+> + #define	EN8811H_FW_CTRL_2_LOADING	BIT(11)
+> +
+> + /* MII Registers */
+> + #define AIR_AUX_CTRL_STATUS		0x1d
+> + #define   AIR_AUX_CTRL_STATUS_SPEED_MASK	GENMASK(4, 2)
+> + #define   AIR_AUX_CTRL_STATUS_SPEED_100		0x4
+> + #define   AIR_AUX_CTRL_STATUS_SPEED_1000	0x8
+> + #define   AIR_AUX_CTRL_STATUS_SPEED_2500	0xc
+
+Please fix indent, and be consistent about it:
+
+#define<space>MACRO_NAME<tab><more tabs as needed>0xvalue
+
+> +#define AIR_EXT_PAGE_ACCESS		0x1f
+> +#define   AIR_PHY_PAGE_STANDARD			0x0000
+> +#define   AIR_PHY_PAGE_EXTENDED_4		0x0004
+
+[...]
+
+> +int air_phy_restore_page(struct phy_device *phydev, int oldpage, int ret)
+> +{
+> +	int r;
+> +
+> +	if (oldpage >= 0) {
+> +		r = air_phy_write_page(phydev, oldpage);
+> +
+> +		if (ret >= 0 && r < 0)
+> +			ret = r;
+> +	} else {
+> +		ret = oldpage;
+
+Invert the conditionals to reduce indent
+
+if (oldpage < 0)
+   return oldpage;
+
+r = ...
+
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int air_buckpbus_reg_write(struct phy_device *phydev,
+> +				  u32 pbus_address, u32 pbus_data)
+> +{
+> +	int ret, saved_page;
+> +
+> +	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
+> +
+> +	if (saved_page >= 0) {
+
+Invert the conditional (*):
+
+if (saved_page < 0)
+   return saved_page; // this is OK, because air_phy_restore_page() will
+                      // bail in case saved_page < 0 , see above
+
+...
+
+> +		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE, AIR_BPBUS_MODE_ADDR_FIXED);
+> +		if (ret < 0)
+> +			goto restore_page;
+> +
+> +		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
+> +				air_upper_16_bits(pbus_address));
+> +		if (ret < 0)
+> +			goto restore_page;
+> +
+> +		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
+> +				air_lower_16_bits(pbus_address));
+> +		if (ret < 0)
+> +			goto restore_page;
+> +
+> +		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
+> +				air_upper_16_bits(pbus_data));
+> +		if (ret < 0)
+> +			goto restore_page;
+> +
+> +		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
+> +				air_lower_16_bits(pbus_data));
+> +		if (ret < 0)
+> +			goto restore_page;
+> +	}
+> +
+> +restore_page:
+> +	if (ret < 0)
+> +		printf("%s 0x%08x failed: %d\n", __func__,
+> +		       pbus_address, ret);
+> +
+> +	return air_phy_restore_page(phydev, saved_page, ret);
+> +}
+> +
+> +static int air_buckpbus_reg_read(struct phy_device *phydev,
+> +				 u32 pbus_address, u32 *pbus_data)
+> +{
+> +	int pbus_data_low, pbus_data_high;
+> +	int ret = 0, saved_page;
+> +
+> +	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
+
+Same change (*) applies here, see above.
+
+> +	if (saved_page >= 0) {
+
+
+[...]
+
+> +static int air_buckpbus_reg_modify(struct phy_device *phydev,
+> +				   u32 pbus_address, u32 mask, u32 set)
+> +{
+> +	int pbus_data_low, pbus_data_high;
+> +	u32 pbus_data_old, pbus_data_new;
+> +	int ret = 0, saved_page;
+> +
+> +	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
+
+Same change (*) applies here, see above, fix globally.
+
+> +	if (saved_page >= 0) {
+
+[...]
+
+> +static void crc32_check(unsigned char *buf, u32 len)
+> +{
+> +	u32 ca_crc32;
+> +
+> +	ca_crc32 = crc32(0, buf, len);
+> +	printf("crc32 is 0x%x\n", ca_crc32);
+
+Shouldn't this produce some return value , in case the check fails ?
+
+> +}
+> +
+> +__weak int en8811h_read_fw(void **addr)
+> +{
+> +	loff_t read;
+> +	int ret;
+> +
+> +	printf("\nLoading Airoha FW from %s %s\n",
+> +	       CONFIG_PHY_AIROHA_FW_PART,
+> +	       CONFIG_PHY_AIROHA_FW_DM_FILEPATH);
+
+debug() instead of printf() .
+
+> +	ret = fs_set_blk_dev("mmc", CONFIG_PHY_AIROHA_FW_PART, FS_TYPE_ANY);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = fs_read(CONFIG_PHY_AIROHA_FW_DM_FILEPATH,
+> +		      (ulong)*addr, 0, EN8811H_MD32_DM_SIZE, &read);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	/* Calculate the CRC32 */
+> +	crc32_check((unsigned char *)*addr, EN8811H_MD32_DM_SIZE);
+> +
+> +	printf("Loading Airoha FW from %s %s\n",
+> +	       CONFIG_PHY_AIROHA_FW_PART,
+> +	       CONFIG_PHY_AIROHA_FW_DSP_FILEPATH);
+> +	ret = fs_set_blk_dev("mmc", CONFIG_PHY_AIROHA_FW_PART, FS_TYPE_ANY);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = fs_read(CONFIG_PHY_AIROHA_FW_DSP_FILEPATH,
+> +		      (ulong)*addr + EN8811H_MD32_DM_SIZE,
+> +		      0, EN8811H_MD32_DSP_SIZE, &read);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	/* Calculate the CRC32 */
+> +	crc32_check((unsigned char *)*addr + EN8811H_MD32_DM_SIZE,
+> +		    EN8811H_MD32_DSP_SIZE);
+> +
+> +	printf("Found Airoha Firmware.\n");
+> +
+> +	return 0;
+> +}
+> +
+> +static int en8811h_load_firmware(struct phy_device *phydev)
+> +{
+> +	struct en8811h_priv *priv = phydev->priv;
+> +	void *addr = NULL;
+> +	int ret;
+> +
+> +	if (IS_ENABLED(CONFIG_PHY_AIROHA_FW_IN_MMC)) {
+
+This conditional should be in en8811h_read_fw() too , the malloc as well 
+, so user can completely override the loading and only return a buffer 
+with firmware from wherever they loaded it from .
+
+This:
+
+__weak int en8811h_read_fw(void **addr) {
+   if (!IS_ENABLED(CONFIG_PHY_AIROHA_FW_IN_MMC))
+     return -EOPNOTSUPP;
+
+   buffer = malloc();
+   ...
+   load_the_firmware(buffer);
+   ...
+   *addr = buffer;
+   ...
+   return 0;
+}
+
+And here:
+
+...
+void *buffer;
+...
+ret = en8811h_read_fw(&buffer);
+if (ret)
+   return ret;
+...
+
+> +		u32 fw_length = EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE;
+> +
+> +		addr = malloc(fw_length);
+> +		if (!addr) {
+> +			printf("Failed to allocate memory for firmware\n");
+> +			return -ENOMEM;
+> +		}
+> +
+> +		ret = en8811h_read_fw(&addr);
+> +		if (ret < 0) {
+> +			free(addr);
+> +			return ret;
+
+Remove the free() and goto en8811h_load_firmware_out;
+
+> +		}
+> +	} else {
+> +		puts("EN8811H firmware loading not implemented");
+> +		return -EOPNOTSUPP;
+
+Invert the conditional, reduce indent.
+
+> +	}
+> +
+> +	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+> +				     EN8811H_FW_CTRL_1_START);
+> +	if (ret < 0)
+> +		goto en8811h_load_firmware_out;
+> +
+> +	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
+> +				      EN8811H_FW_CTRL_2_LOADING,
+> +				      EN8811H_FW_CTRL_2_LOADING);
+> +	if (ret < 0)
+> +		goto en8811h_load_firmware_out;
+> +
+> +	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, EN8811H_MD32_DM_SIZE,
+> +			    (unsigned char *)addr);
+> +	if (ret < 0)
+> +		goto en8811h_load_firmware_out;
+> +
+> +	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, EN8811H_MD32_DSP_SIZE,
+> +			    (unsigned char *)addr + EN8811H_MD32_DM_SIZE);
+> +	if (ret < 0)
+> +		goto en8811h_load_firmware_out;
+> +
+> +	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
+> +				      EN8811H_FW_CTRL_2_LOADING, 0);
+> +	if (ret < 0)
+> +		goto en8811h_load_firmware_out;
+> +
+> +	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
+> +				     EN8811H_FW_CTRL_1_FINISH);
+> +	if (ret < 0)
+> +		goto en8811h_load_firmware_out;
+> +
+> +	ret = en8811h_wait_mcu_ready(phydev);
+> +
+> +	air_buckpbus_reg_read(phydev, EN8811H_FW_VERSION,
+> +			      &priv->firmware_version);
+> +	printf("MD32 firmware version: %08x\n",
+> +	       priv->firmware_version);
+> +
+> +en8811h_load_firmware_out:
+> +	free(addr);
+> +	if (ret < 0)
+> +		printf("Firmware loading failed: %d\n", ret);
+> +
+> +	return ret;
+> +}
+
+[...]
+
+> +static int air_leds_init(struct phy_device *phydev, int num, int dur, int mode)
+> +{
+> +	int ret, i;
+> +	struct en8811h_priv *priv = phydev->priv;
+
+Use reverse xmas tree sorting for variables, i.e. 'int ret, i;' goes 
+below struct en88... , fix globally.
+
+> +	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_BLINK,
+> +			    dur);
+> +	if (ret < 0)
+> +		return ret;
+
+[...]
+
+> +static int en8811h_config(struct phy_device *phydev)
+> +{
+> +	ofnode node = phy_get_ofnode(phydev);
+> +	struct en8811h_priv *priv = phydev->priv;
+> +	int ret = 0;
+> +	u32 pbus_value = 0;
+> +
+> +	/* If restart happened in .probe(), no need to restart now */
+> +	if (priv->mcu_needs_restart) {
+> +		ret = en8811h_restart_mcu(phydev);
+> +		if (ret < 0)
+> +			return ret;
+> +	} else {
+> +		ret = en8811h_load_firmware(phydev);
+> +		if (ret) {
+> +			printf("Load firmware fail.\n");
+> +			return ret;
+> +		}
+> +		/* Next calls to .config() mcu needs to restart */
+> +		priv->mcu_needs_restart = true;
+> +	}
+> +
+> +	ret = phy_write_mmd(phydev, 0x1e, 0x800c, 0x0);
+> +	ret |= phy_write_mmd(phydev, 0x1e, 0x800d, 0x0);
+> +	ret |= phy_write_mmd(phydev, 0x1e, 0x800e, 0x1101);
+> +	ret |= phy_write_mmd(phydev, 0x1e, 0x800f, 0x0002);
+
+Bitwise operations do not work on signed integers , do proper error 
+checking on all four return values above.
+
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	/* Serdes polarity */
+> +	pbus_value = 0;
+> +	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
+> +		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
+> +	else
+> +		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
+> +	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
+> +		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
+> +	else
+> +		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
+> +	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
+> +				      EN8811H_POLARITY_RX_REVERSE |
+> +				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = air_leds_init(phydev, EN8811H_LED_COUNT, AIR_PHY_LED_DUR,
+> +			    AIR_LED_MODE_USER_DEFINE);
+> +	if (ret < 0) {
+> +		printf("Failed to disable leds: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+
+[...]
+
 -- 
-2.43.0
-
-base-commit: fcdb871cb79e21d53fa8ef241dd0f06336c27d47
-branch: kv260-spl-build
+Best regards,
+Marek Vasut
