@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9519C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 22:15:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61093C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 22:16:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B591582CA8;
-	Fri, 13 Jun 2025 00:15:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 311C082CC9;
+	Fri, 13 Jun 2025 00:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VeEeGm1L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="adhCOEoM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F117182C87; Fri, 13 Jun 2025 00:15:29 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 424A782CA8; Fri, 13 Jun 2025 00:15:31 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C720982C30
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 00:15:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21A9482AA7
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 00:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-72c13802133so534706a34.3
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 15:15:27 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-736f1953673so427810a34.0
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 15:15:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749766526; x=1750371326; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749766528; x=1750371328; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ygRHeFmpWGeGgtbnQB8JrUVUQrPLeDayH5sNuWkDC8k=;
- b=VeEeGm1LdutmBc5o+vwqsY/PMBfc6+yp9RoxjaJOl93vVXa8qQPI6Lbzjk3flk+SJu
- 2bpQp0CBa5PH9BlMtUw3t7a/0+PvNAPbxzGU33htX1M1XdQG0tT9BjrR83bK4LuioX2q
- 2OSJN8bSLUb51UfopL1FdwqUiizknoUKAogQA=
+ bh=jn7KBSn3Q1j7w6JvQzxN7ZuFgXHwEubgBhlP7BAdJJc=;
+ b=adhCOEoMo+Z2os9FjD4GzjNTrY3wIESjfTbD9iHTxFyKr3wi0998ApkuQ+VdZhf9IK
+ O4JR8b01w33PImM3eFu6Sw445OS0kfWmkxzrdMl4Hq5dQvF08AlTDcju1krwbDjn8Xmx
+ c3qwkkR/ddpq48tHiaH+mFuxSe9iB0OT0tSEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749766526; x=1750371326;
+ d=1e100.net; s=20230601; t=1749766528; x=1750371328;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ygRHeFmpWGeGgtbnQB8JrUVUQrPLeDayH5sNuWkDC8k=;
- b=c1SSGwk5zovVV3pd++yjJMcyBMklmDO3LuRULTUz64ojvW1M26tiWNGYuAST3/NKpM
- atqCtzY9JiD6/6S70APFo22JYZApqlpIo0PevbhXRB1GR76cdEqvX3tXpDaVa/mn246c
- TuG22SleAYrZjjpLFU+4Pn3wQxgGlrorSBLY9SdR0XK3uJ2BsgUU3SakV2lM+Sd3laRm
- II4ybO6apqt28jCNYLkzxn3SX+gx+aND8sx3yHFwDW7KaEOh2NG6SfMdIBCMbQMdyk40
- SaWppvBj8gBXIrPH4x7jza8e+Rigyh1kwV0cXpxCLDNk69+XDCrLvirfn5XPJW6bUfzH
- lLRg==
-X-Gm-Message-State: AOJu0Yys2XiM0Sk0L9KRPiqs0EvotChnP+Vb+4bcx5ruAj0lni/kLxYY
- FgJoP717ZlV2qgkc7D1OGGlpiSKXILQndaD1GGBAuIuoP4o19myq9tzbT2uBMTXfCVM=
-X-Gm-Gg: ASbGncsCuMna86UFGpirwEYVhkb6rVerVOQA7MJJKTIuWEvUq0osX40hIz/mktMb+ga
- hUd4NyTE/FTFWDxzzPU2INYgXKOGyrq4KPXu1c8/lVfrwLXM8evtwnQ+y+OFdWp6QUoaIaTRIJF
- beARrTs+Kd8QKqEzvpB8+l4MtaUyJwbg/O4kpZlWG9huVkAOooSHlBe48amUqEFNF7b9pYc7/bZ
- rtKxdPyd4pIqE7xiKKJbfi1TklA7UkcO5JyQQKbI0OKawQKgTGA7wHB2H8eclEXajD4qYb92Gff
- 9RVjmtKDRe36UGK8a/ArnKSwPMiEOu9EciycC0jEwSXkSRIG5JsIoXpfTcEY8NYfddYlHd/ZuOu
- ZaEMf38B+ZIX8zMUxZHGx6wdTggH2iSJS
-X-Google-Smtp-Source: AGHT+IEH+VjbN+0g5jWdpajWXrwCldZF6o9RRVwen+Tfbo8aONVSXh0IpQmby0nECIa+NZvLGY/ngA==
-X-Received: by 2002:a05:6830:808a:b0:72b:b8d8:3995 with SMTP id
- 46e09a7af769-73a27134f5amr284834a34.19.1749766526591; 
- Thu, 12 Jun 2025 15:15:26 -0700 (PDT)
+ bh=jn7KBSn3Q1j7w6JvQzxN7ZuFgXHwEubgBhlP7BAdJJc=;
+ b=iLVAVIUe86Pc1sj8aK59R0QKszlddvG99cJGLQaKajH6bpT8FJjWg0tOZF7uIArwtO
+ oPKGQLKBdIHUW9P1fyMxuqYtws5C8JrEHzRoqAitVsoh2nOCVKZBDTrl1bu/ev+qDDu1
+ B0zYE+orRp5t7vD8eWSMw2Te1ECzMj0SoEg5oXsmWhY6D/m3t5CrzMDvroeJocgddzZh
+ hoSdMwUywhW5IombedYUshuFD1yB8wLXvIPzv/Hq44R8hneg9F5ExY1E/lLcf4E+1/rv
+ aAP5RMKmXgW70L+6KuGPodWg2tDzVnIdkdsgCaOKv/1KHEhIB60ADgYx1eXMA7JtdIUv
+ OMKw==
+X-Gm-Message-State: AOJu0Yw744/MR8k8gebrq+zdPt+Eum7eSsAS8ODRJJffvgVuZO43sJZ8
+ CelajisCxOP60PVaCXjecSsiqT37DTXHnflp3lRUBG3Xw1a7OLrQ0hLYyPLAjXidCNw=
+X-Gm-Gg: ASbGncvtyQRJGPiP2g4/TXYnzH9wmkbUBl5ZIqiklW4frkL2irk9FWFGOw+zDz66dUf
+ TC2Y7xc6as0uTCEDIkV9xUTxKBi+htCt9PzSFbzvPDQhCeaEfQd61J7WhYbEcUDGP2cQHXyOyHb
+ eeyPwLvViSloMIAsaCoS11uDEHFViFcP4Pw89MVAg/Z1WMP18kDgh73043Ry+W0OJ0rQiV4jCTh
+ MT/Xa7HEvXKHuGa6CujlAbLXd8jf29GrEXhN2doCK6cQ34ujiSXNwZqLY9GMIFazwQYzteG77aP
+ tmpVqzSbOFLD3+jh1O1dLeJlOphkZbgTugsnIBUQ61RgBR3iBUE9SSDe+rXC+O8Gy0tH+os+ry4
+ eKELlMt+aizXFDG1UngCFerC6wAMwWMbZ
+X-Google-Smtp-Source: AGHT+IGF2fkBVxTnflnyjhLxtfCDY+iyoXQLCHZGeo5WRVrxsMJb44oP/rkqIoN74eE85WWlbLq6Zg==
+X-Received: by 2002:a05:6830:638c:b0:727:36a0:a2ae with SMTP id
+ 46e09a7af769-73a27118a28mr319903a34.14.1749766527921; 
+ Thu, 12 Jun 2025 15:15:27 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a283e3198sm7145a34.10.2025.06.12.15.15.25
+ 46e09a7af769-73a283e3198sm7145a34.10.2025.06.12.15.15.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 15:15:26 -0700 (PDT)
+ Thu, 12 Jun 2025 15:15:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Richard Weinberger <richard@nod.at>
-Cc: ddrokosov@salutedevices.com, sjg@chromium.org, tharvey@gateworks.com, 
- ilias.apalodimas@linaro.org, kojima.masahisa@socionext.com, 
- upstream+uboot@sigma-star.at
-In-Reply-To: <20250529150213.27149-1-richard@nod.at>
-References: <20250529150213.27149-1-richard@nod.at>
-Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
-Message-Id: <174976652550.365589.4489095631856636528.b4-ty@konsulko.com>
-Date: Thu, 12 Jun 2025 16:15:25 -0600
+To: u-boot@lists.denx.de, Aristo Chen <jj251510319013@gmail.com>
+Cc: sjg@chromium.org, richard@nod.at, aristo.chen@canonical.com
+In-Reply-To: <20250602021818.2277-1-aristo.chen@canonical.com>
+References: <20250602021818.2277-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH 1/1] bootstage: Fix typo
+Message-Id: <174976652671.365589.18370859649124507893.b4-ty@konsulko.com>
+Date: Thu, 12 Jun 2025 16:15:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,23 +95,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 29 May 2025 17:02:13 +0200, Richard Weinberger wrote:
+On Mon, 02 Jun 2025 02:18:02 +0000, Aristo Chen wrote:
 
-> Although if we we don't setup an initrd, there could be a stale
-> initrd setting from the previous boot firmware in the live
-> device tree. So, make sure there is no setting left if we
-> don't want an initrd.
+> Fix typo from heder to header
 > 
-> This can happen when booting on a Raspberry Pi. The boot firmware
-> can happily load an initrd before us and configuring the addresses
-> in the live device tree we get handed over.
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] fdt: Make sure there is no stale initrd left
-      commit: 9fe2e4b46458f9c4ec6b8115ebf18b4b26fe6127
+[1/1] bootstage: Fix typo
+      commit: 0805e4648686d5aa50b3990347b2b9f41dd42b3c
 -- 
 Tom
 
