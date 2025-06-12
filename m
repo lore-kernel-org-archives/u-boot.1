@@ -4,67 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A19C71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 04:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3ADDC71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 05:14:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7453A82BD9;
-	Thu, 12 Jun 2025 06:59:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 44A9F82977;
+	Thu, 12 Jun 2025 07:14:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XtHd5s48";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fVMzvOOG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15D2682C4D; Thu, 12 Jun 2025 06:59:34 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EADD82B70
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 06:59:31 +0200 (CEST)
+ id C0E0E82A4B; Thu, 12 Jun 2025 07:14:09 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BE331828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:14:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55C4xTdO2808747;
- Wed, 11 Jun 2025 23:59:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749704369;
- bh=GDcv+u2rjMSHl8WV8VTVhtrlzu8DS+Pn1SMZ4KWU+mY=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=XtHd5s48yrlECm+Pk2XiQF9cMVpP3nTXKqYmRltRxSEcB5m/QstRFdw1IsfMp+62i
- u+rnuT10V+rDaQjAi8/o4XKRE37UmmbulvksfRydbEM1vREwjYvnhHYQpAjJYxxDUj
- sGVt/+jNzMY9MSgK8YG1ictlXyCcyJPz6fUkNyVM=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55C4xThX2287946
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 11 Jun 2025 23:59:29 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 11
- Jun 2025 23:59:28 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 11 Jun 2025 23:59:28 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55C4xSE81597082;
- Wed, 11 Jun 2025 23:59:28 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=heiko.thiery@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-32b31afa781so3478401fa.3
+ for <u-boot@lists.denx.de>; Wed, 11 Jun 2025 22:14:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749705247; x=1750310047; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UfJEbEMPssPBS1sDRnXen92VhSHkBVZUre35gWnK7aY=;
+ b=fVMzvOOGFNHOGd5qdSlJH/rRk1jmPg6Gl0RK1gfSnIVz45tmFQHDZRC2nSJcyTidsF
+ Ih4C74tw+fmyEppJ0wFIq/baHNYJRzE+lrlN0ZMpBvJe2iGxGYWzNesFGlThjQa3zGrs
+ rzhXNzCtr3cRBdgTjuQzR8zUbbR9yjtgKFg+yUH8HppJthhQYtLLnT9+3Pc1YWNmN/aD
+ JO25obXxaJkxN78x8eqRRt0eJ8izLZ2YolwCpgqYLC5Pof9ov/CCtO3kqBmGbaI+GWL5
+ Gl5PiQGcbRkOwfKi3EWsB4P5CFFsxWmTH/VhZ7/2WsTF/Oj8EgLKJk/2bc4cuzc6E3G/
+ EjEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749705247; x=1750310047;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UfJEbEMPssPBS1sDRnXen92VhSHkBVZUre35gWnK7aY=;
+ b=amP6vTkH8l5YUowVA6E0mR4yqu8wWyKi3WhFiD6XCxQlswkzBvCnfAIm5fnzhNAPoS
+ 5ErozFvxOcauD5VtiLVsaoGBjCspptrbcvv6D2DlhPnVN3LBecmR7TbvM2r9WVEFK+Ei
+ Xg15Y0jpfFGGC5RJii8nBS3NfoLSt/wJGhM5LwShaPk+HErakXYAmaue9aR6aR4IQf+u
+ gTbAzWNRS/ktkr09+h3NJ6dBzrl2Qcqk3lPJHHr9yTbW6rNM9wMu9jnNMWPh7+XpUfU8
+ IDSL6Tq2G+lf3Ekzr7IXNa/z5Kv43UFJQC6mtBCamtS6862blo4/5/hZcnZKggp6kLKi
+ ajeA==
+X-Gm-Message-State: AOJu0Yw2FObRx0UHOEHVhBY96ieFxmQSR7pMbTvD+4+DHBZnyEa4C6Qy
+ ey1NeTe3UROJqKu3bDGPLN5MEsefKK3TzgTWPrmUZKsP3YxmTO/aHXxpJLoUFH0wTsfby6MlA2R
+ K80kwKAAUjnwjn3kRPr90+fh9c9pKH80=
+X-Gm-Gg: ASbGncsEVtuPnLo2ufmNqRl47MeoSzDGe8fb6WEoo3KKVfE8sEzsxgefggahqx/L0D7
+ tQQ9WKnNZGvYkmsoXWOO10ZCBJiJqpaQiBbHnbgQfdqK8JuPaZkQem0wiR1Sqzu/kD7VO/xakY7
+ GbFtDH4dBtej65qQ/G6y6RYwyvl77yVjFD0IXRM+qFgutA
+X-Google-Smtp-Source: AGHT+IFnZLTPmiy9wcVVfQHkgMepv0WA8bHNkLy4/hJ7JQJbBLG/Tvt/PsEt0mU3RtZzYy/7shZ7Tn6bMMN8LOH3VsA=
+X-Received: by 2002:a05:651c:210b:b0:32a:88b8:9ab with SMTP id
+ 38308e7fff4ca-32b30705d9fmr5738561fa.27.1749705246766; Wed, 11 Jun 2025
+ 22:14:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20250611142352.3990076-1-trini@konsulko.com>
+ <174968817336.20873.2253388108943248289.b4-ty@konsulko.com>
+In-Reply-To: <174968817336.20873.2253388108943248289.b4-ty@konsulko.com>
+From: Heiko Thiery <heiko.thiery@gmail.com>
+Date: Thu, 12 Jun 2025 07:13:54 +0200
+X-Gm-Features: AX0GCFu6KfN_Q0Fezs9GI1DO0AAyNoyxbbtkGq9NjAXn1XB7WjNWXo4agTJgZ5M
+Message-ID: <CAEyMn7aseZADnoRWVrgrbKBAK8xjZiLLtMBEe7yyOLmiJWY1Dg@mail.gmail.com>
+Subject: Re: [PATCH] mmc: Kconfig: Really correct dependencies SDHCI ADMA
+ options
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 12 Jun 2025 10:28:53 +0530
-Message-ID: <DAKAF5YRCY2T.39SSJYUIINTK7@ti.com>
-CC: <u-boot@lists.denx.de>
-Subject: Re: [PATCH -next 3/5] binman: add sysfw-inner-cert to
- missing-blob-help
-From: Anshul Dalal <anshuld@ti.com>
-To: Bryan Brattlof <bb@ti.com>, Simon Glass <sjg@chromium.org>, "Alper Nebi
- Yasak" <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
- <20250611-missing-blob-help-entries-v1-3-c6de1844117f@ti.com>
-In-Reply-To: <20250611-missing-blob-help-entries-v1-3-c6de1844117f@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,41 +93,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed Jun 11, 2025 at 11:47 PM IST, Bryan Brattlof wrote:
-> Now that the inner certificate for TI' Foundation Security TIFS firmware
-> is mandatory to a successful build, provide some guidance on what it is
-> and links to the documentation on how to obtain the firmware blobs.
->
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-> ---
->  tools/binman/missing-blob-help | 10 ++++++++++
->  1 file changed, 10 insertions(+)
->
-> diff --git a/tools/binman/missing-blob-help b/tools/binman/missing-blob-h=
-elp
-> index e28eaa2015443f256a469df4ead87793e23ba219..fcc989ed757e0d0a8d5bc8238=
-c3d013da98aa390 100644
-> --- a/tools/binman/missing-blob-help
-> +++ b/tools/binman/missing-blob-help
-> @@ -60,3 +60,13 @@ Have a look at your board's documentation to find the =
-latest version of
->  the DM firmware binary and how to include it in the build.
-> =20
->      https://docs.u-boot.org/en/latest/board/ti/k3.html
-> +
-> +sysfw-inner-cert:
-> +You are missing the inner certificate for TI's Foundational Security (TI=
-FS)
-> +firmware which is critical to authenticating the TIFS firmware during bo=
-ot.
-> +HS-FS and HS-SE parts will not boot without this certificate.
-> +
-> +Have a look at your board's documentation to find and include the latest
-> +TIFS certificate blobs and how to include them in the build.
-> +
-> +    https://docs.u-boot.org/en/latest/board/ti/k3.html
+Hi Tom,
 
-Nit: With the entries ordered alphabetically in the 1st patch, the entry
-`sysfw-inner-cert` should go after `scp-sunxi` instead.
+Am Do., 12. Juni 2025 um 02:29 Uhr schrieb Tom Rini <trini@konsulko.com>:
 
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
+> On Wed, 11 Jun 2025 08:23:52 -0600, Tom Rini wrote:
+>
+> > When doing the investigation for commit 53bb8fdea12a ("mmc: Kconfig:
+> > Correct dependencies SDHCI ADMA options") I missed the implications of
+> > MMC_SDHCI_ADMA_HELPERS. The problem is that FSL_ESDHC via the
+> > FSL_ESDHC_SUPPORT_ADMA2 option will also enable these helper functions.
+> > This in turn means the correct dependency here is
+> > MMC_SDHCI_ADMA_HELPERS and not *MMC_SDHCI_ADMA.
+> >
+> > [...]
+>
+> Applied to u-boot/master, thanks!
+>
+
+Just tested the latest master. Looks good.
+
+Thank you for the quick fix.
+
+
+>
+> [1/1] mmc: Kconfig: Really correct dependencies SDHCI ADMA options
+>       commit: b62e422d6e6878e9bca1d20fe372ffdd7db294fa
+> --
+> Tom
+>
+>
+>
+--
+Heiko
