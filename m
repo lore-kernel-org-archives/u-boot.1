@@ -4,88 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4119C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 18:37:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B581C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 19:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7AF882B97;
-	Thu, 12 Jun 2025 20:37:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E6DF82B97;
+	Thu, 12 Jun 2025 21:12:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mUkTrWwo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MGrm7R85";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55A1082BD9; Thu, 12 Jun 2025 20:37:10 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8F9082B70
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 20:37:07 +0200 (CEST)
+ id 3E88682BD9; Thu, 12 Jun 2025 21:12:24 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D6A1882B70
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 21:12:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4067b7d7e52so345115b6e.2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 11:37:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749753426; x=1750358226; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iK1rKKAykaV5B9B7Aqqb3DQxNDb6ZRK8zkxWJxpi6uo=;
- b=mUkTrWwoggJcdR4xYGL37SGvjK6G9ZcyWIMKilqQ44MTgWsWyWuyNGn/j4vrBCEG16
- HT1PdjBfPh7xDDtnyAcS/LNCaEPQSmNFEkJ2NkNsrsfg7/NSCDfln71q2NDPKAStc1fd
- s5iivkvp+MNvtYYuQdvu8k0lBA9K00D92JxHw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749753426; x=1750358226;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iK1rKKAykaV5B9B7Aqqb3DQxNDb6ZRK8zkxWJxpi6uo=;
- b=bMUL/t/TuZX5/xk/td3F58/tqRqDXyyUyGM6ROcph9qnGC/KLUU6XpxgDAUI9sBWbY
- Vr+InLvPAw+Q6jmbsnMDe7Nx+SkMuQ071rpy7L8eU6hM4Zu48KWEF7X8Oc3PMs310SWh
- rsGi8IRxFkjrbEvjDDFCbfr9SDV+Rb+svjkGneAwb0Y7boNPQeUbxU3ZQKzstAneSkMf
- +wN1VER/GX6Q+LLquMuxrvB+yG3AmZ2aXxulo+zHwTJdqUMbZQT8Eb79tJ5N8Xe7zR9V
- WnsGqvNQphFQJk2xutvNZ0Gj5/ME9uKFmB9e5mXBkjjkM2Cwmz+NonQvoh5HUP+Fn08+
- bJSw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6zQu3lwh/CtuOFJAdTTVko7jrud/AU2mcpswZpMwqwFW1kvbtxfa6SB1sIjWLOBReAXYWRoE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHJJkth1ROEyqL3c67fjQrUP6wsHvdI032pEPH490R5h4ukMdv
- HccJKf+4vjWrh1Nek0worEXdMV7y/EvhnixehKDGIjEX6Vjgf6YdDVd/RlN3Nquk1DA=
-X-Gm-Gg: ASbGncvPgY/+MkWySFXgD4fYfZZRmc7uwyki9T9h4JKrnDyjaPsFtvl6gGGNqWqg4LX
- 4q2vKwsYBOvABA3WPSf616FQr4AxPzlEWr8+4yT5WT6rDIhHGegZPes6Ht2nFZIkJbjRsY90Ijz
- lheOMUtXvc91OACUJj5cQ1fMezAuj7LiO+M3+oFQXLwuyF49KShq4Q7dAxwr8eY+8jPWOMDUAEW
- aXztOdTvcd4mnqu5UpqCBcmqxWXFxa3UeygN6iG/zCSHd+XwUCmQ5kQFRl46V58TNoqOB0JMkgM
- LTtpfqcoxpMKjcbXzXjMXTV57ZvAslxBMX98CgSCZg4RUqG2/I9rRzMPJmqoz0sEIrYuxkka2fs
- SJqe2OA6nMPHO1jiZez0SsCE=
-X-Google-Smtp-Source: AGHT+IFnauO9QGc9AlZz6o+QFYmOJPKaTLWOJPrE6vhJbiL14bS9dS+RTSiMKX2HKf7anxG5Q5X7ew==
-X-Received: by 2002:a05:6808:179f:b0:401:ea99:54b with SMTP id
- 5614622812f47-40a71e82258mr301372b6e.23.1749753426562; 
- Thu, 12 Jun 2025 11:37:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a68329d14sm401106b6e.50.2025.06.12.11.37.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 11:37:05 -0700 (PDT)
-Date: Thu, 12 Jun 2025 12:37:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH 1/3] dts/upstream: write fdtfile path to /chosen/fdtfile
-Message-ID: <20250612183702.GV1382132@bill-the-cat>
-References: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
- <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55CJCBkt1773470;
+ Thu, 12 Jun 2025 14:12:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1749755531;
+ bh=n2Pa3EOC2Mez8IsEHmpLua8iMUvGsc4xTxpG9BVSPoo=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=MGrm7R85e+Trtqvve6E/uaGVEUC34rvt8WyQYopX1mXARw+rcfQNB8I4NU8f4y3jZ
+ FxPhF8sQwcr9hWr/Yia4txK5mMxmvkWSEwwt51um6Z4Y9crezOBthThCG0QXXlOHyF
+ zzvYG1aff30WxsXFZefiWDbbW1DKtJ3Cg7050R74=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55CJCBIo2841223
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 12 Jun 2025 14:12:11 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 12
+ Jun 2025 14:12:10 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 12 Jun 2025 14:12:11 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55CJCBnW2440213;
+ Thu, 12 Jun 2025 14:12:11 -0500
+Date: Thu, 12 Jun 2025 14:12:11 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Heiko Thiery <heiko.thiery@gmail.com>, <u-boot@lists.denx.de>, Udit Kumar
+ <u-kumar1@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, Vaishnav Achath
+ <vaishnav.a@ti.com>, Keerthy <j-keerthy@ti.com>, Michael Walle
+ <mwalle@kernel.org>, Thomas =?utf-8?Q?Sch=C3=A4fer?=
+ <thomas.schaefer@kontron.com>
+Subject: Re: [PATCH] mach-k3: j722s: enable caches for the SPL stage
+Message-ID: <20250612191211.h6wosk4vd722h7ld@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250612115015.266601-1-heiko.thiery@gmail.com>
+ <20250612143808.GM1382132@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="44rLWzwNWvLfA7sf"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20250612143808.GM1382132@bill-the-cat>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,56 +83,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On June 12, 2025 thus sayeth Tom Rini:
+> On Thu, Jun 12, 2025 at 01:50:15PM +0200, Heiko Thiery wrote:
+> 
+> > This is same as done in 27cd65ca1bf1 ("mach-k3: am62ax: enable caches for the SPL stage").
+> > 
+> > This is resulting in ~2x speedup in the A53 SPL stage.
+> > 
+> > Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+> > ---
+> >  arch/arm/mach-k3/j722s/j722s_init.c | 2 ++
+> >  1 file changed, 2 insertions(+)
+> > 
+> > diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
+> > index af211377e7c..591aa1d60d5 100644
+> > --- a/arch/arm/mach-k3/j722s/j722s_init.c
+> > +++ b/arch/arm/mach-k3/j722s/j722s_init.c
+> > @@ -162,6 +162,8 @@ static void k3_mem_init(void)
+> >  		if (ret)
+> >  			panic("DRAM init failed: %d\n", ret);
+> >  	}
+> > +
+> > +	spl_enable_cache();
+> >  }
+> >  
+> >  static __maybe_unused void enable_mcu_esm_reset(void)
+> 
+> A bit less a comment for you and more a comment for all the TI folks,
+> can't we re-architect this a bit to be common? I think I even made that
+> point on another patch doing this same thing for another K3 part.
+> 
 
---44rLWzwNWvLfA7sf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yeah we're copy and pasting quite a lot of common stuff for each of 
+these SoCs. I can take a stab at this and see what I come up with.
 
-On Tue, Jun 10, 2025 at 06:23:33PM +0200, Casey Connolly wrote:
-
-> Since we're using the upstream file structure, we know at build time
-> the path to each DTB that we build. These same paths are used relative
-> to some (maybe version specific) dtb directory on the boot partition
-> or ESP.
->=20
-> By recording this path at build time and embedding it into the
-> devicetree, we can set the fdtfile environment variable with 100%
-> certainty that it is correct.
->=20
-> Devicetree file names are already treated as stable kernel API upstream,
-> since they are used by OS loaders extensively.
->=20
-> Embedding the path into the devicetree itself just simplifies the
-> process and allows U-Boot or the OS loader to select a devicetree of a
-> different version for the specific board that U-Boot is running on.
->=20
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-
-My biggest and really only problem is that you need to work with
-https://github.com/devicetree-org/dt-schema and to get the chosen.yaml
-updated with fdtfile and then we can go ahead and do whatever that
-resulting discussion is.
-
---=20
-Tom
-
---44rLWzwNWvLfA7sf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLHkcACgkQFHw5/5Y0
-tyz3zQv9ExiZQzwtdN3B3qbDbIMzxHyyY1uV1deGFGX3mn+jEBhCvZ2WIFZ8aYei
-brb7csTdA4jfVLFXrAzr3dn7dU+k9cAzFE0+ZDC7uGwVWSpNYBjtQHJFUSmpcu2V
-vOK9fpNB1SF7CGlrvDyWPFsMgc+5kIZKDMqdUp8k66eAgsE66Zyw9Ly+nExdH3Mq
-jGaaWzXZcngsb9pTJWXhGaG46tWJuJbTPBqyjYZhwl2WTg88+R2VZgDnk7Dy7LI1
-yblY91dp5kwCwCbVNECut5B0Nbdfezf77GKjUcldvazTLI9k4kYgouRZKHhB8q2d
-Na03MlGTh1pLCc29HCxk5I4prV6t/sK57/yy1BO6L9UiFteU+mKtL6/sH46rsoKU
-iiGIXn4iHd7+Amy2bJUB2L1VLixiOJLugz6AaVwXEk6wqxjyJUmshPBLtzx0encU
-TZENjdiKH3FVREFSTBa22nelH0txonqyewUSS0TTRIb7loGWUAkIrD2dOVWIxSvW
-ggVhpaGs
-=RuJh
------END PGP SIGNATURE-----
-
---44rLWzwNWvLfA7sf--
+~Bryan
