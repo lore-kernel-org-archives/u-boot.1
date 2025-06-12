@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F96C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 16:09:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF22C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 16:49:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C694A82C79;
-	Thu, 12 Jun 2025 18:09:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dietpi.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E55182B97;
+	Thu, 12 Jun 2025 18:49:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="H4ZTz3eh";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A7082B97; Thu, 12 Jun 2025 17:59:45 +0200 (CEST)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
- [209.85.128.44])
+ id B8BCB82BD9; Thu, 12 Jun 2025 18:49:45 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2484C828A2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 17:59:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ABF282B70
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 18:49:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dietpi.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pom.pumba@gmail.com
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-450ce671a08so6934155e9.3
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 08:59:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2db2149ffceso819690fac.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 09:49:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749746982; x=1750351782; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JFZnSs0PWfM+aHSg9cdxdak+XiLJmabFpxAw2Uzbw1E=;
+ b=H4ZTz3ehq3t2pPipx6h7AwOZE4jUYW9fpyWGNWXGkabbM/DUvf3guk/WXN9irXF3dj
+ HmkHDf+bqdM5ysv1tiLU026aOHI6Z3P+tjb9OTKSEcZpuGmJffnFoms62+lMpfSUeZLs
+ Cv8iBKGmG3o2EndS/HMmM194Es41oUowg0akQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749743982; x=1750348782;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3N7kzSTQPKxn9vGffRriLeUPtD8LGvBW4sSEdAV6Kko=;
- b=VfbVuUrhsiGNwLXho+RzrAkCl/j2ZZQVT7Lh13KLS+hSznBD7uoI1gcHmT1OpQKXEw
- t/Vn1y5dBJImQ0BIKNepQDOCTVxZXdyfxH5+R1uX/1Piro/IRR3S7vmcIkjNjXiqNX7U
- LKv4pe+DJvtKf7Dxa+nkzTxVzn/OGBbwxSnCZ6etGvWcgqu/3ytVGf+Y9GtlGKGj5MDf
- D/yobK+1ArDSgnYkbG2yTRf8uknTo2yZ+/6A1oUmGZkaE7QZSsuqsV1DQDqpypjJ9gxl
- ++62kaCEKo01agXYdxAA9e9ouJpZ5QRPmDesbUliegbLcuxHSB5NtMDxCUBtUfXAp3zK
- QI6g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWa4oN6emPAYvjT6sS3vZjRwsUrAMxBn6nE7VpkHfgP+PDjOUa6sZUR0FyZCXEFt0+rP71XG0o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx83QD27sE3PmzpiWDRgQnTdNI3ye1VFyRtsoeULWz/WsQZXp8b
- Yl7HwsmD9OC7e7g03+M6tB7Os0HWO1uxs0Fp2gyUahLfnsCWz9s9/BAM
-X-Gm-Gg: ASbGncsWoXcibflVWs9V6pMDzAfLURGt3yczqEmi22ELirEbGrH00HFpwlat0uWPrVL
- Pc0WK6f8mkcIS4LhVgOIPzUG8L0+xPgnwQ/BUh4fbvKTDCZjGcRW0cQXYlsX0+TODPpwIUy2WB9
- GN2bqNCM+IzM1JNE3EbIDg8ugOpk43JaP3l7gE/Foe+tH8ACfZq9dvehDwnlOhMmYTa1qYH35yj
- Y51+lcpC5okatcZem+1oYiQS0GNyD9oCJWwddMg2OB4UdWAADtPuQZv3C4vnrq1hk1gOSMovZTT
- cYALcd/a0y1AWOW8iTfNzjJrbz2Vqm7QlAQ38od/hHEefyrqujawpem5spHSyKckDagIC1imdn3
- Y4eMueXf4VgKm4vrT3VkkxGy1ii7UZsEAGA3wFNEbp5kwu4Q8Sx2fqnOH1rTsAZf53feLwAodqn
- ftsY35CTo+5wZIWTKp2akx
-X-Google-Smtp-Source: AGHT+IGhlEEckzPPGoFuHLiiWING6BXdKJleEq+YbCxsCZvE3/vWZdCcO5YoECkCWgC+Szd1W1eSrg==
-X-Received: by 2002:a05:600c:a409:b0:442:e03b:589d with SMTP id
- 5b1f17b1804b1-4533436f9f7mr1680345e9.24.1749743982096; 
- Thu, 12 Jun 2025 08:59:42 -0700 (PDT)
-Received: from ?IPV6:2003:e0:6f23:53de:74bc:ab1e:f82a:e3c2?
- (p200300e06f2353de74bcab1ef82ae3c2.dip0.t-ipconnect.de.
- [2003:e0:6f23:53de:74bc:ab1e:f82a:e3c2])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532e232219sm24165735e9.9.2025.06.12.08.59.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Jun 2025 08:59:41 -0700 (PDT)
-Message-ID: <5aeeab0f-cbaa-4b25-9baf-37e2b0e5e9d1@dietpi.com>
-Date: Thu, 12 Jun 2025 17:59:42 +0200
+ d=1e100.net; s=20230601; t=1749746982; x=1750351782;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JFZnSs0PWfM+aHSg9cdxdak+XiLJmabFpxAw2Uzbw1E=;
+ b=RgA+DUTOJoB2LtUF3fGyRclGZJ5LaKzdx2HcrbtN6Y5n75ZQbOLQ7qcWWGR0ezvi8n
+ Bd6JTT0UeuGcLbBz503UA5bzIHp1R8/YRmCjAAPv8C62nS9uBW4jByVgt2xtyPrYBZuR
+ 2AivqxJ8B1heFFGXOIU71Hz65WyK64pSJmf7B7OszBJ8dtfboVJYYNmAn7nL1fhrTjan
+ f+KXqvcOvllRMl03XLs20YIdOLmuCd3CEBs3TFNvOidjUGMg7Pb/vb2PfGlCyBnwbkwN
+ APRpxLrFSh1R6sFlGVXtD+y+CMrwYi3+lqwV+MmtUnU0+lXTB3tABIlee2f1aL83wCkK
+ S3IA==
+X-Gm-Message-State: AOJu0Yyob/feWpIxfLg6X0/jULJ+sf0jE4c6ZSPQtW6QY49HENF8E9TN
+ IriI1JAUt11PQJop1bGiEDGtBX24hvzniEVnDLRA8U0/Hp2P6es7VX3SBn7+pIHZ3ak=
+X-Gm-Gg: ASbGncsDDyiNa256dzxzioSLr4/tDZVtIVjLQT25ETldavbsC+eNxH1kWc5/DNXsreH
+ s7tRM2iZYpL1FOQzM3OdZ7/tUHzIZaPmADKx9pF+VRfF80WVj7/rf5ZI0xSb/4fXq5gDoleiiRs
+ UUS/V7/zZxs0zt31DFuR6b2kl1gEO6tMJz0jfwcfR2dnezOmxePrgxW8NLyzelgypkP9gRqvnXf
+ g1YOXMlNihUFqpeqK5698PtK+ku22eiD6UtQ+vphWtk//FShkCRLtXYkA9wWrnCGajoI8TD1XVy
+ 2jMA0MybzTUVvBYAFBSQFNM9n2Pcx8EG9G/pwx2jRksGgSu44JBfLBRPJhO964ejqH0GGTXNr2v
+ y0uEgwPvpZ6vBR3zRND+yDM8=
+X-Google-Smtp-Source: AGHT+IHLHu2HQ4r3ARSwRrGJbqeEnVwyOppiJRz9IymDxGF0OuyEawBtelg6k4NK7QN2PEBPDrfyyQ==
+X-Received: by 2002:a05:6871:4385:b0:2c2:c92a:5789 with SMTP id
+ 586e51a60fabf-2ead0162cf8mr449335fac.5.1749746982201; 
+ Thu, 12 Jun 2025 09:49:42 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2eab8decea3sm357510fac.28.2025.06.12.09.49.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Jun 2025 09:49:41 -0700 (PDT)
+Date: Thu, 12 Jun 2025 10:49:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: [RFC PATCH] tools: zynqmp: add build script and documentation
+ for ZynqMP KV260
+Message-ID: <20250612164939.GO1382132@bill-the-cat>
+References: <20250612153311.2379944-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: board: assign up to 3 static Ethernet MAC
- addresses
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <e76dbe98-2fa3-4d1b-a452-aa88a142c5cc@dietpi.com>
- <2beda42f-68c4-4fc3-8b84-ede6e452c4c7@cherry.de>
-Content-Language: en-GB, de-DE
-From: MichaIng <micha@dietpi.com>
-In-Reply-To: <2beda42f-68c4-4fc3-8b84-ede6e452c4c7@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 12 Jun 2025 18:09:03 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1R3eS9Ml3i8k7Mzf"
+Content-Disposition: inline
+In-Reply-To: <20250612153311.2379944-1-jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,54 +97,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-thanks for the review!
+--1R3eS9Ml3i8k7Mzf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- > You could set the eth2addr in your board file if you wanted instead of
- > setting it for everybody.
+On Thu, Jun 12, 2025 at 05:32:41PM +0200, Jerome Forissier wrote:
 
-We provide OS images for everyone, and our users complained about the 
-changing MAC addresses. I agree with them that generally the exception 
-is that MAC addresses are static by default, and randomising them being 
-an optional privacy feature when connecting to untrusted networks, like 
-a WiFi hotspot with a mobile phone. Setting eth2addr in boot 
-script/environment would require a random MAC address generation our end 
-on first boot or so on each system, to rule out collisions. Since U-Boot 
-has the feature implemented already, it just makes sense to make use of 
-it and extend it for the affected Rockchip builds, also to have the 
-somewhat nicely aligned with the last digit deferring only. So we 
-currently patch our sources.
+> Add a script to help build a functional U-Boot binary for the ZynqMP
+> Kria KV260. Also add some documentation.
+>=20
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>=20
+>  doc/board/xilinx/index.rst        |  1 +
+>  doc/board/xilinx/zynqmp-kv260.rst | 27 +++++++++
+>  tools/zynqmp_kv260_build.sh       | 43 ++++++++++++++
+>  tools/zynqmp_pmufw_elf_convert.py | 96 +++++++++++++++++++++++++++++++
+>  4 files changed, 167 insertions(+)
+>  create mode 100644 doc/board/xilinx/zynqmp-kv260.rst
+>  create mode 100755 tools/zynqmp_kv260_build.sh
+>  create mode 100755 tools/zynqmp_pmufw_elf_convert.py
 
- > What's the number when we'll decide this is too many? I have a board
- > with 5 Ethernet ports for example :)
+Helper build scripts don't belong in the tools directory. If they're
+super helpful, I don't object to adding them to
+u-boot-extras/contrib/<you>/ directory. But there's a number of
+documented examples already on checkout and build TF-A then do ... for
+your platform.
 
-Good question. In Germany we say "Aller guten Dinge sind drei" (All good 
-things come in threes). Jokes aside: not sure whether there are Rockchip 
-SoC boards which provide more Ethernet NICs, but I have 3 with 3 ones 
-(in one case provided by an official expansion board), all RK3588 with 
-two onboard PCIe adapters. There is another PCIe bus, but commonly used 
-for an M.2 socket, not sure whether it could theoretically provide a 4th 
-Ethernet adapter. I don't know the background about why the Ethernet 
-driver/firmware is not able to read/assign the hardware MAC, or why 
-there is no hardware MAC, as I understand that this is an IEEE 
-requirement. So what U-Boot does seems a workaround, and I agree that, 
-if there is no generic approach, it has limits.
+> diff --git a/tools/zynqmp_pmufw_elf_convert.py b/tools/zynqmp_pmufw_elf_c=
+onvert.py
+> new file mode 100755
+> index 00000000000..b4eb2695831
+> --- /dev/null
+> +++ b/tools/zynqmp_pmufw_elf_convert.py
+> @@ -0,0 +1,96 @@
+> +#!/usr/bin/env python3
+> +# SPDX-License-Identifier: GPL-2.0+
+> +# Copyright (C) 2025 Linaro Ltd.
+> +#
+> +# Written by Gemini (Google AI) then reviewed and edited to remove some =
+comments
 
- > I don't know how far we want to go to avoid defining unused ethXaddr
- > variables in the environment? We could use of_alias_get_highest_id for
- > example and generate enough environment variables based on that info?
+I'm glad this calls out where it's from. I'm not comfortable for a
+number of ethical reasons on taking LLM-generated code. I'm also a
+little surprised we don't already have something like this with binman
+today?
 
-This sounds reasonable. But are ethXaddr variables not generated before 
-boot scripts are called, when the number of alias IDs cannot be known 
-yet, and MAC addresses assigned afterwards, when the OS device tree was 
-loaded? When generating the variables afterwards, all good, but then 
-existing values assigned by boot script/env should not be overwritten, 
-of course. Then a generic approach would be possible, incrementing the 
-bit mask by one each loop, to assign up to a quite large number of MAC 
-addresses to ethernet aliases.
+--=20
+Tom
 
-Best regards,
+--1R3eS9Ml3i8k7Mzf
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Micha (aka MichaIng)
-DietPi project lead
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLBR8ACgkQFHw5/5Y0
+tyy12Qv9GOitWi1AnYAZNaLtvsbRnA+MhLTrRUsHKlYse7/XkC4IaUlKOMp3M/AT
+rSbhRWzvPGJpGJveBdiJ90pQkn96dq+Gf+bZm7kJ0yJwYHTqFAH5OpJcJzo1mGLy
+LxeKCITcakueW2U8lAX03ZTw2DHtA0oJshttG8+6mGDDx6IP6T9Thckra361/5TO
+lgTQIz7W1hP83RPF61FtZaQbjPcY7sJy0KTpqKeDJc1PGDPv7ADxAQ4JWLBo+Lhc
+qnWfV2LLdp3gXFYNDFeOL5L2yNTH5U02cfIWWjJBj9y4OWBdTyOMH/Xtbt4sMfbO
+CtoVBbs5l0224d7qnA/MHmowcHJjhwoEdxMPxhY6u1V/d88q5rFYy+HaYmEp0WhU
+jipSy+HDXpop3AvBpYEcj+Lw4ZR7dmvEbtLAo15CFe1KUHOzhlYY9jkRizhciVze
+G2aUNL7cqW4LHmuy0a/RUpf2Z+XlGPPn8G2OagkNMPiNsVgsQk1+Ok+AoXXYmurJ
+HokVmuWr
+=kSn+
+-----END PGP SIGNATURE-----
+
+--1R3eS9Ml3i8k7Mzf--
