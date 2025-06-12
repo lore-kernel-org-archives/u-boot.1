@@ -4,54 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EC66C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 08:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C419C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 08:49:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 621B382BD9;
-	Thu, 12 Jun 2025 10:28:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A9DD882A4B;
+	Thu, 12 Jun 2025 10:49:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gFLVFjvA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fA1NxGWl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A7AA82C79; Thu, 12 Jun 2025 10:28:38 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BD1D82BD9
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 10:28:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ id 054A582B7C; Thu, 12 Jun 2025 10:49:52 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CEA780050
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 10:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5C007629E5;
- Thu, 12 Jun 2025 08:28:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EE2EC4CEEA;
- Thu, 12 Jun 2025 08:28:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749716913;
- bh=AtwfU0iubxMBda1vZg2eA07LURtgVijGGVGCeAcUzJU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gFLVFjvAlTU7ZHrHgTOjfZC2jxXjdMVfiW8yMMMLgpPaE7mAZXvH5R8PIaxFX3Jgz
- 7YQy9EtIH1Rf1MAZ0u9giOAoXyqguem2HT6f5TZDzo6VcUqz/fD5mT94gYhLFzACTr
- MVCLN73FtH5xfrxCQCfQ3J9MpMfloMUxbnIlqTKVAsLPu4PXvvuPFKlIUNbDTUz6+Q
- a1ZEMGcuAGmJjsnQ3Y5X/RiIlsG2XOMUEh+dzj0XBGn7/LTgL21FTl/jtZ0oCPiiPr
- CU5ej6CLlimJ+ZRSmUg0YwMPLQ8EgPfCfAqMPfHl2f41/ytcD7aWZ1g7zw/t1S2wiu
- bEezULZbplI4w==
-Date: Thu, 12 Jun 2025 13:58:26 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: sbabic@nabladev.com, festevam@gmail.com, trini@konsulko.com,
- u-boot@lists.denx.de, uboot-imx@nxp.com, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] imx91: Drop OF_UPSTREAM
-Message-ID: <aEqPqrQZAg-4ryju@sumit-X1>
-References: <20250612021356.4228-1-peng.fan@oss.nxp.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55C8nIXa2856894;
+ Thu, 12 Jun 2025 03:49:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1749718158;
+ bh=RcdlQMuBbepnCzSP2+QQYwlQQ6I7R6ifMSSRLmcGSBE=;
+ h=From:To:CC:Subject:Date;
+ b=fA1NxGWlKEIU6f+d/vNWhmpTP70aWmdmp5K4eco9zhXIf7NDRVVZyGZii6vUs1qmT
+ qUwW4gMcvCKmFyiTWVyshngAIc7Gktf72xiesi/obhNhSV0ylAarfIj+Cpn0KZq6Oy
+ oeX8yF5nqUGzzlo4vlKUlF8ng479le9JmQV+JvIk=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55C8nHrV1803792
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 12 Jun 2025 03:49:17 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 12
+ Jun 2025 03:49:17 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 12 Jun 2025 03:49:17 -0500
+Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com [172.24.227.4])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55C8nBjn1907911;
+ Thu, 12 Jun 2025 03:49:11 -0500
+From: Hrushikesh Salunke <h-salunke@ti.com>
+To: <trini@konsulko.com>, <Oliver.Gaskell@analog.com>, <peng.fan@nxp.com>,
+ <malysagreg@gmail.com>, <nathan.morrison@timesys.com>,
+ <twoerner@gmail.com>, <sjg@chromium.org>, <contact@paulk.fr>,
+ <marex@denx.de>, <anshuld@ti.com>,
+ <dario.binacchi@amarulasolutions.com>, <jerome.forissier@linaro.org>,
+ <michael@amarulasolutions.com>, <a-dutta@ti.com>,
+ <kever.yang@rock-chips.com>, <jonas@kwiboo.se>
+CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <danishanwar@ti.com>,
+ <s-vadapalli@ti.com>, <srk@ti.com>
+Subject: [PATCH] spl: Add support for Device Firmware Upgrade (DFU) over PCIe
+Date: Thu, 12 Jun 2025 14:19:10 +0530
+Message-ID: <20250612084910.3457060-1-h-salunke@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250612021356.4228-1-peng.fan@oss.nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,136 +83,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Introduce support for Device Firmware Upgrade (DFU) over PCIe in
+U-Boot. Traditionally, the DFU protocol is used over USB, where a
+device enters DFU mode and allows a host to upload firmware or binary
+images directly via the USB interface. This is a widely adopted and
+convenient method for updating firmware.
 
-It seems in all your previous postings touching dts/upstream, you never
-CCed me which is the case in this one too. Please run
-scripts/get_maintainer.pl for your further postings.
+In the context of Texas Instruments (TI) SoCs, PCIe can be used as a
+boot interface in a manner that differs from the conventional
+"PCIe Boot" process, which typically refers to booting an OS or
+firmware image from an NVMe SSD or other PCIe-attached storage devices.
+Instead, TI SoCs can be configured as a PCIe Endpoint, allowing a
+connected PCIe Root Complex (host) to transfer images directly into the
+device’s memory over the PCIe bus for boot purposes. This mechanism is
+analogous to DFU over USB, but leverages the high-speed PCIe link and
+does not depend on traditional storage devices.
 
-On Thu, Jun 12, 2025 at 10:13:56AM +0800, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
-> 
-> i.MX91 device tree still not landed in linux kernel, so drop OF_UPSTREAM
-> and move the device tree files to arch/arm/dts
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->  .../arm/dts}/imx91-11x11-evk.dts                |  0
->  .../freescale => arch/arm/dts}/imx91-pinfunc.h  |  0
->  .../arm64/freescale => arch/arm/dts}/imx91.dtsi | 17 -----------------
+By extending the DFU framework in U-Boot to support PCIe, it will be
+possible to flash images over PCIe. While this implementation is
+motivated by TI SoC use cases, the framework is generic and can be
+adopted by everyone for platforms that support PCIe Endpoint mode.
+Platforms with hardware support for PCIe-based memory loading can use
+this to implement PCIe as a boot mode, as well as to enable flashing
+and recovery scenarios similar to DFU over USB.
 
-It is really unfortunate that this DT landed in dts/upstream without
-anything in upstream kernel. Direct patching of dts/upstream is not
-allowed but you should only be able to do cherry picking as described
-here [1].
+In summary, enable support for:
+- DFU-style flashing of firmware/images over PCIe, analogous to existing
+USB DFU workflows
+- PCIe as a boot mode where a host can load images directly into device
+memory using DFU over PCIe
 
-FWIW:
+Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+---
+This patch is based on commit
+59d00e20fce Merge tag 'v2025.07-rc4' into next
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+This feature is tested on AM64X EVM. Following are the logs corresponding
+to it.
+https://gist.github.com/hrushikesh221/bb11746d4325a27f209028573f3255a1
 
-[1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing-with-devicetree-rebasing
+ common/spl/Kconfig   | 61 +++++++++++++++++++++++++++++
+ common/spl/spl_dfu.c | 93 ++++++++++++++++++++++++++++++++++++++++++++
+ common/spl/spl_ram.c | 12 +++++-
+ drivers/Makefile     |  1 +
+ 4 files changed, 166 insertions(+), 1 deletion(-)
 
--Sumit
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 880192043c4..98e78263c34 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1268,6 +1268,14 @@ config SPL_PCI
+ 	  necessary driver support. This enables the drivers in drivers/pci
+ 	  as part of an SPL build.
+ 
++config SPL_PCI_ENDPOINT
++	bool "Support for PCI endpoint drivers"
++	help
++	   Enable this configuration option to support configurable PCI
++	   endpoints at SPL. This should be enabled if the platform has
++	   a PCI controllers that can operate in endpoint mode (as a device
++	   connected to PCI host or bridge).
++
+ config SPL_PCH
+ 	bool "Support PCH drivers"
+ 	help
+@@ -1328,6 +1336,59 @@ config SPL_RAM_DEVICE
+ 	  be already in memory when SPL takes over, e.g. loaded by the boot
+ 	  ROM.
+ 
++config SPL_PCI_DFU
++	bool "PCIe boot support"
++	help
++		This config enables support to download bootloaders over PCIe
++		when device is acting as an PCI endpoint.
++
++config PCI_DFU_SPL_LOAD_FIT_ADDRESS
++	hex "Address to load FIT image when booting via DFU over PCIe"
++	default 0x00
++	help
++		Specify the load address of the fit image that will be loaded
++		by SPL via DFU over PCIe.
++
++config PCI_DFU_BAR_SIZE
++	hex "BAR size to advertise for PCIe DFU"
++	default 0x800000
++	help
++		This config sets the size of BAR to be advertised to the Root
++		Complex. The size should be large enough to fit the FIT image
++		being downloaded via DFU over PCIe.
++
++config PCI_DFU_MAGIC_WORD
++	hex "Completion magic word for PCIe DFU boot"
++	default 0xdeadbeef
++	help
++		Specify the magic word which will be written to a specific
++		address to signal the completion of transfer of FIT image
++		when using DFU over PCIe to download the image. Size of magic
++		word should be 32-bit.
++
++config PCI_DFU_VENDOR_ID
++	hex "PCI Vendor ID for PCI endpoint"
++	default 0xffff
++	help
++		PCI Vendor ID for endpoint device for DFU over PCIe. This should
++		be set to your assigned 16-bit PCI Vendor ID.
++
++config PCI_DFU_DEVICE_ID
++	hex "PCI Vendor ID for PCI endpoint"
++	default 0xffff
++	help
++		A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
++
++config PCI_DFU_BOOT_PHASE
++	string "Current boot phase for PCI DFU boot"
++	default "none"
++	help
++		Specify the current boot phase when booting via DFU over PCIe.
++		This value can be read by the root complex to determine the
++		current boot phase. Value of this config is written to memory
++		location (BAR_start + PCI_DFU_BAR_SIZE - 70). Max size of this
++		config is 63 bytes.
++
+ config SPL_REMOTEPROC
+ 	bool "Support REMOTEPROCS"
+ 	default y if (CPU_V7R && ARCH_K3)
+diff --git a/common/spl/spl_dfu.c b/common/spl/spl_dfu.c
+index e9f381c392c..1fb5fb2bf6b 100644
+--- a/common/spl/spl_dfu.c
++++ b/common/spl/spl_dfu.c
+@@ -15,6 +15,17 @@
+ #include <usb.h>
+ #include <dfu.h>
+ #include <linux/printk.h>
++#include <pci_ep.h>
++#include <dm/uclass.h>
++#include <cpu_func.h>
++#include <linux/io.h>
++
++/*
++ * Macros define size of magic word and boot phase string
++ * in bytes.
++ */
++#define MAGIC_WORD_SIZE 4
++#define BOOT_PHASE_STRING_SIZE 64
+ 
+ static int run_dfu(int usb_index, char *interface, char *devstring)
+ {
+@@ -32,11 +43,93 @@ exit:
+ 	return ret;
+ }
+ 
++#ifdef CONFIG_SPL_PCI_DFU
++static int dfu_over_pcie(void)
++{
++	u32 offset, magic_word;
++	void *addr;
++	struct udevice *dev;
++	struct pci_bar bar;
++	struct pci_ep_header hdr;
++	uint fn = 0;
++	int ret;
++	char *bootphase;
++
++	uclass_get_device_by_seq(UCLASS_PCI_EP, 0, &dev);
++	if (!dev) {
++		pr_err("Failed to get pci ep device\n");
++		return -ENODEV;
++	}
++
++	printf("%s: Configuring PCIe endpoint\n", __func__);
++	hdr.deviceid = CONFIG_PCI_DFU_DEVICE_ID;
++	hdr.vendorid = CONFIG_PCI_DFU_VENDOR_ID;
++	hdr.baseclass_code = PCI_BASE_CLASS_MEMORY;
++
++	ret = pci_ep_write_header(dev, fn, &hdr);
++	if (ret) {
++		pr_err("Failed to write header: %d\n", ret);
++		return ret;
++	}
++
++	bar.barno = BAR_0;
++	bar.phys_addr = (dma_addr_t)CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
++	bar.flags = PCI_BASE_ADDRESS_SPACE_MEMORY |
++			  PCI_BASE_ADDRESS_MEM_TYPE_32 |
++			  PCI_BASE_ADDRESS_MEM_PREFETCH;
++
++	bar.size = CONFIG_PCI_DFU_BAR_SIZE;
++
++	ret = pci_ep_set_bar(dev, fn, &bar);
++	if (ret) {
++		pr_err("Failed to set bar: %d\n", ret);
++		return ret;
++	}
++
++	ret = pci_ep_start(dev);
++	if (ret) {
++		pr_err("Failed to start ep: %d\n", ret);
++		return ret;
++	}
++
++	addr = (void *)CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
++	offset = CONFIG_PCI_DFU_BAR_SIZE - MAGIC_WORD_SIZE;
++
++	if (sizeof(CONFIG_PCI_DFU_BOOT_PHASE) > BOOT_PHASE_STRING_SIZE) {
++		pr_err("Boot phase string too long\n");
++	} else {
++		bootphase = (char *)(addr + CONFIG_PCI_DFU_BAR_SIZE -
++				  (BOOT_PHASE_STRING_SIZE + MAGIC_WORD_SIZE));
++		strncpy(bootphase, CONFIG_PCI_DFU_BOOT_PHASE,
++			sizeof(CONFIG_PCI_DFU_BOOT_PHASE));
++		bootphase[sizeof(CONFIG_PCI_DFU_BOOT_PHASE)] = '\0';
++	}
++
++	addr = addr + offset;
++	magic_word = CONFIG_PCI_DFU_MAGIC_WORD;
++	(*(int *)addr) = 0;
++	printf("%s: Waiting for an image .....\n", __func__);
++	for (;;) {
++		if (*(int *)addr == magic_word)
++			break;
++		invalidate_dcache_all();
++	}
++	printf("Image loaded\n");
++
++	return 0;
++}
++#endif
++
+ int spl_dfu_cmd(int usbctrl, char *dfu_alt_info, char *interface, char *devstr)
+ {
+ 	char *str_env;
+ 	int ret;
+ 
++#ifdef CONFIG_SPL_PCI_DFU
++	if (spl_boot_device() == BOOT_DEVICE_PCIE)
++		return dfu_over_pcie();
++#endif
++
+ 	/* set default environment */
+ 	env_set_default(NULL, 0);
+ 	str_env = env_get(dfu_alt_info);
+diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+index 71b7a8374bb..5bb94d6b972 100644
+--- a/common/spl/spl_ram.c
++++ b/common/spl/spl_ram.c
+@@ -27,6 +27,9 @@ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+ 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+ 		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+ 				      CONFIG_SPL_LOAD_FIT_ADDRESS);
++
++		if (spl_boot_device() == BOOT_DEVICE_PCIE)
++			addr = CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
+ 	}
+ 	addr += sector;
+ 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
+@@ -47,6 +50,9 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+ 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+ 		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+ 				      CONFIG_SPL_LOAD_FIT_ADDRESS);
++
++		if (spl_boot_device() == BOOT_DEVICE_PCIE)
++			addr = CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
+ 	}
+ 
+ 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
+@@ -60,7 +66,8 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+ 	header = map_sysmem(addr, 0);
+ 
+ #if CONFIG_IS_ENABLED(DFU)
+-	if (bootdev->boot_device == BOOT_DEVICE_DFU)
++	if (bootdev->boot_device == BOOT_DEVICE_DFU ||
++	    bootdev->boot_device == BOOT_DEVICE_PCIE)
+ 		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
+ #endif
+ 
+@@ -102,3 +109,6 @@ SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
+ #if CONFIG_IS_ENABLED(DFU)
+ SPL_LOAD_IMAGE_METHOD("DFU", 0, BOOT_DEVICE_DFU, spl_ram_load_image);
+ #endif
++#if CONFIG_IS_ENABLED(PCI_DFU)
++SPL_LOAD_IMAGE_METHOD("PCIE", 0, BOOT_DEVICE_PCIE, spl_ram_load_image);
++#endif
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 3c0ad17138f..bd15e89adb0 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -25,6 +25,7 @@ obj-$(CONFIG_MULTIPLEXER) += mux/
+ obj-$(CONFIG_$(PHASE_)ETH) += net/
+ obj-$(CONFIG_$(PHASE_)PCH) += pch/
+ obj-$(CONFIG_$(PHASE_)PCI) += pci/
++obj-$(CONFIG_$(PHASE_)PCI_ENDPOINT) += pci_endpoint/
+ obj-$(CONFIG_$(PHASE_)PHY) += phy/
+ obj-$(CONFIG_$(PHASE_)PINCTRL) += pinctrl/
+ obj-$(CONFIG_$(PHASE_)POWER) += power/
+-- 
+2.34.1
 
->  arch/arm/mach-imx/imx9/Kconfig                  |  1 -
->  configs/imx91_11x11_evk_defconfig               |  2 +-
->  configs/imx91_11x11_evk_inline_ecc_defconfig    |  2 +-
->  6 files changed, 2 insertions(+), 20 deletions(-)
->  rename {dts/upstream/src/arm64/freescale => arch/arm/dts}/imx91-11x11-evk.dts (100%)
->  rename {dts/upstream/src/arm64/freescale => arch/arm/dts}/imx91-pinfunc.h (100%)
->  rename {dts/upstream/src/arm64/freescale => arch/arm/dts}/imx91.dtsi (79%)
-> 
-> diff --git a/dts/upstream/src/arm64/freescale/imx91-11x11-evk.dts b/arch/arm/dts/imx91-11x11-evk.dts
-> similarity index 100%
-> rename from dts/upstream/src/arm64/freescale/imx91-11x11-evk.dts
-> rename to arch/arm/dts/imx91-11x11-evk.dts
-> diff --git a/dts/upstream/src/arm64/freescale/imx91-pinfunc.h b/arch/arm/dts/imx91-pinfunc.h
-> similarity index 100%
-> rename from dts/upstream/src/arm64/freescale/imx91-pinfunc.h
-> rename to arch/arm/dts/imx91-pinfunc.h
-> diff --git a/dts/upstream/src/arm64/freescale/imx91.dtsi b/arch/arm/dts/imx91.dtsi
-> similarity index 79%
-> rename from dts/upstream/src/arm64/freescale/imx91.dtsi
-> rename to arch/arm/dts/imx91.dtsi
-> index be923e5076a..9963f0bb5ce 100644
-> --- a/dts/upstream/src/arm64/freescale/imx91.dtsi
-> +++ b/arch/arm/dts/imx91.dtsi
-> @@ -7,7 +7,6 @@
->  #include "imx93.dtsi"
->  
->  /delete-node/ &A55_1;
-> -/delete-node/ &cm33;
->  /delete-node/ &mlmix;
->  /delete-node/ &mu1;
->  /delete-node/ &mu2;
-> @@ -41,18 +40,6 @@
->  	assigned-clock-rates = <100000000>, <250000000>;
->  };
->  
-> -&i3c1 {
-> -	clocks = <&clk IMX93_CLK_BUS_AON>,
-> -			<&clk IMX93_CLK_I3C1_GATE>,
-> -			<&clk IMX93_CLK_DUMMY>;
-> -};
-> -
-> -&i3c2 {
-> -	clocks = <&clk IMX93_CLK_BUS_WAKEUP>,
-> -			<&clk IMX93_CLK_I3C2_GATE>,
-> -			<&clk IMX93_CLK_DUMMY>;
-> -};
-> -
->  &iomuxc {
->  	compatible = "fsl,imx91-iomuxc";
->  };
-> @@ -61,10 +48,6 @@
->  	status = "disabled";
->  };
->  
-> -&{/soc@0/ddr-pmu@4e300dc0} {
-> -	compatible = "fsl,imx91-ddr-pmu", "fsl,imx93-ddr-pmu";
-> -};
-> -
->  &{/thermal-zones/cpu-thermal/cooling-maps/map0} {
->  	cooling-device = <&A55_0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
->  };
-> diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-> index e6cafdcd813..280d255c086 100644
-> --- a/arch/arm/mach-imx/imx9/Kconfig
-> +++ b/arch/arm/mach-imx/imx9/Kconfig
-> @@ -43,7 +43,6 @@ config TARGET_IMX91_11X11_EVK
->  	bool "imx91_11x11_evk"
->  	select OF_BOARD_FIXUP
->  	select IMX91
-> -	imply OF_UPSTREAM
->  	imply BOOTSTD_FULL
->  	imply BOOTSTD_BOOTCOMMAND
->  
-> diff --git a/configs/imx91_11x11_evk_defconfig b/configs/imx91_11x11_evk_defconfig
-> index 810a8a8c012..a57c1fd01f5 100644
-> --- a/configs/imx91_11x11_evk_defconfig
-> +++ b/configs/imx91_11x11_evk_defconfig
-> @@ -11,7 +11,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_ENV_OFFSET=0x700000
->  CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
->  CONFIG_DM_GPIO=y
-> -CONFIG_DEFAULT_DEVICE_TREE="freescale/imx91-11x11-evk"
-> +CONFIG_DEFAULT_DEVICE_TREE="imx91-11x11-evk"
->  CONFIG_TARGET_IMX91_11X11_EVK=y
->  CONFIG_OF_LIBFDT_OVERLAY=y
->  CONFIG_SYS_MONITOR_LEN=524288
-> diff --git a/configs/imx91_11x11_evk_inline_ecc_defconfig b/configs/imx91_11x11_evk_inline_ecc_defconfig
-> index f330ea694f7..0533acaaa6b 100644
-> --- a/configs/imx91_11x11_evk_inline_ecc_defconfig
-> +++ b/configs/imx91_11x11_evk_inline_ecc_defconfig
-> @@ -11,7 +11,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_ENV_OFFSET=0x700000
->  CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
->  CONFIG_DM_GPIO=y
-> -CONFIG_DEFAULT_DEVICE_TREE="freescale/imx91-11x11-evk"
-> +CONFIG_DEFAULT_DEVICE_TREE="imx91-11x11-evk"
->  CONFIG_TARGET_IMX91_11X11_EVK=y
->  CONFIG_OF_LIBFDT_OVERLAY=y
->  CONFIG_SYS_MONITOR_LEN=524288
-> -- 
-> 2.35.3
-> 
