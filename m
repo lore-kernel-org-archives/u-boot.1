@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9296CC71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA742C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:35:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D834582B70;
-	Thu, 12 Jun 2025 16:34:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C1F182BD9;
+	Thu, 12 Jun 2025 16:34:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dUJ+SoP5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dxw+EUU7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C26D582BD9; Thu, 12 Jun 2025 16:34:37 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 0B64282C4D; Thu, 12 Jun 2025 16:34:58 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2BEA828A2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:34:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74252828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:34:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2e95ab2704fso638808fac.3
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:34:34 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7304efb4b3bso668904a34.0
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:34:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749738873; x=1750343673; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749738894; x=1750343694; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FMp5PQKD76spcV9bL5ilHvBRH9QQTc/elqjD+hJaIp4=;
- b=dUJ+SoP5sx0YL2mYZn2gWm8cgYRT5exDZpp4diu6pcNoQmlHA91tSsuO9gUTdP8Iik
- eML7vPjn+RieZmxQDlBaxRQyAeCm8sOBoErMdEM4VjpYZBwCeN9uZHv0f2BZln0z7v8B
- vexfv8ti51wtP9othLfazJsPFRHa6CpiS+9Fo=
+ bh=S5yxgcxATPYoQYruSw+kcCZgVrT6UdsLgKCWe4s9C0Q=;
+ b=dxw+EUU7LwMZp3XGBitRzjM2sIfSh5B41x1sMQKTkUSV7OO8gzsr11kL89fFElxHVX
+ COiEM+JfvXbF025oXIXBO2MmO3/rzrOljLW53tSPflHkA6sjV/alvVnE/jPqc4+SRQ+j
+ MeKt0QveOU2hPlcMEZK44yhCjgqaz4VJUGt00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749738873; x=1750343673;
+ d=1e100.net; s=20230601; t=1749738894; x=1750343694;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FMp5PQKD76spcV9bL5ilHvBRH9QQTc/elqjD+hJaIp4=;
- b=d4ws/OmVPDlea/d5fdyIY/y8TZ9JLkAUyHV5YU0Uwqaxf3+djwAs+a66Mihcx+zMZb
- G7ncvIPId4SXuzC4g2HtrGbM2W7T/zh6W90s0W5a3199S081Slid7ktxc+JOxz9YXc43
- tVIjwTvGgBMjESiNR0r+rj3yg+vtbnBmpPyDSr3Rq+8I1tfRYeFtDMM2Gyqp+K8UvXj1
- 9oeOMZhQEry+v6sDjoN+BNByO7JKxqp5POKfh8qfvObJRg+0OwkQjT2GgmprtoD3+uD8
- NVeVp+VP7jBPgt5SD73Ls3DI2KRzUQSgLe6pOXE9b+2/fLFft91DOWaISEQHUcL3DPd5
- oSWw==
-X-Gm-Message-State: AOJu0YwicpCL2RSU2K8SZ2MAnJE/TaS/Cz8UzrjLpE80sO53DbiEwK4L
- IqkktJ/Mz9NbHjEAEVGBnGdyJL6Do1ma6YDWogNMokWQ4kb5eNpQwu/mQFa6gxUuBtA=
-X-Gm-Gg: ASbGncuEUD3pMDYZpp0qtwrxHeZ99jgBTCcL1F7x4cCbG1AgC4Q2eai/RUit3hfiWz0
- IzxDUIl3+FjaMeKCjwDr/KBwbG+ulyz6AHuHnIFjmKhmUvh3pzxPFCBCP/85x7h0oVHvH2zhvGd
- brehus0gX/uXyituCRYFlo8CHTWKZBdLyYlg42HJWBsuHzw0CrZXBgU7GQhk2laf3lSRslFOheM
- ZD8c/F/r8mDqBzTED/XnG6yNmd5ojUPpwkBswC2OSNTn5ocIiQWbz7aWb9LRF8Ic9WOwfkTwsj6
- j/Cq1WsdC2s8jGr4rLgl6LW7GyYFA1i7oNU4lqFgUa7VIOHRCvy7fqSIbJg0jg4uPJlL2CCGbHH
- IVfQenqcx9Ph+d5g+l4EcL0TT8yltrZeZ
-X-Google-Smtp-Source: AGHT+IFkVlrCrgd6v3R5avuFwKlxYAotVK24mzgb38/5i4jOEUbMe3L9UHNyVolkY0RPmC0AyZYmcQ==
-X-Received: by 2002:a05:6870:63a6:b0:2d5:ba2d:80df with SMTP id
- 586e51a60fabf-2eab447a5a9mr2012073fac.8.1749738873475; 
- Thu, 12 Jun 2025 07:34:33 -0700 (PDT)
+ bh=S5yxgcxATPYoQYruSw+kcCZgVrT6UdsLgKCWe4s9C0Q=;
+ b=k4+LKYTPH/CrcIJXcbYJjqsxtYzw1i962F0ITP0ZlOkqeiBmAqeRR800MK2EH73OH6
+ ndF1vaxCipFrtgbBrxrnW35/A5xU3mqgaS+v2mFO8x9tWPHmDdKdAsG8RyVglYzC5dPv
+ D3lMlWrkmhkrYZ2mU0/cSCBhotQcEr7luGaXl97phyt8CFFgNlrM617k0GyFVdf9PpIC
+ yyUJDcd8/55WgBD2kkddmHoxE4X7Wo9tXCnCsrl41ZA7YpNkTO90HFX0pBRs94paP8d6
+ gx7zxWCDG7MjaYegPtmmaMHgDHyATgIAflrKPayQ87mV3fnKSIqdMyO4iJ7rUqPkT2Xj
+ tAXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaiWOl9vX0StxzQxinOlCtgosdwKgj+CafXYWN3YCYsjIUZto19GwpL67jl/iIih8MUN5GNZk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yym16UGIRNqf7coY+zTQX4IORiV0UpfxjOadAFzW0Br+47TWvGc
+ 3xle7II1yoHpDXbga3CEoboLkTokkFpWvf66QNEUk8AsODmLdetAOaSJDDQIC0CgY+nZCcKT5mg
+ e53GHtYY=
+X-Gm-Gg: ASbGnctBOH9R0yoaubRnysPbZgxEbso886D/Kmy1zMK3ullG1kk6wTLIptoJ+/jOcFi
+ xiIDdXDOlUofh0Dr3AetnC639jMTDR8wTMZJQR9/KZ9GNys4wLrQ1EHzUz649i3EeaT1SVNEmqL
+ vOsUZHiIZUDvtZWy9aeXeUHKPsP3eucHQownVLzRC1PHH6FYLXet4CO9G+t/0PHR5Een9GZoqzL
+ NWvoIecUrlGrDSZ7g5L5Rd7l9/mE5NwFU8bYLWDZKtl92xwTDam6dQUTfm8UvpHnZgcDBXTDj4R
+ +Lr0UgicN34KEo4S2JxI+mZgmtvAssChlNRXq2GAv2uIJ0aOo8Wecoa3fzK5JF/9b869O0pBYh9
+ 0EDK3Cre3XA99u7fuTrZsGQ==
+X-Google-Smtp-Source: AGHT+IHob5vMPFHH1b02aGZA/po/67jem8SM1xdYmAxB0Z4Zna+hxyAWDkyVBEFMvGzTAlrs7PZDLw==
+X-Received: by 2002:a05:6870:46a4:b0:2d6:209:8a6 with SMTP id
+ 586e51a60fabf-2ea96bbae67mr4379760fac.2.1749738894141; 
+ Thu, 12 Jun 2025 07:34:54 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2eac0c17211sm193474fac.18.2025.06.12.07.34.32
+ 586e51a60fabf-2eab8de67e9sm319217fac.30.2025.06.12.07.34.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 07:34:32 -0700 (PDT)
+ Thu, 12 Jun 2025 07:34:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: sbabic@nabladev.com, festevam@gmail.com, 
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20250612021356.4228-1-peng.fan@oss.nxp.com>
-References: <20250612021356.4228-1-peng.fan@oss.nxp.com>
-Subject: Re: [PATCH] imx91: Drop OF_UPSTREAM
-Message-Id: <174973887229.204495.10217403514183848856.b4-ty@konsulko.com>
-Date: Thu, 12 Jun 2025 08:34:32 -0600
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Michal Simek <michal.simek@amd.com>, Yao Zi <ziyao@disroot.org>, 
+ u-boot@lists.denx.de
+In-Reply-To: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
+References: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v2 00/13] Update the kbuild system to 5.1
+Message-Id: <174973889260.204623.16659773282498326479.b4-ty@konsulko.com>
+Date: Thu, 12 Jun 2025 08:34:52 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +102,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Jun 2025 10:13:56 +0800, Peng Fan (OSS) wrote:
+On Wed, 11 Jun 2025 23:24:27 +0300, Ilias Apalodimas wrote:
 
-> i.MX91 device tree still not landed in linux kernel, so drop OF_UPSTREAM
-> and move the device tree files to arch/arm/dts
+> Another series backporting and merging patches from Linux 5.1 kbuild.
+> There is still a gap that I plan to update after this series gets
+> merged [0]
 > 
+> [0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/commit/5da099cef04fb5c02dcafab8d1bab8ddc2855765
 > 
+> Changes since v1:
+> - Rebase on top of next
+> 
+> [...]
 
-Applied to u-boot/master, thanks!
+Applied to u-boot/next, thanks!
 
-[1/1] imx91: Drop OF_UPSTREAM
-      commit: 02a2cbfee83df3eddf619d01e5153c3239a3984d
+[01/13] kbuild: add -fno-PIE flag unconditionally
+        commit: 7e81e690d7276283d4a4d988fa47e0965c62c433
+[02/13] kbuild: add -Werror=implicit-int flag unconditionally
+        commit: 0ebda5f1f0c96679a7d6d365016ca9294a1c5dd9
+[03/13] kbuild: use assignment instead of define ... endef for filechk_* rules
+        commit: a76fb6981fb502717c7a5b7a601ef5c4c4dc17a0
+[04/13] kbuild: clang: choose GCC_TOOLCHAIN_DIR not on LD
+        commit: 3991f85e4cdcd721c91d376468e5396504e2199d
+[05/13] kbuild: use -Werror=implicit-... instead of -Werror-implicit-...
+        commit: c4a52fbb674cce8b85d9a9c62ba718de7803e176
+[06/13] kbuild: gitignore output directory
+        commit: 156fdc57f7a2d7ab578c8c52c3eb1108d6e0af4e
+[07/13] kbuild: remove meaningless prepare2 target
+        commit: 931f04a85ad40cc4f96feec1cdd05e0c44cb3bf0
+[08/13] gcc-9: silence 'address-of-packed-member' warning
+        commit: 057a53b570a6896b9337169645f6b2cc8d0d218c
+[09/13] kbuild: do not overwrite .gitignore in output directory
+        commit: d1b6489ef11bc89145e9fcf1d0f05d89a934e410
+[10/13] kbuild: skip parsing pre sub-make code for recursion
+        commit: 27529f1cb02d8a55ce8de594f15a8d9e7aec0bb8
+[11/13] kbuild: mark prepare0 as PHONY to fix external module build
+        commit: 4a247d1376302ebdb05af3a15a1788b987d53a1a
+[12/13] kbuild: make 'archprepare' depend on 'scripts'
+        commit: 45acf56e59a38275fcd4662eb005d910f65df4b5
+[13/13] kbuild: fix single target build for external module
+        commit: 070b81458aec02f0cde69f87b28fa82c5bb8e906
 -- 
 Tom
 
