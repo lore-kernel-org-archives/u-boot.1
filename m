@@ -4,91 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA64C71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 10:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E376C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 11:09:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 741FF82A4B;
-	Thu, 12 Jun 2025 12:42:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CD09882B7C;
+	Thu, 12 Jun 2025 13:09:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=zugschlus.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HNVP6ivc";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FA9B82B70; Thu, 12 Jun 2025 12:42:09 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9B55F82B97; Thu, 12 Jun 2025 13:09:03 +0200 (CEST)
+Received: from torres.zugschlus.de (torres.zugschlus.de
+ [IPv6:2a01:238:43fa:bc01::28:100])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B73800C1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 12:42:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8139800C1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 13:08:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=zugschlus.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4533027c0ceso2862915e9.1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 03:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749724926; x=1750329726; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=akKhKTQvvyHElMMF8GfVJfBOjRSWuZwAUT1WSgXj+n0=;
- b=HNVP6ivcHw3zbL8OMDb1Fv3cF9MudTb+FZKBN7xf/yLLFgJulcchotpT5zYweH3Uql
- KAom/8qgzqlC9nvgSv9Uix3uGJ07yag2GvlwSp0ms6NAG2Q1cfckVvj3kcv1FcAI7A9g
- cKFgDbXnJYFYNcSaiy+dh26syJtUerhepZPX8wDesA36NkweGC7iLPDMHBjyyotzue8O
- N/nVX890wNHKm8Et/4VsMyO3bMaqM4qhyMc1Mq0CR1l5Dw/8lbObjrKYXnbYmNw7OF3w
- 6nlR1SB0oZb2T2lR/cgE37KuoFa4xoKcV5a0VyQSst0QrdGNQ+ZnRkNISnGH7bedJPMk
- y+4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749724926; x=1750329726;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=akKhKTQvvyHElMMF8GfVJfBOjRSWuZwAUT1WSgXj+n0=;
- b=oNXepOKWOo9myQPIGAJiAionjfsPOh5pd1ZaHEs1holP3VFJkZyREgUbg2EGOaVtxj
- C9EHHH/S3A6xwVwaDyu3xX7nuQLjmyLSveM18OZjM6v7DIPPPL93pPCRSDsVS+3WCYDe
- gmdKcbzBNSDEj5Bo5Z8msJuJd65DhNcg8nm//qJ0dPKtMO50plXacRaJ6yuZzZ8El1k+
- up5lJFfU1Vlq+W+tbIHJf1GCRfkl8QIMSyWp8SrlhzZ7NNcTfl+lJK4oyTSXEYu7Zzwx
- N32UuddYh6C7Y1ZeuKKXh5qhQJi+U1XdVie5/6g82XOkz5g6KhAFEbZwDHwlOJITYVv8
- Nihg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCCiMYLlQaYxn1wYEm/CJamq7+H58WaaAwdUs4qCG2Uu5f/gXGBiGtS1DD532r/70l3VwKey0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyN4tqStPJtccStXQ7lOCLc4+RezXfG4zeR5tYivVIChLU74Lw/
- wGRQOaX9t3FsdrtEzb23X1RapU242vGBwD/ZDgYv+H8oUGJQq8ftjl4DYc9DhuqOglE=
-X-Gm-Gg: ASbGnctLQny4Fkh9/Sux+Cu2tfvCw4eZxEwdJi15uCUs6ykdSai08LwqAjdwgE6u5s/
- cK1XW2BDf194/qhIFkytWMXeviXS30+BEgOGEB27gZ79LJCqvwgt29O+m0bMNnXhQ+VPpMhbv3X
- 64Q4FZB4KvLwMCD1oa+Wj2mda1mmePdV4RQd01F7goz0DdxbgnHCWAwjvTNZb4e4HLbeDrhLIPr
- yFnxo8IhCdqR1jLNEpx8WAvfydRXyk4K1xneXBIKPLPQRtJTiqlWFhybvpgBpnkxqdYEWvwsjt6
- 1r2C/v+IGfNpILhesBuGaI7EDVnLliisMyi+zajhvIyfwbBy/t/HY53n34Jj57/fFftFwDW8Cdq
- T6hbKoxvY6okiONrh7Q9/vmQIFT9dF3G3Efmz0g==
-X-Google-Smtp-Source: AGHT+IFFqRNlV7fENkFnQlJ56SmktAgwDoZxY02t7oDKLuOqZnuxsT2LnKqZX++wtrZqwW/D/uSIcw==
-X-Received: by 2002:a05:600c:3e84:b0:453:a95:f086 with SMTP id
- 5b1f17b1804b1-4532b8c2bd7mr35222325e9.12.1749724926242; 
- Thu, 12 Jun 2025 03:42:06 -0700 (PDT)
-Received: from ?IPV6:2a01:170:117e:fc:1405:203b:89a3:c77a?
- ([2a01:170:117e:fc:1405:203b:89a3:c77a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532de8c2d2sm17414155e9.1.2025.06.12.03.42.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Jun 2025 03:42:05 -0700 (PDT)
-Message-ID: <b53b821b-95e2-4887-a837-cc3e3236cd27@linaro.org>
-Date: Thu, 12 Jun 2025 12:42:03 +0200
+ spf=pass smtp.mailfrom=mh+u-boot@zugschlus.de
+Received: from mh by torres.zugschlus.de with local (Exim 4.96)
+ (envelope-from <mh+u-boot@zugschlus.de>) id 1uPfnn-0031yH-1U
+ for u-boot@lists.denx.de; Thu, 12 Jun 2025 13:08:59 +0200
+Date: Thu, 12 Jun 2025 13:08:59 +0200
+From: Marc Haber <mh+u-boot@zugschlus.de>
+To: u-boot@lists.denx.de
+Subject: Re: Searching and Finding boot.scr and uboot.env on a Raspberry Pi 4
+Message-ID: <aEq1S5UDZ9FcsMWH@torres.zugschlus.de>
+References: <aEcOkQdwEF9zNJu2@torres.zugschlus.de>
+ <dc51ba46-010e-4fc5-a0bd-88c758940e96@cherry.de>
+ <aEgN40XL0D8gIg0F@torres.zugschlus.de>
+ <907734c2-f401-4c89-888d-5eb2670cb690@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Fix variable name of msm_clk_data in two drivers
-To: Luca Weiss <luca.weiss@fairphone.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250611-qcom-clk-variable-names-v1-0-37615b74daad@fairphone.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250611-qcom-clk-variable-names-v1-0-37615b74daad@fairphone.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+In-Reply-To: <907734c2-f401-4c89-888d-5eb2670cb690@cherry.de>
+User-Agent: Mutt/2.2.12 (2023-09-09)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,31 +56,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin, hi List,
 
+tl;dr my issue is solved.
 
-On 6/11/25 14:08, Luca Weiss wrote:
-> Just some fixes with no functional change.
-> 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+On Tue, Jun 10, 2025 at 01:18:17PM +0200, Quentin Schulz wrote:
+>On 6/10/25 12:50 PM, Marc Haber wrote:
+>>On Tue, Jun 10, 2025 at 12:36:23PM +0200, Quentin Schulz wrote:
+>>>On Theobroma boards (Rockchip-based), we force the environment to be
+>>>coming from the same storage medium as U-Boot proper, c.f.
+>>>board/theobroma-systems/common/common.c:arch_env_get_location()
+>>>
+>>>This is the location of the U-Boot environment in raw, not in a
+>>>filesystem, so this won't apply to your use-case.
+>>
+>>Sadly ;-)
+>>
+>
+>But the logic to detect which boot medium was used is there, hence why 
+>I mentioned it :)
 
-Thanks :)
+I looks like Debian's u-boot for Raspberry Pi actually finds boot.scr 
+laying at the side of u-boot.bin, and the initial environment the script 
+gets contains $devtype, $devnum, and $distro_bootpart which can be used 
+to continue finding things. $disto_bootpart is a bit confusingly named, 
+but since it's the only variable that always seems to contain the 
+correct number according to the tests I did, this is about enough.
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+I had to explicitly code out reading of uboot.env though (that for some 
+reason doesn't happen automatically), and while at it I added some code 
+to also read uboot.env.asc which easier to generate and to edit.
 
-> ---
-> Luca Weiss (2):
->        clk/qcom: sc7280: Fix variable name of msm_clk_data
->        clk/qcom: sm8250: Fix variable name of msm_clk_data
-> 
->   drivers/clk/qcom/clock-sc7280.c | 4 ++--
->   drivers/clk/qcom/clock-sm8250.c | 4 ++--
->   2 files changed, 4 insertions(+), 4 deletions(-)
-> ---
-> base-commit: d7c449c3d83a986d61e38d1762433c0607caf5c5
-> change-id: 20250611-qcom-clk-variable-names-0cb615817b3e
-> 
-> Best regards,
+I apologize for not finding this myself any earlier, I was led into an 
+incorrect assumption about u-boot since the Raspberry Pi 4 is VERY picky 
+regarding choice of SD cards with the Firmware from April 2024 that 
+comes with current Debian. The Firmware that comes with current 
+Raspberry Pi OS is from March 2025 and is actually much less picky 
+regarding SD cards. I sorted out three SD cards and was about to give up 
+on u-boot when I discovered the firmware issue in the debug output of 
+the second stage bootloader (which needs to be explicitly enabled by 
+uart_2ndstage=1 in config.txt).
+
+Writing "kernel=uboot.bin" in my config.txt while the file actually was 
+named u-boot.bin cost me an additional couple of hours. I then went to 
+bed and spotted the missing hyphen first thing in the morning. 
+Recommendation: Letting things rest for a while helps a lot!
+
+>>As far as I have understood, if u-boot finds neither its environment
+>>file or a boot.scr (that one comes from the environment as well, right?)
+>>it just sits there doing nothing. It's that first step that I don't
+>>understand.
+>>
+>
+>Which first step are you talking about?
+
+I was taling about finding the boot.scr script which now magically seems 
+to work. I do not even need an SD card any more, everything can happen 
+from the USB SSD. I reached my goal, can do everything with what's in 
+Debian and thank you for your help!
+
+Thank you very much, again, for providing u-boot, and for listening and 
+giving answers that were able to point me in the right direction!
+
+Cheers
+Marc
 
 -- 
-Casey (she/they)
-
+-----------------------------------------------------------------------------
+Marc Haber         | "I don't trust Computers. They | Mailadresse im Header
+Leimen, Germany    |  lose things."    Winona Ryder | Fon: *49 6224 1600402
+Nordisch by Nature |  How to make an American Quilt | Fax: *49 6224 1600421
