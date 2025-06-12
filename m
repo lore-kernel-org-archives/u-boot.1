@@ -4,93 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A5EC61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 10:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F8F6C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 10:39:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8BB4800C1;
-	Thu, 12 Jun 2025 12:36:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7021800C1;
+	Thu, 12 Jun 2025 12:39:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DqKkc824";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="buASrV0x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC53382B70; Thu, 12 Jun 2025 12:36:54 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 94D5E82B70; Thu, 12 Jun 2025 12:39:30 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2FD18004F
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 12:36:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DEA88004F
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 12:39:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-450cfb6a794so4425825e9.1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 03:36:52 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-450cfb790f7so5939145e9.0
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 03:39:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749724612; x=1750329412; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749724767; x=1750329567; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=aGakPzNgzNdUsGMKaLWarlLHOque1Td8zerB3ESg8CY=;
- b=DqKkc824eUxwdRohn5c1Qq8HuUuoo3Um+giqaMCTvWvVzD63fOh9ez2/CE40+vjl6x
- mcFcTUSXopfqtQyiau9iwYViNtZFduooekpBT9UYQvr4n5P2nm5TvDrTJ6c2AbyrBEOx
- z+/h+MdzjDO8k5NQJr+w9plHdNAeJ0Ri9t0x5JxVxyi4pXus878gDvvStN2Ypw7g5J57
- r/3fkPhYZA2udvEKqhoXLk+IymmuXg/eqiLHNRKx2VQnsnU1ixxif9e9wjC+roeQfGuc
- y5q//sc8l92UJ7dStcynuuoEAq1p6eOLH1KVcZzn3lS8EUNfKjuFssywe3JPxlvbtPLv
- Y0iQ==
+ bh=ZgAVfOjlVykqU1GeyYz34sdoGY89nm0c4zWwiE8dIhs=;
+ b=buASrV0xSbTY8rp4OrGEg4zXJ91WLXovUq6zefnsyO4QUiZ41zx+t7wrItMrtZ+2Js
+ H3W+EQz3hGXoWsDgUShRajgwwJc6xwDGtYB1eDr90ZUIb5PsB95eSJufdL4KBZpojLnY
+ ISqTuiA6NwaZNv+rwnO01uYPqZywmR4DUOeEjXLv3OjzloxRL6BQdKZpWL6iIZPeRhy6
+ C7pn+XnrEHCMmLktqo/zmk0FswSRRobDnCYUoEw48q5plWDxf/o73jLQ8Q8HQODrMV5Q
+ ns8/Cz9MqFJe/UNeI3m9Jrjuiu24KA6XfUXHhzYH1THOwwCFZJUGyC0YTaYoqhYzkVM2
+ qprA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749724612; x=1750329412;
+ d=1e100.net; s=20230601; t=1749724767; x=1750329567;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aGakPzNgzNdUsGMKaLWarlLHOque1Td8zerB3ESg8CY=;
- b=gLehTyAwWEZnIdGsUt/txpmzGt+ocwd/PKd++IWv+kMkMm4paL+GFrbH9p7o8qE27r
- v+K6N+XVVW9v3XchwGULjOYwd7wa/FvVV71zJxShCOP5OMEt3FNGFb0tqRCwq9mI0/yf
- RXVfM77rpwVlv4YpAS9+7SelZ6DFojE/ZAzvolVc/RzQJIyyynnA0L537UWkrmH4lNWG
- fmWCNnAznbBSUxRk2OCMYYTf4ZjMKtO3hWLBotBWcnRceC6ck7Fp8B3amsXGTzSSC/kF
- 7CvkOXPw9xIwGl6CSmiF8ZYCybYRICfaOaFrqj+B7nhCc7FUqUaxh8snuvFIcHbNqBjt
- 8t/Q==
+ bh=ZgAVfOjlVykqU1GeyYz34sdoGY89nm0c4zWwiE8dIhs=;
+ b=gwVEhfWDiMkDKvQJ8XR8GZLNP5UBxgsUINogvBy1HtJC3QJ98l+ou00vgcgTYMKU8w
+ yNHOy0pemtTctyLVJK5ODibwslWsN4tyB3Cy08oCSVeS5larqriu2LoLE6trKMfGcT0O
+ +l9uuDjnu2hQ4SqPQfRqE/uETL9syOFZ/DQWdhe3X3a3bx+NInV3Dqf8b8JjLvgDrQu7
+ cSt1ayvVltiJvhXuRU4pf9NfHltkCkgstg3jqWzFf5aBdtvfb1WiqW8sfnePnKfpnPQx
+ mh+BQ+XeVGzYJDOWeecVjbED1kG7551hgqStgCLVffUv/URtTYQznNTYATHKueMLWPPw
+ VO+g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVt5j+pEd3bqsunhwpianY95MX2+8/VYfxc9zDd+YiSisOra+tUId9R3fhRlQXKn5HgqKrJ7dg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMU3wiM6jojj+QALWqEVsXsmrYz8gLVH1+Vq9LEssXCU7ECx3+
- nK5cNHPRk1oXv4JQIdQ2e/kJA8Q+ZVuD/8sA/tJWR1NEpCJ4HBSG1oChK6QeD8TetoUg3xhrTqa
- 7nLB5
-X-Gm-Gg: ASbGncsLn9xlbr8g4mFDjJs1rabgSTjrzr+pfOJ66lzlYZkO/GL7NGVeHr1kUP9NayU
- sboVOOY+fRJtLzZlSnm6MP2gdpPfRLu2sjyUvFAl525hAy4LMCpengxNjL0bW/6TZJHmWCbTS95
- JDfxcG9b7XwwEWLACAUMbQplquI8DeamHp/9FSnoDPHdx+jhxVEX9G14mG3Srbwy7n3G2Y059fU
- qWaXjGgbx3qsad4Z0ytFhXeNgABrzEK2ELmEg9vYTsfIDlGqshc7Z8OvDuvvA8XPVWN844SBgxI
- ZLWB9VK+0f7TlrM2GXBsRBJWmNw/5Ik2Kg6PfjAAUbDiY5lTuIJa06eLFyDSjNHCaA5qtZs16iy
- Zn1mgx3aTTLzFaPFMqOfvHL7A974al8CalvOr7A==
-X-Google-Smtp-Source: AGHT+IHmtOvGO6vVeQmDhIcFKbYdEXx+nsmGDI61o9qbq2QCwkiNkLeHB3JpVMwpkXwrWwtTsm2MCw==
-X-Received: by 2002:a5d:688c:0:b0:3a3:63d3:369a with SMTP id
- ffacd0b85a97d-3a55869cdf9mr4525440f8f.25.1749724612263; 
- Thu, 12 Jun 2025 03:36:52 -0700 (PDT)
+ AJvYcCU6dqksw6qx6/oFnm52CIoDZ9ootCdwqo4gVda66BT3mBz5lsghq0/jZfkJcmQ48fk0lCDNAoE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNWpX0Jckfu7GyQxIdZPLQmiMPwJdyfRfnjHfZ5SGrjciU8kKf
+ jAx7PSoSUwAzgzrimByRbU/cavVMn3xBU+sRlvZZURzGtBD16VUiDBTWblHiochNoe0=
+X-Gm-Gg: ASbGncvY3HyZbZ0FaK7rs/yLhC0/QLHlvGVuY6/PBuN+iCcHuXuZtkzvc7oli7CkoTl
+ TBxCWBBVBIhDpal88S3y6+D05ooxcYQD46rbT7EOLaqFbF+FaxySUipRolfuhnhAKm4TbAo+6Q3
+ VdRhCIHPBPoILSTZO5xekS/fv9bAYp1PEYwZc9zT4+xa7gMScSUVge/K/QKKE6Z8U9IO0IVkbvK
+ n9oCYLUt4Pu+opfkeFtI4Rsw42tZd35j7tF8R2CpRungGuZ24ySjGktnPH6sv13K0cYTMfWEIR5
+ A8FdxmWepvPQMD6jobF0gvK8RWTCBTjSeuh3OLz7S+oaseZxYI1UWaF3ZVVM6y16vLjvJf/FQfZ
+ aW4UCW9eTZEytfGb2i4jKZCspohe01jBumGWnSw==
+X-Google-Smtp-Source: AGHT+IHn7IvupMBYc0KORMyG2D5Yckz8grlvekNDLofuWwmqH74HYurk/vZLxmLtiTiZdjVaP+sCPA==
+X-Received: by 2002:a05:600c:83c6:b0:453:2433:1c5b with SMTP id
+ 5b1f17b1804b1-4532486c53emr63186145e9.5.1749724767448; 
+ Thu, 12 Jun 2025 03:39:27 -0700 (PDT)
 Received: from ?IPV6:2a01:170:117e:fc:1405:203b:89a3:c77a?
  ([2a01:170:117e:fc:1405:203b:89a3:c77a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532e2354fbsm16156475e9.15.2025.06.12.03.36.50
+ 5b1f17b1804b1-4532e156e8dsm16736765e9.31.2025.06.12.03.39.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Jun 2025 03:36:51 -0700 (PDT)
-Message-ID: <1f37719f-0c5a-48af-bf9a-5508a6bea5e2@linaro.org>
-Date: Thu, 12 Jun 2025 12:36:50 +0200
+ Thu, 12 Jun 2025 03:39:26 -0700 (PDT)
+Message-ID: <b79a5bb1-4f2e-4b08-a65c-8d909c7b0678@linaro.org>
+Date: Thu, 12 Jun 2025 12:39:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] dts/upstream: write fdtfile path to /chosen/fdtfile
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
+Subject: Re: [PATCH 2/3] env: set fdtfile environment variable from
+ /chosen/fdtfile
+To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 References: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
- <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
- <8734c679xn.fsf@bloch.sibelius.xs4all.nl>
+ <20250610-b4-fdtfile-from-dt-v1-2-aec4df0fa53e@linaro.org>
+ <33d65ef7-34ca-455a-bf91-11716bae5236@cherry.de>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <8734c679xn.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <33d65ef7-34ca-455a-bf91-11716bae5236@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,93 +111,96 @@ X-Virus-Status: Clean
 
 
 
-On 6/11/25 14:13, Mark Kettenis wrote:
->> From: Casey Connolly <casey.connolly@linaro.org>
->> Date: Tue, 10 Jun 2025 18:23:33 +0200
-> 
+On 6/11/25 15:55, Quentin Schulz wrote:
 > Hi Casey,
 > 
->> Since we're using the upstream file structure, we know at build time
->> the path to each DTB that we build. These same paths are used relative
->> to some (maybe version specific) dtb directory on the boot partition
->> or ESP.
->>
->> By recording this path at build time and embedding it into the
->> devicetree, we can set the fdtfile environment variable with 100%
->> certainty that it is correct.
->>
->> Devicetree file names are already treated as stable kernel API upstream,
->> since they are used by OS loaders extensively.
-> 
-> But when something similar was suggested some time ago, the Linux
-> kernel folks explicitly stated that the file names are ~*not*
-> considered to be ABI.
-
-They don't /want/ it to be ABI, but that ship has long since sailed as 
-the filename is how the dtb is loaded. If this wasn't meant to be the 
-case then "make dtbs_install" should mangle filenames somehow.
-
-> 
-> So I think this proposal should be discussed in a broader context,
-> probably on the devicetree-spec@vger.kernel.org mailing list.
-
-One could argue that since this property is added by the U-Boot build 
-system during compilation, and only expected to be consumed by U-Boot 
-itself, is could fall outside the purview here. But yeah... probably
-
-.
-
-> 
->> Embedding the path into the devicetree itself just simplifies the
->> process and allows U-Boot or the OS loader to select a devicetree of a
->> different version for the specific board that U-Boot is running on.
+> On 6/10/25 6:23 PM, Casey Connolly wrote:
+>> If /chosen/fdtfile exists in the devicetree and the fdtfile variable
+>> isn't set in the default environment then populate it. This allows for
+>> U-Boot to load the devicetree from the boot partition or ESP that should
+>> more closely match the OS being booted.
 >>
 >> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 >> ---
->>   scripts/Makefile.lib | 15 +++++++++++++++
->>   1 file changed, 15 insertions(+)
+>>   common/board_r.c | 35 +++++++++++++++++++++++++++++++++++
+>>   1 file changed, 35 insertions(+)
 >>
->> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
->> index e89a4a51b74ddccfd9f0a6463cdeded12eaa5235..1f95bda0597c14d2ee785eb8058d607a6c819a56 100644
->> --- a/scripts/Makefile.lib
->> +++ b/scripts/Makefile.lib
->> @@ -360,16 +360,31 @@ $(obj)/%.dtbo.S: $(obj)/%.dtbo
->>   ifeq ($(CONFIG_OF_LIBFDT_OVERLAY),y)
->>   DTC_FLAGS += -@
->>   endif
->>   
->> +ifeq ($(CONFIG_ARM64),y)
->> +dt_dir := dts/upstream/src/arm64
->> +else
->> +dt_dir := dts/upstream/src/$(ARCH)
->> +endif
+>> diff --git a/common/board_r.c b/common/board_r.c
+>> index 
+>> 41c8dec8d49ef21a12fd41272581dd94484dfa08..594c7827c39cfca5f4561b4699e5b66de54e11c2 100644
+>> --- a/common/board_r.c
+>> +++ b/common/board_r.c
+>> @@ -448,8 +448,41 @@ static int should_load_env(void)
+>>       return 1;
+>>   }
+>> +/**
+>> + * fdtdec_setup_fdtfile - set fdtfile variable from /chosen/fdtfile
+>> + *
+>> + * This function will look for a string property named "fdtfile" under
+>> + * the chosen node and if found set the "fdtfile" environment variable.
+>> + *
+>> + * This devicetree property is used to identify the path to the FDT in
+>> + * use so that the same path can be checked in the dtbs directory on
+>> + * the boot partition or ESP.
+>> + */
+>> +int setup_fdtfile(void)
+>> +{
+>> +    ofnode node;
+>> +    const char *path;
 >> +
->> +ifeq ($(CONFIG_OF_UPSTREAM),y)
->> +# Embed the upstream path to the DTB into it as /chosen/fdtfile. This property is used
->> +# at runtime to set the fdtfile variable
->> +dt_extra_snippet = / { chosen { fdtfile = "$(subst $(dt_dir)/,,$@)"; }; };
->> +else
->> +dt_extra_snippet =
->> +endif
+>> +    if (env_get("fdtfile"))
+> 
+> How do we guarantee that fdtfile variable is read from the default 
+> environment (I assume here you're talking about the environment stored 
+> in the U-Boot binary?) with env_get?
+
+I'm not sure tbh, I don't have much familiarity with the env_ api.
+
+> 
+>> +        return -EINVAL;
 >> +
->>   quiet_cmd_dtc = DTC     $@
->>   # Modified for U-Boot
->>   # Bring in any U-Boot-specific include at the end of the file
->>   # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
->>   cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
->>   	(cat $< > $(pre-tmp)); \
->>   	$(foreach f,$(subst $(quote),,$(dtsi_include_list) $(CONFIG_DEVICE_TREE_INCLUDES)), \
->>   	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
->> +	[[ -z "$(dt_extra_snippet)" ]] || echo '$(dt_extra_snippet)' >> $(pre-tmp); \
->>   	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
->>   	$(DTC) -O dtb -o $@ -b 0 \
->>   		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
->>   		-d $(depfile).dtc.tmp $(dtc-tmp) || \
->>
->> -- 
->> 2.49.0
->>
->>
+>> +    node = ofnode_path("/chosen");
+>> +    if (!ofnode_valid(node))
+>> +        return -ENOENT;
+>> +
+>> +    path = ofnode_read_string(node, "fdtfile");
+>> +    if (!path)
+>> +        return -ENOENT;
+>> +
+> 
+> Please add this to the DT spec (and schema) before it lands in U-Boot so 
+> we can have some sort of standard here (e.g. Barebox may want to use 
+> that as well? The earlier stage setting this variable needs to know the 
+> location, name and expected content of the property).
+> 
+> Additionally, you say this property is a string array, I assume of the 
+> form:
+> 
+> fdtfile = "myboard.dts", "myboard-overlay.dtso";
+> 
+> ?
+> 
+> Which seems to be hinted at by the cover letter.
+> 
+> In that case, I don't think ofnode_read_string is the right way to go. 
+> We should
+> 
+> 1) enforce the location of the dts in the array (I assume 0?)
+> 2) look only at that location to get fdtfile, e.g. with 
+> ofnode_read_string_index?
+> 
+> Otherwise we'll have incompatibility with old U-Boot being unable to 
+> parse a string array and new Device Tree providing an actual string array.
+
+I don't think this is an issue since a string array in DT is just null 
+separated strings, but yeah it would probably make things clearer 
+regardless.
+
+thanks
+
+> 
+> Cheers,
+> Quentin
 
 -- 
 Casey (she/they)
