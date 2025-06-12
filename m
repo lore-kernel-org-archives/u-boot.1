@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C67AC61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:43:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F0FC71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 15:05:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E152082B70;
-	Thu, 12 Jun 2025 16:43:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B03F682B70;
+	Thu, 12 Jun 2025 17:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mJNch4e9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GHjyEzOK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6367182C4D; Thu, 12 Jun 2025 16:43:39 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 9254282B70; Thu, 12 Jun 2025 17:05:35 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DD1B828A2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:43:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B3E5828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 17:05:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-735a6faec9eso686914a34.3
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:43:37 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-60d5c665fceso554877eaf.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 08:05:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749739416; x=1750344216; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yWpsOg8NHXyjHIfYnI271t98HNwLim/1fE/vBr+bUhk=;
- b=mJNch4e975HQ477pphPPBaAcOo4Oc8c1ackNbIu4HQbDxj4h3yumQtAR+pF2h+BqXy
- Bs0LjQPgQpRz5jhYDbyDPH9P2/2FpW1FWci3tzuRz2wjJ4V93w4sTri61p3su8CbLA0V
- 9MELQz1znoW1F73FECEAuefiaVK3olssQvlqU=
+ d=konsulko.com; s=google; t=1749740732; x=1750345532; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=U0K15BfZBAgqX/jTvBoswhxbYUl7qJfjxDjedF37tzQ=;
+ b=GHjyEzOKQbmdQlzwoRXamFw0+4d09bG5AqByBw7aHcnHCg4t/yGyv+tQE2goPiaq1f
+ EAplhCqyo4QWerAqN1GODpuHRrFMp66+vsWKs9ieUrXup4mQEHjry1JfVst7s6Jic0/Q
+ 5nkuy/D6N+Dqna+aMmlWnWY6sRIsYykagDyD4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749739416; x=1750344216;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yWpsOg8NHXyjHIfYnI271t98HNwLim/1fE/vBr+bUhk=;
- b=Jjt0oHY1SmFUTRjZuSVE4XNGvzQN/a9dtYLYyZ3H0CuV3bSzjlNY4NDpmOL8kaDKxu
- IO0/w89yZw58m/gk/rdGl7MbD7KOlKZ+B14hqmVuOMTH5mKhxIdPK1+hRsi5xBIQ89xd
- sxbYddzdIhajFAmtBmMZa1QwBfFm4FBEYOFIZEXXh21Lgv2qCrXNJfrITHoRvdBvC+9N
- hpTNzLj5Kko9rW3Kpj6jDFpDItIMV5UuOO8qO4YNBpiiSZ8Obak9TUVMZkhQb+XMRqGf
- dRanFXNWTuXCfAHFnirMxboCpgGKKdn7SXCiZ3Dp9Q82RMmIR+BJhh15TtiLQvN6R4uk
- 8xqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKq48xPbLVRwxO831rerdiKoohi9WhX7USPcNl/CSHXVQjwk2lurlVRV/noSQ6Ga0ofGw3fxE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbTGHbPuTXNE55br3rL3BUnz44ZykXM7u9/7yYsnuTWYxwVn8M
- XAGSnziWtFSZP3KpNrJZT1Nx3KChWd3rvYPSyinKbOZrH2VCe4SVcvqIaOdBhJh7nQDPhXCr5J3
- E8oDHGoY=
-X-Gm-Gg: ASbGncvLRSsCJ/e7PfrIkcFaQB8smazjHq1YRPDwrz084S+w3MLZ3nZGU5yHTb3+kai
- 5OMn7SOjKsJJ25lTBGavAPG9lIbAjRhx+zyTapwh7eJUlR7OsdblXzDSxjdpl+wEI/BVO7sNt/a
- 0yYSs9GwT4pLftokl4Y1H5z7uhLfitlMTKruDW/+WyCj1QyHFhN116mHz0KV9ybz39p/tLwWsyN
- cI15R1tPOaFguLDUrjW/wZvtPKTCDFzzJwHykjHaeO5rRjrGr800lE2rnAsNoCoQy3vyLJOPQs0
- vxTju4S5A+ebAH10PTnmRrvvLhcB2J+5r7Ut6HrzeaVnvu/k9dGX/cEEVQ0YJ4/jK6fR2c0j+LK
- 26kQGRQQSJyD2gAnLK8zU3g==
-X-Google-Smtp-Source: AGHT+IEJedwiQZaJP3+dSiW67HChYZ+d/lS27EC/PwSJrGvHYNgKXV57e2SbmrfczrAF8Jz4xKBcwQ==
-X-Received: by 2002:a05:6830:4d87:b0:727:3e60:b44b with SMTP id
- 46e09a7af769-73a13adfdf1mr2406362a34.14.1749739415993; 
- Thu, 12 Jun 2025 07:43:35 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1749740732; x=1750345532;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=U0K15BfZBAgqX/jTvBoswhxbYUl7qJfjxDjedF37tzQ=;
+ b=Of6oki1HaLRXecJ6/X2wbqYuJfbCMP8UDDVWNvfLBjRhLiAnpnAmZBTvQyhvynpmQb
+ zvaMI3pTFyY+7zGBIvmGs4GDekwKvJcJtrwYT5ZEs+VNDSoZgFZuFJgfo67GalMWZP44
+ LpA49kCntN6SWmZUqX4oAn5WHvLb8Jg28k1zmeC/tZEjmqkUyQ0UaeezvajNmb5bqP24
+ aICBT0SYdZn9BESDgh4s08Ri3LnXjZstNh0y/q0GjZPDRIIOQIbI0v6083y79PiB8TNH
+ ASjlXhbOKaO2UZ8zv5PQCTKu3U9jvLIuLg9FgbONpkyWsPZ/5c+YEM5595gWd1JHAnDY
+ C16g==
+X-Gm-Message-State: AOJu0YwCYVbPG+N1uLdneftVHrT5yfQYxI3jQVZHLpBaEUcckm0zZK9W
+ GEXyaHm7+5cUfvfZegvOw2qjrIWPzp6NYwG0t3vT/EJcznPQydvhkRly1zNTL26Lyhw=
+X-Gm-Gg: ASbGncsqchnJkEkaCaM4J2xf5pJ/YF1eFHn4YvqL8lhh/jot4620OFBl7545I6PbZ/p
+ Fc0XrDyFYteJHNk1gklu0ZM2nBR94nAxTIgrIEjA6j+JbhQJpEJ5g4gbQKSBKFl2kZN/cKfd8/n
+ ziuQ0iCSWeyodiYU3Hm7kpOwa8HViNhMJXkJkEMZDdibvHK3mMFyevULuuUFpHf3/i9gwHZSDW4
+ swP372mtiKIza5OZQ6qZqbvWmPKNUddZNKBWj2iihtQly60QT0ws9AoLmn4aaoVqRc9YCqGkQNi
+ Du9nOXJy5Evov1VcM+kP1WkcyIDE320fmWQHegmrBxfbTbt29r+ZDDxXBBu0nn+qIkWsb+vC+nc
+ ej9raIaiWYAaChwYDtmKCX8E=
+X-Google-Smtp-Source: AGHT+IHYi+5axosDlyOTqxxEITLPf+XHJ9Mn2MKwpwF7JoKUMTbLjyYyw5kYPEs86T3FwAAA8HNtMg==
+X-Received: by 2002:a05:6808:3318:b0:406:6825:da34 with SMTP id
+ 5614622812f47-40a70b274a4mr210567b6e.16.1749740731707; 
+ Thu, 12 Jun 2025 08:05:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a16d54e40sm288209a34.63.2025.06.12.07.43.35
+ 5614622812f47-40a682fb574sm321638b6e.30.2025.06.12.08.05.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 07:43:35 -0700 (PDT)
+ Thu, 12 Jun 2025 08:05:30 -0700 (PDT)
+Date: Thu, 12 Jun 2025 09:05:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
- Hugo Villeneuve <hugo@hugovil.com>
-Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de
-In-Reply-To: <20250612133519.764041-1-hugo@hugovil.com>
-References: <20250612133519.764041-1-hugo@hugovil.com>
-Subject: Re: [PATCH] board: var-som-mx8mn: Fix alloc space exhausted in SPL
-Message-Id: <174973941514.205859.4992550309671528554.b4-ty@konsulko.com>
-Date: Thu, 12 Jun 2025 08:43:35 -0600
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
+ n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
+Subject: Re: [PATCH v7 01/10] spl: Kconfig: allow K3 devices to use falcon mode
+Message-ID: <20250612150528.GN1382132@bill-the-cat>
+References: <20250603142452.2707171-1-anshuld@ti.com>
+ <20250603142452.2707171-2-anshuld@ti.com>
+ <20250606190625.GZ1382132@bill-the-cat>
+ <DAHZOKDJ7QAM.2MKJ1WRFIJPAD@ti.com>
+ <20250609145919.GN1382132@bill-the-cat>
+ <DAIPP8VS7YQO.3PK5EYRE3D11A@ti.com>
+ <20250610144444.GY1382132@bill-the-cat>
+ <DAK9XDDNWUX4.1IRWBI9YA4MKG@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WjGbTA2SdHJYfxDv"
+Content-Disposition: inline
+In-Reply-To: <DAK9XDDNWUX4.1IRWBI9YA4MKG@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,22 +103,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Jun 2025 09:35:18 -0400, Hugo Villeneuve wrote:
 
-> After enabling some options to support EEPROM read in SPL
-> (CONFIG_SPL_I2C_EEPROM), the following error appears:
-> 
->     alloc space exhausted
-> 
-> Increasing SYS_MALLOC_F_LEN from 8kB to 64kB fixes the problem.
-> 
-> [...]
+--WjGbTA2SdHJYfxDv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Thu, Jun 12, 2025 at 10:05:38AM +0530, Anshul Dalal wrote:
+> On Tue Jun 10, 2025 at 8:14 PM IST, Tom Rini wrote:
+> > On Tue, Jun 10, 2025 at 02:01:59PM +0530, Anshul Dalal wrote:
+> >> On Mon Jun 9, 2025 at 8:29 PM IST, Tom Rini wrote:
+> >> > On Mon, Jun 09, 2025 at 05:38:37PM +0530, Anshul Dalal wrote:
+> >> >> On Sat Jun 7, 2025 at 12:36 AM IST, Tom Rini wrote:
+> >> >> > On Tue, Jun 03, 2025 at 07:54:41PM +0530, Anshul Dalal wrote:
+> >> >> >
+> >> >> >> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b44=
+37bc
+> >> >> >> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older=
+ 32-bit
+> >> >> >> HS devices and can be enabled on K3 devices.
+> >> >> >>=20
+> >> >> >> For secure boot, the kernel with x509 headers can be packaged in=
+ a fit
+> >> >> >> container (fitImage) signed with TIFS keys for authentication.
+> >> >> >>=20
+> >> >> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> >> >> >> ---
+> >> >> >>  common/spl/Kconfig | 2 +-
+> >> >> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >> >> >>=20
+> >> >> >> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> >> >> >> index 77cf04d38ed..bc5a334a1c5 100644
+> >> >> >> --- a/common/spl/Kconfig
+> >> >> >> +++ b/common/spl/Kconfig
+> >> >> >> @@ -1190,7 +1190,7 @@ config SPL_ONENAND_SUPPORT
+> >> >> >> =20
+> >> >> >>  config SPL_OS_BOOT
+> >> >> >>  	bool "Activate Falcon Mode"
+> >> >> >> -	depends on !TI_SECURE_DEVICE
+> >> >> >> +	depends on !TI_SECURE_DEVICE || ARCH_K3
+> >> >> >>  	help
+> >> >> >>  	  Enable booting directly to an OS from SPL.
+> >> >> >>  	  for more info read doc/README.falcon
+> >> >> >
+> >> >> > I wonder if overloading ARCH_K3 like this isn't a great idea. Or =
+perhaps
+> >> >> > TI_SECURE_DEVICE is too generic a name. I kind of want to introdu=
+ce
+> >> >> > something that means TI Secure Boot is supported but also Falcon =
+is
+> >> >> > supported, and then use that as how we disable in Kconfig various
+> >> >> > insecure options. And I assume that it's a matter of effort not
+> >> >> > technical restrictions for supporting falcon mode on older HS par=
+ts?
+> >> >>=20
+> >> >> I second your opinion here, the falcon boot flow we do have in K3
+> >> >> devices is quite different from existing platforms but still enable=
+d by
+> >> >> the same SPL_OS_BOOT config. Perhaps adding a config like K3_FALCON
+> >> >> makes sense here.
+> >> >>=20
+> >> >> And yes, older HS *K3* parts should be able to support a similar fa=
+lcon
+> >> >> style boot flow with not much changes to the k3_falcon_prep functio=
+n.
+> >> >
+> >> > Maybe we need a common symbol for things that are common to all TI
+> >> > secure devices, and other symbols for K3 or AM33xx (or whatever is m=
+ost
+> >> > appropriate for that overall era of parts).
+> >>=20
+> >> I was thinking of adding TI_SECURE_DEVICE_(LEGACY|K3) hidden config
+> >> symbols which TI_SECURE_DEVICE selects as below:
+> >>=20
+> >> config TI_SECURE_DEVICE
+> >> 	bool "HS Device Type Support"
+> >> 	depends on ARCH_KEYSTONE || ARCH_OMAP2PLUS || ARCH_K3
+> >> 	select TI_SECURE_DEVICE_LEGACY if ARCH_KEYSTONE || ARCH_OMAP2PLUS
+> >> 	select TI_SECURE_DEVICE_K3 if ARCH_K3
+> >>=20
+> >> We can then use TI_SECURE_DEVICE_LEGACY to disable OS_BOOT for older n=
+on
+> >> K3 platforms instead.
+> > =20
+> > The current tech today is the legacy tech tomorrow, so I think a better
+> > symbol name is needed for ARCH_KEYSTONE || ARCH_OMAP2PLUS, especially
+> > since the next question is how much do they in fact share in terms of
+>=20
+> Agreed, I will update the names to be more descriptive of specific device.
+>=20
+> > tooling and features. But I was also thinking that TI_SECURE_DEVICE
+> > should be a hidden symbol too, and used for the common-if-any parts, and
+> > so SPL_OS_BOOT would depend on !TI_SECURE_DEVICE_K2_OMAP2PLUS or
+> > whatever.
+>=20
+> I don't think we should make TI_SECURE_DEVICE hidden since iot2050 is a
+> defconfig that disables TI_SECURE_DEVICE while being ARCH_K3, it's also
+> useful to expose it as a config to users in cases of GP devices for
+> example.
+>=20
+> If we are in agreement here, I can post v8 with the suggested changes ;)
 
-[1/1] board: var-som-mx8mn: Fix alloc space exhausted in SPL
-      commit: 461f357fa9fa29886c787583d42e7a8d2cd14feb
--- 
+Well, with TI_SECURE_DEVICE hidden but TI_SECURE_DEVICE_K3 not, iot2050
+can be migrated easily. That should also cover the legacy-within-K3 GP
+parts too, yes?
+
+--=20
 Tom
 
+--WjGbTA2SdHJYfxDv
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhK7LQACgkQFHw5/5Y0
+tywv+Qv9H/gmJifCQskaPtaEAuCPFnakwUMG+QbGElwqcoqSNgzgieRWWIoBsYHs
+Grwi6SO+Y3p6thhR1QEQIt+72PzAk0Bfnyi/Y4ozqGHtb8n4PIG0/3VOv41JaMuz
+PQfmgqMhxQmGoBK4ti8qnzGUY9OULc8v2HECVi3ZbClPSqGn9NscxdqXdCKGdVAu
+rR4Mrg/BJ8yh8zBofTUjC/dOutb58sHWbG4NziJvc4hHnulKiAXuw1vYyYChnKEo
+yXnw8JNkU+ea3T5q9yNHKh5rt8H14b9aKIlvGNX5pRWkzgzqjDDuyvCK9yvmHBSx
+DWXpZzuz6y47F9XsR5DuYdbWa+yl+rnhYspX+JRavkaDSIfXOf/ZhPU+Gd5gOjxC
+D6J5ZrHHrsblMfYfTRGXEhLRCl6s4PRkNVEOmzjs1c7UBe0W2ZnjY63zNEsHp097
+H2Vn7aX+jEN+tyH7VDUiY2KZKFCbGHJ21WWE7L9GawnTl6gDFm8iZubEvU6Nd0DL
+vjQA3TwJ
+=4ZMx
+-----END PGP SIGNATURE-----
+
+--WjGbTA2SdHJYfxDv--
