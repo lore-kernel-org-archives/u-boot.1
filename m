@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824E5C71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 22:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9519C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 22:15:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BD6882C30;
+	by phobos.denx.de (Postfix) with ESMTP id B591582CA8;
 	Fri, 13 Jun 2025 00:15:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cgpiwaxu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VeEeGm1L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5A8582C87; Fri, 13 Jun 2025 00:15:28 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id F117182C87; Fri, 13 Jun 2025 00:15:29 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C11082AA7
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 00:15:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C720982C30
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 00:15:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-72ecb4d9a10so1405427a34.3
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 15:15:26 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-72c13802133so534706a34.3
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 15:15:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749766525; x=1750371325; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749766526; x=1750371326; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HFEcXY3GipPqLp1xteGfmvXDCCQpEdurshcHgkk9X5s=;
- b=cgpiwaxufxZVC2Tg4u+vBdsc5PBehXajPHdFVCkzCfRsZBOvMpan3s9hryzA6UCVRU
- NpzvuxVJpDwE7n5CsF8Cmm4XDPmjVgI7AywOCY1vg/65PAKDVVeoLak1NmohUx5KO+Ed
- jXzc5Jfk8H404Gz6kqquTaI9Y1mpu3GljStXQ=
+ bh=ygRHeFmpWGeGgtbnQB8JrUVUQrPLeDayH5sNuWkDC8k=;
+ b=VeEeGm1LdutmBc5o+vwqsY/PMBfc6+yp9RoxjaJOl93vVXa8qQPI6Lbzjk3flk+SJu
+ 2bpQp0CBa5PH9BlMtUw3t7a/0+PvNAPbxzGU33htX1M1XdQG0tT9BjrR83bK4LuioX2q
+ 2OSJN8bSLUb51UfopL1FdwqUiizknoUKAogQA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749766525; x=1750371325;
+ d=1e100.net; s=20230601; t=1749766526; x=1750371326;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HFEcXY3GipPqLp1xteGfmvXDCCQpEdurshcHgkk9X5s=;
- b=g5ybc5MFiA18zTJNaMALab4832DNRLDNZUhFkg6rRcLCQwXM4zN4U59qDyJBSzMqhS
- WeaFjqAe6JWHznuZEmKXnw4vCqBm3sjpxJp7x9V108N5dtHYBkL4LYCzJGuowRk9Pvao
- +dcrdbGTTZd7UCtPPsh2tDeFWTTjmsUvQX1rg6wWRslisbrolj04y1k0VVUE5g6OY622
- D7nbHzeyDUHl/ah9MeEtaPwKYydmIeQ1hplNn9mivSCxZ8+wGSHFsoszF7G239SDGa7D
- bv4eCP8rMu7OImG3GCGqAmwRIJcEVhWFuzxsXODW+w0bi5qn8n+E0DSx0fQj2Ou7A1HL
- n5iw==
-X-Gm-Message-State: AOJu0Yz50skL3VqzjwCdNsInSfbbiTUqBBqyzcSlJJMr2+RCBTlM0O4/
- HY0Xt8n8vEqAuB6KRB4cDWBas4f4n5ftJj2Ku+ebs2XXKibgNusCUn6jATXE+ViNmmw=
-X-Gm-Gg: ASbGnct0lAtm3wzUePvXIfROLo9VQuKv13xYLbFe3jpUbIvItnaYQJkyJjQb3hZaVV9
- 72UXJH0SqYXhc2vTcMvvkMB+s4EUemnUUSHT/om3YtAQR4CbMOgObYL03UmcCWYkIGl7S8BwvZz
- nOSrYCuycacBf4p0Qd+ej157eazq9xGymx8a4jQzvT5TKBkNh7g9g+ElRIUHAYJJqK5PhCYV2Ni
- ibevBCjoFogfOpzoAnEu6mXJ47WG8tlt3ByoirzgB+5uyuOiTQQufFi28Xrn1O845gBsNkl+/3F
- zjwpJ7p0eDi2Bx9wnjwb4hKXXzIoBBYa9IT5AFmuiZ0el0rThyuYm06O3RTGSKOQw1YX9xt6+/E
- DJW+oAMSkd1gjwi+P7XWPuQ==
-X-Google-Smtp-Source: AGHT+IEX/Nx6VcMZNglTkareOa3EK7lErpxzI3t054yIcnMOs/ZO1XGoT1nOBsmn4T2zC9t0Vg25pw==
-X-Received: by 2002:a05:6830:3c83:b0:72b:8ec6:e533 with SMTP id
- 46e09a7af769-73a270cecf9mr358352a34.7.1749766525371; 
- Thu, 12 Jun 2025 15:15:25 -0700 (PDT)
+ bh=ygRHeFmpWGeGgtbnQB8JrUVUQrPLeDayH5sNuWkDC8k=;
+ b=c1SSGwk5zovVV3pd++yjJMcyBMklmDO3LuRULTUz64ojvW1M26tiWNGYuAST3/NKpM
+ atqCtzY9JiD6/6S70APFo22JYZApqlpIo0PevbhXRB1GR76cdEqvX3tXpDaVa/mn246c
+ TuG22SleAYrZjjpLFU+4Pn3wQxgGlrorSBLY9SdR0XK3uJ2BsgUU3SakV2lM+Sd3laRm
+ II4ybO6apqt28jCNYLkzxn3SX+gx+aND8sx3yHFwDW7KaEOh2NG6SfMdIBCMbQMdyk40
+ SaWppvBj8gBXIrPH4x7jza8e+Rigyh1kwV0cXpxCLDNk69+XDCrLvirfn5XPJW6bUfzH
+ lLRg==
+X-Gm-Message-State: AOJu0Yys2XiM0Sk0L9KRPiqs0EvotChnP+Vb+4bcx5ruAj0lni/kLxYY
+ FgJoP717ZlV2qgkc7D1OGGlpiSKXILQndaD1GGBAuIuoP4o19myq9tzbT2uBMTXfCVM=
+X-Gm-Gg: ASbGncsCuMna86UFGpirwEYVhkb6rVerVOQA7MJJKTIuWEvUq0osX40hIz/mktMb+ga
+ hUd4NyTE/FTFWDxzzPU2INYgXKOGyrq4KPXu1c8/lVfrwLXM8evtwnQ+y+OFdWp6QUoaIaTRIJF
+ beARrTs+Kd8QKqEzvpB8+l4MtaUyJwbg/O4kpZlWG9huVkAOooSHlBe48amUqEFNF7b9pYc7/bZ
+ rtKxdPyd4pIqE7xiKKJbfi1TklA7UkcO5JyQQKbI0OKawQKgTGA7wHB2H8eclEXajD4qYb92Gff
+ 9RVjmtKDRe36UGK8a/ArnKSwPMiEOu9EciycC0jEwSXkSRIG5JsIoXpfTcEY8NYfddYlHd/ZuOu
+ ZaEMf38B+ZIX8zMUxZHGx6wdTggH2iSJS
+X-Google-Smtp-Source: AGHT+IEH+VjbN+0g5jWdpajWXrwCldZF6o9RRVwen+Tfbo8aONVSXh0IpQmby0nECIa+NZvLGY/ngA==
+X-Received: by 2002:a05:6830:808a:b0:72b:b8d8:3995 with SMTP id
+ 46e09a7af769-73a27134f5amr284834a34.19.1749766526591; 
+ Thu, 12 Jun 2025 15:15:26 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a283e3198sm7145a34.10.2025.06.12.15.15.24
+ 46e09a7af769-73a283e3198sm7145a34.10.2025.06.12.15.15.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 15:15:24 -0700 (PDT)
+ Thu, 12 Jun 2025 15:15:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250528194839.1206-1-mibodhi@gmail.com>
-References: <20250528194839.1206-1-mibodhi@gmail.com>
-Subject: Re: [PATCH] ext4fs: Fix: Read outside partition error (take 2)
-Message-Id: <174976652424.365589.1196549697218904051.b4-ty@konsulko.com>
-Date: Thu, 12 Jun 2025 16:15:24 -0600
+To: u-boot@lists.denx.de, Richard Weinberger <richard@nod.at>
+Cc: ddrokosov@salutedevices.com, sjg@chromium.org, tharvey@gateworks.com, 
+ ilias.apalodimas@linaro.org, kojima.masahisa@socionext.com, 
+ upstream+uboot@sigma-star.at
+In-Reply-To: <20250529150213.27149-1-richard@nod.at>
+References: <20250529150213.27149-1-richard@nod.at>
+Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
+Message-Id: <174976652550.365589.4489095631856636528.b4-ty@konsulko.com>
+Date: Thu, 12 Jun 2025 16:15:25 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,25 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 May 2025 12:48:39 -0700, Tony Dinh wrote:
+On Thu, 29 May 2025 17:02:13 +0200, Richard Weinberger wrote:
 
-> Use lbaint_t for blknr to avoid overflow in ext4fs_read_file().
+> Although if we we don't setup an initrd, there could be a stale
+> initrd setting from the previous boot firmware in the live
+> device tree. So, make sure there is no setting left if we
+> don't want an initrd.
 > 
-> Background:
-> 
-> blknr (block number) used in ext4fs_read_file() could be increased to a
-> very large value and causes a wrap around at 32 bit signed integer max,
-> thus becomes negative. This results in an out-of-normal range for sector
-> number (during the assignment delayed_start = blknr) where delayed_start
-> sector is typed uint64 lbaint_t. This causes the "Read outside partition"
-> error.
+> This can happen when booting on a Raspberry Pi. The boot firmware
+> can happily load an initrd before us and configuring the addresses
+> in the live device tree we get handed over.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] ext4fs: Fix: Read outside partition error (take 2)
-      commit: 53cc4332b3b37218a7cdab8bdb953da57eec2668
+[1/1] fdt: Make sure there is no stale initrd left
+      commit: 9fe2e4b46458f9c4ec6b8115ebf18b4b26fe6127
 -- 
 Tom
 
