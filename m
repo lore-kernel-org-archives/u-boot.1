@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCFB3C71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 07:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3AB9C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 07:35:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B02F82A4B;
-	Thu, 12 Jun 2025 09:24:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EEE2582A4B;
+	Thu, 12 Jun 2025 09:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="epikIPGG";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Lx+/sgFe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0439682B70; Thu, 12 Jun 2025 09:24:50 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id 08A6382B70; Thu, 12 Jun 2025 09:35:52 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2129828A2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 09:24:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2948828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 09:35:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 0A9CCA516B6;
- Thu, 12 Jun 2025 07:24:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E844C4CEEA;
- Thu, 12 Jun 2025 07:24:45 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id C3AF15C4153;
+ Thu, 12 Jun 2025 07:33:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FFD2C4CEEA;
+ Thu, 12 Jun 2025 07:35:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749713086;
- bh=dMYWPAMmb41SroqkvvkUTS38ccyPJrFIrc+m8Zy/Wr4=;
+ s=k20201202; t=1749713748;
+ bh=s7afy+qBFxLmt4OCk1r6+5OKxBZPNdvA3hpVA5R7pvE=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=epikIPGGdQpDkQnZ4RgGihkR1DeuFUy5URtfaVNdaLpevRFb/Gcx8vfJ3zv6mjh8Z
- 7mGiJ+cLy3NgKyLIEHGeeyxONJK/hHMhpEzKOcO6eep1N2ZSXXgF2PfsAZgdWNFRsN
- 9yqCeNPjXBfFDgcOpz/1zgJyPeBoq2djuauwHef+K7LursvcTgzlFBHlQkjAsvmC8I
- EW1oS5ikPejjSEEAkNhmK8V6MQYFJYAUsaZobJX7q8CiT++Akk1GDCM8sM8W4//0DV
- YKeaNFGkIxiMNAcH3Je/QVKPe/HqUnVgM0KZxzvOu5XLkgs9VRYtlBOOuL2FN6xavm
- BlTc6MbQXeiBQ==
+ b=Lx+/sgFehVRquivtEw7KjGxx+qjWJoWd8rAaP9pVcagwvW/P83+02YdXo6S9TSIjf
+ jVoClaZd/o8v0tRgmONiWAmtr96Mfqeng+b495hL8MxL+TR+/TwHzFkrJjvArODoCO
+ R5GIPTl0V7GU9tPg1c/YlyNDO1kDMOIyHjFBGhXaElGHHyErDf6lWzEThv/sRLGRQu
+ w2+W2Dphoe+6B6o9Ih3p2wr7AB9veiZptRlTAbb7sVS8JFDDXlvSmHCKpKiYL/OzhJ
+ YKTk4E/54hhX2eWp4h47fOEmmDISvRuyXwik6mQOuEpjT35OnwT2jmmvfZIkw/HOnp
+ ZvLc9QqfDJs9w==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>, Tom
  Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
@@ -49,13 +48,13 @@ To: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>, Tom
  Korpershoek <mkorpershoek@kernel.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, gchan9527@gmail.com
-Subject: Re: [PATCH v2 5/5] usb: gadget: Introduce usb gadget vendor/product
- default id for ARCH_QCOM
-In-Reply-To: <20250607-sc7180-android-boot-v2-5-2df5d7f61124@gmail.com>
+Subject: Re: [PATCH v2 3/5] boot: bootmeth_android: Conditionally dependent
+ on abootimg
+In-Reply-To: <20250607-sc7180-android-boot-v2-3-2df5d7f61124@gmail.com>
 References: <20250607-sc7180-android-boot-v2-0-2df5d7f61124@gmail.com>
- <20250607-sc7180-android-boot-v2-5-2df5d7f61124@gmail.com>
-Date: Thu, 12 Jun 2025 09:24:43 +0200
-Message-ID: <87sek5a0ck.fsf@kernel.org>
+ <20250607-sc7180-android-boot-v2-3-2df5d7f61124@gmail.com>
+Date: Thu, 12 Jun 2025 09:35:45 +0200
+Message-ID: <87qzzp9zu6.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -78,51 +77,69 @@ Hi George,
 
 Thank you for the patch.
 
-On Sat, Jun 07, 2025 at 13:25, George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org> wrote:
+On Sat, Jun 07, 2025 at 13:24, George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org> wrote:
 
 > From: George Chan <gchan9527@gmail.com>
 >
-> Currently vendor/product id are both 0, and that might not as we want.
-> Set to some arbitary known value that we can make it work more smoothly.
+> If target u-boot img do not support androidboot v3 or greater,
+> abootimg might not be necessary.
+
+Indeed, and this is already handled properly in ./boot/bootm.c and
+./boot/image-board.c.
+
+>
+> aarch64-linux-gnu-ld.bfd: boot/bootmeth_android.o: in function `boot_android_normal':
+> /home/user/sources/u-boot-next/boot/bootmeth_android.c:541:(.text.boot_android_normal+0xd0): undefined reference to `set_avendor_bootimg_addr'
+> aarch64-linux-gnu-ld.bfd: /home/user/sources/u-boot-next/boot/bootmeth_android.c:543:(.text.boot_android_normal+0xd8): undefined reference to `set_abootimg_addr'
+> Segmentation fault (core dumped)
 >
 > Signed-off-by: George Chan <gchan9527@gmail.com>
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-Casey, even if this is usb gadget, feel free to pick this up in your
-tree.
-
-Thanks,
-Mattijs
-
+Casey, feel free to pick this up through your tree.
 
 > ---
->  drivers/usb/gadget/Kconfig | 2 ++
->  1 file changed, 2 insertions(+)
+>  boot/bootmeth_android.c | 2 +-
+>  include/image.h         | 3 ++-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index 46a83141481..2a56e360b5f 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -60,6 +60,7 @@ config USB_GADGET_VENDOR_NUM
->  	default 0x0955 if ARCH_TEGRA
->  	default 0x1f3a if ARCH_SUNXI
->  	default 0x2207 if ARCH_ROCKCHIP
-> +	default 0x18d1 if ARCH_QCOM
->  	default 0x0
->  	help
->  	  Vendor ID of the USB device emulated, reported to the host device.
-> @@ -86,6 +87,7 @@ config USB_GADGET_PRODUCT_NUM
->  	default 0x350a if ROCKCHIP_RK3568
->  	default 0x350b if ROCKCHIP_RK3588
->  	default 0x350c if ROCKCHIP_RK3528
-> +	default 0x4ee0 if ARCH_QCOM
->  	default 0x0
->  	help
->  	  Product ID of the USB device emulated, reported to the host device.
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 8c2bde10e17..d7740b86d67 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -534,7 +534,7 @@ static int boot_android_normal(struct bootflow *bflow)
+>  	if (ret < 0)
+>  		return log_msg_ret("read boot", ret);
+>  
+> -	if (priv->header_version >= 3) {
+> +	if (IS_ENABLED(CONFIG_CMD_ABOOTIMG) && priv->header_version >= 3) {
+>  		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
+>  					     priv->vendor_boot_img_size, vloadaddr);
+>  		if (ret < 0)
+> diff --git a/include/image.h b/include/image.h
+> index 1e1bded690b..2c03dde768d 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -2038,7 +2038,7 @@ ulong get_abootimg_addr(void);
+>   * Return: no returned results
+>   */
+>  void set_abootimg_addr(ulong addr);
+> -
+> +void __weak set_abootimg_addr(ulong addr) {}
+>  /**
+>   * get_ainit_bootimg_addr() - Get Android init boot image address
+>   *
+> @@ -2059,6 +2059,7 @@ ulong get_avendor_bootimg_addr(void);
+>   * Return: no returned results
+>   */
+>  void set_avendor_bootimg_addr(ulong addr);
+> +void __weak set_avendor_bootimg_addr(ulong addr) {}
+>  
+>  /**
+>   * board_fit_config_name_match() - Check for a matching board name
 >
 > -- 
 > 2.43.0
