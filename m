@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA742C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E26EC71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:36:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C1F182BD9;
-	Thu, 12 Jun 2025 16:34:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AE1582B70;
+	Thu, 12 Jun 2025 16:36:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dxw+EUU7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cpLWCWrW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B64282C4D; Thu, 12 Jun 2025 16:34:58 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 3008F82BD9; Thu, 12 Jun 2025 16:36:48 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74252828A2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:34:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09B3D828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:36:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7304efb4b3bso668904a34.0
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:34:55 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2ea080f900cso192821fac.2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:36:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749738894; x=1750343694; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S5yxgcxATPYoQYruSw+kcCZgVrT6UdsLgKCWe4s9C0Q=;
- b=dxw+EUU7LwMZp3XGBitRzjM2sIfSh5B41x1sMQKTkUSV7OO8gzsr11kL89fFElxHVX
- COiEM+JfvXbF025oXIXBO2MmO3/rzrOljLW53tSPflHkA6sjV/alvVnE/jPqc4+SRQ+j
- MeKt0QveOU2hPlcMEZK44yhCjgqaz4VJUGt00=
+ d=konsulko.com; s=google; t=1749739005; x=1750343805; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iJxfwX86ce3mvv2DI+VS0TQ2iPy79uTjG1A45sNjTMs=;
+ b=cpLWCWrWbaApGbfBM91HTN9mgJtJXiQKtDcml5LqdQ3ey/MBb7JAlaD3TdZH6pRgkl
+ uTQ2uOvC2DAf3IBzAgE3djSHuhwwbzdr6Im8af13o5wMCUR8wZRecOz6eatOTl2Db96q
+ QcWdAkCV/8bPCT2Wv4Jg3iGDQw80JNIf+l8Y0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749738894; x=1750343694;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S5yxgcxATPYoQYruSw+kcCZgVrT6UdsLgKCWe4s9C0Q=;
- b=k4+LKYTPH/CrcIJXcbYJjqsxtYzw1i962F0ITP0ZlOkqeiBmAqeRR800MK2EH73OH6
- ndF1vaxCipFrtgbBrxrnW35/A5xU3mqgaS+v2mFO8x9tWPHmDdKdAsG8RyVglYzC5dPv
- D3lMlWrkmhkrYZ2mU0/cSCBhotQcEr7luGaXl97phyt8CFFgNlrM617k0GyFVdf9PpIC
- yyUJDcd8/55WgBD2kkddmHoxE4X7Wo9tXCnCsrl41ZA7YpNkTO90HFX0pBRs94paP8d6
- gx7zxWCDG7MjaYegPtmmaMHgDHyATgIAflrKPayQ87mV3fnKSIqdMyO4iJ7rUqPkT2Xj
- tAXQ==
+ d=1e100.net; s=20230601; t=1749739005; x=1750343805;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iJxfwX86ce3mvv2DI+VS0TQ2iPy79uTjG1A45sNjTMs=;
+ b=JdK8hqp7GwmUE62R+AgRJdGPmLX9x0L9/GcAx2MRpEWAUrpykcGuXOyoShzQXSRQrF
+ p9V+vFYhslCyJfSewLMQJIpSCTAVBAKs8R8cEacq2V+pmpNQE0LhHyiscBcn/fMWpXYb
+ TP7rb6ldRG+Oz8RruJLoL1opNC5pAS7viUUqn+q8w56fGZI8VzAybYSlOwoM/V0a8lDB
+ 6vH5Wm1vrPlHCuCu4TNyyjg0PA8nRaSvkVCjOmnbXBccl/WLY4W4kqa3ns0XnQLXhmFf
+ IoCAqL8SYATcU5FyLiINO+T91sikytLRmEVKp6EMQjHfCa/bjXWhYBc4gFYrFbfUORf9
+ tUBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaiWOl9vX0StxzQxinOlCtgosdwKgj+CafXYWN3YCYsjIUZto19GwpL67jl/iIih8MUN5GNZk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yym16UGIRNqf7coY+zTQX4IORiV0UpfxjOadAFzW0Br+47TWvGc
- 3xle7II1yoHpDXbga3CEoboLkTokkFpWvf66QNEUk8AsODmLdetAOaSJDDQIC0CgY+nZCcKT5mg
- e53GHtYY=
-X-Gm-Gg: ASbGnctBOH9R0yoaubRnysPbZgxEbso886D/Kmy1zMK3ullG1kk6wTLIptoJ+/jOcFi
- xiIDdXDOlUofh0Dr3AetnC639jMTDR8wTMZJQR9/KZ9GNys4wLrQ1EHzUz649i3EeaT1SVNEmqL
- vOsUZHiIZUDvtZWy9aeXeUHKPsP3eucHQownVLzRC1PHH6FYLXet4CO9G+t/0PHR5Een9GZoqzL
- NWvoIecUrlGrDSZ7g5L5Rd7l9/mE5NwFU8bYLWDZKtl92xwTDam6dQUTfm8UvpHnZgcDBXTDj4R
- +Lr0UgicN34KEo4S2JxI+mZgmtvAssChlNRXq2GAv2uIJ0aOo8Wecoa3fzK5JF/9b869O0pBYh9
- 0EDK3Cre3XA99u7fuTrZsGQ==
-X-Google-Smtp-Source: AGHT+IHob5vMPFHH1b02aGZA/po/67jem8SM1xdYmAxB0Z4Zna+hxyAWDkyVBEFMvGzTAlrs7PZDLw==
-X-Received: by 2002:a05:6870:46a4:b0:2d6:209:8a6 with SMTP id
- 586e51a60fabf-2ea96bbae67mr4379760fac.2.1749738894141; 
- Thu, 12 Jun 2025 07:34:54 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ AJvYcCXR6gLJX5Jo8ztWyDvCaB1BD7VwbDWMnTPysGSsj076zVCPxwrbiKqA8eFHSVqoaSLQiFD5LLY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1Pblufx/5wylOw8DbmsSvkFjYom+ipdlHpK58AipbcDg7fJlq
+ hyqEjGXI3jUSJwWFyA99cuq7DiOaBrPdrpLolLXRCwoUT5E1rCveUwie4tKQ/LyBWm0=
+X-Gm-Gg: ASbGnctlOfR19r5bCxrH3pZmgrI6VPHWtNr9R/URlKyfa4+8FCwX3Ya9Ry7HESkwDA1
+ eF0nf5FSPBSpV3qlSeA9le2GW3qDydcHMpecD5wU3HiA0oxJxTBLXkKBPWE2g+JZZsdwIRDrDui
+ N/rBzj+9p5uCne5R3Aeh9rAMyGSGDHv4TNnoSkCmyJcy6q1NjVmK25eFXBwpfD01pqWFArua4pG
+ fcChrwFoD0WzYWXIDW0VHvP6wT4c/cvSAQprXXOVPNV4N4+20zow2bJiBL2k3eG+/tn8NdJm09T
+ np6wd8THNyFUihYCg/ht2jazvDQidgSe9D3Q6kgMa7ECCvtyTINvaR7ai2+MBpcE0U/SENDh9ak
+ ZCU7bxoZu9xZnt752/GsAgBbaOtvCBQGQqw==
+X-Google-Smtp-Source: AGHT+IEZOE3oDlHuD8ADYuBsiz92LLvu4ZkGJWZsF7VH6teGdZ4MMC8yLq0bEVBq9hetQtD0qG3AlA==
+X-Received: by 2002:a05:6870:844e:b0:2e9:9b1d:d11e with SMTP id
+ 586e51a60fabf-2eab43f4ae6mr2065322fac.38.1749739004671; 
+ Thu, 12 Jun 2025 07:36:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2eab8de67e9sm319217fac.30.2025.06.12.07.34.52
+ 586e51a60fabf-2eab88aece2sm316018fac.7.2025.06.12.07.36.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 07:34:53 -0700 (PDT)
+ Thu, 12 Jun 2025 07:36:43 -0700 (PDT)
+Date: Thu, 12 Jun 2025 08:36:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Prasad Kummari <prasad.kummari@amd.com>, 
- Michal Simek <michal.simek@amd.com>, Yao Zi <ziyao@disroot.org>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
-References: <20250611202449.2317279-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v2 00/13] Update the kbuild system to 5.1
-Message-Id: <174973889260.204623.16659773282498326479.b4-ty@konsulko.com>
-Date: Thu, 12 Jun 2025 08:34:52 -0600
+To: frank-w@public-files.de
+Cc: lucienzx159@gmail.com, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com,
+ u-boot@lists.denx.de, joseph.lin@airoha.com,
+ wenshin.chung@airoha.com, lucien.jheng@airoha.com,
+ daniel@makrotopia.org, ericwouds@gmail.com
+Subject: Re: Aw: [U-Boot, v1, 1/1] net: phy: Add the Airoha EN8811H PHY driver
+Message-ID: <20250612143641.GL1382132@bill-the-cat>
+References: <20250511051400.29853-1-lucienzx159@gmail.com>
+ <trinity-e740c5ff-b6cd-404c-82c4-eaf0642a13a6-1749722988086@trinity-msg-rest-gmx-gmx-live-b647dc579-66mhx>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uEr5xwA1um3XmV8F"
+Content-Disposition: inline
+In-Reply-To: <trinity-e740c5ff-b6cd-404c-82c4-eaf0642a13a6-1749722988086@trinity-msg-rest-gmx-gmx-live-b647dc579-66mhx>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,48 +103,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Jun 2025 23:24:27 +0300, Ilias Apalodimas wrote:
 
-> Another series backporting and merging patches from Linux 5.1 kbuild.
-> There is still a gap that I plan to update after this series gets
-> merged [0]
-> 
-> [0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/commit/5da099cef04fb5c02dcafab8d1bab8ddc2855765
-> 
-> Changes since v1:
-> - Rebase on top of next
-> 
-> [...]
+--uEr5xwA1um3XmV8F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Thu, Jun 12, 2025 at 10:09:48AM +0000, frank-w@public-files.de wrote:
 
-[01/13] kbuild: add -fno-PIE flag unconditionally
-        commit: 7e81e690d7276283d4a4d988fa47e0965c62c433
-[02/13] kbuild: add -Werror=implicit-int flag unconditionally
-        commit: 0ebda5f1f0c96679a7d6d365016ca9294a1c5dd9
-[03/13] kbuild: use assignment instead of define ... endef for filechk_* rules
-        commit: a76fb6981fb502717c7a5b7a601ef5c4c4dc17a0
-[04/13] kbuild: clang: choose GCC_TOOLCHAIN_DIR not on LD
-        commit: 3991f85e4cdcd721c91d376468e5396504e2199d
-[05/13] kbuild: use -Werror=implicit-... instead of -Werror-implicit-...
-        commit: c4a52fbb674cce8b85d9a9c62ba718de7803e176
-[06/13] kbuild: gitignore output directory
-        commit: 156fdc57f7a2d7ab578c8c52c3eb1108d6e0af4e
-[07/13] kbuild: remove meaningless prepare2 target
-        commit: 931f04a85ad40cc4f96feec1cdd05e0c44cb3bf0
-[08/13] gcc-9: silence 'address-of-packed-member' warning
-        commit: 057a53b570a6896b9337169645f6b2cc8d0d218c
-[09/13] kbuild: do not overwrite .gitignore in output directory
-        commit: d1b6489ef11bc89145e9fcf1d0f05d89a934e410
-[10/13] kbuild: skip parsing pre sub-make code for recursion
-        commit: 27529f1cb02d8a55ce8de594f15a8d9e7aec0bb8
-[11/13] kbuild: mark prepare0 as PHONY to fix external module build
-        commit: 4a247d1376302ebdb05af3a15a1788b987d53a1a
-[12/13] kbuild: make 'archprepare' depend on 'scripts'
-        commit: 45acf56e59a38275fcd4662eb005d910f65df4b5
-[13/13] kbuild: fix single target build for external module
-        commit: 070b81458aec02f0cde69f87b28fa82c5bb8e906
--- 
+> > Gesendet: Sonntag, 11. Mai 2025 um 07:14
+> > Von: "Lucien.Jheng" <lucienzx159@gmail.com>
+> > Betreff: [U-Boot, v1, 1/1] net: phy: Add the Airoha EN8811H PHY driver
+> >
+> > Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
+> > 100/1000/2500 Mbps with auto negotiation only.
+> >=20
+> > The driver uses two firmware files, for which updated versions are adde=
+d to
+> > linux-firmware already.
+> >=20
+> > Locating the AIROHA FW within the filesystem at the designated partition
+> > and path will trigger its automatic loading and writing to the PHY via =
+MDIO.
+> > If need board specific loading override,
+> > please override the en8811h_read_fw function on board or architecture l=
+evel.
+> >=20
+> > Linux upstream AIROHA EN8811H driver commit:
+> > 71e79430117d56c409c5ea485a263bc0d8083390
+> >=20
+> > Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
+> > I have modified the relevant process to align with the U-Boot boot sequ=
+ence.
+> > and have validated this on Banana Pi BPI-R3 Mini.
+> >=20
+> > Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> > ---
+> >  drivers/net/phy/Kconfig       |  43 ++
+> >  drivers/net/phy/air_en8811h.c | 852 ++++++++++++++++++++++++++++++++++
+> >  2 files changed, 895 insertions(+)
+> >  create mode 100644 drivers/net/phy/air_en8811h.c
+>=20
+> Hi,
+>=20
+> is there any progress? i see no review or apply (+tom in To-header).
+
+I'm not super thrilled at the concept of having to load firmware from a
+filesystem. But since we have to do this anyways in other cases, is this
+something we could be using FS_LOADER for or no?
+
+--=20
 Tom
 
+--uEr5xwA1um3XmV8F
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhK5fUACgkQFHw5/5Y0
+tyxb3wv+McGjKlG2BpKkVQLhksZNPhhrbK5tZOfl/Sfn8xwE3iVY9Dg4qEbWtMx0
+M9vAgKsPSdi/zfBf5wtqQ95E2QovH1sPOtYbeARWQgZTjRawzuWHTZVENjwtVDU5
+sxJCjsSCbeBEnFX5OiogIcB79iYkM0+Necm47g8DRjq0Q5S1PL1dWgnoqDyJe3kY
+7mjJNNXgGZ2KZx3Gj3KMP9An+ZdLEHNTAVBoV02in8AaUWAvVHbGvvHEOYC1cHMg
+m4x4wAwmQMNIREXTCz4+rT58bRMwhqsXYjdybuvqRiX6Z2B3i61o3/kOSiLMvdTW
+LeBVRpmSW4Uufw/B7OWK3Spso1GcoVE4IhhcmfOclBxJ7DgSNIxKfxVHhghqKyt9
+gTrJwPvytgww540kI4enrzaoNaGM5NqK4Qa1qfwmsBeYJ60/BwDvoe+UUlw8Ahw9
+yEIJmtCC8e+0FK0HnhjD6s+YKs7bCvH2IoiwsGHaKptTsKMz225F1P4XSLlIrH2j
+3VYkPMR3
+=jDc4
+-----END PGP SIGNATURE-----
+
+--uEr5xwA1um3XmV8F--
