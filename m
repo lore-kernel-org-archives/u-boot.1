@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E30CC71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 11:39:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 645C6C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 11:50:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FE1482CCE;
-	Thu, 12 Jun 2025 13:39:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B3A582C49;
+	Thu, 12 Jun 2025 13:50:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="d7XVI6qw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Okrnvx8+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B095A82B7C; Thu, 12 Jun 2025 13:39:11 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 681F182BD9
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 13:39:05 +0200 (CEST)
+ id 4F25082C4D; Thu, 12 Jun 2025 13:50:33 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 113A482BD9
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 13:50:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55CBd2552850814;
- Thu, 12 Jun 2025 06:39:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749728342;
- bh=uEg24meS1EWX9gpaYillmSZRp3SPjY75Igt0ZL9tmFY=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=d7XVI6qwyoBu+NauLhE1iH4liO1AlcurKSicRAuOiNZFzn0JP3JkMJYm1bY0DYTOX
- zvB4DvlRw53s3Dbmcpah5X0c6za0F99H549nFI9irpjczzAbT5740WKheedQyWZzlj
- sqL/V3fOfoheICIr2p+1/M9Nt5iO2lcBV0A/ipgQ=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55CBd26h1905288
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 12 Jun 2025 06:39:02 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 12
- Jun 2025 06:39:02 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 12 Jun 2025 06:39:02 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55CBd2f01922437;
- Thu, 12 Jun 2025 06:39:02 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Thu, 12 Jun 2025 06:38:54 -0500
-Subject: [PATCH -next v2 5/5] binmain: include ti-fs-enc.bin into
- missing-blob-help
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=heiko.thiery@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-604f5691bceso2036029a12.0
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 04:50:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749729030; x=1750333830; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xnn/F4EmHY25MKaMFAODq3YRa+JVpBeXzetVL7xAt/w=;
+ b=Okrnvx8+c1+6KqId1O0plDIM6WXVrn9+xil9RG1QMwRUCiT1el1kcrKrB42CUWiyO4
+ FF+evij4sxnNOemc70a5/8JigWaoEizXzrCNhN2M79+JBTxaypj/HwTU8L7X9yOFHLnc
+ xuETTEpGMDyVDbqPQifQGcSw80a5Cx9fQujXi5H1duqNCrzCIRYPaAGnnGhMUFV+tZmx
+ nGfnYKyJ4IuzC5Xty+rNtuNQnWkPbzDxwcLezYFGD3TSb6ueqpSVYuEZalAstALfmUSi
+ 2Kej2x5w881taHLvmmLcd8LFArOh7f18PCwpepd1uBvKICtUcQTsBU8Mr3650+pjRlRu
+ 4Q7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749729030; x=1750333830;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xnn/F4EmHY25MKaMFAODq3YRa+JVpBeXzetVL7xAt/w=;
+ b=XLnNn+0/2kaKjznrLFhl06CFqhl1Dp/rOq3wTmoUNIwHCL5ZUv3G7qn9I7lWqkcxLe
+ Y6bolQIYtQDUJf7XikHefCyPcJOMtq1qrrZrZGlAlZ+xoj0CgcFZW+WrIFsyMFgfaDoy
+ ddrxpBTxkS2A8b7drHVRm4DMIkEy2SmLxd/eSkGlV0wIm0kQIJlr4p+93bRSDfdJE2LA
+ tFYZ36+qapDLf4Py2JT1ZQEcxClPHG67uWZ3N0GVmJSjZc5z8GfRxoqaVMa1DOkfmbwQ
+ 36RaMJ/CQaL3edWio3cEixJEGTKYGFPa30BqHFPCB/tzNrCrs4aQJGlTn16q6Cq3YJ34
+ Jvrg==
+X-Gm-Message-State: AOJu0YyUuW5xm5lNK21d2pDrJXGBtPRSxNrdC9GKqhSdStPs0c2Gsa7o
+ mVX6Oxo6VAncZWBL/YMfaFYShs9X3GL01Tc3YppeTybJtaUFNGOzDS4KoZ1+34nq
+X-Gm-Gg: ASbGncvlNVsKKb1/szzPQZ0Wec0vWcXGyU/rGbQLcXbv194RZ+oDyPIaMENr+jOmPMk
+ DWBGSxcgRkj0wk8yOYkv9i/zRPoYDOYDqChPR/o9Hq/gQ731Fm0wJoXd+XqL+Tqc5L7T7GEBz3c
+ Z1r8klDcP6mGH75gmc36gF66QM67kpFmmG/YWapFTF6rmmASKBIPLDJ0l6U1NVCOy7vUJJJPm6R
+ 7Cz6SLW9TOkjH12HZJrS6ae7pLuZrf3+7Jz1WnjneIswrTQp48E90YtHSDxg+5ku/na9lvpbvQT
+ KU+VdEsLk24xxfjQ8VNNK5A8l2d393CiZG2Y/l6V6SIQ/pNsJTu/8aEmo41q1tAGzehuzwqLipv
+ zQBc=
+X-Google-Smtp-Source: AGHT+IH1Jvl6T+NxWIFuHjKcFjWwGmQnmnkmPjZSF+aM2pyfnNreDVWIlXPFlxcx108UJTmc28Bapw==
+X-Received: by 2002:a17:907:9447:b0:adb:33d9:67e5 with SMTP id
+ a640c23a62f3a-ade89734f5cmr778671166b.38.1749729029614; 
+ Thu, 12 Jun 2025 04:50:29 -0700 (PDT)
+Received: from hthiery.kontron.local ([213.135.10.150])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-adeadb8b74bsm119824166b.124.2025.06.12.04.50.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Jun 2025 04:50:28 -0700 (PDT)
+From: Heiko Thiery <heiko.thiery@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
+ Heiko Thiery <heiko.thiery@gmail.com>, Keerthy <j-keerthy@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Michael Walle <mwalle@kernel.org>,
+ =?UTF-8?q?Thomas=20Sch=C3=A4fer?= <thomas.schaefer@kontron.com>
+Subject: [PATCH] mach-k3: j722s: enable caches for the SPL stage
+Date: Thu, 12 Jun 2025 13:50:15 +0200
+Message-Id: <20250612115015.266601-1-heiko.thiery@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250612-missing-blob-help-entries-v2-5-36f1c8078155@ti.com>
-References: <20250612-missing-blob-help-entries-v2-0-36f1c8078155@ti.com>
-In-Reply-To: <20250612-missing-blob-help-entries-v2-0-36f1c8078155@ti.com>
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1280; i=bb@ti.com;
- h=from:subject:message-id; bh=xOavI7EFFIkG5/FYYFW1FFvYGLRq3urmpOZdWvKeNQg=;
- b=owNCWmg5MUFZJlNZk8PmsAAAbX///7/rv7f07K63P7aX8VW/d/tv+e6Pvvf33nv59rDj+e6wA
- RtqMZIAGgAA0GgMhoANGgNGgNAaZNAAZAaGmQGjTRoAHpAYTBGmmnqaMJpvSIg0aDTEaDRiaBpk
- 0DQAGTQaDRoZB6Q00DQ0ADRp6gbSNNGTTE0NBkaaZDTTQxDQ0ByaZBo0A000xBkMQMQYINNBgQA
- AGAgxMQ0aDEZNABo0MgaaaAAAyMQDB1gU+HIRKhVESNpHc1EHIkSR8gFWr1Inx9B8lfjBADokOs
- B3Qwn8OV1GPz2Q464GwKm9d7l0Yag+CMBWH6ilhXyueODIj3jfkAgolgb80nfiXwNQXZpgOfsnF
- T4PX4RbFMZ9adDRmtrzbuB7rZPBIgLYQd9tmcNrTCQIwTjlYh9cod8aP3CWFvxuf/gzUpD1zJ2i
- T6+Udf+WAnbhfNxZg60yeNUeZv6SqQDxwHQk1eNxglogR78qdYfQ5cug7iLVCmY/zdfKCAaZyRS
- SvvFUXSk07BmgZ2Cpr7N1loPvQxCG5XIisYMOMjgukdXIQC67EjkMmXbIzjYyEbuIUAC54AjXUY
- TzRjRSYrUaVgkrQpHueg0belFuMsWBQYtG0hlWpe3TYPwmhjil/d4gGAC1/Fc9LvlAmue8lVWwo
- 4DgBk0IZOhv7/F3JFOFCQk8PmsA
-X-Developer-Key: i=bb@ti.com; a=openpgp;
- fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,35 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the TIFS firmware is marked as a mandatory component to a
-successful build, provide some helpful descriptions to what it is and
-links to more information about how to get this needed firmware.
+This is same as done in 27cd65ca1bf1 ("mach-k3: am62ax: enable caches for the SPL stage").
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
+This is resulting in ~2x speedup in the A53 SPL stage.
+
+Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
 ---
- tools/binman/missing-blob-help | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/arm/mach-k3/j722s/j722s_init.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/tools/binman/missing-blob-help b/tools/binman/missing-blob-help
-index 3b16a9b1679c4d3003da08c8a49c7acee2293538..d2ed35bef4d05abbb3a8e54e5db524e848676c53 100644
---- a/tools/binman/missing-blob-help
-+++ b/tools/binman/missing-blob-help
-@@ -70,3 +70,14 @@ Have a look at your board's documentation to find the latest version of
- the DM firmware binary and how to include it in the build.
+diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
+index af211377e7c..591aa1d60d5 100644
+--- a/arch/arm/mach-k3/j722s/j722s_init.c
++++ b/arch/arm/mach-k3/j722s/j722s_init.c
+@@ -162,6 +162,8 @@ static void k3_mem_init(void)
+ 		if (ret)
+ 			panic("DRAM init failed: %d\n", ret);
+ 	}
++
++	spl_enable_cache();
+ }
  
-     https://docs.u-boot.org/en/latest/board/ti/k3.html
-+
-+ti-fs-enc.bin:
-+You are missing TI's Foundational Security (TIFS) firmware which is
-+critical to provide foundational security services like authenticated boot,
-+and firewall management for the SoC. Your board will not boot without
-+this firmware.
-+
-+Have a look at your board's documentation to find the latest version of the
-+TIFS firmware binary and how to include them in the build.
-+
-+    https://docs.u-boot.org/en/latest/board/ti/k3.html
-
+ static __maybe_unused void enable_mcu_esm_reset(void)
 -- 
-2.49.0
+2.39.5
 
