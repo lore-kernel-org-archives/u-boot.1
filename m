@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35066C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 18:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4119C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 18:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A79F82B97;
-	Thu, 12 Jun 2025 20:14:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7AF882B97;
+	Thu, 12 Jun 2025 20:37:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9J03VQ2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mUkTrWwo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAF0B82BD9; Thu, 12 Jun 2025 20:14:38 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 55A1082BD9; Thu, 12 Jun 2025 20:37:10 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BAD682B70
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 20:14:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8F9082B70
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 20:37:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-408d7e2ad03so814825b6e.1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 11:14:36 -0700 (PDT)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4067b7d7e52so345115b6e.2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 11:37:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749752075; x=1750356875; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749753426; x=1750358226; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lch/RGzornpRKRDL1vMJJ9IClso0onGcKPcYik4ykVo=;
- b=M9J03VQ2fmH2ki9C4RWty/gOhDYjimsS7V6B4YQRZnaI4QbPJoc7vaiByWGqq1SWcU
- 8HqiFPI4HhIxIB+GM0lyqv2TmZkgIT/ETZu4xcEb//jmDZCuQzjf6wvZQdAXrW7DyY/7
- P0lQ9Tq3iWMOUdBxCanFm5D+HP9BRl7P2eDBo=
+ bh=iK1rKKAykaV5B9B7Aqqb3DQxNDb6ZRK8zkxWJxpi6uo=;
+ b=mUkTrWwoggJcdR4xYGL37SGvjK6G9ZcyWIMKilqQ44MTgWsWyWuyNGn/j4vrBCEG16
+ HT1PdjBfPh7xDDtnyAcS/LNCaEPQSmNFEkJ2NkNsrsfg7/NSCDfln71q2NDPKAStc1fd
+ s5iivkvp+MNvtYYuQdvu8k0lBA9K00D92JxHw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749752075; x=1750356875;
+ d=1e100.net; s=20230601; t=1749753426; x=1750358226;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lch/RGzornpRKRDL1vMJJ9IClso0onGcKPcYik4ykVo=;
- b=KyDGrrGRFlpa7r6cCc2ynQFQbCNC8F/fbT2owey+28vH+iJA3UO/6TDSwaleKEvfSS
- ZI6M71AWQowawN6Pm0zl1/Ndc9wyr4EuUWm2USLFTjMydB3JG3uLuo/BXVo82+9PLjFL
- PKQiigh6/jVfMfL3Y16TndZnm4yYBGcanCaznL+eWOdbUCMp1mT5c/HTbZT3+XKC0Amy
- ulFi6XTbURIWngV8TjPZNzaI1Kn2giH5Q6KjDV+Z3Y3n/J6a6fpICw3vmrb6f7+Gv8H3
- 4J8D2KtDdF+aSfxfFxouPEXmrfAaQAGubCL9YBGY9wgJ4Ym3S29h+rjAx6xYQn33hTB2
- gudA==
-X-Gm-Message-State: AOJu0Yzl9udXVlSSn1Rta8TXrHcvBevoUHTtof8npfjEF2KBRRPWvj8u
- SxMFUBXPUqRS3W79KNTcnFYOxdMpe/lP3k4U7g/JZvr7Leu8llEVNlBt9qRxo5lq86w=
-X-Gm-Gg: ASbGnctI8zxJEpewLc+mdhRQdJLaHR56QofVbfuC706bsAQP86o6HB1eakNRaSo4QS6
- twv2vBlFFDuDoVvfM8qb9M9/xMzpRXf66zIi68zv/dxSdZNNZn0+W1q9YvZyL+9+du0Vr6+kWmv
- 1J1pjUOC2tk3SdfUts+F2QVKRZAXcdIxpfvZr7bQ8CXOrrVnreS5pjxmGyibaPtXVuXkrJWQtQA
- 3a54w7tu6mPLNp8KotyrC/RgDnLeFy1CDD4PhLw75E6w48GLpVFBJRe0i7NPMe6MhFXVp+/9fzP
- rP6SJHtXgfWRML+YIbh+eg2C3f9dCrwbOmI7eGoUI0CoFV+dTBgWsYuyJam8oqgDoHlsrOl7paz
- cazoIqkAy8ixrnxZD09wHzAg=
-X-Google-Smtp-Source: AGHT+IGjUbLlSm7WN8EOnWaDS/ef3tugpSs7L/gvAmnd2ovEF69tWMZjAAQZYmNTpoQAcLQ6hroSoQ==
-X-Received: by 2002:a05:6808:228a:b0:405:6b13:ca55 with SMTP id
- 5614622812f47-40a71e6ee79mr295863b6e.37.1749752075032; 
- Thu, 12 Jun 2025 11:14:35 -0700 (PDT)
+ bh=iK1rKKAykaV5B9B7Aqqb3DQxNDb6ZRK8zkxWJxpi6uo=;
+ b=bMUL/t/TuZX5/xk/td3F58/tqRqDXyyUyGM6ROcph9qnGC/KLUU6XpxgDAUI9sBWbY
+ Vr+InLvPAw+Q6jmbsnMDe7Nx+SkMuQ071rpy7L8eU6hM4Zu48KWEF7X8Oc3PMs310SWh
+ rsGi8IRxFkjrbEvjDDFCbfr9SDV+Rb+svjkGneAwb0Y7boNPQeUbxU3ZQKzstAneSkMf
+ +wN1VER/GX6Q+LLquMuxrvB+yG3AmZ2aXxulo+zHwTJdqUMbZQT8Eb79tJ5N8Xe7zR9V
+ WnsGqvNQphFQJk2xutvNZ0Gj5/ME9uKFmB9e5mXBkjjkM2Cwmz+NonQvoh5HUP+Fn08+
+ bJSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6zQu3lwh/CtuOFJAdTTVko7jrud/AU2mcpswZpMwqwFW1kvbtxfa6SB1sIjWLOBReAXYWRoE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHJJkth1ROEyqL3c67fjQrUP6wsHvdI032pEPH490R5h4ukMdv
+ HccJKf+4vjWrh1Nek0worEXdMV7y/EvhnixehKDGIjEX6Vjgf6YdDVd/RlN3Nquk1DA=
+X-Gm-Gg: ASbGncvPgY/+MkWySFXgD4fYfZZRmc7uwyki9T9h4JKrnDyjaPsFtvl6gGGNqWqg4LX
+ 4q2vKwsYBOvABA3WPSf616FQr4AxPzlEWr8+4yT5WT6rDIhHGegZPes6Ht2nFZIkJbjRsY90Ijz
+ lheOMUtXvc91OACUJj5cQ1fMezAuj7LiO+M3+oFQXLwuyF49KShq4Q7dAxwr8eY+8jPWOMDUAEW
+ aXztOdTvcd4mnqu5UpqCBcmqxWXFxa3UeygN6iG/zCSHd+XwUCmQ5kQFRl46V58TNoqOB0JMkgM
+ LTtpfqcoxpMKjcbXzXjMXTV57ZvAslxBMX98CgSCZg4RUqG2/I9rRzMPJmqoz0sEIrYuxkka2fs
+ SJqe2OA6nMPHO1jiZez0SsCE=
+X-Google-Smtp-Source: AGHT+IFnauO9QGc9AlZz6o+QFYmOJPKaTLWOJPrE6vhJbiL14bS9dS+RTSiMKX2HKf7anxG5Q5X7ew==
+X-Received: by 2002:a05:6808:179f:b0:401:ea99:54b with SMTP id
+ 5614622812f47-40a71e82258mr301372b6e.23.1749753426562; 
+ Thu, 12 Jun 2025 11:37:06 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a6822f829sm392159b6e.15.2025.06.12.11.14.33
+ 5614622812f47-40a68329d14sm401106b6e.50.2025.06.12.11.37.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 11:14:34 -0700 (PDT)
-Date: Thu, 12 Jun 2025 12:14:32 -0600
+ Thu, 12 Jun 2025 11:37:05 -0700 (PDT)
+Date: Thu, 12 Jun 2025 12:37:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Rick Chen <rick@andestech.com>, Yao Zi <ziyao@disroot.org>
-Subject: Re: [PATCH, v2] bootm: Pass SMP core ID and DTB address for
- ELF-formatted kernels
-Message-ID: <20250612181432.GU1382132@bill-the-cat>
-References: <SY7P282MB567599431AB1E77FD46913549F74A@SY7P282MB5675.AUSP282.PROD.OUTLOOK.COM>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH 1/3] dts/upstream: write fdtfile path to /chosen/fdtfile
+Message-ID: <20250612183702.GV1382132@bill-the-cat>
+References: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
+ <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DD8eYFaTcZp+nTY9"
+ protocol="application/pgp-signature"; boundary="44rLWzwNWvLfA7sf"
 Content-Disposition: inline
-In-Reply-To: <SY7P282MB567599431AB1E77FD46913549F74A@SY7P282MB5675.AUSP282.PROD.OUTLOOK.COM>
+In-Reply-To: <20250610-b4-fdtfile-from-dt-v1-1-aec4df0fa53e@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,70 +103,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DD8eYFaTcZp+nTY9
-Content-Type: text/plain; charset=utf-8
+--44rLWzwNWvLfA7sf
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 12, 2025 at 09:08:50AM +0000, =E7=89=9B =E5=BF=97=E5=AE=8F wrot=
-e:
+On Tue, Jun 10, 2025 at 06:23:33PM +0200, Casey Connolly wrote:
 
-> When booting RISC-V ELF-formatted kernel images (IH_TYPE_KERNEL + IH_OS_E=
-LF),
-> explicitly pass SMP hart ID (via a0/argc) and DTB address (via a1/argv)
-> to comply with modern SMP-enabled kernels' boot protocol requirements.
-> See https://www.kernel.org/doc/html/latest/arch/riscv/boot.html#register-=
-state
+> Since we're using the upstream file structure, we know at build time
+> the path to each DTB that we build. These same paths are used relative
+> to some (maybe version specific) dtb directory on the boot partition
+> or ESP.
 >=20
-> Signed-off-by: Zone.N <zone.niuzh@hotmail.com>
-> ---
-> boot/bootm_os.c | 11 +++++++++++
-> 1 file changed, 11 insertions(+)
+> By recording this path at build time and embedding it into the
+> devicetree, we can set the fdtfile environment variable with 100%
+> certainty that it is correct.
 >=20
-> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> index a3c7cb5332e..d95477f1344 100644
-> --- a/boot/bootm_os.c
-> +++ b/boot/bootm_os.c
-> @@ -402,6 +402,17 @@ static int do_bootm_elf(int flag, struct bootm_info =
-*bmi)
-> if (flag !=3D BOOTM_STATE_OS_GO)
-> return 0;
-> +/*
-> + * Required per RISC-V boot protocol:
-> + * a0(argc) =3D hartid of the current core
-> + * a1(argv) =3D address of the devicetree in memory
-> + * https://www.kernel.org/doc/html/latest/arch/riscv/boot.html#register-=
-state
-> + */
-> +#if defined(CONFIG_RISCV)
-> + bmi->argc =3D gd->arch.boot_hart;
-> + bmi->argv =3D (char **)bmi->images->ft_addr;
-> +#endif
-> +
-> bootelf(bmi->images->ep, flags, bmi->argc, bmi->argv);
-> return 1;
+> Devicetree file names are already treated as stable kernel API upstream,
+> since they are used by OS loaders extensively.
+>=20
+> Embedding the path into the devicetree itself just simplifies the
+> process and allows U-Boot or the OS loader to select a devicetree of a
+> different version for the specific board that U-Boot is running on.
+>=20
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 
-Something entirely ate the spacing, please repost, thanks.
+My biggest and really only problem is that you need to work with
+https://github.com/devicetree-org/dt-schema and to get the chosen.yaml
+updated with fdtfile and then we can go ahead and do whatever that
+resulting discussion is.
 
 --=20
 Tom
 
---DD8eYFaTcZp+nTY9
+--44rLWzwNWvLfA7sf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLGQUACgkQFHw5/5Y0
-tywfzwwAnntXV7Gi12lxwMTWQHCz2D9a5BoFI6/xyxjBBERNfCPRjO12hkcGORnn
-q1U4U8kNNSN/zckbcKN8uLCMvZ6+dkLPGZQGrRkdlHypJFDYi6iNa/xyGNq8e0Y1
-1IUdImMG7h1Dvmr4vmedTUFDG7OfaUJ4+4iqGJzl9zOFuzna8NKLywDRBdI3W5re
-XapUDeSTSgyZxeH4jKNz99elyJreV0Ze98CrtyDEp+SGz2XWWpevoH1TgojTrJT1
-almCMBoMNBFqg8GqfUVRB0PlEiJwqp7A+PpZz3XSofnViOhkGdacBD7eb7yBwyqE
-1TwcXzpREuVXFcwQk2eA3iyfOdoMu4acoiojQqaQJvLthh5/HkxlyG6zQ4F7TFdu
-Brfxs63tTSA/6TLhIHr9ELRstnzLDPjjjQOs/Gz3l6N8SB8W+oMBARWtPTB68QqB
-X513vzWh14b+QHl1+awH4hHkLspMialB0B3Li2bFUvXq6asL9dQAH/YKxnJ0Sx+Y
-ziQinsCr
-=Bn5s
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLHkcACgkQFHw5/5Y0
+tyz3zQv9ExiZQzwtdN3B3qbDbIMzxHyyY1uV1deGFGX3mn+jEBhCvZ2WIFZ8aYei
+brb7csTdA4jfVLFXrAzr3dn7dU+k9cAzFE0+ZDC7uGwVWSpNYBjtQHJFUSmpcu2V
+vOK9fpNB1SF7CGlrvDyWPFsMgc+5kIZKDMqdUp8k66eAgsE66Zyw9Ly+nExdH3Mq
+jGaaWzXZcngsb9pTJWXhGaG46tWJuJbTPBqyjYZhwl2WTg88+R2VZgDnk7Dy7LI1
+yblY91dp5kwCwCbVNECut5B0Nbdfezf77GKjUcldvazTLI9k4kYgouRZKHhB8q2d
+Na03MlGTh1pLCc29HCxk5I4prV6t/sK57/yy1BO6L9UiFteU+mKtL6/sH46rsoKU
+iiGIXn4iHd7+Amy2bJUB2L1VLixiOJLugz6AaVwXEk6wqxjyJUmshPBLtzx0encU
+TZENjdiKH3FVREFSTBa22nelH0txonqyewUSS0TTRIb7loGWUAkIrD2dOVWIxSvW
+ggVhpaGs
+=RuJh
 -----END PGP SIGNATURE-----
 
---DD8eYFaTcZp+nTY9--
+--44rLWzwNWvLfA7sf--
