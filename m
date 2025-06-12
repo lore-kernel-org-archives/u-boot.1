@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7454BC71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 17:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D39A6C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 17:18:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91CF782B97;
-	Thu, 12 Jun 2025 19:13:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CA5782C30;
+	Thu, 12 Jun 2025 19:18:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RS/I11/R";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="maDwWKiF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFA1382B97; Thu, 12 Jun 2025 19:13:44 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 225D282C4D; Thu, 12 Jun 2025 19:18:54 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 775CD82B70
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 19:13:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A741882B97
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 19:18:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-40905ae04e4so413889b6e.0
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 10:13:42 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2ea08399ec8so756958fac.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 10:18:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749748421; x=1750353221; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749748730; x=1750353530; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rcSRF+9EayXkw5Qrb7Nz94QKxS+nnVdI3vXBMm9+Y3g=;
- b=RS/I11/Rqojw7wd15XnJNyisvv0eFCeLfmBLWpjcFBUeo0z9lXAIOQLN5ESIOHXv/b
- wYSXJvCNva2xy3f8GsvJtlQ1Y7lJcl1Mfj1iKX6EyF2ozCawFlW/F9Xu5p5MXctSnO0O
- bvxi9tMFhTdWPbTKKPZ8ax1INo0nlGzZJQzsI=
+ bh=2cq0XDs/CoRPCSHDOrzZ3ixiIdSIaoh6zkyes4CA4sQ=;
+ b=maDwWKiFK31U8c/yssmVRxxGY7Brfz2YcBP6ArGEy4a3to/81sOmgEeGkZKMoYwoKz
+ mxbMHwW3qIJM1+5sppbtPPK9OBemynseMvVZ6iqYUwgLC9Iqt4xHUPT4+yAsQrrNoOw9
+ dzReoIN91FfdFgRADE5EjSQYOV6TSyoUgT6sA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749748421; x=1750353221;
+ d=1e100.net; s=20230601; t=1749748730; x=1750353530;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rcSRF+9EayXkw5Qrb7Nz94QKxS+nnVdI3vXBMm9+Y3g=;
- b=FV5GsiWj8AebkVO+e8B+RW83zLVDkpLjw0TqXWqY8uBPXDyOwbXcCjmBgsZU1xqTEc
- E/CEgQ/36jmr9QHHktAnD0E+8oSOkielhLZlMgyzgL50LNFkyocV4R+68AtewWWX9Zbi
- oB2LlnbkjhXWxU5tQxwogJxyV3WWWlCKG7gGsaNSD0ZYl1YRGP4+ox9cICByOm9WEL81
- 8iBZRAbXkHgL069PcIJZfrMnY0g2Q3OTYFvmrMj/zuvcS4ffPVDdgnXVtqh26npsMrvk
- eSTRZKPK0k5jMKQsTe6XPEEo4FA8b0sssHzX22eRtemj+DtHEMHFexFBgXMsq4B0oGeM
- wWuA==
+ bh=2cq0XDs/CoRPCSHDOrzZ3ixiIdSIaoh6zkyes4CA4sQ=;
+ b=mrOUbhdnHUrfWSdp2QY9v/5DPryJ9Fls0YNuOCLkZ86KRg4SE6yIc7iq8pQr2oEERW
+ e6y+TUTodIHSySjbGRv6//NaHhVbEiftJ9QUQzXf2zyASik/gYYlBL2q+DjeSqbHux5/
+ gj4BcMQMD6mVg1mWx09sLuyRm7lrQIcPzcKJsXd2P7JRTog7e7e+DtQYLYRFCQKvnR+L
+ qB4ajK0BEOvlodSyXoYfQyiF0A/fNFr0T63ECjMpKK+17eTrAjgBSQv0X1aB04Rd7zmy
+ aighjL5E+gCLufbydDtGpijSs6Bn7sqVMmPe8CFK+NHbDBL19fLuat2CizY08e2I8Q4t
+ M1DA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWJlKwtWrXTAg8J/euSjjEwIz0xEoYGY2olyU/IWh/G3iqj6+V1svVl5GqykinjWNuLuGooFI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTxN9wWD/LNlLqGM3OWDpflN0nk2hPkFKrHj0KI/VOCz/n+Fc3
- Q5HX914qvxSLib64ipUDxl8IXZ2B3gCUP5nNsUe3aDvuXQD3OnSKLGDzLe7AMVq6LMM=
-X-Gm-Gg: ASbGncuyHaS2rUn3c0cMDkaUklvmIQciYjMiLPpKn68s2et5n+VAo4YMVpLkeS2dGHP
- l2fNTnWE9mP7WvkgmwVFwzWIwfqaLfEWUrIEMUZsg3e93gLz5PzXFvVHYqW2XZgGOp3u7vbRh47
- fIarGLb27lf4quBvm6bgFa0ghZC0WR+ymUU359rZ3MTfDvXYylrL/TmXNYRiJpm2F4SG+Cdgruc
- GrQZywfeuzfS3Gag0XQGNscsgKBAsGIN51Kd2XriuAGn11p1idgrhybqwsKL+xDb3X3aw0e515w
- Vm/SZfc7cAfP+tTc6QqvHBmr6//F+CmGW78D6UKf4pLQBUV4pVm/uII5q39rE5V+A6L/tLFId2D
- jyIHXDWNt3E499QhmOyixM1o=
-X-Google-Smtp-Source: AGHT+IH2EnJRO9D82eHl3qpaVV1eRbd6foar5A7XNhHSUfyUGBUroVQcGuGu/6rc1uptzfZWDm+dNQ==
-X-Received: by 2002:a05:6808:4485:b0:3f8:b73b:682b with SMTP id
- 5614622812f47-40a71d949cbmr79047b6e.7.1749748421185; 
- Thu, 12 Jun 2025 10:13:41 -0700 (PDT)
+ AJvYcCVb5AV7gRwDa5H0vuzYefvRUsd1ZoefM9SIuDYPPhCFC9m8B9/hKo9hqERY60lugrEywt8d95Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmUNgajpyXPgSYfkWt2DDrJnSwk+xX7hMBhQLcsKUOHdkQfEG2
+ CVaeSRoODnToWu1otZEJ6S/auwGHByjcjcq5UUvrk0u9CfCXFqtIoDfLwSUygK83Umc=
+X-Gm-Gg: ASbGnct+Dt2ppNbApcyZINo4P2LpRD4KiHC74mYjGo5Bq8b/VBUcbDlVQ9s5hHjahw9
+ XnIlQ0XdWiKFTo1hvMgt1hzOAZgsdUiDVgASxdRVjCo5dwJ6ObytFZ/TIAKGRrMauDzoqtLnmEU
+ iOKPPuH/pvUZaoxtqLtZGfwpZj2XwG2xUm2dFgmgDeXP9f8011LPsSYYi5yOXACYiSWcyOlYEH2
+ 1qMA06HVdhRZebHRk65W6Zcpx3Aj6hajbJOohv8xqfwEyDMAL0RvIGxo9M33X8/bW+hlottz4Ym
+ OJoq3mnyNzpVCDdzFLDRQ9p0YgzJhXbjbQ3hm03+Y+LZNq94ALjT6kdSbtHsmQouZvbhC+EkHZc
+ ishL/9X16vFVRgyVCDKOnSyUBYQtqevpfJg==
+X-Google-Smtp-Source: AGHT+IH3FsqjpQvWvdvXcCoEa8yF1RGUqdYn3PRrBd7FakiS991/LGKHuFMNwEo2jzlOZKsawdiGAg==
+X-Received: by 2002:a05:6870:828c:b0:2d5:25b6:ec14 with SMTP id
+ 586e51a60fabf-2ea96c3ccd7mr5129951fac.15.1749748730331; 
+ Thu, 12 Jun 2025 10:18:50 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a6832ae46sm365697b6e.49.2025.06.12.10.13.38
+ 586e51a60fabf-2eab8de6b4fsm360221fac.24.2025.06.12.10.18.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 10:13:40 -0700 (PDT)
-Date: Thu, 12 Jun 2025 11:13:37 -0600
+ Thu, 12 Jun 2025 10:18:49 -0700 (PDT)
+Date: Thu, 12 Jun 2025 11:18:47 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Hrushikesh Salunke <h-salunke@ti.com>
-Cc: Oliver.Gaskell@analog.com, peng.fan@nxp.com, malysagreg@gmail.com,
- nathan.morrison@timesys.com, twoerner@gmail.com, sjg@chromium.org,
- contact@paulk.fr, marex@denx.de, anshuld@ti.com,
- dario.binacchi@amarulasolutions.com, jerome.forissier@linaro.org,
- michael@amarulasolutions.com, a-dutta@ti.com,
- kever.yang@rock-chips.com, jonas@kwiboo.se, u-boot@lists.denx.de,
- danishanwar@ti.com, s-vadapalli@ti.com, srk@ti.com
-Subject: Re: [PATCH] spl: Add support for Device Firmware Upgrade (DFU) over
- PCIe
-Message-ID: <20250612171337.GP1382132@bill-the-cat>
-References: <20250612084910.3457060-1-h-salunke@ti.com>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v3 0/7] Qualcomm: teach the build system to emit signed
+ ELF images
+Message-ID: <20250612171847.GQ1382132@bill-the-cat>
+References: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ClED9Zey6BfV7o2p"
+ protocol="application/pgp-signature"; boundary="fFudDyiGwhbZV3Pi"
 Content-Disposition: inline
-In-Reply-To: <20250612084910.3457060-1-h-salunke@ti.com>
+In-Reply-To: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,99 +103,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ClED9Zey6BfV7o2p
+--fFudDyiGwhbZV3Pi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 12, 2025 at 02:19:10PM +0530, Hrushikesh Salunke wrote:
+On Thu, Jun 12, 2025 at 04:16:36PM +0200, Casey Connolly wrote:
 
-> Introduce support for Device Firmware Upgrade (DFU) over PCIe in
-> U-Boot. Traditionally, the DFU protocol is used over USB, where a
-> device enters DFU mode and allows a host to upload firmware or binary
-> images directly via the USB interface. This is a widely adopted and
-> convenient method for updating firmware.
+> With several new Qualcomm platforms appearing on the mailing list, all
+> of which build U-Boot as an ELF, sign it, and then flash it to some
+> partition on the board, we're getting a lot of defconfigs which just
+> contain a debug UART and a TEXT_BASE address. This leads to needless
+> rebuilds in CI of effectively the same image, and needless duplication
+> of build instructions.
+>=20
+> To address this, let's introduce a new tool "mkmbn.py", this is based
+> on the existing qtestsign[1] tool but is (currently) hardcoded to
+> only handle the Dragonwing and IPQ boards which use MBN header v6.
+> Additionally, the tool contains a lookup table that maps from a boards
+> DT compatible property to the load address it needs. Since it's highly
+> unusual for different boards using the same SoC to have different load
+> addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
+>=20
+> With this tool in place, we teach binman to use it and introduce
+> a qcom-binman.dts file to describe the image. The tool will emit a
+> u-boot.mbn file for supported platforms, for unsupported platforms the
+> u-boot MBN etype in binman will print a notice explaining that no mbn
+> file is built and to look at tools/qcom/mkmbn/mkmbn.py
+>=20
+> Finally, the defconfigs are cleaned up by moving the debug UART
+> definitions to config fragments (since it doesn't make sense to have
+> them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
+> the qcs9100_defconfig is removed entirely since the same binary can
+> be created with just make arguments. This platform entirely lacked
+> documentation to begin with, which should be addressed by future
+> patches.
+>=20
+> The Qualcomm documentation is also cleaned up, a new "signing" page
+> is added to briefly cover the what and why of MBN signing, and board
+> specific pages are updated to explain the new build process.
+>=20
+> These patches have been tested on the RB3 Gen 2, but additional
+> testing for other platforms would be super useful.
+>=20
+> [1]: https://github.com/msm8916-mainline/qtestsign
 
-Interesting, glad to see this overall.
-
-> @@ -1328,6 +1336,59 @@ config SPL_RAM_DEVICE
->  	  be already in memory when SPL takes over, e.g. loaded by the boot
->  	  ROM.
-> =20
-> +config SPL_PCI_DFU
-> +	bool "PCIe boot support"
-
-Needs to depend on SPL_PCI_ENDPOINT
-
-> +	help
-> +		This config enables support to download bootloaders over PCIe
-> +		when device is acting as an PCI endpoint.
-
-Correct the spacing.
-
-> +config PCI_DFU_SPL_LOAD_FIT_ADDRESS
-> +	hex "Address to load FIT image when booting via DFU over PCIe"
-> +	default 0x00
-
-No default, and then for the rest of these options put it under if
-SPL_PCI_DFU ... endif please.
-
-> +config PCI_DFU_VENDOR_ID
-> +	hex "PCI Vendor ID for PCI endpoint"
-> +	default 0xffff
-> +	help
-> +		PCI Vendor ID for endpoint device for DFU over PCIe. This should
-> +		be set to your assigned 16-bit PCI Vendor ID.
-> +
-> +config PCI_DFU_DEVICE_ID
-> +	hex "PCI Vendor ID for PCI endpoint"
-> +	default 0xffff
-> +	help
-> +		A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
-
-No defaults here.
-
-> +config PCI_DFU_BOOT_PHASE
-> +	string "Current boot phase for PCI DFU boot"
-> +	default "none"
-
-Nor here.
-
-> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-> index 71b7a8374bb..5bb94d6b972 100644
-> --- a/common/spl/spl_ram.c
-> +++ b/common/spl/spl_ram.c
-> @@ -27,6 +27,9 @@ static ulong spl_ram_load_read(struct spl_load_info *lo=
-ad, ulong sector,
->  	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
->  		addr =3D IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
->  				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-> +
-> +		if (spl_boot_device() =3D=3D BOOT_DEVICE_PCIE)
-> +			addr =3D CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-
-Probably need an IS_ENABLED(..) here first? And possibly a few other
-places too.
+Thanks for switching this all over to binman. My big question is, is
+there binman documentation that you wished was clearer, or that should
+be written to make this easier for the next SoC / architecture that
+needs to come along and add to binman?
 
 --=20
 Tom
 
---ClED9Zey6BfV7o2p
+--fFudDyiGwhbZV3Pi
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLCr4ACgkQFHw5/5Y0
-tyz9tAv/e5mIr6bBQKNcaH6NLAwMRocmrfLK/kMoFDk0oWwh7yTp3qd1oYU+TWGC
-iSdhsdICcXzc4lnbJkNqfoBCEDSM0QCaS49OFUqy4Z58V+zhrb2PHiCRsH6nKGrt
-x7pyxG62jjRHSAhLLNeFnkRePn1995jdCOibawhoY+CkOe8+y3XZEDihnKio/wTb
-sPRWxCdGetyMW/23ntetBtJ3IQYKKIrYIQ6TqRI5uYM/14vSO30KWXulTOg3e/6L
-OMdp9eLyofYSw+LiEGz/j3pSF0xaAtciBuQ2alGKewngajl/TYQairkvjadQBSzs
-wXYZ4K3xsR+U64SXP9Y3nwcb0ccaGm8YKzKPNK3gZmxCAwFwwTEJQQrgbU3zBIaQ
-cKllBmKeyrgM25f3i9x9k7bc1d8Hjz+hGMevPcKJ9+ip9VzT+LGIprYNSVymEDvS
-CGNfwXgNWE+yQ7nGS26Ca4Tad50+PMixhvvoaIBGDxcCe9cmWw8Hg1PbzAf4HFZ4
-Hrd2lbQd
-=LULr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLC/cACgkQFHw5/5Y0
+tyyVZgv/b11UwGy4TSygDx1FiSpLi7ylELb5lS6K+SR8O7ZQa0qLM8KObyjLPz0c
+vQBA1NB1+HhR8sQeIWezN1GiZtVxz7Hw9nTKfry4shC2r6wZ5Zg2HW6uS9FYFY86
+0ua3eV8JYm/+b6hPvmxktIfaeiUfQhW46hQ9DtTC/T2Cu/upwu3f4wsvs7KDxELs
+VzmeVSQ5cmzGvEmKoH/rphZn0Xmngx3btpdSd2PMmrwPufCHlR/Ja5L0p8qX1JfQ
+xC37Itz1H8+CND+ZgJz748tIgRVG4Cy/BtttdJGq5hFULkdKRhLNZF13l3OwDV0+
+i5yfxqmoUfEUg+CDpeFyqiwtgvXaZ9mOoA7W5Uke9bJVS1mQfiYuxJDE+NeGetso
+Ak2uaeLt2gdhxoLosJ4U7YoiXDYLn9j1ztCOYl0nzre13+DOmANfVnRXKrhY5DUW
+MzB3YPZN3X6Q5R5XAozZIGbh5gTenTf2IsMudNfG8rk33la7riyIU+7r/2R/WewZ
+8TjjQQFk
+=JX+I
 -----END PGP SIGNATURE-----
 
---ClED9Zey6BfV7o2p--
+--fFudDyiGwhbZV3Pi--
