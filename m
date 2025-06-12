@@ -4,51 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D5CC71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D493C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:09:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3358082C30;
-	Thu, 12 Jun 2025 16:04:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
+	by phobos.denx.de (Postfix) with ESMTP id A543B82B70;
+	Thu, 12 Jun 2025 16:09:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="gl3yQ+xU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NoKW1b6b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27404828A2; Thu, 12 Jun 2025 16:04:21 +0200 (CEST)
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1D8FE82BD9; Thu, 12 Jun 2025 16:09:48 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBBC982BD9
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:04:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E975E828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:09:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hugovil.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
- ; s=x;
- h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
- :From:subject:date:message-id:reply-to;
- bh=2YWiG2CW9CB05XENeyDqblGa+yOCeABU4bKADhFHuro=; b=gl3yQ+xU7EW43W9BKHtC84uYcm
- RRrZdId8dmoWX/mGfVG7YWCQDOJeHyWIcPzA5K+h3sd1Ebqs2ntfbtvykAIbPFY9GspgFiTydAcMD
- UMuIN1snKaoXS88FeUuDW8015wSSlaQvXCm7plfMBWF3cfjnWyKkL4MXh6YduUqDa51c=;
-Received: from modemcable061.19-161-184.mc.videotron.ca ([184.161.19.61]:48604
- helo=pettiford.lan) by mail.hugovil.com with esmtpa (Exim 4.92)
- (envelope-from <hugo@hugovil.com>)
- id 1uPiXP-0007iT-Og; Thu, 12 Jun 2025 10:04:16 -0400
-From: Hugo Villeneuve <hugo@hugovil.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: hugo@hugovil.com, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- u-boot@lists.denx.de
-Date: Thu, 12 Jun 2025 10:04:10 -0400
-Message-Id: <20250612140410.768650-1-hugo@hugovil.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-7406c6dd2b1so2048885b3a.0
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:09:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749737384; x=1750342184; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5CD1yswgq3J+tGltLKmFPHbpsaVms3rYIC5MbGViXVM=;
+ b=NoKW1b6bqq2K0XBuqafyev2B2GF8hHzgbP+0ZYv5WZYNpzeoR6+viKa+IelLs3ry9v
+ 5s0kPJSlk0a5oqyE/o0VyQLN4O+WtANy9b9P1R566j7RjJrzWPhMC4MMhP+KVnbOysoT
+ G/YjS4N+PGMS3QifZCdzZaMv9Ag9fSfFKglErcPySbZRVFOpkEsFs/yh3cVEKDUyPOuj
+ HfzjWRWRThZrxJn/iEtX+oVIMnanHPwITATeY+6M68iPWGNIO69C0hfdszhJOtEzORbh
+ ae/aIYtaP/k68TvfefE8/V7whZWae2ha99rOudE64CEVoGj+F7qI7gAe1ZupseI8l8sp
+ yKuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749737384; x=1750342184;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5CD1yswgq3J+tGltLKmFPHbpsaVms3rYIC5MbGViXVM=;
+ b=J5D1g/wia6yZ3IHhbhtjOaoe6Ymkg/cYmGORiDNhhWQ4PBYhzXFpOJnX80Km4DsDE4
+ 1FR+lhjw4IHw5y9y7l5GArI4qzWehXvJyYjOuLkxz9pmxvPzUG4XY2b09lk6Pwyu2RB+
+ ODELPyDN3RLj+U9Etmhnbn9qp5R0Lddcsvg7CIjEQmHco0xePZOp+PaC9R52GOjM+j6c
+ 7qxrbkCNYVmmHQ+LQCzlUBPLzJww69wMH0bK4pNK/W/WjmigrPNU5RlY2EQPeXtPD8Kq
+ xwvEMDEgqGyY1o+OcnuwzhX7FiYbUuprKho8PMNE/1dHDZDmZqjYCXZ1FE8khnENFvlX
+ 77DA==
+X-Gm-Message-State: AOJu0YzFG0VEt/X1Max0/R12ctutai4NbtP785OOxZ3EAAM1/VfPZWbc
+ cZwZ6Z5OxKp7K35/n8v+Kez9l+ZLVfZTKFMmYsmiRqFYw81NZ23yq9lr
+X-Gm-Gg: ASbGncsfgRz3Dt/e/wZ8dK35xV+6apzCky6wV6XxSlK/burLBN9d1Sar4wyFSjxtwhT
+ 817b5HvSWlWJXAiLUuhXKP/7laGLPcWkDnLbJc97CQPcHvHxSxx0SU3buWanGW2EdbjHmB5I9Um
+ aXZ2fa3vwUqomDzj/bP5EiUNZ8dTc9mHkp7JXS3YZmAt6oova6f9/ew4oSVfLHRxGzTPzXSFWSj
+ L2HSWHglVdpN3Hd3PBwfQjYFeGLEsmk/1N2cisooVoVTNcODH1vFxu5It91o7JEPG0X/M6kXWX2
+ BPBhFYbOfmZPr/qtFsXfITPdzPF8MBQwAzIsp+Tu4LhJpd4zEbrLY39jQ/MsS7DPVO+8HyAzt2M
+ vigsviTJa
+X-Google-Smtp-Source: AGHT+IF1U7zcwkrjyL+mTPUEXOTfJlfRq/xIOWfKamLxLNqu9o/HbtLaDxpe2LIb2O6lVX5TepHIyg==
+X-Received: by 2002:a05:6a20:9495:b0:21f:9b24:321b with SMTP id
+ adf61e73a8af0-21f9b243595mr3956104637.20.1749737384135; 
+ Thu, 12 Jun 2025 07:09:44 -0700 (PDT)
+Received: from hiagof-nb.corp.toradex.com ([67.159.246.222])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b2fd6296164sm1166644a12.42.2025.06.12.07.09.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Jun 2025 07:09:43 -0700 (PDT)
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de,
+	Hiago De Franco <hiago.franco@toradex.com>
+Subject: [PATCH] toradex-smarc-imx8mp: add SPL_STACK size and
+ SPL_HAVE_INIT_STACK
+Date: Thu, 12 Jun 2025 11:09:23 -0300
+Message-Id: <20250612140923.20497-1-hiagofranco@gmail.com>
 X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 184.161.19.61
-X-SA-Exim-Mail-From: hugo@hugovil.com
-Subject: [PATCH] cmd: tlv_eeprom: fix typo errors in comments and error msg
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,66 +97,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+From: Hiago De Franco <hiago.franco@toradex.com>
 
-Fix typo errors in comments and error message by replacing EERPOM->EEPROM.
+When the toradex-smarc-imx8mp_defconfig file was first added, SPL_STACK
+was set to 0x960000, but SPL_HAVE_INIT_STACK wasn't enabled.
 
-Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+This led to SPL_STACK being correctly dropped in commit 25fefa05d732
+("configs: Resync with savedefconfig"), since SPL_HAVE_INIT_STACK was
+missing, which ended up making the board not boot.
+
+Fix this by adding SPL_STACK back and making sure SPL_HAVE_INIT_STACK is
+enabled.
+
+Fixes: dde53eae88d6 ("board: toradex: add Toradex SMARC iMX8MP")
+Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
 ---
- cmd/tlv_eeprom.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Fabio, Tom: this is for master please, thanks!
+---
+ configs/toradex-smarc-imx8mp_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/cmd/tlv_eeprom.c b/cmd/tlv_eeprom.c
-index d7c229e5441..89546cef16f 100644
---- a/cmd/tlv_eeprom.c
-+++ b/cmd/tlv_eeprom.c
-@@ -41,7 +41,7 @@ static int set_date(char *buf, const char *string);
- static int set_bytes(char *buf, const char *string, int *converted_accum);
- static void show_tlv_devices(int current_dev);
- 
--/* The EERPOM contents after being read into memory */
-+/* The EEPROM contents after being read into memory */
- static u8 eeprom[TLV_INFO_MAX_LEN];
- 
- static struct udevice *tlv_devices[MAX_TLV_DEVICES];
-@@ -430,7 +430,7 @@ int do_tlv_eeprom(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	static int has_been_read;
- 	int ret;
- 
--	// If no arguments, read the EERPOM and display its contents
-+	// If no arguments, read the EEPROM and display its contents
- 	if (argc == 1) {
- 		if (!has_been_read) {
- 			ret = read_eeprom(current_dev, eeprom);
-@@ -560,7 +560,7 @@ U_BOOT_CMD(tlv_eeprom, 4, 1,  do_tlv_eeprom,
- /**
-  *  tlvinfo_find_tlv
-  *
-- *  This function finds the TLV with the supplied code in the EERPOM.
-+ *  This function finds the TLV with the supplied code in the EEPROM.
-  *  An offset from the beginning of the EEPROM is returned in the
-  *  eeprom_index parameter if the TLV is found.
-  */
-@@ -631,7 +631,7 @@ static bool tlvinfo_add_tlv(u8 *eeprom, int tcode, char *strval)
- 	char data[MAX_TLV_VALUE_LEN];
- 	int eeprom_index;
- 
--	// Encode each TLV type into the format to be stored in the EERPOM
-+	// Encode each TLV type into the format to be stored in the EEPROM
- 	switch (tcode) {
- 	case TLV_CODE_PRODUCT_NAME:
- 	case TLV_CODE_PART_NUMBER:
-@@ -691,7 +691,7 @@ static bool tlvinfo_add_tlv(u8 *eeprom, int tcode, char *strval)
- 	// Is there room for this TLV?
- 	if ((be16_to_cpu(eeprom_hdr->totallen) + ENT_SIZE + new_tlv_len) >
- 			TLV_TOTAL_LEN_MAX) {
--		printf("ERROR: There is not enough room in the EERPOM to save data.\n");
-+		printf("ERROR: There is not enough room in the EEPROM to save data.\n");
- 		return false;
- 	}
- 
-
-base-commit: d7c449c3d83a986d61e38d1762433c0607caf5c5
+diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
+index ca7d9b56efbd..25e6d9623c1d 100644
+--- a/configs/toradex-smarc-imx8mp_defconfig
++++ b/configs/toradex-smarc-imx8mp_defconfig
+@@ -16,6 +16,7 @@ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK=0x960000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_SPL_TEXT_BASE=0x920000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -51,6 +52,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_HAVE_INIT_STACK=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
 -- 
 2.39.5
 
