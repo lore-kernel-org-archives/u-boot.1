@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D39A6C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 17:18:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F152FC71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 17:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CA5782C30;
-	Thu, 12 Jun 2025 19:18:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C5F582B97;
+	Thu, 12 Jun 2025 19:31:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="maDwWKiF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sot5PTLk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 225D282C4D; Thu, 12 Jun 2025 19:18:54 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 126E782B97; Thu, 12 Jun 2025 19:31:36 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A741882B97
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 19:18:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 861CF82B70
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 19:31:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2ea08399ec8so756958fac.1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 10:18:51 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-400fa6eafa9so878903b6e.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 10:31:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749748730; x=1750353530; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1749749492; x=1750354292; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2cq0XDs/CoRPCSHDOrzZ3ixiIdSIaoh6zkyes4CA4sQ=;
- b=maDwWKiFK31U8c/yssmVRxxGY7Brfz2YcBP6ArGEy4a3to/81sOmgEeGkZKMoYwoKz
- mxbMHwW3qIJM1+5sppbtPPK9OBemynseMvVZ6iqYUwgLC9Iqt4xHUPT4+yAsQrrNoOw9
- dzReoIN91FfdFgRADE5EjSQYOV6TSyoUgT6sA=
+ bh=u0vCpz9y+JzWc3i9+c8dvUElzXcQJhKhbeUuwRXKxCQ=;
+ b=Sot5PTLkstJhFDbdybZbJkQDkVfka1VOc7Ao9/lN+W7ssmZZZUUxEk++z3iBLKZaGs
+ P4Zn7juPa3WcsfUN6k7sdFCIQ382p6Qlbr3WukccO7wu7nuoJshU/Ic/gNmAnrVHH7CD
+ TL/FZLT7AsnAylt63lRTirKxKae73QJhRXb5s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749748730; x=1750353530;
+ d=1e100.net; s=20230601; t=1749749492; x=1750354292;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2cq0XDs/CoRPCSHDOrzZ3ixiIdSIaoh6zkyes4CA4sQ=;
- b=mrOUbhdnHUrfWSdp2QY9v/5DPryJ9Fls0YNuOCLkZ86KRg4SE6yIc7iq8pQr2oEERW
- e6y+TUTodIHSySjbGRv6//NaHhVbEiftJ9QUQzXf2zyASik/gYYlBL2q+DjeSqbHux5/
- gj4BcMQMD6mVg1mWx09sLuyRm7lrQIcPzcKJsXd2P7JRTog7e7e+DtQYLYRFCQKvnR+L
- qB4ajK0BEOvlodSyXoYfQyiF0A/fNFr0T63ECjMpKK+17eTrAjgBSQv0X1aB04Rd7zmy
- aighjL5E+gCLufbydDtGpijSs6Bn7sqVMmPe8CFK+NHbDBL19fLuat2CizY08e2I8Q4t
- M1DA==
+ bh=u0vCpz9y+JzWc3i9+c8dvUElzXcQJhKhbeUuwRXKxCQ=;
+ b=G7/aeGBm+4igOJBD/yFLKSPKCMVmvMr3qvCxQ2uRvLOwYu0ipq95cTmRE5t4DiJgxy
+ rg7F+lNDWvWdErHvaeWVrO78No0FqtfDOwK5FXCbdNbRolEEf6482jDMFSvQs3MWhhD6
+ rb5DbgbAXDamUfLllRXeuSWxqbZ3Dtxjtmb4yCrXK5NEhA3g8EOk182pDGMOnO4+vTF/
+ +uBEdqHP14WLp83i6z/tS4Lp/H/nzlEFvmLvPMc1+inj1OAZ0UEiR3eggyzjfWMHfb7A
+ R57HIrpSuURary1HWpvKkiXNUMty30XfqsqQdQa9/RXhfIbQ9TKGekzHU88J8e8YHtjR
+ uEPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVb5AV7gRwDa5H0vuzYefvRUsd1ZoefM9SIuDYPPhCFC9m8B9/hKo9hqERY60lugrEywt8d95Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmUNgajpyXPgSYfkWt2DDrJnSwk+xX7hMBhQLcsKUOHdkQfEG2
- CVaeSRoODnToWu1otZEJ6S/auwGHByjcjcq5UUvrk0u9CfCXFqtIoDfLwSUygK83Umc=
-X-Gm-Gg: ASbGnct+Dt2ppNbApcyZINo4P2LpRD4KiHC74mYjGo5Bq8b/VBUcbDlVQ9s5hHjahw9
- XnIlQ0XdWiKFTo1hvMgt1hzOAZgsdUiDVgASxdRVjCo5dwJ6ObytFZ/TIAKGRrMauDzoqtLnmEU
- iOKPPuH/pvUZaoxtqLtZGfwpZj2XwG2xUm2dFgmgDeXP9f8011LPsSYYi5yOXACYiSWcyOlYEH2
- 1qMA06HVdhRZebHRk65W6Zcpx3Aj6hajbJOohv8xqfwEyDMAL0RvIGxo9M33X8/bW+hlottz4Ym
- OJoq3mnyNzpVCDdzFLDRQ9p0YgzJhXbjbQ3hm03+Y+LZNq94ALjT6kdSbtHsmQouZvbhC+EkHZc
- ishL/9X16vFVRgyVCDKOnSyUBYQtqevpfJg==
-X-Google-Smtp-Source: AGHT+IH3FsqjpQvWvdvXcCoEa8yF1RGUqdYn3PRrBd7FakiS991/LGKHuFMNwEo2jzlOZKsawdiGAg==
-X-Received: by 2002:a05:6870:828c:b0:2d5:25b6:ec14 with SMTP id
- 586e51a60fabf-2ea96c3ccd7mr5129951fac.15.1749748730331; 
- Thu, 12 Jun 2025 10:18:50 -0700 (PDT)
+ AJvYcCWiFGXJ93xnsRafvyi3IRUAWol6Qjj6ysZ6+QlXlwzE1rCvjFEZ56DYgct3vyrZdkgjJGA5d60=@lists.denx.de
+X-Gm-Message-State: AOJu0YxM/f5YJT6t8nRR9CxdsvCGtw3YpNEJQL30FY9O0LtBDdhBraCF
+ Xwgd/xOOLIGmTcwThK1APka8cTNBUf7nn3zsBD+XxS36aKAIGRA3tghO8xxxgmn3P/U=
+X-Gm-Gg: ASbGncuabs9yVgYwrfwMqLaxoEp8vciCvAh+3r2LmOV1KT6YcAURFqepxXe2Vq4GIog
+ FdJPQzFciDr9WbMSlxRvhxa9z2keM4NFtcdkJ86A4OvRcmtKunweX9x6dyokuZAsx57SfWXA6RV
+ /HGAVceAiXzCIs7S6B//fbS/RGYUuj46GSkp1wE+H9BBFoDp2+7mNetULw1NftfXII2J/kmHrkt
+ TeaEYfh7JsjTg0ymfRI3tXvNMzkiqrJUNbrTSsBcF476DZmuHcIRFAYhcjCx3FTa4SwD8jOuA68
+ ge20c8ImUfkbwy3339dSzHda9trqQjOkxIMNIbLH4ZGE+ZzQS6cDPRDQDY7UHoPAd3CBrMbgoyZ
+ kTBwoRtF1YwO5jVse/ELrwPc=
+X-Google-Smtp-Source: AGHT+IErrPB1Pwm4KPxyRVDAzcYzXiVbf9nG7GVfzeKXoVAVonFRbsBtMJfTj7QWvS8/BD7uuHnZTA==
+X-Received: by 2002:a05:6808:1895:b0:404:ed0d:79e5 with SMTP id
+ 5614622812f47-40a72401581mr130198b6e.30.1749749492200; 
+ Thu, 12 Jun 2025 10:31:32 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2eab8de6b4fsm360221fac.24.2025.06.12.10.18.48
+ 5614622812f47-40a6822f714sm374732b6e.16.2025.06.12.10.31.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 10:18:49 -0700 (PDT)
-Date: Thu, 12 Jun 2025 11:18:47 -0600
+ Thu, 12 Jun 2025 10:31:31 -0700 (PDT)
+Date: Thu, 12 Jun 2025 11:31:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Varadarajan Narayanan <quic_varada@quicinc.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/7] Qualcomm: teach the build system to emit signed
- ELF images
-Message-ID: <20250612171847.GQ1382132@bill-the-cat>
-References: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
+To: Hrushikesh Salunke <h-salunke@ti.com>
+Cc: vigneshr@ti.com, rfried.dev@gmail.com, jm@ti.com, s-k6@ti.com,
+ rogerq@kernel.org, afd@ti.com, sjg@chromium.org, danishanwar@ti.com,
+ anshuld@ti.com, n-francis@ti.com, u-boot@lists.denx.de,
+ s-vadapalli@ti.com, srk@ti.com
+Subject: Re: [PATCH 1/2] pci_endpoint: Add TI K3 Cadence PCIe Endpoint
+ Controller driver
+Message-ID: <20250612173128.GR1382132@bill-the-cat>
+References: <20250612085023.3457117-1-h-salunke@ti.com>
+ <20250612085023.3457117-2-h-salunke@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fFudDyiGwhbZV3Pi"
+ protocol="application/pgp-signature"; boundary="Ihluf0mUCGBRzr7C"
 Content-Disposition: inline
-In-Reply-To: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
+In-Reply-To: <20250612085023.3457117-2-h-salunke@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,75 +103,118 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fFudDyiGwhbZV3Pi
+--Ihluf0mUCGBRzr7C
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 12, 2025 at 04:16:36PM +0200, Casey Connolly wrote:
+On Thu, Jun 12, 2025 at 02:20:22PM +0530, Hrushikesh Salunke wrote:
 
-> With several new Qualcomm platforms appearing on the mailing list, all
-> of which build U-Boot as an ELF, sign it, and then flash it to some
-> partition on the board, we're getting a lot of defconfigs which just
-> contain a debug UART and a TEXT_BASE address. This leads to needless
-> rebuilds in CI of effectively the same image, and needless duplication
-> of build instructions.
->=20
-> To address this, let's introduce a new tool "mkmbn.py", this is based
-> on the existing qtestsign[1] tool but is (currently) hardcoded to
-> only handle the Dragonwing and IPQ boards which use MBN header v6.
-> Additionally, the tool contains a lookup table that maps from a boards
-> DT compatible property to the load address it needs. Since it's highly
-> unusual for different boards using the same SoC to have different load
-> addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
->=20
-> With this tool in place, we teach binman to use it and introduce
-> a qcom-binman.dts file to describe the image. The tool will emit a
-> u-boot.mbn file for supported platforms, for unsupported platforms the
-> u-boot MBN etype in binman will print a notice explaining that no mbn
-> file is built and to look at tools/qcom/mkmbn/mkmbn.py
->=20
-> Finally, the defconfigs are cleaned up by moving the debug UART
-> definitions to config fragments (since it doesn't make sense to have
-> them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
-> the qcs9100_defconfig is removed entirely since the same binary can
-> be created with just make arguments. This platform entirely lacked
-> documentation to begin with, which should be addressed by future
-> patches.
->=20
-> The Qualcomm documentation is also cleaned up, a new "signing" page
-> is added to briefly cover the what and why of MBN signing, and board
-> specific pages are updated to explain the new build process.
->=20
-> These patches have been tested on the RB3 Gen 2, but additional
-> testing for other platforms would be super useful.
->=20
-> [1]: https://github.com/msm8916-mainline/qtestsign
+> Add support for Endpoint mode of operation in the Cadence PCIe
+> Controller present on TI's K3 SoCs. This driver is an adaptation of the
+> Linux driver.
 
-Thanks for switching this all over to binman. My big question is, is
-there binman documentation that you wished was clearer, or that should
-be written to make this easier for the next SoC / architecture that
-needs to come along and add to binman?
+Please mention what release you're adopting from as it will make future
+resyncs easier.
+
+>=20
+> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+> ---
+>  drivers/pci_endpoint/Kconfig           |   6 +
+>  drivers/pci_endpoint/Makefile          |   1 +
+>  drivers/pci_endpoint/pcie_cdns_ti_ep.c | 399 +++++++++++++++++++++++++
+>  3 files changed, 406 insertions(+)
+>  create mode 100644 drivers/pci_endpoint/pcie_cdns_ti_ep.c
+>=20
+> diff --git a/drivers/pci_endpoint/Kconfig b/drivers/pci_endpoint/Kconfig
+> index 19cfa0aafb5..413556a4982 100644
+> --- a/drivers/pci_endpoint/Kconfig
+> +++ b/drivers/pci_endpoint/Kconfig
+> @@ -22,6 +22,12 @@ config PCIE_CADENCE_EP
+>  	  endpoint mode. This PCIe controller may be embedded into many
+>  	  different vendors SoCs.
+> =20
+> +config PCIE_CDNS_TI_EP
+> +	bool "TI K3 PCIe EP support"
+> +	help
+> +		Say Y here to enable support for the Canence PCIe Controller
+> +		in Endpoint Mode on TI's K3 Socs.
+
+Spacing is off.
+
+> +
+>  config PCI_SANDBOX_EP
+>  	bool "Sandbox PCIe endpoint controller"
+>  	depends on PCI_ENDPOINT
+> diff --git a/drivers/pci_endpoint/Makefile b/drivers/pci_endpoint/Makefile
+> index 3cd987259d3..62a865c4463 100644
+> --- a/drivers/pci_endpoint/Makefile
+> +++ b/drivers/pci_endpoint/Makefile
+> @@ -6,3 +6,4 @@
+>  obj-y +=3D pci_ep-uclass.o
+>  obj-$(CONFIG_PCIE_CADENCE_EP) +=3D pcie-cadence-ep.o
+>  obj-$(CONFIG_PCI_SANDBOX_EP) +=3D sandbox-pci_ep.o
+> +obj-$(CONFIG_PCIE_CDNS_TI_EP) +=3D pcie_cdns_ti_ep.o
+> diff --git a/drivers/pci_endpoint/pcie_cdns_ti_ep.c b/drivers/pci_endpoin=
+t/pcie_cdns_ti_ep.c
+> new file mode 100644
+> index 00000000000..18b9e45911e
+> --- /dev/null
+> +++ b/drivers/pci_endpoint/pcie_cdns_ti_ep.c
+> @@ -0,0 +1,399 @@
+> +// SPDX-License-Identifier: GPL-2.0-only OR MIT
+> +/*
+> + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com
+> + *
+> + * PCIe Endpoint controller driver for TI's K3 SoCs with Cadence PCIe co=
+ntroller
+> + *
+> + * Ported from the Linux driver - drivers/pci/controller/cadence/pci-j72=
+1e.c
+> + *
+> + * Author: Hrushikesh Salunke <h-salunke@ti.com>
+> + *
+> + */
+> +
+> +#include <asm/gpio.h>
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <generic-phy.h>
+> +#include <linux/delay.h>
+> +#include <linux/io.h>
+> +#include <linux/ioport.h>
+> +#include <linux/log2.h>
+> +#include <linux/sizes.h>
+> +#include <power-domain.h>
+> +#include <regmap.h>
+> +#include <syscon.h>
+> +#include <pcie-cadence.h>
+> +#include <pci_ep.h>
+
+Please audit this include list.
+
+Otherwise seems fine, thanks.
 
 --=20
 Tom
 
---fFudDyiGwhbZV3Pi
+--Ihluf0mUCGBRzr7C
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLC/cACgkQFHw5/5Y0
-tyyVZgv/b11UwGy4TSygDx1FiSpLi7ylELb5lS6K+SR8O7ZQa0qLM8KObyjLPz0c
-vQBA1NB1+HhR8sQeIWezN1GiZtVxz7Hw9nTKfry4shC2r6wZ5Zg2HW6uS9FYFY86
-0ua3eV8JYm/+b6hPvmxktIfaeiUfQhW46hQ9DtTC/T2Cu/upwu3f4wsvs7KDxELs
-VzmeVSQ5cmzGvEmKoH/rphZn0Xmngx3btpdSd2PMmrwPufCHlR/Ja5L0p8qX1JfQ
-xC37Itz1H8+CND+ZgJz748tIgRVG4Cy/BtttdJGq5hFULkdKRhLNZF13l3OwDV0+
-i5yfxqmoUfEUg+CDpeFyqiwtgvXaZ9mOoA7W5Uke9bJVS1mQfiYuxJDE+NeGetso
-Ak2uaeLt2gdhxoLosJ4U7YoiXDYLn9j1ztCOYl0nzre13+DOmANfVnRXKrhY5DUW
-MzB3YPZN3X6Q5R5XAozZIGbh5gTenTf2IsMudNfG8rk33la7riyIU+7r/2R/WewZ
-8TjjQQFk
-=JX+I
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLDu0ACgkQFHw5/5Y0
+tyzWiQv7BuggGqdwpJzZMtGKtOCryJfGlHUYgHlBko9nsLVYFq7Eoa83Xejwwma0
+RQJ84k1zLpjYjashrMsUqu2waFIRTFozX41AMaLXDjm9kHeQ/wdmDV8G1ZhkAes/
+7e/D09TYGJqoJjWDInb3RSprL8lnYF1rW/AmSNlKWUhD95Tf1cBXQLYgFxhSNl7m
+AW2/tJ0nm0S0kRj1CPEuQP9NMk826ifh65YuCZsEM6v2nwyKZ6LgC8lF06T8XIhC
+SmjXo/EIHCnFEyMRKyS+JzIJRDShT4OVgUGaAympkg6RP3GzMphe9uG26f+b2VKK
+JtCAM9qgH/QftORpQ6VaL+zR2vRcVv2Thwd/tcQ4n1T1o7qN6EQ9woGqrdzeA7yl
+kRhgvh8A4bKfjCziuSenzUjn6mpWUfz6BOo5vxve+tYHEtH+m6/fHdIPQ4mUJEYt
+cGIClo/0MCRMtbsv0IQJJWFDVyATIpmBI5pGlXneBF1nbHwBSQJOFeepwZ+BahId
+hB8Q2aab
+=90sE
 -----END PGP SIGNATURE-----
 
---fFudDyiGwhbZV3Pi--
+--Ihluf0mUCGBRzr7C--
