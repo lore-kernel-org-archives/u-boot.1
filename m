@@ -4,42 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E376C71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 11:09:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72231C71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 11:15:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD09882B7C;
-	Thu, 12 Jun 2025 13:09:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=zugschlus.de
+	by phobos.denx.de (Postfix) with ESMTP id DA04182B7C;
+	Thu, 12 Jun 2025 13:15:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WQtIgmNB";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B55F82B97; Thu, 12 Jun 2025 13:09:03 +0200 (CEST)
-Received: from torres.zugschlus.de (torres.zugschlus.de
- [IPv6:2a01:238:43fa:bc01::28:100])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8139800C1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 13:08:59 +0200 (CEST)
+ id EE3A082B97; Thu, 12 Jun 2025 13:15:39 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C0EE828A2
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 13:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=zugschlus.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mh+u-boot@zugschlus.de
-Received: from mh by torres.zugschlus.de with local (Exim 4.96)
- (envelope-from <mh+u-boot@zugschlus.de>) id 1uPfnn-0031yH-1U
- for u-boot@lists.denx.de; Thu, 12 Jun 2025 13:08:59 +0200
-Date: Thu, 12 Jun 2025 13:08:59 +0200
-From: Marc Haber <mh+u-boot@zugschlus.de>
-To: u-boot@lists.denx.de
-Subject: Re: Searching and Finding boot.scr and uboot.env on a Raspberry Pi 4
-Message-ID: <aEq1S5UDZ9FcsMWH@torres.zugschlus.de>
-References: <aEcOkQdwEF9zNJu2@torres.zugschlus.de>
- <dc51ba46-010e-4fc5-a0bd-88c758940e96@cherry.de>
- <aEgN40XL0D8gIg0F@torres.zugschlus.de>
- <907734c2-f401-4c89-888d-5eb2670cb690@cherry.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55CBFY3a2904214;
+ Thu, 12 Jun 2025 06:15:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1749726934;
+ bh=B0HoVUmUgKQssbhSREy4iDpXRgEdErYFsTwwurTGx3M=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=WQtIgmNB71R/LAwxNj63iZwF725kY+Pas7Zmf+NdA2uFcsuBd2JuoXcEEXHb9dBin
+ /j1JfVs2hLTSw5whFWjKyr6u6bxQpQoeTs6+X7GMrAXs6xmwtrN0e2kSAJv75LTTlM
+ hxXr7AbWvFI4wRsd5z42d8IxsxLT/WapphNNmiZ4=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55CBFYsC1892476
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 12 Jun 2025 06:15:34 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 12
+ Jun 2025 06:15:34 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 12 Jun 2025 06:15:34 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55CBFYj42072795;
+ Thu, 12 Jun 2025 06:15:34 -0500
+Date: Thu, 12 Jun 2025 06:15:34 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>,
+ Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH -next 3/5] binman: add sysfw-inner-cert to
+ missing-blob-help
+Message-ID: <20250612111534.4xwqhv6rzeeuzou3@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250611-missing-blob-help-entries-v1-0-c6de1844117f@ti.com>
+ <20250611-missing-blob-help-entries-v1-3-c6de1844117f@ti.com>
+ <DAKAF5YRCY2T.39SSJYUIINTK7@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <907734c2-f401-4c89-888d-5eb2670cb690@cherry.de>
-User-Agent: Mutt/2.2.12 (2023-09-09)
+In-Reply-To: <DAKAF5YRCY2T.39SSJYUIINTK7@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,73 +83,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin, hi List,
+On June 12, 2025 thus sayeth Anshul Dalal:
+> On Wed Jun 11, 2025 at 11:47 PM IST, Bryan Brattlof wrote:
+> > Now that the inner certificate for TI' Foundation Security TIFS firmware
+> > is mandatory to a successful build, provide some guidance on what it is
+> > and links to the documentation on how to obtain the firmware blobs.
+> >
+> > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> > ---
+> >  tools/binman/missing-blob-help | 10 ++++++++++
+> >  1 file changed, 10 insertions(+)
+> >
+> > diff --git a/tools/binman/missing-blob-help b/tools/binman/missing-blob-help
+> > index e28eaa2015443f256a469df4ead87793e23ba219..fcc989ed757e0d0a8d5bc8238c3d013da98aa390 100644
+> > --- a/tools/binman/missing-blob-help
+> > +++ b/tools/binman/missing-blob-help
+> > @@ -60,3 +60,13 @@ Have a look at your board's documentation to find the latest version of
+> >  the DM firmware binary and how to include it in the build.
+> >  
+> >      https://docs.u-boot.org/en/latest/board/ti/k3.html
+> > +
+> > +sysfw-inner-cert:
+> > +You are missing the inner certificate for TI's Foundational Security (TIFS)
+> > +firmware which is critical to authenticating the TIFS firmware during boot.
+> > +HS-FS and HS-SE parts will not boot without this certificate.
+> > +
+> > +Have a look at your board's documentation to find and include the latest
+> > +TIFS certificate blobs and how to include them in the build.
+> > +
+> > +    https://docs.u-boot.org/en/latest/board/ti/k3.html
+> 
+> Nit: With the entries ordered alphabetically in the 1st patch, the entry
+> `sysfw-inner-cert` should go after `scp-sunxi` instead.
+> 
 
-tl;dr my issue is solved.
+Oops you're right. Thanks for the review
 
-On Tue, Jun 10, 2025 at 01:18:17PM +0200, Quentin Schulz wrote:
->On 6/10/25 12:50 PM, Marc Haber wrote:
->>On Tue, Jun 10, 2025 at 12:36:23PM +0200, Quentin Schulz wrote:
->>>On Theobroma boards (Rockchip-based), we force the environment to be
->>>coming from the same storage medium as U-Boot proper, c.f.
->>>board/theobroma-systems/common/common.c:arch_env_get_location()
->>>
->>>This is the location of the U-Boot environment in raw, not in a
->>>filesystem, so this won't apply to your use-case.
->>
->>Sadly ;-)
->>
->
->But the logic to detect which boot medium was used is there, hence why 
->I mentioned it :)
-
-I looks like Debian's u-boot for Raspberry Pi actually finds boot.scr 
-laying at the side of u-boot.bin, and the initial environment the script 
-gets contains $devtype, $devnum, and $distro_bootpart which can be used 
-to continue finding things. $disto_bootpart is a bit confusingly named, 
-but since it's the only variable that always seems to contain the 
-correct number according to the tests I did, this is about enough.
-
-I had to explicitly code out reading of uboot.env though (that for some 
-reason doesn't happen automatically), and while at it I added some code 
-to also read uboot.env.asc which easier to generate and to edit.
-
-I apologize for not finding this myself any earlier, I was led into an 
-incorrect assumption about u-boot since the Raspberry Pi 4 is VERY picky 
-regarding choice of SD cards with the Firmware from April 2024 that 
-comes with current Debian. The Firmware that comes with current 
-Raspberry Pi OS is from March 2025 and is actually much less picky 
-regarding SD cards. I sorted out three SD cards and was about to give up 
-on u-boot when I discovered the firmware issue in the debug output of 
-the second stage bootloader (which needs to be explicitly enabled by 
-uart_2ndstage=1 in config.txt).
-
-Writing "kernel=uboot.bin" in my config.txt while the file actually was 
-named u-boot.bin cost me an additional couple of hours. I then went to 
-bed and spotted the missing hyphen first thing in the morning. 
-Recommendation: Letting things rest for a while helps a lot!
-
->>As far as I have understood, if u-boot finds neither its environment
->>file or a boot.scr (that one comes from the environment as well, right?)
->>it just sits there doing nothing. It's that first step that I don't
->>understand.
->>
->
->Which first step are you talking about?
-
-I was taling about finding the boot.scr script which now magically seems 
-to work. I do not even need an SD card any more, everything can happen 
-from the USB SSD. I reached my goal, can do everything with what's in 
-Debian and thank you for your help!
-
-Thank you very much, again, for providing u-boot, and for listening and 
-giving answers that were able to point me in the right direction!
-
-Cheers
-Marc
-
--- 
------------------------------------------------------------------------------
-Marc Haber         | "I don't trust Computers. They | Mailadresse im Header
-Leimen, Germany    |  lose things."    Winona Ryder | Fon: *49 6224 1600402
-Nordisch by Nature |  How to make an American Quilt | Fax: *49 6224 1600421
+~Bryan
