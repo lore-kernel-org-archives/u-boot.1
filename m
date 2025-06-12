@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C32EC71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 18:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35066C61CE8
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 18:14:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951AE82B97;
-	Thu, 12 Jun 2025 20:11:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A79F82B97;
+	Thu, 12 Jun 2025 20:14:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FYk85u3b";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9J03VQ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9107C82BD9; Thu, 12 Jun 2025 20:11:33 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id DAF0B82BD9; Thu, 12 Jun 2025 20:14:38 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EE4382B70
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 20:11:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BAD682B70
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 20:14:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-60634f82c77so395153eaf.1
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 11:11:31 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-408d7e2ad03so814825b6e.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 11:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749751890; x=1750356690; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=L4jlP83tVXRZ9nkPcWOFzYr/ChrQVvi7PVIp5Gn1+U8=;
- b=FYk85u3bL0I0Wo0mI9zSaqUprCychyTXGdTsKF1Dso1G48YTtt6A8Mn8HMXpgegRZV
- rdxQEDhDJzabmMhJzASsjGufSxbWIWPqpOmS4S2dGXFModTTTjHIEvajKdNNfZ2AAUi8
- XGOUiA2fDghx+ff5WYrJFnzS8CaptXPJq0kAE=
+ d=konsulko.com; s=google; t=1749752075; x=1750356875; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lch/RGzornpRKRDL1vMJJ9IClso0onGcKPcYik4ykVo=;
+ b=M9J03VQ2fmH2ki9C4RWty/gOhDYjimsS7V6B4YQRZnaI4QbPJoc7vaiByWGqq1SWcU
+ 8HqiFPI4HhIxIB+GM0lyqv2TmZkgIT/ETZu4xcEb//jmDZCuQzjf6wvZQdAXrW7DyY/7
+ P0lQ9Tq3iWMOUdBxCanFm5D+HP9BRl7P2eDBo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749751890; x=1750356690;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=L4jlP83tVXRZ9nkPcWOFzYr/ChrQVvi7PVIp5Gn1+U8=;
- b=rZi3+87HP5s/klXfBKxZBzASXfgbWS4GAw87g//Jb9yax0oktZitikCOkbGI/Y0ELm
- J9/DKnQExae2RL3BKxLnLW4hb7GvSINQCsjO2C0CHwzTZDY4QMhs/rrFaJfoIaZ3WI3j
- aI5YddxAw+zwoq5megdIToD8Qc/ntLCnHI5/pQFtK31AzzUVSeuNKlYf5SRtL1lUhrLZ
- OHH/I2I12RlBfakT01K77hehvdS1QcXZ9t01/+lln75SGKcs/sH5UEBXg9sLfrPWgUnM
- c2OfhyggXMLalj8aizwI2tv038G7K7iTJhWvh6iGYhQkJHiLtB19t9wOpgmeDIhqlKRI
- FkUA==
-X-Gm-Message-State: AOJu0YwCbiB5tBKYyFjoEme4mFAccoJthcpEJ5rivC9YIQj+CBS5D12e
- TCMwhFTGBZOZZS7JQaL40i3IlyNAStSqFQ/vaDiRszmVGoAUKuFENfSaK31AZESCZQa8Cv7oUZd
- b/C4wkDA=
-X-Gm-Gg: ASbGncvpnVxJI2GcVDTjrKWPNjAgFqd3iVXYuC2F7OuLqpIavJKt3vSGCXCvMywDSOZ
- sSzYoVps5ALuIMpnxkLIv44tlueHx3ATSnri4sppp4KP2P/RU1ymAJje8XGKhP9nSIcPtTWAluG
- 4IAhvaaoIO1vYBs+wlYf6AyUs2YRXc61Y6Jz3pXZtCtrvVHZpqeiBnHFvF8WMClG2rns1d6d2Lu
- iOlLuUTfqK7+Pw2hFcjofQFc+shkeL287U874irj00ujyM4ObJ1C3JAUFHbsDX0oTKP5mM3DoOc
- VqnRQ85iC+f+0nT0JsyuUiUhrnoyYn4aLCYOgLD1kwMOqu4Xy1Hkz6Wj2unGY9EVW1T9XSHAT+x
- i5ZdBGm/E+qO30geXPShiaYRigw==
-X-Google-Smtp-Source: AGHT+IH6Swl9ldsvehA77mfGAYCP5BRUq9FObNmDjF9W0GJ2b5wkyWDmus6AYsRRu4u+UuX43oPtUw==
-X-Received: by 2002:a05:6808:318e:b0:406:7118:de09 with SMTP id
- 5614622812f47-40a71d9e5f8mr268994b6e.10.1749751889947; 
- Thu, 12 Jun 2025 11:11:29 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1749752075; x=1750356875;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lch/RGzornpRKRDL1vMJJ9IClso0onGcKPcYik4ykVo=;
+ b=KyDGrrGRFlpa7r6cCc2ynQFQbCNC8F/fbT2owey+28vH+iJA3UO/6TDSwaleKEvfSS
+ ZI6M71AWQowawN6Pm0zl1/Ndc9wyr4EuUWm2USLFTjMydB3JG3uLuo/BXVo82+9PLjFL
+ PKQiigh6/jVfMfL3Y16TndZnm4yYBGcanCaznL+eWOdbUCMp1mT5c/HTbZT3+XKC0Amy
+ ulFi6XTbURIWngV8TjPZNzaI1Kn2giH5Q6KjDV+Z3Y3n/J6a6fpICw3vmrb6f7+Gv8H3
+ 4J8D2KtDdF+aSfxfFxouPEXmrfAaQAGubCL9YBGY9wgJ4Ym3S29h+rjAx6xYQn33hTB2
+ gudA==
+X-Gm-Message-State: AOJu0Yzl9udXVlSSn1Rta8TXrHcvBevoUHTtof8npfjEF2KBRRPWvj8u
+ SxMFUBXPUqRS3W79KNTcnFYOxdMpe/lP3k4U7g/JZvr7Leu8llEVNlBt9qRxo5lq86w=
+X-Gm-Gg: ASbGnctI8zxJEpewLc+mdhRQdJLaHR56QofVbfuC706bsAQP86o6HB1eakNRaSo4QS6
+ twv2vBlFFDuDoVvfM8qb9M9/xMzpRXf66zIi68zv/dxSdZNNZn0+W1q9YvZyL+9+du0Vr6+kWmv
+ 1J1pjUOC2tk3SdfUts+F2QVKRZAXcdIxpfvZr7bQ8CXOrrVnreS5pjxmGyibaPtXVuXkrJWQtQA
+ 3a54w7tu6mPLNp8KotyrC/RgDnLeFy1CDD4PhLw75E6w48GLpVFBJRe0i7NPMe6MhFXVp+/9fzP
+ rP6SJHtXgfWRML+YIbh+eg2C3f9dCrwbOmI7eGoUI0CoFV+dTBgWsYuyJam8oqgDoHlsrOl7paz
+ cazoIqkAy8ixrnxZD09wHzAg=
+X-Google-Smtp-Source: AGHT+IGjUbLlSm7WN8EOnWaDS/ef3tugpSs7L/gvAmnd2ovEF69tWMZjAAQZYmNTpoQAcLQ6hroSoQ==
+X-Received: by 2002:a05:6808:228a:b0:405:6b13:ca55 with SMTP id
+ 5614622812f47-40a71e6ee79mr295863b6e.37.1749752075032; 
+ Thu, 12 Jun 2025 11:14:35 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-610fd51bfcfsm234668eaf.38.2025.06.12.11.11.28
+ 5614622812f47-40a6822f829sm392159b6e.15.2025.06.12.11.14.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 11:11:29 -0700 (PDT)
+ Thu, 12 Jun 2025 11:14:34 -0700 (PDT)
+Date: Thu, 12 Jun 2025 12:14:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>
-Subject: [PATCH] arm: zynqmp: Remove local copy of
- 'dt-bindings/clock/xlnx-zynqmp-clk.h'
-Date: Thu, 12 Jun 2025 12:11:28 -0600
-Message-ID: <20250612181128.340232-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, Yao Zi <ziyao@disroot.org>
+Subject: Re: [PATCH, v2] bootm: Pass SMP core ID and DTB address for
+ ELF-formatted kernels
+Message-ID: <20250612181432.GU1382132@bill-the-cat>
+References: <SY7P282MB567599431AB1E77FD46913549F74A@SY7P282MB5675.AUSP282.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DD8eYFaTcZp+nTY9"
+Content-Disposition: inline
+In-Reply-To: <SY7P282MB567599431AB1E77FD46913549F74A@SY7P282MB5675.AUSP282.PROD.OUTLOOK.COM>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,167 +99,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As part of the recent cleanup of dt-bindigns header files we did not
-remove our copy of dt-bindings/clock/xlnx-zynqmp-clk.h at the time. This
-is because the difference between ours and current upstream is that
-current upstream has a #warning to not use it and to instead use
-xlnx-zynqmp-clk.h. So we change zynqmp-clk-ccf.dtsi to use the other
-and upstream-only file and then delete our dt-bindings file.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Michal Simek <michal.simek@amd.com>
----
- arch/arm/dts/zynqmp-clk-ccf.dtsi            |   2 +-
- include/dt-bindings/clock/xlnx-zynqmp-clk.h | 126 --------------------
- 2 files changed, 1 insertion(+), 127 deletions(-)
- delete mode 100644 include/dt-bindings/clock/xlnx-zynqmp-clk.h
+--DD8eYFaTcZp+nTY9
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/dts/zynqmp-clk-ccf.dtsi b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-index 385fed8a852a..52e122fc7c9e 100644
---- a/arch/arm/dts/zynqmp-clk-ccf.dtsi
-+++ b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-@@ -8,7 +8,7 @@
-  * Michal Simek <michal.simek@amd.com>
-  */
- 
--#include <dt-bindings/clock/xlnx-zynqmp-clk.h>
-+#include "xlnx-zynqmp-clk.h"
- / {
- 	pss_ref_clk: pss-ref-clk {
- 		bootph-all;
-diff --git a/include/dt-bindings/clock/xlnx-zynqmp-clk.h b/include/dt-bindings/clock/xlnx-zynqmp-clk.h
-deleted file mode 100644
-index cdc4c0b9a374..000000000000
---- a/include/dt-bindings/clock/xlnx-zynqmp-clk.h
-+++ /dev/null
-@@ -1,126 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Xilinx Zynq MPSoC Firmware layer
-- *
-- *  Copyright (C) 2014-2018 Xilinx, Inc.
-- *
-- */
--
--#ifndef _DT_BINDINGS_CLK_ZYNQMP_H
--#define _DT_BINDINGS_CLK_ZYNQMP_H
--
--#define IOPLL			0
--#define RPLL			1
--#define APLL			2
--#define DPLL			3
--#define VPLL			4
--#define IOPLL_TO_FPD		5
--#define RPLL_TO_FPD		6
--#define APLL_TO_LPD		7
--#define DPLL_TO_LPD		8
--#define VPLL_TO_LPD		9
--#define ACPU			10
--#define ACPU_HALF		11
--#define DBF_FPD			12
--#define DBF_LPD			13
--#define DBG_TRACE		14
--#define DBG_TSTMP		15
--#define DP_VIDEO_REF		16
--#define DP_AUDIO_REF		17
--#define DP_STC_REF		18
--#define GDMA_REF		19
--#define DPDMA_REF		20
--#define DDR_REF			21
--#define SATA_REF		22
--#define PCIE_REF		23
--#define GPU_REF			24
--#define GPU_PP0_REF		25
--#define GPU_PP1_REF		26
--#define TOPSW_MAIN		27
--#define TOPSW_LSBUS		28
--#define GTGREF0_REF		29
--#define LPD_SWITCH		30
--#define LPD_LSBUS		31
--#define USB0_BUS_REF		32
--#define USB1_BUS_REF		33
--#define USB3_DUAL_REF		34
--#define USB0			35
--#define USB1			36
--#define CPU_R5			37
--#define CPU_R5_CORE		38
--#define CSU_SPB			39
--#define CSU_PLL			40
--#define PCAP			41
--#define IOU_SWITCH		42
--#define GEM_TSU_REF		43
--#define GEM_TSU			44
--#define GEM0_TX			45
--#define GEM1_TX			46
--#define GEM2_TX			47
--#define GEM3_TX			48
--#define GEM0_RX			49
--#define GEM1_RX			50
--#define GEM2_RX			51
--#define GEM3_RX			52
--#define QSPI_REF		53
--#define SDIO0_REF		54
--#define SDIO1_REF		55
--#define UART0_REF		56
--#define UART1_REF		57
--#define SPI0_REF		58
--#define SPI1_REF		59
--#define NAND_REF		60
--#define I2C0_REF		61
--#define I2C1_REF		62
--#define CAN0_REF		63
--#define CAN1_REF		64
--#define CAN0			65
--#define CAN1			66
--#define DLL_REF			67
--#define ADMA_REF		68
--#define TIMESTAMP_REF		69
--#define AMS_REF			70
--#define PL0_REF			71
--#define PL1_REF			72
--#define PL2_REF			73
--#define PL3_REF			74
--#define WDT			75
--#define IOPLL_INT		76
--#define IOPLL_PRE_SRC		77
--#define IOPLL_HALF		78
--#define IOPLL_INT_MUX		79
--#define IOPLL_POST_SRC		80
--#define RPLL_INT		81
--#define RPLL_PRE_SRC		82
--#define RPLL_HALF		83
--#define RPLL_INT_MUX		84
--#define RPLL_POST_SRC		85
--#define APLL_INT		86
--#define APLL_PRE_SRC		87
--#define APLL_HALF		88
--#define APLL_INT_MUX		89
--#define APLL_POST_SRC		90
--#define DPLL_INT		91
--#define DPLL_PRE_SRC		92
--#define DPLL_HALF		93
--#define DPLL_INT_MUX		94
--#define DPLL_POST_SRC		95
--#define VPLL_INT		96
--#define VPLL_PRE_SRC		97
--#define VPLL_HALF		98
--#define VPLL_INT_MUX		99
--#define VPLL_POST_SRC		100
--#define CAN0_MIO		101
--#define CAN1_MIO		102
--#define ACPU_FULL		103
--#define GEM0_REF		104
--#define GEM1_REF		105
--#define GEM2_REF		106
--#define GEM3_REF		107
--#define GEM0_REF_UNG		108
--#define GEM1_REF_UNG		109
--#define GEM2_REF_UNG		110
--#define GEM3_REF_UNG		111
--#define LPD_WDT			112
--
--#endif
--- 
-2.43.0
+On Thu, Jun 12, 2025 at 09:08:50AM +0000, =E7=89=9B =E5=BF=97=E5=AE=8F wrot=
+e:
 
+> When booting RISC-V ELF-formatted kernel images (IH_TYPE_KERNEL + IH_OS_E=
+LF),
+> explicitly pass SMP hart ID (via a0/argc) and DTB address (via a1/argv)
+> to comply with modern SMP-enabled kernels' boot protocol requirements.
+> See https://www.kernel.org/doc/html/latest/arch/riscv/boot.html#register-=
+state
+>=20
+> Signed-off-by: Zone.N <zone.niuzh@hotmail.com>
+> ---
+> boot/bootm_os.c | 11 +++++++++++
+> 1 file changed, 11 insertions(+)
+>=20
+> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> index a3c7cb5332e..d95477f1344 100644
+> --- a/boot/bootm_os.c
+> +++ b/boot/bootm_os.c
+> @@ -402,6 +402,17 @@ static int do_bootm_elf(int flag, struct bootm_info =
+*bmi)
+> if (flag !=3D BOOTM_STATE_OS_GO)
+> return 0;
+> +/*
+> + * Required per RISC-V boot protocol:
+> + * a0(argc) =3D hartid of the current core
+> + * a1(argv) =3D address of the devicetree in memory
+> + * https://www.kernel.org/doc/html/latest/arch/riscv/boot.html#register-=
+state
+> + */
+> +#if defined(CONFIG_RISCV)
+> + bmi->argc =3D gd->arch.boot_hart;
+> + bmi->argv =3D (char **)bmi->images->ft_addr;
+> +#endif
+> +
+> bootelf(bmi->images->ep, flags, bmi->argc, bmi->argv);
+> return 1;
+
+Something entirely ate the spacing, please repost, thanks.
+
+--=20
+Tom
+
+--DD8eYFaTcZp+nTY9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhLGQUACgkQFHw5/5Y0
+tywfzwwAnntXV7Gi12lxwMTWQHCz2D9a5BoFI6/xyxjBBERNfCPRjO12hkcGORnn
+q1U4U8kNNSN/zckbcKN8uLCMvZ6+dkLPGZQGrRkdlHypJFDYi6iNa/xyGNq8e0Y1
+1IUdImMG7h1Dvmr4vmedTUFDG7OfaUJ4+4iqGJzl9zOFuzna8NKLywDRBdI3W5re
+XapUDeSTSgyZxeH4jKNz99elyJreV0Ze98CrtyDEp+SGz2XWWpevoH1TgojTrJT1
+almCMBoMNBFqg8GqfUVRB0PlEiJwqp7A+PpZz3XSofnViOhkGdacBD7eb7yBwyqE
+1TwcXzpREuVXFcwQk2eA3iyfOdoMu4acoiojQqaQJvLthh5/HkxlyG6zQ4F7TFdu
+Brfxs63tTSA/6TLhIHr9ELRstnzLDPjjjQOs/Gz3l6N8SB8W+oMBARWtPTB68QqB
+X513vzWh14b+QHl1+awH4hHkLspMialB0B3Li2bFUvXq6asL9dQAH/YKxnJ0Sx+Y
+ziQinsCr
+=Bn5s
+-----END PGP SIGNATURE-----
+
+--DD8eYFaTcZp+nTY9--
