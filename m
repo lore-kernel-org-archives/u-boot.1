@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F8F6C71136
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 10:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C5C1C71141
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 10:40:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7021800C1;
-	Thu, 12 Jun 2025 12:39:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EF4282A4B;
+	Thu, 12 Jun 2025 12:40:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="buASrV0x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XZWW3gqD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94D5E82B70; Thu, 12 Jun 2025 12:39:30 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id F09D082B70; Thu, 12 Jun 2025 12:40:33 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DEA88004F
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 12:39:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0431800C1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 12:40:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-450cfb790f7so5939145e9.0
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 03:39:28 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a376ba6f08so484286f8f.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 03:40:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749724767; x=1750329567; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749724831; x=1750329631; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ZgAVfOjlVykqU1GeyYz34sdoGY89nm0c4zWwiE8dIhs=;
- b=buASrV0xSbTY8rp4OrGEg4zXJ91WLXovUq6zefnsyO4QUiZ41zx+t7wrItMrtZ+2Js
- H3W+EQz3hGXoWsDgUShRajgwwJc6xwDGtYB1eDr90ZUIb5PsB95eSJufdL4KBZpojLnY
- ISqTuiA6NwaZNv+rwnO01uYPqZywmR4DUOeEjXLv3OjzloxRL6BQdKZpWL6iIZPeRhy6
- C7pn+XnrEHCMmLktqo/zmk0FswSRRobDnCYUoEw48q5plWDxf/o73jLQ8Q8HQODrMV5Q
- ns8/Cz9MqFJe/UNeI3m9Jrjuiu24KA6XfUXHhzYH1THOwwCFZJUGyC0YTaYoqhYzkVM2
- qprA==
+ bh=BNIpqI1uCX16ug4F6gI90i24UdJEfs+hOguPGm7O0jQ=;
+ b=XZWW3gqDtRpeaUBerL27/Ewin/FHEyGidZBD7pHWAOhYNH4gegNaqrnPkM0EkufgEw
+ iCmw37ScDnl5bLTzVaIaQIF2WZu9LDdrL577f9DBCOSNDuVpiTzTMB6IGZiF+C/WH8XR
+ /45wOmw4SU+pksVXg9xHxTT7NBWLnFyd1LHOceRu8dljaE7NFtjWrIpgJH/YfDf56TRq
+ XagA/EzhoB5rhisA3OkBvX/SbPfZXB3bcTzMZ9oUGsH4HQAjpI/VkO3+wgQBObmHTSm9
+ hkalt2TMOsofxaeHBraiXUptn4FYOTRlrZrOeZVPAhtxk2H23bLbnoUZN6dGPrTY8LD1
+ ao2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749724767; x=1750329567;
+ d=1e100.net; s=20230601; t=1749724831; x=1750329631;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZgAVfOjlVykqU1GeyYz34sdoGY89nm0c4zWwiE8dIhs=;
- b=gwVEhfWDiMkDKvQJ8XR8GZLNP5UBxgsUINogvBy1HtJC3QJ98l+ou00vgcgTYMKU8w
- yNHOy0pemtTctyLVJK5ODibwslWsN4tyB3Cy08oCSVeS5larqriu2LoLE6trKMfGcT0O
- +l9uuDjnu2hQ4SqPQfRqE/uETL9syOFZ/DQWdhe3X3a3bx+NInV3Dqf8b8JjLvgDrQu7
- cSt1ayvVltiJvhXuRU4pf9NfHltkCkgstg3jqWzFf5aBdtvfb1WiqW8sfnePnKfpnPQx
- mh+BQ+XeVGzYJDOWeecVjbED1kG7551hgqStgCLVffUv/URtTYQznNTYATHKueMLWPPw
- VO+g==
+ bh=BNIpqI1uCX16ug4F6gI90i24UdJEfs+hOguPGm7O0jQ=;
+ b=Mw8BktyBDk/g/Suf0YmOw95JSxeOkwWDX6RapxxkMV30j3RqN+lvwaA+opGjmA2qzy
+ FfMnKhISDjanubQrhiAN5h30LPwc5B8sBAVg5ENI90+WGyig2KObKVPOifeYO9e+6fn0
+ JeX8BiNH0XMRLOiu0hxVDmFmI+HcwLZJ9KHFGuV2QtXqJh2zNqKMxzpE+BXnvXy/kFgy
+ vgmUApLN8UPOe6DPwOo+1IcPec8oGgiIRb8ETMmHDF1sHr84imE12OzPBALzVUzIYKl/
+ G/l07PmLxhtOP1BHYYKGDjUFGLtUUcPSeJduNTuszDiGGtrfB6b76gMY3fmZsyCgbOkO
+ fjxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6dqksw6qx6/oFnm52CIoDZ9ootCdwqo4gVda66BT3mBz5lsghq0/jZfkJcmQ48fk0lCDNAoE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNWpX0Jckfu7GyQxIdZPLQmiMPwJdyfRfnjHfZ5SGrjciU8kKf
- jAx7PSoSUwAzgzrimByRbU/cavVMn3xBU+sRlvZZURzGtBD16VUiDBTWblHiochNoe0=
-X-Gm-Gg: ASbGncvY3HyZbZ0FaK7rs/yLhC0/QLHlvGVuY6/PBuN+iCcHuXuZtkzvc7oli7CkoTl
- TBxCWBBVBIhDpal88S3y6+D05ooxcYQD46rbT7EOLaqFbF+FaxySUipRolfuhnhAKm4TbAo+6Q3
- VdRhCIHPBPoILSTZO5xekS/fv9bAYp1PEYwZc9zT4+xa7gMScSUVge/K/QKKE6Z8U9IO0IVkbvK
- n9oCYLUt4Pu+opfkeFtI4Rsw42tZd35j7tF8R2CpRungGuZ24ySjGktnPH6sv13K0cYTMfWEIR5
- A8FdxmWepvPQMD6jobF0gvK8RWTCBTjSeuh3OLz7S+oaseZxYI1UWaF3ZVVM6y16vLjvJf/FQfZ
- aW4UCW9eTZEytfGb2i4jKZCspohe01jBumGWnSw==
-X-Google-Smtp-Source: AGHT+IHn7IvupMBYc0KORMyG2D5Yckz8grlvekNDLofuWwmqH74HYurk/vZLxmLtiTiZdjVaP+sCPA==
-X-Received: by 2002:a05:600c:83c6:b0:453:2433:1c5b with SMTP id
- 5b1f17b1804b1-4532486c53emr63186145e9.5.1749724767448; 
- Thu, 12 Jun 2025 03:39:27 -0700 (PDT)
+ AJvYcCVY/S19RPHZ5BB1YEdlQC9A1LpyQk8J9+LdcEMulcvA8LTIe8nXe4AR4UDdqIGkUZnBhBiV9XM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmsbGIuspDydsjOOYJVcQ8YCZl1pOdubKT/IyQbrVl50kwpLif
+ we+7o9pLMrJPKzdVO4ZAGc1MHkdJHuMUrPqLXj+4hQn9SwlpoYpamx/2b3kAAXz/wiU=
+X-Gm-Gg: ASbGncshHWl5B6O+Bq5oicPbS1pHr1v5+4SUDPrGGaGQHZDq5ZtNboz9aUC2cLtOqnU
+ rXVl3o32WWTF+0OrKCxAvS+o2Vb58mYd2ym2KUT0lqR0OZaZiVXhdJ5H8kfquosdtER3WhLPBJf
+ 9pd36kYt+eabFvae0PEXPRte9IvSBZyoLQrYm7sdARXq6jaqT9LkWYkYESkNLd/PHOpoKMA0zhP
+ At4qD3+/pQwqonQ5+gzq5GoBCTUrmEZ4mdWI5XPWEMu9E0wv7vNvFVd2XWYosHdaJVXiQnq37h6
+ R8HbWFS0Ce/rlb2Q6S8AIqxvmircm44hTiDSmLjeCpj03zVjKP15Jq1J7lQGJe3hqxlFWWS2tu9
+ ORyG9LHlQodxB5DM8/tkFU/UIuhssSEWeWqAkmA==
+X-Google-Smtp-Source: AGHT+IHU41K+XCr47EalrXpFrxxTcLqC1fvENVjHOSTTkBxCx/VdfUUHMBgDn3uHkF79RfrItYxvPQ==
+X-Received: by 2002:a5d:5f89:0:b0:3a4:f786:4fa1 with SMTP id
+ ffacd0b85a97d-3a5612f0d01mr2173306f8f.2.1749724830942; 
+ Thu, 12 Jun 2025 03:40:30 -0700 (PDT)
 Received: from ?IPV6:2a01:170:117e:fc:1405:203b:89a3:c77a?
  ([2a01:170:117e:fc:1405:203b:89a3:c77a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532e156e8dsm16736765e9.31.2025.06.12.03.39.26
+ ffacd0b85a97d-3a5619767b3sm1660038f8f.13.2025.06.12.03.40.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Jun 2025 03:39:26 -0700 (PDT)
-Message-ID: <b79a5bb1-4f2e-4b08-a65c-8d909c7b0678@linaro.org>
-Date: Thu, 12 Jun 2025 12:39:25 +0200
+ Thu, 12 Jun 2025 03:40:30 -0700 (PDT)
+Message-ID: <57061d19-294e-418e-b74a-4c3d6411b9a7@linaro.org>
+Date: Thu, 12 Jun 2025 12:40:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] env: set fdtfile environment variable from
- /chosen/fdtfile
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20250610-b4-fdtfile-from-dt-v1-0-aec4df0fa53e@linaro.org>
- <20250610-b4-fdtfile-from-dt-v1-2-aec4df0fa53e@linaro.org>
- <33d65ef7-34ca-455a-bf91-11716bae5236@cherry.de>
+Subject: Re: [PATCH v3 0/3] Implement reset to EDL for qcs9100
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ ilias.apalodimas@linaro.org, clamor95@gmail.com, robert.marko@sartura.hr,
+ me@samcday.com, sjg@chromium.org, marek.vasut+renesas@mailbox.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250507070733.2871986-1-quic_varada@quicinc.com>
+ <fb46de68-c969-433c-8f11-2dbc258afeb0@linaro.org>
+ <20250612100924.wlowchclk3u7uijd@hu-varada-blr.qualcomm.com>
 Content-Language: en-US
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <33d65ef7-34ca-455a-bf91-11716bae5236@cherry.de>
+In-Reply-To: <20250612100924.wlowchclk3u7uijd@hu-varada-blr.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,96 +109,76 @@ X-Virus-Status: Clean
 
 
 
-On 6/11/25 15:55, Quentin Schulz wrote:
-> Hi Casey,
-> 
-> On 6/10/25 6:23 PM, Casey Connolly wrote:
->> If /chosen/fdtfile exists in the devicetree and the fdtfile variable
->> isn't set in the default environment then populate it. This allows for
->> U-Boot to load the devicetree from the boot partition or ESP that should
->> more closely match the OS being booted.
+On 6/12/25 12:09, Varadarajan Narayanan wrote:
+> On Wed, Jun 11, 2025 at 01:55:32PM +0200, Casey Connolly wrote:
+>> Hi Varadarajan,
 >>
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> ---
->>   common/board_r.c | 35 +++++++++++++++++++++++++++++++++++
->>   1 file changed, 35 insertions(+)
+>> On 5/7/25 09:07, Varadarajan Narayanan wrote:
+>>> Using the 'reboot edl' command in Linux, the platform can reboot to the
+>>> Emergency Download mode. Implement the same for U-Boot.
+>>>
+>>> v3: * Introduce a sysreset op that will pass down the 'reset' command
+>>>         arguments to registered handlers
+>>>       * Handle 'reset to edl' alone in qcom-psci driver
+>>>
+>>> v2: * Rebased to recent sources
+>>>       * Dropped the first patch as it is not applicable anymore
+>>>       * Bind the new driver from psci driver
 >>
->> diff --git a/common/board_r.c b/common/board_r.c
->> index 
->> 41c8dec8d49ef21a12fd41272581dd94484dfa08..594c7827c39cfca5f4561b4699e5b66de54e11c2 100644
->> --- a/common/board_r.c
->> +++ b/common/board_r.c
->> @@ -448,8 +448,41 @@ static int should_load_env(void)
->>       return 1;
->>   }
->> +/**
->> + * fdtdec_setup_fdtfile - set fdtfile variable from /chosen/fdtfile
->> + *
->> + * This function will look for a string property named "fdtfile" under
->> + * the chosen node and if found set the "fdtfile" environment variable.
->> + *
->> + * This devicetree property is used to identify the path to the FDT in
->> + * use so that the same path can be checked in the dtbs directory on
->> + * the boot partition or ESP.
->> + */
->> +int setup_fdtfile(void)
->> +{
->> +    ofnode node;
->> +    const char *path;
->> +
->> +    if (env_get("fdtfile"))
+>>
+>> Sorry for the late reply.
+>>
+>> This really needs some associated documentation, at least adding the edl arg
+>> to doc/usage/cmd/reset.rst and the help output in cmd/boot.c should describe
+>> the edl arg if CONFIG_SYSRESET_QCOM_PSCI is enabled.
 > 
-> How do we guarantee that fdtfile variable is read from the default 
-> environment (I assume here you're talking about the environment stored 
-> in the U-Boot binary?) with env_get?
+> ok.
+> 
+>>
+>> it also doesn't build?
+>>
+>> ../drivers/sysreset/sysreset-uclass.c: In function 'sysreset_walk_arg':
+>> ../drivers/sysreset/sysreset-uclass.c:93:63: error: passing argument 3 of
+>> 'sysreset_request_arg' from incompatible pointer type
+>> [-Wincompatible-pointer-types]
+>>     93 |                         ret = sysreset_request_arg(dev, argc, argv);
+>>        |                                                               ^~~~
+>>        |                                                               |
+>>        | char * const*
+>> ../drivers/sysreset/sysreset-uclass.c:35:69: note: expected 'const char **'
+>> but argument is of type 'char * const*'
+>>     35 | int sysreset_request_arg(struct udevice *dev, int argc, const char
+>> *argv[])
+> 
+> ok.
+> 
+>> ignoring that for a sec, I'm a bit worried still about how this behaves on
+>> boards that don't implement this psci call, on sdm845 for example we just
+>> hang.
+>>
+>> I think psci_system_reset2() should be adjusted to time out (though I can't
+>> imagine a psci implementation that would return execution to el1 during the
+>> reset, so maybe the timeout isn't even needed?) and return an error if the
+>> reset didn't happen.
+> 
+> Would checking if the system-reset2 function is implemented in PSCI and
+> handling appropriately similar to [1] be ok? Please let me know.
+> 
 
-I'm not sure tbh, I don't have much familiarity with the env_ api.
+Yeah that looks good.
 
+>> Then qcom_psci_sysreset_request_arg() should print some useful error message
+>> ("reset2 not supported on this platform, reset to edl failed") and bubble up
+>> the error code to abort the reset entirely.
 > 
->> +        return -EINVAL;
->> +
->> +    node = ofnode_path("/chosen");
->> +    if (!ofnode_valid(node))
->> +        return -ENOENT;
->> +
->> +    path = ofnode_read_string(node, "fdtfile");
->> +    if (!path)
->> +        return -ENOENT;
->> +
-> 
-> Please add this to the DT spec (and schema) before it lands in U-Boot so 
-> we can have some sort of standard here (e.g. Barebox may want to use 
-> that as well? The earlier stage setting this variable needs to know the 
-> location, name and expected content of the property).
-> 
-> Additionally, you say this property is a string array, I assume of the 
-> form:
-> 
-> fdtfile = "myboard.dts", "myboard-overlay.dtso";
-> 
-> ?
-> 
-> Which seems to be hinted at by the cover letter.
-> 
-> In that case, I don't think ofnode_read_string is the right way to go. 
-> We should
-> 
-> 1) enforce the location of the dts in the array (I assume 0?)
-> 2) look only at that location to get fdtfile, e.g. with 
-> ofnode_read_string_index?
-> 
-> Otherwise we'll have incompatibility with old U-Boot being unable to 
-> parse a string array and new Device Tree providing an actual string array.
+> If the function is not implemented will print a message and bubble up
+> -EPROTONOSUPPORT.
 
-I don't think this is an issue since a string array in DT is just null 
-separated strings, but yeah it would probably make things clearer 
-regardless.
-
-thanks
-
+Makes sense. Thanks!>
+> 1 - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/firmware/psci/psci.c#n554
 > 
-> Cheers,
-> Quentin
+> Thanks
+> Varada
 
 -- 
 Casey (she/they)
