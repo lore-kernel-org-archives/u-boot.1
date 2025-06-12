@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC714C61CE8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:17:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E27CC71136
+	for <u-boot@archiver.kernel.org>; Thu, 12 Jun 2025 14:17:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D03982CA8;
-	Thu, 12 Jun 2025 16:16:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87F5C82C87;
+	Thu, 12 Jun 2025 16:16:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e3nHYfPt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PIU/L3eF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 513B982C84; Thu, 12 Jun 2025 16:16:47 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 0A7A282CC9; Thu, 12 Jun 2025 16:16:50 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5B0082C79
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:16:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3F1482C7F
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 16:16:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-453066fad06so7855895e9.2
- for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:16:44 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-450cfb6a794so6195145e9.1
+ for <u-boot@lists.denx.de>; Thu, 12 Jun 2025 07:16:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749737804; x=1750342604; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749737807; x=1750342607; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xs7xiA0ipFktXUAsKK2mlzZ1QR/S2l8R+ymVYFNhpKI=;
- b=e3nHYfPtBkz0f+/M1xXE9ii9ZwilsQlkH0RbfUq/fV4I4gYY4SiVFG0Cpgkfufut8X
- /lMiBTOt0osSvJMrMuVPbJXP0AhHSiIoChvM4x5Fl4h09o+JBZd8JWVM+yg/pQBkKMja
- xv5xahuAVuQOYAWFs48TyXTfc4cYSt/3xrEkWpNUmB2ZLsOvXBwlhjOB9+RMdWJudkUw
- xHy3rxbQhzP0njNMeMSxbHpR9FxXBT4rIhiU+CZyOV4MITZ1qFREOYNhyqI0fvYJQrwn
- /zptAguyS4kLVxm0jcXzllSKT0BbI6xI3p9uyJroV3fW+BC6TglzOh+vS4iC5GcpLnc/
- tlJA==
+ :reply-to; bh=3rBlczCLDuJeJVfwlHqjHo9naPJLzz7NV2CUVDyqSTk=;
+ b=PIU/L3eFFFQ4fv+60497+lBIAzsOdqwFEPpfoXNUAa8e1AG7EuuzJwy7IIAZx0TNTz
+ vZ7X4duR1ygUrIEOFnltPkLIB9WT36ukJGHFh8jLknPhEsBMSU8lZYbJZcWOx4NZM68g
+ s6/UxupahBpO+YuW5runClBmCP3ESiWIA0iG6ZACo1boxthI5ilco0sC3xCHbk3jRe0l
+ Ev/cm+qlz7W74AxfXCCYKS8iFz/92Hl2R5HhNYzTzxW769c0RnY10zsi9l6WnHxl6vdO
+ ukSEFQ/IfnIQVVzyn1y464+0VFak6GYEkszI+DRjUEGwF5LC/YkebGL3rj3RprqR3eoF
+ 7rZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749737804; x=1750342604;
+ d=1e100.net; s=20230601; t=1749737807; x=1750342607;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xs7xiA0ipFktXUAsKK2mlzZ1QR/S2l8R+ymVYFNhpKI=;
- b=XjeB92B5RYuwOjWmmP09yLPPul5+Mi9rZCARTocQwFS/myMqwLAP3xmQ4oQcWS/boZ
- q1AF0XbVMj7gYxdW7/wUFzW5dcXSZ6ULaJgjTyg3lljTnhsP4v7vzEGATJRbdLGD2mGg
- SF/qisnyhExK/T1yxex3pRuRk4iCu4yA+DX6r8HEkFuH4hjOXTgWd6w9VaA20jfozY9b
- 8hMhoit8Pft61nAB5KNT3Ha1lwhZ0mWtzNx0H2lMjkahuNjkf96fuwFsURbcbeU54us/
- 0HlWmJLMptLkCjt3j0J061eX6oLFbaiftMcDTBjsJdQ3isqd0kVNVQ/+xZGbFVcHNkpV
- D/og==
-X-Gm-Message-State: AOJu0YyGg1KE3/HfYgj09IyXublMOnOWocism0gLB0kLxdwpEppnYrFy
- nASQ9Jzyh5AgCWPS0NgVt91l1v6yTT4rUZZR4kXwpEwyiTVsSQuszi/gu+P7EbxtDBQ0YFA8stf
- dWLTO
-X-Gm-Gg: ASbGncv0huGvUiH10Ar0oTpt+kUskfGBTuKgd2UrZtNeeXkXMSo9o4Dtpv1226YAZiT
- Tu4K76I6oqp8BFdWfma5b5YlcblvK8kPTZduWGkmwbBKSXvRyOCEQymujdwoXfhHsWk6iETZWns
- 4VZBSsC9TIAbQ5IPeLmBM86O41jsEKwf332STwZd0r8UhEQAidvKB0TVVGIqb9kmBxMb+NjP8/y
- TXecycfTUbdKFFAfFyrN3ySeywH6jBi+FSUa8WriH6HoWpSbd9hKtbO02UVW5ALqMch3u7/8Orm
- zUQn2NaJV+Wt/YzZykWUPr3HnO5Dw1Hv/FZSK5uq0M8yI/XuarGMTI+BdL9yZ1nLYR5rRDGp
-X-Google-Smtp-Source: AGHT+IElHNir8KZdsAXJCgUu8VMk7vzoG7udT49WVxB3/pcbN1tHSPakBrZcsVNGSX63nY/n2fBRgg==
-X-Received: by 2002:a05:600c:b8a:b0:442:d5dd:5b4b with SMTP id
- 5b1f17b1804b1-4532492b480mr77613545e9.31.1749737803802; 
- Thu, 12 Jun 2025 07:16:43 -0700 (PDT)
+ bh=3rBlczCLDuJeJVfwlHqjHo9naPJLzz7NV2CUVDyqSTk=;
+ b=niWZmDi68bMcWq97zCrorX8t/Iz4BaVn5VwoEZ+LIoBBMCJSrm7WBbF0etjlFOdJCF
+ 8WKTB8xLQFiLt9yF3us3EubIk7ooLwu2iud7dxCuBnl0K5wJ5o5cMRcSnWcQP14/SXwL
+ FPJomHtDaRffahW2SzhfCx920w4Fa5qCUQ0cn4cclUE3z0aGXIYuC6y6nyURCj0/vWCZ
+ sX53WwGcgbYMGllpR1x1cFAm+n0ARg4IEYtKWRYLRk0NT6DBUaPetiL67W53rKzNN87Z
+ g9i9Zb8yxHtNJLJAeD8b0fb2D1sx/y8YKEsxZprs5XTsDfOhppFF7JLUmraA43Sa2p8r
+ upgQ==
+X-Gm-Message-State: AOJu0YzTGFX8tBc7SjY5B9Hef9gUg6TXribcnw7aAGqyQQL3vpny4J6z
+ YJWcjhpeQyBhnHgf11lURBQMaDJjOyvjwZ2FQMmBqu5Dv8cEvxQZaXXay2W6fSXxJ8DXLxyYGKj
+ FVkaz
+X-Gm-Gg: ASbGncs6IdilYVJNiIE+HeIoDk+UQKZCrkmqxSBDJjB/VnSfVOlqYPnA4sP6cRLYMZL
+ O7z/Ld/cV4iv55FsnNjHx6hFqOqdZJo6g7UB7araulTP5dxNgE1y2EkQSA7ZzzgKgF1IQC1GKYs
+ faTHiouH0R/OKjjZ8hUPoaXbQPf9zyFBEsJFRYuadAOT2EJQU3KPN1XInrFVSUG2fbOyolqesMT
+ lmRQq1i6k1Gr1mHekSLUwwk/Ncwk4lI+F1zlZ2jwCt2QJX4DMzIBunZVJwcf8UHAEYOY1LfoMZj
+ hujDsIAod/v+KgOv8qH4znqyRSPmTnVcCFTj3Mt2Rh9XVCurTvKQ/ghcDIFl+1ps1Mo1LT8n
+X-Google-Smtp-Source: AGHT+IGXdWPVU5l4D2oYxmyG3TBEyESq5Mz3X4IK0qYNj/OQHusQ8e1Rx6weoCRjn5GAN5pmxkOGKA==
+X-Received: by 2002:a05:600c:1d94:b0:442:d9f2:ded8 with SMTP id
+ 5b1f17b1804b1-4532906416bmr56032755e9.15.1749737806751; 
+ Thu, 12 Jun 2025 07:16:46 -0700 (PDT)
 Received: from toyger.local ([2a01:170:117e:fc:1405:203b:89a3:c77a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a561b510dfsm2044006f8f.82.2025.06.12.07.16.42
+ ffacd0b85a97d-3a561b510dfsm2044006f8f.82.2025.06.12.07.16.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jun 2025 07:16:42 -0700 (PDT)
+ Thu, 12 Jun 2025 07:16:46 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 12 Jun 2025 16:16:38 +0200
-Subject: [PATCH v3 2/7] binman: support building binman dtb when
- OF_UPSTREAM is enabled
+Date: Thu, 12 Jun 2025 16:16:40 +0200
+Subject: [PATCH v3 4/7] binman: add support for building Qualcomm signed
+ MBN ELF images
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250612-b4-qcom-tooling-improvements-v3-2-76f34cf216e2@linaro.org>
+Message-Id: <20250612-b4-qcom-tooling-improvements-v3-4-76f34cf216e2@linaro.org>
 References: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
 In-Reply-To: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,21 +88,21 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1814;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3365;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=zpH4J/5un2orgNb3aWeipGM6L8Q2h9Oh8TvyEo7hNVI=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoSuFGiGDgTi5ycoKS5s7h0aBPsj33znGO5XiZB
- DmET337dV2JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaErhRgAKCRAFgzErGV9k
- tnoaEACIBkAqy3mL/fO7pK8Poy6n+LsusM8QcntHjxCKaAMWNebM7mJWi42g09GytRupaEPYfJw
- ivQ5QWmatTDyUZm3/ywj8CvnDLV4Hwdyj5iy1nL4jmAuEwglO1XB8YC+8oOUPA6gNIUtCK2gEOX
- oJBmVeVfXRN+kCRA+c7ni8xL7V6GEI1vKCkdQlCcgRoApkCL/Rjso3Uxvx0WC+QAHA6WWklmNxF
- WamndZstN8NRDP7WSJzLOREHBhcXgXXAS7k1dvgZenFvZor28DhzjkcAt6sd4BI+M/1yVNR2fC/
- FOkVtfcnxsALhzYdIiLuxKns3MV/d5EpG38f/I/pH97gGR+V2KvWJjihUNXMOQGGHwoz+txpKCC
- hG3wWIqi6JmgyhGT/S3o7e/XqZw2SuBmIvEYh/iyYARjV2491cq0nGi4fxLMCUovacD/OoNCHhz
- CgmRev9WTiWlEVrhNo8TQI0CGSDQ5F/1Mwg5WyogmXgmKhxBv40psv9ldjd0IwiqAPW6paf++bg
- kub8PyB5rydQbu0GmTfcNHjSCT9k2il/n4n4Z7Vs2rlLIeWjEi8doyI1ES7i8dKY0JZyjqhQJ3y
- QHkXW3YudKx7A0EsRJ6jrRf9uvervEUcSYcM/xoZebwzx+uKX4jnp3PCkUoGuL7wqx6Fi+TnjHF
- yqDGIY6WNuNijSQ==
+ bh=TXFHSBTqflb6f6NfX7pRRs+cU+8UjpId/6G4GiI9qEA=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoSuFGvw+ehD6xUslITd7b15HwQIJL0+3sKW2Ny
+ V+cE8QvJEOJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaErhRgAKCRAFgzErGV9k
+ tq6pD/4jaPX2bacPb+DkkQtxEEcl/X4fLm45G8CCWM3siuNwWcJQX/pTebB4Zr2kBbRD85ziYIy
+ gzcVbzK4O44M3mhnRKfJTyWnaY7XL+GY3kUldQJHqj54KkwGcG2RI8G3y5CJ/BmMSgiP+0ZNi4n
+ 3Is5Tc19DM7Jv6zOkxDAVu3w1XiIVKvdWjxnDUI2MeYvYsr9Gh0xrwmwjRlOYFSdDqVKqP0wn6x
+ iOkuIfjcOUf/5AsiMwIPptOf6WHYsdbxoTyWq11UJsEbPUrYA7+5b3Ek+4SlP2SpqgQ6UFiJQ+v
+ QzFwS+5nXNLoRWWc0J/rFFLZzi6V69uJJ+jnM+lO4CuTRjbgFugJcoMeVTmZf5jk3bXkVIH00Uv
+ NwcaS9NKkIW+YJ5jBzBJoiJUlAc4QlZWswOAisz7KkADKTKNEcnD4ya0CjghQVT/mO6Tx46JGKB
+ JqGC+GlyJhlCLY3oVcZyX9cAgu4arTyT4sJIeJSJHOt3BObcRRDpGtAEMM1HGinVTN0g4m+hA2x
+ W6tmUCYnPGLRuZWg+vVc4WxjcuiEU1a38IzGkUePyADynEJxD3sQdoIs3rcEMi0bRf28bYXzyn9
+ Zr2SqYJPFq1rVXBrLSgoY2TWHFtvYDHHICQBOqhLi7LyJm4LdtjCSH3ESzDEL+xXhebtDbG2Ijs
+ cVCYzbQoYXmxvBA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -121,66 +121,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since binman DTB files are not upstream they are kept in the U-Boot dts
-dirs, this means they will not be built when building with OF_UPSTREAM
-enabled. Resolve this by adding a rule to build the binman DTB if both
-conditions are met.
+Implement support for building u-boot.mbn files using the new mkmbn
+tool.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- dts/Makefile | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ tools/binman/btool/mkmbn.py      | 29 +++++++++++++++++++++++
+ tools/binman/etype/u_boot_mbn.py | 51 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 80 insertions(+)
 
-diff --git a/dts/Makefile b/dts/Makefile
-index 86bf8dc215603c3c02930e9c642d7dc06ce715fc..c20d0fb7cca9d117030a882be783a8e855e10749 100644
---- a/dts/Makefile
-+++ b/dts/Makefile
-@@ -25,8 +25,15 @@ local_dtbos := local-dtbos
- else
- local_dtbos :=
- endif
- 
-+binman_dtb := $(subst ",,$(CONFIG_BINMAN_DTB))
-+ifneq ($(binman_dtb),)
-+binman_dtb_target := binman-dtb
-+else
-+binman_dtb_target :=
-+endif
+diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..232e2b442a166f9e86a4d4eb5f55f624eee0dc62
+--- /dev/null
++++ b/tools/binman/btool/mkmbn.py
+@@ -0,0 +1,29 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2025, Linaro Ltd.
++#
++"""Bintool implementation for mkmbn"""
 +
- ifneq ($(EXT_DTB),)
- DTB := $(EXT_DTB)
- else
- DTB := $(dt_dir)/$(DEVICE_TREE).dtb
-@@ -45,9 +52,9 @@ $(obj)/dt.dtb: $(DTB) FORCE
- endif
- 
- targets += dt.dtb
- 
--$(DTB): arch-dtbs $(local_dtbos)
-+$(DTB): arch-dtbs $(local_dtbos) $(binman_dtb_target)
- 	$(Q)test -e $@ || (						\
- 	echo >&2;							\
- 	echo >&2 "Device Tree Source ($@) is not correctly specified.";	\
- 	echo >&2 "Please define 'CONFIG_DEFAULT_DEVICE_TREE'";		\
-@@ -64,8 +71,18 @@ PHONY += local-dtbos
- local-dtbos:
- 	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbos
- endif
- 
-+# If CONFIG_BINMAN_DTB is set and CONFIG_OF_UPSTREAM is set then
-+# ensure we build the binman DTB as well
-+ifneq ($(binman_dtb),)
-+ifeq ($(CONFIG_OF_UPSTREAM),y)
-+PHONY += binman-dtb
-+binman-dtb:
-+	$(MAKE) $(build)=arch/$(ARCH)/dts $(binman_dtb)
-+endif
-+endif
++from binman import bintool
++from u_boot_pylib.command import CommandResult
 +
- ifeq ($(CONFIG_XPL_BUILD),y)
- obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
- # support "out-of-tree" build for dtb-spl
- $(obj)/dt-spl.dtb.o: $(obj)/dt-spl.dtb.S FORCE
++class Bintoolmkmbn(bintool.Bintool):
++    """Qualcomm MBN generator for U-Boot
++    """
++    def __init__(self, name):
++        super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
++
++    # pylint: disable=R0913
++    def run(self, infile: str) -> CommandResult:
++        """Run mkmbn.py
++        """
++        args = [infile]
++        return self.run_cmd_result(*args, raise_on_error=False)
++
++
++    def get_path(self):
++        path = super().get_path()
++        return path
++
++
++    def fetch(self, _method):
++        return True
+diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..35c271a45e3ce75f10d1852eb0ac290b38913d84
+--- /dev/null
++++ b/tools/binman/etype/u_boot_mbn.py
+@@ -0,0 +1,51 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2025 Linaro Ltd
++# Authored by Casey Connolly <casey.connolly@linaro.org>
++#
++# Entry-type module for 'u-boot.mbn'
++#
++
++from binman.entry import Entry
++from binman.etype.blob import Entry_blob
++from u_boot_pylib import tout
++from u_boot_pylib import tools
++from binman.btool.mkmbn import Bintoolmkmbn
++
++"""
++Casey TODO:
++
++* move qcom-binman.dts back to arch/arm/dts and figure out how to make it build...
++* set CONFIG_BINMAN_DTB in qcom_defconfig
++* update docs
++
++"""
++
++class Entry_u_boot_mbn(Entry_blob):
++    """U-Boot Qualcomm signed MBN ELF image
++
++    This is an ELF file with custom program headers containing Qualcomm
++    specific hashes, signatures and other metadata. It contains the
++    u-boot.bin image.
++    """
++    mkmbn: Bintoolmkmbn
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++
++    def ObtainContents(self):
++        self._pathname = tools.get_input_filename('u-boot.bin')
++        res = self.mkmbn.run(self._pathname)
++        if res is None:
++            self.Raise('mkmbn not found or failed!')
++        # Exit code 61 (ENODATA) indicates that an MBN file can't be built
++        # for this board. This is non-fatal since it may not be required.
++        # however we print the stderr which indicates how to add MBN support
++        # if it is actually needed for this platform.
++        if res.return_code == 61:
++            print(res.stderr, end='')
++        return self.ReadBlobContents()
++
++    def GetDefaultFilename(self):
++        return 'u-boot.mbn'
++
++    def AddBintools(self, btools):
++        self.mkmbn = self.AddBintool(btools, 'mkmbn')
 
 -- 
 2.49.0
