@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9116BC71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:01:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91D4C71136
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F28A982DFD;
-	Fri, 13 Jun 2025 15:59:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C0E782E17;
+	Fri, 13 Jun 2025 15:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="iDOHnzze";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yMem25tI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A18482D17; Fri, 13 Jun 2025 15:22:05 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 4B1C582D17; Fri, 13 Jun 2025 15:22:06 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68BCA82CA8
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:22:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C14D82C30
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:22:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ad89333d603so421763866b.2
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 06:22:03 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-606ddbda275so4215423a12.1
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 06:22:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1749820923; x=1750425723;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1749820924; x=1750425724;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GCm0WtfO78Oz5ehYnd53GOoAyFctm0Y3FFNG2a93lzI=;
- b=iDOHnzzeqKA8LddFsa2OjbxN+6n13iTYYVPNhE8uNdBHnDPwcbEWcJ3KIIWhKqTkgp
- CJghyZd3G0XrKqR2+Br7LQFNJV+DZIZEL0CYzSNpZTPEkmwozaD/RR4B+7a6HIpO2wLa
- f3n0MYzcCxTW2YAaZNN0bMydmaU0CVpk7RatsaP404ndDqLQem5S2C72oUpAgi3pdOU9
- 9NlibNshP4R6Iu+kiU4iv55uiI3P3n5tfrRc9RWiTevIfrwW4jvOHc5IAV64PC7tC1qP
- bAjJ8W7mK0TSqacz0CNpx4ImItYfWx0VwdLcjR2qCHF74/JlxmFHdWFzKrqofh9uUXD+
- jqiw==
+ :reply-to; bh=1+SomWi3H77I8TRlw0ITmjSWIDSsWZUYho6iXyCxTXY=;
+ b=yMem25tIakJ4L+fjcYWKAVhPKRdWd46Vx0wzRCltDeIVLczMBMGtvk/B6ctmRzs3QZ
+ uvrEQtYFtdFwe6YM17ikL1VjBfg835bnVaC8WJYux/k6nQMkN8OpqmfakZViTZOu+iE2
+ TkD2Jt7WVhNyOA4Mq1J7d9tnb5FLtc+V0CGpFU5fXgm5IxMXdMTTUkvoSrtScDoUq4AN
+ f6n8Y6VIqDnVi+FgircDKWqgbIwk237NP8cLZD4uq7dETVo76iK6ypZkykwuQa+21l2a
+ psWoDpoFWQWsKnOGa7xyX22QhkYMEx2BtbomxP7vnbOTXONFl3oNjmK6jQZuFeoaKYIT
+ z/Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749820923; x=1750425723;
+ d=1e100.net; s=20230601; t=1749820924; x=1750425724;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GCm0WtfO78Oz5ehYnd53GOoAyFctm0Y3FFNG2a93lzI=;
- b=mZPwhgPwfjGnxzGX/1PytW3ui9oD9Y7fzVZFpIPt3sfCOLeyupeP0lynBTpMjnfMGV
- oXkYg31K0pfz7+k9xEZesEjsxK1dJ+rUN4sUY9NmS6ABF172phDpZsnNwAneptRYyEY1
- sjX4ri7ZN110qNgg26JHxdckO238icVR5NDp6d0Rz0kFE5PnTtnenQkTzXZg/NNzKRjD
- s1VaCOTmY0IZGja8AAw+u48JXf6bmJKB/dYeCoiAEPqV1PQDnCCxRokDRBgd0BKe3H/J
- HZAtqnhspGCYuJwki+49yedtXInxTqbqXQnrTgrK0+ohnTbkcQqU+I8o+Q+YWEYYeOdL
- go3A==
-X-Gm-Message-State: AOJu0YyjeUaa3urg9xo5ALtVO0igry2aHl31fzufi9shWIxvBDhX1kxX
- ahKIpnUlwErpgPNIr7bp0tC/xdbRU64KKHVEA/yLnhJL0CapFPJQTukFDsP3e8URhBb2PN1zWmS
- G2rjO
-X-Gm-Gg: ASbGncsdKgevUEUhzCTQNypVQptgPLc3lK0r7RvG3ZucotNrxAbJhbMZOxOiK7JiP/P
- GQscStXm/fvEOWSe+JTjNDBOObKEN89YblQkhWim4GsPpXJOr0Wfb82QeRdlQwmuyruvS78KrVZ
- 0He3DSvOm+JUzxcuOfbT432bKT4eOT54O3du0xQf2DfELQ9cQnGj21zBJDi9nDw/9nxrnL3XiMf
- dR59X7+LMfiKkBKXUH0l+WVs8S63U6yOzKanX3mw8ecog+mGXdyRHUS3ZFzkqaipNVl75PZvRQZ
- c0aPQqnU5Jf9q2ERtiQfnA1VU9AZLFUX/r/0XfbHOSlIQmJqb+COu6G1Rm4=
-X-Google-Smtp-Source: AGHT+IH9MkEiD/9IjzMGqkvCH2/MRF3RxNx31on2X+ZRiPdONTUWRgyE0PJLtz7QBuj80ZZZR6Rdxg==
-X-Received: by 2002:a17:906:4fca:b0:ade:433c:6412 with SMTP id
- a640c23a62f3a-adec53e92afmr333628466b.3.1749820922742; 
- Fri, 13 Jun 2025 06:22:02 -0700 (PDT)
+ bh=1+SomWi3H77I8TRlw0ITmjSWIDSsWZUYho6iXyCxTXY=;
+ b=iR5scf6YKSP+nohk6eXTe6m3XgNR3ikwwbNEpUrJrUY+OWRbva0uZ34gk9P2bbx+Sv
+ r3sVuDwse8scOZfDyE+H+qcrCJQSFV0UNQA6Hk29zLJ/rwF6EfGt4jY4TQrYK/4cwvtJ
+ 8DPtp384HrVKXD447h+tcaPKueXttmPkkx39bps6DRCtlqM0dzin6JayMavR+fLM5ZY+
+ n941YGKBiSf+qijyyJlWvvG7On5xsVJCn+cewe6IvecNVb5MSpNl8K7GRMWa6Y6STkrj
+ oJjmtAzemnruIcr9bT6afcyezUnFZSsYx6zOmTcy2bmQe5QkZ4UA1MqzeIeisZPOcrsC
+ K1pg==
+X-Gm-Message-State: AOJu0YwkaFd8qZYlBE6iWvWC0OF3XlZrl44LSAHzdUCTrCyX6FweG+FN
+ yq3C5BE1Klms15GJi0GQAQF5t4ian4owYxl66sPRQhDMZeK20nIUhqokKRbvt4AGKmMVY1Qlxi7
+ +RTaJ
+X-Gm-Gg: ASbGncs9hgR/pF8ZeJA5YukUnmyQODAyFBU3u6Ovr+RYxa6X2XkR4LIzInCEovjNiWM
+ yBbGIlUJOhJ8Iy3Yzrivo/UmXQnULilZv86YE1AGq7cZ3LejzsHremMe81lN0mNSRewvJpeipVE
+ 2OA60XBywjPtyH8ZbTvffRdtOMUI0G1MjMdIwZ132aJWsXJVyYpxYeIl5YhC/LA/42sFR4WVs8r
+ l3Yl1JDP7UYSFgLSHmIDdjefHUlnM95hacjui8bWiUAH3BLasaTLvfQgxG67ZxVHDH+xAaLjg9Y
+ vZrj5oWVk9O6A3Bdv+iiez7m1spB6n0GjbE6S31UXYIGZS5s0X10Jq5gl8yYAYig2rFndw==
+X-Google-Smtp-Source: AGHT+IETFlXcSCeBh7ZRnJdEHsk9EroN3jiULS8jLJmZaw2Szp5ZhW6hXOf37dYdJT9ZVyMoimR5kA==
+X-Received: by 2002:a17:907:7faa:b0:ade:3bec:ea40 with SMTP id
+ a640c23a62f3a-adec54dc9femr298651966b.10.1749820923848; 
+ Fri, 13 Jun 2025 06:22:03 -0700 (PDT)
 Received: from localhost ([2001:4090:a244:83c4:9fe4:a128:a20c:8b84])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-adec81c0135sm127821866b.47.2025.06.13.06.22.02
+ a640c23a62f3a-adec8158d8esm128490966b.5.2025.06.13.06.22.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 06:22:02 -0700 (PDT)
+ Fri, 13 Jun 2025 06:22:03 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Fri, 13 Jun 2025 15:19:28 +0200
-Subject: [PATCH v2 08/22] arm: mach-k3: am62a7_init: Resume on LPM exit
+Date: Fri, 13 Jun 2025 15:19:29 +0200
+Subject: [PATCH v2 09/22] arm: mach-k3: am62p5_init: Resume on LPM exit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-8-3d233aaea355@baylibre.com>
+Message-Id: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-9-3d233aaea355@baylibre.com>
 References: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
 In-Reply-To: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
 To: Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
@@ -86,12 +86,12 @@ Cc: u-boot@lists.denx.de, Kevin Hilman <khilman@baylibre.com>,
  Kendall Willis <k-willis@ti.com>, Sebin Francis <sebin.francis@ti.com>, 
  Dhruva Gole <d-gole@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1027; i=msp@baylibre.com;
- h=from:subject:message-id; bh=SfzC7fBe2v/ey7l22O0xntG0VIP5KpxJcrlNayaufZs=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhgwf1bkZf2ULvy5rr1jZ5VGbnnVfXmFe+t2wfacdo4+r3
- 5xypoG/o5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACaidYyR4d301ZMeBL8MPsP7
- pLWmaGFEkvv0T6Vv+Gb0lsdtOCK9SIDhf3T4Ctcsfbfvmdu61iu0+j1T3dfz8c7JwO2zZ755tVF
- +PgsA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1026; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=f1LIySQa1+o3D0Vl5MgVicXbjesnn2pYzwzeidL/K3g=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhgwf1SURc+XkLwU7+eos/fWh4M3GI+annj8s7l1h4rTki
+ sTJzFmtHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCRdVmMDPM3ecv9bvR7p/eL
+ Yc9ZXe7NK+/I6J/4rGGeJej0V+JyVQAjw6N2z0JWYxHO9BgB6a8nVxyZf7Xsp7wGa08MC8f0K5u
+ N2AE=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Fri, 13 Jun 2025 15:59:32 +0200
@@ -116,17 +116,17 @@ resume after DDR setup is done. Call the common function to resume.
 
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- arch/arm/mach-k3/am62ax/am62a7_init.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/mach-k3/am62px/am62p5_init.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index d50de75ff669938c0803c0622d040fc1e5d0cf4c..7f2e8265bc2af942edbfcb94b8149ec15862d41f 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -192,6 +192,15 @@ void board_init_f(ulong dummy)
- 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
- 	if (ret)
- 		panic("DRAM init failed: %d\n", ret);
+diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
+index 357012b3e52b4a381fb8592c7afb624d01583776..8cb54fcb42003ecdd5dbe80fbd3e6a19ae668103 100644
+--- a/arch/arm/mach-k3/am62px/am62p5_init.c
++++ b/arch/arm/mach-k3/am62px/am62p5_init.c
+@@ -249,6 +249,16 @@ void board_init_f(ulong dummy)
+ 	spl_enable_cache();
+ 
+ 	setup_qos();
 +
 +	if (wkup_ctrl_is_lpm_exit()) {
 +		u64 meta_data_addr;
@@ -136,9 +136,10 @@ index d50de75ff669938c0803c0622d040fc1e5d0cf4c..7f2e8265bc2af942edbfcb94b8149ec1
 +			panic("Failed to get LPM meta data address %d\n", ret);
 +		lpm_resume_from_ddr(meta_data_addr);
 +	}
- #endif
- 	spl_enable_cache();
++
+ 	debug("am62px_init: %s done\n", __func__);
  
+ 	fixup_a53_cpu_freq_by_speed_grade();
 
 -- 
 2.49.0
