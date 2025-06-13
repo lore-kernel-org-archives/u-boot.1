@@ -4,86 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA09C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF093C71136
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:53:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85A0782E58;
-	Fri, 13 Jun 2025 18:52:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E46B82D34;
+	Fri, 13 Jun 2025 18:53:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C+c14ArT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Mws0F84z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9D6D82E36; Fri, 13 Jun 2025 18:52:37 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 8E0DB82D39; Fri, 13 Jun 2025 18:53:35 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4C1D82CA0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:52:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 177BF82CA0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:53:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-72c47631b4cso1555125a34.1
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:52:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4530921461aso20991885e9.0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:53:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749833554; x=1750438354; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5QuB03dTgKwm2R4blKHeYm8oMm4SiFlOUTkPF2EjFIg=;
- b=C+c14ArTVnNK6xufcT132nX9Vhn3SL8KjeUa7/5simE4bKmmFVMVTX8MV9ODpNBhPr
- FS5oclXTBrPaHQfDFYXWBcD9n9ypVEKUQNy9PAcn4/Kv0AQ8kFnbkLxd8F/BLOidriUV
- baKWDf8zd132F5k7UEDKxOfheiDO+nT343Mao=
+ d=linaro.org; s=google; t=1749833612; x=1750438412; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aUVH2KLgfvQyG43jE8akSdBZsv9qYxAkFLDwaCFjdSA=;
+ b=Mws0F84z3TGWcTx2uoLyGP3m60T0FZScBcPVipjRdH02okB994b1laPGiS6uWBSAQN
+ okGj5/fDOn0RMddI8dYFJkvWw86KT3QjJ2qQiJ03+zzKV/uIBmvaMbsNPnU/HgkOo7UG
+ P4mr4tRCQpc7vHMKv3+JNfXQvo3C4b9MRHC3o9GFgMzZcPvPTN3znC2wCeZHa3Di+fPa
+ Uu2dOP+avUgdTzBVtX/GzdXpFKbz5ZA0eC4yL2VcTlxmWF+fpFj8j1d5314BX+iji3PG
+ Xgkwz1fZbivnnItTGaAiiyuP0nHX7GIyWCHzsic+66wnM0c0JpZh1BEiAwKMzIa0Fm1O
+ knrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749833554; x=1750438354;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5QuB03dTgKwm2R4blKHeYm8oMm4SiFlOUTkPF2EjFIg=;
- b=qoSdaxPRrL0tbc80ykQ3Et0TRnFJs0C/N5KL73neQ/ZYMfaB4t9KXneHAaewUlVSpE
- w9+2h8w+4yJxGJpEXeJBdGavEDlMkMUymqvvwdp5cEUsVHZoOvR3E3i2OXMVlOy4Ayb2
- Oq6u+5Dl/UoLZvpFPJ0TT+k8yFaE1kU+6InH9ah12oKRzzKGO/JXCdZVSlcLWxgAJebB
- ph8s0b+Q7wx0skyaHa9BmoLikCYmNAe9TrCKxofgYX/Ra5bEJwwTvrh3xYrR/sxHd2z8
- fip2MH5t1n0E+eWR0aQ64wUGTlnyPQrsTXYDMaID0CHBuFzbZ2mT13K0DG5cqI4ib4y9
- E6fQ==
+ d=1e100.net; s=20230601; t=1749833612; x=1750438412;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aUVH2KLgfvQyG43jE8akSdBZsv9qYxAkFLDwaCFjdSA=;
+ b=N/KaWViXtI6aKgfpW6mY0RxLsO/SjaxHlSFbBi3Me8IC/Wp4SaMgD/IzZc6Rv4a3lW
+ aF0ZZewWm7wJurmpsv2Fg2LOUm+2SwRbo/RZPH3YF9JnKoHWU00JaiqoHdIBt/PsNLXf
+ +1da4g8cj+j/OzCP3AtjgFOMxHeK2ICgdLelvxqmiZi75cTwrNludUPGfp6yTK0pfRoL
+ 9hjeZ6vpTkaYPF4pWAkHZMQ8duR5tCTBt8rWpCf+zVkgX+fBKxsa2pcQ27PSymToc5ei
+ oRbIfcObwldM8CqqY8Ohokt4QrntiNUnVu93uKxFbo4YsBfBFjDfi3eR6QjOLLDtEET2
+ 7uSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUojsgB4sQ8mjLquVeJMlqmK7tWHBsF2Ok+wrztaL8Tov8NrVut/0X6T2yDAstAsEwGUsxCfXY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJx6aaQER41KS9Z5TVHw0C5dZl/2rBsvU7BKVdKfKaaq5prCxU
- sDSo0amhCTVuYZMFmGaYIcFrxeOlomqMGmhyLAsdmF8IKSU6PMkna44moOPfH26djS4=
-X-Gm-Gg: ASbGncukz7GofRl0bLjpkzY3aTvFzhgphnwW4A7/fkFD4IKdJgBf6mw0NGVn9oYbxM/
- WrGNs3WdYYwk+ZCP2gPEijZF5VdcqI3vq9trxtDfe/L0LCJH0cW5Zn7S6tKMLmLac3pIuxpjIVQ
- ZU7mEaIxUDzlzcHWlXSJcKV3ps8S7kKkI63X3gDP/RT9hBh9GonT4FjqVnzb/UXPjQKCa4ZdRBP
- z8twlQYxjsQVPFWFQH2h8Ce0MVj928imTjY8YdbTtHkecGl0pAqSJFWl8UTMdVvxFILipM098E6
- PT5o0il1bF9SO989OD1wwIhqEC2RzcAEYPrWXF9JqqBQ5NsNJ8f8ECC/s2McBr5v2jaxN8ZrQYv
- dQe748TIW35d00O4gZyYCWWU=
-X-Google-Smtp-Source: AGHT+IFRyLxydqEgmmzwroqI3DEYPYF6cUt+8s59IhviDHNKv0EIyS/MkLIpXaWRHMp1e5FZ7ZJxkQ==
-X-Received: by 2002:a05:6808:19a5:b0:404:f14a:1345 with SMTP id
- 5614622812f47-40a7c166852mr57466b6e.20.1749833554380; 
- Fri, 13 Jun 2025 09:52:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a74172ccbsm329385b6e.29.2025.06.13.09.52.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 09:52:33 -0700 (PDT)
-Date: Fri, 13 Jun 2025 10:52:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ben Dooks <ben.dooks@codethink.co.uk>
-Cc: rick@andestech.com, ycliang@andestech.com, u-boot@lists.denx.de,
- nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
- fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk
-Subject: Re: [PATCH v2 1/2] riscv: add build support for big-endian
-Message-ID: <20250613165231.GA1382132@bill-the-cat>
-References: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
- <20250613161258.1805957-2-ben.dooks@codethink.co.uk>
+ AJvYcCWkiIzI+bwF5Jif9AMqF130j5DPZPUbRjAPJd3kVtJ0GI5mgRgDpD7iNbTTyWNvzgVyWf75wv4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLhm0IUIkG9pfZfqBW0tN1Y5JbVvxIiQsKuNw9SuItlE2l8ZBI
+ 9D1dJWNfz4fJjjZpuKe6MxwrCuf0mlTJTSZ+iyB/s13+OgP/i7KsAr5aX5loHK5sjgE=
+X-Gm-Gg: ASbGncvKly8uRPPtS6xah+h25jxZINbZU12ME/iL9JIfq50/5Bt0VuqGPEDYAnpF2uU
+ UMMO9+A381D/AHJ6eH4pbdebM7kYAd/PERcqZubLryjnS1M83RMyUS4E3NIvK1S8Xbx0P9451Kr
+ XJB7n1o1rhnZE9Vy8UDvWTHR714vycBYLOVlTv1usytt8J2OVx+XM5zhlVlL8s7a+l7f5rbPhB/
+ DfVlk8uIeN6YC5ZejzwyhVTAajq3x9XCQa0cWWM7Ljw5kU7GYH+dFIYAFefX9w3Wb/WRc0y7TC2
+ uJ2x0tReVMmgHeWzSElDau9cBbtOnC6U+CBbSGJaMlgSf2/HsVB4QpnyEZfGrEn/S3+W10zmyCT
+ gWXcwZo1kJbr45T+5ERD4Cx6sy/13nYpGL6GU
+X-Google-Smtp-Source: AGHT+IGtc2ppuRAfm5fICFn07cX9y3NzDNuaBtpDFK7PlIK537L2+xO5LQOdOk6r0KTghdU9n4N1mQ==
+X-Received: by 2002:a05:6000:4006:b0:3a0:7d27:f076 with SMTP id
+ ffacd0b85a97d-3a572367967mr598709f8f.2.1749833612328; 
+ Fri, 13 Jun 2025 09:53:32 -0700 (PDT)
+Received: from ?IPV6:2a01:170:117e:fc:19e6:b5d7:f8b4:a927?
+ ([2a01:170:117e:fc:19e6:b5d7:f8b4:a927])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568a54e71sm2839849f8f.1.2025.06.13.09.53.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Jun 2025 09:53:31 -0700 (PDT)
+Message-ID: <d6688abb-e187-43e1-be34-d92c3c44f499@linaro.org>
+Date: Fri, 13 Jun 2025 18:53:30 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UGzPvMgCaoa8jxSc"
-Content-Disposition: inline
-In-Reply-To: <20250613161258.1805957-2-ben.dooks@codethink.co.uk>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/7] Qualcomm: teach the build system to emit signed
+ ELF images
+To: Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+References: <20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org>
+ <20250612171847.GQ1382132@bill-the-cat>
+Content-Language: en-US
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20250612171847.GQ1382132@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,40 +109,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---UGzPvMgCaoa8jxSc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 13, 2025 at 05:12:57PM +0100, Ben Dooks wrote:
+On 6/12/25 19:18, Tom Rini wrote:
+> On Thu, Jun 12, 2025 at 04:16:36PM +0200, Casey Connolly wrote:
+> 
+>> With several new Qualcomm platforms appearing on the mailing list, all
+>> of which build U-Boot as an ELF, sign it, and then flash it to some
+>> partition on the board, we're getting a lot of defconfigs which just
+>> contain a debug UART and a TEXT_BASE address. This leads to needless
+>> rebuilds in CI of effectively the same image, and needless duplication
+>> of build instructions.
+>>
+>> To address this, let's introduce a new tool "mkmbn.py", this is based
+>> on the existing qtestsign[1] tool but is (currently) hardcoded to
+>> only handle the Dragonwing and IPQ boards which use MBN header v6.
+>> Additionally, the tool contains a lookup table that maps from a boards
+>> DT compatible property to the load address it needs. Since it's highly
+>> unusual for different boards using the same SoC to have different load
+>> addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
+>>
+>> With this tool in place, we teach binman to use it and introduce
+>> a qcom-binman.dts file to describe the image. The tool will emit a
+>> u-boot.mbn file for supported platforms, for unsupported platforms the
+>> u-boot MBN etype in binman will print a notice explaining that no mbn
+>> file is built and to look at tools/qcom/mkmbn/mkmbn.py
+>>
+>> Finally, the defconfigs are cleaned up by moving the debug UART
+>> definitions to config fragments (since it doesn't make sense to have
+>> them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
+>> the qcs9100_defconfig is removed entirely since the same binary can
+>> be created with just make arguments. This platform entirely lacked
+>> documentation to begin with, which should be addressed by future
+>> patches.
+>>
+>> The Qualcomm documentation is also cleaned up, a new "signing" page
+>> is added to briefly cover the what and why of MBN signing, and board
+>> specific pages are updated to explain the new build process.
+>>
+>> These patches have been tested on the RB3 Gen 2, but additional
+>> testing for other platforms would be super useful.
+>>
+>> [1]: https://github.com/msm8916-mainline/qtestsign
+> 
+> Thanks for switching this all over to binman. My big question is, is
+> there binman documentation that you wished was clearer, or that should
+> be written to make this easier for the next SoC / architecture that
+> needs to come along and add to binman?
 
-> Add support to build code big-endian if the board supports
-> it. Updates the makefile to pass the correct compiler and
-> elf flags.
->=20
-> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+I think the goal of binman overall is good, having a single framework 
+for building complicated firmware images is awesome and I appreciate the 
+goal of cleaning up the makefiles.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+That said, I think for our case at least, if the U-Boot build system had 
+a nice way for us to write some rules in 
+arch/arm/mach-snapdragon/Makefile to do everything (in a self-contained 
+way) it would be a much clearer and simpler solution, not requiring 
+folks to go and learn how this huge and quite complicated python tool 
+works in order to debug or add features to mkmbn.py.
 
---=20
-Tom
+I also think using devicetree for configuration is a really strange 
+choice. YAML would have been much better, faster, cleaner, and more 
+readable. It's also entirely possible (trivial?) to convert DT to YAML 
+and vice versa, so whatever needs there are to pass this config into 
+U-Boot at runtime could be met this way instead (though I firmly believe 
+that having the entire binman config be available at runtime is a huge 
+layering violation, and we should have a better approach to make 
+available whatever /specific/ properties need to be passed in, but 
+that's just my opinion having not looked at this in detail).
 
---UGzPvMgCaoa8jxSc
-Content-Type: application/pgp-signature; name="signature.asc"
+Practically speaking, I'm not sure what I'd suggest here, it's easy to 
+advocate for doing something entirely new and I think I'd need to have a 
+deeper understanding of binman to make any concrete suggestions.
 
------BEGIN PGP SIGNATURE-----
+Kind regards,
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhMV08ACgkQFHw5/5Y0
-tywIgAwAmOnwZECOOf5k1UsYyatLMyYmC0OfrW3ce0eVkQqSfa9vYCVU0bpAUlvx
-28FV4hdejJGZpO6ct+4sMjOLDh66U2KzjoMgdp7eFFcXDkCA+eQhoobtNcNOFLye
-XUGlCBKMHFXQwx36HzRCd3LqIuEZP4WDrB9C9W2rGyvarOdKNuAidUFLYxxIchoi
-JuBtQXqm3xkHqpLQLiwto6rL+57Q8GnEUP0G3WxrRDG67BFKHOX5E0dugwEmLE9g
-gRyIlZFwsXWcNXrb0ZAeQsrHbrUAQiCpfXQMD71Kg7RFe/A0t7pJC9/Bnjh85RUk
-Pa6VBkpuz/TcL4g6d3o4YRT/mfq+HqUNOQsmoRBjk5TFoNbfN8g4/jrpHGz/QQ31
-nYcxUDiufiK6yJSKZRsAyiwqus2htbVEUohteB/vOielx6lyfvN9na09sRs/yW9E
-pJ34DUilFCwT4zvb3KXdzZxl5zybjnFaGADyRlEatcRUxd9g9RWUSTsCsJN5LR2W
-TcRH0TCw
-=/c8h
------END PGP SIGNATURE-----
+-- 
+Casey (she/they)
 
---UGzPvMgCaoa8jxSc--
