@@ -4,83 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8BF9C61DB2
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 07:30:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79384C61DB2
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 07:38:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D237382C30;
-	Fri, 13 Jun 2025 09:30:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B245B82C30;
+	Fri, 13 Jun 2025 09:38:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JVHkC7eL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WVVOCtrj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37BDE82C44; Fri, 13 Jun 2025 09:30:39 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id ADED782C44; Fri, 13 Jun 2025 09:38:52 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14B1B82C2F
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:30:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59D4382C2F
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:38:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-30c416cdcc0so15218071fa.2
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 00:30:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-453398e90e9so954235e9.1
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 00:38:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749799836; x=1750404636; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tPo9luRCyQfBoCl411dvCyvpqHJQvMG0DqljkfNt1d8=;
- b=JVHkC7eLwHpKrhvZ3UFLYUJBm3FmcOs4hea7eiyQOxmn/uDqx3Sw3MZl4StNd2UzEk
- 3q2T2I0d14l5iJ75rCiiVwsiCm/1kLOGl+i2cmL6Zve+/zChaCFNuAB38mzWnnmBHcZo
- Mgb2xS0ypI6J9oo/qP6lX5u3lofajR+esf8sXT5DAkafopxI0TOK8z6R19m/jHFdSfvH
- mI6gjU3eUjdivx8rAXBemFUUhuOKpl/pay5br6efGdaf9xSREhHpoR7XvzhJELthnvFZ
- oVZ/yHgOwYQ5s6wG81h/T6K7cnghYnF1b3HaW28n4UCcTtEDC+JlmOK+YtqZdwQVRVd8
- slcQ==
+ d=linaro.org; s=google; t=1749800327; x=1750405127; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2gb+L5G/bYi/sWgaig/InuQo3g+o69mDaUJ8nYBx9og=;
+ b=WVVOCtrjnmS0uX2i9rl0Q3nNYz4UIp9OdF01Do86Mctel9v7qETbNN8qlbgKbIxKjz
+ EM3r0V1vAG8i/tpGouEIGHMQ7XOhtaepOlZCCsKtaircz13eq6coDVXqkEkuEb8o8x9B
+ 9+lWEO8v9S6+9dGKNnzhSUu7PhMqLJ8ZyRCItoGuzUx3tWHcw/3yxU52AJzs71J4zN4A
+ i3pA0vZoucLJWUrEX4d834HrkfVACJrNUYp28Hv5JxhmC9MxRF4z2cf3QZAm7q6mGloe
+ cvXqfgwegi/csjkdwA5kSFkv0ShPP2nhLWEA9XIE2ZfmPwZkRgoClqZSdwQZNV42AuFv
+ FZJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749799836; x=1750404636;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tPo9luRCyQfBoCl411dvCyvpqHJQvMG0DqljkfNt1d8=;
- b=wieSgvkainKBXo68zSIydxroEl/pD6KCx2J5cphzulgqtDLZOzqNA/dllc5bdMgNQU
- LtqhcjWZP0xANPT8Vw7suFWpKmvBOjJXtoagMdgJT7r7y0tAavjCrynUhn8/GFaSImEy
- Xv5NMJcKAo8rK08p9OM4ZxWPUtMtiMs9WBJi1gubKI2s2xZhZqk14/9C+PHoFN7ksxeD
- hylzKK+FEa8YWfR9UJqG6uxsPHalgxNgtlKdHq3/b3qGksFxsegmx4AMFvdZXpH0fPNg
- WQDRqyr6ACyYEkkxdh473+irF31m/N05vSIMtCvjELA5hCcIZBxZ/ITuRM4O5k0UTDx5
- vFrg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7ms5DyxoYRS6cH1zytmHmWd6XZ2ZjSDps7X1DFgYS3fzM4FgXXIALVLmz8Hlwj9WNazIU21k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyf8KZNmYZGGoU9uwlq5HotgCs+JdKLcOFezV6SIzQ0KPzexA1U
- H/oPQkVKZnjisunUTZc4wnsdAzKW8sXlpMkOPCILNDdrY/uafBdInHGSls0hzYMYtWT+iTCYpzO
- nWkjSAATozwVL6lHwtqrC1tvl6bYB1r4=
-X-Gm-Gg: ASbGnctnqHvoZG7yvWWPJF88AcPlLFJYf6U70jjw8K/afvliWu82GqBLzEWWPX/dcj6
- wV5MjDx+ULgxMVRdEDxireUsk9NT9xIT7qnAGMeZBEiPXMjbfoCoNIH3y2QbtIlv6FME6pyXrFF
- hROPdTWtTlc9gbfOdYDQGcyO8KdEWAzE4mnXvPasZuw069
-X-Google-Smtp-Source: AGHT+IEnXa14KacImbiDJAqpMZpYoI6+oqpxHi5a0Y7lEPI42Gf8yD9Sa5VFZvkrXaGozvmU6IRAASKEkGaEkc0AbeY=
-X-Received: by 2002:a2e:b8c8:0:b0:32a:7d76:262e with SMTP id
- 38308e7fff4ca-32b3ea0ff5cmr4599301fa.3.1749799835947; Fri, 13 Jun 2025
- 00:30:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1749800327; x=1750405127;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2gb+L5G/bYi/sWgaig/InuQo3g+o69mDaUJ8nYBx9og=;
+ b=nREEzUjepYeCOxbauyz4Gp1dYk1ImChEU1Hu9cpIY1dPgVx92UrioiJkyZZN6WCTf7
+ 4kKUu6XrhlTi+STUrMtWsX3lM1d612P7oRbSHUBaUmyRGWseG8yCqunfGZttHbkBtd7t
+ 7tcqDliaS11mm7vi3Ib0P866WCSfr1avm4UCU1BpaAbYH5X7uzP81bYoCTc0wYm85lPi
+ EH6++8FuJyFKUTdcO8QxfFv6KJSg5vbZ20a0DJcb7ryFGdO1Sp/RmHgAvQ+1ssQ9sjjH
+ kGMxKC1RZLIUoQEav4zkN+WAfODYa2QfS3UN+cpkVEymOZ4vT793QLxTWp3AVk+qpvbb
+ CRxA==
+X-Gm-Message-State: AOJu0Yz/xvFrYfjKUtiW4iouBlWnKSFSsyoJM1fvm741ObbsGkB83r4H
+ btvu+0s/ghFTzKzlKlQ2QTgRh3mH/jplB+Kn9T6FCODONI3gvnP/qYpXhqebGiBPPbTW4M/Z8/d
+ wt11x
+X-Gm-Gg: ASbGnctvQn0HZswn0qtn1Rj1WAbdb07hmfilu4mTISTmb9HMpl7Fe60QBD/jZGp+0CL
+ HVqacRJD+lbTfBHtj6bEXah6+1wB3xjytSicxD3NxA7hye+c6guRv10pMSqPCxn5nFKWmhfTRWu
+ QhV+Hx9EOvSTvp9rWVWxEkZ3f6EWQN8obtTsmid/Kq9uif85Vd2AlzvE+3BPwA+OJZmIc78O92M
+ NsxNVFQt9KAKNvz8vQCgJ3yaoGrcg2GTzKZ7xU804JRSC/3Ovl65sY2NjdNzpAiJur0HVlptPVi
+ cQ0c+IQLsXiAgvTie1V3QGIwyW+DWeVpgj1uBVGC8p6UdFBmObQx2FCY+4bZHa+DXqt8lsStjlE
+ upBA37lrEsslCikXPPRuNssHb7O+tbr4QtGS1FEb4FA==
+X-Google-Smtp-Source: AGHT+IGf0qZtUGe3I378IojmziFKq4XoEut/b3057+B30snVDtdTpMpqweRFExvn17IuIqZZMJJM8A==
+X-Received: by 2002:a05:600c:6095:b0:43c:f513:9591 with SMTP id
+ 5b1f17b1804b1-45334b0fc1emr18805845e9.14.1749800326812; 
+ Fri, 13 Jun 2025 00:38:46 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:5fcb:93f2:a702:e5b2?
+ ([2a01:e0a:3cb:7bb0:5fcb:93f2:a702:e5b2])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4532e261a72sm42898425e9.38.2025.06.13.00.38.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Jun 2025 00:38:45 -0700 (PDT)
+Message-ID: <b806f55f-da5a-4373-a6c2-15b1cab93da3@linaro.org>
+Date: Fri, 13 Jun 2025 09:38:44 +0200
 MIME-Version: 1.0
-References: <20250521072149.21007-1-ghidoliemanuele@gmail.com>
- <174976652212.365589.11863773954985914311.b4-ty@konsulko.com>
-In-Reply-To: <174976652212.365589.11863773954985914311.b4-ty@konsulko.com>
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Fri, 13 Jun 2025 09:30:23 +0200
-X-Gm-Features: AX0GCFtYD_rMMmnK6Tqmf1QiLY8aq__7-1cmk24PPoKAnD75JA1VHqjZPRbnUo4
-Message-ID: <CAEyMn7bH3DYUgYMkpC9HSg7HDtpWa7hvb0w6T1+1vUBjbCPBgg@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: mach-k3: j784s4: Call do_board_detect() before
- DDR probing
-To: Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>
-Cc: Apurva Nandan <a-nandan@ti.com>,
- Emanuele Ghidoli <ghidoliemanuele@gmail.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de, 
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] tools: zynqmp: add build script and documentation for
+ ZynqMP KV260
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>
+References: <20250612153311.2379944-1-jerome.forissier@linaro.org>
+ <20250612164939.GO1382132@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250612164939.GO1382132@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,36 +104,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Hi Bryan,
-
-Am Fr., 13. Juni 2025 um 00:49 Uhr schrieb Tom Rini <trini@konsulko.com>:
-
-> On Wed, 21 May 2025 09:21:43 +0200, Emanuele Ghidoli wrote:
->
-> > Call do_board_detect() hook before the K3 DDRSS driver gets probed.
-> > It will allow boards to adjust DDR timings in do_board_detect().
-> >
 
 
-I think the comment from Tom is also valid like the one in [1] about not
-doing things over and over again.
+On 6/12/25 18:49, Tom Rini wrote:
+> On Thu, Jun 12, 2025 at 05:32:41PM +0200, Jerome Forissier wrote:
+> 
+>> Add a script to help build a functional U-Boot binary for the ZynqMP
+>> Kria KV260. Also add some documentation.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>
+>>  doc/board/xilinx/index.rst        |  1 +
+>>  doc/board/xilinx/zynqmp-kv260.rst | 27 +++++++++
+>>  tools/zynqmp_kv260_build.sh       | 43 ++++++++++++++
+>>  tools/zynqmp_pmufw_elf_convert.py | 96 +++++++++++++++++++++++++++++++
+>>  4 files changed, 167 insertions(+)
+>>  create mode 100644 doc/board/xilinx/zynqmp-kv260.rst
+>>  create mode 100755 tools/zynqmp_kv260_build.sh
+>>  create mode 100755 tools/zynqmp_pmufw_elf_convert.py
+> 
+> Helper build scripts don't belong in the tools directory. If they're
+> super helpful, I don't object to adding them to
+> u-boot-extras/contrib/<you>/ directory.
 
-[1] https://lore.kernel.org/u-boot/20250612143808.GM1382132@bill-the-cat/
+OK
 
---
-Heiko
+> But there's a number of
+> documented examples already on checkout and build TF-A then do ... for
+> your platform.
 
+There is doc/board/xilinx/zynqmp.rst which deals with quite few ZynqMP
+boards but not the KV260. In addition, it has a number of shortcomings:
+- It mentions pmu.bin but does not say where to get if from
+- It doesn't say how to build TF-A (bl31.bin), some very specific build
+options are needed.
+- I consider that detailed build instructions belong in things called
+scripts or Makefiles, that were invented long ago exactly for that
+purpose :) IMO the documentation should tell the bare minimum and ideally
+be unnecessary.
 
+I am not particularly proud of the fact that I spent more than a whole
+day trying to get U-Boot master to boot on my KV260, and without the help
+of Michal, no doubt I would still be trying... So, how about I submit the
+zynqmp_kv260_build.sh script to the u-boot-extras/contrib/<me>/ directory
+and just point to it in doc/board/xilinx/zynqmp.rst?
 
->
-> >
->
-> Applied to u-boot/next, thanks!
->
-> [1/1] arm: mach-k3: j784s4: Call do_board_detect() before DDR probing
->       commit: 79ae5510a211d788b01cc5cb7f4ad15e9f5f528f
-> --
-> Tom
->
->
->
+>> diff --git a/tools/zynqmp_pmufw_elf_convert.py b/tools/zynqmp_pmufw_elf_convert.py
+>> new file mode 100755
+>> index 00000000000..b4eb2695831
+>> --- /dev/null
+>> +++ b/tools/zynqmp_pmufw_elf_convert.py
+>> @@ -0,0 +1,96 @@
+>> +#!/usr/bin/env python3
+>> +# SPDX-License-Identifier: GPL-2.0+
+>> +# Copyright (C) 2025 Linaro Ltd.
+>> +#
+>> +# Written by Gemini (Google AI) then reviewed and edited to remove some comments
+> 
+> I'm glad this calls out where it's from. I'm not comfortable for a
+> number of ethical reasons on taking LLM-generated code. I'm also a
+> little surprised we don't already have something like this with binman
+> today?
+
+Nervermind. 'llvm-objcopy -O binary pmufw.elf pmufw.bin' works just
+fine :) so I'll use that instead. Note that the binutils objcopy
+cannot be used because it is target-specific and the MicroBlaze
+version is not so easily available. While LLVM supports many targets
+natively.
+
+Thanks,
+-- 
+Jerome
