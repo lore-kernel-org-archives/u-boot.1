@@ -4,94 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 798B5C71136
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57275C71136
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00B5482D34;
-	Fri, 13 Jun 2025 18:55:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C41E882D34;
+	Fri, 13 Jun 2025 18:59:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xyYpBxmD";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="do8gzagj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 682F182D34; Fri, 13 Jun 2025 18:55:34 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E65B482E67; Fri, 13 Jun 2025 18:59:41 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8514882CA0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:55:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98FFE82CA0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:59:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a548a73ff2so2307812f8f.0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:55:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749833729; x=1750438529; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lC/poenttV//20AiVnBeMfS1YhXw2SW5fK4YDCTs4CU=;
- b=xyYpBxmDmW09hZ5psBwrYCf9cVI+x4/J8nHd4QTK1+NirZ3/dRp1XAxSOGEzrCXhU5
- qMGxcq1bNCUdTLr7e+4SvCHIutp35QL1Vs/DFuRc+lD7yP+/jyLEkPLlevxNPdjAHEqM
- snrkA72sSeqF1EJOsSITQlU4xTpd8MD+3Ns8h7SZMVdbdTsE6jHuJTyrKdex/yxbsiLG
- Oa6OGc322M5gCrCD/fRNAPhpSGXgdmdNcDWUPt8yB+vUWKAAwqdhVBjPvUJl58Go4ECx
- gkG5so+jB4cbMbvDMZi6HB9hlRK4fZ/49W19sw9Kkf1XrWoRKiP8iVXkZnz6f1v+Bfms
- +Lug==
+ spf=pass smtp.mailfrom=fmartine@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1749833978;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=qpzb+LP9vsKsAbSh62Nix5TZ8g8heeaZHYWABUBtwPs=;
+ b=do8gzagjW1l4/r7+WvprQbHoOBhRQ7TvBvmBOOH7/aYJzoGzGwbKFAnB//KlPMwc7ysDR8
+ u+A57ngueYZazukX1iE4bXVUuPeyllZ8cLl3z/QoU+C+YkYGp+CNGr7oBt9ycN6C++Va1S
+ QGGLaTKolvqZaESEAbdaCvyfoBzZNU0=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-74-4oan0XgoNweSTuI2WiFfBg-1; Fri, 13 Jun 2025 12:59:37 -0400
+X-MC-Unique: 4oan0XgoNweSTuI2WiFfBg-1
+X-Mimecast-MFC-AGG-ID: 4oan0XgoNweSTuI2WiFfBg_1749833976
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-450d6768d4dso13929365e9.2
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:59:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749833729; x=1750438529;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lC/poenttV//20AiVnBeMfS1YhXw2SW5fK4YDCTs4CU=;
- b=tiQPxyaThYu8MPxzzwzzvHf6E1eNQXTbdv6j8GhfsDCD8RQCD2UmIx4u2vDMwXzNik
- 1TZQ9B9EhYksf7jKfTSN0gOjwu9RsCdWPuaS8t9tOdsE3T8OhXngnba3bB2LU9jCxddW
- eIntUU8QbwLmmr0a2Pgug6ggwgbUNtspvRv8O2YCAuAz962oed/dcOXtisZRmQpPTrp4
- h8NG5ZZssAnFMyioJC6wZTD4UieoY4vORrfN54mv3Kcsb2A6b8/7yJG2FEbwJ0ki1C+G
- V+aRaSKkWH/YlAbiL9Wd1zNgpCBqx44tNI0a/NTLxk/DTafCvqE75AhVZe+3J8V52RK6
- rUvA==
+ d=1e100.net; s=20230601; t=1749833976; x=1750438776;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qpzb+LP9vsKsAbSh62Nix5TZ8g8heeaZHYWABUBtwPs=;
+ b=h/LwjmF7Eh/ZGuPmiQ4ZSCcVhHNJQ1wej/5OpWaOzVs1sodH8G+nuAC6lMyLRHWQNj
+ e4Zt2/zCdcGjs5HCDu3Q+Qz2m3yWOuXazvoBabpvHTB/jZOjjPbw6YOd8TPWKTCFHIE/
+ p4Ups1RBm5RD1pzZZ0FQT9NvPmcDsxK6EVtllN7gJrZMJtlF/rcbiFwMIqKeh11yIUR7
+ 11MXXuup707vbhH/e/I9JnkVREyxiQNEVysmbvmIee+Tpuwh552s1fAUSrUt5NUwLSdn
+ 3zc3GhJVa5zbfNYFz+z8I19T4CgmO39DT9rw6wAwidztnqTa99Mb/Z03zNS+EA+wvpQo
+ Tc/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZYTk9DN5Bb7vaGEWleEDqtJhDlGUYWfhpEXwbO/8E8eFazgODo96dvDVhub94iS6KX8sEvCs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1TspFQGRjGflkh6VyKMKaCRVTQGtJJfv6LMVo6nrN9w0gzl8T
- 8FuB5ZXcaKBLZM9g4d7y0Y10rLN3TA+NWyJ4xK2/iQuDLXkTCm6T3ykfVvmVF9ZMvUs=
-X-Gm-Gg: ASbGnctJbwnVZDQCU+w77ES1bZMdfWP6VGjhVh8ysVbTp8HRJNNlqfIr5Fj4w6nCP7y
- 4EUs3AL1r3hHZgICoNBchSjb3aG9Fsd4uK/WcBoBlFLc/JrDIzRG79DQwaQ9POF65KFykjwwLtK
- uE0UNQLsS0A1XZMnKeTVCgAa1c+qkpKP1btl7ePzE5aK69qJnV9DEKvOBXwEhut64P92U1QbhQG
- XZEkNOWi62/OMcedF//94eOmRVEixUkkSNipuRCpJUuoaLNWcNVqIiJCLNf+lCXVXZ2c5VdSxpr
- ZKOD/O4W2YJ7/RYmW4KVacybzxbxmBo+m0FHagXpUMCeddRqAyXJ1cKjXPs+9SGnWGUP0fo+cLe
- O/fJShYBAtEZXtOHkx+lyGOi2JVeAccq2Z791
-X-Google-Smtp-Source: AGHT+IE2UnpAiClIyqzj7nS9r59fbp2FmjIZYGn5LUt8HnMxvXVdKuUN2JX5g8lPuO+TJ8NTatH17A==
-X-Received: by 2002:a05:6000:22c1:b0:3a3:7115:5e7a with SMTP id
- ffacd0b85a97d-3a572e8a191mr470063f8f.42.1749833728895; 
- Fri, 13 Jun 2025 09:55:28 -0700 (PDT)
-Received: from ?IPV6:2a01:170:117e:fc:19e6:b5d7:f8b4:a927?
- ([2a01:170:117e:fc:19e6:b5d7:f8b4:a927])
+ AJvYcCUpud8mp85MBqhkHK0K2qwBqVIODOna9SMaidf2AvLNcVFwkjxQi4JwqGzgcgX51SyrT/uPETk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCh5ISmV37nlP7TAiAHEtmhFWT8wCxFnQ8I0npam6zyDi9Blga
+ Dx+yqECc0uaer2crKlNiZNJgmCoH4IUPq4+tp1z4NmkEHwK7wq3Esbi0xDVEBu3yKORp7BKqGn9
+ aLH6COWU/sdNlK/klHSVePcAKgk5rtZSW4ZFWSnYq54TBMg5XhLBOwoo=
+X-Gm-Gg: ASbGnct2GCpJ38l4aW+zADjvI4CsMdeE7tXoBS8v3j3X57aNqGluEPNtvPuRHAg4T4q
+ cxxC72Ph2vP/+qzBJPJyhCCyk+Ty35E+OcKP4O/lMNK6RQuiSIO/VCW50r8wjmj7hVE2PXxm58I
+ dKM+I5O5OS2LnOC4AOfXyDXw9aQQzzoNqfgoRp4d7au1pC610xGV7MaR0fw0VPH4QoxKCIUklvh
+ r8ZJd0Z78llkNPjqyr/kVHpI8xMmc+ItsC9ItKHm9Bf3I0iLpjGgVnXDUk6MaaUno2yqGhk5dLu
+ vg0x0iyXU8CUcTzHPvl/8HRkF+GUIx4yZC4Z+Qdh42XgJA0rQ88Pjp3lJ2VzI/6TjTqdQFCocFm
+ 9n6LP
+X-Received: by 2002:a05:600c:3ac6:b0:450:ceb2:67dd with SMTP id
+ 5b1f17b1804b1-4533cb5751bmr2582805e9.33.1749833975867; 
+ Fri, 13 Jun 2025 09:59:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHlBg1Fex09muGUmWKxu71lJBNRNltX70/l7LyR5jUJ98sP+6KaYQIpCr+wL0O1I24Z5kcwRA==
+X-Received: by 2002:a05:600c:3ac6:b0:450:ceb2:67dd with SMTP id
+ 5b1f17b1804b1-4533cb5751bmr2582515e9.33.1749833975430; 
+ Fri, 13 Jun 2025 09:59:35 -0700 (PDT)
+Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b09148sm2953520f8f.58.2025.06.13.09.55.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Jun 2025 09:55:28 -0700 (PDT)
-Message-ID: <6857eb08-c3d8-4a02-b8c0-b608977ffea1@linaro.org>
-Date: Fri, 13 Jun 2025 18:55:26 +0200
+ 5b1f17b1804b1-4532e151c3csm59136965e9.30.2025.06.13.09.59.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Jun 2025 09:59:34 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ mkorpers@redhat.com, mskrivan@redhat.com, eballetb@redhat.com,
+ mripard@redhat.com, alexl@redhat.com, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Maks Mishin <maks.mishinfz@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 3/3] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
+ support
+In-Reply-To: <20250613154922.GY1382132@bill-the-cat>
+References: <20250613085742.796015-1-javierm@redhat.com>
+ <20250613085742.796015-4-javierm@redhat.com>
+ <2584944A-D0CF-44E5-ABAE-C3E156ED8539@gmx.de>
+ <87ikkzvghz.fsf@minerva.mail-host-address-is-not-set>
+ <20250613154922.GY1382132@bill-the-cat>
+Date: Fri, 13 Jun 2025 18:59:33 +0200
+Message-ID: <87cyb7vaq2.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] clk/qcom: sm8250: Fix variable name of msm_clk_data
-To: Luca Weiss <luca.weiss@fairphone.com>,
- Alexey Minnekhanov <alexeymin@minlexx.ru>, Sean Anderson
- <seanga2@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250611-qcom-clk-variable-names-v1-0-37615b74daad@fairphone.com>
- <20250611-qcom-clk-variable-names-v1-2-37615b74daad@fairphone.com>
- <267f957f-f74d-40f9-a65a-da00ea12810c@minlexx.ru>
- <DAL7BBN0YH1Y.1HOHC7JM44TFF@fairphone.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <DAL7BBN0YH1Y.1HOHC7JM44TFF@fairphone.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: kPI1MM6O_jihh-bNQU_HOByu-ehLoMUSnwPLqTqcmtY_1749833976
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,37 +116,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tom Rini <trini@konsulko.com> writes:
 
+Hello Tom,
 
-On 6/13/25 08:45, Luca Weiss wrote:
-> On Thu Jun 12, 2025 at 5:49 PM CEST, Alexey Minnekhanov wrote:
->> On 11.06.2025 15:08, Luca Weiss wrote:
->>> Update the variable name to sm8250_gcc_data as it's in the sc7280
->>> driver.
->>
->> Hi!
->> But why are you mentioning sc7280 here, while fixing clock-sm8250.c ?
-> 
-> Copy paste from the other patch :'(
-> 
-> Will fix, thanks for spotting!
+> On Fri, Jun 13, 2025 at 04:54:48PM +0200, Javier Martinez Canillas wrote:
 
-I'll fix this while applying, np (already picked this patch up...)
+[...]
 
-Thanks>
->>
->>> ---
->>>    drivers/clk/qcom/clock-sm8250.c | 4 ++--
->>>    1 file changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/drivers/clk/qcom/clock-sm8250.c b/drivers/clk/qcom/clock-sm8250.c
->>
->>
->> ---
->> Regards,
->> Alexey Minnekhanov
-> 
+>> The project is https://gitlab.com/CentOS/automotive/src/ukiboot and reads
+>> UKI (https://uapi-group.org/specifications/specs/unified_kernel_image)
+>> images from raw data partitions. Just like ABL reads Android Boot images.
+>> 
+>> > Are you planning to add it to the EBBR specification?
+>> >
+>> 
+>> I haven't thought about it before but I also didn't know that u-boot had
+>> this requirement. Probably it should be documented somewhere to make it
+>> more clear? Maybe I didn't look enough but didn't find a doc in the repo.
+>
+> We are not strictly and only EBBR requirements, if there is good reason
+
+That's good to know. Heinrich's answer seemed to imply that u-boot was
+limited to EBBR requirements.
+
+> to add more features (and tests). But Heinrich's follow-up question is
+
+Oh, I missed the lib/efi_selftest directory. I'll see to add a test then.
+
+> quite important. I feel like there's already a half dozen offerings of
+> A/B update that works within UEFI.
+>
+
+I just brought the A/B boot protocol used by ukiboot because I was asked
+how I was using the EFI_PARTITION_INFO_PROTOCOL. But I'm not proposing to
+add a new A/B update mechanism for u-boot, just to implement an existing
+EFI protocol...
+
+> -- 
+> Tom
 
 -- 
-Casey (she/they)
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
