@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D0AC61DB2
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 07:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23253C71135
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 08:00:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAB7F82C30;
-	Fri, 13 Jun 2025 09:55:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F05F82C30;
+	Fri, 13 Jun 2025 10:00:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rfvnWxTu";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="y/7uE1Kw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9062582C44; Fri, 13 Jun 2025 09:55:23 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::62c])
+ id B839A82C44; Fri, 13 Jun 2025 10:00:06 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20625.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::625])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9939182C2F
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:55:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08B5882C2F
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 10:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hSO7xecH+3Lwu3Y73509wk9RRL19Oc0IuYydTNQQtdpTIt3P2cML7B/BSj7nVA/zm/IV4aq05OMRSzpLbVBpU43cxmf7SzB4FPipDWmDMggtJJq5e8iiZ9qrntTP3/Thq7nCa6KUASUCd6Bnle9Sp5RB6EW3z8u7I2rbRWzFDJAQnEPY5GEjuFxwdP140p5d2G9yVtlKIJ3zFBvNtAX1RRYCt2HV8ofsKokHK7r/yU2NEaXJ2phVngjn3vsxIDpWOpEQot3o4IDZIXS32Q/XUUbAYDoK6Q5XQZEgSfF2g/9EhgOEaB+4SjPXi1rz2uNMIvlyrBGa/wE7Ch77zD8EkA==
+ b=ECAVLON7Icls2ZxvP5Vdb0o/8j8fjMWLsN1Trl/fRFeM/FFRVmeLJ4JeL06yWmXDkDYmmBLXv3N6DpC14ilT248J7u5t4Tt2t2GHhZAjtx3sObNuOLwByd69e33PwBfaEPEda97gvC7/5HG3ZTfVzFyaWv8Xukr7bgi2PD3iNcS91Bq2t1zed8d1I4qDExRa+PTtvssx+qFKdER8cjEJvHUp0xB/VUSIo0YJIT7XJnCqTZzKWV9yS6Wa6Ngd8P5+pH5aI9F3c6wP8CT/O+qzgfZG69tFh8Dvl3d3l86Rk/qNQojxn7pnfS4D1NkRgCOCSRoYB/BgCA+7WYlJtmJlcA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o+T5PWA0ukj1QATUH9QxmGCVIleeg5/q+9IbanHDh9M=;
- b=UXC3Ld2Cq4H8dOXEUOQQmuZB17D8ghq25qSfxo3JIfoHiFK9TaMttRXpLyO2EEm13U1F87uUGY6kK8LQydpHwpM8ia80M6Rr3cYmuVveYs1Bc9BeyRNwi9uycQkeEJh/TOZCwAuJvFKdW6eyWsXKRHZW/jsfhzT7LbBPOhIgoiyTJDcU+WTqY5i0lSGekFQPArT5qntb3visDHu5S3YvvCl4POVrudtx/VipUSsT2YDLKOzEOMi12+KgUOS6KNrd125bal/hpmE/5lHlt6ps2bEHbGrJQPAeHAtUiK41kEcw3gqT4k2iqbXyHJKhyNJzvHllTvSdiN6MTcg8HT210Q==
+ bh=p102FfQm0ud8E7/n+vkvoAwgnbfnpwnV72iO7IfBKAk=;
+ b=ViCFT5p8Uv4BrYE3QVUjuBPWjcuZ6p3RXGmsO6+oDW2eETbTCMr3QpcZa2qzZmGtF/gxEVynTM6m9mtClmGCN0WfCYCxSwd13tP2lpZB0/Hdab+L70jTSFZo9Gc0Myu9b1b7THC4KoDkhHN+Gnx2LdICoCOOXBh5f1T4RQT5i1BYi2nCh1ShhajfC/rcAvF7+WwWs1WmMtZw7YOHgBetbtyzQJ7fZpHocDEl3/jHoCxSrKEvEwt5GNwHKefYTOzOo/ZFeSCZvfoMTqpcRC8YsgzCLzbjCclrbfzrhka3eCz9f7BW6+meARCPND1tu/gv38IPN2syn0kF5v1QVmTFEA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o+T5PWA0ukj1QATUH9QxmGCVIleeg5/q+9IbanHDh9M=;
- b=rfvnWxTuGjNFvbZEA/kh7VdQqDm4+769/fzrw+CdKEOFIIPbMhvKCIQbekSoAY64rFS06FSCHuYSb95NAgY+c2rldt9gXX8qXKaqLOvZwMz4ISj+hX6iNT7VFQLktzfyKP9Arq//wNjTi11S4MRX11FasOxHP51OruM7oR2TxU8=
+ bh=p102FfQm0ud8E7/n+vkvoAwgnbfnpwnV72iO7IfBKAk=;
+ b=y/7uE1Kwxj4MGO42R6M4hbYulk5+UGxy/BcA25lQKV4P50Ksrgi3OLExAxwTvC/u7P5iam7UqOKIkFFpQ76fBFWTemS0Raj5N5eu4qo7tqg19vzHom6p8V/kEUP/AHGPh5BNHWooFTiJFvxQ0eWmNi5O9oCX2qlH94TWoKdoIHY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by DS0PR12MB8248.namprd12.prod.outlook.com (2603:10b6:8:f3::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.39; Fri, 13 Jun
- 2025 07:55:16 +0000
+ 2025 08:00:00 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.8835.018; Fri, 13 Jun 2025
- 07:55:16 +0000
-Message-ID: <7dd048ed-4f8b-4318-88d4-3bdf14f961b2@amd.com>
-Date: Fri, 13 Jun 2025 09:55:08 +0200
+ 08:00:00 +0000
+Message-ID: <eefb84b0-f995-446a-b885-8de9e0b2f295@amd.com>
+Date: Fri, 13 Jun 2025 09:59:52 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [RFC PATCH] tools: zynqmp: add build script and documentation for
  ZynqMP KV260
 To: Jerome Forissier <jerome.forissier@linaro.org>,
- U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>, Neal Frager <neal.frager@amd.com>
+Cc: U-Boot mailing list <u-boot@lists.denx.de>
 References: <20250612153311.2379944-1-jerome.forissier@linaro.org>
+ <20250612164939.GO1382132@bill-the-cat>
+ <b806f55f-da5a-4373-a6c2-15b1cab93da3@linaro.org>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -107,101 +109,101 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20250612153311.2379944-1-jerome.forissier@linaro.org>
+In-Reply-To: <b806f55f-da5a-4373-a6c2-15b1cab93da3@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0271.eurprd07.prod.outlook.com
- (2603:10a6:803:b4::38) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR03CA0076.eurprd03.prod.outlook.com
+ (2603:10a6:803:50::47) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS0PR12MB8248:EE_
-X-MS-Office365-Filtering-Correlation-Id: be91a667-2fef-4f68-47c8-08ddaa4fa246
+X-MS-Office365-Filtering-Correlation-Id: f248b5c4-8810-4bec-c951-08ddaa504bd1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZTg1d3gxcExJbDhEZDRZeUlFZ2xpWGdnNWRyd3dXVHNEeFREZWxLNUw5OWFm?=
- =?utf-8?B?MFhDZXgyc0FBK1llbGRkSDdjRGNiNVdSZGg0NVREUVFrTFoxM1d3ekdBNmpv?=
- =?utf-8?B?MWdXSkI0V1p3T2dDUkk0UnFXN2xXVkhNV1dFbzVSSTRFMzdScWgwd0hMWXlK?=
- =?utf-8?B?ZkJ6TEtwY3lrMmhISWlST3pNR2tMSnh5cnJHYWtXYUJCRUR5UEp5L0NBOFBm?=
- =?utf-8?B?VDk3eGRCMENBTlFPdSswS2hwYXFEc3I5UG9WaHRld09MTVlDOGZ4K2x5Nnhk?=
- =?utf-8?B?YS9vU2JsREFXb1V1M25EaVJEamRYaHJ4b2xTR0tSWU8wV0hNb2FJUlZRM1Q0?=
- =?utf-8?B?YW5vZUE2OHVYZW9POWNNbVlpc0c2Q2JlcElkSTZTa3ozSUNIQjRoV1A1ZTY0?=
- =?utf-8?B?MHJDTGNtNkhNWTVmYnBHb0NoeTJIVHZvMjNkZFY3NTZqb0Q2cnhWNTh3VTBm?=
- =?utf-8?B?amw0d3FyZzdBUVA4SVZ4ZnYrdUdCTDVTcjZYdXNVQzRWa0ZYMjFHYklWT2E1?=
- =?utf-8?B?eHFJMFNVRzEyRFFDSEZzTXNNd3FXNUwyM3VIZ3FSeHN1aTNlRTI2a09FdUo4?=
- =?utf-8?B?WlhSSGtNZTFRTmNsWmZwenp6YzgwN1huRlNwMzBFelB4c3dMZTBMcjhZVC9h?=
- =?utf-8?B?RUFiUnVBSjZDSzVwYVVMY0ZEaStuUU1uSHdZM0ZXOXVxT001dlFOb1BFNWFC?=
- =?utf-8?B?M2FYMC93THNmTWs4QnlwWU9RZ0s2ZUo1dEFNQko5R2k5R2lENDB2TnpEaFNr?=
- =?utf-8?B?ZVptb3l1aDE1VHVwdnVkSFV0ejg5OXJmNDdYQWprWENtb1VETXhERFZicXhI?=
- =?utf-8?B?MXNKRy84T3NhWG5lb3c2d2pneU4vbnRKbG1ZVnN2UFVybm1FVnJjajMvRVAy?=
- =?utf-8?B?OU9iaWc4M09EWUgySm11Mkl2OS84OTRZUm8wbHVtSGlHZzlmbjl3dUh6SnYx?=
- =?utf-8?B?NUJRbFJKQURyQzZqRUR0c005ZVRjU29wclFPajJ6bUQ4YVJRYkY3dC93NkZR?=
- =?utf-8?B?VWZQcjM5YzNMZENaNEt3OTR4ZlRldDhsUlBZRnQ5OURKc0lIblRiRFk3SkRk?=
- =?utf-8?B?Yjd4MExDYmhOOTk4MjFTYng0aUJqc2FacVNOc2ltODIvRXE5MUdCekhCVkEr?=
- =?utf-8?B?ajkrbE9JazlXUGVYenM5KytrT2lEU3lMVHRlZVRnZHFQVzFHV0M3d0NUbVM5?=
- =?utf-8?B?bzV3YkJRdXY0OEpFcS9YeVE5ZnBTc2FZMFJuRGw4M2FBbHdvTnBINnYveEdF?=
- =?utf-8?B?UE5FTnhhVzlZaVBHUEprTDl4VWh6MVRvcGw4cW9jdE9qK0xNUEpQd0x1UGY3?=
- =?utf-8?B?WFJJbm5XM1JadmlMVTJzbk5uYmhtSkk2aFZLcTZsODBDUThrYzBFbmVIQy9V?=
- =?utf-8?B?R1N6YWtPbkR2QUhnckdmbHZWODZxL1JzUUVSc0N5ZGdNRHNmTTU1di9FZ1Ur?=
- =?utf-8?B?ZHFJajlEcmdlc1ZTL2VmOGR3Zi85WFFsY25ZdWdibHNnYnovQis1Mi84MFh1?=
- =?utf-8?B?M2tBalA3Qnh6VFlyMitxVHJ0NFNsZHc2RHdteEhYR0pydmdzempidWJ1UlZ4?=
- =?utf-8?B?QnN5WGpSVzk1Z3BaMTJFVFp2WDd5MGk5LzlkZXlsL1JLVjFkTWQvWGRMM25O?=
- =?utf-8?B?dzY1SldIandUNXRxWHV0T29TRHR5MVZLOTZjNXY3NEFYd3g4TzJiRmNSczJx?=
- =?utf-8?B?U2hRdlQvMFdVZ3pWbENPZ1AvazVIVnlzS3lUTTc2Wm9zWE4wV3F3d0dXbHNw?=
- =?utf-8?B?bHZnd3dCSmtOTHNKTko5MXlROGxuQkdFOG5oNTBNZy8rcXNFZ3pJVHFVd0Jz?=
- =?utf-8?B?YnM3SCs2eUVMNDVsaFFCVlRBSzlUTEg4bGdBeHFBYWZ1cms3eTdpTTFWZkZK?=
- =?utf-8?B?VVlVT3Y5WlQ4VlZvUW5zRVRzWUpzT0JhSGdzOTlZZ0dRdWZPQUdHS3Zmbk81?=
- =?utf-8?Q?ceVD8R32s7w=3D?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzlZZ3VOL3dKbE41bDFxWWtsN2MwUUsrMm9wRnM2Y2hDaytCdVRYc3NZaTh6?=
+ =?utf-8?B?aTFHQkVhTGNGVHBGeEVjUVpZMTVVL2xGRFZKMWRHemZVdzdOeUFmcUc4emh3?=
+ =?utf-8?B?anZmblpWQ083aDNhbThlNlIvM1JVSXpyZURsWHF5MnVBU1JHMlBrN01xVGNo?=
+ =?utf-8?B?VXJadGxqZWxRTEtaajl6YVpaSXZObmdZa3RkVTNHQ0VVMC9iMElsbVJQbGpE?=
+ =?utf-8?B?UWZtTVZ3bzM4ZG0xWVBPK0VsbGtBVEdpSU9BZElQamQyVkpjRC84S1NEQlFR?=
+ =?utf-8?B?VWRZbjN4bENzNVZpSWNGT0NiejJGL1RMNitkRStreVBHa3pWay95dy9Wcmg5?=
+ =?utf-8?B?cjBRRjYvQnpSUnhGYlA5RXlCdStsT2pUUkNld3dkNjdaTWRlRk1CbzJzbnZa?=
+ =?utf-8?B?SEtHc3habCs1UDF6Y1NEL3FTRlBqVVFkQUtEV3ZtYnExbVpxMFdYTE1DSWRy?=
+ =?utf-8?B?dzVQTDRTMHpEV2lCbjlsdzNFQmVFSlpCOUd0SFF0eE5XWDd4UnNXV0pUM2or?=
+ =?utf-8?B?SDNRT0tDUDBOQ2d3RmxlbmVaZ0NyNlVGM3hjNW5EY0tvUXhwVFh6aFYzMFpC?=
+ =?utf-8?B?N2JUcy8ySEg5azhUelFMR2drNGxTQWtoTGtxNUo1MjRoSnk0ZDUzRVZhNUp0?=
+ =?utf-8?B?Uno0RTZXaXZPKzFxeDQvOUxpSnFwek9CcStGdzFERWZxUXlmdE90N2JnMHdL?=
+ =?utf-8?B?M0UrcWM4UEZaV2ZYNk1HaTlqS280cC8wUUVGaDU4N2JESmZDUEZCMHpXQTBP?=
+ =?utf-8?B?TUwzMjlHOEc0bjhDNHloMi9BRnJpQm9pVnlRVE9yZU9jT0FjMkV0OFEyQlVx?=
+ =?utf-8?B?bnUvNEJOWGovU1pZSzd1MTZscVM3ZC9rOXVZemlkZjluL1g3N0hCLzZYamJh?=
+ =?utf-8?B?OWtpUHc5a0FxbGdRU1BiOTgxWmpWNjQyOEM3bFNMVWpYTHFWRmtiZ3JMMVlU?=
+ =?utf-8?B?UC9TaXREdGZOUTcxRXgyeTdMeXQydFZ1eHdUSE04Z0FXQ3ZQYTNKUHVqdzVK?=
+ =?utf-8?B?WkNlMStVR0RuTWlYZmlUVFFIZGQ3eHJ4SkNhY0hmUkVWV0lwamVCWitBaExi?=
+ =?utf-8?B?a3Jod0N0UFlVMzFwei8yTU1CTUxOVmdETWgrRzFFeVNSbkZ6VTdPVlRVNStB?=
+ =?utf-8?B?TlV5WWpGWm5obUlqRUxiMzJHcWJiNnhOamFIV3VSdEo5NWUxTHAvYjZLN1Jh?=
+ =?utf-8?B?QlhlUDdsMjhGV0dvcjVXQTAvY2t6NTdGcndpVkx3VXI3RUh0MFpORGhvVEVF?=
+ =?utf-8?B?ZkZTMjdQcVh0R2k0cGxjN3JyWTcyWWo2OS9lU2lPRy9tYSt6dXJBdjhjUVZs?=
+ =?utf-8?B?MXZYRHdmQlhUVTBORzNDbUdXcnQ1b21TMHpJTjR3RWZxVnl5T0pvbllrVmcw?=
+ =?utf-8?B?NUp5RFhTekdBalNhT2NmM0sxZWI2TVlZY3lwcm0vM0NOYVZ2Vk5XaWtzVmY1?=
+ =?utf-8?B?ZUl1U1JSWk4vSjRsMnVpM0FHRWMwYVFHTmNkZ1V5ekhGNm1yUC82ZDY3dmhk?=
+ =?utf-8?B?M2h3bHduMmhsa1N6M2pNZlhucWJ5U2RBN0hMZXpHSkZUUGtzeW5jY1dDTFU5?=
+ =?utf-8?B?U2syYVkrM21xS2w5UU5NdVNwOEJvRHZtbW4vSktuZWZkT3NkTm85K2NHSzMr?=
+ =?utf-8?B?aWsveGlMVStaK25VQXdQejRxZW1KQkFYYXpPOU1XTkZLdlZoMEE2ZERZazRS?=
+ =?utf-8?B?cXJwVkdySE1wU25sUEhjYzhGRjhrMlZCbnVMa0gxaG4wRzN4ZExwcWdPLy9l?=
+ =?utf-8?B?eENWK1lpSkJuZHc2OXR0SWFXS3RnYkxnUzd4RFhabHQ0cEh4R2NCMWpLM05l?=
+ =?utf-8?B?L3htZEpXMWxTcnJZeXE1UDFETVZadllxME5uaHdtTDA1YVExTnVnTXJ4bko0?=
+ =?utf-8?B?WTBheGdVSWVkVXNTRjQzYlBuTGNEeUF5N3VRdjNaNnpFS05xOXVVQmJueXh4?=
+ =?utf-8?Q?5EKZgGqUmB4=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bk84dGQwVDc3eVg2cmswTkFoeGxUajhpR2FEd1JDdC93WGlja1JtOHR2WlFP?=
- =?utf-8?B?M2V1emlDYkJ2MjBlTWM4VUdnMUZvWmlqK29ySXBuVzNMSndoWmZSMDBuUmhQ?=
- =?utf-8?B?VlRWNjluSGhvdDQ2WVpUdzhnWi9DbzhQMlplZTlrTUtJRDhVbTdtOVJ5aGZY?=
- =?utf-8?B?czBnY0ZWMXNYSkVQOG1KVlZaT2VIUXYvQzRGYk9MSUFwb1RJTlROZ3l5SUMy?=
- =?utf-8?B?cmdrWFN3di8wQ1BoamRjak5QbEU1d21xcDZxZXkxY0gzaHZhMVBOUUVjU2g5?=
- =?utf-8?B?VlkzTWVmbnNGcWJFbVhVcnBZa1VIWDFUVXpwQ0dUSVhKRnkwRXYyZ1V1RjFN?=
- =?utf-8?B?WjNyVTBkN3o1MjlZTENCTEV0VWdRR1g2TlhTd09TUUQ5ajllaHJCZm5sNXp5?=
- =?utf-8?B?N25KOXRYSkx4QmNEZ1NzOEkyNDE2dG5za0NYLzZaajh5a1RqZ082SWxDUFl2?=
- =?utf-8?B?MnMvVXVnaU9ab3pvYUlqMVovQkQ0TFIzcWY2STlzaDBGRit4V1pxYzBHSHNU?=
- =?utf-8?B?dHNHTEl4MXRYTWM5bHZEV1czWlZqdG1OVWVMYzZ5Z2tqMzB0aGdnd3NwYnRm?=
- =?utf-8?B?dHFSS2RTR202VTVlN1hZTkFuS3pVTk91bWlTYmMzQ3hVRmk0cXNvQ0x3ZTdO?=
- =?utf-8?B?STRjME1BbytJT28vYkdrMXh0c09xWFl2YUlwL2JobXI2Z3dIRHBRcnBjTkNU?=
- =?utf-8?B?VkxZbXgxU1A1U20rbGNKNjNJUGNkRlpXQnhmSDAwUUE3WjFjVVhNK01jYTJq?=
- =?utf-8?B?QTA2ckRPYXl5Skg3Q1ZzejAxN21VL0JZdEVCZjl0cWZHS0prMzZQQWRhTFNX?=
- =?utf-8?B?YzB3QnNDWXg1alhmM3dKZnhkR0N5d0N4M08zV0tPWVNLZHRBaGFVMFZDM2RT?=
- =?utf-8?B?WVVPNks4VG02bzl6MUJjdUJsSDlaY2hWMXNMdzdPNkk3dnBjVGlrUVl6M0Z3?=
- =?utf-8?B?NGwzVTFZWHhhdWlGVjJOdGRhWFhyR3cvREgyTkJnSUJiL001RGJLNlIzcTE4?=
- =?utf-8?B?U0pWR01CVTBURHpwZHZxS0trWHVXSjg3Um9yalBHcHBwOUFIOFJsYWVCRzZ2?=
- =?utf-8?B?bkF5eEhzRFB1bUF2MWlvK092UzhJbFM3RGtzR0ZBcDZnN3F6YklFSmxSc2Yx?=
- =?utf-8?B?UFRzZUUrUHN5MVRHUjBybFJzWEFyQi9RenhwTmtZMno3RWtnR1BEYnJDTEgx?=
- =?utf-8?B?STFySTlOcm8raWdGUnMwQTFBUDNnZVc3dWt5YmtSWUsxY05UZkZ6dkxwK0xD?=
- =?utf-8?B?SVBaQW0rWmc5R005UDdZaElUYVIyNmpiejBvRzE1SDVRZzZ6a0xqMW1FNDR1?=
- =?utf-8?B?WnUrVS91bkRSK3hUaGpNTkNCUWcrUWhKMWl1SVdKaUMyQ3dhYzVEZVBPcUxo?=
- =?utf-8?B?VGhySHJtSFEzeWhHWUlUS1dZZkRKVXQ1MXY4TUlHTWVHc1VHcG9uaUYzK2ZH?=
- =?utf-8?B?MVdqaVQwUDZYQ3d4RWc2Y3JPenQ0YWdVL3REQjlUTkRiWlNxUUZTUjBCNGJY?=
- =?utf-8?B?S2dqeVA4cXBZN1RGR2VZUGNyck9MdmRFMFBOc3dzK0dRMllQSUxxdHA4dzVq?=
- =?utf-8?B?eVBXYjlLWmtzM2h0STNnNUYzYW93dG41QkgyZit4cmhZRGhKakg2c3psV0w4?=
- =?utf-8?B?ckZFT3RyRS9EU0w5UmQ3U1RtYjFYWng5VW81d2xDdjExaWtCeVBIWHFoR2Zy?=
- =?utf-8?B?ckF6bTJzUUtYcU45RlR3ZGp2YXE3azNQREFLY3grVHhoMjZZMFROdjVnUkd1?=
- =?utf-8?B?eDZEYWJUejE4NUdpd2NTZHBFNDhIb0dVeCt3a213RlZkSXB5OEpvaHVZYmFI?=
- =?utf-8?B?R0Vtck1UamxzQnVnd21weVM1aUJVcjY2dlZBcGF3V21FWksrK2svY0JEazlD?=
- =?utf-8?B?a0kwQmVQUWIzZWMxRFFXWEFzVzZjZ2hVdWVGSE1xMlAwcGVmZEVsaXpiZ280?=
- =?utf-8?B?dUFjbVhyRkhJRkhrWkNodG1DS0xRZlNDRFZMK2oxUGdNSTBXNFN0ZVBIS21R?=
- =?utf-8?B?V1dld1RMb05mNXF1RGtTYzg1YmdreXRwQzRDZUw2cjZabjRDTlN2M3J5VHV5?=
- =?utf-8?B?NGx2SjlzVnB6MHpOR3ZUaHcrNU5TQWJpS291QWlhS2twOThoR3FKNnlxcTI3?=
- =?utf-8?Q?7nnYleIBzXnoeDx4oEmcuA6nS?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZWllMzhxbjRpZ0VMWlhYdkRoNmNGMFpNMGFybUR2aWg3Q3B4cnFWc0ZsbFpl?=
+ =?utf-8?B?T3Y2ZmZUTkdHWFR2MVc0bkxTeFJnNUJlczk1V2gzRUtVWmZwb0FXM1lNZ2l0?=
+ =?utf-8?B?MjhRYmt6TWZsTmVOYTM3d1F6bnVrVmQ3WmZDYVViWC9jS2hmQysxaS9YRnhy?=
+ =?utf-8?B?cE5vQmxOaHdWNWwrM0dDL3k5eE83VWtRQllLaEl6R1FnZ281cXg0S1hXa1Nm?=
+ =?utf-8?B?dzJ6azJmdFVJNnpZSENEWkdUZElmV3U5L1NuQk5kaGtZR2l4WFpqY01vZHVa?=
+ =?utf-8?B?c3FVbERnOTNRNzBBWitlK3E5dzBudlJqTTNlRm1La2ZuYUIydUIwUTUzQW5H?=
+ =?utf-8?B?WTBGUHdBWTNiMHl2bjdrUm5hdVBEWHpDb1BWMWVHYWJKRnpYNEs3M1VqR0Rm?=
+ =?utf-8?B?RnFEcnVsZksvZUs3a1B1RFBwTHlXVDQ0SDlDQ1BjOWFqR1gzVWxET3YvMW4y?=
+ =?utf-8?B?ekkxOUJwZWVlbWhnQVJtVDV2Z1dSTTBuNVBEYml5Vkdzc1dVL3ZHOVlOTWpm?=
+ =?utf-8?B?UkZmNjhQaXllWWo1Zk1zUG9kV3BXQy9nT0FIRUZhOE1vd3BBejQyWDU3K0N6?=
+ =?utf-8?B?YlFFTVQ2N0RHQ0xveVFidGZqTG1tRTIrN2pMUFZMOWVzNjhBaDZlckNFb1dp?=
+ =?utf-8?B?bDU3bnV5ZXQwVWo1SDY1ZVJmM0IyMm1qdDZLNUpTL0xqUmk0ekRRMk9VQi9S?=
+ =?utf-8?B?MWNNL3FHdmZLZUkzaG1zZ3RoYnNlWWlxQWxWTEZGc01Wc2pnSkFLZUNURi9F?=
+ =?utf-8?B?TWVzQVNVc2M5N0d2b3ppcFNhZmdrd1dkSHBObHFTR1RKc2kxU0NhYnFkSk9S?=
+ =?utf-8?B?MkUvTmN4bXA1ZnRYQnNOanAwWDhRZVNQeVhnVnIrVlNjbGhKWVgxckVjek9C?=
+ =?utf-8?B?cXdCYmNKbmp0WUx3YXNKeXhKQVRUVGhobDRVaVlhbmY4RVBlZGoyZ1EwcFZh?=
+ =?utf-8?B?dGRhODhmWDBCT0hMMGhwWG1tM0EvZE9rald3cUFha2hrbHBQeGd2OEJXTnlO?=
+ =?utf-8?B?OGVFNzByNmwzeGVCTDJRanZ5VlJ6am5VdFBDbzlBWDZCK0pBRWRHdlQ0Qzdx?=
+ =?utf-8?B?SHV0bVJVSi9EaERzRFBleGN4WjhLRnY1TjIwV2xTbG51QjNQR1VrUGpKMERE?=
+ =?utf-8?B?SXRUbkF6ZGpKcEZpcWQzNFdGM2hsQXhMaUFnelMyYUJMSmxzazd6K2M5TGJw?=
+ =?utf-8?B?Y2lKYXdYSnNvdlhIZGxBd0tyMWEwZ3ZCMVBtaTdOeTFyNWljZ25GVjFVUlBl?=
+ =?utf-8?B?WjBGN3lYYmpyTHpDdVNEM0NPTnB3azBOUk4wL0RXWGZMdmVzYm42RW8yVE85?=
+ =?utf-8?B?N0szdmZRNEtxNTNqKzhYSnBMKzRGRXc2TkJOSVNDMUwwRkI2OGR0L0hkdlNN?=
+ =?utf-8?B?NXlLQVVOWTB1MEhhbStXWFV6RldmNUxJQ2dWSXE1b0VZamNqMEJEdTdNTUFN?=
+ =?utf-8?B?MnZRaW54K0pCUitWdHQwRUZLTUxkZUhQTmJhN3Z6dzkwRzBrakh6cFp0NDNl?=
+ =?utf-8?B?eUx1MmZpc2FBWEY4d2RScWFsWnhQcXdRM1hxek5tTnJDSmNPc3o0ZU94TEIw?=
+ =?utf-8?B?YXBUTDliM3hMMjZ1NFZqVFNWODRnVnArMHVsZ1p3eERPWmVFV1ViV01JWFJu?=
+ =?utf-8?B?ei9kK2dlYWNUZEhVcnVFMU1uZFU3REd5K0dQSUlJcE5aYWQvdFNvNDloL2Zs?=
+ =?utf-8?B?a3pNTFpyNW9CQ2x4OUlTZ3hGR3QxZTY3Y2JNcXNzSW1KWk16N1lZVzZjcWMx?=
+ =?utf-8?B?RWtTQzFuRVNBSlFBRVlLWHFIZ1k1S1dzc2tlckk0YzU3OGQ5ZDlQYWo3WC81?=
+ =?utf-8?B?czI3UWgzcVh6aTVGRlR2aUhoRTNVSzR0T3drbzZkWXFEVWRWbCtjeFBBL285?=
+ =?utf-8?B?WVpMbWpWdzI3NE1kaVNwRmkvSklxMW5ZUlcwT0luYk5ZTVBwSjYxb0VvOEVp?=
+ =?utf-8?B?WEx6REFtSnpXeDhPU2Vyd1pGUzZjYXExL255S0RLTFN6V3BYa0llelFZMisw?=
+ =?utf-8?B?U2ljdjhUVXYzeTIzUGQ0RUhKYjVNM05ocWpHd3k1QWlaZ01NZDR3Nmo4bGdh?=
+ =?utf-8?B?T3NTNEtoRlk2TXVpNlNqSXF3b1VObUs4dTlPQURGWTRjdkhEdVRibFJrUWhN?=
+ =?utf-8?Q?vnyzOHmk2wt2zIUxiuQeXcTrd?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: be91a667-2fef-4f68-47c8-08ddaa4fa246
+X-MS-Exchange-CrossTenant-Network-Message-Id: f248b5c4-8810-4bec-c951-08ddaa504bd1
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2025 07:55:16.0575 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2025 08:00:00.5318 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: G5B96znG9+XowIAs+bOjaNWRVFEa+dyp3R2yFhZ+Hj7re+IbsUpoljMtsFpOu6B5
+X-MS-Exchange-CrossTenant-UserPrincipalName: ndNBcD369BbIHujcgdhK8vlXzUVSjnYOxNNUPK248NFERfjecNpFrgnWSBxk6mDg
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8248
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -221,116 +223,91 @@ X-Virus-Status: Clean
 
 
 
-On 6/12/25 17:32, Jerome Forissier wrote:
-> Add a script to help build a functional U-Boot binary for the ZynqMP
-> Kria KV260. Also add some documentation.
+On 6/13/25 09:38, Jerome Forissier wrote:
 > 
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
 > 
->   doc/board/xilinx/index.rst        |  1 +
->   doc/board/xilinx/zynqmp-kv260.rst | 27 +++++++++
->   tools/zynqmp_kv260_build.sh       | 43 ++++++++++++++
->   tools/zynqmp_pmufw_elf_convert.py | 96 +++++++++++++++++++++++++++++++
->   4 files changed, 167 insertions(+)
->   create mode 100644 doc/board/xilinx/zynqmp-kv260.rst
->   create mode 100755 tools/zynqmp_kv260_build.sh
->   create mode 100755 tools/zynqmp_pmufw_elf_convert.py
+> On 6/12/25 18:49, Tom Rini wrote:
+>> On Thu, Jun 12, 2025 at 05:32:41PM +0200, Jerome Forissier wrote:
+>>
+>>> Add a script to help build a functional U-Boot binary for the ZynqMP
+>>> Kria KV260. Also add some documentation.
+>>>
+>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>> ---
+>>>
+>>>   doc/board/xilinx/index.rst        |  1 +
+>>>   doc/board/xilinx/zynqmp-kv260.rst | 27 +++++++++
+>>>   tools/zynqmp_kv260_build.sh       | 43 ++++++++++++++
+>>>   tools/zynqmp_pmufw_elf_convert.py | 96 +++++++++++++++++++++++++++++++
+>>>   4 files changed, 167 insertions(+)
+>>>   create mode 100644 doc/board/xilinx/zynqmp-kv260.rst
+>>>   create mode 100755 tools/zynqmp_kv260_build.sh
+>>>   create mode 100755 tools/zynqmp_pmufw_elf_convert.py
+>>
+>> Helper build scripts don't belong in the tools directory. If they're
+>> super helpful, I don't object to adding them to
+>> u-boot-extras/contrib/<you>/ directory.
 > 
-> diff --git a/doc/board/xilinx/index.rst b/doc/board/xilinx/index.rst
-> index 2e31fe3f3a4..3f3a85b709c 100644
-> --- a/doc/board/xilinx/index.rst
-> +++ b/doc/board/xilinx/index.rst
-> @@ -9,4 +9,5 @@ Xilinx
->      xilinx
->      zynq
->      zynqmp
-> +   zynqmp-kv260
->      zynqmp-r5
-> diff --git a/doc/board/xilinx/zynqmp-kv260.rst b/doc/board/xilinx/zynqmp-kv260.rst
-> new file mode 100644
-> index 00000000000..219bbd602e9
-> --- /dev/null
-> +++ b/doc/board/xilinx/zynqmp-kv260.rst
-> @@ -0,0 +1,27 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +..  (C) Copyright 2025 Linaro Ltd.
-> +
-> +ZYNQMP KV260
-> +============
-> +
-> +Building
-> +--------
-> +
-> +To build for the KV260:
-> +
-> +   $ ./tools/zynqmp_kv260_build.sh
-> +
-> +The first invocation will fetch and build some required binaries (bl31.bin,
-> +pm_cfg_obj.o, pmufw.bin). Subsequently `make` can be invoked directly as
-> +follows:
-> +
-> +   $ export BL31=bl31.bin
-> +   # export CROSS_COMPILE=aarch64-linux-gnu-
-> +   $ make -j$(nproc) BINMAN_ALLOW_MISSING=1
-> +
-> +Flashing
-> +--------
-> +
-> +Press the FWUEN button on the carrier board, the press and release the RESET
-> +button, then release FWUEN. Connect to the embedded HTTP server and upload
-> +`qspi.bin`. Press and release RESET again.
-> diff --git a/tools/zynqmp_kv260_build.sh b/tools/zynqmp_kv260_build.sh
-> new file mode 100755
-> index 00000000000..3cf7147e3a6
-> --- /dev/null
-> +++ b/tools/zynqmp_kv260_build.sh
-> @@ -0,0 +1,43 @@
-> +#!/bin/bash
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright (C) 2025 Linaro Ltd.
-> +
-> +set -ex
-> +
-> +if [ "$1" == "-c" ]; then
-> +  rm -f bl31.bin pmufw.elf pmufw.bin pm_cfg_obj.c pm_cfg_obj.o
-> +  exit 0
-> +fi
-> +[ -e bl31.bin ] || {
-> +  ATF_SRC=$(mktemp -d /tmp/arm-trusted-firmware.XXXXXXXXXX)
-> +  git clone https://github.com/ARM-software/arm-trusted-firmware ${ATF_SRC}
-> +  make -C ${ATF_SRC} -j$(nproc) bl31 CROSS_COMPILE=aarch64-linux-gnu- \
-> +	  LOG_LEVEL=40 ZYNQMP_CONSOLE=cadence1 CONSOLE_RUNTIME=cadence1 \
-> +	  RESET_TO_BL31=1 PLAT=zynqmp ZYNQMP_ATF_MEM_BASE=0x10000 \
-> +	  ZYNQMP_ATF_MEM_SIZE=0x2ffff ENABLE_LTO=1
+> OK
+> 
+>> But there's a number of
+>> documented examples already on checkout and build TF-A then do ... for
+>> your platform.
+> 
+> There is doc/board/xilinx/zynqmp.rst which deals with quite few ZynqMP
+> boards but not the KV260. In addition, it has a number of shortcomings:
+> - It mentions pmu.bin but does not say where to get if from
+> - It doesn't say how to build TF-A (bl31.bin), some very specific build
+> options are needed.
+> - I consider that detailed build instructions belong in things called
+> scripts or Makefiles, that were invented long ago exactly for that
+> purpose :) IMO the documentation should tell the bare minimum and ideally
+> be unnecessary.
+> 
+> I am not particularly proud of the fact that I spent more than a whole
+> day trying to get U-Boot master to boot on my KV260, and without the help
+> of Michal, no doubt I would still be trying... So, how about I submit the
+> zynqmp_kv260_build.sh script to the u-boot-extras/contrib/<me>/ directory
+> and just point to it in doc/board/xilinx/zynqmp.rst?
 
-As I told you this is shortcut. Recommendation is to put TF-A to OCM with FSBL.
-That's why there are some challenges in connection to fit both of them there.
-
-Another thing is that none is creating reservation for TFA in DT. When you boot 
-Linux than there is big chance that user application will rewrite TF-A and you 
-break your platform because of missing protection.
+no issue from my side.
 
 
-> +  cp ${ATF_SRC}/build/zynqmp/release/bl31.bin .
-> +  rm -rf ${ATF_SRC}
-> +}
-> +[ -e pmufw.bin ] || {
-> +  wget https://github.com/Xilinx/soc-prebuilt-firmware/raw/refs/heads/xlnx_rel_v2023.1/kv260-kria/pmufw.elf
+>>> diff --git a/tools/zynqmp_pmufw_elf_convert.py b/tools/zynqmp_pmufw_elf_convert.py
+>>> new file mode 100755
+>>> index 00000000000..b4eb2695831
+>>> --- /dev/null
+>>> +++ b/tools/zynqmp_pmufw_elf_convert.py
+>>> @@ -0,0 +1,96 @@
+>>> +#!/usr/bin/env python3
+>>> +# SPDX-License-Identifier: GPL-2.0+
+>>> +# Copyright (C) 2025 Linaro Ltd.
+>>> +#
+>>> +# Written by Gemini (Google AI) then reviewed and edited to remove some comments
+>>
+>> I'm glad this calls out where it's from. I'm not comfortable for a
+>> number of ethical reasons on taking LLM-generated code. I'm also a
+>> little surprised we don't already have something like this with binman
+>> today?
+> 
+> Nervermind. 'llvm-objcopy -O binary pmufw.elf pmufw.bin' works just
+> fine :) so I'll use that instead. Note that the binutils objcopy
+> cannot be used because it is target-specific and the MicroBlaze
+> version is not so easily available. While LLVM supports many targets
+> natively.
 
-Better to use 2025.1 version.
+yes/no. Toolchains are wired via buildman already and available at kernel.org.
+Connection to llvm is adding another dependency.
 
-> +  ./tools/zynqmp_pmufw_elf_convert.py pmufw.elf pmufw.bin
-> +}
-> +[ -e pm_cfg_obj.o ] || {
-> +  wget https://github.com/Xilinx/embeddedsw/raw/refs/heads/xlnx_rel_v2023.1/lib/sw_apps/zynqmp_fsbl/misc/pm_cfg_obj.c
+I think putting this script to u-boot-extras is fine. To upstream u-boot could 
+be more problematic because as I mentioned there are some issues with the way 
+you use. You should be able to take bl31.elf from soc-prebuilt-firmware repo too.
+You can also look what Neal did in buildroot to get it work which is better 
+place for building tfa and putting images together from different locations.
 
-This is any generic configuration which is not aligned with standard firmware. 
-It means yes you can use it but it is missing SOM specific configuration. It 
-means for example power off don't need to work. Also this can work on kv260 only 
-but don't need to work on kr260.
+Thanks,
+Michal
 
-My way is to extract it from released fsbl instead but up2you.
 
-M
+
+
