@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC253C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:13:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06DE6C71148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:13:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F26E82E58;
-	Fri, 13 Jun 2025 18:13:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BDCCC82EC6;
+	Fri, 13 Jun 2025 18:13:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="1Ij8ykgO";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="UsM602C4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BD8482D34; Fri, 13 Jun 2025 18:13:07 +0200 (CEST)
-Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk
- [78.40.148.171])
+ id 520DE82D39; Fri, 13 Jun 2025 18:13:16 +0200 (CEST)
+Received: from imap4.hz.codethink.co.uk (imap4.hz.codethink.co.uk
+ [188.40.203.114])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C0BC82D09
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:13:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78E6082D09
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:13:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=srv_ts003@codethink.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JAbBiqmnZpOCrK8WZG+4DRNYVwggsq0LrfAKLKtD5jA=; b=1Ij8ykgOgZiHw5jj9sBJT/BlDN
- AetT4eqJn1+HiAlfkzrQLFFZ2+uBj6rYUBq+AiYv4B0XkL84OGIlPdEsG586FRtAwTNnZMbRYbu8O
- v9y3sMZiGw0+yeyXxorelXa04QLIVSeQW7oS1JdzZTTC1j4ebHMvty9uGR9W11yLMr2i4+PEiSreL
- sYdOUz6Yeq22hjiE4xpMpan4rkOTk5f2cvcL1MJZDt+NpgrQnoXXvAM+6DLmp1CFBz1maL/RMOWHQ
- cPl34FhDZk1C7rvqoWOuXLa4ETP2IkqB2BWN9Yqu64Ce/txlw5GhWlUxlrMlfHDuWnnMBUvJqgYKr
- UALj1Cpw==;
+ d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=a8XL55Vbore/7WGssKPmeAIh119NlaVhIWsFSSo2htc=; b=UsM602C4wL3iQPrxzZGacDAN3I
+ UP/cfE51QI7xoJ29IPEtGGVB8Ovg40S+Iz195HiQ9Qg4A6lYhad4eJPKMPqDiFJ9SUww2v2o517OQ
+ 57BqON7i09wWG+j8MJkNhxccL/2au2EIAe1LFE4exBd/j3GB+QaWS90JI6vi66DGuIPEp11zHRszH
+ F6E0EnO9vk1tvkJ6wHQO7NMrB8koogJZekfu0vDnFi8xOE0La2zu7tCmFDKFGg/yHXAvEZppHtYQc
+ N2EwO2VAbH8/lfJZ9yKunk16zpV3E+EBr90w5wdlAfkoSEDVl+yA1iE6d0IuskLU2xtErPYmdSWd9
+ Wf7KssAA==;
 Received: from [167.98.27.226] (helo=rainbowdash)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1uQ71W-001arx-Dn; Fri, 13 Jun 2025 17:12:59 +0100
+ by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uQ71X-00Dpwp-B1; Fri, 13 Jun 2025 17:12:59 +0100
 Received: from ben by rainbowdash with local (Exim 4.98.2)
- (envelope-from <ben@rainbowdash>) id 1uQ71X-00000007ZpV-0DK2;
+ (envelope-from <ben@rainbowdash>) id 1uQ71X-00000007ZpS-00B9;
  Fri, 13 Jun 2025 17:12:59 +0100
 From: Ben Dooks <ben.dooks@codethink.co.uk>
 To: rick@andestech.com,
@@ -51,12 +51,10 @@ To: rick@andestech.com,
 Cc: nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
  fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk,
  ben.dooks@codethink.co.uk, trini@konsulko.com
-Subject: [PATCH v2 1/2] riscv: add build support for big-endian
-Date: Fri, 13 Jun 2025 17:12:57 +0100
-Message-Id: <20250613161258.1805957-2-ben.dooks@codethink.co.uk>
+Subject: Add big-endian build option for riscv
+Date: Fri, 13 Jun 2025 17:12:56 +0100
+Message-Id: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
 X-Mailer: git-send-email 2.37.2.352.g3c44437643
-In-Reply-To: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
-References: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,56 +73,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to build code big-endian if the board supports
-it. Updates the makefile to pass the correct compiler and
-elf flags.
+Add the option to allow building a RISC-V system big-endian.
 
-Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
----
-v2:
-- fixed issue with big v little endian build (+typos)
----
- arch/riscv/config.mk | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+This has been tested against our big-endian qemu/cva6 system
+and is the minimal base to allow a system to run big-endian.
 
-diff --git a/arch/riscv/config.mk b/arch/riscv/config.mk
-index 9f16dda92a0..eddd6a3b9a2 100644
---- a/arch/riscv/config.mk
-+++ b/arch/riscv/config.mk
-@@ -10,19 +10,29 @@
- # Rick Chen, Andes Technology Corporation <rick@andestech.com>
- #
- 
--32bit-emul		:= elf32lriscv
--64bit-emul		:= elf64lriscv
-+ifdef CONFIG_SYS_BIG_ENDIAN
-+small-endian		:= b
-+large-endian		:= big
-+PLATFORM_CPPFLAGS       += -mbig-endian
-+KBUILD_LDFLAGS          += -mbig-endian
-+else
-+small-endian		:= l
-+large-endian		:= little
-+endif
-+
-+32bit-emul		:= elf32$(small-endian)riscv
-+64bit-emul		:= elf64$(small-endian)riscv
- 
- ifdef CONFIG_32BIT
- KBUILD_LDFLAGS		+= -m $(32bit-emul)
- EFI_LDS			:= elf_riscv32_efi.lds
--PLATFORM_ELFFLAGS	+= -B riscv -O elf32-littleriscv
-+PLATFORM_ELFFLAGS	+= -B riscv -O elf32-$(large-endian)riscv
- endif
- 
- ifdef CONFIG_64BIT
- KBUILD_LDFLAGS		+= -m $(64bit-emul)
- EFI_LDS			:= elf_riscv64_efi.lds
--PLATFORM_ELFFLAGS	+= -B riscv -O elf64-littleriscv
-+PLATFORM_ELFFLAGS	+= -B riscv -O elf64-$(large-endian)riscv
- endif
- 
- PLATFORM_CPPFLAGS	+= -ffixed-x3 -fpic
--- 
-2.37.2.352.g3c44437643
+We don't yet address IO endian which has been an interesting
+issue, as some code seems to assume big-endian means big-endian
+IO.
+
 
