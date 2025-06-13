@@ -4,102 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57275C71136
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B741C71148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 17:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C41E882D34;
-	Fri, 13 Jun 2025 18:59:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B68C82D2E;
+	Fri, 13 Jun 2025 19:23:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="do8gzagj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qeGzYNZm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E65B482E67; Fri, 13 Jun 2025 18:59:41 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C3F7882D21; Fri, 13 Jun 2025 19:23:11 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98FFE82CA0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:59:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7CFFC82CE7
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 19:23:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1749833978;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=qpzb+LP9vsKsAbSh62Nix5TZ8g8heeaZHYWABUBtwPs=;
- b=do8gzagjW1l4/r7+WvprQbHoOBhRQ7TvBvmBOOH7/aYJzoGzGwbKFAnB//KlPMwc7ysDR8
- u+A57ngueYZazukX1iE4bXVUuPeyllZ8cLl3z/QoU+C+YkYGp+CNGr7oBt9ycN6C++Va1S
- QGGLaTKolvqZaESEAbdaCvyfoBzZNU0=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-74-4oan0XgoNweSTuI2WiFfBg-1; Fri, 13 Jun 2025 12:59:37 -0400
-X-MC-Unique: 4oan0XgoNweSTuI2WiFfBg-1
-X-Mimecast-MFC-AGG-ID: 4oan0XgoNweSTuI2WiFfBg_1749833976
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-450d6768d4dso13929365e9.2
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:59:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-450cfb79177so14760895e9.0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 10:23:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1749835389; x=1750440189; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CiZBoSy5e7DcOqC98Kiu2xEAniXAlRTMoulWltnlDig=;
+ b=qeGzYNZmtj2l/X+VCXVfyhvy29JKUWzzCqiZZiJN7Qvsv/mDHVQQqDDOkCngJk3BIO
+ xfsMaMO7/M/hrPHBwyASsngR5P83CrbOFs2C5eYSB/VBY9BG/EUpf4d4kvvTAFhGB9j2
+ EzD/l3uaXzP4XjiWEykqF9Br9XIz7P3IsgUJ0MWdHcGTtRbiPJI0xgrTc6Bbx9LMM/6p
+ 6NU+uGZaXWInhILG+N66fKCOlPcQ08lTzWVhmZBqbgqmRyUV0kTU2ADiBBagK05ls6sr
+ uFOo43f+4D7RSZaakuz7JxCtocVYkTFi1d5fYRc7v+nk56Y5iMEcpwcv1jxJ5F8t1Nt/
+ ZmMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749833976; x=1750438776;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qpzb+LP9vsKsAbSh62Nix5TZ8g8heeaZHYWABUBtwPs=;
- b=h/LwjmF7Eh/ZGuPmiQ4ZSCcVhHNJQ1wej/5OpWaOzVs1sodH8G+nuAC6lMyLRHWQNj
- e4Zt2/zCdcGjs5HCDu3Q+Qz2m3yWOuXazvoBabpvHTB/jZOjjPbw6YOd8TPWKTCFHIE/
- p4Ups1RBm5RD1pzZZ0FQT9NvPmcDsxK6EVtllN7gJrZMJtlF/rcbiFwMIqKeh11yIUR7
- 11MXXuup707vbhH/e/I9JnkVREyxiQNEVysmbvmIee+Tpuwh552s1fAUSrUt5NUwLSdn
- 3zc3GhJVa5zbfNYFz+z8I19T4CgmO39DT9rw6wAwidztnqTa99Mb/Z03zNS+EA+wvpQo
- Tc/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpud8mp85MBqhkHK0K2qwBqVIODOna9SMaidf2AvLNcVFwkjxQi4JwqGzgcgX51SyrT/uPETk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCh5ISmV37nlP7TAiAHEtmhFWT8wCxFnQ8I0npam6zyDi9Blga
- Dx+yqECc0uaer2crKlNiZNJgmCoH4IUPq4+tp1z4NmkEHwK7wq3Esbi0xDVEBu3yKORp7BKqGn9
- aLH6COWU/sdNlK/klHSVePcAKgk5rtZSW4ZFWSnYq54TBMg5XhLBOwoo=
-X-Gm-Gg: ASbGnct2GCpJ38l4aW+zADjvI4CsMdeE7tXoBS8v3j3X57aNqGluEPNtvPuRHAg4T4q
- cxxC72Ph2vP/+qzBJPJyhCCyk+Ty35E+OcKP4O/lMNK6RQuiSIO/VCW50r8wjmj7hVE2PXxm58I
- dKM+I5O5OS2LnOC4AOfXyDXw9aQQzzoNqfgoRp4d7au1pC610xGV7MaR0fw0VPH4QoxKCIUklvh
- r8ZJd0Z78llkNPjqyr/kVHpI8xMmc+ItsC9ItKHm9Bf3I0iLpjGgVnXDUk6MaaUno2yqGhk5dLu
- vg0x0iyXU8CUcTzHPvl/8HRkF+GUIx4yZC4Z+Qdh42XgJA0rQ88Pjp3lJ2VzI/6TjTqdQFCocFm
- 9n6LP
-X-Received: by 2002:a05:600c:3ac6:b0:450:ceb2:67dd with SMTP id
- 5b1f17b1804b1-4533cb5751bmr2582805e9.33.1749833975867; 
- Fri, 13 Jun 2025 09:59:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHlBg1Fex09muGUmWKxu71lJBNRNltX70/l7LyR5jUJ98sP+6KaYQIpCr+wL0O1I24Z5kcwRA==
-X-Received: by 2002:a05:600c:3ac6:b0:450:ceb2:67dd with SMTP id
- 5b1f17b1804b1-4533cb5751bmr2582515e9.33.1749833975430; 
- Fri, 13 Jun 2025 09:59:35 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
+ d=1e100.net; s=20230601; t=1749835389; x=1750440189;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CiZBoSy5e7DcOqC98Kiu2xEAniXAlRTMoulWltnlDig=;
+ b=PCNXld/z7mTzX863EbnOrT6CWYNoNbeKs1Skr545xOyj7AsAltQJPzPdxe4IzcDcri
+ StVfa9cr4uQVclT+MkVoqQoN/xrXFIPsOlxzxEeIfBb/Ow1U788beVVGLv6GkK+0mBFr
+ 8oKNgvbkaiDQSurUfkZiodFj2/V8g8Hu2ZeDVSzr/R4UJAaIQf7v3RgmPBsDSi8ujWG2
+ sAfKAfQ84RPhZuK0zAVl+ZSIGcWzrAqdrbrms4zcZEYZB3UtNeNHr412JHMWgMveFroH
+ 47APTLOgmqtv74Uq9jcbG6BCtSYSLL5F6zEoPshUXcl0a0Cs0B8Pbt+0U79SwVc5vWOV
+ 3Gkg==
+X-Gm-Message-State: AOJu0YymzOUqVlgEm+kRR/irY5WgEhCJQOqmAt99mNQByvKCYHBQ+JHj
+ tIWgog1u+EMXtaw5Yt38lwoNCsE03R2b5FOEpITH4J7dije0jeGGw4P9ByzINcvzFuOFkSpQQ/Y
+ nSeo1
+X-Gm-Gg: ASbGncvcopXTQQ4YCtq5pS4be34hZndCzxNsdCJphxo5KEddShKTQNLaLrMuBRDwNfz
+ PRNUetipYGZCSGRr74Sf0Gp91A0RNLFv8cKR6pjRn6DioiBMWBwtsunZSlpj6d3psDtjYGKivn9
+ s4Uk6fU7Pm+Qa2ny4FHtp9LBd3TLv7TeayUrQTsZ0F6L9++KWak8r52W4D4reyhVYjwgaRfrwg9
+ iTb3L6LUoI4gBx7XUVRvQvj7lLiD5pWESNeAIIN/zgBIDatxq7inmwtCR4KD7Tzqfa+iiq0WA2u
+ dlll+n3XP5+UdMRcM3CdDcdX6tHrjpwQYIvuRskSJz985sfKRzSmYRKL8r3rQBa7Wr99
+X-Google-Smtp-Source: AGHT+IGi7JNiuIsWkqk0fk7Z9twUHXQLjuOeccR+NMuOL5WNHHZ1jzrqdP5PSwqwHQC9cs6eR5QIHA==
+X-Received: by 2002:a05:600c:3589:b0:43c:f3e4:d6f6 with SMTP id
+ 5b1f17b1804b1-4533cb0013cmr4628115e9.31.1749835388796; 
+ Fri, 13 Jun 2025 10:23:08 -0700 (PDT)
+Received: from toyger.lan ([2a01:170:117e:fc:19e6:b5d7:f8b4:a927])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532e151c3csm59136965e9.30.2025.06.13.09.59.34
+ 5b1f17b1804b1-4532de8c50esm57895015e9.4.2025.06.13.10.23.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 09:59:34 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- mkorpers@redhat.com, mskrivan@redhat.com, eballetb@redhat.com,
- mripard@redhat.com, alexl@redhat.com, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Maks Mishin <maks.mishinfz@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 3/3] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
- support
-In-Reply-To: <20250613154922.GY1382132@bill-the-cat>
-References: <20250613085742.796015-1-javierm@redhat.com>
- <20250613085742.796015-4-javierm@redhat.com>
- <2584944A-D0CF-44E5-ABAE-C3E156ED8539@gmx.de>
- <87ikkzvghz.fsf@minerva.mail-host-address-is-not-set>
- <20250613154922.GY1382132@bill-the-cat>
-Date: Fri, 13 Jun 2025 18:59:33 +0200
-Message-ID: <87cyb7vaq2.fsf@minerva.mail-host-address-is-not-set>
+ Fri, 13 Jun 2025 10:23:08 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH v4 0/8] Qualcomm: teach the build system to emit signed ELF
+ images
+Date: Fri, 13 Jun 2025 19:23:04 +0200
+Message-Id: <20250613-b4-qcom-tooling-improvements-v4-0-7ea1c68779fa@linaro.org>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: kPI1MM6O_jihh-bNQU_HOByu-ehLoMUSnwPLqTqcmtY_1749833976
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHheTGgC/43N0Q6CIBTG8VdxXEfjICh21Xu0LgBR2VIMHKs53
+ z30ploXdvn/dvY7MwrGWxPQKZuRN9EG64YU7JAh3cmhNdjWqREllBNOKVYM37Xr8eTczQ4ttv3
+ oXTS9GaaApWKEC64AJKBEjN409rHxl2vqzobJ+ef2LcK6/glHwAQLYKBExblu1DndSO+Ozrdol
+ SN9awXZ02jSdFlDpUnNpPjV8g8N9rQ8aWXR5Ew3FApDv7RlWV4+zqxZZQEAAA==
+X-Change-ID: 20250522-b4-qcom-tooling-improvements-ab40585b11a1
+To: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5070;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=Ra533MgWpoMKTKuq8xjKQVla0qOjlBRaFXLrCMxboGk=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoTF56jdQrtwjqoNNNZssO6kAsrzUSIOywwtPww
+ JNBymPNVj+JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaExeegAKCRAFgzErGV9k
+ tgmUD/sFGJe7uA8mxto7/sggj6XpVOZI/lr7qzHyPHfyCfPEaseisTd0CJEUuN18xKNVnSQXOkm
+ AI/2QpqcHpm/uhuqRDSBuayhkWdgmM2mocVDvtV6zAxhA0l8e7sUTOr/ODlIXSGCD5vff9biNUa
+ XRzs0VBP1feoP5FGbrVZq7pY576mP0JYEH6lpoSgiJsRLWgihDcfye2nArZD6kybNux9b5nyH9I
+ yunwIrT9mP2rakyQEwb7xR1Iu6L8vrehIE7cBc1W1lGTkO2gE+UDJDh9kPGawVRAZmIPvKzuxFA
+ dYCrT8g/awjjbd8rSAU51ksta6klWnETJ649SrWnjNmDdm4Beegu4Tv2p9Z+vBUkAwf4Xnap4d0
+ RidUT02K77wdz8+Zn8QFkrdu82znH0Gaclr6sWqG/F1W2ClmYYgT2gGzXJdWCyFRURZLbQiBPjr
+ 9CwnBzlNOguTW6w8124okmNi2q6aDz9ZN+kk+zclPJWFuruHtH41xRxl7gNvoNp/qcvo6G6SPLB
+ d5JwOa1DG7oeunPwo21SuQMELwnpCv4DFVoQbWK33C/0wfklv3865mPYsmWb//8qkqMMWZM6z+u
+ QRsX4tBKtizmGADJBEXNuVNu5ZVZLxZcXvZni3alJCDSL7okOgUuwtfqCaejcs4pwBFuhv/VVGi
+ BLnPJjMb1GtqXgg==
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,50 +124,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> writes:
+With several new Qualcomm platforms appearing on the mailing list, all
+of which build U-Boot as an ELF, sign it, and then flash it to some
+partition on the board, we're getting a lot of defconfigs which just
+contain a debug UART and a TEXT_BASE address. This leads to needless
+rebuilds in CI of effectively the same image, and needless duplication
+of build instructions.
 
-Hello Tom,
+To address this, let's introduce a new tool "mkmbn.py", this is based
+on the existing qtestsign[1] tool but is (currently) hardcoded to
+only handle the Dragonwing and IPQ boards which use MBN header v6.
+Additionally, the tool contains a lookup table that maps from a boards
+DT compatible property to the load address it needs. Since it's highly
+unusual for different boards using the same SoC to have different load
+addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
 
-> On Fri, Jun 13, 2025 at 04:54:48PM +0200, Javier Martinez Canillas wrote:
+With this tool in place, we teach binman to use it and introduce
+a qcom-binman.dts file to describe the image. The tool will emit a
+u-boot.mbn file for supported platforms, for unsupported platforms the
+u-boot MBN etype in binman will print a notice explaining that no mbn
+file is built and to look at tools/qcom/mkmbn/mkmbn.py
 
-[...]
+Finally, the defconfigs are cleaned up by moving the debug UART
+definitions to config fragments (since it doesn't make sense to have
+them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
+the qcs9100_defconfig is removed entirely since the same binary can
+be created with just make arguments. This platform entirely lacked
+documentation to begin with, which should be addressed by future
+patches.
 
->> The project is https://gitlab.com/CentOS/automotive/src/ukiboot and reads
->> UKI (https://uapi-group.org/specifications/specs/unified_kernel_image)
->> images from raw data partitions. Just like ABL reads Android Boot images.
->> 
->> > Are you planning to add it to the EBBR specification?
->> >
->> 
->> I haven't thought about it before but I also didn't know that u-boot had
->> this requirement. Probably it should be documented somewhere to make it
->> more clear? Maybe I didn't look enough but didn't find a doc in the repo.
->
-> We are not strictly and only EBBR requirements, if there is good reason
+The Qualcomm documentation is also cleaned up, a new "signing" page
+is added to briefly cover the what and why of MBN signing, and board
+specific pages are updated to explain the new build process.
 
-That's good to know. Heinrich's answer seemed to imply that u-boot was
-limited to EBBR requirements.
+These patches have been tested on the RB3 Gen 2, but additional
+testing for other platforms would be super useful.
 
-> to add more features (and tests). But Heinrich's follow-up question is
+[1]: https://github.com/msm8916-mainline/qtestsign
 
-Oh, I missed the lib/efi_selftest directory. I'll see to add a test then.
+To: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de
+Cc: u-boot-qcom@groups.io
+Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 
-> quite important. I feel like there's already a half dozen offerings of
-> A/B update that works within UEFI.
->
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+Changes in v4:
+- Rework how qtestsign code is imported to make it easier to sync with upstream in the future.
+- Actually raise an exception when mkmbn fails in an unexpected way.
+- Link to v3: https://lore.kernel.org/r/20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org
 
-I just brought the A/B boot protocol used by ukiboot because I was asked
-how I was using the EFI_PARTITION_INFO_PROTOCOL. But I'm not proposing to
-add a new A/B update mechanism for u-boot, just to implement an existing
-EFI protocol...
+Changes in v3:
+- Fixup Makefiles and add missing qcom-binman.dts
+- Adjust wording to reflect changes to build process
+- Link to v2: https://lore.kernel.org/r/20250602-b4-qcom-tooling-improvements-v2-0-c7d19c0d4a8b@linaro.org
 
-> -- 
-> Tom
+Changes in v2:
+- Reworked to use binman with a plugin to build the u-boot.mbn file
+- Added some fixes for binman to work with OF_UPSTREAM and with tools
+  in the srctree toolpath rather than objtree for out of tree builds.
+- Link to v1: https://lore.kernel.org/r/20250522-b4-qcom-tooling-improvements-v1-0-8141b8955cfb@linaro.org
 
--- 
-Best regards,
+---
+Casey Connolly (8):
+      binman: add $(srctree)/tools to toolpath
+      binman: support building binman dtb when OF_UPSTREAM is enabled
+      tools: qcom: introduce mkmbn library
+      tools: qcom: add mkmbn.py
+      binman: add support for building Qualcomm signed MBN ELF images
+      configs: qualcomm: use fragments for debug UART
+      qualcomm: use mkmbn via binman and stop creating ELF files
+      doc: board/qualcomm: update docs for new u-boot.mbn target
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+ Makefile                            |   5 +
+ arch/arm/Kconfig                    |   1 +
+ arch/arm/dts/qcom-binman.dts        |  16 ++
+ board/qualcomm/debug-qcm6490.config |   5 +
+ board/qualcomm/debug-qcs9100.config |   5 +
+ configs/qcm6490_defconfig           |  10 --
+ configs/qcom_defconfig              |   2 +
+ configs/qcom_ipq9574_mmc_defconfig  |   1 -
+ configs/qcs9100_defconfig           |  10 --
+ doc/board/qualcomm/index.rst        |   1 +
+ doc/board/qualcomm/rb3gen2.rst      |  27 ++--
+ doc/board/qualcomm/rdp.rst          |   5 +-
+ doc/board/qualcomm/signing.rst      |  29 ++++
+ dts/Makefile                        |  19 ++-
+ tools/binman/btool/mkmbn.py         |  29 ++++
+ tools/binman/etype/u_boot_mbn.py    |  53 +++++++
+ tools/mkmbn                         |   1 +
+ tools/qcom/mkmbn/cert.py            | 127 ++++++++++++++++
+ tools/qcom/mkmbn/elf.py             | 238 ++++++++++++++++++++++++++++++
+ tools/qcom/mkmbn/hashseg.py         | 281 ++++++++++++++++++++++++++++++++++++
+ tools/qcom/mkmbn/mkmbn.py           | 154 ++++++++++++++++++++
+ 21 files changed, 981 insertions(+), 38 deletions(-)
+---
+base-commit: 783f365c9dbb5c9e9341753fbad6a44dcdc7a069
+change-id: 20250522-b4-qcom-tooling-improvements-ab40585b11a1
+
+Casey Connolly <casey.connolly@linaro.org>
 
