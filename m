@@ -4,115 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8790AC61DB2
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 12:56:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA88C61DB2
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 12:56:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4BCB82CA0;
-	Fri, 13 Jun 2025 14:56:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1D04982CA6;
+	Fri, 13 Jun 2025 14:56:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pjvzhiH2";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="c4A42tQP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C883A82CA6; Fri, 13 Jun 2025 14:56:32 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 3127182CF5; Fri, 13 Jun 2025 14:56:46 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1A2807B1
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 14:56:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAF0A807B1
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 14:56:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1749819387; x=1750424187; i=xypron.glpk@gmx.de;
- bh=IXAR4N6RKc0UQ076+SlqXMaMQ1X4W89JL+wpPQIKKYU=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=pjvzhiH29zHjiT4cRMyw4nYnSzlbyRSNvuXtQj0xvz+BuQ4dZNufOw7AdXwF0g/M
- qmAESGVhGJDFq8PwccA+W4gLcn1K7tdJx9zsbdKq+m4qNU6loGvopC6avWvYkRytH
- GcypIrz6D+gwoJZk/kJnX0H3uM94XCpxWDHWIuTVjuqa2XkrEHSGRPU6GcAALHRyE
- cOOSfx4o6hxjrhKlQGT2t2gZqgNngnVvShn8iu0qbPmAMK/YcB3J//j2V9J2fVtSN
- ktioEq0AP32ZRbOkNnamDwbQprNGOvwan0fMB4gJTTMuZtAWs5LyGs3wqXlNvzpk0
- Xpg/X31i2P0aqCLrww==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([61.8.138.179]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MBUm7-1uWPCf29Cp-001TJV; Fri, 13
- Jun 2025 14:56:26 +0200
-Date: Fri, 13 Jun 2025 14:56:24 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Javier Martinez Canillas <javierm@redhat.com>, u-boot@lists.denx.de
-CC: mkorpers@redhat.com, mskrivan@redhat.com, eballetb@redhat.com,
- mripard@redhat.com, alexl@redhat.com,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Maks Mishin <maks.mishinfz@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_3/3=5D_efi=5Floader=3A_disk=3A_ad?=
- =?US-ASCII?Q?d_EFI=5FPARTITION=5FINFO=5FPROTOCOL_support?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250613085742.796015-4-javierm@redhat.com>
-References: <20250613085742.796015-1-javierm@redhat.com>
- <20250613085742.796015-4-javierm@redhat.com>
-Message-ID: <2584944A-D0CF-44E5-ABAE-C3E156ED8539@gmx.de>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sP0OSjowlZFoPklU8x4rUVI1FMn6tCEHCbRKxve+w+Z8YhYC8Gq0B/rue/2/mAkxqzaV6YoJk4zfYRuVyZitgcBrZOHvz1w2qPHJvg7oNgT0Rc5ob/fWdGKPSKdQJtZvIA3/rMCJ0otPtCrLGnCSa+RPVNlFueb6qCK3rbQMYFnozVzqskeBILlcGNjmmFKihmSBjtbNujCqhPq05p2Jhaj8zUVlg8e4lrJlOww1VdRBg2V/fL9yetf3n/2rP9EZ+lay3Prg4/6F4X3TByZn1+GMieIbdmZlMNbKmbbaer0AdHaD6h00fhGtWuNN7Hg8TC3w2RnNq8v046cyntuD9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rzABSO67cWA8VZqAWiG/XGRBkGkWO6KsZ8eJ3/Za+U0=;
+ b=RKHZ6aisrVetbBwzm3Lk+FkhXKLLyLBsGm4036j3RJ7A/V6qJY/4qv+V+kx8FyksmS/+N2nA7UxA78jmZ1gMIQxHi+SvksoQLYyg5cMnwTguptiKfczmdHHWX7rN2bRwixSGoDJfPsf/Igll0Y1cCkhspintMSXjPzt4mzRoucllu23JYjPoNzyduhXTi43vQUSsiorDvJfDqu+6PMfaM3XzBkjUm7+4hhTmQDY3vDgw9kkRPZX01kACY2zaUZ6mReAekJWtf1abfa3cToAWMXQQIq1n57cUzCL/3wqJHC+Lkz/Kv75xC1Tf+7IvjkzSy5SoI9JF5fryJWBwuojsww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rzABSO67cWA8VZqAWiG/XGRBkGkWO6KsZ8eJ3/Za+U0=;
+ b=c4A42tQPY76conRYA3sFqKMJjGy+ytLzyHFtd50rHVcsgGsLbZBj8iSYCJN4mkUp019LyIhHeqaoeZzBJ617Ooq6+pT6eXf7JMZB62Rl9Xz9dJjunaiGMhM+MMgLNGXw+85JCdrcDC5+dF4J2wCz9tlVE8NBRduaJufVb1a7FOs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by GVXPR04MB10022.eurprd04.prod.outlook.com (2603:10a6:150:11a::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.19; Fri, 13 Jun
+ 2025 12:56:40 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8835.018; Fri, 13 Jun 2025
+ 12:56:40 +0000
+Message-ID: <7ab1deb6-5ab7-4544-805f-f2e1e139d045@cherry.de>
+Date: Fri, 13 Jun 2025 14:56:38 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: board: assign up to 3 static Ethernet MAC
+ addresses
+To: MichaIng <micha@dietpi.com>, u-boot@lists.denx.de
+References: <e76dbe98-2fa3-4d1b-a452-aa88a142c5cc@dietpi.com>
+ <2beda42f-68c4-4fc3-8b84-ede6e452c4c7@cherry.de>
+ <5aeeab0f-cbaa-4b25-9baf-37e2b0e5e9d1@dietpi.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <5aeeab0f-cbaa-4b25-9baf-37e2b0e5e9d1@dietpi.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR07CA0267.eurprd07.prod.outlook.com
+ (2603:10a6:803:b4::34) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:EFoaJPVE0fm0tin9Pc89ThDI/TCOeOguYhIsUfDpFLUdUSvYQ8A
- k6gAQA64VA2fvd2pou5o6zih+ZxEhU39hnuJvwmrsKwD0qUdvcPcA0D2f5dd7yqTmBB/iSo
- /gVHsjyNFEL0vKAJcmD5eWfNYW0mmwvz04pGiZ97zEWjAJE+M7o+/y+MKEn1FmNM4j3QFZX
- bbloRzmlLWpuCnm1nBwxw==
-UI-OutboundReport: notjunk:1;M01:P0:DFJY7BmVlxM=;iwEEKjDWuDwz4QpJnwW9xMXosqR
- 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
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB10022:EE_
+X-MS-Office365-Filtering-Correlation-Id: dc28db8d-c5f4-412d-ce29-08ddaa79bd2d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eHpLVWZEVWhuR0pKQk40N0k3Rm1FK01ZYWY1ZEFwVkZIb1J5MXYwT2VyaUtt?=
+ =?utf-8?B?NDBKNER1YlFndStYK2pTR3RLR0YrNFFyNHd0RWNkQXRwbWJCNHpRcy9ySldS?=
+ =?utf-8?B?TXVWaDF3TUNDSzJrWFFDaFRiQnVOZHRwZzNrL0M1N2JzY1czelZYNDQ2ZFpw?=
+ =?utf-8?B?Z3N1THFwUXZGaVV0bGYvaUwxQ3Q3T2NraHV1ZnZ5bllhWHdEWS95a0ZNSWQx?=
+ =?utf-8?B?aGQwTlk4TFlGNEdMbjBCUmJsSDcvUjJXejVwSklQMGlFb0M5L1VEaXB1MDRD?=
+ =?utf-8?B?NkkvVVZaMEplY0Vkbk1XYzIxRTFnQXFoNy9pdTRDcmRRSnpMcDdQcnVXM29R?=
+ =?utf-8?B?dmFqYkw5NlREZ2JETnc1Vk9pbENRMHdLWjJqc2hadktmU0FsaUhDWnh4WmNs?=
+ =?utf-8?B?MFhlc2J5WWVobVRJWm11UU4yeTJIUzQzOXlka0hRODRMbFlpcDVpb0xxalZk?=
+ =?utf-8?B?bENEZDdiWVJMOTN3Q1Fxb2xvTzFRVHN0dzZ5d3N6QjVQMURQMGdZZ1VBWWxi?=
+ =?utf-8?B?VVlmRGQ4MXk0WWVHbFZ3c1VDVmJvOG1VOTBJK3paMElTNFVPTnVjZFhnT1Mx?=
+ =?utf-8?B?bGtMRWRmUWJ2UW1BUkRVcWRPNlBGQlJrUjJId3JNVzZTVllzU3NtU2JJajJq?=
+ =?utf-8?B?U29jK1E3aTkzRUxQT1RzdGRVSTRmZkdLckpISUNEc0djcHZCTkhpYlVXVGlJ?=
+ =?utf-8?B?cEdTL0RuSDdqeG82cGxVN0RrOWwvTDF3bUFSZmJhWTk0N0Nka005ZHJxM3BR?=
+ =?utf-8?B?SVo2N0FucXpwclE1TktsUVhueGtJc0cxSFo5NDU5UUpOREdOMnBPUjdzUnJM?=
+ =?utf-8?B?dlF1b0xjdnV3cHV1ZFhwWDU0aWZjU0dMOHFtU0VmdVFpa2UxQklJQlByUDlV?=
+ =?utf-8?B?VVMvWmxHZ0ZLSUlnNmIzZ1hhMktMMXlCazQzUitmdFZ1ZHNZczlmQXIxckJB?=
+ =?utf-8?B?eFRTQVkyc0pmZjZDNXZxMEdYTmwvQ01oc0M2UU0yZk9UQzAveGpucEtKUDN4?=
+ =?utf-8?B?Q1RBV3pFTTBGVEtLOUs3NFRUbWtjek40eEd3OHNVNDVLeVRyTkhnaDBSaVBP?=
+ =?utf-8?B?QXYyWU1vclpyRjVaNmF6Z3pBalVMM3dQTVpRaU1UYURpcXhLdXNJTDYveWpI?=
+ =?utf-8?B?a2gra3FPRzN0MkNYSHFJaVNxOHQ0VWlLMjZiMFFOZDN4emdZK2Y4SmFTVlk0?=
+ =?utf-8?B?SFdGanc2bzdWbitOOUZFQ2pqNjB4RkJ6L2htTnU1Q09lelEwZkJWdGpTUzlP?=
+ =?utf-8?B?a2QvRTJYWEhSSzkwc1dnbDhVVGxtdkx4VlFjRHJXRDl6bzV4ZXgyN2ptaWIz?=
+ =?utf-8?B?TXNuOFNYUFFBWkFqV1orOHhkQXFrR3BzQWFiMnJkcU4rRUUza0NmcGtFSHU2?=
+ =?utf-8?B?Z2E3N0pkYndnaGJrQmlxVmFSQW9KbXR5VDlaMlh5K3lxNmlIY3lENFlHMGFX?=
+ =?utf-8?B?NXN6L0U3WHRUSm5WaWNyZytkTlgzOEczRFFXbkZiYXYzK3JCSXI0UWg2aTF2?=
+ =?utf-8?B?YXZEMkdjdTBMUUpxOWVJSTJRYitrYkZ3M0NwL0w2RmYzL0dHU1dWU1cvdzNp?=
+ =?utf-8?B?UHVOV0VTOHl0VUI4V01ZNHFRMnZHOVFHNmFRS0ZGcTRXS093SU9pekZZWjFM?=
+ =?utf-8?B?aWJOWmpzdk41TGc1OWprdWd6ZE9zTWZPSVN0QUJhYXZrc2IxNCtoR0I5R2xN?=
+ =?utf-8?B?cXBWdDBDZ1dCTEZRSGhkbWJ0M25QSUJENEJ1U09zMjFsbm5KdkFkLysxdHBz?=
+ =?utf-8?B?bGdoRml0djlsZjVCenFma29nQVZ1YlpVa3BqOGtOc25VcUVTY1ArNkU5SHZr?=
+ =?utf-8?B?dGQ0dlBRNWpqc1UvS1BFTnFvazZqbnk5bjlXd0E1b3JBSUNGV1o1ZDNXZW9G?=
+ =?utf-8?B?RHM4TERJMTRuSW95SERKV280cGFGZkFxNENMei9hblNSU3RsaFBGUk5UZ3Zi?=
+ =?utf-8?Q?bLOBDSUHjW8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aURQcUZkQmRjQmJRaktxY3NqK2JtaWpXRlc5dlgxcStkaDRlSFhWbXZZNDA1?=
+ =?utf-8?B?eHVNWGZhTGc2VlJ6MVlRdGJGcXk2WHFrdGR5eHIyUUx5eWtON1hHV3R2WEpX?=
+ =?utf-8?B?bUVnTUY5c1dhaTBzVENPZUtHa3Y1SFY4UmVFVS9ISzBoajRaSi9pTWJud0ZV?=
+ =?utf-8?B?aGg1YnloaFBhR1E5TGxhbFF6czg1bldNQmhxdklBcHN2NVp4UDhPSXVRcjVq?=
+ =?utf-8?B?ZVZET25LNFBRMVhGV1ljNkJoM0hobVlBTGxpVUR3ZndIMTZTT1hWVjlSQzdQ?=
+ =?utf-8?B?UUFEaEhMZzNWM3ArVGdVU0w2WloyWmVLemJRU1dIaFVXSU9zRGRyMm9PYmNh?=
+ =?utf-8?B?UzBmTU9xZjBhUU04cUEzRFliOTF5Y2JzczRhNHNBK3ZjanRDYU1QaHJZRU1K?=
+ =?utf-8?B?NEJKdlExZmo4RG1xbHFYa0N5cVNXMFhtOFZqUzlJM1l3bXQ2MnBkWDh1WHRy?=
+ =?utf-8?B?cWtzVjhiNm5GK2RESTZpRjlERTV0dlYyR0o3N29uSFFzWFVaZFRGcEFJc0dX?=
+ =?utf-8?B?RjRxYkhHQU1wZ2x6MnhTcXJwdXJWOXRPUkovZGNIdWF3MGYxQkZ3dXZlTnF5?=
+ =?utf-8?B?WnkwUTdOVUhCcU1RUkFaQ1pXdHpXQWFSV1J2WXZwQkd1U1lHUHlEZzd1dzg5?=
+ =?utf-8?B?aUI0UVljMWEyTC9OZCt2dEl3eUVJNk5CRWVzRUw4cGtOMU44YlhJVmZFTXdl?=
+ =?utf-8?B?c2pTdjRSS0t1aHVmeDRjY1ZSQ01hclluOEpBTjdmeUZTNThtcmxRQlY4N0Z6?=
+ =?utf-8?B?aXpNcTNtb05sVDVXU3RRL3NPK0dweVFGc0JHa3NxVGl6Q09xZkl0RlBTQ0NF?=
+ =?utf-8?B?cnlMdVY4V2x6S2UvZWxlMTdvamNrVDRlejVaN1EybFB5d3Q4ZHBjcEhWUjRP?=
+ =?utf-8?B?dGF1WjVhQjdZUUhjZmV2TWFNYW0zV1hyS3JOU3Fydlk3cFFjWC9FOEZIbXJS?=
+ =?utf-8?B?Vzh5SU1sY0pQOS82R1BkYk5IZm9VbS9ZVHVleS9hSytFWFREOHE3U2pKa0hl?=
+ =?utf-8?B?WHV2KzNnUk5MRFVrcjZxU1pNSHN1Nm1vYzlFM0x6a0VvMDA0eGRkSVI4eU1r?=
+ =?utf-8?B?QlhvbkZYMWJZSmVnVHJVYTA2elA1QitnWFpub3B0eWxRNWYyOVV4SzZscHFi?=
+ =?utf-8?B?NWh4eTU1WC9za1VxVnpaa3Z2L09SNGxYenZxZ0djVDIrQjkrclVJQjEzR0JE?=
+ =?utf-8?B?c0c2K1d2MjNGY3h6WTdDZzdNbWUvdmtzTW1BRWxyOEZxaFFKYTliK0NoZjVh?=
+ =?utf-8?B?MC93VTFpT0M0N0JKYXJyK29vcSt2KzNOODhCRzQxQU5vOGljdTQxN3E3R0N4?=
+ =?utf-8?B?TFBYQWdxNGFPY0t6eUszOW5TMkhSdmxWQ3JQV1piaG9BL0dKYzVaRjh6RGM5?=
+ =?utf-8?B?amdBeGU2THJTK2JDVVNNQTM3T002R1lybFVnLzlnazRMWGtMLzhFWnNIUUZn?=
+ =?utf-8?B?K0NzNGVpcjFNSmZ3TW9xRFpPQk5nL2NVWFA2SlZtZ3FINWRNTkVOVHB5eGEy?=
+ =?utf-8?B?RzZoR3FMMjNqSXgwMW5uRmlHd1J6a0tjR2wva1BlMVNjV2lmSG0wL010eGdp?=
+ =?utf-8?B?U1JZdjdCbGhWaS9IMkRRem1sTm9Ic3BSTkJQMjZRSzl1RHBxTHNlenFiU3Yy?=
+ =?utf-8?B?aUdLNy9pNzQ0bkpwdzlNb20wSTh6ZlQwbEJ4TDdEOThRb2k2TVNSd3h1MWli?=
+ =?utf-8?B?NE5JSWsyQlVoL1JySE85djNOTEZjNHBBdHl0OUV5RzFORjRESmMxZ0w2bVcv?=
+ =?utf-8?B?RTNYUWNPREkxTEQrazJmUks3ZXorc1pqQ2ZSdUJmRFh3dXRyK1ByY0kyb3dX?=
+ =?utf-8?B?bVdIZTdqT1BhcVlDdTVCTUliNU9RY1hNQXZNQTBGUUJtYmRwb0Q4QWRSQmUy?=
+ =?utf-8?B?RkFIQjUwdlBLeTdVMStSWE5PYXF5SzEzUmt4MXZYZ2hZVzNVT1NPTzdOMEN2?=
+ =?utf-8?B?RzEvT0pWK29sT3JsZkxmS0tBUHhoVTA1VS9PUXhETTBWMHBGckM3U1NaS1Ni?=
+ =?utf-8?B?cDdqTXB6cmNta1UxdUVjcGN3dGhXSUxqZEtwYUJ0WWhDTS93dWpnR01QQlov?=
+ =?utf-8?B?V0RoVEE5UEVlaVhtbGM0TS95RE5lbWc3MkJZZDRFNWN4ZTgxSmcyZ3hXU1h1?=
+ =?utf-8?B?cWkzYkRqamxlNU5UUWp2d3JRTzB1MGFjdzNqK3FwUHFvdHRiQlRYTDQvK1dJ?=
+ =?utf-8?B?WkE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: dc28db8d-c5f4-412d-ce29-08ddaa79bd2d
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2025 12:56:39.9625 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gkq95YcYZX40EzEU9DAIJw28bztcTPugtwBRqD0TP4mgMyxnxA2sqIXamvA6hRYguG6N5TPKuzkaXV+u+yc/chM54CbWCXyJQWROc7PcPM0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10022
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,164 +176,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 13=2E Juni 2025 10:57:38 MESZ schrieb Javier Martinez Canillas <javierm@=
-redhat=2Ecom>:
->The UEFI 2=2E10 specification mentions that this protocol shall be instal=
-led
->along with EFI_BLOCK_IO_PROTOCOL=2E It provides cached partition informat=
-ion
->for MBR and GPT partition types=2E
+Hi Micha,
 
-U-Boot is targeting the EBBR specifcation which defines a subset of UEFI=
-=2E
+On 6/12/25 5:59 PM, MichaIng wrote:
+> [You don't often get email from micha@dietpi.com. Learn why this is 
+> important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Hi Quentin,
+> 
+> thanks for the review!
+> 
+>  > You could set the eth2addr in your board file if you wanted instead of
+>  > setting it for everybody.
+> 
+> We provide OS images for everyone, and our users complained about the
+> changing MAC addresses. I agree with them that generally the exception
+> is that MAC addresses are static by default, and randomising them being
+> an optional privacy feature when connecting to untrusted networks, like
+> a WiFi hotspot with a mobile phone. Setting eth2addr in boot
+> script/environment would require a random MAC address generation our end
+> on first boot or so on each system, to rule out collisions. Since U-Boot
 
-Which application needs this protocol?
-Are you planning to add it to the EBBR specification?
+I didn't mean to suggest to have this as part of the boot script. Board 
+file (for me) is any file in the board/ directory which applies to a 
+board. See board/theobroma-systems/ringneck_px30 for example.
 
-Best regards=20
+There you could replace misc_init_r entirely, or define your own 
+rockchip_early_misc_init_r (like I do in 
+board/theobroma-systems/ringneck_px30/ringneck-px30.c for example) or 
+add a rockchip_late_misc_init_r callback after the ethernet addresses if 
+you want?
 
-Heinrich=20
+That's what I was suggesting essentially.
 
+> has the feature implemented already, it just makes sense to make use of
+> it and extend it for the affected Rockchip builds, also to have the
+> somewhat nicely aligned with the last digit deferring only. So we
+> currently patch our sources.
+> 
 
+That's fair. The point is I'm not sure it makes sense to have X ethXaddr 
+variables with X being the highest possible amount of Ethernet devices 
+one can find on a Rockchip device.
 
->
->This patch just implements support for GPT partition types=2E The legacy =
-MBR
->partition types is only needed for backward compatibility and can be adde=
-d
->as a follow-up if needed, to make it fully compliant with the EFI spec=2E
->
->Signed-off-by: Javier Martinez Canillas <javierm@redhat=2Ecom>
->---
->
-> include/part_efi=2Eh        | 20 ++++++++++++++++++++
-> lib/efi_loader/efi_disk=2Ec | 38 ++++++++++++++++++++++++++++++++++++--
-> 2 files changed, 56 insertions(+), 2 deletions(-)
->
->diff --git a/include/part_efi=2Eh b/include/part_efi=2Eh
->index 59b7895b8a23=2E=2Efb402df6f13e 100644
->--- a/include/part_efi=2Eh
->+++ b/include/part_efi=2Eh
->@@ -138,4 +138,24 @@ typedef struct _legacy_mbr {
-> 	__le16 signature;
-> } __packed legacy_mbr;
->=20
->+#define EFI_PARTITION_INFO_PROTOCOL_GUID \
->+	EFI_GUID(0x8cf2f62c, 0xbc9b, 0x4821, 0x80, \
->+		 0x8d, 0xec, 0x9e, 0xc4, 0x21, 0xa1, 0xa0)
->+
->+#define EFI_PARTITION_INFO_PROTOCOL_REVISION 0x0001000
->+#define PARTITION_TYPE_OTHER 0x00
->+#define PARTITION_TYPE_MBR 0x01
->+#define PARTITION_TYPE_GPT 0x02
->+
->+struct efi_partition_info {
->+	u32 revision;
->+	u32 type;
->+	u8 system;
->+	u8 reserved[7];
->+	union {
->+		struct partition mbr;
->+		gpt_entry gpt;
->+	} info;
->+} __packed;
->+
-> #endif	/* _DISK_PART_EFI_H */
->diff --git a/lib/efi_loader/efi_disk=2Ec b/lib/efi_loader/efi_disk=2Ec
->index 47b583cc5e12=2E=2Eba41b77b9d1c 100644
->--- a/lib/efi_loader/efi_disk=2Ec
->+++ b/lib/efi_loader/efi_disk=2Ec
->@@ -26,6 +26,7 @@ struct efi_system_partition efi_system_partition =3D {
->=20
-> const efi_guid_t efi_block_io_guid =3D EFI_BLOCK_IO_PROTOCOL_GUID;
-> const efi_guid_t efi_system_partition_guid =3D PARTITION_SYSTEM_GUID;
->+const efi_guid_t efi_partition_info_guid =3D EFI_PARTITION_INFO_PROTOCOL=
-_GUID;
->=20
-> /**
->  * struct efi_disk_obj - EFI disk object
->@@ -35,6 +36,7 @@ const efi_guid_t efi_system_partition_guid =3D PARTITIO=
-N_SYSTEM_GUID;
->  * @media:	block I/O media information
->  * @dp:		device path to the block device
->  * @volume:	simple file system protocol of the partition
->+ * @info:	EFI partition info protocol interface
->  */
-> struct efi_disk_obj {
-> 	struct efi_object header;
->@@ -42,6 +44,7 @@ struct efi_disk_obj {
-> 	struct efi_block_io_media media;
-> 	struct efi_device_path *dp;
-> 	struct efi_simple_file_system_protocol *volume;
->+	struct efi_partition_info info;
-> };
->=20
-> /**
->@@ -426,6 +429,7 @@ static efi_status_t efi_disk_add_dev(
-> 	/* Fill in object data */
-> 	if (part_info) {
-> 		struct efi_device_path *node =3D efi_dp_part_node(desc, part);
->+		struct efi_partition_info *info =3D &diskobj->info;
-> 		struct efi_handler *handler;
-> 		void *protocol_interface;
->=20
->@@ -454,18 +458,47 @@ static efi_status_t efi_disk_add_dev(
-> 			goto error;
-> 		}
->=20
->+		info->revision =3D EFI_PARTITION_INFO_PROTOCOL_REVISION;
->+
->+		switch (desc->part_type) {
->+		case PART_TYPE_EFI:
->+			info->type =3D PARTITION_TYPE_GPT;
->+			ret =3D part_get_gpt_pte(desc, part, &info->info=2Egpt);
->+			if (ret) {
->+				log_debug("get PTE for part %d failed %ld\n",
->+					  part, ret);
->+				goto error;
->+			}
->+
->+			break;
->+		case PART_TYPE_DOS:
->+			info->type =3D PARTITION_TYPE_MBR;
->+
->+			/* TODO: implement support for MBR partition types */
->+			log_debug("EFI_PARTITION_INFO_PROTOCOL doesn't support MBR\n");
->+
->+			break;
->+		default:
->+			info->type =3D PARTITION_TYPE_OTHER;
->+
->+			break;
->+		}
->+
-> 		diskobj->dp =3D efi_dp_append_node(dp_parent, node);
-> 		efi_free_pool(node);
-> 		diskobj->media=2Elast_block =3D part_info->size - 1;
->-		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION)
->+		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
-> 			esp_guid =3D &efi_system_partition_guid;
->+			info->system =3D 1;
->+		}
->+
-> 	} else {
-> 		diskobj->dp =3D efi_dp_from_part(desc, part);
-> 		diskobj->media=2Elast_block =3D desc->lba - 1;
-> 	}
->=20
-> 	/*
->-	 * Install the device path and the block IO protocol=2E
->+	 * Install the device path, the block IO and partition info protocols=
-=2E
-> 	 *
-> 	 * InstallMultipleProtocolInterfaces() checks if the device path is
-> 	 * already installed on an other handle and returns EFI_ALREADY_STARTED
->@@ -476,6 +509,7 @@ static efi_status_t efi_disk_add_dev(
-> 					&handle,
-> 					&efi_guid_device_path, diskobj->dp,
-> 					&efi_block_io_guid, &diskobj->ops,
->+					&efi_partition_info_guid, &diskobj->info,
-> 					/*
-> 					 * esp_guid must be last entry as it
-> 					 * can be NULL=2E Its interface is NULL=2E
+>  > What's the number when we'll decide this is too many? I have a board
+>  > with 5 Ethernet ports for example :)
+> 
+> Good question. In Germany we say "Aller guten Dinge sind drei" (All good
+> things come in threes). Jokes aside: not sure whether there are Rockchip
+> SoC boards which provide more Ethernet NICs, but I have 3 with 3 ones
+> (in one case provided by an official expansion board), all RK3588 with
+> two onboard PCIe adapters. There is another PCIe bus, but commonly used
+> for an M.2 socket, not sure whether it could theoretically provide a 4th
+> Ethernet adapter. I don't know the background about why the Ethernet
+> driver/firmware is not able to read/assign the hardware MAC, or why
+> there is no hardware MAC, as I understand that this is an IEEE
+> requirement. So what U-Boot does seems a workaround, and I agree that,
+> if there is no generic approach, it has limits.
+> 
+>  > I don't know how far we want to go to avoid defining unused ethXaddr
+>  > variables in the environment? We could use of_alias_get_highest_id for
+>  > example and generate enough environment variables based on that info?
+> 
+> This sounds reasonable. But are ethXaddr variables not generated before
+> boot scripts are called, when the number of alias IDs cannot be known
+> yet, and MAC addresses assigned afterwards, when the OS device tree was
+> loaded? When generating the variables afterwards, all good, but then
 
+I assume you should have a Device Tree in U-Boot, on Rockchip it's 
+typically available in U-Boot SPL already (except on some TPL-less or 
+SPL-extremly-size-limited configurations) so you can do that based on 
+the aliases found in the U-Boot device tree.
+
+Then you can also do additional fdt fixups  on the kernel DT before 
+booting the kernel if that is something you're worried about (U-Boot DT 
+being different from kernel DT for example). There you could read the 
+aliases node and generate a mac address for all controllers that do not 
+already have one in the environment for example.
+
+You likely need both, first one for consistent network support (MAC 
+address) in U-Boot and the second one in case the kernel DT differs from 
+the U-Boot DT (in terms of amount of Ethernet controllers for example). 
+E.g. you could have an overlay for an adapter board that has multiple 
+Ethernet ports each with their own MAC address. You don't necessarily 
+need those enabled in U-Boot so the base DTB would be enough, but you 
+for sure want all of them enabled in the kernel).
+
+Cheers,
+Quentin
