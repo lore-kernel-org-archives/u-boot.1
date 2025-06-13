@@ -4,88 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF16C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:01:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5390C71136
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:13:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1DA682D34;
-	Fri, 13 Jun 2025 18:01:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 0717D82D34;
+	Fri, 13 Jun 2025 18:13:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="3VUf2gT7";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="DieYF8eS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6050582D4D; Fri, 13 Jun 2025 16:46:08 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2548C82E27; Fri, 13 Jun 2025 18:13:07 +0200 (CEST)
+Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk
+ [78.40.148.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7621F82D21
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 16:46:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D04C82D34
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:13:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=codethink.co.uk
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-32a81344ae9so24386811fa.0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 07:46:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1749825966; x=1750430766;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8RylEmOefYsrQEQMghcsVjmta78DESV3npmLBOaP/YQ=;
- b=3VUf2gT7608O5RAMOJynVR8bdKd/CrAqDZ073hJo16u3bYnwEYYa8fQMOvdskVXmSr
- NEf6odTr6jNAqHqBWErjdSEMa5N4YFWb/4bB936AZFJiE79n4jrSS8EV6swEH8Z2vaTT
- uu5DoOzQSAvZT22227gHBp7uVDKw6mAS0RbsvS2g12McXGPucg8diUprW7IFyOLsd/Ek
- R0GVImSBG6zyBAmztqQ9kG1CqwOySecftL1GQSZ87hcAdGawMXghZOhfW4sDo6SioJtt
- 3pnDUszXdOkDwby5ixAuKPkHkofDVul/Tr/nce4WYUU+pDfcTr6VRzIDTHPfCc5onZf6
- svhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749825966; x=1750430766;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8RylEmOefYsrQEQMghcsVjmta78DESV3npmLBOaP/YQ=;
- b=QZ7a4fAzq5S4G9OmrNOnbGRoF01bbT3oRHJcmNf4l5VFTVpsUTwka/6hC8YofBY05B
- U/XIvK2gQIwzR96TgYWlwWWiwUB+DhCdtan0ZeAL5auJGHg7qCQL5IkPnPy2KM9Papi+
- 7SKUGUh5H9x8VPSl3i02BRZ3IRhvSCRNLf05Nif0mvRyq/kkh8Dr+JXg/Fse4oMZtgTz
- QXhiFn9ly5P2pL3paRFl3cxWUGO7hsfO8GDkMnXsgzVDexFk0hJmP8xm34HYUG5/RZ5s
- 9tAA5bhqYStXG3cMwgnudcVboX2v44V2p4oc1HIdKvQR63UScyzwMNLO44gNLYorElCc
- YynA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+HIrPiGuOguIopzp4IOgWeNuwnvd+LCHMSDuSEnS3/s6KGZD8mw4lbppPDeDjxtBkXvpqLww=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6BoPDqMHGxnMsG5vy+TPfPfCRQkR95/Yz0cHsedBi+xnSIM2H
- ZNCTwkiqjNF+pXMyYnRMr56SOHy+QzCWqD6DCnxVq5StpcEId5sZnMTIp2+MYU/1wxJQvRcD7uX
- W06PIJRbiSXUH+LXqo29XJXxq+tS0+xt3/0uys6+7qg==
-X-Gm-Gg: ASbGncuZnMIFncMFV5dcIXsqSY88sbcakAKLUb8Q+Ii5uDucDNfOvycNB90pQUy+laL
- 1zqq23vYNzapuLQ2jTQFtCkUJ/+o00jZWYOWJP+wVb/8i0qdetvYB3FA0+4SsYUNB+wEuSK//xy
- xMDuhaJa81vJYytU/9sAWPQWJxwmh4b/c9Slddtlqv73zuQYOwmjo=
-X-Google-Smtp-Source: AGHT+IEXkgwCYi4x/DHYMp2EeBNL/emBCBiyr1V/plofW56fHPScWqyBXjEhm6NJCEsvH0M3w1JufC103L00UqJE2bE=
-X-Received: by 2002:a05:651c:2122:b0:32b:3b5a:c4a2 with SMTP id
- 38308e7fff4ca-32b3ea1ddf8mr9010691fa.6.1749825965456; Fri, 13 Jun 2025
- 07:46:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=srv_ts003@codethink.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=La1SXtenEp8srQeIlXqtjIW/06hVkmu4T4QWyDN0bNo=; b=DieYF8eSON/32z+xNBP0grwCIg
+ +u7D3pqD03q6QHXolFugr7Gb+zM1zyAAczmmgiTMTE5sL/8hIJUinFFlD253G9jSSLCMzVGHUYRwp
+ occxCVyA0AgU+yCS7PB+JLxiBmc1R9vw5P6dfUPFdWkKd7szyEO0R5uuWZNWnqzrEjC/wO9vUUHVf
+ Pqryki/V9jVvdORahbS+0fWz/RjURTzkmSNn2lGTxrr5/eC3CDlfEse9eGvpLaZF/ieupK2+K46e/
+ mQotXpCl/bPWGL7BakPnK9lupxvYFJJ5Wxt00oc9WY75U3rX3ftSpE9MchuMc020H10m2wxlImcZN
+ KGNcywaw==;
+Received: from [167.98.27.226] (helo=rainbowdash)
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uQ71W-001ary-Fg; Fri, 13 Jun 2025 17:12:59 +0100
+Received: from ben by rainbowdash with local (Exim 4.98.2)
+ (envelope-from <ben@rainbowdash>) id 1uQ71X-00000007ZpZ-0R1j;
+ Fri, 13 Jun 2025 17:12:59 +0100
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+To: rick@andestech.com,
+	ycliang@andestech.com,
+	u-boot@lists.denx.de
+Cc: nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
+ fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk,
+ ben.dooks@codethink.co.uk, trini@konsulko.com
+Subject: [PATCH v2 2/2] riscv: byteorder: add test for big-endian
+Date: Fri, 13 Jun 2025 17:12:58 +0100
+Message-Id: <20250613161258.1805957-3-ben.dooks@codethink.co.uk>
+X-Mailer: git-send-email 2.37.2.352.g3c44437643
+In-Reply-To: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
+References: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
 MIME-Version: 1.0
-References: <20250602-pullup-v1-1-edcde5a050dd@hifiphile.com>
- <87iklbuddu.fsf@kernel.org> <dd3a3cad-75df-43b7-862f-a51cacda3de6@linaro.org>
- <CA+GyqeaPEiwu7b3E-Gm+QMntGgcAVufAhy3jXZ4DzL9O9GANLw@mail.gmail.com>
- <87tt4k3sit.fsf@kernel.org>
-In-Reply-To: <87tt4k3sit.fsf@kernel.org>
-From: Zixun LI <admin@hifiphile.com>
-Date: Fri, 13 Jun 2025 16:45:53 +0200
-X-Gm-Features: AX0GCFugkTnMI-Wk12N_dzkpW8x4avXOGfM-56ZYMCroFuDg2MdkKiU9qIC1PfI
-Message-ID: <CA+GyqeYhMBW2Hpa0cr=ruA+LJiOm4ycL0mzcKfkaF8w68JVdJw@mail.gmail.com>
-Subject: Re: [PATCH] usb: gadget: atmel: reliably generate disconnect by
- disabling controller instead of toggling PULLD_DIS
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Mihai Sain <mihai.sain@microchip.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 13 Jun 2025 18:01:18 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,33 +75,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 13, 2025 at 11:22=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@kernel.org> wrote:
->
->
-> Mihai, Zixun, do you have any update on case No.01589331 ?
->
-> I'd like to pick this up and some point so please keep me informed.
->
-> Thank you
-> Mattijs
->
+Test for big-endian either via __RISCVEB__ which migth be
+rather old, or check the BYTE_ORDER if the compiler defines
+it (which should be any modern gcc like v12)
 
-Hi Mattijs,
+Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+---
+ arch/riscv/include/asm/byteorder.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The case was reported in early May and MCHP have also observed the
-missing of detach event on host.
+diff --git a/arch/riscv/include/asm/byteorder.h b/arch/riscv/include/asm/byteorder.h
+index d26ac5688fa..3140c1f585e 100644
+--- a/arch/riscv/include/asm/byteorder.h
++++ b/arch/riscv/include/asm/byteorder.h
+@@ -26,7 +26,7 @@
+ #  define __SWAB_64_THRU_32__
+ #endif
+ 
+-#ifdef __RISCVEB__
++#if  defined(__RISCVEB__) || (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+ #include <linux/byteorder/big_endian.h>
+ #else
+ #include <linux/byteorder/little_endian.h>
+-- 
+2.37.2.352.g3c44437643
 
-My latest measure shows a differential signal level about +-350mV
-between DP&DM lines when
-DETACH and PULLD_DIS bits are 1, much lower than the detachment
-threshold of 625mV from
-USB 2.0 specification Table 7.3.
-
-From my view the patch can be picked, even on an unaffected family it
-won't have side effects.
-Unless one day we decide to implement SAM9RL and SAM9G45 errata then
-it needs to be retested.
-
-Best Regards,
-Zixun
