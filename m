@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E2DCC71136
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 17:23:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 113A8C71148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 17:24:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D588E82F35;
-	Fri, 13 Jun 2025 19:23:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31F9D82F33;
+	Fri, 13 Jun 2025 19:23:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TyNR1Kde";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ueg7f76+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC0C682EC6; Fri, 13 Jun 2025 19:23:18 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id A81A082F4E; Fri, 13 Jun 2025 19:23:20 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD6AF82E5A
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 19:23:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9FE982EA3
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 19:23:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3a522224582so1347415f8f.3
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 10:23:16 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-442f9043f56so14097805e9.0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 10:23:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749835396; x=1750440196; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1749835398; x=1750440198; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=HSctOsDtr3cTSaNvhQwXc7JUjvmoXsiNTRopqGQ4n10=;
- b=TyNR1KdeDba6d+etNux0IlJi/PDLvXMm0ur4XeLAxZawxGCE5xAglugz3xQhWjmuD4
- bkF+UtXKcCWa6DNmamfUjO2CTgHZNiFcoHykAQ4/Wnc+oHKgQAPRYEbdiy1UtokaL5Lm
- cGI/Rx3AFff9Wr9aAjuDp22j6NN6YtDfmjSAegE44eyu+8q4vgCPbe7yk2NeXTYdMFA9
- NtHH7lTnlf653A2yCOdiE+4aWBgDQCUHimGlORx77EoQta2ko8j4ow615Etqu0satbTJ
- O5Sp0IgUA5w7UHlb9zY5CW0etybd8clSD1HDVNoPmpZWeWi6e2Ed51onLkGLJrnk0WvI
- EjNA==
+ :reply-to; bh=Df1pTdKTeqg3Lb8MB8WBMAKUSFdZHTW3MgkVpG8A5qs=;
+ b=Ueg7f76+OkSPoe/o6uV4p8+1R5otFCEG/tHNKnRjHbhbsSTwn4AkV2+ja6YQnJOMva
+ N0spth0kPemj9Z5GQhXMSBDaRGkPfi++sU8MV8315vKZJU0k1d7HxUppOZeSr8FUiECz
+ r+X7nL1BhZsFK2J7rsBTEDrl7eJ2lfA25QQ2qlUITougbfQ3Je4afFQlfuh5THoL0muu
+ cdLv2pT1yGCwlh1o/YtPsve6vz9/f9018jQ1nf4uv9ZOXNiX2a6X6x1l0w8QN6nZXgXc
+ Uy9Lvzxq194bOinQCjIho1UW8pb4Qqy1aa0LzmhCHZnfOn3pDNfQLbdIIDg8vyg35wjG
+ l9CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749835396; x=1750440196;
+ d=1e100.net; s=20230601; t=1749835398; x=1750440198;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HSctOsDtr3cTSaNvhQwXc7JUjvmoXsiNTRopqGQ4n10=;
- b=ugkftPFsdnSBt0HAsq6Yri6X6vmtipNv0UBV71jcksxTGYENRSKuHz+D+3cDCGggWQ
- JZhKaXJZYVYTvrt1vFd12ezHTGIkPql8QHVgohh5k11ymHjia1z1V1BokpAHD4oUlRAk
- JvugR6/373GlAt73WG2IqS8BriHbnGNYdd7AIP2416p7eoZagkVVf8okKlPboKEb2TMO
- FYDkbBFABNBQLw6/zauPYYZauBeXmY7okOAFrXbhSzWLzUFbQXNw8tqxejhLgcl+V5Xm
- FNecPttyG7aXkoFqzgIpAeaTjtimIL7sC+qk+MT4WBDdfWwxH9HudaK7LDZB8apJGfbT
- a/mA==
-X-Gm-Message-State: AOJu0Ywni96I8hEOcX2L/eiQhcTEZn8KhMOUmim7D843pdcUlw1k7A8R
- igx2F4K5M9bfBmjg6MejEQ96FI/gzsElb8ojPNCtbwDOQ+Vx6jC6jGx27jCTNKwy30s=
-X-Gm-Gg: ASbGncu9nO6WUAkkx+2lYP4jQNMzCji7FxJ3wSaRSWFGHrdgtcQyCSqn3BH7cd8hEcI
- 5xyH9BLRvr2sUO/ykAG91h1TdFs/88QkgZ0oLh115BEwMwHjqg5ecx6LN07D7l2epLXstlwFd+U
- x9Wc8zMhSOvBT/MNnR7rljxlG4s7fzF7piClm8cify7D84EHsLjcv9vVTATScj4hp+HQ41eXpfE
- 5BN5gFfgEOSrC+MndglOFLh30T+E5uqnMvrV9vlMp5dDC5Sj9fezf5GVUZZL3osOoyBLag5Quar
- AQ1dNh+JLBTXZgsbc5r6qyRVrhi+O2FSMrTHeCcEXaLHKEPolaT/Xy0KGbMMvXenseyS
-X-Google-Smtp-Source: AGHT+IE8VcBnl4sq1EDilpsFk3l46G6vghRpygnc9A+kQz4zd+Dhbd0Vpdx32cW73kOPtpBoFmHRAQ==
-X-Received: by 2002:a05:6000:40dc:b0:3a4:ed10:c14 with SMTP id
- ffacd0b85a97d-3a572371fe7mr677316f8f.14.1749835396067; 
- Fri, 13 Jun 2025 10:23:16 -0700 (PDT)
+ bh=Df1pTdKTeqg3Lb8MB8WBMAKUSFdZHTW3MgkVpG8A5qs=;
+ b=k8D+Mm2Ws+0fVdeW8dx+n5FzfsLZyvprVRagkMacJFGiovj2DzL5NWth+5/RBH1VFa
+ O8ypOOzsRmNLAABqfVLMLIDtD2KCbYfxN2HSbmAupnjDj9n2LvJNbyatJjRmToUUsqNa
+ R8ShzyumNQLb8GFPsT3qFE0blTzcmYCUiZ7DY8JLw33z4H3vwjqoOVuNwR5zgO2yk5cY
+ 767o32TkGjo9yItKkCvMX84SBYWWSpDLUyMdXWiAeaxeGWKGvVXqSXmP6gh4itj9hqLw
+ EU3X19YK+PYgy7ZvPEKkSPCOH65LzCUfyltZVcjxGqAkYAekiV40nywe9wYZoxpd8pEq
+ FfIg==
+X-Gm-Message-State: AOJu0YwHbfCNL+/BE1/ofUZwNW/3rHwuoPtfYHlL5245hatFcu6JzT3v
+ lssAGfU5xwiW/g485jiK4f5b8PYmwZdLlTo4kwYc5wK86BtIhhNElmhi+P+xnaDZUp8=
+X-Gm-Gg: ASbGnctI8Dhr1/xPIiSqWXR7wtLsr5JOs0ifDVGWFOnaV8P2PeheuaOX3UwvTKTeT0y
+ EhuOgxFLiU9gaP8kOTDjL8WJKJO5/QbNcebgDstjU7rAn2VO3ni5giyX2n6OTGacIpOghR7pI+P
+ JlmjyxtEP2y8FCM+Z3YzkchkUYRNxdZUnLYJ+4oJBC6IK2nMpQukndY+UUPQJE/Rk72qJUdVoZg
+ r8SIPfZSTZRDskR5xarMkgWlwqfrmHt1ZjUzuSCyAckmsUv2CeuldDjtuzg6PyBjCDJhzP3J7En
+ OHe3h7H0shOMjkvD5dmAaDFuOPs0oox1kccvqlJfyJDn3xNCPgJdR6AAiGyCroP8SQ5nSuD7oDB
+ zNQo=
+X-Google-Smtp-Source: AGHT+IGAA5nZ5T3nZRWdOxiEApOa0iihLWcu5xO7M6qfVtiUPKwfxlKf9+gxxoBh/htZMSM65cnefQ==
+X-Received: by 2002:a05:600c:190b:b0:445:1984:247d with SMTP id
+ 5b1f17b1804b1-4533cadefe8mr4311765e9.7.1749835397951; 
+ Fri, 13 Jun 2025 10:23:17 -0700 (PDT)
 Received: from toyger.lan ([2a01:170:117e:fc:19e6:b5d7:f8b4:a927])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532de8c50esm57895015e9.4.2025.06.13.10.23.14
+ 5b1f17b1804b1-4532de8c50esm57895015e9.4.2025.06.13.10.23.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 10:23:15 -0700 (PDT)
+ Fri, 13 Jun 2025 10:23:17 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Fri, 13 Jun 2025 19:23:08 +0200
-Subject: [PATCH v4 4/8] tools: qcom: add mkmbn.py
+Date: Fri, 13 Jun 2025 19:23:09 +0200
+Subject: [PATCH v4 5/8] binman: add support for building Qualcomm signed
+ MBN ELF images
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250613-b4-qcom-tooling-improvements-v4-4-7ea1c68779fa@linaro.org>
+Message-Id: <20250613-b4-qcom-tooling-improvements-v4-5-7ea1c68779fa@linaro.org>
 References: <20250613-b4-qcom-tooling-improvements-v4-0-7ea1c68779fa@linaro.org>
 In-Reply-To: <20250613-b4-qcom-tooling-improvements-v4-0-7ea1c68779fa@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -86,21 +88,21 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8452;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3476;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=vf4fO8Tsr3mu9qIbj0DbFpoiqpYcB8eR8sIaRFcEmpw=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoTF56vfBlA/r5xm+j6AYHeXzs1S2WbgX+bkzml
- lsw851gRyiJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaExeegAKCRAFgzErGV9k
- tkHsD/4umP8fbsX3oGljFv1VsVuliQ+0X8RlGxnHPgdQJbE5kbhCFsX5IH2BKr5r9iUBnteq7zi
- cgL6J6zFzwFqzcWBP70zBPsrKwbG1EIOqaSJqCfONbJBV7A7ac1PxTX1GOt/QjJEUtoq1QwMRq6
- nSDT2TWHQAN79dX/rTn6fshcFv57iazPUVaGsgyvnmyAz7AwQdXHMBWNT+7d4e3gQwtS7BKC0i4
- Xo/EzdHv/6o0PT8n/9ZBekxMXkt4igQWADFF5b+naUJXIDYg/Xv6n1DiBU5poE+cyZaSnszAolB
- p4EphGwKZOQgCf8JajyeVxUHX5bM+zEscuFoFW4VLMPaBxmjAG7AIjghsfZDsjxNKJedcAJ6eLL
- QPRDT6qABJZAOxbrHHvvrIebATdN1TnVchc/rQeKjkSj/Q3XIEQqYSDnAtrhRC6BSMP0eAucwyW
- qyk98c534HwEKJ9bHZlP1ZX5YYmRiC3TKzq7fzQZyKIPys/DJZYoz3lg7Fz5jSoPWZzg6x7ncD0
- MC+QUOukW8zQsSnGu/8mxm+Zq1BxwGqFxQTGXKSl0IBUgtz/uTUlcwbyJjoFywTSYj/YaJXKoPH
- aLL3qdKeanjpTMUWPTofFNDnlh64q2hmCKgfzoxcc6vArjkTqDlnKBV2YcS8VcJ93ima9sYqAEV
- EdhBkmyp38NIQfw==
+ bh=m6wxSaFMiSwQB0KhJG9e8wz/pDDnFRTBJ9h99vdxSGI=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoTF57VLFS8VhjKHMW/URPEkkJK0ZheJ+cEjYxq
+ 9pdJtJbmf6JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaExeewAKCRAFgzErGV9k
+ tkaHD/9y7S7pYXYewC5ePyGInqhyWzd7l+HU6oa0n32Amdw+9q9/sHBTVjfnRnYA0rUdyd8rVL+
+ pblNx4r82I8eRoFENezpVnjwnyt9J6skRa19RYYnf47EwUvjPkNF1bCZEwkm3fboVOD/1EqOzWx
+ DkWonA7DKptYZ+iDrxZeQjaUVnz1Jvdkk/w+FKVuP7Xk/IXwkD4/uGISkMVYdDkBup5UIK6ZWld
+ QB9ZcnKF2CSI+D6DImTtj4mqftrg/fCrYLFHuxjpf53ttVA+8WUctUsRlnfFl0C01me6enTpctD
+ IeklYQMpNj2bFRDzmYMJFVYNoh1EljIhM+0sW6ZjvkzCeV9kGZdgnKogdDeAUTiMrmpWqYn+pU+
+ 5g9SZLBX426LHsRvfHttd8lEfwTbNpYZ0A5JRQPJ0KzhfmA/CCeMCCPO0nY1K3AiSINI/3PA6vc
+ a4OkovthJ70uRiyiiTllR3hTITwqsPhz93h5SVjtflPFAeaGx38J4nhjyiv6szKX1lviNnjyFza
+ X5S0AZucAAE0T/+JmXkdETJzcvY2Hu5ct1Qh3cyeebWKnD/DGMkbo9lltKDkoo9BuiR8OY+2mdt
+ u/EBV2vis9/L7xh31l3rZMiYunS53nq2dHQcSgZ4u8DiL3p8Xz48SwlbbX8V+zR5HHNAy2Bdmbf
+ ytzCwts4TlawTqQ==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -119,275 +121,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the elf class to support creating ELF files from scratch so that
-mkmbn can build an MBN file from the U-Boot binary image and fix some
-imports to work correctly in the U-Boot build system.
-
-Since we already need to process the ELF file to produce a valid "MBN"
-which sbl1 will accept, mkmbn additionally inspects the U-Boot binary,
-finding the DTB and then checking for known compatible strings to
-identify the board or platform.
+Implement support for building u-boot.mbn files using the new mkmbn
+tool.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- tools/mkmbn                 |   1 +
- tools/qcom/mkmbn/elf.py     |  36 +++++++++++
- tools/qcom/mkmbn/hashseg.py |   4 +-
- tools/qcom/mkmbn/mkmbn.py   | 154 ++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 193 insertions(+), 2 deletions(-)
+ tools/binman/btool/mkmbn.py      | 29 ++++++++++++++++++++++
+ tools/binman/etype/u_boot_mbn.py | 53 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 82 insertions(+)
 
-diff --git a/tools/mkmbn b/tools/mkmbn
-new file mode 120000
-index 0000000000000000000000000000000000000000..a7b2096756f76c07ca21e73c63f3b8be28a4cf59
+diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..232e2b442a166f9e86a4d4eb5f55f624eee0dc62
 --- /dev/null
-+++ b/tools/mkmbn
-@@ -0,0 +1 @@
-+qcom/mkmbn/mkmbn.py
-\ No newline at end of file
-diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
-index 9fac35cfd5d272a07ee56c3a2cebe36e6f9fbe4a..86f12d1f4e5deb102dd97d1616f64b7e3215b96e 100644
---- a/tools/qcom/mkmbn/elf.py
-+++ b/tools/qcom/mkmbn/elf.py
-@@ -44,8 +44,24 @@ class Ehdr:
- 
- 	CLASS32 = 1
- 	CLASS64 = 2
- 
-+	# Init a qcom XBL style ELF header
-+	def __init__(self):
-+		self.ei_magic = b"\x7fELF"
-+		self.ei_class = 2
-+		self.ei_data = 1
-+		self.ei_version = 1
-+		self.ei_os_abi = 0
-+		self.ei_abi_version = 0
-+		self.e_type = 2
-+		self.e_machine = 183
-+		self.e_version = 1
++++ b/tools/binman/btool/mkmbn.py
+@@ -0,0 +1,29 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2025, Linaro Ltd.
++#
++"""Bintool implementation for mkmbn"""
 +
-+		self.e_ehsize = 64
-+		self.e_phoff = 64
-+		self.e_phentsize = 56
++from binman import bintool
++from u_boot_pylib.command import CommandResult
 +
- 	@staticmethod
- 	def parse(b: bytes) -> Ehdr:
- 		hdr_unpack = Ehdr.START_FORMAT.unpack_from(b)
- 		hdr = Ehdr(*hdr_unpack)
-@@ -106,8 +122,24 @@ class Phdr:
- 			unpack.insert(-1, flags)
- 
- 		return Phdr(*unpack)
- 
-+	@staticmethod
-+	def from_bin(b: bytes, loadaddr: int) -> Phdr:
-+		# p_offset is fixed later
-+		phdr = Phdr(
-+			p_type=1,
-+			p_offset=0xFFFFFFFF,
-+			p_vaddr=loadaddr,
-+			p_paddr=loadaddr,
-+			p_filesz=len(b),
-+			p_memsz=len(b),
-+			p_flags=7,
-+			p_align=0x1000,
-+		)
-+		phdr.data = memoryview(b)
-+		return phdr
++class Bintoolmkmbn(bintool.Bintool):
++    """Qualcomm MBN generator for U-Boot
++    """
++    def __init__(self, name):
++        super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
 +
- 	def save(self, f: BinaryIO, ei_class: int) -> int:
- 		unpack = dataclasses.astuple(self)
- 
- 		if ei_class == Ehdr.CLASS32:
-@@ -139,8 +171,12 @@ def _align(i: int, alignment: int) -> int:
- class Elf:
- 	ehdr: Ehdr
- 	phdrs: List[Phdr]
- 
-+	def __init__(self):
-+		self.ehdr = Ehdr()
-+		self.phdrs: List[Phdr] = []
++    # pylint: disable=R0913
++    def run(self, infile: str) -> CommandResult:
++        """Run mkmbn.py
++        """
++        args = [infile]
++        return self.run_cmd_result(*args, raise_on_error=False)
 +
- 	def total_header_size(self):
- 		return self.ehdr.e_phoff + len(self.phdrs) * self.ehdr.e_phentsize
- 
- 	@staticmethod
-diff --git a/tools/qcom/mkmbn/hashseg.py b/tools/qcom/mkmbn/hashseg.py
-index e73f6e94e163dd1e45cc341f76cfebf55685ded8..11e6a7b39f0fefeb0dd4ea86dd279e6dd4f96532 100644
---- a/tools/qcom/mkmbn/hashseg.py
-+++ b/tools/qcom/mkmbn/hashseg.py
-@@ -14,10 +14,10 @@ import hashlib
- from dataclasses import dataclass
- from io import BytesIO
- from struct import Struct
- 
--from . import cert
--from . import elf
-+import cert
-+import elf
- 
- # A typical Qualcomm firmware might have the following program headers:
- #     LOAD off    0x00000800 vaddr 0x86400000 paddr 0x86400000 align 2**11
- #          filesz 0x00001000 memsz 0x00001000 flags rwx
-diff --git a/tools/qcom/mkmbn/mkmbn.py b/tools/qcom/mkmbn/mkmbn.py
-new file mode 100755
-index 0000000000000000000000000000000000000000..94d85275c19c01c1e0aa64a61b615d14c10c0468
++
++    def get_path(self):
++        path = super().get_path()
++        return path
++
++
++    def fetch(self, _method):
++        return True
+diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..e470b31fa3185c1eed27ccd46c2d845111c1ea59
 --- /dev/null
-+++ b/tools/qcom/mkmbn/mkmbn.py
-@@ -0,0 +1,154 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0-only
-+# Copyright (C) 2024 Stephan Gerhold
-+# Copyright (C) 2025 Casey Connolly
-+from __future__ import annotations
++++ b/tools/binman/etype/u_boot_mbn.py
+@@ -0,0 +1,53 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2025 Linaro Ltd
++# Authored by Casey Connolly <casey.connolly@linaro.org>
++#
++# Entry-type module for 'u-boot.mbn'
++#
 +
-+import argparse
-+from pathlib import Path
-+
-+from elf import Elf, Phdr
-+import hashseg
-+import sys
-+from enum import Enum
-+
-+verbose = False
-+
-+def log(*args, **kwargs):
-+    if verbose:
-+        print(args, kwargs, file=sys.stderr)
-+
-+def error(*args, **kwargs):
-+    print("mkmbn: ", file=sys.stderr, end='')
-+    print(*args, *kwargs, file=sys.stderr)
-+
-+
-+
-+class SwId(Enum):
-+    sbl1 = 0x00
-+    mba = 0x01
-+    modem = 0x02
-+    prog = 0x03
-+    adsp = 0x04
-+    devcfg = 0x05
-+    tz = 0x07
-+    aboot = 0x09
-+    rpm = 0x0A
-+    tz_app = 0x0C
-+    wcnss = 0x0D
-+    venus = 0x0E
-+    wlanmdsp = 0x12
-+    gpu = 0x14
-+    hyp = 0x15
-+    cdsp = 0x17
-+    slpi = 0x18
-+    abl = 0x1C
-+    cmnlib = 0x1F
-+    aop = 0x21
-+    qup = 0x24
-+    xbl_config = 0x25
-+
-+class MbnData:
-+
-+    # sw_id 0x9 is aboot/uefi, the most common
-+    def __init__(self, loadaddr: int, version: int, sw_id: SwId = SwId.aboot):
-+        self.loadaddr = loadaddr
-+        self.version = version
-+        self.sw_id = sw_id
-+
++from binman.entry import Entry
++from binman.etype.blob import Entry_blob
++from u_boot_pylib import tout
++from u_boot_pylib import tools
++from binman.btool.mkmbn import Bintoolmkmbn
 +
 +"""
-+This dictionary is used to map a board or platform to the appropriate load address and
-+other MBN metadata. When adding support for a new platform to U-Boot, the appropriate
-+data should be filled out here. The load address can typically be determined by looking
-+at the uefi.elf or xbl.elf for the platform. For the uefi.elf it is the load address, and
-+for xbl.elf it is typically the RWX section in the middle, just BEFORE the section loaded
-+at 0x1495xxxx or similar. Looking at similar platforms in the table below may help.
++Casey TODO:
++
++* move qcom-binman.dts back to arch/arm/dts and figure out how to make it build...
++* set CONFIG_BINMAN_DTB in qcom_defconfig
++* update docs
++
 +"""
-+boards: dict[bytes, MbnData] = {
-+    # Exact matches for boards, these are preferred
-+    b"qcom,qcs6490-rb3gen2\0": MbnData(0x9FC00000, 6, SwId.aboot),
-+    b"qcom,qcs9100-ride-r3\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ9
-+    b"qcom,qcs8300-ride\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ8
-+    b"qcom,qcs615-ride\0": MbnData(0x9FC00000, 6, SwId.aboot),  # Dragonwing IQ6
-+    # Fallback/generic matches since most boards for a platform will
-+    # use the same load address
-+    b"qcom,qcm6490\0": MbnData(0x9FC00000, 6, SwId.aboot),  # rb3gen2, rubikpi3
-+    b"qcom,qcs9100\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ9
-+    b"qcom,qcs8300\0": MbnData(0xAF000000, 6, SwId.aboot),  # Dragonwing IQ8
-+    b"qcom,qcs615\0": MbnData(0x9FC00000, 6, SwId.aboot),  # Dragonwing IQ6
-+    b"qcom,ipq9574\0": MbnData(0x4A240000, 6, SwId.aboot),
 +
-+    # msm8916/apq8016 has an "aboot" partition but the process is the same
-+    # They use header version 3.
-+    b"qcom,apq8016\0": MbnData(0x8f600000, 3, SwId.aboot),
-+    b"qcom,msm8916\0": MbnData(0x8f600000, 3, SwId.aboot),
-+}
++class Entry_u_boot_mbn(Entry_blob):
++    """U-Boot Qualcomm signed MBN ELF image
 +
-+parser = argparse.ArgumentParser(
-+    description="""
-+	Create a signed Qualcomm "uefi" ELF image
-+"""
-+)
-+parser.register("type", "hex", lambda s: int(s, 16))
-+parser.add_argument(
-+    "-o", "--output", type=Path, default="u-boot.mbn", help="Output file"
-+)
-+parser.add_argument(
-+    "-v", dest="verbose", action="store_true", default=False, help="Verbose"
-+)
-+parser.add_argument(
-+    "bin", type=argparse.FileType("rb"), help="Binary to embed (e.g. u-boot.bin)"
-+)
-+args = parser.parse_args()
++    This is an ELF file with custom program headers containing Qualcomm
++    specific hashes, signatures and other metadata. It contains the
++    u-boot.bin image.
++    """
++    mkmbn: Bintoolmkmbn
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
 +
-+elf = Elf()
++    def ObtainContents(self):
++        self._pathname = tools.get_input_filename('u-boot.bin')
++        res = self.mkmbn.run(self._pathname)
++        if res is None:
++            self.Raise('mkmbn not found or failed!')
++        # Exit code 61 (ENODATA) indicates that an MBN file can't be built
++        # for this board. This is non-fatal since it may not be required.
++        # however we print the stderr which indicates how to add MBN support
++        # if it is actually needed for this platform.
++        if res.return_code == 61:
++            print(res.stderr, end='')
++        elif res.return_code != 0:
++            self.Raise(f"mkmbn failed: \n========\n{res.stderr}=======")
++        return self.ReadBlobContents()
 +
-+data: bytes = args.bin.read()
++    def GetDefaultFilename(self):
++        return 'u-boot.mbn'
 +
-+# dtb is at the end, so find the last match
-+dtb_off = 0
-+off = 0
-+while True:
-+    off = data.find(b"\xd0\x0d\xfe\xed", dtb_off + 1)
-+    if off == -1:
-+        break
-+    dtb_off = off
-+
-+if not dtb_off:
-+    print("Couldn't find DTB in provided binary!")
-+    exit(1)
-+
-+log(f"Found FDT at {dtb_off:#x}")
-+
-+mbn: MbnData|None = None
-+
-+for match, mbndata in boards.items():
-+    if data.find(match, dtb_off) != -1:
-+        mbn = mbndata
-+        break
-+
-+if not mbn:
-+    error(
-+        "Not building an MBN file for this board, see tools/qcom/mkmbn/mkmbn.py for details"
-+    )
-+    # Bailing out would fail the build, and it's not possible to know if an MBN
-+    # is actually needed for the board we're building for. Minimise confusion by removing
-+    # any file that might exist from a previous build and exit with a known code.
-+    args.output.unlink(missing_ok=True)
-+    exit(61)
-+
-+log(f"Detected board {match.decode('UTF-8')} with load address {mbn.loadaddr:#x}")
-+
-+elf.phdrs.append(Phdr.from_bin(data, mbn.loadaddr))
-+elf.ehdr.e_entry = mbn.loadaddr
-+elf.update()
-+
-+# QLI boards use v6 sw_id is "aboot"
-+hashseg.generate(elf, mbn.version, mbn.sw_id.value)
-+# print(f"after: {elf}")
-+
-+with open(args.output, "wb") as f:
-+    elf.save(f)
-+
-+log(f"Built signed MBN: {args.output.resolve()}")
++    def AddBintools(self, btools):
++        self.mkmbn = self.AddBintool(btools, 'mkmbn')
 
 -- 
 2.49.0
