@@ -4,101 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4F1C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA09C71148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 16:52:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E5B82D34;
-	Fri, 13 Jun 2025 18:52:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 85A0782E58;
+	Fri, 13 Jun 2025 18:52:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LfnR3p3l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C+c14ArT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B38AB82D39; Fri, 13 Jun 2025 18:52:31 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B9D6D82E36; Fri, 13 Jun 2025 18:52:37 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4026882CA0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:52:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id B4C1D82CA0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 18:52:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1749833543;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=i4wURqT9bmfFsrgf6W2f3+LSvQDYpgWBNU5iGvPwy6Y=;
- b=LfnR3p3lhPrf/6k6segXMVp45+G37VkAUGfYfA6/RpHOee08BzHPWSJBE25ae8IWD39EcE
- 98L/w0NwqItryhSCQY9C2LZG60Vx+vfmJd/HbM+T+geBDrxWE0TZF/inKZiwaxZRM7mhyC
- eiydp91/SLjxWq0sJfy4wK3fz3JFRHc=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-561-nQ_0EQcBPOuwxHCPtVfMHg-1; Fri, 13 Jun 2025 12:52:22 -0400
-X-MC-Unique: nQ_0EQcBPOuwxHCPtVfMHg-1
-X-Mimecast-MFC-AGG-ID: nQ_0EQcBPOuwxHCPtVfMHg_1749833541
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-3a4eb6fcd88so1526375f8f.1
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:52:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72c47631b4cso1555125a34.1
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 09:52:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749833554; x=1750438354; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5QuB03dTgKwm2R4blKHeYm8oMm4SiFlOUTkPF2EjFIg=;
+ b=C+c14ArTVnNK6xufcT132nX9Vhn3SL8KjeUa7/5simE4bKmmFVMVTX8MV9ODpNBhPr
+ FS5oclXTBrPaHQfDFYXWBcD9n9ypVEKUQNy9PAcn4/Kv0AQ8kFnbkLxd8F/BLOidriUV
+ baKWDf8zd132F5k7UEDKxOfheiDO+nT343Mao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749833540; x=1750438340;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=i4wURqT9bmfFsrgf6W2f3+LSvQDYpgWBNU5iGvPwy6Y=;
- b=h/e43pTQKTeI7jDNF53YrtZqEWPag6tYfpVhFtdXNn9kYW9zZqIUlzSM1aQt5EqA1p
- O11c2xyTxWyn5MDv5G9g+VOPLh23FTzEbmWLuvsAFcIDfCg1i3bhbWRYbZI6kKX/Mahr
- P0pEJpLUbKH+KIJFl63/qXm2TqGmb/ohWUdeAtsihX8+ikTGRCKnsgnkhbaXujUEKHCg
- oydvn+QLJE7582DmBtiw+hMVqb7Wcgqza6uqcyp3NbgiAgnmgO6xFHny68uCctMOJWl/
- TMUSaA/op4vkzZ7UVlq7DWabU5swC3jCX0tVLNyBCrlP38siKZE4u44UoPXenCmPPUxO
- e3Nw==
+ d=1e100.net; s=20230601; t=1749833554; x=1750438354;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5QuB03dTgKwm2R4blKHeYm8oMm4SiFlOUTkPF2EjFIg=;
+ b=qoSdaxPRrL0tbc80ykQ3Et0TRnFJs0C/N5KL73neQ/ZYMfaB4t9KXneHAaewUlVSpE
+ w9+2h8w+4yJxGJpEXeJBdGavEDlMkMUymqvvwdp5cEUsVHZoOvR3E3i2OXMVlOy4Ayb2
+ Oq6u+5Dl/UoLZvpFPJ0TT+k8yFaE1kU+6InH9ah12oKRzzKGO/JXCdZVSlcLWxgAJebB
+ ph8s0b+Q7wx0skyaHa9BmoLikCYmNAe9TrCKxofgYX/Ra5bEJwwTvrh3xYrR/sxHd2z8
+ fip2MH5t1n0E+eWR0aQ64wUGTlnyPQrsTXYDMaID0CHBuFzbZ2mT13K0DG5cqI4ib4y9
+ E6fQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXayCyzunUmxPqIWvqe4W0h/EpMG/QUoOU0UvAJJu9Jq77UbekJscCWoX1V/2fbc+iONxpweYo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjYpyFkXSgmCFqj9gJIL/ZyBU+tlryfX+j/TnAatsdq6JV/Q0X
- Q7KdmNYE0VUF5hln+3QHT0drORNgk8O2kIaw55NqnNZBJxB4LHauaVTIFWZKrEeqM0Ah+Ar2Of8
- iHkcXG6s9uTOuUvrJ3/YN5klbzp/HnPlPcWwFSnugrK/N3PbE6lxQa7w=
-X-Gm-Gg: ASbGncv73bLqLOUCjb6YCrsn6HExmkvAQZ7jYvjqnUOZ2poNUR1hsSaeEZtu32o0+FV
- lxc6NaxzBTs5FQqV9M3U8YhKi68TPN8h5O3SLHr1lr2XJ2CvW/mVA+VDHkURQVciQ0TDnw68BfP
- AXt8T1GR92X53ZJOmVPhJBBCp8hUZ19VcLat8oxexmz8pmxa7+SO6hzHIjDLOLNjiFlx+cJpg2W
- A54gIsh3W6Pe83P4abjL11qcZQSMmeJPmyjeyUl5VoPJSkXZa9xeLqOiyEKjwFpQnAR9qHIqQ6t
- F+Cq1K8mrTlKQgVLwBA17Mx1timc6tndcQTm4AtydMkHw0jF8zzMLsSCE0/8SbPEzUiQTFtRT94
- V/Bti
-X-Received: by 2002:a05:6000:18ac:b0:3a4:f6fe:5244 with SMTP id
- ffacd0b85a97d-3a572367b13mr505644f8f.12.1749833539692; 
- Fri, 13 Jun 2025 09:52:19 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHhdWGrt5n51JOKaXMKzH3v0NAap2ekf4E9hC4Gtu/uOq5ssd9Hf7S4pUH5GuaCpETuD10hxA==
-X-Received: by 2002:a05:6000:18ac:b0:3a4:f6fe:5244 with SMTP id
- ffacd0b85a97d-3a572367b13mr505611f8f.12.1749833539281; 
- Fri, 13 Jun 2025 09:52:19 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532dea1c27sm57299365e9.15.2025.06.13.09.52.18
+ AJvYcCUojsgB4sQ8mjLquVeJMlqmK7tWHBsF2Ok+wrztaL8Tov8NrVut/0X6T2yDAstAsEwGUsxCfXY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJx6aaQER41KS9Z5TVHw0C5dZl/2rBsvU7BKVdKfKaaq5prCxU
+ sDSo0amhCTVuYZMFmGaYIcFrxeOlomqMGmhyLAsdmF8IKSU6PMkna44moOPfH26djS4=
+X-Gm-Gg: ASbGncukz7GofRl0bLjpkzY3aTvFzhgphnwW4A7/fkFD4IKdJgBf6mw0NGVn9oYbxM/
+ WrGNs3WdYYwk+ZCP2gPEijZF5VdcqI3vq9trxtDfe/L0LCJH0cW5Zn7S6tKMLmLac3pIuxpjIVQ
+ ZU7mEaIxUDzlzcHWlXSJcKV3ps8S7kKkI63X3gDP/RT9hBh9GonT4FjqVnzb/UXPjQKCa4ZdRBP
+ z8twlQYxjsQVPFWFQH2h8Ce0MVj928imTjY8YdbTtHkecGl0pAqSJFWl8UTMdVvxFILipM098E6
+ PT5o0il1bF9SO989OD1wwIhqEC2RzcAEYPrWXF9JqqBQ5NsNJ8f8ECC/s2McBr5v2jaxN8ZrQYv
+ dQe748TIW35d00O4gZyYCWWU=
+X-Google-Smtp-Source: AGHT+IFRyLxydqEgmmzwroqI3DEYPYF6cUt+8s59IhviDHNKv0EIyS/MkLIpXaWRHMp1e5FZ7ZJxkQ==
+X-Received: by 2002:a05:6808:19a5:b0:404:f14a:1345 with SMTP id
+ 5614622812f47-40a7c166852mr57466b6e.20.1749833554380; 
+ Fri, 13 Jun 2025 09:52:34 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40a74172ccbsm329385b6e.29.2025.06.13.09.52.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 09:52:18 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Cc: mkorpers@redhat.com, mskrivan@redhat.com, eballetb@redhat.com,
- mripard@redhat.com, alexl@redhat.com, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Maks Mishin <maks.mishinfz@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 3/3] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
- support
-In-Reply-To: <975875C4-8B41-4228-AF6C-6090DE1B68DE@gmx.de>
-References: <20250613085742.796015-1-javierm@redhat.com>
- <20250613085742.796015-4-javierm@redhat.com>
- <2584944A-D0CF-44E5-ABAE-C3E156ED8539@gmx.de>
- <87ikkzvghz.fsf@minerva.mail-host-address-is-not-set>
- <975875C4-8B41-4228-AF6C-6090DE1B68DE@gmx.de>
-Date: Fri, 13 Jun 2025 18:52:17 +0200
-Message-ID: <87frg3vb26.fsf@minerva.mail-host-address-is-not-set>
+ Fri, 13 Jun 2025 09:52:33 -0700 (PDT)
+Date: Fri, 13 Jun 2025 10:52:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ben Dooks <ben.dooks@codethink.co.uk>
+Cc: rick@andestech.com, ycliang@andestech.com, u-boot@lists.denx.de,
+ nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
+ fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk
+Subject: Re: [PATCH v2 1/2] riscv: add build support for big-endian
+Message-ID: <20250613165231.GA1382132@bill-the-cat>
+References: <20250613161258.1805957-1-ben.dooks@codethink.co.uk>
+ <20250613161258.1805957-2-ben.dooks@codethink.co.uk>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: wyCbn4aksoHtsh8BG0X4lZaSThnu_FI63BaMtM_X9Ho_1749833541
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UGzPvMgCaoa8jxSc"
+Content-Disposition: inline
+In-Reply-To: <20250613161258.1805957-2-ben.dooks@codethink.co.uk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,60 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
 
-> Am 13. Juni 2025 16:54:48 MESZ schrieb Javier Martinez Canillas <javierm@redhat.com>:
->>Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
->>
->>Hello Heinrich,
->>
->>Thanks for your feedback.
->>
->>> Am 13. Juni 2025 10:57:38 MESZ schrieb Javier Martinez Canillas <javierm@redhat.com>:
->>>>The UEFI 2.10 specification mentions that this protocol shall be installed
->>>>along with EFI_BLOCK_IO_PROTOCOL. It provides cached partition information
->>>>for MBR and GPT partition types.
->>>
->>> U-Boot is targeting the EBBR specifcation which defines a subset of UEFI.
->>>
->>
->>Interesting. I knew that the u-boot EFI implementation was to support
->>SystemReady IR (what is now called SystemReady DeviceTree) and EBBR,
->>but I didn't know that meant to only implement what's required by EBBR.
->>
->>I noticed that EFI_PARTITION_INFO_PROTOCOL is not even required by SBBR
->>and only EFI_BLOCK_IO_PROTOCOL is required there just like for EBBR.
->>
->>> Which application needs this protocol?
->>
->>We are experimenting with a new A/B boot protocol and an EFI binary that
->>implements it. It's inspired on what the Android Boot Loader does for its
->>A/B booting too.
->>
->>The project is https://gitlab.com/CentOS/automotive/src/ukiboot and reads
->>UKI (https://uapi-group.org/specifications/specs/unified_kernel_image)
->>images from raw data partitions. Just like ABL reads Android Boot images.
->
-> Linaro already implemented A/B EFI Boot in U-Boot. (https://docs.u-boot.org/en/latest/develop/uefi/fwu_updates.html). What are you missing in the existing solution?
->
+--UGzPvMgCaoa8jxSc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Maybe I haven't explained myself clearly but we are talking about different
-things here. The solution you mention is to support A/B *firmware* updates,
-while I was talking about A/B *Linux kernel* updates.
+On Fri, Jun 13, 2025 at 05:12:57PM +0100, Ben Dooks wrote:
 
-ukiboot already works on platforms that use an edk2 based EFI firmwares,
-since these provide the EFI_PARTITION_INFO_PROTOCOL. I just want to make
-it work on platforms that use u-boot instead.
+> Add support to build code big-endian if the board supports
+> it. Updates the makefile to pass the correct compiler and
+> elf flags.
+>=20
+> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
 
-> Best regards 
->
-> Heinrich
->
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
--- 
-Best regards,
+--=20
+Tom
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+--UGzPvMgCaoa8jxSc
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhMV08ACgkQFHw5/5Y0
+tywIgAwAmOnwZECOOf5k1UsYyatLMyYmC0OfrW3ce0eVkQqSfa9vYCVU0bpAUlvx
+28FV4hdejJGZpO6ct+4sMjOLDh66U2KzjoMgdp7eFFcXDkCA+eQhoobtNcNOFLye
+XUGlCBKMHFXQwx36HzRCd3LqIuEZP4WDrB9C9W2rGyvarOdKNuAidUFLYxxIchoi
+JuBtQXqm3xkHqpLQLiwto6rL+57Q8GnEUP0G3WxrRDG67BFKHOX5E0dugwEmLE9g
+gRyIlZFwsXWcNXrb0ZAeQsrHbrUAQiCpfXQMD71Kg7RFe/A0t7pJC9/Bnjh85RUk
+Pa6VBkpuz/TcL4g6d3o4YRT/mfq+HqUNOQsmoRBjk5TFoNbfN8g4/jrpHGz/QQ31
+nYcxUDiufiK6yJSKZRsAyiwqus2htbVEUohteB/vOielx6lyfvN9na09sRs/yW9E
+pJ34DUilFCwT4zvb3KXdzZxl5zybjnFaGADyRlEatcRUxd9g9RWUSTsCsJN5LR2W
+TcRH0TCw
+=/c8h
+-----END PGP SIGNATURE-----
+
+--UGzPvMgCaoa8jxSc--
