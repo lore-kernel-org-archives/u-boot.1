@@ -4,93 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D01F4C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 17:35:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31522C71148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 18:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BC5582D34;
-	Fri, 13 Jun 2025 19:35:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 82DAC82E6A;
+	Fri, 13 Jun 2025 20:10:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ov62l/9u";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FORm1mT5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEC4E82D2E; Fri, 13 Jun 2025 19:35:06 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 7581D82EA3; Fri, 13 Jun 2025 20:10:21 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1072B82D4D
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 19:35:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43F1082D5E
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 20:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-72c3b863b8eso1639998a34.2
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 10:35:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-451d6ade159so20484375e9.1
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 11:10:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749836103; x=1750440903; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QC/WgFOf6juVUEqjV8oNIochRj212YNoT41WQO6o+SU=;
- b=Ov62l/9u3/ofKNorNil8XiW34dLISiMgyrw2Otwg0KUYy1jebdqiQn9wCVujog0pXG
- eupBL+AWJeocp5d6m1GzTqEDYvWiVOOVAlv2x/rVb44VCyw8UybAQ/KC1UuUD6E1Qd9I
- IMfaJi7xnTxHCnu6FeKU8upVaQvjEu+f/7giE=
+ d=linaro.org; s=google; t=1749838219; x=1750443019; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z0v1Ik3zbgk7DcOsEE8cO9DMiyT+1TTYg9x+8m2q4U8=;
+ b=FORm1mT59rGVpk8Z+tALW+PDWdrGFaGREBuCHH1pluiqb0y+JyJzMxC3sZMjXoBDqn
+ W5JtWL6NCFG0c9sSUs+OanDlgUE9Mu5vJ8Nmcd5JILzTvPV5tBs91DbkSJ8nam7xeNQz
+ QtJPlvgxD73tjOBnzzZBY+RWnw8GK/iUPsonKkEm4aRupEyGRWy7ZosLfKvbwR+gsU9V
+ Qrocy5ixDWNbEdWEFGk/sriMnRCip23uSXJcQ8kSWPA87yOgDwbRzSDXUflz2jOzC07E
+ wViuNrJ7VW5klwJpKNv09naet5zgCTneyEYqd3RRfVE+bMNnn5iDPKWKFePP6BvcCJpP
+ Rm4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749836103; x=1750440903;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QC/WgFOf6juVUEqjV8oNIochRj212YNoT41WQO6o+SU=;
- b=plBUlkvwFzfXEN8szUvLLuk2Q31F1Kq6yq0pW751n0Uy3FZJ5WxB+gvFLUileYAtsy
- pNWYXvR3IK9HdB3zpXuvYlSGSBqB8AE4nfL5/dtsnJREBXimcCi3o/9MSfC852yOe5HB
- 87BNFaBdfFjUJhbzUJD3KeYHo1WLxQcdMyxSpVwFp8KN7ElbvXuJH4WyxmZuxzZQuYjN
- n5VFlPEmOm+QnX9aA8NlAsvy/p+CZH8giRRqyGMdf+nBWGC//74yu7HwgO/Fod5bVlm+
- WcxsWTT5TbPLojok2/dGSyji+K8/OFZ9bNdu4kkL+okWVjQfk3CrrRvIkX/EXhFoRMYE
- WVww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXWg+gyV9ITfPz/zpmX/ZZWe0ldQ2OTU8dNADuq0dGWEMSqLHBQzo0le+rJ1JsP7CMdXU45ZSo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzw2OgccXX9mwQrtpH1pJMS++MNuRCchwGOFzkRWtkFhMGOpNiq
- syGOZdoS1oxt6+bTjDtbTeODC36Jn/ZHeppUNfvuhj2bVLM94B2L0VXi2QEzSLgb3Cg=
-X-Gm-Gg: ASbGncuaFyRfMOOLpx+lC3j6KNHYHJ85XKM8twVFN2iIglhoivZvCsitgUJbgu0rslO
- hGbgEfjIpsC627nYcGFEHWVP9fqZj/KStiZXHPTTYffuUs/d3g7gsoo1YuZqZY0kIXk9gq2S/g+
- z4yX70jfDazXyH/ZfymSKiNgw3SH6ROWCWqxN5d/OI0JpVUzOfwDLM96kgaYl8XqWTpZxcpmWo7
- aeFCJpCU2W9N6CxyoAqqsmmQRpYyPFcVhNTRmiP747oEu1TKeGHemhgNI9CvhrBlZyJjHySkylv
- W4jJsPkisR70Are8wMeuwzXllFpR+amDlF3Kfqoz25ekHGeLr3yBk0aecTxuGpwY6PBC8TxI3hq
- 5WJbUK60TTnsfEoOGktFKcT4=
-X-Google-Smtp-Source: AGHT+IFQTBoXmxPuSRlxhs+g0du1Lhgz8ZJDNi61gEOQhkznyZDFL0bSFvCZpjcARv3UW/mQUAELAg==
-X-Received: by 2002:a05:6830:668a:b0:739:fcb4:db17 with SMTP id
- 46e09a7af769-73a3631618bmr484980a34.15.1749836102639; 
- Fri, 13 Jun 2025 10:35:02 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a283dc98asm276950a34.11.2025.06.13.10.35.01
+ d=1e100.net; s=20230601; t=1749838219; x=1750443019;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z0v1Ik3zbgk7DcOsEE8cO9DMiyT+1TTYg9x+8m2q4U8=;
+ b=YomZmN3rWdfrx60L79zjcm9SuZWx2rVycayqRnGP7XsRJNlxCW57XVWxpampqiI09m
+ N+P+kmDbyROFPZV/XQudDsSjLtUuYnbT1Q+WG4MlAXKyHmCOJyGPFnR2JE8+cA+pQltv
+ JHluiuj5YSlwNQqyPv2nzEsK10h1Putg1Ajf9XC+niy0E8EK6R05ZVCS5aYl7BnE+h1B
+ koBfOkGRBCUefRiNNtFgJjH67VTp3R2i4stcX2IdvDf13BLBy9WrFKTp5zCgywffZysM
+ eyG+LoBv0XrgNy4NlOpzTn98P21z01EjTFfgEH0e9ICQXbm42NSIVbr9O69izLif8yg+
+ 54aA==
+X-Gm-Message-State: AOJu0Ywi4LDlme8ZbVzaqFypxSr7O8GHNHjyhzrBUmfkIAgyJBAW5vh5
+ 546xOAj3Qw5+UyIxh27aQLevbm4yVkelLQZ7zrQtTOpHZXZhg0gXFW9LO6fc2watX+vzYjeq4h3
+ qQBWU
+X-Gm-Gg: ASbGncvr9GI6/UZMlHS9EcGD/qXvVsijeocYmxONtpdroTVMyj1DrGGtSf+jtl3aBfY
+ SHube5aNr6MTlRiSrRVg8qaIpzPKOdTLJoxkSmWjgUo0Mi3J0eZTBBbmcOADE3yr2BnT2wHa/Ll
+ ByBVccDmWuewaQYCPIwrqmNYoYVVPGFiFQ5Yihj7Zi0nZ9yIwciPEh444Dn3ETsIhfXL2tj24ui
+ 6l5gKY9jVqExH3Ok/XE1gDWFGS81Pts8k+p2/9p0i2W/edR9RmwOKyt3WTF2QKcDoBZ9X/yR22I
+ TNIoBQuJLQLxtst6KjxgQvUWmlseXpp/+U9ukSVO3F3xtaVApLsUrQ5JxGguJ9Ofeeuq
+X-Google-Smtp-Source: AGHT+IE1glMsk4Yyeebv0ktIbjv4+ahAkh3CtVnAvzxgEjaTkcd8hjn2Cga9KR3pEieIeNeNzFmL+Q==
+X-Received: by 2002:a05:600c:8b2a:b0:440:61eb:2ce5 with SMTP id
+ 5b1f17b1804b1-4533cb488b5mr5784185e9.17.1749838218575; 
+ Fri, 13 Jun 2025 11:10:18 -0700 (PDT)
+Received: from toyger.lan ([213.240.182.76]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4532e14fc98sm61511975e9.29.2025.06.13.11.10.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 10:35:01 -0700 (PDT)
-Date: Fri, 13 Jun 2025 11:34:59 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Javier Martinez Canillas <javierm@redhat.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- mkorpers@redhat.com, mskrivan@redhat.com, eballetb@redhat.com,
- mripard@redhat.com, alexl@redhat.com,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Maks Mishin <maks.mishinfz@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 3/3] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
- support
-Message-ID: <20250613173459.GB1382132@bill-the-cat>
-References: <20250613085742.796015-1-javierm@redhat.com>
- <20250613085742.796015-4-javierm@redhat.com>
- <2584944A-D0CF-44E5-ABAE-C3E156ED8539@gmx.de>
- <87ikkzvghz.fsf@minerva.mail-host-address-is-not-set>
- <20250613154922.GY1382132@bill-the-cat>
- <87cyb7vaq2.fsf@minerva.mail-host-address-is-not-set>
+ Fri, 13 Jun 2025 11:10:17 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH v3 0/5] Qualcomm: implement support for GENI firmware loading
+Date: Fri, 13 Jun 2025 20:10:13 +0200
+Message-Id: <20250613-geni-load-fw-v3-0-be778b3b101b@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Kdch8Q+oSFVx2jwu"
-Content-Disposition: inline
-In-Reply-To: <87cyb7vaq2.fsf@minerva.mail-host-address-is-not-set>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIVpTGgC/22PzW7DIBAGX8XiXCpYICZWFOU9qh4wLA6qbVpw3
+ VaR372ESP1Tjx9iZrQXkjEFzKRrLiThGnKIcxniriH2bOYBaXBlE2CgmOCSDjgHOkbjqH+jDK2
+ RArzUe0sK8pzQh/eqe3i87YQvr8W63B7JhDmbau2aw5c02xY0o1NMSO0Y7VOmK6eMonFKSt1ao
+ fE0htmkeB/TcLy2epPL5zhNYemavWZKAHfeYU+u5XPIS0wf9a6V1/T/J9SO0q0H5UFz8D861bT
+ CN73j7A8NhW6tcbvecu169ovetu0TM+Yc+mEBAAA=
+X-Change-ID: 20250314-geni-load-fw-0eca432f489c
+To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Casey Connolly <casey.connolly@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2843;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=alc1fwbhUCZ4cDT+cjh8b1RM1g6h4ygfnXOrJd09LMY=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoTGmHDVwO/fSvb7HSmFGmaEgoRDH+NaET8r+ms
+ p+eSjcsPqyJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaExphwAKCRAFgzErGV9k
+ tiVdEACBXn/7VOVL9ebQim1y70NMs/zyqsi9ulT3bkMmN30Dp9QXmPBOLRhHDV8IEJOzjSslNa/
+ 3ej2r5gy3Xkbxlq+k/LUVGXQ/MuGkquu8zEb/ff35porE7yu877yf5TQ+ooE4RuW0De861YbQSP
+ v5i41/ldmILYhv3rTEIlkUBbbFrovm+PXn9sHLczZrB/pn7wGAI5mqImnxCb8N8QDD8vljs3eDn
+ Ym+p+SaYi0Lwa9KPdIyU8JwVgDMy/Rjn+pDS/hugzakFZ3qU/XfxAgbO5hu3OvzXqfvptn1kqtH
+ k7CM0TzaDwMH5gtcS2M1OpajCih9YLyBGhxq5jOsErmBB0UuzZXr1PJG1Et/vkyrXDtQ3R5pZC/
+ OQJSxw2d8GJCQx+/bNZOILBS96VuLdsOggLMt0SWcOsmHYHD71ddZqbAp/ali9Lo6KHtQmhQU1f
+ Ow3/pZQwFGCvriEPAcIJr3v+nJ4ZQSMaf5OC1T8HCEz6OOrDWijhHB9wZh74xOL6FRjpv+RNU73
+ ADfj17RPJLzNSyw1PLbwlW7LVgYfSBZjFqmja2aCZkPxn7vswvK5t5tFBRyigKaRwel57Q0kOKh
+ l8FiwL0QsnyQDKXkp6pzPMkBWRqTuUUsFe1SN/GbjVM9HC9L9Jp84hAPVvgfk57w3zEYuMb7Vmt
+ RNZ3F6Us2issPeg==
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,88 +122,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The GENI block on Qualcomm platforms contains many Serial Engines (SEs),
+these are general purpose hardware blocks capable of implementing any
+low speed protocol (UART, SPI, I2C, etc).
 
---Kdch8Q+oSFVx2jwu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The protocol implementation is provided in the form of firmware which is
+programmed in to the peripheral, typically by the EDK2 bootloader. Up
+until now we have primarily been chainloading U-Boot, and therefore
+haven't had to deal with this problem.
 
-On Fri, Jun 13, 2025 at 06:59:33PM +0200, Javier Martinez Canillas wrote:
-> Tom Rini <trini@konsulko.com> writes:
->=20
-> Hello Tom,
->=20
-> > On Fri, Jun 13, 2025 at 04:54:48PM +0200, Javier Martinez Canillas wrot=
-e:
->=20
-> [...]
->=20
-> >> The project is https://gitlab.com/CentOS/automotive/src/ukiboot and re=
-ads
-> >> UKI (https://uapi-group.org/specifications/specs/unified_kernel_image)
-> >> images from raw data partitions. Just like ABL reads Android Boot imag=
-es.
-> >>=20
-> >> > Are you planning to add it to the EBBR specification?
-> >> >
-> >>=20
-> >> I haven't thought about it before but I also didn't know that u-boot h=
-ad
-> >> this requirement. Probably it should be documented somewhere to make it
-> >> more clear? Maybe I didn't look enough but didn't find a doc in the re=
-po.
-> >
-> > We are not strictly and only EBBR requirements, if there is good reason
->=20
-> That's good to know. Heinrich's answer seemed to imply that u-boot was
-> limited to EBBR requirements.
+However, when running U-Boot as the primary bootloader it is necessary
+to handle loading and writing the firmware.
 
-It's one of the main users, yes, but it shouldn't be seen as *only* for
-that.
+Support for doing this in Linux is also in progress [1], this series is
+largely based on that one, however the Linux patches expect the firmware
+to be provided in /lib/firmware, and will only exist on newer kernels.
 
-> > to add more features (and tests). But Heinrich's follow-up question is
->=20
-> Oh, I missed the lib/efi_selftest directory. I'll see to add a test then.
+Since we may want to use peripheral (e.g. EEPROM) inside U-Boot it is
+still useful to implement firmware loading in U-Boot.
 
-Thanks.
+The approach taken here is to bind all peripheral devices which don't
+need firmware loading (e.g. the serial port), then wait until
+EVT_LAST_STAGE_INIT to handle loading the firmware from storage and
+probing the remaining peripherals. We forcefully probe them so that they
+will trigger firmware loading and will be available to Linux.
 
-> > quite important. I feel like there's already a half dozen offerings of
-> > A/B update that works within UEFI.
-> >
->=20
-> I just brought the A/B boot protocol used by ukiboot because I was asked
-> how I was using the EFI_PARTITION_INFO_PROTOCOL. But I'm not proposing to
-> add a new A/B update mechanism for u-boot, just to implement an existing
-> EFI protocol...
+For testing on the RB3 Gen 2 [2] is needed so that the i2c peripherals
+can be probed.
 
-Yes, this was more a lament for the ecosystem as a whole really. The
-concept of A/B(/Golden) with various security features is pretty old at
-this point, there's many implementations. I wish there was not "here is
-yet another" in the space.
+[1]: https://lore.kernel.org/linux-arm-msm/20250303124349.3474185-1-quic_vdadhani@quicinc.com/
+[2]: https://lore.kernel.org/u-boot/20250314-sc7280-more-clocks-v1-0-ead54487c38e@linaro.org/
 
-But regardless, we should aim to have U-Boot be able to be used with it.
-Otherwise my crystal ball says that a few years down the line it'll be
-hard to use Fedora-IoT-distro on common-device with U-Boot.
+---
+Changes in v3:
+- Replace printf() with pr_XXX() in geni SE driver
+- Add firmware loading for UART as well
+- Link to v2: https://lore.kernel.org/r/20250610-geni-load-fw-v2-0-7cad6bc18db0@linaro.org
 
---=20
-Tom
+Changes in v2:
+- Use GENI_SE_INVALID_PROTO in geni_i2c instead of 0xff
+- Fix typo
+- Link to v1: https://lore.kernel.org/r/20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org
 
---Kdch8Q+oSFVx2jwu
-Content-Type: application/pgp-signature; name="signature.asc"
+---
+Casey Connolly (5):
+      i2c: geni: fix error message wording in clk_disable
+      misc: introduce Qcom GENI wrapper
+      i2c: geni: load firmware if required
+      clk/qcom: sc7280: add uart7 clocks
+      serial: msm-geni: implement firmware loading
 
------BEGIN PGP SIGNATURE-----
+ arch/arm/Kconfig                 |   1 +
+ drivers/clk/qcom/clock-sc7280.c  |   6 +
+ drivers/i2c/geni_i2c.c           |  14 +-
+ drivers/misc/Kconfig             |   9 +
+ drivers/misc/Makefile            |   1 +
+ drivers/misc/qcom_geni.c         | 578 +++++++++++++++++++++++++++++++++++++++
+ drivers/serial/serial_msm_geni.c |  81 ++----
+ include/soc/qcom/geni-se.h       |  36 +++
+ include/soc/qcom/qup-fw-load.h   | 178 ++++++++++++
+ 9 files changed, 849 insertions(+), 55 deletions(-)
+---
+base-commit: 9805321dfdeb5225fe5c5e0721abf49c0875637e
+change-id: 20250314-geni-load-fw-0eca432f489c
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhMYT8ACgkQFHw5/5Y0
-tyxJAQv7BCCDKx4SA3ELXFlVqusP9PONaBdn5I+76VkvTthmyUEKNtMNeDhh+5hU
-/Yu43D1sGWN8o4V/G3giTY+9DC24+A0WejvCt7jqVc+1UgN42AoHbtau4b6SY+cj
-JIrr8QubfsnRbAqQc44HblHZphIP8oEEXk1Oxf1oSaf221jeN18zsidx7prwY5KC
-wFE1+LjZopjv/wjNWhVCwDqaDuldTbbTqeM4yYm57C+SrOKFAbnz2uyazuOy6izP
-vA0QhhLZ/pmT4d9bIef2WI+suOiHOlLF+/NBM5jumHWHSM+xOuKpktqZfSXJer0f
-xWTdTzY30w+HkHnqLbVyJ+SoJ3S/lmkRxgeJYu9AznENk7mvA/fVg4z8WsyTuxT+
-ELhIJS0Ru9kquCdZ0ZagvMehkUpb5UHu+dd5oydpo5MIURqYYIy+MAjhkFtqd5As
-k6k8JZGXnm3CVlEbxnYjhz3xmeOz4zpzKneae08Oi+kpFSqsktmFoXRhDIw7CURC
-MLQ1c+0e
-=GL/h
------END PGP SIGNATURE-----
+Casey Connolly <casey.connolly@linaro.org>
 
---Kdch8Q+oSFVx2jwu--
