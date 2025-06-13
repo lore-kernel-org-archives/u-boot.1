@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA445C71136
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:03:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F415CC71136
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:03:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 920F382F28;
+	by phobos.denx.de (Postfix) with ESMTP id D831982F35;
 	Fri, 13 Jun 2025 15:59:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eAK6QTcx";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yMxsG4jx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7E9C82CA0; Fri, 13 Jun 2025 15:22:17 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 09F5282D09; Fri, 13 Jun 2025 15:22:19 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 264DF82D09
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:22:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DA3382CA8
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:22:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-adb47e0644dso366731066b.0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 06:22:16 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ad1b94382b8so384892966b.0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 06:22:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1749820935; x=1750425735;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1749820937; x=1750425737;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=H219KVZw5grLTyoQw9SIkS6lcNkeXNDs9oZGAD+Pn6w=;
- b=eAK6QTcxdgula9ouVRbLZ2oYpQblstIrLnkzolqlGvG3krROeWYHzIV9+pl28N4nkT
- Yw68jzGwcIsC4PbGPSZO/STCfn0BAdR4PwjKCjY6ux1UGy7mHYP5hsbEwiAz9hnLmQcc
- gQJdT6dPtYNnUCwWOzOWCXSwdqPDUAACoakYwS6DmM9otueEwP7VFwWQESMvxhRDqAvn
- 4F8LOk81o/uSTMG06qIb/PbwbBDs/tUXyDN+6AeqeuF9yJHMqIp7NkuXoRYc02RozhMz
- 0GwvVFVXkHbJ9xHWsRVZNesr8ZbrXG3DJ0vWaf47obaPMer18mThWnXAHdkDbR3bpfbz
- ri1Q==
+ :reply-to; bh=AkOfoHnFV/Z+CEBZc+gd1476X5driDQCnPNgqB1p1zw=;
+ b=yMxsG4jxrtloQ177mrdxPAEi+nDhCqVsTPLSc0UMn+cuE+aFNBIAM95aSeAM+w6kIq
+ XLC8Kg8WMMjKHS93G1AbSyg0Oomqn4Km/4305k43A6Rr2X++NUBXPs/jmgfWaik6mMJj
+ atjvkiO0U7LbOZK9pKZO4MYPkgiKwGPMH3rISh9tnjU0GYJJOKQ/kfTQREeS/MWpOfQP
+ f19xqvgqt6iV00dA1RinOfMH+g80gnJpKKEEWHTFGbU82QvdpFNpS/6mW+w4y59pitr4
+ RoJGT9+Kw14kHrVCjF0iTDsKz4Asz+e1/G7yMJ4Pfko0AMbcPOR5l82DSaZydttggzRU
+ FIWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749820936; x=1750425736;
+ d=1e100.net; s=20230601; t=1749820937; x=1750425737;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=H219KVZw5grLTyoQw9SIkS6lcNkeXNDs9oZGAD+Pn6w=;
- b=TIGn2aceKvnUgF5V/apUYJzVZ568YpNccL9rZzwrXE+c7CLCbTjDK9GZovrUkChrlE
- wjuAYkUqNiFSSr7VD1ks8ivqbP6xZTrN0y9m3rBfh3rjNtAYCt3dLJtpO0cUbO8nWhVt
- q3JdIKzGCm8BJUSf9qjXq5CxTEJdWalsmJl/iPH1KydVOWq7L/AzD6vXy5N+wKLcHdKA
- NfNMqKr5Zn9a5dHIYtMCT7wr3e07I3engBukQLQStK0xM+RN1v3yN+kXE6AG/N6GSUey
- aCc9TJsznd0o4bWyipcy+iM5yJlcLjpxgli2tvgiUEc4RBeBi8TwgdjoXBOsnPKQXIXt
- SOgQ==
-X-Gm-Message-State: AOJu0Yx/u6aAUq34DcwFKZK0se2D5G3Zu6Qqd7rq9ZoTNcyuaFVGLim+
- oSq4uBp9WVZi0PWr4f8XcSAN1KD02yqna1ML+KZ2SdHddZPZ4Pvft1TZ+2/clsShEQuBwdOn0HK
- TbccD
-X-Gm-Gg: ASbGnctfGCyTYONfSSFjfJHjX/S86Aw9Ot2SXNtFtYNlyV5ZmeBatvDcpB6kHf2glo2
- 0qR6tzOlLJqYUaqfFOaFTaC0GikkCiLAEh15lg6cseuXWPOIO01LTWTB5H4v6791irf2XyBqr7J
- TyMJp5tKZRoRNrn1YrdseeARK74LNx1HZk5dbDxE65I5558PV5nXf1W7Po/X+MaCT/JFkBdxVhz
- hb5qET7Cx4iZ1iaa4svA9ihja6vp+VEbMxRm3dhmK+1UAWbnrTO+cX98a6KlZt2LRO+m5JanRHg
- l6RaeXtb3tqG6t45chuFvpQQH8Luhkq0UY6c//ugt7hf5b3zq4YaZMjFYp8=
-X-Google-Smtp-Source: AGHT+IF24N55cv2xdb8c27qoGQWzV8twAHp/Ozb1q2y0oSQmETI2uhuvfCoTpgMNHkLa5lSGiUaDYA==
-X-Received: by 2002:a17:907:3d45:b0:ad2:2fdb:b0ab with SMTP id
- a640c23a62f3a-adf56630427mr67170166b.29.1749820935601; 
- Fri, 13 Jun 2025 06:22:15 -0700 (PDT)
+ bh=AkOfoHnFV/Z+CEBZc+gd1476X5driDQCnPNgqB1p1zw=;
+ b=AGs84FA1rQjBGZKLrddpxqZPwI6oqChF6tMB4bsOrr9KznRD9xT4II9U/j/Ctm6B9c
+ WoUkpQ5jSpXFO3IbHLRvOmM1JdoClZaOhxZUb0lEg+oagwYVuIViE72IVioLxPVRwqLZ
+ ++wbkiyRSPJatgNQMviR6MhIlcYGf/cqX1w6rNlEfkUP/zd5/Eze6hCF1pE5HzoMd+z1
+ SjqA6KleITJpMSfw2772up/sMzWvFxraUZSokCdOoZmlf7o+xKzeEPZbVvVO5B/Xa0kJ
+ MiloCSQ+YHs/E/el9Hran9rHQl9WJd/iq7PI/I8KdvtrFUGzKPR60oK0XRTx+iCTnl0Z
+ hHZg==
+X-Gm-Message-State: AOJu0YwxfXPhInzjqjvJRMG1n8WAA7ACTK6GTZJZe8WK6sQ2QyM6oS25
+ UwKIsS/ZdFjh/BRp1BxGcU9Cpo9gPXpUaAsnRqNcbd/VCteOv3YOrRTamChwuinvMzvxxVhiU66
+ A3ur7
+X-Gm-Gg: ASbGncs7EwVHd56PKkPXDong6Fu+nWb3XzuOnYmpjfxKcuctvmd0WyeXUZKJJYZlQuB
+ +wDebJOx40s7vyY+JLZarHOezXm4eG4lY4am4/kpIh+jNhJwFlyoKgCNjtJXevT7wd40uaVPkjf
+ x/q70EBNs3MegdP8BYDkEiTlPLK6mBS526wwedIToVND9Zhrep/hRIV99+qtX1zEr06ayMKXGVj
+ Z/M+CFRE2e7j5utUfjqizKVm/AEELr/5efqGz6dRRyVsv0S+sywFtyjpuBTVEp43zsFCcYmJYEL
+ BCQYFEA+jOrUe9uqdvuhLb+O7nxBQoH/1T5zztDabuTVvyOIg9cwl/GJHyho60+w53bgQA==
+X-Google-Smtp-Source: AGHT+IElBo4OoHFNaGAyC41wr6xK18aqr8A0gbUXLCmaGfKhoAYEsQ5K6xRie5xOZ74D1SppevXuhQ==
+X-Received: by 2002:a17:907:7ea8:b0:ade:bf32:b05a with SMTP id
+ a640c23a62f3a-adec4cfe2fbmr309508266b.0.1749820936667; 
+ Fri, 13 Jun 2025 06:22:16 -0700 (PDT)
 Received: from localhost ([2001:4090:a244:83c4:9fe4:a128:a20c:8b84])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-adec81566afsm130805366b.19.2025.06.13.06.22.15
+ a640c23a62f3a-adec8158cc8sm129263366b.1.2025.06.13.06.22.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 06:22:15 -0700 (PDT)
+ Fri, 13 Jun 2025 06:22:16 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Fri, 13 Jun 2025 15:19:40 +0200
-Subject: [PATCH v2 20/22] arm: dts: k3-am62p: Add r5 device nodes
+Date: Fri, 13 Jun 2025 15:19:41 +0200
+Subject: [PATCH v2 21/22] configs: am62ax_evm_r5: Enable IODDR resume support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-20-3d233aaea355@baylibre.com>
+Message-Id: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-21-3d233aaea355@baylibre.com>
 References: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
 In-Reply-To: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
 To: Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
@@ -86,12 +86,12 @@ Cc: u-boot@lists.denx.de, Kevin Hilman <khilman@baylibre.com>,
  Kendall Willis <k-willis@ti.com>, Sebin Francis <sebin.francis@ti.com>, 
  Dhruva Gole <d-gole@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=950; i=msp@baylibre.com;
- h=from:subject:message-id; bh=Zoqhv8UWHGbqUQ4qIa4qJq4nErwA6hRuiIIjgmPZ2yc=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhgwf1UdnHJvbDhRKz5nRJJ/1mM3tr7eqbt4j38C8PMvfB
- 0RFMlZ0lLIwiHExyIopsnQmhqb9l995LHnRss0wc1iZQIYwcHEKwESmJzD8D3SQm8913vBekOH9
- d2HBHVpS6TNOWjS+1y5SZhQPrvpxkJHhT6er/pnJNT6OnFFSXyY61i9srYxl9eKMWbyoK+PFi68
- cAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=624; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=kh9cdx4rlesuW/3Ibe/be4eC7uZY3ZAwwnIb4cKx+W0=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhgwf1efNstI3vz6sqTMoYa25kbfL4Avjnq6QiBnBZ9YvF
+ nlxpFano5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACZS0MjI8Kj/s2NqTfaDgw0z
+ /X9sqbvTl2Audn7hps3TBB+/VXxaupzhn5UN9yaGv0G105df3Pj6+wNPDmmtaG1m139Rf6RkVZ6
+ JcgAA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Fri, 13 Jun 2025 15:59:32 +0200
@@ -111,47 +111,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are needed in SPL to be able to resume from DDR immediately after
-booting from IO+DDR.
+Enable K3_IODDR to enable support to resume from DDR after exiting
+IO+DDR.
 
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ configs/am62ax_evm_r5_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-index cf087c6e343a8af6f4bb2093bb6c3f28395a2686..8c2b198dede03fd77f16786f8743313a34902e46 100644
---- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-@@ -11,8 +11,28 @@
- 		stdout-path = "serial2:115200n8";
- 		tick-timer = &main_timer0;
- 	};
-+
-+	reserved-memory {
-+		bootph-pre-ram;
-+	};
-+};
-+
-+&wkup_r5fss0_core0_memory_region {
-+	bootph-pre-ram;
-+};
-+
-+&cbass_wakeup {
-+	bootph-pre-ram;
- };
- 
- &dmsc {
- 	bootph-pre-ram;
- };
-+
-+&wkup_r5fss0 {
-+	bootph-pre-ram;
-+};
-+
-+&wkup_r5fss0_core0 {
-+	bootph-pre-ram;
-+};
+diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+index 4ea551b509bdff2541453046a54b2dc87720d08b..c57cff530089b2f4ca1db1e298259f64416eb9fe 100644
+--- a/configs/am62ax_evm_r5_defconfig
++++ b/configs/am62ax_evm_r5_defconfig
+@@ -105,3 +105,4 @@ CONFIG_SPL_TIMER=y
+ CONFIG_OMAP_TIMER=y
+ CONFIG_LIB_RATIONAL=y
+ CONFIG_SPL_LIB_RATIONAL=y
++CONFIG_K3_IODDR=y
 
 -- 
 2.49.0
