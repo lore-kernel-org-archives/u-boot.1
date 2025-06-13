@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEF93C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:22:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9824AC71148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:26:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28BF882D21;
-	Fri, 13 Jun 2025 16:22:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B049D82D21;
+	Fri, 13 Jun 2025 16:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ODpNix2y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F1vN+mVu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C22808AF; Fri, 13 Jun 2025 16:22:46 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id B264382D34; Fri, 13 Jun 2025 16:26:14 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25F5F82D21
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 16:22:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B41982CE7
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 16:26:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-4a58c2430edso23469661cf.1
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 07:22:44 -0700 (PDT)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-40667dc8a62so1097266b6e.0
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 07:26:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749824563; x=1750429363; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0H0Z6TfAnf1HziUyjB0xPxppXpTHY5o8Kc7xWphWHMU=;
- b=ODpNix2yiy1Kp81Ob6JCJ+zp7UDeX/5VPp0eNj+dz8SEUgvjtrM6hbh/GoJdNS0xdA
- WTROT+kIJS12wAV/57FzmF0oxBT6oIqBd6wvtXvMVnKxPPjhZT5XkZ+OFHtWrOzUS7CS
- Use4CrvI26ySchwtPAUe6fzoF3+lJyD7dKYP0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749824563; x=1750429363;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1749824771; x=1750429571; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0H0Z6TfAnf1HziUyjB0xPxppXpTHY5o8Kc7xWphWHMU=;
- b=shSmsBj35RyvcsJKd8TFulQJo+AabhIrksa7PyeSWJnJm2OmRyKLpVYrjg/akMZBgK
- VCv4xh8yz739B8YWmLV8sx8ewlVdzSL7x+T6miDfdsPNPR42wbUXup5LgCo0Z0T4PQTI
- xT83R+I7FIHWomgJodsFpuMM3DnapL/wVWOgHWQz4F2Bgq6Z4zZjc1fPwZIso6STC0DM
- U2I6hEMu9zVtuf189RvZHfY5KMC2VQk4e9eaVth3HfhK4fKShjvz2E3um29bXv5rkC/q
- mVQ2oq3bS7xPLzNbgSzphTiafuds4i7ltmzUqbIE8VsIYTWeZDqsWHXkn32ae0bdGzx8
- mk0Q==
-X-Gm-Message-State: AOJu0Yw0tGntTtYkiWnHGYUIQ23ARmHpjLUADtaaEzJY8ex15oBsGMBJ
- v1j83wyS/luSk5kAJ81L0k8eq/5UCbdCjs4s0lxyAMDFz8e2Q9syYAuPirm9MP8CmrgrHWwc15k
- /5dPr03Q=
-X-Gm-Gg: ASbGnctwHoWBqgWVzKi3uPcwsEKkYUQ/EUI1ZKVO+ZNlr0LQM2fpDI4o+dJgnCvNogU
- x89HQbEOywzsLV0Jh5WKgyAgpP3felCkVy7otggsbIKIn37CQ8S60dPs5jiW7Ug+rG/jBgz5zle
- toCbJ7XmrpLkEk5J1nW2kdGsVDW5tuhhm3R41ktSRN5gOwQwBO+APl3TnUT7IQ26W2ydYy4KHnd
- Gtxu7y8GaR7jCiveRq0WmVt98bo46xoKTDHUshnPWAGWzLSuvdhU9kAki3uoFnIeO2vLCt2ersg
- MCjT5Yoq/Y5OldIzGfKtX7vourHxQfMdBuG6J7xthKWB5kEB8edSeq5jj68Z1abG7EywEZ/vunT
- kkvZubPns6FzwZSqRqW8lNRe4dst6ZepuAg==
-X-Google-Smtp-Source: AGHT+IHd1len11Kulc9vVGPWtiibAYUe6PzUeK8DnSodiVGg3RhfeOfdlRXHHjQm1cTIaROlAh19yw==
-X-Received: by 2002:a05:6820:2213:b0:60f:1fac:b899 with SMTP id
- 006d021491bc7-6110ef6be53mr574723eaf.2.1749824551019; 
- Fri, 13 Jun 2025 07:22:31 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ bh=M9TnHoSUcRaXSsS/EwiQg9fZn35Lr6w2GasE1udY7u8=;
+ b=F1vN+mVu/1AOUUjYVJGKlBp8AXwMraIerV6Hz7+SMUvZsw0Gb85J1C0/nchYwWS+ZJ
+ Zjzph4F4Vr436xeImQOJ3JRyGpCI9lDKnAmn/qhQAgBnmpSMUf9hJhXVWXIhGJhX7Tjl
+ QWEeZ5OAlZOl/sl5CmlQHUA3IVuyBIGN8TthU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749824771; x=1750429571;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=M9TnHoSUcRaXSsS/EwiQg9fZn35Lr6w2GasE1udY7u8=;
+ b=d5kzJSqoRECIIdTpgSk1j21EtoG+MYqy+7krZmWS50gxFFyBWOqUr6wPj1kO740vSk
+ BwwK6gNtCzrIe77mhr1b++oobXqEiQFVweaLyekQZXVtBvG7ciMLmUyixn1T0jHY1b69
+ 8MISAPF4cRmJhtIgjangPMc1JnQf0aOz4wC5grSrKc/BRy7cIXMb/kmU7nlpCMgWjvxY
+ TTlDk/x8AxehrsW51EL0oVsfYFyIdW876tq+TtzVGIK3igna1aab2QenB55ZfRTjTYdD
+ c7cwclNub2cMKxyhS3qr7PMZuEmsB0Hcch2bTZv/6M+xQAl5LMbBHXjGJZkxvXaX3dgF
+ i8yA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVRALbeIt+dUU3VKPMwb9RnoWfJ/9gR7/NbaoHzN0Wxb+rG+EEB4yU/wm/dX2kvTp1xhIOpp+o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2/OzTaboyCUFlQFo4ZFiITW6miGhdTebA/DitZm4Dqp4nh21Z
+ erN5zrAEczCMqQoSnT0iR4Ockf4n3wuvViu75g8xOnZ0hTWke1kJmNXn9f4JluWVtL8=
+X-Gm-Gg: ASbGncuoAyI9WP+MZL6WKzmBPao3eDzdPO/5ULXCTedF3DHkbCbVlFbkb7lDTB7vd9u
+ IB7pRpo6RIesfs5jaJwMaEUG8GnUW/Zdo/IIRVrk9CFDL+Dl761EKZ4sCwWbMVDH32ZZxbSI0/j
+ MO0WCkcP/9Ehaa5DLHBgI+ckZvk9FkUoR8jlmwLW6LTrcwbQMLqz7d4EqzH3Cqk7dCSisVuhUOK
+ 8gGWPjpt03o4jqFVLozyANQ8r82p/lpA8RXimpJp/euawAmAoO+4/vLY1k5oofs0zuMXhI9Ikb5
+ /zdqhbgq6LdyNYZ4/0+bCYGOQOZWRe+vRjoPh88JZohDCbAsiRqocg8mplIYtdXhNP6OiQEZQeH
+ 4B+wolBvP4StaitvXOrj5jA==
+X-Google-Smtp-Source: AGHT+IE5+w0Li5hCvpVvZOWCmxpfvzxRKNIqwf1jSUX+0GHPffOylwX/rDfH1MftjBxX4aYtUODkkQ==
+X-Received: by 2002:a05:6808:3a16:b0:408:ee26:fa65 with SMTP id
+ 5614622812f47-40a71d6db3emr2374094b6e.17.1749824771043; 
+ Fri, 13 Jun 2025 07:26:11 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61108da6baesm182138eaf.11.2025.06.13.07.22.29
+ 5614622812f47-40a741727f9sm284933b6e.32.2025.06.13.07.26.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 07:22:30 -0700 (PDT)
-Date: Fri, 13 Jun 2025 08:22:27 -0600
+ Fri, 13 Jun 2025 07:26:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] arm: zynqmp: Remove local copy of
- 'dt-bindings/clock/xlnx-zynqmp-clk.h'
-Message-ID: <20250613142227.GW1382132@bill-the-cat>
-References: <20250612181128.340232-1-trini@konsulko.com>
- <5e694bb1-02e7-48c2-8b07-35882fff0939@amd.com>
+To: Sukrut Bellary <sbellary@baylibre.com>
+Cc: Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>, 
+ Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
+In-Reply-To: <20250530212232.1686613-1-sbellary@baylibre.com>
+References: <20250530212232.1686613-1-sbellary@baylibre.com>
+Subject: Re: [PATCH v2 0/3] ti: Add support for eCAP PWM and LCD pin mux
+Message-Id: <174982477002.479222.15604735181166868988.b4-ty@konsulko.com>
+Date: Fri, 13 Jun 2025 08:26:10 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mKejaX2DOAfjT0g+"
-Content-Disposition: inline
-In-Reply-To: <5e694bb1-02e7-48c2-8b07-35882fff0939@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,59 +98,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 30 May 2025 14:22:29 -0700, Sukrut Bellary wrote:
 
---mKejaX2DOAfjT0g+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This patch series adds the support for
+> 
+> 1. In am33xx SoC[1], enhanced capture (eCAP) supports auxiliary PWM (APWM).
+> This series adds the PWM driver support for the APWM feature for eCAP on
+> AM33xx. AM335X_ECAP0_IN_PWM0_OUT is used to enable the backlight.
+> 
+> 2. Fix build warning in ti-ehrpwm driver in dev_deb().
+> 
+> [...]
 
-On Fri, Jun 13, 2025 at 10:31:33AM +0200, Michal Simek wrote:
->=20
->=20
-> On 6/12/25 20:11, Tom Rini wrote:
-> > As part of the recent cleanup of dt-bindigns header files we did not
-> > remove our copy of dt-bindings/clock/xlnx-zynqmp-clk.h at the time. This
-> > is because the difference between ours and current upstream is that
-> > current upstream has a #warning to not use it and to instead use
-> > xlnx-zynqmp-clk.h. So we change zynqmp-clk-ccf.dtsi to use the other
-> > and upstream-only file and then delete our dt-bindings file.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Michal Simek <michal.simek@amd.com>
-> > ---
-> >   arch/arm/dts/zynqmp-clk-ccf.dtsi            |   2 +-
-> >   include/dt-bindings/clock/xlnx-zynqmp-clk.h | 126 --------------------
-> >   2 files changed, 1 insertion(+), 127 deletions(-)
-> >   delete mode 100644 include/dt-bindings/clock/xlnx-zynqmp-clk.h
-> >=20
->=20
-> Tested-by: Michal Simek <michal.simek@amd.com>
->=20
-> I expect you will take this patch via your tree. If not, please let me kn=
-ow.
+Applied to u-boot/next, thanks!
 
-It's a regular cleanup you can take it in your next PR for -next.
-
---=20
+[1/3] pwm: ti: am33xx: Enable Auxiliary PWM using eCAP
+      commit: 1bf82082b9e4f079adaffc1dcee5306b082dc760
+[2/3] pwm: ti: am33xx: Fix build warnings in dev_dbg()
+      commit: d0bcbf782f5909b36d0af705e95c5c8ad4092bfc
+[3/3] board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
+      commit: 04df37a095cb08edb865b218398550341a6118c1
+-- 
 Tom
 
---mKejaX2DOAfjT0g+
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhMNCAACgkQFHw5/5Y0
-tyx2bgv9Fi4AsZGPc2r6ah7BVMgRug3Www7dYiaoWMFuLYbsVm/BNNSspmB9aslH
-MejCXtCCHXZasejwwXXRaQ/Wq0JCfg31Fz3MzuY0AlNnCBBYGTwWtljwbWHuowuT
-/FPwXV6cIE9P5ejzG0r9W2sK+XT1lx56DodLlzLlEJFHsI/QeuuS/IfbTXsAxFcQ
-RV5iL/J9+XtAn4rdDoUD/6Sgoeaz49VQxhqrFA5ACkMMIjZF41m+0pmupfQZU3yD
-zmxJ2yJtnOi/Vc/GSVflq7pM+flIGTv3Fcth5TYxeeqi1EadVfzAyDrsbJGweYyG
-eVQnlgjlEiMm0fL+HMwvU0iHbk+WRwNUBpn/bun7pqeGVUl9YZbZW5074YlZgFI1
-tl4SCRNgBzg2B9y2I/wdY8pN8mDCz/z6tEyiEQo2T09CmJbUufuKDkct1YmaAKj9
-oKHNMhimbZQ36sQNTmw4CKuCXC3ybnDIRYwkS9dV9gfLs1bkPJdSPy2d9lVEWFEy
-d3rQi+I2
-=s0F0
------END PGP SIGNATURE-----
-
---mKejaX2DOAfjT0g+--
