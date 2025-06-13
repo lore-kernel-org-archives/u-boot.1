@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A812C71148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9BF4C71136
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 14:01:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9538F82E27;
+	by phobos.denx.de (Postfix) with ESMTP id E4B7A82E36;
 	Fri, 13 Jun 2025 15:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="nXRjUOVC";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MrgzV/qn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB04F82CA8; Fri, 13 Jun 2025 15:22:07 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id C1C6B82D18; Fri, 13 Jun 2025 15:22:08 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9497682CA8
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:22:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA4C082C30
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-adb4e36904bso410711966b.1
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 06:22:05 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-605b9488c28so4044709a12.2
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 06:22:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1749820925; x=1750425725;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1749820926; x=1750425726;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6KIQw+Uv46Cr/zzsV+8knw+9fKTqnWu6VRUpXsnKwyQ=;
- b=nXRjUOVC/oRMzro9UE1R0BHR5h9qc58JeYqc5GJek7fjJiVcNCEQ+xCrG/MXIIFjWB
- uTpfhRGpxgX4zEP8ZtP7Mwoov0oaXOBqFSK/tV/x1Mjm2T3+ubMHRIh4uZWS6+BYITLV
- j0A2jv0NDlgJuF5H3XPL0pyc0gLv99XZ/DWnlC1iCT7Y8fm3oXHHZXy7vRbGi4Omo7KZ
- 6Iwu9nQG2/6fdI24BZohp1dSg3WfwnzKe2om+DllyZ2Kx8fXvBfzwyy4mif9X82YM/jd
- RRNb0yE0QcJIVXef421uZFC0dl9NndCPA6EsEG//J2cdyG2OzCJcNYVy7t1D2HfG2nqD
- /Itg==
+ :reply-to; bh=6H9CuxWdlmzJkhdA2JO8EKexK6zKHD7kEQrPErAWKpM=;
+ b=MrgzV/qn3c/0ZDdhdSTmsZkph2k3eMEohTY8E0j/G5HnRp0CD6iwVp8Ohd+8UxzbDp
+ fVRF/TohSIMvnXptTExq+/fWGUFYiNFJO3J4ZMwW1tlDWnXCfYDaFz/ZTSp/qGoB4DJS
+ W3tbuOKXEUdThEDFiZDDPaCvU9DNkOuKVJY+lXf9ZIvSWg+5e2yfs/4VK/vd+Wqojwqs
+ N3Sf0qBt6PfrzaCUPbhBpiNwaShbIbDAZvPXt33XH/WYaGetMzBKP7IBIj94qjzFNlus
+ Y4ScdA40C6iZZZ2veqbJNdHH34d1+MV/KyT9CU0wiiiPuECsxbh9L2S3avoi8gA+irB4
+ tvsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749820925; x=1750425725;
+ d=1e100.net; s=20230601; t=1749820926; x=1750425726;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6KIQw+Uv46Cr/zzsV+8knw+9fKTqnWu6VRUpXsnKwyQ=;
- b=Hr/lwY5YmLC/iC82ThlaihK8bHrB6Jjb+goAdEIVg/3IcQsS0qJ4/Uxr+oyOhjUTBE
- BVbC78p5X6hMDqiM+yWo7fQZJo0i61u5EVnO5wPoUtXutvlwplFWZWL5BbxTglhPANJD
- 1/cE0SctYH1ggz5luN7bxs27UesZ6Y3mSMZ434LaNrXRfzwNCKMh7IK2F386xhQgFliC
- QBEjzLSBmMXXTRrXyexjgmALAY+zhDH2wniBgRgSVIrE6xcLp7gwgX3a7lwHbwwzwwuu
- JZcU2Rdse3tx9RX/xSi0x+aqeTJiSOrwa9Zo8d2EAUA21NgG/ugAbx4iszIV8YSvPfre
- Qlug==
-X-Gm-Message-State: AOJu0YwOj6XQ3KcDY8hu9bZ+RN0cpxReCrcQ2cGRzPff5cmZWuZw6nea
- /9xrCZFNmoAwf0NrHjE+vSTIMUNcGGObqAT8AHxltZk02GUhOV8IrLeuf9ZtZVjOeeqOGUjg6qy
- e6IAG
-X-Gm-Gg: ASbGncsvRmUTTWcNpieIOUHYqzZLp7XiROUhHXWrO7Zb6yIDguF0yruajUEf0TMBYGx
- SCqOiZBOl2lqBKGSInbWY74D1nqjP/FvXw5nKPaeTaxay3ifOP84g74I+K6BE2zVFYMtHDxPNmM
- rdtH+3wdTF+rK6+iaFGVQUwV9RGZ4dCNVEst2OOpbGvJmuSm/XhWkMvvYQ3dWhjSvfYWio8g7Cr
- ytR12JKx3d6B3sU3Hm9dZ/+k40k9NIk8hPiLm94czD0ElsD8+LUBo+wgzqx2Oo7V5WAK3S/cXnS
- oTveF03LvXURESpQqmvczHTC2VaDAVLPRv8rtkk+b+XowW2fOUAHmW6/oT0=
-X-Google-Smtp-Source: AGHT+IHUa+zndOQYWkHA/5hwRwAGSFuTPKwEPyTw5l8O4vM8IQmJSwqf865/l89ArJFLrAn/UlEcZg==
-X-Received: by 2002:a17:907:720a:b0:adb:300a:bcc0 with SMTP id
- a640c23a62f3a-adec5d184e6mr306712266b.46.1749820924980; 
- Fri, 13 Jun 2025 06:22:04 -0700 (PDT)
+ bh=6H9CuxWdlmzJkhdA2JO8EKexK6zKHD7kEQrPErAWKpM=;
+ b=pdjCRK1J+0voDTAxaqJ1+S/SMn65K9exeZdLCSR5pLa7H+GbuqWOfYSeS2pu+ffoyL
+ TKcXyrmBhTJxjMtRgZchTj3b24JzU3HpJQsUWN2747UwKN8A7LvHCKXAblmYR1ILS16v
+ BqgiAq1MXF7EPR1RgowFmXlEsP/gphFBzQvr0R05a05ZiX9kLvSIJWRnl3pGgUSIfA37
+ or4mfyC5/ahNiaB9JKR+DBl6mRWfBhC88J5oZ3454CVYbk+qjYIZNd7TzIlzVhE5X0nV
+ rA8Kh70hLDJ64v0uBsGZ7PMi0Uo9IhX1T7WLLEQK72qp6xUnIA7kVssgRzMwElF/YOql
+ 6tCg==
+X-Gm-Message-State: AOJu0Yzs6/pDIFVZVahXqeFV5oo3O6qD+TXWCZCkAZZ98bX+tnKg7sLD
+ ebIetix7i5LwEXd3UQbcjOCyTLioQ/1w9Bgz+t/1Ne23Uol5dSZzPpo1Ze/ThVfyRp8ARx4vGo4
+ MOl/8
+X-Gm-Gg: ASbGncvAix61hcx8MM61g0oMd0Bd/rcoEGvNIm49pH/Xoo303oyYNiU7EcJ5M2vfe6t
+ Uvty9OAnfQY5H5SRsAgFPdep1SI5nn+ow2GtJKOl9S0esZfS+dNXhfcXq21FaISw8TZdsyNko7P
+ fbwcqqexEFKFTrTZxMIthxVohKLS9PCObi9gzWmpEJKHQi73N7zq+hiGQXtrmQgR2uRFBw1r9w3
+ IorOjnw/jvUsiDdTrc6qCdxnFgGGgEQXohGYkcgKh8Ola363QoJ7ysOav48d9x7s6l8Nf3w2587
+ 9oUBd4SQY1YRLLI8OF97yuomJI0o1yPnV2XKA7aY1BxKX8CJg/9K8aaZaCk=
+X-Google-Smtp-Source: AGHT+IGgh9Ay+v3njj05kRltDcB+LCEXHnDL/8433AwJv8eNQ/wivRlWc3hSO/5ILaZl6S6y44eZXA==
+X-Received: by 2002:a17:907:86ab:b0:ade:f72:435 with SMTP id
+ a640c23a62f3a-adec5cb5a0cmr292510166b.36.1749820925991; 
+ Fri, 13 Jun 2025 06:22:05 -0700 (PDT)
 Received: from localhost ([2001:4090:a244:83c4:9fe4:a128:a20c:8b84])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-adec81c729csm129963766b.67.2025.06.13.06.22.04
+ a640c23a62f3a-adec88ff430sm127588966b.105.2025.06.13.06.22.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 06:22:04 -0700 (PDT)
+ Fri, 13 Jun 2025 06:22:05 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Fri, 13 Jun 2025 15:19:30 +0200
-Subject: [PATCH v2 10/22] arm64: dts: ti: k3-am62a7-sk: Enable PWM
+Date: Fri, 13 Jun 2025 15:19:31 +0200
+Subject: [PATCH v2 11/22] arm64: dts: ti: k3-am6*: Add boot phase flag to
+ support MMC boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-10-3d233aaea355@baylibre.com>
+Message-Id: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-11-3d233aaea355@baylibre.com>
 References: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
 In-Reply-To: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
 To: Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
@@ -86,12 +87,12 @@ Cc: u-boot@lists.denx.de, Kevin Hilman <khilman@baylibre.com>,
  Kendall Willis <k-willis@ti.com>, Sebin Francis <sebin.francis@ti.com>, 
  Dhruva Gole <d-gole@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2100; i=msp@baylibre.com;
- h=from:subject:message-id; bh=Jwj16kUOyZJPaHTGfluQFB4SG1hmfBPBs5J6+uozIEg=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhgwf1dWXSrS/L46733vLunKJ+UWnQuW4228E/Msj4s6bM
- gtV2s7sKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIl8TGZk6Dkf5BMee/B8SMFr
- w773S776SyYYr4w6xLk9OF+AW7XThpHhu8CZQBZjqWafmPf/sze23OhYUCKWH/rnxAK/K5khGsE
- 8AA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2804; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=NcZcYBYrQvdQ6LTTGn8XgXpk6Hl0VLAtIHLR+fBjbtw=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhgwf1U3x8wQjZ4t/YS+vLk7792WBLI+pXLLG/Ynr79/8c
+ nHtgUsPO0pZGMS4GGTFFFk6E0PT/svvPJa8aNlmmDmsTCBDGLg4BWAiEy4z/I+ZzePRwDjZ5m/i
+ oanTDk85OelzjBXfmXeHCuxqSh/tE3Vg+KehLbQ//9jnZ+wzX6wz2rlp1vxp3qKPtex1PjJ9fRL
+ 96RQ7AA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Fri, 13 Jun 2025 15:59:32 +0200
@@ -113,77 +114,98 @@ X-Virus-Status: Clean
 
 From: Judith Mendez <jm@ti.com>
 
-PWM signals can be routed to the user expansion header on am62a7
-SK. Enable eCAP0, eCAP1, eHRPWM1, and route the output PWM signals
-to pins on J3 header.
+The bootph-all flag was introduced in dt-schema
+(dtschema/schemas/bootph.yaml) to define node usage across
+different boot phases.
+
+For eMMC and SD boot modes, voltage regulator nodes, io-expander
+nodes, gpio nodes, and MMC nodes need to be present in all boot
+stages, so add missing bootph-all phase flag to these nodes to
+support SD boot and eMMC boot.
 
 Signed-off-by: Judith Mendez <jm@ti.com>
-Reviewed-by: Bryan Brattlof <bb@ti.com>
-Link: https://lore.kernel.org/r/20250422000851.4118545-3-jm@ti.com
+Reviewed-by: Moteen Shah <m-shah@ti.com>
+Link: https://lore.kernel.org/r/20250429151454.4160506-2-jm@ti.com
 Signed-off-by: Nishanth Menon <nm@ti.com>
 
-[ upstream commit: 5aec1169b53969d07cc288814f7eebd2ef01f9a0 ]
+[ upstream commit: db3cd905b8c8cd40f15a34e30a225704bb8a2fcb ]
 
-(cherry picked from commit 16c71470bff15f5ea677edebe3cba8a2504dc5e0)
+(cherry picked from commit efc9013586bda11485bbc190592bd25d83d0c1bc)
 ---
- dts/upstream/src/arm64/ti/k3-am62a7-sk.dts | 40 ++++++++++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
+ dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts | 12 ++++++++++++
+ dts/upstream/src/arm64/ti/k3-am62a7-sk.dts  |  2 ++
+ 2 files changed, 14 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
-index 1c9d95696c839a51b607839abb9429a8de6fa620..a9557ee73b8311087db9ce9cd9596efb8bb8975d 100644
---- a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
-+++ b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
-@@ -383,6 +383,25 @@
- 			AM62AX_IOPAD(0x07c, PIN_OUTPUT, 7) /* (M19) GPMC0_CLK.GPIO0_31 */
- 		>;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts b/dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts
+index 8e9fc00a6b3c7459a360f9e1d6bbb60e68c460ab..aafdb90c0eb700b554c6c308be6c1732d0459a8c 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts
+@@ -69,6 +69,7 @@
+ 		gpios = <&main_gpio0 31 GPIO_ACTIVE_HIGH>;
+ 		states = <1800000 0x0>,
+ 			 <3300000 0x1>;
++		bootph-all;
  	};
-+
-+	main_ecap0_pins_default: main-ecap0-default-pins {
-+		pinctrl-single,pins = <
-+			AM62AX_IOPAD(0x01b8, PIN_OUTPUT, 3) /* (C16) SPI0_CS1.ECAP0_IN_APWM_OUT */
-+		>;
-+	};
-+
-+	main_ecap2_pins_default: main-ecap2-default-pins {
-+		pinctrl-single,pins = <
-+			AM62AX_IOPAD(0x01a4, PIN_OUTPUT, 2) /* (A19) MCASP0_ACLKX.ECAP2_IN_APWM_OUT */
-+		>;
-+	};
-+
-+	main_epwm1_pins_default: main-epwm1-default-pins {
-+		pinctrl-single,pins = <
-+			AM62AX_IOPAD(0x019c, PIN_OUTPUT, 6) /* (B18) MCASP0_AXR1.EHRPWM1_A */
-+			AM62AX_IOPAD(0x01a0, PIN_OUTPUT, 6) /* (B20) MCASP0_AXR0.EHRPWM1_B */
-+		>;
-+	};
  };
  
- &mcu_pmx0 {
-@@ -741,3 +760,24 @@
- 		};
+@@ -77,12 +78,14 @@
+ 		pinctrl-single,pins = <
+ 			AM62X_IOPAD(0x07c, PIN_OUTPUT, 7) /* (M19) GPMC0_CLK.GPIO0_31 */
+ 		>;
++		bootph-all;
  	};
+ 
+ 	main_gpio1_ioexp_intr_pins_default: main-gpio1-ioexp-intr-default-pins {
+ 		pinctrl-single,pins = <
+ 			AM62X_IOPAD(0x01d4, PIN_INPUT, 7) /* (C13) UART0_RTSn.GPIO1_23 */
+ 		>;
++		bootph-all;
+ 	};
+ 
+ 	pmic_irq_pins_default: pmic-irq-default-pins {
+@@ -118,6 +121,7 @@
+ 
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&main_gpio1_ioexp_intr_pins_default>;
++		bootph-all;
+ 	};
+ 
+ 	exp2: gpio@23 {
+@@ -229,6 +233,14 @@
+ 	DVDD-supply = <&buck2_reg>;
  };
-+
-+&ecap0 {
-+	/* P26 of J3 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&main_ecap0_pins_default>;
-+	status = "okay";
+ 
++&main_gpio0 {
++	bootph-all;
 +};
 +
-+&ecap2 {
-+	/* P11 of J3 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&main_ecap2_pins_default>;
-+	status = "okay";
++&main_gpio1 {
++	bootph-all;
 +};
 +
-+&epwm1 {
-+	/* P36/P33 of J3 */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&main_epwm1_pins_default>;
-+	status = "okay";
-+};
+ &gpmc0 {
+ 	ranges = <0 0 0x00 0x51000000 0x01000000>; /* CS0 space. Min partition = 16MB */
+ };
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+index a9557ee73b8311087db9ce9cd9596efb8bb8975d..22be41d46eb519917516fba5f2439bdb492c46f4 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+@@ -313,6 +313,7 @@
+ 			AM62AX_IOPAD(0x1fc, PIN_INPUT_PULLUP, 0) /* (AD2) MMC0_DAT6 */
+ 			AM62AX_IOPAD(0x1f8, PIN_INPUT_PULLUP, 0) /* (AC2) MMC0_DAT7 */
+ 		>;
++		bootph-all;
+ 	};
+ 
+ 	main_mmc1_pins_default: main-mmc1-default-pins {
+@@ -634,6 +635,7 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&main_mmc0_pins_default>;
+ 	disable-wp;
++	bootph-all;
+ };
+ 
+ &sdhci1 {
 
 -- 
 2.49.0
