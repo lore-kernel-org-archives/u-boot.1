@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B42F7C71135
-	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 12:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5709CC61DB2
+	for <u-boot@archiver.kernel.org>; Fri, 13 Jun 2025 12:04:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CECC82CF5;
+	by phobos.denx.de (Postfix) with ESMTP id 6468F82D17;
 	Fri, 13 Jun 2025 14:03:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="BlH7Ffub";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="UkzyvweM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CBC582C84; Fri, 13 Jun 2025 14:03:26 +0200 (CEST)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20718.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::718])
+ id E5C8582C84; Fri, 13 Jun 2025 14:03:26 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on2071f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::71f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 571E882CBB
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 14:03:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B21BB807B1
+ for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 14:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=In07rATFzDK8Hr7GL801Z5I/iD5L1FYvz9a0FncuiUj/UvbHz+/YZOj2GkIU24IkslvH5R6QrhKVuhvrCgBnH2FyeIePdyKX2fAZ0VS9rJ8I9rulAEA0UTU990AdX/t5m+TLisSQoXauoBw2YyZJzGga1ADcIVALfh6pktkP7n6PkuztSk4IsjQtxIIu1T6lzJZPAmuDhMUeYKm2rO/azXix2xU2YqdCeG57SHssnotSHhwXq5SYsGHPribFKAfjquzQxBOGSgjZLZf86e3goWRH/GbGmQ7oXMZSoJpkBSEvcJH1BTnVf9kirBQg1gTXFq3QTe6iXQX/PFzmJcR4Rw==
+ b=EeV+3mOGKh7AJtgowppM5G2cWDQW6jsE5uhYnR9QLtL+t8Hv03KNITVRa4pscr07wBi9ihNusj+it8mhclH3hKc+aXrxBalx8R2aZjdJglKIAxtONwrzU8mA0vahYytV8ORfzVa5rUxkdcURON4o6/9/0IrQGNMfK+HIscqbuyDtkFm4QodO3XN55y1r2G52SpT0qv555lbiaYcWHoEgKLmQjqIfoH3ZbMuXFEHepwcW3G7EhVxUOyZafeXfUGCJad4FWWoCe+ath+g3ndjxCS1I7vYRfZzQlULsmTFxwQLmOcrwAopCGcEiWd2GeLbvegxZ+JJcxTD03mzN/u5F1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rPSVHBy9bk5vTGxdyYEdlt8LIZrUXYptD9m2jAaArB0=;
- b=oSGzQzBznsEGTVE8sv5F1LLU+RQcLzm0gr1Y6JGiufdhGzTDexaqz4ozvjT9T82IrOoELgogRR05pGSC1LEB+uGz24r/bWX4kGnDg34eWvmRg7rbmCrVR5Lt+QHOSQ32/pBGPEyqF+4lQHPP7vjnUCbAqZ7mGHAlZIXc8dqUnoZjcjh/taOMgiLr50bS2nDWim2gmRFtaT3RBdPBsMZTW9E/TRw7mlKHcc9RfwlkaL8A+Fiq/54z2SZwaGX0ms7h+qHxBKXXtyiq9HbhWGCtwvkfvmvF2h1AG+CVbSeid5xrAwhRjTPiNDAtgnhnVVMqq+woftEKenOHSzfbO1Cg7A==
+ bh=7CzKRlKJSqMDCbF1HZGYtWrNjDDcotLLIwm1k30VYwA=;
+ b=iL93QkmboPtXYkvWrOf/KLzdajMxT8nC0GKVMhKlDjQMO5bSsCJ07CBo9UsAM9zTJg4fQJrGxJJbp/mNFB+BdR5SMFuGp1V3wuhyEFl401E7bCU0OCSzDH2sMp8IBg7G5ePyR3TUYXSW9LOVdzH+NC+NMzUJ/0h6r6S76gtlY+nrloJC6I+9IZFTEd4ddKD7Qv9DA3UFgjS7ZCBl8YLt3+zcjT6TmPnrR0k8bicHM98zvBFg3hKf9HxBBUew7jq2ZcyWP3oxM+RdTpi1JKU8pTpytWSvH4cAJ9zOBdovrLWJJPpSxcNTMTCRbSaz0d4d6Q5+7nwY2ZYGH4EhM1rouw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rPSVHBy9bk5vTGxdyYEdlt8LIZrUXYptD9m2jAaArB0=;
- b=BlH7FfubwIlipwjQeUr6izxG4doRyvtoAxQfyJ18N/azrF5O/UUPGPh0oAUc2J9X/1TLHjMuu1dvwBPPGRc6qPEozOdAfCbakd+b8bUULTBf1QYvQOPZvV5UGvYShOZZWPGAswBFGA6qiF+FJ/PjlLXSt3UYbpoAiAl/mfykmyuEP/QgJWiXq/eYLOz4c9L6f/KZIVXmXUfkVZPZVx2yB5V/yZXRQ1kDyj260bHhxCiwP3U8PUIsnMSlz3TxOFAJxaR1QUz6pirJSL2Y4OcgkRZTFt1Kl4IvPlRizU+sY1MMx+xym62VnU8D2CCg905UiVzTYvSDXUoW90o3LKWfpA==
-Received: from AM0PR06CA0142.eurprd06.prod.outlook.com (2603:10a6:208:ab::47)
- by PR3P195MB1022.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:95::24) with
+ bh=7CzKRlKJSqMDCbF1HZGYtWrNjDDcotLLIwm1k30VYwA=;
+ b=UkzyvweMURAfly3YX0uSyh8Gm3z4wlTZsjgq7OVLWHKt3jKT0N+Xxe5SWVwaAdgl9sELpFIHSaRYzsFofJvBE+8yUaNMm820Pn71G4+GlRXKN3YaNgJV8BnQYQw6AekYp6I6II6kWfCYGrcWAcisqBlaznOc9c3Ayg4o3c6GrS/SgT1HuOczy9w0zOev5dqfsORRgRdhmGxbEhWwQVZKWicY7IUjcGrXjV8YMj2RuoGD7IAwOcj/nVM3ZbH68gxv7/H4FlTZnsM4JrP3wCLQ4W6x5t/tZGBzw7loYa3gmDDEHaLwzvEyXkxJmebHEKG6ij1BtqajLyPXb3m6YzJHBg==
+Received: from AM0PR06CA0121.eurprd06.prod.outlook.com (2603:10a6:208:ab::26)
+ by GV1P195MB2103.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:a6::21) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.18; Fri, 13 Jun
- 2025 12:03:19 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.19; Fri, 13 Jun
+ 2025 12:03:17 +0000
 Received: from AM2PEPF0001C70B.eurprd05.prod.outlook.com
- (2603:10a6:208:ab:cafe::21) by AM0PR06CA0142.outlook.office365.com
- (2603:10a6:208:ab::47) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.22 via Frontend Transport; Fri,
- 13 Jun 2025 12:03:18 +0000
+ (2603:10a6:208:ab:cafe::9c) by AM0PR06CA0121.outlook.office365.com
+ (2603:10a6:208:ab::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.25 via Frontend Transport; Fri,
+ 13 Jun 2025 12:03:17 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -60,35 +60,37 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AM2PEPF0001C70B.mail.protection.outlook.com (10.167.16.199) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8835.15 via Frontend Transport; Fri, 13 Jun 2025 12:03:18 +0000
+ 15.20.8835.15 via Frontend Transport; Fri, 13 Jun 2025 12:03:16 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 13 Jun
- 2025 14:03:17 +0200
+ 2025 14:03:16 +0200
 Received: from llp-moog.phytec.de (172.25.32.81) by Florix.phytec.de
  (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 13 Jun
  2025 14:03:16 +0200
 From: Yannic Moog <y.moog@phytec.de>
-Date: Fri, 13 Jun 2025 14:02:42 +0200
-Subject: [PATCH v3 3/6] binman: rework dropping absent entries from
- packaged image
+Subject: [PATCH v3 0/6] Fix handling of optional blobs in binman
+Date: Fri, 13 Jun 2025 14:02:39 +0200
+Message-ID: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250613-binman_faked_optional-v3-3-1e23dd7c41a2@phytec.de>
-References: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
-In-Reply-To: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
+X-B4-Tracking: v=1; b=H4sIAF8TTGgC/3XNQQ6CMBAF0KuYrq1pp5SCK+9hDGnLII1aCCWNh
+ HB3C4nRDcs/8+fNTAIODgM5H2YyYHTBdT4FcTwQ22p/R+rqlAkwkIwDUOP8S/uq0Q+sq64fU18
+ /qUzrRrEsR5Ak3fYDNu69uddbyq0LYzdM25vI1+lXLHfEyCmjOpMiMzZX1phL304j2lONZBUj/
+ BQJak+BpAiRgzZFqWTB/5VlWT48NmUDAAEAAA==
+X-Change-ID: 20250122-binman_faked_optional-5025f7046e25
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
  <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
 CC: <upstream@lists.phytec.de>, <u-boot@lists.denx.de>, Yannic Moog
  <y.moog@phytec.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1749816196; l=9517;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1749816196; l=3102;
  i=y.moog@phytec.de; s=20250509; h=from:subject:message-id;
- bh=30NcHxGk2S58y5OJy6A5SCZKhr3ADaY0x4Tksca91KQ=;
- b=Err5+eB7EKdsQ113TUdClq81PLYKFuYa/B7fec44gQZYC/lpkoZlMIA7ZuhPjt1YpHWbUDXzH
- Y4NbXS0E+kpAoXaoMWpmRo3BiBQ7EmzwfJWV4Kna4KQycHOgBETwtXd
+ bh=sXP9S1KnHjvw37SIYuJskE5jGpOhWUD+eH0poVVdQGM=;
+ b=uQsPVMfJu5DKoNU2Q8VrZ/MNpGFV83DUGUcobEXITkz6561hS/eIizJTnWZX1fQmbUu7cKPC+
+ ktyg8Cst1iEDhE9T7nfOyjNE+kaLbQfivzjbH1Y333IEyypTGcz//J/
 X-Developer-Key: i=y.moog@phytec.de; a=ed25519;
  pk=rpKoEJ4E7nD9qsrU/rfKVwMTWNWYaTBylZuJUXUiFr8=
 X-Originating-IP: [172.25.32.81]
@@ -96,61 +98,61 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70B:EE_|PR3P195MB1022:EE_
-X-MS-Office365-Filtering-Correlation-Id: ec54a686-079b-4689-a7fb-08ddaa72494c
+X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70B:EE_|GV1P195MB2103:EE_
+X-MS-Office365-Filtering-Correlation-Id: f95eea5e-06f9-4275-19f5-08ddaa724828
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzdSczlLdXVSd0VXN2kxa2NwK2FTbXNBRGVSbHNXdFNXN3RvNFZPMVZOZUxE?=
- =?utf-8?B?aEdWc25TY29rRHc3V01DMW9hTlltSmgyZ2Jua2dTRjd3V040My9adHZndmVW?=
- =?utf-8?B?dVJzcXlEa2d6bGdLR3JFWlRwTzlKbUpGWlJ6QmIzZEFqR1ZRdGZQOVl6STF2?=
- =?utf-8?B?N3BKalpmckQ2TmtxVnByYlh3QVB0Nk9JMnIxQkt5Z3dnUXJvWktNcVlhOUl4?=
- =?utf-8?B?eklXS0RiTnZBSmNuRi9MenNuTXJQNWFqY1FSa0pSSURldXdBN2sxcU80a2xI?=
- =?utf-8?B?UHZpSGU0R2pxRmx1aUdlK2ZqUmNMZFRCQ3ZIWUtTMDZPVTdYMld4R25naVMx?=
- =?utf-8?B?RldNTTNBclg5Nllob0FYNE1TbHpCUHZpTXdWN3FKOWczaWNvNE40dndBNXRD?=
- =?utf-8?B?dU5QRWxoalJnT00za0lEUjFBME5TdWdRWERwa05tTzFtVkliS08zT3pXeWJD?=
- =?utf-8?B?N3I4SDlRTXZsYWdZcHY5TlVSY01SWkdLTnlvc1dtRjczNEx1Tlkva2hOWWli?=
- =?utf-8?B?bHdIaTZRR2VIN1F5MjFlTmM4NTN2T2JRMnJ6RmNzN2N5WWFPSkt3S3FQQjVs?=
- =?utf-8?B?WWhFVGNyMml0YVUvbWFTL2t1c0J2VGZRV1dZSlY0YkZxMms2UFgwc1pUSWJK?=
- =?utf-8?B?QWR6d3dJaENjU0NtaFJ2OEJQMWpnZEFGM1BrSUVOZFk0YW42ODk0ejRLRVZO?=
- =?utf-8?B?b01wdm9ONVJpVVowNkUyaUhNTjdRaDlUTWFQUHRXMFVvb2FqVmZvY2JVK05v?=
- =?utf-8?B?aXlETzVIN1ZTbU8xVUE4OWFURERKZUpWaW1JMUZLUlNHQkJ0bGhiNk1UWjJK?=
- =?utf-8?B?bmgvYjMzMjBEYThyTDVtUWxBc0hwZHNodFcwQXQ2bTVpbTRPelZaTi9heHdK?=
- =?utf-8?B?NnA1RmIzL2tYQnRLYW5GVG1sdnhJTHhLdTI5UVRTQ0pmOUV4YnhLdFluUGRh?=
- =?utf-8?B?WDZRTURMRGRmaDVNL1hPUVhTT0NzRWpjRXNpU1FkSFhJL3hhV3ZjTlI4WDFZ?=
- =?utf-8?B?a3N6dG9wZlBxdnZvM3Y0ZkdlWWNBOUFrU2Y4VnVLa0R0TUc1QXR6VVpqdFVr?=
- =?utf-8?B?WUZ4NVpmWmNrVFFVNGFDVzlNd0pZbTEyZ2sxMFNoUXdWQXFwWUJ4WmdNL1Z2?=
- =?utf-8?B?OFhzNVkwZ2xjOXZmQUhZZUs5RkxlTlo1bXczYzNYOFcyVlJwZnJBRzdOb3M4?=
- =?utf-8?B?REQvbnZGdHJESXF1VmxLWTF3VklncDFFOTRvU0dYdnBUTzlua2F6aWFVZiti?=
- =?utf-8?B?MGI2YVZid3I3WHNRemJlaWNLV1RpZDlTc1gvK2E1aGFZUFRkNDhOVkczdlpo?=
- =?utf-8?B?MmlQWitKcDhCNDFmZDFyMlZHaVkxZEVKaWUxZFFIemlrVUNNYy83ZDBFbzBi?=
- =?utf-8?B?UjNNM0t0aGZkUk8wUGMxTGs1SHN3TTUzTGViMzVzSWZ3cnJlSEVZTlkzcHN5?=
- =?utf-8?B?K0FPOXZVSFRmcEd3TVFUUXZJcCtDS3JUeE9lM2RRL1JKU000UHh5QWZWejFT?=
- =?utf-8?B?azJaYmNsL1VCTWRBNUtURWI5MVJHRUtCZFZCd1hwZkhQSTJyMUdKOEhlTFFX?=
- =?utf-8?B?R0lXS3FXSHNIK3ZXQzFMb3UvS3Z3MENPcy85TzNPZG41VG1VRTQySm9mbjRW?=
- =?utf-8?B?VkhlN2dqbS8xSTZBcmxHYkk2cGgwWWJOT2t3eXJOTTNTeGFPVTIxWjR3UjZK?=
- =?utf-8?B?aXRVTVI0VmdNQ2M4dm0zUUV4VENrMzUzVkVVV3BYUEdhQkwvTU9OaHR1bFFK?=
- =?utf-8?B?VTFUU2c1UkpRRVJhMklkZXBxZkRLUVVlTGVPKzlDdU5LZXhMU1ZSNEdIdXNo?=
- =?utf-8?B?REMwYXRha293Wnd2dDBCMFFoZ3kyNkFrTVRrRXNpRGkxWTVoaE5FNUt0UkFF?=
- =?utf-8?B?RFdrbzA4TzZpQkRBNmlaczZUTVNKa0FoUTFCNmYvZy9NY2hrOFpKNUpvNzR3?=
- =?utf-8?B?VTZLVXhxdE1iM011R2tBTGFnaU9DV2RPd3l0VUdaOGY2Uy8xRHFCM01WSkU4?=
- =?utf-8?B?T3VxRDJDS3krVjlsNkdKeHkxem5XMytjY2dtYm8zMk84L1Q3RlVJeVNGV01k?=
- =?utf-8?Q?X+AjmD?=
+ ARA:13230040|82310400026|1800799024|36860700013|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a2xtZ2NqSXJtdlpxTE9ENDE3N2Q4bkFlTG1zajlvUG8zQTUrQU5nNnJGWDNo?=
+ =?utf-8?B?Nys2c0piaDlad1Q0cklYUmFMcGxuZ05OeXZhdjVyVEpsd3crT0o0VTVMWXNy?=
+ =?utf-8?B?TGtZa3VucjZuSm81ODFCbnJJR3p3dGJTdXNoRjY3RVhBNkRmWHk5UzJ3MVVi?=
+ =?utf-8?B?VWZ4NWxITjE4amFRZlBYT1FFa2hKbk9hVGV2YWVzMmZCVTMrM0RqVW8ySTds?=
+ =?utf-8?B?VUJCSDhTTnU0VzVTZlBaem5PTHpyQncxbkF0K0JMQXJPZ2dvSUVZazBpaXRV?=
+ =?utf-8?B?bDhSVy9ka1hUb0ZWWFVrY2FRMXQwSXgzUE5QNDErUzkzenU4TkZ5T054cnc1?=
+ =?utf-8?B?NlozTno5K1owSGMrV2lCNlR0bkEzTnRqcC80NUVBRnJGQ1lBemh3Y0YyNkhM?=
+ =?utf-8?B?Y1gvREV5dUJGUEFjQ2ZpWi9HR3ZuaEtacWtFeXN1YnhpM2IyNkk3N1paTGUv?=
+ =?utf-8?B?dWJ6UFlxU21BNUx4bnh1ZE5hanhGbE81TE8wYnNpVG9xSzUvUVhYZHNaSER2?=
+ =?utf-8?B?aDcvelFRVUsyM0d6U1lWVXl0YitRdjZwNWF3L2k0aVoyUkVVWERjUFlwQXJq?=
+ =?utf-8?B?aFNHQ3BlMmE2cGdWeUFxMjBtT3VNeURaTmxyQnV5ZURXMTYxT0taTTJNZzZ5?=
+ =?utf-8?B?ZzJUWFQzcGJGT3ZuNkFyVVE3ZFhHTi9EQlNuVElLNG9jOExCayt5ZlBmdm1Y?=
+ =?utf-8?B?TmkvUlZyTkppdEJncmZtU1BxNGVValoxcG1xUzNEUFJiMVNHR3N6L2M1VHYy?=
+ =?utf-8?B?TGQ4aGJ5RjlnV2lVRktyL1BhcVlDbU9Jem54RWE2OERPRlJuQkthTGVWVjU5?=
+ =?utf-8?B?SVdTRTZCbEo3cDRxY0k0RmVWSTdlVnh6TDV4VG1hbC83L3hQcUhDL1VlQjJs?=
+ =?utf-8?B?US9laWVLVU4xTmlydHBrd0xscHJzdjdLTlAzakVXcUg1ZDRWMzhiZ2J0cUN5?=
+ =?utf-8?B?Y1U0bWVVTmhrRTFTSzlodmsya2gyU2RQbkRiSDRYMU96ZFJNUGdrQjdSMXRk?=
+ =?utf-8?B?Q1crYVBQWEhVRzFRU2U2c1h4dUdaZzhFRG85LzBnNG83N2s5TVY1ZmtTMHRR?=
+ =?utf-8?B?RkRJZlduS2JsMksrNndKNEliUnBscGdYU1RVUlBHM2E2L0k0RzNvM0pwVW8r?=
+ =?utf-8?B?bk8wTzE1bWlSekxIVm4vQkNxSXBBQmxGQWk0RWc1bkljem5BbldSUjFiakQ3?=
+ =?utf-8?B?RUp6Z2dESUlwT0ZDaHNNTEdia0dYWXpYcmFBZXFwS21vVUZVcWhEYS9NZ1Jv?=
+ =?utf-8?B?bm4xUDdjalJEWWlIYW4xck9WY3J6dk1yRzNjRllaZnpaZkw2dGRhYURpaVlD?=
+ =?utf-8?B?dFA4MGFiakVFWnNsbTBZRm51dVVBOXRnWDNjakRqUmdlTWJ4eW80VkUwT212?=
+ =?utf-8?B?QkJRMHVaeW4rRjFpS3NXdzBGeVpwVm8vbldRQnptM1pxbUcrTk01UkhCNnZB?=
+ =?utf-8?B?UUtlV0llU2xSa3o4bzIvM3ExQ0JUemN2ZDFWaEVVNnhGd05sRWtkeG5hSW1B?=
+ =?utf-8?B?YnRkU2NoKzgrQnNiQmhzSlc1dTJzVUMwUThGRk9YK1RtdkxkY0hVeUxxSXFl?=
+ =?utf-8?B?aXlXVWNUcEVXZ3VxRk1kMUhhVVFFaHgvck9GSmszUWc2V2g4RHNxSzQ4TlBU?=
+ =?utf-8?B?SzdLd3lyTWM0bDM3eTZkaFRMT1R3SFJ6eXFnNVhoYy9nZktqZ1VuV3l0WnV1?=
+ =?utf-8?B?RWtFbUJ0RkZnS20yd1hoczQyeFNIQk9RUjhSMVYyZiszN2VtZXdNQ3JNeXhh?=
+ =?utf-8?B?K1VtK0FIdXF1M2gvUzhZSFdNZ3FjdlAyS3BTcUZxWFU1bmx4cTFndlhFWWFh?=
+ =?utf-8?B?NzhZb1BNVHVTQ2xMUGxUWWoxVEo4T1oyZ0hYYVJJVzB0ZDd0SzVHaXJsOVVY?=
+ =?utf-8?B?bnVjcjdSVGJGK1BKa0hwN3ZPd3doeDA4SS8wUmZ0dlRpTHUzN24vUCtOS3Zl?=
+ =?utf-8?B?V2FTa2FuQVgrc0RIN3hwVHNCZGlUZ2xhU3ZTWjZ0K1c4dDlVUDNIaWVKQ3ZM?=
+ =?utf-8?B?R09aNXR0ZVBvLzU4aEkyUiswL2FONzVXbFBBdCswS0x2eUJyNmRUTnlUazRD?=
+ =?utf-8?B?M3p5KzcrY3oyeFVUUC9QVi9qcSs0TEduQmFjUT09?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
- SFP:1102; 
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(13003099007);
+ DIR:OUT; SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2025 12:03:18.8757 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ec54a686-079b-4689-a7fb-08ddaa72494c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Jun 2025 12:03:16.9538 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f95eea5e-06f9-4275-19f5-08ddaa724828
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AM2PEPF0001C70B.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB1022
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB2103
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,217 +169,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When blobs are absent and are marked as optional, they can be safely
-dropped from the binman tree. Use the drop_absent function for that.
-Rename drop_absent to drop_absent_optional as we do not want to drop any
-entries that are absent; they should be reported by binman as errors
-when they are missing.
-We also reorder the processing of the image the following:
-- We call the CheckForProblems function before the image is built.
-- We drop entries after we checked for problems with the image.
-This is okay because CheckForProblems does not look at the file we have
-written but rather queries the data structure (image) built with binman.
-This also allows us to get all error and warning messages that we want
-to report while avoiding putting missing optional entries in the final
-image.
-As only the blobs are dropped, the sections still remain in the
-assembled image. Thus add them to the expected test case checks where
-necessary.
+This series solves a contradiction regarding ext blobs packaged in
+binman. When they are marked as optional, by default they are faked, two
+messages are emitted. One says the image is not functional the other
+says the image is still functional. Both concern the same binman
+entry/blob.
 
-In addition, a rework of testPackTeeOsOptional test case is necessary.
+Binman is set up to have fake external blobs in case they are missing.
+This is regardless on whether they are optional or not.
+The implementation does not allow different types of entries to override
+the faking decision; at least there wouldn't be much sense in doing so.
 
-The test did not really do what it was supposed to. The description said
-that optional binary is tested, but the binary is not marked as
-optional. Further, the tee.elf file, when included in the image
-properly, also shows up in the image data. This must be added as well.
+Here is an example build output of a phycore-imx8mp:
 
-As there is no global variable for the elf data, set the pathname to the
-elf file that was created when setting up the test suite.
-For the test case get the filename and read the contents, comparing them
-to the contents of the created binman image.
+  BINMAN  .binman_stamp
+Image 'image' is missing optional external blobs but is still functional: tee-os
 
-Signed-off-by: Yannic Moog <y.moog@phytec.de>
+/binman/section/fit/images/tee/tee-os (tee.bin):
+   See the documentation for your board. You may need to build Open Portable
+   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+
+Image 'image' has faked optional external blobs and is still functional: tee.bin
+
+  OFCHK   .config
+
+The output stays to inform/warn the user, but in this case the tee-os
+entry will not be present in the final image.
+
 ---
- tools/binman/control.py       |  5 ++---
- tools/binman/entry.py         |  6 +++++-
- tools/binman/etype/cbfs.py    |  3 ++-
- tools/binman/etype/mkimage.py |  2 +-
- tools/binman/etype/section.py | 16 ++++++++++++----
- tools/binman/ftest.py         | 14 ++++++++------
- tools/binman/image.py         |  2 ++
- 7 files changed, 32 insertions(+), 16 deletions(-)
+Changes in v3:
+- Fix all failing tests
+  - add commit that reworks bin.elf test
+  - add section data to failing tests. E.g. tee-os contains missing
+    tee.bin, but is still included in the image.
+- remove _entries -> GetEntries() refactor patch
+- reorder commits -> smaller fixes before refactor EDITME: use bulletpoints and terse descriptions.
+- squash commits so that for each commits all binman tests should pass now
+- rebase on next
+- Link to v2: https://lore.kernel.org/r/20250527-binman_faked_optional-v2-0-3362ab897581@phytec.de
 
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index 1946656f7d368209df3299a0e7c833b93edf2120..5a66c06d346cc74dc3e0e037eb263b6ced64a9b4 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -697,7 +697,6 @@ def ProcessImage(image, update_fdt, write_map, get_contents=True,
-         image.SetAllowMissing(allow_missing)
-         image.SetAllowFakeBlob(allow_fake_blobs)
-         image.GetEntryContents()
--        image.drop_absent()
-     image.GetEntryOffsets()
- 
-     # We need to pack the entries to figure out where everything
-@@ -736,12 +735,12 @@ def ProcessImage(image, update_fdt, write_map, get_contents=True,
-         image.Raise('Entries changed size after packing (tried %s passes)' %
-                     passes)
- 
-+    has_problems = CheckForProblems(image)
-+
-     image.BuildImage()
-     if write_map:
-         image.WriteMap()
- 
--    has_problems = CheckForProblems(image)
--
-     image.WriteAlternates()
- 
-     return has_problems
-diff --git a/tools/binman/entry.py b/tools/binman/entry.py
-index 6390917e5083e40a4e3294e5d36ec300d2057fe9..ce7ef28e94b17e349544776070c457d5882661b1 100644
---- a/tools/binman/entry.py
-+++ b/tools/binman/entry.py
-@@ -760,7 +760,7 @@ class Entry(object):
-                           self.image_pos)
- 
-     # pylint: disable=assignment-from-none
--    def GetEntries(self):
-+    def GetEntries(self) -> None:
-         """Return a list of entries contained by this entry
- 
-         Returns:
-@@ -1351,6 +1351,10 @@ features to produce new behaviours.
-             os.mkdir(cls.fake_dir)
-         tout.notice(f"Fake-blob dir is '{cls.fake_dir}'")
- 
-+    def drop_absent_optional(self) -> None:
-+        """Entries don't have any entries, do nothing"""
-+        pass
-+
-     def ensure_props(self):
-         """Raise an exception if properties are missing
- 
-diff --git a/tools/binman/etype/cbfs.py b/tools/binman/etype/cbfs.py
-index 124fa1e4ffc7d0374b27c09d32ead8429567d304..5879f377231bf94697bea97c3cfc3a2515665b8f 100644
---- a/tools/binman/etype/cbfs.py
-+++ b/tools/binman/etype/cbfs.py
-@@ -276,7 +276,8 @@ class Entry_cbfs(Entry):
-         for entry in self._entries.values():
-             entry.ListEntries(entries, indent + 1)
- 
--    def GetEntries(self):
-+    def GetEntries(self) -> dict[str, Entry]:
-+        """Returns the entries (tree children) of this section"""
-         return self._entries
- 
-     def ReadData(self, decomp=True, alt_format=None):
-diff --git a/tools/binman/etype/mkimage.py b/tools/binman/etype/mkimage.py
-index 6ae5d0c8a4f3c54e1277a575b8e235cc1aba4e13..75e59c3d3a3104da7559982f64968fdd99b7bd5f 100644
---- a/tools/binman/etype/mkimage.py
-+++ b/tools/binman/etype/mkimage.py
-@@ -205,7 +205,7 @@ class Entry_mkimage(Entry_section):
-             self.record_missing_bintool(self.mkimage)
-             return data
- 
--    def GetEntries(self):
-+    def GetEntries(self) -> dict[str, Entry]:
-         # Make a copy so we don't change the original
-         entries = OrderedDict(self._entries)
-         if self._imagename:
-diff --git a/tools/binman/etype/section.py b/tools/binman/etype/section.py
-index 1d50bb477534702019502d08f8648d4c9a367c0f..03c4f7c6ec74c6fa75c9362e2fecdb0e6ab568cb 100644
---- a/tools/binman/etype/section.py
-+++ b/tools/binman/etype/section.py
-@@ -537,7 +537,7 @@ class Entry_section(Entry):
-         for entry in self._entries.values():
-             entry.WriteMap(fd, indent + 1)
- 
--    def GetEntries(self):
-+    def GetEntries(self) -> dict[str, Entry]:
-         return self._entries
- 
-     def GetContentsByPhandle(self, phandle, source_entry, required):
-@@ -772,9 +772,17 @@ class Entry_section(Entry):
-                        todo)
-         return True
- 
--    def drop_absent(self):
--        """Drop entries which are absent"""
--        self._entries = {n: e for n, e in self._entries.items() if not e.absent}
-+    def drop_absent_optional(self) -> None:
-+        """Drop entries which are absent.
-+        Call for all nodes in the tree. Leaf nodes will do nothing per
-+        definition. Sections however have _entries and should drop all children
-+        which are absent.
-+        """
-+        self._entries = {n: e for n, e in self._entries.items() if not (e.absent and e.optional)}
-+        # Drop nodes first before traversing children to avoid superfluous calls
-+        # to children of absent nodes.
-+        for e in self.GetEntries().values():
-+            e.drop_absent_optional()
- 
-     def _SetEntryOffsetSize(self, name, offset, size):
-         """Set the offset and size of an entry
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 4a8d330c8f89adc3c248199760a936dd243158a2..d707e2aa555b39316d206a4c170ebb83aa6daf72 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -251,7 +251,7 @@ class TestFunctional(unittest.TestCase):
-         # ATF and OP_TEE
-         TestFunctional._MakeInputFile('bl31.elf',
-             tools.read_file(cls.ElfTestFile('elf_sections')))
--        TestFunctional._MakeInputFile('tee.elf',
-+        TestFunctional.tee_elf_path = TestFunctional._MakeInputFile('tee.elf',
-             tools.read_file(cls.ElfTestFile('elf_sections')))
- 
-         # Newer OP_TEE file in v1 binary format
-@@ -6459,16 +6459,18 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testAbsent(self):
-         """Check handling of absent entries"""
-         data = self._DoReadFile('262_absent.dts')
--        self.assertEqual(U_BOOT_DATA + U_BOOT_IMG_DATA, data)
-+        self.assertEqual(U_BOOT_DATA + b'aa' + U_BOOT_IMG_DATA, data)
- 
--    def testPackTeeOsOptional(self):
--        """Test that an image with an optional TEE binary can be created"""
-+    def testPackTeeOsElf(self):
-+        """Test that an image with a TEE elf binary can be created"""
-         entry_args = {
-             'tee-os-path': 'tee.elf',
-         }
-+        tee_path = self.tee_elf_path
-         data = self._DoReadFileDtb('263_tee_os_opt.dts',
-                                    entry_args=entry_args)[0]
--        self.assertEqual(U_BOOT_DATA + U_BOOT_IMG_DATA, data)
-+        self.assertEqual(U_BOOT_DATA + tools.read_file(tee_path) +
-+                         U_BOOT_IMG_DATA, data)
- 
-     def checkFitTee(self, dts, tee_fname):
-         """Check that a tee-os entry works and returns data
-@@ -6724,7 +6726,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-         node = dtb.GetNode('/configurations/conf-missing-tee-1')
-         self.assertEqual('atf-1', node.props['firmware'].value)
--        self.assertEqual(['u-boot', 'atf-2'],
-+        self.assertEqual(['u-boot', 'tee', 'atf-2'],
-                          fdt_util.GetStringList(node, 'loadables'))
- 
-     def testTooldir(self):
-diff --git a/tools/binman/image.py b/tools/binman/image.py
-index 24ce0af7c72b5256a9a71963a6d94c080ed8bdd4..698cfa4148e1a0f762d90d99ee3bc581cff5105a 100644
---- a/tools/binman/image.py
-+++ b/tools/binman/image.py
-@@ -183,6 +183,8 @@ class Image(section.Entry_section):
-         fname = tools.get_output_filename(self._filename)
-         tout.info("Writing image to '%s'" % fname)
-         with open(fname, 'wb') as fd:
-+            # For final image, don't write absent blobs to file
-+            self.drop_absent_optional()
-             data = self.GetPaddedData()
-             fd.write(data)
-         tout.info("Wrote %#x bytes" % len(data))
+Changes in v2:
+- mark as RFC due to failing tests. In current state, series is more of
+  a concept
+- Link to v1: https://lore.kernel.org/r/20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de
 
+---
+Yannic Moog (6):
+      binman: drop "faked" return value from check_fake_fname
+      binman: mark optional missing blobs as absent
+      binman: rework dropping absent entries from packaged image
+      binman: add faked optional entry case in CheckForProblems
+      binman: ftest: pass allow_fake_blob to _DoReadFileDtb
+      binman: test: assert optional blobs don't cause non-functionality
+
+ tools/binman/binman.rst             |  7 +++++
+ tools/binman/control.py             | 30 ++++++++++++++++-----
+ tools/binman/entry.py               | 17 +++++++-----
+ tools/binman/etype/blob.py          |  9 ++++---
+ tools/binman/etype/blob_ext_list.py |  4 +--
+ tools/binman/etype/cbfs.py          |  3 ++-
+ tools/binman/etype/mkimage.py       |  2 +-
+ tools/binman/etype/section.py       | 16 ++++++++---
+ tools/binman/ftest.py               | 54 +++++++++++++++++++++++++------------
+ tools/binman/image.py               |  2 ++
+ 10 files changed, 102 insertions(+), 42 deletions(-)
+---
+base-commit: 548d997229b7929bd7f0782415952d5a85eb7e64
+change-id: 20250122-binman_faked_optional-5025f7046e25
+
+Best regards,
 -- 
-2.43.0
+Yannic Moog <y.moog@phytec.de>
 
