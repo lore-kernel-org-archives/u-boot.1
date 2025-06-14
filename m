@@ -4,71 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C95C71141
-	for <u-boot@archiver.kernel.org>; Sat, 14 Jun 2025 09:38:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E772C71135
+	for <u-boot@archiver.kernel.org>; Sat, 14 Jun 2025 12:10:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F80780FA8;
-	Sat, 14 Jun 2025 11:37:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BD2E780F0E;
+	Sat, 14 Jun 2025 14:10:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g3Ev8JVu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mJejOVgQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43C5D82B70; Sat, 14 Jun 2025 11:37:54 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCE0280F0E
- for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 11:37:50 +0200 (CEST)
+ id 6A42880FA8; Sat, 14 Jun 2025 14:10:08 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 031E7800C1
+ for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 14:10:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55E9be0Y2180650;
- Sat, 14 Jun 2025 04:37:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1749893860;
- bh=3Qq+jRCyanD1hHbjscNGBns4Axxa6gA8oL7rUrvB8pI=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=g3Ev8JVuk0raDQS9RuVDYuazYpszf4HMGkzGEN3qqji4ra2MHjj8PsWtEYF8+bzgh
- vunazU7ICftUPIm3S6N4aaqlYu7jgHDDekIJtE7AqEP2fNwMbYVjJqQwi9lXHQ9NX+
- /ArOqqSIeQNnyn7UyiJdjSwsdCmFjrHKZ1ewpIp4=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55E9bei63359799
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Sat, 14 Jun 2025 04:37:40 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Sat, 14
- Jun 2025 04:37:39 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Sat, 14 Jun 2025 04:37:39 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55E9bOPr840286;
- Sat, 14 Jun 2025 04:37:34 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
- <ggiordano@phytec.com>, <wegorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <jm@ti.com>, <n-francis@ti.com>,
- <bb@ti.com>, <vitor.soares@toradex.com>, <contact@paulk.fr>,
- <Oliver.Gaskell@analog.com>, <marex@denx.de>,
- <jerome.forissier@linaro.org>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 2/2] configs: j7*/*am62*: Remove malloc size overwrite at
- config level.
-Date: Sat, 14 Jun 2025 15:07:17 +0530
-Message-ID: <20250614093717.2479920-3-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250614093717.2479920-1-u-kumar1@ti.com>
-References: <20250614093717.2479920-1-u-kumar1@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-addda47ebeaso583239266b.1
+ for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 05:10:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749903005; x=1750507805; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cqJcoars5DxSBwkR76heFCWogFOR1u3i1LpQJ+o6txU=;
+ b=mJejOVgQ5thM8msRZlfmi+aB0P4cUNLRc1bFSY+VqexG6it98dIRAJk0nuK6bxoskM
+ xyHfnq6PJ03wv0CSQ+qO0EMODcBAihKcqUuedSZsEQSF1N/SuErvhERlFX5H2k0Tt/Ch
+ n1jHNlSlpEOinIat0AUkh/Q/KTGn21G6f8nVR5WYd8cgL/q2TYEudfIfsR++ktA3GRam
+ 7GpkWkJcHSc81AyMfiDpsPup/jd4OmEbw5kgCkgv/kzaol1LdoRz6CWRxjxlvn/CgEWx
+ xJCJSS4eC5uPSuOg3kJRoCbYOezCn08Jppfe319ltiFMIsjdO84wZHAq7MzEZ7D5UCDd
+ NruQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749903005; x=1750507805;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cqJcoars5DxSBwkR76heFCWogFOR1u3i1LpQJ+o6txU=;
+ b=mVjwQgMQhm9EFAhvc9BvFgAYyq4BmSbEN9FLhdzs17HDqJojF2XDCVhB9j+sOS3h5Y
+ gvok9kyTR9lFkRdIGJ85Eo+GyTBX/dEvRoUrvUqG9OTbAXxMqDigoockqXDpCwl6IUe4
+ 5XFrUUufbN6WF+TX7kXH41tzFxS2gUyGUBK4DIpuuOTBXo8R1JB+N4NO0LXKjgqS25c7
+ bDs6eVuuMub+mFL798hHS1BpGEEgaN+8D6veT69y0ganRXPdtjW77fr+NY/6eMDsKGo7
+ UUH+EbR5aX/PdjGxbFTRSepyTyt0JAwelYxG9UqF1HxBXl4hHn5BH0hg/SL7IrLJg07z
+ 3tqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV8HgQ3yam2Wk1UmBOk7U1e593UYKjrRpqOO5UYggw7L1oldxshcLDLKrgOs34VENk83p+Cexg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyA8x+nEVvidoGnFYlULsOJdIwQMkV0mRdVisrVZ6GwMBKC2m6w
+ fyYV421tB2Al77935gPi4A41ZL3LY2GIHDSR4De4u8zFEbt/wNQTOjaj/RwYLR029wzk7TquMqa
+ 9f9ymq0vnxv9Y8dPknuaTuwzNEibmZk4=
+X-Gm-Gg: ASbGnctlkSxit3FRbeEF87XvlaTJ85RUSBtIQQSvqdTtGKRNGtA1EpvW9JktNkCA4Vk
+ bFVXCXgiD6I7j8dqJCvcVZVJ3qGTISd+B/BRqhYtLlqhdhv7brueMmUI0emyvjP8/euep3Ha9OQ
+ wGyM8aTzkJRPoq4WqQYu3qxKXAuc2qAgUzdOeAIhMJg/k3deFCf8H5loBARJabgyqFWshwcSg02
+ Pf7
+X-Google-Smtp-Source: AGHT+IEJzlRX+HbTb/d08UwNUcyie3ET80wBGNDY/G/C5iD7vGm3utNCe1uynIF1AikxfilAVjuMR7YSHKC5nNBGbR4=
+X-Received: by 2002:a17:907:3da6:b0:ad2:39f2:3aa8 with SMTP id
+ a640c23a62f3a-adfad450a57mr259066966b.38.1749903005073; Sat, 14 Jun 2025
+ 05:10:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250613085742.796015-1-javierm@redhat.com>
+ <20250613085742.796015-4-javierm@redhat.com>
+ <2584944A-D0CF-44E5-ABAE-C3E156ED8539@gmx.de>
+ <87ikkzvghz.fsf@minerva.mail-host-address-is-not-set>
+ <20250613154922.GY1382132@bill-the-cat>
+ <87cyb7vaq2.fsf@minerva.mail-host-address-is-not-set>
+ <20250613173459.GB1382132@bill-the-cat>
+In-Reply-To: <20250613173459.GB1382132@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 14 Jun 2025 13:09:52 +0100
+X-Gm-Features: AX0GCFuSnBYAfc0VHlUnXsu35qWcPpc4LXx92kMAkyoO1ZTdSP27sWR2vNtwVk8
+Message-ID: <CALeDE9P33wLtWz6Aj8CsQxP7V_yDA6D9KgxtecmhPASgBgkBSw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
+ support
+To: Tom Rini <trini@konsulko.com>
+Cc: Javier Martinez Canillas <javierm@redhat.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
+ mkorpers@redhat.com, mskrivan@redhat.com, eballetb@redhat.com, 
+ mripard@redhat.com, alexl@redhat.com, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Maks Mishin <maks.mishinfz@gmail.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,281 +104,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use default value of malloc size coming from Kconfig, instead of
-board specific override.
+> > >> The project is https://gitlab.com/CentOS/automotive/src/ukiboot and reads
+> > >> UKI (https://uapi-group.org/specifications/specs/unified_kernel_image)
+> > >> images from raw data partitions. Just like ABL reads Android Boot images.
+> > >>
+> > >> > Are you planning to add it to the EBBR specification?
+> > >> >
+> > >>
+> > >> I haven't thought about it before but I also didn't know that u-boot had
+> > >> this requirement. Probably it should be documented somewhere to make it
+> > >> more clear? Maybe I didn't look enough but didn't find a doc in the repo.
+> > >
+> > > We are not strictly and only EBBR requirements, if there is good reason
+> >
+> > That's good to know. Heinrich's answer seemed to imply that u-boot was
+> > limited to EBBR requirements.
+>
+> It's one of the main users, yes, but it shouldn't be seen as *only* for
+> that.
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
- configs/am62x_a53_usbdfu.config            | 1 -
- configs/am64x_evm_a53_defconfig            | 1 -
- configs/am64x_evm_r5_defconfig             | 1 -
- configs/am65x_evm_a53_defconfig            | 1 -
- configs/am65x_evm_r5_defconfig             | 1 -
- configs/am65x_evm_r5_usbdfu_defconfig      | 1 -
- configs/am65x_evm_r5_usbmsc_defconfig      | 1 -
- configs/j7200_evm_a72_defconfig            | 1 -
- configs/j7200_evm_r5_defconfig             | 1 -
- configs/j721e_beagleboneai64_a72_defconfig | 1 -
- configs/j721e_beagleboneai64_r5_defconfig  | 1 -
- configs/j721e_evm_a72_defconfig            | 1 -
- configs/j721e_evm_r5_defconfig             | 1 -
- configs/j721s2_evm_a72_defconfig           | 1 -
- configs/j721s2_evm_r5_defconfig            | 1 -
- configs/j784s4_evm_a72_defconfig           | 1 -
- configs/j784s4_evm_r5_defconfig            | 1 -
- configs/phycore_am62ax_a53_defconfig       | 1 -
- configs/phycore_am62x_a53_defconfig        | 1 -
- configs/phycore_am64x_a53_defconfig        | 1 -
- configs/phycore_am64x_r5_defconfig         | 1 -
- configs/verdin-am62_a53_defconfig          | 1 -
- 22 files changed, 22 deletions(-)
+Also to note that EBBR is a living spec and can evolve, typically the
+way we've done that historically is to have an implementation, or at
+least patches, in U-Boot first to prove out the idea before putting
+something in the spec so IMO this is the right way to go about this.
 
-diff --git a/configs/am62x_a53_usbdfu.config b/configs/am62x_a53_usbdfu.config
-index 16cd4c89f41..373b1d0ed64 100644
---- a/configs/am62x_a53_usbdfu.config
-+++ b/configs/am62x_a53_usbdfu.config
-@@ -1,4 +1,3 @@
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
-diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-index 8f7d098f770..318a2270da2 100644
---- a/configs/am64x_evm_a53_defconfig
-+++ b/configs/am64x_evm_a53_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SPL_GPIO=y
-diff --git a/configs/am64x_evm_r5_defconfig b/configs/am64x_evm_r5_defconfig
-index b222bcd6e43..3f7012c99ce 100644
---- a/configs/am64x_evm_r5_defconfig
-+++ b/configs/am64x_evm_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x80000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
-index a41f67a43fe..2cc7ae1cbc1 100644
---- a/configs/am65x_evm_a53_defconfig
-+++ b/configs/am65x_evm_a53_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
-index 386749ebabd..7849c89500a 100644
---- a/configs/am65x_evm_r5_defconfig
-+++ b/configs/am65x_evm_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x55000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
-index b0d333d95c2..3ac494f0126 100644
---- a/configs/am65x_evm_r5_usbdfu_defconfig
-+++ b/configs/am65x_evm_r5_usbdfu_defconfig
-@@ -2,7 +2,6 @@
- 
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x57000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/am65x_evm_r5_usbmsc_defconfig b/configs/am65x_evm_r5_usbmsc_defconfig
-index 90a857b8b95..7bd65bfef0c 100644
---- a/configs/am65x_evm_r5_usbmsc_defconfig
-+++ b/configs/am65x_evm_r5_usbmsc_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x55000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index a446074ad5d..ca444cfa349 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SPL_GPIO=y
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index 0ae07ddf7c8..b9ffa1fc989 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x70000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index e3cd59343f0..fbe6a839fb5 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j721e_beagleboneai64_r5_defconfig b/configs/j721e_beagleboneai64_r5_defconfig
-index 086ad99ff6d..7d5c71e5650 100644
---- a/configs/j721e_beagleboneai64_r5_defconfig
-+++ b/configs/j721e_beagleboneai64_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x70000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 99461cf6007..16c3c3243b2 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
-index c8324d4c068..fce4d32a48c 100644
---- a/configs/j721e_evm_r5_defconfig
-+++ b/configs/j721e_evm_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x70000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
-index 084deea28d0..8249a50d46f 100644
---- a/configs/j721s2_evm_a72_defconfig
-+++ b/configs/j721s2_evm_a72_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SPL_GPIO=y
-diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-index 6ea1d712be1..71fa0d57bc2 100644
---- a/configs/j721s2_evm_r5_defconfig
-+++ b/configs/j721s2_evm_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x10000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index 56af0230860..ba164697802 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SPL_GPIO=y
-diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
-index 4f5a0c943d8..4c4fd787714 100644
---- a/configs/j784s4_evm_r5_defconfig
-+++ b/configs/j784s4_evm_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x10000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
-index c74909dabdf..06a9c5a3152 100644
---- a/configs/phycore_am62ax_a53_defconfig
-+++ b/configs/phycore_am62ax_a53_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index 487eafb0e17..18bd2c703ac 100644
---- a/configs/phycore_am62x_a53_defconfig
-+++ b/configs/phycore_am62x_a53_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARM_SMCCC=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-index 2032a34030f..a317ab29c34 100644
---- a/configs/phycore_am64x_a53_defconfig
-+++ b/configs/phycore_am64x_a53_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/phycore_am64x_r5_defconfig b/configs/phycore_am64x_r5_defconfig
-index 2552479713f..fe21b412f67 100644
---- a/configs/phycore_am64x_r5_defconfig
-+++ b/configs/phycore_am64x_r5_defconfig
-@@ -1,6 +1,5 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x80000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
-index 4bdcb4b6c46..5b2c7f05605 100644
---- a/configs/verdin-am62_a53_defconfig
-+++ b/configs/verdin-am62_a53_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_ARCH_K3=y
--CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
--- 
-2.34.1
+> > > to add more features (and tests). But Heinrich's follow-up question is
+> >
+> > Oh, I missed the lib/efi_selftest directory. I'll see to add a test then.
+>
+> Thanks.
 
+Yes, the lack of tests was the first thing I noticed on the patches ;-)
+
+> > > quite important. I feel like there's already a half dozen offerings of
+> > > A/B update that works within UEFI.
+> > >
+> >
+> > I just brought the A/B boot protocol used by ukiboot because I was asked
+> > how I was using the EFI_PARTITION_INFO_PROTOCOL. But I'm not proposing to
+> > add a new A/B update mechanism for u-boot, just to implement an existing
+> > EFI protocol...
+>
+> Yes, this was more a lament for the ecosystem as a whole really. The
+> concept of A/B(/Golden) with various security features is pretty old at
+> this point, there's many implementations. I wish there was not "here is
+> yet another" in the space.
+>
+> But regardless, we should aim to have U-Boot be able to be used with it.
+> Otherwise my crystal ball says that a few years down the line it'll be
+> hard to use Fedora-IoT-distro on common-device with U-Boot.
+
+There's a basic concept of a fallback with the UEFI bootnext bits but
+yes, if UEFI actually had the ability to deal with proper A/B we
+wouldn't need a dozen different ways to do it, sigh, of course there's
+some harder things that also need to be addressed like changes for
+signing keys etc.
+
+The other initial feedback I would ask is around a Kconfig to make it
+optional, will everyone want/need it, what's the size impact?
+
+Cheers,
+Peter
