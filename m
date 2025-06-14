@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF09C71141
-	for <u-boot@archiver.kernel.org>; Sat, 14 Jun 2025 13:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85472C71141
+	for <u-boot@archiver.kernel.org>; Sat, 14 Jun 2025 14:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C7D4808AF;
-	Sat, 14 Jun 2025 15:56:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E481080F0E;
+	Sat, 14 Jun 2025 16:05:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HZjO8nOe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qtr1iMze";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB5D180F0E; Sat, 14 Jun 2025 15:56:34 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 89D9880FA8; Sat, 14 Jun 2025 16:05:03 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A69A800C1
- for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 15:56:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5203D800C1
+ for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 16:05:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-739f2508ffaso2268117a34.2
- for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 06:56:32 -0700 (PDT)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-401f6513cb2so2314607b6e.0
+ for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 07:05:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749909391; x=1750514191; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SB2WxYju5bGKtXEV+mzAg0CYbJtB+AcQeNuumKgwFqE=;
- b=HZjO8nOeghzyBR7BiwOaV3VqPmhpIjRl2FnWIXT0qR3MatcE2RNhS5EYF8nszNuQfM
- +hw0kta9w8lDx6AniIGJ6++GQv7YhDs2m0T58OIy+H7PLmWh/qpHQQX8C6lFVN+UvayR
- tTsQhx25cjnki+k96IJ9tK46EaI0pvZzyv6qI=
+ d=konsulko.com; s=google; t=1749909900; x=1750514700; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7w+QWEOHn1V/tmaesEclyA3emNc0fwGhPDO/+M2lMoE=;
+ b=Qtr1iMzepPkIB+J33a2+l6rCfra3UGl76Uxn6JJNc+ul2N+PSnr3lLY9bDsZV7UMWA
+ imRTgBHKuEKb3Sh8EQpd8DxtITt5qMZKnsiYgJXbHIwqw1Ze7ZEtPca1A8EnC0iQ+Bm8
+ ejcW//xflHcMzAWuGVJ7HKZy9aedFJZobqTM4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749909391; x=1750514191;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SB2WxYju5bGKtXEV+mzAg0CYbJtB+AcQeNuumKgwFqE=;
- b=VwAVsGGlsEj0xpuzTSlw1xqwliKi4IShDeBluFpsV1nj1LMlqU06EnLLgr/OZCMBew
- b3Y6DIS3H++dvcOHZbATo6iitMQWmgTuQ1oB1kXQshpzq4dYouCOGjjC0ObCx6PS7T0e
- 9tTPa+GzVwLnrrSksLRDXSGk6urjMR2xCo/ti/OKMpQXM1BjSg0h9dctt9yapBDV7jgB
- Jku9ae9Bz2Xx/9VFOOzY+CgU1DMFr1SEeark9OqsU65HATPzA+AqPZZmfzgyS0390Pdn
- xbnQZihU90aAUlEE7rhQ968Ox38sGlQYfYgPB4FQoQYyDqtFFLj+/GZt+0AJvavmCWh5
- 74Sw==
-X-Gm-Message-State: AOJu0YzG+1jRZe7FXIH/Z3PHuqJQy3kOQG/QMG4JEMaIePyzNFQAvjUq
- SF3TiAZddHCw6sTyuJxu7HceqtweI1eJ7OVOkH+iGU/BaTbOQoGEtnJ12HV12yCy5sQrnuIRbRa
- JaqAVU2Qf2w==
-X-Gm-Gg: ASbGncs/Zs5nj/LuBZXVyzZ8q2ce+LtY7MTsHzMoq7eyJfR/vU42B/9NFjvVYJLGFx1
- FEQtdp7YORMvK2Ips0kYv7H66HPjJa8HJxs8JJAoQPVj6J0aXfqeFJy4GNB3GRubUWp4aCJpeak
- DKH2uFlgM+IK9n7WD4cM9WRlbinYqSX7zXVZD0m9HpHbHobl8eSjxUX8HHJ3TxisEugUuMEMGGw
- 5be83EMKH1G8//sdsPyfW7JqgjWa26uenm8F7FCjw1sdeyu+VRHCHvoY/otE77SSYtDekaGCPBo
- AL0CgiFsdBaez5Ub5gHJOz/bGWYWylx7i44Kuk3yeZ0pl45mSQhdCs14/uY+8HviL5MrugIEyiH
- /qDQTDNp8r4k648vjc/k3yw==
-X-Google-Smtp-Source: AGHT+IHZlcFFnfjj2EDNRsaOJuK4hg8a5Sxlxk483kiEX8/52/wOjv/XO/zb/9DTZ5EoGcOBEsIH0g==
-X-Received: by 2002:a05:6808:1ded:b0:40a:3e68:b194 with SMTP id
- 5614622812f47-40a7c196b75mr1474116b6e.27.1749909391257; 
- Sat, 14 Jun 2025 06:56:31 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1749909900; x=1750514700;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7w+QWEOHn1V/tmaesEclyA3emNc0fwGhPDO/+M2lMoE=;
+ b=PIgNK110cLDidLaP221HdWbPGGZT3tnTiE3lx3XlbI67AcV2Z0ZuQpXEMAvF/GmGts
+ nz9uiLplrY1FrUyKBv/EuX75ZM/LAVwzvfy2l36l5ysmLU/XamZchfbrhcpPmRwfNtR5
+ fUTKkw/9BTayjaXY3eW5O2AUeOoxFoC1upsEjNRpYh60wWaaN7yW+CeqcpTx1M+QHg5n
+ PSkneYbjW34Knvp7hJgISfpKjYmhmiulR1k6tAdNDDNvJcSrbDzor/SNadXrTUgqfcwA
+ Xy2MY7vxh7AziHyAiez0ZF/sp0tKRxtn4x2uG4geL6L2EPBluGOatr5PfmKGce6G8bn0
+ 76Wg==
+X-Gm-Message-State: AOJu0YzZyHG+5CuqvHcw9mwraJGXQ0BAIb1xT+TQhdfQ0+tns64ZEJtV
+ fWUG8wvqzitowSVe+oHALgk3aHSoKoCdF4fvir1GSSJABKHcwRdzPYX//2Q21Uka/jc=
+X-Gm-Gg: ASbGncuPwkM2wEkkgTwiRtJNRvnuPZ4nNcA7GQslt3I2rqNymkpW+4WcGShxudxEKA/
+ LWpknMzbmcck0KvIsuud1a+wdEBe+bSsiSYfzBVdeHB7tlBMONdHXXbsMwMxgA1+OYWYIBE5oIR
+ NhJzpjCLWTEkR0zWV2bHibmqtct3zQqCh6E+ZN5/v2lOc83tkFAOaSMVbi4CWpxIDb5U7U2kFYf
+ 4mOLakxsYjH15jh/ieBB2lJonNLwTCFg3xdklMQsDZQWdG8V+sdaTUWHF02Le8q2BrPIEFpBDa9
+ xquW8dukJVeN7CyEIbXKJpii6Aqh0lydGycfPKnbBEpKSoP1w7yf5DKLYLQOL0vTydYrk4jUUqe
+ SLYT6kv7olo2urjaSxKc35Es=
+X-Google-Smtp-Source: AGHT+IEgSjPBkIWR8x3Z0o5wSm4dEu5e5P13IiTsYQH3RDTEc5Weobok90kGP2mApLiz0VdV+mzqsw==
+X-Received: by 2002:a05:6808:22ac:b0:3f7:d442:1986 with SMTP id
+ 5614622812f47-40a7b65c9b1mr2681483b6e.1.1749909899947; 
+ Sat, 14 Jun 2025 07:04:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a7418c881sm704170b6e.41.2025.06.14.06.56.29
+ 5614622812f47-40a740b3931sm706698b6e.10.2025.06.14.07.04.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Jun 2025 06:56:30 -0700 (PDT)
+ Sat, 14 Jun 2025 07:04:58 -0700 (PDT)
+Date: Sat, 14 Jun 2025 08:04:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
-Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Rick Chen <rick@andestech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- uboot-snps-arc@synopsys.com
-In-Reply-To: <20250604195612.2312979-1-ravi@prevas.dk>
-References: <20250604195612.2312979-1-ravi@prevas.dk>
-Subject: Re: [PATCH 00/12] drop volatile from global data
-Message-Id: <174990938963.962063.5579321613463235820.b4-ty@konsulko.com>
-Date: Sat, 14 Jun 2025 07:56:29 -0600
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, nm@ti.com,
+ robertcnelson@gmail.com, ggiordano@phytec.com, wegorov@phytec.de,
+ francesco.dolcini@toradex.com, jm@ti.com, n-francis@ti.com,
+ bb@ti.com, vitor.soares@toradex.com, contact@paulk.fr,
+ Oliver.Gaskell@analog.com, marex@denx.de, jerome.forissier@linaro.org
+Subject: Re: [PATCH 1/2] Kconfig: Add default malloc size of K3 ARCH
+Message-ID: <20250614140456.GE1382132@bill-the-cat>
+References: <20250614093717.2479920-1-u-kumar1@ti.com>
+ <20250614093717.2479920-2-u-kumar1@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GCU9DThgRmfCGtG0"
+Content-Disposition: inline
+In-Reply-To: <20250614093717.2479920-2-u-kumar1@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,46 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 04 Jun 2025 21:56:00 +0200, Rasmus Villemoes wrote:
 
-> There's really no reason for the gd pointer to have the volatile
-> qualifier.
-> 
-> In fact, I claim that it's completely unnecessary and just pessimizes
-> code generation and forces ugly casts in lots of places. For example,
-> see the casts in drivers/core/tag.c where elements are added to
-> gd->dm_taglist, or a helper such as cyclic_get_list() that should not
-> be needed.
-> 
-> [...]
+--GCU9DThgRmfCGtG0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Sat, Jun 14, 2025 at 03:07:16PM +0530, Udit Kumar wrote:
 
-[01/12] arm: drop volatile qualifier from gd pointer
-        commit: 45fa0014ba56fc52765d66edda489933ce0e9871
-[02/12] powerpc: drop volatile qualifier from gd pointer
-        commit: aa53d9bb7d7b470eaa62e53550d66546f80d2446
-[03/12] mips: drop volatile qualifier from gd pointer
-        commit: 344c7e091c2033be4a5cb8bf73c08d8cf020b77d
-[04/12] microblaze: drop volatile qualifier from gd pointer
-        commit: fe0fa2bb6635ce3826b38204e68b284ada3a79fe
-[05/12] m68k: drop volatile qualifier from gd pointer
-        commit: e66d7fc089912a8f84bbbfa4a69eb5c0ebaa1e1d
-[06/12] m68k: drop pointless #if 0 block
-        commit: a6f3d70a6bc2f99ac86f47bc5697d7e6e36ea7b8
-[07/12] arc: drop volatile qualifier from gd pointer
-        commit: 30b97f58f20e58ea5bb1d5dce7253c58d03629d5
-[08/12] arm: imx: remove unnecessary volatile qualifiers from "save gd" variables
-        commit: 01869368c08278d19a0b7ec744013bc88afcf09a
-[09/12] efi: drop volatile qualifier from "save gd" variables
-        commit: 83b040983c92446c284c7b4ee5f97c60c6ab5afc
-[10/12] lib/trace: drop volatile qualifier from "save gd" variables
-        commit: abe705be4751dfd5ae2ed0c24971cd4417f645ad
-[11/12] arm: remove volatile from set_gd prototype
-        commit: ce55643546a59c05d6c4b181c2b490b6db7ba1f5
-[12/12] riscv: remove volatile from set_gd prototype
-        commit: ae86cd8c59fe08c9a37d14dbd6e42190dda2a0d4
--- 
+> Many boards of K3 overwrites default malloc size, instead
+> of doing at almost each board level,
+> Add default size at Kconfig.
+>=20
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
 Tom
 
+--GCU9DThgRmfCGtG0
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhNgYQACgkQFHw5/5Y0
+tyyWpgwAgBX07WQlbOZX6yLZIT6BrA6EZ3zlxrNGJjVEl5KcDHFMtf9cgtbujNFw
+IQd16S7HPzwOLhbxkufW1Gr4QtNVu41ZVcHRML3rn8+fiOsss8B5SZqrs2ImO66b
+9yxL0VxL1t5d8ZK1bXc9rxTtZf3r/2bXkNAfsl8gU5808cJM7yTbukajXMeUolwG
+/2Yan/WECxOxJQvybaPPKpT02tHbXumQHMfGVTwI857ziH4H6kkeyQNuy+ltwAIf
+ZrzlofRvHPf6IlTKfTOGOdVcFfTBaTC/U+ZtTPkvYM0cLuGd8lQMQKUiALeeHmZc
+AtouTgr8mAXchEXip+wHsuVJk7wyMD04XbCYIqCXW74DbktAPHgc2AzKBo8XSIY6
+KjzkwZBJCt5tEUXhHs1oIcIYtQFYfDIuvH0Rr05aGnUMP4MEO/gjXL4dPes3rJy1
+/Nri2xT3N7B8pZHdezEeXh/UQe0IjqUWUOp/8WL7QwrjtgKr3w1AXK7ySRAMSfuO
+Glm2d9i2
+=umE/
+-----END PGP SIGNATURE-----
+
+--GCU9DThgRmfCGtG0--
