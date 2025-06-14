@@ -4,108 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E87C71136
-	for <u-boot@archiver.kernel.org>; Sat, 14 Jun 2025 00:36:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B339C71135
+	for <u-boot@archiver.kernel.org>; Sat, 14 Jun 2025 09:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD7C182D21;
-	Sat, 14 Jun 2025 02:36:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 94078807B1;
+	Sat, 14 Jun 2025 11:37:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MWt5Uz8t";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MQv7vNKT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F317B82D2E; Sat, 14 Jun 2025 00:27:10 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC91B82B70
- for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 00:27:08 +0200 (CEST)
+ id 2CAB58129F; Sat, 14 Jun 2025 11:37:52 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C632780050
+ for <u-boot@lists.denx.de>; Sat, 14 Jun 2025 11:37:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-72ecc0eeb8bso1120643a34.0
- for <u-boot@lists.denx.de>; Fri, 13 Jun 2025 15:27:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1749853627; x=1750458427; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=53LCWwtjBsJih5SgMyaJboAcq2zuL0xQA5d2JRjx47M=;
- b=MWt5Uz8t/EqH4oMvFyELm65EZhzjAYW8hkDobljAFLy2BZUn4JdAczc+dkY3lK75Uu
- l6j+XQBOEKcueDYkM4B2v/Xyy1o1QNVC9RwK9q26sk3huSxR1++qhij4JVCUoXBtxvvn
- rnxYmmwRczRmkDOb1p5PoDtQGCuPKOgrgiqY4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749853627; x=1750458427;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=53LCWwtjBsJih5SgMyaJboAcq2zuL0xQA5d2JRjx47M=;
- b=TlfGo/dAEkLX2vMp4y0zXm9Ugrl5zgI3ZJn+vhILhSKxasVL5e0p/CUBzBZQhKqcMc
- jzPF3id+j5hOkEFryG83IN0SdDqca94FZPljyLZ0oqzBUQa5ngzStpR9hdMbRUclM8dD
- eUYQrWFKzYXdDB/qhzjiJsF4z4Ca7Cx73YquLzwK92jb/6ifyLzJxTTvfiUQE0mf1huH
- ksdz9FA6iA9tN7p+W0dQ11bW9HgfrVpfvtCRaq1mBhF433yACTOGbfLx+31ZhWoOy3CP
- G8aHoq5I2sWXKlSYL7DEZVb0/L4cXPwsZNZ/vX4Egwg57nTlbywRp3A+Cx5MrB3msX1W
- vgJw==
-X-Gm-Message-State: AOJu0YyYn46S0bEJ+4xlLpBP2z4fRYyljUlBfRdlZS6kCLolD1zKtxID
- E90UnWVT8e6Upcu3mFyTcy5uPHFdOqnnWLG8mEKyuQ80Q38x1oP9EYe10SAlPNO9Bzo=
-X-Gm-Gg: ASbGnctrE/Wy909nwCugex1dgpCoXvKd9d1GiJ4C0YyP7l8fCdtrU9OvnElcbADYxFP
- Beec70ELPgS72bJ2fxeDEtfVoHj4iZGuUAZh+keAkoOgCMXzsiGEsffchZczNTIY/8Ex315KPHG
- fZ7HjqU/+HBcAfrEhF0H69SAhnOartoGmxgpsnAqVtMXsvB47rbsREJ3jV+5InuuBN6ZZZixbZe
- eyZIUxNED0DcGnbQ3zjHsYbJ78x9icSUOWEJYbZTWefQXGLO2Ex+Y7ZbhmvrnW0FfrzWpaMn/mu
- qeVh/B3s4sJJuWq/kKVLqpaPFaztsnqUeJ5qiVRPpRaKtiqEHCY1swyyoKZ240kLZan06NTCoTR
- yZ62uzQ7cbOB/uxNnMocv+CIJJmi1gyDj
-X-Google-Smtp-Source: AGHT+IGQyeJdGTk+cQHSXuElQOzxDQBhOErOvVmfeHFfTnl10vp1osa6jYCZ8GdFy3zMo4IBMG6fQQ==
-X-Received: by 2002:a05:6870:1cc:b0:2e9:512:ee1a with SMTP id
- 586e51a60fabf-2eaf0835465mr889020fac.4.1749853627250; 
- Fri, 13 Jun 2025 15:27:07 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2eab8e6bec6sm885548fac.35.2025.06.13.15.27.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jun 2025 15:27:06 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: =?utf-8?q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Bill Mills <bill.mills@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Phelps <andrew.phelps@canonical.com>, 
- Alexander Graf <agraf@csgraf.de>, Boyan Karatotev <boyan.karatotev@arm.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Fabio Estevam <festevam@gmail.com>, Harrison Mutai <harrison.mutai@arm.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Liviu Dudau <liviu.dudau@foss.arm.com>, 
- Liya Huang <1425075683@qq.com>, 
- =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
- =?utf-8?q?Marek_Moj=C3=ADk?= <marek.mojik@nic.cz>, 
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Peter Maydell <peter.maydell@linaro.org>, Rasmus Villemoes <ravi@prevas.dk>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>, 
- Stefano Babic <sbabic@nabladev.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Xu Zhang <423756212@qq.com>, qemu-devel@nongnu.org
-In-Reply-To: <20250528123236.1138632-1-sjg@chromium.org>
-References: <20250528123236.1138632-1-sjg@chromium.org>
-Subject: Re: (subset) [PATCH v5 00/25] passage: Define a standard for
- firmware data flow
-Message-Id: <174985362441.860502.7163329201162812483.b4-ty@konsulko.com>
-Date: Fri, 13 Jun 2025 16:27:04 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55E9bTVa2176793;
+ Sat, 14 Jun 2025 04:37:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1749893849;
+ bh=fu7/obz6WzSQ9MbUQ6h5bwOkzYqmX2DyLZXZYpcYzVs=;
+ h=From:To:CC:Subject:Date;
+ b=MQv7vNKTPegLDUp8puciXXc6sSIJHxxNSqhD+ukXnr0Cxgr1CBICvYEznNxOcvVOa
+ eSVa3nWIEAs65vFeiJvsqeCrvchY0PNxIuKUTsyFY6A9Kj+n51r/97vmSMgXxfjeaL
+ 3cvUiqNECw4736VhOtUSOnB5pF4yXIws32gkv8rc=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55E9bT1D4113377
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Sat, 14 Jun 2025 04:37:29 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Sat, 14
+ Jun 2025 04:37:29 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Sat, 14 Jun 2025 04:37:29 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55E9bOPp840286;
+ Sat, 14 Jun 2025 04:37:24 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
+ <ggiordano@phytec.com>, <wegorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <jm@ti.com>, <n-francis@ti.com>,
+ <bb@ti.com>, <vitor.soares@toradex.com>, <contact@paulk.fr>,
+ <Oliver.Gaskell@analog.com>, <marex@denx.de>,
+ <jerome.forissier@linaro.org>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH 0/2] malloc size cleanup for K3 devices
+Date: Sat, 14 Jun 2025 15:07:15 +0530
+Message-ID: <20250614093717.2479920-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
-X-Mailman-Approved-At: Sat, 14 Jun 2025 02:36:08 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,24 +82,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 May 2025 06:32:02 -0600, Simon Glass wrote:
+Many boards based upon K3 ARCH overrides default malloc size to 32MB,
+as part of cleanup, add default size of 32MB for K3 ARCH.
 
-> This series adds a standard way of passing information between different
-> firmware phases. This already exists in U-Boot at a very basic level, in
-> the form of a bloblist containing an spl_handoff structure, but the intent
-> here is to define something useful across projects.
-> 
-> The need for this is growing as firmware fragments into multiple binaries
-> each with its own purpose. Without any run-time connection, we must rely
-> on build-time settings which are brittle and painful to keep in sync.
-> 
-> [...]
+Udit Kumar (2):
+  Kconfig: Add default malloc size of K3 ARCH
+  configs: j7*/*am62*: Remove malloc size overwrite at config level.
 
-Applied to u-boot/next, thanks!
+ Kconfig                                    | 2 +-
+ configs/am62x_a53_usbdfu.config            | 1 -
+ configs/am64x_evm_a53_defconfig            | 1 -
+ configs/am64x_evm_r5_defconfig             | 1 -
+ configs/am65x_evm_a53_defconfig            | 1 -
+ configs/am65x_evm_r5_defconfig             | 1 -
+ configs/am65x_evm_r5_usbdfu_defconfig      | 1 -
+ configs/am65x_evm_r5_usbmsc_defconfig      | 1 -
+ configs/j7200_evm_a72_defconfig            | 1 -
+ configs/j7200_evm_r5_defconfig             | 1 -
+ configs/j721e_beagleboneai64_a72_defconfig | 1 -
+ configs/j721e_beagleboneai64_r5_defconfig  | 1 -
+ configs/j721e_evm_a72_defconfig            | 1 -
+ configs/j721e_evm_r5_defconfig             | 1 -
+ configs/j721s2_evm_a72_defconfig           | 1 -
+ configs/j721s2_evm_r5_defconfig            | 1 -
+ configs/j784s4_evm_a72_defconfig           | 1 -
+ configs/j784s4_evm_r5_defconfig            | 1 -
+ configs/phycore_am62ax_a53_defconfig       | 1 -
+ configs/phycore_am62x_a53_defconfig        | 1 -
+ configs/phycore_am64x_a53_defconfig        | 1 -
+ configs/phycore_am64x_r5_defconfig         | 1 -
+ configs/verdin-am62_a53_defconfig          | 1 -
+ 23 files changed, 1 insertion(+), 23 deletions(-)
 
-[06/25] spl: Rename jump_to_image_no_args()
-        commit: f73450918d66565c5efacf2bb57227ba94bdaa40
 -- 
-Tom
-
+2.34.1
 
