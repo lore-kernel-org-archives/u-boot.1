@@ -4,73 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088CCC61CE8
-	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 10:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E4CC61CE8
+	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 10:57:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD95082CA8;
-	Sun, 15 Jun 2025 12:51:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 951BE82CB6;
+	Sun, 15 Jun 2025 12:57:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pQxVXwQL";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Geoicd/c";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TFxmX1+e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CE5682B00; Sun, 15 Jun 2025 12:51:27 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2FF6582CA4; Sun, 15 Jun 2025 12:57:11 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73F9582C79
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 12:51:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7237E82CC9
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 12:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bKqgd1pDFz9svQ;
- Sun, 15 Jun 2025 12:51:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1749984685;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sL1JnXoKOvO0fzpXxXmc8Sc5r2MDlicgn20ErQ4oUDc=;
- b=pQxVXwQLksjIZk+mlyoiYsvKMAzRoUQFPyLG3FrYQoeXLjM0UdWfrTXeLExMRtu3hFiPOs
- db+zJfC7IxQwRXOvhIF+cXad+cY2C9kyiCttevDTjKjt21tKbcICmOvNHmvA0bYzeadGGd
- YAchbAt4XOEQSLa5QU7EUF48yerGd55OIRmhB8o43a2PTYY/VnY+vIRLm5fPXSHjHTfkim
- JHkjnxm48ga79h9Wx4rMj17tEmI49/SGRWykt1Yd2qVEW+B9mTz6kIShiqGaMLMwwplgzR
- 00VEMciqk6Eo+ZZt9PrHDMkrFs5OB/eEfuUpLjlegxj3N9cQU+jnmS5zaqyyLw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1749984683;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sL1JnXoKOvO0fzpXxXmc8Sc5r2MDlicgn20ErQ4oUDc=;
- b=Geoicd/cntnCsp1siqtCir6/NfQprtmEY/AsZiIxPshFrfCnrRfKRoUirSa6tQr9eUkFzt
- nZ+2R92ZWqSmLuMYq84NhPfSVDkKtve5i95trGlH8zixXq50tpZWYm9NUm4WIOzGHn4XOn
- iStoRo0tT0+qI9qeIzuaUSQuG/1DdjglD91DcpOhvYAS2AKBltIvWOwc9hvVNEC4RXKmvF
- OZMAZggLROW6YGLxy0yaPmerW7bEnPDIK+89BDx2NKO1/mqizn330c9tCJKkQdHjA9nxN6
- HBZX+wNQypsxkd5W3/zP+EvSYFFpug7vAn6l3zD6n6c5EDUs4LopKFRjinUDrw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] arm64: renesas: Add Renesas R-Car Gen4 SCIF/HSCIF loader
- SREC generation
-Date: Sun, 15 Jun 2025 12:51:08 +0200
-Message-ID: <20250615105112.15330-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250615105112.15330-1-marek.vasut+renesas@mailbox.org>
-References: <20250615105112.15330-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-60727e46168so6037101a12.0
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 03:57:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1749985027; x=1750589827; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vn3wHSCaj4M6TW8nZZAsTATdqYloQGUyJTEzACOCQGI=;
+ b=TFxmX1+eYUQVsL4PediAuY+gXr4SNU1/TK+fa40jTesl3nrO25pBG2xPd34rnFhEQO
+ e2vmqKiWDEKkUwOd6zPqxPXK7DMiH4PZZw4+kkB58LvvUUxL5Q5Df5rBDuQHUZpuAMGx
+ aLSZTOnUB1uRn+1jm5+Eypiu21/m7LHZGNbnZLO0dCQrHtJLjkPBZ1ChSO0uuYEt/Euv
+ isHp3x4aieLwHS7SDXW4zwotzfukxTKWk3pbMrd748XVi6nuenI9Zm1k177V6VT+xAE/
+ JKnVmTGIssQWvvRcxJ8hMxqV1TP5V3xDsOD1b0HFVsFq9ENSLbK2lClArIysAJrPTOJM
+ CnuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749985027; x=1750589827;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vn3wHSCaj4M6TW8nZZAsTATdqYloQGUyJTEzACOCQGI=;
+ b=knT6pn2f/BMikKWscmQJYBNirFYz52esspU7nX9PMg6YmknAIZ8Rq47i5N0SYSIwnn
+ xflwI7IFMUbqpcHEeLrRD5k3S611yyKVtAseCe4qmXW9aFX3awUNtUy/7GxAXwL8d9YU
+ b/VbRxjNDwMkzX5Ka+Ov3CycpzmcVWwzko8t2UptlU83bVH4be4SrK/KRO/4MV+TUCot
+ Ymjp9dnnuECY5I6sKySCiqQXmYZNvdMpa2v6IVQ+i6QawqJuEYujGVUvXtLfYNAPAb78
+ pqrY2hbf25xiRqFJiszwLR98GOH0GnMw/sCCPlHii/6Tyl9Q8l9XanS9oHWeeACUnZjb
+ eiHw==
+X-Gm-Message-State: AOJu0Yw0ClVKr145d4QKcQs6WCXtUwIhQJzLcfhu/tVyZV8Pw6YmXkeN
+ LM3BjG+D569MIYJqQjwkM/n/HjGAy4jNNujuE9JcmO6jX9uTqHaHtmrRiejwDQ6ef2DHp9kYTV+
+ eBUJ2dHGhZyAKYDn8d9mFzTQAMdvzJFs=
+X-Gm-Gg: ASbGncsvH7pMGmWru71nfyGwIBh8ET16RQkyP/sagMBv6d5m2ga9GY/4wCfwldxkkUZ
+ WBAPPAyc3uxg8mICMAtF+qV152O3C2VQLjOuDm5A/1R7N+XCuG7bgoos3li1AhFH+vOsgJ+4Ifd
+ 14pN9YpTiE89u/INH3L7/T7x6UtqSLV1MC8sEvr9k0BR7xlPiT8VKQxF4pibnLGAPkOTIx8eeoR
+ 82qD3cEY9sbrmY=
+X-Google-Smtp-Source: AGHT+IGVJQ0E5xDPAtcyUDqweZQDrtcsQpvMdplpnyqPgejTlEJRMPA89wCfH5lj4OZWe5U+5NiRCTGdvwycd2Tig00=
+X-Received: by 2002:a17:906:ee8e:b0:ade:76d0:fd9c with SMTP id
+ a640c23a62f3a-adfad31bd39mr515761866b.3.1749985026545; Sun, 15 Jun 2025
+ 03:57:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: aca35f29ed808d8b22e
-X-MBO-RS-META: ozcmjh3wzto69nki6jwywfeq519rtsxc
+References: <294e9037fe8b9502b41a06e9ac9363f2d5204b07.camel@opensuse.org>
+ <851157797.299472.1749160367219@mail.yahoo.com>
+ <da35020455a4a086617a0588ba913b5ad3d2dcd9.camel@opensuse.org>
+ <1801521580.655864.1749318986908@mail.yahoo.com>
+ <3b7988777abfb62a51cd2afa92764dfcb9f4a134.camel@opensuse.org>
+ <1287835630.661385.1749328029886@mail.yahoo.com>
+In-Reply-To: <1287835630.661385.1749328029886@mail.yahoo.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 15 Jun 2025 11:56:55 +0100
+X-Gm-Features: AX0GCFvF2mN4vRWIy9GqDue5qRrXdPbGaQbrrhPyKj2UxHpE3f0-feUDHd5zWaM
+Message-ID: <CALeDE9OgocnDjk57pUvK_VVagi7ay1wcDj5=XfnTeO0sn6VuAg@mail.gmail.com>
+Subject: Re: Raspberry Pi Compute Module 5 support
+To: Jojan <jjvazha@yahoo.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Jonas Kvinge <jonaski@opensuse.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,63 +98,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Renesas R-Car Gen4 SCIF/HSCIF loader compatible SREC generation.
-This is a regular U-Boot SPL SREC augmented with a short header which
-describes where to store the received data and how much data to store.
-This header is interpreted by the R-Car Gen4 BootROM SCIF/HSCIF loader.
+On Sat, 7 Jun 2025 at 21:27, Jojan <jjvazha@yahoo.com> wrote:
+>
+>  Sorry I mean 2712Raspebrry -P 4 , that the U-boot support as of now incl=
+udes , bcm2711.dtsi
+> bcm2711-rpi-4-b.dts:#include "bcm2711.dtsi"
+>
+> However RPi-5 uses broadcom 2712 chips.These dts files are not available =
+in u-boot.Howver you can get it from other places and modify / inroduce in =
+your device tree source and configure correctly.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/mach-renesas/Makefile | 10 ++++++++++
- common/spl/Kconfig             |  2 +-
- 2 files changed, 11 insertions(+), 1 deletion(-)
+By default it will use the DT passed from the previous firmware, the
+advantage of this is it deals with any of the overlays and other
+pieces applied.
 
-diff --git a/arch/arm/mach-renesas/Makefile b/arch/arm/mach-renesas/Makefile
-index 3409437d75a..9165ceab4a3 100644
---- a/arch/arm/mach-renesas/Makefile
-+++ b/arch/arm/mach-renesas/Makefile
-@@ -34,6 +34,15 @@ else
- 	srec_cat_le_cmd := "-l-e-constant"
- endif
- 
-+ifneq ($(CONFIG_RCAR_GEN4),)
-+quiet_cmd_srec_cat = SRECCAT $@
-+      cmd_srec_cat = srec_cat -output $@ -M 8 $< -M 8 \
-+			-Output_Block_Size 16 \
-+			-generate 0xeb203000 0xeb203154 $(srec_cat_le_cmd) 0x0 4 \
-+			-generate 0xeb203154 0xeb203158 $(srec_cat_le_cmd) $(CONFIG_SPL_TEXT_BASE) 4 \
-+			-generate 0xeb203158 0xeb203264 $(srec_cat_le_cmd) 0x0 4 \
-+			-generate 0xeb203264 0xeb203268 $(srec_cat_le_cmd) $$(( ( $2 + 4 ) / 4 )) 4
-+else
- ifneq ($(CONFIG_R8A774C0)$(CONFIG_R8A77990)$(CONFIG_R8A77995),)
- #
- # The first 6 generate statements generate the R-Car Gen3 SCIF loader header.
-@@ -90,6 +99,7 @@ quiet_cmd_srec_cat = SRECCAT $@
- 			-generate 0xe6301154 0xe6301158 $(srec_cat_le_cmd) $(CONFIG_SPL_TEXT_BASE) 4 \
- 			-generate 0xe6301264 0xe6301268 $(srec_cat_le_cmd) $2 4
- endif
-+endif
- 
- spl/u-boot-spl.scif: spl/u-boot-spl.srec spl/u-boot-spl.bin
- 	$(call cmd,srec_cat,$(shell wc -c spl/u-boot-spl.bin | awk '{printf("0x%08x\n",$$1)}'))
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 880192043c4..afa4fca7d0d 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1598,7 +1598,7 @@ config SPL_OPENSBI_SCRATCH_OPTIONS
- config SPL_TARGET
- 	string "Addtional build targets for 'make'"
- 	default "spl/u-boot-spl.srec" if RCAR_GEN2
--	default "spl/u-boot-spl.scif" if RCAR_GEN3
-+	default "spl/u-boot-spl.scif" if RCAR_64
- 	default ""
- 	help
- 	  On some platforms we need to have 'make' run additional build target
--- 
-2.47.2
-
+>
+>     On Saturday, June 7, 2025 at 11:19:28 AM PDT, Jonas Kvinge <jonaski@o=
+pensuse.org> wrote:
+>
+>  I've never heard of bcm7712, it's not
+> on https://github.com/raspberrypi/firmware/tree/master/boot
+> Or do you mean bcm2712?
+>
+> I managed to get u-boot v2025.04 to load  by setting boot delay to -2,
+> same issue as described here:
+> https://lists.denx.de/pipermail/u-boot/2024-December/576043.html
+>
+> What are the changes does the custodian version have that are needed?
+> It seems like it's not up to date with the new version u-boot.
+>
+> Jonas
+>
+> On Sat, 2025-06-07 at 17:56 +0000, Jojan wrote:
+> >
+> >
+> > Master is ok. But it won=E2=80=99t work as is. You need to have rpi5
+> > configuration and the dts files. I did it a year back. But since  did
+> > not have bcm7712 dts files, I took the dtb file from the raspberry pi
+> > images ( it has a pre built dtb file, and extracted dts)
+> >
+> > dtc -I dtb -O dts -o <output.dts> -i< input.dtb>
+> >
+> >
+> >
+> >
+> >  On Saturday, June 7, 2025 at 03:26:31 AM PDT, Jonas Kvinge
+> > <jonaski@opensuse.org> wrote:
+> >
+> >
+> >
+> >
+> >
+> > Which branch? The master branch is 1 year old.
+> >
+> > On Thu, 2025-06-05 at 21:52 +0000, Jojan wrote:
+> > >
+> > > You need to take raspberry  ( custodian version)
+> > >
+> > >
+> > > Making sure you're not a bot!
+> > >
+> > > Making sure you're not a bot!
+> > >
+> > >
+> > >
+> > >
+> > > But it is still missing the device tree fro bcm7712 ( RPI 5 is
+> > > bcm7712)
+> > > But you can Dow load the dtb file from the pre built dtb file from
+> > > raspberry pi images
+> > >
+> > > and  use those  device tree sources ( using a dtc )
+> > >
+> > >
+> > >
+> > >
+> > >
+> > >
+> > >  On Thursday, June 5, 2025 at 02:13:24 PM PDT, Jonas Kvinge
+> > > <jonaski@opensuse.org> wrote:
+> > >
+> > >
+> > >
+> > >
+> > >
+> > > Hi,
+> > > I'm trying to boot openSUSE Linux on an CM5 using a sourcekit io
+> > > board
+> > > (https://sourcekit.cc/#/).
+> > > u-boot seem to be stuck with the logo on the upper right corner, no
+> > > text.
+> > > I re-built u-boot using the latest source from git from the next
+> > > branch
+> > > and also set CONFIG_LOG in make menuconfig, but still no text.
+> > >
+> > > Is the CM5 supported by u-boot?
+> > >
+> > > Jonas
+> > >
+> > >
+> >
+> >
+> >
+>
