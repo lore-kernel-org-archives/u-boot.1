@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C262C71135
-	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 18:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5680C71135
+	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 18:02:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06F2382CA4;
-	Sun, 15 Jun 2025 20:02:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CC1082CD2;
+	Sun, 15 Jun 2025 20:02:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QT5aMBiB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RBSZZQuM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C976082CCE; Sun, 15 Jun 2025 20:02:24 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id EBED282C87; Sun, 15 Jun 2025 20:02:25 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 675C682C87
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 20:02:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86C2081E06
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 20:02:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-407aac76036so2281090b6e.1
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 11:02:22 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-73a01a7bee7so1085225a34.1
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 11:02:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750010541; x=1750615341; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750010542; x=1750615342; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pOuIZhyVCQ9dknIp0doh7L07efh451naUB8A4UiohG4=;
- b=QT5aMBiB1w0LVy8g4bfUaKUvVQDheI5J41POHdT5/p4M6qDdke4h8TdnveuPjxAfga
- MuI/lYy/zy9WLRR07R3umGwtKdA9BoyWYyVrg3Mvz5HT+Jdkj0xmU6newmZugTKs48zh
- kTr35asQSy5PIHsqeu7pntLlQc4/QpIkrnJ3M=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=NAf+pWHD/907Q5yjrQ53KJP0aEuXui5DUMo4ykwRbb8=;
+ b=RBSZZQuMRtAhXSbJ9A1i/TzkayL/WDYcVe390+rNSzALtsfzaSxJfrLQQf8xuEnse5
+ TVJ0ilo9R91VzljMuwNRxpQvk8V1WSqD4i+wAq0FuhINI0KCtmVYSjRSn1IdJX2z1/d4
+ sV5szaWnDcLoKZqFKhP+5j3zLCrbsQfdKEnK8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750010541; x=1750615341;
+ d=1e100.net; s=20230601; t=1750010542; x=1750615342;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pOuIZhyVCQ9dknIp0doh7L07efh451naUB8A4UiohG4=;
- b=W1G/0A8iSUBH36DTrSdTkc39xJ+ijWQ09idOq1ADiNnKdQUyO7pCmGlmH4WggSlfu5
- owk5I1tDPv8VfeatZT1ITHRgJpB8CAvop8IfArn4TuBDEK7TRdRBTW0kWNI/7Snk+NMq
- 4eiO8FEzhDCX0z19qdPP6P8XPlnNEeODP/gImDA0vcVfUhy8M17WD14sLeg3EK+Ll31k
- sztFjLKz5CjY+eCkB/7FDfS3c+5DeEV0S9r39Q2Ax9Ti4C/0VXs6Di1NrTaA8GTphbkA
- pVxQpsYu+58NhpLNU83Y5C/rpfUD+lfNv8rdlmTnJvja5kpGl7u8+8PKnsIw+OEByEUy
- jDOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW90YTkBoF1UuwUXg1ARiq6ec6LQIA6VXtEaXxU/I9oiswDp9m6vdTbneYemUes+8VpH39QYO8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLnf4RdHkPj4MwB6ggdF7fgHauvy6DApiPzKpNv62mP08L2Wah
- bJ1bPgQMSUI87V3hcM3XXrIOcGOmURopkw3qAKp6VagR2RXEIfOGiEI7m0P/JWAJOIM=
-X-Gm-Gg: ASbGncvNwIvNRPzJbQiWJ76UasoH/wYb7KnMaY8WeOZE1T/OLmDbBCCQpKxYnHqd8jO
- faY9CWN1exuU8UGbgHHZ200QSZv2opWR/4qjoDy+ZkKZICGypB4ALZvuEPBUbKALNVD5+mWDREz
- p2upXZHDSaaUacR8tsocLlNIokN2A5ZAlhWqgLU4aOh3iW5wezYlcy1iZiGL2ljkzN06Vnbz63R
- 459oEPGqL/zOTxtChgCBIo2MV+oGbidFPRHlUhAgwmUCvpQTAlE8NBWuYUCP2IdPZboHq6QKNuh
- tqgqCBNTtn3yapnKRKem62PPCCm6pPq4UGfXFMuAe4BtJK/OLQFsOTxNYqhSDYLx5YIMZUC0Lc1
- 2hfaZDjLJ6f7HsGKEF+Wu5f4lC56aRGmA
-X-Google-Smtp-Source: AGHT+IE9uYQn5z+dseQamd/8ArgOImlNFhz7p/K7UEQOKAJxUXhR5YR8HwWFSF6Aa80vkQ1Csd1JnQ==
-X-Received: by 2002:a05:6808:6808:b0:403:3c95:3684 with SMTP id
- 5614622812f47-40a7c0f73aemr4629611b6e.1.1750010541145; 
- Sun, 15 Jun 2025 11:02:21 -0700 (PDT)
+ bh=NAf+pWHD/907Q5yjrQ53KJP0aEuXui5DUMo4ykwRbb8=;
+ b=V9MdT0wM1Vngd5bso+ot/+L1W7RnLfpC5GqJVh+cSlSSPYs5E62isuEItGTXBhslYF
+ icBZDfMWOJ3i+zHGPKZL2E2OQfQzS7ps85e/Ud3l9rJDEamm3f6rD22J2HNCtMBbAtcN
+ rVV5mEJi+jR2jt3cHtyzxxLslwZdkxA3zY6KtvzXBWx4kdIQP7/tazP9HlycO7rwM6CT
+ XYiXLPamBC6e4+1MGeU553KI8Ynx1SZTZMiYf89YgqxeDC3lAo3DuEJQCSJL5AI12R1N
+ ydAyRYMhR2ibPR9ZM7oxLQ8xexDkHBAWzuXxVpnvOeC2q/biGi/gp0yVWgWEQDpYIRW8
+ KwZg==
+X-Gm-Message-State: AOJu0YxBNZRqrlI6NFh7cU1fQ7PHkbzow+qNT4hUIsq5KAVJ+PB9Utrm
+ 3mHCcuah5ZEb88u8eR/UJYoMThFohzuZRrAB6DIsklJGRUj7MUNhHilydB9YLP/wpj0=
+X-Gm-Gg: ASbGnctzcWB1Wq6cP0Pps51tyYfLxJPHJ0fuC9W/T5GtoF6VtrqYmUHXFB6kg2VtGYd
+ mENd/TVI5xfiXmEbAX7K7df4lQfj/mlw4YIvAKLQ2HEzrjYoxHAArQBfJqdBpVgm3a0dC+1/Akz
+ hv+NL9bp5zLGi8ru8nNs/W+0xGQXyW2xOIdTEGnyfBTcnbpJhMx02LdV34yQqn79I22e3cz/1LZ
+ Yprxtz2EHmaqU6hGGu/38asHDdCjEiXXMpvHjK1h9P0PF6l2xLujZm8+rhB0t2BhpeAU1TtehrO
+ xN4tBJ1d65DkQyFm6mGsds9iWVmdkH0keFpd2iCP3+BxxDBW72aD1MCgmXL4bIIp6N3lZlHWr1k
+ dJts2tKAy3j3srw09AB7vyg==
+X-Google-Smtp-Source: AGHT+IHJwKifshShp9A9A4b6roWPcpYN3jKCYUxs1c1SuvlFGSry75YsalaQgT9k85qX/VSgOOjS1w==
+X-Received: by 2002:a05:6830:3818:b0:735:22:7cad with SMTP id
+ 46e09a7af769-73a3628b22dmr4684954a34.11.1750010542286; 
+ Sun, 15 Jun 2025 11:02:22 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61108d785a6sm728761eaf.1.2025.06.15.11.02.19
+ 006d021491bc7-61108d785a6sm728761eaf.1.2025.06.15.11.02.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Jun 2025 11:02:20 -0700 (PDT)
+ Sun, 15 Jun 2025 11:02:21 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250613224343.3521820-1-jonas@kwiboo.se>
-References: <20250613224343.3521820-1-jonas@kwiboo.se>
-Subject: Re: [PATCH] arm: dts: rockchip: Fix eMMC write on RK3528
-Message-Id: <175001053964.1130810.12447001686719939078.b4-ty@konsulko.com>
-Date: Sun, 15 Jun 2025 12:02:19 -0600
+To: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>
+In-Reply-To: <CALeDE9M_g9JSqZLbOv3Zh-HrDnnvOw1pA8Ky7opOBbL8DTZNiw@mail.gmail.com>
+References: <CALeDE9M_g9JSqZLbOv3Zh-HrDnnvOw1pA8Ky7opOBbL8DTZNiw@mail.gmail.com>
+Subject: Re: [GIT PULL] rpi: updates for v2025.07-rc5
+Message-Id: <175001054128.1130810.1862848163082063866.b4-ty@konsulko.com>
+Date: Sun, 15 Jun 2025 12:02:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,23 +93,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Jun 2025 22:43:40 +0000, Jonas Karlman wrote:
+On Sun, 15 Jun 2025 13:24:44 +0100, Peter Robinson wrote:
 
-> Writing to eMMC on RK3528 is affected with the same or a similar issue
-> as on RK3588, where eMMC must init to HS200 at least once to fully work.
+> The following changes since commit:
+> d7c449c3d83a986d61e38d1762433c0607caf5c5
 > 
-> Trying to write u-boot-rockchip.bin to eMMC fails with:
+>    Prepare v2025.07-rc4
 > 
->   => mmc write $fileaddr 40 5000
->   MMC write: dev # 0, block # 64, count 20480 ... mmc write failed
->   0 blocks written: ERROR
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
+> tags/rpi-2025.07-rc4
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] arm: dts: rockchip: Fix eMMC write on RK3528
-      commit: f8cb3fde935ed003ad1d7cf6a06d59586fe65cd5
 -- 
 Tom
 
