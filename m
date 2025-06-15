@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84899C61CE8
-	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 11:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3745C61CE8
+	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 12:15:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D63682BF6;
-	Sun, 15 Jun 2025 13:06:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 177438283E;
+	Sun, 15 Jun 2025 14:15:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a26M5jCC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TLbzrkJS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 273E082C84; Sun, 15 Jun 2025 13:06:08 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id A84C882B0F; Sun, 15 Jun 2025 14:15:03 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 258E48144A
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 13:06:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DD8D81E06
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 14:15:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-60780d74c85so5286304a12.2
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 04:06:06 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-607cf70b00aso7254875a12.2
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 05:15:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749985565; x=1750590365; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1749989701; x=1750594501; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oDmqlAHQTxVlK8hIkhsARjbE8wnwO4sdR7h5NGhp7TQ=;
- b=a26M5jCCR30PSY/3+2FVr15R1mTBfZbFZ/8EXKen1EaorIMj0VFmAgeOjkIajZYmAc
- HLT8FEuuXEzK7DRl97yi8aVvdtfLjcMSrZmloYQMMlXB+OV2FWuv5PlmuKc/9FAH8TgP
- MnSEaee5u6d1YmsPHml2mMvqLVs7ToH+Y5vyZ72I1B3ONycgWN4s1rWCSiowBmrnIyL1
- TESBu47EKh78y6tfi+rQ6hV4c2uYnhV6Z4M/hCUQR8gAFbabmT09NUGcLoA82lw+eIKS
- 0FDjpbVRI5ooeH6UN1aG3S1nRqt+uhl5yvzkZYVeioaefwrIRrvGX0ALT5aGftwiNDRM
- 517A==
+ bh=BSgyQO4KnrgMph7O63oNhaVldO5P7AL1rXpbD7i0Uog=;
+ b=TLbzrkJSNXyJ01ih8VYBVfVQEf+f0izybUyoECfVLIvnhrD61E/O9P07DKwvoerQ/R
+ V/KHzzUrerTKito3mPYu6g+ptSZzCm//w/K3rNpuxGilf6kBWnPkFw2SECyxiZippp8N
+ py8cp3n6tWqpQ1CGvMKr0bSd4dsQjGmWoHZ0zKVWqK9/QM5laHOY6W1HtoVmV+LgtInd
+ IkL3Q/ko1ArreBnmYZ8V9C0eNipnOUwpp147xsva2t2I21VraFxH7Tg6BHezeyfhUlUG
+ Vv82meE6MoR/XJFCgyfBB4j+aQaP7Bpytux19UuTFswhSANjMVA8gKo4nGmps16PIyJg
+ pvRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749985565; x=1750590365;
+ d=1e100.net; s=20230601; t=1749989701; x=1750594501;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oDmqlAHQTxVlK8hIkhsARjbE8wnwO4sdR7h5NGhp7TQ=;
- b=RG4a1fmJAb6NNz22IDVn9iGf/rcsGO1XKWjs84LqQ6cYnNSiT98bjTLHOD8/Y1E/K3
- 0/r7n3cO2g0YM6I1gAoxupj6ZQ+1faaGQ1ZloOTaDlCVbJZNchOSLfBMzlhlYesuG/mZ
- arWDv7NwzEjtNbMZvrLLUXuEOBl+LbleMVJgsfO5TiZhdZLucRsE1xwHH7oYA29wN8Kf
- CsotjkdKJKqXS9wDPDkw6INwofhVFk/+l3J2odyZ9JUkbDhR2zFL43PWWVPp79BVVHF0
- dIoWd71+TEfjk6K12efN1X1PTZ6boOVH6FkY/657P80t1OVFofrK8n0AmcrMZp9R78W7
- yrhQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKZyEfNJxOWUVupjPw+Q4aTXKhSOJW7qYTBWKmEnXKsbkP+GmvXvGp4LzmF9EDr8j8tRXxFRY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTWPo02xcf+Ol48UgQfiii1EVZNtZ+L1IToOSvPoDYmQDdboxX
- KhfXp0iu2ezh6QeyzsLWkcuorKPB0bxmuZ874AdXNkW3O/DYtkK3X3O++FCrvohdJvH2oT7dekR
- Oxs/JTYJiS7Nk7w1uuY8x72X4sImiFjM=
-X-Gm-Gg: ASbGncvLvAfojSMrm+IGkiB8RMqlcZGHFWaeu0Q3hmXYP5kMzd489rhCHHSYrpepA5r
- WsidujXanpGE8zIDCXpMz23Q1WfKYfAQYudLcs90X++/e5nyQG7n8MLx6x0jHp0RAVAPJYRJa3r
- hjCv6q08EpZ3l1vw2/jFemkjqNbDmC/Ha5eJddpIqrQ086gFoTLL2PeV7VYzNqyX1ysfDLy13kk
- 7RI+r8yaafYo/8=
-X-Google-Smtp-Source: AGHT+IGvryvHbzA6HwWzxR+35jYLyZXfkobVmjBBFUD86gA7cyjU1siGrkXIXz+PZ0IKVqyzBQc+GylEmrZlnEuwFxU=
-X-Received: by 2002:a17:907:3d16:b0:ad8:a4a8:1038 with SMTP id
- a640c23a62f3a-adfad4f68c1mr462532366b.53.1749985565434; Sun, 15 Jun 2025
- 04:06:05 -0700 (PDT)
+ bh=BSgyQO4KnrgMph7O63oNhaVldO5P7AL1rXpbD7i0Uog=;
+ b=dIxFvSZyt0MXW3KOPpWb6d2CAnndMsPwknW2CJPLCL+Poi/S/pAY6hCpZDsWR0F3C0
+ lR4pa3l72oZerN47JOr+Ow7vG4JPDq0s+xke5zx0aHTJaRMZMxfxvTjymGUR5V+4/qmc
+ Rvi7uLtdmBAYxzGsTJmbfvIm1WsWhl5IFxr+RYtktet/dCXfbE2hkA8wNN8WIcjq+uBT
+ IzIGdnQVpInF8N5x+kVAHrol2VNaAnvwhhTCbdGH6i2Pw/X8drMBTynAMuDbRfhRd2bn
+ b/wzyYqcmgqMNMUGWGqWMmFgiN6u1aLS+Jhj4AHqnkKOu6nBT+NZyNOq725M69OjaLAM
+ 2FWg==
+X-Gm-Message-State: AOJu0YwRdc8jyYmdEIEG57UthYfthrlExp+PI4YsEm1tYBHnqNwqGpy2
+ yuhZLaW+riq3OlsNc2db92r+RN1qPdENfXY8r+q2sW0FynUy/7KhBgHBuVY6gxxuc6nReVXfqjx
+ LDVlu7ip0esAfoVsiRgDidN6Eq+QAn74=
+X-Gm-Gg: ASbGnctG8JJryJe8rxnHeMHrtJ9tu5LPMJp1y32M5TWD5JauzcD6Agix7KiB69jPM50
+ DzP29oJjCALehTW00sbJT91nX3gtGWjmPrQOVHC809AYa5/Pp14v3C3maPxfgMDTedLprTW5gs9
+ oMUJKDKRCRo76QF704knSEi1Dtac64aU0ARXhZpAOJjnFhBbIsLsdYDNIpzfZiVjHlJDbMtUFvB
+ Jlp
+X-Google-Smtp-Source: AGHT+IHaQz1nR5dxsnGcpyvsy7mMWRhUBYkJvYjozm6nNJeyVU12P9kZB4QxhX9Zd/XYOmDyvuvlE+CXL2yAqXzAlm0=
+X-Received: by 2002:a17:907:1c9e:b0:ad5:112:48e4 with SMTP id
+ a640c23a62f3a-adfad3a24a6mr558647466b.18.1749989700306; Sun, 15 Jun 2025
+ 05:15:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250502113556.134731-1-brunosampaioleite@gmail.com>
- <20250502144031.GT1261075@bill-the-cat> <87frhj5r32.fsf@prevas.dk>
- <20250505134843.GK1261075@bill-the-cat>
- <87zffq95f7.fsf@bloch.sibelius.xs4all.nl>
- <20250505212816.GP5430@bill-the-cat> <878qna5h8c.fsf@prevas.dk>
-In-Reply-To: <878qna5h8c.fsf@prevas.dk>
+References: <20250211135829.3467088-1-fiona.klute@gmx.de>
+ <CALeDE9Oumn2xO0MPq+L5rsv5NEAjL=XM8zRNA38uV+MbqkVrzw@mail.gmail.com>
+ <8b8386f2-7a85-499d-956a-11a22b3cb10c@gmx.de>
+In-Reply-To: <8b8386f2-7a85-499d-956a-11a22b3cb10c@gmx.de>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 15 Jun 2025 12:05:54 +0100
-X-Gm-Features: AX0GCFv7SM3wkLgP0aNN2WCrV3ZDXpklPPEn5Ty_HkCw16vh4mTwvDRAdFauEJw
-Message-ID: <CALeDE9O9-L5hKjN7cK_-EY3Ptn77DX-PUtp4zapRQ3jcXVx4jg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- brunosampaioleite@gmail.com, u-boot@lists.denx.de, probinson@gmail.com, 
- mbrugger@suse.com, clast@prevas.dk, brule@prevas.dk
+Date: Sun, 15 Jun 2025 13:14:49 +0100
+X-Gm-Features: AX0GCFv_pTkWbPxETs2kNyJY09qi8Gg-PrjEyITKepU-gXmZydt4KbFQzQAlaoI
+Message-ID: <CALeDE9ONxe=MUdt77eMxgEhj0SV1t8vMmQht4pQrc=_eMdfQGA@mail.gmail.com>
+Subject: Re: [RFC] Raspberry Pi: copy /system/linux, {serial,
+ revision} from firmware
+To: Fiona Klute <fiona.klute@gmx.de>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,98 +94,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 6 May 2025 at 08:30, Rasmus Villemoes <ravi@prevas.dk> wrote:
+Hi Fiona,
+
+> do you have any comments? My main concern is if creating a temporary
+> overlay is the right approach here, or if there's better way to create
+> the /system node if needed.
+
+Apologies, I looked at this originally and my thought then was it
+needed more thought and then it slipped through the cracks.
+
+Off the top of my head I have a few concerns. I will have another look
+at this but to provide some initial feedback.
+
+Firstly there's no bindings upstream [1] that I can see for a root
+system node so it's completely RPi specific and doesn't adhere to
+anything. I don't really want to be adding this to the kernel DT in
+this mode if it's not really verifiable.
+
+I also wonder what the value is if we end up copying large amounts of
+the FW DT into the other DT, why not just use the firmware DT instead?
+
+In the terms of the RPi kernel, again I think for that you'd be better
+of just passing through the FW DT as they should both match in that
+case, for the upstream kernel this won't make any difference. We
+already have the rev details in the model, we should look and see if
+there's a standard way way to pass HW rev/serial number through in
+device tree.
+
+In terms of userspace I think getting it that way in the example is
+broken, as it was in /proc/cpuinfo which was why it never made it to
+aarch64. but I'm not sure what details are being used there and why
+they matter for RGB LEDs.
+
+Overall I am not currently convinced this is something we currently want.
+
+Peter
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings
+
+> Best regards,
+> Fiona
 >
-> On Mon, May 05 2025, Tom Rini <trini@konsulko.com> wrote:
->
-> > On Mon, May 05, 2025 at 10:19:24PM +0200, Mark Kettenis wrote:
-> >> > Date: Mon, 5 May 2025 07:48:43 -0600
-> >> > From: Tom Rini <trini@konsulko.com>
-> >> >
-> >> > On Mon, May 05, 2025 at 11:45:05AM +0200, Rasmus Villemoes wrote:
-> >> > > On Fri, May 02 2025, Tom Rini <trini@konsulko.com> wrote:
-> >> > >
-> >> > > > On Fri, May 02, 2025 at 01:34:33PM +0200, Bruno Leite wrote:
-> >> > > >
-> >> > > >> From: Bruno Leite <brule@prevas.dk>
-> >> > > >>
-> >> > > >>
-> >> > > >> Currently rpi5 uses a generic rpi_arm64_defconfig file that builds rpi4
-> >> > > >> devicetree. Add a defconfig that is specific to the rpi5 building the
-> >> > > >> now available upstream dts for that board. The defconfig makes use of
-> >> > > >> defconfig including that is now available and only changes the DTS
-> >> > > >> related config.
-> >> > > >>
-> >> > > >> It is also necessary to add a more specific u-boot.dtsi to rpi5, since
-> >> > > >> due to the ARCH_BCM283X config it will try to build the
-> >> > > >> bcm283x-u-boot.dtsi and break.
-> >> > > >
-> >> > > > My question is, can we not adjust rpi_arm64_defconfig to be generic
-> >> > > > enough and not have a problem on Pi 5 due to the default device tree?
-> >> > >
-> >> > > Not really.
-> >> > >
-> >> > > What we want is to have CONFIG_DEFAULT_DEVICE_TREE to point at the
-> >> > > rpi5's .dts file, because we really want to build that and not some
-> >> > > "random" dts file that doesn't have anything to do with the hardware. I
-> >> > > know that kinda works for the setups where the .dtb built in U-Boot is
-> >> > > not used for anything, but in our case, we really do want to use the
-> >> > > .dtb from the U-Boot build - we inject various U-Boot specific stuff via
-> >> > > the EXTRA_DTSI mechanism, e.g. public key for kernel verification.
-> >> > >
-> >> > > And due to CONFIG_SYS_SOC being bcm283x, and bcm283x-u-boot.dtsi
-> >> > > referencing nodes that simply don't exist when building
-> >> > > bcm2712-rpi-5-b.dts, the build breaks.
-> >> > >
-> >> > > Perhaps the real problem is CONFIG_SYS_SOC being bcm283x for rpi5? I
-> >> > > don't really know why rpi4 is both bcm2711 and bcm2835 and what the
-> >> > > difference is, but rpi5 only seems to include a bcm2712.dtsi which does
-> >> > > not include further dtsi files.
-> >> > >
-> >> > > If rpi5 has nothing to do with bcm283x, then perhaps a better approach
-> >> > > is to ensure that CONFIG_SYS_SOC is bcm2712 when building for
-> >> > > rpi5. Something like adding a CONFIG_TARGET_RPI_5 choice and adding a
-> >> > > 'default "bcm2712" if TARGET_RPI_5' ?
-> >> >
-> >> > OK, so I guess my next question is, is rpi_arm64 useful enough in the
-> >> > end for Pi 3 and Pi 4? I would have expected that it doesn't matter what
-> >> > tree we build in to U-Boot as we would be using the one passed to us by
-> >> > the prior stage firmware, and then update that at run-time as needed.
-> >>
-> >> Works well enough for us on OpenBSD.  And it would be nice if
-> >> rpi_arm64 would work for the Pi 5 as well.
+> Am 15.02.25 um 14:01 schrieb Peter Robinson:
+> > Hi Fiona,
 > >
-> > But that gets back to my first question. Can we correct the code such
-> > that we do whatever is required at run time, as the previous stage will
-> > have assembled and passed a correct device tree already?
->
-> I think this is sort-of asking the wrong question. The problem is not
-> about what dtb the prior stage hands us or what to do at run-time. [*]
->
-> The problem is to have a defconfig that will compile
-> bcm2712-rpi-5-b.dts, as part of the U-Boot build. As I said, it's quite
-> likely that rpi5 isn't at all a part of the 'menu "Broadcom BCM283X
-> family"', and it's the CONFIG_SYS_SOC="bcm283x" that prevents
-> bcm2712-rpi-5-b.dts from being compiled (because the bcm283x-u-boot.dtsi
-> doesn't apply to that .dts). Bruno's patches achieve that by adding a
-> more-specific -u-boot.dtsi file (it doesn't seem that we need any of the
-> bootph-all settings from the bcm283x.dtsi file), and adding a defconfig
-> file that is based on arm64, but just changes the dt settings.
-
-Any reason why CONFIG_OF_LIST= wouldn't work for that?
-
-> Those who simply ignore what .dtbs are part of the U-Boot build and use
-> blobs coming from elsewhere can probably use rpi_arm64_defconfig as-is
-> for rpi5.
->
-> Rasmus
->
-> [*] That's mostly a solved packaging problem outside the scope of
-> U-Boot itself: Just put whatever .dtb one wishes the prior stage to pass
-> to U-Boot along with u-boot.bin in the FAT filesystem, and put
->
-> kernel=u-boot.bin
-> device_tree=u-boot.dtb
->
-> in config.txt (sure, there might be drivers that need updating to take
-> different compatibles or whatnot into account).
+> > I'll review and test this the coming week and provide feedback.
+> >
+> > On Tue, 11 Feb 2025 at 13:58, Fiona Klute <fiona.klute@gmx.de> wrote:
+> >
+> >> Both the Raspberry Pi downstream kernel [1] and some userspace tools
+> >> [2] use the revision property to identify the board, and the latter
+> >> fails if it is absent. The firmware creates the /system node, so we
+> >> need to do the same.
+> >>
+> >> [1]
+> >> https://github.com/raspberrypi/linux/blob/0f292fbb6346b05766152902076895558ac23f9a/arch/arm/mach-bcm/board_bcm2835.c#L23-L33
+> >> [2]
+> >> https://github.com/jgarff/rpi_ws281x/blob/7fc0bf8b31d715bbecf28e852ede5aaa388180da/rpihw.c#L579
+> >>
+> >> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
+> >> Cc: Matthias Brugger <mbrugger@suse.com>
+> >> Cc: Peter Robinson <pbrobinson@gmail.com>
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> ---
+> >> I'm sending this as RFC because I'm not sure if creating a temporary
+> >> overlay is the best approach here, advice on a better way to create the
+> >> /system node if needed is very much welcome. I know I'll need to add
+> >> more error checks, I'll do that after I know I have the right approach.
+> >>
+> >>   board/raspberrypi/rpi/rpi.c | 37 +++++++++++++++++++++++++++++++++++++
+> >>   1 file changed, 37 insertions(+)
+> >>
+> >> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> >> index aa39afa338a..647716127c7 100644
+> >> --- a/board/raspberrypi/rpi/rpi.c
+> >> +++ b/board/raspberrypi/rpi/rpi.c
+> >> @@ -550,6 +550,41 @@ int copy_property(void *dst, void *src, char *path,
+> >> char *property)
+> >>          return fdt_setprop(dst, dst_offset, property, prop, len);
+> >>   }
+> >>
+> >> +int copy_system_node(void *fdt, void *fw_fdt)
+> >> +{
+> >> +       const fdt32_t *prop;
+> >> +       char fdto[2048];
+> >> +       int src_offset;
+> >> +       int len;
+> >> +
+> >> +       src_offset = fdt_path_offset(fw_fdt, "/system");
+> >> +       if (src_offset < 0)
+> >> +               return -1;
+> >> +
+> >> +       fdt_create(fdto, sizeof(fdto));
+> >> +       fdt_finish_reservemap(fdto);
+> >> +       fdt_begin_node(fdto, "");
+> >> +       fdt_begin_node(fdto, "fragment");
+> >> +       fdt_property_string(fdto, "target-path", "/");
+> >> +       fdt_begin_node(fdto, "__overlay__");
+> >> +       fdt_begin_node(fdto, "system");
+> >> +
+> >> +       prop = fdt_getprop(fw_fdt, src_offset, "linux,serial", &len);
+> >> +       if (prop)
+> >> +               fdt_property(fdto, "linux,serial", prop, len);
+> >> +       prop = fdt_getprop(fw_fdt, src_offset, "linux,revision", &len);
+> >> +       if (prop)
+> >> +               fdt_property(fdto, "linux,revision", prop, len);
+> >> +
+> >> +       fdt_end_node(fdto);
+> >> +       fdt_end_node(fdto);
+> >> +       fdt_end_node(fdto);
+> >> +       fdt_end_node(fdto);
+> >> +       fdt_finish(fdto);
+> >> +
+> >> +       fdt_overlay_apply_verbose(fdt, fdto);
+> >> +}
+> >> +
+> >>   /* Copy tweaks from the firmware dtb to the loaded dtb */
+> >>   void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+> >>   {
+> >> @@ -560,6 +595,8 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+> >>          /* The firmware provides a more precise model; so copy that */
+> >>          copy_property(fdt, fw_fdt, "/", "model");
+> >>
+> >> +       copy_system_node(fdt, fw_fdt);
+> >> +
+> >>          /* memory reserve as suggested by the firmware */
+> >>          copy_property(fdt, fw_fdt, "/", "memreserve");
+> >>
+> >> --
+> >> 2.47.2
+> >>
+> >>
