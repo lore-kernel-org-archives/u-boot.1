@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E4CC61CE8
-	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 10:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E9E1C71150
+	for <u-boot@archiver.kernel.org>; Sun, 15 Jun 2025 11:02:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951BE82CB6;
-	Sun, 15 Jun 2025 12:57:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 887F282C2F;
+	Sun, 15 Jun 2025 13:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TFxmX1+e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g/UInwhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FF6582CA4; Sun, 15 Jun 2025 12:57:11 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id E11BC82C84; Sun, 15 Jun 2025 13:02:31 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7237E82CC9
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 12:57:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3C9C82B0F
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 13:02:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-60727e46168so6037101a12.0
- for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 03:57:07 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ade326e366dso631415666b.3
+ for <u-boot@lists.denx.de>; Sun, 15 Jun 2025 04:02:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749985027; x=1750589827; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vn3wHSCaj4M6TW8nZZAsTATdqYloQGUyJTEzACOCQGI=;
- b=TFxmX1+eYUQVsL4PediAuY+gXr4SNU1/TK+fa40jTesl3nrO25pBG2xPd34rnFhEQO
- e2vmqKiWDEKkUwOd6zPqxPXK7DMiH4PZZw4+kkB58LvvUUxL5Q5Df5rBDuQHUZpuAMGx
- aLSZTOnUB1uRn+1jm5+Eypiu21/m7LHZGNbnZLO0dCQrHtJLjkPBZ1ChSO0uuYEt/Euv
- isHp3x4aieLwHS7SDXW4zwotzfukxTKWk3pbMrd748XVi6nuenI9Zm1k177V6VT+xAE/
- JKnVmTGIssQWvvRcxJ8hMxqV1TP5V3xDsOD1b0HFVsFq9ENSLbK2lClArIysAJrPTOJM
- CnuQ==
+ d=gmail.com; s=20230601; t=1749985349; x=1750590149; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DoiHhUzqNrmhJlP8x5BsqFEuf0wrC3QPynwDy3h9xi0=;
+ b=g/UInwhjsCmQjtOaHWCl9Ijt8/MTWioVOPpGyyv07wqW5XJa16bUMzSjO+GVCR9St2
+ 63QLle2HM7WIrEOv5ffqb7ZWQ0jIfL6XwcyInVpnAQ+WxDUvaNLh3qPMDH9OFEAlxZmM
+ N4YqmzCbjTO5f3ymsHNUtDOtc9FSIMS1oNPLyx3I6Y9u3BNiemdRzFKBgbk73/aYvAvL
+ y/0Nbkq7jyQJ+44/DU+UjtYlkfN7Pr8eMTcPKHWPb4Zl06x47C6gvIdguVlcco9pnk/4
+ CCNXawsg2MngPwUr+PQqp23bT4g+hFS6m2OP5Sii/xArZCqgtvPI9BmLOy+hpH0izdWJ
+ dcWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749985027; x=1750589827;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vn3wHSCaj4M6TW8nZZAsTATdqYloQGUyJTEzACOCQGI=;
- b=knT6pn2f/BMikKWscmQJYBNirFYz52esspU7nX9PMg6YmknAIZ8Rq47i5N0SYSIwnn
- xflwI7IFMUbqpcHEeLrRD5k3S611yyKVtAseCe4qmXW9aFX3awUNtUy/7GxAXwL8d9YU
- b/VbRxjNDwMkzX5Ka+Ov3CycpzmcVWwzko8t2UptlU83bVH4be4SrK/KRO/4MV+TUCot
- Ymjp9dnnuECY5I6sKySCiqQXmYZNvdMpa2v6IVQ+i6QawqJuEYujGVUvXtLfYNAPAb78
- pqrY2hbf25xiRqFJiszwLR98GOH0GnMw/sCCPlHii/6Tyl9Q8l9XanS9oHWeeACUnZjb
- eiHw==
-X-Gm-Message-State: AOJu0Yw0ClVKr145d4QKcQs6WCXtUwIhQJzLcfhu/tVyZV8Pw6YmXkeN
- LM3BjG+D569MIYJqQjwkM/n/HjGAy4jNNujuE9JcmO6jX9uTqHaHtmrRiejwDQ6ef2DHp9kYTV+
- eBUJ2dHGhZyAKYDn8d9mFzTQAMdvzJFs=
-X-Gm-Gg: ASbGncsvH7pMGmWru71nfyGwIBh8ET16RQkyP/sagMBv6d5m2ga9GY/4wCfwldxkkUZ
- WBAPPAyc3uxg8mICMAtF+qV152O3C2VQLjOuDm5A/1R7N+XCuG7bgoos3li1AhFH+vOsgJ+4Ifd
- 14pN9YpTiE89u/INH3L7/T7x6UtqSLV1MC8sEvr9k0BR7xlPiT8VKQxF4pibnLGAPkOTIx8eeoR
- 82qD3cEY9sbrmY=
-X-Google-Smtp-Source: AGHT+IGVJQ0E5xDPAtcyUDqweZQDrtcsQpvMdplpnyqPgejTlEJRMPA89wCfH5lj4OZWe5U+5NiRCTGdvwycd2Tig00=
-X-Received: by 2002:a17:906:ee8e:b0:ade:76d0:fd9c with SMTP id
- a640c23a62f3a-adfad31bd39mr515761866b.3.1749985026545; Sun, 15 Jun 2025
- 03:57:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1749985349; x=1750590149;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DoiHhUzqNrmhJlP8x5BsqFEuf0wrC3QPynwDy3h9xi0=;
+ b=s//6byWDCQuqcsD1ybNQQbENuRRTdPl3YNyuP1UYt0T8HNqLjvn6ZEdZPN3LIcimww
+ srqlzKCENVyEk06qaKtwneaZTy/n53EP/TSKNZlR7DX3nrE+CnEcTnrwUJwCTIl8yjKx
+ pFvumzdSSgrOIEzyyWLrrXXs6aZKz0eVK8sObJac4R/zjU9+yy8AmXxVp9KgUDoWmtqv
+ Rxt9iAfSf4ODSxuLn5wi2Hj3/YAjiWP17p1PgpHxWya+ZvHiWy3ajILsgh3nbgwqb4TD
+ 88MYs5hY6B5NozO93MyHLPPCHT1CFfUX7Aowj7JWfolfQJvRuWtCDq7leAc4U/UtHSWy
+ uiyA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/G0Jn1U/u2w+NfmL4UflYb4G5uDvP6GecGg5G3RTKA9nbNBC29ZGBmpV5ohXi+NColk/R4/w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxmDvPP0cykX87NGe5i4T/+/ID7FeEgsoCs9Z28lOYXqYt9se3m
+ L1AF0UTmswcxlqeXnfl6433YUcXksalArnoJT9g+Ze7TJnzt752Lz+Di+K6srZAUI34surfzZUC
+ jzLtoczzuY2hjNd0ZcpOeGOMSr3L4oy4=
+X-Gm-Gg: ASbGnctPXNreOQk0EksVpNj64fXTsN6wDYF2zCwHvTgH+nrPdYJ1anhVxe072TH1dqi
+ d0jWWNxNv+WRmyNsmwtC4HxVfD7q9t7MfetPI7ZU6bewcTAVqGZlpTi9NA/igFhsI2lZWGJmqCu
+ psPa1h8zU3wIijmg4RcivQldGIPuJOiITThqsiGTd+1XrcNlImiPlb8Xjvy4W+2pXOy2cXlox0O
+ l5F
+X-Google-Smtp-Source: AGHT+IFxiEASEJ/HaZ/UBtoSLf/ra4gmSsDv3LRDOG98SEE8wynGRLFAGG60WW9W8CAXl4Z5qq6BwJDdDgN6uJ26IWc=
+X-Received: by 2002:a17:907:3e93:b0:ade:40cb:2515 with SMTP id
+ a640c23a62f3a-adfad4f649fmr492834266b.59.1749985348990; Sun, 15 Jun 2025
+ 04:02:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <294e9037fe8b9502b41a06e9ac9363f2d5204b07.camel@opensuse.org>
- <851157797.299472.1749160367219@mail.yahoo.com>
- <da35020455a4a086617a0588ba913b5ad3d2dcd9.camel@opensuse.org>
- <1801521580.655864.1749318986908@mail.yahoo.com>
- <3b7988777abfb62a51cd2afa92764dfcb9f4a134.camel@opensuse.org>
- <1287835630.661385.1749328029886@mail.yahoo.com>
-In-Reply-To: <1287835630.661385.1749328029886@mail.yahoo.com>
+References: <20250502113556.134731-1-brunosampaioleite@gmail.com>
+ <20250502144031.GT1261075@bill-the-cat> <87frhj5r32.fsf@prevas.dk>
+ <20250505134843.GK1261075@bill-the-cat>
+ <87zffq95f7.fsf@bloch.sibelius.xs4all.nl>
+ <20250505212816.GP5430@bill-the-cat>
+In-Reply-To: <20250505212816.GP5430@bill-the-cat>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 15 Jun 2025 11:56:55 +0100
-X-Gm-Features: AX0GCFvF2mN4vRWIy9GqDue5qRrXdPbGaQbrrhPyKj2UxHpE3f0-feUDHd5zWaM
-Message-ID: <CALeDE9OgocnDjk57pUvK_VVagi7ay1wcDj5=XfnTeO0sn6VuAg@mail.gmail.com>
-Subject: Re: Raspberry Pi Compute Module 5 support
-To: Jojan <jjvazha@yahoo.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Jonas Kvinge <jonaski@opensuse.org>
+Date: Sun, 15 Jun 2025 12:02:17 +0100
+X-Gm-Features: AX0GCFsuZAo-n63G3W63nUXeAylW3HRNR8mvxasOrdfuJ76QO_yv5YpmWo4VtVU
+Message-ID: <CALeDE9ME103UAwSu333dD=LmVQPPXtopEA6qqV=mLu9L-SnvUg@mail.gmail.com>
+Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
+To: Tom Rini <trini@konsulko.com>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, ravi@prevas.dk,
+ brunosampaioleite@gmail.com, 
+ u-boot@lists.denx.de, probinson@gmail.com, mbrugger@suse.com, clast@prevas.dk, 
+ brule@prevas.dk
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,106 +99,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 7 Jun 2025 at 21:27, Jojan <jjvazha@yahoo.com> wrote:
+> > > > >> Currently rpi5 uses a generic rpi_arm64_defconfig file that builds rpi4
+> > > > >> devicetree. Add a defconfig that is specific to the rpi5 building the
+> > > > >> now available upstream dts for that board. The defconfig makes use of
+> > > > >> defconfig including that is now available and only changes the DTS
+> > > > >> related config.
+> > > > >>
+> > > > >> It is also necessary to add a more specific u-boot.dtsi to rpi5, since
+> > > > >> due to the ARCH_BCM283X config it will try to build the
+> > > > >> bcm283x-u-boot.dtsi and break.
+> > > > >
+> > > > > My question is, can we not adjust rpi_arm64_defconfig to be generic
+> > > > > enough and not have a problem on Pi 5 due to the default device tree?
+> > > >
+> > > > Not really.
+> > > >
+> > > > What we want is to have CONFIG_DEFAULT_DEVICE_TREE to point at the
+> > > > rpi5's .dts file, because we really want to build that and not some
+> > > > "random" dts file that doesn't have anything to do with the hardware. I
+> > > > know that kinda works for the setups where the .dtb built in U-Boot is
+> > > > not used for anything, but in our case, we really do want to use the
+> > > > .dtb from the U-Boot build - we inject various U-Boot specific stuff via
+> > > > the EXTRA_DTSI mechanism, e.g. public key for kernel verification.
+> > > >
+> > > > And due to CONFIG_SYS_SOC being bcm283x, and bcm283x-u-boot.dtsi
+> > > > referencing nodes that simply don't exist when building
+> > > > bcm2712-rpi-5-b.dts, the build breaks.
+> > > >
+> > > > Perhaps the real problem is CONFIG_SYS_SOC being bcm283x for rpi5? I
+> > > > don't really know why rpi4 is both bcm2711 and bcm2835 and what the
+> > > > difference is, but rpi5 only seems to include a bcm2712.dtsi which does
+> > > > not include further dtsi files.
+> > > >
+> > > > If rpi5 has nothing to do with bcm283x, then perhaps a better approach
+> > > > is to ensure that CONFIG_SYS_SOC is bcm2712 when building for
+> > > > rpi5. Something like adding a CONFIG_TARGET_RPI_5 choice and adding a
+> > > > 'default "bcm2712" if TARGET_RPI_5' ?
+> > >
+> > > OK, so I guess my next question is, is rpi_arm64 useful enough in the
+> > > end for Pi 3 and Pi 4? I would have expected that it doesn't matter what
+> > > tree we build in to U-Boot as we would be using the one passed to us by
+> > > the prior stage firmware, and then update that at run-time as needed.
+> >
+> > Works well enough for us on OpenBSD.  And it would be nice if
+> > rpi_arm64 would work for the Pi 5 as well.
 >
->  Sorry I mean 2712Raspebrry -P 4 , that the U-boot support as of now incl=
-udes , bcm2711.dtsi
-> bcm2711-rpi-4-b.dts:#include "bcm2711.dtsi"
->
-> However RPi-5 uses broadcom 2712 chips.These dts files are not available =
-in u-boot.Howver you can get it from other places and modify / inroduce in =
-your device tree source and configure correctly.
+> But that gets back to my first question. Can we correct the code such
+> that we do whatever is required at run time, as the previous stage will
+> have assembled and passed a correct device tree already?
 
-By default it will use the DT passed from the previous firmware, the
-advantage of this is it deals with any of the overlays and other
-pieces applied.
+Typical RPi users want one of two things:
+1) use the DT provided by the prior FW stage, this has the advantage
+that the FW deals with overlays, will add configs automatically based
+on HW/settings/actual device etc.
+2) Use the DT provided by the Linux kernel, we have code to detect the
+HW and load the right DT in that case
 
->
->     On Saturday, June 7, 2025 at 11:19:28 AM PDT, Jonas Kvinge <jonaski@o=
-pensuse.org> wrote:
->
->  I've never heard of bcm7712, it's not
-> on https://github.com/raspberrypi/firmware/tree/master/boot
-> Or do you mean bcm2712?
->
-> I managed to get u-boot v2025.04 to load  by setting boot delay to -2,
-> same issue as described here:
-> https://lists.denx.de/pipermail/u-boot/2024-December/576043.html
->
-> What are the changes does the custodian version have that are needed?
-> It seems like it's not up to date with the new version u-boot.
->
-> Jonas
->
-> On Sat, 2025-06-07 at 17:56 +0000, Jojan wrote:
-> >
-> >
-> > Master is ok. But it won=E2=80=99t work as is. You need to have rpi5
-> > configuration and the dts files. I did it a year back. But since  did
-> > not have bcm7712 dts files, I took the dtb file from the raspberry pi
-> > images ( it has a pre built dtb file, and extracted dts)
-> >
-> > dtc -I dtb -O dts -o <output.dts> -i< input.dtb>
-> >
-> >
-> >
-> >
-> >  On Saturday, June 7, 2025 at 03:26:31 AM PDT, Jonas Kvinge
-> > <jonaski@opensuse.org> wrote:
-> >
-> >
-> >
-> >
-> >
-> > Which branch? The master branch is 1 year old.
-> >
-> > On Thu, 2025-06-05 at 21:52 +0000, Jojan wrote:
-> > >
-> > > You need to take raspberry  ( custodian version)
-> > >
-> > >
-> > > Making sure you're not a bot!
-> > >
-> > > Making sure you're not a bot!
-> > >
-> > >
-> > >
-> > >
-> > > But it is still missing the device tree fro bcm7712 ( RPI 5 is
-> > > bcm7712)
-> > > But you can Dow load the dtb file from the pre built dtb file from
-> > > raspberry pi images
-> > >
-> > > and  use those  device tree sources ( using a dtc )
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >
-> > >  On Thursday, June 5, 2025 at 02:13:24 PM PDT, Jonas Kvinge
-> > > <jonaski@opensuse.org> wrote:
-> > >
-> > >
-> > >
-> > >
-> > >
-> > > Hi,
-> > > I'm trying to boot openSUSE Linux on an CM5 using a sourcekit io
-> > > board
-> > > (https://sourcekit.cc/#/).
-> > > u-boot seem to be stuck with the logo on the upper right corner, no
-> > > text.
-> > > I re-built u-boot using the latest source from git from the next
-> > > branch
-> > > and also set CONFIG_LOG in make menuconfig, but still no text.
-> > >
-> > > Is the CM5 supported by u-boot?
-> > >
-> > > Jonas
-> > >
-> > >
-> >
-> >
-> >
->
+This is why we've never really bothered with the full RPi DT in U-Boot
+because it's always a worse experience that either of the above two
+options and allows a more straight forward config making support
+easier. Even with the RPi5 I am still yet to to be convinced there's a
+real reason this would change.
+
+Peter
