@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB8D3C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 09:45:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B94C71135
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 09:46:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39CA082B00;
+	by phobos.denx.de (Postfix) with ESMTP id 87D6782CCF;
 	Mon, 16 Jun 2025 11:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hToYt2Gj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gz8Jg7m/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F4BE829F5; Mon, 16 Jun 2025 11:44:58 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 18DF580C93; Mon, 16 Jun 2025 11:45:00 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94A0C81760
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 11:44:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F0D282CBC
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 11:44:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a531fcaa05so2611370f8f.3
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 02:44:56 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-450d668c2a1so36074455e9.0
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 02:44:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750067096; x=1750671896; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750067097; x=1750671897; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3UV57k4rVnijtDtvo0BY0z3lwOaNoI6EVcU6lW1NM8o=;
- b=hToYt2GjwQ+k/e2Tai6wTe6iKbPnfUjL0dnBghpbAHcA3wg0J1dyNxbSgWIwGNy5Fd
- asSCmtJ2Vx7xWBv7sZyczoBhHmw1M/TLbbV58962ivueAwwBvMuF5al8z2Hew2KIi/hh
- pNGsSZJO3AC+1srrnEcYja9NKytgOsJ0WfsaQ5KSDDHyZR0AD2FJHP7wlbM7moxir2op
- 256lq7m+M2P4sGF/NTVLteSounSwLnNRuNi3cyXV6Sm46wtyv4S1qsHLKLjkQYRqzJmr
- WW3QbiWoS4s2QHozycwYktPn915nXthJcamHosT3EYPOIKljOXZ+hZ7Ee3wEEVor3yQx
- iLGw==
+ :reply-to; bh=d1S8f2UxKaB6hnYE+VpXXcL4q4gMpoZRXz4T8RarZJI=;
+ b=gz8Jg7m/BkpSmjskAPiARqqWXSezDxyqPxaBi5/9u82vanymoIuUTqaR83CzI9AZLb
+ 63lMgH0JDrsZ1FKCnMKHCA5TVYnJpiAj+UZ30bWL98C9Ax1FTaSa5YkGEaf23hikFPGC
+ 4IUo1+3vIfY/AyKbxTmsYNasI3UBaS6iz7d71iAyMuyhtTE1gc3bhLOvsrKdZXaoM0Ty
+ pmthFA6f5gaspl+mXKy3lbUHG6UHoxRbKKHz0Fw4tKD2gL6HfQ6L0YkXXHn90A1O0a4F
+ AJnxR4zXyBRlPuM+X0xxctElmWRWhs4EWPkToKZLVzY22sGoCDyesatGPrEEFEzhjong
+ z+NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750067096; x=1750671896;
+ d=1e100.net; s=20230601; t=1750067097; x=1750671897;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3UV57k4rVnijtDtvo0BY0z3lwOaNoI6EVcU6lW1NM8o=;
- b=EUp3MmNyFJQkqvEPAiA4ARTtjUV4URiEznIpMO6UlNBy0rpTtUGScnTr4KeF6oYsKO
- y36Mzb8FWcJ+9ydFsmS4gGNO6iSFW2CP5BIQak9Od+YY8ENlqAoNe05di4IwtKWbSIsj
- 30qFVdMbUfHv7N7xgtoO552CssjEbiNrSKUcK1MHjs3HP8h9E5c1s6OI8FCMLeMW5cJQ
- tjo3dZ5AkM0UXe3odXodCVHRGr0BA3M57repwjNwWQBmU17E3KNAxNn2JxdMAU/kp7tc
- E/6iSMkLDIV/wKDbHXtfz5/neROhlE3AfJHrnx2t/gur5Z2BpZm9prKmeiSTu54Le9uV
- neSA==
-X-Gm-Message-State: AOJu0Yx2UxtqoMrdB82ndrLIwybxWCTKY2Eb0h6m7xqhq93Ob8dK/Ppg
- 8AUkQ2d2A1t+VWmBrVWCkaVhyMG+NqZmKHPP4EnyNbVXN3gFEG01whHAPyQ1JqJGpw0=
-X-Gm-Gg: ASbGncvT2peKew5uCbqtX2doJYL00v6gMU/sXwMbqdfKg00h+cc/KHk9B3vkq5B+aIB
- 8IjtrNCceYXiUgk3IEVcBfA15tsSXU9jLGeMn/5C81w8qZO1VkUBMGutc7fgESllzhT7dtLtQeK
- bOsAE6CbxAaYjXrMvH55LcVxAPtPCJPnyGr+hvXdkdv79hl7KetQjvzPG8WSRQUq6R+hFM7JGPS
- PrtSyKtOijNVj8j7YNwWhyynOQizvyyo6KwXktpI0g6S196F1wZ2cHIkQqKlQ39RbK/lNv5Ie7U
- 8sVf/UtbyTmAhGTfioNsiqElx9mWxqcDceOSUq611Ngh0ZoAgtYYgZ1GGU7UaQRELQI4M9Cq/mv
- dURbu
-X-Google-Smtp-Source: AGHT+IFBigejFNkVxdTJbb+ySi2+K7l4MoaT+DAEMSre8XIOiywrkP5WT7efSrRnpjRf7OoBJEHPtA==
-X-Received: by 2002:a05:6000:4284:b0:3a4:d6ed:8df7 with SMTP id
- ffacd0b85a97d-3a572ea7ff9mr7549441f8f.59.1750067096019; 
- Mon, 16 Jun 2025 02:44:56 -0700 (PDT)
+ bh=d1S8f2UxKaB6hnYE+VpXXcL4q4gMpoZRXz4T8RarZJI=;
+ b=psGV9k/PbMuKCZMAGgSl6KX/PvS3gYzKGuYKRDZKMCMB0xgCK0jSldPtDhGzNF90lF
+ 32hGlJpbICyslt2jernHZe9qgHth+SBmP1jcopV+FvHRIShJEDC/xv/R0Kag1pZ76MM8
+ N6mxP7vK0qePfp92q8nd13/QC1MEZodvfpGSjHtXl7oTfzXwQDotpwa345ki1ud9hT75
+ NDxdtIMAejjiS6Fd8QMQnxqbzrL3lk7Hqk0dGsizEMM/bXMJBp/DxrDYjJF95SScNNtq
+ pG662x2vS4EP0RLtHTNfVqvYsRVHN1DyezEXX9Z5RWOSNFaCT9cXOmKviVPk+a8kFVng
+ 3GGA==
+X-Gm-Message-State: AOJu0Yx+3hSSLRm/W2rq2WOZtd9vUCqjThIoxWP4qS5x+6uzUedp95CU
+ B27HBnO2AbKqiStRt0151DHisPQCJJjxX82+TzeQ1IP5WU2gqq8bY8Xc2yoHtYBKV3M=
+X-Gm-Gg: ASbGncuXD/qFyzk6kAN6vmAdcLnyGsTqJcolXFNkbsjgcNEIPdP9e19Ijo6wcmLnoec
+ gBbMlsbxU+TuVRbgXympm9LHqYUCmG3JgOvTkMfEHdAtB0ETiQRE6YyGIUSDOejCc8Cl/Y+yw0d
+ yO2V2hItYrqdTy2LM58lBCB8v6C9YB9mrydpndBUaOjGWMVDnTh3glphOp48tF5hFMRuKFc0Ro0
+ avPz6IiqWcUipmBekxVMRzYEBaAGhTYA4R3DNZnWc0qjYPMUxOtjuEoY+jjOqXGWSWBvMAWW8L0
+ jdyBvuulk+6u1qZSq5Z+dryaM28AIoWXVFnoa9ZH5JQ0rSFBUqGUEQvvbvG6nxjRa7+Azl/uiCO
+ LtrZ8
+X-Google-Smtp-Source: AGHT+IFeDT1GNHE3vnl2DTVHqfBqSUceS/d9aSOkSN3SDYdtG1phOh6vwUTuyduutWKnqRqWfYaC5w==
+X-Received: by 2002:a05:600c:5492:b0:442:f904:1305 with SMTP id
+ 5b1f17b1804b1-4533c8dd553mr75754505e9.6.1750067097456; 
+ Mon, 16 Jun 2025 02:44:57 -0700 (PDT)
 Received: from toyger.localdomain ([213.240.182.76])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532de8c229sm139308105e9.6.2025.06.16.02.44.54
+ 5b1f17b1804b1-4532de8c229sm139308105e9.6.2025.06.16.02.44.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Jun 2025 02:44:55 -0700 (PDT)
+ Mon, 16 Jun 2025 02:44:56 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 16 Jun 2025 11:44:47 +0200
-Subject: [PATCH v4 5/9] clk/qcom: sc7280: add uart7 clocks
+Date: Mon, 16 Jun 2025 11:44:48 +0200
+Subject: [PATCH v4 6/9] serial: msm-geni: implement firmware loading
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250616-geni-load-fw-v4-5-e7df44205505@linaro.org>
+Message-Id: <20250616-geni-load-fw-v4-6-e7df44205505@linaro.org>
 References: <20250616-geni-load-fw-v4-0-e7df44205505@linaro.org>
 In-Reply-To: <20250616-geni-load-fw-v4-0-e7df44205505@linaro.org>
 To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -86,21 +86,21 @@ To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Casey Connolly <casey.connolly@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1851;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4895;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=ilc+MkFAWqEHp3xVjnRqOgd0tHQQmGiRxLtjzyftWZk=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoT+eOfHHxcCMk/2EkzTQGXFEJJO2k1RCyohwQS
- iDrjp98ocmJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaE/njgAKCRAFgzErGV9k
- tlJ+D/9OPc5dkb8vLCbUhM13IYn9nGMx1k/9bXOcv+af4mGIArEP/bXWTR/A46oQg4WDsGbvRi6
- akbk+pCNhZrUXHVO9gUHO4etAcCdqmKqgwH8Iq7vWUjEsZ4luBFhPYPNQ+59Y1tkqC3qT1CwDsA
- iiHdc6ZXvLcJYg112dD5Eayc9Nh0GDV4/8FiPdiop4Nty3G5KKBfG5HwOftYCJt15sqlQsXi05P
- hfbp/iiGg8sQ4dtzDiqDwGhnXhI2Wfns8DnKMjWb6QtgCLU6BRdDRxyr7+J6w2Kw1BEgnBA97w1
- 0VmX57nUwnRhbbEhS/TyMYjCr6rJCcRjluc+SNkiQhe0IjeKnism5xbAQtI8/x4VnJvV//BNF2F
- 4o62ROlITPBIEZyiYZthMctZijPsjbns0K8hwTlUl23yoJo/bZ/b4fh/FjiEDgBmAdB8wLmjfsX
- IFvj0f+nd+SGFnXwhW/FYqCyxjs+hyxRKhmqxRknbjpWj8nCuAPXDMsMG4MI3rnUWu0EfyXta3W
- 0mJPjsPqss6VGXr8UAYqGEs6wWUlwcdyYyRAdIKpd7T5IWInSpWUec7qYE9LnykhtI7XFqGxJRY
- xenaVHNuRDy5IIT2u757YBGiNItVgN1/l9DCkTqBHfVKxEkPqRZxwc7qNpNW7Xbm0bGerc9Yuj1
- OYbM8pEUTp+fWJw==
+ bh=aruKasiUGY9yf+ZpXSvHhb2LO8n/ScJfqCYKb9Cys6g=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoT+eOLmriNGDz7RSDPSW0MhAtHUibJ03meY58e
+ ZekzPbyEteJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaE/njgAKCRAFgzErGV9k
+ tsb5D/4vsRB2mxcPIP7x3ceK7t6Hl9Wkr4YuV4We/Fq5p6wjyxkCoMu1yEnfmZ/22QLuPT6W9wm
+ 3fX28M+Qq5PcE4mRaGanWiYkhcil+Bs0dZarV1yWdCjODjIxiYjHuf8fVM3XiGPRuzZONsnXC7O
+ FbAYe7M1L4ANmMnNruTGuL9smoRJlJGIQ/2lyA/A8pxVC4QNHy/csj5VhMBj1giusf3HRxfCfZu
+ LEubTIdL4e3b9BQ5dQtrkKSkKw06ai38L4FVg+Z4pelEa1GczK6XgZJFD5jZ4FKI6H9+XGju/Cf
+ p5UHNs67W6S32lYxqnyssEXBJeAz4mJ9TfqUhpJp17djP5diRgb3uWQ+VvV1NJa7pb3FP9/LPXq
+ QdYE9gwzmN4frUbX0sqOJ2dvJXhkJ2MueypCUD8AeqvZzdJAYcnBbxFMdccdbvr+tHCCqEZ3HQF
+ W/U3JQLr1iDEM0/rp+TlVa2q76LGvSy3LkKvWCDAgfzXMWotMvJA3pSD2j7WSOcs1k0FHQFyIln
+ kdyqYvp8gr4Zgw04QK3Rw+Nf1p0D33Y70YdP55yv2AvmKp2DXR0bmVhn2RY+gqc0xB5Qs1J/BFe
+ tkTWvx2EXHY+DPx096n8A5WxenueFr69g20llc2TFHTsP4hNyaaYrVjv6pTbEGxeJ3SUmVEzaH9
+ xeVYc85UN1En2Jg==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -119,42 +119,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow us to power up UART7 so we can load the QUP firmware, this is used
-for bluetooth on RB3 Gen 2 and possibly other boards.
+Teach the GENI UART driver to load firmware, similar to i2c.
+
+This is primarily intended for non-debug UARTs, but since we don't
+support using these as the console we abort probe for now.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/qcom/clock-sc7280.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/serial/serial_msm_geni.c | 68 ++++++++++++++++++----------------------
+ 1 file changed, 30 insertions(+), 38 deletions(-)
 
-diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
-index bf3c6c4ae647a46f7f96b10c0e3ed76a2f2ebee1..55a233df39450e511aebf7892214967c284a603e 100644
---- a/drivers/clk/qcom/clock-sc7280.c
-+++ b/drivers/clk/qcom/clock-sc7280.c
-@@ -67,8 +67,13 @@ static ulong sc7280_set_rate(struct clk *clk, ulong rate)
- 		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s2_clk_src, rate);
- 		clk_rcg_set_rate_mnd(priv->base, 0x17600,
- 				     freq->pre_div, freq->m, freq->n, freq->src, 16);
- 		return freq->freq;
-+	case GCC_QUPV3_WRAP0_S7_CLK: /* UART7 */
-+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s2_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, 0x17860,
-+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
-+		return freq->freq;
- 	case GCC_USB30_PRIM_MASTER_CLK:
- 		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
- 		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
- 				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-@@ -128,8 +133,9 @@ static const struct gate_clk sc7280_clks[] = {
- 	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x52008, BIT(10)),
- 	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x52008, BIT(11)),
- 	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK, 0x52008, BIT(13)),
- 	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK, 0x52008, BIT(15)),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S7_CLK, 0x52008, BIT(17)),
- 	GATE_CLK(GCC_UFS_PHY_AXI_CLK, 0x77010, BIT(0)),
- 	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x770cc, BIT(0)),
- 	GATE_CLK(GCC_UFS_PHY_AHB_CLK, 0x77018, BIT(0)),
- 	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x7705c, BIT(0)),
+diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+index 35e0029144be7948eb5ab0da5a2d1317a08fb0c5..ad8b183edf5763486c9bd30be1458a1b332c2fee 100644
+--- a/drivers/serial/serial_msm_geni.c
++++ b/drivers/serial/serial_msm_geni.c
+@@ -9,22 +9,23 @@
+ 
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <dm.h>
++#include <dm/device_compat.h>
+ #include <errno.h>
+ #include <linux/delay.h>
+ #include <linux/time.h>
+ #include <misc.h>
+ #include <serial.h>
++#include <soc/qcom/qup-fw-load.h>
++#include <soc/qcom/geni-se.h>
+ 
+ #define UART_OVERSAMPLING	32
+ #define STALE_TIMEOUT	160
+ 
+ /* Registers*/
+ #define GENI_FORCE_DEFAULT_REG	0x20
+ #define GENI_SER_M_CLK_CFG	0x48
+-#define GENI_SER_S_CLK_CFG	0x4C
+-#define SE_HW_PARAM_0	0xE24
+ #define SE_GENI_STATUS	0x40
+ #define SE_GENI_S_CMD0	0x630
+ #define SE_GENI_S_CMD_CTRL_REG	0x634
+ #define SE_GENI_S_IRQ_CLEAR	0x648
+@@ -38,9 +39,8 @@
+ #define SE_GENI_TX_FIFOn	0x700
+ #define SE_GENI_RX_FIFOn	0x780
+ #define SE_GENI_TX_FIFO_STATUS	0x800
+ #define SE_GENI_RX_FIFO_STATUS	0x804
+-#define SE_GENI_TX_WATERMARK_REG	0x80C
+ #define SE_GENI_TX_PACKING_CFG0	0x260
+ #define SE_GENI_TX_PACKING_CFG1	0x264
+ #define SE_GENI_RX_PACKING_CFG0	0x284
+ #define SE_GENI_RX_PACKING_CFG1	0x288
+@@ -53,61 +53,26 @@
+ #define SE_UART_TX_PARITY_CFG	0x2a4
+ #define SE_UART_RX_TRANS_CFG	0x280
+ #define SE_UART_RX_PARITY_CFG	0x2a8
+ 
+-#define M_TX_FIFO_WATERMARK_EN	(BIT(30))
+ #define DEF_TX_WM	2
+ /* GENI_FORCE_DEFAULT_REG fields */
+-#define FORCE_DEFAULT	(BIT(0))
+-
+-#define S_CMD_ABORT_EN	(BIT(5))
+ 
+ #define UART_START_READ	0x1
+ 
+-/* GENI_M_CMD_CTRL_REG */
+-#define M_GENI_CMD_CANCEL	(BIT(2))
+-#define M_GENI_CMD_ABORT	(BIT(1))
+-#define M_GENI_DISABLE	(BIT(0))
+-
+-#define M_CMD_ABORT_EN	(BIT(5))
+-#define M_CMD_DONE_EN	(BIT(0))
+ #define M_CMD_DONE_DISABLE_MASK	(~M_CMD_DONE_EN)
+ 
+-#define S_GENI_CMD_ABORT	(BIT(1))
+-
+-/* GENI_S_CMD0 fields */
+-#define S_OPCODE_MSK	(GENMASK(31, 27))
+-#define S_PARAMS_MSK	(GENMASK(26, 0))
+-
+-/* GENI_STATUS fields */
+-#define M_GENI_CMD_ACTIVE	(BIT(0))
+-#define S_GENI_CMD_ACTIVE	(BIT(12))
+-#define M_CMD_DONE_EN	(BIT(0))
+-#define S_CMD_DONE_EN	(BIT(0))
+-
+ #define M_OPCODE_SHIFT	27
+ #define S_OPCODE_SHIFT	27
+-#define M_TX_FIFO_WATERMARK_EN	(BIT(30))
+ #define UART_START_TX	0x1
+ #define UART_CTS_MASK	(BIT(1))
+-#define M_SEC_IRQ_EN	(BIT(31))
+ #define TX_FIFO_WC_MSK	(GENMASK(27, 0))
+-#define RX_FIFO_WC_MSK	(GENMASK(24, 0))
+-
+-#define S_RX_FIFO_WATERMARK_EN	(BIT(26))
+-#define S_RX_FIFO_LAST_EN	(BIT(27))
+-#define M_RX_FIFO_WATERMARK_EN	(BIT(26))
+-#define M_RX_FIFO_LAST_EN	(BIT(27))
+ 
+ /* GENI_SER_M_CLK_CFG/GENI_SER_S_CLK_CFG */
+-#define SER_CLK_EN	(BIT(0))
+-#define CLK_DIV_MSK	(GENMASK(15, 4))
+ #define CLK_DIV_SHFT	4
+ 
+ /* SE_HW_PARAM_0 fields */
+-#define TX_FIFO_WIDTH_MSK	(GENMASK(29, 24))
+ #define TX_FIFO_WIDTH_SHFT	24
+-#define TX_FIFO_DEPTH_MSK	(GENMASK(21, 16))
+ #define TX_FIFO_DEPTH_SHFT	16
+ 
+ /* GENI SE QUP Registers */
+ #define QUP_HW_VER_REG		0x4
+@@ -548,16 +513,42 @@ static inline void geni_serial_init(struct udevice *dev)
+ static int msm_serial_probe(struct udevice *dev)
+ {
+ 	struct msm_serial_data *priv = dev_get_priv(dev);
+ 	int ret;
++	u32 proto;
+ 	struct clk *clk;
+ 
+ 	clk = devm_clk_get(dev, NULL);
+ 	if (IS_ERR(clk))
+ 		return PTR_ERR(clk);
+ 	priv->se = clk;
+ 
++	/* Try enable clock */
+ 	ret = clk_enable(clk);
++
++	/* Check if firmware loading is needed (BT UART) */
++	proto = readl(priv->base + GENI_FW_REVISION_RO);
++	proto &= FW_REV_PROTOCOL_MSK;
++	proto >>= FW_REV_PROTOCOL_SHFT;
++
++	if (proto == GENI_SE_INVALID_PROTO) {
++		qcom_geni_load_firmware(priv->base, dev);
++		proto = readl(priv->base + GENI_FW_REVISION_RO);
++		proto &= FW_REV_PROTOCOL_MSK;
++		proto >>= FW_REV_PROTOCOL_SHFT;
++	}
++
++	if (proto != GENI_SE_UART) {
++		dev_err(dev, "Invalid proto %d\n", proto);
++		clk_disable(clk);
++		return -ENXIO;
++	}
++
++	/* Don't actually probe non-debug UARTs */
++	if (ofnode_device_is_compatible(dev_ofnode(dev), "qcom,geni-uart"))
++		return -ENOENT;
++
++	/* Now handle clock enable return value */
+ 	if (ret)
+ 		return ret;
+ 
+ 	ret = geni_set_oversampling(dev);
+@@ -588,8 +579,9 @@ static int msm_serial_ofdata_to_platdata(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id msm_serial_ids[] = {
+ 	{ .compatible = "qcom,geni-debug-uart" },
++	{ .compatible = "qcom,geni-uart" },
+ 	{ }
+ };
+ 
+ U_BOOT_DRIVER(serial_msm_geni) = {
 
 -- 
 2.49.0
