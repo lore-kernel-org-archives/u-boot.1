@@ -4,115 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B71C71159
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 16:40:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694A0C71159
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 16:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3069282A0A;
-	Mon, 16 Jun 2025 18:40:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A688D82A0A;
+	Mon, 16 Jun 2025 18:42:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k/AjcFth";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jtCi6NE9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D9482B18; Mon, 16 Jun 2025 18:40:40 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id E3F8782B18; Mon, 16 Jun 2025 18:42:49 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58AB881E18
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 18:40:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDF1A81E18
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 18:42:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a548a73ff2so4465274f8f.0
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 09:40:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-408d7e2ad03so3114553b6e.1
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 09:42:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750092038; x=1750696838; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=hcKwZAiVPv4FcYz5W4+J5tCKzB1NjRbzOUmdxAIRS1g=;
- b=k/AjcFthtvqFJT65UmNMRv6CmXSP7Xf07sL6XMrx0EQE5S9Dwex/y8b4OkRG0SVnhS
- UqaX35+cLlydjJIF59OfGR9K9sBDM6eLNr9QRBtxyDGBhmJ0mnwSUVyOvnTD4mulklFC
- jNTfzotUQKdR7YTX5I2aKSJuVOPgpNLsG29Bdgzq8fl3UUG8evBONN7O0xuLrsdVNRrR
- Ju9tKivHd7CYaAmoGBHzGhPXDt++JHikTRWYqL4FxRDzo/exouh7HFIXjVlEzVXE6Xmu
- lfLcmrZpKlhFN3JY5nDqyp0sbdSawQIHIjNtt40xaJJ6Gq9zYEWoPSEeCr48EbXLRzEx
- exkA==
+ d=konsulko.com; s=google; t=1750092166; x=1750696966; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xg5d4gkklUYYOgvuk+8lLD4/M2/08lzrzyrmWIWwnSU=;
+ b=jtCi6NE9I9qWTY0jzVeov4YmIuC/p0aakJskFhOHYkVVIYky9vK65I0wy/Mov+fLUK
+ YeufSC8sjemvydMOk9obI/FVsEtHDeB601tcalT+PN6yfDoNAUzyUB7yzc31m4R+WXT+
+ /ExLi/5ax60ab2ZNiQJrpdUdfbOoEwt+aPUls=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750092038; x=1750696838;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=hcKwZAiVPv4FcYz5W4+J5tCKzB1NjRbzOUmdxAIRS1g=;
- b=sY2IyoC5NLK19azl4aUAxKBiOstsWcl+gN6142+ejIUwq+WWQOn818dGn0vQziP9QA
- pybzY5vtFp/DzU66o9ksMX8abmdx8dJqBX31BsAHf2I5EUyd74pZgFJm5uXPhxcBdDOu
- mhzr1Sk4LUW/7txq/t3k1DUlGcsMa4UYlOn2i5RMgqOrZUqz6M92PlT+UpT07fMkItfN
- Bh5y7qy268mrfNBxruoVQPmUpKQnK9Kj8PtVYkh2DlWz8Jf2yz6TEciKn2ympbXT7SyW
- JbJjLegMV5t6bGix3eZ4IU3lE+5i3gEX1WaiLNPxT5VOIjJ+TFQWSIuwdnqesktN7sDR
- r8tQ==
+ d=1e100.net; s=20230601; t=1750092166; x=1750696966;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Xg5d4gkklUYYOgvuk+8lLD4/M2/08lzrzyrmWIWwnSU=;
+ b=PxHXBfdBmaSQWn2ABbhAQd8u3zesWqhlcvJcXqIma/BjZeRNyWg+7T2yPajbC7aD0Z
+ DyqzEH7PzUvG53x9ZfbkGxsviX8Lv2QH8hr5pkkLmB7i9Yp3aboyEc/OQaDIgR4qTqm0
+ fvrckc3PzwK/YkBloUobeUQWj013+rcN878w+c7GzRKoJhIpucCQVyZ1hp7pdyz4tVSN
+ gCUnS1yCib8GkNdNyahcTEpOVGCCoNA2OQ2SeYJ9OoVhp7qA7zDdNNhWGZDb04W9i5G/
+ Z77t+TAxb+t6R4Ra22ln64SKuar+7xg5pel4EvrCsn5/hoPbejKOd4IT9oj+q5K/IQ8J
+ qaaw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlWLmz8YWNzcf819nfqLkhMnjfPZOFHm2y2QTmWd3u+K/07z+Wm5eHWE0f69+YxSl7P74p0NY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw07oHkfRfwjca0zQjgthudqoRzsNVVv2Q2YNNZVzZZeherkimJ
- RIQBEPxxyelG9mCbKq3WKUlKC03iCpuemjxn38TjsuusA96D8+7QIET/9rzrgk0o+Jo=
-X-Gm-Gg: ASbGncseWbMIa54DHmqWVfrPpZlpbSWRVbjrNpLJjJpPkqQiIedErYXMLOjfOhGJ22Z
- tNgxxeFBnhwnEYJyshgP9PMC8QyzEZK/GPKmnfYMt0B1CwhwwWqOervbtTXMBtCEkkrGaN3Zem+
- tTsFcwsl1X9mlsxo7lksUY9xbc6SYEMbh4zBrs11b/JZibJAnpWQACV59ZDKlAAG3AhHo+kNciX
- rEbmckQ/gYu/rbwXB0IaQUHm9cJleYzjgLaMoV7kHca4n55g/XGmW1LN/SrpqYStRxU+zcMiMb4
- ZWLFGJrKSclbysi+7+zshO7trZzYho5KdF9rhny9fyDz75bZMAI0XUE320hGa2qXMWga43gN7vO
- f1NSH1P3jKNA4qfLh6S0uiis+GR06GlO1AO9C
-X-Google-Smtp-Source: AGHT+IHg01366LdLrsnTbbnP4fKY+Xr83m8gzgp9G84snc6OJBUhOTfY4zl/WZhoVEwQS0nD+q/dIA==
-X-Received: by 2002:a05:6000:461e:b0:3a5:300d:5e17 with SMTP id
- ffacd0b85a97d-3a572e79733mr6984547f8f.29.1750092037760; 
- Mon, 16 Jun 2025 09:40:37 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:6c7:97de:65a8:488a?
- ([2a01:e0a:3d9:2080:6c7:97de:65a8:488a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b28240sm11580556f8f.72.2025.06.16.09.40.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Jun 2025 09:40:37 -0700 (PDT)
-Message-ID: <28b0f2cc-4403-4473-8258-c08f12b1bd5e@linaro.org>
-Date: Mon, 16 Jun 2025 18:40:35 +0200
+ AJvYcCUYgJOOEEjk9MiiR1SzN7eAgzUcYakKtcvZxfPo2KB7p4OHdD2/nfvv3Ekx+i9AR+KQbgpM4BY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7rqHf1Ibkws//vd2b5jQCxJUWsNJUsyVCW8y7CV5MgDMY8MlD
+ HXI1fyE7EON5Vk3fIIyhMDGqflZE/O6DmuIk/l9Tf+oTeDPmcxh/Awd9+7+qMxqBgyFjXIyaxRF
+ 3GNxmOFg=
+X-Gm-Gg: ASbGncuQTeC3mF4vf02OSrvg6igHiZ1tRW6mlIO5X5AlvYtvMMZH+X/z7c8V2LnSJeN
+ iNwIuojkpVam+7zfduU9XX+tUk7nxBl2sOgiG6fPVgjj6oGgkwqerRYQIndtqXe5cv4RIKpON9E
+ QA/BHCnF/E+Q7XoqovS+Qa17FqYsQcRYER7MX6tZRXkZIiF41Yrj7dBpttBpnksId+WDN7ivzjx
+ e5eb1QT+IPZjz/nr8by8Y8Hhqe8Zm4cqtJI/RyOsfQ831xNRra8bMNOUJo+A0eKr27oBew096lC
+ SVe0j0/talPSKc2MUwOFtIITVP6UlOxsODYz4PRwLdQdOu9Y9/DE3/y4d9/dtfaX3cxibJmAw3t
+ 2DMDkM8qlzYEBSIePGYqjKww=
+X-Google-Smtp-Source: AGHT+IGtEJ3peR5sF1Vtq/dCTSKahXCCDZT/b/NOXN87QlMSUGXHWjvmQmEp4uxkqsAzWvCnSSoCPQ==
+X-Received: by 2002:a05:6808:1693:b0:3f6:abbf:bb88 with SMTP id
+ 5614622812f47-40a7c1c46e6mr5934863b6e.29.1750092166411; 
+ Mon, 16 Jun 2025 09:42:46 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40a741bd6fbsm1534632b6e.47.2025.06.16.09.42.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Jun 2025 09:42:45 -0700 (PDT)
+Date: Mon, 16 Jun 2025 10:42:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, mikko.rapeli@linaro.org,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] arm: io.h: Fix io accessors for KVM
+Message-ID: <20250616164243.GH1382132@bill-the-cat>
+References: <20250616075035.1144220-1-ilias.apalodimas@linaro.org>
+ <c7d2a64f-1415-4481-9c2c-072e0abb2698@linaro.org>
+ <CAC_iWjJxE_XSbHAZcxf2bVssnyqesT5td3XxAAvs80-PSMQOjQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] pinctrl: meson: support gpio toggle command
-To: forbidden405@outlook.com, Tom Rini <trini@konsulko.com>,
- Beniamino Galvani <b.galvani@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20250617-meson_ppinctrl-v1-1-593aa15f288a@outlook.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250617-meson_ppinctrl-v1-1-593aa15f288a@outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Ud5AuIYAqzDh+T07"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjJxE_XSbHAZcxf2bVssnyqesT5td3XxAAvs80-PSMQOjQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,72 +99,81 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16/06/2025 18:23, Yang Xiwen via B4 Relay wrote:
-> From: Yang Xiwen <forbidden405@outlook.com>
-> 
-> meson_gpio_get() always assumes gpio is configured to input mode. This
-> is incorrect and breaks `gpio toggle` command:
-> 
-> gpio: pin aobus-banks2 (gpio 2) value is 0
->     Warning: value of pin is still 1
-> 
-> Fix it by adding the logic to handle both input and output mode.
-> 
-> Fixes: 2009a8d03fe5 ("pinctrl: meson: add GPIO support")
-> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-> ---
->   drivers/pinctrl/meson/pinctrl-meson.c | 21 ++++++++++++++++++++-
->   1 file changed, 20 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/pinctrl/meson/pinctrl-meson.c b/drivers/pinctrl/meson/pinctrl-meson.c
-> index babf1bccc969..a1f4afd11f94 100644
-> --- a/drivers/pinctrl/meson/pinctrl-meson.c
-> +++ b/drivers/pinctrl/meson/pinctrl-meson.c
-> @@ -117,8 +117,27 @@ int meson_gpio_get(struct udevice *dev, unsigned int offset)
->   	struct meson_pinctrl *priv = dev_get_priv(dev->parent);
->   	unsigned int reg, bit;
->   	int ret;
-> +	enum gpio_func_t direction;
-> +	enum meson_reg_type reg_type;
->   
-> -	ret = meson_gpio_calc_reg_and_bit(dev->parent, offset, REG_IN, &reg,
-> +	direction = meson_gpio_get_direction(dev, offset);
-> +
-> +	switch (direction) {
-> +	case GPIOF_INPUT:
-> +		reg_type = REG_IN;
-> +		break;
-> +
-> +	case GPIOF_OUTPUT:
-> +		reg_type = REG_OUT;
-> +		break;
-> +
-> +	default:
-> +		reg_type = REG_IN;
-> +		dev_warn(dev, "Failed to get current direction of Pin %u\n", offset);
-> +		break;
 
-Just return -EINVAL here
+--Ud5AuIYAqzDh+T07
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-Neil
+On Mon, Jun 16, 2025 at 04:11:32PM +0300, Ilias Apalodimas wrote:
+> Hi Jerome,
+>=20
+> [...]
+>=20
+> >
+> > If I'm not mistaken, this patch is doing two things that are unrelated:
+> > (1) fix the KVM issue and
+> > (2) get rid of the __arch_*() macros in favor of the __raw_*() macros
+>=20
+> I can split it, but I don't see much point since we redefine the raw_macr=
+os.
 
-> +	}
-> +
-> +	ret = meson_gpio_calc_reg_and_bit(dev->parent, offset, reg_type, &reg,
->   					  &bit);
->   	if (ret)
->   		return ret;
-> 
-> ---
-> base-commit: c5afa1fef49f55146e78d6157470520391c40eca
-> change-id: 20250617-meson_ppinctrl-5139ca06b828
-> 
-> Best regards,
+For point 2, I'm not sure it's worth splitting, no.
 
+> > IMO this should be two separate patches.
+> >
+> > >
+> > >  /*
+> > >   * The compiler seems to be incapable of optimising constants
+> > > diff --git a/drivers/spi/fsl_dspi.c b/drivers/spi/fsl_dspi.c
+> > > index f2393c041f44..545561ad1169 100644
+> > > --- a/drivers/spi/fsl_dspi.c
+> > > +++ b/drivers/spi/fsl_dspi.c
+> > > @@ -123,8 +123,10 @@ static uint dspi_read32(uint flags, uint *addr)
+> > >
+> > >  static void dspi_write32(uint flags, uint *addr, uint val)
+> > >  {
+> > > -     flags & DSPI_FLAG_REGMAP_ENDIAN_BIG ?
+> > > -             out_be32(addr, val) : out_le32(addr, val);
+> > > +     if (flags & DSPI_FLAG_REGMAP_ENDIAN_BIG)
+> > > +             out_be32(addr, val);
+> > > +     else
+> > > +             out_le32(addr, val);
+> > >  }
+> >
+> > Unrelated change
+>=20
+> Due to the the new do {} while(0) macro this doesn't compile, so it
+> needs to go together.
+
+It can be done first as what the driver does now is valid but
+clever-for-clever-sake, and cleaning this up is valid before the new
+macros.
+
+--=20
+Tom
+
+--Ud5AuIYAqzDh+T07
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhQSXgACgkQFHw5/5Y0
+tyxE3Qv/dD5GgDLkv/JHrqUtnLZZCJ8LoO+8SoerFhBZFP4CDkzTArlus/Nj/5Zl
+7swZQV9DJDl+903m3sRJ5MeeM+Or/H9H9HQov5+yDckhVSbMRJAYgop/3HD67EGK
+wnCzVMH15X5hvNlT7HMSmZIaPAkgnPlDViGz3nvEzx+tlSkTRq4EvtmBgEH7psJl
+EVw0bP5PwTGrv35JbsmUteA5XFKCu9qiCvdLUyGXx4vPYMxLJWT7qwss8LidxeT2
+NqGu8FoY5J2ShkuFjbQI/kfV/5VxvWu1zT19meJcCQuvRvEZ3scO5qZGu0AnC06J
+1f5DJ8joP952MtDmdrH5LUFx8zPH9yof7actsUSxfgY7EkVnqEXaUyj09cJvlVFU
+yA4nG9aAepRndTolCDQFVRmCNcZaj2kF0TN0II4bxt6/P/UGnQdOk6SjxYTOdPoD
+Up5/vlq2X0et+FW1Cy/eO2LDeHvVSDlJmHAYSDTpeR3p7ChUFFtisRc94WCi6HaJ
+f+3BvKl7
+=tGss
+-----END PGP SIGNATURE-----
+
+--Ud5AuIYAqzDh+T07--
