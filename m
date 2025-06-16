@@ -4,89 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381A4C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 08:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB39C71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 09:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 769CC80C93;
-	Mon, 16 Jun 2025 10:25:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 87DA782A0A;
+	Mon, 16 Jun 2025 11:44:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="nAjnYBsL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RTdjeOM4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC31281E18; Mon, 16 Jun 2025 10:24:59 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D50CA829F5; Mon, 16 Jun 2025 11:44:51 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6D9F8007D
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 10:24:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A0D980C93
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 11:44:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=82620602e9=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55G6OcOY001568;
- Mon, 16 Jun 2025 10:24:35 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- 31E7WwoKvt16r8MYMjn0tDkbO+yHBZiyNofhnTJlYOU=; b=nAjnYBsL/UC7RvHQ
- +XJSdxkULPGv2cTDz5qoT0LQeFlpYRantEiP1M5qXvbkUeTZRerT0OrkkuTJ6/4m
- Od3Vp6Ob91SnB/1kmyGJvWH8//ta9a5fiWHSIpebWxyTVdmPv1o/wJad+JAmobnK
- aZilkW6X0VuKujaIWxh1VdoLlBKBsWyiI3ycnK3Fw61c73diVqBAAMq986YbgEZF
- QOi699WmkiE/kZaDnz2Yb1c+E6jTpfWr453u8Pjl1wZTRmxVgxn4YcZeyN14/FUt
- 8EvWEYQdXARDZh2WL92cbcB/74xHhBAFFwd77t4AhAfyVlmH8u+aY+MOi7TzBQfY
- RujDzw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4790e1yhm6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 16 Jun 2025 10:24:34 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DF3EE4004D;
- Mon, 16 Jun 2025 10:22:12 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 303FF5D40C4;
- Mon, 16 Jun 2025 10:20:51 +0200 (CEST)
-Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Jun
- 2025 10:20:49 +0200
-Message-ID: <dedd6356-8a35-468d-b144-f80db627cd08@foss.st.com>
-Date: Mon, 16 Jun 2025 10:20:48 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3a375e72473so2423377f8f.0
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 02:44:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750067088; x=1750671888; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wdsH3zh6R5sAcOzBTMPiEqD+va3yHRdhckxXVr5nmDw=;
+ b=RTdjeOM4K7/WrMUtemIL2q8jffUHP30h+tvOgXAyphVMCWUB91cRDZQYjBaF7HCfUE
+ vxsH25xqmiSmIdZ9PcWZD6NAgpy+BhviUQaTyeljNj0WqHkGriigLGuNYjf7ExGLk4Qg
+ Mh1ufsNbN4H4OsNzCGOy5LGko5ko3RZh2oYcCs29/8pOvG5PU0VnqMmuf6vm9++FJ0I2
+ EuuDFHCd9XqZUvzpdBjZo9a9c8bYVDVatflmJ+Ek9F2eG/RH+h9PVurfV1t3+czUdeiL
+ 4GnwIDIKpZydscFb0ltjRbvZDM1rrRuNwHT3pXGG9ms1SQzEukzQjQ1EytNWeEMhciiN
+ jHSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750067088; x=1750671888;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wdsH3zh6R5sAcOzBTMPiEqD+va3yHRdhckxXVr5nmDw=;
+ b=koidtsYCYU6DpMuEQhFIQ7HZ+H8TlyZlfHxLM2j2aCMTv/pWL34YvsaEjvnMgBA6o8
+ YtbiVDr0qxLMNnWDk8eoGT30SpFXZhd55OZLoQenhVgMQBrRiEzgEtOIFKBdOcBGeXNt
+ 4kdNaT0Aqt9BrHMwo9PCg1JoabI61wc64KW93GeohWD/fLSwkL1d9xwy5kTUv97cyPWI
+ BAH/8CuE4o3QrYOWCpCVnDCK47ZQTVu6qytPOIYA1EJiw42qBg0DtoktQUfymGuCfGNq
+ sXiBndETTObvBH7p2BH0yIHllMwCMx/nfoh0o7/AUzRCM8kM3jgAPJojUzDu/2UKWEoV
+ caXQ==
+X-Gm-Message-State: AOJu0YyUWs219d3oVQiOuOhERDLfsBlDh8BjpbnVgLFvY/YbhDamm4WB
+ Ylpnx15mSV7K79TXqzNsiG4TleMTJp6HI2FSBp7L6SnkQmNJUoWycG1D1VIr6R51nzY=
+X-Gm-Gg: ASbGncvudZ6T1qgrOH92LWgPGsWF+CrtSvPM1Xmq9nQ5stEwmKldh350ZYxPbMuXkvO
+ yrjPaQ5zghLAhwD9ZtGcHEWGpFDz/X6YZXiLYlAwClQynPF6IrDfcxOl4zW1Z4gG3CnHjB3FLIj
+ IyPdWL+D/lsBPxg5as6NmIY1kI2dsqwqWLYP/drspeHjQcsRYxHRep0dJjbTRtzhDLsejIDOAoj
+ EomoCboOg9NlGDI1BFICs1JNiM7/j46E+qTZe3etXQSdBFBOq54dQmXxIx+xINkUFgej0LzJnjS
+ lS/7MarphFlf0Ih1HMqd44zl9v2OltaJIoCdfwUVzA+DGRqsbj7XHQ2CgJSUbeq18iVjAUVdZWL
+ kaJQH
+X-Google-Smtp-Source: AGHT+IEnq0pmwgE+CWW7lNbz/6kIWbZdiJvNbIguJ5CLWJ83P2BdhlAsKKCUlf4ewPdP9NUFWqdLkw==
+X-Received: by 2002:a5d:5849:0:b0:3a4:dfc2:2a3e with SMTP id
+ ffacd0b85a97d-3a5723aeb2cmr7224146f8f.39.1750067088505; 
+ Mon, 16 Jun 2025 02:44:48 -0700 (PDT)
+Received: from toyger.localdomain ([213.240.182.76])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4532de8c229sm139308105e9.6.2025.06.16.02.44.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Jun 2025 02:44:47 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH v4 0/9] Qualcomm: implement support for GENI firmware loading
+Date: Mon, 16 Jun 2025 11:44:42 +0200
+Message-Id: <20250616-geni-load-fw-v4-0-e7df44205505@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/7] drivers: use lowercase hex prefix style
-To: E Shattow <e@freeshell.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Tien Fong Chee
- <tien.fong.chee@altera.com>, Tingting Meng <tingting.meng@altera.com>, Peng
- Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Michal Simek <michal.simek@amd.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Anatolij Gustschin <agust@denx.de>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250606224558.1117422-1-e@freeshell.de>
- <20250606224558.1117422-4-e@freeshell.de>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20250606224558.1117422-4-e@freeshell.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.182]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-16_03,2025-06-13_01,2025-03-28_01
+X-B4-Tracking: v=1; b=H4sIAIrnT2gC/22P207EIBRFf6XhWQzXgWmM8T+MD1wOHWJbFGrVT
+ PrvMkyi4+jjJqy1co6oQI5QUN8dUYY1lpjmOsRNh9zBzAPg6OtGjDBJOBV4gDniMRmPwzsm4Iz
+ gLAi9d6giLxlC/Gi6x6fzzvD6Vq3L+RFNUIpp1r67+5YWp5gmeEoZsBuTey54pZhgMF4KoZXjG
+ h7GOJucblMe7k8ta0r9nKYpLn2310RyRn3wYNGpfIhlSfmz3bXSlv7/hNaRWgUmA9OUhYtOM63
+ sh95RckWzSitn/M46qr0lf2h+SfMrmlfaglLacksJtb/obdu+AArVFeGfAQAA
+X-Change-ID: 20250314-geni-load-fw-0eca432f489c
+To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Casey Connolly <casey.connolly@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3967;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=qoKIq8VKw3yy7SRrV//rRt0hfgriV3oexSplXoTbZN4=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoT+eNaXpxb+ivN7n3LRpOKPiLiVi58ow9SkQJE
+ WbIcyCz/06JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaE/njQAKCRAFgzErGV9k
+ tjwMD/9Fugr7MUxK0sndSoDT7JwEimL2UxfYSDFou9/IUNFovsFDFIClk385o7qjuWa2dmbLDIh
+ f04uKwuixcP/7JblEsGVylQqDb6fhBrIJQGh619mC0Nhji5AVrlVmJu9+TMfUBNf9G7JWqltpr1
+ l2XYzYSQFzr97QvMe+3dkQUsm+Ixdt2W98QZaiyNE/ZnX0iz0pedYaEGYCNYfIPZz8o2AkOEqIK
+ GFBC6LxctT0cgl3nSud30bHoa2QuO8Oqu5RziRREMFqdZfeMo/l1tSkfaw438fuZRJE6u+js7iI
+ fwjRfUnVs9YKVLKhUx9V9/p4/8pKv5y7HFsrqZnYcEuSsiik+VHbDjPjbcrFwfK4WSwk+gpMUCh
+ oa1PWdL3JMRsw2joyVxuF2zhtXNpIMmqI8KdC95gHdfvaEA2Hi/pTEtmiwk9/qyrTw6LHp2DZQ3
+ LcZJIWwrTK448LE175pSY6jd5tB+iLCsvlfFWOSzqO7TfEMXRAuAwMj4K8LXrsBWQM5ROpCO7I7
+ /N8WQ03ISWhdm/SJQWgPTu4f61HZcBVtaGscCEyCH3ZPKXkztwZfZZOd+ZE/C1zHiPciwPgvPRc
+ fWOMbIkSBwuNL5KFm/0yLemhaWDxmnQx/xb66HgaVAafQVxM/UsdliXOJQ9jcoyHbQ9IN1HG/Ac
+ jtAW+yVoK0GFT2g==
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,74 +123,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The GENI block on Qualcomm platforms contains many Serial Engines (SEs),
+these are general purpose hardware blocks capable of implementing any
+low speed protocol (UART, SPI, I2C, etc).
 
-On 6/7/25 00:44, E Shattow wrote:
-> Use consistent lowercase hex prefix style in drivers/*
->
-> Does not change hex prefix case in allcaps uppercase style error messages
->
-> Signed-off-by: E Shattow <e@freeshell.de>
-> ---
->   drivers/ata/dwc_ahsata_priv.h             |  4 +-
->   drivers/clk/renesas/r8a774a1-cpg-mssr.c   |  2 +-
->   drivers/clk/stm32/clk-stm32mp1.c          |  2 +-
->   drivers/ddr/altera/iossm_mailbox.c        |  2 +-
->   drivers/mmc/sdhci-cadence6.c              |  2 +-
->   drivers/mmc/zynq_sdhci.c                  |  2 +-
->   drivers/mtd/nand/raw/lpc32xx_nand_mlc.c   |  4 +-
->   drivers/net/fsl-mc/mc.c                   |  2 +-
->   drivers/net/phy/ca_phy.c                  |  2 +-
->   drivers/phy/rockchip/phy-rockchip-typec.c |  2 +-
->   drivers/power/regulator/act8846.c         |  4 +-
->   drivers/ram/k3-ddrss/k3-ddrss.c           |  2 +-
->   drivers/ram/octeon/octeon3_lmc.c          |  2 +-
->   drivers/sound/max98088.h                  | 50 +++++++++++------------
->   drivers/sound/max98095.h                  |  2 +-
->   drivers/video/bridge/dp501.c              |  2 +-
->   drivers/video/hx8238d.c                   |  2 +-
->   drivers/video/zynqmp/zynqmp_dpsub.h       |  2 +-
->   18 files changed, 45 insertions(+), 45 deletions(-)
->
-> diff --git a/drivers/ata/dwc_ahsata_priv.h b/drivers/ata/dwc_ahsata_priv.h
-> index 0c2cd5446b5..f2a118420f9 100644
-> --- a/drivers/ata/dwc_ahsata_priv.h
-> +++ b/drivers/ata/dwc_ahsata_priv.h
-> @@ -117,8 +117,8 @@
->   #define SATA_HOST_GPARAM1R_PHY_TYPE	0x00001000
->   #define SATA_HOST_GPARAM1R_RETURN_ERR	0x00000400
->   #define SATA_HOST_GPARAM1R_AHB_ENDIAN_MASK	0x00000300
-> -#define SATA_HOST_GPARAM1R_S_HADDR	0X00000080
-> -#define SATA_HOST_GPARAM1R_M_HADDR	0X00000040
-> +#define SATA_HOST_GPARAM1R_S_HADDR	0x00000080
-> +#define SATA_HOST_GPARAM1R_M_HADDR	0x00000040
->   
->   /* Global Parameter 2 Register */
-...
-> diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
-> index 9cb69a01f7f..823ce132d0b 100644
-> --- a/drivers/clk/stm32/clk-stm32mp1.c
-> +++ b/drivers/clk/stm32/clk-stm32mp1.c
-> @@ -117,7 +117,7 @@ DECLARE_GLOBAL_DATA_PTR;
->   #define RCC_DSICKSELR		0x924
->   #define RCC_ADCCKSELR		0x928
->   #define RCC_MP_APB1ENSETR	0xA00
-> -#define RCC_MP_APB2ENSETR	0XA08
-> +#define RCC_MP_APB2ENSETR	0xA08
->   #define RCC_MP_APB3ENSETR	0xA10
->   #define RCC_MP_AHB2ENSETR	0xA18
->   #define RCC_MP_AHB3ENSETR	0xA20
+The protocol implementation is provided in the form of firmware which is
+programmed in to the peripheral, typically by the EDK2 bootloader. Up
+until now we have primarily been chainloading U-Boot, and therefore
+haven't had to deal with this problem.
 
-....
+However, when running U-Boot as the primary bootloader it is necessary
+to handle loading and writing the firmware.
 
+Support for doing this in Linux is also in progress [1], this series is
+largely based on that one, however the Linux patches expect the firmware
+to be provided in /lib/firmware, and will only exist on newer kernels.
 
-For stm32mp1 clock driver,
+Since we may want to use peripheral (e.g. EEPROM) inside U-Boot it is
+still useful to implement firmware loading in U-Boot.
 
+The approach taken here is to bind all peripheral devices which don't
+need firmware loading (e.g. the serial port), then wait until
+EVT_LAST_STAGE_INIT to handle loading the firmware from storage and
+probing the remaining peripherals. We forcefully probe them so that they
+will trigger firmware loading and will be available to Linux.
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+For testing on the RB3 Gen 2 [2] is needed so that the i2c peripherals
+can be probed.
 
-Thanks
-Patrick
+[1]: https://lore.kernel.org/linux-arm-msm/20250303124349.3474185-1-quic_vdadhani@quicinc.com/
+[2]: https://lore.kernel.org/u-boot/20250314-sc7280-more-clocks-v1-0-ead54487c38e@linaro.org/
 
+---
+Changes in v4:
+- Regenerate qcom_ipq5424_mmc_defconfig
+- Adjust Kconfig so that peripheral drivers express their dependency on QCOM_GENI for firmware loading and update the defconfig
+- Add fw loading for UART (e.g. bluetooth) and SPI
+- Link to v3: https://lore.kernel.org/r/20250613-geni-load-fw-v3-0-be778b3b101b@linaro.org
 
+Changes in v3:
+- Replace printf() with pr_XXX() in geni SE driver
+- Add firmware loading for UART as well
+- Link to v2: https://lore.kernel.org/r/20250610-geni-load-fw-v2-0-7cad6bc18db0@linaro.org
+
+Changes in v2:
+- Use GENI_SE_INVALID_PROTO in geni_i2c instead of 0xff
+- Fix typo
+- Link to v1: https://lore.kernel.org/r/20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org
+
+---
+Casey Connolly (9):
+      configs: run savedefconfig on qcom_ipq5424_mmc_defconfig
+      i2c: geni: fix error message wording in clk_disable
+      misc: introduce Qcom GENI wrapper
+      i2c: geni: load firmware if required
+      clk/qcom: sc7280: add uart7 clocks
+      serial: msm-geni: implement firmware loading
+      WIP: rb3gen2: describe micro-usb port
+      spi: geni: load firmware if required
+      configs: qcom_*: enable QCOM_GENI where needed
+
+ configs/chromebook_trogdor_defconfig            |   2 +-
+ configs/qcom_defconfig                          |   3 +-
+ configs/qcom_ipq5424_mmc_defconfig              |  69 +--
+ configs/qcom_ipq9574_mmc_defconfig              |   2 +
+ drivers/clk/qcom/clock-sc7280.c                 |   6 +
+ drivers/i2c/Kconfig                             |   2 +-
+ drivers/i2c/geni_i2c.c                          |  14 +-
+ drivers/misc/Kconfig                            |   9 +
+ drivers/misc/Makefile                           |   1 +
+ drivers/misc/qcom_geni.c                        | 578 ++++++++++++++++++++++++
+ drivers/serial/Kconfig                          |   1 +
+ drivers/serial/serial_msm_geni.c                |  81 ++--
+ drivers/spi/Kconfig                             |   2 +-
+ drivers/spi/spi-geni-qcom.c                     |   8 +
+ dts/upstream/src/arm64/qcom/qcs6490-rb3gen2.dts |  17 +
+ include/soc/qcom/geni-se.h                      |  36 ++
+ include/soc/qcom/qup-fw-load.h                  | 178 ++++++++
+ 17 files changed, 904 insertions(+), 105 deletions(-)
+---
+base-commit: 9805321dfdeb5225fe5c5e0721abf49c0875637e
+change-id: 20250314-geni-load-fw-0eca432f489c
+
+Casey Connolly <casey.connolly@linaro.org>
 
