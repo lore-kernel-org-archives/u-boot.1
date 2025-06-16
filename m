@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A332C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:12:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69F51C71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:21:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC56B80C93;
-	Mon, 16 Jun 2025 15:12:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5A4380C93;
+	Mon, 16 Jun 2025 15:21:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uk48/YKH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DZCymuad";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2B2381760; Mon, 16 Jun 2025 15:12:11 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 9992C81760; Mon, 16 Jun 2025 15:21:02 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B64D38070C
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:12:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5563E8070C
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:21:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-70e75f30452so26879157b3.2
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 06:12:09 -0700 (PDT)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-70e6bddc30aso37731767b3.0
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 06:21:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750079528; x=1750684328; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750080059; x=1750684859; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Eog/YoB3gkEN2HfiHQq93Yw6Xf5SmqcwuCy3sh3iyAU=;
- b=uk48/YKHXCU2ePtd33nsVpqcZcx8KJcUXg6bGDCv19BgUPXqx0aQ3HkWMAp2yeoyE7
- K/q/yzCermaAqlm5Tji/AlMJzvNiwWa/umg+tluXbfysmA0Ze4oQhf01Aov/nCORQof4
- x6cNQhuDpfQcEMYIWJABcNdzSbqb5zpWNghgxwS0xFyKUCf1VEQ4kEx/Wlhp+hLEg+Eg
- DIuUSTqOsN7yCJ3wwggaiHcv7BIA6jY7GReuXll2+y0Pf1UsqEoZa9fTtFKdPp6sWAkO
- JxoT51cDaS9KwR7cGxPjr5pXBOJRD/hX12wBMwNp+OkhfbP+QLWoGzMcuXYR+8pAEXJK
- 8kvg==
+ bh=hjhWoI2MQakcb2HwKb3A6fT7/TVH+4C5vcuUad9ch5w=;
+ b=DZCymuadZklSjQ1GPUQZhjnzIZpXgSxsqlHOuc7eDJ0Nl2mIP/xm6zM0fewDKzsEZ2
+ i+5hrYRvZA8hFA3xNrqsXxs4h4kkO7iCj6M1XKI89ZWZSXmSsokDJNqP7WtQlR29WQEw
+ dF7y5ItnLUYRxwS9Oe9yMzUVLBkOR2RN+YkEDksvMbnEoBNoUbKS8S+9rrFxG6A6ib9v
+ XOAWEsRz2O+to8/jIY+7aHhM+lPGhJsnUrPGpTyS6IEbje2/hqtXVIh2yMrM6tFFusO6
+ mD7gpRtoBYF9HQgcnF7pdrTFYxBmQG8KXXXp6yau5tihBDG6JOML5eB9ey6MmPd41gWy
+ Rrgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750079528; x=1750684328;
+ d=1e100.net; s=20230601; t=1750080059; x=1750684859;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Eog/YoB3gkEN2HfiHQq93Yw6Xf5SmqcwuCy3sh3iyAU=;
- b=hTB8SVMfHZfrv57tNHSE1UYw0QSImpUIa1q3vL4NNhquHGepP7kj10jwH25uiPOzzR
- Vt+F6W3jJtFRPhAl0XNdVojnC9TwTSzTAW/7lgGtJzvtWhjI36KIb7RCDxu6P/mBlTYH
- GOVculkus4t0efYhMKJ5UGL7WFco3YMo/UMwQeikfkmTnIKSkn8wnQ9yeIgGm4rchvka
- BohXvK0HsbW9P92qWKINeON/TsYLv0FC0bDn5Mr3gbxtR8pBpMVIsx8qrHC8JImeeEoT
- V2BMwZIHXRkN1hAQ42i/Iu9cK8KcyhcLyL2qBNgv0vhYgKoDSqCKNvxuEjwejqCIvW+j
- 8JqA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzvHh9O/f3fJrSgW/rf36lvgCm9HttzGQwKxy0l7R2zLG7y70Fs2fiH9EI7YcAinovI8umRHw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsamGefhaZdw/0LE1BSI8RpXyNQMNTbce+yDPHgAzk5LYO5zwS
- PmKXZdx6apcyMxN/ZVERdsJd0Alo9sM4sE0UOj8p63EX6+/tm09b0/pmQRgifFc36E1/VEvsEt+
- sPHI5+zFRwkHxOSsLB0i6P1r4xMRtkEnk/4STOqpvvA==
-X-Gm-Gg: ASbGncugkI4HLsKWPwc5k+tPWesLj9vi4FSzj6DJV6GOiwd0j77qbMztueOfsscIHDo
- f1rTH9AgiTH9JR3KOulhRVc59w0vouMvytzcczzZtUmLEXQRUCFu6rtOm/5ttqBgG0qtL35evMr
- 1SMvaElMFinsRZTTWcaVWY9/o2fHqbB6hyLwdMwNOGxh5l
-X-Google-Smtp-Source: AGHT+IFeMUqO4fE+mqjprjTyVbwVmN4ecldS49ddOBoQzZund4mG5dKmTHaR/FYcx1mCjKYD18ehKqS+Pc4n5/ELbzA=
-X-Received: by 2002:a05:690c:a04b:b0:710:f20a:eacd with SMTP id
- 00721157ae682-71175384eedmr105516477b3.7.1750079528569; Mon, 16 Jun 2025
- 06:12:08 -0700 (PDT)
+ bh=hjhWoI2MQakcb2HwKb3A6fT7/TVH+4C5vcuUad9ch5w=;
+ b=CPM12p9WhDnILxCM9vYzPIcW63QmJToiTqeKk+5eKwRRxWHBq7HY7rLlmdLR6QlOqR
+ hski3qnY0I9rWd6hS8EgujOwSmzg9sVctR7Z4t/WnVjG2q5rY9I0Bq9ewfGAhYu8DzNO
+ 32GeaNpUiSokKwFtHIhfNUM7tvmTacBCmZf1sgSR2IQ5aHPVkenTkfWR2JETOuWXd7WU
+ TA+OMQLmZve2sAE5OE7hYKDuyyNPyg6SzcXEgls2Iq2qPtEFkd9CETv+IaBcue3QX1v4
+ 5eOZ041j2hzxHMWCVINGdULTTw9xNGlniaY2fL5l7kunM9kycDq6eHgMkDw/GcHmTykX
+ EWlA==
+X-Gm-Message-State: AOJu0YzefJgObIwiM0kdd51cxKT3CvS6uODbBr3w6BfD5JWgz5Nera8X
+ idqka3Zyh3OP0hGumcieCchB/cKks3670QY9DK1aLuEZ85hWG01K2r5jDD4cY+j1/UOCjvT8AGE
+ J4WFfU8YxOgFleCzxlpA291dWQ7WUbP9ENZdQYE1Yqw==
+X-Gm-Gg: ASbGncsZTmpS299X8xk1/uU9Ht8LJskdenqZhW7hSMwd0jSxNHHfqTR7JE+McKDLVX5
+ G6XNFz3ajiIHhkklToLwvkDB8TMabOWpUMJoJU8o8Yi53K2Sjog5oqXy0lwnJ20Q3debJmX1uqX
+ ALVvbWYPYzTKFQSgceOKI9SKjGrIKMB7LU7eJjtpD68E8q
+X-Google-Smtp-Source: AGHT+IGk3Hqhsti2lF1rtke2NSTFPP3Ho4zi1jcstjnAmh/0ND24A/hTUV2DiZfrcmorjbve6lYUkMV++XXMBg4HTNk=
+X-Received: by 2002:a05:690c:60c1:b0:70d:ed5d:b4dd with SMTP id
+ 00721157ae682-7117544c86cmr124874487b3.25.1750080059017; Mon, 16 Jun 2025
+ 06:20:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250616075035.1144220-1-ilias.apalodimas@linaro.org>
- <c7d2a64f-1415-4481-9c2c-072e0abb2698@linaro.org>
-In-Reply-To: <c7d2a64f-1415-4481-9c2c-072e0abb2698@linaro.org>
+References: <20250611050844.210384-1-paulliu@debian.org>
+ <20250611050844.210384-5-paulliu@debian.org>
+In-Reply-To: <20250611050844.210384-5-paulliu@debian.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 16 Jun 2025 16:11:32 +0300
-X-Gm-Features: AX0GCFvtmeD1lFjC8gkCt6gLhCUfZj-MR6rlSVGaa2XlDl0k8rhfMWzrTiVAIXk
-Message-ID: <CAC_iWjJxE_XSbHAZcxf2bVssnyqesT5td3XxAAvs80-PSMQOjQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: io.h: Fix io accessors for KVM
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: trini@konsulko.com, mikko.rapeli@linaro.org, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Date: Mon, 16 Jun 2025 16:20:20 +0300
+X-Gm-Features: AX0GCFtVbPwm9ThpMS0vMRrYHCI3gys-Oo9HzQfnAztnZImzxotG_pthvh-8O1A
+Message-ID: <CAC_iWjJ3bcgeebGLFpQejStYy-BL49b77TZvYg+w31yzM--A9w@mail.gmail.com>
+Subject: Re: [PATCH v5 4/4] efi: add EFI_DEBUG_IMAGE_INFO for debug
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,105 +92,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+[...]
+
+
+>         }
+> +
+> +       if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT)) {
+> +               if (*image_handle) {
+
+Can you fold this in a single line if?
+
+> +                       efi_core_new_debug_image_info_entry(EFI_DEBUG_IMAGE_INFO_TYPE_NORMAL,
+> +                                                           info,
+> +                                                           *image_handle);
+> +               }
+> +       }
+>  error:
+>         return EFI_EXIT(ret);
+>  }
+> @@ -3359,6 +3367,9 @@ efi_status_t EFIAPI efi_unload_image(efi_handle_t image_handle)
+>                 ret = EFI_INVALID_PARAMETER;
+>                 goto out;
+>         }
+> +       if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT)) {
+> +               efi_core_remove_debug_image_info_entry(image_handle);
+> +       }
+
+Drop the {}
+
+>         switch (efiobj->type) {
+>         case EFI_OBJECT_TYPE_STARTED_IMAGE:
+>                 /* Call the unload function */
+> diff --git a/lib/efi_loader/efi_debug_support.c b/lib/efi_loader/efi_debug_support.c
+> index a6a672bc0e4..468e9e1cc83 100644
+> --- a/lib/efi_loader/efi_debug_support.c
+> +++ b/lib/efi_loader/efi_debug_support.c
+> @@ -16,6 +16,13 @@ struct efi_debug_image_info_table_header efi_m_debug_info_table_header = {
+>         NULL
+>  };
+>
+> +/* efi_m_max_table_entries is the maximum entries allocated for
+> + * the efi_m_debug_info_table_header.efi_debug_image_info_table.
+> + */
+> +static u32 efi_m_max_table_entries;
+> +
+> +#define EFI_DEBUG_TABLE_ENTRY_SIZE  (sizeof(union efi_debug_image_info *))
+> +
+>  /**
+>   * efi_initialize_system_table_pointer() - Initialize system table pointer
+>   *
+> @@ -50,3 +57,125 @@ efi_status_t efi_initialize_system_table_pointer(void)
+>
+>         return EFI_SUCCESS;
+>  }
+> +
+> +/**
+> + * efi_core_new_debug_image_info_entry() - Add a new efi_loaded_image structure to the
+> + *                                         efi_debug_image_info Table.
+> + *
+> + * @image_info_type: type of debug image information
+> + * @loaded_image:    pointer to the loaded image protocol for the image
+> + *                   being loaded
+> + * @image_handle:    image handle for the image being loaded
+> + *
+> + * Re-Allocates the table if it's not large enough to accomidate another
+
+s/accomidate/accomodate
+
+> + * entry.
+> + *
+> + * Return: status code
+> + **/
+> +efi_status_t efi_core_new_debug_image_info_entry(u32 image_info_type,
+> +                                                struct efi_loaded_image *loaded_image,
+> +                                                efi_handle_t image_handle)
+> +{
+> +       union efi_debug_image_info **table;
+> +       u32 index;
+> +       u32 table_size;
+> +       efi_status_t ret;
+> +
+> +       /* Set the flag indicating that we're in the process of updating
+> +        * the table.
+> +        */
+> +       efi_m_debug_info_table_header.update_status |=
+> +               EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +
+> +       table = &efi_m_debug_info_table_header.efi_debug_image_info_table;
+> +
+> +       if (efi_m_debug_info_table_header.table_size >= efi_m_max_table_entries) {
+> +               /* table is full, re-allocate the buffer increasing the size
+> +                * by 4 KiB.
+> +                */
+> +               table_size = efi_m_max_table_entries * EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +
+> +               ret = efi_realloc((void **)table, table_size + EFI_PAGE_SIZE);
+> +
+> +               if (ret != EFI_SUCCESS) {
+> +                       efi_m_debug_info_table_header.update_status &=
+> +                               ~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +                       return ret;
+> +               }
+> +
+> +               /* Enlarge the max table entries and set the first empty
+> +                * entry index to be the original max table entries.
+> +                */
+> +               efi_m_max_table_entries +=
+> +                       EFI_PAGE_SIZE / EFI_DEBUG_TABLE_ENTRY_SIZE;
+> +       }
+> +
+> +       /* We always put the next entry at the end of the currently consumed
+> +        * table (i.e. first free entry)
+> +        */
+> +       index = efi_m_debug_info_table_header.table_size;
+> +
+> +       /* Allocate data for new entry. */
+> +       efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
+> +                         sizeof(union efi_debug_image_info),
+> +                         (void **)(&(*table)[index].normal_image));
+> +       if ((*table)[index].normal_image) {
+> +               /* Update the entry. */
+> +               (*table)[index].normal_image->image_info_type = image_info_type;
+> +               (*table)[index].normal_image->loaded_image_protocol_instance =
+> +                       loaded_image;
+> +               (*table)[index].normal_image->image_handle = image_handle;
+> +
+> +               /* Increase the number of EFI_DEBUG_IMAGE_INFO elements and
+> +                * set the efi_m_debug_info_table_header in modified status.
+> +                */
+> +               efi_m_debug_info_table_header.table_size++;
+> +               efi_m_debug_info_table_header.update_status |=
+> +                       EFI_DEBUG_IMAGE_INFO_TABLE_MODIFIED;
+> +       }
+
+Since it's a debug protocol I am ok with not unwinding all the
+reallocations here, but don't you at least have to somehow warn the
+consumer that updating the entry failed?
+
+> +
+> +       efi_m_debug_info_table_header.update_status &=
+> +               ~EFI_DEBUG_IMAGE_INFO_UPDATE_IN_PROGRESS;
+> +
+> +       return EFI_SUCCESS;
+> +}
+> +
 
 [...]
 
->
-> If I'm not mistaken, this patch is doing two things that are unrelated:
-> (1) fix the KVM issue and
-> (2) get rid of the __arch_*() macros in favor of the __raw_*() macros
-
-I can split it, but I don't see much point since we redefine the raw_macros.
-
->
-> IMO this should be two separate patches.
->
-> >
-> >  /*
-> >   * The compiler seems to be incapable of optimising constants
-> > diff --git a/drivers/spi/fsl_dspi.c b/drivers/spi/fsl_dspi.c
-> > index f2393c041f44..545561ad1169 100644
-> > --- a/drivers/spi/fsl_dspi.c
-> > +++ b/drivers/spi/fsl_dspi.c
-> > @@ -123,8 +123,10 @@ static uint dspi_read32(uint flags, uint *addr)
-> >
-> >  static void dspi_write32(uint flags, uint *addr, uint val)
-> >  {
-> > -     flags & DSPI_FLAG_REGMAP_ENDIAN_BIG ?
-> > -             out_be32(addr, val) : out_le32(addr, val);
-> > +     if (flags & DSPI_FLAG_REGMAP_ENDIAN_BIG)
-> > +             out_be32(addr, val);
-> > +     else
-> > +             out_le32(addr, val);
-> >  }
->
-> Unrelated change
-
-Due to the the new do {} while(0) macro this doesn't compile, so it
-needs to go together.
-
->
-> >
-> >  static void dspi_halt(struct fsl_dspi_priv *priv, u8 halt)
-> > diff --git a/include/fsl_ifc.h b/include/fsl_ifc.h
-> > index 3ac226879303..1c363115beb2 100644
-> > --- a/include/fsl_ifc.h
-> > +++ b/include/fsl_ifc.h
-> > @@ -803,29 +803,29 @@ void init_final_memctl_regs(void);
-> >       ((struct fsl_ifc_fcm *)CFG_SYS_IFC_ADDR)
-> >
-> >  #define get_ifc_cspr_ext(i)  \
-> > -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext))
-> > +             ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext)
-> >  #define get_ifc_cspr(i)              \
-> > -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr))
-> > +             ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr)
-> >  #define get_ifc_csor_ext(i)  \
-> > -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext))
-> > +             ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext)
-> >  #define get_ifc_csor(i)              \
-> > -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor))
-> > +             ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor)
-> >  #define get_ifc_amask(i)     \
-> > -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask))
-> > +             ifc_in32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask)
-> >  #define get_ifc_ftim(i, j)   \
-> > -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j]))
-> > +             ifc_in32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j])
-> >  #define set_ifc_cspr_ext(i, v)       \
-> > -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext, v))
-> > +             ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext, v)
-> >  #define set_ifc_cspr(i, v)   \
-> > -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr, v))
-> > +             ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr, v)
-> >  #define set_ifc_csor_ext(i, v)       \
-> > -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext, v))
-> > +             ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext, v)
-> >  #define set_ifc_csor(i, v)   \
-> > -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor, v))
-> > +             ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor, v)
-> >  #define set_ifc_amask(i, v)  \
-> > -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask, v))
-> > +             ifc_out32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask, v)
-> >  #define set_ifc_ftim(i, j, v)        \
-> > -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j], v))
-> > +             ifc_out32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j], v)
->
-> Same.
-
-Same here, both of the changes are needed
-
 Thanks
 /Ilias
->
-> >
-> >  enum ifc_chip_sel {
-> >       IFC_CS0,
-> > --
-> > 2.43.0
-> >
->
-> Thanks,
-> --
-> Jerome
