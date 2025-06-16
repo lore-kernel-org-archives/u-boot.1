@@ -4,105 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5FEAC71135
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 09:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78D2C71135
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 09:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A284882CB8;
-	Mon, 16 Jun 2025 11:45:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 722E482CF5;
+	Mon, 16 Jun 2025 11:45:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gjq3NY7y";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Qw7Jsc4s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D367829F5; Mon, 16 Jun 2025 11:45:04 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC14382CF5; Mon, 16 Jun 2025 11:45:53 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20607.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::607])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E4AD829F5
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 11:45:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13E9E829F5
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 11:45:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-450ce3a2dd5so40956635e9.3
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 02:45:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750067102; x=1750671902; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=UY0LEHVBuxxCZxy26Maj/aw8cZ6rY0nS1ZHni5/12/k=;
- b=Gjq3NY7yHKTQG/jbPWOieh14XtWaD2ZmmnTk6a1iLOOMFlHUzLBhGDliOB9hmqVw8v
- JH9jqX6bzgZZG++I3JsfjTZqKE66SjxXjS9PlKvWcjgPIkGMGNL9glryzQEHUTO1FQyE
- SxbRXJs3jn4QTIKskFWuZgiNISIV9LCzktapEJGpPa116xvmRWlHeeEvtww2WxkgDUEw
- T9pz4hEvlqF3e19qJhPVk0PFMqK6lNotntOHKZbc2k+L7jjbx43+OyYdyGkg8yeIr5Vq
- 0lbE5MLM5sMJVM5fMkQPsCeWBXLjnhV4SP7Qo1VSoiShPjBPs1OAbqHInXQ/9BmDqxel
- YPRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750067102; x=1750671902;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UY0LEHVBuxxCZxy26Maj/aw8cZ6rY0nS1ZHni5/12/k=;
- b=CbYhRX2Z05chNvH3uI81yLCX6k9ax2CAf18ILep/2fSZjuwz+siKByofFv8RSGvtwv
- Zh6Nr41RJaxF4mkpcel3kT6NQjgvPapIZYlnSsX1Hc7frL+SpRsSMqYZhmY6Gvl6QMHl
- 26WiDWVlqLkiWuVwrMKUJu7lHk+FoDFgXq8nGkuXeJsR+JEUPY4rB+L4dBWUpiqRLv7F
- 0wrn+nVRNQA3/2EQttO2YqGkuqJ6kMzzI6qEofyqtyIk7F4Xv0AMEmVN0k1jxA7LeVvo
- IJJ06hcO7ZDPg2IgXGuTlGSnw/aris+82n/lu8PqPeHr3zQ2Ogl7rx2KPrjrUESKFwhF
- p1og==
-X-Gm-Message-State: AOJu0YwUUmY2DCyNZCzWPmotjSl71yQEhda9BcYHCAPtzs98yxBmMZiR
- 5cnxoUSQGwImhbRguFKhEYeQVuHEY9y3BO1OtK/Qj0Nzq/6OU0bLAreaA/IunwVbEXs=
-X-Gm-Gg: ASbGncttCHmbkVg/TRezf5CNVFZp1gCPSnowdQic8UXURQnCyUwEpDPpFh6Ly/NFQ4K
- D+YE6h3m3qV8MkDOS+jIuZKkGYAUZ9yb2x9pvklraPcUm//dYswUOCN2rkCfuGPjJtdCadfkHRj
- SvJ4wsHlrLnC7KW7AnufVJ8f5sWOGgNoZRPvOakAFDUA36dNFz3qew5EcOeNjQukJtTdNBq3/gk
- vjDq1UX1En3nWILx8aWWcNHVNmQpM4rRJC+xqDfi953zdypst/xBivhi0Gd1AaWpli9aJtTyl3i
- amkizd3ssCGZoSWFEQ1+iEnLMdVUiGJg2IMw8UnRyGGxChSsTQeONgkmVk2e6U6cs+yVQVnRWh9
- 2EH+W
-X-Google-Smtp-Source: AGHT+IGmYf5XNrelidpFvhruU3XxDd/YPZho5rxL3bSmJEr4jLaQIs3+pGb0sAQC0ZKJQUZguaZNbA==
-X-Received: by 2002:a05:600c:1c02:b0:450:d04e:22d6 with SMTP id
- 5b1f17b1804b1-4533ca4e497mr74862335e9.7.1750067101831; 
- Mon, 16 Jun 2025 02:45:01 -0700 (PDT)
-Received: from toyger.localdomain ([213.240.182.76])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532de8c229sm139308105e9.6.2025.06.16.02.45.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Jun 2025 02:45:01 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 16 Jun 2025 11:44:51 +0200
-Subject: [PATCH v4 9/9] configs: qcom_*: enable QCOM_GENI where needed
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CYffCW4lE+vAEIZezWn0K09WzcSeTMLt1si0BCM7vkL6mQj/I9Zg0VdUiAklzu9Fq3vY47rJh0NpIvOWcnt2OdsWVxXCvoIadEE+76P1EI5wV5tP21l69NUIKxmEEnaze+8pe4T2yK6e7ehqCik7jn1TS3F8rPGVlDepLSq0R6izGZ8zaDvKqmaSlbLCDU7xZglnHaBGeKpDdtcIBFIXii7fOoDqBksK80YV3VcvkCb3uQ93cacvht4p+wojLDsl4wT/4duYX8KpjfNTluFOM4FgwcdXLqaAXVwGvQ7OsKcPnAxmUd+hUplVAmUub6YfooDD3LYtU3vbvi0pj4zCtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sO7ouRSmsrXw4VLUcihVgW9z8IXsqmp8IvQeYsxprlI=;
+ b=B1bR2kY2ORYgH+XsfoEEonosvQEvWEAhiR8ubHpra+GksCPn79L86H7m6XWfWXFqhzfs6N8JyuGgbRW1Bi3F+Y+aZT2G5T1RctDCIM/D5dJleRSNeW2wQSA76haGpwVks/lVFQXQU/XZSEgIMJ4EFvc+tBszngXOxi3bXfy2lImqXKZ6vFQr9g3TcWcApHCb84duGIo7qby1eXe9aD3jG0dVEXVfVaF1YaKoGJSHaCU5VClb8SmDvAQFy7tlzbk00+31nccBLzxtHkKB9tXL5vaqZoIvGWuLVMdJptP2tYcFoOD6xkgi9ySXvkVvocuMwMbUoOpySoQPiyKZbY8MHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sO7ouRSmsrXw4VLUcihVgW9z8IXsqmp8IvQeYsxprlI=;
+ b=Qw7Jsc4sh8qowGD2oibA9HSDHRlFWUd+73bLoMWHxwWLu8oqQHbkf/ZrC4fDpxNjAOgYcvi7E6FqtzIrRYkAQA7uu9VYxtvDWGQO1RniPCYexYkQOGCTEQyMdYlBFoQCBXr+E3XBbCA0RhxbuR/orOwh3eqbHbSPhKNYpYm0Ea4=
+Received: from MN2PR05CA0031.namprd05.prod.outlook.com (2603:10b6:208:c0::44)
+ by BY5PR12MB4324.namprd12.prod.outlook.com (2603:10b6:a03:209::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.30; Mon, 16 Jun
+ 2025 09:45:47 +0000
+Received: from BN2PEPF000044AB.namprd04.prod.outlook.com
+ (2603:10b6:208:c0:cafe::ba) by MN2PR05CA0031.outlook.office365.com
+ (2603:10b6:208:c0::44) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.23 via Frontend Transport; Mon,
+ 16 Jun 2025 09:45:46 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN2PEPF000044AB.mail.protection.outlook.com (10.167.243.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8835.15 via Frontend Transport; Mon, 16 Jun 2025 09:45:46 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Jun
+ 2025 04:45:40 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Mon, 16 Jun 2025 04:45:38 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
+ <sughosh.ganu@linaro.org>, <ilias.apalodimas@linaro.org>
+Subject: [PATCH 0/2] xilinx: update guid with fwu metadata
+Date: Mon, 16 Jun 2025 15:15:29 +0530
+Message-ID: <20250616094531.4158505-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250616-geni-load-fw-v4-9-e7df44205505@linaro.org>
-References: <20250616-geni-load-fw-v4-0-e7df44205505@linaro.org>
-In-Reply-To: <20250616-geni-load-fw-v4-0-e7df44205505@linaro.org>
-To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Casey Connolly <casey.connolly@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2986;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=yMJ4hHsnuAn/lBXW0ghmyoZkkGxaE/muJ+J7mW5WKtM=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBoT+eOEMd5FStJzoAss6/faFqHokW9bt2zCsyAJ
- 1PS0S0vtrqJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCaE/njgAKCRAFgzErGV9k
- tjvED/oDg4Zkd7VhTqiQWprPieXquVkhncgbkHbWEG9d0dyT4DWV0BUH9Z+GBTjVRvL2pepLrDK
- Nai+GHWF9drnWmFqxhPFuvYAgC2piEK3Mxu0Ok7yAF9RsPhTJffElBnBAgwwRsVV2Fcny7aRUow
- cTrHHrIZFLhs1tGal+V5GQMswI9a54d5J/8ljd+iGgzGn++frsNZ13auv+j9K9503iNybId5Bdq
- LVrxzLng1uz1GsXWjAl9hGRR/eqnynXWx6Ay69pyfNjHixwXs0CqfboSQFueJna2wYzTfv/IU/e
- TFAvs7G2Dsj9785A+URlUN4U+RYcK+RJNHFL4Pu63lw1sgO9VipUK42SpwHqn6kpOGn36uwi9CU
- bg9QyHN8vvbbI8tQRMRhATGXJu/+nXxsu0S1qFML5ITSnVRocqQ8XXDHyXpIk2YjxXfsMhAvdt7
- x2jJ2tm2ZlLaYv51cml9qpVMAQrFtV2NVacw0IbDwKqO/wxJd84BDb1VirA3c0JNiVDzPce9B6g
- pZNLm77QRsH+IL2M8Qbz18WwyW/4AYB8O5deRUj3wDN+OUHscxMHjcoU8eeTGVP7XM6rEMBGNJS
- gN6QmA0FWNh0JdQYNcC4ePajsg9CoUfmVPjBbrC++vZigCG46Iwejw6Wb1YavJgshTSnT+9pMfe
- BL43ZnYWTROEItg==
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044AB:EE_|BY5PR12MB4324:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fcab8d0-6ea8-4c49-d243-08ddacba91bf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dc0dAIhGeAIflYtdy341pFQor/eE1Azoel5Wi/DkzaYfP3oBpXLVXK+YBpeS?=
+ =?us-ascii?Q?cmo3mHCHNRNNFbSyZVNICmlUmY/QK9JZYMV8WJdsYAgOzi5J0Ow+vqmGEgue?=
+ =?us-ascii?Q?uOHLMAkngkUbaKMrudASvnnO57i61tZVxSKNiW1NvLghwMH4NI6LWoG+Audz?=
+ =?us-ascii?Q?R3lHR1RACB8684Yuqz7BUFfR6n9HO0QPaEjWSet+W18KHpLYrXhSEGvzdq5N?=
+ =?us-ascii?Q?SB7bGSorso3QOD908+j4475oaDKcdbjg+jZokL57WpoMV/6b0DyI4+1UHXd7?=
+ =?us-ascii?Q?t8+IK29g2b/3aMzrj9ISsFEEH0gdaRXvn52/oC8va9fAG0MznjlM3+K7l1LJ?=
+ =?us-ascii?Q?vMpDodxy1MqsDqPOD96MCD+IlKPYXhHwMmN46L8412fd0xqfsA/kpzISqEkv?=
+ =?us-ascii?Q?louc7kjBZ596rQ6Uv77oEw02kBYAX28PqpIyIZRgVs38I/LAeGlLanrAjJK0?=
+ =?us-ascii?Q?v9Tv2mVluZ6IP8TugPZukwJBuCr0ix1IR1L4vRnpBCxC3KN0Ywln/NzFI0uR?=
+ =?us-ascii?Q?F9HaJFfTwY7gL04WzFQZJ1Gdb2ClmAwxhLdyFoZRwJksQbPb2z0ZMV2XhUSP?=
+ =?us-ascii?Q?AvopIdOPqpQMv8SPoHOhw3Et+van8aoH22kUW4eYlXz+X8aTBOgJEeIAC9sh?=
+ =?us-ascii?Q?Qe53veEZc8okhIQYd6EMljHDN/AtnSv/eljQFtHasmNxGHv3isNfC6xb6o90?=
+ =?us-ascii?Q?BXUCcTeji+bZNOSn9Rvw9+M5s6Sy6TIjksSrpFxDQaWBRkcqk397dTG8MuxQ?=
+ =?us-ascii?Q?lZ2oKg3s7MhTbasshoztbUTwmZteJEJNM+shczh/wcObyY0Gk74zqBp0v8Sl?=
+ =?us-ascii?Q?pGSjmi69Cvy5WSWRVjUrfwtGWf/Ne/V7pfG0Ve5fKXMSRQMYm9tvNuK2upd0?=
+ =?us-ascii?Q?M1DTdTjxDX3Q2fEodq7bTiO8zcg9Ok2Pg2ETK067nKwQXHnqs6biTWEuTNKL?=
+ =?us-ascii?Q?PZTRgE4CbVXoTYlWf97kyK+VluAh+k41ywRbOqJNCgisZUi7SrIOrPi1Y+d4?=
+ =?us-ascii?Q?NbQFTEKCnU92fPMnDBmYJ5kKIufbwMI+xNxzfpthlsEs971DaA3p1DwbiyKL?=
+ =?us-ascii?Q?5N+dS1643ytnl7/zRbCzzW4iieifrHj+IWsDzCST/6DezYRmuJoAHM4XkLpJ?=
+ =?us-ascii?Q?vkxveKkPFy/toKYefKpLfW/rOALbJ3awIC7oBaQNBxk9nG8hm2zPHnDZHo/y?=
+ =?us-ascii?Q?6jCnRBnbVc1ItSqvIpGeLNHk7LwZRflh+KRTDwVGAoAZgQIBjbRhtykpM2r+?=
+ =?us-ascii?Q?2C00Be96RQWMwmuIBI3RdYdouzv4Zpams4RcpN7fC3ycukN9TwTNtnrRRw+Q?=
+ =?us-ascii?Q?00ZMIMdAuhTY/uPXJhvSZK9EJAn3xKp+4Fkktmkvrvd/0+iIjnD4xj/8l73q?=
+ =?us-ascii?Q?v1JmMqwb0fNvL1SPodrS1aXizqiISh2D5zKbr+5yfk10pinKQTiKhAJXUKj7?=
+ =?us-ascii?Q?gBEByBEjZIlSn3MPHw9T149IiS/2iNBcuooHpgBnoipi9hXBffAoY8+TCBYU?=
+ =?us-ascii?Q?+R436fia33yZ6JSIeCP6rora++eWMm7oZjzF?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2025 09:45:46.5210 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fcab8d0-6ea8-4c49-d243-08ddacba91bf
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044AB.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4324
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,96 +147,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the GENI MISC driver which is required for many Qualcomm
-platforms.
+Introducing the fwu platform hook function from fwu
+initialization to process fwu metadata information with
+platform specific operation, and use image uuid(GUID)
+from fwu metadata structure for fwu multi bank update.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- configs/chromebook_trogdor_defconfig | 2 +-
- configs/qcom_defconfig               | 3 ++-
- configs/qcom_ipq5424_mmc_defconfig   | 2 ++
- configs/qcom_ipq9574_mmc_defconfig   | 2 ++
- 4 files changed, 7 insertions(+), 2 deletions(-)
+Padmarao Begari (2):
+  FWU: Add platform hook support for fwu metadata
+  board: xilinx: update guid based on metadata
 
-diff --git a/configs/chromebook_trogdor_defconfig b/configs/chromebook_trogdor_defconfig
-index c90dc946494c7f1a25051da84b010e01bd4f9518..81853a6b86fb160021e4db775164311e2cdf8af5 100644
---- a/configs/chromebook_trogdor_defconfig
-+++ b/configs/chromebook_trogdor_defconfig
-@@ -74,9 +74,8 @@ CONFIG_CMD_EXT2=y
- CONFIG_CMD_EXT4=y
- CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_CMD_LOG=y
--CONFIG_PARTITION_TYPE_GUID=y
- CONFIG_OF_LIVE=y
- # CONFIG_OF_TAG_MIGRATE is not set
- CONFIG_DM_WARN=y
- # CONFIG_OFNODE_MULTI_TREE is not set
-@@ -89,8 +88,9 @@ CONFIG_DM_I2C=y
- CONFIG_I2C_CROS_EC_TUNNEL=y
- CONFIG_SYS_I2C_GENI=y
- CONFIG_CROS_EC_KEYB=y
- CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- # CONFIG_MMC_PCI is not set
- CONFIG_MMC_SDHCI_MSM=y
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 2afb930e103cac5801bea05f531f98ed046113a0..e53bd7fba484153e2334f1d2e016a173373b84c7 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -87,8 +87,9 @@ CONFIG_BUTTON_KEYBOARD=y
- CONFIG_IOMMU=y
- CONFIG_QCOM_HYP_SMMU=y
- CONFIG_MISC=y
- CONFIG_NVMEM=y
-+CONFIG_QCOM_GENI=y
- CONFIG_I2C_EEPROM=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
-@@ -150,8 +151,8 @@ CONFIG_VIDEO=y
- CONFIG_VIDEO_FONT_16X32=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
--CONFIG_WDT_QCOM=y
- CONFIG_WDT=y
-+CONFIG_WDT_QCOM=y
- # CONFIG_BINMAN_FDT is not set
- CONFIG_BINMAN_DTB="./arch/arm/dts/qcom-binman.dtb"
-diff --git a/configs/qcom_ipq5424_mmc_defconfig b/configs/qcom_ipq5424_mmc_defconfig
-index 81c3865193d73e3f1fc85bd342e3f1d25534c81d..cbd154f81c396b0b10c3c208efe52ff4077e0b54 100644
---- a/configs/qcom_ipq5424_mmc_defconfig
-+++ b/configs/qcom_ipq5424_mmc_defconfig
-@@ -34,8 +34,10 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_IPQ5424=y
- CONFIG_MSM_GPIO=y
- # CONFIG_I2C is not set
- # CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
- CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
-diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-index 00abc8430596dadd574d5d2b7353ecfdef01e2b4..a14129d1e9b96118503a7e9c9ef8bcf2559981a7 100644
---- a/configs/qcom_ipq9574_mmc_defconfig
-+++ b/configs/qcom_ipq9574_mmc_defconfig
-@@ -33,8 +33,10 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_IPQ9574=y
- CONFIG_MSM_GPIO=y
- # CONFIG_I2C is not set
- # CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
- CONFIG_MTD=y
+ board/xilinx/common/board.c          | 13 +++++++++++
+ drivers/fwu-mdata/fwu-mdata-uclass.c | 17 +++++++++++++++
+ drivers/fwu-mdata/raw_mtd.c          |  6 ++++++
+ include/fwu.h                        | 32 ++++++++++++++++++++++++++++
+ lib/fwu_updates/fwu.c                |  8 +++++++
+ 5 files changed, 76 insertions(+)
 
 -- 
-2.49.0
+2.25.1
 
