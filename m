@@ -4,62 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8B80C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 08:05:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381A4C71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 08:25:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D01780C93;
-	Mon, 16 Jun 2025 10:05:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 769CC80C93;
+	Mon, 16 Jun 2025 10:25:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ODjV9ENA";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="nAjnYBsL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09A2C81E18; Mon, 16 Jun 2025 10:05:16 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1B168007D
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 10:05:13 +0200 (CEST)
+ id CC31281E18; Mon, 16 Jun 2025 10:24:59 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A6D9F8007D
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 10:24:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55G85B7b3766641;
- Mon, 16 Jun 2025 03:05:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750061112;
- bh=9uObKwloUc9EINVGzX/XlS5N0YqNjribFJw0SgGvZeA=;
- h=From:To:CC:Subject:Date;
- b=ODjV9ENA2+bvnILL2r1Z3jJF0vb3YCvIua1NcinrKfH94L+DDgWD2ESDAJL7CFXb+
- sQVK+HLgGSo1flGyBC5FSG4BeaCS1YeWeuZJTd6ckc6aDEM1zpjDLc5eLto3seL5Qx
- 6mCsfEHVGl/xsN+K/88pOtEY9wbZ8taZgouLUgo4=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55G85B4b769757
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 16 Jun 2025 03:05:11 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 16
- Jun 2025 03:05:11 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 16 Jun 2025 03:05:11 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55G85A8p3705224;
- Mon, 16 Jun 2025 03:05:11 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v1] arm: Kconfig: enable LTO for ARCH_K3
-Date: Mon, 16 Jun 2025 13:34:30 +0530
-Message-ID: <20250616080431.3548976-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=82620602e9=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55G6OcOY001568;
+ Mon, 16 Jun 2025 10:24:35 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 31E7WwoKvt16r8MYMjn0tDkbO+yHBZiyNofhnTJlYOU=; b=nAjnYBsL/UC7RvHQ
+ +XJSdxkULPGv2cTDz5qoT0LQeFlpYRantEiP1M5qXvbkUeTZRerT0OrkkuTJ6/4m
+ Od3Vp6Ob91SnB/1kmyGJvWH8//ta9a5fiWHSIpebWxyTVdmPv1o/wJad+JAmobnK
+ aZilkW6X0VuKujaIWxh1VdoLlBKBsWyiI3ycnK3Fw61c73diVqBAAMq986YbgEZF
+ QOi699WmkiE/kZaDnz2Yb1c+E6jTpfWr453u8Pjl1wZTRmxVgxn4YcZeyN14/FUt
+ 8EvWEYQdXARDZh2WL92cbcB/74xHhBAFFwd77t4AhAfyVlmH8u+aY+MOi7TzBQfY
+ RujDzw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4790e1yhm6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 16 Jun 2025 10:24:34 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DF3EE4004D;
+ Mon, 16 Jun 2025 10:22:12 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 303FF5D40C4;
+ Mon, 16 Jun 2025 10:20:51 +0200 (CEST)
+Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Jun
+ 2025 10:20:49 +0200
+Message-ID: <dedd6356-8a35-468d-b144-f80db627cd08@foss.st.com>
+Date: Mon, 16 Jun 2025 10:20:48 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/7] drivers: use lowercase hex prefix style
+To: E Shattow <e@freeshell.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Tien Fong Chee
+ <tien.fong.chee@altera.com>, Tingting Meng <tingting.meng@altera.com>, Peng
+ Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Anatolij Gustschin <agust@denx.de>
+CC: <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250606224558.1117422-1-e@freeshell.de>
+ <20250606224558.1117422-4-e@freeshell.de>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20250606224558.1117422-4-e@freeshell.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.182]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-16_03,2025-06-13_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,27 +103,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_LTO enables Link Time Optimizations that helps in reducing binary
-size. The config has been validated on all K3 platforms so can be safely
-enabled.
+Hi,
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+On 6/7/25 00:44, E Shattow wrote:
+> Use consistent lowercase hex prefix style in drivers/*
+>
+> Does not change hex prefix case in allcaps uppercase style error messages
+>
+> Signed-off-by: E Shattow <e@freeshell.de>
+> ---
+>   drivers/ata/dwc_ahsata_priv.h             |  4 +-
+>   drivers/clk/renesas/r8a774a1-cpg-mssr.c   |  2 +-
+>   drivers/clk/stm32/clk-stm32mp1.c          |  2 +-
+>   drivers/ddr/altera/iossm_mailbox.c        |  2 +-
+>   drivers/mmc/sdhci-cadence6.c              |  2 +-
+>   drivers/mmc/zynq_sdhci.c                  |  2 +-
+>   drivers/mtd/nand/raw/lpc32xx_nand_mlc.c   |  4 +-
+>   drivers/net/fsl-mc/mc.c                   |  2 +-
+>   drivers/net/phy/ca_phy.c                  |  2 +-
+>   drivers/phy/rockchip/phy-rockchip-typec.c |  2 +-
+>   drivers/power/regulator/act8846.c         |  4 +-
+>   drivers/ram/k3-ddrss/k3-ddrss.c           |  2 +-
+>   drivers/ram/octeon/octeon3_lmc.c          |  2 +-
+>   drivers/sound/max98088.h                  | 50 +++++++++++------------
+>   drivers/sound/max98095.h                  |  2 +-
+>   drivers/video/bridge/dp501.c              |  2 +-
+>   drivers/video/hx8238d.c                   |  2 +-
+>   drivers/video/zynqmp/zynqmp_dpsub.h       |  2 +-
+>   18 files changed, 45 insertions(+), 45 deletions(-)
+>
+> diff --git a/drivers/ata/dwc_ahsata_priv.h b/drivers/ata/dwc_ahsata_priv.h
+> index 0c2cd5446b5..f2a118420f9 100644
+> --- a/drivers/ata/dwc_ahsata_priv.h
+> +++ b/drivers/ata/dwc_ahsata_priv.h
+> @@ -117,8 +117,8 @@
+>   #define SATA_HOST_GPARAM1R_PHY_TYPE	0x00001000
+>   #define SATA_HOST_GPARAM1R_RETURN_ERR	0x00000400
+>   #define SATA_HOST_GPARAM1R_AHB_ENDIAN_MASK	0x00000300
+> -#define SATA_HOST_GPARAM1R_S_HADDR	0X00000080
+> -#define SATA_HOST_GPARAM1R_M_HADDR	0X00000040
+> +#define SATA_HOST_GPARAM1R_S_HADDR	0x00000080
+> +#define SATA_HOST_GPARAM1R_M_HADDR	0x00000040
+>   
+>   /* Global Parameter 2 Register */
+...
+> diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
+> index 9cb69a01f7f..823ce132d0b 100644
+> --- a/drivers/clk/stm32/clk-stm32mp1.c
+> +++ b/drivers/clk/stm32/clk-stm32mp1.c
+> @@ -117,7 +117,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>   #define RCC_DSICKSELR		0x924
+>   #define RCC_ADCCKSELR		0x928
+>   #define RCC_MP_APB1ENSETR	0xA00
+> -#define RCC_MP_APB2ENSETR	0XA08
+> +#define RCC_MP_APB2ENSETR	0xA08
+>   #define RCC_MP_APB3ENSETR	0xA10
+>   #define RCC_MP_AHB2ENSETR	0xA18
+>   #define RCC_MP_AHB3ENSETR	0xA20
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 6ff3f2750ea..ab7ed0b8e77 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -820,6 +820,7 @@ config ARCH_K3
- 	select FIT
- 	select REGEX
- 	select FIT_SIGNATURE if ARM64
-+	select LTO
- 	imply TI_SECURE_DEVICE
- 
- config ARCH_OMAP2PLUS
--- 
-2.49.0
+....
+
+
+For stm32mp1 clock driver,
+
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
+
 
