@@ -4,94 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5440BC71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:42:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11728C71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:47:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4A3081760;
-	Mon, 16 Jun 2025 15:41:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8461B80C93;
+	Mon, 16 Jun 2025 15:46:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dZUBsgt6";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gS0HRAz5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FA0881E18; Mon, 16 Jun 2025 15:41:57 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 304F281760; Mon, 16 Jun 2025 15:46:58 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 109FC80C93
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:41:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EF258070C
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:46:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3a510432236so3350088f8f.0
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 06:41:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750081314; x=1750686114; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gPd+YoGafkQh3TSxPWi3CzV9x0UEvkMu7rByBWRPiJQ=;
- b=dZUBsgt6VfL4n5GNv8bPIif8GeHcUS+onV9jHEI690LFKkC4kq1KGIb1JP/7MzvQ5F
- x9sobhRXF+W7/pMWAqo1iGC3qa4YR8oW94QcotVfWDWl7apJ9n2Oy2F/qB22oerrioV+
- I0HTo7VhMrDVcB6RtaA5MqIxQLN6t40oPp5FFjRcabMO0xb8LQ5YsBTB+4PWwVBd0OCn
- 6yW+RuCTwLmtIicN9BiAv7680lLjDV19KHX+X9ckXILQYASF7wwCl66cIvzswAI8Cdvy
- c+GtJrK22VDMASwwgzGgCiqhrv1XU/t2LfmQn+YmG2c7fzbbcxUMEuPhVT8stMIBdx/H
- MnyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750081314; x=1750686114;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gPd+YoGafkQh3TSxPWi3CzV9x0UEvkMu7rByBWRPiJQ=;
- b=gxYbVXyopLdIr3HSDyNTKeYY9CPp33+gjxzuJMNB8na5lUYA2+X/QIzPC9VPoykuaT
- DzoUyhzMSKy8v86AV/zkxsUY2besz6bNL6zatdUWeaXVYNgV0jY/IQ4tVdGJMQKOqjKD
- iQVebZeFiacfw7XYbfYk1v4m7jAqD/4i8RUGtWk89MpgSnDxkLQcRkg5morZ1qojleOn
- TBg6xDZ/aDd/cs6uWlPoy5nVu2O2d9Ai+owJYbtPDzdvANk9lRK5/WkMGSpTA7qQz2ZB
- t48S2epJ8B80W6VOprBedPuQ30zHkwq1Ud3W7ymg/YfRTqQjZg5uJNt61gq91t2pQM+f
- BUPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjfuk2MP7LyFRk5kHh9tlLprNuTOcq+VuD6lfNcpGdiAXJMSu3+LO7+YEuA4O2NBfHW65dtjk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHlYIi4aM1cLUyKUCVGVdOj3cHSIcrNGODy6mRfWE73hXTVrVl
- bnBpW57W/PVobn/C8/dlrqo7sHhW5KV2nbvXC5t1QX7sPUTtq3ZecCvGSN9qFQURRyU=
-X-Gm-Gg: ASbGncu/agkJFhndo4GajFYUj08Y8poAmX8Iy5vIBGfgnE8OD7er2zCJu5McOX6+6kx
- u/pvXJc5GAmJjazUSSNPKxBwgnVIJDeNEHXeSn9VLC7bvIss5n1NnkCI7Ki8wH4kIsE801JSZGO
- Qewihxa4PidWVb0clyK1+4E5D4QvTQ9oZUK7rxkGZaX2Qlb3yvePbfKgDyXE+VJNRGC3e5hukJP
- HdxiUtZrl4JFsM/Mp8SIU/1wI0MDexDaIugI58E8CoDukvaqz0g7aXhZkawupktO/JOFhmdJNBm
- z9AdA++ROF0fxGcV3dybWDIMUHzZaEwIwo1iMRrzhymAy3rS5PcsiEP1fTjmuf0oe+BpoVbtdKa
- 4CZLp5dtQ8pFmQmD0mdGD8ttpgs6qJNhCkQmDLYtIJIXvAjR/DQ==
-X-Google-Smtp-Source: AGHT+IE95vCu51pe3NjWV9aoRIAhecwLPwM38sRHSuD6zwGJOAMDu8HfjmrF069XrTHV/rd7g4E0hw==
-X-Received: by 2002:a05:6000:230e:b0:3a4:e740:cd72 with SMTP id
- ffacd0b85a97d-3a572396df6mr7733643f8f.13.1750081314407; 
- Mon, 16 Jun 2025 06:41:54 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:ed5:5ba4:73c4:b199?
- ([2a01:e0a:3cb:7bb0:ed5:5ba4:73c4:b199])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532e232e4asm143653905e9.11.2025.06.16.06.41.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Jun 2025 06:41:54 -0700 (PDT)
-Message-ID: <7f8cb72d-ba9a-4317-adc3-5c17bdcfb80a@linaro.org>
-Date: Mon, 16 Jun 2025 15:41:53 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1750081611; x=1750686411; i=xypron.glpk@gmx.de;
+ bh=wL9KQy0xDZVjmYDatFo/xpfhf0+xWvlb/hRezikoysE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=gS0HRAz5fW7PIufUWIjzI6KLYHFrBd8Rc9ksILrt04oxaXaAiPaIZkSmV3S+4rP1
+ pak0sM3QRxdLa3IF6mGmtKNfKT7XLYoXXEOXLmh8juOydo7HYo9WeLproGSxTQrnG
+ iV2jnYE2KRh4menm8iEUy/Ld3fXUe/OCcW6KnRgbJ3G1o1PUK48pyKdUmDG7D6VHF
+ BeN8a8ahrjavtk9JASeryNb5LmNDHZWNt2tltZusSJK8XEKnUK6adlIb++WtWRUZp
+ bQpjfx593Y7j/VYNGd8I2sQ+o1JXTFCFVi4galYdOCk6XSVxrFV10MbnXyqMm+9In
+ vuWwx/7MxPzDLGO/hQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgeoI-1uzQf839Iq-00flrk; Mon, 16
+ Jun 2025 15:46:50 +0200
+Message-ID: <a6e2637e-a748-4b0d-88a5-13431284dc06@gmx.de>
+Date: Mon, 16 Jun 2025 15:46:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: io.h: Fix io accessors for KVM
+Subject: Re: [PATCH v5 3/4] lib: efi_loader: efi_memory.c: add efi_realloc()
+ for realloc memory
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, mikko.rapeli@linaro.org,
- Jagan Teki <jagan@amarulasolutions.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-References: <20250616075035.1144220-1-ilias.apalodimas@linaro.org>
- <c7d2a64f-1415-4481-9c2c-072e0abb2698@linaro.org>
- <CAC_iWjJxE_XSbHAZcxf2bVssnyqesT5td3XxAAvs80-PSMQOjQ@mail.gmail.com>
+Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+References: <20250611050844.210384-1-paulliu@debian.org>
+ <20250611050844.210384-4-paulliu@debian.org>
+ <CAC_iWjLhWKRdGmuwV6OO-yKBbbjE2Kdr=NrxbMoR9Rxy4NYM=g@mail.gmail.com>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjJxE_XSbHAZcxf2bVssnyqesT5td3XxAAvs80-PSMQOjQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjLhWKRdGmuwV6OO-yKBbbjE2Kdr=NrxbMoR9Rxy4NYM=g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:w1ignUZyDTevPChhYUxfWtgQHAkQCEXkPwgh/y5syrrW1tugs9Z
+ JiniShbFV1to49uAUK26sBn+s4aOsncqaNPlRy0JCLM6z6wGWlSSFlv0oYTXTGrEdV3Tasr
+ UyBnvlsrXQIeHlLtEfXblPMu9tKFJO28GIvOgUs5TGcgMNVjg0zWjXRCYegW/NI9u2+cEby
+ s/u7cTUfWxUXeu4tePmhA==
+UI-OutboundReport: notjunk:1;M01:P0:UThNRrv/ywg=;0Sm/UDvwEy1pDY2XKXgH1Qw6/X0
+ 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
+ taURrksMpzb2bJKVBW4ufbDgW/X2eR0/hLpAjA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,115 +128,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 6/16/25 15:11, Ilias Apalodimas wrote:
-> Hi Jerome,
-> 
+On 16.06.25 15:09, Ilias Apalodimas wrote:
+> Hi Paul
+>=20
 > [...]
-> 
->>
->> If I'm not mistaken, this patch is doing two things that are unrelated:
->> (1) fix the KVM issue and
->> (2) get rid of the __arch_*() macros in favor of the __raw_*() macros
-> 
-> I can split it, but I don't see much point since we redefine the raw_macros.
+>=20
+>> +/**
+>> + * efi_realloc() - reallocate boot services data pool memory
+>> + *
+>> + * Reallocate memory from pool for a new size and copy the data from o=
+ld one.
+>> + *
+>> + * @ptr:       pointer to old buffer
+>> + * @size:      number of bytes to allocate
+>> + * Return:     EFI status to indicate success or not
+>> + */
+>> +efi_status_t efi_realloc(void **ptr, size_t size)
+>> +{
+>> +       efi_status_t ret;
+>> +       void *new_ptr;
+>> +       struct efi_pool_allocation *alloc;
+>> +       u64 num_pages =3D efi_size_in_pages(size +
+>> +                                         sizeof(struct efi_pool_alloca=
+tion));
+>> +       size_t old_size;
+>> +
+>> +       if (!*ptr) {
+>> +               *ptr =3D efi_alloc(size);
+>=20
+> Shouldn't you check that *ptr !=3D NULL before returning success here?
 
-Just to make it easier to review.
+Hello Ilias,
 
-> 
->>
->> IMO this should be two separate patches.
->>
->>>
->>>  /*
->>>   * The compiler seems to be incapable of optimising constants
->>> diff --git a/drivers/spi/fsl_dspi.c b/drivers/spi/fsl_dspi.c
->>> index f2393c041f44..545561ad1169 100644
->>> --- a/drivers/spi/fsl_dspi.c
->>> +++ b/drivers/spi/fsl_dspi.c
->>> @@ -123,8 +123,10 @@ static uint dspi_read32(uint flags, uint *addr)
->>>
->>>  static void dspi_write32(uint flags, uint *addr, uint val)
->>>  {
->>> -     flags & DSPI_FLAG_REGMAP_ENDIAN_BIG ?
->>> -             out_be32(addr, val) : out_le32(addr, val);
->>> +     if (flags & DSPI_FLAG_REGMAP_ENDIAN_BIG)
->>> +             out_be32(addr, val);
->>> +     else
->>> +             out_le32(addr, val);
->>>  }
->>
->> Unrelated change
-> 
-> Due to the the new do {} while(0) macro this doesn't compile, so it
-> needs to go together.
+Do you mean "check that ptr !=3D NULL"?
 
-If you make all the __raw_*() macros compound litterals, i.e., ({ ... })
-it should not be necessary I think.
+Best regards
 
-> 
+Heinrich
+
+>=20
+>> +               return EFI_SUCCESS;
+>> +       }
+>> +
+>> +       ret =3D efi_check_allocated((uintptr_t)*ptr, true);
+>> +       if (ret !=3D EFI_SUCCESS)
+>> +               return ret;
+>> +
+>> +       alloc =3D container_of(*ptr, struct efi_pool_allocation, data);
+>> +
+>> +       /* Check that this memory was allocated by efi_allocate_pool() =
+*/
+>> +       if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+>> +           alloc->checksum !=3D checksum(alloc)) {
+>> +               printf("%s: illegal realloc 0x%p\n", __func__, *ptr);
+>> +               return EFI_INVALID_PARAMETER;
+>> +       }
+>> +
+>> +       /* Don't realloc. The actual size in pages is the same. */
+>> +       if (alloc->num_pages =3D=3D num_pages)
+>> +               return EFI_SUCCESS;
+>> +
+>> +       old_size =3D alloc->num_pages * EFI_PAGE_SIZE -
+>> +               sizeof(struct efi_pool_allocation);
+>> +
+>> +       new_ptr =3D efi_alloc(size);
+>> +
+>> +       /* copy old data to new alloced buffer */
+>> +       memcpy(new_ptr, *ptr, min(size, old_size));
+>> +
+>> +       /* free the old buffer */
+>> +       efi_free_pool(*ptr);
+>> +
+>> +       *ptr =3D new_ptr;
+>> +
+>> +       return EFI_SUCCESS;
+>> +}
+>> +
+>>   /**
+>>    * efi_free_pool() - free memory from pool
+>>    *
+>> --
+>> 2.39.5
 >>
->>>
->>>  static void dspi_halt(struct fsl_dspi_priv *priv, u8 halt)
->>> diff --git a/include/fsl_ifc.h b/include/fsl_ifc.h
->>> index 3ac226879303..1c363115beb2 100644
->>> --- a/include/fsl_ifc.h
->>> +++ b/include/fsl_ifc.h
->>> @@ -803,29 +803,29 @@ void init_final_memctl_regs(void);
->>>       ((struct fsl_ifc_fcm *)CFG_SYS_IFC_ADDR)
->>>
->>>  #define get_ifc_cspr_ext(i)  \
->>> -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext))
->>> +             ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext)
->>>  #define get_ifc_cspr(i)              \
->>> -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr))
->>> +             ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr)
->>>  #define get_ifc_csor_ext(i)  \
->>> -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext))
->>> +             ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext)
->>>  #define get_ifc_csor(i)              \
->>> -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor))
->>> +             ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor)
->>>  #define get_ifc_amask(i)     \
->>> -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask))
->>> +             ifc_in32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask)
->>>  #define get_ifc_ftim(i, j)   \
->>> -             (ifc_in32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j]))
->>> +             ifc_in32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j])
->>>  #define set_ifc_cspr_ext(i, v)       \
->>> -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext, v))
->>> +             ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext, v)
->>>  #define set_ifc_cspr(i, v)   \
->>> -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr, v))
->>> +             ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr, v)
->>>  #define set_ifc_csor_ext(i, v)       \
->>> -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext, v))
->>> +             ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext, v)
->>>  #define set_ifc_csor(i, v)   \
->>> -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor, v))
->>> +             ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor, v)
->>>  #define set_ifc_amask(i, v)  \
->>> -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask, v))
->>> +             ifc_out32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask, v)
->>>  #define set_ifc_ftim(i, j, v)        \
->>> -             (ifc_out32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j], v))
->>> +             ifc_out32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j], v)
->>
->> Same.
-> 
-> Same here, both of the changes are needed
-> 
+>=20
 > Thanks
 > /Ilias
->>
->>>
->>>  enum ifc_chip_sel {
->>>       IFC_CS0,
->>> --
->>> 2.43.0
->>>
->>
->> Thanks,
->> --
->> Jerome
+
