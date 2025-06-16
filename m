@@ -4,114 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11728C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7555AC71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:49:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8461B80C93;
-	Mon, 16 Jun 2025 15:46:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id EB6F880C93;
+	Mon, 16 Jun 2025 15:48:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gS0HRAz5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CDZg7KNl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 304F281760; Mon, 16 Jun 2025 15:46:58 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B7F5D81760; Mon, 16 Jun 2025 15:48:58 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EF258070C
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:46:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38DB38070C
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:48:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1750081611; x=1750686411; i=xypron.glpk@gmx.de;
- bh=wL9KQy0xDZVjmYDatFo/xpfhf0+xWvlb/hRezikoysE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=gS0HRAz5fW7PIufUWIjzI6KLYHFrBd8Rc9ksILrt04oxaXaAiPaIZkSmV3S+4rP1
- pak0sM3QRxdLa3IF6mGmtKNfKT7XLYoXXEOXLmh8juOydo7HYo9WeLproGSxTQrnG
- iV2jnYE2KRh4menm8iEUy/Ld3fXUe/OCcW6KnRgbJ3G1o1PUK48pyKdUmDG7D6VHF
- BeN8a8ahrjavtk9JASeryNb5LmNDHZWNt2tltZusSJK8XEKnUK6adlIb++WtWRUZp
- bQpjfx593Y7j/VYNGd8I2sQ+o1JXTFCFVi4galYdOCk6XSVxrFV10MbnXyqMm+9In
- vuWwx/7MxPzDLGO/hQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgeoI-1uzQf839Iq-00flrk; Mon, 16
- Jun 2025 15:46:50 +0200
-Message-ID: <a6e2637e-a748-4b0d-88a5-13431284dc06@gmx.de>
-Date: Mon, 16 Jun 2025 15:46:50 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/4] lib: efi_loader: efi_memory.c: add efi_realloc()
- for realloc memory
+ spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-553bcf41440so1575032e87.3
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 06:48:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750081735; x=1750686535; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Nb5dR8/b23Eg/wNLU+N+cAw9cb3us40b1Yka9c4+Jz8=;
+ b=CDZg7KNlvjlKRT/WQQKjzusPCf0RdFFyuUVKAGvBnG6fdm717NaujPMBB+gUn2HVkJ
+ p1wbok9AVPHquGzREBMkl7KCwOyLY0FAZW2xTfJU6vYdNHFyOUQX5z3H4NYWBm8rU9n5
+ huzEXG40zyJYWaV4ftSOUcQDcl28ysokWXOtgj55NtHFXYlMMEXRocax9Z4i/oMMnnJn
+ k+cTPZdtjap1asRrHCi4QQl3QjKyhcxC1NTMUHfjlhCt+t+y6gqC2bvvx/aAUpecCvHV
+ RVY3NneL6kf9FMc4AbtP2VL35QV6S/EUJDadK0Em48qoa76vzQiPOWorfuR3By8PSFEz
+ BUfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750081735; x=1750686535;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nb5dR8/b23Eg/wNLU+N+cAw9cb3us40b1Yka9c4+Jz8=;
+ b=e/8kTgzptc1mgRiSPjNwJVOkq6FtOoa74570sP23kaTcNBSPtHV/Se9rV97Aj2sZg1
+ w9H5q8n1jA3tgG5xIy0XDvI22tU2HXovR8j04wckCzjNJVCIw9Jf4CxGJ364XUrPWPu/
+ eoKOKHmfuJHtXrjyNXSGdkVisAVx3FH023KlEEaYbFvVAABTsRWSkX3AVEnkExwvcM3H
+ VwbRYqWQmrqjK3vc4dxy/5ofyzAZOVvJR4nT+A7lBusD49dyi963XyaEGi1ZK1S//ju5
+ 6edWFD8TLMvQoWMSLZE/FZQdqne8LiExuRRBHEGrV3JTindJaQTo7PBjkIAEux+/2esO
+ aLXg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlog2wF/tETuiVZB3mnwxF1JVyABNEvkJq5csOERGcOh75WbYnGov3INjj73YAfaM5NiFBZEc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpccGNf+hh8wOWK2SxUZjagoi1a5+1OMAaajGtLi48X9HvloXE
+ IZUtbQDIhRfXiHirznuu1nUZ5BuZt9D7+qU8yiLE46RXg4+zAax9Ryb4AVaaeqGILAo=
+X-Gm-Gg: ASbGncuDigxcijJ2sHRBIDPxkddQtg/0BPAA6FFrJSwD2zPMe9XBIfM+jyJepeRF6V7
+ 0onPxFnjSXOeL2T9CqFUHObTsC5YNYZK5jTOZDAydK2HQz3aR0LHNvevuFWEpcvS8I7UlFdQVHy
+ D0emGChecNL8cckYlyePiKyha+OO95nZLnM0avyzOLhrZZN0KLFqYNW2IBkU8AZT/7W4WANVxwh
+ XGH5MpVbMEaWPLl5ISkkns81QSyZbvyyZmxNDYLCAKneL71DSXCfu1KcqvqCQ3FgkJikM6XDBiT
+ qGpVBmBNZAuxOKrdC5rnHdciEU9M1EZJPCe83ccazh4JEbJrnL9CPU3M/ORQr6sRs4j8xm4knJA
+ kbW+mWpZwFNm48d0j8KY=
+X-Google-Smtp-Source: AGHT+IEl2QsML+cu/z5h724ZVlBmM1weLRxEXjp3189luG+k5DMaLmflhX9iXaKoVQGwgnqdhsQdMQ==
+X-Received: by 2002:a05:6512:224b:b0:553:25f4:695f with SMTP id
+ 2adb3069b0e04-553b6e8ca1fmr2431139e87.20.1750081735342; 
+ Mon, 16 Jun 2025 06:48:55 -0700 (PDT)
+Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-553ac1dc751sm1558609e87.195.2025.06.16.06.48.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Jun 2025 06:48:55 -0700 (PDT)
+Date: Mon, 16 Jun 2025 16:48:53 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-References: <20250611050844.210384-1-paulliu@debian.org>
- <20250611050844.210384-4-paulliu@debian.org>
- <CAC_iWjLhWKRdGmuwV6OO-yKBbbjE2Kdr=NrxbMoR9Rxy4NYM=g@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjLhWKRdGmuwV6OO-yKBbbjE2Kdr=NrxbMoR9Rxy4NYM=g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: trini@konsulko.com, jerome.forissier@linaro.org,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] arm: io.h: Fix io accessors for KVM
+Message-ID: <aFAgxeGCUSqIBet3@nuoska>
+References: <20250616075035.1144220-1-ilias.apalodimas@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:w1ignUZyDTevPChhYUxfWtgQHAkQCEXkPwgh/y5syrrW1tugs9Z
- JiniShbFV1to49uAUK26sBn+s4aOsncqaNPlRy0JCLM6z6wGWlSSFlv0oYTXTGrEdV3Tasr
- UyBnvlsrXQIeHlLtEfXblPMu9tKFJO28GIvOgUs5TGcgMNVjg0zWjXRCYegW/NI9u2+cEby
- s/u7cTUfWxUXeu4tePmhA==
-UI-OutboundReport: notjunk:1;M01:P0:UThNRrv/ywg=;0Sm/UDvwEy1pDY2XKXgH1Qw6/X0
- 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
- taURrksMpzb2bJKVBW4ufbDgW/X2eR0/hLpAjA==
+In-Reply-To: <20250616075035.1144220-1-ilias.apalodimas@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,89 +104,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16.06.25 15:09, Ilias Apalodimas wrote:
-> Hi Paul
+Hi,
+
+On Mon, Jun 16, 2025 at 10:50:32AM +0300, Ilias Apalodimas wrote:
+> commit 2e2c2a5e72a8 ("arm: qemu: override flash accessors to use virtuali=
+zable instructions")
+> explains why we can't have instructions with multiple output registers
+> when running under QEMU + KVM and the instruction leads to an exception
+> to the hypervisor.
 >=20
-> [...]
+> USB XHCI is such a case (MMIO) where a ldr w1, [x0], #4 is emitted for
+> xhci_start() which works fine with QEMU but crashes for QEMU + KVM.
 >=20
->> +/**
->> + * efi_realloc() - reallocate boot services data pool memory
->> + *
->> + * Reallocate memory from pool for a new size and copy the data from o=
-ld one.
->> + *
->> + * @ptr:       pointer to old buffer
->> + * @size:      number of bytes to allocate
->> + * Return:     EFI status to indicate success or not
->> + */
->> +efi_status_t efi_realloc(void **ptr, size_t size)
->> +{
->> +       efi_status_t ret;
->> +       void *new_ptr;
->> +       struct efi_pool_allocation *alloc;
->> +       u64 num_pages =3D efi_size_in_pages(size +
->> +                                         sizeof(struct efi_pool_alloca=
-tion));
->> +       size_t old_size;
->> +
->> +       if (!*ptr) {
->> +               *ptr =3D efi_alloc(size);
+> These instructions cannot be emulated by KVM as they do not produce
+> syndrome information data that KVM can use to infer the destination
+> register, the faulting address, whether it was a load or store, or
+> if it's a 32 or 64 bit general-purpose register.
+> As a result an external abort is injected from QEMU, via ext_dabt_pending
+> to KVM and we end up throwing an exception that looks like
 >=20
-> Shouldn't you check that *ptr !=3D NULL before returning success here?
-
-Hello Ilias,
-
-Do you mean "check that ptr !=3D NULL"?
-
-Best regards
-
-Heinrich
-
+>  U-Boot 2025.07-rc4 (Jun 10 2025 - 12:00:15 +0000)
+>  [...]
+>  Register 8001040 NbrPorts 8
+>  Starting the controller
+>  "Synchronous Abort" handler, esr 0x96000010, far 0x10100040
+>  elr: 000000000005b1c8 lr : 000000000005b1ac (reloc)
+>  elr: 00000000476fc1c8 lr : 00000000476fc1ac
+>  x0 : 0000000010100040 x1 : 0000000000000001
+>  x2 : 0000000000000000 x3 : 0000000000003e80
+>  x4 : 0000000000000000 x5 : 00000000477a5694
+>  x6 : 0000000000000038 x7 : 000000004666f360
+>  x8 : 0000000000000000 x9 : 00000000ffffffd8
+>  x10: 000000000000000d x11: 0000000000000006
+>  x12: 0000000046560a78 x13: 0000000046560dd0
+>  x14: 00000000ffffffff x15: 000000004666eed2
+>  x16: 00000000476ee2f0 x17: 0000000000000000
+>  x18: 0000000046660dd0 x19: 000000004666f480
+>  x20: 0000000000000000 x21: 0000000010100040
+>  x22: 0000000010100000 x23: 0000000000000000
+>  x24: 0000000000000000 x25: 0000000000000000
+>  x26: 0000000000000000 x27: 0000000000000000
+>  x28: 0000000000000000 x29: 000000004666f360
 >=20
->> +               return EFI_SUCCESS;
->> +       }
->> +
->> +       ret =3D efi_check_allocated((uintptr_t)*ptr, true);
->> +       if (ret !=3D EFI_SUCCESS)
->> +               return ret;
->> +
->> +       alloc =3D container_of(*ptr, struct efi_pool_allocation, data);
->> +
->> +       /* Check that this memory was allocated by efi_allocate_pool() =
-*/
->> +       if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
->> +           alloc->checksum !=3D checksum(alloc)) {
->> +               printf("%s: illegal realloc 0x%p\n", __func__, *ptr);
->> +               return EFI_INVALID_PARAMETER;
->> +       }
->> +
->> +       /* Don't realloc. The actual size in pages is the same. */
->> +       if (alloc->num_pages =3D=3D num_pages)
->> +               return EFI_SUCCESS;
->> +
->> +       old_size =3D alloc->num_pages * EFI_PAGE_SIZE -
->> +               sizeof(struct efi_pool_allocation);
->> +
->> +       new_ptr =3D efi_alloc(size);
->> +
->> +       /* copy old data to new alloced buffer */
->> +       memcpy(new_ptr, *ptr, min(size, old_size));
->> +
->> +       /* free the old buffer */
->> +       efi_free_pool(*ptr);
->> +
->> +       *ptr =3D new_ptr;
->> +
->> +       return EFI_SUCCESS;
->> +}
->> +
->>   /**
->>    * efi_free_pool() - free memory from pool
->>    *
->> --
->> 2.39.5
->>
+>  Code: d5033fbf aa1503e0 5287d003 52800002 (b8004401)
+>  Resetting CPU ...
 >=20
-> Thanks
-> /Ilias
+> There are two problems making this the default.
+> - Some v7 platforms throw an error looking like
+>   {standard input}: Assembler messages:
+>   {standard input}:1259: Error: lo register required -- `ldrh ip,[r1]'
+>   We can change the asm constraints from "r" to "l" for  Thumb.
+>   However, it overcomplicates the macros for no apparent reason.
+>   Running armv7 + KVM is unlikely. The pipeline [0] contains the details
+>   of what needs to change.
+> - Some platforms that depend on TPL/SPL grow in size enough so that the
+>   binary doesn't fit anymore.
+>=20
+> So let's add proper I/O accessors for arvm8 only and add a Kconfig option
+> to turn it off by default if TPL is selected.
+>=20
+> [0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/26673
+>=20
+> Reported-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+Tested on yocto master branch builds for qemuarm64 machine and this
+patch fixes the boot hang when USB devices are enabled (like they are
+on qemuarm64 yocto target machine config). Included u-boot update from 2025=
+=2E04
+to newer master branch commit b22a276f039f818d5564bec6637071cfc8a7e432
+in the build.
+
+$ bitbake core-image-minimal u-boot && \
+BIOS=3Dtmp/deploy/images/qemuarm64/u-boot.bin runqemu slirp nographic novga=
+ snapshot kvm
+=2E..
+runqemu - INFO - Running /home/mcfrisk/src/base/repo/poky/build_qemuarm64/t=
+mp/work/aarch64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/=
+qemu-system-aarch64 -device virtio-net-pci,netdev=3Dnet0,mac=3D52:54:00:12:=
+35:02 -netdev user,id=3Dnet0,hostfwd=3Dtcp:127.0.0.1:2222-:22,hostfwd=3Dtcp=
+:127.0.0.1:2323-:23,tftp=3D/home/mcfrisk/src/base/repo/poky/build_qemuarm64=
+/tmp/deploy/images/qemuarm64 -object rng-random,filename=3D/dev/urandom,id=
+=3Drng0 -device virtio-rng-pci,rng=3Drng0 -drive id=3Ddisk0,file=3D/home/mc=
+frisk/src/base/repo/poky/build_qemuarm64/tmp/deploy/images/qemuarm64/core-i=
+mage-minimal-qemuarm64.rootfs-20250616133755.ext4,if=3Dnone,format=3Draw -d=
+evice virtio-blk-pci,drive=3Ddisk0 -device qemu-xhci -device usb-tablet -de=
+vice usb-kbd  -machine virt -cpu host -machine gic-version=3D3 -smp 4 -enab=
+le-kvm -m 256 -snapshot -serial mon:stdio -serial null -nographic -vga none=
+ -bios tmp/deploy/images/qemuarm64/u-boot.bin -kernel /home/mcfrisk/src/bas=
+e/repo/poky/build_qemuarm64/tmp/deploy/images/qemuarm64/Image -append 'root=
+=3D/dev/vda rw  mem=3D256M ip=3Ddhcp console=3DttyAMA0 console=3Dhvc0 swiot=
+lb=3D0 '
+=2E..
+U-Boot 2025.07-rc3 (May 30 2025 - 19:44:05 +0000)
+=2E..
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x413fd0c1]
+[    0.000000] Linux version 6.12.31-yocto-standard (oe-user@oe-host) (aarc=
+h64-poky-linux-gcc (GCC) 15.1.0, GNU ld (GNU Binutils) 2.44.0.20250429) #1 =
+SMP PREEMPT Thu Jun  5 02:14:18 UTC 2025
+
+Tested-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+
+Cheers,
+
+-Mikko
