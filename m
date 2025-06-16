@@ -4,56 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FEC8C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 06:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B67CC71135
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 06:45:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4BE681E18;
-	Mon, 16 Jun 2025 08:39:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id AB92181E18;
+	Mon, 16 Jun 2025 08:45:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="O2bgRFWK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qQeGDDnl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3200782063; Mon, 16 Jun 2025 08:39:32 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1917381E06
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 08:39:29 +0200 (CEST)
+ id BA9C182063; Mon, 16 Jun 2025 08:45:09 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1722781E06
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 08:45:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-107-162.46.114.pool.telefonica.de
- [46.114.107.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9A79541AD6; 
- Mon, 16 Jun 2025 06:39:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1750055968;
- bh=HQFV77ZoFMgeU8k/IqIC1lLaK9+LW040qOdlcF2gdwM=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=O2bgRFWKx7WsIFeMozT7Shr8RlwfhBRcD1d+pT1GHTZQskuf0z/mbopjwq4yOLruV
- oO/VXAVlvvmB93GM8p1VdO/DbK8ou9Lgs96AJrtu+8hK/hFASj/QapR2414syEspEA
- 1R53KydEetUlfjM6rqWEE+GREyclsc4raWrzRENFODd3jsGZccFMF+TUyuAiaxI6cM
- APiq6qykn9A7ZUXy7LXDJ6uHznIz96JAfredqhL3ne2NxqSS4Cp9oRblnZOOimWSMk
- 1erUFzh7NLzHYPOrPjvzSfz4d7ZbxaSUYLJZRLklQcpAy5E3y5v6/JabvisnuXNsqF
- wVe6TIeFqj2RA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: Support loading a ramdisk with bootefi
-Date: Mon, 16 Jun 2025 08:39:22 +0200
-Message-ID: <20250616063922.9882-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55G6ioPu3742350;
+ Mon, 16 Jun 2025 01:44:50 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1750056290;
+ bh=MWxICYxM7x5ma3/Q9bIhDrHfw/L4p6G7/u2qtobRiKI=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=qQeGDDnlY/xrZclZ3Y98/oIWYcYI53obOYIs3J4MWARQVnTIwH/TYh6oWc5hJ2KzC
+ 0vF3/BEBKFjmrKPve5M3pOksI+duuK6jkv3WbtVl3bAHTUMnubv6SfV1LaXzW3f4N4
+ n/5LTiwoJCMusIuOT8DIlGmi1Dkpmfp/QzJCKqbQ=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55G6inev718057
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 16 Jun 2025 01:44:49 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 16
+ Jun 2025 01:44:49 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 16 Jun 2025 01:44:49 -0500
+Received: from [172.24.227.4] (hp-z2-tower.dhcp.ti.com [172.24.227.4])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55G6ihuK3801620;
+ Mon, 16 Jun 2025 01:44:43 -0500
+Message-ID: <b406e576-54c9-4394-9bf8-d4d171de1d22@ti.com>
+Date: Mon, 16 Jun 2025 12:14:42 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] Re: [PATCH] spl: Add support for Device Firmware
+ Upgrade (DFU) over PCIe
+To: Tom Rini <trini@konsulko.com>
+CC: <Oliver.Gaskell@analog.com>, <peng.fan@nxp.com>, <malysagreg@gmail.com>,
+ <nathan.morrison@timesys.com>, <twoerner@gmail.com>,
+ <sjg@chromium.org>, <contact@paulk.fr>, <marex@denx.de>,
+ <anshuld@ti.com>, <dario.binacchi@amarulasolutions.com>,
+ <jerome.forissier@linaro.org>, <michael@amarulasolutions.com>,
+ <a-dutta@ti.com>, <kever.yang@rock-chips.com>, <jonas@kwiboo.se>,
+ <u-boot@lists.denx.de>, <danishanwar@ti.com>, <s-vadapalli@ti.com>,
+ <srk@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>
+References: <20250612084910.3457060-1-h-salunke@ti.com>
+ <20250612171337.GP1382132@bill-the-cat>
+Content-Language: en-US
+From: Hrushikesh Salunke <h-salunke@ti.com>
+In-Reply-To: <20250612171337.GP1382132@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,160 +88,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
 
-It is sometimes useful to be able to boot via EFI using a ramdisk. Add
-support for this.
 
-Fix a 'specifiy' typo while here.
+On 12/06/25 22:43, Tom Rini wrote:
+> On Thu, Jun 12, 2025 at 02:19:10PM +0530, Hrushikesh Salunke wrote:
+> 
+>> Introduce support for Device Firmware Upgrade (DFU) over PCIe in
+>> U-Boot. Traditionally, the DFU protocol is used over USB, where a
+>> device enters DFU mode and allows a host to upload firmware or binary
+>> images directly via the USB interface. This is a widely adopted and
+>> convenient method for updating firmware.
+> 
+> Interesting, glad to see this overall.
+> 
+>> @@ -1328,6 +1336,59 @@ config SPL_RAM_DEVICE
+>>   	  be already in memory when SPL takes over, e.g. loaded by the boot
+>>   	  ROM.
+>>   
+>> +config SPL_PCI_DFU
+>> +	bool "PCIe boot support"
+> 
+> Needs to depend on SPL_PCI_ENDPOINT
+> 
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/bootefi.c             | 33 +++++++++++++++++++++++++--------
- doc/usage/cmd/bootefi.rst | 38 +++++++++++++++++++++++++++++++-------
- 2 files changed, 56 insertions(+), 15 deletions(-)
+Yes, I will update this is V2.
 
-diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-index 8e8752127ed..db1eb4f1dbf 100644
---- a/cmd/bootefi.c
-+++ b/cmd/bootefi.c
-@@ -136,22 +136,39 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- {
- 	efi_status_t ret;
- 	char *p;
--	void *fdt, *image_buf;
--	unsigned long addr, size;
-+	void *fdt, *ramdisk = NULL, *image_buf;
-+	unsigned long addr, size, rd_len = 0, fdt_addr = 0;
- 	void *image_addr;
- 	size_t image_size;
-+	int fdt_arg = 2;
- 
- 	if (argc < 2)
- 		return CMD_RET_USAGE;
- 
- 	if (argc > 2) {
--		uintptr_t fdt_addr;
-+		ulong rd_addr = 0;
-+		char *end = strchr(argv[2], ':');
- 
--		fdt_addr = hextoul(argv[2], NULL);
-+		if (end) {
-+			rd_addr = hextoul(argv[2], NULL);
-+			if (!rd_addr)
-+				return CMD_RET_USAGE;
-+
-+			rd_len = hextoul(++end, NULL);
-+			ramdisk = map_sysmem(rd_addr, rd_len);
-+			++fdt_arg;
-+		}
-+	}
-+
-+	if (argc > fdt_arg + 1)
-+		return CMD_RET_USAGE;
-+	if (argc == fdt_arg + 1)
-+		fdt_addr = hextoul(argv[fdt_arg], NULL);
-+
-+	if (fdt_addr)
- 		fdt = map_sysmem(fdt_addr, 0);
--	} else {
-+	else
- 		fdt = EFI_FDT_USE_INTERNAL;
--	}
- 
- 	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
- 	    !strcmp(argv[1], "bootmgr")) {
-@@ -215,7 +232,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 		}
- 	}
- 
--	ret = efi_binary_run(image_buf, size, fdt, NULL, 0);
-+	ret = efi_binary_run(image_buf, size, fdt, ramdisk, rd_len);
- 
- 	if (ret != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
-@@ -224,7 +241,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- 
- U_BOOT_LONGHELP(bootefi,
--	"<image address>[:<image size>] [<fdt address>]\n"
-+	"<image address>[:<image size>] [<ramdisk_address>:<size>] [<fdt address>]\n"
- 	"  - boot EFI payload\n"
- #ifdef CONFIG_CMD_BOOTEFI_HELLO
- 	"bootefi hello\n"
-diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-index d6e4e62e383..b78a9c61331 100644
---- a/doc/usage/cmd/bootefi.rst
-+++ b/doc/usage/cmd/bootefi.rst
-@@ -12,7 +12,7 @@ Synopsis
- 
- ::
- 
--    bootefi <image_addr>[:<image_size>] [<fdt_addr>]
-+    bootefi <image_addr>[:<image_size>] [<ramdisk_addr>:<ramdisk_size>] [<fdt_address>]
-     bootefi bootmgr [<fdt_addr>]
-     bootefi hello [<fdt_addr>]
-     bootefi selftest [<fdt_addr>]
-@@ -44,6 +44,16 @@ command sequence to run a UEFI application might look like
-     load mmc 0:1 $kernel_addr_r /EFI/grub/grubaa64.efi
-     bootefi $kernel_addr_r $fdt_addr_r
- 
-+or
-+
-+::
-+
-+    setenv bootargs root=/dev/vda1
-+    load mmc 0:1 $fdt_addr_r dtb
-+    load mmc 0:1 $kernel_addr_r vmlinux
-+    load mmc 0:1 $ramdisk_addr_r intird
-+    bootefi $kernel_addr_r $ramdisk_addr_r:$filesize $fdt_addr_r
-+
- The last UEFI binary loaded defines the image file path in the loaded image
- protocol.
- 
-@@ -51,21 +61,35 @@ The value of the environment variable *bootargs* is converted from UTF-8 to
- UTF-16 and passed as load options in the loaded image protocol to the UEFI
- binary.
- 
-+.. note::
-+
-+    The bootefi command accepts one to three arguments.
-+    If the second argument contains a colon ':', it is assumed to specify the
-+    initial RAM disk.
-+
- image_addr
-     Address of the UEFI binary.
- 
--fdt_addr
--    Address of the device-tree or '-'. If no address is specifiy, the
--    environment variable $fdt_addr is used as first fallback, the address of
--    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
--    When using ACPI no device-tree shall be specified.
--
- image_size
-     Size of the UEFI binary file. This argument is only needed if *image_addr*
-     does not match the address of the last loaded UEFI binary. In this case
-     a memory device path will be used as image file path in the loaded image
-     protocol.
- 
-+ramdisk_addr
-+    Address of the ramdisk or '-'. If no address is specified, a ramdisk is not
-+    used when booting.
-+
-+ramdisk_size
-+    Address of the ramdisk or '-'. If no address is specified, a ramdisk is not
-+    used when booting.
-+
-+fdt_addr
-+    Address of the device-tree or '-'. If no address is specified, the
-+    environment variable $fdt_addr is used as first fallback, the address of
-+    U-Boot's internal device-tree $fdtcontroladdr as second fallback.
-+    When using ACPI no device-tree shall be specified.
-+
- Note
-     UEFI binaries that are contained in FIT images are launched via the
-     *bootm* command.
--- 
-2.48.1
+>> +	help
+>> +		This config enables support to download bootloaders over PCIe
+>> +		when device is acting as an PCI endpoint.
+> 
+> Correct the spacing.
+> 
 
+I missed this. Will take care of it in V2.
+
+>> +config PCI_DFU_SPL_LOAD_FIT_ADDRESS
+>> +	hex "Address to load FIT image when booting via DFU over PCIe"
+>> +	default 0x00
+> 
+> No default, and then for the rest of these options put it under if
+> SPL_PCI_DFU ... endif please.
+> 
+>> +config PCI_DFU_VENDOR_ID
+>> +	hex "PCI Vendor ID for PCI endpoint"
+>> +	default 0xffff
+>> +	help
+>> +		PCI Vendor ID for endpoint device for DFU over PCIe. This should
+>> +		be set to your assigned 16-bit PCI Vendor ID.
+>> +
+>> +config PCI_DFU_DEVICE_ID
+>> +	hex "PCI Vendor ID for PCI endpoint"
+>> +	default 0xffff
+>> +	help
+>> +		A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
+> 
+> No defaults here.
+> 
+>> +config PCI_DFU_BOOT_PHASE
+>> +	string "Current boot phase for PCI DFU boot"
+>> +	default "none"
+> 
+> Nor here.
+> 
+>> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+>> index 71b7a8374bb..5bb94d6b972 100644
+>> --- a/common/spl/spl_ram.c
+>> +++ b/common/spl/spl_ram.c
+>> @@ -27,6 +27,9 @@ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+>>   	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+>>   		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+>>   				      CONFIG_SPL_LOAD_FIT_ADDRESS);
+>> +
+>> +		if (spl_boot_device() == BOOT_DEVICE_PCIE)
+>> +			addr = CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
+> 
+> Probably need an IS_ENABLED(..) here first? And possibly a few other
+> places too.
+> 
+
+Thanks for the feedback. I will update the patch based on
+comments and post the V2.
+
+Regards,
+Hrushikesh.
