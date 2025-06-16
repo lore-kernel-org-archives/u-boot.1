@@ -4,74 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B67CC71135
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 06:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43F7C71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 07:00:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB92181E18;
-	Mon, 16 Jun 2025 08:45:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A484D81E06;
+	Mon, 16 Jun 2025 09:00:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qQeGDDnl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G8u6If1p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA9C182063; Mon, 16 Jun 2025 08:45:09 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1722781E06
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 08:45:06 +0200 (CEST)
+ id 3719D81E18; Mon, 16 Jun 2025 09:00:23 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B7D868006D
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 09:00:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55G6ioPu3742350;
- Mon, 16 Jun 2025 01:44:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750056290;
- bh=MWxICYxM7x5ma3/Q9bIhDrHfw/L4p6G7/u2qtobRiKI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=qQeGDDnlY/xrZclZ3Y98/oIWYcYI53obOYIs3J4MWARQVnTIwH/TYh6oWc5hJ2KzC
- 0vF3/BEBKFjmrKPve5M3pOksI+duuK6jkv3WbtVl3bAHTUMnubv6SfV1LaXzW3f4N4
- n/5LTiwoJCMusIuOT8DIlGmi1Dkpmfp/QzJCKqbQ=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55G6inev718057
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 16 Jun 2025 01:44:49 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 16
- Jun 2025 01:44:49 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 16 Jun 2025 01:44:49 -0500
-Received: from [172.24.227.4] (hp-z2-tower.dhcp.ti.com [172.24.227.4])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55G6ihuK3801620;
- Mon, 16 Jun 2025 01:44:43 -0500
-Message-ID: <b406e576-54c9-4394-9bf8-d4d171de1d22@ti.com>
-Date: Mon, 16 Jun 2025 12:14:42 +0530
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id D70EB44C04;
+ Mon, 16 Jun 2025 07:00:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D373C4CEEA;
+ Mon, 16 Jun 2025 07:00:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750057218;
+ bh=oTg+7FQ9cqM6KHNGCf78etYiqSlck2R5YLOcjcp5iVU=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=G8u6If1pIkkVIfYsyrVB4xFZx1uK6aNdo4Z/lC8aeW4JLC+eDXospvam4AgK2Viyo
+ LSh0h/InQuNvTUCyi205HJi0qDeNJOlTfqLpaIeZyAaYWsGScr17LxSHE8ajN3Lf9B
+ eCo3egMOI3J31TQBMIeWo5paAO9CPx02Gbpz68/xgwIUuChSPBeKeyVPpH3F+bjlr8
+ 2QdHFkrQjIiKqKss63ri3RlL4ZZAIVnLGirupDQIM5lXLDmbyJtNJlftycMBcuJGQl
+ NCyEkF4Rog4XRtzCRbc4Rs0urwWBPlKfj25MobWGWVTaqyvFZIPOQURPYjoLy/AMDh
+ dE8n8QHV7naJg==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Lukasz Majewski <lukma@denx.de>, Ivan Pang <ipman@amazon.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+In-Reply-To: <20250611050127.38011-1-ipman@amazon.com>
+References: <20250611050127.38011-1-ipman@amazon.com>
+Subject: Re: [PATCH v1] dfu: fix dev_part_str for file operations
+Message-Id: <175005721597.8548.2080001779742776245.b4-ty@kernel.org>
+Date: Mon, 16 Jun 2025 09:00:15 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] Re: [PATCH] spl: Add support for Device Firmware
- Upgrade (DFU) over PCIe
-To: Tom Rini <trini@konsulko.com>
-CC: <Oliver.Gaskell@analog.com>, <peng.fan@nxp.com>, <malysagreg@gmail.com>,
- <nathan.morrison@timesys.com>, <twoerner@gmail.com>,
- <sjg@chromium.org>, <contact@paulk.fr>, <marex@denx.de>,
- <anshuld@ti.com>, <dario.binacchi@amarulasolutions.com>,
- <jerome.forissier@linaro.org>, <michael@amarulasolutions.com>,
- <a-dutta@ti.com>, <kever.yang@rock-chips.com>, <jonas@kwiboo.se>,
- <u-boot@lists.denx.de>, <danishanwar@ti.com>, <s-vadapalli@ti.com>,
- <srk@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>
-References: <20250612084910.3457060-1-h-salunke@ti.com>
- <20250612171337.GP1382132@bill-the-cat>
-Content-Language: en-US
-From: Hrushikesh Salunke <h-salunke@ti.com>
-In-Reply-To: <20250612171337.GP1382132@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,86 +72,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+On Wed, 11 Jun 2025 05:00:38 +0000, Ivan Pang wrote:
+> The third_arg for a dfu alt is read as an integer and is overloaded for
+> different supported backends. For ext4 and fat, this third_arg
+> represents the partition and forms the dev part string, which should
+> have its partition in hex. This commit fixes dfu ext4/fat usage for
+> devices with ten or more partitions.
+> 
+> 
+> [...]
 
-On 12/06/25 22:43, Tom Rini wrote:
-> On Thu, Jun 12, 2025 at 02:19:10PM +0530, Hrushikesh Salunke wrote:
-> 
->> Introduce support for Device Firmware Upgrade (DFU) over PCIe in
->> U-Boot. Traditionally, the DFU protocol is used over USB, where a
->> device enters DFU mode and allows a host to upload firmware or binary
->> images directly via the USB interface. This is a widely adopted and
->> convenient method for updating firmware.
-> 
-> Interesting, glad to see this overall.
-> 
->> @@ -1328,6 +1336,59 @@ config SPL_RAM_DEVICE
->>   	  be already in memory when SPL takes over, e.g. loaded by the boot
->>   	  ROM.
->>   
->> +config SPL_PCI_DFU
->> +	bool "PCIe boot support"
-> 
-> Needs to depend on SPL_PCI_ENDPOINT
-> 
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-Yes, I will update this is V2.
+[1/1] dfu: fix dev_part_str for file operations
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/aa2efc584a4d3fe0fe88cd600f53464b26bcd848
 
->> +	help
->> +		This config enables support to download bootloaders over PCIe
->> +		when device is acting as an PCI endpoint.
-> 
-> Correct the spacing.
-> 
-
-I missed this. Will take care of it in V2.
-
->> +config PCI_DFU_SPL_LOAD_FIT_ADDRESS
->> +	hex "Address to load FIT image when booting via DFU over PCIe"
->> +	default 0x00
-> 
-> No default, and then for the rest of these options put it under if
-> SPL_PCI_DFU ... endif please.
-> 
->> +config PCI_DFU_VENDOR_ID
->> +	hex "PCI Vendor ID for PCI endpoint"
->> +	default 0xffff
->> +	help
->> +		PCI Vendor ID for endpoint device for DFU over PCIe. This should
->> +		be set to your assigned 16-bit PCI Vendor ID.
->> +
->> +config PCI_DFU_DEVICE_ID
->> +	hex "PCI Vendor ID for PCI endpoint"
->> +	default 0xffff
->> +	help
->> +		A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
-> 
-> No defaults here.
-> 
->> +config PCI_DFU_BOOT_PHASE
->> +	string "Current boot phase for PCI DFU boot"
->> +	default "none"
-> 
-> Nor here.
-> 
->> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
->> index 71b7a8374bb..5bb94d6b972 100644
->> --- a/common/spl/spl_ram.c
->> +++ b/common/spl/spl_ram.c
->> @@ -27,6 +27,9 @@ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
->>   	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
->>   		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
->>   				      CONFIG_SPL_LOAD_FIT_ADDRESS);
->> +
->> +		if (spl_boot_device() == BOOT_DEVICE_PCIE)
->> +			addr = CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-> 
-> Probably need an IS_ENABLED(..) here first? And possibly a few other
-> places too.
-> 
-
-Thanks for the feedback. I will update the patch based on
-comments and post the V2.
-
-Regards,
-Hrushikesh.
+--
+Mattijs
