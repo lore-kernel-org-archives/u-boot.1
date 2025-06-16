@@ -4,71 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB24C71136
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 13:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB29C71155
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 14:08:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08E9C80C93;
-	Mon, 16 Jun 2025 15:57:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CCB2B82B0F;
+	Mon, 16 Jun 2025 16:08:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bAD0t/6h";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="aKCCpGu6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A9C281760; Mon, 16 Jun 2025 15:57:33 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BA688070C
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 15:57:30 +0200 (CEST)
+ id 47DC48070C; Mon, 16 Jun 2025 16:08:55 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C4638070C
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 16:08:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55GDvPoh3828682;
- Mon, 16 Jun 2025 08:57:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750082245;
- bh=MsOAC2JTojsoMQJayVlmM+574w0En/jcVa7VQd3Un3o=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=bAD0t/6hOGVfqVEh7WZjelaOmzvhEBQ9ClekyMIqDK5OlqsKjGsUxNY5FRF9e1RIP
- A4UOojJe88cbqbNsVCzVxzZZjWBTrDUtKUTwlQFFjm9/xwN0tGRvez+d8ozbmriNwl
- 3ejEdzjBmYlGX0ecpOQnnVbVxi/KRGfck/xsUxww=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55GDvPr32704120
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 16 Jun 2025 08:57:25 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 16
- Jun 2025 08:57:24 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 16 Jun 2025 08:57:24 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55GDvO8h4172981;
- Mon, 16 Jun 2025 08:57:24 -0500
-Date: Mon, 16 Jun 2025 08:57:24 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Markus Schneider-Pargmann <msp@baylibre.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Sumit
- Garg <sumit.garg@kernel.org>, Robert Nelson <robertcnelson@gmail.com>, Tom
- Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Kevin Hilman
- <khilman@baylibre.com>, Vishal Mahaveer <vishalm@ti.com>, Akashdeep Kaur
- <a-kaur@ti.com>, Kendall Willis <k-willis@ti.com>, Sebin Francis
- <sebin.francis@ti.com>, Dhruva Gole <d-gole@ti.com>
-Subject: Re: [PATCH v2 03/22] ram: k3-ddrss: Add support for DDR in
- self-refresh
-Message-ID: <20250616135724.tutpbgb2wj7xdg43@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
- <20250613-topic-am62-ioddr-v2025-04-rc1-v2-3-3d233aaea355@baylibre.com>
+ spf=pass smtp.mailfrom=fmartine@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750082932;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=53isGTbgIlmsoO7OfAQWlmYYFjqI+IcpaJ8ualkcGpg=;
+ b=aKCCpGu6QxNLQ5L3A1hYHnDdIT9QtpzishPbgjnPGg8prwoJp+5Ef3o0wJ8Lzm1af2TK3d
+ 7SQMu7w45uHBGLUfgJhqHJ7u7PRD+Em3s+4r3sTjbp4bT9VTdJvlOeVGy2Y2Hfl7T5YwU/
+ SzkSmayWkGH9F+eL4p89zH8L5KxpLtU=
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-231-O2AQoLRSP0W-H-qFsj2dKw-1; Mon, 16 Jun 2025 10:08:47 -0400
+X-MC-Unique: O2AQoLRSP0W-H-qFsj2dKw-1
+X-Mimecast-MFC-AGG-ID: O2AQoLRSP0W-H-qFsj2dKw_1750082926
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-b1442e039eeso2793981a12.0
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 07:08:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750082926; x=1750687726;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=53isGTbgIlmsoO7OfAQWlmYYFjqI+IcpaJ8ualkcGpg=;
+ b=JjZHcTLKIUt4DwFxHWhlAZr1S5G14wIJApL1RK/HQcCFEq3uvMJsUtyZSog7vsuaoo
+ BMZdiKi8zWaGNHyY/RopSnVmcjN/6VGUZ4CPBxRMo7zhcREMaSqG0z7WveoTNIbmcu1D
+ OVZMXTWuUG9IeS2pqlbknF38By4F3vOOX4TCo2B8JRTr1Sq2huoa80y/hJbdXpiswJMR
+ 24ByrGD+WPXRavL5QiGGMjWrMY7xj5XjPB3bNyrUr3EaX37GBE/5dsSqnRqc9eK2jjqm
+ y2l49uL849Fmw7QZhjD/yxxUAmZmSVbGZJdUOHSG1fDCbMlmye1rra4Nk93FI8+3nqUN
+ Go8g==
+X-Gm-Message-State: AOJu0YyebXp4Qp6O0NHUiaP9S4SaKX3uDtHnWysjkhZKCytnw6IKrRf4
+ Ukac/+Gb6yFuwO9MUaOO7usFlaCQK1YBEoiPML4GWi0u2VS3grIXwSgHqiB0+q4hk/lzAuhWHKA
+ YuhGL5dH8U9D8jaMUF0imwcXRd6Xgs/w9+DoWEHa+Ls09EW1JzIdlmZs=
+X-Gm-Gg: ASbGnctEcVsVrgk5CmMChD44Xd6QFfsCvc4VzxU9qZRY7mCnL/p7Pm+YH2nvmr3RQ0r
+ 6botNVzOhsryolGm/37kUXq4cBeNIPQENdn5kNi2sUrDrUgWNKP9k6yhNzlLV/Ys+Me09PGs/pL
+ S+VdrDYYuBbwpCA7G4t6PLnwLHmHMbjizveUktrMtyoVPijI33RnHPU0Cn+NId6uIjjfHXoAkgq
+ Z0QShlMtjBecg1KdfYrnxpyxeJjwcKagpcfcMSzDVnajB5w00j6ZkLEs6stdiF9fgKQfX3XsJgP
+ 4lrcGpQk2kueQ21PX+oRyy5tbXFDjrj/bGejik732ybefLBY2yC2
+X-Received: by 2002:a17:90b:3806:b0:313:f6fa:5bb5 with SMTP id
+ 98e67ed59e1d1-313f6fa5d2bmr14346804a91.18.1750082925760; 
+ Mon, 16 Jun 2025 07:08:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHinJAyxB+zq/UrVrqLwW0bRb9lMNSYo9q1M8Kd5o+X8vNbZjSuMUYIZN1gXAyGRFj1qRsJVw==
+X-Received: by 2002:a17:90b:3806:b0:313:f6fa:5bb5 with SMTP id
+ 98e67ed59e1d1-313f6fa5d2bmr14346766a91.18.1750082925300; 
+ Mon, 16 Jun 2025 07:08:45 -0700 (PDT)
+Received: from localhost ([195.166.127.210]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2365deb4f85sm61587095ad.183.2025.06.16.07.08.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Jun 2025 07:08:44 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, mkorpers@redhat.com, mskrivan@redhat.com,
+ eballetb@redhat.com, mripard@redhat.com, alexl@redhat.com, Casey Connolly
+ <casey.connolly@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom
+ Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/3] disk: efi: Move logic to get a GPT entry into a
+ helper function
+In-Reply-To: <5d30ed64-cffc-4db0-8e92-986771e024ca@gmx.de>
+References: <20250613085742.796015-1-javierm@redhat.com>
+ <20250613085742.796015-2-javierm@redhat.com>
+ <CAC_iWj+YfdT=6nazVJQEuYH_RuWbXNL_FmOL57i35Z4rmOi6Sg@mail.gmail.com>
+ <5d30ed64-cffc-4db0-8e92-986771e024ca@gmx.de>
+Date: Mon, 16 Jun 2025 16:08:38 +0200
+Message-ID: <87o6un7p95.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-3-3d233aaea355@baylibre.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: K_SJZ9aDi-va9AAXnNiRod2X2aEp4P6N6yVDjtSf950_1750082926
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,48 +111,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On June 13, 2025 thus sayeth Markus Schneider-Pargmann:
-> In IO+DDR the DDR is kept in self-refresh while the SoC cores are
-> powered off completely. During boot the normal initialization routine of
-> DDR is slightly different to exit self-refresh and keep the DDR contents.
-> 
-> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
-> ---
->  drivers/ram/k3-ddrss/k3-ddrss.c | 165 ++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 165 insertions(+)
-> 
-> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> index ff87faf6a22419e54d3639817ad2b884a97a3911..d7ae6e9ef24d5aebdb61656e6ca797b1799ca0f6 100644
-> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
-> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
 
-...
+Thanks Ilias and Heinrich for your review / feedback.
 
-> +
-> +static void k3_ddrss_lpm_resume(struct k3_ddrss_desc *ddrss)
-> +{
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_MASK,
-> +				 K3_DDRSS_CFG_DENALI_CTL_160_LP_CMD_ENTRY);
-> +	while (!(readl(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_345) &
-> +		 (1 << K3_DDRSS_CFG_DENALI_CTL_345_INT_STATUS_LOWPOWER_SHIFT)))
-> +		;
+> On 16.06.25 15:32, Ilias Apalodimas wrote:
+>> On Fri, 13 Jun 2025 at 11:58, Javier Martinez Canillas
+>> <javierm@redhat.com> wrote:
+>>>
+>>> Factor out the logic to get the Partition Table Entry (PTE) of a given
+>>> partition into a helper function, since it could be used by other code.
+>>>
+>>> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+>>> ---
+>>>
+>>>   disk/part_efi.c | 67 +++++++++++++++++++++++++++++--------------------
+>>>   1 file changed, 40 insertions(+), 27 deletions(-)
+>>>
+>>> diff --git a/disk/part_efi.c b/disk/part_efi.c
+>>> index 932d058c184c..c7d79e253958 100644
+>>> --- a/disk/part_efi.c
+>>> +++ b/disk/part_efi.c
+>>> @@ -216,6 +216,34 @@ int get_disk_guid(struct blk_desc *desc, char *guid)
+>>>          return 0;
+>>>   }
+>>>
+>>> +static int part_get_gpt_pte(struct blk_desc *desc, int part, gpt_entry *gpt_e)
+>>> +{
+>>> +       ALLOC_CACHE_ALIGN_BUFFER_PAD(gpt_header, gpt_head, 1, desc->blksz);
+>>> +       gpt_entry *gpt_pte = NULL;
+>>> +
+>>> +       /* "part" argument must be at least 1 */
+>>> +       if (part < 1) {
+>>> +               log_debug("Invalid Argument(s)\n");
+>> 
+>> I think this should be a log_err an match the comment above
+>
+> Screen output during a running EFI application like GRUB should be 
+> avoided as output will no longer match the expected cursor positioning 
+> for the EFI console.
+>
+> Please, stick to log_debug().
+>
 
-Can we use the wait_for_bit_* logic here?
+I agree. This allows to have for example flicker-free boot output. But
+also, I tried to follow the convention I noticed in this file and AFAICT
+most messages printouts were using just log_debug().
 
-> +
-> +	k3_ddrss_reg_update_bits(ddrss->ddrss_ctl_cfg,
-> +				 K3_DDRSS_CFG_DENALI_CTL_353,
-> +				 0,
-> +				 1 << K3_DDRSS_CFG_DENALI_CTL_353_INT_ACK_LOWPOWER_SHIFT);
-> +	while ((readl(ddrss->ddrss_ctl_cfg + K3_DDRSS_CFG_DENALI_CTL_169) &
-> +		K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_MASK) !=
-> +	       0x40 << K3_DDRSS_CFG_DENALI_CTL_169_LP_STATE_SHIFT)
-> +		;
+> Shell commands like gpt should write a message based on error codes.
+>
+> Best regards
+>
+> Heinrich
+>
 
-I know DRAM is so early on in the bringup that we'll probably have a 
-debugger nearby already but just having an error message to grep for 
-could really help if the controller never acknowledges this.
+-- 
+Best regards,
 
-~Bryan
+Javier Martinez Canillas
+Core Platforms
+Red Hat
+
