@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2FDDC71159
-	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 17:38:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F86C71136
+	for <u-boot@archiver.kernel.org>; Mon, 16 Jun 2025 18:44:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E85BD81E18;
-	Mon, 16 Jun 2025 19:38:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 537E681E18;
+	Mon, 16 Jun 2025 20:44:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="ZlNI8y/W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jINjOE0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A490682A0A; Mon, 16 Jun 2025 19:38:12 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 6493C82A0A; Mon, 16 Jun 2025 20:44:06 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C169881760
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 19:38:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AEAD81760
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 20:44:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4079f80ff0fso3523770b6e.1
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 10:38:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-70e78e04e48so38611097b3.1
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 11:44:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1750095488; x=1750700288; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/ZqQbCdPZX6NSp3RyKuFUbreg2h5b0Pnk4VstOqHuBI=;
- b=ZlNI8y/WTWcvo9nNKDQt8BSk4pdrF3ZdDpk1hcuNDUunLFsLAAzayXxnRDImLJZXoV
- K1tZ+cdrsvh1xQoNP77ovHqhUBi6XaKMyQxOPBlTWVAvD7uPgVlw3xplcI9cDi7EHthT
- UNo7rs5mUOpifT0ppkTEL35J2Kn48g2Xn1DLWvky6gjpW14KjqJHIJpc/NYdAG/BlIah
- LNnyHmUTqX0hoQoYkSEL+MTZV1730YIjB/y9DAZirG/DcFzDoMzdxoHDeHojiDwhOHY2
- rumqiUf5qWV/Pys9NzpxUmG2n/H69SCVLgkGLwnCXbcAGpIkKHfuunfJmYBo2OVZbcZG
- YU3g==
+ d=linaro.org; s=google; t=1750099443; x=1750704243; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DnVgjcgRu8mJCWYyGTBfVTGjBWIlvFe3LYt2gbZqjrw=;
+ b=jINjOE0ldMjsMcT/appiuqQXkMzxskQkfkhhDA3jm96ZJ04KPbrHu8B1Zx57qupZl1
+ 1uo5cGzzKKjPNlO7ZB2DjS6Tap/doseVYGzaERNM6G0gqySh4emLF4DGHVp1LaU7ybDm
+ gRJHeamwGNjUv99xPWF7Y2h4KjFykO7nxHLVA09FPHGugwQBj6fGNlahPNvMLUL8xoBm
+ 9MKOepvBj+4Eqdt5QqEXro8IEyieftHPMZX81VUSgtgLt6z4xLk+oYffyoQvs6rm1fuG
+ 7nsrfMRh6NAU3A+sH4kXwUYGAxomIPL3qXHQ/gV7VDCmXTTA+/WdRf40rFpPPNGELtqQ
+ UHFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750095488; x=1750700288;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/ZqQbCdPZX6NSp3RyKuFUbreg2h5b0Pnk4VstOqHuBI=;
- b=Yasz3rS9EoxUT44TTT0enUkm0m2WCqOdhlUZxzSPVdQ4xPjV11QKNZNV5hVI/Fs3h0
- vMlIfYVfwLZb7fY5WeGmGfDDgUSLz9Z2PpbQNisRhwuVGCn5WepTFoOTy1oQ+Zf9/eDk
- CfXOed69i0lWSqznfjhDEAw8GY6A3kZJlUneNQaMYaYS2Js7BxYpliZKRp0SKNqtPu0P
- r0TVQcIo4nnHkQWWoXIPE69S05pj8v4EY4S1QgdwyMjGvmy5aKuCpHsbkKN0uEQpOoMA
- gI168zEqVNVmg8IQwCQHDizWY4/4ROzaJTK7odAYz8jl8qFXawP93oLeIbNnkrlgVFPl
- 7psA==
+ d=1e100.net; s=20230601; t=1750099443; x=1750704243;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DnVgjcgRu8mJCWYyGTBfVTGjBWIlvFe3LYt2gbZqjrw=;
+ b=WwYgz7+DAYdEXO5lhkm8OzzE4ge7R3iSxelwGjSTVTZswZJGkgGTKgrFr0WSgkxrf/
+ aVEonpjgJZ05ETbddL7f/FQdvffhS2IICMXZQc4NyQfoo+lTAylg9/uIhFwKvU2fShp4
+ gtMrpB1e1HQJRr83LfxkQfl6Lpicme74QkU/4OqN9C2T9YGpiFU3no5bcoDMRz3Q3+ei
+ YgcQi2uRymbzZDMiX7PAl6aWEmyGOKg9wIiAbQyy9O2hgWdItHjcO0Sdn5Y+WqMWg4C1
+ aaT53bz/Dq/0RsGgqVqBl1VHbyt5EKh/5I0KTlHNT4S0wLXoJRoOg41c5x9mp/tB7pwj
+ XDhQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQuIenoSvecElj8maLgw2Y3mf7HZHSJYgkxwcIV8+2BlDut0t3Cr1jlKgLb3cDzchLZnaVkyU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yym6OaBPTLZ11F+cz/ivdoFsKNk3xCxR0yCcFclFPfPo9tEVPHq
- vwLtE6KYWY8eZmpq/Eacvuunbm443Of9ONpZWztVKZ30R3zDxkzI26MMMMl9X2HVBESIfyBIgwE
- 3YeCYspvjLRR2m3g94nP2i9/t54raHU4b+BFfkYR0rw==
-X-Gm-Gg: ASbGncsKV1Puq6+rY83Qkn/lEFJLARr3u1lZ75BQ6XCwaEeqzb4rjjbUqyvC43C0Wvm
- 2HOV9Lr1ADeFKp0oPt2I+6N4/sC6xhXU9LgjiybbCx33sSp7A5F+Lb5V3XPA7AJKMLvkbjpAQcu
- xWWJ2BFG//a8uorlDGzuaUCioVpWiMZaKjRc7PY6yKVUg=
-X-Google-Smtp-Source: AGHT+IGAh374d4xDLGB874QzQ0/N8FhOhGf/RNzGGFO+wvk/l/l86ywJtqXHEKEewU9Nvm6uxMY+p9qeI+HljUuQ4qs=
-X-Received: by 2002:a05:6808:130a:b0:3f8:18a3:b1cc with SMTP id
- 5614622812f47-40a7b6fea25mr6841414b6e.12.1750095488361; Mon, 16 Jun 2025
- 10:38:08 -0700 (PDT)
+ AJvYcCV2OOnoMQG9cJkNBu3mAvC/1Gdo8InWCtqhqm8cH/d4/XBWAW4Dlx8SdjMoby1SG3MdFmzvN/g=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3eIXh+I6yanjabgkCQqilkaqWIV1fc3Fbbz++fiiCF51pAAqL
+ ktee2vsnIvfRnyM0B4rkb1hczYEoajJAU7F5zUBfbWRaPd2PXsEVji67AP6zneKK5GmslsacIpB
+ jUY+qvgz0AGR+O040xcJsQ4c6zHdXIRuvWmrL/aar/w==
+X-Gm-Gg: ASbGncvx+pzfsIzw2LAE/LhQA+7BTa6D2CM5RytZHrjfDU8zgU2UiQjtpDLXbvQlQDT
+ 0dHD6E8+xlNprqR43mV3FEWTY8L3N3Mugdyia+29OKSmukDlettKh5dvZK66arZXPv+LqZ4s9bj
+ +2Phl6EgW0K07J0HvFmB3oK3/9rmTt61wFs21gTj65cB4e
+X-Google-Smtp-Source: AGHT+IHL6Whs8B+waJrnb6Wh3WxYJuzyX2doej5cS4EMhYYn5viOfTw0UW768M/5sOZWNfxrCzuM9eC81D2PUgguJeU=
+X-Received: by 2002:a05:690c:4:b0:70e:2168:7330 with SMTP id
+ 00721157ae682-71175431f62mr146068177b3.19.1750099442971; Mon, 16 Jun 2025
+ 11:44:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250530153826.1057407-1-tharvey@gateworks.com>
- <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
- <CAJ+vNU2UfSVHvo=_HsCKbWH5AFsYV=SnVGru4ZBWHrGnAVBcRw@mail.gmail.com>
- <CAJ+vNU2trStWN_7jG5OxvvKtodz=qq9JVMaYHPWdpzUDJYiU=Q@mail.gmail.com>
- <63e2718b-81f8-4f2b-9d23-73d53a26b358@linaro.org>
-In-Reply-To: <63e2718b-81f8-4f2b-9d23-73d53a26b358@linaro.org>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 16 Jun 2025 10:37:57 -0700
-X-Gm-Features: AX0GCFtFRVZwDWtxGoeiMcy56ioPUCXLTOgfkTQDQ_j7rqdJenzc9EfKmyDboYw
-Message-ID: <CAJ+vNU2-iaDxsPYkkNC1P=OREj2c9FxNuRZrajYiT4TDnuh9Hg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
- rx
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>
+References: <20250616075035.1144220-1-ilias.apalodimas@linaro.org>
+ <c7d2a64f-1415-4481-9c2c-072e0abb2698@linaro.org>
+ <CAC_iWjJxE_XSbHAZcxf2bVssnyqesT5td3XxAAvs80-PSMQOjQ@mail.gmail.com>
+ <20250616164243.GH1382132@bill-the-cat>
+In-Reply-To: <20250616164243.GH1382132@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 16 Jun 2025 21:43:26 +0300
+X-Gm-Features: AX0GCFsMDs79wU9V4zY4yX0PNiWzin_4UJ-hPvqYe1PUo94oqD1zm4NRO3XU6Ug
+Message-ID: <CAC_iWjJK6EAahzHk52dyS8GLgy+L4yAtLPG8W0_3ri6Knhze7Q@mail.gmail.com>
+Subject: Re: [PATCH] arm: io.h: Fix io accessors for KVM
+To: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, mikko.rapeli@linaro.org, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,143 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jun 16, 2025 at 12:18=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Mon, 16 Jun 2025 at 19:42, Tom Rini <trini@konsulko.com> wrote:
 >
->
->
-> On 6/9/25 19:35, Tim Harvey wrote:
-> > On Tue, Jun 3, 2025 at 5:04=E2=80=AFPM Tim Harvey <tharvey@gateworks.co=
-m> wrote:
-> >>
-> >> On Sun, Jun 1, 2025 at 2:07=E2=80=AFPM Heinrich Schuchardt
-> >> <heinrich.schuchardt@canonical.com> wrote:
-> >>>
-> >>> On 5/30/25 17:38, Tim Harvey wrote:
-> >>>> Call schedule() in net_lwip_rx() to service U-Boot tasks and
-> >>>> actions during packet rx.
-> >>>>
-> >>>> As a cleanup also move sys_check_timeouts() here and remove it from =
-the
-> >>>> functions that call net_lwip_rx().
-> >>>>
-> >>>> This resolves the issue of an active watchdog resetting the board on
-> >>>> long network activities.
-> >>>>
-> >>>> Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >>>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> >>>> ---
-> >>>> v2:
-> >>>>   - remove duplication of sys_check_timeouts() from functions that c=
-all
-> >>>>     net_lwip_rx()
-> >>>> ---
-> >>>>   net/lwip/dhcp.c     | 1 -
-> >>>>   net/lwip/dns.c      | 1 -
-> >>>>   net/lwip/net-lwip.c | 7 +++++++
-> >>>>   net/lwip/ping.c     | 1 -
-> >>>>   net/lwip/tftp.c     | 1 -
-> >>>>   net/lwip/wget.c     | 1 -
-> >>>>   6 files changed, 7 insertions(+), 5 deletions(-)
-> >>>>
-> >>>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> >>>> index 92bd7067a7fb..b79b746db390 100644
-> >>>> --- a/net/lwip/dhcp.c
-> >>>> +++ b/net/lwip/dhcp.c
-> >>>> @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
-> >>>>       /* Wait for DHCP to complete */
-> >>>>       do {
-> >>>>               net_lwip_rx(udev, netif);
-> >>>> -             sys_check_timeouts();
-> >>>>               bound =3D dhcp_supplied_address(netif);
-> >>>>               if (bound)
-> >>>>                       break;
-> >>>> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-> >>>> index 19172ac959ac..738f8bf3196b 100644
-> >>>> --- a/net/lwip/dns.c
-> >>>> +++ b/net/lwip/dns.c
-> >>>> @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const ch=
-ar *name, const char *var)
-> >>>>                       net_lwip_rx(udev, netif);
-> >>>>                       if (dns_cb_arg.done)
-> >>>>                               break;
-> >>>> -                     sys_check_timeouts();
-> >>>>                       if (ctrlc()) {
-> >>>>                               printf("\nAbort\n");
-> >>>>                               break;
-> >>>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> >>>> index f05c4cd3f64f..e8d4cc542ed8 100644
-> >>>> --- a/net/lwip/net-lwip.c
-> >>>> +++ b/net/lwip/net-lwip.c
-> >>>> @@ -13,8 +13,10 @@
-> >>>>   #include <lwip/etharp.h>
-> >>>>   #include <lwip/init.h>
-> >>>>   #include <lwip/prot/etharp.h>
-> >>>> +#include <lwip/timeouts.h>
-> >>>>   #include <net.h>
-> >>>>   #include <timer.h>
-> >>>> +#include <u-boot/schedule.h>
-> >>>>
-> >>>>   /* xx:xx:xx:xx:xx:xx\0 */
-> >>>>   #define MAC_ADDR_STRLEN 18
-> >>>> @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct ne=
-tif *netif)
-> >>>>       int len;
-> >>>>       int i;
-> >>>>
-> >>>> +     /* lwIP timers */
-> >>>> +     sys_check_timeouts();
-> >>>> +     /* Other tasks and actions */
-> >>>> +     schedule(
-> >>>
-> >>> Some scheduled tasks have a long duration, specifically video_sync_al=
-l()
-> >>> called via video_idle(). This change will lead to lost packages.
-> >>>
-> >>>
-> >>> @Tom, Simon
-> >>>
-> >>> The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule()
-> >>> instead of WATCHDOG_RESET()"). This added schedule() calls to EFI
-> >>> networking. Package losses can expected if schedule() takes more than=
- 1
-> >>> =C2=B5s. This is much shorter than the time needed for synchronizing =
-a 1 MiB
-> >>> frame buffer. The cyclic framework was explicitly meant for short
-> >>> duration function calls, not for long duration tasks like syncing the
-> >>> video frame buffer.
-> >>>
-> >>>
-> >>> I think we should remove video_idle() from the cyclic framework.
-> >>> video_sync_all() should only be triggered if there is video output.
-> >>>
-> >>
-> >> Hi Heinrich,
-> >>
-> >> It makes sense what you are saying but I don't have the hardware to
-> >> test your scenario. Can you submit a patch for discussion with a fixes
-> >> tag?
+> On Mon, Jun 16, 2025 at 04:11:32PM +0300, Ilias Apalodimas wrote:
+> > Hi Jerome,
 > >
-> > Gentle ping here.
+> > [...]
 > >
-> > Can we get some discussion on the point Heinrich brings up about
-> > video_idle in cyclic? Without my patch here which this discussion is
-> > blocking, large lwIP network transfers are quite broken on boards with
-> > watchdogs.
+> > >
+> > > If I'm not mistaken, this patch is doing two things that are unrelated:
+> > > (1) fix the KVM issue and
+> > > (2) get rid of the __arch_*() macros in favor of the __raw_*() macros
+> >
+> > I can split it, but I don't see much point since we redefine the raw_macros.
 >
-> Another option might be to increase the watchdog timeout?
+> For point 2, I'm not sure it's worth splitting, no.
 >
-Hi Jerome,
+> > > IMO this should be two separate patches.
+> > >
+> > > >
+> > > >  /*
+> > > >   * The compiler seems to be incapable of optimising constants
+> > > > diff --git a/drivers/spi/fsl_dspi.c b/drivers/spi/fsl_dspi.c
+> > > > index f2393c041f44..545561ad1169 100644
+> > > > --- a/drivers/spi/fsl_dspi.c
+> > > > +++ b/drivers/spi/fsl_dspi.c
+> > > > @@ -123,8 +123,10 @@ static uint dspi_read32(uint flags, uint *addr)
+> > > >
+> > > >  static void dspi_write32(uint flags, uint *addr, uint val)
+> > > >  {
+> > > > -     flags & DSPI_FLAG_REGMAP_ENDIAN_BIG ?
+> > > > -             out_be32(addr, val) : out_le32(addr, val);
+> > > > +     if (flags & DSPI_FLAG_REGMAP_ENDIAN_BIG)
+> > > > +             out_be32(addr, val);
+> > > > +     else
+> > > > +             out_le32(addr, val);
+> > > >  }
+> > >
+> > > Unrelated change
+> >
+> > Due to the the new do {} while(0) macro this doesn't compile, so it
+> > needs to go together.
+>
+> It can be done first as what the driver does now is valid but
+> clever-for-clever-sake, and cleaning this up is valid before the new
+> macros.
+>
 
-I don't think that makes much sense. Long transfers for compressed
-disk images can take minutes sometimes. It doesn't make sense to not
-call any cyclic's in that timeframe. Additionally its possible some
-older less capable watchdogs don't have that much flexibility in
-timeouts.
+Ok looking at it again, the platforms that need changing are v7 only.
+Due to to issues mentioned in the commit message, I decided not to
+change v7, so i can drop these completely now.
 
-What Heinrich points out here seems valid but I'm not familiar with
-the video framework to work up a patch.
+I'll send a v2 with the IO changes only.
 
-Best Regards,
-
-Tim
+Thanks
+/Ilias
+> --
+> Tom
