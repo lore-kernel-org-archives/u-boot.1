@@ -4,101 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9AD6C71136
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 08:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BD18C71136
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 08:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4515281E18;
-	Tue, 17 Jun 2025 10:06:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id EFC3581E18;
+	Tue, 17 Jun 2025 10:17:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ia4vwCDX";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WKr8fK/I";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g61eqPjF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB96982B20; Tue, 17 Jun 2025 10:06:55 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ id 9835D82B0F; Tue, 17 Jun 2025 10:17:10 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E21118070C
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 10:06:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id C965780C83
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 10:17:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750147612;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bM08f3y02z9sj8;
+ Tue, 17 Jun 2025 10:17:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1750148226;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=was8181DE9xfmXLyVBd7Iq1haWRqlHTrdJ655ADXygE=;
- b=ia4vwCDXyUaRGjQJ+5rpSlxFjKhuEe8Jlq93AjQxf33CxT0tmzznR27wFibrk0ZsRVEpIe
- ws4NakU4onTSCHsJZ6NiNCnx7xJLbhLDG6LNoLT++JllrKshL+cClPt+2IZ4SmE7MzCxQ7
- P5TCWD70jfQgVYh7q6ReRvm9XY0+Lag=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-2-CQ_YaR4wMwCQEcgnQNiBtg-1; Tue, 17 Jun 2025 04:06:49 -0400
-X-MC-Unique: CQ_YaR4wMwCQEcgnQNiBtg-1
-X-Mimecast-MFC-AGG-ID: CQ_YaR4wMwCQEcgnQNiBtg_1750147608
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3a5780e8137so1333645f8f.1
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 01:06:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750147608; x=1750752408;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=was8181DE9xfmXLyVBd7Iq1haWRqlHTrdJ655ADXygE=;
- b=SDq3j4aD+7E8tapm+7ebub1ExCU9ELSKZWAIafVmJ4PteaUGqCSG5OsnTOmGuKokGS
- XCc91Y5MCrGIhA2kPrPiND9cwRTCz9dZutdYKruQpggPbIOzGJaGtq9QnLI1oNFhs1Aj
- kRh5tKg/yMGEeLZYHY3AQStk10ErBpagqBUmMIpgf2VVoefcgKWWifWWjQJXX8QgdnIj
- VNbkpE+W9FdniYEDBh9D57BgpnRT84m7RCTRzNg6sZY2rapUpoKkx/d+xYrf/QL18+Nd
- 74nb1locGF014N2/ngkA0ILYmbV+0U7ecZ+YbHp6ZjS2G4SX7UvDD+Uzx6ge+X0pGOhm
- Yc/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXkX2gSIAfjwo3dxTEVjRSE8fzC7TL5rMEIJhW2boq9XRtOuF5TdYISqgt7KcRmi1Ib233N9qY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxo5kw2p2yHvpAh+YPlAm5AmSP/EKwLs+LGAaaQILtL+2qrbkW9
- DyXaVuTGUySutGAh/pR5t2kLkcFHq3d5qpmrqqwLBNoJbNvkPp2h+PZtcs555XXyvqBrUz5eShr
- dt+uSoXgr9qTjdKMwefGzmvUqfbReEtxhg65/xxRDfA4nBIm4xWy54oU=
-X-Gm-Gg: ASbGncsE6f6pxEjpTHE7NBryz7SsxNiLnjD6SFCB6zaz3mTptvzwdb7/bMIkBrLvyLc
- DnfykxANkbY9F4Rqod75sVxlLU8mwE4wDGgXKCdFyoRBGeIKCDpBSOCy7z5PxU+s4WlQppfb362
- 8Bg/wbNIGJCIxM0LP8encGk6DUzG7jgPoX7+gmX2+KhhlM4PTUm6bVLuTyVeGVcD1Ksx/w8HPpT
- cJyAmOxUWhNqjOdSRFeSndR47xxgJL4UjuSV40IBfGz5u6jBbH1Zjc8rOatAnGbch+rd49A9xNq
- D7d90EGpnyrTmIPTvjRAGZLrzT2WTncMJV+UrCRbXWiF1Bj/zB8p0MnrckUvfPOF1TvEodK8Z6C
- CdFdH
-X-Received: by 2002:a05:6000:652:b0:3a5:8601:613b with SMTP id
- ffacd0b85a97d-3a586016217mr2413805f8f.20.1750147607829; 
- Tue, 17 Jun 2025 01:06:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEXcwHyQBuyYSvrAVze5edcLv1MU1VdMIiWqHUsPVR5UpRclot2bM30YrYWr91B5brDEVcR3g==
-X-Received: by 2002:a05:6000:652:b0:3a5:8601:613b with SMTP id
- ffacd0b85a97d-3a586016217mr2413769f8f.20.1750147607490; 
- Tue, 17 Jun 2025 01:06:47 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568a53f79sm13042933f8f.4.2025.06.17.01.06.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 01:06:47 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Jerome Forissier
- <jerome.forissier@linaro.org>, Dan Carpenter <dan.carpenter@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Andrew Goodbody
- <andrew.goodbody@linaro.org>, Yu-Chien Peter Lin <peter.lin@sifive.com>,
- u-boot@lists.denx.de, Heinrich Schuchardt
- <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH v2 2/2] sandbox: enable CONFIG_CMD_BOOTEFI_SELFTEST by
- default
-In-Reply-To: <20250617061945.9266-3-heinrich.schuchardt@canonical.com>
-References: <20250617061945.9266-1-heinrich.schuchardt@canonical.com>
- <20250617061945.9266-3-heinrich.schuchardt@canonical.com>
-Date: Tue, 17 Jun 2025 10:06:46 +0200
-Message-ID: <87ikkudc6h.fsf@minerva.mail-host-address-is-not-set>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=tXwLfxZl7b5bpFdvtoVG2h6MNJIZ3sUK2eC8lIB3PCo=;
+ b=WKr8fK/IUJPPzg/R5gxAkCRgPFMhAlsyXm7u6zOddZvSs/+gX461qDc2GUi2dSKNsGnd1q
+ Dfn40RnZlUwd4q9sT63T1LVOhEJFy5kEPFBliQAdHYZ1XRoQ2BOKGK4TvJiexQpTK9q3pd
+ pdX5uQnXHKtG87yeo+L1n3R7ZPtXqn8ldlyZOJhvCIQCl6xnD01AXgHcgf6XWJmdiir17b
+ QQSYWOEPZ7YJjCVZe437m4k8LLDwepOaSrKTUuNeIdjpAJq3fqNZFNKtUI06gQ6MUFfOVN
+ LFuA5l6f2RhIxWFN8+yAUB6ZmxsiSV9AAOUvkqtVAl3XNLn3h35hncZlfu6itA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1750148224;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=tXwLfxZl7b5bpFdvtoVG2h6MNJIZ3sUK2eC8lIB3PCo=;
+ b=g61eqPjFLQJ9dbvAF0YOD0VM+MV5mpkQFfGCO195f/kGnevciVvL+1rSiTcrc5nUbUs5VZ
+ W3N04yBAX8UbqPd1khckrKpuzw3gAr3+6MovO4eqp1ixxP19Stq88NTVts2PPuDbz0x0x/
+ 3HAPGJNu6piJLo7UgR5IG1bGHXggnmTdYpiU6oT8CLCtDRiwPjFQsCMgk6Xg3oITPWxoqM
+ UjqfRaBRYqVIioq8Q5UChG5JeDIPkd0yIzMd5Uy7Qa4az2uFOn/Xm/TVK0JFPimjZf3UFt
+ 3+wONkfrDgS1ZBU5P0DDOGuqNjeqnvHizy8EWFL3fFEUvEL0hU5WgF3zfGpiJg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, John Crispin <john@phrozen.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-amlogic@groups.io, u-boot-qcom@groups.io
+Subject: [PATCH 1/6] drivers: pci: pcie_dw_common: Add
+ dw_pcie_link_set_max_link_width()
+Date: Tue, 17 Jun 2025 10:16:27 +0200
+Message-ID: <20250617081641.8385-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: ahbduEt_oyDEFPmlOWm7utZYFY80xBwyA53bLUa6Hes_1750147608
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: jsqh458kah7znud1zek95ui56fbjitua
+X-MBO-RS-ID: 190a0fa05b78b32e24d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,22 +92,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heinrich Schuchardt <heinrich.schuchardt@canonical.com> writes:
+Add dw_pcie_link_set_max_link_width() implementation ported from Linux kernel
+as of commit 89db0793c9f2 ("PCI: dwc: Add missing PCI_EXP_LNKCAP_MLW handling").
+This is common code which is already duplicated in multiple drivers.
 
-> The sandbox is used for a lot of generic development, we should run the
-> UEFI tests there, too.
->
-> Reported-by: Javier Martinez Canillas <javierm@redhat.com>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: John Crispin <john@phrozen.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot-amlogic@groups.io
+Cc: u-boot-qcom@groups.io
+Cc: u-boot@lists.denx.de
+---
+ drivers/pci/pcie_dw_common.c | 45 ++++++++++++++++++++++++++++++++++++
+ drivers/pci/pcie_dw_common.h |  2 ++
+ 2 files changed, 47 insertions(+)
 
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
-
+diff --git a/drivers/pci/pcie_dw_common.c b/drivers/pci/pcie_dw_common.c
+index 78961271a8e..c4cad019373 100644
+--- a/drivers/pci/pcie_dw_common.c
++++ b/drivers/pci/pcie_dw_common.c
+@@ -13,6 +13,7 @@
+ #include <pci.h>
+ #include <dm/device_compat.h>
+ #include <asm/io.h>
++#include <linux/bitfield.h>
+ #include <linux/delay.h>
+ #include "pcie_dw_common.h"
+ 
+@@ -28,6 +29,50 @@ int pcie_dw_get_link_width(struct pcie_dw *pci)
+ 		PCIE_LINK_STATUS_WIDTH_MASK) >> PCIE_LINK_STATUS_WIDTH_OFF;
+ }
+ 
++void dw_pcie_link_set_max_link_width(struct pcie_dw *pci, u32 num_lanes)
++{
++	u32 lnkcap, lwsc, plc;
++	u8 cap;
++
++	if (!num_lanes)
++		return;
++
++	/* Set the number of lanes */
++	plc = readl(pci->dbi_base + PCIE_PORT_LINK_CONTROL);
++	plc &= ~PORT_LINK_FAST_LINK_MODE;
++	plc &= ~PORT_LINK_MODE_MASK;
++
++	/* Set link width speed control register */
++	lwsc = readl(pci->dbi_base + PCIE_LINK_WIDTH_SPEED_CONTROL);
++	lwsc &= ~PORT_LOGIC_LINK_WIDTH_MASK;
++	lwsc |= PORT_LOGIC_LINK_WIDTH_1_LANES;
++	switch (num_lanes) {
++	case 1:
++		plc |= PORT_LINK_MODE_1_LANES;
++		break;
++	case 2:
++		plc |= PORT_LINK_MODE_2_LANES;
++		break;
++	case 4:
++		plc |= PORT_LINK_MODE_4_LANES;
++		break;
++	case 8:
++		plc |= PORT_LINK_MODE_8_LANES;
++		break;
++	default:
++		dev_err(pci->dev, "num-lanes %u: invalid value\n", num_lanes);
++		return;
++	}
++	writel(plc, pci->dbi_base + PCIE_PORT_LINK_CONTROL);
++	writel(lwsc, pci->dbi_base + PCIE_LINK_WIDTH_SPEED_CONTROL);
++
++	cap = pcie_dw_find_capability(pci, PCI_CAP_ID_EXP);
++	lnkcap = readl(pci->dbi_base + cap + PCI_EXP_LNKCAP);
++	lnkcap &= ~PCI_EXP_LNKCAP_MLW;
++	lnkcap |= FIELD_PREP(PCI_EXP_LNKCAP_MLW, num_lanes);
++	writel(lnkcap, pci->dbi_base + cap + PCI_EXP_LNKCAP);
++}
++
+ static void dw_pcie_writel_ob_unroll(struct pcie_dw *pci, u32 index, u32 reg,
+ 				     u32 val)
+ {
+diff --git a/drivers/pci/pcie_dw_common.h b/drivers/pci/pcie_dw_common.h
+index 8cb99a12ea1..ccd423081eb 100644
+--- a/drivers/pci/pcie_dw_common.h
++++ b/drivers/pci/pcie_dw_common.h
+@@ -130,6 +130,8 @@ int pcie_dw_get_link_speed(struct pcie_dw *pci);
+ 
+ int pcie_dw_get_link_width(struct pcie_dw *pci);
+ 
++void dw_pcie_link_set_max_link_width(struct pcie_dw *pci, u32 num_lanes);
++
+ int pcie_dw_prog_outbound_atu_unroll(struct pcie_dw *pci, int index, int type, u64 cpu_addr,
+ 				     u64 pci_addr, u32 size);
+ 
 -- 
-Best regards,
-
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+2.47.2
 
