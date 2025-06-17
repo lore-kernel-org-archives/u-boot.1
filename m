@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA95C71157
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 13:01:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1777C71136
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 13:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 794F682D17;
+	by phobos.denx.de (Postfix) with ESMTP id C329F82E0A;
 	Tue, 17 Jun 2025 15:01:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aAc2uGK7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JuFRCXA9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C22C382B0F; Tue, 17 Jun 2025 10:43:40 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id F027B82C2F; Tue, 17 Jun 2025 11:23:50 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C55C880C83
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 10:43:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6BC981760
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 11:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jakobunt@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-60707b740a6so8295898a12.0
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 01:43:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=vtpieter@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-607ec30df2bso10106568a12.1
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 02:23:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750149818; x=1750754618; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1750152228; x=1750757028; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ktNSHf8hcKjQd+gqW6bKd8NLFTDhdvdAH/Ol0HgPBm4=;
- b=aAc2uGK7DqC8pQ5vtUS6gIAPZZcVnbTW1cNYr3jio61aIsLjyPmZOiY5gJ5IKvXiM+
- Y4gccH6ANqKM8yiQhouQc0ln/q6qgwTmo6Q8wpKSSVBocRUEKKOzt26FutMg91tZxEga
- MmNhMekDa2dOpPzRMVkHOnKUBPHw4lc6JjJccO4hLoyUW3b/jjzP2Wv8l0rakmnou0JP
- rfwmvN4XQj7ebzYXUZ/xgat5BZS7QD91HsCaS8WjAevXtuM5YnZwNL1iMsD3V10lbWB/
- M/HbrSm9JO7v49EVd0i/Em8fTtxu7HbX1cKPAcGTpbI4Z3193N2mkIB4HY3KI/+C1qP+
- DY3A==
+ bh=7zQbU6BSb5g+l0SBUW87ymZ8jtWfh8wZHRLMZjTanRA=;
+ b=JuFRCXA9f7EIs7uz+ChTSjlp0nBKnfmN2cy6XDnqtM+LcfdsdADfPCALxIUQwo4N4b
+ gsVeYIlxPeu9B+ypxMGtXWoLruVeZrifi9sQ74l6GZCDfvbJS3+t2wHfjsb7s05dNrlc
+ NVqC+zo+hrtQoFDV0NbkeehOfsShqJk9LlHKaeHi0LnxjR5zkVmkMx5VvMh1zOiSprTf
+ OAt8HgmdDr/qZO5K8+tCL0vm8b1VIPrHbajehkKirKxXrguiq5SSXm7g6fA+VCTIHm8H
+ gvStLoTE8IJ4ic7k5IUh31vuPH2zMwCl1STfGY0B8YEjzGWYCt8XD1lymqFQWqXwMuYk
+ DUMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750149818; x=1750754618;
+ d=1e100.net; s=20230601; t=1750152228; x=1750757028;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ktNSHf8hcKjQd+gqW6bKd8NLFTDhdvdAH/Ol0HgPBm4=;
- b=C6rYs4JGVm2Sr10YtUSvEviLavw2LYYgvsI2LSZQaQBdpmFS6T0iZZpeMG12nW57RY
- GWk+G8+CBYoNY1gD+VvHNQnCknu3gYpQjEWo7uP8c0pysx3RTjs0++whVGnGBoeHudQF
- vSsqnbxzcSpnYbDEnGaXTmo+jfxa4RFw+3Bsl157SOdlhmoJrahzKZuQ3wzfwiYV0L4B
- PwG9OYlDU7q4h24e4gabWoDBihq16vBKmnt0/NEyMtgH0qJ4O9e/i0ZVSXnv8T7WPZz+
- UwkWKqo6yddm6dXtbvCwcHkBlskhLvQAh1UDsamMOaf8AuDdAVQogPXl7yfDEjZOKbg1
- zqJw==
+ bh=7zQbU6BSb5g+l0SBUW87ymZ8jtWfh8wZHRLMZjTanRA=;
+ b=eIpHa6kTAME8M/XPx+/8WL+KizojhYQaoZ8qzWUuzIFqUNSP2l0HzIDKv9PdCNibys
+ 3uaAV6JHQGYwdHI/V4NL6HOrNIekadjJYphU61kjzvVx7QKZtLCkLf4PCuxuVZd9UujD
+ jnuEcqOkfwxap2gBhDQ4Q9gO4p74gR0qwFzOHmkw3RY1nKjf4Iq/PZY1FQ344KrwCWca
+ BObCX2gcLDCXymg6WDl75E80jXnWt4paJUQFsGKGDkqi4oLlvI+M1WpwfzpNxiXmPk7/
+ ZnWRl6izXA4esONn3eblg6wMV+06GLpZKCkDi62vw5pnX0hM/txvofE9U1dniB30iI8F
+ O/5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUC3o5OZc42o0Og8hhEAkXgsqk2VvxAqNWZlWMGG/lwg8LpebDGtzoZGWkX7b8vobUNAgWmrzY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKT2MxTDoK1Xi+Wa7rS6vlD6TDgZhURLdCu0KsQ1BMbQ/BXd6L
- 70uYE7cn1CKZ0NNqwiaajEz5nGticzNz7EinNLSo2t38iiEmcntfQdNmEPCuvKHz
-X-Gm-Gg: ASbGncvOsFkKMoGZCJbXX3m3E1XSBkDUmMhJuqpI4UBo4WAysqxDZcyFOlLKg3Vsx32
- 4XBkBEeGUL8mRiDxuy2PZIY/fhVNX1cyPe+8R7vJ+VbkHzjGBqP56qJ71Jv4UfcaIRf2abGKpJP
- okCFN8/zrAxKGyk3JsCghGjha1DQVXqa2Su+BTcoe3oDkfXuORELqeJmBgDTrYNZcrA7mkDpYwF
- ZANJFVFyaPfTC7YUdjLJ5XNjUqB/5aC6DMLDslJsI/lsdjbJU/RVoCCHoJc/UjxPHTh5/a5icuG
- 7rfQxSCkEBlCtKwB1VYYbK8nCD+lfO4A9QJScVw38M/15ifXenQOoSgxZffDhM8sUgb1Rj9sOo6
- afa/wsm/hAljPxXhrabHow/DukSieL+DVkPW77z95
-X-Google-Smtp-Source: AGHT+IEbkfiS5MMBjb1k4Y5qN8IcjJdZmePAy007Up8IFEDBV2XBqITtOIVi36EtOH3GyjcdHUkvnQ==
-X-Received: by 2002:a05:6402:1d4a:b0:608:523c:1365 with SMTP id
- 4fb4d7f45d1cf-608d097b95cmr9660630a12.29.1750149817934; 
- Tue, 17 Jun 2025 01:43:37 -0700 (PDT)
-Received: from localhost.localdomain (ip092042140082.rev.nessus.at.
- [92.42.140.82]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-608b4addedcsm7511437a12.68.2025.06.17.01.43.36
+ AJvYcCX7v0strM3tCM8oD0lkSoQiBZyW2jpyf+vMatfYtSZ2FjscCWk0vykJTh04Y/kUbLGbZQL5fO4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3TIoch1i65grVdFzDnc0ERwF7/A1/m/1lHAXnzbgeF7l+y1DN
+ NL5TnVl8Qjk7w3//97qSgDyUsweTCgMspNZ24G4bxxxLGe7AJgHw9ka9
+X-Gm-Gg: ASbGncvCmK5tR2UY0ftFKrTsanTDZf6q3DeJ74K+PAsdCFF+fjZap1PgiLFqu8P/hOa
+ Bkqxx+7xzWX5ubMuwXvHe0JXH1GG/rU5OJTF3r4OutNNOoa3BWbgiAW8dQ90VXEwEZCvP7zlx0W
+ Ue+S9jtNMCy1P+ojS8mahwIllwpL11l5kzK9njGgKH1B20gTOmxY0k/jBRCQhA9xx90es+gxtai
+ MA/iTuUyWn0STxvFlnol5AZpOnHyDfQu7/pxIpB6GuYDcK3520ayaOuiR78l99/pktf492KJN7k
+ yBtLkVAow1fQVDMC9jct4K528cJCbJ8H3Y/h0DkiuyF4WfqJWZw4ypunIn5I2jq/
+X-Google-Smtp-Source: AGHT+IGZPwdgWiKiJiyMy1S9DzYYJK3vfnbM+9K8BTw54/gD5el4DRlCP+ElSBvr2ykPW4g3DtoNIg==
+X-Received: by 2002:a05:6402:5cd:b0:607:94d:9bb0 with SMTP id
+ 4fb4d7f45d1cf-608d0963d50mr11858285a12.22.1750152228065; 
+ Tue, 17 Jun 2025 02:23:48 -0700 (PDT)
+Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-608b48a95a7sm7618211a12.12.2025.06.17.02.23.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 01:43:36 -0700 (PDT)
-From: Jakob Unterwurzacher <jakobunt@gmail.com>
-X-Google-Original-From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
-To: Klaus Goger <klaus.goger@cherry.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
-Cc: Heiko Stuebner <heiko@sntech.de>,
+ Tue, 17 Jun 2025 02:23:47 -0700 (PDT)
+From: vtpieter@gmail.com
+To: Michal Simek <michal.simek@amd.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>,
 	u-boot@lists.denx.de
-Subject: [PATCH] board: rockchip: unblock CAN bus in spl_board_init on Jaguar
-Date: Tue, 17 Jun 2025 10:42:52 +0200
-Message-Id: <20250617084253.1756035-1-jakob.unterwurzacher@cherry.de>
-X-Mailer: git-send-email 2.39.5
+Subject: [PATCH] Improve user feedback in case of FPGA bitstream load failure
+Date: Tue, 17 Jun 2025 11:23:32 +0200
+Message-ID: <20250617092333.335908-1-vtpieter@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 17 Jun 2025 15:01:34 +0200
@@ -104,63 +98,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GPIO0_B7 is routed to TXI of the on-board CAN transceiver. The
-line has a pull-down per SoC default.
+From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-This means the CAN transceiver transmits a dominant zero
-and blocks the CAN bus until Linux boots and reconfigures the pin.
+In fpga.c, change debug() calls to puts() for important user
+feedback. In zynqpl.c, change 'up to' to 'above' which corrects this
+confusing or wrong statement.
 
-Let's switch to pull-up as soon as we can (i.e. in SPL).
-This cuts down the "bus is blocked" time from 10 seconds to < 1 second.
-
-Of course, to this needs CONFIG_SPL_BOARD_INIT, so enable it
-the Jaguar defconfig.
-
-Signed-off-by: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- .../jaguar_rk3588/jaguar_rk3588.c             | 19 +++++++++++++++++++
- configs/jaguar-rk3588_defconfig               |  1 +
- 2 files changed, 20 insertions(+)
+ cmd/fpga.c            | 20 ++++++++++----------
+ drivers/fpga/zynqpl.c |  2 +-
+ 2 files changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
-index a6d44f10db3..3f484646701 100644
---- a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
-+++ b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
-@@ -51,3 +51,22 @@ int rockchip_early_misc_init_r(void)
+diff --git a/cmd/fpga.c b/cmd/fpga.c
+index 9dc7b63db5d..2c2a63524de 100644
+--- a/cmd/fpga.c
++++ b/cmd/fpga.c
+@@ -43,7 +43,7 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
+ 	debug("%s %d, %d\n", __func__, argc, cmdtp->maxargs);
  
- 	return 0;
- }
-+
-+#define GPIO0B7_PU_EN BIT(15)
-+
-+void spl_board_init(void)
-+{
-+	/*
-+	 * GPIO0_B7 is routed to CAN TX. This SoC pin has a pull-down per default.
-+	 * So on power-up, we block the CAN bus with a dominant zero. We want to keep
-+	 * this blocking time to a minimum, so we want to get this pin high in SPL.
-+	 *
-+	 * The CAN driver in Linux disables the pull-down and sets the pin to
-+	 * output high. We don't have a CAN driver in U-Boot and don't need one,
-+	 * so we just use the easiest way to get the pin high, which is setting a
-+	 * pull-up.
-+	 */
-+	struct rk3588_pmu2_ioc * const ioc = (void *)PMU2_IOC_BASE;
-+
-+	rk_setreg(&ioc->gpio0b_p, GPIO0B7_PU_EN);
-+}
-diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
-index 03d38274b15..272f1ca8ded 100644
---- a/configs/jaguar-rk3588_defconfig
-+++ b/configs/jaguar-rk3588_defconfig
-@@ -27,6 +27,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-jaguar.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_CYCLIC=y
- CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_ATF=y
- # CONFIG_BOOTM_NETBSD is not set
+ 	if (argc != cmdtp->maxargs) {
+-		debug("fpga: incorrect parameters passed\n");
++		puts("fpga: incorrect parameters passed\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+@@ -51,14 +51,14 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
+ 
+ 	local_fpga_data = simple_strtol(argv[1], NULL, 16);
+ 	if (!local_fpga_data) {
+-		debug("fpga: zero fpga_data address\n");
++		puts("fpga: zero fpga_data address\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 	*fpga_data = local_fpga_data;
+ 
+ 	local_data_size = hextoul(argv[2], NULL);
+ 	if (!local_data_size) {
+-		debug("fpga: zero size\n");
++		puts("fpga: zero size\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 	*data_size = local_data_size;
+@@ -78,7 +78,7 @@ static int do_fpga_loads(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	memset(&fpga_sec_info, 0, sizeof(fpga_sec_info));
+ 
+ 	if (argc < 5) {
+-		debug("fpga: incorrect parameters passed\n");
++		puts("fpga: incorrect parameters passed\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+@@ -100,13 +100,13 @@ static int do_fpga_loads(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	if (fpga_sec_info.authflag >= FPGA_NO_ENC_OR_NO_AUTH &&
+ 	    fpga_sec_info.encflag >= FPGA_NO_ENC_OR_NO_AUTH) {
+-		debug("fpga: Use <fpga load> for NonSecure bitstream\n");
++		puts("fpga: Use <fpga load> for NonSecure bitstream\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+ 	if (fpga_sec_info.encflag == FPGA_ENC_USR_KEY &&
+ 	    !fpga_sec_info.userkey_addr) {
+-		debug("fpga: User key not provided\n");
++		puts("fpga: User key not provided\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+@@ -248,12 +248,12 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	debug("fpga: argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
+ 
+ 	if (dev == FPGA_INVALID_DEVICE) {
+-		debug("fpga: Invalid fpga device\n");
++		puts("fpga: Invalid fpga device\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+ 	if (argc == 0 && !datastr) {
+-		debug("fpga: No datastr passed\n");
++		puts("fpga: No datastr passed\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+@@ -390,7 +390,7 @@ static int do_fpga_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	fpga_cmd = find_cmd_tbl(argv[1], fpga_commands,
+ 				ARRAY_SIZE(fpga_commands));
+ 	if (!fpga_cmd) {
+-		debug("fpga: non existing command\n");
++		puts("fpga: non existing command\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+@@ -398,7 +398,7 @@ static int do_fpga_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	argv += 2;
+ 
+ 	if (argc > fpga_cmd->maxargs) {
+-		debug("fpga: more parameters passed\n");
++		puts("fpga: more parameters passed\n");
+ 		return CMD_RET_USAGE;
+ 	}
+ 
+diff --git a/drivers/fpga/zynqpl.c b/drivers/fpga/zynqpl.c
+index 3e86d854a01..7495ac2a69a 100644
+--- a/drivers/fpga/zynqpl.c
++++ b/drivers/fpga/zynqpl.c
+@@ -360,7 +360,7 @@ static int zynq_validate_bitstream(xilinx_desc *desc, const void *buf,
+ 	}
+ 
+ 	if ((u32)buf < SZ_1M) {
+-		printf("%s: Bitstream has to be placed up to 1MB (%x)\n",
++		printf("%s: Bitstream has to be placed above 1MB (%x)\n",
+ 		       __func__, (u32)buf);
+ 		return FPGA_FAIL;
+ 	}
+
+base-commit: 62d24441e0a29c828fda6fbda3b10710ce714094
 -- 
-2.39.5
+2.48.1
 
