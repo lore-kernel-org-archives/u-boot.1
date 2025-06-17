@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CF8C71157
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:08:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC58C71157
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:09:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A63AB82D59;
-	Tue, 17 Jun 2025 12:07:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 00ACF82D66;
+	Tue, 17 Jun 2025 12:07:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tbTzXsOk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XOHkfnjj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6E8E82CD5; Tue, 17 Jun 2025 12:07:51 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id C95DB82D06; Tue, 17 Jun 2025 12:07:52 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E037A80C83
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:07:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D746382CBC
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3a4fb9c2436so3231660f8f.1
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 03:07:49 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3a5123c1533so3124470f8f.2
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 03:07:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750154869; x=1750759669; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750154870; x=1750759670; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zw2o6MnolNwOFvuGvEw5Nc0YvBVz9NEXlG0S6QtGMrM=;
- b=tbTzXsOkit8y3pSth/W4OMrs/e/QcaYEA58ERsufHCH+i0QBFe8XjXFC0NpXjflIze
- 2lB1Cthp4lUmtxet75gNYphgB27hLSZAxjvCCykmT3TjdFGNJaZcrQQN05dpjx0QHbCQ
- F9LJsROvY/hZkRT2atDj9l/n30LLVercc3MoOb3UHF1tw+7TjFrUs+UevrO1sTz+kYx2
- PtHWNh13+BMmCnlK8GbrBB9LWDIl4xSJMPuxm+rDOE+p76BeOOZMyz6JBnDevBK7zhKn
- Du4vDyYHsCVFzZUZapUEkopuuXuAPFYEQMuvZNkBC1pdtuxWAhpfViRP7X9CP7e4Y4AV
- /f0g==
+ bh=IJHk/OIQAK7p2slUDuw7khsvXEgoqUGdrCgMhts+zoA=;
+ b=XOHkfnjjH+9IFlNbTdqcLdkHcNsmD+F03MgOX8v4IdPJIBBzV4gbMntR1wWDjLd2XS
+ 9epGbGHUHn8jbDj6WgNXophs29YUw0ROTJrqml9VALsu5KhGwYrZf95Sv0DL6OkQg77e
+ F8J59wE3apd7TnAEUdMgSyyOtfht//X48DcJxIBd5WvrJ7RCWvZpUEhUMIxWxlstD+m6
+ xvbQtwaSDkdmagEs+sxb2mhbkCwN1CnGLalNAenTcPCItYic28S9uf/Gwvhuim9b5ftp
+ qpWNgaudhDnH5lKpVzXQtCU4Bq9REroRzUMIP/4oRthagkpksKTdHTUORw6s4tA1x+fp
+ 9Qdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750154869; x=1750759669;
+ d=1e100.net; s=20230601; t=1750154870; x=1750759670;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zw2o6MnolNwOFvuGvEw5Nc0YvBVz9NEXlG0S6QtGMrM=;
- b=sJuHUGCxvO2HfcYFEYv+imsNSxDc1wWyk0YQby7WryJkNnQZqf1BqwVTYz8JAzG4Fy
- j8xF/G0TK/2UgL7lRfWNDZ+U1IExv+jNRVpz7nvgMgpIU7rVinUaCBckhajr6z8A/Kib
- X2n4ogGfOJkJ55Hn7gb2wpRZhSK+9rxBGrWIJsRLVLGIIIijwHnnzvmHpVq65sCRQAvR
- e6GguFott7YG6/n5h0elvFemPSdzoJeraN4oi/I9PreQhyhTYLTRC6+YjHNHfB4hf0kK
- X+leLJr03Z6TfhArQ2dQX77WtXTSsMc9uM/5jO8Xhvury8l+XV4/FXfEZOVMPVAw2vPP
- h23Q==
-X-Gm-Message-State: AOJu0YzS/RHKBmpLQdE6u7Om8oyN9/uEVQZguCTEQV7PcF7c1jXRBF1/
- b9fPO8o2qw03nMSJCOCwk8brttZ4UxyVusfyT3JKiQENOA2h/Zfmfn/75JI8F0J7xS+ISGV8Dih
- 27uAL
-X-Gm-Gg: ASbGnctCwnSnw2pDUbA3Xbl03qPNqErfB4L75pfoXmZyTwpo2eynt9ztN98W0V5LSpi
- JMG5CvKR0e/YJJA4Ui2ydImg8ph1PKE+/19tNODt3PlB04b+gMJRsT3Ki0uU7GvQrBlivbVt9ck
- F8YztWqQ2ebIFr7bH4djYWFf9zlFNqSSPrYDNeysiFI/V2ywKwMkTsjztgMnmIMpk/1yA4z/ebP
- iMWY99rKPhOoQ+PBqEEfwxYOSm7Ab+iVY8tT8L1+0gS9RTbRRpp7N/7pMkPpjl1vTDuZkrYPgD0
- lOqBxzfPtZcevCHYl0ZKJqf9pUGA5tfSWlEbNAdIoUUCsimOlUNv23fg29RyRM6EhUcroOE=
-X-Google-Smtp-Source: AGHT+IFpHibFSjTPsCCpxsM4MKjYVZrrpQzi/ltC5a5KGi9YSZjSyzaWrMESslQUe2o91MQLK8atPA==
-X-Received: by 2002:a05:6000:2184:b0:3a5:783f:5297 with SMTP id
- ffacd0b85a97d-3a5783f5770mr5786983f8f.35.1750154868966; 
- Tue, 17 Jun 2025 03:07:48 -0700 (PDT)
+ bh=IJHk/OIQAK7p2slUDuw7khsvXEgoqUGdrCgMhts+zoA=;
+ b=MhQoMhjIgCG6uTuVKclxUx+CIxXRAN6nPKgyr4PXerEiUP18SO1abKSUP2Wy8WC3R4
+ vO9ltHxufclD6e/57g/S355vRoJop9UyKkPLxboFtQzPmiQI5Q0DRMhpwF7GNbT4jrSu
+ n0ogN3YUe4HnQVb6bknWCV32jOUPR//TnU/DCRtgS+s8EBkFiY6ykg3PFldbg0OkxplI
+ pHe3FjTSL3MZz6DrStIY/L9OhfgYpEVKa8x/+ralJD3F3rmCYqTG9Ng8AHuKUKCYC7YW
+ 41TT8qbHLAZ71il8H5qWIDOmBKrynciF+tyigqnt+Rsm5LvDh9eZJ86xkog5gD+HXSmJ
+ pwbg==
+X-Gm-Message-State: AOJu0Yzpk6DvW30hNAS0vgFr3PRFi3kEv3rY46EsT6y0gLGQl2AXMak1
+ iMYL+eE44P4ssT2oZ3uPxV5Uma20jG/EL9E/xe0B2PKgDCjxDhxoWbAyBUT2CRbSriw+0GAvEbr
+ 3WSdA
+X-Gm-Gg: ASbGncsPjYXtgzpZuFCi/ZEt1waTqOL4AcICOJLwwmBeUc7HPinoW1o21avNbbZMoDA
+ vefVtiUQUGh+lVotLVideRdGjDEprjhPj5Oz6aUHp4obRFAtrEFpKF7vLbkZEmBZc2nX8rxJ8Rz
+ lf8sI3wZWDcfT8uhdvcVrYVV+Yw1+3zq5QjmLvReJgdRV0KkywfEAUJtPtZj8VzD2oSSrJ3zJuV
+ dIdoCQm4SYd4TrZ1UenQ5tUI1IQ2iLoQLFyfn6z7F2xkIFoLtgqFZowpDNHTmJSAb2UZmI/Xdw4
+ Crf2Bbz708Sd9jDKZAY72yb1yfzLxEFn3ivyHHgsbIf+CzssXszH7HZ91TPpvPt5u6KC1aqaY86
+ QohU83A==
+X-Google-Smtp-Source: AGHT+IGmLBtO16ydnpgQvjYIFwhxLFQGi8ro4dV8wbjqAvTJ/uG7UukPVQILP1q6Hkho8cT7hy+hlA==
+X-Received: by 2002:a05:6000:230e:b0:3a4:ebc4:45a4 with SMTP id
+ ffacd0b85a97d-3a572398fbbmr10465363f8f.5.1750154869911; 
+ Tue, 17 Jun 2025 03:07:49 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d4f5:465a:56e7:e545])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b61071sm13582412f8f.90.2025.06.17.03.07.48
+ ffacd0b85a97d-3a568b61071sm13582412f8f.90.2025.06.17.03.07.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 03:07:48 -0700 (PDT)
+ Tue, 17 Jun 2025 03:07:49 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 07/13] lwip: dns: do not print IP address when a variable
- is specified
-Date: Tue, 17 Jun 2025 12:03:57 +0200
-Message-ID: <20250617100720.2544758-8-jerome.forissier@linaro.org>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 08/13] lwip: add net_lwip_dns_resolve()
+Date: Tue, 17 Jun 2025 12:03:58 +0200
+Message-ID: <20250617100720.2544758-9-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250617100720.2544758-1-jerome.forissier@linaro.org>
 References: <20250617100720.2544758-1-jerome.forissier@linaro.org>
@@ -101,10 +103,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When calling "dns <hostname> <varname>", do not print out the IP address
-of <hostname> onto the console. Print it only when no variable is
-passed. The reason is to be able to call do_dns() from another command
-in need of the DNS services without polluting the output.
+Add a helper fonction to convert an IP address (supplied as a text
+string) or a host name to an ip_addr_t.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
@@ -114,35 +114,79 @@ Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Changes in v2:
 - New patch
 
- cmd/lwip/dns.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ include/net-lwip.h  |  1 +
+ net/lwip/net-lwip.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 40 insertions(+)
 
-diff --git a/cmd/lwip/dns.c b/cmd/lwip/dns.c
-index 4689ecce513..344f9a68bb9 100644
---- a/cmd/lwip/dns.c
-+++ b/cmd/lwip/dns.c
-@@ -42,8 +42,6 @@ static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 9c1167482e9..299df29ace9 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -37,6 +37,7 @@ struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+ void net_lwip_remove_netif(struct netif *netif);
+ struct netif *net_lwip_get_netif(void);
+ int net_lwip_rx(struct udevice *udev, struct netif *netif);
++int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *ip);
  
- 	if (dns_cb_arg->var)
- 		env_set(dns_cb_arg->var, ipstr);
--
--	printf("%s\n", ipstr);
+ /**
+  * wget_validate_uri() - varidate the uri
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index f05c4cd3f64..c9a7114bbff 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -6,6 +6,7 @@
+ #include <dm/device.h>
+ #include <dm/uclass.h>
+ #include <hexdump.h>
++#include <linux/kernel.h>
+ #include <lwip/ip4_addr.h>
+ #include <lwip/err.h>
+ #include <lwip/netif.h>
+@@ -315,6 +316,44 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 	return len;
  }
  
- static int dns_loop(struct udevice *udev, const char *name, const char *var)
-@@ -107,8 +105,11 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
- 
- 	net_lwip_remove_netif(netif);
- 
--	if (dns_cb_arg.done && dns_cb_arg.host_ipaddr.addr != 0)
-+	if (dns_cb_arg.done && dns_cb_arg.host_ipaddr.addr != 0) {
-+		if (!var)
-+			printf("%s\n", ipaddr_ntoa(&ipaddr));
- 		return CMD_RET_SUCCESS;
-+	}
- 
- 	return CMD_RET_FAILURE;
- }
++/**
++ * net_lwip_dns_resolve() - find IP address from name or IP
++ *
++ * @name_or_ip: host name or IP address
++ * @ip: output IP address
++ *
++ * Return value: 0 on success, -1 on failure.
++ */
++int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *ip)
++{
++#if defined(CONFIG_CMD_DNS)
++	char *var = "_dnsres";
++	char *argv[] = { "dns", name_or_ip, var, NULL };
++	int argc = ARRAY_SIZE(argv) - 1;
++#endif
++
++	if (ipaddr_aton(name_or_ip, ip))
++		return 0;
++
++#if defined(CONFIG_CMD_DNS)
++	if (do_dns(NULL, 0, argc, argv) != CMD_RET_SUCCESS)
++		return -1;
++
++	name_or_ip = env_get(var);
++	if (!name_or_ip)
++		return -1;
++
++	if (!ipaddr_aton(name_or_ip, ip))
++		return -1;
++
++	env_set(var, NULL);
++
++	return 0;
++#else
++	return -1;
++#endif
++}
++
+ void net_process_received_packet(uchar *in_packet, int len)
+ {
+ #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
 -- 
 2.43.0
 
