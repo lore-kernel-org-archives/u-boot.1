@@ -4,60 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FCBFC71136
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CAB2C7115A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3E8181760;
-	Tue, 17 Jun 2025 12:01:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B0BC682CBB;
+	Tue, 17 Jun 2025 12:07:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tmSZLPDn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TqkZvvie";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF26482977; Tue, 17 Jun 2025 12:01:18 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E009680C83; Tue, 17 Jun 2025 12:07:45 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72A4380C83
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:01:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id EDD6C82B20
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:07:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 7416DA4F502;
- Tue, 17 Jun 2025 10:01:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D63CC4CEE3;
- Tue, 17 Jun 2025 10:01:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750154475;
- bh=jtV5QBj8kohcI8qSb0Zb4CX1gI2o7IEUxBPiupkACAw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=tmSZLPDnkogOPln0Q6HjkQXdq+BayrEPoNcDFKbTWrw1zAqZykbplbDiKEKaLF1Oo
- sflZ/eu9BQh9Z39TxRhTlrzJJu6XfMjxhlmvNYpJIEnOLJJQd+zLv9JevoMcF/PFGN
- 6dOQhEgTIhMmBVZqOfQ3yWFQtk0m9aJxgoFNLCUqHUdrwA0xoxyqPSd1NZ08BZ9t75
- 4XAfm5RZSzHHOlPb29pXb4ifwMdkJovWySMRqH15RrAQBCC60JZIuUMWbZ85FPatsw
- mbdosXiCKIhTOqaiL+vYBmvhQUgs0A23jxoBIGMAaK0PcgLwcfjXWikpNUwvSZQvqO
- lJx064WxPBnMw==
-Date: Tue, 17 Jun 2025 15:31:08 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Markus Schneider-Pargmann <msp@baylibre.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>,
- Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>,
- u-boot@lists.denx.de, Kevin Hilman <khilman@baylibre.com>,
- Vishal Mahaveer <vishalm@ti.com>, Akashdeep Kaur <a-kaur@ti.com>,
- Kendall Willis <k-willis@ti.com>,
- Sebin Francis <sebin.francis@ti.com>, Dhruva Gole <d-gole@ti.com>
-Subject: Re: [PATCH v2 00/22] am62: IO+DDR resume support
-Message-ID: <aFE85L2EphPvRmiL@sumit-X1>
-References: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a375e72473so3057705f8f.0
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 03:07:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750154863; x=1750759663; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B/ySdy1n6AgDC7NIfoWPUsAgLrYrc7+o/jJcNrR0Sb4=;
+ b=TqkZvviegCv6LQ0BVPAMmy337HLEsO6H3bVqGvhKzJ+ZVPvbtQ8419o5wy+0FL4f0R
+ sKWW+2HvsyArrnMCjcOOaxlHWkgjMrdhB+W02ONxjRlczOjtVivieKSZlLZMDh8okESg
+ 80SSjINEp4roO8Te8S/AZ5YQ+wp4uZMe4uJqP4A3dMGeCArpnAMNUnxPYyBeOiRHYTRX
+ orZuUOn9teg0xV0tJeX8S8EHpwrXDfPQGTTaGcL95WyYNK4HZq4SFyj97nMQwTQPu4or
+ bt2jzUv1ymSpbBERnfKGXHniEXzDcBcio1tO0FGksOHhzWI73+xU+FMb097BELkXIzed
+ 18QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750154863; x=1750759663;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B/ySdy1n6AgDC7NIfoWPUsAgLrYrc7+o/jJcNrR0Sb4=;
+ b=qVMgbIhwTZRnpgHvbRQ5S/iafgy1chc5l7RM7M3ZZ4TXMFt3wBVf30zNiUk9RqKfEW
+ sQGPRWa+Mu99Qqx/qFT0qLphx05bf/s0FZyyNAWcRuU/ejdbDkHmmNlmZswB4zWAsyE8
+ bzedK0W7elKihXVWPrrlP1J0Y649/GSOeelJlcamOIIJ0dxYv6sK2rgSfIK5ohwtNX8x
+ TkTht/ze2MvdkLy8pHcMPWMZlwd4SJYe3vHl5M7YN8nsliL1YPn/mAW6KmbsgRXwutHg
+ k320bow1aRDzMacxOA0Yl5rk3ICkqS6i6NQE3NLMAMNAkOUvZKiRBFGO+7pEQ8bTQ78u
+ SAiQ==
+X-Gm-Message-State: AOJu0YxLX2rtn+ucYFB/iXeC62alAu4RsiW17rqca7jicuujWr3RlF70
+ pp5V81du2RjI0Bynw7MW1FagZX/pVUrIhyVGuINRhxpdylV3P7316jjzjQhxm46yz6kMB5SQJqD
+ 3RvxT
+X-Gm-Gg: ASbGncvlBBQIXIBuZ7r31SDkHau4hcyWY7aMVHfxdiZ+4tbUU5p3SMS1d5ZAWcmMwuu
+ 8b3lFPs7/7m7RGSe4Nn5whgLb3rYFk8ffvCFGB8rJtfQvll3GKsVhq8qTgHEJavVKL0Cx55Ju66
+ 0/RWKABs5RRw6lUExga2Fzd/wzcWhqyxsR5/BGIXcxWLvAnfkqCdlFq70FbV5HZMlcpn4HmvYw7
+ aGKxfZUa8gMv5rWh/UKmEvsggVfamVcyf3JflSnuRC4xOSDJ5lqJRzEAbckZ9/0zAkMyvvXN/Db
+ GN6ZOobSHjFYGlS3o6T7C9Mm316ygtD7MMiicIE2ZssZuDmJrytWVgHtI87RdgZ5WZPGbyc=
+X-Google-Smtp-Source: AGHT+IH7uHW0JAgxsIL2EAD2T+fYsHdOt5Y1GSnQd3RZVoHOVnMVZ2qyVtuU2TvYv8AQgGEjrPcrGA==
+X-Received: by 2002:a05:6000:1887:b0:3a4:e393:11e2 with SMTP id
+ ffacd0b85a97d-3a5723a22d6mr10853294f8f.34.1750154863177; 
+ Tue, 17 Jun 2025 03:07:43 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:d4f5:465a:56e7:e545])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568b61071sm13582412f8f.90.2025.06.17.03.07.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Jun 2025 03:07:42 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 01/13] lwip: remove net/lwip/eth_internal.h
+Date: Tue, 17 Jun 2025 12:03:51 +0200
+Message-ID: <20250617100720.2544758-2-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250617100720.2544758-1-jerome.forissier@linaro.org>
+References: <20250617100720.2544758-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,125 +100,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
+net/lwip/eth_internal.h is not used. Remove it.
 
-On Fri, Jun 13, 2025 at 03:19:20PM +0200, Markus Schneider-Pargmann wrote:
-> Hi,
-> 
-> this series introduces support to resume from IO+DDR. IO+DDR is a low
-> power mode of am62a and am62p in which nearly everything is powered off
-> except DDR which is in self-refresh and a few pins which detect
-> activity and can wakeup the system again.
-> 
-> On resume uboot SPL is loaded and checks if this is a IO+DDR resume. If
-> it is, the DDR initialization sequence in k3-ddrss differs slightly as
-> it has to get the DDR out of the self-refresh.
-> 
-> Afterward a specific address determined from DT is used to get the
-> metadata that stores relevant context addresses. The context is restored
-> using the tisci message TI_SCI_MSG_MIN_CONTEXT_RESTORE. At the end all
-> further initializations are skipped and uboot SPL directly jumps into
-> the DM resume address which takes care of the rest.
-> 
-> The devicetree R5F related patches were picked up from the devicetree
-> repository tag v6.16-rc1-dts and are required to find the correct
-> address of the metadata. I picked some additional patches to avoid
-> conflicts.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
 
-The DT cherry-picks seems fine to me. Feel free to add following to
-those DT cherry-picks:
+(no changes since v2)
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Changes in v2:
+- New patch
 
--Sumit
+ net/lwip/eth_internal.h | 35 -----------------------------------
+ 1 file changed, 35 deletions(-)
+ delete mode 100644 net/lwip/eth_internal.h
 
-> 
-> k3-ddrss is using absolute register accesses at the moment. I am trying
-> to submit syscon DT patches upstream to access these through syscon,
-> unfortunately there is ongoing discussion regarding syscon.
-> 
-> This series is based on next.
-> 
-> I tested this on am62a.
-> 
-> Best,
-> Markus
-> 
-> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
-> ---
-> Changes in v2:
-> - Remove 'default n' from K3_IODDR
-> - Pick devicetree patches from upstream instead of mailinglist
-> - Link to v1: https://lore.kernel.org/r/20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com
-> 
-> ---
-> Devarsh Thakkar (3):
->       arm64: dts: ti: k3-am62a-wakeup: Add R5F device node
->       arm64: dts: ti: k3-am62a7-sk: Enable IPC with remote processors
->       arm64: dts: ti: k3-am62p5-sk: Enable IPC with remote processors
-> 
-> Hari Nagalla (2):
->       arm64: dts: ti: k3-am62a-mcu: Add R5F remote proc node
->       arm64: dts: ti: k3-am62x-sk-common: Enable IPC with remote processors
-> 
-> Jai Luthra (1):
->       arm64: dts: ti: k3-am62a-main: Add C7xv device node
-> 
-> Judith Mendez (3):
->       arm64: dts: ti: k3-am62a7-sk: Enable PWM
->       arm64: dts: ti: k3-am6*: Add boot phase flag to support MMC boot
->       arm64: dts: ti: k3-am6*: Remove disable-wp for eMMC
-> 
-> Markus Schneider-Pargmann (13):
->       arm: mach-k3: Remove CANUART IO isolation
->       arm: mach-k3: Kconfig: Add symbols for IO+DDR Low Power Mode
->       ram: k3-ddrss: Add support for DDR in self-refresh
->       firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
->       arm: mach-k3: common: Add CANUART wakeup check helpers
->       arm: mach-k3: common: Add lpm_resume_from_ddr
->       arm: mach-k3: common: Helper for LPM meta data address from DT
->       arm: mach-k3: am62a7_init: Resume on LPM exit
->       arm: mach-k3: am62p5_init: Resume on LPM exit
->       arm: dts: k3-am62a: Add r5 device nodes
->       arm: dts: k3-am62p: Add r5 device nodes
->       configs: am62ax_evm_r5: Enable IODDR resume support
->       configs: am62p_evm_r5_defconfig: Enable IODDR resume support
-> 
->  arch/arm/dts/k3-am62a7-sk-u-boot.dtsi              |  16 ++
->  arch/arm/dts/k3-am62p5-sk-u-boot.dtsi              |  20 +++
->  arch/arm/mach-k3/Kconfig                           |   8 +
->  arch/arm/mach-k3/am62ax/am62a7_init.c              |  11 ++
->  arch/arm/mach-k3/am62px/am62p5_init.c              |  12 ++
->  arch/arm/mach-k3/am62x/am625_init.c                |   2 +
->  arch/arm/mach-k3/common.c                          | 162 ++++++++++++++++++++
->  arch/arm/mach-k3/common.h                          |   4 +
->  arch/arm/mach-k3/include/mach/hardware.h           |  32 ++++
->  configs/am62ax_evm_r5_defconfig                    |   1 +
->  configs/am62px_evm_r5_defconfig                    |   1 +
->  drivers/firmware/ti_sci.c                          |  38 +++++
->  drivers/firmware/ti_sci.h                          |  14 ++
->  drivers/ram/k3-ddrss/k3-ddrss.c                    | 165 +++++++++++++++++++++
->  dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts        |  12 ++
->  dts/upstream/src/arm64/ti/k3-am62-phycore-som.dtsi |   1 -
->  dts/upstream/src/arm64/ti/k3-am625-beagleplay.dts  |   1 -
->  dts/upstream/src/arm64/ti/k3-am62a-main.dtsi       |  12 ++
->  dts/upstream/src/arm64/ti/k3-am62a-mcu.dtsi        |  25 ++++
->  .../src/arm64/ti/k3-am62a-phycore-som.dtsi         |   1 -
->  dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi     |  25 ++++
->  dts/upstream/src/arm64/ti/k3-am62a7-sk.dts         | 139 ++++++++++++++++-
->  dts/upstream/src/arm64/ti/k3-am62p5-sk.dts         |  51 ++++++-
->  dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi  |  35 ++++-
->  dts/upstream/src/arm64/ti/k3-am642-evm.dts         |   1 -
->  dts/upstream/src/arm64/ti/k3-am654-base-board.dts  |   1 -
->  .../ti/k3-am6548-iot2050-advanced-common.dtsi      |   1 -
->  dts/upstream/src/arm64/ti/k3-am69-sk.dts           |   1 -
->  include/linux/soc/ti/ti_sci_protocol.h             |   9 ++
->  29 files changed, 774 insertions(+), 27 deletions(-)
-> ---
-> base-commit: 548d997229b7929bd7f0782415952d5a85eb7e64
-> change-id: 20250306-topic-am62-ioddr-v2025-04-rc1-0b3a0ffe92b1
-> 
-> Best regards,
-> -- 
-> Markus Schneider-Pargmann <msp@baylibre.com>
-> 
+diff --git a/net/lwip/eth_internal.h b/net/lwip/eth_internal.h
+deleted file mode 100644
+index 87561d5b214..00000000000
+--- a/net/lwip/eth_internal.h
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2001-2015
+- * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+- * Joe Hershberger, National Instruments
+- */
+-
+-#ifndef __ETH_INTERNAL_H
+-#define __ETH_INTERNAL_H
+-
+-/* Do init that is common to driver model and legacy networking */
+-void eth_common_init(void);
+-
+-/**
+- * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
+- *
+- * This sets up an environment variable with the given MAC address (@enetaddr).
+- * The environment variable to be set is defined by <@base_name><@index>addr.
+- * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
+- * eth1addr, etc.
+- *
+- * @base_name:	Base name for variable, typically "eth"
+- * @index:	Index of interface being updated (>=0)
+- * @enetaddr:	Pointer to MAC address to put into the variable
+- * Return: 0 if OK, other value on error
+- */
+-int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+-				  uchar *enetaddr);
+-
+-int eth_mac_skip(int index);
+-void eth_current_changed(void);
+-void eth_set_dev(struct udevice *dev);
+-void eth_set_current_to_next(void);
+-
+-#endif
+-- 
+2.43.0
+
