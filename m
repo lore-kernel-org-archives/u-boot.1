@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C900C71157
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:44:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77BBDC71136
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A9F882CCE;
-	Tue, 17 Jun 2025 12:44:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5983E82BCD;
+	Tue, 17 Jun 2025 12:44:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B00AB82BCD; Tue, 17 Jun 2025 12:44:22 +0200 (CEST)
+ id 409AB82C79; Tue, 17 Jun 2025 12:44:26 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 31C7782C79
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:44:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 04DD882BCD
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:44:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8B3C61596;
- Tue, 17 Jun 2025 03:43:58 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 614D91596;
+ Tue, 17 Jun 2025 03:44:02 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 60A1E3F58B;
- Tue, 17 Jun 2025 03:44:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 373B93F58B;
+ Tue, 17 Jun 2025 03:44:19 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -34,9 +34,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v5 4/7] lmb: use a single function to free up memory
-Date: Tue, 17 Jun 2025 16:13:43 +0530
-Message-Id: <20250617104346.1379981-5-sughosh.ganu@linaro.org>
+Subject: [PATCH v5 5/7] lmb: use a single function to check for allocation and
+ reservation requests
+Date: Tue, 17 Jun 2025 16:13:44 +0530
+Message-Id: <20250617104346.1379981-6-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250617104346.1379981-1-sughosh.ganu@linaro.org>
 References: <20250617104346.1379981-1-sughosh.ganu@linaro.org>
@@ -58,313 +59,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no need to have two separate API's for freeing up memory. Use
-a single API lmb_free() to achieve this.
+The functions that handle allocation requests check if a region of
+memory overlaps with a used region. This is done through
+lmb_overlaps_region(). Similar checks are done for reservation
+requests made to the LMB module, where the caller asks specifically
+for a particular region of memory. These checks are being done through
+lmb_can_reserve_region().
+
+There are subtle differences in the checking needed for allocation
+requests, as against reservation requests. In the former, it is only
+needed to be checked if a region is overlapping with an existing
+used region, and return as soon as an overlap is found. For
+reservation request checks, because U-Boot allows for re-use of in-use
+regions with a particular memory attribute, this check has to iterate
+through all the regions that might overlap with the requested region,
+and then check that the necessary conditions are met to allow for the
+overlap.
+
+Combine these two checks in a single function, lmb_overlap_checks() as
+both lmb_overlaps_region() and lmb_can_reserve_region() are pretty
+similar otherwise.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes since V4: None
 
- boot/image-fdt.c            |  2 +-
- cmd/load.c                  |  2 +-
- include/lmb.h               |  6 ++---
- lib/efi_loader/efi_memory.c |  6 ++---
- lib/lmb.c                   |  8 +-----
- test/lib/lmb.c              | 49 +++++++++++++++++++------------------
- 6 files changed, 33 insertions(+), 40 deletions(-)
+ lib/lmb.c | 84 +++++++++++++++++++++++++++----------------------------
+ 1 file changed, 42 insertions(+), 42 deletions(-)
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 2720ce6f6f3..97b6385ab7c 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -690,7 +690,7 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 
- 	/* Delete the old LMB reservation */
- 	if (CONFIG_IS_ENABLED(LMB) && lmb)
--		lmb_free(map_to_sysmem(blob), fdt_totalsize(blob));
-+		lmb_free(map_to_sysmem(blob), fdt_totalsize(blob), LMB_NONE);
- 
- 	ret = fdt_shrink_to_minimum(blob, 0);
- 	if (ret < 0)
-diff --git a/cmd/load.c b/cmd/load.c
-index a6e54fc668c..159767aa7f7 100644
---- a/cmd/load.c
-+++ b/cmd/load.c
-@@ -191,7 +191,7 @@ static ulong load_serial(long offset)
- 			dst = map_sysmem(dst_addr, binlen);
- 			memcpy(dst, binbuf, binlen);
- 			unmap_sysmem(dst);
--			lmb_free(dst_addr, binlen);
-+			lmb_free(dst_addr, binlen, LMB_NONE);
- 		    }
- 		    if ((store_addr) < start_addr)
- 			start_addr = store_addr;
-diff --git a/include/lmb.h b/include/lmb.h
-index aead799d555..5d5f037ccb9 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -142,16 +142,14 @@ phys_size_t lmb_get_free_size(phys_addr_t addr);
- int lmb_is_reserved_flags(phys_addr_t addr, int flags);
- 
- /**
-- * lmb_free_flags() - Free up a region of memory
-+ * lmb_free() - Free up a region of memory
-  * @base: Base Address of region to be freed
-  * @size: Size of the region to be freed
-  * @flags: Memory region attributes
-  *
-  * Return: 0 on success, negative error code on failure.
-  */
--long lmb_free_flags(phys_addr_t base, phys_size_t size, uint flags);
--
--long lmb_free(phys_addr_t base, phys_size_t size);
-+long lmb_free(phys_addr_t base, phys_size_t size, u32 flags);
- 
- void lmb_dump_all(void);
- void lmb_dump_all_force(void);
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 466f45c98b1..0828a47da61 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -508,7 +508,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 	ret = efi_update_memory_map(efi_addr, pages, memory_type, true, false);
- 	if (ret != EFI_SUCCESS) {
- 		/* Map would overlap, bail out */
--		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-+		lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
- 		unmap_sysmem((void *)(uintptr_t)efi_addr);
- 		return  EFI_OUT_OF_RESOURCES;
- 	}
-@@ -548,8 +548,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
- 	 * been mapped with map_sysmem() from efi_allocate_pages(). Convert
- 	 * it back to an address LMB understands
- 	 */
--	status = lmb_free_flags(map_to_sysmem((void *)(uintptr_t)memory), len,
--				LMB_NOOVERWRITE);
-+	status = lmb_free(map_to_sysmem((void *)(uintptr_t)memory), len,
-+			  LMB_NOOVERWRITE);
- 	if (status)
- 		return EFI_NOT_FOUND;
- 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 3265fad317d..4af8dae4359 100644
+index 4af8dae4359..45b26512a5b 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -655,8 +655,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
- 	return lmb_map_update_notify(base, size, LMB_MAP_OP_ADD, LMB_NONE);
+@@ -317,8 +317,34 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 				    rgn[i].flags);
  }
  
--long lmb_free_flags(phys_addr_t base, phys_size_t size,
--		    uint flags)
-+long lmb_free(phys_addr_t base, phys_size_t size, u32 flags)
+-static long lmb_overlaps_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+-				phys_size_t size)
++/**
++ * lmb_overlap_checks() - perform checks to see if region can be allocated or reserved
++ * @lmb_rgn_lst: list of LMB regions
++ * @base: base address of region to be checked
++ * @size: size of region to be checked
++ * @flags: flag of the region to be checked (only for reservation requests)
++ * @alloc: if checks are to be done for allocation or reservation request
++ *
++ * Check if the region passed to the function overlaps with any one of
++ * the regions of the passed lmb region list.
++ *
++ * If the @alloc flag is set to true, this check stops as soon an
++ * overlapping region is found. The function can also be called to
++ * check if a reservation request can be satisfied, by setting
++ * @alloc to false. In that case, the function then iterates through
++ * all the regions in the list passed to ensure that the requested
++ * region does not overlap with any existing regions. An overlap is
++ * allowed only when the flag of the requested region and the existing
++ * region is LMB_NONE.
++ *
++ * Return: index of the overlapping region, -1 if no overlap is found
++ *
++ * When the function is called for a reservation request check, -1 will
++ * also be returned when there is an allowed overlap, i.e. requested
++ * region and existing regions have flags as LMB_NONE.
++ */
++static long lmb_overlap_checks(struct alist *lmb_rgn_lst, phys_addr_t base,
++			       phys_size_t size, u32 flags, bool alloc)
  {
- 	long ret;
+ 	unsigned long i;
+ 	struct lmb_region *rgn = lmb_rgn_lst->data;
+@@ -326,9 +352,12 @@ static long lmb_overlaps_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 	for (i = 0; i < lmb_rgn_lst->count; i++) {
+ 		phys_addr_t rgnbase = rgn[i].base;
+ 		phys_size_t rgnsize = rgn[i].size;
++		u32 rgnflags = rgn[i].flags;
  
-@@ -667,11 +666,6 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
- 	return lmb_map_update_notify(base, size, LMB_MAP_OP_FREE, flags);
+-		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
+-			break;
++		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
++			if (alloc || flags != LMB_NONE || flags != rgnflags)
++				break;
++		}
+ 	}
+ 
+ 	return (i < lmb_rgn_lst->count) ? i : -1;
+@@ -390,7 +419,8 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align)
+ 		base = ALIGN_DOWN(lmbbase + lmbsize - size, align);
+ 
+ 		while (base && lmbbase <= base) {
+-			rgn = lmb_overlaps_region(&io_lmb->used_mem, base, size);
++			rgn = lmb_overlap_checks(&io_lmb->used_mem, base, size,
++						 LMB_NOOVERWRITE, true);
+ 			if (rgn < 0) {
+ 				/* This area isn't reserved, take it */
+ 				if (lmb_add_region_flags(&io_lmb->used_mem, base,
+@@ -488,45 +518,12 @@ void lmb_dump_all(void)
+ #endif
  }
  
--long lmb_free(phys_addr_t base, phys_size_t size)
+-/**
+- * lmb_can_reserve_region() - check if the region can be reserved
+- * @base: base address of region to be reserved
+- * @size: size of region to be reserved
+- * @flags: flag of the region to be reserved
+- *
+- * Go through all the reserved regions and ensure that the requested
+- * region does not overlap with any existing regions. An overlap is
+- * allowed only when the flag of the request region and the existing
+- * region is LMB_NONE.
+- *
+- * Return: true if region can be reserved, false otherwise
+- */
+-static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
+-				   u32 flags)
 -{
--	return lmb_free_flags(base, size, LMB_NONE);
+-	uint i;
+-	struct lmb_region *lmb_reserved = lmb.used_mem.data;
+-
+-	for (i = 0; i < lmb.used_mem.count; i++) {
+-		u32 rgnflags = lmb_reserved[i].flags;
+-		phys_addr_t rgnbase = lmb_reserved[i].base;
+-		phys_size_t rgnsize = lmb_reserved[i].size;
+-
+-		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+-			if (flags != LMB_NONE || flags != rgnflags)
+-				return false;
+-		}
+-	}
+-
+-	return true;
 -}
 -
- static int _lmb_alloc_base(phys_size_t size, ulong align,
- 			   phys_addr_t *addr, u32 flags)
+ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
  {
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index d8eab96527a..b6259bef442 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -182,7 +182,7 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 8, 0, 0);
+ 	long ret = 0;
+ 	struct alist *lmb_rgn_lst = &lmb.used_mem;
  
--	ret = lmb_free(a, 4);
-+	ret = lmb_free(a, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 4, 0, 0);
-@@ -191,12 +191,12 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 	ut_asserteq(a, a2);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 8, 0, 0);
--	ret = lmb_free(a2, 4);
-+	ret = lmb_free(a2, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 4, 0, 0);
+-	if (!lmb_can_reserve_region(base, size, flags))
++	if (lmb_overlap_checks(lmb_rgn_lst, base, size, flags, false) != -1)
+ 		return -EEXIST;
  
--	ret = lmb_free(b, 4);
-+	ret = lmb_free(b, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 3,
- 		   alloc_64k_addr - 8, 4, alloc_64k_addr, 0x10000,
-@@ -206,17 +206,17 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 	ut_asserteq(b, b2);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 4, 0, 0);
--	ret = lmb_free(b2, 4);
-+	ret = lmb_free(b2, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 3,
- 		   alloc_64k_addr - 8, 4, alloc_64k_addr, 0x10000,
- 		   ram_end - 8, 4);
+ 	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
+@@ -698,7 +695,8 @@ static int _lmb_alloc_base(phys_size_t size, ulong align,
+ 		}
  
--	ret = lmb_free(c, 4);
-+	ret = lmb_free(c, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 4, alloc_64k_addr, 0x10000, 0, 0);
--	ret = lmb_free(d, 4);
-+	ret = lmb_free(d, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 1, alloc_64k_addr, 0x10000,
- 		   0, 0, 0, 0);
-@@ -320,7 +320,7 @@ static int test_bigblock(struct unit_test_state *uts, const phys_addr_t ram)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, a,
- 		   big_block_size + 0x10000, 0, 0, 0, 0);
+ 		while (base && lmbbase <= base) {
+-			rgn = lmb_overlaps_region(&lmb.used_mem, base, size);
++			rgn = lmb_overlap_checks(&lmb.used_mem, base, size,
++						 LMB_NOOVERWRITE, true);
+ 			if (rgn < 0) {
+ 				/* This area isn't reserved, take it */
+ 				if (lmb_add_region_flags(&lmb.used_mem, base,
+@@ -733,7 +731,8 @@ static int _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
+ 	struct lmb_region *lmb_memory = lmb.available_mem.data;
  
--	ret = lmb_free(a, big_block_size);
-+	ret = lmb_free(a, big_block_size, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, alloc_64k_addr, 0x10000,
- 		   0, 0, 0, 0);
-@@ -392,12 +392,12 @@ static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
- 			   - alloc_size_aligned, alloc_size, 0, 0);
- 	}
- 	/* and free them */
--	ret = lmb_free(b, alloc_size);
-+	ret = lmb_free(b, alloc_size, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1,
- 		   ram + ram_size - alloc_size_aligned,
- 		   alloc_size, 0, 0, 0, 0);
--	ret = lmb_free(a, alloc_size);
-+	ret = lmb_free(a, alloc_size, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 0, 0, 0, 0, 0, 0, 0);
+ 	/* Check if the requested address is in one of the memory regions */
+-	rgn = lmb_overlaps_region(&lmb.available_mem, base, size);
++	rgn = lmb_overlap_checks(&lmb.available_mem, base, size,
++				 LMB_NOOVERWRITE, true);
+ 	if (rgn >= 0) {
+ 		/*
+ 		 * Check if the requested end address is in the same memory
+@@ -786,7 +785,8 @@ phys_size_t lmb_get_free_size(phys_addr_t addr)
+ 	struct lmb_region *lmb_memory = lmb.available_mem.data;
  
-@@ -408,7 +408,7 @@ static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
- 		   ram + ram_size - alloc_size_aligned,
- 		   alloc_size, 0, 0, 0, 0);
- 	/* and free it */
--	ret = lmb_free(b, alloc_size);
-+	ret = lmb_free(b, alloc_size, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 0, 0, 0, 0, 0, 0, 0);
- 
-@@ -476,12 +476,12 @@ static int lib_test_lmb_at_0(struct unit_test_state *uts)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, a, ram_size - 4,
- 		   0, 0, 0, 0);
- 	/* check that this was an error by freeing b */
--	ret = lmb_free(b, 4);
-+	ret = lmb_free(b, 4, LMB_NONE);
- 	ut_asserteq(ret, -1);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, a, ram_size - 4,
- 		   0, 0, 0, 0);
- 
--	ret = lmb_free(a, ram_size - 4);
-+	ret = lmb_free(a, ram_size - 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 0, 0, 0, 0, 0, 0, 0);
- 
-@@ -612,7 +612,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ut_asserteq(b, 0);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x2000, LMB_NONE);
- 	ut_asserteq(b, 0);
--	ret = lmb_free(alloc_addr_a, 0x2000);
-+	ret = lmb_free(alloc_addr_a, 0x2000, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
- 	ut_asserteq(b, 0);
-@@ -620,7 +620,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ut_asserteq(b, -EEXIST);
- 	b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
- 	ut_asserteq(b, -EEXIST);
--	ret = lmb_free(alloc_addr_a, 0x1000);
-+	ret = lmb_free(alloc_addr_a, 0x1000, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 
- 	/*
-@@ -642,9 +642,9 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, alloc_addr_a, 0x1000,
- 		   alloc_addr_a + 0x4000, 0x1000, 0, 0);
- 
--	ret = lmb_free(alloc_addr_a, 0x1000);
-+	ret = lmb_free(alloc_addr_a, 0x1000, LMB_NONE);
- 	ut_asserteq(ret, 0);
--	ret = lmb_free(alloc_addr_a + 0x4000, 0x1000);
-+	ret = lmb_free(alloc_addr_a + 0x4000, 0x1000, LMB_NOOVERWRITE);
- 	ut_asserteq(ret, 0);
- 
- 	/*
-@@ -667,7 +667,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, alloc_addr_a, 0x6000,
- 		   0, 0, 0, 0);
- 
--	ret = lmb_free(alloc_addr_a, 0x6000);
-+	ret = lmb_free(alloc_addr_a, 0x6000, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 
- 	/*
-@@ -689,9 +689,9 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, alloc_addr_a, 0x1000,
- 		   alloc_addr_a + 0x4000, 0x1000, 0, 0);
- 
--	ret = lmb_free(alloc_addr_a, 0x1000);
-+	ret = lmb_free(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
- 	ut_asserteq(ret, 0);
--	ret = lmb_free(alloc_addr_a + 0x4000, 0x1000);
-+	ret = lmb_free(alloc_addr_a + 0x4000, 0x1000, LMB_NOOVERWRITE);
- 	ut_asserteq(ret, 0);
- 
- 	/*  reserve 3 blocks */
-@@ -732,7 +732,8 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 		   0, 0, 0, 0);
- 
- 	/* free thge allocation from d */
--	ret = lmb_free(alloc_addr_c + 0x10000, ram_end - alloc_addr_c - 0x10000);
-+	ret = lmb_free(alloc_addr_c + 0x10000, ram_end - alloc_addr_c - 0x10000,
-+		       LMB_NONE);
- 	ut_asserteq(ret, 0);
- 
- 	/* allocate at 3 points in free range */
-@@ -741,7 +742,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ut_asserteq(d, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, ram, 0x18010000,
- 		   ram_end - 4, 4, 0, 0);
--	ret = lmb_free(ram_end - 4, 4);
-+	ret = lmb_free(ram_end - 4, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
- 		   0, 0, 0, 0);
-@@ -750,7 +751,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ut_asserteq(d, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, ram, 0x18010000,
- 		   ram_end - 128, 4, 0, 0);
--	ret = lmb_free(ram_end - 128, 4);
-+	ret = lmb_free(ram_end - 128, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
- 		   0, 0, 0, 0);
-@@ -759,13 +760,13 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ut_asserteq(d, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010004,
- 		   0, 0, 0, 0);
--	ret = lmb_free(alloc_addr_c + 0x10000, 4);
-+	ret = lmb_free(alloc_addr_c + 0x10000, 4, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
- 		   0, 0, 0, 0);
- 
- 	/* allocate at the bottom a was assigned to ram at the top */
--	ret = lmb_free(ram, alloc_addr_a - ram);
-+	ret = lmb_free(ram, alloc_addr_a - ram, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram + 0x8000000,
- 		   0x10010000, 0, 0, 0, 0);
+ 	/* check if the requested address is in the memory regions */
+-	rgn = lmb_overlaps_region(&lmb.available_mem, addr, 1);
++	rgn = lmb_overlap_checks(&lmb.available_mem, addr, 1, LMB_NOOVERWRITE,
++				 true);
+ 	if (rgn >= 0) {
+ 		for (i = 0; i < lmb.used_mem.count; i++) {
+ 			if (addr < lmb_used[i].base) {
 -- 
 2.34.1
 
