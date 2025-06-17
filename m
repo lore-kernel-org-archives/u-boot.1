@@ -4,86 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E7BC71155
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 06:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3074FC7114A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 07:09:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F327E80C83;
-	Tue, 17 Jun 2025 08:39:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54A2D80C83;
+	Tue, 17 Jun 2025 09:09:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LZlA6mdw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lS8dSV+t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2118F81E18; Tue, 17 Jun 2025 08:39:30 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id EF4A681E18; Tue, 17 Jun 2025 09:09:07 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338108070C
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 08:39:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ADEA8070C
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 09:09:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-6099d89a19cso199739a12.2
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 23:39:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3a54700a463so316383f8f.1
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 00:09:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750142367; x=1750747167; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fcCasylUYnZlNWRk+7T8JcDpJopx7vfTjQhHnmU0Xmo=;
- b=LZlA6mdw++rDTMONjFoKeAL/aYv3VoljFfdh8e1AkW1w2LWo777krTZcKxa2QdPpbf
- R3GLQCEWk8pjQqDkbHtD+PLAzlw2b2KCLvFnaEvkbE8LEuEZe8lIQ97UAjYwsjuMK8HI
- JZQNG+kqulOACfyDuhhs/lnp1hMR534Xa3kDYyB7T67ZoHQlHKU22bm6plX5p7XjWNwv
- JTyuRCmDk1XioqmJp1V8F0PeGFNdksuftiqBkxzoYVBGApCg1LhFGx8+sQ0j4Xh1zkzs
- J/oM/KDCswjgA92KW0ti6u/JT4TxxvqkPkbRGqThbcpPTGvjd+Wef73U2fwqDstpyp3y
- 05yQ==
+ d=linaro.org; s=google; t=1750144142; x=1750748942; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hwgQrU4PXy58mxxVAeEz5jhFEzvB2P7b/O48ZHhD3EI=;
+ b=lS8dSV+tgOLvjLKKZpz15v/i1mJvzXbIEhafBLUJV+zsQsmxWoG/jfnUQPQ+8V2Y9i
+ Uz5g1Q/sBzT1CucrMq/JJqJXxwNUZvja/eJ38gwbyxLFFbyEr34a2s8oRpIEeXtQ7oTJ
+ +7WIzNRcxe5BmOmw7/66MOulNHCDtIlL9lOcsSUkApuYmUfnfEFGt6s9/hQm1L1jIP90
+ 3vXi3xg0YFDDp719reulGmJx6rJly+ipcNiRr8Een2lxF530Tj1g2n+ahCiVx3112q26
+ MVyXYb93QPNQrNEftfjh7qgr752IFluFxPXzgESA8DS/h5trx98NZuWdvGXba+E+1XU7
+ lsYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750142367; x=1750747167;
- h=in-reply-to:references:to:from:subject:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=fcCasylUYnZlNWRk+7T8JcDpJopx7vfTjQhHnmU0Xmo=;
- b=CzlA37Uf+rfg2WtQl1QPri64E+Y8sb9jYvLxeUzTWreuFuqFwM/ka5RhbHnHAt4IVo
- K6LxwmMhTdEtGTCEw0+HeuDs/lNUFPD86ACmuxA/T0FJGHoELQpj07hNjakcCr55uXQa
- JrodsUomHyz6l/Ab/AypblH2m9qs19vZAk1rjmcyOoiMq/AIbBuFHtBqrVoveyLxhUN9
- BUlBjuOa/T89a4p9WFvCBzZ/6WlwpA0aZfRwSFM3GTjN5swx58wWYlnSNPKm64xhl/+u
- ruM5Wf00EduVsay06eOYhhP5iIzEgOfqM3n4IchAi8vfYZUPbuHSLgNbyurTG6nXmdTS
- RTBA==
+ d=1e100.net; s=20230601; t=1750144142; x=1750748942;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hwgQrU4PXy58mxxVAeEz5jhFEzvB2P7b/O48ZHhD3EI=;
+ b=tjUb6hazi+RLDKhchlB/TgJzCdUrmhgf/ON80RcRmmJBaL3dMtfipNOE/heanfIhIb
+ JY92QKCMLaTAxEjj69TtbT8ClLR8r2/R0bPmOX8C74GWDD0fDK37KSj+20PkTxlmzHBm
+ z95ZttjVs4z/rYeuQrf5b/31AiTvD/H2yEfAaDSWF9FfcGGceKRoDfTMBfm6od9mS/eG
+ yb39xuRV+77IyF/b4B+buOUyu2EIX3vlSkRl873DCn2ti3nHSyV2ReqgAOWmpikbWqkO
+ iuyl4TKZcmRC8GH4cr+e+dRlcs6Rm+8Se28MW6JRy5BgNwViBA0J9/luJNoqIvm1ZU30
+ x/ag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4eeqHqLCr9Ipk7luDHUzVwXVsqLqXZYocr7ugI3w7RgHdpyrKzU/lIsc1h5C8nN7lhbP8LvU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQncO/ZBc9poz/O3cG5d40bM9iw/KzF8QRbiPF/0ptVK9YtRic
- Imqz9cgChEKIfyZ0P0bS8A1r7KolOBHWDUIf5YnDzVBN2ilSRUefCk0nBTl8QBox66Q=
-X-Gm-Gg: ASbGncvi1JlCKU+Dt3X0emn5EWlyaoHGAaRc5XErmNjWGIY26nGqje8Ev8a5sG5cEmq
- wRRMsmMdD54xeLzURbLPoRysOad31y2uxreNaCgi7Er+NeYijKlImUTBiiMhzB67g7qhRWJBkox
- xLBLbm9d6nFElE6ft8S51ztvXC8P8QNkSTKORwww2BQdG/bEjjNAEkftKrvHBw/NuZmSGxIyj/J
- yu24aySLI+WGuX2etBe8nWrYVlDRzMKdof4gVh8BRHyMDyEKUZ4iK2vo8WaWBDa5mr3EQCoud8b
- kZsPXUKH02hmHa/XQdP35PxOOF88O5e6lgVt1lORTpeNh+71ceSxnWjNRO7uwIWCzQj/1zBWlPl
- y/9/A5FKqBpJk0ITHwKr9Mdz1
-X-Google-Smtp-Source: AGHT+IF1Y2mX848jIpYvIknBbO2XdxhX/hlVvzO7PGKFrAdvfzX+6uLdKvo+hBTCPUaJkNyWYQqaEQ==
-X-Received: by 2002:a17:906:fe49:b0:adb:335b:decb with SMTP id
- a640c23a62f3a-adfad318002mr1063369666b.24.1750142367611; 
- Mon, 16 Jun 2025 23:39:27 -0700 (PDT)
-Received: from localhost (ppp089210105145.access.hol.gr. [89.210.105.145])
+ AJvYcCXToE/TDJ8Cn5HtVE/BjMKgAlzLXUat+/w+HPy5GOpAOKHKLB+nRjwucxgp2lAzkO0S+fLu7BA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMX/hQQobiVq17cKxieYTIJX5yfZyrYw+1sGMZSVsdgtsduSbn
+ BpBsSBU/RxFIP9gJ9LOZdSfTlQ+yc1Dwj+nxGf0yU0bJTM8lJd8mudwRNzD+vsCIjpE=
+X-Gm-Gg: ASbGncs0juRogktKIfn1LqnjM/EErxBA0Epycg4EW3Djt5T3GylioXVHRTMMD0QaAMf
+ OeCXy7m0pRfdoRJeRS6aORvDXD1uv7H+UXt0rHXqVVg+58ulRPeolfyGA30tZvRyIEtXvqIlMRn
+ LCHzmQUqkminvEILQVyEp4nxE6Ai5t23B+LzQcKdOMUAmrpp/ydaI8MTKQoWBYH7Nzc6niQBhO0
+ 3tZl4Z+zrYj19JfvvhKRgtyEROsefJEf/EEsvlCZC074YsXX7XGj5CuZYnwoJYUK9PVBk/aFV1Z
+ z7XiAs1KITqqFP2ZjPaIjzjAUobx4fspUgnUx2epcZOg1kmDmAy0i/49i4K+Hnn8aJxNYeEc84l
+ vsMwEsqdmIqgzJtvVNfCIj+Joff5a3QthZPlkYrSwTQ==
+X-Google-Smtp-Source: AGHT+IGhWrJlTQgoXtQ+8C45UUA/HIslaHfcPs6vK7GPKsS9cvaMhzV4hg/uWHuQKcj5w9wHv1LAhw==
+X-Received: by 2002:a05:6000:310f:b0:3a4:e231:8632 with SMTP id
+ ffacd0b85a97d-3a57239587bmr9222386f8f.12.1750144142205; 
+ Tue, 17 Jun 2025 00:09:02 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:fab8:6e00:5653:6566?
+ ([2a01:e0a:3cb:7bb0:fab8:6e00:5653:6566])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec88ff1a1sm791655666b.89.2025.06.16.23.39.26
+ ffacd0b85a97d-3a568a73845sm13286816f8f.35.2025.06.17.00.09.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Jun 2025 23:39:27 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+ Tue, 17 Jun 2025 00:09:01 -0700 (PDT)
+Message-ID: <9df8e773-92f8-4594-b45f-4d62f0521e46@linaro.org>
+Date: Tue, 17 Jun 2025 09:09:00 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
+ rx
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, u-boot@lists.denx.de,
+ Anatolij Gustschin <agust@denx.de>
+References: <20250530153826.1057407-1-tharvey@gateworks.com>
+ <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
+ <CAJ+vNU2UfSVHvo=_HsCKbWH5AFsYV=SnVGru4ZBWHrGnAVBcRw@mail.gmail.com>
+ <CAJ+vNU2trStWN_7jG5OxvvKtodz=qq9JVMaYHPWdpzUDJYiU=Q@mail.gmail.com>
+ <63e2718b-81f8-4f2b-9d23-73d53a26b358@linaro.org>
+ <CAJ+vNU2-iaDxsPYkkNC1P=OREj2c9FxNuRZrajYiT4TDnuh9Hg@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAJ+vNU2-iaDxsPYkkNC1P=OREj2c9FxNuRZrajYiT4TDnuh9Hg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Date: Tue, 17 Jun 2025 09:39:25 +0300
-Message-Id: <DAOLOVHXW7MX.LAIVDE0UN7GN@linaro.org>
-Subject: Re: [PATCH] disable VBE by default
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Peter Robinson" <pbrobinson@gmail.com>, "Tom Rini"
- <trini@konsulko.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.20.0
-References: <20250615093344.159920-1-pbrobinson@gmail.com>
-In-Reply-To: <20250615093344.159920-1-pbrobinson@gmail.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,32 +113,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun Jun 15, 2025 at 12:33 PM EEST, Peter Robinson wrote:
-> The VBE protocol needs explicit device support and as
-> such isn't particularly useful by itself without that,
-> it also adds size and the potential of an attack vector
-> so devices that wish to use this protocol should
-> explicitly opt in to it like all other large features
-> in U-Boot.
->
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-> ---
->  boot/Kconfig | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 30eb5b328d7..e8c3fbcb11d 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -635,7 +635,6 @@ config BOOTMETH_QFW
->  config BOOTMETH_VBE
->  	bool "Bootdev support for Verified Boot for Embedded"
->  	depends on FIT
-> -	default y
->  	select BOOTMETH_GLOBAL
->  	select EVENT
->  	help
+On 6/16/25 19:37, Tim Harvey wrote:
+> On Mon, Jun 16, 2025 at 12:18 AM Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>>
+>>
+>> On 6/9/25 19:35, Tim Harvey wrote:
+>>> On Tue, Jun 3, 2025 at 5:04 PM Tim Harvey <tharvey@gateworks.com> wrote:
+>>>>
+>>>> On Sun, Jun 1, 2025 at 2:07 PM Heinrich Schuchardt
+>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>
+>>>>> On 5/30/25 17:38, Tim Harvey wrote:
+>>>>>> Call schedule() in net_lwip_rx() to service U-Boot tasks and
+>>>>>> actions during packet rx.
+>>>>>>
+>>>>>> As a cleanup also move sys_check_timeouts() here and remove it from the
+>>>>>> functions that call net_lwip_rx().
+>>>>>>
+>>>>>> This resolves the issue of an active watchdog resetting the board on
+>>>>>> long network activities.
+>>>>>>
+>>>>>> Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>>>>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+>>>>>> ---
+>>>>>> v2:
+>>>>>>   - remove duplication of sys_check_timeouts() from functions that call
+>>>>>>     net_lwip_rx()
+>>>>>> ---
+>>>>>>   net/lwip/dhcp.c     | 1 -
+>>>>>>   net/lwip/dns.c      | 1 -
+>>>>>>   net/lwip/net-lwip.c | 7 +++++++
+>>>>>>   net/lwip/ping.c     | 1 -
+>>>>>>   net/lwip/tftp.c     | 1 -
+>>>>>>   net/lwip/wget.c     | 1 -
+>>>>>>   6 files changed, 7 insertions(+), 5 deletions(-)
+>>>>>>
+>>>>>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+>>>>>> index 92bd7067a7fb..b79b746db390 100644
+>>>>>> --- a/net/lwip/dhcp.c
+>>>>>> +++ b/net/lwip/dhcp.c
+>>>>>> @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
+>>>>>>       /* Wait for DHCP to complete */
+>>>>>>       do {
+>>>>>>               net_lwip_rx(udev, netif);
+>>>>>> -             sys_check_timeouts();
+>>>>>>               bound = dhcp_supplied_address(netif);
+>>>>>>               if (bound)
+>>>>>>                       break;
+>>>>>> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+>>>>>> index 19172ac959ac..738f8bf3196b 100644
+>>>>>> --- a/net/lwip/dns.c
+>>>>>> +++ b/net/lwip/dns.c
+>>>>>> @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
+>>>>>>                       net_lwip_rx(udev, netif);
+>>>>>>                       if (dns_cb_arg.done)
+>>>>>>                               break;
+>>>>>> -                     sys_check_timeouts();
+>>>>>>                       if (ctrlc()) {
+>>>>>>                               printf("\nAbort\n");
+>>>>>>                               break;
+>>>>>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+>>>>>> index f05c4cd3f64f..e8d4cc542ed8 100644
+>>>>>> --- a/net/lwip/net-lwip.c
+>>>>>> +++ b/net/lwip/net-lwip.c
+>>>>>> @@ -13,8 +13,10 @@
+>>>>>>   #include <lwip/etharp.h>
+>>>>>>   #include <lwip/init.h>
+>>>>>>   #include <lwip/prot/etharp.h>
+>>>>>> +#include <lwip/timeouts.h>
+>>>>>>   #include <net.h>
+>>>>>>   #include <timer.h>
+>>>>>> +#include <u-boot/schedule.h>
+>>>>>>
+>>>>>>   /* xx:xx:xx:xx:xx:xx\0 */
+>>>>>>   #define MAC_ADDR_STRLEN 18
+>>>>>> @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+>>>>>>       int len;
+>>>>>>       int i;
+>>>>>>
+>>>>>> +     /* lwIP timers */
+>>>>>> +     sys_check_timeouts();
+>>>>>> +     /* Other tasks and actions */
+>>>>>> +     schedule(
+>>>>>
+>>>>> Some scheduled tasks have a long duration, specifically video_sync_all()
+>>>>> called via video_idle(). This change will lead to lost packages.
+>>>>>
+>>>>>
+>>>>> @Tom, Simon
+>>>>>
+>>>>> The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule()
+>>>>> instead of WATCHDOG_RESET()"). This added schedule() calls to EFI
+>>>>> networking. Package losses can expected if schedule() takes more than 1
+>>>>> µs. This is much shorter than the time needed for synchronizing a 1 MiB
+>>>>> frame buffer. The cyclic framework was explicitly meant for short
+>>>>> duration function calls, not for long duration tasks like syncing the
+>>>>> video frame buffer.
+>>>>>
+>>>>>
+>>>>> I think we should remove video_idle() from the cyclic framework.
+>>>>> video_sync_all() should only be triggered if there is video output.
+>>>>>
+>>>>
+>>>> Hi Heinrich,
+>>>>
+>>>> It makes sense what you are saying but I don't have the hardware to
+>>>> test your scenario. Can you submit a patch for discussion with a fixes
+>>>> tag?
+>>>
+>>> Gentle ping here.
+>>>
+>>> Can we get some discussion on the point Heinrich brings up about
+>>> video_idle in cyclic? Without my patch here which this discussion is
+>>> blocking, large lwIP network transfers are quite broken on boards with
+>>> watchdogs.
+>>
+>> Another option might be to increase the watchdog timeout?
+>>
+> Hi Jerome,
+> 
+> I don't think that makes much sense. Long transfers for compressed
+> disk images can take minutes sometimes. It doesn't make sense to not
+> call any cyclic's in that timeframe.
 
+Sorry I wasn't clear and I was mistaken.  I was not suggesting not to
+call schedule() in the network receive loop, I was responding to the
+fact that schedule()->video_idle()->video_sync_all() can take a long
+time. I thought this would in turn cause issues with watchdogs (hence
+my question if the watchdog can be adjusted), while in fact the issue
+is packet loss. So please ignore my comment ;)
+Not using the cyclic framework for this video thing is probably the
+right thing to do I guess.
+
+> Additionally its possible some
+> older less capable watchdogs don't have that much flexibility in
+> timeouts.
+> 
+> What Heinrich points out here seems valid but I'm not familiar with
+> the video framework to work up a patch.
+
+Yeah, same.
+
+Thanks,
+-- 
+Jerome
+> Best Regards,
+> 
+> Tim
