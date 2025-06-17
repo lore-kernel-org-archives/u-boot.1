@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64976C71136
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 12:33:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5FCC71157
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 12:36:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C390082BA1;
-	Tue, 17 Jun 2025 14:33:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6EF6482BA1;
+	Tue, 17 Jun 2025 14:36:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PZUo9gAR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D4Bl+zTJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DEF382BCD; Tue, 17 Jun 2025 14:33:31 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 90F1782BCD; Tue, 17 Jun 2025 14:36:40 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C28082977
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 14:33:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A21CB82B20
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 14:36:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-23633a6ac50so80428765ad.2
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 05:33:28 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-551fc6d4a76so5508430e87.0
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 05:36:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750163607; x=1750768407; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gIIyZHr+9RsDFmxHGEN0RPKXRXHMoYd/0G/iy5Z8Z1k=;
- b=PZUo9gARgrLrUZuqDlD49IF9xvqzNwTzASYObaEKgUjDKKl4UsZ2rnyf80HcXs3QEz
- SNflPZPEE+j7Zo5tRiNjauMc++jO86QA6KwoAqYRDCW0ckpfGiFdAQxRz7NQXtbE+5EZ
- a2KW6KM4wwWB8Vjhs+h3iN3KWHdGzxpmvQ0QX3c5Jn8+koW7jn5ZjdFS/hlK0VZabLHJ
- q0RUq26daEZ3fAS1OGaaMsMFB3lVnyjWAydAv8yTsWevsYNwgFVQ5zFmZTqM8W/wLB0u
- X06DdrdLhOdOPvVswVOc/ZpJUbfH4NSzyYgph2K0jJDwZB1aQxV866+rwWrNHqjM4umH
- kvvw==
+ d=gmail.com; s=20230601; t=1750163798; x=1750768598; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mrRWz1HCLHUC+ljRlaxPOgOa9mZW8RwMxLYF/z6fcpo=;
+ b=D4Bl+zTJD4bt8LEbjv926knH1vL4xQgNpgkIGO1uzQrlXVsOCM5dnmk0uQ6IJsaEzx
+ xv9UOucJy6Eufz+pD7I4xlKOTJ4kqofWFqJdu/9KPdiXYkyRwAS7ollq7lvqhwBWAClJ
+ KhshUpFK010ldcfmkaO1nqOxssF6W2uCPdNyKmA0mEsu0OvD1+hF+dI0v9itvYJHkObi
+ iStLNzhedkvL+HQeQNrwaM0KNs3IQn3zEBjvl66vVblEU/+i+L23mbAJrFhzJ2iYCyRz
+ wQoXpuvL6xkrnLByLwef6gkpIsbfIlA/r/9a9z2gr3Ti+vpAd1GqXI7efBzokDnQjRfQ
+ gSgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750163607; x=1750768407;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gIIyZHr+9RsDFmxHGEN0RPKXRXHMoYd/0G/iy5Z8Z1k=;
- b=pMtLaJAAcOGOeM5+eV+gyL20kzT4m1jd2UnENOzGvkWoYWdhpsq3XH2r1NfNEGG+o8
- hUx1JoWBFSdmL1Ov5BZtQZ78/xkuDVUvoLbSQI2erJidbxThgTbu5O53+Qhm8u8Gdviq
- B+WjNKRunOvkwWKsL0hvWlGNtxYdy0sm2OOM9qkDm2dCD1170j9fvJDci6jPW7NARdLd
- xKk8Q9k3Yurz86/SRb2smcGJwcJD/yXQxCjOwOoEYs5wXzU6EH4GR6eRMt2mtPAV6bJS
- RmmhBazbTsttW9AEK2t4VzNz/eokrIAuzm2CDXrsa+QnKSSnQYoLy+UyxKrWM0q1OVMx
- jIDA==
-X-Gm-Message-State: AOJu0Yz6MX9Duy4tJNs5lYb5WY9ANvHEG1rTkz+Yvt3Hz/nq8qNnxAtH
- aYZRt2oUEqE4VoB5luWKN8oYoSK8MYC9ccxlm8GZa417OVnzBMrdniJbVX9Rag==
-X-Gm-Gg: ASbGnct7wM2zWaQ4mAc7Jd7YT/lHJc/3oxGxi1SFXXONl4teTWskWuhMvHtKiK8ezJn
- P4v2Q2xn+hiri1oAmPXihgp31Bh2SQNXnZlslpNHJti2jlNsHvNI6Lhih/395KVOqg7r5FoLow+
- E0q153RZHLDROwG63TrCJllvL3SfTtZW30P964dinnFqVIvmEzwc6RJNuhjPPhn7eNq5s4IzL4U
- R8Q6eKUERi3rANP8mE5pJKxDn4r8aNby2tCkb0O1yUStTH3DI0SKzz42syRpr54SAk3amMXlm46
- +U1r7OhQLIH07T0+hwDJThyX8gJrF21c1VeKYEb+GmxWAjbGKDFuImfHgw==
-X-Google-Smtp-Source: AGHT+IHkmz8Pfwv5WW2xzn3jBWKprcrZWzPCnNIVW0iKgkWz9kK+2BJJzVoPtpda6zKTby2lwCVA+Q==
-X-Received: by 2002:a17:903:2983:b0:233:ab04:27a with SMTP id
- d9443c01a7336-2366b40ba84mr205079275ad.53.1750163606675; 
- Tue, 17 Jun 2025 05:33:26 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61::1000])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2365e0d22edsm78337615ad.240.2025.06.17.05.33.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 05:33:25 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-next-20250617
-Date: Tue, 17 Jun 2025 09:33:22 -0300
-Message-Id: <20250617123322.1020714-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1750163798; x=1750768598;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mrRWz1HCLHUC+ljRlaxPOgOa9mZW8RwMxLYF/z6fcpo=;
+ b=s21tqWcCdmWn6D8sIiTC/uUOrhJ/M+FpMZwbxGYWCzWICMpphs0VQnxnvYXnwINMXd
+ M8pp66ukwg2D0H2eJmvcOCfBeKXeCkUSuqDF65hLJTfWF7o8a5X7ECBubGh8d5T9a8tR
+ qbq+1n3YxRDE5OBZeyxqWIQIizyxjHGnastuLHSLDMU4QyGjWXM8vtnDNaam5YnGK/Qk
+ TXtgSe1dxQwHFO5wvfXRa6ZK9erWOshB5IPzivQAidleXGt87ttx/kITQUBTtMLuDwIc
+ CsicHe69mPh6FqAV/u8Gz7FTLlsvnY5wqb/TCYT7MC+Bi17pJ5ytrtOa3mmJ9/OGSt5K
+ k/fg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOeYSL1rYDApxbkxmtKms+nbZMI5pw+v/ygow9XWuroAUCblNJX9fLPqDjyWO93bV7geG/DWk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb4UqvXpEqp9n9I38z2SWZGDI8RUA2IHmGqKH5lahxzfedRzCt
+ tMd8y7cChfTGlrQXwBtGiVY37FKRg4HfY0XHXFOk0hNiGlZwhE143FblhOv234mfUBZ2yiee1+P
+ +D77rPbzPmCzUcNTomLM13q+Y4cLy/NE=
+X-Gm-Gg: ASbGnctz/bN30QRaoHq1QyzOZQZvl5FIift/+C3yJc9Wolrdb4s5MHW2j7AUzrGuygT
+ 3Tx6U8Ux4uFCyWX8lzaZAK09UHZUQHhLTM+RYzzfg2OoQoTLGm1/5ycgAAUpWAd8mWrDXFsnXXD
+ qAcTKlpM5Wc4VdvN9aZTF6qrMRGiajU5LKQYdd3kE3iKZaQGRXn9sMRJZt
+X-Google-Smtp-Source: AGHT+IGtnHJZ1a9QilN93cAqkBaidOAHhlAXZRhd0RCEwE8G6BD5smZIqC6HK8JCcAg2MkPOtAVW03a9DIQ8JryMyrM=
+X-Received: by 2002:a05:6512:b87:b0:553:2f8c:e615 with SMTP id
+ 2adb3069b0e04-553b6e7d4bcmr3136735e87.11.1750163797553; Tue, 17 Jun 2025
+ 05:36:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250606103838.1862928-1-lukma@denx.de>
+ <CAOMZO5DVh+YqspbbeupVJiE08Uv5rgcE920BQFVrk6ygbB8mng@mail.gmail.com>
+In-Reply-To: <CAOMZO5DVh+YqspbbeupVJiE08Uv5rgcE920BQFVrk6ygbB8mng@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 17 Jun 2025 09:36:25 -0300
+X-Gm-Features: AX0GCFtqzTUP_WWPQme1xkbxjjHaft4Bk3KFOdevesfVGLsPPe_TEWCMyFi7o4I
+Message-ID: <CAOMZO5A8KjAW4STh_ZjXn0hOAR4uDSxQHV1DOSW+Y80Sm9RL1A@mail.gmail.com>
+Subject: Re: [PATCH v4] ARM: imx: mxs: Add support for imx287 based BTT devices
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,62 +97,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, Jun 6, 2025 at 11:20=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> On Fri, Jun 6, 2025 at 7:39=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
+> >
+> > The btt[c3] devices are based on imx287 SoC.
+> >
+> > U-Boot SPL 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+> > Trying to boot from MMC1
+> >
+> > U-Boot 2025.04-01081-g07e086681d26 (Apr 16 2025 - 12:24:36 +0200)
+> >
+> > CPU:   Freescale i.MX28 rev1.2 at 454 MHz
+> > BOOT:  SSP SPI #3, master, 3V3 NOR
+> > Model: BTT3
+> > Board: LWE BTT SoM HW rev 0
+> > DRAM:  256 MiB
+> > Core:  86 devices, 15 uclasses, devicetree: separate
+> > MMC:   MXS MMC: 0
+> > Loading Environment from SPIFlash... SF: Detected is25lp128 with page
+> >                     size 256 Bytes, erase size 64 KiB, total 16 MiB
+> > OK
+> > In:    serial@80074000
+> > Out:   serial@80074000
+> > Err:   serial@80074000
+> > Net:   eth0: ethernet@800f0000
+> > Hit any key to stop autoboot:  0
+> >
+> > Signed-off-by: Lukasz Majewski <lukma@denx.de>
+>
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
 
-Please pull from u-boot-imx/next, thanks.
-
-The following changes since commit 9de873b4c3098c0662d4adaeb1cc31be4e6d2688:
-
-  Merge patch series "linux/bitfield.h: sync <linux/bitfield.h> from Linux 6.15 + winbond" (2025-06-14 09:13:39 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20250617
-
-for you to fetch changes up to 9d7f90782d0a768af76718e0cbc17c954d6731e5:
-
-  ARM: imx: mxs: Add support for imx287 based BTT devices (2025-06-16 14:40:27 -0300)
-
-u-boot-imx-next-20250617
-------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/26728
-
-- Add support for imx28 BTT boards.
-----------------------------------------------------------------
-Lukasz Majewski (1):
-      ARM: imx: mxs: Add support for imx287 based BTT devices
-
- arch/arm/dts/imx28-btt3-0-u-boot.dtsi |   7 +
- arch/arm/dts/imx28-btt3-1-u-boot.dtsi |   7 +
- arch/arm/dts/imx28-btt3-2-u-boot.dtsi |   7 +
- arch/arm/dts/imx28-btt3-u-boot.dtsi   |  90 +++++++
- arch/arm/mach-imx/mxs/Kconfig         |   6 +
- board/liebherr/btt/Kconfig            |  24 ++
- board/liebherr/btt/MAINTAINERS        |   6 +
- board/liebherr/btt/Makefile           |   9 +
- board/liebherr/btt/boot_img_scr.h     |  27 ++
- board/liebherr/btt/btt.c              | 451 ++++++++++++++++++++++++++++++++++
- board/liebherr/btt/btt.env            | 139 +++++++++++
- board/liebherr/btt/spl_btt.c          | 347 ++++++++++++++++++++++++++
- configs/imx28_btt3_defconfig          | 140 +++++++++++
- doc/board/index.rst                   |   1 +
- doc/board/liebherr/btt.rst            |  34 +++
- doc/board/liebherr/index.rst          |   9 +
- include/configs/btt.h                 |  18 ++
- 17 files changed, 1322 insertions(+)
- create mode 100644 arch/arm/dts/imx28-btt3-0-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-btt3-1-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-btt3-2-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-btt3-u-boot.dtsi
- create mode 100644 board/liebherr/btt/Kconfig
- create mode 100644 board/liebherr/btt/MAINTAINERS
- create mode 100644 board/liebherr/btt/Makefile
- create mode 100644 board/liebherr/btt/boot_img_scr.h
- create mode 100644 board/liebherr/btt/btt.c
- create mode 100644 board/liebherr/btt/btt.env
- create mode 100644 board/liebherr/btt/spl_btt.c
- create mode 100644 configs/imx28_btt3_defconfig
- create mode 100644 doc/board/liebherr/btt.rst
- create mode 100644 doc/board/liebherr/index.rst
- create mode 100644 include/configs/btt.h
+Applied to u-boot/imx next, thanks.
