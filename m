@@ -4,94 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 765B6C71136
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:07:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAA2BC71136
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28B4382CE7;
+	by phobos.denx.de (Postfix) with ESMTP id 71F6B82CF4;
 	Tue, 17 Jun 2025 12:07:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FzWQYLRR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PhiUrv9J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 686E182CCE; Tue, 17 Jun 2025 12:07:47 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 077E582C87; Tue, 17 Jun 2025 12:07:48 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E4D82C87
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:07:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15F9580C83
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3a5123c1533so3124404f8f.2
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 03:07:45 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3a50fc819f2so4642355f8f.2
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 03:07:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750154864; x=1750759664; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750154865; x=1750759665; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/7B1jqkU0ZB9bfTKoSuygoKRovifI7TwPxghUo+wV9U=;
- b=FzWQYLRRMsmaVN7NfJ+YYzfDLxUoWL7a/tckqApxVFKBETJ+TcZuq/+ZYo2XxqtUes
- 31LMbGcy7IZZhxpbbvCbz1lF1HI+UZFL6xc59Xhhblh7pNZJTZIGYY9cBs7UT2dCbKEz
- idd7inb/quZAGwrqyFgLhUX+Y6cr9XJi/KYswyqe54i7DwRG1LoH/+7ibWpCjleh/MBT
- 1pZIuJuDfTMnqD4bJ6qK9k6vrQDO7TiT1XuVGr/TdZZRokjrRkJtyyOzl4P/f0IPZRvK
- e0H4wWicXPGySJU2UTYDTVhuDTfUly+sgKzLSN/9EcdsqOwCxJuyTDdYOjUoYpf/C87a
- x8qg==
+ bh=gcXN/O0sngamvLKoUvDh3jJG0AbZo2sR4TdOddPYPg0=;
+ b=PhiUrv9JRZ9/ltrsR6GcTLc6sFcnnFUo+t/UkxYVMAC2dg243Acx/xRu6jhM78AIqr
+ gA60fX/6AuiE2TXdpgB3QxQGZaleQoNGl63uYVgDD4tK1AqvcaV11RHIMXwLiajKDu+C
+ 0RTmVuoRi5XLyZf1oMHciq5JyolcQfI/64ut+cHZOFiPfbPct1SoxtEbxwulCMnZxjeq
+ DgjW1Xm16dfDZOyztkAJP9+w4mnyDi8jRJQY9XrmuhTP5KqafrNhnLz22lunppgCMNWq
+ Z5qw1AWAyZM0fPF8b/uitF47K7M2PUXIMyxDN+ZTNGqLpS9NXIMfYm4ny6M8IjskEWez
+ +ogQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750154864; x=1750759664;
+ d=1e100.net; s=20230601; t=1750154865; x=1750759665;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/7B1jqkU0ZB9bfTKoSuygoKRovifI7TwPxghUo+wV9U=;
- b=WvArWyQvCTGZGzqBi+vtnYEmWE0P94lC0CAQCHTXqju7Hr3kAam2Jj+WTXhPOwSCNC
- diKV+gMOnZZlwMq03oI/99FeeBgws6jXOAfbQ1fkK9mg2DZ/C/cWiwlR4Nc8Vgx0Bqj1
- 9AaTWvFevikPitBYeS8FVh/Vt+g690nEVdJ65BNLrC7aGS74jfCutD6PO+WLnhq23E5K
- 6DuVM520HaeVmmlpcHmASQexgsHDPxQmrJmNfxqXvt33uJVdvaHMcLARUVqrISTC74me
- U0+gLSayWzle2AEsKISZlmqgvl7EGXIkaYAg91s/4A8kXpIcQHxnORbz1llh2z05/DXa
- QTBw==
-X-Gm-Message-State: AOJu0YxOYI5a+8EhyOLhlAaHHa0rEhCzGqqW7jpGH5BM2MwhaRFHQYIK
- 5NosJUVyEJtg0MuMj96ldbL61qYUKnC8aqLbFGzYOpQdRQwt7XCGf0tIuH5eNphjbYRYPesDflj
- U8wRK
-X-Gm-Gg: ASbGncuTKBrE7zzdS7TKZgSHGvXwb/zf16cSmXUSEhsBpvT9vggOAa94r2b1Ie/ylXb
- Gqg/B2MvEbIMJ0s5+tnKrV93dwazIYrQRwPMGlXZ6a+tLo10qMCsu20UeVb364Svoly/rXuKyaY
- elt1R54dyUb7PmLpAVFWa+Cb94rrOysPrbmNRq5bn0XC12c3O71KGABrDixBizAXxeVFA8M93cJ
- KrsyCtxyy+sEHm/fJYguHFme1WG8B3pwjC/glfCT+fwvAqpLdPMzbYa0fRNGNw7Z7CkdOhbQvGJ
- 3C90VB8FZc0WD2nXvDA27zF1bOqsJ5a9mpY58pPzMEMwnxnVTZzG4DZPDQwcd0rMdR5VY5U=
-X-Google-Smtp-Source: AGHT+IFGJvV4Jk1kTSWpd27ADYuYcGepS5w/VODFl0AVN5I81hHatwH5bDUpGFK3V50mmMqai2alng==
-X-Received: by 2002:a05:6000:144e:b0:3a4:eb92:b5eb with SMTP id
- ffacd0b85a97d-3a572e998a0mr8895325f8f.50.1750154864270; 
- Tue, 17 Jun 2025 03:07:44 -0700 (PDT)
+ bh=gcXN/O0sngamvLKoUvDh3jJG0AbZo2sR4TdOddPYPg0=;
+ b=qmmheS5hZjYb9vKlzMx/mwf/rQbqRnsYuEllxlMkO4EN9rvZnw9q8ILroKv+6QG6Cp
+ S9HusV6B63xK0P1J9NZC5+vh92vCF4MmTtG0jlAFbebzdUTrMbM9fzS0Eh3b7AVWdFJs
+ 79cTe/vBx8m7axJgjm3z3mebW1sH6ofJy4+v6vWK3j46pOxGSkEmnpj8Ej2H7v6glQ48
+ zU0uR9sbqF13lWpT6nE7nVXB5QeYkXsfHZEx4b2c2S0W0xdcEPF5vMVuoAQZPBJ/yWz8
+ vy6cfQPY+xtsvBozVhIsfMOEAgCDYVKJCsHJ+nUd/dY3o9sh23dJ7zcN25DJoI3qlVwz
+ ni7w==
+X-Gm-Message-State: AOJu0YysllkVTqOqRNzxnzefws5KfHplRhdmwt1ZHyxo3TzqnnJ5J0rv
+ fM2e2sJfbShyckRBnhNXl1zg01LnLlmk/F5X599uG/oSW61m6RHuF3aw0EqeAijNDn8PtNe6zs0
+ GGBEw
+X-Gm-Gg: ASbGnct/t0j0ZMtFk0jBRjnwPBXLrmVoyP83PbEDal9+k37SZrwbLduzUNzFisZemHh
+ FIyQJvVbUo/RqkOhrdkh4PUx/nZFi9g8lEsd5RRld3149AGigf7tNJSFvDbBQZnJ2NTJSVTK2S2
+ A3Tq2GsX9WB2oIhq1uUOskD7aY8UD6EoNldeVF/tsAD4qV30eZyuCfhx+LpTiwAh1i5ZOCTV+mO
+ Z6wbgU/8kM9+tb2oZILaMejCFhaRHWl9l4kcS/wzisMD2PSk3ijf1hcaWEOCrYCL6MxN560FVuK
+ aULE8LHdj0WnwosU854OlyzTuggbSP9qEDGj+HESc6g1p3YHZzZ0TUIXBuS5wcuBQFilF5o=
+X-Google-Smtp-Source: AGHT+IHdoKl4FF4ZsLYhrI+c8ufZNztTkT23bvnaw/FSttSfqWpS2izSm2WaRLNNlXYz/LFcXezfUg==
+X-Received: by 2002:a5d:5f8f:0:b0:3a4:f439:e715 with SMTP id
+ ffacd0b85a97d-3a572398eb0mr10700916f8f.9.1750154865176; 
+ Tue, 17 Jun 2025 03:07:45 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d4f5:465a:56e7:e545])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b61071sm13582412f8f.90.2025.06.17.03.07.43
+ ffacd0b85a97d-3a568b61071sm13582412f8f.90.2025.06.17.03.07.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 03:07:43 -0700 (PDT)
+ Tue, 17 Jun 2025 03:07:44 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Greg Malysa <malysagreg@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>, Robert Marko <robert.marko@sartura.hr>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 02/13] lwip: move net/lwip/dns.c to cmd/lwip
-Date: Tue, 17 Jun 2025 12:03:52 +0200
-Message-ID: <20250617100720.2544758-3-jerome.forissier@linaro.org>
+Subject: [PATCH v3 03/13] lwip: move net/lwip/ping.c to cmd/lwip
+Date: Tue, 17 Jun 2025 12:03:53 +0200
+Message-ID: <20250617100720.2544758-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250617100720.2544758-1-jerome.forissier@linaro.org>
 References: <20250617100720.2544758-1-jerome.forissier@linaro.org>
@@ -113,7 +103,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prepare to split the dns command from cmd/net-lwip.c by moving the
+Prepare to split the ping command from cmd/net-lwip.c by moving the
 implementation from net/lwip/dns.c to cmd/lwip.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
@@ -121,68 +111,42 @@ Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 
 Changes in v3:
 - Move this patch before "lwip: split cmd/net-lwip.c into one file per
-  command".
+  command". Drop a change recommended by checkpatch (uint16_t -> u16)
+  which would better be submitted separately, since the purpose if this
+  patch is to move code around, not to modify it.
 
 Changes in v2:
 - New patch
 
- MAINTAINERS             | 1 +
- cmd/Makefile            | 2 +-
- cmd/lwip/Makefile       | 1 +
- {net => cmd}/lwip/dns.c | 0
- net/lwip/Makefile       | 1 -
- 5 files changed, 3 insertions(+), 2 deletions(-)
- create mode 100644 cmd/lwip/Makefile
- rename {net => cmd}/lwip/dns.c (100%)
+ cmd/lwip/Makefile        | 1 +
+ {net => cmd}/lwip/ping.c | 0
+ net/lwip/Makefile        | 1 -
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename {net => cmd}/lwip/ping.c (100%)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d62dd35a385..e8f644fc75b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1409,6 +1409,7 @@ F:	net/
- NETWORK (LWIP)
- M:	Jerome Forissier <jerome.forissier@linaro.org>
- S:	Maintained
-+F:	cmd/lwip/
- F:	cmd/net-lwip.c
- F:	configs/qemu_arm64_lwip_defconfig
- F:	drivers/net/sandbox-lwip.c
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 80cf70b7fe8..102422470c2 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -133,7 +133,7 @@ obj-$(CONFIG_CMD_NAND) += nand.o
- ifdef CONFIG_NET
- obj-$(CONFIG_CMD_NET) += net.o net-common.o
- else ifdef CONFIG_NET_LWIP
--obj-$(CONFIG_CMD_NET) += net-lwip.o net-common.o
-+obj-$(CONFIG_CMD_NET) += net-lwip.o net-common.o lwip/
- endif
- obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
- obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
 diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
-new file mode 100644
-index 00000000000..6c4ab58d06b
---- /dev/null
+index 6c4ab58d06b..da79b64b5c2 100644
+--- a/cmd/lwip/Makefile
 +++ b/cmd/lwip/Makefile
-@@ -0,0 +1 @@
-+obj-$(CONFIG_CMD_DNS) += dns.o
-diff --git a/net/lwip/dns.c b/cmd/lwip/dns.c
+@@ -1 +1,2 @@
+ obj-$(CONFIG_CMD_DNS) += dns.o
++obj-$(CONFIG_CMD_PING) += ping.o
+diff --git a/net/lwip/ping.c b/cmd/lwip/ping.c
 similarity index 100%
-rename from net/lwip/dns.c
-rename to cmd/lwip/dns.c
+rename from net/lwip/ping.c
+rename to cmd/lwip/ping.c
 diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 5df222589b8..255c7d018b0 100644
+index 255c7d018b0..97299d9b542 100644
 --- a/net/lwip/Makefile
 +++ b/net/lwip/Makefile
 @@ -2,7 +2,6 @@ ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
  
  obj-$(CONFIG_$(PHASE_)DM_ETH) += net-lwip.o
  obj-$(CONFIG_CMD_DHCP) += dhcp.o
--obj-$(CONFIG_CMD_DNS) += dns.o
- obj-$(CONFIG_CMD_PING) += ping.o
+-obj-$(CONFIG_CMD_PING) += ping.o
  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
  obj-$(CONFIG_WGET) += wget.o
+ 
 -- 
 2.43.0
 
