@@ -4,85 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88980C71157
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C35C71157
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 10:44:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC1482E0A;
-	Tue, 17 Jun 2025 12:07:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7B8BC82C2F;
+	Tue, 17 Jun 2025 12:44:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eKWyP7U7";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E25782C87; Tue, 17 Jun 2025 12:07:57 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7333081760
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:07:55 +0200 (CEST)
+ id CE85182C79; Tue, 17 Jun 2025 12:44:06 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 87CBE82BCD
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 12:44:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-451dbe494d6so70380485e9.1
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 03:07:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750154874; x=1750759674; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TLRcqehQyeudcAfUgQyUPGb8hXSikCjgmrSVEgvIiSM=;
- b=eKWyP7U7ZlDRIZpKAsRpLNFnerTlteYSdCofvMLrcAJzJbJlOweO6ukb7o0agzU71a
- iitx/p0z9yTgx8SXEOrm+djtWJWGsFVWHeYvVUq6Bjkc41SgVZQDnQFtNI007bmwYLnY
- T+/1wfYVCGeInGcSYU+a9ymDo7eCspV6TwU4+l/HkhGNDutdaGZFgktTMoFMz1ntuFXd
- OvxUqAroXm/wfkdtLgECTOxKSqHKMLvghgryUr+cHvV7FH3d0rodr1+KZI60vJ82NQPz
- XpsPikhVOddF6xxO3MxWstel9pZ2I11XXBA9uBPnY6XFKxagUq1CW0XrmiK1ETbrzraC
- Bf3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750154874; x=1750759674;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TLRcqehQyeudcAfUgQyUPGb8hXSikCjgmrSVEgvIiSM=;
- b=w9xwTS1cdaAZ6b165e21zk7/3C4sFIzMS9q5+NGvRJO8/Biclw3IbtpThW2xRrzmAy
- Sol9mKkW/DROSHi4IwAlmvQ68Q4rMdb8NuvWpi5wF2rOcJh7F3FJYhgQ2LMX0rtrhFsh
- MduG1HbgeldVR92A3U2bPp+XKud2KIP4ifMck3bWqHsCMuR4iFhyVLUI5RoRVW86jR5a
- NjoTw5RQqYdZcg7MrmUWY1eSSgPqzV+hPu3Yd1l8Km91mr6ROAwPgWFfyNL/ECMFS6A7
- 41uLzwY4zG6nbpkEen2gPnKTITmJ1DuZ9JjFUI7at3F6PmPJZECBMJ84lR27V/naapE9
- +e0g==
-X-Gm-Message-State: AOJu0Yxl69Fs2dMgoedNfPE4eBTgHwk5zdVnp+uyYKcA1lg4hc1DxGmO
- 9dxT8Ylp8hE+n+EpwFdMkXdHhFROyWHucie/+uqY0S5VHPlkrh3AttqT1GHGhVi8bouMtxEIceF
- rtFfB
-X-Gm-Gg: ASbGncvmNKSkiJrGn8UECXJI8qLX6g62w8gydyrsJJFgGN2LXKyouMz3hy2hbtDEegu
- MOckPGjHn2F+JGrjnqrTG4dasNEAasd+/V6kJm80CfTtDHTSuHRIV04PD1YsnCu0RcmpyQk1l1u
- vzWnrCFA37+b7xAeeAij5KLgiTC/PGBqXONf02dZitP2FVokb+7tiiZrE2i5LvG7dmXk70wg4Cq
- qEOwZrlvU7WFRXQDGw8BRjyTemz89sa4ihBukl+WYac9C97UJ/7rrB/83lH9y0na2qeTNjTVKE3
- pxa0DnEUuu7/jRopRm/F0Zw2oYz1OB44kZRxqVAw9Ev7+6gTQ9jEeTSAUKGrJOixSITNpeOlKID
- txpbPbg==
-X-Google-Smtp-Source: AGHT+IFyijex/jg2/pUunQj2RYXtLJRr7kvGgxzg//ZU0SoYJkXLFi9MkdqBXZ1M3bC+MDxeA4/Jsg==
-X-Received: by 2002:a05:600c:6989:b0:442:f4a3:9338 with SMTP id
- 5b1f17b1804b1-4533caf91a6mr110011995e9.21.1750154874420; 
- Tue, 17 Jun 2025 03:07:54 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:d4f5:465a:56e7:e545])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b61071sm13582412f8f.90.2025.06.17.03.07.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 03:07:54 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-Subject: [PATCH v3 13/13] configs: qemu_arm64_lwip_defconfig: enable CMD_SNTP
-Date: Tue, 17 Jun 2025 12:04:03 +0200
-Message-ID: <20250617100720.2544758-14-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250617100720.2544758-1-jerome.forissier@linaro.org>
-References: <20250617100720.2544758-1-jerome.forissier@linaro.org>
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ACA8E1596;
+ Tue, 17 Jun 2025 03:43:42 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C30593F58B;
+ Tue, 17 Jun 2025 03:44:00 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, Weijie Gao <weijie.gao@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v5 0/7] lmb: use a single API for all allocations
+Date: Tue, 17 Jun 2025 16:13:39 +0530
+Message-Id: <20250617104346.1379981-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,30 +55,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the sntp command by default in the arm64 QEMU defconfig for lwIP
-since this config is meant to have all the features supported by lwIP.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+The LMB module has a bunch for API's which are used for allocating
+memory. There are a couple of API's for requesting memory, and two
+more for reserving regions of memory. Replace these different API's
+with a single one, lmb_alloc_mem(). The type of allocation to be made
+is specified through one of the parameters to the function.
 
----
+Additionally, the two API's for reserving regions of memory,
+lmb_reserve() and lmb_alloc_addr() are the same with one
+difference. One can reserve any memory region with lmb_reserve(),
+while lmb_alloc_addr() actually checks that the memory region being
+requested is part of the LMB memory map. Reserving memory that is not
+part of the LMB memory map is pretty futile -- the allocation
+functions do not allocate memory which has not been added to the LMB
+memory map.
 
-(no changes since v1)
+This series also removes the functionality allowing for reserving
+memory regions outside the LMB memory map. Any request for reserving a
+region of memory outside the LMB memory map now returns an -EINVAL
+error.
 
- configs/qemu_arm64_lwip_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Certain places in the common code using the LMB API's were not
+checking the return value of the functions. Checks have been added for
+them. There are some calls being made from the architecture/platform
+specific code which too do not check the return value. Those have been
+kept the same, as I do not have the platform with me to check if it
+causes any issues on those platforms.
 
-diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-index 814e98729a3..e8f976efaf7 100644
---- a/configs/qemu_arm64_lwip_defconfig
-+++ b/configs/qemu_arm64_lwip_defconfig
-@@ -5,6 +5,7 @@ CONFIG_ARCH_QEMU=y
- 
- CONFIG_NET_LWIP=y
- CONFIG_CMD_DNS=y
-+CONFIG_CMD_SNTP=y
- CONFIG_CMD_WGET=y
- CONFIG_EFI_HTTP_BOOT=y
- CONFIG_WGET_HTTPS=y
+In addition, there is a patch which refactors code in
+lmb_overlaps_region() and lmb_can_reserve_region() so that both
+functionalities can be put in a single function, lmb_overlap_checks().
+
+Finally, a new patch has been added which checks the return value of
+the lmb allocation function before copying the device-tree to the
+allocated address.
+
+Changes since V4:
+* Remove the superfluous return from _lmb_alloc_addr() - patch 1
+
+
+Sughosh Ganu (7):
+  lmb: replace lmb_reserve() and lmb_alloc_addr() API's
+  lmb: replace the lmb_alloc() and lmb_alloc_base() API's
+  lmb: staticise lmb_add_memory()
+  lmb: use a single function to free up memory
+  lmb: use a single function to check for allocation and reservation
+    requests
+  mach-snapdragon: add a check before copying FDT to fdt_addr_r
+  doc: add lmb documentation
+
+ arch/arm/mach-apple/board.c      |  27 +++--
+ arch/arm/mach-mediatek/tzcfg.c   |   8 +-
+ arch/arm/mach-snapdragon/board.c |  41 ++++---
+ arch/powerpc/cpu/mpc85xx/mp.c    |   4 +-
+ arch/powerpc/lib/misc.c          |   5 +-
+ boot/bootm.c                     |  27 +++--
+ boot/image-board.c               |  56 ++++++----
+ boot/image-fdt.c                 |  69 ++++++++----
+ cmd/booti.c                      |  10 +-
+ cmd/bootz.c                      |  10 +-
+ cmd/load.c                       |   9 +-
+ doc/api/index.rst                |   1 -
+ doc/api/lmb.rst                  |   7 --
+ doc/develop/index.rst            |   1 +
+ doc/develop/lmb.rst              | 166 ++++++++++++++++++++++++++++
+ fs/fs.c                          |   5 +-
+ include/lmb.h                    | 105 ++++++++----------
+ lib/efi_loader/efi_memory.c      |  22 ++--
+ lib/lmb.c                        | 183 ++++++++++++++++---------------
+ test/lib/lmb.c                   | 102 +++++++++++------
+ 20 files changed, 578 insertions(+), 280 deletions(-)
+ delete mode 100644 doc/api/lmb.rst
+ create mode 100644 doc/develop/lmb.rst
+
 -- 
-2.43.0
+2.34.1
+
 
