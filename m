@@ -4,92 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC9D7C71157
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 09:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B342C71136
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 09:20:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E30D681E18;
-	Tue, 17 Jun 2025 11:15:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 62CC881760;
+	Tue, 17 Jun 2025 11:20:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s7wTLZb9";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZAmtjzvi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B664A82977; Tue, 17 Jun 2025 11:15:43 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C39DB82B0F; Tue, 17 Jun 2025 11:20:54 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AB7780C83
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 11:15:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE1A980C83
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 11:20:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-45348bff79fso26149135e9.2
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 02:15:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750151740; x=1750756540; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GuzWV4tSF3C5NeXBPto+PaNuvbZR3xzxQJqrKTt+2k4=;
- b=s7wTLZb9DXzG4BZnykOtUlCOwjz1LmUqcIDIWAnimZkS0jZjdttA1B9gvLJS6rLKGF
- KQ4lbqXdBRdtjlT4D1T2iMHHnPEyLhYrBgLdpUWse/xrBhARFyxD/qMaFQSuW5qHGhGR
- TMeHfsWBf97IKqOFyABLIHNZkw2fzdzSu6sc2TgwIb7NOAbC1Q4SBDA2bvNyBxXYE9Xb
- Dp9ROwrocVsofaIoozmeOzgxxq4qV5BoBTZse9+Yts5SnCJH3cbDQCjRFPUdnAshlkFe
- Xj4bC1e4ZCx18U+d03fUKllGJ5DrTwt1pd/jbTz1FMMyWf68DhSMydMwlIDiAHOPBmk5
- WaEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750151740; x=1750756540;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GuzWV4tSF3C5NeXBPto+PaNuvbZR3xzxQJqrKTt+2k4=;
- b=vDZmkJNWzfdQoZdyw5eIKLy3vJiusI4qzTmRzdnjrU5uemAdmyd2BRv2TjL5DUOmfb
- 1M9QXG9khtngYCX4HxcEQuSWRiC9nP2K86Gg44BnPyWTqYkmlLcLXrEqgbrNAz7E1Yxp
- 6qKgOUNHFgVk5Odg1uBUZof/qlYsgSQAtk7XWgtMa9I762hMoMDHxZ3VfkeiLrMKWCaO
- Yp/tL3F3H8DmWy/LzBn7pnQiEATG7y9cPgaP2IjWkmo/zCrhrpFscQX/4MkJ0UhaODp1
- ikFVCwkVX5vWTfMG0ty0tO/ev2gjIag20/SqgU0l0BvNaoCfxlF2HM+C2DoYpqHcOJpd
- 3erg==
-X-Gm-Message-State: AOJu0YwWr6XmRkZDn4N8PGJ2fV3pgUIAKlp9ybrFjj9VsAxLRjcjX4fL
- VtBCSRtcAeUxC3WVFfWAnM/bFa3YOB4D0IaPnHyFLUAAvhiurmeL4uQzFX/obRsmrIg=
-X-Gm-Gg: ASbGncvSgfGjxlvuhM9OC+lDCE5dd8zgtEvbdbRGr7zWnUDEjl2CswGBjOBuPDyY+Yb
- YoPwhCvHuDAnhuu6JoJj5KLx0G7R6ExpcXiOi84QS8d96LwGX4r6IvK5VyclBzZeZpx8aV6hkPy
- aG/mLS1wo3Ws4HMHOcFydJxOI1wrXKZy5dd/CIrZuNpRMBr9ii8fnc8R4YgbrZbGPqal50DJbzJ
- eXZdX4T+P7zwlCUGtgVuruHy0FQT37lq2H0/FYaMBUT4uNAiZcY+FblRpJCZTs7iZWgYNORYqu7
- LGc/nH///aTzsc5BwQsNw8NFTbDn0NJgGlsh9NPpmJefLMk8/J0zk4lh0HTJ2xeCLaoKnmdZNQ3
- b
-X-Google-Smtp-Source: AGHT+IHgf0mIXm9y6DrjBCZt26xKkDibV0LbbwrgkwOZfA9tqZUVIiWSM0TOLX7oZgxGljOLqDxbXA==
-X-Received: by 2002:a5d:5f96:0:b0:3a5:2fb2:35ac with SMTP id
- ffacd0b85a97d-3a5723a182cmr10081215f8f.24.1750151739584; 
- Tue, 17 Jun 2025 02:15:39 -0700 (PDT)
-Received: from [192.168.1.104] ([213.240.182.76])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4532e172b03sm168731225e9.36.2025.06.17.02.15.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Jun 2025 02:15:38 -0700 (PDT)
-Message-ID: <bf53c55b-b554-4a1e-9edd-043a02523e03@linaro.org>
-Date: Tue, 17 Jun 2025 11:15:37 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nfjkKYMjHSsSRQvbVI5+HqjBwPjuHGhAd+WH2sUpM6bK9l5Ub4rQmsbHb8ZG1YaL9pnTBt5x4emfZk/mHUZn+VmnT040mOmz9CnN82ZSkQbWx3bGsUyH4N4dEptNa24dXxK+7TIcjz/ZUc/ljMjAz2gq/AjTWG3VBNcdxD3YQS8iFZ48LWnDo1kD2ijpeqLflq6A1N6MABJMDfuN/pRZxa31wWl7WdJ2gD8d0ITfr533xm3BmmEvhy+HWCbcDwojYJE7bYil0lRdqew7g8holx6B701u7MkJgWYvhA3onv5vLDxEQtPUKHakYNlTrbL44UyDnF6/glSZk2VsrIuLsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/3hdJJcuMEkV9bKI35zuxLJPOF+Z7XaH2o9AG3PjCaY=;
+ b=m6xiFEFSoHkwqXCkENpFb5CnWEslwHkixag4Of1jzm5we6bVmJR+5WrxkCPlMiVH0WBPMVZt2HP6ZVxlF1q0rPrLXUgZXuSLMjgj1YEiZGjXk9dItgiMuQTKAbpLCY3xmTzEIwxDPmNYtq8V8iWqOYPKNSSG/y4JGeejwrjM/4WdplKmiBGPOSHMClEx63S9sYXgh/G+BsJH8G0NE6v7E86v7WKba18nK45BIvukx9QTUIUW16qlbCz/I3R4D9Dcltb8/LC8lsgUp73qOkt6Rz/2zkRhTKAseAX/lpcR1pOT4BM270eplaKlz1h5mrw7Na3eLvzO5KLD273qGWN/7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/3hdJJcuMEkV9bKI35zuxLJPOF+Z7XaH2o9AG3PjCaY=;
+ b=ZAmtjzvixawyFnjpbHcFbfuczPPt/WPz6jAqv9oPh0tBeLua6WZfmEBmT4ZWf8FuJNnBM2SRn2/2gGuXplAubP9BiAEGFXFz9+5g/CNgdgh5HM3v1sTkJKXRV5J3hTYjzWNR14xjsCnRMsEZBIxscX0bDYa7Z/s/+yrZFxcUgGM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AS8PR04MB8435.eurprd04.prod.outlook.com (2603:10a6:20b:344::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.29; Tue, 17 Jun
+ 2025 09:20:50 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8835.027; Tue, 17 Jun 2025
+ 09:20:50 +0000
+Message-ID: <c259053b-41a7-42b9-a42e-ca2141efc8e6@cherry.de>
+Date: Tue, 17 Jun 2025 11:20:49 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/8] Qualcomm: teach the build system to emit signed
- ELF images
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-References: <20250613-b4-qcom-tooling-improvements-v4-0-7ea1c68779fa@linaro.org>
- <aa490fb0-e485-4227-8750-70c66c308bd5@linaro.org>
- <6da50198-445e-4e50-b2ec-97a385c5b2eb@linaro.org>
+Subject: Re: [PATCH] board: rockchip: unblock CAN bus in spl_board_init on
+ Jaguar
+To: Jakob Unterwurzacher <jakobunt@gmail.com>,
+ Klaus Goger <klaus.goger@cherry.de>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+Cc: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de
+References: <20250617084253.1756035-1-jakob.unterwurzacher@cherry.de>
 Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <6da50198-445e-4e50-b2ec-97a385c5b2eb@linaro.org>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250617084253.1756035-1-jakob.unterwurzacher@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM6P192CA0030.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:209:83::43) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB8435:EE_
+X-MS-Office365-Filtering-Correlation-Id: 84394d92-a0fc-4507-d050-08ddad804024
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a0hQKzdrdVNxbnlBNHpTdE5tcDNXeWo0dmszYnFZcXMyRzdOTTcyNXA2aWlN?=
+ =?utf-8?B?TjY0NHM5Rk53RlZGREt2UEc0aU01OWpHMXFxNlFTc1FSazBxdmFxaXBzTUF4?=
+ =?utf-8?B?SEJYeHdUK2ZBQWx3Y0FVV1Z1czA3OVRwN0s1Y015QXNQYjE0UDBGNkJRZU9L?=
+ =?utf-8?B?U1U1RXRJRllLeDBGektTQS8yUmR0MHNuUW5DVVljMmkzcGpZQjBQWnRPeVRo?=
+ =?utf-8?B?VDBqeFdyYk1LU0Q5WGxoTWlhd05YcHZQcldQRHVPY1ptdTF0QmllamRBK1ha?=
+ =?utf-8?B?Z0d4Q0gyTVNhYnRmSHpzVm5JbU9RaWtjWlFLaGZQS05hYVkxZVVnaGpVQWlF?=
+ =?utf-8?B?NGZDZi9DY25UVXNXTWlIamFaMWxmU0d3SitDSjBnREFrQ01LOHZsSHFMUUwr?=
+ =?utf-8?B?cnh4MUhuZDVmdXU5MktCNlJiSGhacTNXYXZpaWxsT09XUEh6aDVjMFdZUmx2?=
+ =?utf-8?B?V1B5U3VYbW1VWE0rUDJyd1VCUWlpQnFJWldZK1NIMUM1b28wMmhsWkRvQ1E1?=
+ =?utf-8?B?TGdxUU81eExaQUNUc2VrRDQwWHJieHhyRzlTQkNGYys2N3ZyMjhYVzZ5d09E?=
+ =?utf-8?B?bDlINU55Wk1TS3B5VzE5enpwTFhBYklyY0ZUMHg4akN5SG1VMFFWL1ZobWls?=
+ =?utf-8?B?OHJOanZyN0QySXFWQjYvempuS0Nsa3IyNUtyMnJYWmRVcnR1ZGpEMmZZOXdU?=
+ =?utf-8?B?cDF5VGFBVXBPeGxDRytXTlczU3FmV2R5bUp6eTZFQjhQc3lUaFpWZkM5VjZr?=
+ =?utf-8?B?TXRTZlVhd21iRnEwRldWQ0ROSFFmbGlNbVVnRHZSTjJnaVZNdThxVVRlRDVj?=
+ =?utf-8?B?ODdINmUyc1B5cHdDMVBzNjVMcms3T0Uvd29vMUFPNE91RjgyWXJCcDNpRll3?=
+ =?utf-8?B?NjRtQUVnRXZPVC9TODU4WnQxTm1MRm9NOUk5L1gzWVZ5Wk1PYmlneEk3UTRD?=
+ =?utf-8?B?WWxWQXZTMkZmYkJMUklCbFRNdFNyZmJKNnNUZVBBS2Exb1FUYy9neGg3UXdu?=
+ =?utf-8?B?YzA1elBTV28wMkU2dnFmSGQvN00rM29rZkI2SVZtd0JuenlvZHZmRGRHaGxn?=
+ =?utf-8?B?THNLajdLTFNkbWxTN0JVUG9Iem9tZ3paeStUc2FYWDRaRklyWHV2WUphbk95?=
+ =?utf-8?B?MXpwUHEvbzk3eTFHclljTHVGOU1pZU9nQkwwSEdrMWw4K3VBMnN3NVpDdlpZ?=
+ =?utf-8?B?Qkt6MVhxN2Z3S0NhZDk2NS9heXJFTmZrRXg0K0VvdDRyWWhvcHN5KzN2Ly91?=
+ =?utf-8?B?Z2hnK3ovM25JbzgyQUJraEM4cmZmYUZtMnYxanB4cEsxdDJjTmE2bnFraURL?=
+ =?utf-8?B?WGhVOWsyWGVZYVMxTko0WERlZjRVOUZJdG41M3FCeUFCd0V3SS9PZkhlbEJa?=
+ =?utf-8?B?Q3NKT3FpdmRZcEFHcXhXd2VtNjNvemJxZmllZXNOYk5FTUxMRTNnSTZHMi9E?=
+ =?utf-8?B?eG90dDI4SVk1VTB0UGZFL2VkZlFBTXJRSTN4UnJ0aXgrWWpha0p0Um5kTjQ4?=
+ =?utf-8?B?aGhBV0djcEpGYWRyTTRsTGVRN2piM3gwL1hXT3hsb0dLYStIZ0xpTVlqLzV3?=
+ =?utf-8?B?M1hOcEFXeGxlNUdDQ2NSRXJ5TUlXcDQ3YmM4RkVnbVA2bFdLbU56cGhmVlBi?=
+ =?utf-8?B?bk9vVjNvcE9RQ1FTMitNMDFOb2ZLMUE3NFY0UmF1bnVuektxbWU0NStqVTl5?=
+ =?utf-8?B?eEI5ZUlNK05pbXVLYy9DcFpCekVKZmVYS0g5MjZJWHo0eXQyS2pua3N4SVkw?=
+ =?utf-8?B?WWtSU0ZRWHp2YndaSHcyakJvK0EvZUI4QUVzZ2JhcW0zcFFtem9NbmRaVmZn?=
+ =?utf-8?B?Y2JYQTJ0bGRwdEJkRVNwMFZrVlh2bHBFc0RpUERDSGVGV0JJK1BCZ2FUVTF6?=
+ =?utf-8?B?OUM0YWVQN1E2bmp2UC9RM3diUjdVYURXUkc4bk83ZnFzZm0xSWU3cmExRTkx?=
+ =?utf-8?Q?/JOsS0MsDl8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VzlVSGVhUHAwdWVDQ0lTQTJRTGxPaklKaW43OUlZMktmcWpxanJZcUttTjNn?=
+ =?utf-8?B?SkI0bFlXSENvbGxSN1UzRkNQVks2REpSVmFxTUNFZ3ZZYkE0UXNqWml4MUwv?=
+ =?utf-8?B?NXBaSk1zWjNoU0ViQ1FTaFN2Z2ZXQkFobUgxVnEzT1R6TXNzeVE2QlI3VDZS?=
+ =?utf-8?B?N1F2cXc1Yk1LWDhOamcyZzRMR0ljS3l1SS9GeTBVVXVPWGpweElGVmR3Z0JE?=
+ =?utf-8?B?RGRrOVhTVGNUZSthOE5SVHlPamlrdURYVVRsc0xhQnlVZTFEMFFpNXlkSW0x?=
+ =?utf-8?B?MWZzV1hJV05LMGRUbzN5NzEwQU9oTTNqdE4vUkRiUncvdTBWWGNsMEdTcWUy?=
+ =?utf-8?B?RVo4OFlUZWRYZlJEZk9OeG5QVzN3ZE9zbHRmOWFsNkh5U20veVZWK1BkWlVV?=
+ =?utf-8?B?NW9RcVcySkF3Mkptc1ZOWVZEb1g1Zzd5L2FoSFdtdWkxS1JzTUV2MUJHZTdF?=
+ =?utf-8?B?MjBld1NKdEk0TnBDd0dlRHhlRmlsaHFPd3pVZm0yVjE2b0RyTWQySDVNbkRi?=
+ =?utf-8?B?Zkk0V0NsRTVJbFpFMGxzcUVpQTk4L3pDMHRoTm5NYlQ2TllndTFWa2lzVFFX?=
+ =?utf-8?B?SjJMU3BobWZSdnl2L2Q1YUhETndxYzlRTEJXQjZiMWFxUXJEenV6N1ZmZGR2?=
+ =?utf-8?B?NDE0eXkxZmRiMWd3TjZLVWpzZzVCb0s4UHVEWW5ieGI4U1RIR1ZJZlNOMGNT?=
+ =?utf-8?B?a0ZtVDYybmxoU2hmenoxOVRGRU1GSjdqUTRHcDI2NXZZUmNvVDNRRjZoQmV2?=
+ =?utf-8?B?c0lRT0tpUU8wZTY5U1kyTGNMSy9ySk9qZUNBMUlUS2pJZ0xXclhyY2tPS0pi?=
+ =?utf-8?B?TlZZUU1LM0s4VldDaHFTK1pRa2F4cW1jYnk1L0J4M01mTlE4UUZYb0Z4QjN0?=
+ =?utf-8?B?WTQxS3ZLeHNtRnI2aXZSQ054NXQ5TUVlc05IcUkycFBBWXFabTNDRFhBU0NH?=
+ =?utf-8?B?Z3JTdkdZcWFuemw4TjgyUFpwY0hlT3J3V0ZZSDUwWUU3cHUyWWdlY2YxTzgz?=
+ =?utf-8?B?cUJXMSs2VjRlVE1lZVhXZUo1WndHSzdaM0YxaFh2MmswVXNZWDVpbmlMcWVZ?=
+ =?utf-8?B?dVBadmxPVzc1S1h3ZktuY1IrSEJQeTFJcmJKdmhiS3pFSW5oSFFtNXFKUjYy?=
+ =?utf-8?B?T2h5WmMyL2syOHd2YVpDOWFGTjdQeGFaZjRWMGhwcEZ4UlQ2UVZUb0FyRDBl?=
+ =?utf-8?B?L2dEQUhLUGV2Tm5ETnpSYWw4UW9xVzNOTm05QWNHMzB3bS80UlpQRGNvRTVo?=
+ =?utf-8?B?bHE4WnJ1MnA3eEo3L2t6OHd1MjFVZDh0V0ZGbjFhWUducGhUQnFlMi9hV3Ix?=
+ =?utf-8?B?Zm5ycU0wWURWMytVNlZWZ0ZnQVM2eHBHS3YrS3I4U3pCaXJYKzZnWnl1c1cw?=
+ =?utf-8?B?c3ppOGorcGYwdHNhV2pzU3BnakErMDVpRFhjUTlnRE9HQ0IxNDYxYnNNeThr?=
+ =?utf-8?B?SFV4Q29kUk9BRjdKVSt4NVNpWDlYd0MzUEt6OTFneFpzNmxJRGhzWEIxT1d2?=
+ =?utf-8?B?c0ZkR1R2d0ViNXdhZUQyL3lUNHdkYjg3SjlrZ1o2U3V1L1FXd00xWVRyWmhV?=
+ =?utf-8?B?MDFOaWtnMHFXNDQ0U0pmK1NxTTlUS0k0aDF5QWtuVkQ3TXhta0wzbDdIQVlX?=
+ =?utf-8?B?b1ZXdHBxdG1xdTlSNjVMRUt0UXd2TzFzTjhrdmtNRnd6ZHZDVUJyeXJzTEp3?=
+ =?utf-8?B?UjBja2ROS2hqalNHbWVHWFZRRmlTYWdZNEdaZnNOTWttUC9BaWZQMnI2d3Qx?=
+ =?utf-8?B?bStaSWE1eFJxVm1rV1FmUmtOeWpTTlJjTXFNTVlrZ0VRZE5JZk5vOTBQUUVH?=
+ =?utf-8?B?WGdTZVhNSnY5M3kxcXE1R2Y4Vk9FOUo5VjAyQmc2enhzUEI5QUZPbnlXanNS?=
+ =?utf-8?B?enBDeVlBU0UwN3IzZVoxR2pEQVpvNHlnZ2I2SEdZYnhMcTZuYi9KZFpsQVFZ?=
+ =?utf-8?B?TjJFWGtsMkpyenBuMG9XdXp5RldmZUpVY2wvdGlQUDBPOFlGQmZWemc1NnZU?=
+ =?utf-8?B?WVJXbjdJNHBzZzllZDhYSkkyMHJQQ21zS0d5angyUS9yUWlJSkZhaWs2RkVU?=
+ =?utf-8?B?TDRTa3RXVzNIbGMvcVB4N2dJekF1V1Y5aXZaN2dvaW9EMWpnVnlxdkdhVms1?=
+ =?utf-8?B?cVUzTk5iUTNKMm1kR3lkWjhpMzYzUU5Nbk1wM3U3VVlUL2VJMTVCdUhsMG1l?=
+ =?utf-8?B?NGc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84394d92-a0fc-4507-d050-08ddad804024
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2025 09:20:50.2853 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JbMa7BYGKso5EjgVVXe3E8iMA7XTXmoQldU26dU2YLsKDt+PuNFFbQ6OgJWj8t0ZGiuEoEOULYRoCBNoCrk/9IDeAcgFgMBrArE1ki75xcI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8435
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,163 +180,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jakob,
 
-
-On 6/17/25 10:26, Neil Armstrong wrote:
-> On 16/06/2025 18:13, Casey Connolly wrote:
->> Hi Tom,
->>
->> So I've been testing this a bit harder (really should have noticed 
->> this sooner) and it turns out using binman makes things a whole lot 
->> more complicated...
->>
->> Specifically, the new trogdor chromebook board doesn't need binman, 
->> the U-Boot ELF is used directly since they have their own bootloader 
->> beforehand.
->>
->> But since CONFIG_BINMAN can't be enabled in a defconfig and only 
->> selected by some other Kconfig there isn't really a nice way to handle 
->> this. The trogdor board doesn't add any Kconfigs of it's own and doing 
->> something like
->>
->> depends on BINMAN if !CONFIG_SYS_COREBOOT
->>
->> would be a huge hack...
+On 6/17/25 10:42 AM, Jakob Unterwurzacher wrote:
+> GPIO0_B7 is routed to TXI of the on-board CAN transceiver. The
+> line has a pull-down per SoC default.
 > 
-> Can't you change to depends on BINMAN if CONFIG_BINMAN_DTB ?
-
-No, since this creates a recursive dependency
-
+> This means the CAN transceiver transmits a dominant zero
+> and blocks the CAN bus until Linux boots and reconfigures the pin.
 > 
->>
->> This wouldn't be an issue in and of itself, but binman makes the build 
->> fail since of course the DT doesn't have a binman node and the trogdor 
->> defconfig doesn't define CONFIG_BINMAN_DTB (and shouldn't have to...).
->>
->> Possibly the easiest solution would be to allow defconfigs to set 
->> CONFIG_BINMAN, or add some additional kconfig we can use to pull it in 
->> (CONFIG_QCOM_BUILD_MBN ?), maybe the latter is the most comprehensible 
->> solution.
->>
->> I think I'll go with that unless anyone can chime in with some other 
->> suggestions.
->>
->> Kind regards,
->>
->> On 6/13/25 19:23, Casey Connolly wrote:
->>> With several new Qualcomm platforms appearing on the mailing list, all
->>> of which build U-Boot as an ELF, sign it, and then flash it to some
->>> partition on the board, we're getting a lot of defconfigs which just
->>> contain a debug UART and a TEXT_BASE address. This leads to needless
->>> rebuilds in CI of effectively the same image, and needless duplication
->>> of build instructions.
->>>
->>> To address this, let's introduce a new tool "mkmbn.py", this is based
->>> on the existing qtestsign[1] tool but is (currently) hardcoded to
->>> only handle the Dragonwing and IPQ boards which use MBN header v6.
->>> Additionally, the tool contains a lookup table that maps from a boards
->>> DT compatible property to the load address it needs. Since it's highly
->>> unusual for different boards using the same SoC to have different load
->>> addresses, generic platform matching is also done (e.g. "qcom,qcm6490").
->>>
->>> With this tool in place, we teach binman to use it and introduce
->>> a qcom-binman.dts file to describe the image. The tool will emit a
->>> u-boot.mbn file for supported platforms, for unsupported platforms the
->>> u-boot MBN etype in binman will print a notice explaining that no mbn
->>> file is built and to look at tools/qcom/mkmbn/mkmbn.py
->>>
->>> Finally, the defconfigs are cleaned up by moving the debug UART
->>> definitions to config fragments (since it doesn't make sense to have
->>> them enabled by default anyway) and remove CONFIG_REMAKE_ELF. Notably,
->>> the qcs9100_defconfig is removed entirely since the same binary can
->>> be created with just make arguments. This platform entirely lacked
->>> documentation to begin with, which should be addressed by future
->>> patches.
->>>
->>> The Qualcomm documentation is also cleaned up, a new "signing" page
->>> is added to briefly cover the what and why of MBN signing, and board
->>> specific pages are updated to explain the new build process.
->>>
->>> These patches have been tested on the RB3 Gen 2, but additional
->>> testing for other platforms would be super useful.
->>>
->>> [1]: https://github.com/msm8916-mainline/qtestsign
->>>
->>> To: Tom Rini <trini@konsulko.com>
->>> To: Neil Armstrong <neil.armstrong@linaro.org>
->>> To: Sumit Garg <sumit.garg@kernel.org>
->>> Cc: u-boot@lists.denx.de
->>> Cc: u-boot-qcom@groups.io
->>> Cc: Varadarajan Narayanan <quic_varada@quicinc.com>
->>> Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
->>> Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
->>>
->>> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->>> ---
->>> Changes in v4:
->>> - Rework how qtestsign code is imported to make it easier to sync 
->>> with upstream in the future.
->>> - Actually raise an exception when mkmbn fails in an unexpected way.
->>> - Link to v3: https://lore.kernel.org/r/20250612-b4-qcom-tooling- 
->>> improvements-v3-0-76f34cf216e2@linaro.org
->>>
->>> Changes in v3:
->>> - Fixup Makefiles and add missing qcom-binman.dts
->>> - Adjust wording to reflect changes to build process
->>> - Link to v2: https://lore.kernel.org/r/20250602-b4-qcom-tooling- 
->>> improvements-v2-0-c7d19c0d4a8b@linaro.org
->>>
->>> Changes in v2:
->>> - Reworked to use binman with a plugin to build the u-boot.mbn file
->>> - Added some fixes for binman to work with OF_UPSTREAM and with tools
->>>    in the srctree toolpath rather than objtree for out of tree builds.
->>> - Link to v1: https://lore.kernel.org/r/20250522-b4-qcom-tooling- 
->>> improvements-v1-0-8141b8955cfb@linaro.org
->>>
->>> ---
->>> Casey Connolly (8):
->>>        binman: add $(srctree)/tools to toolpath
->>>        binman: support building binman dtb when OF_UPSTREAM is enabled
->>>        tools: qcom: introduce mkmbn library
->>>        tools: qcom: add mkmbn.py
->>>        binman: add support for building Qualcomm signed MBN ELF images
->>>        configs: qualcomm: use fragments for debug UART
->>>        qualcomm: use mkmbn via binman and stop creating ELF files
->>>        doc: board/qualcomm: update docs for new u-boot.mbn target
->>>
->>>   Makefile                            |   5 +
->>>   arch/arm/Kconfig                    |   1 +
->>>   arch/arm/dts/qcom-binman.dts        |  16 ++
->>>   board/qualcomm/debug-qcm6490.config |   5 +
->>>   board/qualcomm/debug-qcs9100.config |   5 +
->>>   configs/qcm6490_defconfig           |  10 --
->>>   configs/qcom_defconfig              |   2 +
->>>   configs/qcom_ipq9574_mmc_defconfig  |   1 -
->>>   configs/qcs9100_defconfig           |  10 --
->>>   doc/board/qualcomm/index.rst        |   1 +
->>>   doc/board/qualcomm/rb3gen2.rst      |  27 ++--
->>>   doc/board/qualcomm/rdp.rst          |   5 +-
->>>   doc/board/qualcomm/signing.rst      |  29 ++++
->>>   dts/Makefile                        |  19 ++-
->>>   tools/binman/btool/mkmbn.py         |  29 ++++
->>>   tools/binman/etype/u_boot_mbn.py    |  53 +++++++
->>>   tools/mkmbn                         |   1 +
->>>   tools/qcom/mkmbn/cert.py            | 127 ++++++++++++++++
->>>   tools/qcom/mkmbn/elf.py             | 238 +++++++++++++++++++++++++ 
->>> +++++
->>>   tools/qcom/mkmbn/hashseg.py         | 281 +++++++++++++++++++++++++ 
->>> +++++++++++
->>>   tools/qcom/mkmbn/mkmbn.py           | 154 ++++++++++++++++++++
->>>   21 files changed, 981 insertions(+), 38 deletions(-)
->>> ---
->>> base-commit: 783f365c9dbb5c9e9341753fbad6a44dcdc7a069
->>> change-id: 20250522-b4-qcom-tooling-improvements-ab40585b11a1
->>>
->>> Casey Connolly <casey.connolly@linaro.org>
->>>
->>
+> Let's switch to pull-up as soon as we can (i.e. in SPL).
+> This cuts down the "bus is blocked" time from 10 seconds to < 1 second.
 > 
+> Of course, to this needs CONFIG_SPL_BOARD_INIT, so enable it
 
--- 
-Casey (she/they)
+-this
 
+(No need to send a v2 just for that)
+
+> the Jaguar defconfig.
+> 
+> Signed-off-by: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+If we ever have an open DRAM init in U-Boot, we should move this to TPL 
+so it's as early as possible in the boot process.
+
+Thanks!
+Quentin
