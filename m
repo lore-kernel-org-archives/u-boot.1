@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EED0C71157
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 08:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE076C71136
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 08:17:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5156E82C4C;
-	Tue, 17 Jun 2025 10:17:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9598682C8D;
+	Tue, 17 Jun 2025 10:17:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="X5tuOysb";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QoamdNLo";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g37JJJKd";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mAbSyfjQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF2AB82C79; Tue, 17 Jun 2025 10:17:11 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id ED70C80C83; Tue, 17 Jun 2025 10:17:14 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5A6682B20
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 10:17:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01BDA82C87
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 10:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,33 +32,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bM08j3dQmz9smB;
- Tue, 17 Jun 2025 10:17:09 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bM08m5tZtz9swL;
+ Tue, 17 Jun 2025 10:17:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1750148229;
+ s=mail20150812; t=1750148232;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CSMO/BLjDEs0jGnvchY+T89tfQOiTxtFct0VpnnHWCE=;
- b=X5tuOysbd0WuA/z3kdLOG/u932x0ASLDicrSBqi/YFxnrAUYCvIONZTjYXI9m7YmKLLQWW
- CzZtIus+zGfM6wbOdspUhMVSGtCCtyGR8K5MVWkcRTGEDwcSKOBR11vra+Z79VuzqW7X3r
- Oan0dbt2G9mN70zfJ5uf3pI+ASY3n0sbuHCZxT/P+Eyx/mTuxdpk78ZVbjiRi6lHIpQNfO
- VGLlW3wLOjGVKtJja8QHPGGIqGbm3a21k4KMzy0K20NRBdh8WbB9qnMLy/RVV5kHi93ltB
- dIIQ1zLyPg+HrWpYKpXWZCpMDeTtJZ61Gr81w+RzG6G3djlzzhUi2LiftrfAjA==
+ bh=hwoPJRPRTqqVrPkam43GUzS8fdj+4R9STOqtuVLiWcs=;
+ b=g37JJJKdZf4Fl5oLJ1kDRz/gaRQmFKVCGe8q38qj6iS0PH5NmzxtCrPtaDYZuQI3XXmcpF
+ +szL6Lr3o0FhNfEzAaZ/KFe7VAuLedj0e5hH1TyB/9A5z0kkCtAcTfhP7m+LWQfVJVCvAN
+ v/p7tTOIgaeeoo/XAOvL/V5E1pycWftwo6NL3C85upCq5EwunUkNZECtsSWqRTyton3NTL
+ l25dzIsHzaNXXyPo/Q36yGzNBC/X4QYybls0qOHdJude7ThnGdotqwXghZH8Z00aTfPEoX
+ xzAMgJaTVcWHKmhbdYWY4R9C+6+6zQR2sskEGcm5Xdhc959fx88FBI/+qzjBPA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1750148227;
+ s=mail20150812; t=1750148230;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CSMO/BLjDEs0jGnvchY+T89tfQOiTxtFct0VpnnHWCE=;
- b=QoamdNLon2aqYSUnkl219kukEOEJ66llL4swfuL5pxFjEfVDWskC6tsYTF2sBdwdnUsB4a
- De75O8B2K3/UwgmvfY0v9E/X68HH5/+vS8k1g2rvYm/FNAajPw+kuFpSYM3OhRx8ThIVZ5
- rNnRc12FrU7w/X8nQlAQBAqMSNrPvha+KMTAGx72xs3tLV2yfgGqcPfZRe8u6SCiMoeosW
- vlHKAQRB1wmKMA0VdMb5asdCGbjTe/gyWUhXOn82GzlJ7qPVRt5X9AdxCPBGRA4idn03SP
- 4aXFZUsUVwvjb5rQEkdNQSREqMRulowdAqDFOuV1lNDhk1Kf4JwzhGvXy26aSw==
+ bh=hwoPJRPRTqqVrPkam43GUzS8fdj+4R9STOqtuVLiWcs=;
+ b=mAbSyfjQL/9GxHBM8fg5PW0MMbVne4dEcDN7gZ7z8PyfqF4oYrqMpqTrNstubJihWaxg0w
+ UdaQEaAaNRwg7SRvw5cMPIQKs8FjS5iDW/zkIKP6lWptKFTGleJcfNztVISoKvNWN+x4Qk
+ kTNEXcKQ877mMjeKbxfJHET/hoM6vydFgDqql233xz0V/F0xrepLxOaZ32vz34QxjZ0P0T
+ B/TMzpHxyjHx4KZqoAKiGBRfZ4MkFlZ8eHqQ9uDErAouEyzjSzmoCD/Q50PtuAm6vPGcoC
+ toENht/FRXKjDiLENdkctZoDJG8vhImPGkt4qcKdce+U3j9+tnUyQvY63+EbrQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Casey Connolly <casey.connolly@linaro.org>,
@@ -72,16 +72,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Siddharth Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  u-boot-amlogic@groups.io, u-boot-qcom@groups.io
-Subject: [PATCH 2/6] pci: pcie_dw_meson: Use dw_pcie_link_set_max_link_width()
-Date: Tue, 17 Jun 2025 10:16:28 +0200
-Message-ID: <20250617081641.8385-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/6] pci: pcie_dw_qcom: Use dw_pcie_link_set_max_link_width()
+Date: Tue, 17 Jun 2025 10:16:29 +0200
+Message-ID: <20250617081641.8385-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250617081641.8385-1-marek.vasut+renesas@mailbox.org>
 References: <20250617081641.8385-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: kd5asew6ynbi93557i5ngsbeswmh4dta
-X-MBO-RS-ID: eba0aa1e4e0fe73ba2f
-X-Rspamd-Queue-Id: 4bM08j3dQmz9smB
+X-MBO-RS-META: e3wt73y1au67my1jddic3rus1myg5kss
+X-MBO-RS-ID: 380f6469c229cd87810
+X-Rspamd-Queue-Id: 4bM08m5tZtz9swL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,10 +99,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Use dw_pcie_link_set_max_link_width() instead of local implementation
-of the same functionality. This does change the behavior slightly, as
-the dw_pcie_link_set_max_link_width() implementation also programs the
-LNKCAP register MLW, this should however be correct and is now aligned
-with Linux kernel behavior.
+of the same functionality.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -123,25 +120,45 @@ Cc: u-boot-amlogic@groups.io
 Cc: u-boot-qcom@groups.io
 Cc: u-boot@lists.denx.de
 ---
- drivers/pci/pcie_dw_meson.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ drivers/pci/pcie_dw_qcom.c | 19 +------------------
+ 1 file changed, 1 insertion(+), 18 deletions(-)
 
-diff --git a/drivers/pci/pcie_dw_meson.c b/drivers/pci/pcie_dw_meson.c
-index bb78e7874b1..483b07ce078 100644
---- a/drivers/pci/pcie_dw_meson.c
-+++ b/drivers/pci/pcie_dw_meson.c
-@@ -115,13 +115,9 @@ static void meson_pcie_configure(struct meson_pcie *priv)
+diff --git a/drivers/pci/pcie_dw_qcom.c b/drivers/pci/pcie_dw_qcom.c
+index 39b4cd4efe2..978754e8472 100644
+--- a/drivers/pci/pcie_dw_qcom.c
++++ b/drivers/pci/pcie_dw_qcom.c
+@@ -213,17 +213,6 @@ static void qcom_pcie_clear_hpc(struct qcom_pcie *priv)
+ 	dw_pcie_dbi_write_enable(&priv->dw, false);
+ }
+ 
+-static void qcom_pcie_set_lanes(struct qcom_pcie *priv, unsigned int lanes)
+-{
+-	u8 offset = pcie_dw_find_capability(&priv->dw, PCI_CAP_ID_EXP);
+-	u32 val;
+-
+-	val = readl(priv->dw.dbi_base + offset + PCI_EXP_LNKCAP);
+-	val &= ~PCI_EXP_LNKCAP_MLW;
+-	val |= FIELD_PREP(PCI_EXP_LNKCAP_MLW, lanes);
+-	writel(val, priv->dw.dbi_base + offset + PCI_EXP_LNKCAP);
+-}
+-
+ static int qcom_pcie_config_sid_1_9_0(struct qcom_pcie *priv)
+ {
+ 	/* iommu map structure */
+@@ -299,15 +288,9 @@ static void qcom_pcie_configure(struct qcom_pcie *priv)
  	val &= ~PORT_LINK_FAST_LINK_MODE;
  	val |= PORT_LINK_DLL_LINK_EN;
  	val &= ~PORT_LINK_MODE_MASK;
--	val |= PORT_LINK_MODE_1_LANES;
+-	val |= PORT_LINK_MODE_2_LANES;
  	writel(val, priv->dw.dbi_base + PCIE_PORT_LINK_CONTROL);
  
 -	val = readl(priv->dw.dbi_base + PCIE_LINK_WIDTH_SPEED_CONTROL);
 -	val &= ~PORT_LOGIC_LINK_WIDTH_MASK;
--	val |= PORT_LOGIC_LINK_WIDTH_1_LANES;
+-	val |= PORT_LOGIC_LINK_WIDTH_2_LANES;
 -	writel(val, priv->dw.dbi_base + PCIE_LINK_WIDTH_SPEED_CONTROL);
-+	dw_pcie_link_set_max_link_width(&priv->dw, 1);
+-
+-	qcom_pcie_set_lanes(priv, 2);
++	dw_pcie_link_set_max_link_width(&priv->dw, 2);
  
  	dw_pcie_dbi_write_enable(&priv->dw, false);
  }
