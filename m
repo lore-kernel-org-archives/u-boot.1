@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A94C7114A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 06:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABDD6C71155
+	for <u-boot@archiver.kernel.org>; Tue, 17 Jun 2025 06:16:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6672880C83;
-	Tue, 17 Jun 2025 08:16:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7D2E82B0F;
+	Tue, 17 Jun 2025 08:16:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TdGG02Rx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="byU90fWH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAC1382B0F; Tue, 17 Jun 2025 08:16:06 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id DC2068070C; Tue, 17 Jun 2025 08:16:24 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FD458070C
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 08:16:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91A5082C4C
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 08:16:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7d09b0a5050so328935485a.3
- for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 23:16:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-70e4043c5b7so46884377b3.1
+ for <u-boot@lists.denx.de>; Mon, 16 Jun 2025 23:16:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750140960; x=1750745760; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750140979; x=1750745779; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wd81WGU2OVXzIp76qFATAHLKo7Jw1CV6f7fJeJAanfc=;
- b=TdGG02RxTFJKbLIE16i6vUJYvdAydlxiBFlOEsZuzTp/9cGxqPn5xlPX322ZzGHnil
- NxSir0zEJaxAtqBz/b0z2EOOQvikgmhxmBucM94fHcrvK7QxBG1iuV9Y1YO5i3G0cI2U
- j7aemQfjoiOSwzB8tLPEGSrbQPo+VqHO9PmWEAg5N0kFlz0GnslIRhGkcSPl0wOwyagY
- ZTVboZtmLtvZvxMysVKCKzi/ipTj3g9v0tCJt94ANurp0WJa639fDBZEMU0eLfU4JSGe
- w4bhSZqgDRxTNr5+KS+ob4L1D/uip75NzqOC67qpc9uNVrS2Sc2zci4SR25zUwY8DYhs
- S2Og==
+ bh=/iXyxZKN1FpkKSDVqOvRm0Eqy0xbFbHZi2kdEfkwJtI=;
+ b=byU90fWHnTOS/izwamiCgaz9tggX6HiEDhMFK4CvdmgAVEhaVVUDsczJALuY9rajYF
+ /jtpSuI03+cWZ28r1ItiwWjwOQrz9Zb46bdh0C9OyCdpy1tcSUrT1e2hxLZxAn0UUgWu
+ rHYfbx1XmtamHYed0wHOonxNzN7Rnzrb9eBX9jZFZp3xm5AErvS/iPpfU0I+nHn/mANC
+ rk++zUCZALFp3mVyecpOudGKB1q3vTPpugQz1UZZLpsXtB+Ox1PN8E0t4O9e5RXRRSfR
+ y8Hrv1tIb1osGyV74RYLENnmrqez3ybrthxQSzYCdZKtAR09dCizzzC1DB6lo5Qk7Y//
+ DuFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750140960; x=1750745760;
+ d=1e100.net; s=20230601; t=1750140979; x=1750745779;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wd81WGU2OVXzIp76qFATAHLKo7Jw1CV6f7fJeJAanfc=;
- b=T5zdyezVq8Of+tosD3cVWfIoQ+NwJU0Vtyh1XpGfR/O0a11nwKtBLmsvB3bpswC9m7
- qnH8m96s8I5n0ypnJEiWyrI6XTYUC3SdHAg3bwPFSOLNL1TGQEXc7wikTwLf+s8nSJdZ
- og1603a2cqrS4f4+ogxgICxmZlsOAclCvKP9X+7wpeT8Fp6mXpTmT5+ebcfjAS/PgmQr
- UY1kH4Scb8F7MMtOvUmYZCcDDC/yzo0OkQ3ctY16o1rO5H98fnWwsZ9w+HAXw4ks7gVU
- 9VPrgbJIdgP15OOB33EQSZbtMkCjihxqZbnRc86tt3C44qBFqW6tjOzUmOrigtYJerMl
- zlFg==
+ bh=/iXyxZKN1FpkKSDVqOvRm0Eqy0xbFbHZi2kdEfkwJtI=;
+ b=whDnGzytQaZc7hSyoM9epK1/eOiZiwP13/rtl/0efyYY0IhqQHNbDuXhoAbl/bgAYC
+ v1v/511fEKx+3AtUrfZbFW0l90TKQnXGhytmo/P468MXim/gV8bwZtv0ZSkOXznjZIIB
+ HckutrU2waLMnA7Q553ALLdlZE80pEEJuHoy6TwtuXIixkwi51+u2KhuD8qpTc4L+wFm
+ lzZLWgcxBC0rFj5xyYJaKaRROzkfzRmPKWIi5nVm2FktMGxcjExOPpbzt3W9vZ32YEAV
+ hdF+h+AP+DUHRPuQrwCIbhm+RlC84if8PNyBSrEeboxHfyDo+aaLH+F4yMN+OLwVjRDl
+ OBJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXs9l/iVkGmtzBlmUqekA6nlB8xodmWcXTAhZ13P40VWzpl5jrZaVJ0l0OD5NnGWWvxiMYQB5g=@lists.denx.de
-X-Gm-Message-State: AOJu0YxrzsbwbGfrJbR8eadQwZ5wXFvULE/LUg1gaQa3bCSmtVK0aR3p
- NuXJyftGunROD64tUqyHG6egoIyUsbCkBnIWbL/dWFR/r1MJ09uqQcSTdngtdRkwiE3O5AYY6kp
- 3HS3c+ow5jZP1s554nGyWNAYvZZSY9UigFszgq57thQ==
-X-Gm-Gg: ASbGncvVUyogsTq6M6TssgiLGm60IrVieOddZft4fEPaxulAVVYeV8AHGErCbF49smB
- SqnXQsiYZ8PEvHXDi2YaQIaoypmQeXV3VJxQcYNztHxWlIouJHFoWjXyjnqOdDjOpPNS+g5iFVl
- uy68vVSI1PfIdSvvvDnNr8SLz5hzquas9ztLCJ+EIIIbvz
-X-Google-Smtp-Source: AGHT+IEGPoCaz2ubSJMZE1x5mle5oFR76yENpj1N8VN63ahKWnJDNDWNydlW60k8yU2a/jd7d/HSZ6n7Oahgd3TiFhI=
-X-Received: by 2002:a05:620a:4384:b0:7d3:8f51:e80c with SMTP id
- af79cd13be357-7d3c6c1eea9mr1970839285a.22.1750140960069; Mon, 16 Jun 2025
- 23:16:00 -0700 (PDT)
+ AJvYcCXffMbrYuLFpcks6Hw3QS1CuF+NR31v5k1/Wb/Z7K/tbHWiFldsllJvOiDypnyWjt/ZQrisE1s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDR+ZHfbRu61ArMLhTz90/OK02WlF5vPmGUcQ87JXlRmPmzKAc
+ LCM1c+UbAWELuhQ2YM+oRHoiKwMioukl3jv0mfQpfUOx51H6YQN0Meymu2DTtxWmt7W2TcFYVb/
+ ovRnzpqYAtW8Un1r9ZsVSrBcfEEFrwviRgchHuYQL+0Od9Q5b8e1j
+X-Gm-Gg: ASbGnctJK/d0pt8KrHEtsAQj8dmxUfwsEzHr/vkctjigxxciBFwhk0MYnSMmdnUzj/3
+ DAJkt2YIkS5BEdvSOnny0+Rcot/6irL65m0VhvNQ2FDL6j2+m6fhJPbkSkp2xv6ar3DGQd+hGrY
+ g13OB4Y723pJsnNTdVT+7aD8DKc9Q5xsmoqsqRmQaiT+Nv
+X-Google-Smtp-Source: AGHT+IFg3Og9QBhqPpbzRhAd5RWLxDKv7vpDMOvvW0p1KQ+ZI+9uMb1LnUHg6pVHzaI36Q3z5OLIsPtoR7kGAq46GP0=
+X-Received: by 2002:a05:690c:28f:b0:70e:143:b827 with SMTP id
+ 00721157ae682-7117537b4dcmr167745957b3.8.1750140979264; Mon, 16 Jun 2025
+ 23:16:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250616102338.1269541-1-sughosh.ganu@linaro.org>
  <f126efa4-8d21-4358-bf69-45714142daa8@gmx.de>
 In-Reply-To: <f126efa4-8d21-4358-bf69-45714142daa8@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 17 Jun 2025 11:45:48 +0530
-X-Gm-Features: AX0GCFtoy8Eizjrx6l4ZaGx_mAGdNycjtrYHTcXGUsxA0fGpZjVDx2ReY40fcm8
-Message-ID: <CADg8p94M_pwzifhgeR33kWNcL6_Vs4ueiQGHm2j7q2G=GppSww@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 17 Jun 2025 09:15:43 +0300
+X-Gm-Features: AX0GCFuOJ6vPq5RJv43VKDckJtOoKKRc2GN2UmZN2UvMSfUNzxIieDn9dEcYymM
+Message-ID: <CAC_iWj++ib_3MheMnVJeFA9cFN8dq1evQRAW5vQ0rtHDADcCWg@mail.gmail.com>
 Subject: Re: [PATCH] cmd: eficonfig: add support for URI device path based
  boot options
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -97,7 +97,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 17 Jun 2025 at 03:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
+Hi Heinrich, Sughosh
+
+On Tue, 17 Jun 2025 at 00:53, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
 e:
 >
 > On 6/16/25 12:23, Sughosh Ganu wrote:
@@ -116,6 +118,10 @@ e:
 >        Fdt File:
 >        Optional Data:
 >        Uri:
+
+I think this is going to confuse people. Can we just move it with
+'File' and instead have 'File or URI"?
+
 >        Save
 >        Quit
 >
@@ -124,25 +130,26 @@ e:
 > * binary
 > * initrd
 > * fdt
+
+Hmm why? Perhaps the FDT makes some sense. But for distros currently
+the initrd is supplied by GRUB. Even if we download our own, using it
+is impossible at the moment. I think we should just add the URI for
+the OS for now.
+
 >
 > It should be possible to choose a network device in this menu instead:
 >
 >    ** Select Volume **
 >
+
+Yes that would be a good idea. And I assume choosing it would
+automatically set ethact as well?
+
 >        nvme 0:1
 >        nvme 0:2
 >        mmc 0:1
 >        mmc 0:2
 >        Quit
-
-This is an interesting suggestion. But this patch is bringing the
-eficonfig command in line with the other command that is being used
-for setting the boot options, namely efidebug. Moreover, if there is a
-plan and interest to support getting the initrd and fdt files over the
-network through an URI based device-path, we first need to add support
-for the same in the EFI bootmgr. Then it would make sense to change
-both the commands (eficonfig and efidebug) accordingly.
-
 >
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
@@ -206,6 +213,10 @@ ri_str)
 > don't check that the schema is http:// or https://.
 >
 > Please, provide unit tests for the URL validation.
+
+We already have some of that in wget. Just export those functions and
+re-use them
+
 >
 > The UEFI spec refers to RFC 3986 for the allowable content of a Uri()
 > device-path.
@@ -220,26 +231,17 @@ encoded as
 >
 > 1) convert to UTF-8
 > 2) encode bytes in URL fragements using hex encoding as needed.
-
-Fwiw, I did consider adding a check for the URI, but then I saw that
-the lwip stack does this in parse_url() through a call to
-wget_validate_uri().
-
 >
 > See https://url.spec.whatwg.org/#url-fragment-string
 >
 > Please, implement unit tests for URL encoding.
-
-Okay, but as I mentioned in the patch note, the entire eficonfig test
-has been bypassed for some unknown reason. This too needs
-investigation.
-
--sughosh
-
 >
 > Best regards
 >
 > Heinrich
+
+Thnaks
+/Ilias
 >
 > > +
 > > +     uridp_len =3D sizeof(struct efi_device_path) + len + 1;
