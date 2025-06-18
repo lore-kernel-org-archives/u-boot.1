@@ -4,100 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8136C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 08:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62F19C7115B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 08:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D94EE82CF4;
-	Wed, 18 Jun 2025 10:01:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id D6F9682CBB;
+	Wed, 18 Jun 2025 10:01:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="d9hYuwYS";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="xXlGx6Or";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CEA582B20; Wed, 18 Jun 2025 10:01:18 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ id 693BB82D06; Wed, 18 Jun 2025 10:01:29 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2E2082D06
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 10:01:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2063D82B20
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 10:01:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javierm@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750233673;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Q1PbqzhLLUsFfxOg2D1/PMpDFuFCQXeIpyOH2A/8wko=;
- b=d9hYuwYSg0596nX+c9vZCTpouTnWiWwiNAojXKPuk44bQGb1zZi61yjMzWblAatKBie21L
- B9NQfJfkSEdh4SkKMTrJQDRrFt7XE+Ehg4LbBSwAQJc61QPvd1lvD36o7YM69ZkXMtzXT7
- grDdnYX1PB29F4+PFReG4JJ+ZWRGKpU=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-55-BpX9oOEOMaazOINWCdfwyA-1; Wed, 18 Jun 2025 04:01:12 -0400
-X-MC-Unique: BpX9oOEOMaazOINWCdfwyA-1
-X-Mimecast-MFC-AGG-ID: BpX9oOEOMaazOINWCdfwyA_1750233671
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-450eaae2934so54630545e9.2
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 01:01:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750233671; x=1750838471;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q1PbqzhLLUsFfxOg2D1/PMpDFuFCQXeIpyOH2A/8wko=;
- b=ZpIJ4AvBe+tlY1Wekd2oaeSeqZPCEx2FvgHyisuaA/XMZyMUS+dYKK7zwSMJcaawot
- 6ozCHQqgBGlRzQEdECNaVLBcW1oW6V5fO/ofMSva1QoY0N2Fp61MZLTwHLz6++CMrCbo
- IGOlIcDRiS8EmSOJ5olf7W2rMJ1c1chh7nW9/AxlaCbg5gq1+vphd9RdOk6BVBQ8VdGG
- D+fRIeLO3XjmXToZC6ray0k5PG75FIS3NSe9YaV68aqXw0mJi4oeDLr4wrB+W9llrk0f
- 4BmMUSRCkWnoz4J9/cVg6utgkphAfTSzIMrQFBTwXHtKTR2Y50sBrg9ndWTiQkbiLNF2
- gLlw==
-X-Gm-Message-State: AOJu0YwSJEHBeiFnzw+vuqbWPVty3hyhEGqkXyEpaQNImyI6aLUjNKg2
- cRvABQv50SFM48mkEf8DFm3DACHtemK8GQ37yjv3LT1ifWogq7aE5t7O9/pAU7Ci5q5nb0GHU2+
- mlHBe7NHzTBrB7+VQZ8DnB6f1XyqkvEOi7sOW5qYNaYFiCEH1LEiy4H4rq1ROCm8b6hRK/8EwUA
- B3eIQZknIfJNlKztw49JKSf+1KmalGxKM0s30WRA==
-X-Gm-Gg: ASbGncsVI3XKJGRUdj8TRyg2e7VPyhmeBP1O1l/7WIzvlrtEZgnFmtyTyhh+MvWQY0M
- xZs2x/29ZHoOC1YgBAUE6a7CFyHMPXBmYEZihqUUzi0M6J8C9qsfZKjbYQ8eTGhU1yj5WTC1gnF
- 0CrEox5gZMPhz98tP/mLDdd1iPqtepwRosIjDQJa0VqZpCYPky4ucIikvznWDKK0btZMidcUMBN
- qoV3qHnCeLOJz1tCropGbpk9WyketkTXaMMaDUsjbhvEOin6W7P00+uer233jVYGulhbmeUbZ1k
- 9i4amxGk5CjTNPyz/+z61lnXZSWXu6ChuoNbDv+foy6txX8=
-X-Received: by 2002:a05:600c:1f8e:b0:453:aca:4d05 with SMTP id
- 5b1f17b1804b1-4533cadfd75mr170351345e9.31.1750233671117; 
- Wed, 18 Jun 2025 01:01:11 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFjtKPnpMgYaU5EiC1/uLSlhliuPNZ6WdfPCknrVL103JSJzLhMkUpy7r0ueWGLT9rZy9dPbA==
-X-Received: by 2002:a05:600c:1f8e:b0:453:aca:4d05 with SMTP id
- 5b1f17b1804b1-4533cadfd75mr170350635e9.31.1750233670529; 
- Wed, 18 Jun 2025 01:01:10 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568a633ddsm16035693f8f.26.2025.06.18.01.01.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 01:01:09 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, mripard@redhat.com,
- Tom Rini <trini@konsulko.com>, alexl@redhat.com, mkorpers@redhat.com,
- eballetb@redhat.com, mskrivan@redhat.com,
- Javier Martinez Canillas <javierm@redhat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 4/4] efi_selftest: Add basic partition info check to block
- io test
-Date: Wed, 18 Jun 2025 10:00:38 +0200
-Message-ID: <20250618080056.1973311-5-javierm@redhat.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250618080056.1973311-1-javierm@redhat.com>
-References: <20250618080056.1973311-1-javierm@redhat.com>
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id A126E1F925;
+ Wed, 18 Jun 2025 10:01:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1750233686;
+ bh=un5i/qOIpVmha5mOIkf1B7LNVqGsDX3VVtRFCoeW4Ts=; h=From:To:Subject;
+ b=xXlGx6OrMYuHYfz4nQTFssHSe/aWni3sRdzPtJVSsr99a0uq+B7cJUyrzDGiQSiSI
+ SpJPAuACEGZlGFS3mWm7yXH4UUOGfB0F329rBWpL+/xovB19f0rKNLz0JEz0T/xONu
+ EyfxsmFsiVInNpDqmofcjwyOjJRAQj/PuMiFaCzFYYsHlfzih0YrcRbpPm5ApnLkN9
+ LOyBmGcYO1eP4n7FRp2h48xHUaBcM+jMMwom2HpJHa1OsXQ2kjvXzKesRne+1cYyyJ
+ XM2CHQJvyvEmCNV6Zz4Z9rHCiLUzhFn/DgaRXPj3l2nYuLyMPs5hTSNEMQnkQ5FG9t
+ G8wVHxtP6UMZw==
+Date: Wed, 18 Jun 2025 10:01:22 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Enric Balletbo i Serra <eballetb@redhat.com>
+Subject: Re: [PATCH v1 3/8] imx: imx8qxp: update packing i.MX8QXP MEK flash.bin
+Message-ID: <20250618080122.GA13226@francesco-nb>
+References: <20250618-binman-v1-0-373e66c7a51f@oss.nxp.com>
+ <20250618-binman-v1-3-373e66c7a51f@oss.nxp.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: FxOe_HqfOSWg2uGcLbhbN8UMv0A04nJHQfrkCO2wAHU_1750233671
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-content-type: text/plain; charset="US-ASCII"; x-default=true
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250618-binman-v1-3-373e66c7a51f@oss.nxp.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,79 +69,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test the EFI_PARTITION_INFO_PROTOCOL in the existing EFI_BLOCK_IO_PROTOCOL
-unit test. It is fairly basic, since it only checks that the values of the
-struct efi_partition_info .revision, .type and .system fields are correct.
+Hello Alice,
 
-It doesn't check the MBR partition record information, because that's not
-supported by the EFI_PARTITION_INFO_PROTOCOL implementation yet. The test
-can be extended once the support is implemented, or if the in-memory disk
-image used for the test is modified to have a GPT partition type instead.
+On Wed, Jun 18, 2025 at 03:30:16PM +0800, Alice Guo (OSS) wrote:
+> From: Alice Guo <alice.guo@nxp.com>
+> 
+> Using this patch, a bootable flash.bin can be generated. It contains
+> seco container image, scfw image, u-boot-spl.bin, atf and u-boot.bin.
+> 
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 
-Suggested-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
----
+Do also colibri-imx8x needs updates? Or that's not the case? If yes it
+should be part of this series.
 
-Changes in v2:
-- Add a test for the EFI partition information protocol (Tom Rini).
-
- lib/efi_selftest/efi_selftest_block_device.c | 29 ++++++++++++++++++++
- 1 file changed, 29 insertions(+)
-
-diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
-index a367e8b89d17..0ee909da87d6 100644
---- a/lib/efi_selftest/efi_selftest_block_device.c
-+++ b/lib/efi_selftest/efi_selftest_block_device.c
-@@ -29,6 +29,7 @@ static struct efi_boot_services *boottime;
- 
- static const efi_guid_t block_io_protocol_guid = EFI_BLOCK_IO_PROTOCOL_GUID;
- static const efi_guid_t guid_device_path = EFI_DEVICE_PATH_PROTOCOL_GUID;
-+static const efi_guid_t partition_info_guid = EFI_PARTITION_INFO_PROTOCOL_GUID;
- static const efi_guid_t guid_simple_file_system_protocol =
- 					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
- static const efi_guid_t guid_file_system_info = EFI_FILE_SYSTEM_INFO_GUID;
-@@ -310,6 +311,7 @@ static int execute(void)
- 		struct efi_file_system_info info;
- 		u16 label[12];
- 	} system_info;
-+	struct efi_partition_info *part_info;
- 	efi_uintn_t buf_size;
- 	char buf[16] __aligned(ARCH_DMA_MINALIGN);
- 	u32 part1_size;
-@@ -375,6 +377,33 @@ static int execute(void)
- 			     part1_size - 1);
- 		return EFI_ST_FAILURE;
- 	}
-+
-+	/* Open the partition information protocol  */
-+	ret = boottime->open_protocol(handle_partition,
-+				      &partition_info_guid,
-+				      (void **)&part_info, NULL, NULL,
-+				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to open partition information protocol\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	/* Check that cached partition information is the expected */
-+	if (part_info->revision != EFI_PARTITION_INFO_PROTOCOL_REVISION) {
-+		efi_st_error("Partition info revision %x, expected %x\n",
-+			     part_info->revision, EFI_PARTITION_INFO_PROTOCOL_REVISION);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (part_info->type != PARTITION_TYPE_MBR) {
-+		efi_st_error("Partition info type %x, expected %x\n",
-+			     part_info->type, PARTITION_TYPE_MBR);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (part_info->system != 0) {
-+		efi_st_error("Partition info system %x, expected 0\n",
-+			     part_info->system);
-+		return EFI_ST_FAILURE;
-+	}
-+
- 	/* Open the simple file system protocol */
- 	ret = boottime->open_protocol(handle_partition,
- 				      &guid_simple_file_system_protocol,
--- 
-2.49.0
+Francesco
 
