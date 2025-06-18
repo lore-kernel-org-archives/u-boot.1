@@ -4,79 +4,209 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A66D7C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 23:11:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745C2C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 23:11:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B696E82CCE;
-	Thu, 19 Jun 2025 01:11:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dietpi.com
+	by phobos.denx.de (Postfix) with ESMTP id 8547A82D06;
+	Thu, 19 Jun 2025 01:11:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cern.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=cern.ch header.i=@cern.ch header.b="VQB0kfPn";
+	dkim=pass (1024-bit key) header.d=cern.ch header.i=@cern.ch header.b="VQB0kfPn";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F75882CBB; Wed, 18 Jun 2025 18:24:29 +0200 (CEST)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CDC4782BCD; Wed, 18 Jun 2025 21:30:32 +0200 (CEST)
+Received: from ZRAP278CU002.outbound.protection.outlook.com
+ (mail-switzerlandnorthazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c213::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6322E82CBC
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 18:24:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4DDF82B18
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 21:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dietpi.com
+ dmarc=pass (p=quarantine dis=none) header.from=cern.ch
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pom.pumba@gmail.com
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-3a54690d369so7364507f8f.3
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:24:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750263866; x=1750868666;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FomzvIx+1rHY1R3WltzquaF6RmrPt0M5v7vuhGZBfKE=;
- b=jgfwiVunSiQYoQs1Wa/oqGoq1J8xvb+H4Bi7Yn/3zByGGSkdJ9ts8fKoYZDnea4/ey
- dm2LV3AhM9DEknp6Y0kdLmjnJ/M6iV20dZaRi4ebib11josW/Jfrth2Fjh6mR6v2tHeu
- HMvj/jNVvSdFIrQyYTo7y4c/zxwZbO/4dpYubYisI11jWfpBDGthonTyvsrD6U2B+Qu/
- Rjv6JVGqrMcqg+5XCRJ5vcLijnQtrPvqintv6mHV7zmuyYXg790Dz7SL0JIGjlAsrxz+
- 63A31tVCmOgVdpzgBI7Em6AiTOgX2N1meArpgsYELY1XGqCjIiQPx2tM2o4YkVu/0xNo
- V1fQ==
-X-Gm-Message-State: AOJu0YxmeEd8XsAytpLIuwJyJituQXTXJ9DwWh1Jsed7yeuHR4EruFiY
- 5Rp1ZJhvyDvsE3cLlyhh5YjbOayPRBoUHJDQQHNvrrR/W/ZGi7pUR3Zr
-X-Gm-Gg: ASbGncu5eD/pnRcBgRHR4OPtdcknmGrZU52ffG3hmVBRa1WxNXf3LxZ9rVenItf5WSv
- k9BothChVseSw2MlUqjLEOj/mxhF31AnpOOf1hc4plNNyLuePdf1Sc0cbOjNasCfCsd75S+KyF4
- yyz7BMW02pK12WXlRP+4Y3WcJFZEh+af/6gFm0pi1VzMKj1aBA8/1MITyqgMJr22h9Encvu0qfM
- mVn6LrxCwQh96FJLCyM3jNJhgnskZyyBVefKLmm+UoeXjQ2gxBp2Dt1Z8b0U39GbFmGiW3yZrV3
- Bn/MOz/0AgKWfrboa9198MyLD0WOQcWNTNTj3YQziZssxNXY4rDgEt+QuIlxCrMJGS/y/KayqCS
- W6jMjwI+2pHKE8LSnEV+MRXJGzYF1da+q5xVpeMtdZIkWZDiseSJMtJA43UNLn6DCGweC3PllFq
- TN+gBUfDWQgg7EJST8Yg==
-X-Google-Smtp-Source: AGHT+IEZvoUOFhrC7e0WUzX5382DiWwPo45NBBuhccmgcOd3+zC4oABgn+blrkAtnvbwnnAk+gWjBA==
-X-Received: by 2002:a05:6000:22c2:b0:3a4:fea6:d49f with SMTP id
- ffacd0b85a97d-3a572e568b4mr14323856f8f.49.1750263865493; 
- Wed, 18 Jun 2025 09:24:25 -0700 (PDT)
-Received: from ?IPV6:2003:e0:6f23:53cc:6065:ccf7:5e0:66a1?
- (p200300e06f2353cc6065ccf705e066a1.dip0.t-ipconnect.de.
- [2003:e0:6f23:53cc:6065:ccf7:5e0:66a1])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b47198sm17063854f8f.81.2025.06.18.09.24.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Jun 2025 09:24:24 -0700 (PDT)
-Message-ID: <3a38f9b3-e8a1-41dc-b770-0af80b8ebc09@dietpi.com>
-Date: Wed, 18 Jun 2025 18:24:24 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=pieter.van.trappen@cern.ch
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xRk9DqBc8oYCL/+zFpazMqUErMRoHn8BlT8Lw2D65YSHYyq+kwfa70UeYt9jXh3dQyxL1NDjrSMxROoK5XOLxQEWjOZnv8g/WhjITZ+npPMMTpNsrFGjyZHmroB2ev1vrWS+iEInUSby2mNnymKl8YsNTiW2H26wMQEISKln8VKXItGlSm+PvI02F4KV7QL/5AcvPRXLMVpPYdKRBeW/tALAdCI3mIqW3ZtvyMbtuQJ/XHt9F/VlpTulkInebwoxo93wgjOsPJ4qaMGigV0DUcMUWBL2fLIjN23p7eZD2iA1qT7sGrCclZ2yNyWsQE7zvnEpW3XyM6M7w5l1kzRE2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=isqbOUn+RRTZoYFK1sPEjYmpka0EW3GnlazBJ7NAc+0=;
+ b=GRlvp9jqMs/agCqBNAWBgYa+uMBDRlXv0EJJ1+nDYtcNTsbPiS3k1YxqNB3AxYknOJuHXhQ0ly1yyiYFngzEt/f9TigbBTlJjNcNUH/B2qu1jpNOS6sc5qMABPAtOwoZXJE5TKr8W8GBNM7/Yde9DApYr2OO61fNXqpHThoKOG7jEj+dddwON/XF9BxBWawJ6lL5O7XCBm8Uuy9GETSvCBdiYArQ/8lRES6avmkE+oZGpPifE+WPiroENtbBv36mGqzZGWdUTOx/i1vyDjibyM1VqB5eaJNpaxCHJZOhirV74/vBhQp4cWgVpmAYaZG56L4ctlB9BOEG36NYcz3UlQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 51.107.2.244) smtp.rcpttodomain=amd.com smtp.mailfrom=cern.ch; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=cern.ch; dkim=pass
+ (signature was verified) header.d=cern.ch; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.ch; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=isqbOUn+RRTZoYFK1sPEjYmpka0EW3GnlazBJ7NAc+0=;
+ b=VQB0kfPnUpstuXMqpmJbxVDSrlAfS4t099PsDPN1je9aLrjDStOjdk9ukU0hf0Up6ZSajhydbF+zkdldPQS26KZy97JpGsrQpiWHvvvcwN1eCtDeHpHhv1ps3hb/uzzsaTMi3Va2879witWE0Up3vpV4RLRZPIhkrRg5Eytu+QI=
+Received: from CWLP123CA0087.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:5b::27)
+ by ZR2P278MB1112.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:5e::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.19; Wed, 18 Jun
+ 2025 19:30:28 +0000
+Received: from AM3PEPF00009B9B.eurprd04.prod.outlook.com
+ (2603:10a6:401:5b:cafe::f3) by CWLP123CA0087.outlook.office365.com
+ (2603:10a6:401:5b::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.30 via Frontend Transport; Wed,
+ 18 Jun 2025 19:30:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 51.107.2.244)
+ smtp.mailfrom=cern.ch; dkim=pass (signature was verified)
+ header.d=cern.ch;dmarc=pass action=none header.from=cern.ch;
+Received-SPF: Pass (protection.outlook.com: domain of cern.ch designates
+ 51.107.2.244 as permitted sender) receiver=protection.outlook.com;
+ client-ip=51.107.2.244; helo=mx2.crn.activeguard.cloud; pr=C
+Received: from mx2.crn.activeguard.cloud (51.107.2.244) by
+ AM3PEPF00009B9B.mail.protection.outlook.com (10.167.16.20) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.21
+ via Frontend Transport; Wed, 18 Jun 2025 19:30:27 +0000
+Authentication-Results-Original: auth.opendkim.xorlab.com; dkim=pass (1024-bit
+ key; unprotected) header.d=cern.ch
+ header.i=@cern.ch header.a=rsa-sha256
+ header.s=selector1 header.b=VQB0kfPn
+Received: from ZR1P278CU001.outbound.protection.outlook.com
+ (mail-switzerlandnorthazlp17012053.outbound.protection.outlook.com
+ [40.93.85.53])
+ by mx2.crn.activeguard.cloud (Postfix) with ESMTPS id 033C981ACB;
+ Wed, 18 Jun 2025 21:30:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.ch; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=isqbOUn+RRTZoYFK1sPEjYmpka0EW3GnlazBJ7NAc+0=;
+ b=VQB0kfPnUpstuXMqpmJbxVDSrlAfS4t099PsDPN1je9aLrjDStOjdk9ukU0hf0Up6ZSajhydbF+zkdldPQS26KZy97JpGsrQpiWHvvvcwN1eCtDeHpHhv1ps3hb/uzzsaTMi3Va2879witWE0Up3vpV4RLRZPIhkrRg5Eytu+QI=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cern.ch;
+Received: from ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4f::14)
+ by ZR1PPF44E2E16D4.CHEP278.PROD.OUTLOOK.COM (2603:10a6:918::28c) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.19; Wed, 18 Jun
+ 2025 19:30:25 +0000
+Received: from ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::1a96:59c:94fe:3ae8]) by ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::1a96:59c:94fe:3ae8%7]) with mapi id 15.20.8857.016; Wed, 18 Jun 2025
+ 19:30:25 +0000
+Message-ID: <405c6a76-d2f2-4842-9d0c-b74888834c78@cern.ch>
+Date: Wed, 18 Jun 2025 21:30:24 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: board: assign up to 3 static Ethernet MAC
- addresses
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <e76dbe98-2fa3-4d1b-a452-aa88a142c5cc@dietpi.com>
- <2beda42f-68c4-4fc3-8b84-ede6e452c4c7@cherry.de>
- <5aeeab0f-cbaa-4b25-9baf-37e2b0e5e9d1@dietpi.com>
- <7ab1deb6-5ab7-4544-805f-f2e1e139d045@cherry.de>
- <647c2f92-344f-4feb-8979-93b1d6574193@dietpi.com>
- <0c822158-11d7-4a1f-93f8-22043c807bd9@cherry.de>
-Content-Language: en-GB, de-DE
-From: MichaIng <micha@dietpi.com>
-In-Reply-To: <0c822158-11d7-4a1f-93f8-22043c807bd9@cherry.de>
+Subject: Re: [PATCH] Improve user feedback in case of FPGA bitstream load
+ failure
+To: Tom Rini <trini@konsulko.com>
+Cc: Michal Simek <michal.simek@amd.com>, vtpieter@gmail.com,
+ u-boot@lists.denx.de
+References: <20250617092333.335908-1-vtpieter@gmail.com>
+ <eb9be150-5298-4929-94e2-ace2f095eb84@amd.com>
+ <20250618135728.GA6521@bill-the-cat>
+ <ef7de176-5beb-4a7f-9663-a2757b85b86c@cern.ch>
+ <20250618161622.GG6521@bill-the-cat>
+Content-Language: en-US
+From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+In-Reply-To: <20250618161622.GG6521@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: ZR2P278CA0056.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:53::8) To ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:4f::14)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic: ZR0P278MB0759:EE_|ZR1PPF44E2E16D4:EE_|AM3PEPF00009B9B:EE_|ZR2P278MB1112:EE_
+X-MS-Office365-Filtering-Correlation-Id: 22e8dd1d-38eb-4575-c12b-08ddae9e9488
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?TW9tRVNEQlZGNVJKakJBbSt5QllYZjlwSnRPZzQ2VGlGYlVBM2hkWkZrOGRJ?=
+ =?utf-8?B?aHBzbU56bzhyQ3pEeUZhMW90alBRSmtwY3NwM1g3cmtQV0Qyc1FyczRmWm11?=
+ =?utf-8?B?bisrUU1lQ3dBejJIcnBCZ2FlWmxFNHhpR2djTENpZVlIK2lsME1DbTZ4VVJU?=
+ =?utf-8?B?TlNmcUxKQy84eHhUZFRKT3pIQm9NQllobzkvc2YzQXA3aTdWQThwdkRiMThZ?=
+ =?utf-8?B?emwySk84RWRHZTBsVGoxVXZ6Q0N5MDhVdzBMM3dMMlhtMnl5SkhOZ2lJeW1m?=
+ =?utf-8?B?QU1BTXpURCthN1RnUmhMbzhIeEx2YnI5eDRFQ0FsRVlYQ2pOV2h6cTV1eWQw?=
+ =?utf-8?B?ZURla3hGTUFuR2ZXbGYvQ3RPdnkvS2ViaVlkazk2anNxdEczL01ESW13aWJr?=
+ =?utf-8?B?dmhOK3FHSm9vN0QzQzdOcEZaRk1rQUN0bUU4cmJiRlV3STlSN21IRmFnYjg5?=
+ =?utf-8?B?MnNrSFgwQUpBNWhSaE9QSHVOc3R4dUJ3NmhoZDFZSktENUxETGoycFYveWVO?=
+ =?utf-8?B?Y3hsNnNFeVJvcmVXdWs2aktXMTgxdzFFWmNIY0tmV2gwQnMwbHdTQTVmNGlJ?=
+ =?utf-8?B?aThMaTZ1QmJORDRVWU9NL0szajBsM3hLVVZLSXY1cHJkZ2pGWGtqd2hab2gr?=
+ =?utf-8?B?MFhQSnFJeEtlenRkSnQ0NVBSVzY0NzN4SEQ1NU5KVWdYanZlN042QjRjWGxR?=
+ =?utf-8?B?cWNYZjc5eTRXR3k2R0lwRnVVOXcxeHVFTlBKS2FqeGllQmFjWHN2QWxCN3Yx?=
+ =?utf-8?B?ZVdXbEdtQ0xwWkk0aENwdGhteHVORTRDMjdRTk03aXg3QzFSRVVrb1JGMU12?=
+ =?utf-8?B?eW9LR1hoWmRKL2F4dGpJMjlydXFWWWhYMjEvMWlkMXhNVlp2aDhlTHpZYktZ?=
+ =?utf-8?B?ck5BakJWMHhkYUlmb3QzczhXUWtwVkI0VWFqbE5PdkkwRWQxZ2ZudzErVXJN?=
+ =?utf-8?B?T1BMSmhtZzZLNURNS3Y0Y2FBM29JaEdvaWpkSW9wVWtjM1RHVURoZkl5TTU5?=
+ =?utf-8?B?b1VGRVJGc0RKYjRCWjZwUjlOMEEzOFN4RjNXZkdxK0xBRFFscy9MakV0dlV6?=
+ =?utf-8?B?NEo2OWNYZjV6anZ1ckZvTVVEMUhwZUpTVU0rb1l0SWFHT0ZxM1BkSmRvci9i?=
+ =?utf-8?B?NFV2Uzk3TTBFVXBwS2d2UkYxelIvVzcyclQxQ21HMUE1enAxWlpvMHAzY1Jx?=
+ =?utf-8?B?WXBUdGEzYnlHNEpiK3BRWDF4bW1iWDdBZXdpczNIRTVScHB6OVU2LzVEVmR5?=
+ =?utf-8?B?ZjIvR3VWMTlYaGR5UmxBZ21sSWY3K1BLZmh0NDRNOGFzQ2VaV3FmR0NYZEtu?=
+ =?utf-8?B?YzZ5eHN1c2dFY1ZwNSsxT0dYWXJyV0hmZ0pVeEJndzdTTDVNcjI0LzBLb1dY?=
+ =?utf-8?B?VkFBamsrdkFPOVhJZHFOTkpMa0twK3pYNUFvNUxFUExMbGh0anpoQ3JCZ2t4?=
+ =?utf-8?B?WndvWFBwN09ZOURjdGNZTlpBeitjaHVIT2tPNmxseXJHdERjM0ZYTmRnck5a?=
+ =?utf-8?B?WWlCZS9RdlVOZjJERXl4dXJucGlZR3RXS0w4dVRCVDJYL0ZSeHB0WkhkcUxW?=
+ =?utf-8?B?VnVvQ1JLL2VlMHV3eEplWlNlKzZsV1pYRGIvNTBKdVFsQmRxVGFoVkE5NW1W?=
+ =?utf-8?B?Z2pXN2hZTGJXU2E5Q3ZySUlkRzZDbzBaT0hyQkw5RDlwU3RRUEVNR1hyUG1h?=
+ =?utf-8?B?QlQ5VFZmUnUyNFJIUWxDK2FWMzFWdGtPTnFnSGdNcEhhN2FQcWJ1N2NBMnF1?=
+ =?utf-8?B?TW1ZTUROOHNMQ3NxNmc3TlhFOVNqMFJqNlpxY1luaU9MVFMwMTVwN2VIdEk5?=
+ =?utf-8?B?eGxuZDZWUXU3emhPRUhmZXZubndwdUhlL3ROSHVCemYwTmVPZEhSY2tZcUdF?=
+ =?utf-8?B?Nk5iUm1RMmZNN1h4YnY0aUJZdlIzYzA0QWp3M0xhMk1YbjZxa2RuMktFUEhm?=
+ =?utf-8?Q?jEl9f/wfu/k=3D?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM; PTR:;
+ CAT:NONE; SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1102; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR1PPF44E2E16D4
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM3PEPF00009B9B.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: e08151ad-090f-4c34-f781-08ddae9e9344
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|35042699022|14060799003|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZkphbzRvZU44Nk0rVlIwVHJ5RTAyazI1Z0VydzU2aWh0VlhBa2R1Ynl0bkhF?=
+ =?utf-8?B?QzQ4QithM2JqdWxYU0tjYzJjb05KVHhQc2lkUFJTOUUrb2xVRS9DcWJ2NkNG?=
+ =?utf-8?B?WFRZMXpIWWd4WjIyQ1hENk5KQ0hmZWY1NnBtN3dOZHRUSlBkcDZBWng4cW43?=
+ =?utf-8?B?RnQ5Rmw4UTRtN1pneDRXODRrLzdqT3NtQmxXbzkyNXR4VGgyY1RqTmpKclE2?=
+ =?utf-8?B?SmZDZWY2OWVSMHFSdVllRlJUM21BeEd6TjNMVitnbWhSdGxYQ0dZYXBJNXlL?=
+ =?utf-8?B?UWxWSlpsM1hFKzNyRWRrZGE5VTh4Lzdic1BWVk5YMEJkV0tTZFQ5aGJnaFEw?=
+ =?utf-8?B?WjJGTTl0T1Y3TmU0UWxxMVhEa01oOFlWRnp1MTRFN001ZmdVam9YcTF6QVRh?=
+ =?utf-8?B?Lzk4QnRpUmhWS1JUUXdqR3FtWlI2amZtZWFXcm1vR3BhUW54V1Q1dlkzMkpM?=
+ =?utf-8?B?VkFCeEl3L201cmIyVDFjeS9DMytBckR0T09sRzE3bU9CMmpMSU1UWDRQZzZM?=
+ =?utf-8?B?ZWNqVjBZdDdVZTlqY0xGb2lNSllxOTdJemRuWWZqVDZxcmxSMDlvZGh5ZEpl?=
+ =?utf-8?B?L2c0TllTRm5oMkttOGhQZEprQ0wvaThOUWdMRDRxMWdjTzlrV2FaWW5Cc3FI?=
+ =?utf-8?B?a2hZbEQ1bE9qRUdaQUxyQWVqd2dpYm5id0ZEWkNCdHV0T015ZjhGNGRudURz?=
+ =?utf-8?B?Q05JOS8xNlVoT2ZxR01VbmJsUklZNXpVMVpSWHY2TzlrNUhQZFRISTV4WWl0?=
+ =?utf-8?B?OGxXVTRLenpDcWdENUVEc3JtVDcraDJQYWRPVGxrQ04wc2tsbGJjejlkK2hX?=
+ =?utf-8?B?UzM5YWI1Znh1LzRzV3dnTUxta1huWElyOWRPRnhIaWQxaGhURjNKQ3Q5dmNT?=
+ =?utf-8?B?aFBhbkdYeFA5Qm11K2ZKRkFMMktGeXdMUDdmQ0FuVGxRM0YxZHF3dGVHQ0Z2?=
+ =?utf-8?B?NUxRV1c5NjJNUnZtQk91R0QzL2dkRmxmSU56L1lMdzNnSTZhNmozSlVWbmFJ?=
+ =?utf-8?B?VDU1TTFnYXBsU1NmOUFlUzdNbGFoUWliaHgxMHN2YUdDdUVLamU1Q3F5K3RX?=
+ =?utf-8?B?dklDdEdKTkowRk1yUVhmMTE0aXQ4b3hIZzBRLzA0c3labEFQVEdiOWhtakRS?=
+ =?utf-8?B?VXUyMjB5VS9ndzNuL0duaWVhZnV4UnRDNE15V2JoWWg1a3FUWCtOODdtYm5n?=
+ =?utf-8?B?c1RQa1lSRU5xT09MRkxOcDJiOVBxY1hINHdBbnEyOUJWWjk3SE9yVzJMT2Rl?=
+ =?utf-8?B?dFdZOElXK3Y0ZzVjNnZFcjBITkxSc29jNkM5ZzZFczQ4Mk5hREZYeDBidVlE?=
+ =?utf-8?B?UVB6S3hURmNjVjFOSE5UWEtxTHptN3huZkFCcmVqNWV5bFBSdjA5OW56dG56?=
+ =?utf-8?B?U1VNcUkrMmRqNWMzOURMSGVVNWh3YVlJd291WjY1WkN0T0ZRVWVzQTdHV1dE?=
+ =?utf-8?B?czJGTUdvZTErSzkvOG1tUE9CL21LNFY2VTk0U1QyelFFNU1Ta0FpWG9yMDB2?=
+ =?utf-8?B?UHllc3RRcFV1akx0THVERHR5bWUwU0pCamRQQzFZRlh5U1l1ZUhLZGZteEVE?=
+ =?utf-8?B?VDNjbG5lMnFhbUo1OFozVWRRL3hLUDdMaTdwNWZhNGMwWW9FOGlBYURUSnVq?=
+ =?utf-8?B?TUduV2kySktaakExWUt4b1d1M1lPREFaV2FtNEt5OHo4S0Vvdk1ZeXJBNmY0?=
+ =?utf-8?B?WGlBVkhwS1BEZkNzQ3BvUC8xNndQMDZlckVCMmFaUklBTHRlQU1hRWZ3V0dp?=
+ =?utf-8?B?NjJiRkJWT2pVYS83MTQyb2JrS2JwN1gxQTNvRDZQVzgzUXBiUlI0bmwvQjly?=
+ =?utf-8?B?TkkvcVJ1UmkvemFEZG4wck81ZjhvOExpU1ViOGlmN1krTzhxL0xiNlZFTzJW?=
+ =?utf-8?B?SS9ndDRPWjBFVFJuQlUzc0hRNUNOYlltSmhZa2srSFZCMG1tS0hXRExtanpY?=
+ =?utf-8?B?Z2pWbkR0Sm1wQnRVcVFTYjR0bU00U1AyMlM0bWM3SjhPdW5NdThwK1RNb1dL?=
+ =?utf-8?B?TVJGVlh1eUEvZVNXSG01NEtEeUNyRVgwT29ibFQzSnhWcHUyUTNWaUxyeFZp?=
+ =?utf-8?Q?gGHQF4?=
+X-Forefront-Antispam-Report: CIP:51.107.2.244; CTRY:CH; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:mx2.crn.activeguard.cloud; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(35042699022)(14060799003)(1800799024);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: cern.ch
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 19:30:27.5707 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 22e8dd1d-38eb-4575-c12b-08ddae9e9488
+X-MS-Exchange-CrossTenant-Id: c80d3499-4a40-4a8c-986e-abce017d6b19
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c80d3499-4a40-4a8c-986e-abce017d6b19; Ip=[51.107.2.244];
+ Helo=[mx2.crn.activeguard.cloud]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9B.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR2P278MB1112
 X-Mailman-Approved-At: Thu, 19 Jun 2025 01:11:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,203 +224,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
- > Please keep the ML in Cc.
-
-Was too late for me yesterday :).
-
- > We currently have 137 defconfigs for Rockchip boards (git grep -l
- > ARCH_ROCKCHIP configs/ | wc -l), so not sure 3 is a reasonable 
-threshold :)
-
-I mean just for us/me, coding efforts and maintaining a patch, it is 
-easier to do it right there, where it is done right now for ethaddr and 
-eth1addr already for all Rockchip boards, instead of creating overrides 
-for 3 particular boards. I hope an additional eth2addr is fine for now, 
-until we found a better/more generic solution.
-
- > Now I see a possible issue in that. I believe the random MAC addresses
- > are constant across reboots for a given board since it's based on the
- > CPU ID. I am assuming we should be keeping this stable if we make the
- > thing more generic. Sunxi seems to be setting the first byte of the MAC
- > address depending on the ethernet controller index. Rockchip seems to be
- > XOR'ing the last bit of the last byte (and you were looking into
- > extending this to the 2LSB of the last byte for up to 4 addresses). So
- > we already have different expectations of how the random MAC addresses
- > need to be computed.
- >
- > We could have a generic implementation that is overridable for boards/
- > vendors or architectures (e.g. via weak symbols for example).
-
-Yes, whatever we do, it should be a non-breaking addition, at last for 
-now, just generating those MAC addresses for existing ethernet* aliases, 
-which have no related variable assigned yet. And seeing the different 
-approaches on getting the first/initial ethaddr to derive further ones 
-from, I think a new generic method needs to work on top of an existing 
-ethaddr variable, generated in current board-specific way, or defined in 
-boot env/script.
-
-I also wondered about sunxi adjusting the first byte. Since the first 
-block contains also unicast/multicast bit etc, I would always prefer 
-varying addresses from the back, so the same method can theoretically be 
-continued for a lot more MAC addresses, before running into bits we must 
-not change. We can assign already 16 MAC addresses with the last xdigit 
-only, when incrementing the bitwise mask by 1 each iteration, and apply 
-it on the original ethaddr each time? And as far as I can think about 
-it, incrementing it further to span the second last xdigit, hence the 
-whole last MAC address block, would work just the same way, able to 
-handle ethernet0 - ethernet255, theoretically.
-
- > Not sure to understand what you want to do here or what's the issue 
-sorry.
- >
- > You need also eth*addr for use in U-Boot (if you do PXE, TFTP, ping,
- > whatever involving networking) so it makes sense to have them in U-Boot
- > DT as well.
-
-U-Boot assigns those variables to ethernet aliases on its own device 
-tree as well? Would be reasonable, but for me this is minor. At least I 
-did not hear from a case where someone was complaining about a random 
-MAC address for network boot.
-
-What I aim for is U-Boot assigning static MAC addresses to ethernet 
-aliases defined in/for the kernel device tree, better in a more generic 
-than specific way, so it does not need to be changed again each time a 
-new SBC (with new SoC) with multiple onboard Ethernet adapters arrives. 
-Adding the aliases to the kernel device tree is then a different topic, 
-not related to U-Boot, which I however aim to achieve upstream as well. 
-If U-Boot syncs these back, it allows static MAC addresses for related 
-adapters in U-Boot phase as well, of course.
-
- > U-Boot may point to ethernet1 in kernel for example, in which case MAC
- > addresses may all get swapped between U-Boot and kernel. This is
- > theoretically possible, not sure how likely it is to happen though.
-
-That could happpen already now with the often at least 2 aliases 
-defined. I wonder whether it can cause issues with PXE boot etc. In the 
-cases I know, a dedicated dtb is shipped as well, and I am not even sure 
-whether the network connection remains the same between U-Boot phase and 
-kernel phase? In any case, as long as any new generic MAC assignment 
-does not overwrite existing eth*addr variables, and does not generate 
-new/different MAC addresses for ethernet* aliases which have a related 
-eth*addr variable, it should not be able to break anything, but only 
-turns all those MAC addresses to static, which are otherwise random.
-
-Best regards,
-
-Micha (aka MichaIng)
-DietPi project lead
-
-Am 18.06.2025 um 11:49 schrieb Quentin Schulz:
-> Hi Micha,
-> 
-> Please keep the ML in Cc.
-> 
-> On 6/18/25 3:05 AM, MichaIng wrote:
->> Hi Quentin,
+On 6/18/25 18:16, Tom Rini wrote:
+> On Wed, Jun 18, 2025 at 05:44:29PM +0200, Pieter Van Trappen wrote:
+>> On 18/06/2025 15:57, Tom Rini wrote:
+>>> On Wed, Jun 18, 2025 at 09:15:54AM +0200, Michal Simek wrote:
+>>>>
+>>>>
+>>>> On 6/17/25 11:23, vtpieter@gmail.com wrote:
+>>>>> From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+>>>>> -		debug("fpga: incorrect parameters passed\n");
+>>>>> +		puts("fpga: incorrect parameters passed\n");
+>>>>
+>>>> I think all of these should be moved to log_err that you should be able to
+>>>> control verbosity.
+>>>>
+>>>> Tom: I think this is where you want to go right?
+>>>
+>>> Sounds right, thanks.
+>>>
 >>
->>  > I didn't mean to suggest to have this as part of the boot script. 
->> Board
->>  > file (for me) is any file in the board/ directory which applies to a
->>  > board. See board/theobroma-systems/ringneck_px30 for example.
->>  >
->>  > There you could replace misc_init_r entirely, or define your own
->>  > rockchip_early_misc_init_r (like I do in board/theobroma-systems/
->>  > ringneck_px30/ringneck-px30.c for example) or add a
->>  > rockchip_late_misc_init_r callback after the ethernet addresses if you
->>  > want?
->>  >
->>  > That's what I was suggesting essentially.
+>> Right I will amend accordingly in a v2.
 >>
->> Ah I see. Since it affects 3 different Rockchip boards relevant for 
->> me/ us, potentially more, doing it for all Rockchip boards seems 
->> reasonable, 
-> 
-> We currently have 137 defconfigs for Rockchip boards (git grep -l 
-> ARCH_ROCKCHIP configs/ | wc -l), so not sure 3 is a reasonable threshold :)
-> 
->> at least less code in one place. I will probably start to work on the 
->> Orange Pi R2S soon, a RISC-V board with 4 Ethernet adapters, which 
->> will most likely have random MAC addresses as well. So actually I 
->> would vote for a more generic solution which works the same way on all 
->> hardware. I 
-> 
-> I am not too fond of how we handle the random MAC addresses in Rockchip 
-> either, we should be able to make this more generic indeed.
-> 
-> Now I see a possible issue in that. I believe the random MAC addresses 
-> are constant across reboots for a given board since it's based on the 
-> CPU ID. I am assuming we should be keeping this stable if we make the 
-> thing more generic. Sunxi seems to be setting the first byte of the MAC 
-> address depending on the ethernet controller index. Rockchip seems to be 
-> XOR'ing the last bit of the last byte (and you were looking into 
-> extending this to the 2LSB of the last byte for up to 4 addresses). So 
-> we already have different expectations of how the random MAC addresses 
-> need to be computed.
-> 
-> We could have a generic implementation that is overridable for boards/ 
-> vendors or architectures (e.g. via weak symbols for example).
-> 
->> see the argument to not bloat the environment with often unused 
->> variables, so makes sense to generate those MAC addresses on demand only.
+>> I'm trying to compile now that it's more than some tweaks and I notice many
+>> (fixable) errors in the drivers/fpga files such as missing time.h includes,
+>> spotted by gcc 14.2 (x86_64). I'm on the next branch.
 >>
->> As you mention misc_init_r, I see sunxi boards override/use it to do 
->> it more that way: check for aliases ethernet0-4 in a loop, and 
->> generate an eth*addr variable only if the alias exist, and the 
->> variable does not: https://eur02.safelinks.protection.outlook.com/? 
->> url=https%3A%2F%2Fgithub.com%2Fu-boot%2Fu- 
->> boot%2Fblob%2Fmaster%2Fboard%2Fsunxi%2Fboard.c%23L776- 
->> L795&data=05%7C02%7Cquentin.schulz%40cherry.de%7C464204d1dfa844099a4208ddae0443dc%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C638858055555459309%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=%2FD%2Fr88eFxZY%2Bf%2FMafL6AftJVswiA4uVClC1Hqn3xM1M%3D&reserved=0
->> But since it generates variables, I assume it is called before boot 
->> scripts and hence is based on the ethernet* aliases defined in U- 
->> Boot's device tree, rather than the kernel device tree, right? I mean 
->> I aim to 
+>> Is this due to my gcc being too recent or is something else going on? I
+>> don't mind patching these in case that's welcomed; let me know.
 > 
-> Yes. Remember that some boards do use U-Boot DTB as kernel DTB as well, 
-> so it's not that easy of a shortcut for everything supported by U-Boot.
+> Just further changes on the next branch which your changes are exposing
+> I guess, separate patches for them would be much appreciated, thanks!
 > 
->> send Linux patches to add those to respective device trees as well, 
->> if/ once this U-Boot patch gets merged, and those might be synced back 
->> into U-Boot device trees. But since this is all done on/for the kernel 
->> device tree, I would prefer it to depend on kernel dtb aliases only.
->>
-> 
-> Not sure to understand what you want to do here or what's the issue sorry.
-> 
-> You need also eth*addr for use in U-Boot (if you do PXE, TFTP, ping, 
-> whatever involving networking) so it makes sense to have them in U-Boot 
-> DT as well.
-> 
-> You can anticipate ethernet aliases being in DT of future Linux kernel 
-> releases by adding a temporary -u-boot.dtsi with a few properties in / 
-> chosen/aliases matching the ones in the Linux kernel. Once synced you 
-> can remove them. Note that obviously unless your system uses the exact 
-> same binary for U-Boot DTB and kernel DTB, you cannot guarantee that the 
-> aliases will point to the same controllers for example, so ethernet2 in 
-> U-Boot may point to ethernet1 in kernel for example, in which case MAC 
-> addresses may all get swapped between U-Boot and kernel. This is 
-> theoretically possible, not sure how likely it is to happen though.
-> 
->> Wouldn't it be possible to generate and generate and apply the MAC 
->> addresses [here](https://eur02.safelinks.protection.outlook.com/? 
->> url=https%3A%2F%2Fgithub.com%2Fu-boot%2Fu- 
->> boot%2Fblob%2Fmaster%2Fboot%2Ffdt_support.c%23L645- 
->> L664&data=05%7C02%7Cquentin.schulz%40cherry.de%7C464204d1dfa844099a4208ddae0443dc%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C638858055555480725%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=zes5ZQmR4du9dygIIf6HLT2cVO5yWR2b5dwbaLzpWDA%3D&reserved=0), hence for all actually existing aliases, and only as fallback if the respective eth*addr variable is not set?
->> If the method for obtaining the first ethaddr differs between boards, 
->> it could still rely on an existing ethaddr variable, to derive 
->> different MAC addresses for each ethernet* alias index in a consistent 
->> way.
->>
-> 
-> I guess. I would rather have a fallback whenever env_get(mac) doesn't 
-> return successfully, in which case you can attempt to generate one 
-> randomly based on some callback. This would cover the case when you have 
-> a kernel DT with etherent aliases not present in U-Boot DT, this is 
-> reasonable for boards with adapters covered by Device Tree Overlays for 
-> example, which don't need to necessarily be applied on U-Boot DTB.
-> 
-> Cheers,
-> Quentin
-> 
+
+Thanks but that's not the case; I switched to the latest `next` HEAD 
+which is your commit ce2a7fcb and I get the same error, see below (one 
+of many). Maybe due to my config in which I enabled all FPGA-related 
+configs? Is is there a `allyesconfig` pipeline somewhere? Sorry I'm new 
+to u-boot development and I don't think patchwork is running pipelines. 
+I'm further investigating, I'm probably doing something wrong although 
+the gcc errors are correct AFAIK.
+
+
+drivers/fpga/spartan2.c: In function ‘spartan2_sp_load’:
+drivers/fpga/spartan2.c:145:22: error: implicit declaration of function 
+‘get_timer’ [-Wimplicit-function-declaration]
+   145 |                 ts = get_timer (0);             /* get current 
+time */
+       |                      ^~~~~~~~~
 
