@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F0F2C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 09:55:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D046C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 09:55:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D128882CC9;
-	Wed, 18 Jun 2025 11:55:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4641082D06;
+	Wed, 18 Jun 2025 11:55:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="NwPmcd1C";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="SVY6QD/O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D68B882CD5; Wed, 18 Jun 2025 11:55:22 +0200 (CEST)
+ id BA65982D21; Wed, 18 Jun 2025 11:55:28 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6407882C8D
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 11:55:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBF2382C8D
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 11:55:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 190532600C;
- Wed, 18 Jun 2025 11:55:20 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id AB4A420943;
+ Wed, 18 Jun 2025 11:55:26 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JzaSR9qe_T4T; Wed, 18 Jun 2025 11:55:19 +0200 (CEST)
+ id ZglFOqUr5AcD; Wed, 18 Jun 2025 11:55:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1750240519; bh=FMhVz31SglFFiw7vt3c+us4DDz6sylB8R3Skx+k2BXU=;
- h=From:To:Cc:Subject:Date;
- b=NwPmcd1CChKwc0rJQMMnworFSSWD9gwU6xC5WFcvHCWkL/KCG0fKtUB/h76asjcrO
- wS2MiFmn7fOp4vugPa8GxEC01/YQJ0hch6uWOO8fohhxfbJKefEtdveQiox+nFouAf
- f8oUoF3ZrifpSUUEcNkmOKRZLNXFeheTYgT6FEYwHtYvj5NtLd73XvPXkeY02zbVrb
- E0ozWngGl97DhqvX1z3WZZTv5d9IHmu7Wa60VAu2BCkhmJ2GsBbL4/3c5B3Z8CNV3v
- FgMRQphck/WMYbqnbE/P9lPmVxIwh7QqUKYa5zXjaunhg+CW+1ZyvAoZdOJbhsl8/W
- msOnWJeiDBemw==
+ t=1750240525; bh=fR2pKIZdmllUCVo4/1hIJx7P257TelJCrqk8cmIEvVE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=SVY6QD/OUZBTaPTtX36GdnQfmU0GDgHrKQZ+6Uv+ALscd9MhuM5t6eGlSdPcyBBbp
+ jYJfSdHSftLcvFroyziRVWeG0XesTMkPV09Bfn8vbeuGC8PPmpBgOMCPvpNH5l+n+e
+ ktlmZ03ij8OuWV6EMtuk20ef7UOWDuj6MO0kG+nE1yZxudZgLMIq/D4wQdHF3dt08f
+ VoOR5h3nh7Y7SR2C8z9qs/5NBv0UKV6VxFkgXTZREAvisgy01Cic2NA34/Y+j17Fzj
+ bjC9wbgwjC1lTNFLl+Yc0hJnK+WCActtMZSPpy4z/Xbcxa3ODKNokVdYuFytH7K9Sx
+ GnjtLeY3/eYxA==
 From: Yao Zi <ziyao@disroot.org>
 To: Tom Rini <trini@konsulko.com>, Yao Zi <ziyao@disroot.org>,
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>
 Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
  Han Gao <gaohan@iscas.ac.cn>
-Subject: [PATCH 0/3] Add pinctrl support for TH1520 SoC
-Date: Wed, 18 Jun 2025 09:54:54 +0000
-Message-ID: <20250618095457.45926-1-ziyao@disroot.org>
+Subject: [PATCH 2/3] riscv: dts: th1520: Add pin controllers
+Date: Wed, 18 Jun 2025 09:54:56 +0000
+Message-ID: <20250618095457.45926-3-ziyao@disroot.org>
+In-Reply-To: <20250618095457.45926-1-ziyao@disroot.org>
+References: <20250618095457.45926-1-ziyao@disroot.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -67,38 +69,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds pin configuration support for TH1520 SoC with a
-driver ported from Linux kernel, and enables it by default. As a test,
-random configuration is specified in devicetree, then the effects are
-verified by reading back registers or observing hardware behavior.
+Describe the three pin controllers integrated in TH1520 SoC. Since we
+don't have support for clocks in the AON region, a dummy fixed-clock
+node is added to supply the pin controller locating in it.
 
-With several downstream patches, I've also successfully brought up the
-second GMAC controller on TH1520. Since the controller won't work with
-the default pin configuration, this also serves as a proof of the
-driver's functionality.
+Signed-off-by: Yao Zi <ziyao@disroot.org>
+---
+ arch/riscv/dts/th1520.dtsi | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
-This series may depend on the previous series "Bring up secondary cores
-on Lichee Pi 4A"[1] for a clean apply. An output of pinmux status -a
-could be obtained here[2].
-
-[1]: https://lore.kernel.org/u-boot/20250606042804.64311-1-ziyao@disroot.org/
-[2]: https://gist.github.com/ziyao233/55738ed1a33d450ccb1dc3752494a2b4
-
-Yao Zi (3):
-  pinctrl: Port pin controller driver for T-Head TH1520 SoC
-  riscv: dts: th1520: Add pin controllers
-  riscv: cpu: th1520: Enable pinctrl by default
-
- MAINTAINERS                      |   1 +
- arch/riscv/cpu/th1520/Kconfig    |   1 +
- arch/riscv/dts/th1520.dtsi       |  28 ++
- configs/th1520_lpi4a_defconfig   |   1 +
- drivers/pinctrl/Kconfig          |   8 +
- drivers/pinctrl/Makefile         |   1 +
- drivers/pinctrl/pinctrl-th1520.c | 700 +++++++++++++++++++++++++++++++
- 7 files changed, 740 insertions(+)
- create mode 100644 drivers/pinctrl/pinctrl-th1520.c
-
+diff --git a/arch/riscv/dts/th1520.dtsi b/arch/riscv/dts/th1520.dtsi
+index e773d2e6a80..8306eda5521 100644
+--- a/arch/riscv/dts/th1520.dtsi
++++ b/arch/riscv/dts/th1520.dtsi
+@@ -128,6 +128,13 @@
+ 		#clock-cells = <0>;
+ 	};
+ 
++	aonsys_clk: clock-73728000 {
++		compatible = "fixed-clock";
++		clock-frequency = <73728000>;
++		clock-output-names = "aonsys_clk";
++		#clock-cells = <0>;
++	};
++
+ 	soc {
+ 		compatible = "simple-bus";
+ 		interrupt-parent = <&plic>;
+@@ -259,6 +266,13 @@
+ 			};
+ 		};
+ 
++		padctrl1_apsys: pinctrl@ffe7f3c000 {
++			compatible = "thead,th1520-pinctrl";
++			reg = <0xff 0xe7f3c000 0x0 0x1000>;
++			clocks = <&clk CLK_PADCTRL1>;
++			thead,pad-group = <2>;
++		};
++
+ 		gpio0: gpio@ffec005000 {
+ 			compatible = "snps,dw-apb-gpio";
+ 			reg = <0xff 0xec005000 0x0 0x1000>;
+@@ -299,6 +313,13 @@
+ 			};
+ 		};
+ 
++		padctrl0_apsys: pinctrl@ffec007000 {
++			compatible = "thead,th1520-pinctrl";
++			reg = <0xff 0xec007000 0x0 0x1000>;
++			clocks = <&clk CLK_PADCTRL0>;
++			thead,pad-group = <3>;
++		};
++
+ 		uart2: serial@ffec010000 {
+ 			compatible = "snps,dw-apb-uart";
+ 			reg = <0xff 0xec010000 0x0 0x4000>;
+@@ -439,6 +460,13 @@
+ 			};
+ 		};
+ 
++		padctrl_aosys: pinctrl@fffff4a000 {
++			compatible = "thead,th1520-pinctrl";
++			reg = <0xff 0xfff4a000 0x0 0x2000>;
++			clocks = <&aonsys_clk>;
++			thead,pad-group = <1>;
++		};
++
+ 		ao_gpio1: gpio@fffff52000 {
+ 			compatible = "snps,dw-apb-gpio";
+ 			reg = <0xff 0xfff52000 0x0 0x1000>;
 -- 
 2.49.0
 
