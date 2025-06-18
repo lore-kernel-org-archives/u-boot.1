@@ -4,82 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A39BC7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B30F3C7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC1E082B0F;
-	Wed, 18 Jun 2025 16:06:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E6EA82B0F;
+	Wed, 18 Jun 2025 16:07:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BPHOajuN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fmt5jh5l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A27480E9A; Wed, 18 Jun 2025 16:06:37 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 794D582B0F; Wed, 18 Jun 2025 16:07:36 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BE9982BCD
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:06:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBF4F80E9A
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:07:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-60efc773b5fso3754003eaf.3
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:06:34 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72c40235c34so1784241a34.3
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:07:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750255593; x=1750860393; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750255652; x=1750860452; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=osgGLIzrX1zjXAXLDyn+pGFyyI/dKEyzOlLcVqBQ7n0=;
- b=BPHOajuN6G5rOSXbu1BtHprm4tBpD03jyagzYi2LLnS+468RMDP3KPzke0AGmOdBOD
- to0YiHHgV9bvOzGZldzWZPzQrvLkKneqYbo3JEJFyTvm1I1nS2Vm8stINJswm9ZNTJK8
- lbG8GSTTEIzbof1Oa0IG1QL1Sni+lKyBgUUW8=
+ bh=kivEGkpLvg20/zzEpxVxJslK7z2V0+siN6APOk3AiJs=;
+ b=Fmt5jh5laF/hAVuoMvlWMuxCJIOFnz5urazghBen6j8anLWEdAaAvBlq3sic0B6EOr
+ GQfCO0FhiSB2nQwFqbDN9ZL26v7p8KtWSr2uZOh5S4xAQTAU4xtuF2rMZZRRUOE0vN/4
+ 4uy4I0xleXGx+eyzYQotMDP4i8RYZ/UPt+S7w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750255593; x=1750860393;
+ d=1e100.net; s=20230601; t=1750255652; x=1750860452;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=osgGLIzrX1zjXAXLDyn+pGFyyI/dKEyzOlLcVqBQ7n0=;
- b=lPXK+uMIvkJJctDsMslW00YOlrFPJJsBY2iOIbpnG+iy+UsktwQM/m7v2F+hMHtOdX
- l6c3VA1kwnlJZzcskMVJOQP98GQGAOFMa3JwKkV1AsCVc1Nma/eMClB3vIAtEAtbbetv
- w3IbGPHuNz4ggY5LFeqhYyqzPgG8MeWfOHXsLb5Vwr69QxVIdG4DWniF5WNZkQ5WVqui
- 8zhvvw/RETSf0N/P625vMfkVrAZjyr0/nIoCgEhvWhn1kZZOx35z1hJ80vleMOpF7j3Y
- grZlIE1U5QzRqc2oiTvO1ai5JMHG414hoAVL93HX6IM14s13NKgjWMqpEIkzftA05inZ
- iQkg==
-X-Gm-Message-State: AOJu0YzxP6XLm3ae2MrZHTEGHtwBYJ7FFZjRcraa+FpgjLTV+BNWBANE
- EImG6dxmXyk7j2YX9AnUjS8BmrV/++GompAREaFWkmrveFLJIn0ZpAp8dgiGzyzLXA0=
-X-Gm-Gg: ASbGncsXi/965+AsvIPXc9hTwK1rh0Yz/nEFsOk5UVHytZgotvQcCe4NhRO67I+e3uu
- LVhZsKu8mVX2uASUuArF+j8t9Qczf0QQcDIxhEJPTTnS9O1+belxl14EKuZPrcxBmmiQpZM4QGl
- 0LRKf3zGQF8UxF3DBGkOfAWzSHqkVhwZT3NLq7V1dSBjj2CSLniGTSKfPkQ0avdlJGvvEdNldBB
- ULIryPVHftBO+Dqi2nsb7JTQKU+3AJOMOyJM+UC4uSAxqRZN5SAYTJTtNVPC5pA0LbRZr6v2nye
- JuI1BizEMEVc6Y71orM5659wkdI5d2gHGNaeSyXn6WaO75kT8QP+3Ay+xfcjiD5Hcwant+3AS08
- mEmHvpSlWVeONP+0lOsV+rbw=
-X-Google-Smtp-Source: AGHT+IG3nwktZAKsRZTkFpf+/rpnvshJS5WLSzXC45icfBvCOBqMnOuoGODMXhcRoO0EcaCRODucYQ==
-X-Received: by 2002:a05:6820:168d:b0:60f:847:8354 with SMTP id
- 006d021491bc7-61110f312abmr10798850eaf.7.1750255593212; 
- Wed, 18 Jun 2025 07:06:33 -0700 (PDT)
+ bh=kivEGkpLvg20/zzEpxVxJslK7z2V0+siN6APOk3AiJs=;
+ b=WhWPTPYwtIXlO+h+6XSCiYLCxBm1+lqU6/GV7qFK6N+zD7zFk9u8iZG/q//YWjv+jK
+ Du6TXij925nr+rnSqWuug/BP/5fsqXjO8MxPKlS9xLTkyTfL82RYeymXzZgNJVR+Q1Fs
+ DheD3j/6CgINIAzy5UlkZ/ph38t6rd67B5D2Fj+7LMssi80a3W4b6/jDI0MAFZw4+ibn
+ SVeg+umogHVE0ly+5eHjJghFz9tGFinKrCrPeZelhDzE9zQ43xzXHDvivH6snzLQm3wR
+ /NgI8P3VqTKwTCjT8SwXfbJ9EUqgGRd8fmChaZH0yZHSuS4AZGq9KQr4JonD6RK3f2MN
+ 5TKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVh9Qnttw8EFaCYGw0AHysyULy/G24ZkM4fOZfwsxyI+YHXO+GC6kBEY7eLeMpgX2Q/x3Cd97o=@lists.denx.de
+X-Gm-Message-State: AOJu0YznffjF6l3A/aefIc+b327qVsS/jRtKJp/cBKGmC1ROExGL58K4
+ BunpHUpCmQdh1ht5h5CLyoP0uqxLo1142fzSlduRL64V6KbfSyBb4ASCNlyZxSCYGs0=
+X-Gm-Gg: ASbGncs+B/DXJNYyML7vSKo+ipbXJZQ/6Rw2UTUEfiu2NQcSAPOqDZzwBdt/FNUEoqX
+ lXX5VW4a/XAyHJRnSo/aGY/ZJY7FJB1uMt7IT5t42ioramH3rOa30kVYiIHcsoakfLttZzEJjC5
+ STTrBtGdiVKx50ich/l93yi5kuTC2TlwpWtYRc0mF0zxNyP16l2HP5eLZOIXPSnEWCtoHTnkPu6
+ VjAeXqgibzAsaHldmxPVMacPBf1lfJjvq2pbGDRhdPO3LJ38UUOHj5N01O94jU9NKsEutRjaq61
+ WB1uvTEJSy22qNgHB1GRlw25ppbIgMEv3t54hhxjOcM50SdiQMb4Nez5CB89702fH0N+IajOql1
+ x2TYxXRxdgBr9r3U0vyFedEI=
+X-Google-Smtp-Source: AGHT+IFaQKazLgVOUY8Eg6lFjQFepKvwdGfj/WWewRL7R2Ix4K1MHwhUPq7xzMSkTxZWGQhl2LfExg==
+X-Received: by 2002:a05:6830:418b:b0:72c:320b:f76b with SMTP id
+ 46e09a7af769-73a36270c14mr11323186a34.1.1750255652581; 
+ Wed, 18 Jun 2025 07:07:32 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-61108d785a6sm1418724eaf.1.2025.06.18.07.06.31
+ 46e09a7af769-73a517c6e26sm1041043a34.56.2025.06.18.07.07.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 07:06:32 -0700 (PDT)
-Date: Wed, 18 Jun 2025 08:06:30 -0600
+ Wed, 18 Jun 2025 07:07:32 -0700 (PDT)
+Date: Wed, 18 Jun 2025 08:07:29 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH 0/4] list.h/treewide: get rid of no-op prefetch()
-Message-ID: <20250618140630.GC6521@bill-the-cat>
-References: <20250507121246.518691-1-ravi@prevas.dk>
- <20250522165656.GB2179216@bill-the-cat> <87ecvhzhyx.fsf@prevas.dk>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: jerome.forissier@linaro.org, mikko.rapeli@linaro.org,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Simon Glass <sjg@chromium.org>, Boyan Karatotev <boyan.karatotev@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
+ Liya Huang <1425075683@qq.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] nxp: Prepare macros for KVM changes
+Message-ID: <20250618140729.GD6521@bill-the-cat>
+References: <20250618065828.1312146-1-ilias.apalodimas@linaro.org>
+ <20250618065828.1312146-2-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iRa5QLM+uCb9nJIp"
+ protocol="application/pgp-signature"; boundary="71lICAbKafYbgN2/"
 Content-Disposition: inline
-In-Reply-To: <87ecvhzhyx.fsf@prevas.dk>
+In-Reply-To: <20250618065828.1312146-2-ilias.apalodimas@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,53 +115,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---iRa5QLM+uCb9nJIp
+--71lICAbKafYbgN2/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 18, 2025 at 08:23:02AM +0200, Rasmus Villemoes wrote:
-> On Thu, May 22 2025, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Wed, May 07, 2025 at 02:12:42PM +0200, Rasmus Villemoes wrote:
-> >
-> >> While looking through list.h, I saw that the regular list_* helpers
-> >> (and one of the hlist_* ones) still contain the prefetch() that was
-> >> removed in linux 14 years ago. It doesn't do anything, but makes the
-> >> macros harder to read, so get rid of it, and the fallback, no-op
-> >> definition that they relied on. That requires removing a few uses
-> >> outside list.h as well.
-> >>=20
-> >
-> > Unfortunately this leads to build problems on lots of platforms:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1141951
->=20
-> Hi Tom
->=20
-> Now that the 'remove volatile from gd' series is in -next, could you see
-> how these cleanups would fare on top of that?
+On Wed, Jun 18, 2025 at 09:58:12AM +0300, Ilias Apalodimas wrote:
 
-Yes, I'll give it another spin right now.
+> A following patch is replacing our IO accessors with
+> do { ... } while(0) ones in order to make them usable with KVM.
+>=20
+> That leads to an error eventually looking like this:
+> arch/arm/include/asm/io.h:62:9: error: expected expression before 'do'
+>    62 |         do {                                            \
+>       |         ^~
+> arch/arm/include/asm/io.h:211:41: note: in expansion of macro '__raw_writ=
+el'
+>   211 | #define out_arch(type,endian,a,v)       __raw_write##type(cpu_to_=
+##endian(v),a)
+>       |                                         ^~~~~~~~~~~
+> arch/arm/include/asm/io.h:223:25: note: in expansion of macro 'out_arch'
+>   223 | #define out_be32(a,v)   out_arch(l,be32,a,v)
+>       |                         ^~~~~~~~
+> drivers/spi/fsl_dspi.c:127:17: note: in expansion of macro 'out_be32'
+>   127 |                 out_be32(addr, val) : out_le32(addr, val);
+>       |                 ^~~~~~~~
+>=20
+> So adjust the current macros and code to be compatible with the upcoming
+> change.
+>=20
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---iRa5QLM+uCb9nJIp
+--71lICAbKafYbgN2/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhSx+YACgkQFHw5/5Y0
-tyzw3wv/Vnl6xm7PMmlkxDOM297eEB0Le9n5b6NjuZtzEvu0JP4AWbn7e8ZB0MCc
-nc9kcA1zjPhIlpW0H2vVUxXmejzIM3Ndl9C+h4ab9AkpovY7/7EiBcM71qiQ4Shr
-h3hPOda8NCnm+zHXYzTcTeu+syfiyuv255dOtP+HyvXTyt6h2rpPJITWt9bLiHhy
-T/CfRP9cYuLjBk1Abxbu4IiVKLAVPg1IEv9Xk94P8fHKnTkkawClJHw8DmM8f3Mn
-HQVTI2jnCmOys/hMcbYu+H7enTUkGrpSfU5RBFKieouC6yN7IBdXI5kpIgezv2II
-40ZvjzRU7xv5SH1rQSpDim/4DAieM0WpIPpJgVzeVDbdjCUTjWUPAzKzikqWuAHu
-wxDKIxuXJxgYLhjGnjzVcOewhZyYN+DCy0Itf6rTKvMpFWgWVvVBIYWqHVcG/kBH
-Gz9401HJgRHjqXNhT3pUGbaHHcrNbaEPWsND98xcsKRDpD5DnFpBHFF35RnVSIqL
-qPP5EKa1
-=f9Rm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhSyCEACgkQFHw5/5Y0
+tywp3wwAgh7wy523EWnouVd4H/DFP6Xhet0cmNctgTHZKw4j69Y3QOEAjcZ1vXMD
+Pl8VRphlMMwV5TCJSJfjPwuRZvH+ExVKvTkIAskoXafvgDgQ8c7hDBi6M75O2lM3
+k1CG+iSJ3xXG6u6MyZMvgYHu7E56Ymx8Akb20wt4vnAycwmWLCzZaCHT4PxSC5Fj
+mD2ZJ652rEgc/2clVkFJ/rtp/IcA8AdKQwpARs8/wcB4iXlsq8n2zm0FIPxsFe9F
+ShEB88Hz7ydQ1HbvmHizuayNoPC/NdC0Gh8D8XG9dMjkte/4Atr5pkUZglldBf6F
+nYtqw9HadL4VzvGtKLqUjLrQR913XvunlWSycOYFBjN652zLNtLfl0uaGhAYgMlj
+/S3LwoaaclLyiICyr/LO/pLlLXzVcQnSlfKz1IHTkSk+jwbOiQXKhy3d3T6jmicC
+TDhgHmoG4wMJBP0gjddTzsdM5kseD+beK2IYQFng+RY2vD6A0No0RIutxMTdY/69
+vWDQJ3jM
+=KOko
 -----END PGP SIGNATURE-----
 
---iRa5QLM+uCb9nJIp--
+--71lICAbKafYbgN2/--
