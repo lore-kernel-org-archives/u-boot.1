@@ -4,95 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61ABC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 15:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4706BC7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 15:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A79E282EA2;
-	Wed, 18 Jun 2025 17:00:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B8C8882E20;
+	Wed, 18 Jun 2025 17:10:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LZfOXHMi";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="H0TXi8oS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7898E82E9F; Wed, 18 Jun 2025 17:00:09 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 985DB82E25; Wed, 18 Jun 2025 17:10:29 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A00182CBB
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 17:00:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A24C82E17
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 17:10:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6fad79433bbso73894986d6.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:00:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750258805; x=1750863605; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YY6XfOYlobG1yHS0Nl/CsSJUbyxmgb73FNJOs+DJ67E=;
- b=LZfOXHMifvvEBbUbyBunI4kS9LUZAbbYB8jb4jAK6xeBYZvx/Wxb1f3j3dCMSusGQy
- tPJZ6nnFuqLZJhkZUjkODqpXZl292D6YCpO1vPNUanVuorIhbpDG0LlS7x07TIW70MZm
- ToSY/OYLKTKvgjqhnojmzj8a8f5tnpVxkGHHfIzHrZdi7EWvK8qWzVpu1zMeqVTEGQq1
- 73qJPEE9YvfrwvLfPGuXqFiVkWy2mhBRAHVRebUFDw8pEv0Nw4h8JVtJ+dSDck2FGM5c
- zNzkWZnJLHuDCgi8hhwEletBXIYeFhWLGow46R0obNk5c0j7Pb/2oR9e1WAJTVdWH3Kj
- 8tIg==
+ spf=pass smtp.mailfrom=fmartine@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750259420;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=h4PgzOtt/oW8d/0Q9gpCug9TuQSx+gHl9TJ/nT0bCgM=;
+ b=H0TXi8oS9k5TAgAmKKel45wlm43ed/0/MM3rRd2yj48GFYg5dGejPvD1SxspJmQhoxYA5e
+ Gxwykw9kdJYkhumCbDb10rt6USoaZZoSM75lhy1u4iLTlHU1LXogC9drsM09GN143RoedS
+ kS7sSNoL02HO4ZLDTKYCEI/HYMfq/8g=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-557-9vTNp7v2PAiMuJ3l3od7uQ-1; Wed, 18 Jun 2025 11:10:05 -0400
+X-MC-Unique: 9vTNp7v2PAiMuJ3l3od7uQ-1
+X-Mimecast-MFC-AGG-ID: 9vTNp7v2PAiMuJ3l3od7uQ_1750259400
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3a58939191eso885855f8f.0
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:10:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750258805; x=1750863605;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YY6XfOYlobG1yHS0Nl/CsSJUbyxmgb73FNJOs+DJ67E=;
- b=vTsdP6eAIXw3HyYLUzJrfoGnamdEjBCsnOcUkrZ7ipyJL8wwLQbBrPP3ViTnzDgU6d
- qZg/sli02Bf9LwqC/4aZUyY+L0Quc1rcVkuPj5cUvJSS6kX7wqMwD6/R601C37I3PFb0
- LjtYhl7Kd1pO6I0214eP4cnu5nWXzh6gmO0+a6828erMPxQdeQKRn+mpI6Qg2pBSqhlK
- 13ucxLczEf3to0jUbvMes50l/UKX4XpvsfZlNGrfAwA1jat6x9gGotDUJ50P+bQkMl/C
- ZRrPdskzKac2oqkk5ai5kEQHdYtQjZ9tzL7gZcu4kYiHwbno7UIvKBitB7vkOzkv5AfC
- I+Iw==
-X-Gm-Message-State: AOJu0YwGtZr/KPBf5sNvee4VAYsE+evggylscX4ECXJrtrzfm+CuAo7q
- vmJpkl1XIsNcfK9LqjTeDwlVAaWLv/jNaH5qdFqjtFIDvYNWvI4ozIyifR7UsQLafEC2adhoaQ1
- kpCS5
-X-Gm-Gg: ASbGncuUTiJW7S7BqBllRUPcMmaVJlQBqaBnxM2Yb4D6XiS2pSLnfyABY6JqAhE8IVn
- bs+qySW4a8zUJfR1JsHek25MV830/veKhPXOQ0R72eCu9S25IaqyyChAHm3MkzzBzU8t7/iEx5F
- uxw7ox/eT+2pyvU/8T9r9IYxNamVxcOqvS7F49SPLivHu134DNhz9d4qcS2EzqPfhaTyTjWmOmT
- tmApLozYmI3/u7XhQqCivIyM5enpjaW9XrVSICP/L+7ve3hRUcE61PUNwXO2YoauUWMtsCQgUgD
- egaqBBMbsDXVIshh994+nIYoSw2St7c2E965DN2T3f3iii3MuA5Ia6J9xtMaGaA4kbktf+e02Kk
- W91Iig9QTPsfuRSw/Dd/OmObI9ynii5Lkr/G27iFJVLelRUk=
-X-Google-Smtp-Source: AGHT+IHa79Af+BiVzVWy9EcUtC3ZuL/0Mg5KA5hrEn4YBGLv+hX/Ii+uX90gCyDZpSMh49j4EZnyQw==
-X-Received: by 2002:a05:6214:da9:b0:6fa:a724:8769 with SMTP id
- 6a1803df08f44-6fb477a62c1mr282976646d6.35.1750258804659; 
- Wed, 18 Jun 2025 08:00:04 -0700 (PDT)
-Received: from ubuntu.localdomain (173-206-114-64.cpe.distributel.net.
- [173.206.114.64]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6fb4d627a14sm44736416d6.68.2025.06.18.08.00.03
+ d=1e100.net; s=20230601; t=1750259400; x=1750864200;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=h4PgzOtt/oW8d/0Q9gpCug9TuQSx+gHl9TJ/nT0bCgM=;
+ b=KnhotNHecB1IVB754UX9x+d60xqQ3XdeaU1BuSSYfJiVHpasVBb084GzatWiWCgx/Y
+ Vl5KKcaxjmP6JOEt06q5AKDvgklbJ8OrcMJ8R4v+G4vv8GargoTVEWXbk3ew713YT6Aj
+ GLmzdvWkrKK+Z+ePQsZFEu2EFFd5Ll71/cnGdoPjizPQVrLZVj14jK/oIC64FXdDp38v
+ MZ9qBodZ9flNzVDz0QJwJMbX2tgIRdNEHpVIri5icDPJR3yZ3BM/SPbfblpSqq2vx2O5
+ G52m63gSnBfN8PJIzviaW+BY6929tViphDYqLqOQDtvkw+z9mzpCczEOnPdn5oKX74aU
+ TFAA==
+X-Gm-Message-State: AOJu0YwZed8bakGUua1ySZfE9H4SwxROGLLFMGpbZL9PrLYFAf5/8IDu
+ FVd00juCU2ilexUE6nAh1jQ5QV+bc/8nMzrlY9M8ZkXZ4ZOWS4JihwiZstOZ0i41ZQmUyE/FnKr
+ RU1/IKn9eMarxuHmPUZnGuQJTSBUP4spwEUe6uTiYgcnYQYCAa/vFYBM=
+X-Gm-Gg: ASbGnctdceLhvUx0ofAvgw8IYVsYyhf45dMbctp0+OoDJ/EVrqk/UvmfGeK8Gtih1Xc
+ L5/9l0v4qkYje8wWt07fcp3oc5Z6oCYtGsKeG2bc/TIP8E6OjMojf49GCdsfAZUsFiHITky9W9C
+ VVsHaUqVRxoXtnVeG2L0pjxQvtMWtat4suSd3JIOS9zySGSbjRiwaDhQVpRsao18FzyUrm6skr4
+ 0l05Vv1YMqgvnn2ObdGxKNt652H70MfGYOwDPEIWgFZQzkLJtmt2RrYJhyjXQt3RYev5ad6AEQ0
+ So7i3al+m6KWaX7bISAsH0w/YGi2Hs5xBEdG+IWlnfZeXOR6PFtlPMBjYEjYA3wLuhiXoXc9aAq
+ EewjW
+X-Received: by 2002:a5d:64ce:0:b0:3a3:6b07:20a1 with SMTP id
+ ffacd0b85a97d-3a572e8c1dfmr13144007f8f.40.1750259400148; 
+ Wed, 18 Jun 2025 08:10:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFN42cnY6EiE/9t58AueDMVhrHZjWzos9sG1hW1Pdma1N6+Sv/HP13kyTDiHWe/F89V5wjXeg==
+X-Received: by 2002:a5d:64ce:0:b0:3a3:6b07:20a1 with SMTP id
+ ffacd0b85a97d-3a572e8c1dfmr13143952f8f.40.1750259399676; 
+ Wed, 18 Jun 2025 08:09:59 -0700 (PDT)
+Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568a6078csm16885755f8f.21.2025.06.18.08.09.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 08:00:04 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Levi Yun <yeoreum.yun@arm.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH 6/6] fdtdec: apply DT overlays from bloblist
-Date: Wed, 18 Jun 2025 07:59:28 -0700
-Message-Id: <20250618145930.2652304-7-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250618145930.2652304-1-raymond.mao@linaro.org>
-References: <20250618145930.2652304-1-raymond.mao@linaro.org>
+ Wed, 18 Jun 2025 08:09:59 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ mripard@redhat.com, alexl@redhat.com, mkorpers@redhat.com,
+ eballetb@redhat.com, mskrivan@redhat.com, Alexey Romanov
+ <avromanov@salutedevices.com>, Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Maks Mishin
+ <maks.mishinfz@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Svyatoslav
+ Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
+In-Reply-To: <20250618145016.GF6521@bill-the-cat>
+References: <20250618080056.1973311-1-javierm@redhat.com>
+ <20250618145016.GF6521@bill-the-cat>
+Date: Wed, 18 Jun 2025 17:09:57 +0200
+Message-ID: <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: H6UfiNEo81D98L5p_FtOjBkwLM1eFAAz-q1tEmJhsuc_1750259400
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,89 +114,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During FDT setup, apply all existing DT overlays from the bloblist
-to the base FDT if bloblist is being used for handoff from previous
-boot stage.
+Tom Rini <trini@konsulko.com> writes:
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- lib/fdtdec.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 56 insertions(+)
+Hello Tom,
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index c38738b48c7..3a218d8c94a 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1687,6 +1687,60 @@ void fdtdec_setup_embed(void)
- 	gd->fdt_src = FDTSRC_EMBED;
- }
- 
-+static int fdtdec_apply_dto_from_blob(void **blob)
-+{
-+	int ret;
-+	struct fdt_header *live_fdt;
-+	size_t new_fdt_size, blob_size;
-+	int expand_by;
-+
-+	if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY) ||
-+	    !CONFIG_IS_ENABLED(BLOBLIST))
-+		return -EPERM;
-+
-+	live_fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-+	ret = fdt_check_header(live_fdt);
-+	if (ret)
-+		return ret;
-+
-+	ret = fdt_check_header(*blob);
-+	if (ret)
-+		return ret;
-+
-+	blob_size = fdt_totalsize(*blob);
-+
-+	/* Expand the FDT for spare spaces to apply the overlay */
-+	new_fdt_size = fdt_totalsize(live_fdt) + blob_size + 0x400;
-+	ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, new_fdt_size, &expand_by);
-+	if (ret)
-+		return ret;
-+
-+	/* The blob is shifted if it was following the FDT */
-+	if (*blob > (void *)live_fdt)
-+		*blob += expand_by;
-+
-+	ret = fdt_open_into(live_fdt, live_fdt, new_fdt_size);
-+	if (ret)
-+		return ret;
-+
-+	ret = fdt_overlay_apply_verbose(live_fdt, *blob);
-+	if (ret)
-+		return ret;
-+
-+	/* Shrink the excessive spaces */
-+	fdt_pack(live_fdt);
-+	new_fdt_size = fdt_totalsize(live_fdt);
-+	ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, new_fdt_size, &expand_by);
-+	if (ret)
-+		return ret;
-+
-+	/* The blob is shifted if it was following the FDT */
-+	if (*blob > (void *)live_fdt)
-+		*blob += expand_by;
-+
-+	return ret;
-+}
-+
- int fdtdec_setup(void)
- {
- 	int ret = -ENOENT;
-@@ -1708,6 +1762,8 @@ int fdtdec_setup(void)
- 				gd->fdt_src = FDTSRC_BLOBLIST;
- 				log_debug("Devicetree is in bloblist at %p\n",
- 					  gd->fdt_blob);
-+				bloblist_apply_blobs(BLOBLISTT_FDT_OVERLAY,
-+						     fdtdec_apply_dto_from_blob);
- 				goto setup_fdt;
- 			} else {
- 				log_debug("No FDT found in bloblist\n");
+> On Wed, Jun 18, 2025 at 10:00:34AM +0200, Javier Martinez Canillas wrote:
+
+[...]
+
+>>     05: efi_selftest: Add basic partition info check to block io test
+>>        aarch64: (for 1/1 boards) all +563.0 rodata +179.0 text +384.0
+>>                 qemu_arm64_lwip: all +563 rodata +179 text +384
+>>                    u-boot: add: 1/0, grow: 1/0 bytes: 384/0 (384)
+>>                      function                                   old     new   delta
+>>                      execute                                  36428   36796    +368
+>>                      partition_info_guid                          -      16     +16
+>>     (no errors to report)
+>
+> Thanks for digging at the size part here. I don't think that amount of
+> growth justifies a new Kconfig option.
+>
+
+On the contrary, thanks for pointing me to your script. It's really awesome.
+
+> -- 
+> Tom
+
 -- 
-2.25.1
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
