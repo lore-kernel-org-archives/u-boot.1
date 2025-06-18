@@ -4,87 +4,209 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586B7C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 15:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44658C7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 16:03:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACE8982DF2;
-	Wed, 18 Jun 2025 17:33:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D30F82D83;
+	Wed, 18 Jun 2025 18:03:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cern.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Oi4WrrBx";
+	dkim=pass (1024-bit key; unprotected) header.d=cern.ch header.i=@cern.ch header.b="taxrGXuG";
+	dkim=pass (1024-bit key) header.d=cern.ch header.i=@cern.ch header.b="taxrGXuG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6E9882E08; Wed, 18 Jun 2025 17:33:10 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E106D82E08; Wed, 18 Jun 2025 17:44:38 +0200 (CEST)
+Received: from ZRAP278CU002.outbound.protection.outlook.com
+ (mail-switzerlandnorthazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c213::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3F8E82C55
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 17:33:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B780082C55
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 17:44:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=quarantine dis=none) header.from=cern.ch
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2e9a38d2a3aso5091520fac.3
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:33:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1750260786; x=1750865586; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8h1QqNtARcdIe6lQb+zNQ4Bt7+1jpoQEmkkPCEG7sGk=;
- b=Oi4WrrBxa6i7s1n3u9Ivxii2/sDrJaCVicGWW0/zz8i00SQQJshpBxqd4qP3IwcA0w
- KnvsLRS1kFUYeU8TyIhXKPzeQ/YzmX1GSEjtp1iP1dPYZ0RlqYQ8x1Gb2x23/i/8gr0C
- 9wzF8mHXS1jpfs8CJ8jOL6ywKWI4ZAh9Dm0vX2UGRGzeEfyHyviRMj1vIE7S1GWw8v9R
- oNhx8L0o2R9GcGnyFBN9bWu2aHAwilsuZ2mf3/0mnhaHaeB5C5O5iAfwsb/uk9tbnXP+
- afuAj2hnyVGCJw/EZ/1yLZXpPFQvTZzQCeDpO4U6VYiHfl3Pb/egxJ1IpLUv+z1sptcV
- 7Bog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750260786; x=1750865586;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8h1QqNtARcdIe6lQb+zNQ4Bt7+1jpoQEmkkPCEG7sGk=;
- b=ZHOUF5NuxlA1rEaLGLUXrxic2++fttGHZykFhx7WeEY9huB3eYSdGIiGwV7KmdvuYD
- Or4M5sSj74CWzwTT4QK2ml8fJrcO/fkmivS0VWKPnaYhvoB2HKxdbotFdOdMeu489lFR
- gkjBqOZpLkukAokszSG2Y4Dtm6owGtCn+wTlOuVkQGeW0fdxReXYI4APsgUGDMs4y8vl
- P5TYiA96QViqojVFjTiI2KS0Bc8K29YCjh/G/OwaD2s42/kBOxDb9FboqBN8EPxFux7B
- h4VORxtlUrJmrIErEtU6KwDt5oMlpxXKuXFU3eAFdtre1RzPjvwSyvOX9ljfz5BdtGfS
- 3SkA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWzJVtyivlrYDOD61wG5SKLBLFDtQW4tLRp8PuAoiKP73I4cBlJGAY1Mh1usJ+8IWo5EaCH/Jg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwArmNAmiPNhjv4L6oi97c0m7Byu6p2lafyIlt9hD+tRu56/3S2
- BLUwvdMQEdZCB/KumD42SdrMu0VQwDRBxkA0cFcGMfMSeIEYXB1MvfwGqT3XiTQrG/OO8M04TXp
- bKYorKz/0RZ1Jte9C+DBYjk7/K5NQD1UDqXV/9Gmlqw==
-X-Gm-Gg: ASbGncvAJXpQE23PU0cThew5p1zenKq+LIcQOvAhlAWk0DtFt1SyPYJFOGchpRrk4GL
- +TOWlfFbVZ7RUG7okBzGCTrf+Kjw9JTYiyn5g5HX0goPYcenC7+f4uVdZdLW+BSjEOMuG5wSurY
- j3jji0+sWVzFya8pgYt43nFtQ9n4s6Y/ePheWVw6VknlU=
-X-Google-Smtp-Source: AGHT+IHIf/A9rYycPZpd57GkDs31zXjaJwp7d0r5Am/Zz6rywUtlw60ak1WEzyQRWtNIcerFuz8tDVFHuAabGGnmhBg=
-X-Received: by 2002:a05:6870:b01a:b0:2c2:cd87:7521 with SMTP id
- 586e51a60fabf-2eaf07f5f14mr10621917fac.4.1750260786250; Wed, 18 Jun 2025
- 08:33:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=pieter.van.trappen@cern.ch
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vwXx22lxa5fop+6F2x2C94XIsBx5iEG46jngVoOwhD71V8lOhz9Qj8OJzbuaKbavl8qjc4tAZmudnADsrADfU4VJXM9vkGywnoTKPPnupmq4Ujib21eiyvOiiZfBHNHWiJgDfSGA1jmXkiFhK+s/a5nO1MfeSGopVthYJp4myfFMcCMhJ0UbrvqL4W5k3skvX18Fd4q/gUvP9t5wak2uhzPfcfOzzieCnP7teAVR9y+FSdBOviwFoZ5S2Tli48ygV57zaGnMPvEBtuCdD6AqKRWviynDA7nEnoJZHYqe+ci/NFezV1zWQd4WegcW32m9WRhqp0yDO0PaniAHEmzDXQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qA/iKeBAOjQbjSgNjngWZf3rHxLJM5QwI6ubTPiyNEk=;
+ b=LpMwBjNKn+pwgwkAB0PRX6eIvZOjyNBjVNaW+wfUELVIFWoiRpEE4wSXvPx5hwSCiX492EvpYd0Zs39lxcCRYO2PCoBYIxQ/1nbFYESOhXlbHPKd5MudPfkOKlnVRjvVmnY84Q8Hgwlwi0cCdLF4IAVYhkD55lqngKZ6oLbaSG6n40N0uy7+UBgbc5ad7/4lcUKLF4NkKHoa5Oh6vh1pMZNmmmxM3FybNQ1t1slxUgJpKNwFf5v3FQtenuRFagPV16xB70EQ+1tK+w5PrNifkwDWv+7O5vgykxXDV5KsMmJVJJE0e7ReBHFwVyGH46eBICV9GHECW/Hhf6iIDAfd3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 51.107.16.99) smtp.rcpttodomain=amd.com smtp.mailfrom=cern.ch; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=cern.ch; dkim=pass
+ (signature was verified) header.d=cern.ch; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.ch; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qA/iKeBAOjQbjSgNjngWZf3rHxLJM5QwI6ubTPiyNEk=;
+ b=taxrGXuGpS8/ofl8WDQ0lzSUZz2tmAmx0fw54BySIlIJG8qN9FzruYuO4AMXRpdU8s2p5tQT9BjPrqUwx+XRcBqKMk+BSy/44Ihq/BW58T7wStgJzqRAt2bjXirTbcUC4WMLdBSAFI8XCRjpM+cOjgC7QTK3fSeraBPSk2if+Kw=
+Received: from AS4P250CA0028.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5e3::16)
+ by ZR0P278MB0026.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:19::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.19; Wed, 18 Jun
+ 2025 15:44:32 +0000
+Received: from AM4PEPF00027A67.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5e3:cafe::21) by AS4P250CA0028.outlook.office365.com
+ (2603:10a6:20b:5e3::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.33 via Frontend Transport; Wed,
+ 18 Jun 2025 15:44:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 51.107.16.99)
+ smtp.mailfrom=cern.ch; dkim=pass (signature was verified)
+ header.d=cern.ch;dmarc=pass action=none header.from=cern.ch;
+Received-SPF: Pass (protection.outlook.com: domain of cern.ch designates
+ 51.107.16.99 as permitted sender) receiver=protection.outlook.com;
+ client-ip=51.107.16.99; helo=mx4.crn.activeguard.cloud; pr=C
+Received: from mx4.crn.activeguard.cloud (51.107.16.99) by
+ AM4PEPF00027A67.mail.protection.outlook.com (10.167.16.84) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.15
+ via Frontend Transport; Wed, 18 Jun 2025 15:44:32 +0000
+Authentication-Results-Original: auth.opendkim.xorlab.com; dkim=pass (1024-bit
+ key; unprotected) header.d=cern.ch
+ header.i=@cern.ch header.a=rsa-sha256
+ header.s=selector1 header.b=taxrGXuG
+Received: from ZR1P278CU001.outbound.protection.outlook.com
+ (mail-switzerlandnorthazlp17012050.outbound.protection.outlook.com
+ [40.93.85.50])
+ by mx4.crn.activeguard.cloud (Postfix) with ESMTPS id E7EC97FC5D;
+ Wed, 18 Jun 2025 17:44:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.ch; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qA/iKeBAOjQbjSgNjngWZf3rHxLJM5QwI6ubTPiyNEk=;
+ b=taxrGXuGpS8/ofl8WDQ0lzSUZz2tmAmx0fw54BySIlIJG8qN9FzruYuO4AMXRpdU8s2p5tQT9BjPrqUwx+XRcBqKMk+BSy/44Ihq/BW58T7wStgJzqRAt2bjXirTbcUC4WMLdBSAFI8XCRjpM+cOjgC7QTK3fSeraBPSk2if+Kw=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cern.ch;
+Received: from ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4f::14)
+ by ZR1P278MB1690.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:a6::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.30; Wed, 18 Jun
+ 2025 15:44:30 +0000
+Received: from ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::1a96:59c:94fe:3ae8]) by ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::1a96:59c:94fe:3ae8%7]) with mapi id 15.20.8857.016; Wed, 18 Jun 2025
+ 15:44:30 +0000
+Message-ID: <ef7de176-5beb-4a7f-9663-a2757b85b86c@cern.ch>
+Date: Wed, 18 Jun 2025 17:44:29 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Improve user feedback in case of FPGA bitstream load
+ failure
+To: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
+Cc: vtpieter@gmail.com, u-boot@lists.denx.de
+References: <20250617092333.335908-1-vtpieter@gmail.com>
+ <eb9be150-5298-4929-94e2-ace2f095eb84@amd.com>
+ <20250618135728.GA6521@bill-the-cat>
+Content-Language: en-US, fr
+From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+In-Reply-To: <20250618135728.GA6521@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0224.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ac::10) To ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:4f::14)
 MIME-Version: 1.0
-References: <20250530153826.1057407-1-tharvey@gateworks.com>
- <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
- <20250617224551.GA1687135@bill-the-cat>
-In-Reply-To: <20250617224551.GA1687135@bill-the-cat>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 18 Jun 2025 08:32:55 -0700
-X-Gm-Features: AX0GCFuiP7L7FohoTxknvFuHFUJWa5WKCSBVrIK5eKgC6HJNNu79S0nt0DtVKi8
-Message-ID: <CAJ+vNU2oNMpupHLHHcf3HTXBTN8mnPczo6T8khAkN875YwmUxg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
- rx
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-TrafficTypeDiagnostic: ZR0P278MB0759:EE_|ZR1P278MB1690:EE_|AM4PEPF00027A67:EE_|ZR0P278MB0026:EE_
+X-MS-Office365-Filtering-Correlation-Id: c3075b2c-387d-4d6f-25d7-08ddae7f051b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|1800799024|376014|10070799003; 
+X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?RE45cWM1b2pGNlo1alZicEtQcXd0S0RyaHNGSm9EejhNL05ZU3JiMzdlWTFl?=
+ =?utf-8?B?YWd2ME1TaHp3YkFIa3JGRE53UldLeFJqNGdKRmIwZFhYNnVEV21ZSThjSUFZ?=
+ =?utf-8?B?eldTVmtodVdRcTFyZERnd0Y4YmZVOUZKcExJWWx4MjdJWFY3UUNXVCtuNnpE?=
+ =?utf-8?B?VnlZLy9HTGg3cFo3RHk5UG56czFZb2QrRFNRRjkwdTZ5bHdweUFMMk1qUkx3?=
+ =?utf-8?B?cjJIc29EYVA3YTNZVDk2eDJaY25KUFNzTk5XLzRGcDFIUTk2OUVmSWV5Y005?=
+ =?utf-8?B?YXh1Y01XdjU5STJWMDdKUk5vTzVKNHpZWW9Yb0ZTZjFtZW9YYzF3SXl2MWZ4?=
+ =?utf-8?B?cjhhZnVDZ3pTdGl5WHJaT2J1QnRqUTNiRS90KzUxR2VUUGljNld2dFdzeGgv?=
+ =?utf-8?B?bWZ6QUw0cURqOEE3TTY2Q0sydW1pNVJKejFyUEsyWWxva2MzREMzellKa2Jy?=
+ =?utf-8?B?NDlicUpIMFJTMUUxaU5FUVp2Mko2S0k2RDAvYzN3NUc2ZDI5L1hYTzl1ZTNW?=
+ =?utf-8?B?K3lzdk5BN0FiZ0V6dm9CNWRMcy9yamNJSVA3cTBEeFZLMVl5cnpRRk8rWDVJ?=
+ =?utf-8?B?S1RmMDlYWFovUDlTQUFyaWlsUUIvVW9JbjA2T21YM1E0TjIzVFo2cWRMMkxh?=
+ =?utf-8?B?dG5kTkxVSnFjQVRDWWJHNTFCRy9LeHY0MkZJd21vK1pOMVlZaE9XVkc0dFhw?=
+ =?utf-8?B?RUwxbDVVLzhaU1F4NnJiMUlCaktXVnMyVVFvNllVMXp0Y25TZVRMeFMxRVFw?=
+ =?utf-8?B?Q1VmUDlFQm1kSWxmR2I1ZlpkQ2dJMlZRb3BmTHZMQU5hTm5iNmJOSG9IVk5N?=
+ =?utf-8?B?Y001WFMrc0EyYTNTY3FvSXZzNFhpSm8rUWV4MUt2eEhZZDJTV0NncGxEMlN4?=
+ =?utf-8?B?N0wrVm82Qk1TRzRkQUZOL1RrNDhGTjF5aGFhaUp6aWFHOTRrRTlKNTJLRlNx?=
+ =?utf-8?B?aDk5S3JtaHorVmlqOENtODJZbkloalpHdmVabFVXaGJZMCtMY3gyYXNuajBO?=
+ =?utf-8?B?Z1ZPZjhWaUFPczJkQWtJZ2haeWRaUy9tTkZVRDY3ZmlSWDlQK1dEaTg4OFBk?=
+ =?utf-8?B?clVpUmhsL0FTRTZqUmdMaFFZL3NOdW5WelhORzdWUCt3ZG5yNUFGT1pkejlk?=
+ =?utf-8?B?d1IvMG5SR3RMUFhXTDdMenhOQUZ5UjFPbDRRcy8rc1ZEYTBsbDNYd3lTdk56?=
+ =?utf-8?B?YWhXVTV3R1dwYndiQ1hZbjhNRXI4d3ZUeEVxaFl0M0xHRUZxNzRMelhGSVZ3?=
+ =?utf-8?B?cEV6QkZTQ1FKV3Jhbk1xWjVrU1JvUGlyVnJVdmQvSUdndm5jb3JzUkRKaURJ?=
+ =?utf-8?B?WncvekFxSzFrNDVpVEZNUGxnbWZqd2ExZW5VYmptOU5tTDl6VldiT1N2ck41?=
+ =?utf-8?B?dzlubmFmVmpQYmFMNVREMXl4MjU1TW50UGV1MHRLZWNRdnlOU3oyQmlzejgy?=
+ =?utf-8?B?NnVkaGNURlJCL2hLUkdjQVRTUm1xMzlGckdwaklEZ0RoYWxWTTF1UXMrREdE?=
+ =?utf-8?B?UElXcTZsTlVyTURuOHp1SkxNWWFFcTJvMlRIQXpzTG9BUEI5WmZubnVhQzVO?=
+ =?utf-8?B?Z0FMcWxMeFRWWWNnOWdsRDBxU1l6SEo2TmFxTXdwSlIxenJQUno2MU9IckYr?=
+ =?utf-8?B?VGdQT2pqdy9yL20zOWZKV0I5UWJQVS9jajdOZHN0WjlsMlZQZlp6S2svN2pz?=
+ =?utf-8?B?cDVHNDVNNGQzOXptMUhHN3JZN1FnUTV4c2tKZDZTbmJtS2pOZ3RLcDBjcUhw?=
+ =?utf-8?B?djZYRmlTQUFDSS9CbjhDeG9kOE9YUElTQ1Z6eXFtd2liWVlaeUJkTzJSZk5a?=
+ =?utf-8?B?cFRlNCtkL3pZVG8zT2ZpVVpGcnZUalVHUDkvc3ZuTDZHelJtdityZUYzNGNS?=
+ =?utf-8?B?cCt6ZzV1dU9MR2dzNm5nQ21mZUpmeXB5TEV4UXNQVXB4NVY2d3hCRHBaUFph?=
+ =?utf-8?Q?zKgya8j/Bwc=3D?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:ZR0P278MB0759.CHEP278.PROD.OUTLOOK.COM; PTR:;
+ CAT:NONE; SFS:(13230040)(366016)(1800799024)(376014)(10070799003); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR1P278MB1690
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM4PEPF00027A67.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 0642d79e-7111-46eb-cb50-08ddae7f03c3
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|35042699022|82310400026|14060799003|1800799024|36860700013|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TUVoVi9pN0cycHhUekxWTGt4ODBIeEZ0M003UkVyY1BLOWZuTU5BV2RvbHVS?=
+ =?utf-8?B?ay9ZaEpLSkM5ZWRza3h3N0NSdXllcE52b3l3V3doQTdia0REUTFSUkljdmdC?=
+ =?utf-8?B?cE1CajhxQUpWNjBtVURGcU9lWjRnYWRnV1JueVRmcE01dkdQcHdoNHNrdHc5?=
+ =?utf-8?B?MGs3bVB4ZXc4c2VycHZ4bEFXcVRHNGphclZnVmt6TkcvUVhtY2dyMHlzcHgz?=
+ =?utf-8?B?K3VyRUpVRWVEYWJuTkVlQWhSQ2U1MmY2MUtxelZHcWxZU3hWM3VHZ2JIaHBa?=
+ =?utf-8?B?ZmdCNU80cGFNdWRLR2J0Qit5TElWVnkvd21xSytoL0NoRXJsZWZjdmtLVWc5?=
+ =?utf-8?B?NS9ML2VRR1hROWN4YVF6VUJJYkhpeVJ3UGM0emxVYzJDKzU1Z3M3dkxVY1g4?=
+ =?utf-8?B?eGNIdjRDYW85UkxnQnlkY2hIZmpLUEhkL1oxNTN2NVVscEUvL0ZJQ2VjOTcz?=
+ =?utf-8?B?UGN5SkVSQ1A5cm03Nlg5SnBveUVPSXQ2MzhuRVo5dlYzMXJXa1E5cGhHWk0r?=
+ =?utf-8?B?RDZpeXIzYU95Q2dabm95Zmg4QTdqTVIxSjBCd2M3M29sWWpDbWtRYi9Hcksz?=
+ =?utf-8?B?MkZHcU02N1FjZkt6NWpnVW95NEF0U1grREJwYzI4UWxOZkdTVkNFKzdBUU1M?=
+ =?utf-8?B?R091TmFNUXlSM2dSOUpFSllDTDZTei9Zb3VNVEhzdHlDWVdmNm5OWDUwenly?=
+ =?utf-8?B?VlhRbThFbmRHWng5TXVBNkRGUkhmM01RQ0JZc2Z5UCtSOHF6aURqK0x0a0lZ?=
+ =?utf-8?B?RGpTZnNQS3J0a3h0THVreVQyMmZFblpqYklZTGlpejN2QjcveFBEeU4veWs3?=
+ =?utf-8?B?L2wxcFN2T1dkajlFWkdrb0YrTU4xT0hhOGdkb3NVNGhYS2Rwc0haTmlnL3BB?=
+ =?utf-8?B?WUtLNnF0OWM1OE5YdkVZU0NEY0hybmtOOFpFbjJiVXJWTzloOXdqa3pKazhs?=
+ =?utf-8?B?YXlnWS9uOFdnSm9LN1dheUV3d3R3NHBuUUZKK3R4Tk9TM0JHRjRHU1IzVWxD?=
+ =?utf-8?B?Q2M2c0pSMk1WZmw1c0JqR1pjTUdKbU4vS25NMGMvRUx1TS8xVjVIbVZLUVZR?=
+ =?utf-8?B?TjQ0ZE5RYzZlM29HTDh5MGpBTXp6QTc0aSt3bm1kM1hMOGhmZUhGVGJmbXhG?=
+ =?utf-8?B?T3lrblluWUFaUU1RN1VxL283V1JuVFMzUE1OTmFtODhDWHgrYTVsYjBydHVJ?=
+ =?utf-8?B?TVZXOTFIV3g0WDRRQWFPUFhvczRBa2ZXbVV0Qk5mMXlmZS8rR3IyVFRlR1lw?=
+ =?utf-8?B?TTdYY1A1T05EVGtyNjdYODBUWUdaNTdRbTJBUExISVM2R1FuSWJsT2k2VDQy?=
+ =?utf-8?B?QXBBVFJRdzJmYkE1YXlXcDlTcUdJQ3dRTGk1cktuT25KUndLcFlEZTFnWDlw?=
+ =?utf-8?B?ZzBWNTZkb1BtZzRFc2d3THpXTm0rL1Bad2Z4aDUycTRhWjlHK0xJNFE0dEkx?=
+ =?utf-8?B?cUpvVE4vMit0WjhsUEh1M3p0cGRkWFJwSTRLYmlneXZQZGJ5WUZDWXV6UlhT?=
+ =?utf-8?B?Qi9qK3pZNlV6SlZIY295dzNvZk1zMmg4ZlEvWWY0bGdEcTJJSkY1Z1JORkRL?=
+ =?utf-8?B?OHhGTG9ia3p1M21HcnA1UStqcUkyaDgrQjJuQVVRa0ttUzhLS3J5YWR4bWdI?=
+ =?utf-8?B?YU4vR2RjWWVvY1RTeE81Mk9haWxSZFE5RVpPemJQUnFZZlZvOVdxN2FJTVl6?=
+ =?utf-8?B?ZSsrMVFKYTNCQWprV2Vwb3pyaGRVR3Z5QjBvUTFZelZKOVhwRmFDU2QxZUYy?=
+ =?utf-8?B?cjlYSzJwVFIwd1pQQVZQVXFyQmZzckpIanlEQjhuMGdyRFpGZ01mYTVLQ1hZ?=
+ =?utf-8?B?L2FULzUvQkhLckN3YVFtSkNqd0xScW1oTHJ3QWllKzBWS05UZmdyRjBpZDU1?=
+ =?utf-8?B?T05pUUY5bGFPZWQxS0ZSU2ptY1l2dGs2VXhKVzljZmhpZW9XdCtrQVhVQ0xI?=
+ =?utf-8?B?U0hHaER1Y3JpcUFzeElFcHVYT0k4SktxaTQzRGJaeXNuZDRoT3o0UmdYZ2xj?=
+ =?utf-8?B?ekxRWUtoVnpkdVZNRHJDWE04YmQ2Z01XZFc2WVFMcVdqenRQZmpYQmkyaU9v?=
+ =?utf-8?Q?s1bcQN?=
+X-Forefront-Antispam-Report: CIP:51.107.16.99; CTRY:CH; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:mx4.crn.activeguard.cloud; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(35042699022)(82310400026)(14060799003)(1800799024)(36860700013)(376014);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: cern.ch
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 15:44:32.5385 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3075b2c-387d-4d6f-25d7-08ddae7f051b
+X-MS-Exchange-CrossTenant-Id: c80d3499-4a40-4a8c-986e-abce017d6b19
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c80d3499-4a40-4a8c-986e-abce017d6b19; Ip=[51.107.16.99];
+ Helo=[mx4.crn.activeguard.cloud]
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A67.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0026
+X-Mailman-Approved-At: Wed, 18 Jun 2025 18:03:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,125 +223,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 17, 2025 at 3:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Sun, Jun 01, 2025 at 11:07:16PM +0200, Heinrich Schuchardt wrote:
-> > On 5/30/25 17:38, Tim Harvey wrote:
-> > > Call schedule() in net_lwip_rx() to service U-Boot tasks and
-> > > actions during packet rx.
-> > >
-> > > As a cleanup also move sys_check_timeouts() here and remove it from t=
-he
-> > > functions that call net_lwip_rx().
-> > >
-> > > This resolves the issue of an active watchdog resetting the board on
-> > > long network activities.
-> > >
-> > > Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > > ---
-> > > v2:
-> > >   - remove duplication of sys_check_timeouts() from functions that ca=
-ll
-> > >     net_lwip_rx()
-> > > ---
-> > >   net/lwip/dhcp.c     | 1 -
-> > >   net/lwip/dns.c      | 1 -
-> > >   net/lwip/net-lwip.c | 7 +++++++
-> > >   net/lwip/ping.c     | 1 -
-> > >   net/lwip/tftp.c     | 1 -
-> > >   net/lwip/wget.c     | 1 -
-> > >   6 files changed, 7 insertions(+), 5 deletions(-)
-> > >
-> > > diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> > > index 92bd7067a7fb..b79b746db390 100644
-> > > --- a/net/lwip/dhcp.c
-> > > +++ b/net/lwip/dhcp.c
-> > > @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
-> > >     /* Wait for DHCP to complete */
-> > >     do {
-> > >             net_lwip_rx(udev, netif);
-> > > -           sys_check_timeouts();
-> > >             bound =3D dhcp_supplied_address(netif);
-> > >             if (bound)
-> > >                     break;
-> > > diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-> > > index 19172ac959ac..738f8bf3196b 100644
-> > > --- a/net/lwip/dns.c
-> > > +++ b/net/lwip/dns.c
-> > > @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const cha=
-r *name, const char *var)
-> > >                     net_lwip_rx(udev, netif);
-> > >                     if (dns_cb_arg.done)
-> > >                             break;
-> > > -                   sys_check_timeouts();
-> > >                     if (ctrlc()) {
-> > >                             printf("\nAbort\n");
-> > >                             break;
-> > > diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> > > index f05c4cd3f64f..e8d4cc542ed8 100644
-> > > --- a/net/lwip/net-lwip.c
-> > > +++ b/net/lwip/net-lwip.c
-> > > @@ -13,8 +13,10 @@
-> > >   #include <lwip/etharp.h>
-> > >   #include <lwip/init.h>
-> > >   #include <lwip/prot/etharp.h>
-> > > +#include <lwip/timeouts.h>
-> > >   #include <net.h>
-> > >   #include <timer.h>
-> > > +#include <u-boot/schedule.h>
-> > >   /* xx:xx:xx:xx:xx:xx\0 */
-> > >   #define MAC_ADDR_STRLEN 18
-> > > @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct net=
-if *netif)
-> > >     int len;
-> > >     int i;
-> > > +   /* lwIP timers */
-> > > +   sys_check_timeouts();
-> > > +   /* Other tasks and actions */
-> > > +   schedule(
-> >
-> > Some scheduled tasks have a long duration, specifically video_sync_all(=
-)
-> > called via video_idle(). This change will lead to lost packages.
-> >
-> >
-> > @Tom, Simon
-> >
-> > The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule() inst=
-ead
-> > of WATCHDOG_RESET()"). This added schedule() calls to EFI networking.
-> > Package losses can expected if schedule() takes more than 1 =C2=B5s. Th=
-is is much
-> > shorter than the time needed for synchronizing a 1 MiB frame buffer. Th=
-e
-> > cyclic framework was explicitly meant for short duration function calls=
-, not
-> > for long duration tasks like syncing the video frame buffer.
-> >
-> >
-> > I think we should remove video_idle() from the cyclic framework.
-> > video_sync_all() should only be triggered if there is video output.
->
-> So for testing purposes, if CYCLIC is disabled but LWIP is enabled,
-> things are fine here? And so we need to at least partially revert commit
-> 5c8dddadf1c9 ("video: Use cyclic to handle video sync") if not fully
-> revert it?
+On 18/06/2025 15:57, Tom Rini wrote:
+> On Wed, Jun 18, 2025 at 09:15:54AM +0200, Michal Simek wrote:
+>>
+>>
+>> On 6/17/25 11:23, vtpieter@gmail.com wrote:
+>>> From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+>>>
+>>> In fpga.c, change debug() calls to puts() for important user
+>>> feedback. In zynqpl.c, change 'up to' to 'above' which corrects this
+>>> confusing or wrong statement.
+>>>
+>>> Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+>>> ---
+>>>    cmd/fpga.c            | 20 ++++++++++----------
+>>>    drivers/fpga/zynqpl.c |  2 +-
+>>>    2 files changed, 11 insertions(+), 11 deletions(-)
+>>>
+>>> diff --git a/cmd/fpga.c b/cmd/fpga.c
+>>> index 9dc7b63db5d..2c2a63524de 100644
+>>> --- a/cmd/fpga.c
+>>> +++ b/cmd/fpga.c
+>>> @@ -43,7 +43,7 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
+>>>    	debug("%s %d, %d\n", __func__, argc, cmdtp->maxargs);
+>>>    	if (argc != cmdtp->maxargs) {
+>>> -		debug("fpga: incorrect parameters passed\n");
+>>> +		puts("fpga: incorrect parameters passed\n");
+>>
+>> I think all of these should be moved to log_err that you should be able to
+>> control verbosity.
+>>
+>> Tom: I think this is where you want to go right?
+> 
+> Sounds right, thanks.
+> 
 
-Hi Tom,
+Right I will amend accordingly in a v2.
 
-I can't disable CYCLIC without also disabling WDT which then works
-fine as the watchdog isn't being used.
+I'm trying to compile now that it's more than some tweaks and I notice 
+many (fixable) errors in the drivers/fpga files such as missing time.h 
+includes, spotted by gcc 14.2 (x86_64). I'm on the next branch.
 
-You are likely pointing to the correct patch that is causing
-Heinrich's issue but as far as I know he has the
-hardware/configuration needed to test this and I don't know how to
-re-create his issue.
+Is this due to my gcc being too recent or is something else going on? I 
+don't mind patching these in case that's welcomed; let me know.
 
-So in my opinion there is nothing wrong with my patch here and it's
-more of an issue with the video using cyclic for video sync.
-
-Best Regards,
-
-Tim
+Thanks, Pieter
