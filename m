@@ -4,151 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A893C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 12:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7DAC71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 12:43:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EBE782C55;
-	Wed, 18 Jun 2025 14:16:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 33AD182BCD;
+	Wed, 18 Jun 2025 14:43:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="V3Bl8Vec";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Q2Wdpsy3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22C4A82C84; Wed, 18 Jun 2025 14:16:18 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A31D82BCD
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 14:16:16 +0200 (CEST)
+ id 4AEB782C84; Wed, 18 Jun 2025 14:43:29 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A1F282B20
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 14:43:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iixFWQoLPwYc4FfOUrATP+FYmuCbeDDB6tVIYZMyIHD4Aj1J+NW5jFdMGub6evXg0mDDTSKj2IRWJRfYbPLXFgH/42ss1kFrDKbB7xhIxTmoAqgsioE8NmAu3LwnzUezRKCDk6zw9NsLXzTkrKEjxE6LXVaPzewQj7aM8UHADpa1W5gG8Iao4FYYJgfJ5x/fgJLHi89rkReBrdAb5XvIuXjgcrsxczlaVmMLqnhb72XnO40LXKKtdL7QVp9d2z5lbagY+LQBZqrH/XFIURC3ZLkgXgnxxeod0Q6Y3hWFzEJOsCNksSep/yz43gBlQALkiyWjAo1MVPrNX8+CqzXzLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gyhXKBPLAsx31+JDaTK7lEjDx7Lx9+rmKTFYpIRaztU=;
- b=AGNsZU3QvgG7tRZ+z9neLESnTH7Vc5bxawiyKlAgsK+kOdMl30NPXZ9dk6CbiU/lNrzlPwrBZCjjZLRset2dsZiKftYFmbsMHPnydcObY/NO0rfIM2KF6/j+coEeuc0cvAz0v0vhjfGkswIoeuE7ea2lhfNRC+7+76fB2HxYXxuJQL4DiIyyexQBJz37EVbH/KSemuXaRDK8qYNM3ImAwh5BMOO7q9YcS7DU9QrIITgxG3vrteX9nAsn28KRtizsIH/eIsvd62vO1GYiv+2yHOktAcbLythnvw4Z9cQVWptSM8fRVkOAfqTfvih1gKxeKIekzzytjUAykBE70GgoZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gyhXKBPLAsx31+JDaTK7lEjDx7Lx9+rmKTFYpIRaztU=;
- b=V3Bl8VeceA67Qx0hV22PHaMvSGx35qaKVbXAgURDo+EzoE/T0B7btTELeZsZMkzmNRSCfqLcLXRHH9G5fsgDLhwTeB00iQY8w+yXU0aimuaNUKk4S8mbxvFtafxGavua3xXjWmkz/npFJ7rfjqV5iHu+iVmuF/ez8Mgpqj2KyBk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DU0PR10MB5629.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:31b::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.25; Wed, 18 Jun
- 2025 12:16:10 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.8835.027; Wed, 18 Jun 2025
- 12:16:10 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,  Mark Kettenis <mark.kettenis@xs4all.nl>,
- brunosampaioleite@gmail.com,  u-boot@lists.denx.de,  probinson@gmail.com,
- mbrugger@suse.com,  clast@prevas.dk,  brule@prevas.dk
-Subject: Re: [PATCH 0/2] Add rpi5 specific defconfig
-In-Reply-To: <CALeDE9O9-L5hKjN7cK_-EY3Ptn77DX-PUtp4zapRQ3jcXVx4jg@mail.gmail.com>
- (Peter Robinson's message of "Sun, 15 Jun 2025 12:05:54 +0100")
-References: <20250502113556.134731-1-brunosampaioleite@gmail.com>
- <20250502144031.GT1261075@bill-the-cat> <87frhj5r32.fsf@prevas.dk>
- <20250505134843.GK1261075@bill-the-cat>
- <87zffq95f7.fsf@bloch.sibelius.xs4all.nl>
- <20250505212816.GP5430@bill-the-cat> <878qna5h8c.fsf@prevas.dk>
- <CALeDE9O9-L5hKjN7cK_-EY3Ptn77DX-PUtp4zapRQ3jcXVx4jg@mail.gmail.com>
-Date: Wed, 18 Jun 2025 14:16:09 +0200
-Message-ID: <875xgtz1me.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0092.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::22) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55IChN4F242069;
+ Wed, 18 Jun 2025 07:43:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1750250603;
+ bh=/vve9v4LWteo1OFZOGHcv5um2OBK2avO6YHlXL7ue/M=;
+ h=From:To:CC:Subject:Date;
+ b=Q2Wdpsy3fs7ewY205uUY+EK58yFJqKWQcRIRG0x/Bvvq2x/K82lIS8oYMmE/AupTB
+ /QND2SsaMaE5qBVAGKu0tWv0ZKxfq5Z5/vxSAEtvPfEYMuU3uYg3o3UAYXnxvntDXY
+ aco8nJzEMEbHoK0HdwZqDF0useSYYLDQCxbuHt6U=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55IChNlZ3933271
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 18 Jun 2025 07:43:23 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 18
+ Jun 2025 07:43:23 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 18 Jun 2025 07:43:23 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55IChMAB3717161;
+ Wed, 18 Jun 2025 07:43:23 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <afd@ti.com>, <nm@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <robertcnelson@gmail.com>
+Subject: [PATCH v4 1/2] mach-k3: add runtime memory carveouts for MMU table
+Date: Wed, 18 Jun 2025 18:12:08 +0530
+Message-ID: <20250618124210.1936140-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB5629:EE_
-X-MS-Office365-Filtering-Correlation-Id: f2e8557b-eb81-46e9-d4ec-08ddae61e8f7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|52116014|7053199007|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?V49U+LuPlotpScQLeH1G0A1wMbLPbFc9HNJBDZbfke17lJlMmcUyx7SkPIor?=
- =?us-ascii?Q?BRFhRZuSHGpaIBmi1cRQj6kWO+hBYFhexEtiEtUqlO3bLKkHRouHw0+GPEF6?=
- =?us-ascii?Q?T2lRlHPKoxTHF1atXCuPLB6IssWf8fjqB+9/sJoAKsgAqEAXK3DDauK8n+bq?=
- =?us-ascii?Q?yR+7PFCI/ewzkvLYESqc969PQDGa/AJKhatvnZQgOLrlKVmahvOD60u7z23Z?=
- =?us-ascii?Q?mfQLIfK1vRVXiCif576L23mMSaSwRtzUYqJCDTSDy5zZWJgWog+xAzXL65SZ?=
- =?us-ascii?Q?TLrBU45CLde4wjcXTNxwK2McyiuMzkQ5sNaAVsK4wBOFIOPAYEx5jgRxy3cQ?=
- =?us-ascii?Q?Flpf+ZWPuYmTJdetOEyYU3V7IdYfrPSR/aJ5d9jVp/XlNeaP4LZNxK64LNQn?=
- =?us-ascii?Q?1/PclFtK0dustZzlVWo5u2Ilc/QW4w/4CTFRMJSkD77EvR4932e9YjW2Njcb?=
- =?us-ascii?Q?f3s5WVULhWqyADv9eLLFqSWp5aQtvaeTvJNiGEMGzCYUzZniXZ44lyru/CDo?=
- =?us-ascii?Q?e79rISbjsg7Gf3AA/CRO0DeXEK8bnuss0j3U+PYSPQvuUPJYuP4yXy/j36V1?=
- =?us-ascii?Q?f39QUGjycqyFBiOuAmZnPs35IAwrIs8bwA8ZlGuwQ1seYKqbDyEKQIFUQqqa?=
- =?us-ascii?Q?k96WpGpHJH7NJMbxlN43l8WuSk34Pg2z8Q9xiVv1YNAaedTSSLLuAdk+a5cQ?=
- =?us-ascii?Q?OrOpmDF8OKgZj4zlwYpack7keawZJ2x2JUaTwltUqLFZ8AOWop896P/E+gT4?=
- =?us-ascii?Q?d96xxfpSvbP8zpxDmxMZUP4zUjwHrb2W2gVvi2agsWYVWJF6q6TAZM1weS0e?=
- =?us-ascii?Q?GALV0JHb3cFR1Iwfsin19lVqddb1FF0o5RH2hSwZdQnuOvh8ffEG+k0hEw+f?=
- =?us-ascii?Q?qLEcxmjDojaCMx/Gun8fGPUvD4EJ0LIDvQyGiHxMeVO5cABz1nWpC+5Q6Qdl?=
- =?us-ascii?Q?rXcVznOtlKInOZ1RdW3e9EGa3YIpwkXpwCg6ujaNPNm/g/7+qqoiTF6HrOX5?=
- =?us-ascii?Q?s1aDpWuT15E1yeBtsU+OdhZf/CaIKQdMm0oUUdCyYaJogXrkEmr5PX1t3wrq?=
- =?us-ascii?Q?fVdpChFNhtxLvsSIsmvoBLSJ90TbqPHmFYjq/YDgff7fDpW2YCvNMwq9XnA4?=
- =?us-ascii?Q?UC/N5wyZIKd8ttUIvrjtWdhg699uR9FwLxEMH9JvhChWC6XZND2yg+cLesHW?=
- =?us-ascii?Q?t2RcxRxzVDlUtnIpay2r2sLD4vuKKPUfjP4WjnyHrRAcc29cV4kSJbSBVY53?=
- =?us-ascii?Q?eemY7CaSWWsoqkdRe5/2Du06wtWsEB0bEn4sPxiJDdQ6bgb5V3bUmyJlptae?=
- =?us-ascii?Q?X1hT0OkieC0QA9kq0Z+Wahf/RIN2VA4O+lVXqFMXfgi8jtKCIqXDJghb3SR9?=
- =?us-ascii?Q?L2XTbQRLSIvT1hKf6Y3e8P9wYDBMt36FeWl72Rty8oC+3YFpx/cBuUuVvh2Z?=
- =?us-ascii?Q?77zkZ0VUphhmsEb7qVxJrYHoqpHDl+Wu4hSiOvGNT+Y8G9lZbAA2aw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(52116014)(7053199007)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pYAiI8XV5r6ESbzmLgwUd4V4jlez5ZV5cdnFlHLF0UfQBbGmOktEWmz0fsX+?=
- =?us-ascii?Q?7rCwAzBG1vsjQi7kVDqiIOXZP1d5xl1SDM39Ta8YJd2P5ZMJPwZSX1wWgC/p?=
- =?us-ascii?Q?6qnHfTIznLE/BO6KADXGFQoSziyHBcv06fBa6VKqoJCM+pyJBZmxFso2HBBC?=
- =?us-ascii?Q?DrGpih7pdQJGqoOF2icW8LFl+NE+bcd82ODKSO1hguMm8vIUhIQBLp/dQBzy?=
- =?us-ascii?Q?poZiJUUaMyvvcX0jLHgjZlMnuFi98iMo3wGauq0awqb+MzYderoOCSZzcnk2?=
- =?us-ascii?Q?ROcFLoundHtiq7Ox8D7HUxtoJGyxB1lrLR5zYTiAtW6yYWaVsRKK4DkS6CYs?=
- =?us-ascii?Q?eaVhWJWE+CQZEZjZEXxwtsrIRrQ/vUzNwdS2MIEVV8gSScX/YFQfK1tX6N/H?=
- =?us-ascii?Q?4bDpH3Vx+l+AZAEJDx54yLUbFxpeBs49C/3SKIp4KPkOFRstBhmUFBk0E0ij?=
- =?us-ascii?Q?4SDwM3TaBHTklcJN0JdOaMMU+hHsrc2VuxfofCbbRqqb4IUqHJ0fjMNH/5U1?=
- =?us-ascii?Q?l84YkaVHp6RcMx7ZAAeFbC8NSDEzXESiX44TfbY6nzUDn3apjFaUYfH3Uh1C?=
- =?us-ascii?Q?N1Ergk12Hqeu9SQIZfFPdB1G54DtBrP2NBNRrSf97kW5CnojmT5p5rTWtXNp?=
- =?us-ascii?Q?Of1EYgJaguI6V9bqnwOgR/GywQfmBhuJHIqvE6+HKshuewu8LK23Gjc3F8/4?=
- =?us-ascii?Q?1uvBZy59bXFemx11PMR3NInS6dsSmUftiKQ8sM7F88lUicGnphqfUtL7r/5l?=
- =?us-ascii?Q?tuT5fUglFn6KLhKcIWjkc0sXHPn6/+f6K5QV19AhxCHeb57qZ82qROeXs/TZ?=
- =?us-ascii?Q?6SGt/cFtFUiAGlVZq2Baf0jqsffbAjupqVHpfC30qqsTO60xkJJjrPpQRhA2?=
- =?us-ascii?Q?kosG7CU0cZA5/DtSgkwGsVhfHOt0maDTeN/O86atH5HmefLDH1SDj+OOgf6j?=
- =?us-ascii?Q?EVHq4peAtpPPyVdAPToJlDLvO1BOZBKS86j3uwOPDCKt3tQ4NoQe6ZFj4Nro?=
- =?us-ascii?Q?ouR17mkQWRtd9diwQiRi6wDXweyuYXgHTB+gSNywYeal7LVlNpiuyNGShYDc?=
- =?us-ascii?Q?7DiHqB8taxeVU/KkTj77HSFhX3Fa9fEDR3jFDzPOI4fhC0ghFtCIxwwmpW4K?=
- =?us-ascii?Q?x5Ae2RN+hgJa/TRsnMfjqOK5DXzq7CJ0yzFpDJSElAcFegq0wjcoYWO3ImNt?=
- =?us-ascii?Q?+L3bNatusLJBz5l3Ww4JcT/fDGJ9QPZbSV3cRo+uPV/MnmlqblMwszHTXROO?=
- =?us-ascii?Q?8uUdg09Xd3+HNjKCzLqGyXvEt1+UGNXyDNGRyqemwpzBZqZhpQXUdK4yeGi6?=
- =?us-ascii?Q?gJk0C6KS9SRePIIV0/z2/6X4x+EA7/0y45qhvTLRBTE5PLjvCPqNAy/YayFu?=
- =?us-ascii?Q?GG2qSAQCPCusBPWPFEb/I4mxgCvpKINMNvk2ZHhBLUXNuzb1+BRk7PHAQu2e?=
- =?us-ascii?Q?61eUfgGoA7Zcbxy2A686CX2MNnvvWqQQtymF663ozOMZAEYqHLGc6MlFKXlO?=
- =?us-ascii?Q?lcqFId9L4eZUOVyKYWuH74Ca96nq1C52V1VHSPHcSJlbVAmbf80560B+2PkY?=
- =?us-ascii?Q?M53VuytMr0PNJaadG7VyvmCw9Rd2guxFUUnI1SFhsZmRg00r6trEJHEA/Otc?=
- =?us-ascii?Q?kw=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2e8557b-eb81-46e9-d4ec-08ddae61e8f7
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 12:16:10.3635 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qh0vA10FWP84owyM54NQsymj3TiZMerTw+DEAVydFvZovJuvpslZ9clGlzecFCT4FIfr47gGmTajHlmqWHxwfcQ4so9DxaGrmum9+laN6yI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5629
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,99 +78,387 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jun 15 2025, Peter Robinson <pbrobinson@gmail.com> wrote:
+In u-boot we only provide a single MMU table for all k3 platforms,
+this does not scale for devices with reserved memory outside the range
+0x9e780000 - 0xa0000000 or for devices with < 2GiB of memory (eg
+am62-SIP with 512MiB of RAM).
 
-> On Tue, 6 May 2025 at 08:30, Rasmus Villemoes <ravi@prevas.dk> wrote:
->>
->> On Mon, May 05 2025, Tom Rini <trini@konsulko.com> wrote:
->>
->> > On Mon, May 05, 2025 at 10:19:24PM +0200, Mark Kettenis wrote:
->> >> > Date: Mon, 5 May 2025 07:48:43 -0600
->> >> > From: Tom Rini <trini@konsulko.com>
->> >> >
->> >> > On Mon, May 05, 2025 at 11:45:05AM +0200, Rasmus Villemoes wrote:
->> >> > > On Fri, May 02 2025, Tom Rini <trini@konsulko.com> wrote:
->> >> > >
->> >> > > > On Fri, May 02, 2025 at 01:34:33PM +0200, Bruno Leite wrote:
->> >> > > >
->> >> > > >> From: Bruno Leite <brule@prevas.dk>
->> >> > > >>
->> >> > > >>
->> >> > > >> Currently rpi5 uses a generic rpi_arm64_defconfig file that builds rpi4
->> >> > > >> devicetree. Add a defconfig that is specific to the rpi5 building the
->> >> > > >> now available upstream dts for that board. The defconfig makes use of
->> >> > > >> defconfig including that is now available and only changes the DTS
->> >> > > >> related config.
->> >> > > >>
->> >> > > >> It is also necessary to add a more specific u-boot.dtsi to rpi5, since
->> >> > > >> due to the ARCH_BCM283X config it will try to build the
->> >> > > >> bcm283x-u-boot.dtsi and break.
->> >> > > >
->> >> > > > My question is, can we not adjust rpi_arm64_defconfig to be generic
->> >> > > > enough and not have a problem on Pi 5 due to the default device tree?
->> >> > >
->> >> > > Not really.
->> >> > >
->> >> > > What we want is to have CONFIG_DEFAULT_DEVICE_TREE to point at the
->> >> > > rpi5's .dts file, because we really want to build that and not some
->> >> > > "random" dts file that doesn't have anything to do with the hardware. I
->> >> > > know that kinda works for the setups where the .dtb built in U-Boot is
->> >> > > not used for anything, but in our case, we really do want to use the
->> >> > > .dtb from the U-Boot build - we inject various U-Boot specific stuff via
->> >> > > the EXTRA_DTSI mechanism, e.g. public key for kernel verification.
->> >> > >
->> >> > > And due to CONFIG_SYS_SOC being bcm283x, and bcm283x-u-boot.dtsi
->> >> > > referencing nodes that simply don't exist when building
->> >> > > bcm2712-rpi-5-b.dts, the build breaks.
->> >> > >
->> >> > > Perhaps the real problem is CONFIG_SYS_SOC being bcm283x for rpi5? I
->> >> > > don't really know why rpi4 is both bcm2711 and bcm2835 and what the
->> >> > > difference is, but rpi5 only seems to include a bcm2712.dtsi which does
->> >> > > not include further dtsi files.
->> >> > >
->> >> > > If rpi5 has nothing to do with bcm283x, then perhaps a better approach
->> >> > > is to ensure that CONFIG_SYS_SOC is bcm2712 when building for
->> >> > > rpi5. Something like adding a CONFIG_TARGET_RPI_5 choice and adding a
->> >> > > 'default "bcm2712" if TARGET_RPI_5' ?
->> >> >
->> >> > OK, so I guess my next question is, is rpi_arm64 useful enough in the
->> >> > end for Pi 3 and Pi 4? I would have expected that it doesn't matter what
->> >> > tree we build in to U-Boot as we would be using the one passed to us by
->> >> > the prior stage firmware, and then update that at run-time as needed.
->> >>
->> >> Works well enough for us on OpenBSD.  And it would be nice if
->> >> rpi_arm64 would work for the Pi 5 as well.
->> >
->> > But that gets back to my first question. Can we correct the code such
->> > that we do whatever is required at run time, as the previous stage will
->> > have assembled and passed a correct device tree already?
->>
->> I think this is sort-of asking the wrong question. The problem is not
->> about what dtb the prior stage hands us or what to do at run-time. [*]
->>
->> The problem is to have a defconfig that will compile
->> bcm2712-rpi-5-b.dts, as part of the U-Boot build. As I said, it's quite
->> likely that rpi5 isn't at all a part of the 'menu "Broadcom BCM283X
->> family"', and it's the CONFIG_SYS_SOC="bcm283x" that prevents
->> bcm2712-rpi-5-b.dts from being compiled (because the bcm283x-u-boot.dtsi
->> doesn't apply to that .dts). Bruno's patches achieve that by adding a
->> more-specific -u-boot.dtsi file (it doesn't seem that we need any of the
->> bootph-all settings from the bcm283x.dtsi file), and adding a defconfig
->> file that is based on arm64, but just changes the dt settings.
->
-> Any reason why CONFIG_OF_LIST= wouldn't work for that?
+To properly configure the MMU on various k3 platforms, the
+reserved-memory regions need to be queried at runtime from the
+device-tree and the MMU table should be updated accordingly.
 
-Yes. The fact that when you try to do that currently,
-CONFIG_SYS_SOC="bcm283x" means that the u-boot build system ends up
-including bcm283x-u-boot.dtsi, and that has references to nodes that do
-not exist in bcm2712-rpi-5-b.dts. Which is exactly what I wrote above.
+This patch adds the required fixups to the MMU table (during proper
+U-boot stage) by marking the reserved regions as non cacheable and
+keeping the remaining area as cacheable.
 
-So what we're suggesting is to add a more-specific *-u-boot.dtsi file
-(namely, one named after the base .dts file), which can just be empty,
-so that that empty file will instead be picked up when U-Boot builds
-bcm2712-rpi-5-b.dtb.
+For the A-core SPL, the 128MiB region starting from SPL_TEXT_BASE
+is marked as cacheable i.e 0x80080000 to 0x88080000.
 
-That works just fine. And with that in place, one could add
-bcm2712-rpi-5-b to CONFIG_OF_LIST in the rpi64_defconfig.
+The 128MiB size is chosen to allow for future use cases such as falcon
+boot from the A-Core SPL which would require loading kernel image from
+the SPL stage. This change also ensures the reserved memory regions that
+all exist past 0x88080000 are non cacheable preventing speculative
+accesses to those addresses.
 
-Rasmus
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Changes for v4:
+ - Add call to k3_mem_map_init for beagleplay
+ - Mark reserved regions as non-cacheable
+ - More debug logs
+
+v3: https://lore.kernel.org/u-boot/20250617135844.2873701-1-anshuld@ti.com/
+
+Changes for v3:
+ - Remove unused memory regions in SPL's map
+ - Add runtime addition of MMU entry for the framebuffer in SPL
+ - Refactor k3_mem_map_init to use standard u-boot APIs
+ - Unmap reserved-memory regions instead of keeping them uncached
+
+v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.com/
+
+Changes in v2:
+- Removed dependency to:
+  https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+
+v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
+---
+ arch/arm/mach-k3/arm64/arm64-mmu.c     | 212 +++++++++++++++++++++++--
+ arch/arm/mach-k3/include/mach/k3-ddr.h |   9 ++
+ board/beagle/beagleplay/beagleplay.c   |  12 ++
+ board/ti/common/k3-ddr.c               |  10 ++
+ 4 files changed, 230 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 0e07b1b7ce0..135f842556d 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -11,9 +11,16 @@
+ 
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
++#include <mach/k3-ddr.h>
++#include <sort.h>
+ 
+-struct mm_region k3_mem_map[] = {
++#include "../common_fdt.h"
++
++DECLARE_GLOBAL_DATA_PTR;
++
++struct mm_region k3_mem_map[K3_MMU_REGIONS_COUNT] = {
+ 	{
++		/* Peripherals */
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+ 		.size = 0x80000000UL,
+@@ -21,30 +28,27 @@ struct mm_region k3_mem_map[] = {
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+-		.virt = 0x80000000UL,
+-		.phys = 0x80000000UL,
+-		.size = 0x1e780000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
+-		.virt = 0xa0000000UL,
+-		.phys = 0xa0000000UL,
+-		.size = 0x60000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
++		/* Higher DDR banks */
+ 		.virt = 0x880000000UL,
+ 		.phys = 0x880000000UL,
+ 		.size = 0x80000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+ 			 PTE_BLOCK_INNER_SHARE
+ 	}, {
++		/* Flash peripherals */
+ 		.virt = 0x500000000UL,
+ 		.phys = 0x500000000UL,
+ 		.size = 0x380000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Map SPL load region and the next 128MiB as cacheable */
++		.virt = CONFIG_SPL_TEXT_BASE,
++		.phys = CONFIG_SPL_TEXT_BASE,
++		.size = SZ_128M,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+ 		/* List terminator */
+ 		0,
+@@ -52,3 +56,185 @@ struct mm_region k3_mem_map[] = {
+ };
+ 
+ struct mm_region *mem_map = k3_mem_map;
++
++static int dt_reserved_cmp(const void *a, const void *b)
++{
++	const struct fdt_resource *val_a = a, *val_b = b;
++
++	return (val_a->start - val_b->start);
++}
++
++int k3_mem_map_init(void)
++{
++	fdt_addr_t mem_base;
++	fdt_size_t mem_size;
++	struct fdt_resource dt_reserved[K3_MMU_REGIONS_COUNT],
++		coalesced[K3_MMU_REGIONS_COUNT];
++	int k3_map_idx = -EINVAL, ret, nodeoffset, subnode;
++	void *blob = (void *)gd->fdt_blob;
++	unsigned int carveout_len, i, j;
++
++	ret = fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
++	if (ret) {
++		pr_err("%s: Failed to fixup reserved node for tfa [%d]\n",
++		       __func__, ret);
++		return ret;
++	}
++
++	ret = fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR,
++				 0x1800000);
++	if (ret) {
++		pr_err("%s: Failed to fixup reserved node for optee [%d]\n",
++		       __func__, ret);
++		return ret;
++	}
++
++	nodeoffset = fdt_subnode_offset(blob, 0, "memory");
++	if (nodeoffset < 0) {
++		pr_err("%s: Failed to get memory data: %s\n", __func__,
++		       fdt_strerror(nodeoffset));
++		return nodeoffset;
++	}
++
++	mem_base = fdtdec_get_addr_size(blob, nodeoffset, "reg", &mem_size);
++	if (mem_base != CFG_SYS_SDRAM_BASE)
++		return -EINVAL;
++
++	for (i = 0; i < K3_MMU_REGIONS_COUNT; i++) {
++		if (k3_mem_map[i].virt == CONFIG_SPL_TEXT_BASE) {
++			k3_map_idx = i;
++			break;
++		}
++	}
++
++	if (k3_map_idx == -EINVAL) {
++		pr_err("%s: Failed to find DDR region in MMU memory map\n",
++		       __func__);
++		return -EINVAL;
++	}
++
++	i = 0;
++	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
++	fdt_for_each_subnode(subnode, blob, nodeoffset) {
++		const char *name;
++		fdt_addr_t addr, end_addr;
++		fdt_size_t size;
++
++		if (i >= K3_MMU_REGIONS_COUNT) {
++			/*
++			 * This is a recoverable error if the regions can be
++			 * coalesced, the required logic can be implemented once
++			 * requirement arises.
++			 */
++			pr_err("%s: Not enough space in MMU map for carveouts\n",
++			       __func__);
++			return -ENOMEM;
++		}
++
++		name = fdt_get_name(blob, subnode, NULL);
++		addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
++
++		if (addr == FDT_ADDR_T_NONE)
++			continue;
++
++		if (!fdtdec_get_bool(blob, subnode, "no-map"))
++			continue;
++
++		if (addr >= mem_base + mem_size)
++			continue;
++
++		end_addr = addr + size;
++
++		if (end_addr <= mem_base)
++			continue;
++
++		debug("Added memory carveout at 0x%llx, size: 0x%llx for '%s'\n",
++		      addr, size, name);
++
++		addr = max(addr, mem_base);
++		end_addr = min(end_addr, mem_base + mem_size);
++		size = end_addr - addr;
++		dt_reserved[i].start = addr;
++		dt_reserved[i].end = end_addr;
++		i++;
++	}
++	carveout_len = i;
++
++	if (!carveout_len)
++		return 0;
++
++	/* sort carveout regions by address required for creating carveouts */
++	qsort(dt_reserved, carveout_len, sizeof(dt_reserved[0]),
++	      dt_reserved_cmp);
++
++	/* coalesce regions */
++	struct fdt_resource coalescing_temp = dt_reserved[0];
++
++	j = 0;
++	for (i = 1; i < carveout_len; i++) {
++		struct fdt_resource current = dt_reserved[i];
++
++		if (coalescing_temp.end >= current.start) {
++			coalescing_temp.end = current.end;
++			continue;
++		}
++		coalesced[j] = coalescing_temp;
++		coalescing_temp = current;
++		j++;
++	}
++
++	coalesced[j] = coalescing_temp;
++	carveout_len = j + 1;
++
++	if (coalesced[0].start != mem_base) {
++		k3_mem_map[k3_map_idx].virt = mem_base;
++		k3_mem_map[k3_map_idx].phys = mem_base;
++		k3_mem_map[k3_map_idx].size = coalesced[0].start - mem_base;
++		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++					       PTE_BLOCK_INNER_SHARE;
++		k3_map_idx++;
++	}
++
++	for (i = 1; i < carveout_len; i++) {
++		k3_mem_map[k3_map_idx].virt = coalesced[i - 1].end;
++		k3_mem_map[k3_map_idx].phys = coalesced[i - 1].end;
++		k3_mem_map[k3_map_idx].size =
++			coalesced[i].start - coalesced[i - 1].end;
++		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++					       PTE_BLOCK_INNER_SHARE;
++		k3_map_idx++;
++	}
++
++	k3_mem_map[k3_map_idx].virt = coalesced[carveout_len - 1].end;
++	k3_mem_map[k3_map_idx].phys = coalesced[carveout_len - 1].end;
++	k3_mem_map[k3_map_idx].size =
++		mem_base + mem_size - coalesced[carveout_len - 1].end;
++	k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++				       PTE_BLOCK_INNER_SHARE;
++	k3_map_idx++;
++
++	/* map reserved memory as non cachable */
++	for (i = 0; i < carveout_len; i++) {
++		k3_mem_map[k3_map_idx].virt = coalesced[i].start;
++		k3_mem_map[k3_map_idx].phys = coalesced[i].start;
++		k3_mem_map[k3_map_idx].size =
++			coalesced[i].end - coalesced[i].start;
++		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++					       PTE_BLOCK_INNER_SHARE;
++		k3_map_idx++;
++	}
++
++	debug("%s: MMU Table configured as:\n", __func__);
++	debug("   |virt start\t\t|virt end\t|phys\t\t|size\t\t|attrs:\n");
++	for (i = 0; i < k3_map_idx; i++) {
++		debug("%2d: 0x%-12llx\t0x%-12llx\t0x%-12llx\t0x%-12llx\t0x%llx\n",
++		      i, k3_mem_map[i].virt,
++		      k3_mem_map[i].virt + k3_mem_map[i].size,
++		      k3_mem_map[i].phys, k3_mem_map[i].size,
++		      k3_mem_map[i].attrs);
++	}
++
++	k3_mem_map[k3_map_idx] = (const struct mm_region){ 0 };
++
++	return 0;
++}
+diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+index 39e6725bb9b..0b164ebf5e6 100644
+--- a/arch/arm/mach-k3/include/mach/k3-ddr.h
++++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
+@@ -8,10 +8,19 @@
+ 
+ #include <spl.h>
+ 
++/* Number of mappable regions in the MMU page table */
++#define K3_MMU_REGIONS_COUNT 32
++
+ int dram_init(void);
+ int dram_init_banksize(void);
+ 
+ void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
+ void fixup_memory_node(struct spl_image_info *spl_image);
+ 
++/*
++ * Modifies the MMU memory map based on DDR size and reserved-memory
++ * nodes in DT
++ */
++int k3_mem_map_init(void);
++
+ #endif /* _K3_DDR_H_ */
+diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
+index 78635810585..031040fe705 100644
+--- a/board/beagle/beagleplay/beagleplay.c
++++ b/board/beagle/beagleplay/beagleplay.c
+@@ -13,6 +13,7 @@
+ #include <spl.h>
+ 
+ #include <asm/arch/hardware.h>
++#include <mach/k3-ddr.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -48,6 +49,17 @@ int board_init(void)
+ 
+ int dram_init(void)
+ {
++	int ret;
++
++	if (IS_ENABLED(CONFIG_ARM64) && xpl_phase() != PHASE_SPL) {
++		ret = k3_mem_map_init();
++		if (ret) {
++			printf("%s: Error fixing up MMU memory map: %d\n",
++			       __func__, ret);
++			return ret;
++		}
++	}
++
+ 	return fdtdec_setup_mem_size_base();
+ }
+ 
+diff --git a/board/ti/common/k3-ddr.c b/board/ti/common/k3-ddr.c
+index a8425da8de5..ee882f62109 100644
+--- a/board/ti/common/k3-ddr.c
++++ b/board/ti/common/k3-ddr.c
+@@ -7,6 +7,7 @@
+ #include <dm/uclass.h>
+ #include <k3-ddrss.h>
+ #include <spl.h>
++#include <mach/k3-ddr.h>
+ 
+ #include "k3-ddr.h"
+ 
+@@ -14,6 +15,15 @@ int dram_init(void)
+ {
+ 	s32 ret;
+ 
++	if (IS_ENABLED(CONFIG_ARM64) && xpl_phase() != PHASE_SPL) {
++		ret = k3_mem_map_init();
++		if (ret) {
++			printf("%s: Error fixing up MMU memory map: %d\n",
++			       __func__, ret);
++			return ret;
++		}
++	}
++
+ 	ret = fdtdec_setup_mem_size_base_lowest();
+ 	if (ret)
+ 		printf("Error setting up mem size and base. %d\n", ret);
+-- 
+2.49.0
+
