@@ -4,103 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D587C7115B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 06:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504E7C7115C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 07:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02BD582B18;
-	Wed, 18 Jun 2025 08:58:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B3B4282B18;
+	Wed, 18 Jun 2025 09:08:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="co28iaPc";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QuAAeIDo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A58882B18; Wed, 18 Jun 2025 08:58:50 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2F3C082BF6; Wed, 18 Jun 2025 09:08:19 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7493A82977
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:58:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9180A82B0F
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:08:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ade76b8356cso1313200066b.2
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 23:58:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750229928; x=1750834728; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Jeh0DbXF/4CDe+sbD8rPJN3EUBTcrZlc4Cr5BlGaqWE=;
- b=co28iaPcxQFQRziPSDODh6xOFp9n53kVgx8ofTrOBCJw/jfj3DssU/Hk3c19ngxnvU
- yDSKt38zCq2yXL06WMaVKrN7iAOTqy5RlO728dG/KriC3fh4MVqvrg58Wz5++ZjVGG3B
- OrGQ0qEluFr2tsgPKsX/aLvne8GG5HxgUouon2X1xzS8zHyN+zy22lpy2+ZaeI/R2KjM
- Il/2Dqdlodv7qXExg9bimR5i5X4pnuH7EMpbfdctJWmzw4vWzlKY/t8NUOgPVld0g5mB
- bpKSGpMowJsHqfolyMoYEUI3/6XEo6xqtNV1AXjs4kkn8/LEKsOaj98g7vL1JuRpsHaW
- 4APA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750229928; x=1750834728;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Jeh0DbXF/4CDe+sbD8rPJN3EUBTcrZlc4Cr5BlGaqWE=;
- b=YmcJZnsYqxknbNsXFgwSheexl32j/4rklKXu0GkLXNjuh/PHyx8N2gEHJEJ57Mr3j3
- M4e+kdWZ3qoE0Hqeq3mQ1XafKSXTPIN1gCYKA3p1G4JXHgmfZWwA96Ln174WkrxhGN9Q
- qX7Qe1xOBlYTX6/GFikSXMOen71Vjbo1tHA9lMTmNVUhx/rTPHebygTG8O6TZTGlJWVC
- +YuafIs3qepXEPieYwTqI7vWayG89DTNo+mgBcHkfWzkNFeAu1HPiteTl1vhqbl+41wy
- JISP5SRdHuFm5b6FyF6RvhiL8C6/wueG8JnKKilc6EK3jWkAupgYbZxBn+ytdSGBXead
- 9XKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDx7CPPvO+LAWDUdF6crPJCppKi7aBctEX3ocU9DwbX4PEY1l1RZQ9ycnRMHOMSuzIKc8XFV8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy54t/yThY0giQJsgh0Sai0khcNBSfuTYxQ0kGrQm2SymoCQb7z
- WrviM7542ftRUYffu8T7Ul5NTOTJJw6kk2AAFXXds9U6QKZZaXJHvD5QdTa32B0kz7U=
-X-Gm-Gg: ASbGncteTfvUkDoxBF3TrrVWmnj64rUzNkEa0NjbN7aMOxHdlaljDkAD+De8ylt6Ipd
- iIIkmnrlxGt7D2xOBD1hj3i5JFbaDs1FIwTBpvBCmchJ1bJv3Kb0jj2C5VR4nho2MRDw9wN6mWN
- hVkGlOj1sY0Xf4Ks89mdnlRYF+d41tWEqtcEBS5tA1rNjZaeYQQZteyrPYYbhAXccVgPwrOEAnI
- CBtAv1xjDVqESIQ1gqGYdzwp1X0FRImo25EgNzCetPCDTxwFQpu7k3ef2hrtM2WfqPhAC1d9tMb
- nwRgWkhKA22EsuYBz3erOUNtEQodJ9bhoifTFW1fCZacoiXYqjvwvk2VHtgqKTKO7G273XWPV6P
- NlsyhTb47t3K9502kbakz2Q==
-X-Google-Smtp-Source: AGHT+IE5KlGgg6o55pkovIa2g+xP9uJoyni0/JCSM1VLxyWThlP0z1rxWRH3XeDtHm6YuM3yRi58KQ==
-X-Received: by 2002:a17:906:7310:b0:ad8:a41a:3cd2 with SMTP id
- a640c23a62f3a-adfad434544mr1555917966b.16.1750229927871; 
- Tue, 17 Jun 2025 23:58:47 -0700 (PDT)
-Received: from hades.. (ppp089210105145.access.hol.gr. [89.210.105.145])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec897bae7sm978322866b.162.2025.06.17.23.58.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 23:58:47 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: jerome.forissier@linaro.org, mikko.rapeli@linaro.org,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Boyan Karatotev <boyan.karatotev@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
- =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Liya Huang <1425075683@qq.com>, Raymond Mao <raymond.mao@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/3] qemu: arm: Enable virtualizable IO accessors
-Date: Wed, 18 Jun 2025 09:58:14 +0300
-Message-ID: <20250618065828.1312146-4-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250618065828.1312146-1-ilias.apalodimas@linaro.org>
-References: <20250618065828.1312146-1-ilias.apalodimas@linaro.org>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 9780DA523A4;
+ Wed, 18 Jun 2025 07:08:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4486C4CEED;
+ Wed, 18 Jun 2025 07:08:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750230494;
+ bh=QaddolRz2bvyebeiAwBoqVaHI/C+6/lsoBm+md8rW9s=;
+ h=From:To:Subject:In-Reply-To:References:Date:From;
+ b=QuAAeIDoyzVZWOapVSJDLI/oFQh7CEQLnzWg9Hl36fxHMfUodwhYzFDB7dd0Y97m4
+ iFQ4mSMvFDLGu4aJqwfHmn/J5DJjMtvhbAdY+reR+bagVHpxUxo2lUeqUbH4SqCmoD
+ IRzZkIU9RwyaqWdxRZ0EmkKLgJy3MXwSJSYRfE6LBCu8F9Z9NrzXGKrA5wHopodCYB
+ VXIZ1QCALM3lIB3bG/S/xpB5rFPx7Yh23QOAlw15LpixlFI8Xshv9KtMdGhXRuG3D3
+ fxXoVXwllcD+G445jDQYdTxVSUIMLjMgZLZppZEKRSnVFnpO3zdDgE0BIv/+GBe4XJ
+ hWwbVzORc9cjw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [RFH] Future direction of the U-Boot project
+In-Reply-To: <20250602222738.GC100073@bill-the-cat>
+References: <20250602222738.GC100073@bill-the-cat>
+Date: Wed, 18 Jun 2025 09:08:11 +0200
+Message-ID: <87msa5ttlw.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,36 +66,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We recently added IO accessors that will work with KVM for any MMIO
-access that casues an exception to the hypervisor. Enable them by
-default for QEMU.
+Hi Tom,
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- configs/qemu_arm64_defconfig | 1 +
- configs/qemu_arm_defconfig   | 1 +
- 2 files changed, 2 insertions(+)
+On Mon, Jun 02, 2025 at 16:27, Tom Rini <trini@konsulko.com> wrote:
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 72bd255eafa3..39afb837e411 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -1,4 +1,5 @@
- CONFIG_ARM=y
-+CONFIG_KVM_VIRT_INS=y
- CONFIG_ARCH_QEMU=y
- CONFIG_SYS_MALLOC_LEN=0x1000000
- CONFIG_BLOBLIST_SIZE_RELOC=0x2000
-diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-index f13001390d4d..92ba48f6af97 100644
---- a/configs/qemu_arm_defconfig
-+++ b/configs/qemu_arm_defconfig
-@@ -1,4 +1,5 @@
- CONFIG_ARM=y
-+CONFIG_KVM_VIRT_INS=y
- CONFIG_ARM_SMCCC=y
- CONFIG_ARCH_QEMU=y
- CONFIG_SYS_MALLOC_LEN=0x1000000
---
-2.43.0
+> Hey all,
+>
+> Something I've talked about in release emails earlier this year, and
+> promised a follow-up on but hadn't gotten to yet, was how to manage the
+> project moving forward. The email I made last week about Simon also I
+> believe highlighted some of the problems that we as a project and
+> community face.
+>
+> As a starting point, I want to thank all of the people (and companies)
+> that have been working on the project and doing the less visible but
+> important and expensive things that need doing. DENX has been running
+> much of the project infrastructure since inception. Currently, all of
+> the fast AMD64 build machines are from Simon. Linaro has been providing
+> two of the 3 fast ARM64 build machines (the other is from Simon). Our
+> patchwork project is on OzLabs group. A number of years ago, Simon
+> picked up the u-boot.org domain. There's likely other things I'm
+> unintentionally forgetting here.
+>
+> So, what are the problems I see and would like to get some help and
+> guidance in working on resolving? Well, in a lot of ways it all stems
+> from one root cause. The project was founded on the "BDFL" model,
+> which was quite common at the time, and a relatively reasonable option
+> too.
+>
+> But now? It makes getting resources harder. There are a number of people
+> working in the background now trying to get things donated to the
+> project (thank you, again) but I also know historically it's been a
+> challenge not having some distinct entity for U-Boot. Individual
+> contributions are best done as "I have a server" or similar. Conferences
+> are a strictly individual thing.
+>
+> Then there's the day to day parts of the project. I feel like I
+> shouldn't complain about taking vacations where I just handle pull
+> requests and not patchwork stuff too, or only doing a few things on the
+> weekend. But it also means there's no real way to handle contentious
+> issues other than what I say goes. Which isn't ideal.
+>
+> What to do about it? Well, I've talked with the Software Freedom
+> Conservancy (https://sfconservancy.org/) (SFC) earlier in the year (and
+> before that, years ago at conferences). There are number of open source
+> and community focused projects that they provide a legal entity for and
+> help with administrative things. I've personally been a fan of what they
+> do, and donated yearly for a long time. I think they would be a good fit
+> for the project because they do this kind of work for a number of other
+> big and important and community centric projects. I would encourage
+> anyone interested to look at their website and look around.
+>
+> But that is something like step two or step three. The first step is
+> that I'm hoping some members of the community would like to formalize
+> helping with the project. SFC can help us with creating some
+> organizational structure for the project itself, but we need a few
+> people to do it. And before we even get that far, help with the mailing
+> list moderation queue and triaging patchwork assignments would be great.
 
+I'm happy to help with the mailing list moderation queue. I'm in Europe
+timezone.
+I will be away for 2 months (August-Sept). Please reach out to me if you
+think I can help.
+
+>
+> Thanks for reading this, I look forward to finding a sustainable path
+> forward for the project and the community at large.
+>
+> -- 
+> Tom
