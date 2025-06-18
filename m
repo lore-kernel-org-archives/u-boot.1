@@ -4,88 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A39C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 19:38:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA309C7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 19:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4495182BCD;
-	Wed, 18 Jun 2025 21:38:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B6BD82C2F;
+	Wed, 18 Jun 2025 21:49:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="VPeYZ7fF";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="btyJDieW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8807E82BCD; Wed, 18 Jun 2025 21:38:36 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6FD7882C55; Wed, 18 Jun 2025 21:49:05 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7E0D82B20
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 21:38:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32BAB82BCD
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 21:49:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-40a4de1753fso754811b6e.1
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 12:38:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1750275512; x=1750880312; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mwyymksZGns3cXWmcDWi+bg8KK3FnNPeG4dAdtiX1JY=;
- b=VPeYZ7fFmhYVoHy4GwNO3f0DEOSrCHpe0JOkL1Les764RxO5QQUPXDY3WX/CvvRrNh
- tkhXtXLqYwZ6Rgxjj34J0+S1khFe7qXQRv/NzCR1l+EfJMiCfvaCQoMC4V5b1kVEzTZI
- PE9fkbapaCLGIKIdEatP7nJ96Z+LLZhtWryDhiIGXXGYX8BmFDzCIuAF3nUQ0IKeEITq
- upmrvL+Mic2U0FtGzbrRUrgO/uNQpBcyUg+gF1Jc7QOFFFTDYbUeb80WA+hknkMcTnNK
- o7r8N0G389zJK9+auEiHzj3XQpafDyuzb9jdWgGbCzVK5EGJvirEADLf0fJOYDuYcoUQ
- sG2w==
+ spf=pass smtp.mailfrom=fmartine@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750276141;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=rJh/HqXcDebEy/om3rmGAUBVQ7pwCi2cM/6awawqf38=;
+ b=btyJDieWWnpmJpCP8KrgSAjcMKlirpoA2jDc2V+y7/QIpf/fFsv9WU9XPDN4q0GqXkek7N
+ BZltgea0QLVoy/zKKFQ7s7QkSswjVJwNkC8KEQhFmQK7bTc1NHcKW/Y6WuarwYhct7BQRc
+ 8hiJYDr96SfvI/UiuEk8EwDNU0OIL7g=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-402-GwGXP9tdPBGG9d6nbfTKNg-1; Wed, 18 Jun 2025 15:49:00 -0400
+X-MC-Unique: GwGXP9tdPBGG9d6nbfTKNg-1
+X-Mimecast-MFC-AGG-ID: GwGXP9tdPBGG9d6nbfTKNg_1750276139
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3a4e713e05bso26970f8f.3
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 12:49:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750275512; x=1750880312;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mwyymksZGns3cXWmcDWi+bg8KK3FnNPeG4dAdtiX1JY=;
- b=uGx3ecckmUyaym6hV77aFQlGDl7sK3CPXB4cfrOM5JsT9YTlDyHqffGN/1I8fH9ZZG
- 86Uz3TdFolG8j8oGDxB3LNMvkiRHXs4tgqmEsb/xktFXe/+bNbwvPxYcw+SOXiw6kwys
- cprzTl921r8Gka04cf1+B2f30G0yzDV2eZSbUHJy4Vts/HNY6ukLQ2FARtRkIJfDxfQY
- UKPabsZj7TugMxFITeSs29yI0pH8L8vJLyhqPB5bVNIOxyiRgpM9alEvmMb4yebdXZjH
- am8YXNYgnl2QJS2mRMhIUXqvWcX3JZIkgu2C1LSJWi2DvO0by0BEEHEh/dcvHyPC5ADx
- 2VcQ==
+ d=1e100.net; s=20230601; t=1750276139; x=1750880939;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rJh/HqXcDebEy/om3rmGAUBVQ7pwCi2cM/6awawqf38=;
+ b=g4pPaGX9MB6nhBtnHeV38XsIJoVrJZAsJu+TaM5NRQYWRdrKk9MfdRL1LZstRhstNc
+ FJsi21g+vmi9KFTnu2IKJXt4DUG719gmRf+JKG8DocrvOqm7QLPFuSEfbKIT/T97kFLN
+ ai14pJ9cPMBLR1JWTH8uhoowlkVW5vug2Soy0oxrYbeK5d8ZDv12fVqrknvlLkPUMdOx
+ z1D+HNw8l8Xx/Ey/RUeYcLhhFWNMl4dLdVkon8r9St2LQrNpfSScuYWrxj56WVTudpAr
+ KljE2pfVyF5ozXmnN8yZzuDxtyN24VBqgb+PYhxOv/MBn5WL0nLvHthOFsZcvYxYZT/r
+ eGbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXqI8QfPU/3CE7Z9uQtvAopqSN2C4j3pxyq12SQqm8elRJ9X/jenGDGf9aC40jrAB4UXhtHT7c=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlD0IhdQ6FDh8KrpKTaAis9g9AvQOwuDY5tK3CAWGn58QWpXOF
- +7u0lttp1bimIhXrcFEC8CFpSVZS0jXT76sIJgzORoOQnZ4Yi40QrtEHRREXYJaKmdqrQlvczu/
- SCeQzfjo2sUpmL7v8sYT0VBqgp5aMNzPb1l2ZqjyRVw==
-X-Gm-Gg: ASbGncv3N7ygpIeoOHYFPKfFZ+jB7h0GcjlhnfEeFlBxndfBd44V16fDPoscb4wLxrO
- sVXF2+HWW0+m9Zrz2870ctbh5Ky4/YuNiA+ZzCUW3CAfRYYU8BQiz3yB0RIBebF9rpsA7PIlp23
- iKm/DTgTDJuCyF1uLkynp8aaTJuNa+XSCMb/z4PW1yLkI=
-X-Google-Smtp-Source: AGHT+IG9MLh3BZhqO8tnBDBBvA3mXWuAXuqkhyx6MYGZLrovCPfFqlbnD/+GSnBi+4QfrIH/9fM1iQvK+86Tq4UDkNM=
-X-Received: by 2002:a05:6808:201c:b0:3f3:d6f9:69a5 with SMTP id
- 5614622812f47-40ab5150553mr734847b6e.8.1750275512455; Wed, 18 Jun 2025
- 12:38:32 -0700 (PDT)
+ AJvYcCVYsud8yhlpeL3Lej0ecQDVQqYB5j6U+7IYyVvmD85a8OFuonFo2EAc8SNIGhJZCnquYZnvKT0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbYtmg/s8WkABFIRAybfCGJ8ft0K1jpL9z/5LQ/P8lJxgcfXMx
+ qppIxFB3yr2tFAWEwTzmgOxrnh3k6MUIDN6hn3Hq0B08TE2qVXcYrxgH3zFvZm84W9KI06ygv65
+ 6FJmKGAqI4r5TsurRAfIV7MildDKkPeFb5o1npf+rtxn8obIvQU7eoU4=
+X-Gm-Gg: ASbGncsP9AS9XP1HaX81To0yYnCF7ZcdPc5ka6ZVNSiTqmqAWxS4zA5RS6SUbE7AGln
+ dqs5zPutEVbcav4CWG61VmMqlaXJBAzmhU0UF+3Gx8yqO8A5U3cuWmNx5kn8TBQhWYZo4TQzNQA
+ jnpcK8rqh+1V+1bwz8aq+7p4z2UdGkvAlmGuAyEDdOV7fZFQ0bo/v3P5kkLj0q2M3mSnrpqAHsO
+ WOWdBmP7Ui9+NKZr3IBFPDTj3r5vUXjhoDNgYCjeERo4DZnUeCF3ActCebjanIYnPvJ3NtMbzvC
+ v5SPPzWE7NpvYg3UjxdmFJSAnPr/H6/aBnQ1D1bTfA+EJgD0z8qQXLYrgFbA9CiYX0cEvE/m1Iw
+ rzrEN
+X-Received: by 2002:a05:6000:178a:b0:3a4:f72a:b19d with SMTP id
+ ffacd0b85a97d-3a572366706mr15314276f8f.8.1750276139292; 
+ Wed, 18 Jun 2025 12:48:59 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEYNUJsm6POUDLuaceMM1kvT1O8VKj0ygnihzwvyVhCVSW/t3Jd5SluVR/XHUyeULrJwaYCwQ==
+X-Received: by 2002:a05:6000:178a:b0:3a4:f72a:b19d with SMTP id
+ ffacd0b85a97d-3a572366706mr15314259f8f.8.1750276138870; 
+ Wed, 18 Jun 2025 12:48:58 -0700 (PDT)
+Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568a60f5asm17466060f8f.25.2025.06.18.12.48.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Jun 2025 12:48:58 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mripard@redhat.com,
+ alexl@redhat.com, mkorpers@redhat.com, eballetb@redhat.com,
+ mskrivan@redhat.com, Alexey Romanov <avromanov@salutedevices.com>, Casey
+ Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Maks Mishin <maks.mishinfz@gmail.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Svyatoslav
+ Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
+In-Reply-To: <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
+References: <20250618080056.1973311-1-javierm@redhat.com>
+ <20250618145016.GF6521@bill-the-cat>
+ <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
+ <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
+Date: Wed, 18 Jun 2025 21:48:57 +0200
+Message-ID: <8734bw4yqe.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
-References: <20250530153826.1057407-1-tharvey@gateworks.com>
- <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
- <20250617224551.GA1687135@bill-the-cat>
- <CAJ+vNU2oNMpupHLHHcf3HTXBTN8mnPczo6T8khAkN875YwmUxg@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2oNMpupHLHHcf3HTXBTN8mnPczo6T8khAkN875YwmUxg@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 18 Jun 2025 12:38:21 -0700
-X-Gm-Features: AX0GCFs-HPQ1pVNkH18pldKUq4bJanwNDeVQlnX-mY-LOflKdPTJZgtg9KVknNY
-Message-ID: <CAJ+vNU3UH2fMBc=fg4aMvUCdxHf4ADf2KeApBeiCiGrrNyc+ew@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
- rx
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 7d4Gfeww3nZgR3qbkp1ReRD33Ty3HsQIXe7AVhZ_o9I_1750276139
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,137 +118,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 18, 2025 at 8:32=E2=80=AFAM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+
+Hello Ilias,
+
+> Javier I reviewed the patches but I probably missed something.
 >
-> On Tue, Jun 17, 2025 at 3:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Sun, Jun 01, 2025 at 11:07:16PM +0200, Heinrich Schuchardt wrote:
-> > > On 5/30/25 17:38, Tim Harvey wrote:
-> > > > Call schedule() in net_lwip_rx() to service U-Boot tasks and
-> > > > actions during packet rx.
-> > > >
-> > > > As a cleanup also move sys_check_timeouts() here and remove it from=
- the
-> > > > functions that call net_lwip_rx().
-> > > >
-> > > > This resolves the issue of an active watchdog resetting the board o=
-n
-> > > > long network activities.
-> > > >
-> > > > Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > > > ---
-> > > > v2:
-> > > >   - remove duplication of sys_check_timeouts() from functions that =
-call
-> > > >     net_lwip_rx()
-> > > > ---
-> > > >   net/lwip/dhcp.c     | 1 -
-> > > >   net/lwip/dns.c      | 1 -
-> > > >   net/lwip/net-lwip.c | 7 +++++++
-> > > >   net/lwip/ping.c     | 1 -
-> > > >   net/lwip/tftp.c     | 1 -
-> > > >   net/lwip/wget.c     | 1 -
-> > > >   6 files changed, 7 insertions(+), 5 deletions(-)
-> > > >
-> > > > diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> > > > index 92bd7067a7fb..b79b746db390 100644
-> > > > --- a/net/lwip/dhcp.c
-> > > > +++ b/net/lwip/dhcp.c
-> > > > @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
-> > > >     /* Wait for DHCP to complete */
-> > > >     do {
-> > > >             net_lwip_rx(udev, netif);
-> > > > -           sys_check_timeouts();
-> > > >             bound =3D dhcp_supplied_address(netif);
-> > > >             if (bound)
-> > > >                     break;
-> > > > diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-> > > > index 19172ac959ac..738f8bf3196b 100644
-> > > > --- a/net/lwip/dns.c
-> > > > +++ b/net/lwip/dns.c
-> > > > @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const c=
-har *name, const char *var)
-> > > >                     net_lwip_rx(udev, netif);
-> > > >                     if (dns_cb_arg.done)
-> > > >                             break;
-> > > > -                   sys_check_timeouts();
-> > > >                     if (ctrlc()) {
-> > > >                             printf("\nAbort\n");
-> > > >                             break;
-> > > > diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> > > > index f05c4cd3f64f..e8d4cc542ed8 100644
-> > > > --- a/net/lwip/net-lwip.c
-> > > > +++ b/net/lwip/net-lwip.c
-> > > > @@ -13,8 +13,10 @@
-> > > >   #include <lwip/etharp.h>
-> > > >   #include <lwip/init.h>
-> > > >   #include <lwip/prot/etharp.h>
-> > > > +#include <lwip/timeouts.h>
-> > > >   #include <net.h>
-> > > >   #include <timer.h>
-> > > > +#include <u-boot/schedule.h>
-> > > >   /* xx:xx:xx:xx:xx:xx\0 */
-> > > >   #define MAC_ADDR_STRLEN 18
-> > > > @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct n=
-etif *netif)
-> > > >     int len;
-> > > >     int i;
-> > > > +   /* lwIP timers */
-> > > > +   sys_check_timeouts();
-> > > > +   /* Other tasks and actions */
-> > > > +   schedule(
-> > >
-> > > Some scheduled tasks have a long duration, specifically video_sync_al=
-l()
-> > > called via video_idle(). This change will lead to lost packages.
-> > >
-> > >
-> > > @Tom, Simon
-> > >
-> > > The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule() in=
-stead
-> > > of WATCHDOG_RESET()"). This added schedule() calls to EFI networking.
-> > > Package losses can expected if schedule() takes more than 1 =C2=B5s. =
-This is much
-> > > shorter than the time needed for synchronizing a 1 MiB frame buffer. =
-The
-> > > cyclic framework was explicitly meant for short duration function cal=
-ls, not
-> > > for long duration tasks like syncing the video frame buffer.
-> > >
-> > >
-> > > I think we should remove video_idle() from the cyclic framework.
-> > > video_sync_all() should only be triggered if there is video output.
-> >
-> > So for testing purposes, if CYCLIC is disabled but LWIP is enabled,
-> > things are fine here? And so we need to at least partially revert commi=
-t
-> > 5c8dddadf1c9 ("video: Use cyclic to handle video sync") if not fully
-> > revert it?
->
-> Hi Tom,
->
-> I can't disable CYCLIC without also disabling WDT which then works
-> fine as the watchdog isn't being used.
->
-> You are likely pointing to the correct patch that is causing
-> Heinrich's issue but as far as I know he has the
-> hardware/configuration needed to test this and I don't know how to
-> re-create his issue.
->
-> So in my opinion there is nothing wrong with my patch here and it's
-> more of an issue with the video using cyclic for video sync.
+> I am getting a compilation error with the selftests applied.
+> #include <part_efi.h> seems to be missing.
 >
 
-Incidentally, I've noticed that I only have this
-watchdog-not-getting-reset issue when using the IMX FEC driver. The
-IMX QOS (imx8mp) has calls to udelay in the packet send and udelay
-calls schedule. I'm not sure how many network drivers out there end up
-calling udelay/schedule on their own.
+Sorry about that. What's the command you are using to build so that I can
+replicate the issue. I tested with the following build command:
 
-Best Regards,
+make qemu-x86_64_defconfig && make -j8
 
-Tim
+> Thanks
+>
+> /Ilias
+>
+
+-- 
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
+
