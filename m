@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20E6BC7115B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 07:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43268C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 07:31:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A30CF82BCD;
-	Wed, 18 Jun 2025 09:30:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AFB182D6F;
+	Wed, 18 Jun 2025 09:30:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="CIpbuEBT";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="tXq3+Nsp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE25682B18; Wed, 18 Jun 2025 09:30:42 +0200 (CEST)
+ id BF25382D6F; Wed, 18 Jun 2025 09:30:47 +0200 (CEST)
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEB3982BCD
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:30:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C408E82D39
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:30:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RK9av1i5QCN/J6JDdEWHLxRYI66V9Kc50TE20JAv799fZOXAhlHQS2Xdv4BdCwQaQu26Js+IVs0JLxasfTD973ZPzfcQQ0ugemXv54R56ax9XsMCXQDoqa0mcBwj20CEoGTu+5bqiDpW5gLU0WtNR/Z7bkg0/6BShYsWYrQg525YlD5BcuqoEheZqq7mGu0ZLl4yu+Gjk4x3635L6k4AbB/POAtGIJ2ocGukFK1VYz9pfwdyeeB8SI/RiSZeVsa07SyacOb1DL+4lMHQjIWTCZTFS8wlYrWQJCsgCZXm2y5bvjgW+40hx/7OMhBaSd67lkEEXkBB/1rirBICZfJGow==
+ b=LexVi+mNyFxMJa6DMUEIpFmDqGwnz97kXovwrNlFAgJxb39Xek63zsnAkvAwAi0RhVHS3Dpvy6gTvAsNKsHHtwMhePPmXqdfrJxLDVWj7Zhh8ODWXsTHIXGW9MK0gN2GdpCmNOLub7zuyhs/IvZiTwVEm1RYlpJ1wNgKzBQcN9z3LPomCofaOT57SDQbQsIqJv6aH8+p9GYO33Vl96kI4hhbjAKmYF8b4BVAONFf860VmpxZUqYRWgf1RKyS2b5Q4JK06ocfdseUn6nSxWEHwYEsorIXWCOvF+Oik8W0dN/8ef1F005lydPC8hWozTJQfWUuMg0WJGXNey31QFzS4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+zZSzTxKA20AKQlDGWvAPo0uEU1OVe7Hb61vganiTSM=;
- b=tIWjbC8od4X+xTs2FZkojqJcwUwGUUodVPV6qjOx4TMJAqUzjkaQyR1ENQvanlYKVSCqzan6bFUjYXgpg3/Fs2paruRZtqyuW+MRVT4KHcomyw1ejDVVjsmrbeH8PYeoOXvHxqJUOc46aiDFuokHzr+2992rmFsA8YARXECYA3OROgC3GVrAF9Z2wIbXUOcBaVNc8wbBDGDE66JKivEt/l/SXsAVaHS4KWevJ6157Z+NA7sHl1KMCE/c/jnrGCnXhHmphehqOJkqfDRJ9NdVWxgAMjk65wl7KLJAqVhLib5yQ0bk47B9y5J2JRLmiQCc+JzLiXfdyrY+LtyTKhTmXg==
+ bh=LmlLLq5kKg1X/crfKLZU2Rhc/24uxOnAPWxEX2i5wuI=;
+ b=j1zQUV3J7q7x+jVxSrFUyJ/sZfpyFg7flzhONJxqCvtwd9P7pTvovqjem9DkQ9I+MfLNKEFbzZ/JzXp11fnrc7kIg4ZJ0ZGFDPY+9cRs435FofDGr5kIBXyPmcNdbdQ4aF1/ON28Jo3Vv6SaYIbQoXaksdGldKuTbSSomLCwmwjl0uLobXjEY8TQ3SYPBCy1wfPv+OWPkrg2rq8n65mWO2dcCsKnlNH/HmUmkWD1SmAWzrWLaz5Aq0F7WxxuhgHJyjCCHf00DHGBYPyznDeVqZ5O/hhJkf3g6Qy9UCQMWDWBOHov1hpGE/+dgHP/1CLBdZJVWagfrxxUsYmSal7nCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+zZSzTxKA20AKQlDGWvAPo0uEU1OVe7Hb61vganiTSM=;
- b=CIpbuEBTLDCdy9Qpo47e77+h74YTlehdHAA2Y9uEjMtT2woBvqOSbRJBg6/pqtzh5dcsVsemdyAHFkFhkKVzgFpMJ+o3o9rGA4oTHWWYinW5bm1mDJlN7CajZa73asVZ7rHFFOPqX6Iixzz8MYbrC+ZHDpAUQZ2l6xtfCIfI6+WzFnu1XIrWfZywxdgPWQF0ldPz/ywE3Jth/g7/yL04GqxLTarZszyvoHzT0rCq0WQT8ILMzafHVQbyS3/4kvG2nEcPwJNVG2HEPL5JhJMJnpJlPI+YBDrFQdVtb0GLsWkcbbjrYYuMRHxg3py7gd3QhV5NGmkqToTxAO3xns4rZA==
+ bh=LmlLLq5kKg1X/crfKLZU2Rhc/24uxOnAPWxEX2i5wuI=;
+ b=tXq3+Nsp5KyJjDwrsNdG6TlADN9xlqnbBfKTE9HonF5xo0mPJJSS1TrYJBuSP2qz6B3ASpmOcStEA0kcolcRzv7me5K40OQNRIJV2z1rZXVAPYAiSZWa5z3P90uH3BR2oExFdizV4gLwSsFrzSp/z15Js4ib0FWmsMRzda4NtIx+k5UA2V5yZvBdM54Yk3iR2ExSqsstBSDAKCKEb6zmyiq9Sb1CQiBbSicGlFezuUl2h4GRU7BNFQP1PEkCx3gI9OQnKyoV6WwhKtuiCEESGaF+XOu3cmMzbL+REbdnlE6AejPdPrAWrkjRXFvRPKWOGazPMEye/PQ/Vs5URiV8XQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by AS1PR04MB9454.eurprd04.prod.outlook.com (2603:10a6:20b:4d9::9)
+ by VI0PR04MB10928.eurprd04.prod.outlook.com (2603:10a6:800:261::8)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.23; Wed, 18 Jun
- 2025 07:30:38 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.29; Wed, 18 Jun
+ 2025 07:30:42 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.8835.027; Wed, 18 Jun 2025
- 07:30:38 +0000
+ 07:30:42 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Wed, 18 Jun 2025 15:30:19 +0800
-Subject: [PATCH v1 6/8] tools: imx8image: Add 2 new commands
- CMD_CNTR_VERSION and CMD_DUMMY_DDR
+Date: Wed, 18 Jun 2025 15:30:20 +0800
+Subject: [PATCH v1 7/8] spl: imx: Add support for new PQC container
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250618-binman-v1-6-373e66c7a51f@oss.nxp.com>
+Message-Id: <20250618-binman-v1-7-373e66c7a51f@oss.nxp.com>
 References: <20250618-binman-v1-0-373e66c7a51f@oss.nxp.com>
 In-Reply-To: <20250618-binman-v1-0-373e66c7a51f@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>, 
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>
-Cc: u-boot@lists.denx.de, Enric Balletbo i Serra <eballetb@redhat.com>
+Cc: u-boot@lists.denx.de, Enric Balletbo i Serra <eballetb@redhat.com>, 
+ Ye Li <ye.li@nxp.com>, Jacky Bai <ping.bai@nxp.com>
 X-Mailer: b4 0.13.0
 X-ClientProxiedBy: SG2PR01CA0191.apcprd01.prod.exchangelabs.com
  (2603:1096:4:189::6) To PAXPR04MB9644.eurprd04.prod.outlook.com
@@ -73,98 +73,98 @@ X-ClientProxiedBy: SG2PR01CA0191.apcprd01.prod.exchangelabs.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS1PR04MB9454:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe421d17-cd1f-48b6-6785-08ddae3a05c4
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|VI0PR04MB10928:EE_
+X-MS-Office365-Filtering-Correlation-Id: 032aba16-6fe2-4177-fb21-08ddae3a07ae
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dDhxRW1MQWt5V05iWWMyTEc4b25uME9pbk5PMmNvWkxHL2JlcVowS3dwR2sz?=
- =?utf-8?B?MDlSVlIvalR5ZU9iYXVXaEl4aVVwdHBTeWdSZXR6MllXbVJpVlpTUlRwRDJk?=
- =?utf-8?B?YU1UUnp4V09IZmFjQVFSTlNmYlpqdUVCaWVEdk1DN2x5RThYbE9zUlBkMWM0?=
- =?utf-8?B?TGpnSnFwVTdkTzNRaUxBcWFKSEV1dEJmcWxwK2VFdFNhTUU5NW9yVlh0TStr?=
- =?utf-8?B?U2xUdHhSUlNacnNkQlNFTytQOEJCZmhCWmY3eGE1dUpYWXNLV2x0cXpQekph?=
- =?utf-8?B?NjNwYTVpTVJEYlNabDBRdVhIVXhpeG9kemxGZEZ6b3BhTHh1Vk5jSHhYMWRB?=
- =?utf-8?B?S0VEQ2sxbFNoSS91RE1RUGxBbWg4d2R5Q0EzbzRxWE5sRlRKREpnNDI5eWtu?=
- =?utf-8?B?YkQrbWg1b01DR0M0S0lHUjJPaUtoN2VacWNhREJwQWNscndMOFAwYzNjY3hV?=
- =?utf-8?B?TUcxenRPUlBVQWJwZWlVZ2E4eEMwZS9ZS3BvVGROSzB5RW5ETFJmdnJvSk1Q?=
- =?utf-8?B?STBrcEdvSjR4TzIrczRhS2NSb1NVaG1lNUxQdUMxa05RYzN4a3doNldNTGtC?=
- =?utf-8?B?WGw3N3V2NFQ0UmVuNDNDdVEvb2oyNEw0MHdlekRTYmliUnJBajRHcHdsWGRW?=
- =?utf-8?B?aXJzVXJ5dktZMUFKZmFtaG9PZlNuczRtcmtiVjdPYnV4Z2ttRGdGWWcwaStQ?=
- =?utf-8?B?RTJ4ZGh5Vzc0VXJ5VEppaEtqODlaVXZ3UnZyTXhFc1BFeW83ZlA1VHVXTkgv?=
- =?utf-8?B?ZFNRSVB5WTQyUnlYZ0U1UEhQSVN2M2UvTkwrVFVnRTBjUkZadjA0dC9QQUdU?=
- =?utf-8?B?d2FVQ3BzL3U4OU1TdUpyT0dkSEUwSTVBVmJmajVDL0dnWXV4N0xJSEFWMlov?=
- =?utf-8?B?VFdKSUptdFc0a3JlbmtMU0NvMkZ6MktqZHZYOXgvQnl5Wm43TjBNclVsRzlC?=
- =?utf-8?B?MjVSNmZHaDM5NFBoSjBrOG9yRkRZdk1sU0dPTUZmdVNrUDJyQlZzOER4OG1Q?=
- =?utf-8?B?blliS2tSS0VtRDNleVVNUW4waG9vaFNMaWoydGpYR0N6MTVaaFBOUFBISFVu?=
- =?utf-8?B?SVBGVmRLSHBOSmJjYk5zYS82K3B0dmRvM2xwN3NYTzRnbktvWVJEeDV5VDFI?=
- =?utf-8?B?NGN5cnNOL0o5dVhBTkFYNHlJTldtRzQ1T1dJUk0vOXJ2Vlp2Z01helYyTjU5?=
- =?utf-8?B?SytGc1FEUU9KeXpGUDRxOWtlQU54ZS9LOEdpUjFUWndubEY4RnVXY0VGQTUr?=
- =?utf-8?B?RkVkNVdPNUdHZ0w5b0JaRHlLMXRPbzJGQ1duWlpoUjd3ZUw3S2JXcE9iMW1s?=
- =?utf-8?B?Rmdic3FrMXRXb1VENGx4WmNOSDg0VHlEYm9UWlRaUlpyMi82aTFYWGhHdW5P?=
- =?utf-8?B?QzVVa1RBU2MyY0FObWt2d1V1b3JldDFPcVI0blJJdkNqZ0J4QTVTMzFPeWFD?=
- =?utf-8?B?NzJqSUdBY1J0N3UwNHJYQlNuZnZhNEFMbC9IbDdNbTZFb0UxalhabEQzOVZy?=
- =?utf-8?B?czhOa1NGWUFKd0g2UXBkWkRJYUMvNGQwWmswZHRnSVorMWplQnpxTWNxdVpy?=
- =?utf-8?B?b01JNUo2ODZxWi9CM3RLalVmVUZXMVdMT0x5dWRlb0lXUFdjdmJHb0htYWRH?=
- =?utf-8?B?U0FsNnJBQmo0ZUxVY3pETzZ4blQ5Q0JHaEh3NkZYUjVTSWRMSlVDOC9xbWxa?=
- =?utf-8?B?SEFNN0VYMklxZHpqVGd1Vmt1NGVwVjA3Ujh4eXBTRDVERDI0VmJoVmI5RHM2?=
- =?utf-8?B?dS8wbjlQZFlFTks5dE9ZNlVvMFdDTWhkSUdta2QyVzNiV3BvdTBsZWhKVm9L?=
- =?utf-8?B?YXBFaitwOXk5MlBTeko0ZmRYTFRRNmE2aitVNkc4UWVjTW1iZ0NxQ0FrYU9D?=
- =?utf-8?B?SEk1TmcwcHJmNVppQTQ5cTZOd3pCUVpFRHpWU2c3RFZodHpoREwwc1ZBeXJq?=
- =?utf-8?B?RnVzeExBQXU5UnVGenRrdEtNM0FrTmFTOTFNVDF6TEF0QzJBcDJRaHQ2UnpI?=
- =?utf-8?B?WEVtNWxSbEJ3PT0=?=
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OVppRC9RMXVRQzZGOGtQK1E3d3pnSmlpRmt4YkN2bEdEODRHL0RsOWRvQ0pV?=
+ =?utf-8?B?dmFaN3A0SmQ0SkNSRStuT2hrLzErWXRuUmpkUFZYQkwwa3BrZmN2QWRRMENW?=
+ =?utf-8?B?SlBUSXl0d25HdExSMTU5TlRFNnFkbFNoOStHZnFZSjlSMWxmTEVUeXpGem5P?=
+ =?utf-8?B?dS9Lc2U5WWpDSmtlbEsxQUl4SDdEK2ltdGpZNU9xMllMV2FTdHNlQTlTQjdM?=
+ =?utf-8?B?T0xUY1U2bHB6L0VQSEhybkNvdGNtN1R0OHplL3dWWTlLSFczSWh3bzhwVEF1?=
+ =?utf-8?B?MndCNGJLc3VWaFB4eEJOeU1PcFg3S1pISkI4UWJBa3BTWWh3MHpUZEFYSVdI?=
+ =?utf-8?B?b1FwNExIek94aVUzbHZHell5R29ldGdiRWVmcFhMd004elVjWnpRK0JvQTFo?=
+ =?utf-8?B?VWMxQ29nUTNmT3dSK043enFZSVVYQmd6dExnZzZyczdkQTJGa0lCZ1VnMmVi?=
+ =?utf-8?B?a2tWNWgzUHdLRFhoNUk1d2NRbFNiQ2JDYlJEVEpaUTc4eVVsajY0ajc4OUVR?=
+ =?utf-8?B?S3dFV1A2ekc1Z0RmWXJCcEJLWUFlZWJoSitSenZZT3Z6SWVMdkJqVmFuMnRh?=
+ =?utf-8?B?cmxZZXdNYXI2UVhVbnZXejVldTF0R0piTjlpTFk5cWsvVGx3ekJtdUhGWjdU?=
+ =?utf-8?B?Ny9wejFpdU5EZ2RlRTVPbU03OWNjSmNwV2ZiUDdYdHpVajIybS9nWW10cHcv?=
+ =?utf-8?B?MXJ5cU5vWEVBeThpRGtTNHEwbnJ1L1JSTmhZTUY2RTNuSnFwNmF3WFhacXA2?=
+ =?utf-8?B?QzIySGJCQ0RscTRQOXF3cHNXV1N2MHN5RENKK1l2cmxRMC8vOXY3MjJTa1Q2?=
+ =?utf-8?B?NjFhSitHMkI2bEhaOXQ3RVNwdjZMbGZWa3krZFB6N0JMV2NscnRoZ3ByelVL?=
+ =?utf-8?B?WVB4OUJEdU1BMHhyUDJVRmk3RGM1RDJHdjFvak41Ti9LaVU4NG1rMGI1VDlh?=
+ =?utf-8?B?SlI5Y1dGNVl0THBwQ0svb05xakpUbnRsa0lPUzdrVkg1b2IwV1JBRzNGVzJU?=
+ =?utf-8?B?Qnc0YmhCUnJlbFBxZVIwclZXVklnVmRWMk1XKzVwdDF0QU14dTBmWUN6ekNN?=
+ =?utf-8?B?ekZxNnNmM3cyM1BYU013M2hSNldRZ2QyZmt4NHc5Q2ZUMlRNUDRjY1dhU3Np?=
+ =?utf-8?B?QVIrVHRLWUZnTkRMNXVwa0lJU3FVeDB5azlsVHNOdCsxTFkwVGtCOHU2bkJU?=
+ =?utf-8?B?eDBjWjFONW1LY2x5ZDFST3BEelYxV0ZrYkNGSk9CcnFNRG5oU2NodCt0WE5o?=
+ =?utf-8?B?ZjMxZE1sOWx1bUVOV0NGU0YwNXNiaHVrcGVEeURQOXdVeVFQZnBDL0Jtc2tY?=
+ =?utf-8?B?N1RxcEN0MmhwaUErVXIrUy92a1lCcko0cTVkS2RNU0Y3STNPc0JWYUw3WVNa?=
+ =?utf-8?B?QWNKZlJJUGVWZ2RrMXRpeTBBRVVOWElNNzhrd3J5cjV6WWY4bnVLT0xSN25O?=
+ =?utf-8?B?RjM0TjhtV3FjUWJmaGRoNUFrL05jekp6UnpMRkw1VlZ3Yk9HYS9aN1ZvQ0VI?=
+ =?utf-8?B?QmxrS3dDNm9NbEZsSGpRZ05NSVJRMXhITGdYTmhzYXRVR3VxSEE4ZkxLNDdQ?=
+ =?utf-8?B?T0dJNmkvVkVjVlNuNUxSRXQzRzRCRjBBd0NnTDdMNDFWWkRJSlNidXhoVFh6?=
+ =?utf-8?B?ZCtOUW5UYzYwS1VzMEd4ek5xaWIrQXEwRzNDWWFnaXVCQUlwc2NBWUpFV1VM?=
+ =?utf-8?B?WGNJdnJoY010RUl5V3l1OUxFN2paOWR3V0xMQjBHM1lDOXN1TnVvRnVKNHlH?=
+ =?utf-8?B?cDZwV0xTUmpvN0ZwczFZUyszWVNoOFA2RmFDdFV5OFlGL0FOMW52b1NNVnJk?=
+ =?utf-8?B?dDFzOUVtMFFqN0pXOC8wejRlYXVDQ1ZnS3RPbUxrbVd0VXpDQk80Uk00TkRj?=
+ =?utf-8?B?cEpybnB5cFRtdlpRYi80T20vay9GTm5OWUI0M21LRzVPZ2Ria2I3OG02TzB1?=
+ =?utf-8?B?YmYzSys5MVVNQXFYYStSN3N6Z1FxUzdXSjJqVHBwQnNuVncvTDYveHd3L1pB?=
+ =?utf-8?B?YjNJcmJVODlBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S1ppYmQ0NDljWTBEWTZQb1hZRGU4dnlSK1FocjRuaVl6QWZOVURzSUxCcjUv?=
- =?utf-8?B?MnllbDkrYXpveHlzN0JYa3BxdWNIVXpDS01yWFBIaisyMGFJZktlWmhDS0tk?=
- =?utf-8?B?VVV5cWlOUXI3KzR0UE5LSmZkRnNYUGJDNXZZVDNWRWpyUDV0NWo3N0tvaHZn?=
- =?utf-8?B?ZlBYaExaYWdNMGFEUWFSU2Y2S2xoak9OdlZ4SVcrL3JuT0kwaHN1NlNFLzRM?=
- =?utf-8?B?WUpCWUVQUGhzSFY0U0JyUTJETU5HU3NCdmNOWXk5dGtLalAvcHY3UkwrcWRZ?=
- =?utf-8?B?bmRTTmMwTElJUEpNQ2pyeEE4ZjFnSDNNdDhzdFlLWFYzOXAzV3hyR1FNTVU3?=
- =?utf-8?B?M0tFaFkyTnExM05MSTJrRzVyTnJ4ZDU2Ky9xUTJxSVUvczhkWkhuYkU1WjU0?=
- =?utf-8?B?MFg4ZXpMNC9yQ0JjU3lpTTZvREUyMVVkZGtxbWJwaUZLeTk4WGxPZFJUUFNN?=
- =?utf-8?B?T0c4dWZmWFVZZ1dSTENxS1lsNEhLQ2hVRkhTK05QSnpaK0xUZzh5K1EveXFG?=
- =?utf-8?B?Zkk4VEJWVWE1NFNaUzVheXhSRlBORlNpTGtXYm93ZXpURER0ZEk0LzFBdXhy?=
- =?utf-8?B?UExWSGVBM1FIMEc4L2UrU0d6VUFVSENMS2QxTmRjL1NYczJsSE1aY1g3d2lR?=
- =?utf-8?B?YW80TGRraEdUcVlLazNoNGI1V3ZocFJOMEdLdG8zTXEwRmJoMXA5ZzR4TTZ0?=
- =?utf-8?B?SktCc25FSm90Y1hLN3VadlFxd3BiMkFtbHEyV2RkMVRpWkRqZWpQckhKck1B?=
- =?utf-8?B?UFlyYkdBeGxDR3NMb0JJQVd0eTgyU0JLWUhkQnZFdFFYUE1JbXhDMlBOU1dv?=
- =?utf-8?B?N3M0NC9RbHpyWWFxUk1SMzBKSVF6Q0Y4ODNjY3AvV1ZINlpSODZ5aUJaUEJH?=
- =?utf-8?B?cVhkdStRQThLWm5UWWZNSTdpenFkY1VyRXo4MWtmTHFWV0RzcUVSR21OSmlk?=
- =?utf-8?B?ZGhKZW5wNmRpNHZuYnNTaWZBaHJNUS9pQkRZdGRvMEQ3YWpZdmhtcTVzNWhG?=
- =?utf-8?B?Vk84dC9iZzVPQkhPZ1JLVTNEaTJ4ZlFtMHJ6RnhDWHVqT2hkNVRtZ1B2bGhS?=
- =?utf-8?B?dkE3L2FOZjdjWEF2N2tkSTFJc0FOMm1pMFVHdGNObGNic05LNjlrU1RjNTQ2?=
- =?utf-8?B?eHNpbE0xUmJJZzU0enpMb1VtVThBc3RNMUpFUGg4K0tPVTEwUFFhbkpiSVB5?=
- =?utf-8?B?NHFNY24vUWprczAydUttcnJlSDFNYTk4cXpYRHE1UjA0WnhFYi9ER0V0VXRi?=
- =?utf-8?B?eVFaelk5TlpmVzVkSTZLWjJ4ZlY2TDBpS2dRQUxjSkR6SXEybmsyckJvOE9w?=
- =?utf-8?B?am1lZTB5V2huQTVYcnMzbXV0ZnljenVrazFQdDgzWWl3Z0F3ZUdXUjdsQVo2?=
- =?utf-8?B?TWlkVWxzZURUVkUxejhmNmRvbmhvK1NpQkpMNEtDZ2ZYcXF1cnZNYmZ1RmFN?=
- =?utf-8?B?bG84NEkveiszQk9rcEZJUG4wU1JJZFRYd1VDeUExTVh1dmFoc21yRW9nSHh5?=
- =?utf-8?B?MEl1SFVtaW9JODhZRmJVUHRNeHpzMFJrTmxvbUR0bk55TjdCcEJFNHNUTFRy?=
- =?utf-8?B?dVlEVW9LdVp6ZldFdFpPZjdxRi8xaVV3NU0yK0RLQ3ZUd012R0hqRWlMbHVP?=
- =?utf-8?B?UmVQMjZ1RnNreUprVzJPTkNiVC82U3YzcitpdDdDSXBIU2swcHVKM0ZwekNq?=
- =?utf-8?B?Qy9KRkpocmYyMjM1aXJFVXk4eFdnSEhsdEsrbHNCeUdHZVNkdHM5NWdPUnc4?=
- =?utf-8?B?bkxhS2hMUUZ5ek05WUFKa0tFSHdPazZ2VFhVUDRzVmVTZlJVQ3AwN3d4VnBH?=
- =?utf-8?B?OWcyd2FwZ3JaUzNqTUd2NXR2ZXlGR2tlSEFScm4wdFBNN0hNV09GajQweCtq?=
- =?utf-8?B?UmlaYnBQWmllSkthL2RVUE01ZEVSU00wcER0OGZmMTFrZDgwUnYrNmE5QlRO?=
- =?utf-8?B?MGJTVGZUUjdpS1NoWlZJZTY0c21iQ3J2cURlZTVYOWc2alJDTGlkTS9jQW1B?=
- =?utf-8?B?K2lRb29LTURWY2UvVVhNVnBPWWorOS8wQlMrN2E4L1JxUDRqK0xMa1lQeldl?=
- =?utf-8?B?WnRyUnRJMktTMk5FZXFxN2trUFdrY1VodWpxYzNFMFJSUmRkUWpzK293MTFw?=
- =?utf-8?Q?+oBDbIvDN3hDijF5b/hKhIGb1?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dWpPWnFDZ0RnWGQxYU1Ma2ZodHp3RklrZ0c0dHFtamhTYTFQajhzejZ0a3FP?=
+ =?utf-8?B?TzQ4RzZ4ZURZTG02akFPNmdWd1Bla2c4dkh1d1ZwYU13and6VmE2L2t0bFhs?=
+ =?utf-8?B?TlMxY0Fwa0c2VDVJWHpWUDUzYi9RbTRtdFo2QmVCMWxWMFMzZ3k0UXJ4cjBB?=
+ =?utf-8?B?eHZTZ3JuOGVRc2Q1MklCVEdtQTVEODlUT3BZTVlVRW9BYUlYZzV0NEVVNFpE?=
+ =?utf-8?B?b2dIRFFTTzgyUy9CeHVqTURtODgyNlhla3RTcE9OOVAvWko4UVlNNnBLTm9m?=
+ =?utf-8?B?UVh4d2pJUjB0T1l6eHNGSnBQQUtMcGIwaVJaUENoZUYyRmEvNmxxVHZQaTFm?=
+ =?utf-8?B?UGFvV2Uyamo5N1pTODVVNXJPUVZwdHR6R3BzV0NyZjJuUFQ5cDFwajFCTE5C?=
+ =?utf-8?B?dllXcHpUeEJmZ2lBUlJkdHNQb25mSGxGMHV4ZWxneUQyQjZ0c1VBampCZkVS?=
+ =?utf-8?B?ZTl1MzBlT1l0djZMNmVTcTF2ZHZyd1FtekhuSDJ3TXBNUEFEeGdTd1NqbU8x?=
+ =?utf-8?B?azR0a0V3d21DSStWa3N4bCswL1hOSDhicng4cnRlL0xsT0ZBMmFTSHNkSHZP?=
+ =?utf-8?B?OXZER1VsSkRDMEd4S0xWWENuU3ZHNDVLSnZEaW84eitqSzhpcEhnODhEVFlI?=
+ =?utf-8?B?UU9jSUpWbCtObnAzZ3pOTEpDdDEzVjJqWlAwMlJDYzUrc1pKOFJnQmNEUE1W?=
+ =?utf-8?B?MlhxaHZQdFg0N2NIc3Jobk9aeUU4azRBWElYTU5leWhtbEZEb2tpUUtuWXZU?=
+ =?utf-8?B?dkgrdis2Rmt5VE1Oc3VZN29Ub1MwdlA2UjI3TWxEUkl6WjhQZmM3YWJqTUtP?=
+ =?utf-8?B?YWt6S0UzL3dmWHd5ZUYzNWxtVGdMSWwyRkNjZGh2TzdnRkNFVm5LRWNkb3U5?=
+ =?utf-8?B?L0d1NDRyL3d6YlRIaTNNS1hZQVd5MzBoa00yM3JYc2Q2U0EyQmR6RmxCQ1Z4?=
+ =?utf-8?B?dVEyYWJFU0xqU2JaVENkMUxWTmR5MEs0RG9kZkozS1J2TWpHNm9hTkJGMHd0?=
+ =?utf-8?B?ak1haEtGZ2xkdWs5SFdNaVNLcFlneUI2bE9ZbUtwY0dxejlBVllOYkR1QUdO?=
+ =?utf-8?B?UzZhUTZvalVyNkQzYXZLblhKS0pXMGFjZlVFZnlydHVpNHowRjZCTDhMNlA3?=
+ =?utf-8?B?dU1HQ0pIbTVPKzlnM2p3ZXBPKzdYcTNUN29hQkxiS1Rjd1JxR1BmUmV4ZXRp?=
+ =?utf-8?B?VE5PTFlFUVR3WnpLMEVpb3o3TStsNkY3R2tLdythTGRrL2h6b2Z1ZWM1aHpu?=
+ =?utf-8?B?SVFDTTJMTWIzcUZ3Vi9jWXR3Vi9uZ1k0dzZmWnBTVFFMWXBlc2JjTVd0U21X?=
+ =?utf-8?B?aFBrM2JXaTZ3dDFjK3V1c3VtU2N4VTJiN0RCcnJrT2M4aDJPdUR6RlBBZDFv?=
+ =?utf-8?B?R1QrYm1VQzhTSFlzM1d4YTJxUzVNV01lSUZVZTFyTE1nTlk4TmdnWkpGZThN?=
+ =?utf-8?B?K1d6NHEzOEVIRVlLYytqYURjb0RpdlJwdWtYclIrQTBnN2Vja0F5WWJqemNX?=
+ =?utf-8?B?NTdVcjhJUXQ1UC91TkxSNHQ3dlcyMC9FbWtXbGRzMnAzVXZpRlkwM2RQY2Mv?=
+ =?utf-8?B?S21xZ1BpK1J3Yk5PcmlvQjF2ME5jWFM2Y0ZvbHR0TlhEMmVnQVUwOGgzd2dT?=
+ =?utf-8?B?R0wrY3B4bVFiS1BRdTlKaWM2RHB6Ty9TL3l0ZFQrcHBCdm9kTGNYV0t2RnVO?=
+ =?utf-8?B?WUVqc2tocnhhN2FQNjBoODZwRThOTENVN0s0M1lxeXZwMjdjQmZzN3hneXR5?=
+ =?utf-8?B?YW9rZWhkMy9SU29hME5nS1duY2swSEJKTXhHZVZabWdLb093b3B3R2VvczR1?=
+ =?utf-8?B?TVFFWWM3L1B6ZEQxckUrY21ET3NsUndQSkVzbzN4R1lmR2pjeFQ5Rm4yYWFJ?=
+ =?utf-8?B?WjJMRDFyOG9GcGUxZ2NrTElSbTArWU1qSmRNcWV2RkRGV2pOQStKa0x6MXlQ?=
+ =?utf-8?B?c1hIK2pvQWFsTEkyUk5yMmVtNW9Wc25WaFVlRTN2R1NYbUVBVlFrRW5iUDBP?=
+ =?utf-8?B?eFc0SUJObFVBenZrN0FpNktoRG1QZURTblZYY1A4R3BkeVFhRHk2YXBRVGRT?=
+ =?utf-8?B?RGhDNlZ3ZnZwRC8rb0gyTnhqZGVqUWtLOHlkcWkvU0JVQW5CZ0xja1RWY3Y4?=
+ =?utf-8?Q?HiCnOfV4VZST175GuECYZS+uC?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe421d17-cd1f-48b6-6785-08ddae3a05c4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 032aba16-6fe2-4177-fb21-08ddae3a07ae
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 07:30:38.5693 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 07:30:41.9612 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4F7CirvSgPQgRqsShmzQAvlNM6mGO3AO6Fq0X+cJ0bfRJ5/YtRsemkQVe0L6M4UFXFw7DTkziKg961VTKs6tUQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9454
+X-MS-Exchange-CrossTenant-UserPrincipalName: xAxsUKxYsfpe2ZDY2iUluVvciuQCD8qjQSQeOm1F78QBpq+YvQXHmP1I3scw3ooOlpKe2YGDiY6racScz0WyRQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10928
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,242 +181,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+From: Ye Li <ye.li@nxp.com>
 
-i.MX95 B0 uses image container format v2, and `one container header
-occupies 0x4000, so that CMD_CNTR_VERSION needs to be added.
+To support PQC container format which is used for post quantum
+authentication on new i.MX parts like i.MX94
 
-The purpose of CMD_DUMMY_DDR is to create a dummy image entry in boot
-container prior the DDR OEI image entry. ROM reads the address of DUMMY
-DDR image entry and passes it to DDR OEI in OEI entry function as
-parameter value, in order to indicate the offset of training data with
-the boot container.
+The major changes compared to legacy container format is in
+signature block, new container tag and version, and new alignment
+of container header.
 
+Signed-off-by: Ye Li <ye.li@nxp.com>
+Signed-off-by: Jacky Bai <ping.bai@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Acked-by: Peng Fan <peng.fan@nxp.com>
 ---
- include/imx8image.h |  6 ++++++
- tools/imx8image.c   | 57 +++++++++++++++++++++++++++++++++++++++++------------
- 2 files changed, 50 insertions(+), 13 deletions(-)
+ arch/arm/mach-imx/image-container.c |  2 +-
+ common/spl/Kconfig                  |  7 +++++++
+ include/imx_container.h             | 11 +++++++++++
+ 3 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/include/imx8image.h b/include/imx8image.h
-index e0d25c5b6c9..d0e05811ff9 100644
---- a/include/imx8image.h
-+++ b/include/imx8image.h
-@@ -45,6 +45,7 @@
- #define DCD_ENTRY_ADDR_IN_SCFW		0x240
+diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
+index f84e23f4b2a..3a9e6dcf225 100644
+--- a/arch/arm/mach-imx/image-container.c
++++ b/arch/arm/mach-imx/image-container.c
+@@ -66,7 +66,7 @@ static bool is_v2x_fw_container(ulong addr)
+ 	struct boot_img_t *img_entry;
  
- #define CONTAINER_ALIGNMENT		0x400
-+#define CONTAINER_PQC_ALIGNMENT		0x4000
- #define CONTAINER_FLAGS_DEFAULT		0x10
- #define CONTAINER_FUSE_DEFAULT		0x0
- 
-@@ -160,6 +161,8 @@ enum imx8image_cmd {
- 	CMD_DATA,
- 	CMD_DUMMY_V2X,
- 	CMD_HOLD,
-+	CMD_CNTR_VERSION,
-+	CMD_DUMMY_DDR,
- };
- 
- enum imx8image_core_type {
-@@ -216,6 +219,8 @@ typedef enum option_type {
- 	OEI,
- 	DUMMY_V2X,
- 	HOLD,
-+	CNTR_VERSION,
-+	DUMMY_DDR,
- } option_type_t;
- 
- typedef struct {
-@@ -262,6 +267,7 @@ typedef struct {
- #define IMG_TYPE_SENTINEL 0x06	/* SENTINEL image type */
- #define IMG_TYPE_PROV    0x07   /* Provisioning image type */
- #define IMG_TYPE_DEK     0x08   /* DEK validation type */
-+#define IMG_TYPE_DDR_DUMMY 0x0D /* DDR training data dummy entry */
- #define IMG_TYPE_V2X_DUMMY 0x0E /* V2X Dummy image */
- 
- #define IMG_TYPE_SHIFT   0
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index cad55fd3cf2..5a76643c06e 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -19,6 +19,7 @@ static bool dcd_skip;
- static image_t param_stack[IMG_STACK_SIZE];
- static uint8_t fuse_version;
- static uint16_t sw_version;
-+static uint8_t cntr_version;
- static uint32_t custom_partition;
- static uint32_t scfw_flags;
- 
-@@ -57,6 +58,8 @@ static table_entry_t imx8image_cmds[] = {
- 	{CMD_DATA,              "DATA",                 "new data",           },
- 	{CMD_DUMMY_V2X,         "DUMMY_V2X",            "v2x",                },
- 	{CMD_HOLD,              "HOLD",                 "hold",               },
-+	{CMD_CNTR_VERSION,      "CNTR_VERSION",         "cntr version",       },
-+	{CMD_DUMMY_DDR,         "DUMMY_DDR",            "ddr",                },
- 	{-1,                    "",                     "",	              }
- };
- 
-@@ -157,6 +160,10 @@ static void parse_cfg_cmd(image_t *param_stack, int32_t cmd, char *token,
- 		param_stack[p_idx].option = HOLD;
- 		param_stack[p_idx].entry = (uint32_t)strtoll(token, NULL, 0);
- 		param_stack[p_idx++].filename = NULL;
-+		break;
-+	case CMD_CNTR_VERSION:
-+		cntr_version = (uint8_t)(strtoll(token, NULL, 0) & 0xFF);
-+		break;
- 	default:
- 		break;
+ 	phdr = (struct container_hdr *)addr;
+-	if (phdr->tag != 0x87 || phdr->version != 0x0) {
++	if ((phdr->tag != 0x87 && phdr->tag != 0x82) || phdr->version != 0x0) {
+ 		debug("Wrong container header\n");
+ 		return false;
  	}
-@@ -177,6 +184,8 @@ static void parse_cfg_fld(image_t *param_stack, int32_t *cmd, char *token,
- 		if (*cmd == CMD_CONTAINER) {
- 			fprintf(stdout, "New Container: \t%d\n", ++container);
- 			param_stack[p_idx++].option = NEW_CONTAINER;
-+		} else if (*cmd == CMD_DUMMY_DDR) {
-+			param_stack[p_idx++].option = DUMMY_DDR;
- 		}
- 		break;
- 	case CFG_CORE_TYPE:
-@@ -588,7 +597,8 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 	img->offset = offset;  /* Is re-adjusted later */
- 	img->size = size;
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 77cf04d38ed..5d2e0b4ec4b 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -370,6 +370,13 @@ config SPL_IMX_CONTAINER_USE_TRAMPOLINE
+ 	help
+ 	  Enable SPL load reader to load data to a trampoline buffer.
  
--	if (type != DUMMY_V2X) {
-+	/* skip hash generation here if dummy image */
-+	if (type != DUMMY_V2X && type != DUMMY_DDR) {
- 		set_image_hash(img, tmp_filename, IMAGE_HASH_ALGO_DEFAULT);
- 	}
- 
-@@ -632,6 +642,15 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 		img->entry = entry;
- 		img->meta = meta;
- 		custom_partition = 0;
++config IMX_PQC_SUPPORT
++	bool "Enable to support i.MX ROM PQC Container"
++	depends on SPL && SPL_LOAD_IMX_CONTAINER
++	help
++	  Support i.MX ROM new PQC container format. If your chip does not use
++	  PQC container, say 'n'.
 +
-+		if (container->num_images) {
-+			/* if at least 2 images in container, [0] and [1] */
-+			boot_img_t *ddr_dummy = &container->img[container->num_images - 1];
-+			if ((ddr_dummy->hab_flags & 0x0F) == IMG_TYPE_DDR_DUMMY) {
-+				ddr_dummy->offset = img->offset + img->size;
-+				set_image_hash(ddr_dummy, "/dev/null", IMAGE_HASH_ALGO_DEFAULT);
-+			}
-+		}
- 		break;
- 	case AP:
- 		if (soc == QX && core == CORE_CA35) {
-@@ -751,6 +770,11 @@ static void set_image_array_entry(flash_header_v3_t *container,
- 		img->entry = entry;
- 		img->size = 0; /* dummy image has no size */
- 		break;
-+	case DUMMY_DDR:
-+		img->hab_flags |= IMG_TYPE_DDR_DUMMY;
-+		tmp_name = "DDR Dummy";
-+		img->size = 0; /* dummy image has no size */
-+		break;
- 	default:
- 		fprintf(stderr, "unrecognized image type (%d)\n", type);
- 		exit(EXIT_FAILURE);
-@@ -776,22 +800,27 @@ void set_container(flash_header_v3_t *container,  uint16_t sw_version,
- static int get_container_image_start_pos(image_t *image_stack, uint32_t align, uint32_t *v2x)
+ config IMX_CONTAINER_CFG
+ 	string "i.MX8 Container config file"
+ 	depends on SPL && SPL_LOAD_IMX_CONTAINER
+diff --git a/include/imx_container.h b/include/imx_container.h
+index 691c764b3e5..684fc3bc988 100644
+--- a/include/imx_container.h
++++ b/include/imx_container.h
+@@ -12,7 +12,11 @@
+ #define IV_MAX_LEN			32
+ #define HASH_MAX_LEN			64
+ 
++#if IS_ENABLED(CONFIG_IMX_PQC_SUPPORT)
++#define CONTAINER_HDR_ALIGNMENT 0x4000
++#else
+ #define CONTAINER_HDR_ALIGNMENT 0x400
++#endif
+ #define CONTAINER_HDR_EMMC_OFFSET 0
+ #define CONTAINER_HDR_MMCSD_OFFSET SZ_32K
+ #define CONTAINER_HDR_QSPI_OFFSET SZ_4K
+@@ -72,7 +76,14 @@ int get_container_size(ulong addr, u16 *header_length);
+ 
+ static inline bool valid_container_hdr(struct container_hdr *container)
  {
- 	image_t *img_sp = image_stack;
--	/*8K total container header*/
--	int file_off = CONTAINER_IMAGE_ARRAY_START_OFFSET;
-+	/*
-+	 * 8K total container header for legacy container, for version 2
-+	 * container, the total container header is 0x4000 * 3 = 0xC000.
-+	 */
-+	int file_off = cntr_version ? 0xC000 : CONTAINER_IMAGE_ARRAY_START_OFFSET;
-+	size_t size = cntr_version ? SZ_32K : SZ_4K;
-+	uint32_t cntr_header_len = cntr_version ? CONTAINER_PQC_ALIGNMENT : FIRST_CONTAINER_HEADER_LENGTH;
- 	FILE *fd = NULL;
- 	flash_header_v3_t *header;
- 	flash_header_v3_t *header2;
- 	void *p;
- 	int ret;
- 
--	p = calloc(1, SZ_4K);
-+	p = calloc(1, size);
- 	if (!p) {
--		fprintf(stderr, "Fail to alloc 4K memory\n");
-+		fprintf(stderr, "Fail to alloc %lx memory\n", size);
- 		exit(EXIT_FAILURE);
- 	}
- 
- 	header = p;
--	header2 = p + FIRST_CONTAINER_HEADER_LENGTH;
-+	header2 = p + cntr_header_len;
- 
- 	while (img_sp->option != NO_IMG) {
- 		if (img_sp->option == APPEND) {
-@@ -801,7 +830,7 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align, u
- 				exit(EXIT_FAILURE);
- 			}
- 
--			ret = fread(header, SZ_4K, 1, fd);
-+			ret = fread(header, size, 1, fd);
- 			if (ret != 1) {
- 				printf("Failure Read header %d\n", ret);
- 				exit(EXIT_FAILURE);
-@@ -813,11 +842,11 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align, u
- 				fprintf(stderr, "header tag mismatched \n");
- 				exit(EXIT_FAILURE);
- 			} else {
--				if (header2->tag != IVT_HEADER_TAG_B0) {
-+				if ((header2->tag != IVT_HEADER_TAG_B0) && (header2->tag != 0x82)) {
- 					file_off += header->img[header->num_images - 1].size;
- 					file_off = ALIGN(file_off, align);
- 				} else {
--					file_off = header2->img[header2->num_images - 1].offset + FIRST_CONTAINER_HEADER_LENGTH;
-+					file_off = header2->img[header2->num_images - 1].offset + cntr_header_len;
- 					file_off += header2->img[header2->num_images - 1].size;
- 					file_off = ALIGN(file_off, align);
- 					fprintf(stderr, "Has 2nd container %x\n", file_off);
-@@ -839,7 +868,7 @@ static void set_imx_hdr_v3(imx_header_v3_t *imxhdr, uint32_t cont_id)
- 
- 	/* Set magic number, Only >= B0 supported */
- 	fhdr_v3->tag = IVT_HEADER_TAG_B0;
--	fhdr_v3->version = IVT_VERSION_B0;
-+	fhdr_v3->version = cntr_version ? 0x2 : IVT_VERSION_B0;
++#if IS_ENABLED(CONFIG_IMX_PQC_SUPPORT)
++	return (container->tag == CONTAINER_HDR_TAG ||
++		container->tag == 0x82) &&
++		(container->version == CONTAINER_HDR_VERSION ||
++		 container->version == 0x2);
++#else
+ 	return container->tag == CONTAINER_HDR_TAG &&
+ 	       container->version == CONTAINER_HDR_VERSION;
++#endif
  }
- 
- static uint8_t *flatten_container_header(imx_header_v3_t *imx_header,
-@@ -921,6 +950,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 	char *tmp_filename = NULL;
- 	uint32_t size = 0;
- 	uint32_t file_padding = 0;
-+	uint32_t cntr_header_len = cntr_version ? CONTAINER_PQC_ALIGNMENT : FIRST_CONTAINER_HEADER_LENGTH;
- 	uint32_t v2x = false;
- 	int ret;
- 
-@@ -978,6 +1008,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 			break;
- 
- 		case DUMMY_V2X:
-+		case DUMMY_DDR:
- 			if (container < 0) {
- 				fprintf(stderr, "No container found\n");
- 				exit(EXIT_FAILURE);
-@@ -1023,7 +1054,7 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 		case NEW_CONTAINER:
- 			container++;
- 			set_container(&imx_header.fhdr[container], sw_version,
--				      CONTAINER_ALIGNMENT,
-+				      cntr_version ? CONTAINER_PQC_ALIGNMENT : CONTAINER_ALIGNMENT,
- 				      CONTAINER_FLAGS_DEFAULT,
- 				      fuse_version);
- 			scfw_flags = 0;
-@@ -1073,9 +1104,9 @@ static int build_container(soc_type_t soc, uint32_t sector_size,
- 		if (img_sp->option == APPEND) {
- 			copy_file(ofd, img_sp->filename, 0, 0);
- 			if (v2x)
--				file_padding += FIRST_CONTAINER_HEADER_LENGTH * 2;
-+				file_padding += cntr_header_len * 2;
- 			else
--				file_padding += FIRST_CONTAINER_HEADER_LENGTH;
-+				file_padding += cntr_header_len;
- 		}
- 		img_sp++;
- 	} while (img_sp->option != NO_IMG);
+ #endif
 
 -- 
 2.43.0
