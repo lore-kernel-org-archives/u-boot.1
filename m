@@ -4,106 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E14CC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 20:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544A6C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 20:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C14A182C2F;
-	Wed, 18 Jun 2025 22:19:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 80C0E82BCD;
+	Wed, 18 Jun 2025 22:33:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="d03904Ln";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jI7407sz";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rkRVVPEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6312182C55; Wed, 18 Jun 2025 22:19:07 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ id 5BBAF82C2F; Wed, 18 Jun 2025 22:33:21 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C57B782BCD
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 22:19:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3565182B18
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 22:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750277943;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bMwRg0McDz9sSQ;
+ Wed, 18 Jun 2025 22:33:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1750278799;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=cxUVcAtVBvC7jqnlnQu6u/cBvpb4pjBJWBpU+Q3zqwU=;
- b=d03904LnBroS7dmAhWKO3Sud7I5EwFhNCIlEUTY+vjaITxpy3A3L0zKwmM/Z5v0a5PUa34
- o+mDEpAIFNYpGGMinH1upGvqwcLk88gaVwbBnhNTQHQnHZkF33kc/HhX9bpdmR780kwaMr
- AhCsvKGuNagmfez4waXPUb5GH2gT+xM=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-194-TkNdTTvAOCWh_YfoJIxm2A-1; Wed, 18 Jun 2025 16:19:01 -0400
-X-MC-Unique: TkNdTTvAOCWh_YfoJIxm2A-1
-X-Mimecast-MFC-AGG-ID: TkNdTTvAOCWh_YfoJIxm2A_1750277940
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-450d50eacafso305355e9.3
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 13:19:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750277939; x=1750882739;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cxUVcAtVBvC7jqnlnQu6u/cBvpb4pjBJWBpU+Q3zqwU=;
- b=G+din9ATmbcKDhkb1fEnL1eJFhGE/5omlgPpg1FDfQljN3dnrOOLj3VpGSKoE0t96Q
- ermThbWx7K8AxzETie4hdWUN8ErDmyz6RA0UWL0LCShiJeyHUoCvEy99fuLgOkLf1ugd
- 1DqV+IF5LOnTGy/WgSz2NNKR0r00RdkQlurjMjhykaC6Uv259XpNKsyGE5gcK6r4AsX2
- 2QIXIQKb1kfu4vOHHhsl2mE12gcgiR24PRsPA0rjg1tJhLJiHj2yxDQspRxhZOIrBIYs
- 3QccO/IO4yuqlavzssB2TulX8l0mfGTiEsPrEeEYbJZqstOV7vd1DfilpLNlI+VYVuQB
- bI5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWEFJ91CAuX6YGFt53C9ODVweM9Uqa7whcIHlA42X4axpULMZKPSgV4031C6sc6zQJj+LjGMls=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9uecRfD53d+TQb61QGalaSpsGS2/mQ6tgoVlo+rBTFbBVmixf
- iR0oh6zNwYrqyUFCupJ3Ir5NXEKAbi+o4rUnpLWJQmJYlFNMCFcmE/bv4+qlq59n8QoOdzH2ZD0
- ttk2O7X6tRUhkOUClNFY3ub/mjURMekJGSvsEM43WK98amWlDMeR6vhY=
-X-Gm-Gg: ASbGncsmP/KqHL2ZogQXjUyNG9TObj68xr3LIIH8g8P1Z1m8LB1au4bFTt+Qj/KL8dQ
- 2sjpDIb+cAr4oUoebJBVt3P5LHLnzJg0avzsHK42OTXlE5ZmBvO2aG5v2vHPod3hH9rlo5AerYz
- F5qiAcEOpumLQIpFuH4Lpi912TKVBZ/5utYlA1sxz1hjl1xbDK8o0bx6zlfjYsE7r1Pg8LYsGYl
- AmZF0lvpAbIOtr9o94EeZIQLXxtcP3nlB5hIHvt1M7gnJFOmq/IzdcNSW2CzlnBN8yjMnv3J4dx
- L5goV1v36RFkV7LzUl2z5tYZr059DpVV56Ts1lplbFWZ3nfXBaqWQReVJ6umoXvxsgIQDy1xNxo
- JN7Re
-X-Received: by 2002:a05:6000:144d:b0:3a1:fe77:9e1d with SMTP id
- ffacd0b85a97d-3a5723a3aebmr16437611f8f.16.1750277939661; 
- Wed, 18 Jun 2025 13:18:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGsVxPF2TW9W2LJkHSt6naA+eRMTKl8/MW+chh5GXRUYUwGwxXxzmhA15ORSBgBExum+5kWAw==
-X-Received: by 2002:a05:6000:144d:b0:3a1:fe77:9e1d with SMTP id
- ffacd0b85a97d-3a5723a3aebmr16437592f8f.16.1750277939243; 
- Wed, 18 Jun 2025 13:18:59 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568a7ddefsm17800147f8f.39.2025.06.18.13.18.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 13:18:58 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mripard@redhat.com,
- alexl@redhat.com, mkorpers@redhat.com, eballetb@redhat.com,
- mskrivan@redhat.com, Alexey Romanov <avromanov@salutedevices.com>, Casey
- Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Maks Mishin <maks.mishinfz@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Michael Trimarchi
- <michael@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Svyatoslav
- Ryhel <clamor95@gmail.com>
-Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
-In-Reply-To: <CAC_iWjJexudN_ZHB0TS5xnFLYeL8_99yWM_kqPgDR==1dB_2xg@mail.gmail.com>
-References: <20250618080056.1973311-1-javierm@redhat.com>
- <20250618145016.GF6521@bill-the-cat>
- <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
- <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
- <8734bw4yqe.fsf@minerva.mail-host-address-is-not-set>
- <CAC_iWjJexudN_ZHB0TS5xnFLYeL8_99yWM_kqPgDR==1dB_2xg@mail.gmail.com>
-Date: Wed, 18 Jun 2025 22:18:57 +0200
-Message-ID: <87y0to3iry.fsf@minerva.mail-host-address-is-not-set>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GthegdusjiliGdu0olgJHtXk9egqWoa5U/Buj0wNiKk=;
+ b=jI7407szNttlt7tJxj95jOEb1nzWUUJYDx8S2Fzem8x8QWBe1/P6N/U9aB0ep5dHqpk0nc
+ pwLS2gKzS4iTPHxui/lQyAgKWQMbjtOIBPHu1fmoBGrEBAeocegqQTApzTxlXOGDrilAh4
+ 8WMBIV80AFzktypXbyJRoOltVgiT+b9M/bQmo0Qx5bdINR/1IFZ1+BUFdpfQgXuFGp2+Ar
+ 5bYVl4x1wP0hk52LKJGbdbpehkyI4R5BNmyhUF2e+zmujBVNDqW4WqA+kal8tAAbtquTi7
+ VQ4fRH8CAogIazBm6B+Fev2tlioYIGXxmeswUQ3KAvbr9uC7GwOQPRoO13ajUQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1750278797;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=GthegdusjiliGdu0olgJHtXk9egqWoa5U/Buj0wNiKk=;
+ b=rkRVVPEZPBQimFsoMzrb6XTZ0yjP8TJrgjmI6Rq+OvLPXUSxH8beYFM4qHc6BgqC+UydPx
+ FDH5s7VWNwfbHT2WYjxg5rhOukncHnfzAxh6Afm3slv1gyetf5cov+/ujwybFmvL2S+f68
+ aZYcTdzq5e1M3pqxQEDAlAvtYFUmbsDiGVDU1aQJ0BOgYp1e16d8A+6Jt/OQqc2Kwod715
+ 9c1hEdXawAVnsaUTyca7ig/wMleTXY22vmUgom0amYvfKUw6E8tuBFvpgTI3l3/2yNxdOw
+ f58jX9xiadlDpkNAIhO1OonXaDW1opbEKZdImjAHoiIshbd6AUmJ+l1LOEJPHw==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Wed, 18 Jun 2025 22:32:47 +0200
+Message-ID: <20250618203306.181857-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: o43HFE97W3cCNeic57QlJme-TasmIu_dvJtRHfHBh8k_1750277940
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: wxq6j5mzxxj3jboj9ui93bw1t5qzpbkq
+X-MBO-RS-ID: c84eb31dbb0334c21fc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,42 +82,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+The following changes since commit 17012e3068d047ad71460f039eeb0c3be63f82a0:
 
-> Hi Javier no worries
->
-> On Wed, 18 Jun 2025 at 22:49, Javier Martinez Canillas
-> <javierm@redhat.com> wrote:
->>
->> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
->>
->> Hello Ilias,
->>
->> > Javier I reviewed the patches but I probably missed something.
->> >
->> > I am getting a compilation error with the selftests applied.
->> > #include <part_efi.h> seems to be missing.
->> >
->>
->> Sorry about that. What's the command you are using to build so that I can
->> replicate the issue. I tested with the following build command:
->>
->> make qemu-x86_64_defconfig && make -j8
->
-> Yea that's ok. The problem appears only if you test the patches
-> against -next. There are big changes in the kbuild system.
-> AFAICT it's only that include missing to make -next happy.
->
+  Merge tag 'u-boot-dfu-20250616' of https://source.denx.de/u-boot/custodians/u-boot-dfu (2025-06-16 07:53:11 -0600)
 
-Thanks for letting me know and also for pointing out that I should base
-on -next. Once your pipeline [0] finishes, I'll rebase, fix and re-send.
+are available in the Git repository at:
 
-[0]: https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/26761
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
--- 
-Best regards,
+for you to fetch changes up to 668b2d791d94d4fd6a4be6d7dfa822b072017378:
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+  arm64: renesas: Move early SPL stack into System RAM SRAM on R-Car V4H boards (2025-06-18 17:18:43 +0200)
 
+----------------------------------------------------------------
+Marek Vasut (1):
+      arm64: renesas: Move early SPL stack into System RAM SRAM on R-Car V4H boards
+
+ configs/r8a779g0_whitehawk_defconfig   | 4 +++-
+ configs/r8a779g3_sparrowhawk_defconfig | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
