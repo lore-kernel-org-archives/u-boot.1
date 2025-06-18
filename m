@@ -4,93 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A9E3C71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 07:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 125F5C7115B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 07:41:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C328B82C79;
-	Wed, 18 Jun 2025 09:36:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7C0B582C79;
+	Wed, 18 Jun 2025 09:41:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PNZ/+L7O";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SJJe3FSw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 318E382C87; Wed, 18 Jun 2025 09:36:04 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 9317F82C87; Wed, 18 Jun 2025 09:41:40 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15EC282C2F
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:36:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A34ED82C2F
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:41:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-608acb0a27fso8694666a12.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 00:36:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ad883afdf0cso1292409166b.0
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 00:41:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750232161; x=1750836961; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=No0ZHrY62VdlgKc7ibhYMmHWB4tHM4UQwgHsyjGhr9M=;
- b=PNZ/+L7OPdDXk6FXwQDKMn4NqraxEPGpr1COPOu5b7He3nsU8U1GBMLOSBrqAyvEGG
- +hOFoKT5WlQhwUmFPKRpD8CAnaq2gHq77iI0HP7RmKTJhcqmbQYRQvyONmRG+FW1u6iZ
- ZdHObQecDgON5UV52d48QSV0JAVVYcmmTv2+UUAD5YBDfRyLpgoBSe4AH6+j0LnSufgx
- 0FHnQsJH4NK9rw4pnVWfYARKxHgN0WITSC/kaZZtC0DmVmN0SsBwl8IRi4Xk8T+F9a0l
- XgqgdSj5FDo2FiVmgsWd8CJotS+Pp2N1JCZh5vN8qFABSg7OiiZ7ZihQ23J5GXaKElZS
- Rngw==
+ d=gmail.com; s=20230601; t=1750232498; x=1750837298; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gLMUAEIjz2N/yMjV6XNPlEOBwIXqTEZfHXSIolamW7c=;
+ b=SJJe3FSwzqycDXbOBN+TOv8Zp0oBFWsGwvH6jLKSFiMws6U3eYDpbjULeSmdnNsuNb
+ tzJk7DJKolxEAUdewxnIqSn3EHFbh3y730ZVON9Cak83+8pYi22iugm42H9TTLB87z9V
+ rLsCQgQiFDJ9yiUMDxLdbhoQHzg3oSrUmiSNicP3n5vBjTBX9B4bECrbvdlFz2+jibZL
+ Xf1kzOoXC/Tu283bnba2GoClkATpwkoAF4tC1o4pZvEqdJLFDZkGcELz39uvtjwrdHpw
+ WcvbGlIhnmIp/mlBaG7R0CyahoMPAqf4XAoJDBc3X7RtugFZBG+u7oN4a7jQtqpFLseK
+ dyhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750232161; x=1750836961;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=No0ZHrY62VdlgKc7ibhYMmHWB4tHM4UQwgHsyjGhr9M=;
- b=svTQTh8wFCFRs/fP49vfWWyz0X0z6Dm0M8lHdyAZYnS4r1D9nlIYI4kSspaCWy91k1
- uj9e2PhYf3qgWA8RR+b3nhsGBAgeM+yXr78deSk73Kvj0FKwzLjxDYzgsEsZUF+aRgtK
- zTcSJKwWvO1pliT0McVtRQkyRII44fpPAWIgT8YaNHypRsY8uEKXKdtiIVjUPiwA9CCf
- s0QCmdjvInDdlv9Ki5hbIu/aO/STsOJwhQ7WRVbccO80lt8/P7xDL4egrrYtYns8YzJu
- Y0lBjprNXWkegEEBHOXgK82PcGztENC1tjtLJ24+y0pwFk25eTGoKhKnEOxxyMtG6wrh
- ioLw==
+ d=1e100.net; s=20230601; t=1750232498; x=1750837298;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gLMUAEIjz2N/yMjV6XNPlEOBwIXqTEZfHXSIolamW7c=;
+ b=FWcLHGvpefAGel0bYFdw7OoQmJw2+Mc/HYhrJOsGZ9Mt7UyVQXIbKaekk94n6ct2ke
+ 6Y2KGgB7Q+pLRa/fxIpOVls9F3SFrJjJPjb6iMdcgY3LnUBRc0jASw1oqM6G3XWlvcFS
+ KM/1k0AuebCuAAc441Ultg4SpP+REIcbyb5Poo3VNFHbQk75MMhgyjfg8WfHJGFpARHo
+ wO0e6tNRRdr9qlD06JckffaIHPmZpf5SZPtwKje+vAGRgX4Kk6FTJHf6EL5uVJarKx/B
+ DL/N76PLA1H7a11K32DufLp/+rxOO8LMCiINOJXrZc3tN6fxPm7MnMB0CWCd2sN15l28
+ rsCg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsqouZttd2GP30sJOgVvD2+xrh6kqz4sgKSJM9JCxfm8KFF/jPjx2mgNBW4ZamMk7Z8iQh70U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVfBhfq4DpCibC1BtRPPaVj00m6R3NPGbD5zbSMCl9+rjz9tNy
- j3RTn8Us0JfVEyolwZE6h8HoyHKOHtD8YWGNjQXzHhFR7jZ3b6M9RRUu4JA9/ao3FAk=
-X-Gm-Gg: ASbGncsVb0oJ14V74W3gl62Znn0Tn5yIbYjFrbvyOl9+C4YeMqfDv5yAqYVkEt+1Dt2
- wlYr/k1ksp+NoUE3p+qsr982pZLvURr0FSwjA4Db0KGWni0a2j95K985HpYS0jxgaF/UeA1OATk
- zH3XOzZs9Qo1LQPOXuqKy+KIo7JXLKqJxrAFAPLj0DyubSn/eXgAoSl00ac8cyY7fv7YOADabpH
- NhDjQhOBeMsZmIsNhs3uefEMmzukpdeFyeNeo5oKd8vXfJms4VQnwBE+IMMql9pOxSJcf9URads
- /W04rjRjxDNU8gi/HC+KVrhe1xU3wdB4LBWx8x3RewNOUGjrYYH90ipE6bus2HA1PfSepA==
-X-Google-Smtp-Source: AGHT+IF5fYTikCcrgJEUkCEfKa5Fuexog1i7SWVgNd4NgI0PcNjPJyWzDajUYzMokkpNM75v/6GO4w==
-X-Received: by 2002:a17:907:6d0d:b0:adb:2bb2:ee2 with SMTP id
- a640c23a62f3a-adfad451438mr1797962366b.41.1750232161310; 
- Wed, 18 Jun 2025 00:36:01 -0700 (PDT)
-Received: from [192.168.0.33] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adf2a174072sm915545766b.32.2025.06.18.00.36.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Jun 2025 00:36:00 -0700 (PDT)
-Message-ID: <a0419e95-e333-4d7e-b2bc-3f0d21e46f23@linaro.org>
-Date: Wed, 18 Jun 2025 10:35:59 +0300
+ AJvYcCX5Dld6WEwvUPcPOxlAMW216xTFA0f8JW8CUUCbYU7nz3BRCSg7K37fDES5tsiqbqlDhJK+gho=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywu+QqCndzmKbeMwja9Em441aFyk7IhIOqLRIG1Pd0wlMhU8kpN
+ XliPPqy7lw0BswJ+UCEPkG3HICsZKBIwrfn8P41h+oE2V24qKsvmybR2L+bzVmHJMS9WD8xxxYu
+ eBOIgQ7GAtpD/xekjNefsDukaGEmQ5wk=
+X-Gm-Gg: ASbGncsaRH/gj1dTNTL8HeLqQqO7VYihoSUgphviiWkVtu2yzVC0gwRuSAb1snQBwZO
+ jry0hTl3kPhvqZuSXhVb8u4snAwThzQYaAMg5UpPUws8rSbAUemENCNPml+cjgHStjM31AtN+tw
+ AcUElUUy88y0Iw1VEDy24vHasHsabXaYQqVCc8OVQ/I0AV0MCUi0w9NE3Azaap/0gOW/Rc4g64I
+ ELp
+X-Google-Smtp-Source: AGHT+IEPOOm9UhcTRbuuAPhYspDoAz1MoooUbolMdcfCDaaKZ6jsIf37cnmlGS+w4fIKLl6f6LsAKYEUzllnBdpABmQ=
+X-Received: by 2002:a17:907:3f21:b0:ad5:1bfd:30d2 with SMTP id
+ a640c23a62f3a-adfad54ab92mr1595043766b.55.1750232497920; Wed, 18 Jun 2025
+ 00:41:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 0/9] Add support for sam9x7 SoC and SAM9X75 Curiosity
- board
-To: Manikandan Muralidharan <manikandan.m@microchip.com>,
- Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com, sjg@chromium.org,
- Oliver.Gaskell@analog.com, malysagreg@gmail.com,
- nathan.morrison@timesys.com, mkorpershoek@kernel.org,
- robert.marko@sartura.hr, jerome.forissier@linaro.org,
- sebastian.reichel@collabora.com, duje.mihanovic@skole.hr,
- sumit.garg@kernel.org, patrice.chotard@foss.st.com,
- nicolas.ferre@microchip.com, u-boot@lists.denx.de
-References: <20250603050556.80851-1-manikandan.m@microchip.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250603050556.80851-1-manikandan.m@microchip.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250615093344.159920-1-pbrobinson@gmail.com>
+ <DAOLOVHXW7MX.LAIVDE0UN7GN@linaro.org>
+ <20250617231046.GQ1382132@bill-the-cat>
+In-Reply-To: <20250617231046.GQ1382132@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 18 Jun 2025 08:41:26 +0100
+X-Gm-Features: AX0GCFsIWhWlcTP8MQyXK42X_1C3lrBYv0nJpSCm6Cq-1Ox3rY6fV7A5uTjTzlA
+Message-ID: <CALeDE9PJ2fUdgXUPt+25EkD8MQP+7SW2=+7we3aT7YdpuL9wXQ@mail.gmail.com>
+Subject: Re: [PATCH] disable VBE by default
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,101 +94,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 18 Jun 2025 at 00:10, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Jun 17, 2025 at 09:39:25AM +0300, Ilias Apalodimas wrote:
+>
+> > On Sun Jun 15, 2025 at 12:33 PM EEST, Peter Robinson wrote:
+> > > The VBE protocol needs explicit device support and as
+> > > such isn't particularly useful by itself without that,
+> > > it also adds size and the potential of an attack vector
+> > > so devices that wish to use this protocol should
+> > > explicitly opt in to it like all other large features
+> > > in U-Boot.
+> > >
+> > > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> >
+> > Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> This is I think a tad premature. I believe Fedora has been carrying this
+> patch for some time, and that's the prerogative of that project and so
+> fine. There is a chicken-and-egg type problem with this feature and if
+> we aren't going to enable it by default, we then ought not bother
+> including it and that's not a collection of issues I wish to open at
+> this time.
 
-
-On 6/3/25 08:05, Manikandan Muralidharan wrote:
-> This patch series adds support for the new SoC family - sam9x7.
->  - sam9x7 SoC is added
->  - Clock driver for sam9x7 is added
->  - Target board SAM9X75 Curiosity is added with its differences in DT
->  and MMC config support 
-> 
-> ----
-> changes in v6:
-> - 1/4 - New addition to this series
-> - 5/8 - Parse NULL in at91_clk_main_rc() call for parent_name
-> - 7/8 - Remove main_rc node from DT
-> 
-> changes in v5:
-> - 4/8 - Define ID_MAIN_RC name in sam9x7 clock driver thus dropping
-> 	the main_rc clock from DT and Alinging it with Linux
-> - 6/8 - Drop main_rc clock for pmc node in DT
-> 
-> changes in v4:
-> - 1/8 - Drop the local include file clock/at91.h and the update
-> 	the MAINTAINERS respectively.
-> 
-> changes in v3:
-> - 1/8 - rename at91.h to at91-pmc-status.h, update the SoC DTs
-> 	and MAINTAINERS file respectively
-> - 4/8 - update header from clk/at91.h to clock/at91.h 
-> 
-> changes in v2:
-> - 1/8 - add additional PMC clock definition to support the sam9x7 upstream
-> 	DT
-> - 6/8 - Remove support for SoC DT and board DTS as they are already available
->         in dts/upstream
->       - add the differences in DT files between upstream Linux DT and U-Boot
->       	DT to at91-sam9x75_curiosity-u-boot.dtsi
-> - 7/8 - Add OF_UPSTREAM support for sam9x75 curiosity board
-> - 8/8 - update the DEFAULT_DEVICE_TREE config to <vendor/name>
-> 
-> ----
-> 
-> 
-> Manikandan Muralidharan (5):
->   dt-bindings: drop at91.h from clock includes
->   clk: at91: clk-main: drop parent_name check when registering main_rc
->     oscillator
->   ARM: dts: at91: sam9x75_curiosity: add tweaks for sam9x75 curiosity
->     board
->   board: sam9x75_curiosity: Add support for sam9x75 curiosity
->   configs: sam9x75_curiosity: Add initial mmc default config
-> 
-> Varshini Rajendran (4):
->   clk: at91: sam9x60-pll: add support for core clock frequency inputs
->   clk: at91: sam9x60-pll: add support for HW PLL freq dividers
->   clk: at91: sam9x7: add pmc driver for sam9x7 SoC family
->   ARM: at91: Add sam9x7 soc
-> 
->  MAINTAINERS                                   |    1 -
->  .../dts/at91-sam9x75_curiosity-u-boot.dtsi    |   95 ++
->  arch/arm/mach-at91/Kconfig                    |   12 +
->  arch/arm/mach-at91/arm926ejs/Makefile         |    1 +
->  arch/arm/mach-at91/arm926ejs/sam9x7_devices.c |   49 +
->  arch/arm/mach-at91/include/mach/hardware.h    |    2 +
->  arch/arm/mach-at91/include/mach/sam9x7.h      |  172 +++
->  board/atmel/sam9x75_curiosity/Kconfig         |   15 +
->  board/atmel/sam9x75_curiosity/MAINTAINERS     |    7 +
->  board/atmel/sam9x75_curiosity/Makefile        |    7 +
->  .../sam9x75_curiosity/sam9x75_curiosity.c     |   66 +
->  configs/sam9x75_curiosity_mmc_defconfig       |   73 ++
->  drivers/clk/at91/Makefile                     |    1 +
->  drivers/clk/at91/clk-main.c                   |    2 +-
->  drivers/clk/at91/clk-sam9x60-pll.c            |   55 +-
->  drivers/clk/at91/pmc.h                        |    2 +
->  drivers/clk/at91/sam9x60.c                    |    7 +
->  drivers/clk/at91/sam9x7.c                     | 1085 +++++++++++++++++
->  drivers/clk/at91/sama7g5.c                    |    6 +
->  include/configs/sam9x75_curiosity.h           |   23 +
->  include/dt-bindings/clock/at91.h              |   23 -
->  21 files changed, 1669 insertions(+), 35 deletions(-)
->  create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
->  create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
->  create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
->  create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
->  create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
->  create mode 100644 board/atmel/sam9x75_curiosity/Makefile
->  create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
->  create mode 100644 configs/sam9x75_curiosity_mmc_defconfig
->  create mode 100644 drivers/clk/at91/sam9x7.c
->  create mode 100644 include/configs/sam9x75_curiosity.h
->  delete mode 100644 include/dt-bindings/clock/at91.h
-> 
-
-
-Even though I am not really happy with patch 4/9 , but because I haven't
-figured a better way to deal with it without some core rework, let's not
-delay this further, applied to u-boot-at91/next !
-
-Eugen
+Can you provide some docs on how to use it on every device without
+device specifc config?
