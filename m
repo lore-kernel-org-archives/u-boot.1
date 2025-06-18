@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF71BC7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 12:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D7EC71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 12:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D278882CCE;
-	Wed, 18 Jun 2025 14:43:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A130C82BCD;
+	Wed, 18 Jun 2025 14:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g8COSclP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KvdHwLkX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF6AB82B20; Wed, 18 Jun 2025 14:43:29 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 5FA9282CBC; Wed, 18 Jun 2025 14:49:28 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82E7582C55
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 14:43:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E14EE82B20
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 14:49:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55IChPDr242073;
- Wed, 18 Jun 2025 07:43:25 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55ICnNdg309866;
+ Wed, 18 Jun 2025 07:49:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750250605;
- bh=3vvCvgj2YoKO/dJcxyfzqbJTlz7AQQMkSZ2U7QNV4/8=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=g8COSclPkZwEQHtFmZR4I+EzuSYOponPgr8Y4yoSyyQVyXp/YjABf8EWsW7Eoe/nB
- G8NUZGoGywBI7uoFkYvSzTn2U7Jz3oD5WZSwQOrNrSfKaoR370Rq8SdBJCpzzLtOVQ
- 3rEO5pqN+M3cNbT+WOXP14OVTvM4LZUSTqRquZXU=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55IChPEI2924992
+ s=ti-com-17Q1; t=1750250963;
+ bh=zr+kywgpbBeHtwN6pxpMZ5XqzatN+MjqXJ5g4sAPNdU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=KvdHwLkXAgyJeW0eGUDBF7jnsIA/VxzDXTuCPNG2NHiXbqH8lN7+KJGIEKXQJf2bv
+ waCdvai3oXOo1Li9lnvEtIrbu0DJxWlXc4bmiisigHwIMlwpMYg09YQocvq1FIXQki
+ 5b9YzOOOiyLAvZHuTksDTZC4ne0VcEpIEdBIufsc=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55ICnNxv381996
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 18 Jun 2025 07:43:25 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 18 Jun 2025 07:49:23 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 18
- Jun 2025 07:43:24 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 07:49:22 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 18 Jun 2025 07:43:24 -0500
+ Frontend Transport; Wed, 18 Jun 2025 07:49:22 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55IChO7Q3485052;
- Wed, 18 Jun 2025 07:43:24 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <nm@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
- <devarsht@ti.com>, <robertcnelson@gmail.com>
-Subject: [PATCH v4 2/2] mach-k3: add dynamic mmu fixups for SPL stage
-Date: Wed, 18 Jun 2025 18:12:09 +0530
-Message-ID: <20250618124210.1936140-2-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250618124210.1936140-1-anshuld@ti.com>
-References: <20250618124210.1936140-1-anshuld@ti.com>
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55ICnM9l3491956;
+ Wed, 18 Jun 2025 07:49:22 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 18 Jun 2025 18:18:42 +0530
+Message-ID: <DAPO65QJ47IV.1AX9GYAWDCG67@ti.com>
+From: Anshul Dalal <anshuld@ti.com>
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>
+Subject: Re: [PATCH v3 1/2] mach-k3: add runtime memory carveouts for MMU table
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250617135844.2873701-1-anshuld@ti.com>
+In-Reply-To: <20250617135844.2873701-1-anshuld@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,145 +80,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On platforms with spl splash support i.e CONFIG_VIDEO=y, the top of DDR
-is reserved for the framebuffer.
+On Tue Jun 17, 2025 at 7:28 PM IST, Anshul Dalal wrote:
+> In u-boot we only provide a single MMU table for all k3 platforms,
+> this does not scale for devices with reserved memory outside the range
+> 0x9e780000 - 0xa0000000 (eg j722s[1]) or for devices with < 2GiB of
+> memory (eg am62-SIP with 512MiB of RAM).
+>
+> To properly configure the MMU on various k3 platforms, the
+> reserved-memory regions need to be queried at runtime from the
+> device-tree and the MMU table should be updated accordingly.
+>
+> This patch adds the required fixups to the MMU table (during proper
+> U-boot stage) by marking the reserved regions as non cacheable and
+> keeping the remaining area as cacheable.
+>
+> For the A-core SPL, the 128MiB region starting from SPL_TEXT_BASE
+> is marked as cacheable i.e 0x80080000 to 0x88080000.
+>
+> The 128MiB size is chosen to allow for future use cases such as falcon
+> boot from the A-Core SPL which would require loading kernel image from
+> the SPL stage. This change also ensures the reserved memory regions that
+> all exist past 0x88080000 are non cacheable preventing speculative
+> accesses to those addresses.
+>
+> [1]:
+> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/arch/arm/mach-k3/arm64/a=
+rm64-mmu.c?h=3Dti-u-boot-2025.01-next#n54
+>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+> Changes for v3:
+>  - Remove unused memory regions in SPL's map
+>  - Add runtime addition of MMU entry for the framebuffer in SPL
+>  - Refactor k3_mem_map_init to use standard u-boot APIs
+>  - Unmap reserved-memory regions instead of keeping them uncached
+> v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.co=
+m/
+>
+> Changes in v2:
+> - Removed dependency to:
+>   https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+>
+> v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.co=
+m/
+> ---
 
-The size for the framebuffer is computed at runtime by video_reserve.
-During the MMU configuration an entry corresponding to the framebuffer
-should be dynamically created to properly map the required space for the
-framebuffer.
+[snip]
 
-Therefore this patch adds k3_spl_mem_map_init which adds the required
-MMU entry by querying the gd after the framebuffer size has been
-computed in spl_reserve_video_from_ram_top.
-
-For non VIDEO=y platforms, the added k3_spl_mem_map_init function gets
-optimized out of the final binary so overall, the spl size is not
-impacted[1].
-
-[1]: Tested on clang 19.1.7 and gcc 15.1.1
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/mach-k3/arm64/arm64-mmu.c     | 44 ++++++++++++++++++++++++++
- arch/arm/mach-k3/common.c              | 13 ++++++--
- arch/arm/mach-k3/include/mach/k3-ddr.h |  3 ++
- 3 files changed, 57 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
-index 135f842556d..0d9b4d062bf 100644
---- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-@@ -49,6 +49,10 @@ struct mm_region k3_mem_map[K3_MMU_REGIONS_COUNT] = {
- 		.size = SZ_128M,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_INNER_SHARE
-+	}, {
-+		/* Framebuffer reserved, size set at runtime */
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_INNER_SHARE
- 	}, {
- 		/* List terminator */
- 		0,
-@@ -57,6 +61,46 @@ struct mm_region k3_mem_map[K3_MMU_REGIONS_COUNT] = {
- 
- struct mm_region *mem_map = k3_mem_map;
- 
-+int k3_spl_mem_map_init(void)
-+{
-+	unsigned int i;
-+	int k3_map_idx = -EINVAL;
-+
-+	for (i = 0; i < K3_MMU_REGIONS_COUNT; i++) {
-+		if (k3_mem_map[i].virt == 0 && k3_mem_map[i].phys == 0 &&
-+		    k3_mem_map[i].size == 0) {
-+			k3_map_idx = i;
-+			break;
-+		}
-+	}
-+
-+	if (k3_map_idx == -EINVAL) {
-+		pr_err("%s: Failed to find fixup region in MMU memory map\n",
-+		       __func__);
-+		return -EINVAL;
-+	}
-+
-+	if (k3_map_idx >= K3_MMU_REGIONS_COUNT - 1) {
-+		pr_err("%s: Not enough space in MMU map for the added entry\n",
-+		       __func__);
-+		return -ENOMEM;
-+	}
-+
-+	if (CONFIG_IS_ENABLED(VIDEO)) {
-+		k3_mem_map[k3_map_idx].virt = gd_video_bottom();
-+		k3_mem_map[k3_map_idx].phys = gd_video_bottom();
-+		k3_mem_map[k3_map_idx].size =
-+			gd_video_top() - gd_video_bottom();
-+		k3_mem_map[k3_map_idx].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+					       PTE_BLOCK_INNER_SHARE;
-+		k3_map_idx++;
-+	}
-+
-+	k3_mem_map[k3_map_idx] = (const struct mm_region){ 0 };
-+
-+	return 0;
-+}
-+
- static int dt_reserved_cmp(const void *a, const void *b)
- {
- 	const struct fdt_resource *val_a = a, *val_b = b;
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index fc230f180d0..198ab4e85fe 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -15,6 +15,7 @@
- #include <asm/global_data.h>
- #include <linux/printk.h>
- #include "common.h"
-+#include "mach/k3-ddr.h"
- #include <dm.h>
- #include <remoteproc.h>
- #include <asm/cache.h>
-@@ -224,9 +225,6 @@ void spl_enable_cache(void)
- 
- 	dram_init();
- 
--	/* reserve TLB table */
--	gd->arch.tlb_size = PGTABLE_SIZE;
--
- 	gd->ram_top += get_effective_memsize();
- 	gd->relocaddr = gd->ram_top;
- 
-@@ -234,6 +232,15 @@ void spl_enable_cache(void)
- 	if (ret)
- 		panic("Failed to reserve framebuffer memory (%d)\n", ret);
- 
-+	if (IS_ENABLED(CONFIG_ARM64)) {
-+		ret = k3_spl_mem_map_init();
-+		if (ret)
-+			panic("Failed to perform MMU fixups: %d\n", ret);
-+	}
-+
-+	/* reserve TLB table */
-+	gd->arch.tlb_size = PGTABLE_SIZE;
-+
- 	gd->arch.tlb_addr = gd->relocaddr - gd->arch.tlb_size;
- 	gd->arch.tlb_addr &= ~(0x10000 - 1);
- 	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
-diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
-index 0b164ebf5e6..375a1a85945 100644
---- a/arch/arm/mach-k3/include/mach/k3-ddr.h
-+++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
-@@ -17,6 +17,9 @@ int dram_init_banksize(void);
- void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
- void fixup_memory_node(struct spl_image_info *spl_image);
- 
-+/* Performs MMU memory map fixups at SPL stage */
-+int k3_spl_mem_map_init(void);
-+
- /*
-  * Modifies the MMU memory map based on DDR size and reserved-memory
-  * nodes in DT
--- 
-2.49.0
-
+Superseded by v4:
+https://lore.kernel.org/u-boot/20250618124210.1936140-1-anshuld@ti.com/
