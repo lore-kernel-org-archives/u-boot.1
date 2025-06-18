@@ -4,66 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D7EC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 12:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6582C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 13:26:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A130C82BCD;
-	Wed, 18 Jun 2025 14:49:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CA3CE82BCD;
+	Wed, 18 Jun 2025 15:26:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KvdHwLkX";
+	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="BE+0SDDJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FA9282CBC; Wed, 18 Jun 2025 14:49:28 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E14EE82B20
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 14:49:25 +0200 (CEST)
+ id A2A4282B20; Wed, 18 Jun 2025 15:26:05 +0200 (CEST)
+Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 39B5A82C55
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 15:26:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55ICnNdg309866;
- Wed, 18 Jun 2025 07:49:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750250963;
- bh=zr+kywgpbBeHtwN6pxpMZ5XqzatN+MjqXJ5g4sAPNdU=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=KvdHwLkXAgyJeW0eGUDBF7jnsIA/VxzDXTuCPNG2NHiXbqH8lN7+KJGIEKXQJf2bv
- waCdvai3oXOo1Li9lnvEtIrbu0DJxWlXc4bmiisigHwIMlwpMYg09YQocvq1FIXQki
- 5b9YzOOOiyLAvZHuTksDTZC4ne0VcEpIEdBIufsc=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55ICnNxv381996
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 18 Jun 2025 07:49:23 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 18
- Jun 2025 07:49:22 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 18 Jun 2025 07:49:22 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55ICnM9l3491956;
- Wed, 18 Jun 2025 07:49:22 -0500
+ dmarc=none (p=none dis=none) header.from=hugovil.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
+ ; s=x;
+ h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
+ :From:subject:date:message-id:reply-to;
+ bh=peD62Dp4moncuqLxKZ1vRHWMPtsIf8Nr//tBHenChPo=; b=BE+0SDDJ8Mrh8273ngkw5VKWwG
+ NArDukaafzAayaR1fW6NGWKbW6lj1EypkT8/q1EpejjdeP2WrxnKWB1Uz5KBpuMX97jP2Z5OWlNyh
+ l0qTneJzJzRac/5TXfS6QhW5alnUj+IEYI2oAiGMDMb9M2P7MgXlv+IIT2oVUoz1Qu8A=;
+Received: from [184.161.19.61] (port=41656 helo=pettiford.lan)
+ by mail.hugovil.com with esmtpa (Exim 4.92)
+ (envelope-from <hugo@hugovil.com>)
+ id 1uRsnf-0005ab-Fx; Wed, 18 Jun 2025 09:26:00 -0400
+From: Hugo Villeneuve <hugo@hugovil.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: hugo@hugovil.com, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ u-boot@lists.denx.de
+Date: Wed, 18 Jun 2025 09:25:37 -0400
+Message-Id: <20250618132538.855803-1-hugo@hugovil.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 18 Jun 2025 18:18:42 +0530
-Message-ID: <DAPO65QJ47IV.1AX9GYAWDCG67@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
- <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>
-Subject: Re: [PATCH v3 1/2] mach-k3: add runtime memory carveouts for MMU table
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a
-References: <20250617135844.2873701-1-anshuld@ti.com>
-In-Reply-To: <20250617135844.2873701-1-anshuld@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 184.161.19.61
+X-SA-Exim-Mail-From: hugo@hugovil.com
+Subject: [PATCH] cmd: tlv_eeprom: improve mac_read_from_eeprom() log messages
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,52 +65,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Jun 17, 2025 at 7:28 PM IST, Anshul Dalal wrote:
-> In u-boot we only provide a single MMU table for all k3 platforms,
-> this does not scale for devices with reserved memory outside the range
-> 0x9e780000 - 0xa0000000 (eg j722s[1]) or for devices with < 2GiB of
-> memory (eg am62-SIP with 512MiB of RAM).
->
-> To properly configure the MMU on various k3 platforms, the
-> reserved-memory regions need to be queried at runtime from the
-> device-tree and the MMU table should be updated accordingly.
->
-> This patch adds the required fixups to the MMU table (during proper
-> U-boot stage) by marking the reserved regions as non cacheable and
-> keeping the remaining area as cacheable.
->
-> For the A-core SPL, the 128MiB region starting from SPL_TEXT_BASE
-> is marked as cacheable i.e 0x80080000 to 0x88080000.
->
-> The 128MiB size is chosen to allow for future use cases such as falcon
-> boot from the A-Core SPL which would require loading kernel image from
-> the SPL stage. This change also ensures the reserved memory regions that
-> all exist past 0x88080000 are non cacheable preventing speculative
-> accesses to those addresses.
->
-> [1]:
-> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/arch/arm/mach-k3/arm64/a=
-rm64-mmu.c?h=3Dti-u-boot-2025.01-next#n54
->
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
-> Changes for v3:
->  - Remove unused memory regions in SPL's map
->  - Add runtime addition of MMU entry for the framebuffer in SPL
->  - Refactor k3_mem_map_init to use standard u-boot APIs
->  - Unmap reserved-memory regions instead of keeping them uncached
-> v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.co=
-m/
->
-> Changes in v2:
-> - Removed dependency to:
->   https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
->
-> v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.co=
-m/
-> ---
+From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
-[snip]
+mac_read_from_eeprom() always display debug infos, and this messes up the
+display of the "Net:" section details:
 
-Superseded by v4:
-https://lore.kernel.org/u-boot/20250618124210.1936140-1-anshuld@ti.com/
+Before:
+    Net:   EEPROM: TlvInfo v1 len=172
+    eth0: ethernet@11c20000
+
+After:
+    Net:   eth0: ethernet@11c20000
+
+Fix by moving unconditional "EEPROM: " header into each message and
+changing debug message to use log_debug().
+
+Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+---
+ cmd/tlv_eeprom.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/cmd/tlv_eeprom.c b/cmd/tlv_eeprom.c
+index d7c229e5441..86fee7771a4 100644
+--- a/cmd/tlv_eeprom.c
++++ b/cmd/tlv_eeprom.c
+@@ -1033,10 +1033,8 @@ int mac_read_from_eeprom(void)
+ 	struct tlvinfo_header *eeprom_hdr = to_header(eeprom);
+ 	int devnum = 0; // TODO: support multiple EEPROMs
+ 
+-	puts("EEPROM: ");
+-
+ 	if (read_eeprom(devnum, eeprom)) {
+-		printf("Read failed.\n");
++		log_err("EEPROM: read failed\n");
+ 		return -1;
+ 	}
+ 
+@@ -1082,8 +1080,8 @@ int mac_read_from_eeprom(void)
+ 		}
+ 	}
+ 
+-	printf("%s v%u len=%u\n", eeprom_hdr->signature, eeprom_hdr->version,
+-	       be16_to_cpu(eeprom_hdr->totallen));
++	log_debug("EEPROM: %s v%u len=%u\n", eeprom_hdr->signature, eeprom_hdr->version,
++		  be16_to_cpu(eeprom_hdr->totallen));
+ 
+ 	return 0;
+ }
+
+base-commit: 17012e3068d047ad71460f039eeb0c3be63f82a0
+-- 
+2.39.5
+
