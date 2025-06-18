@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C497AC7115B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 06:58:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F33C7115B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 06:58:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 579CE82C79;
-	Wed, 18 Jun 2025 08:58:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A997682C84;
+	Wed, 18 Jun 2025 08:58:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HSZlfcDG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O1/XhBFr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 884BE82C87; Wed, 18 Jun 2025 08:58:40 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id BDE3782977; Wed, 18 Jun 2025 08:58:45 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8649182C79
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:58:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BCCF82977
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:58:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ad89c32a7b5so1027030866b.2
- for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 23:58:38 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ae0290f8686so2912766b.2
+ for <u-boot@lists.denx.de>; Tue, 17 Jun 2025 23:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750229918; x=1750834718; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750229923; x=1750834723; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fpReFvRSWXIJsGV0vq2i/mgseUyQwgltnFDjTnZ3K5M=;
- b=HSZlfcDGEZMovVVcoQxbXhs+1rY8/6zmYE+zHOGyJiiPLjYQ6WFhVWNSJGWKbh16sn
- LM/F9Px6BuUQw8mXbDLYD0uaW2Dh08yHUloD/ljdI/gCUTYP8xFJUZejgBjvK/GO4IHo
- G7udBg73vqUW0i12U31YHudimk2sh8OSo+J6BIrrq2IbAQQSlb7bVlK0WfM8Mte3Vc4m
- 0K5uNPWu4gHvypitfHYsInN+J2muzVN2v8F0Q2flqJ4qpNr/LtcJPRdbWSDcUEbpiylq
- 9cK9wh0cbKu8xMgnpg4Ajnjflfi0xuU/Ku9JmfQ8O5J5/GCSagGs4CdNPctE2akamTpq
- H9TQ==
+ bh=r1YU2srrJ25BJ1VBHLtPHOeA1wYti0oNPoW7TW/X5kE=;
+ b=O1/XhBFrZf+Ob9fVAxk5kLigjpcV4zVvJB8SE/XelK+M5zx/w/eeBaekB6JaqxOVeV
+ F2y4Pw/og+mzTZNRpJ3W9xVjvZG2gVWlMmdG6uZDaPVFS6bTEsSAe1yy7BO2GcpQcHLU
+ x3DI2VJkUPHiU1AjN6YKQrKi4odu/IdidZFSzo+4PMTvhvwQdQOoXIW0FZHVBW/93Kr3
+ S96NwLRWFsPdUyzzLSPWbg+I7FtWVPB1jwvc9QlNFnATyPB+lzucoiX37idu6+U5WN7N
+ rdwVmZYt/zyizv6NsLJNsdI1KG8Mdo4LsFC0k+qbcO40g/6IVHYGjiuZOmbvkRP0j9N+
+ l5PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750229918; x=1750834718;
+ d=1e100.net; s=20230601; t=1750229923; x=1750834723;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fpReFvRSWXIJsGV0vq2i/mgseUyQwgltnFDjTnZ3K5M=;
- b=oI+ZwTvc+Qvuy/InUhT9Yqf9CHQ0cUasiHxddoXOtB7SgehmGuyN0mUgPyeixk5pJz
- /1z9Rm4dqrDU+x87oOiI1P5XJsThvyT0cXINdacChfdlOl1EgskwjvAfhDKUfLHpa0oQ
- LGHaIJCfw4JDZkV+hjcRXRR18Qzsv3wS1OOKG9SlfADpNFCS6eF8K7ShJ/VSJ9ef+Ows
- aQAplbAVi0EPAalZOVbYy/0b/yxokgm5OnL+I3kwjg3umM8zJ2VPZJWDTy64A735QGtS
- Py2MjPzj+g0XU2fe91J3oIJZm8ZoNWGFU3/48jYWwf++r8Rb85Llxpr2p7nsimaa5JPx
- 5gzg==
+ bh=r1YU2srrJ25BJ1VBHLtPHOeA1wYti0oNPoW7TW/X5kE=;
+ b=oODzRndIPm/WvwXhtYcWhb9O+DX4gMRl2NKW10X0rLziY62VnlKG64AniHebeDmQtu
+ ma808URFlKGWS8IxSO4nHqEsw1Rk4Bo3dGXJnR54SUC8uZmIuyOmAqc2eH30+8+Thb3A
+ t2IEicWaCuAU7ySn+23Xyp1eoftuynFNWmo4nWW55a73pyuP4DD9e6NxMKnQB6sWPqZz
+ k/DRz6456bf4yI07IfWY0++K96kEFhkZpoeStJaL43a+DcwNDQvtCzc6wC6LxJV4yQtS
+ /AlIlOQEiG+Jq0TsGjikRxGBRaILHk7K1JtnUE5iJVi6YKCjNS01H1DvLV5ncf+b3YdD
+ ZdFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVebo3O/aFUGNDq7WaPiBBkEeEX7+sPW4cet26P/Z8W+fCn7T80vRhQaVetsdgOppbt/d044Ys=@lists.denx.de
-X-Gm-Message-State: AOJu0Yws/CUlDbXURUe+4ytR08RmOle5NvruIRnaiIHABGnup9PDPwLa
- r1Jz6RNuAGIStge54T3kwKUenxOkm/E9Gmh7bURdSKfrGMv1C+9cvZLuAvDIzH+EZrQ=
-X-Gm-Gg: ASbGncsUlMBE6ISU70mZ0RukUdyv3OAGtaQWkQIAYz/kgnxYUZX4NI/nEUYZDw2cdT1
- YB9R9AGE32jbY0wgAelE+oCA8fYhx1/lpY14nFFD41uqOAPFyy3PFu2Ucmg1m6QK6oUBCRis1vU
- mJRnmV478+bJaOKm1twGsqrfxVKytJyuKYqJMIPRrBVcPTTNdnMWzqFLEYwvvFBDWygoPxwha4F
- pFCalTgn9Dg17llz4MD2Pm0q3CzGNkk0hHgutFs/5Y6HpDlk1SW852QKXhwpayB+g+/EZKSP/qx
- sPhCsQ/E/qAQczl0F0FC0NB5/eOGopmj1KDLSfy1tlajzsWBoafIAAvIK32pB3t1x86zr9LUGVJ
- kpKwYLgvhSzf832beYirGSA==
-X-Google-Smtp-Source: AGHT+IHOdlTufpeTdePXiNFPv4uASexfcQV3RKHJRQJOoUfZqkx5cTrUYO+39BSn/2sXkNn1EROgow==
-X-Received: by 2002:a17:906:6a18:b0:ad8:9a3b:b274 with SMTP id
- a640c23a62f3a-adfad4f4b80mr1526051866b.52.1750229917885; 
- Tue, 17 Jun 2025 23:58:37 -0700 (PDT)
+ AJvYcCUIudyH/j0RMtA+FtSCxXYc2QxDPzjowxMZwR1N+geuc7pe9PuLvOs3jnKcvlud8kyTfmEjRhE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzl39vTqDWbiARaziIweixRy8oKNMU2mhClZiEswIJ1wi7RvFge
+ eTyXHHutyFzNW0Oe/9B08zuqS2xXZnuTkAZzTOk+1/9i0f3Gy+Dlz94fAkBmt6GfYVc=
+X-Gm-Gg: ASbGnctduD5SfGSw6Vvnzy9mHx0BqLMq+VOqA/QnRJR9WMCUMsn4JrSgqVaVtKFCnUr
+ apQotUoBw/0K1NWYnipByxqpPw3sVN/EnQ0+4pHMoh5A81mk/vvnpiai8xhbk4zkbPx5kJ5LUUI
+ CH+N7umTZ+t7BIeGmtL05+YYpvKXMgw+h0IMr45oceBGI6SBCVlcQUQfJ6wEL06rDqlos9LYHsa
+ t7eNeIML1jgw8ULoxo7Xi7lZxvdN8IxHhJ4khfGPuUs+ADvjYRGBeIzaeHLZyeGMM257CHWz6ed
+ O9C9ZSLjaTvpP+jrba/5zPvvNMk9GV9jFRL2roQcqfMG2wQ2xfhEDoXH49KuN0Nh6Muhr50H7Th
+ Nie0NcK2uF+8mADKlgPm3aSYZfvsnLUr8
+X-Google-Smtp-Source: AGHT+IFk+bct4E9qy9sm8OVlY8b0DIt5PrzBiOdPRq4ogfaiwmaBl/rPoRbyXSt/iG2lRJT7teTgZw==
+X-Received: by 2002:a17:907:3e93:b0:adb:449c:7621 with SMTP id
+ a640c23a62f3a-adfad438184mr1556409666b.29.1750229922859; 
+ Tue, 17 Jun 2025 23:58:42 -0700 (PDT)
 Received: from hades.. (ppp089210105145.access.hol.gr. [89.210.105.145])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec897bae7sm978322866b.162.2025.06.17.23.58.35
+ a640c23a62f3a-adec897bae7sm978322866b.162.2025.06.17.23.58.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jun 2025 23:58:37 -0700 (PDT)
+ Tue, 17 Jun 2025 23:58:42 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: jerome.forissier@linaro.org, mikko.rapeli@linaro.org,
@@ -82,19 +82,20 @@ Cc: jerome.forissier@linaro.org, mikko.rapeli@linaro.org,
  Casey Connolly <casey.connolly@linaro.org>,
  Tien Fong Chee <tien.fong.chee@altera.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Boyan Karatotev <boyan.karatotev@arm.com>,
+ Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
+ Liya Huang <1425075683@qq.com>, Boyan Karatotev <boyan.karatotev@arm.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
  =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Liya Huang <1425075683@qq.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/3] nxp: Prepare macros for KVM changes
-Date: Wed, 18 Jun 2025 09:58:12 +0300
-Message-ID: <20250618065828.1312146-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 2/3] arm: io.h: Fix io accessors for KVM
+Date: Wed, 18 Jun 2025 09:58:13 +0300
+Message-ID: <20250618065828.1312146-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250618065828.1312146-1-ilias.apalodimas@linaro.org>
 References: <20250618065828.1312146-1-ilias.apalodimas@linaro.org>
@@ -116,95 +117,306 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A following patch is replacing our IO accessors with
-do { ... } while(0) ones in order to make them usable with KVM.
+commit 2e2c2a5e72a8 ("arm: qemu: override flash accessors to use virtualizable instructions")
+explains why we can't have instructions with multiple output registers
+when running under QEMU + KVM and the instruction leads to an exception
+to the hypervisor.
 
-That leads to an error eventually looking like this:
-arch/arm/include/asm/io.h:62:9: error: expected expression before 'do'
-   62 |         do {                                            \
-      |         ^~
-arch/arm/include/asm/io.h:211:41: note: in expansion of macro '__raw_writel'
-  211 | #define out_arch(type,endian,a,v)       __raw_write##type(cpu_to_##endian(v),a)
-      |                                         ^~~~~~~~~~~
-arch/arm/include/asm/io.h:223:25: note: in expansion of macro 'out_arch'
-  223 | #define out_be32(a,v)   out_arch(l,be32,a,v)
-      |                         ^~~~~~~~
-drivers/spi/fsl_dspi.c:127:17: note: in expansion of macro 'out_be32'
-  127 |                 out_be32(addr, val) : out_le32(addr, val);
-      |                 ^~~~~~~~
+USB XHCI is such a case (MMIO) where a ldr w1, [x0], #4 is emitted for
+xhci_start() which works fine with QEMU but crashes for QEMU + KVM.
 
-So adjust the current macros and code to be compatible with the upcoming
-change.
+These instructions cannot be emulated by KVM as they do not produce
+syndrome information data that KVM can use to infer the destination
+register, the faulting address, whether it was a load or store, or
+if it's a 32 or 64 bit general-purpose register.
+As a result an external abort is injected from QEMU, via ext_dabt_pending
+to KVM and we end up throwing an exception that looks like
 
+ U-Boot 2025.07-rc4 (Jun 10 2025 - 12:00:15 +0000)
+ [...]
+ Register 8001040 NbrPorts 8
+ Starting the controller
+ "Synchronous Abort" handler, esr 0x96000010, far 0x10100040
+ elr: 000000000005b1c8 lr : 000000000005b1ac (reloc)
+ elr: 00000000476fc1c8 lr : 00000000476fc1ac
+ x0 : 0000000010100040 x1 : 0000000000000001
+ x2 : 0000000000000000 x3 : 0000000000003e80
+ x4 : 0000000000000000 x5 : 00000000477a5694
+ x6 : 0000000000000038 x7 : 000000004666f360
+ x8 : 0000000000000000 x9 : 00000000ffffffd8
+ x10: 000000000000000d x11: 0000000000000006
+ x12: 0000000046560a78 x13: 0000000046560dd0
+ x14: 00000000ffffffff x15: 000000004666eed2
+ x16: 00000000476ee2f0 x17: 0000000000000000
+ x18: 0000000046660dd0 x19: 000000004666f480
+ x20: 0000000000000000 x21: 0000000010100040
+ x22: 0000000010100000 x23: 0000000000000000
+ x24: 0000000000000000 x25: 0000000000000000
+ x26: 0000000000000000 x27: 0000000000000000
+ x28: 0000000000000000 x29: 000000004666f360
+
+ Code: d5033fbf aa1503e0 5287d003 52800002 (b8004401)
+ Resetting CPU ...
+
+There are two problems making this the default.
+- It will emit ldr + add or str + add instead of ldr/str(post increment)
+  in somne cases
+- Some platforms that depend on TPL/SPL grow in size enough so that the
+  binary doesn't fit anymore.
+
+So let's add proper I/O accessors add a Kconfig option
+to turn it off by default apart from our QEMU builds.
+
+Reported-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+Tested-by: Mikko Rapeli <mikko.rapeli@linaro.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- drivers/spi/fsl_dspi.c |  6 ++++--
- include/fsl_ifc.h      | 24 ++++++++++++------------
- 2 files changed, 16 insertions(+), 14 deletions(-)
+ arch/arm/Kconfig          |  12 +++
+ arch/arm/include/asm/io.h | 152 ++++++++++++++++++++++++++++----------
+ 2 files changed, 124 insertions(+), 40 deletions(-)
 
-diff --git a/drivers/spi/fsl_dspi.c b/drivers/spi/fsl_dspi.c
-index f2393c041f44..545561ad1169 100644
---- a/drivers/spi/fsl_dspi.c
-+++ b/drivers/spi/fsl_dspi.c
-@@ -123,8 +123,10 @@ static uint dspi_read32(uint flags, uint *addr)
- 
- static void dspi_write32(uint flags, uint *addr, uint val)
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 6ff3f2750ea8..f6430a5aaf07 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -108,6 +108,18 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+ 	  The value subtracted from CONFIG_TEXT_BASE to calculate the
+ 	  TEXT_OFFSET value written to the Linux kernel image header.
+
++config KVM_VIRT_INS
++	bool "Emit virtualizable instructions"
++	help
++	  Instructions in the ARM ISA that have multiple output registers,
++	  can't be used if the instruction leads to an exception to the hypervisor.
++	  These instructions cannot be emulated by KVM because they do not produce
++	  syndrome information data that KVM can use to infer the destination
++	  register, the faulting address, whether it was a load or store,
++	  if it's a 32 or 64 bit general-purpose register amongst other things.
++	  Use this to produce virtualizable instructions if you plan to run U-Boot
++	  with KVM.
++
+ config NVIC
+ 	bool
+
+diff --git a/arch/arm/include/asm/io.h b/arch/arm/include/asm/io.h
+index 89b1015bc4d3..85ec0e6937e8 100644
+--- a/arch/arm/include/asm/io.h
++++ b/arch/arm/include/asm/io.h
+@@ -20,23 +20,108 @@ static inline void sync(void)
  {
--	flags & DSPI_FLAG_REGMAP_ENDIAN_BIG ?
--		out_be32(addr, val) : out_le32(addr, val);
-+	if (flags & DSPI_FLAG_REGMAP_ENDIAN_BIG)
-+		out_be32(addr, val);
-+	else
-+		out_le32(addr, val);
  }
- 
- static void dspi_halt(struct fsl_dspi_priv *priv, u8 halt)
-diff --git a/include/fsl_ifc.h b/include/fsl_ifc.h
-index 3ac226879303..1c363115beb2 100644
---- a/include/fsl_ifc.h
-+++ b/include/fsl_ifc.h
-@@ -803,29 +803,29 @@ void init_final_memctl_regs(void);
- 	((struct fsl_ifc_fcm *)CFG_SYS_IFC_ADDR)
- 
- #define get_ifc_cspr_ext(i)	\
--		(ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext))
-+		ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext)
- #define get_ifc_cspr(i)		\
--		(ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr))
-+		ifc_in32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr)
- #define get_ifc_csor_ext(i)	\
--		(ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext))
-+		ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext)
- #define get_ifc_csor(i)		\
--		(ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor))
-+		ifc_in32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor)
- #define get_ifc_amask(i)	\
--		(ifc_in32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask))
-+		ifc_in32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask)
- #define get_ifc_ftim(i, j)	\
--		(ifc_in32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j]))
-+		ifc_in32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j])
- #define set_ifc_cspr_ext(i, v)	\
--		(ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext, v))
-+		ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr_ext, v)
- #define set_ifc_cspr(i, v)	\
--		(ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr, v))
-+		ifc_out32(&(IFC_FCM_BASE_ADDR)->cspr_cs[i].cspr, v)
- #define set_ifc_csor_ext(i, v)	\
--		(ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext, v))
-+		ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor_ext, v)
- #define set_ifc_csor(i, v)	\
--		(ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor, v))
-+		ifc_out32(&(IFC_FCM_BASE_ADDR)->csor_cs[i].csor, v)
- #define set_ifc_amask(i, v)	\
--		(ifc_out32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask, v))
-+		ifc_out32(&(IFC_FCM_BASE_ADDR)->amask_cs[i].amask, v)
- #define set_ifc_ftim(i, j, v)	\
--		(ifc_out32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j], v))
-+		ifc_out32(&(IFC_FCM_BASE_ADDR)->ftim_cs[i].ftim[j], v)
- 
- enum ifc_chip_sel {
- 	IFC_CS0,
--- 
+
+-/* Generic virtual read/write. */
+-#define __arch_getb(a)			(*(volatile unsigned char *)(a))
+-#define __arch_getw(a)			(*(volatile unsigned short *)(a))
+-#define __arch_getl(a)			(*(volatile unsigned int *)(a))
+-#define __arch_getq(a)			(*(volatile unsigned long long *)(a))
++#ifdef CONFIG_ARM64
++#define __W	"w"
++#else
++#define __W
++#endif
++
++#if CONFIG_IS_ENABLED(SYS_THUMB_BUILD)
++#define __R "l"
++#define __RM "=l"
++#else
++#define __R "r"
++#define __RM "=r"
++#endif
+
+-#define __arch_putb(v,a)		(*(volatile unsigned char *)(a) = (v))
+-#define __arch_putw(v,a)		(*(volatile unsigned short *)(a) = (v))
+-#define __arch_putl(v,a)		(*(volatile unsigned int *)(a) = (v))
+-#define __arch_putq(v,a)		(*(volatile unsigned long long *)(a) = (v))
++#ifdef CONFIG_KVM_VIRT_INS
++/*
++ * The __raw_writeX/__raw_readX below should be converted to static inline
++ * functions. However doing so produces a lot of compilation warnings when
++ * called with a raw address. Convert these once the callers have been fixed.
++ */
++#define __raw_writeb(val, addr)			\
++	do {					\
++		asm volatile("strb %" __W "0, [%1]"	\
++		:				\
++		: __R ((u8)(val)), __R (addr));	\
++	} while (0)
++
++#define __raw_readb(addr)				\
++	({						\
++		u32 __val;				\
++		asm volatile("ldrb %" __W "0, [%1]"		\
++		: __RM (__val)				\
++		: __R (addr));				\
++		__val;					\
++	})
++
++#define __raw_writew(val, addr)			\
++	do {					\
++		asm volatile("strh %" __W "0, [%1]"	\
++		:					\
++		: __R ((u16)(val)), __R (addr));	\
++	} while (0)
++
++#define __raw_readw(addr)				\
++	({						\
++		u32 __val;				\
++		asm volatile("ldrh %" __W "0, [%1]"		\
++		: __RM (__val)				\
++		: __R (addr));				\
++	__val;						\
++    })
++
++#define __raw_writel(val, addr)				\
++	do {						\
++		asm volatile("str %" __W "0, [%1]"		\
++		:					\
++		: __R ((u32)(val)), __R (addr));	\
++	} while (0)
++
++#define __raw_readl(addr)				\
++	({						\
++		u32 __val;				\
++		asm volatile("ldr %" __W "0, [%1]"		\
++		: __RM (__val)				\
++		: __R (addr));				\
++		__val;					\
++	})
++
++#define __raw_writeq(val, addr)				\
++	do {						\
++		asm volatile("str %0, [%1]"		\
++		:					\
++		: __R ((u64)(val)), __R (addr));	\
++	} while (0)
++
++#define __raw_readq(addr)				\
++	({						\
++		u64 __val;				\
++		asm volatile("ldr %0, [%1]"		\
++		: __RM (__val)				\
++		: __R (addr));				\
++		__val;					\
++	    })
++#else
++/* Generic virtual read/write. */
++#define __raw_readb(a)			(*(volatile unsigned char *)(a))
++#define __raw_readw(a)			(*(volatile unsigned short *)(a))
++#define __raw_readl(a)			(*(volatile unsigned int *)(a))
++#define __raw_readq(a)			(*(volatile unsigned long long *)(a))
++
++#define __raw_writeb(v, a)		(*(volatile unsigned char *)(a) = (v))
++#define __raw_writew(v, a)		(*(volatile unsigned short *)(a) = (v))
++#define __raw_writel(v, a)		(*(volatile unsigned int *)(a) = (v))
++#define __raw_writeq(v, a)		(*(volatile unsigned long long *)(a) = (v))
++#endif
+
+ static inline void __raw_writesb(unsigned long addr, const void *data,
+ 				 int bytelen)
+ {
+ 	uint8_t *buf = (uint8_t *)data;
+ 	while(bytelen--)
+-		__arch_putb(*buf++, addr);
++		__raw_writeb(*buf++, addr);
+ }
+
+ static inline void __raw_writesw(unsigned long addr, const void *data,
+@@ -44,7 +129,7 @@ static inline void __raw_writesw(unsigned long addr, const void *data,
+ {
+ 	uint16_t *buf = (uint16_t *)data;
+ 	while(wordlen--)
+-		__arch_putw(*buf++, addr);
++		__raw_writew(*buf++, addr);
+ }
+
+ static inline void __raw_writesl(unsigned long addr, const void *data,
+@@ -52,40 +137,30 @@ static inline void __raw_writesl(unsigned long addr, const void *data,
+ {
+ 	uint32_t *buf = (uint32_t *)data;
+ 	while(longlen--)
+-		__arch_putl(*buf++, addr);
++		__raw_writel(*buf++, addr);
+ }
+
+ static inline void __raw_readsb(unsigned long addr, void *data, int bytelen)
+ {
+ 	uint8_t *buf = (uint8_t *)data;
+ 	while(bytelen--)
+-		*buf++ = __arch_getb(addr);
++		*buf++ = __raw_readb(addr);
+ }
+
+ static inline void __raw_readsw(unsigned long addr, void *data, int wordlen)
+ {
+ 	uint16_t *buf = (uint16_t *)data;
+ 	while(wordlen--)
+-		*buf++ = __arch_getw(addr);
++		*buf++ = __raw_readw(addr);
+ }
+
+ static inline void __raw_readsl(unsigned long addr, void *data, int longlen)
+ {
+ 	uint32_t *buf = (uint32_t *)data;
+ 	while(longlen--)
+-		*buf++ = __arch_getl(addr);
++		*buf++ = __raw_readl(addr);
+ }
+
+-#define __raw_writeb(v,a)	__arch_putb(v,a)
+-#define __raw_writew(v,a)	__arch_putw(v,a)
+-#define __raw_writel(v,a)	__arch_putl(v,a)
+-#define __raw_writeq(v,a)	__arch_putq(v,a)
+-
+-#define __raw_readb(a)		__arch_getb(a)
+-#define __raw_readw(a)		__arch_getw(a)
+-#define __raw_readl(a)		__arch_getl(a)
+-#define __raw_readq(a)		__arch_getq(a)
+-
+ /*
+  * TODO: The kernel offers some more advanced versions of barriers, it might
+  * have some advantages to use them instead of the simple one here.
+@@ -98,15 +173,15 @@ static inline void __raw_readsl(unsigned long addr, void *data, int longlen)
+
+ #define smp_processor_id()	0
+
+-#define writeb(v,c)	({ u8  __v = v; __iowmb(); __arch_putb(__v,c); __v; })
+-#define writew(v,c)	({ u16 __v = v; __iowmb(); __arch_putw(__v,c); __v; })
+-#define writel(v,c)	({ u32 __v = v; __iowmb(); __arch_putl(__v,c); __v; })
+-#define writeq(v,c)	({ u64 __v = v; __iowmb(); __arch_putq(__v,c); __v; })
++#define writeb(v, c)	({ u8  __v = v; __iowmb(); writeb_relaxed(__v, c); __v; })
++#define writew(v, c)	({ u16 __v = v; __iowmb(); writew_relaxed(__v, c); __v; })
++#define writel(v, c)	({ u32 __v = v; __iowmb(); writel_relaxed(__v, c); __v; })
++#define writeq(v, c)	({ u64 __v = v; __iowmb(); writeq_relaxed(__v, c); __v; })
+
+-#define readb(c)	({ u8  __v = __arch_getb(c); __iormb(); __v; })
+-#define readw(c)	({ u16 __v = __arch_getw(c); __iormb(); __v; })
+-#define readl(c)	({ u32 __v = __arch_getl(c); __iormb(); __v; })
+-#define readq(c)	({ u64 __v = __arch_getq(c); __iormb(); __v; })
++#define readb(c)	({ u8  __v = readb_relaxed(c); __iormb(); __v; })
++#define readw(c)	({ u16 __v = readw_relaxed(c); __iormb(); __v; })
++#define readl(c)	({ u32 __v = readl_relaxed(c); __iormb(); __v; })
++#define readq(c)	({ u64 __v = readq_relaxed(c); __iormb(); __v; })
+
+ /*
+  * Relaxed I/O memory access primitives. These follow the Device memory
+@@ -121,13 +196,10 @@ static inline void __raw_readsl(unsigned long addr, void *data, int longlen)
+ #define readq_relaxed(c)	({ u64 __r = le64_to_cpu((__force __le64) \
+ 						__raw_readq(c)); __r; })
+
+-#define writeb_relaxed(v, c)	((void)__raw_writeb((v), (c)))
+-#define writew_relaxed(v, c)	((void)__raw_writew((__force u16) \
+-						    cpu_to_le16(v), (c)))
+-#define writel_relaxed(v, c)	((void)__raw_writel((__force u32) \
+-						    cpu_to_le32(v), (c)))
+-#define writeq_relaxed(v, c)	((void)__raw_writeq((__force u64) \
+-						    cpu_to_le64(v), (c)))
++#define writeb_relaxed(v, c)	__raw_writeb((v), (c))
++#define writew_relaxed(v, c)	__raw_writew((__force u16)cpu_to_le16(v), (c))
++#define writel_relaxed(v, c)	__raw_writel((__force u32)cpu_to_le32(v), (c))
++#define writeq_relaxed(v, c)	__raw_writeq((__force u64)cpu_to_le64(v), (c))
+
+ /*
+  * The compiler seems to be incapable of optimising constants
+--
 2.43.0
 
