@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC64AC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 18:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080C9C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 18:30:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D2D282B18;
-	Wed, 18 Jun 2025 20:05:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 281BF82B18;
+	Wed, 18 Jun 2025 20:30:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wfC06uAL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yL9h/44T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B66782C2F; Wed, 18 Jun 2025 20:05:29 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 9407682BCD; Wed, 18 Jun 2025 20:30:35 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9336182B0F
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 20:05:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 790BD82B0F
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 20:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ade5ca8bc69so1113708266b.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 11:05:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-710ffc7a051so66543237b3.0
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 11:30:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750269927; x=1750874727; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wxC6YZ6vPSFWaZ1W+jndIa1hZAkgp57Xnydm8ufAJcY=;
- b=wfC06uALuifv3ciT1xvcXaqfY7jmb0nYUtQFkEokObI2ymY6xGFam9OOkwHH2VsrD0
- LNZQva0W2R7K5PThcft8IRYH7gvdBZ6njHeCUNR3by5URh6bx2ypOBClnnp23MjbesgP
- 0AHU6YD5y2XZkuCLK8EX86uDRLDs3uuoUlY3p+zADWGyMTkCkWTRt3D+LO4MYLpo0jUn
- APH+Gx3bx9e3Y/c9F17yLebMPNG7GxD5rjW8yBdmPQUuIFE7wVpI67Ugv4YD3zEUlc7n
- efF5jEiHyvbK5VJQh1YL5XOKjWmkT9ZTKfDsQKnEV5gr+bxNYYbl3LtvLBqmVORVueI+
- bicg==
+ d=linaro.org; s=google; t=1750271432; x=1750876232; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=omw2e8xAtLP93PrFOQeCXO0KXV1aCDR/w5my6Sm0iZ4=;
+ b=yL9h/44TXzEkQeDTZ1csGWvcu7YRWg2LmZP/rzTnaOl0AGuVfAGwXM3bIfl+LBBuuK
+ /dsw38HHOWPpx1YOTiy0VCQMAcIWgryJIp6UYACtLxMkOy5Dxn/mRnFsdd0x08v0O0s5
+ +sbMZsHwG4/l4wPrmAMQ3qq0ZFT1FsvAkW2dcxCM8YRgQK1hULQ0pwolCjCSL+JTOadH
+ FqMPYzWDJ6uWn25ks6dMUidyBdf13bfDc6qqa4gVTj87N3prSjem2gflYagHG+tZ/mWL
+ i9Flm43w+6a5qyH67OPK5ShKsH3x1dAeQCC/PgCzo5BeJXFeLOcPxqOUW9qdLDUTw9N1
+ IHWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750269927; x=1750874727;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wxC6YZ6vPSFWaZ1W+jndIa1hZAkgp57Xnydm8ufAJcY=;
- b=cj13trev1UVcmXXoJPyPTSNh/ZPy+8x/XdHOT1FImWXdKBxONG1TlZ1QHD1KeiLW9S
- BmtiuCivyhNG+37ZXysGWLgR6fi5it8LiHM9pMG1FOoqgSeUtRgnoBUQYbxyL7JqvoPm
- jL9iZOSA0JMUGZoSMhDi2PjndsfUizga1g8kB/Y/ke5WrUpN2Si3R7v63jLF955U9EAv
- k0+I+sThjSAJ0zSvV5pJZjrBp89NSCa2IhC6TT1oHYEAta+ZP8T5O/NqWbb/WTQdfdVc
- 3BksWucPEBNHV2Cv27qJb3CGqaS2Czfpc/K869izNA373QWOQkpepH7pkikmTe4//ADy
- jVEQ==
+ d=1e100.net; s=20230601; t=1750271432; x=1750876232;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=omw2e8xAtLP93PrFOQeCXO0KXV1aCDR/w5my6Sm0iZ4=;
+ b=Gc3xUrE4iM3m6Y2Str4LBBp/HSPZYFujX2x2PsZkev/WirrmtpacjgDaeYAtXeQQXw
+ dO6FiE5KoXjF8esg8Rf0WyyDaB3HE9H26ypY/EcCgGI8EtbYwjG++TOcyBfA08zW/Wq4
+ ld/yR4GtndY82r1WtFT2m4GooVAURp5RR8gKgInWq/qZmmvq/mn12U4HH5e+7Feh7Cf3
+ FlZBFRrVm9H4Tt2eDakR5+Z413oFtVydjAld2K00VFtqOgprQMv96I3Ol1A9RkKXEN0a
+ 6/iEjHVM7SoJKHGSTo4FVuMLMezDkg2jglPSQ8YaYK8oICJYrX9Aj1oo13z/pV6drU7z
+ dHOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4N3ZWV8feHX2Nsx4eUgmj2x8NlOlSBfsd+2/wjvzQpLANy94EptlRguaVpV02tM2geb3MNvg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyi8HmlRwmIbOOKMlq6yCOlK0CJp15P+6QjQAqhT7CaFuAz4cv4
- 1Gy0CbKYXYBjpFd4+qv2KQ1Sm66D8MSGMu1PCJQ4IAoZ/wg9RwcChnr3iAHgITjcSJb1nUYl7V5
- 0HCwB
-X-Gm-Gg: ASbGncsgRVrA+pyxD5zFabpjxFB28rBFcWBTqON6RlBQt17Hi7APm3+wJsu/bs/Dejo
- 0+PkaUsqGdALM3e6OOyvj7hQguYJPXwrVDfRh1owOajJsMepfEYeanzB7YUN9gzzLIw53y/CLRk
- STUARY/IZw9kaXuyE9/OUEYxFSAYUYJQ+TBzxnqOvO7DEtc8cJZ9y9NWk3fhHVu9puPlKInE/+i
- tO4dDPrS/arZIJFks2H/eFnhVpjsBW9vAVoLW9mb4/J0Ol7ROMmo/Sz1OGsCdJQuh57Q5UnRbQu
- gAiF0Ahvt044KndDrRql2Q2GiJ8klksWnFyQZuIFAtBQCQcr86/WkrbixpBVtWo4BFW5wm4nTeZ
- +AME+cmCWEG9VXmi7GDA8MUfcSGngr/xpVQKrIWhVLKWnl3o+Zho=
-X-Google-Smtp-Source: AGHT+IHkgs8OK+oUejXqlQBqtbWRWWJiXOt1eFiqM/WLKUA/DoRDan97N8PhHyATWBoDZcpl0OdJNg==
-X-Received: by 2002:a17:907:e90:b0:ad5:7529:94d with SMTP id
- a640c23a62f3a-adfad59951cmr1730059966b.42.1750269926967; 
- Wed, 18 Jun 2025 11:05:26 -0700 (PDT)
-Received: from [192.168.23.225] (ip-037-024-206-101.um08.pools.vodafone-ip.de.
- [37.24.206.101]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec892b216sm1091947866b.135.2025.06.18.11.05.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Jun 2025 11:05:26 -0700 (PDT)
-Message-ID: <4b55bab1-0c40-44a6-b8be-9751b88cd977@linaro.org>
-Date: Wed, 18 Jun 2025 20:05:24 +0200
+ AJvYcCXRCZsstIwCAiOyHdYA6PyTKCDlG8euzgLhRBo5jemwl6Eo/1oIcfdTvWHzh5IbC4jKzQEKLms=@lists.denx.de
+X-Gm-Message-State: AOJu0YxmWE1xHKI46+aZbbg3b5axK0LdBRYLREZUlhKUszYBLim7OtC5
+ FpiOZHBZxEPmSm9f1QqwT9rPwyDQlwo73/6IINBJLn4stm2OV1RClbQMhoQqi02Ep+QOOidg25e
+ wMP0aPYibtkCg98/R5FLFYRklBDHFdAThUwQEUXdwIyxhrbGRCJUA
+X-Gm-Gg: ASbGnctu9oOljacJ4bEtCJ/yPdOh/XGSGK84YHnfkFB5ogKu1FSslwcP9ItX2f2Dz/k
+ 15g/XTHLqxJRSLG0/p5mdkxJQgGQRpOzXlDxgsEzJChqXjU7p6LCcHWQmFxO39wxxulLZ/3nz1i
+ eChUQPRHA2mdrkq+8/GrESAFJL20TawR0PmsG0OZhpi87y
+X-Google-Smtp-Source: AGHT+IH6domDGSbFoP4ISr2Qp1avyQobC+dfnhbphq0XvJKqRI59TDhAAn88yPKR3QIXRJR0y9/Ei2OzQXdmgOuR/xk=
+X-Received: by 2002:a05:690c:b06:b0:705:750e:37b7 with SMTP id
+ 00721157ae682-7117546315fmr221031587b3.5.1750271432140; Wed, 18 Jun 2025
+ 11:30:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 7/9] WIP: rb3gen2: describe micro-usb port
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20250616-geni-load-fw-v4-0-e7df44205505@linaro.org>
- <20250616-geni-load-fw-v4-7-e7df44205505@linaro.org>
- <aFE6HP629Ocg3Fj6@sumit-X1>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <aFE6HP629Ocg3Fj6@sumit-X1>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250618080056.1973311-1-javierm@redhat.com>
+ <20250618145016.GF6521@bill-the-cat>
+ <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
+In-Reply-To: <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 18 Jun 2025 21:29:56 +0300
+X-Gm-Features: AX0GCFsKKyoZfaMvFhOV8LFV1GDmB7lK5yGIySFB5jHmCTUSvPPDWoncmMEIxt0
+Message-ID: <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mripard@redhat.com, 
+ alexl@redhat.com, mkorpers@redhat.com, eballetb@redhat.com, 
+ mskrivan@redhat.com, Alexey Romanov <avromanov@salutedevices.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Maks Mishin <maks.mishinfz@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,63 +102,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Javier I reviewed the patches but I probably missed something.
 
+I am getting a compilation error with the selftests applied.
+#include <part_efi.h> seems to be missing.
 
-On 6/17/25 11:49, Sumit Garg wrote:
-> Hi Casey,
-> 
-> On Mon, Jun 16, 2025 at 11:44:49AM +0200, Casey Connolly wrote:
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   dts/upstream/src/arm64/qcom/qcs6490-rb3gen2.dts | 17 +++++++++++++++++
->>   1 file changed, 17 insertions(+)
-> 
-> I suppose this is an unrelated change to the patch-set and I don't think
-> this patch as it is applied upstream since the manual patch isn't
-> allowed for dts/upstream subtree. You can rather have a *-u-boot.dtsi
-> for this change.
+Thanks
 
-oops, didn't mean to include this one in the series...
+/Ilias
 
-thanks for pointing that out>
-> -Sumit
-> 
->>
->> diff --git a/dts/upstream/src/arm64/qcom/qcs6490-rb3gen2.dts b/dts/upstream/src/arm64/qcom/qcs6490-rb3gen2.dts
->> index 7a36c90ad4ec8b52f30b22b1621404857d6ef336..a9689f126cc7f94a01921fe2dc70efb83774610a 100644
->> --- a/dts/upstream/src/arm64/qcom/qcs6490-rb3gen2.dts
->> +++ b/dts/upstream/src/arm64/qcom/qcs6490-rb3gen2.dts
->> @@ -881,8 +881,25 @@
->>   
->>   	status = "okay";
->>   };
->>   
->> +&usb_2 {
->> +	status = "okay";
->> +};
->> +
->> +&usb_2_dwc3 {
->> +	dr_mode = "peripheral";
->> +	/delete-property/ usb-role-switch;
->> +};
->> +
->> +&usb_2_hsphy {
->> +	vdda-pll-supply = <&vreg_l10c_0p88>;
->> +	vdda18-supply = <&vreg_l1c_1p8>;
->> +	vdda33-supply = <&vreg_l2b_3p072>;
->> +
->> +	status = "okay";
->> +};
->> +
->>   &usb_dp_qmpphy_out {
->>   	remote-endpoint = <&redriver_phy_con_ss>;
->>   };
->>   
->>
->> -- 
->> 2.49.0
->>
-
--- 
-Casey (she/they)
-
+On Wed, 18 Jun 2025 at 18:10, Javier Martinez Canillas
+<javierm@redhat.com> wrote:
+>
+> Tom Rini <trini@konsulko.com> writes:
+>
+> Hello Tom,
+>
+> > On Wed, Jun 18, 2025 at 10:00:34AM +0200, Javier Martinez Canillas wrote:
+>
+> [...]
+>
+> >>     05: efi_selftest: Add basic partition info check to block io test
+> >>        aarch64: (for 1/1 boards) all +563.0 rodata +179.0 text +384.0
+> >>                 qemu_arm64_lwip: all +563 rodata +179 text +384
+> >>                    u-boot: add: 1/0, grow: 1/0 bytes: 384/0 (384)
+> >>                      function                                   old     new   delta
+> >>                      execute                                  36428   36796    +368
+> >>                      partition_info_guid                          -      16     +16
+> >>     (no errors to report)
+> >
+> > Thanks for digging at the size part here. I don't think that amount of
+> > growth justifies a new Kconfig option.
+> >
+>
+> On the contrary, thanks for pointing me to your script. It's really awesome.
+>
+> > --
+> > Tom
+>
+> --
+> Best regards,
+>
+> Javier Martinez Canillas
+> Core Platforms
+> Red Hat
+>
