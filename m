@@ -4,55 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 282E8C7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 09:56:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02063C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 09:59:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0D9682CC9;
-	Wed, 18 Jun 2025 11:56:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 3695282CD5;
+	Wed, 18 Jun 2025 11:59:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="Q9JS+0Ti";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T5aHGEJx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06C1882CD5; Wed, 18 Jun 2025 11:56:20 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E0E0482D17; Wed, 18 Jun 2025 11:59:25 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F56182C8D
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 11:56:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB4A382CC9
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 11:59:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 0186A260D3;
- Wed, 18 Jun 2025 11:56:18 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LoZEbL-N01Qk; Wed, 18 Jun 2025 11:56:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1750240577; bh=cIqCt3J+9EDtZNXvaR35DV66A3MJoe+NYGKguNnIcQM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=Q9JS+0TiDEQYb2SHih86p6VZ9GAryz93MelKyuSZiCD5f73v2cRPNgLb8vgWdQ0p+
- h/R4ZuxEiFEIgUoKo7caefIo7KnKaQrlaJLKW7iHpqgZ8K9Iy2rnTyQd9R4kUj4coi
- ss+Do4YH5ue+CjUMIYtnhwR3t4ddJmT8ID1j8LPfATZnFVFuqYXwLi28K++LCprroS
- wYghgQOr7GKyt9+UwbVPT2jiWdmq7hJa4xdVkqk/IrtpqGgXbxFU09GIDbHNff5Eiq
- HAX/igCj5UyL3tffFprdYW4/s24P5icYQCf0CUWT7jpJzcl0H1gcVbw9gWNY43a81I
- CaBf7z9DuPVkw==
-From: Yao Zi <ziyao@disroot.org>
-To: Tom Rini <trini@konsulko.com>, Yao Zi <ziyao@disroot.org>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>
-Cc: u-boot@lists.denx.de, Han Gao <rabenda.cn@gmail.com>,
- Han Gao <gaohan@iscas.ac.cn>
-Subject: [PATCH 3/3] riscv: cpu: th1520: Enable pinctrl by default
-Date: Wed, 18 Jun 2025 09:54:57 +0000
-Message-ID: <20250618095457.45926-4-ziyao@disroot.org>
-In-Reply-To: <20250618095457.45926-1-ziyao@disroot.org>
-References: <20250618095457.45926-1-ziyao@disroot.org>
+ spf=pass smtp.mailfrom=mikko.rapeli@linaro.org
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-553d52cb80dso301200e87.1
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 02:59:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750240763; x=1750845563; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
+ :to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TpuAQMjur9JYh90sYK2QCxLvg1bKVesXPgE7FXt9NXc=;
+ b=T5aHGEJxhmf270NmXcpjZNtYxQgLbibq/26pwazjrOmDVKKYHkvmuO9BzCfLlYBJrp
+ sbIVwz8vabtYVhrM+AO6/g7wP5ggnA91NKGf5i9tm9d4cBLEH6JB1hjkScsjcOa4PLFe
+ JuukJ3X0BPy00f/zySw9u7W40Irtkk5IfXzSejRhiMoeRVp6ewG31+K36WrTSMuzWsOd
+ iRlKI8Ym5J28IEvzg2l3VGXXXZi1/MDNRbJzV6W0Alw1SzfQ07lfZYHk7RZ5MNmX+j0O
+ Eo720Sym/Z6OKiaR30IsTupy8fAO6gN3GVSKeSSK2Q+5rhm4v/P8Y4ZpiKuA/VKZSCbZ
+ +x1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750240763; x=1750845563;
+ h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
+ :to:from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TpuAQMjur9JYh90sYK2QCxLvg1bKVesXPgE7FXt9NXc=;
+ b=bi/qMmO5zTo2FyVVdUPyLmb+qSqSJNweF7I7dOUqpQbYkPt/Iu9zAdg9vdbUrjUa8W
+ tBspCTbG/MCA6dGZcu87uxpg5QtdBkId1/6ewvvDap2abTEJxpvg7w75Z+7Lv8q4D0Cr
+ gVDb86rmNtwctZjGvhgdKIEhiJ0jlbZOd8IH2N+UaxrqU+bKYqMKDZ4+hVRRRJsnvRMK
+ XVHFbwLRsnYt8NwsVr+1C6+9oi1S/BgJyE3bl4bOnzmwVY/TOU9T0ATY4X0EXw8+pBmN
+ KkILUpTFUNkVO/WHKKM9HryE9bzCfl1mn8kymWgZKisMe/f0BT+YArbOjr1mdRFCKXoB
+ rq8A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVnTh2AocwY1eMw/saEsLV5SnqtgC+pXW9uJCPMua+ZzQ4e/061ITj5HkVtXf1YNyoSDwclHnQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwuO/QXj/Pnt6LXnkUdEXurIzf16QKckq7fH5eNY33DRac5tnmA
+ WlpDQAtRUABpg7Pro8ip0Pihy6xGXC4cJriL4clPWY45VIy5u015Xk+pYKhWsswKbBk=
+X-Gm-Gg: ASbGncvP0OeMzAqghinJiLrF88CkO3uOUA+gl1GvpsZx/puJaoc3drq46Z2BlC7z52W
+ W7Gv20M048CgahA+bATsjxLqBSP70dte9eGfgo2t/eQVyTCcBKdtlU7NZuVxTEx/00SUxHFKl0t
+ gAVYjRowOoWdQbxz1vsT1hXpNF+NZxVTIaR89XcyGkbI8Mn8ZFBFBVaIXKOaZGWWWD7N3B4kNBP
+ Rc3Q1qm6Kf8udEXNi5QwMrDUW2t4cpOtzMHjICbdLZrzsn2Bqr9iiWUg+rw/rEpK978+7GfOzog
+ 0MGzAiAmVibzmc2XCuHytWaMFvMZO4jMWr+qv3OHXTMTwxDk+wXzU8uyGnSOu4m1xUPfPV4ir1d
+ 7oYLbR5YLHCHPOyMtwWQ=
+X-Google-Smtp-Source: AGHT+IE5t+LXdp3I/Q/v2WG/M8B5d4CuTzgVK2i8vVhBaFVWX3Gv4XT++3yg+0n4NnELNzEBT/mV6w==
+X-Received: by 2002:a05:6512:2215:b0:553:2438:8d16 with SMTP id
+ 2adb3069b0e04-553d393f333mr564097e87.20.1750240762959; 
+ Wed, 18 Jun 2025 02:59:22 -0700 (PDT)
+Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-553ac135c7csm2216134e87.64.2025.06.18.02.59.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Jun 2025 02:59:22 -0700 (PDT)
+Date: Wed, 18 Jun 2025 12:59:20 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: trini@konsulko.com, jerome.forissier@linaro.org,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Simon Glass <sjg@chromium.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Liya Huang <1425075683@qq.com>, Boyan Karatotev <boyan.karatotev@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH v2 0/3] Fix io accessors for KVM
+Message-ID: <aFKN-N8RhWsBOhWp@nuoska>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250618065828.1312146-4-ilias.apalodimas@linaro.org>
+ <20250618065828.1312146-3-ilias.apalodimas@linaro.org>
+ <20250618065828.1312146-2-ilias.apalodimas@linaro.org>
+ <20250618065828.1312146-1-ilias.apalodimas@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,36 +117,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select PINCTRL_TH1520 in CPU Kconfig entry and update defconfig for
-existing TH1520-based boards to ensure PINCTRL is enabled.
+Hi,
 
-Signed-off-by: Yao Zi <ziyao@disroot.org>
----
- arch/riscv/cpu/th1520/Kconfig  | 1 +
- configs/th1520_lpi4a_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+Tested on yocto poky master branch using u-boot master branch
+commit 17012e3068d047ad71460f039eeb0c3be63f82a0 and these
+patches. qemu KVM boot on aarch64 works again with USB devices
+enabled in qemu system.
 
-diff --git a/arch/riscv/cpu/th1520/Kconfig b/arch/riscv/cpu/th1520/Kconfig
-index 4d44191bd22..c73462c04b8 100644
---- a/arch/riscv/cpu/th1520/Kconfig
-+++ b/arch/riscv/cpu/th1520/Kconfig
-@@ -11,6 +11,7 @@ config THEAD_TH1520
- 	select BINMAN if SPL
- 	select SYS_CACHE_THEAD_CMO
- 	select CLK_THEAD
-+	select PINCTRL_TH1520
- 	imply CPU
- 	imply CPU_RISCV
- 	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
-diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
-index 5734005199b..025250e56af 100644
---- a/configs/th1520_lpi4a_defconfig
-+++ b/configs/th1520_lpi4a_defconfig
-@@ -105,3 +105,4 @@ CONFIG_ZLIB_UNCOMPRESS=y
- CONFIG_BZIP2=y
- CONFIG_ZSTD=y
- CONFIG_LIB_RATIONAL=y
-+CONFIG_PINCTRL=y
--- 
-2.49.0
+Tested-by: Mikko Rapeli <mikko.rapeli@linaro.org>
 
+Cheers,
+
+-Mikko
