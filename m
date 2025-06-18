@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69811C7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 20:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4900C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 20:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E934082C2F;
-	Wed, 18 Jun 2025 22:01:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21EBD82C2F;
+	Wed, 18 Jun 2025 22:07:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dCBOook+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LrYEGeu3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0249882C55; Wed, 18 Jun 2025 22:01:21 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id A497E82C55; Wed, 18 Jun 2025 22:07:52 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DE6082BCD
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 22:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88F8C82BCD
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 22:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-311bd8ce7e4so6313283a91.3
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 13:01:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-710bbd7a9e2so791047b3.0
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 13:07:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750276877; x=1750881677; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750277269; x=1750882069; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FJfKFLhT9b0C1z/8BeV/ryNRhP5WVt3CLYeqXDC89uY=;
- b=dCBOook+IZGxAygoDXfaj9XQsKmKGlue/eYT9vP5x5WyTmrYuSDGrV5fcQDppYkgrA
- Dg/I8ItUQ/jLx+0l836VFgfGO55ulWhnD06diTAW8NFJrg5asGe/D6TbQ6bPLydpgjLh
- cbKu+AYHl5exhWCHRMeP95aSjzPAYxezaX6zooG7PImjgk+5WK6C9XVThSNvZ0XSh3hM
- DtelD0WEDIN3Vd+6+/QoY7/LigcXddyYrmWwkUNB96xe2avk/1cYoIAgOoxrAQm0VLQt
- 19yjmXCH7jYBq/6rx3Wd8U9b2hNsT/gXv2ZatA07BMAW3MjkCOzbrCJBYgjXwyWO6YDh
- J+Ew==
+ bh=IfFd5QUmIGkT8nciCQ9dP+88P5BuMubWNcwn9SZv+5Q=;
+ b=LrYEGeu3nff3p6L4R7/iZy0vd6Tb1yrZVcQC4criqpAjiik6AqI7+8iElDe79fYrKo
+ UegNKoSAJ3Xvt/clRpYmcZ8knRTbbl0L/LUzqx8bceThnlx0BlxPJeKP/zjMYK3PsQyp
+ F8DMFCabbbaGKDZAlxgvmgXb6AuXbZUZtOvtEceh6q9G5C06PuxU2+NmFh8LlgIUr0Dz
+ 3U7WrioWfRxK+y4bWvat8zagXld/gbHnZgDcqIUNbHQqa6YmceU5sJM3vvTBE/klay/U
+ Ysu2lI0JhNsEmBLpZoFdswsaUg7mPk428PslAauja4xNySGsDLbja0HjyauJcO1qFCLP
+ yrpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750276877; x=1750881677;
+ d=1e100.net; s=20230601; t=1750277269; x=1750882069;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FJfKFLhT9b0C1z/8BeV/ryNRhP5WVt3CLYeqXDC89uY=;
- b=JSnVUXio/+kA9j35cgsWFKtALXdE46gNPfTTSGcNQAopWj5+OvvI5qxhuEmYL93jFo
- 6fqeyCp2f6gHUzOKZSTmq8CRPMFyqFQ2q7BePlhfqJw7s+hoKAqoz7xeeTl7z1GJnllm
- z7Ac7M4YY2EWTrHLuQhXIzqwwjOlFBEYnU9Ry2/IqAC87EphkEcSjdbJrsLV87e5TH9a
- FRrGkEBovhX0Qxrua2erlA4z7ERbnuDFIPTPfcAjwKtiwtr4TtBCrUmZsB4+0IQtrXq+
- xWgcw/kBT4ue5qdU6LoOmFBQh/1NofHlY466aN6+lwQlo1y5LEgAmTXF/0DivPA6sqQ9
- VyLg==
-X-Gm-Message-State: AOJu0YxSAF9TtbgH3BuS+N2pIQCHHJtyASOoiT86eiNiBMg4tuB1Sdml
- P+ad20qCqvYTJs3UkYmt3WveH704nm6/rrycr90rPc4sZsMe2MmOfpyWOhU4+4E+FGZZB3Im6Re
- METQ1wiLq4DQpHfXZxV4n/EhJPGcopRYRvpdcNT7pbw==
-X-Gm-Gg: ASbGncv4n5ISQB8Ig6w0hR7cKcw181tC6EBTkxbkiZrYDBAdQNRCyBxzCRKjeqWnpfC
- opNeshgs95jWBE4boLMRO8evhUHh2ivwCSFow7Y682t9kyRf9ruqUtN4x8Rk8tWcwYbpuzlDeTz
- 2jrs64v/gXT35rFf7uHVnWxia0NLukHJjRn3IB00kyQTLc
-X-Google-Smtp-Source: AGHT+IF5IEnYLnPD8csAB0xv8fCbPU0v9M5hnaEhSqwGOt8RECmuzqR0fCnofzEB0fjG+92G34CERTnlHIKSh9AAa3g=
-X-Received: by 2002:a17:90a:d60b:b0:313:283e:e87c with SMTP id
- 98e67ed59e1d1-313f1c77731mr25836446a91.3.1750276876962; Wed, 18 Jun 2025
- 13:01:16 -0700 (PDT)
+ bh=IfFd5QUmIGkT8nciCQ9dP+88P5BuMubWNcwn9SZv+5Q=;
+ b=XX9CG1zAhW1ar4dtM0jW4Uj+dELH4UQOFuUiPDlEcAPRqiLwElRGQ1XBOycg5U5dNW
+ D0bVr4Ph9dZrPcHJq1AQ/BNYoHqdFlUNAfCRSEi+F3pUWmnH0QCu2EkUdg+XmYOT5XQx
+ XlXJoLzeraF7wENffJ6Vr81KIAwdeiNR9QJB8V+JZxX0XvLsnFkCoStWaC9QtH21Z8ds
+ uhi0Ngo/h2elDWY3mLU7udoLaqhtOzaSSqd0yz9fwZlFOWfAfRzm6i6ABaEtKP7IMf+C
+ 8bF2OFY7r5vAN+qbFORpg9BgNcEf3rQu+FnV3sD4aFOQpJZevRThqsHcjUXC41/E7Vld
+ Z4MQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPKXUWxnm1WFSQW+/C8YmkD/Tj8L7DgOx2vWnOrQthNzJw+5tYWEazQ7szANyS4vS9hLeGBPg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOp3OjpYzA29weXrCOtbriOpsyrSzaCo3ND9GWOwRdEgZjTXXF
+ rO/1QeniwZckVtId9JZMcVL2v0elpz8r52yGzQswzJXv8hQi9UCwX50OcbJwuYlxCqp6t5Oq5Jc
+ jBDeBeTc/63gJksGtXWKR9eNtNFHRLRf6tsex1Xr7UQ==
+X-Gm-Gg: ASbGncvPzHJZDXSavcWbb7BJVCDyxZEF8p33XxwUuoFOl8Q27CXeDdwwcuvg3Kp9pob
+ 0mTJwZRSXM8OAqE5j3X2/hfGX6w6uy+phvOdk3PwEJfLPkIsEziIbmI+PsRXhrAUUMCTsMQ9LRd
+ mxelEFnXgCIH+Tx7JdfzhihGVocZe+ylQ7mocofPkWJDA+
+X-Google-Smtp-Source: AGHT+IF3BOV531omEviD1x0Yl/kHwhb/3ap0xAPxwJHmyE32MiLFdDk9GDQxvRcqbW1bjBvYd2n8jIeTNWy7rNt64ZQ=
+X-Received: by 2002:a05:690c:578f:b0:711:a54e:8e11 with SMTP id
+ 00721157ae682-711a54e99bcmr83641217b3.24.1750277269404; Wed, 18 Jun 2025
+ 13:07:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250618145930.2652304-1-raymond.mao@linaro.org>
- <20250618145930.2652304-5-raymond.mao@linaro.org>
- <20250618174011.GI6521@bill-the-cat>
-In-Reply-To: <20250618174011.GI6521@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 18 Jun 2025 16:01:02 -0400
-X-Gm-Features: AX0GCFvvfVc_m6Z4aY7PE85sfYzyHjrhfIj2zWyqmwOJk_qfCJ9dmabW437a-Oo
-Message-ID: <CAEfUkUJnUf2m_Dv=4HM79qqDzQRnhsUU4mKFiprp8cRqHoJogQ@mail.gmail.com>
-Subject: Re: [PATCH 4/6] bloblist: expose 'expand_by' as an output argument
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Matthias Brugger <mbrugger@suse.com>,
+References: <20250618080056.1973311-1-javierm@redhat.com>
+ <20250618145016.GF6521@bill-the-cat>
+ <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
+ <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
+ <8734bw4yqe.fsf@minerva.mail-host-address-is-not-set>
+In-Reply-To: <8734bw4yqe.fsf@minerva.mail-host-address-is-not-set>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 18 Jun 2025 23:07:13 +0300
+X-Gm-Features: AX0GCFtt0tqKyHmiyuK6aXZmM9b6G3PAteMuPn7gjq__xL1mFILI9bK3AD4lHBA
+Message-ID: <CAC_iWjJexudN_ZHB0TS5xnFLYeL8_99yWM_kqPgDR==1dB_2xg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mripard@redhat.com, 
+ alexl@redhat.com, mkorpers@redhat.com, eballetb@redhat.com, 
+ mskrivan@redhat.com, Alexey Romanov <avromanov@salutedevices.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Maks Mishin <maks.mishinfz@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,63 +104,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Javier no worries
 
-On Wed, 18 Jun 2025 at 13:40, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 18 Jun 2025 at 22:49, Javier Martinez Canillas
+<javierm@redhat.com> wrote:
 >
-> On Wed, Jun 18, 2025 at 07:59:26AM -0700, Raymond Mao wrote:
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
 >
-> > Some advanced usecases of bloblist needs to know the actual bytes
-> > expanded or shrunk after blob resizing.
-> > For example, to support applying DT overlay from bloblist, firstly
-> > the FDT blob needs to be resized for potential size increasing after
-> > applying overlay. If the DT overlay blob is one of the following blobs
-> > of the FDT, its address will be shifted after FDT blob resizing.
-> > Thus, returning 'expand_by' helps the caller to get the shifted data
-> > pointer when it comes to get the overlay for applying.
+> Hello Ilias,
+>
+> > Javier I reviewed the patches but I probably missed something.
 > >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> [snip]
-> > @@ -337,6 +338,7 @@ void *bloblist_ensure(uint tag, int size);
-> >   */
-> >  int bloblist_ensure_size_ret(uint tag, int *sizep, void **blobp);
+> > I am getting a compilation error with the selftests applied.
+> > #include <part_efi.h> seems to be missing.
 > >
-> > +#if CONFIG_IS_ENABLED(BLOBLIST)
-> >  /**
-> >   * bloblist_resize() - resize a blob
-> >   *
-> > @@ -345,10 +347,17 @@ int bloblist_ensure_size_ret(uint tag, int *sizep, void **blobp);
-> >   *
-> >   * @tag:     Tag to add (enum bloblist_tag_t)
-> >   * @new_size:        New size of the blob (>0 to expand, <0 to contract)
-> > + * @expand_by:       Number of bytes actually expanded by (-ve to contract)
-> >   * Return: 0 if OK, -ENOSPC if the bloblist does not have enough space, -ENOENT
-> >   * if the tag is not found
-> >   */
-> > -int bloblist_resize(uint tag, int new_size);
-> > +int bloblist_resize(uint tag, int new_size, int *expand_by);
-> > +#else
-> > +static inline int bloblist_resize(uint tag, int new_size, int *expand_by)
-> > +{
-> > +     return -EPERM;
-> > +}
-> > +#endif
 >
-> Do we really need to be doing this if/else in the header? What's failing
-> otherwise, and can we not guard that with:
-> if (IS_ENABLED(CONFIG_BLOBLIST)) {
->   ..
-> }
-> in the code?
+> Sorry about that. What's the command you are using to build so that I can
+> replicate the issue. I tested with the following build command:
 >
-This function is needed to be called in fdtdec, if it is not guarded
-in the header file, we have to guard it from all its callers to avoid
-linker error when BLOBLIST is not selected (In the future, there might
-be more than one caller).
+> make qemu-x86_64_defconfig && make -j8
 
-Regards,
-Raymond
+Yea that's ok. The problem appears only if you test the patches
+against -next. There are big changes in the kbuild system.
+AFAICT it's only that include missing to make -next happy.
+
+Cheers
+/Ilias
 
 
+>
+> > Thanks
+> >
+> > /Ilias
+> >
+>
 > --
-> Tom
+> Best regards,
+>
+> Javier Martinez Canillas
+> Core Platforms
+> Red Hat
+>
