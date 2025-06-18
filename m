@@ -4,96 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C24ACC7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:46:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DABBC7115B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99FA182EA2;
-	Wed, 18 Jun 2025 16:45:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fairphone.com
+	by phobos.denx.de (Postfix) with ESMTP id C6F0682D4A;
+	Wed, 18 Jun 2025 16:50:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="TUkUPT9J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BUVcxs6r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C39882BCD; Wed, 18 Jun 2025 16:25:36 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id ECC2682D4A; Wed, 18 Jun 2025 16:50:23 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0296482C55
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:25:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2554082D32
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:50:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=fairphone.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-607c5715ef2so11448903a12.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:25:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-73a45bb2ac6so2552830a34.0
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1750256733; x=1750861533; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1B7KrfbYFhLcZW/1eVr9ocl7isAfLPKWL3pwWUOSRsA=;
- b=TUkUPT9Jm+Yvdsnwz/IxvOpHhKV3x0YWaKqlGaiErDSNsUN/09UkNTGAlNl2uO5b7H
- hJNp53x+2ZLDzvubBg8Hsqlq8sEQZFPS5PSAGN/1KK7Yx8sB4oGrsvSfalD8rAff2GPb
- oiFbWJKv0oPXztqmCQ22HQiBezr/t8x6mEp0nPXljYohLCZkRR6v8xCndWRFyHCkdeYF
- bFPKNZo6aqo2TlTHNFLIJ2PSi2g1W0tf91Qov8q2dC8pzRCODvxPhyCmG6oqb7ZR+yZg
- VKCF2GnTB0ngdZkv7H5tC1UoqNo08s+I4trTpd3gEvK5ZlUaSuSBi2pnnZgAkI8sRwvv
- iW5Q==
+ d=konsulko.com; s=google; t=1750258220; x=1750863020; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HvqOtCqiXHeKQalzoEX0IqTtTN+wUmnASMzpRMIR3Kg=;
+ b=BUVcxs6rr2AaaLzHXj1rPLyOm3Xx7JecGnfQJ3jWHBxKptDN1GWkaZzLcm3zigJMKc
+ cXsr1zBU4PlDZeiDnqn3VFwMpsbDw/wxDmTSF6C2VFV85eZpUXniF7ciAp2eDzw9XxLZ
+ ZRQc9RC24nJ6+BTjOwdOLMz8wmiE8obBHpPE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750256733; x=1750861533;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1B7KrfbYFhLcZW/1eVr9ocl7isAfLPKWL3pwWUOSRsA=;
- b=SQ+Iul1IaHjZUx8NbLn54FKpMrgwziTCAajuK0LEi0+sLBEIkpaQwnKjTYv+4QrtO5
- 58ivIhZwsf7GYdXGwwObUv2/AzIH0yJgK/NNQP7gZA2yzJXvelXZK1jK4ossY0btAFcC
- tqijoy9ZR7T31Or/NV0QI9u6PmUpWjY3ykWe+V6lXcfu4V0TKau6yBPbU/IZL8bd5HFq
- v2IntyiV7VJfaIDEcBi+N7No1kGizxrQyz7gdCCRR7yzPTiHILMOlNF5Sgm0I7UfVZ87
- v8vYpE8ujY2g92/hFuo0Z8u9O65OZ8Qiq1H2BLweAv0RG93VPCiG3Vu/+oqK9awzJrqL
- l27Q==
-X-Gm-Message-State: AOJu0YwltcAWhppZ0y6MFWSRyBxgheFXO3N/1zeOrdlxiXei06fRHYAS
- xjqEBTXevdupHB/nqP2sX4aJ8jiN4QlQfKOmkOwFYU66JJKMJ68AsIYGeibh28CgNA0=
-X-Gm-Gg: ASbGncto2WMWIm9O04ouonJwkaqoox5B0K+UIftpftcKrBSpIXdyHgdhTdZmZ0jyAY7
- eWDrWGiSZlMXqY9/dzmS6FPd4hFcV1SatgiascNDjCLJngupaHbdT6JD5t0t5XQVYXzWeXVh3N1
- 4hVkUYL7Ek27L4uqpzKWmXJTAXge5lBpZjEY1qomdUdE/vTsdbfGrZKX4BE5FxXrenGR6T3f88T
- 7qHWbIFRwo21fDfnTVmyrO/wlUqM6ZL5xvntwTrXNN5eSeMO094CUkuhLkUwGHm9PfluQQEI5is
- FY+xL9Roggnjt8SY5N1nC/11P46hNwGPmwCU4qRtsKiWeCklYYokJI5J4al10ZistmKPEbvolzs
- ALp0Qi/e34gXcpAsavTaqTPfWgiGKE7NN
-X-Google-Smtp-Source: AGHT+IGLU2OgSSexu6ebFyErj2n1H/ReUg3bSDqrIYIOeHg0A7FhlZ2MGBqefwThRatr8hBGF8WUxQ==
-X-Received: by 2002:a17:907:6010:b0:adf:d157:4331 with SMTP id
- a640c23a62f3a-adfd1574436mr930480366b.44.1750256733416; 
- Wed, 18 Jun 2025 07:25:33 -0700 (PDT)
-Received: from otso.local (144-178-202-138.static.ef-service.nl.
- [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec8159e19sm1056733866b.4.2025.06.18.07.25.33
+ d=1e100.net; s=20230601; t=1750258220; x=1750863020;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HvqOtCqiXHeKQalzoEX0IqTtTN+wUmnASMzpRMIR3Kg=;
+ b=uzBzhZE+AtBKOGXaS4xtNwQlswsoo1egJYuErlmT7/bW2rodZ3ArG85M3xu4+ObvbO
+ 8th/Oost1wct4XRBna0+JmxRpM+8+bFGoHiYy1KERuxFIFptBiqZ5v+jG/j0R3G7zsVt
+ szaBb+1rxCqHXQhUk/JevrK72lBTrc8VFXA3Cos3rd0LGC5z82xxM/WvGPl4zbdVb7hu
+ OSeGlqP6wPvuYhe8sNoUPoMd6BPJxthu+4NRy5x9m616T/hDp9kgPQdJXYr8mmkaqiLe
+ K2BFurQD4OigT85c2SOdqDFDsh1pahpGyXebbeP0vJWHwsRNsTKGgCwPIQMLTJSFzLDm
+ ppMw==
+X-Gm-Message-State: AOJu0Yw7FlB6nXNgIbJru8ZOvDinSy0v0AQcxy7OtgqOPEIPo9ZProjn
+ raJLGsd9PmI2cm6lmzysFdtDwNZxjz5aNFiEEXmTdTzTGqM4AEW1YKvIceO7U13FK7E=
+X-Gm-Gg: ASbGnctnuGhz12ySBlpAZZemR/e94R4gKSK5WM3J+7ggJf0Q32n5l1OwqRXzerZnYip
+ teATJkiHRuijPgPHhggkM7pH9iMh4q+uVVClizgwKr8MuSYyv2SW+wzdAw/kc6vhJDHPCM9qMFm
+ VBgZfi8EHYbiTOc7R+C8o2mHCurtN2eZYKaF+vqyuS2PceFYE84Pv6Jr1KGw5L9oNsapMxvvAeO
+ Wvr15sFSi/FWBkgy4Xh7V6CaJSIGiWq6C0TYyXgHw4vQPSTH8f0x79MoAu+7MuiXGsJkNjLATaB
+ w099sZbM3b96ogB5mGLEj5cRQIEI637tEZ0DyfL+O4Ko+jAteiLJiFKonAizc9dqXrvf173mxhx
+ 3Cshuvs5JI7jgAg4/EEr1qrE=
+X-Google-Smtp-Source: AGHT+IFelI3/K7dc5Yp3KgVB44R0FU9MaXXVJPVgPuZJ98buXeYRdL8sNZQFwyq9RQes0/frqFszMQ==
+X-Received: by 2002:a05:6871:14f:b0:2d4:e101:13dd with SMTP id
+ 586e51a60fabf-2eaf082785cmr9658556fac.1.1750258219732; 
+ Wed, 18 Jun 2025 07:50:19 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2eab8edbd91sm2783075fac.41.2025.06.18.07.50.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 07:25:33 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Wed, 18 Jun 2025 16:25:24 +0200
-Subject: [PATCH 8/8] board/qualcomm: add debug config fragment for SM6350
+ Wed, 18 Jun 2025 07:50:18 -0700 (PDT)
+Date: Wed, 18 Jun 2025 08:50:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ mripard@redhat.com, alexl@redhat.com, mkorpers@redhat.com,
+ eballetb@redhat.com, mskrivan@redhat.com,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Maks Mishin <maks.mishinfz@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
+Message-ID: <20250618145016.GF6521@bill-the-cat>
+References: <20250618080056.1973311-1-javierm@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250618-sm6350-bringup-v1-8-3cc22aab7a7a@fairphone.com>
-References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
-In-Reply-To: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
-To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Luca Weiss <luca.weiss@fairphone.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1750256728; l=638;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=n0iu5cNz2EgXLiQzCdkEJMBcpEgn8jWB8pMFxZFdMJA=;
- b=sdUilZ8m8J1AvGIuz33uJhP1kbHdd212u8UN72mbGfhhii8bQafkKp/QfQT3i9TcYsdof5wTb
- RP16Y5GVqidD/XArDOJWKcFd+XWkNY4JJcP0d8J34CGW6tnRo9uPLvR
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
-X-Mailman-Approved-At: Wed, 18 Jun 2025 16:45:31 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pFQ30dL8mpEd2a/O"
+Content-Disposition: inline
+In-Reply-To: <20250618080056.1973311-1-javierm@redhat.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,25 +105,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a fragment similar to others to enable earlycon.
 
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
----
- board/qualcomm/debug-sm6350.config | 5 +++++
- 1 file changed, 5 insertions(+)
+--pFQ30dL8mpEd2a/O
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/board/qualcomm/debug-sm6350.config b/board/qualcomm/debug-sm6350.config
-new file mode 100644
-index 0000000000000000000000000000000000000000..1379ddeac93f1beb59bdbff4ae9a90b4f0a0af2a
---- /dev/null
-+++ b/board/qualcomm/debug-sm6350.config
-@@ -0,0 +1,5 @@
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x98c000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=14745600
+On Wed, Jun 18, 2025 at 10:00:34AM +0200, Javier Martinez Canillas wrote:
+> This patch series implements support for the EFI_PARTITION_INFO_PROTOCOL,
+> to provide cached partition information for GPT partition types.
+>=20
+> The EFI specification mentions that the protocol can understand legacy MBR
+> partition types, but that's for backward compatibility and not implemented
+> by this series. It can be added as a follow-up if needed, to make it fully
+> compliant with the spec.
+>=20
+> Patch #1 moves the logic to get a GPT partition table entry to a helper
+> part_get_gpt_pte() function.
+>=20
+> Patch #2 exposes that helper function to be used by the efi_loader.
+>=20
+> Patch #3 implements the actual protocol support using the mentioned helper
+> to get the GPT partitions table entries.
+>=20
+> Patch #4 extends the existing block io EFI selftest to also check for some
+> cached data provided by the partition info protocol.
+>=20
+> This is a v2 of the series, the first version can be found here:
+>=20
+> https://lists.denx.de/pipermail/u-boot/2025-June/592237.html
+>=20
+> The EFI_PARTITION_INFO_PROTOCOL implementation is added unconditionally,
+> because the u-boot-size-test.sh reports the code increase is negligible:
+>=20
+>     ./u-boot-size-test.sh qemu_arm64_lwip --all
+>     ...
+>     01: Merge tag 'u-boot-dfu-20250616' of https://source.denx.de/u-boot/=
+custodians/u-boot-dfu
+>     02: disk: efi: Move logic to get a GPT entry into a helper function
+>     03: disk: efi: expose the part_get_gpt_pte() helper function
+>     04: efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL support
+>     05: efi_selftest: Add basic partition info check to block io test
+>         5    0    0 /5              qemu_arm64_lwip
+>     Completed: 5 total built, 5 newly), duration 0:01:32, rate 0.05
+>     /tmp/qemu_arm64_lwip/add-efi-part-info-proto-v2/boards.cfg is up to d=
+ate. Nothing to do.
+>     Summary of 5 commits for 1 boards (1 thread, 8 jobs per thread)
+>     01: Merge tag 'u-boot-dfu-20250616' of https://source.denx.de/u-boot/=
+custodians/u-boot-dfu
+>     02: disk: efi: Move logic to get a GPT entry into a helper function
+>        aarch64: (for 1/1 boards) all -64.0 text -64.0
+>                 qemu_arm64_lwip: all -64 text -64
+>                    u-boot: add: 0/0, grow: 0/-1 bytes: 0/-72 (-72)
+>                      function                                   old     n=
+ew   delta
+>                      part_get_info_efi                          468     3=
+96     -72
+>     03: disk: efi: expose the part_get_gpt_pte() helper function
+>        aarch64: (for 1/1 boards) all +32.0 text +32.0
+>                 qemu_arm64_lwip: all +32 text +32
+>                    u-boot: add: 1/0, grow: 0/-1 bytes: 200/-164 (36)
+>                      function                                   old     n=
+ew   delta
+>                      part_get_gpt_pte                             -     2=
+00    +200
+>                      part_get_info_efi                          396     2=
+32    -164
+>     04: efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL support
+>        aarch64: (for 1/1 boards) all +144.0 rodata +16.0 text +128.0
+>                 qemu_arm64_lwip: all +144 rodata +16 text +128
+>                    u-boot: add: 0/0, grow: 1/0 bytes: 148/0 (148)
+>                      function                                   old     n=
+ew   delta
+>                      static.efi_disk_add_dev                    636     7=
+84    +148
+>     05: efi_selftest: Add basic partition info check to block io test
+>        aarch64: (for 1/1 boards) all +563.0 rodata +179.0 text +384.0
+>                 qemu_arm64_lwip: all +563 rodata +179 text +384
+>                    u-boot: add: 1/0, grow: 1/0 bytes: 384/0 (384)
+>                      function                                   old     n=
+ew   delta
+>                      execute                                  36428   367=
+96    +368
+>                      partition_info_guid                          -      =
+16     +16
+>     (no errors to report)
 
--- 
-2.50.0
+Thanks for digging at the size part here. I don't think that amount of
+growth justifies a new Kconfig option.
 
+--=20
+Tom
+
+--pFQ30dL8mpEd2a/O
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhS0iQACgkQFHw5/5Y0
+tyx5IQv/c/fHi8sI+7FF8fE1Z9y+QtE6+hodafTWKh2+ynXoIVS5rnX/g2A7niLC
+wuMzSaFzPO22xvAq1z3trAcIYjLr1XNfLAT0SY/BLxhTiCvYVJMULYMZDSXbF034
+qxfDQhsACncfkbDrytfaEy+yW8rULiWoLwLTu94zt7ahwYrsBloicYJTCGNoe3RR
+Lubc1Xjv+XPoGaG25IJEPPptfLnQtgJARI2DRDlH/elJerAp3ef6EBwLWLkFuyri
+ytYjL9PNqm10wCwGLOapgQk9v9khUHx56G0TRlCXsupZibRlN3YH7ZnpMRF+uweP
+Ew4QGLVp9Ch4Hdmrpmg4hFavTWMwjowHPhqYAW1SwmZoWdqtk4bH1BSXsP29o4X6
+f35G/ieEanWiSHGsp6ymZYqZYJQhJDi2e0oRUaLWU+7fGMWmXmR6sGZ8AXd/c77F
+gRxN84CAAJGSgZt9mDznH3ld/6BcMeYS8yZuv/s/NnQ5NQQvjfuK/INHw4sPicWh
+2w5zf7nY
+=BZpb
+-----END PGP SIGNATURE-----
+
+--pFQ30dL8mpEd2a/O--
