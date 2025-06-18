@@ -4,96 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC91C7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 13:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8460CC71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 13:51:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F34282CFA;
-	Wed, 18 Jun 2025 15:50:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fairphone.com
+	by phobos.denx.de (Postfix) with ESMTP id 1337580E9A;
+	Wed, 18 Jun 2025 15:51:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="HLB4wWtJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HIujQEM+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52E3482BCD; Wed, 18 Jun 2025 13:11:27 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0829582B0F
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 13:11:24 +0200 (CEST)
+ id 3BC6D82CF4; Wed, 18 Jun 2025 15:51:51 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 78AD68006D
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 15:51:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=fairphone.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-607c2b96b29so13300948a12.1
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 04:11:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1750245084; x=1750849884; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=h8KV4Ldq7Q4VfopwhQQAZEUQf1mYlRVOGVGvwY767cM=;
- b=HLB4wWtJwM6r4Mu99E0WsHy10oJx26mVAbyySQMjNos0P9e8etl+BTsIXwLsunMojx
- kIpAykZj003P463ui+DXl7Ub8zTDdzcZSRsxB+uask+nJRTp3N9dus12pPJ/GcxBxFam
- mnlxjkruVGGRdG8a6OklZ9RoBLvEsEGverhPwjKRalFjPd/B4gq6Je0LbFFDrWh4X69v
- MkPYMLBivokQtWGRlo0Eiq8KLQ0Zn72l7XpejmQ/UR///udDF2RQYIwvFxEpcbkTlqoB
- JDlT4t36asD0petDNES7U5FLknE4TcmgYUWprh/YrSBXPEs0U6HDXgXAF9IaEDgHsn81
- VZTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750245084; x=1750849884;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=h8KV4Ldq7Q4VfopwhQQAZEUQf1mYlRVOGVGvwY767cM=;
- b=ivFLJvYb7/oBGWePNIpHjiC8oVRKhuPuT7XjZZgX3izPrM3sTpmU08TD5WLv8hf+Sz
- LxuARTC7qSwgd29v+1EsY8R7jImXOdOKtYHEKST15SkBxt2TgT5oPozSTfXXLTnTPdFz
- FtyzmGCL1+EJb8DwfZdA+7PybBWLqyZ5XRdSxrYIhZ1JY50CpnofTrQGbmkjPjkLc3GM
- 8O3pQ0t8gjfAVmiZOXBpQDoG5xqyDXFM6LmR5c/llrpZmUsgPuhxgYnsgtFH4GTWAjHI
- oe0rPSrEl5m5KCs1T7BKXdTTWMWQAB6ocqR8q1DSvGMPHmfX+i+soMTd9powsRW13VPW
- icrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXO8ZMX3qQ9FowfqtyU0PtyFo21JmzkHNm2tEMAQtYYf200YuTdZnOHysmMaa22+vuOuILe+yU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/0g0TmtvPX9IBw6o9augxBU/mYD+W1+kPHUVaQmqJSrrI3GtT
- N4iNs9jvL3IVq7SzL3RM4wyeuEK8PTid9kcC0UhOJSbpNpv+ZmYV6zG770p6ZPph6js=
-X-Gm-Gg: ASbGncsFEv71Qs/83mVQyoPN15qZiPx1JtlhtW8PwGwjdKbU05Ad/wPei24FXoD+Jy1
- wocQdX4mE0SRtiLbPZ7NRU7IMKqycI5YOtEv7JSc+V/HCMnRg0Rrpoe7jLgt79NSlCdidpIp9zx
- S3AM1/0SDfFoORP44w4uZxF/KXggVcsVXTrZNRbObpd8SEHNQ6EEZa6mF0D1dZ800b0cu/xLcb4
- 3m+GZSG1p/Bz3bvoHkqy8r6ns0IZqWcn5Aoee8+ArpmhGZXOTnHFZN1PF7Enw0BUt42oqJnrefh
- 3IZqVEhh9Oj5dPJGonwbDpN/Jn+PASMe8zC5wn816xhrtKeGpRlCHyZGfFE593ScT8A89EeLR0U
- GSQP8OhXkNUyhOUBJvbRfJ6M/g8v/roQ=
-X-Google-Smtp-Source: AGHT+IEQIp0nIVIgRN/iDGspnT9OMgVi+WwCgBhQra1gnRvQCYDKON8E2aM95aGrjUIGZD/DfKIS7w==
-X-Received: by 2002:a05:6402:42d6:b0:608:47e7:508 with SMTP id
- 4fb4d7f45d1cf-608d0890a94mr15671632a12.13.1750245084388; 
- Wed, 18 Jun 2025 04:11:24 -0700 (PDT)
-Received: from localhost (144-178-202-138.static.ef-service.nl.
- [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-608b4ae4d18sm9236945a12.76.2025.06.18.04.11.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Jun 2025 04:11:24 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 18 Jun 2025 13:11:23 +0200
-Message-Id: <DAPM3N6M8HZK.3139OVRBRU92O@fairphone.com>
-Cc: <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/2] clk/qcom: sm8250: Fix variable name of msm_clk_data
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Luca Weiss" <luca.weiss@fairphone.com>, "Casey Connolly"
- <casey.connolly@linaro.org>, "Alexey Minnekhanov" <alexeymin@minlexx.ru>,
- "Sean Anderson" <seanga2@gmail.com>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Sumit Garg" <sumit.garg@kernel.org>, "Tom
- Rini" <trini@konsulko.com>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250611-qcom-clk-variable-names-v1-0-37615b74daad@fairphone.com>
- <20250611-qcom-clk-variable-names-v1-2-37615b74daad@fairphone.com>
- <267f957f-f74d-40f9-a65a-da00ea12810c@minlexx.ru>
- <DAL7BBN0YH1Y.1HOHC7JM44TFF@fairphone.com>
- <6857eb08-c3d8-4a02-b8c0-b608977ffea1@linaro.org>
- <DAONZND9ACD3.35GQ47V0IVE46@fairphone.com>
-In-Reply-To: <DAONZND9ACD3.35GQ47V0IVE46@fairphone.com>
-X-Mailman-Approved-At: Wed, 18 Jun 2025 15:50:29 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55IDpkq5313639;
+ Wed, 18 Jun 2025 08:51:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1750254706;
+ bh=8Z2Vzn4f9emU90vD6qIBWNUbnbLZXV7oOdYiswnjjos=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=HIujQEM+MVq2pCJEa09e6pCeex8wEbO8A3RG/ZxEoaLAxsSSaOWfM6Axh+TNkIGXU
+ CuycUBt3Srhldp5QFR2iTYe3ISbB/zutehia1uvVyaGJCOE8d17Pa8D+XCl5wGcKIr
+ uJ9Cz8EqClfBUsgWfrBzv2/FtwLKh0QM0QltJNJo=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55IDpk3c2796465
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 18 Jun 2025 08:51:46 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 18
+ Jun 2025 08:51:46 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 18 Jun 2025 08:51:46 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55IDpgpo3808431;
+ Wed, 18 Jun 2025 08:51:43 -0500
+Message-ID: <4d0fe3dd-f7d8-47ea-9253-5b836a32e926@ti.com>
+Date: Wed, 18 Jun 2025 19:21:41 +0530
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] mach-k3: add runtime memory carveouts for MMU table
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>
+References: <20250617135844.2873701-1-anshuld@ti.com>
+ <a7454d8d-5715-46e5-95e1-544d1fbee197@ti.com>
+ <DAPMYRW1KA2N.15K3WJSU96ZS4@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <DAPMYRW1KA2N.15K3WJSU96ZS4@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,52 +82,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Jun 17, 2025 at 10:27 AM CEST, Luca Weiss wrote:
-> On Fri Jun 13, 2025 at 6:55 PM CEST, Casey Connolly wrote:
+
+On 6/18/2025 5:22 PM, Anshul Dalal wrote:
+> On Wed Jun 18, 2025 at 3:56 PM IST, Udit Kumar wrote:
+>> On 6/17/2025 7:28 PM, Anshul Dalal wrote:
+>>> In u-boot we only provide a single MMU table for all k3 platforms,
+>>> this does not scale for devices with reserved memory outside the range
+>>> 0x9e780000 - 0xa0000000 (eg j722s[1]) or for devices with < 2GiB of
+>>> memory (eg am62-SIP with 512MiB of RAM).
+>> please avoid giving reference to internal HACKs
 >>
->>
->> On 6/13/25 08:45, Luca Weiss wrote:
->>> On Thu Jun 12, 2025 at 5:49 PM CEST, Alexey Minnekhanov wrote:
->>>> On 11.06.2025 15:08, Luca Weiss wrote:
->>>>> Update the variable name to sm8250_gcc_data as it's in the sc7280
->>>>> driver.
->>>>
->>>> Hi!
->>>> But why are you mentioning sc7280 here, while fixing clock-sm8250.c ?
->>>=20
->>> Copy paste from the other patch :'(
->>>=20
->>> Will fix, thanks for spotting!
->>
->> I'll fix this while applying, np (already picked this patch up...)
+> Got it :)
 >
-> Thank you!
+>>> To properly configure the MMU on various k3 platforms, the
+>>> reserved-memory regions need to be queried at runtime from the
+>>> device-tree and the MMU table should be updated accordingly.
+>>>
+>>> This patch adds the required fixups to the MMU table (during proper
+>>> U-boot stage) by marking the reserved regions as non cacheable and
+>>> keeping the remaining area as cacheable.
+>>>
+>>> For the A-core SPL, the 128MiB region starting from SPL_TEXT_BASE
+>>> is marked as cacheable i.e 0x80080000 to 0x88080000.
+>>>
+>>> The 128MiB size is chosen to allow for future use cases such as falcon
+>>> boot from the A-Core SPL which would require loading kernel image from
+>>> the SPL stage. This change also ensures the reserved memory regions that
+>>> all exist past 0x88080000 are non cacheable preventing speculative
+>>> accesses to those addresses.
+>>>
+>>> [1]:
+>>> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/arch/arm/mach-k3/arm64/arm64-mmu.c?h=ti-u-boot-2025.01-next#n54
+>>>
+>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>> ---
+>>> Changes for v3:
+>>>    - Remove unused memory regions in SPL's map
+>>>    - Add runtime addition of MMU entry for the framebuffer in SPL
+>>>    - Refactor k3_mem_map_init to use standard u-boot APIs
+>>>    - Unmap reserved-memory regions instead of keeping them uncached
+>>> v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.com/
+>>>
+>>> Changes in v2:
+>>> - Removed dependency to:
+>>>     https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+>>>
+>>> v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
+>>> ---
+>>>    arch/arm/mach-k3/arm64/arm64-mmu.c     | 191 +++++++++++++++++++++++--
+>>>    arch/arm/mach-k3/include/mach/k3-ddr.h |   9 ++
+>>>    board/ti/common/k3-ddr.c               |  10 ++
+>>>    3 files changed, 197 insertions(+), 13 deletions(-)
+>>>
+> [snip]
+>
+>>> +int k3_mem_map_init(void)
+>>> +{
+>>> +	fdt_addr_t mem_base;
+>>> +	fdt_size_t mem_size;
+>>> +	struct fdt_resource dt_reserved[K3_MMU_REGIONS_COUNT],
+>>> +		coalesced[K3_MMU_REGIONS_COUNT];
+>>> +	int k3_map_idx = -EINVAL, ret, nodeoffset, subnode;
+>>> +	void *blob = (void *)gd->fdt_blob;
+>>> +	unsigned int carveout_len, i, j;
+>>> +
+>>> +	ret = fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+>>> +	if (ret) {
+>>> +		pr_err("%s: Failed to fixup reserved node for tfa [%d]\n",
+>>> +		       __func__, ret);
+>>> +		return ret;
+>>> +	}
+>> [..]+
+>> +	k3_mem_map[k3_map_idx] = (const struct mm_region){ 0 };
+>> I assume you are looping over reserved -memory and adding to map..
+>>
+>> what if , we need some reserved memory as non-cached.
+>>
+>>
+> Yes, here I loop over all the reserved regions and add the carveouts to
+> the map after coalescing. So far the reserved regions are kept unmapped
+> but that causes issues with remoteproc, I'll fix that in the next
+> revision by marking them as non-cacheable instead.
 
-Quick process question, how do I find out if a patch has been
-accepted/applied? Am I supposed to check patchwork, or are there
-b4-ty-style emails for it?
+you should check wrt device capability, If device is coherent then it 
+can be as is
 
-I'm trying to keep track of patches in my inbox that are still
-outstanding with labels, so it's basically about when I can mark it as
-accepted.
+If device is non-coherent (we observed in J722s, still to confirm this) 
+    then node should be
 
-Regards
-Luca
+non-cacheable
+
 
 >
->>
->> Thanks>
->>>>
->>>>> ---
->>>>>    drivers/clk/qcom/clock-sm8250.c | 4 ++--
->>>>>    1 file changed, 2 insertions(+), 2 deletions(-)
->>>>>
->>>>> diff --git a/drivers/clk/qcom/clock-sm8250.c b/drivers/clk/qcom/clock=
--sm8250.c
->>>>
->>>>
->>>> ---
->>>> Regards,
->>>> Alexey Minnekhanov
->>>=20
+>>> +
+>>> +	return 0;
+>>> +}
+>>> diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+>>> index 39e6725bb9b..0b164ebf5e6 100644
+>>> --- a/arch/arm/mach-k3/include/mach/k3-ddr.h
+>>> +++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
+>>> @@ -8,10 +8,19 @@
+>>>    
+>>>    #include <spl.h>
+>>>    
+>>> +/* Number of mappable regions in the MMU page table */
+>>> +#define K3_MMU_REGIONS_COUNT 32
+>>> +
+>> why 32 ?
+> I just took it as a worst case scenario with assuming > 10
+> reserved-memory nodes with no coalescing and two entries per node (one
+> for the carveout and another for the non-cached entry as per above).
+> The table size is 1KiB at the moment and I think it's a reasonable
+> compromise.
+>
+>>>    int dram_init(void);
+>>>    int dram_init_banksize(void);
+>>>    
+>>>    void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
+>>>    void fixup_memory_node(struct spl_image_info *spl_image);
+>>>    
+>>> +/*
+>>> + * Modifies the MMU memory map based on DDR size and reserved-memory
+>>> + * nodes in DT
+>>> + */
+>>> +int k3_mem_map_init(void);
+>>> +
+>>>    #endif /* _K3_DDR_H_ */
+>>> diff --git a/board/ti/common/k3-ddr.c b/board/ti/common/k3-ddr.c
+>>> index a8425da8de5..ee882f62109 100644
+>>> --- a/board/ti/common/k3-ddr.c
+>>> +++ b/board/ti/common/k3-ddr.c
+>>> @@ -7,6 +7,7 @@
+>>>    #include <dm/uclass.h>
+>>>    #include <k3-ddrss.h>
+>>>    #include <spl.h>
+>>> +#include <mach/k3-ddr.h>
+>>>    
+>>>    #include "k3-ddr.h"
+>>>    
+>>> @@ -14,6 +15,15 @@ int dram_init(void)
+>>>    {
+>>>    	s32 ret;
+>>>    
+>>> +	if (IS_ENABLED(CONFIG_ARM64) && xpl_phase() != PHASE_SPL) {
+>>> +		ret = k3_mem_map_init();
+>>> +		if (ret) {
+>>> +			printf("%s: Error fixing up MMU memory map: %d\n",
+>>> +			       __func__, ret);
+>>> +			return ret;
+>> If can not set MMU table, then should be Hang , no ?
+> That I have deferred to the caller which is initcall in our case which
+> will hang the board if dram_init fails.
 
+ok
+
+
+>
+>>> +		}
+>>> +	}
+>>> +
+>>>    	ret = fdtdec_setup_mem_size_base_lowest();
+>>>    	if (ret)
+>>>    		printf("Error setting up mem size and base. %d\n", ret);
