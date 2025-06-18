@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB82EC7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B373C7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:46:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4859182D83;
+	by phobos.denx.de (Postfix) with ESMTP id AE3E282DFD;
 	Wed, 18 Jun 2025 16:45:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="33z55qbQ";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="xexRcTPY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C77A82DA1; Wed, 18 Jun 2025 16:25:34 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 3D4DD82CF4; Wed, 18 Jun 2025 16:25:34 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D54A82CF4
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:25:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34D0382D7C
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:25:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-adeaa4f3d07so1379864466b.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:25:30 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-60179d8e65fso12703298a12.0
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:25:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1750256730; x=1750861530; darn=lists.denx.de;
+ d=fairphone.com; s=fair; t=1750256732; x=1750861532; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CgjMdz44eaVnOCXw9SIogMT3O5m1UBOPf1WzefN3V3U=;
- b=33z55qbQ+/GBKMRt4pCi6Pa2YMYc94cdj7N71VguCCQ3ZVRBA+UNHUm2H2EzldwiC7
- gQVV6v04CekWmS1FqCjNifiDKsWgMUOXXfcWEgw6x+oVEbbJHbdWo0aCBkj1rZ48Ux04
- jfk9NFR4qs0bR/REhH0CLqcqhC+dwcYdeggmLvwaAdaCIL+jFF41IqokyGWlR1w1IM5J
- odQ007GbmmjwF/XHv5PLXv1zeJThtgr8F5Ls2jAW0FE68NwvbP6t4Q5HCoEyLNxijbtL
- bID3xpz+y7iHlAln7NCi6xEUirELuqxCXKEOcN1vp+6ZX/kK8iCcgaYI8FmQCXKyH+vJ
- 2R/w==
+ :reply-to; bh=KiWBfDYIQWvu70VybT/CqQa3Na5mGQE52VecAznbfME=;
+ b=xexRcTPYOul2eh4bBLYPwvOOcD9scl6UGDWK30Mozw9spvVY4AZ17i9xJhiDEJHDQe
+ dDRNpl75lp8VV2jnr6XT8U78ZItPEm/0jzGesIabgFUMd19x/2PezSCSbXzBl4vv6nrK
+ 5QZIN/W5VyjQRqAiaMhDSwKKySUiNpsNWvMJ4Qxs5ZfY4IOSteaXNJluBHqMzUB5trHO
+ M47EtvIUGza+Bse8gHlDyLJRwHvx//+R+ts28aF8P+WYEDS73GsuR1jWaBYGXwypAjz9
+ x+Qz/00GVAIivox7OzJDIyvRmBseguPFEp5Z6atKCzBJQsG1hZ+ZVMoiZrgJq0dm7HQ/
+ ZXLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750256730; x=1750861530;
+ d=1e100.net; s=20230601; t=1750256732; x=1750861532;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CgjMdz44eaVnOCXw9SIogMT3O5m1UBOPf1WzefN3V3U=;
- b=feTSdD47U+KmJg/iKOkda/MYkVrgVxOJZx+o9J770D/PlneoovrpKlCnoTnK/d8Wsf
- ABa7C+PNxvnNMr25izXvAVsQJ76c4OgkbKOYOCO0DU3FdNgD3yeH4olu6x9lm/kLDYZs
- fUFhncVybiwR1uScy8zuYh1mrBATgMk3QcY/3iBsB2tEnS8z5jPXLqE/O+RNO430qrOs
- f4Kee6KWhXYKcQnGCbsCe/QfVgXdWVhxYbd5N+iURDjrWqJt5cHYZKp75KUXjyi7XMdA
- 9bKa3nYvDlP/IfUi+eGmzLR7CxP8Vn3OYQURUF9qLgLKz52BSq17wz0OTH9xIzQl0rIM
- gSzA==
-X-Gm-Message-State: AOJu0Ywl1p4DPT6iP6oVPMpzhjoYK6a1rp+XZdz6dP0+9da4CIuVXdZ6
- bxgKgStI1CWTpe3gpeFkZVmGhYmoGSGu0624WJ0tu6gK621WC2+cd3icdBt8ALjBjlk=
-X-Gm-Gg: ASbGncvTiH82MqFwTu7Wzj+x0NEXkoxZpsxMmJ1Dy+mhYG/l26dxeKSaEj7A+zsuMaW
- PqHxx1T91VPzPNrWUzmena7aSRhONZu4v8J0jmDMawczDEfe59CUPEjjF3TooyFTL6g/lh7dLHo
- tb3REkg89XU/7N5fwqIKB4fELVLpRBmUhFhPNSFPpzCfM0umXgadNBDkN6BChzd4E/KygkCpMaq
- APxLUc5OkrvIFrd8Msr9ra1x7ym6ZjUDlz///UW9Oh5ktZexROXldBlJzNP6rli5cUH6EATbk4y
- 83UJt7ZBYuc0wFdjM+8iL1Q8fQ28apQVb9ZnAzFxR4pNAaCtW1R/M4/Mrohm28F9I5WAAPrl3Dq
- bNPxHiZYdViIRafHfQIucDjjDC1cfI63B
-X-Google-Smtp-Source: AGHT+IFWXrxjljKEFU9xPNq3P+G4JH4UiMtFVMuzGjoOmFSe45MpumYlX43ZYijEq/xHgRCNW1Nj4g==
-X-Received: by 2002:a17:907:d806:b0:ae0:1fdf:ea60 with SMTP id
- a640c23a62f3a-ae01fdfed00mr268985366b.25.1750256729960; 
- Wed, 18 Jun 2025 07:25:29 -0700 (PDT)
+ bh=KiWBfDYIQWvu70VybT/CqQa3Na5mGQE52VecAznbfME=;
+ b=HBOR3dNWH/Zp+bBPUBu2EsHl+iDweqYzRYdQfDXLsPGLe4G4IOOyPKNRR1Lth+0OlE
+ NKbzeyrLqC3ti5AwtUh9BgPsxjz7lDxuUVBdxLx6JjdmsSu+RLb4U9sfIYAmzf1flPB8
+ p0/qWsy+p6eqqFPQTSfYadKThnYd/y3oQ/0eA2LWomY08T06vnEuc9SzZu6TjS61r987
+ h4KZ7+DlH50bfrTpwIBSoDanrHl66tzrjvJNfmpGlZ8c89Kl4J0os6GUjpWppsHZxkqD
+ 997YSxQYfoq+aZuGRvRNBOrQZ+kAQhMGZaJxRSvuYBEXsGZ3E+SQdV9jaNK9Vg0sI0I4
+ a87g==
+X-Gm-Message-State: AOJu0YxPZ0A0DiGn1KWVRoWmejH7Ui8yUFjUaYF5ZigV6fZ+rHg+FbX4
+ WPrS61+InzOTclitpHnJBdGx2UcZJj8F4X+dZ4X9+iF1HAEORFuHg/zx+PpBKbJaI8k=
+X-Gm-Gg: ASbGncu/zV7BbG1APpqS70tASLyW/XH6yjg46crS9fRXpBDgvA68QFs75h/dI4ykOJl
+ sdDcK4U7uCEZiJGYixyALhjSlJpUxDOploUGqvdhzMwfNRSxq37AF/5WNidsD7FkENMFUZ1IoZO
+ n7lLab6H1UypwpsPvZulRUh2yUayWKX/nLa3ZcDnfj0+Fsjm4ScRZXKd1yBts2EUYFfmkHILwvV
+ 3cnx/vfYcCZVdkSv7qx1IH9Z+u8+do0JaSP2RNCdyZonMYX+n7GNC5mT/n5hQ//ufpQTIrW+kFe
+ Je9NQQwQgd/Uedfhjjid6ZWmgbUnOTwJWY/PiICg1XrTI9XUqYDb293p4HkqHw456cOOEOf8eBD
+ pnuzPcqA4wSGPXyKgi+36BrUBggaFXjbJ
+X-Google-Smtp-Source: AGHT+IFsC2W2X/Bv/DNId5HaW7i2Bk/FAyDx4ZwYk03PZfZ9Fp2zH5cJqdrSiXixPf0sXPacCBSRdg==
+X-Received: by 2002:a17:907:1c0c:b0:ade:1863:6ff2 with SMTP id
+ a640c23a62f3a-adfad5c9158mr1671478866b.52.1750256731635; 
+ Wed, 18 Jun 2025 07:25:31 -0700 (PDT)
 Received: from otso.local (144-178-202-138.static.ef-service.nl.
  [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-adec8159e19sm1056733866b.4.2025.06.18.07.25.29
+ a640c23a62f3a-adec8159e19sm1056733866b.4.2025.06.18.07.25.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 07:25:29 -0700 (PDT)
+ Wed, 18 Jun 2025 07:25:31 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Wed, 18 Jun 2025 16:25:18 +0200
-Subject: [PATCH 2/8] clk/stub: add sm6350-rpmh clock
+Date: Wed, 18 Jun 2025 16:25:21 +0200
+Subject: [PATCH 5/8] phy: qcom: Add SM6350 to QMP UFS PHY driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250618-sm6350-bringup-v1-2-3cc22aab7a7a@fairphone.com>
+Message-Id: <20250618-sm6350-bringup-v1-5-3cc22aab7a7a@fairphone.com>
 References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
 In-Reply-To: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -86,11 +86,11 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1750256728; l=778;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750256728; l=1115;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=SbbQSbzsn5LTAByx2tF/MOVKhiJWTyqLDlQjeiCZx2c=;
- b=hTQ/eET3xCnJmdj3jRC/QFJ207TpLr7dH1t4Qi4PxeG7jJDkdADFGXhPwCfqfN+0pQppUN+Rm
- v6UraUV0NdlA0s/E104BbpIFg1Ym9hvmmve3VWlNXKbxZuaJlHh7QLo
+ bh=0c6xTvH3h2RjXc3MsgPSgjZl0cV13cosFkgQhv1prAY=;
+ b=f6J+ZFbfiODiOBxUPS7U7aj3mMpo060qzNsiwfufPAZSR7qWTw271Ln9CpjmoiDLacf7mf1/r
+ PACvoRzI5bfAaMC1orKLWgo9JX5HdeWjqTdits7Xu6lsP2SnGNc+zH6
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Wed, 18 Jun 2025 16:45:31 +0200
@@ -110,25 +110,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stub the RPMh clock controller on SM6350.
+The UFS on SM6350 can reuse the SDM845 configuration, just like in
+Linux.
 
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- drivers/clk/clk-stub.c | 1 +
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-index 5f5aca41d5b322537f070a740bf1f80531006036..5863ec72abefefb3c62152805260238b7045e81a 100644
---- a/drivers/clk/clk-stub.c
-+++ b/drivers/clk/clk-stub.c
-@@ -52,6 +52,7 @@ static const struct udevice_id stub_clk_ids[] = {
- 	{ .compatible = "qcom,rpmcc" },
- 	{ .compatible = "qcom,sdm845-rpmh-clk" },
- 	{ .compatible = "qcom,sc7280-rpmh-clk" },
-+	{ .compatible = "qcom,sm6350-rpmh-clk" },
- 	{ .compatible = "qcom,sm8150-rpmh-clk" },
- 	{ .compatible = "qcom,sm8250-rpmh-clk" },
- 	{ .compatible = "qcom,sm8550-rpmh-clk" },
+diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+index 449b97677788132dd6b9eb654732896756a3ff47..b536517f93a3a41a05b20d811033fc62c05169ec 100644
+--- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
++++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
+@@ -1467,6 +1467,7 @@ static struct phy_ops qmp_ufs_ops = {
+ static const struct udevice_id qmp_ufs_ids[] = {
+ 	{ .compatible = "qcom,sa8775p-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg, },
+ 	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
++	{ .compatible = "qcom,sm6350-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
+ 	{ .compatible = "qcom,sm8150-qmp-ufs-phy", .data = (ulong)&sm8150_ufsphy_cfg },
+ 	{ .compatible = "qcom,sm8250-qmp-ufs-phy", .data = (ulong)&sm8250_ufsphy_cfg },
+ 	{ .compatible = "qcom,sm8550-qmp-ufs-phy", .data = (ulong)&sm8550_ufsphy_cfg },
 
 -- 
 2.50.0
