@@ -4,96 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6817C7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 22:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D74AAC7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 23:11:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F25482C2F;
-	Thu, 19 Jun 2025 00:04:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 17D3182BCD;
+	Thu, 19 Jun 2025 01:11:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lHRsUt5k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R2lCIPSJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 316E382C55; Thu, 19 Jun 2025 00:04:49 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 7ED2F82DA1; Wed, 18 Jun 2025 18:10:58 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B00F682B20
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 00:04:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 940AA82D66
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 18:10:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-40a4de175a3so93902b6e.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 15:04:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=rfried.dev@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-451ebd3d149so48493425e9.2
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 09:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750284285; x=1750889085; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BnOjYuBl5N/L2OsrzYcjuE5K1CsasIQ8jr6yhygvJp4=;
- b=lHRsUt5kYYsrsgNgRfLyDFurKlj76WHRHcNR9LCD405pR1bfSON3qBi/jSa2CQuQZ6
- +6kwIAluTdUP45q48WgtEyDHqZtShsT6M8WLKa5XVUsRXOUVtaukrBaOcCX8DuEbyp89
- F2miHO4gawThB4aI43oNeTyV4xnJWbQPsIGeI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750284285; x=1750889085;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1750263056; x=1750867856; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BnOjYuBl5N/L2OsrzYcjuE5K1CsasIQ8jr6yhygvJp4=;
- b=RPnzhO3c8gOMS9sdZJv96GSZCWt4V7ONbg2qIriUOc81Om4sP6zg3uiwUEUFjQ37NU
- wTluKSm8R6oBG60eQm33SEvx1YL7nyhbxPfmqZz5Khkofexnqwrkt6WdjFcT9cIkOmee
- 12Yvpbw757AW63SKHcg48n9EGohB3bIroo7IPX4WwYLknqzRavCrLgg8drdd+4GcscFU
- UZBk6TrGs4qbBan3lHw0cUDxv/bkn/SzGAr320Qy+17UGB89rb20yKPFrPOFLefzHZw6
- zex5s3ePBWvRgY8udv0ULc8bmmyYQLL8mJy+tZnVgxEhZjm5Wd5L2xOwqAINE1r9lrB9
- CVbg==
-X-Gm-Message-State: AOJu0YyXN/6Vmfn3Nw5z6Z2bha1xy2Bp/EA3z/B7lAKulUvb8tDac5gu
- jpwy08upMX5VZOQ9fWZ0ZpX3d2ylGiTLcjfDjBPkRd1vAMZXGmWJ6L7Hd60qZ4UO75XzxW0oTAR
- 8zz9HuXk=
-X-Gm-Gg: ASbGncvuezly34Z2GlVTxDXMAvFtxerohaGod5Bpos1cC9KFhyhyNohLFzJOZgvomTU
- Fz3nQu6MU23bAh+G+4HOsPud0WpF5U+YVr7RlO/A0TjEzGFJ7K1zylTFeQP37V97Msh9jKWFUpL
- U8i6zQgcj1r5Et17SR0KkgYfeEekVOdOfikYQkv04aiQBZtzJMR/B8ozb4e7FyWCx9rDwq809c7
- Fzi0PiVS9xNpjgkW24L6Xs+I/TIvGVXqYARo/85QvgIVMDHWcg/SoI9jK51D0YX3PBDLguZjalk
- dogq3UpFBXx4t6g6itI/FFo8yByo7mjnXvP6+Ov3tKLnfcVwpqrQ9L+lHMOwgA9odVr2Jbfr4Oc
- yVeHHKTAM+gPazOWrigpT9XI=
-X-Google-Smtp-Source: AGHT+IEGxFmv32w86gXWowDpDUYpuFT7i6emRIYLRcwBJGpjKsxLg4NSjlXdKzZUB+So7IV9EDIMrw==
-X-Received: by 2002:a05:6808:d49:b0:406:6d79:49e1 with SMTP id
- 5614622812f47-40a7c1a4e30mr12060680b6e.24.1750284285392; 
- Wed, 18 Jun 2025 15:04:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40a7418aeb7sm2548140b6e.38.2025.06.18.15.04.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 15:04:44 -0700 (PDT)
-Date: Wed, 18 Jun 2025 16:04:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/6] bloblist: add blob type for DT overlay
-Message-ID: <20250618220441.GK6521@bill-the-cat>
-References: <20250618145930.2652304-1-raymond.mao@linaro.org>
- <20250618145930.2652304-2-raymond.mao@linaro.org>
- <20250618173713.GH6521@bill-the-cat>
- <CAEfUkUJe+sgbPU0BYiZnGo15CMXfaixiRVYNv+vw8+h6YAOrZA@mail.gmail.com>
+ bh=UEvMGCfYSqKdSrpcOCzSAX0xFDONrGejRP5/br9AI5s=;
+ b=R2lCIPSJMGtdhkDD7KKW+DtWIH4UJW1WkCRTUQKw5//9G/0Btfq/l1fbMOITdJ9uLg
+ i24yCFQlDs+kbYCtvHgZAgU5C7hqKTd7Tiv2+tLwDdzSd7sQbZdhd1na0xMVEuA+8vlr
+ S6awblqRSLBhuSIgB2u1bo07FfONDGG2UrcYEqLNwLKVgagD2rUSb383WM9O2nIS6E2B
+ MIYkDvmxVGP14rrv2qam7q7oi2zZ9BGojO8a1HkWRxMMWX4Y0SViPScmPiCOikAtFtmM
+ g8eY49Hga9PdQ7nUw7Ev+vBOBW7mN+I78d1dopEPnvfsDRibm/U+qSI+ARW5tyqm/b1z
+ oUEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750263056; x=1750867856;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UEvMGCfYSqKdSrpcOCzSAX0xFDONrGejRP5/br9AI5s=;
+ b=qeIqH6+4pzMRdXIIDfDL/g0ef3wFh+/ehzUjzHC87y9z9U7XhMr9oTvc30nt5uOw9m
+ 1mTzzZXZ8/Es/er1T0hP7WauV+bIMqRXW3BL2ZDkDESYjsnuHqN+wrwtIe/NK6VuEsKW
+ mmyy/PFHsOPxXcg2x1fEWq0Dle6mkykZnRFLubwxyuZBcWqqw0d5GHCkQXcG+p9zOsI9
+ g1TEbcAIEiOitFGhh8kTguXzO1935SU5/Cm4/KsDtn5rRitPNhakBkODERU8uNdoVcGQ
+ WlCfDraqyd9o/LNyocaiCiA8i7+sMiewizMay3mspctXEAJGVOz89TSQtIFatIPuJz8k
+ Xtcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXi5JqjVaxsXRUhfBaBVwaOrt/vX9AuaCWemM6z2sdQ0tTMVMx8Y9f6DZHH9EYi5y+3F7Q6Qxc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPKWOt8QxCV8KE3Amq/P6tfRZpz/n1D1wyqsVQVcLeZfn6QT+x
+ MnWopZ/1hINf28mMqnuVAGqNgCaMDaWTCz7OAyz+qeKlER6mFlIFUEJmjxXSv4jaWssdcp5Ntuy
+ 9VP2ZGCmYTuSjw2jNQAVfODxOLq0M/Z0=
+X-Gm-Gg: ASbGncsYQtWizebNASPrkbPp2TlAkm9cAmokgGhB2WSdlLM3gV1/LluFe0uj8cR/s7k
+ /7EAXAJivcNwGcYhWcMIGD1fFECDXpjcVVwRLPRHGfhY0XyScGwi+rU/f2GlAje0vitLHncMUQS
+ qSyowgaFe01Dpxv/BYnPqe5KcO0Gb/HKF+O9MvLmIGZtJr
+X-Google-Smtp-Source: AGHT+IFZlp3SvBNDuLDEPqPb8haSsihnpN8DyJUhImr2kTcQb6HSTaiM5CRODGc7mu2rIND7QYsH5vfzcgxlM7MOA2Q=
+X-Received: by 2002:a05:600c:5309:b0:43e:bdf7:7975 with SMTP id
+ 5b1f17b1804b1-45344e65f1cmr129983805e9.32.1750263055685; Wed, 18 Jun 2025
+ 09:10:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ej70bPJA4g6Z+0Gu"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkUJe+sgbPU0BYiZnGo15CMXfaixiRVYNv+vw8+h6YAOrZA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <e3ed716de67cf4f46b303e9e7536b4938fba5a68.1750262675.git.baruch@tkos.co.il>
+In-Reply-To: <e3ed716de67cf4f46b303e9e7536b4938fba5a68.1750262675.git.baruch@tkos.co.il>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Wed, 18 Jun 2025 19:10:41 +0300
+X-Gm-Features: Ac12FXz0uxbSm49hzLfc7F6q0wzq7xj5gbWGHNgbmgA95gk4YRf3XYLSIwT9ULE
+Message-ID: <CAGi-RU+_4PpjqRdcpTGfo_nE-MsqJFJBFzYRLTuArbFC5UJDog@mail.gmail.com>
+Subject: Re: [PATCH] net: designware: fix bus address dereference
+To: Baruch Siach <baruch@tkos.co.il>
+Cc: Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 19 Jun 2025 01:11:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,74 +94,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---Ej70bPJA4g6Z+0Gu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jun 18, 2025 at 03:53:15PM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Wed, 18 Jun 2025 at 13:37, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Jun 18, 2025 at 07:59:23AM -0700, Raymond Mao wrote:
-> >
-> > > Add blob type for DT overlay according to the update of Firmware
-> > > Handoff spec[1].
-> > >
-> > > [1] https://github.com/FirmwareHandoff/firmware_handoff/pull/74
-> > >
-> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >
-> > Once merged, this should be a Link: line for tooling to better pick it
-> > up. And I don't want to merge this here until it is merged / agreed to
-> > in FirmwareHandoff.
-> >
-> > > diff --git a/include/bloblist.h b/include/bloblist.h
-> > > index f32faf78560..b40e04fe2d3 100644
-> > > --- a/include/bloblist.h
-> > > +++ b/include/bloblist.h
-> > > @@ -110,7 +110,8 @@ enum bloblist_tag_t {
-> > >       BLOBLISTT_ACPI_TABLES =3D 4,
-> > >       BLOBLISTT_TPM_EVLOG =3D 5,
-> > >       BLOBLISTT_TPM_CRB_BASE =3D 6,
-> > > -     BLOBLISTT_ACPI_PP =3D 7,
-> > > +     BLOBLISTT_FDT_OVERLAY =3D 7,
-> > > +     BLOBLISTT_ACPI_PP =3D 8,
-> >
-> > ... sigh, so BLOBLISTT_ACPI_PP isn't something in FirmwareHandoff yet.
-> > Was someone working on that it should it be moved down to the project
-> > internal numbering area?
-> Since we decided to make bloblist compliant to Firmware Handoff, it is
-> required to get an ID placeholder in the spec first (at least a PR)
-> before updating the code to avoid conflicts, but BLOBLISTT_ACPI_PP
-> does not exist in the spec. In this case, I will consider it as a test
-> only ID and can be shifted. Or I can move it into the custom range if
-> you think that is better.
-
-I'm hoping maybe Patrick will chime in at least as yes, we should either
-upstream it, or move it.
-
---=20
-Tom
-
---Ej70bPJA4g6Z+0Gu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhTN/kACgkQFHw5/5Y0
-tyztmQv/fi1oiFCv/r1VGA3XaNz/m7BoeOJHWDm0sC1g3MrzdFIac2aGXRXfnyaz
-E9i+ZIdxBvBo5O764oBEAfVPRV6YQrXYkFUcl9butzweyehIyA4d7ac74MKDHxkt
-dhzPm8tjwasuuJJs3bqFAcVxj6pHTjpPY19P/V+wimiH+qMj4sYuWLSjZUok/5gF
-sVax+tgbNAs6R6Fp7yM37BU8ChWEvbprl7MVE/j81I199UwZ4yHBjqnwEbKnYLYn
-eW/pxT5Bwg5Ng9aLNXz0VxyUPRjXMW6y5TQMhnVO7UaY/Tglob5ER75u6/xJ2zpM
-Fq7ZX0Xp0n8qt/qqhg6Wrbb9ex1YzWkOfcs14Hdz6G7WT0q5DDSGKOm0SVWqm7jI
-fLSrM1cpZOJScIsmzBIcV5ZfH54srZXX5LXMy68eJCZnY/zdc5yUaCoX04SrWODV
-7ALsT/ZBqJQc9Cq2E6d8u5zIbFBzKC/J3asu5koizcsjfsrVgI2wFZEuXZrilNk9
-TXsnvUPJ
-=YXcb
------END PGP SIGNATURE-----
-
---Ej70bPJA4g6Z+0Gu--
+On Wed, Jun 18, 2025 at 7:04=E2=80=AFPM Baruch Siach <baruch@tkos.co.il> wr=
+ote:
+>
+> Device bus address might not be valid for direct access when the bus
+> address and CPU address are not the same. Use dev_bus_to_phys() to
+> translate bus address back to CPU address.
+>
+> Fixes: 3d98b8c504e15 ("net: designware: Invalidate RX buffer cache before=
+ freeing the DMA descriptor")
+> Signed-off-by: Baruch Siach <baruch@tkos.co.il>
+> ---
+>  drivers/net/designware.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+> index 0f93c25e3fed..fce3ef910cb2 100644
+> --- a/drivers/net/designware.c
+> +++ b/drivers/net/designware.c
+> @@ -716,7 +716,7 @@ static int _dw_free_pkt(struct dw_eth_dev *priv)
+>         ulong desc_start =3D (ulong)desc_p;
+>         ulong desc_end =3D desc_start +
+>                 roundup(sizeof(*desc_p), ARCH_DMA_MINALIGN);
+> -       ulong data_start =3D desc_p->dmamac_addr;
+> +       ulong data_start =3D dev_bus_to_phys(priv->dev, desc_p->dmamac_ad=
+dr);
+>         ulong data_end =3D data_start + roundup(CFG_ETH_BUFSIZE, ARCH_DMA=
+_MINALIGN);
+>
+>         /* Invalidate the descriptor buffer data */
+> --
+> 2.47.2
+>
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
