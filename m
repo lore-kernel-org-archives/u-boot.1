@@ -4,104 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA309C7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 19:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5675C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 19:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B6BD82C2F;
-	Wed, 18 Jun 2025 21:49:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 0431082C2F;
+	Wed, 18 Jun 2025 21:53:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="btyJDieW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Nq10/I59";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FD7882C55; Wed, 18 Jun 2025 21:49:05 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4986182C55; Wed, 18 Jun 2025 21:53:32 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32BAB82BCD
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 21:49:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6ACD482BCD
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 21:53:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750276141;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rJh/HqXcDebEy/om3rmGAUBVQ7pwCi2cM/6awawqf38=;
- b=btyJDieWWnpmJpCP8KrgSAjcMKlirpoA2jDc2V+y7/QIpf/fFsv9WU9XPDN4q0GqXkek7N
- BZltgea0QLVoy/zKKFQ7s7QkSswjVJwNkC8KEQhFmQK7bTc1NHcKW/Y6WuarwYhct7BQRc
- 8hiJYDr96SfvI/UiuEk8EwDNU0OIL7g=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-402-GwGXP9tdPBGG9d6nbfTKNg-1; Wed, 18 Jun 2025 15:49:00 -0400
-X-MC-Unique: GwGXP9tdPBGG9d6nbfTKNg-1
-X-Mimecast-MFC-AGG-ID: GwGXP9tdPBGG9d6nbfTKNg_1750276139
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3a4e713e05bso26970f8f.3
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 12:49:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-3137c20213cso8635680a91.3
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 12:53:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750276408; x=1750881208; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2jwHvYDgWthlqZjosTW9ucfSveRLHxEZa77uOykgOmM=;
+ b=Nq10/I59IOzmO6b9SIzh8BPAlSpezcMKdavedoOhC5BGjeUqk+bD5ux7/2ov/Lt2IL
+ hy2Rb4wl3JHOykbfaqzn7lnWXM0RsoWAls1bPCHQrvp3DKYb/vAWcf+HvFsxeklCiMGO
+ 0QX/JmCoer1VLqKLvT1qRtIGrhU93TMQGw+Cw6jx5JQuwsyMmtDictkXZq7LGb86RccC
+ zkN3sjhJEU6fhF72qdsAanAIc6hJBeMuaL0IsKnszauFJ/aR8N245TFdy9sOAZupyf/a
+ yrdmvgdRViplYRetViQHSeMQykqo0rtJbwIIdBzcwNxA9NL+3n7aTdPpM8cAVsU7xfsl
+ 80Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750276139; x=1750880939;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rJh/HqXcDebEy/om3rmGAUBVQ7pwCi2cM/6awawqf38=;
- b=g4pPaGX9MB6nhBtnHeV38XsIJoVrJZAsJu+TaM5NRQYWRdrKk9MfdRL1LZstRhstNc
- FJsi21g+vmi9KFTnu2IKJXt4DUG719gmRf+JKG8DocrvOqm7QLPFuSEfbKIT/T97kFLN
- ai14pJ9cPMBLR1JWTH8uhoowlkVW5vug2Soy0oxrYbeK5d8ZDv12fVqrknvlLkPUMdOx
- z1D+HNw8l8Xx/Ey/RUeYcLhhFWNMl4dLdVkon8r9St2LQrNpfSScuYWrxj56WVTudpAr
- KljE2pfVyF5ozXmnN8yZzuDxtyN24VBqgb+PYhxOv/MBn5WL0nLvHthOFsZcvYxYZT/r
- eGbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVYsud8yhlpeL3Lej0ecQDVQqYB5j6U+7IYyVvmD85a8OFuonFo2EAc8SNIGhJZCnquYZnvKT0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbYtmg/s8WkABFIRAybfCGJ8ft0K1jpL9z/5LQ/P8lJxgcfXMx
- qppIxFB3yr2tFAWEwTzmgOxrnh3k6MUIDN6hn3Hq0B08TE2qVXcYrxgH3zFvZm84W9KI06ygv65
- 6FJmKGAqI4r5TsurRAfIV7MildDKkPeFb5o1npf+rtxn8obIvQU7eoU4=
-X-Gm-Gg: ASbGncsP9AS9XP1HaX81To0yYnCF7ZcdPc5ka6ZVNSiTqmqAWxS4zA5RS6SUbE7AGln
- dqs5zPutEVbcav4CWG61VmMqlaXJBAzmhU0UF+3Gx8yqO8A5U3cuWmNx5kn8TBQhWYZo4TQzNQA
- jnpcK8rqh+1V+1bwz8aq+7p4z2UdGkvAlmGuAyEDdOV7fZFQ0bo/v3P5kkLj0q2M3mSnrpqAHsO
- WOWdBmP7Ui9+NKZr3IBFPDTj3r5vUXjhoDNgYCjeERo4DZnUeCF3ActCebjanIYnPvJ3NtMbzvC
- v5SPPzWE7NpvYg3UjxdmFJSAnPr/H6/aBnQ1D1bTfA+EJgD0z8qQXLYrgFbA9CiYX0cEvE/m1Iw
- rzrEN
-X-Received: by 2002:a05:6000:178a:b0:3a4:f72a:b19d with SMTP id
- ffacd0b85a97d-3a572366706mr15314276f8f.8.1750276139292; 
- Wed, 18 Jun 2025 12:48:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEYNUJsm6POUDLuaceMM1kvT1O8VKj0ygnihzwvyVhCVSW/t3Jd5SluVR/XHUyeULrJwaYCwQ==
-X-Received: by 2002:a05:6000:178a:b0:3a4:f72a:b19d with SMTP id
- ffacd0b85a97d-3a572366706mr15314259f8f.8.1750276138870; 
- Wed, 18 Jun 2025 12:48:58 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568a60f5asm17466060f8f.25.2025.06.18.12.48.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 12:48:58 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mripard@redhat.com,
- alexl@redhat.com, mkorpers@redhat.com, eballetb@redhat.com,
- mskrivan@redhat.com, Alexey Romanov <avromanov@salutedevices.com>, Casey
- Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Maks Mishin <maks.mishinfz@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Michael Trimarchi
- <michael@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Svyatoslav
- Ryhel <clamor95@gmail.com>
-Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
-In-Reply-To: <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
-References: <20250618080056.1973311-1-javierm@redhat.com>
- <20250618145016.GF6521@bill-the-cat>
- <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
- <CAC_iWjKnLXYUEiJ-B_vxjCaoMpcPazT4HijAsdtA+PCKfCQXKQ@mail.gmail.com>
-Date: Wed, 18 Jun 2025 21:48:57 +0200
-Message-ID: <8734bw4yqe.fsf@minerva.mail-host-address-is-not-set>
+ d=1e100.net; s=20230601; t=1750276408; x=1750881208;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2jwHvYDgWthlqZjosTW9ucfSveRLHxEZa77uOykgOmM=;
+ b=i0KZNusEaITSUArLIpXFXicLFbSMs6BABghLO0fZ8loi7iKI9WSTdDaScphGcGXM/e
+ cUZ/PzzLOrUjzwwn0Uh7BXoyfkiIhWJPCzR+TJklgdAkD+lL0KerPW2mYJmnVc34RpoF
+ 8m2dlzT/KaAbqxwts7UHYkcrG++/wsguQ9DKjG8FAoUAf9sajgdjhdZ426cLBOskO0tM
+ ZnsBim2xwiZE9zd3FEKQZa+Bmyyehc6zzU8TU5YmGs4iqWj5y9Nmcf8dhHBvLasboRO3
+ U7zgww3TciNWcFH1Qo0vUaChjFMqkcHuVMHY+/rN5KhmxNzKb5gXQxoXb4NKIcIu+3Q5
+ zn6w==
+X-Gm-Message-State: AOJu0YyzQj9PhjXgL7U4wciLbuFcNKE3lmfoABa9Qdxjo4M98MvKMVGl
+ ueWTss95skdVlSNlZSUxHDw+PWPHq7hh3PciO3hD1ZzS1zG3oWGwlLBhekqSwL7JOxX2wWVGG4S
+ KJpCt1Aw2kEFt0irgE2HM5Q/+ew+ZVVDXrVyhetskNw==
+X-Gm-Gg: ASbGncu7PFV0Co84eQezyQ68n0ZMM6sx/xKBW54ZLrL/yIQ+kKLqvxosda1hVzrcWH+
+ vErsTT34Ypggasl3aCRT1bt0awlMi+/D4jmWkdCC37F3gIBP9aI8KbRqRlBCiIUE6j6uLQijrE9
+ qKkQLadFr8Rihrhtx7px59gBviHYUrm5kjrymolNrVsyw4
+X-Google-Smtp-Source: AGHT+IHa/ABILFjJ7svf1tL8rxYPEqt7Ax3/2DbNJsW54h5JoG5AdKOdu/yowDkZch3elmLFaK8th7Ex/oyNAL9wN6w=
+X-Received: by 2002:a17:90b:1a8e:b0:2ff:6167:e92d with SMTP id
+ 98e67ed59e1d1-313f1d25619mr21818955a91.32.1750276407896; Wed, 18 Jun 2025
+ 12:53:27 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 7d4Gfeww3nZgR3qbkp1ReRD33Ty3HsQIXe7AVhZ_o9I_1750276139
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+References: <20250618145930.2652304-1-raymond.mao@linaro.org>
+ <20250618145930.2652304-2-raymond.mao@linaro.org>
+ <20250618173713.GH6521@bill-the-cat>
+In-Reply-To: <20250618173713.GH6521@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 18 Jun 2025 15:53:15 -0400
+X-Gm-Features: AX0GCFvzbeOFL-VFvE_nthidpw2ffPtRJXT_-vQcZxTYGmFW-RRlaxk2trd77YQ
+Message-ID: <CAEfUkUJe+sgbPU0BYiZnGo15CMXfaixiRVYNv+vw8+h6YAOrZA@mail.gmail.com>
+Subject: Re: [PATCH 1/6] bloblist: add blob type for DT overlay
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,30 +101,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+Hi Tom,
 
-Hello Ilias,
-
-> Javier I reviewed the patches but I probably missed something.
+On Wed, 18 Jun 2025 at 13:37, Tom Rini <trini@konsulko.com> wrote:
 >
-> I am getting a compilation error with the selftests applied.
-> #include <part_efi.h> seems to be missing.
+> On Wed, Jun 18, 2025 at 07:59:23AM -0700, Raymond Mao wrote:
 >
-
-Sorry about that. What's the command you are using to build so that I can
-replicate the issue. I tested with the following build command:
-
-make qemu-x86_64_defconfig && make -j8
-
-> Thanks
+> > Add blob type for DT overlay according to the update of Firmware
+> > Handoff spec[1].
+> >
+> > [1] https://github.com/FirmwareHandoff/firmware_handoff/pull/74
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 >
-> /Ilias
+> Once merged, this should be a Link: line for tooling to better pick it
+> up. And I don't want to merge this here until it is merged / agreed to
+> in FirmwareHandoff.
 >
+> > diff --git a/include/bloblist.h b/include/bloblist.h
+> > index f32faf78560..b40e04fe2d3 100644
+> > --- a/include/bloblist.h
+> > +++ b/include/bloblist.h
+> > @@ -110,7 +110,8 @@ enum bloblist_tag_t {
+> >       BLOBLISTT_ACPI_TABLES = 4,
+> >       BLOBLISTT_TPM_EVLOG = 5,
+> >       BLOBLISTT_TPM_CRB_BASE = 6,
+> > -     BLOBLISTT_ACPI_PP = 7,
+> > +     BLOBLISTT_FDT_OVERLAY = 7,
+> > +     BLOBLISTT_ACPI_PP = 8,
+>
+> ... sigh, so BLOBLISTT_ACPI_PP isn't something in FirmwareHandoff yet.
+> Was someone working on that it should it be moved down to the project
+> internal numbering area?
+Since we decided to make bloblist compliant to Firmware Handoff, it is
+required to get an ID placeholder in the spec first (at least a PR)
+before updating the code to avoid conflicts, but BLOBLISTT_ACPI_PP
+does not exist in the spec. In this case, I will consider it as a test
+only ID and can be shifted. Or I can move it into the custom range if
+you think that is better.
 
--- 
-Best regards,
+Regards,
+Raymond
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
 
+>
+> --
+> Tom
