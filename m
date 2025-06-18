@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CA5EC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A39BC7115A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 14:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBC4080E9A;
-	Wed, 18 Jun 2025 16:04:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC1E082B0F;
+	Wed, 18 Jun 2025 16:06:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IzqGDshW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BPHOajuN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA92682BCD; Wed, 18 Jun 2025 16:04:08 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 2A27480E9A; Wed, 18 Jun 2025 16:06:37 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 496B98006D
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:04:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BE9982BCD
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 16:06:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4a6f3f88613so68618051cf.1
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:04:06 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-60efc773b5fso3754003eaf.3
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 07:06:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750255445; x=1750860245; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=62V/BhmujVKnCh1Eup54V34S+R7BfIhjWGqncsywrls=;
- b=IzqGDshWDAbU0v8EXJZM0EufX6LTz7ZgsdcPBP2z3wo3OQMI+NWu+tcPTC3rS6Zn63
- N+rB52v9TvVxX1GSY3X2Wa5KrAH3JZmpg0DEiyEqRIjE0hoegbCW0iVEiMQ1SUKFS5JQ
- zxjwwgqXWbJMdVLmuh3DgF9GxkF9MkrkziGdM=
+ d=konsulko.com; s=google; t=1750255593; x=1750860393; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=osgGLIzrX1zjXAXLDyn+pGFyyI/dKEyzOlLcVqBQ7n0=;
+ b=BPHOajuN6G5rOSXbu1BtHprm4tBpD03jyagzYi2LLnS+468RMDP3KPzke0AGmOdBOD
+ to0YiHHgV9bvOzGZldzWZPzQrvLkKneqYbo3JEJFyTvm1I1nS2Vm8stINJswm9ZNTJK8
+ lbG8GSTTEIzbof1Oa0IG1QL1Sni+lKyBgUUW8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750255445; x=1750860245;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=62V/BhmujVKnCh1Eup54V34S+R7BfIhjWGqncsywrls=;
- b=HevmoWhiXhIpuMUfSRtC1Mn/c9QYxN1QnkTdTKcgr4QmTJRo6K87sBGgyStW/U/nGT
- Y3QqNvVBrOTgnFyuQUAp0WKfvV+ulUry/GnSK1Kmhrx3NC8aoRmdKy9zRTILr4yr91hG
- rXBr8NsUPoEKelJdfBoZHet+inEJPCeO5CMH6xOgpSSOFwz4MaEo4iBpojAStz6165Kl
- n2xpO9iNhGCeTUtTcQaNgPrPW93GWnf5htdmgexpl5VPMHOgMOMoJTWNZd5UjHSYQfFP
- qJc4qNeURKCzoUftvunDoAt82tsWklSWnocDV43XJj5rGG0n2n707K+sX0dDouSmciE+
- IrWA==
-X-Gm-Message-State: AOJu0YzTdS/bnG168NxCM7JLIAIvraPNFP7p3TbkmZ1hVY1uZKMwrupz
- ynQq+FoNmDDOyHXKm7YdKrKzO3EdhsTwt61w/hdwX3cW9Ey26Ifj9QT7/+PXasD1BCOxOfevzuU
- 17kDVohg=
-X-Gm-Gg: ASbGncsrxdjrWGxSQh5U+KuAJ96EunK4iWo659t2hq25E9MnH41XOeaZFw4wFBpu4ed
- TavxX2zGp4dBz1eAVXlzJtRPA6TjJGK9yuhhbOP2IvgTZpFgHSqSCS93kJs9sIObCGyt/zpOsB3
- MmDgmdWYbOdc7qcTkhYzHDuadoLSWKGR0hdTwoXTJMGiTC+qKwDhutUIr5dH3zhZ0AMNpco/cBs
- VqjqXxDANQ6jTxFfqgO+rWfar2rM3tSpBo65Qmt8QI5+MklRiCM2y4TeHZTMB/FdsXmgXcqoVJw
- naRyBpSi1wBrTAcNlgXY4RwK6oGzcLPjRcKGmHlK0lmblgndetsjgo+rJljefXAR2orEXd5mhQv
- UiMN/2gbM136UfmEl/0WfdqYs7d8EJSqx
-X-Google-Smtp-Source: AGHT+IHd23PsFm+liOV6f+YupcrKZSFTw0VGgomB1RRf+3CJ7r4ecIux7IRdjiqV9tEqDL/KqdWPhw==
-X-Received: by 2002:a05:6870:b02a:b0:2d4:ef88:97af with SMTP id
- 586e51a60fabf-2eaf057ce1emr9634215fac.3.1750255431849; 
- Wed, 18 Jun 2025 07:03:51 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1750255593; x=1750860393;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=osgGLIzrX1zjXAXLDyn+pGFyyI/dKEyzOlLcVqBQ7n0=;
+ b=lPXK+uMIvkJJctDsMslW00YOlrFPJJsBY2iOIbpnG+iy+UsktwQM/m7v2F+hMHtOdX
+ l6c3VA1kwnlJZzcskMVJOQP98GQGAOFMa3JwKkV1AsCVc1Nma/eMClB3vIAtEAtbbetv
+ w3IbGPHuNz4ggY5LFeqhYyqzPgG8MeWfOHXsLb5Vwr69QxVIdG4DWniF5WNZkQ5WVqui
+ 8zhvvw/RETSf0N/P625vMfkVrAZjyr0/nIoCgEhvWhn1kZZOx35z1hJ80vleMOpF7j3Y
+ grZlIE1U5QzRqc2oiTvO1ai5JMHG414hoAVL93HX6IM14s13NKgjWMqpEIkzftA05inZ
+ iQkg==
+X-Gm-Message-State: AOJu0YzxP6XLm3ae2MrZHTEGHtwBYJ7FFZjRcraa+FpgjLTV+BNWBANE
+ EImG6dxmXyk7j2YX9AnUjS8BmrV/++GompAREaFWkmrveFLJIn0ZpAp8dgiGzyzLXA0=
+X-Gm-Gg: ASbGncsXi/965+AsvIPXc9hTwK1rh0Yz/nEFsOk5UVHytZgotvQcCe4NhRO67I+e3uu
+ LVhZsKu8mVX2uASUuArF+j8t9Qczf0QQcDIxhEJPTTnS9O1+belxl14EKuZPrcxBmmiQpZM4QGl
+ 0LRKf3zGQF8UxF3DBGkOfAWzSHqkVhwZT3NLq7V1dSBjj2CSLniGTSKfPkQ0avdlJGvvEdNldBB
+ ULIryPVHftBO+Dqi2nsb7JTQKU+3AJOMOyJM+UC4uSAxqRZN5SAYTJTtNVPC5pA0LbRZr6v2nye
+ JuI1BizEMEVc6Y71orM5659wkdI5d2gHGNaeSyXn6WaO75kT8QP+3Ay+xfcjiD5Hcwant+3AS08
+ mEmHvpSlWVeONP+0lOsV+rbw=
+X-Google-Smtp-Source: AGHT+IG3nwktZAKsRZTkFpf+/rpnvshJS5WLSzXC45icfBvCOBqMnOuoGODMXhcRoO0EcaCRODucYQ==
+X-Received: by 2002:a05:6820:168d:b0:60f:847:8354 with SMTP id
+ 006d021491bc7-61110f312abmr10798850eaf.7.1750255593212; 
+ Wed, 18 Jun 2025 07:06:33 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2eab8910463sm2797192fac.11.2025.06.18.07.03.50
+ 006d021491bc7-61108d785a6sm1418724eaf.1.2025.06.18.07.06.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 07:03:51 -0700 (PDT)
+ Wed, 18 Jun 2025 07:06:32 -0700 (PDT)
+Date: Wed, 18 Jun 2025 08:06:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: jerome.forissier@linaro.org, patrice.chotard@foss.st.com, 
- ilias.apalodimas@linaro.org, Casey Connolly <casey.connolly@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Simon Glass <sjg@chromium.org>, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
- Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250616112749.17311-1-patrick.delaunay@foss.st.com>
-References: <20250616112749.17311-1-patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH v4 0/3] Restore support of short name for type UUID
- parameter
-Message-Id: <175025543025.7476.1231836682265621641.b4-ty@konsulko.com>
-Date: Wed, 18 Jun 2025 08:03:50 -0600
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [PATCH 0/4] list.h/treewide: get rid of no-op prefetch()
+Message-ID: <20250618140630.GC6521@bill-the-cat>
+References: <20250507121246.518691-1-ravi@prevas.dk>
+ <20250522165656.GB2179216@bill-the-cat> <87ecvhzhyx.fsf@prevas.dk>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iRa5QLM+uCb9nJIp"
+Content-Disposition: inline
+In-Reply-To: <87ecvhzhyx.fsf@prevas.dk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,26 +97,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Jun 2025 13:27:46 +0200, Patrick Delaunay wrote:
 
-> V4 update the test print_guid, as "ESP" is a known part type UUID under
-> CONFIG_EFI_PARTITION flag and no more CONFIG_EFI or CONFIG_CMD_EFIDEBUG
-> or CONFIG_CMD_EFIDEBUG
-> 
-> test result:
-> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/26699
-> 
-> [...]
+--iRa5QLM+uCb9nJIp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Wed, Jun 18, 2025 at 08:23:02AM +0200, Rasmus Villemoes wrote:
+> On Thu, May 22 2025, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > On Wed, May 07, 2025 at 02:12:42PM +0200, Rasmus Villemoes wrote:
+> >
+> >> While looking through list.h, I saw that the regular list_* helpers
+> >> (and one of the hlist_* ones) still contain the prefetch() that was
+> >> removed in linux 14 years ago. It doesn't do anything, but makes the
+> >> macros harder to read, so get rid of it, and the fallback, no-op
+> >> definition that they relied on. That requires removing a few uses
+> >> outside list.h as well.
+> >>=20
+> >
+> > Unfortunately this leads to build problems on lots of platforms:
+> > https://source.denx.de/u-boot/u-boot/-/jobs/1141951
+>=20
+> Hi Tom
+>=20
+> Now that the 'remove volatile from gd' series is in -next, could you see
+> how these cleanups would fare on top of that?
 
-[1/3] lib/uuid.c: restore support of system partition type for ESP
-      commit: 73d5a68fec9e68b2278d83625d6f8bbfcb33e2d5
-[2/3] doc: cmd: gpt: add information on type partition
-      commit: a3a5179b1c9eafee0850aa653384cb8c23a4f79f
-[3/3] test/py: tests: gpt: add test_gpt_write_part_type
-      commit: 7a598e633a5376ddae6a96bfcdb28c8e7b422b0c
--- 
+Yes, I'll give it another spin right now.
+
+--=20
 Tom
 
+--iRa5QLM+uCb9nJIp
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhSx+YACgkQFHw5/5Y0
+tyzw3wv/Vnl6xm7PMmlkxDOM297eEB0Le9n5b6NjuZtzEvu0JP4AWbn7e8ZB0MCc
+nc9kcA1zjPhIlpW0H2vVUxXmejzIM3Ndl9C+h4ab9AkpovY7/7EiBcM71qiQ4Shr
+h3hPOda8NCnm+zHXYzTcTeu+syfiyuv255dOtP+HyvXTyt6h2rpPJITWt9bLiHhy
+T/CfRP9cYuLjBk1Abxbu4IiVKLAVPg1IEv9Xk94P8fHKnTkkawClJHw8DmM8f3Mn
+HQVTI2jnCmOys/hMcbYu+H7enTUkGrpSfU5RBFKieouC6yN7IBdXI5kpIgezv2II
+40ZvjzRU7xv5SH1rQSpDim/4DAieM0WpIPpJgVzeVDbdjCUTjWUPAzKzikqWuAHu
+wxDKIxuXJxgYLhjGnjzVcOewhZyYN+DCy0Itf6rTKvMpFWgWVvVBIYWqHVcG/kBH
+Gz9401HJgRHjqXNhT3pUGbaHHcrNbaEPWsND98xcsKRDpD5DnFpBHFF35RnVSIqL
+qPP5EKa1
+=f9Rm
+-----END PGP SIGNATURE-----
+
+--iRa5QLM+uCb9nJIp--
