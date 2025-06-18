@@ -4,100 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4706BC7115A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 15:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586B7C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 15:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C8882E20;
-	Wed, 18 Jun 2025 17:10:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id ACE8982DF2;
+	Wed, 18 Jun 2025 17:33:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="H0TXi8oS";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Oi4WrrBx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 985DB82E25; Wed, 18 Jun 2025 17:10:29 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E6E9882E08; Wed, 18 Jun 2025 17:33:10 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A24C82E17
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 17:10:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id C3F8E82C55
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 17:33:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750259420;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=h4PgzOtt/oW8d/0Q9gpCug9TuQSx+gHl9TJ/nT0bCgM=;
- b=H0TXi8oS9k5TAgAmKKel45wlm43ed/0/MM3rRd2yj48GFYg5dGejPvD1SxspJmQhoxYA5e
- Gxwykw9kdJYkhumCbDb10rt6USoaZZoSM75lhy1u4iLTlHU1LXogC9drsM09GN143RoedS
- kS7sSNoL02HO4ZLDTKYCEI/HYMfq/8g=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-557-9vTNp7v2PAiMuJ3l3od7uQ-1; Wed, 18 Jun 2025 11:10:05 -0400
-X-MC-Unique: 9vTNp7v2PAiMuJ3l3od7uQ-1
-X-Mimecast-MFC-AGG-ID: 9vTNp7v2PAiMuJ3l3od7uQ_1750259400
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3a58939191eso885855f8f.0
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:10:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2e9a38d2a3aso5091520fac.3
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:33:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1750260786; x=1750865586; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8h1QqNtARcdIe6lQb+zNQ4Bt7+1jpoQEmkkPCEG7sGk=;
+ b=Oi4WrrBxa6i7s1n3u9Ivxii2/sDrJaCVicGWW0/zz8i00SQQJshpBxqd4qP3IwcA0w
+ KnvsLRS1kFUYeU8TyIhXKPzeQ/YzmX1GSEjtp1iP1dPYZ0RlqYQ8x1Gb2x23/i/8gr0C
+ 9wzF8mHXS1jpfs8CJ8jOL6ywKWI4ZAh9Dm0vX2UGRGzeEfyHyviRMj1vIE7S1GWw8v9R
+ oNhx8L0o2R9GcGnyFBN9bWu2aHAwilsuZ2mf3/0mnhaHaeB5C5O5iAfwsb/uk9tbnXP+
+ afuAj2hnyVGCJw/EZ/1yLZXpPFQvTZzQCeDpO4U6VYiHfl3Pb/egxJ1IpLUv+z1sptcV
+ 7Bog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750259400; x=1750864200;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=h4PgzOtt/oW8d/0Q9gpCug9TuQSx+gHl9TJ/nT0bCgM=;
- b=KnhotNHecB1IVB754UX9x+d60xqQ3XdeaU1BuSSYfJiVHpasVBb084GzatWiWCgx/Y
- Vl5KKcaxjmP6JOEt06q5AKDvgklbJ8OrcMJ8R4v+G4vv8GargoTVEWXbk3ew713YT6Aj
- GLmzdvWkrKK+Z+ePQsZFEu2EFFd5Ll71/cnGdoPjizPQVrLZVj14jK/oIC64FXdDp38v
- MZ9qBodZ9flNzVDz0QJwJMbX2tgIRdNEHpVIri5icDPJR3yZ3BM/SPbfblpSqq2vx2O5
- G52m63gSnBfN8PJIzviaW+BY6929tViphDYqLqOQDtvkw+z9mzpCczEOnPdn5oKX74aU
- TFAA==
-X-Gm-Message-State: AOJu0YwZed8bakGUua1ySZfE9H4SwxROGLLFMGpbZL9PrLYFAf5/8IDu
- FVd00juCU2ilexUE6nAh1jQ5QV+bc/8nMzrlY9M8ZkXZ4ZOWS4JihwiZstOZ0i41ZQmUyE/FnKr
- RU1/IKn9eMarxuHmPUZnGuQJTSBUP4spwEUe6uTiYgcnYQYCAa/vFYBM=
-X-Gm-Gg: ASbGnctdceLhvUx0ofAvgw8IYVsYyhf45dMbctp0+OoDJ/EVrqk/UvmfGeK8Gtih1Xc
- L5/9l0v4qkYje8wWt07fcp3oc5Z6oCYtGsKeG2bc/TIP8E6OjMojf49GCdsfAZUsFiHITky9W9C
- VVsHaUqVRxoXtnVeG2L0pjxQvtMWtat4suSd3JIOS9zySGSbjRiwaDhQVpRsao18FzyUrm6skr4
- 0l05Vv1YMqgvnn2ObdGxKNt652H70MfGYOwDPEIWgFZQzkLJtmt2RrYJhyjXQt3RYev5ad6AEQ0
- So7i3al+m6KWaX7bISAsH0w/YGi2Hs5xBEdG+IWlnfZeXOR6PFtlPMBjYEjYA3wLuhiXoXc9aAq
- EewjW
-X-Received: by 2002:a5d:64ce:0:b0:3a3:6b07:20a1 with SMTP id
- ffacd0b85a97d-3a572e8c1dfmr13144007f8f.40.1750259400148; 
- Wed, 18 Jun 2025 08:10:00 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFN42cnY6EiE/9t58AueDMVhrHZjWzos9sG1hW1Pdma1N6+Sv/HP13kyTDiHWe/F89V5wjXeg==
-X-Received: by 2002:a5d:64ce:0:b0:3a3:6b07:20a1 with SMTP id
- ffacd0b85a97d-3a572e8c1dfmr13143952f8f.40.1750259399676; 
- Wed, 18 Jun 2025 08:09:59 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568a6078csm16885755f8f.21.2025.06.18.08.09.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Jun 2025 08:09:59 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- mripard@redhat.com, alexl@redhat.com, mkorpers@redhat.com,
- eballetb@redhat.com, mskrivan@redhat.com, Alexey Romanov
- <avromanov@salutedevices.com>, Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Maks Mishin
- <maks.mishinfz@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Michael Trimarchi
- <michael@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Svyatoslav
- Ryhel <clamor95@gmail.com>
-Subject: Re: [PATCH v2 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
-In-Reply-To: <20250618145016.GF6521@bill-the-cat>
-References: <20250618080056.1973311-1-javierm@redhat.com>
- <20250618145016.GF6521@bill-the-cat>
-Date: Wed, 18 Jun 2025 17:09:57 +0200
-Message-ID: <875xgt3x2y.fsf@minerva.mail-host-address-is-not-set>
+ d=1e100.net; s=20230601; t=1750260786; x=1750865586;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8h1QqNtARcdIe6lQb+zNQ4Bt7+1jpoQEmkkPCEG7sGk=;
+ b=ZHOUF5NuxlA1rEaLGLUXrxic2++fttGHZykFhx7WeEY9huB3eYSdGIiGwV7KmdvuYD
+ Or4M5sSj74CWzwTT4QK2ml8fJrcO/fkmivS0VWKPnaYhvoB2HKxdbotFdOdMeu489lFR
+ gkjBqOZpLkukAokszSG2Y4Dtm6owGtCn+wTlOuVkQGeW0fdxReXYI4APsgUGDMs4y8vl
+ P5TYiA96QViqojVFjTiI2KS0Bc8K29YCjh/G/OwaD2s42/kBOxDb9FboqBN8EPxFux7B
+ h4VORxtlUrJmrIErEtU6KwDt5oMlpxXKuXFU3eAFdtre1RzPjvwSyvOX9ljfz5BdtGfS
+ 3SkA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWzJVtyivlrYDOD61wG5SKLBLFDtQW4tLRp8PuAoiKP73I4cBlJGAY1Mh1usJ+8IWo5EaCH/Jg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwArmNAmiPNhjv4L6oi97c0m7Byu6p2lafyIlt9hD+tRu56/3S2
+ BLUwvdMQEdZCB/KumD42SdrMu0VQwDRBxkA0cFcGMfMSeIEYXB1MvfwGqT3XiTQrG/OO8M04TXp
+ bKYorKz/0RZ1Jte9C+DBYjk7/K5NQD1UDqXV/9Gmlqw==
+X-Gm-Gg: ASbGncvAJXpQE23PU0cThew5p1zenKq+LIcQOvAhlAWk0DtFt1SyPYJFOGchpRrk4GL
+ +TOWlfFbVZ7RUG7okBzGCTrf+Kjw9JTYiyn5g5HX0goPYcenC7+f4uVdZdLW+BSjEOMuG5wSurY
+ j3jji0+sWVzFya8pgYt43nFtQ9n4s6Y/ePheWVw6VknlU=
+X-Google-Smtp-Source: AGHT+IHIf/A9rYycPZpd57GkDs31zXjaJwp7d0r5Am/Zz6rywUtlw60ak1WEzyQRWtNIcerFuz8tDVFHuAabGGnmhBg=
+X-Received: by 2002:a05:6870:b01a:b0:2c2:cd87:7521 with SMTP id
+ 586e51a60fabf-2eaf07f5f14mr10621917fac.4.1750260786250; Wed, 18 Jun 2025
+ 08:33:06 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: H6UfiNEo81D98L5p_FtOjBkwLM1eFAAz-q1tEmJhsuc_1750259400
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+References: <20250530153826.1057407-1-tharvey@gateworks.com>
+ <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
+ <20250617224551.GA1687135@bill-the-cat>
+In-Reply-To: <20250617224551.GA1687135@bill-the-cat>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 18 Jun 2025 08:32:55 -0700
+X-Gm-Features: AX0GCFuiP7L7FohoTxknvFuHFUJWa5WKCSBVrIK5eKgC6HJNNu79S0nt0DtVKi8
+Message-ID: <CAJ+vNU2oNMpupHLHHcf3HTXBTN8mnPczo6T8khAkN875YwmUxg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
+ rx
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,36 +101,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> writes:
-
-Hello Tom,
-
-> On Wed, Jun 18, 2025 at 10:00:34AM +0200, Javier Martinez Canillas wrote:
-
-[...]
-
->>     05: efi_selftest: Add basic partition info check to block io test
->>        aarch64: (for 1/1 boards) all +563.0 rodata +179.0 text +384.0
->>                 qemu_arm64_lwip: all +563 rodata +179 text +384
->>                    u-boot: add: 1/0, grow: 1/0 bytes: 384/0 (384)
->>                      function                                   old     new   delta
->>                      execute                                  36428   36796    +368
->>                      partition_info_guid                          -      16     +16
->>     (no errors to report)
+On Tue, Jun 17, 2025 at 3:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Thanks for digging at the size part here. I don't think that amount of
-> growth justifies a new Kconfig option.
+> On Sun, Jun 01, 2025 at 11:07:16PM +0200, Heinrich Schuchardt wrote:
+> > On 5/30/25 17:38, Tim Harvey wrote:
+> > > Call schedule() in net_lwip_rx() to service U-Boot tasks and
+> > > actions during packet rx.
+> > >
+> > > As a cleanup also move sys_check_timeouts() here and remove it from t=
+he
+> > > functions that call net_lwip_rx().
+> > >
+> > > This resolves the issue of an active watchdog resetting the board on
+> > > long network activities.
+> > >
+> > > Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > > ---
+> > > v2:
+> > >   - remove duplication of sys_check_timeouts() from functions that ca=
+ll
+> > >     net_lwip_rx()
+> > > ---
+> > >   net/lwip/dhcp.c     | 1 -
+> > >   net/lwip/dns.c      | 1 -
+> > >   net/lwip/net-lwip.c | 7 +++++++
+> > >   net/lwip/ping.c     | 1 -
+> > >   net/lwip/tftp.c     | 1 -
+> > >   net/lwip/wget.c     | 1 -
+> > >   6 files changed, 7 insertions(+), 5 deletions(-)
+> > >
+> > > diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> > > index 92bd7067a7fb..b79b746db390 100644
+> > > --- a/net/lwip/dhcp.c
+> > > +++ b/net/lwip/dhcp.c
+> > > @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
+> > >     /* Wait for DHCP to complete */
+> > >     do {
+> > >             net_lwip_rx(udev, netif);
+> > > -           sys_check_timeouts();
+> > >             bound =3D dhcp_supplied_address(netif);
+> > >             if (bound)
+> > >                     break;
+> > > diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+> > > index 19172ac959ac..738f8bf3196b 100644
+> > > --- a/net/lwip/dns.c
+> > > +++ b/net/lwip/dns.c
+> > > @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const cha=
+r *name, const char *var)
+> > >                     net_lwip_rx(udev, netif);
+> > >                     if (dns_cb_arg.done)
+> > >                             break;
+> > > -                   sys_check_timeouts();
+> > >                     if (ctrlc()) {
+> > >                             printf("\nAbort\n");
+> > >                             break;
+> > > diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> > > index f05c4cd3f64f..e8d4cc542ed8 100644
+> > > --- a/net/lwip/net-lwip.c
+> > > +++ b/net/lwip/net-lwip.c
+> > > @@ -13,8 +13,10 @@
+> > >   #include <lwip/etharp.h>
+> > >   #include <lwip/init.h>
+> > >   #include <lwip/prot/etharp.h>
+> > > +#include <lwip/timeouts.h>
+> > >   #include <net.h>
+> > >   #include <timer.h>
+> > > +#include <u-boot/schedule.h>
+> > >   /* xx:xx:xx:xx:xx:xx\0 */
+> > >   #define MAC_ADDR_STRLEN 18
+> > > @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct net=
+if *netif)
+> > >     int len;
+> > >     int i;
+> > > +   /* lwIP timers */
+> > > +   sys_check_timeouts();
+> > > +   /* Other tasks and actions */
+> > > +   schedule(
+> >
+> > Some scheduled tasks have a long duration, specifically video_sync_all(=
+)
+> > called via video_idle(). This change will lead to lost packages.
+> >
+> >
+> > @Tom, Simon
+> >
+> > The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule() inst=
+ead
+> > of WATCHDOG_RESET()"). This added schedule() calls to EFI networking.
+> > Package losses can expected if schedule() takes more than 1 =C2=B5s. Th=
+is is much
+> > shorter than the time needed for synchronizing a 1 MiB frame buffer. Th=
+e
+> > cyclic framework was explicitly meant for short duration function calls=
+, not
+> > for long duration tasks like syncing the video frame buffer.
+> >
+> >
+> > I think we should remove video_idle() from the cyclic framework.
+> > video_sync_all() should only be triggered if there is video output.
 >
+> So for testing purposes, if CYCLIC is disabled but LWIP is enabled,
+> things are fine here? And so we need to at least partially revert commit
+> 5c8dddadf1c9 ("video: Use cyclic to handle video sync") if not fully
+> revert it?
 
-On the contrary, thanks for pointing me to your script. It's really awesome.
+Hi Tom,
 
-> -- 
-> Tom
+I can't disable CYCLIC without also disabling WDT which then works
+fine as the watchdog isn't being used.
 
--- 
-Best regards,
+You are likely pointing to the correct patch that is causing
+Heinrich's issue but as far as I know he has the
+hardware/configuration needed to test this and I don't know how to
+re-create his issue.
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+So in my opinion there is nothing wrong with my patch here and it's
+more of an issue with the video using cyclic for video sync.
 
+Best Regards,
+
+Tim
