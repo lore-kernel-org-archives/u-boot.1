@@ -4,146 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE32DC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 06:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F115C7115B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 06:25:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A15DA82B0F;
-	Wed, 18 Jun 2025 08:23:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id B40D782B18;
+	Wed, 18 Jun 2025 08:25:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="QNivQNY2";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Qcmkcb/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B61282B18; Wed, 18 Jun 2025 08:23:13 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id D966282C2F; Wed, 18 Jun 2025 08:25:32 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9D2D82977
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:23:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EE2182B0F
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 08:25:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CcIa+AwrzTKq3OQxig1i9cvH4ApZkZqiWpfYbXO7R593IcDqWNKjQy+NolCkfMBZa35T5ZqwQLZUj3BMTVFmgOeCd1+91OMMHyp9FtVHZnU/AdBEEYzMombqwtSAnnVW7WfeTF8pQI1S05qmVsKtKE6u6vUB+XCRK2WhzlkpVQet+fIN5TGmlWFUrC4EjZha5/6ZI4QtgdpKpLwBWfp5EYPd1pQOL9gyuGUdKEX6rz81wvWdx0/eKDGeuvktyHiJkzgzwUDxQrn54OxcDP/WJp5GcWlKsK1HBRkYA8DsT2+8bpg8tfL1M0K+iX0dtN8eST8q1MmiXJp2RMCZyPWe9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jqgur+5YBLremOlnvjhGCyO/xzlY2c7oFauyZapxyAU=;
- b=Xy3yyVu8vbwwFnmM9gi7GRQm+OImc4ExHwWLbzvXXvGhMTf/tpHDxII+4HCjUeRw+EBvbh6+VbLrRByFTwMKpC+5OWUvPhm29Dj9J3X69JaiTXagWXial8J2cnAgtS5gubiUX6VhBov8kdecGOdphzR2ZuuW+im8M3GwsucaqYyL9vrwxRo/tUjeDVrcVwwW5h79LSk3uE2gja0Qz/NFbKRSUdzgRSnYzVAG0+wqlPJGSQ1gDtBs6oZmvDLDctNQyvA4pT3UyP8v7Sib4bAeDzggzbvYJCuYcvmybg1MsFOGLpGerqPrm6VK6D65hoAR6OSV/occq2RticeQKvK+QA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jqgur+5YBLremOlnvjhGCyO/xzlY2c7oFauyZapxyAU=;
- b=QNivQNY2G7nUNPWQuAqQGUni+UcKkBW50LY6BHGzmIpxnt26KzU0zUZhlAenULHvAEodA282dFgsyHEpNMo56qm7gWia6sCNh/aRt5apHjdLmBfRLGUF7ZSzOCvpfoDwqAk0fAsdLiiTRexvkwV9Nxk9CQaLDuHllYs/f/ENVbg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by VI1PR10MB3743.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:13a::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.28; Wed, 18 Jun
- 2025 06:23:05 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.8835.027; Wed, 18 Jun 2025
- 06:23:05 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,  Daniel Schwierzeck
- <daniel.schwierzeck@gmail.com>,  Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH 0/4] list.h/treewide: get rid of no-op prefetch()
-In-Reply-To: <20250522165656.GB2179216@bill-the-cat> (Tom Rini's message of
- "Thu, 22 May 2025 10:56:56 -0600")
-References: <20250507121246.518691-1-ravi@prevas.dk>
- <20250522165656.GB2179216@bill-the-cat>
-Date: Wed, 18 Jun 2025 08:23:02 +0200
-Message-ID: <87ecvhzhyx.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0055.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::18) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1750227930; x=1750832730; i=xypron.glpk@gmx.de;
+ bh=B+aAOuMH+T/YN0uZ+tH7imKtx1PGDUKqrEMSuTKQ6+E=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Qcmkcb/TFsbw+WTqKbPxzKhG8P+BKtMgaT7JkDwndGc5t+Y0dFZ22WLRU9rt6Wb5
+ i/ByJ+4A2PQEEoCSxgd8gOp8MLKFAUCeT+uynVna4wLFowLDz7OqxUTE0zCGz0tX3
+ gKoAqApKbrKvp0uZeajR2A1xUiU2NCyWhVWTPB6CUDwnhIKtnZ66SA9y5p9C11EWb
+ xDFan/yp6V6bcJmFnG3GnTkp0vIlol7xvpZTJ58Y62z+9+IaRyMAiqmdCXeB/4D/p
+ iP7j+rmTECRC0NErNqxXYYcGEtiFvhJI80UjzFxWJ9+YUo0Adk9F3bFzPEeo1XlVk
+ 9c//vFiVXqwi3rC/1Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.107.213]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtOGU-1umBfT367S-012SMO; Wed, 18
+ Jun 2025 08:25:29 +0200
+Message-ID: <1598cffa-316b-41c1-b031-fc3259bcfbac@gmx.de>
+Date: Wed, 18 Jun 2025 08:25:28 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|VI1PR10MB3743:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22fccb74-94e3-452f-d398-08ddae3095a5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|38350700014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?x/RJADBatWyCOTEXT1x5ct496S2/bunIXiiY6Y5jCrfFKTyhCas8TrpvxPnr?=
- =?us-ascii?Q?HiW4LX3B5IBmY0oOFm8Mk+UmbD7W2EuqwaieDZaf4ONFA+u3rwoHWx/POGfw?=
- =?us-ascii?Q?NnVnxfr/laDZf2pVSfyjE6AhPORjNOMuSrBEtzfEUsxq+0I8UkETP3WzM+6t?=
- =?us-ascii?Q?RfNFSOAxmBxPqC+0S9+h9yb80sYF+jxvuRtjCaTjXka4z/ftslUgN0MihkvL?=
- =?us-ascii?Q?L8PDy0V34Fdf9VSD998FqKq8REqd+7gMb8zWNw6tEdmanysH4zf8NamGCeW4?=
- =?us-ascii?Q?p/st983wF38ilw9KzPJouBvcIMtSgw5hkKnR2LdkeTcwy4VohhP9z9ZWtbjz?=
- =?us-ascii?Q?j8hfnm81t3yEsS3G/epRtwOxeDgJgwQVKaxnN+8oQoVWWl3QNoZrvFzOfzQy?=
- =?us-ascii?Q?Z6v8lbicSoOx+rF2qlLbWRx3EIBr45nktKgxATCMOeFB6SOt+Y6/I8MBCSr6?=
- =?us-ascii?Q?zAcH1zVc8IOHdHISJVj7sMC40orLUNcjSeRksCBuHh+4PAZy8wNYn6ruZH3J?=
- =?us-ascii?Q?VdwWN6e6KgzzYh2CzQMz5gp9DpHypNkkgEX9c7yZz1vA5Q1AHuSIwd0AZjjM?=
- =?us-ascii?Q?vkjZ09I3h+UJZNSHli7JqlmO/iMn5V14Ph+a7+QuRwPmUWYptF2IhpjFXeRW?=
- =?us-ascii?Q?7eFBUjhtV30eJJfn5Du8clzNzUCDel/7BDQEtGBU6Z+mh004tApWdNCN754l?=
- =?us-ascii?Q?xNdVTEdzXJdPMwXOWIH/SdHZX/U0gGh+N7/SXf4aa49J5Gxcjfxbd1HiXLrM?=
- =?us-ascii?Q?fFUqKpDlutB/aX/9JILq/hzXfQNxLcTqFCTso/uUCVq1W4iUaso+XZIy08na?=
- =?us-ascii?Q?4aGIDNrxHvgMn+tgoVZqqPcij3TbTxd9RP+IsHqF3GMBl+jWD7qidCsmMUjs?=
- =?us-ascii?Q?T0LKUD6C1rjCM7afg/sSrhKsu0Jje4ku1pKjnEEjLTQcAcDmrdMH2oMr0A8b?=
- =?us-ascii?Q?mBw+GDbySwt5TwoSi5aBwtcDGAH3emaQtaOsmHSoCu429LkA25rJc8rDjZxA?=
- =?us-ascii?Q?m4QTkU50OnRxLF64P+B03c2rFcri2RGwccS+9I6OCbfq1yqIgTlvhMa+C2JA?=
- =?us-ascii?Q?fQF8bsYPOvDslUTkkXeKi7qbs0ZHMFvDRqAESQ56C7jSzfEFgBvXKOx6B+UM?=
- =?us-ascii?Q?O6hQomS8tGLt2m/OjqgtTsRfVjY09f9frVwSpY/W99V9r9oE5qc3LOAxzsPX?=
- =?us-ascii?Q?TE/Unfk54pWnZ+/QCcVmXV6NFLyCm6ENjpaKByhE7vtsnm5zabLte+Pp8fGz?=
- =?us-ascii?Q?yVhHgw5cpFIIfHz//8j6VP64nlmURRyJ9b4OvORexKxMenWw+op95u8ef3Fp?=
- =?us-ascii?Q?ggcz40rlWz+YYTxsqqBi3i99/qoIuiV+btuUH6PHdH47hj3D0YveSYQeTL4o?=
- =?us-ascii?Q?kLdE0vLc3OjWCZ8ErbMdRwNncObmKLoJ83hZWHgFH5TIknGNk+xHDQpyACCa?=
- =?us-ascii?Q?tfolgH69Ozc=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?f2rvSxeGrZfHQm0W4VrTgRxE6QmzlT80w1QusNniOjuxMc42BaqPSLW2Ltlj?=
- =?us-ascii?Q?BULaWq2gMccEHgyGqyK0W/cOtJN7rePz12eO03Hc89nQVSQRVOdM2HT7R3O2?=
- =?us-ascii?Q?3VFvmtK09B4bS4m/+2QVHdib8zhcxfrzOb5TNTKnEhZD3vM/MU/WRnl0zzDm?=
- =?us-ascii?Q?9/f1ih/ZQIHH6lBl8baJgma0oZ9vMlycRJ1Ub+xbNuFJ1e40EXAjG6BdwUd0?=
- =?us-ascii?Q?Nj0+fnm4vrEW3+jyTsx3pByGYnhcI4uxgkcIP9FaPyly8ejCJ3kHQxBpsgXy?=
- =?us-ascii?Q?UB79D00NpKs+BEJTXR/EjpZQUsTaBR1cNZlBmQb6ww6mMHawGx0cmeSxmM9x?=
- =?us-ascii?Q?sEaQr7p8MdSbB1J2rsybL0IiWkH2KM1lXQq0SZXXsqB8kEGOxsbQq2nitWqP?=
- =?us-ascii?Q?kfiB7eoS5SyLlPScDUZe5UFCE0V1BVS9hTwHe53MdKrZWyGZ5TxBaXEzt2CT?=
- =?us-ascii?Q?Zq4gT01EHR1e3QjlRHZg3ns0U1WwZGwUFBaZpvXD+K1ESNGyci0BSKNmjqEd?=
- =?us-ascii?Q?8MvXxgp2kqqVVl0mItYtXndmFtzkCnb4MQPqxD5DeIDbNkhTNwPvwtiLWfqZ?=
- =?us-ascii?Q?Gt2EmjFXPEuDMVWQCZwGWmY1qkcX1qpfNgsILXLJLYOrC5kTirRdahhLAChc?=
- =?us-ascii?Q?b0pUGhBmCcxOKHNxuF03EYw49zFZ4lTtYUGD5FDMMRmKVwX7FwW+0z7Ij2eO?=
- =?us-ascii?Q?D1/CfcMyCJy71VUYeE++Wi2v3jlbUG+GtrLueorsUuI1yaIErpvlFIgnCs/X?=
- =?us-ascii?Q?iLqfRIZC/4SIC5r+f6pKk8mLpAqgmy9PrI/G2Fjuel1inLHjUltxDkkefFq7?=
- =?us-ascii?Q?ohr7CKNVaXCvblT/wbIZePNsolUdNEGpXzi1d7H08ySv9ucMNVzxSQLLpk/K?=
- =?us-ascii?Q?c+B5beMdMfEC/j8qXJ/YZmRbIzOBf2NKRNGuDvrEKcIIZAv/KjWfqmqXmch+?=
- =?us-ascii?Q?rgP3U7xV+YV+bAN74iTzrT8SiIDD11NDt7sksteVXfw8vC0Jwk6qb47bWObh?=
- =?us-ascii?Q?3H9PDK0HH82/vREl7R8dgbRVJTsxokYtiZ0ppSyfLmiOTimPwoFxAy24E4Uc?=
- =?us-ascii?Q?QZtfFutrTaCZniS+TfgI1a79oJkgYVX+iGRCcX0jh6td7pk2GbpSHvMZtlEa?=
- =?us-ascii?Q?DOJFIe/d+nMom9m5/fqtFFGBh6Ziyu8r4npWGazcV3OYeguR7QuMG41zl+Oj?=
- =?us-ascii?Q?huEuwNfshmfnwqat3KcSAplrMuRNIeTdcDQJYOCeLeID3/z6zZ6KKzROjL+4?=
- =?us-ascii?Q?JZD38nACkB3t2q3eEo317hIisMfSBit/6/f1MeXbdmncYNEBFNMHTalSqzyD?=
- =?us-ascii?Q?5MHl04/x9yfg+FB7xx/Zol5fmaEwklHRR9MiyAbUAwLHrgfZRMQqPBTH2XUx?=
- =?us-ascii?Q?IWLDooO+SCujeetwQobs8fBqk07pRQlbS+NsY3t2vl6hpDIRLutjUCBC6rR5?=
- =?us-ascii?Q?6QkiDGMJKZDBv5egFnEhwJU3G/G/l4dE6H9UFLbXyGWcaxYGMWT25ADX2Hya?=
- =?us-ascii?Q?Ddoh8/A1tujdJKoz9uOSxnNnmKYSvg1SnMeqnB0yfoeW0GOeMQ7f1tG20MrK?=
- =?us-ascii?Q?vdkePB9R6Axz0LM+EPPQu591vHGejLUXpKzsfeEXOgiitvoZ1P9V1JxAd3Ed?=
- =?us-ascii?Q?8Q=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22fccb74-94e3-452f-d398-08ddae3095a5
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 06:23:05.3320 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: crGKsHFyMB+0iEmPBjOyw3Dmo13R8TpsQJ0iL0A6mUE2W6uEWEsMdmbkzfvSEw9zXaUe49C8zO/5jIvBNO44jajgyOJ11sDL5g6VmLIWS74=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3743
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/4] efi: add EFI_SYSTEM_TABLE_POINTER for debug
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20250617120855.87492-1-paulliu@debian.org>
+ <20250617120855.87492-2-paulliu@debian.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250617120855.87492-2-paulliu@debian.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:0ejFQXPUaCwG5/HoLrErCx8CkQP3u0ZZ/WNXmZ1td61/DFiTShS
+ L7yR6sf1Mx+06vHmLhlAwV5piHzoDjVzHJN+GPQiZB4EEN9MHUTAZVxWBL4wsw2Zr8HTXj2
+ a/xUZNHBEXGDRbS3ldfEmbuPz/Ztr7Ih4IGwS2br8a4ugcoACpV7qx5bFy7KlGNZgN4avQf
+ 003jc7ifcdLlMWsmmfhjw==
+UI-OutboundReport: notjunk:1;M01:P0:YzWsBsFLbNo=;Xq8JTclSEtAEXR5sDfGX40sMrez
+ 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
+ J5eaYAY
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,25 +128,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, May 22 2025, Tom Rini <trini@konsulko.com> wrote:
+On 6/17/25 14:08, Ying-Chun Liu (PaulLiu) wrote:
+> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+>=20
+> Add EFI_SYSTEM_TABLE_POINTER structure for remote debugger to locate
+> the address of EFI_SYSTEM_TABLE.
+>=20
+> This feature is described in UEFI SPEC version 2.10. Section 18.4.2.
+> The implementation ensures support for hardware-assisted debugging and
+> provides a standardized mechanism for debuggers to discover the EFI
+> system table.
+>=20
+> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+> V2: add Kconfig options to turn on/off this feature.
+> V3: make efi_initialize_system_table_pointer() do the job as described.
+> V4: use efi_alloc_aligned_pages() for system_table_pointer.
+> V5: move the code into a separate module.
+> V6: Use macros to replace size_4MB
+> ---
+>   include/efi_api.h                  | 16 +++++++++++
+>   include/efi_loader.h               |  2 ++
+>   lib/efi_loader/Kconfig             |  8 ++++++
+>   lib/efi_loader/Makefile            |  1 +
+>   lib/efi_loader/efi_debug_support.c | 46 ++++++++++++++++++++++++++++++
+>   lib/efi_loader/efi_setup.c         |  8 ++++++
+>   6 files changed, 81 insertions(+)
+>   create mode 100644 lib/efi_loader/efi_debug_support.c
+>=20
+> diff --git a/include/efi_api.h b/include/efi_api.h
+> index eb61eafa028..6c4c1a0cc7b 100644
+> --- a/include/efi_api.h
+> +++ b/include/efi_api.h
+> @@ -259,6 +259,22 @@ struct efi_capsule_result_variable_header {
+>   	efi_status_t capsule_status;
+>   } __packed;
+>  =20
+> +/**
+> + * struct efi_system_table_pointer - struct to store the pointer of sys=
+tem
+> + * table.
+> + * @signature: The signature of this struct.
+> + * @efi_system_table_base: The physical address of System Table.
+> + * @crc32: CRC32 checksum
+> + *
+> + * This struct is design for hardware debugger to search through memory=
+ to
+> + * get the address of EFI System Table.
+> + */
+> +struct efi_system_table_pointer {
+> +	u64 signature;
+> +	efi_physical_addr_t efi_system_table_base;
+> +	u32 crc32;
+> +};
+> +
+>   struct efi_memory_range {
+>   	efi_physical_addr_t	address;
+>   	u64			length;
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 8f9f2bcf1cb..8f065244d8e 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -646,6 +646,8 @@ efi_status_t efi_tcg2_measure_dtb(void *dtb);
+>   efi_status_t efi_root_node_register(void);
+>   /* Called by bootefi to initialize runtime */
+>   efi_status_t efi_initialize_system_table(void);
+> +/* Called by bootefi to initialize debug */
+> +efi_status_t efi_initialize_system_table_pointer(void);
+>   /* efi_runtime_detach() - detach unimplemented runtime functions */
+>   void efi_runtime_detach(void);
+>   /* efi_convert_pointer() - convert pointer to virtual address */
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 7f02a83e2a2..f9d75cbc3fd 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -71,6 +71,14 @@ config EFI_SECURE_BOOT
+>   config EFI_SIGNATURE_SUPPORT
+>   	bool
+>  =20
+> +config EFI_DEBUG_SUPPORT
+> +	bool "EFI Debug Support"
 
-> On Wed, May 07, 2025 at 02:12:42PM +0200, Rasmus Villemoes wrote:
->
->> While looking through list.h, I saw that the regular list_* helpers
->> (and one of the hlist_* ones) still contain the prefetch() that was
->> removed in linux 14 years ago. It doesn't do anything, but makes the
->> macros harder to read, so get rid of it, and the fallback, no-op
->> definition that they relied on. That requires removing a few uses
->> outside list.h as well.
->> 
->
-> Unfortunately this leads to build problems on lots of platforms:
-> https://source.denx.de/u-boot/u-boot/-/jobs/1141951
+There should be at least one defconfig using the setting so that we at=20
+least compile the new code in our CI.
 
-Hi Tom
+> +	help
+> +	  Select this option if you want to setup the EFI Debug Support
+> +	  Table and the EFI_SYSTEM_TABLE_POINTER which is used by the debug
+> +	  agent or an external debugger to determine loaded image information
+> +	  in a quiescent manner.
+> +
+>   menu "UEFI services"
+>  =20
+>   config EFI_GET_TIME
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index cf050e5385d..51ccf1cd87e 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -70,6 +70,7 @@ obj-$(CONFIG_EFI_RISCV_BOOT_PROTOCOL) +=3D efi_riscv.o
+>   obj-$(CONFIG_EFI_LOAD_FILE2_INITRD) +=3D efi_load_initrd.o
+>   obj-$(CONFIG_EFI_SIGNATURE_SUPPORT) +=3D efi_signature.o
+>   obj-$(CONFIG_EFI_ECPT) +=3D efi_conformance.o
+> +obj-$(CONFIG_EFI_DEBUG_SUPPORT) +=3D efi_debug_support.o
+>  =20
+>   EFI_VAR_SEED_FILE :=3D $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+>   $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+> diff --git a/lib/efi_loader/efi_debug_support.c b/lib/efi_loader/efi_deb=
+ug_support.c
+> new file mode 100644
+> index 00000000000..3794b31c4cd
+> --- /dev/null
+> +++ b/lib/efi_loader/efi_debug_support.c
+> @@ -0,0 +1,46 @@
+> +// SPDX-License-Identifier: GPL-2.0+
 
-Now that the 'remove volatile from gd' series is in -next, could you see
-how these cleanups would fare on top of that?
+GPL-2.0-or-later
 
-Thanks,
-Rasmus
+see https://spdx.org/licenses/GPL-2.0-or-later.html
+
+> +/*
+> + * EFI application boot time services
+> + *
+> + * Copyright (c) 2025 Ying-Chun Liu, Linaro Ltd. <paul.liu@linaro.org>
+> + */
+> +
+> +#include <efi_loader.h>
+> +#include <linux/sizes.h>
+> +#include <u-boot/crc.h>
+> +
+> +struct efi_system_table_pointer __efi_runtime_data * systab_pointer =3D=
+ NULL;
+> +
+> +/**
+> + * efi_initialize_system_table_pointer() - Initialize system table poin=
+ter
+> + *
+> + * Return:	status code
+> + */
+> +efi_status_t efi_initialize_system_table_pointer(void)
+> +{
+> +	uintptr_t addr;
+> +	u32 crc32_value;
+> +
+> +	/* Allocate configuration table array */
+
+This comment does not match the allocated object.
+
+> +	addr =3D (uintptr_t)efi_alloc_aligned_pages(sizeof(struct efi_system_t=
+able_pointer),
+> +						  EFI_RUNTIME_SERVICES_DATA,
+> +						  SZ_4M);
+
+Please, assign system_pointer here directly and avoid unnecessary=20
+conversions (void *) -> (uintptr_t) -> (struct efi_system_table_pointer *)=
+.
+
+> +
+> +	if (!addr) {
+> +		log_err("Installing EFI system table pointer failed\n");
+> +		return EFI_OUT_OF_RESOURCES;
+> +	}
+> +
+> +	systab_pointer =3D (struct efi_system_table_pointer *)addr;
+> +	memset(systab_pointer, 0, sizeof(struct efi_system_table_pointer));
+> +
+> +	systab_pointer->signature =3D EFI_SYSTEM_TABLE_SIGNATURE;
+> +	systab_pointer->efi_system_table_base =3D (efi_physical_addr_t)&systab=
+;
+> +
+> +	crc32_value =3D crc32(0,
+> +			    (const unsigned char *)systab_pointer,
+> +			    sizeof(struct efi_system_table_pointer));
+> +	systab_pointer->crc32 =3D crc32_value;
+
+You can do that assignment directly without extra variable.
+
+> +
+> +	return EFI_SUCCESS;
+> +}
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index 48f91da5df7..6193b9f6d0c 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -278,6 +278,14 @@ efi_status_t efi_init_obj_list(void)
+>   	if (ret !=3D EFI_SUCCESS)
+>   		goto out;
+>  =20
+> +	/* Initialize system table pointer */
+> +	if (IS_ENABLED(CONFIG_EFI_DEBUG_SUPPORT)) {
+> +		ret =3D efi_initialize_system_table_pointer();
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			goto out;
+> +		}
+
+Running scripts/checkpatch.pl will indicated that the braces should be=20
+avoided here to achieve adherence to the kernel style.
+
+Best regards
+
+Heinrich
+
+> +	}
+> +
+>   	if (IS_ENABLED(CONFIG_EFI_ECPT)) {
+>   		ret =3D efi_ecpt_register();
+>   		if (ret !=3D EFI_SUCCESS)
+
