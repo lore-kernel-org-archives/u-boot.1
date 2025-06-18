@@ -4,160 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A0BC71157
-	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 08:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6BF4C71157
+	for <u-boot@archiver.kernel.org>; Wed, 18 Jun 2025 08:55:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35BC082C2F;
-	Wed, 18 Jun 2025 10:51:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id F32E482CBB;
+	Wed, 18 Jun 2025 10:55:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="S7TB2LeI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JBxoe+rw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0638D82C55; Wed, 18 Jun 2025 10:51:10 +0200 (CEST)
-Received: from AS8PR03CU001.outbound.protection.outlook.com
- (mail-westeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8E3FE82CBC; Wed, 18 Jun 2025 10:55:19 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B5E382B18
- for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 10:51:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 4B3AA82C55
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 10:55:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Nn2kPMQn9PQeBl1OB0VDS7pmXF92nxeUFD7y+B7w6wx8k5UfH91L8vFBeoDO2vBd6yXZMDxbkad5OlLIbIarJTv9PPuVfv93J5lSmg/gyLh0ZjBEwRMPf8UGQa2rs647gt1QxoEWLpQ0u3FfXMnhF9D4qwcExoPmJNe5GSVVS6P2RBIDt+atBqok/m2cC2wYj8lq5pNv6Hi+3kFiwm3ipXcNayVjl7avqPh0slRvVhbf+qaRfCxLhy5hbKRgnOt17fAh5ZhzZzpVFTT4uvQEBzlY322ZaawUZsOtXEp+SN0d1Wc5/VBtovO4c0Y+32vQoeng0hrvEvTzCKWQtVGPvg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WJ0w8TBNWuKi3aYH54eKXn0JJtewPsY/1+7JISOj4yw=;
- b=BkEj2fxRc7RdJ2SnwVaWpQZwohtZC6diAhRv3Hwv94XVhj3Y9nk8poD1zmPQPB1gOinZnZdbvcY7Z/YP2UrOlvVa+a1byHMzR4gLerFGCVhZDivfSEWHYd2s8QigyXuegW48gSF3xl0Z3TKJTg+dJVZcOcG+7mokCpNWxEtqJS1vxPmuV8i8BoeQIZVZGRJFQFypPnwiQZCpDwXTjMENJSN/1qSLWhbikAiJH4sAiIZ856blxfEuRCN/i6XwqbpZUBJPm6mGMIahyb2DiL8VWMyTWPucbb4TCtJWuGq2i5pCBwU1YekK6BKFyhq1pmrl11gBRDHUrjxDU+llW0YfWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WJ0w8TBNWuKi3aYH54eKXn0JJtewPsY/1+7JISOj4yw=;
- b=S7TB2LeIaQse0fYvmsi9+2FjzTZWhR9IFBJgnMNhsebE+bQsu73tXJVmo1ABBju7W+HT8SkLB/PMpA5xIwQV3nnTIqXcGoVmRz4TeeU1jer8sReIVSzbxTMRRHmqU1yq81MqOkL1UP9YiiofBeV5CIJ0YPxGTnilthIwrFuhVB0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI2PR04MB10881.eurprd04.prod.outlook.com (2603:10a6:800:27e::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.29; Wed, 18 Jun
- 2025 08:51:04 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.8857.019; Wed, 18 Jun 2025
- 08:51:04 +0000
-Message-ID: <1479d629-bf77-4c73-8108-8d9fbedd8b1a@cherry.de>
-Date: Wed, 18 Jun 2025 10:51:02 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: tlv_eeprom: fix typo errors in comments and error msg
-To: Hugo Villeneuve <hugo@hugovil.com>, Tom Rini <trini@konsulko.com>
-Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
-References: <20250612140410.768650-1-hugo@hugovil.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250612140410.768650-1-hugo@hugovil.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0132.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b9::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-7111d02c777so56979287b3.3
+ for <u-boot@lists.denx.de>; Wed, 18 Jun 2025 01:55:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750236916; x=1750841716; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vnSicJ3kX25dIMf/Zfu4DnGDrSEH01cDLCXUj3EwG5k=;
+ b=JBxoe+rwM5dp92Y9DY7TRuubj2ldAIbe1GfoV+dQ35uCunhAa0VVt3in5U3np1zmcS
+ eMHIQB2aGJZ6Ep9wWLFIPSuwuE5pgREZsQT5+JQHoTBNdGWunEZpURojfjblSa6jyN99
+ Q1+4U5mu7Mj4O5oyvrjLHpa+TOao19pLtp8epsALnbKfr00g1DffrhXKKGzY/6b1WJr4
+ hzqgs1bBXfaibGLjYK7U+91fAJ8b/cm2amy9SjJ2QcoHL5yudf7dS1SnHNQz0l5MJtZr
+ EDRTjeRH1UQkrIJYLg6ho/UM8Lm48oWgDpT/icGp1CABS09Fjej0SQCdHgQsKk1ZOK30
+ w1RA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750236916; x=1750841716;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vnSicJ3kX25dIMf/Zfu4DnGDrSEH01cDLCXUj3EwG5k=;
+ b=AFStJts5IrH/e224W3i9v8sdj/cWeWfuLQynuGpbzpFwiRFowef6RggDhhRHloBWpo
+ hwNe17OFPFKNsTnJYtSvm2ffaqaweWsNDuQmwzRM4vimU1irlG3V+VvgSLEIT52PRxrq
+ iSGWwUfFVkz4VqiQ0d4KxRFKpI63OnrI2i+mzJDtESq/jpgnMplUyP1fsCTCSJk9Zgr9
+ oxOvGL4NhMEJ/RF8vp41qwv6ckLPV6vGQ8z4WezOwtmm9d5HnuA5CMfViAXimXs+Oq1m
+ TVn5Q7XRPls74A+r1Gb6qwWhzpxUnpvFra72KAuhjWiuOd+s+lTcx6D5QdY0CYr8Dr43
+ ZS/Q==
+X-Gm-Message-State: AOJu0Ywxlp1ES7o8c2OY2ybyOSREc67eRdnELHV17GngZ4kDnN03Kx0F
+ 2fwAhs7GLY6SByZ+39OHYPAVqAdCCOsy4FUZ3h5X4l+deT98QfflzHe6vTV9Dp2Q8B8QS3g2zfn
+ OxitjkNo25RLt9+efN3i/X3bHK026g1nlxbjJVQ1rkA==
+X-Gm-Gg: ASbGncsQO4PrNBoKOqGP8clCa0jmbaHIXMLpHiyxrgrb/k/ttenDrhEgUE1IbZBoBKy
+ 68H7HrN7lVLb25cELcuWPHFC0jz5J11ahh7KTRMR6wQckLtTUC0aNu9xcESYtslizA6dbZfO3Me
+ A2FNSFlTcjIAVdSX6OMNIKaNgjXNUZzefJr3Z2UKg86VAW
+X-Google-Smtp-Source: AGHT+IHE87u76KyfFS4DvFohGYB6ov9W5TRfwvfZMm2F9856Zu/c/frUj9fOoh5y9wdvV5hBzPp23+S88B3ja4m4TJU=
+X-Received: by 2002:a05:690c:599a:b0:711:af14:3981 with SMTP id
+ 00721157ae682-711af144040mr56330777b3.31.1750236916051; Wed, 18 Jun 2025
+ 01:55:16 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI2PR04MB10881:EE_
-X-MS-Office365-Filtering-Correlation-Id: c2babebb-a7f9-4b7a-ed0a-08ddae454202
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?U29iOUFJTmR6YTFHV01GR0NsUGxkd0psNkhnYTRTRDg2N2hHWDFnd3o0dFNY?=
- =?utf-8?B?TjFsT095NU91NWd3dzd6cG90dUJZZWFIclZQaWxpcmdTV3FsdGpwVUh3OHUw?=
- =?utf-8?B?R2taZHhuZGxEQ2w5TjBTWDRnN2FvanhkRzBmMWYxYlpPSm5VZWdMeWZPQzhR?=
- =?utf-8?B?WjdSTFRpMW96UXk5QmRxNTdEUUdvZkkxZ2U2M1lxdVR2aHRiTThLdENXdUlP?=
- =?utf-8?B?aXlQWEN6aWE1bmFEUXc3ZmljbDQ0MWVIL0RseGpYcUpDSjg4ZHhSbVBhdVBW?=
- =?utf-8?B?MGUzVU13TWZMUUdxNy9MUUlrVG9YZ24zc0YzVzVQMDBuVUFqaFBDQVFjWjRu?=
- =?utf-8?B?eHU4TkpvbHNTUFM5Wm9Mb1BzeWJxZlpzN2xtZnVuWkc5TGYwa0ZUY0hQT1Rm?=
- =?utf-8?B?NHJqSHlVWXBJUXZRMGtOdVdoL2paNjJWMzV6eVBTZ2w5cDdjV1lwbk1RV0xk?=
- =?utf-8?B?TWt5VXkxU0RsZGFYLzdlTmw2NVBZaFZTMGNsZjk2VytLRjkrWVJlSlRWZFNR?=
- =?utf-8?B?RTlPa2VMSFdCUjNpdzhQMUdUNG5GMTZjSnltNnVVd3FiY2drN2I4OHdWd1hJ?=
- =?utf-8?B?ekVuSXFMYytLVjVKbmczSkF3T3phSEFDRFNTZXBqRFM4MVhoR3EreCs1OGtV?=
- =?utf-8?B?cXF0cUdqQkpLcDFKNWRFNVFVMnBNS3RKbUd1clRITVNsSkJMaE51djlNbHFQ?=
- =?utf-8?B?M3IzQTZFTGwrR2pZcXNDUEkwdzVrMVpCMHpaV1NJUkFsTytaekQwcnoxNURq?=
- =?utf-8?B?ZTdTbzZJK0hXUVpnSnltbC9pSkxQWDdYSXpFTXgzeDZDZmU1anNYcUNPSHVT?=
- =?utf-8?B?bmoweG5HYjR5cjU3elQ4dE9qVHI4QUhTQ0s2a3JHdFR4d0Y4QUtRRGVYTCtr?=
- =?utf-8?B?NlU0Qks1c1lCMDljbzVkWGNMOGZkaW5XL1BrNVduVldjY1dyUXBXcmxBRlg2?=
- =?utf-8?B?Rk5NcGdEQnd4YkxXV3BWbWNjU01XZUNCRFpJTUdzZGFsOGtiUFV4Uzk2T0xp?=
- =?utf-8?B?NnhObzdqTlhuM21hczBpU3ZWVkFDNVpuQVpwc3E0dkQzOFJXRHRMdnFVTnVR?=
- =?utf-8?B?bXZMd1JZOXFaZHJHQjFCelJRbm1neFNzdHZTRlkzWjU0UGg5dXVLbXp0TU9G?=
- =?utf-8?B?eFRGdm5UR0FZQmt5Y3NFcjg3VDZZaW9LZFpJU1hFYjRFQXlYeVg0dDUyZEE2?=
- =?utf-8?B?YmdPcXJLZzl2SVI1SHhCVDhoNENaeFd4YmJaTWhRMzBBWFRBVFAvZ0dCT25n?=
- =?utf-8?B?WmRGYVV5cjJRRkRMWG9iMzVlL2xsY3V0ajFNdGkySnd0eU10TlMrT2U1a3Er?=
- =?utf-8?B?ZGNKNjhqK1NaYnJvWlFDSEo3cFVFcHdpQzgzK3Q3ZU5GNWZxTk54b1FLZFFp?=
- =?utf-8?B?cDBOUFVXMzBBSHBWOHBHcmY5aXdQWWdCa0pISVhERlA2NjlydytVcFdxT2Nj?=
- =?utf-8?B?aGhGeWJkbmh5emVQbENOZDB6YVpiVm02UFJvMTJIRzNrVG1PdE13ZlgvQmgz?=
- =?utf-8?B?dHA1RFBodEFEVUZZSHBOMDhkaGozclJvMTNUOTUrcFBMQzg3OWdRTnZIbFBG?=
- =?utf-8?B?WFhrOU8wNnZvZE9RZjEyVGZIZ0JJZ25HbFZvTTZJUTZiNDhyNnVDTnJYQ1F1?=
- =?utf-8?B?U3lFSFF0SjJHZ0JRM2gxMnJUanpSRTk5MzRqU1hJVXExQ25FYno2TmJmc2hK?=
- =?utf-8?B?U2swYUpEanhLaElTcFU5TXBEZzBIajlBMkgrQWplY2owVUMvYnhSRVBZamNa?=
- =?utf-8?B?SzVyWXdONWVQV2xvMjJyVEI4bDdUcFhHaERHWGkwMmZmMjFPL0tuM29yZDh6?=
- =?utf-8?B?WHdyL2MvTEcyL2hJek1NTUt2bmlQelA4SHJYd1FYMjN4ejlqNUl5Q2dHRjZT?=
- =?utf-8?B?bW16UWtNa2Q4eEhOSkIrQzErYkNiUHhadkhScndPRnUweklROUlEU0RYY0Fa?=
- =?utf-8?Q?2oC9cFe9yK0=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ME81amlBRlh2a2ppVFlyb3MrUnZUNVBBa0lOWFVmNXZIT3NrZ3pnaklEeUpZ?=
- =?utf-8?B?OUxoODJKWFRtaitsYXZJVGpxbzRMSnpQS3lHUm11ZkFTMXNmWi9VNjk5VGZj?=
- =?utf-8?B?RjVWaFpZcjJXN05PY3V4MkRxTG9Hc1VOekI5MWk0RlBNTHRRV1ArK1B0a1lp?=
- =?utf-8?B?V1F2aVdDZE16blJsMllmNzJGdTBiRHhZdHpGcUlJRXBTcXJmZnFyNHdQTUNE?=
- =?utf-8?B?QnU4Y2hiRkFJTzZYT1VYNE1TSDA1ZmVrSWpaUVZBZkhFcHp1dHA1cUpJeFFO?=
- =?utf-8?B?Wm9rbXQxbVNDWUprSEVSU0QzVDV5U296bnljMnRLY0dINTQ2dm9GaVBraUI1?=
- =?utf-8?B?RkNoNmZXRUlsN2JhMXYvUDh6L0RVbmdTWGF0V0U1THd3M1Q4OGJmdklKVUhO?=
- =?utf-8?B?aTVaSW5sUXp3eGZsWE83bnVRcER6b0RtNHFUcGJRMlA5TEVPWDlPVGNyR0xM?=
- =?utf-8?B?ZWZjNnNHUGRUWVlJYW9TMmt1SVpBdElYaVRuN1pOd0w4ZncvM0NDODZLcDU3?=
- =?utf-8?B?dmtOZTJja3NXLys2U3c1eGhQazVFZWIvL21icWRONkhHU3UrOCtMbkVyck5L?=
- =?utf-8?B?cHVuek5aRm1LSzMyNDNtdmxEQ1VZdkRwTkxhMEVlS0JYalJ1VlJENUwwWU9x?=
- =?utf-8?B?cGZEZ0MzSk1GWGhiMEJ0Z3JHZm1HY2JVTTc5by9nZXdmUEMrTThUcEZzOTRT?=
- =?utf-8?B?dDVqbEdqT0VwMVN2d3RBZU8rZ21tVHRQNTluOW9CeGQ1elo2V1Vnc0F2SnJM?=
- =?utf-8?B?d1FaODZvdHdMVDdHUkdiZ2NtSTQ1Ykg5cTMwalBiOS9xaGx3K2VFbDJtM2ha?=
- =?utf-8?B?cWlWT21yYVlWaFNRU2pFT2locjk1QjF2c0FSeHdScEhiKy9RQWU5WXFoN21C?=
- =?utf-8?B?MGZ5SkFvNjNLVktPZ3BFM3JvRXFkQVUrUDRKWllqMi9lNjFvdFZMUGpwV1kr?=
- =?utf-8?B?emZ3dUhFc0kwMjFlMmM5Z2dIb3RJWk9vWk01Si83RFNDVWV1cVlGY21taGdy?=
- =?utf-8?B?My9Xa0xWcTNBNUlCdWxXYVozV2p6RzdOMGlCell2RW1KYWRlZWpzZ3U0NjBx?=
- =?utf-8?B?MGNHMWdGNlkxbFpxdHJsdE1aTFFJWCsvSWtwdnR6QlVWaWJZNVFiUmx3ellx?=
- =?utf-8?B?cGNlbDlrRFhMdFFKV0Z1aFd3TXIzcmwxcGF3amJiVE5sT3MydWJwYUpFQUgv?=
- =?utf-8?B?L2NTR3JiZWZMWWhDblZ0MTNRRVhLRDZMMTdMMzR4cWROd1N1RC9ZaFJKVXNQ?=
- =?utf-8?B?eklKdyt2Q0pUd1NzaVg1ajNqRUF3SVdvdWFDWUNZelBSV21xSHRrOCtMcGRO?=
- =?utf-8?B?QlpVY1FHQWJRSVViaERZRjFpU09MZzdkaUdoWHExczQ3NFJkbXlmdWd6eHdH?=
- =?utf-8?B?b2tDOXVnS2pZSDNGS010NWhCaHEwdm42eDBzQ3BtYTg4TndnT2Zvb2Evc0ta?=
- =?utf-8?B?MW9IQ3NhRTdrdXo4WXA5MWd3cU1yczVyTVJSWUNobWZFczVTUEhrV3lsT0do?=
- =?utf-8?B?N1ZpODl2TU9XbkNCMHJhSWZDZVNDNnFVUXJkQ21DelMwM25aWVR0cFhLS2ox?=
- =?utf-8?B?Y2lRUEpPbHhVZzg5bjJtY2FvSk00NXdrR0tKWWVOVGx5cTVHcm81TjlJdGth?=
- =?utf-8?B?SnU2RGpzTlF3ZytIWXdlK0hsY1VrUVRBRDRjRWthcWwyZGxpUXVUYlRWVCsy?=
- =?utf-8?B?VDQzdTdrZnhJWHJ4eTF5ZXc5Q284em9UUFpBalV3WGNHR3haLytweWFqOFps?=
- =?utf-8?B?ZUZIcG1PUm1UNGhPNDB5dFBhelJad1UzWThjdDRmUTczc3FPVzFZVjFpQm05?=
- =?utf-8?B?dmVuVURTL21rZFJzcll4aWNab2lwS3JUSjdZZXJ4N2gweHFtVHVuVjlxWUFJ?=
- =?utf-8?B?UnNVREJiVFQxZ25mZ250TnYrVERFZjNyVEc3Sk1KcDdlSVc0NkM0ZDlpNVBO?=
- =?utf-8?B?MC8xTFY1TDZFOFRzcjExNjBvVlR1eVc5RUVKdkRlakZ5ZmIrNjRZT2E0R1Ay?=
- =?utf-8?B?RlNYZHhZaUJMRitIaC90ZmR0cC9QWnBRd1UzbmJ5TGQwN3ByQWRTbWJzK0d0?=
- =?utf-8?B?cytMalF5NXZQckN1YUNxOUJGNEpRWEdBYitETWUvQm1IbXJxRmt1NExndWVJ?=
- =?utf-8?B?THZZb3VnOExWU2hMVUt5VDdaZ3ZSSTNWMFZaN2lGN3BZNHA3RUxpVUp6YWVn?=
- =?utf-8?B?VEE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c2babebb-a7f9-4b7a-ed0a-08ddae454202
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jun 2025 08:51:04.2899 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SgLtRZBdYKoYKDZVCS4D3fVhX3vPPhQ5bAXnqZwxb7Zt4zULNVNZFgaSzKBqm1pUkJaPAb3vxNjk7aCYe4npjpy8vUYuj4w2Gu1TuQoTPvY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10881
+References: <20250618080056.1973311-1-javierm@redhat.com>
+ <20250618080056.1973311-4-javierm@redhat.com>
+In-Reply-To: <20250618080056.1973311-4-javierm@redhat.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 18 Jun 2025 11:54:40 +0300
+X-Gm-Features: AX0GCFsifT7spCzdDQkXJCQKm9oPx18C768YtYMlkTkYk40IVAceXhtvdGAAGc0
+Message-ID: <CAC_iWjLTHfckxa13rGkacL+dUWGj_-jGffOLqzc4ACKZoYYSQA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
+ support
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: u-boot@lists.denx.de, mripard@redhat.com, Tom Rini <trini@konsulko.com>, 
+ alexl@redhat.com, mkorpers@redhat.com, eballetb@redhat.com, 
+ mskrivan@redhat.com, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Maks Mishin <maks.mishinfz@gmail.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,16 +94,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hugo,
+On Wed, 18 Jun 2025 at 11:06, Javier Martinez Canillas
+<javierm@redhat.com> wrote:
+>
+> The UEFI 2.10 specification mentions that this protocol shall be installed
+> along with EFI_BLOCK_IO_PROTOCOL. It provides cached partition information
+> for MBR and GPT partition types.
+>
+> This patch just implements support for GPT partition types. The legacy MBR
+> partition types is only needed for backward compatibility and can be added
+> as a follow-up if needed, to make it fully compliant with the EFI spec.
+>
+> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
 
-On 6/12/25 4:04 PM, Hugo Villeneuve wrote:
-> From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-> 
-> Fix typo errors in comments and error message by replacing EERPOM->EEPROM.
-> 
-> Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thanks!
-Quentin
+> ---
+>
+> (no changes since v1)
+>
+>  include/part_efi.h        | 20 ++++++++++++++++++++
+>  lib/efi_loader/efi_disk.c | 38 ++++++++++++++++++++++++++++++++++++--
+>  2 files changed, 56 insertions(+), 2 deletions(-)
+>
+> diff --git a/include/part_efi.h b/include/part_efi.h
+> index 59b7895b8a23..fb402df6f13e 100644
+> --- a/include/part_efi.h
+> +++ b/include/part_efi.h
+> @@ -138,4 +138,24 @@ typedef struct _legacy_mbr {
+>         __le16 signature;
+>  } __packed legacy_mbr;
+>
+> +#define EFI_PARTITION_INFO_PROTOCOL_GUID \
+> +       EFI_GUID(0x8cf2f62c, 0xbc9b, 0x4821, 0x80, \
+> +                0x8d, 0xec, 0x9e, 0xc4, 0x21, 0xa1, 0xa0)
+> +
+> +#define EFI_PARTITION_INFO_PROTOCOL_REVISION 0x0001000
+> +#define PARTITION_TYPE_OTHER 0x00
+> +#define PARTITION_TYPE_MBR 0x01
+> +#define PARTITION_TYPE_GPT 0x02
+> +
+> +struct efi_partition_info {
+> +       u32 revision;
+> +       u32 type;
+> +       u8 system;
+> +       u8 reserved[7];
+> +       union {
+> +               struct partition mbr;
+> +               gpt_entry gpt;
+> +       } info;
+> +} __packed;
+> +
+>  #endif /* _DISK_PART_EFI_H */
+> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> index 47b583cc5e12..ba41b77b9d1c 100644
+> --- a/lib/efi_loader/efi_disk.c
+> +++ b/lib/efi_loader/efi_disk.c
+> @@ -26,6 +26,7 @@ struct efi_system_partition efi_system_partition = {
+>
+>  const efi_guid_t efi_block_io_guid = EFI_BLOCK_IO_PROTOCOL_GUID;
+>  const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
+> +const efi_guid_t efi_partition_info_guid = EFI_PARTITION_INFO_PROTOCOL_GUID;
+>
+>  /**
+>   * struct efi_disk_obj - EFI disk object
+> @@ -35,6 +36,7 @@ const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
+>   * @media:     block I/O media information
+>   * @dp:                device path to the block device
+>   * @volume:    simple file system protocol of the partition
+> + * @info:      EFI partition info protocol interface
+>   */
+>  struct efi_disk_obj {
+>         struct efi_object header;
+> @@ -42,6 +44,7 @@ struct efi_disk_obj {
+>         struct efi_block_io_media media;
+>         struct efi_device_path *dp;
+>         struct efi_simple_file_system_protocol *volume;
+> +       struct efi_partition_info info;
+>  };
+>
+>  /**
+> @@ -426,6 +429,7 @@ static efi_status_t efi_disk_add_dev(
+>         /* Fill in object data */
+>         if (part_info) {
+>                 struct efi_device_path *node = efi_dp_part_node(desc, part);
+> +               struct efi_partition_info *info = &diskobj->info;
+>                 struct efi_handler *handler;
+>                 void *protocol_interface;
+>
+> @@ -454,18 +458,47 @@ static efi_status_t efi_disk_add_dev(
+>                         goto error;
+>                 }
+>
+> +               info->revision = EFI_PARTITION_INFO_PROTOCOL_REVISION;
+> +
+> +               switch (desc->part_type) {
+> +               case PART_TYPE_EFI:
+> +                       info->type = PARTITION_TYPE_GPT;
+> +                       ret = part_get_gpt_pte(desc, part, &info->info.gpt);
+> +                       if (ret) {
+> +                               log_debug("get PTE for part %d failed %ld\n",
+> +                                         part, ret);
+> +                               goto error;
+> +                       }
+> +
+> +                       break;
+> +               case PART_TYPE_DOS:
+> +                       info->type = PARTITION_TYPE_MBR;
+> +
+> +                       /* TODO: implement support for MBR partition types */
+> +                       log_debug("EFI_PARTITION_INFO_PROTOCOL doesn't support MBR\n");
+> +
+> +                       break;
+> +               default:
+> +                       info->type = PARTITION_TYPE_OTHER;
+> +
+> +                       break;
+> +               }
+> +
+>                 diskobj->dp = efi_dp_append_node(dp_parent, node);
+>                 efi_free_pool(node);
+>                 diskobj->media.last_block = part_info->size - 1;
+> -               if (part_info->bootable & PART_EFI_SYSTEM_PARTITION)
+> +               if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
+>                         esp_guid = &efi_system_partition_guid;
+> +                       info->system = 1;
+> +               }
+> +
+>         } else {
+>                 diskobj->dp = efi_dp_from_part(desc, part);
+>                 diskobj->media.last_block = desc->lba - 1;
+>         }
+>
+>         /*
+> -        * Install the device path and the block IO protocol.
+> +        * Install the device path, the block IO and partition info protocols.
+>          *
+>          * InstallMultipleProtocolInterfaces() checks if the device path is
+>          * already installed on an other handle and returns EFI_ALREADY_STARTED
+> @@ -476,6 +509,7 @@ static efi_status_t efi_disk_add_dev(
+>                                         &handle,
+>                                         &efi_guid_device_path, diskobj->dp,
+>                                         &efi_block_io_guid, &diskobj->ops,
+> +                                       &efi_partition_info_guid, &diskobj->info,
+>                                         /*
+>                                          * esp_guid must be last entry as it
+>                                          * can be NULL. Its interface is NULL.
+> --
+> 2.49.0
+>
