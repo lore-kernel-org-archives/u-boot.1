@@ -4,87 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1C6C7115A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 16:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB356C7115B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 16:39:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78E4382C65;
-	Thu, 19 Jun 2025 18:22:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 443F982C65;
+	Thu, 19 Jun 2025 18:39:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZkQBr0VW";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="tBXy+x1+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5050A82CCE; Thu, 19 Jun 2025 18:22:21 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D2E682CBB; Thu, 19 Jun 2025 18:39:19 +0200 (CEST)
+Received: from OS0P286CU011.outbound.protection.outlook.com
+ (mail-japanwestazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d406::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6C69800C1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 18:22:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9FAB80C83
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 18:39:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-235e1d710d8so13643995ad.1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 09:22:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750350137; x=1750954937; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=61F6dnyPCGum5fpeGnvNNUDlA6TOLmpFReI9w8VFd10=;
- b=ZkQBr0VWGp+RIi76jwGvk54GmVOcrH4noEtUGvpS3F8QQpdCIibKdMDRDqxV+D8w8A
- 9EFCFEPZNODtwxDJa1iM0eF/BrtezTNMjRpzw/sVq5EZjO3O9tWoo2oFF+Kx12f8tyFp
- A1QtS2NUT5cQ00T2BXuPMvDEOVMXo5s10c1jzyw5KDopTi+QiByCyOMbq7NoNzkJPi4g
- oF9FMviZeVot+SQgKzjDQKg+Jg2gdxgi+C2wdL5GO9ZcLOR5KR1eRKddsafitL5aPtim
- TIoT8QPgEN0pBwP/oNb47JuYh64pEGm9GH7v36oYQLGypElruX8qc0NZfIE4kO+9px/A
- eXYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750350137; x=1750954937;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=61F6dnyPCGum5fpeGnvNNUDlA6TOLmpFReI9w8VFd10=;
- b=chb1eDWu20CLfjxEPPOQRTzNLLWbiC/Jl1U6xx5mQh5bFyEwsnM605h9droHF438PV
- K+/LIVzru2PslH80fvFU/7pmmFSY0szQd6lmR615aglYjswqwySArG70cvq3yCR0+6FA
- 29bS08rf/1IRT8OGtEweYh5UEdbQVww7vEXJy34Zxe+Zd7clRjw3UXn/TA7PKoFdkTLq
- 9Jz4VssYnx06pWTQIx/8DDP4s22q1AR3JjdbNdEP1j/c+STND35ypm/odGDZtWChFG+V
- TvLma5b4pyG7CjbiRhUFuXeRV67+JXycDv+mfQ7R7PA57n/q6343u4dsIBLvd/l9cn8e
- lDhQ==
-X-Gm-Message-State: AOJu0YzLbKJ5z3Pyo/kturp9FM1Bir1JXU1nz6HXBik9sYpZDj2a2Jva
- zegoPOMTyJ3Nljb7aOirxV9NvCeV8/3pzY/AkVVMFM4BrAkZIbJR9CVxoV6/MV+IVolD9i6uSzI
- 3PGVt3VuUnscrrFcy0IFqDqhdh6JEZv8yQpcftz01hA==
-X-Gm-Gg: ASbGncuifWx/mFClaTQmXGPE8QN/5WXQa9qe6+uH74MbUqSUq2RszGXkWwX89VNCPkd
- /HUstTzMkqF+Y0DEabzur+kXx2WO3LBzGnb0+fGlqVAPmJWJBSZXHsUOs4+INumRccFVZ93ZFjm
- 1KH4dir8Co0lohs6beeU0jqpg7E/IKQAZdyGEIf1y1J9ZQ
-X-Google-Smtp-Source: AGHT+IEJKd6H08Iqv/2SuxOaXTR/bsppuqsfA8R6p1Dz2P0jf2lX6LRPxjPfgmLjtUUEEkMoClN7fi3rT5FXK45Tz9g=
-X-Received: by 2002:a17:90a:dfc8:b0:311:f05b:86a5 with SMTP id
- 98e67ed59e1d1-313f19d2977mr38010141a91.0.1750350137114; Thu, 19 Jun 2025
- 09:22:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=yangshiji66@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gVWB6qGpuelsSO7In/3kO4DIODWdyyThkgSo/DIK4KvDVJuzvL+wCbfefassWw6vTQTKiFSUefp/RRmXxSVRYfg6ONdMN/2BfUN9NkU0+AxB68gMvBeCRmBKBzmJildWTKNYxvYyVpBnDO6YcyVpr7Wyor9ZDH/lW8qLThVS4zNJkHhbW27O9yDmpsJzy4auaoNl8t+WO8T+aPfn6DAR0wGPjrLKG9BzFOVzU8kCsJtJj0+7D+5cuS5vDfxO/VzFziiR1Moofw87F4IW/6mgMyIV9XeGJKC4L0pS3pZ1v897D0XO+UPW/5PqGOXWBUdgrZIarrFujrxPgS0Hl2PgBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pnu4BxjHu1/9Tkc3rfqSSFFz0mR4DbeQp84rYqREZ6E=;
+ b=KIL11Kz7rjzYLVvQ5m1S3ieJVXwTsJ1j2PwsIv537HDzjE2sBA6yO1c1UM/LPCJ84CHPGf2KMuodVXGyn5JkonMfeuz8+Z5Xj/VpgU6UrBs7MA4Qh43SSycOkVsqS9Nl6cnbH6eDyb8uzjzNx77Oy+7SQzupmQp0HBpJqut+lhxuDj4txvKJryQ2hAVNzyTCO9ztkn6qOoRk1l54PlNcxv5aKf6fLJTpraz0MRg0vkGSWYpVA35NgAUSHJEfxEyVMCVnphK0mxyqygEZ29NGuB80yl6NXLAJ2irK2Iu9vzA3cjdf+jNc+bv+Y09smOXNy0U7CzVmfe2Wr83l8WrkIw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pnu4BxjHu1/9Tkc3rfqSSFFz0mR4DbeQp84rYqREZ6E=;
+ b=tBXy+x1+UAsNCL95OIjcvBBTBPsPluZFM7DQ4dIN3x/QyADpz+8/T4Qs+lf97fLIfYKg2JRKh7QuepQdcLLmp2d3VzD4az1n/T/CslLiN0z+eiNeDzDVvO+9eQ5sFSe9LscxxIjANQAl8oXbKLr4G3mNSi5c7DehYLtm0GELD7wVTtg3p7OhPQ2LwxoLT7vhto0Gvv/XznQJNcFRb8ys9JpFiBlLBys9R9F/m+5QZgjzHlk8RuzNC5QBMr//vSbHfd+17hW/2kbrdl73CkKCgeCX9EuEsjDjQjqaJwnihvhj43iPS7jeemyFeIx9xA34eWsn7c6a/WNHB5sVIHgr3Q==
+Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com (2603:1096:603:2::18)
+ by TY4PR01MB14499.jpnprd01.prod.outlook.com (2603:1096:405:23e::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.30; Thu, 19 Jun
+ 2025 16:39:12 +0000
+Received: from OSBPR01MB1670.jpnprd01.prod.outlook.com
+ ([fe80::c00:ec4e:ee7e:9b7f]) by OSBPR01MB1670.jpnprd01.prod.outlook.com
+ ([fe80::c00:ec4e:ee7e:9b7f%7]) with mapi id 15.20.8857.016; Thu, 19 Jun 2025
+ 16:39:12 +0000
+From: Shiji Yang <yangshiji66@outlook.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Daniel Golle <daniel@makrotopia.org>, Shiji Yang <yangshiji66@qq.com>
+Subject: [PATCH 0/2] rsa and fit_check_sign build fix for v2025.07-rc
+Date: Fri, 20 Jun 2025 00:38:16 +0800
+Message-ID: <OSBPR01MB16702ED24460D23A7ED63440BC7DA@OSBPR01MB1670.jpnprd01.prod.outlook.com>
+X-Mailer: git-send-email 2.50.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR01CA0003.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:191::16) To OSBPR01MB1670.jpnprd01.prod.outlook.com
+ (2603:1096:603:2::18)
+X-Microsoft-Original-Message-ID: <20250619163818.4021-1-yangshiji66@outlook.com>
 MIME-Version: 1.0
-References: <20250618145930.2652304-1-raymond.mao@linaro.org>
- <20250618145930.2652304-7-raymond.mao@linaro.org>
- <9a5ed161-0420-4656-9fcf-6d122d4f6c0e@amd.com>
-In-Reply-To: <9a5ed161-0420-4656-9fcf-6d122d4f6c0e@amd.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 19 Jun 2025 12:22:05 -0400
-X-Gm-Features: AX0GCFs1mb3ZFR_RK2u57kQe2BEA-XK8g6AqnCdmPGW3MiArLFOnqtr5sFCgtcw
-Message-ID: <CAEfUkUL5L6YVbWtZrjitKuRPbs_3-=nr4i_1xtppi6CcXhhv1w@mail.gmail.com>
-Subject: Re: [PATCH 6/6] fdtdec: apply DT overlays from bloblist
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, venkatesh.abbarapu@amd.com, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Harrison Mutai <harrison.mutai@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: OSBPR01MB1670:EE_|TY4PR01MB14499:EE_
+X-MS-Office365-Filtering-Correlation-Id: f0f73ae8-4839-4b2c-7f9c-08ddaf4fcf9e
+X-MS-Exchange-SLBlob-MailProps: YfhX3sd/0TWw/1Sq6pz4wShrVua6nWkTMENPg10ahArMQ0pgw/q+7wMX1dv+regxfayfDI7a0naXudIl658txVttr5a5T0uBMvPKSjNJJb+GsSY3huO6SPs49UfqQcl3H2T19pcUV/Pve6gCUyDP95/u+52ulH8oEznS9Ca/Zqzw85VFnsWs3FQ5kVAzQUYMS9+UJaqvtcr6HJ87vZ3VNnSkcngNfZPBUZzRaKkccUD0p1YEffcTh7RLg9Ga7vtcE2N7plDx2BNWYX+R1hJsF+ZyPHDrg8Ee7g3gT4f92UTZ54o914Zpr7phGHcAkQzCcmsOO8m5aj0g5ZieTJnI/dKQsNc+6E2vMEKARyW3VmzSsNxzE/THEJ/tx+I1nyudCfULahZiOZ+UeoNy7w3e76prFvquzHqdCZj6EUsiaFqeusEor5U4beGbJZch5tYkeBhVBDX280/gZDxNI+uuPFPHOymYrwfBVTdQGcMLtL4dMeH7UT4Z/XXvMUqsQsJ8932Vfw05dvR7oeJ/nv/jJ/spy1j5K0Hbsf9T+Amc/idhdkNLWl3ZDOKGFjSbwVE6yuY6VlHjFHReM+ffWCgwicKOXkSdokl2s53cOFSsHKUacpxccI0K9BAeC7DqrVqKYWAW9B5DDLNlNCpvQNd8y1qk3VCKp2qh1xcvZYZYvyJskCtdw/2FRFDViblswVL8qlF/kga9hRUzt3R2aQacXmGkzn91+efu1Fcs8XtKEMLUQcLIP/fAlzWO9liu0G1YQIv/El0MaTmBJ42j8yum7Io+vJbD7HZoB0dgxibhUUA=
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|19110799006|8060799009|461199028|5062599005|15080799009|7092599006|5072599009|440099028|3412199025|10035399007|40105399003|39105399003;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?btp8Gul5jnDEzZU6rM8Q1qFuPGqpkDDBkHl/QXn2gFvk1t9cJBTiwdfyxkkX?=
+ =?us-ascii?Q?fsZJEfwSGeI3lzsL1kMSb9icf4wJV5+BZQ4fTac3jEppfBHXMAzU90pPoohc?=
+ =?us-ascii?Q?RpyVvt/bU9Q/ndiQf7jcAozyW/nvKwH31bFlLkStSRRHTR1zN4TnsDIdu7j0?=
+ =?us-ascii?Q?U8FzPHSO4AW/mjo6PPUDWpo4jSI0e055kkmYvtviqt/9ULlOJRqgPlnkv6sF?=
+ =?us-ascii?Q?TqSONZ5Ge3cDxmADsdZG75mUZPB4sNLMXacD4CApZZHk7MeNKKaVucM63ErV?=
+ =?us-ascii?Q?WlX836FwKa7x/HlOpCLcjOrMLP4VIbZLfg6NOWedtbmLgwwbmbudkK3KRe3W?=
+ =?us-ascii?Q?N6xm9jY2anXzJ0ncyC9nEcgPureQoiVGgKVKlRYVDPCeZLlEwb6snuGE6J1y?=
+ =?us-ascii?Q?xN32pcPylQR/+wZuF9uO7DsyCctYG+3jgoOWlOcjdjyvnRmwf72cjPt0JSbT?=
+ =?us-ascii?Q?VTgz+IPpgQKlAa5j5yC0JYeBEObZ2C1IdHAhxn3g86sj9I9lXx0TDk7XCPXy?=
+ =?us-ascii?Q?oYknT1BsPnV7q1Q6Powm6bHWdE3RoFPPG/H6J0vVM5666pbGTvE8r2jLGGR7?=
+ =?us-ascii?Q?J/LbHzhwp7F6bgdnFpWWDjSMdUoqgfMcmcI/XmDBQ2KrgKpJprByZLG2IyA7?=
+ =?us-ascii?Q?ITofsDj8n87Psrjqz6M8cbhyapwUjPQEM//PlXVuTGNSH8a450zDSChmVCrz?=
+ =?us-ascii?Q?KBdEYtIjSE6eSDyo2cKTjU/xFwOsdXZJMy1d/O10D1SVF8rQqQs3NwBdwxRP?=
+ =?us-ascii?Q?QJ4B+p+rOHjXv/SY2DzY/vbmVG3klGMuh0ga86+MYPN8PgwLvOwwSOGqOkTE?=
+ =?us-ascii?Q?3sXT7zZqr0ries9LYvGpj8iuItI5lBzX9b8TNx9a0ccBycpCt0r+EoOkKhIG?=
+ =?us-ascii?Q?Wop9eRFpRZVpfSIxG5r9dbTtyWC2K5Ys6zIQLpJK2l29Av/bMfvMNJd33Pqe?=
+ =?us-ascii?Q?kZONGAQUqXGwxJ8YaoGHzAYTFZSzJYNCUhVSmtcyWG82W7JHJhpKRMU5VLAZ?=
+ =?us-ascii?Q?WR7SsowKrDBvWVoOTBlnEZJ1v25PcHyfvqPsP8VBMNdCJw10SVu5s2cN3i/j?=
+ =?us-ascii?Q?8gmv0eKDHPWAHFf9nbrE+9gN2D2tRf+4ZgJSv1cC+cmHrBjQaS6h45WbvUfj?=
+ =?us-ascii?Q?kOIZuwgroXdQcGs9PEReuZlCauZfVHrwJtds5nxDPS96r2C8M8kPY7Xzpnnv?=
+ =?us-ascii?Q?0BUxP5px1bWp4r63OcZ8ANLm+o7lXJVtttaS+Eeuh5tl9EAH8zs5NbSDna+U?=
+ =?us-ascii?Q?nQmqQ8ZPgZ1Aw7dCJp5oEHJVdDn+Z67rDnf6Fue93ENr8m3JYyc4CsRm18wS?=
+ =?us-ascii?Q?gtPXy4JHh2o/Te/c8tzcqTRz?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Khs6wJf5+QFbJtnU2ouf0cFoa/rczZUP5goxZAspd9lO0EDWj+3XCwOlm1XL?=
+ =?us-ascii?Q?oBt4QKyiIHWH/PxBxJ/HFmU6WFl1cs4voOBlAGef68fwoF5uF3yfeOx+pkDs?=
+ =?us-ascii?Q?0IEWM9TVa3bnC0coFoqOJDLbSBElyHXGNqJ8Vfbi/kdvi2D5iGLjUMJ41Udh?=
+ =?us-ascii?Q?eVT1cxsI7U009wbi3zw9aN/ZShAVxEIssLVp+AcBf1877wDNBDtxa1/6roeC?=
+ =?us-ascii?Q?FYc2hnlBLCOK7gWirFQRJjntKLMiB79hjR5BWe9/4r6wmp0iDxWVlvnyy5sM?=
+ =?us-ascii?Q?7o3CMIT/IsCqc1jBfYd9zaNYFURbfA5XPkmUZYzy9n8jsqOz/IgnN2SbYwgf?=
+ =?us-ascii?Q?Ik99b1wzLojHMu5ojbFcwZzLKuUX07YJHAaQx/aalhlxKrta8vWaRJsTiEif?=
+ =?us-ascii?Q?zVlXnsBfOZUSWTciwVSq6CieGW1cHsNKn+nI17ejCjRizt0nHX/25FaAZJZr?=
+ =?us-ascii?Q?s+uefPSsjyZD+f8vE5ElrKjxN6WFQbOhGcVmluPqrbSZPgpdOh0EZZ6ypwr8?=
+ =?us-ascii?Q?xjAZyPpa8liXO5WgW24+y5hdqHn6sFmYPNPmEQJ6LON7tryBG4AOblqugF00?=
+ =?us-ascii?Q?igKKOId1atlOuBsHLN48r7yt/wqt9bC20yl19IXhL7M4g4DRT7beNvllCvH2?=
+ =?us-ascii?Q?uF09VLgg7bsUrg5ubK4fyD+X6021Qkd/hzkmIdo8nzVdSPJ2Ubknr8n1JixZ?=
+ =?us-ascii?Q?ze0whqPl5YR4QPZB9FCtELgJ3RvA7fwwj52RqywhEQTLTTLdqpP+F4+YltQH?=
+ =?us-ascii?Q?rB5FlSumITo6sSJribF/d3RICRzohO6AWKaFj33U4gAYsf1KMQVkIGnMMljq?=
+ =?us-ascii?Q?5aiBO7dvfsD5aG+5qy6bpbItaLXdMa5rjUhT84WVqoPtvx+WpzznWRvQE1qt?=
+ =?us-ascii?Q?vqp/+B7oTtUDImshlfdNmNRx/C1srFxtzRe72cq4IXaKg3Xkm7MDqCeoGeJ6?=
+ =?us-ascii?Q?mqh7actW+EB5P268lBYvCS1DLBH4XvshoW5rJZEtOMco46UIMzSOHyA6p5mV?=
+ =?us-ascii?Q?JRuyOY/mfz+6Jbv5bX8IZPH6oKmYTvAQGgQJwO2p67JHdhgGFRfGPzkdYVlU?=
+ =?us-ascii?Q?bOjGe66xfEHMxANn8Pcti4+uQOZ0XMW6hBXNWMlcq9FJSFD/N+T84U3llorB?=
+ =?us-ascii?Q?9/U6EE9TDftuZd1KXkaVlfoWQKN9BB7zqVdgGhIWIrLQsYpwJdKFYPsOHY1e?=
+ =?us-ascii?Q?opzqwowBqysd/G/ZHrg+3/3lFg+PCv63ha9Oz72tJal1CEXO3CDJRkrKSO/Z?=
+ =?us-ascii?Q?9snvP8YR30PvM9S9msfL?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f0f73ae8-4839-4b2c-7f9c-08ddaf4fcf9e
+X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1670.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2025 16:39:12.5545 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY4PR01MB14499
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,147 +144,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+From: Shiji Yang <yangshiji66@qq.com>
 
-On Thu, 19 Jun 2025 at 07:39, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 6/18/25 16:59, Raymond Mao wrote:
-> > During FDT setup, apply all existing DT overlays from the bloblist
-> > to the base FDT if bloblist is being used for handoff from previous
-> > boot stage.
->
-> More technical details would be good to have here.
-> Especially that the way what you are using is to expand DT
->
-Agree. I can add more details in the next post.
+This patchset fixes some compilation errors that I caught in version
+v2025.07-rc4 and branch next. If they are acceptable, please apply
+them to the master branch. If anyone has a better way to fix these
+issues, it's fine to ignore this patchset.
 
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >   lib/fdtdec.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 56 insertions(+)
-> >
-> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > index c38738b48c7..3a218d8c94a 100644
-> > --- a/lib/fdtdec.c
-> > +++ b/lib/fdtdec.c
-> > @@ -1687,6 +1687,60 @@ void fdtdec_setup_embed(void)
-> >       gd->fdt_src = FDTSRC_EMBED;
-> >   }
-> >
-> > +static int fdtdec_apply_dto_from_blob(void **blob)
-> > +{
-> > +     int ret;
-> > +     struct fdt_header *live_fdt;
-> > +     size_t new_fdt_size, blob_size;
-> > +     int expand_by;
-> > +
-> > +     if (!CONFIG_IS_ENABLED(OF_LIBFDT_OVERLAY) ||
-> > +         !CONFIG_IS_ENABLED(BLOBLIST))
-> > +             return -EPERM;
-> > +
-> > +     live_fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> > +     ret = fdt_check_header(live_fdt);
-> > +     if (ret)
-> > +             return ret;
->
->
-> Why is this needed? You already have gd->fdt_blob which has been checked.
->
-You are right, these can be skipped.
+CI test: https://github.com/u-boot/u-boot/pull/783
 
->
-> > +
-> > +     ret = fdt_check_header(*blob);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     blob_size = fdt_totalsize(*blob);
-> > +
-> > +     /* Expand the FDT for spare spaces to apply the overlay */
-> > +     new_fdt_size = fdt_totalsize(live_fdt) + blob_size + 0x400;
->
-> Some notes about this 0x400 would be good. Do you see issue if you don't use
-> this value? Is file DTB after expansion actually bigger then origin+overlay that
-> you need to add 0x400 magic value here?
->
-The value 0x400 is arbitrary and it really depends on the DTOs.
-When applying a DTO, it may create new entries in:
-The structure block (nodes, properties)
-The strings block (all unique strings, including property names and values)
-These new entries require extra space, not just equal to the overlay
-size - because:
-Some parts will bring in new strings, which get appended to the string table.
-Also alignment padding might require more bytes.
-What I am concerned about is that 0x400 might be not sufficient for
-those complex DTOs.
-Maybe more bytes are required.
+Shiji Yang (2):
+  lib: rsa: fix compilation error without openssl
+  tools/fit_check_sign: make the module dependent on
+    CONFIG_FIT_SIGNATURE
 
->
-> > +     ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, new_fdt_size, &expand_by);
-> > +     if (ret)
-> > +             return ret;
->
-> You do resize inside tl list.. That should be described in commit message
-> because my exception was that this location can be read only from NS world.
->
-I can update the commit message with more details but why should it be
-read-only? At least I don't recall if the spec says the TL is not
-expected to be updated in BL33.
-
-> I didn't run this on HW and likely I should do it to understand this better
-> but isn't this moving CONTROL_FDT entry to different location which will have
-> bigger space for applying overlay?
->
-Do you mean to move it to a predefined address like existing
-CONFIG_BLOBLIST_ADDR with more space reserved? I am open to it.
-But what I have to say is that the entry memory can only be marked
-with void, no reclaim memory mechanisms. This leads to duplicated
-memory ranges.
-Other than that, I think dynamically increasing/shrinking the size is
-more flexible.
-
-> Isn't it also worth to check if existing CONTROL_FDT has enough space inside
-> that new overlay can fit there before resizing it?
-By default each entry only contains the actual size since bloblist
-(aka transfer list) is designed as a compact data structure and there
-should not be a waiver for CONTROL_FDT to carry additional spare
-spaces.
-
->
->
-> > +
-> > +     /* The blob is shifted if it was following the FDT */
-> > +     if (*blob > (void *)live_fdt)
-> > +             *blob += expand_by;
-> > +
-> > +     ret = fdt_open_into(live_fdt, live_fdt, new_fdt_size);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     ret = fdt_overlay_apply_verbose(live_fdt, *blob);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     /* Shrink the excessive spaces */
-> > +     fdt_pack(live_fdt);
-> > +     new_fdt_size = fdt_totalsize(live_fdt);
-> > +     ret = bloblist_resize(BLOBLISTT_CONTROL_FDT, new_fdt_size, &expand_by);
-> > +     if (ret)
-> > +             return ret;
->
-> I didn't try to run on HW but don't you need to also adjust gd->fdt_blob to
-> point to current location where fdt is?
->
-gd->fdt_blob is already pointed to the one inside TL, it remains the
-same, only the size is changed.
+ include/image.h      | 2 +-
+ lib/rsa/rsa-verify.c | 2 +-
+ tools/Makefile       | 3 ++-
+ tools/image-host.c   | 4 ++--
+ 4 files changed, 6 insertions(+), 5 deletions(-)
 
 Regards,
-Raymond
+Shiji Yang
 
-> Thanks,
-> Michal
->
->
+-- 
+2.50.0
+
