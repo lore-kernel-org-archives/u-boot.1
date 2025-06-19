@@ -4,85 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B71EC7115A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 12:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1F4DC7115A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 12:57:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24CB282CD5;
-	Thu, 19 Jun 2025 14:02:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE5F482CCE;
+	Thu, 19 Jun 2025 14:57:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L9pV69O7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dKbrvIlx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A1A282D18; Thu, 19 Jun 2025 14:02:47 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AF2482CCE
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 14:02:45 +0200 (CEST)
+ id 2861D82CD5; Thu, 19 Jun 2025 14:57:26 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 78E7E82CBB
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 14:57:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-453398e90e9so5028235e9.1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 05:02:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750334565; x=1750939365; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AtjbSnnmmJNTy9AQcsXNJxpx4wckFGwTGdRsQG662B0=;
- b=L9pV69O7gvHDN/qqpZYnHIqRdKmNwn1WpTW3a3cDARRvb7VjUPEj0sko7OBpGUvYic
- d0zihWZk2V+WF2fVCqLR2dBGyX9QJz6aSFouN8qY67kpe7eWDV5CxumJtqAbIxRV2m2r
- zhT/frGmm3goOK+XERBv6kC3OxWqrL/gYr6WP+9XF8+KwB4nb00yUEdyVkrLt0osekhL
- 1S6NWWgynDv9xFrl5dVUYzqTyuaadavGJ6ZbKSa+2SIzrO/TTYAtWoU25WvtUywBNA7c
- ijT5DxPWzl/mp31eUTPWHUOUmalO70AAGl3nziz18Tdhu1CWFHV3w3ByHelcnoKSeKjY
- k/UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750334565; x=1750939365;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=AtjbSnnmmJNTy9AQcsXNJxpx4wckFGwTGdRsQG662B0=;
- b=EQbROFQW9yhBQ/a7YEUDP4sWUtzAoc9Qy1YsveZ+hDJMnalMwSUIs0sIHofxItIQwB
- 4viW8S8/a3mvGp42Md08dKNCM9kuO2MwqS59wn7kcLqUE8epqyP81hx3h7YdEpmKrXih
- 9ypH9KtfRnUL4yQeIAO0rXcn1S991TSmv9mNMYva8Gh/ahhXjN8uEv0wv+tO+u4FBx7B
- nihBPE+1YeeCw+v/ok9J/4VbbfUHsxclgw7Ah8wFNoFePEUcQobPiwrERMyucPmY3+pm
- PBUzAf2kYwiAjMfUnq5h2c/llRjIQ7ArIRmCaw+wg1bjlCPxAYvb52YVSsZEM8tr/7LU
- +Ang==
-X-Gm-Message-State: AOJu0YwIk5h2WJDz+ffMn+y/OXfAZ6L6YGnzgXvqtXbvUC0D9ewdqwrr
- GeY9D9kFEVFMz8vTv7TifJ3de1mnMlN0PKwpg17/IncIhR80tLTKDlW7O0nCEYupUut4eh+ajXY
- tMdvaSsg=
-X-Gm-Gg: ASbGncvXSHrFFD18TT1xQx7Ypbh6+E4ioAPwd4IiBmvcwk8ptWhKrXye0K6abcD91e5
- z6XSfWor7JPxwa/QvfxLto93qgdkSvo7Fe+ZVujne1PHvdkMkDr8wZoVO/eiybGHzlMSX/ZC17q
- h/Y6ug860fTROcN8ATRTz6OChxGTBszMUGi+7/tDD/ktVvN78pc9dcLx3Da2v707uzySzJNZQBo
- 7JVeQgyXUYe1W88IERu1sTGQ5znDXJEftrXo0LmF5K3qvzjVXGK0fHY0vDEOwrsSj01Wtj0lEE3
- cCsuNRtLMpKjLjv7BmLRQOUfIhYwuOLC5c9zGegf3578fP07Loir+pxhNOnLE34spb18XcPizDU
- ibG0GPyOCui/HXhZ4r1rWgMMOd9XMmplDxdB9MmvzuTrzOC6oIrra
-X-Google-Smtp-Source: AGHT+IHHBo0h9lJCZi8oXO4p7zCUm51Gek3lmFub469juu3PMSOppbQgY9HhNmf9oDOY2TzYk7VZHA==
-X-Received: by 2002:a05:6000:2908:b0:3a3:ec58:ebf2 with SMTP id
- ffacd0b85a97d-3a572398e99mr16950337f8f.7.1750334563499; 
- Thu, 19 Jun 2025 05:02:43 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:ee3:2301:cf2f:b483:c307:5b0f?
- ([2a0a:ef40:ee3:2301:cf2f:b483:c307:5b0f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a5896356eesm6991696f8f.49.2025.06.19.05.02.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Jun 2025 05:02:42 -0700 (PDT)
-Message-ID: <caa9932c-c5dd-46d6-a5ae-120238300a73@linaro.org>
-Date: Thu, 19 Jun 2025 13:02:39 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55JCvMoD589700
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 07:57:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1750337842;
+ bh=M3/kAffKa83MW86Dr9cLs1EZIITUv5ktxFc8OhAlLNQ=;
+ h=Date:CC:Subject:From:To;
+ b=dKbrvIlx3DuMad6u3mQ2VsO9rS/OfF/jWsatgDj3wXMox4zGfXxPcYw2UzGWE8pjC
+ nRha4kCDUkoafgJu7XfsC0ThWjjNmW0JG6TtdGeyMLIA6/n7nHP3khyFz3RnPnRRjc
+ uaZ0pl0Wuf16Po9GrJVclzp483fNAqFq1W0yJs0M=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55JCvLEc3719852
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 07:57:21 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 19
+ Jun 2025 07:57:21 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 19 Jun 2025 07:57:21 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55JCvKEw1396544;
+ Thu, 19 Jun 2025 07:57:21 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Philip Oberfichtner <pro@denx.de>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [bug report] usb: Assimilate usb_get_descriptor() to linux
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 19 Jun 2025 18:26:43 +0530
+Message-ID: <DAQIYU2LVE61.2K9Z7L7EQ2QQY@ti.com>
+CC: <vigneshr@ti.com>
+Subject: [RFC] board_f: why is TLB size estimated before board_init_banksize
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,74 +76,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Philip Oberfichtner,
+Hi all,
 
-Commit 2fc8638403c7 ("usb: Assimilate usb_get_descriptor() to linux")
-from Jun 4, 2024, leads to the following Smatch static checker
-warning:
+I was trying to create an MMU table (set as mem_map) at runtime when I
+encountered an issue with the init sequence for u-boot (defined in
+initcall_run_f at common/board.f:893).
 
-	common/usb.c:261 usb_control_msg()
-	warn: should this be 'timeout == -1'
+As part of the MMU creation, I am adding entries for all the memory
+banks as per gd->bd->bi_dram which is set after dram_init_banksize. So I
+called the function responsible for creating the MMU table after the
+bi_dram has been populated in gd by dram_init_banksize.
 
-common/usb.c
-     220 int usb_control_msg(struct usb_device *dev, unsigned int pipe,
-     221                         unsigned char request, unsigned char 
-requesttype,
-     222                         unsigned short value, unsigned short index,
-     223                         void *data, unsigned short size, int 
-timeout)
-     224 {
-     225         ALLOC_CACHE_ALIGN_BUFFER(struct devrequest, 
-setup_packet, 1);
-     226         int err;
-     227
-     228         if ((timeout == 0) && (!asynch_allowed)) {
-     229                 /* request for a asynch control pipe is not 
-allowed */
-     230                 return -EINVAL;
-     231         }
-     232
-     233         /* set setup command */
-     234         setup_packet->requesttype = requesttype;
-     235         setup_packet->request = request;
-     236         setup_packet->value = cpu_to_le16(value);
-     237         setup_packet->index = cpu_to_le16(index);
-     238         setup_packet->length = cpu_to_le16(size);
-     239         debug("usb_control_msg: request: 0x%X, requesttype: 
-0x%X, " \
-     240               "value 0x%X index 0x%X length 0x%X\n",
-     241               request, requesttype, value, index, size);
-     242         dev->status = USB_ST_NOT_PROC; /*not yet processed */
-     243
-     244         err = submit_control_msg(dev, pipe, data, size, 
-setup_packet);
-     245         if (err < 0)
-     246                 return err;
-     247         if (timeout == 0)
-     248                 return (int)size;
-     249
-     250         /*
-     251          * Wait for status to update until timeout expires, USB 
-driver
-     252          * interrupt handler may set the status when the USB 
-operation has
-     253          * been completed.
-     254          */
-     255         while (timeout--) {
-     256                 if (!((volatile unsigned long)dev->status & 
-USB_ST_NOT_PROC))
-     257                         break;
-     258                 mdelay(1);
-     259         }
-     260
---> 261         if (timeout == 0)
-     262                 return -ETIMEDOUT;
-     263
-     264         if (dev->status)
-     265                 return -1;
-     266
-     267         return dev->act_len;
-     268 }
+Although as per the initcall sequence, u-boot has already computed a
+size estimate for the TLB by this point from arch_reserve_mmu. Though
+u-boot does expose get_page_table_size API to allow boards to reserve
+their own size for the TLB but I am not sure why arch_reserve_mmu is
+being called before dram_init_banksize in the first place.
+
+Modifying the sequence from the existing:
+dram_init -> arch_reserve_mmu -> dram_init_banksize
+
+To the new:
+dram_init -> dram_init_banksize -> arch_reserve_mmu=20
+
+Will allow for MMU configuration inside dram_init_banksize where we can
+access the dram bank sizes and also make use of u-boot's default size
+estimate for the TLB with the drawback being the dram_init_banksize
+would not be aware of u-boot's reserved memory.
+
+I was unable to find a reason for why the init sequence is structured
+this way, any inputs are appreciated :)
 
 Regards,
-Andrew Goodbody
+Anshul
