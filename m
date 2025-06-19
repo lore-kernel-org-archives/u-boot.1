@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21938C7115A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 22:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2701C7115A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 23:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62BAF82CDF;
-	Fri, 20 Jun 2025 00:44:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 564E082CBB;
+	Fri, 20 Jun 2025 01:04:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OgXscUJd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FCNEwhl0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F6BE82D21; Fri, 20 Jun 2025 00:44:39 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id A48B282CDF; Fri, 20 Jun 2025 01:04:15 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1682D82CBB
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 00:44:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A86B80C83
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:04:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-551efd86048so1240746e87.3
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 15:44:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-60702d77c60so2312794a12.3
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 16:04:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750373076; x=1750977876; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1750374253; x=1750979053; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ncYXh9hYMoHK7PoZ2NO3JZydQRNIA2ofo8tauo6aRLw=;
- b=OgXscUJdAt4jAYgFYFPih5hzDvYO/a2p14pz5nshVcwvmC1MwQWixq0xkzSOvW6eV0
- CMWTlxoCsWbKE6TnZGymcdkTYcehLSWbBNfmD/rsVPxAWN7/uwMMbliuzPhtRdV6Q+b1
- wc5GvV+qdjfFKGN7XbGEmS6HQrz/HYbtqgp9lHmw1TmQheeptkE1NiHCjiPwyDxda9h3
- lH7mmEqcN+HAyYbkzpmXNO6P7HnhSo2V9ncYQW6pgEium8N3WJIaKyqgcCnQF61lReCJ
- 4GK6j2bSXEQ1pNfyFGwnyCgFaGZTt53k1Xac5bL5WMdb2ed1kAK+9nHOoHFmnY+GXkNJ
- Gs2Q==
+ bh=i1+0SY/NgpTNAZ00Dpo3AkJqqkRi1t6lrieilCOLkDA=;
+ b=FCNEwhl0Svkf/UqkAqaGFRvt7ggDZZv5y8zvxGkJMXURXkmgmNeuqVWnUdV+6jKMpQ
+ HGjoTXDyg/eS2qMxsOu5lcXB7n/7jb6bk1nhfJv5ID3hxRY3fqLvFCvoi2KyBMiC+pmu
+ 2htQE4JgtzxW+ruNik0NgbGoXLP4UM/pCa1NlWu2hnjLU5zFPnNGBpoM5/g8vR+r1Blf
+ /c3r0uzgPJDj4CjJKtPm3aRFOdNY8QINbHvh6R7Ozv08IaMHNcrI3+PDsfDb+LR53f3z
+ G54qVVlYMTYxF2BSmCGmSHtOKB2cES4zEctN90kiEKLciUWYVR6I5VQKW2Qxqu3TdR91
+ Jn+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750373076; x=1750977876;
+ d=1e100.net; s=20230601; t=1750374253; x=1750979053;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ncYXh9hYMoHK7PoZ2NO3JZydQRNIA2ofo8tauo6aRLw=;
- b=R6B8va5EkOp3WN+aZB0YBYv3M37oGYVWKRDSp9q80iGaZ/DJsgnbmuoKl5oN2icGoJ
- J5y18SWZsP2S15aSHQhr0UBMPuWzBk2IvJhvzTogVXQ+7N3qJVTj1baWcntP81LhmcG2
- pRdE1WBWG6p1ye8CqHthYarqbq9fzPfn1l9SSBmrE6CB/qXJAFZ2cxIgbe+rYnLEvbVS
- Ki3VudmEivKfTs/h3+Sz8eePlQ26nxtvrFJKp2J2AkP+wDQMByquSsaYS8lj4bU0KxRK
- pMQn7mexp6lgmEQ+mctbJntO9IOpMBuHaYHsNAClj/bVH72dv3lXuUlmfxiISuHnX96I
- hrhQ==
+ bh=i1+0SY/NgpTNAZ00Dpo3AkJqqkRi1t6lrieilCOLkDA=;
+ b=PlXvl51gAKu7gGPCs5et0c1wexTSGSPoHS/JVU0aj9g5UXIUPSQI31fkSi2Q+WfqIJ
+ VdJYe+/fA+lo4FAFyBaMN0Mj5qRuDhUMJk53dIJla0ZWnHjYwBGG9qkyi7JsQNs64DKP
+ q68vyJdVRx6UspZm1yInsersL4Kr4ekA3Lay46DXszs3O3l84OVKcu5nvcDOO5uF4gFQ
+ UuCsCZmL53Ap9xW80FvFDsbm8X7U3b1TGlDXP9N+Ipgt9eIsOczFBbDsy4KXaVUeNp7o
+ RV09Lkp9IpamTXrUAZiLPHUdMBxZExj4npuC5rE3ml7U48NC48g4aC0JeUm/CqQjD0Qo
+ 0dfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyh83HmAUq98EcHJznzNBAI0VeUewju4VUsaxvAAJ78EYk9iwrv8BETiDNJpWiFcnpR2ygOJM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxoUHT+Ic7BWjTd8aKvsGGq+BpCg6BgHKMHbxlUnawKOaYciw+L
- B0SHRUwdDUD0hSm/2IaqWaSl6fMkeJjFpF6SrGQRdpt6ZDVU6DO1gN/AZeQPxsMXpkVJizgImx1
- KRByQAIjYgLUuThgyVP8CgAZbLFvKFMY=
-X-Gm-Gg: ASbGncvJtYd6eSavPS7K8P7WKyGqYYVVf66yyFLSnrzygCdOQyQaWtcUiY3newrODB1
- SlVbKhaumiegdL89cgdPd+CgnRaGhzBlbGLjCLFdIugXzAu7uoWQZXQkppPnXI5fWD4BcnGtyFH
- gaCHHJoaWSvYG+S1ffmk2wv3eTY0Idq7GG0z2V9KSIRp086r6umbygQj7ONhoTJuCDcx1pRB6dJ
- ho=
-X-Google-Smtp-Source: AGHT+IFYRQfY2ODSS2y/6K8J+Ofg523+Sn6DDsuqTyD0cxeX7N5tvwDOTqcvIeYkWTc0dNeikbSiXLYFk2SJtYRvHms=
-X-Received: by 2002:a05:6512:a94:b0:553:277b:17c8 with SMTP id
- 2adb3069b0e04-553e3cfd999mr204994e87.35.1750373075986; Thu, 19 Jun 2025
- 15:44:35 -0700 (PDT)
+ AJvYcCVOUFVZS7xWb5YuISf7BNlNau5y93beNxAuD2Tj4BCa5h2X08IBEUgWSKmXvBg4ZxjhfP4PX2k=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHZ851/3xwhfb0KVtY/n9Q7uWxOJNfLeqDjBCMApBIpzbtZU6e
+ IW+FYQDLCPu4JOzUyCEluYtiIZIwDogYWGqnO0USzowSoXbXJbNcXYnScaLZnPq8qmo8RrsiH3d
+ UtD6tLkOJ0rs4ahHbGNVzdWjpls3YNcI=
+X-Gm-Gg: ASbGncv0mX7mykjM9+kcV7P+JXgGulKvvmnpicdTxR2BKvm1EcPCwLqEXafqypzMHWb
+ 0JRxfcNzMOpOdT1nnZrN/8PHCswmQcEU8cPUFl6TQrM030yIXX5fWrCS+rsZGcGj8E3bhgDzfBJ
+ PQmbq59McURmUuNcOcpyMcZ7XrLxMKP6Ai3q1/4tu4TRSw
+X-Google-Smtp-Source: AGHT+IEDiNV5AVgx/dOG/q+vXEZdxnixRhZJwHl3RkAsa4dYx6a7/fzLsSMM8O6JnKB7pcRp9xaK3apf9FJT6J+P5sY=
+X-Received: by 2002:a05:6402:4316:b0:5f3:f04b:5663 with SMTP id
+ 4fb4d7f45d1cf-60a1cd31008mr628144a12.24.1750374252657; Thu, 19 Jun 2025
+ 16:04:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250619-sr-v1-0-631100a113a5@nxp.com>
- <20250619-sr-v1-1-631100a113a5@nxp.com>
-In-Reply-To: <20250619-sr-v1-1-631100a113a5@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 19 Jun 2025 19:44:24 -0300
-X-Gm-Features: AX0GCFujulHkf19BlBuM-mtsOpEljJQbc8ovxgcY4mWdNWmxa2LIpNss0Refv3c
-Message-ID: <CAOMZO5CHSgaYcQcS+9VtfP0eH8QTwvJ6rG8yLijDU2M0JVacuQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] imx8mp: evk: Add support for capsule update
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Peng Fan <peng.fan@nxp.com>
+References: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
+ <20250619212714.GD216500@bill-the-cat>
+In-Reply-To: <20250619212714.GD216500@bill-the-cat>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Thu, 19 Jun 2025 16:04:00 -0700
+X-Gm-Features: AX0GCFvy9SSGzYo-Al1zMU2aOVPXsuCKq3uSenh6RthUpwd9SpGToKtfP2dKwFw
+Message-ID: <CAJaLiFwQCT7LLw2rr9p+hviojYgrw166RCsdOOutRKDvye7icQ@mail.gmail.com>
+Subject: Re: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
+To: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, Stefan Roese <sr@denx.de>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,16 +95,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 19, 2025 at 6:13=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
-m> wrote:
+Hi Tom,
+
+On Thu, Jun 19, 2025 at 2:27=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> From: Peng Fan <peng.fan@nxp.com>
+> On Thu, Jun 19, 2025 at 01:37:53PM -0700, Tony Dinh wrote:
+> > Hi Jerome,
+> >
+> > While fixing some ext4 file system problems on 2025.07-rc4, I ran into
+> > a problem booting a few Kirkwood boards. kwboot loaded the u-boot
+> > image,
+> > and then u-boot execution was frozen without anything going to the
+> > serial console. I did a bisect and found the commit that caused it.
+> >
+> > https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc02b8=
+a75c1940
+> >
+> > When I tried to reverse this commit, I had a build error like this
+> > "{standard input}:24246: Error: selected processor does not support
+> > `mrc p15,1,r3,c15,c1,0' in Thumb mode"
+> >
+> > Currently, the only way to boot Kirkwood boards is to disable either
+> > CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
+> >
+> > I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
+> > know if I can help with testing to troubleshoot this regression.
 >
-> Define image array and GUID
-> Select configs for EFI Capsule update
+> I wonder if the right answer is that CONFIG_SYS_THUMB_BUILD should be
+> off? A quick look around and this (and sheevaplug) are ARM926EJ-S which
+> is Thumb-1 not Thumb-2 and it looks like the kernel for example only
+> supports building itself with thumb2 on armv7/v7m. I know that this was
+> working, so we should dig more too, but I'm not sure what the best
+> answer here is.
 
-Please improve the commit message.
+I recalled we added support for Thumb-1 from way back and a few people
+have helped porting more changes from the Linux kernel.
 
-What is the motivation for adding support for capsule update?
+U-boot has grown larger and larger over the years, especially with
+bootstd enabled (I know you have been watching closely for size
+growth). Built without CONFIG_SYS_THUMB_BUILD, the sheevaplug board is
+about 107K over the CONFIG_BOARD_SIZE_LIMIT of 512K. And it would be
+an unpleasant surprise to see size growth for other downstream
+projects still supporting Kirkwood SoCs.
 
-Why is it useful? How can this feature be used?
+All the best,
+Tony
+
+>
+> --
+> Tom
