@@ -4,61 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F8A1C7115B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 07:51:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC199C7115B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 08:34:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DBCB82CBB;
-	Thu, 19 Jun 2025 09:51:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=zoho.com
+	by phobos.denx.de (Postfix) with ESMTP id D398382CCE;
+	Thu, 19 Jun 2025 10:34:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=zoho.com header.i=alex3kov@zoho.com header.b="cfJl5RMH";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="LjkoaDwz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60E1782CCE; Thu, 19 Jun 2025 09:28:07 +0200 (CEST)
-Received: from sender4-pp-o92.zoho.com (sender4-pp-o92.zoho.com
- [136.143.188.92])
+ id AE7A782CCE; Thu, 19 Jun 2025 10:34:23 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CDD582B18
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 09:28:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98FC982B18
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 10:34:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=zoho.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alex3kov@zoho.com
-ARC-Seal: i=1; a=rsa-sha256; t=1750318081; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=FYgVG4tAPozVonoYp1Wws9fXVSc0Q2aYiWbKYM3hh4F3ZQgzeOeUtq0j59jrY0N8OxUAbWgxFCbLaLjdgftKeMZc0/9b9EFb6rJIPzTTWp3slvZoRtsXVWjdrPqHTUuNWHgdUgGJCFFkSBfFrqQoSw/RKCIfrqBiVuc4nfoYjTg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1750318081;
- h=Content-Type:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=Pp3N0+tJhR7oE2AY7hOl0Qfs5CjemCGmBJdoPEv8PPo=; 
- b=bhWVwheBSxu015NW5XAopKLf9tukjH6MwDv2P2M2dtkzq538JaONNcNEMak424mSET8iYNTLFUd680YZjFVsHFJ26V6AJvJ1g7GGznuVkIf8LTCsCgo4cWwDd0l8rjyFAj/ulQ6exn5g0/4m04YQW0lLhG1vKljTLmYhaM9lY28=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
- spf=pass  smtp.mailfrom=alex3kov@zoho.com;
- dmarc=pass header.from=<alex3kov@zoho.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1750318081; 
- s=zm2022; d=zoho.com; i=alex3kov@zoho.com;
- h=Date:Date:From:From:To:To:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Feedback-ID:Message-Id:Reply-To:Cc;
- bh=Pp3N0+tJhR7oE2AY7hOl0Qfs5CjemCGmBJdoPEv8PPo=;
- b=cfJl5RMHHSD2nVOFNtTRWoN4tmYhXcd9yNSx+Gf9fZBtQEMJv1vQ5SQhWl+sN70i
- 0mALPU8UX4mVdIFouMwOm6uWePPvrcBSw9CQKoK9637G9yl3SCkd5XpQLOLI0RUtVeh
- hST6eRff5VomY56boS8w9MaTa+erH5d1YvRqASTM=
-Received: by mx.zohomail.com with SMTPS id 1750318075460354.44580158455904;
- Thu, 19 Jun 2025 00:27:55 -0700 (PDT)
-Date: Thu, 19 Jun 2025 10:27:47 +0300
-From: Aleksei <alex3kov@zoho.com>
+ spf=pass smtp.mailfrom=javierm@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750322059;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=/bFhdaNHSWvZPudcCmaWgQmgWV3NMDVI2AFe/2bj7PY=;
+ b=LjkoaDwzE/h4UVxG6IKkPbf/f1pPS0MkIZYMgdkTZW5vSh0vc49gl/lKGhDx9XM95gJwHY
+ epqQG13DFLIO+HfISlIxM9UkkVgOAOdFlxBuXWB5o0SOOIOqAdm2O4zMiRp6YJFlqN+vqB
+ VtPQ/m71UqFVQ+/eiXtNrc3ng1mRezE=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-20-nM6v48VeNCeev2dfxqbGyA-1; Thu, 19 Jun 2025 04:34:18 -0400
+X-MC-Unique: nM6v48VeNCeev2dfxqbGyA-1
+X-Mimecast-MFC-AGG-ID: nM6v48VeNCeev2dfxqbGyA_1750322057
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3a4f7f1b932so348899f8f.2
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 01:34:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750322056; x=1750926856;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/bFhdaNHSWvZPudcCmaWgQmgWV3NMDVI2AFe/2bj7PY=;
+ b=AISa3ZKbIAawgzuA6BtoAPEuSQSVJ5fRUtNjTTZUKKw5dh48Th7NkGaaXiXyoPKA0E
+ j/44VTpissnxSfkF2wI1NvNaN00R8wctSaitA5NdyU/oaon2yVw01Oftz7+YbPEbT0nj
+ 9vG3Sq4JYykr0g6Ian1Pnz6qe7mG6ieCq/oTRTt56C5lxF8wAraZPKkMtZGbB0iIST2O
+ VSy4RFIHN/ZZtmi9H36Bet3yJ+/rNlBnOLBm6pIDHmPBK88gkNqNp2HnzBEdQiWqumFr
+ yP3xNFUzwALjn5JNfFXDNzy5/1de36UupKjz1P93DWi8yrtvXAtK4L/vUEZ+vVpkrvCQ
+ zobA==
+X-Gm-Message-State: AOJu0Yz4USF3hNMmW271z6CBeinD3r5CiP+8lNIsANArv1xHy5lu+JJ4
+ bEFvQ3kJtH/eBtj+9cG1gvXY/4qnLzSiifhhKLPyI0FkTgSUAdEiogDPEBqSKaxX+ZGrOwN3ffJ
+ LXCWysWRRGHmFGUS92yeYvvFyvALjimq1/9NKAUMrcBvQap28wsSU3HjNW0ElztjEZLeBHqeEcn
+ mHeXcW7GYif5pvTpe65ibEZ7NA9GeVkO3+8fGfbw==
+X-Gm-Gg: ASbGncsZyuFEWwTTGQkjwQ4YdQdCELZSgHe+DwcFYzGbSQaKgJ2EtcMWP2AyBTuPeEh
+ n671hSg/4ZOUxLVuYBBkG1gpIhaBaPh8yfH8l5n1LgEfoc9CR7gYfzWXkCGnDc9ju0kmWdY+wyq
+ JYNHGrpyXLUVhNz7ite5MmS5ngjxxQ8w9G6rGDojnCg1HLrA5z2BOT6yy7qxZc/WzvqYFgUMbQf
+ wvGDjuOFK2jEeFPsX7WtCvpPBVInHWEgpjVnKmLkXN9MdeKwrIrb5sSPAAaA+FBsq5xo0Avm+CA
+ Vcv37sVFNAE+NzlZW0bbk51wD86v/zvoxqJQRe9P1FxkWplsyNaW
+X-Received: by 2002:a5d:64c2:0:b0:3a4:fbd9:58e6 with SMTP id
+ ffacd0b85a97d-3a572e56e89mr16116487f8f.50.1750322056420; 
+ Thu, 19 Jun 2025 01:34:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEgPU1X04muCY5b3tijud+Fqc5/zeZ8eU/eIbhgL9+v3I/RdfMBaICHOpKhgD6mvsjWoWnLeA==
+X-Received: by 2002:a5d:64c2:0:b0:3a4:fbd9:58e6 with SMTP id
+ ffacd0b85a97d-3a572e56e89mr16116444f8f.50.1750322055833; 
+ Thu, 19 Jun 2025 01:34:15 -0700 (PDT)
+Received: from localhost (35.pool90-77-212.dynamic.orange.es. [90.77.212.35])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568a54af6sm18709366f8f.6.2025.06.19.01.34.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jun 2025 01:34:15 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
 To: u-boot@lists.denx.de
-Subject: Re: Build fail on rockpro64-rk3399_defconfig + SATA_MV=y
-Message-ID: <f6vr7xc7v4ajxjlwtynrugtdrppv3h2jgbaj4gsixxacoqnxz2@hvko5bjrm7ui>
-References: <tc42tqvd3kqqbfqkau5niycwkhi5ddaqponrasaitk3tkusops@yevset7ocspg>
+Cc: mripard@redhat.com, mskrivan@redhat.com, Tom Rini <trini@konsulko.com>,
+ eballetb@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ alexl@redhat.com, mkorpers@redhat.com,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Heiko Schocher <hs@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Maks Mishin <maks.mishinfz@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Subject: [PATCH v3 0/4] efi_loader: add EFI_PARTITION_INFO_PROTOCOL support
+Date: Thu, 19 Jun 2025 10:33:58 +0200
+Message-ID: <20250619083411.2214491-1-javierm@redhat.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <tc42tqvd3kqqbfqkau5niycwkhi5ddaqponrasaitk3tkusops@yevset7ocspg>
-Feedback-ID: rr0801122873e84037f4f4fb89938d504400008baa71d1ef1214b68eb8d354a5f284c454127343baa1a133fa25:zu08011225bbb388485513ea1f411218ba0000d425b3ae16a6c1c6ae085e279ea75353615899354afb3a:rf0801122c6c6af37dc06b98a911eab8ff0000cdd839120890b32a838d1a42b443b85f451b192137cd3c6a5f033b320dfb:ZohoMail
-X-ZohoMailClient: External
-X-Mailman-Approved-At: Thu, 19 Jun 2025 09:51:38 +0200
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 3KEi5EjiB3XOh_fQjVXcchRFzcZ2ZL-0559DzO-ltZs_1750322057
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+content-type: text/plain; charset="US-ASCII"; x-default=true
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,18 +118,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-06-18, Aleksei wrote:
->Hello,
->Building v2025.07-rc4 or git (17012e3068d):
->
->make mrproper && make rockpro64-rk3399_defconfig
->make menuconfig
-># enable SATA_MV=y in menu
->make -j $(nproc) BL31=/tmp/bl31.elf
->
->drivers/ata/sata_mv.c:55:10: fatal error: asm/arch/soc.h: No such file or directory
->   55 | #include <asm/arch/soc.h>
->      |          ^~~~~~~~~~~~~~~~
->compilation terminated.
+This patch series implements support for the EFI_PARTITION_INFO_PROTOCOL,
+to provide cached partition information for GPT partition types.
 
-Disregard this please, I misunderstood the meaning of SATA_MV.
+The EFI specification mentions that the protocol can understand legacy MBR
+partition types, but that's for backward compatibility and not implemented
+by this series. It can be added as a follow-up if needed, to make it fully
+compliant with the spec.
+
+Patch #1 moves the logic to get a GPT partition table entry to a helper
+part_get_gpt_pte() function.
+
+Patch #2 exposes that helper function to be used by the efi_loader.
+
+Patch #3 implements the actual protocol support using the mentioned helper
+to get the GPT partitions table entries.
+
+Patch #4 extends the existing block io EFI selftest to also check for some
+cached data provided by the partition info protocol.
+
+This is a v3 of the series, the v2 can be found here:
+
+https://lists.denx.de/pipermail/u-boot/2025-June/592550.html
+
+The EFI_PARTITION_INFO_PROTOCOL implementation is added unconditionally,
+because the u-boot-size-test.sh reports the code increase is negligible:
+
+    ./u-boot-size-test.sh qemu_arm64_lwip --all
+    ...
+    01: Merge patch series "list.h/treewide: get rid of no-op prefetch()"
+    02: disk: efi: Move logic to get a GPT entry into a helper function
+    03: disk: efi: expose the part_get_gpt_pte() helper function
+    04: efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL support
+    05: efi_selftest: Add basic partition info check to block io test
+        5    0    0 /5              qemu_arm64_lwip
+    Completed: 5 total built, 5 newly), duration 0:01:57, rate 0.04
+    /tmp/qemu_arm64_lwip/add-efi-part-info-proto-v3/boards.cfg is up to date. Nothing to do.
+    Summary of 5 commits for 1 boards (1 thread, 8 jobs per thread)
+    01: Merge patch series "list.h/treewide: get rid of no-op prefetch()"
+    02: disk: efi: Move logic to get a GPT entry into a helper function
+       aarch64: (for 1/1 boards) all -64.0 text -64.0
+                qemu_arm64_lwip: all -64 text -64
+                   u-boot: add: 0/0, grow: 0/-1 bytes: 0/-72 (-72)
+                     function                                   old     new   delta
+                     part_get_info_efi                          468     396     -72
+    03: disk: efi: expose the part_get_gpt_pte() helper function
+       aarch64: (for 1/1 boards) all +32.0 text +32.0
+                qemu_arm64_lwip: all +32 text +32
+                   u-boot: add: 1/0, grow: 0/-1 bytes: 200/-164 (36)
+                     function                                   old     new   delta
+                     part_get_gpt_pte                             -     200    +200
+                     part_get_info_efi                          396     232    -164
+    04: efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL support
+       aarch64: (for 1/1 boards) all +176.0 rodata +16.0 text +160.0
+                qemu_arm64_lwip: all +176 rodata +16 text +160
+                   u-boot: add: 0/0, grow: 1/0 bytes: 148/0 (148)
+                     function                                   old     new   delta
+                     static.efi_disk_add_dev                    636     784    +148
+    05: efi_selftest: Add basic partition info check to block io test
+       aarch64: (for 1/1 boards) all +531.0 rodata +179.0 text +352.0
+                qemu_arm64_lwip: all +531 rodata +179 text +352
+                   u-boot: add: 1/0, grow: 1/0 bytes: 384/0 (384)
+                     function                                   old     new   delta
+                     execute                                  36428   36796    +368
+                     partition_info_guid                          -      16     +16
+    (no errors to report)
+
+
+Changes in v3:
+- Add ifdef guards for {EFI,DOS}_PARTITION being disabled (Ilias Apalodimas).
+- Fix build in -next due missing part_efi.h header include (Ilias Apalodimas).
+- Rebase on top of -next (Ilias Apalodimas).
+
+Changes in v2:
+- Add a test for the EFI partition information protocol (Tom Rini).
+
+Javier Martinez Canillas (4):
+  disk: efi: Move logic to get a GPT entry into a helper function
+  disk: efi: expose the part_get_gpt_pte() helper function
+  efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL support
+  efi_selftest: Add basic partition info check to block io test
+
+ disk/part_efi.c                              | 67 ++++++++++++--------
+ include/part.h                               | 14 ++++
+ include/part_efi.h                           | 20 ++++++
+ lib/efi_loader/efi_disk.c                    | 39 +++++++++++-
+ lib/efi_selftest/efi_selftest_block_device.c | 30 +++++++++
+ 5 files changed, 141 insertions(+), 29 deletions(-)
+
+-- 
+2.49.0
+
+base-commit: ce2a7fcbd565d55b1d3fdc0e68edd50a21eca7d4
+branch: add-efi-part-info-proto-v3
+
