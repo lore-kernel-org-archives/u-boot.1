@@ -4,70 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C58CC71159
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 07:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50B5FC71159
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 07:35:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83AB382BA1;
-	Thu, 19 Jun 2025 09:19:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 40BBF82BA1;
+	Thu, 19 Jun 2025 09:35:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hzD+xwhN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cei7cuTa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4FD282CBB; Thu, 19 Jun 2025 09:19:11 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EFCB82B18
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 09:19:07 +0200 (CEST)
+ id 2A82182CD5; Thu, 19 Jun 2025 09:35:40 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1632882B18
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 09:35:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55J7Inim521399;
- Thu, 19 Jun 2025 02:18:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750317529;
- bh=Tyt/XfYrqKJkCn46FhrTclbKn91eYudLc4GSHx5Nqtg=;
- h=From:To:CC:Subject:Date;
- b=hzD+xwhNHSetSeCt7Bb0GyzkMQK24SVpiO6MzDGhFZ8BjTPXjVh8E5PHd9UBrNA/n
- /Eb+T4/iYT06F0c4Cae4VxOC5+tlDGSWOPNqZDv+SZhlL1kx7R4qKonUWvnc8uCF2u
- XYgUjRU8iuiu5glSQgwqWp+zcCFKJR0UOzHr35vs=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55J7ImCf528455
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 19 Jun 2025 02:18:48 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 19
- Jun 2025 02:18:48 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 19 Jun 2025 02:18:48 -0500
-Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com [172.24.227.4])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55J7Ifdg719070;
- Thu, 19 Jun 2025 02:18:42 -0500
-From: Hrushikesh Salunke <h-salunke@ti.com>
-To: <trini@konsulko.com>, <Oliver.Gaskell@analog.com>, <peng.fan@nxp.com>,
- <malysagreg@gmail.com>, <nathan.morrison@timesys.com>,
- <twoerner@gmail.com>, <sjg@chromium.org>, <contact@paulk.fr>,
- <marex@denx.de>, <anshuld@ti.com>,
- <dario.binacchi@amarulasolutions.com>, <jerome.forissier@linaro.org>,
- <michael@amarulasolutions.com>, <a-dutta@ti.com>,
- <kever.yang@rock-chips.com>, <jonas@kwiboo.se>, <mkorpershoek@kernel.org>
-CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <danishanwar@ti.com>,
- <s-vadapalli@ti.com>, <srk@ti.com>
-Subject: [PATCH v3] spl: Add support for Device Firmware Upgrade (DFU) over
- PCIe
-Date: Thu, 19 Jun 2025 12:48:41 +0530
-Message-ID: <20250619071841.1265364-1-h-salunke@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3a503d9ef59so373067f8f.3
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 00:35:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750318537; x=1750923337; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wbg9Ts4XMlMNkELHjEURVQVk/3IiWQATKQufoAHDjvg=;
+ b=cei7cuTaEzSGNrI1GH87/KFLWtIXAfM5d4j4QbAiH66bXP2eQOrbLfSEDqN8fu5tFi
+ LN8rl/qJyRhg6qGyP3UZMKTH1jQvoEW4OqF3MdCIYP15sDW+BZ4pCQOvOVUY3b7dI/KO
+ at22MPdDCUYEum1t7nHiZwNb+WV0GaWMeBB/bOui92OO/3xk6HbOob+vRunmszqH4NI9
+ L7UtH0MdAN40NYRa7uYIRqNEjpcvMcdZaxRrX1wtuYu0o6LPfu8Xgs9hXZqyXQA15Vug
+ Je6xRsXbqIwK+DRyMpm7rFDGN9+e01d5mtlk4jtNEmJgxB2Od4oWN+k0GefVkxGy4A2t
+ Xpeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750318537; x=1750923337;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wbg9Ts4XMlMNkELHjEURVQVk/3IiWQATKQufoAHDjvg=;
+ b=tofIsjvldrRk9aSxHOHCDJwG7TG1VrAW9SRquB5BCEYIo/miLeWBiFXKnZdJlfQT3b
+ hTiP2pg2v4psghHxlfyHJUPhFcKpd4XsF5IrUYpoaswLCDpnDV1mKLElsGefsk0QP68d
+ KfkuGQj2Jwj5K2LA6JgfKIbSSHOrGyE/OaKMCTmYTnWA7dps0LomiEwmD8uAfdg0J2Ji
+ h4oTj3716+frHw6cX+0PyWOMvt3MhwCDnmh5KXPmspZ9kPLx9y5+GCAIPEiSiTyDTA5e
+ WalcbWTzp4PAoV7j8yYxHVJIK5YYW1ejk0QZ1HRTJnWmSpA5hlchai/gu8toZ/3WBa7H
+ WGMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXrJvoVBrsJAWXy3qpisN71ZJKy7yCkmdC3tfBX4LNyrij7zdGb3cBmabeHBM66ga8kW2cmpUA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHtzedMZPVc61dFhulunrIkpBDEhPs8zVx4hEOa+fgDMEZrPgJ
+ 8nvcjSpZ6lTl5x5qhqkuQDsjhJWiegc4MOoa35XdxLTVRSdXuCCbU/A1hBwN1uvFX+E=
+X-Gm-Gg: ASbGncsr+DI+HMUe0JJfnUHlNwgkAYMVve1mxqcHxeUJbVpMVydgKH34K9s6pgRC8eH
+ rv3h6zUe6L0vLkIrcfI7tg9Hvzqd1pvBWqVKSBcnx4+wBFuUEM7PxOexqD4ScO/2qTEQ+oIET5o
+ djoAqZ6Dm+WaG8e3aKoudZviMBBvKYtTOlLDG8PdPM2hbJXDbIUKlDqdgOhKonEqM16XqwBXgLy
+ LS7+lUh+Qy5AgpVV9yFA43dpJ2usPv/+6JCYT83h9RT1YV/zdson5Fa7v4KnWZA65iSTj4a6de4
+ Fy7/RTFEL4wSusQyNO1wcDV7SmpQHTxU0vapcGC/yE4/Ed4l7TLADkh7WGNHhynaIL44RvAB9Mv
+ 5c3OORoYtOQd7FelgyVQ7JnuG0W06UxbxzfSIwzjtQw==
+X-Google-Smtp-Source: AGHT+IGAAPqPYl56qQuG2RcPHM0agCrLyy5kUZ9P6CpA26MscZNvvG7o3fDsAC4kt/R7VxptynedDQ==
+X-Received: by 2002:a05:6000:1acb:b0:3a4:f038:af76 with SMTP id
+ ffacd0b85a97d-3a572e886ddmr17754632f8f.53.1750318537440; 
+ Thu, 19 Jun 2025 00:35:37 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:74f8:af5e:a2d5:5049?
+ ([2a01:e0a:3cb:7bb0:74f8:af5e:a2d5:5049])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568b5c372sm18356251f8f.89.2025.06.19.00.35.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Jun 2025 00:35:37 -0700 (PDT)
+Message-ID: <12e60010-a856-4db1-84e5-d5bdf289a449@linaro.org>
+Date: Thu, 19 Jun 2025 09:35:35 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] net: lwip: call sys_check_timeouts and schedule on
+ rx
+To: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>
+References: <20250530153826.1057407-1-tharvey@gateworks.com>
+ <f19b630b-4a01-4e6f-b419-d2995b45198c@canonical.com>
+ <20250617224551.GA1687135@bill-the-cat>
+ <CAJ+vNU2oNMpupHLHHcf3HTXBTN8mnPczo6T8khAkN875YwmUxg@mail.gmail.com>
+ <CAJ+vNU3UH2fMBc=fg4aMvUCdxHf4ADf2KeApBeiCiGrrNyc+ew@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAJ+vNU3UH2fMBc=fg4aMvUCdxHf4ADf2KeApBeiCiGrrNyc+ew@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,310 +111,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduces support for Device Firmware Upgrade (DFU) over PCIe in
-U-Boot. Traditionally, the DFU protocol is used over USB, where a
-device enters DFU mode and allows a host to upload firmware or binary
-images directly via the USB interface. This is a widely adopted and
-convenient method for updating firmware.
 
-In the context of Texas Instruments (TI) SoCs, PCIe can be used as a
-boot interface in a manner that differs from the conventional
-"PCIe Boot" process, which typically refers to booting an OS or
-firmware image from an NVMe SSD or other PCIe-attached storage devices.
-Instead, TI SoCs can be configured as a PCIe Endpoint, allowing a
-connected PCIe Root Complex (host) to transfer images directly into the
-device’s memory over the PCIe bus for boot purposes. This mechanism is
-analogous to DFU over USB, but leverages the high-speed PCIe link and
-does not depend on traditional storage devices.
 
-By extending the DFU framework in U-Boot to support PCIe, it will be
-possible to flash images over PCIe. While this implementation is
-motivated by TI SoC use cases, the framework is generic and can be
-adopted by everyone for platforms that support PCIe Endpoint mode.
-Platforms with hardware support for PCIe-based memory loading can use
-this to implement PCIe as a boot mode, as well as to enable flashing
-and recovery scenarios similar to DFU over USB.
+On 6/18/25 21:38, Tim Harvey wrote:
+> On Wed, Jun 18, 2025 at 8:32 AM Tim Harvey <tharvey@gateworks.com> wrote:
+>>
+>> On Tue, Jun 17, 2025 at 3:45 PM Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Sun, Jun 01, 2025 at 11:07:16PM +0200, Heinrich Schuchardt wrote:
+>>>> On 5/30/25 17:38, Tim Harvey wrote:
+>>>>> Call schedule() in net_lwip_rx() to service U-Boot tasks and
+>>>>> actions during packet rx.
+>>>>>
+>>>>> As a cleanup also move sys_check_timeouts() here and remove it from the
+>>>>> functions that call net_lwip_rx().
+>>>>>
+>>>>> This resolves the issue of an active watchdog resetting the board on
+>>>>> long network activities.
+>>>>>
+>>>>> Suggested-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>>>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+>>>>> ---
+>>>>> v2:
+>>>>>   - remove duplication of sys_check_timeouts() from functions that call
+>>>>>     net_lwip_rx()
+>>>>> ---
+>>>>>   net/lwip/dhcp.c     | 1 -
+>>>>>   net/lwip/dns.c      | 1 -
+>>>>>   net/lwip/net-lwip.c | 7 +++++++
+>>>>>   net/lwip/ping.c     | 1 -
+>>>>>   net/lwip/tftp.c     | 1 -
+>>>>>   net/lwip/wget.c     | 1 -
+>>>>>   6 files changed, 7 insertions(+), 5 deletions(-)
+>>>>>
+>>>>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+>>>>> index 92bd7067a7fb..b79b746db390 100644
+>>>>> --- a/net/lwip/dhcp.c
+>>>>> +++ b/net/lwip/dhcp.c
+>>>>> @@ -57,7 +57,6 @@ static int dhcp_loop(struct udevice *udev)
+>>>>>     /* Wait for DHCP to complete */
+>>>>>     do {
+>>>>>             net_lwip_rx(udev, netif);
+>>>>> -           sys_check_timeouts();
+>>>>>             bound = dhcp_supplied_address(netif);
+>>>>>             if (bound)
+>>>>>                     break;
+>>>>> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+>>>>> index 19172ac959ac..738f8bf3196b 100644
+>>>>> --- a/net/lwip/dns.c
+>>>>> +++ b/net/lwip/dns.c
+>>>>> @@ -91,7 +91,6 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
+>>>>>                     net_lwip_rx(udev, netif);
+>>>>>                     if (dns_cb_arg.done)
+>>>>>                             break;
+>>>>> -                   sys_check_timeouts();
+>>>>>                     if (ctrlc()) {
+>>>>>                             printf("\nAbort\n");
+>>>>>                             break;
+>>>>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+>>>>> index f05c4cd3f64f..e8d4cc542ed8 100644
+>>>>> --- a/net/lwip/net-lwip.c
+>>>>> +++ b/net/lwip/net-lwip.c
+>>>>> @@ -13,8 +13,10 @@
+>>>>>   #include <lwip/etharp.h>
+>>>>>   #include <lwip/init.h>
+>>>>>   #include <lwip/prot/etharp.h>
+>>>>> +#include <lwip/timeouts.h>
+>>>>>   #include <net.h>
+>>>>>   #include <timer.h>
+>>>>> +#include <u-boot/schedule.h>
+>>>>>   /* xx:xx:xx:xx:xx:xx\0 */
+>>>>>   #define MAC_ADDR_STRLEN 18
+>>>>> @@ -284,6 +286,11 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+>>>>>     int len;
+>>>>>     int i;
+>>>>> +   /* lwIP timers */
+>>>>> +   sys_check_timeouts();
+>>>>> +   /* Other tasks and actions */
+>>>>> +   schedule(
+>>>>
+>>>> Some scheduled tasks have a long duration, specifically video_sync_all()
+>>>> called via video_idle(). This change will lead to lost packages.
+>>>>
+>>>>
+>>>> @Tom, Simon
+>>>>
+>>>> The EFI code was impacted by 29caf9305b6f ("cyclic: Use schedule() instead
+>>>> of WATCHDOG_RESET()"). This added schedule() calls to EFI networking.
+>>>> Package losses can expected if schedule() takes more than 1 µs. This is much
+>>>> shorter than the time needed for synchronizing a 1 MiB frame buffer. The
+>>>> cyclic framework was explicitly meant for short duration function calls, not
+>>>> for long duration tasks like syncing the video frame buffer.
+>>>>
+>>>>
+>>>> I think we should remove video_idle() from the cyclic framework.
+>>>> video_sync_all() should only be triggered if there is video output.
+>>>
+>>> So for testing purposes, if CYCLIC is disabled but LWIP is enabled,
+>>> things are fine here? And so we need to at least partially revert commit
+>>> 5c8dddadf1c9 ("video: Use cyclic to handle video sync") if not fully
+>>> revert it?
+>>
+>> Hi Tom,
+>>
+>> I can't disable CYCLIC without also disabling WDT which then works
+>> fine as the watchdog isn't being used.
+>>
+>> You are likely pointing to the correct patch that is causing
+>> Heinrich's issue but as far as I know he has the
+>> hardware/configuration needed to test this and I don't know how to
+>> re-create his issue.
+>>
+>> So in my opinion there is nothing wrong with my patch here and it's
+>> more of an issue with the video using cyclic for video sync.
 
-In summary, enable support for:
-- DFU-style flashing of firmware/images over PCIe, analogous to existing
-USB DFU workflows
-- PCIe as a boot mode where a host can load images directly into device
-memory using DFU over PCIe
+I agree. This patch is:
 
-Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
----
-This patch is based on commit
-9de873b4c30 Merge patch series "linux/bitfield.h: sync <linux/bitfield.h> from Linux 6.15 + winbond"
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-Changes since v2
-Put the usage of macro BOOT_DEVICE_PCIE under #ifdef CONFIG_SPL_PCI_DFU
-to avoid potential compilation errors. This is required as 
-BOOT_DEVICE_PCIE macro is defined for only those platforms which support
-PCIE as a valid boot device.
 
-v2 : https://patchwork.ozlabs.org/project/uboot/patch/20250616164444.631575-1-h-salunke@ti.com/
+...and I will add the whole series in my next PR to Tom.
 
- common/spl/Kconfig   | 62 +++++++++++++++++++++++++++++
- common/spl/spl_dfu.c | 93 ++++++++++++++++++++++++++++++++++++++++++++
- common/spl/spl_ram.c | 18 +++++++++
- drivers/Makefile     |  1 +
- 4 files changed, 174 insertions(+)
+Thanks,
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 880192043c4..212b4fc4e9e 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1268,6 +1268,14 @@ config SPL_PCI
- 	  necessary driver support. This enables the drivers in drivers/pci
- 	  as part of an SPL build.
- 
-+config SPL_PCI_ENDPOINT
-+	bool "Support for PCI endpoint drivers"
-+	help
-+	   Enable this configuration option to support configurable PCI
-+	   endpoints at SPL. This should be enabled if the platform has
-+	   a PCI controllers that can operate in endpoint mode (as a device
-+	   connected to PCI host or bridge).
-+
- config SPL_PCH
- 	bool "Support PCH drivers"
- 	help
-@@ -1328,6 +1336,60 @@ config SPL_RAM_DEVICE
- 	  be already in memory when SPL takes over, e.g. loaded by the boot
- 	  ROM.
- 
-+config SPL_PCI_DFU
-+	bool "PCIe boot support"
-+	depends on SPL_PCI_ENDPOINT
-+	help
-+	  This config enables support to download bootloaders over PCIe
-+	  when device is acting as an PCI endpoint.
-+
-+if SPL_PCI_DFU
-+
-+config PCI_DFU_SPL_LOAD_FIT_ADDRESS
-+	hex "Address to load FIT image when booting via DFU over PCIe"
-+	help
-+	  Specify the load address of the fit image that will be loaded
-+	  by SPL via DFU over PCIe.
-+
-+config PCI_DFU_BAR_SIZE
-+	hex "BAR size to advertise for PCIe DFU"
-+	default 0x800000
-+	help
-+	  This config sets the size of BAR to be advertised to the Root
-+	  Complex. The size should be large enough to fit the FIT image
-+	  being downloaded via DFU over PCIe.
-+
-+config PCI_DFU_MAGIC_WORD
-+	hex "Completion magic word for PCIe DFU boot"
-+	default 0xdeadbeef
-+	help
-+	  Specify the magic word which will be written to a specific
-+	  address to signal the completion of transfer of FIT image
-+	  when using DFU over PCIe to download the image. Size of magic
-+	  word should be 32-bit.
-+
-+config PCI_DFU_VENDOR_ID
-+	hex "PCI Vendor ID for PCI endpoint"
-+	help
-+	  PCI Vendor ID for endpoint device for DFU over PCIe. This should
-+	  be set to your assigned 16-bit PCI Vendor ID.
-+
-+config PCI_DFU_DEVICE_ID
-+	hex "PCI Vendor ID for PCI endpoint"
-+	help
-+	  A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
-+
-+config PCI_DFU_BOOT_PHASE
-+	string "Current boot phase for PCI DFU boot"
-+	help
-+	  Specify the current boot phase when booting via DFU over PCIe.
-+	  This value can be read by the root complex to determine the
-+	  current boot phase. Value of this config is written to memory
-+	  location (BAR_start + PCI_DFU_BAR_SIZE - 70). Max size of this
-+	  config is 63 bytes.
-+
-+endif
-+
- config SPL_REMOTEPROC
- 	bool "Support REMOTEPROCS"
- 	default y if (CPU_V7R && ARCH_K3)
-diff --git a/common/spl/spl_dfu.c b/common/spl/spl_dfu.c
-index e9f381c392c..1fb5fb2bf6b 100644
---- a/common/spl/spl_dfu.c
-+++ b/common/spl/spl_dfu.c
-@@ -15,6 +15,17 @@
- #include <usb.h>
- #include <dfu.h>
- #include <linux/printk.h>
-+#include <pci_ep.h>
-+#include <dm/uclass.h>
-+#include <cpu_func.h>
-+#include <linux/io.h>
-+
-+/*
-+ * Macros define size of magic word and boot phase string
-+ * in bytes.
-+ */
-+#define MAGIC_WORD_SIZE 4
-+#define BOOT_PHASE_STRING_SIZE 64
- 
- static int run_dfu(int usb_index, char *interface, char *devstring)
- {
-@@ -32,11 +43,93 @@ exit:
- 	return ret;
- }
- 
-+#ifdef CONFIG_SPL_PCI_DFU
-+static int dfu_over_pcie(void)
-+{
-+	u32 offset, magic_word;
-+	void *addr;
-+	struct udevice *dev;
-+	struct pci_bar bar;
-+	struct pci_ep_header hdr;
-+	uint fn = 0;
-+	int ret;
-+	char *bootphase;
-+
-+	uclass_get_device_by_seq(UCLASS_PCI_EP, 0, &dev);
-+	if (!dev) {
-+		pr_err("Failed to get pci ep device\n");
-+		return -ENODEV;
-+	}
-+
-+	printf("%s: Configuring PCIe endpoint\n", __func__);
-+	hdr.deviceid = CONFIG_PCI_DFU_DEVICE_ID;
-+	hdr.vendorid = CONFIG_PCI_DFU_VENDOR_ID;
-+	hdr.baseclass_code = PCI_BASE_CLASS_MEMORY;
-+
-+	ret = pci_ep_write_header(dev, fn, &hdr);
-+	if (ret) {
-+		pr_err("Failed to write header: %d\n", ret);
-+		return ret;
-+	}
-+
-+	bar.barno = BAR_0;
-+	bar.phys_addr = (dma_addr_t)CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-+	bar.flags = PCI_BASE_ADDRESS_SPACE_MEMORY |
-+			  PCI_BASE_ADDRESS_MEM_TYPE_32 |
-+			  PCI_BASE_ADDRESS_MEM_PREFETCH;
-+
-+	bar.size = CONFIG_PCI_DFU_BAR_SIZE;
-+
-+	ret = pci_ep_set_bar(dev, fn, &bar);
-+	if (ret) {
-+		pr_err("Failed to set bar: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = pci_ep_start(dev);
-+	if (ret) {
-+		pr_err("Failed to start ep: %d\n", ret);
-+		return ret;
-+	}
-+
-+	addr = (void *)CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-+	offset = CONFIG_PCI_DFU_BAR_SIZE - MAGIC_WORD_SIZE;
-+
-+	if (sizeof(CONFIG_PCI_DFU_BOOT_PHASE) > BOOT_PHASE_STRING_SIZE) {
-+		pr_err("Boot phase string too long\n");
-+	} else {
-+		bootphase = (char *)(addr + CONFIG_PCI_DFU_BAR_SIZE -
-+				  (BOOT_PHASE_STRING_SIZE + MAGIC_WORD_SIZE));
-+		strncpy(bootphase, CONFIG_PCI_DFU_BOOT_PHASE,
-+			sizeof(CONFIG_PCI_DFU_BOOT_PHASE));
-+		bootphase[sizeof(CONFIG_PCI_DFU_BOOT_PHASE)] = '\0';
-+	}
-+
-+	addr = addr + offset;
-+	magic_word = CONFIG_PCI_DFU_MAGIC_WORD;
-+	(*(int *)addr) = 0;
-+	printf("%s: Waiting for an image .....\n", __func__);
-+	for (;;) {
-+		if (*(int *)addr == magic_word)
-+			break;
-+		invalidate_dcache_all();
-+	}
-+	printf("Image loaded\n");
-+
-+	return 0;
-+}
-+#endif
-+
- int spl_dfu_cmd(int usbctrl, char *dfu_alt_info, char *interface, char *devstr)
- {
- 	char *str_env;
- 	int ret;
- 
-+#ifdef CONFIG_SPL_PCI_DFU
-+	if (spl_boot_device() == BOOT_DEVICE_PCIE)
-+		return dfu_over_pcie();
-+#endif
-+
- 	/* set default environment */
- 	env_set_default(NULL, 0);
- 	str_env = env_get(dfu_alt_info);
-diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-index 71b7a8374bb..c8a62a438bb 100644
---- a/common/spl/spl_ram.c
-+++ b/common/spl/spl_ram.c
-@@ -27,6 +27,11 @@ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
- 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
- 		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
- 				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-+
-+#ifdef	CONFIG_SPL_PCI_DFU
-+		if (spl_boot_device() == BOOT_DEVICE_PCIE)
-+			addr = CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-+#endif
- 	}
- 	addr += sector;
- 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
-@@ -47,6 +52,11 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
- 		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
- 				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-+
-+#ifdef	CONFIG_SPL_PCI_DFU
-+		if (spl_boot_device() == BOOT_DEVICE_PCIE)
-+			addr = CONFIG_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
-+#endif
- 	}
- 
- 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
-@@ -64,6 +74,11 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
- #endif
- 
-+#if CONFIG_IS_ENABLED(PCI_DFU)
-+	if (bootdev->boot_device == BOOT_DEVICE_PCIE)
-+		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
-+#endif
-+
- 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
- 	    image_get_magic(header) == FDT_MAGIC) {
- 		struct spl_load_info load;
-@@ -102,3 +117,6 @@ SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
- #if CONFIG_IS_ENABLED(DFU)
- SPL_LOAD_IMAGE_METHOD("DFU", 0, BOOT_DEVICE_DFU, spl_ram_load_image);
- #endif
-+#if CONFIG_IS_ENABLED(PCI_DFU)
-+SPL_LOAD_IMAGE_METHOD("PCIE", 0, BOOT_DEVICE_PCIE, spl_ram_load_image);
-+#endif
-diff --git a/drivers/Makefile b/drivers/Makefile
-index 3c0ad17138f..bd15e89adb0 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -25,6 +25,7 @@ obj-$(CONFIG_MULTIPLEXER) += mux/
- obj-$(CONFIG_$(PHASE_)ETH) += net/
- obj-$(CONFIG_$(PHASE_)PCH) += pch/
- obj-$(CONFIG_$(PHASE_)PCI) += pci/
-+obj-$(CONFIG_$(PHASE_)PCI_ENDPOINT) += pci_endpoint/
- obj-$(CONFIG_$(PHASE_)PHY) += phy/
- obj-$(CONFIG_$(PHASE_)PINCTRL) += pinctrl/
- obj-$(CONFIG_$(PHASE_)POWER) += power/
 -- 
-2.34.1
+Jerome
 
+>>
+> 
+> Incidentally, I've noticed that I only have this
+> watchdog-not-getting-reset issue when using the IMX FEC driver. The
+> IMX QOS (imx8mp) has calls to udelay in the packet send and udelay
+> calls schedule. I'm not sure how many network drivers out there end up
+> calling udelay/schedule on their own.
+> 
+> Best Regards,
+> 
+> Tim
