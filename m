@@ -4,74 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 425E5C7115B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 20:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E17ACC7115A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 21:27:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BECC82C65;
-	Thu, 19 Jun 2025 22:38:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0648882BA1;
+	Thu, 19 Jun 2025 23:27:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ur9xk2oA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ql5rIXiW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C348782CCE; Thu, 19 Jun 2025 22:38:07 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 1363982CBB; Thu, 19 Jun 2025 23:27:21 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BC5C82BA1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 22:38:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A21A580C83
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 23:27:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6099d89a19cso2455747a12.2
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 13:38:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-735a6d7c5b1so800401a34.2
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 14:27:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750365485; x=1750970285; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=c1KgIOGJBCa43lyFhnNPTwoymeS5guvihEe/cFklVpg=;
- b=Ur9xk2oAYqheYDWsIoaWFdXG54IjjYg2ijDcL+n8M/qMpQaoq0tK5t+8bAfneOKVVH
- azahssIePRM42tNlg/v5kr7YJhIdVCsE1uP9sy+P5CEl979vERWW3C6saoEiWWUrZGRM
- Xsz9hMUF5cIqNa+VE/k27e+sBnveWz+L6QCLJHAI6yS1w6/nHNWAWTrHJ/GQ5ZkimT0O
- G0b1/O9mB230LGAGw2+ruGSZFhKnGPYi/aeqz1vmO4NxcYPujxMR8w8bEgOrKAbeVJ3Y
- H+61p2z3g0xkiAcJrk30Tf7Euuio0sCum4v/LmLKiEply91k3q3mGyh9kYFcE6TMCTcJ
- GI1A==
+ d=konsulko.com; s=google; t=1750368437; x=1750973237; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z1nND4yFp783a+0/yJeswQJAb/TdzYs6gehjJX2yfJk=;
+ b=ql5rIXiWiRf9bSXYzHoOFFvwZyXoJzYvdH+nzThlbowFAI0nk6Y0y3BQY9z4NMKatP
+ snLtS7KKTlaGeHvUMnfD+QwEzDAKb89IOArjBEh09CSltX23ebrjsWyZtm+j8Dl0/Os2
+ yv8XKcWAZtoEB3DawiwUxVwvy4GZ6a6mS4X2M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750365485; x=1750970285;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c1KgIOGJBCa43lyFhnNPTwoymeS5guvihEe/cFklVpg=;
- b=di31hVWQnADnTfetVoFLx+eDmfWkzH1XJICVC+x1Ru1BU+ikSM0KktnVrkJzNLb4Wb
- Lbn2OdgHG8lyftYLDs9MCNlTaVUspWXX8YKVAJM8y8Wc9N/h24BzKPypr9W4GdM1g95R
- ToAE5afOrJ3GPVa14M8fv3l5Aq/NBb2FnEywhGbhHy5zeqVweDeWb2IeLhj/9oMtKtED
- uRN+sG/wPp00ggYKkiYwOE8+I3W4fvg0jH+thh87GTnDUmG0pSIm7BZIcx0NajvUqals
- J6nb/XOmDmQx63aogS0R8QeuVMDolcT7SI5qOHDZ/3RvJoyOOB9/SjymMSDGUp1/JxJD
- NQlQ==
+ d=1e100.net; s=20230601; t=1750368437; x=1750973237;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z1nND4yFp783a+0/yJeswQJAb/TdzYs6gehjJX2yfJk=;
+ b=YLyx/s7fwAa7mvJhgzP9fK7VF1rmXxdCqP/sH5n99HDIPqSOxblUW/PzWyz0COz2ez
+ fCuSAiZlyTCgvOzA7eYU1+CPyQfs/z1LCosIc3hwfmcSeQfPCyB+a6cs7VFHNLTgOv1t
+ QiDe9OQXtJ48caA/TjwjzJrt+7U73oG8Vs6+nrkxG2yJg3G2vKLb90aS4/tbhJfvdCwI
+ yEW54ZANR7QboRG5mfhnPCKd8v/8NZIzSs3v8xe85BCbcgJvc/WjAxWGfBBkNL8P9+vL
+ suQRHJsoUHmOzKQLY7kfxdVx8vOEzUKlrTq5y5AxVSN2UjScyML0FHJw/vBHdCWt91jU
+ axhw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOuWq2jkodyULg3SJK8yAzFJQ8fX95k8Yu/5uk+51oCFB/8/PAh13okWx97LXRGCC5zWcrZLA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHk2pskRra4FE2c3KKzRHjUaArXgnoAFMkbB8NUfn9Tskvxwvy
- SMMEPzDvKcKq8pcPDn5X3loy9i66ra2GLvn10l0M9379x4Do5o06CyYomeVpwbR5OPcxJkiN88A
- zs6YbpNmFjL22p6L7a1T2cFRxTUaVHEE=
-X-Gm-Gg: ASbGncuMw6kX5bfS8T0Wp/6zhPcvtlsPBIvaeACusK0YBAcLtbG4sIpdz1iy1PP7tLW
- pi5yjY7QPUgftjpwbRtnWmI0mZZsiWh1VwtVYL5ubyi9dCusBvruG0i+vosG8P1wUVOTogQfOG6
- /xxI+YqhPG3ZLMcdwQ6OJMxM89Wd7TOtLOjBPT4WVYUAXf
-X-Google-Smtp-Source: AGHT+IHANXM+JUYd+Xa39+x/hciGqeQfs8CTbxP1s5vXp4CsCcQlfcYB+WtoDQk6ct+UTt85RjbK1cWywhr1CZTpTv0=
-X-Received: by 2002:a05:6402:5210:b0:601:dc49:a99f with SMTP id
- 4fb4d7f45d1cf-60a1d167701mr310802a12.18.1750365484859; Thu, 19 Jun 2025
- 13:38:04 -0700 (PDT)
+ AJvYcCV7JL/zk6FOBtjYFxwgl8L6n0di1cyLmG6dP1xwrbdu2lcxzk4VfI/pq4fEKecfVtBTOxpdyfA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzibwKhkYqORDpuwnOpJaGmbXr0kfuEvVlXi8NfDZympsBA9UZz
+ VoJOFlKD2zsTwJFHAmr4hsaF+cuIMCd1q6ABY+4IOsNQzpveDNJShQS3GZwkKcgfg/U=
+X-Gm-Gg: ASbGncsXRozNPnR3tIne9fqO0/nIesiG5B9/BXky7Q/dwoO2x3706F2KZYk8NxRvlqd
+ e9ya3dFZrWfPG9+5P62mVMY03U74noCbaQNkQR+IqtnOqpE9h9XWUIhWlB93/4six+xUxbA1a0x
+ WtL2xFXi9Xo4w+KxYvyi167+yWbphxVq+rRfvJfuYGviHrfSQwSfQfAVOoHL9ftrRX7MPvnK60/
+ lQwVmLbgiFoXYy5tfwwi3XPWtXTwaD+1D1fYwfe3gKtsEQB3jXbbaclK2F41/5lrRXh4OP4nC90
+ 2s/EHb0UMOfIaNKHBLkEKdRy+5+5zxPtoZx220oiFk36riqz8KuQ8CcLBcjPyXVdaCreh6q+7A4
+ AkA0+WOuxXHrLM8HNekivqLk=
+X-Google-Smtp-Source: AGHT+IFLCywtvik/Zy9BY1i9iWISAfFJb/jaOsvkq/7R2zWuQsPuGFD7mwlKYsTEr6GBMOlJpnBfGw==
+X-Received: by 2002:a05:6830:3102:b0:739:fe04:7aec with SMTP id
+ 46e09a7af769-73a92032511mr206381a34.26.1750368437244; 
+ Thu, 19 Jun 2025 14:27:17 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73a90cbb386sm71362a34.57.2025.06.19.14.27.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jun 2025 14:27:16 -0700 (PDT)
+Date: Thu, 19 Jun 2025 15:27:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, Stefan Roese <sr@denx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
+Message-ID: <20250619212714.GD216500@bill-the-cat>
+References: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
 MIME-Version: 1.0
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Thu, 19 Jun 2025 13:37:53 -0700
-X-Gm-Features: AX0GCFsFdS55cBkrvmxMEdOYIsCjzKWnk3SoDFSfJqnPjTMOlLym6yRuMhrbZ94
-Message-ID: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
-Subject: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
-To: Jerome Forissier <jerome.forissier@linaro.org>, Stefan Roese <sr@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mt0W4T0L+j2sV/V8"
+Content-Disposition: inline
+In-Reply-To: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,25 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
 
-While fixing some ext4 file system problems on 2025.07-rc4, I ran into
-a problem booting a few Kirkwood boards. kwboot loaded the u-boot
-image,
-and then u-boot execution was frozen without anything going to the
-serial console. I did a bisect and found the commit that caused it.
+--mt0W4T0L+j2sV/V8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc02b8a75c1940
+On Thu, Jun 19, 2025 at 01:37:53PM -0700, Tony Dinh wrote:
+> Hi Jerome,
+>=20
+> While fixing some ext4 file system problems on 2025.07-rc4, I ran into
+> a problem booting a few Kirkwood boards. kwboot loaded the u-boot
+> image,
+> and then u-boot execution was frozen without anything going to the
+> serial console. I did a bisect and found the commit that caused it.
+>=20
+> https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc02b8a7=
+5c1940
+>=20
+> When I tried to reverse this commit, I had a build error like this
+> "{standard input}:24246: Error: selected processor does not support
+> `mrc p15,1,r3,c15,c1,0' in Thumb mode"
+>=20
+> Currently, the only way to boot Kirkwood boards is to disable either
+> CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
+>=20
+> I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
+> know if I can help with testing to troubleshoot this regression.
 
-When I tried to reverse this commit, I had a build error like this
-"{standard input}:24246: Error: selected processor does not support
-`mrc p15,1,r3,c15,c1,0' in Thumb mode"
+I wonder if the right answer is that CONFIG_SYS_THUMB_BUILD should be
+off? A quick look around and this (and sheevaplug) are ARM926EJ-S which
+is Thumb-1 not Thumb-2 and it looks like the kernel for example only
+supports building itself with thumb2 on armv7/v7m. I know that this was
+working, so we should dig more too, but I'm not sure what the best
+answer here is.
 
-Currently, the only way to boot Kirkwood boards is to disable either
-CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
+--=20
+Tom
 
-I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
-know if I can help with testing to troubleshoot this regression.
+--mt0W4T0L+j2sV/V8
+Content-Type: application/pgp-signature; name="signature.asc"
 
-All the best,
-Tony
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhUgKoACgkQFHw5/5Y0
+tyw0Gwv/X2yvvqIIdSV1Lv4wx3kl+4gPyhbjLDxFE/ZwdaRp8Bl2qSB4AmHoOhGn
+Ze8ffL7uOmHi8eCFZf4NNQIcBRj54hg5OYl1lOmOXnqyzfJPake2VpJfpYrnOAVZ
+LLJB5q/9CZM5E87yp7OkJo6w+WptbF/sYH299sSJ9GvHxsgqOLjC3aNqr8FSRJhx
+VLihfZydxxbAGsKINuDqo76VR3iYbbrQ9PW8dJlZM86h1SrwcX5PY0S720aV/wTy
+24F4LDIcirBRvdv0Bk8C+sStjOqtQlxrMHhg+sQJ7Wn1bDf+7BRtKQkAnPh+Aok5
+C33W0HDpSEWicAoRT3QkfMb5hN9avw/UfLmCXXPmHN71uUYlDdCqQkThIG8MLnNZ
+I1M9+q+/Xu3HH+UM0TcZOSjfXrh4JOabTwTYzWVbyZyjUtLwOwBlM4K2v/0DcXBm
+41mukGeIBcHW7ieACNbmnVpQ4/9SOLmJH2YYk6Qm+vYqZHa/aOBEUu3vz3YWFMNN
+ivh5TBdZ
+=FCoQ
+-----END PGP SIGNATURE-----
+
+--mt0W4T0L+j2sV/V8--
