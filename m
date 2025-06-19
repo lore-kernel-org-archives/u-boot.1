@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4F7C7115B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 11:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F19C7115B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 12:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCA5F82CCE;
-	Thu, 19 Jun 2025 13:45:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DE2A82CCE;
+	Thu, 19 Jun 2025 14:01:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ceyLm6z+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z1QSY3CK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFAFD82CD5; Thu, 19 Jun 2025 13:45:15 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D376B82CBB
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 13:45:12 +0200 (CEST)
+ id 6FBE482CD5; Thu, 19 Jun 2025 14:01:15 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C4E682CBB
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 14:01:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55JBjBEB573053;
- Thu, 19 Jun 2025 06:45:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750333511;
- bh=NTpsqjGlE2km1d/F2xqWqq2PZy4rCNkaof2bnqAtymI=;
- h=From:Date:Subject:To:CC;
- b=ceyLm6z+OVewgUQqFyR36V2pQrfF635LWVtY+lpNj+GrYL9KVZ2OK8Oh3e4MzEzXX
- a1m/bbUydf1s8fL+jJuiONg1wF2TEwMNX51kq+blre2b228N9MV/2ZZppEeLXSmWWY
- EqWjDo4kE8580p97QMl7wto0lRyXzs0CGS6+S5iI=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55JBjBhj3672337
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 19 Jun 2025 06:45:11 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 19
- Jun 2025 06:45:10 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 19 Jun 2025 06:45:10 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55JBjAfm1056596;
- Thu, 19 Jun 2025 06:45:10 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Thu, 19 Jun 2025 06:45:05 -0500
-Subject: [PATCH -next] test/py/test_mmc: wrap multi-argument printf-style
- strings
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3a507e88b0aso627884f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 05:01:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750334472; x=1750939272; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6zMjOjNeoUy0D6o4cjzfHiWVhRlscHlm6T1/k7wYlQo=;
+ b=Z1QSY3CK3w/uXDB9HrweYCPEeabwcOb1bQiROCW+kbCNBPJN8+K2GZTqWwV6W+/TO9
+ ZNupw9CoFPEBz487OXCjhysDL4MSorwZaqgDi2WvdePs+haheLjSKFUkTBZqPQxeacOr
+ n70PsfkHyLVksAf1M4Owmnets+SfkC43l5SB4wIUdpnOJrKQ4k1b+zDwl8UjbyNuAtH+
+ JBfXYVptKqPKBHv2Noe0HCQsXiZdSRfxE+wxQYGBqDv/UEN8wyfJYVI3j7ABNZtzXO2s
+ F5ZeDJ8fGrQHuL8k69MHk3laTr86/tNa98l8SXLSKA/Qk6Vp6j7xBFTiyJzXoJ1tyj2o
+ J7bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750334472; x=1750939272;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=6zMjOjNeoUy0D6o4cjzfHiWVhRlscHlm6T1/k7wYlQo=;
+ b=HLvuTcMBirDAgEAOlNFmp/dYg9Aweph/XWqxvZLZT00700+T0PIQpe3UJ51eQoCLKd
+ jD0iRSZDuKETXcj9vgeEVwgGtMahAqBrCL4JWRRIdSPVj/M48AfKm/shnqur3i6hsdv9
+ mN3rYw/ksJTCPYeV5ujLzbnR0STHl3+W7wpW9kNnFmTtOP2+5u3DjL3r/8oqKrxHFCnp
+ T7Vt65hOL+ST+XBD+R3pxgz6UFQHdxca9ou9jFWgjHaCPdfmJJG7f/rNxGN+UtqMcQPn
+ jM3Z7jUtIgHPME7oVo1zNYpPbW5ykmdYCaE8ymKvM9l+dimx7PyRVSR7EVsLZKeGCKew
+ 0hOw==
+X-Gm-Message-State: AOJu0YwmeRC14xdMXGlDh77+xA8Zz9DcinHxijORDsSJp/9nko0qkoyZ
+ PZ44EXam+P1/mFUro+kFVycwyyrXxtPSa4wQagkjpYqhOYoQZ7X3dmNz/Hlmyi5ae2arJAlfF0s
+ js3jaOL8=
+X-Gm-Gg: ASbGncsHd5EosfQhYDCclGz8dxN8Ga2T6vcWPyNT2tHCMY9PIVgyC8aiqJg78UC8a+L
+ VofawEGwoMJbpWi/lQ4SbnFhoCw7GUVbd5FLAEHSvRjvchUL8w8Vh7KXhZErnVQwjhEEwUpmNtF
+ NFagFg2guiWlN6Uu5HqhXBQ4FGWtW7rOywU8aN5pPwRz6xpEK8WxZXm2GI8//k6t/6MTXjVMKe3
+ pe/tpsi24HjiDX+39MYTEb8jOFU7EOwI11gVALCl9sgCAWCj09KLEayMT2xfaCn7RR7fuHV3ERI
+ mE/WJaS+EQZrjvETv463pQHyVV7PMYnZXTEdDgQOubfdq9lgv19LZJLdKsadzLLLMyNi+j+DZo8
+ mUsasCJ56VWlgB94BbkuSlvGeGoNYwbvrTeOPnM0ckw==
+X-Google-Smtp-Source: AGHT+IHeSPWHgMESPo3DsxubJMI6Z/KAPgHcIhuxSIbOS2GbuDX5NlgoqOH0Fxeu5VhdTeAREjr/VQ==
+X-Received: by 2002:a05:6000:188d:b0:3a5:2875:f985 with SMTP id
+ ffacd0b85a97d-3a572e5858amr18750023f8f.59.1750334472192; 
+ Thu, 19 Jun 2025 05:01:12 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:ee3:2301:cf2f:b483:c307:5b0f?
+ ([2a0a:ef40:ee3:2301:cf2f:b483:c307:5b0f])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a568b28876sm19296350f8f.73.2025.06.19.05.01.11
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Jun 2025 05:01:11 -0700 (PDT)
+Message-ID: <56eec040-4f67-4b92-9736-eba5883d182b@linaro.org>
+Date: Thu, 19 Jun 2025 13:01:08 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [RFC] Using Smatch to find bugs in u-boot
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250619-mmc-test-fixes-v1-1-1eff87dd69db@ti.com>
-X-B4-Tracking: v=1; b=H4sIAED4U2gC/x3LSwqAMAxF0a1IxgZqof62Ig6KPjUDqzRFBHHvF
- oeHy31IEQVKffFQxCUqR8ioyoKmzYcVLHM2WWOdqauO933iBE28yA1l1xjTNn62cKA8nRF/yM9
- AHHAnGt/3A5mlGVpnAAAA
-X-Change-ID: 20250619-mmc-test-fixes-570087ad2e5e
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7853; i=bb@ti.com;
- h=from:subject:message-id; bh=8dkEG1Rc2yf8BAyNOmXXSZnTSYeyG59ZPnUmZ3rLEj8=;
- b=owNCWmg5MUFZJlNZ+nlU+wAAcH///nfd2/m3/duv7u8znP+b/a4v4H++nlJPb63O6Ttay+ewA
- RtWCHpA0AAA9QZPUBoAPUMjQDQAAANAB6jT1AAAAaNHqHqAZpNPUPU2o8U20odAaAyDTTQYmQMg
- NPUBgIYgZDQA0Bk0GgANqYJk0wT1GE0NNA0MmE00PQZQeoeUehDQA0xDJkaaPQg00aGgZNDTEGm
- gDRpiDQaBoANGQ0YjJpiaNGJkBoCDXBog5Mzn7IgoQ5ACVmWK8UoEA90bKqFnBw0bPzYFa7Mx+a
- jkGOtrh2PQjTGiuC+krFEBdbB4CoiIjg93h9uKxOStXvUd7zfKvwfkKF8rbicZDr4AT16Gmh4KD
- mZKDku3+wxgRJoTTmoz5o5J5l0pEjL3ypVRv6GeAgFU7mr91jVQ2cCSpIgkmi9rqe7EQp2hQQW4
- oBixaJCt/S9apvEcuHp8ukIyoixgGDab6i3tj+Z7Qc4uNiA2XBBB45r3slECxhbFpN7dUqaOJ8Y
- RvUq8QMchDwUNSLEwFyUwTKhfyukvtQUKEVWq0c713jEPhsaxdhs1qpPYNpZETvwWfEWvHMfhO1
- nWazc3+Xb+pdhMkycwJDqWEwpwHpEJ5S3YeV8XU9H6cbQ4sGA4FR+gXJB8kAvJmnJYMEnSSJUnd
- B/+LuSKcKEh9PKp9g==
-X-Developer-Key: i=bb@ti.com; a=openpgp;
- fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,168 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Newer versions of python will emit a TypeError about not enough
-arguments for a format string:
+I have begun to run Smatch on the U-Boot source code. This is showing up 
+a number of different classes of issue.
 
-    FAILED ub/test/py/tests/test_mmc.py::test_mmc_dev - TypeError: not enough arguments for format string
-    FAILED ub/test/py/tests/test_mmc.py::test_mmcinfo - TypeError: not enough arguments for format string
-    FAILED ub/test/py/tests/test_mmc.py::test_mmc_info - TypeError: not enough arguments for format string
-    FAILED ub/test/py/tests/test_mmc.py::test_mmc_rescan - TypeError: not enough arguments for format string
-    FAILED ub/test/py/tests/test_mmc.py::test_mmc_part - TypeError: not enough arguments for format string
+1) Inconsistent indentation.
+While I would like to fix all of these reports, they are not actually 
+causing any bugs. So I am going to assume that in the interest of 
+keeping churn in the source down to a minimum that these can be ignored.
 
-Add parentheses around all multi argument format strings so all
-arguments will be passed to the format string
+2) Warnings about large usage of the stack.
+I am going to ignore these, at least for the moment. It would be good 
+practice not to do this though.
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- test/py/tests/test_mmc.py | 30 +++++++++++++++---------------
- 1 file changed, 15 insertions(+), 15 deletions(-)
+3) Uninitialised variables.
+These generally result from possible but unlikely code paths. These 
+should be checked though.
 
-diff --git a/test/py/tests/test_mmc.py b/test/py/tests/test_mmc.py
-index e751a3bd36a8e212d19a6587c33c34043a3dd4a2..1f738ef3dcb4c9c82ee982eac058520b215f3766 100644
---- a/test/py/tests/test_mmc.py
-+++ b/test/py/tests/test_mmc.py
-@@ -99,7 +99,7 @@ def test_mmc_dev(ubman):
-         devices[x]['detected'] = 'yes'
- 
-         for y in mmc_modes:
--            output = ubman.run_command('mmc dev %d 0 %d' % x, y)
-+            output = ubman.run_command('mmc dev %d 0 %d' % (x, y))
- 
-             if 'Card did not respond to voltage select' in output:
-                 fail = 1
-@@ -122,7 +122,7 @@ def test_mmcinfo(ubman):
-     for x in range(0, controllers):
-         if devices[x]['detected'] == 'yes':
-             for y in mmc_modes:
--                ubman.run_command('mmc dev %d 0 %d' % x, y)
-+                ubman.run_command('mmc dev %d 0 %d' % (x, y))
-                 output = ubman.run_command('mmcinfo')
-                 if 'busy timeout' in output:
-                     pytest.skip('No SD/MMC/eMMC device present')
-@@ -146,7 +146,7 @@ def test_mmc_info(ubman):
-     for x in range(0, controllers):
-         if devices[x]['detected'] == 'yes':
-             for y in mmc_modes:
--                ubman.run_command('mmc dev %d 0 %d' % x, y)
-+                ubman.run_command('mmc dev %d 0 %d' % (x, y))
- 
-                 output = ubman.run_command('mmc info')
-                 assert mmc_modes_name[mmc_modes.index(y)] in output
-@@ -172,7 +172,7 @@ def test_mmc_rescan(ubman):
-     for x in range(0, controllers):
-         if devices[x]['detected'] == 'yes':
-             for y in mmc_modes:
--                ubman.run_command('mmc dev %d 0 %d' % x, y)
-+                ubman.run_command('mmc dev %d 0 %d' % (x, y))
-                 output = ubman.run_command('mmc rescan')
-                 if output:
-                     pytest.fail('mmc rescan has something to check')
-@@ -210,7 +210,7 @@ def test_mmc_part(ubman):
-                     elif part_type == '83':
-                         print('ext(2/4) detected')
-                         output = ubman.run_command(
--                            'fstype mmc %d:%d' % x, part_id
-+                            'fstype mmc %d:%d' % (x, part_id)
-                         )
-                         if 'ext2' in output:
-                             part_ext2.append(part_id)
-@@ -246,7 +246,7 @@ def test_mmc_fatls_fatinfo(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     output = ubman.run_command(
-                             'fatls mmc %d:%s' % (x, part))
-                     if 'Unrecognized filesystem type' in output:
-@@ -288,7 +288,7 @@ def test_mmc_fatload_fatwrite(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     part_detect = 1
-                     addr = utils.find_ram_base(ubman)
-                     devices[x]['addr_%d' % part] = addr
-@@ -357,7 +357,7 @@ def test_mmc_ext4ls(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     output = ubman.run_command(
-                         '%sls mmc %d:%s' % (fs, x, part)
-                     )
-@@ -392,7 +392,7 @@ def test_mmc_ext4load_ext4write(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     part_detect = 1
-                     addr = utils.find_ram_base(ubman)
-                     devices[x]['addr_%d' % part] = addr
-@@ -454,7 +454,7 @@ def test_mmc_ext2ls(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     part_detect = 1
-                     output = ubman.run_command(
-                         '%sls mmc %d:%s' % (fs, x, part)
-@@ -491,7 +491,7 @@ def test_mmc_ext2load(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     part_detect = 1
-                     addr = devices[x]['addr_%d' % part]
-                     size = devices[x]['size_%d' % part]
-@@ -534,7 +534,7 @@ def test_mmc_ls(ubman):
- 
-                 for part in partitions:
-                     for y in mmc_modes:
--                        ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                        ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                         part_detect = 1
-                         output = ubman.run_command('ls mmc %d:%s' % (x, part))
-                         if re.search(r'No \w+ table on this device', output):
-@@ -566,7 +566,7 @@ def test_mmc_load(ubman):
- 
-                 for part in partitions:
-                     for y in mmc_modes:
--                        ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                        ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                         part_detect = 1
-                         addr = devices[x]['addr_%d' % part]
-                         size = devices[x]['size_%d' % part]
-@@ -609,7 +609,7 @@ def test_mmc_save(ubman):
- 
-                 for part in partitions:
-                     for y in mmc_modes:
--                        ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                        ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                         part_detect = 1
-                         addr = devices[x]['addr_%d' % part]
-                         size = 0
-@@ -656,7 +656,7 @@ def test_mmc_fat_read_write_files(ubman):
- 
-             for part in partitions:
-                 for y in mmc_modes:
--                    ubman.run_command('mmc dev %d %d %d' % x, part, y)
-+                    ubman.run_command('mmc dev %d %d %d' % (x, part, y))
-                     part_detect = 1
-                     addr = utils.find_ram_base(ubman)
-                     count_f = 0
+4) Possible buffer overflows.
+Most of these are probably not possible in practice but Smatch has not 
+been able to absolutely confirm that. Some however are going to be real 
+bugs. These need to be checked.
 
----
-base-commit: ce2a7fcbd565d55b1d3fdc0e68edd50a21eca7d4
-change-id: 20250619-mmc-test-fixes-570087ad2e5e
+5) Ignoring unreachable code.
+Mostly this is deliberate (if unnecessary). Sometimes it is the result 
+of config choices. Also used as a way to disable some broken test code.
 
-Best regards,
--- 
-Bryan Brattlof <bb@ti.com>
+6) Variable dereferenced before check.
+There are instances where a variable is dereferenced early in the 
+function and then later there is a null check for that variable.
 
+7) Always true or always false tests.
+eg checking if an unsigned variable is negative.
+
+8) Probable incorrect tests.
+eg use of && instead of &, etc
+
+9) Other things.
+
+I am going to follow this email with a sample email that can be produced 
+for one report that I believe shows an actual bug.
+
+I do not wish to swamp the mailing list but I do also believe that we 
+should be aware of these issues and absolutely must resolve them where 
+needed.
+
+The code coverage from a run of Smatch depends on the platform chosen as 
+the target of the build and I am never going to run all of them. But 
+maybe it will be possible to run at least one build in CI with Smatch 
+enabled to catch newly introduced issues, at least in those areas of 
+code that are used in that build. It would be good for all developers to 
+run Smatch on their platform builds to broaden the code coverage as far 
+as possible.
+
+Andrew
