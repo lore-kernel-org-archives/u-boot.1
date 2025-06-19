@@ -4,103 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8F0C7115B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 08:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01028C7115E
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 08:34:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D6A882D06;
-	Thu, 19 Jun 2025 10:34:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 84C3082BA1;
+	Thu, 19 Jun 2025 10:34:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BHOgE/1j";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="hKWfF/c+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E52CB82CDF; Thu, 19 Jun 2025 10:34:26 +0200 (CEST)
+ id 46BB482B18; Thu, 19 Jun 2025 10:34:29 +0200 (CEST)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF8C982CBB
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 10:34:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F3A382BA1
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 10:34:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=redhat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javierm@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750322063;
+ s=mimecast20190719; t=1750322065;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=aFAvFoXqprm5W5zyzbPI3ZcmYyLib0iMp9SCUQo7PYQ=;
- b=BHOgE/1jadoLzLGJgxBO4q+7DoSNKO3tv9sfvhoT5hTb90ISZvA4m6F6qBnyxZnuRacrcE
- r3Kf6grAIW0oMTEIm/xgicA+ghKWbNMA0TrNjESgLaEy7fpAC18viLwPRtlWvn2zaqJXOD
- /qvYEOugS+k5fB9aVB/rrzZYGSgnXVE=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=1Y2F7jTMtVu1es0POW08uDhVnT8xOU16bc2BsA/SvjU=;
+ b=hKWfF/c+7WrdUBO8n+TiZPWMJ63/tuWtP6ffDVh90AQV4L7r7wTF7Yf5iK/e+9ocbBhdh+
+ jrE2ubi7KA8c+t5t+GwYM3C16hzF12p8IWcNUTrdjefacIGKQI+FtSuj2FRA9Ap5R8lE53
+ wb8nIIwmo2YPmyu7+gEPBYtcZc2I8GY=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-91-oO0wayThPOWGnOxHUH7GXw-1; Thu, 19 Jun 2025 04:34:22 -0400
-X-MC-Unique: oO0wayThPOWGnOxHUH7GXw-1
-X-Mimecast-MFC-AGG-ID: oO0wayThPOWGnOxHUH7GXw_1750322061
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-45359bfe631so2968725e9.0
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 01:34:22 -0700 (PDT)
+ us-mta-531-fPcsyxOeN56XIh1urKwDbA-1; Thu, 19 Jun 2025 04:34:24 -0400
+X-MC-Unique: fPcsyxOeN56XIh1urKwDbA-1
+X-Mimecast-MFC-AGG-ID: fPcsyxOeN56XIh1urKwDbA_1750322064
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3a4f55ea44dso214367f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 01:34:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750322060; x=1750926860;
+ d=1e100.net; s=20230601; t=1750322063; x=1750926863;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aFAvFoXqprm5W5zyzbPI3ZcmYyLib0iMp9SCUQo7PYQ=;
- b=iWbFipBYDqfmzZv/W8nit7A+s0es2nsb8FQ7e945s9THRvKL0uB9CkeFXAnRqcG663
- yxWBude5gUVjVpuxTq9JyQSAmBXxnl5NDndy9Fks0y4cfW7ZaTZUn6P4BuPYbxkjrzYP
- JXPvKbTiBQn9LNtme24oeEwd6//j3YCBFcdNECnX3p1SZH67yczR96mOVQGtgw6JvgAU
- LlfuatbCDzhuOmpxVMmsoIItJH7DiJHRArZtfE8CQgkpj0ZVfPnYm1Iex6P9RJU2MvQn
- 3fEIugiNX9re/V8FsO7YPeefEDTpOe3C4/jTAtr36rDQzuNXu9t71YvZ/F5QV5S6wHm5
- JsVw==
-X-Gm-Message-State: AOJu0YySo8HtAsuAX+2LeA0JOqfMCCCf7R+YUMi3clbC9X8q6kvmnpfO
- HZQJcPqVJYYYATvye9fzq6V12NEhNhFBybzxMEzveyf6HRs6F0sstWkyg8GxjwXhTxvuGQbRmmN
- gEcdv7pTHIGdyP5A30AYcDWmOErqQX7KZGnouYcur1/GAqyWfFbIIRRuSyviyc/xWTazTFf9H5v
- LhvIb9ngaGfQu1ERZsU+DpHevBHud3wZuvlTtzEA==
-X-Gm-Gg: ASbGncuNM3g7AtlenvG/uM+lQ3iAAxKROptZo86ZE368B0CB2eE6wCLg2BaSneLu86X
- GdP8JYYwEqAd43vsHy+Wn/3bwUyRmqKpxsBeG2hp96GC15HdZya/Tykv9w4NAEj4Sx+m4w2p+SJ
- UukLLFdOGxqmZC6O+tnEJH175VF25Xzz35/1haIGn7+kAAjAgIr/C8r4p20J9a7iSa3icjEksUe
- ypdSHW4bPq1QTR7oxUUJwvTGuxF1NS4TkQgqwzdUBrQDi1bwoCQxQdZEoTxwfSMxj0uIlH3eWVs
- Wmh5g1/Fre9L6F/+a1b4NK+g+HTA55ol502Rs0w5n6C0aPu2nCOx
-X-Received: by 2002:a05:600c:1e28:b0:442:ffa6:d07e with SMTP id
- 5b1f17b1804b1-4533ca46742mr165210555e9.1.1750322060520; 
- Thu, 19 Jun 2025 01:34:20 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGH5dvHP9pgU5CWnF3igdZoxqAdlfpwKmDKpMTqzrjzHP3KBUtJJYzgsu5cADR1ULmt9CNULA==
-X-Received: by 2002:a05:600c:1e28:b0:442:ffa6:d07e with SMTP id
- 5b1f17b1804b1-4533ca46742mr165210105e9.1.1750322060108; 
- Thu, 19 Jun 2025 01:34:20 -0700 (PDT)
+ bh=1Y2F7jTMtVu1es0POW08uDhVnT8xOU16bc2BsA/SvjU=;
+ b=Z0XimaOf2Gc4pLNNFr53E5J4UlL5wdFeMyX/xeWvMQbL44y9xQ544U9KxF3FDN+cOO
+ tpRPRRq19Pl9m9pArq4ttHpLk5o+OZsgXyjR9sda9WsU/8CBj9pgEH+8iTgTdBAYMpyi
+ PR5qthYftWQl1XPJDU5hbRgDf6v5GACbR+P4Kfxs80eNOLqRGYkYHf28acbW5Ahy7Bp0
+ NLE+ewZ+iOc6Gri5ALOGFYSe83enmjW+/pK6qg2gv1yS+V6pMbomYrlyTNglC9iavYIY
+ 9opIMamBa7/U760fd80GM2r3JxqEB3ZBoLTg5+TOIckgYypzxhKKSnS5C4uyFGiARPEy
+ oV6g==
+X-Gm-Message-State: AOJu0Yw2JNYpGWLX6N7jL+27tfIDoKuzSSBI2auUnFgmO9YuxFFqx5+v
+ YFJ6C1Hw1hj5U4vRF5dbS3uVX6rihm9z2H02w2fdKCCZnzCrmJzea/57GOiyL+ILA5bEG1bT8ja
+ m8oDhcz4ts1qKINNRlZVx3YYPyhBNsKRnoxSJixVITtoQOVPcNoKxNxxYUqqZjVypTHIwxkIbln
+ w24bYcOLih55WRFFYaCVXsfxN8KjO0VrlPIHkQmg==
+X-Gm-Gg: ASbGncvH0ZB/EgSfvH5z3t+VCe3974usNl9LquHCgotq8z0GoaGP90c77bes7ODlfjc
+ 5bZibz/ecoS25eMkQFlCX4vKfyU9irxIyoyWjVfudpLau1KrE1x5XlpJjtLb+uvqcMssUf39FaI
+ e6BfjFSUukxcrAwF88Yy6WWKvcYoncH9MxDFK/CQ1/4tJ5zZUkGVd65lx02RlD29MznvQsHMcew
+ pzlUwfGlyHIaVule189r1eS7Nhv26fwy6oeFsyzkt8TJzd52d0yGvtYUmm+lN4BB2R1deKALNfr
+ EHPaATv6F9hIAU8cbA6aW3VYVTzCvilbvdNxoD7SSeF6FCu6sExn
+X-Received: by 2002:a05:6000:178a:b0:3a4:f72a:b19d with SMTP id
+ ffacd0b85a97d-3a572366706mr16456941f8f.8.1750322063003; 
+ Thu, 19 Jun 2025 01:34:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEUEfFFc4fV/Sl0FlSGnhnDENGNNMh/fFaBOgL+3J82s7Kt0CUi8CqWlVwgAwCA1WG3YEEt2g==
+X-Received: by 2002:a05:6000:178a:b0:3a4:f72a:b19d with SMTP id
+ ffacd0b85a97d-3a572366706mr16456902f8f.8.1750322062490; 
+ Thu, 19 Jun 2025 01:34:22 -0700 (PDT)
 Received: from localhost (35.pool90-77-212.dynamic.orange.es. [90.77.212.35])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4535e97a908sm21033595e9.4.2025.06.19.01.34.19
+ 5b1f17b1804b1-4535a14221csm30269775e9.1.2025.06.19.01.34.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Jun 2025 01:34:19 -0700 (PDT)
+ Thu, 19 Jun 2025 01:34:21 -0700 (PDT)
 From: Javier Martinez Canillas <javierm@redhat.com>
 To: u-boot@lists.denx.de
 Cc: mripard@redhat.com, mskrivan@redhat.com, Tom Rini <trini@konsulko.com>,
  eballetb@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  alexl@redhat.com, mkorpers@redhat.com,
  Javier Martinez Canillas <javierm@redhat.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Casey Connolly <casey.connolly@linaro.org>, Heiko Schocher <hs@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Subject: [PATCH v3 2/4] disk: efi: expose the part_get_gpt_pte() helper
- function
-Date: Thu, 19 Jun 2025 10:34:00 +0200
-Message-ID: <20250619083411.2214491-3-javierm@redhat.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Maks Mishin <maks.mishinfz@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 3/4] efi_loader: disk: add EFI_PARTITION_INFO_PROTOCOL
+ support
+Date: Thu, 19 Jun 2025 10:34:01 +0200
+Message-ID: <20250619083411.2214491-4-javierm@redhat.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250619083411.2214491-1-javierm@redhat.com>
 References: <20250619083411.2214491-1-javierm@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 6R_BnzXMSbESrBr6SVJHtbeLnqb7FxhOgDMlrFOffFE_1750322061
+X-Mimecast-MFC-PROC-ID: Jb_82nYZ6SEci0DOZIHKeypIg092PQPbi50R-pyHWUQ_1750322064
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -120,57 +115,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function will be used by the EFI application disk support code
-to provide data required by the EFI_PARTITION_INFORMATION_PROTOCOL.
+The UEFI 2.10 specification mentions that this protocol shall be installed
+along with EFI_BLOCK_IO_PROTOCOL. It provides cached partition information
+for MBR and GPT partition types.
+
+This patch just implements support for GPT partition types. The legacy MBR
+partition types is only needed for backward compatibility and can be added
+as a follow-up if needed, to make it fully compliant with the EFI spec.
 
 Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Add ifdef guards for {EFI,DOS}_PARTITION being disabled (Ilias Apalodimas).
 
- disk/part_efi.c |  2 +-
- include/part.h  | 14 ++++++++++++++
- 2 files changed, 15 insertions(+), 1 deletion(-)
+ include/part_efi.h        | 20 ++++++++++++++++++++
+ lib/efi_loader/efi_disk.c | 39 +++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 57 insertions(+), 2 deletions(-)
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index d0b1f96adff2..fb1ed534f861 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -215,7 +215,7 @@ int get_disk_guid(struct blk_desc *desc, char *guid)
- 	return 0;
- }
+diff --git a/include/part_efi.h b/include/part_efi.h
+index 59b7895b8a23..fb402df6f13e 100644
+--- a/include/part_efi.h
++++ b/include/part_efi.h
+@@ -138,4 +138,24 @@ typedef struct _legacy_mbr {
+ 	__le16 signature;
+ } __packed legacy_mbr;
  
--static int part_get_gpt_pte(struct blk_desc *desc, int part, gpt_entry *gpt_e)
-+int part_get_gpt_pte(struct blk_desc *desc, int part, gpt_entry *gpt_e)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER_PAD(gpt_header, gpt_head, 1, desc->blksz);
- 	gpt_entry *gpt_pte = NULL;
-diff --git a/include/part.h b/include/part.h
-index 7075b2cb1164..b3a3362b2af2 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -647,6 +647,20 @@ int gpt_verify_partitions(struct blk_desc *desc,
-  */
- int get_disk_guid(struct blk_desc *desc, char *guid);
- 
-+/**
-+ * part_get_gpt_pte() - Get the GPT partition table entry of a partition
-+ *
-+ * This function reads the GPT partition table entry (PTE) for a given
-+ * block device and partition number.
-+ *
-+ * @desc:	block device descriptor
-+ * @part:	partition number for which to return the PTE
-+ * @gpt_e:	GPT partition table entry
-+ *
-+ * Return:	0 on success, otherwise error
-+ */
-+int part_get_gpt_pte(struct blk_desc *desc, int part, gpt_entry *gpt_e);
++#define EFI_PARTITION_INFO_PROTOCOL_GUID \
++	EFI_GUID(0x8cf2f62c, 0xbc9b, 0x4821, 0x80, \
++		 0x8d, 0xec, 0x9e, 0xc4, 0x21, 0xa1, 0xa0)
 +
- #endif
++#define EFI_PARTITION_INFO_PROTOCOL_REVISION 0x0001000
++#define PARTITION_TYPE_OTHER 0x00
++#define PARTITION_TYPE_MBR 0x01
++#define PARTITION_TYPE_GPT 0x02
++
++struct efi_partition_info {
++	u32 revision;
++	u32 type;
++	u8 system;
++	u8 reserved[7];
++	union {
++		struct partition mbr;
++		gpt_entry gpt;
++	} info;
++} __packed;
++
+ #endif	/* _DISK_PART_EFI_H */
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index 47b583cc5e12..130c4db9606f 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -26,6 +26,7 @@ struct efi_system_partition efi_system_partition = {
  
- #if CONFIG_IS_ENABLED(DOS_PARTITION)
+ const efi_guid_t efi_block_io_guid = EFI_BLOCK_IO_PROTOCOL_GUID;
+ const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
++const efi_guid_t efi_partition_info_guid = EFI_PARTITION_INFO_PROTOCOL_GUID;
+ 
+ /**
+  * struct efi_disk_obj - EFI disk object
+@@ -35,6 +36,7 @@ const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
+  * @media:	block I/O media information
+  * @dp:		device path to the block device
+  * @volume:	simple file system protocol of the partition
++ * @info:	EFI partition info protocol interface
+  */
+ struct efi_disk_obj {
+ 	struct efi_object header;
+@@ -42,6 +44,7 @@ struct efi_disk_obj {
+ 	struct efi_block_io_media media;
+ 	struct efi_device_path *dp;
+ 	struct efi_simple_file_system_protocol *volume;
++	struct efi_partition_info info;
+ };
+ 
+ /**
+@@ -426,6 +429,7 @@ static efi_status_t efi_disk_add_dev(
+ 	/* Fill in object data */
+ 	if (part_info) {
+ 		struct efi_device_path *node = efi_dp_part_node(desc, part);
++		struct efi_partition_info *info = &diskobj->info;
+ 		struct efi_handler *handler;
+ 		void *protocol_interface;
+ 
+@@ -454,18 +458,48 @@ static efi_status_t efi_disk_add_dev(
+ 			goto error;
+ 		}
+ 
++		info->revision = EFI_PARTITION_INFO_PROTOCOL_REVISION;
++
++		switch (desc->part_type) {
++#if CONFIG_IS_ENABLED(EFI_PARTITION)
++		case PART_TYPE_EFI:
++			info->type = PARTITION_TYPE_GPT;
++			ret = part_get_gpt_pte(desc, part, &info->info.gpt);
++			if (ret) {
++				log_debug("get PTE for part %d failed %ld\n",
++					  part, ret);
++				goto error;
++			}
++			break;
++#endif
++#if CONFIG_IS_ENABLED(DOS_PARTITION)
++		case PART_TYPE_DOS:
++			info->type = PARTITION_TYPE_MBR;
++
++			/* TODO: implement support for MBR partition types */
++			log_debug("EFI_PARTITION_INFO_PROTOCOL doesn't support MBR\n");
++			break;
++#endif
++		default:
++			info->type = PARTITION_TYPE_OTHER;
++			break;
++		}
++
+ 		diskobj->dp = efi_dp_append_node(dp_parent, node);
+ 		efi_free_pool(node);
+ 		diskobj->media.last_block = part_info->size - 1;
+-		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION)
++		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
+ 			esp_guid = &efi_system_partition_guid;
++			info->system = 1;
++		}
++
+ 	} else {
+ 		diskobj->dp = efi_dp_from_part(desc, part);
+ 		diskobj->media.last_block = desc->lba - 1;
+ 	}
+ 
+ 	/*
+-	 * Install the device path and the block IO protocol.
++	 * Install the device path, the block IO and partition info protocols.
+ 	 *
+ 	 * InstallMultipleProtocolInterfaces() checks if the device path is
+ 	 * already installed on an other handle and returns EFI_ALREADY_STARTED
+@@ -476,6 +510,7 @@ static efi_status_t efi_disk_add_dev(
+ 					&handle,
+ 					&efi_guid_device_path, diskobj->dp,
+ 					&efi_block_io_guid, &diskobj->ops,
++					&efi_partition_info_guid, &diskobj->info,
+ 					/*
+ 					 * esp_guid must be last entry as it
+ 					 * can be NULL. Its interface is NULL.
 -- 
 2.49.0
 
