@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E17ACC7115A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 21:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05276C7115A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 22:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0648882BA1;
-	Thu, 19 Jun 2025 23:27:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FB9682CEB;
+	Fri, 20 Jun 2025 00:04:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ql5rIXiW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H/dhj09Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1363982CBB; Thu, 19 Jun 2025 23:27:21 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 5A68A82CF8; Fri, 20 Jun 2025 00:04:40 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A21A580C83
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 23:27:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D174582D21
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 00:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-735a6d7c5b1so800401a34.2
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 14:27:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e75668006b9so1281397276.3
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 15:04:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750368437; x=1750973237; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z1nND4yFp783a+0/yJeswQJAb/TdzYs6gehjJX2yfJk=;
- b=ql5rIXiWiRf9bSXYzHoOFFvwZyXoJzYvdH+nzThlbowFAI0nk6Y0y3BQY9z4NMKatP
- snLtS7KKTlaGeHvUMnfD+QwEzDAKb89IOArjBEh09CSltX23ebrjsWyZtm+j8Dl0/Os2
- yv8XKcWAZtoEB3DawiwUxVwvy4GZ6a6mS4X2M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750368437; x=1750973237;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1750370674; x=1750975474; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z1nND4yFp783a+0/yJeswQJAb/TdzYs6gehjJX2yfJk=;
- b=YLyx/s7fwAa7mvJhgzP9fK7VF1rmXxdCqP/sH5n99HDIPqSOxblUW/PzWyz0COz2ez
- fCuSAiZlyTCgvOzA7eYU1+CPyQfs/z1LCosIc3hwfmcSeQfPCyB+a6cs7VFHNLTgOv1t
- QiDe9OQXtJ48caA/TjwjzJrt+7U73oG8Vs6+nrkxG2yJg3G2vKLb90aS4/tbhJfvdCwI
- yEW54ZANR7QboRG5mfhnPCKd8v/8NZIzSs3v8xe85BCbcgJvc/WjAxWGfBBkNL8P9+vL
- suQRHJsoUHmOzKQLY7kfxdVx8vOEzUKlrTq5y5AxVSN2UjScyML0FHJw/vBHdCWt91jU
- axhw==
+ bh=p0XPJD0sNo1KFeiOLdpWiyEimF6bWuBwgBhzJ+/PnS4=;
+ b=H/dhj09ZJ2mMtbe1JGodD69dOxWx8OLInNqUkGcs5qjxW2W56fEYXER7BUXx0i+aKG
+ 7Ng2ZLTz960XTp+G+2JoDkeGjNvkWlpjDlHsO4mn6f+DApudlzNjI2MglzycOBbN8TFp
+ 73u4/nxVj83YTqTn7h46daULe0DVZMhUgKXd19vq5if5KWy447u4EOIdHKs7rQqFjfAN
+ GgaFby1BApOvbq/t/2wzQP3CGsW4vwbGXtVJ8LD9mjKqPc3eLZpPaDovA7NvGFEmSwhq
+ WqejKQ/TZtaWXWQN0gp6MtAmWsE/xyNx43ubwkxN5WrUmXS+SPT2z1Ht2dU8X2O02p8I
+ Iqgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750370674; x=1750975474;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=p0XPJD0sNo1KFeiOLdpWiyEimF6bWuBwgBhzJ+/PnS4=;
+ b=c3bJsSHeHHCVzJ7g3XRRPi1M7W5n5QW9eq5Y6Qmd/cHK9H7nFJUQUcYs5XEILUV2T5
+ 2SoWz3jCitucgrAyNVBLKBvy24JhxJfBuFqrZYnoDNmho8BhBWhJuiIj7xMd61OOSsJ8
+ DDe+TIxg+qQ7HLSgLgwL0YUJMuZoX41B7cnGtrVXMIw19IXFMTFos+4oUaPcL2hrMdnC
+ 9o6en9Zvwuah/qJTEUzimMa9jSZnrEzvmL2/TX3jnIDaWNj0mqhmEq/fKiJoIoqTCyEU
+ rRnLgMk2xx8/Hcahr+GWlP2sWlwUoLvFiz8hMihpHTsiIx6Q7VXcYdY3Qi1j649PL+3V
+ lngw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7JL/zk6FOBtjYFxwgl8L6n0di1cyLmG6dP1xwrbdu2lcxzk4VfI/pq4fEKecfVtBTOxpdyfA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzibwKhkYqORDpuwnOpJaGmbXr0kfuEvVlXi8NfDZympsBA9UZz
- VoJOFlKD2zsTwJFHAmr4hsaF+cuIMCd1q6ABY+4IOsNQzpveDNJShQS3GZwkKcgfg/U=
-X-Gm-Gg: ASbGncsXRozNPnR3tIne9fqO0/nIesiG5B9/BXky7Q/dwoO2x3706F2KZYk8NxRvlqd
- e9ya3dFZrWfPG9+5P62mVMY03U74noCbaQNkQR+IqtnOqpE9h9XWUIhWlB93/4six+xUxbA1a0x
- WtL2xFXi9Xo4w+KxYvyi167+yWbphxVq+rRfvJfuYGviHrfSQwSfQfAVOoHL9ftrRX7MPvnK60/
- lQwVmLbgiFoXYy5tfwwi3XPWtXTwaD+1D1fYwfe3gKtsEQB3jXbbaclK2F41/5lrRXh4OP4nC90
- 2s/EHb0UMOfIaNKHBLkEKdRy+5+5zxPtoZx220oiFk36riqz8KuQ8CcLBcjPyXVdaCreh6q+7A4
- AkA0+WOuxXHrLM8HNekivqLk=
-X-Google-Smtp-Source: AGHT+IFLCywtvik/Zy9BY1i9iWISAfFJb/jaOsvkq/7R2zWuQsPuGFD7mwlKYsTEr6GBMOlJpnBfGw==
-X-Received: by 2002:a05:6830:3102:b0:739:fe04:7aec with SMTP id
- 46e09a7af769-73a92032511mr206381a34.26.1750368437244; 
- Thu, 19 Jun 2025 14:27:17 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a90cbb386sm71362a34.57.2025.06.19.14.27.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Jun 2025 14:27:16 -0700 (PDT)
-Date: Thu, 19 Jun 2025 15:27:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, Stefan Roese <sr@denx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
-Message-ID: <20250619212714.GD216500@bill-the-cat>
-References: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
+ AJvYcCWlanMiFkvklB+Vld0oyziv94Z0exGBw+94WaMQInU63ZLUHoS15WfdbyCG7uzhxjog/cad7U4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/lXR1EygunU2DZ9w92OEwdoKjNBmkP93DCjeW92tOLW+PCsnK
+ 1rDvK+4uGiqwGdP3bDx/L3v0Zimo3pO14CLyAnltVqiJktMag4VP+zc9hSptZuptSkEv3rvXDry
+ pAhLipIt52rntO/m50BtXoIGYcdcy6v35Ad/MgESE0w==
+X-Gm-Gg: ASbGncvzD1vkqU+rYQFSygm3MwRylca2CB+q3DDG2j0sST1ynqvs5oC/wr1n7CguxoE
+ akvh3nrqnwGuKJqrr1qc7k5GHe4VZf20ASUaGYQvvr9mnl1y9PxLFjIZkv1+KOHCtSe2QbYr3OW
+ U+Iy41+qjje7mymoBvEQIQb4Y5NYRGUu01GF7k5ncDUAtb/fkowU/qQ8+EtIGhCxqp7WY2sbRym
+ AF7Qg==
+X-Google-Smtp-Source: AGHT+IFEjk/aiAWBd1K4ZnTHJ/St7Un1KLOVsci6+6w/GR+iKeMnX6AR+Gl45l28dCBpIR8M75tSX4K7YROzkhiAYKA=
+X-Received: by 2002:a05:690c:708d:b0:70e:7882:ea97 with SMTP id
+ 00721157ae682-712c63afd4emr13061307b3.10.1750370674605; Thu, 19 Jun 2025
+ 15:04:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mt0W4T0L+j2sV/V8"
-Content-Disposition: inline
-In-Reply-To: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250112034213.13153-1-semen.protsenko@linaro.org>
+ <20250112034213.13153-2-semen.protsenko@linaro.org>
+ <CAFLszThSRtSofySbSBa3hHn2u19bCm-jq_S4gXG+pXFjiiJsHA@mail.gmail.com>
+ <CAPLW+4=38cBhUXyngbLG-iypxx+ksXp2-3Cjm3Wgd1V+pMmfCg@mail.gmail.com>
+ <CAFLszTiZdbMu64_+=LV3gxUf_Jm9Ngxdmg=+XrVhGNHR9FDAnw@mail.gmail.com>
+In-Reply-To: <CAFLszTiZdbMu64_+=LV3gxUf_Jm9Ngxdmg=+XrVhGNHR9FDAnw@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 19 Jun 2025 17:04:23 -0500
+X-Gm-Features: AX0GCFsF9iPKKO7h625SEIylHJfZjApYMsFIB66_gGjrlsx_LU8I8_U2EwRMnWg
+Message-ID: <CAPLW+4nCr1j4MxR9mjAt3JtocwsxBKgWpah_ARODX+6ENs-xDg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] bootstd: Fix memleak on errors in
+ bootmeth_setup_iter_order()
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,60 +101,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Feb 7, 2025 at 7:26=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
+:
+>
+> Hi Sam,
+>
+> On Fri, 7 Feb 2025 at 18:11, Sam Protsenko <semen.protsenko@linaro.org> w=
+rote:
+> >
+> > On Tue, Jan 14, 2025 at 7:14=E2=80=AFAM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > On Sat, 11 Jan 2025 at 20:42, Sam Protsenko <semen.protsenko@linaro.o=
+rg> wrote:
+> > > >
+> > > > Free memory allocated for 'order' (array of bootmeths) on error pat=
+hs in
+> > > > bootmeth_setup_iter_order() function.
+> > > >
+> > > > Fixes: c627cfc14c08 ("bootstd: Allow scanning for global bootmeths =
+separately")
+> > > > Fixes: 10d16faa436c ("bootstd: Detect empty bootmeth")
+> > > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > > > ---
+> > > >  boot/bootmeth-uclass.c | 16 ++++++++++++----
+> > > >  1 file changed, 12 insertions(+), 4 deletions(-)
+> > > >
+> > >
+> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > How about adding a test to check there is no leak? You can see
+> > > test/lib/abuf.c for similar tests.
+> >
+> > That might be a good idea, and I already have the test code handy. But
+> > frankly I wasn't able to successfully run the current bootstd test in
+> > sandbox, it fails before it can get to memleak check I added. Firstly,
+> > when I do:
+> >
+> >     $ make sandbox_defconfig
+> >     $ make -j32
+> >     $ ./u-boot -T -c "ut bootstd"
+> >
+> > it says:
+> >
+> >     MMC:   Can't map file 'mmc1.img': Invalid argument
+> >
+> > and I can see only empty (zero size) mmc1.img in my U-Boot source code
+> > root dir. Then I was able to trigger its creation (I guess) by running
+> > Python suite somehow, so it generated 20 MiB mmc1.img. But even with
+> > that added, I hit this error:
+> >
+> >     test/boot/bootdev.c:218, bootdev_test_order():
+> >         0 =3D=3D bootflow_scan_first(((void *)0), ((void *)0), &iter, 0=
+, &bflow):
+> >         Expected 0x0 (0), got 0xffffffed (-19)
+> >
+> > I've read corresponding doc [1] ("Tests" section), but still don't
+> > understand how can I successfully run the bootstd test locally. If you
+> > can help me out, I can send the memleak test you mentioned in v2.
+>
+> You can run the bootstd tests with something like:
+>
+> test/py/test.py -B sandbox --build-dir /tmp/b/sandbox -k bootstd
+>
+> although it sounds like you have already figured that out. After you
+> do it once (to create the images) you can run the C tests directly as
+> you did above, but yes, sadly, some of the tests are affected by
+> others (with bootstd). You could take a look if you like.
+>
 
---mt0W4T0L+j2sV/V8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is it possible to just apply this patch without a test? It's clearly
+fixing a memleak. Not that I'm lazy or anything, I came up with a test
+like below, but I don't want to send something that is quite hard to
+test. If you think this test is really essential, I can send it once
+bootstd tests are fixed and can be run in one command without any
+extra non-documented work.
 
-On Thu, Jun 19, 2025 at 01:37:53PM -0700, Tony Dinh wrote:
-> Hi Jerome,
->=20
-> While fixing some ext4 file system problems on 2025.07-rc4, I ran into
-> a problem booting a few Kirkwood boards. kwboot loaded the u-boot
-> image,
-> and then u-boot execution was frozen without anything going to the
-> serial console. I did a bisect and found the commit that caused it.
->=20
-> https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc02b8a7=
-5c1940
->=20
-> When I tried to reverse this commit, I had a build error like this
-> "{standard input}:24246: Error: selected processor does not support
-> `mrc p15,1,r3,c15,c1,0' in Thumb mode"
->=20
-> Currently, the only way to boot Kirkwood boards is to disable either
-> CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
->=20
-> I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
-> know if I can help with testing to troubleshoot this regression.
+8<---------------------------------------------------------------------->8
+diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+index 9af947868707..f4746ee4fb61 100644
+--- a/test/boot/bootdev.c
++++ b/test/boot/bootdev.c
+@@ -194,6 +194,7 @@ static int bootdev_test_order(struct unit_test_state *u=
+ts)
+ {
+        struct bootflow_iter iter;
+        struct bootflow bflow;
++       ulong start;
 
-I wonder if the right answer is that CONFIG_SYS_THUMB_BUILD should be
-off? A quick look around and this (and sheevaplug) are ARM926EJ-S which
-is Thumb-1 not Thumb-2 and it looks like the kernel for example only
-supports building itself with thumb2 on armv7/v7m. I know that this was
-working, so we should dig more too, but I'm not sure what the best
-answer here is.
+        test_set_skip_delays(true);
 
---=20
-Tom
+@@ -201,6 +202,8 @@ static int bootdev_test_order(struct unit_test_state *u=
+ts)
+        bootstd_reset_usb();
+        ut_assertok(run_command("usb start", 0));
 
---mt0W4T0L+j2sV/V8
-Content-Type: application/pgp-signature; name="signature.asc"
++       start =3D ut_check_free();
++
+        /*
+         * First try the order set by the bootdev-order property
+         * Like all sandbox unit tests this relies on the devicetree settin=
+g up
+@@ -277,6 +280,9 @@ static int bootdev_test_order(struct unit_test_state *u=
+ts)
+                        iter.dev_used[3]->name);
+        bootflow_iter_uninit(&iter);
 
------BEGIN PGP SIGNATURE-----
++       /* Check for memory leaks */
++       ut_assertok(ut_check_delta(start));
++
+        return 0;
+ }
+ BOOTSTD_TEST(bootdev_test_order, UTF_DM | UTF_SCAN_FDT);
+8<---------------------------------------------------------------------->8
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhUgKoACgkQFHw5/5Y0
-tyw0Gwv/X2yvvqIIdSV1Lv4wx3kl+4gPyhbjLDxFE/ZwdaRp8Bl2qSB4AmHoOhGn
-Ze8ffL7uOmHi8eCFZf4NNQIcBRj54hg5OYl1lOmOXnqyzfJPake2VpJfpYrnOAVZ
-LLJB5q/9CZM5E87yp7OkJo6w+WptbF/sYH299sSJ9GvHxsgqOLjC3aNqr8FSRJhx
-VLihfZydxxbAGsKINuDqo76VR3iYbbrQ9PW8dJlZM86h1SrwcX5PY0S720aV/wTy
-24F4LDIcirBRvdv0Bk8C+sStjOqtQlxrMHhg+sQJ7Wn1bDf+7BRtKQkAnPh+Aok5
-C33W0HDpSEWicAoRT3QkfMb5hN9avw/UfLmCXXPmHN71uUYlDdCqQkThIG8MLnNZ
-I1M9+q+/Xu3HH+UM0TcZOSjfXrh4JOabTwTYzWVbyZyjUtLwOwBlM4K2v/0DcXBm
-41mukGeIBcHW7ieACNbmnVpQ4/9SOLmJH2YYk6Qm+vYqZHa/aOBEUu3vz3YWFMNN
-ivh5TBdZ
-=FCoQ
------END PGP SIGNATURE-----
-
---mt0W4T0L+j2sV/V8--
+> Regards,
+> Simon
+>
+> >
+> > Thanks!
+> >
+> > [1] doc/develop/bootstd/overview.rst
