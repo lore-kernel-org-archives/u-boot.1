@@ -4,100 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCFEC7115B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 08:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F75C7115B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Jun 2025 09:13:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFE2982D34;
-	Thu, 19 Jun 2025 10:34:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 43EDA82CCE;
+	Thu, 19 Jun 2025 11:13:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="aUc7NbUA";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="tf5Zwnqh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C058882B18; Thu, 19 Jun 2025 10:34:31 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ id 43D8A82CBB; Thu, 19 Jun 2025 11:13:17 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DE6F82BA1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 10:34:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4395E82B18
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 11:13:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javierm@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1750322068;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dUikEwSyK0zfVH05waXd9Df2jcIf665Zts7hBf/9zeA=;
- b=aUc7NbUAlY68Rnlz+mPB8MXIpYSrGILG/WEKveoDgsTofAzqI1zaQD4H8hzC2nypu/kN02
- n5NsBkIwrBWXvDAlIAMuXtcKBtFEn+TzXXooXqLsEOu+EbmkDpt5jfgrPuYzrA6VL5C7az
- iNIjGlXNwIkkipr4d+1yysyyT2+n0/Y=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-259-zlYFb4_7MYGBL8gqdTbcFQ-1; Thu, 19 Jun 2025 04:34:27 -0400
-X-MC-Unique: zlYFb4_7MYGBL8gqdTbcFQ-1
-X-Mimecast-MFC-AGG-ID: zlYFb4_7MYGBL8gqdTbcFQ_1750322066
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3a4eeed54c2so383918f8f.3
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 01:34:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750322065; x=1750926865;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dUikEwSyK0zfVH05waXd9Df2jcIf665Zts7hBf/9zeA=;
- b=D+5T/o1njgZt2cny05ih/OUhYNcr+jsIyHJPjmIgJaxmIMfJdkzdXU9ZMQH4JEqPeY
- I8koaKweYsITZ8pQ6vrO4qh2WhMdV+MnmGq6CEHUcRlG+ryyHet3xDbgYqfDS6hPeYis
- CW/4mv0yaPzHAr/2mqsFUAOXlKe7stsgk/zALKVwv9RPQ50rOHWtVHf36Y2KD4ETX17B
- 6Z6zcffRTQyprKiKzQB8p2EcqGPFGy2t1vXBLcW2vCI2FisGAVcfyPKO16O+baf/pbMC
- WRi9SLU2Bi/0cG4UZPbGO4aoAbq1812Gy3q1Z/cKkW614o35wqgrlIEpR1qXf3KtfQQc
- A1Ww==
-X-Gm-Message-State: AOJu0Yx1v6zjz3e8OrS9XhgF6Cmica2uaOlyK301gRCkswfW5M9kRLMc
- KCztf7B2HSDpLF7LbDDL6P/qNAyn6bZ4ZQjT4ENzchaHzmE5mBPgCt4/iCmG+aumdbr4ENdYCS0
- 8LE08mNufotdMJBGG5dIcVfNZmRzCX5IDQdX7E0yTzVKnHSmcwO8MEuoMN5nVupS+7ADOi6t+qB
- 3VO/umoOKV9ExS2SEOY5kDM5lLn6K8oF6Rf7gRDw==
-X-Gm-Gg: ASbGnctV5f/nHAg8U0hepmQXrC8ZWCshv/LwqntEXST7L0AgD3E+tXKdFoTvKKyaH8t
- rLtQTggAezuGzjwuxVjqpaqQDwho9zLJE8WgNJ02G4NwgImiPBwurADygkuX9oSAU4yciTMvsJ3
- Q1+2TTOMiK4gtwp2d8zAcLegfiNjkH8u+Dg2RLdfFfOUm2QTygKtMQKTuy0Jk3r3D05d2RFnNat
- /3MC6Yx9PFKSsTCARhElvxDu4BmzcGv20rkSE0db/k1WDTB9Lm+k6370bVm+Nd3j5/YvQ8B5nf8
- 7TJ/87hUN3kwjcw/L85fCpduW4fBrJqcsvywNAH7qzPPQ+FKqA9K
-X-Received: by 2002:a5d:5c84:0:b0:3a5:3e64:1ac4 with SMTP id
- ffacd0b85a97d-3a5723a2742mr17383832f8f.33.1750322065288; 
- Thu, 19 Jun 2025 01:34:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEox3CQuYxcg2cjwyQSz01T4tm1RqnFVBG5ag8X0tHKveMSNQdVL3VFOzdR7dl92ZIoJLc+OA==
-X-Received: by 2002:a5d:5c84:0:b0:3a5:3e64:1ac4 with SMTP id
- ffacd0b85a97d-3a5723a2742mr17383794f8f.33.1750322064773; 
- Thu, 19 Jun 2025 01:34:24 -0700 (PDT)
-Received: from localhost (35.pool90-77-212.dynamic.orange.es. [90.77.212.35])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4535e97abf6sm21123155e9.6.2025.06.19.01.34.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Jun 2025 01:34:24 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: u-boot@lists.denx.de
-Cc: mripard@redhat.com, mskrivan@redhat.com, Tom Rini <trini@konsulko.com>,
- eballetb@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- alexl@redhat.com, mkorpers@redhat.com,
- Javier Martinez Canillas <javierm@redhat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v3 4/4] efi_selftest: Add basic partition info check to block
- io test
-Date: Thu, 19 Jun 2025 10:34:02 +0200
-Message-ID: <20250619083411.2214491-5-javierm@redhat.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250619083411.2214491-1-javierm@redhat.com>
-References: <20250619083411.2214491-1-javierm@redhat.com>
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=B2aoIH/7WGmhzGTrNrf255mczi/I2H+VkbcKe+t/uXFjt6IcaWkRum50VzPUzC6gY2HEo7mLQgSNqABTguMVuMbudqfHBFuYAhnqXtLfAHLnLqS8SEQka16OHca1ARPsGp9Pln1UrPDPKuiN75xxr/K9g8QXk9hzWjrYt4f3Lf4Ew+ugtYnCgNjg2FqmPm0yYCYU5p0MSQkiRRnTY2bvOFVHI99WmiQvtUf4G/qvCsbphLFMmXBshXC9Im/QYxYdD4xNDmn+CavLvzQt6aAkQxN0Aa0QR0nsIDrIvhQONFIMY0W6NXz3p8mL7fFqGOK3LFIIWT4niBWpQl67xdegNA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=L9SFXt1PkDH8UdNC24NFQx/FV7oU5r0yoXgq08Cw/Zk=;
+ b=g8h4UBErp55VMgudBJlJwM88TREdD9AMym8p3zWnYAIEEGkFaxUHzSEnlZECtR0vCu9Hgq7UR5TnoXG7GhVny4TgQk1YMujLuR2LHUdCqrPQn1D+3ueJzpdw7BWc3bzOYk7e7+b3aDZNGrghH9GXaRNHUHSyQ86Cn1Oa+9UOl3DBthgtPixMoPGq+b5w2QFcyos5rQPId8HPenR91gMgIZQEft1zdThX7M2F6v39eDzkM0/urYBRS5BJNIWkcMC0usrLLh51nrGSgxIjGn3xYz+3Y37IGlP8mlqTnVqr3Nen9Gqw0KqtOKXHBo/5iO0SS2jj0TdDqkSZtIk0RrMqBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=L9SFXt1PkDH8UdNC24NFQx/FV7oU5r0yoXgq08Cw/Zk=;
+ b=tf5ZwnqhYgNpyW31P8+gsA2ptgFr5GI1SDYN4Bjf5Hgoh/YNqjBbj4jlmQp6Aq5B8QhVmje+MtFDhywpOIJerXROifESmIAhsn1QZ/8FFIBFO/9bYAOCHY/tsS0ArBpORH1JQ8t2yvPjI7BEAz8g2wIEYau5AeSdrxeyLnfNflF6RB3590fZK+Nukl9JK5VZv51mo8rJOiumcOFMgx7tSzdDmMwMQovjtc1z/eN/nOPBiITN/9o1NhLIKeJp8LxmafB+xcLFQnwj9RY4imPfU8TyPI4EwtXegNlhCbhV5mhypSrdqSDggJd76qWkSq2tBRYpMUxZN9M4hSgU+FY9AQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DU4PR04MB10888.eurprd04.prod.outlook.com (2603:10a6:10:585::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.19; Thu, 19 Jun
+ 2025 09:13:12 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%3]) with mapi id 15.20.8857.021; Thu, 19 Jun 2025
+ 09:13:12 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH 0/5] imx: Support capsule update
+Date: Thu, 19 Jun 2025 18:23:34 +0800
+Message-Id: <20250619-sr-v1-0-631100a113a5@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACblU2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDM0Mj3eIiXePEVIPkJMPk5BSDVCWgwoKi1LTMCrAh0bG1tQAxiRS8VAA
+ AAA==
+X-Change-ID: 20250612-sr-3ae0cb1ccd0e
+To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.14.2
+X-ClientProxiedBy: SI2PR01CA0054.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::22) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: HQw2WImZMURhw6yTcE_-Ozg2KEv66AwQRJfaPJZoPTY_1750322066
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-content-type: text/plain; charset="US-ASCII"; x-default=true
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU4PR04MB10888:EE_
+X-MS-Office365-Filtering-Correlation-Id: ae93f9e8-ec52-4f37-83fe-08ddaf118404
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V3I1aW5maFZkZzRFdE82SFFtTXY2Z1JJZUJ5emFhVHpXRmEzdU90Y2EwcUdh?=
+ =?utf-8?B?djVoRzJ0TUJSUE1TZnNRSVF6UXZJY0ZJVEEyVEJmUlVub29MZDJsY3ByUHhC?=
+ =?utf-8?B?YzNpTmJoZmFKbnVTUG9OWmxiNVB6M0p1Q3k5YWJqem41L2t4OFo1QUVicVFZ?=
+ =?utf-8?B?bGV5TGFIK21WU0I2SVhDYmsxaGxmVHJVU1JNNVBTdk9GK0x4bU1hd1Z4RGxC?=
+ =?utf-8?B?em04N0VhT09RN1c2R0VpQWIybDg5ZytzWDJBaWVRVVRGdFp6ZWVnMXpIMXZO?=
+ =?utf-8?B?akxnaEx3QXMyNGdaeG5LMzFtTVVjWEpqRnJYdzB4ZGxHd3gvZng2aGk4U3lh?=
+ =?utf-8?B?d0lqeng4UHEvOXVzb1pySmJ2MkRiZTg0dGZuVlZwVEpqaFhUTlB5eDB1V0E1?=
+ =?utf-8?B?ODFQOHN6TkZ1YldmR3h2ZEJxUkN4R0NMVkxvVk5XQ0VCMnJrS3JLK0N3clVz?=
+ =?utf-8?B?RnFFYWVibnRLbm1EbHdURjlTM2I4RHpRZ0Y5UEZCYVlXb3FKbEtxb1RXbUJT?=
+ =?utf-8?B?SGZHUlU5cjMyRGZFSjROMFVoVytMMGkxTXVkcGE1aTJEWEVkanhtVDZHU245?=
+ =?utf-8?B?bGlOZ093QlJiTU9UNllxSzJ3Yjlzdi8rejkzcy9IbmFEU09jNjlvVyt1dlJW?=
+ =?utf-8?B?TDdzVlRVTWIzVjhyUmpLQm5qdkxnemFFSUxHMTIwRFRMckczZ3d5WTNZdGJY?=
+ =?utf-8?B?WStzZEdJWk10MWZxalFBS1V3a3lGam04QzZtT2NKSTFXRGtiY0hDNlhOTGha?=
+ =?utf-8?B?K1gzS2hBV0tNRmpyaTNVbGlseG5xYU9paytYMFlEU2FFRC9aS0xGNkxCdjMx?=
+ =?utf-8?B?WDJ1Z0NZTU1YaTdQVzVSOE9ZM3l1MlVTYVdJR3d2VklYRFk2UE8wMVJjSUQr?=
+ =?utf-8?B?ckVUblNxemR6Ukg5MEgxRXEzNS9ZOENsVHRzNys5Rk9GbXh6VjlGeUNzQVpY?=
+ =?utf-8?B?aVdaNTlaSS9sZVFkUHl0cGxGL1JSZ0ttZ3FsMTBDWnkzQ0kwTkFxVEt0Y2Y4?=
+ =?utf-8?B?Z3dURzk4d2J1MHNzNFVyVGYycjZ6dnZBNVJZT3dHQVRJY1dnVE9tNy8wdERR?=
+ =?utf-8?B?WEk4TFdNZzR0VG5yY1lodjVEWUZzTnRyKzdPK1hYUTFwMEpaYnpoNE14bllT?=
+ =?utf-8?B?RG5MVXlkQXZrUHliL3lIZEowUmdEK3VQT2N2d2VuV1RnL1YxdzNKYlNCT3Vq?=
+ =?utf-8?B?QnNvVXFPWTRpYWY0Zkk1UGZjNU9KVHFzcmVoNlExTEZaOHRSSnZHN3VHYmh5?=
+ =?utf-8?B?STRUR2cvSDd5cnpPZHZhWTJTb0cyQUVqUjRub2ZySy9zSG5VWEdOdlVXUGM4?=
+ =?utf-8?B?NmRVazJZME9zcmc1K0lwNXA2TFovV2ttWGlLOFdHL1UzMlVlblFQVmNBa21v?=
+ =?utf-8?B?TVFsTVlTT2JrYVV4RFFlaEF4aEJYWlB4WS9jd2tybFV2Sm5tZlJiblAvQmpV?=
+ =?utf-8?B?SEwvUWdmbHg3QXZlaFV6SEhNeVRVVUVtd2R2YkV4aCtQT0VrdVlkVG1tZS9H?=
+ =?utf-8?B?NUNnd1ZKeTNET2tWTGIzeXJkbnV6NWJKbmpoTjdQdVljZlJpaGRnZzZqWG42?=
+ =?utf-8?B?TVdWNXRnalc3TDF5TzR6L3NESnlza0tLY0U5UmwzZ2hWU1hnaVoxcmFCbmp6?=
+ =?utf-8?B?SXVGWnJxQTh6eWFqTEg5OUVkNTY3QkJkOVlzeVZDUFJ2Mm5vZjIxU015KzF2?=
+ =?utf-8?B?Q2JBTiswUklZZDB0ZTFBMkk1bDV0WTZUd0JoL09KeDhiUjF3Nm5DRzRpaXVU?=
+ =?utf-8?B?SjBFWHZtblFjWVU3OHBacWxWMTRXOWJuWXo2clVXR2ZuQmZ0ZDlzS0ZQb0Ru?=
+ =?utf-8?B?VkFPS1M1MThXbHJIcWVBUk0xWW1QbWp3R2NpTS9QMndDd2hWb0s5Sm85UTVp?=
+ =?utf-8?B?WFllRk5MSGR1QzljYmpXa21iRzFCQVZKeVMxcS9JN2QzTkdiNmkvYkN1YUFW?=
+ =?utf-8?B?YjVsVmJEYXBYdTQyNkpENm8yTzBrWUQwKzRaSCtaMzlTMFA4TlQ3Z1U0NFVN?=
+ =?utf-8?B?bEdTSWs3V2ZBPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cys3NEZzNzA5TU51Q2JHUm43elE1L0pScUJKVGNOTmNCeG1YRVZPencxdkRP?=
+ =?utf-8?B?L1dnZmozdlRHN2p2L21ZMko0MVA4SUpGZnRRaXhxYkNlSmdCRnVFSU4wT3hi?=
+ =?utf-8?B?Y2dXaWhCVEc4SC92dHhQeUZTUVp5WUVGTWU1L2tjc3EzNjNiMzgxVGV1S0NO?=
+ =?utf-8?B?L3FJMmtMSElHcTFBNS9tYlZJbGMwWEo4eDV1Y3ZHWUJnR0JNR2lha1p6WnBl?=
+ =?utf-8?B?Rkw2eGMyR2NrVlIxYitlRG0rVXJKMFdyZ2NjTVZnM1hFQVlnSXlzbUdXNTQ1?=
+ =?utf-8?B?SE9PZFA4MWxBZUZBMFoyN2ZtVVVjVzBtTTM3UW9WR3ptWkZYM1lTSHBrRk53?=
+ =?utf-8?B?REdQcTJnZ0wxcllGYzR0dXRLb1ZkVnZ1cnB3ZHhHbEQwV2VxRUZyOSt5Nk1D?=
+ =?utf-8?B?OEJ1WjRPSkJmNzZFR3BYbHBiWHQ4SnhjbWlQeW9MRTZxdy9qREJaNGlOOXVx?=
+ =?utf-8?B?REE0S2s0QWI2MUpHbHpoVXhLZmMzbUtjZXU1bWQyN0txUnhoeDN4OHRpdkI2?=
+ =?utf-8?B?UUI2dzZGcE9hTWx4RlErQmV1ekJnYW5KVDYyNzBEcHMzL2NhTUNncEJsN3Jj?=
+ =?utf-8?B?dWptZFZiaG9DbW9PbndCd0lsQUdlbTFGcGZvR3lML3hhOUdaUWpidXdjKzgv?=
+ =?utf-8?B?ZkpQb3ZKNnZUM1Q0d2dxcmxTNWJTN0RiWGNTRDdGelJTS1k5RmxHdEFjS0gr?=
+ =?utf-8?B?bXBsOGxzcm1JVXErMjBmQy90aHJpbFNwS0laSlVjSmRUR0ltRHhFbGF0OHc2?=
+ =?utf-8?B?TXVVVzhrVGpwUmlkK20yam5JUkNYNjZPSmxrVnRHdzNOL2pjV3hMVDdPTldj?=
+ =?utf-8?B?NmowSDIvSzc1aEh2WGVqZ3ROQ2xzR29Odng2Tm5yRml3M1pKcUNnWkFyN0hh?=
+ =?utf-8?B?Tm9CQXVVOE4xSFpIMi9yZ3dYbldmSWcwSkFab3MxdEc3N0lqMTRCVTU5czl4?=
+ =?utf-8?B?engybXh4d3cyZmNYRllMaWhCSWpzMkErOHZMZnNyY25GYTY2TUxSejZ6ejNy?=
+ =?utf-8?B?OGExT0lIY3JLM096MUJGb2VpMTNDZWNPWXNlUHFaYXViOGh1d3VIdlZnQ2Z6?=
+ =?utf-8?B?dVRzcGxtcUFnUzdNN2NGR2dOWEJNSzhvR09ENkhqaWhUMjNWcUl5UWlkZTVM?=
+ =?utf-8?B?NENwTTdvSU9ETHFhNXZsQ3h3SzNlL0VSWG9VM2l1Q25FNEo3V1ZxUitPVVE2?=
+ =?utf-8?B?Z2VPbXJDeVc2aTdsNTg1R2pwTWFodis0U1ZJM2lkRERydVNsMUhrUWpFSnly?=
+ =?utf-8?B?azlmNFU2QzFxRXZYTFBLVDZkRlZnbVlkemVwOUNTbmhtTUhhc1ZlSHN5OFIw?=
+ =?utf-8?B?WW9lQjk5VnJ5ZG1HYWt0UTNJdytQOEsrN3RKVmhobENwclpOY2o4SzdqNDE1?=
+ =?utf-8?B?OUxBdlhkendQSktud3J3NWJNQ1N1L1hrRFBoV3JKSTBLUUtTdXprWmtsMk5X?=
+ =?utf-8?B?RDRHSDZpTldzUnA0a25LVnRhMjJGQ3NHTDdWWkxqU1MvNGxzdEFGOUE1aE53?=
+ =?utf-8?B?eHFSTXdFZGtwck4weSt6elJGcmlFdC9uWnRYSHBwTVNza3NTK3ZFb1crKzcy?=
+ =?utf-8?B?eHBROUdzNlpDMlA2blFJRzJMNDQrRVUvdjFpVkI2YVloTkpZbGpCUlJWN1hu?=
+ =?utf-8?B?WE5CRU0wTDFqMll2NUlRd2RRamErbzlZb0Y5dnlnTGpkS3JOUUFVY3lFL3My?=
+ =?utf-8?B?NlhsSFlPYlZkUXBJNXhSa1lkTDU4KzkveVlhMmk1SjNyL1RpbC9OV25pdFVz?=
+ =?utf-8?B?REZrTWUwcGtHQ2s5cUhHQVROK2JqcU1Ld1p1R2hGTy85ekNKQnlTTHBXTDBM?=
+ =?utf-8?B?M0R4T0pOcXhFVitKWDlEWEYwaWxUUjdKZzAzTm5ycGZGaDRvc29hcjVlaFRy?=
+ =?utf-8?B?UVJCMXltWG5hcndhSmphNS9jRFd4dk9oUHEyMzF6a0Q2OERYNkVPZGE1dnRv?=
+ =?utf-8?B?dUkxTHV1WlBCY0IvNURIZEpPTTRoOW1BOGVTUk1ncW5VSkVqSUJBTTh1d1NW?=
+ =?utf-8?B?NzdyVzlSMnpWdDMzbHZjMkZ5OUE4RUVPREluTFhaWm8yeW14d2hmVTBnRDNw?=
+ =?utf-8?B?b3V4UmFnWmRncWNXQnMydGZubk1QQ2NVeXErMUEvWVlLdTh4YnFRRi85TjhO?=
+ =?utf-8?Q?E55/AuAaV/J32lYJnKFW7fS6z?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ae93f9e8-ec52-4f37-83fe-08ddaf118404
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2025 09:13:12.3125 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pQeBWqtYFIy5g6TNCwLSZop5BDxPhG/WyMqseOTg17oEWoI0Rl8oQ1ly9SzSk58feG+Txvm7vdJtPOLE5LqDWQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10888
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,92 +181,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test the EFI_PARTITION_INFO_PROTOCOL in the existing EFI_BLOCK_IO_PROTOCOL
-unit test. It is fairly basic, since it only checks that the values of the
-struct efi_partition_info .revision, .type and .system fields are correct.
+Support capsule update for i.MX8M-EVK and i.MX93-11x11-EVK.
+Currently tested on i.MX8MM/N/P-EVK and i.MX93-11x11-EVK.
+Capsule authentication not enabled as of now, this is on TODO list.
 
-It doesn't check the MBR partition record information, because that's not
-supported by the EFI_PARTITION_INFO_PROTOCOL implementation yet. The test
-can be extended once the support is implemented, or if the in-memory disk
-image used for the test is modified to have a GPT partition type instead.
-
-Suggested-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
+Peng Fan (5):
+      imx8mp: evk: Add support for capsule update
+      imx8mm: evk: Add support for capsule update
+      imx8mn: evk: Add support for capsule update
+      imx93: evk: Add support for capsule update
+      imx8mq: evk: Add support for capsule update
 
-Changes in v3:
-- Fix build in -next due missing part_efi.h header include (Ilias Apalodimas).
-- Rebase on top of -next (Ilias Apalodimas).
+ board/freescale/imx8mm_evk/imx8mm_evk.c | 22 ++++++++++++++++++++++
+ board/freescale/imx8mn_evk/imx8mn_evk.c | 22 ++++++++++++++++++++++
+ board/freescale/imx8mp_evk/imx8mp_evk.c | 23 +++++++++++++++++++++++
+ board/freescale/imx8mq_evk/imx8mq_evk.c | 21 +++++++++++++++++++++
+ board/freescale/imx93_evk/imx93_evk.c   | 21 +++++++++++++++++++++
+ configs/imx8mm_evk_defconfig            | 19 +++++++++++++++++++
+ configs/imx8mn_evk_defconfig            | 23 +++++++++++++++++++++++
+ configs/imx8mp_evk_defconfig            | 15 +++++++++++++++
+ configs/imx8mq_evk_defconfig            | 13 +++++++++++++
+ configs/imx93_11x11_evk_defconfig       | 14 ++++++++++++++
+ 10 files changed, 193 insertions(+)
+---
+base-commit: a239cdc0bd4bfe5fce82368627fc55a5fa632e3a
+change-id: 20250612-sr-3ae0cb1ccd0e
 
-Changes in v2:
-- Add a test for the EFI partition information protocol (Tom Rini).
-
- lib/efi_selftest/efi_selftest_block_device.c | 30 ++++++++++++++++++++
- 1 file changed, 30 insertions(+)
-
-diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
-index a367e8b89d17..f145e58a267a 100644
---- a/lib/efi_selftest/efi_selftest_block_device.c
-+++ b/lib/efi_selftest/efi_selftest_block_device.c
-@@ -18,6 +18,7 @@
- #include <efi_selftest.h>
- #include "efi_selftest_disk_image.h"
- #include <asm/cache.h>
-+#include <part_efi.h>
- 
- /* Block size of compressed disk image */
- #define COMPRESSED_DISK_IMAGE_BLOCK_SIZE 8
-@@ -29,6 +30,7 @@ static struct efi_boot_services *boottime;
- 
- static const efi_guid_t block_io_protocol_guid = EFI_BLOCK_IO_PROTOCOL_GUID;
- static const efi_guid_t guid_device_path = EFI_DEVICE_PATH_PROTOCOL_GUID;
-+static const efi_guid_t partition_info_guid = EFI_PARTITION_INFO_PROTOCOL_GUID;
- static const efi_guid_t guid_simple_file_system_protocol =
- 					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
- static const efi_guid_t guid_file_system_info = EFI_FILE_SYSTEM_INFO_GUID;
-@@ -310,6 +312,7 @@ static int execute(void)
- 		struct efi_file_system_info info;
- 		u16 label[12];
- 	} system_info;
-+	struct efi_partition_info *part_info;
- 	efi_uintn_t buf_size;
- 	char buf[16] __aligned(ARCH_DMA_MINALIGN);
- 	u32 part1_size;
-@@ -375,6 +378,33 @@ static int execute(void)
- 			     part1_size - 1);
- 		return EFI_ST_FAILURE;
- 	}
-+
-+	/* Open the partition information protocol  */
-+	ret = boottime->open_protocol(handle_partition,
-+				      &partition_info_guid,
-+				      (void **)&part_info, NULL, NULL,
-+				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to open partition information protocol\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	/* Check that cached partition information is the expected */
-+	if (part_info->revision != EFI_PARTITION_INFO_PROTOCOL_REVISION) {
-+		efi_st_error("Partition info revision %x, expected %x\n",
-+			     part_info->revision, EFI_PARTITION_INFO_PROTOCOL_REVISION);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (part_info->type != PARTITION_TYPE_MBR) {
-+		efi_st_error("Partition info type %x, expected %x\n",
-+			     part_info->type, PARTITION_TYPE_MBR);
-+		return EFI_ST_FAILURE;
-+	}
-+	if (part_info->system != 0) {
-+		efi_st_error("Partition info system %x, expected 0\n",
-+			     part_info->system);
-+		return EFI_ST_FAILURE;
-+	}
-+
- 	/* Open the simple file system protocol */
- 	ret = boottime->open_protocol(handle_partition,
- 				      &guid_simple_file_system_protocol,
+Best regards,
 -- 
-2.49.0
+Peng Fan <peng.fan@nxp.com>
 
