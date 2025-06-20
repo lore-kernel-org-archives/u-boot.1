@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A5B5C7115D
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 17:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC404C7115B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 17:49:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 613D082D60;
-	Fri, 20 Jun 2025 19:49:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ACDAB82D4E;
+	Fri, 20 Jun 2025 19:49:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PRcTiYDC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dqOEXtbE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 809B580E9A; Fri, 20 Jun 2025 19:49:29 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 9D53882E08; Fri, 20 Jun 2025 19:49:31 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D3E580E9A
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 19:49:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68B4482D4E
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 19:49:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-2eaf96c7579so1080468fac.3
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:49:27 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-72c47631b4cso1369649a34.1
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:49:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750441766; x=1751046566; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750441768; x=1751046568; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/zuecDb3NJ+Ud3eCWv/bA206a6jsY7KGlMPBsp9yQsM=;
- b=PRcTiYDCT0VjKB5eOGwqHCUEpXqnUDAvtkWATMG5UIbaLF2Pc8Kfs0gSE0JkKpH2GG
- gs0jUUU8cw4XG+12DmuPsL74bf79D6U1LTFKKuZ2Yak/xXOK+be4GJn/EjMO6OHUWMzB
- rnLUIk2LUzZpbGgZXNqoyKEXJZPY5/fQXUxZY=
+ bh=uN7f4o/nkwve2sBEQxjjZzowV1D9NDiQt24N+1lcIig=;
+ b=dqOEXtbEuKkFNvGIwacMbACKClIcaBMPpD63nVypBudIF8Cu+nZE2ChoPoau0qmPUd
+ VUsHpK0ptQ43KjVBsUZn1npbmINB2q2OijtVF6F7fO2vnX/PiyaSwlI7FBItjIKctJeH
+ cX8dpZANYJpwcjgpUO+ajZXrKTog1U3Ltpo9E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750441766; x=1751046566;
+ d=1e100.net; s=20230601; t=1750441768; x=1751046568;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/zuecDb3NJ+Ud3eCWv/bA206a6jsY7KGlMPBsp9yQsM=;
- b=BiCzORLPcSjHGXTupwXakZ+i4pkG+WxMfSE3O9Wx35L/iIfc0kZ//qM0tNWTgkcwFE
- Cv2VpnIkytji16hWBiDseWRgOQY9sad/z9JxKm+JStvFoszXYCKMvIqQDTVdqtY14KG0
- SO+PtvR9wAHTLNri1yzjZhqgVdmazhKZ4J3qr/cirOrvYamxR7Tly0uey5YzIf9y7dpE
- 2skriV1fJPPq7gIu9ISTm4sDLxDvrM686G9XR+TZ/BpBbncjlHoT2N5km5JNAOg0Jy7A
- bbxydY0/mTyYb7U4PNAXeWr7AgPRqdAvcth8HkfqllemXE3bc9PgTbTbxSvjDpTBHh/7
- d7FQ==
-X-Gm-Message-State: AOJu0YzhC/z/I6l2X1t2qK3NyksHH2nyBMcFX18DTWb3VF98xWr9XWap
- FnJiqMg3CfaHQ1YbWj09wUOwZn/KaH94EfIroldmKIXCxMut+U/BLFhTcMY9u/ydMtZeTL0sE5S
- l9kGJqWU=
-X-Gm-Gg: ASbGncsAJAueUpkmpgN3nNaFZDBH4MM5cj1oi4H/JH1M1WAsm4P6wy6VP77/FpPYXzl
- Fbdm37aJk2dH2xZUvJ/j+PC1PBhRh+xH+rKSN3bAT7V7U9gCgViKrY5CV5FRisSq78WyGU8dnuK
- xoo1cSRwSVzBMhP40mF7pPd6WTyKx+W2JqQ3QqIQtvNyLNxV9SvlOowXo1+xnJxXRMnkvV6kSHX
- brTmvzdnOPgCanelfVUNoklwfbqqXrED9ySEoGvHU8y4FgLiu4wgWkUtvCRHSviCpRnvHVczFoF
- a/Omd+Fkw5BGaLBV21exJyBDf5Dyg+3xk2HlLyePci/9dn8PPHD8LVH/Edk1fB158wJLqgaZkuE
- 0wFLFTEfb+KqQlP0MDjf1mq+QfVEnwQAA
-X-Google-Smtp-Source: AGHT+IHRBpt0NZ3Y9zKbonzFImUuFW6P0Lpb1lmKAhTIWVLfiYJktLHAVY0i+Ar2O6dKnV05lOyYNw==
-X-Received: by 2002:a05:6870:1615:b0:2eb:b6a2:8d77 with SMTP id
- 586e51a60fabf-2eeee586c38mr2904139fac.29.1750441766026; 
- Fri, 20 Jun 2025 10:49:26 -0700 (PDT)
+ bh=uN7f4o/nkwve2sBEQxjjZzowV1D9NDiQt24N+1lcIig=;
+ b=lQ1EL7GAs8pEwppRq5EU9K1xOAbYnNIfB6XPZ1yMgooW/Ycta6Tm6IytPUD8+T/lOk
+ +dubcBIZJ1gejQlFwDVQvpCrvWR6PGADwTBFese9LK2IF5MvNK1BapzCe4KWEXMLSG/R
+ FloQEL3n8+6NMJGyAF7BlDgfQgZf73pvarBiuanC6JUlJaKFQvvXXJPKJs3zAC+rO+m7
+ XwVlD7BthbupV173pQRbLI5E7O6Lw8ohe+UvRagXjqo38ngBPZOaYsA42ztTcemYKNrx
+ kxnilHpr1xb3xz8lES/zAQzkEf33Oyom59mZtD8XzZtiiRyCaWr8WwYZ5r3zO0W2ScCX
+ Rh5w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUHje5B31xhl+bJm/JnnE4pxURe9VYVKSlxW8IvYoD069OUcZ/nYVVZfOTVAvsBM9lZgCe/jJo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwksK00F4JgXefCSCwfnqpd6IsvuhsOeMP8fM/wcwoHwwx9MCkk
+ 3PhTF8yeRYl+f4aE9oHlbs8LEIjFhnHxp4jIVIgHEEa36ddA02ZfkIlrHrx0IPj9ga4=
+X-Gm-Gg: ASbGncseiTVVEtSh86mbvBaQ9wyPCyY6dogZ2LfU4yjpZSies3kBFX3IV5mGRRebxq4
+ txmNCPOmUChfsIUYpdLnRqEVuqvfjnhmgfrcK4+e/jssknTyg8DMG0/aLWTDjkeMpIbFfUl4Zy4
+ mmBWxJ0ArMsD/kYQsofo0i+pBEN5BbIxH/9JOAfUbdDNk63awkFrolqX089CwcG/z4FFO0qI8H2
+ 8ISNzkHFs1A/xvt1swBySCAvrvYR+aCwWP/7ABzfUUL4Owc+q/YKCNUc59KWKntIFwJ24cu21Cq
+ 8Slhvh9ijkLZwJsWjGCP5+mSINAQQCLxfzmm0kD5i1Dei1CNdKozjT6B6httRlrjoSBHI19jqYn
+ jISFDoQdSTcHWi0YopaF+Pw==
+X-Google-Smtp-Source: AGHT+IEG5oLhyV7tI3gu6VMzV39nWYDeR4i8xqxH/OOui/Dfx633o/AnOLGivJPEcqFx3LL3E/zoxA==
+X-Received: by 2002:a05:6870:2397:b0:2c2:174b:c829 with SMTP id
+ 586e51a60fabf-2eeee38e7f8mr2482495fac.15.1750441768087; 
+ Fri, 20 Jun 2025 10:49:28 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ee58bc74b2sm480067fac.0.2025.06.20.10.49.24
+ 586e51a60fabf-2ee58bc74b2sm480067fac.0.2025.06.20.10.49.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 10:49:25 -0700 (PDT)
+ Fri, 20 Jun 2025 10:49:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: open list <u-boot@lists.denx.de>
-In-Reply-To: <ce9f3c01-1025-48cb-8f4f-aa27781fa5df@linaro.org>
-References: <ce9f3c01-1025-48cb-8f4f-aa27781fa5df@linaro.org>
-Subject: Re: [PULL next] u-boot-at91-2025.10-a
-Message-Id: <175044176486.3427696.6123024821098241284.b4-ty@konsulko.com>
-Date: Fri, 20 Jun 2025 11:49:24 -0600
+To: Simon Glass <sjg@chromium.org>, Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+In-Reply-To: <20250112034213.13153-1-semen.protsenko@linaro.org>
+References: <20250112034213.13153-1-semen.protsenko@linaro.org>
+Subject: Re: [PATCH 0/3] bootstd: Fix efi_mgr usage in bootmeths env var
+Message-Id: <175044176689.3427696.5945400433067455935.b4-ty@konsulko.com>
+Date: Fri, 20 Jun 2025 11:49:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,22 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Jun 2025 10:36:09 +0300, Eugen Hristev wrote:
+On Sat, 11 Jan 2025 21:42:10 -0600, Sam Protsenko wrote:
 
-> Please pull tag u-boot-at91-2025.10-a , the first set of at91 features
-> and fixes for the next 2025.10 cycle.
+> Defining the 'bootmeths' environment variable with efi_mgr causes NULL
+> pointer dereference when running 'bootflow scan' on the E850-96 board.
+> This patch series fixes that, and cleans up the surrounding code a
+> little while at it.
 > 
-> This feature set includes the addition of new sam9x7 SoC and a new board
-> named sam9x7-curiosity. There is also new support for sam9x60 compatible
-> at91 watchdog.
-> 
-> Thanks,
-> Eugen
+> Sam Protsenko (3):
+>   bootstd: Fix memleak on errors in bootmeth_setup_iter_order()
+>   bootstd: Probe bootmeth devices for bootmeths env var
+>   bootstd: Fix incorrect struct name in bootmeth_setup_iter_order()
 > 
 > [...]
 
-Merged into u-boot/next, thanks!
+Applied to u-boot/next, thanks!
 
+[1/3] bootstd: Fix memleak on errors in bootmeth_setup_iter_order()
+      commit: 11319e0e2bbf7b3892658d45017cd80c41ad961b
+[2/3] bootstd: Probe bootmeth devices for bootmeths env var
+      commit: 8da358c0a15a4f538d561602f600b2695fedeb56
+[3/3] bootstd: Fix incorrect struct name in bootmeth_setup_iter_order()
+      commit: 8c61fc082e9ae045534dc2f18ed50493adf35e6d
 -- 
 Tom
 
