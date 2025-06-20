@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754D4C7115C
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 18:54:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D500C7115B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 18:59:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0D6182BA1;
-	Fri, 20 Jun 2025 20:54:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0177582BA1;
+	Fri, 20 Jun 2025 20:59:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wx4HCG9+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LkfSv28M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C463682BA1; Fri, 20 Jun 2025 20:54:32 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 985F882CBC; Fri, 20 Jun 2025 20:59:36 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 994CD80C83
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 20:54:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9985C80C83
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 20:59:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-60402c94319so1163342eaf.1
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 11:54:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-711756ae8c9so19529707b3.3
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 11:59:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750445669; x=1751050469; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zr2H8eppeLTBC/0lBYluBRzooNse3vDbMmpcqWqw77o=;
- b=Wx4HCG9+sX0S6lCvS8ckFPvnDCSG7uIqEd2iwJ+NR/42hWd1ngdIqVtghxxhw+jnY7
- QurpOnGkolSbY+UT6M3GyVcrwurfVT94GzUi4jjXvYc4I/8Q+tSLCgLUJfHpo0A7CRQd
- HtHHhifqevAuz3d5QXS5p1BzGUJ0DGLJhrKsQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750445669; x=1751050469;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1750445972; x=1751050772; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zr2H8eppeLTBC/0lBYluBRzooNse3vDbMmpcqWqw77o=;
- b=TGt+2ewNTGMMvRln1gTKfsWlIJjkbO2Cp4zMEHx6uQ91xv9aIkBGdchkm/GI8Ht87T
- VgjKK+g79e/ZC7k7a0PsuGxJKHIwfCUm7mipdV7JRrQEvYLWsnqXABqMHD+FWYqINdwW
- AHEJ+VhcD9ZWXnO98CelMiJu9H7Uh14Wkn4j6g9jS87r1hfgp205h3xDs6Yu0aCD2Ink
- DkeX9I7MAH82fAn8BUKdrXRvRI0PhHgVI6V9R4/kpFr72CM4KPSgaYRk6ICDL5SanmPx
- xJ/bysDxWW69HpehdqTckEAOiU7YggDSVRIlzibDRDHrk9M6v3niUJETa2t08FB8Yozg
- owow==
+ bh=qSBpenBJ3yYYE2u+arGgSZUHwwqkBRlR+nQm5FaG+Ck=;
+ b=LkfSv28MSX2tKg5WgPv85WSMUDNWl17tyoUDyk1Azo0UL83xLPWIIWHh96iBNjP6pY
+ dnYkMLQ0VTQFMLpJbJzNOpOae7/o0xiSiZuLj0Fk61aLvGfIwR2j1y56dwViKzRX4I4F
+ M9sFJt/P/QrqzG5l52MIWB1pc4L2lG8awEFS6lJzTRv6asDSpmHKfFZ2rbZ24kKplgoV
+ GrxiaKYgo4K8e6Lt8CHr+dq3pkiOGJsirPXVokXL18cD6ixfQgoZuHi0jQB1nWFpQe/L
+ 4Dm6A7SbWIawKLThIf3Y6y5wQr/FAYmQtDqXtHQLmhvimmWce64150eBhT/g5qFv/Vlk
+ RDfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750445972; x=1751050772;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qSBpenBJ3yYYE2u+arGgSZUHwwqkBRlR+nQm5FaG+Ck=;
+ b=Li+ACgjQt3BABeg4H59cEMIy9aVacVjN8c8CX3UTzmDR2MewmX3HY+xKjqsAZ11okA
+ x4yzIWfmPpKi+Qx7E/dv571BhzOt1KiE988zlT5+jZUp5UyoiWcAhznP3i3QYEkvDA+U
+ qpgokhtUqBpN/t5NaRNkRv6RKcU1ftsL7SJ3M75+DJspf/3MK3zDNq7faXtVHtBBqp2Q
+ F7PpiieXtk5F8VohCx9tyAVtTZMzyuH6lIyZx3Nbl1YSs81sYU6TtDvC+cppPQ9ybGhD
+ TKGaYxo1oG/T/aQ7/lJKOvBmYuj8h9gshfWBvm8X9zye/8Ncmqd5x11prIo88w3kbHPp
+ WRPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtgdsi+5lj9FtpdihUC3WIpuCLaz3Lmc/IN4d48yniKsQr2BwO90Kr1ANC8ay1hTSHkZjDqBI=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywfib5wABUknz/yP9oC6WKUYqdZWpaaIM6KQH0pcJvtk+TKwz6O
- C7sIoB0c1MDu910JAFx6AytdsGN57LTDMb/YydW5pF25ruLx5SDt6AIfux87A2Za5gA=
-X-Gm-Gg: ASbGnctDejGfqZPOpzw3GMEQw8ETrKjqmVGJehMlayuG5Pg1imPa3qEHN7wP89OtSQ7
- oCaPC621eQ5nbRbIB4eKH1gJPG5cgDb5ZwtpgAGusnIWorRDmF1Z30IbYR+erHZZ4rW+wC6onat
- 6RcJC6ybn3yfANM6Uh42I97eOW8nmiCIiohDLJLM29IDHws4YBm9AYY54HC/BokbJM6//A/Y3gD
- 5pEYvKa6SW42ZY0qaemH1MFvIXpEfdTkx9FYfTlG+1z2AgVA96CRYbWtfsm9hczZi/6hcA+84im
- W5c/oNQeWMuD1LrKRSPNALdWpn3l3k8Xdqq8vlPMLYd4Z34x2wDZAgxlA3cv8V0MNHpzJVJv/vU
- cdD5pkFsX/YcGOhHZIjXp3Ko=
-X-Google-Smtp-Source: AGHT+IEX7PCdkfzwsO/Qp1ECQqu89ANITajdHOJNrZrLjrX68XH1aaOtftxvfRPoClvVUWcm2uCJiA==
-X-Received: by 2002:a05:6820:1986:b0:611:3eb5:7291 with SMTP id
- 006d021491bc7-6115b8a100amr2939757eaf.1.1750445669308; 
- Fri, 20 Jun 2025 11:54:29 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6115b6ca9b3sm318442eaf.11.2025.06.20.11.54.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 11:54:28 -0700 (PDT)
-Date: Fri, 20 Jun 2025 12:54:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] board: samsung: e850-96: Fix MMC devices in EFI
-Message-ID: <20250620185425.GM216500@bill-the-cat>
+ AJvYcCWNAglCvIh3b1e7Y/0gHf1hhBZmvFSsAYPwGRF0OAdpix4d65eZQFrDRWraAJi9g3cGKmdhj3w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyw7/jV4V60PgKkQK+w/iMsCWTjs2KgxnJxLIoEIPBRwxhDSrWw
+ Ec+YL6CLQS2WdBbCCsX4Z3KxQqbz6DJhu6xHgcgibRtNuq/C2YrHW1231FsensCxKzFy4kx/mB9
+ Nwb590+YiMBsbQ8IVSZOhELjXwihe4smdmTEs4WqAGA==
+X-Gm-Gg: ASbGncvK0RONeVtPxwtF1ZVsLiUnDzP8n4+ZWE/AJA/fnuy5jVtF0oX962AQs2dNZPk
+ 2GLlv6nYvJiYwYPffVTZre894q3bq6lcwrnJJGy7fpebj3QaHRg/B7rlkVwu0X5m1YHrVX8Wg06
+ P3w9BaQ3vtHCIICFvlEuAYt1kL192VCLYzNGs2gzW1vaRfdZR6kPw9N+tFJjzIk61OAzN0w/LK0
+ w1tcqa1d/pAAr1t
+X-Google-Smtp-Source: AGHT+IE9I13/pKqDtvP/6EqYsRCUCA4ZtOKl/8QKwx2aB+QYBcfD9Hjkpcn73NGsqwsvaX/zQu6/rNkvJoNv39N1XRA=
+X-Received: by 2002:a05:690c:6088:b0:70e:2168:7330 with SMTP id
+ 00721157ae682-712c64fd6e2mr64282387b3.19.1750445972364; Fri, 20 Jun 2025
+ 11:59:32 -0700 (PDT)
+MIME-Version: 1.0
 References: <20250620022556.10363-1-semen.protsenko@linaro.org>
  <20250620142058.GJ216500@bill-the-cat>
  <CAPLW+4=JkVWoNaK5f98fRXOLZOQWc462U=EaDfYsXGmYBDbYnA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hn7jWGg54TfV49af"
-Content-Disposition: inline
-In-Reply-To: <CAPLW+4=JkVWoNaK5f98fRXOLZOQWc462U=EaDfYsXGmYBDbYnA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20250620185425.GM216500@bill-the-cat>
+In-Reply-To: <20250620185425.GM216500@bill-the-cat>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Fri, 20 Jun 2025 13:59:21 -0500
+X-Gm-Features: AX0GCFsNnijCh5iaXPRPech3Yyx7CrdpkPPmlD0bkZu3oOvbQ1nZMzcUDCad6CQ
+Message-ID: <CAPLW+4kZCtOddQtmYrku=T_voWa6Gnn8SknTVGUo8routfEgNA@mail.gmail.com>
+Subject: Re: [PATCH 0/2] board: samsung: e850-96: Fix MMC devices in EFI
+To: Tom Rini <trini@konsulko.com>
+Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Jerome Forissier <jerome.forissier@linaro.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,83 +101,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---hn7jWGg54TfV49af
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jun 20, 2025 at 01:36:09PM -0500, Sam Protsenko wrote:
-> On Fri, Jun 20, 2025 at 9:21=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Thu, Jun 19, 2025 at 09:25:54PM -0500, Sam Protsenko wrote:
-> >
-> > > Avoid using MMC in board_init() to make sure disk objects are created=
- in
-> > > EFI subsystem later.
+On Fri, Jun 20, 2025 at 1:54=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Fri, Jun 20, 2025 at 01:36:09PM -0500, Sam Protsenko wrote:
+> > On Fri, Jun 20, 2025 at 9:21=E2=80=AFAM Tom Rini <trini@konsulko.com> w=
+rote:
 > > >
-> > > If it's still possible, please take this series for 2025.07, as it ma=
-kes
-> > > EFI functional on E850-96 board.
+> > > On Thu, Jun 19, 2025 at 09:25:54PM -0500, Sam Protsenko wrote:
 > > >
-> > > Sam Protsenko (2):
-> > >   configs: e850-96: Enable BOARD_LATE_INIT
-> > >   board: samsung: e850-96: Load LDFW in board_late_init()
+> > > > Avoid using MMC in board_init() to make sure disk objects are creat=
+ed in
+> > > > EFI subsystem later.
+> > > >
+> > > > If it's still possible, please take this series for 2025.07, as it =
+makes
+> > > > EFI functional on E850-96 board.
+> > > >
+> > > > Sam Protsenko (2):
+> > > >   configs: e850-96: Enable BOARD_LATE_INIT
+> > > >   board: samsung: e850-96: Load LDFW in board_late_init()
+> > > >
+> > > >  board/samsung/e850-96/e850-96.c | 9 +++++++++
+> > > >  configs/e850-96_defconfig       | 1 +
+> > > >  2 files changed, 10 insertions(+)
 > > >
-> > >  board/samsung/e850-96/e850-96.c | 9 +++++++++
-> > >  configs/e850-96_defconfig       | 1 +
-> > >  2 files changed, 10 insertions(+)
+> > > These should be one patch and also I think you want to disable
+> > > CONFIG_BOARD_INIT ?
+> > >
 > >
-> > These should be one patch and also I think you want to disable
-> > CONFIG_BOARD_INIT ?
+> > Thanks for the review! I'll send v2 in an hour. But I wasn't able to
+> > find CONFIG_BOARD_INIT option:
 > >
->=20
-> Thanks for the review! I'll send v2 in an hour. But I wasn't able to
-> find CONFIG_BOARD_INIT option:
->=20
->     $ find . -name Kconfig* -exec grep -Hn "\bBOARD_INIT" {} \;
->=20
-> initcall_run_r() seems to always call board_init() for ARM and other
-> architectures:
->=20
->     #if CONFIG_IS_ENABLED(ARM) || CONFIG_IS_ENABLED(RISCV) || \
->         CONFIG_IS_ENABLED(SANDBOX)
->         INITCALL(board_init);    /* Setup chipselects */
->     #endif
->=20
-> Interesting thought though. I did a brief analysis, and it looks like
-> there are 79 boards which have empty board_init() because it's not
-> possible to disable it at the moment:
->=20
->     $ grep -Pzrl "\bboard_init\(void\)\n{\n.*return 0;\n}\n" board/ | wc =
--l
->     79
->=20
-> Do you think U-Boot could benefit from having such an option?
+> >     $ find . -name Kconfig* -exec grep -Hn "\bBOARD_INIT" {} \;
+> >
+> > initcall_run_r() seems to always call board_init() for ARM and other
+> > architectures:
+> >
+> >     #if CONFIG_IS_ENABLED(ARM) || CONFIG_IS_ENABLED(RISCV) || \
+> >         CONFIG_IS_ENABLED(SANDBOX)
+> >         INITCALL(board_init);    /* Setup chipselects */
+> >     #endif
+> >
+> > Interesting thought though. I did a brief analysis, and it looks like
+> > there are 79 boards which have empty board_init() because it's not
+> > possible to disable it at the moment:
+> >
+> >     $ grep -Pzrl "\bboard_init\(void\)\n{\n.*return 0;\n}\n" board/ | w=
+c -l
+> >     79
+> >
+> > Do you think U-Boot could benefit from having such an option?
+>
+> Yes, it looks like we need to clean the code up to match what we have in
+> Kconfig now, thanks!
+>
 
-Yes, it looks like we need to clean the code up to match what we have in
-Kconfig now, thanks!
+On it. Would appreciate it if you can take v2 as is for v2025.07, it
+fixes EFI on E850-96.
 
---=20
-Tom
-
---hn7jWGg54TfV49af
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhVrl0ACgkQFHw5/5Y0
-tyypZwwAqbUEFB8KWwejQo6thmV/C4Pp14vVBLfqwEjnMs+tTk/RBXf1seCTMIXb
-GlARjFf1v6yaZwa9D9+MySr9PdPrOEkVRsFYGBNBli1n1M0s5RpIrE/yp5eMbsmW
-8rsBRYfqtIkfMKvB39gkIq0Db+nENAjQe88ENVj1qt8Opr6YVjdhERU8UwRIOvEn
-IrBPsQU38Q6hqy2ySV0wWlStrHtpn2wzrEBdhzJq46/LxnX5C07j6IMd2VtmkHet
-it/Ab4gh//RYR1nqEK75/hylIF9s7LI4txZyn7ek/IqOvIMNrx9gf4uJMilG1Alb
-ElRB6BOBz9f+m7gIigJQtYZ3TzQ7H+qoM+9PlQ6DghxLs4TjmBafBYFNOBF1Hw8U
-GE7QICXVmbxbnN9ZKOT//CichyOXcp2Cnioqh2sekMsuiYfu9QQ9TBta+ji5r6vB
-1aMMhefVUCvlzjLESsFfNDtBO/PUHt5tgYYnVKa34LZ2UVyhSQvnkZDDCm+DSx0V
-4JmI/sdG
-=pczN
------END PGP SIGNATURE-----
-
---hn7jWGg54TfV49af--
+> --
+> Tom
