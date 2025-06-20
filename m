@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8561BC71155
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA07C7115B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:56:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E94182D7C;
-	Fri, 20 Jun 2025 10:56:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 409F382DBC;
+	Fri, 20 Jun 2025 10:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u7nfWzbj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wwLZv6GL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97E2382D7C; Fri, 20 Jun 2025 10:56:33 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 8F63C82E28; Fri, 20 Jun 2025 10:56:40 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A746D82E17
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:56:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9512482D6F
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:56:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3a4fb9c2436so807836f8f.1
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:56:31 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-450ccda1a6eso14255305e9.2
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:56:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750409791; x=1751014591; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750409798; x=1751014598; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=ENfwUEKQuTn05zB9DeGiH3b7FviC6d/wPiV3h1/av1k=;
- b=u7nfWzbjtVEDatTHLH7kkTJ6vqRn4UDQkWIvRO14CaXqkj0eUM8nzC+EVmWpvRiKse
- 54rFfg6YmjpryPW6FixFc6MiXKjYzQQYhXZ5JeYqs4/rmKmmsbm5pEe9L8GD5pIMvz3M
- OBttkCUulN+i51VJaAyWPqyk+sOZvR/mQ4gZQbxiTnZfey7OEvBD60Ys9dRr5FHx5lZ2
- nLGAUpPGVUiYeH93CDJRm8486RSV46UbKbfc3E8KKOR0uew0rJvNbgXzI+6wtbN81ley
- Ujrai/IjQDwGPuUwysxuyVNmT9+oO0CXjjgKptzxtPIhUcR32cty5E+TQzFYih9A3ZZA
- 7tow==
+ :reply-to; bh=Im9oMgdVNXmNpAwKKEex+oubnbay24Ltk1SnGzjT3ZU=;
+ b=wwLZv6GL8JOp0BqQmx3qOB5hSG1KiFSgyO7826UhzXrHjy+Dpvd9BLJLjRKnzwVUE1
+ 4JgWamAKdMpwmf07thPwFitArZ/HPyKuw8JDYxNaQ6fc3xa7YzdtzU33iPykaVxHzmmi
+ meyUf4WYi6BO8pb6tFiwxMW2hQz0isyF0TWPvhPkIeJI30BVYDlfC5y7I8arGt171/dh
+ KGN+qxlD8mBPsgoLLWbyoP4GVM/lTyKVvBCrXKhYu98vQjhYTW43pY+EUQdQZJBX0egS
+ EhQgVJLjmZ+ebOkKxsPlERKxE+yDwxOosu3hFQ/TWhn6EjK50Bdtc2vy+dzMl91Nobsa
+ ZzQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750409791; x=1751014591;
+ d=1e100.net; s=20230601; t=1750409798; x=1751014598;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=ENfwUEKQuTn05zB9DeGiH3b7FviC6d/wPiV3h1/av1k=;
- b=UZJYdJ9kLPmNmjsatBOKbwjZnCjuD7exU8u1GDMmfph7/pVMISUyshhI8un6hVKXcb
- We0zTdoJvv9v0w6Bh6XdkvpJM8fYjB7bgICHFauMWR0Y7NFlRGL8NnbAY8blfvhJbq7L
- unkyTLrKwd/8WGzrrfB1vceVVSKqjHf8RVP3zjwsht8wxarbeWPwi0p+dQBMER+TTEEH
- MzPnPqvgWSqiLWH1ntf/tLT1suYYdbO59e8XImrPgmhcPs3xGbUp5E8d71zXRLdZKaTw
- zExATuQ2vTh+mao/wP1nfZ0yns/mTEW3Ez2joSY+LWlOdhb1Hd7v7YGzISzp/o0f7HM1
- ogpQ==
-X-Gm-Message-State: AOJu0YwHBYtXl4ClxEv2l2IGCSHcFRwtQhVdVNCuF7AKZtap8LoYqo2S
- 2ZqIxdaavpF68CEdyPngxRRAia4Tdze71rfh6wopVegfPj4F4/S+v03Tjj3rG0VMTEo=
-X-Gm-Gg: ASbGncugUv2zccXd/H2D1K6N+sCTdlW6UCL/pem9Gid+YkfJxKbq4VWlhsz2MuzivkE
- Grbd+qkCE//rdmLULySHgOsdeC4pAjRsux0ypQYFLyNq/XDTz0aItr6VSNCazJeDdqbgMhYwNQ/
- kmSKIFjz07tFV6ubkW+lt3NN4nJU+YqaGvoTTbPJAsoQeNF3ztTrNiOHAHlN7DlXO0PdxMY6SkN
- BUOmL3cagnVTfALdq9a+EmaZyiZ12on6iHTuKLgz61bJi0RrYaq/kFzSCBMIKcZLZsntbSuXfPI
- CkiQ4LxHwzoYF3+Xj2N5wjABgxxAIb0iNGEdAfY6Hh1eWixB9SUCwXuqgd+RrWFvukeSYbJEhiO
- Qrl8hE571lQEaWURCc1Y3JXAntSm0o6nGPN5F5ls=
-X-Google-Smtp-Source: AGHT+IFfc4y2Pt3ZSalCQH7d/Yj2ck7cfteoh1piimTKvF0Y0EQj45qwyBPm5eFR7AvtoGyV+l01iw==
-X-Received: by 2002:a05:6000:3111:b0:3a4:ea8f:efe4 with SMTP id
- ffacd0b85a97d-3a6d12a0d6dmr1423361f8f.18.1750409791101; 
- Fri, 20 Jun 2025 01:56:31 -0700 (PDT)
+ bh=Im9oMgdVNXmNpAwKKEex+oubnbay24Ltk1SnGzjT3ZU=;
+ b=QGsm6wxXvr5Q2C0xrIiKyprWwJDe72olYwIkobBx+ICEefL8tR9iHjozVd9yNNklhM
+ rZFXuIfPcdw8ycTW0WMPdFMg5tDzdp+OGifqO9h3VxTLZneH+J5FcyejKnPsLtJN/Bgv
+ HfzbkGI2B8wsKRpKTp71XppbOn+Eem7pVrcWYtIaEtjSefCcDH6HqoV26c9Y/P/o1a5y
+ u2avHFPndGVi9NLWmHf9lXEDhJ8RT0UopmK56X4Ms2YzMBysBZfF+kd9CCDtFGeg9pa4
+ 59djYPSNvDZN2tiLBhPPJwG4zORr8fvUxQuGXUhPNBm/WB1piiNIzeI7sVvuAVVtBmew
+ OdHA==
+X-Gm-Message-State: AOJu0YwSwVnzLqyfmf7bxW6pTrG6CCZizDr4i7Cc3v+MftWbu+cROp41
+ fgIjGGqKJS+UH3GumkQ+Ym2OIlwu4g99wHTt+VtCeTbqTuaksX6CkFm/ccpqe63oTr0=
+X-Gm-Gg: ASbGncuj4stU+N4jbClEd6MxdJdh/+x0UDMw5slReMQ/jbaRxWQHBXJ0jHRZd+oqhil
+ NfIZMDaN/Fy3mRcOa3qFSyfpnGqKCCg0fFvVk8OQwIcvL6gUOalzzihyNvcdVKhH996lkspe++k
+ fw3MpAFhgS5lC8Hs179a0USglKogjNlHNKgDE4k2rDwpO/NHDxFmPZeZ9rTfuE9rs1p7WcJsWtV
+ RIN1lz32DDkq0ZiorB8bnq8Bu2C3gGwDtS46yErJdIYzaiCP8ezrUi4V+NeD8QrKyi0EPJ/s3nk
+ t9gJJCWSOSTthRtn/axfPFcRdaLLdnwk5vWdlCAI+V/3dZ5oB96GSzxD65fEG6OZN+5E8qIhgyi
+ eJN8uZxL6fmkQj7li/vpxj0PqURF82Qm1n+7EAjg=
+X-Google-Smtp-Source: AGHT+IF3SIMBrAbMaTEM74wD9dhMDS7z1ducWNmG+jvBySbAFtSti2Imvh3WzSkOI7XoaOIZrrr6QA==
+X-Received: by 2002:a05:600c:4fc5:b0:453:2066:4a26 with SMTP id
+ 5b1f17b1804b1-453659ee9famr17537815e9.16.1750409798081; 
+ Fri, 20 Jun 2025 01:56:38 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:3d60:2fa3:b982:4627?
  ([2a01:e0a:3d9:2080:3d60:2fa3:b982:4627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4535eac8c16sm51629345e9.19.2025.06.20.01.56.30
+ 5b1f17b1804b1-453646cb692sm18550875e9.2.2025.06.20.01.56.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Jun 2025 01:56:30 -0700 (PDT)
-Message-ID: <7b9161f6-df38-4edc-8aa6-2d5ab5d8e9ea@linaro.org>
-Date: Fri, 20 Jun 2025 10:56:30 +0200
+ Fri, 20 Jun 2025 01:56:37 -0700 (PDT)
+Message-ID: <d801eac6-7aff-48ef-b571-d73c0c63807a@linaro.org>
+Date: Fri, 20 Jun 2025 10:56:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 7/8] qcom_defconfig: Enable SM6350 clock and pinctrl
- drivers
+Subject: Re: [PATCH 8/8] board/qualcomm: add debug config fragment for SM6350
 To: Luca Weiss <luca.weiss@fairphone.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
- <20250618-sm6350-bringup-v1-7-3cc22aab7a7a@fairphone.com>
+ <20250618-sm6350-bringup-v1-8-3cc22aab7a7a@fairphone.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250618-sm6350-bringup-v1-7-3cc22aab7a7a@fairphone.com>
+In-Reply-To: <20250618-sm6350-bringup-v1-8-3cc22aab7a7a@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,33 +132,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 18/06/2025 16:25, Luca Weiss wrote:
-> Enable the drivers so that SM6350 devices can boot with qcom_defconfig.
+> Add a fragment similar to others to enable earlycon.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->   configs/qcom_defconfig | 2 ++
->   1 file changed, 2 insertions(+)
+>   board/qualcomm/debug-sm6350.config | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index b8399701da06e20cb5d21c4de1fbeb38df671be6..068475d59da5890858ee8e48af148db33ffcedc2 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -54,6 +54,7 @@ CONFIG_CLK_QCOM_QCS404=y
->   CONFIG_CLK_QCOM_SA8775P=y
->   CONFIG_CLK_QCOM_SDM845=y
->   CONFIG_CLK_QCOM_SM6115=y
-> +CONFIG_CLK_QCOM_SM6350=y
->   CONFIG_CLK_QCOM_SM8150=y
->   CONFIG_CLK_QCOM_SM8250=y
->   CONFIG_CLK_QCOM_SM8550=y
-> @@ -106,6 +107,7 @@ CONFIG_PINCTRL_QCOM_SA8775P=y
->   CONFIG_PINCTRL_QCOM_SC7280=y
->   CONFIG_PINCTRL_QCOM_SDM845=y
->   CONFIG_PINCTRL_QCOM_SM6115=y
-> +CONFIG_PINCTRL_QCOM_SM6350=y
->   CONFIG_PINCTRL_QCOM_SM8150=y
->   CONFIG_PINCTRL_QCOM_SM8250=y
->   CONFIG_PINCTRL_QCOM_SM8550=y
+> diff --git a/board/qualcomm/debug-sm6350.config b/board/qualcomm/debug-sm6350.config
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1379ddeac93f1beb59bdbff4ae9a90b4f0a0af2a
+> --- /dev/null
+> +++ b/board/qualcomm/debug-sm6350.config
+> @@ -0,0 +1,5 @@
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_DEBUG_UART_BASE=0x98c000
+> +CONFIG_DEBUG_UART_MSM_GENI=y
+> +CONFIG_DEBUG_UART_CLOCK=14745600
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
