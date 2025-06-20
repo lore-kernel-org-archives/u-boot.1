@@ -4,115 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DC5C71155
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2188C7115D
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 10:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEC4382CF4;
-	Fri, 20 Jun 2025 10:57:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0DA6482CF4;
+	Fri, 20 Jun 2025 12:07:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sbCBfD7O";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="KDLsrcmO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66FE482D88; Fri, 20 Jun 2025 10:57:11 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 04B6A82D7C; Fri, 20 Jun 2025 11:07:38 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7945782CBC
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:57:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08C8782D39
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 11:07:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-442fda876a6so14218515e9.0
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:57:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ade76b8356cso276212466b.2
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 02:07:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750409829; x=1751014629; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=g7KNeeS2RRaKlsI26r+lPLpNs4n72K5TTh1X91VdQnQ=;
- b=sbCBfD7O9e+Q3ERH0Tgqvn1NozwSl2LgDcbmGt6nTa+A927XbCybbvXwch6y7lqBkB
- mlVJuaLFS2qOsN8ndidNlvneJ84u4Fre+OcYklaHqsQ0WOagXRQr/koqaXAU7HQqdKLM
- YXFsT377dVRdzW7dEKK69cVbW5RCcNQXNu3SW3sUeQlsfCmS7A92T3kFkrK5Gniy5Hz4
- I8xFy0sLd4EDYZzA0vHaYaDzKSkkJttweV1tiRJqXt3NHRttBeP7xoStYTr0uGWasC45
- +EJq1D7sEwL+OfGDjh7wA9gdj1yFxJetQCnA5QBB9VqbYZr+nSczY6zkJcuUmNuIRABT
- 8N8w==
+ d=fairphone.com; s=fair; t=1750410455; x=1751015255; darn=lists.denx.de;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mIaDmj17uCezT4FfANFV1uNKGfQMJHyz+Mdrkn6xcWo=;
+ b=KDLsrcmOeEMZd0oSJZzF9OB4DqpXC7Ns3jnOrjU8PwN4VG91+JJyTKZGkfvy32IjMk
+ Yxu+noCLGwRx151TQRGqnuDdQ9wCG+3MB1DyDe1L4CrH95fXzes6NfX3IlRse+yF2lno
+ x322Z+doMSQ8PmW11ZznKtQ5uZJAGvj0XKGQcac7K7HTIveRp96FlrUOvllRC4eYItNH
+ p4gdRGwESq2qxSno4wlavf1juLQVaTF06V63pm+e6AkyCJ9pWhugEs+I+N6mWGF9mhDN
+ Cu3tkCjPzVhPmEuyB/ST5w2CeDM2zoftihHE+Nn2wFJ1EghasY+84QdZ95mHR8MECXUM
+ JT6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750409829; x=1751014629;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=g7KNeeS2RRaKlsI26r+lPLpNs4n72K5TTh1X91VdQnQ=;
- b=nPEX4CxmOp3w2UjGrWysVVUaQpLfHSVK+excPpwNjntvR4YTe0AYe9EcfyoLY4bvwO
- dQHPV7pesvgADnKLsCv6PiOSy19CesQRQgnvkAazkD+PtWn0nmg1F1BjhfJiMwYhWBl9
- zOvIk3BEFk/S6cOrII1djSO/Qy1OujWli41zVGHi53UPdoCxiQqi2mroQSGXudcPkAbe
- 3howQZUXBEiwr58TIcivhalpGfBFJDkeA6MwLisWAJqPsZ7sfffftT5fp5UW8w4xYkPN
- LFOFZzgDAvqWGNcPOLUgvhTvkee5plpTZ6a8u+HqEYAkNGcZqsWmtYPNp1Pby/as9SLd
- yn7A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCULzoPLZRqO0VO/acn2/yONmsmLZ7LlU2jetFMHlNkXK0LKXvLTLDXDhDaEwzXGGnJpyE1ORmM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyydcM14MRgnMuyVDkDK4+pm+uuIaIwnA0Xe+baO/lPQz1QnsbK
- 9W5GOg591bAn2YqVgZDd5QvkhAzY8bubDmg5vbIiXQIYGxBCdugB/FaNijs0KtzFgdg=
-X-Gm-Gg: ASbGncuzB0jW8h4ia2lCa/krozUc63QZ+AYeE9ZRIkW/SW4UuceHhGojE9DC8xTl4ML
- VBpwgivEmBN9MuWmop+C4PpV72TIBuxN5L+11Zz/PfpOMGEUAoQ9E8qgFYwfJBj166yRgD7t1vJ
- /NbXDy+zoHVEphjI+FRyKjOHuVTfa/5pRDqkJY0Lv7JgvhpEyUgbRwqJG0Lkxz+c4q47EozQjEs
- 7RRDTLJjMe/dS4abc/o2G0T9iCQCKI+nSnsG1e/8oX3HJOGq+bs7BmAktdCeBXKsF8W23aJHRxG
- ++zkvf0fppH8D5BVXEGZa/G1ubWtlHKXYygAfHLeAxsX4WCldN9mQHzsI7O9MnnYn+aV8kQDyUW
- DiMJwkGZVd6oIuaEIL0o3rpIiQE0ReAv6qrtyqa8=
-X-Google-Smtp-Source: AGHT+IE4R1xqbIHt6rvscgdaxLTZE1j8hJjMqUn4SG2JZkZWJmtTbuelPFupzTkQXVy2Ewp8hEMIwQ==
-X-Received: by 2002:a05:600c:8b23:b0:442:faa3:fadb with SMTP id
- 5b1f17b1804b1-453656c1fd8mr14933875e9.2.1750409828939; 
- Fri, 20 Jun 2025 01:57:08 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:3d60:2fa3:b982:4627?
- ([2a01:e0a:3d9:2080:3d60:2fa3:b982:4627])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-453646cb5a8sm18740875e9.7.2025.06.20.01.57.08
+ d=1e100.net; s=20230601; t=1750410455; x=1751015255;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=mIaDmj17uCezT4FfANFV1uNKGfQMJHyz+Mdrkn6xcWo=;
+ b=jLebUShhsOi+tsX6IgQnQs1Uh0FHcOXk7/Z4FOL2tluO5szZ3vXTXqQ61zENkCdAKf
+ y8D1h5SqBsFe+SPVuvepj6iqUUJDxkRae5ntshVoXgHSSCEAFYSj52csZw+gUO+6eQMW
+ F7oo4v16BszlQSN+R6mXtDPqUBMlm50Wh73lYYa551lgXX22lxMHjqHDXS02Ys/3BUBW
+ eJEOLU9fWSyfSX3+PAFg/YgsVGSopdipo4NqChKloPusauh9Rns+Gl2857E7yhIBGeLB
+ rYt3KEK30N+qIKoDytknELLygbACSydN5OoUq8npaRgzCJHZa8BGM5JcskFK3VZtTR+x
+ L9Ag==
+X-Gm-Message-State: AOJu0YxBHneokVN4MdXVObnKREdY9EiRMOtMvkacmpjC7o+OkMz33jox
+ a0EIlw8dbf80y5gejKkTpVEhVvqTgfctXE9EfInNvuP4i0SdFniNkkwVFWaqFuyAwVE=
+X-Gm-Gg: ASbGnctNOul7SBENf8FCk3VvkRqahQLcoF/R7Qtsw/155CERboK40XOeg2do+hAtQWS
+ +d08tHwjE5LUzZKUrteatsCs68FvTORgLZkakBgceZcY2fTsIAbda8CaxBMhS03ylwnJM5WV0Y8
+ XAF8CrtE32n/BTwbXJUiZvLvaiXummQIfjzn+Cf3LIbNsY6Vm7Q6Ie0vLKyIfByTH/FDOlPQ/AZ
+ lFm3gqN7DyO5UyUOpPRcTuu4cXXOUAuLqPvUZmK7pAt5GiF5Rne48qzn5nZkLRWhJUMgq6GyB0V
+ 8HdoEzSBiiPKOBM8XeEscW0FT8pN82mR5x759AiG+aDDMIXmDkqpf3VBHGL/Seh/IEw0XxKOZri
+ dh6JAuvYoy9TTOadPj65sRbeCDoAlLqk=
+X-Google-Smtp-Source: AGHT+IGOFLok6A34tBJi/+51XibrhW49MUG97hnV2zuObA5rDC7qEo56f2b8v1ZFPWdAghB0MEe2WQ==
+X-Received: by 2002:a17:907:6095:b0:ade:cdec:7085 with SMTP id
+ a640c23a62f3a-ae057d87d58mr189107866b.26.1750410455348; 
+ Fri, 20 Jun 2025 02:07:35 -0700 (PDT)
+Received: from localhost (144-178-202-138.static.ef-service.nl.
+ [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae053e7f53fsm129827766b.28.2025.06.20.02.07.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Jun 2025 01:57:08 -0700 (PDT)
-Message-ID: <f0baf6cf-41c3-470c-93c4-53c3ddfe5af0@linaro.org>
-Date: Fri, 20 Jun 2025 10:57:08 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] clk: qcom: sm8650: add usb3 noc clk
-To: Rui Miguel Silva <rui.silva@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250618093253.225929-1-rui.silva@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250618093253.225929-1-rui.silva@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ Fri, 20 Jun 2025 02:07:35 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 20 Jun 2025 11:07:34 +0200
+Message-Id: <DAR8PXSLCOFN.GNOSXEGBFEX3@fairphone.com>
+Cc: <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
+Subject: Re: [PATCH 1/8] clk/qcom: Add SM6350 clock driver
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: "Neil Armstrong" <neil.armstrong@linaro.org>, "Tom Rini"
+ <trini@konsulko.com>, "Lukasz Majewski" <lukma@denx.de>, "Sean Anderson"
+ <seanga2@gmail.com>, "Casey Connolly" <casey.connolly@linaro.org>, "Sumit
+ Garg" <sumit.garg@kernel.org>, "Jaehoon Chung" <jh80.chung@samsung.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
+ <20250618-sm6350-bringup-v1-1-3cc22aab7a7a@fairphone.com>
+ <7ba396a4-d248-41bd-ace2-6d8f5c4c3bda@linaro.org>
+In-Reply-To: <7ba396a4-d248-41bd-ace2-6d8f5c4c3bda@linaro.org>
+X-Mailman-Approved-At: Fri, 20 Jun 2025 12:07:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,36 +99,83 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18/06/2025 11:32, Rui Miguel Silva wrote:
-> Commit [0] introduced, correctly, the bubble of qcom clock errors to
-> make it easy to spot missing clocks in the platforms, and this is a case
-> of that, add the GCC_CFG_NOC_USB3_PRIM_AXI_CLK clock to sm8650 clock
-> pool.
-> 
-> 0: 7c5460afec3f ("clk/qcom: bubble up qcom_gate_clk_en() errors")
-> 
-> Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
-> ---
->   drivers/clk/qcom/clock-sm8650.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/clk/qcom/clock-sm8650.c b/drivers/clk/qcom/clock-sm8650.c
-> index 364454644a69..7c49e99c005c 100644
-> --- a/drivers/clk/qcom/clock-sm8650.c
-> +++ b/drivers/clk/qcom/clock-sm8650.c
-> @@ -193,6 +193,7 @@ static const struct gate_clk sm8650_clks[] = {
->   	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,		0x39060, BIT(0)),
->   	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,		0x39064, BIT(0)),
->   	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,		0x39068, BIT(0)),
-> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x39088, BIT(0)),
->   };
->   
->   static int sm8650_enable(struct clk *clk)
+On Fri Jun 20, 2025 at 10:54 AM CEST, Neil Armstrong wrote:
+> On 18/06/2025 16:25, Luca Weiss wrote:
+>> Add Clock driver for the GCC block found in the SM6350 SoC.
+>>=20
+>> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+>> ---
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+<snip>
+
+>> +static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] =3D {
+>> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
+>> +	F(9600000, CFG_CLK_SRC_CXO, 2, 0, 0),
+>> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+>> +	F(25000000, CFG_CLK_SRC_GPLL0_ODD, 8, 0, 0),
+>> +	F(50000000, CFG_CLK_SRC_GPLL0_ODD, 4, 0, 0),
+>> +	F(100000000, CFG_CLK_SRC_GPLL0_ODD, 2, 0, 0),
+>> +	F(202000000, CFG_CLK_SRC_GPLL7, 4, 0, 0),
+>> +	{}
+>> +};
+>> +
+>> +static struct pll_vote_clk gpll7_vote_clk =3D {
+>> +	.status =3D APCS_GPLL7_STATUS,
+>> +	.status_bit =3D BIT(31),
+>> +	.ena_vote =3D APCS_GPLLX_ENA_REG,
+>> +	.vote_bit =3D BIT(7),
+>> +};
+>> +
+>> +static ulong sm6350_set_rate(struct clk *clk, ulong rate)
+>> +{
+>> +	struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
+>> +	const struct freq_tbl *freq;
+>> +
+>> +	if (clk->id < priv->data->num_clks)
+>> +		debug("%s: %s, requested rate=3D%ld\n", __func__,
+>> +		      priv->data->clks[clk->id].name, rate);
+>> +
+>> +	switch (clk->id) {
+>> +	case GCC_QUPV3_WRAP1_S3_CLK: /*UART9*/
+>> +		freq =3D qcom_find_freq(ftbl_gcc_qupv3_wrap1_s3_clk_src, rate);
+>> +		clk_rcg_set_rate_mnd(priv->base, GCC_SE12_UART_RCG_REG,
+>> +				     freq->pre_div, freq->m, freq->n, freq->src,
+>> +				     16);
+>> +
+>> +		return freq->freq;
+>> +	case GCC_SDCC2_APPS_CLK:
+>> +		/* Enable GPLL7 so that we can point SDCC2_APPS_CLK_SRC at it */
+>> +		clk_enable_gpll0(priv->base, &gpll7_vote_clk);
+>> +		freq =3D qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
+>> +		printf("%s: got freq %u\n", __func__, freq->freq);
+>> +		WARN(freq->src !=3D CFG_CLK_SRC_GPLL7,
+>> +		     "SDCC2_APPS_CLK_SRC not set to GPLL7, requested rate %lu\n",
+>> +		     rate);
+>
+> Why not enabling GPLL7 only if freq->src =3D=3D CFG_CLK_SRC_GPLL7 ??
+
+I honestly just copy-pasted this part, I didn't think too much about
+this code. But also doesn't the code do the wrong thing when pointing to
+any freq apart from 202 MHz? The warn and the clk_rcg_set_rate_mnd call
+below will complain about/set the wrong parent?
+
+Seems that construct is in clock drivers for qcm2290, sm6115 and sm8250.
+
+Also other clk drivers like clock-sc7280.c don't have any set_rate
+handling for this clock either and SD card supposedly works fine on the
+Shiftphone 8.
+=20
+>
+> Apart that, looks good :-)
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Thanks!
+
+Regards
+Luca
