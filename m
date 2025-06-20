@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC404C7115B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 17:49:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8AFC7115C
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 17:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACDAB82D4E;
-	Fri, 20 Jun 2025 19:49:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CDDEE82CBC;
+	Fri, 20 Jun 2025 19:54:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dqOEXtbE";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="p3qbk4Xr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D53882E08; Fri, 20 Jun 2025 19:49:31 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 956AC82CF8; Fri, 20 Jun 2025 17:54:55 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68B4482D4E
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 19:49:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AD6780E9A
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 17:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72c47631b4cso1369649a34.1
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:49:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750441768; x=1751046568; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uN7f4o/nkwve2sBEQxjjZzowV1D9NDiQt24N+1lcIig=;
- b=dqOEXtbEuKkFNvGIwacMbACKClIcaBMPpD63nVypBudIF8Cu+nZE2ChoPoau0qmPUd
- VUsHpK0ptQ43KjVBsUZn1npbmINB2q2OijtVF6F7fO2vnX/PiyaSwlI7FBItjIKctJeH
- cX8dpZANYJpwcjgpUO+ajZXrKTog1U3Ltpo9E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750441768; x=1751046568;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uN7f4o/nkwve2sBEQxjjZzowV1D9NDiQt24N+1lcIig=;
- b=lQ1EL7GAs8pEwppRq5EU9K1xOAbYnNIfB6XPZ1yMgooW/Ycta6Tm6IytPUD8+T/lOk
- +dubcBIZJ1gejQlFwDVQvpCrvWR6PGADwTBFese9LK2IF5MvNK1BapzCe4KWEXMLSG/R
- FloQEL3n8+6NMJGyAF7BlDgfQgZf73pvarBiuanC6JUlJaKFQvvXXJPKJs3zAC+rO+m7
- XwVlD7BthbupV173pQRbLI5E7O6Lw8ohe+UvRagXjqo38ngBPZOaYsA42ztTcemYKNrx
- kxnilHpr1xb3xz8lES/zAQzkEf33Oyom59mZtD8XzZtiiRyCaWr8WwYZ5r3zO0W2ScCX
- Rh5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHje5B31xhl+bJm/JnnE4pxURe9VYVKSlxW8IvYoD069OUcZ/nYVVZfOTVAvsBM9lZgCe/jJo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwksK00F4JgXefCSCwfnqpd6IsvuhsOeMP8fM/wcwoHwwx9MCkk
- 3PhTF8yeRYl+f4aE9oHlbs8LEIjFhnHxp4jIVIgHEEa36ddA02ZfkIlrHrx0IPj9ga4=
-X-Gm-Gg: ASbGncseiTVVEtSh86mbvBaQ9wyPCyY6dogZ2LfU4yjpZSies3kBFX3IV5mGRRebxq4
- txmNCPOmUChfsIUYpdLnRqEVuqvfjnhmgfrcK4+e/jssknTyg8DMG0/aLWTDjkeMpIbFfUl4Zy4
- mmBWxJ0ArMsD/kYQsofo0i+pBEN5BbIxH/9JOAfUbdDNk63awkFrolqX089CwcG/z4FFO0qI8H2
- 8ISNzkHFs1A/xvt1swBySCAvrvYR+aCwWP/7ABzfUUL4Owc+q/YKCNUc59KWKntIFwJ24cu21Cq
- 8Slhvh9ijkLZwJsWjGCP5+mSINAQQCLxfzmm0kD5i1Dei1CNdKozjT6B6httRlrjoSBHI19jqYn
- jISFDoQdSTcHWi0YopaF+Pw==
-X-Google-Smtp-Source: AGHT+IEG5oLhyV7tI3gu6VMzV39nWYDeR4i8xqxH/OOui/Dfx633o/AnOLGivJPEcqFx3LL3E/zoxA==
-X-Received: by 2002:a05:6870:2397:b0:2c2:174b:c829 with SMTP id
- 586e51a60fabf-2eeee38e7f8mr2482495fac.15.1750441768087; 
- Fri, 20 Jun 2025 10:49:28 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ee58bc74b2sm480067fac.0.2025.06.20.10.49.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 10:49:27 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
-In-Reply-To: <20250112034213.13153-1-semen.protsenko@linaro.org>
-References: <20250112034213.13153-1-semen.protsenko@linaro.org>
-Subject: Re: [PATCH 0/3] bootstd: Fix efi_mgr usage in bootmeths env var
-Message-Id: <175044176689.3427696.5945400433067455935.b4-ty@konsulko.com>
-Date: Fri, 20 Jun 2025 11:49:26 -0600
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=82669a5191=cheick.traore@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55KD6Vdg008345;
+ Fri, 20 Jun 2025 17:54:49 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ WEli/A4Q3I6u2EDJ86EAfYm6EusmxuNZkUrVUW6oVlc=; b=p3qbk4XroWlsP43J
+ CNRiZKD4dvGlaKDfcNutGDfZs8bxkDoYJg6P5F5d2s8EW/jB1hmHkkx+csk5oI+a
+ V61bLHlYjaW6Bk00GegLMI3lDxi7gnkWDusD5MXnfHuR3do9hw+dmw5piDpIgBgu
+ GE+t6Luu1mIYd91OktkqLzH6AI6N45Z7LbYXBdzH26R/FKxzT9HWBe0ejnVTPM+t
+ u2aZLiYBp5yCnpQysBVYowzJKTUQ2c8IfcMM9HaAM29rTnngbZQhzAY7yEpCEnRP
+ w+wrmK/IIyjmE8GgMTGKiQf5XdKHeItxzyiVnfq+KnXIdsLckWojCldOuZLEZOEf
+ yOkPmQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 478x7af64d-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 20 Jun 2025 17:54:49 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0EEC24007F;
+ Fri, 20 Jun 2025 17:54:09 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 669E7B2970C;
+ Fri, 20 Jun 2025 17:51:15 +0200 (CEST)
+Received: from localhost (10.48.86.135) by SHFDAG1NODE2.st.com (10.75.129.70)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 20 Jun
+ 2025 17:51:15 +0200
+From: Cheick Traore <cheick.traore@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
+ <cheick.traore@foss.st.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] arm: stm32mp2: add multifunction timer support for
+ stm32mp25
+Date: Fri, 20 Jun 2025 17:49:58 +0200
+Message-ID: <20250620155000.1258718-2-cheick.traore@foss.st.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250620155000.1258718-1-cheick.traore@foss.st.com>
+References: <20250620155000.1258718-1-cheick.traore@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.86.135]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-20_06,2025-06-20_01,2025-03-28_01
+X-Mailman-Approved-At: Fri, 20 Jun 2025 19:54:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,29 +92,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 11 Jan 2025 21:42:10 -0600, Sam Protsenko wrote:
+Add support for STM32MP25 SoC.
+Identification and hardware configuration registers allow to read the
+timer version and capabilities (counter width, ...).
+So, rework the probe to avoid touching ARR register by simply read the
+counter width when available. This may avoid messing with a possibly
+running timer.
+Also add useful bit fields to stm32-timers header file.
 
-> Defining the 'bootmeths' environment variable with efi_mgr causes NULL
-> pointer dereference when running 'bootflow scan' on the E850-96 board.
-> This patch series fixes that, and cleans up the surrounding code a
-> little while at it.
-> 
-> Sam Protsenko (3):
->   bootstd: Fix memleak on errors in bootmeth_setup_iter_order()
->   bootstd: Probe bootmeth devices for bootmeths env var
->   bootstd: Fix incorrect struct name in bootmeth_setup_iter_order()
-> 
-> [...]
+Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
+---
 
-Applied to u-boot/next, thanks!
+ arch/arm/mach-stm32mp/include/mach/timers.h |  9 ++++++
+ arch/arm/mach-stm32mp/timers.c              | 34 ++++++++++++++++++++-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
 
-[1/3] bootstd: Fix memleak on errors in bootmeth_setup_iter_order()
-      commit: 11319e0e2bbf7b3892658d45017cd80c41ad961b
-[2/3] bootstd: Probe bootmeth devices for bootmeths env var
-      commit: 8da358c0a15a4f538d561602f600b2695fedeb56
-[3/3] bootstd: Fix incorrect struct name in bootmeth_setup_iter_order()
-      commit: 8c61fc082e9ae045534dc2f18ed50493adf35e6d
+diff --git a/arch/arm/mach-stm32mp/include/mach/timers.h b/arch/arm/mach-stm32mp/include/mach/timers.h
+index a84465bb28e..8209dd84911 100644
+--- a/arch/arm/mach-stm32mp/include/mach/timers.h
++++ b/arch/arm/mach-stm32mp/include/mach/timers.h
+@@ -29,6 +29,10 @@
+ #define TIM_DMAR	0x4C	/* DMA register for transfer */
+ #define TIM_TISEL	0x68	/* Input Selection         */
+ 
++#define TIM_HWCFGR2	0x3EC	/* hardware configuration 2 Reg (MP25)	*/
++#define TIM_HWCFGR1	0x3F0	/* hardware configuration 1 Reg (MP25)	*/
++#define TIM_IPIDR	0x3F8	/* IP identification Reg (MP25)		*/
++
+ #define TIM_CR1_CEN	BIT(0)	/* Counter Enable	   */
+ #define TIM_CR1_ARPE	BIT(7)
+ #define TIM_CCER_CCXE	(BIT(0) | BIT(4) | BIT(8) | BIT(12))
+@@ -40,11 +44,16 @@
+ #define TIM_CCMR_M1	(BIT(6) | BIT(5))  /* Channel PWM Mode 1 */
+ #define TIM_BDTR_MOE	BIT(15)	/* Main Output Enable      */
+ #define TIM_EGR_UG	BIT(0)	/* Update Generation       */
++#define TIM_HWCFGR2_CNT_WIDTH	GENMASK(15, 8)	/* Counter width */
++#define TIM_HWCFGR1_NB_OF_DT	GENMASK(7, 4)	/* Complementary outputs & dead-time generators */
+ 
+ #define MAX_TIM_PSC		0xFFFF
+ 
++#define STM32MP25_TIM_IPIDR	0x00120002
++
+ struct stm32_timers_plat {
+ 	void __iomem *base;
++	u32 ipidr;
+ };
+ 
+ struct stm32_timers_priv {
+diff --git a/arch/arm/mach-stm32mp/timers.c b/arch/arm/mach-stm32mp/timers.c
+index a3207895f40..1940ba42f74 100644
+--- a/arch/arm/mach-stm32mp/timers.c
++++ b/arch/arm/mach-stm32mp/timers.c
+@@ -10,6 +10,7 @@
+ #include <asm/io.h>
+ #include <asm/arch/timers.h>
+ #include <dm/device_compat.h>
++#include <linux/bitfield.h>
+ 
+ static void stm32_timers_get_arr_size(struct udevice *dev)
+ {
+@@ -29,6 +30,33 @@ static void stm32_timers_get_arr_size(struct udevice *dev)
+ 	writel(arr, plat->base + TIM_ARR);
+ }
+ 
++static int stm32_timers_probe_hwcfgr(struct udevice *dev)
++{
++	struct stm32_timers_plat *plat = dev_get_plat(dev);
++	struct stm32_timers_priv *priv = dev_get_priv(dev);
++	u32 val;
++
++	if (!plat->ipidr) {
++		/* fallback to legacy method for probing counter width */
++		stm32_timers_get_arr_size(dev);
++		return 0;
++	}
++
++	val = readl(plat->base + TIM_IPIDR);
++	/* Sanity check on IP identification register */
++	if (val != plat->ipidr) {
++		dev_err(dev, "Unexpected identification: %u\n", val);
++		return -EINVAL;
++	}
++
++	val = readl(plat->base + TIM_HWCFGR2);
++	/* Counter width in bits, max reload value is BIT(width) - 1 */
++	priv->max_arr = BIT(FIELD_GET(TIM_HWCFGR2_CNT_WIDTH, val)) - 1;
++	dev_dbg(dev, "TIM width: %ld\n", FIELD_GET(TIM_HWCFGR2_CNT_WIDTH, val));
++
++	return 0;
++}
++
+ static int stm32_timers_of_to_plat(struct udevice *dev)
+ {
+ 	struct stm32_timers_plat *plat = dev_get_plat(dev);
+@@ -38,6 +66,7 @@ static int stm32_timers_of_to_plat(struct udevice *dev)
+ 		dev_err(dev, "can't get address\n");
+ 		return -ENOENT;
+ 	}
++	plat->ipidr = (u32)dev_get_driver_data(dev);
+ 
+ 	return 0;
+ }
+@@ -60,13 +89,16 @@ static int stm32_timers_probe(struct udevice *dev)
+ 
+ 	priv->rate = clk_get_rate(&clk);
+ 
+-	stm32_timers_get_arr_size(dev);
++	ret = stm32_timers_probe_hwcfgr(dev);
++	if (ret)
++		clk_disable(&clk);
+ 
+ 	return ret;
+ }
+ 
+ static const struct udevice_id stm32_timers_ids[] = {
+ 	{ .compatible = "st,stm32-timers" },
++	{ .compatible = "st,stm32mp25-timers", .data = STM32MP25_TIM_IPIDR },
+ 	{}
+ };
+ 
 -- 
-Tom
-
+2.34.1
 
