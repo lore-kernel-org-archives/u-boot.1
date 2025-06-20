@@ -4,95 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26FF2C7115B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 17:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A5B5C7115D
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 17:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F52682CBC;
-	Fri, 20 Jun 2025 19:20:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 613D082D60;
+	Fri, 20 Jun 2025 19:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kwwhT4o/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PRcTiYDC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3282482CF4; Fri, 20 Jun 2025 19:20:05 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 809B580E9A; Fri, 20 Jun 2025 19:49:29 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B28E280E9A
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 19:20:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D3E580E9A
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 19:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-73a8d0e3822so812171a34.2
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:20:02 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2eaf96c7579so1080468fac.3
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:49:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750440001; x=1751044801; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sgfEV05Mu+3ID0vPOSZ/gxYPY/9Wky5ZTEuIysoLPfM=;
- b=kwwhT4o/GAVg2s2WIlwE5kvIzKKtviQL2gtM1HrDSunmY9S5tNhFQsEDVvxEeZr9Md
- qSpVA8dr2GbFg9+FiGNq8JooWCY0QdToww/301T3I1529APSVYF0RCG0BdohQmYNCG7t
- 5CTX4f7ba8rb1wlrTSd2DDYKeaPuvqIPKnoVU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750440001; x=1751044801;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1750441766; x=1751046566; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sgfEV05Mu+3ID0vPOSZ/gxYPY/9Wky5ZTEuIysoLPfM=;
- b=M4KYC726DhQ7/4dR4i8BGjwLmFHE2YQEAef2iwUeoSyEpXrz3n/ZBX3jxyDI5E+FCp
- /Mni0TXjLShdb5eFQH1fN7QVNZO6x2R85Dbl/RLbNpEgVFmaLORiC7e2WOYCoNIP6me7
- 50h64fqO3qxKro+Ns2zzlPmfDzRVu5E6OOUjSW/RZJ0XfECEfCssYq5VRRCvIIDo8ReE
- aKzD3iT/ZvdyeediZkbMKx2Cpavaoqe2Uk4RB4oZ+Tm3NZ/mtJ5db88CplljJsIqNP4W
- /ApnVDj1EMOnMadRRecpPf5KeCHQdCt8T6M9mI4gNiLKVi+6Tg4iL3dnnc2rNqHKem7v
- 8+CA==
-X-Gm-Message-State: AOJu0YykGraGVZWbjjT4JkL1I3dte4Tr2gofH3lof/1pOLwOig+5xWty
- 2lno2lv2oRHYp/aig9yPEDqj9mSJfVd1WF9OZluSuE+NPuAntKg9eN2WQwVD2j8QB40=
-X-Gm-Gg: ASbGncuHd9qSqjjt50X+5ne2+8eiWy9A+fpUL4Pp8eG29/lW9eS9Gkgm0yd4B7oFBaC
- FBf0V3Cva5HY9bXzVhhvY9qTUPx8HdWMqd+OR5apX/IMUix7vTRZ9u6gQYDCowsguHf6oL4hr6t
- bsNnZn/FIV2A8SM+Ct7SFkfHEE7LZizh1wimHBZMsG3oPAii2MCyHe89d5oeB9Oajn2+nZLeOhA
- //MuDCsTYB7zG0D3+NRo9GFTaOF8uUcaKuN6ElBSMOrHeqqiobJp5YcBRBcXDC1uAr96Buls1vm
- oHcIhFW0rLRfTyJH5Ds2TtlvpL2DV6KOlvE3Yg2g0iI+SZI8qmjVn6OLM+f75lOWzUEcKLLe74h
- ZgUQAw/QiOC4WzjYSPhHbwNE=
-X-Google-Smtp-Source: AGHT+IHMf4US7y8J/wnroPrk7NPlGZOD5E/cCzPEgtcdQdzdszCDYQNB0Mvb5aoot1AcdK5egHfu3Q==
-X-Received: by 2002:a05:6830:8089:b0:73a:9158:fb7e with SMTP id
- 46e09a7af769-73a91d85d30mr2425355a34.25.1750440001364; 
- Fri, 20 Jun 2025 10:20:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ bh=/zuecDb3NJ+Ud3eCWv/bA206a6jsY7KGlMPBsp9yQsM=;
+ b=PRcTiYDCT0VjKB5eOGwqHCUEpXqnUDAvtkWATMG5UIbaLF2Pc8Kfs0gSE0JkKpH2GG
+ gs0jUUU8cw4XG+12DmuPsL74bf79D6U1LTFKKuZ2Yak/xXOK+be4GJn/EjMO6OHUWMzB
+ rnLUIk2LUzZpbGgZXNqoyKEXJZPY5/fQXUxZY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750441766; x=1751046566;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/zuecDb3NJ+Ud3eCWv/bA206a6jsY7KGlMPBsp9yQsM=;
+ b=BiCzORLPcSjHGXTupwXakZ+i4pkG+WxMfSE3O9Wx35L/iIfc0kZ//qM0tNWTgkcwFE
+ Cv2VpnIkytji16hWBiDseWRgOQY9sad/z9JxKm+JStvFoszXYCKMvIqQDTVdqtY14KG0
+ SO+PtvR9wAHTLNri1yzjZhqgVdmazhKZ4J3qr/cirOrvYamxR7Tly0uey5YzIf9y7dpE
+ 2skriV1fJPPq7gIu9ISTm4sDLxDvrM686G9XR+TZ/BpBbncjlHoT2N5km5JNAOg0Jy7A
+ bbxydY0/mTyYb7U4PNAXeWr7AgPRqdAvcth8HkfqllemXE3bc9PgTbTbxSvjDpTBHh/7
+ d7FQ==
+X-Gm-Message-State: AOJu0YzhC/z/I6l2X1t2qK3NyksHH2nyBMcFX18DTWb3VF98xWr9XWap
+ FnJiqMg3CfaHQ1YbWj09wUOwZn/KaH94EfIroldmKIXCxMut+U/BLFhTcMY9u/ydMtZeTL0sE5S
+ l9kGJqWU=
+X-Gm-Gg: ASbGncsAJAueUpkmpgN3nNaFZDBH4MM5cj1oi4H/JH1M1WAsm4P6wy6VP77/FpPYXzl
+ Fbdm37aJk2dH2xZUvJ/j+PC1PBhRh+xH+rKSN3bAT7V7U9gCgViKrY5CV5FRisSq78WyGU8dnuK
+ xoo1cSRwSVzBMhP40mF7pPd6WTyKx+W2JqQ3QqIQtvNyLNxV9SvlOowXo1+xnJxXRMnkvV6kSHX
+ brTmvzdnOPgCanelfVUNoklwfbqqXrED9ySEoGvHU8y4FgLiu4wgWkUtvCRHSviCpRnvHVczFoF
+ a/Omd+Fkw5BGaLBV21exJyBDf5Dyg+3xk2HlLyePci/9dn8PPHD8LVH/Edk1fB158wJLqgaZkuE
+ 0wFLFTEfb+KqQlP0MDjf1mq+QfVEnwQAA
+X-Google-Smtp-Source: AGHT+IHRBpt0NZ3Y9zKbonzFImUuFW6P0Lpb1lmKAhTIWVLfiYJktLHAVY0i+Ar2O6dKnV05lOyYNw==
+X-Received: by 2002:a05:6870:1615:b0:2eb:b6a2:8d77 with SMTP id
+ 586e51a60fabf-2eeee586c38mr2904139fac.29.1750441766026; 
+ Fri, 20 Jun 2025 10:49:26 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a90c921a7sm382811a34.34.2025.06.20.10.19.59
+ 586e51a60fabf-2ee58bc74b2sm480067fac.0.2025.06.20.10.49.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 10:20:00 -0700 (PDT)
-Date: Fri, 20 Jun 2025 11:19:57 -0600
+ Fri, 20 Jun 2025 10:49:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Sumit Garg <sumit.garg@kernel.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: Re: [PATCH 1/3] mbedtls: Introduce subset of compiler-rt from LLVM
-Message-ID: <20250620171957.GL216500@bill-the-cat>
-References: <20250620151021.2711542-1-raymond.mao@linaro.org>
+To: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: open list <u-boot@lists.denx.de>
+In-Reply-To: <ce9f3c01-1025-48cb-8f4f-aa27781fa5df@linaro.org>
+References: <ce9f3c01-1025-48cb-8f4f-aa27781fa5df@linaro.org>
+Subject: Re: [PULL next] u-boot-at91-2025.10-a
+Message-Id: <175044176486.3427696.6123024821098241284.b4-ty@konsulko.com>
+Date: Fri, 20 Jun 2025 11:49:24 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ir5hoRUJmJWfxnHM"
-Content-Disposition: inline
-In-Reply-To: <20250620151021.2711542-1-raymond.mao@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,81 +96,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 20 Jun 2025 10:36:09 +0300, Eugen Hristev wrote:
 
---Ir5hoRUJmJWfxnHM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Please pull tag u-boot-at91-2025.10-a , the first set of at91 features
+> and fixes for the next 2025.10 cycle.
+> 
+> This feature set includes the addition of new sam9x7 SoC and a new board
+> named sam9x7-curiosity. There is also new support for sam9x60 compatible
+> at91 watchdog.
+> 
+> Thanks,
+> Eugen
+> 
+> [...]
 
-On Fri, Jun 20, 2025 at 08:10:08AM -0700, Raymond Mao wrote:
-> Introduce the implementation of udivti3 and udivmodti4 from LLVM
-> compiler-rt builtins for building MbedTLS bignum module via Clang.
->=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  lib/mbedtls/port/compiler-rt/LICENSE.TXT      | 311 ++++++++++++++++++
->  lib/mbedtls/port/compiler-rt/README.txt       |  11 +
->  .../compiler-rt/lib/builtins/int_endianness.h | 114 +++++++
->  .../port/compiler-rt/lib/builtins/int_lib.h   | 171 ++++++++++
->  .../port/compiler-rt/lib/builtins/int_types.h | 276 ++++++++++++++++
->  .../port/compiler-rt/lib/builtins/int_util.h  |  47 +++
->  .../compiler-rt/lib/builtins/udivmodti4.c     | 158 +++++++++
->  .../port/compiler-rt/lib/builtins/udivti3.c   |  23 ++
->  8 files changed, 1111 insertions(+)
->  create mode 100644 lib/mbedtls/port/compiler-rt/LICENSE.TXT
->  create mode 100644 lib/mbedtls/port/compiler-rt/README.txt
->  create mode 100644 lib/mbedtls/port/compiler-rt/lib/builtins/int_endiann=
-ess.h
->  create mode 100644 lib/mbedtls/port/compiler-rt/lib/builtins/int_lib.h
->  create mode 100644 lib/mbedtls/port/compiler-rt/lib/builtins/int_types.h
->  create mode 100644 lib/mbedtls/port/compiler-rt/lib/builtins/int_util.h
->  create mode 100644 lib/mbedtls/port/compiler-rt/lib/builtins/udivmodti4.c
->  create mode 100644 lib/mbedtls/port/compiler-rt/lib/builtins/udivti3.c
->=20
-> diff --git a/lib/mbedtls/port/compiler-rt/LICENSE.TXT b/lib/mbedtls/port/=
-compiler-rt/LICENSE.TXT
-> new file mode 100644
-> index 00000000000..5a79a1b9d5c
-> --- /dev/null
-> +++ b/lib/mbedtls/port/compiler-rt/LICENSE.TXT
-> @@ -0,0 +1,311 @@
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-> +The LLVM Project is under the Apache License v2.0 with LLVM Exceptions:
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-> +
-> +                                 Apache License
-> +                           Version 2.0, January 2004
-> +                        http://www.apache.org/licenses/
+Merged into u-boot/next, thanks!
 
-I don't know that this is compatible for us. Looking at
-https://www.apache.org/licenses/GPL-compatibility.html it talks about
-how you can use it with GPLv3 (which we are *NOT*) but not GPLv2.
-
---=20
+-- 
 Tom
 
---Ir5hoRUJmJWfxnHM
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhVmDoACgkQFHw5/5Y0
-tyyz3gwArJpt3jcXmkx66EUlXzYCI7+5zI4FOPLb3atTnPARAGAVWmtF0QF/6IQ5
-1WcsGF8G+yq9t8Tal03fyyP7VIVq9rbs5Yhs3Czla4vytD3E0MIVDjZAUFvy8seW
-lT15E/JdsiMdqSIpkbzS0vT0BCBZWSYUkqVs60ev2ZRk4rALf8vNEe3yt+vNSfG4
-vc9RwEGu9VHMdEhC8CUTYpuGFaDusiAwlSVX+YHFXCBBl313BTINwUazHpeoORMe
-u7hNStWI6Lwvu+YtTS16flNzH6G35UkAyl6BPmccm+5b6mpWUQGiqid/eD7NOSac
-VJm687jo9WYtcwu2JjocfyUhN2K2qZqZyVPf66C2L7FdamzYkgIiZ5lJ7gOD7WQl
-hrdjjsA3r5xiKX/SKfdjwJZBZ0wRMjz9X5Q1NaDhDUYjxaO8xGTi4m9hiq4vr6Fi
-W8Op8q0M/aJZlvnbWiMItxgLPCDDdunKaB243Dd1+NmMQjuhY5kERhqPwfZu/v3d
-r/FKV0zK
-=6FNZ
------END PGP SIGNATURE-----
-
---Ir5hoRUJmJWfxnHM--
