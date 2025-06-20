@@ -4,64 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CEAC7115C
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 13:22:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 734BAC7115C
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 13:58:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BD9C82CBC;
-	Fri, 20 Jun 2025 15:22:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 974C582CBC;
+	Fri, 20 Jun 2025 15:58:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o2YwSjUW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q4361Mlo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C40C82CF4; Fri, 20 Jun 2025 15:22:10 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A87EF80E9A
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 15:22:07 +0200 (CEST)
+ id A1A0D82CF4; Fri, 20 Jun 2025 15:58:34 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 85DF580E9A
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 15:58:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55KDM5eK306710;
- Fri, 20 Jun 2025 08:22:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750425725;
- bh=sabZlkfa4g9mq1Z69cxLZbUB4jNUHdAPEm7gemATZZU=;
- h=From:To:CC:Subject:Date;
- b=o2YwSjUW0b4V17/l3KI5ExBTyG324zaavwHKGRJ+NZnIHFLpBk97E3oRgqwDd2dWD
- v+fL5oxrx80IBsiU0aHoBNzhetblKX0a0c9RURxAp8fBRE2eJ3FIVKUJke0Ozv1H5r
- pAu/lGCFj7bIYbHSCFrn+C4o+wz5CpuDuLJzdykw=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55KDM5hS502550
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 20 Jun 2025 08:22:05 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 20
- Jun 2025 08:22:05 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 20 Jun 2025 08:22:05 -0500
-Received: from uda0132425.dhcp.ti.com (uda0132425.dhcp.ti.com [172.24.227.245])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55KDM35r3007764;
- Fri, 20 Jun 2025 08:22:04 -0500
-From: Vignesh Raghavendra <vigneshr@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Bryan Brattlof <bb@ti.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
- <vigneshr@ti.com>, <n-francis@ti.com>
-Subject: [PATCH] mach-k3: am62ax: am62a7_init: Drop write to non existent
- register
-Date: Fri, 20 Jun 2025 18:51:54 +0530
-Message-ID: <20250620132154.1982902-1-vigneshr@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-40791b696a2so482845b6e.2
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 06:58:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1750427911; x=1751032711; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=fBhAnIYlO5539TiUCXG2XaXCVlxKiapB41xEPa9q5Ks=;
+ b=Q4361MloIMBbN1SPThfNyJ5NWClvJXhXwetg+dB4veswb/yYSVe8dJN81q2KI5GTR/
+ wr6eKxCK2SLIKDPvfeK8HotK+DpkAuIe74faC4mfoQhwJRZKxH0A909Dy5fwwzxO7u1s
+ gEDjsLCekv8nh2n+sGG2VQQFw0E1xN9uf18vc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750427911; x=1751032711;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fBhAnIYlO5539TiUCXG2XaXCVlxKiapB41xEPa9q5Ks=;
+ b=jioM7qSUumJlvPpCxzTqO23HNGd6k06fgTRRLe2iEXqODsV7av7jnBh6SdB/pIctnc
+ UVPAcrSqb8j6eJJGflWN8bhvsPPJhLMWu63NCkg2fUQatMrhj4CpFZXXFGyXTbaO2V7J
+ g98UNAoPkRUkZDMlTwhl6PYDnlLkaM4TE5rJoOnyQlCS+TrqQH0BVi5nQyQ9D6Nxel65
+ 7XYrt+Mw6NL0ktlwyGKR1fVzThkHfog3PLMK2kbrJk30KPFoeSrQiIk28JUi9oRiEXF4
+ 0/5FA+1q0oUDVm8Mk7kvv9/iHJRjAjzZEZg/t/5kQRRdUMNc5yQWFo+orncArqELetRa
+ WjqQ==
+X-Gm-Message-State: AOJu0Yz4J37LOBqJP6Wf7C09OoDVtE2EGV8R8DffTLgHpP6JEZly2uYH
+ 2XzbnKPVeU66NbPIRZTOv/3ws/Mu9SfGdyTdRrvs9EcP2o1s0uUY4v1LJ2sSkVsrsGMfbmRLa+C
+ ZsIVJYPc=
+X-Gm-Gg: ASbGncv7c6qlPc+ckEMnhV0FQ0JUA5h0EyiNgJkmNSMuYw8KEOq0mC/Ez6OLqCfQpln
+ 0+3+spK33+E2ZI4G8+YBoLprLPL4AEp0M7RhbnkDR82oWZmSk9aPilRz5AWNvehE0aZImWCEGBj
+ LduPfXTXxtOdxH45DqpxRtmgHGkCoftKQV2EY2+mDTxcXbQvZ1ULzHuRHiYSy2/zNNM4FY42Rql
+ cbac3623q27Tpartifc147MDpdsVW0xQ0GwAgf2FjKNEIVrbMKDkzY7xAz0Z6KKsobYubWCsCEr
+ WZJhw96aH7WZN1151uQsu12AJnXC8vbRC9+5WEtF2++kRpHU4a2QBqizrMj3goUYiwYLq73uYwH
+ g+MG6TTeOJKRvglcZA5jABC+82nCvuBhA
+X-Google-Smtp-Source: AGHT+IFyklXkjKjm28cHz+Gi6MFC63n1HYhqIipOVNkksu1watiTnWoabke6L3RNkOITDyq0bNfi8w==
+X-Received: by 2002:a05:6808:4f09:b0:402:a5c:906 with SMTP id
+ 5614622812f47-40ac6f1f615mr2339206b6e.34.1750427911262; 
+ Fri, 20 Jun 2025 06:58:31 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40ac6d3b8basm298339b6e.47.2025.06.20.06.58.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Jun 2025 06:58:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, 
+ Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+In-Reply-To: <20250603170624.93376-1-eric.schikschneit@novatechautomation.com>
+References: <20250603170624.93376-1-eric.schikschneit@novatechautomation.com>
+Subject: Re: [PATCH] dtc: Add Kconfig option to pad device tree blob
+Message-Id: <175042790993.2432286.5342964273820354633.b4-ty@konsulko.com>
+Date: Fri, 20 Jun 2025 07:58:29 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,29 +95,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Per section 14.2.1.3 Kick Protection Registers of AM62A TRM[1],
-there is no partition 5. Delete it.
+On Tue, 03 Jun 2025 12:06:24 -0500, Eric Schikschneit wrote:
 
-[1] https://www.ti.com/lit/pdf/spruj16
+> This will allow arch(s) that use device tree blobs to pad the end of the
+> device tree so they can be modified by board files at run time. This will
+> help prevent errors such as FDT_ERR_NOSPACE from occuring.
+> 
+> 
 
-Fixes: b511b371ad76 ("arm: mach-k3: introduce basic files to support the am62a")
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
----
- arch/arm/mach-k3/am62ax/am62a7_init.c | 1 -
- 1 file changed, 1 deletion(-)
+Applied to u-boot/next, thanks!
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index edd43a1d78da..fcc65ef2652e 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -57,7 +57,6 @@ static void ctrl_mmr_unlock(void)
- 	mmr_unlock(CTRL_MMR0_BASE, 1);
- 	mmr_unlock(CTRL_MMR0_BASE, 2);
- 	mmr_unlock(CTRL_MMR0_BASE, 4);
--	mmr_unlock(CTRL_MMR0_BASE, 5);
- 	mmr_unlock(CTRL_MMR0_BASE, 6);
- 
- 	/* Unlock all MCU_CTRL_MMR0 module registers */
+[1/1] dtc: Add Kconfig option to pad device tree blob
+      commit: 5ba5cbf5a29d54763f30b6685e6c06ffd51d29eb
 -- 
-2.49.0
+Tom
+
 
