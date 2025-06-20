@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AEC0C7115A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 02:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD61C7115A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 02:41:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45E8382CDF;
-	Fri, 20 Jun 2025 04:37:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B7D8282CDF;
+	Fri, 20 Jun 2025 04:41:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="irkiNJAt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pQ4NxHkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A452C82CFA; Fri, 20 Jun 2025 04:37:40 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 7180482CDF; Fri, 20 Jun 2025 04:41:21 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E7D782CBC
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 04:37:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F0F082CBC
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 04:41:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-70f94fe1e40so14676787b3.1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 19:37:38 -0700 (PDT)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e7d9d480e6cso1187635276.2
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 19:41:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750387057; x=1750991857; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750387278; x=1750992078; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AEP9b/jbhHCZRE03d1UJPsiYjr50G5ckio9SNpMz3kw=;
- b=irkiNJAtdC5hsDvWyFyRGwA0aJJgnEkKnoPrRMUB3NfCA94G0KXY5ZzHKjoJFsMMrl
- M2JhMzed05ujgu4GRDwWs8JTl/2KfP6pgEER9AjEF7pGhs4FlZslNOv3EifgncavDOJB
- fvrgpB6E5LM42BjNatN6RFxZyAB01bDzPhR9mYc1ha94+yVPTARCsxLHJeWD50o5gHVu
- r8oqChyJ5rIk21hApZ70EIgmF9mv/l1Lrrq0PTatm/BaRZurBW9uYPwZJ+LlpQGPSjkc
- HS+gSSasOCjpVNsW0zbZ9AB6sopZk2qqrS59t0iZ0r5UBfmSOPNRNeKxDlDiui9i0ojC
- D6nQ==
+ bh=cEa/P9I543PaHb59oNoRLxpkJsQBW/05poQnQZm7mzc=;
+ b=pQ4NxHkr6AqmMEcXZcEBxqQ7axXnhpQSqxcXhwTTWOXjmVHShdnp0B57Koj/qzjxse
+ xuVNKqtRQZUQ6AAD/suzlhGm1aRyeKb2UypfCbOZ+UY0t6np0216tTqsEnbJoEuxpgMC
+ ahII0qvLao9gUElf91s9C+qmtgks2OuN3i0hfvoA2AsNa6uiBNZcLqgeD5ELTz7ms6t3
+ yJF3YTutPMxgSSi3xO+R1V19xIsHfuhV4Qq/SEDdc3q9h3ruDI1BoBwshQdV5aVLNWnb
+ +k2c3ia+GTziW4QFzsMxvDD9TyHNB2vvZGfp49+rxb/S16VcRrVOI5IdLT4pkgCMmVdU
+ PjMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750387057; x=1750991857;
+ d=1e100.net; s=20230601; t=1750387278; x=1750992078;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AEP9b/jbhHCZRE03d1UJPsiYjr50G5ckio9SNpMz3kw=;
- b=OG4VvZzH4J8w6fZptJON0VVQY74k0rhTujxrame2Ju0/NcZ2PBsLRe2mkU8s2vEcrK
- UcsXQXk1x0By6bFIV2AeJCBFpmApAbX8qYKI99OvdwGQbDvfcVij6mTbfKHR7Dp+yMUg
- tLTxYAC7/55gEhuG0Q/FSs6x7//JcfBQl0Oi99o0fxDdIgQ+QvtDYinW6+Eq63CY7iWJ
- XMgJ7b8D4tPyHCL5UDoX0Bn8A9eXg7/7SH2SRihuLv0l845p/JsZHjAnHF7Tb/bJI0EW
- C3F2iVJf7NqMi0s3TY4YXSugK5r4bJqHVIMI4pZ7sEOaWQ6UGoxGM72ineKOwM/SPD2R
- XVYw==
+ bh=cEa/P9I543PaHb59oNoRLxpkJsQBW/05poQnQZm7mzc=;
+ b=kfOYgIS02wtwZRQH2SwiQWL8klXLfqljBKprgaMXE5Mli9ULxbTf1Dd3KdnZhee0yI
+ 0TL1ApVqhh0x9dbUc9KULrSSd2z6KeDnH47B8a39N4rPTNokloMUyQHIYEVgSM58elXD
+ gbwkUXujXfWKb/hkOOhtACkxjKH+uRxuJS+O4h/myKZSMM2ihoeX86J9QTb7d/L1O6Dr
+ zL+OJuaLwrvUyLzAV6ECciEbJNvLMbs97Ciqrr5uhbB8/M4JPsNfSCBxd2n1cvegD8go
+ dRbX9k/57vQQ/XNmV/4q7oHknQrPf5ai0qr1TqV5ZVtiBqBFyJo34TsZjVj6+Eg9LeZe
+ cw3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzKsFEZ0c4HMYQscT35hizfg2g7m0QgFatnbvtmVCyz/iGPP5Q4I1Mam3gtSVlWKwDletAqK8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8PFx0ni1VJfPfJDhhka03y9vDTftRTpO8iylValMyfh1PpoP4
- M7q090T8vg/SNAQpdcVqWsm7lxqRwe0OsruUN+ACJFjY67rZedgoQakqaFKKkgj9WVDZ6W+IIcK
- 6bY87A6DVv9SZ0GzLmNq1mNBSlgngsH9pQyO9DitpMw==
-X-Gm-Gg: ASbGncsMBw8PTCTFZO2dvrn6p1+M3+amR0I0apIobiW0fEOTLIyh9nR7t5b8ok17RPU
- wf4NVfeiyU1O/T3rMLGnJ2BY235em2w1lKbO6FBR6W6J0oLeYRiAVZRKnzr1E5TrIrk3mJ7v8Is
- +i3p+wwrfZjuZ7CGljjArEMVQ0HPW7t+TWTYj4acq0SYB0ni+eTKwO1cSvQDAkAsgilpfVu8J6q
- aGgiw==
-X-Google-Smtp-Source: AGHT+IEzepUlZG6nQp6M+YA2RouALjMi4/T1feFkIkiYJRezfgQSnBKj0yXihcG87VzIh02JEFSz36srGhCdJocr8Rs=
-X-Received: by 2002:a05:690c:296:b0:70e:404f:6714 with SMTP id
- 00721157ae682-712ca535b20mr7833497b3.19.1750387056903; Thu, 19 Jun 2025
- 19:37:36 -0700 (PDT)
+ AJvYcCUo442yit/mc2ZMrOPWu7b1g67qEEHbdP3LWGB4FQizMYTTI1rb177HMGa3zIId5syHSMqZJgs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhrN/GZKRpVsPHsRuDPiL+87USnYC2/RK5UOi5JApEtcHWm7m2
+ bS9MHVw5fIK61IfqIiPOyAUB2MKdDgGgZQC5P9Ddsu56YL7CUftoRC4X0JrpxX1iTLztev2ynda
+ jlzIyDtmUxU/y7fO82BPXQKc/c+hi5xAFmXMh9dVRkJOFG4RLazYt
+X-Gm-Gg: ASbGncsx8cZ2Me2BJdtZrx5dXyDR1WQMDIKmN4jcDqmbofhcf5D4LRUSvBtbGanBrB0
+ AIOuMlN6Ojh+BXQdBmYwP5lNbqQ5JgXXSjk3YCrEag6SpeRmaxifwWHC0DoXxyLaOVQLj3FZoEd
+ KBv2nZGINjBDEpfl0vX2WkcF89ebJR+hUh2harG5flPqnrNnSlxJfDXPcatJ8oCCbGMuQB18eqk
+ TToxg==
+X-Google-Smtp-Source: AGHT+IHofnWVEaFalWEUuLWTC6haN/uNDtC5roh6aGUUebdaQzl5d2vmzuHH/FP+fPrqsMtz2g5utdXl8UbVoxW1RL8=
+X-Received: by 2002:a05:690c:9689:b0:707:dba5:2e44 with SMTP id
+ 00721157ae682-712c6512c50mr20636057b3.30.1750387277836; Thu, 19 Jun 2025
+ 19:41:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250112235843.25738-1-semen.protsenko@linaro.org>
- <be394627-0cbd-4658-a45b-7cbd4d1b4db0@gmx.de>
-In-Reply-To: <be394627-0cbd-4658-a45b-7cbd4d1b4db0@gmx.de>
+References: <20250112034213.13153-1-semen.protsenko@linaro.org>
+ <20250112034213.13153-2-semen.protsenko@linaro.org>
+ <CAFLszThSRtSofySbSBa3hHn2u19bCm-jq_S4gXG+pXFjiiJsHA@mail.gmail.com>
+ <CAPLW+4=38cBhUXyngbLG-iypxx+ksXp2-3Cjm3Wgd1V+pMmfCg@mail.gmail.com>
+ <CAFLszTiZdbMu64_+=LV3gxUf_Jm9Ngxdmg=+XrVhGNHR9FDAnw@mail.gmail.com>
+ <CAPLW+4nCr1j4MxR9mjAt3JtocwsxBKgWpah_ARODX+6ENs-xDg@mail.gmail.com>
+ <20250619223520.GE216500@bill-the-cat>
+In-Reply-To: <20250619223520.GE216500@bill-the-cat>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 19 Jun 2025 21:37:26 -0500
-X-Gm-Features: AX0GCFtrG9ok79zAZW_-gZuDEi-uHnns5GBm5Cww8k4H95GdbOZdtcMt2TlzqkE
-Message-ID: <CAPLW+4kcjK7om-7tSzOL0TcGpbAowwh_pF01F+EfvJ835uMzHg@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/1] efi_loader: Call efi_init_early() even earlier
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
+Date: Thu, 19 Jun 2025 21:41:07 -0500
+X-Gm-Features: AX0GCFv3yW0qc09uQYpjFNFEWhuYXcfEPOWh-wI9yM1nUWjuYNCyi2WncRD-WJ8
+Message-ID: <CAPLW+4npMfxD8ihnBPNxrG6PjagC4RHUzEyvfrEMw8AyK8WVSA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] bootstd: Fix memleak on errors in
+ bootmeth_setup_iter_order()
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,32 +103,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 13, 2025 at 1:29=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
+On Thu, Jun 19, 2025 at 5:35=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+
+[snip]
+
+> >
+> > Is it possible to just apply this patch without a test? It's clearly
+> > fixing a memleak. Not that I'm lazy or anything, I came up with a test
+> > like below, but I don't want to send something that is quite hard to
+> > test. If you think this test is really essential, I can send it once
+> > bootstd tests are fixed and can be run in one command without any
+> > extra non-documented work.
+> >
 
 [snip]
 
 >
-> There are two DM functions:
->
-> - dm_initr
-> - dm_initr_dm_devices
->
-> Before dm_initr() gd->dm_root points to the pre-relocation tree. So I
-> guess we should not register the DM events for EFI before that point.
->
-> Shouldn't the DM devices only be scanned in initr_dm_devices? Why is
-> E850-96 doing so in dm_initr?
+> Yes, we can do this in a follow-up I think. I'll take this series to
+> -next soon.
 >
 
-Sorry for the confusion! After further investigation it turns out this
-RFC patch is a hack, and should be ignored. You are right, the issue
-was in E850-96 board file. It was reading a firmware from MMC in
-board_init(), which indirectly probed the MMC driver before
-efi_early_init(). I took care of that in this series [1].
+Thanks Tom! It's not very recent though, should I rebase it and re-submit?
 
-Thanks!
-
-[snip]
-
-[1] https://lists.denx.de/pipermail/u-boot/2025-June/592698.html
+> --
+> Tom
