@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B85C71155
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2763C7115B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9561D82CBC;
-	Fri, 20 Jun 2025 10:55:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E12F282CF4;
+	Fri, 20 Jun 2025 10:55:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XXwWIdnL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FEs6S+1N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53DC382CF4; Fri, 20 Jun 2025 10:55:07 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 99FC782D39; Fri, 20 Jun 2025 10:55:49 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63E5D80E9A
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:55:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A7FA82CBC
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:55:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-453634d8609so6406075e9.3
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:55:05 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-45362b7adc9so5892195e9.0
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:55:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750409705; x=1751014505; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750409747; x=1751014547; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=FBgVWughqFoNs3Ns4f4d410vGgsrtvBwnT7yI3RhoTs=;
- b=XXwWIdnLAQ4PvcXu8F/DvfgbdQWCJYec65CaUXRZBd9wFOVxD5P5O4usbZSdgfXAZY
- aL6Ye9zRZck0kUhi9sdMO5j2redQpYjcOXViGZq8WHURtulQyyG1IOt2FoCnJFpFRQAy
- IXFrGBgMLKHs7+gS6FUvh1Ifr3aVqj4GquBCViuFMeuZmSwp8F+iADD+PItiSdJSFdiD
- C5ZtHm23MMTOZyMgN+c4Vi0e8lK3WKTKXCWQi5h74ZucCnzahlNYEV3og6Fvy/HSqzhZ
- ZALecGuK4Ieq008278RsgyQijgg1nLtr443ndh1Dvddv8HRoqaykhf1GJcMB193n0LdQ
- JD8g==
+ :reply-to; bh=N9BwvrT47BhaR4PI2tE7A3DY5f6hcwsLbaZizXD46lE=;
+ b=FEs6S+1Nw2JpHWG/AFjbsJ68GN4zX/fBLDVZOZiqLGirdaQLB/OIstGOrW+iFhjloi
+ 6Y8XwXapcD0EttfmSRGZQ9nxWBbgXnTSq+3Bj7orHuW8oQ9NS75KbY+eV3XRpUBenh6W
+ rTkcSjks7Jd6u3rFgjdxod1eeZuMS45erMvoFnW4ZQGjZ5+cNmz4MCwj0a8dvZPFVJZD
+ i3GoJgkrTizFzlF1Ww8SkpaLP7jBqsKFY/7TAs8SmVpueKz6BRNj9jpzBVZZYZVH9Sui
+ 2KtVL1VceZAooykOiNarrNcPrzlk4UJYqmldKqBPU/hWNwk1Bb1whUs9ZA/V2qCZx566
+ +uTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750409705; x=1751014505;
+ d=1e100.net; s=20230601; t=1750409747; x=1751014547;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=FBgVWughqFoNs3Ns4f4d410vGgsrtvBwnT7yI3RhoTs=;
- b=LnqgEOQmDH2oDh6ERIv8zsPjMO16zhPoSYIZ4hUUr3U8J14NhCqPOKjlndkvcFEOus
- 7jdRmUDfLzXy+MpjSkpnWTohzruDyD5EMvQjG2aQAKU+VFsy5xukMe9yf1SbE9bPdGQK
- ABBdwTO1mN0D9iIbauDcRHgwKXmgJ+Ul4/Dj6ugV0daoaJFVwkO91ZSuIIUg3y9pBH5p
- kt/3v4OD28fg+UbgEYpyPg25/R86P7NvWDWdj6aHhHbBTy8tM7C8IWqzlSYgJzD0p70C
- OdsoqAu1ZzYvUYHfysrUMOocdcWS37lq58Hb60p2wz67h74d3/MomyuTgAbNPedya68u
- biWA==
-X-Gm-Message-State: AOJu0Yw8GvCqkXxbwDLqPZW0AmyO/XGYmoHsaSq2wsgBP97lNyp6BqvZ
- 6mWZZftEvkoxcTpfcpW3zVLRQDHDp8i574jHWaooSGCJxUL86zN0UVnpgo7c0ZqUD72AEXtNpU8
- SZlGtdnU=
-X-Gm-Gg: ASbGncu80qdSpA0Vqjr+q2YQSsx98Z+RKIjVE6/zXoO6VQ7NfSneC4otuBHPc41t0FN
- 5O4r7WEtDZ2HN16FHi2vY09DUkP+riMj6Ssgsb4PTIC/MY/bgEtinLQ3nxCpEJ+/fzlwKHXv+Be
- pD64owF7OViUWUPr/cIm1D0Z+yYED5oAm6HusbyzhFbG8s+R3sjAtKVaGbTHnpsx73aohgNWKwQ
- bbn9Dkd8x2y94b0r0jPpLtw5kF8VVAvZT9dby5/v42K8KAzoRBWtPmfBuo9w7rPfspknDnVer0a
- mjZAzIBxrwnvCIcx4QDirm+vylKm60RTe0fcy8QESInOF4JnHVPsFTNa302YUXgIxHoRRiRUgXI
- +ztxYtscs3sKi/NLEfhn7+71Btyg+X4tuNPRSJE4vfd/R04hW7Q==
-X-Google-Smtp-Source: AGHT+IHGxDW7YfNINN7aprSMmTJpTpLEm4GhqmAU7000KGG/3mHSnSt0NhdaS/+Ui+g5ODrV0zCkpA==
-X-Received: by 2002:a05:600c:820e:b0:43c:e478:889 with SMTP id
- 5b1f17b1804b1-4536478ecd2mr20960125e9.0.1750409704750; 
- Fri, 20 Jun 2025 01:55:04 -0700 (PDT)
+ bh=N9BwvrT47BhaR4PI2tE7A3DY5f6hcwsLbaZizXD46lE=;
+ b=k9R5g4STyFmRtsKcd9fmccHI/BUNveeeG8AiLmmI5diUsAOjvnAmSBIMHkJGr4kNwL
+ g93+8QCyDAmvlFtkciqgw3LZn1G82BZPjt+IKteKgP8JCD+TuDT2QqjWZOGIatZeRacR
+ 43ejOTbNwkq5aV92wrLeEx+0eSqWkToHMX3QWWt+y5tto8fWw5VHjddbofg5Tkr2Goq/
+ iP+mgX35X2Lzzo3YokHSfzKhkKwz2dswn0V6jJPXQkmzv5guakK/hYeFhoOvzmVJOHd7
+ szB1c8LJCMH/JSc7A0saGYrwk2K8b3ftTSyx179+njG0LlIvF4lDB3fgbjm4KWbxIa3P
+ 6q1g==
+X-Gm-Message-State: AOJu0YxIWnSmDJfpDfoHJk/RP6qRkmrMT5w+f1oAHdSduPL4mpirvhf8
+ KOToalfwfINB5rULm+jv57ehBa3mLaQa48qSl8TrAxp/B3sbPcSVAASOUWKh37LKGTc=
+X-Gm-Gg: ASbGnct7o/7HFnJxqWMhznrGU9aFkP6WV+1W1HkIHhcOnbGIrfUIbxN/oJ6n82jF3FQ
+ rMMqXnHyWb5rpWGsf5jJiXZE3iaxrO+o2nfHxBXGSIPSd71Zvc5xVG++B6AqSd1QisKju9cZJBb
+ KWrxBaLd3IoXRru03ZQ7ya7Qum294LHcDJ62qdxxGY+4Nn0IrEYGRlgdLcUyFKVqeVRWIVMulIh
+ tpUIAPI1z86CIemc+DbzIFe5lRiYMLCVM+HnuABce7eIDHrWMcdyXd7uctVVzFlJNJ3Uq6j7j75
+ ipUjMA7ByrDzCFzdtn+j91lOC45xOrm1+7EpePkJIvTkidNvluCMS1XB83H7pFW1tn64p+YEMBC
+ 3aMfxrZ4J+BoJrSlH7WIoxdWyw7MJmgyh7WkYjqA=
+X-Google-Smtp-Source: AGHT+IFWWJzpCSwk3oI2JD3keMcuMetFVNE+vKjJNBDboX9B+FyvkPiArm7CywWrFDocygmdSHU9vw==
+X-Received: by 2002:a05:600c:37c6:b0:43d:fa5f:7d30 with SMTP id
+ 5b1f17b1804b1-45365e6e199mr12876655e9.16.1750409746545; 
+ Fri, 20 Jun 2025 01:55:46 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:3d60:2fa3:b982:4627?
  ([2a01:e0a:3d9:2080:3d60:2fa3:b982:4627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-453646cb5ecsm18717645e9.8.2025.06.20.01.55.04
+ 5b1f17b1804b1-4535ebcecdcsm51074805e9.36.2025.06.20.01.55.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Jun 2025 01:55:04 -0700 (PDT)
-Message-ID: <6bb69a1a-1cc7-495f-96eb-8c0981a3bc9b@linaro.org>
-Date: Fri, 20 Jun 2025 10:55:03 +0200
+ Fri, 20 Jun 2025 01:55:46 -0700 (PDT)
+Message-ID: <4926a8f5-bf91-42d5-a7b4-e6f7536b8c64@linaro.org>
+Date: Fri, 20 Jun 2025 10:55:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/8] clk/stub: add sm6350-rpmh clock
+Subject: Re: [PATCH 3/8] drivers: pinctrl: Add Qualcomm SM6350 TLMM driver
 To: Luca Weiss <luca.weiss@fairphone.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
- <20250618-sm6350-bringup-v1-2-3cc22aab7a7a@fairphone.com>
+ <20250618-sm6350-bringup-v1-3-3cc22aab7a7a@fairphone.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250618-sm6350-bringup-v1-2-3cc22aab7a7a@fairphone.com>
+In-Reply-To: <20250618-sm6350-bringup-v1-3-3cc22aab7a7a@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,25 +132,159 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 18/06/2025 16:25, Luca Weiss wrote:
-> Stub the RPMh clock controller on SM6350.
+> Add support for TLMM pin controller block (Top Level Mode Multiplexer)
+> on SM6350 SoC, with support for special pins.
+> 
+> Correct pin configuration is required for working debug UART and eMMC/SD
+> cards.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->   drivers/clk/clk-stub.c | 1 +
->   1 file changed, 1 insertion(+)
+>   drivers/pinctrl/qcom/Kconfig          |   7 +++
+>   drivers/pinctrl/qcom/Makefile         |   1 +
+>   drivers/pinctrl/qcom/pinctrl-sm6350.c | 104 ++++++++++++++++++++++++++++++++++
+>   3 files changed, 112 insertions(+)
 > 
-> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-> index 5f5aca41d5b322537f070a740bf1f80531006036..5863ec72abefefb3c62152805260238b7045e81a 100644
-> --- a/drivers/clk/clk-stub.c
-> +++ b/drivers/clk/clk-stub.c
-> @@ -52,6 +52,7 @@ static const struct udevice_id stub_clk_ids[] = {
->   	{ .compatible = "qcom,rpmcc" },
->   	{ .compatible = "qcom,sdm845-rpmh-clk" },
->   	{ .compatible = "qcom,sc7280-rpmh-clk" },
-> +	{ .compatible = "qcom,sm6350-rpmh-clk" },
->   	{ .compatible = "qcom,sm8150-rpmh-clk" },
->   	{ .compatible = "qcom,sm8250-rpmh-clk" },
->   	{ .compatible = "qcom,sm8550-rpmh-clk" },
+> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+> index e567cb113a316592c6cfb9f42350fc60291772bc..bfda968299d694ba7db9796e561799ab0195328a 100644
+> --- a/drivers/pinctrl/qcom/Kconfig
+> +++ b/drivers/pinctrl/qcom/Kconfig
+> @@ -82,6 +82,13 @@ config PINCTRL_QCOM_SM6115
+>   	  Say Y here to enable support for pinctrl on the Snapdragon SM6115 SoC,
+>   	  as well as the associated GPIO driver.
+>   
+> +config PINCTRL_QCOM_SM6350
+> +	bool "Qualcomm SM6350 Pinctrl"
+> +	select PINCTRL_QCOM
+> +	help
+> +	  Say Y here to enable support for pinctrl on the Snapdragon SM6350 SoC,
+> +	  as well as the associated GPIO driver.
+> +
+>   config PINCTRL_QCOM_SM8150
+>   	bool "Qualcomm SM8150 Pinctrl"
+>   	select PINCTRL_QCOM
+> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+> index 6ffc6d48c1553a21bdf6aecdaee41c76251fae2d..8a3ad5d39f7869f2dabecc829961a5d7fe9cc596 100644
+> --- a/drivers/pinctrl/qcom/Makefile
+> +++ b/drivers/pinctrl/qcom/Makefile
+> @@ -14,6 +14,7 @@ obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
+>   obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
+>   obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+>   obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+> +obj-$(CONFIG_PINCTRL_QCOM_SM6350) += pinctrl-sm6350.o
+>   obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+>   obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
+>   obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
+> diff --git a/drivers/pinctrl/qcom/pinctrl-sm6350.c b/drivers/pinctrl/qcom/pinctrl-sm6350.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1cbed77b55f28ce5f644173dfb3cba5398db504f
+> --- /dev/null
+> +++ b/drivers/pinctrl/qcom/pinctrl-sm6350.c
+> @@ -0,0 +1,104 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Qualcomm sm6350 pinctrl
+> + *
+> + * (C) Copyright 2024 Linaro Ltd.
+> + * (C) Copyright 2025 Luca Weiss <luca.weiss@fairphone.com>
+> + *
+> + */
+> +
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+> +
+> +#define MAX_PIN_NAME_LEN 32
+> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> +
+> +static const struct pinctrl_function msm_pinctrl_functions[] = {
+> +	{"qup13_f2", 1},
+> +	{"gpio", 0},
+> +};
+> +
+> +#define SDC_PINGROUP(pg_name, ctl, pull, drv)		\
+> +	{						\
+> +		.name = pg_name,			\
+> +		.ctl_reg = ctl,				\
+> +		.io_reg = 0,				\
+> +		.pull_bit = pull,			\
+> +		.drv_bit = drv,				\
+> +		.oe_bit = -1,				\
+> +		.in_bit = -1,				\
+> +		.out_bit = -1,				\
+> +	}
+> +
+> +#define UFS_RESET(pg_name, offset)			\
+> +	{						\
+> +		.name = pg_name,			\
+> +		.ctl_reg = offset,			\
+> +		.io_reg = offset + 0x4,			\
+> +		.pull_bit = 3,				\
+> +		.drv_bit = 0,				\
+> +		.oe_bit = -1,				\
+> +		.in_bit = -1,				\
+> +		.out_bit = 0,				\
+> +	}
+> +
+> +static const struct msm_special_pin_data sm6350_special_pins_data[] = {
+> +	[0] = UFS_RESET("ufs_reset", 0xae000),
+> +	[1] = SDC_PINGROUP("sdc1_rclk", 0xa1000, 15, 0),
+> +	[2] = SDC_PINGROUP("sdc1_clk", 0xa0000, 13, 6),
+> +	[3] = SDC_PINGROUP("sdc1_cmd", 0xa0000, 11, 3),
+> +	[4] = SDC_PINGROUP("sdc1_data", 0xa0000, 9, 0),
+> +	[5] = SDC_PINGROUP("sdc2_clk", 0xa2000, 14, 6),
+> +	[6] = SDC_PINGROUP("sdc2_cmd", 0xa2000, 11, 3),
+> +	[7] = SDC_PINGROUP("sdc2_data", 0xa2000, 9, 0),
+> +};
+> +
+> +static const char *sm6350_get_function_name(struct udevice *dev,
+> +					    unsigned int selector)
+> +{
+> +	return msm_pinctrl_functions[selector].name;
+> +}
+> +
+> +static const char *sm6350_get_pin_name(struct udevice *dev,
+> +				       unsigned int selector)
+> +{
+> +	if (selector >= 156 && selector <= 163)
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN,
+> +			 sm6350_special_pins_data[selector - 156].name);
+> +	else
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+> +
+> +	return pin_name;
+> +}
+> +
+> +static int sm6350_get_function_mux(__maybe_unused unsigned int pin,
+> +				   unsigned int selector)
+> +{
+> +	return msm_pinctrl_functions[selector].val;
+> +}
+> +
+> +static struct msm_pinctrl_data sm6350_data = {
+> +	.pin_data = {
+> +		.pin_count = 164,
+> +		.special_pins_start = 156,
+> +		.special_pins_data = sm6350_special_pins_data,
+> +	},
+> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+> +	.get_function_name = sm6350_get_function_name,
+> +	.get_function_mux = sm6350_get_function_mux,
+> +	.get_pin_name = sm6350_get_pin_name,
+> +};
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +	{ .compatible = "qcom,sm6350-tlmm", .data = (ulong)&sm6350_data },
+> +	{ /* Sentinel */ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_sm6350) = {
+> +	.name		= "pinctrl_sm6350",
+> +	.id		= UCLASS_NOP,
+> +	.of_match	= msm_pinctrl_ids,
+> +	.ops		= &msm_pinctrl_ops,
+> +	.bind		= msm_pinctrl_bind,
+> +};
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
