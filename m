@@ -4,59 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C3EC7115B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 07:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97329C71155
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 07:36:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBFAE80C83;
-	Fri, 20 Jun 2025 09:28:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id EE69582CBB;
+	Fri, 20 Jun 2025 09:36:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="XPkSBL5T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DmhAAK/Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B1A582C55; Fri, 20 Jun 2025 09:28:25 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B534F82CBB; Fri, 20 Jun 2025 09:36:13 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A4B48006D
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 09:28:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C7BB8006D
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 09:36:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 3CE581FBD6;
- Fri, 20 Jun 2025 09:28:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1750404502;
- bh=nBa8sFqtkOHZ+L+9f5aR4M9GO+Swq6SNSzQJl3vvOok=; h=From:To:Subject;
- b=XPkSBL5TtalhqhT/UUbgvTTIlH2LRoRdKS9V+FFmwMZc7kiFcPyzOEOpoh1EiXBoP
- XVY1lVroirYlWSNoq/78Nw8t4hdEF4+fowMWO7BGkM+y/utGjI3jZDpmVfO1IKiukS
- /EVnpR3QZ+6ohDWBHc6u5PvoYoREKxUSu3XiF2kcUt3aeg+2mOhFE9Fr8KXWzTNXS3
- h3ZIh6Lfx3dtTiiGdmz08+5u/ZLbvzmVv6QU4kcpiGSRPTW+M7GGAvilgyt7C4tXUR
- ZNE1c+AyPIGr0+dBva+HCp+l2Nez1PHd6jqLn65xZEL9YNdt5n7CvSORwmYI5O5EsN
- s8ABlJSe5c1tw==
-Date: Fri, 20 Jun 2025 09:28:16 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Fabio Estevam <festevam@gmail.com>,
- "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
- Enric Balletbo i Serra <eballetb@redhat.com>, Ye Li <ye.li@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [PATCH 0/8] (no cover subject)
-Message-ID: <20250620072816.GA5437@francesco-nb>
-References: <20250618-binman-v1-0-373e66c7a51f@oss.nxp.com>
- <CAOMZO5CpcBTKQW4O6qFH4TgvsBBzmud1MQOEtz1i0V3UApz-sQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ad891bb0957so273935766b.3
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 00:36:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750404970; x=1751009770; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:cc:to:from:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hPpHa6OuCQEYvxwTopvovgcLnqUvQAeziTg/QnH4j/g=;
+ b=DmhAAK/Q9CEpOjRs76Fjm288AEO6Nz3G5o68vA9vl+k/a9dI1Os0fAKM7i7nJxyjKm
+ TPWXvkzh+TApXG7wT1hWTBsYTNzyjM0Hw04N/bTzpoarmRAvQdA397CrUZzYlCUkznQF
+ l5bznW23SuWr0e4uB9Wsv4XBCVv63pwO6fdqFIC5qMQAYscAmoHy+5WhiOgjyF0n5F0F
+ q3Wt00BV5Vix0uiUV7wcdI5mYzOt/UTk9wW1Dsxs/jG7xQhyOM+388nHjyhuHt/5HPW3
+ TVh/Njt2CjDHRW5eTPV4On1HOZhMUmXAuxYpmm1Zx5zbmh8Hpwc2x304OABO8XaHw1eE
+ ZHGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750404970; x=1751009770;
+ h=content-transfer-encoding:subject:cc:to:from:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=hPpHa6OuCQEYvxwTopvovgcLnqUvQAeziTg/QnH4j/g=;
+ b=QxmDhkt2ZUUel0OJKjMBVOYaMjCSp7W+x+v7TqDaNh16I3R8xSh7e9IbfD/maN3kSa
+ 3fZZ0GwQD8Fu/ZnIRDnBYSdALmoZ2ChRQSk0HUHakA3TAC2njM1G8Rf2OuzV5khk1k3J
+ vENHvpCj7XrUL4iWPkd/eSfamOfTbIjDiuEazlLsIlbfM4EEM6jx1blv20+9vSdWO4u1
+ DVmL7BQT6z/dVJ8qrE/1dFQnZR5/KZv9D9DPY6tfGwZUOhyePsaE/nu6cY6bj/StacXU
+ 5vM0dMCs+q3t5/0uAECtediw+0JExEaZwEYxbX8jmBRXqIyEIA+HSt5SFQndfyNwojPy
+ //EQ==
+X-Gm-Message-State: AOJu0YziPQ6bKOUBZwDdLns51PkC4LFB7HJNzmzkZTb/F7Sx0pJFdukn
+ mQormZtJm9kytIRu0M7kDk5zSMzTxo/U3OFcwRxJuvHp6kKiyqFiheMAuMQKhAem/QxfTkQgiDa
+ sTPAC
+X-Gm-Gg: ASbGncvK5g1VXUyikgdzt7wYhOvJXmW4x2G2bqDolrMtimNtAO7pgfnHjj5ucKvxD/B
+ 4Bb/oZRCWcIiM7Y4UYMcUvn10me+6Ki8jlfhMDDiFDInn2axRkizmlzbgm2CYTD0F9PqeR1j1uw
+ 0V76IvDcV45FdM2hgXlMpzXURb+BpGbePad+4fZjGWkClCvyRO6sZ+f/aAv9iqTnxr3pqb8AOsd
+ ognU8c9b6ybcaFNMwDYQsZ4xm3fGHL35nYPGaTSEb26+L7NyLilbu7A7vUlCzd1pFeoHpB3fm1S
+ LoCFkNpmbCDWueG0O2ZzBktg1ZU2+M9uVTGFDEJj7vf8BT8fh4a7JPvpgA8Nbs49zRXYLQ==
+X-Google-Smtp-Source: AGHT+IHJmON7aMBxIeblbozpqex3lT3/qi/lCKfSh9UjKkSc1DLZFUFUub8EYg1lRNIqf0WHJq/RCA==
+X-Received: by 2002:a17:907:b00f:b0:ad8:9084:4ec0 with SMTP id
+ a640c23a62f3a-ae057b894cemr94259566b.35.1750404970403; 
+ Fri, 20 Jun 2025 00:36:10 -0700 (PDT)
+Received: from [192.168.0.33] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae0541b6e41sm115215766b.121.2025.06.20.00.36.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Jun 2025 00:36:10 -0700 (PDT)
+Message-ID: <ce9f3c01-1025-48cb-8f4f-aa27781fa5df@linaro.org>
+Date: Fri, 20 Jun 2025 10:36:09 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOMZO5CpcBTKQW4O6qFH4TgvsBBzmud1MQOEtz1i0V3UApz-sQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: open list <u-boot@lists.denx.de>
+Subject: [PULL next] u-boot-at91-2025.10-a
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,61 +97,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio, Alice
+Hello Tom,
 
-On Thu, Jun 19, 2025 at 10:01:52PM -0300, Fabio Estevam wrote:
-> On Wed, Jun 18, 2025 at 4:30 AM Alice Guo (OSS) <alice.guo@oss.nxp.com> wrote:
-> >
-> > imx: update the building bootloader image related part for
-> > i.MX8QXP, i.MX8QM and i.MX95 B0.
-> 
-> This way it is written above it looks like a cleanup, but if I
-> understand correctly, there was a bug report from Enric, so should
-> this entire series target master as a bug fix?
-> 
-> Francesco brought a good point: are other imx8qxp/qm boards affected?
-> Could you make the fix to all boards?
+Please pull tag u-boot-at91-2025.10-a , the first set of at91 features
+and fixes for the next 2025.10 cycle.
 
-I have not looked into the details myself (no time, sorry), but I
-had a quick look at our CI and current master U-Boot is able to boot
-on both apalis-imx8 and colibri-imx8x.
+This feature set includes the addition of new sam9x7 SoC and a new board
+named sam9x7-curiosity. There is also new support for sam9x60 compatible
+at91 watchdog.
 
-```
-U-Boot 2025.07-rc4-0.0.0-devel+git.a239cdc0bd4b (Jun 17 2025 - 23:21:42 +0000)
-CPU:   NXP i.MX8QM RevB A53 at 1200 MHz - invalid sensor data
-DRAM:  8 GiB
-Core:  161 devices, 19 uclasses, devicetree: separate
-MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial@5a070000
-Out:   serial@5a070000
-Err:   serial@5a070000
-Model: Toradex 0067 Apalis iMX8QM 8GB WB IT V1.1B
-Serial#: 15543176
-Boot:  MMC0
-Reset cause: POR
-Build: SCFW 83624b99, SECO-FW 7d5462e6, ATF android
-Net:   eth0: ethernet@5b040000
-```
+Thanks,
+Eugen
 
 
-```
-U-Boot 2025.07-rc4-0.0.0-devel+git.a239cdc0bd4b (Jun 17 2025 - 23:21:42 +0000)
-CPU:   NXP i.MX8QXP RevC A35 at 1200 MHz at 33C
-DRAM:  2 GiB
-Core:  110 devices, 21 uclasses, devicetree: separate
-MMC:   FSL_SDHC: 0, FSL_SDHC: 1
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial@5a090000
-Out:   serial@5a090000
-Err:   serial@5a090000
-Model: Toradex 0050 Colibri iMX8QXP 2GB IT V1.0E
-Serial#: 14986935
-Boot:  MMC0
-Reset cause: POR
-Build: SCFW 83624b99, SECO-FW c9de51c0, ATF android
-Net:   eth0: ethernet@5b040000
-```
+The following changes since commit ce2a7fcbd565d55b1d3fdc0e68edd50a21eca7d4:
 
-Francesco
+  Merge patch series "list.h/treewide: get rid of no-op prefetch()"
+(2025-06-18 08:05:29 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-at91.git
+tags/u-boot-at91-2025.10-a
+
+for you to fetch changes up to 9b9a2c99946a7ad43d9716618ae48ea01947f5fa:
+
+  configs: sam9x75_curiosity: Add initial mmc default config (2025-06-19
+13:56:43 +0300)
+
+----------------------------------------------------------------
+First set of u-boot-at91 features for the 2025.10 cycle
+
+----------------------------------------------------------------
+Fabio Estevam (1):
+      board: sama5d27_wlsom1_ek: Get RAM size and base from devicetree
+
+Manikandan Muralidharan (5):
+      dt-bindings: drop at91.h from clock includes
+      clk: at91: clk-main: drop parent_name check when registering
+main_rc oscillator
+      ARM: dts: at91: sam9x75_curiosity: add tweaks for sam9x75
+curiosity board
+      board: sam9x75_curiosity: Add support for sam9x75 curiosity
+      configs: sam9x75_curiosity: Add initial mmc default config
+
+Varshini Rajendran (4):
+      clk: at91: sam9x60-pll: add support for core clock frequency inputs
+      clk: at91: sam9x60-pll: add support for HW PLL freq dividers
+      clk: at91: sam9x7: add pmc driver for sam9x7 SoC family
+      ARM: at91: Add sam9x7 soc
+
+Zixun LI (6):
+      arm: at91: wdt: Remove at91_wdt struct
+      arm: at91: wdt: Rename regval in priv data to mr
+      watchdog: at91sam9_wdt: Rename priv to wdt
+      watchdog: at91sam9_wdt: Add SAM9X60 support
+      ARM: dts: sam9x60: Add watchdog DT node
+      ARM: dts: at91: sam9x60-curiosity: Enable watchdog node
+
+ MAINTAINERS                                        |    1 -
+ arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi    |    4 +
+ arch/arm/dts/at91-sam9x60_curiosity.dts            |    4 +
+ arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi    |   95 ++
+ arch/arm/dts/sam9x60.dtsi                          |    8 +
+ arch/arm/mach-at91/Kconfig                         |   12 +
+ arch/arm/mach-at91/arm926ejs/Makefile              |    1 +
+ arch/arm/mach-at91/arm926ejs/sam9x7_devices.c      |   49 +
+ arch/arm/mach-at91/include/mach/at91_wdt.h         |   25 +-
+ arch/arm/mach-at91/include/mach/hardware.h         |    2 +
+ arch/arm/mach-at91/include/mach/sam9x7.h           |  172 ++++
+ arch/arm/mach-at91/spl.c                           |    4 +-
+ board/atmel/sam9x75_curiosity/Kconfig              |   15 +
+ board/atmel/sam9x75_curiosity/MAINTAINERS          |    7 +
+ board/atmel/sam9x75_curiosity/Makefile             |    7 +
+ board/atmel/sam9x75_curiosity/sam9x75_curiosity.c  |   66 ++
+ .../atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c  |   11 +-
+ configs/sam9x75_curiosity_mmc_defconfig            |   73 ++
+ drivers/clk/at91/Makefile                          |    1 +
+ drivers/clk/at91/clk-main.c                        |    2 +-
+ drivers/clk/at91/clk-sam9x60-pll.c                 |   55 +-
+ drivers/clk/at91/pmc.h                             |    2 +
+ drivers/clk/at91/sam9x60.c                         |    7 +
+ drivers/clk/at91/sam9x7.c                          | 1085
+++++++++++++++++++++
+ drivers/clk/at91/sama7g5.c                         |    6 +
+ drivers/watchdog/at91sam9_wdt.c                    |   55 +-
+ include/configs/sam9x75_curiosity.h                |   23 +
+ include/configs/sama5d27_wlsom1_ek.h               |    6 -
+ 28 files changed, 1749 insertions(+), 49 deletions(-)
+ create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+ create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+ create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
+ create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
+ create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
+ create mode 100644 board/atmel/sam9x75_curiosity/Makefile
+ create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+ create mode 100644 configs/sam9x75_curiosity_mmc_defconfig
+ create mode 100644 drivers/clk/at91/sam9x7.c
+ create mode 100644 include/configs/sam9x75_curiosity.h
