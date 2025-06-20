@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10409C7115B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 01:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3483EC7115A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 02:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 065D682CBC;
-	Fri, 20 Jun 2025 03:02:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8578C82CDF;
+	Fri, 20 Jun 2025 04:26:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PkOg6Iql";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YlDqt+pT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E83482CDF; Fri, 20 Jun 2025 03:02:07 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 6EE3082D4A; Fri, 20 Jun 2025 04:26:02 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA90D82C55
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 03:02:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 165C682CFA
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 04:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-54e98f73850so1159909e87.1
- for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 18:02:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-2da73155e91so396068fac.0
+ for <u-boot@lists.denx.de>; Thu, 19 Jun 2025 19:26:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750381324; x=1750986124; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1750386359; x=1750991159; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fjKOb+blTNS8URU2UdyKp+brES/Cc8iOc96+GeAuGpA=;
- b=PkOg6IqlAMHfIPAQLzhbpO9+t0scY+EVvP3CFqpW+kpLm32Yf97OBFLRfZOLJDiKkR
- 2ecXqHKfMNsHD0h7aovZXzS79MKrWLPSiHxLQRONvztcUFFIl9NLv2Nmf6OgXUoQ7oRn
- 6dlG7XWRlHlcRXMvN223DfWZ4MyReA6teMKHQteNG8A7yitwfRmLTQfG+hcap5A8DEUm
- wq4huM/Y7MhQjLovbNQ37IrSRdo/doWaE/1woPi1nIj0eveZoBAW3Nx+lOAOAPaJbK0N
- EC2Ic4NSjE7nymkPrZgU52CPnDX2rOmXIF/53uHJ9tVxXOJ56A80ObYGBKwe8n8SxlhQ
- 9keg==
+ bh=xsNJfwr2fJiSrXwNpDjvOnZDK2i4Yf3k1Rg19bpt+yA=;
+ b=YlDqt+pTL9KVkT6vcNm6BrNDX22M0y2+ZMjULyg0j0EmX6xmJzUPUFy7L/bSWr/xh/
+ 5triXK4QfDu6NUcjKo4CS6wiP8kp4ym2CLsj9NacdT7Bm2o6/plUi4Sc/XhYd+y2mI1q
+ Ez6VwF7vQ/M1TjJJGsV7KroKweNcJAEINiA0t7KT3OJGYGBXp7OeEox6SFhPC/swzAte
+ zdbdMzw8vf7LAOk856sEYmipPwHNlfTwndz0cSuB5qsTf4AZd1wsn8D66ZFOEQQ/3ihO
+ WLwhziHQ0+deYjE8rTvWBFu301mxCwd3qG2tUAn5Imo0L9cJnoVn/XzmnByTQpVDsBq9
+ CP4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750381324; x=1750986124;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1750386359; x=1750991159;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fjKOb+blTNS8URU2UdyKp+brES/Cc8iOc96+GeAuGpA=;
- b=KGvB6gg6qErhgTClKU48zBYhrK8VnxkBy0erxbQxE0dbZlO6iLdziDtNXsuvDWngmn
- 17SuC/K8UTaazaI2/JBpAIeAI+nqwHsoao+e5lFd/ijP6zCQChYbC4NwG3O2togN+DqE
- wq9yj8DSBozGTWEY2JHLHncaH/lVQHJvwy5oKuv6KmksGK/oa2Lo3LwZQlb9Qqi/lber
- skZHCq4LeForS6tGXOCQGbcdCNA0WgBl2GXIlNfwxCm30umKS2iPU00MRHTrzHY52ZA3
- b1pqH+iMju7XIUGJ+Zm4wOTKaEEoTBTCnW3SA6w6XKcdQ+KB2H1DTwQY2ZQ/sbAmLNHu
- Yn7w==
+ bh=xsNJfwr2fJiSrXwNpDjvOnZDK2i4Yf3k1Rg19bpt+yA=;
+ b=E2uXpK1BBgkfhJUK0nqDzIX7zZlEPLZ8BJ+7S0mft37ag0+pVRxaaWWmMX3bAsk/rT
+ 9wuCcGxOk50s7u/+4JM3Ay3ZbGcWGcBqSiFcNFZ4SOqzWOaKTemgnc4mXPkBQqXrh/FW
+ 9t7U1ERngcADOBDDs0YnQ3CtGgjJyWucnLTZNSx8tu3j09W68ZTRXNBrWfe48iuNNarl
+ X2Ih+JIDTNr9XwcgQymQ9J1dhMYMHMXxyxFAM6uhc6aElluIgWZuVtq1ucEf27Geu8mC
+ aLwuiHXEj4R/Fmag2rY6QqNoOCHFpUhg1EiJtF0TX9waeVYKNGPJEY9mrTc/lQQqQrtq
+ 4rIA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxaA1dqJKN5sUZLdqFlhYuH+4NqqMP6DBIBf578Nw1mdWdFVphLOPu2vZUie/GM2dpUZS1sBU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxWe7LeQch9DWYI5QwAFT+T6dBlICIwMHvAswtvPjZTjXi/RefI
- uTN5gucg8bz8Kup61D47tDsMsvjGAaRCdDqVfmq+lB8hz/b5gndWj44ofhCnNd8eLoa8hNa1OG3
- s+79RxD6BDvOamFuVMhHzcgkNIQ/MXt0=
-X-Gm-Gg: ASbGncvZijvFbHmcZzgY4qScjL2PrAoB5pGPqDoEmlJX2gqrtvhZNe5E1iU1U6xvOSF
- zugnSygZ6Ku23+parARn1ch0pTBB6e89SyG35/+8f1By8ffyG6c5hbj/dKD9BuqOi8ilMYSF44E
- RRdxuwshgbk8m68uAeqY2sFrSjEut3dCKFT1/7+1C+Rxm0eCESkVewF/D+eDyF6x7F/25saIWJj
- bQ=
-X-Google-Smtp-Source: AGHT+IGJD12IXVaWZR62iczYsEGGdiUL9Qnnn0KXIM2qOMxyZUHE1CiKT3wBcSFFn+mkggC6RX1RUAcoNLMAtWaJcaQ=
-X-Received: by 2002:a05:6512:318e:b0:553:3770:c907 with SMTP id
- 2adb3069b0e04-553e3b9adf2mr274112e87.10.1750381323565; Thu, 19 Jun 2025
- 18:02:03 -0700 (PDT)
+ AJvYcCUL9Apb1mpaLS6pDuAd9z7hd70Wdg82kufd4xpOxSO0zTW7iG295quEc/w5UUnJs/mp7fGr9wo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNm2yAG5Qh5Mj3I1L/pzUD6mB/8xpGanYl/KNd0M1MtX2ClAs/
+ UGKjt+KaaitUOUP5eyf+hsD8qzqG7/79XwL3466hWmltNoPhh8KxpWKu/Fb60kZ7LgE=
+X-Gm-Gg: ASbGnct8wvzSxbwp30iv7UFWAlf8RcWVCMjACL6v0QN3DEEvXt66kbxASPlDloShmOZ
+ htmKUG182XsvRPjewb40zJ1RECydflAMC7ZsQxDBlgO3e0hyLuQM76T8Zru8reqiN2TA1z6gk1l
+ WR0T3ZcGEkdcf2uF946G/nNNJZ7rqXwx3SoIGmXgR5ODn77aJ+dKCHSTrO6XT7ZByB9k+KM10wD
+ swkHa6SqKzL6jAYMw+gtv4Nfb7JER5//Naa7pp5Z0fMn3G1zlMq+wvJXlVzKoY4fqxL8HkcEISg
+ 2MbKguvwtTS/ULXhRfKm9BgBJH6blZxcbY9Dr6k/KEft6QCZVlwdbOftYVKkoaJ02NfYHyLv
+X-Google-Smtp-Source: AGHT+IGrZ7nwg/mWkfdtlkembgghkFTnIldXu7BNfh/S8TZrMBlsj/hk3/zVfBAePRJ2FhlDGKTz1g==
+X-Received: by 2002:a05:6870:8196:b0:2d5:1232:b081 with SMTP id
+ 586e51a60fabf-2eeee573ca2mr1028523fac.29.1750386358792; 
+ Thu, 19 Jun 2025 19:25:58 -0700 (PDT)
+Received: from localhost ([2605:a601:a0f4:b000:264b:feff:fe59:d7f7])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2ee665ae530sm195324fac.20.2025.06.19.19.25.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jun 2025 19:25:58 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+	Minkyu Kang <mk7.kang@samsung.com>
+Cc: Minkyu Kang <promsoft@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH 1/2] configs: e850-96: Enable BOARD_LATE_INIT
+Date: Thu, 19 Jun 2025 21:25:55 -0500
+Message-Id: <20250620022556.10363-2-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250620022556.10363-1-semen.protsenko@linaro.org>
+References: <20250620022556.10363-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-References: <20250618-binman-v1-0-373e66c7a51f@oss.nxp.com>
-In-Reply-To: <20250618-binman-v1-0-373e66c7a51f@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 19 Jun 2025 22:01:52 -0300
-X-Gm-Features: AX0GCFs1SGXM6JuM6uHzS6c1H9eMMARI8Ky6E12-vvzZZynh1m_at6B0d1o9MqU
-Message-ID: <CAOMZO5CpcBTKQW4O6qFH4TgvsBBzmud1MQOEtz1i0V3UApz-sQ@mail.gmail.com>
-Subject: Re: [PATCH 0/8] (no cover subject)
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>, 
- Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, 
- u-boot@lists.denx.de, Enric Balletbo i Serra <eballetb@redhat.com>,
- Ye Li <ye.li@nxp.com>, 
- Jacky Bai <ping.bai@nxp.com>, Francesco Dolcini <francesco.dolcini@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,15 +102,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 18, 2025 at 4:30=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
-com> wrote:
->
-> imx: update the building bootloader image related part for
-> i.MX8QXP, i.MX8QM and i.MX95 B0.
+LDFW firmware should be loaded in board_late_init() when MMC driver is
+already probed and initialized. Doing so in board_init() causes MMC
+driver to be probed earlier, which leads to EFI disk objects not being
+created. Enable CONFIG_BOARD_LATE_INIT to make that possible.
 
-This way it is written above it looks like a cleanup, but if I
-understand correctly, there was a bug report from Enric, so should
-this entire series target master as a bug fix?
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ configs/e850-96_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Francesco brought a good point: are other imx8qxp/qm boards affected?
-Could you make the fix to all boards?
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+index 5facd418260c..e4c6aa28e0b7 100644
+--- a/configs/e850-96_defconfig
++++ b/configs/e850-96_defconfig
+@@ -19,6 +19,7 @@ CONFIG_ANDROID_BOOT_IMAGE=y
+ CONFIG_BOOTSTD_FULL=y
+ CONFIG_DEFAULT_FDT_FILE="exynos850-e850-96.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_BOARD_LATE_INIT=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
+ CONFIG_CMD_ABOOTIMG=y
+ CONFIG_CMD_NVEDIT_EFI=y
+-- 
+2.39.5
+
