@@ -4,149 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0B9C7115D
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 10:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D7BC7115D
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 10:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E82082D83;
-	Fri, 20 Jun 2025 12:30:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 99C2C82CBB;
+	Fri, 20 Jun 2025 12:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="pmNHQtc+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="soINMwbL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A5C382D60; Fri, 20 Jun 2025 12:30:07 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7612A82CF4; Fri, 20 Jun 2025 12:53:40 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F058F82D17
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 12:30:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEC6D80E9A
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 12:53:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y+mJ+p8L+iiznzaY28luMUJWP/RNJpYY0LkcSm7pTaBDjqL8N9z58czIjJ4RQNjOZCrxkQXkjVQ8ew1aOPYKve3vUZWrvy6Bl5vN5Czn3u5PzNcxwD/WVEcb2EUu+7yGtHZrYiQL5pRYss/nHZDJ/6bZg2JnF5Z6l4B4DBCyX3kpqd8xjzD+OGZQfW9JBg7tTnxXIOSCUTEvAd7iFgnFXFacKq6HZ+cqFmxf7KOZD/25ZLjXmQTTybuS6Qx1N0X9LNnSqO40isBpytLSMM8UPAknwWVcl1omIF17nIqTQU1k2DtF9CXa6I8wHKeLNvGuDWRoxvQkAHa91LMCydoxGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jpr+KR3QAGgdP1u+e4Sb1Fo02p7uRfATxYkRvs4AWjM=;
- b=qFUZ1e9abAQM1/9tVpOLJ5XDYy/LQiu7S+W/PMX/XbLwJi1wTFMwHHMz7zldQDOWHUQBWYhVYU5X1HFg0lNgW5EPpQj78siPBn9btBFIftlLMlj0OTHbdaSHnys7HReDZROuup1nvS+MP+cdcEirZPcsR1qLndVqp2fH/zYKr9bORVz0nUr5AbI11GYkRAvSx5EKxs6U32bo2OfvhOyNLN+DOAfnu17GrYwWDSdHqlPqN4rUh6oVmlAUGev248zNKMaM+rNQ9xx7fv9qFAc1uta/aCg0Xbih1Qvd42NUPzqQFc4bCb7cB8oFa0Lp+xojQin+oJz+md0zGEuG9M1QgQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jpr+KR3QAGgdP1u+e4Sb1Fo02p7uRfATxYkRvs4AWjM=;
- b=pmNHQtc+PVgPmQuttmGmgRpDrMwu40DZKZKEY5du8IYL6CRTMhQHd0hluxxih7jn8Ldo7PDR6UHTFsF+NyTa8XF27a46FXfzdNTTru921cvBIRu3ipERbsa4u/0XFNAoMaUct3y9ovYuSQ9jeYBxofWgtL126QTRCuU36Cb+mIiRBh/oCy2IZxSl4qOSUkpazJqp7cFBDnrsXcUmr5LMob3YcRMo8bL7WGgdMLqw35XjBCZKWpCJqS18aC7ZASSw3oicww+981qyEhYURW0kCVFf4iexoAuojesKjzb13oPJMPbtWcMfCULbGjr88Ca7J2X6l3jxb+z6ND5Aacs1hg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by BY5PR03MB5250.namprd03.prod.outlook.com (2603:10b6:a03:220::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.21; Fri, 20 Jun
- 2025 10:29:58 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::d020:3494:f031:fc29]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::d020:3494:f031:fc29%3]) with mapi id 15.20.8857.016; Fri, 20 Jun 2025
- 10:29:58 +0000
-From: alif.zakuan.yuslaimi@altera.com
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 2/2] mtd: nand: denali: Add SPL image loader
-Date: Fri, 20 Jun 2025 03:29:53 -0700
-Message-Id: <20250620102953.29633-3-alif.zakuan.yuslaimi@altera.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20250620102953.29633-1-alif.zakuan.yuslaimi@altera.com>
-References: <20250620102953.29633-1-alif.zakuan.yuslaimi@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BY3PR05CA0005.namprd05.prod.outlook.com
- (2603:10b6:a03:254::10) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43edecbfb46so11900875e9.0
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 03:53:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750416817; x=1751021617; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JagsejbD9yBFCvgrpOCTNkhxZwJtbbKIaAuP8Sz+lmg=;
+ b=soINMwbLUHocHvnJWsb6TrcF4nwL5ybvjrF4A9gwbjavimeOUPy3cPGm/7a/hxVvBA
+ yzpP2FWxBiZxzLqYa66zDpXDb01BRFtmHrGKTl1EhpoMTNhOiH0ytpXmKuWM7rNldn8V
+ yR9dj2VqAzvm/yv+IZT/Epk6Z082zkl7zE2TshhU8bPEktvDq2e2k/pfj/pf6KhQsaUd
+ /646Qs7y0MBMoIHxhbGPKMAqouja3/LSjEYcC0/RBx/aMo7D+Ejkrv6TEIZyNQdFOV/H
+ iizCF5DFehQ9NzrR47ZiqbwMGV3WOSM85qUyh4X1MeeA26RyFtTXmKwRMe1HWh3LOrpc
+ Fosw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750416817; x=1751021617;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JagsejbD9yBFCvgrpOCTNkhxZwJtbbKIaAuP8Sz+lmg=;
+ b=S4aE+oEjfBKNzuhq5ItVGEsccvY21XNDP5gn7TpkdmmZHp2unGzSoLojqCcVZ9SS5V
+ Hmfsd9/aED8oo91dSqbXDOKthcs9sNpdNM1k9AozvAwCHnnas2Ji8NCqXDxHDqoUTC1D
+ 6m4jjrkYWMZ4GtBEEw2z69BkHYqRMj8bL7iePnteXD3kREk5W3FERflBFipOh+MiCWFa
+ cnelSZGpWS9BZ/ZKzJOos9+v32SPLA6nu4m78MkG9IGKLPZGucS7BGUhqzmPocf5+7US
+ IDB5HKokIE7e1AKtpQSOC/U5/w7B9VHOQVOidrZFRqA5k+r6JMjQJjziI362vzceVj49
+ LmUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWdry6H/qLQdZeJcyUBPlE6Y/R1QKthfzTKaHh7V71+ysLqZFOFAXq/PDxMulUiH8ZOCxP9K+0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlVk89SN7mVpdoSyeX7lsZK9hdUgNTTjVDtkcaKskPKjbmH9o4
+ M0lnNJNd96cGNZ5iiXlOftVDl1eWtCQU45iY3Sk3lVapdRsN0lOIvS75HJpzERb4hco=
+X-Gm-Gg: ASbGncuzRudvqVdE015vDgff3RmeIjCh+KfZvm/JTEsYqWsNkYyBW1MYNsCzv62oywZ
+ CYijiEkBLQzMQkmtaWOzQWdu+cFDymDz/EIUZPDy7jBsQ+RNrJmvSu5Vi3OmFdqAAblchiy/asp
+ a/dCSCa0L8JRjpZ85z99WhzJuTtjJETvqMkI8vJuPPXI0ufhUJed7ulqqpr5C2/Qnaig5dcVjV8
+ lWsB+sqC4A4vKFmqw0dSOv9YQ+cHzPE1jcml/OOrif/FDsgqRcZRMw56ezgdwbhx+uYgCrcfT1l
+ h/OIXUfYx0ChisN0xCRZt398kCwtcBaL0edeX2imT6etd4O8Mtay8XGeIkg/EzIn3+5PY5KygKn
+ pFwVqq4lGFf+xhU92+6/mIAtFs+G6p7l0DqoDP8XX/ujTa/OIwNMa
+X-Google-Smtp-Source: AGHT+IGRS4UKELwbrWqFPxKwU2umXwtAEpE5mfxC19v4pdrHO2ucfLrisGIXm6NOCERbTUUmksltPQ==
+X-Received: by 2002:a05:600c:468e:b0:43c:f629:66f4 with SMTP id
+ 5b1f17b1804b1-453653c748amr23261375e9.0.1750416817120; 
+ Fri, 20 Jun 2025 03:53:37 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
+ ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-453647082a2sm21424125e9.37.2025.06.20.03.53.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Jun 2025 03:53:34 -0700 (PDT)
+Message-ID: <47e2ae8a-19b1-4841-bdde-e2994d1a7f70@linaro.org>
+Date: Fri, 20 Jun 2025 12:53:33 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|BY5PR03MB5250:EE_
-X-MS-Office365-Filtering-Correlation-Id: f21aac89-d34e-46ae-2bd8-08ddafe56803
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|1800799024|376014|366016|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MKlLm6bGUZD3orAMkM6fjQwh8qEyI9en8M0SmQmg37O+4sBGPNlDcs2CqOHO?=
- =?us-ascii?Q?1MDu5DiOu2RZezugkar3EUZ9l3gI2zn1puda8pwj17zGo3KDAJCkS2C1gv0l?=
- =?us-ascii?Q?hbH8BEy20TX1qf6ey8mIgE/Bz0FwStNRY+e0WRqBKVs7bF8TulOjuukYRns5?=
- =?us-ascii?Q?dtrti4Khrs7jPL594TgM2yktK3ewRAKO9dBoq4LASnYmWJNrsXRYVLwvzs3u?=
- =?us-ascii?Q?5lMiXyI+/XYBEW8ecfaMQSoEGyjtXW06GzJrOctdhFkRRXqvE9cmpojSBIvi?=
- =?us-ascii?Q?4Fbjo+u7hwxE87yfVUfVj2xg952+Nj+9sHxhh/o7rtrsM6c9jrsDlaPKrXXb?=
- =?us-ascii?Q?eJJtQISeizSLKzejHPIjIhnvV7Z9C7ZqoLoCG0rRzgaDzLUzWgKidGuO+IKf?=
- =?us-ascii?Q?eyydiwjqhQX+A/StxaOPww+b65NWKgRdYUKqW2DdVfWYAn90JcJwkmNK7wH8?=
- =?us-ascii?Q?QvM+SniG71HEnqZPiUExICoh5pnhO/ziqsfizFagtR4vGMdfsilGXoaPK4K9?=
- =?us-ascii?Q?Xlz7ID+gLSr9n/Xf0mTucJin0QmMl9hvH48tjMnq4MAZNz+X16Xtu89/1FdN?=
- =?us-ascii?Q?GP0YEKySNcNU00qq1mBembg4SokL0Pj+ZudN9GdMwnEihCaVdQd9DI+HRc2a?=
- =?us-ascii?Q?8rBy7q6MeK4L+SEXXTQxtdcwLnwhFfm2E8uXsHxCqQwxpFl8/ER7A6GTee6Q?=
- =?us-ascii?Q?uBDthCxuE1kmXqecZv5NUywXNHGdaW3rsN/QTJ81zUvCUDI1Y8Ke/Z3E2IGm?=
- =?us-ascii?Q?nkY5gJaNnc/xZd+zC627YwCdr8TVIoVDwsPk2GB/FTJ4y+V/dDAhrIjhHMD2?=
- =?us-ascii?Q?lJIgHPbC5pd4v5K9HaaYqsD6mNjVYTRrdFpXGQt2obzuh9l3Sz4pX/iluUqo?=
- =?us-ascii?Q?keofvOHj/JNNzILGkI7btCHMnk6pHUAjWso1pPn0k2WcxKdPjHIEpeoUp8KI?=
- =?us-ascii?Q?oX3876zcm06Gs1CueVlSGR5VZ8Ysx4RbX3ifDwgh5Irvv7kqzx3tNjAQLZv/?=
- =?us-ascii?Q?/Ts4FzkEbuMALwFLfFKOMlFmfF/5NKTx2ckFE8chCOxBZgTlHkdO1CKQxmOs?=
- =?us-ascii?Q?gtCg5Eq01QBifKGbZ9yDLMbTmPcD9cM9iqe9QN4PdiE8MAhNNE8a2PUnZx+0?=
- =?us-ascii?Q?25SEIStnFfDjb0AxYA5AwZDoyp6FWI5ia75O+NJVOimP5y4MbTK4EcQabkEN?=
- =?us-ascii?Q?i0eFUWSeRtTZpmLAyeY6SkaGZ7YecBSn1KMBAQBDvIkJ5jPmHmCYDjQ2adNG?=
- =?us-ascii?Q?5876R3B9A1qgq4uSHdN3GEq3YiGkTUlHT+hLxPK6zsLUGXdkYmU3ueEsAxfj?=
- =?us-ascii?Q?q1EsYe6RaHv9TfQhIZOeeTvqcdyG3XiCbQ6uJG0CIhG2l/zRrIurcJQs2Vn1?=
- =?us-ascii?Q?FFJHq2w=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(13003099007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9gtpa5Pyvh01XWvEekjdz5eat0aRwTEJ7tXLQeLe/7Th0li49isuMKPWRF1f?=
- =?us-ascii?Q?hbvOG9k7rShD7QOzU38MnumFi7I7vHUOe9kh+fCjNt8bwQk0PIz8pKpO+1ba?=
- =?us-ascii?Q?L6TrmDGoBkMOiApNeDEQWiDgQTRR68ROnOPY4R9V/JR3f6z18cH1eoacyj8N?=
- =?us-ascii?Q?h17RhEw36K+znCGiVLwv1gxuCy+Iboaoe6vinaghzaZf7km3dt5Wk1bqetBc?=
- =?us-ascii?Q?MdQZ/cNV0G/j0sgdIhckS0iZsfE1wf9S37z0zcMaubsc5YrOE7W4Y6ik/II2?=
- =?us-ascii?Q?1VMReczz1nqYqnhTIMsHRDBTirb35g/TuJ+t6u+qw4F0n992w7QKdGSyGFKT?=
- =?us-ascii?Q?2AVDpLa8pcwP18xaOr6LCsFbgICipl8tSXwTk7QBq4yE+ik97OldcdfaXfbG?=
- =?us-ascii?Q?BMskcDhaGb0CI5eOjuBr4DCoXCLR4V0hnM4sFFTN239dWDLz6VGxeztc/IEi?=
- =?us-ascii?Q?akQ5yvZuMleMvzVLi05xQ6B5i+8qoF6im/tzaw5DYYMYnYjnXB3SIpc+mMeF?=
- =?us-ascii?Q?DWdB3tFONxuQ3kOEpGAGFnTRuK/KKE2OkjjCrEHvuaqLGTZAKFsL5ezxgy3M?=
- =?us-ascii?Q?egP4iIZ9vjU8t6z/u7HJfdf2Q7PctcV9UFQ+aV39OlVYZDym04C4Bg0wbTzV?=
- =?us-ascii?Q?tva7/mDkqBcGus2uUNy73POIIskQz74L+FS4TGO+6frJeu0bPs7xGdfT+6M6?=
- =?us-ascii?Q?dSZPi5V3cziMmatP1sxrycjN1rySspJdlI0ubHX2VS80yeFD6QTli9/B2I7o?=
- =?us-ascii?Q?btgkIKReSjeWZ1YIPwtSZTXN9jox13UvVdG87P/Wq/I3QhA2N3k2Rk+wlVXl?=
- =?us-ascii?Q?MhlH1sXrLJozPyTuu027EJptiPioUqcmIIX396m7dqMvUlVv2PMOGxOgjoUd?=
- =?us-ascii?Q?QA5ytH/TQgj0aL8fgsK5acLFU6C74xFKo0mwgrcB1A/r1xnm/3wZp3qGbS0F?=
- =?us-ascii?Q?PgPpNKl0o6lxQRFknGCzMoj8Whbl5P5ZzJzZUkv2gF9Y224zzre0XUOI+vUk?=
- =?us-ascii?Q?KTNrD+Dcy0zKx1rZZ1Wi9sGJTUDsM8PyTCeWnrUHVF0IVzW+NmKBKHXYVmZD?=
- =?us-ascii?Q?l/kqZXVo0ioPPF5sMVz6VKkhQtfhlKUV9IJ0ntitDoh1dDtxpmS3ShMiB/y/?=
- =?us-ascii?Q?DVbmwjDnxfyl51XsGr00oqFGva4jkwtwgBDajnCN/P7yChi02L2IYwkmLDVD?=
- =?us-ascii?Q?cyN7VDTWNjXxeFbsy6CV5xXfNfOZ77mTv8oDMXP60or28oOxpDFNvYd/uZlJ?=
- =?us-ascii?Q?gbn1xUeLr13FVLIXGcphM5bS5gq4i1cp2KH/7kJorCekD9NvSUYh9bWL9aPZ?=
- =?us-ascii?Q?7DHcc41Wc/aWsu3sg5tv1YdlmiK9EACAZSfDDpQj3CHV3B1/ee723h1ALVzD?=
- =?us-ascii?Q?WisthRW/d5b7qBloQGfio6SOoDZKb+Ii4nwreLB7sy98kCuS3RpqYmtf00Xh?=
- =?us-ascii?Q?44k1PM3ewsDLIL0Gc7S7UO4QsuRct4Cb+PkT1yTjGnPgM/hGzkAB1/b0gR21?=
- =?us-ascii?Q?iy0yuMmJ7zLBvzz2WaBctty3bjb572ewRBhcPSoad9b1KostjDc+Ls4155Pa?=
- =?us-ascii?Q?ci6PaV1ZjK8kiWwgOBHl3xW8/kZSm9bQFPkYqplarTeW4ZBej+o8QoDZY3XU?=
- =?us-ascii?Q?Ig=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f21aac89-d34e-46ae-2bd8-08ddafe56803
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jun 2025 10:29:58.5603 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tA4bq5kEQFzwZVrQF6b++MGxoIhALGJ+dXsAne5EQyDYgQmZFl2vnI3UHCLmyql7A6Rh72NHfmOVQCMC21wkk1qzvcWl4BdKwcAA5MCZ33c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5250
+User-Agent: Mozilla Thunderbird
+Subject: Re: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
+To: Tony Dinh <mibodhi@gmail.com>, Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,104 +102,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Hi Tony,
 
-Add image loader used by the NAND SPL into the full Denali NAND
-driver. This allows usage of the full Denali NAND driver in SPL instead
-of the reduced SPL-only version.
+On 6/19/25 22:37, Tony Dinh wrote:
+> Hi Jerome,
+> 
+> While fixing some ext4 file system problems on 2025.07-rc4, I ran into
+> a problem booting a few Kirkwood boards. kwboot loaded the u-boot
+> image,
+> and then u-boot execution was frozen without anything going to the
+> serial console. I did a bisect and found the commit that caused it.
+> 
+> https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc02b8a75c1940
+> 
+> When I tried to reverse this commit, I had a build error like this
+> "{standard input}:24246: Error: selected processor does not support
+> `mrc p15,1,r3,c15,c1,0' in Thumb mode"
+> 
+> Currently, the only way to boot Kirkwood boards is to disable either
+> CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
+> 
+> I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
+> know if I can help with testing to troubleshoot this regression.
+> 
+> All the best,
+> Tony
 
-Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
-Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
----
- drivers/mtd/nand/raw/denali.c | 66 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 65 insertions(+), 1 deletion(-)
+The problem seems to be that some arm32 instructions are inlined
+inside thumb code and that's not allowed on this CPU without some
+interworking instruction (bx, blx etc.). For example, consider
+board_init_r(), is is mainly 16-bit instructions (Thumb):
 
-diff --git a/drivers/mtd/nand/raw/denali.c b/drivers/mtd/nand/raw/denali.c
-index b2401116689..1f302a6f1e7 100644
---- a/drivers/mtd/nand/raw/denali.c
-+++ b/drivers/mtd/nand/raw/denali.c
-@@ -1,12 +1,14 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2014       Panasonic Corporation
-- * Copyright (C) 2013-2014, Altera Corporation <www.altera.com>
-+ * Copyright (C) 2013-2025, Altera Corporation <www.altera.com>
-  * Copyright (C) 2009-2010, Intel Corporation and its suppliers.
-  */
- 
- #include <dm.h>
-+#include <hang.h>
- #include <malloc.h>
-+#include <memalign.h>
- #include <nand.h>
- #include <asm/cache.h>
- #include <asm/dma-mapping.h>
-@@ -1373,3 +1375,65 @@ free_buf:
- 
- 	return ret;
- }
-+
-+#if IS_ENABLED(CONFIG_XPL_BUILD)
-+struct mtd_info *nand_get_mtd(void)
-+{
-+	struct mtd_info *mtd;
-+
-+	mtd = get_nand_dev_by_index(nand_curr_device);
-+	if (!mtd)
-+		hang();
-+
-+	return mtd;
-+}
-+
-+int nand_spl_load_image(u32 offset, u32 len, void *dst)
-+{
-+	size_t count = len, actual = 0, page_align_overhead = 0;
-+	u32 page_align_offset = 0;
-+	u8 *page_buffer;
-+	int err = 0;
-+	struct mtd_info *mtd;
-+
-+	if (!len || !dst)
-+		return -EINVAL;
-+
-+	mtd = nand_get_mtd();
-+
-+	if ((offset & (mtd->writesize - 1)) != 0) {
-+		page_buffer = malloc_cache_aligned(mtd->writesize);
-+		if (!page_buffer) {
-+			debug("Error: allocating buffer\n");
-+			return -ENOMEM;
-+		}
-+
-+		page_align_overhead = offset % mtd->writesize;
-+		page_align_offset = (offset / mtd->writesize) * mtd->writesize;
-+		count = mtd->writesize;
-+
-+		err = nand_read_skip_bad(mtd, page_align_offset, &count,
-+					 &actual, mtd->size, page_buffer);
-+
-+		if (err)
-+			return err;
-+
-+		count -= page_align_overhead;
-+		count = min((size_t)len, count);
-+		memcpy(dst, page_buffer + page_align_overhead, count);
-+		free(page_buffer);
-+
-+		len -= count;
-+		if (!len)
-+			return err;
-+
-+		offset += count;
-+		dst += count;
-+		count = len;
-+	}
-+
-+	return nand_read_skip_bad(mtd, offset, &count, &actual, mtd->size, dst);
-+}
-+
-+void nand_deselect(void) {}
-+#endif
+006186a0 <board_init_r>:
+board_init_r():
+/home/jerome/work/u-boot/common/board_r.c:799
+  6186a0:       b5f0            push    {r4, r5, r6, r7, lr}
+  6186a2:       b0ab            sub     sp, #172        @ 0xac
+get_gd():
+/home/jerome/work/u-boot/./arch/arm/include/asm/global_data.h:127
+  6186a4:       464a            mov     r2, r9
+...
+
+but then suddenly:
+
+/home/jerome/work/u-boot/arch/arm/mach-kirkwood/cpu.c:242
+  619aae:       9b15            ldr     r3, [sp, #84]   @ 0x54
+writefr_extra_feature_reg():
+/home/jerome/work/u-boot/./arch/arm/include/asm/arch/cpu.h:100
+  619ab0:       ee2f3f11        mcr     15, 1, r3, cr15, cr1, {0}
+                ^^^^^^^^
+                32-bit arm instruction
+
+I would expect some call to a *_from_thumb() veneer, such as in:
+
+006009dc <do_bootm_qnxelf>:
+[...]
+/home/jerome/work/u-boot/boot/bootm_os.c:379
+  600a02:       9501            str     r5, [sp, #4]
+/home/jerome/work/u-boot/boot/bootm_os.c:384
+  600a04:       f04a fc7c       bl      64b300 <__dcache_status_from_thumb>
+
+
+0064b130 <__dcache_enable_from_thumb>:
+__dcache_enable_from_thumb():
+  64b130:       4778            bx      pc
+  64b132:       e7fd            b.n     64b130 <__dcache_enable_from_thumb>
+  64b134:       e59fc000        ldr     ip, [pc]        @ 64b13c <__dcache_enable_from_thumb+0xc>
+  64b138:       e08cf00f        add     pc, ip, pc
+  64b13c:       fffffb28        .word   0xfffffb28
+
+We may need to move the inline functions with mrc/mcr to a .S file,
+making sure it's built with -marm on CPUs that do not support Thumb2.
+Then hopefully the proper interworking sequence would be inserted by the
+linker as is the case when Thumb is calling into object files resulting
+from .c files built with -marm (for example: arch/arm/mach-kirkwood/cpu.c
+which has CFLAGS_cpu.o := -marm).
+
+In the meantime, could you try the following patch?
+
+diff --git a/common/Makefile b/common/Makefile
+index 35991562a12..a509675335a 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -19,6 +19,8 @@ obj-y += version.o
+ # # boards
+ obj-y += board_f.o
+ obj-y += board_r.o
++CFLAGS_board_f.o += -marm
++CFLAGS_board_r.o += -marm
+ obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
+ obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
+
+I think it should resolve the issue, but is does also increase the
+size of the binary (+4 KiB). So the .S solution would definitely be
+better if it works IMO. I'll try to propose something ASAP, will
+likely be on Monday, feel free to give it a try by yourself though :)
+
+Thanks,
 -- 
-2.25.1
-
+Jerome
