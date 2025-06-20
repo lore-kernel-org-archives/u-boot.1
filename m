@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF68C71155
-	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE5AC7115B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Jun 2025 08:56:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A218282E20;
-	Fri, 20 Jun 2025 10:56:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1380C82D88;
+	Fri, 20 Jun 2025 10:56:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AZTYy4PV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C9G2Q+lY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 639A982E0A; Fri, 20 Jun 2025 10:56:09 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id C13D082E08; Fri, 20 Jun 2025 10:56:27 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7336C82CBC
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:56:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA99D82CF4
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 10:56:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43ea40a6e98so18476675e9.1
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:56:07 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-450dd065828so11262515e9.2
+ for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 01:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750409767; x=1751014567; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750409785; x=1751014585; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=+XjhYyWllbyQQA0AbEeLsSUsXzvkA+h9jLRS1FIfcXg=;
- b=AZTYy4PVXBHQ/pw8e8ufRKFyLwKiQ4D4cjnWzBvt9qaq7eVadCR/Yw5ourdqthYcj0
- snHffFHdHVE4DjCOTlNM/mpODhxlA4ZKLPCtcjwWCVJrI3hgyjNmIWMXBYWdplztm57R
- mlNxjjhS+JpM6llXTbn4r+xyulepCJn4BlrhFztMPs7ek9P1HpBxX9ZB0QGR5uC4AHOI
- hmkSCFOkmbUbzSOul03L7dr04i4piMg2D7YJfkSxBm1n0KTALsT3/jpXDCtpcL8kvvBR
- TQWWN9DrtnEfBFmcKUbtdMViqL5N5+xScFHvtNzd54S4mobodQXCZ0WpMGALqU5OtJ6F
- 6DOg==
+ :reply-to; bh=v7Xio3ajAvwmcDE7XJifhkZRpQZ6TVg/4XNkAn+gBZE=;
+ b=C9G2Q+lYYRMNqkAW8RXdyxCBr98a8fIP9UBbqbQkeVIfp9P6oqALQQ47YEqTYwkcul
+ UJA6xQ5KYK3iN5wyogARIOKcGuPwBKgqtzTlxYppA40lIhzH28eBQQMGyoaO2beIVKHw
+ OsBJMuSSJSLiPcQ5T00pGZVEn9zMysITg9AU31YiTtxY1XmiazgorAGzX7b6u2tA0vx/
+ 8AZrOqIdaD5vXxIFlNQl6yOXYB1wHrstz64j+Eubod8IwFign2TCyLBEG2LieeQEX25E
+ qkinuCc0fAViiK3RVWxT2hHdl+yFicc26oIKWXjLOrzm1zbFP2R2Ws0W66nJVmGqiDSo
+ XePw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750409767; x=1751014567;
+ d=1e100.net; s=20230601; t=1750409785; x=1751014585;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=+XjhYyWllbyQQA0AbEeLsSUsXzvkA+h9jLRS1FIfcXg=;
- b=ve7+J9JWAqmQ5u+fJkqM6NNH8aXeHore0iNjA/Hci9TTWMget68DFUu/ArYI/HgicS
- OrksEnv5T+kLCjpCKYQoY/of5NDP+qXUVq719xlK5oqheHSv7wR7zswQzIfaS5Pxs+my
- SLTJwQCf0IByoDgyu4gCGO4etD4zsU7+HsIBUbrgdTrRCjGOcoGVH5iuPLTFSd37yy+N
- bXVeQqmBSLDqk0wygKGgd59DSNuGIAw1QRH65mFNzDgoJTImwOBJrpiEwvHxxKnW1UWU
- WlC4aj2IkV0GvjSKabNXI8jwQOYoKSBBUSJaXnFOGiXGp7kmelHadxcBgLN22aBby2Vi
- 3zZg==
-X-Gm-Message-State: AOJu0Yzkq1Gq4h7+fVc4XCuYBKahG4SQ5IfZdYVIRQpMVzTrMaKk0aMZ
- ukkNSLgQl9BL6JtpyX4qI4PqeQva8HvHvBNApeK3VcxDlZNo//IglsLCIdx0T16HcIs=
-X-Gm-Gg: ASbGnct78xXEp30kTpm5BjKSEQ3vCGcJr8tP07wv5CuCcoyLTMVLJME64+ccFr5i/4h
- y4kb2tvSzdAR61MM65X4eq5NcfV/PNO7KAdBgnY1hjgCq3ksL+SWA/fjyK3FFwhD8e6iKXdwG7O
- X3qTeBbDA/cvtc1o5OBKN+Q+QVrnajy4MwV1BewnLzaODyDL2Vs7EMVxDTnePXdjfwRhriZM1bN
- eekngbHZSMMVCsBHGL18pbY25drpD06M08lqRXQP4NfXh8HAA+LmmLoq2Ns1Sbz/mF9BiKSRjG8
- /yHDUN+Ybr2VJhrl8R33fspMZk2WygE0E23vdtEbAi9nvh5t/2xxm9qndOzHigOGaqL0jce5pry
- J1KRRBzQaU6nr3wZBNyrhq8qsSAInntRJfWSr0tc=
-X-Google-Smtp-Source: AGHT+IFW1ZkOXwXFnmAQulg4qX5RBV6q0oPnGtmPHXVE8qY84qZvpK3vh0+QzLV5u0l3HtoHyzWrdA==
-X-Received: by 2002:a05:6000:4185:b0:3a5:2923:8006 with SMTP id
- ffacd0b85a97d-3a6d12daab6mr1477652f8f.25.1750409766852; 
- Fri, 20 Jun 2025 01:56:06 -0700 (PDT)
+ bh=v7Xio3ajAvwmcDE7XJifhkZRpQZ6TVg/4XNkAn+gBZE=;
+ b=gCPU843ejTH2/5O5um65JjHpeJh9aPntTeB5/oHdLmDIuKBT0n08i0wXkY8wybgrjS
+ rMtxn8lLdRrNxH8LRCA3IFoUyv44vvFxefBB+Ojseuaa6hhKkPOHyliJNdlVF8m+ckyZ
+ 7undkmX7W6GCRzDZzHLpMCtYIxrMDqvtkPsQbTt4xh6v3yiR0D+zOlFFZ/6nI/4F7t1W
+ w5fVj3G14QBgx/tDrNVAEInC2PEMUbcfuVsF7zf9HJBM1gRj+j/Z2c/7SG7BqcqdXXyG
+ vI+RCwcG+LIdgCPEq9aXyeWkAum8zxyStqyY8L6fontjShyt0EMhWIoHwH/K56FwXTmG
+ p/Zw==
+X-Gm-Message-State: AOJu0YyNWEXhQ4bj0D0XqdYmRo2k1lc/o6qQ+SwWZRo/yNsS1LY+Cju0
+ amYDtDTFsZQLBBA44dYfYymvZMw9IdKDO7XFKpYuIWUD1NfOTyp57dQIKreLjsGaJIg=
+X-Gm-Gg: ASbGncvLTCEwK4jfEyf8KQspeVz7RIS4jwVAU59VOUGon/MaozOwlH7qB8IB3SYSmXv
+ t+132InvAOftO6d3IGWpoHrDQodkjZgoEdM4RU82KdyyXw+hor9sAXiR/AQP+pXiPW2fSmHx23S
+ BeWlG/ndxtdfkPdiyuba8OTyF+S+1Jx/PlNyRXcWpCep4zsczpQxOHVWYwh//VgC+O/+FKRIefS
+ hZGwG1utGbZwNWOZwWwLYYAM4i2VGTaxIKnTkv1DrbA6BHNuAzSYG6g97xEmCiBer4JyGGsOORl
+ nT6GQfrZTwvcsIVixYW1o8+NkCr2mOWuOPNh0mBWgUty4NEvR+Cig//0oQaOy9HkLPolfDb8KKf
+ 4RBZ9XXDXDlhEgRIB/hR8BPw5RBqcVDfxPu3YOsY=
+X-Google-Smtp-Source: AGHT+IELSTGxqhwuUBf9gmcwGBUhJgstdtHyvurXI724P897zhYToA+/Kdj9r275Xip38eR6AebLWQ==
+X-Received: by 2002:a05:600c:3115:b0:440:9b1a:cd78 with SMTP id
+ 5b1f17b1804b1-453654cbfdbmr18904685e9.10.1750409785204; 
+ Fri, 20 Jun 2025 01:56:25 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:3d60:2fa3:b982:4627?
  ([2a01:e0a:3d9:2080:3d60:2fa3:b982:4627])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4536366326fsm25729475e9.38.2025.06.20.01.56.06
+ 5b1f17b1804b1-4535eac8c16sm51629345e9.19.2025.06.20.01.56.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Jun 2025 01:56:06 -0700 (PDT)
-Message-ID: <aa1916b3-804e-4701-b209-b2ae73131bcb@linaro.org>
-Date: Fri, 20 Jun 2025 10:56:06 +0200
+ Fri, 20 Jun 2025 01:56:24 -0700 (PDT)
+Message-ID: <868e429a-75b5-47a1-828d-1791e2826c4c@linaro.org>
+Date: Fri, 20 Jun 2025 10:56:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 5/8] phy: qcom: Add SM6350 to QMP UFS PHY driver
+Subject: Re: [PATCH 6/8] regulator: qcom-rpmh-regulator: add support for
+ pm6150l regulators
 To: Luca Weiss <luca.weiss@fairphone.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com>
- <20250618-sm6350-bringup-v1-5-3cc22aab7a7a@fairphone.com>
+ <20250618-sm6350-bringup-v1-6-3cc22aab7a7a@fairphone.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -111,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250618-sm6350-bringup-v1-5-3cc22aab7a7a@fairphone.com>
+In-Reply-To: <20250618-sm6350-bringup-v1-6-3cc22aab7a7a@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,26 +133,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 18/06/2025 16:25, Luca Weiss wrote:
-> The UFS on SM6350 can reuse the SDM845 configuration, just like in
-> Linux.
+> Add the pm6150l regulator data found on the Qualcomm SM6350 platform.
+> The tables are imported from the Linux driver. The SMPS regulators were
+> not added now.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 1 +
->   1 file changed, 1 insertion(+)
+>   drivers/power/regulator/qcom-rpmh-regulator.c | 31 +++++++++++++++++++++++++++
+>   1 file changed, 31 insertions(+)
 > 
-> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> index 449b97677788132dd6b9eb654732896756a3ff47..b536517f93a3a41a05b20d811033fc62c05169ec 100644
-> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> @@ -1467,6 +1467,7 @@ static struct phy_ops qmp_ufs_ops = {
->   static const struct udevice_id qmp_ufs_ids[] = {
->   	{ .compatible = "qcom,sa8775p-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg, },
->   	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
-> +	{ .compatible = "qcom,sm6350-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8150-qmp-ufs-phy", .data = (ulong)&sm8150_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8250-qmp-ufs-phy", .data = (ulong)&sm8250_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8550-qmp-ufs-phy", .data = (ulong)&sm8550_ufsphy_cfg },
+> diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
+> index 954deca5ed75ca4f58898ee401bd06c9da82e56e..0646614256049e49846aa257bd02466fb9cf59d7 100644
+> --- a/drivers/power/regulator/qcom-rpmh-regulator.c
+> +++ b/drivers/power/regulator/qcom-rpmh-regulator.c
+> @@ -456,6 +456,16 @@ static const struct rpmh_vreg_hw_data pmic5_pldo_lv = {
+>   	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
+>   };
+>   
+> +static const struct rpmh_vreg_hw_data pmic5_nldo = {
+> +	.regulator_type = VRM,
+> +	.ops = &rpmh_regulator_vrm_drms_ops,
+> +	.voltage_range = REGULATOR_LINEAR_RANGE(320000, 0, 123, 8000),
+> +	.n_voltages = 124,
+> +	.hpm_min_load_uA = 30000,
+> +	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
+> +	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
+> +};
+> +
+>   static const struct rpmh_vreg_hw_data pmic5_nldo515 = {
+>   	.regulator_type = VRM,
+>   	.ops = &rpmh_regulator_vrm_drms_ops,
+> @@ -493,6 +503,23 @@ static const struct rpmh_vreg_hw_data pmic5_pldo515_mv = {
+>   	.supply_name	= _supply_name, \
+>   }
+>   
+> +static const struct rpmh_vreg_init_data pm6150l_vreg_data[] = {
+> +	/* smps1 - smps8 are not added to u-boot yet */
+> +	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_pldo_lv,   "vdd-l1-l8"),
+> +	RPMH_VREG("ldo2",   "ldo%s2",  &pmic5_nldo,      "vdd-l2-l3"),
+> +	RPMH_VREG("ldo3",   "ldo%s3",  &pmic5_nldo,      "vdd-l2-l3"),
+> +	RPMH_VREG("ldo4",   "ldo%s4",  &pmic5_pldo,      "vdd-l4-l5-l6"),
+> +	RPMH_VREG("ldo5",   "ldo%s5",  &pmic5_pldo,      "vdd-l4-l5-l6"),
+> +	RPMH_VREG("ldo6",   "ldo%s6",  &pmic5_pldo,      "vdd-l4-l5-l6"),
+> +	RPMH_VREG("ldo7",   "ldo%s7",  &pmic5_pldo,      "vdd-l7-l11"),
+> +	RPMH_VREG("ldo8",   "ldo%s8",  &pmic5_pldo,      "vdd-l1-l8"),
+> +	RPMH_VREG("ldo9",   "ldo%s9",  &pmic5_pldo,      "vdd-l9-l10"),
+> +	RPMH_VREG("ldo10",  "ldo%s10", &pmic5_pldo,      "vdd-l9-l10"),
+> +	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_pldo,      "vdd-l7-l11"),
+> +	RPMH_VREG("bob",    "bob%s1",  &pmic5_bob,       "vdd-bob"),
+> +	{}
+> +};
+> +
+>   static const struct rpmh_vreg_init_data pm8150_vreg_data[] = {
+>   	RPMH_VREG("ldo13",  "ldo%s13", &pmic5_pldo,      "vdd-l13-l16-l17"),
+>   	{}
+> @@ -705,6 +732,10 @@ static int rpmh_regulators_bind(struct udevice *dev)
+>   }
+>   
+>   static const struct udevice_id rpmh_regulator_ids[] = {
+> +	{
+> +		.compatible = "qcom,pm6150l-rpmh-regulators",
+> +		.data = (ulong)pm6150l_vreg_data,
+> +	},
+>   	{
+>   		.compatible = "qcom,pm8150-rpmh-regulators",
+>   		.data = (ulong)pm8150_vreg_data,
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
