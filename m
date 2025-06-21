@@ -4,69 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502D3C71157
-	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 10:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08CFDC71157
+	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 17:19:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4AB982E08;
-	Sat, 21 Jun 2025 12:54:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0AFE082CCE;
+	Sat, 21 Jun 2025 19:19:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="q7I6FN7c";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="IVdZHSPA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94B8D82CF4; Sat, 21 Jun 2025 12:54:25 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 9C7B782CF4; Sat, 21 Jun 2025 19:19:52 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E81282D06
- for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 12:54:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A3B4260008;
- Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 57D4CC4CEF0;
- Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750503260;
- bh=j6PjFG5OMuZBhhRfC2sS4MKg7541JvE4utrmLTDy+hM=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=q7I6FN7c9HCXkaWX/S/xlArx2fLQlosPUxs9wip7ICtes2UKmod2X3eHj+QyxMhI4
- 2LoGH30pjHafAnU4xMrj47rxGfecTGj+vf+iS0sHzcV7a3X1S3fv8rV6cISbfpJ+xL
- qifaTa1Xsb3FjraCN00RmgsUjRkUdnCa30NKiVj5yr5VHBfPZQ56F/tVrOesNmGvdt
- sOtyntETtPlTKKxPDwcoY5KLGM7epI3ENCcmft+4dGPsv4iCwx+pYlPNdiRz/2S9y8
- Lb/3oT4ALRHkppCu1GY/+buuRBBmtVvYbVjhsBLEAwob2/9EAyv8HrMY5dYk4H8iXl
- kofzvVsXGScOQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 4B076C7EE2A;
- Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Sat, 21 Jun 2025 18:54:19 +0800
-Subject: [PATCH RFC 2/3] clk: allow assigning parent lazily
+ by phobos.denx.de (Postfix) with ESMTPS id 699D48210D
+ for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 19:19:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1750526388; x=1751131188; i=xypron.glpk@gmx.de;
+ bh=zr2si95s8z4MI23vwT3hSYpv+D3FGi0UwRZtW19iu8A=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=IVdZHSPAqWtqdAPNs+2RxCcWnIlpQ6uFGGVvGKWZxxe83zzN/wVaHqjuC8dAGbuW
+ QNmOFoShTEEcJ16lLZEanC7itg8hyHsNPWywOe1JUSSX6wesm0cZlm00WLxUD4VwM
+ iOqGrLMQ8whLnMdqmqTKIxfn2vI18zk3qWR3US42zu7OjXVyGpQ09GISUnXqp6KwB
+ KvF1egPAsBa9c9cWyeJTj+D9Oo8LkngPZOlIKyTxRzebbf6CElphU8lFnUFUVBzuR
+ 55NdvJYeA/jdWBuDZYHH5dFeiqLx/w6qLXkbuUhifyRTbewQFIvJ20I3c8VmI6Et1
+ 0+Z0DokUb1FYZch0vA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MYNJq-1uFCF73kSA-00Nsl7; Sat, 21
+ Jun 2025 19:19:47 +0200
+Message-ID: <61b4648f-8a78-4551-a8bd-fd7c4a0638a3@gmx.de>
+Date: Sat, 21 Jun 2025 19:19:42 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250621-clk-reparent-v1-2-48a7f2f31c59@outlook.com>
-References: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
-In-Reply-To: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1750503259; l=4677;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=M4ETxzx1tCptzduCq/daGnVeROMlU8YfDr9GIZMOx4o=;
- b=8od1PjD+TgZEf9MupDiUgqSp9I/+GlIFGfaOfDXPRbx41XTjIHkWsXGm6vQzRj8qiYAqyFSiJ
- RNk/O+d/kteCW4hl0gihL46oYFE+/sqJFz7W/bPITLEGFX/XG31K/3A
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request doc-2025-07-rc5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:snwN0HjVjPA5S0HVo1xMyDZmSFjG4kR1p2GVhAPIA2//OF7IOoX
+ mOXBLZVS6/MiPBchwcgk1h9ptjogk95rA2tATAtrHWjDS0BuFGFbclWjKz27MpKVWtMWRKd
+ IgIpDKjnrKwDadFuS1orPG9B6qBuPgvUzSab2xDjYR0gdZ1eeXSVV5Bwb5lTwl9l4aos87l
+ XIbc3qGkb9qoHgT+Uqg2A==
+UI-OutboundReport: notjunk:1;M01:P0:tPxWrRy1He0=;FP1x5vnuIoddb0jJdsMMTe9Auqk
+ 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
+ jTKM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,166 +115,33 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+The following changes since commit 721eecd9cbf2cc59c5230abd37d02d4a02f75cc=
+7:
 
-Don't mandate parent to exist when registering clocks.
+   Merge patch series "common/spl fixes" (2025-06-19 11:01:52 -0600)
 
-Cache the parent name in core clk struct, and refresh the parent in
-clk_get_parent(), which is called later.
+are available in the Git repository at:
 
-Also modify clk_enable() and clk_disable() to use clk_get_parent()
-rather than getting parent from dm directly, which bypassed the
-reparent logic.
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
+tags/doc-2025-07-rc5
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
----
- drivers/clk/clk-uclass.c | 47 ++++++++++++++++++++++++++++++++++-------------
- drivers/clk/clk.c        | 14 ++++++++++++--
- include/clk.h            |  2 ++
- 3 files changed, 48 insertions(+), 15 deletions(-)
+for you to fetch changes up to 820bbf1d46f5d3fd30d306e955d2b4d1487c3484:
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 2167cd5ad0fe..f619b963e66d 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -494,14 +494,31 @@ struct clk *clk_get_parent(struct clk *clk)
- {
- 	struct udevice *pdev;
- 	struct clk *pclk;
-+	int ret;
- 
- 	debug("%s(clk=%p)\n", __func__, clk);
- 	if (!clk_valid(clk))
- 		return NULL;
- 
- 	pdev = dev_get_parent(clk->dev);
--	if (!pdev)
--		return ERR_PTR(-ENODEV);
-+	if (!pdev) {
-+		clk = dev_get_clk_ptr(clk->dev);
-+		if (!clk->parent_name)
-+			return ERR_PTR(-ENODEV);
-+
-+		debug("%s: Trying to reparent to %s\n", __func__, clk->parent_name);
-+
-+		ret = uclass_get_device_by_name(UCLASS_CLK, clk->parent_name, &pdev);
-+		free(clk->parent_name);
-+		clk->parent_name = NULL;
-+		if (ret)
-+			return ERR_PTR(ret);
-+
-+		ret = device_reparent(clk->dev, pdev);
-+		if (ret)
-+			return ERR_PTR(ret);
-+	}
-+
- 	pclk = dev_get_clk_ptr(pdev);
- 	if (!pclk)
- 		return ERR_PTR(-ENODEV);
-@@ -652,7 +669,7 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
- int clk_enable(struct clk *clk)
- {
- 	const struct clk_ops *ops;
--	struct clk *clkp = NULL;
-+	struct clk *clkp = NULL, *clk_parent;
- 	int ret;
- 
- 	debug("%s(clk=%p name=%s)\n", __func__, clk, clk->dev->name);
-@@ -668,9 +685,10 @@ int clk_enable(struct clk *clk)
- 				clkp->enable_count++;
- 				return 0;
- 			}
--			if (clkp->dev->parent &&
--			    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
--				ret = clk_enable(dev_get_clk_ptr(clkp->dev->parent));
-+
-+			clk_parent = clk_get_parent(clkp);
-+			if (!IS_ERR_OR_NULL(clk_parent)) {
-+				ret = clk_enable(clk_parent);
- 				if (ret) {
- 					printf("Enable %s failed\n",
- 					       clkp->dev->parent->name);
-@@ -743,13 +761,16 @@ int clk_disable(struct clk *clk)
- 				return ret;
- 		}
- 
--		if (clkp && clkp->dev->parent &&
--		    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
--			ret = clk_disable(dev_get_clk_ptr(clkp->dev->parent));
--			if (ret) {
--				printf("Disable %s failed\n",
--				       clkp->dev->parent->name);
--				return ret;
-+		if (clkp) {
-+			struct clk *clk_parent = clk_get_parent(clkp);
-+
-+			if (!IS_ERR_OR_NULL(clk_parent)) {
-+				ret = clk_disable(clk_parent);
-+				if (ret) {
-+					printf("Disable %s failed\n",
-+					       clkp->dev->parent->name);
-+					return ret;
-+				}
- 			}
- 		}
- 	} else {
-diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-index b8c2e8d531b9..a0c7fad700f9 100644
---- a/drivers/clk/clk.c
-+++ b/drivers/clk/clk.c
-@@ -24,12 +24,22 @@ int clk_register(struct clk *clk, const char *drv_name,
- 	if (parent_name) {
- 		ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
- 		if (ret) {
--			log_err("%s: failed to get %s device (parent of %s)\n",
--				__func__, parent_name, name);
-+			/*
-+			 * The parent is not registered yet right now.
-+			 * Cache the parent name and reparent it when needed.
-+			 */
-+			log_debug("%s: failed to get %s device (parent of %s)\n",
-+				  __func__, parent_name, name);
-+
-+			clk->parent_name = strdup(parent_name);
-+			if (!clk->parent_name)
-+				return -ENOMEM;
- 		} else {
- 			log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
- 				  parent->name, parent);
- 		}
-+	} else {
-+		clk->parent_name = NULL;
- 	}
- 
- 	drv = lists_driver_lookup_name(drv_name);
-diff --git a/include/clk.h b/include/clk.h
-index a6ef4e026922..5f684dcbf9d2 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -37,6 +37,7 @@ struct udevice;
- /**
-  * struct clk - A handle to (allowing control of) a single clock.
-  * @dev: The device which implements the clock signal.
-+ * @parent_name: The name of the parent.
-  * @rate: The clock rate (in HZ).
-  * @flags: Flags used across common clock structure (e.g. %CLK_)
-  *         Clock IP blocks specific flags (i.e. mux, div, gate, etc) are defined
-@@ -62,6 +63,7 @@ struct udevice;
-  */
- struct clk {
- 	struct udevice *dev;
-+	char *parent_name;
- 	long long rate;	/* in HZ */
- 	u32 flags;
- 	int enable_count;
+   doc: cmd: wget: remove erroneous note (2025-06-21 19:03:42 +0200)
 
--- 
-2.43.0
+=2D---------------------------------------------------------------
+Pull request doc-2025-07-rc5
 
+* in wget documentation remove erroneous note about CAs
 
+=2D---------------------------------------------------------------
+Jerome Forissier (1):
+       doc: cmd: wget: remove erroneous note
+
+  doc/usage/cmd/wget.rst | 7 -------
+  1 file changed, 7 deletions(-)
