@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9732C71157
-	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 03:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D2EEC7115C
+	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 10:54:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C753D82CF4;
-	Sat, 21 Jun 2025 05:22:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B332A80C83;
+	Sat, 21 Jun 2025 12:54:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aqHOWbne";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fEXP8f/g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0187B82D06; Sat, 21 Jun 2025 05:22:30 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A138382D4A; Sat, 21 Jun 2025 12:54:23 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C74BD82AA4
- for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 05:22:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-40a55314d06so579260b6e.1
- for <u-boot@lists.denx.de>; Fri, 20 Jun 2025 20:22:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750476146; x=1751080946; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aguOS+B0wTMrMBPtS3EdqepbvZjS71ncH1It6O7hj2M=;
- b=aqHOWbne4gVxs6wGULtq72CPICN4E1t2xkm8w5L8aStAd9NcF2wJeQ33mk6tyJuKcM
- TvoEgOU7gC6KfpUlZp1oNQvA/qX4NVD1VCgYwV++fEZimRn6U501Oo2nMPLAc8Q6JanF
- NVDE4Th8WuP1xo1l1LGDnTCctsgsw97PRMMihKZAXNdQ2ZX8JZmoVP3DCMg3RwqvFTKY
- G8DQfK5aZZRghGGTv7/tyaD+aI88NRDpknJK/1dLSl7CPPDLs6/QCuq9bsBHL2G2Q2ow
- 0sbxamuevncA22JgsqD/fcieq+5ioxkEtm9WY2pWwMK2Uninoc+/pSwAYs5CBUGx5O/h
- bi8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750476146; x=1751080946;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aguOS+B0wTMrMBPtS3EdqepbvZjS71ncH1It6O7hj2M=;
- b=Fp9Hf+r/PZD9FeQ9iowd/zhyza+eP91xigQjiN/Ygwq4MTp9I9ZIWwxRKYjqRlnmmI
- 61SN4Fe5xUxDnsHeCzffWsJUuYNAzxUJPNA92kOVGakzkI2KykY69ZMPAkSd3O/jTxVD
- hq2ocp2g+DH+0rD2+wxHTSWgWpISlPFAnTmESGaKQ2OS73r4VssV9KiM+zNPpkzw43Tf
- Upa4rZLll6FHrRzrDY/Pu07q4VYU9VCveoMaUvhJgtDwP0EPH9/s5cQRzjC6VibHnOdZ
- 6mz18aILcj5pCVhVnFwDSvxZeXC9TLH7q+13ZBkYwTRTnNLKa8W69XniUd2G92hBd6Xg
- LBnA==
-X-Gm-Message-State: AOJu0YzrTwJmXBllj7jJs/4rUU3urTk9MevTU8L3CQp2LUoh+3HGzCJr
- hw3+zXRtCQx4ZNqtllLoe1ruhjFi774zTRW5Oigyg1hD1K/W0i8I0bn1
-X-Gm-Gg: ASbGncu1x6jT+dY6RT/0jUqbzfMlRG1//6UObaorlYUTF+gk/DjX4minp2m/E0rrjGF
- lqhKeZtJDPQWcfzmmvfuc2feuG+DretD4wTUDyZAwnP9F3hb+LuJ+8n2qWT1g0ZqS1oh0s9awRl
- q/nBe7DWezcA4ttWvm2/t+0LxyYZPGs1MvqzqkUYcZb65ylyph1tIR9H/5uUK7zleSwBL6Ud/Ng
- KpYtSYGUfs8qmgq4CrolXmMHJh15dOFpwgeN/hvwNuwAWcDbo5r9buKgogV1LYe/RaTHwF+DgA6
- ynrcSIks602aoG+byZjiRtGkXKzlitsoGVTvkzpHsqXHmlWrLgWNxuo4y14g1ZbTfnkwTOUVkqc
- LxKLtTTKZ5mid+S8rgP6uxGgkkklzQF7fhZEPS+l+xH667MrERQ==
-X-Google-Smtp-Source: AGHT+IELjInFU7eJrA5YQoHXDHXWK4IdzIsee1cOpiHNF/CeLSTdEk6Gxd5/RJGCswvQHdOZTO5x5A==
-X-Received: by 2002:a4a:ee04:0:b0:611:3eb5:728d with SMTP id
- 006d021491bc7-6115b733bf9mr3556412eaf.0.1750476146447; 
- Fri, 20 Jun 2025 20:22:26 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6115b7f6ca4sm419302eaf.35.2025.06.20.20.22.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jun 2025 20:22:25 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Stefan Roese <sr@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH] arm: kirkwood: Maintainer for RaidSonic ICY BOX ib62x0 board
-Date: Fri, 20 Jun 2025 20:22:04 -0700
-Message-Id: <20250621032205.19329-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ by phobos.denx.de (Postfix) with ESMTPS id 9892F809A5
+ for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 12:54:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 93C9BA4D3BD;
+ Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3F7B6C4CEE7;
+ Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750503260;
+ bh=Kr1PMFMv+JN+0XmDqx/X45C5BEyo9RXyrT7a22SKlgE=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=fEXP8f/gQ5xhne2MFWScQpYtIHiueXmSumaqHjNLUWkYaRI7dLC+6OXARoZCPctOa
+ WDdoLwVDgWDgklBTLEU43RHktZrx37FRghC+VKhtgsbmIfJ5ymHBXL6Fg0AMifsjjT
+ bNCtlO2IU9ao1LTAzT8GZcN81FGtVipVaiiIDNphNv2avfFc/rnVQxlBbSURDTyhQ9
+ BCvX848JJosefbozvQH/5Tiiyoop7hCmfi+vYM/PlAhp91G1QFR4UBBZWWS267ZoNw
+ zSrVLY62+HQR9EEIfZhNTrgBwMSvUx5hx0LP+fFS60/xMvKgHHZFT1yS1FrsCEfTMx
+ fTQ/AkvExc3Nw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 305E5C77B7F;
+ Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
+From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
+Subject: [PATCH RFC 0/3] clk: support arbitrary clk_register() sequence
+Date: Sat, 21 Jun 2025 18:54:17 +0800
+Message-Id: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFmPVmgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDMyND3eScbN2i1ILEotS8El0LyxRz0zSzRItUA0sloJaCotS0zAqwcdF
+ KQW7OSrG1tQC96b0OYwAAAA==
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750503258; l=1543;
+ i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
+ bh=Kr1PMFMv+JN+0XmDqx/X45C5BEyo9RXyrT7a22SKlgE=;
+ b=ZJ9Jd2KUh17Kt6cHU2G3Pc8ks2gIVIIUm10ruOh1X7mskFWALArzUdZUulDcnUBLXiTCbAxGY
+ 0dmzedxsuDhBE7j85wL8HLmkw/t1MwjgF6FwGRuA9azbxuXSOYBCBSK
+X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
+ pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
+X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
+ auth_id=67
+X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,32 +79,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add me as  maintainer for the RaidSonic ICY BOX ib62x0.
+Currently U-Boot clk framework mandates the sequence of registering clks
+to begin from root, and then its children. This is an addtional
+requirement that doesn't exist in Linux kernel, which makes clk driver
+porting more difficult.
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+Let's handle this entirely in clk framework and give driver the freedom
+to register clocks in any order.
+
+This is done by assigning the parent "lazily". It will cache the parent
+name in the core clk struct and try to refresh it when clk consumers
+call clk_get_parent(). It's transparent to clk consumers as long as they
+only use APIs provided by clk framework.
+
+I've ran `ut dm clk*` and verified these commits does not break any
+existing testcases. Though no new testcase is added because I think
+existing testcases already test the logic very well.
+
+Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
+Yang Xiwen (3):
+      drivers: core: device: set new parent when old parent is NULL
+      clk: allow assigning parent lazily
+      clk: sandbox: reverse the order to register clk i2c_root and i2c
 
- board/raidsonic/ib62x0/MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/clk-uclass.c      | 47 +++++++++++++++++++++++++++++++------------
+ drivers/clk/clk.c             | 14 +++++++++++--
+ drivers/clk/clk_sandbox_ccf.c |  6 +++---
+ drivers/core/device.c         |  5 +++++
+ include/clk.h                 |  2 ++
+ 5 files changed, 56 insertions(+), 18 deletions(-)
+---
+base-commit: 721eecd9cbf2cc59c5230abd37d02d4a02f75cc7
+change-id: 20250621-clk-reparent-89d75f6a8e09
 
-diff --git a/board/raidsonic/ib62x0/MAINTAINERS b/board/raidsonic/ib62x0/MAINTAINERS
-index 423aa0cf253..2822eb0d29d 100644
---- a/board/raidsonic/ib62x0/MAINTAINERS
-+++ b/board/raidsonic/ib62x0/MAINTAINERS
-@@ -1,5 +1,5 @@
- IB62X0 BOARD
--M:	Luka Perkov <luka@openwrt.org>
-+M:	Tony Dinh <mibodhi@gmail.com>
- S:	Maintained
- F:	board/raidsonic/ib62x0/
- F:	include/configs/ib62x0.h
+Best regards,
 -- 
-2.39.5
+Yang Xiwen <forbidden405@outlook.com>
 
-base-commit: 4e7ac18516aed7e8e30fc0bd3b282fc1669767e4
-branch: master
+
