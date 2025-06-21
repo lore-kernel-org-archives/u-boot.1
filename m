@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A5EC7115C
-	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 10:54:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A1E2C7115C
+	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 10:54:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A69682D06;
+	by phobos.denx.de (Postfix) with ESMTP id 6118E82D6F;
 	Sat, 21 Jun 2025 12:54:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TR3j3iWn";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="U6U6WARZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECBAC809A5; Sat, 21 Jun 2025 12:54:23 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 78A6782D5E; Sat, 21 Jun 2025 12:54:25 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE93882CCE
- for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 12:54:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DDDA82CF4
+ for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 12:54:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 1CE0A5C4A20;
- Sat, 21 Jun 2025 10:52:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4D145C4CEF1;
+ by tor.source.kernel.org (Postfix) with ESMTP id AE5656112A;
+ Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 64621C4CEF2;
  Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1750503260;
- bh=fefn13fOFRbn8sA97ASWptiBWflI6IjJSaAKSIFHnlc=;
+ bh=xuuiPBWhXSQgtO28bRF3dwPQsnmPIoGqpR0hk4Dhilg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=TR3j3iWnjaY37dmaV1/u7Rw7A7mLcCGWj5Wj77Kwdcuj18gPblaVsvKC7Xi1wYzEu
- 7i4ZQsD67em/J+lwluoUsTouUy7mIRP/Y3xdXN94fyCoqHvYwAMUlsDZKNrgAseeWg
- 3l3E7lAnelQ60+eefusWPuNx83Lzz+MROLflKlyTBqLCHebzfaXptPq5FS4KxtomAS
- pfM0EJ8LwYItMekfQn6YlN3WQtDjjkGA4xPWgXJBqmElQhAhEBbgUaauHko4Qj6hQn
- kKEbn7uni/5OPI3ZF2MjsITEfGhppQlLODahWVOUxSFZrrNb0LGxwtV5JxAQvNsHWU
- qiBCpT5Havmhg==
+ b=U6U6WARZZWMUwWlj3SPCI1nSVXY8aj4TSWD8G6PSgc2uu+EiTHIr6ZEXqyJ4MenKo
+ Sly4YmydZHS27HI7PO/ZLL32d6XN8PvghsCFZ1WFEM2CQ7DzPTYZdz8FJHqROgbC0H
+ i+PsXJUkQ8x4DyPjdCrNrLVfqqS6BaAty1W2iMy9ML30DmodgH+VpZ8/kWCj4cIBnt
+ jRAjy4P/fmxSfwglguzy4LFDxhTI3g3Cl5JA7KKkvD1iFnLeX78hlGJcDI1JuEJBeE
+ u4YgjIZCZvPTeQaBNZr6k84xC7oL8JBcwrts2eEb0egtsWSQQJEGI5JL2J7ze7GpMq
+ FRJr8hbvH6oFw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 3D3DFC71157;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 57A8AC7115C;
  Sat, 21 Jun 2025 10:54:20 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Sat, 21 Jun 2025 18:54:18 +0800
-Subject: [PATCH RFC 1/3] drivers: core: device: set new parent when old
- parent is NULL
+Date: Sat, 21 Jun 2025 18:54:20 +0800
+Subject: [PATCH RFC 3/3] clk: sandbox: reverse the order to register clk
+ i2c_root and i2c
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250621-clk-reparent-v1-1-48a7f2f31c59@outlook.com>
+Message-Id: <20250621-clk-reparent-v1-3-48a7f2f31c59@outlook.com>
 References: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
 In-Reply-To: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1750503259; l=839;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750503259; l=1071;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=rhy+xV0NM53o9DGwPd5dEg228yNd5agLsWCZl6AQrlQ=;
- b=JguQ/lYhzykbkwtJhNhk0SybJMgcu07+xWoxHAKji4qpklmRgVu0MMJhnEp54PpQisJ9k47+D
- bVNY1Yo4lRCA+X5PYjGsiI+vlMBzrkWluLnVT4mvhtTGOoOStkkSTYg
+ bh=aQSA7Q7r1hkmSAHzG9f5x6P95Gk/sYDULKCIbOSFSDQ=;
+ b=5QdURyUI0hcXo3SAFd6XUQWtJVWJ1gMobrMRm7eaWRaRe5zmkPDBYlnmZxzS0T1ixGMfQLRon
+ jegfYlKcRTrBop8QcH63rNOAO0b1e//eYSAdwFJyZTSUsXDK7Y88f7/
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -88,32 +87,36 @@ X-Virus-Status: Clean
 
 From: Yang Xiwen <forbidden405@outlook.com>
 
-The old logic does not set the new parent in device_reparent() when old
-parent is NULL. It's not desired. Fix it by setting the parent in this
-case.
+Reverse the clk_register() order of i2c_root and i2c to test the feature
+that allows register clocks in a less strict order.
 
-Fixes: cfecbaf4e768 ("dm: core: add support for device re-parenting")
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/core/device.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/clk/clk_sandbox_ccf.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/core/device.c b/drivers/core/device.c
-index 779f371b9d5b..497c32befde7 100644
---- a/drivers/core/device.c
-+++ b/drivers/core/device.c
-@@ -285,6 +285,11 @@ int device_reparent(struct udevice *dev, struct udevice *new_parent)
- 	assert(dev);
- 	assert(new_parent);
+diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/clk_sandbox_ccf.c
+index f96a15c30b3a..ed4f69807644 100644
+--- a/drivers/clk/clk_sandbox_ccf.c
++++ b/drivers/clk/clk_sandbox_ccf.c
+@@ -269,14 +269,14 @@ static int sandbox_clk_ccf_probe(struct udevice *dev)
+ 	       sandbox_clk_mux("usdhc2_sel", &reg, 17, 1, usdhc_sels,
+ 			       ARRAY_SIZE(usdhc_sels)));
  
-+	if (!dev->parent) {
-+		dev->parent = new_parent;
-+		return 0;
-+	}
++	clk_dm(SANDBOX_CLK_I2C_ROOT,
++	       sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
 +
- 	device_foreach_child_safe(pos, n, dev->parent) {
- 		if (pos->driver != dev->driver)
- 			continue;
+ 	reg = BIT(28) | BIT(24) | BIT(16);
+ 	clk_dm(SANDBOX_CLK_I2C,
+ 	       sandbox_clk_composite("i2c", i2c_sels, ARRAY_SIZE(i2c_sels),
+ 				     &reg, CLK_SET_RATE_UNGATE));
+ 
+-	clk_dm(SANDBOX_CLK_I2C_ROOT,
+-	       sandbox_clk_gate2("i2c_root", "i2c", base + 0x7c, 0));
+-
+ 	return 0;
+ }
+ 
 
 -- 
 2.43.0
