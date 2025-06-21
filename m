@@ -4,106 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08CFDC71157
-	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 17:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61204C7115C
+	for <u-boot@archiver.kernel.org>; Sat, 21 Jun 2025 18:49:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AFE082CCE;
-	Sat, 21 Jun 2025 19:19:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8426282CCE;
+	Sat, 21 Jun 2025 20:49:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="IVdZHSPA";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lK0pvz1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C7B782CF4; Sat, 21 Jun 2025 19:19:52 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 5377082CF4; Sat, 21 Jun 2025 20:48:59 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 699D48210D
- for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 19:19:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C288E8210D
+ for <u-boot@lists.denx.de>; Sat, 21 Jun 2025 20:48:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1750526388; x=1751131188; i=xypron.glpk@gmx.de;
- bh=zr2si95s8z4MI23vwT3hSYpv+D3FGi0UwRZtW19iu8A=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=IVdZHSPAqWtqdAPNs+2RxCcWnIlpQ6uFGGVvGKWZxxe83zzN/wVaHqjuC8dAGbuW
- QNmOFoShTEEcJ16lLZEanC7itg8hyHsNPWywOe1JUSSX6wesm0cZlm00WLxUD4VwM
- iOqGrLMQ8whLnMdqmqTKIxfn2vI18zk3qWR3US42zu7OjXVyGpQ09GISUnXqp6KwB
- KvF1egPAsBa9c9cWyeJTj+D9Oo8LkngPZOlIKyTxRzebbf6CElphU8lFnUFUVBzuR
- 55NdvJYeA/jdWBuDZYHH5dFeiqLx/w6qLXkbuUhifyRTbewQFIvJ20I3c8VmI6Et1
- 0+Z0DokUb1FYZch0vA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MYNJq-1uFCF73kSA-00Nsl7; Sat, 21
- Jun 2025 19:19:47 +0200
-Message-ID: <61b4648f-8a78-4551-a8bd-fd7c4a0638a3@gmx.de>
-Date: Sat, 21 Jun 2025 19:19:42 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=bc34=ZF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1750531734;
+ bh=2K7J5Yjdp0+wcBrcDLtweJep69PtLTUb/1N8Z+SvFpc=;
+ b=lK0pvz1zn37YL7j+NOUWL5NkCrJfRMPNtAMms0mOl9d8Nfw2ZtHJ8XKbEFvSHb/XnaFPYlr6U
+ AZYRtBGiFz6IgUNgveWrTc3dqMV4vOoslUy6YGJPFyIt/cZcFmRF2vZY3EBLoFrZYVFdAmkeEYY
+ 3Zrnc+Ji8TzbGpZL7NGgVn99P8V4J1Wzeueas34Dr5VPWHtapZiu9Wg8br9A+88ARYJi0WdKcf8
+ 0t3ijov1CA5o6GVK/XA0XEOahug5giMwJ+D2HfJvieFrTuQseOs3L/83sC0Eq20UbiqI/7w8eRV
+ 1xTQX73IahOiWkHFZdtawI9BvDVqkQRmyLhwbgvXSA6A==
+X-Forward-Email-ID: 6856fe9405da1d979e43d9a6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.3
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <1ac97715-1d24-443e-95ff-dda8b691384d@kwiboo.se>
+Date: Sat, 21 Jun 2025 20:48:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rk3328: Fix Synchronous Abort on usb start
+To: Alex Shumsky <alexthreed@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250524142258.297397-1-alexthreed@gmail.com>
+ <65b2368d-fed5-4633-b9e6-25ab9d151d1e@kwiboo.se>
+ <5aecf685-07fd-4cc5-88f4-9624c78aac03@kwiboo.se>
+ <CAF4oh-O2WnVt-U6M=vo8O=ms1WN7iUHFca8gc9nYpLYPSs6XQA@mail.gmail.com>
+ <CAF4oh-M7AgDoy-=cuxwQEPh8F+iKmTkoh47tu0eXkzpcfWpepw@mail.gmail.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request doc-2025-07-rc5
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:snwN0HjVjPA5S0HVo1xMyDZmSFjG4kR1p2GVhAPIA2//OF7IOoX
- mOXBLZVS6/MiPBchwcgk1h9ptjogk95rA2tATAtrHWjDS0BuFGFbclWjKz27MpKVWtMWRKd
- IgIpDKjnrKwDadFuS1orPG9B6qBuPgvUzSab2xDjYR0gdZ1eeXSVV5Bwb5lTwl9l4aos87l
- XIbc3qGkb9qoHgT+Uqg2A==
-UI-OutboundReport: notjunk:1;M01:P0:tPxWrRy1He0=;FP1x5vnuIoddb0jJdsMMTe9Auqk
- 6yLXzQb9U+Do46xkzE5QdFHPncMKvWpZOVzJf90eXd0K//1n/zsG8p31Wh7H58bNRQ2RN6i6K
- IsOP98F4csWK600t0SKzW6r7P2UhD1n3b4ZsXyAiBB9ahZqMB1cycrxWGWA7QVrU2bd8XCT62
- Go/mbyYJNUzcFTZ6L9RzBwL7DImDhgHnU66ireDQ2LJKDCuFwLs5KWNIAWfc4q8xYBTLaXFuy
- 6B7MCqeBhd6XQfsiblVrog0SFT23dZZHdYN5eZrjk1fazReFOlAz/dB/ADGgiPUBHpQFPsHw3
- 1EtwyTsDtWd8fo+Jxhg6wgq9Sg0Ns0UJPEl+qklzenqIcwuzSeKZqkqQBW24i9uc70JBJNn9Z
- IMYvGm8SQ8n3vij0YbTr8WG/TIxsCi6ht8IN0ekijPnA51BRYeM3SUlmAdgPjGAW14nkAt/bD
- u+Wyi2Yyt2EWhL7d5rDq1bCEp0XgjZl7eBQzv/4m2E3g/WvyU8Dtw+5UJq/FyIOqqfNAnTiyz
- KdecBuocUIgSzbYU5ukiWXRPXp7rPS4MA4PsgjFUBvgDqQxKo76WBv8Wzx1PfMP1BRqWCiGfm
- Oejj+zRE9Nbo4yD6E+XFx5VlmkeHbMY/KB18s2+O5oXHS+w29FjRkn5/4g6HK77vooGNu38LY
- xuK17c0cP6Y4vTkD1xq12O7VpgBbP1pGNa7pRn8O3upwJKP59CVcKx5/h8L1c5JjBZQT6/OhE
- LlAdyV+ezE0ZDL1CxXShNL0hUEgZTi6wmgE85qO+ANWwnuP3L3f1Uqsg8C6XgoY068S+BWQpL
- QUkd6U62zOWRE9Y77fC1NzvsItXjyiOQROztv/7eZRt4db4KybLUfA7InqxeCZnS5RLQwSr1W
- x9pv4HIM1/ce2XybjP+AWuw1AOR9lvPct6jqaHp7V3hxEeIK0wkTyrtFKLuQmNpS2HNhWGBD/
- VGWCwCzQqxx3Dlate3nRL/ijzPhtUZeKvzssMU4I8huApwYFFbAg1WcIoleuhI2ItVZA1FLs7
- dwz8nlBsfDYTaJmsxKo9ggMwpcBGN9qU1WWUxOghnKk9qhlBkO1txnc2DHLdnumbHEFXbhhxK
- DsFVTYZj0yvpYzsUFvV16efJqCDm1YcEYEMq4roz+b8PBzG0VyAwQ2doKEQxx4e8nXwpJ3wUe
- htBeW2P/fZI6u7LAZwl/Wi2V5fQlhQmnx6c6aKbZO5TAI3GKduYwPBRukhu018S0XpGc68Pn4
- J814lGrq0aBffJOEagY6ECd+kT89ThYU1rMHPgjPUdBC73H1/1dvgCc58d+EgdkTlp2si3VQg
- DvWtG3U1t21aGVsKBzh7soopoIN9mSpQ+Fz3EMM1fyJCIkQgcEpparIx3EGIy0HIRbUFFY8n9
- c1i2UuWAVLt3xXrRoUTt+tMPPtzpYbJJElT2DaoYkbkuSO4VaVHXMP2Y1Cpf+bNVONnPSueeM
- bTyC9pbO3lEk7vdLJUTSdub5/7DupeBbAeZrvCdRLlTlrAg7J3faMdxu5cqwjfUl1jqneBb3D
- GfL4vFkDlhw4v+yMUjKO6RmvyAS+1ODolkQ722mF3hbJGNjMP7YKlKPKK8nMplw3QAZtr2F+0
- tWYLru+8q8mfIiiWNTe4DhLV/Te2h+kOLPAccffxFICx1gTt9vtEgEZThQDMDpbH1PQvaNeGh
- TwfqWVpGgE/4UsFV1cdg8KfovtHyLC2p/M6sjNCNRA4pefXkwkYiWfkV6Vg5FxeksZ8rY0erG
- rE4Y4SDNWXg82AHqCHcR6Og06bXqZqoKaBGYGhIMS2aw9VmOdGdmh4LRvG4uXtNyyzFQNNvVs
- nl/pnzFtpT/9uZLGLieF1uiRggUJ8PSK+Z9kcGkYOR1o04R6g2qhNsyOGsjJBMPgfroYMNx3s
- EAC8hWnvsglSqbaknkh6CiOc1MnNu1ELEVGH/UnZLrFJc8SgNwXWRfuiFGB7xwBihRwsRBY40
- 8B/gCnuWu+ZT8fumhWZVXmTp8itd0eBgOTL5BT07zHhv8+TpG2guoRlSkt/ZDNjXIDg2iGrwS
- UJCP90/FGdDemhMDu1HpCEBkediHQyHuCE0g6WGAYwQyxW/CUDGptg1TxdASi+AOpjCyiKQzo
- PbMzlESdsOtQAPYbEcvrqHXNV+TwaBlEkprqMZjAS4S/5m/TmumMJ7socoN0GVbjic2hBDaMg
- l+82RjQlBnkLfSyIFucY369d+Mmn0cINCGzzZ4IwbVlv22vpf0BWumJXrvaijgoOAmAHtb+wk
- WL89YqhqfJqO2qvW4Rrv5iRy1Kc6K8sphcVW5Xf1o4nQzye6OjOgajhxaxNnx6GA+aMLRU6lm
- 2g4RiUQlertlSbdL6zIgSVMopkvuvLB+K0dfRED/FFFHYAnXBQq8ehSoyCFhim8LBlyGfxAun
- NXFQOzH8foZHFBdpKbZnI8DWCLgCGlP972LUJFUWJ8NEipAJquqG04+CyJGEGa4DPwSZqjLmg
- hpwNBFmqEHz6/7cy4Lb3UyTFjj1yUfNaydwks9Qt+nFvdx5p/3aCTU17SgRQUBWfByfM8lGJ9
- ihAmPJiE6+xeqoa+zJ8bPVNj7kPQEBwxUoR+2CGbVETCwjvfYLuIhs+0v/X06T3TG/vR21JVl
- LPEB6bo1zLmCDXPaILSvVxDer2Si5ksVZhigHuNImOgsD0e1ka9o09rrjeQezam2yzIFUViwJ
- w9nBUCjB/o98tXicF6bVnEtcprMM5VYWnIUsldGpZEuSK+F/BarBw22M0zOCQaSn2TbKSUMYt
- xVzfXblxCBnwt7hQ5xB1EsUuCl2+rvlXXcVeG+7HE9uCF6lyFBk/TG+dV1xGiKKQjeWfd4Q80
- JL8zjqum43Te/DUz39SjR8TDy0jAF01OEzOAzT8Lq0qtPk066rVugxZoOQYLrJLiow9594Seu
- Nzne15F/TuxBntTQYFTASTf139PgIfdb9eDRSOZ+cbBjZd/6Ghb3mdxBCA+Htp68SoiMyuPs2
- FoUzKqTVLX89otl0JfjWyTwtA3dWabqM58u0oe7P9YCU+/M7DP1ZVIh450iUdxa+aO4ZoG5Lc
- ZpRXJmI38E2C8ZC3uUvIFdCL3DnFcP7/8YHHmSjDH51U+TfzVnG3Z6P7xVmfqqIWJJpWL7BX+
- Mu3TzSToKr7y9FO6UKJNYZByokY2CrvMuVE2rOwGZm4OkdfdWpQgO/bAY3xY9h0oU16arSYCz
- jTKM=
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAF4oh-M7AgDoy-=cuxwQEPh8F+iKmTkoh47tu0eXkzpcfWpepw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,28 +80,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 721eecd9cbf2cc59c5230abd37d02d4a02f75cc=
-7:
+Hi Alex,
 
-   Merge patch series "common/spl fixes" (2025-06-19 11:01:52 -0600)
+On 2025-06-07 14:18, Alex Shumsky wrote:
+> On Sun, May 25, 2025 at 8:35 PM Alex Shumsky <alexthreed@gmail.com> wrote:
+>>
+>> Oops, I forgot Reply-All and some messages missed list. Sorry about that.
+>>
+>> Jonas and I have found NULL pointer dereference in rockchip_usb2phy_clkout_ctl:
+>> https://github.com/u-boot/u-boot/blob/df2ed552f0b05591090369a7fe7ddc92439dea5c/drivers/phy/rockchip/phy-rockchip-inno-usb2.c#L177
+>>
+>> Here rockchip_usb2phy_clkout_ctl tries to read from
+>> `dev_get_priv(parent)->phy_cfg`
+>> but it is NULL because rockchip_usb2phy_probe is not yet called.
+>>
+>> Johnas, I have dug the problem a little further and found something interesting.
+>> We have circular dependency between rockchip-inno-usb2 clock/phy initialisation
+>> here. The rockchip-inno-usb2 phy node also acts as a parent clock for itself.
+>> Parent clocks now are enabled as part of the probe process before dev->probe
+>> call, but this particular clock depends on phy. Here is relevant code:
+>> https://github.com/u-boot/u-boot/blob/df2ed552f0b05591090369a7fe7ddc92439dea5c/drivers/core/device.c#L572
+>>
+>> Quick and dirty solution would be to just ignore rockchip_usb2phy_clk_enable
+>> when the phy node is not yet probed. USB works fine with this check added,
+>> exactly as before the recent parent clock enablement commit that introduced
+>> this issue:
+>> ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting").
+>>
+>> Clean solution would probably be to break dependency cycle, but I'm not
+>> proficient enough with uboot codebase to propose such solution.
+>> I've tried to move some of rockchip_usb2phy_probe initialisation code to
+>> rockchip_usb2phy_of_to_plat to make it run before clock initialisation.
+>> But I have failed on `priv->reg_base = syscon_get_regmap(dev_get_parent(dev))`
+>> which needs a parent node to be probed (I unsure is it OK to probe parent from
+>> of_to_plat).
+>>
+>> If we settle on a quick fix, I propose to add to rockchip_usb2phy_clk_enable
+>> something like (Johnas, please let me know if it have some flaw over your
+>> patch):
+>>   struct rockchip_usb2phy *parent_priv = dev_get_priv(dev_get_parent(clk->dev));
+>>   if (!parent_priv->phy_cfg) {
+>>       return 0;
+>>   }
+>>
+>>
+> 
+> Kindly ping Jonas and Kever.
+> How can we proceed with this issue to apply fix before the 2025.07 release?
+> Do some of my ideas from the previous message make sense to you?
 
-are available in the Git repository at:
+rockchip_usb2phy_clkout_ctl() was introduced this cycle, so I would
+personally prefer a proper fix and having this new function incorporate
+a proper NULL check, similar to what I sent you some time ago.
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
-tags/doc-2025-07-rc5
+If possible, please send a similar patch and include a fixes-tag for
+229218373c22 ("phy: rockchip-inno-usb2: Add support for clkout_ctl_phy").
 
-for you to fetch changes up to 820bbf1d46f5d3fd30d306e955d2b4d1487c3484:
+Regards,
+Jonas
 
-   doc: cmd: wget: remove erroneous note (2025-06-21 19:03:42 +0200)
+> 
+> 
+>>
+>> On Sat, May 24, 2025 at 8:43 PM Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>
+>>> On 2025-05-24 18:02, Jonas Karlman wrote:
+>>>> Hi Alex,
+>>>>
+>>>> On 2025-05-24 16:20, Alex Shumsky wrote:
+>>>>> Remove incorrect assigned-clock-parents in rk3328-u-boot.dtsi.
+>>>>> This incorrect parent has become a problem since recent commit with parent
+>>>>> clock enablement.
+>>>>>
+>>>>> Currently assigned-clock-parents is not a CLK node, but rk3328-usb2phy.
+>>>>> It looks like a mistake in dts made a long time ago (~8 years ago).
+>>>>
+>>>> No, this is very much correct, u2phy is a clk provider as can be seen
+>>>> by the use of the '#clock-cells' prop so being able to use it as a
+>>>> parent clk is allowed and the device tree is correct.
+>>>>
+>>>>>
+>>>>>   => usb start
+>>>>>   starting USB...
+>>>>>   Bus usb@ff580000: "Synchronous Abort" handler, esr 0x96000210, far 0x4
+>>>
+>>> I have now tried to re-create this issue using latest master branch on a
+>>> rk3328 board, however I was only able to re-create a different issue.
+>>>
+>>> On what board and U-Boot version/commit are you seeing this issue?
+>>>
+>>> The issue I faced was due to only enable usb20_otg and not u2phy_otg,
+>>> something that could be fixed with following diff:
+>>>
+>>> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+>>> index 88b33de1b2a0..d6ce12b5e83d 100644
+>>> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+>>> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+>>> @@ -538,7 +538,7 @@ U_BOOT_DRIVER(rockchip_usb2phy_clock) = {
+>>>
+>>>  U_BOOT_DRIVER(rockchip_usb2phy) = {
+>>>         .name   = "rockchip_usb2phy",
+>>> -       .id     = UCLASS_PHY,
+>>> +       .id     = UCLASS_NOP,
+>>>         .of_match = rockchip_usb2phy_ids,
+>>>         .probe = rockchip_usb2phy_probe,
+>>>         .bind = rockchip_usb2phy_bind,
+>>>
+>>> Regards,
+>>> Jonas
+>>>
+>>>>>
+>>>>> Linux dts source reference:
+>>>>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c60c0373a5e85d8bd0bb026cd5440576249d2299
+>>>>>
+>>>>> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
+>>>>> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+>>>>> ---
+>>>>>
+>>>>>  arch/arm/dts/rk3328-u-boot.dtsi | 4 ++++
+>>>>>  1 file changed, 4 insertions(+)
+>>>>>
+>>>>> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
+>>>>> index b0e50a973a..39dcc2313b 100644
+>>>>> --- a/arch/arm/dts/rk3328-u-boot.dtsi
+>>>>> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
+>>>>> @@ -150,6 +150,10 @@
+>>>>>      bootph-all;
+>>>>>  };
+>>>>>
+>>>>> +&u2phy {
+>>>>> +    /delete-property/ assigned-clock-parents;
+>>>>> +};
+>>>>
+>>>> We should fix the driver code and not modify the device tree to fit the
+>>>> code.
+>>>>
+>>>> The u2phy ofnode is tied to multiple uclass drivers so is it possible
+>>>> that the parent clock lookup from commit ac30d90f3367 ("clk: Ensure the
+>>>> parent clocks are enabled while reparenting") is not getting the
+>>>> UCLASS_CLK driver?
+>>>>
+>>>> Regards,
+>>>> Jonas
+>>>>
+>>>>> +
+>>>>>  #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+>>>>>  &binman {
+>>>>>      simple-bin-spi {
+>>>>
+>>>
 
-=2D---------------------------------------------------------------
-Pull request doc-2025-07-rc5
-
-* in wget documentation remove erroneous note about CAs
-
-=2D---------------------------------------------------------------
-Jerome Forissier (1):
-       doc: cmd: wget: remove erroneous note
-
-  doc/usage/cmd/wget.rst | 7 -------
-  1 file changed, 7 deletions(-)
