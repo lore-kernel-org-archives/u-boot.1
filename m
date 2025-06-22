@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F9B7C7115D
-	for <u-boot@archiver.kernel.org>; Sun, 22 Jun 2025 20:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADEDCC7115A
+	for <u-boot@archiver.kernel.org>; Sun, 22 Jun 2025 20:52:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 719F281F66;
+	by phobos.denx.de (Postfix) with ESMTP id BD45582D60;
 	Sun, 22 Jun 2025 22:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L48uenGs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gcFKVLZA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA9D782CBC; Sun, 22 Jun 2025 22:52:35 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 71CFC82D2B; Sun, 22 Jun 2025 22:52:37 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB5BF8210D
- for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 22:52:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A4D98006D
+ for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 22:52:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-60be827f2b7so2079620eaf.0
- for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 13:52:33 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-60d63174f05so735185eaf.0
+ for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 13:52:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750625552; x=1751230352; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750625554; x=1751230354; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BblGfNY+4/ceqPHZx2NmeZAbWFm0CxkTxVhQWfwzTkk=;
- b=L48uenGslSjwCWMQKbbLhoAXv1ksyuFFtWQD5P0IXW+7psGDBZd9qau5dnQESokIOi
- ya4GVy3JsoSrViMxs41mvtEmpsIucCe8E0wmF/3mE9UUEwix0R0aSjfYPaxYLT6nMbiX
- dRK7BbqiO80Ojhwc1NLtKp3acYrK8WwYi0TAo=
+ bh=EgZMVb9brVIqXRLRFD5yRLLG1iHq/oP2Np5pC4s/LU8=;
+ b=gcFKVLZAYxH8SqFfE2J5MCZrIQO7FWdnxTXL6ZmIgfx9AIsOl3ViBjX1qgVnyK9K8O
+ 74FFALCEGWJMxnx82z1qTUE8JL+teVS1VW+jVSYciBYmkO74Nmb0cXKQG/n8g3bC3x8k
+ 4m156ItAa/IXr/51AuB9zHr0TIgIcpcRCsEMQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750625552; x=1751230352;
+ d=1e100.net; s=20230601; t=1750625554; x=1751230354;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BblGfNY+4/ceqPHZx2NmeZAbWFm0CxkTxVhQWfwzTkk=;
- b=H3pxAlNdJnUmTT6V8QqGTDtV+aCdBDJKvcnX4h7S5R+n4r/UtuV4oKkhxgvpt2/JTS
- 1uQWiSsHI05cNyumiqaerJj7Ngk3YaaFB7/5CJYqkItPfIxMDr1C0dW+hZVnglcZ79wx
- IveHizE1q+FXS0s49K/MU9OvFMzhZKgQxKjenrm694wvNdtLHeUbxmGb1M2jml4qc3gV
- gO4fPx4OsauJ2VGDRCZE1pf6wO4ARSfZ7aGIOby4/+CLTCy1V7zKVHDas9VNCzOJpnJ0
- 3O5p+5xAyLmiSPWPt+K4HAQ6p7DJvD2YPxmfFLP3SehndzFGL5RCIkC/yN9wTZzKvMeW
- rMOg==
-X-Gm-Message-State: AOJu0YyKRWSpC39ZZ5xLGxhaXpv51aGT6F+UkXxgcxvjpOvVljXQEjVz
- ja0+7raYB7C1eV7hQiYFRW/n0BQ3wepxdD4eHfaeL6KSGBlPt69UermuawfSRtQHmTRr9/KjnNA
- Bc301h6Q=
-X-Gm-Gg: ASbGncv/BtmfZw5ZaYyJtR06L2LmIPNGrW49AzU1uqCDxSxhlMCy45mZYTet78212ka
- ypeYIh6hZqA16tMWpxYE5jBHUsjc/BthzJvspGnZTx8QK8PrBW3AkxeZP6MMVwmLkwVAki+sDHd
- 1EFWVcLuu9QIXB1ailuM1X4wQDXw4yYLwJrCHgZqVJw173fp5cZzVIe8WNzEMDsuTZmHjjwTjvn
- tQxsv6zLzgYvB0+/t/q77DOlaHEZm7/pFgUUIweCCh43aEeb/IcplJ/BjxGQZFCmbdSVvosv5c2
- JdVanVVPFZlf53zv+2MCr0AwlSkecdiTKnwKnBG3+tzGNeymoSHxyHI88PjZufbVzrhpfOPIqsl
- cDLR+dqmg8zAOGoK8C47f4dUW9bA0DbEJ
-X-Google-Smtp-Source: AGHT+IFW/eQkZveKPGogIUJDGsN3nB3fLZSlrdZfElUJtAoa40hMnRR0hTILUMsYRcNkOw+20zuz8Q==
-X-Received: by 2002:a05:6871:240f:b0:2e4:c5c8:707b with SMTP id
- 586e51a60fabf-2ef2a7517d4mr3998879fac.6.1750625552337; 
- Sun, 22 Jun 2025 13:52:32 -0700 (PDT)
+ bh=EgZMVb9brVIqXRLRFD5yRLLG1iHq/oP2Np5pC4s/LU8=;
+ b=XACYOu8xwQtIA+pEE9eCc8Y826zc3Nuya0AABnzzfHDETD5styyfFdomXd0aY0vsfm
+ 872OqNi5M7+QB+hjZ2UCTzb3tD2Pkrk0DkSA/FyDBUDRlVhtxNGVjNWqn4hhu/JlgK7B
+ YEQL/wqx3C4K/mBW78M2m6m7+2zAJ0o80gi1iomNxlbUGYOGufjJXRgnmb/NQydryrPl
+ 10aor/H+nixC0N3wlPiAlbk0rlk/jsN2w/+va+wfsNV/QhqN1TACzIEDIxfUVWaBr/i+
+ uU0gKg5y2Nlcl+J5nE6lNEBgkyc5UGaKtE0yim0t5FNu5rh/0FvJ4U0Tihw1/HpkZZ+1
+ zd2w==
+X-Gm-Message-State: AOJu0Yxv1cyf7usLnpzOIFxYG8DTlG122rY4qU1nk6U+rEM3KgSjLmes
+ BX0oT6COBA/I3dUKo99Z9u5FjA9urE/dx0TlkvhbnEiIb6i6GQaC8AQM06GMg3m3e6w5S09hhQL
+ pOqQWcMc=
+X-Gm-Gg: ASbGncsF/pAvluWhEUvvfrmC5sMgSDqKNfXwgzavh1W3lY2Pr3dfTdD+pL1S9BBhj+Q
+ 8NeEIUyYWq8BkkpxflvrlN2lZ0ztqQakGkgXiWifILVS0JQk5AppSMX8Fz7VEq8nFBXoIj/qwL2
+ MIurVq3c5WufbwLwgOjSi/bhaS7HSYeIrVMkhLUyz0DM0f0kS2wRN+ey2H8RAYtDUB4UT+PgjP/
+ DUDTtEjPI8t/fBhvJga47z/0s2GXS/fYYs7dcE05VmVXQj5KL9zHMOS/5pcp6/kmBRW9COZ5bxh
+ 2aTuNMIe8oc1rklCb8x+mwZ1uGrqjVdstXpFnmP/YLFN6QjQ3LB5Vy0g1zLBQDsHy6mNRNSuVYD
+ EiYr8t5Uf4qlXgAR1HB15WINXBmR4rjKQ
+X-Google-Smtp-Source: AGHT+IHOp+bsuTIs0FuZVq3+4RjfB+s6836qb54ERhi0AkHCCUWzsMW76nnZC9+6LaYWAAtnV8wIUA==
+X-Received: by 2002:a05:6871:547:b0:2d4:ce45:6993 with SMTP id
+ 586e51a60fabf-2eeee5c758bmr6875030fac.30.1750625554051; 
+ Sun, 22 Jun 2025 13:52:34 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ee665ad4a5sm1357117fac.18.2025.06.22.13.52.31
+ 586e51a60fabf-2ee665ad4a5sm1357117fac.18.2025.06.22.13.52.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Jun 2025 13:52:31 -0700 (PDT)
+ Sun, 22 Jun 2025 13:52:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Baruch Siach <baruch@tkos.co.il>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <e3ed716de67cf4f46b303e9e7536b4938fba5a68.1750262675.git.baruch@tkos.co.il>
-References: <e3ed716de67cf4f46b303e9e7536b4938fba5a68.1750262675.git.baruch@tkos.co.il>
-Subject: Re: [PATCH] net: designware: fix bus address dereference
-Message-Id: <175062555120.3894397.4855403516951831200.b4-ty@konsulko.com>
-Date: Sun, 22 Jun 2025 14:52:31 -0600
+To: u-boot@lists.denx.de, Shiji Yang <yangshiji66@outlook.com>
+Cc: Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Shiji Yang <yangshiji66@qq.com>
+In-Reply-To: <OSBPR01MB16702ED24460D23A7ED63440BC7DA@OSBPR01MB1670.jpnprd01.prod.outlook.com>
+References: <OSBPR01MB16702ED24460D23A7ED63440BC7DA@OSBPR01MB1670.jpnprd01.prod.outlook.com>
+Subject: Re: [PATCH 0/2] rsa and fit_check_sign build fix for v2025.07-rc
+Message-Id: <175062555250.3894397.1055498853974438511.b4-ty@konsulko.com>
+Date: Sun, 22 Jun 2025 14:52:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,18 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Jun 2025 19:04:35 +0300, Baruch Siach wrote:
+On Fri, 20 Jun 2025 00:38:16 +0800, Shiji Yang wrote:
 
-> Device bus address might not be valid for direct access when the bus
-> address and CPU address are not the same. Use dev_bus_to_phys() to
-> translate bus address back to CPU address.
+> From: Shiji Yang <yangshiji66@qq.com>
 > 
+> This patchset fixes some compilation errors that I caught in version
+> v2025.07-rc4 and branch next. If they are acceptable, please apply
+> them to the master branch. If anyone has a better way to fix these
+> issues, it's fine to ignore this patchset.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] net: designware: fix bus address dereference
-      commit: 9d169ac9733b5c3f208921a1d82f4fa8ff708258
+[1/2] lib: rsa: fix compilation error without openssl
+      commit: 961e260cdcd01d68c8dae87eef67e116f1a67aed
+[2/2] tools/fit_check_sign: make the module dependent on CONFIG_FIT_SIGNATURE
+      commit: 1989eb65c50e2541373bc6657a85620ff0c6f573
 -- 
 Tom
 
