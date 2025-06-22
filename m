@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86726C7115A
-	for <u-boot@archiver.kernel.org>; Sun, 22 Jun 2025 16:40:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DAB3C7115A
+	for <u-boot@archiver.kernel.org>; Sun, 22 Jun 2025 20:52:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FE9B82CBC;
-	Sun, 22 Jun 2025 18:40:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04D4382C4C;
+	Sun, 22 Jun 2025 22:52:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B7PdhZn2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RR8rjORi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7E918210D; Sun, 22 Jun 2025 18:40:23 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 827B282CBC; Sun, 22 Jun 2025 22:52:34 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A57A8210D
- for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 18:40:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64FD68006D
+ for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 22:52:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-73884ccffcbso2823643a34.1
- for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 09:40:21 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2cc89c59cc0so2193843fac.0
+ for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 13:52:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750610420; x=1751215220; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6OmGZXXykTJnMfye+a0euIxSu8Iwbhb21zPMLmR/kLM=;
- b=B7PdhZn2V2QVnHJMx43ftDHj+JPM3nirpjON0NYOzMQfVP96gpzjwdbxAvvGQBXn3O
- Sl023w5N4LKtucwIIUB2kTgbE4Yfov4NW6EvMtubzjYHcv79rn/DqLQWS+zrRhowLpQ/
- NUY2J0d8h6MFhK9oX98gZEzQLfN6+FiaVjTZc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750610420; x=1751215220;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1750625551; x=1751230351; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6OmGZXXykTJnMfye+a0euIxSu8Iwbhb21zPMLmR/kLM=;
- b=TQaVrnE2kfOTLS35DDUEjPLhsB9s2TMo/6oQpP1rsbSNvjeVGg3ft07wF37NzVrSfa
- oxN95Y0R+DtY+WGjixTD6Pz5ImfdBpDn7+I7EK9l+fFpB3YuD34SY+s43no+4OI+BNj2
- WwobKZRxmNdaXrOfmsRxo//abs7OccWDE2xSxQBPEGtqcNTBROXhYbiDbFJwaNDEDD3a
- FV4h/GR98d3mWerOush8mPGOTOtGXD4kIuur5U0auPo40/BLDUSxwE08FZvA6sHA7vNq
- cchVxWqwIjm03sPK/EBdbms2JM2LBYGLgRUqFxmi95BWGW7NakdPK92bII7ry06Kvm5r
- r7WA==
+ bh=LSBMQ+QjvrDOdx+X1S++VyJgzeF6GicU6F4bOsSwXGQ=;
+ b=RR8rjORiAmCk9NT2P5yVuNVVpK1OFBbC+Vnbyxr1DBWCBRAE355FR0BSQHJ31CBHkH
+ S2OsBF2sUd3mCDQR8ZifqTlnvqJbDg6zM8YkJonqA9iM+l9nTjT8Jv9VGtoTypMWDqNT
+ /H+nsEBj70PXId0cv8AdWW1AXZRsaAVBTAP+c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750625551; x=1751230351;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LSBMQ+QjvrDOdx+X1S++VyJgzeF6GicU6F4bOsSwXGQ=;
+ b=pSLuw5TuICNS1hmI9o2xJ1Wlwn6A7nwwwIPmVMOin1E1OLHCgbDzyiinbDV/kCXoKH
+ OkpLBywQvjO/5QkvZdM4jOujBW530id/spPFbEsAnFmXTTxjrYBCxV6t18VNqeG8HxOa
+ 1wtwIvC1/Et11GgOJPuXsTCU1t4reKuI0DzxZL9K3UEy1bg/ZkiPcdKzAjhwiYdJVenn
+ IKDyJmIiamVeL0Lu6cNbekGy8cT3TX9k1JZ1C8PkwnO8utkXl2B4yUJ8D2Id9jzMEtVW
+ vUpiNqI3MkJJK39YPN/M3mdeIFV+vq8Su7J/DD57JdL1h98IXOF+yxBPP+KMZrLOG1BG
+ AEBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5tlC10v09zNUOrwXTDXCcQdmTdBualn8Jw5TwCGdQ/WKzdIJdJy7RuJDMTe4J2tNDLHnt4Hc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw73uOwTQLXE3UtzJr6IaCxi5dgbHV3cNageMWxFk9VmgrluwCy
- 3TtTDvUJyxSQQbj0/eIY9gIfEr3A31Yz46nRL2eZuvwYonU9Rk+7cUPP2wci9QhGZVI=
-X-Gm-Gg: ASbGncuqGqpj0I6jqimlOsxjzL1+lBALSIajkny9t5wmZhFbcCh6GUh83R7Cr0TOJBg
- 4HuPxihrYCyLEV2GUF2KAWlzHhJ419DOjak+MmIWsT/XZn7apHRte3fNN/d61ruD4kCs4Urxvvu
- YjlAbQbcsUIAJFjPIUtNafPz7AHSh1fMbjjs+PcGBx9UoOTwdTvATEsGsN7h8sJ4jR1RaftVw1L
- EYQTLAryVEeSO6FsDy1Lwkvae110nRcIfK/xToKJDi9tCdebkj77eBdcbKpD24RHT8MU3fAWZcc
- FeE31h9o31pkc9TCYjmeqye6pc6kvQE70UDV3vCMVHb8gXiwIVyBA0vn9GLlejTiCIV4zPOHYes
- az+/+Wf5ZGVktR0FVU1NDdKf2trgM34U0Fw==
-X-Google-Smtp-Source: AGHT+IGlvvnUy1mPybXVKRWOXJ5awUFl7RzjQ18HhFqtbNp7KhhPN6R15CkzMIQRzs8UtmrBsPucqw==
-X-Received: by 2002:a05:6871:4410:b0:2d5:ba2d:80ed with SMTP id
- 586e51a60fabf-2eeee55c6f9mr7356928fac.25.1750610419839; 
- Sun, 22 Jun 2025 09:40:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ AJvYcCXbFy1p2Y83khhgW+g5q3gKY1A+aatRQ8S+gxYq79XQ4Zf1DM4Wk0fPaFEpsySi693Xtlhpq4Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YwyRYREsk/SApQvlZ3aO7xGS4vjPxwv39A5Wn5TEDUqeTnK0Xvb
+ XxqJXQ0ajeePA1VHEJgsrN4sJy0Ergqh8bpeXOjbdicvxW0gWVnsbH1H4GHwc583m2idfVXY4xY
+ TcSp0vR4=
+X-Gm-Gg: ASbGncvqK63jvbku3P5AcaST5RlzklddYWzDLBr5kP42uSKyolsQNeR/zi8lGEz2OtZ
+ bIs5Pvb/0UF+0IDd8Y39hAjz+D6HR6yg0EtnJ1hE78oWDP/ZoPJGpydp3be+vWj706NHbn18S9T
+ tN5+UfqprK1uhc7sGAvD47+IwDWyk3Rb6X0vMu0dIx+fwfzRmqWzW64RATjYxJoIZ093zOYkfbd
+ R0QGo3o5XfpcjnOL6Tlgs7b+wxV4uggIBgC6OFUQiYegv/hfpTpmiGvp9Ua29sTofQulUhEA6Yj
+ tX0arOwXBf19TNnxEAZ6XBFjVsHcf7lXPUm2M9aKeVu+ts/OLrKbH2ffln22HS/Y5PhmxePY6oY
+ QHB6LvV1yHBdf6lo90IhLtDv74MgKHi51
+X-Google-Smtp-Source: AGHT+IE79VhXZF29I2g59TpGeQEJHqRKmIlcpa8BjK7IwSXXxv5xWDFZkvFMe9ecAm/wu42ubkgt2w==
+X-Received: by 2002:a05:6871:e2c8:b0:2ef:486f:7e27 with SMTP id
+ 586e51a60fabf-2ef48700c6amr4102482fac.10.1750625551046; 
+ Sun, 22 Jun 2025 13:52:31 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ee8a8e5ee6sm1291247fac.31.2025.06.22.09.40.17
+ 586e51a60fabf-2ee665ad4a5sm1357117fac.18.2025.06.22.13.52.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Jun 2025 09:40:18 -0700 (PDT)
-Date: Sun, 22 Jun 2025 10:40:16 -0600
+ Sun, 22 Jun 2025 13:52:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Minkyu Kang <promsoft@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- u-boot@lists.denx.de, Minkyu Kang <mk7.kang@samsung.com>
-Subject: Re: [PATCH v2] board: samsung: e850-96: Load LDFW in board_late_init()
-Message-ID: <20250622164016.GQ216500@bill-the-cat>
+To: Minkyu Kang <mk7.kang@samsung.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Minkyu Kang <promsoft@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20250620185010.11400-1-semen.protsenko@linaro.org>
 References: <20250620185010.11400-1-semen.protsenko@linaro.org>
- <CAPLW+4ksWWvGtV-u_CuxOv_FJjMR980Fs1jxasv0AM9sQjtHxA@mail.gmail.com>
+Subject: Re: [PATCH v2] board: samsung: e850-96: Load LDFW in board_late_init()
+Message-Id: <175062554915.3894397.3339356566029231179.b4-ty@konsulko.com>
+Date: Sun, 22 Jun 2025 14:52:29 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a0sG4BfK/2W8YDNc"
-Content-Disposition: inline
-In-Reply-To: <CAPLW+4ksWWvGtV-u_CuxOv_FJjMR980Fs1jxasv0AM9sQjtHxA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,50 +102,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 20 Jun 2025 13:50:10 -0500, Sam Protsenko wrote:
 
---a0sG4BfK/2W8YDNc
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> As stated in 5e847f7729b3 ("efi_loader: call efi_init_early() earlier"):
+> 
+>     efi_init_early() creates an event hook for block device probing.
+>     It has to be called before any block device is probed.
+> 
+> Indeed, efi_bl_init() registers EVT_DM_POST_PROBE event, which calls
+> efi_disk_probe() whenever any block device is probed. And to make that
+> hook work, the initialization of all block devices was put after
+> efi_init_early() in initcall_run_r():
+> 
+> [...]
 
-On Fri, Jun 20, 2025 at 02:42:54PM -0500, Sam Protsenko wrote:
-> On Fri, Jun 20, 2025 at 1:50=E2=80=AFPM Sam Protsenko
-> <semen.protsenko@linaro.org> wrote:
->=20
-> [snip]
->=20
-> >  int board_init(void)
-> > +{
-> > +       return 0;
-> > +}
->=20
-> CONFIG_BOARD_INIT only appears to be present in -next, but I'd like to
-> target this patch for v2025.07. *If* it's possible, and it can be
-> applied to both mainline and -next, I'll then submit a separate
-> cleanup patch for reworking all empty board_init() calls w.r.t. new
-> CONFIG_BOARD_INIT option.
+Applied to u-boot/master, thanks!
 
-Yes, we can do the cleanup in -next once the next -rc is merged, thanks.
-
---=20
+[1/1] board: samsung: e850-96: Load LDFW in board_late_init()
+      commit: c08cecf2d7632d2c7be9a9d260f74bb585d7a3e3
+-- 
 Tom
 
---a0sG4BfK/2W8YDNc
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhYMewACgkQFHw5/5Y0
-tyxZZgv/eH+aScbkVAQnAtZVi6he/S7H63g2eGukATDKZ+MSZGnlhv7Qn7KMaMOb
-9AE3fQfjuhn9z07KxnnAhAcz56+T4YtNqmoGGpeimwGMllzJJbeY6mhMULZEUa4X
-6h3Kfc8/BlmhgWYdphOBmttnVymoy278W3dCZbHpD1lcIHSuPmNwqUUsRf7vXghW
-1LmglGxNEAeAbP1R7GI7Vw798dIYi3VaDYQbBqOy1UfsXqiYnHIEG8bdDvFDLkW4
-lTMfFEveWq6IQR6AX9NXvM6tM+KyrUa8lsMupr7xMzswMio1zWHaebmkKc8Xz89k
-OVDepCM0p1GiGU7MC6lchCQZ0WwmPZmlPNDvogSUpJRVsG3zk0HXOfLgkRkDN+v9
-p0KKtc1+J8M0pUMjUyxhn0GKauNuyQM4K8bdFx85BSYS8Eyh6DPi+ZywWJOhh9FP
-Xgzl71I0jAQwZPTeLi1dvUtcpFQ8XToxkgusUF0sNWivGwn5oCjKjs5YwEQWCvCO
-3XnuJH2j
-=1II8
------END PGP SIGNATURE-----
-
---a0sG4BfK/2W8YDNc--
