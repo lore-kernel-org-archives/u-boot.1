@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A5CC77B7C
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4609C7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A65BA82E17;
+	by phobos.denx.de (Postfix) with ESMTP id F349582E2D;
 	Mon, 23 Jun 2025 21:13:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RFS2wnS0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tlkfu8PU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7329782D2B; Mon, 23 Jun 2025 20:13:21 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 2716482DA1; Mon, 23 Jun 2025 20:13:24 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64CA981E13
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 20:13:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5D8781E13
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 20:13:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-adb4e36904bso885648466b.1
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 11:13:19 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ade4679fba7so865392266b.2
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 11:13:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750702399; x=1751307199; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1750702401; x=1751307201; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ffs+MXxUZjgnk/ck47pSmsi6Sn8E0DhLileVNzhuA6c=;
- b=RFS2wnS0dHmgcWXi4RRDY0CQG4KTNK2dnUVsD46SzM1drCdBZCsUEAUunjFCZ8pZBL
- EG3AU42iQl1xNcfdyhpnU4jIPakpQI3H8w9gg8Dbj6DGF75/8bznvNgZwC/j2x5vqqco
- GGstG5oaMLLp7eBdlsJB7K6m/nTDatNg9SwjheQloogQaSvdNKiumEKB5fX25Jf8Pipj
- Lt2/bgCytI2n/UmTUPo5r4suXvmL4sQxZQbGSu+ao28ICOh1tJVcbWWssgbArXz9Y8ek
- 5R2kKbhW2L/ZGOfjcjVG3bqWauUTQE/C3Yc8vUGhpyD81dGTnRl3AuadiIyBB+shsuC3
- KhXw==
+ bh=nwLsrmfXM6AEebcOHMHBCvjMM8VHOsZTbqCmo+d77Ek=;
+ b=Tlkfu8PU6bfI4naf5/luFX0asQ2HFggqELfeo74grI0EDcrb2jmjEg4rEbjFd68szp
+ NJspIhNwqDRtigSmIbVU2VUEyI9B3sz6IcVsNp/ELyLMcVgF22Qqq2pOweX5ywXSCaWn
+ NTkdWTZFkoQymYmtueUyb+RbH6N2kTp9Bn0qOFzzKbIhhnZyNdnEZGzOzXg92cdo+aER
+ 1ih4zgrJ9PkN2oPR1ZkCuampikPe1CHGfel4jaULi/TLrrEolXGGaVqxwi+N/mdNp44M
+ tfG+JXn5s1ixWCijRpJ7PcAfZ4IwbVd2DofCOxyLmH6WLafDad80ScLsF/cNmMZis0EP
+ UL9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750702399; x=1751307199;
+ d=1e100.net; s=20230601; t=1750702401; x=1751307201;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ffs+MXxUZjgnk/ck47pSmsi6Sn8E0DhLileVNzhuA6c=;
- b=EtD4TcAr4KWb9FXn/i0H6rBiWF2EdC0oxpz/j1HKl/tF97gIxrunHXUrM7shonstfi
- BSGz8jZvyHd4tYetRuAGMGQ7K3wYnm7OA06i/KK7RVbfoKrU5UeHHKeeT+rEB7UWSsAG
- 5RR9gXMzxxlXt46kqRwHD3hkgEstOQkdLfiYdxhovwqtezBuLUFvw0mqgnv7DpPFGtLh
- 8ONK1DZ7A0QksANtGvyURq1Z+IjI7h2SM0N7//a+axQEtCp0PVLwN8t0DpsppxwpRck8
- E3AcMncevlAoHiSpk4mjGdLig5mai7MJlNEx18vtXuO8naT5FpQYj5XaqEO2taTgQL4G
- EeGw==
-X-Gm-Message-State: AOJu0YxtOnhWYYa8HhEq06Im1LETGbnpE6Y+aP1NvrNI9WrxZV0i+ko+
- G9C17c99MMnTR71bKhnnTOdVNPxKGrCQHL190wkQwMUxg9Xy7BvZRUc3X4h29g==
-X-Gm-Gg: ASbGnctDGVwnAC2TB40zOt0lO84n7fHz93MBg4tdB8GgZcCazzVJxHCDFXmLL6VMyAJ
- fU+uS+ZoUc6YyaPBX8KM6Foh/yFMptdeo8JDPEHTjd86/V7GDiEXugYq5dalxDVFlsNuIQu6wZa
- N5qTgCIxTZtpm+cw7QQ4zyb0YyFSE2viJG8BGP1unxeD6bWB6jIaRXn7EaHZjvfPqt13eMRXP2K
- sA6FBvRCpIMkdLxgHGKVKg4PFXEbzCxkFFWrJuZgP9VVeVmiw51hAHPPKd5MbOG/B7rk3Vvu3+U
- LlrP6LNoanDGpHBOKLylAd/A/IPP4+OkRFTFvocvdwqS68omFQBmJUdT6Wu97Q+7
-X-Google-Smtp-Source: AGHT+IED0iBw6J8YXEje/44/3N2JN35ikcOAbA0FqlyaUWQwqZBA1j2zdVVcyT8j8e5igGCcTQ7jkA==
-X-Received: by 2002:a17:906:7956:b0:ade:3559:8a3e with SMTP id
- a640c23a62f3a-ae057fa417emr1345416766b.60.1750702398512; 
- Mon, 23 Jun 2025 11:13:18 -0700 (PDT)
+ bh=nwLsrmfXM6AEebcOHMHBCvjMM8VHOsZTbqCmo+d77Ek=;
+ b=on/57bmV7FyHSip09bW6CaINx7+Kaj9HpcOz41rKDFML/g2VVhZDbAAsh/2P4Xtd9+
+ x1Z0Jc1tGT+JbDcyRdDk25K8L2igy8k3bFZ9raz9j/ZbR35RVz0LXR6qAnhywbMIdcfj
+ 4o20mQCuot6G2aFlTB3NRHrg6j9W7jNqMoGLN9qiQImtzwLMth96BcsuqaJhVy1JyoPy
+ Ed6zywKJ9qTlR/Nq+/NSocQNzR/519MRgO/mVIV85UP5Ja39yEVfGGkINHY1hZfetsbX
+ IvXZC9wK89O4gzLzU1BVDPMwlDxCRRK1MyUiahy5sU9DZ7oJp7lYBYEfllzCiqENtE+o
+ Xq3Q==
+X-Gm-Message-State: AOJu0Ywb/fzFJ2oZ79SwTBJrv/7joRGtQggl5yAqaAV5RNglov0g+sqP
+ vzUiffw7Bis+G1LovbSm/drXR02Y+zRNNNukppyVRBLC9R/fD7JbHz/6oSJcuw==
+X-Gm-Gg: ASbGncunwM27GVsKpnf/qdG+xCb5xT531FuRgsC/pY2z26UN8B8LAIxR5eUXu8+YVF0
+ kv54kegWGggyoqQjW5NGChaeiC/JljfcGnfnAm8Xp4w9Miz1H7ssNKwYVA3NxLrF/ujAg4aSTGy
+ LLpEY4U28vgGKBJgpOQ2cYaFCbgdMKeVRVTBcMEy2+njPAB08c7qWBk/W49ca+I6tkvWyMCC2fi
+ OU8Uwkk6CG5DfOYZ1dle/52dmP6DhuDb7qzVvZ+1z2k3LS/FDA2coGUleww+QCcAVdxuAgedyeh
+ smSbXjgExBYNZ4cf6h2ejveQwNF3wQnLnVHHFnTy8MxdA4IyevN+dfVQARpA7NoDehHA6O6EL/8
+ =
+X-Google-Smtp-Source: AGHT+IHsQ30b6ZJK6kcxRsIl4kvB0EtrWz8g0vmbhvxPgtXViwRyy7wMP2ovUpOKqsQmErRgLo8YyQ==
+X-Received: by 2002:a17:906:6a08:b0:adb:3345:7564 with SMTP id
+ a640c23a62f3a-ae057ad198cmr1238018166b.35.1750702401022; 
+ Mon, 23 Jun 2025 11:13:21 -0700 (PDT)
 Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae0a18d9887sm59955366b.11.2025.06.23.11.13.17
+ a640c23a62f3a-ae0a18d9887sm59955366b.11.2025.06.23.11.13.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 11:13:18 -0700 (PDT)
+ Mon, 23 Jun 2025 11:13:20 -0700 (PDT)
 From: vtpieter@gmail.com
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
+To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>
 Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v2 2/3] Amend fpga Kconfig and add a new sandbox_fpga_defconfig
-Date: Mon, 23 Jun 2025 20:12:18 +0200
-Message-ID: <20250623181222.1539194-3-vtpieter@gmail.com>
+Subject: [PATCH v2 3/3] FPGA drivers files - correct compiler errors and
+ warnings
+Date: Mon, 23 Jun 2025 20:12:19 +0200
+Message-ID: <20250623181222.1539194-4-vtpieter@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250623181222.1539194-1-vtpieter@gmail.com>
 References: <20250623181222.1539194-1-vtpieter@gmail.com>
@@ -100,429 +102,355 @@ X-Virus-Status: Clean
 
 From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-All but the FPGA_SOCFPGA configurations are enabled because
-drivers/fpga/socfpga.c requires ARCH_SOCFPGA set for the *manager
-include macros; amend Kconfig with that dependency.
+Errors reported by GCC 14.2 when using the new sandbox_fpga_defconfig,
+to ensure most FPGA-related sources are compiled in. Also several
+style fixes as reported by checkpatch.pl on the diffs.
 
-Add a new defconfig to facilitate compiler checks on most FPGA-related
-sources.
+No functional changes but note that `StratixII_load/dump` function
+arguments and thus API has changed.
 
 Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- configs/sandbox_fpga_defconfig | 391 +++++++++++++++++++++++++++++++++
- drivers/fpga/Kconfig           |   1 +
- 2 files changed, 392 insertions(+)
- create mode 100644 configs/sandbox_fpga_defconfig
+ cmd/fpga.c               |   2 +-
+ drivers/fpga/ACEX1K.c    |   1 +
+ drivers/fpga/ivm_core.c  |   1 +
+ drivers/fpga/lattice.c   |   4 +-
+ drivers/fpga/spartan2.c  |   1 +
+ drivers/fpga/stratixII.c | 131 ++++++++++++++++++---------------------
+ drivers/fpga/stratixv.c  |   2 +-
+ drivers/fpga/versalpl.c  |   1 -
+ drivers/fpga/virtex2.c   |   2 +
+ include/stratixII.h      |   6 +-
+ 10 files changed, 72 insertions(+), 79 deletions(-)
 
-diff --git a/configs/sandbox_fpga_defconfig b/configs/sandbox_fpga_defconfig
-new file mode 100644
-index 00000000000..a64e208ad89
---- /dev/null
-+++ b/configs/sandbox_fpga_defconfig
-@@ -0,0 +1,391 @@
-+CONFIG_TEXT_BASE=0
-+CONFIG_SYS_MALLOC_LEN=0x6000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x2000
-+CONFIG_DEFAULT_DEVICE_TREE="sandbox"
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x0
-+CONFIG_PRE_CON_BUF_ADDR=0xf0000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_SYS_MEMTEST_START=0x00100000
-+CONFIG_SYS_MEMTEST_END=0x00101000
-+CONFIG_EFI_SECURE_BOOT=y
-+CONFIG_EFI_RT_VOLATILE_STORE=y
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-+CONFIG_EFI_CAPSULE_AUTHENTICATE=y
-+CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
-+CONFIG_BUTTON_CMD=y
-+CONFIG_FIT=y
-+CONFIG_FIT_RSASSA_PSS=y
-+CONFIG_FIT_CIPHER=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTMETH_ANDROID=y
-+CONFIG_UPL=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_MEASURED_BOOT=y
-+CONFIG_BOOTSTAGE=y
-+CONFIG_BOOTSTAGE_REPORT=y
-+CONFIG_BOOTSTAGE_FDT=y
-+CONFIG_BOOTSTAGE_STASH=y
-+CONFIG_BOOTSTAGE_STASH_SIZE=0x4096
-+CONFIG_AUTOBOOT_KEYED=y
-+CONFIG_AUTOBOOT_PROMPT="Enter password \"a\" in %d seconds to stop autoboot\n"
-+CONFIG_AUTOBOOT_ENCRYPTION=y
-+CONFIG_AUTOBOOT_SHA256_FALLBACK=y
-+CONFIG_AUTOBOOT_NEVER_TIMEOUT=y
-+CONFIG_AUTOBOOT_STOP_STR_ENABLE=y
-+CONFIG_AUTOBOOT_STOP_STR_CRYPT="$5$rounds=640000$HrpE65IkB8CM5nCL$BKT3QdF98Bo8fJpTr9tjZLZQyzqPASBY20xuK5Rent9"
-+CONFIG_IMAGE_PRE_LOAD=y
-+CONFIG_IMAGE_PRE_LOAD_SIG=y
-+CONFIG_CEDIT=y
-+CONFIG_CONSOLE_RECORD=y
-+CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
-+CONFIG_PRE_CONSOLE_BUFFER=y
-+CONFIG_LOG=y
-+CONFIG_LOG_MAX_LEVEL=9
-+CONFIG_LOG_DEFAULT_LEVEL=6
-+CONFIG_LOGF_FUNC=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_STACKPROTECTOR=y
-+CONFIG_ANDROID_AB=y
-+CONFIG_CMD_CPU=y
-+CONFIG_CMD_UFETCH=y
-+CONFIG_CMD_LICENSE=y
-+CONFIG_CMD_SMBIOS=y
-+CONFIG_CMD_BOOTM_PRE_LOAD=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_BOOTM_OPENRTOS=y
-+CONFIG_BOOTM_OSE=y
-+CONFIG_CMD_BOOTEFI_HELLO=y
-+CONFIG_CMD_BOOTMENU=y
-+CONFIG_CMD_ABOOTIMG=y
-+CONFIG_CMD_ASKENV=y
-+CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
-+CONFIG_CMD_ENV_CALLBACK=y
-+CONFIG_CMD_ENV_FLAGS=y
-+CONFIG_CMD_NVEDIT_EFI=y
-+CONFIG_CMD_NVEDIT_INFO=y
-+CONFIG_CMD_NVEDIT_LOAD=y
-+CONFIG_CMD_NVEDIT_SELECT=y
-+CONFIG_LOOPW=y
-+CONFIG_CMD_MD5SUM=y
-+CONFIG_CMD_MEM_SEARCH=y
-+CONFIG_CMD_MX_CYCLIC=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DEMO=y
-+CONFIG_CMD_FPGA_LOADP=y
-+CONFIG_CMD_FPGA_LOADBP=y
-+CONFIG_CMD_FPGA_LOADFS=y
-+CONFIG_CMD_FPGA_LOADMK=y
-+CONFIG_CMD_FPGA_LOAD_SECURE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPIO_READ=y
-+CONFIG_CMD_PWM=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_GPT_RENAME=y
-+CONFIG_CMD_IDE=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_LOADM=y
-+CONFIG_CMD_LSBLK=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_MUX=y
-+CONFIG_CMD_OSD=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_PCI_MPS=y
-+CONFIG_CMD_READ=y
-+CONFIG_CMD_REMOTEPROC=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_TEMPERATURE=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_RKMTD=y
-+CONFIG_CMD_WDT=y
-+CONFIG_CMD_WRITE=y
-+CONFIG_CMD_AXI=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_SETEXPR_FMT=y
-+CONFIG_CMD_XXD=y
-+CONFIG_CMD_DHCP6=y
-+CONFIG_BOOTP_DNS2=y
-+CONFIG_CMD_PCAP=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_TFTPSRV=y
-+CONFIG_CMD_RARP=y
-+CONFIG_CMD_CDP=y
-+CONFIG_CMD_SNTP=y
-+CONFIG_CMD_LINK_LOCAL=y
-+CONFIG_IPV6_ROUTER_DISCOVERY=y
-+CONFIG_CMD_ETHSW=y
-+CONFIG_CMD_DNS=y
-+CONFIG_CMD_2048=y
-+CONFIG_CMD_BMP=y
-+CONFIG_CMD_BOOTCOUNT=y
-+CONFIG_CMD_EFIDEBUG=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_PAUSE=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_SOUND=y
-+CONFIG_CMD_QFW=y
-+CONFIG_CMD_PSTORE=y
-+CONFIG_CMD_PSTORE_MEM_ADDR=0x3000000
-+CONFIG_CMD_BOOTSTAGE=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_AES=y
-+CONFIG_CMD_TPM=y
-+CONFIG_CMD_TPM_TEST=y
-+CONFIG_CMD_SCMI=y
-+CONFIG_CMD_BTRFS=y
-+CONFIG_CMD_CBFS=y
-+CONFIG_CMD_CRAMFS=y
-+CONFIG_CMD_EROFS=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_SQUASHFS=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_STACKPROTECTOR_TEST=y
-+CONFIG_CMD_SPAWN=y
-+CONFIG_MAC_PARTITION=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_EXT4=y
-+CONFIG_ENV_EXT4_INTERFACE="host"
-+CONFIG_ENV_EXT4_DEVICE_AND_PART="0:0"
-+CONFIG_ENV_IMPORT_FDT=y
-+CONFIG_BOOTP_SEND_HOSTNAME=y
-+CONFIG_NETCONSOLE=y
-+CONFIG_IP_DEFRAG=y
-+CONFIG_BOOTP_SERVERIP=y
-+CONFIG_IPV6=y
-+CONFIG_DM_DMA=y
-+CONFIG_DEBUG_DEVRES=y
-+CONFIG_SIMPLE_PM_BUS=y
-+CONFIG_ADC=y
-+CONFIG_ADC_SANDBOX=y
-+CONFIG_AXI=y
-+CONFIG_AXI_SANDBOX=y
-+CONFIG_BLKMAP=y
-+CONFIG_SYS_IDE_MAXBUS=1
-+CONFIG_SYS_ATA_BASE_ADDR=0x100
-+CONFIG_SYS_ATA_STRIDE=4
-+CONFIG_SYS_ATA_DATA_OFFSET=0
-+CONFIG_SYS_ATA_REG_OFFSET=1
-+CONFIG_SYS_ATA_ALT_OFFSET=2
-+CONFIG_SYS_ATA_IDE0_OFFSET=0
-+CONFIG_BOOTCOUNT_LIMIT=y
-+CONFIG_DM_BOOTCOUNT=y
-+CONFIG_DM_BOOTCOUNT_RTC=y
-+CONFIG_DM_BOOTCOUNT_I2C_EEPROM=y
-+CONFIG_DM_BOOTCOUNT_SYSCON=y
-+CONFIG_BUTTON_ADC=y
-+CONFIG_BUTTON_GPIO=y
-+CONFIG_CLK=y
-+CONFIG_CLK_COMPOSITE_CCF=y
-+CONFIG_CLK_K210=y
-+CONFIG_CLK_K210_SET_RATE=y
-+CONFIG_SANDBOX_CLK_CCF=y
-+CONFIG_CLK_SCMI=y
-+CONFIG_CPU=y
-+CONFIG_DM_DEMO=y
-+CONFIG_DM_DEMO_SIMPLE=y
-+CONFIG_DM_DEMO_SHAPE=y
-+CONFIG_DFU_SF=y
-+CONFIG_DMA=y
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_SANDBOX_DMA=y
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_ARM_FFA_TRANSPORT=y
-+CONFIG_FPGA_ALTERA=y
-+CONFIG_FPGA_STRATIX_II=y
-+CONFIG_FPGA_STRATIX_V=y
-+CONFIG_FPGA_ACEX1K=y
-+CONFIG_FPGA_CYCLON2=y
-+CONFIG_FPGA_LATTICE=y
-+CONFIG_FPGA_XILINX=y
-+CONFIG_FPGA_VERSALPL=y
-+CONFIG_FPGA_SPARTAN2=y
-+CONFIG_FPGA_SPARTAN3=y
-+CONFIG_FPGA_VIRTEX2=y
-+CONFIG_SYS_FPGA_CHECK_BUSY=y
-+CONFIG_SYS_FPGA_CHECK_CTRLC=y
-+CONFIG_DM_FPGA=y
-+CONFIG_SANDBOX_FPGA=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_DM_GPIO_LOOKUP_LABEL=y
-+CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_SANDBOX_GPIO=y
-+CONFIG_DM_HWSPINLOCK=y
-+CONFIG_HWSPINLOCK_SANDBOX=y
-+CONFIG_I2C_CROS_EC_TUNNEL=y
-+CONFIG_I2C_CROS_EC_LDO=y
-+CONFIG_DM_I2C_GPIO=y
-+CONFIG_I2C_MUX=y
-+CONFIG_I2C_ARB_GPIO_CHALLENGE=y
-+CONFIG_CROS_EC_KEYB=y
-+CONFIG_I8042_KEYB=y
-+CONFIG_IOMMU=y
-+CONFIG_LED=y
-+CONFIG_LED_BLINK=y
-+CONFIG_LED_GPIO=y
-+CONFIG_DM_MAILBOX=y
-+CONFIG_SANDBOX_MBOX=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_CROS_EC=y
-+CONFIG_CROS_EC_I2C=y
-+CONFIG_CROS_EC_LPC=y
-+CONFIG_CROS_EC_SANDBOX=y
-+CONFIG_CROS_EC_SPI=y
-+CONFIG_P2SB=y
-+CONFIG_PWRSEQ=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MMC_PCI=y
-+CONFIG_MMC_SANDBOX=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_RAW_NAND=y
-+CONFIG_SYS_MAX_NAND_DEVICE=8
-+CONFIG_SYS_NAND_USE_FLASH_BBT=y
-+CONFIG_NAND_SANDBOX=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_SYS_NAND_PAGE_SIZE=0x200
-+CONFIG_SPI_FLASH_SANDBOX=y
-+CONFIG_BOOTDEV_SPI_FLASH=y
-+CONFIG_SPI_FLASH_ATMEL=y
-+CONFIG_SPI_FLASH_EON=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_SST=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_NVMXIP_QSPI=y
-+CONFIG_MULTIPLEXER=y
-+CONFIG_MUX_MMIO=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCI_REGION_MULTI_ENTRY=y
-+CONFIG_PCI_FTPCI100=y
-+CONFIG_PCI_SANDBOX=y
-+CONFIG_PHY=y
-+CONFIG_PHY_SANDBOX=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_SANDBOX=y
-+CONFIG_PINCTRL_SINGLE=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_SANDBOX_POWER_DOMAIN=y
-+CONFIG_SCMI_POWER_DOMAIN=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_ACT8846=y
-+CONFIG_DM_PMIC_PFUZE100=y
-+CONFIG_DM_PMIC_MAX77686=y
-+CONFIG_DM_PMIC_MC34708=y
-+CONFIG_PMIC_QCOM=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_PMIC_S2MPS11=y
-+CONFIG_DM_PMIC_SANDBOX=y
-+CONFIG_PMIC_S5M8767=y
-+CONFIG_PMIC_TPS65090=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_REGULATOR_ACT8846=y
-+CONFIG_DM_REGULATOR_PFUZE100=y
-+CONFIG_DM_REGULATOR_MAX77686=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_REGULATOR_S5M8767=y
-+CONFIG_DM_REGULATOR_SANDBOX=y
-+CONFIG_REGULATOR_TPS65090=y
-+CONFIG_DM_REGULATOR_SCMI=y
-+CONFIG_DM_PWM=y
-+CONFIG_PWM_CROS_EC=y
-+CONFIG_PWM_SANDBOX=y
-+CONFIG_RAM=y
-+CONFIG_DM_REBOOT_MODE=y
-+CONFIG_DM_REBOOT_MODE_GPIO=y
-+CONFIG_DM_REBOOT_MODE_RTC=y
-+CONFIG_REMOTEPROC_SANDBOX=y
-+CONFIG_SANDBOX_RESET=y
-+CONFIG_RESET_SYSCON=y
-+CONFIG_RESET_SCMI=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_MAX313XX=y
-+CONFIG_RTC_RV8803=y
-+CONFIG_RTC_HT1380=y
-+CONFIG_SCSI=y
-+CONFIG_SANDBOX_SERIAL=y
-+CONFIG_SM=y
-+CONFIG_SMEM=y
-+CONFIG_SANDBOX_SMEM=y
-+CONFIG_SOUND=y
-+CONFIG_SOUND_DA7219=y
-+CONFIG_SOUND_MAX98357A=y
-+CONFIG_SOUND_SANDBOX=y
-+CONFIG_SOC_DEVICE=y
-+CONFIG_SANDBOX_SPI=y
-+CONFIG_SPMI=y
-+CONFIG_SPMI_SANDBOX=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SANDBOX=y
-+CONFIG_SYSINFO_GPIO=y
-+CONFIG_SYSRESET=y
-+CONFIG_DM_THERMAL=y
-+CONFIG_TIMER=y
-+CONFIG_TIMER_EARLY=y
-+CONFIG_SANDBOX_TIMER=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_EMUL=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_ETHER=y
-+CONFIG_USB_ETH_CDC=y
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_FONT_SUN12X22=y
-+CONFIG_VIDEO_COPY=y
-+CONFIG_CONSOLE_ROTATION=y
-+CONFIG_CONSOLE_TRUETYPE=y
-+CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
-+CONFIG_I2C_EDID=y
-+CONFIG_VIDEO_SANDBOX_SDL=y
-+CONFIG_VIDEO_BRIDGE=y
-+CONFIG_VIDEO_BRIDGE_LVDS_CODEC=y
-+CONFIG_VIDEO_DSI_HOST_SANDBOX=y
-+CONFIG_OSD=y
-+CONFIG_SANDBOX_OSD=y
-+CONFIG_BMP_16BPP=y
-+CONFIG_BMP_24BPP=y
-+CONFIG_W1=y
-+CONFIG_W1_GPIO=y
-+CONFIG_W1_EEPROM=y
-+CONFIG_W1_EEPROM_SANDBOX=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_GPIO=y
-+CONFIG_WDT_SANDBOX=y
-+CONFIG_WDT_ALARM_SANDBOX=y
-+CONFIG_WDT_FTWDT010=y
-+CONFIG_FS_CBFS=y
-+CONFIG_FS_EXFAT=y
-+CONFIG_FS_CRAMFS=y
-+CONFIG_ADDR_MAP=y
-+CONFIG_PANIC_HANG=y
-+CONFIG_CMD_DHRYSTONE=y
-+CONFIG_MBEDTLS_LIB=y
-+CONFIG_HKDF_MBEDTLS=y
-+CONFIG_ECDSA=y
-+CONFIG_ECDSA_VERIFY=y
-+CONFIG_TPM=y
-+CONFIG_ERRNO_STR=y
-+CONFIG_GETOPT=y
-+CONFIG_TEST_FDTDEC=y
-+CONFIG_UTHREAD=y
-+CONFIG_UNIT_TEST=y
-+CONFIG_UT_TIME=y
-+CONFIG_UT_DM=y
-diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
-index 62cb77b098c..9456ca3149a 100644
---- a/drivers/fpga/Kconfig
-+++ b/drivers/fpga/Kconfig
-@@ -15,6 +15,7 @@ config FPGA_ALTERA
+diff --git a/cmd/fpga.c b/cmd/fpga.c
+index 9cc51f04698..d51c380d7b3 100644
+--- a/cmd/fpga.c
++++ b/cmd/fpga.c
+@@ -302,7 +302,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
  
- config FPGA_SOCFPGA
- 	bool "Enable Gen5 and Arria10 common FPGA drivers"
-+	depends on ARCH_SOCFPGA
- 	select FPGA_ALTERA
- 	help
- 	  Say Y here to enable the Gen5 and Arria10 common FPGA driver
+ 			data = image_get_load(hdr);
+ 
+-			if (gunzip((void *)data, ~0UL, (void *)image_buf,
++			if (gunzip((void *)data, ~0U, (void *)image_buf,
+ 				   &image_size) != 0) {
+ 				log_err("Gunzip error\n");
+ 				return CMD_RET_FAILURE;
+diff --git a/drivers/fpga/ACEX1K.c b/drivers/fpga/ACEX1K.c
+index 3de9011ac06..e1514fc56d0 100644
+--- a/drivers/fpga/ACEX1K.c
++++ b/drivers/fpga/ACEX1K.c
+@@ -14,6 +14,7 @@
+ #include <log.h>
+ #include <ACEX1K.h>		/* ACEX device family */
+ #include <linux/delay.h>
++#include <time.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+  * overrun the device (the Slave Parallel mode can free run at 50MHz).
+diff --git a/drivers/fpga/ivm_core.c b/drivers/fpga/ivm_core.c
+index 3c9a01e5110..4ab5dab250a 100644
+--- a/drivers/fpga/ivm_core.c
++++ b/drivers/fpga/ivm_core.c
+@@ -33,6 +33,7 @@
+ #include <linux/string.h>
+ #include <malloc.h>
+ #include <lattice.h>
++#include <vsprintf.h>
+ 
+ #define vme_out_char(c)	printf("%c", c)
+ #define vme_out_hex(c)	printf("%x", c)
+diff --git a/drivers/fpga/lattice.c b/drivers/fpga/lattice.c
+index 3f481e38565..29cf2f60974 100644
+--- a/drivers/fpga/lattice.c
++++ b/drivers/fpga/lattice.c
+@@ -350,8 +350,8 @@ int lattice_info(Lattice_desc *desc)
+ 			printf("Unsupported interface type, %d\n", desc->iface);
+ 		}
+ 
+-		printf("Device Size:   \t%d bytes\n",
+-				desc->size);
++		printf("Device Size:   \t%zu bytes\n",
++		       desc->size);
+ 
+ 		if (desc->iface_fns) {
+ 			printf("Device Function Table @ 0x%p\n",
+diff --git a/drivers/fpga/spartan2.c b/drivers/fpga/spartan2.c
+index 906649ea181..792e4033428 100644
+--- a/drivers/fpga/spartan2.c
++++ b/drivers/fpga/spartan2.c
+@@ -9,6 +9,7 @@
+ #include <config.h>		/* core U-Boot definitions */
+ #include <log.h>
+ #include <spartan2.h>		/* Spartan-II device family */
++#include <time.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+  * overrun the device (the Slave Parallel mode can free run at 50MHz).
+diff --git a/drivers/fpga/stratixII.c b/drivers/fpga/stratixII.c
+index 73fecd9dca5..c347eba0b79 100644
+--- a/drivers/fpga/stratixII.c
++++ b/drivers/fpga/stratixII.c
+@@ -7,90 +7,38 @@
+ #include <altera.h>
+ #include <linux/delay.h>
+ 
+-int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+-			   int isSerial, int isSecure);
+-int StratixII_ps_fpp_dump (Altera_desc * desc, void *buf, size_t bsize);
+-
+ /****************************************************************/
+ /* Stratix II Generic Implementation                            */
+-int StratixII_load (Altera_desc * desc, void *buf, size_t bsize)
++int StratixII_ps_fpp_dump(Altera_desc *desc, const void *buf, size_t bsize)
+ {
+-	int ret_val = FPGA_FAIL;
+-
+-	switch (desc->iface) {
+-	case passive_serial:
+-		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 1, 0);
+-		break;
+-	case fast_passive_parallel:
+-		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 0, 0);
+-		break;
+-	case fast_passive_parallel_security:
+-		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 0, 1);
+-		break;
+-
+-		/* Add new interface types here */
+-	default:
+-		printf ("%s: Unsupported interface type, %d\n", __FUNCTION__,
+-			desc->iface);
+-	}
+-	return ret_val;
+-}
+-
+-int StratixII_dump (Altera_desc * desc, void *buf, size_t bsize)
+-{
+-	int ret_val = FPGA_FAIL;
+-
+-	switch (desc->iface) {
+-	case passive_serial:
+-	case fast_passive_parallel:
+-	case fast_passive_parallel_security:
+-		ret_val = StratixII_ps_fpp_dump (desc, buf, bsize);
+-		break;
+-		/* Add new interface types here */
+-	default:
+-		printf ("%s: Unsupported interface type, %d\n", __FUNCTION__,
+-			desc->iface);
+-	}
+-	return ret_val;
+-}
+-
+-int StratixII_info (Altera_desc * desc)
+-{
+-	return FPGA_SUCCESS;
+-}
+-
+-int StratixII_ps_fpp_dump (Altera_desc * desc, void *buf, size_t bsize)
+-{
+-	printf ("Stratix II Fast Passive Parallel dump is not implemented\n");
++	printf("Stratix II Fast Passive Parallel dump is not implemented\n");
+ 	return FPGA_FAIL;
+ }
+ 
+-int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+-			   int isSerial, int isSecure)
++int StratixII_ps_fpp_load(Altera_desc *desc, const void *buf, size_t bsize,
++			  int isSerial, int isSecure)
+ {
+ 	altera_board_specific_func *fns;
+ 	int cookie;
+ 	int ret_val = FPGA_FAIL;
+ 	int bytecount;
+-	char *buff = buf;
++	const char *buff = buf;
+ 	int i;
+ 
+ 	if (!desc) {
+-		printf ("%s(%d) Altera_desc missing\n", __FUNCTION__, __LINE__);
++		log_err("Altera_desc missing\n");
+ 		return FPGA_FAIL;
+ 	}
+ 	if (!buff) {
+-		printf ("%s(%d) buffer is missing\n", __FUNCTION__, __LINE__);
++		log_err("buffer is missing\n");
+ 		return FPGA_FAIL;
+ 	}
+ 	if (!bsize) {
+-		printf ("%s(%d) size is zero\n", __FUNCTION__, __LINE__);
++		log_err("size is zero\n");
+ 		return FPGA_FAIL;
+ 	}
+ 	if (!desc->iface_fns) {
+-		printf
+-		    ("%s(%d) Altera_desc function interface table is missing\n",
+-		     __FUNCTION__, __LINE__);
++		log_err("Altera_desc function interface table is missing\n");
+ 		return FPGA_FAIL;
+ 	}
+ 	fns = (altera_board_specific_func *) (desc->iface_fns);
+@@ -99,9 +47,7 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 	if (!
+ 	    (fns->config && fns->status && fns->done && fns->data
+ 	     && fns->abort)) {
+-		printf
+-		    ("%s(%d) Missing some function in the function interface table\n",
+-		     __FUNCTION__, __LINE__);
++		log_err("Missing some function in the function interface table\n");
+ 		return FPGA_FAIL;
+ 	}
+ 
+@@ -124,13 +70,12 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 	bytecount = 0;
+ 	fns->clk (0, 1, cookie);
+ 
+-	printf ("loading to fpga    ");
++	printf("loading to fpga    ");
+ 	while (bytecount < bsize) {
+ 		/* 3.1 check stratix has not signaled us an error */
+ 		if (fns->status (cookie) != 1) {
+-			printf
+-			    ("\n%s(%d) Stratix failed (byte transferred till failure 0x%x)\n",
+-			     __FUNCTION__, __LINE__, bytecount);
++			log_err("\nStratix failed (byte transferred till failure 0x%x)\n",
++				bytecount);
+ 			fns->abort (cookie);
+ 			return FPGA_FAIL;
+ 		}
+@@ -162,7 +107,7 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 
+ 		/* 3.5 while clk is deasserted it is safe to print some progress indication */
+ 		if ((bytecount % (bsize / 100)) == 0) {
+-			printf ("\b\b\b%02d\%", bytecount * 100 / bsize);
++			printf("\b\b\b%02zu\%%", bytecount * 100 / bsize);
+ 		}
+ 	}
+ 
+@@ -170,11 +115,11 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 	fns->clk (1, 1, cookie);
+ 	udelay(100);
+ 	if (!fns->done (cookie)) {
+-		printf (" error!.\n");
++		printf(" error!.\n");
+ 		fns->abort (cookie);
+ 		return FPGA_FAIL;
+ 	} else {
+-		printf ("\b\b\b done.\n");
++		printf("\b\b\b done.\n");
+ 	}
+ 
+ 	/* 5. call lower layer post configuration */
+@@ -187,3 +132,47 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 
+ 	return FPGA_SUCCESS;
+ }
++
++int StratixII_load(Altera_desc *desc, const void *buf, size_t size)
++{
++	int ret_val = FPGA_FAIL;
++
++	switch (desc->iface) {
++	case passive_serial:
++		ret_val = StratixII_ps_fpp_load(desc, buf, size, 1, 0);
++		break;
++	case fast_passive_parallel:
++		ret_val = StratixII_ps_fpp_load(desc, buf, size, 0, 0);
++		break;
++	case fast_passive_parallel_security:
++		ret_val = StratixII_ps_fpp_load(desc, buf, size, 0, 1);
++		break;
++
++		/* Add new interface types here */
++	default:
++		log_err("Unsupported interface type, %d\n", desc->iface);
++	}
++	return ret_val;
++}
++
++int StratixII_dump(Altera_desc *desc, const void *buf, size_t bsize)
++{
++	int ret_val = FPGA_FAIL;
++
++	switch (desc->iface) {
++	case passive_serial:
++	case fast_passive_parallel:
++	case fast_passive_parallel_security:
++		ret_val = StratixII_ps_fpp_dump(desc, buf, bsize);
++		break;
++		/* Add new interface types here */
++	default:
++		log_err("Unsupported interface type, %d\n", desc->iface);
++	}
++	return ret_val;
++}
++
++int StratixII_info(Altera_desc *desc)
++{
++	return FPGA_SUCCESS;
++}
+diff --git a/drivers/fpga/stratixv.c b/drivers/fpga/stratixv.c
+index 372f16d92d1..4b251994598 100644
+--- a/drivers/fpga/stratixv.c
++++ b/drivers/fpga/stratixv.c
+@@ -48,7 +48,7 @@ int stratixv_load(Altera_desc *desc, const void *rbf_data, size_t rbf_size)
+ 	int spi_dev;
+ 	int ret = 0;
+ 
+-	if ((u32)rbf_data & 0x3) {
++	if ((size_t)rbf_data & 0x3) {
+ 		puts("FPGA: Unaligned data, realign to 32bit boundary.\n");
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/fpga/versalpl.c b/drivers/fpga/versalpl.c
+index d691f135e89..624493ad838 100644
+--- a/drivers/fpga/versalpl.c
++++ b/drivers/fpga/versalpl.c
+@@ -6,7 +6,6 @@
+ 
+ #include <cpu_func.h>
+ #include <log.h>
+-#include <asm/arch/sys_proto.h>
+ #include <memalign.h>
+ #include <versalpl.h>
+ #include <zynqmp_firmware.h>
+diff --git a/drivers/fpga/virtex2.c b/drivers/fpga/virtex2.c
+index 8e2c12bb58b..805cbac8082 100644
+--- a/drivers/fpga/virtex2.c
++++ b/drivers/fpga/virtex2.c
+@@ -19,6 +19,7 @@
+ #include <log.h>
+ #include <virtex2.h>
+ #include <linux/delay.h>
++#include <time.h>
+ 
+ /*
+  * If the SelectMap interface can be overrun by the processor, enable
+@@ -301,6 +302,7 @@ static int virtex2_ssm_load(xilinx_desc *desc, const void *buf, size_t bsize)
+ 	size_t bytecount = 0;
+ 	unsigned char *data = (unsigned char *)buf;
+ 	int cookie = desc->cookie;
++	unsigned long ts;
+ 
+ 	ret_val = virtex2_slave_pre(fn, cookie);
+ 	if (ret_val != FPGA_SUCCESS)
+diff --git a/include/stratixII.h b/include/stratixII.h
+index 3c06bb2955a..785cdf41cb8 100644
+--- a/include/stratixII.h
++++ b/include/stratixII.h
+@@ -6,8 +6,8 @@
+ #ifndef _STRATIXII_H_
+ #define _STRATIXII_H_
+ 
+-extern int StratixII_load (Altera_desc * desc, void *image, size_t size);
+-extern int StratixII_dump (Altera_desc * desc, void *buf, size_t bsize);
+-extern int StratixII_info (Altera_desc * desc);
++int StratixII_load(Altera_desc *desc, const void *buf, size_t size);
++int StratixII_dump(Altera_desc *desc, const void *buf, size_t bsize);
++int StratixII_info(Altera_desc *desc);
+ 
+ #endif				/* _STRATIXII_H_ */
 -- 
 2.48.1
 
