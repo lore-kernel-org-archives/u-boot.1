@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5038C77B7F
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 12:26:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AFAFC7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 12:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA69B82F71;
-	Mon, 23 Jun 2025 14:23:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CF6182F8E;
+	Mon, 23 Jun 2025 14:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="RH2wzgXj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NXcQnRs5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A5D81E13; Mon, 23 Jun 2025 14:10:47 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id AB02082D2B; Mon, 23 Jun 2025 14:10:48 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5397782D21
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 14:10:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6611382CCE
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 14:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-60700a745e5so8145190a12.3
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 05:10:45 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ad8a8da2376so651272066b.3
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 05:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1750680645; x=1751285445;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1750680646; x=1751285446;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mrUxM9mIj0J7O7I7vKPgS4Xm/oriEiQRQpUjDGhl1IU=;
- b=RH2wzgXj7bVHH7sHjASxhPfB2IEYi85lNPbp51typ4kwNK8sya11WSD4ZVmEgP1gq7
- KFUasKv20wDkFysJ7WXAQf+s8n6hZZonH2PUjHRIjVfNdhXP4JI6wRlZYWotcHbEepLY
- qCGc4U54rSszMpiEUUXh5ohitUIRcqUaqkLDPGHEzlnSEI2+t+K5JU4YpRInkhTDI52S
- 58JhRBA4wNvGK9pDEgr92Pw9/q6qJWBQnweZhF9INMmZ5sAfSI/b0Yi47eZCWWdK4HDS
- Ahq99HhiGzR/vrn82Ax8d9ItObkXgh9hJgLWOTH+5iF8tnbu/4htbGng02FdGYOlbtcU
- FnmQ==
+ :reply-to; bh=WzVxwIZwQdIvEUWd8NBVmaDGSmkMMWdLZpDT6nqJ9As=;
+ b=NXcQnRs5Zi5hORPKtXpGM/EQlaOO7MTmcbbfmDoMVBzti7uy9ZnSbknq1KPHYq+bZd
+ ailPDKs8CNdOp4MPMTASpX3cU46z1tAA6l7ugYv8xbqA5EuC1HiGSHaFVe7f2892Gh5b
+ 0yarnH7Bylk3qK2r2zZSW7riI+pBNwAQW3xI5IaAvRjZPwluqRJlRDUpJuXdM0+hsbkA
+ eI0B8Mxp3dx9ES+SGqSbN9a/0UuhqXBZtbUEOafaQRmUySlZE3ygtf/owsTYI5LTLBWn
+ TvqDEdAoMSl8oMdYKCD1Vkw6BA9GGK5dWHXCRkQ2WzI0ohrIiuQUrFguwUU/3w0HMUEN
+ urrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750680645; x=1751285445;
+ d=1e100.net; s=20230601; t=1750680646; x=1751285446;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mrUxM9mIj0J7O7I7vKPgS4Xm/oriEiQRQpUjDGhl1IU=;
- b=ZwNcJnPCmxv0/vwTEkaDwCSyuO5EJEBzDyKtcQlxJaPNyB/EZ9XMv5B+uKAD7ZrD/U
- a26+85EF83+hciXYfdcduHQIWf7i811B4DkG9FSeLYGtMXsQJ/gWGKbdHzyAB9b6z0Kh
- VTi4TheJk0Slvr5hDBmP1v1fvTl/JYkXF94dRQmqUzGTm64gcvHpNAmGHSQoTlBe+lzB
- mcQy4dq/bbM6Ak2Qlq+sHdKov5FvH8SKXUjoDveuvwNbSVQ6HlJ74cm2usYB0rTfkTp7
- Rcff2P6SNGatPoXVcHvSx3LiX4wRsdZYgE8RNX6O/fHyYff6b8gopZvUjy6HR6eBpy1l
- +Y6w==
+ bh=WzVxwIZwQdIvEUWd8NBVmaDGSmkMMWdLZpDT6nqJ9As=;
+ b=F+Ub2y+3N6zk5WgZXsYAUbo8IYLGsFL2PzVcmtq0PK0XKwDZ8HawIVw/TvHmVhMPmV
+ dZrxt70zi3u8OotEmQhcxebNIbV0Q5PTng1Ksz08UlwbzjUf1PKikQYRsHA8bvhqCERt
+ 4Dum93/W2crn4oTjQ8uDAJR6dwa0ipyB2xXjEDXYnYPJM/hfvGbrCWjihuSw9/Vx4IyK
+ F0Y4ZyJg/yKPG5UTp7HGNooUD0Uz8nBBBybqrVMPBhfCMcMqE+xtQBrQoG01+u3mn5Hu
+ TLWpQy0I2PqWmWHFjyS3ZwSt7v8t3rEfQsJCGRckDFe7oj6dN45B4kezdOBRBxWwqx5E
+ D2GA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWQtThfTuRmv6MYNDV36kxiJjd7Abi/GjYTUC/FXTOusC/WTy30QvrSZbOjBeMPa/pU+SzOk3M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLrCNK4PmqPJpS4s4jVfJmTJ4cmyG1uHSYJq3QJ/ZLP65njkev
- q8COoHMm+s9sNKrqIsgKAWKaZocwsIkuYHO6j56zavVSD5EBuAzDxdd0jF+kAG8VtBw=
-X-Gm-Gg: ASbGncsWuo01x9MZdZ8BRoLyW1KvT4kWPR6A0PzYn6fjW7m87UILvC4kTaqbRxR7HFx
- f7gCA+cJ0wnSajHcPl79CMIbzgln5YmVAcRMsntS/5G0KrxCBxA64v1+eO7jKT8Oqf7CmnJNCsj
- ZvDcH6xndXHqslGtzU7aHGbZVqBaj9IKF7c4bydmP3UxbhZ1QD91GwaC5LQJ2wRoQwhJ4pbjRkk
- zkON+Bgrin3JLxiduTutuVP95lH7GA6FKqHtykQQpayzboG6kM0DPS47HInEi2RMebYsK7TdyHe
- H8zYl2E07RAzLlTWGtrEup6VGFQeOLgGTcXDEtfk6A2+fe7nOPaCs1SdjaA=
-X-Google-Smtp-Source: AGHT+IGd642UKzFTDLCo7ijkda1UewLqKfOEIl/o9lXjWDYytWsfyAvJWG/TKBXWuZgP+b8lq0XTrg==
-X-Received: by 2002:a05:6402:50c9:b0:604:bbd2:7c6c with SMTP id
- 4fb4d7f45d1cf-60a1d19192amr11180772a12.27.1750680644763; 
- Mon, 23 Jun 2025 05:10:44 -0700 (PDT)
+ AJvYcCWQf6FYYft7t1dx//alxX24hmTDT8dx7JxzfBom0HUsRU+Krg/U9+znRcwLNq1pWr9hlthPav8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzoHSD/fweewT+Udk7mvhaHsAJs9foaa/uSo1RlUCBltU4qdIqb
+ 0R1wBDxrSZCDVsyN6aNfv+0qZe467u3ufHiErBlXGfO0I1MobM0DAGWL5L6zAVlMF0Y=
+X-Gm-Gg: ASbGncu6kK5dCVlUCIfmZOH95+gyWzAwty6WhdG0juvErHb3H2zcy1IuqXQgNbDmWZr
+ WsAgfnIruRxYnstQWbq/RDZT5mTsQQQqIM+AyIAgaRQnrZeGT31TEEp5sDAW4NalQ2gc+rAEygC
+ 4Gt8PIbdmsgAwfGPrGkfMvOg7v2+zMdsWeuFnfk3hYUxO3BaTxG8YFgJ8122/7JNtRDx9Ha9zw6
+ JpVrGXqo26+hD8UV211k06Pd/bUMksP0R7A6bjqC2qm0cth7JnsAhXACzvrKJAy95VDEGrxu3TZ
+ 7U9/MTRAFEPgYSsjeLF7ENAnVlWNEwIkFBaOthVVTebrB001Wf3T62QB7Ztv/csa+D8RlA==
+X-Google-Smtp-Source: AGHT+IFjHUxAUuMWjHugaepNqqs5IckqzwzmIlFjkhiFGY+YqiNCFAEhQVRv/DzIAu8/ZCSLnt74wg==
+X-Received: by 2002:a17:907:3f1d:b0:ade:c102:dc9a with SMTP id
+ a640c23a62f3a-ae057c46464mr1166417566b.40.1750680645856; 
+ Mon, 23 Jun 2025 05:10:45 -0700 (PDT)
 Received: from localhost ([2001:4090:a244:83c4:9fe4:a128:a20c:8b84])
  by smtp.gmail.com with UTF8SMTPSA id
- 4fb4d7f45d1cf-60a18c9473bsm5932932a12.51.2025.06.23.05.10.44
+ a640c23a62f3a-ae053e7fb0esm697584166b.22.2025.06.23.05.10.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 05:10:44 -0700 (PDT)
+ Mon, 23 Jun 2025 05:10:45 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Mon, 23 Jun 2025 14:08:37 +0200
-Subject: [PATCH v3 14/22] arm64: dts: ti: k3-am62a-wakeup: Add R5F device node
+Date: Mon, 23 Jun 2025 14:08:38 +0200
+Subject: [PATCH v3 15/22] arm64: dts: ti: k3-am62a-main: Add C7xv device node
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-14-a4da322c16af@baylibre.com>
+Message-Id: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-15-a4da322c16af@baylibre.com>
 References: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-0-a4da322c16af@baylibre.com>
 In-Reply-To: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-0-a4da322c16af@baylibre.com>
 To: Sumit Garg <sumit.garg@kernel.org>, Nishanth Menon <nm@ti.com>, 
@@ -88,12 +88,12 @@ Cc: Sebin Francis <sebin.francis@ti.com>, Dhruva Gole <d-gole@ti.com>,
  Kevin Hilman <khilman@baylibre.com>, Vishal Mahaveer <vishalm@ti.com>, 
  Kendall Willis <k-willis@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2049; i=msp@baylibre.com;
- h=from:subject:message-id; bh=3h3B22xXibfEaCo843QbJHnBR/evntVXn17B/KwcGz4=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhoxIFxbVhywlLE3/xdYd3dnSZ12QfYrHeJVF17LVtm87j
- Au91Ng7SlkYxLgYZMUUWToTQ9P+y+88lrxo2WaYOaxMIEMYuDgFYCKtkxl+MZ1ur5NM1L+ZwLLu
- Upa6UsbFb3PZ3sZfPSrPPiFC3MPNm5Hh6qJVK5Y+OH4p5WTBnJfinhd6Tu26NffXi9VZr3ZKCAp
- OZgcA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1723; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=V9ZXVxMX+zxkyFPUKQLHdFsKJ4SFs9A2VnlBIf0g7R4=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhoxIF87uyvSXa+TVmtqjm3svN7+1f+WYP8Fg2rENytImH
+ 2fHli7tKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIm0dTIyfOIRunzAfM6KvvlH
+ j/0L/rVq3s1bF7gecU8sZ6s3yc7lm8vI8LttUozn9rC6Pw/5DCvKf229UiTeIJP6qFjUf+N8q8e
+ xbAA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 23 Jun 2025 14:23:35 +0200
@@ -113,64 +113,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Devarsh Thakkar <devarsht@ti.com>
+From: Jai Luthra <j-luthra@ti.com>
 
-AM62A SoCs have a single R5F core in wakeup domain. This core is
-also used as a device manager for the SoC.
+AM62A SoCs have a C7xv DSP subsystem with Analytics engine capability.
+This subsystem is intended for deep learning purposes. Define the
+device node for C7xv DSP.
 
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+Signed-off-by: Jai Luthra <j-luthra@ti.com>
 Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Judith Mendez <jm@ti.com>
 Tested-by: Daniel Schultz <d.schultz@phytec.de>
 Acked-by: Andrew Davis <afd@ti.com>
-Link: https://lore.kernel.org/r/20250502220325.3230653-5-jm@ti.com
+Link: https://lore.kernel.org/r/20250502220325.3230653-6-jm@ti.com
 Signed-off-by: Nishanth Menon <nm@ti.com>
 
-[ upstream commit: f0623719c2a612cbb9d5927fc5ffef9b54a12fb7 ]
+[ upstream commit: 56f13d79430f8faa27943e376ac25aca0836ee93 ]
 
-(cherry picked from commit 87d1a5e90b69c4d995561fe9c1e077bad5db7416)
+(cherry picked from commit d115e1eada3ede7e3598de8758e0ef48ff76f499)
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 ---
- dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ dts/upstream/src/arm64/ti/k3-am62a-main.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi b/dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi
-index b2c8f5351743857a54385178cce5c82a961917e3..259ae6ebbfb5ac5f83cc2c159c779ecaf9f96dcf 100644
---- a/dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi
-+++ b/dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi
-@@ -103,6 +103,31 @@
- 		status = "reserved";
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a-main.dtsi b/dts/upstream/src/arm64/ti/k3-am62a-main.dtsi
+index a1daba7b1fad5dee026ce4ba52077e01baca0131..d296e9e179738aa6661756c82ccf608ac53959bb 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a-main.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62a-main.dtsi
+@@ -1123,6 +1123,18 @@
+ 		power-domains = <&k3_pds 204 TI_SCI_PD_EXCLUSIVE>;
  	};
  
-+	wkup_r5fss0: r5fss@78000000 {
-+		compatible = "ti,am62-r5fss";
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges = <0x78000000 0x00 0x78000000 0x8000>,
-+			 <0x78100000 0x00 0x78100000 0x8000>;
-+		power-domains = <&k3_pds 119 TI_SCI_PD_EXCLUSIVE>;
++	c7x_0: dsp@7e000000 {
++		compatible = "ti,am62a-c7xv-dsp";
++		reg = <0x00 0x7e000000 0x00 0x00100000>;
++		reg-names = "l2sram";
++		resets = <&k3_reset 208 1>;
++		firmware-name = "am62a-c71_0-fw";
++		ti,sci = <&dmsc>;
++		ti,sci-dev-id = <208>;
++		ti,sci-proc-ids = <0x04 0xff>;
 +		status = "disabled";
-+
-+		wkup_r5fss0_core0: r5f@78000000 {
-+			compatible = "ti,am62-r5f";
-+			reg = <0x78000000 0x00008000>,
-+			      <0x78100000 0x00008000>;
-+			reg-names = "atcm", "btcm";
-+			resets = <&k3_reset 121 1>;
-+			firmware-name = "am62a-wkup-r5f0_0-fw";
-+			ti,atcm-enable = <1>;
-+			ti,btcm-enable = <1>;
-+			ti,loczrama = <1>;
-+			ti,sci = <&dmsc>;
-+			ti,sci-dev-id = <121>;
-+			ti,sci-proc-ids = <0x01 0xff>;
-+		};
 +	};
 +
- 	wkup_vtm0: temperature-sensor@b00000 {
- 		compatible = "ti,j7200-vtm";
- 		reg = <0x00 0xb00000 0x00 0x400>,
+ 	e5010: jpeg-encoder@fd20000 {
+ 		compatible = "ti,am62a-jpeg-enc", "img,e5010-jpeg-enc";
+ 		reg = <0x00 0xfd20000 0x00 0x100>,
 
 -- 
 2.49.0
