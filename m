@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0432C7115B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DA1C77B7F
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 194B682E20;
-	Tue, 24 Jun 2025 01:49:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E269882E67;
+	Tue, 24 Jun 2025 01:49:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mg4GwLLM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tbf/Osjp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B186582E20; Tue, 24 Jun 2025 01:49:40 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 17C8382EA3; Tue, 24 Jun 2025 01:49:43 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09BB982E66
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:49:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2D5382E35
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:49:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-442fda876a6so42281545e9.0
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:49:38 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3a507e88b0aso3999685f8f.1
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:49:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750722577; x=1751327377; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750722579; x=1751327379; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=V1zxjz9SAF4OGq5Aoeu/zZgwB4uCX6972RsE5yis7R8=;
- b=mg4GwLLMrFTOmaM3hKHlXScvBcHThKTMvLkpxSrRYscscCjK1fLN3aqI67riIpRxQw
- PeuunNV1KSnfeEjBamHa+Q+4GLbNIMzhBZ/B4IZIrna71Xhi4XCdtnYr4lQMfHju5ex2
- /rb9EYVYNYQ9sDYdsi4wmbsRA1+xLo9HXffcoEaWVjvJ1+m+qBV/rEFiqczfBkq116XS
- h/khthp4SsARrl9R3thoJXG/1w7eub4Cm3SSGcljphc3fvIPr1XCt0jYGdPrmuRXbi6X
- 2JWmL9t4WisYqmTI4oRs8vBYZ697QEGC5iiZCOm2iUfzDeL5ni+YykyxMMw1js52clPT
- f63g==
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nX358pXq2mSGSiYuNTGdSL1IHxnjF1GL9yM5aTwGNWA=;
+ b=Tbf/OsjpwuTcDclTNgRgrtLvV2v4sgdeARJkFomW/h/P1EOig8tDhJkufQcgosV7Gm
+ HL4dvak6BmdWAetDVBwLUYUXLRTPqO6fZiBso72kWnubXoRCSZKzF79BkWP+luVYAF8W
+ eFw0mNGi/qRMeretRdU3/X2xdU0wtLhvuynVarAcc9vOLZA3FnAQSpE4HRmAuDSr/ns5
+ mQvgoAw2qBZlSxFppV/PLnTbzptZ3/IbUljz9L+Ar1muOWhdOCeZ2cAHAnGXHvzyEZ13
+ Ul/1upyRyKGB71YwX1iYNzRNGqKui4lWQdEooL2g/wo2hQkV7Pfst5POiZXSSu76Ny1I
+ UVFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750722577; x=1751327377;
+ d=1e100.net; s=20230601; t=1750722579; x=1751327379;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V1zxjz9SAF4OGq5Aoeu/zZgwB4uCX6972RsE5yis7R8=;
- b=ewyXZHpivoXqjGZZL4QAQwJXkPea3XLNujwn++mTCUhnBCgOWFVX1pMbPB/4fi9T76
- Cle/+HOO86SSyQLB/aKM4YZScmLHyplDwQxiiKIhTo/wMiChBIBJAmLDdEnHCZJfURK6
- qL6juBfPm0m9Z3hRIQXFF66LDmofta5TuoMvxrL+qtYimDsUpEEtRFI+DXVDbw81w/rR
- coYLbVzk1NDFqdCEc7EUYuYlR8zBKmYlW3EG6PO3vdJiNM8LPX3AWJ3wS7w6hrgGCdyc
- U3m1gaCWpkZFWcuPhx/Xzrle4+iqBUtEW1oTOYrW8hzlkEM1CdvnGDiJkkq+K1gffnKD
- izjA==
+ bh=nX358pXq2mSGSiYuNTGdSL1IHxnjF1GL9yM5aTwGNWA=;
+ b=Oili7j3TlSTST4P5TUYosxzqdAxLjg0o2RTm+5rjghZ+RwIGQZ1maGaugL8As3Kr2C
+ 6Iscxrhv2+Al2JQs77X1Hce+CAHU6fidOdKoBtEyGaBquxmTZPsOHjB9lptct6lEqoBq
+ Zquy9bCY0uKhuQmA+woqPE1u1+gCM2aihTm4WnZjj3NmYzOiKw10hzJS5Vvqy6rDrWrC
+ cYjI3HpOvEB3ZDNH4FjwrYcbrfMyipIKn3aupdNlfZWubAmM0HwRI7ELmaXfwe9tMAPQ
+ aTazF+hiplD7re2WOuZ6yjQuN3c+mtvEHPpreo/CZgW/ouH8R/GgOdgZ0/U5wZA9QVaD
+ ritQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvqLpVfEoZrhaEK54+JKIgwvyJTl8Icy/9qUTEDM7yR1w8Tqwfok7rc8GQW3AZRF4/6WDUlCY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxQKdIot1uioR8gOkbFVFGoWi5CyAuGIX1dkYXb3GQKAjOyaIL
- PD5J6T+Si3M8IXs/bM/lZj4flBVF9DdcdPDdzTTQ9jlhSPwprZWRAfnJoteer7chRPEs/6YTybh
- 4DgQ2
-X-Gm-Gg: ASbGnctltd21Bo2FiR3VplB3uyIIORZYZnMW98ZLk11bHwCTvi3L9H4gRqUchcUURzA
- K0q8IAIu5Gzxe+5dnEHNodYrz8ch2VhnNkDNclK82oNYz9Qgtwi0Ch1TzSlbn79/sT9n+fa1rVC
- w3Nn2V4nnfcTEArqSS6nnmEPglsOh0RYFQvEcQ+z4OMi3jahpLYWvsjWhPuqwCNTYHyuzWMR35Z
- oYZQ6hbCQVdD9G8inGslvvH5unnZHxv2GHrpvkTIgcaz4QnhPJYnQmCUZzA9hi/YPWmWY5442h1
- R4BkppBGRCAVlAdm88Gvg7sqmEoTiSVJpIcm3Id08DmTtND0+iYUk3Pvgqx2TIUiIJB3XMvhbnB
- MwVECxoumTpA=
-X-Google-Smtp-Source: AGHT+IH/DyIGSxKBNk0pkBhJYCnMV9I/WIW5lj0aHXYVKlely6JRpf1DBGbDU0Pq7na9tBLaA5HWbw==
-X-Received: by 2002:a05:600c:3545:b0:442:f12f:bd9f with SMTP id
- 5b1f17b1804b1-453659d44f9mr122003815e9.27.1750722577031; 
- Mon, 23 Jun 2025 16:49:37 -0700 (PDT)
+ AJvYcCWjz4Wjkq6xMwhj0JcAsH/et/TO87jwS6+aokj8GpFNDHlHxoKjFHHFrgVogpy7EfrN+n36oPQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzINFiAT0sZrIr689ei3ETR8A/EEjLNix6vEFc8cfnfw7wuQIsl
+ /4ptpW8zEnMJKF83rPTNBEM8P8DlQrkxfMqMWYWlE0rl08N1bVWFs+1kahNHl/DL+C4=
+X-Gm-Gg: ASbGncseYeRfKwHQXBatgIL/zpGGEYfZsmWfiGZzH6KvvBcEIqQb69cijupISr2o0gc
+ eiGhqdcYmLBf18nmIwDipb5vQhlKzWhxSmsIC5UZEH1oW1+b4PsTPluNG9GxFwHGd9xLo+oKDIW
+ Utvpbdyoqt9EPu6VlQzCveVfHHSh+idTJLZf38JWpSaJl2NbWJJE6wdWQIS3f0eebXh3Kw87LB8
+ 11en1wlxAiIxgFnwFVP3SzyKHA16YKVHlXknX3jNXqYuV8NfddnIzkTVK5dHrLVv0RUSpXl5GlC
+ oYhEFVWMBL6Hsu+y+NUU8IwvL54XaQ6JQn0FzSV67XsRyTsZORXp9Yp4rwt1UYOOU9tSFA5R/AZ
+ Rs3xIXD8WB5U=
+X-Google-Smtp-Source: AGHT+IFqaBT6KcCI5DXVzjFioqbOQ5kI1OHkAb0F3EWPI7TcSa8Yk5hUwjDaGIhZONUzY/uRmwgdKQ==
+X-Received: by 2002:a05:6000:491c:b0:3a4:f7dd:234b with SMTP id
+ ffacd0b85a97d-3a6d1164217mr14137942f8f.0.1750722579167; 
+ Mon, 23 Jun 2025 16:49:39 -0700 (PDT)
 Received: from toyger.tail248178.ts.net ([213.240.182.16])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e7fb5716sm432284f8f.0.2025.06.23.16.49.33
+ ffacd0b85a97d-3a6e7fb5716sm432284f8f.0.2025.06.23.16.49.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 16:49:35 -0700 (PDT)
+ Mon, 23 Jun 2025 16:49:38 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com, 
- u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20250508113646.1462518-1-aswin.murugan@oss.qualcomm.com>
-References: <20250508113646.1462518-1-aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH v1 1/1] gpio: msm_gpio: return correct value for gpio read
-Message-Id: <175072257376.128390.1973436138640550429.b4-ty@linaro.org>
-Date: Tue, 24 Jun 2025 01:49:33 +0200
+To: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+In-Reply-To: <20250516130854.606067-1-sumit.garg@kernel.org>
+References: <20250516130854.606067-1-sumit.garg@kernel.org>
+Subject: Re: [PATCH] mach-snapdragon: of_fixup: Drop USB dr_mode override
+ for RB1/2
+Message-Id: <175072257708.128390.13879095705539344766.b4-ty@linaro.org>
+Date: Tue, 24 Jun 2025 01:49:37 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,20 +104,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 08 May 2025 17:06:46 +0530, Aswin Murugan wrote:
-> In the current implementation, the GPIO read operation considers
-> both the input and outbut bits (bits 0 and 1). It should only consider
-> the state of input bit, i.e bit 0. To address this, mask input bit
-> alone and read it.
+On Fri, 16 May 2025 18:38:54 +0530, Sumit Garg wrote:
+> The default DIP switch configuration on RB1/2 is to enable flashing
+> support via USB type-c port either using QDL or fastboot. It's just
+> cumbersome to get the host mode working in U-Boot via DIP switch toggle
+> when you need the flashing capability using the type-c port.
 > 
-> Reviewed-by:
+> So instead lets enable fastboot in U-Boot for RB1/2 boards which is
+> more useful in the default board DIP switch configuration. This let's
+> us to drop dr_mode DT fixup.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] gpio: msm_gpio: return correct value for gpio read
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d202c92862f0
+[1/1] mach-snapdragon: of_fixup: Drop USB dr_mode override for RB1/2
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/fce945be04b7
 
 Best regards,
 -- 
