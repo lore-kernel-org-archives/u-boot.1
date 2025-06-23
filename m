@@ -4,92 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A08C7115D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 08:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56980C7115D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 08:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D98AD81F66;
-	Mon, 23 Jun 2025 10:10:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 815CF81F66;
+	Mon, 23 Jun 2025 10:24:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XJo4T3bX";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="J8DZ7U0f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEC9781FEE; Mon, 23 Jun 2025 10:10:47 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E14E681FEE; Mon, 23 Jun 2025 10:24:57 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2061a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::61a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84CE980548
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 10:10:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D6CA80548
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 10:24:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-453426170b6so28663375e9.1
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 01:10:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750666245; x=1751271045; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3k/4SKluaFpv+T0vKZq2M29d5NTGgRlxoie63h6J92E=;
- b=XJo4T3bXylRYyBwAQHf0Ysm/MDULYKullB57yqL6fQKJkUgbsFTycvRJKOBiKyJnGt
- yvTNBGs2FOjowuzmUSvGrK+FbJJtnUX4sjk1AYQr+uIUoTHC1m1aKd4kPNfrPbLi2MnO
- XqrvBjVGt58ciCvsb/6r1cU8UAL77Zrw9CHH/51ApI8Kde2XP6TGysZzrTwBd+r1X8AE
- k9RVFwTf4w3iFbUf8rsWmgT1+HFmQx/eg+f6hAYEmSTvA7E6yggWMZi1HiaetII/UKwO
- VVliG4/VCW6R5TSXPwscxWwhGqBQzNBuo8TEm4nmUExoFzRi9xrOHHGS/CaZHc2nf7mC
- zEZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750666245; x=1751271045;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3k/4SKluaFpv+T0vKZq2M29d5NTGgRlxoie63h6J92E=;
- b=hREyBiROQ97KpjHfEIgA24OCGpTsSNw6KE8kWLz2Myy4Ud+/4looQzFkr91mUvg2zP
- Rp29UQBV6gNLrYnrwmbZnbsIP6j8Bn81O1HrCKiltZ0sFXTcJ/5fysT0N8dKp4Krx1rs
- dn7IjpM6F06muAXGABLh1AehMOkTw2XxMnU5Zy3uCZOorXfR8mVe709WFfW1A8kDutPw
- MtQFoUlty0/gfkoPISj+REn1F5L+Xd0BjD3gg0ZByVp7rHu+KEJteEGY+Fldzkq9opB+
- ficx4tl2qV39yfJqZajFcJAM71Q/+Mu/BIBKmB0W4CtKjKj+WTphdbu/eEtyPFH5l/Gb
- JJcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX93ayGhb2HbQlAc/ioRWSrSB8zWLj9ouilhhYn5WvfwmPLL5DCgpUvSksG5zhp/NAhj9WO9R0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYlWSU4tBrc9ZQ786fYieFt2DQm4ciAVC/q4+1fD/blIa8DW2U
- eXoXTCpPVSexkJ0uYlb3r0IQ0mS8sLMheeFRtc0MCPzn9Zv7PkI/DDoeXytdWiXLBoo=
-X-Gm-Gg: ASbGncuBt1OwfByDAiOPipepx9jOn4gOfHJxe+8t2Mi18MGWxrpe0EMCtImjNxujMgU
- FZ5xW7o8v2LP9i1QLx4mkQYSuFNh4mJ+v7+aSjortwUKARxdOz4ecIIUfVolW2upkFKnnDhFMWr
- n9E5Fqy7bzCyvbPAl15alDlRyScU7mNdT2L035QR75fIJ6GGNhjSoqTkaT1fTn8mjmUvBKgDpJL
- HM7WOYPL77vl3yGTxmrJQjKr7xZ3OXLi9ITFt56ZKXsGQBFSr88yOGmPlUY/LG2RyaevIZ8uDd5
- j3un5toAAQBO0de5JVQG+JUg7/7uENyhi5QBpLmYXHjZGeyz8Mn/JNOYovTzjC7LX++SJ7AITXO
- wO++5WneRp+VswZLEyDQjg8nAIa9QJlvV9f4FQAGvYw==
-X-Google-Smtp-Source: AGHT+IFauyINXkMayxLQIJVOWXWzG+Ve9zg460JBunT1lU1rruR11Dhk6dkRnOl5SGJzOHy29T9RuQ==
-X-Received: by 2002:a05:6000:4913:b0:3a4:f7e7:3630 with SMTP id
- ffacd0b85a97d-3a6d27cf353mr8329911f8f.15.1750666244808; 
- Mon, 23 Jun 2025 01:10:44 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:f95b:5bbb:67a7:dbd5?
- ([2a01:e0a:3cb:7bb0:f95b:5bbb:67a7:dbd5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6d1188c6esm8559397f8f.81.2025.06.23.01.10.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Jun 2025 01:10:44 -0700 (PDT)
-Message-ID: <2b144700-371c-4492-9244-41539457050b@linaro.org>
-Date: Mon, 23 Jun 2025 10:10:43 +0200
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BQpYcw8pavElGZiInYy7/14ztycvh/p91IN7NhTsiw6AsJr1AKnJVAdFlQvwIBwtgwWLpyM5MkbsFUe/u6J7RHDpEXLQcrzOz+e+OWYAmMcWbqTtexb3tR1Vwmqrwq+/gB5CmxfGKvzc4SjHrjg7HZrg85/bZ1bsEb+MHBlZS8ijjVH9ZRKQYt5VLGVQyf8O3/Xf9UQnmgdEoi8vuotcQny/B19CWqtbCBgpzhfR8F6r2emfTa0KE6L9y1fVyxLavWWehYrY71OsAVz4Yei1/xhGfR/seVN5FDiv1mebEz359/VIa/K2raSQ4aH40nVGtgl8v6A6ldzMRS8mfmVdvw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SHC6AVbP+eAL3DxR1EkXHy6BbdNJGrXHkMnzwuXr24w=;
+ b=uB2z9l4XWQriHxCjuhLFAwm6EoJ/t7TxegGk0M/VgiLdEsXVLls0FF/TfrCGQb1bZsDHnUsrdKgHZijnG3CIxxDouMgrf7vUY6MjhLfmhKGZ/IsGXZ1aynfgrm0OO2zvU+VaZXRi58Twt+ZxlEdoLwSgmoecJvWFQjTJFSYSXByU1jDvdC1Xacu46JfgmKJuxVP/261PrLNKWwWGijVW2AJytAq4A1qI6ELBKsVUATAf+04QktWZUawK0nAHIXO3DbS6HG8xVCkd4jqIv++7NoubiTNZkMcl8FF/nLRl5D9nG3NCxdEcFA+3Ymni5yUkL3173HWoJK2yzzi4cNW35Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SHC6AVbP+eAL3DxR1EkXHy6BbdNJGrXHkMnzwuXr24w=;
+ b=J8DZ7U0fX9lQSYGEyC6XW2+hpJcXQyo2SmvXhtnVhjcqpV3FQtDStraWwHkmbxx/OF2zSUfjsdnjNPKWM/XL7qEmFrjdWLA8W5c/LBPVP659SwjRFoIFo4si6B/dYYiIDWgctQVzQQrMmUU5MSzo7KxGWfNG85JsTX5Bi+PQ+1w=
+Received: from PH8P222CA0007.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:2d7::29)
+ by PH8PR12MB7351.namprd12.prod.outlook.com (2603:10b6:510:215::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.19; Mon, 23 Jun
+ 2025 08:24:50 +0000
+Received: from CY4PEPF0000EE34.namprd05.prod.outlook.com
+ (2603:10b6:510:2d7:cafe::66) by PH8P222CA0007.outlook.office365.com
+ (2603:10b6:510:2d7::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.29 via Frontend Transport; Mon,
+ 23 Jun 2025 08:24:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CY4PEPF0000EE34.mail.protection.outlook.com (10.167.242.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8880.14 via Frontend Transport; Mon, 23 Jun 2025 08:24:50 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 23 Jun
+ 2025 03:24:49 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 23 Jun
+ 2025 03:24:48 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Mon, 23 Jun 2025 03:24:46 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>, <hs@denx.de>,
+ <jonathan.stroud@amd.com>, <bigunclemax@gmail.com>
+Subject: [PATCH] i2c: muxes: Add PCA9541 i2c arbitrator driver
+Date: Mon, 23 Jun 2025 13:54:39 +0530
+Message-ID: <20250623082439.949845-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: arm: mvebu: Kirkwood boards are broken by commit 6fe50e3
-To: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
-Cc: Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAJaLiFwpdskG-eQjFKQseB3ResK=6Lt_RNRbXZTEFq7FYYSuAg@mail.gmail.com>
- <47e2ae8a-19b1-4841-bdde-e2994d1a7f70@linaro.org>
- <eb06107f-2a8b-4347-9937-89d099f22c89@linaro.org>
- <CAJaLiFwW_=GZcyS8qEyCepkYyHsGs-3hOiS6ubNbN=2=WC9ReA@mail.gmail.com>
- <20250621013656.GP216500@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250621013656.GP216500@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE34:EE_|PH8PR12MB7351:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9862a02a-cb72-4340-775f-08ddb22f6c24
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026|30052699003; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?y3jaLNcAuHQBmjhNMj0HVlsYHc80O/ZPRqhJSw2yCi45Rte3puRYf2YC1xjm?=
+ =?us-ascii?Q?Z/EP+DicEdKglSJVt8TugVm2EEC+98l+cSQso26OoxMD+4WLsRrlaNfL6ssi?=
+ =?us-ascii?Q?0OepI8sUxotACS3E8BX5Xi/ioF3Hbi1Op18oUfMdV0tT8Q7VSNfMcVE2Qkxy?=
+ =?us-ascii?Q?rW8HFWQ2Upjr1JxD3ubrG7Jh18q5u0Fp9f3yZ0THSpi6ZTZ8kT0CzrhQZM1M?=
+ =?us-ascii?Q?8/7d97lQOTA5vep7z7+yf1PpcenBPIX3W4LsOyl2rrQtAziw/dOx6biSvpma?=
+ =?us-ascii?Q?vA/4UVsx3P6YgC1uTf+FomUzKKYH+xy5RfI8uovWSBdqpEqkK3ZDyj9QmqCq?=
+ =?us-ascii?Q?wVI4p4vChU2CaR96okCwhMJTpqBM6Vuf13H7DAcG1ga2QwS+TcfOtCOaPhbb?=
+ =?us-ascii?Q?uZlXDGQJtNGQtUkCegNJKKUeHqtFrRs9E4CNRFW+oJHq5ogd29Rwxr82Wq2c?=
+ =?us-ascii?Q?MknYztyJjxOtLG6JuFtgSNOARK8jVeDn8oPKDGq98eCJeLYaXpmZclkABN+t?=
+ =?us-ascii?Q?uTesFFzoVygdXaaWbRrIyiyCXrmoRXFN5Iliae585u41kX23vny0H8yzUGXr?=
+ =?us-ascii?Q?iOxMXzgd/Q3GWClVD4JkfbQF9h8NKA8FQHuyYssZ2Brl+wNBwUN61KhfnPEA?=
+ =?us-ascii?Q?FwLTrPM16KXOiuG7Eo3yActyMEtuDgWuWx/vIh0R+siY9Gb8BcHl5pazVS0l?=
+ =?us-ascii?Q?iAyJGSDO3HNexTcMZdPestH0BXjcTxEJf5I+PyHjEm4r+BEtqmZJ3zeIAswM?=
+ =?us-ascii?Q?3cGvnLPJDkk96v7N2jyr0gE812DhE0yD/ACVgs2uoEBxdlOD1+q8VP8yaIeV?=
+ =?us-ascii?Q?jee1gxofdCc5NgzKuSgVleh+0RhLJmDwBw+OJxETadAmBn9QVEVFVRRjpXxi?=
+ =?us-ascii?Q?253n54G1mzZaPMfEc0uIbXqkxHf1XBWIJ33FoDmQuZcEPC0TYBV1VkmM9Vsf?=
+ =?us-ascii?Q?kIJl0nogSIHpQElzmW/RDDsJG4kTKlmGzlzYXXWXwesniOivYhD58WqsJ+j4?=
+ =?us-ascii?Q?T31coB7r8Rt1CbAuOVGznqhFgIYtLSKsWZU1EwhHf3XHiz6RnPfmVPNM1KCD?=
+ =?us-ascii?Q?KzNJh7wR2cv0BcJaK8Mk05CVYh9zmF+zzHQrJn4CxYZsMgZ6BJoS3gGVNHt5?=
+ =?us-ascii?Q?oOaM/DDNHKcekF/frZUmD6vPrCNHPmdbd6e/9fRUkXVCE7c+s16N3skJUdM7?=
+ =?us-ascii?Q?mnNMTW7PMxhzLeiVS38FZCd8NVlxjOPx0v//kH5U0XeazNexyY65d6Yz14Py?=
+ =?us-ascii?Q?Jef+tVoSNhlXqbc+wWTbapA7/Pti9i0JzsOIt2RH27nM4umgCvsu7TxXbm9i?=
+ =?us-ascii?Q?83StUuVx/bnknXaKizE7WOmOZtsLDLgjOJy+hYJgXqp2R/bN3xJM2x0wJLVL?=
+ =?us-ascii?Q?42AhfOgMbxLXJgijAos43Oizw/HPgPwpXs3YfJJTFfbzspFPpmQ6tM6Ub5zk?=
+ =?us-ascii?Q?ILAH63nrs9Dzn/Ue0vqhTc/4W0FDADySS6wA9z1Bx3vvSuEBTPq4mpGhsIIp?=
+ =?us-ascii?Q?f4dOKyVkMf81phBhiG+IlsmnuEzrE0rumlnK?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026)(30052699003);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2025 08:24:50.3145 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9862a02a-cb72-4340-775f-08ddb22f6c24
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE34.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7351
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,141 +149,351 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Add a driver for the PCA9541 i2c bus arbitrator based
+on the Linux driver for the same device.
 
-On 6/21/25 03:36, Tom Rini wrote:
-> On Fri, Jun 20, 2025 at 02:21:59PM -0700, Tony Dinh wrote:
->> Hi Jerome,
->>
->> On Fri, Jun 20, 2025 at 4:03 AM Jerome Forissier
->> <jerome.forissier@linaro.org> wrote:
->>>
->>> On 6/20/25 12:53, Jerome Forissier wrote:
->>>> Hi Tony,
->>>>
->>>> On 6/19/25 22:37, Tony Dinh wrote:
->>>>> Hi Jerome,
->>>>>
->>>>> While fixing some ext4 file system problems on 2025.07-rc4, I ran into
->>>>> a problem booting a few Kirkwood boards. kwboot loaded the u-boot
->>>>> image,
->>>>> and then u-boot execution was frozen without anything going to the
->>>>> serial console. I did a bisect and found the commit that caused it.
->>>>>
->>>>> https://github.com/trini/u-boot/commit/6fe50e39508043f386fc1bd40bbc02b8a75c1940
->>>>>
->>>>> When I tried to reverse this commit, I had a build error like this
->>>>> "{standard input}:24246: Error: selected processor does not support
->>>>> `mrc p15,1,r3,c15,c1,0' in Thumb mode"
->>>>>
->>>>> Currently, the only way to boot Kirkwood boards is to disable either
->>>>> CONFIG_LTO or CONFIG_SYS_THUMB_BUILD or both.
->>>>>
->>>>> I'm using the pogo_v4 and nsa325 boards as test beds. Please let me
->>>>> know if I can help with testing to troubleshoot this regression.
->>>>>
->>>>> All the best,
->>>>> Tony
->>>>
->>>> The problem seems to be that some arm32 instructions are inlined
->>>> inside thumb code and that's not allowed on this CPU without some
->>>> interworking instruction (bx, blx etc.). For example, consider
->>>> board_init_r(), is is mainly 16-bit instructions (Thumb):
->>>>
->>>> 006186a0 <board_init_r>:
->>>> board_init_r():
->>>> /home/jerome/work/u-boot/common/board_r.c:799
->>>>   6186a0:       b5f0            push    {r4, r5, r6, r7, lr}
->>>>   6186a2:       b0ab            sub     sp, #172        @ 0xac
->>>> get_gd():
->>>> /home/jerome/work/u-boot/./arch/arm/include/asm/global_data.h:127
->>>>   6186a4:       464a            mov     r2, r9
->>>> ...
->>>>
->>>> but then suddenly:
->>>>
->>>> /home/jerome/work/u-boot/arch/arm/mach-kirkwood/cpu.c:242
->>>>   619aae:       9b15            ldr     r3, [sp, #84]   @ 0x54
->>>> writefr_extra_feature_reg():
->>>> /home/jerome/work/u-boot/./arch/arm/include/asm/arch/cpu.h:100
->>>>   619ab0:       ee2f3f11        mcr     15, 1, r3, cr15, cr1, {0}
->>>>                 ^^^^^^^^
->>>>                 32-bit arm instruction
->>>>
->>>> I would expect some call to a *_from_thumb() veneer, such as in:
->>>>
->>>> 006009dc <do_bootm_qnxelf>:
->>>> [...]
->>>> /home/jerome/work/u-boot/boot/bootm_os.c:379
->>>>   600a02:       9501            str     r5, [sp, #4]
->>>> /home/jerome/work/u-boot/boot/bootm_os.c:384
->>>>   600a04:       f04a fc7c       bl      64b300 <__dcache_status_from_thumb>
->>>>
->>>>
->>>> 0064b130 <__dcache_enable_from_thumb>:
->>>> __dcache_enable_from_thumb():
->>>>   64b130:       4778            bx      pc
->>>>   64b132:       e7fd            b.n     64b130 <__dcache_enable_from_thumb>
->>>>   64b134:       e59fc000        ldr     ip, [pc]        @ 64b13c <__dcache_enable_from_thumb+0xc>
->>>>   64b138:       e08cf00f        add     pc, ip, pc
->>>>   64b13c:       fffffb28        .word   0xfffffb28
->>>>
->>>> We may need to move the inline functions with mrc/mcr to a .S file,
->>>> making sure it's built with -marm on CPUs that do not support Thumb2.
->>>> Then hopefully the proper interworking sequence would be inserted by the
->>>> linker as is the case when Thumb is calling into object files resulting
->>>> from .c files built with -marm (for example: arch/arm/mach-kirkwood/cpu.c
->>>> which has CFLAGS_cpu.o := -marm).
->>>>
->>>> In the meantime, could you try the following patch?
->>>>
->>>> diff --git a/common/Makefile b/common/Makefile
->>>> index 35991562a12..a509675335a 100644
->>>> --- a/common/Makefile
->>>> +++ b/common/Makefile
->>>> @@ -19,6 +19,8 @@ obj-y += version.o
->>>>  # # boards
->>>>  obj-y += board_f.o
->>>>  obj-y += board_r.o
->>>> +CFLAGS_board_f.o += -marm
->>>> +CFLAGS_board_r.o += -marm
->>>>  obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
->>>>  obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
->>>>
->>>> I think it should resolve the issue, but is does also increase the
->>>> size of the binary (+4 KiB). So the .S solution would definitely be
->>>> better if it works IMO. I'll try to propose something ASAP, will
->>>> likely be on Monday, feel free to give it a try by yourself though :)
->>>
->>> Or maybe this which is a bit less radical:
->>>
->>> diff --git a/common/Makefile b/common/Makefile
->>> index 35991562a12..f0b7eadf7d2 100644
->>> --- a/common/Makefile
->>> +++ b/common/Makefile
->>> @@ -19,6 +19,8 @@ obj-y += version.o
->>>  # # boards
->>>  obj-y += board_f.o
->>>  obj-y += board_r.o
->>> +CFLAGS_REMOVE_board_f.o := $(LTO_CFLAGS)
->>> +CFLAGS_REMOVE_board_r.o := $(LTO_CFLAGS)
->>>  obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
->>>  obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
->>>
->>> Still results in +1 KiB.
->>
->> The above patch works great! I've tested it on 3 Kirkwood boards: the
->> Pogo V4 (88F6192), Zyxel NSA325 (88F6282), and GoFlex Home (88F6281,
->> same SoC as the Sheevaplug).
->>
->> The Sheevaplug is now 498K, which is well under limit. All these
->> boards see only 1K increase in binary size.
-> 
-> Can we please get a patch of the latter option now for the release and
-> look at doing the .S file for the future? Thanks!
+Co-developed-by: Jonathan Stroud <jonathan.stroud@amd.com>
+Signed-off-by: Jonathan Stroud <jonathan.stroud@amd.com>
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ drivers/i2c/muxes/Kconfig   |   7 +
+ drivers/i2c/muxes/Makefile  |   1 +
+ drivers/i2c/muxes/pca9541.c | 297 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 305 insertions(+)
+ create mode 100644 drivers/i2c/muxes/pca9541.c
 
-https://lists.denx.de/pipermail/u-boot/2025-June/592785.html
-
-Regards,
+diff --git a/drivers/i2c/muxes/Kconfig b/drivers/i2c/muxes/Kconfig
+index cd5579aa55a..65319bb6fd8 100644
+--- a/drivers/i2c/muxes/Kconfig
++++ b/drivers/i2c/muxes/Kconfig
+@@ -25,6 +25,13 @@ config I2C_ARB_GPIO_CHALLENGE
+ 	  response mechanism where masters have to claim the bus by asserting
+ 	  a GPIO.
+ 
++config I2C_MUX_PCA9541
++	tristate "NXP PCA9541 I2C Master Selector"
++	depends on I2C_MUX
++	help
++	  If you say yes here you get support for the NXP PCA9541
++	  I2C Master Selector.
++
+ config I2C_MUX_PCA954x
+ 	tristate "TI PCA954x I2C Mux/switches"
+ 	depends on I2C_MUX
+diff --git a/drivers/i2c/muxes/Makefile b/drivers/i2c/muxes/Makefile
+index b690821199f..844d4520e43 100644
+--- a/drivers/i2c/muxes/Makefile
++++ b/drivers/i2c/muxes/Makefile
+@@ -3,5 +3,6 @@
+ # Copyright (c) 2015 Google, Inc
+ obj-$(CONFIG_I2C_ARB_GPIO_CHALLENGE) += i2c-arb-gpio-challenge.o
+ obj-$(CONFIG_I2C_MUX) += i2c-mux-uclass.o
++obj-$(CONFIG_I2C_MUX_PCA9541) += pca9541.o
+ obj-$(CONFIG_I2C_MUX_PCA954x) += pca954x.o
+ obj-$(CONFIG_I2C_MUX_GPIO) += i2c-mux-gpio.o
+diff --git a/drivers/i2c/muxes/pca9541.c b/drivers/i2c/muxes/pca9541.c
+new file mode 100644
+index 00000000000..021088acaee
+--- /dev/null
++++ b/drivers/i2c/muxes/pca9541.c
+@@ -0,0 +1,297 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2008-2009 Rodolfo Giometti <giometti@linux.it>
++ * Copyright (c) 2008-2009 Eurotech S.p.A. <info@eurotech.it>
++ * Copyright (c) 2010 Ericsson AB.
++ * Copyright (c) 2025 Advanced Micro Devices, Inc.
++ */
++
++#include <dm.h>
++#include <errno.h>
++#include <i2c.h>
++#include <log.h>
++#include <malloc.h>
++#include <linux/delay.h>
++
++/*
++ * The PCA9541 is a bus master selector. It supports two I2C masters connected
++ * to a single slave bus.
++ *
++ * Before each bus transaction, a master has to acquire bus ownership. After the
++ * transaction is complete, bus ownership has to be released. This fits well
++ * into the I2C multiplexer framework, which provides select and release
++ * functions for this purpose. For this reason, this driver is modeled as
++ * single-channel I2C bus multiplexer.
++ *
++ * This driver assumes that the two bus masters are controlled by two different
++ * hosts. If a single host controls both masters, platform code has to ensure
++ * that only one of the masters is instantiated at any given time.
++ */
++
++#define PCA9541_CONTROL		0x01
++#define PCA9541_ISTAT		0x02
++
++#define PCA9541_CTL_MYBUS	BIT(0)
++#define PCA9541_CTL_NMYBUS	BIT(1)
++#define PCA9541_CTL_BUSON	BIT(2)
++#define PCA9541_CTL_NBUSON	BIT(3)
++#define PCA9541_CTL_BUSINIT	BIT(4)
++#define PCA9541_CTL_TESTON	BIT(6)
++#define PCA9541_CTL_NTESTON	BIT(7)
++
++#define PCA9541_ISTAT_INTIN	BIT(0)
++#define PCA9541_ISTAT_BUSINIT	BIT(1)
++#define PCA9541_ISTAT_BUSOK	BIT(2)
++#define PCA9541_ISTAT_BUSLOST	BIT(3)
++#define PCA9541_ISTAT_MYTEST	BIT(6)
++#define PCA9541_ISTAT_NMYTEST	BIT(7)
++
++#define BUSON			(PCA9541_CTL_BUSON | PCA9541_CTL_NBUSON)
++#define MYBUS			(PCA9541_CTL_MYBUS | PCA9541_CTL_NMYBUS)
++
++/* arbitration timeouts, in jiffies */
++#define ARB_TIMEOUT_US		125000	/* 125 ms until forcing bus ownership */
++#define ARB2_TIMEOUT_US		250000	/* 250 ms until acquisition failure */
++
++/* arbitration retry delays, in us */
++#define SELECT_DELAY_SHORT	50
++#define SELECT_DELAY_LONG	1000
++
++struct pca9541_plat {
++	u32 addr;
++};
++
++struct pca9541_priv {
++	u32 addr;
++	unsigned long select_timeout;
++	long arb_timeout;
++};
++
++static inline int mybus(int x)
++{
++	return !(x & MYBUS) || ((x & MYBUS) == MYBUS);
++}
++
++static inline int busoff(int x)
++{
++	return !(x & BUSON) || ((x & BUSON) == BUSON);
++}
++
++static int pca9541_reg_write(struct udevice *mux, struct pca9541_priv *client,
++			     u8 command, u8 val)
++{
++	return dm_i2c_write(mux, command, &val, 1);
++}
++
++static int pca9541_reg_read(struct udevice *mux, struct pca9541_priv *client,
++			    u8 command)
++{
++	int ret;
++	uchar byte;
++
++	ret = dm_i2c_read(mux, command, &byte, 1);
++
++	return ret ?: byte;
++}
++
++/*
++ * Arbitration management functions
++ */
++
++/* Release bus. Also reset NTESTON and BUSINIT if it was set. */
++static void pca9541_release_bus(struct udevice *mux, struct pca9541_priv *client)
++{
++	int reg;
++
++	reg = pca9541_reg_read(mux, client, PCA9541_CONTROL);
++	if (reg >= 0 && !busoff(reg) && mybus(reg))
++		pca9541_reg_write(mux, client, PCA9541_CONTROL,
++				  (reg & PCA9541_CTL_NBUSON) >> 1);
++}
++
++/*
++ * Arbitration is defined as a two-step process. A bus master can only activate
++ * the slave bus if it owns it; otherwise it has to request ownership first.
++ * This multi-step process ensures that access contention is resolved
++ * gracefully.
++ *
++ * Bus	Ownership	Other master	Action
++ * state		requested access
++ * ----------------------------------------------------
++ * off	-		yes		wait for arbitration timeout or
++ *					for other master to drop request
++ * off	no		no		take ownership
++ * off	yes		no		turn on bus
++ * on	yes		-		done
++ * on	no		-		wait for arbitration timeout or
++ *					for other master to release bus
++ *
++ * The main contention point occurs if the slave bus is off and both masters
++ * request ownership at the same time. In this case, one master will turn on
++ * the slave bus, believing that it owns it. The other master will request
++ * bus ownership. Result is that the bus is turned on, and master which did
++ * _not_ own the slave bus before ends up owning it.
++ */
++
++/* Control commands per PCA9541 datasheet */
++static const u8 pca9541_control[16] = {
++	4, 0, 1, 5, 4, 4, 5, 5, 0, 0, 1, 1, 0, 4, 5, 1
++};
++
++/*
++ * Channel arbitration
++ *
++ * Return values:
++ *  <0: error
++ *  0 : bus not acquired
++ *  1 : bus acquired
++ */
++static int pca9541_arbitrate(struct udevice *mux, struct pca9541_priv *client)
++{
++	int reg, ret = 0;
++
++	reg = pca9541_reg_read(mux, client, PCA9541_CONTROL);
++	if (reg < 0)
++		return reg;
++
++	if (busoff(reg)) {
++		int istat;
++
++		/*
++		 * Bus is off. Request ownership or turn it on unless
++		 * other master requested ownership.
++		 */
++		istat = pca9541_reg_read(mux, client, PCA9541_ISTAT);
++		if (!(istat & PCA9541_ISTAT_NMYTEST) ||
++		    client->arb_timeout <= 0) {
++			/*
++			 * Other master did not request ownership,
++			 * or arbitration timeout expired. Take the bus.
++			 */
++			pca9541_reg_write(mux, client, PCA9541_CONTROL,
++					  pca9541_control[reg & 0x0f]
++					  | PCA9541_CTL_NTESTON);
++			client->select_timeout = SELECT_DELAY_SHORT;
++		} else {
++			/*
++			 * Other master requested ownership.
++			 * Set extra long timeout to give it time to acquire it.
++			 */
++			client->select_timeout = SELECT_DELAY_LONG * 2;
++		}
++	} else if (mybus(reg)) {
++		/*
++		 * Bus is on, and we own it. We are done with acquisition.
++		 * Reset NTESTON and BUSINIT, then return success.
++		 */
++		if (reg & (PCA9541_CTL_NTESTON | PCA9541_CTL_BUSINIT))
++			pca9541_reg_write(mux, client, PCA9541_CONTROL,
++					  reg & ~(PCA9541_CTL_NTESTON
++					  | PCA9541_CTL_BUSINIT));
++		ret = 1;
++	} else {
++		/*
++		 * Other master owns the bus.
++		 * If arbitration timeout has expired, force ownership.
++		 * Otherwise request it.
++		 */
++		client->select_timeout = SELECT_DELAY_LONG;
++		if (client->arb_timeout <= 0) {
++			/* Time is up, take the bus and reset it. */
++			pca9541_reg_write(mux, client, PCA9541_CONTROL,
++					  pca9541_control[reg & 0x0f]
++					  | PCA9541_CTL_BUSINIT
++					  | PCA9541_CTL_NTESTON);
++		} else {
++			/* Request bus ownership if needed */
++			if (!(reg & PCA9541_CTL_NTESTON))
++				pca9541_reg_write(mux, client, PCA9541_CONTROL,
++						  reg | PCA9541_CTL_NTESTON);
++		}
++	}
++
++	return ret;
++}
++
++static int pca9541_select_chan(struct udevice *mux, struct udevice *bus,
++			       uint channel)
++{
++	struct pca9541_priv *priv = dev_get_priv(mux);
++	int ret;
++	long timeout = ARB2_TIMEOUT_US; /* Give up after this time */
++
++	/* Force bus ownership after this time */
++	priv->arb_timeout = ARB_TIMEOUT_US;
++	do {
++		ret = pca9541_arbitrate(mux, priv);
++		if (ret)
++			return ret < 0 ? ret : 0;
++
++		udelay(priv->select_timeout);
++		timeout -= priv->select_timeout;
++		priv->arb_timeout -= priv->select_timeout;
++	} while (timeout > 0);
++
++	debug("I2C Arbitration select timeout\n");
++
++	return -ETIMEDOUT;
++}
++
++static int pca9541_release_chan(struct udevice *mux, struct udevice *bus,
++				uint channel)
++{
++	struct pca9541_priv *priv = dev_get_priv(mux);
++
++	pca9541_release_bus(mux, priv);
++
++	return 0;
++}
++
++/*
++ * I2C init/probing/exit functions
++ */
++static int pca9541_of_to_plat(struct udevice *dev)
++{
++	struct pca9541_plat *plat = dev_get_plat(dev);
++
++	plat->addr = dev_read_u32_default(dev, "reg", 0);
++	if (!plat->addr) {
++		debug("Reg property is not found\n");
++		return -ENODEV;
++	}
++
++	debug("Device %s at 0x%x\n", dev->name, plat->addr);
++
++	return 0;
++}
++
++static int pca9541_probe(struct udevice *dev)
++{
++	struct pca9541_plat *plat = dev_get_plat(dev);
++	struct pca9541_priv *priv = dev_get_priv(dev);
++
++	priv->addr = plat->addr;
++
++	return 0;
++}
++
++static const struct i2c_mux_ops pca9541_ops = {
++	.select = pca9541_select_chan,
++	.deselect = pca9541_release_chan,
++};
++
++static const struct udevice_id pca9541_ids[] = {
++	{ .compatible = "nxp,pca9541", },
++	{ }
++};
++
++U_BOOT_DRIVER(pca9541) = {
++	.name = "pca9541",
++	.id = UCLASS_I2C_MUX,
++	.of_match = pca9541_ids,
++	.probe = pca9541_probe,
++	.ops = &pca9541_ops,
++	.of_to_plat = pca9541_of_to_plat,
++	.plat_auto = sizeof(struct pca9541_plat),
++	.priv_auto = sizeof(struct pca9541_priv),
++};
 -- 
-Jerome
+2.25.1
+
