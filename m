@@ -4,135 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56980C7115D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 08:25:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91366C7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 08:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 815CF81F66;
-	Mon, 23 Jun 2025 10:24:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id B032B81F66;
+	Mon, 23 Jun 2025 10:56:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="J8DZ7U0f";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SDOotaIC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E14E681FEE; Mon, 23 Jun 2025 10:24:57 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::61a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D6CA80548
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 10:24:55 +0200 (CEST)
+ id 053EF8210D; Mon, 23 Jun 2025 10:56:34 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FE3E80548
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 10:56:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BQpYcw8pavElGZiInYy7/14ztycvh/p91IN7NhTsiw6AsJr1AKnJVAdFlQvwIBwtgwWLpyM5MkbsFUe/u6J7RHDpEXLQcrzOz+e+OWYAmMcWbqTtexb3tR1Vwmqrwq+/gB5CmxfGKvzc4SjHrjg7HZrg85/bZ1bsEb+MHBlZS8ijjVH9ZRKQYt5VLGVQyf8O3/Xf9UQnmgdEoi8vuotcQny/B19CWqtbCBgpzhfR8F6r2emfTa0KE6L9y1fVyxLavWWehYrY71OsAVz4Yei1/xhGfR/seVN5FDiv1mebEz359/VIa/K2raSQ4aH40nVGtgl8v6A6ldzMRS8mfmVdvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SHC6AVbP+eAL3DxR1EkXHy6BbdNJGrXHkMnzwuXr24w=;
- b=uB2z9l4XWQriHxCjuhLFAwm6EoJ/t7TxegGk0M/VgiLdEsXVLls0FF/TfrCGQb1bZsDHnUsrdKgHZijnG3CIxxDouMgrf7vUY6MjhLfmhKGZ/IsGXZ1aynfgrm0OO2zvU+VaZXRi58Twt+ZxlEdoLwSgmoecJvWFQjTJFSYSXByU1jDvdC1Xacu46JfgmKJuxVP/261PrLNKWwWGijVW2AJytAq4A1qI6ELBKsVUATAf+04QktWZUawK0nAHIXO3DbS6HG8xVCkd4jqIv++7NoubiTNZkMcl8FF/nLRl5D9nG3NCxdEcFA+3Ymni5yUkL3173HWoJK2yzzi4cNW35Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SHC6AVbP+eAL3DxR1EkXHy6BbdNJGrXHkMnzwuXr24w=;
- b=J8DZ7U0fX9lQSYGEyC6XW2+hpJcXQyo2SmvXhtnVhjcqpV3FQtDStraWwHkmbxx/OF2zSUfjsdnjNPKWM/XL7qEmFrjdWLA8W5c/LBPVP659SwjRFoIFo4si6B/dYYiIDWgctQVzQQrMmUU5MSzo7KxGWfNG85JsTX5Bi+PQ+1w=
-Received: from PH8P222CA0007.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:2d7::29)
- by PH8PR12MB7351.namprd12.prod.outlook.com (2603:10b6:510:215::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.19; Mon, 23 Jun
- 2025 08:24:50 +0000
-Received: from CY4PEPF0000EE34.namprd05.prod.outlook.com
- (2603:10b6:510:2d7:cafe::66) by PH8P222CA0007.outlook.office365.com
- (2603:10b6:510:2d7::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.29 via Frontend Transport; Mon,
- 23 Jun 2025 08:24:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EE34.mail.protection.outlook.com (10.167.242.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8880.14 via Frontend Transport; Mon, 23 Jun 2025 08:24:50 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 23 Jun
- 2025 03:24:49 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 23 Jun
- 2025 03:24:48 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 23 Jun 2025 03:24:46 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <hs@denx.de>,
- <jonathan.stroud@amd.com>, <bigunclemax@gmail.com>
-Subject: [PATCH] i2c: muxes: Add PCA9541 i2c arbitrator driver
-Date: Mon, 23 Jun 2025 13:54:39 +0530
-Message-ID: <20250623082439.949845-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55N8uIAP1498929;
+ Mon, 23 Jun 2025 03:56:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1750668978;
+ bh=a+gBrPgzR5ttoDFlxFhgemiynNgrLuM0kv5c5LmSWE0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=SDOotaICvOyX/1Hmo//1PAqJJDx78Uv1ACG8JMMMeF/kKdrUzZd+tdo8TExZgqChU
+ emhlJeStygMAhELUbXUEvXWaaMrJ39OxLojVQiprte4y2agPQgZPj7bU/6aNE70g5D
+ WQz0bktvUIeN6yXYP9AAhfDK6OtXZIYDFWTWDQMw=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55N8uH6B614333
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 23 Jun 2025 03:56:18 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 23
+ Jun 2025 03:56:17 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 23 Jun 2025 03:56:17 -0500
+Received: from [172.24.227.193] (devarsh-precision-tower-3620.dhcp.ti.com
+ [172.24.227.193])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55N8uCJ43518617;
+ Mon, 23 Jun 2025 03:56:13 -0500
+Message-ID: <f9182bdc-0d2f-40df-9fea-4421568a4e01@ti.com>
+Date: Mon, 23 Jun 2025 14:26:12 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE34:EE_|PH8PR12MB7351:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9862a02a-cb72-4340-775f-08ddb22f6c24
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026|30052699003; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?y3jaLNcAuHQBmjhNMj0HVlsYHc80O/ZPRqhJSw2yCi45Rte3puRYf2YC1xjm?=
- =?us-ascii?Q?Z/EP+DicEdKglSJVt8TugVm2EEC+98l+cSQso26OoxMD+4WLsRrlaNfL6ssi?=
- =?us-ascii?Q?0OepI8sUxotACS3E8BX5Xi/ioF3Hbi1Op18oUfMdV0tT8Q7VSNfMcVE2Qkxy?=
- =?us-ascii?Q?rW8HFWQ2Upjr1JxD3ubrG7Jh18q5u0Fp9f3yZ0THSpi6ZTZ8kT0CzrhQZM1M?=
- =?us-ascii?Q?8/7d97lQOTA5vep7z7+yf1PpcenBPIX3W4LsOyl2rrQtAziw/dOx6biSvpma?=
- =?us-ascii?Q?vA/4UVsx3P6YgC1uTf+FomUzKKYH+xy5RfI8uovWSBdqpEqkK3ZDyj9QmqCq?=
- =?us-ascii?Q?wVI4p4vChU2CaR96okCwhMJTpqBM6Vuf13H7DAcG1ga2QwS+TcfOtCOaPhbb?=
- =?us-ascii?Q?uZlXDGQJtNGQtUkCegNJKKUeHqtFrRs9E4CNRFW+oJHq5ogd29Rwxr82Wq2c?=
- =?us-ascii?Q?MknYztyJjxOtLG6JuFtgSNOARK8jVeDn8oPKDGq98eCJeLYaXpmZclkABN+t?=
- =?us-ascii?Q?uTesFFzoVygdXaaWbRrIyiyCXrmoRXFN5Iliae585u41kX23vny0H8yzUGXr?=
- =?us-ascii?Q?iOxMXzgd/Q3GWClVD4JkfbQF9h8NKA8FQHuyYssZ2Brl+wNBwUN61KhfnPEA?=
- =?us-ascii?Q?FwLTrPM16KXOiuG7Eo3yActyMEtuDgWuWx/vIh0R+siY9Gb8BcHl5pazVS0l?=
- =?us-ascii?Q?iAyJGSDO3HNexTcMZdPestH0BXjcTxEJf5I+PyHjEm4r+BEtqmZJ3zeIAswM?=
- =?us-ascii?Q?3cGvnLPJDkk96v7N2jyr0gE812DhE0yD/ACVgs2uoEBxdlOD1+q8VP8yaIeV?=
- =?us-ascii?Q?jee1gxofdCc5NgzKuSgVleh+0RhLJmDwBw+OJxETadAmBn9QVEVFVRRjpXxi?=
- =?us-ascii?Q?253n54G1mzZaPMfEc0uIbXqkxHf1XBWIJ33FoDmQuZcEPC0TYBV1VkmM9Vsf?=
- =?us-ascii?Q?kIJl0nogSIHpQElzmW/RDDsJG4kTKlmGzlzYXXWXwesniOivYhD58WqsJ+j4?=
- =?us-ascii?Q?T31coB7r8Rt1CbAuOVGznqhFgIYtLSKsWZU1EwhHf3XHiz6RnPfmVPNM1KCD?=
- =?us-ascii?Q?KzNJh7wR2cv0BcJaK8Mk05CVYh9zmF+zzHQrJn4CxYZsMgZ6BJoS3gGVNHt5?=
- =?us-ascii?Q?oOaM/DDNHKcekF/frZUmD6vPrCNHPmdbd6e/9fRUkXVCE7c+s16N3skJUdM7?=
- =?us-ascii?Q?mnNMTW7PMxhzLeiVS38FZCd8NVlxjOPx0v//kH5U0XeazNexyY65d6Yz14Py?=
- =?us-ascii?Q?Jef+tVoSNhlXqbc+wWTbapA7/Pti9i0JzsOIt2RH27nM4umgCvsu7TxXbm9i?=
- =?us-ascii?Q?83StUuVx/bnknXaKizE7WOmOZtsLDLgjOJy+hYJgXqp2R/bN3xJM2x0wJLVL?=
- =?us-ascii?Q?42AhfOgMbxLXJgijAos43Oizw/HPgPwpXs3YfJJTFfbzspFPpmQ6tM6Ub5zk?=
- =?us-ascii?Q?ILAH63nrs9Dzn/Ue0vqhTc/4W0FDADySS6wA9z1Bx3vvSuEBTPq4mpGhsIIp?=
- =?us-ascii?Q?f4dOKyVkMf81phBhiG+IlsmnuEzrE0rumlnK?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026)(30052699003);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2025 08:24:50.3145 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9862a02a-cb72-4340-775f-08ddb22f6c24
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE34.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7351
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drivers: video: tidss: Refactor tidss_drv
+To: Swamil Jain <s-jain1@ti.com>, <aradhya.bhatia@intel.com>, <n-jain1@ti.com>,
+ <tomi.valkeinen@ideasonboard.com>, Darren Etheridge <detheridge@ti.com>
+CC: <vigneshr@ti.com>, <praneeth@ti.com>, <h-shenoy@ti.com>,
+ <j-choudhary@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <trini@konsulko.com>, <agust@denx.de>, <u-boot@lists.denx.de>
+References: <20250603105735.4038240-1-s-jain1@ti.com>
+Content-Language: en-US
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <20250603105735.4038240-1-s-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,351 +83,736 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a driver for the PCA9541 i2c bus arbitrator based
-on the Linux driver for the same device.
+Hi Swamil,
 
-Co-developed-by: Jonathan Stroud <jonathan.stroud@amd.com>
-Signed-off-by: Jonathan Stroud <jonathan.stroud@amd.com>
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- drivers/i2c/muxes/Kconfig   |   7 +
- drivers/i2c/muxes/Makefile  |   1 +
- drivers/i2c/muxes/pca9541.c | 297 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 305 insertions(+)
- create mode 100644 drivers/i2c/muxes/pca9541.c
+Thanks for working on this.
 
-diff --git a/drivers/i2c/muxes/Kconfig b/drivers/i2c/muxes/Kconfig
-index cd5579aa55a..65319bb6fd8 100644
---- a/drivers/i2c/muxes/Kconfig
-+++ b/drivers/i2c/muxes/Kconfig
-@@ -25,6 +25,13 @@ config I2C_ARB_GPIO_CHALLENGE
- 	  response mechanism where masters have to claim the bus by asserting
- 	  a GPIO.
- 
-+config I2C_MUX_PCA9541
-+	tristate "NXP PCA9541 I2C Master Selector"
-+	depends on I2C_MUX
-+	help
-+	  If you say yes here you get support for the NXP PCA9541
-+	  I2C Master Selector.
-+
- config I2C_MUX_PCA954x
- 	tristate "TI PCA954x I2C Mux/switches"
- 	depends on I2C_MUX
-diff --git a/drivers/i2c/muxes/Makefile b/drivers/i2c/muxes/Makefile
-index b690821199f..844d4520e43 100644
---- a/drivers/i2c/muxes/Makefile
-+++ b/drivers/i2c/muxes/Makefile
-@@ -3,5 +3,6 @@
- # Copyright (c) 2015 Google, Inc
- obj-$(CONFIG_I2C_ARB_GPIO_CHALLENGE) += i2c-arb-gpio-challenge.o
- obj-$(CONFIG_I2C_MUX) += i2c-mux-uclass.o
-+obj-$(CONFIG_I2C_MUX_PCA9541) += pca9541.o
- obj-$(CONFIG_I2C_MUX_PCA954x) += pca954x.o
- obj-$(CONFIG_I2C_MUX_GPIO) += i2c-mux-gpio.o
-diff --git a/drivers/i2c/muxes/pca9541.c b/drivers/i2c/muxes/pca9541.c
-new file mode 100644
-index 00000000000..021088acaee
---- /dev/null
-+++ b/drivers/i2c/muxes/pca9541.c
-@@ -0,0 +1,297 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2008-2009 Rodolfo Giometti <giometti@linux.it>
-+ * Copyright (c) 2008-2009 Eurotech S.p.A. <info@eurotech.it>
-+ * Copyright (c) 2010 Ericsson AB.
-+ * Copyright (c) 2025 Advanced Micro Devices, Inc.
-+ */
-+
-+#include <dm.h>
-+#include <errno.h>
-+#include <i2c.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <linux/delay.h>
-+
-+/*
-+ * The PCA9541 is a bus master selector. It supports two I2C masters connected
-+ * to a single slave bus.
-+ *
-+ * Before each bus transaction, a master has to acquire bus ownership. After the
-+ * transaction is complete, bus ownership has to be released. This fits well
-+ * into the I2C multiplexer framework, which provides select and release
-+ * functions for this purpose. For this reason, this driver is modeled as
-+ * single-channel I2C bus multiplexer.
-+ *
-+ * This driver assumes that the two bus masters are controlled by two different
-+ * hosts. If a single host controls both masters, platform code has to ensure
-+ * that only one of the masters is instantiated at any given time.
-+ */
-+
-+#define PCA9541_CONTROL		0x01
-+#define PCA9541_ISTAT		0x02
-+
-+#define PCA9541_CTL_MYBUS	BIT(0)
-+#define PCA9541_CTL_NMYBUS	BIT(1)
-+#define PCA9541_CTL_BUSON	BIT(2)
-+#define PCA9541_CTL_NBUSON	BIT(3)
-+#define PCA9541_CTL_BUSINIT	BIT(4)
-+#define PCA9541_CTL_TESTON	BIT(6)
-+#define PCA9541_CTL_NTESTON	BIT(7)
-+
-+#define PCA9541_ISTAT_INTIN	BIT(0)
-+#define PCA9541_ISTAT_BUSINIT	BIT(1)
-+#define PCA9541_ISTAT_BUSOK	BIT(2)
-+#define PCA9541_ISTAT_BUSLOST	BIT(3)
-+#define PCA9541_ISTAT_MYTEST	BIT(6)
-+#define PCA9541_ISTAT_NMYTEST	BIT(7)
-+
-+#define BUSON			(PCA9541_CTL_BUSON | PCA9541_CTL_NBUSON)
-+#define MYBUS			(PCA9541_CTL_MYBUS | PCA9541_CTL_NMYBUS)
-+
-+/* arbitration timeouts, in jiffies */
-+#define ARB_TIMEOUT_US		125000	/* 125 ms until forcing bus ownership */
-+#define ARB2_TIMEOUT_US		250000	/* 250 ms until acquisition failure */
-+
-+/* arbitration retry delays, in us */
-+#define SELECT_DELAY_SHORT	50
-+#define SELECT_DELAY_LONG	1000
-+
-+struct pca9541_plat {
-+	u32 addr;
-+};
-+
-+struct pca9541_priv {
-+	u32 addr;
-+	unsigned long select_timeout;
-+	long arb_timeout;
-+};
-+
-+static inline int mybus(int x)
-+{
-+	return !(x & MYBUS) || ((x & MYBUS) == MYBUS);
-+}
-+
-+static inline int busoff(int x)
-+{
-+	return !(x & BUSON) || ((x & BUSON) == BUSON);
-+}
-+
-+static int pca9541_reg_write(struct udevice *mux, struct pca9541_priv *client,
-+			     u8 command, u8 val)
-+{
-+	return dm_i2c_write(mux, command, &val, 1);
-+}
-+
-+static int pca9541_reg_read(struct udevice *mux, struct pca9541_priv *client,
-+			    u8 command)
-+{
-+	int ret;
-+	uchar byte;
-+
-+	ret = dm_i2c_read(mux, command, &byte, 1);
-+
-+	return ret ?: byte;
-+}
-+
-+/*
-+ * Arbitration management functions
-+ */
-+
-+/* Release bus. Also reset NTESTON and BUSINIT if it was set. */
-+static void pca9541_release_bus(struct udevice *mux, struct pca9541_priv *client)
-+{
-+	int reg;
-+
-+	reg = pca9541_reg_read(mux, client, PCA9541_CONTROL);
-+	if (reg >= 0 && !busoff(reg) && mybus(reg))
-+		pca9541_reg_write(mux, client, PCA9541_CONTROL,
-+				  (reg & PCA9541_CTL_NBUSON) >> 1);
-+}
-+
-+/*
-+ * Arbitration is defined as a two-step process. A bus master can only activate
-+ * the slave bus if it owns it; otherwise it has to request ownership first.
-+ * This multi-step process ensures that access contention is resolved
-+ * gracefully.
-+ *
-+ * Bus	Ownership	Other master	Action
-+ * state		requested access
-+ * ----------------------------------------------------
-+ * off	-		yes		wait for arbitration timeout or
-+ *					for other master to drop request
-+ * off	no		no		take ownership
-+ * off	yes		no		turn on bus
-+ * on	yes		-		done
-+ * on	no		-		wait for arbitration timeout or
-+ *					for other master to release bus
-+ *
-+ * The main contention point occurs if the slave bus is off and both masters
-+ * request ownership at the same time. In this case, one master will turn on
-+ * the slave bus, believing that it owns it. The other master will request
-+ * bus ownership. Result is that the bus is turned on, and master which did
-+ * _not_ own the slave bus before ends up owning it.
-+ */
-+
-+/* Control commands per PCA9541 datasheet */
-+static const u8 pca9541_control[16] = {
-+	4, 0, 1, 5, 4, 4, 5, 5, 0, 0, 1, 1, 0, 4, 5, 1
-+};
-+
-+/*
-+ * Channel arbitration
-+ *
-+ * Return values:
-+ *  <0: error
-+ *  0 : bus not acquired
-+ *  1 : bus acquired
-+ */
-+static int pca9541_arbitrate(struct udevice *mux, struct pca9541_priv *client)
-+{
-+	int reg, ret = 0;
-+
-+	reg = pca9541_reg_read(mux, client, PCA9541_CONTROL);
-+	if (reg < 0)
-+		return reg;
-+
-+	if (busoff(reg)) {
-+		int istat;
-+
-+		/*
-+		 * Bus is off. Request ownership or turn it on unless
-+		 * other master requested ownership.
-+		 */
-+		istat = pca9541_reg_read(mux, client, PCA9541_ISTAT);
-+		if (!(istat & PCA9541_ISTAT_NMYTEST) ||
-+		    client->arb_timeout <= 0) {
-+			/*
-+			 * Other master did not request ownership,
-+			 * or arbitration timeout expired. Take the bus.
-+			 */
-+			pca9541_reg_write(mux, client, PCA9541_CONTROL,
-+					  pca9541_control[reg & 0x0f]
-+					  | PCA9541_CTL_NTESTON);
-+			client->select_timeout = SELECT_DELAY_SHORT;
-+		} else {
-+			/*
-+			 * Other master requested ownership.
-+			 * Set extra long timeout to give it time to acquire it.
-+			 */
-+			client->select_timeout = SELECT_DELAY_LONG * 2;
-+		}
-+	} else if (mybus(reg)) {
-+		/*
-+		 * Bus is on, and we own it. We are done with acquisition.
-+		 * Reset NTESTON and BUSINIT, then return success.
-+		 */
-+		if (reg & (PCA9541_CTL_NTESTON | PCA9541_CTL_BUSINIT))
-+			pca9541_reg_write(mux, client, PCA9541_CONTROL,
-+					  reg & ~(PCA9541_CTL_NTESTON
-+					  | PCA9541_CTL_BUSINIT));
-+		ret = 1;
-+	} else {
-+		/*
-+		 * Other master owns the bus.
-+		 * If arbitration timeout has expired, force ownership.
-+		 * Otherwise request it.
-+		 */
-+		client->select_timeout = SELECT_DELAY_LONG;
-+		if (client->arb_timeout <= 0) {
-+			/* Time is up, take the bus and reset it. */
-+			pca9541_reg_write(mux, client, PCA9541_CONTROL,
-+					  pca9541_control[reg & 0x0f]
-+					  | PCA9541_CTL_BUSINIT
-+					  | PCA9541_CTL_NTESTON);
-+		} else {
-+			/* Request bus ownership if needed */
-+			if (!(reg & PCA9541_CTL_NTESTON))
-+				pca9541_reg_write(mux, client, PCA9541_CONTROL,
-+						  reg | PCA9541_CTL_NTESTON);
-+		}
-+	}
-+
-+	return ret;
-+}
-+
-+static int pca9541_select_chan(struct udevice *mux, struct udevice *bus,
-+			       uint channel)
-+{
-+	struct pca9541_priv *priv = dev_get_priv(mux);
-+	int ret;
-+	long timeout = ARB2_TIMEOUT_US; /* Give up after this time */
-+
-+	/* Force bus ownership after this time */
-+	priv->arb_timeout = ARB_TIMEOUT_US;
-+	do {
-+		ret = pca9541_arbitrate(mux, priv);
-+		if (ret)
-+			return ret < 0 ? ret : 0;
-+
-+		udelay(priv->select_timeout);
-+		timeout -= priv->select_timeout;
-+		priv->arb_timeout -= priv->select_timeout;
-+	} while (timeout > 0);
-+
-+	debug("I2C Arbitration select timeout\n");
-+
-+	return -ETIMEDOUT;
-+}
-+
-+static int pca9541_release_chan(struct udevice *mux, struct udevice *bus,
-+				uint channel)
-+{
-+	struct pca9541_priv *priv = dev_get_priv(mux);
-+
-+	pca9541_release_bus(mux, priv);
-+
-+	return 0;
-+}
-+
-+/*
-+ * I2C init/probing/exit functions
-+ */
-+static int pca9541_of_to_plat(struct udevice *dev)
-+{
-+	struct pca9541_plat *plat = dev_get_plat(dev);
-+
-+	plat->addr = dev_read_u32_default(dev, "reg", 0);
-+	if (!plat->addr) {
-+		debug("Reg property is not found\n");
-+		return -ENODEV;
-+	}
-+
-+	debug("Device %s at 0x%x\n", dev->name, plat->addr);
-+
-+	return 0;
-+}
-+
-+static int pca9541_probe(struct udevice *dev)
-+{
-+	struct pca9541_plat *plat = dev_get_plat(dev);
-+	struct pca9541_priv *priv = dev_get_priv(dev);
-+
-+	priv->addr = plat->addr;
-+
-+	return 0;
-+}
-+
-+static const struct i2c_mux_ops pca9541_ops = {
-+	.select = pca9541_select_chan,
-+	.deselect = pca9541_release_chan,
-+};
-+
-+static const struct udevice_id pca9541_ids[] = {
-+	{ .compatible = "nxp,pca9541", },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(pca9541) = {
-+	.name = "pca9541",
-+	.id = UCLASS_I2C_MUX,
-+	.of_match = pca9541_ids,
-+	.probe = pca9541_probe,
-+	.ops = &pca9541_ops,
-+	.of_to_plat = pca9541_of_to_plat,
-+	.plat_auto = sizeof(struct pca9541_plat),
-+	.priv_auto = sizeof(struct pca9541_priv),
-+};
--- 
-2.25.1
+On 03/06/25 16:27, Swamil Jain wrote:
+> - Refactor tidss_drv to improve modularity, enabling support for more
+>    display interfaces beyond OLDI in the future
+> - Add detection and initialization of active OLDI panels using the DT
+> - Port tidss_oldi.c from the upstream Linux kernel oldi series[0] and
+>    derive several APIs from it to determine the dual link pixel order
+> - Add tidss_oldi_init() and helper routines to handle OLDI-specific
+>    setup and move related helper routines to tidss_oldi.c
+> 
+> [0]: https://lore.kernel.org/all/20250528122544.817829-1-aradhya.bhatia@linux.dev/
+> 
+> Signed-off-by: Swamil Jain <s-jain1@ti.com>
+> ---
+>   drivers/video/tidss/Makefile     |   2 +-
+>   drivers/video/tidss/tidss_drv.c  | 122 +++++++++----
+>   drivers/video/tidss/tidss_drv.h  |  14 +-
+>   drivers/video/tidss/tidss_oldi.c | 298 +++++++++++++++++++++++++++++++
+>   drivers/video/tidss/tidss_oldi.h |  67 +++++++
+>   5 files changed, 461 insertions(+), 42 deletions(-)
+>   create mode 100644 drivers/video/tidss/tidss_oldi.c
+>   create mode 100644 drivers/video/tidss/tidss_oldi.h
+> 
+> diff --git a/drivers/video/tidss/Makefile b/drivers/video/tidss/Makefile
+> index 3381a5fec57..846c19c5a7b 100644
+> --- a/drivers/video/tidss/Makefile
+> +++ b/drivers/video/tidss/Makefile
+> @@ -9,4 +9,4 @@
+>   # Author: Tomi Valkeinen <tomi.valkeinen@ti.com>
+>   
+>   
+> -obj-${CONFIG_$(PHASE_)VIDEO_TIDSS} = tidss_drv.o
+> +obj-${CONFIG_$(PHASE_)VIDEO_TIDSS} = tidss_drv.o tidss_oldi.o
+> diff --git a/drivers/video/tidss/tidss_drv.c b/drivers/video/tidss/tidss_drv.c
+> index 865d4bddb7f..93081ed1dc0 100644
+> --- a/drivers/video/tidss/tidss_drv.c
+> +++ b/drivers/video/tidss/tidss_drv.c
+> @@ -32,6 +32,7 @@
+>   #include <dm/of_access.h>
+>   #include <dm/device_compat.h>
+>   #include <dm/device-internal.h>
+> +#include <dm/ofnode_graph.h>
+>   
+>   #include <linux/bug.h>
+>   #include <linux/err.h>
+> @@ -40,6 +41,7 @@
+>   
+>   #include "tidss_drv.h"
+>   #include "tidss_regs.h"
+> +#include "tidss_oldi.h"
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+> @@ -253,7 +255,7 @@ static void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power)
+>   {
+>   	u32 val;
+>   
+> -	if (WARN_ON(!priv->oldi_io_ctrl))
+> +	if (WARN_ON(!priv->oldis[0]->io_ctrl))
 
+Why only oldis[0], I think you should iterate through all available OLDI 
+Tx nodes ?
+
+>   		return;
+>   
+
+Shouldn't this func dss_oldi_tx_power be present in tidss_oldi.c ? As I 
+understand goal is to make tidss_drv.c agnostic to interface.
+
+
+>   	if (priv->feat->subrev == DSS_AM625) {
+> @@ -275,7 +277,7 @@ static void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power)
+>   		} else {
+>   			val = OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX;
+>   		}
+> -		regmap_update_bits(priv->oldi_io_ctrl, OLDI_PD_CTRL,
+> +		regmap_update_bits(priv->oldis[0]->io_ctrl, OLDI_PD_CTRL,
+>   				   OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX, val);
+
+Why only oldis[0], I think you should iterate through all available OLDI 
+Tx nodes ?
+
+>   	}
+>   }
+> @@ -562,7 +564,7 @@ int dss_vp_enable_clk(struct tidss_drv_priv *priv, u32 hw_videoport)
+>   void dss_vp_prepare(struct tidss_drv_priv *priv, u32 hw_videoport)
+>   {
+>   	dss_vp_set_gamma(priv, hw_videoport, NULL, 0);
+> -	dss_vp_set_default_color(priv, 0, 0);
+> +	dss_vp_set_default_color(priv, hw_videoport, 0);
+>   
+>   	if (priv->feat->vp_bus_type[hw_videoport] == DSS_VP_OLDI) {
+>   		dss_oldi_tx_power(priv, true);
+> @@ -734,27 +736,72 @@ static void dss_vp_init(struct tidss_drv_priv *priv)
+>   		VP_REG_FLD_MOD(priv, i, DSS_VP_CONFIG, 1, 2, 2);
+>   }
+>   
+> -static int dss_init_am65x_oldi_io_ctrl(struct udevice *dev,
+> -				       struct tidss_drv_priv *priv)
+> +static bool is_panel_enabled(ofnode endpoint)
+>   {
+> -	struct udevice *syscon;
+> -	struct regmap *regmap;
+> -	int ret = 0;
+> +	ofnode port_parent = ofnode_graph_get_remote_port_parent(endpoint);
+>   
+> -	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "ti,am65x-oldi-io-ctrl",
+> -					   &syscon);
+> -	if (ret) {
+> -		debug("unable to find ti,am65x-oldi-io-ctrl syscon device (%d)\n", ret);
+> -		return ret;
+> -	}
+> +	/* ports_parent is the bridge connected in between */
+
+in between what, can you add example topology ?
+
+> +	ofnode ports_parent = ofnode_get_parent(port_parent);
+> +
+> +	/* Checking for both port_parent and ports_parent node, as if any
+
+s/as if/so that..
+
+Also give example.
+
+> +	 * bridge is there then it should also be enabled for the panel to
+> +	 * show output.
+> +	 */
+> +	return ofnode_is_enabled(port_parent) && ofnode_is_enabled(ports_parent);
+> +}
+> +
+> +static int tidss_attach_active_panels(struct tidss_drv_priv *priv)
+> +{
+
+Please add some description for function. I don't get what do you mean 
+by attach. Also is this specific to panels only ? What if there is a 
+bridge connected in between ? In that case better to have a generic name.
+
+> +	ofnode dss_node = dev_ofnode(priv->dev);
+> +	ofnode dss_ports = ofnode_find_subnode(dss_node, "ports");
+> +	ofnode port, remote_port, local_endpoint;
+> +	int hw_videoport;
+> +	int active_panels = 0;
+> +	int ret;
+>   
+> -	/* get grf-reg base address */
+> -	regmap = syscon_get_regmap(syscon);
+> -	if (!regmap) {
+> -		debug("unable to find rockchip grf regmap\n");
+> -		return -ENODEV;
+> +	ofnode_for_each_subnode(port, dss_ports) {
+> +		if (strncmp(ofnode_get_name(port), "port", 4))
+> +			continue;
+> +
+> +		ofnode_for_each_subnode(local_endpoint, port) {
+> +			if (strncmp(ofnode_get_name(local_endpoint), "endpoint", 8))
+> +				continue;
+> +
+> +			if (!is_panel_enabled(local_endpoint))
+> +				continue;
+> +
+> +			/* Get videoport id*/
+> +			ret = ofnode_read_u32(port, "reg", &hw_videoport);
+> +			if (ret) {
+> +				dev_warn(priv->dev,
+> +					 "Failed to read videoport id, reg property not found for node: %s\n",
+> +					 ofnode_get_name(local_endpoint));
+> +				/* Check for other video ports */
+> +				continue;
+> +			}
+> +
+> +			remote_port = ofnode_graph_get_remote_port_parent(local_endpoint);
+> +			if (strstr(ofnode_get_name(remote_port), "oldi")) {
+> +				/* Initialize oldi */
+> +				ret = tidss_oldi_init(priv->dev);
+> +				if (ret) {
+> +					if (ret != -ENODEV)
+> +						dev_warn(priv->dev, "oldi panel error %d\n", ret);
+> +					break;
+> +				}
+> +
+> +				active_panels++;
+> +				priv->active_hw_videoport_id = hw_videoport;
+
+Well, there could be multiple active hw video port IDs, how do we plan 
+to handle that ?
+
+> +				/* Only one dual-link oldi panel supported at a time so
+> +				 * initialize it only and then check for other videoports
+> +				 */
+> +				break;
+> +			}
+> +		}
+>   	}
+> -	priv->oldi_io_ctrl = regmap;
+> +	priv->active_panels = active_panels;
+> +	if (active_panels == 0)
+> +		return -1;
+>   	return 0;
+>   }
+>   
+> @@ -772,7 +819,6 @@ static int tidss_drv_probe(struct udevice *dev)
+>   	priv->dev = dev;
+>   
+>   	priv->feat = &dss_am625_feats;
+> -
+>       /*
+>        * set your plane format based on your bmp image
+>        * Supported 24bpp and 32bpp bmpimages
+> @@ -782,6 +828,13 @@ static int tidss_drv_probe(struct udevice *dev)
+>   
+>   	dss_common_regmap = priv->feat->common_regs;
+>   
+> +	ret = tidss_attach_active_panels(priv);
+> +	if (ret) {
+> +		if (ret == -1)
+> +			dev_warn(priv->dev, "NO active panels detected, check status of panel nodes\n");
+> +		return ret;
+> +	}
+> +
+>   	ret = uclass_first_device_err(UCLASS_PANEL, &panel);
+>   	if (ret) {
+>   		if (ret != -ENODEV)
+> @@ -829,7 +882,7 @@ static int tidss_drv_probe(struct udevice *dev)
+>   	dss_vid_write(priv, 0, DSS_VID_BA_1, uc_plat->base & 0xffffffff);
+>   	dss_vid_write(priv, 0, DSS_VID_BA_EXT_1, (u64)uc_plat->base >> 32);
+>   
+> -	ret = dss_plane_setup(priv, 0, 0);
+> +	ret = dss_plane_setup(priv, 0, priv->active_hw_videoport_id);
+>   	if (ret) {
+>   		dss_plane_enable(priv, 0, false);
+>   			return ret;
+> @@ -844,34 +897,27 @@ static int tidss_drv_probe(struct udevice *dev)
+>   		priv->base_vp[i] = dev_remap_addr_name(dev, priv->feat->vp_name[i]);
+>   	}
+>   
+> -	ret = clk_get_by_name(dev, "vp1", &priv->vp_clk[0]);
+> +	ret = clk_get_by_name(dev,
+> +			      dss_am625_feats.vpclk_name[priv->active_hw_videoport_id],
+> +			      &priv->vp_clk[priv->active_hw_videoport_id]);
+
+Don't we need to iterat over all vps ?
+
+>   	if (ret) {
+>   		dev_err(dev, "video port %d clock enable error %d\n", i, ret);
+>   		return ret;
+>   	}
+>   
+> -	dss_ovr_set_plane(priv, 1, 0, 0, 0, 0);
+> -	dss_ovr_enable_layer(priv, 0, 0, true);
+> +	dss_ovr_set_plane(priv, 1, priv->active_hw_videoport_id, 0, 0, 0);
+> +	dss_ovr_enable_layer(priv, priv->active_hw_videoport_id, 0, true);
+
+Same here.
+
+>   
+>   	/* Video Port cloks */
+> -	dss_vp_enable_clk(priv, 0);
+> +	dss_vp_enable_clk(priv, priv->active_hw_videoport_id);
+>   
+> -	dss_vp_set_clk_rate(priv, 0, timings.pixelclock.typ * 1000);
+> +	dss_vp_set_clk_rate(priv, priv->active_hw_videoport_id, timings.pixelclock.typ * 1000);
+>  
+
+Same here.
+
+> -	priv->oldi_mode = OLDI_MODE_OFF;
+>   	uc_priv->xsize = timings.hactive.typ;
+>   	uc_priv->ysize = timings.vactive.typ;
+> -	if (priv->feat->subrev == DSS_AM65X || priv->feat->subrev == DSS_AM625) {
+> -		priv->oldi_mode = OLDI_DUAL_LINK;
+> -		if (priv->oldi_mode) {
+> -			ret = dss_init_am65x_oldi_io_ctrl(dev, priv);
+> -			if (ret)
+> -				return ret;
+> -		}
+> -	}
+>   
+> -	dss_vp_prepare(priv, 0);
+> -	dss_vp_enable(priv, 0, &timings);
+> +	dss_vp_prepare(priv, priv->active_hw_videoport_id);
+> +	dss_vp_enable(priv, priv->active_hw_videoport_id, &timings);
+
+Same here.
+
+>   	dss_vp_init(priv);
+>   
+>   	ret = clk_get_by_name(dev, "fck", &priv->fclk);
+> diff --git a/drivers/video/tidss/tidss_drv.h b/drivers/video/tidss/tidss_drv.h
+> index e229d975ff4..0431f41ae95 100644
+> --- a/drivers/video/tidss/tidss_drv.h
+> +++ b/drivers/video/tidss/tidss_drv.h
+> @@ -13,9 +13,12 @@
+>   #define __TIDSS_DRV_H__
+>   
+>   #include <media_bus_format.h>
+> +#include <syscon.h>
+> +#include <regmap.h>
+>   
+>   #define TIDSS_MAX_PORTS 4
+>   #define TIDSS_MAX_PLANES 4
+> +#define TIDSS_MAX_OLDI_TXES 2
+>   
+>   enum dss_vp_bus_type {
+>   	DSS_VP_DPI,		/* DPI output */
+> @@ -31,6 +34,8 @@ enum dss_oldi_modes {
+>   	OLDI_DUAL_LINK,				/* Combined Output over OLDI 0 and 1. */
+>   };
+>   
+> +enum oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
+>
+
+>   struct dss_features_scaling {
+>   	u32 in_width_max_5tap_rgb;
+>   	u32 in_width_max_3tap_rgb;
+> @@ -96,13 +101,11 @@ struct dss_features {
+>   	u32 vid_order[TIDSS_MAX_PLANES];
+>   };
+>   
+> -enum dss_oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
+> -
+>   struct dss_bus_format {
+>   	u32 bus_fmt;
+>   	u32 data_width;
+>   	bool is_oldi_fmt;
+> -	enum dss_oldi_mode_reg_val oldi_mode_reg_val;
+> +	enum oldi_mode_reg_val oldi_mode_reg_val;
+>   };
+>   
+>   static struct dss_bus_format dss_bus_formats[] = {
+> @@ -132,6 +135,11 @@ struct tidss_drv_priv {
+>   	struct dss_bus_format *bus_format;
+>   	u32 pixel_format;
+>   	u32 memory_bandwidth_limit;
+> +	unsigned int num_oldis;
+> +	struct tidss_oldi *oldis[TIDSS_MAX_OLDI_TXES];
+> +	int active_hw_videoport_id;
+
+I think this should be array too.
+
+> +	int active_panels;
+
+Same here.
+
+Also look at how kernel tidss driver is handling it.
+
+
+Regards
+Devarsh
+
+>   };
+>   
+> +struct tidss_oldi;
+>   #endif
+> diff --git a/drivers/video/tidss/tidss_oldi.c b/drivers/video/tidss/tidss_oldi.c
+> new file mode 100644
+> index 00000000000..a2f232b3e3d
+> --- /dev/null
+> +++ b/drivers/video/tidss/tidss_oldi.c
+> @@ -0,0 +1,298 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
+> + * Swamil Jain <s-jain1@ti.com>
+> + *
+> + * based on the linux tidss_oldi.c, which is
+> + *
+> + * Copyright (C) 2024 - Texas Instruments Incorporated
+> + * Author: Aradhya Bhatia <a-bhatia1@ti.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <dm/ofnode_graph.h>
+> +#include <dm/ofnode.h>
+> +#include <malloc.h>
+> +#include <syscon.h>
+> +#include <clk.h>
+> +#include <regmap.h>
+> +#include <dm/device_compat.h>
+> +
+> +#include "tidss_oldi.h"
+> +
+> +enum tidss_oldi_pixels {
+> +	OLDI_PIXELS_EVEN = BIT(0),
+> +	OLDI_PIXELS_ODD = BIT(1),
+> +};
+> +
+> +/**
+> + * enum tidss_oldi_dual_link_pixels - Pixel order of an OLDI dual-link connection
+> + * @TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS: Even pixels are expected to be generated
+> + *    from the first port, odd pixels from the second port
+> + * @TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS: Odd pixels are expected to be generated
+> + *    from the first port, even pixels from the second port
+> + */
+> +enum tidss_oldi_dual_link_pixels {
+> +	TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS = 0,
+> +	TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS = 1,
+> +};
+> +
+> +static const struct oldi_bus_format oldi_bus_formats[] = {
+> +	{ MEDIA_BUS_FMT_RGB666_1X7X3_SPWG,	18, SPWG_18,	MEDIA_BUS_FMT_RGB666_1X18 },
+> +	{ MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,	24, SPWG_24,	MEDIA_BUS_FMT_RGB888_1X24 },
+> +	{ MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA,	24, JEIDA_24,	MEDIA_BUS_FMT_RGB888_1X24 },
+> +};
+> +
+> +static int tidss_oldi_get_port_pixels_type(ofnode port_node)
+> +{
+> +	bool even_pixels =
+> +		ofnode_has_property(port_node, "dual-lvds-even-pixels");
+> +	bool odd_pixels =
+> +		ofnode_has_property(port_node, "dual-lvds-odd-pixels");
+> +	return (even_pixels ? OLDI_PIXELS_EVEN : 0) |
+> +	       (odd_pixels ? OLDI_PIXELS_ODD : 0);
+> +}
+> +
+> +static int tidss_oldi_get_remote_pixels_type(ofnode port_node)
+> +{
+> +	ofnode endpoint = ofnode_null();
+> +	int pixels_type = -EPIPE;
+> +
+> +	ofnode_for_each_subnode(endpoint, port_node) {
+> +		ofnode remote_port;
+> +		int current_pt;
+> +
+> +		if (!ofnode_name_eq(endpoint, "endpoint"))
+> +			continue;
+> +
+> +		remote_port = ofnode_graph_get_remote_port(endpoint);
+> +		if (!ofnode_valid(remote_port))
+> +			return -EPIPE;
+> +
+> +		current_pt = tidss_oldi_get_port_pixels_type(remote_port);
+> +		if (pixels_type < 0)
+> +			pixels_type = current_pt;
+> +
+> +		if (!current_pt || pixels_type != current_pt)
+> +			return -EINVAL;
+> +	}
+> +
+> +	return pixels_type;
+> +}
+> +
+> +int tidss_oldi_get_dual_link_pixel_order(ofnode port1, ofnode port2)
+> +{
+> +	int remote_p1_pt, remote_p2_pt;
+> +
+> +	if (!ofnode_valid(port1) || !ofnode_valid(port2))
+> +		return -EINVAL;
+> +
+> +	remote_p1_pt = tidss_oldi_get_remote_pixels_type(port1);
+> +	if (remote_p1_pt < 0)
+> +		return remote_p1_pt;
+> +
+> +	remote_p2_pt = tidss_oldi_get_remote_pixels_type(port2);
+> +	if (remote_p2_pt < 0)
+> +		return remote_p2_pt;
+> +
+> +	/*
+> +	 * A valid dual-lVDS bus is found when one remote port is marked with
+> +	 * "dual-lvds-even-pixels", and the other remote port is marked with
+> +	 * "dual-lvds-odd-pixels", bail out if the markers are not right.
+> +	 */
+> +	if (remote_p1_pt + remote_p2_pt != OLDI_PIXELS_EVEN + OLDI_PIXELS_ODD)
+> +		return -EINVAL;
+> +
+> +	return remote_p1_pt == OLDI_PIXELS_EVEN ?
+> +		TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS :
+> +		TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS;
+> +}
+> +
+> +static int get_oldi_mode(ofnode oldi_tx, u32 *companion_instance)
+> +{
+> +	ofnode companion;
+> +	ofnode port0, port1;
+> +	int pixel_order;
+> +	int ret;
+> +	/*
+> +	 * Find if the OLDI is paired with another OLDI for combined OLDI
+> +	 * operation (dual-lvds or clone).
+> +	 */
+> +	companion = ofnode_parse_phandle(oldi_tx, "ti,companion-oldi", 0);
+> +	if (!ofnode_valid(companion)) {
+> +		/*
+> +		 * OLDI TXes in Single Link mode do not have companion
+> +		 * OLDI TXes and, Secondary OLDI nodes don't need this
+> +		 * information.
+> +		 */
+> +		if (ofnode_has_property(oldi_tx, "ti,secondary-oldi"))
+> +			return OLDI_MODE_SECONDARY;
+> +
+> +		/*
+> +		 * The OLDI TX does not have a companion, nor is it a
+> +		 * secondary OLDI. It will operate independently.
+> +		 */
+> +		return OLDI_MODE_SINGLE_LINK;
+> +	}
+> +
+> +	ret = ofnode_read_u32(companion, "reg", companion_instance);
+> +	if (ret)
+> +		return OLDI_MODE_UNSUPPORTED;
+> +
+> +	/*
+> +	 * We need to work out if the sink is expecting us to function in
+> +	 * dual-link mode. We do this by looking at the DT port nodes we are
+> +	 * connected to, if they are marked as expecting even pixels and
+> +	 * odd pixels than we need to enable vertical stripe output.
+> +	 */
+> +	port0 = ofnode_graph_get_port_by_id(oldi_tx, 1);
+> +	port1 = ofnode_graph_get_port_by_id(companion, 1);
+> +	pixel_order = tidss_oldi_get_dual_link_pixel_order(port0, port1);
+> +	switch (pixel_order) {
+> +	case -EINVAL:
+> +		/*
+> +		 * The dual link properties were not found in at least
+> +		 * one of the sink nodes. Since 2 OLDI ports are present
+> +		 * in the DT, it can be safely assumed that the required
+> +		 * configuration is Clone Mode.
+> +		 */
+> +		return OLDI_MODE_CLONE_SINGLE_LINK;
+> +
+> +	case TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS:
+> +		return OLDI_MODE_DUAL_LINK;
+> +
+> +	/* Unsupported OLDI Modes */
+> +	case TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS:
+> +	default:
+> +		return OLDI_MODE_UNSUPPORTED;
+> +	}
+> +}
+> +
+> +static int get_parent_dss_vp(ofnode oldi_tx, u32 *parent_vp)
+> +{
+> +	ofnode ep, dss_port;
+> +	int ret;
+> +
+> +	ep = ofnode_graph_get_endpoint_by_regs(oldi_tx, 0, -1);
+> +	if (ofnode_valid(ep)) {
+> +		dss_port = ofnode_graph_get_remote_port(ep);
+> +		if (!ofnode_valid(dss_port))
+> +			ret = -ENODEV;
+> +
+> +		ret = ofnode_read_u32(dss_port, "reg", parent_vp);
+> +		if (ret)
+> +			return -ENODEV;
+> +		return 0;
+> +	}
+> +
+> +	return -ENODEV;
+> +}
+> +
+> +static int tidss_init_oldi_io_ctrl(struct udevice *dev, struct tidss_oldi *tidss_oldi)
+> +{
+> +	struct udevice *syscon;
+> +	struct regmap *regmap = NULL;
+> +	int ret = 0;
+> +
+> +	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "ti,am65x-oldi-io-ctrl",
+> +					   &syscon);
+> +	if (ret) {
+> +		debug("unable to find ti,am65x-oldi-io-ctrl syscon device (%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	/* get grf-reg base address */
+> +	regmap = syscon_get_regmap(syscon);
+> +	if (!regmap) {
+> +		debug("unable to find rockchip grf regmap\n");
+> +		return -ENODEV;
+> +	}
+> +	tidss_oldi->io_ctrl = regmap;
+> +	return 0;
+> +}
+> +
+> +int tidss_oldi_init(struct udevice *dev)
+> +{
+> +	struct tidss_drv_priv *priv = dev_get_priv(dev);
+> +	u32 parent_vp, oldi_instance, companion_instance;
+> +	int ret, tidss_oldi_panel_count = 0;
+> +	enum tidss_oldi_link_type link_type;
+> +	struct tidss_oldi *tidss_oldi;
+> +	struct clk *serial;
+> +	ofnode child;
+> +	ofnode oldi_parent = ofnode_find_subnode(dev_ofnode(dev), "oldi-transmitters");
+> +
+> +	if (!ofnode_valid(oldi_parent))
+> +		/* Return gracefully */
+> +		return 0;
+> +
+> +	ofnode_for_each_subnode(child, oldi_parent) {
+> +		priv->oldis[tidss_oldi_panel_count] = NULL;
+> +
+> +		ret = get_parent_dss_vp(child, &parent_vp);
+> +		if (ret == -ENODEV) {
+> +			/*
+> +			 * ENODEV means that this particular OLDI node
+> +			 * is not connected with the DSS, which is not
+> +			 * a harmful case. There could be another OLDI
+> +			 * which may still be connected.
+> +			 * Continue to search for that.
+> +			 */
+> +			ret = 0;
+> +			continue;
+> +		}
+> +
+> +		ret = ofnode_read_u32(child, "reg", &oldi_instance);
+> +		if (ret) {
+> +			ret = -ENODEV;
+> +			break;
+> +		}
+> +
+> +		link_type = get_oldi_mode(child, &companion_instance);
+> +		if (link_type == OLDI_MODE_UNSUPPORTED) {
+> +			dev_warn(dev, "OLDI%u: Unsupported OLDI connection.\n", oldi_instance);
+> +
+> +			ret = OLDI_MODE_UNSUPPORTED;
+> +			/* Return gracefully, no supported OLDI panel found */
+> +			break;
+> +		} else if (link_type == OLDI_MODE_SECONDARY) {
+> +			/*
+> +			 * This is the secondary OLDI node, which serves as a
+> +			 * companinon to the primary OLDI, when it is configured
+> +			 * for the dual-lvds mode. Since the primary OLDI will
+> +			 * be a part of bridge chain, no need to put this one
+> +			 * too. Continue onto the next OLDI node.
+> +			 */
+> +			continue;
+> +		}
+> +
+> +		serial = malloc(sizeof(struct clk));
+> +		ret = clk_get_by_name_nodev(child, "serial", serial);
+> +		if (ret) {
+> +			dev_err(dev, "video port %d clock enable error %d\n", parent_vp, ret);
+> +			free(serial);
+> +			return ret;
+> +		}
+> +
+> +		tidss_oldi = malloc(sizeof(struct tidss_oldi));
+> +		ret = tidss_init_oldi_io_ctrl(dev, tidss_oldi);
+> +		if (ret) {
+> +			debug("tidss could not initialize oldi_io_ctrl\n");
+> +			free(serial);
+> +			free(tidss_oldi);
+> +			return ret;
+> +		}
+> +
+> +		tidss_oldi->dev = dev;
+> +		tidss_oldi->parent_vp = parent_vp;
+> +		tidss_oldi->oldi_instance = oldi_instance;
+> +		tidss_oldi->companion_instance = companion_instance;
+> +		tidss_oldi->link_type = link_type;
+> +		tidss_oldi->serial = serial;
+> +		priv->oldis[tidss_oldi_panel_count] = tidss_oldi;
+> +		priv->oldi_mode = link_type;
+> +		tidss_oldi_panel_count++;
+> +	}
+> +	priv->num_oldis = tidss_oldi_panel_count;
+> +	return 0;
+> +}
+> diff --git a/drivers/video/tidss/tidss_oldi.h b/drivers/video/tidss/tidss_oldi.h
+> new file mode 100644
+> index 00000000000..82dcd72fc0e
+> --- /dev/null
+> +++ b/drivers/video/tidss/tidss_oldi.h
+> @@ -0,0 +1,67 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
+> + * Swamil Jain <s-jain1@ti.com>
+> + *
+> + * based on the linux tidss_oldi.h, which is
+> + *
+> + * Copyright (C) 2024 - Texas Instruments Incorporated
+> + * Author: Aradhya Bhatia <a-bhatia1@ti.com>
+> + */
+> +
+> +#ifndef __TIDSS_OLDI_H__
+> +#define __TIDSS_OLDI_H__
+> +
+> +#include <dm/ofnode.h>
+> +#include <dm/of_access.h>
+> +#include <media_bus_format.h>
+> +
+> +#include "tidss_drv.h"
+> +
+> +/* OLDI PORTS */
+> +#define OLDI_INPUT_PORT    0
+> +#define OLDI_OURPUT_PORT   1
+> +
+> +/* Control MMR Registers */
+> +
+> +/* Register offsets */
+> +#define OLDI_PD_CTRL            0x100
+> +#define OLDI_LB_CTRL            0x104
+> +
+> +/* Power control bits */
+> +#define OLDI_PWRDOWN_TX(n)	BIT(n)
+> +
+> +/* LVDS Bandgap reference Enable/Disable */
+> +#define OLDI_PWRDN_BG		BIT(8)
+> +
+> +enum tidss_oldi_link_type {
+> +	OLDI_MODE_UNSUPPORTED,
+> +	OLDI_MODE_SINGLE_LINK,
+> +	OLDI_MODE_CLONE_SINGLE_LINK,
+> +	OLDI_MODE_DUAL_LINK,
+> +	OLDI_MODE_SECONDARY,
+> +};
+> +
+> +struct oldi_bus_format {
+> +	u32 bus_fmt;
+> +	u32 data_width;
+> +	enum oldi_mode_reg_val oldi_mode_reg_val;
+> +	u32 input_bus_fmt;
+> +};
+> +
+> +struct tidss_oldi {
+> +	struct udevice *dev;
+> +
+> +	enum tidss_oldi_link_type link_type;
+> +	const struct oldi_bus_format *bus_format;
+> +	u32 oldi_instance;
+> +	u32 companion_instance;
+> +	u32 parent_vp;
+> +
+> +	struct clk *serial;
+> +	struct regmap *io_ctrl;
+> +};
+> +
+> +int tidss_oldi_init(struct udevice *dev);
+> +
+> +#endif /* __TIDSS_OLDI_H__ */
