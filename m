@@ -4,165 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3AC6C7115B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 05:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9AE7C7115D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 06:29:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7433A82D21;
-	Mon, 23 Jun 2025 07:52:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id F306181FEE;
+	Mon, 23 Jun 2025 08:29:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="NR0FdG2I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qy3ykF7a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D463F82E25; Mon, 23 Jun 2025 07:52:32 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AF6CE8210D; Mon, 23 Jun 2025 08:29:08 +0200 (CEST)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4C7A82D17
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 07:52:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 537FE81F66
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 08:29:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TmivsOvGG+P9y3XZ1yKvSwMlTzoxVDTSh6vHD/fBjvQ0F36L4JXeBnLCQcgxZKtbJBJPKCowKkPF9ZumePB0/cJAxTS7tf0lmKKCEmS/gs81xjtVoteciinwU2kKpqE9hCF1iWxmEHrRSTk27H2X3675jR8qN54bud3276R/GN2b60Eg20VWCY5v2QREtBemk6YrcqaKv8vh65/M2d1m7S/7JP4fkie5r738sRaWUjawIcsaTxstEcfc3nnjeKikiO/Ff7DujyUbTfSznMqNLLTZHSVmTpRjp8thNBfAjODk6cBU1UgDuMP1Wid/ezznv7ZniENakcdVoBknTlaZrw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=quE++ZyGIB7hDaSa/msKEAVscF1Lu4UnJEHa1ryn7HI=;
- b=skDdfl0c00yg+BYVNIuEfl8bnCrI0LjkuuzJ8bypeTTOPVDULlg4o2is5YMSahZxcaOCjU5XxZurvUl0QA2358Bj+pGiNGmysLDeDmeLtLx70LAbRUwlzTmBTRWScQ4UkCmxlN7TrZo1H6b/OC9GiDh8dISsFghwqOQB3XM1BOvJp6HR7HF7MVSE66KXqlD4BfM5kuiLL8+mYhBRZ7iBzn5Lr+Hjg1MSteKEPjfjJud9DE7eZTr3bVZx/MY5BkO8oR9NwY5OCUO7lradAR5z6KhDGcecqiM8/eT/fCtScc50Vy4LjKJqsDjHQZKgcI4IT4HCTy6wrq0C6CSY/sDtng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=quE++ZyGIB7hDaSa/msKEAVscF1Lu4UnJEHa1ryn7HI=;
- b=NR0FdG2Icc+mRAGBRMR0283hfOajCdWxRxY2/OuLZeHJ6RFkZ+gbdUn/SMUcEGtWDMa/fof3y+VgK6O3EiFYxD60CuJDjrHiHVDUn25iHVzmxZIFD7tWL+//kII3bTyjRGVHqKSp97S1k9isB1Up4aJXRwsQsVGhGcNJodut0QSYTMFKLpx6BhSNRmJnvBAxR8DE4w0KjKs14SwjdDeBZkNB7iicwXjrjo5UvNP9g0djNLYQTAblxhNXD7/KMiUJ1Z/4pQJ6yC8Kjx+ZUkHP7n1K4RN6PHrKJ7R7ezbDJNyZeoUcH2+eNAe9EtUvFy6GRInyTQGMI4LM3/ET1j9zdQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DU4PR04MB10671.eurprd04.prod.outlook.com (2603:10a6:10:582::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.26; Mon, 23 Jun
- 2025 05:52:29 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%3]) with mapi id 15.20.8857.026; Mon, 23 Jun 2025
- 05:52:29 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Mon, 23 Jun 2025 15:02:33 +0800
-Subject: [PATCH v2 5/5] imx8mq: evk: Add support for capsule update
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250623-sr-v2-5-e97fc53f0f8d@nxp.com>
-References: <20250623-sr-v2-0-e97fc53f0f8d@nxp.com>
-In-Reply-To: <20250623-sr-v2-0-e97fc53f0f8d@nxp.com>
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.2
-X-ClientProxiedBy: SG2PR02CA0077.apcprd02.prod.outlook.com
- (2603:1096:4:90::17) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-4a77ffcb795so22989031cf.0
+ for <u-boot@lists.denx.de>; Sun, 22 Jun 2025 23:29:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750660144; x=1751264944; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UMK5Aitnso0sni9mGb7Tq/XOJgZVdIg0tB2ZbQ9T0cU=;
+ b=Qy3ykF7aJyyd7G/2NJJeNiCzktMKpPYjnA8H97olOL8WPW51R/rD4RduThmxTN5O5p
+ gL/bOcoX6+dqpnFa66ck14LcalBLADlsT71O0YO8Pnaef4QdXmhApucuFVD9vmgFzpn/
+ 2ElC6XjTuIZAe8cEfTZYPwvscvcJzKYggwGhIQs9ix+aYI+MIIG9C5KzVz7UE51wW5VT
+ +1AHqke/npaZLmpLau5UmdYaVxYTdQu90jqmIY4x5vHoh0Slh8cfCVxEZy2oj7XReu0d
+ pVdfRjbkiajcjW7IU17mMgpQmf8zaG09PgzNmGKbAc9yDFbygn32zJwqS7TehnWmtfXI
+ OalA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750660144; x=1751264944;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UMK5Aitnso0sni9mGb7Tq/XOJgZVdIg0tB2ZbQ9T0cU=;
+ b=JKD5St+JOLaLfwsMt0ir26mSDrGIF+i1LL4/HSh0WJgQ264OtGtBx+l69+iLk1xSTs
+ UMDVOuw+MiyAy8XxYfePH0c4HnfFO6bjKqDu1WPbWFpe3U4KYH9/D5xp9a5kosLL4I+a
+ 7Q9QzxXclRjJfriD4qdPdB9cXjfvO1mGfoh8hM3+JYGjPbErnSsh7yBNHBBYpNb8AtwY
+ 9PeQT7CDdFohOYeZ+eyeZ/bwN7l4WHSjbxIEvX0H/6p1dkUzmdZDiqnYYyn7k2Zrnlrq
+ C8bzzCGFB7w5zfaj0lM8vYTso+NfdaJT5lU/yPsZ5AyAil8fbCo+yEUcVPhSjnGCXEKz
+ 86Cw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXLVYv2VcggdPgpXTNiDkqH3TkbUmY3qddZ2XH64O/Z6ySMtE2WpjeCkmsWPKyw8y4uOhfpBCM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzwkthsbj1OO2POsfeybp0rr8nN9E+3+M2Iws9IrccA5kf7y3ov
+ jaD1qEnLvAp2YGUsZGcJey4oYQVWEud/TzlznoGzWs9SasQNnkOWRjgWXRqfeZVm6YdAF90yXYW
+ GM26zhSPREanydh1OuIsDxEIWH1jEuUB+D7jlxaN5Dw==
+X-Gm-Gg: ASbGncvLgblxi8eXyCcW7v5Dt4CI5GdUHncnDEmDDVMeNpdAgvSBoqSHKpk7iIiwawV
+ hMjOWk8kzXEUhffhTrHY7HnHzGVuWvn0fPJFCUqWml8qzztRQ2UoHPR5x9jSLFIQHZiDesJ7T7t
+ AcSIbMK21J1OO1pqt3qvoIgGdaOEmQ08fKZ+dPPzGS2JA+CsOb4J7+TT8=
+X-Google-Smtp-Source: AGHT+IF0QT7rCimVyjSlcYXFieFogsh0Ctgbbdae0Sr3MjL/6PoQClAkRYLWQmrMKVU9u6TbaCvbqDorCG7tPxObztw=
+X-Received: by 2002:a05:622a:1a09:b0:4a4:31e0:c834 with SMTP id
+ d75a77b69052e-4a77a256dedmr199454721cf.46.1750660143979; Sun, 22 Jun 2025
+ 23:29:03 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU4PR04MB10671:EE_
-X-MS-Office365-Filtering-Correlation-Id: de07839b-8794-4f5d-4346-08ddb21a2390
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|52116014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ckFiSVpOakJ1R1FFUmxsRitrekN0QUdoeTFtVFR1eVh4SnZnNXdlZ2dEQVZ3?=
- =?utf-8?B?MzNqaWRnOVlDSTJob0hJTmVKZmFBbEthZkJDVkE4MTVYaTZ5QUl4N3hKSnR2?=
- =?utf-8?B?OFIyNCtvRnNNVXNqSnJJRHUweG9mSUh6cUZOV1VlUW5oTHZhcFBrWEJQYUpi?=
- =?utf-8?B?ZEhOalNqK1dzUHRHb041SDA0bjZXYmh4T2dETDlDUWY4Qi9IMG14bnZTd0Jy?=
- =?utf-8?B?SUlGcWM3WVJHSE9lYjRXak80M3hEMkJRUTArY2xtQkh3bHBXTVlOSVgrdHgv?=
- =?utf-8?B?dHJvUjkzcENodXczbUtCVllQV2pJcytGQmxKWEhuc0haTlZUK2xFd3R5bEdH?=
- =?utf-8?B?TGxkMG5jWWVReU9aamRaSGIxdTlUQTVkK0toUGc5YndrMWVjbWZZY3E5MXhj?=
- =?utf-8?B?SlVodUk0M0htUm8vNEIzbmdIaVBHZjlWdjkrZ01RbmFCRlpXbEFxSzBEaXRI?=
- =?utf-8?B?NGhNWW84b2hTZ3IrUnNaSUlTeTNpZkwrWnQydHNkYmg2bXMxQXhQdlVSM3pY?=
- =?utf-8?B?OW1zQVQvazhYdm14S29UMFA0aFhNUVBMUFZqWGtQWWcwTm5rWFgxU3dEakRW?=
- =?utf-8?B?QnM2QWtrSmtYVHJ1ejUwTVJaSG9QYXZoMCtnN3JsM2E5TGxwcjhxU2Yvem1u?=
- =?utf-8?B?RzE5ZlBpVWQ2MDZLelNNY0ZyMlJjYk84eW5yQnk3aENrM1JFOFlXV3V3QzAz?=
- =?utf-8?B?VzNuQ1BYdjRqUmFzcWM0ekUxNExQME1qNjcrRzJJQ1RqeG94QUpvSGpkbm83?=
- =?utf-8?B?c3pCUGpuK3JJUzNKMlM2dHU5dzBwT29CbVkvZktVblNnZjBHMElkWTRGT1VW?=
- =?utf-8?B?SGUxZjVlWTU5ZEc2WW5wMDc2VlZudVAwZEEwQWQ5dk96STFudHcxemlqUWg1?=
- =?utf-8?B?bGlKdGtGTG16SktRNmViZlZaOFpNRkkxeXVWdk93eDVsNGRiTEt2Ryt1akd5?=
- =?utf-8?B?MkxlODFUczBHaDk0M2dJMjRNa0lwOXQzL3NZS3lsWkdmYWhpMXRZSlNnYnpj?=
- =?utf-8?B?eXJRTHkwTVdwaEcyc3ZJTTNadnY4RzBWTHI4dEw5a0lyZVhEL1kwM2NDVlh2?=
- =?utf-8?B?UEhqN3hFN2JncUI3YnlXRGxwU0s4TzJPTG5YcEpaWFRVOXo2MzlPNEM2aGJp?=
- =?utf-8?B?Z3VGMGpYRjZFQVpKU1FCRkNCR0ZnblltWlBudTZWejF6MjZ2M2hWWnRkTEJ1?=
- =?utf-8?B?MmVLelVmSHhMYUdoNmtGdEVNVmlucjRUVEFwY2plU0NqWUJHSnBFbjNzd1JB?=
- =?utf-8?B?K3pnUDV2ZnYxaWxnaFE1VC9TNXU4eWdHYU02UlZHalZmY0xvRmQ4cXF1RjA5?=
- =?utf-8?B?dEpYK0xtU3lvWHJoN29lOFY4OUN5ZVNvQ20zeENReVFMR3JrZVZ5NXFHaGlR?=
- =?utf-8?B?bWRVbjhUZUJVRnZGQmVzbjg0empvdVJPWGFPRnFlMXExVE1PbkVjaUFkOStB?=
- =?utf-8?B?MUxoczBnWi9YT1B3blRSc1poUWVMU1NyNFUwd2NKVzZYaklJV0pBRHpCOU5K?=
- =?utf-8?B?dTBuSTY3b1dXalNwcGZUU083K296SnYyTWtxTTZkZ1BlNlozcGttTTZyQTEy?=
- =?utf-8?B?dXdELzFad3RMdkVjKy8zMlVhMHo0Y2YvWmpNYlBsdmxCSHNxZzIvblU2anJB?=
- =?utf-8?B?VDArak05MlRMSENEOGdhbWd6T1ZLcEVZVjk5YmR2N2QwblpuZjN5a1VZZzBO?=
- =?utf-8?B?Uno2aDNSd2JPS3lpRmFpTEhNb3pSYUhaSkg3ZmllUEY4TURpaWRTSVUrclI0?=
- =?utf-8?B?L1p3YXZnSjdJcmxWQVU2NFZBb2F4bFAzVGNVd2pvL1prSTVYRVNxYTlYamFW?=
- =?utf-8?B?Z085UU9yWXE4MVVOR0p5eG83MVVQWXJ4M1JuTUpBVGxPQTM2OHh4YjZveHVX?=
- =?utf-8?B?Y0poQmM1KzhmL0pHYjVqZGIwQ3B0cVlFL0NHWWJWdjJzM3Z0MWxQbTBWN2Ro?=
- =?utf-8?B?bVpQSHpNZFgwUk9Hci84OWNNWFJUUTFhNzMyeGtxSEZ1bzA1bi90TWd4UFVH?=
- =?utf-8?B?R29Id0xPK1R3PT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(52116014)(1800799024)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aGlUcVBUU3FzdVo1azlLQk4rSGFUajVBOUpsWHRpOFpEeGlINnJYaDlHZ1A1?=
- =?utf-8?B?Y3oxdTN4dnFWaEU2dVVBTytpZ1VYNnovMzROWGI3U1YvKytsUFZUWXpBUWlO?=
- =?utf-8?B?S1A4MUthMWQvR2MxL0p2RTQ0VVRKS3FZcG5lMWNzMVI4bmhHaDFZNGZsOXhH?=
- =?utf-8?B?TWdNdXdyRzF5dzFrbW9xM2dHc3BDUy9iUlNYbUJSb1hyQm4rT2ZIVStUSE5Y?=
- =?utf-8?B?RWhncmM4ZllhU1NoWFFvRzZ6TVROSy9JbWkyTmRLbkNGQ2FSQXBLT0J2VGE4?=
- =?utf-8?B?SVFqVGkvOVpxYUJick9tV05yVlJjTVpYYzl3aWN6dkxIL1I3M0FvV2xUbWtX?=
- =?utf-8?B?YkVhWncyZTVPZnc4UlJ3NzdBOWNGTTJGTnR0MlUycXFzY1pKa3V2Y0ltR2k3?=
- =?utf-8?B?OEd1dkUrOXNwcUxQZXZTUlVDRllTQTZkZG1Fdnp1bmRtT0EzTEN2UjcvZStu?=
- =?utf-8?B?VFlZdEo2K1Uya2dWeExDYU9KZ09uSnF1bUJxUkR5ZnQwQzJZQ1huTzJNbDNN?=
- =?utf-8?B?SjBwSWM5Y244eHZ0UlhTZ0FCa0ttc0p6U3VpdnZFTEZiWm9jditHNWxIbTdK?=
- =?utf-8?B?WU9RS3JLdU9KeWVqd2h5TXdwZ3JzUG1mUEcwTHF2RlpnODA1UXFOQ3Nvbkxn?=
- =?utf-8?B?dEVTaVA2QW9KZG9rN0VuS0hUeXJ6eGtoeWNEWTErQkZVT3lQZnFSckMrZEwx?=
- =?utf-8?B?WXNSRGZLSFRjbm0vYlJlUmhzdE1RS2ZRMVppU050Rm1ic0FIUUEzS0xOVGI2?=
- =?utf-8?B?VFNtMHprampTaFRHUGcrKzIwczFKVzFiVllRSnhnZE5halgwOS9QOHZybDRa?=
- =?utf-8?B?TTAyZUFnaE5jaVRSY0pYMzN0YnVBQnBldHc5NENMRmhFdHZ2dGhPTmtrbCs4?=
- =?utf-8?B?dzN1c295ZjJ2Skd5czVGd1BQQzIydFJnVlVqai8zV0Z3RjNYM3JUejlId1Nu?=
- =?utf-8?B?V2tKTXU3aVpUUVpTaEdwM2tqQzVjcitEeFhiMGlmSUFuZXppZzExdFNPVVUz?=
- =?utf-8?B?dEtyN0ZmL3dRSGVET3paQVdpUWRwR0l1dzgrQjFRYXdtOWM0WlRaUFN0UG1U?=
- =?utf-8?B?MXFZSmJ4Zk1UUHcrQW8zbkxYTXcxUG1JVGpsanhXUGZkU3RuZ2xlWkErTkVK?=
- =?utf-8?B?dDlTcFlwWkFwQWFqZ1BIWElOaEhDS1JiK0RvcVhuWldvbWpvZE1VSEl3S2hm?=
- =?utf-8?B?ZjJVT2RFR2tWLzA2YkxBc2JSVGtFcldXVDlKem15MmwvVXVGdjZ3TnFXTW9H?=
- =?utf-8?B?ME8zWmFZZVpUY3pEa3dnTWdna1JQSVhPRktvaXlPVDlNUmc4aUJTNElSM0dD?=
- =?utf-8?B?ZEFEMWY5aHdleHdUOVdveUlGZXRRbEJqM3Q4RHNWejZKMjdHRXlSVk50ek8r?=
- =?utf-8?B?RjVqMVNYZVZmd2ZGbjgrY3JhQWlDMnBZa1QwSUNFL3pYRmdpSy9SSGRXQ1dq?=
- =?utf-8?B?Y0loY3g3ZFdUQmRxaDA5VHBsZ3hTNlNuMDZjRzM0MG1WdEdSNlZHcGlKK2lu?=
- =?utf-8?B?RlNJZGFVS0hxM1NYSC95d09tN2RDbXhDQmt4Uit2WmlUUUE3Q2ZjTmZ4bUNn?=
- =?utf-8?B?M0NrMFhyVjFTL08yeE9yOUF5TkI3T0k0ZCt2SkFnbnRVOCtzSng5MU1uQ3ly?=
- =?utf-8?B?RWU4SzBUNjIrR3lXS0dXdTVjeXNvclJTY2xUU2FsK1NFNUJBMkRsbDFVT0k2?=
- =?utf-8?B?a1lZR3BkcWZ6TjJzZi9OWk5LSUNhSjVQeW1DZmFSWkpIVmFXdEJOWGhpRzc3?=
- =?utf-8?B?NjU3Nm9pTkV5L3RqU3VtTzVzWVQ0NDVTeEtVSlNCd085Z1htT1JOWjhFZWxU?=
- =?utf-8?B?blBRMVRXektpazNURXpWZThTMmRSbTZBZG5rTFM3cFBUT1hrcWJoUFdVWXlr?=
- =?utf-8?B?N2NzUFhaMnZuODdGYlU2MnRPUXhyRFlZWXpVQnZLaUd3bWl0UGtVblI1KzhI?=
- =?utf-8?B?SEk5VlBHYjVIcHNGaUNlN0J6aUlIQVp6d0VTcGVCR00wL3U4WG0wSlg1QWNh?=
- =?utf-8?B?Ti83QkQrWjJ3L29vT3VBS045ejdzaDJhYlVJbyt5dG1OR252K01rM3VJWjk0?=
- =?utf-8?B?NkwvN3A3OGZkVHE1QmpOdm9jWTNveno0MStJaXpSSEE5eVJTTkVUYU5taS8v?=
- =?utf-8?Q?TlSjC8EIS8fG78nWcKh64qL+f?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: de07839b-8794-4f5d-4346-08ddb21a2390
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2025 05:52:29.3106 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bKgg2wkKYcRPsLUJ5uE7klvBxYl7IR2r9BISs8dIS4BbOLmV/58DRN5OuUfuDgq8XkhePlH/3cjMo+WZZaz2PQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10671
+References: <20250616102338.1269541-1-sughosh.ganu@linaro.org>
+ <f126efa4-8d21-4358-bf69-45714142daa8@gmx.de>
+ <CAC_iWj++ib_3MheMnVJeFA9cFN8dq1evQRAW5vQ0rtHDADcCWg@mail.gmail.com>
+In-Reply-To: <CAC_iWj++ib_3MheMnVJeFA9cFN8dq1evQRAW5vQ0rtHDADcCWg@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 23 Jun 2025 11:58:52 +0530
+X-Gm-Features: AX0GCFuBgNISZe1hjLbYwtUqQcp8TIR01zCcjr2Hj29w5p7UplEh6NEE08fZSH4
+Message-ID: <CADg8p97jKvoJg7TvzOWigr0qKwWsezieYdwTGCEFd_R0cU_Jhw@mail.gmail.com>
+Subject: Re: [PATCH] cmd: eficonfig: add support for URI device path based
+ boot options
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,119 +97,341 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+On Tue, 17 Jun 2025 at 11:46, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Heinrich, Sughosh
+>
+> On Tue, 17 Jun 2025 at 00:53, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+> >
+> > On 6/16/25 12:23, Sughosh Ganu wrote:
+> > > The eficonfig command provides a menu based interface for maintenance
+> > > of the EFI boot options. Add support for adding a URI based boot
+> > > option. This boot option can then be used for HTTP boot.
+> >
+> > With your patch when I try to add a boot option I was surprised to see
+> > this menu:
+> >
+> >    ** Add Boot Option **
+> >
+> >        Description:
+> >        File:
+> >        Initrd File:
+> >        Fdt File:
+> >        Optional Data:
+> >        Uri:
+>
+> I think this is going to confuse people. Can we just move it with
+> 'File' and instead have 'File or URI"?
+>
+> >        Save
+> >        Quit
+> >
+> > My expectation is that I can define a URL each for
+> >
+> > * binary
+> > * initrd
+> > * fdt
+>
+> Hmm why? Perhaps the FDT makes some sense. But for distros currently
+> the initrd is supplied by GRUB. Even if we download our own, using it
+> is impossible at the moment. I think we should just add the URI for
+> the OS for now.
+>
+> >
+> > It should be possible to choose a network device in this menu instead:
+> >
+> >    ** Select Volume **
+> >
+>
+> Yes that would be a good idea. And I assume choosing it would
+> automatically set ethact as well?
 
-Capsule update is EFI based firmware update which is widely
-used in various OS distributions. This feature is required
-by ARM System-Ready compliance test. So
- - Define image array and GUID
- - Select configs for EFI Capsule update
+There is a bunch of stuff that we need to set for the http boot,
+including the loadaddr variable, set the httpserverip variable, get IP
+address through DHCP if applicable etc, along with other network
+settings, as applicable. So why only set the network device. Btw, this
+is a tool for setting the relevant EFI boot option as an EFI variable.
+In case of a block device, the device number and partition are
+actually getting set as part of the device path. But in case of the
+URI based dp, it is only the URI string that is required to be set,
+which this patch does. This also is what the bootmgr expects.
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- board/freescale/imx8mq_evk/imx8mq_evk.c | 21 +++++++++++++++++++++
- configs/imx8mq_evk_defconfig            | 13 +++++++++++++
- 2 files changed, 34 insertions(+)
+-sughosh
 
-diff --git a/board/freescale/imx8mq_evk/imx8mq_evk.c b/board/freescale/imx8mq_evk/imx8mq_evk.c
-index 18e83d90a08d653dd629bb773ffd11f50532f4b9..e90c56c33ffd4764b3408df7a154436f05949e19 100644
---- a/board/freescale/imx8mq_evk/imx8mq_evk.c
-+++ b/board/freescale/imx8mq_evk/imx8mq_evk.c
-@@ -7,6 +7,7 @@
- #include <asm/arch/imx8mq_pins.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/mach-imx/iomux-v3.h>
-+#include <efi_loader.h>
- #include <env.h>
- 
- #define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
-@@ -22,6 +23,26 @@ static iomux_v3_cfg_t const uart_pads[] = {
- 	IMX8MQ_PAD_UART1_TXD__UART1_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
- };
- 
-+#if CONFIG_IS_ENABLED(EFI_HAVE_CAPSULE_SUPPORT)
-+#define IMX_BOOT_IMAGE_GUID \
-+	EFI_GUID(0x296119cf, 0xdd70, 0x43de, 0x8a, 0xc8, \
-+		 0xa7, 0x05, 0x1f, 0x31, 0x25, 0x77)
-+
-+struct efi_fw_image fw_images[] = {
-+	{
-+		.image_type_id = IMX_BOOT_IMAGE_GUID,
-+		.fw_name = u"IMX8MQ-EVK-RAW",
-+		.image_index = 1,
-+	},
-+};
-+
-+struct efi_capsule_update_info update_info = {
-+	.dfu_string = "mmc 0=flash-bin raw 0x42 0x2000 mmcpart 1",
-+	.num_images = ARRAY_SIZE(fw_images),
-+	.images = fw_images,
-+};
-+#endif /* EFI_HAVE_CAPSULE_SUPPORT */
-+
- int board_early_init_f(void)
- {
- 	struct wdog_regs *wdog = (struct wdog_regs *)WDOG1_BASE_ADDR;
-diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
-index a2a6991bee28d2e6747a5461093a7c034a88e95a..61ff01c09093cff418d556d8ed4789b1659769f2 100644
---- a/configs/imx8mq_evk_defconfig
-+++ b/configs/imx8mq_evk_defconfig
-@@ -27,6 +27,10 @@ CONFIG_SYS_LOAD_ADDR=0x40480000
- CONFIG_SPL=y
- CONFIG_IMX_BOOTAUX=y
- CONFIG_REMAKE_ELF=y
-+CONFIG_EFI_MM_COMM_TEE=y
-+CONFIG_EFI_VAR_BUF_SIZE=139264
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_FIT=y
- CONFIG_FIT_EXTERNAL_OFFSET=0x3000
- CONFIG_SPL_LOAD_FIT=y
-@@ -53,15 +57,19 @@ CONFIG_SYS_PROMPT="u-boot=> "
- # CONFIG_BOOTM_NETBSD is not set
- # CONFIG_CMD_EXPORTENV is not set
- # CONFIG_CMD_IMPORTENV is not set
-+CONFIG_CMD_NVEDIT_EFI=y
- # CONFIG_CMD_CRC32 is not set
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
- CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_OPTEE_RPMB=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_MDIO is not set
- CONFIG_CMD_CACHE=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_CONTROL=y
-@@ -72,9 +80,11 @@ CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="FEC"
- CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
-+CONFIG_DFU_MMC=y
- CONFIG_MXC_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_FSL_USDHC=y
- CONFIG_PHYLIB=y
-@@ -96,8 +106,11 @@ CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_SPL_POWER_I2C=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+CONFIG_TEE=y
-+CONFIG_OPTEE=y
- CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-+CONFIG_SHA384=y
-
--- 
-2.35.3
-
+>
+> >        nvme 0:1
+> >        nvme 0:2
+> >        mmc 0:1
+> >        mmc 0:2
+> >        Quit
+> >
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >
+> > > Note: I had explored adding a corresponding test for this change. But
+> > > looks like the eficonfig command itself is not being tested since
+> > > commit 952018117ab4 ("dm: sandbox: Switch over to using the new host
+> > > uclass"). This needs to be taken up separately as to why the eficonfi=
+g
+> > > test has been bypassed, before adding stuff to the test.
+> > >
+> > >
+> > >   cmd/eficonfig.c | 90 ++++++++++++++++++++++++++++++++++++++++++++++=
++--
+> > >   1 file changed, 87 insertions(+), 3 deletions(-)
+> > >
+> > > diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> > > index 6e14d34a6bd..f69902b76f7 100644
+> > > --- a/cmd/eficonfig.c
+> > > +++ b/cmd/eficonfig.c
+> > > @@ -35,6 +35,7 @@ static int avail_row;
+> > >
+> > >   #define EFICONFIG_DESCRIPTION_MAX 32
+> > >   #define EFICONFIG_OPTIONAL_DATA_MAX 64
+> > > +#define EFICONFIG_URI_MAX 512
+> > >   #define EFICONFIG_MENU_HEADER_ROW_NUM 3
+> > >   #define EFICONFIG_MENU_DESC_ROW_NUM 5
+> > >
+> > > @@ -57,6 +58,7 @@ struct eficonfig_filepath_info {
+> > >    * @boot_index:             index of the boot option
+> > >    * @description:    pointer to the description string
+> > >    * @optional_data:  pointer to the optional_data
+> > > + * @uri:             URI for HTTP Boot
+> > >    * @edit_completed: flag indicates edit complete
+> > >    */
+> > >   struct eficonfig_boot_option {
+> > > @@ -66,6 +68,7 @@ struct eficonfig_boot_option {
+> > >       unsigned int boot_index;
+> > >       u16 *description;
+> > >       u16 *optional_data;
+> > > +     u16 *uri;
+> > >       bool edit_completed;
+> > >   };
+> > >
+> > > @@ -538,6 +541,31 @@ struct efi_device_path *eficonfig_create_device_=
+path(struct efi_device_path *dp_
+> > >       return dp;
+> > >   }
+> > >
+> > > +static struct efi_device_path *eficonfig_create_uri_device_path(u16 =
+*uri_str)
+> > > +{
+> > > +     char *pos, *p;
+> > > +     u32 len =3D 0;
+> > > +     efi_uintn_t uridp_len;
+> > > +     struct efi_device_path_uri *uridp;
+> > > +
+> > > +     len =3D utf16_utf8_strlen(uri_str);
+> >
+> > The code in this function seems not to guarantee valid URLs. E.g. you
+> > don't check that the schema is http:// or https://.
+> >
+> > Please, provide unit tests for the URL validation.
+>
+> We already have some of that in wget. Just export those functions and
+> re-use them
+>
+> >
+> > The UEFI spec refers to RFC 3986 for the allowable content of a Uri()
+> > device-path.
+> >
+> > See also https://url.spec.whatwg.org/#valid-url-string
+> >
+> > The Chinese URL https://www.hk01.com/zone/1/=E6=B8=AF=E8=81=9E should b=
+e encoded as
+> > https://www.hk01.com/zone/1/%E6%B8%AF%E8%81%9E.
+> >
+> > The following steps are required:
+> >
+> > 1) convert to UTF-8
+> > 2) encode bytes in URL fragements using hex encoding as needed.
+> >
+> > See https://url.spec.whatwg.org/#url-fragment-string
+> >
+> > Please, implement unit tests for URL encoding.
+> >
+> > Best regards
+> >
+> > Heinrich
+>
+> Thnaks
+> /Ilias
+> >
+> > > +
+> > > +     uridp_len =3D sizeof(struct efi_device_path) + len + 1;
+> > > +     uridp =3D efi_alloc(uridp_len + sizeof(EFI_DP_END));
+> > > +     if (!uridp)
+> > > +             return NULL;
+> > > +
+> > > +     uridp->dp.type =3D DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> > > +     uridp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MSG_URI;
+> > > +     uridp->dp.length =3D uridp_len;
+> > > +     p =3D (char *)&uridp->uri;
+> > > +     utf16_utf8_strcpy(&p, uri_str);
+> > > +     pos =3D (char *)uridp + uridp_len;
+> > > +     memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+> > > +
+> > > +     return &uridp->dp;
+> > > +}
+> > > +
+> > >   /**
+> > >    * eficonfig_file_selected() - handler of file selection
+> > >    *
+> > > @@ -983,6 +1011,22 @@ static efi_status_t eficonfig_boot_add_optional=
+_data(void *data)
+> > >                                "  enter optional data:");
+> > >   }
+> > >
+> > > +/**
+> > > + * eficonfig_boot_add_uri() - handle user input for HTTP Boot URI
+> > > + *
+> > > + * @data:    pointer to the internal boot option structure
+> > > + * Return:   status code
+> > > + */
+> > > +static efi_status_t eficonfig_boot_add_uri(void *data)
+> > > +{
+> > > +     struct eficonfig_boot_option *bo =3D data;
+> > > +
+> > > +     return handle_user_input(bo->uri, EFICONFIG_URI_MAX, 24,
+> > > +                              "\n  ** Edit URI **\n"
+> > > +                              "\n"
+> > > +                              "  enter HTTP Boot URI:");
+> > > +}
+> > > +
+> > >   /**
+> > >    * eficonfig_boot_edit_save() - handler to save the boot option
+> > >    *
+> > > @@ -998,7 +1042,8 @@ static efi_status_t eficonfig_boot_edit_save(voi=
+d *data)
+> > >               bo->edit_completed =3D false;
+> > >               return EFI_NOT_READY;
+> > >       }
+> > > -     if (u16_strlen(bo->file_info.current_path) =3D=3D 0) {
+> > > +     if (u16_strlen(bo->file_info.current_path) =3D=3D 0 &&
+> > > +         u16_strlen(bo->uri) =3D=3D 0) {
+> > >               eficonfig_print_msg("File is not selected!");
+> > >               bo->edit_completed =3D false;
+> > >               return EFI_NOT_READY;
+> > > @@ -1318,6 +1363,11 @@ static efi_status_t eficonfig_show_boot_option=
+(struct eficonfig_boot_option *bo,
+> > >       if (ret !=3D EFI_SUCCESS)
+> > >               goto out;
+> > >
+> > > +     ret =3D create_boot_option_entry(efi_menu, "Uri: ", bo->uri,
+> > > +                                    eficonfig_boot_add_uri, bo);
+> > > +     if (ret !=3D EFI_SUCCESS)
+> > > +             goto out;
+> > > +
+> > >       ret =3D create_boot_option_entry(efi_menu, "Save", NULL,
+> > >                                      eficonfig_boot_edit_save, bo);
+> > >       if (ret !=3D EFI_SUCCESS)
+> > > @@ -1340,6 +1390,22 @@ out:
+> > >       return ret;
+> > >   }
+> > >
+> > > +static bool eficonfig_fp_uri(struct efi_device_path *dp)
+> > > +{
+> > > +     return dp->type =3D=3D DEVICE_PATH_TYPE_MESSAGING_DEVICE &&
+> > > +             dp->sub_type =3D=3D DEVICE_PATH_SUB_TYPE_MSG_URI;
+> > > +}
+> > > +
+> > > +static void fill_dp_uri(struct efi_device_path *dp, u16 **uri_str)
+> > > +{
+> > > +     u16 *p =3D *uri_str;
+> > > +     struct efi_device_path_uri *uridp;
+> > > +
+> > > +     uridp =3D (struct efi_device_path_uri *)dp;
+> > > +
+> > > +     utf8_utf16_strcpy(&p, uridp->uri);
+> > > +}
+> > > +
+> > >   /**
+> > >    * fill_file_info() - fill the file info from efi_device_path struc=
+ture
+> > >    *
+> > > @@ -1392,10 +1458,13 @@ static efi_status_t eficonfig_edit_boot_optio=
+n(u16 *varname, struct eficonfig_bo
+> > >       size_t len;
+> > >       efi_status_t ret;
+> > >       char *tmp =3D NULL, *p;
+> > > +     u16 *current_path =3D NULL;
+> > >       struct efi_load_option lo =3D {0};
+> > >       efi_uintn_t dp_size;
+> > >       struct efi_device_path *dp =3D NULL;
+> > >       efi_uintn_t size =3D load_option_size;
+> > > +     struct efi_device_path *dp_volume =3D NULL;
+> > > +     struct efi_device_path *uri_dp =3D NULL;
+> > >       struct efi_device_path *device_dp =3D NULL;
+> > >       struct efi_device_path *initrd_dp =3D NULL;
+> > >       struct efi_device_path *fdt_dp =3D NULL;
+> > > @@ -1464,6 +1533,12 @@ static efi_status_t eficonfig_edit_boot_option=
+(u16 *varname, struct eficonfig_bo
+> > >               goto out;
+> > >       }
+> > >
+> > > +     bo->uri =3D calloc(1, EFICONFIG_URI_MAX * sizeof(u16));
+> > > +     if (!bo->uri) {
+> > > +             ret =3D  EFI_OUT_OF_RESOURCES;
+> > > +             goto out;
+> > > +     }
+> > > +
+> > >       /* copy the preset value */
+> > >       if (load_option) {
+> > >               ret =3D efi_deserialize_load_option(&lo, load_option, &=
+size);
+> > > @@ -1481,7 +1556,9 @@ static efi_status_t eficonfig_edit_boot_option(=
+u16 *varname, struct eficonfig_bo
+> > >               u16_strcpy(bo->description, lo.label);
+> > >
+> > >               /* EFI image file path is a first instance */
+> > > -             if (lo.file_path)
+> > > +             if (lo.file_path && eficonfig_fp_uri(lo.file_path))
+> > > +                     fill_dp_uri(lo.file_path, &bo->uri);
+> > > +             else
+> > >                       fill_file_info(lo.file_path, &bo->file_info, de=
+vice_dp);
+> > >
+> > >               /* Initrd file path (optional) is placed at second inst=
+ance. */
+> > > @@ -1512,6 +1589,9 @@ static efi_status_t eficonfig_edit_boot_option(=
+u16 *varname, struct eficonfig_bo
+> > >                       goto out;
+> > >       }
+> > >
+> > > +     if (utf16_utf8_strlen(bo->uri))
+> > > +             uri_dp =3D eficonfig_create_uri_device_path(bo->uri);
+> > > +
+> > >       if (bo->initrd_info.dp_volume) {
+> > >               dp =3D eficonfig_create_device_path(bo->initrd_info.dp_=
+volume,
+> > >                                                bo->initrd_info.curren=
+t_path);
+> > > @@ -1536,7 +1616,10 @@ static efi_status_t eficonfig_edit_boot_option=
+(u16 *varname, struct eficonfig_bo
+> > >               efi_free_pool(dp);
+> > >       }
+> > >
+> > > -     dp =3D eficonfig_create_device_path(bo->file_info.dp_volume, bo=
+->file_info.current_path);
+> > > +     dp_volume =3D bo->file_info.dp_volume;
+> > > +     current_path =3D bo->file_info.current_path;
+> > > +     dp =3D uri_dp ?
+> > > +             uri_dp : eficonfig_create_device_path(dp_volume, curren=
+t_path);
+> > >       if (!dp) {
+> > >               ret =3D EFI_OUT_OF_RESOURCES;
+> > >               goto out;
+> > > @@ -1558,6 +1641,7 @@ static efi_status_t eficonfig_edit_boot_option(=
+u16 *varname, struct eficonfig_bo
+> > >       ret =3D eficonfig_set_boot_option(varname, dp, dp_size, bo->des=
+cription, tmp);
+> > >   out:
+> > >       free(tmp);
+> > > +     free(bo->uri);
+> > >       free(bo->optional_data);
+> > >       free(bo->description);
+> > >       free(bo->file_info.current_path);
+> >
