@@ -4,89 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D9DC77B7C
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 17:41:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB2DC7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:10:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33FE882E05;
-	Mon, 23 Jun 2025 19:40:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 43BF081FEE;
+	Mon, 23 Jun 2025 21:10:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UdgseabW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ixhl+2HE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A61CA82E2D; Mon, 23 Jun 2025 19:40:34 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id DD7C18210D; Mon, 23 Jun 2025 21:10:16 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78AF382D60
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 19:40:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8618B8006D
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 21:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jpaulo.silvagoncalves@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-311e46d38ddso3900623a91.0
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 10:40:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-605f7d3215cso2197914eaf.0
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 12:10:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750700431; x=1751305231; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bJdbvAJTdCux1O1UCbj/ymnxkBwIwcSghIWNfEN3nPk=;
- b=UdgseabWC9yTwQNxXmWvtVVs4Rlmgs+nyoUc+sERqguDlZyaNPMV3nIl83o/MKkxiA
- 0dvfTDXlCa8DUo4RhcdIp8DW9sSt3USwgXKtgKXxhV9y2r2bjHqel6d91ctBHQI3gtT5
- bmgnFFyTUGDT70Tad46Cqd5z9oMvpkJ+UNlxniN3TgQgpqFV80MzsEtxxybbJt85CvPl
- hT00teNRR80t6m0w0Qwu++Ut/90nRr3aaRIlSVlqsJfjOXreKzkD+vuWx3+6THuxiibW
- Vti8MmyPZPf8/T2AD2yXC76ugnJiaIKDtVs0AR4PJWjRtU8ocO+FecLVaeDR/62sh1rE
- FXMg==
+ d=konsulko.com; s=google; t=1750705813; x=1751310613; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9xOqaA2wZedSBQNHxvEHXAhgNM3ybUiOeBa1Y/SXhiY=;
+ b=ixhl+2HEcz7lOHV6keke4WfORJ3kCNvt8gsoMTDhJOPFhX8Oms5BJHe1ouRJmqrEr1
+ pEwvo0cnRCxf2cCt6mGRfyGc4YKaqdz3JV3lmHqhL+bZfTXARuCRrcdV1tXUMpPUEHHA
+ yE7+IPPfUGr2C96slhG52saKHMHHOjjcstUrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750700431; x=1751305231;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bJdbvAJTdCux1O1UCbj/ymnxkBwIwcSghIWNfEN3nPk=;
- b=W0lhXFoo1B29eZy6bui4NfDGtTI4FEWsNcVpf/QevBd2CS/W79UMDiU4DBC/NIh+nx
- IM/dB5lxr0TDL2qNm4lfdDv27hSpDM3ApWc1vSx9Qo2Ep+wxmniYR0U52v3aBWih7Vhb
- /qMu+lYsWvFIIFCXSTuV1x8vK4SO+LVmPJheTxdFW6HSxTgVDT8yG1HvVyApDrRw5eve
- ZA2yLiSfndEyAidZ3izdN3kOwUcoyg3fzOaOTpU0w1zh8R82jN9ubKIi+zJE3GOIkn+z
- MbWErvytIpDj29uQu5bMwaMhvMBYf71I1IG7F3bZfTmksNJ0U5+wAyu/32cswZVVLU2v
- EjLg==
-X-Gm-Message-State: AOJu0YzzSo6UNpS8OoczY0PAeSVj6/OW3HlCLTwPXDc7qZaEKGVndF3I
- kk8EQ92JWBrC8mv27WnihmUwXlFznsBDnKBSmx4czHWikjTHUdzuecZg/U2g4Usb
-X-Gm-Gg: ASbGncs0Zxzpn+iTc48cahWjV/SHCSfy2V2z5jAxsYMp889bvit0iAieP0fSnI3m8Lq
- muQJaIdmMxBahUoUXi2CzGnrW3iQDQu81Fr2dLVh2GzihWc8rh3idDkeEVE3/BaVSfhlACanH0T
- vAKse7sTKWdxuN6QtKS3NzvZwlpIg3MJJiFg3dtqajHE9giVtc5K6gK6+GRbmKFnKTnbwURp6GB
- fs1jKcgccjtaPXld9vLs1R7ZzWAjHLy5OmFF5N9YeBawFGOjVz9iD+vJXYyKr7cnAYKLnw7s3R6
- zfO+Vg0Uym3Mli8DixWz9F420S2WSsHCyuNa3LQN7WUaU8gqNPbrwXtBes6STyvHDuE5Rm/c78I
- 4Idp6
-X-Google-Smtp-Source: AGHT+IF0DR1aRnz4FXcjAPjjB134nR3sguGtkEgVjxQae1n029d7I+BLgAUBRd6SoIyIYKQqoT/AYQ==
-X-Received: by 2002:a17:90b:1fcc:b0:312:e76f:5213 with SMTP id
- 98e67ed59e1d1-3159d8dbf30mr20928794a91.28.1750700430971; 
- Mon, 23 Jun 2025 10:40:30 -0700 (PDT)
-Received: from [10.22.1.180] ([67.159.246.222])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3159df8354bsm9465088a91.18.2025.06.23.10.40.28
+ d=1e100.net; s=20230601; t=1750705813; x=1751310613;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9xOqaA2wZedSBQNHxvEHXAhgNM3ybUiOeBa1Y/SXhiY=;
+ b=bETZCvpt0zXv1JWd3UqJv8qlUkmbQftD10yhm78PRr9Lk8cwjtyQmJbrlCBlYLDnJf
+ Xtg6oiX0aW1/MgYwXv1saIRqhWb08JqJp+Y9KBIQfRwxWQckweLUusIqLYkw/dYtNW2e
+ aF1/6iEEUv+NIYJqT0MeySovbJML9IgBwtLGsOqYW3Ge6jfpfg6XgMg/UwLG9t3kzL7c
+ cbGqS4NhBbtXdbmlvENrdsVqmnOAQFfK+L72sdPOdLKWzlaI80H2S2EA4WYdyLgMHYQ+
+ e7DP91QM45MCtaYPDbfPQcWcrCymkRYfPbeQzYojNTI4mvGMtP88Q9Piu7svCfr2X7BQ
+ Q5oQ==
+X-Gm-Message-State: AOJu0YySeYK+2QajL5N0rSmYT9a1kjXe8R7rn8oUBHFOwEaziqNemvh0
+ TDnLuZqkjaw6jhaomU+r4KNyc28RAQiWRu9pOjD7PA7GobbG7va8woGfdThCToWP+QzC3JIfgVu
+ 7dVW2nHM=
+X-Gm-Gg: ASbGnctIJqXHvF4zXRDq0+gHA1OQl1JaK/9H4UYWVINCqCOzm3J52Cw1hCSKiM9lVr9
+ ZjXcl9JmC1e4UYComKugOiBr71ZcEruKlrxH/aS/NKd5NLisUW0KyIVImDEIO11sJAMR97eQrC2
+ KcFb0yGyXOb01llaz4DMErAsmkPZ5mmNAGmzXpD2ObPg395Sx6IBl7FIBTFgG2g4FJnn2R/d2gx
+ xtOH+kqb9FVU7hNK/i3CQ3j9kVw52FFZiO4JWWlHoefrkfedrMs+JHskvVrKtwjfSyRVdlcZTA6
+ prllXe+6WT924MuN1iNw+FyEGddbuQZv5z8+14bPRSnI4pikwB7R8kVWQpIXzAdDj3elmaotfb5
+ jCiWtwp9D79994E8K5AKkudm7TCYdRXvzeTX/
+X-Google-Smtp-Source: AGHT+IEgs5P0bwZsaBwyXZgdShlOt1VHreNeFOPgVwVOwFx3YrzCdVQIg1n2WdlsDAoKxBy0bWvRJQ==
+X-Received: by 2002:a05:6820:2784:b0:611:6789:6cda with SMTP id
+ 006d021491bc7-61167896d1dmr7264298eaf.5.1750705813171; 
+ Mon, 23 Jun 2025 12:10:13 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73a90b1383fsm1536216a34.16.2025.06.23.12.10.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 10:40:30 -0700 (PDT)
-From: =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>
-Date: Mon, 23 Jun 2025 14:39:57 -0300
-Subject: [PATCH 4/4] board: toradex: verdin-am62p: Add fixup for critical
- trip points
+ Mon, 23 Jun 2025 12:10:12 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v2] arm: kirkwood: fix freeze on boot
+Date: Mon, 23 Jun 2025 13:10:11 -0600
+Message-ID: <20250623191011.4036434-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250623-am62p-fdt-fixup-trip-points-v1-4-12355eb6a72f@toradex.com>
-References: <20250623-am62p-fdt-fixup-trip-points-v1-0-12355eb6a72f@toradex.com>
-In-Reply-To: <20250623-am62p-fdt-fixup-trip-points-v1-0-12355eb6a72f@toradex.com>
-To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: u-boot@lists.denx.de, 
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,61 +93,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: João Paulo Gonçalves <joao.goncalves@toradex.com>
+From: Jerome Forissier <jerome.forissier@linaro.org>
 
-While TI AM62P supports up to 125°C junction temperature, Tj, for
-industrial and automotive parts, Toradex Verdin-AM62P hardware lifetime
-guarantees consider a 105°C Tj. Fixup the device tree temperature
-critical trip points to match the hardware specifications. The
-implementation ensures the architecture code will not overwrite the
-board specific changes by enabling CONFIG_OF_BOARD_SETUP_EXTENDED for
-the Verdin-AM62P.
+Commit 6fe50e395080 ("arm: asm/system.h: mrc and mcr need .arm if
+__thumb2__ is not set") is not a proper fix for the LTO link error
+mentioned in its description. It causes 32-bit arm instructions to be
+mixed with thumb instructions, which the Kirkwood SoCs do not support.
+For example, board_init_r() is mostly generated in Thumb-1 mode as
+expected since the build flags contain -mthumb -mthumb-interwork. The
+MCR instruction corresponding to writefr_extra_feature_reg() is also
+correcly emitted as a 32-bit ARM instruction (it cannot be encoded in
+Thumb-1 anyways). The problem is, the compiler inlines the MCR without
+generating the BX or BLX instruction which are needed to transition
+between the ARM and the Thumb-1 states. From the objdump output:
 
-Signed-off-by: João Paulo Gonçalves <joao.goncalves@toradex.com>
+006186a0 <board_init_r>:
+board_init_r():
+/home/jerome/work/u-boot/common/board_r.c:799
+  6186a0:       b5f0            push    {r4, r5, r6, r7, lr}
+  6186a2:       b0ab            sub     sp, #172        @ 0xac
+get_gd():
+/home/jerome/work/u-boot/./arch/arm/include/asm/global_data.h:127
+  6186a4:       464a            mov     r2, r9
+...
+/home/jerome/work/u-boot/arch/arm/mach-kirkwood/cpu.c:242
+  619aae:       9b15            ldr     r3, [sp, #84]   @ 0x54
+writefr_extra_feature_reg():
+/home/jerome/work/u-boot/./arch/arm/include/asm/arch/cpu.h:100
+  619ab0:       ee2f3f11        mcr     15, 1, r3, cr15, cr1, {0}
+                ^^^^^^^^
+                32-bit ARM instruction
+
+Further investigation is needed to understand how to fix the issue so
+that the code size is minimal for all boards. In the mean time, this
+fix disables LTO for the two problematic files (common/board_f.c and
+common/board_r.c). This makes the Kirkwood-based boards bootable again.
+The binary size is increased by 1048 bytes which is perfectly
+acceptable.
+
+Fixes: 6fe50e395080 ("arm: asm/system.h: mrc and mcr need .arm if __thumb2__ is not set")
+Reported-by: Tony Dinh <mibodhi@gmail.com>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- board/toradex/verdin-am62p/verdin-am62p.c | 8 ++++++++
- configs/verdin-am62p_a53_defconfig        | 1 +
- 2 files changed, 9 insertions(+)
+Changes in v2:
+- Guard the change with 'ifdef CONFIG_$(PHASE_)SYS_THUMB_BUILD'
+---
+ common/Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/toradex/verdin-am62p/verdin-am62p.c b/board/toradex/verdin-am62p/verdin-am62p.c
-index 8b246e9d304331047dee2073b3fc4c45eceb8ed1..43d1c9312fe309f8b12e0cb2f64447942402a14f 100644
---- a/board/toradex/verdin-am62p/verdin-am62p.c
-+++ b/board/toradex/verdin-am62p/verdin-am62p.c
-@@ -8,6 +8,7 @@
+diff --git a/common/Makefile b/common/Makefile
+index 35991562a12b..e589f3072621 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -19,6 +19,10 @@ obj-y += version.o
+ # # boards
+ obj-y += board_f.o
+ obj-y += board_r.o
++ifdef CONFIG_$(PHASE_)SYS_THUMB_BUILD
++CFLAGS_REMOVE_board_f.o := $(LTO_CFLAGS)
++CFLAGS_REMOVE_board_r.o := $(LTO_CFLAGS)
++endif
+ obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
+ obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
  
- #include <config.h>
- #include <asm/arch/hardware.h>
-+#include <asm/arch/k3-common-fdt.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <dm/uclass.h>
-@@ -97,6 +98,13 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- }
- #endif
- 
-+#if IS_ENABLED(CONFIG_OF_BOARD_SETUP_EXTENDED)
-+void ft_board_setup_ex(void *blob, struct bd_info *bd)
-+{
-+	fdt_fixup_thermal_critical_trips_k3(blob, 105);
-+}
-+#endif
-+
- static void select_dt_from_module_version(void)
- {
- 	char variant[32];
-diff --git a/configs/verdin-am62p_a53_defconfig b/configs/verdin-am62p_a53_defconfig
-index e782ad4faca78a0e7b171933461f145956cca3f0..e4a28050079b4dcce6778d1729c549d0e44e442f 100644
---- a/configs/verdin-am62p_a53_defconfig
-+++ b/configs/verdin-am62p_a53_defconfig
-@@ -37,6 +37,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
- CONFIG_BOOTSTD_FULL=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_BOOTDELAY=1
-+CONFIG_OF_BOARD_SETUP_EXTENDED=y
- CONFIG_BOOTCOMMAND="bootflow scan -b"
- CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile k3-am62p5-verdin-${variant}-${fdt_board}.dtb"
-
 -- 
 2.43.0
 
