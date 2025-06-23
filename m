@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391EDC77B7F
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08CE3C7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:51:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26D2882D60;
-	Tue, 24 Jun 2025 01:49:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E8C182EAA;
+	Tue, 24 Jun 2025 01:49:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zeqspoSq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yI9QB32W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 131AB82E20; Tue, 24 Jun 2025 01:49:44 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 4FBE182E5A; Tue, 24 Jun 2025 01:49:45 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 039E482E52
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:49:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE7B382E9F
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:49:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-45365b1a897so24211605e9.0
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:49:40 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-45348bff79fso52226515e9.2
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:49:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750722580; x=1751327380; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750722582; x=1751327382; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=skkR3KYf0Mn1boap+WVEXnVAPREYAb9bDkhjy9EPaGc=;
- b=zeqspoSq3KaweoXSAuG0eyZapvTqQ5QpfVh9AxqPEUiedMjZEhHgiWJCw3ZmdCacJP
- q+zUpdIAP5Y54cVuBajK3Aunq+o0aXiM9Bw1e3tYSNExYWNTvcy4xRBPiP028rQNLvHU
- IVoH0RVlXQBTSHNsyVMqrG3sFW2qs+L7evXbD7dWdkmq+IwCAmX9kV6gytahJUOdqscN
- NeB0oLq0D3yRxIYDSb/SbC9vkS36v1+hevaxe9pX64Om0bzQzCzILmBvFRRvfH7yfVDA
- ubJVnFPsloEKNiFvFkZiUiRD5LtrHNXEwRcRnL/DQafWlIS2PNw89M5XtCWTTymvjRJr
- mSog==
+ bh=wQ83s0WW+Z5OpsdExE0EF7Pa3hLkcW5X8rgOtcglJqU=;
+ b=yI9QB32WJHDzOaQxAXx9p2JjnobFR6uUBSNeI1SjYhTUjgs+mM5zn8TXEKrdDI4slW
+ iUDVzi3nQT7zkIxi3is300pKIxf3BZ95rPko2BpKe7MI5p5eoKIzsHlqwHf3IMwv3XgY
+ iUZLdy6lb2qizJtnEqxZHgdWhEcroZ+jbFOLsWuL1YPf6wxZ7Zrh0U+sZG8evVMbQI2f
+ eJUG8ilG4q+mRJ2mBbT5mm3LsTqCi/lACLodnxOCrqukWnjOWizV0+nFihp+v7Zq5fJB
+ hbPllWCisZOkAkHKsk7qdfhuPJIKBI1avpDQTcKNa6ET8uTh4H4optRbO3ouTjGHKAjW
+ EjWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750722580; x=1751327380;
+ d=1e100.net; s=20230601; t=1750722582; x=1751327382;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=skkR3KYf0Mn1boap+WVEXnVAPREYAb9bDkhjy9EPaGc=;
- b=b0IIRPPBxE7SotwmjZY8aUVn62sQJKsCMyemWHMDiypLoEdHnU1P+F+nzIAaasj/yb
- OTyldjMtCEamA+JRiR31TalfCRsPoJqQS3ZxVlMOJQt50voeu+KNt6tk9YH3CECIAxHe
- rTF5CCVV/+io1OcGSJccWZOmEP2K+KD8a2VPDQc2Wtd8Bk374bdggqgWBKRKM900RBHt
- ov3r/yQogMAPvMztneugvitXUt81mmNxZAqV1j/zTQuvMKSBrkmKjz15THPADfoJtVc8
- HrcuL4R6lRB3UTG3yr6nRJgrOEGxHfrwgcpkmW6rw44MmSzuphJcYsv/ngZtjmLoggTt
- BHIg==
+ bh=wQ83s0WW+Z5OpsdExE0EF7Pa3hLkcW5X8rgOtcglJqU=;
+ b=l1TmWv3lxLClsy3qcKSpfVMrd1LqIrQCGhIsf2akY0gs1tl1EFSNDxVzCcmChKqi7y
+ 6d3pchOYZunqoprLrelUdpotOb3Gvr8VFcFFUbsw5ncheNILK67p1kbuwSuCskzGObM8
+ oj2YfKJvNTmy7LlGYxvQRa4FSZSemZZleS4yQkVb2tHMJKnrW2v0gmFo8lZeXO2rZ5oz
+ RUBqORkJYtBM6quaNxWgqDbdSNIt2UBOwwK2OEuIybcxyuLzpm1k9dT6P/SknJwNMZx8
+ Q0AAD6CdRZvmq1tmLOxGKbDzGUXtDtSg9f7YaUkfKf7Nm+dElyF1qW71DLN/1g8V6KxP
+ YLMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJhW7TVDP+YZ4G2eYljm1atZuggZjzvyqh/boOAj1L5yU3YdaRJCcxh/DlswbS8cA72teP2sI=@lists.denx.de
-X-Gm-Message-State: AOJu0YznOaZU9MmipwGnDRpbQGfL01SVgfttEiusTTnDiDZ9lfAvsRvz
- TIApQHHghYyC4cGQWX8000b4z1MNBzahWHvT3oSG1AclrVKu8RnMfEcyON5CVYHyOmM=
-X-Gm-Gg: ASbGnctGZ1DD8oco1+s2jZM9yAPXsx7Gzi9CfemlGqE7AJ9MuK3bgYq8KVEORkbTzoe
- CoXd0UxyCB5b8cqOgUPg6gxWZ85eOTsDbW+Fe+CsgcmXCytntBNH4KLbyAnFxyrVW3OW2miBbuB
- epTw5ar7smPzwqOAGYNhQ2oo5AYip+pBYEDQbNWMw47AqcXrReYg/YUNu8wA03fPiKTEQ0VlioU
- rCN7gS+T30PjT2PoZEyI1Auiv7pwEwmeVxZNOk8K0wZ7W4RBm/nwyq/GMESGdts5IQiZzzZ6n9Q
- 6FT3jJ5FNz3fWIwUHS5WjnbJXEIy7ygzqk8w9Njo2CqDb2A7CnkamLQhpznhN7ZaOkrAQLqPzbz
- 2sa0iCnGoHao=
-X-Google-Smtp-Source: AGHT+IHYkcpkmJL/1s03RjRLTfXxNTrpECUZhJDK1QqD8cEK9nmEaGuvikPdkG91WT+jS3zo98p6BA==
-X-Received: by 2002:a05:600c:1da0:b0:44a:775d:b5e8 with SMTP id
- 5b1f17b1804b1-453653a2ee4mr137407685e9.1.1750722580426; 
- Mon, 23 Jun 2025 16:49:40 -0700 (PDT)
+ AJvYcCVqzXqOX5DSDl5Lv5a0BAAiyBYGV1HsgI5GqdtG1jcuLEyXcZ9VtELxtKitc/ybvyyf/y1OYsE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUZnIogsZaL5MYggIDxGw2oNC2N+TKPrYqaMeguS5Vzht3TmGk
+ uLogD33xRMp8iWXWSvxE4hZBAeF7kxH/B2X1lM3+RJ9Gnw1hMSFPtjS3dusMHf8w38w=
+X-Gm-Gg: ASbGncvSs/yGPn9f0JDpwMEirk2HUdN1jGCVBiRR81MQ8S8L05zATnLt76pMXi8EYqA
+ szA1A9uPevefKwwnzOhzeJ2SUFoUFTlx+4hpzGQPc0U3xW+tLAgdQSP5nI8HOCd4m/G5DUOmPgE
+ 9c4o4yP8mmgppoTeo9HHpq6nwjnyDLMkELMxGeZH6sm8Dq3g889N6tBawb1YQrbC675XyZXYUqR
+ FuCYbsVndn2eyj/nMXoxH8tswAMJF5Svr/LaGEFM3Vz2vGd6osUZGGReux3QGlLyvmsM7mW1R6q
+ B+iXzp33zjfbcbBRDHs4VaL4rJnwWTb+wa1n0MJ+iRW5/y6smkfCKWMKehJbIv5kCqnFoJCJPZs
+ fcfnt3B3+dME=
+X-Google-Smtp-Source: AGHT+IH12GEIkILGKIAacwjDUYyvVgbJtnHD2QKnFisRGLRCSuDZGctDIGuP23SGqa7ykFJNnHXe3A==
+X-Received: by 2002:a05:6000:2c0d:b0:3a4:ef70:e0e1 with SMTP id
+ ffacd0b85a97d-3a6d13321d3mr12316644f8f.55.1750722582175; 
+ Mon, 23 Jun 2025 16:49:42 -0700 (PDT)
 Received: from toyger.tail248178.ts.net ([213.240.182.16])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e7fb5716sm432284f8f.0.2025.06.23.16.49.39
+ ffacd0b85a97d-3a6e7fb5716sm432284f8f.0.2025.06.23.16.49.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 16:49:39 -0700 (PDT)
+ Mon, 23 Jun 2025 16:49:41 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Sumit Garg <sumit.garg@kernel.org>
-Cc: neil.armstrong@linaro.org, trini@konsulko.com, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-In-Reply-To: <20250508103238.230608-1-sumit.garg@kernel.org>
-References: <20250508103238.230608-1-sumit.garg@kernel.org>
-Subject: Re: [PATCH] qcom_defconfig: Enable AUTOBOOT_KEYED support
-Message-Id: <175072257929.128390.12889749777051999311.b4-ty@linaro.org>
-Date: Tue, 24 Jun 2025 01:49:39 +0200
+To: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
+ lukma@denx.de, seanga2@gmail.com, ilias.apalodimas@linaro.org, 
+ me@samcday.com, christopher.obbard@linaro.org, quic_varada@quicinc.com, 
+ sughosh.ganu@linaro.org, sjg@chromium.org, lehmanju@devpi.de, 
+ bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Balaji Selvanathan <quic_bselvana@quicinc.com>
+In-Reply-To: <20250529154931.1879976-1-quic_bselvana@quicinc.com>
+References: <20250529154931.1879976-1-quic_bselvana@quicinc.com>
+Subject: Re: [PATCH v4 0/6] Introduce support for QCS8300 SoC based IQ8
+ Series Platform
+Message-Id: <175072258049.128390.12186985473033447273.b4-ty@linaro.org>
+Date: Tue, 24 Jun 2025 01:49:40 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,21 +107,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 08 May 2025 16:02:38 +0530, Sumit Garg wrote:
-> When debug serial port isn't connected, it is at least reported on RB1
-> that autoboot gets interrupted. It is probably due to random characters
-> on the UART RX line when disconnected. Lets try to fix this inconsistent
-> behaviour via enabling AUTOBOOT_KEYED such that the autoboot gets
-> interrupted only when the <SPACE> key gets pressed.
+On Thu, 29 May 2025 21:19:25 +0530, Balaji Selvanathan wrote:
+> These patches introduce the initial support code needed
+> for the Qualcomm Dragonwing QCS8300 SoC based IQ8 Series Platform.
+> For information on supported boards and build instructions please
+> refer to doc/board/qualcomm/dragonwing.rst file.
 > 
-> Reviewed-by:
+> Please see [1] for SoC related details
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] qcom_defconfig: Enable AUTOBOOT_KEYED support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/78f177fcc2ed
+[1/6] doc: board: qualcomm: document Dragonwing board building/flashing
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/3400b06c9bb5
+[2/6] dts: qcs8300-ride-u-boot.dtsi: Add memory entry to bootup
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d4efc04d283d
+[3/6] clk/qcom: qcs8300: Add GCC clock driver for QCS8300
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/8c8fbf390864
+[4/6] phy: qcom: Enable QMP UFS PHY driver for QCS8300
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/21f2b5eda800
+[5/6] qcom_defconfig: Enable QCS8300 clock driver
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/7c24a00b7f7f
+[6/6] configs: add qcom_qcs8300_defconfig
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/0670da70b9a5
 
 Best regards,
 -- 
