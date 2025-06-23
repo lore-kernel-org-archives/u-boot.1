@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4998AC7115B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:50:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6713C7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:50:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AFD082E2D;
-	Tue, 24 Jun 2025 01:49:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9AF4582E66;
+	Tue, 24 Jun 2025 01:49:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pijHvd+M";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wzJOk4yF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6620182E20; Tue, 24 Jun 2025 01:49:35 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id AD7CD82E2D; Tue, 24 Jun 2025 01:49:37 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07B7882E26
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:49:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F01882E50
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:49:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3a4f379662cso3880808f8f.0
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:49:32 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-453647147c6so37466905e9.2
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:49:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750722572; x=1751327372; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1750722574; x=1751327374; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=stneC04+AcmKp9W8qYWwra4zIkb+mOIOlMeB0zxs9hY=;
- b=pijHvd+M8cda4utob6eut/igx9bCK6HirZ9zXaW4bSPSsyRZQhg9qzzAQUDKBhfM2J
- RLVH08Ft9SwG5RIKPnAcvfl4dwc3fjpQEOaOLX8k4UXfNXVC4KROzqY5UOtGjf6g4bwk
- In329wskCMNEt/sosBINM4Lo+DTv9+9NRDmni+6TybYF0YQEWyL1NoVj783Ng8jm3DbV
- kucViCp+/K7ixuZ28J8kesGKY81lxWqWYdhbXeGp/TfXLiG6IYBN1EJH49Dy/vx9hr0u
- Mog2pOj03htiaXBD5Ru+dsbZI39AAp8/gTQAmXaLXny489YFo9nuCI62tVfA8USux2D3
- 5Gkg==
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=RE8xQt5mq0aXXJBlGBzuN6t+T/JKcnxpoiO2fkOMrjE=;
+ b=wzJOk4yFEI/mpbJokeWYN0wuXBVvl3uUHb3iRELXDULLjcjac8WnU6jU/iq9RdYOMd
+ VkhSVSFU18GixQ9zvUKBL07IUbgINLKWjRLIKGP3QeRfS+A2ZVhGRFmuRlNg6MTU2LTK
+ LWsmd4+BMuIwGw6Hssmt1YVBGrCgFIYVnknXs5eOtIYtH86muuqSy8sEdAqEMbBfmVtm
+ 06Ry5wxcKjI8SeR9ydfVYHFhpRBJr93OoJjvS4z+TUS7edPW5oXwBeITRWF4kISsG5tS
+ eoPleeYrZ3vAnH12XuiDjO1YOcwaD6NyOtB1i3FzBKtJ1vvqkIIjEatlwPvCahrwlY4+
+ KXrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750722572; x=1751327372;
+ d=1e100.net; s=20230601; t=1750722574; x=1751327374;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=stneC04+AcmKp9W8qYWwra4zIkb+mOIOlMeB0zxs9hY=;
- b=P6ff00aPJeJ/DoTFXAEaILgYUVvcY7jAldl3Ig4AT9tkdaKzruZ1Qng1YOS2LL5U+9
- ze1RqDZTz3ydzww/Wx/cWBVq2AUXD+8ofNIgbmK8VzMODPMvOUnuVGUPG/T6fQwpLMJY
- 7hZJhp4QQA02LuHSiUGKKsax0tgO3CudCOwsDoKZ8RDSUmp5kDGtQLO9PpKdJELrxtyF
- Wt0iLaUYn4lwFQBIohSkd08xafYir+NT14fNNc1uvAkWV2qE2Rz6NXdwjLp8jE0RzW65
- Q38DBZYreUR4kdIdlMiz/7aQmXEJ8Vn9W2ZrzEVEoiM0bgJchJKDl12pTyff64rEm/Kt
- QvrQ==
-X-Gm-Message-State: AOJu0Yx476YedZOnyUgXaAe7GvCqFdKuRQ0/A+N/BQQIvMlX+RZC1/Zt
- 9Jlwgz4tbOD9YY7IHwq0TCfI/qHwF7mZeHjKHWqYa1H1DcnHMRnAwn8JzjdtEScD4DxjPl71kck
- pSop7
-X-Gm-Gg: ASbGnctqUpWsLdMu8IIdSgNR0mrM0uj2sjReZ49Q79lKTujbZxXZq9Lk2I3byhKn4kP
- k12cW/xbUgAyb20viInuE8UXotJnltfATRyLtJfEvDK/q75GiYvn3NoTs4n1q8Bmm1YRrTVYVRX
- pu7+JjWVx3EKxikw8dFsCRWJ7jFYJjfcugzkj4rxgYW5NlyuMk9aO911H3aJvZUI/wynT/nFpdU
- UQI3bRBh90DdES3KxT4bVmjEEPi6MBB6tBQ5gRPPMtYxlO/VjCP1BIxp08caaMTh34gOS/OAB/R
- e1wHejYJi3tjZ/JlBJv1IeoOYodIAn37BewIRLdD8klzGkzdj71u+hqcVOaB96lD9yeHNR0LBtl
- W/gtRGdKiIXD6QoTKHBpTTg==
-X-Google-Smtp-Source: AGHT+IHSg92T5/+ieg2WXQsZNr+ykmh4lXTl+sTfnzLlr0upqJ31SVEhSzSh7a51sIpFhw2jbmnEww==
-X-Received: by 2002:a05:6000:460f:b0:3a4:cfbf:519b with SMTP id
- ffacd0b85a97d-3a6d12e5e60mr10291075f8f.44.1750722572049; 
- Mon, 23 Jun 2025 16:49:32 -0700 (PDT)
+ bh=RE8xQt5mq0aXXJBlGBzuN6t+T/JKcnxpoiO2fkOMrjE=;
+ b=wklgTKGbEun5xduyDlbVSjr4hEVFOU847ZWLBftapw43YvqHNxqboHgnZ+3IVF+/s5
+ dH4O+vyEC3t7pCIsgN5WMhA40++e6shDCBR8BSd4UayDKsxC6Y59WtDQG1qipV+mP5Jv
+ WprnzSF25IFpJJoNCbpDgsnn45k/dGOmUvzt4AUKeop38er3+lCk0keCV0iHtwInvCQJ
+ 8RuKqR6DoRRSYY1ywWk7DgYWKOyrIvlr2ELGGHO0wcj4/h4fN6OqdJo7AvoyT+/69az0
+ Qhqa7sVXKhBPBMq1JhCglOa5B+WZRn5WdYZlq7Y/Z16NoZzFB0D62u2lip4nSh7+bkp8
+ 6ApQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyZVBJRuIDNCG5beLFVgtVK6mahXVjZ60xkykd8sEvuD7Z2jyDEZzp25GOS5aLTcfpS5BVTaY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWoip0LAsomRq8VlJLAcnzdg9ZzAo9q+wRWbF78cCto1qXZli6
+ 5mLBAc2kZ00LsIluKOm7kfBPL1SJbExGHekxS3aGIv77Z1bwkR4Seo+wF3QKmv9yyBM=
+X-Gm-Gg: ASbGncuCF0feASKqGyRIVoE2RHrcfHu3WnFvdefi+CiwEEdalIIXcfWCu7wlHG+jOMZ
+ IP5uw3EIGr1wMtnUIW8TaIeFdLdfhef7M7ri/58+5NWNLSNgbxxOOFDAjwfTfFli1EHV+jN7a/G
+ p455Gpr58GHVHglXCcvdWSNaJXq122DdfJMTHAO97cZbSz+DPFt98VImNO557VbIjkwp0o7MRiB
+ TJxbkJW3zYZzT4pRw75wSAr2I7BZv3PkI380L5yD1sI7Kz1w+xMLqoICVBzt0YSDafWxG2Tb3Dv
+ EkBKSCw6uzgpqYOH6uSZjXq2BLv9xUNxre/cgnQzipzLLVNSCJaazORUfD1E3SDpR8GLksM4DX7
+ bsODuQ9okTFk=
+X-Google-Smtp-Source: AGHT+IGZjCqPn5z14sEYy2WJ/39nYMBDFGPqA+TTZlA6AYtntPP2dzWW+RvaqNbkfkBS6o0xoioE7Q==
+X-Received: by 2002:a05:600c:1ca0:b0:43d:745a:5a50 with SMTP id
+ 5b1f17b1804b1-453658ba342mr116363795e9.19.1750722573713; 
+ Mon, 23 Jun 2025 16:49:33 -0700 (PDT)
 Received: from toyger.tail248178.ts.net ([213.240.182.16])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e7fb5716sm432284f8f.0.2025.06.23.16.49.29
+ ffacd0b85a97d-3a6e7fb5716sm432284f8f.0.2025.06.23.16.49.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 16:49:31 -0700 (PDT)
+ Mon, 23 Jun 2025 16:49:32 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Stefan Roese <sr@denx.de>, Paul Sajna <hello@paulsajna.com>
-Cc: u-boot-qcom@groups.io, Sam Day <me@samcday.com>
-In-Reply-To: <20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com>
-References: <20250422-b4-qcom-wdt-v3-1-730d4d5a858d@paulsajna.com>
-Subject: Re: [PATCH v3] watchdog: qcom: introduce qcom-wdt driver
-Message-Id: <175072256954.128390.11011518070393346807.b4-ty@linaro.org>
-Date: Tue, 24 Jun 2025 01:49:29 +0200
+To: sr@denx.de, trini@konsulko.com, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, sjg@chromium.org, utsav.agarwal@analog.com, 
+ ian.roberts@timesys.com, hello@paulsajna.com, hs@denx.de, 
+ bastien.curutchet@bootlin.com, nathan.morrison@timesys.com, ravi@prevas.dk, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20250527124926.128413-1-balaji.selvanathan@oss.qualcomm.com>
+References: <20250527124926.128413-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v1] drivers: watchdog: qcom: Add timeout configuration
+ support in watchdog
+Message-Id: <175072257216.128390.15109851083936268304.b4-ty@linaro.org>
+Date: Tue, 24 Jun 2025 01:49:32 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,18 +105,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 23 Apr 2025 02:19:39 +0000, Paul Sajna wrote:
-> Some Qualcomm device vendors decide to turn the watchdog on in the
-> bootloader, resulting in the device being reset if it isn't petted every
-> ~30 seconds. Introduce a driver to keep the watchdog happy and prevent this
-> annoying behaviour.
+On Tue, 27 May 2025 18:19:26 +0530, Balaji Selvanathan wrote:
+> This patch enhances the Qualcomm watchdog driver by introducing
+> support for dynamic timeout configuration. Specifically:
 > 
+> - Calculates and sets the bark and bite timeout values based on
+>   the clock rate and the requested timeout in milliseconds.
+> - Adds retrieval of the watchdog clock rate during probe using
+>   the common clock framework.
+> - Adds a default timeout value for ARCH_SNAPDRAGON
+>   in WATCHDOG_TIMEOUT_MSECS.
 > 
+> [...]
 
 Applied, thanks!
 
-[1/1] watchdog: qcom: introduce qcom-wdt driver
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/530764de9fc8
+[1/1] drivers: watchdog: qcom: Add timeout configuration support in watchdog
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/35811a7b0d68
 
 Best regards,
 -- 
