@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94120C77B7C
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:13:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A5CC77B7C
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:13:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FF2B82D83;
+	by phobos.denx.de (Postfix) with ESMTP id A65BA82E17;
 	Mon, 23 Jun 2025 21:13:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O7LriqY/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RFS2wnS0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4482E8210D; Mon, 23 Jun 2025 20:13:19 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 7329782D2B; Mon, 23 Jun 2025 20:13:21 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1080D81E13
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 20:13:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64CA981E13
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 20:13:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-60707b740a6so6818363a12.0
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 11:13:17 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-adb4e36904bso885648466b.1
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 11:13:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750702396; x=1751307196; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1750702399; x=1751307199; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pKcTuaBfQXIC3qnu7z+38MQsObmk33Da07EvYI7u0QI=;
- b=O7LriqY/RzmWFnTarlfWzTBZOafB3NsNqrVw+BVTfMhJ52VoMWY5eQwNX27nIqj01w
- 5xPzBfeCzGQcv/XxyXNmud/x/VFBIYouGUpLBOq28GT+lL60L7BKfoQ8Ah03uCU8WzLN
- udi2warga8rQZ/OuYaaMoudJljcONQjC9A3O1ucWvrq0mVtVKOGaHyHF8EyCuOYSxW54
- SEXBs+itaSDJoZvGQoJmuPii6L/OEPVsWSf8Eas9bIEHWaraPo5a2PBU1RobY4c+1iLM
- 8XvmvsBiP1kSm67dxchM82sV4LEgVrk12aDvdNqVVEp2qLJnUCHiC6RxADKFaRBkAVIK
- i8ew==
+ bh=Ffs+MXxUZjgnk/ck47pSmsi6Sn8E0DhLileVNzhuA6c=;
+ b=RFS2wnS0dHmgcWXi4RRDY0CQG4KTNK2dnUVsD46SzM1drCdBZCsUEAUunjFCZ8pZBL
+ EG3AU42iQl1xNcfdyhpnU4jIPakpQI3H8w9gg8Dbj6DGF75/8bznvNgZwC/j2x5vqqco
+ GGstG5oaMLLp7eBdlsJB7K6m/nTDatNg9SwjheQloogQaSvdNKiumEKB5fX25Jf8Pipj
+ Lt2/bgCytI2n/UmTUPo5r4suXvmL4sQxZQbGSu+ao28ICOh1tJVcbWWssgbArXz9Y8ek
+ 5R2kKbhW2L/ZGOfjcjVG3bqWauUTQE/C3Yc8vUGhpyD81dGTnRl3AuadiIyBB+shsuC3
+ KhXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750702396; x=1751307196;
+ d=1e100.net; s=20230601; t=1750702399; x=1751307199;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pKcTuaBfQXIC3qnu7z+38MQsObmk33Da07EvYI7u0QI=;
- b=NSjA7kUXnk+kQ5IGbWQqmcL0H5zFOmZbrs6DtUWrKrSs3zdDsI/71b8mNSnotZSOMY
- 4uGUT/1DF0xBK+/RFAmSDpZuCoi2yOEgQgAPA7Ifcux1dTgETTOZtUWlY1+hXcRrEsLb
- VJGgZEQBQ9aUK76iQXZLWCt0gPPB8mq/uf24xhTxxwvGNU/S7HvCUinEghPZCYYMM4tn
- /Wkg7Bp3w+eP+snnfPmiRXXy3QEpBIGbZ90r3Vrnq+6ZzgX92QBgzqhQvNla/Qq/jqWY
- 3z7vbU0+6RAZLlLaFOAUlu6Kh3RIyLJJptA0vxWqy1I86KlTnQoB3fbUNm0XeE4bIJjI
- IV4w==
-X-Gm-Message-State: AOJu0YyGD4cK/CZ7HMJBYtFrhNswvcLBm0gOWZp7HNZNZpCUI1nAfBh1
- +U0b72GjnlxTKA0g3+d7TAzvjstcf0KYmJUdL9KbWAhpL03ZHK7iYmkIdoD6kw==
-X-Gm-Gg: ASbGnctsA/mCF8tXPxW/DpQGt1CD0VnhmGbxiPLeBPW9FH4S7b4iquznvlwMl2vFFMJ
- psZUE3A7UkT2vk8CzT8BeroPpw3kHqGe5cOn3N0xAOMShYLzHobHdafhi9opIW1DSxUIkLfnL9X
- xRGPzRRrdpdzRomr0lbjBXlzehWPGRrWjmj/qstdJURxrYJqAjV7upK6cz5S4zmYYcIvxMQTC6c
- sNvwFfnYZSgKEm/stBQ0hGUwwyJQy293E73TZLB+NaTXGSTXDBZrQnrV90VYb9l15UxxjKvkfO1
- pnQjFzmOxGLUVP4jlwoGVFMz6hAt1RzILXThf0MnAY2cXdHiJ7UbUhWOQmxyPPSmn7r66LwJ/PE
- =
-X-Google-Smtp-Source: AGHT+IE5DgX4qn6SQRvhRzFb8gwb3VR4k9+1iIAmpH1LrFgPzyg53ZvcrrWxhlsWpqlCuiv6PraAoA==
-X-Received: by 2002:a17:907:7e8d:b0:ad8:9b5d:2c1f with SMTP id
- a640c23a62f3a-ae057ca830cmr1316583066b.50.1750702395967; 
- Mon, 23 Jun 2025 11:13:15 -0700 (PDT)
+ bh=Ffs+MXxUZjgnk/ck47pSmsi6Sn8E0DhLileVNzhuA6c=;
+ b=EtD4TcAr4KWb9FXn/i0H6rBiWF2EdC0oxpz/j1HKl/tF97gIxrunHXUrM7shonstfi
+ BSGz8jZvyHd4tYetRuAGMGQ7K3wYnm7OA06i/KK7RVbfoKrU5UeHHKeeT+rEB7UWSsAG
+ 5RR9gXMzxxlXt46kqRwHD3hkgEstOQkdLfiYdxhovwqtezBuLUFvw0mqgnv7DpPFGtLh
+ 8ONK1DZ7A0QksANtGvyURq1Z+IjI7h2SM0N7//a+axQEtCp0PVLwN8t0DpsppxwpRck8
+ E3AcMncevlAoHiSpk4mjGdLig5mai7MJlNEx18vtXuO8naT5FpQYj5XaqEO2taTgQL4G
+ EeGw==
+X-Gm-Message-State: AOJu0YxtOnhWYYa8HhEq06Im1LETGbnpE6Y+aP1NvrNI9WrxZV0i+ko+
+ G9C17c99MMnTR71bKhnnTOdVNPxKGrCQHL190wkQwMUxg9Xy7BvZRUc3X4h29g==
+X-Gm-Gg: ASbGnctDGVwnAC2TB40zOt0lO84n7fHz93MBg4tdB8GgZcCazzVJxHCDFXmLL6VMyAJ
+ fU+uS+ZoUc6YyaPBX8KM6Foh/yFMptdeo8JDPEHTjd86/V7GDiEXugYq5dalxDVFlsNuIQu6wZa
+ N5qTgCIxTZtpm+cw7QQ4zyb0YyFSE2viJG8BGP1unxeD6bWB6jIaRXn7EaHZjvfPqt13eMRXP2K
+ sA6FBvRCpIMkdLxgHGKVKg4PFXEbzCxkFFWrJuZgP9VVeVmiw51hAHPPKd5MbOG/B7rk3Vvu3+U
+ LlrP6LNoanDGpHBOKLylAd/A/IPP4+OkRFTFvocvdwqS68omFQBmJUdT6Wu97Q+7
+X-Google-Smtp-Source: AGHT+IED0iBw6J8YXEje/44/3N2JN35ikcOAbA0FqlyaUWQwqZBA1j2zdVVcyT8j8e5igGCcTQ7jkA==
+X-Received: by 2002:a17:906:7956:b0:ade:3559:8a3e with SMTP id
+ a640c23a62f3a-ae057fa417emr1345416766b.60.1750702398512; 
+ Mon, 23 Jun 2025 11:13:18 -0700 (PDT)
 Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae0a18d9887sm59955366b.11.2025.06.23.11.13.15
+ a640c23a62f3a-ae0a18d9887sm59955366b.11.2025.06.23.11.13.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 11:13:15 -0700 (PDT)
+ Mon, 23 Jun 2025 11:13:18 -0700 (PDT)
 From: vtpieter@gmail.com
-To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
 Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v2 1/3] Improve user feedback in case of FPGA bitstream load
- failure
-Date: Mon, 23 Jun 2025 20:12:17 +0200
-Message-ID: <20250623181222.1539194-2-vtpieter@gmail.com>
+Subject: [PATCH v2 2/3] Amend fpga Kconfig and add a new sandbox_fpga_defconfig
+Date: Mon, 23 Jun 2025 20:12:18 +0200
+Message-ID: <20250623181222.1539194-3-vtpieter@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250623181222.1539194-1-vtpieter@gmail.com>
 References: <20250623181222.1539194-1-vtpieter@gmail.com>
@@ -102,293 +100,429 @@ X-Virus-Status: Clean
 
 From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-In cmd/fpga.c, change some `debug` calls to `log_err` for important
-user feedback and use CMD_RET_FAILURE in favor of CMD_RET_USAGE due to
-its long output which hides the actual, useful return message. Change
-the remaining `debug` calls to `log_debug`. Remove all 'fpga:' and
-__func__ strings as `log_*` has this covered.
+All but the FPGA_SOCFPGA configurations are enabled because
+drivers/fpga/socfpga.c requires ARCH_SOCFPGA set for the *manager
+include macros; amend Kconfig with that dependency.
 
-For `do_fpga_loads`, move up the `do_fpga_check_params` call for more
-consistent command output; use a constant instead of multiple '5' use.
-
-In drivers/fpga/zynq*.c, change 'up to' to 'above' which corrects this
-confusing/wrong statement.
+Add a new defconfig to facilitate compiler checks on most FPGA-related
+sources.
 
 Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- cmd/fpga.c              | 99 +++++++++++++++++++++--------------------
- drivers/fpga/zynqmppl.c |  4 +-
- drivers/fpga/zynqpl.c   |  4 +-
- 3 files changed, 54 insertions(+), 53 deletions(-)
+ configs/sandbox_fpga_defconfig | 391 +++++++++++++++++++++++++++++++++
+ drivers/fpga/Kconfig           |   1 +
+ 2 files changed, 392 insertions(+)
+ create mode 100644 configs/sandbox_fpga_defconfig
 
-diff --git a/cmd/fpga.c b/cmd/fpga.c
-index 9dc7b63db5d..9cc51f04698 100644
---- a/cmd/fpga.c
-+++ b/cmd/fpga.c
-@@ -28,7 +28,7 @@ static long do_fpga_get_device(char *arg)
- 	if (dev == FPGA_INVALID_DEVICE && arg)
- 		dev = simple_strtol(arg, NULL, 16);
+diff --git a/configs/sandbox_fpga_defconfig b/configs/sandbox_fpga_defconfig
+new file mode 100644
+index 00000000000..a64e208ad89
+--- /dev/null
++++ b/configs/sandbox_fpga_defconfig
+@@ -0,0 +1,391 @@
++CONFIG_TEXT_BASE=0
++CONFIG_SYS_MALLOC_LEN=0x6000000
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_ENV_SIZE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="sandbox"
++CONFIG_DM_RESET=y
++CONFIG_SYS_LOAD_ADDR=0x0
++CONFIG_PRE_CON_BUF_ADDR=0xf0000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_SYS_MEMTEST_START=0x00100000
++CONFIG_SYS_MEMTEST_END=0x00101000
++CONFIG_EFI_SECURE_BOOT=y
++CONFIG_EFI_RT_VOLATILE_STORE=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_EFI_CAPSULE_AUTHENTICATE=y
++CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
++CONFIG_BUTTON_CMD=y
++CONFIG_FIT=y
++CONFIG_FIT_RSASSA_PSS=y
++CONFIG_FIT_CIPHER=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_BOOTMETH_ANDROID=y
++CONFIG_UPL=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_MEASURED_BOOT=y
++CONFIG_BOOTSTAGE=y
++CONFIG_BOOTSTAGE_REPORT=y
++CONFIG_BOOTSTAGE_FDT=y
++CONFIG_BOOTSTAGE_STASH=y
++CONFIG_BOOTSTAGE_STASH_SIZE=0x4096
++CONFIG_AUTOBOOT_KEYED=y
++CONFIG_AUTOBOOT_PROMPT="Enter password \"a\" in %d seconds to stop autoboot\n"
++CONFIG_AUTOBOOT_ENCRYPTION=y
++CONFIG_AUTOBOOT_SHA256_FALLBACK=y
++CONFIG_AUTOBOOT_NEVER_TIMEOUT=y
++CONFIG_AUTOBOOT_STOP_STR_ENABLE=y
++CONFIG_AUTOBOOT_STOP_STR_CRYPT="$5$rounds=640000$HrpE65IkB8CM5nCL$BKT3QdF98Bo8fJpTr9tjZLZQyzqPASBY20xuK5Rent9"
++CONFIG_IMAGE_PRE_LOAD=y
++CONFIG_IMAGE_PRE_LOAD_SIG=y
++CONFIG_CEDIT=y
++CONFIG_CONSOLE_RECORD=y
++CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
++CONFIG_PRE_CONSOLE_BUFFER=y
++CONFIG_LOG=y
++CONFIG_LOG_MAX_LEVEL=9
++CONFIG_LOG_DEFAULT_LEVEL=6
++CONFIG_LOGF_FUNC=y
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_STACKPROTECTOR=y
++CONFIG_ANDROID_AB=y
++CONFIG_CMD_CPU=y
++CONFIG_CMD_UFETCH=y
++CONFIG_CMD_LICENSE=y
++CONFIG_CMD_SMBIOS=y
++CONFIG_CMD_BOOTM_PRE_LOAD=y
++CONFIG_CMD_BOOTZ=y
++CONFIG_BOOTM_OPENRTOS=y
++CONFIG_BOOTM_OSE=y
++CONFIG_CMD_BOOTEFI_HELLO=y
++CONFIG_CMD_BOOTMENU=y
++CONFIG_CMD_ABOOTIMG=y
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_GREPENV=y
++CONFIG_CMD_ERASEENV=y
++CONFIG_CMD_ENV_CALLBACK=y
++CONFIG_CMD_ENV_FLAGS=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_NVEDIT_INFO=y
++CONFIG_CMD_NVEDIT_LOAD=y
++CONFIG_CMD_NVEDIT_SELECT=y
++CONFIG_LOOPW=y
++CONFIG_CMD_MD5SUM=y
++CONFIG_CMD_MEM_SEARCH=y
++CONFIG_CMD_MX_CYCLIC=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DEMO=y
++CONFIG_CMD_FPGA_LOADP=y
++CONFIG_CMD_FPGA_LOADBP=y
++CONFIG_CMD_FPGA_LOADFS=y
++CONFIG_CMD_FPGA_LOADMK=y
++CONFIG_CMD_FPGA_LOAD_SECURE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPIO_READ=y
++CONFIG_CMD_PWM=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_GPT_RENAME=y
++CONFIG_CMD_IDE=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_LOADM=y
++CONFIG_CMD_LSBLK=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_MUX=y
++CONFIG_CMD_OSD=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_PCI_MPS=y
++CONFIG_CMD_READ=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_TEMPERATURE=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_RKMTD=y
++CONFIG_CMD_WDT=y
++CONFIG_CMD_WRITE=y
++CONFIG_CMD_AXI=y
++CONFIG_CMD_CAT=y
++CONFIG_CMD_SETEXPR_FMT=y
++CONFIG_CMD_XXD=y
++CONFIG_CMD_DHCP6=y
++CONFIG_BOOTP_DNS2=y
++CONFIG_CMD_PCAP=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_TFTPSRV=y
++CONFIG_CMD_RARP=y
++CONFIG_CMD_CDP=y
++CONFIG_CMD_SNTP=y
++CONFIG_CMD_LINK_LOCAL=y
++CONFIG_IPV6_ROUTER_DISCOVERY=y
++CONFIG_CMD_ETHSW=y
++CONFIG_CMD_DNS=y
++CONFIG_CMD_2048=y
++CONFIG_CMD_BMP=y
++CONFIG_CMD_BOOTCOUNT=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_PAUSE=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_SOUND=y
++CONFIG_CMD_QFW=y
++CONFIG_CMD_PSTORE=y
++CONFIG_CMD_PSTORE_MEM_ADDR=0x3000000
++CONFIG_CMD_BOOTSTAGE=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_AES=y
++CONFIG_CMD_TPM=y
++CONFIG_CMD_TPM_TEST=y
++CONFIG_CMD_SCMI=y
++CONFIG_CMD_BTRFS=y
++CONFIG_CMD_CBFS=y
++CONFIG_CMD_CRAMFS=y
++CONFIG_CMD_EROFS=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_SQUASHFS=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_CMD_STACKPROTECTOR_TEST=y
++CONFIG_CMD_SPAWN=y
++CONFIG_MAC_PARTITION=y
++CONFIG_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_EXT4=y
++CONFIG_ENV_EXT4_INTERFACE="host"
++CONFIG_ENV_EXT4_DEVICE_AND_PART="0:0"
++CONFIG_ENV_IMPORT_FDT=y
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_NETCONSOLE=y
++CONFIG_IP_DEFRAG=y
++CONFIG_BOOTP_SERVERIP=y
++CONFIG_IPV6=y
++CONFIG_DM_DMA=y
++CONFIG_DEBUG_DEVRES=y
++CONFIG_SIMPLE_PM_BUS=y
++CONFIG_ADC=y
++CONFIG_ADC_SANDBOX=y
++CONFIG_AXI=y
++CONFIG_AXI_SANDBOX=y
++CONFIG_BLKMAP=y
++CONFIG_SYS_IDE_MAXBUS=1
++CONFIG_SYS_ATA_BASE_ADDR=0x100
++CONFIG_SYS_ATA_STRIDE=4
++CONFIG_SYS_ATA_DATA_OFFSET=0
++CONFIG_SYS_ATA_REG_OFFSET=1
++CONFIG_SYS_ATA_ALT_OFFSET=2
++CONFIG_SYS_ATA_IDE0_OFFSET=0
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_DM_BOOTCOUNT=y
++CONFIG_DM_BOOTCOUNT_RTC=y
++CONFIG_DM_BOOTCOUNT_I2C_EEPROM=y
++CONFIG_DM_BOOTCOUNT_SYSCON=y
++CONFIG_BUTTON_ADC=y
++CONFIG_BUTTON_GPIO=y
++CONFIG_CLK=y
++CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_K210=y
++CONFIG_CLK_K210_SET_RATE=y
++CONFIG_SANDBOX_CLK_CCF=y
++CONFIG_CLK_SCMI=y
++CONFIG_CPU=y
++CONFIG_DM_DEMO=y
++CONFIG_DM_DEMO_SIMPLE=y
++CONFIG_DM_DEMO_SHAPE=y
++CONFIG_DFU_SF=y
++CONFIG_DMA=y
++CONFIG_DMA_CHANNELS=y
++CONFIG_SANDBOX_DMA=y
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_ARM_FFA_TRANSPORT=y
++CONFIG_FPGA_ALTERA=y
++CONFIG_FPGA_STRATIX_II=y
++CONFIG_FPGA_STRATIX_V=y
++CONFIG_FPGA_ACEX1K=y
++CONFIG_FPGA_CYCLON2=y
++CONFIG_FPGA_LATTICE=y
++CONFIG_FPGA_XILINX=y
++CONFIG_FPGA_VERSALPL=y
++CONFIG_FPGA_SPARTAN2=y
++CONFIG_FPGA_SPARTAN3=y
++CONFIG_FPGA_VIRTEX2=y
++CONFIG_SYS_FPGA_CHECK_BUSY=y
++CONFIG_SYS_FPGA_CHECK_CTRLC=y
++CONFIG_DM_FPGA=y
++CONFIG_SANDBOX_FPGA=y
++CONFIG_GPIO_HOG=y
++CONFIG_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_QCOM_PMIC_GPIO=y
++CONFIG_SANDBOX_GPIO=y
++CONFIG_DM_HWSPINLOCK=y
++CONFIG_HWSPINLOCK_SANDBOX=y
++CONFIG_I2C_CROS_EC_TUNNEL=y
++CONFIG_I2C_CROS_EC_LDO=y
++CONFIG_DM_I2C_GPIO=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_ARB_GPIO_CHALLENGE=y
++CONFIG_CROS_EC_KEYB=y
++CONFIG_I8042_KEYB=y
++CONFIG_IOMMU=y
++CONFIG_LED=y
++CONFIG_LED_BLINK=y
++CONFIG_LED_GPIO=y
++CONFIG_DM_MAILBOX=y
++CONFIG_SANDBOX_MBOX=y
++CONFIG_MISC=y
++CONFIG_NVMEM=y
++CONFIG_CROS_EC=y
++CONFIG_CROS_EC_I2C=y
++CONFIG_CROS_EC_LPC=y
++CONFIG_CROS_EC_SANDBOX=y
++CONFIG_CROS_EC_SPI=y
++CONFIG_P2SB=y
++CONFIG_PWRSEQ=y
++CONFIG_I2C_EEPROM=y
++CONFIG_MMC_PCI=y
++CONFIG_MMC_SANDBOX=y
++CONFIG_MMC_SDHCI=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_SYS_MAX_NAND_DEVICE=8
++CONFIG_SYS_NAND_USE_FLASH_BBT=y
++CONFIG_NAND_SANDBOX=y
++CONFIG_SYS_NAND_ONFI_DETECTION=y
++CONFIG_SYS_NAND_PAGE_SIZE=0x200
++CONFIG_SPI_FLASH_SANDBOX=y
++CONFIG_BOOTDEV_SPI_FLASH=y
++CONFIG_SPI_FLASH_ATMEL=y
++CONFIG_SPI_FLASH_EON=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_SST=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_NVMXIP_QSPI=y
++CONFIG_MULTIPLEXER=y
++CONFIG_MUX_MMIO=y
++CONFIG_NVME_PCI=y
++CONFIG_PCI_REGION_MULTI_ENTRY=y
++CONFIG_PCI_FTPCI100=y
++CONFIG_PCI_SANDBOX=y
++CONFIG_PHY=y
++CONFIG_PHY_SANDBOX=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_SANDBOX=y
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_SANDBOX_POWER_DOMAIN=y
++CONFIG_SCMI_POWER_DOMAIN=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_ACT8846=y
++CONFIG_DM_PMIC_PFUZE100=y
++CONFIG_DM_PMIC_MAX77686=y
++CONFIG_DM_PMIC_MC34708=y
++CONFIG_PMIC_QCOM=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_PMIC_S2MPS11=y
++CONFIG_DM_PMIC_SANDBOX=y
++CONFIG_PMIC_S5M8767=y
++CONFIG_PMIC_TPS65090=y
++CONFIG_DM_REGULATOR=y
++CONFIG_REGULATOR_ACT8846=y
++CONFIG_DM_REGULATOR_PFUZE100=y
++CONFIG_DM_REGULATOR_MAX77686=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_REGULATOR_S5M8767=y
++CONFIG_DM_REGULATOR_SANDBOX=y
++CONFIG_REGULATOR_TPS65090=y
++CONFIG_DM_REGULATOR_SCMI=y
++CONFIG_DM_PWM=y
++CONFIG_PWM_CROS_EC=y
++CONFIG_PWM_SANDBOX=y
++CONFIG_RAM=y
++CONFIG_DM_REBOOT_MODE=y
++CONFIG_DM_REBOOT_MODE_GPIO=y
++CONFIG_DM_REBOOT_MODE_RTC=y
++CONFIG_REMOTEPROC_SANDBOX=y
++CONFIG_SANDBOX_RESET=y
++CONFIG_RESET_SYSCON=y
++CONFIG_RESET_SCMI=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_MAX313XX=y
++CONFIG_RTC_RV8803=y
++CONFIG_RTC_HT1380=y
++CONFIG_SCSI=y
++CONFIG_SANDBOX_SERIAL=y
++CONFIG_SM=y
++CONFIG_SMEM=y
++CONFIG_SANDBOX_SMEM=y
++CONFIG_SOUND=y
++CONFIG_SOUND_DA7219=y
++CONFIG_SOUND_MAX98357A=y
++CONFIG_SOUND_SANDBOX=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SANDBOX_SPI=y
++CONFIG_SPMI=y
++CONFIG_SPMI_SANDBOX=y
++CONFIG_SYSINFO=y
++CONFIG_SYSINFO_SANDBOX=y
++CONFIG_SYSINFO_GPIO=y
++CONFIG_SYSRESET=y
++CONFIG_DM_THERMAL=y
++CONFIG_TIMER=y
++CONFIG_TIMER_EARLY=y
++CONFIG_SANDBOX_TIMER=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_EMUL=y
++CONFIG_USB_KEYBOARD=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_ETHER=y
++CONFIG_USB_ETH_CDC=y
++CONFIG_VIDEO=y
++CONFIG_VIDEO_FONT_SUN12X22=y
++CONFIG_VIDEO_COPY=y
++CONFIG_CONSOLE_ROTATION=y
++CONFIG_CONSOLE_TRUETYPE=y
++CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
++CONFIG_I2C_EDID=y
++CONFIG_VIDEO_SANDBOX_SDL=y
++CONFIG_VIDEO_BRIDGE=y
++CONFIG_VIDEO_BRIDGE_LVDS_CODEC=y
++CONFIG_VIDEO_DSI_HOST_SANDBOX=y
++CONFIG_OSD=y
++CONFIG_SANDBOX_OSD=y
++CONFIG_BMP_16BPP=y
++CONFIG_BMP_24BPP=y
++CONFIG_W1=y
++CONFIG_W1_GPIO=y
++CONFIG_W1_EEPROM=y
++CONFIG_W1_EEPROM_SANDBOX=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_GPIO=y
++CONFIG_WDT_SANDBOX=y
++CONFIG_WDT_ALARM_SANDBOX=y
++CONFIG_WDT_FTWDT010=y
++CONFIG_FS_CBFS=y
++CONFIG_FS_EXFAT=y
++CONFIG_FS_CRAMFS=y
++CONFIG_ADDR_MAP=y
++CONFIG_PANIC_HANG=y
++CONFIG_CMD_DHRYSTONE=y
++CONFIG_MBEDTLS_LIB=y
++CONFIG_HKDF_MBEDTLS=y
++CONFIG_ECDSA=y
++CONFIG_ECDSA_VERIFY=y
++CONFIG_TPM=y
++CONFIG_ERRNO_STR=y
++CONFIG_GETOPT=y
++CONFIG_TEST_FDTDEC=y
++CONFIG_UTHREAD=y
++CONFIG_UNIT_TEST=y
++CONFIG_UT_TIME=y
++CONFIG_UT_DM=y
+diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
+index 62cb77b098c..9456ca3149a 100644
+--- a/drivers/fpga/Kconfig
++++ b/drivers/fpga/Kconfig
+@@ -15,6 +15,7 @@ config FPGA_ALTERA
  
--	debug("%s: device = %ld\n", __func__, dev);
-+	log_debug("device = %ld\n", dev);
- 
- 	return dev;
- }
-@@ -40,26 +40,26 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
- 	size_t local_data_size;
- 	long local_fpga_data;
- 
--	debug("%s %d, %d\n", __func__, argc, cmdtp->maxargs);
-+	log_debug("%d, %d\n", argc, cmdtp->maxargs);
- 
- 	if (argc != cmdtp->maxargs) {
--		debug("fpga: incorrect parameters passed\n");
--		return CMD_RET_USAGE;
-+		log_err("Incorrect number of parameters passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	*dev = do_fpga_get_device(argv[0]);
- 
- 	local_fpga_data = simple_strtol(argv[1], NULL, 16);
- 	if (!local_fpga_data) {
--		debug("fpga: zero fpga_data address\n");
--		return CMD_RET_USAGE;
-+		log_err("Zero fpga_data address\n");
-+		return CMD_RET_FAILURE;
- 	}
- 	*fpga_data = local_fpga_data;
- 
- 	local_data_size = hextoul(argv[2], NULL);
- 	if (!local_data_size) {
--		debug("fpga: zero size\n");
--		return CMD_RET_USAGE;
-+		log_err("Zero size\n");
-+		return CMD_RET_FAILURE;
- 	}
- 	*data_size = local_data_size;
- 
-@@ -70,51 +70,52 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
- static int do_fpga_loads(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
- {
-+	struct fpga_secure_info fpga_sec_info;
-+	const int pos_userkey = 5;
- 	size_t data_size = 0;
- 	long fpga_data, dev;
- 	int ret;
--	struct fpga_secure_info fpga_sec_info;
- 
- 	memset(&fpga_sec_info, 0, sizeof(fpga_sec_info));
- 
--	if (argc < 5) {
--		debug("fpga: incorrect parameters passed\n");
--		return CMD_RET_USAGE;
-+	if (argc < pos_userkey) {
-+		log_err("Too few parameters passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
--	if (argc == 6)
-+	if (argc == pos_userkey + 1)
- 		fpga_sec_info.userkey_addr = (u8 *)(uintptr_t)
--					      simple_strtoull(argv[5],
-+					      simple_strtoull(argv[pos_userkey],
- 							      NULL, 16);
- 	else
- 		/*
- 		 * If 6th parameter is not passed then do_fpga_check_params
- 		 * will get 5 instead of expected 6 which means that function
--		 * return CMD_RET_USAGE. Increase number of params +1 to pass
-+		 * return CMD_RET_FAILURE. Increase number of params +1 to pass
- 		 * this.
- 		 */
- 		argc++;
- 
-+	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
-+				   cmdtp, argc, argv);
-+	if (ret)
-+		return ret;
-+
- 	fpga_sec_info.encflag = (u8)hextoul(argv[4], NULL);
- 	fpga_sec_info.authflag = (u8)hextoul(argv[3], NULL);
- 
- 	if (fpga_sec_info.authflag >= FPGA_NO_ENC_OR_NO_AUTH &&
- 	    fpga_sec_info.encflag >= FPGA_NO_ENC_OR_NO_AUTH) {
--		debug("fpga: Use <fpga load> for NonSecure bitstream\n");
--		return CMD_RET_USAGE;
-+		log_err("Use <fpga load> for NonSecure bitstream\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	if (fpga_sec_info.encflag == FPGA_ENC_USR_KEY &&
- 	    !fpga_sec_info.userkey_addr) {
--		debug("fpga: User key not provided\n");
--		return CMD_RET_USAGE;
-+		log_err("User key not provided\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
--	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
--				   cmdtp, argc, argv);
--	if (ret)
--		return ret;
--
- 	return fpga_loads(dev, (void *)fpga_data, data_size, &fpga_sec_info);
- }
- #endif
-@@ -245,23 +246,23 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 	ulong dev = do_fpga_get_device(argv[0]);
- 	char *datastr = env_get("fpgadata");
- 
--	debug("fpga: argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
-+	log_debug("argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
- 
- 	if (dev == FPGA_INVALID_DEVICE) {
--		debug("fpga: Invalid fpga device\n");
--		return CMD_RET_USAGE;
-+		log_err("Invalid fpga device\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	if (argc == 0 && !datastr) {
--		debug("fpga: No datastr passed\n");
--		return CMD_RET_USAGE;
-+		log_err("No datastr passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	if (argc == 2) {
- 		datastr = argv[1];
--		debug("fpga: Full command with two args\n");
-+		log_debug("Full command with two args\n");
- 	} else if (argc == 1 && !datastr) {
--		debug("fpga: Dev is setup - fpgadata passed\n");
-+		log_debug("Dev is setup - fpgadata passed\n");
- 		datastr = argv[0];
- 	}
- 
-@@ -269,20 +270,20 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (fit_parse_subimage(datastr, (ulong)fpga_data,
- 			       &fit_addr, &fit_uname)) {
- 		fpga_data = (void *)fit_addr;
--		debug("*  fpga: subimage '%s' from FIT image ",
--		      fit_uname);
--		debug("at 0x%08lx\n", fit_addr);
-+		log_debug("*  fpga: subimage '%s' from FIT image ",
-+			  fit_uname);
-+		log_debug("at 0x%08lx\n", fit_addr);
- 	} else
- #endif
- 	{
- 		fpga_data = (void *)hextoul(datastr, NULL);
--		debug("*  fpga: cmdline image address = 0x%08lx\n",
--		      (ulong)fpga_data);
-+		log_debug("*  fpga: cmdline image address = 0x%08lx\n",
-+			  (ulong)fpga_data);
- 	}
--	debug("%s: fpga_data = 0x%lx\n", __func__, (ulong)fpga_data);
-+	log_debug("fpga_data = 0x%lx\n", (ulong)fpga_data);
- 	if (!fpga_data) {
--		puts("Zero fpga_data address\n");
--		return CMD_RET_USAGE;
-+		log_err("Zero fpga_data address\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	switch (genimg_get_format(fpga_data)) {
-@@ -303,13 +304,13 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 			if (gunzip((void *)data, ~0UL, (void *)image_buf,
- 				   &image_size) != 0) {
--				puts("GUNZIP: error\n");
-+				log_err("Gunzip error\n");
- 				return CMD_RET_FAILURE;
- 			}
- 			data_size = image_size;
- #else
--			puts("Gunzip image is not supported\n");
--			return 1;
-+			log_err("Gunzip image is not supported\n");
-+			return CMD_RET_FAILURE;
- #endif
- 		} else {
- 			data = (ulong)image_get_data(hdr);
-@@ -327,12 +328,12 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 		const void *fit_data;
- 
- 		if (!fit_uname) {
--			puts("No FIT subimage unit name\n");
-+			log_err("No FIT subimage unit name\n");
- 			return CMD_RET_FAILURE;
- 		}
- 
- 		if (fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
--			puts("Bad FIT image format\n");
-+			log_err("Bad FIT image format\n");
- 			return CMD_RET_FAILURE;
- 		}
- 
-@@ -348,7 +349,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- #endif
- 	default:
--		puts("** Unknown image type\n");
-+		log_err("Unknown image type\n");
- 		return CMD_RET_FAILURE;
- 	}
- }
-@@ -390,16 +391,16 @@ static int do_fpga_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
- 	fpga_cmd = find_cmd_tbl(argv[1], fpga_commands,
- 				ARRAY_SIZE(fpga_commands));
- 	if (!fpga_cmd) {
--		debug("fpga: non existing command\n");
--		return CMD_RET_USAGE;
-+		log_err("Non existing command\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	argc -= 2;
- 	argv += 2;
- 
- 	if (argc > fpga_cmd->maxargs) {
--		debug("fpga: more parameters passed\n");
--		return CMD_RET_USAGE;
-+		log_err("Too many parameters passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	ret = fpga_cmd->cmd(fpga_cmd, flag, argc, argv);
-diff --git a/drivers/fpga/zynqmppl.c b/drivers/fpga/zynqmppl.c
-index 2b62bbbe3cf..1199b249e36 100644
---- a/drivers/fpga/zynqmppl.c
-+++ b/drivers/fpga/zynqmppl.c
-@@ -191,8 +191,8 @@ static int zynqmp_validate_bitstream(xilinx_desc *desc, const void *buf,
- 	}
- 
- 	if ((ulong)buf < SZ_1M) {
--		printf("%s: Bitstream has to be placed up to 1MB (%px)\n",
--		       __func__, buf);
-+		log_err("Bitstream has to be placed above 1MB (%px)\n",
-+			buf);
- 		return FPGA_FAIL;
- 	}
- 
-diff --git a/drivers/fpga/zynqpl.c b/drivers/fpga/zynqpl.c
-index 3e86d854a01..a8ca015a8a6 100644
---- a/drivers/fpga/zynqpl.c
-+++ b/drivers/fpga/zynqpl.c
-@@ -360,8 +360,8 @@ static int zynq_validate_bitstream(xilinx_desc *desc, const void *buf,
- 	}
- 
- 	if ((u32)buf < SZ_1M) {
--		printf("%s: Bitstream has to be placed up to 1MB (%x)\n",
--		       __func__, (u32)buf);
-+		log_err("Bitstream has to be placed above 1MB (%px)\n",
-+			(u32)buf);
- 		return FPGA_FAIL;
- 	}
- 
+ config FPGA_SOCFPGA
+ 	bool "Enable Gen5 and Arria10 common FPGA drivers"
++	depends on ARCH_SOCFPGA
+ 	select FPGA_ALTERA
+ 	help
+ 	  Say Y here to enable the Gen5 and Arria10 common FPGA driver
 -- 
 2.48.1
 
