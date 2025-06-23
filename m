@@ -4,166 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF207C83F27
-	for <u-boot@archiver.kernel.org>; Wed, 16 Jul 2025 14:44:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11CECC7115B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 01:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E886883280;
-	Wed, 16 Jul 2025 16:44:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 05DE78006D;
+	Tue, 24 Jun 2025 03:51:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="aKgRYjVf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XjDfxGcp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CAE583257; Wed, 16 Jul 2025 16:44:35 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DEF9081E13; Tue, 24 Jun 2025 03:51:20 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4700B830B5
- for <u-boot@lists.denx.de>; Wed, 16 Jul 2025 16:44:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 44C918004F
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 03:51:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aMaty2YZ7HwcgY0h9vIVp0LQDje3xdSGO1ST5iIWhYflsPDML0quXM3/AMym4J5iPGmYmnF7P7KmrgSgZoziweL/0aIxucllirNuArn1qsessaIVkSZ+S8HPxOsl5PV9j75nWyWC6Sp+UZrCbWEDAEn5Q8ePx+6xUL9ta0cXBJGCZymrOlkto+5PitqzseSw4dAQy2H6rnHNa44K08YxCCs1aA4dC0yPZ4ypzfOVPdsIi+41fpm26QJCE6vd+97J+6T1mNMBpTu0uQFJP8vk9xgUPH5TQpvcgBgAlAYBsDrG0WmiNygFgSSIsmxq5pWBq47NIIlN1cOKa1mGoZyV9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/v7AhiIhV18tWfTa+YaOX/4nse7UdhPvXnch8rGd4Qw=;
- b=f45qlOLqffrwB/7RuIPdpGWU8PHx9BmVeZ+7w6m2c3ZAq5rfYaoMOemPJINLwlPkIyRve7uy/Eq0bLQJ7aaqmzztIj16PgAsxhfZMn4jh8fePmuhhqQDSOKC39MUn0En5vLYyeIUbfysCUIRUnDB6K4SVNskbEvR4VVbN2FEzLAsYCAcv6VEwUt56CLR5E4SbYakDZ0wuikf5IVDzW9ePgii+/H5aPj1BvqxuWpD21LP1ZDTvuQzAlUeOaOpdMrmovRlRS5W44fBgo8Wa18CsgtXl5/HtAOIYXNVAYAhYUI+qp2vUd6RE9WwDE9aV2c4xJKqKKPGRFmiWFyE1zn8Tw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/v7AhiIhV18tWfTa+YaOX/4nse7UdhPvXnch8rGd4Qw=;
- b=aKgRYjVfVwFp9H9/8cX7gYssFIg6wNioaCNf7TgbhtIaKEl74ek6mXYCGqL0Hc2BZxsLNaUArl0RhCKKqQAJUvTvZ/RGdSIMqIB9Gmt0gKfGDVMomcpCJdA7KvPX6iAJaapqV2E4W97K8bxMvfiQ1gNV6KoqnzM6XNMHjDA48B4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS5PR04MB9754.eurprd04.prod.outlook.com (2603:10a6:20b:654::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.35; Wed, 16 Jul
- 2025 14:44:30 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%4]) with mapi id 15.20.8922.028; Wed, 16 Jul 2025
- 14:44:30 +0000
-Message-ID: <dba6cc96-ec9a-4929-aa6e-191287099080@cherry.de>
-Date: Wed, 16 Jul 2025 16:44:29 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: spl-boot-order: Defer probe of boot device
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20250712211232.680047-1-jonas@kwiboo.se>
- <0df75337-a0e0-4076-93db-aa8632e23c8e@cherry.de>
- <13913124-c2b9-4072-b57e-7012b2a222ec@kwiboo.se>
- <9390c906-4462-4e02-83f5-5e7d05dd956f@cherry.de>
- <00bc1039-5163-451b-b3e0-81abb4a9185f@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <00bc1039-5163-451b-b3e0-81abb4a9185f@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0196.eurprd06.prod.outlook.com
- (2603:10a6:802:2c::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=fail (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tom.rini@konsulko.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-60ef6bf2336so3359468eaf.0
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 18:51:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750729877; x=1751334677;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:dkim-signature:resent-to:resent-message-id:resent-date
+ :resent-from:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aYJ35KHKz6FWlduTTkrSis5kvxPvp57eaicLRx2Bszg=;
+ b=oM7Dfg5osGcNyjhhPk6RZaReh7WZ4SwlgRz94fXzhmziNR15i5YaDZP+DLW9PzmwB4
+ SHkOOFC6OTaMAHBfoI7k/Lrg9l5NjnAB5HtWp8gcOLs/kxDvGRr0PLg7fSstm/mrmO5f
+ g0FCGXihS2nBNzmHwNgh7OMRamDwrXXHoAJGt0psJswAlgfcraBgljWy9dODlkqzVRhQ
+ iskAQ6PKC0PuPYUryHM40fp2K6IZ9E4dz36KG456k1OFMOAZfVfrWGlMy6hEC3U36W/o
+ GZtPRzirHGzbbx/vBHVQ2RZcnsCg+jSgvxmFwtkkTI7FaUMFgPmZ69r85hWjJ0OKZisG
+ ZPxA==
+X-Forwarded-Encrypted: i=2;
+ AJvYcCXMsxOqguVgyjAQU+M2IspUlewomwB343Xysx+uKxxf5x7cRZVC2ovZ+fJp4hQ/YsgTz3xoWM4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1fGZhCCglxhpXbrG7WLUPKMtpNas8ZS+ElM4lEkas4KccFR5o
+ Rpm4IN/W0aFwdudAedn0NHLo1gdHEVELSm1EmX6LaGpllIoBwTDtvO90ixJPZ+AgSmXsPvQCZLX
+ zsf3hxHo=
+X-Gm-Gg: ASbGncuvqVaOUNnA70urcgD7uWj2HStw+w6PxCx1X4VIHpGaC2i/wHyiWWWZpjBWIQS
+ SNzyV/FOFaWjGxOgPp6BKbnF+O+6wQ98w5F2Dj5Ij9WuOtd4qZgVq3YEMh4oqzzuHzl+0x6uRC/
+ zN9ZJdKpUWGkGhs+FvbvZTPcIhcnqxNjB9JCNxGdipqZDvFZLUv3VewPDdITvZVkJTwCF89xC4U
+ gEWLdLeuMEgGG2SM70HVOvfGACy8MQ9K5E0vnFPPyAVaERwyhK17APSd2uvn1/JWRgI4mBrpaL5
+ iqpLL0wSu379yCbbyiqw02XWDHBywA/IadXbe1AjkpXkDn4rxU478sGCIx90M0T2KgTk7TCpaLm
+ e/6+voH/VU9KCJjVrk8sK/R0=
+X-Google-Smtp-Source: AGHT+IFz9h2ZeNaW0hsRzzBAo5PIYlphviXWD1d1NWtBNkJwznX1VoQoby0jKc14O/PVKMEsB1Wqdg==
+X-Received: by 2002:a05:6871:441a:b0:289:2126:6826 with SMTP id
+ 586e51a60fabf-2eeee595007mr11535759fac.30.1750729876874; 
+ Mon, 23 Jun 2025 18:51:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2ef2e2abcd8sm1744687fac.21.2025.06.23.18.51.16
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Jun 2025 18:51:16 -0700 (PDT)
+From: Casey Connolly <trini@konsulko.com>
+X-Google-Original-From: Casey Connolly <casey.connolly@linaro.org>
+Resent-From: Tom Rini <trini@bill-the-cat>
+Resent-Date: Mon, 23 Jun 2025 19:51:14 -0600
+Resent-Message-ID: <20250624015114.GH4003484@bill-the-cat>
+Resent-To: u-boot@lists.denx.de
+Received: by 2002:a05:7022:45a4:b0:a6:f736:36be with SMTP id cf36csp2931199dlb; 
+ Mon, 23 Jun 2025 16:46:58 -0700 (PDT)
+X-Received: by 2002:adf:b605:0:b0:3a5:3930:f57 with SMTP id
+ ffacd0b85a97d-3a6d13160c0mr10286533f8f.51.1750722417868; 
+ Mon, 23 Jun 2025 16:46:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1750722417; cv=none;
+ d=google.com; s=arc-20240605;
+ b=YbAvFu20rt6RPafF0+xa2EdECk9Gyy+S7LimJzN2Cy+uSRCHo2ZA07Yg/HqpMQ/wQu
+ qPISouHKcgV1H9h8WdYRym6FSgnrV17CHemKzC08JHFp6lS6laz6qG5dQ1W1zdB8hBW7
+ VSE9vi52PtZEfrNw+5y3b5dYq7W51Cb/gZGWzcrIl8RhWnbJZnUw652EgCzcVxDDdBYj
+ Hcgfj2t3ER1p5M+QQf6EqbyX1WrSJxTP5oAkfJ9AngdUV58lE95VUKULGVOt+oC56Yr2
+ pYTGDQHKRzUhqS+4HCuWYKwa6qXA7tyNrUzBVfBIIDT/uT7uwRnUmL3B4LtJgNMcp2pK
+ Ktgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:dkim-signature;
+ bh=aYJ35KHKz6FWlduTTkrSis5kvxPvp57eaicLRx2Bszg=;
+ fh=HiZEvWJXLQIBRR5KTZndlt6Y/KEAt1RsnRDlfhlT/5Y=;
+ b=NJDtloQkuL+utsuX5RfIsqPNF+rqQ8HZZ6mw2ZOgc5MYchPVEGuiyDRvp4kvYvqZNe
+ Ptschsx1FUfDhrwfvTfQ/fIn3DWM/+xAawXfeasISRhAtMlEPmBNy45THIQCy4SP2axw
+ ipomEW7pyT3iBwHspLGWn/CsLFEA6fCNxPM6THudioGTdN7n6dtUgR9wNmO1NlEC2Mce
+ iFws4VPx4XRz+jqpUhbm6ytO1d47vO15qMjj3Zwe4uaC6oFSuYGB3aNu0syoIyPjKxXC
+ C9U7IoUcbMZZB0BEHoLmQvVB3NhOwhRWlGvxZ1Y7VOqfb8ICFg94bhNktnRlaboLVI3x
+ VC9g==; dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+ dkim=pass header.i=@linaro.org header.s=google header.b=XjDfxGcp;
+ spf=pass (google.com: domain of casey.connolly@linaro.org designates
+ 209.85.220.41 as permitted sender) smtp.mailfrom=casey.connolly@linaro.org; 
+ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=linaro.org;
+ dara=pass header.i=@konsulko.com
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com.
+ [209.85.220.41]) by mx.google.com with SMTPS id
+ ffacd0b85a97d-3a6e80b0634sor78636f8f.7.2025.06.23.16.46.57
+ for <trini@konsulko.com> (Google Transport Security);
+ Mon, 23 Jun 2025 16:46:57 -0700 (PDT)
+Received-SPF: pass (google.com: domain of casey.connolly@linaro.org designates
+ 209.85.220.41 as permitted sender) client-ip=209.85.220.41; 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750722417; x=1751327217; darn=konsulko.com;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aYJ35KHKz6FWlduTTkrSis5kvxPvp57eaicLRx2Bszg=;
+ b=XjDfxGcpfIabzBXFHcdq/5+moNRj0pv9xSGqRHvV8jKZx2hnS2Ykm5gvXxGQFMxzw6
+ zlmDqiUxLYNWAP7iak1G5T8JqQiXcCYPNJ+xwWvsbPa8O+ocWhkqjFu22XxJAQHoNY1N
+ qPU/akcU58gXY8HN4RRXIqlbyBx7OFAlgs++4VGSekk+MsGXg2cAco0upu1Zx7wZzoLl
+ IgDdj2YwEyt6H+G9m6hQVN+yzdb493Uu9khqcAmBqv+HruRQQHaCytfJLy9vSNkNuaFU
+ b3QfwPwKxq5ZK5JroBWTAYg5BQ0/Y+zjC+MSpBd3oxBWMrUfB/LTfJ67d+2jRYb+KwDH
+ b7aA==
+X-Received: by 2002:a05:6000:645:b0:3a4:fefb:c8d3 with SMTP id
+ ffacd0b85a97d-3a6d130e802mr12177241f8f.40.1750722416827; 
+ Mon, 23 Jun 2025 16:46:56 -0700 (PDT)
+Received: from toyger.tail248178.ts.net ([213.240.182.16])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a6e8050e09sm411873f8f.19.2025.06.23.16.46.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Jun 2025 16:46:55 -0700 (PDT)
+To: Tom Rini <trini@konsulko.com>
+Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ George Chan <gchan9527@gmail.com>, Luca Weiss <luca.weiss@fairphone.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-next-23Jun-1
+Date: Tue, 24 Jun 2025 01:45:43 +0200
+Message-ID: <20250623234640.126706-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS5PR04MB9754:EE_
-X-MS-Office365-Filtering-Correlation-Id: c61ba187-8366-436a-787d-08ddc4774590
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NFZNcXkzaGc0Vm5EUzA0anJuNysrV3cxMW8yZTJZZUlmRit5aURHc01tNzZR?=
- =?utf-8?B?RGZIYmtIQVNWYjZhMW9hNXYrbmdQKzRwSkhZMTQ1b3JWMGsxSWxrZW14MXFv?=
- =?utf-8?B?cnBNTWM2UWxRT292THViK1d3aUh0dnVEVUxxY3crOEVtTHVvcG91bXpaZ01W?=
- =?utf-8?B?ZVQrQXFOWkVscmtkZWwraTBST3lHcVV2NElGQkNYQTJWZXBITVlOZjdvRFEz?=
- =?utf-8?B?WnpsWU9iM2hxSEp0RG9VMnZPdnBEc09ucFJtMFZEK3RBUnZPSDZTeEozMHNB?=
- =?utf-8?B?WW1xZEJ1SGUyQnZHSGF4Nlg2MzJyS2thVGJ4dVVJelhIOHNyS0o1WmdKejNQ?=
- =?utf-8?B?ZjIzSlVFNE8vd0s1dzNjamxqSjFJaytDQXRIdlBWVTNhdFFCQ0pnbFhLMVZv?=
- =?utf-8?B?UGRrQXVqU3pGWDh4NXZmYUErQmZ2NnZRdzQveFNWL2I5eE16VWNxcDM5ZTR0?=
- =?utf-8?B?cThoUUk5NmFqRUUrWlgwRUtYS21xNFh4aXN5V1B5dDFkS3d0TjNYVTA2ZStT?=
- =?utf-8?B?TUtoRWxEZTNndkNhUy91bjlXL1ZCRnoxbjVuVHAvQjgySGlpU1MwdzdLS2lr?=
- =?utf-8?B?aDVsL0hMeFJQQkN0YmF2Q0h3YVVPc0IrbmxOb0RUcEZZM003ZTFFRmFLdlFy?=
- =?utf-8?B?bHorZ1RFczBVZGJyNW15bVkvemtZdGJoQ0VNL2EvUVpkZHd2eXFqUTc3eFZw?=
- =?utf-8?B?WHlvNXp0MnhOYWV2azhBZ1dvNTVRd3Rmb3BQNTk1SjBJSEwzaHNBbkZoem1l?=
- =?utf-8?B?SXVWR3Y2OXZ0bGIrL0crSi9RNTE3c0VRYlFXMGYveXNpeW4weHZpT2tuckU1?=
- =?utf-8?B?eTFNVDhLRDVUY0VSZ0FvKzRxR0pjZ2tBZHF6N1VNOUFsK0FnOFlweFVhK1Zq?=
- =?utf-8?B?QUFZakc1NEJqdExpNGlRaFRyM3ZLVFlYT3BYZW00VFBOUTRhZVZwb2lTSnhV?=
- =?utf-8?B?Q3c1TGwrVk9oQ2FpYXdkRlRMK1h1OTBGMkd4cG1POWVFdS9oK1VRTGlFeEJG?=
- =?utf-8?B?bjdrY3l1QnlWZWkrQnlhSmFxWGMybzljalhFT1lmRVV1cS85WEhXRHdsNk1t?=
- =?utf-8?B?NlRBTlRUS0VGWTZlV0N3S2xwK2ZKTzE2Vmh2WGRRUWpHL3ViQnRZOE9tcE5k?=
- =?utf-8?B?UWpoVWhWU1dya3JVam0ycDI2M0tydEpiMDlEd1UwQmFMZnVJcE9DeUlSNW9I?=
- =?utf-8?B?QmVQSUJXOGRUbU93N1hZdHlmWjdwcENJZlQwSWoraENIZEdRMThsY0prMFBq?=
- =?utf-8?B?N0xLdUNydW5HRVRyL2E1Qzg4QTZyTXozT3ZFNGNmTDl4dHJNM3JPN0F3OExv?=
- =?utf-8?B?UXd1YWd0YjBxMlR0YmRneXNpYWNySHI3dmg2aHhDVDBqNndIbTNVcjd2SWZV?=
- =?utf-8?B?N2ZzSk5LQnA3RG5VVVltc0NCRUI4VmNXbmxqS1E5M01GU1VHNXJ6WldGbWNL?=
- =?utf-8?B?eC9HMDNFb2N1bXlucEwvaTYvTGdockNXZjdBT3YyUTdUZ0tWUWgyMlRLNVBB?=
- =?utf-8?B?Vk9DUVorWTdvaWtiekRGMVhSQnZUcXdkd1JreXY3bGJYMHd6eVp3RDZjenY0?=
- =?utf-8?B?VEVSRzFxSFQ0WFE1VHFNWHZZcTEyM0N5UzJ6V0xMcW5BTDQzd0RzNC83TGoz?=
- =?utf-8?B?Rk1VeGNEK0hQS3c0RkRhTVprdHA0WTUzQlpuQVhGVEVPbDUvQUIzOGp5Q3Jz?=
- =?utf-8?B?RWxqd0lMQjZUL0tKeCtsZDIxdE5sNzkzekF6bGk2R1BndEJyZ0ora0VxeVo0?=
- =?utf-8?B?bVpGMmt0V3pjeHJzRkxRZjVUcHJyUG5VY1F6Nmx5Y2dCNWFmZDBoMGNSaDRs?=
- =?utf-8?B?d01ITjQ3Rk1idHlMdzEzTGZ3a1p6WHVGMk94aXl4VTZSU1d2MUtmcDRpcUlK?=
- =?utf-8?B?a09BalNhS3ZuMlN4WUZuWUxKNW0wNTN0bmxvc09qS0dTdEVnanJNMkZpNHNh?=
- =?utf-8?Q?JPHDlbSn+R8=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZXZMWjQ2alRRY0pNQWRKZnp6ZE1adXZjTXBwSnU4dDg4TXRwaFR5Sy9meXp5?=
- =?utf-8?B?MzZEVllzbFZTQ1hCMzZIaW9EMy92NFpBVnlmR0xjQytnaitOaGE1UjYvQUhz?=
- =?utf-8?B?UFllREFDeFZqZVRMUU5wWS9pazYraHZzY1NJSk5Wek9qcTNndDJuQy95QTVU?=
- =?utf-8?B?ME95QUQ2QjRtVmtabE8yNXNnMXgySVdndnNJWk9ydU1zSzVPN2N2N0tFdVNm?=
- =?utf-8?B?VlJnbE5FK1FyQnRJMW1BVFR1TnEwZUJESE9FeW5aZFhaUTVoMVQ2cVZvTDFC?=
- =?utf-8?B?amdzTkFEQlozOHBPa0RUU09vY0lpYWpBaG1yMXVNUmJrbjgwQ2V3ZEczMUR1?=
- =?utf-8?B?T1UxZFR3WHovYTM1a21VTDlxbk8rdXk0eEVwdCtQd0lWMkhscjVJNmJaeWh0?=
- =?utf-8?B?NUpyc0tJL3VocU51ZU93aVUrNjRTako5eUtlblZLMU0vSERRQnRTYlpVdDZH?=
- =?utf-8?B?dFNrSG15RUVOd3FDUjhGT2haTWxEUXdCWjVuaGxKcFFLNmxJY0pLMjNxRXFT?=
- =?utf-8?B?WkJuOFNFMjNXSnMyZDJNeml5UXQ3Z1F1MXVvS0RXSDdZbzlmUWVuNUxVSzhV?=
- =?utf-8?B?RXE2MXN5MTZCUGU5Y2dGOWZOVzBrbXZ4WDIzUEpKRUJkN3Mzb1pHdS9SUXRx?=
- =?utf-8?B?RGZWMjJtR2p4WmpEUm9NRlc0SnozK1lXcEo4bDNOUjJGZklxQjlIVjRWV1Zj?=
- =?utf-8?B?Vzk4Q28xaVNqR2ErRHluWnU5aWJKRnRyalFvVjNqRTRGTEpaVktvUmY2YXA4?=
- =?utf-8?B?NjU0OTRDK1h1N3ZiUktBT3lYS3EwTWJQR2JEVXdqTnozRExCcjhQb0lUdmJT?=
- =?utf-8?B?WDNzQ1ErbkFQQVh2UXBwWVJocFVVa2lRYVl3SGUyQ0F5SVBoMTNnWDk2ajd0?=
- =?utf-8?B?Ny9sbzd6U0NhQWZnZkpvc1RyZDZ2SXFhbkdITTFBZGZoR2pRT29XRzIxbG02?=
- =?utf-8?B?ODFtYVBEN0tsd0hOQUN6UStzSEZiSDZNejNicVZCbTRVOGIvaXpWN3pEbkpw?=
- =?utf-8?B?ZUtGWVpGRjFDSG4vSkhtbUNGZzBwRmZNS053U1lIYUJrUkI5ODJWeUdZTGEx?=
- =?utf-8?B?WVN0U3IvS0lLUi85MGJFR0RETEMwVDFoQklOK2hMd0sxRjgva2J0a1ZLTmlR?=
- =?utf-8?B?L1NUeXFRNU5wWkxPajJlY2F6bUZBVVM3Z1NuUEdDT2tIMVFhY0U2OEhKNk41?=
- =?utf-8?B?LzIvalJYdkZ6TlFsaHo1Ni9JMU5uZWJ2MUttWEwrZnZHaDhGb3BqbDlsNFAv?=
- =?utf-8?B?ODZ6YW9HY2YzOWpxRWZBTE1NelZhbjRta3IvWjZjemlJaGdYSER4b01pMlox?=
- =?utf-8?B?a0RlTXdEeWF3WHJJNitBTVkvdWU1MDZQakhwYnI2SlIxUzc3TmVwWmlBY0N5?=
- =?utf-8?B?RFB6ZkF5c0xqSGVRRk83cDBEU2JOOHk1SCtYOWdhVEJ0bEtGeldlbUV6bDZj?=
- =?utf-8?B?aHNxNFNWam1hWWYrU3VsSTJlNG5aSDliaHVDTTJqNXJIRCtyektVYzlEWUdL?=
- =?utf-8?B?OXhuV2Y2aVgySlNXcHlCRUdkUng2UFl3L2Z3TnVsdm5wYlZEYVdrejZBeDFk?=
- =?utf-8?B?NlZuMUJlR1VLeFQ4MGs3dmtBNENiUU1aMkcrT3pHVUhIZ0lJQmlWUDhYems5?=
- =?utf-8?B?Um55a1JJQ1VLNVQ4U0t3dEszR2RiOWFVUnhGaGZMdGtpUVQ2M0pUNGdCU0U0?=
- =?utf-8?B?R2p5VDFkWi82TW1OVnVzRm9BRTN1WUcxOU05Q0ZpYzg1SEhCY1ZmbU05SUJK?=
- =?utf-8?B?aXY3Qmgzcm9uaWw3bWhRR3d1ZEwva3BwMzZiWlUrcHkwS2QyNjZQK2dtTmRs?=
- =?utf-8?B?cHluRFNXYXFjaHNkWmJZQjJwZndtdkJnekUwRG9kTFc5aWZ0TUs4WjRYbUhD?=
- =?utf-8?B?WXNwQUd2Ty9oNkl3QzloYnA0SWovb1NFZnRvWkRKQWcrT2Y3UU5kZUdPeW1K?=
- =?utf-8?B?eER3L1FIM2ZteHNhbUswb01sbE5Zd1ZaWHNzZTBQY0wwaXIxb3U5Q3l2Ny9w?=
- =?utf-8?B?R0FVSDllVDViYnpCVjkvNlF4Q0RKTUtIRjZkUTlOY3RoRW93T1FCWUZ4ZC9P?=
- =?utf-8?B?QkdROXZxSVM2czJoWW9oaUJoUTRrZU1lWGRVcVYxRnZidGxWUzFxMDRMd2N1?=
- =?utf-8?B?MEtxU2NYY1E1Vlk4TmhoL1kxMUFNVFZVempSR0ZmbGo5Y3JqMEdGTXJCOEZv?=
- =?utf-8?B?eFE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c61ba187-8366-436a-787d-08ddc4774590
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2025 14:44:30.6740 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0lyNQOTBKHQohobm8R2Z91z1EY5lj/bQwesc+BlD5SKi7J4YhLAzRPeNLvykA6fidgrCAPyh5smVQTDNb8JumVzuCSxJmG8qSZZ/VP1bXA8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9754
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,178 +155,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Tom,
 
-On 7/15/25 5:22 PM, Jonas Karlman wrote:
-> Hi Quentin,
-> 
-> On 7/15/2025 3:11 PM, Quentin Schulz wrote:
->> Hi Jonas,
->>
->> On 7/15/25 11:36 AM, Jonas Karlman wrote:
->>> Hi Quentin,
->>>
->>> On 7/15/2025 11:07 AM, Quentin Schulz wrote:
->>>> Hi Jonas,
->>>>
->>>> On 7/12/25 11:12 PM, Jonas Karlman wrote:
->>>>> Boot devices are being probed when SPL boot order is determined. This
->>>>> may delay boot slightly and can prevent booting from SPI Flash on boards
->>>>> that use same pins for SPI Flash and eMMC due to pinctrl being applied
->>>>> prior to booting.
->>>>>
->>>>
->>>> How would that be possible? One cannot have the same pins used for SPI
->>>> flash and eMMC at the same time? So that would be an issue in the DT or
->>>> a misconfigured DT for the board?
->>>
->>> Correct, basically there are SoCs, RK3576 and RK3588S comes to mind,
->>> that share/mux pins for FSPI and EMMC. And some devices with those SoCs
->>> have options to mount a SPI flash or eMMC module using same connector.
->>>
->>> E.g. Radxa has a SPI flash module for ROCK 5A/5C that can be mounted on
->>> the eMMC connector. And ROCK 4D has a shared eMMC/UFS connector with a
->>> SPI flash mounted onboard (in some configurations).
->>>
->>> When I tried to boot from SPI flash on my ROCK 4D and was trying to
->>> describe the eMMC module, SPL would instead first probe the SPI flash
->>> module and apply the pinctrl for FSPI func, and then when it tries to
->>> lookup more boot options, it instead probed the sdhci controller and
->>> applied pinctrl for emmc so loading FIT from SPI flash then failed.
->>>
->>
->> Yeah... but that's an invalid DT you just used, no? SPI flash AND eMMC
->> cannot be used at the same time? So we should either have SPI flash or
->> eMMC enabled in the DT and not both? Or are you planning on supporting
->> booting from SPI flash entirely and then somehow have proper load stuff
->> from the eMMC and not SPI flash or something?
-> 
-> Something like that, some scenarios I envision for future:
-> a) an eMMC module is mounted and BROM report eMMC as bootsource.
-> b) a SPI flash module is mounted and BROM report SPINOR as bootsource.
-> 
+sorry this one took a while, still figuring out a good cadence for
+this...
 
-Seems fine if the system is booting from the eMMC or SPI flash, gets 
-more difficult if it doesn't as we'll not be able to rely on the BootROM 
-to tell us what's populated.
+This PR introduces 3 new platforms, two from the new Dragonwing IQx
+series (QCS615 and QCS8300) as well as the IPQ5424.
 
-> For now only scenario a) is possible on ROCK 5A/5C, because the sdhci is
-> currently enabled in the FDT that would be loaded in next boot phase.
-> 
-> For scenario b) a DTBO or an alternative FDT config in FIT can be
-> selected that disabled sdhci and instead enable SPI flash controller.
-> 
-> Main reason to support something like this will be to use the cheap SPI
-> flash module for bootloader and use NVMe for storage without requiring
-> a special DT or build of U-Boot.
-> 
+Additionally:
 
-Makes sense, it just makes things difficult when not booting from this 
-external module (e.g. via an SD card) to know if there's any external 
-module plugged in and if so, which one. I would assume the plan is also 
-to patch the kernel DTB to support whatever is plugged there but not 
-necessarily force booting U-Boot from it (though this can be done later 
-on I guess :) ).
+* Support for booting downstream Android boot images on some phones is added
+* Capsule update support is expanded to be more generic, determining which partition U-Boot was flashed to automatically and supporting many more boards.
+* Minor capsule update bugs are fixed
+* A watchdog driver is added and gets timeout support
+* Autoboot now requires pressing "space" specifically to stop booting as a workaround for some boards getting rogue key presses which would cause autoboot to fail
+* Documentation is added for the Dragonwing boards
+* The RB1/2 now use USB gadget mode rather than host
+* A bug is fixed where GPIO reads could return incorrect values
 
->>
->>> With probe and thus apply of pinctrl happening later when images are
->>> loaded we should be able to create a single boot image that dynamically
->>> can apply correct FDT/DTBO depending if it was booted from SPI flash or
->>> eMMC. Or for the ROCK 4D case (can only boot from FSPI->UFS->USB) being
->>> able to boot from SPI flash and then switch to use eMMC for storage.
->>>
->>
->> I see... So the point would be to have a DTBO with pluggable eMMC which
->> disables the SPI flash and another one with pluggable UFS flash and load
->> the appropriate one based on the boot medium used by the BootROM to load
->> the TPL? This however makes a fallback impossible (e.g. booting from
->> SD/SPI flash so we don't know whether UFS, eMMC or no pluggable storage
->> medium is provided, no or corrupted proper on SD/SPI flash, how to know
->> which next storage to try?).
-> 
-> Correct, for the ROCK 5A/5C their DT currently enable sdhci controller
-> because this is the most likely use-case. However if the user use a SPI
-> flash module instead of the eMMC module (same connector), runtime could
-> determine this and use special FDT or apply an DTBO as you cannot mount
-> both a SPI flash and eMMC module at the same time.
-> 
+The following changes since commit dbf7fd557a73ded3141db3c2cf5c572989378825:
 
-If booted from that medium, the BootROM would give us the information so 
-yes it's fine. If not, we need to attempt autodetection I guess to 
-figure if and what is connected there.
+  Merge patch series "Consistent Kconfig environment options CONFIG_ENV_ prefix" (2025-06-20 12:57:47 -0600)
 
-> If I am not mistaken vendor u-boot may already do something to this
-> effect, try to identify SPI flash and load a special FDT in such case.
-> 
-> Such feature would only be board specific, and possible may require a
-> special boot only DT for SPL, something to investigate in future.
-> 
+are available in the Git repository at:
 
-And likely two different DTs one for eMMC and one for SPI?
+  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-next-23Jun-1
 
->>
->> Maybe we would need to tentatively apply pluggable eMMC DTBO, try to
->> probe, remove the drivers, apply pluggable UFS DTBO, try to probe,
->> remove the drivers, etc... Seems very complex though :/
->>
->>> Something to investigate more in a follow up series.
->>>
->>
->> Have fun :)
-> 
-> Hehe, I do not think it needs to be that complex, but this idea could
-> very likely also never amount to anything :-)
-> 
->>
->> Don't we need to describe the eMMC (sdhci) controller with the pinmux
->> for SPL to be able to load proper from it? Which would conflict with the
->> one from the eMMC controller's? This all seems to be due to some WIP
->> state, bring-up of Rock 4D and odd HW configurations rather than stuff
->> we should support in the long run?
-> 
-> The ROCK 4D variant I have come with onboard SPI flash and a UFS module
-> mount. I think there may be future variants without SPI flash that
-> instead can support use of an eMMC module.
-> 
+for you to fetch changes up to c4c08cc21448aa97328b4dac17fb54c4f657ce80:
 
-The product page hints at supporting the typical Radxa eMMC module but 
-not at the same time as the on-board SPI flash, are you expecting they 
-will have a 4D variant without an on-board SPI flash at all?
+  doc: board/qualcomm: remove signing references from dragonwing.rst (2025-06-23 18:50:41 +0200)
 
-> Current board variant that have an onboard SPI flash also configure BROM
-> to use FSPI->UFS->USB boot order (or USB when MSAK-button is pressed).
-> These models cannot be booted directly from a SD-card (or eMMC).
-> 
+----------------------------------------------------------------
+Aswin Murugan (7):
+      gpio: msm_gpio: return correct value for gpio read
+      dts: qcs615-ride-u-boot.dtsi: Add memory entry to bootup
+      phy: qcom: Enable QMP UFS PHY driver for QCS615
+      clk/qcom: qcs615: Add GCC clock driver for QCS615
+      qcom_defconfig: Enable QCS615 clock driver
+      configs: add qcom_qcs615_defconfig
+      board: qualcomm: Add MAINTAINERS entries for Dragonwing platforms
 
-Interesting design decision.
+Balaji Selvanathan (7):
+      drivers: watchdog: qcom: Add timeout configuration support in watchdog
+      doc: board: qualcomm: document Dragonwing board building/flashing
+      dts: qcs8300-ride-u-boot.dtsi: Add memory entry to bootup
+      clk/qcom: qcs8300: Add GCC clock driver for QCS8300
+      phy: qcom: Enable QMP UFS PHY driver for QCS8300
+      qcom_defconfig: Enable QCS8300 clock driver
+      configs: add qcom_qcs8300_defconfig
 
->>
->> I'm still a bit confused by what the plan for 4D and the additional
->> pluggable storage medium are, do you have anything in mind?
-> 
-> With my current ROCK 4D series only SPI flash boot is supported. UFS
-> boot support would be interesting but I have no current plans to look
-> into that. Fallback to read FIT from SD-card should also be supported.
-> 
+Casey Connolly (7):
+      watchdog: qcom: introduce qcom-wdt driver
+      board: qualcomm: add a MAINTAINERS file
+      mach-snapdragon: track boot source
+      mach-snapdragon: CapsuleUpdate: support all boot methods
+      dfu: scsi: don't call scsi_scan()
+      qcom_defconfig: enable capsule update support
+      doc: board/qualcomm: remove signing references from dragonwing.rst
 
-Would be, but if you cannot boot from the SD card at all, I'm not sure 
-it's that big of a deal? You would only be able to store proper on the 
-SD card then (better than nothing I guess, but still odd).
+George Chan (3):
+      boot/image-android: Workaround kernel/ramdisk invalid addr
+      mach-snapdragon: Enable workaround of ignoring androidboot addr
+      mach-snapdragon: Enhance android image handling memory footprint
 
-> Trying to boot from SPI flash and then later switch to eMMC was just
-> something I was entertaining as an interesting idea, mostly because I
-> had no UFS module until one was delivered earlier today ;-)
-> 
->>
->> With my current understanding, I would say that we simply should remove
->> the part about preventing to boot from other storage medium as that is
->> the result of some WIP state that shouldn't make it to upstream U-Boot?
->> We can describe the current limitations in the documentation if you want.
-> 
-> I can try to simplify the commit message in a v2.
-> 
+Luca Weiss (5):
+      doc: board/qualcomm: Fix commands for compilation missing CROSS_COMPILE
+      doc: board/qualcomm: Replace buildman build instructions
+      doc: board/qualcomm: Add example for boot image version 2
+      clk/qcom: sc7280: Fix variable name of msm_clk_data
+      clk/qcom: sm8250: Fix variable name of msm_clk_data
 
-That'd be great thanks.
+Sumit Garg (2):
+      mach-snapdragon: of_fixup: Drop USB dr_mode override for RB1/2
+      qcom_defconfig: Enable AUTOBOOT_KEYED support
 
-Cheers,
-Quentin
+Varadarajan Narayanan (5):
+      dts: ipq5424-rdp466-u-boot: add override dtsi
+      doc: board/qualcomm: Update RDP signing instructions
+      clk/qcom: add initial clock driver for ipq5424
+      pinctrl: qcom: Add ipq5424 pinctrl driver
+      configs: add qcom_ipq5424_mmc_defconfig
+
+ arch/arm/Kconfig                          |   1 +
+ arch/arm/dts/ipq5424-rdp466-u-boot.dtsi   |  37 ++++
+ arch/arm/dts/qcs615-ride-u-boot.dtsi      |  14 ++
+ arch/arm/dts/qcs8300-ride-u-boot.dtsi     |  19 ++
+ arch/arm/mach-snapdragon/board.c          |  34 +++-
+ arch/arm/mach-snapdragon/capsule_update.c | 274 ++++++++++++++++++++-----
+ arch/arm/mach-snapdragon/of_fixup.c       |  13 --
+ arch/arm/mach-snapdragon/qcom-priv.h      |  14 ++
+ board/qualcomm/MAINTAINERS                |  24 +++
+ boot/Kconfig                              |  11 +
+ boot/image-android.c                      |   9 +-
+ configs/qcm6490_defconfig                 |   6 -
+ configs/qcom_defconfig                    |  10 +
+ configs/qcom_ipq5424_mmc_defconfig        |  83 ++++++++
+ configs/qcom_qcs615_defconfig             |  22 ++
+ configs/qcom_qcs8300_defconfig            |  21 ++
+ doc/board/qualcomm/board.rst              |  21 +-
+ doc/board/qualcomm/dragonwing.rst         |  49 +++++
+ doc/board/qualcomm/index.rst              |   1 +
+ doc/board/qualcomm/rdp.rst                |  15 +-
+ drivers/clk/qcom/Kconfig                  |  24 +++
+ drivers/clk/qcom/Makefile                 |   3 +
+ drivers/clk/qcom/clock-ipq5424.c          |  96 +++++++++
+ drivers/clk/qcom/clock-qcom.h             |   1 +
+ drivers/clk/qcom/clock-qcs615.c           | 163 +++++++++++++++
+ drivers/clk/qcom/clock-qcs8300.c          | 146 ++++++++++++++
+ drivers/clk/qcom/clock-sc7280.c           |   4 +-
+ drivers/clk/qcom/clock-sm8250.c           |   4 +-
+ drivers/dfu/dfu_scsi.c                    |   5 -
+ drivers/gpio/msm_gpio.c                   |   2 +-
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c       | 128 ++++++++++++
+ drivers/pinctrl/qcom/Kconfig              |   7 +
+ drivers/pinctrl/qcom/Makefile             |   1 +
+ drivers/pinctrl/qcom/pinctrl-ipq5424.c    | 322 ++++++++++++++++++++++++++++++
+ drivers/watchdog/Kconfig                  |   9 +
+ drivers/watchdog/Makefile                 |   1 +
+ drivers/watchdog/qcom-wdt.c               | 137 +++++++++++++
+ 37 files changed, 1632 insertions(+), 99 deletions(-)
+ create mode 100644 arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+ create mode 100644 arch/arm/dts/qcs615-ride-u-boot.dtsi
+ create mode 100644 arch/arm/dts/qcs8300-ride-u-boot.dtsi
+ create mode 100644 board/qualcomm/MAINTAINERS
+ create mode 100644 configs/qcom_ipq5424_mmc_defconfig
+ create mode 100644 configs/qcom_qcs615_defconfig
+ create mode 100644 configs/qcom_qcs8300_defconfig
+ create mode 100644 doc/board/qualcomm/dragonwing.rst
+ create mode 100644 drivers/clk/qcom/clock-ipq5424.c
+ create mode 100644 drivers/clk/qcom/clock-qcs615.c
+ create mode 100644 drivers/clk/qcom/clock-qcs8300.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq5424.c
+ create mode 100644 drivers/watchdog/qcom-wdt.c
