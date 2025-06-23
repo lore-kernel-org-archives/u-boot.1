@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C39AC77B7C
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 20:10:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A6CC77B7C
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 20:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4AE081FEE;
-	Mon, 23 Jun 2025 22:10:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 622568210D;
+	Mon, 23 Jun 2025 22:10:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DZUhQKyU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DzUBW6Qc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8DD28210D; Mon, 23 Jun 2025 22:10:39 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id C863E81E13; Mon, 23 Jun 2025 22:10:49 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCBC781E13
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 22:10:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55CB182D83
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 22:10:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-408d14c7e92so3595765b6e.3
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 13:10:37 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-2e9a38d2a3aso3556669fac.3
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 13:10:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750709436; x=1751314236; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V7MSH5S8i+D6/NQmy5VTW4fboXoid4Bx9g+vKN1j3X8=;
- b=DZUhQKyU95MAWIy6O2cR1fk9A39U6KxCvIdL8jhCe2mg+XaBkdPigA062FnI9xDkEQ
- L4tZYNfof2d7lreqZiE1C9xPiCIWzoIF/7eFpZLwtAa0el8TmJ9bmPr7klw3qZ86qmLj
- k6TO7aUCpAsJKf/ogUdjvNvv30EsDeA9tf6oI=
+ d=konsulko.com; s=google; t=1750709444; x=1751314244; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=S1KKdtFFg4iPTpDGrMCN8qz4EWqOv6UOBy2CcQ7fTW8=;
+ b=DzUBW6QcXWm1XMf7ZEClLypT3N/sAjdGHmk5zNVc63DTtbA4oau58oddGZz1fJm73N
+ /pSdY6yzxEAF3K1fzEqE1rZEZvSdq7vUUYAbNgaukV3I8igmtgIF/9taRpjcrgKJUqcI
+ xm8oB0eDtmd1CTmK3cP9RfDCAxHugft+xbrlQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750709436; x=1751314236;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V7MSH5S8i+D6/NQmy5VTW4fboXoid4Bx9g+vKN1j3X8=;
- b=AkVJQ5u60Etsv+Kr7hIinwUuPZVeBo3TTIrhPCp6icAHxfqbRCE8oeuFYV2uDVGSny
- CEXuhiFyX9PG59ImdVcwmi5Zvo7FQFCdj1QJ1f3NhP6mZZXAYWjMHMfO5tuJlhVKLjW5
- pnIdBEdF7kH71gkHCZaYnBbd/6RL0/I60XSSUEIlcKPXJle3v+wloFNunlw2fu8IFY35
- ir4qgnlFo+UIwC/zXCuWtw9+ZHck0v5JXa+7EnxzaxRJJkbpaU4uDiEmok9ppEGzGtdJ
- mPlhbe82Jh9HPEyr2sU4V+J0rW/B2+jpb2gfPmyl2CQxbsm5+DIRaI5YL8d6j45qNiVt
- dB5g==
-X-Gm-Message-State: AOJu0YyeJxwi/TzOmbsR+IBCJk0ol7RSz7c9mMs+imXMp53/ckkgPgNw
- baA9a+Lj51yjFVIieAtp0tjrgPgg60hfz4gP8w5UZGTK0vO90omx7HuPCVmn8zCJY1s=
-X-Gm-Gg: ASbGncvxYIM7Z9o1pQtCTlZ2Zpu0Pw39m6jQs0ozH6TM5maOimPAcBpSOUhxBRZ+VDa
- fbtcQ52//aRIBaiqVTnm3OrIiHXBJdaMv2fXN5IoKZf+AacRyLcl+IQxiibWvAxNjIxWYBdpMuJ
- jQzGtLtZrobCOt9pqB2zC/QfrM7ZG9CXjoxwYL6lxZQhJLdlWMOFHlkH3ea8lBNYVtS0FcFMa6E
- quPA1qExI3TT66gk4JeNHYoZTgyM8OlXosD6JMoRGMb4sbikdCN9eTrcrOs3EPJF9XNzkZNIq/t
- OPHfEFRvfAplXYIh/w9bQp6NPeCQj9mdWUkODxncYtgD8Jgfl2ItDVgJxaVQwhqr94hn4SHsVKt
- CiuGaXV1tYU2tg57sBBIO/Q==
-X-Google-Smtp-Source: AGHT+IEiwA2qcUGdUnZ3z6JYYGlfAXtZHrd8ADO+2KX+F2VCSQyHYm3rHrJwY5Q8lEVSVLmFOl+YYA==
-X-Received: by 2002:a05:6808:e8b:b0:3fa:f848:8dfa with SMTP id
- 5614622812f47-40ac70d94ddmr9965107b6e.30.1750709436546; 
- Mon, 23 Jun 2025 13:10:36 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1750709444; x=1751314244;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=S1KKdtFFg4iPTpDGrMCN8qz4EWqOv6UOBy2CcQ7fTW8=;
+ b=CPe435x4TZ7yOYzmzwn+d/YtvDnTtdgW0u34vni/Ri/PNQQG/4rmb5pqfNONYQzFvu
+ ul4dabCRUNT8cxwEYNZXSywaCd366Q8Nmy1TYG2V3q9m72LFZmUP8zAdCpR8Mx/SFjUB
+ xZSwNkiOiFsRrTv6tmHyN+5DoJcXMwbMm9yhq4ZEtWGgLO5zbLFh4xc8omkge7IXtxm8
+ IIt2Z+EMAsSjNsHpcfmFt1BBhdPY0t5ZUTvxm03tUZyv1FJoLnxRV4bsNmyQe3EZcTO2
+ EGqv6WpAIO41RHg0FEX8WDL8l3nQAWawnlWIeYLBs/S5VoRG8/ZB2gWLjEyyxLkUuhAp
+ o9WQ==
+X-Gm-Message-State: AOJu0YxIMXo4lEehg1ich+2St3ZRhMYDIe7+AR9quR0I6aXzcUJWdNGO
+ ATIEY8AowvUO0IjmMDnD4H25wCBbBzQ1Ype7ZfHI3Ozps7M3tGHut5JiB5glNMEYqdlDlkkgocB
+ UJ9OmqUY=
+X-Gm-Gg: ASbGnctOUONmQIe3YkCZ6VYt5S7Ow2gLwI+Pa+LoSY/3UixYxuHKw3pD1Rm+C0L0HvU
+ AcH4tcNGnd9oGVmf7m1CLchX8JtVIZU4b1NuusCeGKZSwQnoHM/WLu7TDzv2MW04OLuFNaz5g/U
+ eMv7rjo9VEsbVVfkAamVTLc8LOEcgbvwpl/4UOiMNkld9/paBr1VoW9wKrzxfv7dv94pO3SWHBk
+ 4X1dtQolQrX30pLttdbslTf+gDP9VzO5+9nxM+gdaoc6FSaUKWX9iR99iukQOCHjdm1ARdkhx2l
+ pXDvCYouS6sON6RfL75X+2IFVr0KrpWScnI7tBQ7QB7zjfxOwAoVmZFq6qRnYSIoRSJ1ghn+1ru
+ niXqTmEa4hlUghkGCZiBQVf8=
+X-Google-Smtp-Source: AGHT+IEZfS7KFqoG3/Q1CWnZlrwWBiVQalN57n8vsc/ZN5Sr1vDkGtqltPk0DyN9wiJENtFM4LXIRQ==
+X-Received: by 2002:a05:6870:ce88:b0:2d4:ce45:6990 with SMTP id
+ 586e51a60fabf-2eeda55dbd0mr8777157fac.7.1750709443933; 
+ Mon, 23 Jun 2025 13:10:43 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6115b68ebe3sm1151168eaf.8.2025.06.23.13.10.35
+ 586e51a60fabf-2ee8a8ea97dsm1787114fac.29.2025.06.23.13.10.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 13:10:36 -0700 (PDT)
+ Mon, 23 Jun 2025 13:10:43 -0700 (PDT)
+Date: Mon, 23 Jun 2025 14:10:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, 
- Tony Dinh <mibodhi@gmail.com>
-In-Reply-To: <20250623191011.4036434-1-trini@konsulko.com>
-References: <20250623191011.4036434-1-trini@konsulko.com>
-Subject: Re: [PATCH v2] arm: kirkwood: fix freeze on boot
-Message-Id: <175070943565.1014388.14815397537513201857.b4-ty@konsulko.com>
-Date: Mon, 23 Jun 2025 14:10:35 -0600
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2025.07-rc5 released
+Message-ID: <20250623201040.GF4003484@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="deZtbhxshNCqa07h"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,27 +92,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 23 Jun 2025 13:10:11 -0600, Tom Rini wrote:
 
-> Commit 6fe50e395080 ("arm: asm/system.h: mrc and mcr need .arm if
-> __thumb2__ is not set") is not a proper fix for the LTO link error
-> mentioned in its description. It causes 32-bit arm instructions to be
-> mixed with thumb instructions, which the Kirkwood SoCs do not support.
-> For example, board_init_r() is mostly generated in Thumb-1 mode as
-> expected since the build flags contain -mthumb -mthumb-interwork. The
-> MCR instruction corresponding to writefr_extra_feature_reg() is also
-> correcly emitted as a 32-bit ARM instruction (it cannot be encoded in
-> Thumb-1 anyways). The problem is, the compiler inlines the MCR without
-> generating the BX or BLX instruction which are needed to transition
-> between the ARM and the Thumb-1 states. From the objdump output:
-> 
-> [...]
+--deZtbhxshNCqa07h
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+Hey all,
 
-[1/1] arm: kirkwood: fix freeze on boot
-      commit: 410d59095a9f2319585bd66152b31f72389dcdaf
--- 
+So it's release day and so here is -rc5. I will be merging this to the
+next branch shortly and pushing that out as well. As the next tag in
+two weeks is the release, anything now should be either a clear fix or
+clear documentation updates.
+
+I also want to repeat the link I sent out last tag and thank the people
+that have reached out so far, but I hope we can find more support still:
+https://lore.kernel.org/u-boot/20250602222738.GC100073@bill-the-cat/
+In short, I think for the overall health of the community and the
+project I need some help from others in the community, on not strictly
+technical matters.
+
+We're continuing with a community meeting following the release and is
+the same time as the previous meeting. The meeting details itself are:
+https://meet.google.com/btj-wgcg-euw
+June 24th, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+
+In terms of a changelog, roughly:
+- Assorted regression fixes against earlier parts of this release cycle.
+- Assorted platform and infrastructure fixes
+
+As I said above, the next tag is for the release itself on 07 July 2025.
+
+Thanks all!
+
+--=20
 Tom
 
+--deZtbhxshNCqa07h
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhZtMAACgkQFHw5/5Y0
+tyydQAwAuSyIbX/bG9MkvhsY+aqnkYGhXdmJqQnffPNMiE4FHj0aEPW5Bs7ru/NS
+Pe6NuUClcIdDBVgQxOOkctRP3Xm6s5qTNEizogCBtP5CkWu6zic1V8GxX5FGcHvM
+iyFNei0sFOJ9mJXKjrTD32Js2F+/eYS8ZOycnZyFKZenWf/lj5cWsdXsBFDt/Ge0
+xgJNBodbyaE/tEONASClcj5WO8/rXzINN/kfRhMZeGgjNQ35+leEynr+pRqimNSE
+/91/eTsaXWuY7RFcRI7LLkQPo32mHCDjlH3nzLuE0JFqtmLoZaOMgDRucZMSaRTI
+jYByUzv2ECYNhvQzn0KyV1fZzmHkgldJg+TnxOa1raHVurlpLpkOkcaUtqGmIq1C
+CBxt+V1Eo77E5dv7reBHG/tKHMv2ccxieoMoI45Dz1QUCv+/eFrcFDsjAq09acYy
+wojNzLydDmZP36s75w81nvZfyHHJIGzzOH8OJwcGC8DRikIYClWUZVVPHcfhnEAc
+fpZUvkMF
+=JkoJ
+-----END PGP SIGNATURE-----
+
+--deZtbhxshNCqa07h--
