@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EB2C7115B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 21:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C3FC7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 23:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B50508210D;
-	Mon, 23 Jun 2025 23:00:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 738418210D;
+	Tue, 24 Jun 2025 01:40:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J8jUyxno";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DeyfUOLF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F8CF82CBC; Mon, 23 Jun 2025 23:00:24 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 9C0FA82C4C; Tue, 24 Jun 2025 01:40:47 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9A7D81E13
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 23:00:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79AA481E13
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:40:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-747e41d5469so4954677b3a.3
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 14:00:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-736f1953673so1233210a34.0
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 16:40:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750712420; x=1751317220; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gG0bMLUk3R31ZE/1bt3ctr7tjbSRr8Cys9MX21shvSc=;
- b=J8jUyxnoLOInvqAsT8m61In/jttEClkxA/ZLWktdPzqe4GvnPQs9nmF5Y741RgJsG5
- D0MSS6fbkSl9agOGwh6kDMnqmNqRrQ0f8mOR32oxNt1InCLXNzDO3ku0ORWv8W+EvURy
- eu+JBVk7lmfNE9iN+bcB1t/36gpi+Df8kEmfkgNdlpxSw7psHtBL+M9XDs7wl5qHRWrN
- yZlViNQ9pTZrrhjcviESddUSgSGpmt3dMh0D4rza6+8mTs5LUhv6DwkyrW5wK0sKWIxO
- Ml/CdIXxJ5boly3nz05fCbzW6GU5D+yBG6GMzT958kMN4VeX/G+jmsB28PT4uPo4Etc+
- v5Sw==
+ d=konsulko.com; s=google; t=1750722044; x=1751326844; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0sI9Q0aOvjR8Mk5syxa2+QTmIU8l9czwIbYToItyDeI=;
+ b=DeyfUOLFRa4jkZGGnwes8nJLx+wtN4845794e0Wr++FrVXjBoiDBCvjdaBSoXkWurN
+ H27twm4alAScJpalpDIlirOCpXdSyTRNcioBFumwPKW0Ja3ks173jeXWjF6RzdQSSUrd
+ 4L7SrWAiQTxzx7ren3OJZi1jkgffp8fsZ036M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750712420; x=1751317220;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gG0bMLUk3R31ZE/1bt3ctr7tjbSRr8Cys9MX21shvSc=;
- b=T91kw8UAxeP8BTHS/7Pnjjd0MArnJ8vTGMfLDvDaNtpluyXi2jZNYgw56bJKX92aOH
- g994pzAK2mOdEvGFh0v0WL/C5Ih3dkZkAW3uMaqMxXBBPOOgyarc3rDnQ5dnfBPY3Fpf
- NVzG26XjxGTy+oVNvYezD2wrGug4UBecYXo6GENlACH+Nc26YJyYZ093LEaE+fFsO4it
- qcUBkJNj5R9SzdFi6/Aj5Hhj63CuAN7tm3KAmczVLHTEjcyt7Xv9QPLEJjHML5gJpos+
- oIsBrpQYVEc0DXp6exOGaVnpoKhnm5qoe3SHrfOYs/DOCrEjfOnGYoMRCLs2hj9mQRm5
- Xnew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZYuP05MaXE+ItrZtBmzZHoW1EyQRQ42XxWc0LKm8TZq5aOstXU1axfHEYFJhKufhL9oXxeAQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLhfttzCzndqvoWL3X9rQJE1lhyF68gkhso9n4+13LKLvDUUUL
- oo8inS73PDqDu21vX5enw60fKdMoh9QnV5uBlQSdWj/nq4m0HvCbas1Q
-X-Gm-Gg: ASbGncsQk6a52JnwqoXt9laGVadGVBDjnlSo93A2Gfam9MUxio3bkzQBqmFg+v2G0mM
- 6hanH1BbrvuPQ9+7Nb9vC010m9PnyEduZaj+me+PnYsGZ+ofi6V/kgrf3eyEEqxFrDTvTEosLPb
- sPd36f1If6vsEdebB4h/IFXmrQCE/izxhR+5TRgigO9Loe/GTaFBl7ISDAnsJlHdVtjvlBMNkyD
- c0+1o8Ix3ObxwFc6RsmqDdsb1uC5JMPzOncTuKVt95OhJwjgmN7arZitRQzW2YjvlasGQpUD6Sw
- yNtY4Hs4GS7qpoYZFHUjVWMQKLHIn9lC8LE6IbcxZtixjG0C+In9pseQ3s7l0UU1Bw4MsmT9pAh
- 2Ce60qvRRtVptL7V6RowfhAgN9fpZRQUqrdMCswhic3VGl0cKyQ==
-X-Google-Smtp-Source: AGHT+IGt36amP73OrxPagVZrwRbFbwYH9vGxYF3BORPzKc4fGg3MMucygKE4YzM37O5A25ymlR8PKg==
-X-Received: by 2002:a05:6a00:2e99:b0:742:b3a6:db16 with SMTP id
- d2e1a72fcca58-7490d67f737mr19367798b3a.20.1750712420292; 
- Mon, 23 Jun 2025 14:00:20 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-749c8852f0fsm43678b3a.117.2025.06.23.14.00.19
+ d=1e100.net; s=20230601; t=1750722044; x=1751326844;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0sI9Q0aOvjR8Mk5syxa2+QTmIU8l9czwIbYToItyDeI=;
+ b=Nz2bFBzYAnqvjbiPkx7nqWwOCAU0j8IhovtVuCoToa4cAh/yYpjvUFlqUC5qkj6cJH
+ TK5fXclOOxOAqBbVlzHN2ATm6GW7eBrNnct9m04tmrdD4KA1C7ju8Y/o2vJx8jJVges8
+ oRrlkTBzL9PQ4kCxEmXtvGnvK9wzKNmUcQrBgAXSyQ2Ij6dl7dYKoy46sX44RfB2jmdi
+ Apzh31j9O7oO1NXjy/vYh7qh0b2FR4dN/vYj9drJIXIvDrHRkYNUUWLnt7WOuN/PfYtz
+ NpGSSrye5jCAQSREp6raqbu4IXXwN4e5yPpdRr9XYEkF9ZAt8y9LUDcmDrIFKCp0ig0B
+ OOGA==
+X-Gm-Message-State: AOJu0YyXeQJjp1TPn+V88EFRUAbnXE4E6GM9e9PEVLAgnCMvaOAF53+I
+ /Ry9ki2LFlivpP+YfvLyUfCU4U21LdT3EzhCpKvjoZdx9s9EyfjL9WVdr0BbQrh+1uA=
+X-Gm-Gg: ASbGnct5Cll669xfhYyo7C3JZu+X4kOJODGZ3wIVy102MLE7/EQaSpmuJNz/v5haMXe
+ 2Tv+M1OBjWx/KwnIL9MmkZZZiGRHwvk3Q7l9ak5SVTU4hfuMbRkrx7qon+pf5ESBRT5M5sgM2Vz
+ lCygV0aj/rtqSybZSfRY5wZXOGKzGfzv0oc+mVzGSq9Zzqa+Qpx4J+uCwwSzRE5c6AkXC3mge94
+ XV+IZTN5jibBQ+tKmCttunac3Ah9BSVuTtfusVnodYHvxVsOJi8j/R4efwAK4ngMCm7WSS7nt2V
+ gZ9gRnFzucGRg/SZZop4prnl46Hu6f3hdkXVKxxCKDMMnPRxkPO0K3JgWAz/jdh2NLvtGjNtLht
+ frimA0SnXofc1QPv9PUdFb6pou8R7/z5rzQ==
+X-Google-Smtp-Source: AGHT+IGia4rn2AMiAxUYyI5pkmTVble4UAjlKQPr/unK5MCMAvv1o6IBJVVtVrR139CDRNTFl02POw==
+X-Received: by 2002:a05:6871:80c9:b0:2eb:87a9:7fc1 with SMTP id
+ 586e51a60fabf-2eeee56a6d1mr8835745fac.27.1750722044059; 
+ Mon, 23 Jun 2025 16:40:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2ee8a8ea87bsm1863362fac.28.2025.06.23.16.40.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 14:00:19 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Stefan Roese <sr@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH] arm: kirkwood: Enable bootstd and other modernization for
- ib62x0 board
-Date: Mon, 23 Jun 2025 13:59:43 -0700
-Message-Id: <20250623205943.11889-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ Mon, 23 Jun 2025 16:40:42 -0700 (PDT)
+Date: Mon, 23 Jun 2025 17:40:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: vtpieter@gmail.com
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Subject: Re: [PATCH v2 2/3] Amend fpga Kconfig and add a new
+ sandbox_fpga_defconfig
+Message-ID: <20250623234040.GG4003484@bill-the-cat>
+References: <20250623181222.1539194-1-vtpieter@gmail.com>
+ <20250623181222.1539194-3-vtpieter@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bI0db9NfBuV2ar94"
+Content-Disposition: inline
+In-Reply-To: <20250623181222.1539194-3-vtpieter@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,137 +99,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable bootstd.
-Update defconfigs to the latest u-boot requirements.
-Enable SYS_THUMB_BUILD and LTO and to reduce binary size.
-Enable NET_RANDOM_ETHADDR.
-Disable JFFS2 support.
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+--bI0db9NfBuV2ar94
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- configs/ib62x0_defconfig | 16 ++++------------
- include/configs/ib62x0.h | 28 ++++++++++++++++++++++------
- 2 files changed, 26 insertions(+), 18 deletions(-)
+On Mon, Jun 23, 2025 at 08:12:18PM +0200, vtpieter@gmail.com wrote:
 
-diff --git a/configs/ib62x0_defconfig b/configs/ib62x0_defconfig
-index 1beb5837bb4..0c14ac06e92 100644
---- a/configs/ib62x0_defconfig
-+++ b/configs/ib62x0_defconfig
-@@ -2,48 +2,41 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_DCACHE_OFF=y
- CONFIG_ARCH_CPU_INIT=y
-+CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_KIRKWOOD=y
- CONFIG_SYS_KWD_CONFIG="board/raidsonic/ib62x0/kwbimage.cfg"
- CONFIG_TEXT_BASE=0x600000
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_IB62X0=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xE0000
- CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ib62x0"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_IDENT_STRING=" RaidSonic ICY BOX IB-NAS62x0"
-+CONFIG_LTO=y
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=3
--CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="setenv bootargs ${console} ${mtdparts} ${bootargs_root}; ubi part root; ubifsmount ubi:rootfs; ubifsload 0x800000 ${kernel}; ubifsload 0x700000 ${fdt}; ubifsumount; fdt addr 0x700000; fdt resize; fdt chosen; bootz 0x800000 - 0x700000"
- CONFIG_USE_PREBOOT=y
- CONFIG_SYS_PBSIZE=1051
- # CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="ib62x0 => "
- CONFIG_SYS_MAXARGS=32
--CONFIG_CMD_BOOTZ=y
- CONFIG_CMD_IDE=y
- CONFIG_CMD_NAND=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_JFFS2=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:0xe0000@0x0(uboot),0x20000@0xe0000(uboot_env),-@0x100000(root)"
- CONFIG_CMD_UBI=y
--CONFIG_ISO_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NETCONSOLE=y
- CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SYS_ATA_STRIDE=4
- CONFIG_SYS_ATA_DATA_OFFSET=0x100
- CONFIG_SYS_ATA_REG_OFFSET=0x100
-@@ -58,6 +51,5 @@ CONFIG_MVGBE=y
- CONFIG_MII=y
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_STORAGE=y
- CONFIG_LZMA=y
- CONFIG_BZIP2=y
-diff --git a/include/configs/ib62x0.h b/include/configs/ib62x0.h
-index e1b62f78b21..01ab6edb05f 100644
---- a/include/configs/ib62x0.h
-+++ b/include/configs/ib62x0.h
-@@ -1,5 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-+ * Copyright (C) 2025 Tony Dinh <mibodhi@gmail.com>
-  * Copyright (C) 2011-2012
-  * Gerald Kerma <dreagle@doukki.net>
-  * Luka Perkov <luka@openwrt.org>
-@@ -11,19 +12,34 @@
- #include "mv-common.h"
- 
- /*
-- * Environment variables configuration
-- */
--
--/*
-- * Default environment variables
-+ * mv-common.h should be defined after CMD configs since it used them
-+ * to enable certain macros
-  */
-+#include "mv-common.h"
- 
--#define CFG_EXTRA_ENV_SETTINGS \
-+#define EXTRA_ENV_SETTINGS_LEGACY \
- 	"console=console=ttyS0,115200\0"				\
- 	"kernel=/boot/zImage\0"						\
- 	"fdt=/boot/ib62x0.dtb\0"					\
- 	"bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw\0"
- 
-+#define KERNEL_ADDR_R	__stringify(0x800000)
-+#define FDT_ADDR_R	__stringify(0x2c00000)
-+#define RAMDISK_ADDR_R	__stringify(0x01100000)
-+#define SCRIPT_ADDR_R	__stringify(0x200000)
-+
-+#define LOAD_ADDRESS_ENV_SETTINGS \
-+	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
-+	"fdt_addr_r=" FDT_ADDR_R "\0" \
-+	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
-+	"scriptaddr=" SCRIPT_ADDR_R "\0"
-+
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	EXTRA_ENV_SETTINGS_LEGACY \
-+	LOAD_ADDRESS_ENV_SETTINGS \
-+	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-+	"mtdparts=" CONFIG_MTDPARTS_DEFAULT "\0"
-+
- /*
-  * SATA driver configuration
-  */
--- 
-2.39.5
+> From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+>=20
+> All but the FPGA_SOCFPGA configurations are enabled because
+> drivers/fpga/socfpga.c requires ARCH_SOCFPGA set for the *manager
+> include macros; amend Kconfig with that dependency.
+>=20
+> Add a new defconfig to facilitate compiler checks on most FPGA-related
+> sources.
+>=20
+> Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+> ---
+>  configs/sandbox_fpga_defconfig | 391 +++++++++++++++++++++++++++++++++
+>  drivers/fpga/Kconfig           |   1 +
+>  2 files changed, 392 insertions(+)
+>  create mode 100644 configs/sandbox_fpga_defconfig
 
-base-commit: 926d8b9eea89b9a90450f7723d66fba4184f586e
-branch: master
+We should do the fix to Kconfig that you have here and then just enable
+all of the drivers we can in the normal sandbox defconfig file.
+
+--=20
+Tom
+
+--bI0db9NfBuV2ar94
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhZ5fQACgkQFHw5/5Y0
+tyzBEAwAq5QByRl7zoMoPM5Ehf94Me+1cx9jGUid5vZ7KOJSNsDn1GDDN5ninTqm
+jrdgvb/Yqy7Kv4A+i4+JY6Rv9CWwa1Y7bIEcYtsU267QIiUbVjnEATvwv7xpZBMZ
+/THEwAAELmsFzXv+qnTti/a2Nk2ZVPy9kWLLNrQ8wB2SWqjWqxlKVE0xDf18PwCR
+/jaR64iTcRiduJODaJN1mDTw1KXWhB+z7o68LoSYGYTGlO0iXLRsqBvNrC0jBlFx
+gDPgEm8YgD/K94EC9zeJNIPA9IJu+h7NO3EXXOUDFddqTJ6n3EH+MpUfQl6NeOk7
+U7sw4inTmvZ0zBZPI2FZWlFtvFuXp1KX76Mc5v1mVN8qkPue45Uk5isT57yW5O0s
+FM8fDsI6V4YaCDPo5qk4xhfozThsBTUtClG+Vl9pw8yTy97am90CvWBluqGl/gac
+xWWJof/iJdy32LCkTXJXpKCPzEUJmUUwkmPABAzh+wQ1ZHC3M+5xU+tyw8GUzrg8
+uFjqSO9d
+=pBPV
+-----END PGP SIGNATURE-----
+
+--bI0db9NfBuV2ar94--
