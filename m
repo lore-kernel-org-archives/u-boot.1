@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB2DC7115B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:10:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1E53C7115B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Jun 2025 19:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43BF081FEE;
-	Mon, 23 Jun 2025 21:10:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0ECD981FEE;
+	Mon, 23 Jun 2025 21:13:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ixhl+2HE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NCMm/KH3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD7C18210D; Mon, 23 Jun 2025 21:10:16 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 80A558210D; Mon, 23 Jun 2025 20:13:03 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8618B8006D
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 21:10:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9596C81E13
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 20:13:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-605f7d3215cso2197914eaf.0
- for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 12:10:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=vtpieter@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ade30256175so800320966b.1
+ for <u-boot@lists.denx.de>; Mon, 23 Jun 2025 11:13:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750705813; x=1751310613; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1750702381; x=1751307181; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9xOqaA2wZedSBQNHxvEHXAhgNM3ybUiOeBa1Y/SXhiY=;
- b=ixhl+2HEcz7lOHV6keke4WfORJ3kCNvt8gsoMTDhJOPFhX8Oms5BJHe1ouRJmqrEr1
- pEwvo0cnRCxf2cCt6mGRfyGc4YKaqdz3JV3lmHqhL+bZfTXARuCRrcdV1tXUMpPUEHHA
- yE7+IPPfUGr2C96slhG52saKHMHHOjjcstUrM=
+ bh=s9QcYNdSrGIUweoyZHEBK/csZMf3G3ug65tYQlC7diU=;
+ b=NCMm/KH3TFoQ8MmarIEGbMGv6cmelcypDxxC9hfd4c2/KuvSCR6AYuRuNLegFEYopJ
+ QpsX0Vcacx6qaV5bG6HDGMyR4D1+sOsPw6KXV4CFHj1GI26VW6viwDVVYLOJecBfhYQP
+ 5voGycLdn/RC4mMEzbuNZYbViRaICeD1U0wW1pR0gjhtQ88ud0kUm4JRRq5gDnf4TWhv
+ icZRDtv0JkMbZZwEhKg0/amvW8VX8YiiB/BNzsCAFynLA2F+By+F/q/diie2u2eFqQwv
+ TWhkuTfNkQ5kaC71KMlhcvc4G+KXy5+Dg2libf6WktF22aT8llChyW0lrJNFDS7RLiEt
+ 0HmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750705813; x=1751310613;
+ d=1e100.net; s=20230601; t=1750702381; x=1751307181;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9xOqaA2wZedSBQNHxvEHXAhgNM3ybUiOeBa1Y/SXhiY=;
- b=bETZCvpt0zXv1JWd3UqJv8qlUkmbQftD10yhm78PRr9Lk8cwjtyQmJbrlCBlYLDnJf
- Xtg6oiX0aW1/MgYwXv1saIRqhWb08JqJp+Y9KBIQfRwxWQckweLUusIqLYkw/dYtNW2e
- aF1/6iEEUv+NIYJqT0MeySovbJML9IgBwtLGsOqYW3Ge6jfpfg6XgMg/UwLG9t3kzL7c
- cbGqS4NhBbtXdbmlvENrdsVqmnOAQFfK+L72sdPOdLKWzlaI80H2S2EA4WYdyLgMHYQ+
- e7DP91QM45MCtaYPDbfPQcWcrCymkRYfPbeQzYojNTI4mvGMtP88Q9Piu7svCfr2X7BQ
- Q5oQ==
-X-Gm-Message-State: AOJu0YySeYK+2QajL5N0rSmYT9a1kjXe8R7rn8oUBHFOwEaziqNemvh0
- TDnLuZqkjaw6jhaomU+r4KNyc28RAQiWRu9pOjD7PA7GobbG7va8woGfdThCToWP+QzC3JIfgVu
- 7dVW2nHM=
-X-Gm-Gg: ASbGnctIJqXHvF4zXRDq0+gHA1OQl1JaK/9H4UYWVINCqCOzm3J52Cw1hCSKiM9lVr9
- ZjXcl9JmC1e4UYComKugOiBr71ZcEruKlrxH/aS/NKd5NLisUW0KyIVImDEIO11sJAMR97eQrC2
- KcFb0yGyXOb01llaz4DMErAsmkPZ5mmNAGmzXpD2ObPg395Sx6IBl7FIBTFgG2g4FJnn2R/d2gx
- xtOH+kqb9FVU7hNK/i3CQ3j9kVw52FFZiO4JWWlHoefrkfedrMs+JHskvVrKtwjfSyRVdlcZTA6
- prllXe+6WT924MuN1iNw+FyEGddbuQZv5z8+14bPRSnI4pikwB7R8kVWQpIXzAdDj3elmaotfb5
- jCiWtwp9D79994E8K5AKkudm7TCYdRXvzeTX/
-X-Google-Smtp-Source: AGHT+IEgs5P0bwZsaBwyXZgdShlOt1VHreNeFOPgVwVOwFx3YrzCdVQIg1n2WdlsDAoKxBy0bWvRJQ==
-X-Received: by 2002:a05:6820:2784:b0:611:6789:6cda with SMTP id
- 006d021491bc7-61167896d1dmr7264298eaf.5.1750705813171; 
- Mon, 23 Jun 2025 12:10:13 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a90b1383fsm1536216a34.16.2025.06.23.12.10.12
+ bh=s9QcYNdSrGIUweoyZHEBK/csZMf3G3ug65tYQlC7diU=;
+ b=IUJ5M5CrVz5Ook6wqzmpMF70Yrt4F4Niw6vdvO7XwbLRmJ4j6ybn/6yEo5IDp9bD8k
+ cWOppc7FwVpKzy9BkfwNph29CeNFejL+M6WMHzZx257RPbK3D12SfHHRM7uuYB4ZhF2L
+ HFuP+McyiihoWjgRn55lFGnQ/awohnB6+fVesT13fiHnZ9hM415LCxnFuL+Sih7MDDRJ
+ 6xlTqKOTwZCgiWYOavZA4jGqa8FlOgLjS3Vg4bUSLT7UmW/bByKqf4R7048W4nDb/V/8
+ EuXYSwY50Am7c0bwVhxKuCchuoKi6fHBezCxWYYgdmvdbGJALZbaW2DZ6wDQSPyJtmKt
+ aNIg==
+X-Gm-Message-State: AOJu0YxBmURg4cKzfNJvWUeomZHrWIWKzOHuuheeT6WRUFVu5yMKYtxJ
+ 6y14BDPr3J+Kamocn7ZggDTINssUjO0u/ljPw5A8b1xvPWGkRpX/xODE8br/fA==
+X-Gm-Gg: ASbGncsTBlf699v61zfZ4kCsr2reltg6wTB5r3vXFXG0QYX11se7t1F89kDXdolzEuY
+ /iAk/PQF6CBJNIm3vNkuznCctlrvn1k7s4dWybI0dyRppFWbUDhLvHJlWZUCNAnzgNKX2mCwy3K
+ reFi+GQqEJIQQY3/XWvURx5LezT8uMcZ8V0S6g8RfKiAMeeN1QQEmFnL1+skgdB3zCuW/U32FIb
+ XXABQnVsHVNPYiSS441MoK/ITUg4l+PaAKTdfWgdhCVuqOI/KkUToJTKw1HNPSVUKcd195QLSZy
+ XNnvNZfeyquf8YJoa4aOsWq0CyDMlsCnrgPQ3vjL+mzucId47SLBEXDIFx2WGUUD
+X-Google-Smtp-Source: AGHT+IEac+7k6FPEMPBUCORqQ1JOTZSbCdqwR57v8gGl01r2d/eON5yGiwBuT8JXpZBeQNgTuBZHSw==
+X-Received: by 2002:a17:907:3e8d:b0:ade:32fa:739e with SMTP id
+ a640c23a62f3a-ae057953290mr1326159666b.2.1750702380590; 
+ Mon, 23 Jun 2025 11:13:00 -0700 (PDT)
+Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae0a18d9887sm59955366b.11.2025.06.23.11.12.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 12:10:12 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ Mon, 23 Jun 2025 11:13:00 -0700 (PDT)
+From: vtpieter@gmail.com
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v2] arm: kirkwood: fix freeze on boot
-Date: Mon, 23 Jun 2025 13:10:11 -0600
-Message-ID: <20250623191011.4036434-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Subject: [PATCH v2 0/3] Improve user feedback in case of FPGA bitstream load
+ failure
+Date: Mon, 23 Jun 2025 20:12:16 +0200
+Message-ID: <20250623181222.1539194-1-vtpieter@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 23 Jun 2025 21:13:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,70 +95,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jerome Forissier <jerome.forissier@linaro.org>
+From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-Commit 6fe50e395080 ("arm: asm/system.h: mrc and mcr need .arm if
-__thumb2__ is not set") is not a proper fix for the LTO link error
-mentioned in its description. It causes 32-bit arm instructions to be
-mixed with thumb instructions, which the Kirkwood SoCs do not support.
-For example, board_init_r() is mostly generated in Thumb-1 mode as
-expected since the build flags contain -mthumb -mthumb-interwork. The
-MCR instruction corresponding to writefr_extra_feature_reg() is also
-correcly emitted as a 32-bit ARM instruction (it cannot be encoded in
-Thumb-1 anyways). The problem is, the compiler inlines the MCR without
-generating the BX or BLX instruction which are needed to transition
-between the ARM and the Thumb-1 states. From the objdump output:
+The main motivation for this patch series is to make the `fpga *`
+commands' return more explicit because simply returning the command
+usage without indicating the root cause is not helpful.
 
-006186a0 <board_init_r>:
-board_init_r():
-/home/jerome/work/u-boot/common/board_r.c:799
-  6186a0:       b5f0            push    {r4, r5, r6, r7, lr}
-  6186a2:       b0ab            sub     sp, #172        @ 0xac
-get_gd():
-/home/jerome/work/u-boot/./arch/arm/include/asm/global_data.h:127
-  6186a4:       464a            mov     r2, r9
-...
-/home/jerome/work/u-boot/arch/arm/mach-kirkwood/cpu.c:242
-  619aae:       9b15            ldr     r3, [sp, #84]   @ 0x54
-writefr_extra_feature_reg():
-/home/jerome/work/u-boot/./arch/arm/include/asm/arch/cpu.h:100
-  619ab0:       ee2f3f11        mcr     15, 1, r3, cr15, cr1, {0}
-                ^^^^^^^^
-                32-bit ARM instruction
+In addition, a new defconfig was added to facilitate compiling
+fpga-based sources and various compiler errors and warnings have been
+fixed.
 
-Further investigation is needed to understand how to fix the issue so
-that the code size is minimal for all boards. In the mean time, this
-fix disables LTO for the two problematic files (common/board_f.c and
-common/board_r.c). This makes the Kirkwood-based boards bootable again.
-The binary size is increased by 1048 bytes which is perfectly
-acceptable.
+v2:
+ * use log_% instead of puts()
+ * harmonize user feedback format; remove useless strings
+ * add a sandbox_fpga_defconfig; ammend fpga Kconfig
+ * fix various compiler errors and warnings
 
-Fixes: 6fe50e395080 ("arm: asm/system.h: mrc and mcr need .arm if __thumb2__ is not set")
-Reported-by: Tony Dinh <mibodhi@gmail.com>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Guard the change with 'ifdef CONFIG_$(PHASE_)SYS_THUMB_BUILD'
----
- common/Makefile | 4 ++++
- 1 file changed, 4 insertions(+)
+v1: initial version
 
-diff --git a/common/Makefile b/common/Makefile
-index 35991562a12b..e589f3072621 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -19,6 +19,10 @@ obj-y += version.o
- # # boards
- obj-y += board_f.o
- obj-y += board_r.o
-+ifdef CONFIG_$(PHASE_)SYS_THUMB_BUILD
-+CFLAGS_REMOVE_board_f.o := $(LTO_CFLAGS)
-+CFLAGS_REMOVE_board_r.o := $(LTO_CFLAGS)
-+endif
- obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
- obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
- 
+Pieter Van Trappen (3):
+  Improve user feedback in case of FPGA bitstream load failure
+  Amend fpga Kconfig and add a new sandbox_fpga_defconfig
+  FPGA drivers files - correct compiler errors and warnings
+
+ cmd/fpga.c                     | 101 ++++-----
+ configs/sandbox_fpga_defconfig | 391 +++++++++++++++++++++++++++++++++
+ drivers/fpga/ACEX1K.c          |   1 +
+ drivers/fpga/Kconfig           |   1 +
+ drivers/fpga/ivm_core.c        |   1 +
+ drivers/fpga/lattice.c         |   4 +-
+ drivers/fpga/spartan2.c        |   1 +
+ drivers/fpga/stratixII.c       | 131 +++++------
+ drivers/fpga/stratixv.c        |   2 +-
+ drivers/fpga/versalpl.c        |   1 -
+ drivers/fpga/virtex2.c         |   2 +
+ drivers/fpga/zynqmppl.c        |   4 +-
+ drivers/fpga/zynqpl.c          |   4 +-
+ include/stratixII.h            |   6 +-
+ 14 files changed, 518 insertions(+), 132 deletions(-)
+ create mode 100644 configs/sandbox_fpga_defconfig
+
+
+base-commit: dbf7fd557a73ded3141db3c2cf5c572989378825
 -- 
-2.43.0
+2.48.1
 
