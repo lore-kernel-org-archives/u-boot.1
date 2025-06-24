@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABEF6C77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 13:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB63C77B7F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 13:14:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE49082E2D;
-	Tue, 24 Jun 2025 15:12:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AFCD82F4B;
+	Tue, 24 Jun 2025 15:12:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="CZ1yfBrh";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="EFwIUOgY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FA1182D17; Tue, 24 Jun 2025 12:29:04 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 4525B82D17; Tue, 24 Jun 2025 12:29:33 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D942B82C4C
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 12:29:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A68882C4C
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 12:29:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IBguD0R/4fsD6uGVFv8fMQWNdgkTVrr8iZnqSqf4nPJyR9pDsWpIafsPxmk5RxA6ceKNpHTy5XrTdNU79/8bgWghF9llYYMm1+U16dzd+VXvGC8IS+4Y9Oxuuqk3Oo2ZSOMGuseQFbpzdtsc3lUpXp29mzIwFv5oALw2e9qTMnIiPRGlh2nlwFekENLP26HJ+7XlNJFloVFNudcJY9u8NpVflqHAkcB8SXNqPE8IvHx6U7JbwRzYB1seLvflZpR3V0Jx8VVTExBbh+cajyIBCWRPBmbM/Y+uhD2SBxwrkQ2uo0elYpoirvEMnbydn3aUrtPp3pJar4AZAWUTAH4rGw==
+ b=DM0kEmoDaRuFMr6aEEF0wCF8TyJAefrFgPKOTQVQ1ZiH/2YNqnJAIPgMw25tQtW8sZMu2x24tgvZpAA3U6ajCBhbyU8ZTtSL7c0BCSyKa4E07MevRu0GZNwG+EjscdeP6e/zJzXdo92MDr3lCLNvKXXHOooz7rawt/p6o/C77nZm02f6XflWiUjSd0/6BpRCOixbrVLPkKG7ObZbVzcVa4lycVUoRNTr38AUus88EzHj4nU8MB/nkR4PPeFJpQko40uVfLZuyMIahYwx7DUkjfESErIPDU82g5tJwqJM7CoTn3cd7QbE/6vn3RhSg+8WDIl+ePrZcDtEvEfoXMQSJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jQWqisswL9ciayTSFA50X1FGGvjSX0axhGXYMJ8HXFc=;
- b=VB9vQBV9ZDpwt3oD9F5Bd82GufuNnCtib633FAeR5sl2KeEOoRLzEGKPF5qg/SCbIeAxl/Xc181nqrfHyD/1J2BV1zUNP1Kl4pK5Gjcbizy43JteeIeP9HV9AFIcGqvD6xqyPgWMU0mmhnbFzlU89J9Q2pz5RPKhjbo5oXrG5B7vfy6AX3ZFkyK99Xsw2yqW6JfeYecdHOkhYHDWBZPL0HwBAS5mc7ELliSpO8cCH22JV4ZHj2oqio5xVTudWuYl8TdFIo9/3UslJ52KqEM6Pf55lI2jhQa+qKbO8BGRlUXIHeL9FwCsO9cwZFRw8VvEduLFSZlAXsZTfTeXPDNuog==
+ bh=LkQtx4vpxlyHWCXNRYujjyY816IXKC8SGnPFiNk2JDg=;
+ b=Gw6tGTb302pSLeQE8LKmtgVnHNCxIftrbYsFpgM+aoptE7Vc3notW5XwKrEGuCt8GxhdunbCCXJHTsjQAzG9zIU7pbhtqBvUwutWDudaoEgvleHUCyt2+wgnPaabso7FfuXzzC3ixdbdnEdLmb6CHHw8wPvRM1tAdRp1fv33P3J/Hqa9xvpXFClDJ+ANh55YdUtNbk1j3Ccdg5l7VJ+zgrA2t08ixrWaXqWS8pNIc0bJ38St7fV744HcSZaGKQE7NG7m6so19Uofss2OKmAHFtm4b8g3Xz3uSQjgqPswC9At0qVtxk/1eIEBSp5XiAi0QrF/mKhxgxI1ZzOW0IuTtQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jQWqisswL9ciayTSFA50X1FGGvjSX0axhGXYMJ8HXFc=;
- b=CZ1yfBrhOIBYj/QxKonQ95pd6WTtFffUM5kPIdEMxIBBsXsXWSqrWsK3jylPLuK/44elSzNDS4Cww2J9CUnjFXNiJHK+RfYXn9+MFueWeI7r7rRk9s6oin0toBwQOSdBRb1kUxOPHv1A9wEHIyhYEB4H0xC8kQ5XwZZUkCs28jOwxjOJYlaNuxisV5XaBrzyPmZnWqeh+nKzLxtaVksxOeVmbWXFheZHYl6/60nq3AE/VJ/GurieAa2hPJ3auFRVkUMX5eobowBf9NN1tDVztiKvmC+VaZb8LF/izSirNvJE6rxnjLxVMn7atjavmwcZUdgR48d3RSUeq1tcGMCuWQ==
+ bh=LkQtx4vpxlyHWCXNRYujjyY816IXKC8SGnPFiNk2JDg=;
+ b=EFwIUOgYI3icQ4tVkF7aGThr4C1RabZTTA77Aw05Q67eEt+uiBpWcn+S82lyNn8AS8RklGfzCyB6FQ+f7sNWfP6qSU0qD8v4MpyhJ63AKMEFC98DUxvCGdkTU5ZeXQ7MLSU8W+QlXqo1c3ZsQ/GoUgaaENTvwBfmOKAHt2e9+Tn6eJ1ZeJqFVbWuyrbIfN+9/qBUORsbmAwCDQ2ef45RheYH/SiCxq5jU/nXymDS7Qy5mWaJmjmj1XvAevRhj/+ZbEL94ahpVBzX0to93jexUvTWF9EsA3+gT2OcrydYyfJI+KBZ81OwCbo49XsyIiCMGw7VOCXL1YwtoozsMAKGJQ==
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
- by AM8PR09MB5228.eurprd09.prod.outlook.com (2603:10a6:20b:3db::19) with
+ by VI1PR09MB4191.eurprd09.prod.outlook.com (2603:10a6:800:122::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.27; Tue, 24 Jun
- 2025 10:28:58 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.30; Tue, 24 Jun
+ 2025 10:29:28 +0000
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8857.022; Tue, 24 Jun 2025
- 10:28:57 +0000
+ 10:29:28 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu
- <cfu@mips.com>, Uros Stajic <uros.stajic@htecgroup.com>
-Subject: [PATCH v2 10/11] cmd: riscv: Add 'startharts' command to start
- multiple harts
-Thread-Topic: [PATCH v2 10/11] cmd: riscv: Add 'startharts' command to start
- multiple harts
-Thread-Index: AQHb5PLLnKbGbGGxakWyOuTo4InDwg==
-Date: Tue, 24 Jun 2025 10:28:57 +0000
-Message-ID: <20250624102449.324410-11-uros.stajic@htecgroup.com>
+CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Uros Stajic
+ <uros.stajic@htecgroup.com>
+Subject: [PATCH v2 11/11] timer: p8700: Add support for reading time from
+ memory-mapped mtime
+Thread-Topic: [PATCH v2 11/11] timer: p8700: Add support for reading time from
+ memory-mapped mtime
+Thread-Index: AQHb5PLdfyBMXYJxhkaceQq3SiIcsA==
+Date: Tue, 24 Jun 2025 10:29:28 +0000
+Message-ID: <20250624102449.324410-12-uros.stajic@htecgroup.com>
 References: <20250624102449.324410-1-uros.stajic@htecgroup.com>
 In-Reply-To: <20250624102449.324410-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
@@ -71,69 +71,69 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AM8PR09MB5228:EE_
-x-ms-office365-filtering-correlation-id: 55b19405-4a4b-40ef-d46b-08ddb309ed95
+x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|VI1PR09MB4191:EE_
+x-ms-office365-filtering-correlation-id: 0e5fc548-c7fb-4013-f535-08ddb309ffb2
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?VQHaaePpyCO8C92UWfV7eYWl+xauvUIYrrSv0KW0YufiLLmmT0i8mg7YkG?=
- =?iso-8859-1?Q?YqqSi0JyKUsjjDiRzvLE0U3RyFG78aaxD+PtTvZkQsR2W0XHOHKXoQAHZm?=
- =?iso-8859-1?Q?tiiunhtK6l5C7e8G9qkM0n91YdsI151XVnpB88KeL5Fyxj3tP8XfBpsBvw?=
- =?iso-8859-1?Q?rilvVUCVnk3o9qZ/1DbHLwOTWrg2AbZ1bSVYtHo6onIPwwtTFa96hK/r8r?=
- =?iso-8859-1?Q?9QtXCYM4knGZ4xH1BsW0Ydz7OU6YKHbE/huKPTuyRyivtV3zSLcaaGHVYd?=
- =?iso-8859-1?Q?pajcQ+BoUQ5P1BHG7VseE1oLwgQXANVIGbwEtcU2bb9vjEiEs89VNXt0eE?=
- =?iso-8859-1?Q?+bHHb8FsYQl7HlBiJxXFVJjDwR6qFgBeylOmY0klf+7YsDWrgau5vkv0+4?=
- =?iso-8859-1?Q?UwvtBQATM4BUHaXgvumzCNPGLcYe1CRvGW4mTCW9udZpzq5TZbdjB0jKDe?=
- =?iso-8859-1?Q?YNm8dQ48JbPnsWWYRTxuCt7nOVy20hPvL8x7Q7XCswni4vnQCl//5Sb7uB?=
- =?iso-8859-1?Q?jRNQrwYd8axQBy/sowA4l656Tp/RHdYW+qCqyEfmlVl0A4NfZ4uAEEkSSH?=
- =?iso-8859-1?Q?4RhvqPsy0ZU+K19mRLN6/bQPblYXuTXygSVKEiK4J62suNluUPSDXkKvUV?=
- =?iso-8859-1?Q?yPopi7p24cabnBv8BdOlz/ya3ZoxkBCU2tN52IHNaSliz5onN/JXm2EeKA?=
- =?iso-8859-1?Q?fGyoCfRV9FN+u6RZVQtdrx27mGHPnQN+/Sbsa2x8YtCPQqd5HNX6MF7DA0?=
- =?iso-8859-1?Q?kmJf7gM2oTLD9KvPTfj2kHLg1q0XdHmTWVpLabH42SrJq+ZKjtBA2jRXQh?=
- =?iso-8859-1?Q?hhuEEcb2Ed3KPmcPIfqsLZr7pLD/9y60QOkpUUFgOw4siULumMDLxLf6ug?=
- =?iso-8859-1?Q?SesKeIIpxfdL3590yGAnbCRyBg+WcySGsm9LJ/AkA/vO7x8niziz7BiKuv?=
- =?iso-8859-1?Q?mnKq+IuJbFA7RoMc8PgoPbyIVebfvBJUV79cCWE7yEW4N49NM04/m8nW3z?=
- =?iso-8859-1?Q?AmRIbGpVPzc7okUwlLlZumZt/VJgm+kd+fuMMpN3MiZEpp5+YIWluvtRsn?=
- =?iso-8859-1?Q?ULAHd1AZDcXFKEbKf5GOi8Tc0I42rcsQ9hivw9cFwhN8FD8neC5OcuIf3j?=
- =?iso-8859-1?Q?nVWqZS5We2HyzN6xsGgxyBrjn8XDX0ptYXK3imFCWvkPbhsLj7csF9z1I7?=
- =?iso-8859-1?Q?chpuBb4R6lbm/F2fLbR5bSpPoeCyFACeKXIDas+paiYWQUxbvmkfcMZ3ys?=
- =?iso-8859-1?Q?vMRVrIL8SXdB7/AZ1h3+Y+cDm1b7oQZ8q8ZKtCFOkoseK/9SEPJv1gmCB1?=
- =?iso-8859-1?Q?uTXvTqofhTMGks4uBkB4vLsr2KXkIMU7TKCSNzipJBSEyHxqGEJrYP+fxR?=
- =?iso-8859-1?Q?ztIIE4Gqb4HtgCDvoIPW02pVkyTgJiNUHS5UDGlp/NKr5fAypp7WmXUHZa?=
- =?iso-8859-1?Q?geLO8via9Z3NJQYg/0aMlTuo69tZ2trnyEGgTvsHDlXKaS6SC3GVbmROlZ?=
- =?iso-8859-1?Q?PdxsWX0bpNDCzQEoUTFl6MRjwk4Rwi8dtywzhzhGRaaw=3D=3D?=
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?QB7GoOuvhLmEsRnFwJRvUPFA/gb7ryE8FaeLQUdbmyzwvotAw86/jmhOQq?=
+ =?iso-8859-1?Q?9QfjcJ/Moy9RQCzbKn145nvmRwFqT/hiyc1ktTsaGEn1s9PQ2o8mwgcw3f?=
+ =?iso-8859-1?Q?PHwGypkT5kv3ofpq09xfW0DFiRhV3Q3wFxuG1tSofFJViWqmYmjhHiDIHD?=
+ =?iso-8859-1?Q?D0ODBt9UEnGgYMgw9Cyo8w7UhnSmw1tixQX/9CMEjwdCakhV0D8uKNvFqk?=
+ =?iso-8859-1?Q?CmrYI3Ow6LSrxf/e/PimmL92FZCKQAgZXUEKv6I96m2pONE0gDvzI68P+V?=
+ =?iso-8859-1?Q?Z95WP3+PRjVXHvGsTWRKQAEpJ/MzuB4q2zMYU0TjpFn+64dewV5EcUARYp?=
+ =?iso-8859-1?Q?hxR1GcmoQBi6hZBAkMlcc315a2PLR909ohxzdX0nMKfwj6oCS/JATaqbJS?=
+ =?iso-8859-1?Q?QZ7h2Hb8J2gOj0qF2LIOr9SztLWAcuOgSS397V7blKeYkEAjVAzHDi4qu/?=
+ =?iso-8859-1?Q?r2Ogj9i3tpnZwh4k1iKj4JrtccCpewQsZzvbt/aLxFdCHD1DMpztk0swnA?=
+ =?iso-8859-1?Q?4ldNU0SyogU6fwpiA3gskXKs51qcQ/MjLsVm4Yyp6fiPR/zD8dkQV1zIcm?=
+ =?iso-8859-1?Q?wEVX7QyhpddLME/Rc5XJ77U41rubHqwMJUn3Av9qyjyySK9BXklUZ8IuWy?=
+ =?iso-8859-1?Q?K0325lSsr9Czq1YAYQY2vEIpBE7gncH1KOoTFZhmhdNvfp8ZW3EWbbJBMp?=
+ =?iso-8859-1?Q?OsvPJy9bgqK2Gi+d0ZZB/DbWtbQo2dXx+l0a3sPFpnm9jCTBPaB9AXnU98?=
+ =?iso-8859-1?Q?j4+vNPYOrhdlb6xxYJYV5ZFWCazS0XZ3U2+Ks7rMi27Au+O6C9p8w3yNUI?=
+ =?iso-8859-1?Q?1C4nsKtfCav9mVthJv4yNK/AeNogb3XJLBUHqQ5H3kZFjSJzkr7c4bOooS?=
+ =?iso-8859-1?Q?cR5vDb1esHn92rOC3OGUdUllRMK5IS153/3Da3Z8dRROAE76FWDJrhZnIY?=
+ =?iso-8859-1?Q?arlS1IMXxnccYcZG5mQohyKZOkX4jYBjHFT3gxiAXGzNULpP2D91W3z69z?=
+ =?iso-8859-1?Q?s0egkRpszOardMszJCiUmOLydaaQQ5g7uzSL+Udna+SbQMeQvPZuIyaXrY?=
+ =?iso-8859-1?Q?YaMiI3uI8sjVtBhyLTalmFM6rwjRehUWddBeUjeFyc0tGRmgqSwds5dC1A?=
+ =?iso-8859-1?Q?AbXOlhRnvNIEptB5ATlYlBwCOs46zSnUP9IZWUAhI2zjMXrXrxG1gHUVXF?=
+ =?iso-8859-1?Q?gJ9366HrDrMMzHDn66SEs60bePJn57UdveOFRLpy2ZXh6V7mOSDX0SMJME?=
+ =?iso-8859-1?Q?bsnNKZs8mlJojLb7Nc7hhH8tQ329VzpVQ+40NHufh3bM3BD1wajZqSoFj8?=
+ =?iso-8859-1?Q?t+EoPENXWtIVtSrbTtSHHV9bHHMgNxM+zkCn0u/x0DX67fnjjFz3l81wQj?=
+ =?iso-8859-1?Q?K47ODoyjLxU+JfBoguiH62PfTPjslzoBi4FkQau+CmSjM+hut319bP1mMl?=
+ =?iso-8859-1?Q?F9tmzeprxkBTUxrMnc5qWBiYlbEp35qq1TbNVdWQfP6cd7UkgQfgaTGVHO?=
+ =?iso-8859-1?Q?guqnZxD+EK+rP0Clz0ERMpSxnkU97Cc0JFbuN8ba0xeQ=3D=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?BFmBa2lXMuLvdSGDysxtCBu7J/PErTF0/JN4qXGsoG2Z11j8qgTsdDo/pu?=
- =?iso-8859-1?Q?hCtq0kTae8vXSqmXkFPwG4tYonW3kOburMTgu5oilRDOo2KYeJcXJXHx9z?=
- =?iso-8859-1?Q?v38IuLYirodDoFdbx6GO4dUYiXaYnIQE9Vm4d/q8q5cHZh8gSVJmx34a9l?=
- =?iso-8859-1?Q?8XYQtFa65jidh12+WZXogAGjEjwI9iVEP9nQ3FVAioQfefCwB9QEynutq1?=
- =?iso-8859-1?Q?n5brNBx27UGMIB4vKFWXxNMeFP0Z9sqSwPHx64hdH7YZ12Vrxtx3mM/3Hb?=
- =?iso-8859-1?Q?ijPspkzWLTMPIVE0GBhASEfRcr10dCZd2FNuxmGZno5JQFOuwfogtGISo7?=
- =?iso-8859-1?Q?RqzfJkma7sL+IrJwUAg6fq7t5aOT3WOT7aZF8VOcMXABYALX3vflIzmHn0?=
- =?iso-8859-1?Q?43o6WckU65VSYDemUqeazJPoH+HgZJ8yhRHwvnreXIogBEqolPDT7M8XWs?=
- =?iso-8859-1?Q?xgUADxn+7uuzgbbmiVQoZGyZY1IS7cozNhD0lrepgv8Zu0wsOSD+ABro3m?=
- =?iso-8859-1?Q?1Axxh2zShKviTQWaVmciafD/OY8Ux7VRLSIL1Q6EcXO6U9g7VXjrDEED11?=
- =?iso-8859-1?Q?l3uJtKyrDWL2K975c0ZG0dYf3mKh6i0QpPonxbUYMQwfNEm06D9oVXfBFn?=
- =?iso-8859-1?Q?j7oo9i8dFyvD6OFFTID6LZl6YTwCSD7vyA1ydq7UR/nUxdgZBWp4u+Nq5f?=
- =?iso-8859-1?Q?aksbXOCw60/E6YRsAWfk0jMoJRCW/tQ4w2NXPHeJnPYXvTts93S0EnWV2L?=
- =?iso-8859-1?Q?h4SoPSwlz1pj2pSwuTRZSABLyz8wO/AdhHJuS9BKuWIL4KJ5hzUipW+Jx4?=
- =?iso-8859-1?Q?9AGmuSF/VQ0KjkUV9YvlbTNR9j0QGe5cz8/j93SEagm0bkMGWZTEVBWh2N?=
- =?iso-8859-1?Q?ehGyBs80pVGQHeTYLD7G2HwzLSKKjTa9BQkThB+XjZ/BhQQjH+rkMEzckX?=
- =?iso-8859-1?Q?6d4jLCxeJQI9TGA2UXi1uFp3OFb/YTZmdy6PprHB8VU+feZa0RqTN9pyIN?=
- =?iso-8859-1?Q?f/mu+0CK+Qq71Ew9hypjTu3mu8DninJzOAJM3v+/oJLnRquDjtO5tSKV7z?=
- =?iso-8859-1?Q?JXcBMm6Saea3mWOL+usXGNIT8EGyfJNi83HSKEfmbP9tugUYZXkfl/O2XR?=
- =?iso-8859-1?Q?yO2GhoHWBsNRHdxEhaIpHbnHbrGeOb0TGiz0QdCmfpTmfe7RwgtAy8i6jv?=
- =?iso-8859-1?Q?aUuyGtnP3WYKBh5MRpPcw6QVfKZhY0j0DU02UI3KBn7H1Hlini3dT+HfuI?=
- =?iso-8859-1?Q?iJ+KiruK0RaVwUhEWKszbzCd5XHPjkkqRjcmw+WCagFDQ6JXfmXRsJKy+l?=
- =?iso-8859-1?Q?F46Sgq3s5BErlvIR0aJJWZjpJdRQVwTLiI/Wn2fq9SpSiFNRk82hiRoJpF?=
- =?iso-8859-1?Q?vI2WNjyiui13zmwSnk3fHppVt/qFtBSlqeJpKjAosImeLGzEd18/LNWiUN?=
- =?iso-8859-1?Q?TLVd0h6UliLn4bH8W+4wRo5GHj9Px+EqjRCdPXCp7wPidyY3BrFriGYMtw?=
- =?iso-8859-1?Q?aU+a7lUhgDMDfJi0BUvkE/Q8oUKacdY1FfqfnoLvBodWPW6r2fMoT5DXUo?=
- =?iso-8859-1?Q?YTpzwQQnP2Gf/HDeaWVWkMtQNRCrxsy/gJMTU4c5UkBRkhAZ7b/moEP3vb?=
- =?iso-8859-1?Q?WA2Go403Lk5FI2UXrkFeu7MBrIYX1k9NFVOAXi0SRAAmgHedciXDfECQ?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?fpUzvfW2Rt2hh/OiIkE2AWRkqvJ9pJ7+fUk2m3nzX5pPl3MZw7NwnIaHV3?=
+ =?iso-8859-1?Q?MKl6gaIVsz30dW80KQG3ythdwV+WGnLALhwK5p8KOj25cfPz04jQbGSnCz?=
+ =?iso-8859-1?Q?/i6HI3uoVIWCDwJqRaQpnNY2SH4RlX2xQRKr6C+/1zS/sKapaiwClB2+wS?=
+ =?iso-8859-1?Q?Vzxgqt7DIQeM+AeeGfdW7bZiTakaASfn4DXKK9ZPWarDH+UMBt+jDdTez6?=
+ =?iso-8859-1?Q?TP7+SpAY8NLnFSYpfsrOdLhLIqwCm6Eiq2/1YVctzNJxR44VNqTY+3DwLQ?=
+ =?iso-8859-1?Q?SouxvmwwhAdFeVN8/VHxjG/YLZGrmrnrDr4PPi2Y3ajNmEzya7/p8mrlNq?=
+ =?iso-8859-1?Q?sKL/1ZjoLSh7x8sUERtEutAvZx1SkFAl4KNBPTFR3gpJCD37weEnTUSjT+?=
+ =?iso-8859-1?Q?Do8cNEuauU7QWbEDAE3dicMMhRgop2LnsLfJ7rOkfYS2FUeMgl/LiQciH3?=
+ =?iso-8859-1?Q?7rcE8TvijdME0tnFcO2VTdJElyMhzUrCM0NWy3+kZ+5a0PrFWy5UzJNH06?=
+ =?iso-8859-1?Q?AtrE38Xo6Y9G5wBcsrcK6iupv9NeKkhx4JOlHmMkRm9B6chwyFC4JBbPeK?=
+ =?iso-8859-1?Q?hIyZjmXalj1YdHXD1kSU8VuvhLCyxckQGjup83luZFR0GoEQjnhAnFhzeo?=
+ =?iso-8859-1?Q?ag7VrrpqvQQqDu8mZ+49jhruG2VSnnYxQNYn1vLJRWkicSixmu7hx2zpK4?=
+ =?iso-8859-1?Q?3rfUq8ioiU5XIUhtzDNCOvGdDMzKAj5RjsgUlAVh4xiGHgRCko26ikJKGc?=
+ =?iso-8859-1?Q?Eb+H19oohoFEpbDydIVohA8FmpJpFIhWQS8Ii46tGPBVbTK4FHL27rrwQo?=
+ =?iso-8859-1?Q?3JBuwngGaV/FnvXCe8yz8pCU7wn9ceuuPn0DphgYXk1IXfAyDweVXVONu1?=
+ =?iso-8859-1?Q?6FEhJ5jT/coErXVUDTRSWo2mcdxrcL2sD4U9cDwcWeGzgq8pftLz1l3JVh?=
+ =?iso-8859-1?Q?oNoDdhYwdLIVNJtM7DOOvvyIgn+h2MLbD/XT4kYFiG5aslEVHR7wx/6aq5?=
+ =?iso-8859-1?Q?xaCi8wdKAoampDiYNLfmjtI/TqftAcKaOLJ0r/j/g3ADMrtBMtt5r2My5A?=
+ =?iso-8859-1?Q?FCdHZai8ku5E59x0HQ2ZR8lLpPjW5PNyYY28VGB7AIZm20CXbmOwdeiFXk?=
+ =?iso-8859-1?Q?sPKdOTOXNsDa/ShKX4WR9e4xRLnkeGfNevinMr/ovoBF+/3sb+egD8CR/I?=
+ =?iso-8859-1?Q?WrlaeMwl7+DYZqYtR10sa2WtOUswZCrGti2c4DJKE+933PktwTXCxwDs4z?=
+ =?iso-8859-1?Q?xzBXVxybtdmzlcXumqnqQLyyWrdgCXCYRAUo3zum1kDO7SBn9tmZAtQeGG?=
+ =?iso-8859-1?Q?Un11LvK46w30cOAeaRhxbZwNayZBB5DxqQysJKD/nr8wu2+D9mtyAZuRDr?=
+ =?iso-8859-1?Q?aZotiC4AfS1zLFIzNUdteIs2Orwuv5uiKVUGdw8v3O0CrQjqw3gvEN3QOs?=
+ =?iso-8859-1?Q?hGXakMWEqu/nc9BahumrLE/Xqnwr8t7bN7FyJlEy0Xel8KonNIqlYCU8K2?=
+ =?iso-8859-1?Q?jTN9q9Z6IcJzhL6uudyfSAIwrjLE1wsQgLBrachlskpfYaxOS/cs6FUsAV?=
+ =?iso-8859-1?Q?1//TKoiWdqxLDdWV65T85k8D7NZMVdbaiXdNpzODDE/JDPfUp32rgQM4BN?=
+ =?iso-8859-1?Q?a02a4fs40WJTyX6awpt3XZtp8kcpGw4hdZ1x64Y0tRcUmFxxQRU8Co/A?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -141,13 +141,13 @@ MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 55b19405-4a4b-40ef-d46b-08ddb309ed95
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jun 2025 10:28:57.8324 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e5fc548-c7fb-4013-f535-08ddb309ffb2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jun 2025 10:29:28.2332 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: nWZO+14DeCF5ydwsoRNLjPeeTiJsz5zVGra3yBlk2bRTH8v6hxiX0jMZKNy/I0vbXVqT3kA7wBt3qVHyMucjd7yyQnhOwk4L7fcUzJ4E/ss=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR09MB5228
+X-MS-Exchange-CrossTenant-userprincipalname: Q+GGpqhNr2IYSDBVjGqzzkJ6gUIM/t940Zp2Ft+UnF4l3JUEFVlggwxg/uzEgdNwyDYpOiElI2sVeRKIuVmbTkjCXWFh+dc7mEguXFN65OU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR09MB4191
 X-Mailman-Approved-At: Tue, 24 Jun 2025 15:12:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,204 +165,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chao-ying Fu <cfu@mips.com>
+The P8700 core does not support reading the time CSR directly and
+raises an illegal instruction exception. This patch adds support for
+reading the timer value via its memory-mapped address at 0x16108050
+when running on a P8700 processor.
 
-Introduce the 'startharts' command for RISC-V targets, which prints
-or executes commands to power up and reset all harts and jump to
-0x80000000. The command supports optional cluster/core count and
-immediate execution via the 'g' argument.
-
-Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
 ---
- arch/riscv/include/asm/arch-p8700/p8700.h |   3 +
- board/mips/boston-riscv/MAINTAINERS       |   1 +
- cmd/Kconfig                               |   6 ++
- cmd/Makefile                              |   1 +
- cmd/start_harts.c                         | 103 ++++++++++++++++++++++
- configs/boston-p8700_defconfig            |   1 +
- 6 files changed, 115 insertions(+)
- create mode 100644 cmd/start_harts.c
+ drivers/timer/riscv_timer.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/riscv/include/asm/arch-p8700/p8700.h b/arch/riscv/include=
-/asm/arch-p8700/p8700.h
-index 6c47de9a633..20868eee419 100644
---- a/arch/riscv/include/asm/arch-p8700/p8700.h
-+++ b/arch/riscv/include/asm/arch-p8700/p8700.h
-@@ -77,8 +77,11 @@
- #define CPC_SYS_CONFIG		0x0140
+diff --git a/drivers/timer/riscv_timer.c b/drivers/timer/riscv_timer.c
+index 1f4980ceb38..5138236a028 100644
+--- a/drivers/timer/riscv_timer.c
++++ b/drivers/timer/riscv_timer.c
+@@ -18,8 +18,15 @@
+ #include <timer.h>
+ #include <asm/csr.h>
 =20
- #define CPC_Cx_CMD		0x0000
-+#define CPC_Cx_CMD_PWRUP	0x3
- #define CPC_Cx_CMD_RESET	0x4
-=20
-+#define CPC_Cx_VP_RUN		0x0028
++#define P8700_TIMER_ADDR 0x16108050
 +
- /* GCR_CONFIG */
- #define GCR_CONFIG						0x0000
- #define GCR_REV							0x0030
-diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/=
-MAINTAINERS
-index b04dcde943a..0e2f4c277d3 100644
---- a/board/mips/boston-riscv/MAINTAINERS
-+++ b/board/mips/boston-riscv/MAINTAINERS
-@@ -12,3 +12,4 @@ F:  arch/riscv/lib/mips_gic.c
- F:  cmd/display.c
- F:  include/led-display.h
- F:  doc/README.LED_display
-+F:  cmd/start_harts.c
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index e40fbded3e3..eda2e5b8306 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2321,6 +2321,12 @@ config CMD_DISPLAY
- 	  displayed on a simple board-specific display. Implement
- 	  display_putc() to use it.
-=20
-+config CMD_START_HARTS
-+	bool "Start harts"
-+	depends on RISCV
-+	help
-+	  This prints commands to start all harts and go 0x80000000.
-+
- config CMD_EFIDEBUG
- 	bool "efidebug - display/configure UEFI environment"
- 	depends on EFI_LOADER
-diff --git a/cmd/Makefile b/cmd/Makefile
-index e1ce7bbaff9..e3d7e944715 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -59,6 +59,7 @@ obj-$(CONFIG_CMD_SOUND) +=3D sound.o
- ifdef CONFIG_POST
- obj-$(CONFIG_CMD_DIAG) +=3D diag.o
- endif
-+obj-$(CONFIG_CMD_START_HARTS) +=3D start_harts.o
- obj-$(CONFIG_CMD_DISPLAY) +=3D display.o
- obj-$(CONFIG_CMD_ADTIMG) +=3D adtimg.o
- obj-$(CONFIG_CMD_ABOOTIMG) +=3D abootimg.o
-diff --git a/cmd/start_harts.c b/cmd/start_harts.c
-new file mode 100644
-index 00000000000..0d074778b6d
---- /dev/null
-+++ b/cmd/start_harts.c
-@@ -0,0 +1,103 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2005
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-+ */
-+
-+#include <command.h>
-+#include <asm/arch-p8700/p8700.h>
-+
-+int start_harts(struct cmd_tbl *cmdtp, int flag, int argc, char * const ar=
-gv[])
-+{
-+	int n_cluster =3D 1;
-+	int n_core =3D 1;
-+	int run =3D 0;
-+	int cl, co;
-+	long cmd_reg;
-+
-+	if (argc > 1 && argv[1][0] > '0' && argv[1][0] <=3D '9')
-+		n_cluster =3D argv[1][0] - '0';
-+	if (argc > 2 && argv[2][0] > '0' && argv[2][0] <=3D '9')
-+		n_core =3D argv[2][0] - '0';
-+	if (argc > 3)
-+		run =3D (argv[3][0] =3D=3D 'g');
-+
-+	for (cl =3D 1; cl < n_cluster; cl++) {
-+		cmd_reg =3D CPC_BASE + (cl << CM_BASE_CLUSTER_SHIFT) +
-+					CPC_OFF_LOCAL + CPC_Cx_CMD;
-+		printf("# Start cluster %d core 0 hart 0\n", cl);
-+		printf("mw.q 0x%lx %d\n", cmd_reg, CPC_Cx_CMD_PWRUP);
-+		if (run =3D=3D 1) {
-+			asm volatile("sd %0, 0(%1)"::"r"(CPC_Cx_CMD_PWRUP), "r"(cmd_reg));
-+			asm volatile("fence");
-+		}
-+
-+		printf("mw.q 0x%lx %d\n", cmd_reg, CPC_Cx_CMD_RESET);
-+		if (run =3D=3D 1) {
-+			asm volatile("sd %0, 0(%1)"::"r"(CPC_Cx_CMD_RESET), "r"(cmd_reg));
-+			asm volatile("fence");
-+		}
-+
-+		cmd_reg =3D CPC_BASE + (cl << CM_BASE_CLUSTER_SHIFT) + CPC_OFF_LOCAL + C=
-PC_Cx_VP_RUN;
-+		printf("mw.q 0x%lx 1\n", cmd_reg);
-+
-+		if (run =3D=3D 1) {
-+			asm volatile("sd %0, 0(%1)"::"r"(1), "r"(cmd_reg));
-+			asm volatile("fence");
-+		}
+ static u64 notrace riscv_timer_get_count(struct udevice *dev)
+ {
++	if (IS_ENABLED(CONFIG_P8700_RISCV)) {
++		u32 *mtime_addr =3D (u32 *)P8700_TIMER_ADDR;
++		return *mtime_addr;
 +	}
 +
-+	for (cl =3D 0; cl < n_cluster; cl++) {
-+		for (co =3D 1; co < n_core; co++) {
-+			cmd_reg =3D CPC_BASE + (cl << CM_BASE_CLUSTER_SHIFT) +
-+						(co << CM_BASE_CORE_SHIFT) +
-+						CPC_OFF_LOCAL + CPC_Cx_CMD;
-+			printf("# Start cluster %d core %d hart 0\n", cl, co);
-+			printf("mw.q 0x%lx %d\n", cmd_reg, CPC_Cx_CMD_RESET);
-+			if (run =3D=3D 1) {
-+				asm volatile("sd %0, 0(%1)"::"r"(CPC_Cx_CMD_RESET), "r"(cmd_reg));
-+				asm volatile("fence");
-+			}
-+
-+			cmd_reg =3D CPC_BASE + (cl << CM_BASE_CLUSTER_SHIFT) +
-+						(co << CM_BASE_CORE_SHIFT) +
-+						CPC_OFF_LOCAL + CPC_Cx_VP_RUN;
-+			printf("mw.q 0x%lx 1\n", cmd_reg);
-+			if (run =3D=3D 1) {
-+				asm volatile("sd %0, 0(%1)"::"r"(1), "r"(cmd_reg));
-+				asm volatile("fence");
-+			}
-+		}
-+	}
-+
-+	for (cl =3D 0; cl < n_cluster; cl++) {
-+		for (co =3D 0; co < n_core; co++) {
-+			printf("# Start cluster %d core %d all harts\n", cl, co);
-+			cmd_reg =3D CPC_BASE + (cl << CM_BASE_CLUSTER_SHIFT) +
-+						(co << CM_BASE_CORE_SHIFT) +
-+						CPC_OFF_LOCAL + CPC_Cx_VP_RUN;
-+			printf("mw.q 0x%lx 0xff\n", cmd_reg);
-+			if (run =3D=3D 1) {
-+				asm volatile("sd %0, 0(%1)"::"r"(0xff), "r"(cmd_reg));
-+				asm volatile("fence");
-+			}
-+		}
-+	}
-+
-+	printf("go 0x80000000\n");
-+	if (run =3D=3D 1) {
-+		void (*addr)(void) =3D (void (*)(void))0x80000000;
-+		(*addr)();
-+	}
-+
-+	return 0;
-+}
-+
-+/***************************************************/
-+
-+U_BOOT_CMD(startharts, CONFIG_SYS_MAXARGS, 1, start_harts,
-+	   "print commands to start all harts and go 0x80000000",
-+	   "[<#clusters:1-9>] [<#cores_per_cluster:1-9>] [g]\n"
-+	   "    - print commands to start all harts and go 0x80000000\n"
-+	   "      If the 3rd parameter is 'g', execute all comamnds."
-+);
-diff --git a/configs/boston-p8700_defconfig b/configs/boston-p8700_defconfi=
-g
-index 3df7ffe50b3..85ed687107e 100644
---- a/configs/boston-p8700_defconfig
-+++ b/configs/boston-p8700_defconfig
-@@ -72,6 +72,7 @@ CONFIG_OF_EMBED=3Dy
- CONFIG_CPU=3Dy
- CONFIG_MMC_SDHCI=3Dy
- CONFIG_MMC_PCI=3Dy
-+CONFIG_CMD_START_HARTS=3Dy
+ 	__maybe_unused u32 hi, lo;
 =20
- CONFIG_UNIT_TEST=3Dy
- CONFIG_UT_LIB=3Dn
+ 	if (IS_ENABLED(CONFIG_64BIT))
 --=20
 2.34.1
