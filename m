@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E25C77B7C
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 13:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A2C9C77B7F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 13:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 475B782F03;
+	by phobos.denx.de (Postfix) with ESMTP id 9F0EA82F2B;
 	Tue, 24 Jun 2025 15:12:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="OuSzZfV5";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="tDP8Jzbh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F112B82D17; Tue, 24 Jun 2025 12:28:21 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 45C8782D17; Tue, 24 Jun 2025 12:28:43 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B16CD82C4C
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 12:28:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F80A82C4C
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 12:28:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KGcgjh4ZAhlFDX6fhXQ8e5xoED/SUmfl5LWEQFhH/BOLn1mmODzytkHIuYqw3s/0WFEChUDyp9homdBt897ssn0hm6TLvypbAe77E6RCZ0HcXhL1GykX3HNAu+QAaKe3Tz20nWH6Ofl6AxxlZ3Aushnv0IS+fDsWOZwiYAcw2TA/8HiAgE+KTHqsgznISgmLZsOg5+VtQ+CmGwPW6ih0OB8k5J405m77CN7meAvc2Fd9jynj1cyNiSSVTbNbP4HkZyQ4cM/AuuVmltzKp4uNERTmrG+BOwf1y/xbMSwDXH820rC0SqWs8+FV2fs03xM9l8BKBYPqmlvn4blMb2qjxg==
+ b=KhksaqzEpMaybalhrb4ZzRhg9UTbxIcxmfeVuIXQFTPDxs4GkL6RvgwWKFrXGP3pw6xlfaUvMdmC6jPno9DfW/H1650wmGrPwrwtGHU0JyTnS5QwrvDmlxW5371bsDo+PKrdS4r/GZ6TmkLMsHdYlKzGs0umep7NQ+krUQGJYsl44uUR1uNYUa7XlfVsqGdDkKoEBV2ox7oqJzwxl0AWR4SWQmo47tugEvaT5JWy5gp0iB/BEhAM3s0aNY8jx7VbtP3K+a/6D7ogXLS6U0/HhJ4LEXmFCd1mUalemhJjXGUQzsin4m0QbSwRsTG/G0fdg6nKlnuXoDN+TRbkVZZNSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=14A6XQMUNxCKA3wVaxFIquJwuGc3vYj1GDRpRkZxqZ8=;
- b=A6q+ZP+Oi9eUzhSd41S/4Cs5Lti/PJVAmLPiZ0Vcyj5rYmwIXCkGgpaFSsXkHSBA1nb2+lZFj192Gn4iwF7zphIHkyLUtjOl+VcPKylmZIDGriCmMu9ufJFFFkB+4cKg+7rhqNFHdBg9lyuo6Aq0QevMDdxeHGCVC+xqkZsMsOsZN1LP+Yf/xR5ArJssKB6T5UMfTCMHAuxAXRHfnGbnzzXU9G++S30IQZG1qRbJ5NCVHTMwjwxVdMmEIvxibRXty05i9e3M2URl2sgyvZ2D72BJgVI9czVr9PZCz3a4EXqwTTyyfA93BpAoJmVGAo9nH0eE3jbAGyD86qrCKSu6ew==
+ bh=Jgx1kR7CGFKYHnpdcfKGFbuLW27PNO6HbXFUy1LVTGw=;
+ b=tY68V+O3IpD6W1cryh2LCMh8o1ZGFNJj4HAvGi3ASZvhQMNADZzBHbQEAC7viBZUOP54JjLreSpJp0awz13UBU5GjsYa5icoyiLc2x73XzyqxORne9tHYmcK79NSqCb0GvSZCqppYsA+RKhvtFewJ3JP0WfL5rkFDgHb+Bz1Uktojs5wZn/Mup9NypINYQNLv+IlsSPsM97vNuLMsMW1oXaB87e26USabgxg2RL2GdGDZI3D19aV+Cale2sNU3K24d98Si+rN+g/AvaeVtfm3bl9oIbpGRfFDUYRFygDFqsKKJtpw+jnG85OuT5UMDEOdHPE09VmJbIjnMwORgyytQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=14A6XQMUNxCKA3wVaxFIquJwuGc3vYj1GDRpRkZxqZ8=;
- b=OuSzZfV5r3JqZ01sAcW3xLmxSloxY826MMFB/v1eEgBwauLWE7LZVp3EPn6WQ/94i6AGNEkBTm63VeJB4NsAJ9LZIksP6ehY7VGkLFpzQdxpKfcmabeMwGyXeXMHcbi41CIVF0PFYJiBEBRNt1pjovWfhBe1YRUzTNaQf3J25x0sH8XgbzIrpoj0leRAriSoL7Ql379NYFDQD3iW64lgG3NEEGZ1GP/8D9XUj9I/ydo27Cwbb6Bnwclh1s7KpAuWDh7dE79JulQxnjkrZ16iRrlLYY6izkeP/UYegpk28c3/9TWAMgghGXe/PVlSOgcoRn1vrNaeFeFJucWY+wn5fw==
+ bh=Jgx1kR7CGFKYHnpdcfKGFbuLW27PNO6HbXFUy1LVTGw=;
+ b=tDP8JzbhgsuNtRmDE4gpxmJOXlh1NqGAmhBXwL/aYe7OvbUVCMKVN2duJTZwezJwllh8Ed7BDhqitDV48+wPzBzP3Vw65gubFuGIkD1LQRw3QJFgqa9k4u2L94kH5ZEOKR1w6d8+PkU8iQ0d4/X+iHkiV5F4lHHwvwB4Gk7iCYNUk7bLT1hurkeVK60ehubvyzNhFfRHVkKIN6GSkYUJDuCQtK09W2ae17fFAWnMs0JisrQheHAtZaYTTjL3/3tix+61f/TY2Y6+LbLsHRI61x5nvnFhNZQhjnQkYZvAXVZzWVLOK7KadifZPn6FO0iotZCFPwQ13QoWj70CcX0cJA==
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
- by AS1PR09MB5543.eurprd09.prod.outlook.com (2603:10a6:20b:4a7::11) with
+ by AM8PR09MB5228.eurprd09.prod.outlook.com (2603:10a6:20b:3db::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.28; Tue, 24 Jun
- 2025 10:28:18 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.27; Tue, 24 Jun
+ 2025 10:28:38 +0000
 Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
  ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8857.022; Tue, 24 Jun 2025
- 10:28:18 +0000
+ 10:28:38 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu
  <cfu@mips.com>, Uros Stajic <uros.stajic@htecgroup.com>
-Subject: [PATCH v2 08/11] riscv: p8700: Add Coherence Manager (CM) and IOCU
- support
-Thread-Topic: [PATCH v2 08/11] riscv: p8700: Add Coherence Manager (CM) and
- IOCU support
-Thread-Index: AQHb5PKz1F+MfNcYjEuCMJPY/6jBIA==
-Date: Tue, 24 Jun 2025 10:28:17 +0000
-Message-ID: <20250624102449.324410-9-uros.stajic@htecgroup.com>
+Subject: [PATCH v2 09/11] riscv: boston: Add support for LED character display
+ command
+Thread-Topic: [PATCH v2 09/11] riscv: boston: Add support for LED character
+ display command
+Thread-Index: AQHb5PK/B9uU4C57lkucjb9pslYgGg==
+Date: Tue, 24 Jun 2025 10:28:38 +0000
+Message-ID: <20250624102449.324410-10-uros.stajic@htecgroup.com>
 References: <20250624102449.324410-1-uros.stajic@htecgroup.com>
 In-Reply-To: <20250624102449.324410-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
@@ -71,69 +71,69 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AS1PR09MB5543:EE_
-x-ms-office365-filtering-correlation-id: 7642fb26-1105-4fc3-414a-08ddb309d5ca
+x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AM8PR09MB5228:EE_
+x-ms-office365-filtering-correlation-id: 3e5447c6-c203-46fc-35d4-08ddb309e210
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?wgmOEPIUi+lrQ1jD22OPqgF49wMgn8ZGiSu54wrwVfd+ZDg26RSPBp7YHs?=
- =?iso-8859-1?Q?0B7PmXl+5tHl1LzeTmjCLDVybaNeFI1+4HsK0kdZ9zAXkTP3wd2C+Tl5x7?=
- =?iso-8859-1?Q?M9xgI/L0xUwWzZ1VMDAbfoJ8hKck+CI41Vt+lZ8tLx/c6A4olXuowAhDI2?=
- =?iso-8859-1?Q?kdWwr+h8CrE0mZ/ke8PPgInRmKNv46CoCOA8OtfSikbC/GOxyJIilZXXy3?=
- =?iso-8859-1?Q?143tGsaeX6+9GYn+lnBbKlqnj0XXXxN/YD4rGu5HIqUJM13vfChQuulCSm?=
- =?iso-8859-1?Q?gyjSxOiR3oB4DgXrWJYOMGOyjhh6JSMlClLyjapjkfR1snCTgCXbKbNuuO?=
- =?iso-8859-1?Q?H+CBph1V9ShWHWfxZr4tBQCdSI+hQApkDsKlFkuBJbcGLsu3qgC7Tavnx/?=
- =?iso-8859-1?Q?go/35VwAEb2bA6iuqDX5xmgVKcMKz4YjfWnSRsseBnbqx7h4YkoXOU++Ck?=
- =?iso-8859-1?Q?EY6DNv7WCUnMTDeGflsoMohiYyPjG9dxqp8KTd25S65e/icXncJxIN3d0Z?=
- =?iso-8859-1?Q?Ik0sCBxYWwsd1iPj8hPg3uB+Aatt7n4URmShMOydR+unu6fJhxjuO1dQpI?=
- =?iso-8859-1?Q?fLjc05Klt9hxdVHfgzA8/NwSmhB4mDU4Gp06RkcBJxmFxmwATuc4oLZ8z1?=
- =?iso-8859-1?Q?XFYT5n9SVrXfgbKHVqbpv7qK8x9bovSTqm4E+UQZVikiZxWb0EOdgRAQaE?=
- =?iso-8859-1?Q?AYcR972pdTYKGOnF0uvLXuTN62q/+i31phACTW5B3/Yw5fNudpxUuLtMxB?=
- =?iso-8859-1?Q?rCLqPGFCgCoxxFIqPis5M9pWAvvkmN7p+JxwDAlqSfCqAI3H8848BeQvYU?=
- =?iso-8859-1?Q?mjMLboQxPCy/xLQhwe8kVBIaJVd/rqyvxslTq8DydG0pDEYu6PzjAyfJIL?=
- =?iso-8859-1?Q?nHaqBLq+sdQH4eAcBqz3S7w84dCYvi/RGhKnqqFyoIJiPnkHdGFgALNLzK?=
- =?iso-8859-1?Q?6LM63AVUsL2Wnp8btQt/TC+yOIXTq+szg65L4KssDFScnwsHe5A8mLSaww?=
- =?iso-8859-1?Q?FuuEspPc3hGmTa40M3NDejdl6CKb5Hr+JBwbbcVFblsz4aIjWyiZj432h9?=
- =?iso-8859-1?Q?TbPEgejQjxtHisT2pItzNMlbWX6tGT5nJ0L7YS1R6KrjPz/jKgLzomiRVR?=
- =?iso-8859-1?Q?73E+s5j1yTR1ZG8SzFu4DCdrXnHHDQacytB09WaEB6US8r8i+pUexl7FtI?=
- =?iso-8859-1?Q?Ixe0HcpCJbpDGddsrUzb189ZN3BnXn8jvEWtaYcwfz45CPvZ80+2/kdJgK?=
- =?iso-8859-1?Q?QGECPWSknBXZ2ws7b8QwgW5MW/JHhZ3E3LyWvvAvnSlz0YCftV7EMTWJeK?=
- =?iso-8859-1?Q?ryULPyI7v8nLezMOieYS7R5tafpCQQxI4LD5/oA5JYBUn3fn1LVoFgRZUH?=
- =?iso-8859-1?Q?yPLtWiwSRErTOtK3Vpxjp0zZYYalWh/qA19UADCHIUb8Xo1AywDNCheEZ0?=
- =?iso-8859-1?Q?OkAOWGISn2RFupAPUUupdt3CeINnveS+uHUD6osBPe2KsamlmaXvj9owvm?=
- =?iso-8859-1?Q?xd/riwbeQDNrIJ/bF6uTd81tgQExtnygyJnFZ6GSsMig=3D=3D?=
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?ELacnC1JAA2KIL4H7i4x5enVhvpc6rGRb3Yn9GgjBGITCEeBQ5Ur8bIWMc?=
+ =?iso-8859-1?Q?Ehe8UqLQJDGPxeaG5XMPlTN5bnu9ESS/uKNXUTOndNdcSzq2+GmdQO4M5r?=
+ =?iso-8859-1?Q?8r6knguji6pfso6W+TBlbWcS6Yx7rDHGnJKc2byAW6RWzNDw2tH81/WMaS?=
+ =?iso-8859-1?Q?b5+PUt0ljmTxh2hHaOu+oSirMvhODhUWUQPxMiBg9OhXZaAnyQTbCPIfJo?=
+ =?iso-8859-1?Q?iPsATHZhmWm1u+6mSe2/D61cbMFE5cYVxx1MY8Hmmuh5wp/6dC+LBXj8+V?=
+ =?iso-8859-1?Q?/oDsFgSDpsvNVjWHMO00ZZU8KJ051C0kz/gh+YmO2v798gpoxeQSj7aDdS?=
+ =?iso-8859-1?Q?HtNQOc4JDtjmD9bln6AdxwqPQ/7Rgu2+8LkjT87to6jzhQJauUKQGf3O7Y?=
+ =?iso-8859-1?Q?KS6Fk356ADAJNVdnhPAQsN17jCW6FdG3eE+wQe7P40YKCtF8MQxX2jzzHn?=
+ =?iso-8859-1?Q?9yAGtaUG8Q/TKvnwC/9j3W2OrnTBhgtq3Yl5pCtxvE3vPSfQ6iMnOXCsTA?=
+ =?iso-8859-1?Q?wOlY+UyYqL3Va/TPLw+ZRFkZfeYBW0YgmfsXCeSqpuHT3QRHwbstnY7MDH?=
+ =?iso-8859-1?Q?jhn78XM0z8vJjuZ0mH04cJ7WLGACohgsP2ItqsdgBHCygxbiCXgSqUkoRL?=
+ =?iso-8859-1?Q?Gg1i4bXgxedb5mrrwumgLsdI25u1oZTbvw9hUrtkVP7pacsVxWpi9k0Odx?=
+ =?iso-8859-1?Q?s05xzxK4atlXf+Atyi6ncNg6knKv2hgolsK6fKX3eIv0Q7hp6dDgsmyT53?=
+ =?iso-8859-1?Q?o+T4DXA17qsmsrukAml4x61/XvZSlGR+prQEE9fEfSFwiQ9v4k0+365WYY?=
+ =?iso-8859-1?Q?dcBhTK//LuQD66f9tqexvTQZZwNgoWqNDAJOJjn66YbDO7IGanlctm80O5?=
+ =?iso-8859-1?Q?MyuDxw+gey3QUyzXipC2exBeEho2gXOTiqNsbbTxILTd/knR2KFvnAysdt?=
+ =?iso-8859-1?Q?K3mWcSyJgeXbk5ZIfG7kgLFyLTmInEenxVTftXbWc7qF/K7FkHamxXwFTj?=
+ =?iso-8859-1?Q?f35201RavoItk6wOyOpDhI4pfbgmFdY54Qemp8qrsluV5oD1Xg3k7sLifJ?=
+ =?iso-8859-1?Q?PE4F1i6S708Id+SVPPp2W3hjSn8gCVBSb72AnP7d/ZVVzpc3x9cq+Jz+oW?=
+ =?iso-8859-1?Q?SzpVX7oOyKHxl4xE85f3QtQ9BVoTnbdmDpWUA5giTDGpABtzJZwaDsdVoQ?=
+ =?iso-8859-1?Q?KTPW7zR4HCS6IpQk75EWgportKwkoibUi7pmOE0RW3cyX2NHF2bKR/bDCF?=
+ =?iso-8859-1?Q?BVaHBAmghtiBskSQfUQodyYOMg2R5R8u1geIofZmUmnjK1xwaTxpmA178k?=
+ =?iso-8859-1?Q?EdKrlDE2KZffajeoQlcEuvtWCvdG4Hp3ZhHjXYxuXeBhdCmSMw0G+cs3II?=
+ =?iso-8859-1?Q?99fxOoaaX2iwTKH4x2sa0iPMQZxLM3n4Tjo4Go5tlkKfBykHfd4i+CFXD7?=
+ =?iso-8859-1?Q?YNAlZZFNA6IxDwVGCqssVoDhL9Lz4U4e/Zbx8cTrd4LekJMBTxHPmcjAH7?=
+ =?iso-8859-1?Q?oz/sHsQ9/VUZOIjpdwa1XAVipGq5SxSXjKel3E3VVWmg=3D=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?lRJrqI8f87lb+jwcyEjC74w5jsq7XkmY+Kj6uzil/QctqGNiD15otbEldz?=
- =?iso-8859-1?Q?wE4sPhzZOLw6VAInVodXSviiTVGOVmC3Xz6tgdIwSlfe+kj/1bfU4SRC6W?=
- =?iso-8859-1?Q?XxGujveHUvQfbJwi1AW56vG9JYd07vdPsq0q3hmGLQbG9BT+ii2sQ9FYWg?=
- =?iso-8859-1?Q?tZVK4Fc6RuEKHTQFlURsN8F9SLkNREYWladdqmhtKCIrVjVxv9k5vB6Oer?=
- =?iso-8859-1?Q?BV+QpZzvl6iaBIIaxf5nQOjDQI8nmx82ZD5AhRMGwIdNRZylxbZTu8XI3h?=
- =?iso-8859-1?Q?bvirK5K03JRM6E/ELNRqTQRS1CUByumT4bWPrs7Mbo044B0BBOuAgP7EDc?=
- =?iso-8859-1?Q?BVvaroACnVs+2AHskaItzdSzGJvS4Sp06dRUbA/Yj9D561Rf9h55XztGPU?=
- =?iso-8859-1?Q?OdR5Ukb1pdBaMw5+oUC1qydqEOdjTGM04sIGk0T7JZvRGWbdpBFs/2dC9E?=
- =?iso-8859-1?Q?hvFDzLeDpVFu0k3RMOmCEtZ9q4ox+qSTMxW2lrz9PN5zM53KPP08ifupo4?=
- =?iso-8859-1?Q?JvfaJQMp1tBIK/hNAi+o54LJNkHGSVvT8bg2CA/VU44APz+ArkKfboG9jI?=
- =?iso-8859-1?Q?0AUBGNmCwBInvUqJuYvUaXMGQOfoYyNABH/0Yaa/FrQxLC7QLzmz6+ApkB?=
- =?iso-8859-1?Q?AljCnS0ukW4EOZ0g45rgoqECeWvnIbi7cbp9diwrAPyTwNCxWDAv1db622?=
- =?iso-8859-1?Q?as0sBAlkmZVeCVViGFI1QeaYDWDvl32qv9OzoKsHrT8dyCxO+E/XqS8qNT?=
- =?iso-8859-1?Q?lw28RKyrWJE6qhxbzWE+RlWTmvK10KhZtCmiYEQFKn36JLeMEN02Gdp2+m?=
- =?iso-8859-1?Q?YISxGiMBwJjoqq0KWYi9viOP1kqUM9bA7ZwgOI1ZnzicKZJZ3E4Ly1ElQz?=
- =?iso-8859-1?Q?iAhFaKvy6SDYM171AxrfilLxNssvy9FB/7ygU7YiIeO4eSzS0HDgPCYcWG?=
- =?iso-8859-1?Q?vTIq+XiJvLbLr8wYe/cGBCS8DQMWffElMUqojco7uz3FLff1imjI/xklsm?=
- =?iso-8859-1?Q?pGuo4lF9BzzjhNraVNvm28XuKxP4xQee9Fjwepd9im+4f6lQI674y4IaKP?=
- =?iso-8859-1?Q?2/6szerZ9hv5HEhjFRQq3mGbBTsnKKoGl3SrOuWALDsDJkS7HGxWe5muir?=
- =?iso-8859-1?Q?RdQfhH3SXnHVf4SYhU3jFawoCz5IQHQCH3EZJskBNODS+CgulV/K0gIiYN?=
- =?iso-8859-1?Q?g+3V9aZ67VexgtZeKmR/LVaZiRx4Wurj0Lthd1tJqQaHknBASvYdlRDxEc?=
- =?iso-8859-1?Q?knwM0bMlGdufAzAWeT6dQW4C7QTM8ByC7VB5gLiV3oDqbbTb8BJz0maqpY?=
- =?iso-8859-1?Q?zefrnkq4OVFA9TU5v0Nu8wPQ0Ia6uJNzi4+8co6zavFSMzFPxhRXBQvKSU?=
- =?iso-8859-1?Q?vGqtJ8YUtebuD9GDtJQHXgsGZo+R41D2c/VNagz1Lnw6S5B7b2KkgPZrgd?=
- =?iso-8859-1?Q?lctznZTCC5f9L/Ejm7HoNz+CXzFzNZlsJp53X86K7Bi8a6fcCMEwIV8z2P?=
- =?iso-8859-1?Q?bNZ59j64jQgPBqwOjU5GSRfOyx1vbS+3U0HCMkcgUrEWaFH8b2Y5OWhV2s?=
- =?iso-8859-1?Q?2l7SamjaO+9JlCSNb+Fk+Y1C8TOQzpUb9MUVQ3VWkkpo+yLzetXEqT9o6G?=
- =?iso-8859-1?Q?kwQyOsRRV7DQFLvEIxjRETjmMl9C8rm/w8h47+4Yxg67tVVv5cYscnUQ?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?UX0sRY38YwKaiuUrqMWuz4TYxuRreU/R7GMdFc4ODHlj04zphAEdyy71ok?=
+ =?iso-8859-1?Q?1pL6MesvDyCRcfeaZD+YwJAKS5oazUSVLP6/m85IoNG7nBMEE+9b5rGBq+?=
+ =?iso-8859-1?Q?v4sBOK01+DboEMI5BHsa1VMzQ3F8biFuXPEYGBrZ8j9MkzYYvgS4ACwUVj?=
+ =?iso-8859-1?Q?hGp8yumu0YaI5pjGB6Mykw2FwljDo/KyaL9rehhMHa+MBWKLcQ2knsdyM7?=
+ =?iso-8859-1?Q?c1NUrmbjTqiYAut/Ws88+jZoBKgkL0JtOP9Gbwav2t7UcXl1mwn2jwGDAz?=
+ =?iso-8859-1?Q?ay1rPC/3ft+63/h4QXJQFYKjBn5QWBgP07bapcp/39/aWjz7DHGUgfkh7+?=
+ =?iso-8859-1?Q?zGEvTEzg/NFYvJmZSJvH+7/5LIbWairNLLixCG19AD2hgH3sqsk0AeNytQ?=
+ =?iso-8859-1?Q?uSeZ6fQumy44wxAxry3p7bHxt0Cr0uXRnnHRuUbap+HxsH65S3XIPb0DwI?=
+ =?iso-8859-1?Q?8Ocu1eNwJvLxYt1jOGcK5tW8DXLAneI/eX4Y3kJNy9qnsxk9bWYSf3rane?=
+ =?iso-8859-1?Q?hQRWnkqZ6zebUWP0f7XNOeWKjMkuMTTZm/HfrboXhQdQSIFV26AFRQ+GPl?=
+ =?iso-8859-1?Q?f8UtBsMS4qMPJ/KV5NXFHQaQEaLBy2Orxu2yhrUicfRUpGjY5dn9vOWwig?=
+ =?iso-8859-1?Q?DWfmZEjgPhB7+Hvsu42gPHkoigRg0EGR8aOTVi2IEEKnQv41mOj7glfqJt?=
+ =?iso-8859-1?Q?uygqGqimIIbJW8fS+u3nrMSQ77C76QJbR90SpqLztPLia3mHCrOSLYxRWk?=
+ =?iso-8859-1?Q?UjdWdDOv2EdsjVVC1/ju0BawMcvjTz9IlOJCPP3J/f4N3ZgMfU81o5Kxg2?=
+ =?iso-8859-1?Q?sCM0GK8sLEHq6lH4r/I+udivCCLBrXnDp0dWPpnLscnXONRk7iOGaDJZ+w?=
+ =?iso-8859-1?Q?CqQ8AEPI55OvUJZOsG4+KYJPqaRnS0bICNVcSS/h2QQGDaC9qcpdFpFPQa?=
+ =?iso-8859-1?Q?LR5UtoH0HjMaHbwlcXGSeKRZ0IZcYFItLY89N/qAbCHAhyEXV5fqKm95Pz?=
+ =?iso-8859-1?Q?8hnOqiGSDW5uYNCFMTsHYQUpL8AAPdUabcujwVEjAZnpUze6r0R9FliRh6?=
+ =?iso-8859-1?Q?TijEje+ebRC08NtdeCpBbb3n5HiNWG5R/AskDXK/abjQtvegwfjjBypVR9?=
+ =?iso-8859-1?Q?AsjtFlWYtHKl5acGFBCT+XFZ2T67jA1+ndPZv5hNBGRsC/aNzliQWNv9tL?=
+ =?iso-8859-1?Q?ZgVNCkCVeiAn4Yzv1dE8vPhJf2H2zpMtpJbpXOUzyPx1O0rOwpMPDcwn0x?=
+ =?iso-8859-1?Q?hxbOjQnyynGY91BbgFpZR9E0bMkXJP6Wh8HrahsZ5ZOZZXBLTo+XZnbbv2?=
+ =?iso-8859-1?Q?8H8gH1cLfZAKxaA3zzCoGj16GVFg+xN3Z+0SHY99NIAIRQNylW0ybwGyPS?=
+ =?iso-8859-1?Q?gWR6DswMBZcpFGglZl/OP0NZxFD7VL/Vl7/3dYmOQG2F2LcBeu/G4UDYAk?=
+ =?iso-8859-1?Q?u7R92BaYRIYZgpZ2Ild+6N98snJxl/CAdcZpRQ5nvkTC/m/bJrUXcoE/FF?=
+ =?iso-8859-1?Q?f4r3iFfCbLvpUQ4PJqLuBUldUft34SlnhsBmIjON8oP3CXcnDsM40QDjUQ?=
+ =?iso-8859-1?Q?v0XCXhrVmntRnhNR/wJj1CsxYEMAxQ8R8Jmnof/01Zu+VI2wxf9Aa4ezdT?=
+ =?iso-8859-1?Q?Gn1jHQHSchgYaSRQ8idnLPcNm3gYZU22GkMiMqkqGcTKq8/Fx+qDAl5Q?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -141,13 +141,13 @@ MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7642fb26-1105-4fc3-414a-08ddb309d5ca
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jun 2025 10:28:17.8749 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e5447c6-c203-46fc-35d4-08ddb309e210
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jun 2025 10:28:38.4993 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: X6jeAQc8fwVjXTFXBp9xHQwGU4r7zX70GIjV6thxrwm/XD7/PI5zIk5nDuDU0aJfyYw1j+9aszQ2JSa4+ZooQHTAwqubxtpD7h0EI6/w8I0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR09MB5543
+X-MS-Exchange-CrossTenant-userprincipalname: UxdaOuCsPOeAeLs7qQHQ3yObDRSidDFlgYbjFAFAr7isU2eW9e+/MefqklIatjTOOfomtFT7xyt8rQouEQ1OejSZGBA4d9+eNNIiblAPYD4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR09MB5228
 X-Mailman-Approved-At: Tue, 24 Jun 2025 15:12:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -167,609 +167,278 @@ X-Virus-Status: Clean
 
 From: Chao-ying Fu <cfu@mips.com>
 
-Add support for Coherence Manager (CM) and IOCU discovery and
-configuration on the P8700 platform.
+Add basic support for the 8-char LED display on P8700-based Boston
+Board using display_set() and display_putc(), enabling the generic
+'display' command with clear and home support.
 
 Signed-off-by: Chao-ying Fu <cfu@mips.com>
 Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
 ---
- arch/riscv/cpu/p8700/Makefile             |   2 +
- arch/riscv/cpu/p8700/cache.c              |  10 +++
- arch/riscv/cpu/p8700/cm-iocu.c            |  75 ++++++++++++++++
- arch/riscv/cpu/p8700/cm.c                 |  92 +++++++++++++++++++
- arch/riscv/include/asm/arch-p8700/cm.h    |  61 +++++++++++++
- arch/riscv/include/asm/arch-p8700/p8700.h |  31 +++++++
- arch/riscv/include/asm/global_data.h      |   2 +
- arch/riscv/include/asm/io.h               |  86 ++++++++++++++++++
- board/mips/boston-riscv/Makefile          |   1 +
- board/mips/boston-riscv/iocu.c            | 104 ++++++++++++++++++++++
- 10 files changed, 464 insertions(+)
- create mode 100644 arch/riscv/cpu/p8700/cm-iocu.c
- create mode 100644 arch/riscv/cpu/p8700/cm.c
- create mode 100644 arch/riscv/include/asm/arch-p8700/cm.h
- create mode 100644 board/mips/boston-riscv/iocu.c
+ board/mips/boston-riscv/Kconfig         |  4 ++
+ board/mips/boston-riscv/MAINTAINERS     |  3 ++
+ board/mips/boston-riscv/Makefile        |  1 +
+ board/mips/boston-riscv/display.c       | 33 ++++++++++++++++
+ board/mips/boston-riscv/lowlevel_init.S |  2 +
+ cmd/Kconfig                             |  8 ++++
+ cmd/Makefile                            |  1 +
+ cmd/display.c                           | 51 +++++++++++++++++++++++++
+ doc/README.LED_display                  | 26 +++++++++++++
+ include/led-display.h                   | 33 ++++++++++++++++
+ 10 files changed, 162 insertions(+)
+ create mode 100644 board/mips/boston-riscv/display.c
+ create mode 100644 cmd/display.c
+ create mode 100644 doc/README.LED_display
+ create mode 100644 include/led-display.h
 
-diff --git a/arch/riscv/cpu/p8700/Makefile b/arch/riscv/cpu/p8700/Makefile
-index f9fcd20e2ab..3c93a703d84 100644
---- a/arch/riscv/cpu/p8700/Makefile
-+++ b/arch/riscv/cpu/p8700/Makefile
-@@ -6,3 +6,5 @@ obj-y +=3D dram.o
- obj-y +=3D cpu.o
- obj-y +=3D cache.o
- obj-y +=3D emu-amo.o
-+obj-y +=3D cm.o
-+obj-y +=3D cm-iocu.o
-diff --git a/arch/riscv/cpu/p8700/cache.c b/arch/riscv/cpu/p8700/cache.c
-index 27641035d80..e9297d9881b 100644
---- a/arch/riscv/cpu/p8700/cache.c
-+++ b/arch/riscv/cpu/p8700/cache.c
-@@ -37,6 +37,11 @@ static void probe_cache_config(void)
+diff --git a/board/mips/boston-riscv/Kconfig b/board/mips/boston-riscv/Kcon=
+fig
+index 4d55d96603e..5ab89cb5a69 100644
+--- a/board/mips/boston-riscv/Kconfig
++++ b/board/mips/boston-riscv/Kconfig
+@@ -44,4 +44,8 @@ config TFTP_FILE_NAME_MAX_LEN
+     int "Maximum length of TFTP file name"
+     default 256
 =20
- void flush_dcache_range(unsigned long start, unsigned long end)
- {
-+	DECLARE_GLOBAL_DATA_PTR;
-+
-+	if (gd->flags & GD_FLG_COHERENT_DMA)
-+		return;
-+
- 	if (lsize =3D=3D 0)
- 		probe_cache_config();
-=20
-@@ -56,6 +61,11 @@ void flush_dcache_range(unsigned long start, unsigned lo=
-ng end)
-=20
- void invalidate_dcache_range(unsigned long start, unsigned long end)
- {
-+	DECLARE_GLOBAL_DATA_PTR;
-+
-+	if (gd->flags & GD_FLG_COHERENT_DMA)
-+		return;
-+
- 	if (lsize =3D=3D 0)
- 		probe_cache_config();
-=20
-diff --git a/arch/riscv/cpu/p8700/cm-iocu.c b/arch/riscv/cpu/p8700/cm-iocu.=
-c
-new file mode 100644
-index 00000000000..5850647d20f
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/cm-iocu.c
-@@ -0,0 +1,75 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * MIPS Coherence Manager (CM) Support
-+ *
-+ * Copyright (c) 2016 Imagination Technologies Ltd.
-+ */
-+#include <asm/io.h>
-+#include <asm/global_data.h>
-+#include <asm/arch-p8700/cm.h>
-+
-+__weak bool plat_iocu_usable(unsigned int cluster, unsigned int iocu)
-+{
-+	return true;
-+}
-+
-+static int init_cluster_iocus(unsigned int cluster)
-+{
-+	DECLARE_GLOBAL_DATA_PTR;
-+	void __iomem *global_gcrs;
-+	u32 cfg, num_iocus, num_iocus_usable, local_cluster;
-+	int i;
-+
-+	local_cluster =3D mips_cluster_id();
-+
-+	global_gcrs =3D mips_cm_base();
-+	if (cluster !=3D local_cluster) {
-+		// FIXME
-+		return 1;
-+	}
-+
-+	cfg =3D __raw_readl(global_gcrs + GCR_CONFIG);
-+	num_iocus =3D cfg >> GCR_CONFIG_NUMIOCU_SHIFT;
-+	num_iocus &=3D GCR_CONFIG_NUMIOCU_MASK;
-+	gd->arch.num_iocus +=3D num_iocus;
-+
-+	/* Discover how many IOCUs are usable */
-+	num_iocus_usable =3D num_iocus;
-+	for (i =3D num_iocus - 1; i >=3D 0; i--) {
-+		if (!plat_iocu_usable(cluster, i))
-+			num_iocus_usable--;
-+	}
-+	gd->arch.num_iocus_usable +=3D num_iocus_usable;
-+
-+	/* If the cluster has no usable IOCUs there's nothing to do */
-+	if (num_iocus_usable =3D=3D 0) {
-+		if (cluster !=3D local_cluster)
-+			power_down_cluster(cluster);
-+
-+		return 0;
-+	}
-+
-+	/* If the IOCUs are in the local cluster we're good to go already */
-+	if (cluster =3D=3D local_cluster)
-+		return 0;
-+
-+	/* Ensure that the cluster's L2 cache is initialised */
-+	return init_cluster_l2(cluster);
-+}
-+
-+int mips_cm_init_iocus(void)
-+{
-+	DECLARE_GLOBAL_DATA_PTR;
-+	unsigned int cluster;
-+	int err;
-+
-+	for (cluster =3D 0; cluster < mips_cm_num_clusters(); cluster++) {
-+		err =3D init_cluster_iocus(cluster);
-+		if (err) {
-+			gd->arch.num_iocus_usable =3D err;
-+			return 0;
-+		}
-+	}
-+
-+	return 0;
-+}
-diff --git a/arch/riscv/cpu/p8700/cm.c b/arch/riscv/cpu/p8700/cm.c
-new file mode 100644
-index 00000000000..ce7485c564d
---- /dev/null
-+++ b/arch/riscv/cpu/p8700/cm.c
-@@ -0,0 +1,92 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * MIPS Coherence Manager (CM) Support
-+ *
-+ * Copyright (c) 2016 Imagination Technologies Ltd.
-+ */
-+
-+#include <asm/io.h>
-+#include <asm/arch-p8700/cm.h>
-+#include <asm/arch-p8700/p8700.h>
-+
-+static void mips_cpc_init(void)
-+{
-+}
-+
-+__weak const struct mmio_region *get_mmio_regions(void)
-+{
-+	return NULL;
-+}
-+
-+static void p8700_setup_mmio_limits(void)
-+{
-+	void __iomem *gcrs =3D mips_cm_base();
-+	const struct mmio_region *rgn =3D get_mmio_regions();
-+	unsigned int num_clusters =3D mips_cm_num_clusters();
-+	unsigned int limit =3D MIPS_CM_MMIO_LIMIT / num_clusters;
-+	unsigned int i, reg_off;
-+
-+	if (!rgn)
-+		return;
-+
-+	if (num_clusters !=3D 1) {
-+		// FIXME! Need to support multiple clusters.
-+		return;
-+	}
-+
-+	reg_off =3D GCR_MMIO0_BOTTOM;
-+
-+	for (i =3D 0; rgn[i].addr_high; i++) {
-+		__raw_writeq(rgn[i].addr_high & GCR_MMIO0_TOP_ADDR,
-+			     gcrs + reg_off + (GCR_MMIO0_TOP - GCR_MMIO0_BOTTOM));
-+
-+		__raw_writeq((rgn[i].addr_low & GCR_MMIO0_BOTTOM_ADDR) |
-+			     (rgn[i].port << GCR_MMIO0_BOTTOM_PORT_SHIFT) |
-+			     (rgn[i].enable ? GCR_MMIO0_BOTTOM_ENABLE : 0),
-+			     gcrs + reg_off);
-+		reg_off +=3D GCR_MMIO1_BOTTOM - GCR_MMIO0_BOTTOM;
-+	}
-+
-+	__raw_writel(limit, gcrs + GCR_MMIO_REQ_LIMIT);
-+}
-+
-+int power_up_cluster(unsigned int cluster)
-+{
-+	return 0;
-+}
-+
-+int power_down_cluster(unsigned int cluster)
-+{
-+	return 0;
-+}
-+
-+int init_cluster_l2(unsigned int cluster)
-+{
-+	return 0;
-+}
-+
-+int mips_cm_init(void)
-+{
-+	int err;
-+
-+	mips_cpc_init();
-+
-+	err =3D mips_cm_init_iocus();
-+	if (err)
-+		return err;
-+
-+	p8700_setup_mmio_limits();
-+
-+	return 0;
-+}
-+
-+int arch_cpu_init(void)
-+{
-+	int err;
-+
-+	err =3D mips_cm_init();
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-diff --git a/arch/riscv/include/asm/arch-p8700/cm.h b/arch/riscv/include/as=
-m/arch-p8700/cm.h
-new file mode 100644
-index 00000000000..ab5ea7385b2
---- /dev/null
-+++ b/arch/riscv/include/asm/arch-p8700/cm.h
-@@ -0,0 +1,61 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
-+ */
-+
-+#ifndef __P8700_CM_H__
-+#define __P8700_CM_H__
-+
-+#include <asm/arch-p8700/p8700.h>
-+
-+struct mmio_region {
-+	phys_addr_t addr_low;
-+	phys_addr_t addr_high;
-+	unsigned int port : 4;
-+	unsigned int enable : 1;
-+};
-+
-+const struct mmio_region *get_mmio_regions(void);
-+
-+void setup_redirect(unsigned int cluster, unsigned int core,
-+		    unsigned int vp, unsigned int block);
-+
-+int mips_cm_init_iocus(void);
-+
-+int power_up_cluster(unsigned int cluster);
-+int power_down_cluster(unsigned int cluster);
-+int init_cluster_l2(unsigned int cluster);
-+
-+static inline void *mips_cm_base(void)
-+{
-+	return (void *)CM_BASE;
-+}
-+
-+static inline void *mips_cpc_base(void)
-+{
-+	return (void *)CPC_BASE;
-+}
-+
-+static inline unsigned int mips_cm_num_clusters(void)
-+{
-+	u32 cfg;
-+
-+	cfg =3D __raw_readl(mips_cm_base() + GCR_CONFIG);
-+	cfg >>=3D GCR_CONFIG_NUMCLUSTERS_SHIFT;
-+	cfg &=3D GCR_CONFIG_NUMCLUSTERS_MASK;
-+
-+	return cfg;
-+}
-+
-+static inline unsigned int mips_cluster_id(void)
-+{
-+	u32 temp;
-+
-+	asm volatile("csrr %0, mhartid" : "=3Dr"(temp));
-+	temp >>=3D MHARTID_CLUSTER_SHIFT;
-+	temp &=3D MHARTID_CLUSTER_MASK;
-+
-+	return temp;
-+}
-+
-+#endif /* __P8700_CM_H__ */
-diff --git a/arch/riscv/include/asm/arch-p8700/p8700.h b/arch/riscv/include=
-/asm/arch-p8700/p8700.h
-index 5ca9b4b9497..6c47de9a633 100644
---- a/arch/riscv/include/asm/arch-p8700/p8700.h
-+++ b/arch/riscv/include/asm/arch-p8700/p8700.h
-@@ -65,6 +65,10 @@
- #define CM_BASE			0x16100000
- #define CPC_BASE		(CM_BASE + 0x8000)
-=20
-+/* Block offsets */
-+#define GCR_OFF_GLOBAL		0x0000
-+#define GCR_OFF_LOCAL		0x2000
-+
- /* CPC Block offsets */
- #define CPC_OFF_LOCAL		0x2000
-=20
-@@ -75,6 +79,33 @@
- #define CPC_Cx_CMD		0x0000
- #define CPC_Cx_CMD_RESET	0x4
-=20
-+/* GCR_CONFIG */
-+#define GCR_CONFIG						0x0000
-+#define GCR_REV							0x0030
-+#define GCR_CONFIG_NUMCLUSTERS_SHIFT	23
-+#define GCR_CONFIG_NUMCLUSTERS_MASK	    0x7f
-+#define GCR_CONFIG_NUMIOCU_SHIFT	    8
-+#define GCR_CONFIG_NUMIOCU_MASK		    0xf
-+#define GCR_CONFIG_NUMCORES_SHIFT	    0
-+#define GCR_CONFIG_NUMCORES_MASK	    0xff
-+
-+/* GCR_REV CM versions */
-+#define GCR_REV_CM3			0x0800
-+#define GCR_REV_CM3_5		0x0900
-+
-+#define GCR_MMIO_REQ_LIMIT				0x06f8
-+#define GCR_MMIO0_BOTTOM				0x0700
-+#define GCR_MMIO0_BOTTOM_ADDR			(0xffffffffull << 16)
-+#define GCR_MMIO0_BOTTOM_PORT_SHIFT		2
-+#define GCR_MMIO0_BOTTOM_PORT			(0xf << 2)
-+#define GCR_MMIO0_BOTTOM_DISABLE_LIMIT	(0x1 << 1)
-+#define GCR_MMIO0_BOTTOM_ENABLE			(0x1 << 0)
-+#define GCR_MMIO0_TOP					0x0708
-+#define GCR_MMIO0_TOP_ADDR				(0xffffffffull << 16)
-+#define GCR_MMIO1_BOTTOM				0x0710
-+
-+#define MIPS_CM_MMIO_LIMIT	4
-+
- #define P8700_GCR_C0_COH_EN	0x20f8
- #define P8700_GCR_C1_COH_EN	0x21f8
- #define P8700_GCR_C2_COH_EN	0x22f8
-diff --git a/arch/riscv/include/asm/global_data.h b/arch/riscv/include/asm/=
-global_data.h
-index 47b5e2cfc8f..7dbd164f154 100644
---- a/arch/riscv/include/asm/global_data.h
-+++ b/arch/riscv/include/asm/global_data.h
-@@ -44,6 +44,8 @@ struct arch_global_data {
- 	ulong smbios_start;		/* Start address of SMBIOS table */
- #endif
- 	struct resume_data *resume;
-+	int num_iocus;
-+	int num_iocus_usable;
- };
-=20
- #include <asm-generic/global_data.h>
-diff --git a/arch/riscv/include/asm/io.h b/arch/riscv/include/asm/io.h
-index da165858034..fb79d0a8d32 100644
---- a/arch/riscv/include/asm/io.h
-+++ b/arch/riscv/include/asm/io.h
-@@ -15,6 +15,91 @@ static inline void sync(void)
- {
- }
-=20
-+/*
-+ * Generic virtual read/write.  Note that we don't support half-word
-+ * read/writes.  We define __arch_*[bl] here, and leave __arch_*w
-+ * to the architecture specific code.
-+ */
-+
-+#if CONFIG_P8700_RISCV
-+#ifdef CONFIG_ARCH_MAP_SYSMEM
-+static inline void *map_sysmem(phys_addr_t paddr, unsigned long len)
-+{
-+	if (paddr < PHYS_SDRAM_0_SIZE + PHYS_SDRAM_1_SIZE)
-+		paddr =3D paddr | 0x40000000;
-+	return (void *)(uintptr_t)paddr;
-+}
-+
-+static inline void *unmap_sysmem(const void *vaddr)
-+{
-+	phys_addr_t paddr =3D (phys_addr_t)vaddr;
-+
-+	paddr =3D paddr & ~0x40000000;
-+	return (void *)(uintptr_t)paddr;
-+}
-+
-+static inline phys_addr_t map_to_sysmem(const void *ptr)
-+{
-+	return (phys_addr_t)(uintptr_t)ptr;
-+}
-+#endif
-+
-+static inline unsigned char __arch_getb(const volatile void __iomem *mem)
-+{
-+	unsigned char value;
-+
-+	asm volatile("lbu %0,0(%1)" : "=3Dr"(value) : "r"(mem));
-+
-+	return value;
-+}
-+
-+static inline unsigned short __arch_getw(const volatile void __iomem *mem)
-+{
-+	unsigned short value;
-+
-+	asm volatile("lhu %0,0(%1)" : "=3Dr"(value) : "r"(mem));
-+
-+	return value;
-+}
-+
-+static inline unsigned int __arch_getl(const volatile void __iomem *mem)
-+{
-+	unsigned int value;
-+
-+	asm volatile("lw %0,0(%1)" : "=3Dr"(value) : "r"(mem));
-+
-+	return value;
-+}
-+
-+static inline unsigned long long __arch_getq(const volatile void __iomem *=
-mem)
-+{
-+	unsigned long long value;
-+
-+	asm volatile("ld %0,0(%1)" : "=3Dr"(value) : "r"(mem));
-+
-+	return value;
-+}
-+
-+static inline void __arch_putb(unsigned char value, volatile void __iomem =
-*mem)
-+{
-+	asm volatile("sb %0,0(%1)"::"r"(value), "r"(mem));
-+}
-+
-+static inline void __arch_putw(unsigned short value, volatile void __iomem=
- *mem)
-+{
-+	asm volatile("sh %0,0(%1)"::"r"(value), "r"(mem));
-+}
-+
-+static inline void __arch_putl(unsigned int value, volatile void __iomem *=
-mem)
-+{
-+	asm volatile("sw %0,0(%1)"::"r"(value), "r"(mem));
-+}
-+
-+static inline void __arch_putq(unsigned int value, volatile void __iomem *=
-mem)
-+{
-+	asm volatile("sd %0,0(%1)"::"r"(value), "r"(mem));
-+}
-+#else
- #define __arch_getb(a)			(*(volatile unsigned char *)(a))
- #define __arch_getw(a)			(*(volatile unsigned short *)(a))
- #define __arch_getl(a)			(*(volatile unsigned int *)(a))
-@@ -24,6 +109,7 @@ static inline void sync(void)
- #define __arch_putw(v, a)		(*(volatile unsigned short *)(a) =3D (v))
- #define __arch_putl(v, a)		(*(volatile unsigned int *)(a) =3D (v))
- #define __arch_putq(v, a)		(*(volatile unsigned long long *)(a) =3D (v))
-+#endif
-=20
- #define __raw_writeb(v, a)		__arch_putb(v, a)
- #define __raw_writew(v, a)		__arch_putw(v, a)
++config CMD_DISPLAY
++	bool "Enable display command"
++	default y
++
+ endif
+diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/=
+MAINTAINERS
+index 0d9a951441f..b04dcde943a 100644
+--- a/board/mips/boston-riscv/MAINTAINERS
++++ b/board/mips/boston-riscv/MAINTAINERS
+@@ -9,3 +9,6 @@ F:  configs/boston-p8700_defconfig
+ F:  arch/riscv/dts/boston-p8700.dts
+ F:  drivers/gpio/eg20t-gpio.c
+ F:  arch/riscv/lib/mips_gic.c
++F:  cmd/display.c
++F:  include/led-display.h
++F:  doc/README.LED_display
 diff --git a/board/mips/boston-riscv/Makefile b/board/mips/boston-riscv/Mak=
 efile
-index 9032e2ad6bb..007f68287bd 100644
+index 007f68287bd..8ca0967b09e 100644
 --- a/board/mips/boston-riscv/Makefile
 +++ b/board/mips/boston-riscv/Makefile
-@@ -5,4 +5,5 @@
- obj-y +=3D checkboard.o
- obj-y +=3D lowlevel_init.o
+@@ -7,3 +7,4 @@ obj-y +=3D lowlevel_init.o
  obj-y +=3D boston-riscv.o
-+obj-y +=3D iocu.o
+ obj-y +=3D iocu.o
  obj-y +=3D reset.o
-diff --git a/board/mips/boston-riscv/iocu.c b/board/mips/boston-riscv/iocu.=
-c
++obj-y +=3D display.o
+diff --git a/board/mips/boston-riscv/display.c b/board/mips/boston-riscv/di=
+splay.c
 new file mode 100644
-index 00000000000..8478670f350
+index 00000000000..cd222cb6648
 --- /dev/null
-+++ b/board/mips/boston-riscv/iocu.c
-@@ -0,0 +1,104 @@
++++ b/board/mips/boston-riscv/display.c
+@@ -0,0 +1,33 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (c) 2016 Imagination Technologies Ltd.
++ * Copyright (C) 2017 Imagination Technologies
++ *
++ */
++#include <led-display.h>
++#include <asm/io.h>
++#include "boston-lcd.h"
++#include <string.h>
++
++static char buf[8];
++static int pos;
++
++void display_set(int cmd)
++{
++	if (cmd & DISPLAY_CLEAR)
++		memset(buf, ' ', sizeof(buf));
++
++	if (cmd & DISPLAY_HOME)
++		pos =3D 0;
++
++	lowlevel_display(buf);
++}
++
++int display_putc(char c)
++{
++	if (pos >=3D 8)
++		return -1;
++
++	buf[pos++] =3D c;
++	lowlevel_display(buf);
++	return c;
++}
+diff --git a/board/mips/boston-riscv/lowlevel_init.S b/board/mips/boston-ri=
+scv/lowlevel_init.S
+index 8fa85749e40..f65021a0974 100644
+--- a/board/mips/boston-riscv/lowlevel_init.S
++++ b/board/mips/boston-riscv/lowlevel_init.S
+@@ -15,4 +15,6 @@ msg_ddr_ok:	.ascii "DDR OK  "
+ 	.globl lowlevel_display
+ lowlevel_display:
+ 	li	t0, BOSTON_LCD_BASE
++	ld	t1, 0(a0)
++	sd	t1, 0(t0)
+ 	jr	ra
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index f21d27cb27f..e40fbded3e3 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2313,6 +2313,14 @@ config CMD_CLS
+ 	  Enable the 'cls' command which clears the screen contents
+ 	  on video frame buffer.
+=20
++config CMD_DISPLAY
++	bool "Enable the 'display' command, for character displays"
++	help
++	  (this needs porting to driver model)
++	  This enables the 'display' command which allows a string to be
++	  displayed on a simple board-specific display. Implement
++	  display_putc() to use it.
++
+ config CMD_EFIDEBUG
+ 	bool "efidebug - display/configure UEFI environment"
+ 	depends on EFI_LOADER
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 80cf70b7fe8..e1ce7bbaff9 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -59,6 +59,7 @@ obj-$(CONFIG_CMD_SOUND) +=3D sound.o
+ ifdef CONFIG_POST
+ obj-$(CONFIG_CMD_DIAG) +=3D diag.o
+ endif
++obj-$(CONFIG_CMD_DISPLAY) +=3D display.o
+ obj-$(CONFIG_CMD_ADTIMG) +=3D adtimg.o
+ obj-$(CONFIG_CMD_ABOOTIMG) +=3D abootimg.o
+ obj-$(CONFIG_CMD_CYCLIC) +=3D cyclic.o
+diff --git a/cmd/display.c b/cmd/display.c
+new file mode 100644
+index 00000000000..0602345e6c9
+--- /dev/null
++++ b/cmd/display.c
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2005
++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
 + */
 +
-+#include <dm.h>
-+#include <env_callback.h>
-+#include <asm/io.h>
-+#include <asm/arch-p8700/cm.h>
-+#include "boston-regs.h"
++#include <command.h>
++#include <led-display.h>
 +
-+static const struct mmio_region mmio_regions[] =3D {
-+	{ 0x10000000, 0x160f0000, .enable =3D 1 },
-+	{ 0x17ff0000, 0x17ff0000, .enable =3D 1 },
-+	{ 0 },
-+};
++#undef DEBUG_DISP
 +
-+const struct mmio_region *get_mmio_regions(void)
++int do_display(struct cmd_tbl *cmdtp, int flag, int argc, char * const arg=
+v[])
 +{
-+	return mmio_regions;
-+}
++	int i;
 +
-+static int set_io_coherent(bool coherent)
-+{
-+	DECLARE_GLOBAL_DATA_PTR;
++	/* Clear display */
++	display_set(DISPLAY_CLEAR | DISPLAY_HOME);
 +
-+	if (!coherent) {
-+		printf("I/O:   Non-Coherent (Forced by environment)\n");
-+		goto noncoherent;
-+	}
++	if (argc < 2)
++		return (0);
 +
-+	if (gd->arch.num_iocus_usable < 0) {
-+		printf("I/O:   Non-Coherent (IOCU init error %d)\n",
-+		       gd->arch.num_iocus_usable);
-+		goto noncoherent;
-+	}
++	for (i =3D 1; i < argc; i++) {
++		char *p =3D argv[i];
 +
-+	if (gd->arch.num_iocus =3D=3D 0) {
-+		printf("I/O:   Non-Coherent (No IOCU)\n");
-+		goto noncoherent;
-+	}
-+
-+	if (gd->arch.num_iocus_usable =3D=3D 0) {
-+		printf("I/O:   Non-Coherent (IOCU not connected)\n");
-+		goto noncoherent;
-+	}
-+
-+	/*
-+	 * We have some number of connected IOCUs. Map all PCIe DMA access to
-+	 * hit the IOCU by offsetting the addresses as they pass from the PCIe
-+	 * controller to the NoC.
-+	 */
-+	writel(0x10, (u32 *)BOSTON_PLAT_NOCPCIE0ADDR);
-+	writel(0x10, (u32 *)BOSTON_PLAT_NOCPCIE1ADDR);
-+	writel(0x10, (u32 *)BOSTON_PLAT_NOCPCIE2ADDR);
-+
-+	/* Record that I/O is coherent */
-+	gd->flags |=3D GD_FLG_COHERENT_DMA;
-+
-+	printf("I/O:   Coherent\n");
-+	return 0;
-+
-+noncoherent:
-+	/* Map all PCIe DMA access to its default, non-IOCU, target */
-+	writel(0x00, (u32 *)BOSTON_PLAT_NOCPCIE0ADDR);
-+	writel(0x00, (u32 *)BOSTON_PLAT_NOCPCIE1ADDR);
-+	writel(0x00, (u32 *)BOSTON_PLAT_NOCPCIE2ADDR);
-+
-+	/* Record that I/O is not coherent */
-+	gd->flags &=3D ~GD_FLG_COHERENT_DMA;
-+	return 0;
-+}
-+
-+static int on_io_coherent(const char *name, const char *value,
-+			  enum env_op op, int flags)
-+{
-+	switch (op) {
-+	case env_op_create:
-+	case env_op_overwrite:
-+		if (!strcmp(value, "0")) {
-+			set_io_coherent(false);
-+		} else if (!strcmp(value, "1")) {
-+			set_io_coherent(true);
-+		} else {
-+			printf("### io.coherent must equal 0 or 1\n");
-+			return -EINVAL;
++		if (i > 1) { /* Insert a space between strings */
++			display_putc(' ');
 +		}
-+		return 0;
 +
-+	case env_op_delete:
-+		set_io_coherent(true);
-+		return 0;
-+
-+	default:
-+		return 0;
++		while ((*p)) {
++#ifdef DEBUG_DISP
++			putc(*p);
++#endif
++			display_putc(*p++);
++		}
 +	}
++
++#ifdef DEBUG_DISP
++	putc('\n');
++#endif
++
++	return (0);
 +}
 +
-+U_BOOT_ENV_CALLBACK(io_coherent, on_io_coherent);
++/***************************************************/
 +
-+int misc_init_f(void)
++U_BOOT_CMD(display,	CONFIG_SYS_MAXARGS,	1,	do_display,
++	   "display string on dot matrix display",
++	   "[<string>]\n"
++	   "    - with <string> argument: display <string> on dot matrix display\=
+n"
++	   "    - without arguments: clear dot matrix display"
++);
+diff --git a/doc/README.LED_display b/doc/README.LED_display
+new file mode 100644
+index 00000000000..19977ea7e0d
+--- /dev/null
++++ b/doc/README.LED_display
+@@ -0,0 +1,26 @@
++LED display internal API
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++This README describes the LED display API.
++
++The API is defined by the include file include/led-display.h
++
++The first step in to define CONFIG_CMD_DISPLAY in the board config file.
++Then you need to provide the following functions to access LED display:
++
++void display_set(int cmd);
++
++This function should control the state of the LED display. Argument is
++an ORed combination of the following values:
++ DISPLAY_CLEAR	-- clear the display
++ DISPLAY_HOME	-- set the position to the beginning of display
++
++int display_putc(char c);
++
++This function should display it's parameter on the LED display in the
++current position. Returns the displayed character on success or -1 in
++case of failure.
++
++With this functions defined 'display' command will display it's
++arguments on the LED display (or clear the display if called without
++arguments).
+diff --git a/include/led-display.h b/include/led-display.h
+new file mode 100644
+index 00000000000..50830903b0d
+--- /dev/null
++++ b/include/led-display.h
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * (C) Copyright 2005-2010
++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++ *
++ * (C) Copyright 2010
++ * Sergei Poselenov, Emcraft Systems, sposelenov@emcraft.com.
++ */
++
++#ifndef _led_display_h_
++#define _led_display_h_
++
++/* Display Commands */
++#define DISPLAY_CLEAR	0x1 /* Clear the display */
++#define DISPLAY_HOME	0x2 /* Set cursor at home position */
++#define DISPLAY_LINE2	0x4 /* Move to line 2 */
++
++void display_set(int cmd);
++int display_putc(char c);
++
++static inline void display_puts(const char *str)
 +{
-+	return set_io_coherent(env_get_yesno("io.coherent") !=3D 0);
++	while (str[0])
++		display_putc(*str++);
 +}
++
++static inline void display_sets(const char *str)
++{
++	display_set(DISPLAY_CLEAR | DISPLAY_HOME);
++	display_puts(str);
++}
++
++#endif
 --=20
 2.34.1
