@@ -4,117 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E046C77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 09:42:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F5AC77B7F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 10:10:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA9E782D17;
-	Tue, 24 Jun 2025 11:42:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FDBD82D17;
+	Tue, 24 Jun 2025 12:10:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jNQok5R3";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="AGkXttNB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 051D482D21; Tue, 24 Jun 2025 11:42:00 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C8AFB82D21; Tue, 24 Jun 2025 12:10:33 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBEA882C84
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 11:41:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB27382C84
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 12:10:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-adeaa4f3d07so1012411066b.0
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 02:41:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750758117; x=1751362917; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=9fJGA7QRDaz0ZuBSUa0TVOM2T94H6wEcavbLG4IP6u4=;
- b=jNQok5R3pMhIKCBhiqLy2UbohfGt2sJFCqLSuJWmS0gT8StlvMbpnAbmdbl9UBimTM
- baEXX/CEMSSuvR+EIvTe3/hUTR9/RNfqD6EvJUkr2AKpvmQ1xUU4N+LZSsDqxe4kKUwy
- ZCQ5t7QCfjmVSXa5YLTSj668Sdb8SAE+lLv3kpJR++tNTZHo5KNtJkOfgYhPfkHIzCzC
- 3Xc60f8+FQa9CncgzPq4nWBm3Q5AxAP9AEnm/rLDoBHHLmqGkb5LKO3w3Ph7Fu/jaZvl
- gMbhQ4eEiZsGOBiAkS3GNOMV9Kih5XqnozvoDT8xOueZ6OK+KwEf9yrf70Srt6mSsIRI
- kh9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750758117; x=1751362917;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=9fJGA7QRDaz0ZuBSUa0TVOM2T94H6wEcavbLG4IP6u4=;
- b=mgVVduM28ZMZP1Hv7JRvC8RDdeRMXVwW+JM3NOKeYVuDASLyr+5KInFDgzrxXvzXKl
- RdUGOvcw6mC6NFm0ZN9IxMoMEyexNb1Xv/CO6EaNdxjGpCzLdQJKPg5Ek50ZvtaYrorH
- yZ1RToTHt7urvyNz5rr00WUQukXK0o1lH9egD+co2uA2Xcmd09UYuXE6A/xXghhDcYHI
- bnOq4agGJ4Q/Ot1ArMWUElmTZ1b5Gk14YNn3nqpvBqZI3bTUmJ1bcHZZqd/1cysIRQQy
- OKJGfg5PJvXHQ0Z0c+FDS3oUILCTF3vFrYVUazqrB8JbSWq6qDHVJXPP38BQ6UxnuLd+
- vRIQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUt2122ffpwQsDNNYrF767u/x0b9wnc6uENqYhNVnInSi57LBT0lWRSISWwhuQmthy/wdNI3+U=@lists.denx.de
-X-Gm-Message-State: AOJu0YyB6vjnQ9F3F3KwSJO1VVbuOUk+ABsdtM7jG1eSsfB+6ZyAtSCu
- cHwOzGns0tYpbYWOBpBpzkJwnTMKw978mx645qRp+LnhWBcYcnT5GSo5Va3r5hgyYEw=
-X-Gm-Gg: ASbGncs10mcoShHeemIuza4MKRwW4UKC2/0cWjGPZKpJUxdgvfyiubTN7XfYjmh645X
- EOsD1P8JRX8dyJLDDtDdmWyfPgDAQkJbV3tymwEs/V0Su37HhtQ0SA/dT8hUEslOZdswI9OWpwV
- OpnL9bI9+JvKGa4ua1g9/jCSxjeTzcbgYyS3o9UuTmdzjKdwnN82zADGGD4UAw/FqOCoJWOflvH
- GjAI85j4EotHsnojOd/jFjPXiePQlrys3ooareMGYL1QToOPSJAeX2sNRSCHDfaT9Wg0wZiH10d
- bfAIUJwTznb4UtIYw3PP+7WWyrIUmchOkDBMmN0PViqao7oTvehABRmTRX0aO0LXMiPgZyQMW2u
- +rHn+OMW4PU+B2bWErSV+wOMwVSaXVITwynOrxZ+U1+3rEVDnZw==
-X-Google-Smtp-Source: AGHT+IFGhmgI27LR6o8Kbdr3jCx3vj6g++PdJdarh2XQgIHy9dwDcNVEiJjjFj0vM6uJsNay4mGsoQ==
-X-Received: by 2002:a17:907:86ac:b0:ad8:9645:798c with SMTP id
- a640c23a62f3a-ae057f6943emr1358691666b.51.1750758117101; 
- Tue, 24 Jun 2025 02:41:57 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:6fea:600c:ca20:f54a?
- ([2a01:e0a:3d9:2080:6fea:600c:ca20:f54a])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae0540815c2sm863682466b.94.2025.06.24.02.41.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Jun 2025 02:41:56 -0700 (PDT)
-Message-ID: <f85b7592-1a14-4233-9908-b8f42ffad7de@linaro.org>
-Date: Tue, 24 Jun 2025 11:41:56 +0200
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=l/b8uBzJ++FyJPrTATaI9RM6/+pg9LKw7aLCv+ium1uy5uLdyIFkM25xFDXQX6mN6HqdWX94ovjNMKd6vuXbUmoh/c9YxKI3KO9rHChHJt+kufkp1wvwYN7uFPSzpas1kt6sswlGC2gzBKJzkKrny0vurgovP5uhn2+i/38pZyf5g7C54S8xoMRs4GajhxjXeFhAxxfzy3tXOw2L/W/icdwPf8nj4oFDtxPhNTJ4x+hxs/QEICdHyfCUYvgUq04u+coeEjAU9JFyqHZY+2fYOu8Uz+NxPUJKHpeqlB/t86YibHHVO3ruISN+JX9rQQqGZNMCCHmgA0EFTFG+zjZ1Ew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=x77IS18vUWyiYJm47qGZo94V+M2P3x8nLyAUA8qAjbU=;
+ b=fRx5PhjU1StnbkbwYhRbFkVG1YuscnghMhUFZESZ5aliNclb7ty2kYPVaWRFcUS8MRTAPv6ngOmMQseujBIMkgggY4djKAFDX0OP9jKmQ0LXv1TyRnNb/eGakbwizlk4cFcJJs+IXO5Hq0dwjERAeksaRQRKIKlJqBOA26T/sLiIIFLjxbnykS75d0ckBIt3sYcu3ofPR3TTJAtobxzae1vhC6L40T+xw7xAvQEtm3iQH+k+6GKLZeFBNTTr3rPnU8GQ9BxNrEtVfc2OZefjqSi+5Hk0lFKTfSMIVefhhT/l/zodDXcAosYejZZRr5reKXwp1mx3h1cpkQRaEw9plA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=x77IS18vUWyiYJm47qGZo94V+M2P3x8nLyAUA8qAjbU=;
+ b=AGkXttNBWpwTzHmqjJ8cyapWblv23P6a16vE3sj94eVeNEku4w2+OaxQyNrp9Te+GJI7dPVgQRRHO12mCNBCHVZRMKqYgu+mYB3GmJwRSQkjMJQTVyytOk7/Ij7/+eVwxgyc8DJiKvnowiB8tcVfh+TzEAWrCydKdKbiPNGE2hSHZbLY50FHnUJyjohHJelJxVeShkmFEXeudAbSEs/j+2dM3F1EJl7PRv28xgWRa6aceq1Nd1fYs0iGXuLQrkFYcMMvc3StuEi7zkXrJgg3btrV7VdZlDGy2Wt1S4xBoH3jb0yDmzmxPgOS5AP8P6G1bmJr+eAuFiW83i0hnI+J1w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by PA3PR04MB11250.eurprd04.prod.outlook.com (2603:10a6:102:4aa::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.27; Tue, 24 Jun
+ 2025 10:10:29 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.8857.026; Tue, 24 Jun 2025
+ 10:10:29 +0000
+From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+To: trini@konsulko.com, festevam@denx.de, peng.fan@nxp.com, hs@denx.de,
+ alice.guo@nxp.com, sbabic@nabladev.com, uboot-imx@nxp.com,
+ eballetb@redhat.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2] tools: imx8image: Fix the value passed to dcd_skip of
+ build_container()
+Date: Tue, 24 Jun 2025 18:09:22 +0800
+Message-ID: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI1PR02CA0032.apcprd02.prod.outlook.com
+ (2603:1096:4:1f6::12) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 10/10] serial: msm: Use single character mode
-To: Stephan Gerhold <stephan.gerhold@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Sam Day <me@samcday.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250624-db410c-autoboot-fixes-v1-0-d96c97ae41d1@linaro.org>
- <20250624-db410c-autoboot-fixes-v1-10-d96c97ae41d1@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250624-db410c-autoboot-fixes-v1-10-d96c97ae41d1@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PA3PR04MB11250:EE_
+X-MS-Office365-Filtering-Correlation-Id: b3c7f0f4-bd2c-4630-b651-08ddb307589f
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?z3HwYcHVS+VFq5NAwk8pgSz1ncQjojpEBZChMJOTuUItoVGAje4SPHazs+OE?=
+ =?us-ascii?Q?o6CEuRt/Ys3E3CQG44z2s2PZqFD7+AV9Aq4bVWOlfMoz4MDLjc5q8KOkfnYv?=
+ =?us-ascii?Q?8TrLvt2ghrVWBqWoJZ4FMXFy5Inwijf5PbzTrJsAkv++oI18jeIjcT+ZFG9d?=
+ =?us-ascii?Q?nWWj0KBYtynW3Vj7vEfH+XkZ4e23vJFbsVCSa8ZiEDyIU4sYeRhZQrYohCcN?=
+ =?us-ascii?Q?rxB1l5txrQYyCwFwqnPsX7atgq0Vwv8CiVHSiwdStdNlWremncMW3gSHXJdZ?=
+ =?us-ascii?Q?Vfw3XyvG9w318A98Oiq53aXBnXEh5kGJv1msk3Ys6jFNP8bB9L9Jv0Kjzu1L?=
+ =?us-ascii?Q?6Y3EKWOUFJaSrvoik73XXDL9MZ1YZMLcfW0+QZsRmmGSDTu/NoQye+KQHUn0?=
+ =?us-ascii?Q?3MRcpsa8/PvvmmnFJxXTy7OXPdDi/tXc67zu7l+HiiSjndPFr8NcdrG8cOmu?=
+ =?us-ascii?Q?aGoDx7NvMX2fzLbI6wEoBSpmMF/9XUFo1BcWOBBLct2duRIWrJPlUmHuLz5l?=
+ =?us-ascii?Q?sqMEbNJwoUvFAorf/yFCohUV677+wE8dE8gHyGruPMaTeuVVp8p8X/JUbzqn?=
+ =?us-ascii?Q?s9xeOoG/rzRgdYpchn8zmiS2ey2ohZn7RUGMjRH0WmKHPiUC/itw0Nrmixz1?=
+ =?us-ascii?Q?+JrVpoJOuNkRmX+0HkoTJ1rTIih/JeMM2SOoG7YLjb22PLvU+wk3f0a1jBhd?=
+ =?us-ascii?Q?cuVustBDNFOlKFGVEL+++xnAPLDoqayIheQdkaFGZ20asGWy4EK7F+rUPWAC?=
+ =?us-ascii?Q?U72UDSDohGNKNKyNyriQ3fwgAP6iHYfuh+C3xh8OI4ENUp4CL2I7+kar955E?=
+ =?us-ascii?Q?64y7zcPCiFVFXeiSWqdfEKAUCZ5YJV55ZTUJJVeKZxDM5sZUsrV/KWx/ecul?=
+ =?us-ascii?Q?Y55TDIj4DkefMtGAK437nIXlWGsoD7orgYEnIuWhewLGtoYGG9Ss4hhVNqIV?=
+ =?us-ascii?Q?0HcUD0QNFBrvGn/ulZ1qCoTYdBrEaH0TeVzzlwF4/aiAuoJ8GwvOOEhMqWKI?=
+ =?us-ascii?Q?T6PP6HSuBwchqoDvQI82fI+fm1lsy4BMNZHWQlZgZfpbdfVaM7bMJgjz4tAo?=
+ =?us-ascii?Q?aEosZlx4ejrRj0JxGd+NN2qTjDmXdCqnefcX9dx/LYDuCPWMspfhCZCMX97b?=
+ =?us-ascii?Q?r9q3bMgWI8W9IBJg80rRu7AOLrYgrRnrCY5AWn09rGERmQoQq32P7qormGVu?=
+ =?us-ascii?Q?B8wHMTSxiWz38afvV5J65V3o5xSOTLv/yE9L/aWf2xWxSoRkzqfkHFrpo64y?=
+ =?us-ascii?Q?P7B4V/cYyM6nvx7cv4oXzaSmezoh7+Ofh7mjDkPS+2T/KY6NtoqS79sSfeBV?=
+ =?us-ascii?Q?BmqJE6jyR2Zi9MPXlIZb7yasyyHolNlIGGENmHCkEmfxTTOqyMeTkOq5uUc4?=
+ =?us-ascii?Q?JvCdP26kQdZmI/vFiAt0wEt0Q+op3yxQrUOUxCWiqR9HsZ603SMrX6f4nVjy?=
+ =?us-ascii?Q?W+JLODifjHP/jaN0CYjlcfhnVcPSVenpcMKlHEsBQCUJcogCoJ6I2A=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uTbfKDqDx2XKtx4xFJHL6ttOCUItgsBEvqIzxoWkO9v+uByyqHamvWqgXSMQ?=
+ =?us-ascii?Q?FQdjZeVdlF5ERsrOwzJgOB8JETjELS5Dvu/V2Ut+6pp816W1gFJ+MXarj7Td?=
+ =?us-ascii?Q?VbDe29uQOiUPkZyyy4j4cMOWIiUG+iHRtHexiDytNJIdtzt0Nqdcr0eLyyO4?=
+ =?us-ascii?Q?/G0cmC6FA8mqSasIfNClML7xuBBW1xLBftyn2ggziaUUOZCPCCMQMl9NbmSv?=
+ =?us-ascii?Q?iF3p4Oztzt/FZe1pAslApvcnv1/4gByWQsITFP0Vy3CPZ1I4Ppd7EBF9dCuZ?=
+ =?us-ascii?Q?/FosRw0lb2oVvhYvAeG7FBlBSGtiT89VZeCt7Kj0cnoeQSEGHIWD82eVJcg1?=
+ =?us-ascii?Q?QDRv3T/biG99rq4KNMyrvXrbyqKWvJWbq9rd6P1sv4n28AZMfuTzV6fEb/i/?=
+ =?us-ascii?Q?UlXtj8lERcrSEmrRgO7G2zocqEzrYNNcO5npL2keucDKvcuWEELZF3+xWtaj?=
+ =?us-ascii?Q?5Is2zv1LOlUxBJknacM0pgfG/05bukquWIl3ufRMESkNHk8vBhgBQovfa2Sr?=
+ =?us-ascii?Q?Qz2CKzhEZrOrxUMabZRc3J/hYptXlwdNPKPPDSLWtfJDn7MWJUjX+DhkokFi?=
+ =?us-ascii?Q?phvsNbSyeVQ8yedQxoOzC9+ha8dlnZy0gZASajw1bgTjMXby/a0631RSs1TT?=
+ =?us-ascii?Q?FF6HuhcYmGTBJnPzzLAk2WhW6OFUy2iosdOgssk3lKzvJR4/58nGIlWP9474?=
+ =?us-ascii?Q?rOrTamEAszkIWq3Z9oKOPJ01ESzOf2eZOiujlXsg3dRu4J5GUKwouLNB+a8M?=
+ =?us-ascii?Q?JTtv7HF2VFHwupmTG5V2AGimEdlcWDCEJgtHzCjgeo5MyQptfST0Yu2D0X/H?=
+ =?us-ascii?Q?7g6zL35JkfkuzpyjkQvQj6LWbk5WnTEoSJs/Spp9Or1u6qFEWgjejz+PCvip?=
+ =?us-ascii?Q?1s+HPfYg8R6YJE5fcKWTNRMtC1g7LSJeeh/trignG/iNdqwEoqxu6BdRFJKa?=
+ =?us-ascii?Q?IS+uXpOgOojDAf/IJwbLj81ZIp4umbuGaz9N15dJPwhCKzMmficRNJqSs3n8?=
+ =?us-ascii?Q?pD28cyd8Stoq7jZzuj6/lQU5okL97M/rmSS9wlFgqWR6lQsXUku4AvXD0g2a?=
+ =?us-ascii?Q?PTUrfEzTRlHkVYtBaSrFSCyepw9r6lAHEo6tb9zrZE7j9EAwJiyej65AHbtz?=
+ =?us-ascii?Q?MZdgoJqxWhop8znWvstGmZM+h+dwviY50MioRQuH6bTyC+ToEN2T0x1kvDUy?=
+ =?us-ascii?Q?mKvcawqxlmwEh26Pzy00BnnxPAZIyl9S/I8fsSilrM7zhvEcuFaKwSblJctH?=
+ =?us-ascii?Q?AIqPg6dIj93el0TedSHMMz3AXPtNs8KcN+cTp22tDoOKqno0K1Iuqx3tXRUT?=
+ =?us-ascii?Q?VF56eLt3qoppAO4hi2KLPEScl8LPsm/3XpsjdxXp7T1pikTNg2jjUidqY4zf?=
+ =?us-ascii?Q?Z2SL0sePwsK6WOb0mnw36cwbfV4B5a8TC6gaBvpUWripEWJW5NY9vVUj99K3?=
+ =?us-ascii?Q?cUixIjVz2jJYi2+yW7MAdcQEhiZTl0VjUTGIz4kEPZdW6554XMU6FBsX2LEN?=
+ =?us-ascii?Q?SwC4P0+oDv4Up/kloKzieDIAPmc2QdV9pG4MUrZdEP2sCfw1cEeoNbeVRtjd?=
+ =?us-ascii?Q?BqO5xSzQSEIWfq/ExkgcdhZ0goY/gm8hnMh3KaC6?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3c7f0f4-bd2c-4630-b651-08ddb307589f
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2025 10:10:29.5919 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W682l5sqOaeeJAQjbX69hUZyxqKrCNEfbZFap3cjs42TImUu+7963iAskcI02KwXrCQ5zgsHugW+iezYgbprng==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR04MB11250
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,232 +156,41 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24/06/2025 10:45, Stephan Gerhold wrote:
-> The UART DM controller supports different channel data packing modes,
-> either the 4-character packing mode (where 32-bit are read/written at once)
-> or the single-character mode (where only a single character is read/written
-> at a time). The 4-character mode can be more efficient, but the
-> single-character mode is much easier to implement.
-> 
-> At the moment, serial_msm uses the 4-character mode. Since the
-> dm_serial_ops operate on one character at the time, the code goes through
-> quite some hoops in order to break this down to single characters. This
-> code is prone to race conditions (e.g. priv->chars_cnt is read from the
-> registers, then a command is issued, what if another char came in
-> inbetween?). It also seems to cause another subtle issue with autoboot:
-> 
-> Unlike the previous autoboot failures that happened when UART was
-> disconnected, this problem occurs when UART is connected and open in a
-> terminal: For EFI boot, the console size is queried in efi_console.c
-> query_console_serial() by sending an ANSI escape code via UART. For some
-> reason, with the current driver we get yet another 0x00 byte (UART break
-> event?) when reading the reply from serial input. Because of that, reading
-> the console size fails in efi_console.c, the actual reply remains in the
-> UART buffer, and later the boot flow aborts because it detects input after
-> printing a prompt.
-> 
-> Rather than trying to fix the issue in the current complicated approach,
-> switch the driver to use the single-character mode. This is simple and
-> straightforward to implement without race conditions:
-> 
->   - We write one character at a time to UARTDM_TF, as long as the TX FIFO
->     has space available (TX_READY). To flush the console before starting
->     Linux, we wait for TX_EMPTY.
-> 
->   - We read one character at a time from UARTDM_RF and strip off the
->     additional error information (assuming there is something in the
->     RX FIFO, as indicated by RX_READY).
-> 
-> In this mode, querying the serial console size works and autoboot is no
-> longer interrupted. The overall code is also much shorter.
-> 
-> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-> ---
->   drivers/serial/serial_msm.c | 102 +++++++-------------------------------------
->   1 file changed, 16 insertions(+), 86 deletions(-)
-> 
-> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-> index 2c08a84b02773663f3c3a11eddaaa7a8bab2b4a1..18d15b7b15b3aeb2e8fd1da1aa49967d55c943ab 100644
-> --- a/drivers/serial/serial_msm.c
-> +++ b/drivers/serial/serial_msm.c
-> @@ -21,13 +21,9 @@
->   
->   /* Serial registers - this driver works in uartdm mode*/
->   
-> -#define UARTDM_DMRX             0x34 /* Max RX transfer length */
-> -#define UARTDM_DMEN             0x3C /* DMA/data-packing mode */
-> -#define UARTDM_NCF_TX           0x40 /* Number of chars to TX */
-> +#define UARTDM_DMEN			0x3C /* DMA/data-packing mode */
-> +#define UARTDM_DMEN_TXRX_SC_ENABLE	(BIT(4) | BIT(5))
->   
-> -#define UARTDM_RXFS             0x50 /* RX channel status register */
-> -#define UARTDM_RXFS_BUF_SHIFT   0x7  /* Number of bytes in the packing buffer */
-> -#define UARTDM_RXFS_BUF_MASK    0x7
->   #define UARTDM_MR1				 0x00
->   #define UARTDM_MR1_RX_RDY_CTL			 BIT(7)
->   #define UARTDM_MR2				 0x04
-> @@ -45,118 +41,56 @@
->   #define UARTDM_CSR				 0xA0
->   
->   #define UARTDM_SR                0xA4 /* Status register */
-> -#define UARTDM_SR_RX_READY       (1 << 0) /* Word is the receiver FIFO */
-> +#define UARTDM_SR_RX_READY       (1 << 0) /* Receiver FIFO has data */
-> +#define UARTDM_SR_TX_READY       (1 << 2) /* Transmitter FIFO has space */
->   #define UARTDM_SR_TX_EMPTY       (1 << 3) /* Transmitter underrun */
-> -#define UARTDM_SR_UART_OVERRUN   (1 << 4) /* Receive overrun */
->   
->   #define UARTDM_CR                         0xA8 /* Command register */
->   #define UARTDM_CR_RX_ENABLE               (1 << 0) /* Enable receiver */
->   #define UARTDM_CR_TX_ENABLE               (1 << 2) /* Enable transmitter */
->   #define UARTDM_CR_CMD_RESET_RX            (1 << 4) /* Reset receiver */
->   #define UARTDM_CR_CMD_RESET_TX            (2 << 4) /* Reset transmitter */
-> -#define UARTDM_CR_CMD_RESET_ERR           (3 << 4) /* Clear overrun error */
-> -#define UARTDM_CR_CMD_RESET_STALE_INT     (8 << 4) /* Clears stale irq */
-> -#define UARTDM_CR_CMD_RESET_TX_READY      (3 << 8) /* Clears TX Ready irq*/
-> -#define UARTDM_CR_CMD_FORCE_STALE         (4 << 8) /* Causes stale event */
-> -#define UARTDM_CR_CMD_STALE_EVENT_DISABLE (6 << 8) /* Disable stale event */
-> -
-> -#define UARTDM_IMR                0xB0 /* Interrupt mask register */
-> -#define UARTDM_ISR                0xB4 /* Interrupt status register */
-> -#define UARTDM_ISR_TX_READY       0x80 /* TX FIFO empty */
->   
->   #define UARTDM_TF               0x100 /* UART Transmit FIFO register */
->   #define UARTDM_RF               0x140 /* UART Receive FIFO register */
-> +#define UARTDM_RF_CHAR          0xff /* higher bits contain error information */
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
->   struct msm_serial_data {
->   	phys_addr_t base;
-> -	unsigned chars_cnt; /* number of buffered chars */
-> -	uint32_t chars_buf; /* buffered chars */
->   	uint32_t clk_rate; /* core clock rate */
->   };
->   
-> -static int msm_serial_fetch(struct udevice *dev)
-> -{
-> -	struct msm_serial_data *priv = dev_get_priv(dev);
-> -	unsigned sr;
-> -
-> -	if (priv->chars_cnt)
-> -		return priv->chars_cnt;
-> -
-> -	/* Clear error in case of buffer overrun */
-> -	if (readl(priv->base + UARTDM_SR) & UARTDM_SR_UART_OVERRUN)
-> -		writel(UARTDM_CR_CMD_RESET_ERR, priv->base + UARTDM_CR);
-> -
-> -	/* We need to fetch new character */
-> -	sr = readl(priv->base + UARTDM_SR);
-> -
-> -	if (sr & UARTDM_SR_RX_READY) {
-> -		/* There are at least 4 bytes in fifo */
-> -		priv->chars_buf = readl(priv->base + UARTDM_RF);
-> -		priv->chars_cnt = 4;
-> -	} else {
-> -		/* Check if there is anything in fifo */
-> -		priv->chars_cnt = readl(priv->base + UARTDM_RXFS);
-> -		/* Extract number of characters in UART packing buffer*/
-> -		priv->chars_cnt = (priv->chars_cnt >>
-> -				   UARTDM_RXFS_BUF_SHIFT) &
-> -				  UARTDM_RXFS_BUF_MASK;
-> -		if (!priv->chars_cnt)
-> -			return 0;
-> -
-> -		/* There is at least one charcter, move it to fifo */
-> -		writel(UARTDM_CR_CMD_FORCE_STALE,
-> -		       priv->base + UARTDM_CR);
-> -
-> -		priv->chars_buf = readl(priv->base + UARTDM_RF);
-> -		writel(UARTDM_CR_CMD_RESET_STALE_INT,
-> -		       priv->base + UARTDM_CR);
-> -		writel(0x7, priv->base + UARTDM_DMRX);
-> -	}
-> -
-> -	return priv->chars_cnt;
-> -}
-> -
->   static int msm_serial_getc(struct udevice *dev)
->   {
->   	struct msm_serial_data *priv = dev_get_priv(dev);
-> -	char c;
->   
-> -	if (!msm_serial_fetch(dev))
-> +	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_RX_READY))
->   		return -EAGAIN;
->   
-> -	c = priv->chars_buf & 0xFF;
-> -	priv->chars_buf >>= 8;
-> -	priv->chars_cnt--;
-> -
-> -	return c;
-> +	return readl(priv->base + UARTDM_RF) & UARTDM_RF_CHAR;
->   }
->   
->   static int msm_serial_putc(struct udevice *dev, const char ch)
->   {
->   	struct msm_serial_data *priv = dev_get_priv(dev);
->   
-> -	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
-> -	    !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-> +	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_READY))
->   		return -EAGAIN;
->   
-> -	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
-> -
-> -	writel(1, priv->base + UARTDM_NCF_TX);
->   	writel(ch, priv->base + UARTDM_TF);
-> -
->   	return 0;
->   }
->   
->   static int msm_serial_pending(struct udevice *dev, bool input)
->   {
-> -	if (input) {
-> -		if (msm_serial_fetch(dev))
-> -			return 1;
-> -	}
-> +	struct msm_serial_data *priv = dev_get_priv(dev);
->   
-> -	return 0;
-> +	if (input)
-> +		return !!(readl(priv->base + UARTDM_SR) & UARTDM_SR_RX_READY);
-> +	else
-> +		return !(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY);
->   }
->   
->   static const struct dm_serial_ops msm_serial_ops = {
-> @@ -222,8 +156,8 @@ static void uart_dm_init(struct msm_serial_data *priv)
->   	writel(UARTDM_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
->   	writel(UARTDM_MR2_8_N_1_MODE, priv->base + UARTDM_MR2);
->   
-> -	/* Make sure BAM/single character mode is disabled */
-> -	writel(0x0, priv->base + UARTDM_DMEN);
-> +	/* Enable single character mode */
-> +	writel(UARTDM_DMEN_TXRX_SC_ENABLE, priv->base + UARTDM_DMEN);
->   
->   	writel(UARTDM_CR_CMD_RESET_RX, priv->base + UARTDM_CR);
->   	writel(UARTDM_CR_CMD_RESET_TX, priv->base + UARTDM_CR);
-> @@ -320,13 +254,9 @@ static inline void _debug_uart_putc(int ch)
->   {
->   	struct msm_serial_data *priv = &init_serial_data;
->   
-> -	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
-> -	       !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-> +	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_READY))
->   		;
->   
-> -	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
-> -
-> -	writel(1, priv->base + UARTDM_NCF_TX);
->   	writel(ch, priv->base + UARTDM_TF);
->   }
->   
-> 
+From: Alice Guo <alice.guo@nxp.com>
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+The value passed to dcd_skip of build_container() should be obtained by
+parsing .cfg file, and should not be fixed to false. For i.MX8QXP, dcd
+data needs to be skipped, in which case dcd_skip should be true.
+
+Fixes: 5f28a6599f01("tools: imx8image: add i.MX95 support")
+
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+---
+
+Changes for v2:
+ - send this patch separately
+
+ tools/imx8image.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index a333ded46e2..cad55fd3cf2 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -1146,7 +1146,7 @@ int imx8image_copy_image(int outfd, struct image_tool_params *mparams)
+ 	fprintf(stdout, "CONTAINER SW VERSION:\t0x%04x\n", sw_version);
+ 
+ 	build_container(soc, sector_size, emmc_fastboot,
+-			img_sp, false, fuse_version, sw_version, outfd);
++			img_sp, dcd_skip, fuse_version, sw_version, outfd);
+ 
+ 	return 0;
+ }
+-- 
+2.43.0
+
