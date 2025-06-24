@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C71AC77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 11:04:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F74C77B7F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 11:13:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A2C82C4C;
-	Tue, 24 Jun 2025 13:04:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6519482C4C;
+	Tue, 24 Jun 2025 13:13:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1750763095;
-	bh=Qi7QmJxkb7chM+fNZbfdBuvVIzG6kAjn7NVV6yirvfA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=n8CVR69M2AhnhRau9Cf0/RItcJ6KkLaqBb2yoN0KDoiHS7O9zFAyCdFAIM0JS/W0j
-	 2BT6JW2cRR8zdVvsdgyW8DZ1cAU17GCNsJgX3ydH0Q+u5THCD3Mx3x/14m6yWOybfR
-	 m6UGH1HDZYDgbvsaBB7MPGGCLHbPVI4eHJyQcY7gxJJayI2qsoSR3NV0ETjJ0HiFbP
-	 mvJ4zSo+x8e9zNMn1WUnPzyxmv7SpfQqBupJ8flKtrrAv2nwjuHy4IdarGbGHcdiz3
-	 9l00qR2KsHNITifho/vXz/FAmOy1VcXkdRpu+l9TSAaTRAhj7R5aq0T63wFHXvhlRm
-	 Vz4i4WAD7rNQQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5719182C84; Tue, 24 Jun 2025 13:04:55 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A7D282C2F
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 13:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="gUPv4PFs"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8D358101E9287; 
- Tue, 24 Jun 2025 13:04:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1750763092;
- h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=Qi7QmJxkb7chM+fNZbfdBuvVIzG6kAjn7NVV6yirvfA=;
- b=gUPv4PFsCyHQIt7ocJkipHkb4NzaN4idNyBxLh9XBExSTxjueQZPbFZGfqyMYTlYmyLn3F
- lrOPWEQd5fDFZjOJiICKQQg7IocidFCN1UrSBZId/QrjwCSXhmw01y8QoS24kuootbCKSj
- jTdMg6BQmH/A8OzxumRZoz4JThPS5c/k8IQbe/hbfXEmwDbRFC4EGw4tZl3Vis94SrHjJA
- QfPySZR8SoxuUmak/OPtXeL/9nGgbH3DoXOj+HminebxyLlkm0kz3uiEvUj2sTvaIpCM+/
- iOrRpk+b68Bvh7Sme6o88cgA+9p0pG5c4oKru/zRT8QJUMryR5U1W4DNwg/35g==
-Message-ID: <12ad2c11-1eab-8142-c740-21f3a6af60aa@denx.de>
-Date: Tue, 24 Jun 2025 13:05:13 +0200
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YLE6APTs";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BBBE682C84; Tue, 24 Jun 2025 13:13:10 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C8B8782C2F
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 13:13:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-553cf020383so287275e87.2
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 04:13:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750763588; x=1751368388; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UTC52La7qXCmWd+edluVLgKgspf4y2bASmuZD1WJgDg=;
+ b=YLE6APTsg49w4MrLTLWRQpC+MNweZZ466kZVOpC0hpwxAmeUDoOObGXDQMJT0m9u29
+ GrDBsR/2vNYa1C0nJwbhK3ERIu7opJIZv+DIU763tH+TEqSvf498fxz5r+uN72bwiB+6
+ nWKdqRgFoVlTFtOHZZcmJ3a2N2AX/cNsyqNQv5vnLadlDt26K+6jlSKfB9Y+Bs0r3GRT
+ 3thFhAio8tcI3VFQW+0iZhGN5FMcwQ/cG3oVemlswltWgJfo2eECOWhJP2iBPPxfa4tz
+ hJaAuah4c5RkijLrHGLfUS+7UrTnVPkxG75iDV497KXhkBBhGBoveCjvH6OH4gvzm3sz
+ TlHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750763588; x=1751368388;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UTC52La7qXCmWd+edluVLgKgspf4y2bASmuZD1WJgDg=;
+ b=TSKVxKYAEEFdZHJ6cXyjXFsO8IA6K3Flt/FYGPNh+zT+yDL1P0dGVhnnmN9hwrggBN
+ W4+DZYeN00n9vcXomU6s5Htd7oLx+7SUUhzs64zLbSlhv7g9uiUlMUwsBI/JCpvB9pXj
+ 0z9aUv1REAGSiyhvGKLsnZgcwmw2aXbvwsRekMNPuOXQC74nAosnStlfwj7nfXCJnel9
+ Q8SlAJTCHMm0bs3nSOA605sXIIG8V388wFaKOrA5Fi9t0xEK1kGSecKRH/2E4QzG27lV
+ +CV0vPqeweasC/cq20GCKYuHu5sRJSjyUiFk+ZGDRUE6+9VsDRkVua5Edk8ak2wqmTBe
+ MpLA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWWbNwD7vXGUBXgvjRvEGqej/RGi5R5O12fCO9iLTKxXjTkTgBCgEzCDuJmImBZVeHPRrTw9Ds=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXxoCJHTQuGbIZdDNvyRRyhxfwyD7elxZCO4aBsQS9reU4gCZx
+ yocNyOjFXmw0fTAQDSw3jLuQAKU2E6lf1se4vkPOJV5d4qr7zVlZABtLaQihGZ+eLX5rVfxbpW9
+ XpVz34gaq9Nd/dZltfadg86m+Eqh/1sg=
+X-Gm-Gg: ASbGncuhSVJrc/1SXPs7nllRwdZoHd3n8YyOoGjEtaDKXU72duTHqEAtSufOhm+xDof
+ w+V0gdUrS6wZcVRxNxrTs8uTJysRo/2fXGFrTGmZA0+dLAy79PLUvo0v3co7A/O2iWD0qbC7UDU
+ 4oaxGqEa88Jxxs5JkfoRHiWqb2iCSn4bcA8T0i4CEGUEfRjg8BjyE0ZYuRUbUELCvFIbOpXHMr2
+ 6E=
+X-Google-Smtp-Source: AGHT+IEwpxdZbLuJyUEnbBFzaHBz+oQrwNx3cKCk6PsRROifU+TkItErCA7fEVt5cSd31Tfu/E+GLkGDsKsw8nr6PyA=
+X-Received: by 2002:a05:6512:6ca:b0:553:a77f:9c45 with SMTP id
+ 2adb3069b0e04-553e3bfba42mr4200800e87.39.1750763587717; Tue, 24 Jun 2025
+ 04:13:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
+References: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
+In-Reply-To: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 24 Jun 2025 08:12:55 -0300
+X-Gm-Features: AX0GCFvqc61ncjOD8Ar7pNVVY7kkfNRA9SBvm9S8nWT-J-XIlvRGOQTUihR-UHw
+Message-ID: <CAOMZO5AwyMEPE++63O2FncxFVhg7qfmHG7VjDHHfx-pMx8gLFw@mail.gmail.com>
 Subject: Re: [PATCH v2] tools: imx8image: Fix the value passed to dcd_skip of
  build_container()
-Content-Language: en-US
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, trini@konsulko.com,
- festevam@denx.de, peng.fan@nxp.com, alice.guo@nxp.com, sbabic@nabladev.com,
- uboot-imx@nxp.com, eballetb@redhat.com
-Cc: u-boot@lists.denx.de
-References: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: festevam@denx.de, peng.fan@nxp.com, hs@denx.de, alice.guo@nxp.com, 
+ sbabic@nabladev.com, uboot-imx@nxp.com, eballetb@redhat.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,37 +92,29 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alice,
+Hi Alice,
 
-On 24.06.25 12:09, Alice Guo (OSS) wrote:
+On Tue, Jun 24, 2025 at 7:30=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
+>
 > From: Alice Guo <alice.guo@nxp.com>
-> 
+>
 > The value passed to dcd_skip of build_container() should be obtained by
 > parsing .cfg file, and should not be fixed to false. For i.MX8QXP, dcd
 > data needs to be skipped, in which case dcd_skip should be true.
-> 
+>
 > Fixes: 5f28a6599f01("tools: imx8image: add i.MX95 support")
-> 
+>
 > Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
-> 
-> Changes for v2:
->   - send this patch separately
-> 
->   tools/imx8image.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+Thanks for the fix.
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Reported-by: Enric Balletbo i Serra <eballetb@redhat.com>
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
+
+Tom, feel free to apply this one directly to u-boot/master.
