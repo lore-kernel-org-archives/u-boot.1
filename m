@@ -4,40 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7242C77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 19:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FDAC77B7C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 20:47:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 823AE82C2F;
-	Tue, 24 Jun 2025 21:29:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1854C803CC;
+	Tue, 24 Jun 2025 22:47:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1750798046;
+	bh=f1EiU5cJcageFDzPDkXwDBKhctQF8z+/ZgXEldXfPC0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=t61+0Qs2/qTorCnY8eSWFBoZQ2MmCJZspvqf5A+IC9GYYBkDK3ZtIbBnb1S+aaOFy
+	 SgV+g1iAQAnMd+DHAT7HQBt5JfPxITxfzKam57qUqP/jdwxj6mdozMjYiGiUNrQOHi
+	 VNDSiVeytsfIftF+X5QS57a22CZuDaBGZt4h7RPX2Okf5mWQZHiuoE7L/mGWs3VWDc
+	 18YL6UMLuJjIAIUkJVTpszGAfwksdqXSEgQDoJ+jxwt+TyAFPwHydjLhGE58+PHVS+
+	 CSaYwTYalntO3HZxA73RsilQrWiAWw1364gcwANW6nEHmWcALzEDSPT8UkcqWxLYrm
+	 VOPX5Xkl7/Z5w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCDF482C4C; Tue, 24 Jun 2025 21:29:06 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 002E782BCD
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 21:29:03 +0200 (CEST)
+ id 9036582D5E; Tue, 24 Jun 2025 22:47:24 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A8B638006D
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 22:47:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C697B1AC1;
- Tue, 24 Jun 2025 12:28:44 -0700 (PDT)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EA4F63F66E;
- Tue, 24 Jun 2025 12:29:01 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Cody Eksal <masterr3c0rd@epochal.quest>,
- Paul Kocialkowski <contact@paulk.fr>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: [GIT PULL] u-boot-sunxi/next
-Date: Tue, 24 Jun 2025 20:27:38 +0100
-Message-ID: <20250624192738.13062-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.46.3
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="MQIHO/ai"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 679D8102779C2; 
+ Tue, 24 Jun 2025 22:47:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1750798041; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=f1EiU5cJcageFDzPDkXwDBKhctQF8z+/ZgXEldXfPC0=;
+ b=MQIHO/aium4ic89MMounZCoewpgIzEKEXZ4QurnmZ+dpAO0iLSKgsFvxz0J9W2aNLQNTiN
+ djFcIhNDDoIxQoaLOXPsoAt5WnHayAbrvqkTh/ijvAliVMvIsxsT3k1SEIK8ghliyu3anY
+ wU/ZLTAO3YfJfzh0oLKaIVtd1DDnKSGvvmYxIjmd6FqQ6qplu+xMy/UeS/WW4evk+jskVj
+ edlVsq9BPXFGxqnTE6V1zjbgEwWPNQQD3VK7nsAO6gWaxGCqoJPXB1mG3uMZiztcyP82XC
+ JXcbYGw+grkKMdGOzmW0GDPlTheCR9XYz5Bkos0ot1dUPCCfi9rmpLHV+o5F+A==
+From: Lukasz Majewski <lukma@denx.de>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, albert.aribaud@3adev.fr,
+ u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH 1/2] config: nxp: bk4: Increase size of
+ CONFIG_SYS_MALLOC_F_LEN (to 0x1000)
+Date: Tue, 24 Jun 2025 22:46:59 +0200
+Message-Id: <20250624204700.972663-1-lukma@denx.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,72 +75,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The commit c69103218ee4 ("i2c: mxc_i2c: add DM_FLAG_PRE_RELOC flag")
+has enabled by default the i2c initialization in the pre-relocation
+phase.
+It turned out that vf610 based BK4 board had too small SYS_MALLOC_F_LEN
+pool size.
 
-please pull these sunxi changes into next:
-This concludes support for the Allwinner A133 SoC, the biggest chunk of
-which is the DRAM init code. Also includes support for a devboard using
-this SoC, the DT of which  got added to the kernel only recently. The same
-is true for another H618 devboard, so add the respective devconfig as well.
+After increasing it to 0x1000 the board boots again.
 
-Gitlab CI passed, and I booted that briefly on those two boards.
+Signed-off-by: Lukasz Majewski <lukma@denx.de>
+---
+ configs/bk4r1_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks,
-Andre
+diff --git a/configs/bk4r1_defconfig b/configs/bk4r1_defconfig
+index 3ed587a1060..8bff1653859 100644
+--- a/configs/bk4r1_defconfig
++++ b/configs/bk4r1_defconfig
+@@ -4,7 +4,7 @@ CONFIG_SYS_THUMB_BUILD=y
+ CONFIG_ARCH_VF610=y
+ CONFIG_TEXT_BASE=0x3f401000
+ CONFIG_SYS_MALLOC_LEN=0x402000
+-CONFIG_SYS_MALLOC_F_LEN=0x800
++CONFIG_SYS_MALLOC_F_LEN=0x1000
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0x200000
+-- 
+2.39.5
 
-===========================================================
-The following changes since commit 184e7d0bb211b8885f6715fdd6149ce96a4d1037:
-
-  Merge tag 'v2025.07-rc5' into next (2025-06-23 16:15:23 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git next
-
-for you to fetch changes up to babf74be60e7a257ac7539f719017daf7b2129e7:
-
-  sunxi: H616: add support for YuzukiHD Chameleon board (2025-06-24 13:44:52 +0100)
-
-----------------------------------------------------------------
-Andre Przywara (6):
-      sunxi: add support for the Allwinner A100/A133 SoC
-      arm64: dts: allwinner: a100: set maximum MMC frequency
-      arm64: dts: allwinner: a100: add Liontron H-A133L board support
-      sunxi: add support for Liontron H-A133L board
-      arm64: dts: allwinner: h616: add YuzukiHD Chameleon support
-      sunxi: H616: add support for YuzukiHD Chameleon board
-
-Cody Eksal (1):
-      sunxi: A133: add DRAM init code
-
- arch/arm/cpu/armv8/fel_utils.S                     |    2 +-
- arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h  |    7 +
- arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h    |    4 +
- arch/arm/include/asm/arch-sunxi/dram.h             |    2 +
- arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h |  230 ++++
- arch/arm/mach-sunxi/Kconfig                        |  114 +-
- arch/arm/mach-sunxi/Makefile                       |    2 +
- arch/arm/mach-sunxi/board.c                        |    4 +
- arch/arm/mach-sunxi/clock_sun50i_h6.c              |    3 +-
- arch/arm/mach-sunxi/cpu_info.c                     |    2 +
- arch/arm/mach-sunxi/dram_sun50i_a133.c             | 1204 ++++++++++++++++++++
- arch/arm/mach-sunxi/dram_timings/Makefile          |    2 +
- arch/arm/mach-sunxi/dram_timings/a133_ddr4.c       |   80 ++
- arch/arm/mach-sunxi/dram_timings/a133_lpddr4.c     |  102 ++
- board/sunxi/MAINTAINERS                            |   10 +
- board/sunxi/board.c                                |    4 +-
- common/spl/Kconfig                                 |    4 +-
- configs/liontron-h-a133l_defconfig                 |   37 +
- configs/yuzukihd-chameleon_defconfig               |   30 +
- dts/upstream/src/arm64/allwinner/sun50i-a100.dtsi  |    3 +
- .../allwinner/sun50i-a133-liontron-h-a133l.dts     |  211 ++++
- .../allwinner/sun50i-h618-yuzukihd-chameleon.dts   |  222 ++++
- 22 files changed, 2263 insertions(+), 16 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
- create mode 100644 arch/arm/mach-sunxi/dram_sun50i_a133.c
- create mode 100644 arch/arm/mach-sunxi/dram_timings/a133_ddr4.c
- create mode 100644 arch/arm/mach-sunxi/dram_timings/a133_lpddr4.c
- create mode 100644 configs/liontron-h-a133l_defconfig
- create mode 100644 configs/yuzukihd-chameleon_defconfig
- create mode 100644 dts/upstream/src/arm64/allwinner/sun50i-a133-liontron-h-a133l.dts
- create mode 100644 dts/upstream/src/arm64/allwinner/sun50i-h618-yuzukihd-chameleon.dts
