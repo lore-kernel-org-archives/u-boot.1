@@ -4,87 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98036C77B7C
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 08:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07689C7EE2A
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 08:47:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59CDA82F28;
-	Tue, 24 Jun 2025 10:45:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D5A0582D88;
+	Tue, 24 Jun 2025 10:47:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mnTgy9iw";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eQqtOtQX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84F9E82C2F; Tue, 24 Jun 2025 10:45:42 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F2AA82E26; Tue, 24 Jun 2025 10:47:07 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::62e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 502C682E20
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 10:45:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BACCB82D88
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 10:47:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4535fbe0299so27012705e9.3
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 01:45:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750754740; x=1751359540; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xopmBEDY1CEYS6c45FXr72QHWJs6lsZNkN1px9QWbgc=;
- b=mnTgy9iwn0JDdTsGssBY8Avil1Tk2RAmLAdEAijjvd5b1ZXCoafKGc8m5lm57+wriB
- 16LDx7XHXP5TJuUMd5ZXdx0A03DrDsx3fP7TBlOCuT9e7pnjU1zhW1nzVhZL0lxs5JLp
- P7vFNaATOsitUUeaV+zOn8L/me6i3WisxLRDaGSi7d8inAnhAJkezBrODzV17Y2It/lZ
- xJ+ryqh9yNnZYTYwqPpulqK9ewln2vKVhofnrTm5Fl8ca2qLzR/EvmPCXuUepnJfX5Xn
- km70I04NU+jQ3e1QkfNdGogSNsqQDS9YOnil+OMPYt5ibveyUDS/9KtneAS3/JRBEX0R
- jMsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750754740; x=1751359540;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xopmBEDY1CEYS6c45FXr72QHWJs6lsZNkN1px9QWbgc=;
- b=a8VFP4ENH/0yx+SoAmDNg0bMEeexZPYFWQT6XD9I0GYN94a0EtQvHR2D4nOe/U8KI1
- qOBLJ2FiIXCuGQvqoVi+a4XMZxdo/Ninwf0w691uoJrNX8JwXbvrSXY5wG9siXCdfhpk
- wOdUAXMajWTUmBu8OvHXrcrcHVlGt0bT+8xrlkwWgPAvFghKqxBaHfl55gWagwEbzwnJ
- qvGvZ1CizsG+MwEfRgaCEeKmFG9gMIe6rbsLaXJRlYCnvmYVRdfipt0m+129qmw261+q
- Y51hWZr8jhdx2OOCpk/KYW21t7ri9Aftx4nl3Bily4iXQ/21RZzYsOHZnUrIbggNsbRP
- MViA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVgdASy84/9d62qkOiYLIIdDBOwtA8aE7TaLHSPXKqst2xp+pgTjutDUBlBBcq3IMlXGOrHuxs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyaAxj2XRXSqQsPmncHReRaKCh4UKzGZtnw+JfOOC0RtjkVwxv7
- l90WFiBgtPbcGwZHn0tsgu/qIk0fLiktJCSO/Snv2tr7pQRRIrovBsv7anTHP12BH80=
-X-Gm-Gg: ASbGnct3rU7SxSq8o1aIilMSbNSr0qxGzr/S9QLa5iG7wOjg3t07NMZJcbKY2fZZu2D
- 8PD1WfUsPt4M0JiSHjIe4qc1yG7GnF3QLWEf35OCNVWPXLRubNUXkAeW4SIxp9VdBbWSZZorx+0
- SDHcEDVKNOhSj89xYT3GW8djnmcam2XBrf+/tckKnN/SDAJ+FjNNJM50TDh9Igyklqp6yPRsLLp
- y6dUAshri92JUNgswDuvKvopW3yUNAIX5OugVqvWHU+w5KdpqPYoFAKLck3i12AfJRXyP4WswJC
- kORJxIs61tCo+prgo4Hs16eHUl6mtWMJ8UKzka8qBD9H5hKnRqUi7S3Z9b8QkPJChEFgpxbEVHQ
- =
-X-Google-Smtp-Source: AGHT+IFU2It5IUE81knpgbbSYgegvmouELy3HhmlbOI0W1rRIuMAzSlW0FPsv7YYksx+xUY5YgM4iw==
-X-Received: by 2002:a05:600c:3b1e:b0:453:78f:faa8 with SMTP id
- 5b1f17b1804b1-453659c0dbamr131857495e9.6.1750754739574; 
- Tue, 24 Jun 2025 01:45:39 -0700 (PDT)
-Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:8d0b:e160:4436:f56b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e811049bsm1342888f8f.88.2025.06.24.01.45.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Jun 2025 01:45:39 -0700 (PDT)
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Tue, 24 Jun 2025 10:45:23 +0200
-Subject: [PATCH 10/10] serial: msm: Use single character mode
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z7aTqUmS9hR2YzGye0h+dDFkQMUaUxozIRGwp+O3u1zri/F6J0EsjwBhYF8ki9DnOgHL1b4C4pYw1/A1NHkxrljzxLLLILLVd9s7iH6toaKM8ioo/8bz57LBuKEWPLzxaIeyk3qunDhcchYOoKII3RynQ8Eow+TGOulOQR0qoGcwPiKWcQREx4/U9YZWJ5gdEYoCy5kyTXf6c77nf3ax+osDVdIzgFNjQlnq+UI1i78IISwL80+/RBAkwtDOwP2a7JDSK7lxWAuLFhBmboeOwBeD+HXrpOJ4dUrgBDW3X6BQfByAYVRdraATABGymN5jouqiRPOeJWAinVHvzUaxsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tVlhOPq8dv7vKr25+6S7EmGMX7K3njzs6Jlv9JdfCwY=;
+ b=Zrjh3wLFc/N6NxOrFNMxZ0Hi2maW8hOsqXC4D+752TfB7E1aNJOLMWz5rgpNXSickjvn2g+zX/OK6bef57w4fU28AoxIvF3PTVW7VTJFqRJ5rJc6CcmdsRURLgDryj/5MLgxZ9GbfwxnrIC1l9Jcsoevs1MtUPQQwhB7asWztM0+SPvSwnn+cDdZexp87OSbYaeQqETIS4gOxGLNjhUQeP6eWF9M0+7/kNhuVx2LdYP1QoixzsDBbWRA+66Wfz/6ffSTMbA62mn+loZj4UU978Hc7sQCnqx+k3iNKaYtGuHF1t2x1dAwz4XKBRlkYdTRzWcNgIPe+OyJsRclEjr5fg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tVlhOPq8dv7vKr25+6S7EmGMX7K3njzs6Jlv9JdfCwY=;
+ b=eQqtOtQXLxiLPkcR6BmBE/1AIr5EBMEo0SswhbDA8X7HJYACmOVqz3bnHEv5qdP+Uqf9oxPdHWH9UW8NwLy7ajxmLW3um9SEV0cMLf6V3NRSLeY6Ri0g7VA5O1CsVfFxjyUnagouw0Tvg9AmujxCb0wD7wBg6NOAy1d5usLstgw=
+Received: from BYAPR05CA0103.namprd05.prod.outlook.com (2603:10b6:a03:e0::44)
+ by SA1PR12MB7245.namprd12.prod.outlook.com (2603:10b6:806:2bf::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.28; Tue, 24 Jun
+ 2025 08:47:00 +0000
+Received: from CY4PEPF0000E9D3.namprd03.prod.outlook.com
+ (2603:10b6:a03:e0:cafe::46) by BYAPR05CA0103.outlook.office365.com
+ (2603:10b6:a03:e0::44) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.16 via Frontend Transport; Tue,
+ 24 Jun 2025 08:47:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D3.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8880.14 via Frontend Transport; Tue, 24 Jun 2025 08:47:00 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 24 Jun
+ 2025 03:46:55 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 24 Jun
+ 2025 03:46:54 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Tue, 24 Jun 2025 03:46:52 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] xilinx: zynqmp: Enable xilinx ethernet phy
+Date: Tue, 24 Jun 2025 14:16:45 +0530
+Message-ID: <20250624084645.1185428-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250624-db410c-autoboot-fixes-v1-10-d96c97ae41d1@linaro.org>
-References: <20250624-db410c-autoboot-fixes-v1-0-d96c97ae41d1@linaro.org>
-In-Reply-To: <20250624-db410c-autoboot-fixes-v1-0-d96c97ae41d1@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Sam Day <me@samcday.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D3:EE_|SA1PR12MB7245:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5566de38-18a5-469b-974e-08ddb2fbaf30
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?gsGH5lec1GA0q+UszcxV0GJbyZjrFlKuAhZ6/81p6s7eO29TqM+xIlZtZg6d?=
+ =?us-ascii?Q?2tSN7p1AFRPWmO/ZcBZz1wycm/IwaL2LeG3mZgbC1cM7vYKgEBpFWtYN4PdF?=
+ =?us-ascii?Q?gOzTDJQGj48VUOPnZR6Q7K/Ma1VHjnkASDUEwtGdU+K8VZOVqgULynKTJbCL?=
+ =?us-ascii?Q?EHCI2XAzZXCl+1IPkDxb7milMUGB4c9Ub8D7QDyCLA2HEDyi7EZxakka/WRr?=
+ =?us-ascii?Q?9YOroMJjzYCsPMqOJ3Kbu+6hZKZ9K3Aq7PhDR1l1jnza729pIwEuC8f/4PM1?=
+ =?us-ascii?Q?jvWdrN4L6EL3icY6q9XmXii7fhfW9ecZCFworRrg3SRZ3VQbEIYj1hNp9c03?=
+ =?us-ascii?Q?uXVko7hVA/8nkd56gZGEiHsYGcJ1eB3HbNSb2DsFLgjFJ1QMhSbCI5zDPmjQ?=
+ =?us-ascii?Q?CXb0aB0E1s+g+BLNhQ5X7z1B6Z7GAA3qQXVnVw5E4gQp45KoV2n8JvavmMJX?=
+ =?us-ascii?Q?zcEMMGovQpU80f8SDnaPA27vPnQPfK3+gm2kC3D34wKGPMl4RT/AJa3zbsqq?=
+ =?us-ascii?Q?wzOxZ7vjN7+4DTL+uYCUjlbgAicPuoS1xwybPGsvE+X3qJFwtoYRZdVhuCoZ?=
+ =?us-ascii?Q?oIBy5hWM6Tu+Fiu36ECqBAbbN4w5kA+uOFiaINNugibh0wJsBNJ8lvFM6tI3?=
+ =?us-ascii?Q?1TnuUNsx3fXPz8tBsq9c1sbYesUDca3A/8EKUXpjv6iLO5cGyI04gw3gNeAZ?=
+ =?us-ascii?Q?xyunqjsN/QkJfYXX+oT0cqvb4Udpb3RgEFkMiDPqWcam2Hnbqhes8hvpY6Q2?=
+ =?us-ascii?Q?wU7u46NavMPFdmTQncyC6SKvrwh0NxYToW4bfQLTcal5c9nQZgxEWxoX+qoJ?=
+ =?us-ascii?Q?8soQNCmMiVDrbtGbGjsh21aJv0slY47UShY9eKd9jnywxAs48lHab8pIKr44?=
+ =?us-ascii?Q?z5y5HvxwVgqzqiWg2cH7DM839911jUVOzNoiG/9/YgNZlyG8F5bMjUSCIuLT?=
+ =?us-ascii?Q?gUwnT8eZN/+thWN2H33vRZgGPm53EXFnVp9ETc3DWiu3rz8CAoUz9ZJE9CSv?=
+ =?us-ascii?Q?qLUjAzJLIfmNYV2FmTJ4P5wajM3mYFyG7IgV8xYCIg2/NfHFTnRJJunBlbn3?=
+ =?us-ascii?Q?V8o5K1EyDYrDOpACtPS7xE1XVddiOc7b/9er5OJPXyZTo2YujV9ri8avmmdB?=
+ =?us-ascii?Q?iHaUFOP+kT7wlHlyyACoB4lUnE/k/UvdMh/AVD9IofHYp2IXwnim/KjibYXj?=
+ =?us-ascii?Q?xN278q/5epF7LAUWTeV/ZGYeAQEJEmbZcI7hjTt7dtT++1OJjX5Aon1gWAQq?=
+ =?us-ascii?Q?7uK42vrmsDDxf0q5CwUtfnrU6tU2jbQlxJvioQj8YfGPflJdm+kzluWMyRl3?=
+ =?us-ascii?Q?9dwNufKf+4qN9Nc267cHwvysyvi4T/G+7JD/sKHT8YCS+WwjU7V6PDAZh/nO?=
+ =?us-ascii?Q?U30D05Xp2/8r8LsIqYOieHMsEQt3ri2gz0xk5eAkuVI/9lVv/R3bbjL5IMrD?=
+ =?us-ascii?Q?Yf89PnydrZ+eOXwK1l6/7J0ZcE3VWVub6/r2ghiF3G4kLFEXgz5iPtJKNEYZ?=
+ =?us-ascii?Q?3QtSUPqnDjfelNs8s966gnu4pPlDNSsxUe+r?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2025 08:47:00.1341 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5566de38-18a5-469b-974e-08ddb2fbaf30
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D3.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7245
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,226 +148,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The UART DM controller supports different channel data packing modes,
-either the 4-character packing mode (where 32-bit are read/written at once)
-or the single-character mode (where only a single character is read/written
-at a time). The 4-character mode can be more efficient, but the
-single-character mode is much easier to implement.
+Enable xilinx ethernet phy on ZynqMP by default.
 
-At the moment, serial_msm uses the 4-character mode. Since the
-dm_serial_ops operate on one character at the time, the code goes through
-quite some hoops in order to break this down to single characters. This
-code is prone to race conditions (e.g. priv->chars_cnt is read from the
-registers, then a command is issued, what if another char came in
-inbetween?). It also seems to cause another subtle issue with autoboot:
-
-Unlike the previous autoboot failures that happened when UART was
-disconnected, this problem occurs when UART is connected and open in a
-terminal: For EFI boot, the console size is queried in efi_console.c
-query_console_serial() by sending an ANSI escape code via UART. For some
-reason, with the current driver we get yet another 0x00 byte (UART break
-event?) when reading the reply from serial input. Because of that, reading
-the console size fails in efi_console.c, the actual reply remains in the
-UART buffer, and later the boot flow aborts because it detects input after
-printing a prompt.
-
-Rather than trying to fix the issue in the current complicated approach,
-switch the driver to use the single-character mode. This is simple and
-straightforward to implement without race conditions:
-
- - We write one character at a time to UARTDM_TF, as long as the TX FIFO
-   has space available (TX_READY). To flush the console before starting
-   Linux, we wait for TX_EMPTY.
-
- - We read one character at a time from UARTDM_RF and strip off the
-   additional error information (assuming there is something in the
-   RX FIFO, as indicated by RX_READY).
-
-In this mode, querying the serial console size works and autoboot is no
-longer interrupted. The overall code is also much shorter.
-
-Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 ---
- drivers/serial/serial_msm.c | 102 +++++++-------------------------------------
- 1 file changed, 16 insertions(+), 86 deletions(-)
+ configs/xilinx_zynqmp_virt_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-index 2c08a84b02773663f3c3a11eddaaa7a8bab2b4a1..18d15b7b15b3aeb2e8fd1da1aa49967d55c943ab 100644
---- a/drivers/serial/serial_msm.c
-+++ b/drivers/serial/serial_msm.c
-@@ -21,13 +21,9 @@
- 
- /* Serial registers - this driver works in uartdm mode*/
- 
--#define UARTDM_DMRX             0x34 /* Max RX transfer length */
--#define UARTDM_DMEN             0x3C /* DMA/data-packing mode */
--#define UARTDM_NCF_TX           0x40 /* Number of chars to TX */
-+#define UARTDM_DMEN			0x3C /* DMA/data-packing mode */
-+#define UARTDM_DMEN_TXRX_SC_ENABLE	(BIT(4) | BIT(5))
- 
--#define UARTDM_RXFS             0x50 /* RX channel status register */
--#define UARTDM_RXFS_BUF_SHIFT   0x7  /* Number of bytes in the packing buffer */
--#define UARTDM_RXFS_BUF_MASK    0x7
- #define UARTDM_MR1				 0x00
- #define UARTDM_MR1_RX_RDY_CTL			 BIT(7)
- #define UARTDM_MR2				 0x04
-@@ -45,118 +41,56 @@
- #define UARTDM_CSR				 0xA0
- 
- #define UARTDM_SR                0xA4 /* Status register */
--#define UARTDM_SR_RX_READY       (1 << 0) /* Word is the receiver FIFO */
-+#define UARTDM_SR_RX_READY       (1 << 0) /* Receiver FIFO has data */
-+#define UARTDM_SR_TX_READY       (1 << 2) /* Transmitter FIFO has space */
- #define UARTDM_SR_TX_EMPTY       (1 << 3) /* Transmitter underrun */
--#define UARTDM_SR_UART_OVERRUN   (1 << 4) /* Receive overrun */
- 
- #define UARTDM_CR                         0xA8 /* Command register */
- #define UARTDM_CR_RX_ENABLE               (1 << 0) /* Enable receiver */
- #define UARTDM_CR_TX_ENABLE               (1 << 2) /* Enable transmitter */
- #define UARTDM_CR_CMD_RESET_RX            (1 << 4) /* Reset receiver */
- #define UARTDM_CR_CMD_RESET_TX            (2 << 4) /* Reset transmitter */
--#define UARTDM_CR_CMD_RESET_ERR           (3 << 4) /* Clear overrun error */
--#define UARTDM_CR_CMD_RESET_STALE_INT     (8 << 4) /* Clears stale irq */
--#define UARTDM_CR_CMD_RESET_TX_READY      (3 << 8) /* Clears TX Ready irq*/
--#define UARTDM_CR_CMD_FORCE_STALE         (4 << 8) /* Causes stale event */
--#define UARTDM_CR_CMD_STALE_EVENT_DISABLE (6 << 8) /* Disable stale event */
--
--#define UARTDM_IMR                0xB0 /* Interrupt mask register */
--#define UARTDM_ISR                0xB4 /* Interrupt status register */
--#define UARTDM_ISR_TX_READY       0x80 /* TX FIFO empty */
- 
- #define UARTDM_TF               0x100 /* UART Transmit FIFO register */
- #define UARTDM_RF               0x140 /* UART Receive FIFO register */
-+#define UARTDM_RF_CHAR          0xff /* higher bits contain error information */
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
- struct msm_serial_data {
- 	phys_addr_t base;
--	unsigned chars_cnt; /* number of buffered chars */
--	uint32_t chars_buf; /* buffered chars */
- 	uint32_t clk_rate; /* core clock rate */
- };
- 
--static int msm_serial_fetch(struct udevice *dev)
--{
--	struct msm_serial_data *priv = dev_get_priv(dev);
--	unsigned sr;
--
--	if (priv->chars_cnt)
--		return priv->chars_cnt;
--
--	/* Clear error in case of buffer overrun */
--	if (readl(priv->base + UARTDM_SR) & UARTDM_SR_UART_OVERRUN)
--		writel(UARTDM_CR_CMD_RESET_ERR, priv->base + UARTDM_CR);
--
--	/* We need to fetch new character */
--	sr = readl(priv->base + UARTDM_SR);
--
--	if (sr & UARTDM_SR_RX_READY) {
--		/* There are at least 4 bytes in fifo */
--		priv->chars_buf = readl(priv->base + UARTDM_RF);
--		priv->chars_cnt = 4;
--	} else {
--		/* Check if there is anything in fifo */
--		priv->chars_cnt = readl(priv->base + UARTDM_RXFS);
--		/* Extract number of characters in UART packing buffer*/
--		priv->chars_cnt = (priv->chars_cnt >>
--				   UARTDM_RXFS_BUF_SHIFT) &
--				  UARTDM_RXFS_BUF_MASK;
--		if (!priv->chars_cnt)
--			return 0;
--
--		/* There is at least one charcter, move it to fifo */
--		writel(UARTDM_CR_CMD_FORCE_STALE,
--		       priv->base + UARTDM_CR);
--
--		priv->chars_buf = readl(priv->base + UARTDM_RF);
--		writel(UARTDM_CR_CMD_RESET_STALE_INT,
--		       priv->base + UARTDM_CR);
--		writel(0x7, priv->base + UARTDM_DMRX);
--	}
--
--	return priv->chars_cnt;
--}
--
- static int msm_serial_getc(struct udevice *dev)
- {
- 	struct msm_serial_data *priv = dev_get_priv(dev);
--	char c;
- 
--	if (!msm_serial_fetch(dev))
-+	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_RX_READY))
- 		return -EAGAIN;
- 
--	c = priv->chars_buf & 0xFF;
--	priv->chars_buf >>= 8;
--	priv->chars_cnt--;
--
--	return c;
-+	return readl(priv->base + UARTDM_RF) & UARTDM_RF_CHAR;
- }
- 
- static int msm_serial_putc(struct udevice *dev, const char ch)
- {
- 	struct msm_serial_data *priv = dev_get_priv(dev);
- 
--	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
--	    !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-+	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_READY))
- 		return -EAGAIN;
- 
--	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
--
--	writel(1, priv->base + UARTDM_NCF_TX);
- 	writel(ch, priv->base + UARTDM_TF);
--
- 	return 0;
- }
- 
- static int msm_serial_pending(struct udevice *dev, bool input)
- {
--	if (input) {
--		if (msm_serial_fetch(dev))
--			return 1;
--	}
-+	struct msm_serial_data *priv = dev_get_priv(dev);
- 
--	return 0;
-+	if (input)
-+		return !!(readl(priv->base + UARTDM_SR) & UARTDM_SR_RX_READY);
-+	else
-+		return !(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY);
- }
- 
- static const struct dm_serial_ops msm_serial_ops = {
-@@ -222,8 +156,8 @@ static void uart_dm_init(struct msm_serial_data *priv)
- 	writel(UARTDM_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
- 	writel(UARTDM_MR2_8_N_1_MODE, priv->base + UARTDM_MR2);
- 
--	/* Make sure BAM/single character mode is disabled */
--	writel(0x0, priv->base + UARTDM_DMEN);
-+	/* Enable single character mode */
-+	writel(UARTDM_DMEN_TXRX_SC_ENABLE, priv->base + UARTDM_DMEN);
- 
- 	writel(UARTDM_CR_CMD_RESET_RX, priv->base + UARTDM_CR);
- 	writel(UARTDM_CR_CMD_RESET_TX, priv->base + UARTDM_CR);
-@@ -320,13 +254,9 @@ static inline void _debug_uart_putc(int ch)
- {
- 	struct msm_serial_data *priv = &init_serial_data;
- 
--	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
--	       !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-+	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_READY))
- 		;
- 
--	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
--
--	writel(1, priv->base + UARTDM_NCF_TX);
- 	writel(ch, priv->base + UARTDM_TF);
- }
- 
-
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index 7807f6240e3..a6afcd00b5d 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -182,6 +182,7 @@ CONFIG_PHY_NATSEMI=y
+ CONFIG_PHY_REALTEK=y
+ CONFIG_PHY_TI_DP83867=y
+ CONFIG_PHY_VITESSE=y
++CONFIG_PHY_XILINX=y
+ CONFIG_PHY_XILINX_GMII2RGMII=y
+ CONFIG_PHY_FIXED=y
+ CONFIG_DM_ETH_PHY=y
 -- 
-2.49.0
+2.25.1
 
