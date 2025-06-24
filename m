@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF14AC77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 15:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E38B1C77B7C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 15:35:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CDBD82D17;
+	by phobos.denx.de (Postfix) with ESMTP id 6F2B882E05;
 	Tue, 24 Jun 2025 17:35:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VohCR4IE";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="CwNhKU+I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC17482D5E; Tue, 24 Jun 2025 17:35:11 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id E597E82C2F; Tue, 24 Jun 2025 17:35:12 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7EB782C2F
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 17:35:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B36DD82D17
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 17:35:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id DCC683F27F
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 15:35:06 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 012333F595
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 15:35:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1750779306;
- bh=0IhCOuAdLYyEAQ82nzEQtYEA0mHESctUhoQkI2qet4Q=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=VohCR4IEBMcKOBmZ13e7aoVUaqDYNXtruRyId5hzBh5PVNCCv2c8mJuPat/dzGCx3
- 6lCuKYloUZ3nnev2Yptq/8QE0IC/qotp9MjkNq32YzIw+uTh214FGbH8jJ20aR/t1C
- 3RxC8XZ3fhK77VHGcsDhQDvHnscPec9bTB1UulkSDaaBDGaFWlfpJBujU1RrWg+Bqv
- Oqf0WUSzSCNz1L69r6dc/luo6tt3PLBT6D89UH66yXOqx0msBFmyLJdSaIrZ0/BIUU
- KNAoL+a0ZyhJ7VFPjPx8r3ANgS52HI3oiZscZ/xH1o5BtTBtpVMm6nOfSSDaSqlRbh
- JJfbKiYEFLhpw==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-3a4f6ba526eso3465257f8f.1
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 08:35:06 -0700 (PDT)
+ s=20210705; t=1750779310;
+ bh=JaHh9Qmo4K97q9N8Lj6K5nO4EWSQks9vV7ft8SqrO0U=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=CwNhKU+Igwt1wKPll8VramjT3vprZB83cwYaKmqpgAU7S9OxIGD+xENtNrwN2G+ug
+ vnafk6pao2QG45wNzJOOBZsoeeKh8EbJ6XQeP9shr5dmb7wjVkGWK06fYGa2scnj5S
+ 3IxQvL3k5NowGEzU5a74bjkZM937YaBPyE3gJmWeMOiMY+rSblYlkG+upzKCryJHnY
+ JybEPoNbWjNM8Yp5ir4MnFZdiUZB8s3RPTj0opG2J4wfbVBoHmtpg4QpPYUSpxIKoO
+ HxZH78sVOUKZqZSrdAF3M5pv0Rdp6eUK261EFiudaOi9Qc1OXvYtGjaszfV1VY8HJi
+ tWyHX1omPL/+w==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4535ee06160so38911925e9.3
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 08:35:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750779306; x=1751384106;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0IhCOuAdLYyEAQ82nzEQtYEA0mHESctUhoQkI2qet4Q=;
- b=V9qqNiGjFj5UYc4GCpzkmYU3A/wxUc15DpcakUx7OigZn5FyF/zsllkN3PqWz/2kcU
- DV1vInN6+kyVUURyPQ2gz7/0MH9E66sN/anpMD+1qWx2BqIgDxO3EgqzwOXvds4x6low
- wcKpcMNtcR4PaH7ORDwoE9TK8/tUqtgm7TPf4T2PkYPHKAcY3S486TWe4M56veU5v8R7
- +cUouu2sDBjcX5Npp1ZuIBgAxXfL9SLnHemasUMY6/hOLWfNpZc1xVDEwZQug3XL1+81
- 0EJsI4V+FIzCP5cDhntQ7fEBjlDn9yX4VVtE9/dUBQ8UBc1hcAx1c7fZ7fwIVMGqnat9
- 8w0Q==
+ d=1e100.net; s=20230601; t=1750779309; x=1751384109;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JaHh9Qmo4K97q9N8Lj6K5nO4EWSQks9vV7ft8SqrO0U=;
+ b=o50hliIWD5+LLkhXZGtRYYxOLhz+Gb34N5pMOg3004O7eKCU+E5ZpfGILxAYugIFa5
+ c/2c70e920mJguUzE7YeikdT7in2OQ+Li1r0x0nuSvXzfOxxQpXV/cW6GR7zjcoORNyi
+ 0fDsWd02GPDsS/xAuBnkeHEGcVmuHtbfNS+Rx40p9dI44xE3tnocYWboD2+KcNQE1u0C
+ wjgp7A7fZ5rCR/+1cw4hBL/1gwLzWB9HmcEfAez4JtlXxpLroF7sPx9gKQAkD5shLfQm
+ Q7PYdwaCtxKH40y4zD53wVYQU45NJa5VPJYx8GFRCE1c0WQ01DjMpyTNak6eLKgvbBz3
+ 15+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURA8b6BBS8kiK59GP40PSSmB1KiZVi4XKZeVam/0msd1fjM1oSUB4boVgkQWzfv8stklmaWkE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGN4d9SbJYOffXvFbZgJ3KmrRSHmybGvF3nAsFrQMBGdiyL8a3
- qRZqfks1bkXRX7tcsFcddTfm9EMmdG/rplXUtorfNFMDyWoTyvFsNgCERfHO45b8Yqr+2szEWK9
- Z8CfUjN5IPE/dvkNnFoLXvOtM/o0c6NAj5nWX2B+kB7rBNSh0zn+U63/zIDvlMq0ltLwFks0=
-X-Gm-Gg: ASbGncs/Yh5vFyH/zVBq6M3eSCi76IUx8D3jPT0mTa1FOAE8zTYYoNzuy/XRFwPDlF4
- +tLJ+Nf6zAo1QPAlXphg7ODcVh0Yfvqciqbbalky1yTK3cspY+8EZ/ElJi4Eg2DjDfXt+5jGwFe
- 4UcEXYKdcZo8SGf2YEoLAuEXO7QgKP8DlQ05UV3X9YVob7wbcTL4x8sFg7nn90WLPwT++QNp2T3
- CsyqgVrEazEczSUqAYQH8MjZel9f4WSqpCGtuacFCDkBGqPRa5dkJlIHPG5dW7F7f+UTz/JlSkw
- 0oEWcBzbF7HCCdm29cfcxJ/YylbX/NvEyVErkUdUuqpYIOxtNbUqExef
-X-Received: by 2002:a05:6000:310e:b0:3a4:d31e:4af3 with SMTP id
- ffacd0b85a97d-3a6d1307038mr14158836f8f.37.1750779306461; 
- Tue, 24 Jun 2025 08:35:06 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEM7c1ZRjsFkdnlXUIZfaXlo9FyfIDHmOWeSmX0sMHN+uvYW8uUhuIrbXOOOgpEMn9JRQHM+A==
-X-Received: by 2002:a05:6000:310e:b0:3a4:d31e:4af3 with SMTP id
- ffacd0b85a97d-3a6d1307038mr14158817f8f.37.1750779306083; 
- Tue, 24 Jun 2025 08:35:06 -0700 (PDT)
+ AJvYcCWQSZtpe4LaMZP1ly7YGIgAXSlnVCYu0+DoWBngim+j937R6WD2bHSJQ6DlPLQCIA4foLKjuJQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzPya27FDMHmvfdNABO07PJcBqpTsPB+DnnnUXHsAEnRQcdQuaQ
+ TcabUfzOXdiPnyA56RYhU7kSvWSk40HPB2bxiQllj7ImkKsacCbWUgPIGjrFgzcEDwaz/SSFCni
+ 1cffNcW/x8rIk7M3Shu3k3DOvLZKKbEBsnNlpRODeoMAbU1Oclg1CPeBjsWQbsXdezhcsVlI=
+X-Gm-Gg: ASbGnctlu0wEQBVl13dP2QKlgFQ0U+Fw4pqZw14Nk3e2qAwdhKG2QJ/jPTRG40X1U4c
+ dtJfqP31uO1sCXkmp3LrTj8tK3CxVKVeiDUKEqpWMsZe4yDiaCNgIhG802Le70q2xPOlnewqyRp
+ OgzMsP8oP/RN9REgEMhzP6FtnJ+IwIAjYvWf6oeBJcy0rAIRSElFBLd2n/Ye5xOzMeg9b5Djjfg
+ 0flSYwp2q4WJO1wCUj5keNWDnIjmOiWFQiI4hK4YEATBETruDCs3OZ9H6FT70t/iFq7mR13qCx2
+ wbM9FW/1AasGtx1rcusW+lFKqojpBIw6p82mbtR/lI9SFTsI5iECOcNV
+X-Received: by 2002:a05:600c:6306:b0:450:d01f:de6f with SMTP id
+ 5b1f17b1804b1-4537c8bb475mr38795385e9.15.1750779308993; 
+ Tue, 24 Jun 2025 08:35:08 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHUlU3vR5vtkbFynOFACqpPC1/0iUeK4aAux7OWnrrik/tM9Vrbmo54PMC5P5gJHUACaR1IgQ==
+X-Received: by 2002:a05:600c:6306:b0:450:d01f:de6f with SMTP id
+ 5b1f17b1804b1-4537c8bb475mr38795165e9.15.1750779308663; 
+ Tue, 24 Jun 2025 08:35:08 -0700 (PDT)
 Received: from localhost.localdomain ([2a02:3035:6e0:9801:7335:789f:7f15:8b3b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e8113b00sm2277019f8f.96.2025.06.24.08.35.04
+ ffacd0b85a97d-3a6e8113b00sm2277019f8f.96.2025.06.24.08.35.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Jun 2025 08:35:05 -0700 (PDT)
+ Tue, 24 Jun 2025 08:35:08 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -87,10 +88,13 @@ Cc: Simon Glass <sjg@chromium.org>,
  Sam Edwards <cfsworks@gmail.com>, Anshul Dalal <anshuld@ti.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/2] spl: fix error handling in spl_fit_get_image_name()
-Date: Tue, 24 Jun 2025 17:34:29 +0200
-Message-ID: <20250624153431.46986-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/2] common/spl: guard against buffer overflow in
+ spl_fit_get_image_name()
+Date: Tue, 24 Jun 2025 17:34:31 +0200
+Message-ID: <20250624153431.46986-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250624153431.46986-1-heinrich.schuchardt@canonical.com>
+References: <20250624153431.46986-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,29 +113,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-spl_fit_get_image_name() used to lack a detection of malformed image name
-properties in FIT images. The change in commit 3704b888a4ca ("common/spl:
-fix potential out of buffer access in spl_fit_get_image_name function")
-tried to fix this  but led to function spl_fit_get_image_name() no longer
-detecting if a property at index > 1 does not exist.
+A malformed FIT image could have an image name property that is not NUL
+terminated. Reject such images.
 
-This patch is reverted.
+Reported-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ common/spl/spl_fit.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-An explicit check for malformed image name properties is introduced.
-
-Cf.
-[BUG] [PATCH v5 1/3] common/spl: fix potential out of buffer access in
-spl_fit_get_image_name function
-https://lore.kernel.org/u-boot/38f5d078-3328-4bdb-9c95-4fb5fe89ddc2@gmx.de/T/#u
-
-Heinrich Schuchardt (2):
-  common/spl: Revert fix potential out of buffer access in
-    spl_fit_get_image_name function
-  common/spl: guard against buffer overflow in spl_fit_get_image_name()
-
- common/spl/spl_fit.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
-
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index e250c11ebbd..25f3c822a49 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -73,7 +73,7 @@ static int spl_fit_get_image_name(const struct spl_fit_info *ctx,
+ 				  const char **outname)
+ {
+ 	struct udevice *sysinfo;
+-	const char *name, *str;
++	const char *name, *str, *end;
+ 	__maybe_unused int node;
+ 	int len, i;
+ 	bool found = true;
+@@ -83,11 +83,17 @@ static int spl_fit_get_image_name(const struct spl_fit_info *ctx,
+ 		debug("cannot find property '%s': %d\n", type, len);
+ 		return -EINVAL;
+ 	}
++	/* A string property should be NUL terminated */
++	end = name + len - 1;
++	if (!len || *end) {
++		debug("malformed property '%s'\n", type);
++		return -EINVAL;
++	}
+ 
+ 	str = name;
+ 	for (i = 0; i < index; i++) {
+ 		str = strchr(str, '\0') + 1;
+-		if (!str || (str - name >= len)) {
++		if (str > end) {
+ 			found = false;
+ 			break;
+ 		}
 -- 
 2.48.1
 
