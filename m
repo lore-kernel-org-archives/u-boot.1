@@ -4,55 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B76EC77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 12:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A79CCC77B7C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 12:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E6CC82C2F;
-	Tue, 24 Jun 2025 14:15:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BF51D82C2F;
+	Tue, 24 Jun 2025 14:59:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1750767347;
-	bh=X7cGq2avU+1CEq8bC0wP/IzUm5oUgAIfL7+wiv/K5O4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iDsZP/HNYkgA5B6t3VaAOf6FfF0V/6es3xN6XG8GR1/ZFp+T/CqMtgaBPnDKREuXX
-	 SdWT3BByvzxyqgT3C+N0OSTTxGDqz0WuCGQnPJZj6seTrhUwxQyco8cdZkyQgSwnwq
-	 zCBYoxwVXYnJFJMzFiaI+2TfxMZa7Nwl1q9bF+fW8JSCjcEKQr9QT15JoPsSnqsS2N
-	 nxxCMHbiS4si2n7HnjW1ZjDyB2aer+xJGP7ZTnfFoJ7xwtcrfFNveVEc+yY+lc0oZz
-	 UKTV6M3ffHZP1NCYCDqKb6VR/tsD4x9Xgo15QhzGNBh9nQiZ6xkY5Ojtltx1+igx+G
-	 L+UBWEyLAkElw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RtwWZIzX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75C6582B18; Tue, 24 Jun 2025 14:15:45 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 7CA0F82C4C; Tue, 24 Jun 2025 14:59:26 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 849D782C2F
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 14:15:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69B7882BCD
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 14:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4bRP6j2J0nz9scX;
- Tue, 24 Jun 2025 14:15:41 +0200 (CEST)
-Message-ID: <8e14f66c-31d5-4f95-b75e-1d719961e1f9@denx.de>
-Date: Tue, 24 Jun 2025 14:15:40 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1750769949; x=1751374749; i=xypron.glpk@gmx.de;
+ bh=DmxAMz9YRSBVoI9LAvIhejXdWXmYFJkJxDBysMBUNXY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=RtwWZIzX0wXBPieh+vk3W2r6wuWP1Io/cFGVnolX+usiTC/pIdCiQH7v/QUrhNVk
+ IS53tGKdYWj8I2HN4mdG0v2oj9hNvq4OAdLlKzVChRAZBX0tRKvX3p4FniAIME/9g
+ i7QSqHb2HZ9tW19BRiwNAdt9ODMNQECgWMN9y7FoGEuJz+S3wkg9tdqylSu+ZjCRF
+ EsS/CQeDR5RkiRiD+emlMET7mgyZaizIAorHE7FoV/OxhGMR+zKNdb0SVr8D3KRD3
+ uA5CA/yeVuD2eraek+oIet6epJr3MxNBqRerWK/Eu2d9d5tAcmhjuVWzXTn+PiFmg
+ TG+Hz+LdC7IPcLhFJA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMXQ5-1uDLru2Q3r-00LNqM; Tue, 24
+ Jun 2025 14:59:09 +0200
+Message-ID: <38f5d078-3328-4bdb-9c95-4fb5fe89ddc2@gmx.de>
+Date: Tue, 24 Jun 2025 14:58:56 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: kirkwood: Enable bootstd and other modernization for
- ib62x0 board
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20250623205943.11889-1-mibodhi@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: [BUG] [PATCH v5 1/3] common/spl: fix potential out of buffer access
+ in spl_fit_get_image_name function
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+References: <20250610045054.1038235-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250610095632.1085431-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250610095632.1085431-2-mikhail.kshevetskiy@iopsys.eu>
 Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250623205943.11889-1-mibodhi@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sam Edwards <cfsworks@gmail.com>, Anshul Dalal <anshuld@ti.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, E Shattow <lucent@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250610095632.1085431-2-mikhail.kshevetskiy@iopsys.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:vXZqsekNfQnZU4i1URWd95TACOxzKgdwgOwgFO5MXlZBWJH6sPk
+ /EeZrJEpV6AlgAupjYUSRm3QeNAF5JhxvWD9rK8w3T8bw8ORThDS4b0UqVBAcc9i2xVmbUe
+ aj59Kv7abzngoLO199F0Xs6XyoF2mOO3lPnA0wDrYBKBWQsOi92bP7DntPFnBpqzE4OXkuy
+ 2IijvghA8A0NGS5p0uP1Q==
+UI-OutboundReport: notjunk:1;M01:P0:vVtypUgCOyc=;SaeKZIl04xIKFqXwH9as+agBv6F
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,148 +132,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23.06.25 22:59, Tony Dinh wrote:
-> Enable bootstd.
-> Update defconfigs to the latest u-boot requirements.
-> Enable SYS_THUMB_BUILD and LTO and to reduce binary size.
-> Enable NET_RANDOM_ETHADDR.
-> Disable JFFS2 support.
-> 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
-
+On 10.06.25 11:56, Mikhail Kshevetskiy wrote:
+> The current code have two issues:
+> 1) ineffective NULL pointer check
+>=20
+> 	str =3D strchr(str, '\0') + 1
+> 	if (!str || ...
+>=20
+>     The str here will never be NULL (because we add 1 to result of strch=
+r())
+>=20
+> 2) strchr() may go out of the buffer for the special forms of name varia=
+ble.
+>     It's better use memchr() function here.
+>=20
+>     According to the code the property is a sequence of C-string like
+>     shown below:
+>=20
+>       'h', 'e', 'l', 'l', 'o', '\0', 'w', 'o', 'r', 'l', 'd', '\0', '!',=
+ '\0'
+>=20
+>     index is the string number we are interested, so
+>=20
+>       index =3D 0   =3D>  "hello",
+>       index =3D 1   =3D>  "world",
+>       index =3D 2   =3D>  "!"
+>=20
+>     The issue will arrise if last string for some reason have no termina=
+ting
+>     '\0' character. This can happen for damaged or specially crafted dtb=
+.
+>=20
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 > ---
-> 
->   configs/ib62x0_defconfig | 16 ++++------------
->   include/configs/ib62x0.h | 28 ++++++++++++++++++++++------
->   2 files changed, 26 insertions(+), 18 deletions(-)
-> 
-> diff --git a/configs/ib62x0_defconfig b/configs/ib62x0_defconfig
-> index 1beb5837bb4..0c14ac06e92 100644
-> --- a/configs/ib62x0_defconfig
-> +++ b/configs/ib62x0_defconfig
-> @@ -2,48 +2,41 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_DCACHE_OFF=y
->   CONFIG_ARCH_CPU_INIT=y
-> +CONFIG_SYS_THUMB_BUILD=y
->   CONFIG_ARCH_KIRKWOOD=y
->   CONFIG_SYS_KWD_CONFIG="board/raidsonic/ib62x0/kwbimage.cfg"
->   CONFIG_TEXT_BASE=0x600000
->   CONFIG_NR_DRAM_BANKS=2
-> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
->   CONFIG_TARGET_IB62X0=y
->   CONFIG_ENV_SIZE=0x20000
->   CONFIG_ENV_OFFSET=0xE0000
->   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ib62x0"
->   CONFIG_SYS_LOAD_ADDR=0x800000
->   CONFIG_IDENT_STRING=" RaidSonic ICY BOX IB-NAS62x0"
-> +CONFIG_LTO=y
-> +CONFIG_BOOTSTD_FULL=y
->   CONFIG_BOOTDELAY=3
-> -CONFIG_USE_BOOTCOMMAND=y
->   CONFIG_BOOTCOMMAND="setenv bootargs ${console} ${mtdparts} ${bootargs_root}; ubi part root; ubifsmount ubi:rootfs; ubifsload 0x800000 ${kernel}; ubifsload 0x700000 ${fdt}; ubifsumount; fdt addr 0x700000; fdt resize; fdt chosen; bootz 0x800000 - 0x700000"
->   CONFIG_USE_PREBOOT=y
->   CONFIG_SYS_PBSIZE=1051
->   # CONFIG_DISPLAY_BOARDINFO is not set
-> -CONFIG_HUSH_PARSER=y
->   CONFIG_SYS_PROMPT="ib62x0 => "
->   CONFIG_SYS_MAXARGS=32
-> -CONFIG_CMD_BOOTZ=y
->   CONFIG_CMD_IDE=y
->   CONFIG_CMD_NAND=y
->   CONFIG_CMD_USB=y
->   # CONFIG_CMD_SETEXPR is not set
-> -CONFIG_CMD_DHCP=y
-> -CONFIG_CMD_MII=y
-> -CONFIG_CMD_PING=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_FAT=y
-> -CONFIG_CMD_JFFS2=y
->   CONFIG_CMD_MTDPARTS=y
->   CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
->   CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:0xe0000@0x0(uboot),0x20000@0xe0000(uboot_env),-@0x100000(root)"
->   CONFIG_CMD_UBI=y
-> -CONFIG_ISO_PARTITION=y
->   CONFIG_OF_CONTROL=y
->   CONFIG_ENV_OVERWRITE=y
->   CONFIG_ENV_IS_IN_NAND=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NETCONSOLE=y
->   CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-> +CONFIG_NET_RANDOM_ETHADDR=y
->   CONFIG_SYS_ATA_STRIDE=4
->   CONFIG_SYS_ATA_DATA_OFFSET=0x100
->   CONFIG_SYS_ATA_REG_OFFSET=0x100
-> @@ -58,6 +51,5 @@ CONFIG_MVGBE=y
->   CONFIG_MII=y
->   CONFIG_USB=y
->   CONFIG_USB_EHCI_HCD=y
-> -CONFIG_USB_STORAGE=y
->   CONFIG_LZMA=y
->   CONFIG_BZIP2=y
-> diff --git a/include/configs/ib62x0.h b/include/configs/ib62x0.h
-> index e1b62f78b21..01ab6edb05f 100644
-> --- a/include/configs/ib62x0.h
-> +++ b/include/configs/ib62x0.h
-> @@ -1,5 +1,6 @@
->   /* SPDX-License-Identifier: GPL-2.0+ */
->   /*
-> + * Copyright (C) 2025 Tony Dinh <mibodhi@gmail.com>
->    * Copyright (C) 2011-2012
->    * Gerald Kerma <dreagle@doukki.net>
->    * Luka Perkov <luka@openwrt.org>
-> @@ -11,19 +12,34 @@
->   #include "mv-common.h"
->   
->   /*
-> - * Environment variables configuration
-> - */
-> -
-> -/*
-> - * Default environment variables
-> + * mv-common.h should be defined after CMD configs since it used them
-> + * to enable certain macros
->    */
-> +#include "mv-common.h"
->   
-> -#define CFG_EXTRA_ENV_SETTINGS \
-> +#define EXTRA_ENV_SETTINGS_LEGACY \
->   	"console=console=ttyS0,115200\0"				\
->   	"kernel=/boot/zImage\0"						\
->   	"fdt=/boot/ib62x0.dtb\0"					\
->   	"bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw\0"
->   
-> +#define KERNEL_ADDR_R	__stringify(0x800000)
-> +#define FDT_ADDR_R	__stringify(0x2c00000)
-> +#define RAMDISK_ADDR_R	__stringify(0x01100000)
-> +#define SCRIPT_ADDR_R	__stringify(0x200000)
-> +
-> +#define LOAD_ADDRESS_ENV_SETTINGS \
-> +	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
-> +	"fdt_addr_r=" FDT_ADDR_R "\0" \
-> +	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
-> +	"scriptaddr=" SCRIPT_ADDR_R "\0"
-> +
-> +#define CFG_EXTRA_ENV_SETTINGS \
-> +	EXTRA_ENV_SETTINGS_LEGACY \
-> +	LOAD_ADDRESS_ENV_SETTINGS \
-> +	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-> +	"mtdparts=" CONFIG_MTDPARTS_DEFAULT "\0"
-> +
->   /*
->    * SATA driver configuration
->    */
+>   common/spl/spl_fit.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index 86506d6905c..ab277bb2baa 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -86,11 +86,12 @@ static int spl_fit_get_image_name(const struct spl_f=
+it_info *ctx,
+>  =20
+>   	str =3D name;
+>   	for (i =3D 0; i < index; i++) {
+> -		str =3D strchr(str, '\0') + 1;
+> -		if (!str || (str - name >=3D len)) {
+> +		str =3D memchr(str, '\0', name + len - str);
+> +		if (!str) {
+>   			found =3D false;
+>   			break;
+>   		}
+> +		str++;
+>   	}
+>  =20
+>   	if (!found && CONFIG_IS_ENABLED(SYSINFO) && !sysinfo_get(&sysinfo)) {
 
-Viele Grüße,
-Stefan Roese
+Since this patch (commit 3704b888a4cabac8) on the Milk-V Mars board I=20
+see a message "cannot find image node ''" and on some builds I have seen=
+=20
+boot failures.
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+With your patch and some debug messages:
+
+U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:45:11=
+=20
++0200)
+DDR version: dc2e84f0.
+Trying to boot from MMC2
+spl_fit_get_image_name(): index =3D 0, name =3D 'opensbi' len =3D 8
+spl_fit_get_image_name(): outname =3D 'opensbi'
+spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D 'uboot'
+spl_fit_get_image_name(): index =3D 0, name =3D 'fdt-2' len =3D 6
+spl_fit_get_image_name(): outname =3D 'fdt-2'
+spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D 'uboot'
+spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D 'uboot'
+spl_fit_get_image_name(): index =3D 1, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D ''
+cannot find image node '': -1
+
+
+Before that patch:
+
+U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:34:50=
+=20
++0200)
+DDR version: dc2e84f0.
+Trying to boot from MMC2
+spl_fit_get_image_name(): index =3D 0, name =3D 'opensbi' len =3D 8
+spl_fit_get_image_name(): outname =3D 'opensbi'
+spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D 'uboot'
+spl_fit_get_image_name(): index =3D 0, name =3D 'fdt-2' len =3D 6
+spl_fit_get_image_name(): outname =3D 'fdt-2'
+spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D 'uboot'
+spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+spl_fit_get_image_name(): outname =3D 'uboot'
+spl_fit_get_image_name(): index =3D 1, name =3D 'uboot' len =3D 6
+no string for index 1
+
+
+With your patch spl_fit_get_image_name() does not detect that there is=20
+no property at index 1 and does not return -E2BIG. Instead it signals=20
+the property is an empty string and returns 0 which is not expected.
+
+Best regards
+
+Heinrich
+
 
