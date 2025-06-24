@@ -4,118 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A79CCC77B7C
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 12:59:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C26C77B7C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 13:12:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF51D82C2F;
-	Tue, 24 Jun 2025 14:59:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D559E82C2F;
+	Tue, 24 Jun 2025 15:12:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RtwWZIzX";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="B7G32K5T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CA0F82C4C; Tue, 24 Jun 2025 14:59:26 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 1C0B682D21; Tue, 24 Jun 2025 12:25:06 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69B7882BCD
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 14:59:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8C1A82C84
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 12:25:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1750769949; x=1751374749; i=xypron.glpk@gmx.de;
- bh=DmxAMz9YRSBVoI9LAvIhejXdWXmYFJkJxDBysMBUNXY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=RtwWZIzX0wXBPieh+vk3W2r6wuWP1Io/cFGVnolX+usiTC/pIdCiQH7v/QUrhNVk
- IS53tGKdYWj8I2HN4mdG0v2oj9hNvq4OAdLlKzVChRAZBX0tRKvX3p4FniAIME/9g
- i7QSqHb2HZ9tW19BRiwNAdt9ODMNQECgWMN9y7FoGEuJz+S3wkg9tdqylSu+ZjCRF
- EsS/CQeDR5RkiRiD+emlMET7mgyZaizIAorHE7FoV/OxhGMR+zKNdb0SVr8D3KRD3
- uA5CA/yeVuD2eraek+oIet6epJr3MxNBqRerWK/Eu2d9d5tAcmhjuVWzXTn+PiFmg
- TG+Hz+LdC7IPcLhFJA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMXQ5-1uDLru2Q3r-00LNqM; Tue, 24
- Jun 2025 14:59:09 +0200
-Message-ID: <38f5d078-3328-4bdb-9c95-4fb5fe89ddc2@gmx.de>
-Date: Tue, 24 Jun 2025 14:58:56 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: [BUG] [PATCH v5 1/3] common/spl: fix potential out of buffer access
- in spl_fit_get_image_name function
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-References: <20250610045054.1038235-1-mikhail.kshevetskiy@iopsys.eu>
- <20250610095632.1085431-1-mikhail.kshevetskiy@iopsys.eu>
- <20250610095632.1085431-2-mikhail.kshevetskiy@iopsys.eu>
+ spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jBe6mvdJVLS0HWMqpdr6yJ+At687icZLnpBTDuTUO0Jw1V4AuTgx/fYjZzK6DW4MLYaGHYxuB2w+3g72VxXgTmbxNCKI/+T4oYUhkExGsklb0KZRRK4j7L4H3knczszcRyf0OQwJTew3fgyk/2t+4wZs6RGAnpszfT3URniD8VgsIpcXUANQ8loFbkkg348LS+8IQmmm71q5vT8RDye3BTZu2RsikhRdtIFcJj1/X5ebEh15I6WALYLMIwnis3EkhkHV+utm2Z8YCGjGZMidb0b6huXqMkCKet1WrBtTmFJnp071QVx36xcrsD4iaJprNRe6VI7+VLudG0cLeEAAqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7/OULeqrDWN+Z4kcQc3Cn351tAv87QRBYbe84o8vBrs=;
+ b=q0vm494KedHF4FzUAkWAicDY7SCqQ7U7sUNWabxSuSNsdEAEXVLLilPr2ueUJR77cWVg6z8zL+tCwA9pzzs8HNAF0TN5ft+kQRHcVzOXXU3QpWRJMRZX3lrrfqFsCMFgxrQwZqsoayF3tb8JRxYNYKD/zfz7tJdwyvKG8bq6hbUb5K3WN0OBLRGIddwVcAONKk9tAMjwnKzM4bspjACws8NrMoGagEusdploOfBAfj2pFBFBv4fyj3Aec85PB7tqQoXnex8+1ZtEHwvG1qG2HyRbhUkXsrfSNRVA7oMWMxmwVFJ3CxuhglAs8/8DMAsc3fG6QGXa/1ooXLzlvDGPHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=htecgroup.com; dmarc=pass action=none
+ header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7/OULeqrDWN+Z4kcQc3Cn351tAv87QRBYbe84o8vBrs=;
+ b=B7G32K5TF6qnMuGReS1QFomrgJgQPi//zX816JdUkE9M9mAwSuwdStMJuHSJyoQKFPEOccno5LpQN9pZddppgwlmCv9bxi+j6kQvBG9Wtr7dXtZ+yHKMVwcfC6iCAPmv5tA/ga8SPPZR3u+Zm2PFTDM5OeFhePC+w4hLMMy2s+uUGBuJ6IgY1LSpSjHAw54baMWTYfEd61X9bu+cdrEwDOTYKhxBT6teBqKch2dbxgThmYMOHSBTwhymjERdZWt9f/6Ync8MmTAatG1EFM4ujhVShkj+MNDhx95P6FXxCMMAjSWMSLO86F5iHWAHKQrX8436qITMZpE6cYRFmvhUYw==
+Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
+ by AS1PR09MB5543.eurprd09.prod.outlook.com (2603:10a6:20b:4a7::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.28; Tue, 24 Jun
+ 2025 10:25:01 +0000
+Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
+ ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
+ ([fe80::5e01:31b8:ed86:eca7%4]) with mapi id 15.20.8857.022; Tue, 24 Jun 2025
+ 10:25:01 +0000
+From: Uros Stajic <uros.stajic@htecgroup.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Uros Stajic
+ <uros.stajic@htecgroup.com>
+Subject: [PATCH v2 00/11] riscv: Add support for P8700 platform on Boston board
+Thread-Topic: [PATCH v2 00/11] riscv: Add support for P8700 platform on Boston
+ board
+Thread-Index: AQHb5PI8GyijdjAN9EWRMauNpUMVhw==
+Date: Tue, 24 Jun 2025 10:24:57 +0000
+Message-ID: <20250624102449.324410-1-uros.stajic@htecgroup.com>
+Accept-Language: en-US
 Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Sam Edwards <cfsworks@gmail.com>, Anshul Dalal <anshuld@ti.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, E Shattow <lucent@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250610095632.1085431-2-mikhail.kshevetskiy@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=htecgroup.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AS1PR09MB5543:EE_
+x-ms-office365-filtering-correlation-id: ac3f3b12-5d49-4f3e-9772-08ddb3095eba
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?kpeYAy09t6J/LKEv5RMnq5ROU/wCxXdvbWUiH+3u37eR5x2SUacIrf3c3M?=
+ =?iso-8859-1?Q?+0J42ei8GW0hF31TU4ruTJVijS10lDsUz+aq1g1P6qCiLa4k6jUC0xBbnm?=
+ =?iso-8859-1?Q?7gAp1/UyYSUgC8BZUMJWXrYBXRFTgmrNjx4XJ3fXG5oXVCdh69N09MlOOZ?=
+ =?iso-8859-1?Q?f8+UNkHYEcDHe/Vf0ZzD31ktYiVegwp90aKv4np5tRSPk6Uy+85zFH9es8?=
+ =?iso-8859-1?Q?6I8bbbxvVgxxLUed5k2NHKYRhYaRZrYoPBZ6n02I0HqGJPEtvueolHdyPQ?=
+ =?iso-8859-1?Q?GLKvSxzg8XaI+D2nqy1ndwyIZ7IwBZZ8FWTWD6wRaOoz1xHkhnWqlbQw9+?=
+ =?iso-8859-1?Q?0XvCOMdHJQcmFVFuMjoxvfnSSi+0dih6XYFDfuQulkdkD5TauIPfH0hi0q?=
+ =?iso-8859-1?Q?VuoAafMHicd7B35idu75UH+VxJWVTluUQIvEIAhnQJiRIKxJSJxd0ouCi0?=
+ =?iso-8859-1?Q?hQmKxaWAM4Um7JkbfGH0Zwg3HRQpvWdY9spPU/Idh8ILP0p03or85mhp9h?=
+ =?iso-8859-1?Q?VpN2oD6hGsMW1Igou6fi0th6YNmUX8L355gG83ixJvLPEX/VB4TesgH7z7?=
+ =?iso-8859-1?Q?GlZSDil127OUwE5HQzOII+FRqvIEINoisD3lFAcpucixco1iMCle2LHnGq?=
+ =?iso-8859-1?Q?MiWAMh4MwNHT2DHNrLRVayDwBEwfcD7VpMseL4bS9JNABci0IV7RFVbCZI?=
+ =?iso-8859-1?Q?DDY7Xm+ug8GnQpAgC+bsGj5lkZ9w/VtunoOYb75M3qhAUZNe+v6vWpe5U3?=
+ =?iso-8859-1?Q?8yzsFO8DGB/es7LfsLb0fp8H02W/t8qLh6HAvgyYEf2+5h1M+r4YhwizuE?=
+ =?iso-8859-1?Q?LyyCyBiAn05qSBBBpq+V+Hq6QWOMDAbv54edUEnt3ZXm/VHwZ/SyXFtOeX?=
+ =?iso-8859-1?Q?7/k06trRCNBZ4wvRtlJuNaxZbRpk12eviBBizGSvHwh3qGNcn9fQfwM4I1?=
+ =?iso-8859-1?Q?Y8lTQ9arQPqsOH1dVK+vRbZXUbMNw+Liv+PnzJQGpwiNjyi3DgyLEkRa8u?=
+ =?iso-8859-1?Q?sCMwjdB8TMTvldAP4EAZnntvORuKzKNwi48BZ3Vc2qDs9tB0XhepGWVpk2?=
+ =?iso-8859-1?Q?k55UEq3hsjk7+KZjGBsX12n6J9KVZxWUdteTsYL21ssLT4Hz72gUt66A3P?=
+ =?iso-8859-1?Q?hUnfdq+jVUKV9HziyQ0WkCqF6m9K5Ya/AxK82KKuiyqGAEoLfg/C026MYX?=
+ =?iso-8859-1?Q?SDw0KnKLiMQRgE3euuodxixfiw5Mt4Dnn2jIOR2SlgDVNUTcmYVFlJTvHM?=
+ =?iso-8859-1?Q?t9dChHWsGZfO6eh1zT8DpKUHyIhnWKiNPJmaOIMxoO0MrpZWmHI5nfWPp/?=
+ =?iso-8859-1?Q?KOYoNZBJbMnJ7cBkAcKFLjbjBLJOm49/7wwQ+p3ht8e+32Wpv7VkuLNq/1?=
+ =?iso-8859-1?Q?ddPqh53vDVsKcSfX7R/yKtzAhaOOz6Lipp70KIwm4nyqjoC/n8eyYp8CK1?=
+ =?iso-8859-1?Q?VQiqJZyPFkj7DIIHzbszF/4ZGkt1k3YCjQmS7xvVmmm+7hUdAOs2H+2rAW?=
+ =?iso-8859-1?Q?1d0XD4AR8hHoFmhnmPYcASk/eBEGLHm5GY2MNhdnYQOQ=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?H0yA1UJpWjRgRA7GxxSkwjIX6jCo6tLQ+RKTD8aXGNDBxIyBZZtnzDi/6X?=
+ =?iso-8859-1?Q?hrfSC3hbs2T0OL6V2XS0sIrVFdnzhpOM8/S3OFDIuUqhOByyXg2lsBXb2p?=
+ =?iso-8859-1?Q?ubIe3WETMqZqhu78Xf6+8KRIE92zsEXGGe9U9k74zlkCFJqP/txhLoRKL0?=
+ =?iso-8859-1?Q?sG96IGwlkB7Ltk2Y4DPQoaSQ/ne2LKfV8lEjJqIAVfv5Ygqxv1jvMR/nE8?=
+ =?iso-8859-1?Q?NpZ3YSBjG4fGqJqvw9t1LexDk7l4vbBicTQNrAn8f+yMMxgzpGuomo6Ea7?=
+ =?iso-8859-1?Q?wyuiR5nBF4fMIG42YitOteLiu5Rc3CtL6CSU8lCK66nSwBYOwpjuD2AvAO?=
+ =?iso-8859-1?Q?nw2TlM7CDxe4hyDNVcLhJT9+RHviPn1Io+nqlqQXPN+MsYIZCyOad5EQ0s?=
+ =?iso-8859-1?Q?vg3KbublyzqejLsP1KdPN7urSMIlXIOQfe8Tge2FLoN/FTZSJk+1zr/XdV?=
+ =?iso-8859-1?Q?6yl06FWCXxrOJtIz8CoIFdsNZxhaL8yE5zu4KbVOQldAP6pEk53/QeXABO?=
+ =?iso-8859-1?Q?iRlX6TVTL5e0MPw1XZOjEreJWvjxljkTFf0RW/EF9ZP+PWWUitXkMBWVnU?=
+ =?iso-8859-1?Q?DM5lFhUjxuNndbKetrVhVjszfyaE0bQkuOYQGL7U9ayTKnS9Jyuv1HcWcL?=
+ =?iso-8859-1?Q?pt9lD9bX5XHqHQNQyf2O46eoilzED/g0QcNLEI/J6lYtPpyk9BAVNuQgPT?=
+ =?iso-8859-1?Q?xUXHnIXW5dbVVb3HZszU54BIW0izhQ4XelNXe5Z3IUl0AVYcZSnaUiIA3I?=
+ =?iso-8859-1?Q?aXVLI2YOG6bk7qXC6+OeTUIB9mBdb4IiYPnEjVLkbjsb2bwIKiSNvX8uxV?=
+ =?iso-8859-1?Q?zubq78wL/8l8lErMlqkvbqKhiZ0sgTQoKA+0+D9SMfUGj8790mkD0ZAbVy?=
+ =?iso-8859-1?Q?RNAra3JXH3K7bAOt8Gp4IM06LQYKlF16nEs7IFdlwG1qKzdudAp7lm7f/9?=
+ =?iso-8859-1?Q?QAaAT7kIONCKpOFNbFkLPKBocDm/BUI3574IheI/wpTHbmrVBJn4a0u++K?=
+ =?iso-8859-1?Q?0z9lJEXErjWa1AiIWKWioMZ1YBZCzDcHyRT56tupByejhpsbqS/v1K/8HW?=
+ =?iso-8859-1?Q?UmjwWDjcchD+5uMqwx9mORTfW6IOl77a2wfO9HIp5emM1XwjBBc1Oyr4ud?=
+ =?iso-8859-1?Q?7fw8XUgVmsNPHDC+Lqz733t7aMM5QMwJsE+l2peR32+zZR31G6MBwNVcwF?=
+ =?iso-8859-1?Q?BT9R4HEmurwLKrQYObLZ+04N8+FqCEWT/AuMVOiFBEsK8y38izpebAYIFA?=
+ =?iso-8859-1?Q?WVNcbNBZlYjFEXILY/ngbZvqKhRLNDT/OsTEAV9egZSHc6j9PE0m+dDJOV?=
+ =?iso-8859-1?Q?yXz1jdxoGyuGhydhPHQX8a9Up7BdC00AjTFcrLJGqcuysXs4TQICUKXRpf?=
+ =?iso-8859-1?Q?gtwzgQwX/cmniJInRMQ85Rr6QdcKZLGOMDKQ/BvRAu+FC7q2fBdtamtmPS?=
+ =?iso-8859-1?Q?h8y/stoZFl0rryN4RwpGW1Ai7ApD4Q/JDEWEBvPq6DOebjZCrQkB9KrRxr?=
+ =?iso-8859-1?Q?86QUIjuJHA5Inf8hPGr1iXi7RqXxF8sXonX/hsksdWPsrIlx0KSlnqGQsx?=
+ =?iso-8859-1?Q?3Aag6ZQOJWGTnswOMW9QGhppjF1vNUZ+oKRT4lxMa1M1A4NFC3hwpoO3xY?=
+ =?iso-8859-1?Q?ROXZsBC7tAF780ycE0WIIACJbhkPSVzUuFDuSeZ/6nqeclRTcPtknhOg?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:vXZqsekNfQnZU4i1URWd95TACOxzKgdwgOwgFO5MXlZBWJH6sPk
- /EeZrJEpV6AlgAupjYUSRm3QeNAF5JhxvWD9rK8w3T8bw8ORThDS4b0UqVBAcc9i2xVmbUe
- aj59Kv7abzngoLO199F0Xs6XyoF2mOO3lPnA0wDrYBKBWQsOi92bP7DntPFnBpqzE4OXkuy
- 2IijvghA8A0NGS5p0uP1Q==
-UI-OutboundReport: notjunk:1;M01:P0:vVtypUgCOyc=;SaeKZIl04xIKFqXwH9as+agBv6F
- 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
+MIME-Version: 1.0
+X-OriginatorOrg: htecgroup.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac3f3b12-5d49-4f3e-9772-08ddb3095eba
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jun 2025 10:24:58.1406 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ErNb6k39NkVVBT421hZHdher5yVZzOrDXXUCEQz2TxtDjV5VNDvgTOshxqN3lEqsvbrMNE1mh0TbW0KgZcE94zMhIAE5TZ0TSsbiKYe15Lo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR09MB5543
+X-Mailman-Approved-At: Tue, 24 Jun 2025 15:12:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,118 +162,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10.06.25 11:56, Mikhail Kshevetskiy wrote:
-> The current code have two issues:
-> 1) ineffective NULL pointer check
->=20
-> 	str =3D strchr(str, '\0') + 1
-> 	if (!str || ...
->=20
->     The str here will never be NULL (because we add 1 to result of strch=
-r())
->=20
-> 2) strchr() may go out of the buffer for the special forms of name varia=
-ble.
->     It's better use memchr() function here.
->=20
->     According to the code the property is a sequence of C-string like
->     shown below:
->=20
->       'h', 'e', 'l', 'l', 'o', '\0', 'w', 'o', 'r', 'l', 'd', '\0', '!',=
- '\0'
->=20
->     index is the string number we are interested, so
->=20
->       index =3D 0   =3D>  "hello",
->       index =3D 1   =3D>  "world",
->       index =3D 2   =3D>  "!"
->=20
->     The issue will arrise if last string for some reason have no termina=
-ting
->     '\0' character. This can happen for damaged or specially crafted dtb=
-.
->=20
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> ---
->   common/spl/spl_fit.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> index 86506d6905c..ab277bb2baa 100644
-> --- a/common/spl/spl_fit.c
-> +++ b/common/spl/spl_fit.c
-> @@ -86,11 +86,12 @@ static int spl_fit_get_image_name(const struct spl_f=
-it_info *ctx,
->  =20
->   	str =3D name;
->   	for (i =3D 0; i < index; i++) {
-> -		str =3D strchr(str, '\0') + 1;
-> -		if (!str || (str - name >=3D len)) {
-> +		str =3D memchr(str, '\0', name + len - str);
-> +		if (!str) {
->   			found =3D false;
->   			break;
->   		}
-> +		str++;
->   	}
->  =20
->   	if (!found && CONFIG_IS_ENABLED(SYSINFO) && !sysinfo_get(&sysinfo)) {
+This patch series adds platform support for the P8700 processor
+running on the Boston board.
 
-Since this patch (commit 3704b888a4cabac8) on the Milk-V Mars board I=20
-see a message "cannot find image node ''" and on some builds I have seen=
-=20
-boot failures.
+P8700-F is a high-performance RV64GC SoC that supports hardware
+multithreading and optional multi-cluster configurations.
 
-With your patch and some debug messages:
+----
+changes in v2:
+- 03/11 - Remove redundant pcie_xilinx_probe() and update commit
+	  message accordingly.
+----
 
-U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:45:11=
-=20
-+0200)
-DDR version: dc2e84f0.
-Trying to boot from MMC2
-spl_fit_get_image_name(): index =3D 0, name =3D 'opensbi' len =3D 8
-spl_fit_get_image_name(): outname =3D 'opensbi'
-spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D 'uboot'
-spl_fit_get_image_name(): index =3D 0, name =3D 'fdt-2' len =3D 6
-spl_fit_get_image_name(): outname =3D 'fdt-2'
-spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D 'uboot'
-spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D 'uboot'
-spl_fit_get_image_name(): index =3D 1, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D ''
-cannot find image node '': -1
+Chao-ying Fu (10):
+  riscv: Add initial support for P8700 SoC
+  gpio: Add GPIO driver for Intel EG20T
+  pci: xilinx: Avoid writing memory base/limit for root bridge
+  riscv: Add support for MIPS GIC syscon on RISC-V SoCs
+  net: pch_gbe: Add PHY reset and MAC address fallback for RISC-V
+  libfdt: Allow non-64b aligned memreserve entries
+  riscv: p8700: Add software emulation for AMO* instructions
+  riscv: p8700: Add Coherence Manager (CM) and IOCU support
+  riscv: boston: Add support for LED character display command
+  cmd: riscv: Add 'startharts' command to start multiple harts
 
+Uros Stajic (1):
+  timer: p8700: Add support for reading time from memory-mapped mtime
 
-Before that patch:
+ arch/riscv/Kconfig                          |  22 ++
+ arch/riscv/cpu/Makefile                     |   2 +
+ arch/riscv/cpu/p8700/Kconfig                |  15 +
+ arch/riscv/cpu/p8700/Makefile               |  10 +
+ arch/riscv/cpu/p8700/cache.c                |  84 ++++++
+ arch/riscv/cpu/p8700/cm-iocu.c              |  75 +++++
+ arch/riscv/cpu/p8700/cm.c                   |  92 ++++++
+ arch/riscv/cpu/p8700/cpu.c                  |  22 ++
+ arch/riscv/cpu/p8700/dram.c                 |  37 +++
+ arch/riscv/cpu/p8700/emu-amo.S              | 254 +++++++++++++++++
+ arch/riscv/cpu/p8700/p8700_platform_setup.S | 155 ++++++++++
+ arch/riscv/cpu/start.S                      |   8 +
+ arch/riscv/dts/Makefile                     |   1 +
+ arch/riscv/dts/boston-p8700.dts             | 253 +++++++++++++++++
+ arch/riscv/include/asm/arch-p8700/cm.h      |  61 ++++
+ arch/riscv/include/asm/arch-p8700/p8700.h   | 144 ++++++++++
+ arch/riscv/include/asm/global_data.h        |   2 +
+ arch/riscv/include/asm/io.h                 |  86 ++++++
+ arch/riscv/lib/Makefile                     |   1 +
+ arch/riscv/lib/interrupts.c                 | 299 ++++++++++++++++++++
+ arch/riscv/lib/mips_gic.c                   |  47 +++
+ board/mips/boston-riscv/Kconfig             |  51 ++++
+ board/mips/boston-riscv/MAINTAINERS         |  15 +
+ board/mips/boston-riscv/Makefile            |  10 +
+ board/mips/boston-riscv/boston-lcd.h        |  20 ++
+ board/mips/boston-riscv/boston-regs.h       |  38 +++
+ board/mips/boston-riscv/boston-riscv.c      |   9 +
+ board/mips/boston-riscv/checkboard.c        |  43 +++
+ board/mips/boston-riscv/config.mk           |  15 +
+ board/mips/boston-riscv/display.c           |  33 +++
+ board/mips/boston-riscv/iocu.c              | 104 +++++++
+ board/mips/boston-riscv/lowlevel_init.S     |  20 ++
+ board/mips/boston-riscv/reset.c             |  15 +
+ cmd/Kconfig                                 |  14 +
+ cmd/Makefile                                |   2 +
+ cmd/display.c                               |  51 ++++
+ cmd/start_harts.c                           | 103 +++++++
+ configs/boston-p8700_defconfig              |  95 +++++++
+ doc/README.LED_display                      |  26 ++
+ drivers/clk/Kconfig                         |   2 +-
+ drivers/gpio/Kconfig                        |   7 +
+ drivers/gpio/Makefile                       |   1 +
+ drivers/gpio/eg20t-gpio.c                   | 138 +++++++++
+ drivers/net/pch_gbe.c                       |  36 ++-
+ drivers/net/pch_gbe.h                       |   1 +
+ drivers/pci/pcie_xilinx.c                   |   9 +
+ drivers/timer/riscv_timer.c                 |   7 +
+ include/asm-generic/global_data.h           |   5 +
+ include/configs/boston-riscv.h              |  11 +
+ include/interrupt.h                         |  19 ++
+ include/led-display.h                       |  33 +++
+ net/eth-uclass.c                            |   2 +
+ scripts/dtc/libfdt/fdt_ro.c                 |  11 +-
+ 53 files changed, 2610 insertions(+), 6 deletions(-)
+ create mode 100644 arch/riscv/cpu/p8700/Kconfig
+ create mode 100644 arch/riscv/cpu/p8700/Makefile
+ create mode 100644 arch/riscv/cpu/p8700/cache.c
+ create mode 100644 arch/riscv/cpu/p8700/cm-iocu.c
+ create mode 100644 arch/riscv/cpu/p8700/cm.c
+ create mode 100644 arch/riscv/cpu/p8700/cpu.c
+ create mode 100644 arch/riscv/cpu/p8700/dram.c
+ create mode 100644 arch/riscv/cpu/p8700/emu-amo.S
+ create mode 100644 arch/riscv/cpu/p8700/p8700_platform_setup.S
+ create mode 100644 arch/riscv/dts/boston-p8700.dts
+ create mode 100644 arch/riscv/include/asm/arch-p8700/cm.h
+ create mode 100644 arch/riscv/include/asm/arch-p8700/p8700.h
+ create mode 100644 arch/riscv/lib/mips_gic.c
+ create mode 100644 board/mips/boston-riscv/Kconfig
+ create mode 100644 board/mips/boston-riscv/MAINTAINERS
+ create mode 100644 board/mips/boston-riscv/Makefile
+ create mode 100644 board/mips/boston-riscv/boston-lcd.h
+ create mode 100644 board/mips/boston-riscv/boston-regs.h
+ create mode 100644 board/mips/boston-riscv/boston-riscv.c
+ create mode 100644 board/mips/boston-riscv/checkboard.c
+ create mode 100644 board/mips/boston-riscv/config.mk
+ create mode 100644 board/mips/boston-riscv/display.c
+ create mode 100644 board/mips/boston-riscv/iocu.c
+ create mode 100644 board/mips/boston-riscv/lowlevel_init.S
+ create mode 100644 board/mips/boston-riscv/reset.c
+ create mode 100644 cmd/display.c
+ create mode 100644 cmd/start_harts.c
+ create mode 100644 configs/boston-p8700_defconfig
+ create mode 100644 doc/README.LED_display
+ create mode 100644 drivers/gpio/eg20t-gpio.c
+ create mode 100644 include/configs/boston-riscv.h
+ create mode 100644 include/led-display.h
 
-U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:34:50=
-=20
-+0200)
-DDR version: dc2e84f0.
-Trying to boot from MMC2
-spl_fit_get_image_name(): index =3D 0, name =3D 'opensbi' len =3D 8
-spl_fit_get_image_name(): outname =3D 'opensbi'
-spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D 'uboot'
-spl_fit_get_image_name(): index =3D 0, name =3D 'fdt-2' len =3D 6
-spl_fit_get_image_name(): outname =3D 'fdt-2'
-spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D 'uboot'
-spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
-spl_fit_get_image_name(): outname =3D 'uboot'
-spl_fit_get_image_name(): index =3D 1, name =3D 'uboot' len =3D 6
-no string for index 1
-
-
-With your patch spl_fit_get_image_name() does not detect that there is=20
-no property at index 1 and does not return -E2BIG. Instead it signals=20
-the property is an empty string and returns 0 which is not expected.
-
-Best regards
-
-Heinrich
-
-
+--=20
+2.34.1
