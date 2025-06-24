@@ -4,83 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F74C77B7F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 11:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03BB0C77B7F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 11:47:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6519482C4C;
-	Tue, 24 Jun 2025 13:13:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BFE182C84;
+	Tue, 24 Jun 2025 13:47:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YLE6APTs";
+	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="ZNuUfgu9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBBE682C84; Tue, 24 Jun 2025 13:13:10 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 77F8C82D83; Tue, 24 Jun 2025 13:47:01 +0200 (CEST)
+Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8B8782C2F
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 13:13:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B126882C4C
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 13:46:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-553cf020383so287275e87.2
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 04:13:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750763588; x=1751368388; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UTC52La7qXCmWd+edluVLgKgspf4y2bASmuZD1WJgDg=;
- b=YLE6APTsg49w4MrLTLWRQpC+MNweZZ466kZVOpC0hpwxAmeUDoOObGXDQMJT0m9u29
- GrDBsR/2vNYa1C0nJwbhK3ERIu7opJIZv+DIU763tH+TEqSvf498fxz5r+uN72bwiB+6
- nWKdqRgFoVlTFtOHZZcmJ3a2N2AX/cNsyqNQv5vnLadlDt26K+6jlSKfB9Y+Bs0r3GRT
- 3thFhAio8tcI3VFQW+0iZhGN5FMcwQ/cG3oVemlswltWgJfo2eECOWhJP2iBPPxfa4tz
- hJaAuah4c5RkijLrHGLfUS+7UrTnVPkxG75iDV497KXhkBBhGBoveCjvH6OH4gvzm3sz
- TlHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750763588; x=1751368388;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UTC52La7qXCmWd+edluVLgKgspf4y2bASmuZD1WJgDg=;
- b=TSKVxKYAEEFdZHJ6cXyjXFsO8IA6K3Flt/FYGPNh+zT+yDL1P0dGVhnnmN9hwrggBN
- W4+DZYeN00n9vcXomU6s5Htd7oLx+7SUUhzs64zLbSlhv7g9uiUlMUwsBI/JCpvB9pXj
- 0z9aUv1REAGSiyhvGKLsnZgcwmw2aXbvwsRekMNPuOXQC74nAosnStlfwj7nfXCJnel9
- Q8SlAJTCHMm0bs3nSOA605sXIIG8V388wFaKOrA5Fi9t0xEK1kGSecKRH/2E4QzG27lV
- +CV0vPqeweasC/cq20GCKYuHu5sRJSjyUiFk+ZGDRUE6+9VsDRkVua5Edk8ak2wqmTBe
- MpLA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWbNwD7vXGUBXgvjRvEGqej/RGi5R5O12fCO9iLTKxXjTkTgBCgEzCDuJmImBZVeHPRrTw9Ds=@lists.denx.de
-X-Gm-Message-State: AOJu0YwXxoCJHTQuGbIZdDNvyRRyhxfwyD7elxZCO4aBsQS9reU4gCZx
- yocNyOjFXmw0fTAQDSw3jLuQAKU2E6lf1se4vkPOJV5d4qr7zVlZABtLaQihGZ+eLX5rVfxbpW9
- XpVz34gaq9Nd/dZltfadg86m+Eqh/1sg=
-X-Gm-Gg: ASbGncuhSVJrc/1SXPs7nllRwdZoHd3n8YyOoGjEtaDKXU72duTHqEAtSufOhm+xDof
- w+V0gdUrS6wZcVRxNxrTs8uTJysRo/2fXGFrTGmZA0+dLAy79PLUvo0v3co7A/O2iWD0qbC7UDU
- 4oaxGqEa88Jxxs5JkfoRHiWqb2iCSn4bcA8T0i4CEGUEfRjg8BjyE0ZYuRUbUELCvFIbOpXHMr2
- 6E=
-X-Google-Smtp-Source: AGHT+IEwpxdZbLuJyUEnbBFzaHBz+oQrwNx3cKCk6PsRROifU+TkItErCA7fEVt5cSd31Tfu/E+GLkGDsKsw8nr6PyA=
-X-Received: by 2002:a05:6512:6ca:b0:553:a77f:9c45 with SMTP id
- 2adb3069b0e04-553e3bfba42mr4200800e87.39.1750763587717; Tue, 24 Jun 2025
- 04:13:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=lukas.schmid@netcube.li
+dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
+ c=relaxed/relaxed; q=dns/txt;
+ h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
+ bh=8Wbd3CcN3r/ZBeuLb3Ai8KSdXlvTMQ1mRuGP6zGev7E=;
+ b=ZNuUfgu91RGyiG1dmn8v2WaADjXsXUb5OmLdBImFf0PP6XSNGZ3gHRO+qrp1+CjbCzD6jMP4AdwAG+Gh8N2Cmp6N1h+RPKJyeq3Hd54mu5FmrcFn5CrmgT2QQM49UhMl/pxPh4W2gHdIEpVpYN/V9xGWhuDdmZ3AwUb0RXwOGng=
+Received: from lukas-hpz440workstation.localnet (cm70-231.liwest.at
+ [212.241.70.231]) by mail.netcube.li with ESMTPSA
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256)
+ ; Tue, 24 Jun 2025 13:46:52 +0200
+From: Lukas Schmid <lukas.schmid@netcube.li>
+To: Hans de Goede <hdegoede@redhat.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/2] sunxi: Add NetCube Systems Kumquat support and fix
+ nvmem MAC handling
+Date: Tue, 24 Jun 2025 13:46:51 +0200
+Message-ID: <2787254.mvXUDI8C0e@lukas-hpz440workstation>
+In-Reply-To: <20250610053856.1873969-1-lukas.schmid@netcube.li>
+References: <20250610053856.1873969-1-lukas.schmid@netcube.li>
 MIME-Version: 1.0
-References: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20250624100922.1702045-1-alice.guo@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 24 Jun 2025 08:12:55 -0300
-X-Gm-Features: AX0GCFvqc61ncjOD8Ar7pNVVY7kkfNRA9SBvm9S8nWT-J-XIlvRGOQTUihR-UHw
-Message-ID: <CAOMZO5AwyMEPE++63O2FncxFVhg7qfmHG7VjDHHfx-pMx8gLFw@mail.gmail.com>
-Subject: Re: [PATCH v2] tools: imx8image: Fix the value passed to dcd_skip of
- build_container()
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: festevam@denx.de, peng.fan@nxp.com, hs@denx.de, alice.guo@nxp.com, 
- sbabic@nabladev.com, uboot-imx@nxp.com, eballetb@redhat.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; boundary="nextPart12690550.O9o76ZdvQC";
+ micalg="pgp-sha512"; protocol="application/pgp-signature"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,24 +64,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
+--nextPart12690550.O9o76ZdvQC
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"; protected-headers="v1"
+From: Lukas Schmid <lukas.schmid@netcube.li>
+Cc: u-boot@lists.denx.de
+Date: Tue, 24 Jun 2025 13:46:51 +0200
+Message-ID: <2787254.mvXUDI8C0e@lukas-hpz440workstation>
+In-Reply-To: <20250610053856.1873969-1-lukas.schmid@netcube.li>
+References: <20250610053856.1873969-1-lukas.schmid@netcube.li>
+MIME-Version: 1.0
 
-On Tue, Jun 24, 2025 at 7:30=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
-com> wrote:
->
-> From: Alice Guo <alice.guo@nxp.com>
->
-> The value passed to dcd_skip of build_container() should be obtained by
-> parsing .cfg file, and should not be fixed to false. For i.MX8QXP, dcd
-> data needs to be skipped, in which case dcd_skip should be true.
->
-> Fixes: 5f28a6599f01("tools: imx8image: add i.MX95 support")
->
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+On Dienstag, 10. Juni 2025 07:38:53 CEST Lukas Schmid wrote:
+> Changes in v2:
+>   - Renamed the defconfig to match "maker-model" style
+>   - Use the default env offset and size
+>   - Disable redundant env to have U-Boot and env fit into first MB of
+>     SPI-Flash
+>   - Remove unused config options (SPI_BOOT, CMD_RTC, SPI_FLASH_BAR,
+>     USB_ETHER_...)
+>   - Update mtdparts layout to reflect new environment layout
+> 
+> This series adds a defconfig for the NetCube Systems Kumquat and fixes
+> and issue with setup_environment ignoring the mac-address loaded using
+> nvmem-cells
+> 
+> Note: This series is based on U-Boot's `next` branch because it depends
+> on the `sun8i-v3s-netcube-kumquat.dts` device tree, which was recently
+> synced from upstream Linux and is not yet available in `master`.
+> 
+> Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+> ---
+> Lukas Schmid (2):
+>   sunxi: setup_environment: do not generate a MAC address when one is
+>     set using nvmem-cells
+>   configs: add support for NetCube Systems Kumquat
+> 
+>  board/sunxi/board.c               | 15 ++++++++++-
+>  configs/netcube_kumquat_defconfig | 45 +++++++++++++++++++++++++++++++
+>  2 files changed, 59 insertions(+), 1 deletion(-)
+>  create mode 100644 configs/netcube_kumquat_defconfig
 
-Thanks for the fix.
+Hi Andre,
 
-Reported-by: Enric Balletbo i Serra <eballetb@redhat.com>
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Just following up on this v2 series sent on June 10th. It's marked as "New" in 
+Patchwork and assigned to you, so just checking if it's still on your radar.
 
-Tom, feel free to apply this one directly to u-boot/master.
+Happy to address any further feedback if needed.
+
+Thanks again for your time!
+
+Best,
+Lukas
+--nextPart12690550.O9o76ZdvQC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEPv6dcBmn59ssZMkSJnN+drMVRtgFAmhakCsACgkQJnN+drMV
+RthEtwf/cIGdkjfK9IM4DiBKbFRCxlrhOuiqwpSnbxgf8xS1Fbs4VrZUZwNUnCaw
+UxsNhAnOT1e6LsF7ui2fpkTLhPtJPKAfqI9ieqzffuU7t9YJgzNbuL72p3MuVRgA
+pt2f1S+WyNcPJOdE5w3KMWy6cLkIV7qS+LBg5ZVrE0FrWkGGkGazv9lQ1sF516Vv
+/it+frdhqfb6HBHjt+vFwtFa42Qiuugms1O/655Hh2g5wjwIKRbAkJLdPZvPsSwX
+if1VZHg0JziWrmBNTUQ0aeAxaMML+4YRszZK6gCHD1nG3e+ImMbQPe0/EzmKG+aS
+zHodBSSbMTRJYJ6Cb5wITsFkrlehbA==
+=/I4f
+-----END PGP SIGNATURE-----
+
+--nextPart12690550.O9o76ZdvQC--
+
+
+
+
