@@ -4,86 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1665C77B7C
-	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 21:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54411C77B7C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Jun 2025 21:02:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41F1782B18;
-	Tue, 24 Jun 2025 23:01:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C2F2082B18;
+	Tue, 24 Jun 2025 23:02:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uH28p9vq";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="NPCX1iZf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90FCF82C84; Tue, 24 Jun 2025 23:01:26 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2A8A582C84; Tue, 24 Jun 2025 23:02:41 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EA5F803CC
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 23:01:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 976C6803CC
+ for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 23:02:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-6119cd1a154so132391eaf.0
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 14:01:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750798880; x=1751403680; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CJ2QHKepsjStDlqf2GWzQ84CwEfFi94/Fx5ybmOfkWI=;
- b=uH28p9vq9hNrehIPdENYnolSmT5J3PuMK5mpWH3VeIGlgSvTmklHw1Q4Hax9PzvtLN
- AU2+t4VnRupze6qmIxBXiM7dJUH2Nygl+yEWlHndm4CP5r12LQkkL4F0wNPrlEola1na
- s/bXgVF5CKFeY0Bxdup/gZ+vsd13baUXIrn+I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750798880; x=1751403680;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CJ2QHKepsjStDlqf2GWzQ84CwEfFi94/Fx5ybmOfkWI=;
- b=j3ODz1HwtbfeYuQFhAGOJXe26IbNJEDRTnbl5Yb4+8BMBVVk6vgyBkC5N3lI1Lajkx
- cy8XioQK9dlaPKZ4Wf/iyasndn/HOsmKcHTvKGohfWBAZhdYUNBIW1aeqEwva0brJ802
- 13uf/pDWN6YAfiPMkLD+XbgPGgwyIamu0lObkQP6Jd4jeBNQzWmUNxY7qFqi7ad9Msgl
- 0znsu0/JV8SH8D3XZS61zjkhI0jO9u+Ct0hSQClIwKx3j3T4ryx+kIhbumelibjJ6Ybf
- phqxnoqaxZufB3oTfC16rB0Jph3UYd/WULJUYZ6PuvTNbHAgqPBKjWkoJA7Bx4bUYN3S
- 3i8w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWkD6sqkY/gKq9arL/RBolXHhVGJ77FRp8Ak+jIwb4epa2JP+0sTK6joeFOC2AYiuLiPASBg+M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxwEi+Afww9ndcg44894yhWM2RAdKd57Mhu0bRVSXzjVZm079hh
- ZuqU6/pUVeBvLslXNxFHiEMYOMSkD8YcNWQn67h8sHunB+hepg5p/Ak8sB/ijlLlWbM=
-X-Gm-Gg: ASbGncu4gjJwtU/A9ILSdoB+Zq35p7D93cSHQW1VKKZwTymjJny/ouiJJThLosTUbTM
- YX6sMMO/ebJ7FSIM6yuoxtgbm98WkDwgFwazBhLhYS8sYE/XCri9CaLmrn3akiPewjX5s3YV4Bm
- HHYB7w8s6wOQj1ddKaQnTlKkA6Q8w/7KLtDzudAkMZ/lP9wRdGbcoet4Sezi+0hdvWVJolovaGi
- s2AtaT/AZSneQxWArq/AuYa9cVa9kuFkkfXM8+tmcVC6YtwFztjp+xWdG/w4iB8u/26JbpfI7be
- fvO5XMrczr7XNOSfh1gf1FGdILz6GbJgaJqfPjN4gYMfAyENm96JIynRXoEo+7s6N79Dg58gF9M
- A1fXM5CYIurSDgpnga+zf99o=
-X-Google-Smtp-Source: AGHT+IGi7ITqpc9FGVrAFz5ES0Yg8Z2PwBLqkOfn8rPQQXC+lwU3ZRuaB+wfR72vfONi/NqpMYvDUA==
-X-Received: by 2002:a05:6870:ae8d:b0:296:bbc8:4a82 with SMTP id
- 586e51a60fabf-2efb23d997fmr649799fac.27.1750798879451; 
- Tue, 24 Jun 2025 14:01:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2ee8a8e1e0dsm2270411fac.30.2025.06.24.14.01.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Jun 2025 14:01:18 -0700 (PDT)
-Date: Tue, 24 Jun 2025 15:01:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>,
- uboot-imx@nxp.com, albert.aribaud@3adev.fr, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] dts: Add u-boot specific 'fsl,mux_mask' property to
- iomuxc for vf610
-Message-ID: <20250624210116.GL4003484@bill-the-cat>
-References: <20250624204700.972663-1-lukma@denx.de>
- <20250624204700.972663-2-lukma@denx.de>
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wbBH8Ds5i2Q4Zb3HJKpQ5T+E3/bUtA69YBstnWn1WSTlA6HmbIsrWv+4A74dWScLFhuA9CCbLqVNYNTON6HVQg8cCkmjbRr8tFIglC7BRxZnX9IAb+D12WSpXCMNnvilL4KsTvJDpBKjF2rq1VYwglKUisnO7GRGU2VDubwqmNKdR91opMk7YM98S9LLQ6NM3ZtQYHxoSLsoAupMKYp1JGaqvUdQrxLIDoIZaafyzCfCWoPYSicjRB8S0UnQp6StBNDGSLn3LmPFIAJhuNOz540KEGyUnOgBkyLddZelsZI/BYYd3qTuNDIjE1T6+gYn8gNfloqMo1RAM8sxZdZxHQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=C3dIbCkaVgIzGI440QXOkRCkQqauy6Ql2SCHk2rdhrQ=;
+ b=AuWBayxA758IGeM7iC8SchZZDOjcJa7WOK/4vCaohEX5PaTcrFDtsDAzVu8YPm0oyo9X3Sq4+f9J/rKmPe5m+P7Oqmo55snMdf7MA1eyNp6V5E+W46/QdSZWF+42yCkoB76yMTaA5FT/PztH890GLgqMkOkTYa1e+YdWfw+9WTin1msygZ1u2Zk7U9gLh+8pB0poGWksTHP7HhFrdvtLWRmplsscxieuzVEGu7b5MQXjE1TwBvxrqIWY930HQq985nXfCp+aBwx1W0kZW0XbASsKDsXpTIivtdOMEM4kBaQRmigSc4fuenLHTuNdNEdP1uFNInBVzhtth8Prx+LzXw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=C3dIbCkaVgIzGI440QXOkRCkQqauy6Ql2SCHk2rdhrQ=;
+ b=NPCX1iZfixtvfbgRqFIsKEJwRuAEgagt2h6JMhu27WIJ23uRRl5y8OdrQf1iCia3rxYejspQ7XOjR2h7Lb3rXPFdkPS659nYtQiELdIq+0mWu6cj/4GqFe4BBgpj5Ue7ZAEfJ7jusV9G7uEJC81uk0yr/lwhIb8u9vHnRaHZzEWZGr1wTZYyACKiaR11vOJAEPaCvqVSFWsxBt8V0IDdp8iWOYejwc1TBDKyOkeffFNaCMpFS98bjwsCm5FTFnn7lJYabmqe+7YyE8KtlpPCxeQPXxYUtyOqbPtd00HmJYr0oet1n2xRXsiP2RzZ/T/RZpFfBSz9s2dFrWjrUcgiDA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by VI0PR08MB10538.eurprd08.prod.outlook.com (2603:10a6:800:205::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.30; Tue, 24 Jun
+ 2025 21:02:34 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8857.026; Tue, 24 Jun 2025
+ 21:02:34 +0000
+Message-ID: <c9fafbc7-e813-4ed6-ba27-527407b8d32c@iopsys.eu>
+Date: Wed, 25 Jun 2025 00:02:31 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] common/spl: guard against buffer overflow in
+ spl_fit_get_image_name()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Sam Edwards <cfsworks@gmail.com>,
+ Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de
+References: <20250624153431.46986-1-heinrich.schuchardt@canonical.com>
+ <20250624153431.46986-3-heinrich.schuchardt@canonical.com>
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US, ru-RU
+In-Reply-To: <20250624153431.46986-3-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0315.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f6::11) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tf8KT9JEYit9Vkue"
-Content-Disposition: inline
-In-Reply-To: <20250624204700.972663-2-lukma@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|VI0PR08MB10538:EE_
+X-MS-Office365-Filtering-Correlation-Id: 49578d76-f954-4675-17b6-08ddb36270ff
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cnkwOFROZVFTVTZiY1NUVUNaQzBrZElXTThhRTU0ZWZVYjgvUEVqR2F4Ymw3?=
+ =?utf-8?B?WktMdm11VmZIQ3M1MStHSStsWkVUVDFJWklqL2d1WDNLM1JEeDNOZjFvZkx6?=
+ =?utf-8?B?Yi9BUWtDeWREekNhUldmbm5SRmppdVg0ak9lMllaZ3R3TWM2SkFMbFhSQURL?=
+ =?utf-8?B?NUZINmN3SmpjZGR0WGZ4ZlRnQXJ6RmZxS2twYzFnSFo5YVMveFlsT3hxcmQv?=
+ =?utf-8?B?RkV4Q1dJcEhiUk00QW0vR0dJOURjYWdyZ1F6T0tjVEdUZytvU0JhZEhXYm1k?=
+ =?utf-8?B?ZCtrckx5OGpGR0RZWmowWW90NDMwTHRZOXp1bGtrYldpKzhPSDh2NGJJeElG?=
+ =?utf-8?B?YnF5OVFQU1Jzb0UwTHRjN2x6UzdYQlhKU1ZYdUhORm1DTkErcTBRYUVaR2Fq?=
+ =?utf-8?B?bTVJQTdsaFkzV1J6NmhDeUZyekQybXlpcUVVZE84RDhMZkRJdVZyVTdKcGMr?=
+ =?utf-8?B?enlrSmRKNmgxR1pPM09XS0diS1l6enpOVHZFVElGckdtN3FRQVF3dnRlRVp1?=
+ =?utf-8?B?T05tY0xJUUVhanh1SXJUQ01VZDIwMnNUTGdDZGh1b3JFNjlZdXcxMVozcnBM?=
+ =?utf-8?B?OGRTL21XYlNwSnRoS3pQUGpHVGUwOHI1MklDWUUvUi81MjBtUE9FUnhSaUNH?=
+ =?utf-8?B?Zk5mRzVsMjdVNlFTeGU0TUdOWVByRHord0laK2ZIR2dWU0F0ZGMwN0xaMFpO?=
+ =?utf-8?B?VzhrNTlETHpOZzcxVStoUmkvbi9PRWhUVDdZQTZlQmtmZ1hoK2JQY0RKT1R4?=
+ =?utf-8?B?a1o5em94czZXeUthSlA4UXo1dHNZZStQWS92ekZlaEs1eTlpSkNyd2t0MnhE?=
+ =?utf-8?B?YzBvZWdNaWc2TUcycWlMaXJxa2ZJWWJrUHpHb1dDb2orTWtvWm5oeDd2ekRs?=
+ =?utf-8?B?SUh2bkVpZEJ2U1JyUmNaY2E1MGR3ekpyUlhJeCs2YlRsY3lvZVBLazhpUzRD?=
+ =?utf-8?B?NVdGTGNGem9ITFFncDRJTEZoWXBnT2szN3A2UFFBSlcyS2JkTHl4L1NMNnJT?=
+ =?utf-8?B?cldMOGxxNGUzQml6eEZXdkhMOVJuL2ZzdksrNjVrTGpUV21Yb2VUdW1OUCtQ?=
+ =?utf-8?B?SFpiTGNpOFJZa1NUVmR5TUMxSDB0RVRNWU41ZCtKMy9vM2lwRWNZaXlncXEz?=
+ =?utf-8?B?OTl1V3p1UEZwS2hLMTB1aGZMYUdFV0ExN3Fvc1NtUW5XeEJNTVBIRFVVK29H?=
+ =?utf-8?B?dXdkN1FSaGZXd21ZN2t3bWtGWXhINlZSb1BnZ0IzSWxQamNXbkZMbVQ2V1U5?=
+ =?utf-8?B?SlZWaUZ6Z2syV2t4WlA5OGxaNGJQMzNSbU9WYUFHaHZhbmJNVmdGTWpYUk0x?=
+ =?utf-8?B?bjdqZnVFMlB2WGFlekpRdXNTZWxsOTMzaTlJK1UxUVY2d3hmb0dMb3gyVlhX?=
+ =?utf-8?B?ckc4REJOeU9QcUU3aEZ2VHcydjFoUzFsc282YVo4eTFlbExIZW11MG9PVkVk?=
+ =?utf-8?B?RHJQNUpTTTJvY0c0aDBxUDhVUjhvdTJqQ0Y0Rk40Vy9YNFUvazhPdE00Y3ZE?=
+ =?utf-8?B?SmFpOE1IaU9HTG1mWGFJMVdLa2s3amduVTZkQ3RuK2d2aE1jZWF3aUhleEVH?=
+ =?utf-8?B?ZDlNTkZKdC94ek1vMW9QUzRYOFYwc2NkOHRDK0xTdmdRNGRPN1lTK3RNUXVU?=
+ =?utf-8?B?VE1pRW9CU3hReXY2RExUblpXczVyMlM4MDI4eHFxYWJ6R2xUdVc5MUxTak8r?=
+ =?utf-8?B?aGJXS3ArSkxiL29yYW5xS05DczV0bG8rSUxtSFNyeUs3MDZEN01LTEhURnBj?=
+ =?utf-8?B?cGx6dkdsdzdvMWt1SGpyeTFJS1RhbkkyRkZ0bkYrTjlTUUF6TUc3OUdpQThN?=
+ =?utf-8?B?OWJPS3hyeDRJRDJ0SnNQaTByVG5lTm0yRWFCLzYrbkVLbzJ0eXhlbzZFZHdw?=
+ =?utf-8?B?UFRYblRyQm94RlpTZngvUnhDTEk2N0tBNy9nNHJBRDlxcFFPeHFSZTYxdFdG?=
+ =?utf-8?Q?6hcPasrZpJ8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(7053199007); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dFpJOGZUa3lZMWhmemx5Tmc1SEhZdlNCTDVQdUpuRkVCazV5WGFFRU5aRnJl?=
+ =?utf-8?B?RUloYlBqdEY5WThtU3hYZVJkOW1TSXNtSHVQS05YZGFvbC8zRnJKZUZ5amFI?=
+ =?utf-8?B?SDlwZ3I3YnN3RXFxSm1GV2pQYzgzRnZqNDgydXZPYmVVVTM3ZEh3MG1aSWQy?=
+ =?utf-8?B?OVhyNjZqdHFRaHkzSE15T2FnalJhb2dXT2U5TUNMaE9DUit2SXU0enZZVDNI?=
+ =?utf-8?B?QnpVT1VhUEl3MFBIZTlGWWd2NmU1KzJQSjRRcnFYTWZqNXhJWFJDSXkvYmI1?=
+ =?utf-8?B?NUZLaTd3YXZ0R2JwMGI5YXVQVFg1aEUvTU1GNTE5ck53QlV6VjYwUUpyRTFX?=
+ =?utf-8?B?Wmc2eGN2OWhyNm4wQVB1SXNRVGc1bkdJWE1Zem9DK3F3VVBIR1liTGNuOE9L?=
+ =?utf-8?B?ZVZSQXVLcEJpcXh2QzRNSWNOTE4yNm9FQ2JtYUxBZEtwM2k3ZVJVREVqSmtH?=
+ =?utf-8?B?U3UwTEtUUS9oeWw1cTMraFo3ZEp2WS9jdmV0aVdCdTc4TThTWE1MNmpWRWEx?=
+ =?utf-8?B?d0lyd1dZK3c4dmhHMGRabk83ZFp6SForaEZVSXNTSWt2NkZqZDVJK0dFZVZU?=
+ =?utf-8?B?WEZKd0tSNytuWjlKQzF5QkhhMWkrNkdlVDl3MGJnVXVkczVqSG9SQ1hQV09x?=
+ =?utf-8?B?SG9VUGtoYTZDOGhEUk5YRGtLRlYwcjdCL0NtVXhGVTNSVzFna2x3d3VROEhi?=
+ =?utf-8?B?WHRNMkoyQzJpM2g5U0x2Sytab2JwalB1UERBWWI2VTZyK3FyMGtSMWhIMVVm?=
+ =?utf-8?B?YnJVakNzdDA4VDZDTlcxMmlFRDhxckh0WW94bUVUeXMvTzQvNVpZVHJYeUN1?=
+ =?utf-8?B?K0txeWUveG9obm1XSG8wamVyWE9FVStXWS9IMkNuUjV4VUZ5b1BCeU1RcHFl?=
+ =?utf-8?B?VExXMFdQL0xTN2FnaWgzbXdLc29lLzU4enpDMTFjOUNIVlA5d2xndUVBcWFT?=
+ =?utf-8?B?RngzRWhBL1RqY2dyd0VXdVRKQTd1RS9BaS95RkhGbnA5Y1pSMmZYdkpyZ3lB?=
+ =?utf-8?B?SEtja3NtbmNaZEVJQisxZnpjWmlaKzFUQlp1U3VJRitkVVA1V0d6cWhLVFVE?=
+ =?utf-8?B?bHI0VmVTM0x2Z1AySU1HaFEzdEZTWVNYTVVGbGJiQ2dSRTQ0UE13T1hPL3Fn?=
+ =?utf-8?B?cS9rMHBDWnZFQ1V5UjNsbmIzY25uMTVlNkNsZTFqeDBlb1Y0c0RUV0RpdXRN?=
+ =?utf-8?B?cHpFZ21JWXdxbEF4SVA1RGY5dXZDb1V6VzdjRUZ2dXYwcXNUb1pncnR5RU5U?=
+ =?utf-8?B?U0RnOWNiNWJEcHo1Y1M0c0VBcWRVTUk5YlR1M3E2aFRvQ202cUhVaGdEY1M3?=
+ =?utf-8?B?TXBoK0pyU052S1c1WElLYXRaQ0FmdGxpVGVuKzNLL2hodjJIaEphUlhIUTRP?=
+ =?utf-8?B?bUEvZ01xWUpuZTJIOGoxbjA1ODVqYzF3NU1pRWRTZzc0ZjFaeVZjL3NwZEtI?=
+ =?utf-8?B?b1dlRFlmR2lCR045MHJkeUlYYU1NZlB1V0V6K3IrMGxtNjZITmorNlN3SjBD?=
+ =?utf-8?B?bjZ5b1g0a2tqYk1HVkxJWWR2dkxzMVoxcjhQbk1uSEhQVm5Kd1dUU2xZaXI0?=
+ =?utf-8?B?dUxXeG5yOGZ5amZ0QUpSYVZNamkwTkNDT3A1bnZYQWlDVTNjY3dMa1R0c2hW?=
+ =?utf-8?B?SEx6UFBlcWJ5MGFrRFV5THhzNFk1VnRkaE5LemVENUN5cFZuNG5VY3Z4cjZu?=
+ =?utf-8?B?QVBYM3FzMWVMQ0ZhQWZkVE81TUtiL01vNkR2SHNZMVo3eDl6MUNNMm13NjhY?=
+ =?utf-8?B?bnZBVnl0eS8zbmZ2R2l6V1c5QXhUVmNYejhzV1ZpZXFzRWkxOW1DQ1RpWUk2?=
+ =?utf-8?B?c0xkZk9pTDFQMjcxdElYeUxkbk9VbWpVaXRwR0RNSUNIeCtEM2hEM3lVY1Mv?=
+ =?utf-8?B?RWJuRUs4cUdIN0hrTFFxcnRyK09ONW1rRmdUbVVNQ3ZZdmQxN3pLVlh6NXk0?=
+ =?utf-8?B?SE5hTEloNU9ubHNtdXR0SHExQklMNFVOVG1yamo2Ny96aE42M05JYUFGblRn?=
+ =?utf-8?B?UEJDVlp4L1o3ZVdreXkwSzYzOTBiVHhGL0VibzUyWnltdlZyWDJxMGdVNUxw?=
+ =?utf-8?B?QUh5TG9tU0pDeHMxK01yeHIyNmZSWVNNNjJmYnZkMkRnMmFYcDVGM1g3QWVY?=
+ =?utf-8?B?dHl4S3hWdDVwVGQ4SWdvZE9wZEVSWWVkZm94WGIzZXNaRm83OFBKajNjbzdS?=
+ =?utf-8?Q?32p/xQeOP6tyHp3HKWhLgxI=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49578d76-f954-4675-17b6-08ddb36270ff
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2025 21:02:34.4264 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yx6F7VUgcUiNDyoAdcpIGfDqjsI2ZND4YyDSk4PdN/iC17zecJP+dmBjqRTKVGjrG+33pLRjIeoTcsfYIpg8Vy4z9r8e1y2+45q7PPvLEXw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB10538
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,56 +179,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tf8KT9JEYit9Vkue
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jun 24, 2025 at 10:47:00PM +0200, Lukasz Majewski wrote:
-
-> The commit e8a9521e649f
-> ("vf500/vf610: synchronise device trees with linux")
-> has synchronized U-Boot's DTS with v5.19 Linux kernel.
-> It turned out that in Linux's upstream iomuxc node description the
-> fsl,mux_mask' was missing, so the U-Boot's pinctrl driver for NXP's Vybrid
-> SoC was not working properly.
->=20
-> As by default the mux mask was set to 0, the vf610 based boards (like
-> BK4) were bricked, due to misconfiguration of gpio at early boot stage.
->=20
-> The fix for all vf610 based boards is to introduce vfxxx-u-boot.dtsi file
-> with 'fsl,mux_mask' property provided and include it in boards' specific
-> U-Boot adjustment files (like vf610-bk4r1-u-boot.dtsi).
->=20
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+On 24.06.2025 18:34, Heinrich Schuchardt wrote:
+> [You don't often get email from heinrich.schuchardt@canonical.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>
+> A malformed FIT image could have an image name property that is not NUL
+> terminated. Reject such images.
+>
+> Reported-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  arch/arm/dts/vf610-bk4r1-u-boot.dtsi | 2 ++
->  arch/arm/dts/vfxxx-u-boot.dtsi       | 9 +++++++++
->  2 files changed, 11 insertions(+)
->  create mode 100644 arch/arm/dts/vfxxx-u-boot.dtsi
-
-It looks like this is still missing upstream, so what's the status on
-that? Thanks.
-
---=20
-Tom
-
---tf8KT9JEYit9Vkue
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhbEhgACgkQFHw5/5Y0
-tyy04gv/Rt4y4cJzHbdumXDv5yeY2twOY3QbodI3tGXVbRNHeY45F4Fi2ju7crR4
-0MJK2INdF8CPD8kud8GAuoCcSDtY5SfQpkViPWsgDF6/sVvnXyW8nmDSX+Fjvdr/
-0QcJL+BO0Qrm7BJmZm4tIknntSxa9uc1gt30rQjadfxMDeK6q2pCgUFHjwstMWIw
-TfmoXZ6kbtzeo6JKqMnEhotebZNvimI5JTaD3t5ddFElduWQt4kNEpGAWR4i5ibB
-WOy+32RsbFG4c43mzI53iTe/Y8vvGXeeuuClpwzYUuTQyb0FaW1+VV4gPjIfZa33
-deUdEYShmgmA1gEz8Sb1CTnvfOF3qX6JWYED8a77bIcBpACmISYBNiYxQjjouqYM
-NfcMJE4dQ01/myd5mUQVFiou6X5D2B2Lu1LDGRl7ZufLSAEx8/dWScbtXm+Nkkw1
-4hj0Cl9+DNiDjBHjSrweXehmFGC1ofo/IiOzaqIGYkQCzvEUHcThROgp3EY8jGRw
-CW9namDx
-=Tv2U
------END PGP SIGNATURE-----
-
---tf8KT9JEYit9Vkue--
+>  common/spl/spl_fit.c | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
+>
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index e250c11ebbd..25f3c822a49 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -73,7 +73,7 @@ static int spl_fit_get_image_name(const struct spl_fit_info *ctx,
+>                                   const char **outname)
+>  {
+>         struct udevice *sysinfo;
+> -       const char *name, *str;
+> +       const char *name, *str, *end;
+>         __maybe_unused int node;
+>         int len, i;
+>         bool found = true;
+> @@ -83,11 +83,17 @@ static int spl_fit_get_image_name(const struct spl_fit_info *ctx,
+>                 debug("cannot find property '%s': %d\n", type, len);
+>                 return -EINVAL;
+>         }
+> +       /* A string property should be NUL terminated */
+> +       end = name + len - 1;
+> +       if (!len || *end) {
+> +               debug("malformed property '%s'\n", type);
+> +               return -EINVAL;
+> +       }
+>
+>         str = name;
+>         for (i = 0; i < index; i++) {
+>                 str = strchr(str, '\0') + 1;
+The line above has a clear bug. str will never be NULL, so  the check on
+the next line is ineffective or just broken.
+> -               if (!str || (str - name >= len)) {
+> +               if (str > end) {
+>                         found = false;
+>                         break;
+>                 }
+> --
+> 2.48.1
+>
