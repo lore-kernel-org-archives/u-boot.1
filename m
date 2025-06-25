@@ -4,83 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D9F7C77B7C
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 02:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C1CC77B7C
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 05:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B576482B18;
-	Wed, 25 Jun 2025 04:19:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6783B82B18;
+	Wed, 25 Jun 2025 07:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b7b04qTF";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZGyYJ0ko";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4384882977; Wed, 25 Jun 2025 04:19:04 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 305C182C84; Wed, 25 Jun 2025 07:26:57 +0200 (CEST)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20602.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::602])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2846282B18
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 04:19:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1E5682977
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 07:26:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-553b3316160so4651175e87.2
- for <u-boot@lists.denx.de>; Tue, 24 Jun 2025 19:19:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750817941; x=1751422741; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YUB8suOxkM4jOsBmH2Jr4ep8bAsU1x2kuJa+5V7QQT0=;
- b=b7b04qTFsx5qkleCiaKgnWosedfCWOP16Zv1T3FXu+YaT+xnGzkLFYhtJdp0uC2M0e
- EKSp0wtF0ZPQemrTdTisc+8MWt74k/t4ZncIkfIn0DOEiRk6KMbNthRz1US1sN2QCCkB
- NwNAtFu6tf7iokiHsUqx//b61uGHJvO+chkLGi6ZUS1eIAaED58p/qhmGsOL2MUzlsSa
- goxw8aEfU7zfzK/7lbl7PfLev7czN8AWq8EHvEUiDA5qqJ7ll5q8dY5MEZqSA5sMD6XS
- 1K9C07md4v2QcZEbPAxt9CaFF9O31/bPXu83p3CGkan6EEJ21dJI4aCyXKiyC+iZ+Rwx
- mQVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750817941; x=1751422741;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YUB8suOxkM4jOsBmH2Jr4ep8bAsU1x2kuJa+5V7QQT0=;
- b=ivPORe/LExfEZAag9yIEGp+HEXSceeTGQI2Y1oVixc3zcR7k0Dg7GAZ5gCfdyi/K/p
- IZlRkZ1qFoWlxLxXd/MvziyJx6gfx4nK0e/2ASOyFTbJw3sy4AXjptAtk4dMLnxweNT+
- oWc5Nj0/aoQqGxwGCZX3IXYqcr9+8IGKTPgljsXYWEy8dZNt3GPLdFzPjrzJgGYxKkZI
- 9DXkaqJz/U6DqhJoPcOcd4a7JZK7Qlu/pujUOl2jt6XDVXA5tsV2uEaE+vS3fkXnFzbk
- AylQqq31pOiwS08dr+Q9+7VVc4EddHMdl7nnTDyysbjqZ39siHO1YjhSh5OGTmUHFVi1
- m3WQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7kDXFV45bIEQ6AgrbDcQpolqDd0iLD2X/dSSMWH82E2YOCXRhDTpeP3XEL7xfM6zpgFhZLQY=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywd7jYmnH5C0X3180NsMumojCP6E67mLJJhixF9rmX6+JrWYA1A
- EhXqy9pIsJqjwJH2F8XnHu5WxSW3VLy6aNdYXRqjx6vmbwamStdekjwQHPiqB3XvPhSFC0FbtA9
- vu9Ttfx0K9Uyi7Rc9yiZOLjajYFHCHZM=
-X-Gm-Gg: ASbGncvZLZWep+jJfTsF4VaL7u1muDy09Hz1icpNBfM8CfCuwoXYXtEvjRE7JFRZJHA
- 7kvz045txW76KfM/mD0Pf9WrMDdV0Xhi1adEaSNy7XYIcsthQo4yDeFpJCYYXEMyCICWmCJOIGD
- VKHwCIKQkY4Y+BKBOqwXqrkUuD9H4UlPT+Xi0/hs6L4HzS48rXqAN7jz3WzpPTJuCVxI3u5uV8U
- b4=
-X-Google-Smtp-Source: AGHT+IEkKDPRBrroe5HFwmAu+x1d86EZTjn5FHo2vLvrT3rdNeHUmhW/Rf0OPgaEIUikCJh551mlbaD8/UTgOqwKaWk=
-X-Received: by 2002:a05:6512:b91:b0:553:adf7:e740 with SMTP id
- 2adb3069b0e04-554fdd1d728mr347449e87.28.1750817941036; Tue, 24 Jun 2025
- 19:19:01 -0700 (PDT)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=srUjkRy21JcRY9ZbCDXzf9dBULsETSPQxKEGay+LD/6yBoCaKmN6xb9Jyyhp0tC3+2mNgl7mNXHpo3lT2oIy9KYSXwQF4D3pUJdoeoTfPp0iQpt/yoV6wtf1N73qIxYnZ3+xWnusgmGe2B2MgbV+gOEP1hARcj8zQMx0lvg2N6EHn5nXJf8PEZ7gYD2iC13XMhO3K8LdaC3L3fkT4tdwUMpg/F3WcJctBfiGCXbjWa4Dp64POdZIPvhiXk1UgmgvzHQeElWog/viYvLByl5AvmQINllgpP/Z3OCKnG4nne9mMrRQwDUZceszufk8MklTjhotwbYAIMEMJ7EacHExyQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eqz6BvkB+PpkhyD02RsIWHUQST6MlisCgeoOAMBMB4M=;
+ b=srZNQ1DVASdcLa8hVYQNaCw7twxuDuyltVzwxczGrVp3fbInSVySS4q+x+KhGYsNkYQ96feBoA0iYnSFvZ7DNVK8MnjHmFXTr/lpPmi7f/NhR4LYrRNxUXxRcOTbEviPyVVB0shas+Ijo04YIxcWfkjYrBWhCUOArJ6hszmsQtWctj6kRWC1fWEYQgtNn+I/RNE/YWwXf3bd/2oqyT3EivEjp9G6ZZXJeWXmgcRtAVZv3vi3FYF3arFzMvLsP9/7myh4eK+VjrPR2KVsjI9pbgq5Mmh4qiu/nQwGFDfrnhaRl+M1bB+POIbVbknHgrWZuQCexx3O14Clm9o1FEBmwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eqz6BvkB+PpkhyD02RsIWHUQST6MlisCgeoOAMBMB4M=;
+ b=ZGyYJ0kopVI8877aXWwM0qxdRhaeNsxgs5Fe4mC4MTLgSkNrAib1E2vIXdPZgw9Qfm7JRhKSJocruzYirK1Rd9TSuRAmTMW4N6oKn0J5GS4mW8cbHCXnMqRJ6xSXHXw8Ygf1C0UcN6TyBK5/PyFozy1FwzGdC3/O0Jucfv7sZIY=
+Received: from BY5PR16CA0016.namprd16.prod.outlook.com (2603:10b6:a03:1a0::29)
+ by DM4PR12MB6010.namprd12.prod.outlook.com (2603:10b6:8:6a::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8857.29; Wed, 25 Jun 2025 05:26:50 +0000
+Received: from SJ1PEPF0000231C.namprd03.prod.outlook.com
+ (2603:10b6:a03:1a0:cafe::d1) by BY5PR16CA0016.outlook.office365.com
+ (2603:10b6:a03:1a0::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.17 via Frontend Transport; Wed,
+ 25 Jun 2025 05:26:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF0000231C.mail.protection.outlook.com (10.167.242.233) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8880.14 via Frontend Transport; Wed, 25 Jun 2025 05:26:49 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 25 Jun
+ 2025 00:26:48 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Wed, 25 Jun 2025 00:26:46 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <peng.fan@nxp.com>, <jh80.chung@samsung.com>, <git@amd.com>
+Subject: [PATCH] mmc: zynq_sdhci: Reset the host controller
+Date: Wed, 25 Jun 2025 10:56:39 +0530
+Message-ID: <20250625052639.229461-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250624204700.972663-1-lukma@denx.de>
-In-Reply-To: <20250624204700.972663-1-lukma@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 24 Jun 2025 23:18:49 -0300
-X-Gm-Features: AX0GCFtsPoC8T_rMocG5ubFo7sx_5Q6Nl8Zy4LWMd5z7mU81_JG1d3Xg6uXm1rw
-Message-ID: <CAOMZO5Dfw4PDRR1zBMr_8vgZey-X06RPhoCZkwz=kpFyZDY49w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] config: nxp: bk4: Increase size of
- CONFIG_SYS_MALLOC_F_LEN (to 0x1000)
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, 
- albert.aribaud@3adev.fr, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231C:EE_|DM4PR12MB6010:EE_
+X-MS-Office365-Filtering-Correlation-Id: fd863246-4210-48eb-2ad5-08ddb3a8e301
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?JTTB8Awg0MqYBH1Zk1w3lJSbwsZvp/bQWF3GR/RDe6lxqSFVLJjZVBxGGqSd?=
+ =?us-ascii?Q?CpKZEfRXr4sFzKrrEh5ILwWj36GTvOeh0Oab2ayuA8lfSnNPTTo8kogDjlkX?=
+ =?us-ascii?Q?FHdAU+hgIB31EY8HIdFpaQSvJPJZehxsRS0E68bJ20ZQW60QamqCyansj6NI?=
+ =?us-ascii?Q?sivThLUdXo+X1QPGiH1BDGwhzPgLxcfPCY3MiOES8yu/bBuChe6OQT/ZH9pO?=
+ =?us-ascii?Q?zruoxwMsKLhOZSNwUilxRUUrFH+vhiNauBjvpU0yjLeEkpt+n4z3oxIvicA/?=
+ =?us-ascii?Q?vcyxcrAdRlfuYyOOrbY5Gm6VgDZxEBKU+VIVN9nJhiqJEHBiRwkd8Um7dg5b?=
+ =?us-ascii?Q?THrO0htf8LaM0XKwSAvghHvS/c7D7mVXdwnvibpkS+ZGzVIuz8n/lPD45nZZ?=
+ =?us-ascii?Q?hReBNZ/WqD6L02wOQ4AL3Btt7JwFA2NvQMdgqPCpypOgu93PkEKs+EWC0uG8?=
+ =?us-ascii?Q?RVAAweo7QBwXDmpIfK0X9zoGCyU0AYPgBzG/eIlaIs23us/+dcHdvdlwNjme?=
+ =?us-ascii?Q?jILeznAASouamOJDiQDbWZl6bkE+NYb82PK5phxCu3KI9tYQrlSqoA42gqKD?=
+ =?us-ascii?Q?2oYT77V75DGppyOrTBDHnT/txTlhmuQ/injHt0XIPBx6GSwdblxyp5H1191x?=
+ =?us-ascii?Q?r2RBDkcT0ArqJZuSUCsLSpd6rmlbyoahNhumpn0y+V6A1fI2KnYwoHnVPFe0?=
+ =?us-ascii?Q?/riyjpc12PPuLoOweQUuD/ZrpRCmfv0R0CJ5Mi8FG2Mcy0iFmZIbHOi/6sAz?=
+ =?us-ascii?Q?50ybER8WLP2iRvR/tET4ru75KIQ4k/c1vf2iKt1/iyU17qVljNuB/dbD7IgG?=
+ =?us-ascii?Q?jo1o7lUBnoMOecu9uLqfdE+NdQkcGfxUfQXb5VpBjwt11DiVvKF2TRPPW57i?=
+ =?us-ascii?Q?/nRnKH0mdn1qxWsCZ3StOKjoq3EQl/n8idj2jzapBgA0f1LXTwUoUUJXbemX?=
+ =?us-ascii?Q?8V8xSyBoj00mhkEBXXO5usnA4VgMj7KZVOgBi7tWyRMPiyfKWk3VojfKSdk4?=
+ =?us-ascii?Q?2i3MMX7wKlKkWrAdVoVbghKlWwxxbmkhxMpO+voHI/CqvZAPTkEEMl8Wr3Yq?=
+ =?us-ascii?Q?L69Pvg7h5vVRQ2G1ptTuxFTfb8SXu4yOUCVegVwCb8kCVtJep8yXazIZVHKM?=
+ =?us-ascii?Q?BdzOC5AcIxzJ3np7abtQpA8y0ZcKsCPTViag0yZmAV5PUVUg727vPO5AAooO?=
+ =?us-ascii?Q?suJ+Y6LlD5U3rQ24W206G2PQnov0UC0Ll41gRk4Dev52DVRQrkFR1hmN9qS3?=
+ =?us-ascii?Q?xPMTZSMUVJ/C2h6dol4TRFyQItzGfBO+x9Lsc7IisvxM06wB+bV+J0XMU3r3?=
+ =?us-ascii?Q?V4Tp0s7PL/5vhtRarVf+SyX0hMIEnh0k/Pla9CMDu4ACSGABXGs3nRRSASmo?=
+ =?us-ascii?Q?8piukYVAbxyn7Rv8hlj3W50FRHUusD94Hi11zIli3ZI70QObK8GEDtpfoiO1?=
+ =?us-ascii?Q?SY873XREXPb4OspBvJgsrrHcZN3KPteis5XsJdZL2YrwEVgf9/zzXzmP0LdP?=
+ =?us-ascii?Q?S+dM20SxAkviWccrwMy1idNhx5bMYZ2KOaPB?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2025 05:26:49.9472 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fd863246-4210-48eb-2ad5-08ddb3a8e301
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231C.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6010
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,72 +146,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+Reset the host controller at the early stage of probe so that the
+configuration will be done properly for reboot cases.
 
-On Tue, Jun 24, 2025 at 5:47=E2=80=AFPM Lukasz Majewski <lukma@denx.de> wro=
-te:
->
-> The commit c69103218ee4 ("i2c: mxc_i2c: add DM_FLAG_PRE_RELOC flag")
-> has enabled by default the i2c initialization in the pre-relocation
-> phase.
-> It turned out that vf610 based BK4 board had too small SYS_MALLOC_F_LEN
-> pool size.
->
-> After increasing it to 0x1000 the board boots again.
->
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/mmc/zynq_sdhci.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-It seems other Vybrid boards also have the same issue.
+diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+index 0e2bdab4e7e..5d797dfd0c4 100644
+--- a/drivers/mmc/zynq_sdhci.c
++++ b/drivers/mmc/zynq_sdhci.c
+@@ -1127,6 +1127,27 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 	if (arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_VERSAL_NET_EMMC))
+ 		priv->internal_phy_reg = true;
+ 
++	ret = reset_get_bulk(dev, &priv->resets);
++	if (ret == -ENOTSUPP || ret == -ENOENT) {
++		dev_warn(dev, "Reset not found\n");
++		return 0;
++	} else if (ret) {
++		dev_err(dev, "Reset failed\n");
++		return ret;
++	}
++
++	ret = reset_assert_bulk(&priv->resets);
++	if (ret) {
++		dev_err(dev, "Reset assert failed\n");
++		return ret;
++	}
++
++	ret = reset_deassert_bulk(&priv->resets);
++	if (ret) {
++		dev_err(dev, "Reset release failed\n");
++		return ret;
++	}
++
+ 	ret = clk_get_by_index(dev, 0, &clk);
+ 	if (ret < 0) {
+ 		dev_err(dev, "failed to get clock\n");
+-- 
+2.34.1
 
-What about removing CONFIG_SYS_MALLOC_F_LEN from all the Vybrid boards
-so that the default of 0x2000 is used?
-
-diff --git a/configs/bk4r1_defconfig b/configs/bk4r1_defconfig
-index 2b72ec916327..82ebf704c605 100644
---- a/configs/bk4r1_defconfig
-+++ b/configs/bk4r1_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=3Dy
- CONFIG_ARCH_VF610=3Dy
- CONFIG_TEXT_BASE=3D0x3f401000
- CONFIG_SYS_MALLOC_LEN=3D0x402000
--CONFIG_SYS_MALLOC_F_LEN=3D0x800
- CONFIG_NR_DRAM_BANKS=3D1
- CONFIG_ENV_SIZE=3D0x2000
- CONFIG_ENV_OFFSET=3D0x200000
-diff --git a/configs/pcm052_defconfig b/configs/pcm052_defconfig
-index d0d558ab11ad..81d703ec679d 100644
---- a/configs/pcm052_defconfig
-+++ b/configs/pcm052_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=3Dy
- CONFIG_ARCH_VF610=3Dy
- CONFIG_TEXT_BASE=3D0x3f401000
- CONFIG_SYS_MALLOC_LEN=3D0x202000
--CONFIG_SYS_MALLOC_F_LEN=3D0x400
- CONFIG_NR_DRAM_BANKS=3D1
- CONFIG_ENV_SIZE=3D0x2000
- CONFIG_ENV_OFFSET=3D0xA0000
-diff --git a/configs/vf610twr_defconfig b/configs/vf610twr_defconfig
-index c823cb0a30ee..8129484513dd 100644
---- a/configs/vf610twr_defconfig
-+++ b/configs/vf610twr_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=3Dy
- CONFIG_ARCH_VF610=3Dy
- CONFIG_TEXT_BASE=3D0x3f401000
- CONFIG_SYS_MALLOC_LEN=3D0x202000
--CONFIG_SYS_MALLOC_F_LEN=3D0x400
- CONFIG_NR_DRAM_BANKS=3D1
- CONFIG_ENV_SIZE=3D0x2000
- CONFIG_ENV_OFFSET=3D0xC0000
-diff --git a/configs/vf610twr_nand_defconfig b/configs/vf610twr_nand_defcon=
-fig
-index 84e73c0c6657..51365990d0fb 100644
---- a/configs/vf610twr_nand_defconfig
-+++ b/configs/vf610twr_nand_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=3Dy
- CONFIG_ARCH_VF610=3Dy
- CONFIG_TEXT_BASE=3D0x3f401000
- CONFIG_SYS_MALLOC_LEN=3D0x0220000
--CONFIG_SYS_MALLOC_F_LEN=3D0x400
- CONFIG_NR_DRAM_BANKS=3D1
- CONFIG_ENV_SIZE=3D0x20000
- CONFIG_ENV_OFFSET=3D0x180000
