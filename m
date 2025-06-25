@@ -4,142 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B6A8C7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 13:29:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB851C7115C
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 13:30:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E00282E05;
-	Wed, 25 Jun 2025 15:29:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 66BAF803CC;
+	Wed, 25 Jun 2025 15:30:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Q2RC1WjY";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="pXH8fEcW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A995082E08; Wed, 25 Jun 2025 15:29:45 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20629.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::629])
+ id AE8228006D; Wed, 25 Jun 2025 15:30:16 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F29D82DF2
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 15:29:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFEAE82DF2
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 15:30:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QcWHyuXdHyM7IplDLM75XvwYE1PNKH/te+LkUtx21tAmzoSH3odY84lvpfEb2UXjPKHDjvMe7Qky9PZBBUD4mKi96IU2dVhdbTL4nd/Y6VhUp/imgVBRqz4hbTF9uGbIKLvISyrYODHg2hHe+OMbO8SMhoK/vDL9xhZlAlmFG4Qwn1mObcu0RP1nl0SqC2jTuVp6qUSEV03eecDJIpomF9LpwSzIlJVoHA09IXfU4nrRizN8Tn2sU7+JQJNGWj0J6wt94aqKTuMmtxg7teKpmjvqh+GjwkhGkDRBin4Ay+du9UhSna5RvV2FFuSWciJky3XzIWFQJAoocc9xKsz2XQ==
+ b=B4kvT/K+7TOlI4VFeN11bOwza1OAghDgU4TQeVvx5I3S6vPyZXSgF+g8EyKpk63xz8/BXaLWfx5Q1XVDE96gTUTJfMjbVklSv3XOwBmp23UzaEo8jzLEMfdnqXXdlOOwzP0LN2XPSNUWORc4AEVYGlc48UuNe7gJHuBN/ByDnDiTP/gPueb5qBW3d89uiD85E7h+wVP/dcNAbdwT2vW0n6MD0+oChcQ532+7DPwNf0cTNLIaiuv/RZsdXYeA5rAEx4JUR18xxZ42B4w6/+6laIJ1YnXHIMha4H7Mez+3qi9mvMIGX0IBLGSVaN+zp+PJjzHZlAmwB8ZZTpBCbELCsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t0OPTkAdAXfwbDB/3X6H+nP1w3GatAlMTUqDX5Fxp1c=;
- b=h1e/xYn/Mbh4nkI8QXBy712g+boLc3eyZq/YN65qy4Z9jXXFBYr8YjP1DNBnxAkY2SoZ63JMkQa3NzWlS3Vc6arKTB9HSRdHMFuu+arA3QcRr6M8LveCwhynbzsNSJkWN+nBF7gJGBzZEncWXKwm5k5YL6rnVueAQkB6E20JBPk42DLksXlOxZxT8P5GNpNnPpNKW6m8Ex7iN43xoPkcu2CjWEiXPXTik5baCg6gxfYRFE0giwVVs3aOQIb3Oh6Yq/6IDS1j9cmPemlIU186yH9Indo2mmnV9U00fAlfUPxC45an6ghUDrmQ8JQeonmu0U2V7nHIxi3h9QY8eogVxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=c0gr5MD2eVkNa1DytXrXQtxNpzTHfdmeVDPN7ewm0KY=;
+ b=OZ7gEmvuIGddwZvqGnelSGhsLf21gg1RRiyvCTTXJVyitkOtOqKA51AHxzYJXsZGPHm5hRxMgS/RbbbHSD0kZfqeQ5KCYf0ZvBF+J47fIC2he/d5kexMWiVNXawoGvH6SbTGPQ5rE94L/WyOUTjZx2hfulALfg6GrwbmnKfLzq1Tzv8FX+P/xb1K/wW2i78d/u5DW453ngKGY+2YAKWZsc3ykSX1Vw4r0KjaQEozqD4h+AJC+8hMABZGLFDNOMSCes9PUyuUnj6tOxEwxomRTHqn55MRl7ExGKsev3oM09bXoMGCEofgzU7yL9N9ojzFrmZqshIfUcFhuA78g0bAMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t0OPTkAdAXfwbDB/3X6H+nP1w3GatAlMTUqDX5Fxp1c=;
- b=Q2RC1WjYsN7sBmuMmcRIoEbvUgXFgEmA1q0UvQvY9UcVgKPzLgHyLCRM8KyjMVg3BbPNKjZ4IzbSt5mQNamJr9Mc3pApxKKCYKe7HZL/e1IFGjpHmezwD4fqnM4KRfH8oyE8AY8TkD6dgzV1WlV+2tITOkhfpaR+Px0/Thdhirs=
-Received: from BN0PR04CA0044.namprd04.prod.outlook.com (2603:10b6:408:e8::19)
- by SJ2PR12MB9114.namprd12.prod.outlook.com (2603:10b6:a03:567::11)
+ bh=c0gr5MD2eVkNa1DytXrXQtxNpzTHfdmeVDPN7ewm0KY=;
+ b=pXH8fEcWO6kU102n02ajXVwTVPGetiSx6YVCF48Dh9aCbghSkJNK1HUywpKhMOUkK2gOXeTMX+oGt9u0Efj9UVXnFxxln0RyBxjBPf+vkPflP4VYqyiGAoGL/P6WbNZ0Hl1nN6pEqmVP2Z2SBUWvpR4dLK5dJnV5FnAN4YrBs17VhO6KROH8xAkuFBdwptiopZkjaEEb/ftOuHWv1Cfk6S8CeHoPKkUSVtl1OZFigvT7d5wg+YKpNynYsRhMyiKDZjssRUUMHvNkHvF3aPQXjzCNlQ47u0OgHH5VfV9pRTLTs1XMdAU1lrW4295a0KlEWxd37JPEm+M8T07Xs4qYpg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS8PR08MB9409.eurprd08.prod.outlook.com (2603:10a6:20b:5a8::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.27; Wed, 25 Jun
- 2025 13:29:36 +0000
-Received: from BL02EPF00021F68.namprd02.prod.outlook.com
- (2603:10b6:408:e8:cafe::86) by BN0PR04CA0044.outlook.office365.com
- (2603:10b6:408:e8::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.30 via Frontend Transport; Wed,
- 25 Jun 2025 13:29:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF00021F68.mail.protection.outlook.com (10.167.249.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8880.14 via Frontend Transport; Wed, 25 Jun 2025 13:29:36 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 25 Jun
- 2025 08:29:34 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 25 Jun 2025 08:29:34 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] firmware: xilinx: Prepare code for new SMC firmware format
-Date: Wed, 25 Jun 2025 15:29:27 +0200
-Message-ID: <cf99fe1af82bc004de3e313d4018464f4504f380.1750858165.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3929; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=LRJ9v1qcavUuQ3wqPc0+6fRkf4Ej2GkOAUqDEFRxUCw=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRE/9zRajPjGGPAdO0HT0r8igtktLZwvxOzfC77wE3a4
- HW8u25jRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAEyE4xrDX7GNN6psvpb/N+Ix
- SFbmNdq7Yc+yoEOaAdwnZBkuf+VbLMvwP0v4xZ3VNhavNYxf1N5yXBbpo94nlM1Y9/bbQb/0ps3
- n+QA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.30; Wed, 25 Jun
+ 2025 13:30:09 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%4]) with mapi id 15.20.8857.026; Wed, 25 Jun 2025
+ 13:30:08 +0000
+Message-ID: <4bd18e83-a12d-4f1b-ae6a-b6b7566128e0@iopsys.eu>
+Date: Wed, 25 Jun 2025 16:30:06 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [BUG] [PATCH v5 1/3] common/spl: fix potential out of buffer
+ access in spl_fit_get_image_name function
+To: Michal Simek <monstr@monstr.eu>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sam Edwards <cfsworks@gmail.com>, Anshul Dalal <anshuld@ti.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
+ Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, E Shattow <lucent@gmail.com>
+References: <20250610045054.1038235-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250610095632.1085431-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250610095632.1085431-2-mikhail.kshevetskiy@iopsys.eu>
+ <38f5d078-3328-4bdb-9c95-4fb5fe89ddc2@gmx.de>
+ <CAHTX3dKdeM=NyjBJVRrZTLiuV3FuoyfvoLvGG8pPgA24o5g9qA@mail.gmail.com>
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US, ru-RU
+In-Reply-To: <CAHTX3dKdeM=NyjBJVRrZTLiuV3FuoyfvoLvGG8pPgA24o5g9qA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: FR2P281CA0001.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a::11) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F68:EE_|SJ2PR12MB9114:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d392e3a-37f9-4bde-834f-08ddb3ec5448
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB9409:EE_
+X-MS-Office365-Filtering-Correlation-Id: 809cd2b9-0ada-40fa-72c5-08ddb3ec675e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?56MYTj6hGp7bCq7eFNIfcy/J4DJ0bOmnZWSvvoONlyN26hHaX/fpvUgp7uMx?=
- =?us-ascii?Q?LXn5Z4rlhN43DgcRfbbcqS0AUMbkb4ZdhgkkNG7yGXzWg3y51SGrFuBQccjJ?=
- =?us-ascii?Q?IyGycK6hGJVYt1VpJyMti53/Dz9setoGR1Fir/8Hmf+NLm9UreKtjiZIMvla?=
- =?us-ascii?Q?/JDrxkg5TAZyW6+A3EcjfwUxErulQaCpgedw4/oGBoEyM+xpdpzAZmqJcVGH?=
- =?us-ascii?Q?1GnyJO+aOmw3UpvGRI20xufG9xFdsgjRug7i+bUNXTwM+i/dHUa7UUFWJBYj?=
- =?us-ascii?Q?P16kFVArmHHtabWr5CCaea/y+UEceYcTvov906Wek/oX6THQl2BkR9/+4xKL?=
- =?us-ascii?Q?+1va3+6LJHWJTd4P9ZXS3PIeedVuOdmWPa3gJ8bM29b50u42YDkIjpHOKScY?=
- =?us-ascii?Q?YGe8uGnJtOs2nVRu2kGqhar1YwG5o6+O7nzYeCVAqziPiSKP7kGcwakkPA15?=
- =?us-ascii?Q?X6TDZXRMNdLEGPVLcIhFOhDvX4NP3CEbaraw7iP5ISEtlVIME9YtQvI8KoTp?=
- =?us-ascii?Q?Mq2JoiDHqIkCnnCvKo7db8vLhbF+5hkTKS5aNo1pAKLi35vg3251zUBZfWcZ?=
- =?us-ascii?Q?9ERiMxwQHEQPfAuWBOxKO3DljaugxaEH6G4NQVF1F8UvzWDirARGUnKeu2fN?=
- =?us-ascii?Q?SLLUnakemBIS3nhNV4k3g3DBehfXAK88qTMooO8ZddzOfiF9nGmNzU2KmYk7?=
- =?us-ascii?Q?XQBs6Bhd/uoZyR8GkA16bHtsS3+C1Cq7Y+GD62zc++AnYVxDRDIlkBmEYJQ6?=
- =?us-ascii?Q?sd0CR8FGSLYmnMTe66osZes+5BXvWAVA7uSFW7mEBlwrMuPaVq0TDU78sdnD?=
- =?us-ascii?Q?n6qCBP5pVJGY5kzOc+7QE9mBbUHR0GlkseoSqRQcCPJryhHA0HN1NLXMf5rI?=
- =?us-ascii?Q?U5G1t6zKX+EAnV372pqGtr5GC5hxpPEnB6oABK3CmzlZfA9NZFXCgfMy8jRd?=
- =?us-ascii?Q?2dg0no/hDInsKTjqVM6h9gNN76Tieb7tRigVTLK9f+ogERuCYXSGTZNT1qsP?=
- =?us-ascii?Q?tBqu+JAn6uJs7Kkq5mxe4wBLiJL/SNa3JtjjVY6UcrXer4GrY+yAult+ijYM?=
- =?us-ascii?Q?7NYq0QkqnogaACDLebhIdq+nhEG/FkpXbTFVUkVwemngNtJ/0Ywu+oXqAuXR?=
- =?us-ascii?Q?0FoS9Ky8eppv+ZhvEgLuMHgOnEY3nF6O3i4L7BXKs4MGLDI9qvAMytgA5g6U?=
- =?us-ascii?Q?dliFwpeu+/6t3Uc/oUZ9qwXHair2rGFVzgOUhVdJvhOArJEG0CmHEEsXXmRO?=
- =?us-ascii?Q?T6dZN1g/U0k2WmfS3DN3Kw1kfWD0dx0MAaXGjMP129X4iNAzXR36s+vXBG4O?=
- =?us-ascii?Q?XauLa1/HGl9qCdM8bGHzHLql7rZen5+Uva5CYgu23wF4fkKnKtn+QL+z7ars?=
- =?us-ascii?Q?8ksS7rbs8Doareridxdpt9nKKlpWwAt6j8tGp1hys+bFqDUJgOItIRnv3GQa?=
- =?us-ascii?Q?BENqtW7u6L+/InatpZKVIR7GuGJAcJYGjdLBljGa23ALx+JQxxft43f5Dmi9?=
- =?us-ascii?Q?CtvKls+y02/3CSTcL1udzPTJd9TQpq9SN+um?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2025 13:29:36.3733 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d392e3a-37f9-4bde-834f-08ddb3ec5448
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F68.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9114
+ ARA:13230040|376014|7416014|1800799024|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NFJEV1JieVAwaytlMHVHY0dVSHcyZ1lSd05xM2xPRmlBY3hFUmxJUDAzdi8z?=
+ =?utf-8?B?NFdhK0JVaVdhVVNHNlUzT2c5c1d1K1R3TGo2RDU2REIwUktERC9Xc3JqQ2h4?=
+ =?utf-8?B?NlY2SDR4VUwvWjFxdnM1eksyTXBhUm9ZaGprbVk4MFg3RlpuS1MzRVA0Rjdw?=
+ =?utf-8?B?Uzd4dGx0WVBiT2VKRzlvdk5yNWJHdnB1Y1pkdGdKUWRiNDFjdndZL2RYbkgw?=
+ =?utf-8?B?OGlZaURJRHFGNHpnL2N6L0JFditDNE9EbVhlbUNBMWl0NVllYU9rQkxqNFFV?=
+ =?utf-8?B?VFRnVVhlemhmMEFKVDNMaUJaalNCcHNXOUpPaDROZjkzWkI5VjFjdEpweHM3?=
+ =?utf-8?B?enlyNEZvS3BiUHNpL2huVy9PSjBoRy9nTzJndTRNNU9jTytLY1p6a0pjYlEr?=
+ =?utf-8?B?dWZWMFRuLzNoUkU3bjA5RW8vZ2lidEJ3YUxJNWREbnprbFprTG54UVg2WTFi?=
+ =?utf-8?B?c1F4dVRSVDU0ckhuNlc5Mm9NZEtTRUowbThvMEdQbkZNNWQyTkFhUGM5cjhM?=
+ =?utf-8?B?SWg5THEzYXM4aFd4ZVdvUzNRL0pxRXVFN2Z6SjQ4cHF6ei9XbUlmUmVERDV2?=
+ =?utf-8?B?Y0ZXWk5LU3BtRUVvKzdJNjI5eEhEUkVKUk1pbERLaFh4RzBFVmd5SDYrT1Ft?=
+ =?utf-8?B?bWFmazZGK1MvYWhod2hSUGQveGF4cHM3cXNNcDJaUlJiZFFqZTVwVEZHaGww?=
+ =?utf-8?B?RDdUekk1MGI4MkhNNmFqT1NrSTVEVVB0UDFNcUd2bFpQVzRGVlpVOXJOUUUv?=
+ =?utf-8?B?YWRaZWZzM1Jqa1U1NEs5YWJvMjVZb2NVVitXM2g2YzF2bW8zbklLSS9GT2JU?=
+ =?utf-8?B?bXlJRzdSNisyZUFRaStSUWVGOUNEWG9PZDB6V3VSRlpIZXZWMWFiTWFDbXgr?=
+ =?utf-8?B?U0VJZ25idzRtc0QweGU4eVBlVWVCMjBuUGlwWVdDYmVOT0NvaklEYWJPNXhT?=
+ =?utf-8?B?WHZDa01WalNoVVVWNHd5WXJJZW45NWxkVVFuM0ZINWd5NmwweFNzNVIydTls?=
+ =?utf-8?B?WVkxeDJSUDJjUGxacW9xSFhjQ3JmZEFORFpadUV0MnFmL05qalQ0TnhYcmRM?=
+ =?utf-8?B?VHJwUDFZREJIbGg1UC9PeGVUb1hzbEVuQm5zTmsvaDNzREVFWklBR3VBZllU?=
+ =?utf-8?B?N3oyVHFqRkRRUkRIbDVyMUEyQkttYTZLdDUvcmJtTFh0WWlSRHIwVWowRmRL?=
+ =?utf-8?B?VXVEV0thQW45bDZkb0hobG5hWWwxaHR1dlpTemxXbjVYTGNrZVpBWGkwbTFN?=
+ =?utf-8?B?M1JIdmZkeDZxMWNpK3JwMi9wbDdPNXBKZVdMQWZEdVdZY0JPWFovMFpxS0dm?=
+ =?utf-8?B?TmpSMTU4OFBKc3Y4ejVjYlJGV0dRMFE2ODFKeEF4WERsWG1FWjJUN01SZzFs?=
+ =?utf-8?B?RUNIRU9Sa3pUQS81QjRVdjRrbFRFNm1wd0kwdlRIeEllYjFqbDR3TjBILzB6?=
+ =?utf-8?B?UmZpbWFiZjVCUEhTa0F5aDRXK3JnWWRvNjUvZEpHemRsV2JwcjhHYS91a1lO?=
+ =?utf-8?B?VUZqS09jU2p2Qm5NcmNVTnZRbm1YdFJySHc4S0JjbWJQN1hiaXdrV2VKb0oy?=
+ =?utf-8?B?OHMwL1Z3dytkQ2xKVEpRb3hWa0ptOGNzalB2WmI4SlBzSEVLTG5YQmk3V1gy?=
+ =?utf-8?B?ZStRb0gzM2Jlb2tuMlV3VytEYmh5a2ZCcU9sUmJ1SjJQdVM1QnpZSllVeEo3?=
+ =?utf-8?B?OVUvUGNXSUJMV1ArRFJvcXNDd0FzRlFtMU5YUy9PV0dLU3FRNG1vN2gxQ2wv?=
+ =?utf-8?B?NVkyT1RwamU4ZERQWktrTk9DNXZ0eVgwaHFWWVAxamJ3UmRSdlpzeC9DOXF4?=
+ =?utf-8?Q?ONxwuo8VuZu6nmnWuZvD5g1I1gIFzQL8Zfn9A=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cHB3dFI4SHpNVDBoR1hHUTdSc0Q1RFNGMmhiSG1TSnR5TlMwK1B0NlZkQ1RW?=
+ =?utf-8?B?NTIzcDJIVEZZNjFXL015OWFYVFVPcWt0R1dsOXhOc1BrWFUxbk9XdE4vR1Iv?=
+ =?utf-8?B?TVpsRFBMNzFZV2JtTVU3ZDkycG5QeXRaNmJ5OUQzZ2s0RklCSU1qdU1LNTNQ?=
+ =?utf-8?B?MkRZQThFV0sveWlNcktrY0lwSjJpakt2UU5Fd0J3dWwrWVMybkZIaVBRQ2Ix?=
+ =?utf-8?B?NDdWeGFZTG1iUEJ0RVowdnNhQk5iWWU3R25rNzdKaEQ0cThiTEx4ZFNxUk1L?=
+ =?utf-8?B?SDF3cmtQbENaK0xSRUs0TVVMSURUUUo0K3dycitTV2kwTmwveFJmYkFYTGQz?=
+ =?utf-8?B?YkRoWUIwb3E4OEkxdkx1bElLQ0prN0pyNUJhTFZyRUs5Nkx3Y0xtOUdpVCsv?=
+ =?utf-8?B?dGZaTjdEY3JpcjZWSmt1cWw3dWFGN095Mk5TblBIdmdoNWdTZUgwTDVLVkV2?=
+ =?utf-8?B?cDh3bHZsSzA4ZzdSbk9XSWlzcVp5UFdVK0dDV2NUTU1lU1Vsanl1SHoxM09o?=
+ =?utf-8?B?c0piR1VDbjNXdVpVRnhEcDRNNG9MOXlSdmtlR3lnUUhRKzdZS2dBWnRaUWJ4?=
+ =?utf-8?B?eTJlSG5XK1dsNEtHdnhRbXd2cHhHRUJlMmFheGNTRmFRS3daRFFuQkN0RjFW?=
+ =?utf-8?B?Q1VicnlWS0hjV2U4SStvdTllWTJpbzA5SHBUL2M5WHN4dnVSTi9NNk0yVW5B?=
+ =?utf-8?B?VU5KZzRBQWd4MXpJV2pCamZiWkFUYmJtb293ekZsTEVscXp2WmZocjdGVG9n?=
+ =?utf-8?B?aVpsT1A3K3B4dEVhbzJFL3loUDVyVS8rRkNtZ1huQ1ExVlQ5RlFZK0FMdllm?=
+ =?utf-8?B?QzN6anp2cHcvWVFiQWh3VW9JeVdsc2NEVmV4ZFJ1WHUxV2pTUzlzQUhKNlRF?=
+ =?utf-8?B?SzhwUFR4VmlaeUNPQTFBaEttRlBoeXE0Uy9jOTBmREVGTFNLWTJvT1g0MlFt?=
+ =?utf-8?B?U2VzdTY5VVVHa2llbThDM3krQ3RaZ3l3OWhDakp6cklLem5EeW02Zmo5Q2ZH?=
+ =?utf-8?B?eGhzbU5Dci8yQ3FtZmI4STR1Z0kwRlZEMWtjUUwwdHQ0SjY2RDJrZTkxUDlz?=
+ =?utf-8?B?VTRJazZ6THBiUjZBZ1BzSXl0TExwOHZiTmtmbUZXWHhIRFVJMnNyam1RZmVD?=
+ =?utf-8?B?T2kwaVBjbVovK0N6L3FjMTdMNHdLODdENFRwMERLMjJnUFcyWnV4VmhxMThk?=
+ =?utf-8?B?cGZJSnY0MDR2S1RsbG5WTGFVZUVmYVVPQjI0eFUxNzBMWG9HYm1od0pIbk9p?=
+ =?utf-8?B?YXprVlZzTGZEd1ZRMjVCQlBLM08yTEFPdzFwbFQ0RDljUUwzTlRPWEd0cGYz?=
+ =?utf-8?B?ejF5ZnVhZnQ0L0RSLzZNVmxaUVgvMHYwVFRVa0lYVlU4R1p1cGxITkVMOTdC?=
+ =?utf-8?B?SFgrMW9hWVBBcFZINVgyeWVWcVdsWlFIeUdBTmkzUHJCRFZORnhPZFdGZ3py?=
+ =?utf-8?B?OTdJTHdYdGpIOFNoRzMxNHMvbjBxUUYxU3hzQ3lOay9nWTR2dXZZaWZ3S1Ba?=
+ =?utf-8?B?ZjZYeEx4WE9jMnh5L3R2bU14bFp4bitpWHQveW5EZUtYTERZN2tVRjQzb3lF?=
+ =?utf-8?B?VXVoZlB0aXFkTkJ1Wk8wQVd1WHY3QnN4aTdtVUNHU3dKNXZrNmZ2cGpMdGNk?=
+ =?utf-8?B?aXRyQVJ5cHFOSXA4c2tScVNwejBoVXBHUW52c3ZpL3RTMzNRQzVxWS9OK1pK?=
+ =?utf-8?B?NGdjckVOeExwc3VFcEdNMXZXQWhjWjVPYk1NbDcwYTlZbHZNWmxmY1BlZklq?=
+ =?utf-8?B?ZUR1WVFnTTV1S0htcmJ1T2ozd0JXOFA1bkVnZUZXcEdQTm9VNFpTL29lYWYy?=
+ =?utf-8?B?QnFtWGlTNnNxSXhkdnhvSTBMZVZnV1dKR1owTEFHbllNWmVNMzdydGlNS3pl?=
+ =?utf-8?B?M0g1NStiSno4NkhHMHIvT3pUMks4bFd2NTk3Qi9ocXZBT2tvWStZUFFhQVpy?=
+ =?utf-8?B?NzdZdGhKbWJ4dnpDL2pwNFQ1d0xVUTl1QmZhWk4zWTA5aXliVHJ6UitnRXNy?=
+ =?utf-8?B?czJ0a2FuUXVia2N5eDFwZ2Z0VU83VWxYUVFoTGdTaTFPVnd6L3JObDZzSVVH?=
+ =?utf-8?B?NlpPQmR1WVJwcFQvU0xvaWY3OXMwSDBoaVhsT2cvMFU4cnlJOUlzV3l0TCtS?=
+ =?utf-8?B?R0t4aFd0OXZVNkpXZkEyYmI2WTJWSk1WUml2b04rRGJ0U3BVdE50alVVSmFX?=
+ =?utf-8?Q?+c+DsLIRw4yc3jn4uVqQq7s=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 809cd2b9-0ada-40fa-72c5-08ddb3ec675e
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2025 13:30:08.6584 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LOV7nqlbECjTWMAOq+LKA5tXhSquc3xrXz6ZkCMBItII3DhNIflNCCnX4PfewT71y8/knpB33BeKOFeOpmPYfRgoQ24tkeoSHJXpmFwN1iA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB9409
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,133 +183,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Separate code to own function to be able to add new enhancement format.
+I think I can fix this patch or the patchset of Heinrich Schuchardt
+could be applied
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Mikhail Kshevetskiy
 
- drivers/firmware/firmware-zynqmp.c | 60 +++++++++++++++++-------------
- include/zynqmp_firmware.h          |  9 +++++
- 2 files changed, 44 insertions(+), 25 deletions(-)
-
-diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
-index 2940181e83e9..d18ae523b6bc 100644
---- a/drivers/firmware/firmware-zynqmp.c
-+++ b/drivers/firmware/firmware-zynqmp.c
-@@ -422,6 +422,30 @@ U_BOOT_DRIVER(zynqmp_power) = {
- };
- #endif
- 
-+smc_call_handler_t __data smc_call_handler;
-+
-+static int smc_call_legacy(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
-+			   u32 arg3, u32 *ret_payload)
-+{
-+	struct pt_regs regs;
-+
-+	regs.regs[0] = PM_SIP_SVC | api_id;
-+	regs.regs[1] = ((u64)arg1 << 32) | arg0;
-+	regs.regs[2] = ((u64)arg3 << 32) | arg2;
-+
-+	smc_call(&regs);
-+
-+	if (ret_payload) {
-+		ret_payload[0] = (u32)regs.regs[0];
-+		ret_payload[1] = upper_32_bits(regs.regs[0]);
-+		ret_payload[2] = (u32)regs.regs[1];
-+		ret_payload[3] = upper_32_bits(regs.regs[1]);
-+		ret_payload[4] = (u32)regs.regs[2];
-+	}
-+
-+	return (ret_payload) ? ret_payload[0] : 0;
-+}
-+
- int __maybe_unused xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
- 				     u32 arg3, u32 *ret_payload)
- {
-@@ -450,38 +474,20 @@ int __maybe_unused xilinx_pm_request(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
- 			      PAYLOAD_ARG_CNT);
- 		if (ret)
- 			return ret;
-+
-+		return (ret_payload) ? ret_payload[0] : 0;
- #else
- 		return -EPERM;
- #endif
--	} else {
--		/*
--		 * Added SIP service call Function Identifier
--		 * Make sure to stay in x0 register
--		 */
--		struct pt_regs regs;
--
--		regs.regs[0] = PM_SIP_SVC | api_id;
--		regs.regs[1] = ((u64)arg1 << 32) | arg0;
--		regs.regs[2] = ((u64)arg3 << 32) | arg2;
--
--		smc_call(&regs);
--
--		if (ret_payload) {
--			ret_payload[0] = (u32)regs.regs[0];
--			ret_payload[1] = upper_32_bits(regs.regs[0]);
--			ret_payload[2] = (u32)regs.regs[1];
--			ret_payload[3] = upper_32_bits(regs.regs[1]);
--			ret_payload[4] = (u32)regs.regs[2];
--		}
--
- 	}
--	return (ret_payload) ? ret_payload[0] : 0;
-+
-+	return smc_call_handler(api_id, arg0, arg1, arg2, arg3, ret_payload);
- }
- 
- static const struct udevice_id zynqmp_firmware_ids[] = {
--	{ .compatible = "xlnx,zynqmp-firmware" },
--	{ .compatible = "xlnx,versal-firmware"},
--	{ .compatible = "xlnx,versal-net-firmware"},
-+	{ .compatible = "xlnx,zynqmp-firmware", .data = (ulong)smc_call_legacy },
-+	{ .compatible = "xlnx,versal-firmware", .data = (ulong)smc_call_legacy},
-+	{ .compatible = "xlnx,versal-net-firmware", .data = (ulong)smc_call_legacy },
- 	{ }
- };
- 
-@@ -490,6 +496,10 @@ static int zynqmp_firmware_bind(struct udevice *dev)
- 	int ret;
- 	struct udevice *child;
- 
-+	smc_call_handler = (smc_call_handler_t)dev_get_driver_data(dev);
-+	if (!smc_call_handler)
-+		return -EINVAL;
-+
- 	if ((IS_ENABLED(CONFIG_XPL_BUILD) &&
- 	     IS_ENABLED(CONFIG_SPL_POWER_DOMAIN) &&
- 	     IS_ENABLED(CONFIG_ZYNQMP_POWER_DOMAIN)) ||
-diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
-index dc06abc52fce..7ef8a58847f4 100644
---- a/include/zynqmp_firmware.h
-+++ b/include/zynqmp_firmware.h
-@@ -8,6 +8,8 @@
- #ifndef _ZYNQMP_FIRMWARE_H_
- #define _ZYNQMP_FIRMWARE_H_
- 
-+#include <compiler.h>
-+
- enum pm_api_id {
- 	PM_GET_API_VERSION = 1,
- 	PM_SET_CONFIGURATION = 2,
-@@ -512,4 +514,11 @@ struct zynqmp_ipi_msg {
- #define PM_REG_PMC_GLOBAL_NODE		0x30000004
- #define PMC_MULTI_BOOT_MODE_REG_OFFSET	0x4
- 
-+#define __data __section(".data")
-+
-+typedef int (*smc_call_handler_t)(u32 api_id, u32 arg0, u32 arg1, u32 arg2,
-+				  u32 arg3, u32 *ret_payload);
-+
-+extern smc_call_handler_t __data smc_call_handler;
-+
- #endif /* _ZYNQMP_FIRMWARE_H_ */
--- 
-2.43.0
-
-base-commit: aca610317c621731ef48c9b5bd1a865be68685cd
+On 25.06.2025 16:27, Michal Simek wrote:
+> [You don't often get email from monstr@monstr.eu. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>
+> Hi Tom,
+>
+> út 24. 6. 2025 v 14:59 odesílatel Heinrich Schuchardt
+> <xypron.glpk@gmx.de> napsal:
+>> On 10.06.25 11:56, Mikhail Kshevetskiy wrote:
+>>> The current code have two issues:
+>>> 1) ineffective NULL pointer check
+>>>
+>>>       str = strchr(str, '\0') + 1
+>>>       if (!str || ...
+>>>
+>>>     The str here will never be NULL (because we add 1 to result of strchr())
+>>>
+>>> 2) strchr() may go out of the buffer for the special forms of name variable.
+>>>     It's better use memchr() function here.
+>>>
+>>>     According to the code the property is a sequence of C-string like
+>>>     shown below:
+>>>
+>>>       'h', 'e', 'l', 'l', 'o', '\0', 'w', 'o', 'r', 'l', 'd', '\0', '!', '\0'
+>>>
+>>>     index is the string number we are interested, so
+>>>
+>>>       index = 0   =>  "hello",
+>>>       index = 1   =>  "world",
+>>>       index = 2   =>  "!"
+>>>
+>>>     The issue will arrise if last string for some reason have no terminating
+>>>     '\0' character. This can happen for damaged or specially crafted dtb.
+>>>
+>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>>> Reviewed-by: Tom Rini <trini@konsulko.com>
+>>> ---
+>>>   common/spl/spl_fit.c | 5 +++--
+>>>   1 file changed, 3 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+>>> index 86506d6905c..ab277bb2baa 100644
+>>> --- a/common/spl/spl_fit.c
+>>> +++ b/common/spl/spl_fit.c
+>>> @@ -86,11 +86,12 @@ static int spl_fit_get_image_name(const struct spl_fit_info *ctx,
+>>>
+>>>       str = name;
+>>>       for (i = 0; i < index; i++) {
+>>> -             str = strchr(str, '\0') + 1;
+>>> -             if (!str || (str - name >= len)) {
+>>> +             str = memchr(str, '\0', name + len - str);
+>>> +             if (!str) {
+>>>                       found = false;
+>>>                       break;
+>>>               }
+>>> +             str++;
+>>>       }
+>>>
+>>>       if (!found && CONFIG_IS_ENABLED(SYSINFO) && !sysinfo_get(&sysinfo)) {
+>> Since this patch (commit 3704b888a4cabac8) on the Milk-V Mars board I
+>> see a message "cannot find image node ''" and on some builds I have seen
+>> boot failures.
+>>
+>> With your patch and some debug messages:
+>>
+>> U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:45:11
+>> +0200)
+>> DDR version: dc2e84f0.
+>> Trying to boot from MMC2
+>> spl_fit_get_image_name(): index = 0, name = 'opensbi' len = 8
+>> spl_fit_get_image_name(): outname = 'opensbi'
+>> spl_fit_get_image_name(): index = 0, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = 'uboot'
+>> spl_fit_get_image_name(): index = 0, name = 'fdt-2' len = 6
+>> spl_fit_get_image_name(): outname = 'fdt-2'
+>> spl_fit_get_image_name(): index = 0, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = 'uboot'
+>> spl_fit_get_image_name(): index = 0, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = 'uboot'
+>> spl_fit_get_image_name(): index = 1, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = ''
+>> cannot find image node '': -1
+>>
+>>
+>> Before that patch:
+>>
+>> U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:34:50
+>> +0200)
+>> DDR version: dc2e84f0.
+>> Trying to boot from MMC2
+>> spl_fit_get_image_name(): index = 0, name = 'opensbi' len = 8
+>> spl_fit_get_image_name(): outname = 'opensbi'
+>> spl_fit_get_image_name(): index = 0, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = 'uboot'
+>> spl_fit_get_image_name(): index = 0, name = 'fdt-2' len = 6
+>> spl_fit_get_image_name(): outname = 'fdt-2'
+>> spl_fit_get_image_name(): index = 0, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = 'uboot'
+>> spl_fit_get_image_name(): index = 0, name = 'uboot' len = 6
+>> spl_fit_get_image_name(): outname = 'uboot'
+>> spl_fit_get_image_name(): index = 1, name = 'uboot' len = 6
+>> no string for index 1
+>>
+>>
+>> With your patch spl_fit_get_image_name() does not detect that there is
+>> no property at index 1 and does not return -E2BIG. Instead it signals
+>> the property is an empty string and returns 0 which is not expected.
+>>
+> I also see random chars printed on the console on SOM with SPL flow.
+> This patch should be reverted.
+>
+> Thanks,
+> Michal
+>
+> --
+> Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+> w: http://www.monstr.eu/ p: +42-0-721842854
+> Maintainer of Linux kernel - Xilinx Microblaze
+> Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+> U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
