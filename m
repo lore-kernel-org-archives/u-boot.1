@@ -4,62 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E16C77B7C
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 15:56:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417C1C7EE2A
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 15:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DD8282D83;
-	Wed, 25 Jun 2025 17:56:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C684282D83;
+	Wed, 25 Jun 2025 17:57:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1750866985;
-	bh=lKKsqjnF7poCDAojJsA1hxiPXc7BBdWxPQeBr0Fg8vw=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=C8E+sAxee0tLtnUNbzB3dhPxUftBr/eNpX80N7q9W4F0JlupfCWL1AvcmJA4auHzE
-	 hzqBOaWqqUsMvxuGj5TGiBItbjX/PvFQ4pz7ynADmhogzOLck/iZPXHFhod3LAMtGP
-	 O8WpDOGVY7VuDhM0YmE6BKX1iJUWfFOMg/e4lcGTqPgFumI4GbZMsMglEOpY/88r64
-	 3r654fAnvVXDVZg1wH3yKZ2oE8WqCNT0NLKRoNO4A3hgdFo7Zb1HVGeq4q6GXSP5H0
-	 WCPpJ1hwTrxi6dhuUwlxOrRUD1uMT/Yqmt55eNHVY8oimnxdpAzAvlaz35ktuyghCo
-	 8JgHANoivzqhg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A1DF582D88; Wed, 25 Jun 2025 17:56:24 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A038D82CFA
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 17:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="ejCDP2dw"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1CDDA1039BD02; 
- Wed, 25 Jun 2025 17:56:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1750866973; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=lKKsqjnF7poCDAojJsA1hxiPXc7BBdWxPQeBr0Fg8vw=;
- b=ejCDP2dwHgMN6NOrh6lCrkqSd6+muH4pT+N3/eBo8OozZSAyWyAADkWZjIdJl19gkSScV6
- eUqMhQwxlsqqfJdyAIhIFX6oD1QmlaJPuMYgnkIPvqG4GBMkzhJBckIHLx93iyYCTotMhk
- JIITEeMshzkMSTGqEiuVlG+dAJ4eOClO549eO65dHPy3uJ1+jpoMunnF3OoTvIgpjm/7R2
- kVFKdgAtrs9fxcfTz1Z56UyNkisX7d4LTIUZAlgoAIT8SotjmInEjerimTCUinxU3BeYe3
- 5138HmcmrwKQ16t6x8+tndTYqmCWiI1/koqliYiYqRKWMIauWkhbH4QLV6JRCg==
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, albert.aribaud@3adev.fr,
- Alison Wang <alison.wang@nxp.com>, Anatolij Gustschin <agust@denx.de>,
- u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH] config: nxp: vf610: Remove CONFIG_SYS_MALLOC_F_LEN
-Date: Wed, 25 Jun 2025 17:55:51 +0200
-Message-Id: <20250625155551.1759399-1-lukma@denx.de>
-X-Mailer: git-send-email 2.39.5
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l+ghBnAU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D934082D88; Wed, 25 Jun 2025 17:57:45 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 888CD82CFA
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 17:57:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-60bd30dd387so15005eaf.3
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 08:57:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1750867060; x=1751471860; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xaTAFrDNNavXZfqQm8SBvfzXSsMMdGmsgmqRpYxlsFA=;
+ b=l+ghBnAU4vLC1MlrvNfzSRlYYzZCM4UVA8Z7EKWUaKspOxSeTmqsRLP+ln+X7TFHjl
+ SLRdoRJajby9vAa0Et8Cj+zXKco/UVoZsyscMbV0KsNCeEhAftRq3r3RYKBx8GwgNpXA
+ UJjb/7ztrWucnx1uI3UsZDVJAdmZ9aWPJDR9Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750867060; x=1751471860;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xaTAFrDNNavXZfqQm8SBvfzXSsMMdGmsgmqRpYxlsFA=;
+ b=hEVoyz8reHti6+jzl7/Ko5Rc0E4HoKpJ7HCmPZnzebIDBh4H77+8kmK7SwPX/KYYq7
+ H7fcsa7cAIdRQex26hXPlYIC8fnFYR+yl0rzSV4Xo38l+f2lWl4ZcVnOC3ZgAzXguqVm
+ QTr7juNruK4jyfMp3fjlTgElH4TV4rwkCeoJ0ayv3gQc6YVDzrN8EBgDzgV5ZbbJgo1O
+ N/lqHFM1KNn/6UpW7ccLR1+0wtqEcPKO8VzVnrGD9qL3f6yeDwDGe+NCa+HBj17UrHi7
+ maFSwR9hs9K4U0r0AX/mj4xnIcmRyTAm4//cpVT/7fxAW+dQM02Fvx/gxMmiDNuunPWM
+ fsgQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXtVosMlgxTiho3oHEp/USLU2R/C3RATMnSh2G2HQYLoPQCEaqgMAzXkO6iSObh1HQh6k/tg7M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3q4S27Akw29qFyZwWqBzqMmyLuL5uP2Xba7x40E5OgSzfMxoH
+ 1UEThFhsxl4edymhnwjp2o1aOCuCLbMRQNXmg/GPy0YJJSScI9SwRj6rBFhE6ku0Bp8=
+X-Gm-Gg: ASbGncve62/8HROBhtfqgOr/hohQbo0qKa84VGpTGl1KSHghvOuGrld4ovrvEv+nE4n
+ zsV0RR5K8zRsbVG7xAzWtHl9V951K/1T14cWvBJYzTNLtZE+KJW+QS8NPLvBH7+J9P+5uQbhwjc
+ xA0fRa5aiQh671XiSvNRCWHCDQSEb6Y4pqdNBaVbyHaTZ/S93SV+vSyWWRq0DMcViyuk4y0HG51
+ 7FchaGy8v/VpK+b2cnEk8YXiReH4UX+GDgGIrurepLuCUdT0ChvtvHEE4JUBkxGM/39vrf34RYY
+ H1RUJSPucVGXkf7LWplY7BJ//UX+IVQK5QtZvq8TTtlheXhNrd6kTAPiM6Lp8aT6JyWF43WhHFH
+ iDWch/vJkrRf5sqs0NcWDt+T1wWNwoS2gGg==
+X-Google-Smtp-Source: AGHT+IG9vqY3V7R3lPkmmKVm8Ss67dgwlCQvtZJw1o82ALfTsNxEGnHru1gYgCnA67E8RTYZQON4Jw==
+X-Received: by 2002:a05:6820:2908:b0:611:a9b3:1d6b with SMTP id
+ 006d021491bc7-611a9b332d4mr531287eaf.7.1750867060193; 
+ Wed, 25 Jun 2025 08:57:40 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6115b7ca185sm1621617eaf.30.2025.06.25.08.57.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Jun 2025 08:57:39 -0700 (PDT)
+Date: Wed, 25 Jun 2025 09:57:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Safae Ouajih <souajih@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] cmd: abootimg: Prevent use of unintialised variable
+Message-ID: <20250625155737.GQ4003484@bill-the-cat>
+References: <20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="P9k4BxT9KJS+dfqa"
+Content-Disposition: inline
+In-Reply-To: <20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,74 +98,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit c69103218ee4 ("i2c: mxc_i2c: add DM_FLAG_PRE_RELOC flag")
-has enabled by default the i2c initialization in the pre-relocation
-phase.
-It turned out that vf610 based boards had too small SYS_MALLOC_F_LEN
-pool size.
 
-As a solution the explicit value of CONFIG_SYS_MALLOC_F_LEN for all
-vf610 based boards has been removed from their configs.
+--P9k4BxT9KJS+dfqa
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Instead, the default value of 0x2000 is now used, which causes boards
-to work correctly again. This approach has been tested on BK4 device.
+On Wed, Jun 25, 2025 at 04:52:41PM +0100, Andrew Goodbody wrote:
 
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
----
- configs/bk4r1_defconfig         | 1 -
- configs/pcm052_defconfig        | 1 -
- configs/vf610twr_defconfig      | 1 -
- configs/vf610twr_nand_defconfig | 1 -
- 4 files changed, 4 deletions(-)
+> vhdr can be used when not initialised so detect this condition
+> and exit early to prevent the problem.
+>=20
+> This issue was found with Smatch.
+>=20
+> Fixes: 636da2039aea (android: boot: support boot image header version 3 a=
+nd 4)
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
-diff --git a/configs/bk4r1_defconfig b/configs/bk4r1_defconfig
-index 3ed587a1060..2d9fd914900 100644
---- a/configs/bk4r1_defconfig
-+++ b/configs/bk4r1_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_VF610=y
- CONFIG_TEXT_BASE=0x3f401000
- CONFIG_SYS_MALLOC_LEN=0x402000
--CONFIG_SYS_MALLOC_F_LEN=0x800
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x200000
-diff --git a/configs/pcm052_defconfig b/configs/pcm052_defconfig
-index d0d558ab11a..81d703ec679 100644
---- a/configs/pcm052_defconfig
-+++ b/configs/pcm052_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_VF610=y
- CONFIG_TEXT_BASE=0x3f401000
- CONFIG_SYS_MALLOC_LEN=0x202000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xA0000
-diff --git a/configs/vf610twr_defconfig b/configs/vf610twr_defconfig
-index c823cb0a30e..8129484513d 100644
---- a/configs/vf610twr_defconfig
-+++ b/configs/vf610twr_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_VF610=y
- CONFIG_TEXT_BASE=0x3f401000
- CONFIG_SYS_MALLOC_LEN=0x202000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xC0000
-diff --git a/configs/vf610twr_nand_defconfig b/configs/vf610twr_nand_defconfig
-index 84e73c0c665..51365990d0f 100644
---- a/configs/vf610twr_nand_defconfig
-+++ b/configs/vf610twr_nand_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_VF610=y
- CONFIG_TEXT_BASE=0x3f401000
- CONFIG_SYS_MALLOC_LEN=0x0220000
--CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x180000
--- 
-2.39.5
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--P9k4BxT9KJS+dfqa
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhcHG0ACgkQFHw5/5Y0
+tyyEeQv/bFgSLTQLijfV/Qj+qUtpyEaHT6ITAPZSX7qrxNshUgHSHX0imzG5XOLP
+FHrAQgj3ZhvkO1KNFl/3v+KhXoIPLJZyjOCUUvix1+jCf747Gh+Y7Nd/nAv3BJR8
+lyE1tw698lZD6RWaYMFTwpe58uJyb+oso2tter+x7gkyWEMNnXh1Lf+k3RYE05Ot
+77MRN0fIoJoWo4tT5j1pNIRQXd57fgcFsmnIpyBKDzFn1CBxveNrlSCJyz0Vac+K
+IadHiPcnJRIyZ4aayZZytYenNyGXlAs2lIgJlDkopgfIfucSwWx2AFBYgBoOqwLH
+cZ1B0KCGUOEc/cHzpmRqKqE19hkM5HHpwm03ASycqTYzxcsru8hSsRxaXO1ctVbz
+73laANAl+N7y3dUpC2iS/4ViB/fd5Z4ZS6pd5gnnfpMnsslk3dcyiuRSyMxkfVno
+xlhuHN4GCVR516eavIPOeB6OenfHCx0dtNCLqf7RBZk9PbRtEdetLxWdKHXsYZrK
+um/CB2Q3
+=K80f
+-----END PGP SIGNATURE-----
+
+--P9k4BxT9KJS+dfqa--
