@@ -4,115 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79446C7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 14:18:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A25CC7EE2A
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 14:19:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3CA782CFA;
-	Wed, 25 Jun 2025 16:18:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 12B9082D21;
+	Wed, 25 Jun 2025 16:19:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NOAxRFUg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K7/slELP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DF5182D21; Wed, 25 Jun 2025 16:18:35 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9983E803CC; Wed, 25 Jun 2025 16:19:04 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F562803CC
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:18:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D10B82D21
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:19:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1750861109; x=1751465909; i=xypron.glpk@gmx.de;
- bh=/YS87+SIzCVEn5BJaQDNwAgbOPYwY6Y1tVVnYcRX80s=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=NOAxRFUgcefzVlQc0m6Yd7Vz73uyOmpOvXOb2uuv73rhbHPHUNJR2BkaRGZ2N45t
- uGKAIK1dpZP8o+KhvNCk+Edhis1eQX5tDmJT7UcMkpL2VlLu9cj8hd8nclDBWHnmQ
- EFGnl8/uy7fKFFZDPMybYzQwDcAoY0nv2By7gXeeAPXvXUQ0tJAj3KlXTKuHI/jc9
- iq5ahsSEXaIGrGrUVyFOKyghYe7ASb6hGYB+JS/wAtpFKCJBaFGvZv2n6fK+FB4Rv
- 7LYrWALMPxZP7yVMBbTvFKxKPy8kfl+mcF3mZt+8x4irn7fRcMpXpW+Cet50k7ftz
- NxhEVvYaNikMNeCziA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MUXpK-1uLjnB0QWu-00TRjE; Wed, 25
- Jun 2025 16:18:29 +0200
-Message-ID: <012ee7c9-6794-485e-8e0a-5ed0ff23c045@gmx.de>
-Date: Wed, 25 Jun 2025 16:18:20 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7382ffcb373so1092020a34.0
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 07:19:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1750861139; x=1751465939; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ekN6KIScEKQBadb/BoeHyb98IC4XnqtvJ2JzTZiD7FI=;
+ b=K7/slELP2BDNsS05FNn5k0g/uvMHBQxM1q+cmUizpTu+nR4leHSWQkKWm3qnE/ofFl
+ Q26W6pnny5Pr6DtkIxdPVY2JRn1jx3ojuRsNi/QGl49Z+bQwtGj9jM2Cs9oauU/EQLfP
+ sRtQoFlQKabnJFFXKfmcKd6Cjhjzbxexk1/Cw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750861139; x=1751465939;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ekN6KIScEKQBadb/BoeHyb98IC4XnqtvJ2JzTZiD7FI=;
+ b=bWHpBMc3di5qAdAij6Kz0H1WyRPNKJsDJBOvlQg+GcjGqKbeFlrytn68ygT0lxR6vz
+ LpH9gxycLJgOq9jcP2JAupFu4+GnNp4/FrdJPZCTiIyogs72uTU0ltW2q/HGKre7gQED
+ rmXk9OIcJpYzbzi15pfvk4Grr//Mhzgsva5aylgZbtk/y1UXrvNanbFy6rNMLw8VvY3j
+ saWqn9l/M+599IBY/xJSPk1pu6Pz4c574uv0M1g5uU2UeVKElbuLU2Zb5zZA7ZOaEDaQ
+ ah1t0XGqcGPG/bQc88HjY3ahfl3JUpovU+AEFtPgN0qE/QIGicyyaOzMcwDBJlELWhhB
+ 57Ag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW8EEJ6LiF0/JDuaoOMd/6SYDaIBDT3Wd6wzF+qoApM/L5QynQrP7H6AsmnWyEGSQgodpH1kDs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4dd7MOjMBHW0Sajhn2EOrEsq/+fAEGYLSog6oU5SBTUiUaXC7
+ 0WQsEICYfQ6ZcbqFdyyg/SX9rI4/3bgVRn9XTIaYGh0PZLjTUvn5cIxPmV1v8bDBkNE=
+X-Gm-Gg: ASbGncsY7wsWfeZMhViLkOOMvtu9nRkqJEKKn00VysGvEBV1ncgGlEOCUAP6LwqJG9p
+ Gdbv6Wy9Jyr4V3uZPBaHyLuE4sTJghlT/BPWjlm2tjWBHARl5ptVb1GcdEef0f/nwLZL40CXM0i
+ dCl85IZmHoxLP76z6H0nc7xth2XHbPeJ62TtbAodA5pYwK0vc+a1Yz/8Ntav7SR353zVvcI2Y4H
+ I6HNeFBKbnkd5lyUbNYQY8DHICUxzgE8l8pIK6Faai6X0qdKqXPr1UM/9js+2pLFACT06CYOsxl
+ rRA2p3yDnF0u8TMrHjvn4979HL5/8Jt9ui2txGpGKXO0lxpC8fjk9pIFvvCLIdpFro625tKG2Fn
+ btEbJJDGGDLTEJETb+hCQkqk=
+X-Google-Smtp-Source: AGHT+IEVotTEls9XJ0RbK+3FnCR0Aq+hv0FSPKhBZjdbm/v/2FLj5tT5+2pRaGhqL/kyXg6powmCzQ==
+X-Received: by 2002:a05:6830:8104:b0:739:fcb4:db29 with SMTP id
+ 46e09a7af769-73ae9079daamr95259a34.8.1750861138634; 
+ Wed, 25 Jun 2025 07:18:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73aab60c94fsm1519072a34.42.2025.06.25.07.18.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Jun 2025 07:18:57 -0700 (PDT)
+Date: Wed, 25 Jun 2025 08:18:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Michal Simek <monstr@monstr.eu>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Sam Edwards <cfsworks@gmail.com>,
+ Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, E Shattow <lucent@gmail.com>
+Subject: Re: [BUG] [PATCH v5 1/3] common/spl: fix potential out of buffer
+ access in spl_fit_get_image_name function
+Message-ID: <20250625141855.GO4003484@bill-the-cat>
+References: <20250610045054.1038235-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250610095632.1085431-1-mikhail.kshevetskiy@iopsys.eu>
+ <20250610095632.1085431-2-mikhail.kshevetskiy@iopsys.eu>
+ <38f5d078-3328-4bdb-9c95-4fb5fe89ddc2@gmx.de>
+ <CAHTX3dKdeM=NyjBJVRrZTLiuV3FuoyfvoLvGG8pPgA24o5g9qA@mail.gmail.com>
+ <4bd18e83-a12d-4f1b-ae6a-b6b7566128e0@iopsys.eu>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: efi_loader: Sporadic build failure: Error: file not found:
- <path>/capsule_esl_file
-To: "Anthony Pighin (Nokia)" <anthony.pighin@nokia.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>
-References: <BN0PR08MB6951841AE35F95A242553D91837BA@BN0PR08MB6951.namprd08.prod.outlook.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <BN0PR08MB6951841AE35F95A242553D91837BA@BN0PR08MB6951.namprd08.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:CnLixl7bsuFKxdAWYXbbAtHGsShQJLSoMZwpiPfiSzcumQjKEAo
- ZMgNzCFzNipdYINge1h2wsdlcKCJcY+NVaIMmBm/UyjPKzpuKLLs+g+U91rpYQuEmPLWI2P
- a4Djh/HXlFzae3Fk1FP2yYyD2mQL70hFjd0AWgnH+MbhlDF4DH8q5fiUOv5J0X+CDJXrwNl
- WOm+GkYubbUuhHjRhsc2w==
-UI-OutboundReport: notjunk:1;M01:P0:YhdLpLUJVXU=;wixRRyWYiM73rDSwW71+bX9BjRD
- +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
- Ag==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Lo2PZ28ucSHqOppX"
+Content-Disposition: inline
+In-Reply-To: <4bd18e83-a12d-4f1b-ae6a-b6b7566128e0@iopsys.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,39 +107,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.06.25 15:32, Anthony Pighin (Nokia) wrote:
-> Following the introduction of commit fd58c275f6ba524101ba0990e53f5a11ac3=
-90bd0,
-> we have seen sporadic build failures with the following footprint:
->=20
-> <path>/u-boot/2025.04/git/lib/efi_loader/efi_capsule_key.S:14:
-> Error: file not found: <path>/u-boot/2025.04/git/capsule_esl_file
->=20
-> Upstream commit 739ad58dbee874a3ad3bddd116e995212a254e07 also touched th=
-is area,
-> and we pulled it back into our build as a test. However, it still appear=
-s there is a missing
-> dependency:
->=20
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -87,7 +87,7 @@ $(objtree)/capsule_esl_file: FORCE
->          fi
->          $(call cmd,capsule_esl_gen)
->=20
-> -$(obj)/efi_capsule.o: $(objtree)/capsule_esl_file FORCE
-> +$(obj)/efi_capsule.o $(obj)/efi_capsule_key.o: $(srctree)/capsule_esl_f=
-ile FORCE
->   asflags-y +=3D -DCAPSULE_ESL_PATH=3D\"$(objtree)/capsule_esl_file\"
->   endif
->=20
-> Anthony
 
-Hello Anthony,
+--Lo2PZ28ucSHqOppX
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Could you, please, provide logs showing the error and the matching=20
-defconfig.
+On Wed, Jun 25, 2025 at 04:30:06PM +0300, Mikhail Kshevetskiy wrote:
+> I think I can fix this patch or the patchset of Heinrich Schuchardt
+> could be applied
+>=20
+> Mikhail Kshevetskiy
+>=20
+> On 25.06.2025 16:27, Michal Simek wrote:
+> > [You don't often get email from monstr@monstr.eu. Learn why this is imp=
+ortant at https://aka.ms/LearnAboutSenderIdentification ]
+> >
+> > Hi Tom,
+> >
+> > =FAt 24. 6. 2025 v 14:59 odes=EDlatel Heinrich Schuchardt
+> > <xypron.glpk@gmx.de> napsal:
+> >> On 10.06.25 11:56, Mikhail Kshevetskiy wrote:
+> >>> The current code have two issues:
+> >>> 1) ineffective NULL pointer check
+> >>>
+> >>>       str =3D strchr(str, '\0') + 1
+> >>>       if (!str || ...
+> >>>
+> >>>     The str here will never be NULL (because we add 1 to result of st=
+rchr())
+> >>>
+> >>> 2) strchr() may go out of the buffer for the special forms of name va=
+riable.
+> >>>     It's better use memchr() function here.
+> >>>
+> >>>     According to the code the property is a sequence of C-string like
+> >>>     shown below:
+> >>>
+> >>>       'h', 'e', 'l', 'l', 'o', '\0', 'w', 'o', 'r', 'l', 'd', '\0', '=
+!', '\0'
+> >>>
+> >>>     index is the string number we are interested, so
+> >>>
+> >>>       index =3D 0   =3D>  "hello",
+> >>>       index =3D 1   =3D>  "world",
+> >>>       index =3D 2   =3D>  "!"
+> >>>
+> >>>     The issue will arrise if last string for some reason have no term=
+inating
+> >>>     '\0' character. This can happen for damaged or specially crafted =
+dtb.
+> >>>
+> >>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> >>> Reviewed-by: Tom Rini <trini@konsulko.com>
+> >>> ---
+> >>>   common/spl/spl_fit.c | 5 +++--
+> >>>   1 file changed, 3 insertions(+), 2 deletions(-)
+> >>>
+> >>> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> >>> index 86506d6905c..ab277bb2baa 100644
+> >>> --- a/common/spl/spl_fit.c
+> >>> +++ b/common/spl/spl_fit.c
+> >>> @@ -86,11 +86,12 @@ static int spl_fit_get_image_name(const struct sp=
+l_fit_info *ctx,
+> >>>
+> >>>       str =3D name;
+> >>>       for (i =3D 0; i < index; i++) {
+> >>> -             str =3D strchr(str, '\0') + 1;
+> >>> -             if (!str || (str - name >=3D len)) {
+> >>> +             str =3D memchr(str, '\0', name + len - str);
+> >>> +             if (!str) {
+> >>>                       found =3D false;
+> >>>                       break;
+> >>>               }
+> >>> +             str++;
+> >>>       }
+> >>>
+> >>>       if (!found && CONFIG_IS_ENABLED(SYSINFO) && !sysinfo_get(&sysin=
+fo)) {
+> >> Since this patch (commit 3704b888a4cabac8) on the Milk-V Mars board I
+> >> see a message "cannot find image node ''" and on some builds I have se=
+en
+> >> boot failures.
+> >>
+> >> With your patch and some debug messages:
+> >>
+> >> U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:45:=
+11
+> >> +0200)
+> >> DDR version: dc2e84f0.
+> >> Trying to boot from MMC2
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'opensbi' len =3D 8
+> >> spl_fit_get_image_name(): outname =3D 'opensbi'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'uboot'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'fdt-2' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'fdt-2'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'uboot'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'uboot'
+> >> spl_fit_get_image_name(): index =3D 1, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D ''
+> >> cannot find image node '': -1
+> >>
+> >>
+> >> Before that patch:
+> >>
+> >> U-Boot SPL 2025.07-rc4-00017-g3704b888a4ca-dirty (Jun 24 2025 - 14:34:=
+50
+> >> +0200)
+> >> DDR version: dc2e84f0.
+> >> Trying to boot from MMC2
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'opensbi' len =3D 8
+> >> spl_fit_get_image_name(): outname =3D 'opensbi'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'uboot'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'fdt-2' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'fdt-2'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'uboot'
+> >> spl_fit_get_image_name(): index =3D 0, name =3D 'uboot' len =3D 6
+> >> spl_fit_get_image_name(): outname =3D 'uboot'
+> >> spl_fit_get_image_name(): index =3D 1, name =3D 'uboot' len =3D 6
+> >> no string for index 1
+> >>
+> >>
+> >> With your patch spl_fit_get_image_name() does not detect that there is
+> >> no property at index 1 and does not return -E2BIG. Instead it signals
+> >> the property is an empty string and returns 0 which is not expected.
+> >>
+> > I also see random chars printed on the console on SOM with SPL flow.
+> > This patch should be reverted.
 
-Best regards
+Yes, I'll pick up Heinrich's series soon to resolve this part of things.
 
-Heinrich
+--=20
+Tom
+
+--Lo2PZ28ucSHqOppX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhcBU8ACgkQFHw5/5Y0
+tyxMtAwApPK0UWdXTs8NdVaPlKLdTmL8G4XDsliKviBE5CD3NVqRG6Dtry2gd+CX
+zjUZHr5JRBCjQB12/mz7++xdL2Im6R10q9Vd424H/4pOKmYgQNom7DkCW5gzhNyi
+lq2hcWyBbepKpq/Turx3dhycPjKlojSqpW9MVw/4gLqcNdKt5/IHc/KXXCB5UgMt
+Xr52JzIfM+uCKgtrxhP6xeWNQyeUii9qH3NRez0CBQe8lh20yLW7AI7EHX0HwktL
+vjANo54OmnUw+5eEwNZo+eXnFI9c0GGEZmRCnOJIlVU+K1p3AgSxPjcuUefp034J
+2HLXi7BKOvvxG4Ckz3+AEISocn3U7iH5EzSshU2+haO4RAGBj4z9iJf+PIZrjHln
+bls0OoEGmt+MrFBntf7ezgBA7+wyPaNbfEkQ4zj6q30ofpAzhtFrW9bRSCqz1wLF
+0osGHQBr6XKOGbbYque+nd+rGy97r744UYnKR8AH4l6MPWFA83oeW4y+DovwNeTk
+Vt0fEyvD
+=ZUsB
+-----END PGP SIGNATURE-----
+
+--Lo2PZ28ucSHqOppX--
