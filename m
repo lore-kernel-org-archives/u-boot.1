@@ -4,84 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 417C1C7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 15:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD96C7EE2A
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 16:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C684282D83;
-	Wed, 25 Jun 2025 17:57:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 972A682DF2;
+	Wed, 25 Jun 2025 18:10:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l+ghBnAU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eaUC3rEL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D934082D88; Wed, 25 Jun 2025 17:57:45 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 72C3982D83; Wed, 25 Jun 2025 18:10:58 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 888CD82CFA
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 17:57:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C74582CFA
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 18:10:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-60bd30dd387so15005eaf.3
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 08:57:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750867060; x=1751471860; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xaTAFrDNNavXZfqQm8SBvfzXSsMMdGmsgmqRpYxlsFA=;
- b=l+ghBnAU4vLC1MlrvNfzSRlYYzZCM4UVA8Z7EKWUaKspOxSeTmqsRLP+ln+X7TFHjl
- SLRdoRJajby9vAa0Et8Cj+zXKco/UVoZsyscMbV0KsNCeEhAftRq3r3RYKBx8GwgNpXA
- UJjb/7ztrWucnx1uI3UsZDVJAdmZ9aWPJDR9Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750867060; x=1751471860;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xaTAFrDNNavXZfqQm8SBvfzXSsMMdGmsgmqRpYxlsFA=;
- b=hEVoyz8reHti6+jzl7/Ko5Rc0E4HoKpJ7HCmPZnzebIDBh4H77+8kmK7SwPX/KYYq7
- H7fcsa7cAIdRQex26hXPlYIC8fnFYR+yl0rzSV4Xo38l+f2lWl4ZcVnOC3ZgAzXguqVm
- QTr7juNruK4jyfMp3fjlTgElH4TV4rwkCeoJ0ayv3gQc6YVDzrN8EBgDzgV5ZbbJgo1O
- N/lqHFM1KNn/6UpW7ccLR1+0wtqEcPKO8VzVnrGD9qL3f6yeDwDGe+NCa+HBj17UrHi7
- maFSwR9hs9K4U0r0AX/mj4xnIcmRyTAm4//cpVT/7fxAW+dQM02Fvx/gxMmiDNuunPWM
- fsgQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtVosMlgxTiho3oHEp/USLU2R/C3RATMnSh2G2HQYLoPQCEaqgMAzXkO6iSObh1HQh6k/tg7M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3q4S27Akw29qFyZwWqBzqMmyLuL5uP2Xba7x40E5OgSzfMxoH
- 1UEThFhsxl4edymhnwjp2o1aOCuCLbMRQNXmg/GPy0YJJSScI9SwRj6rBFhE6ku0Bp8=
-X-Gm-Gg: ASbGncve62/8HROBhtfqgOr/hohQbo0qKa84VGpTGl1KSHghvOuGrld4ovrvEv+nE4n
- zsV0RR5K8zRsbVG7xAzWtHl9V951K/1T14cWvBJYzTNLtZE+KJW+QS8NPLvBH7+J9P+5uQbhwjc
- xA0fRa5aiQh671XiSvNRCWHCDQSEb6Y4pqdNBaVbyHaTZ/S93SV+vSyWWRq0DMcViyuk4y0HG51
- 7FchaGy8v/VpK+b2cnEk8YXiReH4UX+GDgGIrurepLuCUdT0ChvtvHEE4JUBkxGM/39vrf34RYY
- H1RUJSPucVGXkf7LWplY7BJ//UX+IVQK5QtZvq8TTtlheXhNrd6kTAPiM6Lp8aT6JyWF43WhHFH
- iDWch/vJkrRf5sqs0NcWDt+T1wWNwoS2gGg==
-X-Google-Smtp-Source: AGHT+IG9vqY3V7R3lPkmmKVm8Ss67dgwlCQvtZJw1o82ALfTsNxEGnHru1gYgCnA67E8RTYZQON4Jw==
-X-Received: by 2002:a05:6820:2908:b0:611:a9b3:1d6b with SMTP id
- 006d021491bc7-611a9b332d4mr531287eaf.7.1750867060193; 
- Wed, 25 Jun 2025 08:57:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6115b7ca185sm1621617eaf.30.2025.06.25.08.57.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Jun 2025 08:57:39 -0700 (PDT)
-Date: Wed, 25 Jun 2025 09:57:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Safae Ouajih <souajih@baylibre.com>, u-boot@lists.denx.de
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 61C3C5C5859;
+ Wed, 25 Jun 2025 16:08:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2885FC4CEEA;
+ Wed, 25 Jun 2025 16:10:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1750867854;
+ bh=utHsBE7qzpbq0uwDoDl7Xb9HgpgSX1LsIBZLZCO5CJ8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=eaUC3rELt2qW4BML3rp+i9WDUY7lQXiijc8Wp9W7DEOCN+j+WQKwyB72srurtBpzz
+ Hv0lzTIlibvgDeanemeX1VDgU2jgQfSWZkeeYlvJjm3Kcj1vnA91iDHpg4ZRGroWxL
+ gs/BtwLMV65GukySm59QPHBdGmvZ1GcNPbu+jWVM/BwqddPTzA6mHD7ncWO4sHa6fn
+ zy7tox8TvuJTjwDbYhMVnjp38ZDk8qpx3OH/Du1aKhWAzSErQ55CFc+NmMIyjiWkSl
+ 5sBFmV76huW4DfWTmNiuEtoTDOTbT5Y0JgvyUZLt1pcLGg7v5zcA1nGgu1jXcLsdRu
+ aiNxdRwVvCxiw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Safae
+ Ouajih <souajih@baylibre.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
 Subject: Re: [PATCH v2] cmd: abootimg: Prevent use of unintialised variable
-Message-ID: <20250625155737.GQ4003484@bill-the-cat>
-References: <20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P9k4BxT9KJS+dfqa"
-Content-Disposition: inline
 In-Reply-To: <20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org>
+Date: Wed, 25 Jun 2025 18:10:52 +0200
+Message-ID: <87wm8zx0mr.fsf@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,44 +68,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andrew,
 
---P9k4BxT9KJS+dfqa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you for the patch.
 
-On Wed, Jun 25, 2025 at 04:52:41PM +0100, Andrew Goodbody wrote:
+On Wed, Jun 25, 2025 at 16:52, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
 
 > vhdr can be used when not initialised so detect this condition
 > and exit early to prevent the problem.
->=20
+>
 > This issue was found with Smatch.
->=20
-> Fixes: 636da2039aea (android: boot: support boot image header version 3 a=
-nd 4)
+>
+> Fixes: 636da2039aea (android: boot: support boot image header version 3 and 4)
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+> Changes in v2:
+> - Add unmap_sysmem(hdr) in the new exit path
+> - Link to v1: https://lore.kernel.org/r/20250625-abootimg_fix-v1-1-ce1645ac9879@linaro.org
+> ---
+>  cmd/abootimg.c | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
+>
+> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+> index ae7a1a7c83b..31620aa3cfa 100644
+> --- a/cmd/abootimg.c
+> +++ b/cmd/abootimg.c
+> @@ -98,18 +98,20 @@ static int abootimg_get_dtb_load_addr(int argc, char *const argv[])
+>  	const struct andr_vnd_boot_img_hdr *vhdr;
+>  
+>  	hdr = map_sysmem(abootimg_addr(), sizeof(*hdr));
+> -	if (get_avendor_bootimg_addr() != -1)
+> +	if (get_avendor_bootimg_addr() != -1) {
+>  		vhdr = map_sysmem(get_avendor_bootimg_addr(), sizeof(*vhdr));
+> +	} else {
+> +		unmap_sysmem(hdr);
+> +		return CMD_RET_FAILURE;
+> +	}
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+It's valid for avendor_bootimg_adr() to be -1.
+This is the case for boot image v2 and lower, where there is no
+boot_vendor partition. (so there is no valid vhdr).
 
---=20
-Tom
+Per my understanding vhdr* is NULL if left unintialised. (I might be
+wrong, please let me know).
 
---P9k4BxT9KJS+dfqa
-Content-Type: application/pgp-signature; name="signature.asc"
+android_image_get_data() handles the case where vendor_boot_hdr is NULL:
+"""
+	if (((struct andr_boot_img_hdr_v0 *)boot_hdr)->header_version > 2) {
+		if (!vendor_boot_hdr) {
+			printf("For boot header v3+ vendor boot image has to be provided\n");
+			return false;
+		}
+"""
 
------BEGIN PGP SIGNATURE-----
+So I don't think we should early return here.
+If we do, we will probably break boot image v2 support.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhcHG0ACgkQFHw5/5Y0
-tyyEeQv/bFgSLTQLijfV/Qj+qUtpyEaHT6ITAPZSX7qrxNshUgHSHX0imzG5XOLP
-FHrAQgj3ZhvkO1KNFl/3v+KhXoIPLJZyjOCUUvix1+jCf747Gh+Y7Nd/nAv3BJR8
-lyE1tw698lZD6RWaYMFTwpe58uJyb+oso2tter+x7gkyWEMNnXh1Lf+k3RYE05Ot
-77MRN0fIoJoWo4tT5j1pNIRQXd57fgcFsmnIpyBKDzFn1CBxveNrlSCJyz0Vac+K
-IadHiPcnJRIyZ4aayZZytYenNyGXlAs2lIgJlDkopgfIfucSwWx2AFBYgBoOqwLH
-cZ1B0KCGUOEc/cHzpmRqKqE19hkM5HHpwm03ASycqTYzxcsru8hSsRxaXO1ctVbz
-73laANAl+N7y3dUpC2iS/4ViB/fd5Z4ZS6pd5gnnfpMnsslk3dcyiuRSyMxkfVno
-xlhuHN4GCVR516eavIPOeB6OenfHCx0dtNCLqf7RBZk9PbRtEdetLxWdKHXsYZrK
-um/CB2Q3
-=K80f
------END PGP SIGNATURE-----
-
---P9k4BxT9KJS+dfqa--
+>  
+>  	if (!android_image_get_data(hdr, vhdr, &img_data)) {
+> -		if (get_avendor_bootimg_addr() != -1)
+> -			unmap_sysmem(vhdr);
+> +		unmap_sysmem(vhdr);
+>  		unmap_sysmem(hdr);
+>  		return CMD_RET_FAILURE;
+>  	}
+>  
+> -	if (get_avendor_bootimg_addr() != -1)
+> -		unmap_sysmem(vhdr);
+> +	unmap_sysmem(vhdr);
+>  	unmap_sysmem(hdr);
+>  
+>  	if (img_data.header_version < 2) {
+>
+> ---
+> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+> change-id: 20250625-abootimg_fix-51600dc8356a
+>
+> Best regards,
+> -- 
+> Andrew Goodbody <andrew.goodbody@linaro.org>
