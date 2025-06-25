@@ -4,161 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D415C7EE33
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 13:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B92C7EE2A
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 13:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E529B803CC;
-	Wed, 25 Jun 2025 15:19:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 7030B82D34;
+	Wed, 25 Jun 2025 15:21:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="b3P4q+3/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CLRvDm7J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22E3182CBC; Wed, 25 Jun 2025 15:19:26 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 21DCF803CC; Wed, 25 Jun 2025 15:21:36 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28AD38006D
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 15:19:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 70D03803CC
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 15:21:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ApnjFysCSyGYka8esNt+hVZ6lHIb7U8zPAZNaqbuzlXPW7jdah+nO25OlQtwmAId23UesTuWXZ2IWd2n010j027n/IRk8P7ZAJyYgqTIeo2CAXVAVeZvnWwFc47lnyYLQM5PMFqk7fUqwi6rPSwQSnQIivrmzJcFtTVy/UaTXJGOXqC8jByqqyECMxoQPUaK75CNvkuaKddYKDEaw0kJSIPT3kfkE5Nhe3W7Kwfkp5Hvt7ojSk9yNaAmKf0xf3OIoDyPDXLGzolQE+AJkbQF1QM0Cbaa4tg9Hct+neH0hUcwxl/QvB3AJZko38vxZHWrj/WYEK3XuriTkaiOofDdNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CKsUC35oG1kh2g+inZnDjABfmmk/42jBbjueKTBHcU4=;
- b=HvxdGrPOorEh8oLHUOxOCyF67gFhg+i5nUerozyrpvirXrmpOdO/VdFB/4SLlM8LlzO70d2gOC4zJs+emA3xzpxCRqonG/il1ci9q+ynO52R2rIG8oAiHTPsre2/dsr5+vdP5E/w2TKFMF286T3UHbSkuCsBrTwbHMpLZTpLutALLAb7mYLedcyirj0kLdNQuPQuFSkIK3g6h7OHG54Z//B/7DeO50h6INs0mTT6tdpj6tvx8slI6GfIl3AxbIBK3Ufd5cLfAgIZg+8QIa2cwgBjy/NnY9mpJWabIylsUwKYLL0uZgAKBxKwBLVAbDEP5a7cziB+YI7iKF/AjYRoGg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CKsUC35oG1kh2g+inZnDjABfmmk/42jBbjueKTBHcU4=;
- b=b3P4q+3/RUE/Ok6s0/SFzeaqbCO7E/Wci1P91+Ev/vtvlDZZL6GbOgEFujrXPw1KSbw4gRo1VhLmxiGI41RR/+xBroo2oUpmV354sQ+ttj4tgY7UTOW7UUf7k3iEdVIQByGZ+7xNms7AMUpMl1QPjQMsOcVYE4mI6JV0NESKgaw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI2PR04MB10953.eurprd04.prod.outlook.com (2603:10a6:800:271::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.28; Wed, 25 Jun
- 2025 13:19:17 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.8857.026; Wed, 25 Jun 2025
- 13:19:17 +0000
-Message-ID: <8420640a-d3c1-4d1b-b927-ff7021e6d93b@cherry.de>
-Date: Wed, 25 Jun 2025 15:19:15 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE broken since commit
- 2a00d73
-To: =?UTF-8?Q?Thomas_Lorblanch=C3=A8s?= <zlika_ese@hotmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <DB7PR02MB3676199B1B33A23B5A3DEC33967BA@DB7PR02MB3676.eurprd02.prod.outlook.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <DB7PR02MB3676199B1B33A23B5A3DEC33967BA@DB7PR02MB3676.eurprd02.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR0502CA0030.eurprd05.prod.outlook.com
- (2603:10a6:803:1::43) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3a54690d369so5762474f8f.3
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 06:21:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750857690; x=1751462490; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/YUMuxe7rZ2dVK+dGtIuMJ4qMxxfJXvEVzTi7cLAud4=;
+ b=CLRvDm7J7rBIajpmoZblEZpXXAOwrhu+34q95iuepgOZMNt0MS5XnFAsdJ+B1L2PkK
+ UHM6oLIqqoopSeWtizXcDvQ96mJgZUYV5ZjYjudDg/YOpOgXtAMdOrLI5VfFb6ytgk14
+ UVLsClm42YOS6Iko5pLfiKdpwmcZL4qxRaw55aqoeMZGuNx2iv3o7shN3JPOoVesUUc/
+ L8qlOAFVpjG5U5NsPtAlw+8YGgHesuI5GSwPHG6sUrmJr9Hz1+6c9ycyKVU0tpVZmBbd
+ 2OY45yrBYkBEUcn/LI7HocJPHsldw7FvrdclpNig/iDhWxXuo10ag1yq+VHFkhdb0eC0
+ GxYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750857690; x=1751462490;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/YUMuxe7rZ2dVK+dGtIuMJ4qMxxfJXvEVzTi7cLAud4=;
+ b=vi6ezPUAmVE52DNHI3t7WhF5eAvF/3dDGKpWu0qhb2MVNuGE4UrtB5uCYvJc9IDOVE
+ SNOPT2joRYlh+9RiGG+0wKyCaX5vGvaLM/pyETyW1PpozNnC5bcs/WAQAvr6VkuKXCyc
+ MssAi/FHTVNwNsF1MXq10NZjKCUwnautPwJ8POaYXIN+vTAWIQnFdQm5x/tgeeoyjtIo
+ iIYPc9FBNVrNe/1xjDMHqhn6u+P8wUAuz60CFd5eu+JBpBOMfJkP+UBvWVmQ39rGwS1C
+ AfCJUUy5HxtO9MTNaxVNgyPv62HICXRQCH52ORXZtoKJ0HREnRzxutfMMc2uFlB/hKze
+ 2HEw==
+X-Gm-Message-State: AOJu0Ywoa1rCd6GpXmZcG2nOTLBOrVk1FkxSlLhD8zblPdilEUMxxtuS
+ cxSvbP3cTT4ahURq4dB0j8zk9eSIhZs2W1htcYIAgc5EA5OgSRj+A10Hko3lFCd9OvR3tDHmjsi
+ 4hiVdxIw=
+X-Gm-Gg: ASbGncvSwH51aWxDFbRXIV7uRVge2hCaU+duFiKcQDZwlm6Kre+jrZj5c09O/RnY76o
+ j5KXqpyemWIYnc8gTuJFsYWCAD8LUsxIgBjUJxaWWE0LLvuFp6KkQpNK0dmgArY2ZlzSHxJd0lN
+ 8oGAoC4vLZHRS68XRAOrnOw2nY/w7qF62UPjrcOhP7GPgFWduKG4BbQ3YQ+gGoSNq/BTayYtH8S
+ Z7FBMH6eaRPiWnfKGTw6owYNVbGzqQs5lhMrsTO4Vzq3HGixbXXorN4DR8deoI/DIXbOy9vygf7
+ KCaeXgLi5Kt2amg75EhIqDn5QXe/+pgh9beFATshvEXw7nynmtjPwuVzc7/3+bX5tpBfdAg=
+X-Google-Smtp-Source: AGHT+IEMfKS8eFOi9gIaGKhvNQW4nnbQOISTQoyhjJ+PeFXp6d81zCILAcIa2oBFMs3jkw0tDeSrEg==
+X-Received: by 2002:a05:6000:1449:b0:3a4:f744:e01b with SMTP id
+ ffacd0b85a97d-3a6ed64ba19mr2566075f8f.39.1750857689563; 
+ Wed, 25 Jun 2025 06:21:29 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a6e8068fd0sm4760042f8f.38.2025.06.25.06.21.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Jun 2025 06:21:29 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 03/13] lwip: move net/lwip/ping.c to cmd/lwip
+Date: Wed, 25 Jun 2025 15:19:11 +0200
+Message-ID: <20250625132108.3292932-4-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250625132108.3292932-1-jerome.forissier@linaro.org>
+References: <20250625132108.3292932-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI2PR04MB10953:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d1f98de-8340-40d6-79d2-08ddb3eae340
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZXBWU2NMb293ZytzNkJNdUxsTExIQ200L0VGenBKZUNBUlRBTThpdXZ3SURh?=
- =?utf-8?B?aWljM21aam5EWVNMMU5WOVA2NWRxWjliejUyNHByejFwU0QrOWdpS2t5aUFi?=
- =?utf-8?B?SnJ5QzlyYWU4b1VIcmpoOGpNTHdkcHJ1aEdkNStVb0hoWjlwN3NvbUczenhz?=
- =?utf-8?B?VDM5YVlaRUhKLzd4VEJwVTNiSDIwQmJRRmFjd3F6YmpRdURpRzhPZTRpTXZR?=
- =?utf-8?B?RDR4VE5xZmlDeE1vUDZIOXdvampXU3hBdmlGLzhWUXJHVUlXRmVUajk3M1Ji?=
- =?utf-8?B?eENxNnRsRzY4Ylk0TWdLYW5tU2tMVUxmUGNoVGIwS09ORHU0TDllTTlUNnpP?=
- =?utf-8?B?WW1uWm9qN1IyL2RMcytxZWZGZXNRMkRXR0hLRWEyVFJzL01WVmE5d0hwdklB?=
- =?utf-8?B?bWMrbWFUZWxROFE5M1BMZ2s1bGhibml0UlB6UUVCLzNEclBqSGxvUTMwVy9H?=
- =?utf-8?B?Y2dhdjJLYmVjV2FDbE11bWduODJvV3FMN2NGRVpVQVZDL0taZEYxNUZ4L29p?=
- =?utf-8?B?a014V2cyQTF6VW9vSE04SitGc0NGRkVLNTRHdExPRXBCM2FqaUZIUlRnQytS?=
- =?utf-8?B?TXdPS0tVUU1xSFFSa283ZmZCR1ZTOVdnQjRtU0lzb3prc3YrbHNHak5XbnFB?=
- =?utf-8?B?ZmpLQm92MzVnTG03K0NPZjJzUVJOZVF2ZEVoZVk5U0MzYlNuSVIvQ0NtQUxF?=
- =?utf-8?B?UmJoNnFvY29lYWVVT0hnaE9Wek9td1kyRkNaNlpZcE9GUzVFc09IYmg0Y2o4?=
- =?utf-8?B?a280YmhHcktuMmpZWFlkVVl5WHZzWEozbDN2Vm5PZmViZGxmZU9DWlBaT2JX?=
- =?utf-8?B?NnpCZy8zVFFuZUxuVWtkRUpINnVuT3N5UVEyQzNoQlJ3b0ZTRkF2RjdoQldO?=
- =?utf-8?B?bXZraDNoWTcyOERvQlRLd2lvU3hmNkliTFFkcXRZV3liUnQ5K2Nnc0ZWQ1ZS?=
- =?utf-8?B?c1ZVdGY2Z3cwSlBiUEZ4bDE4MXpSYkJsNFowc2dFcnE5aTJzWDhTeWQ0cjFo?=
- =?utf-8?B?UTZ3ZVV2ZVhsRjFUVXJQOGwwV2VVeGRadmhzOVFJRmc0NGllVW5ZWVFIQ0hh?=
- =?utf-8?B?Mk0yTjhvbnU4ejV3VXRUNElVMUd5NVUvZzI0RkVYQmhGNk56QWZ0ZERJR2pX?=
- =?utf-8?B?MjdUcGNvdk42S2gxRWNOd2VmMGRWK0ZBNExJdVVlUE9nSW9UUU5ham5WMm55?=
- =?utf-8?B?OEphbThzRk5uQWZjTXQ2azR4YTNmMmJieEdXWUlNcTJJYTY2ZjFPSW45NUYy?=
- =?utf-8?B?S0YvbG9FRG5QMUxFUXRQSXppK0hvRHkzNG5VbCswVlZyMldGWmV4R1J5eVBi?=
- =?utf-8?B?Qy8rUmYrdDRlNFNMR09hL2xHd2YyUE9Vdjk3emRuSXJOU211U1VFTmhRaExO?=
- =?utf-8?B?dzhmbFl0ejRpL2F5dFk3NGE0ajI4Q05mUGp5eDRMQlF0Qm0wRVdnbFdqVEhh?=
- =?utf-8?B?SXNVeXZhQlFlZ0l3dERqbmEzTDhTRW8zZmV2aXI3aXVYTlV5ZlNMMGtsbGpJ?=
- =?utf-8?B?M1JDNTE2WnZkdEJ2bU1NajU2b2ovNGtvYjJWYzNWTVNrU2RjdldCM2FWbnBK?=
- =?utf-8?B?YXdNZmRGNE4rY05aa2RBQWc3aEY3OE5zMGlyV1U3MzJ4b3JCYis5Z1RBMjAw?=
- =?utf-8?B?b2pDREhFOUNQUURsYTVLYWxQL2FublpyRm5XUjFTMGVZSlJ6T04zSmhNTVBP?=
- =?utf-8?B?QW9ZcUQ2bjhGK1lQY0VYTUxOU2g1dkNtN0p4UkJVYUNDWnp0ZkpYY0NxKzU5?=
- =?utf-8?B?SW4yVVZ1bmNJRFJ2VWxBc3hCRllsQnBoTjl6YTBXRVFqNWVjMzNMQ1psSXBM?=
- =?utf-8?B?UFhkWTM1MnhSQlZqV09wOHhXZC81Wk55YkFxRnhKaDRBa3RmU25lWkN2Q3dJ?=
- =?utf-8?B?RGE4TDV6SkZPaWxtZk9ZTkp1NzhLakhWZlAzaVl2b1J0KzQ3bHhXZW1uMURW?=
- =?utf-8?Q?hCpPvWzG3xw=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WjJZRlBsZnhGNFpqdE9vWXEwUVo2L0ZLSDNjdW4wVEk5SG9VVE04ZFRFdjFK?=
- =?utf-8?B?QkJGOFRHZHd2ZzhzZVRkbThTK3l5aUpseFFvTFpXdTh0bzRVUS90N2ZHTkti?=
- =?utf-8?B?UUMxNEQyNGZPeG1XNTNmVEk1QUVFODBzUDcxZ0E4ZkdRV0UrWVJQemhyRjRE?=
- =?utf-8?B?U25GZ2JrcnZENEFUVk9lTnlxK0tVcHJvc0NEdkJYbjI0bTdDblBtTWY2TDdI?=
- =?utf-8?B?Z0hBKzR3K3BYZGJza3FIR3cxZVJETlRzeERhSlNWTHM4L0ttT3hLbkV0Zjhu?=
- =?utf-8?B?andlL0xLcXZWNUNQTWRZSlZDWEpVNFAySldvYlBheElLUWp0OG9NN3hOdUJM?=
- =?utf-8?B?dGtiVEwrbU8yc0RqQ1RLN0hjTUJ4cFVpcW9qN3BJa0o4czBLRVZJZXJPM3dr?=
- =?utf-8?B?d0FWeTN0VEVSandjUGRaT0VjaGdXQUFUanhUdFB2Y09ha2JWM0pHSGJlYkY2?=
- =?utf-8?B?QTVzSDRhZFNqakpQek1hRXZ0RldWVUo1L0hqOVhtL0VVOUdTN1BBeklFNHRw?=
- =?utf-8?B?dDVMbzMwMzBnbCtnenJvYlpIa1hsWE5FZ3hLZ05PNytUYTdackhtREk4Q3JT?=
- =?utf-8?B?b0hWYi9aTmpwQk9HMVlUOThnTU40aUtFMGJJWnc0YzhqL04rYzRvaStCZHpW?=
- =?utf-8?B?Z05RTE1FZEROR0VRUnJoN0NGS1ZHODh2NE5vRXV0WGJhWGxzZ2NTMVZRRVVl?=
- =?utf-8?B?dXNlZWh5MDV5RUVyRzRMb3hRSFovV3JmOG9mckJoV1VmWEFBMkNmeVBPOUlx?=
- =?utf-8?B?MTY0RnUzbVdWZ2IxTis0SzdQbWxvdlE2azNsVU8wc09FaXlLaERUQ0hTRHRE?=
- =?utf-8?B?aFNqOVU4bVUvRVJ6ZkRYV3U2TVhaRmJqRHRmaWE2L2VxL1BNU0o3bk9PcGZ0?=
- =?utf-8?B?N1MxM3JFUWJCd3R5QXlXdVV5V0ozMlI0Sk84OWV1N2Y0dzc3WWtMSHJhdWk3?=
- =?utf-8?B?Z0NhaDdOcFVKNWEweUluV0tqWkMxa1FTdkYvV1licFpSTXRPY1cwcHFCL25a?=
- =?utf-8?B?ZDNyNzNURmFmV01JUlJlbzBnQ3VFNHIycjZHVDRKNmk5Zk1tdFd4WC9hbWJw?=
- =?utf-8?B?Y0FFaDAyUndzeU5vQmNtRkNsTmlFcXdWM2d2SUtJNGlKNmtaUXhpOHpIRjZQ?=
- =?utf-8?B?dkd1ZUZOdGhTaFEzZDdUR3JKY2M2WU9lNUEyY2ZwRGxvbzZwdmN2Tkx5QUh4?=
- =?utf-8?B?bFhVU3hmMUY4RlVWaXA4RVpHenVua2FWZDdmQ0tmZ3NxYWh3TzBJRzB1ZlA4?=
- =?utf-8?B?bVR6OGdrekFRbDEyR0ZhRTdxeURzTEgwdTVScFBSYlVTNXJBVUxKQWZuVG1T?=
- =?utf-8?B?MG43cUJlNUZzSEt1c1RhdWVxditDL2VJcitYQlJ5dlFsMHdDVGVRUGpyMExs?=
- =?utf-8?B?Q29aQk9lZGFCSGpJQXZldSswNFMwcWV2UnlKbm5hQkNjSEVrcVZKMldYdk5S?=
- =?utf-8?B?a3pFelVadE5DZ1dHdnRuQmJ6YjFvWUE5Sjh4RWd3dVIxOWgwc2JuTFJWMUps?=
- =?utf-8?B?emlLbExBdEU5Nk0wcUdDQ05qSGlBZ1NYV0JPTWRPWWJDb3Q3Wkcxd1Z2K0dU?=
- =?utf-8?B?a1ArR0dnREZ0eVBQN2hWV0Y3Wks5MjQ5ODMraXFRcVFONnZNdUdReUE0dHJi?=
- =?utf-8?B?bUcybTVRMnJsTlhqZXl3MUhXdEdXWGFPNkVOU0NyRm94ekxpaXJBYmR6SHYw?=
- =?utf-8?B?VXFiTWpKRFErVkdEMVJxNi9IMEJSY0hTMW9jTDlnQ0F0TUpmeEFQQW5KSEJH?=
- =?utf-8?B?SThpQ1FaQmgvY1QvNkxQQ1pEQTRSVHZ5TFd1S1ZXb0o2Y0dKVGx1MCs2UldL?=
- =?utf-8?B?YisxZitEUDNYZ2VOMWcyZHdzUldKYjduZ2V0Z3h4SGFWMFIxUHdkNnlUQUJq?=
- =?utf-8?B?V2V6SUQ1bXZqSkxyMnpGUVhNWFY1QzdvMWJlRnU5UkE2Q2tCc1IvNXBWR2sv?=
- =?utf-8?B?NU9JYTZaci9yeXRxdk1vVUxBaFRiemZOb0pMMURsYVN2SWZ1ZUZCNTRod0th?=
- =?utf-8?B?anNQZnREN0ZOdHQ0MFBNL25CZjZqTGlUZlhZOHVhV2xrTnEwM1BiOEI0SmZR?=
- =?utf-8?B?ZUkyQjhLcVJyOTlnQ1RqbG9MajZXc1JyNzdvOU9wWWtCTXZ6VmVSc3lxU3J5?=
- =?utf-8?B?OFd5RlZxSFRaOGIwSVJZeXM4WXU5S29OeHRjV3dDOC94bzZlZ25jR2h6MGVi?=
- =?utf-8?B?WlE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d1f98de-8340-40d6-79d2-08ddb3eae340
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jun 2025 13:19:17.5185 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XtaaOeWkKQhRK6zSMpRKVuLCvupDD8lFZ+Ew8yc32J16GjmdKIPffCjVe9CEt/SfyDajRZytlzKce5ihUaaduoUTb9nxMgqB1qt5uys5Je8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10953
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,39 +103,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Thomas,
+Prepare to split the ping command from cmd/net-lwip.c by moving the
+implementation from net/lwip/dns.c to cmd/lwip.
 
-On 6/25/25 2:44 PM, Thomas Lorblanchès wrote:
-> [You don't often get email from zlika_ese@hotmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> Hi all,
-> There is a problem with commit 2a00d73 (spl: mmc: Try to clean up raw-mode options):
-> now options SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION and SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE are mutually exclusive.
-> However, SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE is only used in common/spl/spl_mmc.c inside
-> a "#define SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION" block.
-> So this 
-commit breaks the option SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
 
-Seems like you're right indeed.
+(no changes since v3)
 
-I think we also have an issue with dead code in 
-mmc_load_image_raw_partition() function where we have ifdefery around 
-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR which cannot be set since 
-it's another choice Kconfig in common with other 
-SYS_MMCSD_RAW_MODE_U_BOOT_USE_* options.
+Changes in v3:
+- Move this patch before "lwip: split cmd/net-lwip.c into one file per
+  command". Drop a change recommended by checkpatch (uint16_t -> u16)
+  which would better be submitted separately, since the purpose if this
+  patch is to move code around, not to modify it.
 
-To be honest, I'm not sure how to fix this appropriately. I'm also not 
-sure the
+Changes in v2:
+- New patch
 
-#ifdef SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+ cmd/lwip/Makefile        | 1 +
+ {net => cmd}/lwip/ping.c | 0
+ net/lwip/Makefile        | 1 -
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename {net => cmd}/lwip/ping.c (100%)
 
-addition in arch/arm/mach-imx/imx8m/soc.c of the aforementioned commit 
-is proper as it surrounds something that allows to get a sector, which 
-isn't something you should be needing when using U_BOOT_USE_PARTITION?
+diff --git a/cmd/lwip/Makefile b/cmd/lwip/Makefile
+index 6c4ab58d06b..da79b64b5c2 100644
+--- a/cmd/lwip/Makefile
++++ b/cmd/lwip/Makefile
+@@ -1 +1,2 @@
+ obj-$(CONFIG_CMD_DNS) += dns.o
++obj-$(CONFIG_CMD_PING) += ping.o
+diff --git a/net/lwip/ping.c b/cmd/lwip/ping.c
+similarity index 100%
+rename from net/lwip/ping.c
+rename to cmd/lwip/ping.c
+diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+index 255c7d018b0..97299d9b542 100644
+--- a/net/lwip/Makefile
++++ b/net/lwip/Makefile
+@@ -2,7 +2,6 @@ ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+ 
+ obj-$(CONFIG_$(PHASE_)DM_ETH) += net-lwip.o
+ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+-obj-$(CONFIG_CMD_PING) += ping.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+ obj-$(CONFIG_WGET) += wget.o
+ 
+-- 
+2.43.0
 
-I won't be available until 3rd week of July so cannot dig into that 
-myself unfortunately. Would be nice if someone else (you?) could dig a 
-bit and maybe even come up with a fix?
-
-Cheers,
-Quentin
