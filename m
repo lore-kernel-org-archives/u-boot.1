@@ -4,62 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD80C7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 14:42:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47EF4C77B7C
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 14:43:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A56682CFA;
-	Wed, 25 Jun 2025 16:42:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B6CF082CFA;
+	Wed, 25 Jun 2025 16:43:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1750862527;
-	bh=+DNo6IyqR8KySgYo9aFPBxzfPNCM6p6kuw/IQ3knUzs=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ZyhcjNupqe/6j5vvsAh07P7Ni0hpKaUp1Fk/YOknfm3BeNCOzHcJXedxv6kc90Unh
-	 dP4Amog044oqo7QtmcYEHAifLieeLhnL9RRqdRgDhgSXPMUcBVlIYvtwi3GM5hHmJs
-	 pyNl5qVDNR6bGK8uBEkun6QOJdZZ16fqggjoIAQhstFCiPKj46wkwqakqc/GU/8vwL
-	 7IyG5ZeY0nnAdGLYSiA2QrZ4zJGN0/mR0F0hEZXPIaMwoMTOyTmkeIRjdEwdVheI3K
-	 nLNkg2kQFe2lGwGCSxjUsKczm2YOWb4ffo7/ymFtFRruDoBiByw31htKRuuFapveN0
-	 2aQ4BRWqEF1VQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C8B7582CFA; Wed, 25 Jun 2025 16:42:05 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C513D82C4C
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:42:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="AfBla4yK"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5003F1039BD02; 
- Wed, 25 Jun 2025 16:41:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1750862519; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=+DNo6IyqR8KySgYo9aFPBxzfPNCM6p6kuw/IQ3knUzs=;
- b=AfBla4yK5YLJpy+Jls/jdCsVT8Hp+aPB2AGU+pHf1PeW4QM5P5xmtQkvsQ6uVGSDjEB/78
- aJaiVNtv/k92locERjnvcoOvP81tXvLRr9fcFtUx45k8StGG6KhAqbH+Yc0/9edHQHM+y7
- JNAC08z70hDZvivfX4YBnLMRawvtUOY4J0aigjyHtmLHkQJEZcet9MhmcaE8GDeHW0rp3n
- aKWQjkSk1vr5tUPJk4CEbiUKbwwq6veTgLw0pFPe7XGPmX/M54ip5ua7uwyeveFW2FuNnR
- ybbC2DKJfhFUu/6oReEFCxK1xIdWeayupiSSGc0fzW56kqKp+4zkYqYCr3lZeg==
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, albert.aribaud@3adev.fr,
- u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH] dts: pcm052: bk4: Use proper compatible for QSPI SPI-NOR
- memory
-Date: Wed, 25 Jun 2025 16:41:30 +0200
-Message-Id: <20250625144130.1704509-1-lukma@denx.de>
-X-Mailer: git-send-email 2.39.5
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rL3Rwtzc";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CA9B982D21; Wed, 25 Jun 2025 16:43:48 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B06582C4C
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:43:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-72c27166ab3so4289951a34.1
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 07:43:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1750862623; x=1751467423; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HGfpY6F/hPQHbEqy1T1cd+GxRnYxbXYvFYCz83oeBec=;
+ b=rL3RwtzckQ7qPD5U1T74vlJYl+wV9pfHriUYaU+oWzTBssAhBkvLEVPurg+DBcDLp7
+ K24VIUwDB0DNYyJNoGxgYSgBKMknViHS+7L3HYwmEbAJOLr6Ltn3otl87iofebrkzRWT
+ /b1aleH5EvqGGClVaNlXszpFYsC9ieLNzgjv8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750862623; x=1751467423;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HGfpY6F/hPQHbEqy1T1cd+GxRnYxbXYvFYCz83oeBec=;
+ b=R46zxkJcz8ORg2DjpjI8ignu/8uh3dBqYKvrVJIbjcD185Bt68evrk1PbaR/u2MI05
+ hSk5elHS6I/6FhBSKuxaINkCljK5sj8oUCXg2v56bKjOAhRGcEOQQc3WrhjyxBQuyb8l
+ jUTejOlYoXgJV0K6/wcwD9sd1rMwEPZJ3kLoHmxdRzhwhamEUdnuMSmC9Y0zPiYYF5Po
+ 5gcNJiVWR+ej6poxEPKDzRNslNND9dsvYmfxZQlCvZwDURAaxmeqjDuGhdB4b02s8wNj
+ LJMqY4A+qOErFQbnDFckjVQVFii8IfXVfk0jJgyB/1yVD+ZMMg/nrB9wTrCXdSQcbapp
+ YRNw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUp1SZ3hAn0XmFES/coPKe9V6Enz8adU+/MoAYCzoogMczoltNYCeDupwc0jA22YAOW+cz+wO4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1IeqJpzHRSrwXGgz5CZFRkAM653FwvLRXLcbB9hf5bOEHojWC
+ qp4+F5Mk9mrq5iCXJlrOcQ0vr6UBADo5FIQuah6GbhK9wG3pEvBahqQCcfaoCJge7e/aavRyc9z
+ RxNH/XcI=
+X-Gm-Gg: ASbGncvTqrTTUFJHMiyb1f07rUlVpk7rQMI9LUp3mjYe3oL0hO+Lsbc8i5TJxJpDc8Q
+ OU10t8BjN9AkZHqRmrvq3TbI+GheKNGxPEQBraXFF4/rNtFilUAkcNeYo9qMLwnYX3uQA2Yl99J
+ W16d5vK79XuNBtggGMmcIpVm3HJDSYrH6iAKOoNM6XhHMoK9QWG1PxIr1rX0iMzFZlvwPNFrDAR
+ TafAUdIYgwam+mDknWsmlThVfoeyjNQjIskA3aihEJ2fZtfZuElTuPjUIF+4Q27uKoBCnmWin4Z
+ oZoafhs6MEEDWjIHCJMW0cnz7gQfMC6greYyIcPbHnqpknwVDCTRNve1VhwkMkWQNpVenLjBQ/z
+ 3jqtD0ho2dAO8jgxlHTLV06s=
+X-Google-Smtp-Source: AGHT+IF5fl8mv6itiZMM5oDp89bV/7eKTmeQx9DPEpEhaogFwmHrEwOk3ddQRlr/e2/p9hRR4uWJ2g==
+X-Received: by 2002:a05:6830:2a03:b0:735:27:2703 with SMTP id
+ 46e09a7af769-73adc8d368emr2312260a34.26.1750862623087; 
+ Wed, 25 Jun 2025 07:43:43 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-73a90b33b17sm2261018a34.30.2025.06.25.07.43.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Jun 2025 07:43:42 -0700 (PDT)
+Date: Wed, 25 Jun 2025 08:43:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Safae Ouajih <souajih@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] cmd: abootimg: Prevent use of unintialised variable
+Message-ID: <20250625144340.GP4003484@bill-the-cat>
+References: <20250625-abootimg_fix-v1-1-ce1645ac9879@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TrVRZP7V2Y9zK5o1"
+Content-Disposition: inline
+In-Reply-To: <20250625-abootimg_fix-v1-1-ce1645ac9879@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,44 +99,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the contemporary U-Boot the "spi-flash" compatible is used only when
-CONFIG_$(PHASE_)SPI_FLASH_TINY is defined so spi-nor-tiny.c is compiled.
 
-As vf610 devices are not using SPL at all, the SPI_FLASH_TINY is not
-defined and no QSPI flash child nodes are considered as valid ones.
+--TrVRZP7V2Y9zK5o1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The result is that the 'sf probe' command fails and SPI NOR memory is not
-accessible on e.g. BK4 device.
+On Wed, Jun 25, 2025 at 12:15:53PM +0100, Andrew Goodbody wrote:
+> vhdr can be used when not initialised so detect this condition
+> and exit early to prevent the problem.
+>=20
+> This issue was found with Smatch.
+>=20
+> Fixes: 636da2039aea (android: boot: support boot image header version 3 a=
+nd 4)
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  cmd/abootimg.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+> index ae7a1a7c83b..6065be9de6a 100644
+> --- a/cmd/abootimg.c
+> +++ b/cmd/abootimg.c
+> @@ -100,16 +100,16 @@ static int abootimg_get_dtb_load_addr(int argc, cha=
+r *const argv[])
+>  	hdr =3D map_sysmem(abootimg_addr(), sizeof(*hdr));
+>  	if (get_avendor_bootimg_addr() !=3D -1)
+>  		vhdr =3D map_sysmem(get_avendor_bootimg_addr(), sizeof(*vhdr));
+> +	else
+> +		return CMD_RET_FAILURE;
 
-The fix is to use proper compatible - in this case "jedec,spi-nor".
+Do we need an unmap_system(hdr) here as well?
 
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
----
- arch/arm/dts/vf610-pcm052.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> =20
+>  	if (!android_image_get_data(hdr, vhdr, &img_data)) {
+> -		if (get_avendor_bootimg_addr() !=3D -1)
+> -			unmap_sysmem(vhdr);
+> +		unmap_sysmem(vhdr);
+>  		unmap_sysmem(hdr);
+>  		return CMD_RET_FAILURE;
+>  	}
+> =20
+> -	if (get_avendor_bootimg_addr() !=3D -1)
+> -		unmap_sysmem(vhdr);
+> +	unmap_sysmem(vhdr);
+>  	unmap_sysmem(hdr);
+> =20
+>  	if (img_data.header_version < 2) {
+>=20
+> ---
+> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+> change-id: 20250625-abootimg_fix-51600dc8356a
+>=20
+> Best regards,
+> --=20
+> Andrew Goodbody <andrew.goodbody@linaro.org>
+>=20
 
-diff --git a/arch/arm/dts/vf610-pcm052.dtsi b/arch/arm/dts/vf610-pcm052.dtsi
-index ccdc0f57e2b..2b82b7313dd 100644
---- a/arch/arm/dts/vf610-pcm052.dtsi
-+++ b/arch/arm/dts/vf610-pcm052.dtsi
-@@ -244,7 +244,7 @@
- 	qflash0: spi_flash@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
--		compatible = "spi-flash";
-+		compatible = "jedec,spi-nor";
- 		spi-max-frequency = <108000000>;
- 		reg = <0>;
- 	};
-@@ -252,7 +252,7 @@
- 	qflash1: spi_flash@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
--		compatible = "spi-flash";
-+		compatible = "jedec,spi-nor";
- 		spi-max-frequency = <66000000>;
- 		reg = <1>;
- 	};
--- 
-2.39.5
+--=20
+Tom
 
+--TrVRZP7V2Y9zK5o1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhcCxgACgkQFHw5/5Y0
+tyxbpgv+IJ5UPLsM2mKJ2sV2hKQc8YwVNUqhTTy+KgjlQIbPdaeYY8tIMaksyiYS
+omddjPE/WTmt4UHQCO49rKPK3e8KkClag3GC3vm+x1xFtqVuHTns2Np83E/beA6j
+kmEUoLHvbPkhtg36nTC8PPtrOSi3ED+bplVuq7GkxGP2yvHezIir31pAeYPCL6Z0
+nOvp2+K9+zgaZKcz2ZL/O6nyz0k/ububQ1qsP9nigcnTVbsPL7JtqlcYWsR9lHBr
+9r4guxO3+jqj/pEvZ3BVZ0GJ9uVu8eWx+XHm5vbZqfvTWVARQY6oINDybw5jjPnW
++PQTfTONC781Gxu5IP8Vg8fnAM4zk8wKDIy5n9w5USEE8CRnxAwgLiac5B0wlUHQ
+wx1iwX/6jn8yeROjQ7aA5QhO3ms7PztCovQgt510kjoLE8zodWk5k29dGyGNI3ca
+j8BPoHEm8VMNvNUDWpJlhmggCIud45jdDSO3OANdJ4a9jKOy56eAkaJzHotkpZwP
+noqf+AHb
+=CFky
+-----END PGP SIGNATURE-----
+
+--TrVRZP7V2Y9zK5o1--
