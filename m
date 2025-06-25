@@ -4,88 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC2DEC7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 14:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79446C7EE2A
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 14:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE08382CFA;
-	Wed, 25 Jun 2025 16:14:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B3CA782CFA;
+	Wed, 25 Jun 2025 16:18:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Td8GarIK";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NOAxRFUg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56F3682D21; Wed, 25 Jun 2025 16:14:35 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2DF5182D21; Wed, 25 Jun 2025 16:18:35 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 115A2803CC
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:14:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F562803CC
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:18:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-73a5c41a71aso997647a34.0
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 07:14:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750860868; x=1751465668; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8S70gbs434yYISvjyv2NCLotNxQan/ib6dzg/Kts6Q0=;
- b=Td8GarIKHhF2pSWC5xWL5DwYrz+U8AcsxojGUgBigwaKfo01eSRO0GGPTh3ln9yz13
- ttWL5LZSQpu8DhssOTbtcbO00RnDEL/LNxfuAEnqQo2fyFp0iMR8yaDEFY6JUKITZQXM
- qyNR0mNOim8ubkQ8VUougCmgYol4Wx7B0mZHM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750860868; x=1751465668;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8S70gbs434yYISvjyv2NCLotNxQan/ib6dzg/Kts6Q0=;
- b=A1qqqqKC+himsoJrORnckDHMtrkhI4ufJJOZMfBEi8kL5nq1iiW+EsmxQwgiFDyTbL
- fmUlLvoJUwOqpBh/tuenB2MDXZBajFTf8U+0eMkb6kJq5D5t3mORii34fi4TsEetG2Z5
- xHfRdXNi615TNJ+0vM3QbNlhWzeOD84WwkYcNHTE1K0XB8O++YIGHggovTh1pf+iHr62
- ZY2rcv/XWIVUGHtmFadyHNf5w3/lLbJAh+mw25MmuPgivLT4cq3A16tcVKBsoa5h8HvN
- dJoDPbxn0EQfBMJ3fKIjcmyHXLsKEDrB9i2Agkiy9rV+2JioHGrDp42gzjruKP3uTse+
- aVOg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNNUeYZvuIh2TVfQUzHJYRDoKc3wND67WYdj2cWsR+FIfFwqGecG5EIDEmiW00ngUTfEuO23U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqJaLgjPDCok2pH6qo1Oid2GdY45gyFRax4tWht+fat8FbPJwx
- FT9H1xYm2igAdZXiHW2tSqriWwYdSBs0qg+qWJcbeCjvgSzHU1YA9OVhzdbVHLpkNjc=
-X-Gm-Gg: ASbGncvabvHHbeJQZGlAEWVCvV6jIGo8dDZUhevcwic2Do0xLrx4NKCvIyVfysNwv08
- E7FOX2LZEqL27gaXqjym1WmTfKrbMoWhGz93zIzBs4LAfsB/0E3I9EEyg6gFSsez9zHewfTz8Gi
- wmc25PxFLWnhuI62c3TzH2G5jD9V3fp0MXLoYBYmYoDcP96zlxM3oJL8/z5fGN1QcV4y7hlf+gp
- XCdaVYi7I0qj1Bpe8k24KmJxmQ4+W5EDicTFM7WW3cSXXWW8ReALFAmZo3vZI41ukHRfJgZJ6s4
- yQqMmNCq3esucESSRiSBWFtSAk+FMjibrPqs0enhcHFSq34cq0Egv6jtfbV2inPvjCKQTbZ1Ygw
- W0B2KVARdpIbV3JQWPQLAuZQ=
-X-Google-Smtp-Source: AGHT+IEP4vYECBPouAxhBKmWmxmuwrbwJg3dYSyFvrdnlheJvAz24AEIlur/i03ukX0f1LN7kziOIA==
-X-Received: by 2002:a05:6830:211b:b0:72b:9506:8db1 with SMTP id
- 46e09a7af769-73adc48301fmr1968503a34.4.1750860867670; 
- Wed, 25 Jun 2025 07:14:27 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73a90cbf6b7sm2244096a34.59.2025.06.25.07.14.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Jun 2025 07:14:26 -0700 (PDT)
-Date: Wed, 25 Jun 2025 08:14:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>,
- uboot-imx@nxp.com, albert.aribaud@3adev.fr, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] dts: Add u-boot specific 'fsl,mux_mask' property to
- iomuxc for vf610
-Message-ID: <20250625141424.GN4003484@bill-the-cat>
-References: <20250624204700.972663-1-lukma@denx.de>
- <20250624204700.972663-2-lukma@denx.de>
- <20250624210116.GL4003484@bill-the-cat>
- <20250625083637.1d286cec@wsk>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1750861109; x=1751465909; i=xypron.glpk@gmx.de;
+ bh=/YS87+SIzCVEn5BJaQDNwAgbOPYwY6Y1tVVnYcRX80s=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=NOAxRFUgcefzVlQc0m6Yd7Vz73uyOmpOvXOb2uuv73rhbHPHUNJR2BkaRGZ2N45t
+ uGKAIK1dpZP8o+KhvNCk+Edhis1eQX5tDmJT7UcMkpL2VlLu9cj8hd8nclDBWHnmQ
+ EFGnl8/uy7fKFFZDPMybYzQwDcAoY0nv2By7gXeeAPXvXUQ0tJAj3KlXTKuHI/jc9
+ iq5ahsSEXaIGrGrUVyFOKyghYe7ASb6hGYB+JS/wAtpFKCJBaFGvZv2n6fK+FB4Rv
+ 7LYrWALMPxZP7yVMBbTvFKxKPy8kfl+mcF3mZt+8x4irn7fRcMpXpW+Cet50k7ftz
+ NxhEVvYaNikMNeCziA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MUXpK-1uLjnB0QWu-00TRjE; Wed, 25
+ Jun 2025 16:18:29 +0200
+Message-ID: <012ee7c9-6794-485e-8e0a-5ed0ff23c045@gmx.de>
+Date: Wed, 25 Jun 2025 16:18:20 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SV8498Zrm3Ld2nbU"
-Content-Disposition: inline
-In-Reply-To: <20250625083637.1d286cec@wsk>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: efi_loader: Sporadic build failure: Error: file not found:
+ <path>/capsule_esl_file
+To: "Anthony Pighin (Nokia)" <anthony.pighin@nokia.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>
+References: <BN0PR08MB6951841AE35F95A242553D91837BA@BN0PR08MB6951.namprd08.prod.outlook.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <BN0PR08MB6951841AE35F95A242553D91837BA@BN0PR08MB6951.namprd08.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:CnLixl7bsuFKxdAWYXbbAtHGsShQJLSoMZwpiPfiSzcumQjKEAo
+ ZMgNzCFzNipdYINge1h2wsdlcKCJcY+NVaIMmBm/UyjPKzpuKLLs+g+U91rpYQuEmPLWI2P
+ a4Djh/HXlFzae3Fk1FP2yYyD2mQL70hFjd0AWgnH+MbhlDF4DH8q5fiUOv5J0X+CDJXrwNl
+ WOm+GkYubbUuhHjRhsc2w==
+UI-OutboundReport: notjunk:1;M01:P0:YhdLpLUJVXU=;wixRRyWYiM73rDSwW71+bX9BjRD
+ +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
+ Ag==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,80 +129,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---SV8498Zrm3Ld2nbU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jun 25, 2025 at 08:36:37AM +0200, Lukasz Majewski wrote:
-> Hi Tom,
+On 25.06.25 15:32, Anthony Pighin (Nokia) wrote:
+> Following the introduction of commit fd58c275f6ba524101ba0990e53f5a11ac3=
+90bd0,
+> we have seen sporadic build failures with the following footprint:
 >=20
-> > On Tue, Jun 24, 2025 at 10:47:00PM +0200, Lukasz Majewski wrote:
-> >=20
-> > > The commit e8a9521e649f
-> > > ("vf500/vf610: synchronise device trees with linux")
-> > > has synchronized U-Boot's DTS with v5.19 Linux kernel.
-> > > It turned out that in Linux's upstream iomuxc node description the
-> > > fsl,mux_mask' was missing, so the U-Boot's pinctrl driver for NXP's
-> > > Vybrid SoC was not working properly.
-> > >=20
-> > > As by default the mux mask was set to 0, the vf610 based boards
-> > > (like BK4) were bricked, due to misconfiguration of gpio at early
-> > > boot stage.
-> > >=20
-> > > The fix for all vf610 based boards is to introduce
-> > > vfxxx-u-boot.dtsi file with 'fsl,mux_mask' property provided and
-> > > include it in boards' specific U-Boot adjustment files (like
-> > > vf610-bk4r1-u-boot.dtsi).
-> > >=20
-> > > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > > ---
-> > >  arch/arm/dts/vf610-bk4r1-u-boot.dtsi | 2 ++
-> > >  arch/arm/dts/vfxxx-u-boot.dtsi       | 9 +++++++++
-> > >  2 files changed, 11 insertions(+)
-> > >  create mode 100644 arch/arm/dts/vfxxx-u-boot.dtsi =20
-> >=20
-> > It looks like this is still missing upstream, so what's the status on
-> > that?=20
+> <path>/u-boot/2025.04/git/lib/efi_loader/efi_capsule_key.S:14:
+> Error: file not found: <path>/u-boot/2025.04/git/capsule_esl_file
 >=20
-> It looks like in Linux the mux_mask is hardcoded (for Vybrid vf610):
-> https://elixir.bootlin.com/linux/v6.16-rc3/source/drivers/pinctrl/freesca=
-le/pinctrl-vf610.c#L321
+> Upstream commit 739ad58dbee874a3ad3bddd116e995212a254e07 also touched th=
+is area,
+> and we pulled it back into our build as a test. However, it still appear=
+s there is a missing
+> dependency:
 >=20
-> In u-boot other SoCs use it as well, but with different values:
-> - arch/arm/dts/imxrt1050.dtsi -> 0x7
-> - arch/arm/dts/imx8ulp-evk-u-boot.dtsi -> 0xf00
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -87,7 +87,7 @@ $(objtree)/capsule_esl_file: FORCE
+>          fi
+>          $(call cmd,capsule_esl_gen)
 >=20
-> In the imx8ulp case above - it is already set in *-u-boot.dtsi specific
-> file, so I've followed this approach.
+> -$(obj)/efi_capsule.o: $(objtree)/capsule_esl_file FORCE
+> +$(obj)/efi_capsule.o $(obj)/efi_capsule_key.o: $(srctree)/capsule_esl_f=
+ile FORCE
+>   asflags-y +=3D -DCAPSULE_ESL_PATH=3D\"$(objtree)/capsule_esl_file\"
+>   endif
+>=20
+> Anthony
 
-Someone should unify upstream to one approach or another I would think.
-Or find a good explanation as to why it's not unified, and then we
-should follow.
+Hello Anthony,
 
-I'm not nak'ing this patch but I am noting a problem that needs to be
-addressed.
+Could you, please, provide logs showing the error and the matching=20
+defconfig.
 
---=20
-Tom
+Best regards
 
---SV8498Zrm3Ld2nbU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhcBDwACgkQFHw5/5Y0
-tywAbwv+IRqzbLvnURqdHpfcs2H2VZ9lItby1bXYDWXj6GMpPzROYpsLcvIFEtCH
-fN1iNcgulVj6HUwIWH47THeXhqwpxoNgq4/1e+zd5ombEE3SOriM1iAiXrf7ezcX
-xmPBdf02S6SfP8n/FGOOhQrM+rcaX8B8TWVJGsHz2klfWvbqdvRo5liOE6qnk2Ap
-tjHEOK0T7WKHf+hxV0e9Fn52WnSUat6V/7OJaJ0X0dlMr9hfuln5ySNzBAZ7QyLG
-DDyoSz6rksSXuHH3B6Mk3cKTMFz0ssKcSEHc8jsU24254K2x64J41h25PLIbvuSe
-TzwnXwGu53yeqxZWGwcw7LCjXGB1tThj+I9sP02BEF0mRB5wzunM6+gvTkLoLeGq
-bgeezIN1opXsQkSpjK/y9JqKJsA16u1t62RbIHq+d7BKrEOxuNGDrEP/bQLYm1+c
-ojWQ8Pe88Oz3RXyMoA0IJGQ/T4gvh2diALa6+LL1PDZDBflAWvJGJeZy3CH50NsW
-nsBDmOdO
-=I0bf
------END PGP SIGNATURE-----
-
---SV8498Zrm3Ld2nbU--
+Heinrich
