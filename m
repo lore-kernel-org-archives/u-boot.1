@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7560C7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 23:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DEBBC77B7C
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 23:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0EE982E35;
-	Thu, 26 Jun 2025 01:52:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4867382D83;
+	Thu, 26 Jun 2025 01:52:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ddo9DYPV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pfybb0kO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B40982D21; Thu, 26 Jun 2025 01:52:14 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 955CC82E6A; Thu, 26 Jun 2025 01:52:21 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7405582D83
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 01:52:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7C8A82D83
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 01:52:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-73a4c557d47so156358a34.3
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:52:12 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-404a5f4cdedso111082b6e.0
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 16:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750895531; x=1751500331; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750895535; x=1751500335; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qBuKYD1Pgoa1qVp2GA5Gn5dRjan6tkOEBYXW0z1Qh6Y=;
- b=Ddo9DYPVCioY4FANiWcehwu0Wc+btQtVyPDVMfpfknYJ7mlOMogAFiZrRY7BUiN+6l
- RazVWn1Ch+XVbMBNv2GGHWr3zASczTAPgUm8EsJ7af3XwpduGhJeRcyA77iOZRIjD8mR
- lcc2ttZT9DqWm/KWVzJG83OV3XxGLUz9+5rS8=
+ bh=prNlQlykrL8sO3AaEAcA4H6ygJAAFSqz9X3ULnH+ZCQ=;
+ b=pfybb0kO3wDxGG8oySEd9o8t+3q5QwnJ3Ah0Up5WSqSBjcbE/tZxWUwokZTcDUdpUb
+ NVuHafcZh2OhMgOoYK/9IDAExPzMBlC3zuxmza58+vBHW1vT9rZThNuMKDcRzl0pTMgt
+ sERLFFjBLsjxP1rwxfflEEfBOqMt2iutbt+S4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750895531; x=1751500331;
+ d=1e100.net; s=20230601; t=1750895535; x=1751500335;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qBuKYD1Pgoa1qVp2GA5Gn5dRjan6tkOEBYXW0z1Qh6Y=;
- b=HWcdKSGrworElt9dOrVCIRj/uILCZ8vbCAzyfJoMYtkZE6643lYlHdMHtUtgsCpNAP
- DuYKmZp4Inj+3GWtOmccwTiCQeeWRnjK36SDAwH9i+mvawkXQxYiK/w/IHPaOaKpMgmY
- HPTj0SV97XD4xgtlWMqbv/s8At6a787E8cnblErn6kInFStT9mgBu/BhNNFQcYXc+DPh
- afYdQcUMg4IgpxYSJ86595Ep9dz01fOeb+JAjcT/FOyMzXRcEiTGvTYnlLMOTR/XKkSq
- X+hX7tCtTfYwRdBJjf1MrKw7MebwVX45shAiIUPe86PjWg5JnP0biolOsjYthfKe/B1R
- RFJw==
-X-Gm-Message-State: AOJu0Yxe5vyAE6n0FQBA9lmdvBEBtN07FyhmX26ukR1cFNsm9JD/vE6z
- F4Sowfb51TZB8VdYc2fZ4b6KwTyNwypD3DC8VT3b+T4UxmectSyLMp97RQqxYJhZHCHPsiL6a8q
- +an/yKv4=
-X-Gm-Gg: ASbGncv5dL5Ccxj61ElRqXGfb4Ym0ZIPgFNTs/R73/LJwkfq5B2vBwqDnFn7NVz/CJa
- wd10An0sxsZVIangKq32fuvZyt32KsEECquxzCNmMDtsNi8TX6oOCA8HO2tEz2ce8afSMNOMLEL
- u+MY6d60OxLjJZDw0po9Zkg1jQLoTqe8TU5hPHfLbEiqW2KoasiTYPFioUa8orwk4G5t8lMSVpi
- T5HuXn5YGRV9rUKU4JKFj+QpiCcoJmq206NPCcGpfEyjfy0uLdiF3c0Lx9kvD0on/dajxg6uV1I
- CKnAxDaQXNrVAGlYeH/HSQ+8SKWcpk+/ysnO1SI16G8xbz6MkU52kUv+wckS3tmqwdvJ+PbEdiF
- vaOVHzi9gsGbVmBgIfDk5ew==
-X-Google-Smtp-Source: AGHT+IGr6WmUCW/nEozedNwADTY5u/lv5S7xWT4ztuNHa++Z5+ctpcJXJ0aWywUEL9yJzb25G5zvqg==
-X-Received: by 2002:a05:6808:bd6:b0:40a:f3d0:cef7 with SMTP id
- 5614622812f47-40b05728c3emr4559776b6e.7.1750895530985; 
- Wed, 25 Jun 2025 16:52:10 -0700 (PDT)
+ bh=prNlQlykrL8sO3AaEAcA4H6ygJAAFSqz9X3ULnH+ZCQ=;
+ b=Fb0oVNzPfaMk0MH0JDsMWd11fnczI4io9LSRDpzuFOw4Pcs1oznAuJsxzxszHe8asc
+ GrBxK8TIfk24hc01d3vvVw3lTzPwTiV5SHJHzEwJhryNs/9+UvkwJpnzxOpZTDtaKwL6
+ W/EY7K7XwX/IyLH04UiKGIsO51pq+UeKtdjdp4vj1PdGRX3YsZD1uDR5syIWxleC/koW
+ br5EWr6aTyIDeUbJJ88i/haBQjv96rk0Ss6guxvgBuBYUP5ebuXjPPe6aRelkT6FCbs3
+ zyp5GsG6p2CVskG+SZMTjR15qu5PrM9rcCOzq80CcH03hlZ5HvO+tZPBeTpWTSXpkbVE
+ +k2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNGtRWeN0X2hYUntCiVyAURVmpWm55CMmOTiRHF4msOFR1qagRF2t7rRhsMRzy0OaUq3DRZUc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx5sFJ9IHaM8/kCWuQFfGPDfEgmCK8lvm/ThQfwANrztr3+XR9d
+ Huf64KH0RZgLy4Yp34iDXahTDOe4Xq14ZjxfI7XKicQ+n8s8oBL+BI32p3AItfhHckw=
+X-Gm-Gg: ASbGncutju4UScmXiiUDEhbW3EK0g0RhEuLtrxuly8aNGx0wpcIveN0kJ7QbAvIafqn
+ ryCEYMwClQfTkU+mlpo78Lla6h5GMVbuP2q8k7WS2cYsyyKloeXPfqfWt0kFKCJbMziXepFgoRg
+ hW8GKjrF6+CY8e+7E9E5GTeLKNrqQSEObPmcPlNktOWxbwuxGbhnGC36qYgwsjzaGprcjIRx69k
+ Q8ewA6OEeWRosqjJ61zbdFRLAHyg7i26Jgavjfs7BOtWuakfDNXRXk7QrBH9nNE5cdc7k1RFOBm
+ EChcTqSlX1alpIpcMXDHSk8o8ZFpRW6skGnizjhOUGhFMTKx2Ox2S6hDmFVhiPCX4g7s2SvfZw0
+ 8HaVxNDNhzHV7H5ocVRyb8SHop1CTO3am
+X-Google-Smtp-Source: AGHT+IEWGJ7gjD0E21CRvCGnhwomAwWGhMR761y9sF6afPmValdSc/OdDKMHUrebLUcPkc2jQwWd/A==
+X-Received: by 2002:a05:6808:1783:b0:402:b0f:4ccc with SMTP id
+ 5614622812f47-40b05bb21f4mr4400084b6e.16.1750895535451; 
+ Wed, 25 Jun 2025 16:52:15 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6115b6b3052sm1751134eaf.10.2025.06.25.16.52.09
+ 006d021491bc7-6115b6b3052sm1751134eaf.10.2025.06.25.16.52.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Jun 2025 16:52:10 -0700 (PDT)
+ Wed, 25 Jun 2025 16:52:14 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tim Harvey <tharvey@gateworks.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Vincent Fazio <vfazio@xes-inc.com>, Michal Simek <michal.simek@amd.com>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250602162515.1316263-1-tharvey@gateworks.com>
-References: <20250602162515.1316263-1-tharvey@gateworks.com>
-Subject: Re: [PATCH] rtc: add ds1672 driver
-Message-Id: <175089552949.1525333.16238678778751950245.b4-ty@konsulko.com>
-Date: Wed, 25 Jun 2025 17:52:09 -0600
+To: Matthias Pritschet <matthias.pritschet@itk-engineering.de>, 
+ Anton Moryakov <ant.v.moryakov@gmail.com>, 
+ Joakim Tjernlund <joakim.tjernlund@infinera.com>, 
+ Simon Glass <sjg@chromium.org>, open list <u-boot@lists.denx.de>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>
+Cc: troy_lee@aspeedtech.com
+In-Reply-To: <20250606073425.2688710-2-jamin_lin@aspeedtech.com>
+References: <20250606073425.2688710-1-jamin_lin@aspeedtech.com>
+ <20250606073425.2688710-2-jamin_lin@aspeedtech.com>
+Subject: Re: [PATCH v1 1/1] lib: ecdsa: Add support for loading ECDSA
+ public key from FDT
+Message-Id: <175089553397.1525333.12672000670713374461.b4-ty@konsulko.com>
+Date: Wed, 25 Jun 2025 17:52:13 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,16 +103,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 02 Jun 2025 09:25:15 -0700, Tim Harvey wrote:
+On Fri, 06 Jun 2025 15:34:21 +0800, Jamin Lin wrote:
 
-> Add support for Dallas/Maxim ds1672 32bit counter RTC.
+> This patch adds support for parsing ECDSA public keys from the device tree
+> blob (FDT) under the `/signature` node. The public key is expected to be
+> defined using:
 > 
+>   - ecdsa,curve (e.g., "prime256v1", "secp384r1")
+>   - ecdsa,x-point
+>   - ecdsa,y-point
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] rtc: add ds1672 driver
-      commit: e63e088b600df84b2259a06fcd0929cfe31c0cb7
+[1/1] lib: ecdsa: Add support for loading ECDSA public key from FDT
+      commit: ed51f3e446f2ee9e2fa6577388451a93122b6551
 -- 
 Tom
 
