@@ -4,60 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18C60C7EE2A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 16:29:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7733C7115C
+	for <u-boot@archiver.kernel.org>; Wed, 25 Jun 2025 16:31:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3567282D88;
-	Wed, 25 Jun 2025 18:29:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EB27B82D83;
+	Wed, 25 Jun 2025 18:31:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kqd42AKm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RY+wFT07";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F55082DF2; Wed, 25 Jun 2025 18:29:08 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 77C3382D88; Wed, 25 Jun 2025 18:31:29 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEF4F82D83
- for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 18:29:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A4F6560053;
- Wed, 25 Jun 2025 16:29:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DEDCBC4CEEA;
- Wed, 25 Jun 2025 16:28:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1750868940;
- bh=NPJLWPmHA8jm+KGtxlnrJA+qFvYLC8uHDPU5y7nxAho=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kqd42AKmt8b4+rj3j2+VtfxOjhXARKCV4mTJBng8p5+jM+tTD478gNxAmPGKo8wH0
- aHu4/NKrCJaHl4elkxksdoSrxWRtdCDPdTeprsoPJBWQMuWVUgR2MLeaVZqnUAGqwv
- zyDMLlQw/v7COmKbIu8CxgSl5cCnhPBJwpSNmDDZf189FyWXo9rXJb6s0+ijIWxlqQ
- bj5nbKIKoJua61jSLKMcZc3RP34w55WKWQGNfe43Xrl8pVTFmXfJecndTGsvMvFIFU
- 2wWmHHywOF8678Din4WrH7Bk66kKyTYa+vRcS+zoW6uzfJpsAb9iNXpV1UtUeKpnXK
- 7LCazg17hKQkA==
-Date: Wed, 25 Jun 2025 17:28:56 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- albert.aribaud@3adev.fr, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] dts: Add u-boot specific 'fsl,mux_mask' property to
- iomuxc for vf610
-Message-ID: <20250625-stylishly-expiring-c37b5a0a52fb@spud>
-References: <20250624204700.972663-1-lukma@denx.de>
- <20250624204700.972663-2-lukma@denx.de>
- <20250624210116.GL4003484@bill-the-cat>
- <20250625083637.1d286cec@wsk>
- <20250625141424.GN4003484@bill-the-cat>
+ by phobos.denx.de (Postfix) with ESMTPS id 0463082D21
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 18:31:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-451d7b50815so55194435e9.2
+ for <u-boot@lists.denx.de>; Wed, 25 Jun 2025 09:31:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750869082; x=1751473882; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PBth7QNjRqQXRZKkXVWPTYQU+CyN5dPfZsTOtw2aW5E=;
+ b=RY+wFT07J1OdZXhLSDTdej8OiL+lgSwg0a9NjPDfRvzMBt81oN6f/cr/tUuJcGWx6G
+ T9n094pv0YigZeXI1ImKCxfeOXNHt8wNrYkq4WlAU4Ni2YgXP4xy3VEXxiksM/OHW1JD
+ tLRJLtHBWJeXNpcSdncp8BqGq/XJByNYWfrOWqsA/Hy/JMkeLmJoc/oNXbK4mm9x+Iy1
+ 69ia3uKuhrbeodGZXrX+9sFL4nYWuOhvAiN35aFt8Ps6Y7avjVjSaj/2blD8FPT8tgaW
+ edd4a/Iuf6sPBucVUcKuaeM6B2UIUwgF9zCX7nswQzSxoXzC8G21hXoNIRlJYpxviFPS
+ bimg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750869082; x=1751473882;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PBth7QNjRqQXRZKkXVWPTYQU+CyN5dPfZsTOtw2aW5E=;
+ b=njNqruzIX5xEgdsTK3YUC7QjKARi1s75SO1966NXdl/06VJPvNQycWFTJzQU3eXRoe
+ 6usv7PkIs75SziLFYN6TRF2p50fElUMfyX9kMFoSE2LH0Wo+liHIuYoWnTxhbcErZafd
+ iatUKGtTKx+CkZQ8iDcq8x4DoEwIrpi8dYiPKgMfV0NwC9QNuZ/hBhb0SZ72nlUT/qRU
+ GWdNIcBTxtKg9uhD4yyyiMjTR3+guUpSrxy/VCdT6g8bRCJajvSqIiLd5QSOQG13l25M
+ gq3fB7ccUS+rnv9la49eWOMW+/F7POkbEV9lIWqWSCuVMgoMGOZuJppfdFBtt1o1ecIm
+ KKDQ==
+X-Gm-Message-State: AOJu0YzuiF2hsIV2Z0peHfX//QLO10PM1TP/JMEKjBWE/j6IU/47QhJ1
+ 2Nm12bWZMLeGXdIcu/CvaJA+4ugNW3mRuO9XMZJ1gnVUkK7pHNxh4lWNSP+WAFrFynDh5Lyo0Hn
+ jHe0D2Hg=
+X-Gm-Gg: ASbGncuXfNhDaTpGGWQpHY6DIHw5w+NdvLSmDBmZLIJT4xyvXiGCazudJeWh7FBX+8S
+ S9vhBD9PUzVbAtUgQlX4rPeB2d1v8TBr0XtcZ512AuD3q5GNLCAIcg44dTmmPgpZiLsJefBm5II
+ T+oR0v8vIGVc3rycG5+1/w4/MfCYD3iWxETuEowW+QfED14nyUd59NXT4Z5j6qX+FusUDLRUAhF
+ ypk3T+7fP34nsrjF5+SfQ1PYMhfT3zn1OBzqTgIiy7yltyOXHRkahlSRY6UUU/Xvz4vnsXcc75M
+ heKAbMr7/rPLh9oBSaA/7ulH4zcCzdqQJMUuaSW98TiP9y1ArwzqX27rLjHvkTWKz3xjDoWZ874
+ L89X92VTwhfQ0gSlEzVe31EsheqyNYSYnhmH5osE=
+X-Google-Smtp-Source: AGHT+IGrEjjlmj3boQuZ3WJ7QTbkWfjZ1cdo8QpUHSAMYLq7kT1hRpsL7DqXn+CpES11b6FkCFMIyQ==
+X-Received: by 2002:a05:600c:1d04:b0:43b:ce36:7574 with SMTP id
+ 5b1f17b1804b1-45381ab853fmr36698165e9.11.1750869082084; 
+ Wed, 25 Jun 2025 09:31:22 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:ee3:2301:8cc3:8d71:1fb:3fe5?
+ ([2a0a:ef40:ee3:2301:8cc3:8d71:1fb:3fe5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-453823b75cdsm23933275e9.32.2025.06.25.09.31.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Jun 2025 09:31:21 -0700 (PDT)
+Message-ID: <c5a4f007-0846-42a8-a153-d95cb070dc66@linaro.org>
+Date: Wed, 25 Jun 2025 17:31:21 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="xPO7eMjQYnGCKQrL"
-Content-Disposition: inline
-In-Reply-To: <20250625141424.GN4003484@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] cmd: abootimg: Prevent use of unintialised variable
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org>
+ <87wm8zx0mr.fsf@kernel.org>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <87wm8zx0mr.fsf@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,78 +103,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 25/06/2025 17:10, Mattijs Korpershoek wrote:
+> Hi Andrew,
+> 
+> Thank you for the patch.
+> 
+> On Wed, Jun 25, 2025 at 16:52, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
+> 
+>> vhdr can be used when not initialised so detect this condition
+>> and exit early to prevent the problem.
+>>
+>> This issue was found with Smatch.
+>>
+>> Fixes: 636da2039aea (android: boot: support boot image header version 3 and 4)
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>> Changes in v2:
+>> - Add unmap_sysmem(hdr) in the new exit path
+>> - Link to v1: https://lore.kernel.org/r/20250625-abootimg_fix-v1-1-ce1645ac9879@linaro.org
+>> ---
+>>   cmd/abootimg.c | 12 +++++++-----
+>>   1 file changed, 7 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+>> index ae7a1a7c83b..31620aa3cfa 100644
+>> --- a/cmd/abootimg.c
+>> +++ b/cmd/abootimg.c
+>> @@ -98,18 +98,20 @@ static int abootimg_get_dtb_load_addr(int argc, char *const argv[])
+>>   	const struct andr_vnd_boot_img_hdr *vhdr;
+>>   
+>>   	hdr = map_sysmem(abootimg_addr(), sizeof(*hdr));
+>> -	if (get_avendor_bootimg_addr() != -1)
+>> +	if (get_avendor_bootimg_addr() != -1) {
+>>   		vhdr = map_sysmem(get_avendor_bootimg_addr(), sizeof(*vhdr));
+>> +	} else {
+>> +		unmap_sysmem(hdr);
+>> +		return CMD_RET_FAILURE;
+>> +	}
+> 
+> It's valid for avendor_bootimg_adr() to be -1.
+> This is the case for boot image v2 and lower, where there is no
+> boot_vendor partition. (so there is no valid vhdr).
+> 
+> Per my understanding vhdr* is NULL if left unintialised. (I might be
+> wrong, please let me know).
 
---xPO7eMjQYnGCKQrL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+A local uninitialised variable is just allocated space on the stack so 
+its value is undefined AFAIK.
 
-On Wed, Jun 25, 2025 at 08:14:24AM -0600, Tom Rini wrote:
-> On Wed, Jun 25, 2025 at 08:36:37AM +0200, Lukasz Majewski wrote:
-> > Hi Tom,
-> >=20
-> > > On Tue, Jun 24, 2025 at 10:47:00PM +0200, Lukasz Majewski wrote:
-> > >=20
-> > > > The commit e8a9521e649f
-> > > > ("vf500/vf610: synchronise device trees with linux")
-> > > > has synchronized U-Boot's DTS with v5.19 Linux kernel.
-> > > > It turned out that in Linux's upstream iomuxc node description the
-> > > > fsl,mux_mask' was missing, so the U-Boot's pinctrl driver for NXP's
-> > > > Vybrid SoC was not working properly.
-> > > >=20
-> > > > As by default the mux mask was set to 0, the vf610 based boards
-> > > > (like BK4) were bricked, due to misconfiguration of gpio at early
-> > > > boot stage.
-> > > >=20
-> > > > The fix for all vf610 based boards is to introduce
-> > > > vfxxx-u-boot.dtsi file with 'fsl,mux_mask' property provided and
-> > > > include it in boards' specific U-Boot adjustment files (like
-> > > > vf610-bk4r1-u-boot.dtsi).
-> > > >=20
-> > > > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > > > ---
-> > > >  arch/arm/dts/vf610-bk4r1-u-boot.dtsi | 2 ++
-> > > >  arch/arm/dts/vfxxx-u-boot.dtsi       | 9 +++++++++
-> > > >  2 files changed, 11 insertions(+)
-> > > >  create mode 100644 arch/arm/dts/vfxxx-u-boot.dtsi =20
-> > >=20
-> > > It looks like this is still missing upstream, so what's the status on
-> > > that?=20
-> >=20
-> > It looks like in Linux the mux_mask is hardcoded (for Vybrid vf610):
-> > https://elixir.bootlin.com/linux/v6.16-rc3/source/drivers/pinctrl/frees=
-cale/pinctrl-vf610.c#L321
-> >=20
-> > In u-boot other SoCs use it as well, but with different values:
-> > - arch/arm/dts/imxrt1050.dtsi -> 0x7
-> > - arch/arm/dts/imx8ulp-evk-u-boot.dtsi -> 0xf00
-> >=20
-> > In the imx8ulp case above - it is already set in *-u-boot.dtsi specific
-> > file, so I've followed this approach.
->=20
-> Someone should unify upstream to one approach or another I would think.
-> Or find a good explanation as to why it's not unified, and then we
-> should follow.
+> android_image_get_data() handles the case where vendor_boot_hdr is NULL:
+> """
+> 	if (((struct andr_boot_img_hdr_v0 *)boot_hdr)->header_version > 2) {
+> 		if (!vendor_boot_hdr) {
+> 			printf("For boot header v3+ vendor boot image has to be provided\n");
+> 			return false;
+> 		}
+> """
+> 
+> So I don't think we should early return here.
+> If we do, we will probably break boot image v2 support.
 
-If these values are per-SoC, which they appear to be given these
-look like 3 different devices, I don't see a reason for these to be
-accepted "upstream".
+Well I guess the alternate fix is to just init vhdr to be NULL?
 
-And if there're not per-SoC then please make sure the _ becomes a - in
-the property name Lukasz.
+Andrew
 
-> I'm not nak'ing this patch but I am noting a problem that needs to be
-> addressed.
+>>   
+>>   	if (!android_image_get_data(hdr, vhdr, &img_data)) {
+>> -		if (get_avendor_bootimg_addr() != -1)
+>> -			unmap_sysmem(vhdr);
+>> +		unmap_sysmem(vhdr);
+>>   		unmap_sysmem(hdr);
+>>   		return CMD_RET_FAILURE;
+>>   	}
+>>   
+>> -	if (get_avendor_bootimg_addr() != -1)
+>> -		unmap_sysmem(vhdr);
+>> +	unmap_sysmem(vhdr);
+>>   	unmap_sysmem(hdr);
+>>   
+>>   	if (img_data.header_version < 2) {
+>>
+>> ---
+>> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+>> change-id: 20250625-abootimg_fix-51600dc8356a
+>>
+>> Best regards,
+>> -- 
+>> Andrew Goodbody <andrew.goodbody@linaro.org>
 
---xPO7eMjQYnGCKQrL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaFwjyAAKCRB4tDGHoIJi
-0j07AQCcDZekPyzjKI7RFBx03UzTiRPqPzFhRxf2vam55oaXtAD+KQdfKIu8Wgr9
-73oHnrIgl6opZorpbBkCm4xVjzIo+g4=
-=90w6
------END PGP SIGNATURE-----
-
---xPO7eMjQYnGCKQrL--
