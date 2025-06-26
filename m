@@ -4,114 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D56C77B7F
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 08:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBF8C7EE32
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 08:09:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D85F82B34;
-	Thu, 26 Jun 2025 10:06:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D643582B34;
+	Thu, 26 Jun 2025 10:09:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VqjC4mNP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7/yfP/nY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4605B82C4C; Thu, 26 Jun 2025 10:06:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8BF1582C4C; Thu, 26 Jun 2025 10:09:55 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1B2B82AA4
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 10:05:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D7B382AA4
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 10:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1750925156; x=1751529956; i=xypron.glpk@gmx.de;
- bh=AumVnxW0VSHn0Dr9yC3cX2yEKDq0M1hxho93nMz2GWQ=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=VqjC4mNPDH8N1k7VH5n2gli0k/28XexxQ5mXpQO9GNwNTkqo/SvvvT2B4w8lqYMq
- aQ9kCtcmMDMlK34Bt25tmnf2vzSSLAEbicmIwXdRQhVv+qpK8ghkNyCWckHNSjU+n
- UZWvl+VSXAC6WEdobTVHDa8ztNKKe2Z4vDpf/i8tRkrGcnEXzxhPijR+7frzdmRPV
- sCzF+QnaI61MxBYtzS/oOHrN5knypg5CrRUxyynnU+JWVbwHnubMBTqmWfIDIpfkO
- LGP5wxQFHajkI/3RFAeRILjUKg/v44JDyRJ5o/kI4DskIaqk5RPQGj5+okTZuNv3b
- xeGR1rzNmaKRZ8A5MQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M42nS-1uUhcK18vQ-002sxg; Thu, 26
- Jun 2025 10:05:56 +0200
-Message-ID: <688f0e0c-7acd-452a-b941-188b76aa9c2f@gmx.de>
-Date: Thu, 26 Jun 2025 10:05:55 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=8272a98f38=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55Q7eaxW032330;
+ Thu, 26 Jun 2025 10:09:44 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ /fMM+hbPYC/RSuBhKupeCZO8tL+PeJH9Hx9I9MpbKwc=; b=7/yfP/nY3RLjU0bq
+ JygMW6RAinaTJSJgdmWDAnxPF0nTPq5BWmdhqZT0D+Zq6PhNMS9yeqUBls6v1EuI
+ dExiziIS8poNLOxACPTuNrdmtW8SeRpiIhe4de2A5HEQkW6KfoaGYbKyEWNidUNc
+ WhEIe+3LPLAB4DO1NKO/VkzQWgCQtyTS/7FHaP+TKtGIZzcDLSayIa9H2LnYMzhc
+ QETV6+VsFhGVJvh+BnYcZzJ5Q1E498sNFmE/ttdgD/9G0Vm5ftIGMqzdbRwUh8Zr
+ 7aIX7B772/q93adLTRg+iZR8fueLI+6sGrkMTgTPpycZWyvpTB+/zsP/6HUnNyWI
+ cmRUbg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 47dj5nxbs5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 26 Jun 2025 10:09:44 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 42BBA40044;
+ Thu, 26 Jun 2025 10:09:02 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2E7F3B17E92;
+ Thu, 26 Jun 2025 10:08:50 +0200 (CEST)
+Received: from localhost (10.252.13.141) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 26 Jun
+ 2025 10:08:49 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/2] ARM: dts: stm32: Add stm32mp235f-dk-u-boot
+Date: Thu, 26 Jun 2025 10:08:46 +0200
+Message-ID: <20250626080846.48576-2-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250626080846.48576-1-patrice.chotard@foss.st.com>
+References: <20250626080846.48576-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: initialize 'total' variable
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
-References: <20250625171528.1062540-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250625171528.1062540-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:BDDejI6vPi+xI/N+ZjfXbSsmzoAHXSNvwfqf8NOY/In+eFkELoL
- hMVQ7onBNz/R5lpp4aWVhcXOAFE+3Mgy7LEc9LfQcNdwJBPtKoFQeCcrIiIcaVWyHYCm6M1
- I2x+WuoIpcpxeA6JKoG/SFiHDEwt7vTGoHcsTTSyHLAxA1BjvIOyGowH6R7n0LzW39frnKX
- M1jSjH4P6eI8nilW+nSmA==
-UI-OutboundReport: notjunk:1;M01:P0:Per26Ub0Zo8=;AXmatxMzuVTl0uEa4R1qWcmQCYN
- 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
- xaGQ+J1sTyGDVZEpk6GK7zMRvVShsL5o=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.13.141]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-06-26_03,2025-06-25_01,2025-03-28_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,42 +89,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.06.25 19:15, Ilias Apalodimas wrote:
-> This variable might end up being uninitialized if we exit early.
->=20
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   lib/efi_loader/efi_bootmgr.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index b9437a81c642..662993fb8095 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -1134,7 +1134,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_=
-option(void)
->   {
->   	u32 i;
->   	efi_status_t ret;
-> -	efi_uintn_t count, num, total;
-> +	efi_uintn_t count, num, total =3D 0;
+Add U-Boot specific file for stm32mp235f-dk board
 
-'total' is a non-static local variable.
-The first line using it in origin/next initializes the variable:
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-     total =3D num;
+ arch/arm/dts/stm32mp23-u-boot.dtsi      | 104 ++++++++++++++++++++++++
+ arch/arm/dts/stm32mp235f-dk-u-boot.dtsi |  27 ++++++
+ 2 files changed, 131 insertions(+)
+ create mode 100644 arch/arm/dts/stm32mp23-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp235f-dk-u-boot.dtsi
 
-If we exit early, local variables are discarded.
-Could you, please, explain your concern.
+diff --git a/arch/arm/dts/stm32mp23-u-boot.dtsi b/arch/arm/dts/stm32mp23-u-boot.dtsi
+new file mode 100644
+index 00000000000..872a8739c54
+--- /dev/null
++++ b/arch/arm/dts/stm32mp23-u-boot.dtsi
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright : STMicroelectronics 2024
++ */
++
++/ {
++	aliases {
++		gpio0 = &gpioa;
++		gpio1 = &gpiob;
++		gpio2 = &gpioc;
++		gpio3 = &gpiod;
++		gpio4 = &gpioe;
++		gpio5 = &gpiof;
++		gpio6 = &gpiog;
++		gpio7 = &gpioh;
++		gpio8 = &gpioi;
++		gpio25 = &gpioz;
++		pinctrl0 = &pinctrl;
++		pinctrl1 = &pinctrl_z;
++	};
++
++	firmware {
++		optee {
++			bootph-all;
++		};
++
++		scmi {
++			bootph-all;
++		};
++	};
++
++	/* need PSCI for sysreset during board_f */
++	psci {
++		bootph-all;
++	};
++
++	soc@0 {
++		bootph-all;
++	};
++};
++
++&bsec {
++	bootph-all;
++};
++
++&gpioa {
++	bootph-all;
++};
++
++&gpiob {
++	bootph-all;
++};
++
++&gpioc {
++	bootph-all;
++};
++
++&gpiod {
++	bootph-all;
++};
++
++&gpioe {
++	bootph-all;
++};
++
++&gpiof {
++	bootph-all;
++};
++
++&gpiog {
++	bootph-all;
++};
++
++&gpioh {
++	bootph-all;
++};
++
++&gpioi {
++	bootph-all;
++};
++
++&gpioz {
++	bootph-all;
++};
++
++&pinctrl {
++	bootph-all;
++};
++
++&rcc {
++	bootph-all;
++};
++
++&rifsc {
++	bootph-all;
++};
++
++&scmi_clk {
++	bootph-all;
++};
++
++&syscfg {
++	bootph-all;
++};
+diff --git a/arch/arm/dts/stm32mp235f-dk-u-boot.dtsi b/arch/arm/dts/stm32mp235f-dk-u-boot.dtsi
+new file mode 100644
+index 00000000000..1bc77874050
+--- /dev/null
++++ b/arch/arm/dts/stm32mp235f-dk-u-boot.dtsi
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright (C) STMicroelectronics 2024 - All Rights Reserved
++ */
++
++#include "stm32mp23-u-boot.dtsi"
++
++/ {
++	config {
++		u-boot,boot-led = "led-blue";
++		u-boot,mmc-env-partition = "u-boot-env";
++	};
++};
++
++&usart2 {
++	bootph-all;
++};
++
++&usart2_pins_a {
++	bootph-all;
++	pins1 {
++		bootph-all;
++	};
++	pins2 {
++		bootph-all;
++	};
++};
+-- 
+2.25.1
 
-Best regards
-
-Heinrich
-
->   	efi_handle_t *handles =3D NULL;
->   	struct eficonfig_media_boot_option *opt =3D NULL;
->=20
-> --
-> 2.49.0
->=20
-
+base-commit: 3b164fd951a9e93a13e793588cbcd3182089ec48
+branch: upstream_Add_STM32MP23_support
