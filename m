@@ -4,84 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E42C7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 22:17:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B72C7EE33
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 22:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C289C82E6A;
-	Fri, 27 Jun 2025 00:16:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 20D3482B34;
+	Fri, 27 Jun 2025 00:16:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=marliere.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LBxd8A+7";
+	dkim=pass (2048-bit key; unprotected) header.d=marliere.net header.i=@marliere.net header.b="mv0fhGa9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0B8482DA1; Fri, 27 Jun 2025 00:16:01 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 7E9FE82977; Thu, 26 Jun 2025 23:56:53 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D027980E9A
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 00:15:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4090D80E9A;
+ Thu, 26 Jun 2025 23:56:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=marliere.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-4067106dd56so1003827b6e.3
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 15:15:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750976149; x=1751580949; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rwgxZmMzVTWam5WlNvg9nNuKw1Nl5sTJyUPJ04XBHWY=;
- b=LBxd8A+7LWBbiRfsgWMSlHLkqE2jt4CkCOIW8RZ+Rup7hDXtRw4iPgqgnih+QBXQoW
- aJPjmSK6NNvDLOVN0VJJ9xeE2/VBn1y/wvbxWGnjfrNdZAJ5ru5ZIVkz+OL/Wy0RdtBy
- fOhxSXpc+mG77CZpHZg3Sg3ERw5BejiZhCcHc=
+ spf=pass smtp.mailfrom=rbmarliere@gmail.com
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-8731c3473c3so41948239f.1; 
+ Thu, 26 Jun 2025 14:56:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750976149; x=1751580949;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rwgxZmMzVTWam5WlNvg9nNuKw1Nl5sTJyUPJ04XBHWY=;
- b=dl3u4TobYWNg6s4boP+WSNXCDjEHltEET9TB6BrdkQ3egCFhQqLWqgyhqD0lZCpIaI
- sW0CGRhJQpwyTzNfbQc3h9CfNw6nmRkBEKdNT+4dAV0Himkf33SpgItB2Il0Fh+UVRyM
- hX9i2gxF5JwrucQ7QHha8lsTXKU72IAI5+TofUbsMB80fKjFAD3x46KZEKfcjUcd1tnr
- VjxmILwe+HhQF0FriZCXdD6Fubfb1JmxnJgYIpS2Ay0SIN/ZCHXh4Q8G0dVY5YFlHFm/
- r6xr3RTKZHnCopdpZQ4f+FLUTnYntTASvHJAJd54gF2EFLaeF/NIwHv+dDefGPUymoyq
- 1bvQ==
-X-Gm-Message-State: AOJu0Yz0fbkd8FN4xvvhfiCIsC4hqSU+oJ9ujrnafuW9cXM+v8uFyhcK
- Cx2U0PwyelVNIIf6tXIkDkj7pLkAUbOO7SfVV/S4CuvTbzfRMQWejpk5i6XPmj1AF+c=
-X-Gm-Gg: ASbGncu2RcNh+Uy3e6S0+2W0yR0upeQFMGAqMCfTebZgfIhdpcxaAr5II8OcLryej6o
- 3QkcT0zRojVTuC6rEkxovNI1THdiDRPwm1K1QOJOBh8rIFrd9+v75a5UPhzhVHU00Wp7TctpmBj
- XztO4wjjG1jhlI6eAQjlqAGRXAXTJ2NvoSz0rnWbclz9wiw2kOtjqkHuFhNRVQlHEMNNeadp2rI
- A+BFXkvdG2m2sV8c8KQ2Duoj8dD7WQrSNrEubrOfdOrrR8hc7wJtLkClcvsAo4LGC85HGH6VkIL
- IUjG3wCHZGs0CydtImgyNPoJlcChFqTp2MTvYfdMCaUSyatIzfCAly3qTQ70WFlPzY+Llj5c+9D
- BidTitXD9VseAfbAcBC1MAQ==
-X-Google-Smtp-Source: AGHT+IEfunbGeFFmx1G84ogNxJ/8iJ0fl0ivs0yh+wvM0gejB3vTnaVHIlRXFJjbjHAYCtaXq0o/Hw==
-X-Received: by 2002:a05:6808:1914:b0:409:f8e:7282 with SMTP id
- 5614622812f47-40b33c47449mr755453b6e.5.1750976149602; 
- Thu, 26 Jun 2025 15:15:49 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b32289ce3sm129676b6e.6.2025.06.26.15.15.48
+ d=1e100.net; s=20230601; t=1750975007; x=1751579807;
+ h=in-reply-to:references:to:cc:subject:message-id:date
+ :content-transfer-encoding:mime-version:from:dkim-signature
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SC20LiWWtz5KUGCUi3XhzR02YMG6updQi+P8j0cV62w=;
+ b=kOcxpzNi/BPpqeJLKDVX0iKuQEwKTeVCAnSqtYnPrjrq5eZrSaO/f0AZxBn8RelVB6
+ ZaeD6Zm6Sl35r359scguoR2IF3A0l6LoDzWk2FDXPaZyE6D8pgF4lGXwk/Opf41XPGT8
+ Luva4ZT8l2DUX00SmaZs81Effegk00PdxrMbOwJpAdiKZH6rebSPN+8IukJg99565r5E
+ m4b0Thjv2bLwcpKrljEeCcDp7SntUh7MUgPUkW6pj7zND72hHyKJM369L/9FUeQWUz9E
+ WpQLxxLRcRRrEBARRMjQjHjP20Ke8cWhh51y1F4tT4QPILowLB/bcM8Wgs9elGBsVdf+
+ cpvA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUeGDjRm9DoXivh+PD3rEEaEvgZEyM1hZWADzJ4soZtcqEGB0skxPELfBAzcfiYnTtcvvlHmUJhLRZyiRomg==@lists.denx.de
+X-Gm-Message-State: AOJu0YzoHRnnXMDA5EdlU4e10BdPtV3tuePZKfofx9xzm4UqAy+m1xQ8
+ LC8kw23yhBNsKyB2arQ5TdPc6fibgwrVchLODAGG8HuPFtT4ku8BtKD2
+X-Gm-Gg: ASbGnctdg/F+MfROFDAVHXBoOI81D1aFP0UqSZifB8sBbNKOG6W5vivboy1n6sZi00R
+ s91AhYlueh0BAMO2ZMPQOag8wFKJpMoOZ7NM7qVdeLDuDbCtB5UaSaoh0hgAijPp8c3KWh/JFBN
+ hlgRP3EEhvzemT/XTKDk32HihDuzYH/cuST1Y3rKPNLjeW+iYqV/m/DJT41jYwbtu0i9XdEh3IU
+ Fk+vIiVvHmcyy+987+XbBKzOe72jSLBr6HHjs9QxdYq48pHSmXW9Wdh8FOgqvifQPm6z1KMh2Ko
+ yX7YGQ3owYsKVBWwLpeM6jBl9WDtwHP6dnfsFXNgc4hSDT8WIzAXgqs8bK2IxXOGy/4KNizGLNB
+ w9QYgBwbMm5awwL1V2/p1kR1Eb2PuMpVY
+X-Google-Smtp-Source: AGHT+IEm4/8kp5fBz7ZPh9KiB9PNxtfgycndudgrDDv58Bv4OWmbRMlrfPGNJfV44UIjkrMZBa8hOg==
+X-Received: by 2002:a05:6602:c88:b0:875:bc7c:5cf3 with SMTP id
+ ca18e2360f4ac-876880f9d34mr185538939f.0.1750975006845; 
+ Thu, 26 Jun 2025 14:56:46 -0700 (PDT)
+Received: from mail.marliere.net (137.65.66.34.bc.googleusercontent.com.
+ [34.66.65.137]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-502048c6ceesm186583173.47.2025.06.26.14.56.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 15:15:48 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Heiko Thiery <heiko.thiery@gmail.com>
-Cc: Udit Kumar <u-kumar1@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Vaishnav Achath <vaishnav.a@ti.com>, Keerthy <j-keerthy@ti.com>, 
- Bryan Brattlof <bb@ti.com>, Michael Walle <mwalle@kernel.org>, 
- =?utf-8?q?Thomas_Sch=C3=A4fer?= <thomas.schaefer@kontron.com>
-In-Reply-To: <20250612115015.266601-1-heiko.thiery@gmail.com>
-References: <20250612115015.266601-1-heiko.thiery@gmail.com>
-Subject: Re: [PATCH] mach-k3: j722s: enable caches for the SPL stage
-Message-Id: <175097614811.1909185.10197993837809441579.b4-ty@konsulko.com>
-Date: Thu, 26 Jun 2025 16:15:48 -0600
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+ Thu, 26 Jun 2025 14:56:46 -0700 (PDT)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id A0DB360754; Thu, 26 Jun 2025 21:56:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marliere.net;
+ s=dkim; t=1750975004;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=SC20LiWWtz5KUGCUi3XhzR02YMG6updQi+P8j0cV62w=;
+ b=mv0fhGa94wO/UQhp4OdAkxH5b89ZD3v2PPYpDJBy3JwJFOGIwx5TvAQDZYac5loeko4T/p
+ ILDcAD2roEiXwGheobmYMFoznfRa8F4kO06gCR0Aj5fgrYyR7Kw8LifCplki86bMNgBnT3
+ JrPCFSpXzxwP985C5bA7Z5kTtAXd9ISqLXb5+U1KVKIpEuYVlc0B0gLDwm8xLV6iHkG8+U
+ bzfnP4hun+NzhmNwnd9M6ZzZOFHXdmIskJBn3DHEjGzT3DX/3Lc6yXPMdGNAS4TWFvlzl7
+ UB0CLdjJfZIRJewMiMBLc0tOwrM2rL8Ht3pf2LAVc38jenA7+DXKtuIKCcTNkQ==
+From: =?utf-8?B?UmljYXJkbyBCLiBNYXJsacOocmU=?= <ricardo@marliere.net>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 26 Jun 2025 18:56:34 -0300
+Message-Id: <DAWSTZRJDZG2.3VCR6G95TP40K@marliere.net>
+Subject: Re: [PATCH 0/5] Convert Lichee Pi 4A to use S-Mode proper U-Boot
+Cc: <u-boot@lists.denx.de>, "Han Gao" <rabenda.cn@gmail.com>, "Han Gao"
+ <gaohan@iscas.ac.cn>, "U-Boot" <u-boot-bounces@lists.denx.de>
+To: "Yao Zi" <ziyao@disroot.org>, "Rick Chen" <rick@andestech.com>, "Leo"
+ <ycliang@andestech.com>, "Tom Rini" <trini@konsulko.com>, "Wei Fu"
+ <wefu@redhat.com>, "Yixun Lan" <dlan@gentoo.org>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Maksim Kiselev" <bigunclemax@gmail.com>,
+ "Jaehoon Chung" <jh80.chung@samsung.com>, "Jerome Forissier"
+ <jerome.forissier@linaro.org>, "Sughosh Ganu" <sughosh.ganu@linaro.org>
+X-Mailer: aerc 0.20.1-80-g1fe8ed687c05-dirty
+References: <20250530094851.57198-1-ziyao@disroot.org>
+In-Reply-To: <20250530094851.57198-1-ziyao@disroot.org>
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Fri, 27 Jun 2025 00:16:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,19 +108,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Jun 2025 13:50:15 +0200, Heiko Thiery wrote:
+On Fri May 30, 2025 at 6:48 AM -03, Yao Zi wrote:
+> RISC-V software usually expects that HARTs are running under S mode when
+> leaving the firmware, for example, the UEFI specification explicitly
+> states requirements for S mode.
+>
+> This series separates M-mode-only code for TH1520 port out, and
+> configures binman to pack the OpenSBI firmware to initialize the S-mode
+> environment. Then S-mode proper U-Boot is enabled on our Lichee Pi 4A
+> port.
+>
+> Note that booting on Lichee Pi 4A is broken between PATCH 3 and 4,
+> affecting bisectability. Considering TH1520 port is still in an early
+> stage and separating the changes make the commit cleaner, I personally
+> consider it's acceptable.
+>
+> Yao Zi (5):
+>   riscv: cpu: th1520: Build spl.c for SPL only
+>   riscv: cpu: th1520: Support cache enabling/disabling in M mode only
+>   riscv: dts: th1520: Prepare binman configuration for loading OpenSBI
+>   board: thead: licheepi4a: Run proper U-Boot in S-Mode
+>   doc: thead: lpi4a: Update for S-Mode proper U-Boot support
+>
+>  arch/riscv/cpu/th1520/Makefile          |   2 +-
+>  arch/riscv/cpu/th1520/cache.c           |   2 +
+>  arch/riscv/dts/thead-th1520-binman.dtsi |  32 +++++-
+>  configs/th1520_lpi4a_defconfig          |   1 +
+>  doc/board/thead/lpi4a.rst               | 125 +++++++-----------------
+>  5 files changed, 68 insertions(+), 94 deletions(-)
 
-> This is same as done in 27cd65ca1bf1 ("mach-k3: am62ax: enable caches for the SPL stage").
-> 
-> This is resulting in ~2x speedup in the A53 SPL stage.
-> 
-> 
+I also tested with OpenSBI 1.6 on a Lichee Pi 4A 8GB.
 
-Applied to u-boot/next, thanks!
-
-[1/1] mach-k3: j722s: enable caches for the SPL stage
-      commit: cf2abe7b1e6d5a2266d14f801d4eb52edec39ed6
--- 
-Tom
-
-
+Tested-by: Ricardo B. Marli=C3=A8re <ricardo@marliere.net>
