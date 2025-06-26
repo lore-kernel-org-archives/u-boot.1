@@ -4,91 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CACC7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD35C7EE32
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:39:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2243380E9A;
-	Thu, 26 Jun 2025 14:31:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E9ED80E9A;
+	Thu, 26 Jun 2025 14:39:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N1QWu1dP";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="QA4hOo3R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C172582063; Thu, 26 Jun 2025 14:31:49 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8F08B82AA4; Thu, 26 Jun 2025 14:39:55 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20730.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::730])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C692809A5
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 14:31:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73C68809A5
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 14:39:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-453066fad06so5187255e9.2
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 05:31:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750941104; x=1751545904; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zUnhJsTjL+cvK7ren7XaSyMi66MLmKZs6nCAXJFZTPA=;
- b=N1QWu1dPipjmkzeEwNipZSYOfOKEwXhpYHT9uiOivzKx/Wg6Nwp0qa8zU8cyOSTy69
- Il7Qo38b4Zs1rWtMX/d7RHS27wkcJp8zhdttdx2r8csMjTa+yrM68sKzz+rsKsHuf5GZ
- ZA46nkCnDNa9lCGY3ewZy+zm1hQU+Pst2mshl0Yq/FTvZQ86Rf8mZkVWa6VMG8DJGqa0
- 4tVs6qv70+FpLHxNEYcPTVX0dTDFxd7mFvhFzl2uc0ao/tZQ26zkQL37jGSVUmrXer4A
- 6vPLXoUV7/NpEzxtKcDJV3vmA3XdTWY85Ns/bs9PREElE6vngPo56lz6WZsMlncRUTyO
- B7hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750941104; x=1751545904;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zUnhJsTjL+cvK7ren7XaSyMi66MLmKZs6nCAXJFZTPA=;
- b=MjvbAR/Vl0Wt0/W7bm2cCMZDXOs9XLZNFJWXVxjgFmuUVsWVeunrTJWN+gQv6E7CQ0
- qjUcQgaZZrB1av8YWmZt9NRIE69fdtzV8B2FyoVHC1CwSc7+4FKutXX/SIHkL4vmwoh7
- qOCHBwKiLHB2AD0J24TdnSdKc4ss7EOSHSlbLCh4LlcJvIOv0oqqeu8qH0EMD2L/N1Cp
- 1AAc56w/f219RdycmjxH0EXCaN8EJSQSsToomBNlpeNGhvphwhH8BIgblbE7UQRiidfv
- DsuGL9T1S9YjMkbV8bcn6q9cw4PD7hN9OETWAjaBsE0zW1SNsOB8p3NVlByvj/u74qpF
- KaXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUUbRxnHsekJ8dbDusszuoqhBhaCmg0qExt5gU6yfhvS4GwQ0F1uuIG1cFk4rQxdlz4IZ8XMyQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfF6sHV0b7LOvx55++bOS56hLozOytGws+CwnZ+d7Gw0Vn3Sld
- nqTm9RGFhOSFPYpuCOcsXopQjvO7alOZKRiwbS1F2i5JzvB+k1Mj0eHIU5eO234blok=
-X-Gm-Gg: ASbGncvSrSu2Qe5BwX8UBoG+l69VlYQn19z4/BjhJN6ZlPhDoFvATsbDYqQF5dhAvXv
- nG2i+If9d4ZejLe/GW4DMuEwmGeMGO3CdReQPLgF1VjCEwBTqKrLEU9Ek/loO2AQYR1fqdbe3Uc
- 7qdMMfU6A/vxDvCYW9uHVIiY+gok1Pbvcsx3+po5faVRIZj6Il5++zhf8nQsurHZcSlbirty0QK
- fhiBqxltkCfLOLj9cA3kSHPol6lqzNiF7Dcz8WeSApaBKSOdCANy4Kf6D/gsw9PuSWN7p8MkFbg
- LiXvNlN0kPFkrkrJLOb9dRuYTTxVrF7FZFfTUpcU4vaAjUQO/44dRQqafjOtf5fuinOcypYxryu
- oYiBQeZanPOjqo5JYCLyj9JLis5f1tx1bpW/uMJv8
-X-Google-Smtp-Source: AGHT+IEqGoRxIn+ILLRFgUx+oBkC33WhOS6Z+C1syfagxVoXj2ukfehySk/kNq0hTjpsvjd2qimm9Q==
-X-Received: by 2002:a05:600c:37c9:b0:453:7bd:2e30 with SMTP id
- 5b1f17b1804b1-4538dbd5effmr7806675e9.29.1750941103628; 
- Thu, 26 Jun 2025 05:31:43 -0700 (PDT)
-Received: from [192.168.1.159] (p5b29ef66.dip0.t-ipconnect.de. [91.41.239.102])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4538234b6b3sm50259095e9.13.2025.06.26.05.31.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Jun 2025 05:31:42 -0700 (PDT)
-Message-ID: <5afbdafa-a0f9-4146-b64e-8869f68bc7f8@linaro.org>
-Date: Thu, 26 Jun 2025 14:31:41 +0200
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oqrkXUElyx3vlBg1M898oemfod27oEmRLXs6jr3ktu0cDtf2wGl+AtbldfKO8/PD+e4xbkL8rEPrNhcrv3rO6VTJRFeC88q3E9/2nVPDkgOkQqeQDglwoa6L4Wn2t+LkJXMJPv+wkMQE3jMANm8PXGNoNgFVR6Dvd1u7LhZioQ6b+IhxiZZl6etrHuv5vTHc5J0p4pxqgPTEBSDyPOfCUBZAstIlZR95sK92oYu20B6NYSa5YeYceM7SQWHwc26O3NPi/KHZBCk2AU/KLIqD7e4qeEDZgshO2UP56IQarHvxV+YsjUAjdMrc5Er/o28/s5SzR8PNpSOdAcftMcN6zQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aRJquJmtYVmlLynXGZhX8ZdU3sO3Aj2yskmOv+8hcnI=;
+ b=Yn3fRxmLm1L3m3+8XY/CPtjxS1Blm0SexAvN29/N9rE9OU6kjgsO+MIwpjEJDKvSYb74Jxv1ekgJxQlHTiFTy2EFwe/OrSaqfbEzTVljgxMlCSPfImCcl95jze7YJZ8p9TCTfPaCTMdRdkAvV26MNAr1Xc6FKXmluqF1mU0xOb3/MpCeu/FgMd+Tgek3v7OSzVObB+MpS4cxIrKI3DvzcowJxKmBI9cIWLRvmV3TkRqjeo44rL/Mn6wCWrFE91Z5tZt16M3eh3X3PJniD8CLZeLDkMXN3QUGOFS8ULtqVs9ZaDt+zZfnBGYpVxcNixyCXFW1iy/MFFfKXyYlbJ28Ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aRJquJmtYVmlLynXGZhX8ZdU3sO3Aj2yskmOv+8hcnI=;
+ b=QA4hOo3RAtu8epfKneNXv10PE9xY256wiiaB6DNhNK9c8/QCHPg9qqDjNzHMaN1Fd1ydKq52x6z6BCLHb3otslj5dhvkABzUbs5mToegBDbHvD39xUMX1DYwb89wKEHaWoY3f1XdBI3pDBb84kNbPUvocmksrjYBWx326GxaOTeAojAJ4+pz3AiEQhNNMHFqAYZC9bk8jBwwI36UMkH4WijBoEVZQrhbKHXNHTOoNZ5KWQhnKP7iDZorco62PXO6E0aIAYip3MyOB7pBo5jwTInlY9JV6fdHqYvlRptqkoOy/uXl8CWIoSLSBJ4jglC50betSfGlbDY71bL+iCBgdg==
+Received: from AS4P189CA0037.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5dd::8)
+ by GVX0PF886830E71.EURP195.PROD.OUTLOOK.COM (2603:10a6:158:401::7d5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.30; Thu, 26 Jun
+ 2025 12:39:39 +0000
+Received: from AMS1EPF00000040.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5dd:cafe::6e) by AS4P189CA0037.outlook.office365.com
+ (2603:10a6:20b:5dd::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.17 via Frontend Transport; Thu,
+ 26 Jun 2025 12:39:39 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AMS1EPF00000040.mail.protection.outlook.com (10.167.16.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8880.14 via Frontend Transport; Thu, 26 Jun 2025 12:39:39 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 26 Jun
+ 2025 14:39:39 +0200
+Received: from phytec.de (172.25.0.51) by Florix.phytec.de (172.25.0.13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 26 Jun
+ 2025 14:39:38 +0200
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>
+CC: <d.schultz@phytec.de>, <francesco.dolcini@toradex.com>
+Subject: [PATCH] board: phytec: rm-cfg: Update rm-cfg to reflect new resource
+ reservation
+Date: Thu, 26 Jun 2025 14:39:30 +0200
+Message-ID: <20250626123930.128398-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/4] Added QCOM RPMH Power Domain Driver
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, jh80.chung@samsung.com,
- ilias.apalodimas@linaro.org, rui.silva@linaro.org, me@samcday.com,
- quic_varada@quicinc.com, sughosh.ganu@linaro.org, miquel.raynal@bootlin.com,
- balaji.selvanathan@oss.qualcomm.com, sjg@chromium.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250626112441.143064-1-aswin.murugan@oss.qualcomm.com>
-Content-Language: en-US
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20250626112441.143064-1-aswin.murugan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.51]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000040:EE_|GVX0PF886830E71:EE_
+X-MS-Office365-Filtering-Correlation-Id: 09fedf3d-4330-427e-8425-08ddb4ae846a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|82310400026|1800799024|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Oao9cO2AHwxN0tenAbG+JqiOj39q4YN7RZY+iRGBrbwBuJ8cW6knu37uXBm2?=
+ =?us-ascii?Q?flAtlXmhkXtsOW4jOpgzpzBi6WFFKwsPEXxQXEb2ZXhgy7nEhf7YiAOVM5A4?=
+ =?us-ascii?Q?z5/t0gcVglpv7AyrXZnRgHIT0OF3KJv9EIVj4pJfIGS0IgLM4iQ9e/PrSbxV?=
+ =?us-ascii?Q?R7c7Pmo3PUQHvoQwGms2JkzcF3NuauinElcHcHjuYdGr+9sezmm7mQTqZDGy?=
+ =?us-ascii?Q?LFfdyIRir3R68FDLtC5+3ODMHPOHAokjHUHg9YHmLyCguwuSqLRBq/H9bWvD?=
+ =?us-ascii?Q?u/ROnV4uwhwX6omwTILcNsf2qyTg68vQWn5uTP8KgNnCHLYHmi+FFi81+Jl8?=
+ =?us-ascii?Q?g2S+VBdOiqNHDAWTOmXEILdmUL9hTHuxvs3i4l2k/KkTom3U2e5UZg8Gp8pa?=
+ =?us-ascii?Q?/OLyps7LKUaK6/fsMZs3/LjCa/6OHCEXTcvs6pBgc2FIHVDyx6e/pisrV6F5?=
+ =?us-ascii?Q?Cs4G0TGUiVnQrpTxSICEHdyVCo8prD6Ia29l22XmDm4YuCABvj+KJzlJIqh4?=
+ =?us-ascii?Q?rOfY/Hmc1yqAmlb0W0Wl7FFkEBxSuscjgw2AXZCxSXyORL5g6+NmOyRtGYxK?=
+ =?us-ascii?Q?bO6nDw+pGiVmZpv+qtghX6bWrlCX+uUb/LZGw5ftCYtIf0adifrWzk5g2m9N?=
+ =?us-ascii?Q?wWTz1FaAvWikQXNoQ9F/3+ytE5o/5iJKo/hXpgevMamp3qRPwbv+Na1HLhCE?=
+ =?us-ascii?Q?+ftBj0k/YvSjMpbpOuCsKKoHxkbi8i49p9Yq8W8/WV3WjJa+Xan8NkkT1kmH?=
+ =?us-ascii?Q?4w0/i4+xoqekY5dcqA/QBG8+1AT+SrX275/ho2NZO+eWkN0X/unryGQwyea5?=
+ =?us-ascii?Q?/sDld/bM45FVQlq6wJYs6BLl3U2NO8J3tuXp2KBZCA37VPxxSnOYKilEBBX6?=
+ =?us-ascii?Q?xTXHx72Rbz+HqBBw3CO8a+zPeaDUsr67WJULSXjLo3wQiT6osdumYB6ZpaH0?=
+ =?us-ascii?Q?HUjvxA/cUwMjh0SByv3WnoIzqBLTxEgV7FRaWHgwmZlgkFKPX3hy6iJ6ITLb?=
+ =?us-ascii?Q?lpXEEO6gBZYj/jOSe0050u4e+4zuYtcDdAN2gwtdTs+jZAxR+Q6Cexanw0Fw?=
+ =?us-ascii?Q?Vfxy1G+EfhrBiAqmapfJMHqhNAJtJAhV297jRJIwMy/Y/KPzQ07CkBtvbJaH?=
+ =?us-ascii?Q?x3J86pd+ppxr0IPxg5SMAVFjOIRIbhvTZ9YWP//SdA8sf5aU7tZ+dSqCA86z?=
+ =?us-ascii?Q?vkUp02VHU7kJjOUS78mDVrwhhZURZSp5wtO3BZRiO7/ncGduThrZW9dIJGJJ?=
+ =?us-ascii?Q?4ZfIZYl33mdeMS2jtZ0FGe/6DRdn5A0LX13f4r2jGpGtdMSRBe9D/B/WYOgM?=
+ =?us-ascii?Q?y4N19GK1kfvyKM8J7Bz8ZsBMWO2wnD19FhN1SacqT5cQDzhC1BfPIGA4lUaw?=
+ =?us-ascii?Q?69AwYv1Z32pZLHdLQ2DZlEEQpP8BVPMCu+BdEqcbAbRsWMyfWIgY4G6qUNYu?=
+ =?us-ascii?Q?PZK6H1SGQArY6YYpfQ3NbOdcO3j/rpWunkGLzczlC++cMYxJKr9CNQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024)(13003099007);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2025 12:39:39.4185 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 09fedf3d-4330-427e-8425-08ddb4ae846a
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000040.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVX0PF886830E71
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,57 +147,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aswin,
+With the latest TIFS firmware, an additional virtual interrupt and
+event is reserved for TIFS usage on am62x and am62ax devices.
 
-On 6/26/25 13:24, Aswin Murugan wrote:
-> This patch series adds support for the Qualcomm RPMH power domain
-> driver, responsible for managing power domains on Qualcomm SoCs.
-> The driver is ported from the Linux kernel and adapted for
-> U-Boot to enable proper power domain control on SA8775P platform.
+Update the rm-cfg to reflect this new reservation.
 
-Thanks for working on this! I'm very glad to be reducing the amount of 
-DT fixups we do at runtime.
+Based on commit 87720385ab69 ("board: ti: rm-cfg: Update rm-cfg to
+reflect new resource reservation").
 
-Before getting too deep into the code I have to push back on part of 
-your approach here. I would ideally like to see the fixup code removed 
-entirely and rpmh-pd support for most if not all platforms, I think this 
-should be possible? At worst we could have some "stub" code for 
-untested/broken platforms which would also let us drop the fixup code.
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ board/phytec/phycore_am62x/rm-cfg.yaml | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
-Something missing from your description here is an explanation of the 
-motivations for this. What platform is it needed for and why? Are there 
-intentions to expand this in the future? etc...
-
-I guess this comes down to a slightly broader topic that I'm kind of 
-flying blind when it comes to the work you folks are doing, it would be 
-good if we could have some regular meeting off-list to discuss this 
-stuff so that I can better align the work you're doing with the work 
-going on at Linaro and in the community as there is a lot of overlap. 
-I'll follow up about this off-list.
-
-Thanks and kind regards,
-
-> 
-> Aswin Murugan (4):
->    power-domain: Add QCOM RPMH Power Domain Driver Support
->    soc: qcom: cmd-db: Add cmd_db_read_slave_id() & cmd_db_read_aux_data()
->      functions
->    mach-snapdragon: fixup power-domains
->    configs: qcom: Add OF_LIVE_SA8775P & QCOM_POWER_DOMAIN config
-> 
->   arch/arm/mach-snapdragon/Kconfig    |   7 +
->   arch/arm/mach-snapdragon/of_fixup.c |   6 +
->   configs/qcom_defconfig              |   1 +
->   configs/qcs9100_defconfig           |   2 +
->   drivers/power/domain/Kconfig        |   8 +
->   drivers/power/domain/Makefile       |   1 +
->   drivers/power/domain/qcom-rpmhpd.c  | 271 ++++++++++++++++++++++++++++
->   drivers/soc/qcom/cmd-db.c           |  45 +++++
->   include/soc/qcom/cmd-db.h           |   2 +
->   9 files changed, 343 insertions(+)
->   create mode 100644 drivers/power/domain/qcom-rpmhpd.c
-> 
-
+diff --git a/board/phytec/phycore_am62x/rm-cfg.yaml b/board/phytec/phycore_am62x/rm-cfg.yaml
+index e4221f82f92..26d99b03b80 100644
+--- a/board/phytec/phycore_am62x/rm-cfg.yaml
++++ b/board/phytec/phycore_am62x/rm-cfg.yaml
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+ #
+-# Resource management configuration for AM62
++# Resource management configuration for AM62X
+ #
+ 
+ ---
+@@ -244,7 +244,7 @@ rm-cfg:
+             subhdr:
+                 magic: 0x7B25
+                 size: 8
+-            resasg_entries_size: 960
++            resasg_entries_size: 976
+             reserved: 0
+     resasg_entries:
+         -
+@@ -285,10 +285,22 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 0
+-            num_resource: 4
++            num_resource: 2
+             type: 320
+             host_id: 12
+             reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 320
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 320
++            host_id: 36
++            reserved: 0
+         -
+             start_resource: 4
+             num_resource: 4
+@@ -501,13 +513,13 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 35
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 36
+             reserved: 0
+@@ -543,7 +555,7 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 909
+-            num_resource: 627
++            num_resource: 626
+             type: 1805
+             host_id: 128
+             reserved: 0
 -- 
-Casey (she/they)
+2.34.1
 
