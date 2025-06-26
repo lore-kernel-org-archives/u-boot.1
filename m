@@ -4,70 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AD1DC7115B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 08:51:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 622D0C7EE33
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 08:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6A6482AA4;
-	Thu, 26 Jun 2025 10:51:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BB59B82AA4;
+	Thu, 26 Jun 2025 10:58:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="q9VnQQVJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZhU1hLHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5311182C4C; Thu, 26 Jun 2025 10:51:31 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F04B18006D
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 10:51:21 +0200 (CEST)
+ id 949C882D83; Thu, 26 Jun 2025 10:58:20 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 393BE8006D
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 10:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55Q8pELd1693248;
- Thu, 26 Jun 2025 03:51:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750927875;
- bh=LM5xeaeABmqIhmXzm2NamDG+cHqNB2WwX9uWtTe4Fyc=;
- h=Date:Subject:From:To:CC:References:In-Reply-To;
- b=q9VnQQVJdlrzBqjN3wgikv73XCXZLvbE4NXJueuAuam6u8nUm0Q3LUYKg0MKseCQm
- 4xxL9gqLrmfciDfzXikIkRR8UlsFD/AMMOhUCvst1U8UfwXsH9mVAiIwk8SQmwkTpS
- 20JVVNpX5uO8VooIArR/FyVIk65RdQS+EaU5EOIo=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55Q8pE3S3474785
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 26 Jun 2025 03:51:14 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 26
- Jun 2025 03:51:14 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 26 Jun 2025 03:51:14 -0500
-Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
- [172.24.227.136] (may be forged))
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55Q8pBjc722179;
- Thu, 26 Jun 2025 03:51:12 -0500
-Message-ID: <32e126ee-1c0e-4db6-aecd-601ffae37265@ti.com>
-Date: Thu, 26 Jun 2025 14:21:10 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-451dbe494d6so7378285e9.1
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 01:58:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750928284; x=1751533084; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4RdJGdjRLTAOFN5nepA511pZmDj8K3N8+FxbfeIEm3Y=;
+ b=ZhU1hLHok1/eRfxsCd9KvT6CCKKqhupPEBUnTtqGluzvM6TpY8Hanho9PYieO9nOn6
+ C4XYOKCJNSeK3zCme78F8cBm7OfdctjoXDMEH4GaThh2jSQpZyLN7v7ZKbqfdki6yZEJ
+ xoWLxl9HfI2LpWlN76BLXoDlL6jQ+RZmnD/2AFxER0umKrtC/MiEZJMop/iFXISl6DhA
+ 6BXUrw83K+eoymDO2JxxKPYVxmQGXvEuW5a0QxUUs0DIKYWViTbYHbuymnEsTCI/+eTv
+ T+SMsOLP/qfYfaEW+myCf2ZZvQj6VAx7b8Dee16NE/ksbWXB5algwsbXyuCC5Hf8yGbZ
+ 3ERQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750928284; x=1751533084;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4RdJGdjRLTAOFN5nepA511pZmDj8K3N8+FxbfeIEm3Y=;
+ b=Caa8iCSCDZJkT0uouZoQNPInG1aHkiNXU6FgxflJ+x7wOTDF4hbpd8lbGAbqXXKGg1
+ FdCLUDYxAhoa8avKVMLq+vjPtr9KsEDpcJO01qiazhEe7QFNzM1Mpk/F367FjBbQwqCn
+ 0Zj9xKOSJItWK/Xc5yH3b3+u3nK5dX4wTZ28B/gPMULlUNWLjCIdfhiXl35YQyJeUHwy
+ MiAEHQLLV4pqPKiTyLkZzKwH5LP+xDyoI/G0ciXWIe0w4UYQ7Mgfgtc9CMRLRbPdiBgu
+ tLUGMZbX+MDCH/4N5hv2lfRLN3it/kTtNbuhkO1KSM6+kLcHKHj9BaI3uekb6sOMiyLr
+ spAg==
+X-Gm-Message-State: AOJu0YwrrkcDKr+on2m4nfPZUcN9J0uTTBgf/cH7OiWVaLKS6eDcpoq/
+ aX+rb5Y42Lvt1QGAfZaUOvHRKFwidN9chXeAwJAdz8aTNKzazOTKohPMKIqtavfwO3g=
+X-Gm-Gg: ASbGncvEaJmO3yaTzI4MxeNAfwLLljyFohk8CWe/T1NyvPwdTFbGUil4kND1ghshYRN
+ snClwzWuUAGxxqGQCa7+DN/ZGMyzcGQ3rMBXIfPHJWJR88HPl1S4mbe/wPMdSCfmF33oarwEyCB
+ 0ohTu0fb89Rqc2sJpBMKyH1n2Tu4yqa0lH7QD0kDwi855Ld48l0ebncSb9Q1R1M8bbaoX4cdOqA
+ 7NBn7yNJhI+MhoKJn6fxfl0bh2lCTsemCJqQplrgtbhGOxtTvm763tDIfZAKgd7KCrZe/49MP3g
+ 8WZ0BPaGukf8PJBC0kth9C8tExFKU2AkKt1QsIS+YHhNCQFcnnQfLwB7x3HoqpRfsjz8j6Eb75X
+ /hGQVHfQw9U2HeQ==
+X-Google-Smtp-Source: AGHT+IFjGU/FBi8XnLCVKsQfWa/jZhWZlgeS8/cfRipXNGowT/NVM7Y5L3k/O+p8UcXQFYifANmXug==
+X-Received: by 2002:a05:600c:a315:b0:442:f4d4:522 with SMTP id
+ 5b1f17b1804b1-453822d608bmr45680055e9.5.1750928284540; 
+ Thu, 26 Jun 2025 01:58:04 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:ee3:2301:12b:81c6:a008:45a3])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-453823c3a96sm42955735e9.35.2025.06.26.01.58.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Jun 2025 01:58:03 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Thu, 26 Jun 2025 09:58:03 +0100
+Subject: [PATCH v3] cmd: abootimg: Prevent use of unintialised variable
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2 v2] Propagate bootph-all and bootph-some-ram property
- to all supernodes
-From: Moteen Shah <m-shah@ti.com>
-To: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-CC: <sjg@chromium.org>, <alpernebiyasak@gmail.com>, <quentin.schulz@cherry.de>,
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>
-References: <20250516114148.3862114-1-m-shah@ti.com>
- <f2e58917-85c0-42ef-8e26-0a059da0c6ae@ti.com>
-Content-Language: en-US
-In-Reply-To: <f2e58917-85c0-42ef-8e26-0a059da0c6ae@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250625-abootimg_fix-v3-1-9f302e96807d@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAJoLXWgC/32NwQ7CIAxAf8VwFgNM5ubJ/zDGdNBtTRwYWIhm2
+ b8Lu3nQ42v7+hYWMRBGdt4tLGCiSN5lqPY7ZkZwA3KymZkSSotaaQ6d9zNNw72nF9eyFsKaptI
+ 1sKx0EJF3AZwZizRBnDGUxTNgvt8611vmkeLsw3vLJlmmPwpJcskNyvqowbTNqb08yEHwBx8GV
+ j4l9c9W2RZWtdoa2UtUX/a6rh8jyuIxAAEAAA==
+To: Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,48 +101,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Tom,
-Just wanted to have a check on the patch series.
-Is there any change expected on this or is it good to go?
+Initiaise vhdr to prevent its use when uninitialised.
 
-Regards,
-Moteen
+This issue was found with Smatch.
 
-On 09/06/25 11:52, Moteen Shah wrote:
-> Hello all,
->
-> On 16/05/25 17:11, Moteen Shah wrote:
->> In the U-Boot pre-relocation stage, if the parent node lacks
->> bootph-all/bootph-some-ram property and the driver lacks a pre-reloc
->> flag, all of its subsequent subnodes gets skipped over from driver
->> binding—even if they have a bootph* property.
->>
->> This series addresses the issue by scanning through all the nodes during
->> build time and propagating the applicable  property to all of its 
->> supernode.
->>
->> Changes since v1:
->> - Carry reviewed-by from Simon
->> - Add a subnode-4 in testcase
->> - Change commit message and comments in control.py
->>
->> Link to v1:
->> https://lore.kernel.org/u-boot/20250512115028.1783305-1-m-shah@ti.com/
->>
->> Moteen Shah (2):
->>    tools: binman: control.py: Propagate bootph-all/bootph-some-ram 
->> properties to supernodes
->>    tools: binman: ftest.py: Add testcase for bootph-* propagation
->>
->>   tools/binman/control.py               | 54 +++++++++++++++++++++++++++
->>   tools/binman/ftest.py                 | 24 ++++++++++++
->>   tools/binman/test/347_bootph_prop.dts | 21 +++++++++++
->>   3 files changed, 99 insertions(+)
->>   create mode 100644 tools/binman/test/347_bootph_prop.dts
->>
->
-> A gentle ping on this. Does this series requires any further changes?
->
-> Regards,
-> Moteen
->
+Fixes: 636da2039aea (android: boot: support boot image header version 3 and 4)
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Changes in v3:
+- Just initialise the variable rather than exit early
+- Link to v2: https://lore.kernel.org/r/20250625-abootimg_fix-v2-1-0d295dc1f1e2@linaro.org
+
+Changes in v2:
+- Add unmap_sysmem(hdr) in the new exit path
+- Link to v1: https://lore.kernel.org/r/20250625-abootimg_fix-v1-1-ce1645ac9879@linaro.org
+---
+ cmd/abootimg.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmd/abootimg.c b/cmd/abootimg.c
+index ae7a1a7c83b..9ae87581d2c 100644
+--- a/cmd/abootimg.c
++++ b/cmd/abootimg.c
+@@ -95,7 +95,7 @@ static int abootimg_get_dtb_load_addr(int argc, char *const argv[])
+ 		return CMD_RET_USAGE;
+ 	struct andr_image_data img_data = {0};
+ 	const struct andr_boot_img_hdr_v0 *hdr;
+-	const struct andr_vnd_boot_img_hdr *vhdr;
++	const struct andr_vnd_boot_img_hdr *vhdr = NULL;
+ 
+ 	hdr = map_sysmem(abootimg_addr(), sizeof(*hdr));
+ 	if (get_avendor_bootimg_addr() != -1)
+
+---
+base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+change-id: 20250625-abootimg_fix-51600dc8356a
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
