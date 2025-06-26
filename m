@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC616C7EE32
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 23:47:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62CFBC7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 23:48:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D45FD82D21;
-	Fri, 27 Jun 2025 01:47:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2EC1182E05;
+	Fri, 27 Jun 2025 01:47:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HJyZTBhP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uWvqU5Jn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 451E782D21; Fri, 27 Jun 2025 01:47:41 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 3603E82E40; Fri, 27 Jun 2025 01:47:49 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E77380E9A
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 01:47:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FDE682CEB
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 01:47:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-408d7e2ad03so1116396b6e.1
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 16:47:37 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-73afbe149afso208628a34.1
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 16:47:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750981656; x=1751586456; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750981664; x=1751586464; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ufeUPcZsFnrfjRQggtNxGnCBDoXgdByXY8rOF1vhYBU=;
- b=HJyZTBhPHK60BTkqr13rceXoC9W++41NIFn2HzKyVIzIxPEj6Ny/0m/6Vx6OoxkdZe
- jdUw/jBxvSXD+z3Qpa79g2ZSZgyM6JlR/X1x7ov/nBpnfg1cF34P6ZW8zLsgtbEJRAaO
- Smq3pTiqQMOTthC/mlnQRzXUk09sZ048ueaC0=
+ bh=7CEj7975XUxE+4WJ72Ikw5ipYYymgRAlGkOzm+Rf7p8=;
+ b=uWvqU5JnVxXrb5t1jUG1cGzL+zYYPRw7uHE8pUxRcwFXpIT5gQ4U9efUMhRjfoakVj
+ Uj6G8E8d9qJKz3MuMyg7R5ylCiznlz5/KF51oFBPVSDUy+fQ32gNmtYfU1qM2AYWkpuN
+ pJKk2TlMbZHLyBX+Vkzw3SfWbBiOnS/qlGJrc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750981656; x=1751586456;
+ d=1e100.net; s=20230601; t=1750981664; x=1751586464;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ufeUPcZsFnrfjRQggtNxGnCBDoXgdByXY8rOF1vhYBU=;
- b=ny5q6yuUFeAaZfHAw4vNZzgQbBIJqN2e0/lhzvWKVaJeonmSRJqV1tAy5tae+KIOoh
- PBGVQE1PA+Zq8i0BQTV0lFkJeCTgiIHUFaGsMx7I2D4A0ipTzuReZy7+1wz6H4uRH8Pp
- kdgynWA/i9XgiVsY1OEL8fN9ucAMfIAU6jVRIWsEIjp7AzbKj89lnKPIqr9l5oaqvvhZ
- /zyO3vY5/++RWGcdLsooDpm/InCU3efnFfrKPBLB/uj2UtafwYnuccY+ex82QsuuUclC
- Og+rpVzQhnqL/+XNSIbwFut4riR81wgTHeIINgoG5LMvgLW9KWhMSIdOFw/CkzBdpjqv
- DCww==
-X-Gm-Message-State: AOJu0YyZDA6t9v2I2ff/DNhX/LBOw5A3Zmdl72oP3xcx3LpFgmj9Hu9j
- siWgCkBMFywolhJReYbZgTzC2PO89IMYxLqeB1dmRPIpt8ATGFxjllQTgiadv2cmgJ0=
-X-Gm-Gg: ASbGnct3ZoUiNNybH0a2hO1NvVeJR9AOZuoQYgXfRZzxEVLXx9097hD/MC3ArWu0bat
- +xXMu/AXIGjsiBY0zgvdZJhgFVWNUVTecQm7c0KszfN4SVah85f9kcYzgN15vK7+syHDABQ2UBE
- KJsYPn1hq/zlMajBIgjIIE63c49oUWTL069EylrIBKgJIG/YchtgO1S657DnHn6T3W1JUdHyp3T
- nDzMZ5f82UgS04WwdHLc2N4jT6bKbEBePJiGoXKdYEwgoJzea05oHUWGEIwyEDRsjsYkOCVrx+4
- 9FalEtli/s4L7Eg+E+ot0nXI9gz1SOwMf4k3H46FvjfF7Pbja9dPUOdFr632JizUEn0ylL4DpB+
- Pd0JIBt83GGMuHrnDa6kgNxE=
-X-Google-Smtp-Source: AGHT+IGevt3vXfS0/X+BJvG9Z0f27SCUdFrZdUVrqcBOW23HLXX6dcR49HykPDqztVqtUDrOwQJWEg==
-X-Received: by 2002:a05:6808:23c3:b0:408:fb4c:859e with SMTP id
- 5614622812f47-40b33c47117mr981576b6e.6.1750981656101; 
- Thu, 26 Jun 2025 16:47:36 -0700 (PDT)
+ bh=7CEj7975XUxE+4WJ72Ikw5ipYYymgRAlGkOzm+Rf7p8=;
+ b=OsE/7T0bgmMtTUOlBIVDBS+5/3uZe4livT36bFUyMWecxqgmSjt7Fyq3NPUYYP8J2t
+ XoWN5h4BLGom4j5hKWI7gReGTn9dJtSI2cKGVLcmsaNr7dQRVWDkVsNltzEfysBOPsgK
+ rBBL7qM7fObmHWiDq0M6YNOIi2x+lINNdFaNb1qEcWok8fXfEJ/BHdR5inEZ6IXdK00p
+ T6uUCLtHtuA9p2htPzzVS1o9PgrHENGp5Ry2Ar+r3FAOUwP1vLBPQGLXEG7710xuCVez
+ yIi4VyEgb9jBFI48h3ppwvzCVWpbLOr9xsDpD0RdTbFZRdsvzlyuSR9r/WGZY+zuyLBX
+ 466w==
+X-Gm-Message-State: AOJu0YzYkQrHrZvkUU3lScac0VvG4aoCDYVhi4r8SMpdXRTcoZPiFz74
+ e2fiQ7mcjozdsbKWzwn6ca/g1T/7zNNt12QfUFLFcTBGPM+UGsUtqfJFboO3h73nOfc=
+X-Gm-Gg: ASbGncudBUcC6IHwFRWMKM0cLBfIHicNc7ArRVLQLvq+tgBqLNeZrwAFb+VFj0OlYKk
+ nj4NCmJex/bQX8sT8nuebVqM7Xi+qeacHMWEsSQPa+nKO2Kb564jndIQYiQ0a4SUjJI9EdDCBEv
+ cmMJc7h2nF9N8axb0g1tlsjlzx5jEuyat2JiSgG43S9xtpHNTJQt8sgvOsqKBLT1Ao67pSL7DE4
+ pvi2zloRnIl3tnF7K0wmJaxrqPwWKOAiw7/6vGqQvmGuFiIytcLSf7RfNZk2napmfm84OZj2/le
+ b9lMPV+hwIVJUZ5roEAq/rw4zE1AAu0TT8C5tSyIxWBh4oZw/4Qy5gF9Ml14Nz4Jncg9Q92iaib
+ z28eDdqFP7KkaJgO1IkasAak=
+X-Google-Smtp-Source: AGHT+IHho0q5lKmxuKSAJBEFDMwVvRKGFRH/A7Ia1+mlQD+mEwRg0re9gMtsEQz28XV8KzOLKSFrHw==
+X-Received: by 2002:a05:6830:8216:b0:72b:a064:fab0 with SMTP id
+ 46e09a7af769-73afc3dbdd4mr652021a34.3.1750981664045; 
+ Thu, 26 Jun 2025 16:47:44 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b324054a2sm157227b6e.31.2025.06.26.16.47.34
+ 46e09a7af769-73afaff2429sm166326a34.7.2025.06.26.16.47.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 16:47:35 -0700 (PDT)
-Date: Thu, 26 Jun 2025 17:47:33 -0600
+ Thu, 26 Jun 2025 16:47:43 -0700 (PDT)
+Date: Thu, 26 Jun 2025 17:47:41 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Anshul Dalal <anshuld@ti.com>
 Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, nm@ti.com, bb@ti.com
-Subject: Re: [RFC PATCH v1 3/4] spl: Kconfig: disallow loading args in falcon
- mode
-Message-ID: <20250626234733.GA4003484@bill-the-cat>
+Subject: Re: [RFC PATCH v1 4/4] cmd: Kconfig: disable loading raw images in
+ secure os boot
+Message-ID: <20250626234741.GB4003484@bill-the-cat>
 References: <20250626120443.1405409-1-anshuld@ti.com>
- <20250626120443.1405409-4-anshuld@ti.com>
+ <20250626120443.1405409-5-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nODtXoA+2bXof5o7"
+ protocol="application/pgp-signature"; boundary="cQZOBY5t4k+GwlDc"
 Content-Disposition: inline
-In-Reply-To: <20250626120443.1405409-4-anshuld@ti.com>
+In-Reply-To: <20250626120443.1405409-5-anshuld@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,74 +98,66 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---nODtXoA+2bXof5o7
+--cQZOBY5t4k+GwlDc
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 26, 2025 at 05:34:41PM +0530, Anshul Dalal wrote:
+On Thu, Jun 26, 2025 at 05:34:42PM +0530, Anshul Dalal wrote:
 
-> The current falcon boot requires loading of an args file (usually the
-> DTB) and a kernel image file to boot. But with secure boot, the dtb is
-> expected to be packaged inside the fitImage that kernel image (path set
-> by SPL_FS_LOAD_KERNEL_NAME) points to making loading the args file
-> unnecessary.
->=20
-> Secondly the args file causes security issues since it can not be
-> authenticated unlike a fitImage.
->=20
-> Furthermore current falcon boot flow provides added flexibility that
-> might not be desired in the interest of security, in the current flow
-> SPL first looks for files pointed to by the environment variables
-> 'falcon_args_file' and 'falcon_image_file'. This could be compromised by
-> modifying the env data.
->=20
-> Therefore this patch introduces a new boolean config symbol
-> SPL_FALCON_LOAD_ARGS that simplifies the boot flow to only load the
-> kernel image file set by SPL_FS_LOAD_KERNEL_NAME if disabled.
+> Raw kernel images can not be authenticated so disable loading such
+> binaries in secure falcon mode. This change restricts the falcon mode
+> SPL to FIT as the only viable boot image which can be authenticated.
 >=20
 > Signed-off-by: Anshul Dalal <anshuld@ti.com>
 > ---
->  common/spl/Kconfig   | 10 ++++++++++
->  common/spl/spl_ext.c |  5 +++++
->  common/spl/spl_fat.c |  5 +++++
->  3 files changed, 20 insertions(+)
+>  cmd/Kconfig | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index d5d3a41ce61..b2dbe2eea65 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1213,6 +1213,16 @@ config SPL_FALCON_ALLOW_FALLBACK
->  	  When enabled, u-boot will to load SPL_FS_LOAD_PAYLOAD_NAME from MMC
->  	  if loading SPL_FS_LOAD_KERNEL_NAME fails.
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index ed741d43cea..8eb55dd7f6e 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -353,12 +353,13 @@ config BOOTM_ELF
 > =20
-> +config SPL_FALCON_LOAD_ARGS
+>  config CMD_BOOTZ
+>  	bool "bootz"
+> +	depends on !SPL_SECURE_OS_BOOT
+>  	help
+>  	  Boot the Linux zImage
+> =20
+>  config CMD_BOOTI
+>  	bool "booti"
+> -	depends on ARM64 || RISCV || SANDBOX
+> +	depends on (ARM64 || RISCV || SANDBOX) && !SPL_SECURE_OS_BOOT
+>  	default y
+>  	help
+>  	  Boot an AArch64 Linux Kernel image from memory.
 
-I'm not sure we need this, exactly. We might need some hidden symbols
-but with SPL_OS_BOOT && SPL_OS_BOOT_SECURE we just need to not allow
-SPL*_ARGS options to be enabled. The tricky part will be either more
-hidden symbols or some updates to various parts of the code so that we
-can still compile.
+This is just pushing things too far and we need to step back and fix it,
+sorry. We need BOOTZ_IMAGE_FORMAT and BOOTI_IMAGE_FORMAT to go with
+LEGACY_IMAGE_FORMAT, and then SPL_... variants too, and then use those
+symbols.
 
 --=20
 Tom
 
---nODtXoA+2bXof5o7
+--cQZOBY5t4k+GwlDc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhd3BUACgkQFHw5/5Y0
-tyxC6gv9HnLMf2Gd15vgWfKwOLyHFTP5zA05I+KLCLRwhIvlHpj0bbYHy8jtlpCX
-Eyjo047MWfXn+CVf4YgIvf4Ba2mho16UQiDnA/TRiaNfqg8A2kC1PFS+bjrinprN
-8j7p6MIH6Q2lLHV0q1ls2rrolAuUniezJOkU8CIKiMvvEHXOUQ3fojksbzugfT9P
-ZED+ZSG/YD75wSTsCJIcBjJoVsmiiXDeHoNtmvX4Ds0n/Wji5IzM0g+guRjXiPJj
-8lTbyveglBbmbvbKlXGplizlysK4rSKCCp9OYNitQjYBGc/SEbomgTMFUn8WqcYu
-s8N2RrInWMFa4G9pO9AmR6tXr0q8RdJM1BNNvaPEIzJ+eYIUNmYZdDt7a5TVT8lZ
-7pCOG4xNtXHlAF+prJcgAIWEdReeNmiNC57xqzryOMwZ7R7/3ffvZQHvAyTofBie
-SKKeRujK7Km/Jyd26h2KUYWNxGiokjPJ3tD5Yxf0IqWxDEqzSZzviKgMmt7vzVKl
-MF27bX2w
-=t+aW
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhd3B0ACgkQFHw5/5Y0
+tyzwQAwAtjD1sn7pCJkvxoqUDheB9X5nk7amEuBGpc5/DzYq/llo2Fq5N+NBbZxc
+iTMyY5XyhKLodfjDs+vy8jZQrSiHYM1mnxd3R+X1BYQTwub8DM944DmJPQfXiEmh
+vvqODNV2Y+24mdY8icTuFRvHwSsUAleHiRYgA0AzeiAK2cOMxSkCblE0wp/eTLc0
+tYfBL2w/2W7ZLDcz71m12bgQvtV+c/oizAshBqiLTh1+AkhCWzvzqR1Nn5B4uPUu
+lEt01fHrheR7frPVW6UGsXzE18JYxD3aV93mWNZhIQdNuHVahllqCPgkVIPAArAH
+hIIEkG9wu3ysXrKFe4YejRZZmbsKnCYzRaQpJvg7cN80Dt7Fr8MzPw0dGJHd3h2o
+cYP80w1R2lhFQ4RpPwh0WRDjqh4pm7oiFhSQvQLiYkYGd2iMS75O5ZLz5xm2LHNb
+4b+jZaoSxvaSRXybUvZZTP+rQwbTQiDGXOv62ykmuF1x2qwhWvVOPxt5fAJ2CH7x
+M5G5aD5D
+=SNJN
 -----END PGP SIGNATURE-----
 
---nODtXoA+2bXof5o7--
+--cQZOBY5t4k+GwlDc--
