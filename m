@@ -4,62 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3AA0C7EE32
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:06:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822E2C7EE33
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:06:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E0F682E34;
-	Thu, 26 Jun 2025 14:05:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBADD82B34;
+	Thu, 26 Jun 2025 14:05:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lczZeudl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jZyDtyXb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88134809A5; Thu, 26 Jun 2025 14:05:45 +0200 (CEST)
+ id 1645782063; Thu, 26 Jun 2025 14:05:49 +0200 (CEST)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8678782D21
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 14:05:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0549B82B34
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 14:05:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55QC5YMW2450039;
- Thu, 26 Jun 2025 07:05:34 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55QC5Swd2450031;
+ Thu, 26 Jun 2025 07:05:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1750939534;
- bh=cpR99oDZ24/J38ZasXdHF4diIOLLMpAmvrbPEsTxwjo=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=lczZeudlARr7kQq7CJRO5TnYjDs4HlPjQPXzdAOTfbWjKoet5XAwLsZMmEZ7j2Oxx
- AeZse86VrK/YOFLXIBw1aeAnZzB5nkJbWCHLhk0s/I87sqGljuLyyxl46VCn2OyuHS
- Uy1B9bm3aSqEa0tMUIhm0UzqElWOB5APZDZCzqUg=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55QC5YUs3603896
+ s=ti-com-17Q1; t=1750939528;
+ bh=ZBa2h6L/wSuARHjTRxNL+XATGfLt1p4RqdCx3wtxIpA=;
+ h=From:To:CC:Subject:Date;
+ b=jZyDtyXbtZteTdeuOygRhAE13BbAVQ6IhGOEVyUBnRiZN4dOgX1gGmZ9E+GiETlaa
+ NMz3nA2GDSyrmNDVpSUMY6kselFNunyCQ0zjoc0kxKhy4HOLU3TcHiPM1E8TRQbdIc
+ yKSuunzsIYcb0kKK9PL6eLdo2TbJ6QtYt/BD7bpU=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55QC5SUE2222934
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 26 Jun 2025 07:05:34 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 26 Jun 2025 07:05:28 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 26
- Jun 2025 07:05:34 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 07:05:28 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Thu, 26 Jun 2025 07:05:34 -0500
+ Frontend Transport; Thu, 26 Jun 2025 07:05:28 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55QC5XE5967456;
- Thu, 26 Jun 2025 07:05:33 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55QC5RSG967355;
+ Thu, 26 Jun 2025 07:05:27 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <nm@ti.com>, <bb@ti.com>
-Subject: [RFC PATCH v1 4/4] cmd: Kconfig: disable loading raw images in secure
- os boot
-Date: Thu, 26 Jun 2025 17:34:42 +0530
-Message-ID: <20250626120443.1405409-5-anshuld@ti.com>
+Subject: [RFC PATCH v1 0/4] Add support for secure boot in falcon mode
+Date: Thu, 26 Jun 2025 17:34:38 +0530
+Message-ID: <20250626120443.1405409-1-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250626120443.1405409-1-anshuld@ti.com>
-References: <20250626120443.1405409-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,34 +77,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Raw kernel images can not be authenticated so disable loading such
-binaries in secure falcon mode. This change restricts the falcon mode
-SPL to FIT as the only viable boot image which can be authenticated.
+Hi all,
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+With my ongoing work in supporting falcon mode on TI's AM62 platforms[1], I
+have encountered several limitations of falcon boot flow from a security PoV.
+Currently falcon mode requires an args binary (usually a DTB) and the kernel
+image to boot.
+
+This conflicts with secure boot which requires a signed fitImage to be loaded
+with the kernel and dtb packaged in a single FIT container among other issues.
+This patch series adds a new SPL_SECURE_OS_BOOT config symbols which disables
+loading the args file as well as fallback to U-Boot if enabled.
+
+The changes have currently only been verified on MMC FS boot but I can expand
+support to other boot media if this is the right direction for achieving secure
+falcon boot.
+
+Happy booting,
+Anshul
 ---
- cmd/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+[1]: https://lore.kernel.org/u-boot/20250603142452.2707171-1-anshuld@ti.com/
+---
+Anshul Dalal (4):
+  spl: Kconfig: add SPL_SECURE_OS_BOOT config symbol
+  spl: Kconfig: allow disabling fallback during os boot
+  spl: Kconfig: disallow loading args in falcon mode
+  cmd: Kconfig: disable loading raw images in secure os boot
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index ed741d43cea..8eb55dd7f6e 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -353,12 +353,13 @@ config BOOTM_ELF
- 
- config CMD_BOOTZ
- 	bool "bootz"
-+	depends on !SPL_SECURE_OS_BOOT
- 	help
- 	  Boot the Linux zImage
- 
- config CMD_BOOTI
- 	bool "booti"
--	depends on ARM64 || RISCV || SANDBOX
-+	depends on (ARM64 || RISCV || SANDBOX) && !SPL_SECURE_OS_BOOT
- 	default y
- 	help
- 	  Boot an AArch64 Linux Kernel image from memory.
+ cmd/Kconfig          |  3 +-
+ common/spl/Kconfig   | 27 ++++++++++++++
+ common/spl/spl_ext.c |  5 +++
+ common/spl/spl_fat.c |  5 +++
+ common/spl/spl_mmc.c | 87 ++++++++++++++++++++++++++++----------------
+ 5 files changed, 94 insertions(+), 33 deletions(-)
+
 -- 
 2.49.0
 
