@@ -4,93 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2023C7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 15:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E913C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 15:43:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3214D82E08;
-	Thu, 26 Jun 2025 17:43:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 86B2C82DA1;
+	Thu, 26 Jun 2025 17:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z5wUYoga";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oTvVfaB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B328382E05; Thu, 26 Jun 2025 17:43:16 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id AB6D582D88; Thu, 26 Jun 2025 17:43:18 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20FA082063
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 17:43:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 928A182D88
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 17:43:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-735a8be4ea9so205434a34.0
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:43:11 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-40a7322f081so305992b6e.3
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750952590; x=1751557390; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750952588; x=1751557388; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S55CTznoDhbtvSak0Idv44w2Xj4NA5h9w3DYWotKXRk=;
- b=Z5wUYogagEX4hexb3KZMYbxS55KpR/eVxnXs8OFHBFdr9YzxEMMMwq10lEAqEtjyKz
- +ckV9gKMFtj7KNa6PiPGdZg2j8pRai9hm8/pHSq42RXgexdF653W2Bp4qfijs4ajdnFE
- 2l2OaH/vKQTsdjqmyX7TVKy4hhngfVtANA/EM=
+ bh=CF1fxT8CnmzaBEU5yirLadPSeA/9GhJNJQ3HnML+xnc=;
+ b=oTvVfaB4Ub25322m8D8FFGEhlRYUq62uI4q6OtCOQDJQ57Pcpo1LZA36hK+KYRMTPw
+ 2nBIjkyQbKmGUOuyKe01kQiaAwPOCKDpqVAXIPd8D/OJ7NLSX0UF7YlZv4lrKLBjj5CG
+ dJJd0R8l34cVzdVbSnjU1BA41KgNKF3bRdo+s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750952590; x=1751557390;
+ d=1e100.net; s=20230601; t=1750952588; x=1751557388;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S55CTznoDhbtvSak0Idv44w2Xj4NA5h9w3DYWotKXRk=;
- b=Ic5iW/rEb+VogLmGA871A6RQFDMIKDHXc6CqprwjIbRWEh0TqQ4tVCp5j1BtWau4pB
- QAElvHKNNYfs/G3LgM1R6OzLzffGlph9GdJyOy6kY9OnBFZLELHFHQ2Txj2/BmysQJCZ
- YFZbcr7ArHC4bTGSBI41OA8T+XEslFcwfS1cfvfZ4xoYPtBRHMIujFgDpAovrgomHopy
- BOj6V53oOeJmWqe4vWoYkxvLJorVfteIRLxlPl5KgvH0qtt/NzZgb2+/VTEuKmAGmfrB
- nDhn6RtLXA1DDQfkJeXMr4pKLlkE3Xp5CMfvTvGbJWT5Z1hjyDU+6MY3eOx2gC8rtP8b
- Bl7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRHpGezwgT/ojNdOdE0hfngDgpNYoRjkawbDQrL+evfqZ7/+rzhp0c60CiPiPXBDBo0IwSmks=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9uKAp8Z129clhba3nCTSL3QGMrylNuLlLvCZh7vqetZdgGWEb
- A9RVpkkyjpOXDwjnbsqF/dXofbpXDTvxMfb3rAHugSEg0HoT8HC93ZfeS6FsNyXjw5k=
-X-Gm-Gg: ASbGncvWEyEMq88FBNgAb+WTJIZGKqXvfrVCpZi3wFHY4QE72BYk5Rwb4EQ/LwK9PgW
- aed0wWutL5kk2QQuk14rfnFKYnRTeE4SzJrT6j1UaGAzhUJqxbWu93Oa0lTb1fY/ObFDxykkA4k
- 15F6Z07/+R3RiyfwKmbCqNTjEb09dlHYmM6a5iEH6emzvCeFNFjN5jR3o/SRhss2jJeRyq8yRzo
- jBo0IZPAG7Dd7L4qdbrsp58ixot8i/3VAqK7oGOBduZ1WvHLuUrKAlNZKuV285xMoqsfn1xlnlA
- OsDhey7nByqv1uBOWGHkUTv5vvFqIJ6yRnT416dfoukE8ugIWuiY8W+SbpHK+OaQT8+QO+9SB39
- Iwt37iuJIk/pXMEPs6+GcjQ==
-X-Google-Smtp-Source: AGHT+IH8guuFC8TnMPMXBrzY3g9yRik/QiraXlyLOZ9ou3BcklKUsKoiS6arY0bfNMLbY5YJLhXivw==
-X-Received: by 2002:a05:6830:668d:b0:731:e808:be5f with SMTP id
- 46e09a7af769-73adc8f52c0mr5045406a34.28.1750952589756; 
- Thu, 26 Jun 2025 08:43:09 -0700 (PDT)
+ bh=CF1fxT8CnmzaBEU5yirLadPSeA/9GhJNJQ3HnML+xnc=;
+ b=Ns/R670R9f1SyKAwFIgIAq0K31xHf89ZbV0AJrod0LYsqZJdyHRIcnxcS1SlwOtxAs
+ vXEnIy5NeCEwatIN2PPcCz3Wu5/fz6ESWMloS1xQrKLbiB3MpjUTLb4ZdTBMHLXFX+LV
+ B9akYqaR1+09mdpy4Q0xGBeq93PXNuDXr1RXL6h10xq3qt789ziboowPmAxhuqn/4ALZ
+ 18d8eCRv8C11MugUHITpvZ/FBbD291rq7VVpf4ATKyAyyGGtBlAyWqRaN6Xx1dD6zgql
+ zaoZOMMpnyzl7A4TD8z3xkD3Jvyvno1C8x2kjwZswF+p1ewip6kB1HzZz/+k3qdkxh0N
+ QlRA==
+X-Gm-Message-State: AOJu0YxM2KkPv/o4li9k8khuN7RaY/u+f+lBduwSCRFwqhJP95rkmWZn
+ DZKNOX2HWkRrpSzToxt71uzVESuQMPdbSDlmolWejC3G1epPMG8lJYprCMBKFF89tjU=
+X-Gm-Gg: ASbGnctVJDH6l5J7vM6cjfZayJYSdbm6+QZFaQQACdSL8/VqoMsGIA44hnsQ5ixmN8q
+ 3wGBMREy33j+TcxV2JI4hwJUTOP9bI5INv5b6edQW4zAL/C8MgRM2Sjpfx3exn35i5YBqbwZKdf
+ Mr+vGoGNFxlrVv58JU8v+Ka1OYJEMRM5jtaon8JC+s/VSlZBBvB0QjUX/V32aEY4b+AIYpoyDnT
+ hqb0J+xaso6uCV6yNWOstfs7ujTdYldYCaZp7BPTO5Evfxy/OiWwDwAPfwZnpIl3b3SEt0bYH5i
+ d7J2BqN8C7NJiC6j7dnK2EZl6rV9t54yD9hvC8tfs/s7z6vSZ6A5wzKqHHuLh/RiQ+9FnYBySWT
+ xPXoedUnRY8awcT0gStrVqQ==
+X-Google-Smtp-Source: AGHT+IEwcyu5l8SodM5DIGUwIyEFVDsG24LWrZU5+pye3+6U+1VIGzwC9BTXLwgGAd5cgjgWFu96ag==
+X-Received: by 2002:a05:6808:8204:b0:406:6a21:527f with SMTP id
+ 5614622812f47-40b05c75308mr5598725b6e.35.1750952588203; 
+ Thu, 26 Jun 2025 08:43:08 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afaff2429sm20316a34.7.2025.06.26.08.43.08
+ 46e09a7af769-73afaff2429sm20316a34.7.2025.06.26.08.43.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 08:43:09 -0700 (PDT)
+ Thu, 26 Jun 2025 08:43:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Parth Pancholi <parth.pancholi@toradex.com>, 
- Vitor Soares <vitor.soares@toradex.com>, 
- Sean Edmond <seanedmond@microsoft.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Bryan Brattlof <bb@ti.com>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250608074228.12407-1-heinrich.schuchardt@canonical.com>
-References: <20250608074228.12407-1-heinrich.schuchardt@canonical.com>
-Subject: Re: (subset) [PATCH v2 0/3] net: consolidate PXE processor
- architecture type Kconfig
-Message-Id: <175095258839.1712035.13071879747495961141.b4-ty@konsulko.com>
-Date: Thu, 26 Jun 2025 09:43:08 -0600
+To: u-boot@lists.denx.de, Aristo Chen <jj251510319013@gmail.com>
+Cc: sjg@chromium.org, carlos.lopezr4096@gmail.com, 
+ aristo.chen@canonical.com, quentin.schulz@cherry.de, ada@thorsis.com, 
+ paul.henrys_ext@softathome.com, d-gole@ti.com, afd@ti.com, 
+ d.schultz@phytec.de, nm@ti.com, n-francis@ti.com, alpernebiyasak@gmail.com
+In-Reply-To: <20250610074121.8308-1-aristo.chen@canonical.com>
+References: <20250610074121.8308-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH v4 0/5] mkimage: validate image references in FIT
+ configurations
+Message-Id: <175095258688.1712035.9665307099803654909.b4-ty@konsulko.com>
+Date: Thu, 26 Jun 2025 09:43:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -111,24 +99,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 08 Jun 2025 09:42:25 +0200, Heinrich Schuchardt wrote:
+On Tue, 10 Jun 2025 07:41:16 +0000, Aristo Chen wrote:
 
-> DHCP and DHCPv6 use the same value defined in
-> https://www.iana.org/assignments/dhcpv6-parameters#processor-architecture
-> to encode the processor architecture type. We should only use a single
-> Kconfig symbol for both protocols.
+> This series introduces a validation step in mkimage to ensure that all image
+> names referenced under the /configurations node of a FIT source (ITS) are
+> actually defined under the /images node.
 > 
-> Furthermore we should make the value customizable. This allows for instance
-> to choose between "x86 BIOS" or "x64 UEFI".
+> ### Motivation
+> 
+> When using mkimage to build FIT images, it's easy to mistakenly reference
+> nonexistent image nodes in configurations (e.g., referencing a missing `fdt` or
+> `firmware` node). Such issues are often not caught until runtime in U-Boot.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[2/3] cmd: remove duplicate DHCPv6 Kconfig definitions
-      commit: 14480c84dcdbdb5d7861fc1e1100900a8cd16e87
-[3/3] net: consolidate PXE processor architecture type Kconfig
-      commit: 092f0c45f4663d03340e50a4752ad56cfd8994b4
+[1/5] tools: mkimage: propagate error codes from fit_handle_file()
+      commit: 21705d39144a51a50c0206c74588c6e9e4018e7a
+[2/5] tools: mkimage: validate image references in FIT configurations
+      commit: 7a8b25a771f069819eab6134fd1c4df520ebc9ca
+[3/5] binman: test: Ensure all config references exist in /images node
+      commit: 3071e264c9baba4d55aa6d1a07a60c969d57eccf
+[4/5] test: py: add mkimage test for undefined image references in FIT configs
+      commit: 21f75eb7af40cd22ecee94554b2a226760fe9814
+[5/5] arm: dts: phycore-am62x: Add missing tifsstub image nodes for FIT loadables
+      commit: 647931cfeda1ed594904e7dd4262783a264cb97a
 -- 
 Tom
 
