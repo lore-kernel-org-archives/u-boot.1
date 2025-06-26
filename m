@@ -4,158 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCEBC7EE33
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 09:23:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1FF1C7EE33
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 09:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1D1882977;
-	Thu, 26 Jun 2025 11:23:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0697682977;
+	Thu, 26 Jun 2025 11:29:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="jwSHsq7w";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kI373a3f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D8D982D83; Thu, 26 Jun 2025 11:23:28 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5D8E682D83; Thu, 26 Jun 2025 11:29:10 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7989480E9A
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:23:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86C1580E9A
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:29:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fiona.klute@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1750929805; x=1751534605; i=fiona.klute@gmx.de;
- bh=X9JHnqc/ngGZc3gFqvUcVpF73GSGx2mmviCn3EvCg3o=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=jwSHsq7wWAC83Ymuyoz7hg/AeVOU/IemRMGUlVhFzwKnkwqzsSTPRi8t/gc/i+T6
- 0I8TT5d2970Rvda/4hiX3mMeS94reJ55ED5Q+n6xlQSSeFkvSY4HSOMs6DxayWEvS
- ff6K1rH+tpshGn0DoXA4IrKogM14okV31QfeQqlGAfQVFaUrJWNP1AjxH2ptFgyxI
- LH+ZtlCuVwgv/9kUV43VEjbEjAhSFF6/av21/Sur1uFkj5PgtSDUKu8P5SPE7j2Ee
- 2wZemKUj1+iu4u7tOuCX42jGJQD0J+af5xzXxtXw0Yt9OmejBzMEvzploG1WInAJB
- QGdkIQtRqmA/hGXnQQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.7.2] ([85.22.164.90]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mg6dy-1uwuAs3MtC-00nkG9; Thu, 26
- Jun 2025 11:23:24 +0200
-Message-ID: <7de86b29-7307-4b2b-b153-fdeaf58e0ec7@gmx.de>
-Date: Thu, 26 Jun 2025 11:23:24 +0200
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7d3efcb9bd6so77477685a.1
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 02:29:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750930144; x=1751534944; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=O0+8htkDO9HnS4yn7aYJnp2erCSK3yZiLaUYekmoWPY=;
+ b=kI373a3fATAowxsUjCk4um1qA/ulM/8oWQufcXJwlS663+svR6cwkI4Hy0k4HuLBdR
+ nA/PycekdorxNxS1f5dqK0BjNRCS6c1wIvuwE0Dwtu2UZm3hWBxUYudFKqU9EXPHDC06
+ 75ReunSZc9f4BKofdWWQriZdir5DosMncQuc4IepwoyNrNEkuJtftjbS77gFjlRmlO57
+ VluWsofx3MYAmhOB2uqFbbaSflxXg+1OGY7l1eiX5oCt/6vQka195QFbniydvCcHwbIw
+ 92I0a6sG85QiXsbpiV7Ec+9s/ysUHLn6Nv5/xWzav9889VlbbFFtkXnfeqDCeaG/aHGf
+ tFaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750930144; x=1751534944;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O0+8htkDO9HnS4yn7aYJnp2erCSK3yZiLaUYekmoWPY=;
+ b=lcRKAdGg1C0W08H70VMxAuz9GugNAXSN3RXSGPG81WVtPUTxcSQybAL2lgqf9uUls8
+ OBdxceGNDpgFD5fqCuxWG0IKGZ5CJX5fez6SDebJbIZzoFsUcUPA3BLk0tjXBAIaHbPe
+ PUUdOkFubogJDd9zMxpFRuLCa8aNgpMod9bg3/3F6ehndgHywAR9MkcK9wXbZYnIfgQ/
+ FJSpw9e0Z3mCuDbQxfeFEMYY1xF4aqMFyQoiRrPora/X1Htr7ahz9SItdZwFsqL2YdZI
+ j/VfqNq31z29IYOhPK3aMxUKgHOqM1glkQFZU+Ruc+oczMGTl2YxCuMlvOklylPTmOaV
+ eWOw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2DwVsO2qX1Zd127pNKHy6KdtFRYJKwoEk8axwHictJTwOEKR6HZ2IwuQP6D1zF+F4BnU3JoM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBptCf5+i0rvhbXsj45GrxBULb6nc2Qe57PcObifzxxMZ4r6uZ
+ A79wQs4+p9Pxy2mkVGWPaUM+P5I28utFVgZT96sgeL7H/AGfsBMl6xwbzLd+OWt9c3MgAtlL0tA
+ gu4Z0Nl/jLTrjKk31hc5sakX+ZgfAt7tElXfiLeAnRg==
+X-Gm-Gg: ASbGncu95XxqLae717w5kvWFbCXRF4bSarN+SGMTOhEuujGZb9hTsiRPQa5ZfSmBcp0
+ EfVUdwjBkSLPmiFl/6owiGqoGefW1KUI5r28JsUcmhGTdg81W/LX9pvGasKaM/jH5hdeSpZwKt3
+ 1dZIp2SJd1KmYwXdEyffo4vKP84Bf/tydnvgJ9JJPQ+P2d
+X-Google-Smtp-Source: AGHT+IEjaTZ91w9o9Ac5O93wECF/CtWNo9U9VgSFtmWL9qbHssRGy58SM/92qWPJKWYVmExT9aV3J2RxrkefoBq5pvU=
+X-Received: by 2002:a05:620a:1a81:b0:7d2:26f3:881a with SMTP id
+ af79cd13be357-7d4297539d8mr853318385a.56.1750930144107; Thu, 26 Jun 2025
+ 02:29:04 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] doc: mention that extlinux.conf can use environment
- in "append"
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250623113801.2655669-1-fiona.klute@gmx.de>
- <20250623150434.GC4003484@bill-the-cat>
-Content-Language: en-US, de-DE-1901, de-DE
-From: Fiona Klute <fiona.klute@gmx.de>
-Autocrypt: addr=fiona.klute@gmx.de; keydata=
- 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
-In-Reply-To: <20250623150434.GC4003484@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:xWWvSU/9fU+acCQhKuDkB2sT825Sm5ehfyMyt+UU+R/DvYScshB
- jZ7iqPQ7w7muIYa0iytheYo/TbPXfsSkXY2o8jMSoL0B2maqZFbh6q+Li4fIajmeyluZzcn
- A6g+3LruVQrADZXpHxwqThZFFHy9x4kIFo+n2NEZFjLhnBnmaXqe1Ew6v2XA1V4D+vSWmqu
- TUOly5QQ/6SmN+1Rhk02g==
-UI-OutboundReport: notjunk:1;M01:P0:4lYXmG7x0zM=;hMb1N9sJMwC3biRki++fhJav8ZA
- 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
- lA4OH77aiZ85q/SPhB3aGk0=
+References: <20250624120730.2158194-1-sughosh.ganu@linaro.org>
+ <20250624120730.2158194-2-sughosh.ganu@linaro.org>
+ <713c7bf0-25d9-43fc-9e98-486947fd58fb@gmx.de>
+In-Reply-To: <713c7bf0-25d9-43fc-9e98-486947fd58fb@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 26 Jun 2025 14:58:52 +0530
+X-Gm-Features: Ac12FXxnf-3fDqFXX9frETFp4u0JbQUFd1q3974rWZNBDsvp2XFRjmUtR7tu7dc
+Message-ID: <CADg8p94THmBduwEDZK7SSeAgtN8JcAd8cv+aWDiL_MrsK4=vNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] cmd: eficonfig: add support for URI device path
+ based boot options
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,24 +96,326 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 23.06.25 um 17:04 schrieb Tom Rini:
-> On Mon, Jun 23, 2025 at 01:38:01PM +0200, Fiona Klute wrote:
->=20
->> This option is very useful for A/B boot setups with read-only
->> filesystems: Letting U-Boot fill in the rootfs (and possibly related
->> parameters) allows keeping all boot parameters except the actual slot
->> selection in the extlinux.conf file, where they can be updated easily.
->>
->> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
->> Cc: Tom Rini <trini@konsulko.com>
->> ---
->>   doc/README.pxe         | 3 ++-
->>   doc/develop/distro.rst | 7 +++++++
->>   2 files changed, 9 insertions(+), 1 deletion(-)
->=20
-> Thanks! Any chance you would be willing to convert doc/README.pxe to rst
-> and call it say doc/usage/pxe.rst ?
-If you mean simply reformatting, I can probably do that. A review/update=
-=20
-beyond that would be beyond my time & expertise on the topic right now.
+On Thu, 26 Jun 2025 at 13:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 24.06.25 14:07, Sughosh Ganu wrote:
+> > The eficonfig command provides a menu based interface for maintenance
+> > of the EFI boot options. Add support for adding a URI based boot
+> > option. This boot option can then be used for HTTP boot.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1:
+> > * Move the option for entering the URI under the boot file.
+> > * All corresponding changes needed for the above change.
+> >
+> >   cmd/eficonfig.c      | 113 ++++++++++++++++++++++++++++++++++++++++---
+> >   include/efi_config.h |   4 ++
+> >   2 files changed, 109 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> > index 6e14d34a6bd..917d79b8023 100644
+> > --- a/cmd/eficonfig.c
+> > +++ b/cmd/eficonfig.c
+> > @@ -35,6 +35,7 @@ static int avail_row;
+> >
+> >   #define EFICONFIG_DESCRIPTION_MAX 32
+> >   #define EFICONFIG_OPTIONAL_DATA_MAX 64
+> > +#define EFICONFIG_URI_MAX 512
+>
+> I am not aware of as standard setting a limit on URI sizes.
+>
+> https://www.rfc-editor.org/rfc/rfc9110#section-4.1-5 has this
+> recommendation:
+>
+> It is RECOMMENDED that all senders and recipients support, at a minimum,
+> URIs with lengths of 8000 octets in protocol elements.
+>
+> We should determine the length of the URI when the user makes his input.
 
+I had checked the corresponding RFC to check if there was a mention of
+size limit on the URI, and there is none. There is a mention about
+some applications using 2K as a limit for the URI length. But in
+U-Boot's context, I think that 512 bytes is a good enough limit, given
+that we are using the URI primarily for specifying distro installation
+image's path.
+
+Also, the handle_user_input() function in the eficonfig tool expects a
+size limit to be provided for all the user input, and I think this is
+a sane thing to do rather than allowing the user to input random
+strings. Do you see a realistic use-case where a URI of more than 512
+characters might be expected for a boot option?
+
+>
+> >   #define EFICONFIG_MENU_HEADER_ROW_NUM 3
+> >   #define EFICONFIG_MENU_DESC_ROW_NUM 5
+> >
+> > @@ -538,6 +539,31 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
+> >       return dp;
+> >   }
+> >
+> > +static struct efi_device_path *eficonfig_create_uri_device_path(u16 *uri_str)
+> > +{
+> > +     char *pos, *p;
+> > +     u32 len = 0;
+> > +     efi_uintn_t uridp_len;
+> > +     struct efi_device_path_uri *uridp;
+> > +
+> > +     len = utf16_utf8_strlen(uri_str);
+> > +
+> > +     uridp_len = sizeof(struct efi_device_path) + len + 1;
+> > +     uridp = efi_alloc(uridp_len + sizeof(EFI_DP_END));
+> > +     if (!uridp)
+> > +             return NULL;
+> > +
+> > +     uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> > +     uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
+> > +     uridp->dp.length = uridp_len;
+> > +     p = (char *)&uridp->uri;
+> > +     utf16_utf8_strcpy(&p, uri_str);
+> > +     pos = (char *)uridp + uridp_len;
+> > +     memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
+> > +
+> > +     return &uridp->dp;
+> > +}
+> > +
+> >   /**
+> >    * eficonfig_file_selected() - handler of file selection
+> >    *
+> > @@ -983,6 +1009,22 @@ static efi_status_t eficonfig_boot_add_optional_data(void *data)
+> >                                "  enter optional data:");
+> >   }
+> >
+> > +/**
+> > + * eficonfig_boot_add_uri() - handle user input for HTTP Boot URI
+> > + *
+> > + * @data:    pointer to the internal boot option structure
+> > + * Return:   status code
+> > + */
+> > +static efi_status_t eficonfig_boot_add_uri(void *data)
+> > +{
+> > +     struct eficonfig_select_file_info *file_info = data;
+> > +
+> > +     return handle_user_input(file_info->uri, EFICONFIG_URI_MAX, 24,
+> > +                              "\n  ** Edit URI **\n"
+> > +                              "\n"
+> > +                              "  enter HTTP Boot URI:");
+> > +}
+> > +
+> >   /**
+> >    * eficonfig_boot_edit_save() - handler to save the boot option
+> >    *
+> > @@ -998,7 +1040,8 @@ static efi_status_t eficonfig_boot_edit_save(void *data)
+> >               bo->edit_completed = false;
+> >               return EFI_NOT_READY;
+> >       }
+> > -     if (u16_strlen(bo->file_info.current_path) == 0) {
+> > +     if (u16_strlen(bo->file_info.current_path) == 0 &&
+> > +         u16_strlen(bo->file_info.uri) == 0) {
+> >               eficonfig_print_msg("File is not selected!");
+> >               bo->edit_completed = false;
+> >               return EFI_NOT_READY;
+> > @@ -1027,6 +1070,13 @@ efi_status_t eficonfig_process_clear_file_selection(void *data)
+> >       return EFI_ABORTED;
+> >   }
+> >
+> > +static struct eficonfig_item select_boot_file_menu_items[] = {
+> > +     {"Select File", eficonfig_process_select_file},
+> > +     {"Enter URI", eficonfig_boot_add_uri},
+> > +     {"Clear", eficonfig_process_clear_file_selection},
+> > +     {"Quit", eficonfig_process_quit},
+> > +};
+> > +
+> >   static struct eficonfig_item select_file_menu_items[] = {
+> >       {"Select File", eficonfig_process_select_file},
+> >       {"Clear", eficonfig_process_clear_file_selection},
+> > @@ -1042,20 +1092,35 @@ static struct eficonfig_item select_file_menu_items[] = {
+> >   efi_status_t eficonfig_process_show_file_option(void *data)
+> >   {
+> >       efi_status_t ret;
+> > +     unsigned int menu_count;
+> >       struct efimenu *efi_menu;
+> > +     struct eficonfig_item *menu_items;
+> > +     struct eficonfig_select_file_info *file_info = data;
+> > +
+> > +     menu_items = file_info->boot_file_option ? select_boot_file_menu_items :
+> > +             select_file_menu_items;
+> > +
+> > +     menu_count = file_info->boot_file_option ?
+> > +             ARRAY_SIZE(select_boot_file_menu_items) :
+> > +             ARRAY_SIZE(select_file_menu_items);
+> >
+> > -     select_file_menu_items[0].data = data;
+> > -     select_file_menu_items[1].data = data;
+> > -     efi_menu = eficonfig_create_fixed_menu(select_file_menu_items,
+> > -                                            ARRAY_SIZE(select_file_menu_items));
+> > +     menu_items[0].data = data;
+> > +     menu_items[1].data = data;
+> > +     menu_items[2].data = data;
+> > +
+> > +     efi_menu = eficonfig_create_fixed_menu(menu_items, menu_count);
+> >       if (!efi_menu)
+> >               return EFI_OUT_OF_RESOURCES;
+> >
+> > -     ret = eficonfig_process_common(efi_menu, "  ** Update File **",
+> > +     ret = eficonfig_process_common(efi_menu,
+> > +                                    file_info->boot_file_option ?
+> > +                                    "  ** Update File/URI **" :
+> > +                                    "  ** Update File **",
+> >                                      eficonfig_menu_desc,
+> >                                      eficonfig_display_statusline,
+> >                                      eficonfig_print_entry,
+> >                                      eficonfig_choice_entry);
+> > +
+> >       if (ret != EFI_SUCCESS) /* User selects "Clear" or "Quit" */
+> >               ret = EFI_NOT_READY;
+> >
+> > @@ -1268,6 +1333,7 @@ static efi_status_t prepare_file_selection_entry(struct efimenu *efi_menu, char
+> >       u16_strlcat(file_name, file_info->current_path, len);
+> >       ret = create_boot_option_entry(efi_menu, title, file_name,
+> >                                      eficonfig_process_show_file_option, file_info);
+> > +
+> >   out:
+> >       free(devname);
+> >       free(file_name);
+> > @@ -1340,6 +1406,16 @@ out:
+> >       return ret;
+> >   }
+> >
+>
+> Please, document all functions according to
+> https://docs.kernel.org/doc-guide/kernel-doc.html#function-documentation
+
+So I have had this comment from you on my other patches as well. I am
+not adding any API in my patch. What exactly is the rule for adding
+function documentation? I can understand if some static function
+happens to be doing a lot of work, and then it would be easier to
+understand its functionality through comments. But I don't think any
+function being added in this patch qualifies for such documentation
+being needed.
+
+>
+> > +static void fill_dp_uri(struct efi_device_path *dp, u16 **uri_str)
+> > +{
+> > +     u16 *p = *uri_str;
+> > +     struct efi_device_path_uri *uridp;
+> > +
+> > +     uridp = (struct efi_device_path_uri *)dp;
+> > +
+> > +     utf8_utf16_strcpy(&p, uridp->uri);
+> > +}
+> > +
+> >   /**
+> >    * fill_file_info() - fill the file info from efi_device_path structure
+> >    *
+> > @@ -1392,10 +1468,13 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+> >       size_t len;
+> >       efi_status_t ret;
+> >       char *tmp = NULL, *p;
+> > +     u16 *current_path = NULL;
+> >       struct efi_load_option lo = {0};
+> >       efi_uintn_t dp_size;
+> >       struct efi_device_path *dp = NULL;
+> >       efi_uintn_t size = load_option_size;
+> > +     struct efi_device_path *dp_volume = NULL;
+> > +     struct efi_device_path *uri_dp = NULL;
+> >       struct efi_device_path *device_dp = NULL;
+> >       struct efi_device_path *initrd_dp = NULL;
+> >       struct efi_device_path *fdt_dp = NULL;
+> > @@ -1464,6 +1543,14 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+> >               goto out;
+> >       }
+> >
+> > +     bo->file_info.uri = calloc(1, EFICONFIG_URI_MAX * sizeof(u16));
+>
+> Where is the matching free()?
+
+There is one being added below.
+
+>
+> Best regards
+>
+> Heinrich
+>
+> > +     if (!bo->file_info.uri) {
+> > +             ret =  EFI_OUT_OF_RESOURCES;
+> > +             goto out;
+> > +     }
+> > +
+> > +     bo->file_info.boot_file_option = true;
+> > +
+> >       /* copy the preset value */
+> >       if (load_option) {
+> >               ret = efi_deserialize_load_option(&lo, load_option, &size);
+> > @@ -1481,7 +1568,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+> >               u16_strcpy(bo->description, lo.label);
+> >
+> >               /* EFI image file path is a first instance */
+> > -             if (lo.file_path)
+> > +             if (lo.file_path && EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE,
+> > +                                             MSG_URI))
+> > +                     fill_dp_uri(lo.file_path, &bo->file_info.uri);
+> > +             else
+> >                       fill_file_info(lo.file_path, &bo->file_info, device_dp);
+> >
+> >               /* Initrd file path (optional) is placed at second instance. */
+> > @@ -1512,6 +1602,9 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+> >                       goto out;
+> >       }
+> >
+> > +     if (utf16_utf8_strlen(bo->file_info.uri))
+> > +             uri_dp = eficonfig_create_uri_device_path(bo->file_info.uri);
+> > +
+> >       if (bo->initrd_info.dp_volume) {
+> >               dp = eficonfig_create_device_path(bo->initrd_info.dp_volume,
+> >                                                bo->initrd_info.current_path);
+> > @@ -1536,7 +1629,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+> >               efi_free_pool(dp);
+> >       }
+> >
+> > -     dp = eficonfig_create_device_path(bo->file_info.dp_volume, bo->file_info.current_path);
+> > +     dp_volume = bo->file_info.dp_volume;
+> > +     current_path = bo->file_info.current_path;
+> > +     dp = uri_dp ?
+> > +             uri_dp : eficonfig_create_device_path(dp_volume, current_path);
+> >       if (!dp) {
+> >               ret = EFI_OUT_OF_RESOURCES;
+> >               goto out;
+> > @@ -1560,6 +1656,7 @@ out:
+> >       free(tmp);
+> >       free(bo->optional_data);
+> >       free(bo->description);
+> > +     free(bo->file_info.uri);
+
+This is the matching free.
+
+-sughosh
+
+> >       free(bo->file_info.current_path);
+> >       free(bo->initrd_info.current_path);
+> >       free(bo->fdt_info.current_path);
+> > diff --git a/include/efi_config.h b/include/efi_config.h
+> > index d7c1601137e..4438933db6a 100644
+> > --- a/include/efi_config.h
+> > +++ b/include/efi_config.h
+> > @@ -82,15 +82,19 @@ struct eficonfig_item {
+> >    * @current_volume: pointer to the efi_simple_file_system_protocol
+> >    * @dp_volume:              pointer to device path of the selected device
+> >    * @current_path:   pointer to the selected file path string
+> > + * @uri:             URI for HTTP Boot
+> >    * @filepath_list:  list_head structure for file path list
+> >    * @file_selectred: flag indicates file selecting status
+> > + * @boot_file_option:        flag indicating if option is for boot file
+> >    */
+> >   struct eficonfig_select_file_info {
+> >       struct efi_simple_file_system_protocol *current_volume;
+> >       struct efi_device_path *dp_volume;
+> >       u16 *current_path;
+> > +     u16 *uri;
+> >       struct list_head filepath_list;
+> >       bool file_selected;
+> > +     bool boot_file_option;
+> >   };
+> >
+> >   void eficonfig_print_msg(char *msg);
+>
