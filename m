@@ -4,133 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD35C7EE32
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 021C1C7EE32
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:57:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E9ED80E9A;
-	Thu, 26 Jun 2025 14:39:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 3E78B80E9A;
+	Thu, 26 Jun 2025 14:57:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="QA4hOo3R";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ljMhUM7n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F08B82AA4; Thu, 26 Jun 2025 14:39:55 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20730.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::730])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 105AE82E08; Thu, 26 Jun 2025 11:35:35 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73C68809A5
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 14:39:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 2AEBA82C4C
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:35:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oqrkXUElyx3vlBg1M898oemfod27oEmRLXs6jr3ktu0cDtf2wGl+AtbldfKO8/PD+e4xbkL8rEPrNhcrv3rO6VTJRFeC88q3E9/2nVPDkgOkQqeQDglwoa6L4Wn2t+LkJXMJPv+wkMQE3jMANm8PXGNoNgFVR6Dvd1u7LhZioQ6b+IhxiZZl6etrHuv5vTHc5J0p4pxqgPTEBSDyPOfCUBZAstIlZR95sK92oYu20B6NYSa5YeYceM7SQWHwc26O3NPi/KHZBCk2AU/KLIqD7e4qeEDZgshO2UP56IQarHvxV+YsjUAjdMrc5Er/o28/s5SzR8PNpSOdAcftMcN6zQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aRJquJmtYVmlLynXGZhX8ZdU3sO3Aj2yskmOv+8hcnI=;
- b=Yn3fRxmLm1L3m3+8XY/CPtjxS1Blm0SexAvN29/N9rE9OU6kjgsO+MIwpjEJDKvSYb74Jxv1ekgJxQlHTiFTy2EFwe/OrSaqfbEzTVljgxMlCSPfImCcl95jze7YJZ8p9TCTfPaCTMdRdkAvV26MNAr1Xc6FKXmluqF1mU0xOb3/MpCeu/FgMd+Tgek3v7OSzVObB+MpS4cxIrKI3DvzcowJxKmBI9cIWLRvmV3TkRqjeo44rL/Mn6wCWrFE91Z5tZt16M3eh3X3PJniD8CLZeLDkMXN3QUGOFS8ULtqVs9ZaDt+zZfnBGYpVxcNixyCXFW1iy/MFFfKXyYlbJ28Ig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aRJquJmtYVmlLynXGZhX8ZdU3sO3Aj2yskmOv+8hcnI=;
- b=QA4hOo3RAtu8epfKneNXv10PE9xY256wiiaB6DNhNK9c8/QCHPg9qqDjNzHMaN1Fd1ydKq52x6z6BCLHb3otslj5dhvkABzUbs5mToegBDbHvD39xUMX1DYwb89wKEHaWoY3f1XdBI3pDBb84kNbPUvocmksrjYBWx326GxaOTeAojAJ4+pz3AiEQhNNMHFqAYZC9bk8jBwwI36UMkH4WijBoEVZQrhbKHXNHTOoNZ5KWQhnKP7iDZorco62PXO6E0aIAYip3MyOB7pBo5jwTInlY9JV6fdHqYvlRptqkoOy/uXl8CWIoSLSBJ4jglC50betSfGlbDY71bL+iCBgdg==
-Received: from AS4P189CA0037.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5dd::8)
- by GVX0PF886830E71.EURP195.PROD.OUTLOOK.COM (2603:10a6:158:401::7d5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.30; Thu, 26 Jun
- 2025 12:39:39 +0000
-Received: from AMS1EPF00000040.eurprd04.prod.outlook.com
- (2603:10a6:20b:5dd:cafe::6e) by AS4P189CA0037.outlook.office365.com
- (2603:10a6:20b:5dd::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.17 via Frontend Transport; Thu,
- 26 Jun 2025 12:39:39 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AMS1EPF00000040.mail.protection.outlook.com (10.167.16.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8880.14 via Frontend Transport; Thu, 26 Jun 2025 12:39:39 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 26 Jun
- 2025 14:39:39 +0200
-Received: from phytec.de (172.25.0.51) by Florix.phytec.de (172.25.0.13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 26 Jun
- 2025 14:39:38 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>
-CC: <d.schultz@phytec.de>, <francesco.dolcini@toradex.com>
-Subject: [PATCH] board: phytec: rm-cfg: Update rm-cfg to reflect new resource
- reservation
-Date: Thu, 26 Jun 2025 14:39:30 +0200
-Message-ID: <20250626123930.128398-1-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vtpieter@gmail.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-adb4e36904bso164897866b.1
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 02:35:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750930530; x=1751535330; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=urjqgI6DAH4a/i1++UF4IUaIuSN4XN+Zn75193bu9tM=;
+ b=ljMhUM7n9RknrJpfaSX3f5Cwl9BgcXySH3jXGPya1YoKfGlSkY2BWLVlQOOX8dEEMf
+ RDXQuO+iaCxFQgryQMQuMxOely9I3nJynM6tYXKMAL93wP8e2Tj8Rpk0nmdHDYwvfr3G
+ rtuhrKj1sIA/PB6+8LCF9r+7THHDRV+ivhxO3GjTLZ736QZAvF87gTwoYTpHT8ZhzgvW
+ //g1KxTviGpSH+/Je1uMW732LL18P+CArvc9Uot9MOBi58UlCwnY+7meLifCvaTwyAaG
+ vOfUP8p2hTjn0iEUk6CfT6xtqW7Mw4y52skCQeOaZ1o//kxUPoklquWoSt8ARPt7GePZ
+ wD6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750930530; x=1751535330;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=urjqgI6DAH4a/i1++UF4IUaIuSN4XN+Zn75193bu9tM=;
+ b=mc1ALhGrTSV19c00WiJNP9nacs800GoCf19vuAN3xqJiwNdpq6WPHz0ILtLI1tYgBh
+ CNyoQmUlNTREJ1UkI/jDca9nEnYTLSnQhr7L7Xrjrf3T1xWJx5qB4cUcXPoyAeC/4ZX6
+ pA+IaRzGuzna8WiPe9nMFO/BlWjcCk8DmduxxFcX2Nl0AgBrJqTIZqwn88wmmgsGAZqJ
+ 8Ulr/av5YpLepJHJRBAg1EAxuWjRccPKFAKcUYUxW4crriFO4KMPmM+2kGMP0pxx3X75
+ 8xqXYwmYltmkqL3f5JgNkJdEJ5wsBxiTZWDlDpMVxf5rUkzbTGdVqmoE3buZZVVXhTPo
+ 24Jg==
+X-Gm-Message-State: AOJu0YyYdJosX0f3bFmtEDYDZuoZ2Nn2gsOdrSlcBXfQJb8nkSAgDHPv
+ jmO+s2Q6Og1Fk1JbTgihvsOYwtaRUSn4wI6HEqz7NRPn3OjNQjmi1Cpi3vbdpw==
+X-Gm-Gg: ASbGncsd6qIzeJueamUnG/IUkY/nr87FbFIYCVy6OAcWhAYERpByJIZN+L3drqvZc01
+ ZGjabgKGVNQLz6CUq0hOEm7CNEiXL3Mb2cPiMl3/6AluRoaBI25ty1YfnAAmp7/nOuOzE01f9QM
+ sejQjA4mncofT8cjydGbSx0Mwaz3HSdwfXaJbrswzh8J/EOY0bptuJnzHdXXVdBVbpr0FfwCTnL
+ 57jajE+D+Cv2Q54YRdhy1txWmwVvpT9tngqwCwsIzMtduki8lheL5L5gWe4RXtJWxrqiFrK+rDG
+ wPgFrt52AaEbra2+fFMuYFMuPjZaEaYJk9SItkB7djQLUJDR5yp+OoYfMjXiG9tD
+X-Google-Smtp-Source: AGHT+IHyTAtFuMcioGhUOFfDm12iDNEA5VPuqyiP5q/rSuVQHhVQ2byp1DfiM0ZhrHxCmNQE+LLTRA==
+X-Received: by 2002:a17:907:1c0b:b0:ae0:d1ac:d0 with SMTP id
+ a640c23a62f3a-ae0d1ac09cdmr320236166b.50.1750930530465; 
+ Thu, 26 Jun 2025 02:35:30 -0700 (PDT)
+Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae0d950eae0sm76670766b.149.2025.06.26.02.35.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Jun 2025 02:35:30 -0700 (PDT)
+From: vtpieter@gmail.com
+To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+Subject: [PATCH v3 2/4] Amend drivers/fpga Kconfig for FPGA_SOCFPGA
+Date: Thu, 26 Jun 2025 11:35:14 +0200
+Message-ID: <20250626093519.115655-3-vtpieter@gmail.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250626093519.115655-1-vtpieter@gmail.com>
+References: <20250626093519.115655-1-vtpieter@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000040:EE_|GVX0PF886830E71:EE_
-X-MS-Office365-Filtering-Correlation-Id: 09fedf3d-4330-427e-8425-08ddb4ae846a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Oao9cO2AHwxN0tenAbG+JqiOj39q4YN7RZY+iRGBrbwBuJ8cW6knu37uXBm2?=
- =?us-ascii?Q?flAtlXmhkXtsOW4jOpgzpzBi6WFFKwsPEXxQXEb2ZXhgy7nEhf7YiAOVM5A4?=
- =?us-ascii?Q?z5/t0gcVglpv7AyrXZnRgHIT0OF3KJv9EIVj4pJfIGS0IgLM4iQ9e/PrSbxV?=
- =?us-ascii?Q?R7c7Pmo3PUQHvoQwGms2JkzcF3NuauinElcHcHjuYdGr+9sezmm7mQTqZDGy?=
- =?us-ascii?Q?LFfdyIRir3R68FDLtC5+3ODMHPOHAokjHUHg9YHmLyCguwuSqLRBq/H9bWvD?=
- =?us-ascii?Q?u/ROnV4uwhwX6omwTILcNsf2qyTg68vQWn5uTP8KgNnCHLYHmi+FFi81+Jl8?=
- =?us-ascii?Q?g2S+VBdOiqNHDAWTOmXEILdmUL9hTHuxvs3i4l2k/KkTom3U2e5UZg8Gp8pa?=
- =?us-ascii?Q?/OLyps7LKUaK6/fsMZs3/LjCa/6OHCEXTcvs6pBgc2FIHVDyx6e/pisrV6F5?=
- =?us-ascii?Q?Cs4G0TGUiVnQrpTxSICEHdyVCo8prD6Ia29l22XmDm4YuCABvj+KJzlJIqh4?=
- =?us-ascii?Q?rOfY/Hmc1yqAmlb0W0Wl7FFkEBxSuscjgw2AXZCxSXyORL5g6+NmOyRtGYxK?=
- =?us-ascii?Q?bO6nDw+pGiVmZpv+qtghX6bWrlCX+uUb/LZGw5ftCYtIf0adifrWzk5g2m9N?=
- =?us-ascii?Q?wWTz1FaAvWikQXNoQ9F/3+ytE5o/5iJKo/hXpgevMamp3qRPwbv+Na1HLhCE?=
- =?us-ascii?Q?+ftBj0k/YvSjMpbpOuCsKKoHxkbi8i49p9Yq8W8/WV3WjJa+Xan8NkkT1kmH?=
- =?us-ascii?Q?4w0/i4+xoqekY5dcqA/QBG8+1AT+SrX275/ho2NZO+eWkN0X/unryGQwyea5?=
- =?us-ascii?Q?/sDld/bM45FVQlq6wJYs6BLl3U2NO8J3tuXp2KBZCA37VPxxSnOYKilEBBX6?=
- =?us-ascii?Q?xTXHx72Rbz+HqBBw3CO8a+zPeaDUsr67WJULSXjLo3wQiT6osdumYB6ZpaH0?=
- =?us-ascii?Q?HUjvxA/cUwMjh0SByv3WnoIzqBLTxEgV7FRaWHgwmZlgkFKPX3hy6iJ6ITLb?=
- =?us-ascii?Q?lpXEEO6gBZYj/jOSe0050u4e+4zuYtcDdAN2gwtdTs+jZAxR+Q6Cexanw0Fw?=
- =?us-ascii?Q?Vfxy1G+EfhrBiAqmapfJMHqhNAJtJAhV297jRJIwMy/Y/KPzQ07CkBtvbJaH?=
- =?us-ascii?Q?x3J86pd+ppxr0IPxg5SMAVFjOIRIbhvTZ9YWP//SdA8sf5aU7tZ+dSqCA86z?=
- =?us-ascii?Q?vkUp02VHU7kJjOUS78mDVrwhhZURZSp5wtO3BZRiO7/ncGduThrZW9dIJGJJ?=
- =?us-ascii?Q?4ZfIZYl33mdeMS2jtZ0FGe/6DRdn5A0LX13f4r2jGpGtdMSRBe9D/B/WYOgM?=
- =?us-ascii?Q?y4N19GK1kfvyKM8J7Bz8ZsBMWO2wnD19FhN1SacqT5cQDzhC1BfPIGA4lUaw?=
- =?us-ascii?Q?69AwYv1Z32pZLHdLQ2DZlEEQpP8BVPMCu+BdEqcbAbRsWMyfWIgY4G6qUNYu?=
- =?us-ascii?Q?PZK6H1SGQArY6YYpfQ3NbOdcO3j/rpWunkGLzczlC++cMYxJKr9CNQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024)(13003099007);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2025 12:39:39.4185 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 09fedf3d-4330-427e-8425-08ddb4ae846a
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000040.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVX0PF886830E71
+X-Mailman-Approved-At: Thu, 26 Jun 2025 14:57:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,91 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the latest TIFS firmware, an additional virtual interrupt and
-event is reserved for TIFS usage on am62x and am62ax devices.
+From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-Update the rm-cfg to reflect this new reservation.
+FPGA_SOCFPGA requires ARCH_SOCFPGA cause socfpga.c contains
+arch/arm/mach-socfpga/* include macros.
 
-Based on commit 87720385ab69 ("board: ti: rm-cfg: Update rm-cfg to
-reflect new resource reservation").
-
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- board/phytec/phycore_am62x/rm-cfg.yaml | 26 +++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
+ drivers/fpga/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/phytec/phycore_am62x/rm-cfg.yaml b/board/phytec/phycore_am62x/rm-cfg.yaml
-index e4221f82f92..26d99b03b80 100644
---- a/board/phytec/phycore_am62x/rm-cfg.yaml
-+++ b/board/phytec/phycore_am62x/rm-cfg.yaml
-@@ -1,7 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0+
--# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-+# Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
- #
--# Resource management configuration for AM62
-+# Resource management configuration for AM62X
- #
+diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
+index 62cb77b098c..9456ca3149a 100644
+--- a/drivers/fpga/Kconfig
++++ b/drivers/fpga/Kconfig
+@@ -15,6 +15,7 @@ config FPGA_ALTERA
  
- ---
-@@ -244,7 +244,7 @@ rm-cfg:
-             subhdr:
-                 magic: 0x7B25
-                 size: 8
--            resasg_entries_size: 960
-+            resasg_entries_size: 976
-             reserved: 0
-     resasg_entries:
-         -
-@@ -285,10 +285,22 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 4
-+            num_resource: 2
-             type: 320
-             host_id: 12
-             reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 320
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 320
-+            host_id: 36
-+            reserved: 0
-         -
-             start_resource: 4
-             num_resource: 4
-@@ -501,13 +513,13 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 44
--            num_resource: 36
-+            num_resource: 35
-             type: 1802
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 44
--            num_resource: 36
-+            num_resource: 35
-             type: 1802
-             host_id: 36
-             reserved: 0
-@@ -543,7 +555,7 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 909
--            num_resource: 627
-+            num_resource: 626
-             type: 1805
-             host_id: 128
-             reserved: 0
+ config FPGA_SOCFPGA
+ 	bool "Enable Gen5 and Arria10 common FPGA drivers"
++	depends on ARCH_SOCFPGA
+ 	select FPGA_ALTERA
+ 	help
+ 	  Say Y here to enable the Gen5 and Arria10 common FPGA driver
 -- 
-2.34.1
+2.48.1
 
