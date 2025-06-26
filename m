@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C935C7EE31
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 15:43:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65592C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 15:44:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1F6182E35;
-	Thu, 26 Jun 2025 17:43:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2456882E67;
+	Thu, 26 Jun 2025 17:43:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QRkW6obS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n8gwslkD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BABF982DA1; Thu, 26 Jun 2025 17:43:18 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 3C4D082C4C; Thu, 26 Jun 2025 17:43:20 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47DCD82C4C
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 17:43:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46F4982063
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 17:43:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-73a44512c8aso275735a34.0
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:43:13 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7387f21daadso1201771a34.0
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:43:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750952592; x=1751557392; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1750952591; x=1751557391; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iCL/gvsoav1UN8ErC7bRHBPyqIsOhLLEDPNrjtTfsF0=;
- b=QRkW6obSS9Gr+B+CnQ6UvAROqo7NyOj5MsrIEv5gErN+GWNRpjB/2JFWE3iv/upHVw
- RNZ081M90g3mezy09QHLBWmpPOE4efqMy3Sv3lW5vZYbIF3n0O4J0MK/rTwJWILVLIzg
- BNKef8VQwslZGWdCUjDScn8/NirFcViWxIMJ4=
+ bh=ZBUMvX2PrvSK8GGsUQTCzkQVUPB+CHTyE1kQKh/dzCI=;
+ b=n8gwslkDAjLSEOXIqFetnfnb7Ily20DXcgMs5c4xp/ZFFvtBYc1hyz1Kek2ha+bVtX
+ XjKfJGbv3mP4m0TtQKba/PcUcJed3JwRqDRKcIm2FKhalM4r87aACREIh03O0P93Vb/M
+ xZsaEJnAzuCL3ZecXUL1osfKnGJoUf0G8jgS8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750952592; x=1751557392;
+ d=1e100.net; s=20230601; t=1750952591; x=1751557391;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iCL/gvsoav1UN8ErC7bRHBPyqIsOhLLEDPNrjtTfsF0=;
- b=l8pPJjZ+cksTITzAME+an1N7mcwcO1qZ4opC82lifBuN8Cl9y9TWTqXNK/I1pSE3Wb
- BZjfg+wgYNbNf9EG76r9GGBOE7sJ77Ni1kmGwcFFZH3KfVNTmdKVbGAh6s9aEL3JOrKD
- zZ1I2+FMGetu60K01SeUlhP54DFxf1yFfJzPo/QTb8235vlsHSproknflV7LM612jIWU
- AgVGtmV5ymU4HpbzjqNLGri3ryE4nSsN/WfC3PtsWCMRSFQJHEmQbsAzvJPgQ8PTefWF
- bBGfQ1VMP4rJVR7p8+CBeRU7oZK1OsqTo7xeC1PMbpYp/msr1tPjOuitsgPC7Lk2+Lhm
- D7zA==
-X-Gm-Message-State: AOJu0Yx8pITvV+IVVN8Vpc+dJGl3T2I8FjAl/DpN7GzKOKDruP4g1z3I
- E0ZioenXFFpy0SmZRJFMWCMouB9zZ7Z2q7Mf2tioHLT/cYY6QkX8Xm/9h9DFE44d8UM=
-X-Gm-Gg: ASbGncvmzIMfVWko0A4ZF/qOSPvDBcyQ7mGIWXIUpdcir4/GzAFkqBPY+7gGuSfNUq8
- Qdp64Z51lWiXTut+VBFix/5eJjMSWllPI39EqwPM0Jey/HK44xj75TZy1vl8wcOoXy+RfysE1cp
- 4gCFIa8mut87htT3hklFW2AVKKq9UDUS3lbqKQEwtFIg2n+xqqhvwP9pLB3RBi2pMZCojZMQc36
- 3K6S6Ll3///+iCH1NtwVvBCfxisDMjAmPYy+gddj4oXTNlYgPTZetvgl5NP9FkWDpXey3za/EFv
- 5cJfambKRKRP+FVoKG8g4yCIYtuc7Id3NvG2/uIVt9HXlO3o89CpuJdd7fkatDOF1ia6s4MrxxT
- RhtZO7r2VaUP248VvS5m5lg==
-X-Google-Smtp-Source: AGHT+IHu4LKLZgm1ULCnYEO6pH9t+DZe/+o7nlOxGHLPC4wsVYDych1pmZbpVkFRIVy+lUfmOxAIWg==
-X-Received: by 2002:a05:6830:370f:b0:72b:8c5a:7294 with SMTP id
- 46e09a7af769-73afabd0ab4mr336559a34.9.1750952591975; 
- Thu, 26 Jun 2025 08:43:11 -0700 (PDT)
+ bh=ZBUMvX2PrvSK8GGsUQTCzkQVUPB+CHTyE1kQKh/dzCI=;
+ b=JWjBDvfytnB6ePgtq7LqE68rw4ilWrRcNh7hOHI3SJZ364ox+OmjG7y1ZfigisQdAd
+ ZZWle5RwCqvweuH+BuYvT/TReU+HfosykGGXXT9lDCAKMZHhW1OuVhYf9kROCSx1hxPM
+ HdS3BQJtU6o7NVPmmRadazZD/2Nweda9l6WhOKWTqcsucz+OQpwkFFHhrHz9n5JM1D2z
+ VkgcNAI4i6OO/yYiLohnV63rLi59Y1m2apvuCVpRp1ZRbF6lTouZO/5ZMHtntfVA5f9C
+ Fg1iWGbACxtgxTpkYiMDiIThzLPF5HXllPTcz7c861JHZCI9AbAiXoOc6JEtH4dkjzWn
+ 24pQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWWbxAdDnTSIR7j+yU7R6DLEJOPNM99VF+XYSOYLPqJABtBnVsLP4i3P78SJxbSYr0hFMjZP9I=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfCj14YpikAovM4N2xvJUt+Osj2vlSXd+j4iWIYHW+NXzTDj2O
+ unfiqXLGfKBhUs7CxYjgDOFflwQnnfy3HQvYU8kXVonufuNCmRtdtk1xymQj+Zy3skIhI7YXEC0
+ EahkZ1Oc=
+X-Gm-Gg: ASbGncvNn1zQlp6fVPoTNWCJPOSHlv5W0gS57d/sf+kfiN/A7n260JxvnP9P/54DIDb
+ gIs0msDf3jhfr31A+BLTOxzJeMBihnGa0O9MSWFnBWnFfA4ExPdQPvztyIp3LngWYJPWzfkX85h
+ 0pgaiVC674nc2CVgEOTcGjo8wifh6sR1Lwc4Z7urfPL9IcEbrIwoHJhyPpHtmUTf9YA+bKzWDdS
+ V8Afn+RTVPEifuQe2c54G5cg6heWX/cL4dNoWokb099Ksj+fipwzUZg/VtJlTE8E4FqIGDUr9Co
+ CY9TOSHS0EqI93RmdsjJkFnSqdVm93i89+7YCg50l26kKmXRYdWCKoboLGwXMusnG6v/OfolDxb
+ +47m5BvFAbxChnpSL9a+IJw==
+X-Google-Smtp-Source: AGHT+IFhJWsx+TUhwKThz1mJJbgOd9/QMM54r7XDOIgE+lSNs6jmI1dn9MMjNCeF4SjB2wugf9I00A==
+X-Received: by 2002:a05:6830:4909:b0:738:5294:785a with SMTP id
+ 46e09a7af769-73ae9e015a2mr2224263a34.6.1750952590924; 
+ Thu, 26 Jun 2025 08:43:10 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afaff2429sm20316a34.7.2025.06.26.08.43.11
+ 46e09a7af769-73afaff2429sm20316a34.7.2025.06.26.08.43.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 08:43:11 -0700 (PDT)
+ Thu, 26 Jun 2025 08:43:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-In-Reply-To: <20250612-missing-blob-help-entries-v2-0-36f1c8078155@ti.com>
-References: <20250612-missing-blob-help-entries-v2-0-36f1c8078155@ti.com>
-Subject: Re: [PATCH -next v2 0/5] add a few entries into missing-blob-help
-Message-Id: <175095259105.1712035.2504750483442874023.b4-ty@konsulko.com>
-Date: Thu, 26 Jun 2025 09:43:11 -0600
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: b-padhi@ti.com, m-chawdhry@ti.com, afd@ti.com, hnagalla@ti.com, 
+ j-choudhary@ti.com, bb@ti.com, nm@ti.com, vigneshr@ti.com, j-keerthy@ti.com, 
+ u-kumar1@ti.com, u-boot@lists.denx.de
+In-Reply-To: <20250609102706.2434495-1-n-francis@ti.com>
+References: <20250609102706.2434495-1-n-francis@ti.com>
+Subject: Re: (subset) [PATCH v4 0/3] Add support for K3 BIST
+Message-Id: <175095258992.1712035.8213141342652238796.b4-ty@konsulko.com>
+Date: Thu, 26 Jun 2025 09:43:09 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,32 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Jun 2025 06:38:49 -0500, Bryan Brattlof wrote:
+On Mon, 09 Jun 2025 15:57:03 +0530, Neha Malcom Francis wrote:
 
-> Now that TIFS and DM firmwares are marked as mandatory items for a
-> successful build[0] we should provide some more descriptive help text on
-> where to get the firmware in the event they are not found and add links
-> to more information about them.
+> This series implements a driver for the BIST (Built-In Self Test) module
+> for K3 devices. The BIST driver must ideally support triggering of BIST
+> tests, both PBIST (Memory BIST) and LBIST (Logic BIST) on a core. Both
+> tests are destructive in nature. Please see links [1] and [2] for
+> further information regarding the two.
 > 
-> We do need to expand the regex to allow the '.' dot in 'ti-fs-enc.bin'
-> so we can add it to the list which was the lesser number of lines
-> changed than renaming all these entries to 'tifs' or 'ti-fs' which the
-> current regex will match.
+> At boot up, BIST is executed by hardware for the MCU domain
+> automatically as part of HW POST. So BIST has been checked only for the
+> MCU domain when U-Boot comes up in the usual U-Boot to Linux boot flow.
+> To facilitate the use-case where some safe firmware is intended to be
+> run on a safe core, it is best to have triggered the BIST tests on that
+> core. As an example, we take triggering the BIST tests on the MAIN R52_x
+> cores. The triggering patch is kept as DONOTMERGE.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/5] binman: alphabetize missing-blob entries
-      commit: 562dcc6240fdb9b21e0e3b8da0a8452906e31aad
-[2/5] binman: add ti-dm entry to missing-blob-help
-      commit: f16f17fb050e44d9381c8742fa7ec1e37618302a
-[3/5] binman: add sysfw-inner-cert to missing-blob-help
-      commit: cf744bda69772cae34a48ee2d19eefd68231f09d
-[4/5] binman: allow '.' to be included in the missing blob tags
-      commit: 85c4c34dc92a8b545d376d00ec66990457556e9b
-[5/5] binmain: include ti-fs-enc.bin into missing-blob-help
-      commit: c1c8d2db436c9d9e8303b9e9cc108e719c6690c4
+[1/3] drivers: misc: k3_bist: Add K3 BIST driver
+      (no commit info)
+[2/3] arm: mach-k3: j784s4_init: Trigger LBIST and PBIST on MAIN R5 2_0
+      (no commit info)
 -- 
 Tom
 
