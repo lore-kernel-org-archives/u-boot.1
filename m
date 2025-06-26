@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F7CC7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 10:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74384C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 11:07:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17A5782AA4;
-	Thu, 26 Jun 2025 12:49:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C27C082AA4;
+	Thu, 26 Jun 2025 13:07:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U2m1vWRi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MyqNyM6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6479B82C4C; Thu, 26 Jun 2025 12:49:42 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 2652E82C4C; Thu, 26 Jun 2025 13:07:52 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BEA982977
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 12:49:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B27A082977
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 13:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a51481a598so441417f8f.3
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 03:49:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e81ec95d944so1759823276.1
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 04:07:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750934974; x=1751539774; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vQt3s559kM73jRyBlz/WwvmHARtq5xzUHyM3gYOWMa0=;
- b=U2m1vWRiCgnMObA798gpwmWMuqijCoi0lb6ismS0AR3KemIwE3rEG23RrbiXUoThyJ
- Fgs8PczAkFc5vMWYlgLOn7hhZjJCwWVFA9aOw8z0y/xXSc0i+jYkJUk2EW0uWtY96Geq
- uk7/r86dmaSqio4+yKQSC5732XyTeWAQ+kdmJK6XYigjYYPCYm1cpAivnw8GLhNEm/w8
- M9yB5c47Xd8eEEsDIm4cZzt88sOffnVFjZ4NvIG+MuC+aMWckhNkqIHZIbbbSCaUGRBo
- YCPBv7GMdb6YcO+Nx3TAzRkiQq8ot4ELn7k+OeMG251e2Ugx7gG5DQLnOsvmAwwMyudu
- A/wQ==
+ d=linaro.org; s=google; t=1750936065; x=1751540865; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=d1IV2o0gyGg86JCqE+Lc90tDeHvV8BASTqg1CkMoBKk=;
+ b=MyqNyM6UNENwbSq5JDoYFjgsXu219TL/K4r1Fj6KH8VlLpI/XPBO3I3ifTqaVrF/s7
+ Xi4tzhjWdlv2aur9/GwHM0tbpJZEWNfSHlmQ1dZ/cozdUo3KgGNwAsHB48Nxu4tLXHV3
+ hGXCn6RL0iYqHvKUaOauRXMQZrQ+OeklAAj97ht8zkNjX36wsoYGHGRuh3wuGIvYr4Fe
+ ZQcEoKTdV+JMwBL/c3hYu4E35PQwbolfX1B+TtfzdxtevaIrpecTqtdQHtW6ONZd/IRE
+ SXTDMHZCWt8mcVmWfVP+zYE8gLE5tLYUZg07QScqqdwq5gLb21K8TsH/I860MKQDbm/K
+ GOkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750934974; x=1751539774;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1750936065; x=1751540865;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vQt3s559kM73jRyBlz/WwvmHARtq5xzUHyM3gYOWMa0=;
- b=U1EV7DDSM8zYLU3zrztIQnZreCcBI4AilfGCvxbUdYA5vbDZ8pv3PvT9Y+Fi+pfFEc
- eAI+mRcOBJC6W+/ZcXRskPJN3ujOtoCGG35ezrnOWPLI2VfOdeIdz/5Dmxrk84mFQQse
- IzkbgS+aBFJiG1lg+ga7lyM7BRJnzxr01CXon6qAVSFeUsjwm24uTJG+BQrd04eNE0yk
- mTuwhilMkMJsxAqPfT9nmBXYU9R+ky8Xk8siFAxDihScVM5jQUJoTv3HjhbpAgJWdtso
- 7mXknsdPC8ufzxJr9s0MTa1MmNBPksQzdhlafJ/68iM33PfqBlwmYDcsNPddRWx/+TE1
- iTOQ==
-X-Gm-Message-State: AOJu0Yy3AcrIakteGTf3VuWce5ZFlwKyAo/6heYjfUMgFB+G3wWG0ZHJ
- kiWks0Su+b6EW0Vvf6i8FrkheRGLwJYwIB5VkRF+AWtIYN/xHFtCHJBT/91ILcGQRbZ0k++6jZ2
- 6w/Vrhb4=
-X-Gm-Gg: ASbGncsU16kjk3jubQQVeBs3ij4PoHG0rGeStWKwQeDE/KuuKzWE2+puMgstXve2XaM
- aKB8aH5dcHSttL+nx5CwTuTH0oHT7v9dIKB+MELBbuMQRFmNF9pNy32yMw3OZ4XaY29rBCXXj8b
- hB8mnD26fvQn01w6ZX2xCWih6zfvnR4t++84wA6Kl8YQH1fcXsKmXQNX7bmwxbhEt6Sp1PpKAeA
- iHQ4zwmdYhm0kriwOO7Eas3ushl44aQwGHJ/ce9abcwWEZEsf8e5k1AYVnR0IGlQ89q+3GOl+t4
- RbofLpud0UfO0z+ABgHAN2txLzx6YZOrLvEWUVyS06oBrFGJabTCldbyf81q9a4SuVrXRCqTiZU
- hrHBkhRaNSxWLjw==
-X-Google-Smtp-Source: AGHT+IFALVRPyywh3Ilf+pdzsXheZVr1TOl8J77F9f63mZy21TyHy6jjhP2UFKlGt36go1hknwofHg==
-X-Received: by 2002:a05:6000:4a0d:b0:3a4:f70d:8673 with SMTP id
- ffacd0b85a97d-3a6ed6412e5mr6383071f8f.25.1750934973645; 
- Thu, 26 Jun 2025 03:49:33 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ee3:2301:12b:81c6:a008:45a3])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e810b140sm6985680f8f.80.2025.06.26.03.49.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 03:49:33 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 26 Jun 2025 11:49:32 +0100
-Subject: [PATCH] cmd: mtd: Prevent use of uninitialised variable
+ bh=d1IV2o0gyGg86JCqE+Lc90tDeHvV8BASTqg1CkMoBKk=;
+ b=VIlO17bPIPR0FRCAYx1TZPwUIkutpbppg8Uidp/Q6oYGO7zKeookKGGzwfV7LzSpW8
+ pD9DPWnXnsox2UvEDXOEwq6vg3r9d8aOmQX3dvo6eL0MC8+WaZQlPTna4jsb7ADBKxAp
+ haur4dOcnGFK2gqL6mUAWbfMRUaPVEAv/E/V1Hn5VgJ8KZJWIfASm4J41lgdbeH+FJm9
+ NpAuxmntNSkANQru56q2O1jxbFpI7TV44BNrsaCksH5RB+wAi/dyKq8MewmaA0V05kMT
+ Oi4LVkhDYI9KLb3i6jB9G6MPeMyrUrThcUfjLf4iOdn9XE1/t7Lvy77eApN5yGMFpmPm
+ Ferw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW3b1oBNp36eru2F4mA//+WP0bpx7F2KDK1MzCskhvS9bvKtYeltFQDbISxC8ymfm3XC8zCE+g=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgakiTGapouR7w9RQc11ycXag3GUdQlzu2fnC0gTV5nzoBsZ8T
+ GIflDmQZdO3/xWdDPXe6JzX4r5b5Y1ii+b3JcnH/K51ytplAzSGDcu+rpJ41pa/aoUVdtlbVr9Q
+ HijQ6jAL0IVsnXet4hCZWnKvkktIgWi6xFN/BfbyaPg==
+X-Gm-Gg: ASbGnct8sadYgMaiszfUfrkPtxffAfC0+rPkxh1776XWTxZnlYKJ38ma4q76n80/Gdr
+ AiMdbgwYCb3pvlh4wI1rNtdUmOao3vWQbFeCinBGzmwXqVhM4L7oou+8DbvtRPOiyUBfA/KkEAm
+ VdutX5EKkwqWsWhOP+0btNHXtQdXrQbBlTMcZA8ZNXWeTN
+X-Google-Smtp-Source: AGHT+IFEgX88nNjVcvCB9oz+nugGbFCSnh2J585rLGrWVJq9xI3dqSadrvphWtdhC0M5IMxTjkKtgOqMgrJMYbW7yoM=
+X-Received: by 2002:a05:690c:1e:b0:70e:61b:afed with SMTP id
+ 00721157ae682-715094a1bc3mr46158567b3.7.1750936065513; Thu, 26 Jun 2025
+ 04:07:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250626-mtd_fix-v1-1-1ffcc59a9d0a@linaro.org>
-X-B4-Tracking: v=1; b=H4sIALslXWgC/x3N0QpAQBCF4VfRXNtiN5u8iqRZBnNhaUZS8u6Wy
- 7/z1blBSZgUmuwGoZOVt5iizDMYFowzGR5Tgy1sVXjrzXqM/cSXCaFEqv3kHCIkHVDJBME4LJ9
- fUQ+Sb9iFkv8v2u55Xtr2BiZyAAAA
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+References: <20250625171528.1062540-1-ilias.apalodimas@linaro.org>
+ <688f0e0c-7acd-452a-b941-188b76aa9c2f@gmx.de>
+In-Reply-To: <688f0e0c-7acd-452a-b941-188b76aa9c2f@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 26 Jun 2025 14:07:08 +0300
+X-Gm-Features: Ac12FXynD20h-K2eK4wiUblLeAWxvwxidjDVEZ1BU8t59SPmHo77w6ZuOeC3aWE
+Message-ID: <CAC_iWjJd8RXKG_oUBt-pE7seLOe3h9wS2NZkJDJAHrfarHy2Gw@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: initialize 'total' variable
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +94,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ret maybe used uninitialised in some cases so instead
-initialise it first to prevent this.
+On Thu, 26 Jun 2025 at 11:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 25.06.25 19:15, Ilias Apalodimas wrote:
+> > This variable might end up being uninitialized if we exit early.
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   lib/efi_loader/efi_bootmgr.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index b9437a81c642..662993fb8095 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -1134,7 +1134,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+> >   {
+> >       u32 i;
+> >       efi_status_t ret;
+> > -     efi_uintn_t count, num, total;
+> > +     efi_uintn_t count, num, total = 0;
+>
+> 'total' is a non-static local variable.
+> The first line using it in origin/next initializes the variable:
+>
+>      total = num;
+>
+> If we exit early, local variables are discarded.
+> Could you, please, explain your concern.
+>
+> Best regards
+>
 
-This issue was found by Smatch.
+The out: tag uses it on a for loop to free allocated opts[] boot options
 
-Fixes: 9671243e8d10 (cmd: mtd: Use the subcmd infrastructure to declare mtd sub-commands)
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- cmd/mtd.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cheers
+/Ilias
 
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index c25997cfb24..1651a4a6b3e 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -474,7 +474,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
- 	struct mtd_info *mtd;
- 	u32 oob_len;
- 	u8 *buf;
--	int ret;
-+	int ret = CMD_RET_SUCCESS;
- 
- 	if (argc < 2)
- 		return CMD_RET_USAGE;
-
----
-base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
-change-id: 20250626-mtd_fix-bb1ae86f33aa
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+> Heinrich
+>
+> >       efi_handle_t *handles = NULL;
+> >       struct eficonfig_media_boot_option *opt = NULL;
+> >
+> > --
+> > 2.49.0
+> >
+>
