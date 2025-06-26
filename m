@@ -4,75 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B704C77B7F
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 06:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F5A8C77B7F
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 06:25:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7438C82D21;
-	Thu, 26 Jun 2025 08:17:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8FCB082D21;
+	Thu, 26 Jun 2025 08:25:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1750918659;
-	bh=Vp9os7f0LFYzAcjS/lSClJW9V7i8RCKkuS+7SUFwPaE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=l3VUha+F4KCA1jTwpB8A4GEaTCgQoOP3BFNBCIj7SLfnd59rgcHktSmw6EpvqBowf
-	 n3vSvRQkAIwFHhI6KH7Gy5gcpFH3RJLRBL1H7Vp+DsNdZkv6O7mQ0kK8iRcDOdSpRJ
-	 k58iwPlqixB4ID7VIrpOiltcEazUpP6DeqQjTizX7YLwXfGXw/W6MRHwBMsIPa2GHP
-	 /oTCKWKgu12yG8AAq/4lKhCLcC3QeyeAAh1TW62uyFHLDhwA7oWLEn2ITrjTmI+N7J
-	 NYIwkz/OaJXrU+TtCRzOxDbG9+qT4vrv6JWXhtKybhBrgm5y/xbKWVihFk2Y0gH+SN
-	 BOnyOcJC/rD3w==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2961982D83; Thu, 26 Jun 2025 08:17:38 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75D7A82AA4
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:17:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lukma@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="FoWZ0dLq"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9A07210397285; 
- Thu, 26 Jun 2025 08:17:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1750918653; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=Vp9os7f0LFYzAcjS/lSClJW9V7i8RCKkuS+7SUFwPaE=;
- b=FoWZ0dLqOuA+sMujlKcGwwnP0pTetTSpIVKY+2PDZnfb88aECXzIXHwd4v5ioY7V9teLkU
- +w6dxGmiR+q4jUQa4yH/OI922yzpiIHpEBp5roaCGqp8k2pE7jSRzzq2RKmJtPH/sUm7Fj
- fHU/IUOpBfpnfaMSdhQEm6EY6P/tEJgVF61nG67vYcrVTSXr0IzK+yJaLe4swd+2ao0nqf
- 9UuoqWhhX9mxzHyxr56o5N5DVx7aJylkRRAFruvevQJDaRJ43TP2VvmLgyoH1P1+udXBNO
- SCVGnAmm9UKr/CV+SHgyRiLyKIZMcpjBKBGv6Vmtkp2QEFullESeEioJlEPBzQ==
-Date: Thu, 26 Jun 2025 08:17:25 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor@kernel.org>, Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- albert.aribaud@3adev.fr, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] dts: Add u-boot specific 'fsl,mux_mask' property to
- iomuxc for vf610
-Message-ID: <20250626081725.45b947a3@wsk>
-In-Reply-To: <20250625205255.GU4003484@bill-the-cat>
-References: <20250624204700.972663-1-lukma@denx.de>
- <20250624204700.972663-2-lukma@denx.de>
- <20250624210116.GL4003484@bill-the-cat>
- <20250625083637.1d286cec@wsk>
- <20250625141424.GN4003484@bill-the-cat>
- <20250625-stylishly-expiring-c37b5a0a52fb@spud>
- <20250625163742.GR4003484@bill-the-cat>
- <20250625223250.43470703@wsk>
- <20250625205255.GU4003484@bill-the-cat>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AMXUv+LO";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C49BE82D83; Thu, 26 Jun 2025 08:25:13 +0200 (CEST)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on20614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2405::614])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6590B82AA4
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:24:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JLthxWD3M8KqTDqg+pR6ZZYejFr+/9IM38APgOj0ZHliwdaoh1z5cmIT2YAoM6f0ByamDiEpz/wKi96wrnFOIxG7IOoSHsohADwY9atoG1bHE9krS6WwML9/paEbf9FVwe3TqPw/5m8qnf8ff7obl7q1lyABYyDVwTh2Qp5EE/HJVnPZtrWt504QD5yX8hatpYoTl6WnJkoh0VygCcTtf2ujEN/S+I+vSbVlQmCVTlAEFgGILXR15KgOrn78He4kE1PF7Gn/Hsr3JVj91EgDLeM3B2Wj62cNC3S/Ror51YSDW2nYHpgdb9ziNc9miL2ubx8ywhic6zhd5FF58zHamA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=t8MkLXzEwLGGUPAePBZRFoHOfGYRBZ0L2X2t8msJNfA=;
+ b=GPMbvBjURBy3OaeLhpax53YILByfcnqbiQ1Dd+gWtWoCjplGw4k4SaBsEh7GiLu+pY7Zr2jBkYloce8E8txH0EVyBLvGueH82aAqEcliCcHHj70CnkJAqKEYaP1ZkryPHmvvfOvswS9Fofxjwb8EyjogMrfSamUkW5AJc5D6UrRBSQb5+OQXLfHz1K3v5TJ2Q0o1/aG+Y2ZqWJAQ8pP2yZB//7W2iLdz5JCnO3zhzkUqyQoMZxt8TvwqSRtJ3iJBC4idu4oJPEBQykreVE9JwRPy3ZhS/tQIy0OjvO+//4DF0kh1EGR9IquvHrj7N5GRFvxKsgQzC73jWa4FqLcAcw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t8MkLXzEwLGGUPAePBZRFoHOfGYRBZ0L2X2t8msJNfA=;
+ b=AMXUv+LOCNnw6koCumEgSdDhfsD5NqWO0DXrSF9utRb9KhF/QaMEtnQLVoaxs2H/WglE0iJ1/p7pcuSwPKIjhTaT1c/zo2ryXpFy1acTvktJR/i7/2wjvbXpm6ZHbOjR4Nb9cBveoclMguYFRhDuotneXYUVS7o6HR8EZ7c3YwA=
+Received: from BN7PR06CA0071.namprd06.prod.outlook.com (2603:10b6:408:34::48)
+ by DS0PR12MB6487.namprd12.prod.outlook.com (2603:10b6:8:c4::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.22; Thu, 26 Jun
+ 2025 06:24:56 +0000
+Received: from BL6PEPF00022572.namprd02.prod.outlook.com
+ (2603:10b6:408:34:cafe::db) by BN7PR06CA0071.outlook.office365.com
+ (2603:10b6:408:34::48) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.18 via Frontend Transport; Thu,
+ 26 Jun 2025 06:24:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF00022572.mail.protection.outlook.com (10.167.249.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8880.14 via Frontend Transport; Thu, 26 Jun 2025 06:24:55 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 26 Jun
+ 2025 01:24:54 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 26 Jun 2025 01:24:52 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <peng.fan@nxp.com>, <jh80.chung@samsung.com>, <git@amd.com>
+Subject: [PATCH v2] mmc: zynq_sdhci: Reset the host controller
+Date: Thu, 26 Jun 2025 11:54:40 +0530
+Message-ID: <20250626062440.295301-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/IM=r=4.DuNUJozLzEwRCZk4";
- protocol="application/pgp-signature"; micalg=pgp-sha512
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF00022572:EE_|DS0PR12MB6487:EE_
+X-MS-Office365-Filtering-Correlation-Id: a3366d72-6614-4b32-95e5-08ddb47a2b0d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?gLT3Dv6B7c2XbRWeC7ivHJh+GzUANKI1Hi1FRIjW88voy6jzXDXQcv8TpBXZ?=
+ =?us-ascii?Q?bYbg10s4VqXJidHBPM2lDR/3U1E3NdWxZM1cTQg6wh3kSI1UGccBNHpv2zRZ?=
+ =?us-ascii?Q?q45jp2YKFWjqg4i5Y3MqD0js2n1kKjLrSR0WlRb/RNJKcUq913RfKb2hLTis?=
+ =?us-ascii?Q?B0x+kZXLeTGr50ofNb0PAelMMqs/b7SprehInlGJH0Gys7nwMhuQEkr0gYS6?=
+ =?us-ascii?Q?uKhIERFgwPHDqNVI7fJa4YwY45mF9xnor7wwjocHQ1ib792Son/HX34GaDJ5?=
+ =?us-ascii?Q?WOhMvtUPV8jd0XJwETEUHzF2CogGyosKPCONu/kGTtHZ35+mnG3M3WAnEhny?=
+ =?us-ascii?Q?hFni/uMVWFowEgL/BAIPvvPY3tIvfe3Gg81mlE2AsXo/9BOiDlRnelMeRqhL?=
+ =?us-ascii?Q?EfmVMocuWZaVo27CAAP7NcViMBO0TOCaTM9lnwt8K4sItqqk3ZXrSxFhviDi?=
+ =?us-ascii?Q?y6Qln1tizASYwbHfY3DDOotrLUePPib8kooSQwopsmBt4fUYdwG+oS/Zm9lh?=
+ =?us-ascii?Q?Lext8Aeh8XSyi3yB0h06L0Buz5vPKlU/9nDTzeBExjeUzFE12IPGCiM5SyRP?=
+ =?us-ascii?Q?hMsuHbRkH0iq7je6NaudB2wuozBKIvBaKP3GN7OUjr5CEihM5SwkSV7K5K22?=
+ =?us-ascii?Q?VcxMh4wKnsnIqzqoCtgXNg8JS0KUJymZrhJy0gl5L5F4h0Tnzq/2/Eo78oFn?=
+ =?us-ascii?Q?DwqcUPblplYqHSTSBlfehxMUffp6+s+ROzQS7X5Id19TMroWM/q0Owud4Wi1?=
+ =?us-ascii?Q?AhBCbnL2gvNIw0J1vt10fIGwAVc5pNQIYVbqoqurBvJgv8JreNWxnxtFxzT/?=
+ =?us-ascii?Q?NzBCmrVAXLqiCk6dtesoRBh0P6Mj4L+0uleOiCuBGIoZYDDDOlIYMPfUop9F?=
+ =?us-ascii?Q?L2F0R1nT9I2WRebjcDulqW/9K7IF1Kp7sR3QWtbHJ+f313kUoWSZAyGoZsO+?=
+ =?us-ascii?Q?HPlxb48SIp30K5JHYdkckU1bY50RjIENZXGpWcNI+0WbK2spP9435Fu88Oel?=
+ =?us-ascii?Q?lglciiJoLaDCw0pXJjo2G+/hbUIoGideYqQHBcE5uaKDY6phHl0dCkJroT26?=
+ =?us-ascii?Q?P6iAKjhe/LH9cuklSlHMx8K8NUkmtTZ3SSz+UDItTWHzkZrijeBO7WhyYLJj?=
+ =?us-ascii?Q?PIgreSn4ocOFXXneRv33jVRJTw4xRT+NC+lJ5D7NBFdTOzGNU5pSuC/xYK+y?=
+ =?us-ascii?Q?4xgRCsuRRXbQxNUbDuWfJdEGP03+KMqLJy42IboYtoSsG24atcnKqYUdAEaz?=
+ =?us-ascii?Q?YCipAc0Jbj74x+RX4KGeBN+hQqDdjsNpqH17StcWplKHo1K0mXX9dGpQkTgo?=
+ =?us-ascii?Q?7P04bRY/eRit08A2/YYTGErHmmSL2IjeJaCyKoLeWC+kr2BPDIPAW8mWCOSU?=
+ =?us-ascii?Q?s8dHCNHiSJXvQ1OkBP+FcqfdFQX/aFgq5GbY8TFDEPjXNEhxaj36ITir2zOI?=
+ =?us-ascii?Q?IDDafU3SH8PzNiPW36QkWTKLfDNXJJs9oNXtSwme2fYuTdHUUXNjbt+ODreO?=
+ =?us-ascii?Q?jPIUc77y07KJrPrIOpiHZbxEM3MxONe0XsW8?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2025 06:24:55.7368 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a3366d72-6614-4b32-95e5-08ddb47a2b0d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00022572.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6487
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,139 +146,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/IM=r=4.DuNUJozLzEwRCZk4
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Reset the host controller at the early stage of probe so that the
+configuration will be done properly for reboot cases.
 
-Hi Tom,
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+Changes in v2:
+- Reset is optional, so don't return if reset property is not found from
+the device tree.
+---
+ drivers/mmc/zynq_sdhci.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-> On Wed, Jun 25, 2025 at 10:32:50PM +0200, Lukasz Majewski wrote:
-> > Hi Tom,
-> >  =20
-> > > On Wed, Jun 25, 2025 at 05:28:56PM +0100, Conor Dooley wrote: =20
-> > > > On Wed, Jun 25, 2025 at 08:14:24AM -0600, Tom Rini wrote:   =20
-> > > > > On Wed, Jun 25, 2025 at 08:36:37AM +0200, Lukasz Majewski
-> > > > > wrote:   =20
-> > > > > > Hi Tom,
-> > > > > >    =20
-> > > > > > > On Tue, Jun 24, 2025 at 10:47:00PM +0200, Lukasz Majewski
-> > > > > > > wrote:  =20
-> > > > > > > > The commit e8a9521e649f
-> > > > > > > > ("vf500/vf610: synchronise device trees with linux")
-> > > > > > > > has synchronized U-Boot's DTS with v5.19 Linux kernel.
-> > > > > > > > It turned out that in Linux's upstream iomuxc node
-> > > > > > > > description the fsl,mux_mask' was missing, so the
-> > > > > > > > U-Boot's pinctrl driver for NXP's Vybrid SoC was not
-> > > > > > > > working properly.
-> > > > > > > >=20
-> > > > > > > > As by default the mux mask was set to 0, the vf610 based
-> > > > > > > > boards (like BK4) were bricked, due to misconfiguration
-> > > > > > > > of gpio at early boot stage.
-> > > > > > > >=20
-> > > > > > > > The fix for all vf610 based boards is to introduce
-> > > > > > > > vfxxx-u-boot.dtsi file with 'fsl,mux_mask' property
-> > > > > > > > provided and include it in boards' specific U-Boot
-> > > > > > > > adjustment files (like vf610-bk4r1-u-boot.dtsi).
-> > > > > > > >=20
-> > > > > > > > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > > > > > > > ---
-> > > > > > > >  arch/arm/dts/vf610-bk4r1-u-boot.dtsi | 2 ++
-> > > > > > > >  arch/arm/dts/vfxxx-u-boot.dtsi       | 9 +++++++++
-> > > > > > > >  2 files changed, 11 insertions(+)
-> > > > > > > >  create mode 100644 arch/arm/dts/vfxxx-u-boot.dtsi     =20
-> > > > > > >=20
-> > > > > > > It looks like this is still missing upstream, so what's
-> > > > > > > the status on that?    =20
-> > > > > >=20
-> > > > > > It looks like in Linux the mux_mask is hardcoded (for Vybrid
-> > > > > > vf610):
-> > > > > > https://elixir.bootlin.com/linux/v6.16-rc3/source/drivers/pinct=
-rl/freescale/pinctrl-vf610.c#L321
-> > > > > >=20
-> > > > > > In u-boot other SoCs use it as well, but with different
-> > > > > > values:
-> > > > > > - arch/arm/dts/imxrt1050.dtsi -> 0x7
-> > > > > > - arch/arm/dts/imx8ulp-evk-u-boot.dtsi -> 0xf00
-> > > > > >=20
-> > > > > > In the imx8ulp case above - it is already set in
-> > > > > > *-u-boot.dtsi specific file, so I've followed this
-> > > > > > approach.   =20
-> > > > >=20
-> > > > > Someone should unify upstream to one approach or another I
-> > > > > would think. Or find a good explanation as to why it's not
-> > > > > unified, and then we should follow.   =20
-> > > >=20
-> > > > If these values are per-SoC, which they appear to be given these
-> > > > look like 3 different devices, I don't see a reason for these
-> > > > to be accepted "upstream".   =20
-> > >=20
-> > > OK, yes. But it should either be "hard code a thing" or "get the
-> > > property" not maybe-one-maybe-the-other? That was what I was
-> > > trying to make as my point.
-> > >  =20
-> >=20
-> > Agreed.
-> >=20
-> > Then some decision shall be made if:
-> >=20
-> > 1. We keep the fsl,mux-mask as *-u-boot.dtsi specific
-> >=20
-> > 2. Modify the pinctrl driver for Vybrid
-> > (drivers/pinctrl/nxp/pinctrl-imx-mmio.c) and maybe add mux_mask
-> > field to:
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/pinctrl/nxp/=
-pinctrl-imx.h?ref_type=3Dheads#L26
-> >=20
-> > 3. Try to upstream (to Linux) the property. That would require
-> > rewriting kernel pinctrl driver for vf610 to parse "fsl,mux_mask"
-> > property.
-> >=20
-> > As Conor pointed out - the approach from 3. is not feasible.
-> >=20
-> > Then we shall decide if 1. or 2. shall be implemented.
-> >=20
-> > Approach from 1. doesn't require any driver's modification. Approach
-> > from 2. would introduce the extra field and some code modification
-> > to:
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/pinctrl/nxp/=
-pinctrl-imx.c?ref_type=3Dheads
-> > and
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/pinctrl/nxp/=
-pinctrl-imx-mmio.c?ref_type=3Dheads
-> >=20
-> > I would personally opt for 1. =20
->=20
-> Well, my question is wouldn't option 2 bring us closer to how this
-> works in Linux?
->=20
+diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+index 0e2bdab4e7e..4d1f92931a3 100644
+--- a/drivers/mmc/zynq_sdhci.c
++++ b/drivers/mmc/zynq_sdhci.c
+@@ -1127,6 +1127,28 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 	if (arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_VERSAL_NET_EMMC))
+ 		priv->internal_phy_reg = true;
+ 
++	ret = reset_get_bulk(dev, &priv->resets);
++	if (ret == -ENOTSUPP || ret == -ENOENT) {
++		dev_warn(dev, "Reset not found\n");
++	} else if (ret) {
++		dev_err(dev, "Reset failed\n");
++		return ret;
++	}
++
++	if (!ret) {
++		ret = reset_assert_bulk(&priv->resets);
++		if (ret) {
++			dev_err(dev, "Reset assert failed\n");
++			return ret;
++		}
++
++		ret = reset_deassert_bulk(&priv->resets);
++		if (ret) {
++			dev_err(dev, "Reset release failed\n");
++			return ret;
++		}
++	}
++
+ 	ret = clk_get_by_index(dev, 0, &clk);
+ 	if (ret < 0) {
+ 		dev_err(dev, "failed to get clock\n");
+-- 
+2.34.1
 
-Yes, it should.
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/IM=r=4.DuNUJozLzEwRCZk4
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmhc5fUACgkQAR8vZIA0
-zr0rQQgAy7de29upWC9r33YH/wdmYTKVaH/Xzav7Byx1MLO1N9dDbyMc4mVx9tdo
-h/af4a3o0RIRQZmUby42AkMirjjghldSDSukrVMUqN5fXf6ZXivEJJ3IQGjm2peY
-Fi1NMkv9dYsUzwT0iStm3SNm0odcl6CU6wpQqsoe6Kr2NThWdJlHHyW+PjbRsimw
-96zZZHx+Va7FFTmPhaUYKVn6Y6+ILKGsK4/L+1djuI5uyM3bixvtz111KebKcek4
-aJ4BoXufaBHXxEFKCKJDwIMnQG2dKxI1JXO2HRklqjhliKUEX64NO7PZJ9fyyhko
-l48r0S0+h9GGrSNzzEOZ15iplYiyEQ==
-=TgU+
------END PGP SIGNATURE-----
-
---Sig_/IM=r=4.DuNUJozLzEwRCZk4--
