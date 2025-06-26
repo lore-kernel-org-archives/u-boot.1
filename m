@@ -4,123 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3A90C7EE32
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 11:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F15C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 11:30:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E36F82E86;
-	Thu, 26 Jun 2025 13:25:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 38F9882AA4;
+	Thu, 26 Jun 2025 13:30:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XFmoVSCV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sD8w4nZ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E682A82E40; Thu, 26 Jun 2025 13:25:28 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E03C182D83; Thu, 26 Jun 2025 13:30:05 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F382682E17
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 13:25:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 897E080E9A
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 13:29:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55Q9ZxFx029523
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:25:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=SQpXBmHaT09
- P6b3moNyYlHp0l7MTImuDlI3KcyRVnbA=; b=XFmoVSCVekUMOYQwpq0lLds3JGq
- VczBUVf74zsYcoDugpnCkwxEk0n9L44QisQMNMtZPUTnXm/qTbpRloPzaZf8lI9N
- 8eC29gPN0OVsPPxzaM8pU8QZUz/lszDAjaNCtw1XefQy/KU411Z682JQH7J5D8Pa
- nWIOn4kgwb9xB/Rdsf/AfdLJtVxx7P1MmWwIEa7lvtDRD9A4OAhiM0mGPyKX4156
- N3cDo4R0vHOj7ePWU6R8i4TOpTIF6yOR+BZdD8DdSrJf9SnvHJTyezxeyi14r8Zo
- ABMOfnqzRJFDdOowvqnMJ9jEDaRJ1L4f1Z8fDXbBWa89AApOcK0wYCEv/8Q==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47esa4vcet-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:25:21 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-234fedd3e51so9736225ad.1
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 04:25:21 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3a531fcaa05so473389f8f.3
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 04:29:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1750937396; x=1751542196; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mQ/7yH9rwF87qoQMIJmWAeY0O5yOei9Ly5rK1YEIDHk=;
+ b=sD8w4nZ19fRYwH00qteWmgTn/Hm80P8ownFK4UfFVTY+/CC2cnXgNKvXBSU2+kiyF3
+ Y1WdfPb/dAUQlnmS3agU+CUnT8VYAVRwknLP8QZYOtkkx7o+jHJcRalWNxAvt19T2MK1
+ 7t/pzQwtyV/TaabwpCFx/gYl2oACQI7jQiIh4vyrI3xgF7jWfD8WAHlqAS8LM7yi1Br9
+ p/tuX74dFSwFJtJMLT8qtGh3wFb+zUk5mlHNFxiEwPv1nLVRQmRte9RKJXx8N4EyivYS
+ 4w9HxS3u1PqS94++4Ifd/MW/aiNAEuWdyxKcfmrZEl2pHzJdqOmMfqtqyGT2p11I8NBl
+ XQ4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750937117; x=1751541917;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SQpXBmHaT09P6b3moNyYlHp0l7MTImuDlI3KcyRVnbA=;
- b=tu5u6N5cCgNaghv5//gtQen/xDk8Q67lN4O700z6UqEq8k0+AWYuRhAELZVrmx/DyB
- TSYARofrxyhoEnvo9561TZnie1D0YT12sCunJT3lRnvvMwkQkw7RHb3uIAZz6QF+U+Xm
- 8po7/OR5C75vnGg05O+0BKUHyUqM59iihXMevSvcoUILEecycnuVvMUc31IjHInXyfMA
- t3MxsFXrWFTE6MTTsGegnXo3M4cRi0GqiFi8HwBNtaeOOXzuGKgC/k4cz/Z9SY7i1V9X
- lCxVP+7r/LQXCntAK7Euya2DDQmhWe816fzX1UPRoBqIgdRMk3XInPs3Kz0Ul1uD8ldL
- uVsA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXXdyvypCwfAhhIROKfQpxNXjxds1HPkpgPXSEHdfftI4pahawhRgFhfk+2trKdTs1kz8ppGKU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwoXttY9lBVfW0eHS0q5WyuHVFIkbDowVqbrF4gal3fVm3zZcg6
- eX8Yg0MClmB0e3USfOtuZTmO6YhYW4n15imROrqy+nEK74m6kubrrmNVGZ4MWoObmsuSOCukYfP
- 5ZDbzBQu+iXSTC6n3QOqIidc+Mk7BFqyFYYafsbc/yxWO2NlUArxi1pau
-X-Gm-Gg: ASbGnctXnqcUL9/knQSZV/HiACA+KO6EGNCNjFWSd+RGM4V8jnoO3mZac0AXVdJaQSk
- 96JXC+xvkMDTlzU6f6jXVDntgp26vTJ+7Y/0N+EPF6H0km8s2gzeGAMQjXfiawpL9J2BVwAth9r
- J68TH4yP8rIiyX0RwLSTycTpO3HQ9SSKvM9BuqNwO5L3ISxLUVrBezTYTL8AbHq3bDkbb+FDM6c
- ZtZ/cnhMKWYVEkZGNMjeGa+0lVQb/kcJJEl5hpJLQpa6AZvoAmGtECj0PlomDz7z6agiBBNWQ/X
- HEQd9ilibz9xJH4Kawe3E1cg50RgOaLzrnW9QfXsrruxbmvpUs7fZf8u1X476yp2QDBvSt0WPnY
- Y7VhBH4evkCvUGSYY/ebs1eFEmFc0NugL42cNndju/Q==
-X-Received: by 2002:a17:902:e88a:b0:236:9726:7261 with SMTP id
- d9443c01a7336-2382404d970mr102226535ad.39.1750937117451; 
- Thu, 26 Jun 2025 04:25:17 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGxpmdGScCfqbmjOKIH6iioaSoteZHuGaSQJITAkwXc+Tznv0eySeGh26ACGGAKGJPIPVjwjA==
-X-Received: by 2002:a17:902:e88a:b0:236:9726:7261 with SMTP id
- d9443c01a7336-2382404d970mr102226125ad.39.1750937117031; 
- Thu, 26 Jun 2025 04:25:17 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ d=1e100.net; s=20230601; t=1750937396; x=1751542196;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mQ/7yH9rwF87qoQMIJmWAeY0O5yOei9Ly5rK1YEIDHk=;
+ b=ZIRrUmO3AXVFhHHS6OFoAHdzAgwcmpkrfcoBusg4/E/YBlmzxrqeQpRl7BJyp0jMAH
+ mD2Tc5vppiJFrnzO2Bhf6xtkHnTzROsZm62HfR1VY7O3B0Gaskfx49Lj4Q9Xb+fjfEmx
+ sNc3lkOxz869d+bbCI/ojG7xt2MbpWiyoa33y3OMkoENsEo0KXNUGjQU6q2mOUORBBEX
+ Y0qXmJMJc2RMMl9sRC+IlHbN+yMiz6d8y/Oflk1kt9GC2wgVSF+cVwiB6oa+APriXQTw
+ az00iBWLNe23PCZIFDqp+/XzHBPiVYslnXyXkw0vQP1tJ4nPz2npdC65sDYT2g6c0KFS
+ I2CQ==
+X-Gm-Message-State: AOJu0YyvbMVlNFqOTki0YQobqsVO34VXuC1f7LLVz5StHvkTQqh01Uza
+ mtkGkZxrmioo/T/UQpne+sSy/RNUNkSfSV5JRolr/iZwrooIlzOx640pQP1g4qW/GeU=
+X-Gm-Gg: ASbGncsK10ICMUDHmFBsFhlqIKuIVva02nBaoOyAtNG27v/7ZgLjHYG592xr4FCDg0d
+ iTcd19gK6DKd6Xp2fluv67JT+nolOi1zpbc75yr0wLN9FInjyX/M7BXzAinXhkY5t/C9D3cxUeY
+ Cq/EsYtUcWuFd5k6veJtXONl8DwNUP3t8bsivnDg/bRSWJlSTlg7IGPz0P2NuQdbV/EX0DW7ga1
+ M3pZDZDOaJZl1afLkfWLnGbvc8i9foBzY7G2bTZakmO5k9ehhjY6tXjWCJLkZ3j71YRTtT8P9UW
+ mY9LYEWMpCHkmIlWgIEnnq43rb19NdrarlV2tU3O/XSm2H3Si83yvKR7Qgrr7Qs+OFc9+0xR6D6
+ /Ez53vAxgt9bT6zYjMBM+RvUr8AGrA7CQott0YE/JGfw/Ztit0g==
+X-Google-Smtp-Source: AGHT+IHUtcuR2wdemrDn6iypC9MCi5qvsYjG9sjx2qCOOtgiFJ//0XD+6iN/M+/lBKMWL3tTFcH8hA==
+X-Received: by 2002:a05:6000:40df:b0:3a4:eb92:b5eb with SMTP id
+ ffacd0b85a97d-3a6ed65cc0emr4880958f8f.50.1750937395882; 
+ Thu, 26 Jun 2025 04:29:55 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:ee3:2301:12b:81c6:a008:45a3?
+ ([2a0a:ef40:ee3:2301:12b:81c6:a008:45a3])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-237d867b438sm154528185ad.176.2025.06.26.04.25.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 04:25:16 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, jh80.chung@samsung.com,
- aswin.murugan@oss.qualcomm.com, ilias.apalodimas@linaro.org,
- rui.silva@linaro.org, me@samcday.com, quic_varada@quicinc.com,
- sughosh.ganu@linaro.org, miquel.raynal@bootlin.com,
- balaji.selvanathan@oss.qualcomm.com, sjg@chromium.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1 4/4] configs: qcom: Add OF_LIVE_SA8775P & QCOM_POWER_DOMAIN
- config
-Date: Thu, 26 Jun 2025 16:54:41 +0530
-Message-Id: <20250626112441.143064-5-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250626112441.143064-1-aswin.murugan@oss.qualcomm.com>
-References: <20250626112441.143064-1-aswin.murugan@oss.qualcomm.com>
+ 5b1f17b1804b1-453823c0812sm46594035e9.34.2025.06.26.04.29.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Jun 2025 04:29:55 -0700 (PDT)
+Message-ID: <84d760dc-cc1d-46ab-bded-d7c6f72abbf5@linaro.org>
+Date: Thu, 26 Jun 2025 12:29:54 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=eLYTjGp1 c=1 sm=1 tr=0 ts=685d2e21 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=6IFa9wvqVegA:10 a=EUspDBNiAAAA:8 a=uH0TRCUCYLZtirlkuZ4A:9
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: a0vshgFKcG8r0oXsyyfdIxcItLgu8rKC
-X-Proofpoint-ORIG-GUID: a0vshgFKcG8r0oXsyyfdIxcItLgu8rKC
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI2MDA5NiBTYWx0ZWRfXzEsfgNmlDCLi
- OGtYNwaANJRa/c1hAxgrivmquhsY4HhCSWliea2rYcclEfxp2f7sWu4kXUkyWTdaoNKxzj07NVm
- FAZ2w+TNiOWKWUAKg72cV9OG6lu5reZs1gVqOAjSYIRxcmhjKOoFCE7rNCMgzP6ke/AGpDy3+zp
- MIpT9HdR6W3c7eBzmhO/Bpg40y+qU2wALWWnHxDQ/+E/btl6epI+m3wXV+MiFo3BnAhDGMWV134
- 3GR0de1GR43782qESWxNVDRVWdX5UCp7hs/yZmYyQ+gwGfRyYDWWW+x6NXF63HU+fNTFHb39RKy
- tl6Lxw8MMt51OcDUe0Pm8wJwpuzSGF0hrBC+rtGr+I2k/2A+Q8KXEEg5sV+0LGPRMfk/DmMIdGt
- AlaOHJYABG42IwEnxD7nnWKZHBjZmXigPeMvCABbXsdWokI+/gjglajWskWpKmnOj/Vi54dr
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-06-26_05,2025-06-26_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 mlxscore=0 clxscore=1015 mlxlogscore=893
- suspectscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0 malwarescore=0
- adultscore=0 spamscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2506260096
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: mtd: Prevent use of uninitialised variable
+To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250626-mtd_fix-v1-1-1ffcc59a9d0a@linaro.org>
+ <b8e3d928-7f3c-46ef-bf6d-6eb8a48931ac@cherry.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <b8e3d928-7f3c-46ef-bf6d-6eb8a48931ac@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,39 +101,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable QCOM_POWER_DOMAIN & OF_LIVE_SA8775P config for qcs9100
+On 26/06/2025 12:14, Quentin Schulz wrote:
+> Hi Andrew,
+> 
+> On 6/26/25 12:49 PM, Andrew Goodbody wrote:
+>> ret maybe used uninitialised in some cases so instead
+>> initialise it first to prevent this.
+>>
+> 
+> I don't believe that's true, can you tell us which code path(s) could 
+> trigger this because I didn't find one the 2min I spent reading the code.
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- configs/qcom_defconfig    | 1 +
- configs/qcs9100_defconfig | 2 ++
- 2 files changed, 3 insertions(+)
+No error path taken before line 563, ret is still not assigned to.
+remaining == 0 which could come from being passed 0 on the command line, 
+line 518, unless there is a check for that that I missed?
+Code reaches line 591 without assigning to ret.
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index b8399701da0..f7780c06454 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -123,6 +123,7 @@ CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SOC_QCOM=y
- CONFIG_QCOM_COMMAND_DB=y
-+CONFIG_QCOM_POWER_DOMAIN=y
- CONFIG_QCOM_RPMH=y
- CONFIG_SPMI_MSM=y
- CONFIG_SYSINFO=y
-diff --git a/configs/qcs9100_defconfig b/configs/qcs9100_defconfig
-index 10ff4d25398..19bc1cab0e3 100644
---- a/configs/qcs9100_defconfig
-+++ b/configs/qcs9100_defconfig
-@@ -11,6 +11,8 @@ CONFIG_DEBUG_UART_BASE=0xA8C000
- CONFIG_DEBUG_UART_MSM_GENI=y
- CONFIG_DEBUG_UART_CLOCK=14745600
- 
-+CONFIG_OF_LIVE_SA8775P=y
-+
- # Address where U-Boot will be loaded
- CONFIG_TEXT_BASE=0xaf000000
- CONFIG_REMAKE_ELF=y
--- 
-2.34.1
+Andrew
+
+>> This issue was found by Smatch.
+>>
+> 
+> Seems like a false positive to me?
+> 
+> Cheers,
+> Quentin
 
