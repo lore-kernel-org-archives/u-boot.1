@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B55C7EE33
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 09:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5469CC7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 10:43:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFB4A82977;
-	Thu, 26 Jun 2025 11:57:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6524B82AA4;
+	Thu, 26 Jun 2025 12:43:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ql8lEbfx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tEoXWTOO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6755E82B34; Thu, 26 Jun 2025 11:57:42 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C81580E9A
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:57:38 +0200 (CEST)
+ id 6F49682B34; Thu, 26 Jun 2025 12:43:55 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0503582977
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 12:43:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a522224582so344469f8f.3
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 02:57:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1750931858; x=1751536658; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/uTJ2mMc8uIuvU/XH5keJCymXegtQ+rYVK6vayliG3o=;
- b=ql8lEbfxF0AcmexfbLQHLZ8bPSn+t8NyArL/p3mEOF9XwIya/1TkcsLXCMeMUtb4QN
- 8fsd6GJNerhgtiu3r/7TuO8jlayA8HwK7AGCPH9FSGgSahtExkYQ0uwnWqXiv9vslZGk
- Otab7NDeHYP37N0UNDxFjqxwTZ6ISBbvpm4PBa++vy+EkmK62NiWJMPrOdRWPmDHnfvl
- NPXFOAe4uhc8RIQkGy8E3PAnK6d7n0oAvlsASunP3Vd23GVfPf7B+gtAma4HVmEwjnAB
- qSJ3JH76R2LVmq09gIq+UKFJpMo1Q9pGooswsTuLusjSrY2NblzRknXDFY571iWN/tJB
- h8sQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750931858; x=1751536658;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/uTJ2mMc8uIuvU/XH5keJCymXegtQ+rYVK6vayliG3o=;
- b=En3hZy1qXOTWiqSZGUJDP5nMvfEO58eL+5kWljUVy+SOpFnyxOytO7/IfGDvlCVyh/
- arJAEU12lf5OYL+m4kMf0Tfj/v5c0Dsojby9M5y+Dp42T9YRs+cJkXylwoO26QcxIgZ7
- E82+Ak+EhrGh1yxfMnrpxubEhhQgTPKuWA1BJL+R/u6/mCr9JHlrcku20xbVRF/BzBNo
- 7DlgvUdPE+BlyqCz/3rmTdA2Fha8NUV0mKUCwLHb4G4QRHxe2GS5+9jhDBWSFGa2b9HH
- Y6SQ/lAFI3ATDEnhNSGQw85t294JolFCRMS3iv0CP3N1HmH4w/V4PwTM0nLTfV7nmBCW
- FJNQ==
-X-Gm-Message-State: AOJu0YwsFoQwobRtX6Xzav7JwX+aS691SOscw1cRx/qQykkFf5BAV3go
- n4ShynIwoPJv/1amzEIpOTihqX2qK78VO3dM2x2jn+O529htliFhyrsBIFZn/VGw6jQ=
-X-Gm-Gg: ASbGncvpFBbqKFLl8piqs63jgTaXNi8Am5HtYW+yyhAHIPld/VshyYOfCmPzjiQNXQ1
- cxomwH1DYK3b6nfBHQJdCmuv5cwdjswYrduOUMXiuW4wXPJG8PkCqPH9/ghj+IkCcugdX5vh9oh
- gL8ygX5GrCXFEn9DbwYHs1mfNm8uOU/Ay+i2ZnrmLF1g/CUPMM6OHH19Gml3wFJD6OQVVjz956Y
- xCACt02kmZoAFB4nUkgE0aWHu7DYEUdC+Vr4NjcAa2tW1GNFUEAFJFIZyiRyDdhoIwschwzFM0I
- F0GUJW/cQSBPB3FdTa93wr1oX0qffXoT3laXNQ/KCa5Mdk3BdGROm38r8mDHFShemOz4TKQW258
- lrcUqA+E1cGpaVA==
-X-Google-Smtp-Source: AGHT+IFQv3Y20XYJWMYJ0zDGiAU9R/bqR4Vl1BDn6oOlQjMKwidd7ZElajtI+eZ+ikQlLNbGYEMyVQ==
-X-Received: by 2002:a05:6000:65a:b0:3a4:e2f4:a86b with SMTP id
- ffacd0b85a97d-3a6f2eac659mr2255886f8f.37.1750931857849; 
- Thu, 26 Jun 2025 02:57:37 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ee3:2301:12b:81c6:a008:45a3])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a6e80ff461sm7097959f8f.67.2025.06.26.02.57.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 02:57:37 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 26 Jun 2025 10:57:36 +0100
-Subject: [PATCH] cmd: tpm: Fix attempt to return value not in enum
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55QAhhVe2392319;
+ Thu, 26 Jun 2025 05:43:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1750934623;
+ bh=CZZDXdLFdMdqshu/RGrTVWIFHQhbZVMSYGGatrlrwk0=;
+ h=From:Date:Subject:To:CC;
+ b=tEoXWTOOpy1q0hhEtfFJ3Q4BhDUJyk9E1tKMfC3wNj6b31vGamjiU/yqVH5TTxfon
+ q0O5Da/w2wl6wS4fUCBnqKs/xuj1Atjrce8zOuWkc+dLLfgAk0se1Q9FBdFsNb9uwo
+ E4V0YdmaXFf8DgyxOqL5lOxD0tzOpJQnmcvbxFME=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55QAhhsj3552443
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 26 Jun 2025 05:43:43 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 26
+ Jun 2025 05:43:42 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 26 Jun 2025 05:43:42 -0500
+Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.253])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55QAhdSs865642;
+ Thu, 26 Jun 2025 05:43:39 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Date: Thu, 26 Jun 2025 16:13:32 +0530
+Subject: [PATCH] Makefile: Fix of_list_dirs with EXT_DTB
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250625-tpm_enum-v1-1-73a1aff0bd4c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAI8ZXWgC/x2N0QqDMBAEf0XuuYE0EFF/pZRysaveQ1K5s6Ug/
- ntjH4edZXYyqMBoaHZSfMTkVSpcLw2NC5cZTp6VKfgQfRui29b8QHln5/sO6DkitYmqntjgknI
- Zl/OQ2TboOayKSb7/xu1+HD+wxFhIcwAAAA==
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Message-ID: <20250626-b4-upstream-fix-icssg-fit-v1-1-95eff1c853a4@ti.com>
+X-B4-Tracking: v=1; b=H4sIAFMkXWgC/x2MzQpAUBBGX0WzNsXELV5FFoPBLPx0Byl5d5PdO
+ XW+7wGTqGJQJw9EudR0W13yNIF+5nUS1MEdKKMyCxSwK/Dc7YjCC456o/Zmk9OBXeCCqpIGFgb
+ f71E8+L+b9n0/+LUcImsAAAA=
+X-Change-ID: 20250626-b4-upstream-fix-icssg-fit-b6a42952daea
+To: Tom Rini <trini@konsulko.com>
+CC: Udit Kumar <u-kumar1@ti.com>, Andrew Davis <afd@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>, Bryan
+ Brattlof <bb@ti.com>, <u-boot@lists.denx.de>, Manorit Chawdhry
+ <m-chawdhry@ti.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750934619; l=1532;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=fEScn5Lc3HrNdvkq4akx55Sp8Dy1Ev1Z0jkbIRK6Izg=;
+ b=g/ryvD/KoTT7DHyrao1h3vAIod+5Qq5IsTDQ04/FArJ5T3xiPtPJxllgovaO9rQI7KdyMqln3
+ Q7PzPREL22hDG4EWX2o7v0SnFreKiwP3pDqd+fH9qXRtDsL1Xn4od37
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,76 +92,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function tpm2_name_to_algorithm is defined as returning an
-enum for the algorithm specified but it also attempts to return
-an error on failure, but that error is not included in the enum.
-Add the error to the enum so that it can be returned.
+EXT_DTB overrides the of_list_dirs that is passed to binman during
+builds. This causes binman to not find the normal DTB paths and instead
+it just is able to use the path for EXT_DTB only.
 
-This issue was reported by Smatch.
+Add the default of_list_dirs that is used for normal binman builds to
+EXT_DTB usecase as well.
 
-Fixes: 954b95e77ef0 (tpm-v2: add support for mapping algorithm names to algos)
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- cmd/tpm-v1.c                 | 1 +
- cmd/tpm_test.c               | 1 +
- drivers/tpm/sandbox_common.c | 1 +
- include/tpm-v2.h             | 1 +
- 4 files changed, 4 insertions(+)
+ Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/tpm-v1.c b/cmd/tpm-v1.c
-index 6e019d1c729..25402f7543b 100644
---- a/cmd/tpm-v1.c
-+++ b/cmd/tpm-v1.c
-@@ -8,6 +8,7 @@
- #include <malloc.h>
- #include <vsprintf.h>
- #include <asm/unaligned.h>
-+#include <linux/errno.h>
- #include <tpm-common.h>
- #include <tpm-v1.h>
- #include "tpm-user-utils.h"
-diff --git a/cmd/tpm_test.c b/cmd/tpm_test.c
-index af83d78c3fe..1d9644d5aae 100644
---- a/cmd/tpm_test.c
-+++ b/cmd/tpm_test.c
-@@ -7,6 +7,7 @@
- #include <cpu_func.h>
- #include <log.h>
- #include <time.h>
-+#include <linux/errno.h>
- #include <tpm-v1.h>
- #include <linux/printk.h>
- #include "tpm-user-utils.h"
-diff --git a/drivers/tpm/sandbox_common.c b/drivers/tpm/sandbox_common.c
-index 596e0156389..4bc003a2c09 100644
---- a/drivers/tpm/sandbox_common.c
-+++ b/drivers/tpm/sandbox_common.c
-@@ -7,6 +7,7 @@
+diff --git a/Makefile b/Makefile
+index e60bbb01a004c7801034a10e7f3fdd04f92f700d..f2a6fbad6d32c3b68292ff19bda4f4fdb686de63 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1392,17 +1392,17 @@ ifneq ($(EXT_DTB),)
+ ext_dtb_list := $(basename $(notdir $(EXT_DTB)))
+ default_dt := $(firstword $(ext_dtb_list))
+ of_list := "$(ext_dtb_list)"
+-of_list_dirs := $(dir $(EXT_DTB))
++of_list_dirs := $(dir $(EXT_DTB)) $(dt_dir)
+ else
+ of_list := $(CONFIG_OF_LIST)
+-ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
+-of_list_dirs := $(dt_dir) arch/$(ARCH)/dts
+-else
+ of_list_dirs := $(dt_dir)
+-endif
+ default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
+ endif
  
- #define LOG_CATEGORY	UCLASS_TPM
- 
-+#include <linux/errno.h>
- #include <tpm-v1.h>
- #include <tpm-v2.h>
- #include <asm/unaligned.h>
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index ece422df0c7..6c516dd3c9b 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -266,6 +266,7 @@ enum tpm2_return_codes {
-  * TPM2 algorithms.
-  */
- enum tpm2_algorithms {
-+	TPM2_ALG_INVAL		= -EINVAL,
- 	TPM2_ALG_SHA1		= 0x04,
- 	TPM2_ALG_XOR		= 0x0A,
- 	TPM2_ALG_SHA256		= 0x0B,
++ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
++of_list_dirs += arch/$(ARCH)/dts
++endif
++
+ binman_dtb := $(shell echo $(CONFIG_BINMAN_DTB))
+ ifeq ($(strip $(binman_dtb)),)
+ ifeq ($(CONFIG_OF_EMBED),y)
 
 ---
-base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
-change-id: 20250625-tpm_enum-098ee9a5eb6b
+base-commit: 40e083353a1610276f12fdbe613bf12004452656
+change-id: 20250626-b4-upstream-fix-icssg-fit-b6a42952daea
 
 Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+Manorit Chawdhry <m-chawdhry@ti.com>
 
