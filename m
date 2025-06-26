@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A2D4C7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5330EC7EE32
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 12:58:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 282C382E71;
+	by phobos.denx.de (Postfix) with ESMTP id 70AD582E9F;
 	Thu, 26 Jun 2025 14:57:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kMOJIgRT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AQMeCF1o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 533D282D88; Thu, 26 Jun 2025 11:35:39 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 50BAF82C4C; Thu, 26 Jun 2025 11:35:49 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3207F82B34
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:35:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E822882D83
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 11:35:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vtpieter@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ad89ee255easo154117366b.3
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 02:35:30 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6088d856c6eso1501884a12.0
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 02:35:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1750930530; x=1751535330; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1750930533; x=1751535333; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pKcTuaBfQXIC3qnu7z+38MQsObmk33Da07EvYI7u0QI=;
- b=kMOJIgRTHeTxCr/j/kWU8skdqZr6VRUIaCOjTs526Qw9Tn9a2dEpKM/Gintm0z0Mba
- GPHqq4oYbNazeuZFyoPfceDQFGTIXPAVAffv2KAgGHbg8iJJbXYwt7YA0dIRgodIoKqB
- bk7E8BzKCOJOOIQFi7AtDw8QX4pBe+a1RVUjTnPcucNShBbfsBLsLr/Mj8kwkS2OrNpO
- FJyCjddb1tk8leQ6G9hp8djjHDxPkhl5Q75dsQAzI5G6j69cezDXbYZoRqb8extGsU88
- YGDCjTnrws8N05usXCiGRNKbQc8GD0gqxvZH4bt+zP66NNdPDwkgSzK+CaPmVthhgSIN
- TGdw==
+ bh=UPCHN3ivg065LwPfIU7OniKU56lgvYAjDz64nHRYW5Y=;
+ b=AQMeCF1oNwD3l/vhTJVS+dJ6nnru1oqghij+8hYL4TpimlPQgUEM+FS+WkltqLUyCR
+ 4NfeFMi76tuSMWKXMwb8eHz9Hrz13K/Mo37TkXXsDO+HT7/ExpCX/WZXRBMxfDoHM505
+ vvSlj4m/ahNuq5YvoUC1KZW80p5A3b1ZOZ88Xr4GLazfRh8DIXh79H6xZw/2mv1kdDni
+ wY/+gBpe9TG7wKVxNaqEocDb3e/ulYufLP3jTcFoqbo9gSW0ejVGfnEQR+R3VAJKxMLv
+ avFs1oM08MtMI4/ERW1ULpnZOk1p+GJthQ7fSA2nXydat0ambLrAz/pPfWfEFmk3gMrj
+ 5DbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750930530; x=1751535330;
+ d=1e100.net; s=20230601; t=1750930533; x=1751535333;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pKcTuaBfQXIC3qnu7z+38MQsObmk33Da07EvYI7u0QI=;
- b=HTgJbVXmMv+E56KkdtOjoQShKIfHcc+kooN0eJm32SXkLRz2K2spWW0KoMrhJVaTLm
- 4yNWodH82sPevTtX0LqiI/8Jd4brdK8B9AEMjDoK6hMZiWdJHtOWLorjDZ0yKHn2eOIb
- qOmvxwYTU9VrcX9gS6cMnSapeM3e4CCI/JONrhyNReYOEn6LtB/WloRekdw1+Z41mU1j
- Ug3xzLwmor2ULqokY7N3TmgxiTa/0NqN2oZv0IjljK6RfaNo+GjgnFWzgFzAUus+Ze6m
- xVtE6CXwZquv6K+Th9/uRMzhFHYX+sVyFEKAJmzIeZZGlYWUL+co3ofjnXeObUpIADxq
- snEQ==
-X-Gm-Message-State: AOJu0Yy1q661JT9pS8sQfPI2FrvIpocIiBpkmIqVe36iJ/4B2DOXC7in
- 5LzqbEv/qYN82pwBk3STxP0adIQ2+OjrK1y0UZQvgrNDFXZooaMRfMQ2wL0YvQ==
-X-Gm-Gg: ASbGncuwaJ87nqzG/2ePa6ml1yBUNgN+72xQOr8p+IH3+uUKhvKF+0GgAqDsXOa9orO
- GiPXeWqqoCAgOsCkqbLR+lUbEmwTC+8XXe69LU3uD9xD5VI/aUVwmovfATm8OJebsZZ7Cizr9rB
- y0qTKOix7hbTB3BMOUlu9eaqRjHrJZwatRzejo0Hwmd08B2eQEA6elsCpZhMhLwgARTus3oT9IL
- zUgBLqTZpeYtSXrXIb4jxmtqXh4NZpEu5GZkUwlH0/Jv+6jfG5z0427KOG18twVFh1lXGXlkoCl
- T69SFHIoVISVwmBQ/QvfokTCHVoaUa4xKXInGabLopC2OpmbscocIBZclc6NUah4
-X-Google-Smtp-Source: AGHT+IFyWfUgkegBROCAozlEThvL5z5sj68ND6QEupYaFT2yqMVRDi2Nks5tzebHcAFsq1r6xnRgIw==
-X-Received: by 2002:a17:907:7ba2:b0:ad8:a41a:3cd2 with SMTP id
- a640c23a62f3a-ae0be8601a5mr684641266b.16.1750930529357; 
- Thu, 26 Jun 2025 02:35:29 -0700 (PDT)
+ bh=UPCHN3ivg065LwPfIU7OniKU56lgvYAjDz64nHRYW5Y=;
+ b=McoIOQ2XnIrzNkKjmphZD+yifm0VmhKVhLL7kx7CZJZOgEnuSgl1RtRRxTE4wyc5Bu
+ nAokdVllur6w3H8gS26fIvIA94In6pszXuotQAH83r2xKbqstiYb8njNN76cDPODPOw7
+ S+x7fNQv4JopXG6e+zKBOPE/g1taO+fcovFXs8fsZsFdRqT1XiyHNaHYSsav6fs9uDHO
+ BF+4STVRe39Xd9CBJ8F7o9vlfflyBQywPL2NQ3oqk92UeJONobPk9jduK6vWj/CgqH31
+ YD3p66B4kc3YFc54dTlrTxRahJpmCWgIpRlBalCZDr/guMinUOUV30t0QMK6ptY26Zcq
+ DmcQ==
+X-Gm-Message-State: AOJu0YxbaPoPBumFVw7T2lL7uFs+bOm2oFQPgJ1Yo0izKHKFjgGICDpd
+ DIzqli0PTPRJVRP9GkR/uBpqt/janJwq7jG+9OxAWvLbGFRWAsU3DGOOhemnuA==
+X-Gm-Gg: ASbGncuaiCbNFFFRe95GlKvkyfG5A3lqzmStW8HgH3GpooQITUd8vGj2EfddcM5zaFF
+ ubNCN3MdSriNCa6wSMF5jVpULZ2UlSFi0H7+RRwAw8VOvzopBoM/7kS4uxdq6pY2tZwa8akkoF0
+ tPoXujs1mAP+3xdjQrhzIZrdDCe5fEQxv60T9pCMjIbk74E+BUUjEs4EbSrNLywEE3HvQHeEbK/
+ jtKYEZMJHBvQBlX0PQgJyrEP+GVJ4Hh/9yCu3qrrrPYoUysrp5QkPOxckl36alNpcGS2tc7pKbO
+ C8WAgtZeABXNKo1CAB0Cr27/Tm0G1wWWh5V2WpW3DgjuObYOyTyhW8kQjZgp2v8v
+X-Google-Smtp-Source: AGHT+IGWhlsRDHKJlyWvBYN/4E+erWsGtIsvhUQ/NvYQY6iDtr+8lK4/hLaBrvWqVFqBd60Ni0iVwQ==
+X-Received: by 2002:a17:907:3e8d:b0:ad5:42bd:dfab with SMTP id
+ a640c23a62f3a-ae0d0cd5716mr282847466b.30.1750930532973; 
+ Thu, 26 Jun 2025 02:35:32 -0700 (PDT)
 Received: from lapsy144.cern.ch (lapsy144.cern.ch. [2001:1458:202:99::100:4b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae0d950eae0sm76670766b.149.2025.06.26.02.35.28
+ a640c23a62f3a-ae0d950eae0sm76670766b.149.2025.06.26.02.35.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 02:35:29 -0700 (PDT)
+ Thu, 26 Jun 2025 02:35:32 -0700 (PDT)
 From: vtpieter@gmail.com
 To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-Subject: [PATCH v3 1/4] Improve user feedback in case of FPGA bitstream load
- failure
-Date: Thu, 26 Jun 2025 11:35:13 +0200
-Message-ID: <20250626093519.115655-2-vtpieter@gmail.com>
+Subject: [PATCH v3 4/4] FPGA files - correct compiler errors and warnings
+Date: Thu, 26 Jun 2025 11:35:16 +0200
+Message-ID: <20250626093519.115655-5-vtpieter@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250626093519.115655-1-vtpieter@gmail.com>
 References: <20250626093519.115655-1-vtpieter@gmail.com>
@@ -101,293 +100,355 @@ X-Virus-Status: Clean
 
 From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 
-In cmd/fpga.c, change some `debug` calls to `log_err` for important
-user feedback and use CMD_RET_FAILURE in favor of CMD_RET_USAGE due to
-its long output which hides the actual, useful return message. Change
-the remaining `debug` calls to `log_debug`. Remove all 'fpga:' and
-__func__ strings as `log_*` has this covered.
+Errors reported by GCC 14.2 when using the amended sandbox_defconfig,
+now with FPGA commands and drivers. Also many style fixes as reported
+by checkpatch.pl on the diffs. Most changes in stratixII.c which has
+been reorganized as well to avoid the top function prototypes.
 
-For `do_fpga_loads`, move up the `do_fpga_check_params` call for more
-consistent command output; use a constant instead of multiple '5' use.
-
-In drivers/fpga/zynq*.c, change 'up to' to 'above' which corrects this
-confusing/wrong statement.
+No functional changes.
 
 Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
 ---
- cmd/fpga.c              | 99 +++++++++++++++++++++--------------------
- drivers/fpga/zynqmppl.c |  4 +-
- drivers/fpga/zynqpl.c   |  4 +-
- 3 files changed, 54 insertions(+), 53 deletions(-)
+ cmd/fpga.c               |   2 +-
+ drivers/fpga/ACEX1K.c    |   1 +
+ drivers/fpga/ivm_core.c  |   1 +
+ drivers/fpga/lattice.c   |   4 +-
+ drivers/fpga/spartan2.c  |   1 +
+ drivers/fpga/stratixII.c | 131 ++++++++++++++++++---------------------
+ drivers/fpga/stratixv.c  |   2 +-
+ drivers/fpga/versalpl.c  |   1 -
+ drivers/fpga/virtex2.c   |   2 +
+ include/stratixII.h      |   6 +-
+ 10 files changed, 72 insertions(+), 79 deletions(-)
 
 diff --git a/cmd/fpga.c b/cmd/fpga.c
-index 9dc7b63db5d..9cc51f04698 100644
+index 9cc51f04698..d51c380d7b3 100644
 --- a/cmd/fpga.c
 +++ b/cmd/fpga.c
-@@ -28,7 +28,7 @@ static long do_fpga_get_device(char *arg)
- 	if (dev == FPGA_INVALID_DEVICE && arg)
- 		dev = simple_strtol(arg, NULL, 16);
+@@ -302,7 +302,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
  
--	debug("%s: device = %ld\n", __func__, dev);
-+	log_debug("device = %ld\n", dev);
+ 			data = image_get_load(hdr);
  
- 	return dev;
- }
-@@ -40,26 +40,26 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
- 	size_t local_data_size;
- 	long local_fpga_data;
- 
--	debug("%s %d, %d\n", __func__, argc, cmdtp->maxargs);
-+	log_debug("%d, %d\n", argc, cmdtp->maxargs);
- 
- 	if (argc != cmdtp->maxargs) {
--		debug("fpga: incorrect parameters passed\n");
--		return CMD_RET_USAGE;
-+		log_err("Incorrect number of parameters passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	*dev = do_fpga_get_device(argv[0]);
- 
- 	local_fpga_data = simple_strtol(argv[1], NULL, 16);
- 	if (!local_fpga_data) {
--		debug("fpga: zero fpga_data address\n");
--		return CMD_RET_USAGE;
-+		log_err("Zero fpga_data address\n");
-+		return CMD_RET_FAILURE;
- 	}
- 	*fpga_data = local_fpga_data;
- 
- 	local_data_size = hextoul(argv[2], NULL);
- 	if (!local_data_size) {
--		debug("fpga: zero size\n");
--		return CMD_RET_USAGE;
-+		log_err("Zero size\n");
-+		return CMD_RET_FAILURE;
- 	}
- 	*data_size = local_data_size;
- 
-@@ -70,51 +70,52 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
- static int do_fpga_loads(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
- {
-+	struct fpga_secure_info fpga_sec_info;
-+	const int pos_userkey = 5;
- 	size_t data_size = 0;
- 	long fpga_data, dev;
- 	int ret;
--	struct fpga_secure_info fpga_sec_info;
- 
- 	memset(&fpga_sec_info, 0, sizeof(fpga_sec_info));
- 
--	if (argc < 5) {
--		debug("fpga: incorrect parameters passed\n");
--		return CMD_RET_USAGE;
-+	if (argc < pos_userkey) {
-+		log_err("Too few parameters passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
--	if (argc == 6)
-+	if (argc == pos_userkey + 1)
- 		fpga_sec_info.userkey_addr = (u8 *)(uintptr_t)
--					      simple_strtoull(argv[5],
-+					      simple_strtoull(argv[pos_userkey],
- 							      NULL, 16);
- 	else
- 		/*
- 		 * If 6th parameter is not passed then do_fpga_check_params
- 		 * will get 5 instead of expected 6 which means that function
--		 * return CMD_RET_USAGE. Increase number of params +1 to pass
-+		 * return CMD_RET_FAILURE. Increase number of params +1 to pass
- 		 * this.
- 		 */
- 		argc++;
- 
-+	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
-+				   cmdtp, argc, argv);
-+	if (ret)
-+		return ret;
-+
- 	fpga_sec_info.encflag = (u8)hextoul(argv[4], NULL);
- 	fpga_sec_info.authflag = (u8)hextoul(argv[3], NULL);
- 
- 	if (fpga_sec_info.authflag >= FPGA_NO_ENC_OR_NO_AUTH &&
- 	    fpga_sec_info.encflag >= FPGA_NO_ENC_OR_NO_AUTH) {
--		debug("fpga: Use <fpga load> for NonSecure bitstream\n");
--		return CMD_RET_USAGE;
-+		log_err("Use <fpga load> for NonSecure bitstream\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	if (fpga_sec_info.encflag == FPGA_ENC_USR_KEY &&
- 	    !fpga_sec_info.userkey_addr) {
--		debug("fpga: User key not provided\n");
--		return CMD_RET_USAGE;
-+		log_err("User key not provided\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
--	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
--				   cmdtp, argc, argv);
--	if (ret)
--		return ret;
--
- 	return fpga_loads(dev, (void *)fpga_data, data_size, &fpga_sec_info);
- }
- #endif
-@@ -245,23 +246,23 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 	ulong dev = do_fpga_get_device(argv[0]);
- 	char *datastr = env_get("fpgadata");
- 
--	debug("fpga: argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
-+	log_debug("argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
- 
- 	if (dev == FPGA_INVALID_DEVICE) {
--		debug("fpga: Invalid fpga device\n");
--		return CMD_RET_USAGE;
-+		log_err("Invalid fpga device\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	if (argc == 0 && !datastr) {
--		debug("fpga: No datastr passed\n");
--		return CMD_RET_USAGE;
-+		log_err("No datastr passed\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	if (argc == 2) {
- 		datastr = argv[1];
--		debug("fpga: Full command with two args\n");
-+		log_debug("Full command with two args\n");
- 	} else if (argc == 1 && !datastr) {
--		debug("fpga: Dev is setup - fpgadata passed\n");
-+		log_debug("Dev is setup - fpgadata passed\n");
- 		datastr = argv[0];
- 	}
- 
-@@ -269,20 +270,20 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (fit_parse_subimage(datastr, (ulong)fpga_data,
- 			       &fit_addr, &fit_uname)) {
- 		fpga_data = (void *)fit_addr;
--		debug("*  fpga: subimage '%s' from FIT image ",
--		      fit_uname);
--		debug("at 0x%08lx\n", fit_addr);
-+		log_debug("*  fpga: subimage '%s' from FIT image ",
-+			  fit_uname);
-+		log_debug("at 0x%08lx\n", fit_addr);
- 	} else
- #endif
- 	{
- 		fpga_data = (void *)hextoul(datastr, NULL);
--		debug("*  fpga: cmdline image address = 0x%08lx\n",
--		      (ulong)fpga_data);
-+		log_debug("*  fpga: cmdline image address = 0x%08lx\n",
-+			  (ulong)fpga_data);
- 	}
--	debug("%s: fpga_data = 0x%lx\n", __func__, (ulong)fpga_data);
-+	log_debug("fpga_data = 0x%lx\n", (ulong)fpga_data);
- 	if (!fpga_data) {
--		puts("Zero fpga_data address\n");
--		return CMD_RET_USAGE;
-+		log_err("Zero fpga_data address\n");
-+		return CMD_RET_FAILURE;
- 	}
- 
- 	switch (genimg_get_format(fpga_data)) {
-@@ -303,13 +304,13 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 			if (gunzip((void *)data, ~0UL, (void *)image_buf,
+-			if (gunzip((void *)data, ~0UL, (void *)image_buf,
++			if (gunzip((void *)data, ~0U, (void *)image_buf,
  				   &image_size) != 0) {
--				puts("GUNZIP: error\n");
-+				log_err("Gunzip error\n");
+ 				log_err("Gunzip error\n");
  				return CMD_RET_FAILURE;
- 			}
- 			data_size = image_size;
- #else
--			puts("Gunzip image is not supported\n");
--			return 1;
-+			log_err("Gunzip image is not supported\n");
-+			return CMD_RET_FAILURE;
- #endif
- 		} else {
- 			data = (ulong)image_get_data(hdr);
-@@ -327,12 +328,12 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 		const void *fit_data;
+diff --git a/drivers/fpga/ACEX1K.c b/drivers/fpga/ACEX1K.c
+index 3de9011ac06..e1514fc56d0 100644
+--- a/drivers/fpga/ACEX1K.c
++++ b/drivers/fpga/ACEX1K.c
+@@ -14,6 +14,7 @@
+ #include <log.h>
+ #include <ACEX1K.h>		/* ACEX device family */
+ #include <linux/delay.h>
++#include <time.h>
  
- 		if (!fit_uname) {
--			puts("No FIT subimage unit name\n");
-+			log_err("No FIT subimage unit name\n");
- 			return CMD_RET_FAILURE;
+ /* Note: The assumption is that we cannot possibly run fast enough to
+  * overrun the device (the Slave Parallel mode can free run at 50MHz).
+diff --git a/drivers/fpga/ivm_core.c b/drivers/fpga/ivm_core.c
+index 3c9a01e5110..4ab5dab250a 100644
+--- a/drivers/fpga/ivm_core.c
++++ b/drivers/fpga/ivm_core.c
+@@ -33,6 +33,7 @@
+ #include <linux/string.h>
+ #include <malloc.h>
+ #include <lattice.h>
++#include <vsprintf.h>
+ 
+ #define vme_out_char(c)	printf("%c", c)
+ #define vme_out_hex(c)	printf("%x", c)
+diff --git a/drivers/fpga/lattice.c b/drivers/fpga/lattice.c
+index 3f481e38565..29cf2f60974 100644
+--- a/drivers/fpga/lattice.c
++++ b/drivers/fpga/lattice.c
+@@ -350,8 +350,8 @@ int lattice_info(Lattice_desc *desc)
+ 			printf("Unsupported interface type, %d\n", desc->iface);
  		}
  
- 		if (fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
--			puts("Bad FIT image format\n");
-+			log_err("Bad FIT image format\n");
- 			return CMD_RET_FAILURE;
- 		}
+-		printf("Device Size:   \t%d bytes\n",
+-				desc->size);
++		printf("Device Size:   \t%zu bytes\n",
++		       desc->size);
  
-@@ -348,7 +349,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- #endif
- 	default:
--		puts("** Unknown image type\n");
-+		log_err("Unknown image type\n");
- 		return CMD_RET_FAILURE;
- 	}
+ 		if (desc->iface_fns) {
+ 			printf("Device Function Table @ 0x%p\n",
+diff --git a/drivers/fpga/spartan2.c b/drivers/fpga/spartan2.c
+index 906649ea181..792e4033428 100644
+--- a/drivers/fpga/spartan2.c
++++ b/drivers/fpga/spartan2.c
+@@ -9,6 +9,7 @@
+ #include <config.h>		/* core U-Boot definitions */
+ #include <log.h>
+ #include <spartan2.h>		/* Spartan-II device family */
++#include <time.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+  * overrun the device (the Slave Parallel mode can free run at 50MHz).
+diff --git a/drivers/fpga/stratixII.c b/drivers/fpga/stratixII.c
+index 73fecd9dca5..c347eba0b79 100644
+--- a/drivers/fpga/stratixII.c
++++ b/drivers/fpga/stratixII.c
+@@ -7,90 +7,38 @@
+ #include <altera.h>
+ #include <linux/delay.h>
+ 
+-int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+-			   int isSerial, int isSecure);
+-int StratixII_ps_fpp_dump (Altera_desc * desc, void *buf, size_t bsize);
+-
+ /****************************************************************/
+ /* Stratix II Generic Implementation                            */
+-int StratixII_load (Altera_desc * desc, void *buf, size_t bsize)
++int StratixII_ps_fpp_dump(Altera_desc *desc, const void *buf, size_t bsize)
+ {
+-	int ret_val = FPGA_FAIL;
+-
+-	switch (desc->iface) {
+-	case passive_serial:
+-		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 1, 0);
+-		break;
+-	case fast_passive_parallel:
+-		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 0, 0);
+-		break;
+-	case fast_passive_parallel_security:
+-		ret_val = StratixII_ps_fpp_load (desc, buf, bsize, 0, 1);
+-		break;
+-
+-		/* Add new interface types here */
+-	default:
+-		printf ("%s: Unsupported interface type, %d\n", __FUNCTION__,
+-			desc->iface);
+-	}
+-	return ret_val;
+-}
+-
+-int StratixII_dump (Altera_desc * desc, void *buf, size_t bsize)
+-{
+-	int ret_val = FPGA_FAIL;
+-
+-	switch (desc->iface) {
+-	case passive_serial:
+-	case fast_passive_parallel:
+-	case fast_passive_parallel_security:
+-		ret_val = StratixII_ps_fpp_dump (desc, buf, bsize);
+-		break;
+-		/* Add new interface types here */
+-	default:
+-		printf ("%s: Unsupported interface type, %d\n", __FUNCTION__,
+-			desc->iface);
+-	}
+-	return ret_val;
+-}
+-
+-int StratixII_info (Altera_desc * desc)
+-{
+-	return FPGA_SUCCESS;
+-}
+-
+-int StratixII_ps_fpp_dump (Altera_desc * desc, void *buf, size_t bsize)
+-{
+-	printf ("Stratix II Fast Passive Parallel dump is not implemented\n");
++	printf("Stratix II Fast Passive Parallel dump is not implemented\n");
+ 	return FPGA_FAIL;
  }
-@@ -390,16 +391,16 @@ static int do_fpga_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
- 	fpga_cmd = find_cmd_tbl(argv[1], fpga_commands,
- 				ARRAY_SIZE(fpga_commands));
- 	if (!fpga_cmd) {
--		debug("fpga: non existing command\n");
--		return CMD_RET_USAGE;
-+		log_err("Non existing command\n");
-+		return CMD_RET_FAILURE;
+ 
+-int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+-			   int isSerial, int isSecure)
++int StratixII_ps_fpp_load(Altera_desc *desc, const void *buf, size_t bsize,
++			  int isSerial, int isSecure)
+ {
+ 	altera_board_specific_func *fns;
+ 	int cookie;
+ 	int ret_val = FPGA_FAIL;
+ 	int bytecount;
+-	char *buff = buf;
++	const char *buff = buf;
+ 	int i;
+ 
+ 	if (!desc) {
+-		printf ("%s(%d) Altera_desc missing\n", __FUNCTION__, __LINE__);
++		log_err("Altera_desc missing\n");
+ 		return FPGA_FAIL;
  	}
- 
- 	argc -= 2;
- 	argv += 2;
- 
- 	if (argc > fpga_cmd->maxargs) {
--		debug("fpga: more parameters passed\n");
--		return CMD_RET_USAGE;
-+		log_err("Too many parameters passed\n");
-+		return CMD_RET_FAILURE;
+ 	if (!buff) {
+-		printf ("%s(%d) buffer is missing\n", __FUNCTION__, __LINE__);
++		log_err("buffer is missing\n");
+ 		return FPGA_FAIL;
  	}
- 
- 	ret = fpga_cmd->cmd(fpga_cmd, flag, argc, argv);
-diff --git a/drivers/fpga/zynqmppl.c b/drivers/fpga/zynqmppl.c
-index 2b62bbbe3cf..1199b249e36 100644
---- a/drivers/fpga/zynqmppl.c
-+++ b/drivers/fpga/zynqmppl.c
-@@ -191,8 +191,8 @@ static int zynqmp_validate_bitstream(xilinx_desc *desc, const void *buf,
+ 	if (!bsize) {
+-		printf ("%s(%d) size is zero\n", __FUNCTION__, __LINE__);
++		log_err("size is zero\n");
+ 		return FPGA_FAIL;
  	}
- 
- 	if ((ulong)buf < SZ_1M) {
--		printf("%s: Bitstream has to be placed up to 1MB (%px)\n",
--		       __func__, buf);
-+		log_err("Bitstream has to be placed above 1MB (%px)\n",
-+			buf);
+ 	if (!desc->iface_fns) {
+-		printf
+-		    ("%s(%d) Altera_desc function interface table is missing\n",
+-		     __FUNCTION__, __LINE__);
++		log_err("Altera_desc function interface table is missing\n");
+ 		return FPGA_FAIL;
+ 	}
+ 	fns = (altera_board_specific_func *) (desc->iface_fns);
+@@ -99,9 +47,7 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 	if (!
+ 	    (fns->config && fns->status && fns->done && fns->data
+ 	     && fns->abort)) {
+-		printf
+-		    ("%s(%d) Missing some function in the function interface table\n",
+-		     __FUNCTION__, __LINE__);
++		log_err("Missing some function in the function interface table\n");
  		return FPGA_FAIL;
  	}
  
-diff --git a/drivers/fpga/zynqpl.c b/drivers/fpga/zynqpl.c
-index 3e86d854a01..a8ca015a8a6 100644
---- a/drivers/fpga/zynqpl.c
-+++ b/drivers/fpga/zynqpl.c
-@@ -360,8 +360,8 @@ static int zynq_validate_bitstream(xilinx_desc *desc, const void *buf,
+@@ -124,13 +70,12 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 	bytecount = 0;
+ 	fns->clk (0, 1, cookie);
+ 
+-	printf ("loading to fpga    ");
++	printf("loading to fpga    ");
+ 	while (bytecount < bsize) {
+ 		/* 3.1 check stratix has not signaled us an error */
+ 		if (fns->status (cookie) != 1) {
+-			printf
+-			    ("\n%s(%d) Stratix failed (byte transferred till failure 0x%x)\n",
+-			     __FUNCTION__, __LINE__, bytecount);
++			log_err("\nStratix failed (byte transferred till failure 0x%x)\n",
++				bytecount);
+ 			fns->abort (cookie);
+ 			return FPGA_FAIL;
+ 		}
+@@ -162,7 +107,7 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 
+ 		/* 3.5 while clk is deasserted it is safe to print some progress indication */
+ 		if ((bytecount % (bsize / 100)) == 0) {
+-			printf ("\b\b\b%02d\%", bytecount * 100 / bsize);
++			printf("\b\b\b%02zu\%%", bytecount * 100 / bsize);
+ 		}
  	}
  
- 	if ((u32)buf < SZ_1M) {
--		printf("%s: Bitstream has to be placed up to 1MB (%x)\n",
--		       __func__, (u32)buf);
-+		log_err("Bitstream has to be placed above 1MB (%px)\n",
-+			(u32)buf);
+@@ -170,11 +115,11 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 	fns->clk (1, 1, cookie);
+ 	udelay(100);
+ 	if (!fns->done (cookie)) {
+-		printf (" error!.\n");
++		printf(" error!.\n");
+ 		fns->abort (cookie);
  		return FPGA_FAIL;
+ 	} else {
+-		printf ("\b\b\b done.\n");
++		printf("\b\b\b done.\n");
  	}
  
+ 	/* 5. call lower layer post configuration */
+@@ -187,3 +132,47 @@ int StratixII_ps_fpp_load (Altera_desc * desc, void *buf, size_t bsize,
+ 
+ 	return FPGA_SUCCESS;
+ }
++
++int StratixII_load(Altera_desc *desc, const void *buf, size_t size)
++{
++	int ret_val = FPGA_FAIL;
++
++	switch (desc->iface) {
++	case passive_serial:
++		ret_val = StratixII_ps_fpp_load(desc, buf, size, 1, 0);
++		break;
++	case fast_passive_parallel:
++		ret_val = StratixII_ps_fpp_load(desc, buf, size, 0, 0);
++		break;
++	case fast_passive_parallel_security:
++		ret_val = StratixII_ps_fpp_load(desc, buf, size, 0, 1);
++		break;
++
++		/* Add new interface types here */
++	default:
++		log_err("Unsupported interface type, %d\n", desc->iface);
++	}
++	return ret_val;
++}
++
++int StratixII_dump(Altera_desc *desc, const void *buf, size_t bsize)
++{
++	int ret_val = FPGA_FAIL;
++
++	switch (desc->iface) {
++	case passive_serial:
++	case fast_passive_parallel:
++	case fast_passive_parallel_security:
++		ret_val = StratixII_ps_fpp_dump(desc, buf, bsize);
++		break;
++		/* Add new interface types here */
++	default:
++		log_err("Unsupported interface type, %d\n", desc->iface);
++	}
++	return ret_val;
++}
++
++int StratixII_info(Altera_desc *desc)
++{
++	return FPGA_SUCCESS;
++}
+diff --git a/drivers/fpga/stratixv.c b/drivers/fpga/stratixv.c
+index 372f16d92d1..4b251994598 100644
+--- a/drivers/fpga/stratixv.c
++++ b/drivers/fpga/stratixv.c
+@@ -48,7 +48,7 @@ int stratixv_load(Altera_desc *desc, const void *rbf_data, size_t rbf_size)
+ 	int spi_dev;
+ 	int ret = 0;
+ 
+-	if ((u32)rbf_data & 0x3) {
++	if ((size_t)rbf_data & 0x3) {
+ 		puts("FPGA: Unaligned data, realign to 32bit boundary.\n");
+ 		return -EINVAL;
+ 	}
+diff --git a/drivers/fpga/versalpl.c b/drivers/fpga/versalpl.c
+index d691f135e89..624493ad838 100644
+--- a/drivers/fpga/versalpl.c
++++ b/drivers/fpga/versalpl.c
+@@ -6,7 +6,6 @@
+ 
+ #include <cpu_func.h>
+ #include <log.h>
+-#include <asm/arch/sys_proto.h>
+ #include <memalign.h>
+ #include <versalpl.h>
+ #include <zynqmp_firmware.h>
+diff --git a/drivers/fpga/virtex2.c b/drivers/fpga/virtex2.c
+index 8e2c12bb58b..805cbac8082 100644
+--- a/drivers/fpga/virtex2.c
++++ b/drivers/fpga/virtex2.c
+@@ -19,6 +19,7 @@
+ #include <log.h>
+ #include <virtex2.h>
+ #include <linux/delay.h>
++#include <time.h>
+ 
+ /*
+  * If the SelectMap interface can be overrun by the processor, enable
+@@ -301,6 +302,7 @@ static int virtex2_ssm_load(xilinx_desc *desc, const void *buf, size_t bsize)
+ 	size_t bytecount = 0;
+ 	unsigned char *data = (unsigned char *)buf;
+ 	int cookie = desc->cookie;
++	unsigned long ts;
+ 
+ 	ret_val = virtex2_slave_pre(fn, cookie);
+ 	if (ret_val != FPGA_SUCCESS)
+diff --git a/include/stratixII.h b/include/stratixII.h
+index 3c06bb2955a..785cdf41cb8 100644
+--- a/include/stratixII.h
++++ b/include/stratixII.h
+@@ -6,8 +6,8 @@
+ #ifndef _STRATIXII_H_
+ #define _STRATIXII_H_
+ 
+-extern int StratixII_load (Altera_desc * desc, void *image, size_t size);
+-extern int StratixII_dump (Altera_desc * desc, void *buf, size_t bsize);
+-extern int StratixII_info (Altera_desc * desc);
++int StratixII_load(Altera_desc *desc, const void *buf, size_t size);
++int StratixII_dump(Altera_desc *desc, const void *buf, size_t bsize);
++int StratixII_info(Altera_desc *desc);
+ 
+ #endif				/* _STRATIXII_H_ */
 -- 
 2.48.1
 
