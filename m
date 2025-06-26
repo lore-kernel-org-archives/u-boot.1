@@ -4,86 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65592C7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 15:44:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96929C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 15:46:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2456882E67;
-	Thu, 26 Jun 2025 17:43:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E7C8A82DA1;
+	Thu, 26 Jun 2025 17:46:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n8gwslkD";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tJnltWQ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C4D082C4C; Thu, 26 Jun 2025 17:43:20 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E602682E08; Thu, 26 Jun 2025 17:46:55 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46F4982063
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 17:43:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9F3182063
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 17:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7387f21daadso1201771a34.0
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 08:43:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750952591; x=1751557391; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZBUMvX2PrvSK8GGsUQTCzkQVUPB+CHTyE1kQKh/dzCI=;
- b=n8gwslkDAjLSEOXIqFetnfnb7Ily20DXcgMs5c4xp/ZFFvtBYc1hyz1Kek2ha+bVtX
- XjKfJGbv3mP4m0TtQKba/PcUcJed3JwRqDRKcIm2FKhalM4r87aACREIh03O0P93Vb/M
- xZsaEJnAzuCL3ZecXUL1osfKnGJoUf0G8jgS8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750952591; x=1751557391;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZBUMvX2PrvSK8GGsUQTCzkQVUPB+CHTyE1kQKh/dzCI=;
- b=JWjBDvfytnB6ePgtq7LqE68rw4ilWrRcNh7hOHI3SJZ364ox+OmjG7y1ZfigisQdAd
- ZZWle5RwCqvweuH+BuYvT/TReU+HfosykGGXXT9lDCAKMZHhW1OuVhYf9kROCSx1hxPM
- HdS3BQJtU6o7NVPmmRadazZD/2Nweda9l6WhOKWTqcsucz+OQpwkFFHhrHz9n5JM1D2z
- VkgcNAI4i6OO/yYiLohnV63rLi59Y1m2apvuCVpRp1ZRbF6lTouZO/5ZMHtntfVA5f9C
- Fg1iWGbACxtgxTpkYiMDiIThzLPF5HXllPTcz7c861JHZCI9AbAiXoOc6JEtH4dkjzWn
- 24pQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWbxAdDnTSIR7j+yU7R6DLEJOPNM99VF+XYSOYLPqJABtBnVsLP4i3P78SJxbSYr0hFMjZP9I=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfCj14YpikAovM4N2xvJUt+Osj2vlSXd+j4iWIYHW+NXzTDj2O
- unfiqXLGfKBhUs7CxYjgDOFflwQnnfy3HQvYU8kXVonufuNCmRtdtk1xymQj+Zy3skIhI7YXEC0
- EahkZ1Oc=
-X-Gm-Gg: ASbGncvNn1zQlp6fVPoTNWCJPOSHlv5W0gS57d/sf+kfiN/A7n260JxvnP9P/54DIDb
- gIs0msDf3jhfr31A+BLTOxzJeMBihnGa0O9MSWFnBWnFfA4ExPdQPvztyIp3LngWYJPWzfkX85h
- 0pgaiVC674nc2CVgEOTcGjo8wifh6sR1Lwc4Z7urfPL9IcEbrIwoHJhyPpHtmUTf9YA+bKzWDdS
- V8Afn+RTVPEifuQe2c54G5cg6heWX/cL4dNoWokb099Ksj+fipwzUZg/VtJlTE8E4FqIGDUr9Co
- CY9TOSHS0EqI93RmdsjJkFnSqdVm93i89+7YCg50l26kKmXRYdWCKoboLGwXMusnG6v/OfolDxb
- +47m5BvFAbxChnpSL9a+IJw==
-X-Google-Smtp-Source: AGHT+IFhJWsx+TUhwKThz1mJJbgOd9/QMM54r7XDOIgE+lSNs6jmI1dn9MMjNCeF4SjB2wugf9I00A==
-X-Received: by 2002:a05:6830:4909:b0:738:5294:785a with SMTP id
- 46e09a7af769-73ae9e015a2mr2224263a34.6.1750952590924; 
- Thu, 26 Jun 2025 08:43:10 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afaff2429sm20316a34.7.2025.06.26.08.43.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 08:43:10 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: b-padhi@ti.com, m-chawdhry@ti.com, afd@ti.com, hnagalla@ti.com, 
- j-choudhary@ti.com, bb@ti.com, nm@ti.com, vigneshr@ti.com, j-keerthy@ti.com, 
- u-kumar1@ti.com, u-boot@lists.denx.de
-In-Reply-To: <20250609102706.2434495-1-n-francis@ti.com>
-References: <20250609102706.2434495-1-n-francis@ti.com>
-Subject: Re: (subset) [PATCH v4 0/3] Add support for K3 BIST
-Message-Id: <175095258992.1712035.8213141342652238796.b4-ty@konsulko.com>
-Date: Thu, 26 Jun 2025 09:43:09 -0600
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1750952806; x=1751557606; i=xypron.glpk@gmx.de;
+ bh=INS/8uszbe0XZsEfxp1JPcNauqnEQITKANISGc8SK/M=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=tJnltWQ+N0iO2SvSIujg23welksmNWqnoxGSx+NdV+jHoY+zUFsPPOPiHGmwHkB4
+ Y2wK2oYmupqtwFEAz0H3KXWZBnLqdQ0IynN9gVvhTMj2T6LK9VIetCR00/rIRZKhA
+ AxGwcco+xhDlxmlwdH2HhsWE27i52qEl2Dgs45cwbqkuCf/sBLRXb76fluvL2/pvP
+ X7EkTXPBqkgk5ALukjp9fBLrJvURYPM2PeKK0ISo6mVrOD5r4tFZ0nxvUaBDAJebV
+ vfy8q2S0KMOCeWi+bQGJzKXZvUNkOCmYm63y0n6AYLwkE35R0RD0fUm31xNEGWWwx
+ l8UroBLrmlWjjjJbGg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([46.114.111.195]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MBlxW-1uaHNp3EbM-00ApIQ; Thu, 26
+ Jun 2025 17:46:45 +0200
+Message-ID: <361cddab-cf64-4a77-84b1-4852880aa229@gmx.de>
+Date: Thu, 26 Jun 2025 17:46:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: ufetch: Initialise size before first use
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250626-ufetch_fix-v1-1-025afdb85dc2@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250626-ufetch_fix-v1-1-025afdb85dc2@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:oIBHVJB77Q+uY2glUqLL3zduuu4h08IXJrvrHpf8X9kiFQUxqFL
+ TGXfO91shQI8WF+EK9GBQKUJ6EojQUbqVzM9v4VB+nz264roccZnGNwpjmoXOZPsjjhVEEc
+ mvEJIbfVofbTuRStzoycVh0/dPiw9DA+6qhAYgil5n6xqM1jjMK4Xik1z5C2Y18eJbDa/NP
+ mFH2Wtx7wQKSnQJEJA6IQ==
+UI-OutboundReport: notjunk:1;M01:P0:2xfYxfK0UMQ=;Y/3rRvnxsjpe2SpgrtvEjzPN/ab
+ +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
+ wrLIZLGtmclkBixcQEUGhsYp6CqFBI/Y=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,31 +128,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 09 Jun 2025 15:57:03 +0530, Neha Malcom Francis wrote:
+On 26.06.25 16:12, Andrew Goodbody wrote:
+> The local variable size is not assigned to before it is used
+> for the first time. Correct this.
+>=20
+> This issue was found by Smatch.
+>=20
+> Fixes: 86d462c05d57 (cmd: add a fetch utility)
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
-> This series implements a driver for the BIST (Built-In Self Test) module
-> for K3 devices. The BIST driver must ideally support triggering of BIST
-> tests, both PBIST (Memory BIST) and LBIST (Logic BIST) on a core. Both
-> tests are destructive in nature. Please see links [1] and [2] for
-> further information regarding the two.
-> 
-> At boot up, BIST is executed by hardware for the MCU domain
-> automatically as part of HW POST. So BIST has been checked only for the
-> MCU domain when U-Boot comes up in the usual U-Boot to Linux boot flow.
-> To facilitate the use-case where some safe firmware is intended to be
-> run on a safe core, it is best to have triggered the BIST tests on that
-> core. As an example, we take triggering the BIST tests on the MAIN R52_x
-> cores. The triggering patch is kept as DONOTMERGE.
-> 
-> [...]
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Applied to u-boot/next, thanks!
-
-[1/3] drivers: misc: k3_bist: Add K3 BIST driver
-      (no commit info)
-[2/3] arm: mach-k3: j784s4_init: Trigger LBIST and PBIST on MAIN R5 2_0
-      (no commit info)
--- 
-Tom
-
+> ---
+>   cmd/ufetch.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> index 46bd16824e6..bc5db08eee1 100644
+> --- a/cmd/ufetch.c
+> +++ b/cmd/ufetch.c
+> @@ -93,7 +93,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, =
+int argc,
+>   	const char *model, *compatible;
+>   	char *ipaddr;
+>   	int n_cmds, n_cpus =3D 0, compatlen;
+> -	size_t size;
+> +	size_t size =3D 0;
+>   	ofnode np;
+>   	bool skip_ascii =3D false;
+>  =20
+>=20
+> ---
+> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+> change-id: 20250626-ufetch_fix-54b741710142
+>=20
+> Best regards,
 
