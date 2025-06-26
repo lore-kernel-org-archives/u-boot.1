@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51408C7EE31
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 17:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B2FC7EE31
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 17:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FC2080C83;
-	Thu, 26 Jun 2025 19:05:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 227D282977;
+	Thu, 26 Jun 2025 19:56:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mIaYaWZN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mLvViwVT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72E4280C83; Thu, 26 Jun 2025 19:05:24 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 5D1D482E35; Thu, 26 Jun 2025 19:56:52 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 742BA806D8
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 19:05:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DE8680E9A
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 19:56:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2ef8dfb3742so200774fac.3
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 10:05:17 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-735a6faec9eso605895a34.3
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 10:56:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750957516; x=1751562316; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JL45qWBVjJP3mzu8FEBJFjz80yMBGZ/G4LEvS9+dIiM=;
- b=mIaYaWZN+htlYFbrt45zWiziv7+fXc5aGimVX8yoLj0VmyT2fcy+tV+VnyH8bCjF+y
- F+dV3a1btAhlihLa4pXZDXeUyrZ/CIUxsEsPq+tthVsUL0xQZo23sUwVVKGLVutcmFIk
- HpaK1q+5jY+bf09CMl+dkzaE0tIEMl9+g17YY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750957516; x=1751562316;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1750960606; x=1751565406; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JL45qWBVjJP3mzu8FEBJFjz80yMBGZ/G4LEvS9+dIiM=;
- b=JI/MwK6auoF2eTFakl3x8lbrs0gpTyeDGhUNgKhh/LszcB0tdVJ4xtQP7DBgwDu2n3
- uDq1gCQuD0kUHcKCQE7z89er/C/B9XCahTIphJwCvGsaUhfdM7uXwbLzCpd841OnF/Td
- iyuytA8HJ4NarGJR4zKLUPqYo8O8euYoA4UDeHcukPSmkcSxWpLnDDLqitexberaHEv9
- 8QelylxwErMRu0uqFsWO1h0CDkIiX9rb6Mh56Qfe/6tN4C8iGVRUz4DGSb09X0NTtHNM
- MaxJtZRbloVj2tjJ11lhTYaWjRMW/KNFNHkkQ0TW8QlXu0QCNEaJ3pWxatDwoeEaBfsK
- uHyg==
-X-Gm-Message-State: AOJu0YzX4+iFKx52Qh2iGzvFetCsduChax/eaabY+m1iR/6PighuWus+
- WrXuJxXcXraZx2XdQLLjhJMgtLKNAlMkDgO6RbeEEiBs8uUwtoSo2hpgb+pF2qUvgMs=
-X-Gm-Gg: ASbGncvQypLF0G29ZkVLUIQxxj5g7IT2iDutnmh5hToBOwT2HBo/7uvPjPXX/l/blRn
- jsdcltkigpQujATc97LErVOyAgaPwyTLApEeBWTcNMG8uHpweSLxfqfqQrUrtLvHyqqFJSFjH8L
- R0VoqYPxvyyY5hjaIHluTHlHwboR3OI1rIYt+lcjnjySrNs0986WPw17kKM0gQXJ2B1p5kODTgQ
- BfyonthNu7fV4kDH9YmYDovUVBBob9FtGqGKGUgkEfa2rmahuTrd8onPjlOMiEccVhUt7EXTrMd
- V1fMq/YAkWc0XKdH6x2giH3Od7opxzONSWqyPnjpEjQPJYrmZ94pUm2wuWuhkK4HojaGeus2997
- 6qkN4a+LKAe+5YoHX0tUfcEY=
-X-Google-Smtp-Source: AGHT+IHdyvPciImLPqHB9bpLJZ3cXOVudIBwIUryFjFcZVgPRePIRzKDiiCygO8r48bkBbSMEJ8eNA==
-X-Received: by 2002:a05:6870:701f:b0:2c6:72d3:fc93 with SMTP id
- 586e51a60fabf-2efb2199a24mr5166967fac.12.1750957516043; 
- Thu, 26 Jun 2025 10:05:16 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ bh=mbHaJPMXL0foR++wK6Opm5JJW/vDemASy3XFOA4Ql48=;
+ b=mLvViwVTjDKjge0+tqa3qABbG5J5SirrIxfvf02025u+PU5f5S77PYpyILrGWTNCLu
+ hQA2FWHvurVbrBmcejWyn2julp8py9DUfP5BDTTGnMvPfEFaH2aEm74dRXcgno6rNKys
+ b5waf4m47U+0Xm24N6OybBsbNMiujEpi+9kNc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750960606; x=1751565406;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mbHaJPMXL0foR++wK6Opm5JJW/vDemASy3XFOA4Ql48=;
+ b=qliANqdZL2o5KzB8gfyGfNsbL9JA2hnv1NXPC88y51N2grjGloaYBCPLqvpnt1enBJ
+ 2thf2y0DWomvwPb/SsBTTO2meClap9ybkJ+FN8BNQLqZ0zwB0yf6mn5NWWTcUWWK7wgv
+ yB1z6wedg0VCBb+k9ufWvjfdTT0iJJuK0KuDqfKYdqGnnQE+0rarp03vUjsJEMBDwaM+
+ HdPt4r7c9q8r0Uv4zFn/mIKh1zqX1oTlAZqZvtU1tlcs4xj1/ZvOWNud7s5vrEqq6DQV
+ Ard8wYhVkTYxsFXOVbiS28PQePXSaY0C+lWNeArfHzjUxVsOxWH4hvkFWmiVQs5tlKS6
+ XvkA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVBgXPVs6XTj9MCGG5TajY5QgN/jKqNA4Egnv+wdhugfOogY84ApIPK8nBYIzDrBiol3Iw96YM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyUMQ2tSxqK8tBCdfJnr4qbVBEhtxH17XO8GCTdB2GcNKSzD0r/
+ NgEpOdNP+xpVYlF8z4jD6DK+HzHvPIeIsa+fUulM+jvH7xN7L8RaPNQc58fkwqvOTb8=
+X-Gm-Gg: ASbGncuvM+JuVXZqoresWc77f0al43d4GYaeRA3aH0FFMx4vetvXhI74v5ZHfSrb0hM
+ 7nn9Tmq+nsN+vW8SgEHIhtJOma479X/rqlexCZdx3e5rP2cgvGARNbvKWtj2NddB1umpNE+pN95
+ xxKRFaCUpSx9VuGuPizE4b1alanJr5hihqb2XBYXevm84cxMM1RStmtv9FbQCP3+wENtj9Ifz/M
+ pro74Vb/9JCF1TMoH1DdfaxBCeFHtgJrrecvXLhrIO9Vc/iXaffsyF3XcbMgC+9Tg3Ai64P/VXl
+ E/UFrGCQysVbCNLAp1s7Dl337dsA4a/7tk51dFVTPrS9jD4EOGwrGsgjaJWRUnm1Tbsct6xYgOh
+ ZJWB5+MKU4qZ6CIJ6UYPV6S6yP7/ju3ji
+X-Google-Smtp-Source: AGHT+IFlwgeSLT03yostUgEhlPHolayXx8tYWVGiDRPv+eIUCftdcqI4fsD0XL/rUuH5R3ZHjnkD3A==
+X-Received: by 2002:a05:6830:628b:b0:73a:8ac5:a6d5 with SMTP id
+ 46e09a7af769-73afc56f20cmr43904a34.17.1750960605745; 
+ Thu, 26 Jun 2025 10:56:45 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2efd512d404sm439386fac.44.2025.06.26.10.05.13
+ 46e09a7af769-73afb008936sm63877a34.24.2025.06.26.10.56.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 10:05:15 -0700 (PDT)
-Date: Thu, 26 Jun 2025 11:05:11 -0600
+ Thu, 26 Jun 2025 10:56:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fiona Klute <fiona.klute@gmx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] doc: mention that extlinux.conf can use environment
- in "append"
-Message-ID: <20250626170511.GW4003484@bill-the-cat>
-References: <20250623113801.2655669-1-fiona.klute@gmx.de>
- <20250623150434.GC4003484@bill-the-cat>
- <7de86b29-7307-4b2b-b153-fdeaf58e0ec7@gmx.de>
+To: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Yannic Moog <y.moog@phytec.de>
+Cc: upstream@lists.phytec.de, u-boot@lists.denx.de
+In-Reply-To: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
+References: <20250613-binman_faked_optional-v3-0-1e23dd7c41a2@phytec.de>
+Subject: Re: [PATCH v3 0/6] Fix handling of optional blobs in binman
+Message-Id: <175096060477.1879961.6525302263431603846.b4-ty@konsulko.com>
+Date: Thu, 26 Jun 2025 11:56:44 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9YzlqOpIVtA5qoCi"
-Content-Disposition: inline
-In-Reply-To: <7de86b29-7307-4b2b-b153-fdeaf58e0ec7@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,55 +98,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 13 Jun 2025 14:02:39 +0200, Yannic Moog wrote:
 
---9YzlqOpIVtA5qoCi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This series solves a contradiction regarding ext blobs packaged in
+> binman. When they are marked as optional, by default they are faked, two
+> messages are emitted. One says the image is not functional the other
+> says the image is still functional. Both concern the same binman
+> entry/blob.
+> 
+> Binman is set up to have fake external blobs in case they are missing.
+> This is regardless on whether they are optional or not.
+> The implementation does not allow different types of entries to override
+> the faking decision; at least there wouldn't be much sense in doing so.
+> 
+> [...]
 
-On Thu, Jun 26, 2025 at 11:23:24AM +0200, Fiona Klute wrote:
-> Am 23.06.25 um 17:04 schrieb Tom Rini:
-> > On Mon, Jun 23, 2025 at 01:38:01PM +0200, Fiona Klute wrote:
-> >=20
-> > > This option is very useful for A/B boot setups with read-only
-> > > filesystems: Letting U-Boot fill in the rootfs (and possibly related
-> > > parameters) allows keeping all boot parameters except the actual slot
-> > > selection in the extlinux.conf file, where they can be updated easily.
-> > >=20
-> > > Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
-> > > Cc: Tom Rini <trini@konsulko.com>
-> > > ---
-> > >   doc/README.pxe         | 3 ++-
-> > >   doc/develop/distro.rst | 7 +++++++
-> > >   2 files changed, 9 insertions(+), 1 deletion(-)
-> >=20
-> > Thanks! Any chance you would be willing to convert doc/README.pxe to rst
-> > and call it say doc/usage/pxe.rst ?
-> If you mean simply reformatting, I can probably do that. A review/update
-> beyond that would be beyond my time & expertise on the topic right now.
+Applied to u-boot/next, thanks!
 
-I think just reformatting it to start with would be a good starting
-point.
-
---=20
+[1/6] binman: drop "faked" return value from check_fake_fname
+      commit: a657d87f08789c4c50423897bd5ee052c6223ee6
+[2/6] binman: mark optional missing blobs as absent
+      commit: 3ae668b9d2101d111d257ee7d8912c19cfb0e102
+[3/6] binman: rework dropping absent entries from packaged image
+      commit: 21bc3433a43d3add3430543c9eee2a95d4dee2f6
+[4/6] binman: add faked optional entry case in CheckForProblems
+      commit: f5817e05efd39dd455c2e6a0f0622d709fe7ea2d
+[5/6] binman: ftest: pass allow_fake_blob to _DoReadFileDtb
+      commit: e749d64b4622806072c56a839cf9a36a5081b575
+[6/6] binman: test: assert optional blobs don't cause non-functionality
+      commit: 0dbb0a8d1f2aefb2a7fdd8e627edd955e4fe8d3a
+-- 
 Tom
 
---9YzlqOpIVtA5qoCi
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhdfcMACgkQFHw5/5Y0
-tywcTgv6Akvd3cENM6y1GTLco6U/qFqpMEKE4Y2pFWXCV/VqfPJcsLMF9qo7sUje
-EIu7ddJMsorDez2B0C7tj2U9tBa+NJiY6TBOcxp3IiXm0zYDi7zIHKKKr5VQsne+
-Cj9zlkeQ6XOFOCznNn/Y4AlolL4jXb5UzKzA7vit429g84RZNcD3308SHN09fxyU
-DCuNs8L7EVfSBOQ02gaw1aQKzmrwYWCxOKgYnBi1qPRp8FoFiKMrfKeNPqKLENft
-OtuwD61Vff0WnucdLbVWT2HT0bvG7gvA8MYV9vJS75iXKRoxhEzBn8SOfG61GBRC
-wbwaWM87LTBH1x6VrW43QxFVaVX8YEQfgeqe4wuDM5+kWor8lHlts/8KhUu12f71
-kKVh5Uemr+MO0+GhGT67v06djD7rTZDjdrz6QRKsjQti11bpFdmSkqvOJbJCbUc9
-oIt68bIoT28RzCx11Z5cLIXrcZIJW48UaYzS8Y+vIVQvzJOthVfYTT9eWV9PFO1o
-E9pA/7VF
-=w+Dk
------END PGP SIGNATURE-----
-
---9YzlqOpIVtA5qoCi--
