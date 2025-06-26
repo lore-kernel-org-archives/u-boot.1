@@ -4,82 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B78C7EE39
-	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 20:03:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B91C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 26 Jun 2025 20:17:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD97F82977;
-	Thu, 26 Jun 2025 22:03:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 81DBF81F66;
+	Thu, 26 Jun 2025 22:17:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=dujemihanovic.xyz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FAMY/+5G";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=dujemihanovic.xyz header.i=@dujemihanovic.xyz header.b="GWrKP85B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E2E882B34; Thu, 26 Jun 2025 22:03:20 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id D9F4282DA1; Thu, 26 Jun 2025 22:00:37 +0200 (CEST)
+Received: from mx.olsak.net (unknown [37.205.8.231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E0F380C83
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 22:03:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3AAF80C83
+ for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 22:00:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=dujemihanovic.xyz
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-404e580bf09so358059b6e.1
- for <u-boot@lists.denx.de>; Thu, 26 Jun 2025 13:03:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1750968194; x=1751572994; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SyNbj0Y95VcD8Woy3ray10v6YKt27mH41O2iJrQAy+o=;
- b=FAMY/+5GgfbiOb74OjJ9qBMBc/u9GVisQV4tMGw697/XbL+Kd2wB7+eHIy1z2OO4sR
- rQh5RlpNzPiWlfDFQPtRq1kTaK0tag6VTvEnUq5OQn6EnEkne7PvUQIVOIPRQ3BD3YKZ
- Cmb/MbMQqOCaMWKyyj2XckVGIeKH1uZab8Ik8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750968194; x=1751572994;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SyNbj0Y95VcD8Woy3ray10v6YKt27mH41O2iJrQAy+o=;
- b=H39uw4RQ0scbTZVxsNn0FysBjhsOp36qS/DhLy4IJVRqee2hCDQszyATBY+AOxQiKz
- i4X7CWMeM86VpYOvX5zgDRG08MzQrNjtOu436ENHdsKdYlQwwODq+z/CP3dex8WBWTVc
- 5J1qJKABvmzTqr4fzV5vhPtK4Avh3rMv8OiKVjjB1GH+fFKA6J8c3GkOdYNgecvQdhj9
- /pC+vuj3s+80r+Fnvdr0/6ReHjJ3IhPkKK6f/l2pH3CjmeMYCiL6Pqr29Pl80xwG1rsB
- IVtLq49GDET+WruXz5vUhuZ6qa2H02dUK0QQhl137uasLYakuKGt/bhE3IZ/McU7K8CZ
- PGyw==
-X-Gm-Message-State: AOJu0YwA0FdWlpJxMElHpNlFyOznBt2I3beTbZKXbUF9HuGlp4Vx4f/i
- 5wjT36HfvqVBLpS9Upw4ajaqXntAsQqByqeUGuby143MrWEBnDIn9zxZsOS4X4jgq9E=
-X-Gm-Gg: ASbGncu748l7x/MuXrGERWJDz9CO/4+lhdzGfKkKMQXEiZ9E2qFUsO/MjSLeRNL6qbJ
- dp1deOT32GElYCBx9kNL0EZz7EASrNZF06E4Rt0kyyH7qdXzcJ9iLd5/2dOTxr0Zj6BqyCmeH/Y
- gYmO2zAbmhBaICfgSsOtfyZ8GIMGU+zPto9R7RjmgdW2bPBQNMZ76DJqO2vLTowB51C/CX/Wms4
- Qsr8wT2jU1YuUVTl2cFbmFdvfG7AFJIfnTVIfWrI0DR3xNU9Xjtwfy+6K5gDJjIaVfq+YTMwopY
- sI5qXkt8AFr+LIGVBKtgduHSoMmL2pNaF+jCZgunpnjc/NWxmvBqr25tAkAr2KUnbDCRZgSQgzg
- kmJ5u7ARFb1dtP4eM1z+9LlM=
-X-Google-Smtp-Source: AGHT+IG3SRQSl36lsRIt3k12UEccEwkRA+I0d5Sch/RqgpzGOfh3P0WYHzBbgT6pA1aktfK2Ecs71Q==
-X-Received: by 2002:a05:6808:1918:b0:406:6fd3:ff18 with SMTP id
- 5614622812f47-40b33e5f09amr439480b6e.34.1750968193738; 
- Thu, 26 Jun 2025 13:03:13 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b32406a58sm87223b6e.29.2025.06.26.13.03.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Jun 2025 13:03:13 -0700 (PDT)
-Date: Thu, 26 Jun 2025 14:03:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] mailmap: Update =?utf-8?Q?emai?=
- =?utf-8?Q?l_for_Duje_Mihanovi=C4=87?=
-Message-ID: <20250626200311.GX4003484@bill-the-cat>
-References: <20250626-mailmap-v1-1-765760da24ba@dujemihanovic.xyz>
+ spf=pass smtp.mailfrom=duje@dujemihanovic.xyz
+DKIM-Signature: a=rsa-sha256; bh=tqN7zrQ+1HaUrwdoEvMBr6CJoqYDhSEVHozHpZ4vxW8=; 
+ c=relaxed/relaxed; d=dujemihanovic.xyz;
+ h=Subject:Subject:Sender:To:To:Cc:Cc:From:From:Date:Date:MIME-Version:MIME-Version:Content-Type:Content-Type:Content-Transfer-Encoding:Content-Transfer-Encoding:Reply-To:In-Reply-To:Message-Id:Message-Id:References:Autocrypt:Openpgp;
+ i=@dujemihanovic.xyz; s=default; t=1750968030; v=1; x=1751400030;
+ b=GWrKP85Bpfmq3RIDPiPFNr1uDNjFE5cFGYqQDkf4SbDEBJxqwK601MWKigHFk8ihRvSO5TxR
+ 5uN1odCB75fpHg68r1+K1zgKmKbyVeoYJOw0LmhOnnZTiBhmDkV/LM7S+2eZmteqjuiR7ww9uAP
+ bBOvOHVfQLTAbytJytNUQ8hOOJ0+F7QLI1vb6rnKzM8gvT5ZAiFUhnl5p2iVZEje87WcH0a4yMC
+ oC+I5+QjF150x2imHgl0NT8bavyJ6F1mlldkMDfAZKbl5FSooLrXClOeEINBpsixlIfn9K77fWh
+ rtGWM2XJlcwbdFKXnnQ1Aw+LDx82kd4feVdMActZ3e+0g==
+Received: by mx.olsak.net (envelope-sender <duje@dujemihanovic.xyz>) with
+ ESMTPS id cb242120; Thu, 26 Jun 2025 22:00:30 +0200
+From: =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
+Date: Thu, 26 Jun 2025 22:00:23 +0200
+Subject: =?utf-8?q?=5BPATCH=5D_mailmap=3A_Update_email_for_Duje_Mihanovi?=
+ =?utf-8?q?=C4=87?=
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DOzJLWnAHfbGpr3F"
-Content-Disposition: inline
-In-Reply-To: <20250626-mailmap-v1-1-765760da24ba@dujemihanovic.xyz>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20250626-mailmap-v1-1-765760da24ba@dujemihanovic.xyz>
+X-B4-Tracking: v=1; b=H4sIANamXWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDMyMz3dzEzJzcxALdVENDozTjlESTNKMUJaDqgqLUtMwKsEnRsbW1AER
+ DjjdZAAAA
+X-Change-ID: 20250626-mailmap-e112f3da4f2d
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1049;
+ i=duje@dujemihanovic.xyz; s=20240706; h=from:subject:message-id;
+ bh=mDPo054FypVKTum5c4eazPc9aD4+lD+tULVDcEJUO9k=;
+ b=kA0DAAoWrTGTUkWPrQMByyZiAGhdpt6jK871vHOcrGYXn9jEBI6cs+CgY/dYGSvOm00rybC7I
+ oh1BAAWCgAdFiEEbf9B1g3zFLW3a6YwrTGTUkWPrQMFAmhdpt4ACgkQrTGTUkWPrQMT2wEAhwUe
+ VntJrAZip8idsS4A+7ypB+wkTpoc6XFmP9v3uIcA/jpav1V3JB2wjzkPu0Xs1Wv3Iqncm3SQI2E
+ HpV2vVywM
+X-Developer-Key: i=duje@dujemihanovic.xyz; a=openpgp;
+ fpr=6DFF41D60DF314B5B76BA630AD319352458FAD03
+X-Mailman-Approved-At: Thu, 26 Jun 2025 22:17:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,42 +78,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+I'm moving to a new address, so map my old one to it.
 
---DOzJLWnAHfbGpr3F
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Duje Mihanović <duje@dujemihanovic.xyz>
+---
+ .mailmap | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Thu, Jun 26, 2025 at 10:00:23PM +0200, Duje Mihanovi=C4=87 wrote:
+diff --git a/.mailmap b/.mailmap
+index 830a263b983653beb89d8632c075f2a22bbd1f6d..629d0ca95a8149dc15073e50cf65bac3d3d1c897 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -39,6 +39,7 @@ Casey Connolly <casey.connolly@linaro.org> <caleb.connolly@linaro.org>
+ Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
+ Christopher Obbard <christopher.obbard@linaro.org> <chris.obbard@collabora.com>
+ Dirk Behme <dirk.behme@googlemail.com>
++<duje@dujemihanovic.xyz> <duje.mihanovic@skole.hr>
+ Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
+ Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@microchip.com>
+ Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@collabora.com>
 
-> I'm moving to a new address, so map my old one to it.
->=20
-> Signed-off-by: Duje Mihanovi=C4=87 <duje@dujemihanovic.xyz>
-> ---
->  .mailmap | 1 +
->  1 file changed, 1 insertion(+)
+---
+base-commit: fb4a488eb91b089912ffbc9a74d0527f0f2c79ac
+change-id: 20250626-mailmap-e112f3da4f2d
 
-Please update the two MAINTAINERS entries as well, thanks.
+Best regards,
+-- 
+Duje Mihanović <duje@dujemihanovic.xyz>
 
---=20
-Tom
-
---DOzJLWnAHfbGpr3F
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhdp3sACgkQFHw5/5Y0
-tyzVJQv/fkO1o6ZscrxvaXESBddCVDSqUYYzkFZ251zOltozEPhsxfvj/RoOcHZv
-Mwzg/ioqfOyXZvP0TWuqdSF6WlGyXGQL/w8VXT9c0WD1EhmmOyUv0M7tCl9zLEgL
-DFBu2i3zzNjijeVmD1a/WEVSYBa6xaZ3lWTk2xX2ub3wPag3Dxrka0HQOZOmypOC
-fkoCwO+Zj26HI06tfRC1K5rXDG0QcIGfyj4TLc1MORkTKbw/l2F4Ow9dUWfh66dW
-AGuLET9h7rorHzjeG/Ixh8J5b3XqbL1lQNkUuQR5LGCs/2rkzsEilpHgFrmjFtGi
-fEdnLWRMv0dWM5B9PadfmdTu9WHKGP/wqK95YWliDjJ1FBdd7gqKjoje15T6nDEs
-u3H1lvJk+9InOQk0gtWJ+le8OzTDJeGXht2E9J3pYcqzSoxgtvwcqgRW58QobEXu
-UtudrIWTeDCYVJ4lH44WuUbjMHyphpgFqhaAQ9iyua3FLd/e888LMyDpF0aH4onn
-/pSY1j1w
-=Dm9X
------END PGP SIGNATURE-----
-
---DOzJLWnAHfbGpr3F--
