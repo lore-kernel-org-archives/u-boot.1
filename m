@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8919EC7EE2A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E527FC7EE2A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:41:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7139882ED0;
-	Fri, 27 Jun 2025 19:39:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3EDAD82DA1;
+	Fri, 27 Jun 2025 19:40:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MHJI/NOu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJJpRvIZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6FA182E8E; Fri, 27 Jun 2025 19:39:57 +0200 (CEST)
+ id 3A2B282DA1; Fri, 27 Jun 2025 19:40:02 +0200 (CEST)
 Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
  [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD44482DA1
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F05B82E05
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:39:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-40791b6969bso101990b6e.3
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:39:45 -0700 (PDT)
+ 5614622812f47-40a4bf1ebb7so93823b6e.0
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:39:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751045984; x=1751650784; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751045986; x=1751650786; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IpIXVlrNwiIhoys7NeEYA1wXl277wfxzDeGfZ2c8CX4=;
- b=MHJI/NOuoJtKZOlVIEAmd/0pwCRE1Stq6vZ52Jm053TyFnCi8roCMjT/I6m+5cwM5r
- 7c9yC9Z1giV8q1qJ2UwnbmNHWFBE565qeUFnva5wVD5Ah/vg0sz8EEdnmv0OWxwGc0BS
- dgM2/qDJ1pndhVdtv9kR3833rPrC8SzXxRrbA=
+ bh=j8WCZGKNid1QBOhqfnKzGqRSbjODCwFYKtQBHFQIv1k=;
+ b=bJJpRvIZVWIzm6TRepSo0/UQBnm5MIGvU0VBJVvuHt0P5jqOehXhA268+VveIHf8eJ
+ uacL7LfDQVSznlybFVOk4T1eeAWGDjIarsIUhBiboZqdyPj+feZo4v01NVJDsbZvn3yw
+ NcEEqwAgzoFiQ+NG3nhqc6H2KqhhNxf4miwQE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751045984; x=1751650784;
+ d=1e100.net; s=20230601; t=1751045986; x=1751650786;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IpIXVlrNwiIhoys7NeEYA1wXl277wfxzDeGfZ2c8CX4=;
- b=p+3rxmVrygldldBWXKlr4ixHp64tFB+do2EeCwnE871dYn49VQGxtPvrRZ+21DEfoT
- RkDW+U6+YJVXiQW5PSBuR2t8K7gS/jH7CwqdSxTEj5iQkR0uWUl6UffZK2AWH/Cmono5
- BhaOHi46xF4VC38DH3FSECkoLfm8IeR+fHexxIjJYNhaWEc9SdjryQmykoDK1JXClwMk
- z27fG0IcA2NRU6BQmwJu1nGfu4PpfjjRwe53Z7EfHnG6B/cZvv1fkYWBJMrXfhTvs/Pv
- emXOhSgXjhKvdlw4JNpso04gFmlyg2vsi8ucu1pvNYZJKeD15C9qfYI9AeI3ERdapTwm
- x7bQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUrzNcN8xTSNfPm0ypvpyGYp7azWdyMoDSan4upuWHP/W2209MTG/TmYoQDR3K68LufLgoNK2Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/YFZUtAGKe2TqCmPZmKMy4y+NaXrBnA66KB8r3Gr2zpplA+2b
- /v2I7k5ftLGdxkWej4uzSafxOYxTg4xCzo4OvpV7nNIOASHkxNTGOkZt3WDVDqctH3AOlKuqt3C
- mykzqCkA=
-X-Gm-Gg: ASbGncuJ+mTbuDVbnP7Tj/JBLpTvBZr+64BZRReubpX+m+AI1LP40suqopV4aJQeO56
- XehzpXqSMdJHrAdqBftGUls+vwh8RSWOwtwv2mPrH/BTBnaeDRapnJJRM+A7Ik85ZjpOeYYeWee
- EmieVuOv+KTbCsFugMi3Wk/W5pco4hNkdK4L1NKhX3wzKlXTqyn3PtGZ8BuA1n2L4eLoO+7YNjl
- yY8e7J6EcwMQmDfO4DcAK1syUrVSzom9TnXfi1IHtCehZiiS/Dd/ah/WNbyRV9vGHYMyDFMcMYN
- sZTVo4zT1bnJJmVUC95Pu9Z5YVlPmnCuFyQWAcH/TCHgnEcyoRBjXgyniQaTB9RJXjEQoH+1tBQ
- ozEMrFh/TYxakMpLx4FwUig==
-X-Google-Smtp-Source: AGHT+IFk2wve9A276fm2QivnoLE//QDI1qxvDWxWnbF1VHTGWriNm9D9gqYeIq7VCNy2NpW8WMXGWw==
-X-Received: by 2002:a05:6808:21aa:b0:40a:5356:6569 with SMTP id
- 5614622812f47-40b33e1800emr3027903b6e.25.1751045984551; 
- Fri, 27 Jun 2025 10:39:44 -0700 (PDT)
+ bh=j8WCZGKNid1QBOhqfnKzGqRSbjODCwFYKtQBHFQIv1k=;
+ b=KKLMvhmT2jWD3ML0js7wDX/+zN3YiDHzlODvyP9GkZvQS071RlQjEi0Nt82XI71E4T
+ vizfZzBKi+aVEWzwHD5AEn56yOTogauW7mEhwojipxFXW00HTwpF5JLpNgMwVUrQHQqI
+ o/xlhqGxZdTW6EQX5LOZa1jo1wQ4uaSU+9+8WaNMPwPQPHsFh2fIzqGCOfmhrLjXaIEp
+ 2iKPmYV1ybSXCxaGgeigDdBELBE6eT44sF98tQ9K1+A/zGdhYDbXpZWXLkC4dsM1ypKh
+ 06tjiHF1gIOx4JPCELHWZEQAemKnyyzoenaAavyNFkFTaJ5tMu6+73DvJqHPCch/Gh4t
+ wstA==
+X-Gm-Message-State: AOJu0YzvU6nkAyiHGZypIfc6nTYW8t5pJTTLmTmY68xPTT7qOxrnplNM
+ 3e7HZIw7roNRkflLTk8XGreS0poyXLI3WizTCQzq6Esqxd1EbvWZpyOv0rVfbJJQLm4=
+X-Gm-Gg: ASbGncvOjOdy3vZ0Rm2M3VCn7kasBCpYi3zTn9RpkvfBgbraAEmtag+nbpvdP2vSUVN
+ SrfcWnyrB4cH8Od0HQGSnrKLdxlsY8dUdmlooVQtOF0tSz0gHG1i/jTiqJkcTMwBSCAyOoulQFq
+ MupoirNXUHZ5lVdYFMFmByHVZCePvGVxqTCoZTaNt6lrBWSPzCulkSUA2SkoyOXY+4Gy/GyUVm6
+ vvpqCtKPDUiT/KpEv4yo++Vp+leXWAB981NxMQfxQGe4WVlCRisbBgKgsd7c2ZUg9AW5alRmOnu
+ pCNFKkYPvYs68kVu0km7rNwyp5zM0m1jox2XE1BE5JCIPiKiSHY1xAnMSyfKxb3ElHHWGl9GYzk
+ DtJFHgQ2AY4zte6SA7zEsQhoHuCwqLS+o
+X-Google-Smtp-Source: AGHT+IGFmYDX3ZW+h+yffFFzV/Konp0HaVE2tvaDUZxph+Y/luTEN9y8vOGVSAy6+XbAMVZkZ3x0Ag==
+X-Received: by 2002:a05:6808:13c9:b0:3f3:e9d5:7790 with SMTP id
+ 5614622812f47-40b33c2b29amr3600337b6e.6.1751045986159; 
+ Fri, 27 Jun 2025 10:39:46 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b322b5900sm442246b6e.18.2025.06.27.10.39.43
+ 5614622812f47-40b322b5900sm442246b6e.18.2025.06.27.10.39.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 10:39:44 -0700 (PDT)
+ Fri, 27 Jun 2025 10:39:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>, u-boot@lists.denx.de, n-francis@ti.com
-In-Reply-To: <20250620132154.1982902-1-vigneshr@ti.com>
-References: <20250620132154.1982902-1-vigneshr@ti.com>
-Subject: Re: [PATCH] mach-k3: am62ax: am62a7_init: Drop write to non
- existent register
-Message-Id: <175104598386.3877702.1427138106688279377.b4-ty@konsulko.com>
-Date: Fri, 27 Jun 2025 11:39:43 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Huan Wang <alison.wang@nxp.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Wolfgang Wegner <w.wegner@astro-kom.de>
+In-Reply-To: <20250620162147.3419120-1-trini@konsulko.com>
+References: <20250620162147.3419120-1-trini@konsulko.com>
+Subject: Re: [PATCH] m68k: Remove astro_mcf5373l board
+Message-Id: <175104598545.3877702.10068387523961976219.b4-ty@konsulko.com>
+Date: Fri, 27 Jun 2025 11:39:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,19 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Jun 2025 18:51:54 +0530, Vignesh Raghavendra wrote:
+On Fri, 20 Jun 2025 10:21:47 -0600, Tom Rini wrote:
 
-> Per section 14.2.1.3 Kick Protection Registers of AM62A TRM[1],
-> there is no partition 5. Delete it.
-> 
-> [1] https://www.ti.com/lit/pdf/spruj16
+> This board is currently unmaintained. Remove it.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] mach-k3: am62ax: am62a7_init: Drop write to non existent register
-      commit: 95d303f7e56688fde6e50cb0a49e8cbd140b2fb2
+[1/1] m68k: Remove astro_mcf5373l board
+      commit: e5d4733c2e1937eb7b622771bfea9f1fda0425c6
 -- 
 Tom
 
