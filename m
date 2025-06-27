@@ -4,93 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 394F5C7EE2A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 19:03:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10298C7EE2A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 19:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 928E280C83;
-	Fri, 27 Jun 2025 21:03:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C7C880C83;
+	Fri, 27 Jun 2025 21:09:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="a5der4MW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TCSJ9Akb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0120281D5D; Fri, 27 Jun 2025 21:03:10 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCC8D806D8
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 21:02:44 +0200 (CEST)
+ id BA87781D5D; Fri, 27 Jun 2025 21:09:14 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 550CA806D8
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 21:09:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 62D4B3F91F
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:02:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1751050959;
- bh=cyCtZHI9veQGGXrdatUJsSJwZ+/mLZQ156MEhjKFPGA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=a5der4MWt6a2lpWY+So9YbMHcrED/sZ2wxXVmvNiqcCgzA6VrwziIg3vKhQY0SipI
- crdHihhS9MLE7GFmrc3XBqMZR63kpEkTpRM8yPNO7G7roCLlkKouk/0jRq4Ulcetcg
- 2+NWT/8Rdda4rjRXIlOOmvTJWHWmJ5PqKAwwC291ZjHNBAuW6WB0pZfok4rO/a21Gz
- OPnAUVyu1wfate3eIi9zZpjhRGAylqwxj0TllzBxIxXdwu9xSIlJ2ka5vokU9W9ZBd
- C/VZ4PNSfNdXOA7NnWJsmK8/El5o5tZRw5caaoVAF7vqit2MyvkL5jdIohdnfIDeGW
- Q426Hncj+tcgA==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3a4f858bc5eso96066f8f.0
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 12:02:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751050959; x=1751655759;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cyCtZHI9veQGGXrdatUJsSJwZ+/mLZQ156MEhjKFPGA=;
- b=gS26KNWrQkBiyLmAFhMmNCB4u0Whgts8r+IgWOAIChuCEpyZoUtn/EX/aRXte13n0L
- q90mzvdU1YqmfB7sW0y5MyiKKja9Z1LLxFdqlSkPQdg6JY5dAlJU0yqDxvRGEdSNfQtS
- gTxR8F2WrKvJJQ9P+o/B0fMmkcxCjZhPzgmajix8/xhzq47IbWbCpuqe8gg5S/2yHNt1
- mmR4dZzCH9hzJ7uZ9L/+kmEo9gLwfiXUf48t6iXa/El3Mc8uN5Q2d4X8OpZVT1SsmZWF
- 0UKtiFYBTITkloW/ffmuCdeOsVvbbnawnSXQ/pL35hp9iEIQr7ITeTGd4ktJe05uC4Ma
- QL6g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdDatKTXx3ASbG56ZCYDBxVqRP1y9qtMZ/a8QiTPsnrbSYgpP/H4bzrrWOC7wW/r7s1TDW7Wo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxsl5fwI3Wo8eoRuvttr4hKhR4v1vtGmUWuvGcbOocTWmYAXqEd
- 6tllj4gAMGEc/68cY+VmuTb5xT6uPvjRTam+0FEA8D42PSBk9JEoT3qUidBtLuZTy6/rs7FdDcw
- KvzAqMucVxkSp0lRijv+Ppmtgaq64V5yO+eTwuZTZoBYNihMB5kA0uG+OVxaPYHf4bvx9s24fjI
- k6GPw=
-X-Gm-Gg: ASbGncvtevzyLVoWbHsxsPLBdto+HWqBF7QF96REol6PDwCwGbOIbECN9m44BQGa+F3
- UAjhzTTJno7glt8iw9cTAwEP65ITk//N/K7vpidDLKXvbShA3UFPXZaJsXy83XIPBfXPoztWspX
- nHe/Zk8/QSyrZjslg8DRoYAjsZz8pezyAg8EKK34eH9rMrxJSQmeifgZUinxofi7nLL5okEcKZe
- D8C5k5qfJmRfmv/OQiyZJrAf2yGIOc92po7OeUE9EkJCvRzOpuUZ4mTzfPvS5VZAwbibFIuzHp6
- I6by07FUnKfL6w/wvBquWDg3iJK1xhIK5vTeFCS2FVCSzC8R48asMvQr
-X-Received: by 2002:a05:6000:4186:b0:3a5:57b7:cd7b with SMTP id
- ffacd0b85a97d-3a8f482cf28mr3729678f8f.22.1751050958917; 
- Fri, 27 Jun 2025 12:02:38 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFNuBkIZoeayJcEcHj4yOWvSNO/xt/+m5wM3MItw73gGAmYg4qiUwrPENT6Bz2eZSyDgmMTuA==
-X-Received: by 2002:a05:6000:4186:b0:3a5:57b7:cd7b with SMTP id
- ffacd0b85a97d-3a8f482cf28mr3729642f8f.22.1751050958536; 
- Fri, 27 Jun 2025 12:02:38 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:3035:6e0:8e27:7299:ea64:1f34:a93a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45391c6aa0asm20710695e9.26.2025.06.27.12.02.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 12:02:37 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: correct references in x86-fit-boot.rst
-Date: Fri, 27 Jun 2025 21:02:31 +0200
-Message-ID: <20250627190231.13252-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55RJ92rx2491894;
+ Fri, 27 Jun 2025 14:09:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1751051342;
+ bh=h6Asx36/vJBHoQy+BDMn/bl05WVTZlA3MBHJJrUR7OE=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=TCSJ9AkbwUb/LYrdkiU1a7yqGu9sI0q9kDZvq7wURaPxUQfAo5Ecp29cypR7X6wal
+ /jhRtiudghi2Ude00ubRPO1ZGln5OXZKueqqMw5pjsln+D7vwCP+A+tJldcy//Ajw2
+ 3rtBGGp3ZaNs0JGVeXoidrB+iA351nf9H30AU9IQ=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55RJ92hk650322
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 27 Jun 2025 14:09:02 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
+ Jun 2025 14:09:01 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 27 Jun 2025 14:09:01 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55RJ90pJ3305110;
+ Fri, 27 Jun 2025 14:09:01 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Sat, 28 Jun 2025 00:38:19 +0530
+Message-ID: <DAXJVPUUZAW1.P62BXQ73VB7L@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>, <robertcnelson@gmail.com>
+Subject: Re: [PATCH v4 1/2] mach-k3: add runtime memory carveouts for MMU table
+From: Anshul Dalal <anshuld@ti.com>
+To: Andrew Davis <afd@ti.com>, Tom Rini <trini@konsulko.com>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a
+References: <20250618124210.1936140-1-anshuld@ti.com>
+ <85f6fdb7-73ea-4617-b82a-fb14369315d1@ti.com>
+ <20250627180912.GG4003484@bill-the-cat>
+ <623b8617-09c1-4006-9a76-907182ff4387@ti.com>
+In-Reply-To: <623b8617-09c1-4006-9a76-907182ff4387@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,36 +82,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct the references for
+On Sat Jun 28, 2025 at 12:12 AM IST, Andrew Davis wrote:
+> On 6/27/25 1:09 PM, Tom Rini wrote:
+>> On Fri, Jun 27, 2025 at 01:06:50PM -0500, Andrew Davis wrote:
+>>> On 6/18/25 7:42 AM, Anshul Dalal wrote:
+>>>> In u-boot we only provide a single MMU table for all k3 platforms,
+>>>> this does not scale for devices with reserved memory outside the range
+>>>> 0x9e780000 - 0xa0000000 or for devices with < 2GiB of memory (eg
+>>>> am62-SIP with 512MiB of RAM).
+>>>>
+>>>> To properly configure the MMU on various k3 platforms, the
+>>>> reserved-memory regions need to be queried at runtime from the
+>>>> device-tree and the MMU table should be updated accordingly.
+>>>>
+>>>> This patch adds the required fixups to the MMU table (during proper
+>>>> U-boot stage) by marking the reserved regions as non cacheable and
+>>>> keeping the remaining area as cacheable.
+>>>>
+>>>> For the A-core SPL, the 128MiB region starting from SPL_TEXT_BASE
+>>>> is marked as cacheable i.e 0x80080000 to 0x88080000.
+>>>>
+>>>> The 128MiB size is chosen to allow for future use cases such as falcon
+>>>> boot from the A-Core SPL which would require loading kernel image from
+>>>> the SPL stage. This change also ensures the reserved memory regions th=
+at
+>>>> all exist past 0x88080000 are non cacheable preventing speculative
+>>>> accesses to those addresses.
+>>>>
+>>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>>> ---
+>>>> Changes for v4:
+>>>>    - Add call to k3_mem_map_init for beagleplay
+>>>>    - Mark reserved regions as non-cacheable
+>>>
+>>> In v2 I said you cannot mark any regions as non-caching. How did this
+>>> sneak back in? If the reserved memory region is marked in DT as "no-map=
+"
+>>> it must not be mapped at all. So NAK.
+>>=20
+>> Presumably at the top of your mailbox now that I just pushed it to
+>> -next.=20
+>
+> Yes, this bubbled up to my attention thanks to your applied to -next mess=
+age.
+>
+>> Should I revert, or expect a prompt follow-up to clean things up?
+>
+> If we get a quick cleanup patch that maps the reserved regions as caching=
+ to
+> match previous behavior that would remove much of the reason for this pat=
+ch
+> in the first place. Removing mapping the reserved memory then we will bre=
+ak
+> remoteproc loading. Both have issues so reverting will probably be needed
+>
 
-* the x86 boot protocol description
-* the FIT file format
+The idea of the patch was to carveout the optee and atf's reserved
+memory out of u-boot proper but I blindly mapped every reserved node as
+non-cacheable which was not the right approach. I can send a quick
+follow up fix but it would likely remove everything this patch added to
+begin with. So, I feel it's better to drop this altogether and I'll post
+a v5 later with the required changes.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/usage/fit/x86-fit-boot.rst | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Aplogies for any inconvenience.
 
-diff --git a/doc/usage/fit/x86-fit-boot.rst b/doc/usage/fit/x86-fit-boot.rst
-index 9e3e32204d5..18704af3bac 100644
---- a/doc/usage/fit/x86-fit-boot.rst
-+++ b/doc/usage/fit/x86-fit-boot.rst
-@@ -259,11 +259,12 @@ Why Bother?
- References
- ----------
- 
--In the Linux kernel, Documentation/x86/boot.txt defines the boot protocol for
-+In the Linux kernel, `Documentation/arch/x86/boot.rst
-+<https://docs.kernel.org/arch/x86/boot.html>`_ defines the boot protocol for
- the kernel including the setup.bin format. This is handled in U-Boot in
- arch/x86/lib/zimage.c and arch/x86/lib/bootm.c.
- 
--Various files in the same directory as this file describe the FIT format.
--
-+The FIT file format is described in the `Flattened Image Tree Specification
-+<https://fitspec.osfw.foundation/>`_.
- 
- .. sectionauthor:: Simon Glass <sjg@chromium.org> 7-Oct-2014
--- 
-2.48.1
-
+- Anshul
