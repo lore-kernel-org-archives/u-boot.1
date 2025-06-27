@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E527FC7EE2A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:41:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D75AC77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 18:04:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EDAD82DA1;
-	Fri, 27 Jun 2025 19:40:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC2FB806D8;
+	Fri, 27 Jun 2025 20:04:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dietpi.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJJpRvIZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A2B282DA1; Fri, 27 Jun 2025 19:40:02 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 986FF81F66; Fri, 27 Jun 2025 17:24:01 +0200 (CEST)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+ [209.85.128.41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F05B82E05
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:39:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AAA880C83
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 17:23:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=dietpi.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-40a4bf1ebb7so93823b6e.0
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:39:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751045986; x=1751650786; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j8WCZGKNid1QBOhqfnKzGqRSbjODCwFYKtQBHFQIv1k=;
- b=bJJpRvIZVWIzm6TRepSo0/UQBnm5MIGvU0VBJVvuHt0P5jqOehXhA268+VveIHf8eJ
- uacL7LfDQVSznlybFVOk4T1eeAWGDjIarsIUhBiboZqdyPj+feZo4v01NVJDsbZvn3yw
- NcEEqwAgzoFiQ+NG3nhqc6H2KqhhNxf4miwQE=
+ spf=pass smtp.mailfrom=pom.pumba@gmail.com
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-451d7b50815so17008215e9.2
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 08:23:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751045986; x=1751650786;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=j8WCZGKNid1QBOhqfnKzGqRSbjODCwFYKtQBHFQIv1k=;
- b=KKLMvhmT2jWD3ML0js7wDX/+zN3YiDHzlODvyP9GkZvQS071RlQjEi0Nt82XI71E4T
- vizfZzBKi+aVEWzwHD5AEn56yOTogauW7mEhwojipxFXW00HTwpF5JLpNgMwVUrQHQqI
- o/xlhqGxZdTW6EQX5LOZa1jo1wQ4uaSU+9+8WaNMPwPQPHsFh2fIzqGCOfmhrLjXaIEp
- 2iKPmYV1ybSXCxaGgeigDdBELBE6eT44sF98tQ9K1+A/zGdhYDbXpZWXLkC4dsM1ypKh
- 06tjiHF1gIOx4JPCELHWZEQAemKnyyzoenaAavyNFkFTaJ5tMu6+73DvJqHPCch/Gh4t
- wstA==
-X-Gm-Message-State: AOJu0YzvU6nkAyiHGZypIfc6nTYW8t5pJTTLmTmY68xPTT7qOxrnplNM
- 3e7HZIw7roNRkflLTk8XGreS0poyXLI3WizTCQzq6Esqxd1EbvWZpyOv0rVfbJJQLm4=
-X-Gm-Gg: ASbGncvOjOdy3vZ0Rm2M3VCn7kasBCpYi3zTn9RpkvfBgbraAEmtag+nbpvdP2vSUVN
- SrfcWnyrB4cH8Od0HQGSnrKLdxlsY8dUdmlooVQtOF0tSz0gHG1i/jTiqJkcTMwBSCAyOoulQFq
- MupoirNXUHZ5lVdYFMFmByHVZCePvGVxqTCoZTaNt6lrBWSPzCulkSUA2SkoyOXY+4Gy/GyUVm6
- vvpqCtKPDUiT/KpEv4yo++Vp+leXWAB981NxMQfxQGe4WVlCRisbBgKgsd7c2ZUg9AW5alRmOnu
- pCNFKkYPvYs68kVu0km7rNwyp5zM0m1jox2XE1BE5JCIPiKiSHY1xAnMSyfKxb3ElHHWGl9GYzk
- DtJFHgQ2AY4zte6SA7zEsQhoHuCwqLS+o
-X-Google-Smtp-Source: AGHT+IGFmYDX3ZW+h+yffFFzV/Konp0HaVE2tvaDUZxph+Y/luTEN9y8vOGVSAy6+XbAMVZkZ3x0Ag==
-X-Received: by 2002:a05:6808:13c9:b0:3f3:e9d5:7790 with SMTP id
- 5614622812f47-40b33c2b29amr3600337b6e.6.1751045986159; 
- Fri, 27 Jun 2025 10:39:46 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b322b5900sm442246b6e.18.2025.06.27.10.39.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 10:39:45 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Huan Wang <alison.wang@nxp.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, 
- Wolfgang Wegner <w.wegner@astro-kom.de>
-In-Reply-To: <20250620162147.3419120-1-trini@konsulko.com>
-References: <20250620162147.3419120-1-trini@konsulko.com>
-Subject: Re: [PATCH] m68k: Remove astro_mcf5373l board
-Message-Id: <175104598545.3877702.10068387523961976219.b4-ty@konsulko.com>
-Date: Fri, 27 Jun 2025 11:39:45 -0600
+ d=1e100.net; s=20230601; t=1751037835; x=1751642635;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ecy1lu4HubW4pztC4YMUcoXKTGqeXDuf1wJXlT0GEmc=;
+ b=YC5/75hwNjIv0fckzf6tLhjUdlhVBUngYSSR1VjRMb+BFbwXCJE4kNeQiRlwdkn2PS
+ x6v7/tBSMQMWu8cMzyVQdxuuiAlFryxnMrPUieuj4JX5U0M4Cik4Fqv7768lmJj53FMm
+ hj2uQWEjKBUmYsk3h/6k3J60NH0R491qktcCZqBjTtxi/Vk0kwwauthhMA5oeesCLcLK
+ nWiIaubyYNGSK7v9ReYpq8Cok2mkr1w/zBBgTMM/+aauO7kvqMele8Gg8rIjfoDxhxn+
+ rYo7qg6e+UFEfkZeVJwanjJHlj87GyJjraEkbjrpE0a9osqwl6UoIHDAk6KJqAXGO8K6
+ +m5w==
+X-Gm-Message-State: AOJu0Yx3esXpEg+vM96dvvlppb3UIot4PnryeXVTOlhn+v46CW+gZADG
+ 3+uxa/6gdiPOcjQKfnChbez3UpgkDk/V7kOzejX1jKYVJJEFSnSzFJMPaUq9Ug==
+X-Gm-Gg: ASbGncsfqRXAu9lFLC+YbFZllumdZdFjfXXMCd2V2iJ/iL543dZ4ax0RADXUfMYkZpD
+ UvKZ8/8JM718uchUQ7cr4r5fgKTxc0n4jixj2i4bnzgh2u4778/gwIUR2HSB+wPUZLH7+FMYsuN
+ 0NbhckcfSNHuFj4Tf/8a9S73CcN6ivPwNqRobeANr8EmXwIeE5bIhoX0seWGeJLML1Dh33BiCVN
+ P+P5ky4r9Bmwznm1wyI6u2BtElLwdloBVqIUtJZSsk/AD55wDy+wn3hxjF0MhJGicfxJXCRAcrd
+ t/oKP2k+nEm36UzqSxzM5kwvd6L2lpCpRTSi/Vf0TzmUPunk3AxdIQBPRn0mS6+Ciu8s9ApXBPV
+ plF9RDycc/qJFqQCQ7Y/YS73/siK73l9qI9oxau4o5oJQQLvSnsNV81HGuJ5s70jb8B0Q/oqhpy
+ BpmFwIuLDrYklX9t4SHMsp
+X-Google-Smtp-Source: AGHT+IE9LxzyY9S62E0G/Pp6aB3qJbJxHSeI8JRGDoji4mQTIiBG6pGHnTod8Tk3RuZ/S4PpIxJj3A==
+X-Received: by 2002:a05:600c:3b07:b0:444:c28f:e81a with SMTP id
+ 5b1f17b1804b1-4538ee6ebd6mr39691755e9.27.1751037835187; 
+ Fri, 27 Jun 2025 08:23:55 -0700 (PDT)
+Received: from ?IPV6:2003:e0:6f23:535a:5c41:d08c:1d27:c718?
+ (p200300e06f23535a5c41d08c1d27c718.dip0.t-ipconnect.de.
+ [2003:e0:6f23:535a:5c41:d08c:1d27:c718])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-453888886ddsm40796235e9.0.2025.06.27.08.23.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Jun 2025 08:23:54 -0700 (PDT)
+Message-ID: <e92a4e72-1f7f-4a38-80df-7df8447a7bef@dietpi.com>
+Date: Fri, 27 Jun 2025 17:23:52 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: board: assign up to 3 static Ethernet MAC
+ addresses
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <e76dbe98-2fa3-4d1b-a452-aa88a142c5cc@dietpi.com>
+ <2beda42f-68c4-4fc3-8b84-ede6e452c4c7@cherry.de>
+ <5aeeab0f-cbaa-4b25-9baf-37e2b0e5e9d1@dietpi.com>
+ <7ab1deb6-5ab7-4544-805f-f2e1e139d045@cherry.de>
+ <647c2f92-344f-4feb-8979-93b1d6574193@dietpi.com>
+ <0c822158-11d7-4a1f-93f8-22043c807bd9@cherry.de>
+ <3a38f9b3-e8a1-41dc-b770-0af80b8ebc09@dietpi.com>
+ <ed094775-23e6-4fb1-9272-540256d46719@cherry.de>
+Content-Language: en-GB, de-DE
+From: MichaIng <micha@dietpi.com>
+In-Reply-To: <ed094775-23e6-4fb1-9272-540256d46719@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Fri, 27 Jun 2025 20:04:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,17 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Jun 2025 10:21:47 -0600, Tom Rini wrote:
+Hi Quentin,
 
-> This board is currently unmaintained. Remove it.
-> 
-> 
+many thanks for all your feedback and input.
 
-Applied to u-boot/next, thanks!
+ > If DM_SEQ_ALIAS is enabled, I believe so.
+ > I would imagine people be surprised if the same device operates under 
+two different MAC addresses depending on which SW is running at the 
+moment (U-Boot or Linux for example).
 
-[1/1] m68k: Remove astro_mcf5373l board
-      commit: e5d4733c2e1937eb7b622771bfea9f1fda0425c6
--- 
-Tom
+So far I only found 
+https://github.com/u-boot/u-boot/blob/master/boot/fdt_support.c#L645-L664, 
+the fdt_fixup_ethernet() function, which, as far as I can see, is called 
+after/with boot* commands. Ah, but if U-Boots device tree is used to 
+boot, then of course it is applied there as well. What I meant is in 
+bootloader stage before that, when it is about looping through boot 
+media, and in case network boot options, searching for/executing 
+boot.scr, in case U-Boot console.
 
+In any case, I will wait for one more opinion/input about this, and are 
+then happy to try implementing a more generic method: E.g. right into 
+the above function, generating and directly applying MAC addresses to 
+aliases which do not have a variable to apply from yet, based on an 
+existing eth0?addr to start with.
 
+Best regards,
+
+Micha
