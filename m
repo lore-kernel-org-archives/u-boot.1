@@ -4,116 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9256AC7EE31
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 08:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7442C77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 08:50:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6C9482E35;
-	Fri, 27 Jun 2025 10:38:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 24D2382E35;
+	Fri, 27 Jun 2025 10:50:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v/939o5Z";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="syUm+c/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D786982E9A; Fri, 27 Jun 2025 10:38:11 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C4C7D82E9A; Fri, 27 Jun 2025 10:50:22 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20615.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::615])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F55582E27
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:38:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0F2082E27
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:50:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3a50fc819f2so1344952f8f.2
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 01:38:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751013482; x=1751618282; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=m/5VrrJd/Z604z1BeaCvDztRFUJaJI1F7Udq/Hgl9Ag=;
- b=v/939o5Z9X4B2a+um5KCueJrrA10YcbYTVcGLpqkr26HZTTnfPGsXe6yNNZw7Hk4w3
- MPnUnhZhQRPAyJdvsL4gqJNb4VnX97ugZqZCvCle8NECE0PA2boNx9YhKVTILIWhbMu9
- V8vP9W3TpHYfYUhdz6Wrcm8eUESZNuO3XDEyq1xfHNK+SZJjQRXl3UGlPki9DnfaTb3g
- 2SMcP1CgX4uPIWkteILkT/zdiHO8DU3Q38qmiBY9IPBhSBjoHaKhfcJznOahaNiw9h5A
- d5N1ZOM/PkVflz+pEYOpw+G9r3UKdTgSnc+8B0OIM0KX1JyRoxGb8TOKEJwHBQn3RVZS
- UtRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751013482; x=1751618282;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=m/5VrrJd/Z604z1BeaCvDztRFUJaJI1F7Udq/Hgl9Ag=;
- b=YdeChEn/NRGFy1qwzAKJdyrsXYXPMwHweLEMmwzSkFyoj0W+ZvZpVu1hnqvzPsEC8S
- +EqkPSxdkEClQafhjxiV6epY2yt1iLtRycxKXt8D/VXCz+rB/CVuzszOLDxl8oyZBB5i
- HDZsNBLZHI+cvNXRz6P3Z+vTAwTYbfV0h2vMLoQkhxOV5z8YDgv/GzBv4xMuV6TlLo6R
- fI5n1HM4QoAkYOvmSNKGq4nfNtZnZxNrHJcfSLtk/zoH5tEDFQ3bycPUIgrjFZ2FM5dm
- u49WrVvJYvPHEqodD8qXvvbAGzms6OjoSO56Wu921OSgMRcmhPy0BwNCAvaq5g81GMG8
- qkFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWOo/paSghO+YPvh4oTOKChLeZp2pexpgXu71tZOJDmH/x5vpDeG0xjzzQn1kQWAYwserC7IFg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmZwGP9Kl/WsZobWvE8wA6k3SWAhRA3dXRFiI0+kBDKc/dUtGe
- ldnQsV/xrtYep52elPWIQ9kyuEcvWJqjOKNB9l7iOOIkobn4l4iDucfl9RWJEIFNfGY=
-X-Gm-Gg: ASbGnctkWFupHwXepaEyeaEVq8+R6BM+tAHVrjBtp6fqFe0hP+W6nG3ekn8i3jhgo+o
- iy+ZSDO4rZL9n/yGTWw9MKXliJ1x64fLB1cLij2FpRppGoY7hl4/lmy/WOCqo4NbWH04wlHQxTG
- HDuleW6VGdlyHzuECluXAbyXG8prMb0bG1OphDviKdpxMzBCAdIt8e+sth9H20vKSBhSXH+ll0W
- wOvlv151X9xefsWlrQ0gP9WIYFQtYvehGOZcpUfDVQbm0OMaaUZd4rSyso83WCKX/uopKTaU0d3
- TJjkf64PRDOXCDlX7L4WegZF4wZeqx6kPpAaFTxVa03qhnJVNMYaVZIiwoIM6HtSjyILR87xxmO
- NfRfwUvarPcp19Cwa/bV4Fo/EIcuK7gNiCsxzVQg=
-X-Google-Smtp-Source: AGHT+IGiwRZldE8lViEynymBmk1EWUwyGVNrZne4Due9+E26umrTt6IM5h+w250F4nahZUHA0+MjfQ==
-X-Received: by 2002:a5d:6a05:0:b0:3a6:d2ae:1503 with SMTP id
- ffacd0b85a97d-3a91760379fmr1567446f8f.34.1751013482385; 
- Fri, 27 Jun 2025 01:38:02 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:30eb:78d0:2bd1:5cd4?
- ([2a01:e0a:3d9:2080:30eb:78d0:2bd1:5cd4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a88c7fa8aasm2031720f8f.27.2025.06.27.01.37.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Jun 2025 01:37:57 -0700 (PDT)
-Message-ID: <98a8f79b-310a-4058-8054-274832439267@linaro.org>
-Date: Fri, 27 Jun 2025 10:37:56 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LFS24jPr8nba50pF0n078UO7jaN1r+4BO8EStkuhimX7iY+eXq97x/uLFigL3DSgKGZcq3zMfiycZBUaJhcJjgjWSGfd/kXhXkKs8Aj7xuzgL98jrsdA2Im7mBzfpy4DXXK4MmRzZ1KzE/+1BqTNra7MzXzzo1GF09ZXpkf/w0F1ns5lav8GlXac72hvt20PEhHTGU590e/TsfDOcvUIPnBWY0gnmeRlCa59J5+ICachstpAOHVpuJtg/BdYSfZ1KVRRw96r9ZTBOCfZg+DEd1F5YNtlInV8p03rktobvWN25jX3Y6j1/dhJwA3w+mUVfZztsb1aYt6XuOKU5itvYg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+dac8F//S6lcB30BqIz9RZJ4JDD9pD9Lb1HiRnFF1wA=;
+ b=gDBUxLyEZJaPkflfB1O9qaYePDYrs0Gt3dEH2olluc4Xdl2hLMxujFPID5/DrNqYHFU6Eul6rpUKWmLHz4O0+/CyXZuboE0+0N5suFIvS1c+l1koQCVLoFMBLzWs5kfa2EDxGwm5hqtCUFncQ75MYlBxbm9Fkh4/awDS+URTdXhGZ44L30ppTKxCwMY1Zvaa3Drx9e0TvKt9TJmBnH2i27HE61DIWBTIvgCpk4NRwZtixSVzmT/7IHG3QIxRb51yxNbZXZxH2YJhxXzo6o8RK/uRGcnm5dqypbARCYVMiSJHTuetRPZMGE+T/faWCAhIyz6X9cJ1QtTTN2t7aFD1qg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+dac8F//S6lcB30BqIz9RZJ4JDD9pD9Lb1HiRnFF1wA=;
+ b=syUm+c/26fz867ZcCiDabEqSQIBmB8IiWH52XmSRa07icR3IK2iAk+pZtfRH9k5KtHD/rGfrh8/nEsyQ2C/FvjRXbPQ5eFJ+Fl5miAzy7iCO6jjBHs4BF+iMQLLUwAcY4VBITI+YM9yzX0tqTJUBnscnaaiYsFMLVojgVrrbNFU=
+Received: from BN9PR03CA0574.namprd03.prod.outlook.com (2603:10b6:408:10d::9)
+ by MN6PR12MB8470.namprd12.prod.outlook.com (2603:10b6:208:46d::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.20; Fri, 27 Jun
+ 2025 08:50:06 +0000
+Received: from BN3PEPF0000B070.namprd21.prod.outlook.com
+ (2603:10b6:408:10d:cafe::5a) by BN9PR03CA0574.outlook.office365.com
+ (2603:10b6:408:10d::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.23 via Frontend Transport; Fri,
+ 27 Jun 2025 08:50:06 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN3PEPF0000B070.mail.protection.outlook.com (10.167.243.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8901.1 via Frontend Transport; Fri, 27 Jun 2025 08:50:06 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 27 Jun
+ 2025 03:50:04 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 27 Jun
+ 2025 03:50:02 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 27 Jun 2025 03:50:01 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Casey Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] cmd: Introduce CMD_HELP
+Date: Fri, 27 Jun 2025 10:49:52 +0200
+Message-ID: <3f2984f62d6bda6a4a432b51047eddb70e35571f.1751014184.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2] usb: dwc3: qcom: Add delays in UTMI clock selection
- for Qscratch
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, marex@denx.de,
- trini@konsulko.com, mkorpershoek@kernel.org, s-vadapalli@ti.com,
- patrice.chotard@foss.st.com, jan.kiszka@siemens.com, u-boot@lists.denx.de
-References: <20250627045244.2225303-1-balaji.selvanathan@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250627045244.2225303-1-balaji.selvanathan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1067; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=suBfioSmunNdKtsEWV8vEEidSyRvpf1Gj7N2mOhiRUg=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTERRuL3PrxU/lxo0xZ1jrvglcLm575MFw0szoh/PiuS
+ PfmhVoiHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRnGBGhiO/V3J4vuRVO7Su
+ yeJZ66UXYotfy58tyv/5WCfnkWQD83eGX8wHJ+jNEnZpEn8iVyv72CHXz+7tlAk7Tit/VWY0OmG
+ whAsA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B070:EE_|MN6PR12MB8470:EE_
+X-MS-Office365-Filtering-Correlation-Id: b1d4d739-8a65-4df5-acbc-08ddb5579d8a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?22sGGPIT1WmArQclIzCRYNaEJqb2Tz/Eob91co8NcBEaaFp+kkp3/wN5x+4y?=
+ =?us-ascii?Q?nKKcVmQuPX29VeE7ABY+Jn6Y594KzV5ZYAj98AsMOsyn+It2ab120slXDT7D?=
+ =?us-ascii?Q?t6M+OuTP6Mt4acHwj7LW2qwYRKrzwdwRLbY7MUZu68v/8dJYGYCLwqBTTNrn?=
+ =?us-ascii?Q?+MMdOg1y7lUr1anU24QQVVnwJXC7tvJTQF4P8Tr4kGSUXwaZXWCivx6WBRlI?=
+ =?us-ascii?Q?s8MrtBaQ674grv9+EDZ5uVg+eIVZ14pcrlCLS9bwurt79zqf8wcxKEOiECnu?=
+ =?us-ascii?Q?YVDdpPXzbj2ssMI07bjpv/6s2/NLU0Rrk7MbGELei5cLVhyUgJU/9lSpkEeJ?=
+ =?us-ascii?Q?a9rfLZiiu7Xr1rKERTZeZomjw5qRE/eMX+QxM5UPTOnvdhe8FGEVBQqvUosA?=
+ =?us-ascii?Q?d2Sku0CL+tU6WUijCfHNOFx318m5zukk3al83lYNwERAvnOzBr1Wte3gB7ga?=
+ =?us-ascii?Q?iLoji0/pkMvGCVNw8N/ggJyU2jEDKheZNJsIXdfd8787njFwsAUE45WEe/YW?=
+ =?us-ascii?Q?SyOMKxri2j3dXjuf8EFOfuF7GsiEDW6R6m8MreE02YVlg5/5i6/Q8SPjpkyI?=
+ =?us-ascii?Q?CihqG0G79ExDB5/KKpbVG1bTOeTCzQYuA7CcMUVluXBgcV4+X8e4NBX8cj3g?=
+ =?us-ascii?Q?W9yvukNegFtYLdJcy9wGwh6jd/5IZheQk2o+A+XwaZRKCJLUBo9Zyl8jLKT5?=
+ =?us-ascii?Q?aoGGXgyJzcVQsEiznt8VWG0zuiLSi3AS89IjLgJ2J0YT6W8q5rUrhbSV8Thb?=
+ =?us-ascii?Q?6TEnAPvfMhcD947LhzL/pnt9kjZvqsMqfaiSdDS75ylI6QdghiqEnzmt3PD0?=
+ =?us-ascii?Q?Skx3it0kz1KZ+xrlAmvdnrBSiBVx2QoJ6tjRb9gfhOlK+Su+wANkJyJfdLRQ?=
+ =?us-ascii?Q?Ug0Ql9eN1pp9oGcWmoiZnw8tpRAhs67C+dbmDJxcn0kKzfJPk6McwWCgreB/?=
+ =?us-ascii?Q?yppTRTBxaNpFGjvQscot8Whto5MEiNFm5Xl6s1lRAxrh4PeHaPV2wbAekJqM?=
+ =?us-ascii?Q?UTKqZATg5hCPUqT/mQiDPd/ZuMdZLPMUKEfHtz1CarviW5COYC2PVMuA/dxo?=
+ =?us-ascii?Q?VpsiORfJaNRgUjjb//hL2N2uQRzKXzjQff5AzTKXHjbnsZc5zsY0+7kTo6nc?=
+ =?us-ascii?Q?xHlL2L1Wxu3jriy1fNcAUkpsqp9oR32SaOztSskhLR80OxY27X32vV5pAirh?=
+ =?us-ascii?Q?z4rVUE/QxBr9lvt6SY4z2ba6adL8ZeG7Rlvg5uaQ1ltEN/0TMS7QAD9WzfeN?=
+ =?us-ascii?Q?NrMbUk/lKV0ifYCVQy3vMOYjRL220yHVfYpELHdh40quYBo/wWPsTr2xxvyD?=
+ =?us-ascii?Q?lYygAdDPVPHMm3roCsS4crLH5UITq4YW5cuEC4W90uJClIo0UdnhJ/Sp7mW2?=
+ =?us-ascii?Q?9HKM6fXmR1tUnPL60zoWvx9MkhuKh9v4+qsL1FyLhcMcbktAZujzFRmlCrrQ?=
+ =?us-ascii?Q?7bx0imN0CtEl4gOaLi3y2ljNroNzcfRGaNdnfUeLEYY3C3py2yq/8OcFQnET?=
+ =?us-ascii?Q?W0W6bt28WWYT58N6YOS7+9U0SmeN+Y2eeSM0?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2025 08:50:06.5945 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1d4d739-8a65-4df5-acbc-08ddb5579d8a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B070.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8470
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,52 +155,52 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/06/2025 06:52, Balaji Selvanathan wrote:
-> Added delays before and after setting the PIPE_UTMI_CLK_SEL and
-> PIPE3_PHYSTATUS_SW bits in the Qscratch GENERAL_CFG register
-> during UTMI clock selection for DWC3 on Qualcomm platforms.
-> 
-> These delays help ensure proper timing and stability of the UTMI
-> clock switching sequence, potentially avoiding race conditions or
-> unstable PHY behavior during initialization.
-> 
-> Tested on platforms using Qscratch-based DWC3 PHY configuration.
-> 
-> This change is taken from this Linux kernel implementation:
-> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/usb/dwc3/dwc3-qcom.c?id=a4333c3a6ba9ca9cff50a3c1d1bf193dc5489e1c
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Corrected typo in email id in Signed-off (in v1)
-> - Link to v1: https://lore.kernel.org/u-boot/20250627044304.2223767-1-balaji.selvanathan@oss.qualcomm.com/
-> ---
->   drivers/usb/dwc3/dwc3-generic.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 21452ad1569..4800eb64484 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -460,9 +460,13 @@ static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
->   	setbits_le32(qscratch_base + QSCRATCH_GENERAL_CFG,
->   			  PIPE_UTMI_CLK_DIS);
->   
-> +	udelay(100);
-> +
->   	setbits_le32(qscratch_base + QSCRATCH_GENERAL_CFG,
->   			  PIPE_UTMI_CLK_SEL | PIPE3_PHYSTATUS_SW);
->   
-> +	udelay(100);
-> +
->   	clrbits_le32(qscratch_base + QSCRATCH_GENERAL_CFG,
->   			  PIPE_UTMI_CLK_DIS);
->   }
+Add option to disable help command in size constrained systems to save some
+space.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+ cmd/Kconfig  | 6 ++++++
+ cmd/Makefile | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index f21d27cb27f2..3f4221cb4d02 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -189,6 +189,12 @@ config CMD_FWU_METADATA
+ 	help
+ 	  Command to read the metadata and dump it's contents
+ 
++config CMD_HELP
++	bool "help"
++	default y
++	help
++	  Command to show help information about other commands.
++
+ config CMD_HISTORY
+ 	bool "history"
+ 	depends on CMDLINE_EDITING
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 80cf70b7fe8c..718eff4ed197 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
+ # core command
+ obj-y += boot.o
+ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+-obj-y += help.o
++obj-$(CONFIG_CMD_HELP) += help.o
+ obj-y += panic.o
+ obj-y += version.o
+ 
+-- 
+2.43.0
+
+base-commit: 8c20ef07b8939e5ea703224ad91a8669badaaae5
