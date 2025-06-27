@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D75AC77B7F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 18:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC28C7EE2A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 18:04:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC2FB806D8;
-	Fri, 27 Jun 2025 20:04:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dietpi.com
+	by phobos.denx.de (Postfix) with ESMTP id 320F882DA1;
+	Fri, 27 Jun 2025 20:04:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="UWFyTkNH";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 986FF81F66; Fri, 27 Jun 2025 17:24:01 +0200 (CEST)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
+ id 042C181D5D; Fri, 27 Jun 2025 19:36:09 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AAA880C83
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 17:23:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5353806D8
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:36:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dietpi.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pom.pumba@gmail.com
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-451d7b50815so17008215e9.2
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 08:23:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-b31c84b8052so3147574a12.1
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:36:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1751045759; x=1751650559;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KOObANnivRPJe8TPuHJkdrV4YmVqRZZDc8ieXROKjNI=;
+ b=UWFyTkNHZqPeDNUS8YrhPE3OsJ9vuXRh0YLs9UnBsNz0A/2he7I2bYPzI1fPxaMDUJ
+ l7sn7RWLM0Pk39US3tfIaWfu7RzHCdfHEB1gCzm/EA3zZ2KLAdH9po/usx6UOZJzm8ES
+ yq/cYl61m0uUp7XKFTV3uppkjRBkhcQYwVKOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751037835; x=1751642635;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ecy1lu4HubW4pztC4YMUcoXKTGqeXDuf1wJXlT0GEmc=;
- b=YC5/75hwNjIv0fckzf6tLhjUdlhVBUngYSSR1VjRMb+BFbwXCJE4kNeQiRlwdkn2PS
- x6v7/tBSMQMWu8cMzyVQdxuuiAlFryxnMrPUieuj4JX5U0M4Cik4Fqv7768lmJj53FMm
- hj2uQWEjKBUmYsk3h/6k3J60NH0R491qktcCZqBjTtxi/Vk0kwwauthhMA5oeesCLcLK
- nWiIaubyYNGSK7v9ReYpq8Cok2mkr1w/zBBgTMM/+aauO7kvqMele8Gg8rIjfoDxhxn+
- rYo7qg6e+UFEfkZeVJwanjJHlj87GyJjraEkbjrpE0a9osqwl6UoIHDAk6KJqAXGO8K6
- +m5w==
-X-Gm-Message-State: AOJu0Yx3esXpEg+vM96dvvlppb3UIot4PnryeXVTOlhn+v46CW+gZADG
- 3+uxa/6gdiPOcjQKfnChbez3UpgkDk/V7kOzejX1jKYVJJEFSnSzFJMPaUq9Ug==
-X-Gm-Gg: ASbGncsfqRXAu9lFLC+YbFZllumdZdFjfXXMCd2V2iJ/iL543dZ4ax0RADXUfMYkZpD
- UvKZ8/8JM718uchUQ7cr4r5fgKTxc0n4jixj2i4bnzgh2u4778/gwIUR2HSB+wPUZLH7+FMYsuN
- 0NbhckcfSNHuFj4Tf/8a9S73CcN6ivPwNqRobeANr8EmXwIeE5bIhoX0seWGeJLML1Dh33BiCVN
- P+P5ky4r9Bmwznm1wyI6u2BtElLwdloBVqIUtJZSsk/AD55wDy+wn3hxjF0MhJGicfxJXCRAcrd
- t/oKP2k+nEm36UzqSxzM5kwvd6L2lpCpRTSi/Vf0TzmUPunk3AxdIQBPRn0mS6+Ciu8s9ApXBPV
- plF9RDycc/qJFqQCQ7Y/YS73/siK73l9qI9oxau4o5oJQQLvSnsNV81HGuJ5s70jb8B0Q/oqhpy
- BpmFwIuLDrYklX9t4SHMsp
-X-Google-Smtp-Source: AGHT+IE9LxzyY9S62E0G/Pp6aB3qJbJxHSeI8JRGDoji4mQTIiBG6pGHnTod8Tk3RuZ/S4PpIxJj3A==
-X-Received: by 2002:a05:600c:3b07:b0:444:c28f:e81a with SMTP id
- 5b1f17b1804b1-4538ee6ebd6mr39691755e9.27.1751037835187; 
- Fri, 27 Jun 2025 08:23:55 -0700 (PDT)
-Received: from ?IPV6:2003:e0:6f23:535a:5c41:d08c:1d27:c718?
- (p200300e06f23535a5c41d08c1d27c718.dip0.t-ipconnect.de.
- [2003:e0:6f23:535a:5c41:d08c:1d27:c718])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-453888886ddsm40796235e9.0.2025.06.27.08.23.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Jun 2025 08:23:54 -0700 (PDT)
-Message-ID: <e92a4e72-1f7f-4a38-80df-7df8447a7bef@dietpi.com>
-Date: Fri, 27 Jun 2025 17:23:52 +0200
+ d=1e100.net; s=20230601; t=1751045759; x=1751650559;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KOObANnivRPJe8TPuHJkdrV4YmVqRZZDc8ieXROKjNI=;
+ b=ZuNn1/O63pHkFxq9QuNZStdxZw4v6cBTU08zdsVOEud4ZLc+9jIxMGZaGDZEmFt0Qe
+ XkFV7Gy5q7U49bJ/uFHF5IBnZ9L++MSlim0AUwqB48bISUwIUSO6Wfbc8uCeJ9dwH9za
+ RIccwGDxdJjBKgdXans8wxktdUQ0bIHtd8JeOuYC0LQDYthwnh4lUYovyG//zZv5EKVP
+ p6CwrfcKhYCbft/IQMTIWY8lMLcqgk+orXiBFjqWn1GmAeNs1cllu2Id5zLRZJQwKLkU
+ 8OjIaSreeXSnN5biu00hQ4HzWhKq8U/ABpso8A3Rzc57qalZFvFbc2KAGRg5YQ59TglI
+ 560A==
+X-Gm-Message-State: AOJu0Yw5ATt9cM1WXy+8o0xLhr54Pcbq/CDDgy4cNSNkfXlOBmfVbYlS
+ qkoPYIjTJySjZv7FzYqwVfs4SKLageU4y5fcaQMG17NZb/PvACr9Nnb95xNfIp319Scv/k+y8GE
+ Et5ikkimbzLK+xY8HeYaVRIK6VB+RcQCSvSrp2Oi+xQ==
+X-Gm-Gg: ASbGnctibUJsTra9znCiTviuSbSdcbWTNeu1NrCW3WJg7WGPepR5b7bF1hB5w0pdQrD
+ 9FY/CqoAv205Z0YYZh50hYXlxHfUkpzPDGlJsQJ/looZS4ubCDtPRxmZTN6dEN8fnBMZBaD/d0w
+ 8G9yCx9IC3JUP8ySFaqD1PKtVDZx94Wjxf7FBxLQXNRf8Utf8rmwn0Vg==
+X-Google-Smtp-Source: AGHT+IH4rz/K8cUYPhYl/RzMvaaTuLdk4n9AG+AhvvHOAq+eGH5LHi8csgZMRPEye/iXhLupKDi/ujWk/Bch6vu9yNA=
+X-Received: by 2002:a17:90b:3c03:b0:311:c970:c9ce with SMTP id
+ 98e67ed59e1d1-318c930ff71mr5711021a91.28.1751045758994; Fri, 27 Jun 2025
+ 10:35:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: board: assign up to 3 static Ethernet MAC
- addresses
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <e76dbe98-2fa3-4d1b-a452-aa88a142c5cc@dietpi.com>
- <2beda42f-68c4-4fc3-8b84-ede6e452c4c7@cherry.de>
- <5aeeab0f-cbaa-4b25-9baf-37e2b0e5e9d1@dietpi.com>
- <7ab1deb6-5ab7-4544-805f-f2e1e139d045@cherry.de>
- <647c2f92-344f-4feb-8979-93b1d6574193@dietpi.com>
- <0c822158-11d7-4a1f-93f8-22043c807bd9@cherry.de>
- <3a38f9b3-e8a1-41dc-b770-0af80b8ebc09@dietpi.com>
- <ed094775-23e6-4fb1-9272-540256d46719@cherry.de>
-Content-Language: en-GB, de-DE
-From: MichaIng <micha@dietpi.com>
-In-Reply-To: <ed094775-23e6-4fb1-9272-540256d46719@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250526194811.1179530-1-michael@amarulasolutions.com>
+ <20250526194811.1179530-3-michael@amarulasolutions.com>
+ <CAOMZO5ARdWa2bZrg+0VnndR66yFbmAOMNaMtn6PFS1Y9b1xPOw@mail.gmail.com>
+ <CAOf5uwm5mTn3ac65cZiZedpo3kLQH4H1PEWtYMR+Rp_f8tR9fQ@mail.gmail.com>
+In-Reply-To: <CAOf5uwm5mTn3ac65cZiZedpo3kLQH4H1PEWtYMR+Rp_f8tR9fQ@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 27 Jun 2025 19:35:47 +0200
+X-Gm-Features: Ac12FXwYJc36PAOPavcmMTWKn2x3fbwTidpySRug8lDS5U56Ce7ZahUNVcZKNDc
+Message-ID: <CAOf5uwnjLjd2y_eBjiQkrqwgNMOR-0WjYAvwxP+TY=3cumDqOg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] mtd: nand: Add support for EDO mode 1-5 to IMX6ULL
+ platform
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 27 Jun 2025 20:04:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,30 +95,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Fabio
 
-many thanks for all your feedback and input.
+Are you going to pick up my last series?
 
- > If DM_SEQ_ALIAS is enabled, I believe so.
- > I would imagine people be surprised if the same device operates under 
-two different MAC addresses depending on which SW is running at the 
-moment (U-Boot or Linux for example).
+Michael
 
-So far I only found 
-https://github.com/u-boot/u-boot/blob/master/boot/fdt_support.c#L645-L664, 
-the fdt_fixup_ethernet() function, which, as far as I can see, is called 
-after/with boot* commands. Ah, but if U-Boots device tree is used to 
-boot, then of course it is applied there as well. What I meant is in 
-bootloader stage before that, when it is about looping through boot 
-media, and in case network boot options, searching for/executing 
-boot.scr, in case U-Boot console.
+On Mon, May 26, 2025 at 10:01=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi Fabio
+>
+> On Mon, May 26, 2025 at 9:58=E2=80=AFPM Fabio Estevam <festevam@gmail.com=
+> wrote:
+> >
+> > Hi Michael,
+> >
+> > On Mon, May 26, 2025 at 4:48=E2=80=AFPM Michael Trimarchi
+> > <michael@amarulasolutions.com> wrote:
+> > >
+> > > The clock driver allows to boost the NAND performance
+> > > controller. Make changes to let it use the new clock driver
+> > >
+> > > =3D> time nand read ${loadaddr} kernel
+> > >
+> > > NAND read: device 0 offset 0x500000, size 0x800000
+> > >  8388608 bytes read: OK
+> > >
+> > > time: 0.488 seconds
+> >
+> > Out of curiosity: what was the original read time without the clock
+> > driver being used?
+>
+> The downstream driver I made 2 years ago before this change was around
+> 3/3.5mB/sec, if I remember correctly.
+> One point all the IMX6 platforms can then be migrated but I don't have
+> any board with me.
+>
+> Michael
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
 
-In any case, I will wait for one more opinion/input about this, and are 
-then happy to try implementing a more generic method: E.g. right into 
-the above function, generating and directly applying MAC addresses to 
-aliases which do not have a variable to apply from yet, based on an 
-existing eth0?addr to start with.
 
-Best regards,
 
-Micha
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
