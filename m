@@ -4,68 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 781CCC7EE3A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 10:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D65AFC77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 10:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE8E482EC6;
-	Fri, 27 Jun 2025 12:00:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 407EA82EC6;
+	Fri, 27 Jun 2025 12:03:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E6Dse9//";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E03BxhrK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BAE182E9A; Fri, 27 Jun 2025 12:00:34 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CC7D82E9A
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 12:00:30 +0200 (CEST)
+ id 821DC82E9A; Fri, 27 Jun 2025 12:03:01 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 24F6A82EC6
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 12:02:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55RA0SYC2385089;
- Fri, 27 Jun 2025 05:00:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751018428;
- bh=ap6km2sK3NGS0KsH+YeBf8cpOGnrKjssi9kXUA0ECmY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=E6Dse9//uKaOAqVyV/YsWd8SDECx3l6p50Z02TruPZAoLYWy1BJ/2TyqOo2fNioX4
- fo8r9Op5RJrDW7oB9EJQRdOalah6+8Ua7/5/x+QvWMttHIUlMKJjWO7U+y4NlqmtTE
- TnVh2U68yRrur1kCZm2fQjdfr6kLATd+V+jwbwrc=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55RA0SLi286448
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 27 Jun 2025 05:00:28 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
- Jun 2025 05:00:27 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 27 Jun 2025 05:00:27 -0500
-Received: from [10.24.72.128] (psdkl-workstation0.dhcp.ti.com [10.24.72.128])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 55RA0Oqj2884588; Fri, 27 Jun 2025 05:00:25 -0500
-Message-ID: <814d8034-e81d-475b-acfc-ad31a50c75d2@ti.com>
-Date: Fri, 27 Jun 2025 15:30:24 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ae0d758c3a2so284320566b.2
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 03:02:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751018576; x=1751623376; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7oY6l/FhHOnK+B+coeX603M0ApfncJfG2zROVxiG9wg=;
+ b=E03BxhrKm2Yh29ST2AxlQ46fFoP4XRhgDKtEo0M85lTUubsyVJkcsfHpaL6dv+AJof
+ yodUgDLZXl9z9lIuywABUYiOVnEXZv7Qc7j8mh2HLgFhUYITshy/DqyzWa7yx2UjXnE/
+ E35Csq41zSpYqA3pcXHXZIrnzieo4yCMRp95M6xMa7yziZnfDjw4gWNy+/Q1LUPncrqt
+ F8UonzdAqn6etCThNVdnMjsRqA9lD+dP/sfd2O5z8FxiCrpFTgIijhEYfpG7VI7s9zcM
+ eX/Kl/onXzaRthGM9yAMFDQ0JXjS4Cqx4/NVUeDNrb4zVekuVrYaNlcslMeOwNd6b3K/
+ +SPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751018576; x=1751623376;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7oY6l/FhHOnK+B+coeX603M0ApfncJfG2zROVxiG9wg=;
+ b=hA8wTROoff3/RKB6p7L7zPps2mM+i5D1HvlaIF3ikBd9+RAU2EVmzK75TfAeUDPaP7
+ UXeJdj2XPsHpKZrWDpGg5hs8ZCs/x8dF9rSdoigE7+TELcgIGNLojjlD3rdRg6cG1a09
+ TYBrGQqku/7naFJxiaTLKD2EAZG0+z60gjpuUJMDI8wol/PxnuuN9BI1DADgVFmyl030
+ jF8OV9rv9DncNHQKURCaFr9kXtYqnPvJWMUmwHv0fcjbR5M/79mhmZ29XpMLApvW+VgQ
+ btVjgZR7MGGtOZVKDKvxM5B07DwH20x28iKLfNUtPrOxvB+O0pKPC1JbrEzsTutUwxLq
+ E0wA==
+X-Gm-Message-State: AOJu0YzsShd9iwUNGYRHK9sXlnFlYSSftxhuoaGiVVF+quzEtPQCW9Sa
+ Y6IAXHsdMZFlqyMoe2Px9dmaP9232Ep5sQznBGb5EIW5H0zNwAHUcc37RZ4Z3T/SYxpmdt0bC1h
+ 4g9XcPKbtTyTqyHmUhZt9j7G5pqaPeRo=
+X-Gm-Gg: ASbGncvGQjHFTPE2KmThIBlGHRt/gCUppJhkMFs2vwIpEiE5N0LsVB8TEeQuiWHc0hb
+ 7DHJZhp1ZVU9CjlvoJFuCkfY3q7/ZsCp+jy/ozb4Jno8XQEsAcvvQxrMuhmlg02/FPXP1tgva/A
+ W3fjMQ2PK0I0VUAONpbiVDfUlvGHaPz+muKpnWFbSmM4vpLO4OWLAJsnPkuo94RG4W9XbpZ/CW9
+ ZYmqKhs2O5/SU4=
+X-Google-Smtp-Source: AGHT+IHKqANFtKBwk9PN9eiLJW/sn/06QX17v+uiMTTFcYa1URB1p739QugfnkOu5vJitCBsLGWC+oL2z7j10Hcv78c=
+X-Received: by 2002:a17:907:3f08:b0:ada:6adb:cca with SMTP id
+ a640c23a62f3a-ae34fd3370cmr227288866b.6.1751018576224; Fri, 27 Jun 2025
+ 03:02:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Makefile: Fix of_list_dirs with EXT_DTB
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Udit Kumar <u-kumar1@ti.com>, Andrew Davis <afd@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Neha
- Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
- <u-boot@lists.denx.de>
-References: <20250626-b4-upstream-fix-icssg-fit-v1-1-95eff1c853a4@ti.com>
-Content-Language: en-US
-From: Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <20250626-b4-upstream-fix-icssg-fit-v1-1-95eff1c853a4@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <3f2984f62d6bda6a4a432b51047eddb70e35571f.1751014184.git.michal.simek@amd.com>
+In-Reply-To: <3f2984f62d6bda6a4a432b51047eddb70e35571f.1751014184.git.michal.simek@amd.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 27 Jun 2025 11:02:45 +0100
+X-Gm-Features: Ac12FXxGWaUMc93FU-rPrO91Cxm7y8qiLVunpmwoASbGoU8_VVnN0EEwSCGjgvY
+Message-ID: <CALeDE9ORhMR6Zj=Ps+BBBLax67kLDxFPdWtr_V99Pyy+XhuTKw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] cmd: Introduce CMD_HELP
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,55 +97,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit,
-
-
-On 26/06/25 16:13, Manorit Chawdhry wrote:
-> EXT_DTB overrides the of_list_dirs that is passed to binman during
-> builds. This causes binman to not find the normal DTB paths and instead
-> it just is able to use the path for EXT_DTB only.
-> 
-> Add the default of_list_dirs that is used for normal binman builds to
-> EXT_DTB usecase as well.
-> 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-
-Reviewed-by: Aniket Limaye <a-limaye@ti.com>
+On Fri, 27 Jun 2025 at 10:45, Michal Simek <michal.simek@amd.com> wrote:
+>
+> Add option to disable help command in size constrained systems to save some
+> space.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
 > ---
->   Makefile | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/Makefile b/Makefile
-> index e60bbb01a004c7801034a10e7f3fdd04f92f700d..f2a6fbad6d32c3b68292ff19bda4f4fdb686de63 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1392,17 +1392,17 @@ ifneq ($(EXT_DTB),)
->   ext_dtb_list := $(basename $(notdir $(EXT_DTB)))
->   default_dt := $(firstword $(ext_dtb_list))
->   of_list := "$(ext_dtb_list)"
-> -of_list_dirs := $(dir $(EXT_DTB))
-> +of_list_dirs := $(dir $(EXT_DTB)) $(dt_dir)
->   else
->   of_list := $(CONFIG_OF_LIST)
-> -ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-> -of_list_dirs := $(dt_dir) arch/$(ARCH)/dts
-> -else
->   of_list_dirs := $(dt_dir)
-> -endif
->   default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
->   endif
->   
-> +ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-> +of_list_dirs += arch/$(ARCH)/dts
-> +endif
+>
+>  cmd/Kconfig  | 6 ++++++
+>  cmd/Makefile | 2 +-
+>  2 files changed, 7 insertions(+), 1 deletion(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index f21d27cb27f2..3f4221cb4d02 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -189,6 +189,12 @@ config CMD_FWU_METADATA
+>         help
+>           Command to read the metadata and dump it's contents
+>
+> +config CMD_HELP
+> +       bool "help"
+> +       default y
+
+Maybe "default y if CMDLINE" as it also doesn't make sense if there's
+no cmdline enabled.
+
+> +       help
+> +         Command to show help information about other commands.
 > +
->   binman_dtb := $(shell echo $(CONFIG_BINMAN_DTB))
->   ifeq ($(strip $(binman_dtb)),)
->   ifeq ($(CONFIG_OF_EMBED),y)
-> 
-> ---
-> base-commit: 40e083353a1610276f12fdbe613bf12004452656
-> change-id: 20250626-b4-upstream-fix-icssg-fit-b6a42952daea
-> 
-> Best regards,
+>  config CMD_HISTORY
+>         bool "history"
+>         depends on CMDLINE_EDITING
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 80cf70b7fe8c..718eff4ed197 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
+>  # core command
+>  obj-y += boot.o
+>  obj-$(CONFIG_CMD_BOOTM) += bootm.o
+> -obj-y += help.o
+> +obj-$(CONFIG_CMD_HELP) += help.o
+>  obj-y += panic.o
+>  obj-y += version.o
+>
+> --
+> 2.43.0
+>
+> base-commit: 8c20ef07b8939e5ea703224ad91a8669badaaae5
