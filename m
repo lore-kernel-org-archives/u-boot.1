@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E67C7EE31
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 10:51:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C15AFC77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 10:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABEFB82EA5;
+	by phobos.denx.de (Postfix) with ESMTP id F299282F5D;
 	Fri, 27 Jun 2025 12:51:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Vzrx6Xis";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VssDtDG4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4C7B82E9A; Fri, 27 Jun 2025 11:22:45 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 110E582E35; Fri, 27 Jun 2025 11:23:00 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61C9282E35
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 11:22:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A30F182E9A
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 11:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=g-praveen@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55R9MVSs2725085;
- Fri, 27 Jun 2025 04:22:31 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55R9MZbK2373346;
+ Fri, 27 Jun 2025 04:22:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751016151;
- bh=97b/bquYOahVHmbvFer28Q/FsQBVI97P5latNjMyl2Y=;
- h=From:To:CC:Subject:Date;
- b=Vzrx6Xis1Lf5tyvAtgrn5ooDSYejVB478QrvJsxby3GX9MZa7lzE3tKBAbsMKV9n4
- K0YzNqqV3yhH1MEVYtghYYFaq16bEVkEar9REneUKd4kpD7aWwESabVEH3tVUf1lih
- QENhjuqRWFmBkfQHxZbWmRI5QEhQv/F77UJgH0CI=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55R9MUVa2836451
+ s=ti-com-17Q1; t=1751016155;
+ bh=7pwzjtCNnMkzDEofUfyAmwTh3WxNA0gNdZ4J78Xmhuw=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=VssDtDG40yvsoILqg+bta9xIcTeWh/I+MDHBlM0ZZBqI6veLTv34zS39cOdm+XFph
+ zu0++SdTl37/IjWBxWe/eC+tkVekzWBLSVPt5E92U3WwLSh197XB2wUqzRDTH5f9aX
+ 3Jk6GiW3xiZlt1UIJR7tvoAJ14cbqrPXtzR+JIi4=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55R9MZEd3106383
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 27 Jun 2025 04:22:30 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 27 Jun 2025 04:22:35 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
- Jun 2025 04:22:30 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Jun 2025 04:22:34 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 27 Jun 2025 04:22:30 -0500
+ Frontend Transport; Fri, 27 Jun 2025 04:22:34 -0500
 Received: from a0507176-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0507176-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.72.138])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55R9MQWs2835580;
- Fri, 27 Jun 2025 04:22:27 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55R9MQWt2835580;
+ Fri, 27 Jun 2025 04:22:31 -0500
 From: Gokul <g-praveen@ti.com>
 To: <trini@konsulko.com>, <m-chawdhry@ti.com>, <casey.connolly@linaro.org>,
  <tien.fong.chee@altera.com>, <sjg@chromium.org>,
  <patrick.rudolph@9elements.com>
 CC: <1425075683@qq.com>, <Oliver.Gaskell@analog.com>, <u-boot@lists.denx.de>, 
  Gokul Praveen <g-praveen@ti.com>
-Subject: [PATCH 0/1] configs: KASLR OPTEE RNG support
-Date: Fri, 27 Jun 2025 14:52:23 +0530
-Message-ID: <20250627092224.36325-1-g-praveen@ti.com>
+Subject: [PATCH 1/1] configs: KASLR OPTEE RNG support for K3 devices
+Date: Fri, 27 Jun 2025 14:52:24 +0530
+Message-ID: <20250627092224.36325-2-g-praveen@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250627092224.36325-1-g-praveen@ti.com>
+References: <20250627092224.36325-1-g-praveen@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,28 +85,28 @@ X-Virus-Status: Clean
 
 From: Gokul Praveen <g-praveen@ti.com>
 
-KASLR, or Kernel Address Space Layout Randomization, is a security 
-feature in the Linux kernel that randomizes the memory location 
-where the kernel is loaded during boot.
+Add KASLR OPTEE RNG support across K3 devices by enabling the required
+configs.
 
-OP-TEE RNG is a Random Number Generator (RNG) component within the 
-Open Portable Trusted Execution Environment (OP-TEE) which provides 
-a random number to U-BOOT and U-BOOT provides this random number 
-as seed value to the LINUX kernel for KASLR.
-
-To support this feature,the required configs has been enabled 
-across K3 devices.
-
-Boot logs Link :
-
-https://gist.github.com/GOKU-THUG/44aa8c0962438c12ffc55e6ed67742e5
-
-Gokul Praveen (1):
-  PENDING: configs: KASLR OPTEE RNG support for K3 devices
-
+Signed-off-by: Gokul Praveen <g-praveen@ti.com>
+---
  arch/arm/Kconfig | 3 +++
  1 file changed, 3 insertions(+)
 
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 7282c4123b0..cd27e5a5422 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -805,6 +805,9 @@ config ARCH_K3
+ 	select REGEX
+ 	select FIT_SIGNATURE if ARM64
+ 	imply TI_SECURE_DEVICE
++	imply DM_RNG
++	imply TEE
++	imply OPTEE
+ 
+ config ARCH_OMAP2PLUS
+ 	bool "TI OMAP2+"
 -- 
 2.34.1
 
