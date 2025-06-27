@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A56C7EE31
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 08:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41D14C7EE31
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 08:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32B6382F03;
-	Fri, 27 Jun 2025 10:09:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A2BD682E35;
+	Fri, 27 Jun 2025 10:13:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kBvCeiz9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZL8nMtgI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D9182B34; Fri, 27 Jun 2025 09:26:32 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id F0BC382E9A; Fri, 27 Jun 2025 10:13:27 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F87682E35
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 09:26:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9645282E27
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:13:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liujianfeng1994@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-b34b770868dso240395a12.2
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 00:26:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-70e3c6b88dbso14630707b3.0
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 01:13:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751009189; x=1751613989; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AEjslB02Lq1jKLNExD8eobXcpyPRED0fiHM6wK35LqA=;
- b=kBvCeiz91112uGFQSyOkXTKzHXowApHp9BR3OWp4+OcvB3nxu7FlMq93vvNwRXZH3u
- AxrHVkJYl9QqpCIpN4r7JolGwTOFXTboIdYRXfPed6x/Tx7y4b4edDQirK3qNTkbpjjb
- zKxgn4Gx13UNazxP+v0twvcvrj/ywYt7mDuWYQk1N168aG4IEZS7YZJpLtAacif8KTi9
- x5Za18kAKDOLQCrWZkgrz/eOKhdWlYE4SSOK2vMgfCxSsaYcud7oLUFu6Rk7YMRrCCfd
- b5auF6XZMu4+r4pp8pnn+T8vFP3cx5vAHPvi17Vg/4I5bt3K6svMnSo75XVmmRAoOvz6
- nKoA==
+ d=linaro.org; s=google; t=1751011991; x=1751616791; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7D1yIww65ZaWsuePei/l+uDCjjs3cL4VN9W0UN15kSw=;
+ b=ZL8nMtgI3UKT2sBvx0gxBGw83ujQlFTc2RN67prB13/eUfuNCNk7kqXVjDqVun2phb
+ 3mrnsWY+o9wCt/A2oY1MyK2DJhs4xYRFgykyre+AwvJ26Mp2h4omlr7VqA9J/2+IX57x
+ UqqiP3muiVTNsQ0zXkD2+cEEhFUjHrzPlOpRc/Ggk/l4R1dFltrb1mt5txVJlRYBPcF1
+ QT32q2FzyYMH5L2vOcWI6pu14XjJWV6EoYNaYVMvVy4BXJ1iW7FIvQfDXPDG0drd0Ixc
+ pRCNM8bUQiyn1gzsVx/xL8RYXl7n4HMVBl+QAUEOE7T4SAVTQfmS0RKSxEx7ukPMmNwT
+ HBig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751009189; x=1751613989;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AEjslB02Lq1jKLNExD8eobXcpyPRED0fiHM6wK35LqA=;
- b=q1CgF2J7Y7flG2Lu3mdLHciVym9Iz//rmijhODOg6Db0BEpHtvBHu54UjL4OmkzIFO
- AcdrnpV7oJmrxKv5Q5r+2z7DhYwJpwdMCoSFLqAGW56yFNGxS5JZHxMcSf9CI1yi2JO6
- F1Twqizix/RJ1z38LvTgIxHFArEvRgcqARbjzfDdV8shdevGYDF7nX7IUPChzb3Vg9Sx
- 4OoPEFDin81WjOc3HOHB9SgxAfgX5glJvxYG4UKEGSC0OQdY5j9W/1b+Ar+dwHYgWfNu
- c+bUl4QHfZ2jVMgIwbg4AxZ+59rJMjdg/6fnQFFCxOyy+iZjMhyvlNPpZ+aEHPE9Ekhl
- psXA==
+ d=1e100.net; s=20230601; t=1751011991; x=1751616791;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7D1yIww65ZaWsuePei/l+uDCjjs3cL4VN9W0UN15kSw=;
+ b=sk0r9I/pu6ViW2EzSYeUJy+6RnVWmRMLHJlq9ZqoiJeoiwEMa3+3QDy+TOLvjpDyAp
+ HTaH3I9VwSQz4QMQSxQuvO1sZDmQPoPpibwgGVDOQ5jHjtEC5i1OUPzMuD2hvgfLmFu9
+ XB0wH2k+U6MLXqaiEzaQ/kNn3qh/eeC0z99GTYqudsJuJaBym1dtWdFSFLQYSScUlOd4
+ nfMexdczeqeeU/JFoVwRqOZ/0lNvh/lKScRZd0a5PDME5I6VojuI/UNymDr82A7yB2mW
+ Cz3flS0N0uYw9jONZIiFHuFdTCnNAGAD0olb8XHleqdLsaHwi+ja9w9c3VIVRKHHRldl
+ 9ZDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBTVEiY2ZNAg+VIjQ8zZ3U+/CFmQj0fTXuQYo+YSzGjACuhv39OJpoFjweSb6DIBp+8TV72mA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2FuJ/+n1Q26NVJUak83fSaPl6tXy6BLyNzqkokGE0fu0xV0ED
- 0chy6dpnRrjqK/fQobIIgzVhe/i5Hbp+kdmE4PenDxYSlF30eA7nJ1yA
-X-Gm-Gg: ASbGncuyMTfVHgiYXZ9ZX6C+2m3xPzjt/IWR+Zg+qNFauf+frCYs4Q0COt/ePRnD1pM
- 3sm4gEQINV6CORuHzAT0tH453x7lMZpzhJNDmRx0taWkcAz6zcdN7gRWIskHnngXPjBGPatEXXy
- gb1klNizw9n+EsrDB2WGvsPWDFzdThUS2uB3dZ5dZiZ7wxXpfma+MRH++JHsmmrAWbiqHCPwbYC
- rnxyuY635NrxmDvXRzSgXGtcbmqCZj2xoXZqQ9968dZh+D6xF/OttqjuocAZGpRqV/8UDyUM+RX
- kIrKIRaiKH5Yr8y2EP1k8ZavZH8PB3q9MRzITZ2+XevTDx4T1Hy+tvE24/a1wQc=
-X-Google-Smtp-Source: AGHT+IG+RnHNPyyxRI2ta1k00cUlKJ8zqUCLTIRfzLkiY2/k7U8EPaRAwrbcz8d2LvyGBNXzkImCeQ==
-X-Received: by 2002:a05:6a21:3296:b0:1ee:ced0:f0a6 with SMTP id
- adf61e73a8af0-220a169b988mr1195646637.8.1751009188726; 
- Fri, 27 Jun 2025 00:26:28 -0700 (PDT)
-Received: from rock-5b.. ([45.32.55.39]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74af55c6e62sm1489575b3a.120.2025.06.27.00.26.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 00:26:28 -0700 (PDT)
-From: Jianfeng Liu <liujianfeng1994@gmail.com>
-To: jonas@kwiboo.se
-Cc: Oliver.Gaskell@analog.com, heiko@sntech.de, igor.opaniuk@gmail.com,
- ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
- kever.yang@rock-chips.com, liujianfeng1994@gmail.com, malysagreg@gmail.com,
- mkorpershoek@kernel.org, nathan.morrison@timesys.com, pbrobinson@gmail.com,
- philipp.tomsich@theobroma-systems.com, philipp.tomsich@vrull.eu,
- quentin.schulz@cherry.de, robert.marko@sartura.hr, seb-dev@mail.de,
- sebastian.reichel@collabora.com, sjg@chromium.org, sumit.garg@kernel.org,
- trini@konsulko.com, u-boot@lists.denx.de, xuhui.lin@rock-chips.com
-Subject: Re: [PATCH] board: rockchip: add ArmSoM Sige5 RK3576 board
-Date: Fri, 27 Jun 2025 15:26:07 +0800
-Message-ID: <20250627072607.964020-1-liujianfeng1994@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <07e80d9e-c91b-4b33-ab12-bcc5aa0bf3c7@kwiboo.se>
-References: <07e80d9e-c91b-4b33-ab12-bcc5aa0bf3c7@kwiboo.se>
+ AJvYcCVouXLay/7tGtVek7JPLQqHZCBf5+DOrGN1QB+VVA2/lbUv4zyO0u0nRE+TSW4UjsrSG1XStEw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHOBv6GDS4xiviLLMMSXdxKbQ0DbQBUq1i7z/OqpIcJSIfdAk8
+ LpuGPJSSAX/0IFBsGwag8150wPonrNyQGO79VcPMNrUr7Z0rYGSgDS5K0Tch7MjrN8F7BvNFWLb
+ L4wPzthMDi6kPhGPowJqL/mqWMIBsMtmtL//l4yQRgw==
+X-Gm-Gg: ASbGnctnkYI2A9l/j06hbICGLbGgOABOLPVYfXMPym6/CAGkXaKtTkNfdcV6VUADODg
+ EXDBHgy9oORnBVtEJfcf4VVLC6PB5l6d1oSAUD/0Pa4uCw6ppNgvtoQfWzCrqQ6tEHi2G/4azAF
+ sTUR8ChBtRMGJ1B6v/gWaRpNhsbSr26RseVYeFh7A0Oeetg7OOgwb15WM=
+X-Google-Smtp-Source: AGHT+IFOZnLBbeZKZhCD6TWPGWnNk4pl+J7dK+rI3mQO/tjNSPhtXIrr6p+FVB+67mGGRjwGDSeiaSihsZ6rUcKasGo=
+X-Received: by 2002:a05:690c:1e:b0:70f:6ec6:62b2 with SMTP id
+ 00721157ae682-71517150f8emr34319577b3.8.1751011991452; Fri, 27 Jun 2025
+ 01:13:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 27 Jun 2025 10:09:01 +0200
+References: <20250626-ufetch_fix-v1-1-025afdb85dc2@linaro.org>
+In-Reply-To: <20250626-ufetch_fix-v1-1-025afdb85dc2@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 27 Jun 2025 11:12:35 +0300
+X-Gm-Features: Ac12FXyUEVygyn1Fq0r4FE8G8GUn7H1TohLwk363N4jewnVSKk1RKKI59mbky5c
+Message-ID: <CAC_iWjK2-8BcnES55_8hncqyfLjVvzk_O0UF_U5RwphBcUUBww@mail.gmail.com>
+Subject: Re: [PATCH] cmd: ufetch: Initialise size before first use
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,16 +93,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
-
-On Fri, 27 Jun 2025 08:09:13 +0200, Jonas Karlman wrote:
->Please review my series that already adds the Sige5 board, see [1].
+On Thu, 26 Jun 2025 at 17:13, Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
 >
->[1] https://lore.kernel.org/all/20250422211216.3727559-1-jonas@kwiboo.se/
+> The local variable size is not assigned to before it is used
+> for the first time. Correct this.
+>
+> This issue was found by Smatch.
+>
+> Fixes: 86d462c05d57 (cmd: add a fetch utility)
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
 
-I did not notice this series. I will test it. FYI now mainline u-boot can
-not boot with sd card if you have a blank emmc. RK3576 need a new
-boot_merger to generate idbloader.img.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Best regards,
-Jianfeng
+>  cmd/ufetch.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> index 46bd16824e6..bc5db08eee1 100644
+> --- a/cmd/ufetch.c
+> +++ b/cmd/ufetch.c
+> @@ -93,7 +93,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+>         const char *model, *compatible;
+>         char *ipaddr;
+>         int n_cmds, n_cpus = 0, compatlen;
+> -       size_t size;
+> +       size_t size = 0;
+>         ofnode np;
+>         bool skip_ascii = false;
+>
+>
+> ---
+> base-commit: 903eb123236ccbd8ef05d43507a2a910b785bd56
+> change-id: 20250626-ufetch_fix-54b741710142
+>
+> Best regards,
+> --
+> Andrew Goodbody <andrew.goodbody@linaro.org>
+>
