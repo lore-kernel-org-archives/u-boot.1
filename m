@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C83CC77B7F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 09:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED857C77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 09:37:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8302982E52;
-	Fri, 27 Jun 2025 11:37:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D97F682F46;
+	Fri, 27 Jun 2025 11:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ofeJALmn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Af9VvPCu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 797A082E35; Fri, 27 Jun 2025 11:37:33 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 5474982F4E; Fri, 27 Jun 2025 11:37:40 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21BA282E35
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 11:37:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 082C182F46
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 11:37:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-45363645a8eso13650315e9.1
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 02:37:29 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4535fbe0299so11761925e9.3
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 02:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751017048; x=1751621848; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751017049; x=1751621849; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=AZQh3AqTbRXAO0xp+S5TWiIsaPdsE67scTPNLXXSDRI=;
- b=ofeJALmn/o8uMKSr0CoH8ulMwrylpW6lcsqpuVNNvFZ+XabWLqLy/Vvy9ponJ5XKDe
- vqmrMHfSWsSQR7FqehDkiZUa+/w8ycMxEh/OT+E7uoVVBiYsTsL1VCK0kUPHzTniVVhD
- 2J+7GMam41wtbH85qrzcOGwIKjs5W4CHLa1+5XBS0nTR5mbOmWFMk1HRAjzoKwMpn6ZU
- yTZCBDfCQ8aN4IdiPmZ+DqUthEyPK2b+E8MIHrPUBUGaijiU7q+q8oRvw4974FcanTdp
- xL/5ZyIFDuhUrIB2NCdqXrssGXtQilxHnjv1hBcDefe+Webj3l90ZngtJjvdnq6USez2
- LOgg==
+ :reply-to; bh=VQxNtThQ/+i1BwUPG4tjRBDksd07BiXbMIY7+cxIGiU=;
+ b=Af9VvPCuN2tZmA2mtnsLQB0cxagowGjskigGwrSmn6nx+RjXaj3BXqtpbJIClDy5Wy
+ IuZrbQIL8LuBM0dLONMTdgBG62uvTXl1hfGCYWHTKHUP3/JRL5hVVCX3lqix8JLHb+6w
+ poPIjMEfd/aGbNFHcAmR6jLoX51+i9WcBsl12mmXPz0nOuZm7rv9LCiyDKJOTDYahNxq
+ NVi/uVnSYaaAE5XKVZMsrZgi7ILB2aLxfjZqY3n8VSRRF388biU5x2jJRlJfZtXOP1no
+ ogjD4eEEpNoC1YXWQ4+Vrf4tt/JbZ4o2Y0J259SEI2MmLXCnEK+nWmEaFbuf/d6o/VaW
+ Q9ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751017048; x=1751621848;
+ d=1e100.net; s=20230601; t=1751017049; x=1751621849;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AZQh3AqTbRXAO0xp+S5TWiIsaPdsE67scTPNLXXSDRI=;
- b=MTlM/Q+usvnWjFJ6Jh//tAvMdNWOHucwiZoaHWOPhKAaln4rdl+bOVtmbTbWLpB++M
- uHi/rnrh0d7lin6wUubtgeWRaVlvNwn7PrMQ0E/M4o/3Ih50B1lbm2dcVLjliORtJWHd
- k0biP+USTA+KcakiI3dZgVuh4mniIrbZnxaY15l2KKNo1ZV8zMpRczNCM+DEGsXUgdJw
- /Kjw+Ydmx27IhZf25iHgNnXfw8tZl8VmUK/9iJt2VCvk9AHCOaewZsob+q5QYouBRz8u
- ZqTs2peoKHX9fC2akQPgZBN8F1MGj0BfaMCrkLTUFrs6TyyrIzd/sOt7/3dcpJh2Adp2
- r+uw==
-X-Gm-Message-State: AOJu0Yx25d2+MtZBhtO6frLlEsom7uWAuLzxlmlq/pOVMX56Hgj4GoH5
- GqgqWTGoZBnkln+INr4G+bJfUJbxIFou5tgEb+OR/2jqFJKPG25u0wJPasOA2/HNmN5q79KnldS
- sc6l3VLwIvw==
-X-Gm-Gg: ASbGnct9/8rm4tVlGyEDlzBwces1dqlHPOQ2UoSflMYIqsjYQ51URiDSLSvpz2XtOV2
- Q87HruVVlU/ZbCByQzVh1acudjcU235plPpcnO0YnPKBVEicPQekurGFvg9VGVPxXGdgwQEJIDY
- zDv0nVL2fSlBBxVYOvUOnvtRDIeijfqAPgvp3Vy6VcE81qQhLgqAetyoUyHwCn5tBisX31VCmlD
- Bnx8HshuU2tgdEdspoaMJVEGHcpgUDepWRay5Rw/68i+ND0luNGz25AHNalxLXi+KYtyeW/3NZx
- gT7nVPLdjZbuG9xVbm8jwBvOnqD8+cPKafkJeaMZNk01TlqnKYrBjibNeyLa/M5Nxy4T8RB2cwq
- E1CHtlJgidRhQiPS0jIQ2bIS4
-X-Google-Smtp-Source: AGHT+IGJZi1a257BhbwlaU1OhsNIkwy+17DFeXvM8GbcwX2ZKsFP93gVAE67kYkpLGx90iEljP73JA==
-X-Received: by 2002:a05:600c:1549:b0:450:d019:263 with SMTP id
- 5b1f17b1804b1-4538ee5d63emr29783845e9.18.1751017048537; 
- Fri, 27 Jun 2025 02:37:28 -0700 (PDT)
+ bh=VQxNtThQ/+i1BwUPG4tjRBDksd07BiXbMIY7+cxIGiU=;
+ b=hKQeIqzB4spZIpiqGA4r7kT4CGx1xIaCEyRGh4ozbWZ9CSZfNuZuUSLEuu2Fogz8J+
+ xylq504I/HYY8B/0oXEe4CEpUkBCyOEs5etJXwx8PriIVNXcvaRu+3PGSqF3KZVMP/8H
+ xMy+AB71/o5y2ZV944upCm1wNuC85dUuvUlp8OxrPjHrSGzdfYlWY9XLWgbSdQvy7mRA
+ 5wC2l23Huik6t16+YOzgDf+W55pLXzeiLvjKyBLpMBREgf4Zlv5oYNQL1XfvvLBR4wx5
+ yy5ZTSUZcwUE+CMHzrje7qoRZRis20DwFsWe+BEcm0xcrprpju1Tw+u6H7JuCsaARQZ5
+ z+sA==
+X-Gm-Message-State: AOJu0Yz+WgIF+r51tlr8GiYRUwWYR39ZGsufU2xBEjV5CszHKeg+1Awd
+ QOPLAcgcOwd3aKLWq7fDnJTM78HTujnlbEcM6iVd8rSkGThOzaTbMcWg3Ew3nR+reo/wdWH7zvi
+ k56UUH+P7tw==
+X-Gm-Gg: ASbGnctlBvfjEScw7jc4ATXx6RXqxWeR2mIyaqnVYspV1Fnpy/UUCBIFeMXaJZARCWv
+ qsn1Puhru9UA0UCmfoek8LoEmM7lWkf1CFTN8dIqSho2sDdKrUowVZMJ15ASejzBCaUVxn51pYa
+ rCy8sdxJddrhtTUISlu3NL/eYSsjQBBt5e+fKlzHwpmZ4C9QIVJcWigW28hocTlDR+gsSk4sL3+
+ miWV2i54QwKTIl9BSVdW5C5o6FsfTn4nYoM6GWd6cbJZzzktL3B1kXaHROkbuIkcHT+9zQa/HjD
+ bUPsn+8KATqDmpGfkPzoiMya3MXLE7mqnIT5tG5VIYhx0FRKh6HmShZDIii/UYmhiBA/F88lmcW
+ 8na05G94EiPufULSIPCQmBsgg
+X-Google-Smtp-Source: AGHT+IEYiR9VYAjwqKUnHBrT8Ymvjh1TIY/iN+qLPQhGGksOgsS7UbH/cEJKnQM5yHl82TY3JgxQ7g==
+X-Received: by 2002:a05:6000:248a:b0:3a4:c9d4:2fb2 with SMTP id
+ ffacd0b85a97d-3a8ff149554mr2071877f8f.46.1751017049359; 
+ Fri, 27 Jun 2025 02:37:29 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:ee3:2301:c61f:677:c14a:b7e3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a88c7e9d1csm2234958f8f.13.2025.06.27.02.37.27
+ ffacd0b85a97d-3a88c7e9d1csm2234958f8f.13.2025.06.27.02.37.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 02:37:27 -0700 (PDT)
+ Fri, 27 Jun 2025 02:37:28 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 27 Jun 2025 10:37:26 +0100
-Subject: [PATCH v2 1/2] cmd: tpm: Fix attempt to return value not in enum
+Date: Fri, 27 Jun 2025 10:37:27 +0100
+Subject: [PATCH v2 2/2] tpm: Make use of TPM2_ALG_INVAL from enum
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250625-tpm_enum-v2-1-ea3f84f6b639@linaro.org>
+Message-Id: <20250625-tpm_enum-v2-2-ea3f84f6b639@linaro.org>
 References: <20250625-tpm_enum-v2-0-ea3f84f6b639@linaro.org>
 In-Reply-To: <20250625-tpm_enum-v2-0-ea3f84f6b639@linaro.org>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -101,69 +101,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function tpm2_name_to_algorithm is defined as returning an
-enum for the algorithm specified but it also attempts to return
-an error on failure, but that error is not included in the enum.
-Add the error to the enum so that it can be returned.
-
-This issue was reported by Smatch.
+Now that the enum includes TPM2_ALG_INVAL, use that name in the
+code.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- cmd/tpm-v1.c                 | 1 +
- cmd/tpm_test.c               | 1 +
- drivers/tpm/sandbox_common.c | 1 +
- include/tpm-v2.h             | 1 +
- 4 files changed, 4 insertions(+)
+ cmd/tpm-v2.c | 6 +++---
+ lib/tpm-v2.c | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/cmd/tpm-v1.c b/cmd/tpm-v1.c
-index 6e019d1c729..25402f7543b 100644
---- a/cmd/tpm-v1.c
-+++ b/cmd/tpm-v1.c
-@@ -8,6 +8,7 @@
- #include <malloc.h>
- #include <vsprintf.h>
- #include <asm/unaligned.h>
-+#include <linux/errno.h>
- #include <tpm-common.h>
- #include <tpm-v1.h>
- #include "tpm-user-utils.h"
-diff --git a/cmd/tpm_test.c b/cmd/tpm_test.c
-index af83d78c3fe..1d9644d5aae 100644
---- a/cmd/tpm_test.c
-+++ b/cmd/tpm_test.c
-@@ -7,6 +7,7 @@
- #include <cpu_func.h>
- #include <log.h>
- #include <time.h>
-+#include <linux/errno.h>
- #include <tpm-v1.h>
- #include <linux/printk.h>
- #include "tpm-user-utils.h"
-diff --git a/drivers/tpm/sandbox_common.c b/drivers/tpm/sandbox_common.c
-index 596e0156389..4bc003a2c09 100644
---- a/drivers/tpm/sandbox_common.c
-+++ b/drivers/tpm/sandbox_common.c
-@@ -7,6 +7,7 @@
+diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+index a62862e94f9..346e21d27bb 100644
+--- a/cmd/tpm-v2.c
++++ b/cmd/tpm-v2.c
+@@ -113,7 +113,7 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_USAGE;
+ 	if (argc == 4) {
+ 		algo = tpm2_name_to_algorithm(argv[3]);
+-		if (algo < 0)
++		if (algo == TPM2_ALG_INVAL)
+ 			return CMD_RET_FAILURE;
+ 	}
+ 	algo_len = tpm2_algorithm_to_len(algo);
+@@ -157,7 +157,7 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_USAGE;
+ 	if (argc == 4) {
+ 		algo = tpm2_name_to_algorithm(argv[3]);
+-		if (algo < 0)
++		if (algo == TPM2_ALG_INVAL)
+ 			return CMD_RET_FAILURE;
+ 	}
+ 	algo_len = tpm2_algorithm_to_len(algo);
+@@ -288,7 +288,7 @@ static int do_tpm2_pcrallocate(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_USAGE;
  
- #define LOG_CATEGORY	UCLASS_TPM
+ 	algo = tpm2_name_to_algorithm(argv[1]);
+-	if (algo == -EINVAL)
++	if (algo == TPM2_ALG_INVAL)
+ 		return CMD_RET_USAGE;
  
-+#include <linux/errno.h>
- #include <tpm-v1.h>
- #include <tpm-v2.h>
- #include <asm/unaligned.h>
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index ece422df0c7..6c516dd3c9b 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -266,6 +266,7 @@ enum tpm2_return_codes {
-  * TPM2 algorithms.
-  */
- enum tpm2_algorithms {
-+	TPM2_ALG_INVAL		= -EINVAL,
- 	TPM2_ALG_SHA1		= 0x04,
- 	TPM2_ALG_XOR		= 0x0A,
- 	TPM2_ALG_SHA256		= 0x0B,
+ 	ret = get_tpm(&dev);
+diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+index 9ca7933c094..5b21c57ae42 100644
+--- a/lib/tpm-v2.c
++++ b/lib/tpm-v2.c
+@@ -1141,7 +1141,7 @@ enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
+ 	}
+ 	printf("%s: unsupported algorithm %s\n", __func__, name);
+ 
+-	return -EINVAL;
++	return TPM2_ALG_INVAL;
+ }
+ 
+ const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
 
 -- 
 2.39.5
