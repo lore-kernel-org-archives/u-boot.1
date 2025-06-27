@@ -4,42 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7241DC7EE2A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 19:16:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A868CC77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 20:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF8FF81D5D;
-	Fri, 27 Jun 2025 21:16:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id D3E98806D8;
+	Fri, 27 Jun 2025 22:00:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0580682B6B; Fri, 27 Jun 2025 21:16:03 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F883806D8
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 21:15:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [216.234.200.144])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 9F7D1B4D0305;
- Fri, 27 Jun 2025 21:15:46 +0200 (CEST)
-Message-ID: <fa087253-3804-4db7-9b4a-49b9a51e4968@freeshell.de>
-Date: Fri, 27 Jun 2025 12:15:44 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wi0TojIB";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BC0FE8006D; Fri, 27 Jun 2025 22:00:24 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 68ADE806D8
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 22:00:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2db2f23f174so1668272fac.2
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 13:00:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1751054419; x=1751659219; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fql1Nwfk+y1pprWPP+H5Ev6C87t04J5xsfAJLv9Lv3E=;
+ b=Wi0TojIBm3i+lS+auUfa3BGEfThTjiDJFbDGRk4C4k2+zQxCKIxhXSATqE8rAu00kB
+ vn6Ga48HLuWfKFqkok2mY0Um8/nO//YOWk2xlj7E2ykqFyUelSAVzIOj/EZn2FpFL+Up
+ iedcSGrK+UxG4ubWxNC8hY1OO6Z7Z1OFYjUlY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751054419; x=1751659219;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fql1Nwfk+y1pprWPP+H5Ev6C87t04J5xsfAJLv9Lv3E=;
+ b=FbkRnO2rpputFP6/RTh+VWtjaSjgUOOSUps4f/4OmUPGLyq9mIbqSGFOIQN3oyC7E4
+ DmBWFGr3t6KPNue4GHbRgCi+MEbe+iYdqMGgz0qF5u2InAvvkuiB5Z1LVLth3W+AYoAn
+ MfkVYdo9wzU/CjhFwQm1lK5o73QMb8kGIzVX6hrnx6g9QtYnXcyAQJzNnI2kgxoImiij
+ aao7I47Eww6joifbwfSvIzd34Po6GdHV0At1iVSQP4HQpTKfZZ5P1vKHz8HFIPe7/E7d
+ s8Q/rmSpLwPSHt6wtjIah8IflpvpKkZUvkAErLrWRcUC4RCJxQuopgNjX57gbYuwk2I3
+ 9C6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXNSMPrVK0noqCywoSJug++z+rq2YMcWuV37ax0300f2ZfwrkscMnACEn5UaHTXDCHKz3MS0Po=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDWNRzYVGbTu0d+dRwmL3sB255gtknf1P4nJyjR1My4nOD8qS/
+ DB/9pY2EC/ZJ/V+AO1zohPfVKPxVUL5ryzCMnLCxQM0y/VpPmAZfss/q1qziggbx0Hw=
+X-Gm-Gg: ASbGnct61eMXdIP1FDZruCoUALX+CuyqWNZ8W9U6+JYjnzMMH30AldysfwsAyNNLkf9
+ oabxJx8ea5LMsnxsl1sygC4Rxd8jJGdDxRi2nMG4UlAy7sDSzx0Sy6prx2Bz7nMNDa2J+oWQiwY
+ GwITGjKd3OWWAS/SAc79SPPqzrtivPoGK5h0ITZIw6U67+sYmSskHNWgCpc7rpRGTImS5N+BYVB
+ Ok1C0hDYp/2KADiVjjLb6eSsK9r5F+pxC1OSXcnS3ZMUlvrdSajJ3HL9flyiayR+Ewm5MlSY1rO
+ Hn+uVn4fmcSj26v1blYMLCpIqaDfeAmT8XOYBRtNElNH2qWL3MMVDsW/5eWOPDqFIisxUxTEeAX
+ 44ikz4Vzs5zXXGkNZfLyQ7PKEM/yvqMeCRA==
+X-Google-Smtp-Source: AGHT+IF4w34J4V1PpMx1SYPTDeiWD5VtLa/zqQ7yIIimkTMrp0hyGuvJ7jj6hMIJ9qtLxUPIaKHzYg==
+X-Received: by 2002:a05:6870:a448:b0:297:24ad:402f with SMTP id
+ 586e51a60fabf-2efed4b9862mr3105483fac.12.1751054418893; 
+ Fri, 27 Jun 2025 13:00:18 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2efd4ea5a35sm1039324fac.2.2025.06.27.13.00.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Jun 2025 13:00:18 -0700 (PDT)
+Date: Fri, 27 Jun 2025 14:00:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Yannic Moog <y.moog@phytec.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de, Bryan Brattlof <bb@ti.com>
+Subject: Re: [PATCH v2] binman: migrate from pkg_resources to importlib
+Message-ID: <20250627200015.GI4003484@bill-the-cat>
+References: <20250627-pkg_resoures-removal-v2-1-86b277b02552@phytec.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] env: mmc: specify that the address is a block address
- when erasing
-To: Quentin Schulz <foss+uboot@0leil.net>,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20250627-env-mmc-erase-blk-v1-1-d4b8fa90f68b@cherry.de>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250627-env-mmc-erase-blk-v1-1-d4b8fa90f68b@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iPyp22gfxVT546/3"
+Content-Disposition: inline
+In-Reply-To: <20250627-pkg_resoures-removal-v2-1-86b277b02552@phytec.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,89 +101,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--iPyp22gfxVT546/3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 6/27/25 07:04, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> I got very confused by the address printed when erasing the environment
-> because I clearly didn't remember setting it at that location.
-> 
-> It turns out, it's the block offset and not the byte offset that is
-> reported, so let's make this a bit more obvious to the user.
-> 
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Fri, Jun 27, 2025 at 09:07:36AM +0200, Yannic Moog wrote:
+
+> pkg_resources is deprecated, use migration guide in [1] to migrate to
+> importlib.resources.
+> Keep the Python 3.6 backwards compatibility.
+> This also fixes the binman version test which failed for setuptools
+> versions that print the deprecation warning.
+>=20
+> [1] https://importlib-resources.readthedocs.io/en/latest/migration.html
+>=20
+> Reviewed-by: Bryan Brattlof <bb@ti.com>
+> Signed-off-by: Yannic Moog <y.moog@phytec.de>
 > ---
-> Another option would be to report the byte offset by multiplying
-> blk_start by desc->blksz I guess. The result needs to be stored in a u64
-> though instead of uint otherwise we'll be limited to 4GiB offset (which
-> should be fine in most cases but eh).
+> Changes in v2:
+> - rebase on to next
+> - Link to v1: https://lore.kernel.org/r/20250610-pkg_resoures-removal-v1-=
+1-97a269446d35@phytec.de
 > ---
->  env/mmc.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/env/mmc.c b/env/mmc.c
-> index 8848371eb4f5df58da2be5398f159fdd0a00da21..f16926dc74c594b15f0bc82301aa89e1d4456d59 100644
-> --- a/env/mmc.c
-> +++ b/env/mmc.c
-> @@ -383,7 +383,7 @@ static inline int erase_env(struct mmc *mmc, unsigned long size,
->  	blk_cnt = ALIGN(size, erase_size) / desc->blksz;
->  
->  	n = blk_derase(desc, blk_start, blk_cnt);
-> -	printf("%d blocks erased at 0x%x: %s\n", n, blk_start,
-> +	printf("%d blocks erased starting from block at 0x%x: %s\n", n, blk_start,
->  	       (n == blk_cnt) ? "OK" : "ERROR");
->  
->  	return (n == blk_cnt) ? 0 : 1;
-> 
-> ---
-> base-commit: 359e3012921f2fc2d43f3c4e320a752173f82b82
-> change-id: 20250627-env-mmc-erase-blk-7a46a3e63c78
-> 
-> Best regards,
+>  tools/binman/control.py | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 
-NAK. This is more text on the line and less readable; by doing this here
-and nowhere else the overall effect is adding to the confusion.
+This still fails in CI:
+https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/bui=
+ld/builds/11529/logs/83
+and also Gitlab. Please see
+https://docs.u-boot.org/en/latest/develop/ci_testing.html and make sure
+CI passes before posting v3, thanks.
 
-Look at this (topically related) snippet output:
+--=20
+Tom
 
-"Bytes transferred = 534773760 (1fe00000 hex)
+--iPyp22gfxVT546/3
+Content-Type: application/pgp-signature; name="signature.asc"
 
-MMC read: dev # 0, block # 8355840, count 1044480 ... 1044480 blocks
-read: OK
-Total of 534773760 byte(s) were the same"
+-----BEGIN PGP SIGNATURE-----
 
-What units and packet lengths are these numbers? It's hopeless. All of
-that output is garbage to me as the user, missing context required to
-make sense of it.  Adding word-qualifiers I suppose attempts to add
-clarity but the result lacks any meaning. The command which does get it
-right about hexadecimal v. decimal units does so with a displaying a
-literal word qualifier "hex" suffix, not consistent with what we're
-doing elsewhere.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhe+EsACgkQFHw5/5Y0
+tyxxMgwAi0CDxUpPoPh7vIZY4K3v0cbcVRlkP4UzbY5otYrCFNT4yQevddjEZEpi
+4EZso0/BszVXL1bRJhPIyR1EIUW2hrQ6vL2RrgXeFO/Or7bYPLoUU2Q5xJn6XiDZ
+dpV5V2vSkQrEcqvcB2noyWK0DbGHpUuBddQSgyFo6vGxsPrfjZMePmtBZFXFQ9Py
+XMqurEp1lLgtMJw0GLaWcHFAowa05zh5vm8NFfuf5of5055B/tUrtJBO573/qkSI
+QxeT8eKrO8fgFjStbUXjmyGozZakSl6VhHAQJoxcjB9qE6KZOr4pmcm+K3XXoyFY
+kvR57AgygjwiImJiRcVB+ZN2NskGlJU7AK9zPviZKgltIicLXOYmTq5QNO7t1uPk
+wrtjtvnf0VgtEHCKf796I7bw+y8keeG7rMcHiHA9Q10lgzRfOGpAy7a07JLp0RBO
+vRij5Wp8vad2fLDr5Ppdm3/tNwX4sxUg8yZr83A3vchHWt3K9C5XaUA0xk17XJaB
+va4JyOER
+=Q3uH
+-----END PGP SIGNATURE-----
 
-I do agree with your premise that hex address locations and sizes, and
-block counts, are presented in a confusing mix-and-match to the user.
-Decimal numbering is the exception and not the rule but we somehow all
-decide that it's *not important* to make this obvious to the user who
-will have to input everything (except only some things, some times, but
-non-obviously) as hexadecimal. We insist on showing "0x" prefix but user
-input without this prefix is still considered as hexadecimal which is
-just terrible UX all around.
-
-Instead of this one patch in one place and nowhere else - I suggest to
-fix the problem which is U-Boot code base (and code style) has no
-discernible convention for documenting and displaying these outputs. I
-understand the technical limitations of decimal user input/output
-exceeding the memory type sizes, but...
-
-
-#1 rule: DO NOT show me decimal output while only accepting hexadecimal
-at input, it is ridiculous.
-
-also #1 rule: Packet length not-equal-to-one? Display the packet length
-with the output.
-
-Our consistency of units in both documentation and display of
-information is the problem - which I really do want to see resolved...
-can we?
-
--E
+--iPyp22gfxVT546/3--
