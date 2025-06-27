@@ -4,78 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF66C77B7F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 12:07:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA04C7EE31
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 12:23:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB5A482E27;
-	Fri, 27 Jun 2025 14:07:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A631182E35;
+	Fri, 27 Jun 2025 14:23:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TioCuJtM";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="TjLB+qcM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7217082E9A; Fri, 27 Jun 2025 14:07:08 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C763982E9A; Fri, 27 Jun 2025 14:23:41 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0BC382B6B
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 14:06:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 112C082E27
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 14:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-60780d74c8cso3262739a12.2
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 05:06:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751026018; x=1751630818; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/tcMtoN7qEIXjIkGcwS4gCTrcXaEximmtgqvc8wjn1g=;
- b=TioCuJtM5sf5ao2aPeItRFZ0M51SC596RjU123rT0ytM+km0KwF0Y8WwXJdq68ncZi
- Pt0FM/U0zsz6aWU7d4O6JZYC6JZHfnTVW1DuTjPKunPsswBh5BXHd86miVz7TeTqnKyX
- oOIFPZ06y++FRkRkFpLBM7drwZniYaknM+H7N/gmMortWZWAlETZRku0UOqPGyrUBpWb
- OFHZEKwPaz0aYMmqLEfPylUY15Vm3D+aeECmzSfmGAIL2JPNGqTxD/iWDEHQPomlSqLv
- dE6G26FG3QLEJYe6GO10aMeQLN8Z2bNwSXYhlps65N++9bA53Wl9yla27h1gJxZU+xMF
- J+/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751026018; x=1751630818;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/tcMtoN7qEIXjIkGcwS4gCTrcXaEximmtgqvc8wjn1g=;
- b=KhvlAHQ9tnby6GkVqTOWNjgvvJsnBHVLuEzykc1wvimNAPdF3CV2I9lyXdZYYBhci6
- 2YK7SzfOiqVHZXDUUsm8+FMr1coLxCAT+Lh06cXVrURC18zwO6/d8PvEGC35Ow/RlZKm
- Q1sqLEDzR/40WoQRNAJ6AYsRhEMzxcmB1rCnNVzrDeb3LgK9047o3JhiegZJDbzju7mu
- DlpDUVRPurBgMP7OYD5/RYmf4IR+xs1S8skO6eIgiGn1xa6Je3Fl6XN6iIGWU7zGDaZv
- Bnd8GGH8dTvwMEPBCxNqCUBxj9QYXqDePV+T3XCg3lGpReJV8YOwGrJy+VF9tF0Ybwf3
- /LUw==
-X-Gm-Message-State: AOJu0Yyyy9R0UnuP5kVzTLVZ22WzL8e4/o5OzXSEVVEBYqlvuSeLC08B
- CiKF0oH/Xl7FskwsHybcixARiA3SNVlWtw5vr0TJz43ppqYS1dd8doyKfBpWazmnhNsKA7WGJA4
- CnAzXnx+IpBXXC/pK0mF4+fcn1JtQJtk=
-X-Gm-Gg: ASbGncth+UsTeytA3OG7EPSSPMz6JYY4fnHnQMoxbCfA/Tlp1JSmIlgl3YqJj9c08zf
- o2Gopl1l/4MLG1xdI9/yxNH/iKgFnAFTRQA5e2/AYGHXVdOmuRQZPIKJp+qOPtK1TsGwre8Kw43
- MjoDsgTr5626ZmEd7/agP0GdiCXNIfZCnQqJcfon9VnZCbC2GD2MaROjJCLNvk9mZ/s/HMWDLbv
- G9T
-X-Google-Smtp-Source: AGHT+IGqZU4xS3UJbLItTySq8s4qKFpm9TFPBbGLEXp0JNb5EMqIuwtbr2HMEe5L13bSuOQULa+kvCwHVBzzvai85DA=
-X-Received: by 2002:a17:907:7b89:b0:aca:95e7:9977 with SMTP id
- a640c23a62f3a-ae3500b8f3fmr273400366b.28.1751026017840; Fri, 27 Jun 2025
- 05:06:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id B8E9926080;
+ Fri, 27 Jun 2025 14:23:37 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZOqpAKE3f6jq; Fri, 27 Jun 2025 14:23:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1751027016; bh=1SHGLwz2J0E6OOeaSp7hD1LUq8lAlURn3aYkVK6XG7s=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=TjLB+qcM9Q9zmzqFS5juzo0+th2w5tUZORlu4+dAF7Y+nRWTd/zc4mcpTke7Xa+4P
+ bbQRFwOThRei3kowqnimxLwTHUugWzlFPBaNKDjMpXGoyVPetkaecz5rl9eoGfwtrF
+ mcpaSWk63u9fO5fCrfgQHXzQ1u9I0J1wg9Rt5d4VijJdiZhuHEihazhQMq/maEJpz/
+ 3+uahvkRqMy5bKhxfLO/uADxVu91jmd6UoqEGvlGm9b/eSoNMpBWtUjk1yftj5qsq1
+ vlaBCXE1i3GHVnYZYXaouiTLY6dt1MlaPRrC+uUVde64DNDs31dWuj8F/yhS+nmGlS
+ WB4zIa37nAHwQ==
+Date: Fri, 27 Jun 2025 12:23:31 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] boot: Ensure that ranges is not used uninitialised
+Message-ID: <aF6NQ2zt5qKS0UsD@pie>
+References: <20250627-boot_fdt_fix-v1-1-d2e0c4b13762@linaro.org>
 MIME-Version: 1.0
-References: <20250627112509.264221-1-sughosh.ganu@linaro.org>
-In-Reply-To: <20250627112509.264221-1-sughosh.ganu@linaro.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 27 Jun 2025 13:06:46 +0100
-X-Gm-Features: Ac12FXzdL68T__RcA-5NyP23uWMYkiOqfVhYetkiA8wL2AOyMgorCSKmYwABcHw
-Message-ID: <CALeDE9MixLWWM+YRpERY1NqNpFVW9JyVT=um7_PaLVa7YY7dHg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] eficonfig: add support for URI based boot option
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250627-boot_fdt_fix-v1-1-d2e0c4b13762@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,34 +67,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Sughosh,
+On Fri, Jun 27, 2025 at 12:51:02PM +0100, Andrew Goodbody wrote:
+> The local variable ranges may be used uninitialised if the function
+> fdt_get_dma_range is called with node < 0. Ensure this does not
+> happen by initialising ranges when declared.
 
-> Add support for adding URI based boot option through the eficonfig
-> command. Also add a basic test case for checking validity of the URI's
-> being passed to the wget function.
+It doesn't harm. When node < 0, parent is less than zero as well, and
+the first while loop is skipped. The control flow just fails into the
+error path where parent < 0 stays true.
 
-I suspect more an extension to this feature, have we looked at getting
-the URI boot options via dhcp?
+Furthermore, it doesn't seem valid to call fdt_get_dma_range() with a
+negative node parameter, does it?
 
-I'm not sure what options the LWIP dhcp stack support but it would be
-a useful automatic deployment option
+> /**
+>  * fdt_get_dma_range() - get DMA ranges to perform bus/cpu translations
+>  *
+>  * @blob: pointer to device tree blob
+>  * @node_offset: node DT offset
+>  * @cpu: pointer to variable storing the range's cpu address
+>  * @bus: pointer to variable storing the range's bus address
+>  * @size: pointer to variable storing the range's size
+>  *
+>  * Get DMA ranges for a specifc node, this is useful to perform bus->cpu and
+>  * cpu->bus address translations
+>  *
+>  * Return: translated DMA address or OF_BAD_ADDR on error
+>  */
+> int fdt_get_dma_range(const void *blob, int node_offset, phys_addr_t *cpu,
+>                       dma_addr_t *bus, u64 *size);
 
-> Changes since V2:
-> * Added comments for eficonfig_create_uri_device_path() - patch 1
-> * Added comments for fill_dp_uri() - patch 1
-> * Remove some superfluous newlines added - patch 1
->
->
-> Sughosh Ganu (2):
->   cmd: eficonfig: add support for URI device path based boot options
->   test: wget: add a test case for validating URI
->
->  cmd/eficonfig.c      | 131 ++++++++++++++++++++++++++++++++++++++++---
->  include/efi_config.h |   4 ++
->  test/cmd/wget.c      |  20 +++++++
->  3 files changed, 147 insertions(+), 8 deletions(-)
->
-> --
-> 2.34.1
->
->
+Regards,
+Yao Zi
+
+> This issue was found with Smatch.
+> 
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  boot/fdt_support.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> index 92f2f534ee0..4f63ce9a763 100644
+> --- a/boot/fdt_support.c
+> +++ b/boot/fdt_support.c
+> @@ -1547,7 +1547,7 @@ int fdt_get_dma_range(const void *blob, int node, phys_addr_t *cpu,
+>  {
+>  	bool found_dma_ranges = false;
+>  	struct of_bus *bus_node;
+> -	const fdt32_t *ranges;
+> +	const fdt32_t *ranges = NULL;
+>  	int na, ns, pna, pns;
+>  	int parent = node;
+>  	int ret = 0;
+> 
+> ---
+> base-commit: 359e3012921f2fc2d43f3c4e320a752173f82b82
+> change-id: 20250627-boot_fdt_fix-e4e56d956c8a
+> 
+> Best regards,
+> -- 
+> Andrew Goodbody <andrew.goodbody@linaro.org>
+> 
