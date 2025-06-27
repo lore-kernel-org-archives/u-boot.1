@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35A3C7EE2A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7538FC77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:40:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C61281F66;
-	Fri, 27 Jun 2025 19:39:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8AE4182E35;
+	Fri, 27 Jun 2025 19:39:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aGKx48Hn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DXhGPj/I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD16E81F66; Fri, 27 Jun 2025 19:39:50 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id C8BDB82E8E; Fri, 27 Jun 2025 19:39:53 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0266080C83
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A22B82E08
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:39:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-40af40aef06so1672455b6e.3
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:39:44 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-404e580bf09so45262b6e.1
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751045984; x=1751650784; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751045985; x=1751650785; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Lu7YcvAj7wO29ivnGDfglGEy+LEyMrBWJACXx/BvAr8=;
- b=aGKx48HnReg8yNJ2fEI1ByPjVNGnFGWq28q7J08iY7+4d1MPm3Ewmlt6i3pK7mcqup
- bs+c9o8zXbSMM6eqHX9k6WTTdLx/yj88YNePpE4D7MRAktfNQS06bD3V2T3nq0RGXbkJ
- wxKfxhzPxaiLEO4AB4pQUUyDCxzEze1dvIXkM=
+ bh=W4SMISfF0tVQirHtvc9Rc4JmHoojs1gS6z60yTecEtE=;
+ b=DXhGPj/I9nIWaw789NKaPZeYoiEONE/1+TEv72udqphlT6G/6KyevmGMU56Mo30aov
+ aPZ75Mc7oz5vTaULqJ0xtOspYPRZ4u7c8Z6cjpFvLSh7aDbplO0mqvmOFyQKxxuV73SN
+ zp9LcxuSzz3S5blbhj6KBYW6OyTE2vSokp3bM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751045984; x=1751650784;
+ d=1e100.net; s=20230601; t=1751045985; x=1751650785;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lu7YcvAj7wO29ivnGDfglGEy+LEyMrBWJACXx/BvAr8=;
- b=u5nac03qz3vKdhLRRlhFJfwXy0Y+2+zljzKGKYEf4HeIUvaJxT2ASe5DScBWdlEfX2
- xiJJ8S7AD6VNQLq/KbMF+0AYCzkkSCM88dy+hXy3RlQvNUl4LAdH9B/2Cz5DFQcu9qjj
- wL5itqL7a7vkpEWyInNgA4kuuJTQT64fTA39/YZXQ1NszcL29+5fLFs4RYfR6F1dc4J6
- /51DEd8wSFb0xeCU4UvDfOxz1QLfSQhW0RJhyQruCBRrAP34tdOaxGujHzMypNpw46g2
- ogQPyr2AJMqX0FkGJUaYK7dLym9Nomw4ORXXXU1Bhn5nzvPX0u7dYJv9hhKjuL+/uSFU
- 1suw==
-X-Gm-Message-State: AOJu0YzYmjVEFqMb9rgMhxBBXT+1sWYQHC+48DoKmD1B78hvz0OESxEK
- J6MB64on+L2DZpYRjPmfUm3yIyfAnCtU8YftdnaPWYoDqSFNPdlNow78VbopZnWmvXsueeGYXRp
- iw7at/Rc=
-X-Gm-Gg: ASbGnctctGex5/bd5r7eKs43NTIM6rIjFJcLMEx4NQSSGAvOwSz/prvARRcrDtcZPjM
- VTOWciPB6uWEN8D4LM0dLz0cNsMY9yG4/vo2F3L+lG4NRgj1ot8SM6q8QgAEhsX5fcd1cvsvppR
- N9J2Pg/OF6sCsVWLUgA/XvX8Iu5xRrwnTELiZBJJQ8zioYp5TkdITjxINL2ZQTxXbZTcgrL/F+I
- DCjn80lrlCrsZgfLdc0itdNzvWyisBAM0kBM5Jbil4ubSTcl/q8H1k9+pFLFylZsZKMQdnYBc83
- 5cTD4rm7KMSSPHr4i9uhkDypjhXJL6CdeYs5RGWBA4A5WAdjxewi08qajQcOTqW3os0KFUW1JUv
- ydXcYhvpPOjFgD7iKNC4VAA==
-X-Google-Smtp-Source: AGHT+IFoYjCNhoZ/S90Z97HtmvXfWQJogVw0Yi7jmL2m2E1Es335Y0EhO00EwrgDa/E2xA2uyOqJpA==
-X-Received: by 2002:a05:6808:2119:b0:406:6e89:49ba with SMTP id
- 5614622812f47-40b33e6e4d4mr3018784b6e.33.1751045983763; 
- Fri, 27 Jun 2025 10:39:43 -0700 (PDT)
+ bh=W4SMISfF0tVQirHtvc9Rc4JmHoojs1gS6z60yTecEtE=;
+ b=XkQqlbklEW4Iaf8vManSRo6GKMlFIu1oz2Mzxm2QmtvzHyBH7X8oTxmMmhb/o1eqco
+ BPiB8+MS1up6KEDj0P1qFPBDYpkQ9ou0EKTN6FijNNsyb7WJDCwGSmzdlkql53k3mCa0
+ xCA7HVLdPCRfaKUgmRKNOMJhaASyXRbhLTE0C7vx06A7lvcppK+OQeobRHeTmfwyUvjK
+ nZgXak9VrWFqammlizVaytcRGMC7By3wHyRXuljx3u+vDod+rw3j38NNcwFo3PU47Tsx
+ 3yyCTEpMP1hSQ0dkGvsECm/Izm0ysZZFumc+mTI/oUiXzkQ7OUf8yMMUvwtmTxkhaZ1O
+ Oo7g==
+X-Gm-Message-State: AOJu0Yw4G6YIeXI6pRO4sM+PhH49iK26Oknn5KMXOMj7L0lqmmPyKBKc
+ MX8REb4txsZaqjweSevJBBRKz8ikaJWyUEud7+g3JQwI+EzMoPGJnrdzfRHVT60VmLi6VBjoL2y
+ 625tJ2iA=
+X-Gm-Gg: ASbGnctkrFG4T9HTQk9C6F1sdQVcWans2Ei+D9MoV2LzTg9iciMcNKqYGdQmi6WFLr5
+ dth4QNPgq1Rh5MWYunpxPlTytWDiLrnEvHJVTkQnYbZ7jQEF+cIxZ6IB2MkopHOsFXSkhp5BGXl
+ nwceqC+c27AN26O7mlN433BhGkNd+lY3Ue9K1SyMamftlSqaYwzOA4G+TujsiwqINML7vKYaQzj
+ oSzRdDhtK0FBMEgnu+l5x12CrOCkn7QtiERjEqjPXWOqsM/pyOf2KIY7VwGVyNUAqql/0qB+UiS
+ s2xzyFvYUXSQ+3Ge/8oPcVF+iwYV1uIVEb6LPamQCJNQiwDmP59J2wbhT+4LQFTrUE8Okk7ZSh4
+ W6h9/nQClQGIym9+wEK8Zeg==
+X-Google-Smtp-Source: AGHT+IFjlohbeH9FyBNqi14+0goLwaV9diphyXM70MQJgkoJtz6C3n4kMF3OflU3wNKupYK2ZKbHoQ==
+X-Received: by 2002:a05:6808:14d3:b0:406:6671:6d1d with SMTP id
+ 5614622812f47-40b33d79c62mr3411208b6e.15.1751045985319; 
+ Fri, 27 Jun 2025 10:39:45 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b322b5900sm442246b6e.18.2025.06.27.10.39.42
+ 5614622812f47-40b322b5900sm442246b6e.18.2025.06.27.10.39.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 10:39:43 -0700 (PDT)
+ Fri, 27 Jun 2025 10:39:44 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250619-mmc-test-fixes-v1-1-1eff87dd69db@ti.com>
-References: <20250619-mmc-test-fixes-v1-1-1eff87dd69db@ti.com>
-Subject: Re: [PATCH -next] test/py/test_mmc: wrap multi-argument
- printf-style strings
-Message-Id: <175104598278.3877702.15567324233309562539.b4-ty@konsulko.com>
-Date: Fri, 27 Jun 2025 11:39:42 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250620162502.3419508-1-trini@konsulko.com>
+References: <20250620162502.3419508-1-trini@konsulko.com>
+Subject: Re: [PATCH] tools: rmboard.py: Fix conversion from run_pipe to new
+ helper
+Message-Id: <175104598465.3877702.5422272073108171897.b4-ty@konsulko.com>
+Date: Fri, 27 Jun 2025 11:39:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,23 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Jun 2025 06:45:05 -0500, Bryan Brattlof wrote:
+On Fri, 20 Jun 2025 10:25:02 -0600, Tom Rini wrote:
 
-> Newer versions of python will emit a TypeError about not enough
-> arguments for a format string:
+> When this utility was converted from run_pipe and to the new output
+> helper, two problems were introduced. First, the conversion for calling
+> "git rm -f" wasn't correct. Change this to match the other conversions.
+> Second, the final call we do we need to construct the list because we
+> print that command for the user to use to inspect remaining references.
 > 
->     FAILED ub/test/py/tests/test_mmc.py::test_mmc_dev - TypeError: not enough arguments for format string
->     FAILED ub/test/py/tests/test_mmc.py::test_mmcinfo - TypeError: not enough arguments for format string
->     FAILED ub/test/py/tests/test_mmc.py::test_mmc_info - TypeError: not enough arguments for format string
->     FAILED ub/test/py/tests/test_mmc.py::test_mmc_rescan - TypeError: not enough arguments for format string
->     FAILED ub/test/py/tests/test_mmc.py::test_mmc_part - TypeError: not enough arguments for format string
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] test/py/test_mmc: wrap multi-argument printf-style strings
-      commit: b14b3de65282e82b1832d53e3ee04f693c6c39e7
+[1/1] tools: rmboard.py: Fix conversion from run_pipe to new helper
+      commit: adb6e0bad69dc6beb233576ada1ec8de5f4bde65
 -- 
 Tom
 
