@@ -4,43 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC6E1C7EE31
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 11:26:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26412C7EE31
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 11:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B701382EC6;
-	Fri, 27 Jun 2025 13:25:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5481282E27;
+	Fri, 27 Jun 2025 13:51:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NaZ96zPl";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A9682F8E; Fri, 27 Jun 2025 13:25:50 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E22E782F83
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 13:25:35 +0200 (CEST)
+ id A761382E9A; Fri, 27 Jun 2025 13:51:10 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 91E43801BE
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 13:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D50DA22C7;
- Fri, 27 Jun 2025 04:25:07 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0517A3F66E;
- Fri, 27 Jun 2025 04:25:22 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 1/2] cmd: eficonfig: add support for URI device path based
- boot options
-Date: Fri, 27 Jun 2025 16:55:08 +0530
-Message-Id: <20250627112509.264221-2-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250627112509.264221-1-sughosh.ganu@linaro.org>
-References: <20250627112509.264221-1-sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3a548a73ff2so1890341f8f.0
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 04:51:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751025063; x=1751629863; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3+RkbpqM4jqgm8tVVTM8dJ8YRf4gfeS32FJApBu7HJI=;
+ b=NaZ96zPl07rq7NKj/99LglOLtdl327ckUkYB5NCF79KoyTGoFRkZdbX05r85wphEkH
+ Y/Af4FWNQXBL6aDWyYHQHa3FM1WshClvWbATKUim89zZtJKF+5yaQ9N/HqctOcG0QJg8
+ ejT3sAWbAqLc6BIOFbXsrceqfgYXj/UqBtcCbW7nEeWAmsWhQ22Zie6Jyr9Ca/PfNKHI
+ /PqW9HyelhqrOQo76FWyOmnCAq3bCYsANH/Ws8M7Rq1EusZ+HJXSJ7n+Oe08yQMSNWu6
+ AlGp60nvzWLCLSxTKFyfpbYrHVVPoUhbOHMZ85ZI3/ex+TK/2wTm5zPJckPWXSbAfEVZ
+ 2ifw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751025063; x=1751629863;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3+RkbpqM4jqgm8tVVTM8dJ8YRf4gfeS32FJApBu7HJI=;
+ b=npbtI6Az6y5jEMb5tf1V6TfMP7J11mo6cOQuGkUYeVqc6IweZKGEmMI+fWYBChFemB
+ XS0B8LJ1KV8eJsAwl16kHi7xivy25yGOb1PR9+tKZXil+KAewiAxTYpTdAb8WoQHf46U
+ GVUVWu0ZCSBd7D8iTWzF8JJYFwcRXAZDuoR4DaOJDDQnfwSNxlr83neepA9d6+g2KWwF
+ f1PPcGDuUJTgm0l7dwKjMlVJ9qAYG9A6e4uA3pVNqawO92VcsNS2n2R13fzPnWgwoYZj
+ 0Ich+eSUU1c4VYUkukjGCst41by5hHi2meCG0UClGlEupwt34taSziqlbAjLrba7kdEB
+ er/w==
+X-Gm-Message-State: AOJu0YwPI6fKYA20Hb/wAb0exzc/rzItk5pk8J5oSbs5rWBoNxcSc2Bk
+ BtCLutbxcuzbn3I8oQhnL2MfOi7Ralc3qipxuMtNBCNbn+irYfnJOJ/pRKMNNmT2fP0=
+X-Gm-Gg: ASbGnctZ8j7fmVMAtRW2w+UUhjl+lHNRAaxqPe/rG40tRv4/GmR3RsRcOBuW3LpnkwB
+ WO1Ve7+sk72rasoPwzfZF9H2iAPVO5ltat4atAmrGQHI5SszRclV1RMYcsoHSbkMlIPli4LgXBR
+ ttdS+RVenrw96hvw0jrmQKyXeJcVxZnWbqzhp12TwilhkuASqC+70rVKbDKUkHASr75BWiQUax3
+ NcIH/o4C/fss70k2P2EFeHk7deHqZ/t7OO2zBEFyLGWnRtzL3XWCE+LZ0P4lxhBHb+TkJiQsm4X
+ u1kY5YTfhvklyLtVZaVCeRurqtfORkMXCS93Tuyp+Sj+/MOKZUlE7YrP8uogeXdBXD72a7nDOLM
+ LYfV02qyc8MeYig==
+X-Google-Smtp-Source: AGHT+IEcmHfpIObVpGbyiNrhovfLP73iK1Z0dtYqU6VAmI+XPGeP7/zI2Dx+B+lsX2x4/ULjCuGHcg==
+X-Received: by 2002:a05:6000:2dc3:b0:3a4:ebc2:d6ec with SMTP id
+ ffacd0b85a97d-3a90d5a7adbmr2766415f8f.14.1751025062925; 
+ Fri, 27 Jun 2025 04:51:02 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:ee3:2301:c61f:677:c14a:b7e3])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a892e5966csm2510653f8f.72.2025.06.27.04.51.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Jun 2025 04:51:02 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Fri, 27 Jun 2025 12:51:02 +0100
+Subject: [PATCH] boot: Ensure that ranges is not used uninitialised
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250627-boot_fdt_fix-v1-1-d2e0c4b13762@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAKWFXmgC/x2NwQrCMBBEf6Xs2UAbTLT9FRHZJKvdg0nZLSKU/
+ rtbD3N4zDxmAyVhUpi6DYQ+rNyqwXDqIM9YX+S4GIPvfeijv7jU2vp4Fgt/HZ0pxDKGmK8IpiR
+ Uckmw5vmQ3qgryVEsQrb//9zu+/4DsTtBG3cAAAA=
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,280 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The eficonfig command provides a menu based interface for maintenance
-of the EFI boot options. Add support for adding a URI based boot
-option. This boot option can then be used for HTTP boot.
+The local variable ranges may be used uninitialised if the function
+fdt_get_dma_range is called with node < 0. Ensure this does not
+happen by initialising ranges when declared.
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+This issue was found with Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Changes since V2:
-* Added comments for eficonfig_create_uri_device_path()
-* Added comments for fill_dp_uri()
-* Remove some superfluous newlines added
+ boot/fdt_support.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- cmd/eficonfig.c      | 131 ++++++++++++++++++++++++++++++++++++++++---
- include/efi_config.h |   4 ++
- 2 files changed, 127 insertions(+), 8 deletions(-)
-
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index 6e14d34a6bd..602d31dca2d 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -35,6 +35,7 @@ static int avail_row;
- 
- #define EFICONFIG_DESCRIPTION_MAX 32
- #define EFICONFIG_OPTIONAL_DATA_MAX 64
-+#define EFICONFIG_URI_MAX 512
- #define EFICONFIG_MENU_HEADER_ROW_NUM 3
- #define EFICONFIG_MENU_DESC_ROW_NUM 5
- 
-@@ -538,6 +539,40 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
- 	return dp;
- }
- 
-+/**
-+ * eficonfig_create_uri_device_path() - Create an URI based device path
-+ * @uri_str:	URI string to be added to the device path
-+ *
-+ * Take the u16 string, convert it to a u8 string, and create a URI
-+ * device path. This will be used for the EFI HTTP boot.
-+ *
-+ * Return: pointer to the URI device path on success, NULL on failure
-+ */
-+static struct efi_device_path *eficonfig_create_uri_device_path(u16 *uri_str)
-+{
-+	char *pos, *p;
-+	u32 len = 0;
-+	efi_uintn_t uridp_len;
-+	struct efi_device_path_uri *uridp;
-+
-+	len = utf16_utf8_strlen(uri_str);
-+
-+	uridp_len = sizeof(struct efi_device_path) + len + 1;
-+	uridp = efi_alloc(uridp_len + sizeof(EFI_DP_END));
-+	if (!uridp)
-+		return NULL;
-+
-+	uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-+	uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-+	uridp->dp.length = uridp_len;
-+	p = (char *)&uridp->uri;
-+	utf16_utf8_strcpy(&p, uri_str);
-+	pos = (char *)uridp + uridp_len;
-+	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
-+
-+	return &uridp->dp;
-+}
-+
- /**
-  * eficonfig_file_selected() - handler of file selection
-  *
-@@ -983,6 +1018,22 @@ static efi_status_t eficonfig_boot_add_optional_data(void *data)
- 				 "  enter optional data:");
- }
- 
-+/**
-+ * eficonfig_boot_add_uri() - handle user input for HTTP Boot URI
-+ *
-+ * @data:	pointer to the internal boot option structure
-+ * Return:	status code
-+ */
-+static efi_status_t eficonfig_boot_add_uri(void *data)
-+{
-+	struct eficonfig_select_file_info *file_info = data;
-+
-+	return handle_user_input(file_info->uri, EFICONFIG_URI_MAX, 24,
-+				 "\n  ** Edit URI **\n"
-+				 "\n"
-+				 "  enter HTTP Boot URI:");
-+}
-+
- /**
-  * eficonfig_boot_edit_save() - handler to save the boot option
-  *
-@@ -998,7 +1049,8 @@ static efi_status_t eficonfig_boot_edit_save(void *data)
- 		bo->edit_completed = false;
- 		return EFI_NOT_READY;
- 	}
--	if (u16_strlen(bo->file_info.current_path) == 0) {
-+	if (u16_strlen(bo->file_info.current_path) == 0 &&
-+	    u16_strlen(bo->file_info.uri) == 0) {
- 		eficonfig_print_msg("File is not selected!");
- 		bo->edit_completed = false;
- 		return EFI_NOT_READY;
-@@ -1027,6 +1079,13 @@ efi_status_t eficonfig_process_clear_file_selection(void *data)
- 	return EFI_ABORTED;
- }
- 
-+static struct eficonfig_item select_boot_file_menu_items[] = {
-+	{"Select File", eficonfig_process_select_file},
-+	{"Enter URI", eficonfig_boot_add_uri},
-+	{"Clear", eficonfig_process_clear_file_selection},
-+	{"Quit", eficonfig_process_quit},
-+};
-+
- static struct eficonfig_item select_file_menu_items[] = {
- 	{"Select File", eficonfig_process_select_file},
- 	{"Clear", eficonfig_process_clear_file_selection},
-@@ -1042,16 +1101,30 @@ static struct eficonfig_item select_file_menu_items[] = {
- efi_status_t eficonfig_process_show_file_option(void *data)
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 92f2f534ee0..4f63ce9a763 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -1547,7 +1547,7 @@ int fdt_get_dma_range(const void *blob, int node, phys_addr_t *cpu,
  {
- 	efi_status_t ret;
-+	unsigned int menu_count;
- 	struct efimenu *efi_menu;
-+	struct eficonfig_item *menu_items;
-+	struct eficonfig_select_file_info *file_info = data;
-+
-+	menu_items = file_info->boot_file_option ? select_boot_file_menu_items :
-+		select_file_menu_items;
- 
--	select_file_menu_items[0].data = data;
--	select_file_menu_items[1].data = data;
--	efi_menu = eficonfig_create_fixed_menu(select_file_menu_items,
--					       ARRAY_SIZE(select_file_menu_items));
-+	menu_count = file_info->boot_file_option ?
-+		ARRAY_SIZE(select_boot_file_menu_items) :
-+		ARRAY_SIZE(select_file_menu_items);
-+
-+	menu_items[0].data = data;
-+	menu_items[1].data = data;
-+	menu_items[2].data = data;
-+
-+	efi_menu = eficonfig_create_fixed_menu(menu_items, menu_count);
- 	if (!efi_menu)
- 		return EFI_OUT_OF_RESOURCES;
- 
--	ret = eficonfig_process_common(efi_menu, "  ** Update File **",
-+	ret = eficonfig_process_common(efi_menu,
-+				       file_info->boot_file_option ?
-+				       "  ** Update File/URI **" :
-+				       "  ** Update File **",
- 				       eficonfig_menu_desc,
- 				       eficonfig_display_statusline,
- 				       eficonfig_print_entry,
-@@ -1340,6 +1413,27 @@ out:
- 	return ret;
- }
- 
-+/**
-+ * fill_dp_uri() - copy the URI string in the device path
-+ * @dp:		pointer to the URI device path
-+ * @uri_str:	URI string to be copied
-+ *
-+ * Copy the passed URI string to the URI device path. This
-+ * requires utf8_utf16_strcpy() to copy the u16 string to
-+ * the u8 array in the device path structure.
-+ *
-+ * Return: None
-+ */
-+static void fill_dp_uri(struct efi_device_path *dp, u16 **uri_str)
-+{
-+	u16 *p = *uri_str;
-+	struct efi_device_path_uri *uridp;
-+
-+	uridp = (struct efi_device_path_uri *)dp;
-+
-+	utf8_utf16_strcpy(&p, uridp->uri);
-+}
-+
- /**
-  * fill_file_info() - fill the file info from efi_device_path structure
-  *
-@@ -1392,10 +1486,13 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 	size_t len;
- 	efi_status_t ret;
- 	char *tmp = NULL, *p;
-+	u16 *current_path = NULL;
- 	struct efi_load_option lo = {0};
- 	efi_uintn_t dp_size;
- 	struct efi_device_path *dp = NULL;
- 	efi_uintn_t size = load_option_size;
-+	struct efi_device_path *dp_volume = NULL;
-+	struct efi_device_path *uri_dp = NULL;
- 	struct efi_device_path *device_dp = NULL;
- 	struct efi_device_path *initrd_dp = NULL;
- 	struct efi_device_path *fdt_dp = NULL;
-@@ -1464,6 +1561,14 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 		goto out;
- 	}
- 
-+	bo->file_info.uri = calloc(1, EFICONFIG_URI_MAX * sizeof(u16));
-+	if (!bo->file_info.uri) {
-+		ret =  EFI_OUT_OF_RESOURCES;
-+		goto out;
-+	}
-+
-+	bo->file_info.boot_file_option = true;
-+
- 	/* copy the preset value */
- 	if (load_option) {
- 		ret = efi_deserialize_load_option(&lo, load_option, &size);
-@@ -1481,7 +1586,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 		u16_strcpy(bo->description, lo.label);
- 
- 		/* EFI image file path is a first instance */
--		if (lo.file_path)
-+		if (lo.file_path && EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE,
-+						MSG_URI))
-+			fill_dp_uri(lo.file_path, &bo->file_info.uri);
-+		else
- 			fill_file_info(lo.file_path, &bo->file_info, device_dp);
- 
- 		/* Initrd file path (optional) is placed at second instance. */
-@@ -1512,6 +1620,9 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 			goto out;
- 	}
- 
-+	if (utf16_utf8_strlen(bo->file_info.uri))
-+		uri_dp = eficonfig_create_uri_device_path(bo->file_info.uri);
-+
- 	if (bo->initrd_info.dp_volume) {
- 		dp = eficonfig_create_device_path(bo->initrd_info.dp_volume,
- 						 bo->initrd_info.current_path);
-@@ -1536,7 +1647,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 		efi_free_pool(dp);
- 	}
- 
--	dp = eficonfig_create_device_path(bo->file_info.dp_volume, bo->file_info.current_path);
-+	dp_volume = bo->file_info.dp_volume;
-+	current_path = bo->file_info.current_path;
-+	dp = uri_dp ?
-+		uri_dp : eficonfig_create_device_path(dp_volume, current_path);
- 	if (!dp) {
- 		ret = EFI_OUT_OF_RESOURCES;
- 		goto out;
-@@ -1560,6 +1674,7 @@ out:
- 	free(tmp);
- 	free(bo->optional_data);
- 	free(bo->description);
-+	free(bo->file_info.uri);
- 	free(bo->file_info.current_path);
- 	free(bo->initrd_info.current_path);
- 	free(bo->fdt_info.current_path);
-diff --git a/include/efi_config.h b/include/efi_config.h
-index d7c1601137e..4438933db6a 100644
---- a/include/efi_config.h
-+++ b/include/efi_config.h
-@@ -82,15 +82,19 @@ struct eficonfig_item {
-  * @current_volume:	pointer to the efi_simple_file_system_protocol
-  * @dp_volume:		pointer to device path of the selected device
-  * @current_path:	pointer to the selected file path string
-+ * @uri:		URI for HTTP Boot
-  * @filepath_list:	list_head structure for file path list
-  * @file_selectred:	flag indicates file selecting status
-+ * @boot_file_option:	flag indicating if option is for boot file
-  */
- struct eficonfig_select_file_info {
- 	struct efi_simple_file_system_protocol *current_volume;
- 	struct efi_device_path *dp_volume;
- 	u16 *current_path;
-+	u16 *uri;
- 	struct list_head filepath_list;
- 	bool file_selected;
-+	bool boot_file_option;
- };
- 
- void eficonfig_print_msg(char *msg);
+ 	bool found_dma_ranges = false;
+ 	struct of_bus *bus_node;
+-	const fdt32_t *ranges;
++	const fdt32_t *ranges = NULL;
+ 	int na, ns, pna, pns;
+ 	int parent = node;
+ 	int ret = 0;
+
+---
+base-commit: 359e3012921f2fc2d43f3c4e320a752173f82b82
+change-id: 20250627-boot_fdt_fix-e4e56d956c8a
+
+Best regards,
 -- 
-2.34.1
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
