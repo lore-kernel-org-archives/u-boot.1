@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7759C77B7F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35A3C7EE2A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 17:39:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAF6B80C83;
-	Fri, 27 Jun 2025 19:29:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C61281F66;
+	Fri, 27 Jun 2025 19:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GcMa7d7C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aGKx48Hn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8203F81D5D; Fri, 27 Jun 2025 19:29:55 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id DD16E81F66; Fri, 27 Jun 2025 19:39:50 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9524A806D8
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:29:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0266080C83
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 19:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-2eb6c422828so1862988fac.1
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:29:50 -0700 (PDT)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-40af40aef06so1672455b6e.3
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 10:39:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751045389; x=1751650189; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=bQEDpixjU/9w10TsQ6wmF5tlmM84MjsEkpUVjmkH6yM=;
- b=GcMa7d7C2kR6yQZtmQKHNqYfni6c9NqNsGvx3Zejq1apcIZM7wVGL5bPgc8KGwTvCt
- hNe9zKOiY6J5AbYhapoFWFjj3n+j/riyuSwp3CF/wltDgCsrfoJBRsATbF+Ftx0pJhi2
- uaUWP7zn64y6DuagE7kHDFdcKYK805VzKmPdU=
+ d=konsulko.com; s=google; t=1751045984; x=1751650784; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lu7YcvAj7wO29ivnGDfglGEy+LEyMrBWJACXx/BvAr8=;
+ b=aGKx48HnReg8yNJ2fEI1ByPjVNGnFGWq28q7J08iY7+4d1MPm3Ewmlt6i3pK7mcqup
+ bs+c9o8zXbSMM6eqHX9k6WTTdLx/yj88YNePpE4D7MRAktfNQS06bD3V2T3nq0RGXbkJ
+ wxKfxhzPxaiLEO4AB4pQUUyDCxzEze1dvIXkM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751045389; x=1751650189;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bQEDpixjU/9w10TsQ6wmF5tlmM84MjsEkpUVjmkH6yM=;
- b=plugaemvU9vRZsZcGgqusZtWIfmUDg9aViPIB4Yl5SSDFbP8tS4Gpm3CiTQrlOO5fA
- TEJEo3fT569Pf3CqRUZHIEE3vRLbAEBswn3LEtx2u3aXUBD/wpLHZzY6nMK2WNDnGdEI
- CXuPwRdRW1kMh+hF95Iq+xWHhipO8nAmgDMI+7VJlUz01xL24/mwOQoVc6rBJ2ej97lc
- NmP8e0PykIcb/gJlF2DdsCZ3/aY/3S+G7IG5T/COGNLLGLiVLi3PVioNOYk3yRcIX0XD
- AM3yA3g28oShKSVAbrLevEXWzgj6uDjP2eZlhR3Jmcn9Z/ve5f/uk3XY6jvXH0e9donG
- Vuag==
-X-Gm-Message-State: AOJu0YyOxfa69hxqI9erR7vAmKvTaGGVWHpHaOKJfNwNLgaETmkIB1dH
- PgcUuZn1MzxBcq27tXMZgQzegWeZGT75OVIpt+AWmiYlyDJrkr3IgSPw1Qrk+eg78OhoGkeidNm
- SwPwLj58=
-X-Gm-Gg: ASbGncu9ugopgl6/kiPOj+1Om986zQR51pUlmaB/2DapvR8gzohmWp3Yrc+ahZW/hOZ
- ZTk20yIHULDFKy3rilfb7IzD2Dhjgho/T4iV+PU3U7mN3HrovVc8AhQMDP8ocQjuGElEqRBdJG1
- c1nH6TNxir8F+dsz5+C844TUY3aUKNOKOzYQu0PtFy1QxyMu4wTP6JhkcQ1ffwnGPzLR4gM6ACl
- mPY3Ym5nkmWPbyYxHSIv7sbmAZ7ZE/a+F7t8GEjQUYkKUpLxuqj5ZHYGE4JmC1BcDzSx1TI+p2E
- 0SMLIW2+m7Jgt2l/gGd+/Bw/P6Ang49LxB1CJIc5tgAsD2tkU9uytMXmQ7r8bAfG2HSErGhd+/J
- jRzCXlvctJoohn/CwMzA5xhK/WQ==
-X-Google-Smtp-Source: AGHT+IFXnXOoQdfBjDuI15r8RMzfYAbLr0ZAl/lsCwIhchChFT+kD6TzjAMeK3W8+u9Pxgf2nIhYZw==
-X-Received: by 2002:a05:6870:e3cb:b0:2eb:a2ef:901b with SMTP id
- 586e51a60fabf-2efed676191mr2804104fac.14.1751045389124; 
- Fri, 27 Jun 2025 10:29:49 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1751045984; x=1751650784;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Lu7YcvAj7wO29ivnGDfglGEy+LEyMrBWJACXx/BvAr8=;
+ b=u5nac03qz3vKdhLRRlhFJfwXy0Y+2+zljzKGKYEf4HeIUvaJxT2ASe5DScBWdlEfX2
+ xiJJ8S7AD6VNQLq/KbMF+0AYCzkkSCM88dy+hXy3RlQvNUl4LAdH9B/2Cz5DFQcu9qjj
+ wL5itqL7a7vkpEWyInNgA4kuuJTQT64fTA39/YZXQ1NszcL29+5fLFs4RYfR6F1dc4J6
+ /51DEd8wSFb0xeCU4UvDfOxz1QLfSQhW0RJhyQruCBRrAP34tdOaxGujHzMypNpw46g2
+ ogQPyr2AJMqX0FkGJUaYK7dLym9Nomw4ORXXXU1Bhn5nzvPX0u7dYJv9hhKjuL+/uSFU
+ 1suw==
+X-Gm-Message-State: AOJu0YzYmjVEFqMb9rgMhxBBXT+1sWYQHC+48DoKmD1B78hvz0OESxEK
+ J6MB64on+L2DZpYRjPmfUm3yIyfAnCtU8YftdnaPWYoDqSFNPdlNow78VbopZnWmvXsueeGYXRp
+ iw7at/Rc=
+X-Gm-Gg: ASbGnctctGex5/bd5r7eKs43NTIM6rIjFJcLMEx4NQSSGAvOwSz/prvARRcrDtcZPjM
+ VTOWciPB6uWEN8D4LM0dLz0cNsMY9yG4/vo2F3L+lG4NRgj1ot8SM6q8QgAEhsX5fcd1cvsvppR
+ N9J2Pg/OF6sCsVWLUgA/XvX8Iu5xRrwnTELiZBJJQ8zioYp5TkdITjxINL2ZQTxXbZTcgrL/F+I
+ DCjn80lrlCrsZgfLdc0itdNzvWyisBAM0kBM5Jbil4ubSTcl/q8H1k9+pFLFylZsZKMQdnYBc83
+ 5cTD4rm7KMSSPHr4i9uhkDypjhXJL6CdeYs5RGWBA4A5WAdjxewi08qajQcOTqW3os0KFUW1JUv
+ ydXcYhvpPOjFgD7iKNC4VAA==
+X-Google-Smtp-Source: AGHT+IFoYjCNhoZ/S90Z97HtmvXfWQJogVw0Yi7jmL2m2E1Es335Y0EhO00EwrgDa/E2xA2uyOqJpA==
+X-Received: by 2002:a05:6808:2119:b0:406:6e89:49ba with SMTP id
+ 5614622812f47-40b33e6e4d4mr3018784b6e.33.1751045983763; 
+ Fri, 27 Jun 2025 10:39:43 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2efd50f852bsm973213fac.33.2025.06.27.10.29.48
- for <u-boot@lists.denx.de>
+ 5614622812f47-40b322b5900sm442246b6e.18.2025.06.27.10.39.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 10:29:48 -0700 (PDT)
+ Fri, 27 Jun 2025 10:39:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] fit-dtb.blob.gz: Pass "-n" to gzip
-Date: Fri, 27 Jun 2025 11:29:47 -0600
-Message-ID: <20250627172947.3876739-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Bryan Brattlof <bb@ti.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250619-mmc-test-fixes-v1-1-1eff87dd69db@ti.com>
+References: <20250619-mmc-test-fixes-v1-1-1eff87dd69db@ti.com>
+Subject: Re: [PATCH -next] test/py/test_mmc: wrap multi-argument
+ printf-style strings
+Message-Id: <175104598278.3877702.15567324233309562539.b4-ty@konsulko.com>
+Date: Fri, 27 Jun 2025 11:39:42 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,34 +97,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sometimes when building a platform such as imx28_btt3 we can get an
-error such as:
+On Thu, 19 Jun 2025 06:45:05 -0500, Bryan Brattlof wrote:
 
-gzip: fit-dtb.blob: warning: file timestamp out of range for gzip format
-make[1]: *** [Makefile:1219: fit-dtb.blob.gz] Error 2
-make[1]: *** Deleting file 'fit-dtb.blob.gz'
-make: *** [Makefile:186: sub-make] Error 2
+> Newer versions of python will emit a TypeError about not enough
+> arguments for a format string:
+> 
+>     FAILED ub/test/py/tests/test_mmc.py::test_mmc_dev - TypeError: not enough arguments for format string
+>     FAILED ub/test/py/tests/test_mmc.py::test_mmcinfo - TypeError: not enough arguments for format string
+>     FAILED ub/test/py/tests/test_mmc.py::test_mmc_info - TypeError: not enough arguments for format string
+>     FAILED ub/test/py/tests/test_mmc.py::test_mmc_rescan - TypeError: not enough arguments for format string
+>     FAILED ub/test/py/tests/test_mmc.py::test_mmc_part - TypeError: not enough arguments for format string
+> 
+> [...]
 
-This is typically resolved by telling gzip to ignore the timestamp.
+Applied to u-boot/next, thanks!
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Makefile b/Makefile
-index e60bbb01a004..5a238ab9b5da 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1216,7 +1216,7 @@ FINAL_DTB_CONTAINER = fit-dtb.blob
- endif
- 
- fit-dtb.blob.gz: fit-dtb.blob
--	@gzip -kf9 $< > $@
-+	@gzip -nkf9 $< > $@
- 
- fit-dtb.blob.lzo: fit-dtb.blob
- 	@lzop -f9 $< > $@
+[1/1] test/py/test_mmc: wrap multi-argument printf-style strings
+      commit: b14b3de65282e82b1832d53e3ee04f693c6c39e7
 -- 
-2.43.0
+Tom
+
 
