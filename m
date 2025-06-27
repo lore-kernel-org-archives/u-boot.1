@@ -4,86 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89331C77B7F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 10:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7306BC77B7F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 10:22:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D3D382EC6;
-	Fri, 27 Jun 2025 12:09:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C477382EC6;
+	Fri, 27 Jun 2025 12:22:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BLSRKTtm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="O8lbPdV0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C3B182F5D; Fri, 27 Jun 2025 12:09:47 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE3D482E9A
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 12:09:38 +0200 (CEST)
+ id 7C53082F10; Fri, 27 Jun 2025 12:22:33 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 917C282E9A
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 12:22:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-450cfb790f7so15701315e9.0
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 03:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751018978; x=1751623778; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0/KN3Ta08i5EUsRLbse7gerjKLrSqWBt7yJBAG/TYPY=;
- b=BLSRKTtmuxQSf/MasELutSOdygDmaoTBEBxtn/1SUezDRSkHq/szThLVagKDgFqzmU
- i8D1I0t+/hFGWoPxRtelAVCwa1dyxL9OKQdHRyhJUNDOB1jARS7Cpo6crZ3GOERUH8Yv
- 2pap8o3m5SJjNLterX5qmS0nOilxOsBnTuOHEdG/KOeYlTTXbeaIwmm27NO066MrcQQD
- wsXiUDXwS2QQ0H9fowgm1Zi5S+XlTAkXYs+CZRHP/0nfSZKyoQGEnp1w0vLC0hrJAsuu
- SOaQBwKucBeXGfUNDymVU/+IsWmnIBuFQvUBaVvO8vD2H/wwHffXY23fyTxM7UVUnjH2
- 9KTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751018978; x=1751623778;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0/KN3Ta08i5EUsRLbse7gerjKLrSqWBt7yJBAG/TYPY=;
- b=ellmGn009XPIf4ieS4nSCVFy0+FDWWz0s6R3MJ8JyqDDD3R//QItiV+vxyPogQjn40
- 7pIldTDE0AhJi8RkWEE3KoTjOURdgxJCs0Zj+ttCqgc5AwU+jzATGKlJTgdi+L72PiRI
- j2/ZTeH1/zoPWVWfvw/k1m6AHWx2t0ximRQpzi0QqHv3wjI94zNcxmVd/2/Wt5HsAdCr
- +5IT/7FRPonrC6FaPZpKmRY0M+mZQekfH7CMwZqikNafoJNgwGobPx91W/qyC1omgh8d
- UxPvfXg5gMIIB2SUk23zauqOMRdd3U1FGwk2jPFrnh81wY7phJ+SjLkoHQL403Uj/RfC
- wVLw==
-X-Gm-Message-State: AOJu0Yz+5+DyK/vEXa64bTVbHoINKKJTkS8FIUSeehutxgJ1T66Soegc
- kqNJrBVxgjZsYRcSUbi3GKeCYKA1UYxvH65r9IUAWgM1urPlDpMRRcYECQmQdaMrChj/QJ3uuPJ
- /5VoAFAM=
-X-Gm-Gg: ASbGncsF2koqMRwm3w0n2kumxS/iydvhlNTLayPSq/AlAeE01fbUDozxINV9/q1jDcH
- fmKx3Ot3hYwoBZNkFO7fmH1sfMGTdSiX7/r9W9FW2PMU5LbsubmlLePNDOpBTy1A2Me/gjr/ir9
- ohdZO367wraPDvZCpLqAhqPY8QA0BSPZ3xJ1/ZyrbUdUOkOxHUAZIBHlPnses5/oHVOf47e9siy
- BEEb8Q2yJ76WDchkbCjPn2pMMWqnfJAHrTPjX3KRpQZ7vDAqUiohfC68NWrmn4uwgTO82yBdhQc
- Kjgl4zTZINvD9GNREUHMIn5+bZCiVx0oNYocLB9uu+emT2vsB7xqwK2876b4MMyWvaVftm7exrG
- xiLXYnjkD68VgSQ==
-X-Google-Smtp-Source: AGHT+IGPzIv3XUyAkmSWQvkuYZFc1ewigbodYzX0Iay0HNdc7rIEEqJMROi4T/Qe9tSgOnMp+OhHYA==
-X-Received: by 2002:a05:600c:a319:b0:442:f98e:f37 with SMTP id
- 5b1f17b1804b1-4538ee559f7mr20785415e9.21.1751018978028; 
- Fri, 27 Jun 2025 03:09:38 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ee3:2301:c61f:677:c14a:b7e3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4538a423abbsm46761695e9.39.2025.06.27.03.09.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 03:09:37 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 27 Jun 2025 11:09:36 +0100
-Subject: [PATCH] boot: Ensure method_flags is initialised before use
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55RAMKSQ2388215;
+ Fri, 27 Jun 2025 05:22:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1751019740;
+ bh=Jv8Ehu8tjm6U8sW2e5nisfZC+WTrdQGU+vVZCpz5RlE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=O8lbPdV00a94X5nY+MIRmd3O7CdRdv+HWhDCobJKqMMU0dU9zIfaCt4CnflLoAtEJ
+ OsoagTPptaNtr7Y3pAmnk2KKhKzXtkOLWpaMG1GtpA4NGqiMF+BtwftIoRD26/trhw
+ Yq+PfxDfi96oLVsKoEttQSA9qSK2CzlMpwZTJbbs=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55RAMJVX299971
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 27 Jun 2025 05:22:19 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
+ Jun 2025 05:22:19 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 27 Jun 2025 05:22:19 -0500
+Received: from localhost (uda0497581-hp.dhcp.ti.com [172.24.227.253])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55RAMI862910428;
+ Fri, 27 Jun 2025 05:22:19 -0500
+Date: Fri, 27 Jun 2025 15:52:18 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Gokul <g-praveen@ti.com>
+CC: <trini@konsulko.com>, <casey.connolly@linaro.org>,
+ <tien.fong.chee@altera.com>, <sjg@chromium.org>,
+ <patrick.rudolph@9elements.com>, <1425075683@qq.com>,
+ <Oliver.Gaskell@analog.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] configs: KASLR OPTEE RNG support for K3 devices
+Message-ID: <20250627102218.xtjlreu5qmpmfszr@uda0497581-HP>
+References: <20250627092224.36325-1-g-praveen@ti.com>
+ <20250627092224.36325-2-g-praveen@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250627-bootflow_fix-v1-1-f1039b2962d6@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAN9tXmgC/x2NUQqDQAwFryL5diEG2kKvUopk11gD7W5JRAXx7
- l37Ocwb3g4upuJwb3YwWdS15Apd20CaOL8k6FAZCOmCV7qFWMo8vsvaj7qFiIg8IHUpEdQksku
- IxjlNZ/Rhn8VO8TWp+//P43kcP3LnUW93AAAA
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250627092224.36325-2-g-praveen@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,51 +82,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The local variable method_flags is only assigned to in some of the
-code paths leaving it possibly uninitialised at first use.
-Initialise method_flags at declaration to ensure that it cannot be
-used uninitialised. Also remove now redundant assignments.
+Hi Gokul,
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- boot/bootflow.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+On 14:52-20250627, Gokul wrote:
+> From: Gokul Praveen <g-praveen@ti.com>
+> 
+> Add KASLR OPTEE RNG support across K3 devices by enabling the required
+> configs.
+> 
+> Signed-off-by: Gokul Praveen <g-praveen@ti.com>
+> ---
+>  arch/arm/Kconfig | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 7282c4123b0..cd27e5a5422 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -805,6 +805,9 @@ config ARCH_K3
+>  	select REGEX
+>  	select FIT_SIGNATURE if ARM64
+>  	imply TI_SECURE_DEVICE
+> +	imply DM_RNG
+> +	imply TEE
+> +	imply OPTEE
+>  
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 4054a966af8..d60e9df6a9d 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -245,7 +245,7 @@ static int iter_incr(struct bootflow_iter *iter)
- 	if (iter->flags & BOOTFLOWIF_SINGLE_DEV) {
- 		ret = -ENOENT;
- 	} else {
--		int method_flags;
-+		int method_flags = 0;
- 
- 		ret = 0;
- 		dev = iter->dev;
-@@ -264,7 +264,6 @@ static int iter_incr(struct bootflow_iter *iter)
- 		} else if (IS_ENABLED(CONFIG_BOOTSTD_FULL) &&
- 			   iter->flags & BOOTFLOWIF_SINGLE_MEDIA) {
- 			log_debug("next in single\n");
--			method_flags = 0;
- 			do {
- 				/*
- 				 * Move to the next bootdev child of this media
-@@ -306,7 +305,6 @@ static int iter_incr(struct bootflow_iter *iter)
- 				}
- 			} else {
- 				ret = bootdev_next_prio(iter, &dev);
--				method_flags = 0;
- 			}
- 		}
- 		log_debug("ret=%d, dev=%p %s\n", ret, dev,
+Does it get enabled for R5 based defconfigs too in .config? ARCH_K3 is
+enabled for both R5 and ARM64 cores so wondering if we are ending up
+enabling it for R5 too which might not be required ( or is it? )
 
----
-base-commit: 359e3012921f2fc2d43f3c4e320a752173f82b82
-change-id: 20250627-bootflow_fix-b000ad021cc2
+Regards,
+Manorit
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+>  config ARCH_OMAP2PLUS
+>  	bool "TI OMAP2+"
+> -- 
+> 2.34.1
+> 
