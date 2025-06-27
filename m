@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 682D3C7EE31
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 06:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43FC7C7EE31
+	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 06:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDE4881F66;
-	Fri, 27 Jun 2025 08:04:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BC41381F66;
+	Fri, 27 Jun 2025 08:09:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k0dbFhwq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wxGM6LSH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BC7682B34; Fri, 27 Jun 2025 08:04:29 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4133280C83
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 08:04:24 +0200 (CEST)
+ id A5B0582E27; Fri, 27 Jun 2025 08:09:30 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B861380C83
+ for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 08:09:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55R64Iah2645140;
- Fri, 27 Jun 2025 01:04:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751004259;
- bh=7VJEGIcUm8qxtadtXn8VqN5/EOyF/lZ/KLCQGRYax1c=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=k0dbFhwqwAhdzbhI9gbbj2i7F2H4IclKF/jgD+ffUx8mcfxhjnHHmkjrvsFAg4qtk
- SJ2GtOi4rzux0DK8EkUiq9IVeql50Foe1tUs4/RcwfzNG1KyVJBSVL586vP/jKl/3u
- wDreVH0iSVXpfy09N65ffLWQhEbH4Av/3p1XG7y4=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55R64IPi123614
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 27 Jun 2025 01:04:18 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 27
- Jun 2025 01:04:18 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 27 Jun 2025 01:04:18 -0500
-Received: from [172.24.227.4] (hp-z2-tower.dhcp.ti.com [172.24.227.4])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55R64DaL2306277;
- Fri, 27 Jun 2025 01:04:14 -0500
-Message-ID: <227f10db-c584-4ada-828f-f44f72560b8b@ti.com>
-Date: Fri, 27 Jun 2025 11:34:13 +0530
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=ef14=ZK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1751004563;
+ bh=ogoRoUboawlj+IEwRCVwjsFDVxqjPkpTEkiy5D/cvBY=;
+ b=wxGM6LSHSyZGhEW/w/zSYh55bA368H171svZkFqzwPSmg+AY+p0mOfKRfUsTIdR2hY4JL6iJQ
+ NpuRfb2JtzG/yCSVugGVwkQsViFWgO8iOTQ5p4Ty0VbokuPHSIjMeRzKdu1SzyEtwi394ml4/oa
+ yam1mk4GBMTpLkdJnPapZcTfw7/zceqwUlFKwN82HIRnl8C5gvIS+SU46H1I2BhwCMtlK55+9IJ
+ F+2b7JYX088SDsydMOG7VLh38Mo5swd8doAzCPQn+kaAk9TEnCJEkkc9S7EhQuHoKfkX+ckySfz
+ DJtXcXFt7AcB4ruGfljYZakWmfS/cKl0C6dpbxKj/CeQ==
+X-Forward-Email-ID: 685e358f7cdf8336a3484daa
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.1.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <07e80d9e-c91b-4b33-ab12-bcc5aa0bf3c7@kwiboo.se>
+Date: Fri, 27 Jun 2025 08:09:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [EXTERNAL] Re: [PATCH v2 0/2] Add TI K3 PCIe Endpoint Controller
- support for AM64X
-To: Tom Rini <trini@konsulko.com>, <vigneshr@ti.com>, <rfried.dev@gmail.com>, 
- <jm@ti.com>, <s-k6@ti.com>, <rogerq@kernel.org>, <afd@ti.com>,
- <sjg@chromium.org>, <danishanwar@ti.com>, <anshuld@ti.com>,
- <n-francis@ti.com>
-CC: <u-boot@lists.denx.de>, <s-vadapalli@ti.com>, "Govindarajan,
- Sriramakrishnan" <srk@ti.com>
-References: <20250616164929.631791-1-h-salunke@ti.com>
- <175098661987.1928306.16153229800176946154.b4-ty@konsulko.com>
+Subject: Re: [PATCH] board: rockchip: add ArmSoM Sige5 RK3576 board
+To: Jianfeng Liu <liujianfeng1994@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Greg Malysa <malysagreg@gmail.com>, Heiko Stuebner <heiko@sntech.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Robert Marko <robert.marko@sartura.hr>, Sebastian Kropatsch
+ <seb-dev@mail.de>, Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Xuhui Lin <xuhui.lin@rock-chips.com>
+References: <20250627025721.962397-1-liujianfeng1994@gmail.com>
 Content-Language: en-US
-From: Hrushikesh Salunke <h-salunke@ti.com>
-In-Reply-To: <175098661987.1928306.16153229800176946154.b4-ty@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250627025721.962397-1-liujianfeng1994@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,55 +88,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-
-On 27/06/25 06:40, Tom Rini wrote:
-> On Mon, 16 Jun 2025 22: 19: 27 +0530, Hrushikesh Salunke wrote: > This 
-> series adds support for the Endpoint mode on Cadence PCIe controller > 
-> on TI's K3 family of SoCs. The driver is an adaptation of the Linux > 
-> driver (drivers/pci/controller/cadence/pci-j721e. c)
-> ZjQcmQRYFpfptBannerStart
-> This message was sent from outside of Texas Instruments.
-> Do not click links or open attachments unless you recognize the source 
-> of this email and know the content is safe.
-> Report Suspicious
-> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!u3dqPfcvd0wb6sZFHdNgHD_5IYxHC6X6-ZdM_RF6PaZkyeEkWwferth2j24zfrLAu8SOfQrJ0Qwh3AuoqVc-unAZfLSYds3hJogsvDXuFgzmH2lV$>
-> ZjQcmQRYFpfptBannerEnd
+On 2025-06-27 04:53, Jianfeng Liu wrote:
+> ArmSoM Sige5 is a Rockchip RK3576 based SBC (Single Board Computer) by
+> ArmSoM.
 > 
-> On Mon, 16 Jun 2025 22:19:27 +0530, Hrushikesh Salunke wrote:
+> This is the second board of ArmSoM supported by u-boot, so I change the
+> dir in MAINTAINERS to board/armsom/.
+
+Please review my series that already adds the Sige5 board, see [1].
+
+[1] https://lore.kernel.org/all/20250422211216.3727559-1-jonas@kwiboo.se/
+
+Regards,
+Jonas
+
 > 
->> This series adds support for the Endpoint mode on Cadence PCIe controller
->> on TI's K3 family of SoCs. The driver is an adaptation of the Linux
->> driver (drivers/pci/controller/cadence/pci-j721e.c) and has been
->> implemented specifically for Endpoint mode of operation on AM64X. A minor
->> set of changes will be sufficient to support other K3 SoCs as well.
->> 
->> This patch is tested on AM64X EVM. Following are the log corresponding
->> to this feature.
->> 
->> [...]
+> Booting from emmc is tested.
 > 
-> Applied to u-boot/next, thanks!
+> Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
+> ---
 > 
+>  MAINTAINERS                                  |  2 +-
+>  arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi |  6 +++
+>  arch/arm/mach-rockchip/rk3576/Kconfig        |  7 ++++
+>  board/armsom/sige5-rk3576/Kconfig            | 12 ++++++
+>  board/armsom/sige5-rk3576/MAINTAINERS        |  7 ++++
+>  configs/sige5-rk3576_defconfig               | 44 ++++++++++++++++++++
+>  doc/board/rockchip/rockchip.rst              |  1 +
+>  include/configs/sige5-rk3576.h               | 15 +++++++
+>  8 files changed, 93 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/rk3576-armsom-sige5-u-boot.dtsi
+>  create mode 100644 board/armsom/sige5-rk3576/Kconfig
+>  create mode 100644 board/armsom/sige5-rk3576/MAINTAINERS
+>  create mode 100644 configs/sige5-rk3576_defconfig
+>  create mode 100644 include/configs/sige5-rk3576.h
 
-The driver includes header file "pcie-cadence.h" as
-#include <pcie-cadence.h>
-
-But this header file is not in standard inclusion path
-so this needs to be changed to following to avoid build
-issues especially on older compilers (GCC 11.x)
-
-#include "pcie-cadence.h"
-
-I have posted the patch for this fix.
-
-https://patchwork.ozlabs.org/project/uboot/patch/20250627055546.3706770-1-h-salunke@ti.com/
-
-> [1/2] pci_endpoint: Add TI K3 Cadence PCIe Endpoint Controller driver
->        commit: a4a0edc6046dd5b9ebe24ad72dfcdb43b36f0bd6
-> [2/2] configs: am64x_evm_a53_defconfig: Enable configs for PCI Endpoint mode
->        commit: 7d70986071ea32b2d496ecfc4f9621e454dc1b75
-> -- 
-> Tom
-> 
-> 
+[snip]
