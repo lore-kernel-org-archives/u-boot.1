@@ -4,86 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A868CC77B7F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Jun 2025 20:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0884C7EE32
+	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 08:31:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3E98806D8;
-	Fri, 27 Jun 2025 22:00:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BAE882977;
+	Sat, 28 Jun 2025 10:31:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wi0TojIB";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AdV2gic6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC0FE8006D; Fri, 27 Jun 2025 22:00:24 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E46F781D5D; Sat, 28 Jun 2025 10:31:24 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68ADE806D8
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 22:00:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8D87806D8
+ for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 10:31:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2db2f23f174so1668272fac.2
- for <u-boot@lists.denx.de>; Fri, 27 Jun 2025 13:00:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751054419; x=1751659219; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fql1Nwfk+y1pprWPP+H5Ev6C87t04J5xsfAJLv9Lv3E=;
- b=Wi0TojIBm3i+lS+auUfa3BGEfThTjiDJFbDGRk4C4k2+zQxCKIxhXSATqE8rAu00kB
- vn6Ga48HLuWfKFqkok2mY0Um8/nO//YOWk2xlj7E2ykqFyUelSAVzIOj/EZn2FpFL+Up
- iedcSGrK+UxG4ubWxNC8hY1OO6Z7Z1OFYjUlY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751054419; x=1751659219;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fql1Nwfk+y1pprWPP+H5Ev6C87t04J5xsfAJLv9Lv3E=;
- b=FbkRnO2rpputFP6/RTh+VWtjaSjgUOOSUps4f/4OmUPGLyq9mIbqSGFOIQN3oyC7E4
- DmBWFGr3t6KPNue4GHbRgCi+MEbe+iYdqMGgz0qF5u2InAvvkuiB5Z1LVLth3W+AYoAn
- MfkVYdo9wzU/CjhFwQm1lK5o73QMb8kGIzVX6hrnx6g9QtYnXcyAQJzNnI2kgxoImiij
- aao7I47Eww6joifbwfSvIzd34Po6GdHV0At1iVSQP4HQpTKfZZ5P1vKHz8HFIPe7/E7d
- s8Q/rmSpLwPSHt6wtjIah8IflpvpKkZUvkAErLrWRcUC4RCJxQuopgNjX57gbYuwk2I3
- 9C6w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXNSMPrVK0noqCywoSJug++z+rq2YMcWuV37ax0300f2ZfwrkscMnACEn5UaHTXDCHKz3MS0Po=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDWNRzYVGbTu0d+dRwmL3sB255gtknf1P4nJyjR1My4nOD8qS/
- DB/9pY2EC/ZJ/V+AO1zohPfVKPxVUL5ryzCMnLCxQM0y/VpPmAZfss/q1qziggbx0Hw=
-X-Gm-Gg: ASbGnct61eMXdIP1FDZruCoUALX+CuyqWNZ8W9U6+JYjnzMMH30AldysfwsAyNNLkf9
- oabxJx8ea5LMsnxsl1sygC4Rxd8jJGdDxRi2nMG4UlAy7sDSzx0Sy6prx2Bz7nMNDa2J+oWQiwY
- GwITGjKd3OWWAS/SAc79SPPqzrtivPoGK5h0ITZIw6U67+sYmSskHNWgCpc7rpRGTImS5N+BYVB
- Ok1C0hDYp/2KADiVjjLb6eSsK9r5F+pxC1OSXcnS3ZMUlvrdSajJ3HL9flyiayR+Ewm5MlSY1rO
- Hn+uVn4fmcSj26v1blYMLCpIqaDfeAmT8XOYBRtNElNH2qWL3MMVDsW/5eWOPDqFIisxUxTEeAX
- 44ikz4Vzs5zXXGkNZfLyQ7PKEM/yvqMeCRA==
-X-Google-Smtp-Source: AGHT+IF4w34J4V1PpMx1SYPTDeiWD5VtLa/zqQ7yIIimkTMrp0hyGuvJ7jj6hMIJ9qtLxUPIaKHzYg==
-X-Received: by 2002:a05:6870:a448:b0:297:24ad:402f with SMTP id
- 586e51a60fabf-2efed4b9862mr3105483fac.12.1751054418893; 
- Fri, 27 Jun 2025 13:00:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2efd4ea5a35sm1039324fac.2.2025.06.27.13.00.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Jun 2025 13:00:18 -0700 (PDT)
-Date: Fri, 27 Jun 2025 14:00:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, u-boot@lists.denx.de,
- upstream@lists.phytec.de, Bryan Brattlof <bb@ti.com>
-Subject: Re: [PATCH v2] binman: migrate from pkg_resources to importlib
-Message-ID: <20250627200015.GI4003484@bill-the-cat>
-References: <20250627-pkg_resoures-removal-v2-1-86b277b02552@phytec.de>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1751099477; x=1751704277; i=xypron.glpk@gmx.de;
+ bh=hheG5tzB9UN0JqsA+qotmw+Q6DHZCBtWblVj+9IrIJM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
+ Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ cc:content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=AdV2gic6ARGvs5fOlIjvqajwNf3T4XTquQkKsWW1nEVn1/8P1Y7Zx6PYvfaEXHUk
+ h16+G6N5xsKGLaO4Iwpw0h3AFETiOibhSS97oGAdZTHpli06Aw3mEK3rFpOXKva1I
+ KXylaS+YlFTjKWM6n3Y1bua561IbyI1xzjUWkeM0jrORfpmgXnbWcu2ZkEpPj7btS
+ UTt96wf+NLDB/f7jJAtSg3q1PUIin7WBUFNyGhDprilNpC33IvG8K+7EG7xDnLDh3
+ fD1j/EXFUw6eQbrqD2NhnyR0SjB2P2l7s37h/jHS8uj3BIo7TFbT5a8leQtJpAdtI
+ Yy4y9Y6i3ZHMTq2cfw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MFsUv-1uVgt81QzP-00EmHQ; Sat, 28
+ Jun 2025 10:31:17 +0200
+Message-ID: <4e59e5e4-9b65-4f26-a0fa-3f65e122a12a@gmx.de>
+Date: Sat, 28 Jun 2025 10:31:12 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iPyp22gfxVT546/3"
-Content-Disposition: inline
-In-Reply-To: <20250627-pkg_resoures-removal-v2-1-86b277b02552@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: efi_loader: Sporadic build failure: Error: file not found:
+ <path>/capsule_esl_file
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: "Anthony Pighin (Nokia)" <anthony.pighin@nokia.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>
+References: <BN0PR08MB6951841AE35F95A242553D91837BA@BN0PR08MB6951.namprd08.prod.outlook.com>
+ <012ee7c9-6794-485e-8e0a-5ed0ff23c045@gmx.de>
+Content-Language: en-US
+In-Reply-To: <012ee7c9-6794-485e-8e0a-5ed0ff23c045@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Af2N72cmT2F0kS6N3/qsE3wyTHspB/mDQ9KopSWG45RqO0IMyUa
+ uC6yU1Bd7r9MPy+S29GIC32K0hQwlVZa7Et8Sxkr5XG+d3saRJPy44FTYJXqRFvv8DBOJ06
+ 8nC1/7LGSai4Bn8oil2vbY7HnemD0dFXbqrXW2qNXKGtNPp7/ItsQ5mhQoT5mDdPWg2bwf1
+ K8J3OMmO/uNGvGcowstOw==
+UI-OutboundReport: notjunk:1;M01:P0:3iSPy88tXYA=;aCefLuO/IvBTYrT0Ewsoc4FIKlA
+ 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
+ fabQa4KTQu8bryWPM+p5rW8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,59 +129,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 25.06.25 16:18, Heinrich Schuchardt wrote:
+> On 25.06.25 15:32, Anthony Pighin (Nokia) wrote:
+>> Following the introduction of commit=20
+>> fd58c275f6ba524101ba0990e53f5a11ac390bd0,
+>> we have seen sporadic build failures with the following footprint:
+>>
+>> <path>/u-boot/2025.04/git/lib/efi_loader/efi_capsule_key.S:14:
+>> Error: file not found: <path>/u-boot/2025.04/git/capsule_esl_file
+>>
+>> Upstream commit 739ad58dbee874a3ad3bddd116e995212a254e07 also touched=
+=20
+>> this area,
+>> and we pulled it back into our build as a test. However, it still=20
+>> appears there is a missing
+>> dependency:
+>>
+>> --- a/lib/efi_loader/Makefile
+>> +++ b/lib/efi_loader/Makefile
+>> @@ -87,7 +87,7 @@ $(objtree)/capsule_esl_file: FORCE
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 fi
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 $(call cmd,capsule_esl=
+_gen)
+>>
+>> -$(obj)/efi_capsule.o: $(objtree)/capsule_esl_file FORCE
+>> +$(obj)/efi_capsule.o $(obj)/efi_capsule_key.o: $(srctree)/=20
 
---iPyp22gfxVT546/3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+You should not remove the color (':').
 
-On Fri, Jun 27, 2025 at 09:07:36AM +0200, Yannic Moog wrote:
+Best regards
 
-> pkg_resources is deprecated, use migration guide in [1] to migrate to
-> importlib.resources.
-> Keep the Python 3.6 backwards compatibility.
-> This also fixes the binman version test which failed for setuptools
-> versions that print the deprecation warning.
+Heinrich
+
+>> capsule_esl_file FORCE
+>> =C2=A0 asflags-y +=3D -DCAPSULE_ESL_PATH=3D\"$(objtree)/capsule_esl_fil=
+e\"
+>> =C2=A0 endif
+>>
+>> Anthony
 >=20
-> [1] https://importlib-resources.readthedocs.io/en/latest/migration.html
+> Hello Anthony,
 >=20
-> Reviewed-by: Bryan Brattlof <bb@ti.com>
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> ---
-> Changes in v2:
-> - rebase on to next
-> - Link to v1: https://lore.kernel.org/r/20250610-pkg_resoures-removal-v1-=
-1-97a269446d35@phytec.de
-> ---
->  tools/binman/control.py | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+> Could you, please, provide logs showing the error and the matching=20
+> defconfig.
+>=20
+> Best regards
+>=20
+> Heinrich
 
-This still fails in CI:
-https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/bui=
-ld/builds/11529/logs/83
-and also Gitlab. Please see
-https://docs.u-boot.org/en/latest/develop/ci_testing.html and make sure
-CI passes before posting v3, thanks.
-
---=20
-Tom
-
---iPyp22gfxVT546/3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhe+EsACgkQFHw5/5Y0
-tyxxMgwAi0CDxUpPoPh7vIZY4K3v0cbcVRlkP4UzbY5otYrCFNT4yQevddjEZEpi
-4EZso0/BszVXL1bRJhPIyR1EIUW2hrQ6vL2RrgXeFO/Or7bYPLoUU2Q5xJn6XiDZ
-dpV5V2vSkQrEcqvcB2noyWK0DbGHpUuBddQSgyFo6vGxsPrfjZMePmtBZFXFQ9Py
-XMqurEp1lLgtMJw0GLaWcHFAowa05zh5vm8NFfuf5of5055B/tUrtJBO573/qkSI
-QxeT8eKrO8fgFjStbUXjmyGozZakSl6VhHAQJoxcjB9qE6KZOr4pmcm+K3XXoyFY
-kvR57AgygjwiImJiRcVB+ZN2NskGlJU7AK9zPviZKgltIicLXOYmTq5QNO7t1uPk
-wrtjtvnf0VgtEHCKf796I7bw+y8keeG7rMcHiHA9Q10lgzRfOGpAy7a07JLp0RBO
-vRij5Wp8vad2fLDr5Ppdm3/tNwX4sxUg8yZr83A3vchHWt3K9C5XaUA0xk17XJaB
-va4JyOER
-=Q3uH
------END PGP SIGNATURE-----
-
---iPyp22gfxVT546/3--
