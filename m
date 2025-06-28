@@ -4,118 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20114C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 21:21:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A026C7EE39
+	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 21:23:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2062282B34;
-	Sat, 28 Jun 2025 23:21:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE14F82B34;
+	Sat, 28 Jun 2025 23:23:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="FNCON7ni";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pGNbR8KX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D5D482DA1; Sat, 28 Jun 2025 23:21:22 +0200 (CEST)
+ id 3F59582DA1; Sat, 28 Jun 2025 23:23:11 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FF2E82977
- for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 23:21:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85D7182977
+ for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 23:21:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1751145663; x=1751750463; i=xypron.glpk@gmx.de;
- bh=44rBkUvk2wOu3ZQ/wGvDwG9DQOtPCqaVeEjdtgLhT1U=;
+ s=s31663417; t=1751145714; x=1751750514; i=xypron.glpk@gmx.de;
+ bh=V/VI4nHx9I8Nta4hzXX7XLX+DbtYilWnu0oWMiJlbgk=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=FNCON7nipF6lY7kmPbRVQXgCgb+Kq3takpafLSBmJnDP934kFGdB+JTHsXKzrDZE
- 7Qi02AZCdX9rxyr53PAWzS6Ssg2i4jsSHU1qJYt35JfroiJ69PkStwgxDUa87LcK3
- wfqs44pzoJ0TUhmP5fUPDlzotle9hQltz2DpH4HBBE1ABLEQj2/Oy+pj+HYjEzr0X
- evXsE1LKfNa+Q3CeekAqCnyFFnyGg1qbusHvw9vwvswfAU75pVQ5eIA6FGVjq6V0W
- mE+JhFZcf11SZNrXK811pxcETulhny7dQteA8z3UCzWZNBiPN2qBh37eNhpHd3myo
- Nvdnx+Aji1R4sIrcdA==
+ b=pGNbR8KXXHm3/hhxIeGIvgfSbL2r22k7nPaPxmoG2FxWYWvjMKF+GYI7bx/uq0CD
+ u+i9hgsucv5enf317sfJQzVAgmOowhKOUzmKeyH7YFkcDBn7y4wjaGErj0qtCn8fL
+ cc61lMDbBzJqdNB86nc9vV924V95LDThxWkYDAZn8OZi5s1Ind/3YFr/f/x4gd/xM
+ iMVaDUAs/cZfshtuEq/nfkS1bNX29zIEz/rkfBbOPb21NtdX4n2w7oDOPWRgIAEBn
+ /XZdLgcYQbHSROYLbxkjm4BpM3R2oQKZ48WAwrwf8irRIvq7cyufk3hSHgtO1maeM
+ E7eEc4fgNb4ZEVaBIw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.104] ([46.114.106.132]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfHAH-1vCMeC2Apf-00dtws; Sat, 28
- Jun 2025 23:21:03 +0200
-Message-ID: <e6b3f1be-3b8f-44ce-8088-90abb37c07fc@gmx.de>
-Date: Sat, 28 Jun 2025 23:21:02 +0200
+Received: from [192.168.143.104] ([46.114.106.132]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCsPy-1uMrYI1RiK-00Bv4Z; Sat, 28
+ Jun 2025 23:21:54 +0200
+Message-ID: <a37aa882-0a6f-44f0-a98d-56ac19fe663a@gmx.de>
+Date: Sat, 28 Jun 2025 23:21:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] cmd: Introduce CMD_HELP
-To: Michal Simek <michal.simek@amd.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
+To: Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com,
+ Casey Connolly <casey.connolly@linaro.org>,
  Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- git@xilinx.com
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <3f2984f62d6bda6a4a432b51047eddb70e35571f.1751014184.git.michal.simek@amd.com>
+ <CALeDE9ORhMR6Zj=Ps+BBBLax67kLDxFPdWtr_V99Pyy+XhuTKw@mail.gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <3f2984f62d6bda6a4a432b51047eddb70e35571f.1751014184.git.michal.simek@amd.com>
+In-Reply-To: <CALeDE9ORhMR6Zj=Ps+BBBLax67kLDxFPdWtr_V99Pyy+XhuTKw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LYzj43QguHe90irGqrntXqW9rK+AYMQ3QFm5ez+Kl2t9/+u/cNk
- 9E3hCYHcgIKZv8tmuB3MylWvtwYXl1ZZdoPbs9E3s+eTQMqqf32DQ5tVOofnoZ8AzuSFUcE
- OmLPmATWE7TpR/LksdH5vF5Df7tAq87/TFzBulENQ+P/wRM6ShRqTuSQRK/PSqYyy7Zti/v
- v84DZsRjcxdemDyrZS0GQ==
-UI-OutboundReport: notjunk:1;M01:P0:6kteFfS8rOk=;MN9PFtpjfITQRPWNQ9+pkm0Ll1/
- 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
- TVBxDV57FXQ==
+X-Provags-ID: V03:K1:pZ32TpKRbO+sM9vZgzmSVwEDy+azXN3VJHLzk+Kh3t0giBCyhU0
+ wlPTOE8Cm0UtcF310v6tLpvpL5Wvr3lsZ7uCC34yoB5BUZLAUFMjb7R6L9TYG2yis4Eng3U
+ xROh+ij2nWLUyzuPuo+nQbEYxVQU5Zg71BEw1s1gk4aPBZPLxgdbc3A4RlpbaWwBwdyGPKv
+ RBoUnsiQUDqilzQ3tHjSg==
+UI-OutboundReport: notjunk:1;M01:P0:IPMeOYIRBD8=;1xi2e/e9xat7iCIrSnNy6tsUzIN
+ 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
+ HBubcqC5TOw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,65 +133,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.06.25 10:49, Michal Simek wrote:
-> Add option to disable help command in size constrained systems to save s=
-ome
-> space.
+On 27.06.25 12:02, Peter Robinson wrote:
+> On Fri, 27 Jun 2025 at 10:45, Michal Simek <michal.simek@amd.com> wrote:
+>>
+>> Add option to disable help command in size constrained systems to save =
+some
+>> space.
+>>
+>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>> ---
+>>
+>>   cmd/Kconfig  | 6 ++++++
+>>   cmd/Makefile | 2 +-
+>>   2 files changed, 7 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index f21d27cb27f2..3f4221cb4d02 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -189,6 +189,12 @@ config CMD_FWU_METADATA
+>>          help
+>>            Command to read the metadata and dump it's contents
+>>
+>> +config CMD_HELP
+>> +       bool "help"
+>> +       default y
+>=20
+> Maybe "default y if CMDLINE" as it also doesn't make sense if there's
+> no cmdline enabled.
 
-The patch looks fine to me.
-
-When I read through cmd/help.c I am wondering why it has
-
-#ifdef CONFIG_CMDLINE
-
-I would assume that without CMDLINE we wouldn't have this command.
-
-Definitively after your patch this the case.
-
-Please, update the tests in
-test/py/tests/test_help.py
-to depend on the new Kconfig symbol.
+This config is enclosed in an if for CMDLINE.
 
 Best regards
 
 Heinrich
 
-> ---
 >=20
->   cmd/Kconfig  | 6 ++++++
->   cmd/Makefile | 2 +-
->   2 files changed, 7 insertions(+), 1 deletion(-)
->=20
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index f21d27cb27f2..3f4221cb4d02 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -189,6 +189,12 @@ config CMD_FWU_METADATA
->   	help
->   	  Command to read the metadata and dump it's contents
->  =20
-> +config CMD_HELP
-> +	bool "help"
-> +	default y
-> +	help
-> +	  Command to show help information about other commands.
-> +
->   config CMD_HISTORY
->   	bool "history"
->   	depends on CMDLINE_EDITING
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index 80cf70b7fe8c..718eff4ed197 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
->   # core command
->   obj-y +=3D boot.o
->   obj-$(CONFIG_CMD_BOOTM) +=3D bootm.o
-> -obj-y +=3D help.o
-> +obj-$(CONFIG_CMD_HELP) +=3D help.o
->   obj-y +=3D panic.o
->   obj-y +=3D version.o
->  =20
+>> +       help
+>> +         Command to show help information about other commands.
+>> +
+>>   config CMD_HISTORY
+>>          bool "history"
+>>          depends on CMDLINE_EDITING
+>> diff --git a/cmd/Makefile b/cmd/Makefile
+>> index 80cf70b7fe8c..718eff4ed197 100644
+>> --- a/cmd/Makefile
+>> +++ b/cmd/Makefile
+>> @@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
+>>   # core command
+>>   obj-y +=3D boot.o
+>>   obj-$(CONFIG_CMD_BOOTM) +=3D bootm.o
+>> -obj-y +=3D help.o
+>> +obj-$(CONFIG_CMD_HELP) +=3D help.o
+>>   obj-y +=3D panic.o
+>>   obj-y +=3D version.o
+>>
+>> --
+>> 2.43.0
+>>
+>> base-commit: 8c20ef07b8939e5ea703224ad91a8669badaaae5
 
