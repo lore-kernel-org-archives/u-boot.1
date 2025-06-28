@@ -4,83 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6BFBC54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 21:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090D2C54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 22:11:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6231282B34;
-	Sat, 28 Jun 2025 23:50:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6443E82B34;
+	Sun, 29 Jun 2025 00:11:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=benettiengineering.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vyb4qg/d";
+	dkim=pass (2048-bit key; unprotected) header.d=aruba.it header.i=@aruba.it header.b="WCaMAmtk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81F6282DA1; Sat, 28 Jun 2025 23:50:07 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 27BA482DA1; Sun, 29 Jun 2025 00:11:49 +0200 (CEST)
+Received: from smtpdh20-1.aruba.it (smtpdh20-1.aruba.it [62.149.155.164])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 068E682977
- for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 23:50:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-553b544e7b4so919518e87.3
- for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 14:50:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751147402; x=1751752202; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zl90zY3at6P01wnlNmQwdUiP5qPWCbt5F19vpns1KXw=;
- b=Vyb4qg/dfVOhWfRI7xstrVFRfLJWmrVhrxIJaVUsm1YYB/6LOElZd5hIZEhC+Rslxd
- JwPDSwfaVXut+CAX+s/H77W8ZxmKM5wyQ2WnCwKkfJT4Wn15e90PlrlJX1OS+Uq90nKW
- dm4dn+BppEXdKLgm+3lU307wpM5YeacOc7EiZDEXCglIEddGNYdKHDa7sYhadkgn/Qfk
- RYjcNdXyhzBKZAbdxNgI4U7JI82cVBxT0no96wps21yVihjcUUdEOzGUDRRG1EI8brDc
- tKKwyi0ovdSh3P3h+vBR9m5SyMmodQ7yFx9IdvIDOT+xwc3vV9Pf6kVyqbc/s+D1mA5l
- z+nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751147402; x=1751752202;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zl90zY3at6P01wnlNmQwdUiP5qPWCbt5F19vpns1KXw=;
- b=PjX+mr57ERGy0XZgIS8s9XECuERc4lo8tkN2PZEyehOHuL4oSo1P30EAJXidymdGm/
- Mq6s1Q3YdIWNpOm99WvH7sky5KWLbVqzSd2Yo2GHq9QfLPM99xDf14/Rshl3wqhZpGps
- 7n+6EOkCMREYy2YYv025szqjjSMD7RL3g4xRPEytKmDYv9RyHAijpeSQqb/jIm2bJYFo
- hhiO3VODiQZCbxNBHjSneuXzhzLnkGfMzolq3HPAc0wMfZQs+Tl5g114KBnUVAc+Jiw/
- H/lnHEXsffVY6kwqb/6aybDOG/I21DJGfD64wdVyju1LXM3y04DuxhoWpEb0iG7Zi0KW
- HUug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIr8/qloFVUVygVRd2Lu5aF9k1qizkcoQ7ZMk9El3OnLv5qH4Q2arnFvFGaIdt/JXnC+6gH8U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxoE5ogdi4KKvZgbo4jnA8avOwogCt3OsCeeVtKFVVqs02dueiO
- 4rnJ6/ullll2lFUr2UM4SUHmSxPlH58f1EX/rPpejx2oNmaNYx6G3YAIe4dVuCxoRwHTmMb+VaT
- xZh1CfbihGtfaEU5X9nGkfb3Fh7Isbp0=
-X-Gm-Gg: ASbGnctANc1cFUh3VeQ27qLM43nJeRzSlj+nhfoF8WgRK389oOzQELfURmrhu88TiaM
- gXxTwx95duxWk9+crCMI8/6WL7LRlOb9UwBhKJmIvqg0FdGXpHu/joLTKR40ZD0TFjXWREq/KXf
- pjHQ5eM/HNCHJCk0KWJz8MAY3k+Xcat8tky84Vxj5M+xawbSDLni8fMHT2lbO4kmlp/wJMTzQxN
- jI=
-X-Google-Smtp-Source: AGHT+IGrfbb0gCS0W07elYgS0SfPbq7bXZyZJcPWge3AeN9HxVnDAjOatQX3fRXWqGmLlrYxZsMR4jtbzK15vyKfIeM=
-X-Received: by 2002:a05:6512:1284:b0:553:2868:6358 with SMTP id
- 2adb3069b0e04-5550b8bdf30mr2621525e87.35.1751147402004; Sat, 28 Jun 2025
- 14:50:02 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 904F682977
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 00:11:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=benettiengineering.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=giulio.benetti@benettiengineering.com
+Received: from [192.168.50.220] ([84.33.84.190]) by Aruba SMTP with ESMTPSA
+ id VdluuPCG7qg4pVdluuea2v; Sun, 29 Jun 2025 00:11:43 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
+ t=1751148703; bh=z0u7Jr1VOFrXFb7DtJ3IhMO5b3hJt133LLuk8HLSPlY=;
+ h=Date:MIME-Version:Subject:To:From:Content-Type;
+ b=WCaMAmtkMKYGUTaC0bVIkhp+0/BoJeihK1pU2PPduIKrCYruLSW9B6ZrClKu+dJDg
+ VTX7aZ8yNLuvI/uw5ih3ABZZ9BoMR4NpA+Orrj8nLEtb7uP6E1YX7rxensaYv+ZaKy
+ 8IGXEvbCeaLLNYIYMHUngjHoI0NjXU99rXAKUuRTSwCKVD6WKqLJygJKfpUoReJN4D
+ VaaE01FE7QAaTtDm9VmhCjeosAsVwi1VwcLfSaDqowSb2xy9aevC+gzHwtlbcAblJE
+ zWIeniCZkmjsUmCAR8EZD97Q3kHr1LO7xjC0MboOjZ+KwGZCr9MAZ/CGaBHkxT3pdw
+ EGJ2FskM/wQVQ==
+Message-ID: <9328607c-51f3-4579-8f67-2cdb1551c72a@benettiengineering.com>
+Date: Sun, 29 Jun 2025 00:11:42 +0200
 MIME-Version: 1.0
-References: <20250628214656.2395915-1-giulio.benetti@benettiengineering.com>
- <7fe3036a-602f-4ab5-8a8a-ffabd0a3ae0e@benettiengineering.com>
-In-Reply-To: <7fe3036a-602f-4ab5-8a8a-ffabd0a3ae0e@benettiengineering.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 28 Jun 2025 18:49:50 -0300
-X-Gm-Features: Ac12FXwyFMYUbpDic3Isw-L_0dtI9BDblukbMkHcI_DBjdcfCwPhGrOGZ8TrTig
-Message-ID: <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] arch/arm/include/asm/arch-imxrt/gpio.h: imxrt gpio use
  commong gpio.h
-To: Giulio Benetti <giulio.benetti@benettiengineering.com>
+To: Fabio Estevam <festevam@gmail.com>
 Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20250628214656.2395915-1-giulio.benetti@benettiengineering.com>
+ <7fe3036a-602f-4ab5-8a8a-ffabd0a3ae0e@benettiengineering.com>
+ <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
+Content-Language: en-US
+From: Giulio Benetti <giulio.benetti@benettiengineering.com>
+In-Reply-To: <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CMAE-Envelope: MS4xfIPi11kFcwxlSbQr2k4RDs1nkiRedjWyY2w7jDX3VF5Uru798CZaxhuVaQaww8e2OG/oBui59F9sVUJuEkpRfeWPAL+3nXvAQr8E/tDDC5E+dWA7Y0u4
+ TMw56fyti22VLuTdqUVDUAMkENVrgLhm5u/dYoOAkjJOy8OYSwSbPL5kRZU8VrUGyc8quMvIXmfk9qX3OGQyLxVXY4qiZmQZgp3NC1TYc6cixLU2FAqDs2gf
+ NSIbj4i8oVmCm0/g3/ar1+CxY4IV1WRJ+0LKsIoEtxaUF7qMhQUYTppTcF0LXfOMm91dcB9uZAtG1e2Ucm0ZMtaWK5rBeZWOmZQ5IuemMkA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,14 +72,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Giulio,
+Hi Fabio,
 
-On Sat, Jun 28, 2025 at 6:48=E2=80=AFPM Giulio Benetti
-<giulio.benetti@benettiengineering.com> wrote:
->
-> s/commong/common
->
-> can please the committer fix the subject when/if applying?
+On 6/28/25 23:49, Fabio Estevam wrote:
+> Hi Giulio,
+> 
+> On Sat, Jun 28, 2025 at 6:48 PM Giulio Benetti
+> <giulio.benetti@benettiengineering.com> wrote:
+>>
+>> s/commong/common
+>>
+>> can please the committer fix the subject when/if applying?
+> 
+> Please send a v2 with this fix and include a brief commit log that
+> explains the reason for this change.
 
-Please send a v2 with this fix and include a brief commit log that
-explains the reason for this change.
+Ok, thank you for reviewing.
+
+Best regards
+-- 
+Giulio Benetti
+CEO&CTO@Benetti Engineering sas
+https://www.linkedin.com/company/benetti-engineering-sas/
+https://www.linkedin.com/in/giulio-benetti-79975951/
+
