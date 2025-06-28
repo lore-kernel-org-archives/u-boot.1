@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26F99C54ED1
-	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 12:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2A7CC54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 12:37:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B07F681D5D;
-	Sat, 28 Jun 2025 14:35:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 167E282FAB;
+	Sat, 28 Jun 2025 14:35:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZxU7wBjD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ds8aDpve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0917480C83; Sat, 28 Jun 2025 14:25:36 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 174CF81D5D; Sat, 28 Jun 2025 11:27:58 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99B6582DA1
- for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 14:25:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F3B9B462FD;
- Sat, 28 Jun 2025 12:25:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C36C6C4CEF7;
- Sat, 28 Jun 2025 12:25:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751113522;
- bh=C+YoQrvp13f6ofaAyQ76mBfgIUbx71z2GYt9vCIJ/jg=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=ZxU7wBjDOQMlCX6ERsp3X2kwnvUw54SHZ3Hj8FMnWPCPqWQ2a4uYwlWJi1Y6CnzsV
- KC8hwEMqPscljrWCkNe0BGNVfNsotDrSia7mMQodekM0I6QYf4U3Xd3Lr5cyp5jPrt
- bj5KQjkb+VH0GOmlW1W11X8FcavG6Bi9Ruii1Avj9CavIa6rwM09q0ajmja6U3iysc
- yqZ7Z6asF0iPzxjTyI4P8aFICQVdnKYXOPJHcJ8ULUnRYuM6AgTm0CFURjP/G44b6u
- XwQpqPWRrLku9osjtZOSTMU/C3sNRoFLevgitjAhKMUSVFcN/qPJjsmPGHw3Za7mZM
- o3WK2GflxAOww==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id B90EDC83027;
- Sat, 28 Jun 2025 12:25:22 +0000 (UTC)
-From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
-Date: Sat, 28 Jun 2025 20:25:23 +0800
-Subject: [PATCH v3 5/7] boot: bootmeth_android: Conditionally dependent on
- abootimg
+ by phobos.denx.de (Postfix) with ESMTPS id 29E81806D8
+ for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 11:27:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maral04371@gmail.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ae0d11bb2a7so406959466b.3
+ for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 02:27:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751102875; x=1751707675; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=dDZ/K+ZSKPoExGc4qc/YbitCQJcJchaXfHn+GleGcjE=;
+ b=ds8aDpveiJq1bhtS5YobR0fLbg4s+q/nr/1CkgXp7dVOMWCSMNmU1MM6Zysh4Yim7S
+ ccH69p6AHymJIHyKyzQMOIay0JaMCoh1ASJc1OI7ixInAQ2xiQPeYuVsxBRjTigFx6+q
+ pksBl2WJRVGSduoRQBHrWtL1O62TJKOUu1NspcxTX4rkiHHl7BXhcs/HagDXm53K1LHL
+ qRrro+ITjPjEuD/DIGAO8afSMVTKh1rQ33o0f/MJB29SNZ0vZm6785Cclg+Ttwj17FKz
+ qJaG0sgG0qlZrC6olcpOi/8QF/ECnqi/BHzoB3Qb+VtUyiD4fe3OSIs3VYQHh5xPnHaj
+ eAlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751102875; x=1751707675;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dDZ/K+ZSKPoExGc4qc/YbitCQJcJchaXfHn+GleGcjE=;
+ b=xGCGJnwBvPi2AN59JVtK00EpOWoMtElI7VA7eR6XDZcMviIL4HTTvEYB+JfdEI2zsG
+ r9Ap/drcOZqDyOSf+5BkoO02f7gvxrKiz8pwTrx89ctU+YZFW1uDVTusxL9lEjPYm2nF
+ SvhihtT2HI4zmj7knFbOG1XeiqKJMGunZ2qVTuvfsjiqM9eh5S/z2vvn3wr1I4fuIegk
+ qp2IClGTzenQ2t+glYIcvnw9MEExvDxCIsElTBvwoAFKy1EiUufwPlJAHJmTn0fj1NkG
+ DlLc9C6IACJEzqzuquI3daU3H6OIhWx+x4i0/Mziwf08mTTd4+C84iA/V5KhssGTcTxr
+ v9bw==
+X-Gm-Message-State: AOJu0Yw54vw7CqKg2D2qN4xpxjfqOENaj6v6QMoPpNhDmtzr9E5mFq4r
+ 7YKZ8qxb2MWBwoWpfHJsQZFaS4xOZx0wzLVuFRJUGgQaB6nb15sjxDHzFg4gEN2M365LdVZkvDv
+ cG7LoMBeY2mdsm0PEx3VND5M9ChpTsJGtQnIJ8BDjJw==
+X-Gm-Gg: ASbGnctSDLjl9sXecY2lSzF6m262kEUn3ctnQMfDUs1Xvq1FLaw+G0VI8GyKSYLlXR5
+ spOPY43yaBk0n2cun/fzFwjpxV0oTvqICSQ8l5eAgNdwYSpsFXVuCgkoYbMdeOmhQFD/U7Nx2b1
+ N4riTPCGc9m5YrbbFh/b+gEAu2k+2ezp6MhAKPgPVeOj8=
+X-Google-Smtp-Source: AGHT+IFfOhruTRLZcPzBRa6kjQD+xzcDPOTsYp597xNGe4j29bcUgIGzWfMyHz9cdurWiELD72X6eQxFV7TKKCvBlnc=
+X-Received: by 2002:a17:907:944e:b0:ae2:60ba:da91 with SMTP id
+ a640c23a62f3a-ae34fd94b73mr629188866b.15.1751102875290; Sat, 28 Jun 2025
+ 02:27:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250628-sc7180-android-boot-v3-5-105098a19165@gmail.com>
-References: <20250628-sc7180-android-boot-v3-0-105098a19165@gmail.com>
-In-Reply-To: <20250628-sc7180-android-boot-v3-0-105098a19165@gmail.com>
-To: Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, gchan9527@gmail.com
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1751113519; l=2044;
- i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
- bh=7C9uzM2soKSCqA3JNzElAV8R0IY3qJ5Iyq7YkLB/LPY=;
- b=7lKHZEc4lnUn8l/w4pEbVWr1cd+Iqv/3LT74vtvjgLvYuUFoIOVrZLR4f4jz7o5etqUJHT9sD
- SlCjXWpR0GBDgWFnjO5idUDSLppaIrUYjU9ZkEEUkZmRgDUSA8/VykN
-X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
- pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
-X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
- auth_id=248
-X-Original-From: George Chan <gchan9527@gmail.com>
-X-Mailman-Approved-At: Sat, 28 Jun 2025 14:35:07 +0200
+From: nejmi <maral04371@gmail.com>
+Date: Sat, 28 Jun 2025 12:27:43 +0300
+X-Gm-Features: Ac12FXwM9J7AWekt0tgsqO9KGKCZVcw13oUs-0AhdSWlGCd6LlGOwgxrrMl13wM
+Message-ID: <CAJ0Vu=00fqrHKr5o28nghvaWHiWB3ohoo0FKgQiXKYHGtwG4Tw@mail.gmail.com>
+Subject: Re: [PATCH v4 2/3] arm: mach-k3: am62: fix 2nd mux option of clkout0
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Sat, 28 Jun 2025 14:35:19 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,65 +82,9 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: gchan9527@gmail.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-
-From: George Chan <gchan9527@gmail.com>
-
-If target u-boot img do not support androidboot v3 or greater,
-abootimg might not be necessary.
-
-aarch64-linux-gnu-ld.bfd: boot/bootmeth_android.o: in function `boot_android_normal':
-/home/user/sources/u-boot-next/boot/bootmeth_android.c:541:(.text.boot_android_normal+0xd0): undefined reference to `set_avendor_bootimg_addr'
-aarch64-linux-gnu-ld.bfd: /home/user/sources/u-boot-next/boot/bootmeth_android.c:543:(.text.boot_android_normal+0xd8): undefined reference to `set_abootimg_addr'
-Segmentation fault (core dumped)
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: George Chan <gchan9527@gmail.com>
----
- boot/bootmeth_android.c | 2 +-
- include/image.h         | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 8c2bde10e17..d7740b86d67 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -534,7 +534,7 @@ static int boot_android_normal(struct bootflow *bflow)
- 	if (ret < 0)
- 		return log_msg_ret("read boot", ret);
- 
--	if (priv->header_version >= 3) {
-+	if (IS_ENABLED(CONFIG_CMD_ABOOTIMG) && priv->header_version >= 3) {
- 		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
- 					     priv->vendor_boot_img_size, vloadaddr);
- 		if (ret < 0)
-diff --git a/include/image.h b/include/image.h
-index 11d33ceeb39..82a861ba8bf 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -2050,6 +2050,7 @@ ulong get_abootimg_addr(void);
-  * Return: no returned results
-  */
- void set_abootimg_addr(ulong addr);
-+void __weak set_abootimg_addr(ulong addr) {}
- 
- /**
-  * get_ainit_bootimg_addr() - Get Android init boot image address
-@@ -2071,6 +2072,7 @@ ulong get_avendor_bootimg_addr(void);
-  * Return: no returned results
-  */
- void set_avendor_bootimg_addr(ulong addr);
-+void __weak set_avendor_bootimg_addr(ulong addr) {}
- 
- /**
-  * board_fit_config_name_match() - Check for a matching board name
-
--- 
-2.43.0
 
 
