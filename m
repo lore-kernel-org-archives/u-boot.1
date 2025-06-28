@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B1AAC7EE39
-	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 22:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CC3C54ED1
+	for <u-boot@archiver.kernel.org>; Sat, 28 Jun 2025 22:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00E1F8206E;
-	Sun, 29 Jun 2025 00:19:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=benettiengineering.com
+	by phobos.denx.de (Postfix) with ESMTP id 3994282E8C;
+	Sun, 29 Jun 2025 00:44:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aruba.it header.i=@aruba.it header.b="jv4YFzN7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPunzC1h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D975D8206E; Sun, 29 Jun 2025 00:19:53 +0200 (CEST)
-Received: from smtpdh20-1.aruba.it (smtpdh20-1.aruba.it [62.149.155.164])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1727E82E8C; Sun, 29 Jun 2025 00:44:02 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECA4580B9B
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 00:19:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=benettiengineering.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=giulio.benetti@benettiengineering.com
-Received: from localhost.localdomain ([84.33.84.190])
- by Aruba SMTP with ESMTPSA
- id VdthuPF6Sqg4pVdthueayB; Sun, 29 Jun 2025 00:19:45 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
- t=1751149185; bh=cjgUeBTD9u4CqY2XOSqkcRhYbqidiFC1lHf17YT2OMQ=;
- h=From:To:Subject:Date:MIME-Version;
- b=jv4YFzN7uFX9dUs1raSITL/6twMc6FzetPO+rCTGD1HkvD/+QCLnEhLl8DpWUMDUr
- Gipow7JArWcvWgBVO+danfHVd97XG8e2CY1gBxJJitQiL7mUvsqzvSQ5xHksSZeHQO
- wMEbhJlCOhivCfQflI6lG1NXkakDO+h/1c14Q6jJDRj6eTWSxDGCmd1MZWXGN4MCer
- G32OMX8VpELykge3R9sQE1cPpkfj6K5qO6rDcl27Spz1X0BR05Qbs8frv6Ru1QC87k
- GHEoX2uJ+IGUTORzskdBanNFk5lSHhwkXESfl0KK0AzXKHgGQ5d6GtmO+h79I/YEKC
- HnQEESV/fnHfw==
-From: Giulio Benetti <giulio.benetti@benettiengineering.com>
-To: Stefano Babic <sbabic@nabladev.com>,
-	Fabio Estevam <festevam@gmail.com>
-Cc: uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v2] arch/arm/include/asm/arch-imxrt/gpio.h: imxrt gpio use
- common gpio.h
-Date: Sun, 29 Jun 2025 00:19:44 +0200
-Message-Id: <20250628221944.2412860-1-giulio.benetti@benettiengineering.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
-References: <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 0BB6082ADA
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 00:43:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-60f24b478e3so513339eaf.3
+ for <u-boot@lists.denx.de>; Sat, 28 Jun 2025 15:43:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1751150637; x=1751755437; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=aDLfgmr51j1VdUB7DoE+wvG0CYKIcodf8sxeN08iG+8=;
+ b=PPunzC1h+KqDnjehtBlYMbJWnwnu5JNrywS3Jnxa/E0eKik1g22KXkx9W12Xu16rn8
+ W+swabUSil23z+RDAzctcid2i9Y3pIf2joMftHRPSs/49QWxhogo3r/4hitOk1JstcTC
+ v4RcmBTOS1iPOxNMwUGwR2Kd2qJekBuVL68/8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751150637; x=1751755437;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aDLfgmr51j1VdUB7DoE+wvG0CYKIcodf8sxeN08iG+8=;
+ b=ZrXA57yKvpL5lH5H+W8miDfclXw9nT0TTGBDQuzpfGlyo+QazBO/VyzQdy0RPVwV8p
+ xxmsUSOIPxZAeVKBwCn4D2oStHSBgDShmDGaGp/o+2BLHB5RA2McolR5d4uOCOc9cE1N
+ fZwLy/CpBnK5agjwEIUnfBc5uOsq0KoYm6VNVGJhWqirhUT2J9qM09OoFhN8pcFdyhHT
+ 8SvQm24aTCi1dQYVbM6Iptva8J4sO0fW4C1oJLxMxT2QALPUe+USc7dLmzlCa3pWsAiu
+ FIaFS5DIXE1eY0aH2fyqyXdKzPLHapTzqLY1u+ZUT7EggsgigAIx06l1euNxPR30aHAA
+ 5djA==
+X-Gm-Message-State: AOJu0YwUkZni1lIDvqTGBuTvF8IKUgAifPTQgw6LUjv9GP4ax+LRQf/Q
+ GEsWLnfrrPnE1nvXGIb8y2x8EY8FkmHoBZLc57yanR09jB5kjvxDhNzOwzyylwKjFSELROE+cnk
+ Fm6ZUe/E=
+X-Gm-Gg: ASbGncshdpatwU0ifD/ORHHUeaQYtVwWRamJVvw5yvf6n4VOgMAVFEc13aoil0Tf2v1
+ Bf2DyQ7o3OB16QSL9F76LJPu+BLz7GW3JGbRje50pa7G4apthGquvuD2E9mVkfEJK7UDQs6fSR5
+ xg8SEhjYjNimuDU7HM+huP4Z2I1R/uqBK57KcvBR0rBf/C5iQ9YbP+CiWG1nxmHUNKa5zpOBz/9
+ 9Xe3Jnz6h8rgOg3cBScWLKh35BSPQYO4l/QMNutm3giSHMIkjsnw3jNZXaDffWJq6GK3Ij8d9aK
+ AQdk8G+ge1tKnX5AGVWO5d/4rcq+RWXuXMUKWr5/G9lBN/qmtlr0aPNiL1YN7Upw2ucjYOMLwKm
+ x5j0ctpnUYPX0QsLbbQ7alj1M6w==
+X-Google-Smtp-Source: AGHT+IG9USvxhoPYU+Hr033Ln8JcM224oOgFQ+AhiMNqDdn9y1mrruoIUjxSRf3DCFGZ17pgTTT++w==
+X-Received: by 2002:a05:6808:13c9:b0:3f3:e9d5:7790 with SMTP id
+ 5614622812f47-40b33c2b29amr7129589b6e.6.1751150636676; 
+ Sat, 28 Jun 2025 15:43:56 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40b3243e4besm1013148b6e.50.2025.06.28.15.43.55
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 28 Jun 2025 15:43:55 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 2/5] include/part.h: Audit include list
+Date: Sat, 28 Jun 2025 16:43:49 -0600
+Message-ID: <20250628224352.85694-2-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250628224352.85694-1-trini@konsulko.com>
+References: <20250628224352.85694-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CMAE-Envelope: MS4xfJ10eueEB/SzepL+J0Q1rhtcc1C1/AqCCo7DR30wVZ5uOYMSo4pdXJiXSm639HslxikHx2cuiuYip2xq8DcIdB8+pGobG/ot6knLXxpjEqcTtRGpv/NE
- 9D7NNYu5hwAyuUoB/UHVpxJxaaOURIbspJWNYRkQn2z8B6PPjiUnwLEZCjlt1Lem23JgmZ2/hDYcv7uG2otEPFU539tx7HEjJkCL0YeOL8ns5xi0OeHar2zA
- Omnjzb4b3IZ5fhGEv0vjg1dTGrlQcA+XdOhdrxt6IbPhf9ghMvYiN7xA2OQU+uVgKXvhkKL84MCghK+aLOhe0X9H2nnhucwoeJFKGCQhxYcmhpuKZM3OobQA
- osCeF0FuSaySXlc07QgSHdxUndFbc1Qk3PXD1+XSDzIQ6UqDbwc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,38 +94,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current file defines a struct gpio_regs identical to the one in
-<asm/mach-imx/gpio.h>. To eliminate code duplication and align with
-the approach used for i.MX8M, include the common header instead of
-redefining the struct.
+This file does not need <linker_lists.h> so remove it.
 
-Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-V1->V2:
-* fix typo on subject and improve commit log as requested by Fabio Estevam
----
- arch/arm/include/asm/arch-imxrt/gpio.h | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ include/part.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/arch-imxrt/gpio.h b/arch/arm/include/asm/arch-imxrt/gpio.h
-index da31a7438aa..be130e00652 100644
---- a/arch/arm/include/asm/arch-imxrt/gpio.h
-+++ b/arch/arm/include/asm/arch-imxrt/gpio.h
-@@ -7,13 +7,6 @@
- #ifndef __ASM_ARCH_GPIO_H__
- #define __ASM_ARCH_GPIO_H__
+diff --git a/include/part.h b/include/part.h
+index 7075b2cb1164..c380c21dd4c1 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -8,7 +8,6 @@
  
--#if !(defined(__KERNEL_STRICT_NAMES) || defined(__ASSEMBLY__))
--/* GPIO registers */
--struct gpio_regs {
--	u32 gpio_dr;	/* data */
--	u32 gpio_dir;	/* direction */
--	u32 gpio_psr;	/* pad satus */
--};
--#endif
-+#include <asm/mach-imx/gpio.h>
+ #include <blk.h>
+ #include <u-boot/uuid.h>
+-#include <linker_lists.h>
+ #include <linux/errno.h>
+ #include <linux/list.h>
  
- #endif /* __ASM_ARCH_GPIO_H__ */
 -- 
-2.39.5
+2.43.0
 
