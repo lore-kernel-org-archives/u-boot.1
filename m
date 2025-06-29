@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA4EFC7EE30
-	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 13:22:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48ACEC7EE30
+	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 14:31:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B848B82E08;
-	Sun, 29 Jun 2025 15:21:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 94D7082E40;
+	Sun, 29 Jun 2025 16:31:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OpkM/4jO";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ucessm8e";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Ns54ri96";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 676BA82E40; Sun, 29 Jun 2025 15:21:56 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CFDDA82E6A; Sun, 29 Jun 2025 16:31:55 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04D8A81F6B
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 15:21:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB6EA81FEE
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 16:31:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-451d41e1ad1so23328945e9.1
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 06:21:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751203310; x=1751808110; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZEsawCGlj1qTxiiKggfmzbU7eMkwniippXFbgIJVsRE=;
- b=OpkM/4jOQ+MFg/8wQ+vfttNNwl/MtDQPy2P7yWej7c56FVrYhUKFu1q9Aep6oP8nbH
- 6onloSTCWRTW4SHlkLVhkeReE6b67vPTwJrWoOtcQg0AQj5uKhst/GrUnoxcBtEGhNNt
- KxMn6+oumZ5OOBZjysgv6C7KWjHk4Dwt4BCzbTQPH2PfXMzw+9v4ZM+tOVh0CsAWnFmA
- rU4E1q+0mEHxfgf9ZAJZfuDxgbVoSxx5ePlBDANZYshwFO5xQ3iNjBB251F32YoUQp4c
- /As6Ig7CQF1e46iTbZTRDXntpQp12CJzZjb1tL3/5RwgnRni2tUHtyYTnv8XJyGdtsUf
- S4Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751203310; x=1751808110;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZEsawCGlj1qTxiiKggfmzbU7eMkwniippXFbgIJVsRE=;
- b=xKlXomtt9XgSxB4uCnMeZZfRJkUUZveUmJvRHWj0li1SMfleHc1cfllRHxUPxrxxE/
- aJFd9+eEsw+FSNlWLAKh9mT35KYfGaASm041obQLn4ul0LHkALROMhM8V6CvXSTbUAJL
- WjTlTDmA9JZ1qtAD3oMKovdGPTojP2IbhxkigfARb7kOhjXzv0x95R4ClscvjfBLkgDi
- VoXJU4DhyV+myf9PtqiYxtVqjFZ9MJmYWKnbVA6BWm62RXN9MU4Ijtmuow4KXE+tXOMi
- Iwq/7bs7saovviyZSE/KNNV5XU+bBg63eQo90vWetyF44GIbCAwwJHWW9XuzdRjq5lIA
- 2WuQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWecSljJJTkADHhgQcd0j0DAzd37WhT6plJXHIo/+x2TZaR+oazFH6YlvUWNlPHmiydly5UZds=@lists.denx.de
-X-Gm-Message-State: AOJu0YwB2HLNLOT7ZMzXjfmJvXaHMsaqt4BwXBK4URN0dJ8Dxmd9tJPH
- 954J5PYg9x4zHMQeTA3HUxmyQMqG4wMTM3W4WSNe8WQyxi7LHZ2RtJQQ
-X-Gm-Gg: ASbGncsvCPvD826v/ZQFSljIHbpvJlL7xBLeh/WdNRRQXbRXSA0EaFlm+g3EZZhSEpm
- pcxpWn5bhl1XWg/sncFt0h8qwefaUxQIfYGeL2PjzCMpzXC80JJSVbpxN22tUkJgODfobhtkkt1
- AYzS4+H7FOcwWFNmCuGR0J0W1zUF/YghDreyOoiwXaiZqA1XesEdxolwuU0jffqmkYfoEZA9Efv
- d/lUvtB7awS7I0jw5kRcB2g8BQIlOIHGIgtdbeH2Ueu/x45fn7m2RdYj4B19aDzOo63ZfTiPvy5
- m1iAzbl/CFbzUBZhle823ZLX3+GIV86BiV7lk5+TYY+Z+XdeVOZwdEEEUYwscjdGIFU3ZpyiLRJ
- FTh9PsjNZjDUY2MBJTyQc+m6yOLsxilOkAqzkLIa8P7Iz
-X-Google-Smtp-Source: AGHT+IGkCR1sJj5UdtwO4r8A/REHSnaw/4wjrXF+juSTYoumdJzGKnlQc+kUkuD6Jw/82iAXhpCiEg==
-X-Received: by 2002:a05:6000:20c4:b0:3aa:c95b:d1d9 with SMTP id
- ffacd0b85a97d-3aac95bd1ddmr3332613f8f.6.1751203310132; 
- Sun, 29 Jun 2025 06:21:50 -0700 (PDT)
-Received: from localhost.localdomain
- (host-87-3-254-137.retail.telecomitalia.it. [87.3.254.137])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-453823b75cdsm132284515e9.32.2025.06.29.06.21.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Jun 2025 06:21:49 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>
-Subject: [PATCH] env: Fix possible out-of-bound access in env_do_env_set
-Date: Sun, 29 Jun 2025 15:21:18 +0200
-Message-ID: <20250629132122.24389-1-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bVWvV4tl1z9tRx;
+ Sun, 29 Jun 2025 16:31:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1751207510;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LtPFVKaTjC91f/NUQKy9uZywZTxxlexTXPk5tRyXtno=;
+ b=Ucessm8e9pS3p/nh2bdGKbj6kK+DUKoByE7AZbdFZwaJmAE23LRtrDzDvxijaohIf854O3
+ JqnKeOL1i/OMbE6EMwJteg/B6tqPT98aT3hJbRFFyWEzYvqU7EhDFj3g+JACrbLgCpwYei
+ c5vLaSa5ZfbQ2KKJLbjko0m3w3gRsM4aHx/dON4P1eFDm9xSVkRTD8+2YO00phx3ckGUhV
+ DLpY7xr9JsvkJB1eOqxliV/31HcnX0ECv48ivFtplCJiY+Sopi9AxTtG+wazjEuhLf93vI
+ Q17hpcCkIsb+SVsstXYtZnE5OiRAL1iYvzWm016hq+vYRJQYM5YixBSGnjyO9g==
+Message-ID: <995a016a-f873-440c-acb7-b18568003e41@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1751207508;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LtPFVKaTjC91f/NUQKy9uZywZTxxlexTXPk5tRyXtno=;
+ b=Ns54ri96Dc/OtdoxUntkV+MXOPDz17SqsPqeCuIODrQ15OwFjFClL96wwLNYWb5X97y4c2
+ IoWWSnkCUT71bhrWT9Og1gsk1EjgtpNnB+K0I9R3MMY3rib1mnucL1UcWoVBG0QSrZ39I3
+ lvbriXDoqw0KGJPBUJDgdwtF+CFoikyDGAeVL/5zCm3ak+SFspaQCGIatXrIIk5wws9aSx
+ bF25SLY9dhYgIyiQ4QqKgbH3hEhNonBuuq8FhsnQFpzMJf7P00yE5sDy4A8xhTz9AzzfZm
+ VmtYIY8ZC1AVwooltms9bonrWdNfhJ9d9DiZUHvjolJR4kKZK0aMv3JiMoHsmA==
+Date: Sun, 29 Jun 2025 16:31:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [U-Boot, v2, 1/1] net: phy: Add the Airoha EN8811H PHY driver
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com,
+ albert-al.lee@airoha.com
+References: <20250615131243.30770-1-lucienzx159@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250615131243.30770-1-lucienzx159@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: ada3b4a98d1e3138035
+X-MBO-RS-META: zzsdm4cs4idrx1b7nypzx8hqrz573t7o
+X-Rspamd-Queue-Id: 4bVWvV4tl1z9tRx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,58 +93,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It was discovered that env_do_env_set() currently suffer from a long
-time of a possible out-of-bound access for the argv array handling.
+On 6/15/25 3:12 PM, Lucien.Jheng wrote:
+> Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
+> 100/1000/2500 Mbps with auto negotiation only.
+> 
+> The driver uses two firmware files, for which updated versions are added to
+> linux-firmware already.
+> 
+> Locating the AIROHA FW within the filesystem at the designated partition
+> and path will trigger its automatic loading and writing to the PHY via MDIO.
+> If need board specific loading override,
+> please override the en8811h_read_fw function on board or architecture level.
+> 
+> Linux upstream AIROHA EN8811H driver commit:
+> 71e79430117d56c409c5ea485a263bc0d8083390
+> 
+> Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
+> I have modified the relevant process to align with the U-Boot boot sequence.
+> and have validated this on Banana Pi BPI-R3 Mini.
+> 
+> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> ---
+> Change in PATCH v2:
+> air_en8811h.c:
+>   * Fix: Indentation and coding style
+>   * Fix: Invert conditionals in some APIs to reduce indent.
+>   * Correct en8811h_read_fw(): Integrate malloc to allow other users to
+>     fully override the loading process and return a buffer containing the firmware from its source.
+> 
+>   drivers/net/phy/Kconfig       |  43 ++
+>   drivers/net/phy/Makefile      |   1 +
+>   drivers/net/phy/air_en8811h.c | 857 ++++++++++++++++++++++++++++++++++
+>   3 files changed, 901 insertions(+)
+>   create mode 100644 drivers/net/phy/air_en8811h.c
+> 
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 3132718e4f8..f053f8196c2 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -79,6 +79,49 @@ config PHY_ADIN
+>   	help
+>   		Add support for configuring RGMII on Analog Devices ADIN PHYs.
+> 
+> +menuconfig PHY_AIROHA
+> +	bool "Airoha Ethernet PHYs support"
+> +
+> +config PHY_AIROHA_EN8811H
+> +	bool "Airoha Ethernet EN8811H support"
+> +	depends on PHY_AIROHA
+> +	help
+> +	  AIROHA EN8811H supported.
+> +
+> +choice
+> +	prompt "Location of the Airoha PHY firmware"
+> +	default PHY_AIROHA_FW_IN_MMC
+> +	depends on PHY_AIROHA_EN8811H
+> +
+> +config PHY_AIROHA_FW_IN_MMC
+> +	bool "Airoha firmware in MMC partition"
+> +	help
+> +	  Airoha PHYs use firmware which can be loaded automatically
+> +	  from storage directly attached to the PHY, and then loaded
+> +	  via MDIO commands by the boot loader. The firmware is loaded
+> +	  from a file specified by the PHY_AIROHA_FW_PART,
+> +	  PHY_AIROHA_FW_DM_FILEPATH and PHY_AIROHA_FW_DSP_FILEPATH options.
+I ran into the same firmware loading problem recently. I took a 
+different approach, have a look at [1] and specifically function 
+rcar_gen4_pcie_load_firmware() . This invokes U-Boot shell script , 
+which has to be defined by the user, and which loads the firmware by 
+whatever means necessary, from whatever storage or location . I think 
+that might be the generic approach to U-Boot firmware loading . If the 
+user needs to change the firmware loading location, they do not need to 
+rebuild the U-Boot itself, they simply update their environment and the 
+matching script. What do you think ?
 
-The BUG is present in the function env_do_env_set() line:
-
-name = argv[1];
-
-where the function at this point assume the argv at index 1 is always
-present and can't be NULL. Aside from the fact that it's always
-better to validate argv entry with the argc variable, situation where
-the argv[1] is NULL is actually possible and not an error condition.
-
-A example of where an out-of-bound access is triggered is with the
-command "askenv - Press ENTER to ...".
-This is a common pattern for bootmenu entry to ask the user input after
-a bootmenu command succeeded.
-
-In the context of such command, the while loop before "name = argv[1];"
-parse the "-" char as an option arg and increment the argv pointer by
-one (to make the rest of the logic code ignore the option argv) and
-decrement argc value.
-
-The while loop logic is correct but at the "name = argv[1];" line, the
-argv have only one element left (the "-" char) and accessing argv[1]
-(aka the secong element from argv pointer) cause an out-of-bound access
-(making the bootloader eventually crash with strchr searching in invalid
-data)
-
-To better handle this and prevent the out-of-bound access, actually
-check the argv entry left (with the use of the argc variable) and exit
-early before doing any kind of array access.
-
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- env/common.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/env/common.c b/env/common.c
-index 86122582bc1..12570dee6f6 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -82,6 +82,10 @@ int env_do_env_set(int flag, int argc, char *const argv[], int env_flag)
- 		}
- 	}
- 	debug("Final value for argc=%d\n", argc);
-+	/* Exit early if we don't have an env to apply */
-+	if (argc < 2)
-+		return 0;
-+
- 	name = argv[1];
- 
- 	if (strchr(name, '=')) {
--- 
-2.48.1
-
+[1] 
+https://patchwork.ozlabs.org/project/uboot/patch/20250617081641.8385-5-marek.vasut+renesas@mailbox.org/
