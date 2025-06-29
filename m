@@ -4,87 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 513FDC7EE39
-	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 20:02:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96DF7C7EE30
+	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 20:08:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B21FF82F30;
-	Sun, 29 Jun 2025 22:02:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 01F3682F4E;
+	Sun, 29 Jun 2025 22:08:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CF9+JauA";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FsuDqGoC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B372A82F4E; Sun, 29 Jun 2025 22:02:05 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0D73582F6A; Sun, 29 Jun 2025 22:08:49 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B951282EA9
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 22:02:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59EC282ED0
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 22:08:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3a57ae5cb17so829037f8f.0
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 13:02:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751227323; x=1751832123; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5+S4tKNGUgcPqeBZE4hV5oHOjUoJOjaTy24/d2hFkJU=;
- b=CF9+JauAQNz5ec2A0ZXRg71XWTwjgjky3KSKColjjjqEv8xOBzaZvOumyZuzcVVDQH
- LtOKY/6Jdco6Wmn+G4k9hv0asr2FMw67H0BbPYFlB7rVZX7f8SozF1GsxvzmEXTIOJjV
- u0aRX5SO0ipxlwmFbvRNl0SWXmtHYvD+uMd41NopbMf3LsAF1C4WKzYiwyPc9PupzJ86
- ATyhRzkSoDDn7531Yir8Q/JaHfq5ZJ+wpmtP6V/+mM6fPrYnPpYW3uYGBIQStMgcSO+v
- 4vVJPatvEvPGss9CSp0iJ69e0iLnzyieSxAxwWkKPv0Bb8fpXIyj+uTkRdmN49Uh5x8F
- Chtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751227323; x=1751832123;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5+S4tKNGUgcPqeBZE4hV5oHOjUoJOjaTy24/d2hFkJU=;
- b=dX6BIZmX/cwdwjqfLPG/k0k2dYYnryRwt5T7Y03RPP4f6lh+Y39YjY2hQyKdKiwPts
- QPHTuAYn8PJk1azsFjrpkoUtvKQrHX4xx/MzO1FXUfmcZtVuB5opeAM+P7Zn8wMmwonh
- tqeeDPgtCnkx12zYT9jKXUXQcl4fi/81SokZMtjBEq/rx9OPCQ3hdfOw3S7iHfSFAF/b
- 5eA5k5THLx96Mg/p6lBbOFMY5gwHzR5L/bwcUBo3mIwE0LtSn3ykNfhUHRr/QHXoAUVb
- EU3nlYIRWRKwm1nJdk6xnQauBrgT84FakHAGN9f0iH3Yb+X9QScpqwEC8VIzyk/5h9pU
- SCrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUt3oGkAneyB7wCFGs36LgtQXoxh/sQjqtG60EG7fzx2c6DGsPuA2OvjyTN5Rley43JBBsM4RY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzFJla5zfGOoaEz56DLyum4l8hP7LUXaY7/YDhk6WMsc8mWz3We
- H5h/8n1Md2ibHtlior366VATjN9MrYcIkXoAka99M1xCsPv2TA1asRY6vhfXZg==
-X-Gm-Gg: ASbGncujzCpuJgPbs2HaTSUEUvNETbgOB8Xbq+pADGAW3a38wIPdPc4EKEZQ7MPGdRi
- byyQ56mRHF83Si10lA8YbX+o0/iikQkiG0V+fB/uV5waVBGLWSMiMojOIhkEYk+4oYpcuDE7Je3
- oKof6iCjxNo3SQRmjYdwUs++NGutG+u/ZoAWWg+ZUsQGgYIg0ZxWLefk+35xEu8pAH3s7aVixpd
- ZBaeS1ay4iAkFuDxsh7uMHfYhqHAipo+A2uaGqBrxNGzRTQmDadlqqZPPlWrCuWZ2mRZYosvB27
- QJDrpZGFUnejMKr0BEWnd3RFhgLHUjWAbjOxUqgKjNdkWVgyuSXWMJpgEzK1M9RfrixT3ZAQgpg
- vyr1vP0KH4ysNwLzCS4D6LcRq/sMsaBYz0Y5sL/bSdJ5Sb7kcFBt5Ak3MnBHXeePQ8FzSmw/8tw
- lB5I+XT8ML/VcGw52LkLAx
-X-Google-Smtp-Source: AGHT+IHYu+YtNh3hgKgPWK4b2mOJJRLw54xTpyloUvKZuP7sB7YCKj3k1TL6fgosoS1aiNtUAijP0w==
-X-Received: by 2002:a05:6000:4716:b0:3a4:ef0d:e614 with SMTP id
- ffacd0b85a97d-3a8fe5b1cecmr9429950f8f.33.1751227322683; 
- Sun, 29 Jun 2025 13:02:02 -0700 (PDT)
-Received: from cypher.home.roving-it.com
- (2.c.4.1.7.3.6.4.2.a.a.3.0.f.c.2.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
- [2001:8b0:fb11:2681:2cf0:3aa2:4637:14c2])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3a892e5f918sm8465384f8f.100.2025.06.29.13.02.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Jun 2025 13:02:02 -0700 (PDT)
-From: Peter Robinson <pbrobinson@gmail.com>
-To: Adam Ford <aford173@gmail.com>, Tom Rini <trini@konsulko.com>,
- "Derald D. Woods" <woods.technical@gmail.com>, Marek Vasut <marex@denx.de>,
- Paul Kocialkowski <contact@paulk.fr>, u-boot@lists.denx.de
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 0/3] drop legacy musb stack
-Date: Sun, 29 Jun 2025 21:01:58 +0100
-Message-ID: <20250629200200.53994-1-pbrobinson@gmail.com>
-X-Mailer: git-send-email 2.50.0
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bVgNB2Ngrz9srp;
+ Sun, 29 Jun 2025 22:08:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1751227722;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+LATyC7JeMakEo4tNszjvqMeJ5k6SmlijeyKlIndIqE=;
+ b=FsuDqGoC9zfK7Vnlk5Qx6SIra41Fm8RPI2fBHL7WVUEKWuUBe19LGKR6XmcQQdEbktr6FV
+ v8wu0KUq3tBFjjVhMqK21gVxplwOhHBQVFDmYIGXyxyHkeYTvzgFGT1XsIZAqOBHdmE5bn
+ 1wwurcnXt2Tsyi4XXHBQSa4+QW2Y1vi+TejwaAGzKC6fouyFPl8xap2DQYjOk7Vq6PHEqc
+ lxEUpA5O7JocHFMf9KHQ3wt120/ersZXkwpb+7PLHcrNrwZkzBHogmMW2Clkw7npZ+kHMp
+ 9uG6PpGPXlAJXTWN+OD8EOvi1H1mTx2mnDeoVaITQKW+DYe7doDgPNqMojDLMg==
+Message-ID: <4c1d60c4-26fb-40eb-9855-56ca91776acb@mailbox.org>
+Date: Sun, 29 Jun 2025 22:08:39 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH 09/10] ARM: dts: stm32: Add SPL specifics for DH
+ STM32MP13xx DHCOR DHSBC
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Cc: Cheick Traore <cheick.traore@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Gatien Chevallier <gatien.chevallier@foss.st.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>,
+ Pascal Zimmermann <pzimmermann@dh-electronics.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20250512172149.150214-1-marek.vasut@mailbox.org>
+ <20250512172149.150214-10-marek.vasut@mailbox.org>
+ <89a5867f-996f-42e7-9e0e-544bec2fe457@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <89a5867f-996f-42e7-9e0e-544bec2fe457@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: c1b805d3a5b68a34aff
+X-MBO-RS-META: ezwzuf36bwxwpum4ud4gabyegfy5sabu
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,48 +85,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop the legacy musb driver stack. There was just two remaining users,
-both of which appear to have musb-new drivers, I can't test those
-devices but it should be relatively striaght forward to follow up with
-any fixes, and one appears to be a mistake. I think it's useful to get
-rid of this legacy code. I didn't rename the musb-new -> musb directory
-as it seems like churn, I can follow up with a rename patch if it's
-wanted.
+On 6/3/25 4:36 PM, Patrick DELAUNAY wrote:
 
-Peter Robinson (3):
-  omap3: evm: Drop old musb omap3 driver
-  am33xx: am3517 evm: Drop old musb AM35X driver
-  usb: musb: drop musb legacy drivers
+Hi,
 
- configs/am3517_evm_defconfig  |    2 +-
- configs/omap3_evm_defconfig   |    1 -
- drivers/usb/Kconfig           |    2 -
- drivers/usb/musb/Kconfig      |   20 -
- drivers/usb/musb/Makefile     |    9 -
- drivers/usb/musb/am35x.c      |  138 ----
- drivers/usb/musb/am35x.h      |   81 ---
- drivers/usb/musb/musb_core.c  |  150 -----
- drivers/usb/musb/musb_core.h  |  343 ----------
- drivers/usb/musb/musb_debug.h |  191 ------
- drivers/usb/musb/musb_hcd.c   | 1161 ---------------------------------
- drivers/usb/musb/musb_hcd.h   |   93 ---
- drivers/usb/musb/musb_udc.c   |  953 ---------------------------
- drivers/usb/musb/omap3.c      |  129 ----
- drivers/usb/musb/omap3.h      |   38 --
- 15 files changed, 1 insertion(+), 3310 deletions(-)
- delete mode 100644 drivers/usb/musb/Kconfig
- delete mode 100644 drivers/usb/musb/Makefile
- delete mode 100644 drivers/usb/musb/am35x.c
- delete mode 100644 drivers/usb/musb/am35x.h
- delete mode 100644 drivers/usb/musb/musb_core.c
- delete mode 100644 drivers/usb/musb/musb_core.h
- delete mode 100644 drivers/usb/musb/musb_debug.h
- delete mode 100644 drivers/usb/musb/musb_hcd.c
- delete mode 100644 drivers/usb/musb/musb_hcd.h
- delete mode 100644 drivers/usb/musb/musb_udc.c
- delete mode 100644 drivers/usb/musb/omap3.c
- delete mode 100644 drivers/usb/musb/omap3.h
+>> +&etzpc {
+>> +    compatible = "simple-bus";
+>> +};
+>> +
+> 
+> change the compatible is not not needed I think
+> 
+> if the ETZPC driver was not compiled for SPL
+> 
+> today it is compiled
+> 
+>   ./arch/arm/mach-stm32mp/stm32mp1/etzpc.c
+> 
+> ./arch/arm/mach-stm32mp/stm32mp1/Makefile:7:obj-y += etzpc.o
 
--- 
-2.50.0
-
+I need to be able to bind devices on the etzpc bus, so it really has to 
+be a simple-bus .
