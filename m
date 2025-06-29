@@ -4,92 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214A0C7EE39
-	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 10:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B4DC7EE30
+	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 11:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51E8582ADA;
-	Sun, 29 Jun 2025 12:57:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B20848206E;
+	Sun, 29 Jun 2025 13:02:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="koWG1vRY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JjjFPG2i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A60AD81FEE; Sun, 29 Jun 2025 12:57:52 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 351DD82E8C; Sun, 29 Jun 2025 13:02:20 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1B7F82E5A
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 12:57:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACA0581FEE
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 13:02:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-553b5165cf5so4624834e87.0
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 03:57:41 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-555024588b1so1375777e87.1
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 04:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751194661; x=1751799461; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3ypS+N78F4yq06eSAA9LFatKkT5qmXLjtywn5021018=;
- b=koWG1vRYXjqS3nHMVfWInpOSvZLPEL6x8HAXSEpFTqNQaGrBijsiywP8yHyZcqAgKv
- GRrMfOW1cn6wAWCxdj/nWiapZY72XZwBiLYEi3N0eipG36xk4DEeZfmsmHkitoSxoNPc
- tSSxKCuowGSyu6ZRsecJnRro++aXpN5AqsJeoIGobUmK/Z6Z2aZqheoh+VgiwRiokEtW
- Cq8YNmPqpBS7oG8Hf80rRcwPy1dC1mrC6/KMFEVN5ehslBJNVgH6/1lXAD+w70fB1ouB
- UP1fB2RfIScO7bWLSAotZR70uCB042lhmMFByKUhLwRdhsdl/PNyICHHkdqwHoiaeSUx
- WxeA==
+ d=gmail.com; s=20230601; t=1751194935; x=1751799735; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4NNB4d+KXZxgWb1rIOCrOMAj/kk1HIjYeg4lc7nGf10=;
+ b=JjjFPG2i3d7SmHNM5TM9aVJufVCyWMeo0feCkIJRPzGr0OMLD/EqP2e8ltGauqJZ87
+ 2SQI9qwLO/0eOaIG7g8MLCtb6T19KdziTcgkFSb2tT92fkon5MAF9Mddd+kpBO6rJlFW
+ rnl7tYO9SskgLp2aFtQPa985EvTUwr0FGzUDjPRfm6grvT/EDzy4tBtt5w9x6eu8ZAhj
+ ZWlZBE9Mp4EsqZ81VjVBVNdU7kxRPDwY0pzp45a0kv2rZIK788bh3HXYlNskTGxUeZ5O
+ 3aZUT97GPTLpU8zEIrTdCQCDNME23FAmEXiQCQ61T72/V/6+Ow3IRpXYyy0CxIvweK19
+ Wtqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751194661; x=1751799461;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3ypS+N78F4yq06eSAA9LFatKkT5qmXLjtywn5021018=;
- b=nTT8tKS+1fa3K/1LXvxJYAOFmnF8T4sobp3x9iR9Mhlh7vaqhiHM3ppVZYK2eHLgNG
- Ghv+0lX2s0O/XZkNCXsX07BUVjA93gkgYKl4rOyzK6ejBIatCf+sLa/4RYWvcqRHoOd1
- PZmX9dAbqQvMWcsgzwnDct4sXSSN6cKjjP3iw7cBrYoq5YcYP8Cr6J382EDPUwRpmQgH
- hMND1ZJ4k8Qx+5a4iIUj8W7kyWik/QaipCcFEWN8nCLgtIr9uruCSw0VxXOMi38Fxp3o
- IsLdq4daz3vkDZJgMug4rsX6OxP2iGWHsxNk7rVbGk1PuRF2HL8akHrUfrCB2C+4AQot
- 0MMA==
-X-Gm-Message-State: AOJu0YxAdFY/SBDUIHK/W0WDOhOaAlBd3dKSWlOsS1/OcdSIWvEBFVT6
- kcsSikbwF9rU9OGQx8e+oolALqXwNpFdEEPrlNVK7l+21WVZRtH0cIKw
-X-Gm-Gg: ASbGnctNw18aS0gKfSlU/27WFxmMUUr6EqWekySKeWg8aaJgqFCkLFIqVCe1JQMEU9T
- z7atf0bjzhReAloRYh7NvPYxPM6XSGDgu4wGyfmzr5ZtVHxuHLY27FuPMYSX4Sb1RG+ifdm74gL
- VwPGHt/ddRVqI2dWcuXOu1L3tS/wmmu5uiFaYLuQJ/a/rDZU+vLSqARnMAeYyaHXKt3khvgah5A
- 0E1QYRH24sCSineVGCPYFL8GNw7Ma609VpbyUyeQcHvS/50P5B1lsnFckkUQH+/6Y2+nexQkIOU
- pK97UsrItPFvRQVjm7LLTxAg9f+Yy/CEvuqaCacfWbOgjz+na7PcEQ==
-X-Google-Smtp-Source: AGHT+IHRKXjP/PXCEjE+VWQWr5vwkWD2mFvhKt///zre76LBTwM4oW9QqJ8oMaI2ySZ+zS7JF0W4Yg==
-X-Received: by 2002:a05:6512:3e0b:b0:54a:cc76:1676 with SMTP id
- 2adb3069b0e04-5550ba27be5mr3125017e87.44.1751194660814; 
- Sun, 29 Jun 2025 03:57:40 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751194935; x=1751799735;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4NNB4d+KXZxgWb1rIOCrOMAj/kk1HIjYeg4lc7nGf10=;
+ b=fKpke/T03PNKMZU1orzJGlmVLI8wQjWw1zQdMOdE/wue5SI5/UHfzhhMjvhLtEIxuC
+ MZOsIR1oiUvW3SGm4xVquD0XRjYD86TtAeEwiQE4JwnJWq9UgE6l9PY/9gDvawhxEurU
+ 3I5rVrOhIwiDo+PKX6zZtjtcv73eFz1zMAQ3F9tTfmNA7zBHv5gmbfSw2+7+GxQJRqgI
+ l3h1eWmyixCadchbCendx/godDcKpzuFKbbtfEkTS+ZddErx44DHgWZ3TLhHse54eXKk
+ W++7JiV1u46PoGt/wm7/ftA+Z0FWPUCXC+5AJ0hwzEq84LBK/PWDH+SwHt7OmAY3Gha6
+ Owng==
+X-Gm-Message-State: AOJu0Yzs9whi05ovTr1gUHo3/iMFZXnXchQlq5kmmoUtgT8NPitRMgrv
+ uqxI/oj0pfrELdkDYO7M9agjxoL+WVY9POUBiUhom/TQcPgAhpF/Cj2H
+X-Gm-Gg: ASbGnculJdDfG/9fbb129Hz0PmYzdzwo6PFD5m6OW7JW3qK0BeWueFb5Trj9kVdAT6e
+ grxXRXOs3hoRftLLInSzYmWIY0WzyDbPzj3ZZKl+Lug4/Zgrtlzgu8U5lNoTYTZZ4o5jh9VjgxA
+ R69ewyGHmdiNFKCd+AoZqEzl1c+naNDTXzekdxGY23wmaUhePzvySrUdEz9wg05XFLOb0CR8557
+ jbhMQvuE8nXm3SH1gQR6t6AnsiLWIZzh2y5fmPEuuRo3lSIKi9sRPFV5DB9w2c8RqRUxmjXoi43
+ ogTcpk5eK3tj/KOQlqkfwCW3xwDCqdGqROl9i3svHHMrORqgbJN8xcdzBk/OaZpT
+X-Google-Smtp-Source: AGHT+IEnPQ1+0tOtRVtg56PRaifhQydoByKJqdtDOOOZKENDftT5f5z7iDXuz0qWmu2SNsbSedsFWg==
+X-Received: by 2002:a05:6512:3b2c:b0:553:a60d:6898 with SMTP id
+ 2adb3069b0e04-5550b8e5460mr2488985e87.45.1751194934709; 
+ Sun, 29 Jun 2025 04:02:14 -0700 (PDT)
 Received: from xeon.. ([188.163.112.61]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5550b24d32esm1092514e87.69.2025.06.29.03.57.39
+ 2adb3069b0e04-5550b24028esm1090621e87.19.2025.06.29.04.02.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Jun 2025 03:57:40 -0700 (PDT)
+ Sun, 29 Jun 2025 04:02:14 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mario Six <mario.six@gdsys.cc>, Christian Marangi <ansuelsmth@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heiko Schocher <hs@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ion Agorria <ion@agorria.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
- Wang Jie <dave.wang@rock-chips.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Ion Agorria <ion@agorria.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 4/4] test: dm: add AES engine test
-Date: Sun, 29 Jun 2025 13:57:11 +0300
-Message-ID: <20250629105711.24687-5-clamor95@gmail.com>
+Subject: [PATCH v1 0/6] Switch to HW AES engine of Tegra SoC
+Date: Sun, 29 Jun 2025 14:01:57 +0300
+Message-ID: <20250629110203.25086-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250629105711.24687-1-clamor95@gmail.com>
-References: <20250629105711.24687-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,157 +94,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create a basic test suit for AES DM uclass that covers all available
+Switch to HW AES engine of Tegra20/Tegra30 SoC for cryptographic
 operations.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- arch/sandbox/dts/test.dts          |  4 +++
- configs/sandbox64_defconfig        |  2 ++
- configs/sandbox_defconfig          |  2 ++
- configs/sandbox_flattree_defconfig |  3 ++
- test/dm/Makefile                   |  1 +
- test/dm/aes.c                      | 57 ++++++++++++++++++++++++++++++
- 6 files changed, 69 insertions(+)
- create mode 100644 test/dm/aes.c
+Ion Agorria (6):
+  ARM: tegra: Relocate fuse code from warmboot file
+  crypto: tegra: Add Tegra AES engine driver
+  ARM: tegra: Add LP0 support for ODM production
+  ARM: tegra: Add BSE bindings
+  ARM: tegra: Enable BSEV for devices that use CMD_EBTUPDATE
+  ARM: tegra: Use AES engine for crypto functions
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 7026c73bc69..bb696c5ef7f 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -2150,6 +2150,10 @@
- 			};
- 		};
- 	};
-+
-+	aes-engine {
-+		compatible = "software-aes-engine";
-+	};
- };
- 
- #include "sandbox_pmic.dtsi"
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 34e89bf6b3e..8fdc581c205 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -137,6 +137,8 @@ CONFIG_CLK_K210=y
- CONFIG_CLK_K210_SET_RATE=y
- CONFIG_SANDBOX_CLK_CCF=y
- CONFIG_CPU=y
-+CONFIG_DM_AES=y
-+CONFIG_AES_SOFTWARE=y
- CONFIG_DM_DEMO=y
- CONFIG_DM_DEMO_SIMPLE=y
- CONFIG_DM_DEMO_SHAPE=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 4f6943d1a4b..602397430f0 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -186,6 +186,8 @@ CONFIG_CLK_K210_SET_RATE=y
- CONFIG_SANDBOX_CLK_CCF=y
- CONFIG_CLK_SCMI=y
- CONFIG_CPU=y
-+CONFIG_DM_AES=y
-+CONFIG_AES_SOFTWARE=y
- CONFIG_DM_DEMO=y
- CONFIG_DM_DEMO_SIMPLE=y
- CONFIG_DM_DEMO_SHAPE=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 67c0ed7353e..317d7dc9c20 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -75,6 +75,7 @@ CONFIG_CMD_QFW=y
- CONFIG_CMD_BOOTSTAGE=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_AES=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_TPM_TEST=y
- CONFIG_CMD_EXT4_WRITE=y
-@@ -115,6 +116,8 @@ CONFIG_CLK_K210=y
- CONFIG_CLK_K210_SET_RATE=y
- CONFIG_SANDBOX_CLK_CCF=y
- CONFIG_CPU=y
-+CONFIG_DM_AES=y
-+CONFIG_AES_SOFTWARE=y
- CONFIG_DM_DEMO=y
- CONFIG_DM_DEMO_SIMPLE=y
- CONFIG_DM_DEMO_SHAPE=y
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 917dafe7d22..d15859eca30 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -29,6 +29,7 @@ obj-(CONFIG_DM_GPIO) += gpio.o
- obj-y += irq.o
- endif
- obj-$(CONFIG_ADC) += adc.o
-+obj-$(CONFIG_AES_SOFTWARE) += aes.o
- obj-$(CONFIG_SOUND) += audio.o
- obj-$(CONFIG_AXI) += axi.o
- obj-$(CONFIG_BLK) += blk.o
-diff --git a/test/dm/aes.c b/test/dm/aes.c
-new file mode 100644
-index 00000000000..702e4db2b35
---- /dev/null
-+++ b/test/dm/aes.c
-@@ -0,0 +1,57 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for the driver model AES API
-+ *
-+ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#include <dm.h>
-+#include <dm/test.h>
-+#include <uboot_aes.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+#define AES128_KEYSIZE		128
-+
-+static int dm_test_aes(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	u8 test_key[AES128_KEY_LENGTH] = { 0x63, 0x68, 0x69, 0x63, 0x6b, 0x65, 0x6e, 0x20,
-+					   0x74, 0x65, 0x72, 0x69, 0x79, 0x61, 0x6b, 0x69 };
-+	u8 test_iv[AES128_KEY_LENGTH] = { 0 };
-+
-+	u8 test_input[AES_BLOCK_LENGTH] = { 0x49, 0x20, 0x77, 0x6f, 0x75, 0x6c, 0x64, 0x20,
-+					    0x6c, 0x69, 0x6b, 0x65, 0x20, 0x74, 0x68, 0x65 };
-+	u8 exp_output[AES_BLOCK_LENGTH] = { 0x97, 0x68, 0x72, 0x68, 0xd6, 0xec, 0xcc, 0xc0,
-+					    0xc0, 0x7b, 0x25, 0xe2, 0x5e, 0xcf, 0xe5, 0x84 };
-+	u8 exp_cmac[AES_BLOCK_LENGTH] = { 0xfc, 0x89, 0x20, 0xc8, 0x46, 0x97, 0xb1, 0x3d,
-+					  0x31, 0x2c, 0xc2, 0x49, 0x5c, 0x5a, 0x0b, 0x9f };
-+	u8 test_output[AES_BLOCK_LENGTH];
-+
-+	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
-+
-+	/* software AES exposes 2 key slots */
-+	ut_asserteq(2, dm_aes_get_available_key_slots(dev));
-+
-+	ut_assertok(dm_aes_select_key_slot(dev, AES128_KEYSIZE, 0));
-+	ut_assertok(dm_aes_set_key_for_key_slot(dev, AES128_KEYSIZE, test_key, 0));
-+
-+	ut_assertok(dm_aes_ecb_encrypt(dev, test_input, test_output, 1));
-+	ut_assertok(memcmp(exp_output, test_output, 16));
-+
-+	ut_assertok(dm_aes_ecb_decrypt(dev, test_output, test_output, 1));
-+	ut_assertok(memcmp(test_input, test_output, 16));
-+
-+	ut_assertok(dm_aes_cbc_encrypt(dev, test_iv, test_input, test_output, 1));
-+	ut_assertok(memcmp(exp_output, test_output, 16));
-+
-+	ut_assertok(dm_aes_cbc_decrypt(dev, test_iv, test_output, test_output, 1));
-+	ut_assertok(memcmp(test_input, test_output, 16));
-+
-+	ut_assertok(dm_aes_cmac(dev, test_input, test_output, 1));
-+	ut_assertok(memcmp(exp_cmac, test_output, 16));
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_aes, UTF_SCAN_FDT);
+ arch/arm/dts/tegra20-acer-a500-picasso.dts    |   4 +
+ arch/arm/dts/tegra20-asus-transformer.dtsi    |   4 +
+ arch/arm/dts/tegra20-lg-star.dts              |   4 +
+ arch/arm/dts/tegra20-motorola-mot.dtsi        |   4 +
+ arch/arm/dts/tegra20.dtsi                     |  29 +
+ arch/arm/dts/tegra30-asus-grouper-common.dtsi |   4 +
+ arch/arm/dts/tegra30-asus-p1801-t.dts         |   4 +
+ arch/arm/dts/tegra30-asus-tf600t.dts          |   4 +
+ arch/arm/dts/tegra30-asus-transformer.dtsi    |   4 +
+ arch/arm/dts/tegra30-htc-endeavoru.dts        |   4 +
+ .../dts/tegra30-lenovo-ideapad-yoga-11.dts    |   4 +
+ arch/arm/dts/tegra30-lg-x3.dtsi               |   4 +
+ arch/arm/dts/tegra30-ouya.dts                 |   4 +
+ arch/arm/dts/tegra30-wexler-qc750.dts         |   4 +
+ arch/arm/dts/tegra30.dtsi                     |  29 +
+ arch/arm/include/asm/arch-tegra/ap.h          |   7 +
+ arch/arm/include/asm/arch-tegra/crypto.h      |  43 +-
+ arch/arm/include/asm/arch-tegra/fuse.h        |  21 +
+ arch/arm/include/asm/arch-tegra/warmboot.h    |   7 -
+ arch/arm/mach-tegra/Kconfig                   |   2 +
+ arch/arm/mach-tegra/ap.c                      |   8 +
+ arch/arm/mach-tegra/cpu.h                     |   1 +
+ arch/arm/mach-tegra/crypto.c                  | 184 ++----
+ arch/arm/mach-tegra/fuse.c                    |  63 +-
+ arch/arm/mach-tegra/tegra124/bct.c            |  20 +-
+ arch/arm/mach-tegra/tegra20/bct.c             |  20 +-
+ arch/arm/mach-tegra/tegra20/warmboot.c        | 117 +---
+ arch/arm/mach-tegra/tegra30/bct.c             |  20 +-
+ drivers/crypto/Kconfig                        |   2 +
+ drivers/crypto/Makefile                       |   1 +
+ drivers/crypto/tegra/Kconfig                  |   7 +
+ drivers/crypto/tegra/Makefile                 |   3 +
+ drivers/crypto/tegra/tegra_aes.c              | 591 ++++++++++++++++++
+ 33 files changed, 923 insertions(+), 304 deletions(-)
+ create mode 100644 drivers/crypto/tegra/Kconfig
+ create mode 100644 drivers/crypto/tegra/Makefile
+ create mode 100644 drivers/crypto/tegra/tegra_aes.c
+
 -- 
 2.48.1
 
