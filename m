@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7DDC7EE30
-	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 12:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA4EFC7EE30
+	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 13:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4223382E5A;
-	Sun, 29 Jun 2025 14:48:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B848B82E08;
+	Sun, 29 Jun 2025 15:21:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dJwPwlvV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OpkM/4jO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB31E82E67; Sun, 29 Jun 2025 14:48:15 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 676BA82E40; Sun, 29 Jun 2025 15:21:56 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92CD982E40
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 14:48:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04D8A81F6B
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 15:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-55511c3e203so1221538e87.3
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 05:48:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-451d41e1ad1so23328945e9.1
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 06:21:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751201290; x=1751806090; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZoJ/Il5VTvqtTUjpUhKc7DHpncRzuRFUULrLbPlGDfc=;
- b=dJwPwlvVEtfVaZHzJ43dUp3uzTxEttKSvyCZAOYKIN6uv8prxo1H1at0lqUanapsEv
- edVkHQhLlo9iTVQXOIABY03lRnrfQ5sD8sDF6YSRH2x+o2BEkYU4YIXBU3+c7zCzdWiQ
- +0WIXxJyM6Nrz8UX8SKc16b4oqHGX3TWY8flp0vqiggseYtA/MPVcRBGPLturoMYpxOr
- lJTXNdrlPD4cAMZIrZjQhoTqPLJwGFUPD9LexcAaGaDtgfTk8ejJJvSfEB8waKk9zWev
- mEBd/DekIyJYpmBw/DCWiaXPAbGIA3VTzk+d5kY7gdJDfU+cufSnhMdwnx8eV854O2yD
- HnFg==
+ d=gmail.com; s=20230601; t=1751203310; x=1751808110; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZEsawCGlj1qTxiiKggfmzbU7eMkwniippXFbgIJVsRE=;
+ b=OpkM/4jOQ+MFg/8wQ+vfttNNwl/MtDQPy2P7yWej7c56FVrYhUKFu1q9Aep6oP8nbH
+ 6onloSTCWRTW4SHlkLVhkeReE6b67vPTwJrWoOtcQg0AQj5uKhst/GrUnoxcBtEGhNNt
+ KxMn6+oumZ5OOBZjysgv6C7KWjHk4Dwt4BCzbTQPH2PfXMzw+9v4ZM+tOVh0CsAWnFmA
+ rU4E1q+0mEHxfgf9ZAJZfuDxgbVoSxx5ePlBDANZYshwFO5xQ3iNjBB251F32YoUQp4c
+ /As6Ig7CQF1e46iTbZTRDXntpQp12CJzZjb1tL3/5RwgnRni2tUHtyYTnv8XJyGdtsUf
+ S4Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751201290; x=1751806090;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZoJ/Il5VTvqtTUjpUhKc7DHpncRzuRFUULrLbPlGDfc=;
- b=BBwmVW236m1s3hFS8RPYoq0xULRzfOJVwWK0oQASknb5++0Dd68ji//+vB9BfqRvS+
- 45SFzpSNvGMrx06p66ZHrqK4CzMNJ34ZZ5pDoArw6Wsdsv1IeDx82q7MBWa4rClJQrwo
- 0x4F/nnjgbRyHsW6S7D/+vvCVT9a9PfU11eU9zXPd7HIC4r0Md+X3vi409zaDFaCejix
- v2E/yOLDfAHL1GzKTZyLWZ7bXWEYP+71MqGDk86wSCJNxwD9jOZybEaDkF/qGZRmT/11
- 66mZfamVme4HarvUv15z1hBWZluu43AThHSCLljUt1jiTSWG2skWPLUDRlCkyjiBEREa
- uZ1Q==
-X-Gm-Message-State: AOJu0YyqCksLiY3cti4T6SlFi82RM9gawJ7CdjA888USDpfy6R7DOG91
- U4a6esvd8DwUHhPvcltSjOI58nv8XgoVu+qMVkKuuocNwD8kcig9SU4eF3DULAZ/jx7U3fIV0mZ
- eahHCzaYvksBPzVOvuE4nmF4DUGbSwHg=
-X-Gm-Gg: ASbGncsichGvUmgqGgPuAKypcXT8qtq+6sOi6ie7g946pm9a7VxiWSq5KJk5hM0Z8ov
- 3X/20qU7Suv4G/aeOihMGVi9rHjabNlTfXv+wdT/Xqd6fZnjGRSs5D0xBOm7ZjSxxuCmX5Zk/wx
- Z+PaHpmVL2pHBdTaHfMXeXGm2PvpsGnElUj+th+aspHNtZKO9ComwC65bnDJrtBW2uQj811A1lz
- Wk=
-X-Google-Smtp-Source: AGHT+IEyeBJ2xIj1BaP51ldfogqvNP1Tnc5w/+cXj4ko5MsL/D65I84ddJLY3Mp/mwTP9QA11FHhUbY2a8HSAR6RLQo=
-X-Received: by 2002:a05:6512:3990:b0:550:e527:886f with SMTP id
- 2adb3069b0e04-5550b8d8b7cmr3521347e87.51.1751201289460; Sun, 29 Jun 2025
- 05:48:09 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751203310; x=1751808110;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZEsawCGlj1qTxiiKggfmzbU7eMkwniippXFbgIJVsRE=;
+ b=xKlXomtt9XgSxB4uCnMeZZfRJkUUZveUmJvRHWj0li1SMfleHc1cfllRHxUPxrxxE/
+ aJFd9+eEsw+FSNlWLAKh9mT35KYfGaASm041obQLn4ul0LHkALROMhM8V6CvXSTbUAJL
+ WjTlTDmA9JZ1qtAD3oMKovdGPTojP2IbhxkigfARb7kOhjXzv0x95R4ClscvjfBLkgDi
+ VoXJU4DhyV+myf9PtqiYxtVqjFZ9MJmYWKnbVA6BWm62RXN9MU4Ijtmuow4KXE+tXOMi
+ Iwq/7bs7saovviyZSE/KNNV5XU+bBg63eQo90vWetyF44GIbCAwwJHWW9XuzdRjq5lIA
+ 2WuQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWecSljJJTkADHhgQcd0j0DAzd37WhT6plJXHIo/+x2TZaR+oazFH6YlvUWNlPHmiydly5UZds=@lists.denx.de
+X-Gm-Message-State: AOJu0YwB2HLNLOT7ZMzXjfmJvXaHMsaqt4BwXBK4URN0dJ8Dxmd9tJPH
+ 954J5PYg9x4zHMQeTA3HUxmyQMqG4wMTM3W4WSNe8WQyxi7LHZ2RtJQQ
+X-Gm-Gg: ASbGncsvCPvD826v/ZQFSljIHbpvJlL7xBLeh/WdNRRQXbRXSA0EaFlm+g3EZZhSEpm
+ pcxpWn5bhl1XWg/sncFt0h8qwefaUxQIfYGeL2PjzCMpzXC80JJSVbpxN22tUkJgODfobhtkkt1
+ AYzS4+H7FOcwWFNmCuGR0J0W1zUF/YghDreyOoiwXaiZqA1XesEdxolwuU0jffqmkYfoEZA9Efv
+ d/lUvtB7awS7I0jw5kRcB2g8BQIlOIHGIgtdbeH2Ueu/x45fn7m2RdYj4B19aDzOo63ZfTiPvy5
+ m1iAzbl/CFbzUBZhle823ZLX3+GIV86BiV7lk5+TYY+Z+XdeVOZwdEEEUYwscjdGIFU3ZpyiLRJ
+ FTh9PsjNZjDUY2MBJTyQc+m6yOLsxilOkAqzkLIa8P7Iz
+X-Google-Smtp-Source: AGHT+IGkCR1sJj5UdtwO4r8A/REHSnaw/4wjrXF+juSTYoumdJzGKnlQc+kUkuD6Jw/82iAXhpCiEg==
+X-Received: by 2002:a05:6000:20c4:b0:3aa:c95b:d1d9 with SMTP id
+ ffacd0b85a97d-3aac95bd1ddmr3332613f8f.6.1751203310132; 
+ Sun, 29 Jun 2025 06:21:50 -0700 (PDT)
+Received: from localhost.localdomain
+ (host-87-3-254-137.retail.telecomitalia.it. [87.3.254.137])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-453823b75cdsm132284515e9.32.2025.06.29.06.21.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 29 Jun 2025 06:21:49 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Subject: [PATCH] env: Fix possible out-of-bound access in env_do_env_set
+Date: Sun, 29 Jun 2025 15:21:18 +0200
+Message-ID: <20250629132122.24389-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250526194811.1179530-1-michael@amarulasolutions.com>
- <20250526194811.1179530-3-michael@amarulasolutions.com>
- <CAOMZO5ARdWa2bZrg+0VnndR66yFbmAOMNaMtn6PFS1Y9b1xPOw@mail.gmail.com>
- <CAOf5uwm5mTn3ac65cZiZedpo3kLQH4H1PEWtYMR+Rp_f8tR9fQ@mail.gmail.com>
- <CAOf5uwnjLjd2y_eBjiQkrqwgNMOR-0WjYAvwxP+TY=3cumDqOg@mail.gmail.com>
-In-Reply-To: <CAOf5uwnjLjd2y_eBjiQkrqwgNMOR-0WjYAvwxP+TY=3cumDqOg@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 29 Jun 2025 09:47:57 -0300
-X-Gm-Features: Ac12FXxMpen6Mj31XZ6rbwj41NYp7MH2JT6yLF5p3mCGSSdVesyTuqw4HqPozZI
-Message-ID: <CAOMZO5ACskwikgDm1voj=3MhzvfMdMXH=X16scEhV+VRf9UiQw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] mtd: nand: Add support for EDO mode 1-5 to IMX6ULL
- platform
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,11 +98,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 27, 2025 at 2:36=E2=80=AFPM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi Fabio
->
-> Are you going to pick up my last series?
+It was discovered that env_do_env_set() currently suffer from a long
+time of a possible out-of-bound access for the argv array handling.
 
-This series is already in the u-boot/next branch.
+The BUG is present in the function env_do_env_set() line:
+
+name = argv[1];
+
+where the function at this point assume the argv at index 1 is always
+present and can't be NULL. Aside from the fact that it's always
+better to validate argv entry with the argc variable, situation where
+the argv[1] is NULL is actually possible and not an error condition.
+
+A example of where an out-of-bound access is triggered is with the
+command "askenv - Press ENTER to ...".
+This is a common pattern for bootmenu entry to ask the user input after
+a bootmenu command succeeded.
+
+In the context of such command, the while loop before "name = argv[1];"
+parse the "-" char as an option arg and increment the argv pointer by
+one (to make the rest of the logic code ignore the option argv) and
+decrement argc value.
+
+The while loop logic is correct but at the "name = argv[1];" line, the
+argv have only one element left (the "-" char) and accessing argv[1]
+(aka the secong element from argv pointer) cause an out-of-bound access
+(making the bootloader eventually crash with strchr searching in invalid
+data)
+
+To better handle this and prevent the out-of-bound access, actually
+check the argv entry left (with the use of the argc variable) and exit
+early before doing any kind of array access.
+
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ env/common.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/env/common.c b/env/common.c
+index 86122582bc1..12570dee6f6 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -82,6 +82,10 @@ int env_do_env_set(int flag, int argc, char *const argv[], int env_flag)
+ 		}
+ 	}
+ 	debug("Final value for argc=%d\n", argc);
++	/* Exit early if we don't have an env to apply */
++	if (argc < 2)
++		return 0;
++
+ 	name = argv[1];
+ 
+ 	if (strchr(name, '=')) {
+-- 
+2.48.1
+
