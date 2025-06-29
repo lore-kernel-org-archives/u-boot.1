@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E605FC7EE30
-	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 10:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214A0C7EE39
+	for <u-boot@archiver.kernel.org>; Sun, 29 Jun 2025 10:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06B7382B34;
-	Sun, 29 Jun 2025 12:57:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51E8582ADA;
+	Sun, 29 Jun 2025 12:57:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Um/oFLp7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="koWG1vRY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8513F82B20; Sun, 29 Jun 2025 12:57:51 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id A60AD81FEE; Sun, 29 Jun 2025 12:57:52 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 778B682E8E
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 12:57:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1B7F82E5A
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 12:57:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-32aabfd3813so11425321fa.3
- for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 03:57:37 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-553b5165cf5so4624834e87.0
+ for <u-boot@lists.denx.de>; Sun, 29 Jun 2025 03:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751194657; x=1751799457; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751194661; x=1751799461; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XkyZIBgKXBhCdH9Jx60YsVGdS8JjUcTbP9uJhSfjq2s=;
- b=Um/oFLp7iuwX8+9Vwxxw1GMkUMCgnEre/v3gaFsQqU2IOGuvI0iNd1qpADne0C8sbD
- FwVnrlnMu9QH8JWqy6Mv9NOy8NY7Y/Sd4U6XG7UieaiUqiqYZ0zz/8xAfIB6wtnIPBoO
- b99Ak861eN585BJDWxVgt6zIIT1fJz16xIsSEF5SQI2xEwVICjdrjHaNQeB3eBCT9jUG
- ZPratiFmKzIasU8oqRMUd7P36wrkcA58p1HFi/FqPmVWqcI7IIwloSHd6IDeTRhhyxmu
- 4ZzkUxMCUp8QW+U44S8CDTZrBCOQUdK/E/k46n7GUzDn9+kx/SVgQY8gbxDvW0bzpI7E
- xO8Q==
+ bh=3ypS+N78F4yq06eSAA9LFatKkT5qmXLjtywn5021018=;
+ b=koWG1vRYXjqS3nHMVfWInpOSvZLPEL6x8HAXSEpFTqNQaGrBijsiywP8yHyZcqAgKv
+ GRrMfOW1cn6wAWCxdj/nWiapZY72XZwBiLYEi3N0eipG36xk4DEeZfmsmHkitoSxoNPc
+ tSSxKCuowGSyu6ZRsecJnRro++aXpN5AqsJeoIGobUmK/Z6Z2aZqheoh+VgiwRiokEtW
+ Cq8YNmPqpBS7oG8Hf80rRcwPy1dC1mrC6/KMFEVN5ehslBJNVgH6/1lXAD+w70fB1ouB
+ UP1fB2RfIScO7bWLSAotZR70uCB042lhmMFByKUhLwRdhsdl/PNyICHHkdqwHoiaeSUx
+ WxeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751194657; x=1751799457;
+ d=1e100.net; s=20230601; t=1751194661; x=1751799461;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XkyZIBgKXBhCdH9Jx60YsVGdS8JjUcTbP9uJhSfjq2s=;
- b=xSdybVS+yGCQwQiydylBp3fBjEONEhbSJzpfB7MVDMvl/e/XumczCH7krA3vZ9l83G
- 0vMUm1xtYXlxfEuiysYCip6ff1shhsU3mH/mDAARmpDp5IQTtfSuq76jq+Ao+jGGowwn
- +YRNGE4a3rbIw5GWO+rVo2maanv134POqYzQ0ZkMmI4N4YAPAjlFrfDdBUjDLkA1aK7J
- YiMOfhpthvXHoo7MP0nw/gAYjtHss6s/prEoakOzzKBi77yOxOaRZ0UgxYC1OAyM4oU6
- nveFQcEsyKzH8RNlwScwhPEsecFoXNPgpX7tn9TD8Ku9Ane2wYuaFbRJGP0GWolVzP18
- RiTw==
-X-Gm-Message-State: AOJu0YxQVh43fuuTpd6Hzp05H4tj3d1xkXjOPVsVnn+MD1uD+I9d/n7u
- 4EsuYyYqVAVboCA5Jo4UB4jRQpeFO1spT3PINCwKM9ZYMRwlwos4sD2g
-X-Gm-Gg: ASbGncu/glQZalflhocgkL30Ofy5hrd5CPCAObPeqMcVesqLouDknq/FL68yM2TieYu
- 212udw6HcgdMbhs8o3Qphl1QP7fMhIg5lAiryW74L7CflCI1xS9JgIEoqKRcR4lqmAjs3feXlBo
- 2GzV8RwWttkHI16BMUQccB8aI9M7HzNlmUchsJuSuVcMuShV60ZwuetyMuZFTUfdStrL/IL2k50
- 2FtBcr54hNYeFyA9j4Y8yO0l9dX4RXIhs3qaakPCnsCjjYCZy3i4pYuzCP6Ai1ZcQOy3NRx4R7U
- iRG3cXAGEM3w1rn72CNwqSCAk5FxBkE65nE0PLIV9UA6xtHSEGqu+w==
-X-Google-Smtp-Source: AGHT+IGjGCdJXa4Agqh8VOiEyk4969OgvdCOqEtjtBjpWPrKRVVkqhvpyIWq1FwwyiD8HXLTewg/ZQ==
-X-Received: by 2002:a05:6512:3d0f:b0:553:5d00:be84 with SMTP id
- 2adb3069b0e04-5550b896837mr2912606e87.34.1751194656364; 
- Sun, 29 Jun 2025 03:57:36 -0700 (PDT)
+ bh=3ypS+N78F4yq06eSAA9LFatKkT5qmXLjtywn5021018=;
+ b=nTT8tKS+1fa3K/1LXvxJYAOFmnF8T4sobp3x9iR9Mhlh7vaqhiHM3ppVZYK2eHLgNG
+ Ghv+0lX2s0O/XZkNCXsX07BUVjA93gkgYKl4rOyzK6ejBIatCf+sLa/4RYWvcqRHoOd1
+ PZmX9dAbqQvMWcsgzwnDct4sXSSN6cKjjP3iw7cBrYoq5YcYP8Cr6J382EDPUwRpmQgH
+ hMND1ZJ4k8Qx+5a4iIUj8W7kyWik/QaipCcFEWN8nCLgtIr9uruCSw0VxXOMi38Fxp3o
+ IsLdq4daz3vkDZJgMug4rsX6OxP2iGWHsxNk7rVbGk1PuRF2HL8akHrUfrCB2C+4AQot
+ 0MMA==
+X-Gm-Message-State: AOJu0YxAdFY/SBDUIHK/W0WDOhOaAlBd3dKSWlOsS1/OcdSIWvEBFVT6
+ kcsSikbwF9rU9OGQx8e+oolALqXwNpFdEEPrlNVK7l+21WVZRtH0cIKw
+X-Gm-Gg: ASbGnctNw18aS0gKfSlU/27WFxmMUUr6EqWekySKeWg8aaJgqFCkLFIqVCe1JQMEU9T
+ z7atf0bjzhReAloRYh7NvPYxPM6XSGDgu4wGyfmzr5ZtVHxuHLY27FuPMYSX4Sb1RG+ifdm74gL
+ VwPGHt/ddRVqI2dWcuXOu1L3tS/wmmu5uiFaYLuQJ/a/rDZU+vLSqARnMAeYyaHXKt3khvgah5A
+ 0E1QYRH24sCSineVGCPYFL8GNw7Ma609VpbyUyeQcHvS/50P5B1lsnFckkUQH+/6Y2+nexQkIOU
+ pK97UsrItPFvRQVjm7LLTxAg9f+Yy/CEvuqaCacfWbOgjz+na7PcEQ==
+X-Google-Smtp-Source: AGHT+IHRKXjP/PXCEjE+VWQWr5vwkWD2mFvhKt///zre76LBTwM4oW9QqJ8oMaI2ySZ+zS7JF0W4Yg==
+X-Received: by 2002:a05:6512:3e0b:b0:54a:cc76:1676 with SMTP id
+ 2adb3069b0e04-5550ba27be5mr3125017e87.44.1751194660814; 
+ Sun, 29 Jun 2025 03:57:40 -0700 (PDT)
 Received: from xeon.. ([188.163.112.61]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5550b24d32esm1092514e87.69.2025.06.29.03.57.34
+ 2adb3069b0e04-5550b24d32esm1092514e87.69.2025.06.29.03.57.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Jun 2025 03:57:35 -0700 (PDT)
+ Sun, 29 Jun 2025 03:57:40 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mario Six <mario.six@gdsys.cc>, Christian Marangi <ansuelsmth@gmail.com>,
@@ -84,9 +84,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Wang Jie <dave.wang@rock-chips.com>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/4] dm: crypto: Create AES uclass
-Date: Sun, 29 Jun 2025 13:57:08 +0300
-Message-ID: <20250629105711.24687-2-clamor95@gmail.com>
+Subject: [PATCH v1 4/4] test: dm: add AES engine test
+Date: Sun, 29 Jun 2025 13:57:11 +0300
+Message-ID: <20250629105711.24687-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250629105711.24687-1-clamor95@gmail.com>
 References: <20250629105711.24687-1-clamor95@gmail.com>
@@ -108,548 +108,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ion Agorria <ion@agorria.com>
+Create a basic test suit for AES DM uclass that covers all available
+operations.
 
-Create a basic framework for a group of devices that perform AES
-cryptographic operations.
-
-Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/crypto/Kconfig          |   2 +
- drivers/crypto/Makefile         |   1 +
- drivers/crypto/aes/Kconfig      |   5 +
- drivers/crypto/aes/Makefile     |   3 +
- drivers/crypto/aes/aes-uclass.c | 192 ++++++++++++++++++++++++
- include/dm/uclass-id.h          |   1 +
- include/uboot_aes.h             | 251 ++++++++++++++++++++++++++++++++
- 7 files changed, 455 insertions(+)
- create mode 100644 drivers/crypto/aes/Kconfig
- create mode 100644 drivers/crypto/aes/Makefile
- create mode 100644 drivers/crypto/aes/aes-uclass.c
+ arch/sandbox/dts/test.dts          |  4 +++
+ configs/sandbox64_defconfig        |  2 ++
+ configs/sandbox_defconfig          |  2 ++
+ configs/sandbox_flattree_defconfig |  3 ++
+ test/dm/Makefile                   |  1 +
+ test/dm/aes.c                      | 57 ++++++++++++++++++++++++++++++
+ 6 files changed, 69 insertions(+)
+ create mode 100644 test/dm/aes.c
 
-diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
-index 8b49997030b..d26f87364f9 100644
---- a/drivers/crypto/Kconfig
-+++ b/drivers/crypto/Kconfig
-@@ -2,6 +2,8 @@ menu "Hardware crypto devices"
- 
- source "drivers/crypto/hash/Kconfig"
- 
-+source "drivers/crypto/aes/Kconfig"
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 7026c73bc69..bb696c5ef7f 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -2150,6 +2150,10 @@
+ 			};
+ 		};
+ 	};
 +
- source "drivers/crypto/fsl/Kconfig"
++	aes-engine {
++		compatible = "software-aes-engine";
++	};
+ };
  
- source "drivers/crypto/aspeed/Kconfig"
-diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
-index b9105186097..2bd99fc2763 100644
---- a/drivers/crypto/Makefile
-+++ b/drivers/crypto/Makefile
-@@ -4,6 +4,7 @@
- #	http://www.samsung.com
- 
- obj-$(CONFIG_EXYNOS_ACE_SHA)	+= ace_sha.o
-+obj-y += aes/
- obj-y += rsa_mod_exp/
- obj-y += fsl/
- obj-y += hash/
-diff --git a/drivers/crypto/aes/Kconfig b/drivers/crypto/aes/Kconfig
+ #include "sandbox_pmic.dtsi"
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 34e89bf6b3e..8fdc581c205 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -137,6 +137,8 @@ CONFIG_CLK_K210=y
+ CONFIG_CLK_K210_SET_RATE=y
+ CONFIG_SANDBOX_CLK_CCF=y
+ CONFIG_CPU=y
++CONFIG_DM_AES=y
++CONFIG_AES_SOFTWARE=y
+ CONFIG_DM_DEMO=y
+ CONFIG_DM_DEMO_SIMPLE=y
+ CONFIG_DM_DEMO_SHAPE=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 4f6943d1a4b..602397430f0 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -186,6 +186,8 @@ CONFIG_CLK_K210_SET_RATE=y
+ CONFIG_SANDBOX_CLK_CCF=y
+ CONFIG_CLK_SCMI=y
+ CONFIG_CPU=y
++CONFIG_DM_AES=y
++CONFIG_AES_SOFTWARE=y
+ CONFIG_DM_DEMO=y
+ CONFIG_DM_DEMO_SIMPLE=y
+ CONFIG_DM_DEMO_SHAPE=y
+diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
+index 67c0ed7353e..317d7dc9c20 100644
+--- a/configs/sandbox_flattree_defconfig
++++ b/configs/sandbox_flattree_defconfig
+@@ -75,6 +75,7 @@ CONFIG_CMD_QFW=y
+ CONFIG_CMD_BOOTSTAGE=y
+ CONFIG_CMD_PMIC=y
+ CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_AES=y
+ CONFIG_CMD_TPM=y
+ CONFIG_CMD_TPM_TEST=y
+ CONFIG_CMD_EXT4_WRITE=y
+@@ -115,6 +116,8 @@ CONFIG_CLK_K210=y
+ CONFIG_CLK_K210_SET_RATE=y
+ CONFIG_SANDBOX_CLK_CCF=y
+ CONFIG_CPU=y
++CONFIG_DM_AES=y
++CONFIG_AES_SOFTWARE=y
+ CONFIG_DM_DEMO=y
+ CONFIG_DM_DEMO_SIMPLE=y
+ CONFIG_DM_DEMO_SHAPE=y
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 917dafe7d22..d15859eca30 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -29,6 +29,7 @@ obj-(CONFIG_DM_GPIO) += gpio.o
+ obj-y += irq.o
+ endif
+ obj-$(CONFIG_ADC) += adc.o
++obj-$(CONFIG_AES_SOFTWARE) += aes.o
+ obj-$(CONFIG_SOUND) += audio.o
+ obj-$(CONFIG_AXI) += axi.o
+ obj-$(CONFIG_BLK) += blk.o
+diff --git a/test/dm/aes.c b/test/dm/aes.c
 new file mode 100644
-index 00000000000..661dad64a6c
+index 00000000000..702e4db2b35
 --- /dev/null
-+++ b/drivers/crypto/aes/Kconfig
-@@ -0,0 +1,5 @@
-+config DM_AES
-+	bool "Enable Driver Model for AES crypto operations"
-+	depends on DM
-+	help
-+	  If you want to use driver model for AES crypto operations, say Y.
-diff --git a/drivers/crypto/aes/Makefile b/drivers/crypto/aes/Makefile
-new file mode 100644
-index 00000000000..2f409fca1eb
---- /dev/null
-+++ b/drivers/crypto/aes/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-$(CONFIG_$(PHASE_)DM_AES) += aes-uclass.o
-diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
-new file mode 100644
-index 00000000000..745c6ce57a9
---- /dev/null
-+++ b/drivers/crypto/aes/aes-uclass.c
-@@ -0,0 +1,192 @@
++++ b/test/dm/aes.c
+@@ -0,0 +1,57 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+
-+#define LOG_CATEGORY UCLASS_AES
++/*
++ * Tests for the driver model AES API
++ *
++ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
++ */
 +
 +#include <dm.h>
-+#include <malloc.h>
-+#include <log.h>
++#include <dm/test.h>
 +#include <uboot_aes.h>
-+#include <linux/string.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+int dm_aes_get_available_key_slots(struct udevice *dev)
++#define AES128_KEYSIZE		128
++
++static int dm_test_aes(struct unit_test_state *uts)
 +{
-+	const struct aes_ops *ops;
++	struct udevice *dev;
++	u8 test_key[AES128_KEY_LENGTH] = { 0x63, 0x68, 0x69, 0x63, 0x6b, 0x65, 0x6e, 0x20,
++					   0x74, 0x65, 0x72, 0x69, 0x79, 0x61, 0x6b, 0x69 };
++	u8 test_iv[AES128_KEY_LENGTH] = { 0 };
 +
-+	if (!dev)
-+		return -ENODEV;
++	u8 test_input[AES_BLOCK_LENGTH] = { 0x49, 0x20, 0x77, 0x6f, 0x75, 0x6c, 0x64, 0x20,
++					    0x6c, 0x69, 0x6b, 0x65, 0x20, 0x74, 0x68, 0x65 };
++	u8 exp_output[AES_BLOCK_LENGTH] = { 0x97, 0x68, 0x72, 0x68, 0xd6, 0xec, 0xcc, 0xc0,
++					    0xc0, 0x7b, 0x25, 0xe2, 0x5e, 0xcf, 0xe5, 0x84 };
++	u8 exp_cmac[AES_BLOCK_LENGTH] = { 0xfc, 0x89, 0x20, 0xc8, 0x46, 0x97, 0xb1, 0x3d,
++					  0x31, 0x2c, 0xc2, 0x49, 0x5c, 0x5a, 0x0b, 0x9f };
++	u8 test_output[AES_BLOCK_LENGTH];
 +
-+	ops = aes_get_ops(dev);
++	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
 +
-+	if (!ops->available_key_slots)
-+		return -ENOSYS;
++	/* software AES exposes 2 key slots */
++	ut_asserteq(2, dm_aes_get_available_key_slots(dev));
 +
-+	return ops->available_key_slots(dev);
++	ut_assertok(dm_aes_select_key_slot(dev, AES128_KEYSIZE, 0));
++	ut_assertok(dm_aes_set_key_for_key_slot(dev, AES128_KEYSIZE, test_key, 0));
++
++	ut_assertok(dm_aes_ecb_encrypt(dev, test_input, test_output, 1));
++	ut_assertok(memcmp(exp_output, test_output, 16));
++
++	ut_assertok(dm_aes_ecb_decrypt(dev, test_output, test_output, 1));
++	ut_assertok(memcmp(test_input, test_output, 16));
++
++	ut_assertok(dm_aes_cbc_encrypt(dev, test_iv, test_input, test_output, 1));
++	ut_assertok(memcmp(exp_output, test_output, 16));
++
++	ut_assertok(dm_aes_cbc_decrypt(dev, test_iv, test_output, test_output, 1));
++	ut_assertok(memcmp(test_input, test_output, 16));
++
++	ut_assertok(dm_aes_cmac(dev, test_input, test_output, 1));
++	ut_assertok(memcmp(exp_cmac, test_output, 16));
++
++	return 0;
 +}
 +
-+int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->select_key_slot)
-+		return -ENOSYS;
-+
-+	return ops->select_key_slot(dev, key_size, slot);
-+}
-+
-+int dm_aes_set_key_for_key_slot(struct udevice *dev, u32 key_size, u8 *key, u8 slot)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->set_key_for_key_slot)
-+		return -ENOSYS;
-+
-+	return ops->set_key_for_key_slot(dev, key_size, key, slot);
-+}
-+
-+int dm_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->aes_ecb_encrypt)
-+		return -ENOSYS;
-+
-+	return ops->aes_ecb_encrypt(dev, src, dst, num_aes_blocks);
-+}
-+
-+int dm_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->aes_ecb_decrypt)
-+		return -ENOSYS;
-+
-+	return ops->aes_ecb_decrypt(dev, src, dst, num_aes_blocks);
-+}
-+
-+int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->aes_cbc_encrypt)
-+		return -ENOSYS;
-+
-+	return ops->aes_cbc_encrypt(dev, iv, src, dst, num_aes_blocks);
-+}
-+
-+int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks)
-+{
-+	const struct aes_ops *ops;
-+
-+	if (!dev)
-+		return -ENODEV;
-+
-+	ops = aes_get_ops(dev);
-+
-+	if (!ops->aes_cbc_decrypt)
-+		return -ENOSYS;
-+
-+	return ops->aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
-+}
-+
-+static void left_shift_vector(u8 *in, u8 *out, int size)
-+{
-+	int carry = 0;
-+	int i;
-+
-+	for (i = size - 1; i >= 0; i--) {
-+		out[i] = (in[i] << 1) | carry;
-+		carry = in[i] >> 7;	/* get most significant bit */
-+	}
-+}
-+
-+int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
-+{
-+	const u8 AES_CMAC_CONST_RB = 0x87; /* from RFC 4493, Figure 2.2 */
-+	const u32 TMP_BUFFER_LEN = 128;
-+	u8 tmp_block[AES128_KEY_LENGTH] = { };
-+	u8 k1[AES128_KEY_LENGTH];
-+	u8 *tmp_buffer;
-+	int ret;
-+
-+	log_debug("%s: 0x%p -> %p blocks %d\n", __func__, src, dst, num_aes_blocks);
-+
-+	if (!num_aes_blocks) {
-+		log_debug("%s: called with 0 blocks!\n", __func__);
-+		return -1;
-+	}
-+
-+	/* Compute K1 constant needed by AES-CMAC calculation */
-+	ret = dm_aes_cbc_encrypt(dev, (u8 *)AES_ZERO_BLOCK, (u8 *)AES_ZERO_BLOCK, tmp_block, 1);
-+	if (ret)
-+		return -1;
-+
-+	left_shift_vector(tmp_block, k1, AES_BLOCK_LENGTH);
-+
-+	if ((tmp_block[0] >> 7) != 0) /* get MSB of L */
-+		k1[AES128_KEY_LENGTH - 1] ^= AES_CMAC_CONST_RB;
-+
-+	/* Set what will be the initial IV as zero */
-+	memset(tmp_block, 0, AES_BLOCK_LENGTH);
-+
-+	/* Process all blocks except last by calling engine several times per dma buffer size */
-+	if (num_aes_blocks > 1) {
-+		tmp_buffer = malloc(AES_BLOCK_LENGTH * min(num_aes_blocks - 1, TMP_BUFFER_LEN));
-+		while (num_aes_blocks > 1) {
-+			u32 blocks = min(num_aes_blocks - 1, TMP_BUFFER_LEN);
-+
-+			/* Encrypt the current remaining set of blocks that fits in tmp buffer */
-+			ret = dm_aes_cbc_encrypt(dev, tmp_block, src, tmp_buffer, blocks);
-+			if (ret)
-+				return -1;
-+
-+			num_aes_blocks -= blocks;
-+			src += blocks * AES_BLOCK_LENGTH;
-+
-+			/* Copy the last encrypted block to tmp_block as IV */
-+			memcpy(tmp_block, tmp_buffer + ((blocks - 1) * AES_BLOCK_LENGTH),
-+			       AES_BLOCK_LENGTH);
-+		}
-+		free(tmp_buffer);
-+	}
-+
-+	if (num_aes_blocks != 1) {
-+		log_debug("%s: left with %d blocks! must be 1\n", __func__, num_aes_blocks);
-+		return -1;
-+	}
-+
-+	/* XOR last IV with K1 */
-+	aes_apply_cbc_chain_data(tmp_block, k1, tmp_block);
-+
-+	/* Encrypt the last src block already with tmp_block as IV and output to dst */
-+	return dm_aes_cbc_encrypt(dev, tmp_block, src, dst, 1);
-+}
-+
-+UCLASS_DRIVER(aes) = {
-+	.id	= UCLASS_AES,
-+	.name	= "aes",
-+};
-diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index 270088ad94f..5c0fd6d171b 100644
---- a/include/dm/uclass-id.h
-+++ b/include/dm/uclass-id.h
-@@ -38,6 +38,7 @@ enum uclass_id {
- 	/* U-Boot uclasses start here - in alphabetical order */
- 	UCLASS_ACPI_PMC,	/* (x86) Power-management controller (PMC) */
- 	UCLASS_ADC,		/* Analog-to-digital converter */
-+	UCLASS_AES,		/* AES cryptographic engine */
- 	UCLASS_AHCI,		/* SATA disk controller */
- 	UCLASS_AUDIO_CODEC,	/* Audio codec with control and data path */
- 	UCLASS_AXI,		/* AXI bus */
-diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-index d2583bed992..592b7dbee43 100644
---- a/include/uboot_aes.h
-+++ b/include/uboot_aes.h
-@@ -7,6 +7,8 @@
- #ifndef _AES_REF_H_
- #define _AES_REF_H_
- 
-+#include <errno.h>
-+
- #ifdef USE_HOSTCC
- /* Define compat stuff for use in fw_* tools. */
- typedef unsigned char u8;
-@@ -107,4 +109,253 @@ void aes_cbc_encrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
- void aes_cbc_decrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
- 			    u32 num_aes_blocks);
- 
-+/* An AES block filled with zeros */
-+static const u8 AES_ZERO_BLOCK[AES_BLOCK_LENGTH] = { 0 };
-+struct udevice;
-+
-+/**
-+ * struct struct aes_ops - Driver model for AES related operations
-+ *
-+ * The uclass interface is implemented by AES crypto devices which use driver model.
-+ *
-+ * Some AES crypto devices use key slots to store the key for the encrypt/decrypt
-+ * operations, while others may simply pass the key on each operation.
-+ *
-+ * In case the device does not implement hardware slots, driver can emulate or simply
-+ * store one active key slot at 0 in the driver state and pass it on each underlying
-+ * hw calls for AES operations.
-+ *
-+ * Note that some devices like Tegra AES engine may contain preloaded keys by bootrom,
-+ * thus in those cases the set_key_for_key_slot() may be skipped.
-+ *
-+ * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash example
-+ * with 128bits key at slot 0 would be as follow:
-+ *
-+ * set_key_for_key_slot(DEV, 128, KEY, 0);
-+ * select_key_slot(DEV, 128, 0);
-+ * aes_cbc_encrypt(DEV, IV1, SRC1, DST1, LEN1);
-+ * aes_cbc_encrypt(DEV, IV2, SRC2, DST2, LEN2);
-+ * aes_cbc_decrypt(DEV, IV3, SRC3, DST3, LEN3);
-+ */
-+struct aes_ops {
-+	/**
-+	 * available_key_slots() - How many key slots this AES device has
-+	 *
-+	 * @dev			The AES udevice
-+	 * @return		Available slots to use, 0 for none
-+	 */
-+	int (*available_key_slots)(struct udevice *dev);
-+
-+	/**
-+	 * select_key_slot() - Selects the AES key slot to use for following operations
-+	 *
-+	 * @dev			The AES udevice
-+	 * @key_size		Size of the aes key (in bits)
-+	 * @slot		The key slot to set as selected
-+	 * @return		0 on success, negative value on failure
-+	 */
-+	int (*select_key_slot)(struct udevice *dev, u32 key_size, u8 slot);
-+
-+	/**
-+	 * set_key_for_key_slot() - Sets the AES key to use for specified key slot
-+	 *
-+	 * @dev			The AES udevice
-+	 * @key_size		Size of the aes key (in bits)
-+	 * @key			An AES key to set
-+	 * @slot		The slot to load the key at
-+	 * @return		0 on success, negative value on failure
-+	 */
-+	int (*set_key_for_key_slot)(struct udevice *dev, u32 key_size, u8 *key,
-+				    u8 slot);
-+
-+	/**
-+	 * aes_ecb_encrypt() - Encrypt multiple blocks of data with AES ECB.
-+	 *
-+	 * @dev			The AES udevice
-+	 * @src			Source data of length 'num_aes_blocks' blocks
-+	 * @dst			Destination data of length 'num_aes_blocks' blocks
-+	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+	 * @return		0 on success, negative value on failure
-+	 */
-+	int (*aes_ecb_encrypt)(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+	/**
-+	 * aes_ecb_decrypt() - Decrypt multiple blocks of data with AES ECB.
-+	 *
-+	 * @dev			The AES udevice
-+	 * @src			Source data of length 'num_aes_blocks' blocks
-+	 * @dst			Destination data of length 'num_aes_blocks' blocks
-+	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+	 * @return		0 on success, negative value on failure
-+	 */
-+	int (*aes_ecb_decrypt)(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+	/**
-+	 * aes_cbc_encrypt() - Encrypt multiple blocks of data with AES CBC.
-+	 *
-+	 * @dev			The AES udevice
-+	 * @iv			Initialization vector
-+	 * @src			Source data of length 'num_aes_blocks' blocks
-+	 * @dst			Destination data of length 'num_aes_blocks' blocks
-+	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+	 * @return		0 on success, negative value on failure
-+	 */
-+	int (*aes_cbc_encrypt)(struct udevice *dev, u8 *iv,
-+			       u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+	/**
-+	 * aes_cbc_decrypt() - Decrypt multiple blocks of data with AES CBC.
-+	 *
-+	 * @dev			The AES udevice
-+	 * @iv			Initialization vector
-+	 * @src			Source data of length 'num_aes_blocks' blocks
-+	 * @dst			Destination data of length 'num_aes_blocks' blocks
-+	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+	 * @return		0 on success, negative value on failure
-+	 */
-+	int (*aes_cbc_decrypt)(struct udevice *dev, u8 *iv,
-+			       u8 *src, u8 *dst, u32 num_aes_blocks);
-+};
-+
-+#define aes_get_ops(dev)	((struct aes_ops *)(dev)->driver->ops)
-+
-+#if CONFIG_IS_ENABLED(DM_AES)
-+
-+/**
-+ * dm_aes_get_available_key_slots - How many key slots this AES device has
-+ *
-+ * @dev			The AES udevice
-+ * Return:		Available slots to use, 0 for none, -ve on failure
-+ */
-+int dm_aes_get_available_key_slots(struct udevice *dev);
-+
-+/**
-+ * dm_aes_select_key_slot - Selects the AES key slot to use for following operations
-+ *
-+ * @dev			The AES udevice
-+ * @key_size		Size of the aes key (in bits)
-+ * @slot		The key slot to set as selected
-+ * Return:		0 on success, -ve on failure
-+ */
-+int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot);
-+
-+/**
-+ * dm_aes_set_key_for_key_slot - Sets the AES key to use for specified key slot
-+ *
-+ * @dev			The AES udevice
-+ * @key_size		Size of the aes key (in bits)
-+ * @key			An AES key to set
-+ * @slot		The slot to load the key at
-+ * Return:		0 on success, negative value on failure
-+ */
-+int dm_aes_set_key_for_key_slot(struct udevice *dev, u32 key_size, u8 *key, u8 slot);
-+
-+/**
-+ * dm_aes_ecb_encrypt - Encrypt multiple blocks of data with AES ECB.
-+ *
-+ * @dev			The AES udevice
-+ * @src			Source data of length 'num_aes_blocks' blocks
-+ * @dst			Destination data of length 'num_aes_blocks' blocks
-+ * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+ * Return:		0 on success, negative value on failure
-+ */
-+int dm_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+/**
-+ * dm_aes_ecb_decrypt - Decrypt multiple blocks of data with AES ECB.
-+ *
-+ * @dev			The AES udevice
-+ * @src			Source data of length 'num_aes_blocks' blocks
-+ * @dst			Destination data of length 'num_aes_blocks' blocks
-+ * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+ * Return:		0 on success, negative value on failure
-+ */
-+int dm_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+/**
-+ * dm_aes_cbc_encrypt - Encrypt multiple blocks of data with AES CBC.
-+ *
-+ * @dev			The AES udevice
-+ * @iv			Initialization vector
-+ * @src			Source data of length 'num_aes_blocks' blocks
-+ * @dst			Destination data of length 'num_aes_blocks' blocks
-+ * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+ * Return:		0 on success, negative value on failure
-+ */
-+int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+/**
-+ * dm_aes_cbc_decrypt - Decrypt multiple blocks of data with AES CBC.
-+ *
-+ * @dev			The AES udevice
-+ * @iv			Initialization vector
-+ * @src			Source data of length 'num_aes_blocks' blocks
-+ * @dst			Destination data of length 'num_aes_blocks' blocks
-+ * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
-+ * Return:		0 on success, negative value on failure
-+ */
-+int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+/**
-+ * dm_aes_cmac - Hashes the input data with AES-CMAC, putting the result into dst.
-+ * The key slot must be selected already.
-+ *
-+ * @dev			The AES udevice
-+ * @key_size		Size of the aes key (in bits)
-+ * @src			Source data of length 'num_aes_blocks' blocks
-+ * @dst			Destination for hash result
-+ * @num_aes_blocks	Number of AES blocks to encrypt
-+ * Return:		0 on success, negative value on failure.
-+ */
-+int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks);
-+
-+#else
-+
-+static inline int dm_aes_get_available_key_slots(struct udevice *dev)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_set_key_for_key_slot(struct udevice *dev, u32 key_size, u8 *key,
-+					      u8 slot)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst,
-+				     u32 num_aes_blocks)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst,
-+				     u32 num_aes_blocks)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src,
-+				     u8 *dst, u32 num_aes_blocks)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
-+				     u8 *dst, u32 num_aes_blocks)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
-+{
-+	return -ENOSYS;
-+}
-+
-+#endif /* CONFIG_DM_AES */
-+
- #endif /* _AES_REF_H_ */
++DM_TEST(dm_test_aes, UTF_SCAN_FDT);
 -- 
 2.48.1
 
