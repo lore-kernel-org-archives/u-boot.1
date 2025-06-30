@@ -4,71 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B10DBC83029
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 18:54:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6CFC83029
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 18:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5292E82EC6;
-	Mon, 30 Jun 2025 20:53:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A24B182F42;
+	Mon, 30 Jun 2025 20:53:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VDLclz8z";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RnCpXyrx";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8CBA82EA2; Mon, 30 Jun 2025 20:53:08 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6259980B9B; Mon, 30 Jun 2025 17:39:54 +0200 (CEST)
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+ [209.85.222.182])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C4E082EC6
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:52:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 352AA800C1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 17:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bWFfF39kfz9tPp;
- Mon, 30 Jun 2025 20:52:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751309573;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Es8c9xYc14o4HsX9Uiu+f0056FQcydz6i6/D1hvWti8=;
- b=VDLclz8zK74AdSmTFddvNMB7r0BWeRHekjrg2izqmomUUzjPujK/m1chpWUGel7YZ64we8
- h3z9rYmmyAoS1rpOheJfaVwVZDrjElU1+C1pZTjulk3/owR8vvvr4xEOZiMZWo4w0qTF46
- y8WKRR6fNxY4bQvUSOcqnv3n5mXWOi6Cjxbf1queW9WsvvfDMrr133idyLI1FBleX3UN8u
- +oobYza4lZpnW/g3U8YHpUSklCcVQ4aXtVG+gutxugOFRksHtDvt6Kzdw8w5zi2uSv1lZP
- gTSVbk7ZHLq/we+6gvLNDLoR3TE5xBTU69/DXANRLcT9JEq4B84CDi/tacSkdA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751309571;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Es8c9xYc14o4HsX9Uiu+f0056FQcydz6i6/D1hvWti8=;
- b=RnCpXyrxkw/A03xfb+/aTxDv/WTcDG7dLOusdlIlujD0rGQqYLRcA4rri2Ipjv/mP8K0VR
- m1lKg3JzQtRRl0o2ZPzNh22OtS9v+85Dh4UUIO5xz9AnYviOMyp3TTUQPfZEKywSTArWIN
- b6hLbjRixxTKbcMLt/maQgLLBc94mQ/DNSxA9rya+OtZy5bPJfIjHlQCR7qHaMe0Q+7As1
- TaI+I0+byLDnRh+hhnwUCBXsp1kmr/eoADkCDnggjwIqmTBgAoLDZJDIGtpnkHwj6nQ8h0
- 5ogI/j2YKjtgkzmA5Uf6sHjAX3lPrHmGVPO21jF2xlhN/kaZ7kOPcblTqWmk0A==
+ spf=pass smtp.mailfrom=magnus.damm@gmail.com
+Received: by mail-qk1-f182.google.com with SMTP id
+ af79cd13be357-7d219896edeso488467185a.1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 08:39:52 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751297991; x=1751902791;
+ h=subject:message-id:date:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=a61sLOONmihmdhd4OGSI+Q/bLDe72p696O7IHFjET24=;
+ b=EaQNMZ+Lpf4uJfr8nr3tGkEgcjYidxY3TTrBNXatKnugQhDfAWZ8Y3V2oQhmkhcu5e
+ 95Ib4Sd6FI18O5blZbnHVKPsuP0bBy9ai7bHJoBcLEoyj+H4OU0Zs9maVPImaZjw8TZJ
+ mKUkeX1ndl9nuFLm2axjdsp276Uz5Fqp4z1PSqPDplRCbsjuc9GsZIs5s7jqNQpDcbPa
+ KrZycK4InLihVKQgpqNjRG/5DnvFQahYrRS972GUc2YvvzL2D2S1IdsErW5w4YU1TZ9t
+ 7mkSWh7aHvPqGgqKBIrdBno/aAMm4F6V9RP00TheNa284pZqv4dIfXlJ/GDlwwxV+rZN
+ QihA==
+X-Gm-Message-State: AOJu0Yxh7rr7USSRmSUceVAszTkiHOJuIv2Oa8SxfvZ79cpSPvMuScOf
+ lpEj0aLthgWehdZBQI1VWIHUps/m2DD0lqycb3JUvcza2AzKWJO34Pd5xMjfP+dm
+X-Gm-Gg: ASbGncvXBjdMvAw4LT9I4CUllvoAjkjeuQP2RbuPTVjmWkJ/WJd8qU2S3Xr4X/xTyLf
+ AuqAZjQXKZpWGBKD7znWh0loz5CTJk3S0k1mRCjURDXffm+2UkCbHyEYBwxQhJIjJf0uWRDksW+
+ E5Lutmmg21CxQNeATn1L7z1eckj67M9NJjA/w0nNX8AO7pSNoBmAu0rRzcGQ65N7jm2cBKB8drg
+ uDW7CT73pSEjro6pnmhqtyjtPqtEn704yODjo8xXLrKKJE0nLSy5rrTM/DjeTVYN7fvFus+xl74
+ +UB6kfUm5FF7NGDq8xFfK4yYWotBLUVlgHwYex1g/GquSrgyw8ZNQKtsCDImD956Zquj9OVHCUd
+ xODQW49OSbrlE0IedlMnHIaI=
+X-Google-Smtp-Source: AGHT+IGab2Rpxw8S74G9Cl4XbKLKmmvJ1C6HTsflUwBT1DGGZAgZ3eRA0zkJzxAJLD8LviT0E8vncg==
+X-Received: by 2002:ad4:5ae8:0:b0:6fa:c81a:6202 with SMTP id
+ 6a1803df08f44-700036ae7cdmr215570046d6.29.1751297990674; 
+ Mon, 30 Jun 2025 08:39:50 -0700 (PDT)
+Received: from 1.0.0.127.in-addr.arpa ([167.99.4.198])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6fd772e434bsm69722956d6.67.2025.06.30.08.39.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Jun 2025 08:39:50 -0700 (PDT)
+From: Magnus Damm <damm@opensource.se>
 To: u-boot@lists.denx.de
-Cc: damm@opensource.se, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: renesas: Split common RZ/A1 and GR-PEACH defconfigs
-Date: Mon, 30 Jun 2025 20:52:37 +0200
-Message-ID: <20250630185238.1099287-1-marek.vasut+renesas@mailbox.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ca6a99384f69f947d68
-X-MBO-RS-META: 9x4fxdta75di36p9sykdiejdcxndqrg5
-X-Rspamd-Queue-Id: 4bWFfF39kfz9tPp
+Cc: Magnus Damm <damm@opensource.se>, Chris.Brandt@renesas.com,
+ marek.vasut+renesas@gmail.com
+Date: Mon, 30 Jun 2025 17:39:47 +0200
+Message-Id: <175129798741.60585.4269510571459746691.sendpatchset@1.0.0.127.in-addr.arpa>
+Subject: [PATCH] serial: sh: Initial RZ/A2 R7S9210 support
+X-Mailman-Approved-At: Mon, 30 Jun 2025 20:53:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,171 +78,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split the RZ/A1 GR-PEACH defconfig into board-specific defconfig
-and common RZ/A1 SoC defconfig. This is a preparatory patch for
-new RZ/A1 boards, no functional change.
+From: Magnus Damm <damm@opensource.se>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Add SCIF support for RZ/A2 r7s9210 including a work around to prevent
+the driver from hanging on boot due to TEND flag handling.
+
+Signed-off-by: Magnus Damm <damm@opensource.se>
 ---
-Cc: Magnus Damm <damm@opensource.se>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- configs/grpeach_defconfig   | 71 ++++++-------------------------------
- configs/renesas_rza1.config | 57 +++++++++++++++++++++++++++++
- 2 files changed, 67 insertions(+), 61 deletions(-)
- create mode 100644 configs/renesas_rza1.config
 
-diff --git a/configs/grpeach_defconfig b/configs/grpeach_defconfig
-index 0f141b6f0a2..110af10860b 100644
---- a/configs/grpeach_defconfig
-+++ b/configs/grpeach_defconfig
-@@ -1,69 +1,18 @@
-+#include <configs/renesas_rza1.config>
-+
- CONFIG_ARM=y
--CONFIG_ARCH_CPU_INIT=y
- CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x18000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SYS_MALLOC_F_LEN=0x400
--CONFIG_NR_DRAM_BANKS=1
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20900000
--CONFIG_ENV_SIZE=0x10000
--CONFIG_ENV_OFFSET=0x80000
--CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r7s72100-gr-peach"
--CONFIG_RZA1=y
--CONFIG_OF_LIBFDT_OVERLAY=y
--CONFIG_SYS_MONITOR_LEN=524288
--CONFIG_SYS_LOAD_ADDR=0x20400000
--CONFIG_SYS_CLK_FREQ=66666666
--# CONFIG_EFI_LOADER is not set
--CONFIG_BOOTDELAY=3
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="ignore_loglevel"
--CONFIG_SYS_CBSIZE=256
--CONFIG_SYS_PBSIZE=256
--# CONFIG_DISPLAY_CPUINFO is not set
--# CONFIG_BOARD_EARLY_INIT_F is not set
--CONFIG_HUSH_PARSER=y
--# CONFIG_CMD_ELF is not set
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_SNTP=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_MAC_PARTITION=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
-+CONFIG_TARGET_GRPEACH=y
-+
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_DM_SPI_FLASH=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_ENV_SPI_MAX_HZ=50000000
-+CONFIG_ENV_OFFSET=0x80000
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_RZA1_GPIO=y
--CONFIG_LED=y
--CONFIG_LED_GPIO=y
--# CONFIG_MMC is not set
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_ENV_SPI_MAX_HZ=50000000
- CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_MACRONIX=y
--# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
--CONFIG_BITBANGMII=y
--CONFIG_PHY_SMSC=y
--CONFIG_DM_ETH_PHY=y
--CONFIG_SH_ETHER=y
--CONFIG_PINCTRL=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_SCIF_CONSOLE=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_RENESAS_RPC_SPI=y
--CONFIG_TIMER=y
--CONFIG_RENESAS_OSTM_TIMER=y
--CONFIG_USB=y
--CONFIG_USB_R8A66597_HCD=y
--CONFIG_USB_STORAGE=y
-diff --git a/configs/renesas_rza1.config b/configs/renesas_rza1.config
-new file mode 100644
-index 00000000000..c797288474f
---- /dev/null
-+++ b/configs/renesas_rza1.config
-@@ -0,0 +1,57 @@
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_SYS_MALLOC_LEN=0x100000
-+CONFIG_SYS_MALLOC_F_LEN=0x400
-+# CONFIG_BOARD_EARLY_INIT_F is not set
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_EFI_LOADER is not set
-+# CONFIG_MMC is not set
-+CONFIG_BITBANGMII=y
-+CONFIG_BOOTARGS="ignore_loglevel"
-+CONFIG_BOOTDELAY=3
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_SNTP=y
-+CONFIG_CMD_USB=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20900000
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DM_GPIO=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_SPI=y
-+CONFIG_ENV_OFFSET=0x80000
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MAC_PARTITION=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_OF_CONTROL=y
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_PHY_SMSC=y
-+CONFIG_PINCTRL=y
-+CONFIG_RENESAS_OSTM_TIMER=y
-+CONFIG_RENESAS_RPC_SPI=y
-+CONFIG_RZA1=y
-+CONFIG_RZA1_GPIO=y
-+CONFIG_SCIF_CONSOLE=y
-+CONFIG_SH_ETHER=y
-+CONFIG_SPI=y
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_CLK_FREQ=66666666
-+CONFIG_SYS_LOAD_ADDR=0x20400000
-+CONFIG_SYS_MONITOR_LEN=524288
-+CONFIG_SYS_PBSIZE=256
-+CONFIG_TIMER=y
-+CONFIG_USB=y
-+CONFIG_USB_R8A66597_HCD=y
-+CONFIG_USB_STORAGE=y
-+CONFIG_USE_BOOTARGS=y
--- 
-2.47.2
+ drivers/serial/serial_sh.c |   15 +++++++++++++--
+ drivers/serial/serial_sh.h |   15 +++++++++++++++
+ 2 files changed, 28 insertions(+), 2 deletions(-)
 
+--- 0001/drivers/serial/serial_sh.c
++++ work/drivers/serial/serial_sh.c	2025-07-01 00:29:33.340877501 +0900
+@@ -55,10 +55,21 @@ static void sh_serial_init_generic(struc
+ 	sci_out(port, SCFCR, SCFCR_RFRST|SCFCR_TFRST);
+ 	sci_in(port, SCFCR);
+ 	sci_out(port, SCFCR, 0);
+-#if defined(CONFIG_RZA1)
++#if defined(CONFIG_RZA1) || defined(CONFIG_RZA2)
+ 	sci_out(port, SCSPTR, 0x0003);
+ #endif
+-
++#if defined(CONFIG_RZA2)
++	/* For SCIF on RZ/A2, the default value of TEND after reset is 0,
++	 * however this driver expects it to be 1, so without this workaround
++	 * we will get stuck waiting and never send out the first character.
++	 * To rememdy the situation, send a character with loopback enabled.
++	 */
++	sci_out(port, SCFCR, 1); /* enable loopback */
++	sci_out(port, SCxTDR, 'Z'); /* TX data */
++	mdelay(10);
++	sci_out(port, SCFCR, 6); /* assert FIFO reset to clear RX data */
++	sci_out(port, SCFCR, 0); /* deassert FIFO reset, disable loopback */
++#endif
+ #if IS_ENABLED(CONFIG_RCAR_GEN2) || IS_ENABLED(CONFIG_RCAR_GEN3) || IS_ENABLED(CONFIG_RCAR_GEN4)
+ 	if (port->type == PORT_HSCIF)
+ 		sci_out(port, HSSRR, HSSRR_SRE | HSSRR_SRCYC8);
+--- 0001/drivers/serial/serial_sh.h
++++ work/drivers/serial/serial_sh.h	2025-07-01 00:26:47.080924446 +0900
+@@ -98,6 +98,9 @@ struct uart_port {
+ # endif
+ # define SCSCR_INIT(port)	(port->clk_mode == EXT_CLK ? 0x32 : 0x30)
+ 				/* TIE=0,RIE=0,TE=1,RE=1,REIE=0, */
++#elif defined(CONFIG_RZA2)
++# define SCIF_ORER 0x0001               /* Overrun error bit */
++# define SCSCR_INIT(port)       0x30    /* TIE=0,RIE=0,TE=1,RE=1,REIE=0 */
+ #else
+ # error CPU subtype not defined
+ #endif
+@@ -390,6 +393,18 @@ SCIF_FNS(SCLSR,  0,  0, 0x14, 16)
+ #else
+ SCIF_FNS(SCLSR,  0,  0, 0x24, 16)
+ #endif
++#elif defined(CONFIG_RZA2)
++SCIF_FNS(SCSMR,  0x00, 8, 0x00, 16)
++SCIF_FNS(SCBRR,  0x01, 8, 0x02,  8)
++SCIF_FNS(SCSCR,  0x02, 8, 0x04, 16)
++SCIF_FNS(SCxTDR, 0x03, 8, 0x06,  8)
++SCIF_FNS(SCxSR,  0x04, 8, 0x08, 16)
++SCIF_FNS(SCxRDR, 0x05, 8, 0x0A,  8)
++SCIF_FNS(SCFCR,     0, 0, 0x0C, 16)
++SCIF_FNS(SCFDR,     0, 0, 0x0E, 16)
++SCIF_FNS(SCSPTR,    0, 0, 0x10, 16)
++SCIF_FNS(SCLSR,     0, 0, 0x12,  16)
++SCIF_FNS(DL,        0, 0, 0x00,  0) /* dummy */
+ #elif defined(CONFIG_RZG2L)
+ SCIF_FNS(SCSMR,  0x00, 16)
+ SCIF_FNS(SCBRR,  0x02,  8)
