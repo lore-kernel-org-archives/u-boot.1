@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3212C83030
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C52F1C8302F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E29D682E27;
-	Mon, 30 Jun 2025 14:18:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FD2F82E8C;
+	Mon, 30 Jun 2025 14:18:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sCC/ciNa";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="VEhTyKJq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1893D81D6A; Mon, 30 Jun 2025 12:08:27 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 03DC081D6A; Mon, 30 Jun 2025 12:08:30 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2066781D6A
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 12:08:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EB0E81D6A
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 12:08:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3a588da60dfso1146418f8f.1
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 03:08:22 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3ab112dea41so885291f8f.1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 03:08:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1751278101; x=1751882901;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1751278102; x=1751882902;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tUCxv553UloVfTHxkQLUjwndPBZfd+wJJUXvgQpELCA=;
- b=sCC/ciNajHQiSqLdRbN7bUrQjYpY7NtUupvzPck6++YpBfJGq+tMi8dVNE6KfZuCt4
- sGIPBvqusv8/rVPyyvjuP1dl48PUZx3Mw34ybSkHEziZ4aCv5lZdnnbQzsILcxCWq+7c
- 4ULo/C5SS2ltYknis5iUdxDyxovaeNACoK7oVE6MYN93h7ESpFV4wy2pCdvujN8n64Ej
- Hvc094jr6UGENswahKZDsEwITTbifMotFduNALGyR2WpN2cfxV9L9WO0+vhht0A3uCuF
- q3jr8f6s8io9gftj5b5F9Ip3WVylHnkujfDbobUgUgBPe9C9a3ZhtHkVUcZGMQKV+DS8
- So8A==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=wLI1MO6u7Id62OYe2UfRpgXDtUulBmwu4OrmZcD/iTs=;
+ b=VEhTyKJqLxe3/zJfkJTd/QXu0BtGBdmGJW1ma9qjB0ZKdCFIki+SfIUkjM51FSgbjb
+ lRZMJVtyIZqPJswNe98KaUx9qD93+39ndKyTQqDPdSmIGIbNdTA19s5f1KHJeftZK+ub
+ fHMK/LOwnGekdc/DcL9B0uMzBGK00Jgja9xjE8SMqRPy+MjnFjxSveF4/Hu1NL5JV8Tw
+ ZqeseEvRNviXDFx+ZDmIYmsfxogMLdpzJTKj3nNDiXNZFdy6Jo2bsWlf60dDMN1z9Xvx
+ s5+uMGY08F4SFOR6pN/7bCWHe3mOzDbaTwfj2VA9eHcj8YtqwA/sjE7q6TjmHseLGQCM
+ QiNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751278101; x=1751882901;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tUCxv553UloVfTHxkQLUjwndPBZfd+wJJUXvgQpELCA=;
- b=NwxwRqqmC1PQhGNKCzbO4RUcp5ZiXPgyfzs7VgC2d6RMmR7TItlUD8C8PynkRNZY72
- PwlO0gdTGwpxCva1Vc/CWbF+6kMVWCc02O//tdAhZF1WPAr3ohu4OSQusUFYvuZtX8P+
- y42BsRgppCOQUQ/TL+fHY+XHAUZCXcHS/601euLzpojn9qX42OKk9tYsf0ZOdBb6feMZ
- tCErzdOJS4Km6+EovJph+uVjUx3bwXOqwOh82uj7z/CZO9WyuaMJSI2AUnIMUx2T9u9v
- 7U4HHiV6mRIZXUpZN+7KAwd5PuyS0kxWh9MtzITNa1ZfkYNMaxHaijuCVfN0o4s/IRxS
- 60JQ==
-X-Gm-Message-State: AOJu0Yw1IhHj+/422o3uc0x6B3jPHwP5FgcGRgIowe9EqB6u5IiN6EnU
- 1GcFqX/K+Am1oiy24n5hFg8R6yotA33/wxo3mmWwp7OSvJZ1yBIBK+kE4FFLngaB8kg=
-X-Gm-Gg: ASbGncuvhTD340bHThxs4GQWFxZrPlt9ajxwe7LfFNhZN2i5F1bXAjWRXgY0CXsjW9Z
- L8jpKtOjucRGRtGfD3apTmfqEa53W7GIS97PjpZoJxEnCrdqnjP6UxNBTjn0ytsM514jhSdVyUg
- tKdBckVxiDTDe7aoacbaG7JEC8RJVBCzlv2++JyGcFKhXrYRdsC4uOiqqGoN/jr+Gp51l+7XOUp
- Tn9BMGLpY7UXtC734MTRzsn6UOmOPXs67wyWjpiG4sBilkIiolotE9axnuWTReSx/m8N12Yf4f3
- ZEZ2yuZPHrzxRvZQMbAlGxn54bRV8u9l7kO6eg1rPEsh/j2E9PT3kQNKia4HqDVUtF3TptYTaEK
- PFDOxNURrUeJ6klBbjZ8fvc2iShKxTtKqkflx9edNZ7oR2u7Nj+Q/
-X-Google-Smtp-Source: AGHT+IGZBGubxcRQPh1rr1JYbGe7YR1QStdU6hv/EEq8qVg84sFFGS5SWwRgj7G/WrKM1cVJIu0b3Q==
-X-Received: by 2002:adf:9c81:0:b0:3a8:6262:e78 with SMTP id
- ffacd0b85a97d-3a8fe5b1dd8mr6670955f8f.37.1751278101543; 
- Mon, 30 Jun 2025 03:08:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751278102; x=1751882902;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wLI1MO6u7Id62OYe2UfRpgXDtUulBmwu4OrmZcD/iTs=;
+ b=Szc3X/pxA9r0stlocUdRAtd6bud8VCi1zGQUgwu+BoKUpRjIYosu1Kvi16VgEOBLb1
+ hN9ZLY3s2iyMpQeCm9TxLKgK2GDcZm28LHkLf9uRr1nmenOZhwLICEdYLuRb8QVbz3Nb
+ 5fSLn940vcyFow4bCil8UR3r/eKy8AAD+47KpkoNIyUA8+HVxsZkp6hX75358nxd1s2P
+ WcqxKmL+s+FnV3NFKfuZJRBVuooLVhg1AnRbylgO3RsYmBI700nxYCcDLf5cbUqlAjUA
+ MXzBMSVQtJ0PF+J2uvNZMqYpTKRhPPbSx3U1r0vDh501B14nZH8o0FiVidMRHn//S3IC
+ 1vbg==
+X-Gm-Message-State: AOJu0YwzxWz4lSm2rHNyuREElV8WVFBff2aacRdvGiI0ex1qgmwxc+iH
+ zGU4zbTfF8C89iseH06YtzGJpxHXgKZfhfHViL6Wz/xwxnCmX9FGT5G5VNKKPqtOirE=
+X-Gm-Gg: ASbGncvC4kfLOZKwbBlGqbNgPTmIYwH3CZuDrqrlfQ19RVHgqAXEud6SeVoFEK8TY+X
+ TYcUkriTy23v5YuS88fKzArPTXnYhT9nEQb+DH1pheXI0orAx0mR2meTR3VQI8O6/ReZrph0sv5
+ WFyzxFHs1tlxhmpqKGsEviCpOry0PMHD7KMeaPObq9GwEbhmeN205BXy9JTPSTku+iGpqrcX4fF
+ gnLH662cKNihlK3+t29MaszbhxhlxPbun+0mN3DnBLfo3fI4mHIEYFHrSd0JMULFPjIvpaoUb44
+ styUBVJ5gKIjcuq0Jm+2ccM7VZCf7ArzTrnp7bL1UsmjlWvykzDVnCxTH7NCvLaqWyvMA0I5Gp6
+ eeLWbOUvt+rNwVZbJevdjkDLmuYmQ3OM+JWAPIpLKzjNwwUaiVeDX
+X-Google-Smtp-Source: AGHT+IGKGnZU4k4AQgMrRLvpkdj7n8w5VfRsHtBtWhxR86xZrOfwTh6vMR6TjdRL7W1GiKGTrioFkA==
+X-Received: by 2002:a05:6000:2105:b0:3a6:f2c1:5191 with SMTP id
+ ffacd0b85a97d-3a8fda35afemr8328149f8f.4.1751278102457; 
+ Mon, 30 Jun 2025 03:08:22 -0700 (PDT)
 Received: from [172.18.0.1]
  (2a02-842a-d52e-6101-1bf9-06eb-939c-90d1.rev.sfr.net.
  [2a02:842a:d52e:6101:1bf9:6eb:939c:90d1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a892e5f923sm9737883f8f.89.2025.06.30.03.08.20
+ ffacd0b85a97d-3a892e5f923sm9737883f8f.89.2025.06.30.03.08.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 03:08:20 -0700 (PDT)
+ Mon, 30 Jun 2025 03:08:21 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH 0/2] video: display: refactor display_read_timing to avoid
+Date: Mon, 30 Jun 2025 12:08:15 +0200
+Subject: [PATCH 1/2] video: display: refactor display_read_timing to avoid
  code duplication
-Date: Mon, 30 Jun 2025 12:08:14 +0200
-Message-Id: <20250630-read_edid_cleanup-v1-0-ec7d425472c7@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAA5iYmgC/x3M0QpAMBSH8VfRubYay8irSBrnj1MabZGSd7dc/
- i6+76GIIIjUZg8FXBJl9wlFntG0Or9ACSdTqctKW6NVgOMBLDxMG5w/D9WMTQVbsKmtodQdAbP
- c/7Pr3/cDS9xlSGMAAAA=
-X-Change-ID: 20250630-read_edid_cleanup-8b85e61d3763
+Message-Id: <20250630-read_edid_cleanup-v1-1-ec7d425472c7@baylibre.com>
+References: <20250630-read_edid_cleanup-v1-0-ec7d425472c7@baylibre.com>
+In-Reply-To: <20250630-read_edid_cleanup-v1-0-ec7d425472c7@baylibre.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
 X-Mailer: b4 0.14.2
@@ -107,44 +105,39 @@ X-Virus-Status: Clean
 Commit 2dcf143398ad ("dm: video: Repurpose the 'displayport' uclass to 'display'")
 left the display_read_edid() function unused by mistake.
 
-This series addresses that oversight and introduces a new useful cmd.
-
-Patch 1:
- - Refactors display_read_timing() to use the existing
-   display_read_edid() function, eliminating redundant code.
- - Marks display_read_edid() as static since it is not used outside of
-   the file.
-
-Patch 2:
- - Adds a new read_edid command, which can be very useful for debugging
-   or developing new display drivers.
- - As this command uses display_read_edid(), the function is made
-   non-static again.
-
-The patches are deliberately split to allow the functional refactoring
-(Patch 1) to be applied independently, even if the command addition
-(Patch 2) is deemed unnecessary.
-
-Cheers,
-Julien
+Mark the function as static and reuse it within display_read_timing() to
+avoid code duplication.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Julien Stephan (2):
-      video: display: refactor display_read_timing to avoid code duplication
-      cmd: add new command to read edid
+ drivers/video/display-uclass.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
- cmd/Kconfig                    |  6 ++++++
- cmd/Makefile                   |  1 +
- cmd/read_edid.c                | 37 +++++++++++++++++++++++++++++++++++++
- drivers/video/display-uclass.c |  4 +---
- include/display.h              | 10 ++++++++++
- 5 files changed, 55 insertions(+), 3 deletions(-)
----
-base-commit: 17012e3068d047ad71460f039eeb0c3be63f82a0
-change-id: 20250630-read_edid_cleanup-8b85e61d3763
+diff --git a/drivers/video/display-uclass.c b/drivers/video/display-uclass.c
+index 61a73e1bc2a629eae6a9210434641a9babaf9dea..57e730538dfd70513c4746653719440d973aed6a 100644
+--- a/drivers/video/display-uclass.c
++++ b/drivers/video/display-uclass.c
+@@ -10,7 +10,7 @@
+ #include <edid.h>
+ #include <errno.h>
+ 
+-int display_read_edid(struct udevice *dev, u8 *buf, int buf_size)
++static int display_read_edid(struct udevice *dev, u8 *buf, int buf_size)
+ {
+ 	struct dm_display_ops *ops = display_get_ops(dev);
+ 
+@@ -59,9 +59,7 @@ int display_read_timing(struct udevice *dev, struct display_timing *timing)
+ 	if (ops && ops->read_timing)
+ 		return ops->read_timing(dev, timing);
+ 
+-	if (!ops || !ops->read_edid)
+-		return -ENOSYS;
+-	ret = ops->read_edid(dev, buf, sizeof(buf));
++	ret = display_read_edid(dev, buf, sizeof(buf));
+ 	if (ret < 0)
+ 		return ret;
+ 
 
-Best regards,
 -- 
-Julien Stephan <jstephan@baylibre.com>
+2.49.0
 
