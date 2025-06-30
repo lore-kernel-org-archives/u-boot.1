@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9BEAC7EE39
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E467C7EE30
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F5328301E;
-	Mon, 30 Jun 2025 02:11:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C666C82FC7;
+	Mon, 30 Jun 2025 02:11:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="h+j8+r6+";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Ib0+ywzS";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="x3fNgYga";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XtNEyYux";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DC1B8301E; Mon, 30 Jun 2025 02:11:27 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 5D64A82C2F; Mon, 30 Jun 2025 02:11:29 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 142D282FAB
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4118F8300E
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bVmmC5mKRz9syQ;
- Mon, 30 Jun 2025 02:11:23 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bVmm70BMnz9sts;
+ Mon, 30 Jun 2025 02:11:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242283;
+ s=mail20150812; t=1751242279;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YwPsiYQ63urp013zUyYL9rQl83Il0NjavbVS/mAFbhs=;
- b=h+j8+r6+SQUyTihhARLa4BvIDXHSNNeQhhQLMGngSFzIwUMCxKjE7wMJCKapdALFbypFjC
- T11l4T0OhfszqR5kb4KKUEUOmEmHX3M+eV2YM1jX5Y9L8AHXtsgTP4/Xkvlf554r6bqWT4
- YXeL1ToQX6ZS164PIZWLGvM/sEeMkkK6gLqZdq99v75ylsISAoj2oHliGZwn4IaF8q6Rhz
- 4iur5YQ//mXMQRxQoBSqOmUvSOr45oo78fqJhSxWqptYDWhtdzQeUTydcKSKtASI38eMt9
- 5UEYOFVa7plF23mr1Y+o/Zmiw4P1RU6FDls+llha1BL9E7lCc/BQfwQ21RVHfg==
+ bh=8Si8KTtMLJIjBA34u/i4MWjCryx7DAmg4Ya14QXJrlc=;
+ b=x3fNgYgab8fRDF3st/VmV1oZcojoeMdZl9bxW2lOUwfbwrtwgKojgc2ZP+QMNHo0HRmoWl
+ 1Ej3c6xi0Cg91NBuoeCt0Eu+7Tzm9TXJ09c0P3tPro/1zwvHmSg0+OLPgk6OYU/h77VYWX
+ 7V1BxV5CHMPGI9G9EMcb9X6YcSOZhTavqYpkDS/QKtwWiEauNWl2WcfvUJEE0738DiWGi9
+ exKG4q72XQJZma0esPmgRdJfkbB0S/NZy5kdRcMADnxU8f8Fr0UIEfORZsNpgo1ZWr+f5a
+ P3opSyUNbFWjcRw+/X/Lj9I35zyRmUE5chw/ZNHRJm561OZ0ghqqYk5IhjB1tA==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242281;
+ s=mail20150812; t=1751242276;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YwPsiYQ63urp013zUyYL9rQl83Il0NjavbVS/mAFbhs=;
- b=Ib0+ywzSeefW22wkXdKOJBWXDxHPp3eiZx+BUHbefUSccF4Ae7grvNz4grKt1A0Fypm+Gf
- 82oGHHmeuKxM/5WEfmX3CcLZr1gw3bDM+G2qeXj/icXU+FsK8tG/7F1+nZvY0xm9IeW28h
- V5S3kh4RNOiJKFw4RT+PBepfZIARJX8s6uU72WhdDvSWeeVUnej/9zUYDdbfP2KUmZm/It
- G3cmDV3cycibM4dxzfBb3cyPxhU+fHeQtZfSC8MqTICtCZ4YO9P0nbHWSZTJY+EUyUF1lX
- bTCxMy/FXYPuaYxKC6j8tQwqDoQwfrM8lTpjbaxS+Uaz0mFcRS45l9REtU2eyg==
+ bh=8Si8KTtMLJIjBA34u/i4MWjCryx7DAmg4Ya14QXJrlc=;
+ b=XtNEyYux8xr+9mqNKa+8wq0fRI58TE1N3SIbCZJmFhMpppMN84coqzjueriPxCUuQFu9lb
+ De5rBeOhqKcYo7yVdSG8gAXWgvEXFDDec3N+AhiDUpMTtZgQmULCITaNAgZYkfFY8a3zB4
+ 7iOzEtOxnHdA3mam2t7nT4fT02knqeIKudxRL9y7ZawwKIIIywLIx0n0aV7R5ix02E8yOV
+ p7WNb1xZ6P3zPIeX1ZuIbjpRGSFIwvGudIJXymz3j4nEgv/rkkG2h1DbmXbejzcKau3kYj
+ hFJWmjo8zd3G9TfrxAPanyxu3B9qxpmUM7lAHL0z+xPnjdlDeuwm8UreMcEkFQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
@@ -69,16 +71,17 @@ Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 10/10] ARM: dts: stm32: Switch defconfig to SPL for DH
+Subject: [PATCH v2 07/10] ARM: dts: stm32: Add 512 MiB DRAM settings for DH
  STM32MP13xx DHCOR DHSBC
-Date: Mon, 30 Jun 2025 02:10:36 +0200
-Message-ID: <20250630001053.952342-10-marek.vasut@mailbox.org>
+Date: Mon, 30 Jun 2025 02:10:33 +0200
+Message-ID: <20250630001053.952342-7-marek.vasut@mailbox.org>
 In-Reply-To: <20250630001053.952342-1-marek.vasut@mailbox.org>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e8853e9ad5e86526517
-X-MBO-RS-META: snjsmhcosck5ozhm8od38pap6158yw3b
+X-MBO-RS-ID: 2a63701fec01393d5bd
+X-MBO-RS-META: 8t5oj854wsmayftet6ferf1ddqoqd7i7
+X-Rspamd-Queue-Id: 4bVmm70BMnz9sts
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,13 +98,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update defconfig to make use of U-Boot SPL to initialize DH STM32MP13xx
-DHCOM DHSBC SoM and board. This is largely a move of SPL enablement from
-DH STM32MP15xx DHSOM defconfigs into generic DH STM32MP1xx defconfig .
-Support for SPI NOR chips which are not used on STM32MP13xx DHCOR are
-moved into STM32MP15xx DHSOM defconfigs. Changes to STM32MP13xx DHCOR
-defconfig then enable SPL support, CCF in SPL to configure clock, pin
-configuration support in SPL, and OpTee OS start support in U-Boot.
+Add DRAM settings for 512 MiB of DRAM variant of DH STM32MP13xx DHCOR DHSBC.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
@@ -122,238 +119,129 @@ Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
 V2: Add RB from Patrice
 ---
- configs/stm32mp13_dhcor_defconfig | 30 +++++++++++++------
- configs/stm32mp15_dhsom.config    | 48 +++++--------------------------
- configs/stm32mp_dhsom.config      | 35 ++++++++++++++++++++--
- 3 files changed, 60 insertions(+), 53 deletions(-)
+ .../stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi | 100 ++++++++++++++++++
+ arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi    |   1 +
+ 2 files changed, 101 insertions(+)
+ create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
 
-diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
-index e5aaadd3920..c21416459e6 100644
---- a/configs/stm32mp13_dhcor_defconfig
-+++ b/configs/stm32mp13_dhcor_defconfig
-@@ -2,7 +2,6 @@
+diff --git a/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
+new file mode 100644
+index 00000000000..7b344541c3e
+--- /dev/null
++++ b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
+@@ -0,0 +1,100 @@
++// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++/*
++ * Copyright (C) 2025, DH electronics - All Rights Reserved
++ *
++ * STM32MP13xx DHSOM configuration
++ * 1x DDR3L 1Gb, 16-bit, 533MHz, Single Die Package in flyby topology.
++ * Reference used W631GU6MB15I from Winbond
++ *
++ * DDR type / Platform	DDR3/3L
++ * freq		533MHz
++ * width	16
++ * datasheet	0  = W631GU6MB15I / DDR3-1333
++ * DDR density	2
++ * timing mode	optimized
++ * address mapping : RBC
++ * Tc > + 85C : J
++ */
++#define DDR_MEM_COMPATIBLE ddr3l-dhsom-1066-888-bin-g-1x2gb-533mhz
++#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000kHz"
++#define DDR_MEM_SPEED	533000
++#define DDR_MEM_SIZE	0x20000000
++
++#define DDR_MSTR 0x00040401
++#define DDR_MRCTRL0 0x00000010
++#define DDR_MRCTRL1 0x00000000
++#define DDR_DERATEEN 0x00000000
++#define DDR_DERATEINT 0x00800000
++#define DDR_PWRCTL 0x00000000
++#define DDR_PWRTMG 0x00400010
++#define DDR_HWLPCTL 0x00000000
++#define DDR_RFSHCTL0 0x00210000
++#define DDR_RFSHCTL3 0x00000000
++#define DDR_RFSHTMG 0x0081008B
++#define DDR_CRCPARCTL0 0x00000000
++#define DDR_DRAMTMG0 0x121B2414
++#define DDR_DRAMTMG1 0x000A041B
++#define DDR_DRAMTMG2 0x0607080F
++#define DDR_DRAMTMG3 0x0050400C
++#define DDR_DRAMTMG4 0x07040607
++#define DDR_DRAMTMG5 0x06060403
++#define DDR_DRAMTMG6 0x02020002
++#define DDR_DRAMTMG7 0x00000202
++#define DDR_DRAMTMG8 0x00001005
++#define DDR_DRAMTMG14 0x000000A0
++#define DDR_ZQCTL0 0xC2000040
++#define DDR_DFITMG0 0x02050105
++#define DDR_DFITMG1 0x00000202
++#define DDR_DFILPCFG0 0x07000000
++#define DDR_DFIUPD0 0xC0400003
++#define DDR_DFIUPD1 0x00000000
++#define DDR_DFIUPD2 0x00000000
++#define DDR_DFIPHYMSTR 0x00000000
++#define DDR_ADDRMAP1 0x00080808
++#define DDR_ADDRMAP2 0x00000000
++#define DDR_ADDRMAP3 0x00000000
++#define DDR_ADDRMAP4 0x00001F1F
++#define DDR_ADDRMAP5 0x07070707
++#define DDR_ADDRMAP6 0x0F070707
++#define DDR_ADDRMAP9 0x00000000
++#define DDR_ADDRMAP10 0x00000000
++#define DDR_ADDRMAP11 0x00000000
++#define DDR_ODTCFG 0x06000600
++#define DDR_ODTMAP 0x00000001
++#define DDR_SCHED 0x00000F01
++#define DDR_SCHED1 0x00000000
++#define DDR_PERFHPR1 0x00000001
++#define DDR_PERFLPR1 0x04000200
++#define DDR_PERFWR1 0x08000400
++#define DDR_DBG0 0x00000000
++#define DDR_DBG1 0x00000000
++#define DDR_DBGCMD 0x00000000
++#define DDR_POISONCFG 0x00000000
++#define DDR_PCCFG 0x00000010
++#define DDR_PCFGR_0 0x00000000
++#define DDR_PCFGW_0 0x00000000
++#define DDR_PCFGQOS0_0 0x00100009
++#define DDR_PCFGQOS1_0 0x00000020
++#define DDR_PCFGWQOS0_0 0x01100B03
++#define DDR_PCFGWQOS1_0 0x01000200
++#define DDR_PGCR 0x01442E02
++#define DDR_PTR0 0x0022AA5B
++#define DDR_PTR1 0x04841104
++#define DDR_PTR2 0x042DA068
++#define DDR_ACIOCR 0x10400812
++#define DDR_DXCCR 0x00000C40
++#define DDR_DSGCR 0xF200011F
++#define DDR_DCR 0x0000000B
++#define DDR_DTPR0 0x36D477D0
++#define DDR_DTPR1 0x098B00D8
++#define DDR_DTPR2 0x10023600
++#define DDR_MR0 0x00000830
++#define DDR_MR1 0x00000000
++#define DDR_MR2 0x00000208
++#define DDR_MR3 0x00000000
++#define DDR_ODTCR 0x00010000
++#define DDR_ZQ0CR1 0x00000038
++#define DDR_DX0GCR 0x0000CE81
++#define DDR_DX1GCR 0x0000CE81
++
++#include "stm32mp13-ddr.dtsi"
+diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+index 9ff42ab8248..6117da10bbf 100644
+--- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+@@ -4,6 +4,7 @@
+  */
  
- CONFIG_ARM=y
- CONFIG_ARCH_STM32MP=y
--CONFIG_TFABOOT=y
- CONFIG_SYS_MALLOC_F_LEN=0x1c0000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0400000
- CONFIG_ENV_OFFSET=0x3E0000
-@@ -12,11 +11,16 @@ CONFIG_DDR_CACHEABLE_SIZE=0x8000000
- CONFIG_TARGET_ST_STM32MP13X=y
- CONFIG_ENV_OFFSET_REDUND=0x3F0000
- CONFIG_STM32MP15_PWR=y
--# CONFIG_ARMV7_NONSEC is not set
-+CONFIG_ARMV7_NONSEC=y
-+CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
-+CONFIG_ARMV7_PSCI_NR_CPUS=2
-+# CONFIG_ARMV7_LPAE is not set
- CONFIG_SYS_MEMTEST_START=0xc0000000
- CONFIG_SYS_MEMTEST_END=0xc4000000
-+CONFIG_SYS_MEM_TOP_HIDE=0x2000000
- CONFIG_BOOTSTAGE_RECORD_COUNT=100
- CONFIG_BOOTDELAY=3
-+CONFIG_BOOTM_OPTEE=y
- CONFIG_SYS_CONSOLE_IS_IN_ENV=y
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_ERASEENV=y
-@@ -31,20 +35,28 @@ CONFIG_ENV_IS_NOWHERE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_ENV_MMC_USE_DT=y
- CONFIG_ENV_SPI_MAX_HZ=50000000
--CONFIG_CLK_SCMI=y
- CONFIG_SET_DFU_ALT_INFO=y
- CONFIG_SYS_I2C_EEPROM_ADDR=0x50
- CONFIG_ENV_MMC_DEVICE_INDEX=0
- CONFIG_ENV_MMC_EMMC_HW_PARTITION=1
- CONFIG_PHY_REALTEK=y
--CONFIG_DM_REGULATOR_SCMI=y
--CONFIG_RESET_SCMI=y
- CONFIG_DM_RNG=y
- CONFIG_RNG_STM32=y
--CONFIG_SYSRESET_PSCI=y
--CONFIG_TEE=y
--CONFIG_OPTEE=y
--# CONFIG_OPTEE_TA_AVB is not set
- CONFIG_USB_ONBOARD_HUB=y
- CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=2000
- CONFIG_ERRNO_STR=y
-+CONFIG_OPTEE_LIB=y
-+CONFIG_OPTEE_IMAGE=y
-+CONFIG_OPTEE_TZDRAM_SIZE=0x02000000
-+CONFIG_SPL_TEXT_BASE=0x2FFE0000
-+CONFIG_SPL_CLK_CCF=y
-+CONFIG_SPL_CLK_COMPOSITE_CCF=y
-+# CONFIG_SPL_SHA1 is not set
-+# CONFIG_SPL_SHA256 is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_PINCTRL_GENERIC=y
-+CONFIG_SPL_PINMUX=y
-+CONFIG_SPL_PINCONF=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-index c84116482f6..f7ff5db5943 100644
---- a/configs/stm32mp15_dhsom.config
-+++ b/configs/stm32mp15_dhsom.config
-@@ -2,10 +2,6 @@
+ #include "stm32mp13-u-boot.dtsi"
++#include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
  
- # CONFIG_ARMV7_VIRT is not set
- # CONFIG_BINMAN_FDT is not set
--# CONFIG_SPL_DOS_PARTITION is not set
--# CONFIG_SPL_PARTITION_UUIDS is not set
--# CONFIG_SPL_PINCTRL_FULL is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_BOARD_SIZE_LIMIT=1441792
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
-@@ -20,9 +16,7 @@ CONFIG_CMD_STM32PROG_OTP=y
- CONFIG_CONSOLE_MUX=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
- CONFIG_DM_HWSPINLOCK=y
--CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_HWSPINLOCK_STM32=y
- CONFIG_KS8851_MLL=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks access-controllers"
-@@ -31,42 +25,7 @@ CONFIG_PINCTRL_STMFX=y
- CONFIG_REMOTEPROC_STM32_COPRO=y
- CONFIG_SERVERIP="192.168.1.1"
- CONFIG_SF_DEFAULT_SPEED=50000000
--CONFIG_SPL=y
--CONFIG_SPL_BLOCK_CACHE=y
--CONFIG_SPL_BOOTCOUNT_LIMIT=y
--CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
--CONFIG_SPL_DFU=y
--CONFIG_SPL_DM_REGULATOR=y
--CONFIG_SPL_DM_REGULATOR_STPMIC1=y
--CONFIG_SPL_DM_SPI=y
--CONFIG_SPL_DM_SPI_FLASH=y
--CONFIG_SPL_DM_USB_GADGET=y
--CONFIG_SPL_ENV_IS_NOWHERE=y
--CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_FOOTPRINT_LIMIT=y
--CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
--CONFIG_SPL_I2C=y
--CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
--CONFIG_SPL_LOAD_FIT=y
--CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
--CONFIG_SPL_MAX_FOOTPRINT=0x3db00
--CONFIG_SPL_MMC=y
--CONFIG_SPL_MTD=y
--CONFIG_SPL_PHY=y
--CONFIG_SPL_POWER=y
--CONFIG_SPL_RAM_DEVICE=y
--CONFIG_SPL_SPI=y
--CONFIG_SPL_SPI_FLASH_MTD=y
--CONFIG_SPL_SPI_FLASH_SUPPORT=y
--CONFIG_SPL_HAVE_INIT_STACK=y
--CONFIG_SPL_STACK=0x30000000
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
--CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
--CONFIG_SPL_TEXT_BASE=0x2FFC2500
--CONFIG_SPL_USB_GADGET=y
- CONFIG_STM32_ADC=y
--CONFIG_SYSRESET_SYSCON=y
- CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-@@ -76,3 +35,10 @@ CONFIG_PREBOOT="run dh_preboot"
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
- CONFIG_TARGET_DH_STM32MP1_PDK2=y
- CONFIG_USE_SERVERIP=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-+CONFIG_SPL_TEXT_BASE=0x2FFC2500
-+CONFIG_SPL_BLOCK_CACHE=y
-+CONFIG_SPL_MMC=y
-diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
-index 777a02dfe15..56a40839d28 100644
---- a/configs/stm32mp_dhsom.config
-+++ b/configs/stm32mp_dhsom.config
-@@ -2,6 +2,10 @@
- # CONFIG_CMD_EXPORTENV is not set
- # CONFIG_EFI_LOADER is not set
- # CONFIG_ISO_PARTITION is not set
-+# CONFIG_SPL_DOS_PARTITION is not set
-+# CONFIG_SPL_PARTITION_UUIDS is not set
-+# CONFIG_SPL_PINCTRL_FULL is not set
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_CMD_BOOTCOUNT=y
-@@ -38,6 +42,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SPI=y
- CONFIG_DM_SPI_FLASH=y
-@@ -49,6 +54,7 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_FAT_WRITE=y
- CONFIG_FIT=y
- CONFIG_GPIO_HOG=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_I2C_EEPROM=y
- CONFIG_IPV6=y
- CONFIG_IP_DEFRAG=y
-@@ -58,6 +64,7 @@ CONFIG_MTD=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_OF_LIVE=y
- CONFIG_OF_UPSTREAM=y
-+CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_PHY=y
- CONFIG_PHY_STM32_USBPHYC=y
- CONFIG_PINCONF=y
-@@ -66,17 +73,39 @@ CONFIG_PROT_TCP_SACK=y
- CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_SPI=y
--CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPL=y
-+CONFIG_SPL_BOOTCOUNT_LIMIT=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
-+CONFIG_SPL_DFU=y
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_ENV_IS_NOWHERE=y
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_FOOTPRINT_LIMIT=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
-+CONFIG_SPL_MAX_FOOTPRINT=0x3db00
-+CONFIG_SPL_MTD=y
-+CONFIG_SPL_PHY=y
-+CONFIG_SPL_POWER=y
-+CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SPL_SPI_FLASH_MTD=y
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_STACK=0x30000000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
- CONFIG_STM32_FMC2_EBI=y
- CONFIG_STM32_QSPI=y
- CONFIG_STM32_SDMMC2=y
- CONFIG_STM32_SPI=y
- CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_SYSRESET_SYSCON=y
- CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
- CONFIG_SYS_BOOTM_LEN=0x2000000
- CONFIG_SYS_DISABLE_AUTOLOAD=y
+ / {
+ 	aliases {
 -- 
 2.47.2
 
