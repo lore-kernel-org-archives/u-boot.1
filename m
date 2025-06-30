@@ -4,149 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92714C8302F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:21:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1EC1C8302F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:38:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8618582E8C;
-	Mon, 30 Jun 2025 14:21:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D9B681D6A;
+	Mon, 30 Jun 2025 14:37:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wFTz3EZT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FZm6DVfL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59E3680B9B; Mon, 30 Jun 2025 14:21:40 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2062f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::62f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D65BE81E13; Mon, 30 Jun 2025 14:37:57 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AEA880B9B
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 14:21:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3E8D80B9B
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 14:37:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jXobOY8qvlaoDRwhGCxOG6+XmpG59evMp5ivDY29qFK3iaUPly7/oWOPHFgCzvYFlupW7mrBsMAcJvZpLSVHBG63zq3VkIHYKIPvLkVvQedrTpgVtg1a0pV3HaPFrrSI5UaOv5D9yVmBxkP/IBYqV5xfB0ufZjcNgGtkS09vjTsCMR6jM0cE45v4gbZ0XoibzJE7j/otmFkPHw9QC9vAEEQHH/UJ/YhTW/0oZy9KABsgNJoSajlI3+hp/9MPCnQmNWWVXhgzbb0NysRA99TuqqMhTfVNd1tFY0iCHhv0n/e0H7dL6UqzOHYBWZq2LeIIM9GHqmzUw2yGzrgnduNL9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Htih7Rp3Gq8xWzGUaeNzbZnV9GLKJgTKYwN3Y9LONEw=;
- b=gjbe4z3Wqrt+c0B+pCtM3UJsDVQ65gspsi6KNoav/1Rowdu1t7S13syysq73RFQahBCTNfW83OT6IvnrpFekKUhf4yY23AQKRjpKJgPres6JxD/8Pw6YLy8O9ZLNkMjW7ccRqZdPdpSAcuNShbDt4eWj+Gkf7Zxu51E+NLmihF72pxRcloX6NIdZXjTC4Od+psFSfOl1kQWgpYR2HPatUVXPqi+UckTmlkVafStBfcjdqX84gxbKvviOBYwRSDTEVBYo6hO/uuAQ0peGD2/NLV3IXvhbqp+HGV2v4iKy4pYL3nhZt+r/ONHbLgiAuh4jlHhEWT4BlD4TnJtuGzIdSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Htih7Rp3Gq8xWzGUaeNzbZnV9GLKJgTKYwN3Y9LONEw=;
- b=wFTz3EZTJ8fW4OYrtd0dWZvhFpPJrBV4MjE3D+X/7EMlqrjVzB+kdZqiWAt3MTaHOMEcvJ9/Xdz0JzzsOIq6qLVd/AaEAS5INDDdKxXPwCrC9Iqdm6eYC9l7rljeiZ5O54Nsw2Y6FH6qE35upzY5YWw7IECR9jR9112jiwaSpE0=
-Received: from SJ0PR13CA0231.namprd13.prod.outlook.com (2603:10b6:a03:2c1::26)
- by SA3PR12MB9158.namprd12.prod.outlook.com (2603:10b6:806:380::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.29; Mon, 30 Jun
- 2025 12:21:27 +0000
-Received: from SN1PEPF0002BA4D.namprd03.prod.outlook.com
- (2603:10b6:a03:2c1:cafe::c9) by SJ0PR13CA0231.outlook.office365.com
- (2603:10b6:a03:2c1::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.17 via Frontend Transport; Mon,
- 30 Jun 2025 12:21:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF0002BA4D.mail.protection.outlook.com (10.167.242.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Mon, 30 Jun 2025 12:21:24 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Jun
- 2025 07:21:19 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Jun
- 2025 07:21:17 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 30 Jun 2025 07:21:17 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Peter Robinson <pbrobinson@gmail.com>, Casey Connolly
- <casey.connolly@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ibai
- Erkiaga" <ibai.erkiaga-elorza@amd.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/2] cmd: Introduce CMD_HELP
-Date: Mon, 30 Jun 2025 14:21:07 +0200
-Message-ID: <c17f825fb8a74e1d1912a3fd09a9a880c84a8bfd.1751286059.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ae0ccfd5ca5so273908866b.3
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 05:37:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751287073; x=1751891873; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=M/wlxn2q0zBKjwoqVKsQPVSWypInQ1nlMF0CdymjgjU=;
+ b=FZm6DVfLup3gRyKxnj+spQXoYEpBuT8btjxqharLvoty6+69TIY1EK7iKUyqr83EK0
+ ba5jnwJn/rYPN1RjtWly7px9MT22kmnQjkWWaheihAZjpADSMiNpuuW6HnckowuZWRW1
+ 2Mh5LlnpvrQFtiwSBYjIfk8sYQDaUeuJCaMVNdmAma814kSIZAOUaYBwfllCTRb8N49U
+ nHfXTkCP3lUyvnMj5pRTfsCjgBQZ6vnjeT4Gw5pxMglU+93OHzNfCJEAhhNJ59KxgE3/
+ EVa3hGw9RGoXJhinTVIXGfZg5zB6U0geyAStbSebrMeMz6x0t4rAOVy1lWpbkhPD7eRL
+ p93A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751287073; x=1751891873;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=M/wlxn2q0zBKjwoqVKsQPVSWypInQ1nlMF0CdymjgjU=;
+ b=IVUPt6X/bXS+XQrPx1/FXsQixnJOFCp7nEwApl1ZCJnT5rsO/y5pV8Fj/tYqhcEZzz
+ NljOBrTEoQ4MihB9VzpqLufwL977t8yRVyaf36m8JLHB+EuJHS6T6kCB+IuhZuQ7nt5t
+ ol/3ru3bZjUAsUHL0ePQDqv1GN4mt0rxqWr1N7f3SG/NjYcjUsBOiQTcnrKYM14RQVCt
+ 8mxkg8pf+7NPina7T4rB553Qz4sr+PSbEwfrGk1rhAdt9iEoR5pmiuSA9+0k18Zjk0Gf
+ UvEVzQIjyo2c64mWbWFGpM7Gprh4CsVjBRVzA+dumwS2PfRjedGsQ6h2LZPJfP6A9XJY
+ fUXw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUUtKZTza9XBVSC1XxIOm39t3QMUgYtEZdLg1ToqFXdxgcOedjtejiQgkc/uYqbi3XtYnu9WL0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1eXooSYd/NDPWRuz8mBtkU6CFq38o6E8M4B4Xg0OjRC9uHF3K
+ 15kVnz/KBiA8IPOIRt0QlAtAgGSgVRL7f6WtmbuhuP+p8bt5Kk1Ov49fMTqGQAAgAkA=
+X-Gm-Gg: ASbGnctBq3y4bhpj/pzQUeCiF61naSK8jCg2ujT9cl6ROpRfn7PXd6IMDAGff1J14hF
+ iw8rVOTlyj89mz9oSNUawzUUw9ECCCMI0ARJ0Clxt7pzGvC/vf1JUU1iMiEqh8OSAqrJn5Rs8sP
+ 0/OttvL8/OHl+3MzqaNyoBoFLNu1t1nK2LuiLIPUiVEhJg920EQPD3Qr8BdGkzB/ititdv6ayRD
+ MVqndOO6H2vHIiDTinoaafH5UK3Dtr8+0H+RvZBVrOV9tF6buf4WBc2xH7vj8EiEhT/qLZSjI+6
+ Gix50yxv6JNjRaZPcusvPEqANGRalW0PlC3J3dF3SlCTr03RcJ8Sb9mH1gYjQDaPOXJr
+X-Google-Smtp-Source: AGHT+IFE7WpwmdT+YILj1BosZE+sC1JdbeCPk5K9PvZvx4yQeANVoG0qtx8ZNOIbETkDngMvG8Sv6A==
+X-Received: by 2002:a17:907:e98b:b0:ae3:66ff:f922 with SMTP id
+ a640c23a62f3a-ae36700014dmr729289766b.50.1751287072915; 
+ Mon, 30 Jun 2025 05:37:52 -0700 (PDT)
+Received: from [10.5.0.2] ([45.11.80.135]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ae353c0427bsm656455866b.84.2025.06.30.05.37.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 30 Jun 2025 05:37:52 -0700 (PDT)
+Message-ID: <a68bb62c-570d-4619-a9f0-b76550e9aaa4@linaro.org>
+Date: Mon, 30 Jun 2025 14:37:50 +0200
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2653; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=G4xMPhSaplEqt13Woj8LdVC6kE0J50bTZf6LYBCPfsA=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQkNZoqi2asX+/+wuqS+K0v88q3b7ZLvZVzJX5f707Hv
- r3MxbGlHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRslmMDI/Vzt2v40/j9Hkj
- 2K/x695kH4Mrz+tWufVs47q7InqjXz0jw9tdsR8kj8z2MdnD+Kudq+q+x84lP8p431ad5znn8MD
- hGhsA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] usb: xhci: Workaround to fix the USB halted endpoint
+ issues
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Michal Simek <michal.simek@amd.com>, Da Xue <da@lessconfused.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de,
+ git@xilinx.com
+References: <20231013045356.25789-1-venkatesh.abbarapu@amd.com>
+ <2016c1bc-dfe0-416e-a910-75e6cf25036c@denx.de>
+ <CACdvmAju3wDL0yCJtVdEf47u+L5R3AvRpcuJ+ruKFXDTcQ-TBw@mail.gmail.com>
+ <20231013151540.GJ3119521@bill-the-cat>
+ <041b37d4-777a-4c02-b8fd-9985c2cfa938@amd.com>
+ <20231016193052.GF3119521@bill-the-cat>
+ <e8501850-b440-4e2c-a120-875924f59453@collabora.com>
+ <20231017141612.GE3119521@bill-the-cat>
+ <361b19c0-229c-4fb5-9835-d952e877baee@denx.de>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <361b19c0-229c-4fb5-9835-d952e877baee@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4D:EE_|SA3PR12MB9158:EE_
-X-MS-Office365-Filtering-Correlation-Id: 297074d6-4510-42be-69d0-08ddb7d0a159
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fu1A3TPm5mUpdMXZFjH2jecEytmAui9kHDD5ai3ZS79MJtF7Vb/GvjSoOhzE?=
- =?us-ascii?Q?7SmV7k9/bp97CUZSsFXwWB3EjTP0j5Dfwp1QUsEPkkBnocSNuihaOEy2Xhh2?=
- =?us-ascii?Q?QdCM0WkZK4w+lFehSLX5jNFi+lOvvEE2kILg5gmqcnKI7B58oFUnuQf/Vblk?=
- =?us-ascii?Q?S7gF8c29N67N3Y+wx/lBTPOYddnU4xFLkWmTdXDELm57RyHyRjQaiwIkojxH?=
- =?us-ascii?Q?VCsDGXPDVrMfxzVjf+iDoAXz7c2eJMnniyGCvKKpwXJxZrkeMmP7YbVKmG0u?=
- =?us-ascii?Q?oXdnjL48iVRNOCh8oqo2ENbhTcrdcpUPVnnqUWJFm3lR8Kueka3W7GDBh0Rj?=
- =?us-ascii?Q?MXY3buSPApOevJCMGzvQc+AKh5pkR0OCJ9Mw1czhv2RAHP/+t/Iqv7gBZCba?=
- =?us-ascii?Q?dLq6ZzoYUN/ET21KBKf72LbkZsbAaokBGzKlg0Dhn8zhZFg+9W93LmTTcL8a?=
- =?us-ascii?Q?cJGtCuXxY8o0xqBGfkc+CBvPx3givEfEO/s9/OuTVoNf2gLD3/9SkbbNpkAs?=
- =?us-ascii?Q?l6Vhi/i1cT/kCG0ogu33DzsiCijCMh3HRbUo20iBpw45VlN7kmk2kzm0m7sF?=
- =?us-ascii?Q?fcPj73WkyKuut4QONa4+ghLGcsVqSMJLHp3TmCQVgIfOjNmcubuDKgBwLkDV?=
- =?us-ascii?Q?e8GUT9LgEBMlWPbX4SMH92Ga640crqIZqME0VNJH/acQE7CPjS3cJO4xtr7w?=
- =?us-ascii?Q?ImdpyQDZgGEjwB3p0aJBRjz2PHP0giEL36arO1e2I84yygT+wo+Hya3HZapB?=
- =?us-ascii?Q?rPAAv8lJB8kSecQxs2zSKrxmsc++AmtlMn8YXSqkxACBKCdZa1rNi5PmEAUK?=
- =?us-ascii?Q?jHA4wRd5JJQq6Ve7D+zb5OTGuA0gt3Q5DqrS77S4HMqWol1MKTRhRnn5ssLR?=
- =?us-ascii?Q?jUkVrYaZBhhnibLxiGTZ7mxJ0RXkEiWihfwyYOUzuVvm0OErRqH5xrcQ6j6d?=
- =?us-ascii?Q?rTFtf6Veuk+pb6n4LDA6Y3JGRT6/ripCNcnJWycrVEHP/xHn/nr4FRqJrarP?=
- =?us-ascii?Q?U2WvrM79Wzs4S/BYSugPIVi7tAI0g49v67S4zpVUvVxnQawhnB7MwVpF1eWi?=
- =?us-ascii?Q?J2aPoojrnM6kVtTvXzg9FFyxE7UN29Z4NXwY2uLoNrzuqqQHPVNcvQRE2wRN?=
- =?us-ascii?Q?4pRNDL8/huU1YvO8cyF3xmUSV0nClB53lQo9SNjX8wPTDHs561rQX+FYiBnI?=
- =?us-ascii?Q?vz896gvs8nD6wIhmJih0h6+324svt+x+kQDl4fMPC5WCKu+yHoOMc6crhG8d?=
- =?us-ascii?Q?5a77y5KlLNSvvc5g5/8+jf9uo1loXxBneeAe+bVcmxtNHQ61HIq3TsTHUfRm?=
- =?us-ascii?Q?x65+NmQ73DRK8illuifuTvyKuYF12x+bPZkX+XzBcu+pumc5N1bpffjdlUCZ?=
- =?us-ascii?Q?QWDQHx9iR5Hja2KVxBOoTsZruf/++DcfoHUxf14tfLMO/NCdXfr1kZowUbEw?=
- =?us-ascii?Q?lorzxJKyRExxb9IUWl2k7Iux2IAB2ikRM3mICeapDy9PX3hdAOxbXRd0X07f?=
- =?us-ascii?Q?wNqloPVo5IduB6M1gwBgVPIBixtV9koJygjL?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2025 12:21:24.3897 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 297074d6-4510-42be-69d0-08ddb7d0a159
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4D.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9158
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,99 +111,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add option to disable help command in size constrained systems to save some
-space. There is also no need to have ifdefs around CMDLINE because all
-commands bepends on it.
-And also mark cmd_help dependency in test_help.py.
+Hi Marek,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
----
+Sorry or digging up an old discussion.... I work for Linaro and one of the
+tasks I am considering is helping out with the USB stack update/re-sync.
+Not that I know much at all about USB :-\ but at least I will be able to
+spend some cycles on that subject.
 
-Changes in v2:
-- Remove CONFIG_CMDLINE ifdefs from code.
-- Update test_help.
+Please see below.
 
- cmd/Kconfig                | 6 ++++++
- cmd/Makefile               | 2 +-
- cmd/help.c                 | 6 ------
- test/py/tests/test_help.py | 1 +
- 4 files changed, 8 insertions(+), 7 deletions(-)
+On 10/17/23 16:54, Marek Vasut wrote:
+> On 10/17/23 16:16, Tom Rini wrote:
+>> On Tue, Oct 17, 2023 at 03:48:37PM +0300, Eugen Hristev wrote:
+>>> On 10/16/23 22:30, Tom Rini wrote:
+>>>> On Mon, Oct 16, 2023 at 08:34:16AM +0200, Michal Simek wrote:
+>>>>>
+>>>>>
+>>>>> On 10/13/23 17:15, Tom Rini wrote:
+>>>>>> On Fri, Oct 13, 2023 at 11:11:04AM -0400, Da Xue wrote:
+>>>>>>> On Fri, Oct 13, 2023 at 7:47 AM Marek Vasut <marex@denx.de> wrote:
+>>>>>>>>
+>>>>>>>> On 10/13/23 06:53, Venkatesh Yadav Abbarapu wrote:
+>>>>>>>>> The xhci host controller driver trying to queue the URB's and it is
+>>>>>>>>> getting halted at the endpoint, thereby hitting the BUG_ON's.
+>>>>>>>>> Mostly these kind of random issues are seen on faulty boards.
+>>>>>>>>> Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
+>>>>>>>>> xhci code BUG_ON/BUG's are removed entirely.
+>>>>>>>>> Please also note, that BUG_ON() is not recommended any more in the Linux
+>>>>>>>>> kernel.
+>>>>>>>>> Similar issue has been observed on TI AM437x board and they created a patch
+>>>>>>>>> in Linux kernel as below
+>>>>>>>>> https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-git-send-email-balbi@ti.com/
+>>>>>>>>>
+>>>>>>>>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>>>>>>>>
+>>>>>>>> I already explained to Xilinx how to sync the driver with Linux and why
+>>>>>>>> this is needed to move forward, multiple times, and even provided a
+>>>>>>>> script which does most of the work automatically, since it is basically
+>>>>>>>> automated process. Xilinx did not even bother to test the script and
+>>>>>>>> provide any feedback.
+>>>>>>>>
+>>>>>>>> Until that happens, this patch is rejected.
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 4eb0140c10a1..ee3fbe6a4f2b 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -189,6 +189,12 @@ config CMD_FWU_METADATA
- 	help
- 	  Command to read the metadata and dump it's contents
- 
-+config CMD_HELP
-+	bool "help"
-+	default y
-+	help
-+	  Command to show help information about other commands.
-+
- config CMD_HISTORY
- 	bool "history"
- 	depends on CMDLINE_EDITING
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 80cf70b7fe8c..718eff4ed197 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
- # core command
- obj-y += boot.o
- obj-$(CONFIG_CMD_BOOTM) += bootm.o
--obj-y += help.o
-+obj-$(CONFIG_CMD_HELP) += help.o
- obj-y += panic.o
- obj-y += version.o
- 
-diff --git a/cmd/help.c b/cmd/help.c
-index 56579e28d31d..1be83ba607d4 100644
---- a/cmd/help.c
-+++ b/cmd/help.c
-@@ -9,13 +9,9 @@
- static int do_help(struct cmd_tbl *cmdtp, int flag, int argc,
- 		   char *const argv[])
- {
--#ifdef CONFIG_CMDLINE
- 	struct cmd_tbl *start = ll_entry_start(struct cmd_tbl, cmd);
- 	const int len = ll_entry_count(struct cmd_tbl, cmd);
- 	return _do_help(start, len, cmdtp, flag, argc, argv);
--#else
--	return 0;
--#endif
- }
- 
- U_BOOT_CMD(
-@@ -27,7 +23,6 @@ U_BOOT_CMD(
- 	"	- print detailed usage of 'command'"
- );
- 
--#ifdef CONFIG_CMDLINE
- /*
-  * This does not use the U_BOOT_CMD macro as ? can't be used in symbol names
-  * nor can we rely on the CONFIG_SYS_LONGHELP helper macro
-@@ -39,4 +34,3 @@ ll_entry_declare(struct cmd_tbl, question_mark, cmd) = {
- 	""
- #endif /* CONFIG_SYS_LONGHELP */
- };
--#endif
-diff --git a/test/py/tests/test_help.py b/test/py/tests/test_help.py
-index 12cb36b7b985..afb57201ba38 100644
---- a/test/py/tests/test_help.py
-+++ b/test/py/tests/test_help.py
-@@ -4,6 +4,7 @@
- 
- import pytest
- 
-+@pytest.mark.buildconfigspec('cmd_help')
- def test_help(ubman):
-     """Test that the "help" command can be executed."""
- 
+Would you mind telling me a bit more about the re-sync process and the script
+you mentioned?
+
+>>>>>>>
+>>>>>>> This patch also causes all of the USB devices on certain platforms to
+>>>>>>> not be detected:
+>>>>>>>
+>>>>>>> scanning bus usb@c9000000 for devices... Device not responding to set address.
+>>>>>>>
+>>>>>>>          USB device not accepting new address (error=80000000)
+>>>>>>
+>>>>>> Yes, we are stuck at the impasse where the custodian is asking for
+>>>>>> someone to try and do the re-sync, and everyone else will assist with
+>>>>>> testing on other platforms, but the re-sync hasn't happened.  Can we
+>>>>>> please get someone from AMD to attempt the re-sync?
+>>>>>
+>>>>> I would like to say that we have someone to do it. But I simply don't have
+>>>>> that person.
+>>>>
+>>>> That is the big problem we face, yes.  Eugen, I think you said you were
+>>>> going to try and find time to do a re-sync, did you end up getting any?
+>>>>
+>>>
+>>>
+>>> Hi Tom,
+>>>
+>>> Unfortunately at the moment I am working on a different project, so I do not
+>>> see any perspective to do this in the near future, although I would like to
+>>> do it and to help.
+>>> It may be the case that a company investing into an engineer to work on this
+>>> would be the only way.
+
+I might be that guy :)
+
+>>>
+>>> In any case, do you think Marek would accept doing this incrementally , e.g.
+>>> now the driver is synced with 3.10, it would be easier to increment to 4.1
+>>> as a first step ?
+>>
+>> Incremental updates feels like it might be less of a daunting path to
+>> me, so I'd be agreeable.  Marek?
+> 
+> I am fine with that obviously, in fact, I am fine with anything which is not "pick a random patch from the middle of kernel git log, submit it, make the driver into a mess of partial patch backports".
+
+Makes sense of course. What could be a first, simple step in the right
+direction?
+
+Regards,
 -- 
-2.43.0
-
-base-commit: 40ef75b0796307f718a4b424b5e52e79b36ae2f4
+Jerome
