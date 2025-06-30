@@ -4,102 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E87C83029
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 16:05:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B32C83029
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 16:06:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1313882E40;
-	Mon, 30 Jun 2025 18:05:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B8DD80B9B;
+	Mon, 30 Jun 2025 18:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UfYGjibH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eei9n+xd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E36982ADA; Mon, 30 Jun 2025 18:05:03 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 24D8D809A5; Mon, 30 Jun 2025 18:06:15 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F01182E40
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:04:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A61DE8206E
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:06:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3a4f379662cso1929478f8f.0
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:04:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-453426170b6so30194465e9.1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:06:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751299492; x=1751904292; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=z5G4sIRxTG4U1QGiE9u+jy31Ioc4yLM7VXGZrFMXlww=;
- b=UfYGjibHFBXdnRYCY+O/HWEuabSiFo/WAGJIkYWNQ5ebrN18Rlzp9cUEQfoN7XtFc7
- M6Bz4/CoNIRBVkaFuSbkMDqa1Rv6yoHF8PIw7UvIcqczCaUbuC+CWps2nAxZMnv2LnWK
- PheSv0D8vAQ5vv9SYSWNf5ecR8sCrEgdou4TzXVvDp05qEyphFMBiibUKoEYzpTLJJfi
- 547EnCFdFNMXymfh9ryaREcAf7LL3wLweKsoZiBf8RdJt1vPV3Ti/ZRWjjt6ysJefj6p
- VV/Y6HwRurgZLFt+xrC1kRnQSLKdRexNuaUxyEylqoVNobB2luUV/9HS5fbQY60X7PMr
- o5qA==
+ d=linaro.org; s=google; t=1751299569; x=1751904369; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=G+ymrSxpJ72qwuMlDLSaNnvZrsXg4cD+qInF1AmDOiI=;
+ b=eei9n+xdOSac+dMG/NvKITbsFp5gLzGlmUPyupSK0oUMBGDoap32gIRZI6riyD6XxN
+ ynmrH7uAJfTRlS7fOGyHR5I3O1Px/7O7vV/hVrGtj93MmdjJdG8eaN2opIvzZNxaaZQV
+ ZzZBAJfpbZNkXHRxK0MhsMnxwta6cLLxVcRwLAeDgDKlVMv0o4wuiQoZ7hJT9ohQRZG+
+ pIvV7KaLIUbOVslt0X9mbJdixjN4OD+zBreb9KSZYBH6KbmtAbm71EsHW075/DvhkwAQ
+ 0RTo9H1BX7AtRgdMQ49biEIE/6T5VFsk/+6Zc2AY5kQuDJdC1kWRiLP7aLBEy8FH3i0S
+ xlrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751299492; x=1751904292;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z5G4sIRxTG4U1QGiE9u+jy31Ioc4yLM7VXGZrFMXlww=;
- b=vzSeqGiiHGao5J4SabxGJREARyl1NjWBeT30rWoayb9BtGpvxRu53fIJTyplzHH0OV
- vfWxN9UB2QTEb71uZ1Js0YIwIoqfii/1hDbIwfq2nX2QG/Kx5iWsdaBz1qSXTiMwxTXs
- a8U13f0xPeyQORJKJwGbI4YXH4k5iZSlysKYpTmxj/8uGhWcsP1ta5Q7OI7SHEyMfuDH
- k2XmDWcu1XReo5GilLqiADOHiKvbZq5NZD5FFuObmHsftjmaq0n7D6+yZWJezhtnuX8a
- 7XqAKy16Kq7Av2Ufh88PfoAJlHIbWzML7isAE4y9umgq/b8N0j4aRa2UNWJ+TWkwZawq
- wZmQ==
-X-Gm-Message-State: AOJu0Yza4M8VnbOgPwiDMkDGnK0HFRO871xOVCHYBawhYwZiXG4fPmVs
- nOwcsPN+Inl54FTHPIoV1al7iTdi4GNWxKCZcH0m94y2tVKMwFFBmDzMRTHTVv1xj8Y=
-X-Gm-Gg: ASbGncuxqZpN94oqUwsVXo5bmwDryp7J59YL707sTpkLhBFM6l7YHR5VsKqb7FsAmTD
- PDrDUBGajWIpO7n3z24DWDAEbFes72s4nwUcFaVw3tIdqJyaC3zYmDLC9a/33VMW7dTuISg0GSW
- tyWJci83B3o8vwc2LtxfH+ZF+ZP2N3dr7pKM95HoBQoFCMBWCe6e3VpsrKN7CmeAhWMAx0JV1Ux
- PCOpenAjrpzTgU7hq6BVUpRuVefhn8jDPh0En/YThu/HNmvVzN6cJd4v3wYVq34EMKXYjYJ9I2s
- bGZR3swHfndRPOm2Lla7r+TUddslMMgRnsEMST3Sy/0hM/oONyHYLPZr9H7FHnDUQQyMIjVD3Tv
- nhfptGts=
-X-Google-Smtp-Source: AGHT+IHj1h0NEQ4A6C3a4ssyrNb1LKrAC3cuKqenjNYLTsYs9xUlAcySKIbU4i0zM0whTHcvvLlWMA==
-X-Received: by 2002:adf:9d89:0:b0:3a6:e2d5:f14c with SMTP id
- ffacd0b85a97d-3a8fdeff3fcmr10218149f8f.30.1751299492323; 
- Mon, 30 Jun 2025 09:04:52 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1751299569; x=1751904369;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=G+ymrSxpJ72qwuMlDLSaNnvZrsXg4cD+qInF1AmDOiI=;
+ b=Yt8jDlzd5Ibe/Kqy9slzpoMzZQyFoiQQsgAa1hBAGlCs+gc9sLc3EjhUGWB0+tU4ut
+ vK4gqlWOMumVFJbMJgoMPgBMWuh3UuCZAysUKSIpqWBb1JjKfGErlU6afsj8cYxxndEP
+ EmYFKB3sTDScmuIrnLnIDFuPaicq2SpPKOcocxi4AALrX9SD238XuRx+oAt5tFMA+Z/0
+ hBziyAdI67QfqFZTjFyRf3qZyep8HI2RZsYeMjaTP6vDb4ZZAnOzkv/I3MTmn5vRWZRs
+ VkqPuRCrUuHib4fklBF2k+bwQQ8bdMMs4Mmbw7InZCvA5srNJqGEmWTrXSUzdepmeq29
+ FV3A==
+X-Gm-Message-State: AOJu0YxqHD7NfabAK0+neEixT4Mmjd0qqR80CKGjzlB1AUDX0tWnM960
+ UdUu37rHPWa10rdqMwoP3YuCCVby45dzKswdHhXiyluXkrGt1Lp6FrccsX5pf3gJ1Y0i/qLQJYa
+ jxw/Hkhk=
+X-Gm-Gg: ASbGnctV2zq/NPEZF5hWEQC46APJj7HDCXehklgi8SD+Lu+d75vVXAaAyD7jxlBOQaz
+ GOPTuOV5MSSRe5d/OgsC+HiPuNZntyeTrxtClLjj4MffW+CWncXD7PAMLq1TXsEjDSDQQXXyLrf
+ pF9K/3yHhf36WQ6WhPucvER9Uj/WNMH/QW5+WkNURzuexBLmiARxBZ8CI1MTM1JJA6QSTcWWIhi
+ WLN9J/vPEsz0IAQd9eMbODyM8FPVTmlmv+mypBzsRfRE0aTBtmHPlRuYXCvRa0V+ht3x26s2X9W
+ F7zF9DDKJcffbfNWmpd0gLawsTAAzfhHHKIhtRiWe+F1BbpbbTJhPCji3DLFWXtO0Mwspkqx5Kv
+ KBXzAHKRJ3t1KNsc=
+X-Google-Smtp-Source: AGHT+IFEq+/teqVExysx2/MMGjhhUIRDPTm7TIxTHYLadtKPFSHpysxzsumrEWWpqV39LVICcG1tZA==
+X-Received: by 2002:adf:9cca:0:b0:3a4:e231:8632 with SMTP id
+ ffacd0b85a97d-3af0f43218cmr139131f8f.12.1751299568894; 
+ Mon, 30 Jun 2025 09:06:08 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:ee3:2301:10fb:ba4d:cfb6:8c75])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a88c7ec69dsm10685215f8f.6.2025.06.30.09.04.51
+ ffacd0b85a97d-3a892e5966csm10878371f8f.72.2025.06.30.09.06.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 09:04:52 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 30 Jun 2025 18:04:45 +0200
-Subject: [PATCH v2 2/2] gpio: qcom: move pm8550 gpio to new driver
+ Mon, 30 Jun 2025 09:06:08 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Mon, 30 Jun 2025 17:06:07 +0100
+Subject: [PATCH] boot: menu: Do not dereference pointer if pointer is NULL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-2-cc1512931197@linaro.org>
-References: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-0-cc1512931197@linaro.org>
-In-Reply-To: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-0-cc1512931197@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3218;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=UD4lh7YLCq7xJDrxI+MT78QBezZ8U6s4p08979djvuc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoYrWgr1bLA8+CodnXfzcoRsZid9PUQzl1EXKeLZT7
- kpfO/QCJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaGK1oAAKCRB33NvayMhJ0bP5EA
- C8TlBJrp75rV/k5ggUfyKjAHPvZLlf2aQSvEbcSELVKomH4kGFIYnk9HEJ74QRUZzIbJtF5Xbz5Hk7
- 5IUupRuTti406+n1Y83cgpsFzw5VS/KifAf8QJSgLIQiDAFqpdcOti/JVRuOwakKYiZqEPKwzfUSqX
- 5LYi/uAFWfzRw1sih5vD1/180L9fLHxYRKyWKdZBSxPiijLD7ZxDtVEQwi159mdHOX2XScfcusdf7T
- +brWZd/OrZAEic3mndM5NYBe8oxFCpE6Su0DACwjgWGpJwl+iMpaTFOJuJbxkqQRVJabHQ1KywfMDT
- N/R0CTnpVswpk9FJg/frDZ6Dfs+9WWkYvc5+ckg9gD5cyqejGvmTwuRN1TqQw1nVcdOQrkHSTgpJQ/
- uyR5qZBXEpDvCa7/PHdUrceAGNiRS2Xl87v8Yq6j3M7NJDu48tTgE3wnJlRi7zzL4b7qPBYGnye1VL
- C6ptigU5zisSPVA/M/1ZaQI0hpoKgQgYWxg4FInGy6hzsY/qqqA5Me9TSPJyHd0c5z0HJMn5URAyVW
- KhFy0vU7nQG/luTFCA0A95Kmotygowbe2dHQb0oKIaHKuLZGZtYiSe8WfgHmDA8mg9GweiIeLGpaFr
- QIbTu1cUGvsgWSppnSZKTBymOd4gTPHbXZbbAMeFWOPYvVBa8qZ34IqhKqkA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Message-Id: <20250630-scene_menu_fix-v1-1-9ccb9a49c4d8@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAO61YmgC/x2N0QrCQAwEf6Xk2YN46gn+ikhJz9XmoVESFaH03
+ 736OMwOO1PAFUGnbibHR0Mf1mC76aiOYnckvTamzPnAZccpKgz9BHv3N/2mwmXPkHKsmalFgwT
+ S4GJ1XLNJ4gVfxdPR9v+n82VZfvbZ+cd5AAAA
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,90 +100,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move support of the pm8550 gpios to the newly introduced
-driver and drop the compatible entry and the read-only quirk
-at the same time from the old driver.
+scene_obj_find can return NULL but this is not checked for before
+the return is dereferenced. Add a NULL check.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+This issue was found by Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 20 +-------------------
- drivers/gpio/qcom_spmi_gpio.c |  1 +
- 2 files changed, 2 insertions(+), 19 deletions(-)
+ boot/scene_menu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index cd9f3926ac41d84161b1e5311d9a99bb0b4a68ff..4458c55cd3da4d279b360b701348b50247036198 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -69,17 +69,6 @@
- #define REG_EN_CTL             0x46
- #define REG_EN_CTL_ENABLE      (1 << 7)
+diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+index 17150af145d..9a6e37d1c64 100644
+--- a/boot/scene_menu.c
++++ b/boot/scene_menu.c
+@@ -508,7 +508,8 @@ int scene_menu_display(struct scene_obj_menu *menu)
+ 		return 0;
  
--/**
-- * pmic_gpio_match_data - platform specific configuration
-- *
-- * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to configure them.
-- * This is a workaround for an unknown bug on some platforms where trying to write the
-- * GPIO configuration registers causes the board to hang.
-- */
--enum pmic_gpio_quirks {
--	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
--};
--
- struct qcom_pmic_gpio_data {
- 	uint32_t pid; /* Peripheral ID on SPMI bus */
- 	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
-@@ -128,13 +117,8 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
- {
- 	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
- 	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
--	ulong quirks = dev_get_driver_data(dev);
- 	int ret = 0;
+ 	pointer = scene_obj_find(scn, menu->pointer_id, SCENEOBJT_TEXT);
+-	pstr = expo_get_str(scn->expo, pointer->str_id);
++	if (pointer)
++		pstr = expo_get_str(scn->expo, pointer->str_id);
  
--	/* Some PMICs don't like their GPIOs being configured */
--	if (quirks & QCOM_PMIC_QUIRK_READONLY)
--		return 0;
--
- 	/* Disable the GPIO */
- 	ret = pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
- 			      REG_EN_CTL_ENABLE, 0);
-@@ -278,7 +262,6 @@ static int qcom_gpio_bind(struct udevice *dev)
- {
- 
- 	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
--	ulong quirks = dev_get_driver_data(dev);
- 	struct udevice *child;
- 	struct driver *drv;
- 	int ret;
-@@ -292,7 +275,7 @@ static int qcom_gpio_bind(struct udevice *dev)
- 	/* Bind the GPIO driver as a child of the PMIC. */
- 	ret = device_bind_with_driver_data(dev, drv,
- 					   dev->name,
--					   quirks, dev_ofnode(dev), &child);
-+					   0, dev_ofnode(dev), &child);
- 	if (ret)
- 		return log_msg_ret("bind", ret);
- 
-@@ -365,7 +348,6 @@ static const struct udevice_id qcom_gpio_ids[] = {
- 	{ .compatible = "qcom,pms405-gpio" },
- 	{ .compatible = "qcom,pm6125-gpio" },
- 	{ .compatible = "qcom,pm8150-gpio" },
--	{ .compatible = "qcom,pm8550-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
- 	{ }
- };
- 
-diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-index 2bb0f0d10c32ff55d3fd5c61b9bc2999878bfea6..22c8072534e9188445f0aaef5336863fd1da7a75 100644
---- a/drivers/gpio/qcom_spmi_gpio.c
-+++ b/drivers/gpio/qcom_spmi_gpio.c
-@@ -743,6 +743,7 @@ static int qcom_spmi_pmic_gpio_probe(struct udevice *dev)
- }
- 
- static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
-+	{ .compatible = "qcom,pm8550-gpio" },
- 	{ .compatible = "qcom,pm8550b-gpio" },
- 	{ .compatible = "qcom,pm8550ve-gpio" },
- 	{ .compatible = "qcom,pm8550vs-gpio" },
+ 	list_for_each_entry(item, &menu->item_head, sibling) {
+ 		struct scene_obj_txt *key = NULL, *label = NULL;
 
+---
+base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
+change-id: 20250630-scene_menu_fix-60640ea67c20
+
+Best regards,
 -- 
-2.34.1
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
