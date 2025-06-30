@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B479EC8302D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 18:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86690C83029
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 18:53:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B9D182F54;
+	by phobos.denx.de (Postfix) with ESMTP id DF29B82F6F;
 	Mon, 30 Jun 2025 20:52:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kmPjztZR";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="e4k4heAV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uUPDQ87f";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uwUSSNkq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2288B81FFC; Mon, 30 Jun 2025 20:51:53 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id E41B282EB8; Mon, 30 Jun 2025 20:51:55 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD98782ADA
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:51:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D22AA82E27
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:51:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,33 +32,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bWFcw31L9z9t8S;
- Mon, 30 Jun 2025 20:51:44 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bWFcy4bfsz9t6S;
+ Mon, 30 Jun 2025 20:51:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1751309506;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=oKeq6sWOZjRX/Peaa4v2QWvaiCack+1k85EfSIyKgiA=;
+ b=uUPDQ87fOMBwLIrxti57RKwiY3N8bfl9LBRA0GHJ/UZjaLJHEl2Z+H1HNaSWqdNsC0GH+A
+ 2ckesG8Usjxi/TEa4k05Xy0fSNhyCOs2kEmIh/kBDQ4Cclf54iDtRzm1VgSR6LCbSugAFg
+ 8H55kqKstGQ9z+JkcBB2k6zTbGikones/VZp1KnJcEX6i2J+3osGOJEDDQkOwQErXGdmGr
+ dSnMfKFl9qk9dCqobixXQqzN9XBp6QpBAPKcSVC9ypztPVhviQa7HhmJUCgiKQJokOgcov
+ HKVfheWgz7LQ7EfCU91+pTi60aPrniIEKqmsQQvm/Wy1Tl+wv9+xatxX0i/Chg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1751309504;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=peEt02U5+mTBoqH28mX8hvyTCKjH6vz9a6EDQk3rjm8=;
- b=kmPjztZRhQDarO6u2egCUZyOEjvob6g6Hel6SKJtosBqd3HGSqQyLjfqBGXtvPD55OSU6j
- b11KycvZRAu8kkqI3ZPBIwgXqFfeY54D/Q9bODLh4j4DHEcJGVpSn1rpdw1D8PcrxebLTZ
- CT9NXvyHZFJ9x+wvuDW6/2Y5bIUTlqpCcf+LMNJ3vC1iEU5eBfjCFh639c+GqHy6pqvzDe
- imZNwjI5qMHDH+oWCMmm3+j2UP5chnVXNZz3DnjOqbOSJKhkyN/UJwb6rcjwxbpAUQTnN9
- K6JXjKDFBZX4UzsZAx2YbipRxxksRd4D//L5cBeGSDnClkULnfOam1Xd4Ii3/Q==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751309502;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=peEt02U5+mTBoqH28mX8hvyTCKjH6vz9a6EDQk3rjm8=;
- b=e4k4heAVxcDFc4oohWqeua82NwTBpbdtzcoYR5e3ndKdJUyy+Q4+8RYZq51RSMJvPTCVC7
- oY+Vp+0jcpB0NJLgY+deK61dioB1FNqvSklBZU6hQWlPFV/qz9zHZOOVuzgJVdXEd2topP
- xhjnotuawkuZ0DAjHNbkFxBDhLw3S7PAYwgbPrAOEhkFu8hz7QYP316EjfQRRJWwWMC7c4
- NVYwvHAznLlpvIO064FolNyYCb1Ay0U508AhniL4VyBhUiFAshVa4cab6vbA/Swf/TpKdc
- 5yYF9Thnu64lAyeGhhcAdsT9bA35vguAXbYV+nkUSLd15IeLXYQJ4yhKopt38w==
+ bh=oKeq6sWOZjRX/Peaa4v2QWvaiCack+1k85EfSIyKgiA=;
+ b=uwUSSNkqdtpnuz5o6hxyXKXniMbUz/sv/XZy8TlOl6rBEbXBY2tMZvHdiyEaPysz33YX+R
+ E0Xq0U9bJNE5A7k0qwo4vpHM+OUh8Xt8d3Kgz8rmm6kZ7RAbwao2itWRJc27F/dNmbFIii
+ UnkgE4glinn+ZmJT/UXceIdF5clsDTgc5o62fULuiQVtAfhQ1XaVbdj5v9NE85cd5F44ke
+ PWt6eAOyV5HVMdHexxv1+d6QUxIsN4YbbXvflG/z3bGdZe09qpnaZoePmtBEKA52cdle9D
+ dq5hReF/8Iu3gIxZ9kgHukM54nJr1g44h6tMY84bRhYxPP0livlbBz+mtrpHlg==
 To: u-boot@lists.denx.de
 Cc: damm@opensource.se, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -66,16 +67,17 @@ Cc: damm@opensource.se, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/8] net: sh_eth: Convert cache operations to static functions
-Date: Mon, 30 Jun 2025 20:51:12 +0200
-Message-ID: <20250630185124.1099147-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 4/8] net: sh_eth: arm: renesas: README: Drop
+ CFG_SH_ETHER_CACHE_*
+Date: Mon, 30 Jun 2025 20:51:13 +0200
+Message-ID: <20250630185124.1099147-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250630185124.1099147-1-marek.vasut+renesas@mailbox.org>
 References: <20250630185124.1099147-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: t9gaaoqu7m9nucxmnzyxxnjjetcg5hm3
-X-MBO-RS-ID: ac840c8ef9253568566
-X-Rspamd-Queue-Id: 4bWFcw31L9z9t8S
+X-MBO-RS-META: o67f4sn4k6myaywwpboidh5wc1m6xfgg
+X-MBO-RS-ID: 87c3648601199e3b9b8
+X-Rspamd-Queue-Id: 4bWFcy4bfsz9t6S
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,13 +94,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Turn the current cache operation macros into static functions to improve
-compiler coverage checking. This does change the driver behavior slightly,
-the driver now expects those cache operation functions to be available on
-all architectures on which it is used. This should pose no problem, as the
-driver is only used on 32bit and 64bit ARM, which both have those operations.
-The CFG_SH_ETHER_ALIGNE_SIZE is converted to SH_ETHER_ALIGN_SIZE and defined
-as either 64 on ARM or 16 on SH.
+Drop CFG_SH_ETHER_CACHE_WRITEBACK and CFG_SH_ETHER_CACHE_INVALIDATE,
+which are now always enabled in the sh_eth driver, because those cache
+operations are always available. On architectures which do not implement
+cache operations yet, cache operations have to be implemented first.
+
+CFG_SH_ETHER_ALIGNE_SIZE now set as SH_ETHER_ALIGN_SIZE in sh_eth.h
+based on architecture and no longer configured on board level.
+
+Remove CFG_SH_ETHER_CACHE_WRITEBACK configuration option from README.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -111,135 +115,172 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/net/sh_eth.c | 43 ++++++++++++++++++-------------------------
- drivers/net/sh_eth.h | 19 ++++++++-----------
- 2 files changed, 26 insertions(+), 36 deletions(-)
+ README                    | 3 ---
+ include/configs/alt.h     | 3 ---
+ include/configs/condor.h  | 3 ---
+ include/configs/gose.h    | 3 ---
+ include/configs/grpeach.h | 3 ---
+ include/configs/koelsch.h | 3 ---
+ include/configs/lager.h   | 3 ---
+ include/configs/porter.h  | 3 ---
+ include/configs/silk.h    | 3 ---
+ include/configs/stout.h   | 3 ---
+ include/configs/v3hsk.h   | 3 ---
+ 11 files changed, 33 deletions(-)
 
-diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
-index 9ccba153f36..d372ece8e46 100644
---- a/drivers/net/sh_eth.c
-+++ b/drivers/net/sh_eth.c
-@@ -33,31 +33,24 @@
- # error "Please define CFG_SH_ETHER_PHY_ADDR"
- #endif
+diff --git a/README b/README
+index 8f8f4b85ef8..7acf39540c2 100644
+--- a/README
++++ b/README
+@@ -382,9 +382,6 @@ The following options need to be configured:
+ 			CFG_SH_ETHER_PHY_ADDR
+ 			Define the ETH PHY's address
  
--#if defined(CFG_SH_ETHER_CACHE_WRITEBACK) && \
--	!CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
--#define flush_cache_wback(addr, len)    \
--		flush_dcache_range((unsigned long)addr, \
--		(unsigned long)(addr + ALIGN(len, CFG_SH_ETHER_ALIGNE_SIZE)))
--#else
--#define flush_cache_wback(...)
--#endif
-+static void flush_cache_wback(void *addr, unsigned long len)
-+{
-+	flush_dcache_range((unsigned long)addr,
-+			   (unsigned long)(addr + ALIGN(len, SH_ETHER_ALIGN_SIZE)));
-+}
- 
--#if defined(CFG_SH_ETHER_CACHE_INVALIDATE) && defined(CONFIG_ARM)
--#define invalidate_cache(addr, len)		\
--	{	\
--		unsigned long line_size = CFG_SH_ETHER_ALIGNE_SIZE;	\
--		unsigned long start, end;	\
--		\
--		start = (unsigned long)addr;	\
--		end = start + len;		\
--		start &= ~(line_size - 1);	\
--		end = ((end + line_size - 1) & ~(line_size - 1));	\
--		\
--		invalidate_dcache_range(start, end);	\
--	}
--#else
--#define invalidate_cache(...)
--#endif
-+static void invalidate_cache(void *addr, unsigned long len)
-+{
-+	unsigned long line_size = SH_ETHER_ALIGN_SIZE;
-+	unsigned long start, end;
-+
-+	start = (unsigned long)addr;
-+	end = start + len;
-+	start &= ~(line_size - 1);
-+	end = (end + line_size - 1) & ~(line_size - 1);
-+
-+	invalidate_dcache_range(start, end);
-+}
- 
- #define TIMEOUT_CNT 1000
- 
-@@ -133,7 +126,7 @@ static int sh_eth_recv_start(struct sh_eth_info *port_info)
- 
- static void sh_eth_recv_finish(struct sh_eth_info *port_info)
- {
--	invalidate_cache(ADDR_TO_P2(port_info->rx_desc_cur->rd2), MAX_BUF_SIZE);
-+	invalidate_cache((void *)ADDR_TO_P2((uintptr_t)port_info->rx_desc_cur->rd2), MAX_BUF_SIZE);
- 
- 	/* Make current descriptor available again */
- 	if (port_info->rx_desc_cur->rd0 & RD_RDLE)
-diff --git a/drivers/net/sh_eth.h b/drivers/net/sh_eth.h
-index 6b7f8ae5154..006f12a37b9 100644
---- a/drivers/net/sh_eth.h
-+++ b/drivers/net/sh_eth.h
-@@ -19,20 +19,17 @@
- 
- /* The ethernet controller needs to use physical addresses */
- #define ADDR_TO_PHY(addr)	((uintptr_t)(addr) & ~0xe0000000)
-+#define SH_ETHER_ALIGN_SIZE	16
- #elif defined(CONFIG_ARM)
- #ifndef inl
- #define inl	readl
- #define outl	writel
-+#define SH_ETHER_ALIGN_SIZE	64
- #endif
- #define ADDR_TO_PHY(addr)	((uintptr_t)(addr))
- #define ADDR_TO_P2(addr)	(addr)
- #endif /* defined(CONFIG_SH) */
- 
--/* base padding size is 16 */
--#ifndef CFG_SH_ETHER_ALIGNE_SIZE
--#define CFG_SH_ETHER_ALIGNE_SIZE 16
--#endif
+-			CFG_SH_ETHER_CACHE_WRITEBACK
+-			If this option is set, the driver enables cache flush.
 -
- /* Buffers must be big enough to hold the largest ethernet frame. Also, rx
-    buffers must be a multiple of 32 bytes */
- #define MAX_BUF_SIZE	(48 * 32)
-@@ -44,7 +41,7 @@
+ - TPM Support:
+ 		CONFIG_TPM
+ 		Support TPM devices.
+diff --git a/include/configs/alt.h b/include/configs/alt.h
+index 52b8c95cd7b..987fd25bb4c 100644
+--- a/include/configs/alt.h
++++ b/include/configs/alt.h
+@@ -23,9 +23,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
  
- /* The size of the tx descriptor is determined by how much padding is used.
-    4, 20, or 52 bytes of padding can be used */
--#define TX_DESC_PADDING	(CFG_SH_ETHER_ALIGNE_SIZE - 12)
-+#define TX_DESC_PADDING	(SH_ETHER_ALIGN_SIZE - 12)
+ /* Board Clock */
  
- /* Tx descriptor. We always use 3 bytes of padding */
- struct tx_desc_s {
-@@ -59,9 +56,9 @@ struct tx_desc_s {
+diff --git a/include/configs/condor.h b/include/configs/condor.h
+index ecaf58e4c0f..b2d66c785fc 100644
+--- a/include/configs/condor.h
++++ b/include/configs/condor.h
+@@ -16,9 +16,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
  
- /* The size of the rx descriptor is determined by how much padding is used.
-    4, 20, or 52 bytes of padding can be used */
--#define RX_DESC_PADDING	(CFG_SH_ETHER_ALIGNE_SIZE - 12)
-+#define RX_DESC_PADDING	(SH_ETHER_ALIGN_SIZE - 12)
- /* aligned cache line size */
--#define RX_BUF_ALIGNE_SIZE	(CFG_SH_ETHER_ALIGNE_SIZE > 32 ? 64 : 32)
-+#define RX_BUF_ALIGNE_SIZE	(SH_ETHER_ALIGN_SIZE > 32 ? 64 : 32)
+ /* Board Clock */
+ /* XTAL_CLK : 33.33MHz */
+diff --git a/include/configs/gose.h b/include/configs/gose.h
+index 323977e9b8a..acef925855a 100644
+--- a/include/configs/gose.h
++++ b/include/configs/gose.h
+@@ -22,9 +22,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
  
- /* Rx descriptor. We always use 4 bytes of padding */
- struct rx_desc_s {
-@@ -380,11 +377,11 @@ enum DMAC_M_BIT {
- #endif
- };
+ /* Board Clock */
  
--#if CFG_SH_ETHER_ALIGNE_SIZE == 64
-+#if SH_ETHER_ALIGN_SIZE == 64
- # define EMDR_DESC EDMR_DL1
--#elif CFG_SH_ETHER_ALIGNE_SIZE == 32
-+#elif SH_ETHER_ALIGN_SIZE == 32
- # define EMDR_DESC EDMR_DL0
--#elif CFG_SH_ETHER_ALIGNE_SIZE == 16 /* Default */
-+#elif SH_ETHER_ALIGN_SIZE == 16 /* Default */
- # define EMDR_DESC 0
- #endif
+diff --git a/include/configs/grpeach.h b/include/configs/grpeach.h
+index 67ad8339816..9a7eef57c87 100644
+--- a/include/configs/grpeach.h
++++ b/include/configs/grpeach.h
+@@ -19,8 +19,5 @@
+ /* Network interface */
+ #define CFG_SH_ETHER_PHY_ADDR	0
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_MII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
  
+ #endif	/* __GRPEACH_H */
+diff --git a/include/configs/koelsch.h b/include/configs/koelsch.h
+index 11f637d3f33..13d2127ac13 100644
+--- a/include/configs/koelsch.h
++++ b/include/configs/koelsch.h
+@@ -22,9 +22,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
+ 
+ /* Board Clock */
+ 
+diff --git a/include/configs/lager.h b/include/configs/lager.h
+index aaf4a4a6931..d76f003e391 100644
+--- a/include/configs/lager.h
++++ b/include/configs/lager.h
+@@ -23,9 +23,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
+ 
+ /* Board Clock */
+ 
+diff --git a/include/configs/porter.h b/include/configs/porter.h
+index ff99c3fb817..eaf5d31c1d3 100644
+--- a/include/configs/porter.h
++++ b/include/configs/porter.h
+@@ -24,9 +24,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
+ 
+ /* Board Clock */
+ 
+diff --git a/include/configs/silk.h b/include/configs/silk.h
+index 20d18aa5aa7..4ef70281dda 100644
+--- a/include/configs/silk.h
++++ b/include/configs/silk.h
+@@ -24,9 +24,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
+ 
+ /* Board Clock */
+ 
+diff --git a/include/configs/stout.h b/include/configs/stout.h
+index 454d8ca5716..cb544de243e 100644
+--- a/include/configs/stout.h
++++ b/include/configs/stout.h
+@@ -28,9 +28,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x1
+ #define CFG_SH_ETHER_PHY_MODE PHY_INTERFACE_MODE_RMII
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
+ 
+ /* Board Clock */
+ 
+diff --git a/include/configs/v3hsk.h b/include/configs/v3hsk.h
+index e16a289ac1a..a8d1641b36e 100644
+--- a/include/configs/v3hsk.h
++++ b/include/configs/v3hsk.h
+@@ -17,9 +17,6 @@
+ /* SH Ether */
+ #define CFG_SH_ETHER_PHY_ADDR	0x0
+ #define CFG_SH_ETHER_PHY_MODE	PHY_INTERFACE_MODE_RGMII_ID
+-#define CFG_SH_ETHER_CACHE_WRITEBACK
+-#define CFG_SH_ETHER_CACHE_INVALIDATE
+-#define CFG_SH_ETHER_ALIGNE_SIZE	64
+ 
+ /* Board Clock */
+ /* XTAL_CLK : 33.33MHz */
 -- 
 2.47.2
 
