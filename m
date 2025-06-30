@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B878AC8302D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 18:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B10DBC83029
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 18:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3F2481D6A;
-	Mon, 30 Jun 2025 20:52:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5292E82EC6;
+	Mon, 30 Jun 2025 20:53:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nSWE2Q5F";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="USCR4i3A";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VDLclz8z";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RnCpXyrx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B3A581D6A; Mon, 30 Jun 2025 20:52:03 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id C8CBA82EA2; Mon, 30 Jun 2025 20:53:08 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C38882EB8
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:51:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C4E082EC6
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:52:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bWFd63GgVz9t74;
- Mon, 30 Jun 2025 20:51:54 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bWFfF39kfz9tPp;
+ Mon, 30 Jun 2025 20:52:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751309514;
+ s=mail20150812; t=1751309573;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TvrLz5tteZK7xEFMEU81QMwNrYSsitQKdxhU30tsHSI=;
- b=nSWE2Q5FOzA4+r3Z+eOxjqJ95eRriGIpL3GCv5a8W70DIaUXWaFIEMkADgZic+RjpyxUJk
- 1St2KUhlDw454h/6xxemdcidUt4e6bPnlQkgPZk+oOJd1fax0LQ2CRooouofobWpfrJUyc
- Tv51FhH2jkU8chFsvyVbVYZ61nJVv7k8xYYtSBThYRAEs/IjE7V4pNCeZFA3GCWm9Igiwa
- GYc+wNTAv79Bpkjb5MJZIuvjJWli6v8R007saoZUnLIhCTDrMjz0bP95pB45e+QR4uCxe6
- X6tKnC9CsK4gyJCcIicBbsvlBnVJK9iCbLQRu3es7nVBhTnRY2VTYcYkbBIPxg==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Es8c9xYc14o4HsX9Uiu+f0056FQcydz6i6/D1hvWti8=;
+ b=VDLclz8zK74AdSmTFddvNMB7r0BWeRHekjrg2izqmomUUzjPujK/m1chpWUGel7YZ64we8
+ h3z9rYmmyAoS1rpOheJfaVwVZDrjElU1+C1pZTjulk3/owR8vvvr4xEOZiMZWo4w0qTF46
+ y8WKRR6fNxY4bQvUSOcqnv3n5mXWOi6Cjxbf1queW9WsvvfDMrr133idyLI1FBleX3UN8u
+ +oobYza4lZpnW/g3U8YHpUSklCcVQ4aXtVG+gutxugOFRksHtDvt6Kzdw8w5zi2uSv1lZP
+ gTSVbk7ZHLq/we+6gvLNDLoR3TE5xBTU69/DXANRLcT9JEq4B84CDi/tacSkdA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751309512;
+ s=mail20150812; t=1751309571;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TvrLz5tteZK7xEFMEU81QMwNrYSsitQKdxhU30tsHSI=;
- b=USCR4i3AZW4zWuBPO5H6u/t0EdmFP2/4HBF1j57T3y96t7BVfS0wbR1MGmpQq/4ySR5RSX
- xGq0Oq9epobvGuxn8RL9DmLn1mO86y4Tzg+5xMWNqHCw4xwvtpoR4F1Q7HZnHp6A97WGYC
- j/6zUmnGP86/eFYoVdjG7GQ0P2ZzoiVtkd5B6pgtjlmZAKj7tVly6qjkBqobHjoCSItcUO
- LdHBfz7/UY8vapygHRb0hdAMfceww6OdKmucGftp8EgdAdYLny0Vaf+AaTfKCezkcKYxlb
- lmI98elJaf54uZoF7EvZmfPh9aD4z2v7trZr3V2IDhMD5xlIX1Sovu78RRxokw==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Es8c9xYc14o4HsX9Uiu+f0056FQcydz6i6/D1hvWti8=;
+ b=RnCpXyrxkw/A03xfb+/aTxDv/WTcDG7dLOusdlIlujD0rGQqYLRcA4rri2Ipjv/mP8K0VR
+ m1lKg3JzQtRRl0o2ZPzNh22OtS9v+85Dh4UUIO5xz9AnYviOMyp3TTUQPfZEKywSTArWIN
+ b6hLbjRixxTKbcMLt/maQgLLBc94mQ/DNSxA9rya+OtZy5bPJfIjHlQCR7qHaMe0Q+7As1
+ TaI+I0+byLDnRh+hhnwUCBXsp1kmr/eoADkCDnggjwIqmTBgAoLDZJDIGtpnkHwj6nQ8h0
+ 5ogI/j2YKjtgkzmA5Uf6sHjAX3lPrHmGVPO21jF2xlhN/kaZ7kOPcblTqWmk0A==
 To: u-boot@lists.denx.de
 Cc: damm@opensource.se, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 8/8] arm: renesas: configs: Drop deprecated comments
-Date: Mon, 30 Jun 2025 20:51:17 +0200
-Message-ID: <20250630185124.1099147-8-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250630185124.1099147-1-marek.vasut+renesas@mailbox.org>
-References: <20250630185124.1099147-1-marek.vasut+renesas@mailbox.org>
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ARM: renesas: Split common RZ/A1 and GR-PEACH defconfigs
+Date: Mon, 30 Jun 2025 20:52:37 +0200
+Message-ID: <20250630185238.1099287-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 555420fb30e9c6a9cd8
-X-MBO-RS-META: q9gwfuysurku381jacpzp63okwk9y1q4
+X-MBO-RS-ID: ca6a99384f69f947d68
+X-MBO-RS-META: 9x4fxdta75di36p9sykdiejdcxndqrg5
+X-Rspamd-Queue-Id: 4bWFfF39kfz9tPp
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,221 +85,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove various deprecated code comments, no functional change.
+Split the RZ/A1 GR-PEACH defconfig into board-specific defconfig
+and common RZ/A1 SoC defconfig. This is a preparatory patch for
+new RZ/A1 boards, no functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>
-Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
+Cc: Magnus Damm <damm@opensource.se>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- include/configs/alt.h     | 2 --
- include/configs/blanche.h | 4 ----
- include/configs/condor.h  | 5 -----
- include/configs/ebisu.h   | 2 --
- include/configs/falcon.h  | 3 ---
- include/configs/gose.h    | 2 --
- include/configs/grpeach.h | 4 ----
- include/configs/koelsch.h | 4 ----
- include/configs/lager.h   | 4 ----
- include/configs/porter.h  | 4 ----
- include/configs/silk.h    | 4 ----
- include/configs/stout.h   | 4 ----
- include/configs/v3hsk.h   | 5 -----
- 13 files changed, 47 deletions(-)
+ configs/grpeach_defconfig   | 71 ++++++-------------------------------
+ configs/renesas_rza1.config | 57 +++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+), 61 deletions(-)
+ create mode 100644 configs/renesas_rza1.config
 
-diff --git a/include/configs/alt.h b/include/configs/alt.h
-index dfce0b3f4c8..4c5d2de2bdf 100644
---- a/include/configs/alt.h
-+++ b/include/configs/alt.h
-@@ -20,8 +20,6 @@
- #define RCAR_GEN2_SDRAM_SIZE		(1024u * 1024 * 1024)
- #define RCAR_GEN2_UBOOT_SDRAM_SIZE	(512 * 1024 * 1024)
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"	\
- 	"usb_pgood_delay=2000\0"
-diff --git a/include/configs/blanche.h b/include/configs/blanche.h
-index d4e0f677e67..46521aa16bf 100644
---- a/include/configs/blanche.h
-+++ b/include/configs/blanche.h
-@@ -29,8 +29,4 @@
- #define CFG_SYS_FLASH_BANKS_SIZES	{ (CFG_SYS_FLASH_SIZE) }
- #endif
- 
--/* Board Clock */
--
--/* ENV setting */
--
- #endif	/* __BLANCHE_H */
-diff --git a/include/configs/condor.h b/include/configs/condor.h
-index 0fb790f2413..b340800cc11 100644
---- a/include/configs/condor.h
-+++ b/include/configs/condor.h
-@@ -11,9 +11,4 @@
- 
- #include "rcar-gen3-common.h"
- 
--/* Environment compatibility */
--
--/* Board Clock */
--/* XTAL_CLK : 33.33MHz */
--
- #endif /* __CONDOR_H */
-diff --git a/include/configs/ebisu.h b/include/configs/ebisu.h
-index ad5944230a6..707e7c28d55 100644
---- a/include/configs/ebisu.h
-+++ b/include/configs/ebisu.h
-@@ -9,8 +9,6 @@
- #ifndef __EBISU_H
- #define __EBISU_H
- 
--#undef DEBUG
--
- #include "rcar-gen3-common.h"
- 
- /* Environment in eMMC, at the end of 2nd "boot sector" */
-diff --git a/include/configs/falcon.h b/include/configs/falcon.h
-index 0b62ff9fbe1..e1cace73550 100644
---- a/include/configs/falcon.h
-+++ b/include/configs/falcon.h
-@@ -11,7 +11,4 @@
- 
- #include "rcar-gen4-common.h"
- 
--/* Board Clock */
--/* XTAL_CLK : 16.66MHz */
--
- #endif /* __FALCON_H */
-diff --git a/include/configs/gose.h b/include/configs/gose.h
-index abd13df964d..4a5954af76f 100644
---- a/include/configs/gose.h
-+++ b/include/configs/gose.h
-@@ -19,8 +19,6 @@
- #define RCAR_GEN2_SDRAM_SIZE		(1048u * 1024 * 1024)
- #define RCAR_GEN2_UBOOT_SDRAM_SIZE	(512u * 1024 * 1024)
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"
- 
-diff --git a/include/configs/grpeach.h b/include/configs/grpeach.h
-index 1961b4416dd..e4564b67a79 100644
---- a/include/configs/grpeach.h
-+++ b/include/configs/grpeach.h
-@@ -8,10 +8,6 @@
- #ifndef __GRPEACH_H
- #define __GRPEACH_H
- 
--/* Board Clock , P1 clock frequency (XTAL=13.33MHz) */
--
--/* Miscellaneous */
--
- /* Internal RAM Size (RZ/A1=3M, RZ/A1M=5M, RZ/A1H=10M) */
- #define CFG_SYS_SDRAM_BASE		0x20000000
- #define CFG_SYS_SDRAM_SIZE		(10 * 1024 * 1024)
-diff --git a/include/configs/koelsch.h b/include/configs/koelsch.h
-index 16c9e09a17f..c2713b77e0a 100644
---- a/include/configs/koelsch.h
-+++ b/include/configs/koelsch.h
-@@ -19,11 +19,7 @@
- #define RCAR_GEN2_SDRAM_SIZE		(2048u * 1024 * 1024)
- #define RCAR_GEN2_UBOOT_SDRAM_SIZE	(512 * 1024 * 1024)
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"
- 
--/* SPL support */
--
- #endif	/* __KOELSCH_H */
-diff --git a/include/configs/lager.h b/include/configs/lager.h
-index fbdc125d67b..13f327fabf2 100644
---- a/include/configs/lager.h
-+++ b/include/configs/lager.h
-@@ -20,11 +20,7 @@
- #define RCAR_GEN2_SDRAM_SIZE		(2048u * 1024 * 1024)
- #define RCAR_GEN2_UBOOT_SDRAM_SIZE	(512 * 1024 * 1024)
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"
- 
--/* SPL support */
--
- #endif	/* __LAGER_H */
-diff --git a/include/configs/porter.h b/include/configs/porter.h
-index c74ae3a42d9..4612845db19 100644
---- a/include/configs/porter.h
-+++ b/include/configs/porter.h
-@@ -21,11 +21,7 @@
- #define RCAR_GEN2_SDRAM_SIZE		(2048u * 1024 * 1024)
- #define RCAR_GEN2_UBOOT_SDRAM_SIZE	(1024u * 1024 * 1024)
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"
- 
--/* SPL support */
--
- #endif /* __PORTER_H */
-diff --git a/include/configs/silk.h b/include/configs/silk.h
-index bb59e94dc47..09ef2a848bd 100644
---- a/include/configs/silk.h
-+++ b/include/configs/silk.h
-@@ -21,11 +21,7 @@
- #define RCAR_GEN2_SDRAM_SIZE		(1024u * 1024 * 1024)
- #define RCAR_GEN2_UBOOT_SDRAM_SIZE	(512 * 1024 * 1024)
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"
- 
--/* SPL support */
--
- #endif /* __SILK_H */
-diff --git a/include/configs/stout.h b/include/configs/stout.h
-index dbb5c63172d..f98ebb324f3 100644
---- a/include/configs/stout.h
-+++ b/include/configs/stout.h
-@@ -25,11 +25,7 @@
- /* SCIF */
- #define CFG_SCIF_A
- 
--/* Board Clock */
--
- #define CFG_EXTRA_ENV_SETTINGS	\
- 	"bootm_size=0x10000000\0"
- 
--/* SPL support */
--
- #endif	/* __STOUT_H */
-diff --git a/include/configs/v3hsk.h b/include/configs/v3hsk.h
-index 83e5998e7ae..3298e627e53 100644
---- a/include/configs/v3hsk.h
-+++ b/include/configs/v3hsk.h
-@@ -12,9 +12,4 @@
- 
- #include "rcar-gen3-common.h"
- 
--/* Environment compatibility */
--
--/* Board Clock */
--/* XTAL_CLK : 33.33MHz */
--
- #endif /* __V3HSK_H */
+diff --git a/configs/grpeach_defconfig b/configs/grpeach_defconfig
+index 0f141b6f0a2..110af10860b 100644
+--- a/configs/grpeach_defconfig
++++ b/configs/grpeach_defconfig
+@@ -1,69 +1,18 @@
++#include <configs/renesas_rza1.config>
++
+ CONFIG_ARM=y
+-CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x18000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SYS_MALLOC_F_LEN=0x400
+-CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20900000
+-CONFIG_ENV_SIZE=0x10000
+-CONFIG_ENV_OFFSET=0x80000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="renesas/r7s72100-gr-peach"
+-CONFIG_RZA1=y
+-CONFIG_OF_LIBFDT_OVERLAY=y
+-CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_SYS_LOAD_ADDR=0x20400000
+-CONFIG_SYS_CLK_FREQ=66666666
+-# CONFIG_EFI_LOADER is not set
+-CONFIG_BOOTDELAY=3
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="ignore_loglevel"
+-CONFIG_SYS_CBSIZE=256
+-CONFIG_SYS_PBSIZE=256
+-# CONFIG_DISPLAY_CPUINFO is not set
+-# CONFIG_BOARD_EARLY_INIT_F is not set
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_CMD_ELF is not set
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_SNTP=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-CONFIG_MAC_PARTITION=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
++CONFIG_TARGET_GRPEACH=y
++
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_DM_SPI_FLASH=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=50000000
++CONFIG_ENV_OFFSET=0x80000
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_RZA1_GPIO=y
+-CONFIG_LED=y
+-CONFIG_LED_GPIO=y
+-# CONFIG_MMC is not set
++CONFIG_ENV_SECT_SIZE=0x10000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_SPI_MAX_HZ=50000000
+ CONFIG_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH_MACRONIX=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_BITBANGMII=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_DM_ETH_PHY=y
+-CONFIG_SH_ETHER=y
+-CONFIG_PINCTRL=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_SCIF_CONSOLE=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_RENESAS_RPC_SPI=y
+-CONFIG_TIMER=y
+-CONFIG_RENESAS_OSTM_TIMER=y
+-CONFIG_USB=y
+-CONFIG_USB_R8A66597_HCD=y
+-CONFIG_USB_STORAGE=y
+diff --git a/configs/renesas_rza1.config b/configs/renesas_rza1.config
+new file mode 100644
+index 00000000000..c797288474f
+--- /dev/null
++++ b/configs/renesas_rza1.config
+@@ -0,0 +1,57 @@
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_SYS_MALLOC_LEN=0x100000
++CONFIG_SYS_MALLOC_F_LEN=0x400
++# CONFIG_BOARD_EARLY_INIT_F is not set
++# CONFIG_CMD_ELF is not set
++# CONFIG_DISPLAY_CPUINFO is not set
++# CONFIG_EFI_LOADER is not set
++# CONFIG_MMC is not set
++CONFIG_BITBANGMII=y
++CONFIG_BOOTARGS="ignore_loglevel"
++CONFIG_BOOTDELAY=3
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_SNTP=y
++CONFIG_CMD_USB=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20900000
++CONFIG_DM_ETH_PHY=y
++CONFIG_DM_GPIO=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_SPI=y
++CONFIG_ENV_OFFSET=0x80000
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_SIZE=0x10000
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_HUSH_PARSER=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MAC_PARTITION=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_OF_CONTROL=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_PHY_SMSC=y
++CONFIG_PINCTRL=y
++CONFIG_RENESAS_OSTM_TIMER=y
++CONFIG_RENESAS_RPC_SPI=y
++CONFIG_RZA1=y
++CONFIG_RZA1_GPIO=y
++CONFIG_SCIF_CONSOLE=y
++CONFIG_SH_ETHER=y
++CONFIG_SPI=y
++CONFIG_SYS_CBSIZE=256
++CONFIG_SYS_CLK_FREQ=66666666
++CONFIG_SYS_LOAD_ADDR=0x20400000
++CONFIG_SYS_MONITOR_LEN=524288
++CONFIG_SYS_PBSIZE=256
++CONFIG_TIMER=y
++CONFIG_USB=y
++CONFIG_USB_R8A66597_HCD=y
++CONFIG_USB_STORAGE=y
++CONFIG_USE_BOOTARGS=y
 -- 
 2.47.2
 
