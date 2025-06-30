@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A51C7EE39
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37373C7EE30
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:12:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32C7282ED0;
-	Mon, 30 Jun 2025 02:11:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E8D682FD6;
+	Mon, 30 Jun 2025 02:11:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nnbthAmB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NcE3dA+H";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ad8bfH1Y";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ga6pcjL2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36AA381FEE; Mon, 30 Jun 2025 02:11:18 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id CAF5282F54; Mon, 30 Jun 2025 02:11:20 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C52C282F46
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23A5682E86
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,55 +31,54 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4bVmlz47Qhz9sTJ;
- Mon, 30 Jun 2025 02:11:11 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4bVmm26d5Mz9sp3;
+ Mon, 30 Jun 2025 02:11:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242271;
+ s=mail20150812; t=1751242275;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CAIA9r/8TbaxhgZXLTlk0GhYEF0XRmu5tfyglYnvKjk=;
- b=nnbthAmBf4g0Q75JyM4zCmTwQcNLVxv44AQI1W/Y7m9c6/hb8lczokbueH/eyZDjBC7IQr
- pypdMR4ImFxNOKPDs/76WJTO2pKZVskYnQreeAhgRK9TLhTDc8A4nGfYedaBWGIs/2GeSY
- /NLs4YCheh/FwrUYI7N+kTNheo2VWVElAs5lF2Nyu6xLbOTeyVhvQrlDlyoc96xFGdoldf
- IjAHQqfHvzr0bt7PmVvScXXaBTdzPiF/YuE7uB9Zee1aFMBMC0QKkr+7HdwvNWFqOKSo8T
- RiBWbkbSIz5sb+44F9+1zCVJL+EOmG7tynLPenhMwJLXfOVxtugmjMaWbynn6g==
+ bh=m/32zFS5KP7KhnsjXM+zBQ3K+GNPkuC6zOpPSsUbxL0=;
+ b=Ad8bfH1YvountpzhSkBQ76nBmrv9xoqf1CrO/Q18Wq6RtKxGf2wkTEla5snkZvME8CmVja
+ Rjtgcqytmd5FEDuRsxohB+axIO6CRSLOV8LLXR9TDeL54ag9G40ideD6wCK267E99aHjjH
+ K3hv8Y0L9Ms450Q6c5xz6zzw5DsKUFVCaItLoUX4v+V4TzNanfihK09BMKo7Rf3s1Qj80q
+ E3SaY11YAh7TgJxMYffaf6EeCz2Hxi9EHOZzhxRxjqU74W4Bg7+gWNc4h/l88/w098b6Ti
+ IZzWOad1EgMmNorPLxwr0YijxelnaD0L2p56X8/LBWvJssNOGgiOWLgi9h+snQ==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242269;
+ s=mail20150812; t=1751242273;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CAIA9r/8TbaxhgZXLTlk0GhYEF0XRmu5tfyglYnvKjk=;
- b=NcE3dA+HSL2mZ2WQ/6Yk83ORnLcSbLFPpeMiLg/SHXZdpTkCdCYn+Egjg4VKXAp03ADmj0
- ziVo6BfQL0dfzTRvmFjR0XoCINLBcpjBcviF0MFSeM+YyBCXWQjvQz71j7wSAWbzJlshCr
- oMQYn0mR0TCojFErEmL5X5j6XU6usTJlbUSa47Et2jfnNyO8Y8u25NPlTlF1Jjvg4YSjpA
- nwxS2WqR+XE+z9z3ZxW+0rmLvVnb4tfcm7tFDjK5Htj3SGmgPXGYwBhxwNF8QZLiVR0rxn
- HFVaTYJMTBHS6Jv5HfHCd6IiXEvWsRmDfLJoatZRAzoDaEOHAslSwrtFuVlZiw==
+ bh=m/32zFS5KP7KhnsjXM+zBQ3K+GNPkuC6zOpPSsUbxL0=;
+ b=ga6pcjL26yOx8FOM5d0VWZEzw0qWs8MOsHvzYkcRg8+7OFRg/5FiVXGSOtCvpUyDiqBznf
+ p43m5eAKmpMk7baItCSWfEcE4GfQNOypEeEWHHNdtaP/dw5FOVpN0Jzixhag/fKJRsbFv4
+ XkfuFbQ8COx3A8+kgXzo50E0YyPFa0r4evPxYfgJII05bBm1aCwwBSaB42d9OEZTsmPugi
+ fngPLXiDygr8vovLH0+t9fHnpRp8phZ5mnGsd1l2ajb74J7RAiA8pub2X1JPDa1XMPhNjp
+ Ql9FN563uuqUuEOOqW66Y0/7nEP0vWoV+oiz3kL8kiH2QGfPTU9vAK8Ue+Wjdg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Cheick Traore <cheick.traore@foss.st.com>,
  Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  Pascal Zimmermann <pzimmermann@dh-electronics.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 03/10] ARM: stm32: Limit early cache enablement in SPL to
- STM32MP15xx
-Date: Mon, 30 Jun 2025 02:10:29 +0200
-Message-ID: <20250630001053.952342-3-marek.vasut@mailbox.org>
+Subject: [PATCH v2 05/10] ARM: stm32: Add STM32MP13xx debug UART initialization
+Date: Mon, 30 Jun 2025 02:10:31 +0200
+Message-ID: <20250630001053.952342-5-marek.vasut@mailbox.org>
 In-Reply-To: <20250630001053.952342-1-marek.vasut@mailbox.org>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: metzk3a9fnx7masbfeabyeubab1gugrp
-X-MBO-RS-ID: ffcfa1b79bb6b4ec111
+X-MBO-RS-ID: 2a07c094a6f12c85eda
+X-MBO-RS-META: bx34a7h6k7nb4hspyjixkgxyjk4agmbh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,12 +95,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The STM32MP13xx SRAM size is half that the SRAM size on STM32MP15xx,
-disable early dcache start on STM32MP13xx as the TLB itself takes
-about a quarter of the SPL size. The dcache will be enabled later,
-once DRAM is available and TLB can be placed in DRAM.
+Add default STM32MP13xx debug UART initialization. This is similar
+to STM32MP15xx debug UART initialization, except the RCC registers
+are at different offsets and the UART pinmux pins are different.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
 Cc: Cheick Traore <cheick.traore@foss.st.com>
@@ -117,66 +117,51 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
-V2: Add RB from Patrice
+V2: Add RB from Patrice and Patrick
 ---
- arch/arm/mach-stm32mp/stm32mp1/cpu.c | 9 ++++++---
- arch/arm/mach-stm32mp/stm32mp1/spl.c | 3 ++-
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ board/st/stm32mp1/debug_uart.c | 21 ++++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index 8c09d91de05..e0c6f8ba937 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -28,7 +28,9 @@
-  * early TLB into the .data section so that it not get cleared
-  * with 16kB allignment (see TTBR0_BASE_ADDR_MASK)
-  */
-+#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
- u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
+diff --git a/board/st/stm32mp1/debug_uart.c b/board/st/stm32mp1/debug_uart.c
+index 24e3f9f2201..4c2149e0480 100644
+--- a/board/st/stm32mp1/debug_uart.c
++++ b/board/st/stm32mp1/debug_uart.c
+@@ -9,17 +9,32 @@
+ #include <asm/arch/stm32.h>
+ #include <linux/bitops.h>
+ 
++#if IS_ENABLED(CONFIG_STM32MP13X)
++#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0700)
++#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0768)
++#elif IS_ENABLED(CONFIG_STM32MP15X)
+ #define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
+ #define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
 +#endif
  
- u32 get_bootmode(void)
++#define GPIOA_BASE 0x50002000
+ #define GPIOG_BASE 0x50008000
+ 
+ void board_debug_uart_init(void)
  {
-@@ -95,18 +97,19 @@ void dram_bank_mmu_setup(int bank)
-  */
- static void early_enable_caches(void)
- {
-+#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
- 	/* I-cache is already enabled in start.S: cpu_init_cp15 */
--
- 	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
- 		return;
+-	if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE) {
+-		/* UART4 clock enable */
+-		setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
++	if (CONFIG_DEBUG_UART_BASE != STM32_UART4_BASE)
++		return;
  
- #if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
--		gd->arch.tlb_size = PGTABLE_SIZE;
--		gd->arch.tlb_addr = (unsigned long)&early_tlb;
-+	gd->arch.tlb_size = PGTABLE_SIZE;
-+	gd->arch.tlb_addr = (unsigned long)&early_tlb;
- #endif
- 
- 	/* enable MMU (default configuration) */
- 	dcache_enable();
-+#endif
- }
- 
- /*
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-index 9c4fafbf478..e63bdaaf42f 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-@@ -220,10 +220,11 @@ void board_init_f(ulong dummy)
- 	 * activate cache on DDR only when DDR is fully initialized
- 	 * to avoid speculative access and issue in get_ram_size()
- 	 */
--	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && !IS_ENABLED(CONFIG_STM32MP13X)) {
- 		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
- 						CONFIG_DDR_CACHEABLE_SIZE,
- 						DCACHE_DEFAULT_OPTION);
-+	}
- }
- 
- void spl_board_prepare_for_boot(void)
++	/* UART4 clock enable */
++	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
++
++	if (IS_ENABLED(CONFIG_STM32MP13X)) {
++		/* GPIOA clock enable */
++		writel(BIT(0), RCC_MP_AHB4ENSETR);
++		/* GPIO configuration for DH boards: Uart4 TX = A9 */
++		writel(0xfffbffff, GPIOA_BASE + 0x00);
++		writel(0x00000080, GPIOA_BASE + 0x24);
++	} else if (IS_ENABLED(CONFIG_STM32MP15X)) {
+ 		/* GPIOG clock enable */
+ 		writel(BIT(6), RCC_MP_AHB4ENSETR);
+ 		/* GPIO configuration for ST boards: Uart4 TX = G11 */
 -- 
 2.47.2
 
