@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 999A3C7EE39
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 08:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA92C7EE39
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 08:03:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C341D81D6A;
-	Mon, 30 Jun 2025 10:02:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1776D82D4E;
+	Mon, 30 Jun 2025 10:02:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="che2Ar94";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="s+BfA2VN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 736EB82E35; Mon, 30 Jun 2025 09:57:09 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 8A26E80B9B; Mon, 30 Jun 2025 09:57:09 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30C2380B9B
+ by phobos.denx.de (Postfix) with ESMTPS id 3DD6A81D6A
  for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DB5525C4CC8;
+ by sea.source.kernel.org (Postfix) with ESMTP id B543146262;
  Mon, 30 Jun 2025 07:57:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 879D2C4CEEB;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 93575C4AF09;
  Mon, 30 Jun 2025 07:57:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1751270225;
- bh=BVzrfezD0705MIrN9Y9gAZZbzR6tHMdw0KX0fwDeSXk=;
+ bh=CB39LkbvQ/28bS4+wqOlVCkKgFzBnLZ94WNtbp+jiTk=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=che2Ar944PaWvPHdaGkPKk2RD11/ydVzJgaD6PG6Y7VPCaZ6hYVP2AkUp39RQsqvL
- XthdLazvpi76DdkVwoUHg9vZz5j955eaN0Q96j6NKeXZujkAtPbG+cb2gRYU0k79Xd
- H4cc5ucYosL8tOQkdso6HCypXUG4c2TCqG6Z+r1gQ9K0yvcqdn1Ftm298hU/pIEJzW
- y2uOw4m9OZyF2ARXofcQHQCeyjNZ07KcXCcELc7Kfe5L3aYLARBCQNMmrjx/Kzg14A
- XzMeboW+74K3Jvmpd2NAX5VVxipykhWDanmh23yoA2chk7KhlsEYn7KtTbB31CwHBh
- 3ZzX4OrJyoTxg==
+ b=s+BfA2VNyDGgTWF2hWsw1pydJOGyvS3CFowGkd9McgHhhAFFc4yfvTtM+v5joqelZ
+ Nr9Aso6sL+sE3WZeewR+4tgqtZo9wSGB14zgat5by+v4nsRi3k4YYjQPVMnwYuFYk2
+ bntmXzi46z3JeeSvpmY0IUp76sXu7IUkfCIGjhrjIA7j06/MGobsiHHbfD9W5zAA3N
+ qmT9pvtv2o3lkyPmWdOsUnwnfdgzl8LXJH5RdScC4JsYnSzIg8DDeHIcbZ11+ZK9j/
+ Oms+XYygQQ7LUZBBz8N109WZq7Q59gBKK9AIJtuNiwuTNTK6+zXWPT/3ssxjT0vA6v
+ EUQbl4nEL+2ww==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 75A78C83000;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 846A0C7EE39;
  Mon, 30 Jun 2025 07:57:05 +0000 (UTC)
 From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
-Date: Mon, 30 Jun 2025 15:56:50 +0800
-Subject: [PATCH v4 1/6] image-android: Prepend/postpend default bootargs
- value with given bootcmd
+Date: Mon, 30 Jun 2025 15:56:51 +0800
+Subject: [PATCH v4 2/6] boot/image-android.c: Split
+ android_image_get_kernel into two functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250630-sc7180-android-boot-v4-1-24cdb50e860f@gmail.com>
+Message-Id: <20250630-sc7180-android-boot-v4-2-24cdb50e860f@gmail.com>
 References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
 In-Reply-To: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -62,11 +62,11 @@ To: Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, gchan9527@gmail.com
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1751270223; l=3055;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1751270223; l=6043;
  i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
- bh=OYcDlxA0LbIdCmI6cD9sVVUKdg/SXtfmjMU9BuWIyLU=;
- b=/On2+qSg4eUFhSXFpKipBYXYaVek/8QKf0QWs1jI49rYTF0TcjCEa+/WeDJXKBfKunVdZIS6l
- AekCID/iG9jDbDKXZbP6C+siorCvFDg0tj9TSGcP63GjAQVOo4wle+V
+ bh=W3MyHaLKar4QEjVTWpXGZUn759PZQPuZ+FTyox686Kw=;
+ b=A7+wYgu36JSVZ1ZRxqY2W9BYaSbrBpMh95k6kEVvs6ApsaouzBbFioYQFvbV6UtA5CO+QzkDd
+ Udfvzfl31k5BYhGaih2QLnpalyYn4Ms1sJiQT8EJFWsRO0df+AHIgez
 X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
  pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
 X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
@@ -92,87 +92,179 @@ X-Virus-Status: Clean
 
 From: George Chan <gchan9527@gmail.com>
 
-By default, the boot.img's cmdline are appended to the bootargs
-environment.
-If we take a cmdline example of:
-* androidboot.hardware=warm (in U-Boot environment)
-* androidboot.hardware=chilly (in boot.img's cmdline)
+Since fastboot->bootm glue layer also need to cater with bootargs
+environment, so move common logic from android_image_get_kernel into
+a new function to avoid some degree of code duplication.
 
-The resulting commandline will be:
-androidboot.hardware=warm [...] androidboot.hardware=chilly.
+This new function is android_image_modify_bootargs_env to specially
+cater bootargs env value with boot image provided cmdline.
 
-Because of this, the U-Boot environment always take priority on the
-boot.img.
-
-If we want to have a single U-Boot binary that support multiple
-board variants, we can't override androidboot.hardware via the boot.img.
-
-Add a new Kconfig option, ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS that
-reverse the logic.
-
-Above detail is suggested from Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Signed-off-by: George Chan <gchan9527@gmail.com>
 ---
- boot/Kconfig         |  9 +++++++++
- boot/image-android.c | 10 ++++++++--
- 2 files changed, 17 insertions(+), 2 deletions(-)
+ boot/image-android.c | 103 ++++++++++++++++++++++++++++++++-------------------
+ include/image.h      |  12 ++++++
+ 2 files changed, 76 insertions(+), 39 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index a671d78e570..bcc5f886a01 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -22,6 +22,15 @@ config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
- 	  addr by repacking the boot.img (mainly due to AVB signature mismatch),
- 	  we need a way to use kernel_addr_r and ramdisk_addr_r.
- 
-+config ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS
-+	bool "Android Boot Image boot cmd param will prepend to env bootargs"
-+	help
-+	  This controls how Android boot image embedded cmdline integrates
-+	  with U-Boot bootargs environment.
-+
-+	  By enabling this, the boot.img's cmdline is prepended to the bootargs
-+	  environment. By default, when disabled, the cmdline is appended.
-+
- config TIMESTAMP
- 	bool "Show image date and time when displaying image information"
- 	default y if CMD_DATE
 diff --git a/boot/image-android.c b/boot/image-android.c
-index 14cf611cee5..d78e8a4148a 100644
+index d78e8a4148a..5e16564a714 100644
 --- a/boot/image-android.c
 +++ b/boot/image-android.c
-@@ -348,14 +348,14 @@ int android_image_get_kernel(const void *hdr,
- 		len += strlen(img_data.kcmdline_extra) + (len ? 1 : 0); /* +1 for extra space */
- 	}
+@@ -285,6 +285,65 @@ static ulong android_image_get_kernel_addr(struct andr_image_data *img_data,
+ 	return img_data->kernel_addr;
+ }
  
--	char *newbootargs = malloc(len + 1); /* +1 for the '\0' */
-+	char *newbootargs = malloc(len + 2); /* +2 for 2x '\0' */
- 	if (!newbootargs) {
- 		puts("Error: malloc in android_image_get_kernel failed!\n");
- 		return -ENOMEM;
- 	}
- 	*newbootargs = '\0'; /* set to Null in case no components below are present */
- 
--	if (bootargs)
++/**
++ * android_image_modify_bootargs_env() - helper to set new bootargs
++ *
++ * set boot based on provided cmdline and u-boot pre-set value
++ *
++ * @cmd: usually contain kernel boot command line string
++ * @cmd_extra: usually contain kernel boot command line string from vendor img
++ * return: 0, success; otherwise fail in various problem.
++*/
++int android_image_modify_bootargs_env(const char *cmd, const char *cmd_extra) {
++	char *bootargs = env_get("bootargs");
++	char *newbootargs;
++	int len = 0;
++
++	if (bootargs)
++		len += strlen(bootargs);
++
++	if (cmd && *cmd)
++		len += strlen(cmd) + (len ? 1 : 0); /* +1 for extra space */
++
++	if (cmd_extra && *cmd_extra)
++		len += strlen(cmd_extra) + (len ? 1 : 0); /* +1 for extra space */
++
++	newbootargs = malloc(len + 2); /* +2 for 2x '\0' */
++
++	if (!newbootargs) {
++		puts("Error: malloc in android_image_get_kernel failed!\n");
++		return -ENOMEM;
++	}
++
++	*newbootargs = '\0'; /* set to Null in case no components below are present */
++
 +	if (bootargs && !IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS))
- 		strcpy(newbootargs, bootargs);
- 
- 	if (img_data.kcmdline && *img_data.kcmdline) {
-@@ -370,6 +370,12 @@ int android_image_get_kernel(const void *hdr,
- 		strcat(newbootargs, img_data.kcmdline_extra);
- 	}
- 
++		strcpy(newbootargs, bootargs);
++
++	if (cmd && *cmd) {
++		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
++			strcat(newbootargs, " ");
++		strcat(newbootargs, cmd);
++	}
++
++	if (cmd_extra && *cmd_extra) {
++		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
++			strcat(newbootargs, " ");
++		strcat(newbootargs, cmd_extra);
++	}
++
 +	if (bootargs && IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS)) {
 +		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
 +			strcat(newbootargs, " ");
 +		strcat(newbootargs, bootargs);
 +	}
 +
- 	env_set("bootargs", newbootargs);
- 	free(newbootargs);
++	env_set("bootargs", newbootargs);
++	free(newbootargs);
++
++	return 0;
++}
++
+ /**
+  * android_image_get_kernel() - processes kernel part of Android boot images
+  * @hdr:	Pointer to boot image header, which is at the start
+@@ -310,6 +369,7 @@ int android_image_get_kernel(const void *hdr,
+ 	ulong kernel_addr;
+ 	const struct legacy_img_hdr *ihdr;
+ 	ulong comp;
++	int ret;
  
+ 	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
+ 		return -EINVAL;
+@@ -330,54 +390,19 @@ int android_image_get_kernel(const void *hdr,
+ 		printf("Android's image name: %s\n", andr_tmp_str);
+ 
+ 	printf("Kernel load addr 0x%08lx size %u KiB\n",
+-	       kernel_addr, DIV_ROUND_UP(img_data.kernel_size, 1024));
+-
+-	int len = 0;
+-	char *bootargs = env_get("bootargs");
+-
+-	if (bootargs)
+-		len += strlen(bootargs);
++		kernel_addr, DIV_ROUND_UP(img_data.kernel_size, 1024));
+ 
+ 	if (img_data.kcmdline && *img_data.kcmdline) {
+ 		printf("Kernel command line: %s\n", img_data.kcmdline);
+-		len += strlen(img_data.kcmdline) + (len ? 1 : 0); /* +1 for extra space */
+ 	}
+ 
+ 	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+ 		printf("Kernel extra command line: %s\n", img_data.kcmdline_extra);
+-		len += strlen(img_data.kcmdline_extra) + (len ? 1 : 0); /* +1 for extra space */
+ 	}
+ 
+-	char *newbootargs = malloc(len + 2); /* +2 for 2x '\0' */
+-	if (!newbootargs) {
+-		puts("Error: malloc in android_image_get_kernel failed!\n");
+-		return -ENOMEM;
+-	}
+-	*newbootargs = '\0'; /* set to Null in case no components below are present */
+-
+-	if (bootargs && !IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS))
+-		strcpy(newbootargs, bootargs);
+-
+-	if (img_data.kcmdline && *img_data.kcmdline) {
+-		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
+-			strcat(newbootargs, " ");
+-		strcat(newbootargs, img_data.kcmdline);
+-	}
+-
+-	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+-		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
+-			strcat(newbootargs, " ");
+-		strcat(newbootargs, img_data.kcmdline_extra);
+-	}
+-
+-	if (bootargs && IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS)) {
+-		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
+-			strcat(newbootargs, " ");
+-		strcat(newbootargs, bootargs);
+-	}
+-
+-	env_set("bootargs", newbootargs);
+-	free(newbootargs);
++	ret = android_image_modify_bootargs_env(img_data.kcmdline, img_data.kcmdline_extra);
++	if (ret)
++		return ret;
+ 
+ 	if (os_data) {
+ 		if (image_get_magic(ihdr) == IH_MAGIC) {
+diff --git a/include/image.h b/include/image.h
+index b695cc39447..11d33ceeb39 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1890,6 +1890,18 @@ bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+ 
+ struct andr_boot_img_hdr_v0;
+ 
++/**
++ * android_image_modify_bootargs_env() - helper to set new bootargs
++ *
++ * set boot based on provided cmdline and u-boot pre-set value
++ *
++ * @cmd: usually contain kernel boot command line string
++ * @cmd_extra: usually contain kernel boot command line string from vendor img
++ * return: 0, success; otherwise fail in various problem.
++*/
++int android_image_modify_bootargs_env(const char *cmd,
++					 const char *cmd_extra);
++
+ /**
+  * android_image_get_kernel() - Processes kernel part of Android boot images
+  *
 
 -- 
 2.43.0
