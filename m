@@ -4,54 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D18ACC8302F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:03:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE6DC83030
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0038981E13;
-	Mon, 30 Jun 2025 14:02:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 82D5E81E13;
+	Mon, 30 Jun 2025 14:18:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 78E7E81FEE; Mon, 30 Jun 2025 14:02:57 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D415280B9B
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 14:02:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 55UC2UPY060074
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 30 Jun 2025 20:02:30 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Jun
- 2025 20:02:30 +0800
-Date: Mon, 30 Jun 2025 20:02:27 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <Eoin.Dickson@microchip.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>,
- <rick@andestech.com>, Yao Zi <ziyao@disroot.org>
-Subject: Re: [PULL] u-boot-riscv/next
-Message-ID: <aGJ803txDE1mbYjj@swlinux02>
-References: <aD6aAdsMpatCgcIn@swlinux02>
- <20250605200506.GF1382132@bill-the-cat> <aET27PdD0VwuzOAB@pie>
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZKveMEww";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2087A81FEE; Mon, 30 Jun 2025 12:01:48 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E274B800C1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 12:01:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rafal.vonau@gmail.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e7569ccf04cso1373945276.0
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 03:01:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751277705; x=1751882505; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=5zKRmF1WjlOLRNNlqpoOztXUrZRMKl349M0tDNzvvlA=;
+ b=ZKveMEwwYzCEsEAlAGGl0S4eWnPsggK55YoGD+YpQBkT85/q2ZW4WAPqbRjnFhfS7L
+ nXfaZf8XuJiYTmbgh6ITOZnpO/vUzIPrXHYKqbB2YazjwO9fb9tuHrrKz5sjErQb2o87
+ 5JMnUmph5ahZq60vNCKPzlB51zpWmu58h/BYa5FFySyQDwnMOhFHduK/wo2RUZOQetkE
+ YYIQ7zWgpj7bTTkYK3puYet1SFdhO7iv18OevYl+yuaG5M4ObE7111UaLRWaRZPFn3Te
+ rPshP0rYMo9QNClaTQxYcrXEl9sz84J+TaAExRZFYy8hX+TJ2HNLJu1K+nJ5DFsomoqX
+ gsmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751277705; x=1751882505;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5zKRmF1WjlOLRNNlqpoOztXUrZRMKl349M0tDNzvvlA=;
+ b=LWNF/Mcv8xLlTROrs1YvSzTf2J+YpdyPzfWlfEJWO8fr+ifAjsLzqU5rzvUTts/v/p
+ dKjIiyus4V19D5LhVZjAZ7q9Ii0A8LItCU74yksZOILYUnpLkyV/y9Xg86+tIKQV6ot1
+ LYhLpDuzau9cTM+57fFTZwSvHWxZO+orlQwLGmVm/VWknQq3tAeb3GG4BIe5XqW6wkhu
+ Cy0yszqWukk2Dl259apbfTWxoQjY6YuFa8Fh2ijapVWLyLC7eonzdypaZh92+I1v21EO
+ C7snvZCzeNUwcdQpPWWsZjVw5pcpaWV7tx6DiRTt6zogE6Sz5QsKJfznyAEoSjxs3jwC
+ BC1g==
+X-Gm-Message-State: AOJu0YyFUJy/3YQYeO+6isIKwFmbQQOol7vuhbCSD9schUJMpWeeVBso
+ l5LmPYFLyUL9CK635BfLaMSdGM+tqxv3rNGQ53rcqIxu36zI/oRsqmtATGzJn6v9qR5wBJA8y5n
+ heORfgDeRNggwzV8/LLulg9QTxnTYXSD9Aw==
+X-Gm-Gg: ASbGncvgAaP34voebH+Tgr6lslTbNfHP3r1QC6QUVf5Rh8bmBy1+KIngvRam/EAvEym
+ oLGZyQoe6hfp2FlR+isVDtcLqPzWrLyv9x2RSD1yPAcMMuaZPJR0f2RrbGfInKPuF7dBYTmXZ/b
+ AtvP/YcIUib75jujSjuPvUzG4wP+LYQLR3yshmwUjKl48=
+X-Google-Smtp-Source: AGHT+IF8kU92TWqxo2aGfFM8nyOFTIrCCslNx+074bSOaHQ3vIBYx8zGEb63ySh7rtu6F4VKS3tdqR0L9f9/oTz6AhI=
+X-Received: by 2002:a05:6902:2989:b0:e84:1c10:5a21 with SMTP id
+ 3f1490d57ef6-e87a7b0dc1cmr10905662276.11.1751277704596; Mon, 30 Jun 2025
+ 03:01:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <aET27PdD0VwuzOAB@pie>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 55UC2UPY060074
+From: Rafal Vonau <rafal.vonau@gmail.com>
+Date: Mon, 30 Jun 2025 12:01:33 +0200
+X-Gm-Features: Ac12FXy9qiN0Zl5uQrVg3Jy8TbiqeIFPSL7iLCCfWyowMVcxgmlfV9NmCUiZH8I
+Message-ID: <CABj3Bj9u_g-J3j2MRV2PPMNn0HhZeF-BaJfQOXR5xek5_fZynw@mail.gmail.com>
+Subject: [PATCH] nand: fix repeated BBT writes due to missing OOB read
+To: u-boot@lists.denx.de
+Content-Type: multipart/mixed; boundary="0000000000007c830b0638c71d9f"
+X-Mailman-Approved-At: Mon, 30 Jun 2025 14:18:06 +0200
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,62 +87,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jun 08, 2025 at 02:37:04AM +0000, Yao Zi wrote:
-> [EXTERNAL MAIL]
-> 
-> On Thu, Jun 05, 2025 at 02:05:06PM -0600, Tom Rini wrote:
-> > On Tue, Jun 03, 2025 at 02:45:21PM +0800, Leo Liang wrote:
-> >
-> > > Hi Tom,
-> > >
-> > > The following changes since commit d45b1d4ac94710f88902adc2173d7930700e2869:
-> > >
-> > >   Merge tag 'u-boot-dfu-next-20250602' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next (2025-06-02 08:43:10 -0600)
-> > >
-> > > are available in the Git repository at:
-> > >
-> > >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
-> > >
-> > > for you to fetch changes up to b911af6d60d3be570469b92df751874dc376336b:
-> > >
-> > >   MAINTAINERS: riscv: cpu: th1520: Assign myself as maintainer (2025-06-03 14:17:46 +0800)
-> > >
-> > > CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/26483
-> > > ----------------------------------------------------------------
-> > > - board: Convert Lichee Pi 4A to use S-Mode proper U-Boot
-> > > - RISC-V: configs: Raise SPL_SYS_MALLOC_SIZE to 8 MiB
-> > > - driver: Add SD card support to the Beagle-V-Fire
-> > > - MAINTAINERS: Add Yao Zi as maintainer for th1520
-> > > ----------------------------------------------------------------
-> >
-> > This introduces a failure to build on microchip_mpfs_icicle currently in
-> > -next.
-> 
-> microchip_mpfs_icicle_defconfig fails to build in u-boot-riscv/next as
-> well. Reverting b73971dea9fed ("spi: coreqspi: add xfer function for
-> PolarFire SoC") fixes it.
-> 
-> Seems the patch doesn't adapt the multiple-cs-capable definition of
-> dm_slave_plat, which was introduced in commit 34da258bb04 ("spi:
-> spi-uclass: Read chipselect and restrict capabilities") in the last
-> year. Thus I doubt whether the patch has been built and tested against a
-> recent version of U-Boot.
-> 
+--0000000000007c830b0638c71d9f
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Eoin,
+During system startup, U-Boot overwrites the Bad Block Table (BBT) on NAND
+flash
+every time because it fails to properly read the existing BBT. This happens
+due
+to missing OOB (Out-Of-Band) reads when checking for the BBT signature.
 
-Your patch ("spi: coreqspi: add xfer function for PolarFire SoC")[1] does not pass CI[2].
+As a result, U-Boot assumes the BBT is invalid or missing and rewrites it on
+every boot, causing unnecessary NAND wear and slower startup.
 
-Could you fix this issue and resend a V3?
+This patch corrects the issue by enabling proper reading of the BBT from the
+OOB area, preventing redundant writes.
 
-Best regards,
-Leo
+Signed-off-by: Rafal Vonau <rafal.vonau@gmail.com>
+---
+drivers/mtd/nand/raw/zynq_nand.c | 14 ++++++++++++++
+1 file changed, 14 insertions(+)
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20250529102112.3544972-3-Eoin.Dickson@microchip.com/
-[2] https://source.denx.de/u-boot/custodians/u-boot-riscv/-/jobs/1155749#L5205
-> 
-> > --
-> > Tom
-> 
-> Regards,
-> Yao Zi
+diff --git a/drivers/mtd/nand/raw/zynq_nand.c
+b/drivers/mtd/nand/raw/zynq_nand.c
+index ca1aff25a52..3adacb1b46c 100644
+--- a/drivers/mtd/nand/raw/zynq_nand.c
++++ b/drivers/mtd/nand/raw/zynq_nand.c
+@@ -522,6 +522,20 @@ static int zynq_nand_read_page_raw_nooob(struct
+mtd_info *mtd,
+               struct nand_chip *chip, u8 *buf, int oob_required, int page)
+{
+       chip->read_buf(mtd, buf, mtd->writesize);
++
++       if (oob_required) {
++               unsigned long data_width = 4;
++               unsigned long data_phase_addr = 0;
++               u8 *p = chip->oob_poi;
++               chip->read_buf(mtd, p, (mtd->oobsize - data_width));
++               p += (mtd->oobsize - data_width);
++
++               data_phase_addr = (unsigned long)chip->IO_ADDR_R;
++               data_phase_addr |= ZYNQ_NAND_CLEAR_CS;
++               chip->IO_ADDR_R = (void __iomem *)data_phase_addr;
++               chip->read_buf(mtd, p, data_width);
++       }
++
+       return 0;
+}
+
+--
+2.20.1
+
+--0000000000007c830b0638c71d9f
+Content-Type: application/x-patch; 
+	name="0001-fix-Fix-for-the-write-of-the-BBT-table-to-the-NAND-a.patch"
+Content-Disposition: attachment; 
+	filename="0001-fix-Fix-for-the-write-of-the-BBT-table-to-the-NAND-a.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_mcixibjv0>
+X-Attachment-Id: f_mcixibjv0
+
+RnJvbSAwYjExYmZiYzJhNTNhMTNjYjg2ZTg1ZWYzZDZkMDRmNGUwNmU0NzA4IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBSYWZhbCBWb25hdSA8cmFmYWwudm9uYXVAZWxmaW4tcGUucGw+
+CkRhdGU6IE1vbiwgMzAgSnVuIDIwMjUgMTA6MjI6MDAgKzAyMDAKU3ViamVjdDogW1BBVENIXSBm
+aXg6IEZpeCBmb3IgdGhlIHdyaXRlIG9mIHRoZSBCQlQgdGFibGUgdG8gdGhlIE5BTkQgYXQgc3lz
+dGVtCiBzdGFydHVwCgpTaWduZWQtb2ZmLWJ5OiBSYWZhbCBWb25hdSA8cmFmYWwudm9uYXVAZWxm
+aW4tcGUucGw+Ci0tLQogZHJpdmVycy9tdGQvbmFuZC9yYXcvenlucV9uYW5kLmMgfCAxNCArKysr
+KysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDE0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQg
+YS9kcml2ZXJzL210ZC9uYW5kL3Jhdy96eW5xX25hbmQuYyBiL2RyaXZlcnMvbXRkL25hbmQvcmF3
+L3p5bnFfbmFuZC5jCmluZGV4IGNhMWFmZjI1YTUyLi4zYWRhY2IxYjQ2YyAxMDA2NDQKLS0tIGEv
+ZHJpdmVycy9tdGQvbmFuZC9yYXcvenlucV9uYW5kLmMKKysrIGIvZHJpdmVycy9tdGQvbmFuZC9y
+YXcvenlucV9uYW5kLmMKQEAgLTUyMiw2ICs1MjIsMjAgQEAgc3RhdGljIGludCB6eW5xX25hbmRf
+cmVhZF9wYWdlX3Jhd19ub29vYihzdHJ1Y3QgbXRkX2luZm8gKm10ZCwKIAkJc3RydWN0IG5hbmRf
+Y2hpcCAqY2hpcCwgdTggKmJ1ZiwgaW50IG9vYl9yZXF1aXJlZCwgaW50IHBhZ2UpCiB7CiAJY2hp
+cC0+cmVhZF9idWYobXRkLCBidWYsIG10ZC0+d3JpdGVzaXplKTsKKworCWlmIChvb2JfcmVxdWly
+ZWQpIHsKKwkJdW5zaWduZWQgbG9uZyBkYXRhX3dpZHRoID0gNDsKKwkJdW5zaWduZWQgbG9uZyBk
+YXRhX3BoYXNlX2FkZHIgPSAwOworCQl1OCAqcCA9IGNoaXAtPm9vYl9wb2k7CisJCWNoaXAtPnJl
+YWRfYnVmKG10ZCwgcCwgKG10ZC0+b29ic2l6ZSAtIGRhdGFfd2lkdGgpKTsKKwkJcCArPSAobXRk
+LT5vb2JzaXplIC0gZGF0YV93aWR0aCk7CisKKwkJZGF0YV9waGFzZV9hZGRyID0gKHVuc2lnbmVk
+IGxvbmcpY2hpcC0+SU9fQUREUl9SOworCQlkYXRhX3BoYXNlX2FkZHIgfD0gWllOUV9OQU5EX0NM
+RUFSX0NTOworCQljaGlwLT5JT19BRERSX1IgPSAodm9pZCBfX2lvbWVtICopZGF0YV9waGFzZV9h
+ZGRyOworCQljaGlwLT5yZWFkX2J1ZihtdGQsIHAsIGRhdGFfd2lkdGgpOworCX0KKwogCXJldHVy
+biAwOwogfQogCi0tIAoyLjIwLjEKCg==
+--0000000000007c830b0638c71d9f--
