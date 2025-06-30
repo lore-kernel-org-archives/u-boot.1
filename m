@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E467C7EE30
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA8EC7EE39
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C666C82FC7;
-	Mon, 30 Jun 2025 02:11:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BB958303B;
+	Mon, 30 Jun 2025 02:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="x3fNgYga";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XtNEyYux";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NfmEjBli";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sLuI+CyM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D64A82C2F; Mon, 30 Jun 2025 02:11:29 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 63C8783037; Mon, 30 Jun 2025 02:11:32 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4118F8300E
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CD1B83010
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bVmm70BMnz9sts;
- Mon, 30 Jun 2025 02:11:19 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bVmmB0PbDz9sWs;
+ Mon, 30 Jun 2025 02:11:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1751242282;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YN3FLz7ePs8SGb72juhXIbHiLbXSjrDqQtFs0Rea0N8=;
+ b=NfmEjBli71f6J6erCnaoSAVlr2LYPom3DSS3Kvjbl9JSFVHCLhpX2lgx9v0E0z6xUCTNJU
+ p3Hxi0MfjyvA34Tc7xku3S3sYLHTeD9uo5hMjPp1XgVPgQogOot/MdR2JVlGsKPCkHg001
+ UW9NHGkUMa9bLiS6q1u0aVdYRPzKLDeSt90k1nyy7KDlkKhgwvZwNYjwnkGUMIfCGQhd3i
+ XeDKTPZBh77PV/oZLnJlelg7vaV2WPyvDpgYx9RxzQuvqwbP+L2AVJuQFeQuu0WbZ0RvYj
+ pj1+PYNRU7JEKDw+GNniZZJWT+x3bIfjA2pCJKMK9KnxwzhuVZ8duGGOcVvk3A==
+From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1751242279;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8Si8KTtMLJIjBA34u/i4MWjCryx7DAmg4Ya14QXJrlc=;
- b=x3fNgYgab8fRDF3st/VmV1oZcojoeMdZl9bxW2lOUwfbwrtwgKojgc2ZP+QMNHo0HRmoWl
- 1Ej3c6xi0Cg91NBuoeCt0Eu+7Tzm9TXJ09c0P3tPro/1zwvHmSg0+OLPgk6OYU/h77VYWX
- 7V1BxV5CHMPGI9G9EMcb9X6YcSOZhTavqYpkDS/QKtwWiEauNWl2WcfvUJEE0738DiWGi9
- exKG4q72XQJZma0esPmgRdJfkbB0S/NZy5kdRcMADnxU8f8Fr0UIEfORZsNpgo1ZWr+f5a
- P3opSyUNbFWjcRw+/X/Lj9I35zyRmUE5chw/ZNHRJm561OZ0ghqqYk5IhjB1tA==
-From: Marek Vasut <marek.vasut@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242276;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8Si8KTtMLJIjBA34u/i4MWjCryx7DAmg4Ya14QXJrlc=;
- b=XtNEyYux8xr+9mqNKa+8wq0fRI58TE1N3SIbCZJmFhMpppMN84coqzjueriPxCUuQFu9lb
- De5rBeOhqKcYo7yVdSG8gAXWgvEXFDDec3N+AhiDUpMTtZgQmULCITaNAgZYkfFY8a3zB4
- 7iOzEtOxnHdA3mam2t7nT4fT02knqeIKudxRL9y7ZawwKIIIywLIx0n0aV7R5ix02E8yOV
- p7WNb1xZ6P3zPIeX1ZuIbjpRGSFIwvGudIJXymz3j4nEgv/rkkG2h1DbmXbejzcKau3kYj
- hFJWmjo8zd3G9TfrxAPanyxu3B9qxpmUM7lAHL0z+xPnjdlDeuwm8UreMcEkFQ==
+ bh=YN3FLz7ePs8SGb72juhXIbHiLbXSjrDqQtFs0Rea0N8=;
+ b=sLuI+CyM/j0kqhOxxWR8f4azQGiMe9+aH3D8VmiJpsNmb6lRSg3v6LZrV+1zU74mw53dAv
+ IMO2YbLNSIJFpzAt1VzFcP+XIJQzkqtAG9RD1HvObeujajiyQ7bJCX2hp8Tx9X9ULYDpcc
+ nrw/sg6m6veNGqTBc32pDDMkCXLusVWvTSORBZHvbw0TSy8oTQaV967N7/yP9vhALeRkv3
+ QrztPfEjF+7CBK9m2cbTaPCfTwjDERtyJ0GuYzK8ibXHZeNiFmGboRZBUingYzTKipfE8o
+ 46U9JFVuMc5YQb9tlz0SSGYyNoihJxmGWZn3JLB/MqNtcEW7ptvN5nC8j0p62g==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
@@ -71,17 +69,16 @@ Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 07/10] ARM: dts: stm32: Add 512 MiB DRAM settings for DH
+Subject: [PATCH v2 09/10] ARM: dts: stm32: Add SPL specifics for DH
  STM32MP13xx DHCOR DHSBC
-Date: Mon, 30 Jun 2025 02:10:33 +0200
-Message-ID: <20250630001053.952342-7-marek.vasut@mailbox.org>
+Date: Mon, 30 Jun 2025 02:10:35 +0200
+Message-ID: <20250630001053.952342-9-marek.vasut@mailbox.org>
 In-Reply-To: <20250630001053.952342-1-marek.vasut@mailbox.org>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2a63701fec01393d5bd
-X-MBO-RS-META: 8t5oj854wsmayftet6ferf1ddqoqd7i7
-X-Rspamd-Queue-Id: 4bVmm70BMnz9sts
+X-MBO-RS-META: mp4ztix95g93tjq83gortu5wientnqi6
+X-MBO-RS-ID: 2ac241b0a7c92d0e5be
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,7 +95,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add DRAM settings for 512 MiB of DRAM variant of DH STM32MP13xx DHCOR DHSBC.
+Add SPL specific DT additions to DH STM32MP13xx DHCOR DHSBC . These
+include I2C3 configuration which is required to access the PMIC,
+PMIC regulator and QSPI NOR bootph-all properties to allow SPL to
+configure PMIC buck regulators and load from QSPI NOR respectively,
+etzpc bus switch to simple-bus to prevent interference from TFABOOT
+specific configuration, and RCC configuration to define clock tree
+configuration used by this platform.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
@@ -117,131 +120,201 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
-V2: Add RB from Patrice
+V2: - Add RB from Patrice
+    - Wrap the RCC node in if !TFABOOT
 ---
- .../stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi | 100 ++++++++++++++++++
- arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi    |   1 +
- 2 files changed, 101 insertions(+)
- create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
+ arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 159 ++++++++++++++++++++-
+ 1 file changed, 158 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
-new file mode 100644
-index 00000000000..7b344541c3e
---- /dev/null
-+++ b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
-@@ -0,0 +1,100 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2025, DH electronics - All Rights Reserved
-+ *
-+ * STM32MP13xx DHSOM configuration
-+ * 1x DDR3L 1Gb, 16-bit, 533MHz, Single Die Package in flyby topology.
-+ * Reference used W631GU6MB15I from Winbond
-+ *
-+ * DDR type / Platform	DDR3/3L
-+ * freq		533MHz
-+ * width	16
-+ * datasheet	0  = W631GU6MB15I / DDR3-1333
-+ * DDR density	2
-+ * timing mode	optimized
-+ * address mapping : RBC
-+ * Tc > + 85C : J
-+ */
-+#define DDR_MEM_COMPATIBLE ddr3l-dhsom-1066-888-bin-g-1x2gb-533mhz
-+#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000kHz"
-+#define DDR_MEM_SPEED	533000
-+#define DDR_MEM_SIZE	0x20000000
-+
-+#define DDR_MSTR 0x00040401
-+#define DDR_MRCTRL0 0x00000010
-+#define DDR_MRCTRL1 0x00000000
-+#define DDR_DERATEEN 0x00000000
-+#define DDR_DERATEINT 0x00800000
-+#define DDR_PWRCTL 0x00000000
-+#define DDR_PWRTMG 0x00400010
-+#define DDR_HWLPCTL 0x00000000
-+#define DDR_RFSHCTL0 0x00210000
-+#define DDR_RFSHCTL3 0x00000000
-+#define DDR_RFSHTMG 0x0081008B
-+#define DDR_CRCPARCTL0 0x00000000
-+#define DDR_DRAMTMG0 0x121B2414
-+#define DDR_DRAMTMG1 0x000A041B
-+#define DDR_DRAMTMG2 0x0607080F
-+#define DDR_DRAMTMG3 0x0050400C
-+#define DDR_DRAMTMG4 0x07040607
-+#define DDR_DRAMTMG5 0x06060403
-+#define DDR_DRAMTMG6 0x02020002
-+#define DDR_DRAMTMG7 0x00000202
-+#define DDR_DRAMTMG8 0x00001005
-+#define DDR_DRAMTMG14 0x000000A0
-+#define DDR_ZQCTL0 0xC2000040
-+#define DDR_DFITMG0 0x02050105
-+#define DDR_DFITMG1 0x00000202
-+#define DDR_DFILPCFG0 0x07000000
-+#define DDR_DFIUPD0 0xC0400003
-+#define DDR_DFIUPD1 0x00000000
-+#define DDR_DFIUPD2 0x00000000
-+#define DDR_DFIPHYMSTR 0x00000000
-+#define DDR_ADDRMAP1 0x00080808
-+#define DDR_ADDRMAP2 0x00000000
-+#define DDR_ADDRMAP3 0x00000000
-+#define DDR_ADDRMAP4 0x00001F1F
-+#define DDR_ADDRMAP5 0x07070707
-+#define DDR_ADDRMAP6 0x0F070707
-+#define DDR_ADDRMAP9 0x00000000
-+#define DDR_ADDRMAP10 0x00000000
-+#define DDR_ADDRMAP11 0x00000000
-+#define DDR_ODTCFG 0x06000600
-+#define DDR_ODTMAP 0x00000001
-+#define DDR_SCHED 0x00000F01
-+#define DDR_SCHED1 0x00000000
-+#define DDR_PERFHPR1 0x00000001
-+#define DDR_PERFLPR1 0x04000200
-+#define DDR_PERFWR1 0x08000400
-+#define DDR_DBG0 0x00000000
-+#define DDR_DBG1 0x00000000
-+#define DDR_DBGCMD 0x00000000
-+#define DDR_POISONCFG 0x00000000
-+#define DDR_PCCFG 0x00000010
-+#define DDR_PCFGR_0 0x00000000
-+#define DDR_PCFGW_0 0x00000000
-+#define DDR_PCFGQOS0_0 0x00100009
-+#define DDR_PCFGQOS1_0 0x00000020
-+#define DDR_PCFGWQOS0_0 0x01100B03
-+#define DDR_PCFGWQOS1_0 0x01000200
-+#define DDR_PGCR 0x01442E02
-+#define DDR_PTR0 0x0022AA5B
-+#define DDR_PTR1 0x04841104
-+#define DDR_PTR2 0x042DA068
-+#define DDR_ACIOCR 0x10400812
-+#define DDR_DXCCR 0x00000C40
-+#define DDR_DSGCR 0xF200011F
-+#define DDR_DCR 0x0000000B
-+#define DDR_DTPR0 0x36D477D0
-+#define DDR_DTPR1 0x098B00D8
-+#define DDR_DTPR2 0x10023600
-+#define DDR_MR0 0x00000830
-+#define DDR_MR1 0x00000000
-+#define DDR_MR2 0x00000208
-+#define DDR_MR3 0x00000000
-+#define DDR_ODTCR 0x00010000
-+#define DDR_ZQ0CR1 0x00000038
-+#define DDR_DX0GCR 0x0000CE81
-+#define DDR_DX1GCR 0x0000CE81
-+
-+#include "stm32mp13-ddr.dtsi"
 diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-index 9ff42ab8248..6117da10bbf 100644
+index 6117da10bbf..f76fe63281b 100644
 --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
 +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-@@ -4,6 +4,7 @@
+@@ -3,6 +3,7 @@
+  * Copyright (C) 2024 Marek Vasut <marex@denx.de>
   */
  
++#include <dt-bindings/clock/stm32mp13-clksrc.h>
  #include "stm32mp13-u-boot.dtsi"
-+#include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
+ #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
  
- / {
- 	aliases {
+@@ -19,8 +20,12 @@
+ 	};
+ };
+ 
++&etzpc {
++	compatible = "simple-bus";
++};
++
+ &flash0 {
+-	bootph-pre-ram;
++	bootph-all;
+ 
+ 	partitions {
+ 		compatible = "fixed-partitions";
+@@ -49,6 +54,138 @@
+ 	};
+ };
+ 
++&i2c3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2c3_pins_a>;
++};
++
++&qspi {
++	bootph-all;
++};
++
++&qspi_clk_pins_a {
++	bootph-all;
++	pins {
++		bootph-all;
++	};
++};
++
++&qspi_bk1_pins_a {
++	bootph-all;
++	pins {
++		bootph-all;
++	};
++};
++
++&qspi_cs1_pins_a {
++	bootph-all;
++	pins {
++		bootph-all;
++	};
++};
++
++&pinctrl {
++	bootph-all;
++	i2c3_pins_a: i2c3-0 {
++	        bootph-all;
++		pins {
++			bootph-all;
++			pinmux = <STM32_PINMUX('B', 8, AF5)>, /* I2C3_SCL */
++				 <STM32_PINMUX('H', 14, AF4)>; /* I2C3_SDA */
++			bias-disable;
++			drive-open-drain;
++			slew-rate = <0>;
++		};
++	};
++};
++
++#if !defined(CONFIG_TFABOOT)
++&rcc {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>, <&clk_lse>, <&clk_lsi>;
++
++	st,clksrc = <
++		CLK_MPU_PLL1P
++		CLK_AXI_PLL2P
++		CLK_MLAHBS_PLL3
++		CLK_PLL12_HSE
++		CLK_PLL3_HSE
++		CLK_PLL4_HSE
++		CLK_CKPER_HSE
++		CLK_RTC_LSE
++		CLK_MCO1_LSI
++		CLK_MCO2_HSI
++	>;
++
++	st,clkdiv = <
++		0 /*AXI*/
++		0 /*MLHAB*/
++		1 /*APB1*/
++		1 /*APB2*/
++		1 /*APB3*/
++		1 /*APB4*/
++		2 /*APB5*/
++		1 /*APB6*/
++		0 /*RTC*/
++	>;
++
++	st,pkcs = <
++		CLK_I2C12_HSI
++		CLK_I2C3_HSI
++		CLK_QSPI_PLL3R
++		CLK_SAES_AXI
++		CLK_SDMMC1_PLL3R
++		CLK_SDMMC2_PLL3R
++		CLK_STGEN_HSE
++		CLK_UART2_HSI
++		CLK_UART4_HSI
++		CLK_USBO_USBPHY
++		CLK_USBPHY_HSE
++	>;
++
++	/*
++	 * cfg = < DIVM1 DIVN P Q R PQR(p,q,r) >;
++	 * frac = < f >;
++	 *
++	 * PRQ(p,q,r) ... for p,q,r: 0-output disabled / 1-output enabled
++	 * DIVN ... actually multiplier, but RCC_PLL1CFGR1 calls the field DIVN
++	 * m ... for PLL1,2: m=2 ; for PLL3,4: m=1
++	 * XTAL = 24 MHz
++	 *
++	 * VCO = ( XTAL / (DIVM1 + 1) ) * m * ( DIVN + 1 + ( f / 8192 ) )
++	 *   P = VCO / (P + 1)
++	 *   Q = VCO / (Q + 1)
++	 *   R = VCO / (R + 1)
++	 */
++
++	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 266, R = 533 (DDR) */
++	pll2: st,pll@1 {
++		compatible = "st,stm32mp1-pll";
++		reg = <1>;
++		cfg = < 2 65 1 1 0 PQR(1,1,1) >;
++		frac = < 0x1400 >;
++		bootph-all;
++	};
++
++	/* VCO = 600 MHz => P = 200, Q = 150, R = 200 */
++	pll3: st,pll@2 {
++		compatible = "st,stm32mp1-pll";
++		reg = <2>;
++		cfg = < 2 74 2 3 2 PQR(1,1,1) >;
++		bootph-all;
++	};
++
++	/* VCO = 750.0 MHz => P = 125, Q = 83, R = 75 */
++	pll4: st,pll@3 {
++		compatible = "st,stm32mp1-pll";
++		reg = <3>;
++		cfg = < 3 124 5 8 9 PQR(1,1,1) >;
++		bootph-all;
++	};
++};
++#endif
++
+ &sdmmc1 {
+ 	status = "disabled";
+ };
+@@ -56,3 +193,23 @@
+ &usbotg_hs {
+ 	u-boot,force-b-session-valid;
+ };
++
++&vddcpu {
++	bootph-all;
++};
++
++&vdd_ddr {
++	bootph-all;
++};
++
++&vdd {
++	bootph-all;
++};
++
++&vddcore {
++	bootph-all;
++};
++
++&vref_ddr {
++	bootph-all;
++};
 -- 
 2.47.2
 
