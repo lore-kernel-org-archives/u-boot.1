@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8731C83000
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 07:24:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 999A3C7EE39
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 08:02:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6017381FEE;
-	Mon, 30 Jun 2025 09:24:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C341D81D6A;
+	Mon, 30 Jun 2025 10:02:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cLWW/1xC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="che2Ar94";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61B382B20; Mon, 30 Jun 2025 09:24:38 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 736EB82E35; Mon, 30 Jun 2025 09:57:09 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F205C81E13
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:24:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-70e302191a3so39770647b3.2
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 00:24:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751268273; x=1751873073; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5YzXS2pnKQwyiM/t7AsIlLoRwH3NlK75KhDvrfGXPxc=;
- b=cLWW/1xC3Tp9kIaF9uN2dKG1Tqfd9Gx0TcvJQ3frH0t7D372JAffEmMvqZ7xUd/72y
- VqXJP1ChLxeHefh7kI0tkqE66dFbAnMHcE8KZP1O2O02+w4R5t0Qexo+nNH1R6QEamYF
- f2F10erjeFk3W6c1Fne5+9B/8NqwqTu6yoj9z5Tue7JYo7TLUTeQdwWJvi0a2DQ+SMdq
- d+UCTEsAG1XCy5tt7r2pic0xUfqebaIB/BHsta9l6UHJugD6Nk3mCKjjxHYLN+Ds8F0E
- uhWdXgSIc3oAGHiIp34o3LvZQeAwo25XiJ6blVMK29/gqvvqW1FWlhVwQiQcpREVoT6T
- 76Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751268273; x=1751873073;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5YzXS2pnKQwyiM/t7AsIlLoRwH3NlK75KhDvrfGXPxc=;
- b=I6k636CS/Vk/YiyFJ+SdLYdQcnkJosGm4oFYxEN7GFe9AJyqFN3tydHjw1PW25Dx0C
- rvBXoWlDbYa23SHkl91UrFh7x4GCOCVVUilE3g305gVs1g0zaUpbGdBLkIdAQdS7s/PN
- ezgJVP/ACka5Rzy2D9T48aJb0vJgh6UyRaO0007QIr3DItiH5MXvZAUOIU/Jg40R6j3h
- uGilS4z+H/8Wr1yX2mHZaRSZM0tvBPsITowuIESvIfmum6jHyY5AA53S9z9jDEhlESvT
- fLGz2Ealw2ZlWjLlnHMw8uZ3B2R1ES3dsS0p/GK0weT1EHtMbVwhOrm9iNr/cJhF6llR
- F5MQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2uU9NQMMed6EqqQNER/TzBEhc2EVgOqhRfiIBcvh+t6Yje8bkUsP4JihyW5q+JfAt9ZcEXkM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGCdzXUSweJ6U7aIVuZyY+G3Zn8lc1hJl8pod5YGhlA91rSWlY
- Go/8Uc+NnTTRBC8CbAla0epXiq8OLX9CKd0Rf0ugQxYfcM8AAobuXiJjQzUJiG2zVFIdezAse8w
- BCzTtGABF8Lhmo2AZ859tyaPe2raoymAx+rx20AjGHQ==
-X-Gm-Gg: ASbGncuflcSqtsc9DO1mYPhHPtCW3jZQeh15nPsrh95+kiuGmU1KOIuVLfzXPHGuyTW
- sD/85idnts+k/WzapMjB7pTQmk+rcxiT9SSweAqcLwRQiy8uP9V2EhSgSRjm/XV/G6olkEK5i7G
- xXyw1CQ0qf3JdHOA28ghVdwDUThtJcnBbfvtqal/NlPW4U
-X-Google-Smtp-Source: AGHT+IGmHN2g+sNjAcMLzAaJBOq6yV5T33qg6ANH2i7n/nrM8sVYdx3FRtQlYoZWszPuZTMY7lQZvNgr/kAsM6wdd1A=
-X-Received: by 2002:a05:690c:4801:b0:70c:bd93:452d with SMTP id
- 00721157ae682-7151714fc9dmr188849447b3.15.1751268272751; Mon, 30 Jun 2025
- 00:24:32 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 30C2380B9B
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:57:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DB5525C4CC8;
+ Mon, 30 Jun 2025 07:57:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 879D2C4CEEB;
+ Mon, 30 Jun 2025 07:57:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1751270225;
+ bh=BVzrfezD0705MIrN9Y9gAZZbzR6tHMdw0KX0fwDeSXk=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=che2Ar944PaWvPHdaGkPKk2RD11/ydVzJgaD6PG6Y7VPCaZ6hYVP2AkUp39RQsqvL
+ XthdLazvpi76DdkVwoUHg9vZz5j955eaN0Q96j6NKeXZujkAtPbG+cb2gRYU0k79Xd
+ H4cc5ucYosL8tOQkdso6HCypXUG4c2TCqG6Z+r1gQ9K0yvcqdn1Ftm298hU/pIEJzW
+ y2uOw4m9OZyF2ARXofcQHQCeyjNZ07KcXCcELc7Kfe5L3aYLARBCQNMmrjx/Kzg14A
+ XzMeboW+74K3Jvmpd2NAX5VVxipykhWDanmh23yoA2chk7KhlsEYn7KtTbB31CwHBh
+ 3ZzX4OrJyoTxg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 75A78C83000;
+ Mon, 30 Jun 2025 07:57:05 +0000 (UTC)
+From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
+Date: Mon, 30 Jun 2025 15:56:50 +0800
+Subject: [PATCH v4 1/6] image-android: Prepend/postpend default bootargs
+ value with given bootcmd
 MIME-Version: 1.0
-References: <20250625-tpm_enum-v2-0-ea3f84f6b639@linaro.org>
- <20250625-tpm_enum-v2-2-ea3f84f6b639@linaro.org>
-In-Reply-To: <20250625-tpm_enum-v2-2-ea3f84f6b639@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 30 Jun 2025 10:23:56 +0300
-X-Gm-Features: Ac12FXzzqcgzjO2WhdtU_5EPNUIxI13vnrqGGr2xMq4OszAEfrxiRgEZTDPyws4
-Message-ID: <CAC_iWjJTOJte3BFpV0NcuqJziYFaKwnEHU9USKiBHUZ5ZvHRcw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] tpm: Make use of TPM2_ALG_INVAL from enum
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250630-sc7180-android-boot-v4-1-24cdb50e860f@gmail.com>
+References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
+In-Reply-To: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
+To: Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, gchan9527@gmail.com
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1751270223; l=3055;
+ i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
+ bh=OYcDlxA0LbIdCmI6cD9sVVUKdg/SXtfmjMU9BuWIyLU=;
+ b=/On2+qSg4eUFhSXFpKipBYXYaVek/8QKf0QWs1jI49rYTF0TcjCEa+/WeDJXKBfKunVdZIS6l
+ AekCID/iG9jDbDKXZbP6C+siorCvFDg0tj9TSGcP63GjAQVOo4wle+V
+X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
+ pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
+X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
+ auth_id=248
+X-Original-From: George Chan <gchan9527@gmail.com>
+X-Mailman-Approved-At: Mon, 30 Jun 2025 10:02:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,71 +84,97 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: gchan9527@gmail.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 27 Jun 2025 at 12:37, Andrew Goodbody
-<andrew.goodbody@linaro.org> wrote:
->
-> Now that the enum includes TPM2_ALG_INVAL, use that name in the
-> code.
->
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+From: George Chan <gchan9527@gmail.com>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+By default, the boot.img's cmdline are appended to the bootargs
+environment.
+If we take a cmdline example of:
+* androidboot.hardware=warm (in U-Boot environment)
+* androidboot.hardware=chilly (in boot.img's cmdline)
 
-> ---
->  cmd/tpm-v2.c | 6 +++---
->  lib/tpm-v2.c | 2 +-
->  2 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> index a62862e94f9..346e21d27bb 100644
-> --- a/cmd/tpm-v2.c
-> +++ b/cmd/tpm-v2.c
-> @@ -113,7 +113,7 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
->                 return CMD_RET_USAGE;
->         if (argc == 4) {
->                 algo = tpm2_name_to_algorithm(argv[3]);
-> -               if (algo < 0)
-> +               if (algo == TPM2_ALG_INVAL)
->                         return CMD_RET_FAILURE;
->         }
->         algo_len = tpm2_algorithm_to_len(algo);
-> @@ -157,7 +157,7 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
->                 return CMD_RET_USAGE;
->         if (argc == 4) {
->                 algo = tpm2_name_to_algorithm(argv[3]);
-> -               if (algo < 0)
-> +               if (algo == TPM2_ALG_INVAL)
->                         return CMD_RET_FAILURE;
->         }
->         algo_len = tpm2_algorithm_to_len(algo);
-> @@ -288,7 +288,7 @@ static int do_tpm2_pcrallocate(struct cmd_tbl *cmdtp, int flag, int argc,
->                 return CMD_RET_USAGE;
->
->         algo = tpm2_name_to_algorithm(argv[1]);
-> -       if (algo == -EINVAL)
-> +       if (algo == TPM2_ALG_INVAL)
->                 return CMD_RET_USAGE;
->
->         ret = get_tpm(&dev);
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 9ca7933c094..5b21c57ae42 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -1141,7 +1141,7 @@ enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
->         }
->         printf("%s: unsupported algorithm %s\n", __func__, name);
->
-> -       return -EINVAL;
-> +       return TPM2_ALG_INVAL;
->  }
->
->  const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
->
-> --
-> 2.39.5
->
+The resulting commandline will be:
+androidboot.hardware=warm [...] androidboot.hardware=chilly.
+
+Because of this, the U-Boot environment always take priority on the
+boot.img.
+
+If we want to have a single U-Boot binary that support multiple
+board variants, we can't override androidboot.hardware via the boot.img.
+
+Add a new Kconfig option, ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS that
+reverse the logic.
+
+Above detail is suggested from Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Signed-off-by: George Chan <gchan9527@gmail.com>
+---
+ boot/Kconfig         |  9 +++++++++
+ boot/image-android.c | 10 ++++++++--
+ 2 files changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index a671d78e570..bcc5f886a01 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -22,6 +22,15 @@ config ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+ 	  addr by repacking the boot.img (mainly due to AVB signature mismatch),
+ 	  we need a way to use kernel_addr_r and ramdisk_addr_r.
+ 
++config ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS
++	bool "Android Boot Image boot cmd param will prepend to env bootargs"
++	help
++	  This controls how Android boot image embedded cmdline integrates
++	  with U-Boot bootargs environment.
++
++	  By enabling this, the boot.img's cmdline is prepended to the bootargs
++	  environment. By default, when disabled, the cmdline is appended.
++
+ config TIMESTAMP
+ 	bool "Show image date and time when displaying image information"
+ 	default y if CMD_DATE
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 14cf611cee5..d78e8a4148a 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -348,14 +348,14 @@ int android_image_get_kernel(const void *hdr,
+ 		len += strlen(img_data.kcmdline_extra) + (len ? 1 : 0); /* +1 for extra space */
+ 	}
+ 
+-	char *newbootargs = malloc(len + 1); /* +1 for the '\0' */
++	char *newbootargs = malloc(len + 2); /* +2 for 2x '\0' */
+ 	if (!newbootargs) {
+ 		puts("Error: malloc in android_image_get_kernel failed!\n");
+ 		return -ENOMEM;
+ 	}
+ 	*newbootargs = '\0'; /* set to Null in case no components below are present */
+ 
+-	if (bootargs)
++	if (bootargs && !IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS))
+ 		strcpy(newbootargs, bootargs);
+ 
+ 	if (img_data.kcmdline && *img_data.kcmdline) {
+@@ -370,6 +370,12 @@ int android_image_get_kernel(const void *hdr,
+ 		strcat(newbootargs, img_data.kcmdline_extra);
+ 	}
+ 
++	if (bootargs && IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS)) {
++		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
++			strcat(newbootargs, " ");
++		strcat(newbootargs, bootargs);
++	}
++
+ 	env_set("bootargs", newbootargs);
+ 	free(newbootargs);
+ 
+
+-- 
+2.43.0
+
+
