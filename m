@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B628DC8302F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92714C8302F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 12:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35B5381FEE;
-	Mon, 30 Jun 2025 14:21:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8618582E8C;
+	Mon, 30 Jun 2025 14:21:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="njan4EU8";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wFTz3EZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A3C382E27; Mon, 30 Jun 2025 14:21:38 +0200 (CEST)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2408::62e])
+ id 59E3680B9B; Mon, 30 Jun 2025 14:21:40 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2062f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::62f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC0F81E13
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 14:21:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AEA880B9B
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 14:21:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jqyBRT1CwHEMqblb6o1GQt7JakGBZfG3fSQwS4gIcBTkY8FCxTaAq0wqg53GXCWRkTiqBR2yGKx2uI066Kys8vlIsN6DhLeKmiuRGbOe/IVna22XIv64OEes+spMC3xxwq0i02OfiECeU7EfiVoO2IF0OnZIkssw7PpDT/MJf72cj3yB883RI/3sxlHzue91QxHf8K4o6RcmxqHBJXOzDic+oLzxrygvP9yTNGa+eTwrQzoeiKuhrWFGugRnApd0mMkGiWF5D79XUd9e7EVjoI/f1MpX+QRg+kATAUSjFCldBV9u2Wu7GWTKy0y5vcDj13/z4BP988jdfnteHmBMiA==
+ b=jXobOY8qvlaoDRwhGCxOG6+XmpG59evMp5ivDY29qFK3iaUPly7/oWOPHFgCzvYFlupW7mrBsMAcJvZpLSVHBG63zq3VkIHYKIPvLkVvQedrTpgVtg1a0pV3HaPFrrSI5UaOv5D9yVmBxkP/IBYqV5xfB0ufZjcNgGtkS09vjTsCMR6jM0cE45v4gbZ0XoibzJE7j/otmFkPHw9QC9vAEEQHH/UJ/YhTW/0oZy9KABsgNJoSajlI3+hp/9MPCnQmNWWVXhgzbb0NysRA99TuqqMhTfVNd1tFY0iCHhv0n/e0H7dL6UqzOHYBWZq2LeIIM9GHqmzUw2yGzrgnduNL9w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YQrFww7vDpN4TJfsMejDPp7PW6ZzcP3nWVWA+q2bqjk=;
- b=Fv+SM8myP9Ugfq86x7VI3mydSrUzdFVUHjzD463t5AYAyGPLzr84YwKaaICnMQQmhoAM8K4ZpzaN5B4Um+ynhxgae1dsUqs9fWhq7Xkj7rn6opzy6rpyeCBcId4rR74wE/TyzuSDc1ES0NTwS0SFwOB4Qv1tvTNBQqLUD1rTtFuSilOXHtC0+YTOX2e4Lw7uW4Gvi4pe9/teYMHU+5sCZu838Yv2mjglDflyABIYXGkNXsIZXS9EjHyO7SOPuhcckyTzh+4XW16CqecDMjxXjV/7TOTHiSBrvjRKkSf/trj5pUsL9+LwHNBYaO68sVrRfOa+t0ny8GFTs+zpG+SYRw==
+ bh=Htih7Rp3Gq8xWzGUaeNzbZnV9GLKJgTKYwN3Y9LONEw=;
+ b=gjbe4z3Wqrt+c0B+pCtM3UJsDVQ65gspsi6KNoav/1Rowdu1t7S13syysq73RFQahBCTNfW83OT6IvnrpFekKUhf4yY23AQKRjpKJgPres6JxD/8Pw6YLy8O9ZLNkMjW7ccRqZdPdpSAcuNShbDt4eWj+Gkf7Zxu51E+NLmihF72pxRcloX6NIdZXjTC4Od+psFSfOl1kQWgpYR2HPatUVXPqi+UckTmlkVafStBfcjdqX84gxbKvviOBYwRSDTEVBYo6hO/uuAQ0peGD2/NLV3IXvhbqp+HGV2v4iKy4pYL3nhZt+r/ONHbLgiAuh4jlHhEWT4BlD4TnJtuGzIdSA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YQrFww7vDpN4TJfsMejDPp7PW6ZzcP3nWVWA+q2bqjk=;
- b=njan4EU8BwCcfgWYwW3+6MGaXwBwxUbBIiU0F40pHyi69wBtaGE12m9xDJAU/3KPZ6eIBdEEPvkEpfE8kMwv3N7An8HR/lsM6O6Kz9p4oNeWlCCI37/7Ah9SBd6blb/WnYlxDqxbI8CgOugzI7zcz8ZwXPSbTCrLldMNblqBNzs=
-Received: from SA0PR13CA0021.namprd13.prod.outlook.com (2603:10b6:806:130::26)
- by MN2PR12MB4469.namprd12.prod.outlook.com (2603:10b6:208:268::22)
+ bh=Htih7Rp3Gq8xWzGUaeNzbZnV9GLKJgTKYwN3Y9LONEw=;
+ b=wFTz3EZTJ8fW4OYrtd0dWZvhFpPJrBV4MjE3D+X/7EMlqrjVzB+kdZqiWAt3MTaHOMEcvJ9/Xdz0JzzsOIq6qLVd/AaEAS5INDDdKxXPwCrC9Iqdm6eYC9l7rljeiZ5O54Nsw2Y6FH6qE35upzY5YWw7IECR9jR9112jiwaSpE0=
+Received: from SJ0PR13CA0231.namprd13.prod.outlook.com (2603:10b6:a03:2c1::26)
+ by SA3PR12MB9158.namprd12.prod.outlook.com (2603:10b6:806:380::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.29; Mon, 30 Jun
- 2025 12:21:26 +0000
-Received: from SN1PEPF0002BA4E.namprd03.prod.outlook.com
- (2603:10b6:806:130:cafe::f0) by SA0PR13CA0021.outlook.office365.com
- (2603:10b6:806:130::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.19 via Frontend Transport; Mon,
- 30 Jun 2025 12:21:26 +0000
+ 2025 12:21:27 +0000
+Received: from SN1PEPF0002BA4D.namprd03.prod.outlook.com
+ (2603:10b6:a03:2c1:cafe::c9) by SJ0PR13CA0231.outlook.office365.com
+ (2603:10b6:a03:2c1::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.17 via Frontend Transport; Mon,
+ 30 Jun 2025 12:21:25 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,42 +59,40 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF0002BA4E.mail.protection.outlook.com (10.167.242.71) with Microsoft
+ SN1PEPF0002BA4D.mail.protection.outlook.com (10.167.242.70) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Mon, 30 Jun 2025 12:21:25 +0000
+ 15.20.8901.15 via Frontend Transport; Mon, 30 Jun 2025 12:21:24 +0000
 Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Jun
- 2025 07:21:22 -0500
+ 2025 07:21:19 -0500
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
  (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Jun
- 2025 07:21:20 -0500
+ 2025 07:21:17 -0500
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 30 Jun 2025 07:21:20 -0500
+ Transport; Mon, 30 Jun 2025 07:21:17 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Padmarao Begari <padmarao.begari@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2 2/2] xilinx: Disable help command for all mini
- configurations
-Date: Mon, 30 Jun 2025 14:21:08 +0200
-Message-ID: <885a74b7f5b28ea7850a6ebaaf879dd8b13e18c8.1751286059.git.michal.simek@amd.com>
+CC: Peter Robinson <pbrobinson@gmail.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, "Ibai
+ Erkiaga" <ibai.erkiaga-elorza@amd.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/2] cmd: Introduce CMD_HELP
+Date: Mon, 30 Jun 2025 14:21:07 +0200
+Message-ID: <c17f825fb8a74e1d1912a3fd09a9a880c84a8bfd.1751286059.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <c17f825fb8a74e1d1912a3fd09a9a880c84a8bfd.1751286059.git.michal.simek@amd.com>
-References: <c17f825fb8a74e1d1912a3fd09a9a880c84a8bfd.1751286059.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11088; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=48YLmqyQB9kvIyjtuoRazaroRPZi1RKTmHJMi076jJ0=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQkNVolp0c/mMQZvMIzgGtlqE187Zv02Dixbx8tRZn/r
- cp4uFe0o5SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACYylZPhr7jhFRfflL1vjJ8m
- /zpwetu3dWaShs1/33wX5j87f+8MfWmG/2nrg9OL3l/Ot/dOnLb3fcuk/LVfjJcbLVsge2r5W/1
- zndwA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2653; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=G4xMPhSaplEqt13Woj8LdVC6kE0J50bTZf6LYBCPfsA=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQkNZoqi2asX+/+wuqS+K0v88q3b7ZLvZVzJX5f707Hv
+ r3MxbGlHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRslmMDI/Vzt2v40/j9Hkj
+ 2K/x695kH4Mrz+tWufVs47q7InqjXz0jw9tdsR8kj8z2MdnD+Kudq+q+x84lP8p431ad5znn8MD
+ hGhsA
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -103,52 +101,52 @@ Received-SPF: None (SATLEXMB05.amd.com: michal.simek@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4E:EE_|MN2PR12MB4469:EE_
-X-MS-Office365-Filtering-Correlation-Id: af850876-85f5-4c72-67d1-08ddb7d0a217
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4D:EE_|SA3PR12MB9158:EE_
+X-MS-Office365-Filtering-Correlation-Id: 297074d6-4510-42be-69d0-08ddb7d0a159
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+FVqf6LOrRRb+4C8MC1Q8rvCteGoo59B1JBczpkEW6445vdposGnJ2Wr7oId?=
- =?us-ascii?Q?xrEhOJhBEqbfLMSCG6MARxSPrxQkYNTsWx8vwXuwwajVT9NWdEBost9Mn9Yg?=
- =?us-ascii?Q?856uzi+zo+4VWNIRlTGXsK5SE/eNCkn0khrUvyQAdA15ARJYCw0MinTi/BBB?=
- =?us-ascii?Q?MNidI71QGKSB5h3NxxJLCuANbiv/znbfL+fQ0zC5KAH8yitV5xxnaU8nLNjI?=
- =?us-ascii?Q?as51cFUTJ9L8kHntqJ6AfZzwGisLbRYLqKBB12sBCXgnKwUwZxh868E0EVTM?=
- =?us-ascii?Q?exc1FNSn2+jo+N1SBxfabRVc6ilW3rPk8hIBg+oyAw9vqVu/1pGfT2Zfu0Rg?=
- =?us-ascii?Q?w8ZT4lcnhbqPrHb5GCPIZ71YjF1MxVHgEUtXjB+GD+qOhIbdM6Dq3VIVfHSG?=
- =?us-ascii?Q?nHgBn9dqmrBtQYKSuEE3IOVjYfAoNPosfm2yba/9qKJR6yKERKdh+i6mGT23?=
- =?us-ascii?Q?xpaYQrhAUorB3iJTdJym/Os7Be1cHya/q1CGeBqWCBJ+M9/4oLjJg+exbHLU?=
- =?us-ascii?Q?LahevpwKdmp6TsRBXTS23Q7hKD8UQ8R72yJeenFDKFS1hkobPNByc0RxdUmi?=
- =?us-ascii?Q?f9QdeIPbUTk01wJb25W3jisqyrz6iMoZ8QIO4hRNndNeqv7DFmDfeUtdev3D?=
- =?us-ascii?Q?Wlbo5Td7gYer3XuQn9iZXZUbtnM5nnGRe6VjbSlUCbZapWZhQ16ZcvziNuL/?=
- =?us-ascii?Q?D2off9wHQSHjRVHkP3wNsXQV9fdE0Y+5A8N1CcS1vsZEQBTmuYEGcb1Ymqvp?=
- =?us-ascii?Q?no4RFPmN68JDjSXOqddBZ6aDx8w3TUQ6aMMi4WoHIDBUfsCyB2bU5YnM1j9w?=
- =?us-ascii?Q?ESUd5CXuDI7LZuZMFUip9aguIKjxxfUQcLAlNrBKS172i+zde8G6qBkm/AIQ?=
- =?us-ascii?Q?jRdEI43S7mKuV/vIcKoVFDzqjMJAyib5nz+1nnR+NrbU2IQ4fPqH964lzpYO?=
- =?us-ascii?Q?fhtISz58ghwRLAYTz8kS9CE8HIAwDgD71j6MfNakE71b80OXnJIgtI6uWh0n?=
- =?us-ascii?Q?WoVkgoMyKr6y45SbmhJYmVyGRicuokxOzxqlR8Ccg7tqf1c4kx0cF0Vlp2mV?=
- =?us-ascii?Q?a+YXPG3xMvZPUzAxMEy7O4pJE4aq+uSj3nQ9ii2albRJhAmpUxZ64ZnQNRjS?=
- =?us-ascii?Q?ShTdkgomhFDWvavaKlzeudQft4OI2njJM7ZrhNy8NWD5mkmtr95TAzN94FEs?=
- =?us-ascii?Q?y5lHNqymLJCkbsJE93ldqFOxp8YCZ45ciaWjgTjw+baXpUuGBYgXY6Fy5fZ2?=
- =?us-ascii?Q?umEUFhRxYjDBStk/IkaLeH203V7KTN18UBhgTNZ4rdFmsGAV0OBKp1b3uCBG?=
- =?us-ascii?Q?Po6L3leobTlTxgVCqMIMqu8N/PPkJd39Bsu0qlp3DPVOx61pYraWbuoAHLp8?=
- =?us-ascii?Q?8Ia/L3/XMOHd0PL7GRhDDmqOknhy9vR3j9H/SoNNOD5JRsRrmQQbQd6Dfn4c?=
- =?us-ascii?Q?oWH79ng1l+nqqw2ndseONQiFtuWnwwmErLtZ8UH//TuW45BhwB4cWW6wiIFS?=
- =?us-ascii?Q?InqPojSdoxyIp6Yqm5KmzxQxrUI0VxwY0JZG?=
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fu1A3TPm5mUpdMXZFjH2jecEytmAui9kHDD5ai3ZS79MJtF7Vb/GvjSoOhzE?=
+ =?us-ascii?Q?7SmV7k9/bp97CUZSsFXwWB3EjTP0j5Dfwp1QUsEPkkBnocSNuihaOEy2Xhh2?=
+ =?us-ascii?Q?QdCM0WkZK4w+lFehSLX5jNFi+lOvvEE2kILg5gmqcnKI7B58oFUnuQf/Vblk?=
+ =?us-ascii?Q?S7gF8c29N67N3Y+wx/lBTPOYddnU4xFLkWmTdXDELm57RyHyRjQaiwIkojxH?=
+ =?us-ascii?Q?VCsDGXPDVrMfxzVjf+iDoAXz7c2eJMnniyGCvKKpwXJxZrkeMmP7YbVKmG0u?=
+ =?us-ascii?Q?oXdnjL48iVRNOCh8oqo2ENbhTcrdcpUPVnnqUWJFm3lR8Kueka3W7GDBh0Rj?=
+ =?us-ascii?Q?MXY3buSPApOevJCMGzvQc+AKh5pkR0OCJ9Mw1czhv2RAHP/+t/Iqv7gBZCba?=
+ =?us-ascii?Q?dLq6ZzoYUN/ET21KBKf72LbkZsbAaokBGzKlg0Dhn8zhZFg+9W93LmTTcL8a?=
+ =?us-ascii?Q?cJGtCuXxY8o0xqBGfkc+CBvPx3givEfEO/s9/OuTVoNf2gLD3/9SkbbNpkAs?=
+ =?us-ascii?Q?l6Vhi/i1cT/kCG0ogu33DzsiCijCMh3HRbUo20iBpw45VlN7kmk2kzm0m7sF?=
+ =?us-ascii?Q?fcPj73WkyKuut4QONa4+ghLGcsVqSMJLHp3TmCQVgIfOjNmcubuDKgBwLkDV?=
+ =?us-ascii?Q?e8GUT9LgEBMlWPbX4SMH92Ga640crqIZqME0VNJH/acQE7CPjS3cJO4xtr7w?=
+ =?us-ascii?Q?ImdpyQDZgGEjwB3p0aJBRjz2PHP0giEL36arO1e2I84yygT+wo+Hya3HZapB?=
+ =?us-ascii?Q?rPAAv8lJB8kSecQxs2zSKrxmsc++AmtlMn8YXSqkxACBKCdZa1rNi5PmEAUK?=
+ =?us-ascii?Q?jHA4wRd5JJQq6Ve7D+zb5OTGuA0gt3Q5DqrS77S4HMqWol1MKTRhRnn5ssLR?=
+ =?us-ascii?Q?jUkVrYaZBhhnibLxiGTZ7mxJ0RXkEiWihfwyYOUzuVvm0OErRqH5xrcQ6j6d?=
+ =?us-ascii?Q?rTFtf6Veuk+pb6n4LDA6Y3JGRT6/ripCNcnJWycrVEHP/xHn/nr4FRqJrarP?=
+ =?us-ascii?Q?U2WvrM79Wzs4S/BYSugPIVi7tAI0g49v67S4zpVUvVxnQawhnB7MwVpF1eWi?=
+ =?us-ascii?Q?J2aPoojrnM6kVtTvXzg9FFyxE7UN29Z4NXwY2uLoNrzuqqQHPVNcvQRE2wRN?=
+ =?us-ascii?Q?4pRNDL8/huU1YvO8cyF3xmUSV0nClB53lQo9SNjX8wPTDHs561rQX+FYiBnI?=
+ =?us-ascii?Q?vz896gvs8nD6wIhmJih0h6+324svt+x+kQDl4fMPC5WCKu+yHoOMc6crhG8d?=
+ =?us-ascii?Q?5a77y5KlLNSvvc5g5/8+jf9uo1loXxBneeAe+bVcmxtNHQ61HIq3TsTHUfRm?=
+ =?us-ascii?Q?x65+NmQ73DRK8illuifuTvyKuYF12x+bPZkX+XzBcu+pumc5N1bpffjdlUCZ?=
+ =?us-ascii?Q?QWDQHx9iR5Hja2KVxBOoTsZruf/++DcfoHUxf14tfLMO/NCdXfr1kZowUbEw?=
+ =?us-ascii?Q?lorzxJKyRExxb9IUWl2k7Iux2IAB2ikRM3mICeapDy9PX3hdAOxbXRd0X07f?=
+ =?us-ascii?Q?wNqloPVo5IduB6M1gwBgVPIBixtV9koJygjL?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2025 12:21:25.6336 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: af850876-85f5-4c72-67d1-08ddb7d0a217
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2025 12:21:24.3897 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 297074d6-4510-42be-69d0-08ddb7d0a159
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4D.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4469
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9158
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,263 +163,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no reason to have help command available because none is calling
-it and only make binary bigger that's why disable it.
+Add option to disable help command in size constrained systems to save some
+space. There is also no need to have ifdefs around CMDLINE because all
+commands bepends on it.
+And also mark cmd_help dependency in test_help.py.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Remove CONFIG_CMDLINE ifdefs from code.
+- Update test_help.
 
- configs/amd_versal2_mini_defconfig               | 1 +
- configs/amd_versal2_mini_emmc_defconfig          | 1 +
- configs/amd_versal2_mini_ospi_defconfig          | 1 +
- configs/amd_versal2_mini_qspi_defconfig          | 1 +
- configs/xilinx_versal_mini_defconfig             | 1 +
- configs/xilinx_versal_mini_emmc0_defconfig       | 1 +
- configs/xilinx_versal_mini_emmc1_defconfig       | 1 +
- configs/xilinx_versal_mini_ospi_defconfig        | 1 +
- configs/xilinx_versal_mini_qspi_defconfig        | 1 +
- configs/xilinx_versal_net_mini_defconfig         | 1 +
- configs/xilinx_versal_net_mini_emmc_defconfig    | 1 +
- configs/xilinx_versal_net_mini_ospi_defconfig    | 1 +
- configs/xilinx_versal_net_mini_qspi_defconfig    | 1 +
- configs/xilinx_zynqmp_mini_defconfig             | 1 +
- configs/xilinx_zynqmp_mini_emmc0_defconfig       | 1 +
- configs/xilinx_zynqmp_mini_emmc1_defconfig       | 1 +
- configs/xilinx_zynqmp_mini_nand_defconfig        | 1 +
- configs/xilinx_zynqmp_mini_nand_single_defconfig | 1 +
- configs/xilinx_zynqmp_mini_qspi_defconfig        | 1 +
- 19 files changed, 19 insertions(+)
+ cmd/Kconfig                | 6 ++++++
+ cmd/Makefile               | 2 +-
+ cmd/help.c                 | 6 ------
+ test/py/tests/test_help.py | 1 +
+ 4 files changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/configs/amd_versal2_mini_defconfig b/configs/amd_versal2_mini_defconfig
-index 181866ba6973..e0f43352236f 100644
---- a/configs/amd_versal2_mini_defconfig
-+++ b/configs/amd_versal2_mini_defconfig
-@@ -32,6 +32,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- # CONFIG_SYS_LONGHELP is not set
- CONFIG_SYS_PROMPT="versal2> "
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/amd_versal2_mini_emmc_defconfig b/configs/amd_versal2_mini_emmc_defconfig
-index 1c5fe4b84ce5..d95c4b3d199f 100644
---- a/configs/amd_versal2_mini_emmc_defconfig
-+++ b/configs/amd_versal2_mini_emmc_defconfig
-@@ -26,6 +26,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_SYS_PROMPT="versal2> "
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/amd_versal2_mini_ospi_defconfig b/configs/amd_versal2_mini_ospi_defconfig
-index 5d3d0fb5231a..cd59e0fc1a98 100644
---- a/configs/amd_versal2_mini_ospi_defconfig
-+++ b/configs/amd_versal2_mini_ospi_defconfig
-@@ -30,6 +30,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- # CONFIG_SYS_LONGHELP is not set
- CONFIG_SYS_PROMPT="versal2> "
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/amd_versal2_mini_qspi_defconfig b/configs/amd_versal2_mini_qspi_defconfig
-index a9fb217b286f..03f3bd488061 100644
---- a/configs/amd_versal2_mini_qspi_defconfig
-+++ b/configs/amd_versal2_mini_qspi_defconfig
-@@ -30,6 +30,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- # CONFIG_SYS_LONGHELP is not set
- CONFIG_SYS_PROMPT="versal2> "
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_mini_defconfig b/configs/xilinx_versal_mini_defconfig
-index 296c404d15ab..59f33f669cbe 100644
---- a/configs/xilinx_versal_mini_defconfig
-+++ b/configs/xilinx_versal_mini_defconfig
-@@ -33,6 +33,7 @@ CONFIG_CLOCKS=y
- # CONFIG_SYS_LONGHELP is not set
- CONFIG_SYS_PROMPT="Versal> "
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_mini_emmc0_defconfig b/configs/xilinx_versal_mini_emmc0_defconfig
-index 36bd519af0c5..92d08120237e 100644
---- a/configs/xilinx_versal_mini_emmc0_defconfig
-+++ b/configs/xilinx_versal_mini_emmc0_defconfig
-@@ -31,6 +31,7 @@ CONFIG_CLOCKS=y
- CONFIG_SYS_PROMPT="Versal> "
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_mini_emmc1_defconfig b/configs/xilinx_versal_mini_emmc1_defconfig
-index 630f328e69ea..2c3775c3075b 100644
---- a/configs/xilinx_versal_mini_emmc1_defconfig
-+++ b/configs/xilinx_versal_mini_emmc1_defconfig
-@@ -31,6 +31,7 @@ CONFIG_CLOCKS=y
- CONFIG_SYS_PROMPT="Versal> "
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_mini_ospi_defconfig b/configs/xilinx_versal_mini_ospi_defconfig
-index cac691c92cee..11811f3c0fdb 100644
---- a/configs/xilinx_versal_mini_ospi_defconfig
-+++ b/configs/xilinx_versal_mini_ospi_defconfig
-@@ -31,6 +31,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_SYS_PROMPT="Versal> "
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_mini_qspi_defconfig b/configs/xilinx_versal_mini_qspi_defconfig
-index 220daa894ea0..47737ce0f8fd 100644
---- a/configs/xilinx_versal_mini_qspi_defconfig
-+++ b/configs/xilinx_versal_mini_qspi_defconfig
-@@ -32,6 +32,7 @@ CONFIG_SYS_PROMPT="Versal> "
- # CONFIG_SYS_XTRACE is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_net_mini_defconfig b/configs/xilinx_versal_net_mini_defconfig
-index b0f4128932ce..27a163a9ae5c 100644
---- a/configs/xilinx_versal_net_mini_defconfig
-+++ b/configs/xilinx_versal_net_mini_defconfig
-@@ -33,6 +33,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- # CONFIG_SYS_LONGHELP is not set
- CONFIG_SYS_PROMPT="Versal NET> "
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_net_mini_emmc_defconfig b/configs/xilinx_versal_net_mini_emmc_defconfig
-index 1f8fb162c976..8d3561fee6dc 100644
---- a/configs/xilinx_versal_net_mini_emmc_defconfig
-+++ b/configs/xilinx_versal_net_mini_emmc_defconfig
-@@ -26,6 +26,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_SYS_PROMPT="Versal NET> "
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_net_mini_ospi_defconfig b/configs/xilinx_versal_net_mini_ospi_defconfig
-index a8d0c5fc1287..aadfcfcf9dbf 100644
---- a/configs/xilinx_versal_net_mini_ospi_defconfig
-+++ b/configs/xilinx_versal_net_mini_ospi_defconfig
-@@ -30,6 +30,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
- CONFIG_SYS_PROMPT="Versal NET> "
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_versal_net_mini_qspi_defconfig b/configs/xilinx_versal_net_mini_qspi_defconfig
-index 1a3df99f65ed..ed4c3893315e 100644
---- a/configs/xilinx_versal_net_mini_qspi_defconfig
-+++ b/configs/xilinx_versal_net_mini_qspi_defconfig
-@@ -31,6 +31,7 @@ CONFIG_SYS_PROMPT="Versal NET> "
- # CONFIG_SYS_XTRACE is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_zynqmp_mini_defconfig b/configs/xilinx_zynqmp_mini_defconfig
-index a068e8976b48..41444271f0d9 100644
---- a/configs/xilinx_zynqmp_mini_defconfig
-+++ b/configs/xilinx_zynqmp_mini_defconfig
-@@ -27,6 +27,7 @@ CONFIG_CLOCKS=y
- # CONFIG_SYS_LONGHELP is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_zynqmp_mini_emmc0_defconfig b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-index 498bd809afe8..369d480fd1ff 100644
---- a/configs/xilinx_zynqmp_mini_emmc0_defconfig
-+++ b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- # CONFIG_AUTO_COMPLETE is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_zynqmp_mini_emmc1_defconfig b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-index 6b053cfa3ada..2b415b8f7271 100644
---- a/configs/xilinx_zynqmp_mini_emmc1_defconfig
-+++ b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- # CONFIG_AUTO_COMPLETE is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_zynqmp_mini_nand_defconfig b/configs/xilinx_zynqmp_mini_nand_defconfig
-index 09e0cfb693f6..c7271899bdf9 100644
---- a/configs/xilinx_zynqmp_mini_nand_defconfig
-+++ b/configs/xilinx_zynqmp_mini_nand_defconfig
-@@ -28,6 +28,7 @@ CONFIG_CLOCKS=y
- # CONFIG_SYS_LONGHELP is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_zynqmp_mini_nand_single_defconfig b/configs/xilinx_zynqmp_mini_nand_single_defconfig
-index e9258fa598f1..bb9cd8823403 100644
---- a/configs/xilinx_zynqmp_mini_nand_single_defconfig
-+++ b/configs/xilinx_zynqmp_mini_nand_single_defconfig
-@@ -28,6 +28,7 @@ CONFIG_CLOCKS=y
- # CONFIG_SYS_LONGHELP is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
-diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
-index 193cc7d27224..3f2d44d038e5 100644
---- a/configs/xilinx_zynqmp_mini_qspi_defconfig
-+++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- # CONFIG_SYS_LONGHELP is not set
- # CONFIG_CMD_BDI is not set
- # CONFIG_CMD_CONSOLE is not set
-+# CONFIG_CMD_HELP is not set
- # CONFIG_CMD_BOOTD is not set
- # CONFIG_CMD_BOOTM is not set
- # CONFIG_CMD_BOOTI is not set
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 4eb0140c10a1..ee3fbe6a4f2b 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -189,6 +189,12 @@ config CMD_FWU_METADATA
+ 	help
+ 	  Command to read the metadata and dump it's contents
+ 
++config CMD_HELP
++	bool "help"
++	default y
++	help
++	  Command to show help information about other commands.
++
+ config CMD_HISTORY
+ 	bool "history"
+ 	depends on CMDLINE_EDITING
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 80cf70b7fe8c..718eff4ed197 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
+ # core command
+ obj-y += boot.o
+ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+-obj-y += help.o
++obj-$(CONFIG_CMD_HELP) += help.o
+ obj-y += panic.o
+ obj-y += version.o
+ 
+diff --git a/cmd/help.c b/cmd/help.c
+index 56579e28d31d..1be83ba607d4 100644
+--- a/cmd/help.c
++++ b/cmd/help.c
+@@ -9,13 +9,9 @@
+ static int do_help(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		   char *const argv[])
+ {
+-#ifdef CONFIG_CMDLINE
+ 	struct cmd_tbl *start = ll_entry_start(struct cmd_tbl, cmd);
+ 	const int len = ll_entry_count(struct cmd_tbl, cmd);
+ 	return _do_help(start, len, cmdtp, flag, argc, argv);
+-#else
+-	return 0;
+-#endif
+ }
+ 
+ U_BOOT_CMD(
+@@ -27,7 +23,6 @@ U_BOOT_CMD(
+ 	"	- print detailed usage of 'command'"
+ );
+ 
+-#ifdef CONFIG_CMDLINE
+ /*
+  * This does not use the U_BOOT_CMD macro as ? can't be used in symbol names
+  * nor can we rely on the CONFIG_SYS_LONGHELP helper macro
+@@ -39,4 +34,3 @@ ll_entry_declare(struct cmd_tbl, question_mark, cmd) = {
+ 	""
+ #endif /* CONFIG_SYS_LONGHELP */
+ };
+-#endif
+diff --git a/test/py/tests/test_help.py b/test/py/tests/test_help.py
+index 12cb36b7b985..afb57201ba38 100644
+--- a/test/py/tests/test_help.py
++++ b/test/py/tests/test_help.py
+@@ -4,6 +4,7 @@
+ 
+ import pytest
+ 
++@pytest.mark.buildconfigspec('cmd_help')
+ def test_help(ubman):
+     """Test that the "help" command can be executed."""
+ 
 -- 
 2.43.0
 
