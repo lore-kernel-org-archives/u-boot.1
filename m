@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA8EC7EE39
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44DD7C7EE30
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 00:13:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BB958303B;
+	by phobos.denx.de (Postfix) with ESMTP id 63F1983046;
 	Mon, 30 Jun 2025 02:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NfmEjBli";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sLuI+CyM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="x4fp4eSv";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="D4hCuLST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63C8783037; Mon, 30 Jun 2025 02:11:32 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 8516F83010; Mon, 30 Jun 2025 02:11:32 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CD1B83010
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13DF081FEE
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 02:11:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,33 +30,33 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4bVmmB0PbDz9sWs;
- Mon, 30 Jun 2025 02:11:22 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4bVmm85SDcz9stG;
+ Mon, 30 Jun 2025 02:11:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242282;
+ s=mail20150812; t=1751242280;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YN3FLz7ePs8SGb72juhXIbHiLbXSjrDqQtFs0Rea0N8=;
- b=NfmEjBli71f6J6erCnaoSAVlr2LYPom3DSS3Kvjbl9JSFVHCLhpX2lgx9v0E0z6xUCTNJU
- p3Hxi0MfjyvA34Tc7xku3S3sYLHTeD9uo5hMjPp1XgVPgQogOot/MdR2JVlGsKPCkHg001
- UW9NHGkUMa9bLiS6q1u0aVdYRPzKLDeSt90k1nyy7KDlkKhgwvZwNYjwnkGUMIfCGQhd3i
- XeDKTPZBh77PV/oZLnJlelg7vaV2WPyvDpgYx9RxzQuvqwbP+L2AVJuQFeQuu0WbZ0RvYj
- pj1+PYNRU7JEKDw+GNniZZJWT+x3bIfjA2pCJKMK9KnxwzhuVZ8duGGOcVvk3A==
+ bh=AWVfB8ucDu8eQFcwOy2lsbl18zEyjgbEBDkaOR6EQE0=;
+ b=x4fp4eSvoAMWykqthsszJSc7CqB3NDUi8FJMXLY/6BMu3/lncejP0sFaY//Xuxpbq/5Sy4
+ Ca1YMrya2sNWq5gMMguAAASeOd2SA+0peNLRJuoENyJu6TgOjJ/WARbFP3JlzWuT9sHVXq
+ iQW42u784Nz5FFvgprTdf9xKJrIU7kBhpzWiTrHY3TydKK/9W0PrBhyqvIfGGTpxdncS4F
+ +hBeCKBg4DLls6PL5df8vBAl6kf/XwzhjtmdzxK6NIGqVMCwsJAmCFGlB4OmUeDBhdob7t
+ oJ6kSKfnCZjb36WLaBp8OGJED7Y/JDXsWQgZB4vABalZoVBEvJP/phupo63Nyw==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1751242279;
+ s=mail20150812; t=1751242278;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YN3FLz7ePs8SGb72juhXIbHiLbXSjrDqQtFs0Rea0N8=;
- b=sLuI+CyM/j0kqhOxxWR8f4azQGiMe9+aH3D8VmiJpsNmb6lRSg3v6LZrV+1zU74mw53dAv
- IMO2YbLNSIJFpzAt1VzFcP+XIJQzkqtAG9RD1HvObeujajiyQ7bJCX2hp8Tx9X9ULYDpcc
- nrw/sg6m6veNGqTBc32pDDMkCXLusVWvTSORBZHvbw0TSy8oTQaV967N7/yP9vhALeRkv3
- QrztPfEjF+7CBK9m2cbTaPCfTwjDERtyJ0GuYzK8ibXHZeNiFmGboRZBUingYzTKipfE8o
- 46U9JFVuMc5YQb9tlz0SSGYyNoihJxmGWZn3JLB/MqNtcEW7ptvN5nC8j0p62g==
+ bh=AWVfB8ucDu8eQFcwOy2lsbl18zEyjgbEBDkaOR6EQE0=;
+ b=D4hCuLST775rmyNxrfKTlzw4Qiz5bCRt7hm5LULqqS2oGcRVTOq1x4RoBUv1XFcNWrIR2q
+ A6wedy3BeJ2QxwRhsY1m6VukV2i0kmd0/iIPELXf8klKdB6xHjR21aDYK5gYpjr9mtoSLf
+ hf7YBLvjqdk9u4woJCRJVlE/j293Gkzn4IOYjxz8VTBd/CEJ3vVyLhFOebkXC2H9UWOQj4
+ Ry6pDFaB8PMz6LXKyZ3WoeJ5IcsG5Lc1PwsPDUQpq821+sfzFuAbqhCKFFjHTkQclO3INp
+ 6Jh8op8R9eR8rnpOqsq5iIR0X2phKTmFRAPxScsohoaSF3RA8Mp2dEfFyxqKFA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
@@ -69,16 +69,16 @@ Cc: Marek Vasut <marek.vasut@mailbox.org>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 09/10] ARM: dts: stm32: Add SPL specifics for DH
- STM32MP13xx DHCOR DHSBC
-Date: Mon, 30 Jun 2025 02:10:35 +0200
-Message-ID: <20250630001053.952342-9-marek.vasut@mailbox.org>
+Subject: [PATCH v2 08/10] ARM: dts: stm32: Add STM32MP13x SPL specific DT
+ additions
+Date: Mon, 30 Jun 2025 02:10:34 +0200
+Message-ID: <20250630001053.952342-8-marek.vasut@mailbox.org>
 In-Reply-To: <20250630001053.952342-1-marek.vasut@mailbox.org>
 References: <20250630001053.952342-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: mp4ztix95g93tjq83gortu5wientnqi6
-X-MBO-RS-ID: 2ac241b0a7c92d0e5be
+X-MBO-RS-META: 116uh7dxb9cr7wtpdhis5ehs69ufsepe
+X-MBO-RS-ID: 25c63f41fe73a3c4443
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,13 +95,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SPL specific DT additions to DH STM32MP13xx DHCOR DHSBC . These
-include I2C3 configuration which is required to access the PMIC,
-PMIC regulator and QSPI NOR bootph-all properties to allow SPL to
-configure PMIC buck regulators and load from QSPI NOR respectively,
-etzpc bus switch to simple-bus to prevent interference from TFABOOT
-specific configuration, and RCC configuration to define clock tree
-configuration used by this platform.
+Add DT additions required by U-Boot SPL to bring up the hardware.
+This includes binman node to generate STM32 Image v2.0 which can be
+booted by the BootROM, clock entries used by the SPL clock driver
+during clock tree initialization, and syscon-reboot node so U-Boot
+can reset the system without having to rely on PSCI call.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
@@ -120,201 +118,125 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
-V2: - Add RB from Patrice
-    - Wrap the RCC node in if !TFABOOT
+V2: Add RB from Patrice
 ---
- arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 159 ++++++++++++++++++++-
- 1 file changed, 158 insertions(+), 1 deletion(-)
+ arch/arm/dts/stm32mp13-u-boot.dtsi | 89 ++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
 
-diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-index 6117da10bbf..f76fe63281b 100644
---- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-@@ -3,6 +3,7 @@
-  * Copyright (C) 2024 Marek Vasut <marex@denx.de>
-  */
- 
-+#include <dt-bindings/clock/stm32mp13-clksrc.h>
- #include "stm32mp13-u-boot.dtsi"
- #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
- 
-@@ -19,8 +20,12 @@
+diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+index 1fe6966781c..ad63d5027b2 100644
+--- a/arch/arm/dts/stm32mp13-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+@@ -17,6 +17,7 @@
+ 		pinctrl0 = &pinctrl;
  	};
- };
  
-+&etzpc {
-+	compatible = "simple-bus";
-+};
-+
- &flash0 {
--	bootph-pre-ram;
-+	bootph-all;
- 
- 	partitions {
- 		compatible = "fixed-partitions";
-@@ -49,6 +54,138 @@
++#if defined(CONFIG_TFABOOT)
+ 	firmware {
+ 		optee {
+ 			bootph-all;
+@@ -27,6 +28,86 @@
+ 	psci {
+ 		bootph-some-ram;
  	};
- };
- 
-+&i2c3 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c3_pins_a>;
-+};
++#else
++	binman: binman {
++		multiple-images;
 +
-+&qspi {
-+	bootph-all;
-+};
-+
-+&qspi_clk_pins_a {
-+	bootph-all;
-+	pins {
-+		bootph-all;
-+	};
-+};
-+
-+&qspi_bk1_pins_a {
-+	bootph-all;
-+	pins {
-+		bootph-all;
-+	};
-+};
-+
-+&qspi_cs1_pins_a {
-+	bootph-all;
-+	pins {
-+		bootph-all;
-+	};
-+};
-+
-+&pinctrl {
-+	bootph-all;
-+	i2c3_pins_a: i2c3-0 {
-+	        bootph-all;
-+		pins {
-+			bootph-all;
-+			pinmux = <STM32_PINMUX('B', 8, AF5)>, /* I2C3_SCL */
-+				 <STM32_PINMUX('H', 14, AF4)>; /* I2C3_SDA */
-+			bias-disable;
-+			drive-open-drain;
-+			slew-rate = <0>;
++		spl-stm32 {
++			filename = "u-boot-spl.stm32";
++			mkimage {
++				args = "-T stm32imagev2 -a 0x2ffe0000 -e 0x2ffe0000";
++				u-boot-spl {
++					no-write-symbols;
++				};
++			};
 +		};
 +	};
-+};
 +
++	clocks {
++		bootph-all;
++
++		clk_hse: ck_hse {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <24000000>;
++		};
++
++		clk_hsi: ck_hsi {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <64000000>;
++		};
++
++		clk_lse: ck_lse {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <32768>;
++		};
++
++		clk_lsi: ck_lsi {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <32000>;
++		};
++
++		clk_csi: ck_csi {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <4000000>;
++		};
++	};
++
++	cpu0_opp_table: cpu0-opp-table {
++		compatible = "operating-points-v2";
++		opp-shared;
++		bootph-pre-ram;
++		opp-650000000 {
++			bootph-pre-ram;
++			opp-hz = /bits/ 64 <650000000>;
++			opp-microvolt = <1200000>;
++			opp-supported-hw = <0x1>;
++		};
++		opp-1000000000 {
++			bootph-pre-ram;
++			opp-hz = /bits/ 64 <1000000000>;
++			opp-microvolt = <1350000>;
++			opp-supported-hw = <0x2>;
++		};
++	};
++
++	reboot {
++		bootph-all;
++		compatible = "syscon-reboot";
++		regmap = <&rcc>;
++		offset = <0x114>;
++		mask = <0x1>;
++	};
++#endif
+ 
+ 	soc {
+ 		bootph-all;
+@@ -52,6 +133,14 @@
+ 	bootph-all;
+ };
+ 
 +#if !defined(CONFIG_TFABOOT)
-+&rcc {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>, <&clk_lse>, <&clk_lsi>;
-+
-+	st,clksrc = <
-+		CLK_MPU_PLL1P
-+		CLK_AXI_PLL2P
-+		CLK_MLAHBS_PLL3
-+		CLK_PLL12_HSE
-+		CLK_PLL3_HSE
-+		CLK_PLL4_HSE
-+		CLK_CKPER_HSE
-+		CLK_RTC_LSE
-+		CLK_MCO1_LSI
-+		CLK_MCO2_HSI
-+	>;
-+
-+	st,clkdiv = <
-+		0 /*AXI*/
-+		0 /*MLHAB*/
-+		1 /*APB1*/
-+		1 /*APB2*/
-+		1 /*APB3*/
-+		1 /*APB4*/
-+		2 /*APB5*/
-+		1 /*APB6*/
-+		0 /*RTC*/
-+	>;
-+
-+	st,pkcs = <
-+		CLK_I2C12_HSI
-+		CLK_I2C3_HSI
-+		CLK_QSPI_PLL3R
-+		CLK_SAES_AXI
-+		CLK_SDMMC1_PLL3R
-+		CLK_SDMMC2_PLL3R
-+		CLK_STGEN_HSE
-+		CLK_UART2_HSI
-+		CLK_UART4_HSI
-+		CLK_USBO_USBPHY
-+		CLK_USBPHY_HSE
-+	>;
-+
-+	/*
-+	 * cfg = < DIVM1 DIVN P Q R PQR(p,q,r) >;
-+	 * frac = < f >;
-+	 *
-+	 * PRQ(p,q,r) ... for p,q,r: 0-output disabled / 1-output enabled
-+	 * DIVN ... actually multiplier, but RCC_PLL1CFGR1 calls the field DIVN
-+	 * m ... for PLL1,2: m=2 ; for PLL3,4: m=1
-+	 * XTAL = 24 MHz
-+	 *
-+	 * VCO = ( XTAL / (DIVM1 + 1) ) * m * ( DIVN + 1 + ( f / 8192 ) )
-+	 *   P = VCO / (P + 1)
-+	 *   Q = VCO / (Q + 1)
-+	 *   R = VCO / (R + 1)
-+	 */
-+
-+	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 266, R = 533 (DDR) */
-+	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
-+		cfg = < 2 65 1 1 0 PQR(1,1,1) >;
-+		frac = < 0x1400 >;
-+		bootph-all;
-+	};
-+
-+	/* VCO = 600 MHz => P = 200, Q = 150, R = 200 */
-+	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
-+		cfg = < 2 74 2 3 2 PQR(1,1,1) >;
-+		bootph-all;
-+	};
-+
-+	/* VCO = 750.0 MHz => P = 125, Q = 83, R = 75 */
-+	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
-+		cfg = < 3 124 5 8 9 PQR(1,1,1) >;
-+		bootph-all;
-+	};
++&cpu0 {
++	nvmem-cells = <&part_number_otp>;
++	nvmem-cell-names = "part_number";
++	operating-points-v2 = <&cpu0_opp_table>;
 +};
 +#endif
 +
- &sdmmc1 {
- 	status = "disabled";
+ &gpioa {
+ 	bootph-all;
  };
-@@ -56,3 +193,23 @@
- &usbotg_hs {
- 	u-boot,force-b-session-valid;
- };
-+
-+&vddcpu {
-+	bootph-all;
-+};
-+
-+&vdd_ddr {
-+	bootph-all;
-+};
-+
-+&vdd {
-+	bootph-all;
-+};
-+
-+&vddcore {
-+	bootph-all;
-+};
-+
-+&vref_ddr {
-+	bootph-all;
-+};
 -- 
 2.47.2
 
