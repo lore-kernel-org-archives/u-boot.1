@@ -4,120 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC58C83000
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 07:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EA97C83000
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 07:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42B1C82EC6;
-	Mon, 30 Jun 2025 09:01:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 978F581E13;
+	Mon, 30 Jun 2025 09:23:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="M1QI8vA5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CUwqQit/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 523B782E5A; Mon, 30 Jun 2025 09:01:01 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 70CC981FEE; Mon, 30 Jun 2025 09:23:44 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F30FE81E13
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:00:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55TAsCr7012874
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 07:00:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=KeWRXaRWxqK
- 136DBI5xlnSei4e8xC5WKI1fcg9eIlm8=; b=M1QI8vA5rLNnB4J13ZB1FIW8oyp
- mtb1JYf4ELTa0i1K2bPWCVGSIeJNIhgUHZkJLovq9oyZBS8uDtTWK6W9RG0P1ytP
- BhTrXP1RNn5rN7Cqlg86+pTOpmE8OPoRCayO/gpZNghIXpXzhDAwCAkoUpnPKu/Q
- 6Ay6cb2kh6T1NllwWYxC8n34ZZOuE8Z/RX0Ph2HmNEZuV+BG8GKxJwH6J7yKTP5y
- 2axFN5376jm/mETIHQImQPHEGdZ0PhF3KxW3TxyS/95YMuSVqecYF+tSfhF+kSq5
- OOINGoNVs/z3MWKMbyHwPd/rmjcdakmexR8sVDxZcSqkwK/Qnmi/4pDcGWg==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47j9pckkyq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 07:00:49 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-b31f4a9f67cso2632441a12.1
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 00:00:49 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 197D680B9B
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 09:23:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-70e3e0415a7so38412317b3.0
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 00:23:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751268219; x=1751873019; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qb3u8q2k68qjHnDf5TitdCbZta15+jmt66v4Wpqm/qE=;
+ b=CUwqQit/OvE4NPsMqDAD4l9AnfbqIBeBEjD/NaGK28U8prXmobdtHJSpwNpYmeb1s7
+ mvvGarjdISGo2IsJOoWAiwz4oQxG7giMuu0Dg6LMTt9bWZwfqsvyyJUKh3MjLBO6g4Iu
+ uId+D3M4UWPe0O0dQXIh7YYT4eJXwyrgia57j7Q0kJ1OHd4Ls4CWD63x0/xGu3659pIV
+ 1T3t3uDU9BmsYr5lZgSkxJsZSBBUzcQFAkFH7TfQB3IUhzbNZW0K+3yH98QM/ZX5Zlz3
+ CyN68JE4fCwzOMJYFHdQzvRG3n7DQ2w7L93ENmqeMowcAFj504Zd5wsh12yU/z/baTr6
+ cgGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751266849; x=1751871649;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KeWRXaRWxqK136DBI5xlnSei4e8xC5WKI1fcg9eIlm8=;
- b=KHu4KWoxqcJB51rhrEhZD/XMz+rsbdmuH3b6g0GlcKMNfJXG2TJEWgBZ/182yQ8WpD
- ZcYiGfzbV9OR3gdjsGfWzgukSzo9yoU2hdLk8UjP5M738JQZktNE7K8k5LFGXI9dImkO
- 1M443T2HBAuE0AZvCc5wDXkWA01dSkxiYagX2ZwHtWHXWOQZZjbIwoB90iiu33j0jNRK
- w1vZtxdbFBbKLOeWRaWsI0bdrwiWExchM4qk5tI7AA8vxjaGVaAedqMC5TlMAlVcc6jy
- 7Tlmpe5+0ZwwNSo1lScORUH3ufPXpQrj8u3XVIm2+SfN7vM0pAnq00vMX2qn9GrO5IH2
- 8C+g==
+ d=1e100.net; s=20230601; t=1751268219; x=1751873019;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qb3u8q2k68qjHnDf5TitdCbZta15+jmt66v4Wpqm/qE=;
+ b=vdmEHILCyCNYmknrOtkCgsCZqWdXzhLw80ERdIPZoDDCBO4/OPMGUjjVKRj+yxo+ZT
+ W/fQWhsda7N9t+cDppZ4EuUSivofMzGgWqKXLYlv4hrBcbjzKqtwtgV0TTbqX+YGX0C0
+ gJn8/iU236YK9v/JgN4vPeaqV2rjTDdIJ1qqHVDp4BrRcDzA5QmcNr9dUugTpuigsyiB
+ OrjPIEzcvnAFPRqk6waNaoLzC6kQG0Ca+TJgJ6o3dc/4SLMPWuKgAEVWZie/qUctHCTn
+ +vlkIoVqiiqdq3CXuXaINECUZY8ClVs38CjoBPtu4KwcRCX6CzYYjn9ml7JbAtui4JJw
+ ALyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgKDGAyF/MXiW1yCmBldgKnB0NmDniFWrxSOpDB7wi14moN8LrlHnaIR1QXdcZk+juc8iSYns=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZrBTD/+/iuSYBnv6sTZdYOA7HvfmlIptXrZyWS8jHMORGBmEU
- joVeGXZERxdM0ilUo6utTL0JvZmLNq3nnGdDdWInN2GqHH/GUKWsclYC7vFgid6+IOv5C+9pL23
- c9qaLZ9roelVzwwct28Da+ZHqqs9xmAFRe4mlMmGKgwSSod5pNxmY49oy
-X-Gm-Gg: ASbGncvh4ey+fB2VkKh2GObyoKdCkBOnjYOPNr9C+uuVd8PPdxHv6QLezR215uwx0Pl
- yZdv8vJsCPPMhQYnEEIv7dHC4yyiskuTC+GPISmLHsyjEjaYTvn4XwrgVEtkOsl03ZfcpXcyafx
- z7z+HX0TP8C4rAPdcdTwpzTyoQqzDsb8DKNw4fy5WxGUDEJ3TtDQRl1m330YYGXGD8dpoyj/IaS
- pLHLAmWrA4EwbBtqP8B6EcbSMlvigBbfcpkN0YEMekzquPBIQWsrjk2C1qnAEFDqztLz8EMLljC
- Z0BL4fPA4cQ+bWWQ0TArN+stCmffeUVDc+96/LNNLxJmFOAa09hwk1SgQ/cmgUGRRAdSBCNVHMr
- sTmolQx4q/+NpoADHWiQQ1/CD6i1Lae/ZQwGAwO1oDtCMyTWawks=
-X-Received: by 2002:a05:6a20:c704:b0:220:63bd:2bdb with SMTP id
- adf61e73a8af0-220a16ca7famr20225285637.40.1751266848955; 
- Mon, 30 Jun 2025 00:00:48 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGb7G0JYNr9OSzgvYl7hZyqxXHxCa095tylf90wHScEr6+oEyBRo0iX1FFAmxUYDAAxfjbFHg==
-X-Received: by 2002:a05:6a20:c704:b0:220:63bd:2bdb with SMTP id
- adf61e73a8af0-220a16ca7famr20225218637.40.1751266848549; 
- Mon, 30 Jun 2025 00:00:48 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74af540b443sm8383634b3a.15.2025.06.30.00.00.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 00:00:48 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com,
- balaji.selvanathan@oss.qualcomm.com, quic_varada@quicinc.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v1 1/2] configs: Rename qcs9100_defconfig to
- qcom_qcs9100_defconfig
-Date: Mon, 30 Jun 2025 12:30:39 +0530
-Message-Id: <20250630070040.734486-2-balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250630070040.734486-1-balaji.selvanathan@oss.qualcomm.com>
-References: <20250630070040.734486-1-balaji.selvanathan@oss.qualcomm.com>
+ AJvYcCX4WViJdyRRYaLWF9l7bQEcPrzESfSK2TVjwy1ya3NG61L/ZQ0ToFhvsYAlNIxnK+8xPGq10qQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMaM/zoKuDDk0oATo9CAEqbOphiHVGwbZ93qgcGa89pLWi0rIj
+ xDq4Kg09LIfoYBgJVpNyssS2fgg2p3NWJHqRaRkeXSzfjf9Ejk8hmcooeq/ABBFXE0htfRtNfKl
+ AN8TomiDdIRG6hJmTDMXQtakldyFFnzM+UXM/w4XyOA==
+X-Gm-Gg: ASbGncv3LgLa8hAexEHnj62slCeEJUrvp3n7h1j/aBoPhSfMeMJoJ7vAenoDf6h+bgn
+ YtIevxcxpW1hMIZCOR2kA8QfOoWClAKlkmhRMqm+6ANWldC2pYDxF3lZmAH3dzP9BmmLXFiE5sx
+ bYvABeYLBFm/Uc65xmW758kBydCfPFVNIfwGxFH5lgLLL4
+X-Google-Smtp-Source: AGHT+IGGoerzQh1ej2NZ7Zo/tlJaT2SIPc6xdjkvQ5gbzknMux3ZPSUQlomaYlszTCxLhP358lvEx+2rJ6QhiO3kGt8=
+X-Received: by 2002:a05:690c:7089:b0:70e:4d8:5cab with SMTP id
+ 00721157ae682-7151755887dmr179803767b3.2.1751268218824; Mon, 30 Jun 2025
+ 00:23:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: D5F-zwrL5Bnl9mssmXFxwJBMeack4n4E
-X-Proofpoint-ORIG-GUID: D5F-zwrL5Bnl9mssmXFxwJBMeack4n4E
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjMwMDA1NyBTYWx0ZWRfX7c+smLuTHg+1
- M6X9B896lKz8g+BhrBj6FzWZ43FUvy0kjGpwyJ1NNqW4MUNVJVsi2VtR8MlolYeF3e/8tqInI5R
- znZggF5r8uAHXjJU4CKr3oB3MaZyJm4pAZUPAbez57AMeGhzFGXLtp8rQ7f9gVZMQLX3FAlwpf9
- yZznqLDkmsDDnBG+hzezyPoWVcRc4q4m9/Q0T+IifXP7Bc9rhEiBqrZAf22H4XZyl8sZvejwoUA
- TRyjH6TSri72QkMIwhOzWXmgwdZ3Jrzu2npl1GU7hW9Z7G1QbTn2/Ek2zeDNvJdnG10NDvg8TF8
- E0Kc8mq8qyf+WzU2GOnJ6c2CLu08mLNLLzFP/hTSUX8ebq4Q6sq7glAtLIsi2ITnpeafZ9o+of5
- vVbpHOgGPRFFwKWshhNTME3rlr7a9XgWHZgF3HRcJ8PzC6I9WM/G3SjeK1dxDbHKM4idELqP
-X-Authority-Analysis: v=2.4 cv=QMFoRhLL c=1 sm=1 tr=0 ts=68623621 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=6IFa9wvqVegA:10 a=EUspDBNiAAAA:8 a=FJz27EJTjh5BYeropFsA:9
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-06-30_01,2025-06-27_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 bulkscore=0 spamscore=0 adultscore=0
- mlxlogscore=788 mlxscore=0 lowpriorityscore=0 suspectscore=0 impostorscore=0
- clxscore=1015 phishscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2506300057
+References: <20250625-tpm_enum-v2-0-ea3f84f6b639@linaro.org>
+ <20250625-tpm_enum-v2-1-ea3f84f6b639@linaro.org>
+In-Reply-To: <20250625-tpm_enum-v2-1-ea3f84f6b639@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 30 Jun 2025 10:23:03 +0300
+X-Gm-Features: Ac12FXxaKVF0eGIo61of-MMVOmaOK412ZO6c8SeOE6ZnArHSke5mlz_JClkIXHw
+Message-ID: <CAC_iWjJ69F_1n7V3jFLDggcot2OW+VaSAMuKs07SXjGk0P1J3g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] cmd: tpm: Fix attempt to return value not in enum
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,20 +93,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To align with the naming convention used for Qualcomm platforms in
-U-Boot, renamed the defconfig file from qcs9100_defconfig to
-qcom_qcs9100_defconfig.
+Hi Andrew
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
- configs/{qcs9100_defconfig => qcom_qcs9100_defconfig} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename configs/{qcs9100_defconfig => qcom_qcs9100_defconfig} (100%)
 
-diff --git a/configs/qcs9100_defconfig b/configs/qcom_qcs9100_defconfig
-similarity index 100%
-rename from configs/qcs9100_defconfig
-rename to configs/qcom_qcs9100_defconfig
--- 
-2.34.1
 
+On Fri, 27 Jun 2025 at 12:37, Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
+>
+> The function tpm2_name_to_algorithm is defined as returning an
+> enum for the algorithm specified but it also attempts to return
+> an error on failure, but that error is not included in the enum.
+> Add the error to the enum so that it can be returned.
+>
+> This issue was reported by Smatch.
+>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  cmd/tpm-v1.c                 | 1 +
+>  cmd/tpm_test.c               | 1 +
+>  drivers/tpm/sandbox_common.c | 1 +
+>  include/tpm-v2.h             | 1 +
+>  4 files changed, 4 insertions(+)
+>
+> diff --git a/cmd/tpm-v1.c b/cmd/tpm-v1.c
+> index 6e019d1c729..25402f7543b 100644
+> --- a/cmd/tpm-v1.c
+> +++ b/cmd/tpm-v1.c
+> @@ -8,6 +8,7 @@
+>  #include <malloc.h>
+>  #include <vsprintf.h>
+>  #include <asm/unaligned.h>
+> +#include <linux/errno.h>
+
+Why is this needed? Shouldn't it only be on the header file?
+
+Thanks
+/Ilias
+>  #include <tpm-common.h>
+>  #include <tpm-v1.h>
+>  #include "tpm-user-utils.h"
+> diff --git a/cmd/tpm_test.c b/cmd/tpm_test.c
+> index af83d78c3fe..1d9644d5aae 100644
+> --- a/cmd/tpm_test.c
+> +++ b/cmd/tpm_test.c
+> @@ -7,6 +7,7 @@
+>  #include <cpu_func.h>
+>  #include <log.h>
+>  #include <time.h>
+> +#include <linux/errno.h>
+>  #include <tpm-v1.h>
+>  #include <linux/printk.h>
+>  #include "tpm-user-utils.h"
+> diff --git a/drivers/tpm/sandbox_common.c b/drivers/tpm/sandbox_common.c
+> index 596e0156389..4bc003a2c09 100644
+> --- a/drivers/tpm/sandbox_common.c
+> +++ b/drivers/tpm/sandbox_common.c
+> @@ -7,6 +7,7 @@
+>
+>  #define LOG_CATEGORY   UCLASS_TPM
+>
+> +#include <linux/errno.h>
+>  #include <tpm-v1.h>
+>  #include <tpm-v2.h>
+>  #include <asm/unaligned.h>
+> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+> index ece422df0c7..6c516dd3c9b 100644
+> --- a/include/tpm-v2.h
+> +++ b/include/tpm-v2.h
+> @@ -266,6 +266,7 @@ enum tpm2_return_codes {
+>   * TPM2 algorithms.
+>   */
+>  enum tpm2_algorithms {
+> +       TPM2_ALG_INVAL          = -EINVAL,
+>         TPM2_ALG_SHA1           = 0x04,
+>         TPM2_ALG_XOR            = 0x0A,
+>         TPM2_ALG_SHA256         = 0x0B,
+>
+> --
+> 2.39.5
+>
