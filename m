@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3763AC8302B
-	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 15:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58AC4C83029
+	for <u-boot@archiver.kernel.org>; Mon, 30 Jun 2025 15:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66AD182E27;
-	Mon, 30 Jun 2025 17:20:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B3C9E82ADA;
+	Mon, 30 Jun 2025 17:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DPZ8pNat";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NajwaMdV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 731C182F03; Mon, 30 Jun 2025 17:20:10 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id C911C82F2B; Mon, 30 Jun 2025 17:20:13 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 566EF80B9B
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 17:20:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5B8082ADA
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 17:20:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-453398e90e9so17840955e9.1
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 08:20:03 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3a528243636so2838073f8f.3
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 08:20:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751296803; x=1751901603; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751296802; x=1751901602; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qXsJAcjL+wJJXVsuQnMemZXIQywIfTxngzhmXeZF+ys=;
- b=DPZ8pNat//5JPUCe+AzkMBsRRiORQXxCKlCY9KexpFy89TgKH535hCJUr7JxjAO9Z/
- qc6l0m9XmS3Kfb2W+rPS9mOxFaB/9mcDpkrtD4BW+GFDf7sRwAlpGdEuU1ZpaPmv2oZ9
- IGeTSQj2Hd85imjQWiRhuUKz7ZRU6fVuixpK3EJEWiTtdXw5cdwf3AlI4m7oExGgRqyS
- rlLuI9EHStQ6p+Rg2Gcv4bspf11ayf2wRbxWOLYf6We3kAmPtIDC/qdQxuzsFRqLJaFB
- eUCqxDI0LFhxoNJi8aXjPrRYAMfAs6xmtsNSrm5qGSveByMXoxrx6qHl+4h05cJTFEmX
- Xzkw==
+ :reply-to; bh=EEjue6a//58KimZBKjkj7bMaZyR7hvKl1178M90j21k=;
+ b=NajwaMdVUm3O5Cakb98W/3yxnP/HIxMusrQgl5+6zma0v4C9QClseYO2+5HYrLvZAA
+ ittCO8EdqLbKKV0OgsjlrTqqXx5dfe5SbXxiU1/MeCj1O+KQ7FXBnV4BBdwajShlv36A
+ yxJUqKu4Nu2mR7JvM2a69n6bA+XZ9Z2di9fMJa7zhCnDMAFMyLBHbzf/4U3n3d1MkhDi
+ 7TzmwZ9cjARbeHWhBN3GrMlFIDM6bzGRhtVNWdaoHCfMi776tGEuqQp66J5Ta9DYoukz
+ a85XseG1uoX5KRBmoJwzUoTeldqb0HwS+ygnBpavgCxSKaf1eYI0FRcMnY6t7Zy2EKf5
+ I1kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751296803; x=1751901603;
+ d=1e100.net; s=20230601; t=1751296802; x=1751901602;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qXsJAcjL+wJJXVsuQnMemZXIQywIfTxngzhmXeZF+ys=;
- b=qoKT0z2eL8936DCBA/OEm8CaJBSgQLKusG92NW9cAyccZjdv3l5OwcfKr0M4POE8jR
- 7lzgnAX+mBi9vMCHiPSH4bCpewRoSltCawQN960Tt83H9lCZXL8yVotz1iGxrIF28Q3g
- keNnkTaU8OKpW6RRBsgFIF9RNu39GjRisSkBjD7gAOUSU3dWKtgCcoQMAvd5MEWrTkJ1
- 5KGcHiu+60NdMS1pv4qTr2XFnKR+i+GEtJ17NrkuObcShUusr4i8TDm+DnIRvotqYjoq
- WcPf06orPi2VdIEw8kZe3bqKU4ef2gEbUsnKxtu9cgkvDg35u78cbA30pw3RH+fvCW69
- 9UHQ==
-X-Gm-Message-State: AOJu0YxjzrwpHEcPumkv1sWSYTWL3YGlpvtLV2l0R9nRaYPj4wCHe01n
- M9yvs49pHgGYcjW2i4PBSiphiG35WfL2P5YSzU9ZDMIRyp+t9hZKDwv6dYv9yXZ/oFA=
-X-Gm-Gg: ASbGncuMLNUPd+ofQfKj0HFSvk8BBgOuNPTO2Mc6h3pogTzThzj4rmzNhnBRw/4mNB4
- K6jfmGjjfVDGqxkhIpERRjzngpCAISkTI7Jh4xB1p/NwbJZ//UcWLzGaqHWN3tDoMABgjHVSWv3
- 2xBnTiqy3ltmS+VmJrwW8jSk3OLEZ3p8+W+PwyJWJJE8M5qXwKK6zfwmApdW0UjVgonV4nMrcCF
- hxGyGUuI5tsCmmoJ8QXmWnTTXSmKqWUm7hdBGOobPju3vr6ZWWhgpC8Pqfz1h5IJL0lT4Vg4cVW
- 7qYAzVSCN04HvkdFq+u0ALpORyayhAOusWVtC23ZPX1e+BRyhrvTYyI76dipzJmTxbooNNyELIp
- ycjNvU44=
-X-Google-Smtp-Source: AGHT+IHJU6RP9YygiyauUmy1mn4wcx73o9xQFCiiMi86ksM5GsDFEIwrBLhtxEyp0cWdnpg/NbqQ+A==
-X-Received: by 2002:a05:600c:6383:b0:442:f482:c42d with SMTP id
- 5b1f17b1804b1-4538ee39977mr138435995e9.9.1751296802491; 
- Mon, 30 Jun 2025 08:20:02 -0700 (PDT)
+ bh=EEjue6a//58KimZBKjkj7bMaZyR7hvKl1178M90j21k=;
+ b=Xv6ukfSjXvgUPh9UqivsZi0Cz5TegZn7xId0zzFm5KLaZyfhN7sDtfSVpUpvvyMzJb
+ R2jZWG4hM/feJbByroOGlJsRKV4mmUgMBz1+vXM70jchcUhmLowcBiUTq8JnKqsRyTBD
+ u45DOf1tXB2sBul6zG45ATuZNZwDOC/QTrBm2RbwhLACxC2e2BkBBy+cnnWOEtAEBCFR
+ K1RK05FuG1Eg9UDTBYrqWRHB3WDad6bi3Aav7UTCmG0P0WYjMxPWR0Hi4vegv49b32XM
+ vuYjJcPb8txOA7nCT56ERMNvmADzVSBtxpoMrj4EkuxSgnKjohhAGxDmzYWHnqd7aV8j
+ bALg==
+X-Gm-Message-State: AOJu0Yw4yLQEkGR+Wjd1CDbbm+iCSWGT5lan+6i0xM0u+VeXED/0AY9z
+ uXN/0BA7MmBDxALd9omZD5C46aklirYA8fO+6nQ9KfmQGCCOCkErzcfgyQllnyUJqpT5+tI82j4
+ ZBsVtj8s=
+X-Gm-Gg: ASbGnctPGD7d1xzIymjqUFA+489rGp6pXn6bGfmGYkhv7c6sYgncE4L0P08YMugAnxc
+ F0+zlhhfiQXmX/85NCkAEOjhAlNE0wWyt4Jp6dY3axmHH0onLpKV/eyOtkQZTZok8n9IryBQp1x
+ tZ12+gMJPR4ZhKnu62TmO+BJHM6E2OgwraiMczlWP0JElYXIcnyNZ03w+OnUdrhjbMsSZSdqqP4
+ yZbzClZoewWd+AtSlwb4Ztn4xO14NecXxw9+X/rg6+YtTWFzo9bueTeTMBS1I6Npx9LYlKOiEbY
+ e6ELkyb4wPnIvup7mKuabChjN5GQ3O9hdJKAV3OptJatGRG9nEZYSIUh7VSxph9SyB+bx1AwJoC
+ ruWbJXwc=
+X-Google-Smtp-Source: AGHT+IFqxfW0JVZLPB3piAPXgL98CuTZ0FYaEbM/vtKAS2nWVEujVeGwbEClWHwi9GrfjJSYgyeAcg==
+X-Received: by 2002:adf:e648:0:b0:3a5:2208:41d9 with SMTP id
+ ffacd0b85a97d-3a9001a192dmr9276688f8f.40.1751296801928; 
+ Mon, 30 Jun 2025 08:20:01 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-453823ad03asm170432295e9.23.2025.06.30.08.20.02
+ 5b1f17b1804b1-453823ad03asm170432295e9.23.2025.06.30.08.20.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 08:20:02 -0700 (PDT)
+ Mon, 30 Jun 2025 08:20:01 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 30 Jun 2025 17:19:59 +0200
-Subject: [PATCH RFT v6 3/3] fastboot: integrate block flashing back-end
+Date: Mon, 30 Jun 2025 17:19:58 +0200
+Subject: [PATCH RFT v6 2/3] fastboot: blk: switch emmc to use the block helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250630-topic-fastboot-blk-v6-3-7cdfd3a24786@linaro.org>
+Message-Id: <20250630-topic-fastboot-blk-v6-2-7cdfd3a24786@linaro.org>
 References: <20250630-topic-fastboot-blk-v6-0-7cdfd3a24786@linaro.org>
 In-Reply-To: <20250630-topic-fastboot-blk-v6-0-7cdfd3a24786@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -84,20 +85,20 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>, 
  Dmitrii Merkurev <dimorinny@google.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7788;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9409;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=RLinaxkpe3PwUb+fbTmIup4LnynRByPlLI0vD59SZs4=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoYqsfs1noB11I50xBIaD2AcJ5KuRpskHXitG/AdRj
- Vp+WLryJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaGKrHwAKCRB33NvayMhJ0TBgD/
- 0Wf4c2o5fMn+Chx7OTLnxXTeUYSF8zpl3Ake7qr95gzVlLBwwljoc76FSBKYAGKR6z59xxKye3P/TE
- ffCho+o63b95C94BIwdKZGqSTXE4EeLQeP8TsMnreCN0lJk8SsRcwCow7vUfmwAANPE9EuRAqsdtJr
- kbtyBOj4YKFZZEc/3suk5SsOK99+Cex3BdtweOsvFICx0YZNOtzG/M4veCs3Zd1WfDPn7HihAPfn1n
- MOwNl2fLCAtKZHYHjvvEG6Wb+z2sHSieWPL7C7QblTK71i5C11BDQUhWWmdEKQrlPOExuaA7oBkqRw
- aHYXR8SRKUieszF0wYNtyn9kTspA+CXLtkzJ30pS6fcx7zwwJdw9XwKvEQyEv7w3pCQZlua4laK1tI
- PIPNwZHPyr9619dxsZdB4mgOBpSbc/YWquoGlfK1H0U6+zv1Ua2SxX2KPjzTkBy2q1elWh4sfRyaEj
- RsQ8dAFnumhbrgCXs7its4psZYKVpD9gktHRCT9C5V22pANgVlzC1/jcPU5w4QZeZeBQQwAT/cYWYF
- mf9b8wVvRiz5lrshfKP3DbluXbX5u3aL/wAPUiltEt/W4FyOVYCJPWL8mTjiDHuksfh76CnGp0kwE9
- LLV1Iqsl/xY3/zgMJj9n97gE8I+8rqrirSS9W4PeCuWNbD+wxhZmGF0p9HMA==
+ bh=i00E8Gtz4m/2fVqy2mO1ocM94d9KHU3NlieYR42vMkk=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBoYqsfZceD/vO/PMEXJuPuaPpIbxS3O0cAM8G+GLa+
+ 3NsvsXmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCaGKrHwAKCRB33NvayMhJ0eAkD/
+ 9MPfHduQgPTPO9hz2l5MiDHDcRwgWosbVDH2QnOG3ebcvb7QR0IKU/SFxSeDsa9ZGMjKtbqRknpi2e
+ eaTptw+dhnurFlaJrrhUurPMAcZ5hgNe86fsJad0Hh4lmE6cSDGoMoacTmcoSR3TYrbzLpQGo1NtFw
+ 49kMhf+caTTpHmF79ZjM/hInOwv5epYFAVYg1FBzu2zzu8s0eUB+tMbW7tZiueNn2f6VKJguMqCgFt
+ dOP6seFLZjd+r5ve0I/nEfShy+IMXfG6EgZsEitE6X/RuapslzihX7H+pF8h7EQogeuClT8UmU5fMg
+ xc4peYgrKnowflqf/BdKeK/sDotYKto/zo73tKKtC8N0REy6liZH7raX6NLt+bQXFjV1noDciRx8Jv
+ S5mEpitzTaJQrc2AZw6YX5QO1S/bf2cc1xyoKEtBlYfYkYqER7e7bpggbDJJvwni45qyTzjQiC3WiT
+ 9/2E4oQWcYCQxi/06ByEUrirS3uKmAxWd+T49c28q73yJgU/Iz+Tb398iyIGD93dnLIzi/Ey56uWgG
+ W/evUfVj3cyr+KrhUN8oELrdTuln1fJfD+gfgfwKDzoJpKESsn0dXcRJxxFQqmlkmKGrue2Xb+vhcB
+ rtj7QgqlBxUfGuhgc+QJjjFTVxfNF25HovuIVhqFFuj7FKfL+dPUCHCOiQSA==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -118,207 +119,303 @@ X-Virus-Status: Clean
 
 From: Dmitrii Merkurev <dimorinny@google.com>
 
-1. Get partition info/size
-2. Erase partition
-3. Flash partition
-4. BCB
-
-Make FASTBOOT_FLASH also depend on BLK, but make sure
-it doesn't affect SUNXI and ROCKCHIP platforms since they
-default to y already.
-
-Make it only default on SUNXI when MMC or NAND is enabled,
-so it doesn't break the CHIP & Ninendo boards, and for ROCKCHIP
-when MMC is enabled.
+Switch the mmc backend to this new shared block helpers,
+reducing block logic and only leaving MMC specific logic.
 
 Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/fastboot/Kconfig      | 32 ++++++++++++++++++++++++++++++--
- drivers/fastboot/Makefile     |  1 +
- drivers/fastboot/fb_command.c |  8 ++++++++
- drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
- drivers/fastboot/fb_getvar.c  |  8 +++++++-
- 5 files changed, 64 insertions(+), 7 deletions(-)
+ drivers/fastboot/Makefile |   3 +-
+ drivers/fastboot/fb_mmc.c | 210 +++-------------------------------------------
+ 2 files changed, 14 insertions(+), 199 deletions(-)
 
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 70207573de2bd0d56b4b7fa6f7e17fdc5803ba15..b2b20a2c5e430cccc49fd6c04d6fb8825b67ec04 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -90,8 +90,9 @@ config FASTBOOT_USB_DEV
- 
- config FASTBOOT_FLASH
- 	bool "Enable FASTBOOT FLASH command"
--	default y if ARCH_SUNXI || ARCH_ROCKCHIP
--	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
-+	default y if ARCH_SUNXI && ( MMC || MTD_RAW_NAND )
-+	default y if ARCH_ROCKCHIP && MMC
-+	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
- 	select IMAGE_SPARSE
- 	help
- 	  The fastboot protocol includes a "flash" command for writing
-@@ -119,6 +120,10 @@ config FASTBOOT_FLASH_NAND
- 	bool "FASTBOOT on NAND"
- 	depends on MTD_RAW_NAND && CMD_MTDPARTS
- 
-+config FASTBOOT_FLASH_BLOCK
-+	bool "FASTBOOT on block device"
-+	depends on BLK
-+
- endchoice
- 
- config FASTBOOT_FLASH_MMC_DEV
-@@ -193,6 +198,29 @@ config FASTBOOT_MMC_USER_NAME
- 	  defined here.
- 	  The default target name for erasing EMMC_USER is "mmc0".
- 
-+config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
-+	string "Define FASTBOOT block interface name"
-+	depends on FASTBOOT_FLASH_BLOCK
-+	help
-+	  The fastboot "flash" and "erase" commands support operations
-+	  on any Block device, this should specify the block device name
-+	  like ide, scsi, usb, sata, nvme, virtio, blkmap, mtd...
-+	  The mmc block device type can be used but most of the features
-+	  available in the FASTBOOT_MMC will be missing.
-+	  Consider using FASTBOOT_MMC on a MMC block device until all
-+	  features are migrated.
-+
-+config FASTBOOT_FLASH_BLOCK_DEVICE_ID
-+	int "Define FASTBOOT block device identifier"
-+	depends on FASTBOOT_FLASH_BLOCK
-+	default 0
-+	help
-+	  The fastboot "flash" and "erase" commands support operations
-+	  on any Block device, this should specify the block device
-+	  identifier on the system, as a number.
-+	  Device identifiers are numbered starting from 0 and the most
-+	  common case is to use the first controller on the system.
-+
- config FASTBOOT_GPT_NAME
- 	string "Target name for updating GPT"
- 	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
 diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-index c2214c968ab357371f5d3d27ecc9c1a3e9404e89..91e98763e8eab84ccd9b8e5354ff1419f61ef372 100644
+index 048af5aa823436956142a536c5f7dcf1a8948726..c2214c968ab357371f5d3d27ecc9c1a3e9404e89 100644
 --- a/drivers/fastboot/Makefile
 +++ b/drivers/fastboot/Makefile
-@@ -3,6 +3,7 @@
+@@ -3,5 +3,6 @@
  obj-y += fb_common.o
  obj-y += fb_getvar.o
  obj-y += fb_command.o
-+obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
- # MMC reuses block implementation
- obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
+-obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
++# MMC reuses block implementation
++obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
  obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 2cdbac50ac4a0ce501753e95c1918ffa5d11158d..e6aee13e01618ee6567bf00527d3df327ae06f1c 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
+diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
+index dca7c222f35659b22d327541b245760a6a6d7b35..11d9c8e84602c7434733c060b84c91c38772ac9f 100644
+--- a/drivers/fastboot/fb_mmc.c
++++ b/drivers/fastboot/fb_mmc.c
 @@ -8,6 +8,7 @@
  #include <env.h>
  #include <fastboot.h>
  #include <fastboot-internal.h>
 +#include <fb_block.h>
  #include <fb_mmc.h>
- #include <fb_nand.h>
- #include <part.h>
-@@ -337,6 +338,10 @@ void fastboot_data_complete(char *response)
-  */
- static void __maybe_unused flash(char *cmd_parameter, char *response)
- {
-+	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
-+		fastboot_block_flash_write(cmd_parameter, fastboot_buf_addr,
-+					   image_size, response);
-+
- 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
- 		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
- 					 image_size, response);
-@@ -357,6 +362,9 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
-  */
- static void __maybe_unused erase(char *cmd_parameter, char *response)
- {
-+	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
-+		fastboot_block_erase(cmd_parameter, response);
-+
- 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
- 		fastboot_mmc_erase(cmd_parameter, response);
+ #include <image-sparse.h>
+ #include <image.h>
+@@ -20,10 +21,6 @@
  
-diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-index 68f92c4b887c8442cc212b8613fb70c7251cdcdf..dac5528f80908bf5b1224284c9ecd492394e4f0e 100644
---- a/drivers/fastboot/fb_common.c
-+++ b/drivers/fastboot/fb_common.c
-@@ -97,16 +97,24 @@ int __weak fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
- 		[FASTBOOT_REBOOT_REASON_FASTBOOTD] = "boot-fastboot",
- 		[FASTBOOT_REBOOT_REASON_RECOVERY] = "boot-recovery"
- 	};
--	const int mmc_dev = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
--					       CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
+ #define BOOT_PARTITION_NAME "boot"
  
--	if (!IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
-+	int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
-+					CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
-+	if (device == -1) {
-+		device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
-+					    CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
-+	}
-+	const char *bcb_iface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
-+						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
-+						   "mmc");
-+
-+	if (device == -1)
- 		return -EINVAL;
- 
- 	if (reason >= FASTBOOT_REBOOT_REASONS_COUNT)
- 		return -EINVAL;
- 
--	ret = bcb_find_partition_and_load("mmc", mmc_dev, "misc");
-+	ret = bcb_find_partition_and_load(bcb_iface, device, "misc");
- 	if (ret)
- 		goto out;
- 
-@@ -226,8 +234,14 @@ void fastboot_set_progress_callback(void (*progress)(const char *msg))
-  */
- void fastboot_init(void *buf_addr, u32 buf_size)
- {
-+#if IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK)
-+	if (!strcmp(CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME, "mmc"))
-+		printf("Warning: the fastboot block backend features are limited, consider using the MMC backend\n");
-+#endif
-+
- 	fastboot_buf_addr = buf_addr ? buf_addr :
- 				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
- 	fastboot_buf_size = buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
- 	fastboot_set_progress_callback(NULL);
-+
+-struct fb_mmc_sparse {
+-	struct blk_desc	*dev_desc;
+-};
+-
+ static int raw_part_get_info_by_name(struct blk_desc *dev_desc,
+ 				     const char *name,
+ 				     struct disk_partition *info)
+@@ -114,118 +111,10 @@ static int part_get_info_by_name_or_alias(struct blk_desc **dev_desc,
+ 	return do_get_part_info(dev_desc, name, info);
  }
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 9c2ce65a4e5bce0da6b18aa1b2818f7db556c528..f083b21c797dc7e55315f2cba017a4372483fa92 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -7,6 +7,7 @@
- #include <fastboot.h>
- #include <fastboot-internal.h>
- #include <fb_mmc.h>
-+#include <fb_block.h>
- #include <fb_nand.h>
- #include <fs.h>
- #include <part.h>
-@@ -114,7 +115,12 @@ static int getvar_get_part_info(const char *part_name, char *response,
- 	struct disk_partition disk_part;
- 	struct part_info *part_info;
  
--	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
-+	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK)) {
-+		r = fastboot_block_get_part_info(part_name, &dev_desc, &disk_part,
-+						 response);
-+		if (r >= 0 && size)
-+			*size = disk_part.size * disk_part.blksz;
-+	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
- 		r = fastboot_mmc_get_part_info(part_name, &dev_desc, &disk_part,
- 					       response);
- 		if (r >= 0 && size)
+-/**
+- * fb_mmc_blk_write() - Write/erase MMC in chunks of FASTBOOT_MAX_BLK_WRITE
+- *
+- * @block_dev: Pointer to block device
+- * @start: First block to write/erase
+- * @blkcnt: Count of blocks
+- * @buffer: Pointer to data buffer for write or NULL for erase
+- */
+-static lbaint_t fb_mmc_blk_write(struct blk_desc *block_dev, lbaint_t start,
+-				 lbaint_t blkcnt, const void *buffer)
+-{
+-	lbaint_t blk = start;
+-	lbaint_t blks_written;
+-	lbaint_t cur_blkcnt;
+-	lbaint_t blks = 0;
+-	int i;
+-
+-	for (i = 0; i < blkcnt; i += FASTBOOT_MAX_BLK_WRITE) {
+-		cur_blkcnt = min((int)blkcnt - i, FASTBOOT_MAX_BLK_WRITE);
+-		if (buffer) {
+-			if (fastboot_progress_callback)
+-				fastboot_progress_callback("writing");
+-			blks_written = blk_dwrite(block_dev, blk, cur_blkcnt,
+-						  buffer + (i * block_dev->blksz));
+-		} else {
+-			if (fastboot_progress_callback)
+-				fastboot_progress_callback("erasing");
+-			blks_written = blk_derase(block_dev, blk, cur_blkcnt);
+-		}
+-		blk += blks_written;
+-		blks += blks_written;
+-	}
+-	return blks;
+-}
+-
+-static lbaint_t fb_mmc_sparse_write(struct sparse_storage *info,
+-		lbaint_t blk, lbaint_t blkcnt, const void *buffer)
+-{
+-	struct fb_mmc_sparse *sparse = info->priv;
+-	struct blk_desc *dev_desc = sparse->dev_desc;
+-
+-	return fb_mmc_blk_write(dev_desc, blk, blkcnt, buffer);
+-}
+-
+-static lbaint_t fb_mmc_sparse_reserve(struct sparse_storage *info,
+-		lbaint_t blk, lbaint_t blkcnt)
+-{
+-	return blkcnt;
+-}
+-
+-static void write_raw_image(struct blk_desc *dev_desc,
+-			    struct disk_partition *info, const char *part_name,
+-			    void *buffer, u32 download_bytes, char *response)
+-{
+-	lbaint_t blkcnt;
+-	lbaint_t blks;
+-
+-	/* determine number of blocks to write */
+-	blkcnt = ((download_bytes + (info->blksz - 1)) & ~(info->blksz - 1));
+-	blkcnt = lldiv(blkcnt, info->blksz);
+-
+-	if (blkcnt > info->size) {
+-		pr_err("too large for partition: '%s'\n", part_name);
+-		fastboot_fail("too large for partition", response);
+-		return;
+-	}
+-
+-	puts("Flashing Raw Image\n");
+-
+-	blks = fb_mmc_blk_write(dev_desc, info->start, blkcnt, buffer);
+-
+-	if (blks != blkcnt) {
+-		pr_err("failed writing to device %d\n", dev_desc->devnum);
+-		fastboot_fail("failed writing to device", response);
+-		return;
+-	}
+-
+-	printf("........ wrote " LBAFU " bytes to '%s'\n", blkcnt * info->blksz,
+-	       part_name);
+-	fastboot_okay(NULL, response);
+-}
+-
+-#if defined(CONFIG_FASTBOOT_MMC_BOOT_SUPPORT) || \
+-	defined(CONFIG_FASTBOOT_MMC_USER_SUPPORT)
+-static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+-{
+-	lbaint_t blks;
+-
+-	debug("Start Erasing mmc hwpart[%u]...\n", dev_desc->hwpart);
+-
+-	blks = fb_mmc_blk_write(dev_desc, 0, dev_desc->lba, NULL);
+-
+-	if (blks != dev_desc->lba) {
+-		pr_err("Failed to erase mmc hwpart[%u]\n", dev_desc->hwpart);
+-		return 1;
+-	}
+-
+-	printf("........ erased %llu bytes from mmc hwpart[%u]\n",
+-	       (u64)(dev_desc->lba * dev_desc->blksz), dev_desc->hwpart);
+-
+-	return 0;
+-}
+-#endif
+-
+ #ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
+ static void fb_mmc_boot_ops(struct blk_desc *dev_desc, void *buffer,
+ 			    int hwpart, u32 buff_sz, char *response)
+ {
+-	lbaint_t blkcnt;
+-	lbaint_t blks;
+-	unsigned long blksz;
+-
+ 	// To operate on EMMC_BOOT1/2 (mmc0boot0/1) we first change the hwpart
+ 	if (blk_dselect_hwpart(dev_desc, hwpart)) {
+ 		pr_err("Failed to select hwpart\n");
+@@ -233,42 +122,11 @@ static void fb_mmc_boot_ops(struct blk_desc *dev_desc, void *buffer,
+ 		return;
+ 	}
+ 
+-	if (buffer) { /* flash */
+-
+-		/* determine number of blocks to write */
+-		blksz = dev_desc->blksz;
+-		blkcnt = ((buff_sz + (blksz - 1)) & ~(blksz - 1));
+-		blkcnt = lldiv(blkcnt, blksz);
+-
+-		if (blkcnt > dev_desc->lba) {
+-			pr_err("Image size too large\n");
+-			fastboot_fail("Image size too large", response);
+-			return;
+-		}
+-
+-		debug("Start Flashing Image to EMMC_BOOT%d...\n", hwpart);
+-
+-		blks = fb_mmc_blk_write(dev_desc, 0, blkcnt, buffer);
+-
+-		if (blks != blkcnt) {
+-			pr_err("Failed to write EMMC_BOOT%d\n", hwpart);
+-			fastboot_fail("Failed to write EMMC_BOOT part",
+-				      response);
+-			return;
+-		}
+-
+-		printf("........ wrote %llu bytes to EMMC_BOOT%d\n",
+-		       (u64)(blkcnt * blksz), hwpart);
+-	} else { /* erase */
+-		if (fb_mmc_erase_mmc_hwpart(dev_desc)) {
+-			pr_err("Failed to erase EMMC_BOOT%d\n", hwpart);
+-			fastboot_fail("Failed to erase EMMC_BOOT part",
+-				      response);
+-			return;
+-		}
+-	}
+-
+-	fastboot_okay(NULL, response);
++	if (buffer) /* flash */
++		fastboot_block_write_raw_disk(dev_desc, "EMMC_BOOT",
++					      buffer, buff_sz, response);
++	else /* erase */
++		fastboot_block_raw_erase_disk(dev_desc, "EMMC_BOOT", response);
+ }
+ #endif
+ 
+@@ -609,30 +467,11 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
+ 		return;
+ 
+ 	if (is_sparse_image(download_buffer)) {
+-		struct fb_mmc_sparse sparse_priv;
+-		struct sparse_storage sparse;
+-		int err;
+-
+-		sparse_priv.dev_desc = dev_desc;
+-
+-		sparse.blksz = info.blksz;
+-		sparse.start = info.start;
+-		sparse.size = info.size;
+-		sparse.write = fb_mmc_sparse_write;
+-		sparse.reserve = fb_mmc_sparse_reserve;
+-		sparse.mssg = fastboot_fail;
+-
+-		printf("Flashing sparse image at offset " LBAFU "\n",
+-		       sparse.start);
+-
+-		sparse.priv = &sparse_priv;
+-		err = write_sparse_image(&sparse, cmd, download_buffer,
+-					 response);
+-		if (!err)
+-			fastboot_okay(NULL, response);
++		fastboot_block_write_sparse_image(dev_desc, &info, cmd,
++						  download_buffer, response);
+ 	} else {
+-		write_raw_image(dev_desc, &info, cmd, download_buffer,
+-				download_bytes, response);
++		fastboot_block_write_raw_image(dev_desc, &info, cmd, download_buffer,
++					       download_bytes, response);
+ 	}
+ }
+ 
+@@ -646,7 +485,6 @@ void fastboot_mmc_erase(const char *cmd, char *response)
+ {
+ 	struct blk_desc *dev_desc;
+ 	struct disk_partition info;
+-	lbaint_t blks, blks_start, blks_size, grp_size;
+ 	struct mmc *mmc = find_mmc_device(CONFIG_FASTBOOT_FLASH_MMC_DEV);
+ 
+ #ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
+@@ -673,10 +511,7 @@ void fastboot_mmc_erase(const char *cmd, char *response)
+ 		if (!dev_desc)
+ 			return;
+ 
+-		if (fb_mmc_erase_mmc_hwpart(dev_desc))
+-			fastboot_fail("Failed to erase EMMC_USER", response);
+-		else
+-			fastboot_okay(NULL, response);
++		fastboot_block_raw_erase_disk(dev_desc, "EMMC_USER", response);
+ 		return;
+ 	}
+ #endif
+@@ -685,26 +520,5 @@ void fastboot_mmc_erase(const char *cmd, char *response)
+ 		return;
+ 
+ 	/* Align blocks to erase group size to avoid erasing other partitions */
+-	grp_size = mmc->erase_grp_size;
+-	blks_start = (info.start + grp_size - 1) & ~(grp_size - 1);
+-	if (info.size >= grp_size)
+-		blks_size = (info.size - (blks_start - info.start)) &
+-				(~(grp_size - 1));
+-	else
+-		blks_size = 0;
+-
+-	printf("Erasing blocks " LBAFU " to " LBAFU " due to alignment\n",
+-	       blks_start, blks_start + blks_size);
+-
+-	blks = fb_mmc_blk_write(dev_desc, blks_start, blks_size, NULL);
+-
+-	if (blks != blks_size) {
+-		pr_err("failed erasing from device %d\n", dev_desc->devnum);
+-		fastboot_fail("failed erasing from device", response);
+-		return;
+-	}
+-
+-	printf("........ erased " LBAFU " bytes from '%s'\n",
+-	       blks_size * info.blksz, cmd);
+-	fastboot_okay(NULL, response);
++	fastboot_block_raw_erase(dev_desc, &info, cmd, mmc->erase_grp_size, response);
+ }
 
 -- 
 2.34.1
