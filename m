@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9677FC8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 03:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BF7C7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 03:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AE5B82ADA;
-	Tue,  1 Jul 2025 05:49:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 80AEC82F42;
+	Tue,  1 Jul 2025 05:49:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CyHKhqzV";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dVP1wyuF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9680782F35; Tue,  1 Jul 2025 05:49:47 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 06BB582E5A; Tue,  1 Jul 2025 05:49:50 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AE6F82F03
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 05:49:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FED18006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 05:49:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3a528243636so3172802f8f.3
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:49:43 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3a5123c1533so1543522f8f.2
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:49:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751341783; x=1751946583; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751341778; x=1751946578; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bo/MJyul9h5zVmJiQjMIZB+O8dHyV1TlT6TuB+w7dnE=;
- b=CyHKhqzV+N9oHGU000wAp/o2qaFeghZpRYY0bXyzMCElwqe3lJ75XTV4qzZ6esE/RH
- IMo33XFEl0hNZ36PUyM/nYTQ0ZLbvCHqGcrPUreB6WoDAbt2nGXhv4DuNuPaJ7kUbF98
- 2x1GmKs514fv4aqpOG4ygm+HfVtdq9z9ghgieMEg+t8gDT9SN1JLBWowmZFPSWvmtjz7
- mvJpDvPvK7NdtUJ3Kz5leEOsDkh5yvKu7/77NeHRU1umftqWoCoL500g+G5IPpJSI4V1
- tmHd1uzgj1xd/mi+Al0QViAs4LYc7ftd8XKXyQeLKVnNE87ru0Rg6aMAHT7TRzrizO/w
- 7WmA==
+ bh=ydNmL5Gk1TuCL7/qVzPwHMAwrmFgsuXUQqMEZZL11K8=;
+ b=dVP1wyuFEkhYOKUcovsX3Qb9IHXUlx4so+Xg5+VNeWPJoPTTKFCiluVYA0NylKhJiR
+ 8TYm5QyPvBvekNUmtAH+VErTW5CJTo3yr+YeAVP6RxocvhwBMVEaRFvHiI7pNbjFkdjS
+ VKBrX1rNjbj5GcMXSn8i9/nXn5e13CZ8+5OdRFMtHPG74UxIEeTAh+ySQ3nx4+SXoxs0
+ ooyF70VS0SHiV58KckH2SB8hMOy1xVNoCwLUHF4BFeJEuTRYB/71QOfMYGPCs1uzn5qK
+ SRQ4GgpJNVj49B+o67imHkIphLaq4dUgRM3+WWBtgZhSs6lCfxv0XMNEJIfN2Qulv1u8
+ ks0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751341783; x=1751946583;
+ d=1e100.net; s=20230601; t=1751341778; x=1751946578;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bo/MJyul9h5zVmJiQjMIZB+O8dHyV1TlT6TuB+w7dnE=;
- b=LAFxJmG09qVjlsWmH4i6KPtN/YoHznYJHJKsWuV/KbzElULi6vE0XMLrObinPjhMmE
- JQwpcwqQQDa+u7HWiT1nISOGaOJu7VOLN8vjzkC2dmH6lcF162ZcUy+chJVDFNaoXnKB
- w+KeIsSpbxcynuU+T/mCP4SdCKlf6j+W/ipsjZHncsgX0NtMXYY7P1mno230sPXDAEB3
- 6bNpAd8T8vb92Pl4z2x/cnLmuDF0ICncHZJBIJCuD5uusOmX77SiaE20hEKCBeYEu5sf
- D7jAZ0LOx/7LIPRIpd4A37p/rOyMlTHCM75ISGzR8ngNsQxWCXwNeoh5HstHhYLohHAo
- IX6g==
-X-Gm-Message-State: AOJu0YxUMdmz4lR9OEuEbjj8WK014tZBJHic9hElbGVuXu0hry+/2Bvl
- cVep1mC89OyGAsOOJHsOsJrl/amocFBw4Oq4vwksBbE6ziitwcfGlQ22ijRUIzIrnUU=
-X-Gm-Gg: ASbGncufMtm7oB0aOctU0F0/E1ntkxj0N5z8KhT/Ne+TVUjvuSgRL8lC82RK+/SnN05
- bfpAUUroM4f2m/+i7IkB/Gbt++XjtATkPUq7Fo5X7eXHpGFrFELydStX5jA7KAbuOlzO3RXEpOU
- lRTrq0tlrAgsPpVpFdask61STO1xqeHU8RTF97aaN+CV7MKDCWGnP0dDjGf9q9Iu5QKY2lCt47R
- vpZmm9x7ni3OtvjEF7ufowuupz1UnFEjWgbkfaXBShmBnuWJ7xBKloGCJ4y9ecY7KsuMwaHPVrl
- nIaV7t8uPNdmnzctvhOztmDtb6GvyDI0DGVXFnwBfdnwZw5bPBypWdpc8icQZw==
-X-Google-Smtp-Source: AGHT+IEs8ikuhk7l4x5iMMmji8jO87w/2+YUyp07D+0851/ztWYmGaQfxYu37Mpe+oG/22zcdesZzA==
-X-Received: by 2002:adf:e648:0:b0:3a5:2208:41d9 with SMTP id
- ffacd0b85a97d-3a9001a192dmr10374235f8f.40.1751341782627; 
- Mon, 30 Jun 2025 20:49:42 -0700 (PDT)
+ bh=ydNmL5Gk1TuCL7/qVzPwHMAwrmFgsuXUQqMEZZL11K8=;
+ b=g0aHIaHrulNPHzz2zA5mrff1Or54u9VyAUUsSmUd4C3qfSbn3rBjrZUpcomjuEGIbR
+ g4WvNWclr0kMovIEYCWhcgPVwWyNNpygkUFYoFIX55ubcPHAjWTaNwLM2SBZyZUeTxik
+ JmCq9B85Np0ValWMLiRhCsltFTn4ebkx/D2L+3Lo+//xUgrOjVp8B7FcKbOgPTF54A50
+ htC56JotBenDsyfyowHb73+cu8TIQ3mLwEmBxMqEHVz4TDp4SgMixK2iVVK/CBm6jEAD
+ 4BHt8YZjQUv1DJ7pwT7xtrBRX9w6bqKIcz3YCTf1Oca0hUBVI2Hu/QOUjThfY9t9xIKJ
+ rIcA==
+X-Gm-Message-State: AOJu0YzA8Im2UEmehYF+C5Lfl8+vQQf80yPFrD8oFL1AyRQ4u/3UQAIk
+ 0caUGRXVegIRF9SHrGD4RuvmfS7Q4PnyDQvqhIIg6PFqf+prqaWFweLdy+rDcazU35c=
+X-Gm-Gg: ASbGnctejS4PPfLiyu8DkV9UBS4KQuwVnKgJ4mijKWiXpoPMT0kcrI6oXvSWyJZkeuA
+ wxnQn8HxPaXz5eyrv7ZiCS7p6LZucluK/VIsdmeCxExX0tm2nslW3BF5+ko2BWrm+IofhTxPImP
+ 4/qfIFKvksJpPcrWKQ08KOW+y+JKWD0aHMCsxhDW70FqFhOObhWVIo7NtHWPbhS7XhMEi86z92C
+ PnVeBbfzQO5wFEAk8RFpJvr2735cklUNhxgpeEcRJX5cjJPPJlnzQ/qZ06RpX6mUPDbAR7BX9YT
+ yLGbFWemV6FdP9VYmV9gisKSX8oQuV2+sGV+REWQvgV/IZ2GbzZbCOQX/I0Lbw==
+X-Google-Smtp-Source: AGHT+IFDR9gQZJbQfbQreLREZ+rMiwyduEOmzMXPayDPOC78wU6yRqJTAvBU6BfPlnEiFgHJb9BFeQ==
+X-Received: by 2002:a05:6000:5c4:b0:3a5:3b93:be4b with SMTP id
+ ffacd0b85a97d-3a8f54a0395mr14458961f8f.25.1751341778143; 
+ Mon, 30 Jun 2025 20:49:38 -0700 (PDT)
 Received: from localhost ([2001:8a0:6a5a:6c00:eb29:af93:a639:c827])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a892e52af3sm12173392f8f.50.2025.06.30.20.49.42
+ 5b1f17b1804b1-4538a3fe24esm152367695e9.23.2025.06.30.20.49.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 20:49:42 -0700 (PDT)
+ Mon, 30 Jun 2025 20:49:37 -0700 (PDT)
 From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
 To: u-boot@lists.denx.de
 Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v7 6/6] configs: sandbox_defconfig: enable
- CONFIG_EFI_DEBUG_SUPPORT
-Date: Tue,  1 Jul 2025 04:49:26 +0100
-Message-Id: <20250701034926.83536-7-paulliu@debian.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v7 3/6] lib: efi_loader: efi_memory.c: add efi_realloc() for
+ realloc memory
+Date: Tue,  1 Jul 2025 04:49:23 +0100
+Message-Id: <20250701034926.83536-4-paulliu@debian.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250701034926.83536-1-paulliu@debian.org>
 References: <20250701034926.83536-1-paulliu@debian.org>
@@ -101,31 +102,111 @@ X-Virus-Status: Clean
 
 From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 
-Enable CONFIG_EFI_DEBUG_SUPPORT so that we can run a build test for
-this config.
+Add efi_realloc() for realloc memory that previously alloc by efi_alloc().
 
 Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
 ---
-V7: enable CONFIG_EFI_DEBUG_SUPPORT for sandbox_defconfig
+V4: Fix efi_realloc return failure code.
+V6: Return error status when efi_alloc failed.
 ---
- configs/sandbox_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ include/efi_loader.h        | 10 +++++++
+ lib/efi_loader/efi_memory.c | 58 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 68 insertions(+)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 4f6943d1a4b..c50746d3dbc 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -10,6 +10,7 @@ CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- CONFIG_SYS_MEMTEST_START=0x00100000
- CONFIG_SYS_MEMTEST_END=0x00101000
-+CONFIG_EFI_DEBUG_SUPPORT=y
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_EFI_RT_VOLATILE_STORE=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index d0c72d0bc58..13ca2ec9a4e 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -878,6 +878,16 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+ #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
+ /* Allocate boot service data pool memory */
+ void *efi_alloc(size_t len);
++/**
++ * efi_realloc() - reallocate boot services data pool memory
++ *
++ * Reallocate memory from pool for a new size and copy the data from old one.
++ *
++ * @ptr:	pointer to the buffer
++ * @size:	number of bytes to allocate
++ * Return:	EFI status to indicate success or not
++ */
++efi_status_t efi_realloc(void **ptr, size_t len);
+ /* Allocate pages on the specified alignment */
+ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
+ /* More specific EFI memory allocator, called by EFI payloads */
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 0abb1f6159a..1570e300570 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -666,6 +666,64 @@ void *efi_alloc(size_t size)
+ 	return buf;
+ }
+ 
++/**
++ * efi_realloc() - reallocate boot services data pool memory
++ *
++ * Reallocate memory from pool for a new size and copy the data from old one.
++ *
++ * @ptr:	pointer to old buffer
++ * @size:	number of bytes to allocate
++ * Return:	EFI status to indicate success or not
++ */
++efi_status_t efi_realloc(void **ptr, size_t size)
++{
++	efi_status_t ret;
++	void *new_ptr;
++	struct efi_pool_allocation *alloc;
++	u64 num_pages = efi_size_in_pages(size +
++					  sizeof(struct efi_pool_allocation));
++	size_t old_size;
++
++	if (!*ptr) {
++		*ptr = efi_alloc(size);
++		if (*ptr)
++			return EFI_SUCCESS;
++		return EFI_OUT_OF_RESOURCES;
++	}
++
++	ret = efi_check_allocated((uintptr_t)*ptr, true);
++	if (ret != EFI_SUCCESS)
++		return ret;
++
++	alloc = container_of(*ptr, struct efi_pool_allocation, data);
++
++	/* Check that this memory was allocated by efi_allocate_pool() */
++	if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
++	    alloc->checksum != checksum(alloc)) {
++		printf("%s: illegal realloc 0x%p\n", __func__, *ptr);
++		return EFI_INVALID_PARAMETER;
++	}
++
++	/* Don't realloc. The actual size in pages is the same. */
++	if (alloc->num_pages == num_pages)
++		return EFI_SUCCESS;
++
++	old_size = alloc->num_pages * EFI_PAGE_SIZE -
++		sizeof(struct efi_pool_allocation);
++
++	new_ptr = efi_alloc(size);
++
++	/* copy old data to new alloced buffer */
++	memcpy(new_ptr, *ptr, min(size, old_size));
++
++	/* free the old buffer */
++	efi_free_pool(*ptr);
++
++	*ptr = new_ptr;
++
++	return EFI_SUCCESS;
++}
++
+ /**
+  * efi_free_pool() - free memory from pool
+  *
 -- 
 2.39.5
 
