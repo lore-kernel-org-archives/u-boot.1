@@ -4,83 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD10C7EE30
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 15:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 910CFC7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 15:07:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D80382FAB;
-	Tue,  1 Jul 2025 17:02:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DE72E82FAB;
+	Tue,  1 Jul 2025 17:06:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="RugiVwMf";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dMOUGDDR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uJ96UIn6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B76482FC7; Tue,  1 Jul 2025 17:02:13 +0200 (CEST)
-Received: from mail-pl1-x649.google.com (mail-pl1-x649.google.com
- [IPv6:2607:f8b0:4864:20::649])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F77A82F71
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 17:02:10 +0200 (CEST)
+ id 97F3783018; Tue,  1 Jul 2025 16:48:51 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2204A82FAB
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 16:48:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-pl1-x649.google.com with SMTP id
- d9443c01a7336-234f1acc707so26299025ad.3
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 08:02:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1751382128; x=1751986928; darn=lists.denx.de;
- h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=22MV4M7Upo8OvpIKWU1FSVdjcbMRX09ZueXyVie5rD4=;
- b=RugiVwMfS0A4xulSwlO0JJJSgGCviuTmZpiQrVK2klgUbjjO1MaEkE7xWndPjvcpMT
- UJnaZwipQvE5ozFTyMR07+O/2yk/c3kMcK+IAwe54eItpCHS02BSeRlaPBwmuAsnE6PF
- Ak05b+qz18agHXotY37ogBk/a4S8FzR/xVHfcvYtiYdypFZKXFy3ZxQ/YFaF3hTGSeoZ
- Y7mlIGCtmJ30+DDMsI+200vx+x1yQc92TXmpE5SPtWFNYLlnJdQ/SRSBvpz3qCVuyyKm
- aay4bwoKS/BnwVkTqcCagvFAqWstRqJypbz/B07Ot19bTULjLjuDyI3NUzr2zRYCaZIh
- L7vw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751382128; x=1751986928; darn=lists.denx.de;
- h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=22MV4M7Upo8OvpIKWU1FSVdjcbMRX09ZueXyVie5rD4=;
- b=dMOUGDDRZsf24T19SCOvZNo2fvaRsyvAv1QGM0poanmYyqsomU59buSzC6PvHEBmEN
- vYyLQoZQchyf8P726J/vXFGw48f2VNnnwGFkK79heax31ZQfy7sm2S9smWzZOe0iOgxE
- e5781TdOXKFD62Q9XUk8Y9syg/tPDJmyEiwUNGOaawW4xAbU3ZAjK6YmGUemZ+3h3af/
- zb7Cyd1KqRP/jblOblITmJrlCrcg1TeaHljfKq9QliLwJKyB7FmJcKpgCvI6T6Yy6hqT
- 28qTZTDol0u+iiPr9e3xR0ErMWbhaknCYYBSNgj9uaEqofbr4xpaz0pDOA4GxI+wrcod
- deDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751382128; x=1751986928;
- h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=22MV4M7Upo8OvpIKWU1FSVdjcbMRX09ZueXyVie5rD4=;
- b=U4htv6i6w9yEbZ27ijAPFitgXTyIKR7R3/9fBK8/iNJ9TS2ry3dyQPQKXdpLYHU8MA
- pyuUvLpaY1z4br0txcy1Pbktz+BswIKdv5IaHP6v/04tfVm9zAGM9jSJcD/PKhv81xgp
- 9s3FM++l6WFIYCKWBxTImG5RKv1H3lLZTm/pSvBPyS96R5/vMiwW5DI9OrQDrHU6bc0q
- Ok4cLJ0w/jg4SmvfiawpInfUS4QwQ6Xe2fNrs4brvrSdoA/vmuXG6lTTugfQQqgDupdL
- InNTmegk3Ss7Cb2LBJJkOsmWIKTQDeLWnCbK5cSRGgwgpzX3KWSwBJlwZaOru/QsE1lK
- /8yQ==
-X-Gm-Message-State: AOJu0Yx1lfwSVGlDuB+X6At9B7/epDRs7wRkMXToz3Y15FzZfqTWXuJl
- ywz1XJSD7+jpR00keKkkSSc/btN0MIjkUCD90+l1Kgm9KIvsepq9Qd903LCRixVP1xuqMpBiZ1S
- XZqgfBaWDi8nKqTx2V23fd4IfAMRL9X/7GkU=
-X-Google-Smtp-Source: AGHT+IF8VhKNoZw3OgnrFE6GfKNN7/r0yqLtkrgX7hZJIQJGP0j2jyPb+qBPKnShF4aZGXY2cfV3CJoGlv7+K8PRByRV
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-kaur@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 561EmiRU2940808;
+ Tue, 1 Jul 2025 09:48:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1751381324;
+ bh=VgIVDS5so43AKYBMPZeOIpWZMGwdfvE5y97xWa7X8iU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=uJ96UIn6Kh1iKCWaUC33cMxQBChC+vzdt+vAyx9wkKhS+egFJPCG4ZtlmdsT7n8hH
+ VwfULBmZHP4PvzgLFtm1KT2K+2RA94riP0IPHK0b25+HxS76KHZbqhV61+EHkLzINN
+ HIrRbtM3yQcKuxeZQz7NWZvOwU4W6ZwaPbbzqD/Y=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 561EmiuL316424
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 1 Jul 2025 09:48:44 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 1
+ Jul 2025 09:48:43 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 1 Jul 2025 09:48:43 -0500
+Received: from [172.24.227.249]
+ (akashdeep-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.249])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 561EmdJB1466063;
+ Tue, 1 Jul 2025 09:48:40 -0500
+Message-ID: <5fabf5c6-004a-49aa-ab98-df5b9ecd51e3@ti.com>
+Date: Tue, 1 Jul 2025 20:18:38 +0530
 MIME-Version: 1.0
-X-Received: by 2002:a05:6122:2090:b0:52a:79fd:34bd with SMTP id
- 71dfb90a1353d-5330bebe036mr12522419e0c.4.1751382117550; Tue, 01 Jul 2025
- 08:01:57 -0700 (PDT)
-Auto-Submitted: auto-generated
-Message-ID: <calendar-c86b70ad-cf54-42c4-ad42-f8e42e152e68@google.com>
-Date: Tue, 01 Jul 2025 15:01:57 +0000
-Subject: Canceled event: U-Boot community meeting @ Every 2 weeks from 10am to
- 11am on Tuesday (EST) (u-boot@lists.denx.de)
-From: Jesse T <mr.bossman075@gmail.com>
-To: u-boot@lists.denx.de
-Content-Type: multipart/mixed; boundary="000000000000fb9c890638df6c6c"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 06/22] arm: mach-k3: common: Add lpm_resume_from_ddr
+To: Markus Schneider-Pargmann <msp@baylibre.com>, Sumit Garg
+ <sumit.garg@kernel.org>, Nishanth Menon <nm@ti.com>, Bryan Brattlof
+ <bb@ti.com>, Tom Rini <trini@konsulko.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>
+CC: Sebin Francis <sebin.francis@ti.com>, Dhruva Gole <d-gole@ti.com>,
+ <u-boot@lists.denx.de>, Kevin Hilman <khilman@baylibre.com>,
+ Vishal Mahaveer <vishalm@ti.com>, Kendall Willis <k-willis@ti.com>
+References: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-0-a4da322c16af@baylibre.com>
+ <20250623-topic-am62-ioddr-v2025-04-rc1-v3-6-a4da322c16af@baylibre.com>
+Content-Language: en-US
+From: Akashdeep Kaur <a-kaur@ti.com>
+In-Reply-To: <20250623-topic-am62-ioddr-v2025-04-rc1-v3-6-a4da322c16af@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Tue, 01 Jul 2025 17:06:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,157 +82,69 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Jesse T <mr.bossman075@gmail.com>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---000000000000fb9c890638df6c6c
-Content-Type: multipart/alternative; boundary="000000000000fb9c870638df6c6a"
+Hi Markus,
 
---000000000000fb9c870638df6c6a
-Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+On 23/06/25 17:38, Markus Schneider-Pargmann wrote:
+> This is a common function that helps to resume from DDR. There are two
+> pointers which are fetched from DDR to resume, the TIFS context pointer
+> which points to the context in DDR. There is another pointer to the DM
+> loadaddr to jump back into DM.
+> 
+> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
+> ---
+>   arch/arm/mach-k3/common.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
+>   arch/arm/mach-k3/common.h |  1 +
+>   2 files changed, 46 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index 7c3f42e35b0f3a5aa7ed0bf01a1479b29d947540..1ef560e2fb936c4245323bbebc5af3ec277b8792 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
 
-This event has been canceled.
+> +struct lpm_meta_data {
+> +	u64 dm_jump_address;
+> +	u64 tifs_context_save_address;
+> +	u64 reserved[30];
+> +} __packed__;
+> +
+> +void __noreturn lpm_resume_from_ddr(u64 meta_data_addr)
+> +{
+> +	struct lpm_meta_data *lpm_data = (struct lpm_meta_data *)meta_data_addr;
+> +	typedef void __noreturn (*image_entry_noargs_t)(void);
+> +	image_entry_noargs_t image_entry;
+> +	int ret;
+> +
+> +	ret = lpm_restore_context(lpm_data->tifs_context_save_address);
+> +	if (ret)
+> +		panic("Failed to restore context from 0x%p\n",
+> +		      (void *)lpm_data->tifs_context_save_address);
 
-U-Boot community meeting
-Every 2 weeks from 10am to 11am on Tuesday
-Eastern Time - New York
+The above code is reading the value of 
+lpm_data->tifs_context_save_address two times from DDR memory,
+1. While requesting TIFS to restore the context
+2. When printing the address sent to TIFS to restore the context in case 
+of failure
 
-Join with Google Meet
-https://meet.google.com/btj-wgcg-euw?hs=224
+It is better to read the address once from DDR memory and store in local 
+variable as we need to print the exact address that was sent to TIFS for 
+restoring context. (In case the DDR memory is instable, this read can 
+have different values and can be misleading)
 
+> +
+> +	image_entry = (image_entry_noargs_t)(u64 *)lpm_data->dm_jump_address;
+> +	printf("Resuming from DDR, jumping to stored DM loadaddr 0x%p, TIFS context restored from 0x%p\n",
+> +	       image_entry, (void *)lpm_data->tifs_context_save_address);
+> +
+> +	image_entry();
+> +}
+> +#else
+> +
 
-	
-Join by phone
-(US) +1 224-585-7864
-PIN: 107799403
+Regards,
+Akashdeep Kaur
 
-More phone numbers
-https://tel.meet/btj-wgcg-euw?pin=1307528552322&hs=0
-
-
-U-Boot community meeting
-
-Organizer
-Jesse T
-mr.bossman075@gmail.com
-
-Guests
-Jesse T - organizer
-malysagreg@gmail.com
-u-boot@lists.denx.de
-sjg@chromium.org
-pbiel7@gmail.com
-
-
-~~//~~
-Invitation from Google Calendar: https://calendar.google.com/calendar/
-
-You are receiving this email because you are an attendee on the event.
-
-Forwarding this invitation could allow any recipient to send a response to  
-the organizer, be added to the guest list, invite others regardless of  
-their own invitation status, or modify your RSVP.
-
-Learn more https://support.google.com/calendar/answer/37135#forwarding
-
---000000000000fb9c870638df6c6a
-Content-Type: text/calendar; charset="UTF-8"; method=CANCEL
-Content-Transfer-Encoding: 7bit
-
-BEGIN:VCALENDAR
-PRODID:-//Google Inc//Google Calendar 70.9054//EN
-VERSION:2.0
-CALSCALE:GREGORIAN
-METHOD:CANCEL
-BEGIN:VTIMEZONE
-TZID:America/Bahia_Banderas
-X-LIC-LOCATION:America/Bahia_Banderas
-BEGIN:STANDARD
-TZOFFSETFROM:-0600
-TZOFFSETTO:-0600
-TZNAME:CST
-DTSTART:19700101T000000
-END:STANDARD
-END:VTIMEZONE
-BEGIN:VEVENT
-DTSTART;TZID=America/Bahia_Banderas:20250128T090000
-DTEND;TZID=America/Bahia_Banderas:20250128T100000
-RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=TU
-DTSTAMP:20250701T150157Z
-ORGANIZER;CN=Jesse T:mailto:mr.bossman075@gmail.com
-UID:01mquoedjkmgbfq8m4qn6o68tc@google.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=ma
- lysagreg@gmail.com;X-NUM-GUESTS=0:mailto:malysagreg@gmail.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=u-
- boot@lists.denx.de;X-NUM-GUESTS=0:mailto:u-boot@lists.denx.de
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=sj
- g@chromium.org;X-NUM-GUESTS=0:mailto:sjg@chromium.org
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=pb
- iel7@gmail.com;X-NUM-GUESTS=0:mailto:pbiel7@gmail.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Jesse 
- T;X-NUM-GUESTS=0:mailto:mr.bossman075@gmail.com
-X-GOOGLE-CONFERENCE:https://meet.google.com/btj-wgcg-euw
-CREATED:20250218T205738Z
-DESCRIPTION:U-Boot community meeting\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~
- :~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet
- : https://meet.google.com/btj-wgcg-euw\nOr dial: (US) +1 224-585-7864 PIN: 
- 107799403#\nMore phone numbers: https://tel.meet/btj-wgcg-euw?pin=130752855
- 2322&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/a
- nswer/9282720\n\nPlease do not edit this section.\n-::~:~::~:~:~:~:~:~:~:~:
- ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
-LAST-MODIFIED:20250701T150155Z
-LOCATION:
-SEQUENCE:1
-STATUS:CANCELLED
-SUMMARY:U-Boot community meeting
-TRANSP:OPAQUE
-END:VEVENT
-END:VCALENDAR
-
---000000000000fb9c870638df6c6a--
-
---000000000000fb9c890638df6c6c
-Content-Type: application/ics; name="invite.ics"
-Content-Disposition: attachment; filename="invite.ics"
-Content-Transfer-Encoding: base64
-
-QkVHSU46VkNBTEVOREFSDQpQUk9ESUQ6LS8vR29vZ2xlIEluYy8vR29vZ2xlIENhbGVuZGFyIDcw
-LjkwNTQvL0VODQpWRVJTSU9OOjIuMA0KQ0FMU0NBTEU6R1JFR09SSUFODQpNRVRIT0Q6Q0FOQ0VM
-DQpCRUdJTjpWVElNRVpPTkUNClRaSUQ6QW1lcmljYS9CYWhpYV9CYW5kZXJhcw0KWC1MSUMtTE9D
-QVRJT046QW1lcmljYS9CYWhpYV9CYW5kZXJhcw0KQkVHSU46U1RBTkRBUkQNClRaT0ZGU0VURlJP
-TTotMDYwMA0KVFpPRkZTRVRUTzotMDYwMA0KVFpOQU1FOkNTVA0KRFRTVEFSVDoxOTcwMDEwMVQw
-MDAwMDANCkVORDpTVEFOREFSRA0KRU5EOlZUSU1FWk9ORQ0KQkVHSU46VkVWRU5UDQpEVFNUQVJU
-O1RaSUQ9QW1lcmljYS9CYWhpYV9CYW5kZXJhczoyMDI1MDEyOFQwOTAwMDANCkRURU5EO1RaSUQ9
-QW1lcmljYS9CYWhpYV9CYW5kZXJhczoyMDI1MDEyOFQxMDAwMDANClJSVUxFOkZSRVE9V0VFS0xZ
-O1dLU1Q9U1U7SU5URVJWQUw9MjtCWURBWT1UVQ0KRFRTVEFNUDoyMDI1MDcwMVQxNTAxNTdaDQpP
-UkdBTklaRVI7Q049SmVzc2UgVDptYWlsdG86bXIuYm9zc21hbjA3NUBnbWFpbC5jb20NClVJRDow
-MW1xdW9lZGprbWdiZnE4bTRxbjZvNjh0Y0Bnb29nbGUuY29tDQpBVFRFTkRFRTtDVVRZUEU9SU5E
-SVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1BQ1RJT047Q049bWEN
-CiBseXNhZ3JlZ0BnbWFpbC5jb207WC1OVU0tR1VFU1RTPTA6bWFpbHRvOm1hbHlzYWdyZWdAZ21h
-aWwuY29tDQpBVFRFTkRFRTtDVVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQ
-QVJUU1RBVD1ORUVEUy1BQ1RJT047Q049dS0NCiBib290QGxpc3RzLmRlbnguZGU7WC1OVU0tR1VF
-U1RTPTA6bWFpbHRvOnUtYm9vdEBsaXN0cy5kZW54LmRlDQpBVFRFTkRFRTtDVVRZUEU9SU5ESVZJ
-RFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1BQ1RJT047Q049c2oNCiBn
-QGNocm9taXVtLm9yZztYLU5VTS1HVUVTVFM9MDptYWlsdG86c2pnQGNocm9taXVtLm9yZw0KQVRU
-RU5ERUU7Q1VUWVBFPUlORElWSURVQUw7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVF
-RFMtQUNUSU9OO0NOPXBiDQogaWVsN0BnbWFpbC5jb207WC1OVU0tR1VFU1RTPTA6bWFpbHRvOnBi
-aWVsN0BnbWFpbC5jb20NCkFUVEVOREVFO0NVVFlQRT1JTkRJVklEVUFMO1JPTEU9UkVRLVBBUlRJ
-Q0lQQU5UO1BBUlRTVEFUPUFDQ0VQVEVEO0NOPUplc3NlIA0KIFQ7WC1OVU0tR1VFU1RTPTA6bWFp
-bHRvOm1yLmJvc3NtYW4wNzVAZ21haWwuY29tDQpYLUdPT0dMRS1DT05GRVJFTkNFOmh0dHBzOi8v
-bWVldC5nb29nbGUuY29tL2J0ai13Z2NnLWV1dw0KQ1JFQVRFRDoyMDI1MDIxOFQyMDU3MzhaDQpE
-RVNDUklQVElPTjpVLUJvb3QgY29tbXVuaXR5IG1lZXRpbmdcblxuLTo6fjp+Ojp+On46fjp+On46
-fjp+On46fjp+On46fjp+On4NCiA6fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46
-fjp+On46fjo6fjp+OjotXG5Kb2luIHdpdGggR29vZ2xlIE1lZXQNCiA6IGh0dHBzOi8vbWVldC5n
-b29nbGUuY29tL2J0ai13Z2NnLWV1d1xuT3IgZGlhbDogKFVTKSArMSAyMjQtNTg1LTc4NjQgUElO
-OiANCiAxMDc3OTk0MDMjXG5Nb3JlIHBob25lIG51bWJlcnM6IGh0dHBzOi8vdGVsLm1lZXQvYnRq
-LXdnY2ctZXV3P3Bpbj0xMzA3NTI4NTUNCiAyMzIyJmhzPTdcblxuTGVhcm4gbW9yZSBhYm91dCBN
-ZWV0IGF0OiBodHRwczovL3N1cHBvcnQuZ29vZ2xlLmNvbS9hL3VzZXJzL2ENCiBuc3dlci85Mjgy
-NzIwXG5cblBsZWFzZSBkbyBub3QgZWRpdCB0aGlzIHNlY3Rpb24uXG4tOjp+On46On46fjp+On46
-fjp+On46fjoNCiB+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46
-fjp+On46fjp+Ojp+On46Oi0NCkxBU1QtTU9ESUZJRUQ6MjAyNTA3MDFUMTUwMTU1Wg0KTE9DQVRJ
-T046DQpTRVFVRU5DRToxDQpTVEFUVVM6Q0FOQ0VMTEVEDQpTVU1NQVJZOlUtQm9vdCBjb21tdW5p
-dHkgbWVldGluZw0KVFJBTlNQOk9QQVFVRQ0KRU5EOlZFVkVOVA0KRU5EOlZDQUxFTkRBUg0K
---000000000000fb9c890638df6c6c--
