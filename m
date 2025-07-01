@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDBCC83038
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 18:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5EC6C83038
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 18:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E22E82EC6;
-	Tue,  1 Jul 2025 20:43:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 54E0382CFA;
+	Tue,  1 Jul 2025 20:51:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="in2zUD1F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I5xZvcx2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FFE582EA9; Tue,  1 Jul 2025 20:43:02 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 3E3DE82E08; Tue,  1 Jul 2025 20:51:11 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF7BA8300B
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 20:42:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42CE782B18
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 20:51:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-404e580bf09so855041b6e.1
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 11:42:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-553b9eb2299so6315860e87.0
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 11:51:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751395378; x=1752000178; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=XAHfMwwz2Qwk5gD+zM4Pc7l01w5nRjFf2BpNtW5hJyc=;
- b=in2zUD1Fw309JRYubQG6R3edxCpP320ckt+4QHcUp0OC2PkyxhLfRvFqVk+5XcGj7Y
- XabJ3yVa6tohMkX8XXZu1eMNuc+egoEDtQuHvR4tESCuEet3ubW/vKIyBzWjBtdh8XFN
- 8s83NaMA3dBkbNeE4ezt2A0gDU9QziEmqsADw=
+ d=gmail.com; s=20230601; t=1751395868; x=1752000668; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=A5OXq6RH3T9EeTCnEMSgRKkiXmejq9vEkbfGdOIB2ro=;
+ b=I5xZvcx2O4zg6EZsOMRvXXiWhtlQWvJEZU+hv6F+1HR9rCAFur0CBG2ZAWFH1fR3Pe
+ MGBfdb9J4a9Ac0PQKhkE2E0zZLhkxJR8LnJdNkSC9SjzV5bjtqHI9hBk96ofWNP3frvg
+ lOusjp/mQxxtO/Vcou5fi40+jGaGeBA51gZUzAidFnIgSrOm3BIp8wjYuIp3rPodI0F5
+ LYGrZgiiMl9ACflONiR4aLGEWAfxCSTMlSGv70s4fELEPuKW0NLNuTLG32FoA1in921j
+ jCloNRaynYBRMf3qCOimnoxt5uLXzqk1BQ4aIVn7QZev3H3TEtv7hAy5TNmKc/32dz2W
+ RfSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751395378; x=1752000178;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XAHfMwwz2Qwk5gD+zM4Pc7l01w5nRjFf2BpNtW5hJyc=;
- b=OSywk2Nq2jSZrJaCpWzyZMU2f+ZC9azJ1ZeWCknVYuSTsuZdpQEnyckrxci57q/OIS
- f9yk1NhDp8QkCzSN4cYfBOxvWNdmXNrk7sEm1lACpIVm7454MPV3JZWLmVeU+YcHi96r
- Oh8GM5olusgFJ4SJ4OaGaV7Gu94E10H4XJ0JQ5kSUNCts9pfT57AMK966/Qizof1cFOy
- vCujAZd5gXfV/Er9JLGyjnX4eof3fE7n0YHvSRwSHitDpmLi2IijXTwVQyb3FSoYwU/X
- DeoSJaWma0uh4a19zKNI0xvLf9fZ0mhzxvolE+7yQGn2ZYfryLk+H/SPsnIppvlc6gQe
- /8Cw==
-X-Gm-Message-State: AOJu0Yyd1/AhEvxw0dG+FDy40+YsY5aTDUR3/r6L/SdyRARatbh2hSAA
- gshlhuzhQdP5JMnUy0+E1AP2vRdlITHkSLfcH2qKC/9aQpAPERVy3MppcTg9gLJXnAs+w+axNNN
- /aTXWMfE=
-X-Gm-Gg: ASbGncvW3GgZkOBk2+DmzGYKR8tSvHvFengfG+cY9NHbMukQpnA+iwjfXwUJ1dyWQlD
- 8GgBS+qY3uy5c7Uvo9XMcg6L8vwoQB2jT4M3w7uxO9i1LKVDs9hAzAkcv8jLRrQq3O9YvUy5+gM
- /aNXFhpZLOMGbi6HUZAp7A0TgKxqb+h7Yk/GLHwFjbp9HDxulsEm1eDSoN6Yb2HgUXsGVCFsJnB
- ipZf3fmZonT7CXlj49zqUbhc2+YGEQcMarQXbURGvQ5NSJZOXVFqonSzKGukprSsklPKiGwRN0o
- M9IzgWcSbZkAVa9QUXR/zKN/RkxoVSgiOeZkUfP7d3/ejxUHP3UUd3mwa1MG/VpIOqP/A12FPID
- jGNvPb84RoQ1ldIvxBqBqor3fDA==
-X-Google-Smtp-Source: AGHT+IG7asilqv7i2cr9VY9JphnAy7JHYjVPkoWKKf2HornsWh4cnVVjM6wsWrtlBBRHVqsrM0zrpw==
-X-Received: by 2002:a05:6808:3089:b0:40a:5356:6581 with SMTP id
- 5614622812f47-40b33c29d91mr16204534b6e.2.1751395378558; 
- Tue, 01 Jul 2025 11:42:58 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b32420c83sm2234513b6e.36.2025.07.01.11.42.57
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 11:42:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] sandbox: Add some missing {clr,set,clrset}bits variants
-Date: Tue,  1 Jul 2025 12:42:57 -0600
-Message-ID: <20250701184257.3191508-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1751395868; x=1752000668;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=A5OXq6RH3T9EeTCnEMSgRKkiXmejq9vEkbfGdOIB2ro=;
+ b=kCwefOZHXDpFxWw9CVZIojwCxzLMhfKpzhRriC8+XA/GQ2tDRPvZJHLx+cEdFkfrad
+ MeDbm9lhe8pqtBhrK4nUVDxVOuIg/a7DVwBejZq0T4kt3MX1xOQIEKmrr/Xbu64HpFGg
+ KKW2VfMnDDYhplr9fxgZASiJrC+Zwt6nkFMdlJeAFdfUM5GEMf4DbnTr1I+T8AFwMns7
+ LziA470Cl/p28A7o0rCzf2j14gcA+HSP0y6Obfvdm/AETh5Xe2WGkX/b10gOfu4RIFxX
+ 5dq8TaZGYNJECkQGxApoKhrzWr2LIfofpMgxD4UInWpsUs1SjQpEzNo3LiLc/rUb1+PW
+ 82vQ==
+X-Gm-Message-State: AOJu0YwKPzwBC9HhurbjUGAQLJ1ccPYJEU/NxhGdW1biw3ZjzxW5bsLe
+ ZON33mVo2OGyTnzU+jmKoqwJVRv47rLxaq1SePnTlCG3X40ayipwiOPbsRaQraVki11magPEx4C
+ mMlx2XlAvup4jJ2DM7FHDra672n4U79KKmg==
+X-Gm-Gg: ASbGncuArmzGjkDAHc/+HrzCIM9gp+o5qKI1GrmxF7KqiP8NnUBsDjaiv7B25Y8dZeS
+ ut18sRGvwGL/XNa+wqZ6gXLaAlDXNTRrVkYEeFCNTauOVHKEQtMVrabKN6gV1Ur9c9iEl8R++Nk
+ iVJoPvZm5Z+FasRU/CxxcjA4Zym1jgKNV2tJTgsJMS8AyLe8X1NYH0BYFl2X81r2IVlwxpWFlNv
+ 4s=
+X-Google-Smtp-Source: AGHT+IHU60Fs4OaR1L9FbFOs1j/k7eQAII3/kZYrqTNFYuK8h5Id68qpKqhWXZ6SY4K4kHCI4PKttkx4osGySqaG/6s=
+X-Received: by 2002:a05:6512:3f07:b0:553:2375:c6e8 with SMTP id
+ 2adb3069b0e04-556280b6554mr63595e87.1.1751395868085; Tue, 01 Jul 2025
+ 11:51:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250701184252.3191485-1-trini@konsulko.com>
+ <20250701184252.3191485-2-trini@konsulko.com>
+In-Reply-To: <20250701184252.3191485-2-trini@konsulko.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 1 Jul 2025 15:50:56 -0300
+X-Gm-Features: Ac12FXzvsO6A49cZiLdB2uVSYHnbzl6MzuWiyjXizWf7FynVwnjdwgALzl6OSpg
+Message-ID: <CAOMZO5A56QNX5KF1RC6_L1Ztb4uWYDkAQdkAxAi=mVrpCUQD8A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] power: Correct dependencies on POWER_LEGACY
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,52 +93,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the 16, 32 and 64bit versions of the non-endian {clr,set,clrset}bits
-macros.
+On Tue, Jul 1, 2025 at 3:43=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> The POWER_LEGACY option depends on not having SPL_PMIC enabled, so add
+> that here.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- arch/sandbox/include/asm/io.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+I think you meant DM_PMIC.
 
-diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
-index f656f361cd52..6e3f9547fee7 100644
---- a/arch/sandbox/include/asm/io.h
-+++ b/arch/sandbox/include/asm/io.h
-@@ -74,7 +74,14 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
- #define in_be32(a)	in_arch(l,be32,a)
- #define in_be16(a)	in_arch(w,be16,a)
- 
-+#define out_64(a,v)	writeq(v,a)
-+#define out_32(a,v)	writel(v,a)
-+#define out_16(a,v)	writew(v,a)
- #define out_8(a,v)	writeb(v,a)
-+
-+#define in_64(a)	readq(a)
-+#define in_32(a)	readl(a)
-+#define in_16(a)	readw(a)
- #define in_8(a)		readb(a)
- 
- #define clrbits(type, addr, clear) \
-@@ -106,6 +113,18 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
- #define setbits_8(addr, set) setbits(8, addr, set)
- #define clrsetbits_8(addr, clear, set) clrsetbits(8, addr, clear, set)
- 
-+#define clrbits_16(addr, clear) clrbits(16, addr, clear)
-+#define setbits_16(addr, set) setbits(16, addr, set)
-+#define clrsetbits_16(addr, clear, set) clrsetbits(16, addr, clear, set)
-+
-+#define clrbits_32(addr, clear) clrbits(32, addr, clear)
-+#define setbits_32(addr, set) setbits(32, addr, set)
-+#define clrsetbits_32(addr, clear, set) clrsetbits(32, addr, clear, set)
-+
-+#define clrbits_64(addr, clear) clrbits(64, addr, clear)
-+#define setbits_64(addr, set) setbits(64, addr, set)
-+#define clrsetbits_64(addr, clear, set) clrsetbits(64, addr, clear, set)
-+
- /* I/O access functions */
- int _inl(unsigned int addr);
- int _inw(unsigned int addr);
--- 
-2.43.0
-
+The commit log says SPL_PMIC, but the dependency is on !DM_PMIC.
