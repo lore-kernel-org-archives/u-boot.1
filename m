@@ -4,119 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1359C8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 10:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E013C7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 10:43:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C78482A76;
-	Tue,  1 Jul 2025 12:24:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
+	by phobos.denx.de (Postfix) with ESMTP id 514D182A76;
+	Tue,  1 Jul 2025 12:43:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="ysfUls16";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="CxmozPge";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4D8C82B18; Tue,  1 Jul 2025 12:24:15 +0200 (CEST)
-Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF6A781E13
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 12:24:10 +0200 (CEST)
+ id 5F64D82F5E; Tue,  1 Jul 2025 12:43:47 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id CEE0781E13
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 12:43:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=valla.it
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=instance-europe-west4-3j3h.prod.antispam.mailspamprotection.com; s=arckey;
- t=1751365450; 
- b=p1qml5S6bYXlAaCJYhou5f2fWs2lGBmAG5zcM6C8G92DpKwpMwGVer0uFHb/sqSxon/PXxBylJ
- JOAS+2fDbTixURZEsnXnix4SnkYo6iQ7RMYAUoa1IN3qF4XEV3Nf46G5r66ZbcW+lMWDIB5ydg
- E5NqpugXheImkOPBDhmz0bb2mEPhwNyG9Io9y9K6KclsS6oyt4FUz/YqLB1ezeBnX39LBHCAb5
- w5yH2NazVCD5oXPuv2FB095jpdbak72r+PjZg/G7E7gHUbpjyjo1BDEVDKgUPL8mPPxvFBe9Mk
- bbmqbUQVNcJK0T6XNoSu+8fvwmB4Q6M/DiptL/ku8Q0HwQ==;
-ARC-Authentication-Results: i=1;
- instance-europe-west4-3j3h.prod.antispam.mailspamprotection.com;
- smtp.remote-ip=35.214.173.214; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=instance-europe-west4-3j3h.prod.antispam.mailspamprotection.com; s=arckey;
- t=1751365450; 
- bh=U6SUEamUt/MbEkqDNTk2Z2mZJgLIxKQUnAHWgEjsnKQ=;
- h=Content-Transfer-Encoding:Content-Type:Message-ID:References:In-Reply-To:
- Subject:Cc:To:From:Date:MIME-Version:DKIM-Signature:DKIM-Signature;
- b=HeRq7X1CZoYUqhXozk8hrJoOur/COrxAP4OZnbys8/a7xvtO09f/GSFjT9kYHauZ1wb7fL6JIW
- 0dJ8BLfyLa9gn45DtF69sTjdIPXjL1ncVU9fgmqsuLWuYQ/v9uGhdZVbWpHJLnUUfDD1Rlg+Ht
- O+bhbdv7mod5Vo/iOQRZEc3rZu6tuVdN5erD250A8dSfCaIoVE9QfzyJLYf3cKc0n5+a0vFLg1
- knMmbLBMIJ0FV0yVPPxEKMCTke/Rc/F7oPC27XFrFJBsx/GXs9uKK84jib+KgjW14e9Ha0qH8b
- ZZR4wU8H42KpsTT87LwLFICbwRCYHb4jrJdG7Hd7CWZ9zQ==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
- :Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To:From:Date:
- MIME-Version:Reply-To:List-Unsubscribe;
- bh=Ne3wE5zofYPu4hbNW99pbRQRCg1NJCsEWItP7QWOrKM=; b=ysfUls16Zof1oHa87SJmeqUT80
- HPMvx/1Bbjswzv1heZFmfu4Av/PjYRVxH0lKN+ISOJLjevsXCfacUUzugtkiE6RQ5tSQpSx2UXQyF
- hr4shJtpsv9NhEtbcLazssBLU/UdjLaXBkkODXFBtjUIOWqrvmbH25vWltoH3WdFuHr8=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
- helo=esm19.siteground.biz)
- by instance-europe-west4-3j3h.prod.antispam.mailspamprotection.com with
- esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.98.1)
- (envelope-from <francesco@valla.it>) id 1uWY9l-00000005WC5-0P0I
- for u-boot@lists.denx.de; Tue, 01 Jul 2025 10:24:10 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
- s=default; h=Subject:Cc:To:From:Date:list-help:list-unsubscribe:
- list-subscribe:list-post:list-owner:list-archive;
- bh=Ne3wE5zofYPu4hbNW99pbRQRCg1NJCsEWItP7QWOrKM=; b=CxmozPge1rfbajhe/VeCDNo2rX
- XhYJxi+ufecfeZAQ1ED7V9ZeI1aHopV5ZFI5ONtoMujVyQnz0q1QIsdo443qOnuFcNt20wrnnEc3p
- TiTX8rmFx4yHmEvc8qKur64ioCLO0Bakc2WaO8uwNcdcFAt78O4lQHKTbUcYKQwUU0nA=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]:48558
- helo=esm19.siteground.biz)
- by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.98.1) (envelope-from <francesco@valla.it>)
- id 1uWY9g-000000005sA-0FkZ; Tue, 01 Jul 2025 10:24:00 +0000
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9DFF519F0;
+ Tue,  1 Jul 2025 03:43:25 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D78EE3F58B;
+ Tue,  1 Jul 2025 03:43:38 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v4 1/2] cmd: eficonfig: add support for URI device path based
+ boot options
+Date: Tue,  1 Jul 2025 16:13:18 +0530
+Message-Id: <20250701104319.716162-2-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250701104319.716162-1-sughosh.ganu@linaro.org>
+References: <20250701104319.716162-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-Date: Tue, 01 Jul 2025 10:23:59 +0000
-From: Francesco Valla <francesco@valla.it>
-To: "Raghavendra, Vignesh" <vigneshr@ti.com>
-Cc: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, trini@konsulko.com,
- afd@ti.com, m-chawdhry@ti.com, n-francis@ti.com, b-liu@ti.com, nm@ti.com,
- bb@ti.com
-Subject: Re: [PATCH v7 00/10] Add falcon support for am62a, 62p and 62x
-In-Reply-To: <3049d2ce-6303-4622-be6b-eebb47d21c45@ti.com>
-References: <20250603142452.2707171-1-anshuld@ti.com>
- <2553134.XAFRqVoOGU@fedora.fritz.box>
- <3049d2ce-6303-4622-be6b-eebb47d21c45@ti.com>
-Message-ID: <07418d43d2ac7ad4b2241e3c0f0bf390@valla.it>
-X-Sender: francesco@valla.it
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: ad4b97aaeb342b1c69a09eba0eb0abbb
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1uWY9l-00000005WC5-0P0I-feedback@antispam.mailspamprotection.com
-Authentication-Results: instance-europe-west4-3j3h.prod.antispam.mailspamprotection.com; 
- iprev=pass (214.173.214.35.bc.googleusercontent.com)
- smtp.remote-ip=35.214.173.214; 
- auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
- dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
- arc=none
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,124 +57,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vignesh,
+The eficonfig command provides a menu based interface for maintenance
+of the EFI boot options. Add support for adding a URI based boot
+option. This boot option can then be used for HTTP boot.
 
-Il 2025-07-01 09:14 Raghavendra, Vignesh ha scritto:
-> Hi Francesco
-> 
-> On 6/30/2025 7:35 PM, Francesco Valla wrote:
->> Hi Anshul,
->> 
->> On Tuesday, 3 June 2025 at 16:24:40 Anshul Dalal <anshuld@ti.com> 
->> wrote:
->>> This patch set adds support for falcon boot on AM62a, 62p and 62x by
->>> bypassing A53 SPL and U-boot.
->>> 
->>> Existing Boot flow:
->>> R5 SPL -> ATF -> A53 SPL -> U-Boot -> Linux Kernel
->>> 
->>> Updated flow:
->>> R5 SPL -> ATF -> Linux Kernel
->>> 
->>> ...
->> 
->> I tried this series on a custom device based on AM62P. While it's 
->> working
->> mostly fine, I noticed that PWM0 is not working after a falcon boot 
->> from
->> R5F, while it was working correctly after a boot through full U-Boot.
->> 
->> After a bit of debugging, I noticed that the epwm_tbclk0 is marked as
->> disabled in hardware in debugfs's clk_summary even if enabled by 
->> software:
->> 
->>  $ head -n 2 /sys/kernel/debug/clk/clk_summary && cat 
->> /sys/kernel/debug/clk/clk_summary | grep pwm
->> 
->>                                  enable  prepare  protect              
->>                   duty  hardware                            connection
->>    clock                          count    count    count        rate  
->>  accuracy phase  cycle    enable   consumer                         id
->>  clk:86:0                            0       0        0        
->> 250000000   0          0     50000      Y   23000000.pwm               
->>      fck
->>  epwm_tbclk2                         0       0        0        0       
->>     0          0     50000      N   deviceless                      
->> no_connection_id
->>  epwm_tbclk1                         0       0        0        0       
->>     0          0     50000      N   deviceless                      
->> no_connection_id
->>  epwm_tbclk0                         1       1        0        0       
->>     0          0     50000      N   23000000.pwm                    
->> tbclk
->> 
->> 
->> Reading the associated register (0x00104130) returns in fact 
->> 0x00000000,
->> while writing to it has no effect (and after a write the register 
->> reads
->> back as 0x00000000).
->> 
->> 
->> Do you have any idea on the reason of this behaviour? I don't think it 
->> is
->> directly related to the Falcon boot implementation, but probably a 
->> side
->> effect of it (maybe something that was enabled by A53 SPL?).
->> 
-> 
-> My guess is that CTRL_MMR region which hosts TB_CLKEN isn't unlocked.
-> 
-> We unlock the CTRL_MMR here:
-> https://elixir.bootlin.com/u-boot/v2025.04/source/arch/arm/mach-k3/am62px/am62p5_init.c#L156
-> 
-> But its possible that DM firmware that runs after R5 SPL re-locks these
-> registers and Linux is no longer able to write to those registers.
-> So this may need fix in the DM firmware to keep these regions unlocked.
-> 
-> Looking at address of tbclk (0x00104130), it should be under region 4.
-> Could you try after running the equivalent of
-> mmr_unlock(CTRL_MMR0_BASE, 4); at Linux prompt using devmem2 and then 
-> modify the TB_CLKEN?
-> 
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+---
+Changes since V3:
+* Do away with boot_file_option member of struct
+  eficonfig_boot_option.
+* Use the uri pointer being non-null in
+  eficonfig_process_show_file_option() for selecting menu items.
+* Put a check for lo.file_path in eficonfig_edit_boot_option() before
+  calling fill_file_info().
 
-that was exactly the issue, after unlocking the CTRL_MMR region the
-TB_CLKEN bits wrote correctly and the PWM started working again.
-According to TRM, the correct region is number 1.
+ cmd/eficonfig.c      | 129 ++++++++++++++++++++++++++++++++++++++++---
+ include/efi_config.h |   2 +
+ 2 files changed, 123 insertions(+), 8 deletions(-)
 
-These were the issued commands to unlock the CTRL_MMR region 1:
+diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+index 6e14d34a6bd..440d08283bf 100644
+--- a/cmd/eficonfig.c
++++ b/cmd/eficonfig.c
+@@ -35,6 +35,7 @@ static int avail_row;
+ 
+ #define EFICONFIG_DESCRIPTION_MAX 32
+ #define EFICONFIG_OPTIONAL_DATA_MAX 64
++#define EFICONFIG_URI_MAX 512
+ #define EFICONFIG_MENU_HEADER_ROW_NUM 3
+ #define EFICONFIG_MENU_DESC_ROW_NUM 5
+ 
+@@ -538,6 +539,40 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
+ 	return dp;
+ }
+ 
++/**
++ * eficonfig_create_uri_device_path() - Create an URI based device path
++ * @uri_str:	URI string to be added to the device path
++ *
++ * Take the u16 string, convert it to a u8 string, and create a URI
++ * device path. This will be used for the EFI HTTP boot.
++ *
++ * Return: pointer to the URI device path on success, NULL on failure
++ */
++static struct efi_device_path *eficonfig_create_uri_device_path(u16 *uri_str)
++{
++	char *pos, *p;
++	u32 len = 0;
++	efi_uintn_t uridp_len;
++	struct efi_device_path_uri *uridp;
++
++	len = utf16_utf8_strlen(uri_str);
++
++	uridp_len = sizeof(struct efi_device_path) + len + 1;
++	uridp = efi_alloc(uridp_len + sizeof(EFI_DP_END));
++	if (!uridp)
++		return NULL;
++
++	uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
++	uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
++	uridp->dp.length = uridp_len;
++	p = (char *)&uridp->uri;
++	utf16_utf8_strcpy(&p, uri_str);
++	pos = (char *)uridp + uridp_len;
++	memcpy(pos, &EFI_DP_END, sizeof(EFI_DP_END));
++
++	return &uridp->dp;
++}
++
+ /**
+  * eficonfig_file_selected() - handler of file selection
+  *
+@@ -983,6 +1018,22 @@ static efi_status_t eficonfig_boot_add_optional_data(void *data)
+ 				 "  enter optional data:");
+ }
+ 
++/**
++ * eficonfig_boot_add_uri() - handle user input for HTTP Boot URI
++ *
++ * @data:	pointer to the internal boot option structure
++ * Return:	status code
++ */
++static efi_status_t eficonfig_boot_add_uri(void *data)
++{
++	struct eficonfig_select_file_info *file_info = data;
++
++	return handle_user_input(file_info->uri, EFICONFIG_URI_MAX, 24,
++				 "\n  ** Edit URI **\n"
++				 "\n"
++				 "  enter HTTP Boot URI:");
++}
++
+ /**
+  * eficonfig_boot_edit_save() - handler to save the boot option
+  *
+@@ -998,7 +1049,8 @@ static efi_status_t eficonfig_boot_edit_save(void *data)
+ 		bo->edit_completed = false;
+ 		return EFI_NOT_READY;
+ 	}
+-	if (u16_strlen(bo->file_info.current_path) == 0) {
++	if (u16_strlen(bo->file_info.current_path) == 0 &&
++	    u16_strlen(bo->file_info.uri) == 0) {
+ 		eficonfig_print_msg("File is not selected!");
+ 		bo->edit_completed = false;
+ 		return EFI_NOT_READY;
+@@ -1027,6 +1079,13 @@ efi_status_t eficonfig_process_clear_file_selection(void *data)
+ 	return EFI_ABORTED;
+ }
+ 
++static struct eficonfig_item select_boot_file_menu_items[] = {
++	{"Select File", eficonfig_process_select_file},
++	{"Enter URI", eficonfig_boot_add_uri},
++	{"Clear", eficonfig_process_clear_file_selection},
++	{"Quit", eficonfig_process_quit},
++};
++
+ static struct eficonfig_item select_file_menu_items[] = {
+ 	{"Select File", eficonfig_process_select_file},
+ 	{"Clear", eficonfig_process_clear_file_selection},
+@@ -1042,16 +1101,30 @@ static struct eficonfig_item select_file_menu_items[] = {
+ efi_status_t eficonfig_process_show_file_option(void *data)
+ {
+ 	efi_status_t ret;
++	unsigned int menu_count;
+ 	struct efimenu *efi_menu;
++	struct eficonfig_item *menu_items;
++	struct eficonfig_select_file_info *file_info = data;
+ 
+-	select_file_menu_items[0].data = data;
+-	select_file_menu_items[1].data = data;
+-	efi_menu = eficonfig_create_fixed_menu(select_file_menu_items,
+-					       ARRAY_SIZE(select_file_menu_items));
++	menu_items = file_info->uri ? select_boot_file_menu_items :
++		select_file_menu_items;
++
++	menu_count = file_info->uri ?
++		ARRAY_SIZE(select_boot_file_menu_items) :
++		ARRAY_SIZE(select_file_menu_items);
++
++	menu_items[0].data = data;
++	menu_items[1].data = data;
++	menu_items[2].data = data;
++
++	efi_menu = eficonfig_create_fixed_menu(menu_items, menu_count);
+ 	if (!efi_menu)
+ 		return EFI_OUT_OF_RESOURCES;
+ 
+-	ret = eficonfig_process_common(efi_menu, "  ** Update File **",
++	ret = eficonfig_process_common(efi_menu,
++				       file_info->uri ?
++				       "  ** Update File/URI **" :
++				       "  ** Update File **",
+ 				       eficonfig_menu_desc,
+ 				       eficonfig_display_statusline,
+ 				       eficonfig_print_entry,
+@@ -1340,6 +1413,27 @@ out:
+ 	return ret;
+ }
+ 
++/**
++ * fill_dp_uri() - copy the URI string in the device path
++ * @dp:		pointer to the URI device path
++ * @uri_str:	URI string to be copied
++ *
++ * Copy the passed URI string to the URI device path. This
++ * requires utf8_utf16_strcpy() to copy the u16 string to
++ * the u8 array in the device path structure.
++ *
++ * Return: None
++ */
++static void fill_dp_uri(struct efi_device_path *dp, u16 **uri_str)
++{
++	u16 *p = *uri_str;
++	struct efi_device_path_uri *uridp;
++
++	uridp = (struct efi_device_path_uri *)dp;
++
++	utf8_utf16_strcpy(&p, uridp->uri);
++}
++
+ /**
+  * fill_file_info() - fill the file info from efi_device_path structure
+  *
+@@ -1392,10 +1486,13 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 	size_t len;
+ 	efi_status_t ret;
+ 	char *tmp = NULL, *p;
++	u16 *current_path = NULL;
+ 	struct efi_load_option lo = {0};
+ 	efi_uintn_t dp_size;
+ 	struct efi_device_path *dp = NULL;
+ 	efi_uintn_t size = load_option_size;
++	struct efi_device_path *dp_volume = NULL;
++	struct efi_device_path *uri_dp = NULL;
+ 	struct efi_device_path *device_dp = NULL;
+ 	struct efi_device_path *initrd_dp = NULL;
+ 	struct efi_device_path *fdt_dp = NULL;
+@@ -1464,6 +1561,12 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 		goto out;
+ 	}
+ 
++	bo->file_info.uri = calloc(1, EFICONFIG_URI_MAX * sizeof(u16));
++	if (!bo->file_info.uri) {
++		ret =  EFI_OUT_OF_RESOURCES;
++		goto out;
++	}
++
+ 	/* copy the preset value */
+ 	if (load_option) {
+ 		ret = efi_deserialize_load_option(&lo, load_option, &size);
+@@ -1481,7 +1584,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 		u16_strcpy(bo->description, lo.label);
+ 
+ 		/* EFI image file path is a first instance */
+-		if (lo.file_path)
++		if (lo.file_path && EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE,
++						MSG_URI))
++			fill_dp_uri(lo.file_path, &bo->file_info.uri);
++		else if (lo.file_path)
+ 			fill_file_info(lo.file_path, &bo->file_info, device_dp);
+ 
+ 		/* Initrd file path (optional) is placed at second instance. */
+@@ -1512,6 +1618,9 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 			goto out;
+ 	}
+ 
++	if (utf16_utf8_strlen(bo->file_info.uri))
++		uri_dp = eficonfig_create_uri_device_path(bo->file_info.uri);
++
+ 	if (bo->initrd_info.dp_volume) {
+ 		dp = eficonfig_create_device_path(bo->initrd_info.dp_volume,
+ 						 bo->initrd_info.current_path);
+@@ -1536,7 +1645,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+ 		efi_free_pool(dp);
+ 	}
+ 
+-	dp = eficonfig_create_device_path(bo->file_info.dp_volume, bo->file_info.current_path);
++	dp_volume = bo->file_info.dp_volume;
++	current_path = bo->file_info.current_path;
++	dp = uri_dp ?
++		uri_dp : eficonfig_create_device_path(dp_volume, current_path);
+ 	if (!dp) {
+ 		ret = EFI_OUT_OF_RESOURCES;
+ 		goto out;
+@@ -1560,6 +1672,7 @@ out:
+ 	free(tmp);
+ 	free(bo->optional_data);
+ 	free(bo->description);
++	free(bo->file_info.uri);
+ 	free(bo->file_info.current_path);
+ 	free(bo->initrd_info.current_path);
+ 	free(bo->fdt_info.current_path);
+diff --git a/include/efi_config.h b/include/efi_config.h
+index d7c1601137e..23211e799fc 100644
+--- a/include/efi_config.h
++++ b/include/efi_config.h
+@@ -82,6 +82,7 @@ struct eficonfig_item {
+  * @current_volume:	pointer to the efi_simple_file_system_protocol
+  * @dp_volume:		pointer to device path of the selected device
+  * @current_path:	pointer to the selected file path string
++ * @uri:		URI for HTTP Boot
+  * @filepath_list:	list_head structure for file path list
+  * @file_selectred:	flag indicates file selecting status
+  */
+@@ -89,6 +90,7 @@ struct eficonfig_select_file_info {
+ 	struct efi_simple_file_system_protocol *current_volume;
+ 	struct efi_device_path *dp_volume;
+ 	u16 *current_path;
++	u16 *uri;
+ 	struct list_head filepath_list;
+ 	bool file_selected;
+ };
+-- 
+2.34.1
 
-  $ devmem2 0x105008 w 0x68EF3490
-  $ devmem2 0x10500C w 0xD172BC5A
-
-and then to write TB_CLKEN for PWM channel 0:
-
-  $ devmem2 0x00104130 w 0x1
-
-The clock then is marked as enabled also from a hardware point of view:
-
-  $ head -n 2 /sys/kernel/debug/clk/clk_summary && cat 
-/sys/kernel/debug/clk/clk_summary | grep pwm
-
-                                  enable  prepare  protect                
-                 duty  hardware                            connection
-    clock                          count    count    count        rate   
-accuracy phase  cycle    enable   consumer                         id
-  epwm_tbclk2                         0       0        0        0         
-   0          0     50000      Y   deviceless                      
-no_connection_id
-  epwm_tbclk1                         0       0        0        0         
-   0          0     50000      N   deviceless                      
-no_connection_id
-  epwm_tbclk0                         1       1        0        0         
-   0          0     50000      N   23000000.pwm                    tbclk
-  clk:86:0                            0       0        0        250000000 
-   0          0     50000      Y   23000000.pwm                    fck
-
-
-What's the correct path to issue a bug for the DM firmware?
-
-Thank you!
-
-Regards,
-Francesco
