@@ -4,155 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F92C8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 05:46:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC67CC8302F
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 06:10:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C134781FEE;
-	Tue,  1 Jul 2025 07:46:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id AA83381FEE;
+	Tue,  1 Jul 2025 08:10:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ZSQeo6f+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Q1jhe5Fk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E56C382ADA; Tue,  1 Jul 2025 07:46:04 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20704.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::704])
+ id E663C82ADA; Tue,  1 Jul 2025 08:10:05 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B2E18006D
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 07:45:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AZbWSxw3vMVmOaWlPmE3pUpiRLqWFgdnxT1LY6omIMOLlq6pU4T30s+8r5U/NV2XtAtMxkCVBl9nDn7tThHb2abBGNPQ5kpykc1myVuvDOT68zWh4upfD+WhJkTlD9BlQ+bTpI4fjRoaLJpsXirsoDQrqdB0FMygUwDH1P1NweCLukIFkr/VB4yP++12stjWjUGtczNUwRilaOwQxE3R95uwXxDirW0MT5AT/BTilqs6MEy1txI96LMy5T/m3g0K7j2f3Yo07K/uVTLcQTctqK2YPJz1MlB4bghOjttV/oBMCqBYuHnE+KI4VqPZ+leyH/86zx8HLq0XfYzYMWVZ/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DN/MYXDkKPDZcTwLiRrCLkx2vIcV7PK+2Qlxsz2lvpI=;
- b=xpHOsgzeXfaWzrxx/z7RGyogRrGFTqiTsBMjnH+28jejFV7ZLnhWCaizf4IL32noeX+yj3Q9mKOZc8u/Njr3u8DaSYSSNAPVGfEBMaZWop/XPgQPJRos+iu+4UnPqvYGBy+Y30SkYgB8AjAvF4d5OIOS+VufIgLR07PrgsHF/ByUVyR5oPMXoudQ/BZJ65G0kwVHYNvTaBUkHN2SifPJisArw4C1hUwf5uBU5xTMtZ5LAVC2ux2AEMQ1EH7Cz7yNtwqF5ylo5nFr4ogPJYU/wB2lctbymeDoCUefY0MvFPErQDrbXZTKgZd3qZH76DgC5fTEcyhlG5lPvFAEo4Fqew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DN/MYXDkKPDZcTwLiRrCLkx2vIcV7PK+2Qlxsz2lvpI=;
- b=ZSQeo6f+hfHpwTS1S/chEZu7MbDXmiNjNuBXHDLm90DMxirvJi81n4gnB7z9UJrrcbeTwjl1xhxA5hnKIKz/DQ+h/b9Mrl5AJNSff2vqX1QSmYn/OHJI3z8g1+K008eByFM8Ze4Vw0fi2bqNA8wI85znBLdvBlkuw4VF8VbKSKMcEuyAYyVkU6tqxyE0EPo0qgF7qVWzlxqtKhyfMsKUXlTk+MZYjfe/TVEAwfIdZ3jONwwHex47wBPM7Lst7QDiwXyNcShW2RbOyiucn6G1fAthJd6EaqXqAdpTovESliGmDeqj91ocdWiB+TIKfgUGgn2y2LEg3tSqw0zQ1C921A==
-Received: from AM0PR10CA0032.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:150::12)
- by DBAP195MB0937.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:1ce::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.30; Tue, 1 Jul
- 2025 05:45:51 +0000
-Received: from AM3PEPF0000A791.eurprd04.prod.outlook.com
- (2603:10a6:20b:150:cafe::2a) by AM0PR10CA0032.outlook.office365.com
- (2603:10a6:20b:150::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.29 via Frontend Transport; Tue,
- 1 Jul 2025 05:45:51 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AM3PEPF0000A791.mail.protection.outlook.com (10.167.16.120) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Tue, 1 Jul 2025 05:45:51 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 1 Jul
- 2025 07:45:50 +0200
-Received: from llp-moog.phytec.de (172.25.32.39) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 1 Jul
- 2025 07:45:50 +0200
-From: Yannic Moog <y.moog@phytec.de>
-Date: Tue, 1 Jul 2025 07:45:37 +0200
-Subject: [PATCH v3] binman: migrate from pkg_resources to importlib
+ by phobos.denx.de (Postfix) with ESMTPS id 411FF8006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 08:09:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1751350191; x=1751954991; i=xypron.glpk@gmx.de;
+ bh=jbHo6eg9ijD5dwmDh3N/bVo3G6LdXhH3xY9okNjQUdY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Q1jhe5FkRHhhQSEDL+p1NHG+kCUG2DEN3lCFLujDnpvv7QWf0aENqqWh3yIvXjJr
+ VB3ej10SUOhnafBf38SRy03EKLLe0hx8jZLSIua8uJU1hHZMQFurCAnYfx2iHnKre
+ arJY4+PIpP72x6eAF89mPgpLqKufundj4rwGEY6wj5Aw0CGNVbbs5gum/At6INNgA
+ hHrvwtKekjMlKdAdb+rqHXpCeNPwFauf93I6zN5BmkbTWDn2S46ZWWDubZSozkCVT
+ x/EygdeQ2vehlmQJWuh1XMD/eo0QA6z1GuYusGIb1sKzxH7gtRQoWUtVHIFFxJRRf
+ utNYpVhMOFLOJ9jnag==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MzQgC-1usXHj00Js-015E3r; Tue, 01
+ Jul 2025 08:09:51 +0200
+Message-ID: <ec464641-8505-4e58-a162-de53fe9959c0@gmx.de>
+Date: Tue, 1 Jul 2025 08:09:46 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250701-pkg_resoures-removal-v3-1-270188b335ae@phytec.de>
-X-B4-Tracking: v=1; b=H4sIAAB2Y2gC/4XNwQ6CMAwG4FchPTvDCtvEk+9hjAFWYFEZ2XCRE
- N7dwYmL8dLkb/5+ncGTM+ThnMzgKBhvbB9Ddkig7sq+JWZ0zIApilTylA2P9u7I23cczNHLhvL
- JuGoKRI0kcw3xdHDUmM/GXm8xd8aP1k3bl8DX7R8wcMZZoUqURZ5LnYnL0E0j1UdNsIIBdwiqH
- whG5CQrVKqKRYF7ZFmWL/5nmsP9AAAA
-X-Change-ID: 20250610-pkg_resoures-removal-17f922d2e64d
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: Jan Kiszka <jan.kiszka@siemens.com>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>, Bryan Brattlof <bb@ti.com>, Yannic Moog
- <y.moog@phytec.de>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1751348750; l=3095;
- i=y.moog@phytec.de; s=20250509; h=from:subject:message-id;
- bh=b70NaOZSAkW8mrBn8aEJdqSkBRD78/TveKy9balVNhc=;
- b=Oh1e2ln4wCHWOXXu1O6rPtBUIdz+q/2ntr/xs+IPecVRauBLrMFumYDxZ5TrHDGuXXQRcYzyS
- WwKEO2SRxmnB19hKajuR1PxATwPcFvJKOGd17rlz1b9lVIIR8us6NNy
-X-Developer-Key: i=y.moog@phytec.de; a=ed25519;
- pk=rpKoEJ4E7nD9qsrU/rfKVwMTWNWYaTBylZuJUXUiFr8=
-X-Originating-IP: [172.25.32.39]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A791:EE_|DBAP195MB0937:EE_
-X-MS-Office365-Filtering-Correlation-Id: a009e5b4-96ab-4d16-d00b-08ddb8628997
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700013|376014|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dFZ2ZEhOcUJWWXF3djRYRnlxZlM5cXBtTjYzRTVKcGNsZ2h0MThVYjRDSFZl?=
- =?utf-8?B?TmJZTlhtbnkwS0QwWFd3bHBoT1prZnpkbVlsVitDUURxYmlEU2tlVW85aHR0?=
- =?utf-8?B?WG5iTE1MbTV4TnpqL3F5RzZtdDVPR3JiWHdmVC8ybTlzaUk4dHdKOXluZkd3?=
- =?utf-8?B?MzZybWdwV1pBTVA0bmhuTkVMMlh6aXIxa1VqMWZTc2V2WmRFUVRudFNFL1Fj?=
- =?utf-8?B?eGlnSjZZMHY5TVVZS1BwOU41TFg3a3ZjNnQ5TDJpZ2VjRE5SMTZsNnI4UElt?=
- =?utf-8?B?STB4SVBpY2VuSHZLeWhZOEdpZlZVOXFWSWNoR29sZk5YZXY2V0VUK3FTODBP?=
- =?utf-8?B?aU1DUng2QnlES0ZtWUVlczBWSmd0c2pQdHJybGRMYytWUkJYZUlDdDI4MGl1?=
- =?utf-8?B?SjJVbzJkN0dFRUhlcDJrVmJ6ZlFRVW5WSGdCbE02N2dlVHhHajBYNUEwTStM?=
- =?utf-8?B?VDFyelFaL0VjS09YajIyUTlzUGRsaGFKYUVVcmpxeEYrWTNwNGhleHJCS0RY?=
- =?utf-8?B?TlNuUVVwL3JFUVBseTFjWXVLQitxMWdQNzVhSFRNd2pJQ3dTQjBSdzNtWThI?=
- =?utf-8?B?RWcxOEIvQ3E0dzlURHhEWG9QTjVWMTUwOG9sWWZnL0xNRGIwa2hKNjlJcnF5?=
- =?utf-8?B?MldyWlJ1blMzQTFISmNXWFZDNzJzV1ZqZW5MZnVHWXF4NmVueDZoWXZxRGlW?=
- =?utf-8?B?SWp1MWo3allVZUlKTlR1Mk1lZHY1YlY3R0prQXAxbFgyam94a2NaVytjaVlq?=
- =?utf-8?B?aXRKZDhqd3VoT1d0bjU1SmxtRWFRME5JWW5INlZDdXNjV3QrNXl0OFNGeXIv?=
- =?utf-8?B?Nkl6cWNBemp3TUllTUFEekU0Wkd5RDQ3N1c4MkROZjZVVjZuMWJ0TUtVbHpH?=
- =?utf-8?B?ZkRwYzU2dEhxM0t0b0tRNTFDVDlUb2grMjlyNDFpNFlRVWhSUjNTdS9PSXJW?=
- =?utf-8?B?UHlCTDhBQ0xIYlAxalErSU5xWnE1UFAzOVNaM3ZyN1BQLzFGSXVNVk1mNDJa?=
- =?utf-8?B?V1lMTXZ1N2dud2gxMHNHQlBsVkYzUHlVZndlREgwY2IwNUhPR3JWRWFFS2lo?=
- =?utf-8?B?eVFGREljVHlKa1lycVJCVys1VnMwK09sQTRONlF1WWhodWdLZDdkZzFvZ2s0?=
- =?utf-8?B?RHBqZUFWbEZVL2kxcTZsTnUyUEFWNlR4R3dRalRzNExwR2pqcmZOUng3aCti?=
- =?utf-8?B?K0srNXNDdVNzUTRiTG9XVTZlOGZENHdDUUFPU2ViNjBIYlIyclUxdGhZTS9Z?=
- =?utf-8?B?K2NrNURoNkpHMDVadVJqU0YyeCt6WWlsUjVNSWg4WmhzVW9UaUJGMWRBNmo1?=
- =?utf-8?B?cW9IOC9SN1NRZjRHb3NyL0dxT2orTFhIOFcvSFBwNWVjR0g2U1IwS0o1MXdH?=
- =?utf-8?B?alhvdU0ySWtNU1R6bXlnK2loUXB4dzNKbkoySXlweUlzakhKd2k1bXp6cmN4?=
- =?utf-8?B?RUQ1OEl3SUlCK2x1NnovSTJOYUV1cUMrSGdjRkk3SlNPbjg2VWxBdHRKbzNW?=
- =?utf-8?B?U0Z6SkthU1N2REVtaEJMblQ2aGNvTkR0ZDZzbm52enZJeXZGMkE4TFdVNFM5?=
- =?utf-8?B?RXV6SE02dlRKc3czWjI5ZXF2TStvLzNveVFUUU5ndS95NXBscDgzSU00aEpY?=
- =?utf-8?B?L2VMYm9sOTVSV3U3RVRLL3FiL0QvYTgvOGRQZm1vV05IVUVXQUx3MjY1Wm1q?=
- =?utf-8?B?ZDNtek5kVDZPMkVmeGpvVDNPRCtPc0FKZkx4T2xyM0Y1VHpzQTFFeFFXbEFa?=
- =?utf-8?B?RFBIb0xzcVF1elVVd2MzZkVBOGtaR3Q0VnBUS3NpMFVpMjFoc3dPdGRQdU1P?=
- =?utf-8?B?L1ZiYkVGQ3VaczV0eEdMVUZXMEJsSnpIbEt4KzNmQU1VaEJoS0JLOUlUSEN6?=
- =?utf-8?B?Wk9yQ2p3VHlqMlJoVU1oeFBxb1Q2ZUh1Y0xNbkVGL2NEWlRrTC9VTWVmK0hm?=
- =?utf-8?B?QXNuaGZMYmhUSmpPN1laNS9xMU9HdFpDc1kvWWhYalU4OUN1azZtUDQ1Tmg1?=
- =?utf-8?B?dGRVcCtJVlJRPT0=?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(13003099007);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2025 05:45:51.0722 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a009e5b4-96ab-4d16-d00b-08ddb8628997
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A791.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP195MB0937
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 4/6] efi: add EFI_DEBUG_IMAGE_INFO for debug
+To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20250701034926.83536-1-paulliu@debian.org>
+ <20250701034926.83536-5-paulliu@debian.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250701034926.83536-5-paulliu@debian.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:iP4O3QIlwt2LPqWflS4ppw0OxhE5CEzWXtbfmdGDmF9L2lJlqnh
+ Y3wgyc+t58LqrmcYsApnQMrtAOwUQQq2VbPB3p+LhmnbnvRQTRXXMN0FhYIoKvn8M1Z7QmY
+ IHdl0bJqjsduBOptCLyMrcVx5elApjUzNa7njFLXwjETB5VhmnjRIJ0yaBi8iHh/ZQ7ECJi
+ RRIKLJY1c0/1ToKfX8Q8Q==
+UI-OutboundReport: notjunk:1;M01:P0:5ydtPQDyBiY=;tz55CuYqvGBgORPFWr/uJ2Wsfnm
+ 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
+ rg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,86 +131,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pkg_resources is deprecated, use migration guide in [1] to migrate to
-importlib.resources.
-Keep the Python 3.6 backwards compatibility.
-This also fixes the binman version test which failed for setuptools
-versions that print the deprecation warning.
-Change from __name__ to __package__ as with the transition from
-pkg_resources to importlib_resources using __name__ results in
-TypeErrors [2].
+On 01.07.25 05:49, Ying-Chun Liu (PaulLiu) wrote:
+> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+>=20
+> This commit adds the functionality of generate EFI_DEBUG_IMAGE_INFO
+> while loading the image.
+>=20
+> This feature is described in UEFI Spec 2.10. Section 18.4.3.
+> The implementation ensures support for hardware-assisted debugging and
+> provides a standardized mechanism for debuggers to discover the load
+> address of an EFI application.
+>=20
+> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
 
-[1] https://importlib-resources.readthedocs.io/en/latest/migration.html
-[2] https://github.com/python/importlib_resources/issues/60
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
-Signed-off-by: Yannic Moog <y.moog@phytec.de>
----
-Changes in v3:
-- replace __name__ with __package__ when trying to get package resources
-- Link to v2: https://lore.kernel.org/r/20250627-pkg_resoures-removal-v2-1-86b277b02552@phytec.de
+Hello Paul,
 
-Changes in v2:
-- rebase on to next
-- Link to v1: https://lore.kernel.org/r/20250610-pkg_resoures-removal-v1-1-97a269446d35@phytec.de
----
- tools/binman/control.py | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+with
+https://patchwork.ozlabs.org/project/uboot/patch/20250429084138.239990-1-h=
+einrich.schuchardt@canonical.com/
+I got this output:
 
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index af447d792a7f0e87bccb8e78b2df6fa093d320e6..1307222591de1688f8c7c2a3802833d13bf1e795 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -8,12 +8,11 @@
- from collections import OrderedDict
- import glob
- try:
--    import importlib.resources
-+    import importlib.resources as importlib_resources
- except ImportError:  # pragma: no cover
-     # for Python 3.6
-     import importlib_resources
- import os
--import pkg_resources
- import re
- 
- import sys
-@@ -96,7 +95,7 @@ def _ReadMissingBlobHelp():
-             msg = ''
-         return tag, msg
- 
--    my_data = pkg_resources.resource_string(__name__, 'missing-blob-help')
-+    my_data = importlib_resources.files(__package__).joinpath('missing-blob-help').read_bytes()
-     re_tag = re.compile(r"^([-\.a-z0-9]+):$")
-     result = {}
-     tag = None
-@@ -151,8 +150,9 @@ def GetEntryModules(include_testing=True):
-     Returns:
-         Set of paths to entry class filenames
-     """
--    glob_list = pkg_resources.resource_listdir(__name__, 'etype')
--    glob_list = [fname for fname in glob_list if fname.endswith('.py')]
-+    entries = importlib_resources.files(__package__).joinpath('etype')
-+    glob_list = [entry.name for entry in entries.iterdir()
-+                 if entry.name.endswith('.py') and entry.is_file()]
-     return set([os.path.splitext(os.path.basename(item))[0]
-                 for item in glob_list
-                 if include_testing or '_testing' not in item])
-@@ -831,7 +831,7 @@ def Binman(args):
-     global state
- 
-     if args.full_help:
--        with importlib.resources.path('binman', 'README.rst') as readme:
-+        with importlib_resources.path('binman', 'README.rst') as readme:
-             tools.print_full_help(str(readme))
-         return 0
- 
+Debug Info Table Dump
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
----
-base-commit: 490ae8ceae2d5999c9de863e014e463f5c1495a6
-change-id: 20250610-pkg_resoures-removal-17f922d2e64d
+=3D> dump
+Modified
+Number of entries: 0x00000002
+Info type 0x00000001
+   Address: [0x00000000bdd47000, 0x00000000bde5aabf]
+   File: /shellriscv64.efi
+   Handle: 0x00000000beeb17a0
+Info type 0x00000001
+   Address: [0x00000000bdbeb000, 0x00000000bdbee1ff]
+   File: /\dbginfodump.efi
+   Handle: 0x00000000bef12890
+=3D>
 
-Best regards,
--- 
-Yannic Moog <y.moog@phytec.de>
+I found the PE-COFF headers of the EFI binaries in the provided locations:
 
+(gdb) p *(char[0x44]*)0xbdbeb000
+$1 =3D "MZ", '\000' <repeats 46 times>,=20
+"RISCV\000\000\000RSC\005@\000\000\000PE\000"
+(gdb) p *(char[0x84]*)0xbdd47000
+$2 =3D "MZ", '\000' <repeats 58 times>, "\200", '\000' <repeats 67 times>,=
+=20
+"PE\000"
+
+This looks good.
+
+Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
