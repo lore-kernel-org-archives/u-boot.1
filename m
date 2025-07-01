@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97C9C8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 10:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45220C8302F
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 10:44:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 944F282F6D;
-	Tue,  1 Jul 2025 12:43:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DDB8082F5D;
+	Tue,  1 Jul 2025 12:43:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 205B581E13; Tue,  1 Jul 2025 12:43:49 +0200 (CEST)
+ id 10A1882F8C; Tue,  1 Jul 2025 12:43:54 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1B19682B18
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 12:43:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7492F82F49
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 12:43:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DEB871595;
- Tue,  1 Jul 2025 03:43:22 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5DABE19F0;
+ Tue,  1 Jul 2025 03:43:28 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 652B93F58B;
- Tue,  1 Jul 2025 03:43:36 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 97A253F58B;
+ Tue,  1 Jul 2025 03:43:41 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH v4 0/2] eficonfig: add support for URI based boot option
-Date: Tue,  1 Jul 2025 16:13:17 +0530
-Message-Id: <20250701104319.716162-1-sughosh.ganu@linaro.org>
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v4 2/2] test: wget: add a test case for validating URI
+Date: Tue,  1 Jul 2025 16:13:19 +0530
+Message-Id: <20250701104319.716162-3-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250701104319.716162-1-sughosh.ganu@linaro.org>
+References: <20250701104319.716162-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -53,31 +56,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The wget module has a function wget_validate_uri() which is used for
+validating the URI to be used by wget. Add a basic test case for this
+function.
 
-Add support for adding URI based boot option through the eficonfig
-command. Also add a basic test case for checking validity of the URI's
-being passed to the wget function.
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Changes since V3: None
 
-Changes since V3:
-* Do away with boot_file_option member of struct
-  eficonfig_boot_option - patch 1.
-* Use the uri pointer being non-null in
-  eficonfig_process_show_file_option() for selecting menu items -
-  patch 1.
-* Put a check for lo.file_path in eficonfig_edit_boot_option() before
-  calling fill_file_info() - patch 1
+ test/cmd/wget.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-
-Sughosh Ganu (2):
-  cmd: eficonfig: add support for URI device path based boot options
-  test: wget: add a test case for validating URI
-
- cmd/eficonfig.c      | 129 ++++++++++++++++++++++++++++++++++++++++---
- include/efi_config.h |   2 +
- test/cmd/wget.c      |  20 +++++++
- 3 files changed, 143 insertions(+), 8 deletions(-)
-
+diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+index 445750660c2..1005392b952 100644
+--- a/test/cmd/wget.c
++++ b/test/cmd/wget.c
+@@ -241,3 +241,23 @@ static int net_test_wget(struct unit_test_state *uts)
+ 	return 0;
+ }
+ CMD_TEST(net_test_wget, UTF_CONSOLE);
++
++static int net_test_wget_uri_validate(struct unit_test_state *uts)
++{
++	ut_asserteq(true, wget_validate_uri("http://foo.com/bar.html"));
++	ut_asserteq(true, wget_validate_uri("http://1.1.2.3/bar.html"));
++	ut_asserteq(false, wget_validate_uri("http://foo/ba r.html"));
++	ut_asserteq(false, wget_validate_uri("http://"));
++
++	if (CONFIG_IS_ENABLED(WGET_HTTPS)) {
++		ut_asserteq(true,
++			    wget_validate_uri("https://foo.com/bar.html"));
++		ut_asserteq(true,
++			    wget_validate_uri("https://1.1.2.3/bar.html"));
++		ut_asserteq(false, wget_validate_uri("https://foo/ba r.html"));
++		ut_asserteq(false, wget_validate_uri("https://"));
++	}
++
++	return 0;
++}
++CMD_TEST(net_test_wget_uri_validate, UTF_CONSOLE);
 -- 
 2.34.1
-
 
