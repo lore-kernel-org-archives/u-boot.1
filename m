@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 410C9C83038
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 18:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35578C7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 19:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEC4882CFA;
-	Tue,  1 Jul 2025 20:52:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 757F680B9B;
+	Tue,  1 Jul 2025 21:49:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y2vJDIid";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="fK3shdaL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2631D82E08; Tue,  1 Jul 2025 20:52:42 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 0C37281E13; Tue,  1 Jul 2025 21:49:57 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EF0082B18
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 20:52:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 828CC8006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 21:49:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-2ea35edc691so1478781fac.2
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 11:52:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-611a7c617b4so1808233eaf.3
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 12:49:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751395959; x=1752000759; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=taBmjUrJUvhbA+kkpmz0al5XpBrp6ez0TmT5htZhvhk=;
- b=Y2vJDIidEN1zFyKliR54jTdWm0d1PwxxZtkC1dIQ1+dQ/ymzAaC6iCodqmcLWnd1Wf
- fQenMbgXaLHJpazFYHyw8xOHYEAmvuS3RIRAa0UcN0E8IUL8Jn3QZ1yVM3Rr/yG28FmS
- o7F4Dc2hibImx74PhM0SuZU4fb+bsaSiEtu8s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751395959; x=1752000759;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1751399393; x=1752004193; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=taBmjUrJUvhbA+kkpmz0al5XpBrp6ez0TmT5htZhvhk=;
- b=kLnozdEqH2pYBTBtk4jIVjh+VSMP2LIB9RNon7l5jba06hBYSkyyv1S7/hRHE/cR54
- 0LBbMYPsuWmacb5ou7v8qLQ75EoOs5yEFnQ8Fe678zSM7xOWZ2E5vuZg1q0nm/gw6ir6
- pqvZbmsMl8FXb79G0aIWocuxwwRI2xY9xcfxWe5t3y3OEPcNs+tSBSS8xgKEOD6RdZv4
- JYAmqVGyLL/4P4L1TP6Ke8HcNpYoyDura3fFGDaVrE9aavVdHDPd859bWVMww1jbUfYh
- VK9/iM/+pSNfAehlsUAJFpa/INARXmfFkB/aH3d9pvDvMDs3xo1Tbvd3fq+MvewgZcV8
- 9xDQ==
-X-Gm-Message-State: AOJu0Yxzi1DCh+v9ojL6rI5+v0bnJOy6TpLDwQgEKcJ99w7e7KxXZyuW
- yNOIpzqLlDRUSU9KqDuEs6B6oLH5+ikg6NIbhMQZo+RmCe8OWls4LQLM/m78w/LogmLTyzlqge/
- Hvih0isY=
-X-Gm-Gg: ASbGncvGxK6S3h1j/OnORfKcLnWrIi0sIp8z6WSpb/fLY/hqCQt+uY7lWLKNkFatNse
- bRynfoq20Fa437O5Dm7mjCmzwuzBtXzc9guSMHp6kGbZGTbvu4rNbJxZZue4UBwzRrqQuRzpH9m
- sylPo8f5KWxymwJwf6+Ut0gV0wgW/0Lrbq3/ZVxHTgpeI/8ksbmjCSkKKX+TiSqaj5l4jN6j0JP
- lx/mTo+RebXODhqK/8JDZW5bCfjP99l1hvZrk2cLrsVIB0z8T2uP0zFJQwWFBYPtvCx0ltR8ku5
- 5OfXwLWP8M+N+XO/NUKsBkdqRTzT7GQCe4Jc1qoeQygOPoNz11c8cAL0cHKgoFj3RKL1KZ3saGH
- ed83lLB/2oaDNJRvHX3mNM8Q=
-X-Google-Smtp-Source: AGHT+IH9ouo2bxPCUN3MrtuR8FeL/hHDtdl51WNZWgdJoI0dlggxPgPGuNQApw+eArv0HSOqvPQgZA==
-X-Received: by 2002:a05:6870:d1c4:b0:2e9:6a0:80d1 with SMTP id
- 586e51a60fabf-2efed6847e5mr12151584fac.19.1751395958572; 
- Tue, 01 Jul 2025 11:52:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afb006a02sm2214712a34.23.2025.07.01.11.52.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 11:52:37 -0700 (PDT)
-Date: Tue, 1 Jul 2025 12:52:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] power: Correct dependencies on POWER_LEGACY
-Message-ID: <20250701185236.GC523899@bill-the-cat>
-References: <20250701184252.3191485-1-trini@konsulko.com>
- <20250701184252.3191485-2-trini@konsulko.com>
- <CAOMZO5A56QNX5KF1RC6_L1Ztb4uWYDkAQdkAxAi=mVrpCUQD8A@mail.gmail.com>
+ bh=2DOihLeSohQ8NTQ0a4uZ6LAX3WG4qdtZJv+xBZVNNh4=;
+ b=fK3shdaLqS/wl/1q3q2TqdvlADzYyOnxooAlHpoUgvXzfgQCecvRSdXZFi76dcUKEX
+ MU29BYEjHzRIfxSBAj0QLDj3MnBc1h04lCoH+fXx2jHVCKSlHGYq5S56Ulcw0pvvixyu
+ DMNQQ39qVyHz5S0AKUlIlRBOLhSQGksO1rKJpjekRajWYBE12m2v/Cs8yX/VA4OQwtb2
+ N4F3N4K8bOPmIlTRN1tWeDGtMQsSpiVaN7bHFbcH0CjcqeLSmdCe8FGcak2XBrwwkkW7
+ o1w+4P8cRczWcWAO1esCNOhJicrj7vMnVqHErJafGNm/hXcggti5M9hvLzDg1mj7txQk
+ WdLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751399393; x=1752004193;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2DOihLeSohQ8NTQ0a4uZ6LAX3WG4qdtZJv+xBZVNNh4=;
+ b=nLfRr3AuNn9xPkheNaNQNiGeA3Zxutrz4yln8WBRAKOWZBbGcNgEirSRJXiPUzE33K
+ TT54rhznrNwgnqJQ8cPM08SHAHyvPWfDGL10NT0olD1JokSzVtqKXWWUHSwWeU82o7Cz
+ +1jeWdf4yhV40fRmSG9BHWJQjT/xgI4zT3ZYUF3YEbav2mOor4R/4B20ROizW8j9HiYc
+ 40sit3U7AeXfzsnHALYfJm73QIjC1QO0XtteMEI3+x4fY1f7rBjgukFpEzhgHUaAfFEn
+ mYCUyi1yP+bkC4afq9czQrCglJJwl1K1Xfy/T49iLWMY8rOVj1jQ5xedPSyJVWaR7tOJ
+ ci7g==
+X-Gm-Message-State: AOJu0YxUVc12P5yzHE4Koj1iOQrFnJNJUouH0cz2yvIsyW2KAx9Mev9r
+ cbHz6rL9sYOPIYrl84shjFnZOkmz9MDJ7r9Hy/jPMJOufXYbdEaylfFd2lMyupCPyPdvPicAMNN
+ V2GnW69Zk3Q3XirOe4DGERt+1HCoVsHlztZR+TqwUig==
+X-Gm-Gg: ASbGncv9rLrv/d0R/GRlJqaTg4CnsfBbl7aPwp0hhC0qFHE+FdF8QQ3Qx8Q/smjM1rE
+ 1ZQc1T60TbPrnTPCSGOexQjgxNlJdJ6UKcBqHCKpNo66m3r9sDZbjG2vHiTy+eMOlfqMayu3qdF
+ MG9NNpYMb6Ho7kspMqJtA4OS/8Tqoj2YjmGfoyL1QrGsw=
+X-Google-Smtp-Source: AGHT+IF1kwA0SXsoOKdwcnXoL9VsrlbxDGBxe1RDeqK5uYjsaeW4jfsExJ1ZDW+qNPfYjoOTcL5sHkuD7H3n9iwHAI4=
+X-Received: by 2002:a05:6820:2d05:b0:611:ab60:3003 with SMTP id
+ 006d021491bc7-612012b713bmr19053eaf.8.1751399393154; Tue, 01 Jul 2025
+ 12:49:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zzXUsdzP9gwvKVLu"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5A56QNX5KF1RC6_L1Ztb4uWYDkAQdkAxAi=mVrpCUQD8A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAJ+vNU0p4BZX-853gmcgEMzXn+es5SV5aTUcU-kzTjPZLFtLOQ@mail.gmail.com>
+ <PAXPR04MB9644C2E63CE6649A1818ED82E241A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB9644C2E63CE6649A1818ED82E241A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 1 Jul 2025 12:49:41 -0700
+X-Gm-Features: Ac12FXwUiOOzHMX6lbduA5MFCf1b1ILxY2yeqmqFCApPl9P7-wrREH_0a6VUQf4
+Message-ID: <CAJ+vNU0-wUW=j0N3RYVMsjhdpjxoU-GA8uVD_MAawYdj=X2N9Q@mail.gmail.com>
+Subject: Re: imx95 SDP support?
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: u-boot <u-boot@lists.denx.de>, Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,44 +92,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Jul 1, 2025 at 6:07=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
+om> wrote:
+>
+> Hi Tim,
+>
+> i.MX95 needs to enable USB gadget in SPL to load the U-Boot proper. It ca=
+nnot use boot ROM API.
+>
 
---zzXUsdzP9gwvKVLu
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Alice,
 
-On Tue, Jul 01, 2025 at 03:50:56PM -0300, Fabio Estevam wrote:
-> On Tue, Jul 1, 2025 at 3:43=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
+This is unfortunate - is the ROM API not going to be usable for the
+imx95 or is support code simply not written yet? I don't really
+understand the difference for example between the imx8mm BOOTROM and
+the imx8mp/mn BOOTROMv2 where BOOTROMv2 can use the for SDP which
+greatly reduces the SPL footprint.
+
+Have you been able to configure U-Boot SPL for imx95 SDP? I am
+overflowing .sram codespace when I try to add 'either' support for the
+USB2.0 controller or the USB3.0 controller.
+
+Best Regards,
+
+Tim
+
+
+> Best Regards,
+> Alice Guo
+>
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Tim Harvey <tharvey@gateworks.com>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B47=E6=9C=881=E6=97=A5=
+ 8:07
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: u-boot <u-boot@lists.denx.de>; Alice Guo (=
+OSS)
+> > <alice.guo@oss.nxp.com>; Fabio Estevam <festevam@gmail.com>
+> > =E4=B8=BB=E9=A2=98: imx95 SDP support?
 > >
-> > The POWER_LEGACY option depends on not having SPL_PMIC enabled, so add
-> > that here.
->=20
-> I think you meant DM_PMIC.
->=20
-> The commit log says SPL_PMIC, but the dependency is on !DM_PMIC.
-
-Yes, that's right, oops.
-
---=20
-Tom
-
---zzXUsdzP9gwvKVLu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhkLnAACgkQFHw5/5Y0
-tywVxAv/R9OD//Uxyr+tXYBZlRlfyMbKKlA41CLVAyk67Ut01C0AounHqTmZ93vi
-mssANqblY1gGcn8v/kbGOhpe8shzNK4q7RAitATBY6SFc9olZ27dc/5b/RM35Sr+
-xGOqsALDMnt4TpAVrCVMqVBkTlUpEbYmBqTR4svJtML67PNK/nNY/ZsEZBNlZDn0
-L4kOivIiWm2Im0mwKiBOpsT0OhrwncTKfTPqC8EHgi0Wxhri1iSMk2E9T6cAFsvn
-YSeKP754ZAVDUqd0x0LqeNLXEgJyfw2g+r7pBaRL+17ctJivEJr9VV6GwTay+Pcr
-sE1Ab5Q11YOjry2Kfq/uEsOLVxLIbOEl8BQ2cgW1PC1gz/4XjBFPhZ+eBOjgdQ7U
-pi507qs0wKqTL78zfVVQMXnuSBdEgjotYqN7M1BZWV4i/A4/TuE/QOw+p2mXkBQf
-W8MML3SsVoKR+eXhZd03gbcCBRARrkNctF8iRUjfaSOVh1VTORvmL9r8SgnWMVDc
-TbR3dD9c
-=UgHm
------END PGP SIGNATURE-----
-
---zzXUsdzP9gwvKVLu--
+> > Hi Alice,
+> >
+> > I'm wondering if you have any notes regarding U-Boot SPL SDP support fo=
+r the
+> > imx95?
+> >
+> > The SPL boots over SDP just fine but I'm interested in getting to the n=
+ext step
+> > where the SPL provides SDP support to load U-Boot propper.
+> > I'm not clear if the imx95 uses a similar bootrom to as the imx8 and
+> > imx93 or if this is done over scmi.
+> >
+> > Best Regards,
+> >
+> > Tim
