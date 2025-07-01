@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4431EC7EE30
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 18:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDBCC83038
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 18:43:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52E4782FCA;
-	Tue,  1 Jul 2025 20:42:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E22E82EC6;
+	Tue,  1 Jul 2025 20:43:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WuDe6WMI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="in2zUD1F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A8B382F83; Tue,  1 Jul 2025 20:42:57 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 0FFE582EA9; Tue,  1 Jul 2025 20:43:02 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DABF882B18
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 20:42:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF7BA8300B
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 20:42:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-73a4c557d47so2935268a34.3
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 11:42:54 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-404e580bf09so855041b6e.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 11:42:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751395373; x=1752000173; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751395378; x=1752000178; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=4vy8jg/6ySR3pSnTF2yhHLU1pqE1p0iuM8TzG8xS5+4=;
- b=WuDe6WMI2HxUIXWINCR4/ZPgKIVmC0EZcW7zGoTnZDwiHv41aBGkxiohwc5Sjb4tB0
- Yiyu7CRBhiwvy3Y3BVDS2XfMF/yfgTOeUOCNbKhpstP+NufYmgB+wIHyfOVK6BM4LVIZ
- s3blHZgxK9+QESaZnBJNlPwOugvl9dVzNbqGc=
+ bh=XAHfMwwz2Qwk5gD+zM4Pc7l01w5nRjFf2BpNtW5hJyc=;
+ b=in2zUD1Fw309JRYubQG6R3edxCpP320ckt+4QHcUp0OC2PkyxhLfRvFqVk+5XcGj7Y
+ XabJ3yVa6tohMkX8XXZu1eMNuc+egoEDtQuHvR4tESCuEet3ubW/vKIyBzWjBtdh8XFN
+ 8s83NaMA3dBkbNeE4ezt2A0gDU9QziEmqsADw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751395373; x=1752000173;
+ d=1e100.net; s=20230601; t=1751395378; x=1752000178;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4vy8jg/6ySR3pSnTF2yhHLU1pqE1p0iuM8TzG8xS5+4=;
- b=hl14QNVswx/zvYGgmaPetfnz1DzFpVAipknhVxhoqY0u9RbdZfieXh3cOv1TtjiuS6
- HHlSNe8yo3wjOgB9fTOF/7G2fKeJfZpmn7ehfPC4ByRODjh9J8D4LorKu9iI4gCMLTU7
- GGbFbTRuaUjlH7s9BF4fEkK1VJUw5sY3mOg+Nw0RMvd6puva2m86aBVGcNgNYmKlZm+h
- 1NOHLVJNF56CN7djv80e5Z+8eDs8g6JW0u2/59VW68Loxib9s5Xjj1wpiRrpWad89jXf
- Zvg8VPXBYvavWKUla3lcVw6gPQ5iwreO5cleiAyZQK60dhFwNc2RctQvCVdpdClSSXEM
- Wb3Q==
-X-Gm-Message-State: AOJu0YwxTbbFnjXhUxBvyXWFDFz7x4T5P6EY4RtYWvabfkfPs7zSJgpQ
- CljrHIDV3kp2Oj62YWPIHoWjUEnUnhymsPH+i2wB0dyZdtJ9CQDaHeKwOtXGW39wrwd/m7COoib
- FQHi0tnI=
-X-Gm-Gg: ASbGncts/pmg4BUSpaS4QuBqrUJtMsoRxwKju5ZogcMHemI9ia9v7k4puh2+jf4ucQF
- HdroCQGiByrpg0ulSlHdaf52gn0GwGZ9P2K9li9qPZavGlF9ZkfWJWrnvs9GyKktSNJsO4KOWGd
- Qj7rmoWxKWmcEaJMjx/BEdobttBhYbTy/1a4EY3tbANdLCt3sJqziUiAeeUsHU1rS/+YhQkBt8f
- 0LcDzjU/KALKR5p3qI2eKAO4wWmzXJx97ngGvo6NeZPnkk/wiKxtjuLpw4Tj3A9kvpAYQg2zRyv
- krgShSjcu4M1eqf5ClHq48E1Wh9XOu+ANVtl7TWMOhZRMZE6FNn95yPHagdkP5MGd6NsfF0CSVo
- MSB7bWkNxrIyw779QbDleMsO3xw==
-X-Google-Smtp-Source: AGHT+IGS8XgZcGh+vuPqV7KtvZsPbE/3TNY3RMtmxJ4YIEDABfnOc+8G1pej/nle5UiFK5KT2ifQYQ==
-X-Received: by 2002:a05:6808:6f97:b0:3f7:e860:b5f3 with SMTP id
- 5614622812f47-40b33e34b86mr15403606b6e.22.1751395373576; 
- Tue, 01 Jul 2025 11:42:53 -0700 (PDT)
+ bh=XAHfMwwz2Qwk5gD+zM4Pc7l01w5nRjFf2BpNtW5hJyc=;
+ b=OSywk2Nq2jSZrJaCpWzyZMU2f+ZC9azJ1ZeWCknVYuSTsuZdpQEnyckrxci57q/OIS
+ f9yk1NhDp8QkCzSN4cYfBOxvWNdmXNrk7sEm1lACpIVm7454MPV3JZWLmVeU+YcHi96r
+ Oh8GM5olusgFJ4SJ4OaGaV7Gu94E10H4XJ0JQ5kSUNCts9pfT57AMK966/Qizof1cFOy
+ vCujAZd5gXfV/Er9JLGyjnX4eof3fE7n0YHvSRwSHitDpmLi2IijXTwVQyb3FSoYwU/X
+ DeoSJaWma0uh4a19zKNI0xvLf9fZ0mhzxvolE+7yQGn2ZYfryLk+H/SPsnIppvlc6gQe
+ /8Cw==
+X-Gm-Message-State: AOJu0Yyd1/AhEvxw0dG+FDy40+YsY5aTDUR3/r6L/SdyRARatbh2hSAA
+ gshlhuzhQdP5JMnUy0+E1AP2vRdlITHkSLfcH2qKC/9aQpAPERVy3MppcTg9gLJXnAs+w+axNNN
+ /aTXWMfE=
+X-Gm-Gg: ASbGncvW3GgZkOBk2+DmzGYKR8tSvHvFengfG+cY9NHbMukQpnA+iwjfXwUJ1dyWQlD
+ 8GgBS+qY3uy5c7Uvo9XMcg6L8vwoQB2jT4M3w7uxO9i1LKVDs9hAzAkcv8jLRrQq3O9YvUy5+gM
+ /aNXFhpZLOMGbi6HUZAp7A0TgKxqb+h7Yk/GLHwFjbp9HDxulsEm1eDSoN6Yb2HgUXsGVCFsJnB
+ ipZf3fmZonT7CXlj49zqUbhc2+YGEQcMarQXbURGvQ5NSJZOXVFqonSzKGukprSsklPKiGwRN0o
+ M9IzgWcSbZkAVa9QUXR/zKN/RkxoVSgiOeZkUfP7d3/ejxUHP3UUd3mwa1MG/VpIOqP/A12FPID
+ jGNvPb84RoQ1ldIvxBqBqor3fDA==
+X-Google-Smtp-Source: AGHT+IG7asilqv7i2cr9VY9JphnAy7JHYjVPkoWKKf2HornsWh4cnVVjM6wsWrtlBBRHVqsrM0zrpw==
+X-Received: by 2002:a05:6808:3089:b0:40a:5356:6581 with SMTP id
+ 5614622812f47-40b33c29d91mr16204534b6e.2.1751395378558; 
+ Tue, 01 Jul 2025 11:42:58 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b3243e189sm2239234b6e.49.2025.07.01.11.42.53
+ 5614622812f47-40b32420c83sm2234513b6e.36.2025.07.01.11.42.57
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 11:42:53 -0700 (PDT)
+ Tue, 01 Jul 2025 11:42:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 1/2] power: Split *POWER_LEGACY portion of <power/pmic.h> out
- to new header
-Date: Tue,  1 Jul 2025 12:42:51 -0600
-Message-ID: <20250701184252.3191485-1-trini@konsulko.com>
+Subject: [PATCH] sandbox: Add some missing {clr,set,clrset}bits variants
+Date: Tue,  1 Jul 2025 12:42:57 -0600
+Message-ID: <20250701184257.3191508-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,225 +91,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commends in include/power/pmic.h say that once SPL_DM_PMIC exists we
-should update things. This has been true for some time, so let us update
-this to have the legacy portions in their own header, which should not
-be directly included. This cleans up the logic within the file too
-slightly.
+Add the 16, 32 and 64bit versions of the non-endian {clr,set,clrset}bits
+macros.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- include/power/pmic.h        | 88 ++--------------------------------
- include/power/pmic_legacy.h | 94 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 97 insertions(+), 85 deletions(-)
- create mode 100644 include/power/pmic_legacy.h
+ arch/sandbox/include/asm/io.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/include/power/pmic.h b/include/power/pmic.h
-index 636221692d0b..7344b5889cee 100644
---- a/include/power/pmic.h
-+++ b/include/power/pmic.h
-@@ -19,74 +19,8 @@ enum { PMIC_I2C, PMIC_SPI, PMIC_NONE};
+diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
+index f656f361cd52..6e3f9547fee7 100644
+--- a/arch/sandbox/include/asm/io.h
++++ b/arch/sandbox/include/asm/io.h
+@@ -74,7 +74,14 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
+ #define in_be32(a)	in_arch(l,be32,a)
+ #define in_be16(a)	in_arch(w,be16,a)
  
- /* TODO: Change to !CONFIG_IS_ENABLED(DM_PMIC) when SPL_DM_PMIC exists */
- #if CONFIG_IS_ENABLED(POWER_LEGACY)
--enum { I2C_PMIC, I2C_NUM, };
--enum { PMIC_READ, PMIC_WRITE, };
--enum { PMIC_SENSOR_BYTE_ORDER_LITTLE, PMIC_SENSOR_BYTE_ORDER_BIG, };
--
--enum {
--	PMIC_CHARGER_DISABLE,
--	PMIC_CHARGER_ENABLE,
--};
--
--struct p_i2c {
--	unsigned char addr;
--	unsigned char *buf;
--	unsigned char tx_num;
--};
--
--struct p_spi {
--	unsigned int cs;
--	unsigned int mode;
--	unsigned int bitlen;
--	unsigned int clk;
--	unsigned int flags;
--	u32 (*prepare_tx)(u32 reg, u32 *val, u32 write);
--};
--
--struct pmic;
--struct power_fg {
--	int (*fg_battery_check) (struct pmic *p, struct pmic *bat);
--	int (*fg_battery_update) (struct pmic *p, struct pmic *bat);
--};
--
--struct power_chrg {
--	int (*chrg_type) (struct pmic *p);
--	int (*chrg_bat_present) (struct pmic *p);
--	int (*chrg_state) (struct pmic *p, int state, int current);
--};
--
--struct power_battery {
--	struct battery *bat;
--	int (*battery_init) (struct pmic *bat, struct pmic *p1,
--			     struct pmic *p2, struct pmic *p3);
--	int (*battery_charge) (struct pmic *bat);
--	/* Keep info about power devices involved with battery operation */
--	struct pmic *chrg, *fg, *muic;
--};
--
--struct pmic {
--	const char *name;
--	unsigned char bus;
--	unsigned char interface;
--	unsigned char sensor_byte_order;
--	unsigned int number_of_regs;
--	union hw {
--		struct p_i2c i2c;
--		struct p_spi spi;
--	} hw;
--
--	void (*low_power_mode) (void);
--	struct power_battery *pbat;
--	struct power_chrg *chrg;
--	struct power_fg *fg;
--
--	struct pmic *parent;
--	struct list_head list;
--};
--#endif /* CONFIG_IS_ENABLED(POWER_LEGACY) */
--
--/* TODO: Change to CONFIG_IS_ENABLED(DM_PMIC) when SPL_DM_PMIC exists */
--#if defined(CONFIG_DM_PMIC) || !CONFIG_IS_ENABLED(POWER_LEGACY)
-+#include <power/pmic_legacy.h>
-+#else
- /**
-  * U-Boot PMIC Framework
-  * =====================
-@@ -308,23 +242,7 @@ struct uc_pmic_priv {
- 	uint trans_len;
- };
++#define out_64(a,v)	writeq(v,a)
++#define out_32(a,v)	writel(v,a)
++#define out_16(a,v)	writew(v,a)
+ #define out_8(a,v)	writeb(v,a)
++
++#define in_64(a)	readq(a)
++#define in_32(a)	readl(a)
++#define in_16(a)	readw(a)
+ #define in_8(a)		readb(a)
  
--#endif /* DM_PMIC */
--
--/* TODO: Change to CONFIG_IS_ENABLED(DM_PMIC) when SPL_DM_PMIC exists */
--#if CONFIG_IS_ENABLED(POWER_LEGACY)
--
--/* Legacy API, do not use */
--int pmic_init(unsigned char bus);
--int power_init_board(void);
--int pmic_dialog_init(unsigned char bus);
--int check_reg(struct pmic *p, u32 reg);
--struct pmic *pmic_alloc(void);
--struct pmic *pmic_get(const char *s);
--int pmic_probe(struct pmic *p);
--int pmic_reg_read(struct pmic *p, u32 reg, u32 *val);
--int pmic_reg_write(struct pmic *p, u32 reg, u32 val);
--int pmic_set_output(struct pmic *p, u32 reg, int ldo, int on);
--#endif /* CONFIG_IS_ENABLED(POWER_LEGACY) */
-+#endif
+ #define clrbits(type, addr, clear) \
+@@ -106,6 +113,18 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
+ #define setbits_8(addr, set) setbits(8, addr, set)
+ #define clrsetbits_8(addr, clear, set) clrsetbits(8, addr, clear, set)
  
- #define pmic_i2c_addr (p->hw.i2c.addr)
- #define pmic_i2c_tx_num (p->hw.i2c.tx_num)
-diff --git a/include/power/pmic_legacy.h b/include/power/pmic_legacy.h
-new file mode 100644
-index 000000000000..7c244060b4ab
---- /dev/null
-+++ b/include/power/pmic_legacy.h
-@@ -0,0 +1,94 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ *  Copyright (C) 2014-2015 Samsung Electronics
-+ *  Przemyslaw Marczak <p.marczak@samsung.com>
-+ *
-+ *  Copyright (C) 2011-2012 Samsung Electronics
-+ *  Lukasz Majewski <l.majewski@samsung.com>
-+ */
++#define clrbits_16(addr, clear) clrbits(16, addr, clear)
++#define setbits_16(addr, set) setbits(16, addr, set)
++#define clrsetbits_16(addr, clear, set) clrsetbits(16, addr, clear, set)
 +
-+#ifndef __POWER_PMIC_LEGACY_H__
-+#define __POWER_PMIC_LEGACY_H__
++#define clrbits_32(addr, clear) clrbits(32, addr, clear)
++#define setbits_32(addr, set) setbits(32, addr, set)
++#define clrsetbits_32(addr, clear, set) clrsetbits(32, addr, clear, set)
 +
-+#ifndef __CORE_PMIC_H_
-+#error "Do not include <power/pmic_legacy.h> directly"
-+#endif
++#define clrbits_64(addr, clear) clrbits(64, addr, clear)
++#define setbits_64(addr, set) setbits(64, addr, set)
++#define clrsetbits_64(addr, clear, set) clrsetbits(64, addr, clear, set)
 +
-+enum { I2C_PMIC, I2C_NUM, };
-+enum { PMIC_READ, PMIC_WRITE, };
-+enum { PMIC_SENSOR_BYTE_ORDER_LITTLE, PMIC_SENSOR_BYTE_ORDER_BIG, };
-+
-+enum {
-+	PMIC_CHARGER_DISABLE,
-+	PMIC_CHARGER_ENABLE,
-+};
-+
-+struct p_i2c {
-+	unsigned char addr;
-+	unsigned char *buf;
-+	unsigned char tx_num;
-+};
-+
-+struct p_spi {
-+	unsigned int cs;
-+	unsigned int mode;
-+	unsigned int bitlen;
-+	unsigned int clk;
-+	unsigned int flags;
-+	u32 (*prepare_tx)(u32 reg, u32 *val, u32 write);
-+};
-+
-+struct pmic;
-+struct power_fg {
-+	int (*fg_battery_check) (struct pmic *p, struct pmic *bat);
-+	int (*fg_battery_update) (struct pmic *p, struct pmic *bat);
-+};
-+
-+struct power_chrg {
-+	int (*chrg_type) (struct pmic *p);
-+	int (*chrg_bat_present) (struct pmic *p);
-+	int (*chrg_state) (struct pmic *p, int state, int current);
-+};
-+
-+struct power_battery {
-+	struct battery *bat;
-+	int (*battery_init) (struct pmic *bat, struct pmic *p1,
-+			     struct pmic *p2, struct pmic *p3);
-+	int (*battery_charge) (struct pmic *bat);
-+	/* Keep info about power devices involved with battery operation */
-+	struct pmic *chrg, *fg, *muic;
-+};
-+
-+struct pmic {
-+	const char *name;
-+	unsigned char bus;
-+	unsigned char interface;
-+	unsigned char sensor_byte_order;
-+	unsigned int number_of_regs;
-+	union hw {
-+		struct p_i2c i2c;
-+		struct p_spi spi;
-+	} hw;
-+
-+	void (*low_power_mode) (void);
-+	struct power_battery *pbat;
-+	struct power_chrg *chrg;
-+	struct power_fg *fg;
-+
-+	struct pmic *parent;
-+	struct list_head list;
-+};
-+
-+/* Legacy API, do not use */
-+int pmic_init(unsigned char bus);
-+int power_init_board(void);
-+int pmic_dialog_init(unsigned char bus);
-+int check_reg(struct pmic *p, u32 reg);
-+struct pmic *pmic_alloc(void);
-+struct pmic *pmic_get(const char *s);
-+int pmic_probe(struct pmic *p);
-+int pmic_reg_read(struct pmic *p, u32 reg, u32 *val);
-+int pmic_reg_write(struct pmic *p, u32 reg, u32 val);
-+int pmic_set_output(struct pmic *p, u32 reg, int ldo, int on);
-+
-+#endif
+ /* I/O access functions */
+ int _inl(unsigned int addr);
+ int _inw(unsigned int addr);
 -- 
 2.43.0
 
