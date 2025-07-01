@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC09C83030
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 01:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A54C83033
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 01:44:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E230C81FEE;
-	Tue,  1 Jul 2025 03:43:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41E3D81FEE;
+	Tue,  1 Jul 2025 03:44:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KH3HxxQl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ezN/DVcq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A8FF81FFC; Tue,  1 Jul 2025 03:43:49 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 4A0A681FFC; Tue,  1 Jul 2025 03:44:25 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46EC98006D
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 03:43:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FC748006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 03:44:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-553b6a349ccso3070971e87.0
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:43:45 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-553bcba4ff8so3002952e87.2
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:44:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751334224; x=1751939024; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751334259; x=1751939059; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jlzB1hkvTVLfhAaBlvGgcf1G0qNPcqu9TmKAmWAJtMY=;
- b=KH3HxxQl8JLQ6IerSglyguqCjQgumHMAEt43DVS37sO7AHLdu1BmL3jSGFC6b3CgqD
- PZWMDBKXhP8h9HZ7eBM+zFOJO02xDhc3UfCsoLY5ihXOQvYp2RfXa847gpe1KXxQvwWZ
- ykptngF10alg4WuL6uBtU5J7Wl6OTGw197uQUt/rVXxCAeEaeAVJr8C7EUZwyGV1IxIQ
- 8Gg5B1hJdjnsxbOdTmuQaHuh28zLdB6LkLJYh4F+jC1X0PeJTlfJ8RMgvfonBp33T82H
- LFnYOLabo4U8IMMnW2EKuTl+aNSR36tSgNioJkLrk+IqJ08LP0SHHooBePWUM2veae2F
- UIIQ==
+ bh=ZEXzP+Em6voarnn7d5cgtoyNndZjzz2P/saXzMBqj1U=;
+ b=ezN/DVcqePtkkcdeumRp5XiFv17cB6sb2W7q3Qjqn4b9VUiRdhuYO1p3ZuFYmUaOvP
+ 8I+GVSmPvsHk72R/J2c8hdpaQatyCl//v0qtZrbJq/0NlBSxFdK+wr4liL233W01SilJ
+ CJSbXLAJQd2jHnOqeC4niiO6213+kpBalwPrFyTQFIz73r1t6WhKWrckcSdzBUYsdqI5
+ 0exxnD261DjsGH/StIbnSeVhHqwbMyXX8j5hBbmv2X2B9cN9MQmW2iyl8LJ/+gTL6a5E
+ 7s5g63Cvss3GajfwJo3ilGhjVuuDDPE5sVBHLdhyIgoJp6ox49+fCvwXoU9n6y1Bfzey
+ OUyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751334224; x=1751939024;
+ d=1e100.net; s=20230601; t=1751334259; x=1751939059;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jlzB1hkvTVLfhAaBlvGgcf1G0qNPcqu9TmKAmWAJtMY=;
- b=e9GcUn0kGHX3zMrApf1wyzXPXkEP6Qg0+pzoe4fg09cTem0P7cHv+ypYKMgQzaejcQ
- 4KzJQPc2J19yUF9XuDY8PNSVZ9V+uYy5+pi6fbGC4B65fCz+CxqbSSSznzUCIPmchLyi
- gQ/Wi+/DSbrXJvRNRGT8h23urslf+KGrIUZ+lHd9SqGz/dB6L5gGTcijegfpQpaOgWTs
- 3hRiWd77nXYHpZ1GiDf1w74FtN7KX2hTUwFwk3j9Wc5GNto+wBVxoJ8pF+VJNGzrgk6/
- Py3Ci49h9hLc4JYONMcftL38uGLUhd6qCkE/6muqSlHLKSm3G4wk8GzRqsUQPGWacN9H
- h6dQ==
+ bh=ZEXzP+Em6voarnn7d5cgtoyNndZjzz2P/saXzMBqj1U=;
+ b=sR4LFP6NrcUFLVml+wuLoR4XBjBjD6th/j0mAV9YWpqYxx7a3S6Zc8WBnKS6kdF0tO
+ BG1Pro8yBcPNFXb1ORd6oiaeLwYv6MEfDG7PpUvSGP4I5btlRharR2lxGzAsF2EuIJhe
+ 1VmIWjupYEvCOBbXja1dRd4aVEVz9Mjk4d/mjPkIcaABHVlczHt8ckLnea2EhH/u8YTU
+ W/DPTvbP+dgfxXPJuOCTBMPt8BRH0GMrS2ZffpDcAfTlv3e3RHDqY81NgvY3O04Bn/+z
+ LznkIfqGpCWdVwTHwJoZmAI/3NO6yR1t5sKGL2DoGYaOaRD6cqGhnNQWaKILr6Cpr78a
+ 3Iyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVuoZyAIiuvaCkE3z+T0hIbtXVhvLHT4vQMJgc265S4YXZpT+EwnZ0GAocSPVz635UuAL17FvA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxugx+Un66AhwDI47nzB27mA/2eO92zZxtK+8O52+783wG6V/9A
- oBa8qp+bf5n9r2AiTyx+SV+oKSagsrLFB1YXdZau7da6rUV8/llWDRvOkcZZltETnJ+7EHHlhKW
- AVa5HbeRv8sHkd4SEHpwXXYNnHyphLSsYew==
-X-Gm-Gg: ASbGnctVNJ4MBZZMKeGDrGnHa4R7TqijnXnVrtzI/mxsvBQ40MAtCovGe50qA73cCrc
- oT3pCVDg91c6qg/iHqdRdE+mzKRfvYWKgm5c5OFvLRAc8JJS6/HP/yDSL3CURmnmNc1tfBRPe57
- 6E5hzEm+MXR4p7GvLClLHSw96LoJkrztCVudAvNF1Tf/7kcYelJeWunCdTPRlHxsAdQTcLMEq3u
- dM=
-X-Google-Smtp-Source: AGHT+IHjL1JgOADad5r9XdhPHNAnfAmKCZr8zaprymMrs9OMTMXhZC7MAdSG77NFkH2NnNDgD2W3S7Hu51PkhDamd+U=
-X-Received: by 2002:a05:6512:2388:b0:553:3383:6766 with SMTP id
- 2adb3069b0e04-5550b829399mr4416267e87.19.1751334224236; Mon, 30 Jun 2025
- 18:43:44 -0700 (PDT)
+ AJvYcCVGCYWaX/5j4hspUr8bIWwXfkRTs9qZKaZ3yMO+mcz5KBPUz0AbTnoQDcGqLHCmJK+H8vzSVEI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFgC8SIgz51YfNRsWyIScovY++xBHLvWLJOJnjOYtrMcL0QB8q
+ LDrtE50cJ+u6gyBlXYGWeaAkX4YThOPZqY9bPXeqGPoqeT2wmo1j0U4PiuKNUFzobwKcnf+Ossd
+ muzI/+vC+sPGzke8aoM1h4hi+4S6h8Vo=
+X-Gm-Gg: ASbGncsiDuaF0cuPUGvSkcCDYLre1CRSOA21xHpzgoheRNXotJKi93JV7sNOribPyFK
+ sgiU4FCx9HsqF2CLGfufxQcuhrPVYMxkA5TWmKoNLLgFuQQhE87BDqv6tKIap2mWdWM+rY6tmCS
+ QNIxfgyrVxQ2KLwCmBANF7kBHshZwFVmmrFvAiyrT8rf1HJ46p3ce2AaV1BtPvPL7bQAz3UAJyD
+ vQ=
+X-Google-Smtp-Source: AGHT+IGJytgZyVi/p0AScVEFgo5gHHX9oO1bKPmvyTb57FKUxXQI9bSl9xRx1P3xohJ/MPNT/sfQ6XLE1xGVlDW4roI=
+X-Received: by 2002:a05:6512:12d1:b0:553:2e27:6769 with SMTP id
+ 2adb3069b0e04-5550b82a76cmr4050213e87.7.1751334259448; Mon, 30 Jun 2025
+ 18:44:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250623-sr-v2-0-e97fc53f0f8d@nxp.com>
-In-Reply-To: <20250623-sr-v2-0-e97fc53f0f8d@nxp.com>
+References: <20250625144130.1704509-1-lukma@denx.de>
+In-Reply-To: <20250625144130.1704509-1-lukma@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 30 Jun 2025 22:43:32 -0300
-X-Gm-Features: Ac12FXzTpYX2a6PfNwf6NEiVIp6Pdj14cYAialvwM2-6kE8TrkF4ptephRklCnY
-Message-ID: <CAOMZO5Brthfbh8M3iYPSXteTxT-tZ5Mvk-w8i3qHoxUKv=LpVg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] imx: Support capsule update
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Peng Fan <peng.fan@nxp.com>
+Date: Mon, 30 Jun 2025 22:44:08 -0300
+X-Gm-Features: Ac12FXx1DESPnP_3dPKGeTzPnVwgQLldUKBl1uaBt-95p4oBwI2dHS1nGbJ3SI4
+Message-ID: <CAOMZO5B_L=CwP=YL6feXtyYsRDci1MXaCJWgkczS2vKk4FF=Yg@mail.gmail.com>
+Subject: Re: [PATCH] dts: pcm052: bk4: Use proper compatible for QSPI SPI-NOR
+ memory
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, 
+ albert.aribaud@3adev.fr, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,13 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jun 23, 2025 at 2:52=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
-m> wrote:
+On Wed, Jun 25, 2025 at 11:42=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
 >
-> Support capsule update for i.MX8M-EVK and i.MX93-11x11-EVK.
-> Currently tested on i.MX8MM/N/P-EVK and i.MX93-11x11-EVK.
-> Capsule authentication not enabled as of now, this is on TODO list.
+> In the contemporary U-Boot the "spi-flash" compatible is used only when
+> CONFIG_$(PHASE_)SPI_FLASH_TINY is defined so spi-nor-tiny.c is compiled.
 >
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> As vf610 devices are not using SPL at all, the SPI_FLASH_TINY is not
+> defined and no QSPI flash child nodes are considered as valid ones.
+>
+> The result is that the 'sf probe' command fails and SPI NOR memory is not
+> accessible on e.g. BK4 device.
+>
+> The fix is to use proper compatible - in this case "jedec,spi-nor".
+>
+> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+> ---
 
-Applied the series to u-boot-imx/next, thanks.
+Applied to u-boot-imx/next, thanks.
