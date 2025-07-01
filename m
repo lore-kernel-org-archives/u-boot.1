@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61716C83038
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 15:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97572C83038
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 15:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9AEA82FAB;
-	Tue,  1 Jul 2025 17:27:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E02D882F83;
+	Tue,  1 Jul 2025 17:38:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bI7f2rxN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QoGSwkZ8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E0A882FC7; Tue,  1 Jul 2025 17:27:04 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id BDB6782FAB; Tue,  1 Jul 2025 17:38:19 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FF1082F71
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 17:27:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A095682F71
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 17:38:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-736f9e352cbso1894190a34.2
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 08:27:02 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-73a8d0e3822so2977951a34.2
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 08:38:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751383621; x=1751988421; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Wq4wm7XGDfMGnh40ZapDTihvZiWgfR0fMRv0wWtoEMs=;
- b=bI7f2rxNTVz4bzzjGh4uy+gpHhp2fMAu4OkNe9uifOW3+2GYwtesmIqf5hqw5GDnig
- oOHYql2q244IqJEvfLzO/laF1RWVwXwcYKlHgEpesIf0jFEtIQrBb9cB9gRJwSvR8j2n
- qXbkNbb7EuteL5vrwTWU6ugq1bhgieLK/u5Mo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751383621; x=1751988421;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1751384296; x=1751989096; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wq4wm7XGDfMGnh40ZapDTihvZiWgfR0fMRv0wWtoEMs=;
- b=PFR2H2p1+V9LJg14swxz5om4VVwXPMq2TevRD7gp3P1Kn5MoX8OZVsckMidXCjlsDl
- 9bick6k3Swvdurx2xu4cpN1tG0XL+7/lWSQXYfgZF1+jQGluyYR45zVjx6SxIn+ez9z/
- GBdCw2VPvB64FskH3FG8y7dQqF6b7BsPMglRQUQQ8buSwTdkznfUIyX5/qdl+GlqXWvA
- 8PMuS2Mimw1qhNzc6sdskuuwJYKqcPpCnMtrZoEZXeXt3TCsjlamY7XrZou04lGmOCVz
- EzJOW8YokxeHOZUur1jDyUCfhH8A4GzMejChTE9gaUcefP2mDzyFbbUJGaQSeumwLRwL
- HJFw==
-X-Gm-Message-State: AOJu0YwUMnPAsmddQYXRoDgIS8Lv6YsWsD01NKVPXqcuaMO67eDY4A13
- bMlhm6LyW7I5wrsKzSXmHKejzeqPqnDT23T7uCWUaRZTC2fDYLAZ0fiX3AGs7liDT04IAlUrdXZ
- ftV11xEc=
-X-Gm-Gg: ASbGncsicnUAHYTX6qQrKnlJykBIME1rkE+PdLp8acopH/93Cx7UU0VodaubZBnfzBp
- zz2lQFr/vDmoNMcQcK5HVfJlAeMsF97FlRmyfbQIOppDDQ8RxRHQSTcyLqoZQp0I8hUKsiC3IAi
- +UUu/lyzavrCeRdAQCbkHf++2A3+KgQ/Oo+7RzWOzQwm3IlPeNHkQVfjst5WBCMGJJ+vqXKlI0K
- GwIl1xWmzKEzC3Ybx5tWUOQG5O8GEfv6lw80glyJCz3vsdxgI6RWzR5MElENGRmIFEym4SHFEO3
- JZ8ccIf6kJ7sBWdgwHp6O1YG9FXN50I07SF4C+4U247pG8skpIi+192Sb2N0adCejXfz6pLTC0O
- TtriCIX66P5mBch2l2VkwFE8=
-X-Google-Smtp-Source: AGHT+IHSq2yb4oC8vHIweL3u/ZFugBeKVH1omxkp0zsOIWvXBjn4OW4/zBj08C92M8k3uJMOWBzIBQ==
-X-Received: by 2002:a05:6870:f61c:b0:2d5:4f4:e24d with SMTP id
- 586e51a60fabf-2efed426df6mr12448288fac.6.1751383621148; 
- Tue, 01 Jul 2025 08:27:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ bh=ZfX7Toui3mQRvQ6JzOCcO9pTTHLtd9rbGM+r2ZjGagc=;
+ b=QoGSwkZ8SOh8nrMPSpmRXoq+uXN/bbLCgczipwp/R1A4nQujbQena2TYiZWvEuPt8s
+ ojz2Jd78UPC6QxO86S/0SMBREzS7IlvkgkkDFjKVqNjk13qKGsLQsAe2UmpA/vEGQOHI
+ oSiO2fka30K5nay2L57j01qQ4/u8owi0yB/wc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751384296; x=1751989096;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZfX7Toui3mQRvQ6JzOCcO9pTTHLtd9rbGM+r2ZjGagc=;
+ b=ZNKBL2rxL4lRNJgShg22moxtKOv7f/HGg1Qfd5t9S8a7ayNl83XoB22CwcfZPdyD0U
+ vettylHMfp2e8whvroNGhAunr7HW6TlpV1XJKGL7spVS/uFqP27byC+++ezvc1qGK8t7
+ 7wdqniPt68O4c3A0MVB1f9cdUCD74g0ZImTYpyxSlivKC+xnRbOIkR6AYXXNgq/8qYZP
+ 8CKaelRdBux6e4lBFQ/2I7h5w99AKj4kkI9nurEl+y5AlBvor4J31w8JdUHo86W7mvKv
+ ceFa1zYOaZNQ6A4bpI913LqnYhuPc9WcJpUbTKzeg+t1Kb0ClRx72wn9p1lBUwsYn7QL
+ /16g==
+X-Gm-Message-State: AOJu0YwUzP+aFR/G8d+LWBv9/ZYlkVSBIIIEOugYQIzs2pjnjUD/BKRZ
+ npeB9QYPo+hO2Mu/m7Hg31u/XohOyz13NZnKWM7KR9F1+tpqA9SFJYNzUmEoJf7LLbE=
+X-Gm-Gg: ASbGncvSL7TKQ7MEBXXENC8Wudq9J7Cn36xwdaCKpKh6WWIebD0ZwOn2aLLBi9HvdTF
+ IWtwR8QSYQx/HfOgCv0y+0moEZHzAdK+HXR2WEjOvlbCgy9mTs3Z9SIyYVjzPfUyORAKASO2xnE
+ YOPfLJK8nJDt49C32tdUb087Wm94PcM+rk8qwxzjSF5z5/9wasRbUzwA0sLVnW5ddKgHYM+K5wF
+ 27HB77UeZZ3O8O2QPs1Lq/tVkb70TLUGjpMvuh584tdH+3hp0ouXCBH3XJXWZaPALU/M0QoiW1f
+ T+TR4AK8Jn+0/UaobsiyQCoeRe8IA96Hsn638Rq2fk3/xM/Ds4SN17tZRNRySwHw1XCIxGC3Oay
+ 8XfqVzS10gzrgkl1nqcWGXg==
+X-Google-Smtp-Source: AGHT+IE64mKncE7dxT62RztokT4rknNMcHL+40MnTUmMhXt8hedU6cL7EjWqAL3I6Q7fYZJYonxpuA==
+X-Received: by 2002:a05:6830:490c:b0:72b:94d8:9466 with SMTP id
+ 46e09a7af769-73afc6d3c9cmr12239283a34.28.1751384296231; 
+ Tue, 01 Jul 2025 08:38:16 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-100-42.totalplay.net.
  [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2efd4c35a57sm3361774fac.0.2025.07.01.08.26.59
+ 46e09a7af769-73afb0e2f7bsm2127857a34.41.2025.07.01.08.38.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 08:27:00 -0700 (PDT)
-Date: Tue, 1 Jul 2025 09:26:58 -0600
+ Tue, 01 Jul 2025 08:38:15 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fiona Klute <fiona.klute@gmx.de>
+To: Fabio Estevam <festevam@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/3] Move PXE boot from README into online documentation
-Message-ID: <20250701152658.GB523899@bill-the-cat>
-References: <20250630105323.1346850-1-fiona.klute@gmx.de>
+In-Reply-To: <20250701014215.2011927-1-festevam@gmail.com>
+References: <20250701014215.2011927-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250630
+Message-Id: <175138429522.3146160.10038438399271456677.b4-ty@konsulko.com>
+Date: Tue, 01 Jul 2025 09:38:15 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dTVM88Srm/g+QNWU"
-Content-Disposition: inline
-In-Reply-To: <20250630105323.1346850-1-fiona.klute@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,46 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 30 Jun 2025 22:42:15 -0300, Fabio Estevam wrote:
 
---dTVM88Srm/g+QNWU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit 490ae8ceae2d5999c9de863e014e463f5c1495a6:
+> 
+>   Revert the last two mach-k3 changes (2025-06-27 13:07:43 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-On Mon, Jun 30, 2025 at 12:53:20PM +0200, Fiona Klute wrote:
+Merged into u-boot/next, thanks!
 
-> Tom asked if I could move the README into usage documentation when I
-> sent the recent patch about "append" in extlinux.conf. This is mostly
-> a reformatting to make it fit in the RST documentation, I've also
-> added the "sysboot" command which was key for me (patch 3) and grouped
-> up environment variables (patch 2).
->=20
-> There's definitely more that could be improved here (e.g. move the
-> commands to the Shell Commands section, reduce overlap with
-> doc/develop/distro.rst), but I hope this helps for now.
-
-Thanks for doing this, I'm sure Heinrich will review this when he's got
-time.
-
---=20
+-- 
 Tom
 
---dTVM88Srm/g+QNWU
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhj/j8ACgkQFHw5/5Y0
-tyyqWQv/RtYR4Ufpllq0xpXtEMTa8qLdp1JMAD2soNIewG4G7A6KWHKaDbQmJc9E
-8lEN+ufEV4RHaZUK90m/70J7LXdGX0uQVAVHuosJCLIF++I52hgw7spTEb1nvMCf
-7fuWzrlcwm1QWJriTgP7Qq7Tz82og7fqrBB4R6vY6Wm6/Nf+M1eVdRKFN1piaRYu
-Z2y4AUnXgJrT91JP9snLxeWycoaXI8h4VeKP2swvBRLIoS0os9UFWr7SRD8wDr9B
-vzsecqvmIw6Xwk3OD6+wvQMriMnWlgXncWcp16SQq7D11EM8CFfLWvXDzwF97QDU
-vBZTIucgXn4kJfI8NzG+V/hxJ3gZ/6bZ6moNyRgWTcat6f0jsRYnoOAbgwqAtctp
-n5BZZnEDMeGZU/5VdTvM4kTuAZu19uMfiBGn+eKlMuAdEOpdqmKk7G3GsJ1hxbSP
-rLCK9T7c6SzzlfHVl2bcuVpNcjt6d+RqvuaNUOTEHY00hhsa8yO9C4fIqqUcC9/w
-rUdr38Id
-=adki
------END PGP SIGNATURE-----
-
---dTVM88Srm/g+QNWU--
