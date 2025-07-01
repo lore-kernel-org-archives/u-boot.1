@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B25FAC83038
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 13:46:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FD4C7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 13:46:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F35183043;
-	Tue,  1 Jul 2025 15:45:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D863182F6A;
+	Tue,  1 Jul 2025 15:45:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KTPKTInN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IJhkbeoU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A5CF82F83; Tue,  1 Jul 2025 15:45:46 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 390A182FD6; Tue,  1 Jul 2025 15:45:51 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 614AE82F8E
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 15:45:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08DCF8301E
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 15:45:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ae36e88a5daso651598066b.1
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 06:45:41 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ae3b37207easo100570666b.2
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 06:45:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751377541; x=1751982341; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751377539; x=1751982339; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3aDj35BZf2tsDuHeAa/lT3mLUgMDOUdHFp+jaI/rKu4=;
- b=KTPKTInNGQceFv83us0WZkMMvExFpXEJ+RJZOKjVBZ065dMsNSA7j/Mu5xGfjUmcU6
- jefqeHcGCB7kCDfXeaWZOUykq19WMery573TZCZ7GsGLpLNE+MZnqDQ+zcxdTFOu/4iq
- GAPxiTQn3noMlyVAu6Emgi54YqjV7tfMQm9VN0OvXHRutG/t28KzuSV2NcYbRrWvu18E
- s+vmq+rM/dmtluD4q4dAmntiDRvo1LILao3RViDunnFurtcBJE2U+kwvE98r561vi11S
- r9LZcbpgjH5mLWP81QRLwuWJI4g4X3B0YGPpsDfsqa46XrNdzMfzKIyOt4LBOiPxffO9
- n/Lw==
+ bh=nqpq5llxMKs8fmDm7eSOIp99fXNqTU8zXMZlCmB1ClI=;
+ b=IJhkbeoUJwO99A+7UMwTOnstk6mDzT9DSgFPHvlYXfiUf9Yx5ysE4OKHn2zgN2K/oz
+ lhsYWgS8nTt7auW390xajyBDU/3afg8lzAOYJBqdEgQkTvtO318Xyu8IUxpBk8tVeUfR
+ JjG6hzUyf2Jc1ajKf/74gDtJfD+XoEHzrl0dx++3XY28L9ccnX7M+EGnhQjk5IlbTLUK
+ Fgwb6DEGZFsIymyvQ0dQ7CQYLIWcWzBuAtXI+QjQSqOMzIaW3rDUL61upKYqB1DdPdw+
+ dFZyAl35LT80s9OVaYoSSkt1UIdVeNqTSmifGD7MGLOlLnvMIVdACndYu8b81sYT45pR
+ ZX5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751377541; x=1751982341;
+ d=1e100.net; s=20230601; t=1751377539; x=1751982339;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3aDj35BZf2tsDuHeAa/lT3mLUgMDOUdHFp+jaI/rKu4=;
- b=u6Zpk7IM5e6WtedVm+wAokSPzYDO8bOCwUAQdEDiiBm8X6YMFIq6fOgyoFSE9O0e5V
- of8II5XRPHYsck3CBStdBzJzybi91o02A0TbF4p5b5hrvgtmIWSUqXFGpzYz4FVyynXi
- FYwIkwI0WsSr9iKFWVzPPeKm/EgJ3nVSULSKgKQk2oytUUCokVq9KONgeHrifTeQo6Mg
- kLnLoOjMo5nt5Uf6VfVfa2UjQ67+5GETC8SNVnRlkdOwx/fxg2wSw/wolDBnnJEg7QGL
- ihl+4BVzdJwFz4w2diPtH0n00J753mxoIJxlIbCloOR1EjNOpNmyn6eajK/Oof9nP14B
- 45yw==
+ bh=nqpq5llxMKs8fmDm7eSOIp99fXNqTU8zXMZlCmB1ClI=;
+ b=SftjpVbC9b4vgv0UGX7LntRTKuP16uQV6nBw7hrKua7VskXDAbpij8KCKpsscFaNoV
+ kr49MmkbKpzqvHmlkvUP7ot3Z3wuk81zvxolfjmMP5qoyHScmb0wazzUDynVivFfwRSn
+ yG1QBGNskHYyocx9mY6LtceNVejlj0pDHe+XVWuApDIr6brxZF+MgD4egd1w3C9ciFy1
+ o5eV3DRm+3PB1NKYUByGLvkR0A622BfIgNTa8X40Uc5WARZ/H5JTmbjv52dae8C8kw7R
+ Yg8heqyiqcFGvaZayoffvngTutyI60nhDj4BcSyUVMyAgxJUAj5XTyLMY6npKzS0H7K1
+ h4kA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCMMdAymhHs6HSh3Ri4tHKCVdtY5rSp47FUYr/B1sw5qr7IWkoxkcupVQ0a4hAs1ygBBXDKTk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7dcRmJLeT1VxDx3AOtkmEvs4Kyth2seS8Sjj9BEY5FEqlsC1+
- SaQvZDLwF7z8/SS/Xa7OPr6R7AK2cZO7WzafyQevW5X+Odn2FMip1mQRN3zVoA==
-X-Gm-Gg: ASbGncuh0rtDVfZ6pZr+mvyh66Tek61SvpU8MkJmjmFxJl+eFDMnnJszKswIgiC8FRK
- kE883oxhGaHB/iuSAcOJuuod17dv8m+OHSwavP50l4EH56NhlB9VjGIvuyBwAsSW8guxQVFk8Sn
- y1oGvkzdU4k42vL49jMWG/RunDc9WchPV64zDNfFcvsfRCo5KDeKg9PjRF+c5WsVpZDGGC0F9Vo
- f+dA10claMjnNctpeBjQw68HWRBt/y0JuDErXmfguaHZGkC22yAjbHzBvZyxEHkyUTvEIlbFisp
- zuVhsWkXm9k/a6hzC87cL655+5Im+0NIL80aG+orDqnLaikgdXVSviNTzzvupIs/BPxMyyI1d7F
- O+p4Y8QmFfhCTELw3
-X-Google-Smtp-Source: AGHT+IE27HdSf7HYvfFXhtXQXR3PV6fwc1TTNby5+ofeMY9VLM/bzJ5xTnCFzhZQpK82qVV9sN07Kw==
-X-Received: by 2002:a17:907:1c9c:b0:ae3:a799:8e81 with SMTP id
- a640c23a62f3a-ae3a79997ddmr413339966b.39.1751377540480; 
- Tue, 01 Jul 2025 06:45:40 -0700 (PDT)
+ AJvYcCXMRzL/0qNIE3aCMs/syQt/Kvkn0ytmeZ6yQ5CE7bVZ1N1LvWNjXZgliXMbfRL5Yz8W2dN+VeY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwyJWgA8MEtpVQl2m34eLxbNgULfaSHMxJZuhwi82oPg0JzW8a4
+ 0W4j0beaR/trVVe97VPqguKPPayWm8zkKFSWRsLbheZojBn6kzBNB+Qw92y94Q==
+X-Gm-Gg: ASbGnctVIVrF9d00fTn1YVEXTpM6UMiZlF9y4Om55xNv+g8WIEoVeSsfKXXhy5mwiTq
+ 5uZS4h8L/xQN4QRJs3jRrsQnmXGnMY6pdH6qdcXmSRaYLxdXOQ9wswaa0al+CCvzmFPrsN+BZdJ
+ voFGKAKkpArhxkQA87TuqvtK3gh4pReDJP56zlI9d7SQwj0s8UHZlAQPOYO2A1OufPoUhImgu4t
+ KvhFoeTyFN6qP8G1WJztZ5lRc/ufceGzh7gKyrzM9WU88Kwt61jfGRRoMhv7lFlolUjHQqmEsfd
+ pG8jc5JL2Q0ZohcAorpOMOKrBZt+T35CihZi6DZ7kMw/YXnX60zH3/ISYs1hxMmhKQ3G3083/mH
+ rN+gkZ4GtFlP/5GcL
+X-Google-Smtp-Source: AGHT+IFHtG4d2CkafxViRiCgi33OQ2QcdUMP7u+AwO98AXqwdCoacUHQH9RCMq8LlUldYkdrLrEMJQ==
+X-Received: by 2002:a17:907:9802:b0:ae0:e065:ddfb with SMTP id
+ a640c23a62f3a-ae34fd8932cmr1523242466b.18.1751377539184; 
+ Tue, 01 Jul 2025 06:45:39 -0700 (PDT)
 Received: from emanuele-nb.int.toradex.com
  ([2001:b07:aac:705d:6d3f:7f26:74f6:c076])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae39ec1146csm288232366b.185.2025.07.01.06.45.39
+ a640c23a62f3a-ae39ec1146csm288232366b.185.2025.07.01.06.45.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 06:45:40 -0700 (PDT)
+ Tue, 01 Jul 2025 06:45:38 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1 3/5] configs: toradex-smarc-imx8mp: enable RNG support for
- KASLR
-Date: Tue,  1 Jul 2025 15:44:58 +0200
-Message-ID: <20250701134504.1076115-4-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 1/5] configs: verdin-imx8mm: enable RNG support for KASLR
+Date: Tue,  1 Jul 2025 15:44:56 +0200
+Message-ID: <20250701134504.1076115-2-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250701134504.1076115-1-ghidoliemanuele@gmail.com>
 References: <20250701134504.1076115-1-ghidoliemanuele@gmail.com>
@@ -105,25 +104,56 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Enable DM_RNG in U-Boot to automatically populate /chosen/kaslr-seed.
+Enable DM_RNG in U-Boot to automatically populate /chosen/kaslr-seed
+and enable CAAM to provide entropy.
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- configs/toradex-smarc-imx8mp_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/verdin-imx8mm_defconfig | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
-index 3e7e4264b128..0489f4441152 100644
---- a/configs/toradex-smarc-imx8mp_defconfig
-+++ b/configs/toradex-smarc-imx8mp_defconfig
-@@ -154,6 +154,7 @@ CONFIG_DM_REGULATOR_PCA9450=y
- CONFIG_SPL_DM_REGULATOR_PCA9450=y
+diff --git a/configs/verdin-imx8mm_defconfig b/configs/verdin-imx8mm_defconfig
+index 7db6e81ee6d1..ea085acd28f7 100644
+--- a/configs/verdin-imx8mm_defconfig
++++ b/configs/verdin-imx8mm_defconfig
+@@ -76,6 +76,7 @@ CONFIG_CMD_TIME=y
+ CONFIG_CMD_UUID=y
+ CONFIG_CMD_PMIC=y
+ CONFIG_CMD_REGULATOR=y
++# CONFIG_CMD_HASH is not set
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_ISO_PARTITION is not set
+ # CONFIG_SPL_EFI_PARTITION is not set
+@@ -99,6 +100,7 @@ CONFIG_SPL_CLK_COMPOSITE_CCF=y
+ CONFIG_CLK_COMPOSITE_CCF=y
+ CONFIG_SPL_CLK_IMX8MM=y
+ CONFIG_CLK_IMX8MM=y
++CONFIG_FSL_CAAM=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x44200000
+ CONFIG_FASTBOOT_FLASH=y
+@@ -108,7 +110,6 @@ CONFIG_GPIO_HOG=y
+ CONFIG_SPL_GPIO_HOG=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_I2C=y
+-CONFIG_MISC=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_MMC_IO_VOLTAGE=y
+@@ -139,6 +140,7 @@ CONFIG_SPL_DM_PMIC_PCA9450=y
+ CONFIG_DM_REGULATOR=y
  CONFIG_DM_REGULATOR_FIXED=y
  CONFIG_DM_REGULATOR_GPIO=y
 +CONFIG_DM_RNG=y
  CONFIG_DM_SERIAL=y
  CONFIG_MXC_UART=y
  CONFIG_SYSRESET=y
+@@ -161,4 +163,5 @@ CONFIG_CI_UDC=y
+ CONFIG_SDP_LOADADDR=0x40400000
+ CONFIG_SPL_USB_SDP_SUPPORT=y
+ CONFIG_IMX_WATCHDOG=y
++# CONFIG_SPL_SHA_HW_ACCEL is not set
+ CONFIG_HEXDUMP=y
 -- 
 2.43.0
 
