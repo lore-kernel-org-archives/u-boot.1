@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAE8C8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 01:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A623BC7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 03:49:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C57EB81FEE;
-	Tue,  1 Jul 2025 03:46:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C590A82E27;
+	Tue,  1 Jul 2025 05:49:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="je/TLRPm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="leTylbDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C23FA81FFC; Tue,  1 Jul 2025 03:46:47 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id CAF7382E27; Tue,  1 Jul 2025 05:49:38 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC5A78006D
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 03:46:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD1AB8006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 05:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5551a770828so1938869e87.1
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:46:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=grandpaul@gmail.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3a50fc819f2so3732801f8f.2
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:49:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751334403; x=1751939203; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pc7xZjuE/YaJp1tFjaaf17H74tW/qkC1mfL4LqsZ06A=;
- b=je/TLRPmMaAlIOYwhXJ3x7alpmcwkppRBFkSo9m++BFdyZAR0YmLis0iK1QDM4ia/G
- l6P6LZQppOznj5xTY5ewPPNWVh9T98KtqPKuH8I8SfCfEHsuweVER+9L5ExgWDJJ43Nb
- /I64GEdoWA/s9grolYzWcrKuDmdFRz24EmZDEE9zYsiLpVHXJ9XQzzRone1hcfiP7ccD
- F50LNRURN+wJRgKPDWHg7fKFTSkRdbsjCAbIJJutCgOQksVF1ljY8nvTzwMoaaVnczeC
- K4QLuKeepAiSEjetgTvWnxxh66M7wK4uwjpBKMXH6YSZ9HnV8o5FOdDQWjixnw/xuQrz
- N/Dg==
+ d=gmail.com; s=20230601; t=1751341773; x=1751946573; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=nzYtu7qTYgjXDk9/TQlc3S3ju1i44cODTOohjui3c90=;
+ b=leTylbDSDJLJ0a+rzvPsz1dPaR9nb28LymqiwRhatC9CdCW74NdHM6Ag8lsK7c3uNR
+ g+nBoVSoisckGY+HlgqQvJpQRImz765ZrcE9d1F0xUnM+LKWahfjhvyVL07rVCMbjMUL
+ qaiZz5G3d/7djrOqQCiseYVrraAq7EwkdsE2boesPQO/xVJuGStYM53ZPy475DEyu3EU
+ 341b8nxm2nbGJnTm+9zClByswF3QTHNr5CvbZfzIFj3BbtvCWdqguKArAhUEuyi6QaOu
+ fOsLHCPKfesjslV01e8/gWygewKPzIBAutctWZAXAcS/3u5S7p4tDtPsyChXcOFQBBHX
+ VFJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751334403; x=1751939203;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pc7xZjuE/YaJp1tFjaaf17H74tW/qkC1mfL4LqsZ06A=;
- b=wIou/QzJ6dxx46FQEFYDKcraiYBY/3GZu8YWtM1KFY1fCYKusLpv48ornA+VJqY1A2
- SCHebzuaUSqZz0KnZ+pVB0O4ntANjgOakv9WPGAGlnZhbMyklPdNrwDdd9b2hhjDsJHM
- 6ljE3OOWWB3IVND7ZlEAY7A/dzx4BYFtlfLpCIxrRZHm6LKNqEKn+8X3CZNwWoOI1+ei
- ZDpdb6WcrHHB2oiE1ZytxXt8Nlj4YTQ3PMlXvBg6FwQCjxXql0VGdurN3cNdrdSOx37i
- M6Wp+Iea704f+ZI83epu+PM+Ath92vA6BldixqzfImpt50M5XolmDgTMcmBjdWtD9bZy
- uiqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVo4nTTwnWMRnwpTCVeOmxwlcadOJ3v3KY24F15OK4O+voD0+SLbDxgKsZzJTxS0Saz309zhsc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCoac9x1mMvd86TCx2z3EVVilXe+pfzenslGFM7luF6FxRa8CQ
- WPlRF6W2q0jrlm4iik9U1gtBKTTG7eqXDi6fznhw+BOGA4T67s4eRSxJuwge/UaKkjgWPYdzZbg
- jrD2Tfi9i180ipw4zyEl6qgT11yEBMPI=
-X-Gm-Gg: ASbGnctolqwq2ARb2blMnNHWsA0/QAMbiO88VTG9Z1MpuKe2O3lDXwM8doIPk6GZdJ2
- jvfctwf+4VRZDwt6tECgFP/M7CaPlF06fFetZ6MXOpFevxgN5KJiPPr4yfJKqf1WbB/g7RbE/mx
- b2/cepRntHMuLjrZ2ZTTBAKpx4ZFGkZk3qr1h1Vhzrthq40Y6og1ig7u09naotb9B6mN5eti8GX
- CI=
-X-Google-Smtp-Source: AGHT+IH+rYLvWSa37lKw1gDmH4HWsbEs7LjrGzQPowgoXCEg85RBtGL7KJtAnSbm7gwvduCo0bobsobYHfAJOEUIcBQ=
-X-Received: by 2002:a05:6512:224b:b0:553:2357:288c with SMTP id
- 2adb3069b0e04-5550b8802b9mr5508887e87.17.1751334403100; Mon, 30 Jun 2025
- 18:46:43 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751341773; x=1751946573;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nzYtu7qTYgjXDk9/TQlc3S3ju1i44cODTOohjui3c90=;
+ b=UOTBPiBWr9Xktzv5TUy8XAW33zfCw4HVUCw7iPaB7FDeeWzCnefplomHlft5qC0tJ5
+ bQc1J0zCWQYZ988thiyB4cl+bfhURQZKCK+C2WMIASoO8ck9xDfLDrQmfJHfN62Dfprh
+ jRIparqKthTP6urAphzzjfI20zmXh1O/3i1Ra/JAIhD07LXEWKSN3zSuWeb7W5mUoFTz
+ khUTkMhtHsm4Q3s1ecHwhP/PB30PcnITqwQ+eRgD4j9RTJ11gM9MgkZXHJj88N1/5ob1
+ ulgn84lS35YI8zVs1MYye2tBdynyH0LgA5cMkOKh0f1ZGHTHyY3OkDckWvV7+/aq4xX3
+ kJ4A==
+X-Gm-Message-State: AOJu0YyqbIuI+yBUwi3zFh5xFcsyLZT7u16E46AquPZQFDrimmxAwMbQ
+ s9saY8poP2HApQ1ng4EXLWHOD589JlJDYLslZpK2w/PwCqIsRdcwDZlQjastWA2v
+X-Gm-Gg: ASbGnct9Fr9bSKe5nFSSmhBVrR4E6h6e1fDYw1FTauZGTHFlROU4RkkOtt4stHfVpIa
+ Im9bmQNA236G6wiBg9DhjQzMFTRYxHiNVm/JkE8s34UOgFqDsqG3z1VyYUxprwL9ofxERL84XQY
+ eNuwcmVifgc5NNF4IrhcEasI9MqBz/dAgUfhmcywCcTGivM9IABGVm7ocA1jUECIP3JL5a4f2Zj
+ jSCqjCYS4+gov4yuA4fbeBvZfW3CwPaArWHvw8tH9ZdmKeXqs/Y/tT2DYhxsyplo3iCZ0uNwYzZ
+ WNQJ6QZfdG9elUH17mwUnsXgDx85wx49NGvz2JpfgLvav2CcMfhLnJgcq1bglbOVPRqp+jSQ
+X-Google-Smtp-Source: AGHT+IGqo8bkHLnHZU71JGVAFSoclFI6pIKRSSvFY3fb/76ltmE48TiyMAarUM+u2Duelem018byBA==
+X-Received: by 2002:a05:6000:402a:b0:3a5:300d:5e17 with SMTP id
+ ffacd0b85a97d-3a917603734mr13909709f8f.29.1751341772433; 
+ Mon, 30 Jun 2025 20:49:32 -0700 (PDT)
+Received: from localhost ([2001:8a0:6a5a:6c00:eb29:af93:a639:c827])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a892e52a5asm12077347f8f.54.2025.06.30.20.49.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Jun 2025 20:49:32 -0700 (PDT)
+From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+To: u-boot@lists.denx.de
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v7 0/6] Add EFI Debug Support Table feature
+Date: Tue,  1 Jul 2025 04:49:20 +0100
+Message-Id: <20250701034926.83536-1-paulliu@debian.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
- <20250628221944.2412860-1-giulio.benetti@benettiengineering.com>
-In-Reply-To: <20250628221944.2412860-1-giulio.benetti@benettiengineering.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 30 Jun 2025 22:46:31 -0300
-X-Gm-Features: Ac12FXzBjnoIjLuVstoTwonvAutRXWowseZtYKToFk3sjAZFZLtAp7132rlIxqc
-Message-ID: <CAOMZO5Cf+pbKo+zAO0FfkwoAi+aHYYHi_hfCiXF8qdq7jx=KWg@mail.gmail.com>
-Subject: Re: [PATCH v2] arch/arm/include/asm/arch-imxrt/gpio.h: imxrt gpio use
- common gpio.h
-To: Giulio Benetti <giulio.benetti@benettiengineering.com>
-Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,14 +93,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jun 28, 2025 at 7:19=E2=80=AFPM Giulio Benetti
-<giulio.benetti@benettiengineering.com> wrote:
->
-> The current file defines a struct gpio_regs identical to the one in
-> <asm/mach-imx/gpio.h>. To eliminate code duplication and align with
-> the approach used for i.MX8M, include the common header instead of
-> redefining the struct.
->
-> Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
+From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 
-Applied to u-boot-imx/next, thanks.
+I implemented the UEFI Specification version 2.10, specifically focusing on
+the functionality described in Section 18.4, which details the EFI Debug
+Support Table feature. This implementation ensures support for
+hardware-assisted debugging and provides a standardized mechanism for
+debuggers to discover and interact with system-level debug resources.
+
+V2: add Kconfig options to turn on/off this feature.
+V3: Fix the way of removing debug_image_info.
+V4: Fix efi_realloc return failure code and efi_alloc_aligned_pages() for
+    system_table_pointer.
+V5: Fix function comments and move the code into a separate module.
+V6: Fix error handling. Refine the code.
+V7: Add unittest
+
+Ying-Chun Liu (PaulLiu) (6):
+  efi: add EFI_SYSTEM_TABLE_POINTER for debug
+  efi: add EFI_DEBUG_IMAGE_INFO_TABLE for debug
+  lib: efi_loader: efi_memory.c: add efi_realloc() for realloc memory
+  efi: add EFI_DEBUG_IMAGE_INFO for debug
+  efi: selftest: add selftest for EFI_DEBUG_SUPPORT
+  configs: sandbox_defconfig: enable CONFIG_EFI_DEBUG_SUPPORT
+
+ configs/sandbox_defconfig                     |   1 +
+ include/efi_api.h                             |  71 +++++++
+ include/efi_loader.h                          |  19 ++
+ lib/efi_loader/Kconfig                        |   8 +
+ lib/efi_loader/Makefile                       |   1 +
+ lib/efi_loader/efi_boottime.c                 |   7 +
+ lib/efi_loader/efi_debug_support.c            | 183 ++++++++++++++++++
+ lib/efi_loader/efi_memory.c                   |  58 ++++++
+ lib/efi_loader/efi_setup.c                    |  18 ++
+ lib/efi_selftest/Makefile                     |   2 +
+ lib/efi_selftest/efi_selftest_debug_support.c |  58 ++++++
+ 11 files changed, 426 insertions(+)
+ create mode 100644 lib/efi_loader/efi_debug_support.c
+ create mode 100644 lib/efi_selftest/efi_selftest_debug_support.c
+
+-- 
+2.39.5
+
