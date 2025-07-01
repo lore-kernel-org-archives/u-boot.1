@@ -4,117 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74030C8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 07:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D0A7C7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 07:51:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2B0181FEE;
-	Tue,  1 Jul 2025 09:32:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BED4F81FEE;
+	Tue,  1 Jul 2025 09:51:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TJxZFjDg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QO9I5ZHy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CF2382ADA; Tue,  1 Jul 2025 09:32:16 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3FDB682ADA; Tue,  1 Jul 2025 09:51:26 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B220A8006D
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 09:32:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D0118006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 09:51:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1751355125; x=1751959925; i=xypron.glpk@gmx.de;
- bh=WGB1Ar1TQaAcrxNtF8d9pCEdtvAh216Ty+5ox/7Qi68=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=TJxZFjDgFqDJJiA9Mj7kcIe/dHpdlcVOh3twcMa4NrO0abiOM9ZvZ/EVCuE6pIqM
- xZaGXPkgXSR6olK7zd33E8eluvMRxNyZfqgZu1gbJTY/UbeRIJ6aVExzbAI+Osfsm
- ilQqA+kE6Qzeh2SU+pg/ZHi/cTzw38Dvx4t+pkXIopfGCq6LHwEiTATmxWBW0kcKD
- +zQ3FjD66lTN/ohGNby2CkTgpMI4cZ7q6630cbqfu4mUKk0oFpOD4qP6AX3idr+A6
- 5kJZR9EXjiifMhqtwIRxazYrufmVyaFD1ISzkVWXZY3r1pibFb6jqAY6ovwvdBT/q
- 8wzP38t92arcfyy2VQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N8obG-1ukEOB10Ok-00vqen; Tue, 01
- Jul 2025 09:32:05 +0200
-Message-ID: <0ae877bb-c168-4533-bd35-b3d5cc55eaf3@gmx.de>
-Date: Tue, 1 Jul 2025 09:32:04 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-714066c7bbbso59535077b3.3
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 00:51:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751356278; x=1751961078; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ikfEYJbjrtsQ4Pm1NB1DkPRPAOh7X31sDORv1IOpnH4=;
+ b=QO9I5ZHyYKtWwEDALjrXsI/X7wJ3zdiCLQBipTAQhTViir7s5ZTxaya0LVsI/IjZes
+ 68q13tD4RLxYmT7QmiTqQtF89oWZ91gos4Fiqo68WCY/db03gaKOU2ixlOjawPTfhHlm
+ UGsluNekzIGBQxgUSvKW9UCDGfFYCaPubdk2dvZIascewg4BaXDWOib82RwordAJ3h/O
+ mY4gSneofR9UstB3gsc92URlEk1Q+8SH7Ng2c4gQ5Zwf75BqKmYoL5WO/ksaxjogsEWF
+ aysbdMgf3Xh88IYTMrKhBG+Vc58STmLx7ya7OMV8ySybzq8OkZ5i2yjHUdO0C/BsiQSt
+ U3mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751356278; x=1751961078;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ikfEYJbjrtsQ4Pm1NB1DkPRPAOh7X31sDORv1IOpnH4=;
+ b=S7RweZMK6t8SJkiJxabIpmVTZhzYxZv078q0mWfXZnBatwubsld1PhgNeRwlGhyauE
+ dOJaO1w3TiDD+pDYNtGbPB7MLfTPvQ5mr+SmM4BKqlayR94GE0LslRmCTPvM7nsFzMho
+ CzeWMC2qNvRRX+aaRd4lz3H3gnQAn5nXq17Yx1fg7yKoRnk97LBOe3cBGOmBtQRdZyjD
+ 0jSYxwFVYu85AngFPPqVnvANzIt4x4yIANy9Cnp9EoD2C/ybxJdQxljdt0Z8pESDJUui
+ EsYIMFy2rkESJy9Wyw3aLqPuQZwJSBEOF2EXoomC0zxogifZC+f8ckqu3QF5kCb+bhW2
+ KjIg==
+X-Gm-Message-State: AOJu0YwmLcJqsjhSwXhUpnSZRhaQ/TdPYdcg71K8nKyFBmiBK+F0cnxS
+ QwYnkUKYXfk6c/5Kyx+9k8JebeLe5p6KqnTBqIyld3hFPbxkO6gyvatY9ui8l9q+eOzRc4nLnMz
+ 23SDW6UuZ7SvFkxHIqcvzA7TXk4rDvvi3NAoHMrIolQ==
+X-Gm-Gg: ASbGncsK6THahQnXLXkCTjWJrQ7+fTEfKgzWD5cjciZdEb0wdS58/rP4ao9Bp3MNeap
+ 8/B3c4GwPj7dQHTZkfVN3JIKw+nUQ0UkWrNiERMw7JATELoWzdSV1HAsDmyJxBcATgcKkH92ZuZ
+ nJsxQMZ4qu5wbXFEftrDR3R0PsEqiJCyeo1hVUFQgyGCpj
+X-Google-Smtp-Source: AGHT+IHEOeTQ4Oz8ZEH7pLJlISOj4lEsBZOa+dne7Tl/qqteQp1RVEpH4ez5sn7bD3hrF+TeT7WBLobO49lkZjrElDU=
+X-Received: by 2002:a05:690c:708b:b0:711:6419:5ce1 with SMTP id
+ 00721157ae682-715171c769bmr239145717b3.31.1751356278641; Tue, 01 Jul 2025
+ 00:51:18 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 6/6] configs: sandbox_defconfig: enable
- CONFIG_EFI_DEBUG_SUPPORT
-To: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20250701034926.83536-1-paulliu@debian.org>
- <20250701034926.83536-7-paulliu@debian.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250701034926.83536-7-paulliu@debian.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:3iKiQ0/69t+W0YE1fMX0x76oa+JXCRXUMSGzd4JdHAJCaca3agp
- T7tQpxb9uRAcAUw0te9xgPnK0rTB1wJKUOThfgcN548VBpQyF+117+vwnZe02M/qwBibvol
- 2qkR2+ziF43MGp6cteOYajNSidiu7QwnISGHYtL3uv/beRTrsuaWTX2CiYP5kSJ6WbPCsfK
- 5Wp5rj9naIhbSi1EfAFrQ==
-UI-OutboundReport: notjunk:1;M01:P0:Gb4BZ2pesvU=;1CgqHlLKMV+A3lkUImPIBqFs6/J
- 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
- ek8St7ohrl1Ez1khykcXmtU=
+References: <20250627112509.264221-1-sughosh.ganu@linaro.org>
+ <20250627112509.264221-2-sughosh.ganu@linaro.org>
+In-Reply-To: <20250627112509.264221-2-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 1 Jul 2025 10:50:42 +0300
+X-Gm-Features: Ac12FXwE4cVei9K_9LFCytgO5IAAd5Temv2he9Rlgv-hS-1gpsNpWJSdDHLBtUA
+Message-ID: <CAC_iWj+9WBOxjciXBTVa945qgse8nuet85YEeksS+tmg5k+RzQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] cmd: eficonfig: add support for URI device path
+ based boot options
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,54 +93,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01.07.25 05:49, Ying-Chun Liu (PaulLiu) wrote:
-> From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
->=20
-> Enable CONFIG_EFI_DEBUG_SUPPORT so that we can run a build test for
-> this config.
+Hi Sughosh
 
-It is not enough to build only on 64bit. qemu_arm_defconfig showed this=20
-problem:
+[...]
 
-lib/efi_loader/efi_debug_support.c: In function=20
-=E2=80=98efi_initialize_system_table_pointer=E2=80=99:
-lib/efi_loader/efi_debug_support.c:48:49: warning: cast from pointer to=20
-integer of different size [-Wpointer-to-int-cast]
-    48 |         systab_pointer->efi_system_table_base =3D=20
-(efi_physical_addr_t)&systab;
-       |
+> +
+>  static struct eficonfig_item select_file_menu_items[] = {
+>         {"Select File", eficonfig_process_select_file},
+>         {"Clear", eficonfig_process_clear_file_selection},
+> @@ -1042,16 +1101,30 @@ static struct eficonfig_item select_file_menu_items[] = {
+>  efi_status_t eficonfig_process_show_file_option(void *data)
+>  {
+>         efi_status_t ret;
+> +       unsigned int menu_count;
+>         struct efimenu *efi_menu;
+> +       struct eficonfig_item *menu_items;
+> +       struct eficonfig_select_file_info *file_info = data;
+> +
+> +       menu_items = file_info->boot_file_option ? select_boot_file_menu_items :
+> +               select_file_menu_items;
 
-Either enable in multiple defconfigs or maybe use
+Why do we need boot_file_option? Won't the len of the URI be 0 if it's a file?
 
-     default y if !HAS_BOARD_SIZE_LIMIT
+[...]
 
-in the Kconfig file.
+>
+> +/**
+> + * fill_dp_uri() - copy the URI string in the device path
+> + * @dp:                pointer to the URI device path
+> + * @uri_str:   URI string to be copied
+> + *
+> + * Copy the passed URI string to the URI device path. This
+> + * requires utf8_utf16_strcpy() to copy the u16 string to
+> + * the u8 array in the device path structure.
+> + *
+> + * Return: None
+> + */
+> +static void fill_dp_uri(struct efi_device_path *dp, u16 **uri_str)
+> +{
+> +       u16 *p = *uri_str;
+> +       struct efi_device_path_uri *uridp;
+> +
+> +       uridp = (struct efi_device_path_uri *)dp;
+> +
+> +       utf8_utf16_strcpy(&p, uridp->uri);
+> +}
+> +
+>  /**
+>   * fill_file_info() - fill the file info from efi_device_path structure
+>   *
+> @@ -1392,10 +1486,13 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+>         size_t len;
+>         efi_status_t ret;
+>         char *tmp = NULL, *p;
+> +       u16 *current_path = NULL;
+>         struct efi_load_option lo = {0};
+>         efi_uintn_t dp_size;
+>         struct efi_device_path *dp = NULL;
+>         efi_uintn_t size = load_option_size;
+> +       struct efi_device_path *dp_volume = NULL;
+> +       struct efi_device_path *uri_dp = NULL;
+>         struct efi_device_path *device_dp = NULL;
+>         struct efi_device_path *initrd_dp = NULL;
+>         struct efi_device_path *fdt_dp = NULL;
+> @@ -1464,6 +1561,14 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+>                 goto out;
+>         }
+>
+> +       bo->file_info.uri = calloc(1, EFICONFIG_URI_MAX * sizeof(u16));
+> +       if (!bo->file_info.uri) {
+> +               ret =  EFI_OUT_OF_RESOURCES;
+> +               goto out;
+> +       }
+> +
+> +       bo->file_info.boot_file_option = true;
+> +
+>         /* copy the preset value */
+>         if (load_option) {
+>                 ret = efi_deserialize_load_option(&lo, load_option, &size);
+> @@ -1481,7 +1586,10 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+>                 u16_strcpy(bo->description, lo.label);
+>
+>                 /* EFI image file path is a first instance */
+> -               if (lo.file_path)
+> +               if (lo.file_path && EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE,
+> +                                               MSG_URI))
+> +                       fill_dp_uri(lo.file_path, &bo->file_info.uri);
+> +               else
 
-Best regards
+This else does something different now. Shouldn't it be else if (lo.file_path)>
 
-Heinrich
+>                         fill_file_info(lo.file_path, &bo->file_info, device_dp);
+>
 
->=20
-> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> V7: enable CONFIG_EFI_DEBUG_SUPPORT for sandbox_defconfig
-> ---
->   configs/sandbox_defconfig | 1 +
->   1 file changed, 1 insertion(+)
->=20
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 4f6943d1a4b..c50746d3dbc 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -10,6 +10,7 @@ CONFIG_PCI=3Dy
->   CONFIG_DEBUG_UART=3Dy
->   CONFIG_SYS_MEMTEST_START=3D0x00100000
->   CONFIG_SYS_MEMTEST_END=3D0x00101000
-> +CONFIG_EFI_DEBUG_SUPPORT=3Dy
->   CONFIG_EFI_SECURE_BOOT=3Dy
->   CONFIG_EFI_RT_VOLATILE_STORE=3Dy
->   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=3Dy
+[...]
 
+Thanks
+/Ilias
