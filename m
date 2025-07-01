@@ -4,64 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E834C7EE30
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 06:49:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B2AC8302F
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 06:58:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6603682F33;
-	Tue,  1 Jul 2025 08:48:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=opensource.se
+	by phobos.denx.de (Postfix) with ESMTP id DF68981FEE;
+	Tue,  1 Jul 2025 08:58:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Fw71U0K0";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6402382B18; Tue,  1 Jul 2025 08:17:25 +0200 (CEST)
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
- [209.85.160.174])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C21182ADA; Tue,  1 Jul 2025 08:58:01 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 121B281FEE
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 08:17:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=opensource.se
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=magnus.damm@gmail.com
-Received: by mail-qt1-f174.google.com with SMTP id
- d75a77b69052e-4a8244e897fso14432791cf.1
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 23:17:15 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id D90548006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 08:57:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5613OZTj032109
+ for <u-boot@lists.denx.de>; Tue, 1 Jul 2025 06:57:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=j87aWE8gfUXctPbs4tNhNQ6s9OFr1GvvGMS
+ bIrKSHz0=; b=Fw71U0K0qBxMI93ZnzHXa+OHunq4/phdhrE4T8FbqInYhQ5wn9G
+ cfmYmoZn8GniPRxpPxjVTIx6YWqd0oJwhyanvnKpkWu6TZGQ9ljxIRmbyG6ayPOi
+ YV9ObRtdvTadXqOjFr/Kuvo4NmaKc8a+sHJAQqrVPuXANsZro1T/hqJ7Pf6uJYHj
+ ZoqciMacY3XOqujslwUu74IBOR87FSzKidzcVnX1TZMnbOgdq4NgZoJ8MLYx6lpj
+ s0ejJAvRAAlf4YLZf+xi2ly02ocLIJo+OTNjjt0r1x3N7KY/8MzbFd2HIXdaKbGj
+ LiI6jRX76w9JMeeG/Kr0Xmp7Xtf2diuGtoA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47j63k7mk6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 06:57:54 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-b2fa1a84568so4094456a12.1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 23:57:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751350634; x=1751955434;
- h=subject:message-id:date:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=A6SDTglPvNupuyYA1Ft5iGlIGgOSGnEXVLH8XwMCl2k=;
- b=TiVZP7TNLa0lbA/31QcNwIKp9GpTUOBNtzA6Y1cnpeclKS5CymQbmTji99L+M+hXPl
- rG6f+n3h3cQh3NLhMpEf26ocr1Yaozy+rCfmMEaA5JXe9isOrpHj4/NbVmG9wCA9k7JA
- XmeU4Ipxfcdwqp4bMjgTF38XMA1orRYUhudmkF40kw9rh0HCCdOIJHSMRgcXp5oVvbB8
- 9nsLYFfvZS80MK9u/LwBBHcoZNDzsUp0xbto7sSTqQd0bHWcOSGvrf6pX8TtqHnihEUP
- DOaP22wU7TjvWoR/Dd00cyUnCw76WQbJMkkLvrk0VJz1AYGNVSYl2+xhF1h3b3sTmN/t
- W3/g==
-X-Gm-Message-State: AOJu0YxYr+cCcHFWi+TQazmKEZi9M6aN6t+iXeN7SMUragTvT6P5F9qD
- X6IqAL3ClRUKwnFb0Uf/wBvORjjxYxiR8uMdmuNkorinx0Tzaow+PIFPqAKv32kL
-X-Gm-Gg: ASbGncs7fEtZ4woy7B/ihg00iG9+xBvNFmxDtg9YTiqaAXTm6IElGvBc6TILKllAJjU
- wFJin5Ae8XD/yv49kAwvorCkjDyCJ8KHQtYOXPsAnhGpKlxB8OvtoKT0L3SuG5kgNXfh3zr6YhQ
- TMvP/H2IT7dbCXuJYqvVHh1h6EK1T6RcWbUTCzGqM+YZfBoEV0JgqzIQ24IbYAcqM6cwc9IBoG4
- G66VyY5nD7yHo4M93mywh8R3VFx7PPmQvXaBQ0KSZ7Z7Z6LvX1LPO/FW+2fwHigVXvjLce+ZOMe
- oJc1vcKIfeYXxxwdS2I5AlWGdY7ZMrY/BvUE3BznVxT0Qrp2YwwvWD65B8bT9J7begyEXTJDnb8
- 5z043BXQYQHceYL9JGkIy/m0=
-X-Google-Smtp-Source: AGHT+IHenhLdfPYPHCRVTW5Y9ZgoKTvgELXPaBdvTQCfXlCzpzZlBnl8//+xQu1G09mr2b84MqX3GA==
-X-Received: by 2002:a05:622a:592:b0:4a6:d5ae:8901 with SMTP id
- d75a77b69052e-4a7fca2ffe0mr283935001cf.19.1751350633575; 
- Mon, 30 Jun 2025 23:17:13 -0700 (PDT)
-Received: from 1.0.0.127.in-addr.arpa ([167.99.4.198])
+ d=1e100.net; s=20230601; t=1751353074; x=1751957874;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=j87aWE8gfUXctPbs4tNhNQ6s9OFr1GvvGMSbIrKSHz0=;
+ b=TL8lEE7g5yxgTf438tM9ZVdKcXlKFohumiG3VjIyFg3mHlhPAeD2t2ZsSWJueXoKs/
+ 8My+pMXgbIhIAJ8sJUbKSN+M96msxGEGruZ7V+KcVS5fZjpYorUxk9frcA/zXMwHh/un
+ u+izZEFW7y8pMBtAJr5Jcct4wo5z0cjbDePZGHM+wd+AaG1C8SJgXiI7t9rZbL/xf5Sq
+ M87OVW04Dn6C34Ep0xSWHseyQQ/9MQ9U2wmmCa9ZazzUfQ8qy6IgzKj5MJ6bC8m3YwJS
+ fv/fwUDiGv10CRxZxfkK4Cw9FrBK5JDmV1DrvsyPXUenjOgyr6ixlJ8tZTsYYDio8liv
+ FSow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXuBYVBFPh8PyIn2jN2wBlo87q6c+E5Wyt7ShDbRXLp3w1s6nPYa0SZHDM6vX6VW3J22ssd6EU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdGlcUk6qEaGYlYZCmEfpBemnyOT3cbfByB0hs18PICmTJvSuY
+ QHy1Xq06qARjuhOesbz5pMVHozKluk/a6hNyZ7Jev/b25MXMuas9xiwYu8tr2ZTFPdZ2MImCtHc
+ SgA/vA9LKgjnX5gPBIFeBXHaPRWxmZU6oCjEOAQpvQIUXMHBrVJInu7CY
+X-Gm-Gg: ASbGnct66noxh3+ZkKW2EbQ92VwM0iiMcORUI6e88jWs8eg+bOASvageLy1vZ4Ybtk1
+ dPUjthXHJXTz+uT9g/xhNvh/I1cb2mFWSuSx66EKt/tB8X9tMiWo6KpQMsEW0ngJmiPrpWc58sU
+ fCUGzZ2KSRjZqDixFwrY5Rrdl9v7Eb0ByqJUJ785AwZVdQhsbqBfa4RSr+HXSCQbY5rY0TlfSRo
+ tuhbrIPjmGOiClO4NItpm8vLQzwzDvzdFDJPhWhUI8a/C+Tigbf3+xrUnMD2ciM0kxVKfohJXYr
+ XmPVV2L0pLNCK1tfFg1LRL9XKE5LBY2qCW5Sr5R8rxEZFi598qM6HLgWsmBEQ4P9xSmYe6xWHTA
+ ReSsKrk2AutHG46m0y3/JcZfUg3/sA3Yv9x8cZ5h+FbW5sarj8g8=
+X-Received: by 2002:a05:6a20:734e:b0:21c:fa68:9da6 with SMTP id
+ adf61e73a8af0-222c9986fe7mr3618000637.8.1751353073929; 
+ Mon, 30 Jun 2025 23:57:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGlRC8aWz4sxh6sx35tIt+TAGuEvGBCxw2pvbzueOdegXe6KY+5QtFKKF39Q5UYx6wLyTG+IQ==
+X-Received: by 2002:a05:6a20:734e:b0:21c:fa68:9da6 with SMTP id
+ adf61e73a8af0-222c9986fe7mr3617967637.8.1751353073476; 
+ Mon, 30 Jun 2025 23:57:53 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4a7fc5ad641sm71014951cf.77.2025.06.30.23.17.12
+ 41be03b00d2f7-b34e3026c51sm9554662a12.30.2025.06.30.23.57.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 23:17:13 -0700 (PDT)
-From: Magnus Damm <damm@opensource.se>
-To: u-boot@lists.denx.de
-Cc: Chris.Brandt@renesas.com, Magnus Damm <damm@opensource.se>,
- marek.vasut+renesas@mailbox.org
-Date: Tue, 01 Jul 2025 08:17:10 +0200
-Message-Id: <175135063036.63099.10267366987503829859.sendpatchset@1.0.0.127.in-addr.arpa>
-Subject: [PATCH] pinctrl: renesas: Initial RZ/A2 R7S9210 support
-X-Mailman-Approved-At: Tue, 01 Jul 2025 08:48:20 +0200
+ Mon, 30 Jun 2025 23:57:53 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+To: sr@denx.de, casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ balaji.selvanathan@oss.qualcomm.com, hello@paulsajna.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v1] watchdog: qcom-wdt: Drop read check on write-only WDT_EN
+ register
+Date: Tue,  1 Jul 2025 12:27:38 +0530
+Message-Id: <20250701065738.1644669-1-balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=ZKfXmW7b c=1 sm=1 tr=0 ts=686386f2 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=Wb1JkmetP80A:10 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=oqPD5ApjgXJCjJyYgbsA:9
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAxMDAzNyBTYWx0ZWRfX53dS9gX4CXcI
+ wUhqb46Op/EN1hspo/SwwkA5zt3goJHXX0sMQW9bt+VKE37W/5DvkM4EsjNXfrYUhXk/ZyzLVzE
+ U5kc6gsky6EeDaqLnkuoG80mxpgFGRwk3g3htcnAUZlzRmbgg5cVSlxATUVqg86/FdgsBE/bXVE
+ v0zo+bb0aiInSKACSoH+GtDw/6QVGI6vKj1CFwO2/uZ7ORf0/omD3pGHNHgW/uc8wK3uJQ0RD0O
+ YZZOAzf4K78eIQPsVP2fFJ4ZD9+W4M5vVIRyRKa4bXiMTfMBN7VpbEXvrPVHyNLa4mJCoe8S7/D
+ 4TvIJG87pPsIrC/fQqs93eez9RjYBw1xzi1eOsEVCgdoxI8ZOBs+QZ4efXSR1Xqz5o53gz+g+mF
+ MMZKd4XRn21u6qbMoVqIRopr2U4Jc8mfbaTjhFJkw3F7p6rDKNVUkFZUwJkpYBjezjKJ3/P8
+X-Proofpoint-ORIG-GUID: mZcF7reZnFM0rugNO0a40yc3cBxGJR_v
+X-Proofpoint-GUID: mZcF7reZnFM0rugNO0a40yc3cBxGJR_v
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-07-01_01,2025-06-27_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 mlxscore=0 mlxlogscore=924 spamscore=0 suspectscore=0
+ bulkscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
+ impostorscore=0 malwarescore=0 clxscore=1015 classifier=spam authscore=0
+ authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505280000 definitions=main-2507010037
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,195 +131,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Magnus Damm <damm@opensource.se>
+On some Qualcomm platforms, such as Dragonwing boards, the WDT_EN
+register is write-only. Reading it back after enabling the watchdog
+can return invalid data or cause unexpected behavior.
 
-Add pinctrl support for RZ/A2 r7s9210. The actual configuration is
-taken from DT and the current rather simple implementation is enough
-to at least configure serial console and Ethernet.
+In particular, the check:
+  if (readl(wdt_addr(wdt, WDT_EN)) != 1)
+may fail even though the watchdog is correctly enabled and running.
+This leads to misleading error messages and unnecessary failures.
 
-Signed-off-by: Magnus Damm <damm@opensource.se>
+Removing the read check ensures compatibility and avoids false
+negatives on platforms where WDT_EN is not readable.
+
+This work builds upon this previous submission:
+https://lore.kernel.org/u-boot/20250625094607.1348494-1-gopinath.sekar@oss.qualcomm.com/
+
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
+ drivers/watchdog/qcom-wdt.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
- (Resending with updated email address to Marek)
+diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+index af97b27e311..e4ebb1f31d4 100644
+--- a/drivers/watchdog/qcom-wdt.c
++++ b/drivers/watchdog/qcom-wdt.c
+@@ -82,10 +82,7 @@ int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+ 	writel(bark_timeout_s, wdt_addr(wdt, WDT_BARK_TIME));
+ 	writel(bite_timeout_s, wdt_addr(wdt, WDT_BITE_TIME));
+ 	writel(BIT(0), wdt_addr(wdt, WDT_EN));
+-	if (readl(wdt_addr(wdt, WDT_EN)) != 1) {
+-		dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
+-		return -EIO;
+-	}
++
+ 	return 0;
+ }
+ 
+-- 
+2.34.1
 
- drivers/pinctrl/renesas/Kconfig        |    9 +-
- drivers/pinctrl/renesas/Makefile       |    1 
- drivers/pinctrl/renesas/pinctrl-rza2.c |  136 ++++++++++++++++++++++++++++++++
- 3 files changed, 145 insertions(+), 1 deletion(-)
- 
-diff -urN u-boot-v2025.07-rc3/drivers/pinctrl/renesas/Kconfig u-boot-v2025.07-rc3-grmango-v5/drivers/pinctrl/renesas/Kconfig
---- u-boot-v2025.07-rc3/drivers/pinctrl/renesas/Kconfig	2025-02-14 15:36:58.305816789 +0900
-+++ u-boot-v2025.07-rc3-grmango-v5/drivers/pinctrl/renesas/Kconfig	2025-06-22 15:06:03.819573352 +0900
-@@ -3,7 +3,7 @@
- config PINCTRL_PFC
- 	bool "Renesas pin control drivers"
- 	depends on DM && ARCH_RENESAS
--	default n if CPU_RZA1
-+	default n if CPU_RZA1 || CPU_RZA2
- 	help
- 	  Support pin multiplexing control on Renesas SoCs.
- 
-@@ -155,6 +155,13 @@
- 	help
- 	  Support pin multiplexing control on Renesas RZ/A1 R7S72100 SoCs.
- 
-+config PINCTRL_RZA2
-+	bool "Renesas RZ/A2 R7S9210 pin control driver"
-+	depends on CPU_RZA2
-+	default y if CPU_RZA2
-+	help
-+	  Support pin multiplexing control on Renesas RZ/A2 R7S9210 SoCs.
-+
- config PINCTRL_RZG2L
- 	bool "Renesas RZ/G2L family pin control driver"
- 	depends on PINCTRL
-diff -urN u-boot-v2025.07-rc3/drivers/pinctrl/renesas/Makefile u-boot-v2025.07-rc3-grmango-v5/drivers/pinctrl/renesas/Makefile
---- u-boot-v2025.07-rc3/drivers/pinctrl/renesas/Makefile	2024-05-18 16:38:53.196536115 +0900
-+++ u-boot-v2025.07-rc3-grmango-v5/drivers/pinctrl/renesas/Makefile	2025-06-22 15:02:37.360416017 +0900
-@@ -21,5 +21,6 @@
- obj-$(CONFIG_PINCTRL_PFC_R8A779G0) += pfc-r8a779g0.o
- obj-$(CONFIG_PINCTRL_PFC_R8A779H0) += pfc-r8a779h0.o
- obj-$(CONFIG_PINCTRL_RZA1) += pinctrl-rza1.o
-+obj-$(CONFIG_PINCTRL_RZA2) += pinctrl-rza2.o
- obj-$(CONFIG_PINCTRL_RZN1) += pinctrl-rzn1.o
- obj-$(CONFIG_PINCTRL_RZG2L) += rzg2l-pfc.o
-diff -urN u-boot-v2025.07-rc3/drivers/pinctrl/renesas/pinctrl-rza2.c u-boot-v2025.07-rc3-grmango-v5/drivers/pinctrl/renesas/pinctrl-rza2.c
---- u-boot-v2025.07-rc3/drivers/pinctrl/renesas/pinctrl-rza2.c	1970-01-01 09:00:00.000000000 +0900
-+++ u-boot-v2025.07-rc3-grmango-v5/drivers/pinctrl/renesas/pinctrl-rza2.c	2025-06-30 23:14:38.820084926 +0900
-@@ -0,0 +1,136 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * RZ/A2 pin controller support
-+ *
-+ * Based on R7S72100 pinctrl, Copyright (C) 2019 Marek Vasut
-+ * Based on RZA2MEVB board code, Copyright (C) 2018 Chris Brandt
-+ *
-+ * Copyright (C) 2018 Renesas Electronics Corporation
-+ */
-+
-+#include <dm.h>
-+#include <asm/global_data.h>
-+#include <dm/lists.h>
-+#include <dm/pinctrl.h>
-+#include <linux/bitops.h>
-+#include <linux/io.h>
-+#include <linux/err.h>
-+
-+#define PDR_BASE        0x0000     /* 16-bit, 2 bytes apart */
-+#define PODR_BASE       0x0040     /* 8-bit, 1 byte apart */
-+#define PIDR_BASE       0x0060     /* 8-bit, 1 byte apart */
-+#define PMR_BASE        0x0080     /* 8-bit, 1 byte apart */
-+#define DSCR_BASE       0x0140     /* 16-bit, 2 bytes apart */
-+#define PFS_BASE        0x0200     /* 8-bit, 8 bytes apart */
-+#define PWPR            0x02FF     /* 8-bit */
-+#define PFENET          0x0820     /* 8-bit */
-+#define PPOC            0x0900     /* 32-bit */
-+#define PHMOMO          0x0980     /* 32-bit */
-+#define PMODEPFS        0x09C0     /* 32-bit */
-+#define PCKIO           0x09D0     /* 8-bit */
-+
-+#define RZA2_PINS_PER_PORT 8
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+struct r7s9210_pfc_plat {
-+	void __iomem	*base;
-+};
-+
-+static void r7s9210_pfc_set_function(struct udevice *dev, u8 port, u8 pin, u8 func)
-+{
-+	struct r7s9210_pfc_plat *plat = dev_get_plat(dev);
-+	u16 reg16, mask16;
-+
-+	/* Set pin to 'Non-use (Hi-z input protection)' */
-+	reg16 = readw(plat->base + PDR_BASE + (port * 2));
-+	mask16 = 0x03 << (pin * 2);
-+	reg16 &= ~mask16;
-+	writew(reg16, plat->base + PDR_BASE + (port * 2));
-+
-+	/* Temporary switch to GPIO */
-+	clrbits_8(plat->base + PMR_BASE + port, BIT(pin));
-+
-+	/* PFS Register Write Protect : OFF */
-+	writeb(0x00, plat->base + PWPR); /* B0WI=0, PFSWE=0 */
-+	writeb(0x40, plat->base + PWPR); /* B0WI=0, PFSWE=1 */
-+
-+	/* Set Pin function (interrupt disabled, ISEL=0) */
-+	writeb(func, plat->base + PFS_BASE + (port * 8) + pin);
-+
-+	/* PFS Register Write Protect : ON */
-+	writeb(0x00, plat->base + PWPR); /* B0WI=0, PFSWE=0 */
-+	writeb(0x80, plat->base + PWPR); /* B0WI=1, PFSWE=0 */
-+
-+	/* Port Mode : Peripheral module pin functions */
-+	setbits_8(plat->base + PMR_BASE + port, BIT(pin));
-+}
-+
-+static int r7s9210_pfc_set_state(struct udevice *dev, struct udevice *config)
-+{
-+	const void *blob = gd->fdt_blob;
-+	int node = dev_of_offset(config);
-+	u32 cells[32];
-+	u16 bank, line, func;
-+	int i, count;
-+
-+	count = fdtdec_get_int_array_count(blob, node, "pinmux",
-+					   cells, ARRAY_SIZE(cells));
-+	if (count < 0) {
-+		printf("%s: bad pinmux array %d\n", __func__, count);
-+		return -EINVAL;
-+	}
-+
-+	if (count > ARRAY_SIZE(cells)) {
-+		printf("%s: unsupported pinmux array count %d\n",
-+		       __func__, count);
-+		return -EINVAL;
-+	}
-+
-+	for (i = 0 ; i < count; i++) {
-+		func = (cells[i] >> 16) & 0xf;
-+		if (func == 0 || func > 8) {
-+			printf("Invalid cell %i in node %s!\n",
-+			       count, ofnode_get_name(dev_ofnode(config)));
-+			continue;
-+		}
-+
-+		bank = (cells[i] / RZA2_PINS_PER_PORT) & 0xff;
-+		line = cells[i] % RZA2_PINS_PER_PORT;
-+
-+		r7s9210_pfc_set_function(dev, bank, line, func);
-+	}
-+
-+	return 0;
-+}
-+
-+const struct pinctrl_ops r7s9210_pfc_ops  = {
-+	.set_state = r7s9210_pfc_set_state,
-+};
-+
-+static int r7s9210_pfc_probe(struct udevice *dev)
-+{
-+	struct r7s9210_pfc_plat *plat = dev_get_plat(dev);
-+	fdt_addr_t addr_base;
-+
-+	addr_base = dev_read_addr(dev);
-+	if (addr_base == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	plat->base = (void __iomem *)addr_base;
-+	return 0;
-+}
-+
-+static const struct udevice_id r7s9210_pfc_match[] = {
-+	{ .compatible = "renesas,r7s9210-pinctrl" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(r7s9210_pfc) = {
-+	.name		= "r7s9210_pfc",
-+	.id		= UCLASS_PINCTRL,
-+	.of_match	= r7s9210_pfc_match,
-+	.probe		= r7s9210_pfc_probe,
-+	.plat_auto	= sizeof(struct r7s9210_pfc_plat),
-+	.ops		= &r7s9210_pfc_ops,
-+};
