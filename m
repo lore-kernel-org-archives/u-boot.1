@@ -4,84 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DAE9C8302F
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 03:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A1FC7EE30
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 04:09:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C22382F14;
-	Tue,  1 Jul 2025 05:50:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
+	by phobos.denx.de (Postfix) with ESMTP id 0955681FFC;
+	Tue,  1 Jul 2025 06:09:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rg+39752";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3Ra9PAko";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CCEF8006D; Tue,  1 Jul 2025 05:49:51 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 62D1682EA2; Tue,  1 Jul 2025 06:09:37 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20624.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::624])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BA4482EC6
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 05:49:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C587681FEE
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 06:09:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=debian.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3a51481a598so1545505f8f.3
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 20:49:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751341781; x=1751946581; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7+UPL2hOcDBhjm+/r1az9Tp3x/yjMi4R1hn/zjSJRk8=;
- b=Rg+39752EoP4OAWFddF1rY/Doz60LY1/j1K83uiqBlfiXxhCq4RQkSxy7xXgRl8yVU
- ZwvAZvdJno8sGdzb8iOYhfFX15EGS13VdU3zcvh73lthD9Ie6TnnUnmPsoZ7cooBrO3t
- RjEUkbuOVfWmo/36vDmejKFGVCB51MRijwEOW4GS//rVIZ/C4Xr17FMT8/buXGaaa5Jx
- 1+TMIoUtPsK55kDQ+eYa+4POYlnffT+qBXbXCjmTXB7NLA4UUwCo3ussHR2MW2GSjcWX
- r4eG2Yq1MAEJIaDd2g9PCO9FULbHPHq7zi+dK9XmpyWi49VHyw+R/EFzmfh3MthGpZr8
- OVCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751341781; x=1751946581;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=7+UPL2hOcDBhjm+/r1az9Tp3x/yjMi4R1hn/zjSJRk8=;
- b=FxUddwInp3Ig0QElmJKYBKLLFIr3g8Xm8pQIuvJVo4NLccUACK80NRhutOEeVLEwEQ
- 0xU+k6ZbaRlQfw/8wZhPLU9WuqIBIRO2XDlj0a4b0yyjMV95HvNy5Q9xyh/dk/Vnjlvl
- 95uVps7A2fnMsNmNgEMmPlOkdMg7mJfDNWMTOF+NPhbldvrU7HZgZ13AUguuppuvQMs7
- USQobOxjl/GL02SajueQ58Whu4uPYHCn5/rChbi4WbCu4Q+XF386fDNdICaO4ZfrmYVI
- BAZOwRm9cmCKtV1gX+kyxZYLsuCMD6+Kykj/0h2ZIMGrigGxdZjBIwPmGVaLFrBKLBcH
- Hzeg==
-X-Gm-Message-State: AOJu0YzbmbK7Nb09O/l0cwYSXUXWskNHo00tM8vEwIXubC9CUMMYvkA1
- TczQ05t6v0YSsXhII9FMWUPGHAJXYbBwCLpi3TF85LPXq07imLKPy7R+CxtbkB4r
-X-Gm-Gg: ASbGncuaxb6bA/+W2932znluRX8bb6uzMcSP31OJoI0cGKjTIHjtnVGJkRs4ZQgKCwA
- lM8ZudZDIZdbQSjxkggpjimA3AUNuVfx4x1CsdOKlgkFAxi+au0FaufoVY2sLolaEnH9ZQNGraw
- Zp35TRFwCsrBt7XIDbvEMinXSkcjmeIx5Ors7n+2TWBN0hCfbFWlr6DSoGpxbF5r8zbR2Mp8XaK
- pL8kETnHf8aYn6IxA4L6xmFJrhDgpZKTmewYsOsS1Xh8NmUE7hMVthtiDwhsho4YUQr2aUYIJZe
- 5jWAZUvlt1z0wrG5Ha6AwkOjBge5SGooj8vNmeAwPOlShg8B3HxXvz11kdjXgg==
-X-Google-Smtp-Source: AGHT+IF7DmqfhyPwjKX25qSXQ39M5WwsxijWv9tz5NPHrBNRr1UbOfEIf9B5TadlIPdWI7WN4Rj7dQ==
-X-Received: by 2002:a05:6000:4404:b0:3a4:f66a:9d31 with SMTP id
- ffacd0b85a97d-3a8fdb2a034mr9348637f8f.16.1751341780797; 
- Mon, 30 Jun 2025 20:49:40 -0700 (PDT)
-Received: from localhost ([2001:8a0:6a5a:6c00:eb29:af93:a639:c827])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-453b35349f0sm5990575e9.1.2025.06.30.20.49.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jun 2025 20:49:40 -0700 (PDT)
-From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-To: u-boot@lists.denx.de
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v7 5/6] efi: selftest: add selftest for EFI_DEBUG_SUPPORT
-Date: Tue,  1 Jul 2025 04:49:25 +0100
-Message-Id: <20250701034926.83536-6-paulliu@debian.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250701034926.83536-1-paulliu@debian.org>
-References: <20250701034926.83536-1-paulliu@debian.org>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GC59vRoNDzh/vbH3YZqyIIDR4dek9fNZkYJaGfvMZFA4hU4qVgbBNAPKKKXzAdJ8RqFnQt7CIi5xOa6NT5EdBjnZkLv+vVgFLEqxuIkaoVzdYBDJGXA72dmXLUR47+7uyedFelsVZGSJmJ3K1mUkbqt9tPjdcbtTNPlO+ACXjbdy/LBkYqyputvvTbkOycY5603VkazZnzGtPGSMGLL5RQjhxIrQ6a3qBJfBV+i9aQTg9s0BXsEvsdOL1Ot/lCdwx9ZwwmHJsK0BpUu1etT8GWKLPus94Dzmccus0GNLWnobOIKLNsX5dwsplIrEtLs3JDMgW+IcwxkXPSXWSX5+yA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2qrHk4JEOGelYv8ieq0jqnfeNCyShSiiq8j525ucwD4=;
+ b=r0gqf/IkkCfdU1rGehAriAnrsGHvuD0SzWk+7ysCMo8qy9E0rWFRD0tl+ohSgEOXWoYUb9g+FWp6691GlCXs3Y+ybjRnOm60+nzY3Mm3ZD8k7u+bULhC7qRRN/ldQB12mw0lWlmGj8YIdITpQbQrBHvAwwyHJQvgYYBXkUOOVyT9ypW/ghR0oSNxF4kNS/EOrQUgEKWDhK5OLi3eSpV6cRNGGRueSaAUdvwPt6WmfzXJX1h8X0KH4KfjNue2z4Ue0SHw7cDadbwCDVekxbikkr7aheEPTfH8Dj8fSENXjhXJFl74p0o3WvuNRU+Ei38N9TBUpCkev+llohHGz8dfYA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2qrHk4JEOGelYv8ieq0jqnfeNCyShSiiq8j525ucwD4=;
+ b=3Ra9PAko+yGPnLI+kAM81L+B+JP+gt5VsgNIfmg9RecXL1rzTvn2yeSGx8CzbXEtzGm56e08ViTWKaGvvajRcXVDdPSSvcF76DOBtH6kp7jpGaUVXMCNK71ASj8NfIfR1kgbdIaVifyGEU4KBoM6jioRrBxY+vrGohPbczv52mY=
+Received: from CH0PR03CA0338.namprd03.prod.outlook.com (2603:10b6:610:11a::10)
+ by IA1PR12MB6089.namprd12.prod.outlook.com (2603:10b6:208:3ef::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.19; Tue, 1 Jul
+ 2025 04:09:26 +0000
+Received: from CH1PEPF0000A346.namprd04.prod.outlook.com
+ (2603:10b6:610:11a:cafe::99) by CH0PR03CA0338.outlook.office365.com
+ (2603:10b6:610:11a::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.19 via Frontend Transport; Tue,
+ 1 Jul 2025 04:09:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CH1PEPF0000A346.mail.protection.outlook.com (10.167.244.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8901.15 via Frontend Transport; Tue, 1 Jul 2025 04:09:25 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Jun
+ 2025 23:09:23 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Mon, 30 Jun 2025 23:09:22 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <peng.fan@nxp.com>, <jh80.chung@samsung.com>, <michal.simek@amd.com>,
+ <git@amd.com>
+Subject: [PATCH] mmc: zynq_sdhci: Add emmc hardware reset
+Date: Tue, 1 Jul 2025 09:39:15 +0530
+Message-ID: <20250701040915.530912-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000A346:EE_|IA1PR12MB6089:EE_
+X-MS-Office365-Filtering-Correlation-Id: b667b9ad-1769-48e3-5393-08ddb8551150
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ExHj32sQnlWYU5h1MW7lUMJXP1up7nrJQOWex3b6w46smOwkCKnSQ+2FdmuE?=
+ =?us-ascii?Q?ipGLeQOBN7Zi2PsDUDScfl7K9GtmI5eRBgpRnJg3N5EEz4wuYk2872qGbKkT?=
+ =?us-ascii?Q?LZN01VPny0zp99bYtbKxcF+FxPqxcOI8YLhm6r0RPRdiw2tgYaSj9Zmgd7au?=
+ =?us-ascii?Q?1IpwU6nX0gZGBWmsUoEZn+nQ1+NpWWnaXTeu3YkLt2itttYvWLSQMeeosT3f?=
+ =?us-ascii?Q?fUMFii3OODGbSrDoZtnuyooApLU7gxc5KtoaHKlO1suefOEbZJpyjdHsBCVb?=
+ =?us-ascii?Q?4hBRs7uUCH8HobZFRXhDLQNR2g/HDUI6FKhPR6FnsnV0rrDqbieXDlZ3wf49?=
+ =?us-ascii?Q?G5+jG+m+DzkQVmVN0JqLbl1hr9yi7zqPWetGn3vbWyYAeAg+0x6Gt0pS/XBo?=
+ =?us-ascii?Q?lTmVyFcEzSm9qZYRTKV4J9ZGiiIgDbO2vPZCc1kwQfHletAzQVkfcBmjw6Gv?=
+ =?us-ascii?Q?UTBD5lq4Rys20tyQ2D4xmjntlYHE3jqDQH5nwBTh6caQ5yBI/QX0yKplf7zI?=
+ =?us-ascii?Q?/WtDxYflx5+fqofBMTHRuKnyaQn+lgE35HoDHzd6+tFH0z8ogtl6KB+KDfVJ?=
+ =?us-ascii?Q?j9CaQtAYGRkjIbBUB+JWvgNYdllhJ/Ekk2l2PcJGupS9MtTgnhXJt5rHhX7c?=
+ =?us-ascii?Q?lqcCnN75Jf+iTSk/09zodF1Hk5QynS8gSj97ZZv2izy1S0fU8T55y9kkysta?=
+ =?us-ascii?Q?a4ZctA5BBKnh3zdLXsIM3OpaU2fGNUQGTi9ESmHn4Uxsg8s1g72SbD8VKkQv?=
+ =?us-ascii?Q?DYQd+1IkW/q9GHE7Zp0WjGRn6f4VDJiDuKYNtAMK4kgyt0p3xUSAqMF4aRRi?=
+ =?us-ascii?Q?iiKFcYTbVRR9Q5HQuC43R86gCgcemZiBLYWxawdKnhJRueqQBIKhgt1PVhn8?=
+ =?us-ascii?Q?WSapnkPH8+3dNCugbn5RFDQmnZILurIEDE1Bq8D6xw7KirlxAyJB3o+FB9/R?=
+ =?us-ascii?Q?ZY3Rzgi6fwBSf/DVA0ILulcT9rog0G6SpRWpKQ9ciOPCxrWnhVy0fFBoc2bI?=
+ =?us-ascii?Q?eUo6Lr5CGmZ9XsFliMTPq2UbJhE97Z8ooKQrswFSpZhpkigx5IcXWP37SCYT?=
+ =?us-ascii?Q?ETwc+JYwRprRrE+HefL7lXWXvKd9Va72siv+xyKYqXd3nBdKGuJl1Hre3nAW?=
+ =?us-ascii?Q?Lbb6Ja6z59m0Ujo+C+/DB+FoKYoixfIJ8s9J46lxUGXXDihEUZR/wy64Cqhu?=
+ =?us-ascii?Q?8pEU5j0oMJmFpBnvYB6O0qSL7SAATfn+OmcsxYSWzP6RthfSiX8PANGcbJ9v?=
+ =?us-ascii?Q?haL05CuPLZAuXtyoQ2Rm9z7Xlsi4ylpA91RKCu2mUMM8laDqE1Qnw3OpCVS9?=
+ =?us-ascii?Q?XXaZvHuTIiNuEjhuLu8HKrT4p4F8rrzrN0xWn9sBOx963XB4epsWI7vzF8yr?=
+ =?us-ascii?Q?nP+qDFSo+WmwB9txk3E/DcK6UUXIN+1I7tF3N9JjotRKeEuTEy3WVNp3kUDG?=
+ =?us-ascii?Q?Ok6E6z17Qw55RKSlhRgr7eb5GVPLGJv+HF0puxpXDI2Y+KmGXaFG/Pu8OZ6X?=
+ =?us-ascii?Q?C2LYKZsny2uZLo538ltW9T260p6WhjCwrSbs?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2025 04:09:25.8127 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b667b9ad-1769-48e3-5393-08ddb8551150
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000A346.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6089
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,99 +147,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Add support for emmc hardware reset for the emmc card, trigger this
+hardware reset at the end of arasan_sdhci_probe() function.
 
-Add selftest to check the installed configuration table that has
-the correct GUID.
-
-Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
-V7: add selftest for EFI_DEBUG_SUPPORT
----
- lib/efi_selftest/Makefile                     |  2 +
- lib/efi_selftest/efi_selftest_debug_support.c | 58 +++++++++++++++++++
- 2 files changed, 60 insertions(+)
- create mode 100644 lib/efi_selftest/efi_selftest_debug_support.c
+ drivers/mmc/zynq_sdhci.c | 25 ++++++++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
 
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index d78bf7d6191..842433f68aa 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -78,6 +78,8 @@ endif
+diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+index 4d1f92931a3..f99d464a467 100644
+--- a/drivers/mmc/zynq_sdhci.c
++++ b/drivers/mmc/zynq_sdhci.c
+@@ -85,6 +85,8 @@
+ #define VERSAL_NET_EMMC_ICLK_PHASE_DDR52_DLL		146
+ #define VERSAL_NET_PHY_CTRL_STRB90_STRB180_VAL		0X77
  
- obj-$(CONFIG_EFI_ESRT) += efi_selftest_esrt.o
++#define SDHCI_HW_RST_EN			BIT(4)
++
+ struct arasan_sdhci_clk_data {
+ 	int clk_phase_in[MMC_TIMING_MMC_HS400 + 1];
+ 	int clk_phase_out[MMC_TIMING_MMC_HS400 + 1];
+@@ -1101,6 +1103,21 @@ static int sdhci_zynqmp_set_dynamic_config(struct arasan_sdhci_priv *priv,
+ }
+ #endif
  
-+obj-$(CONFIG_EFI_DEBUG_SUPPORT) += efi_selftest_debug_support.o
-+
- targets += \
- efi_miniapp_file_image_exception.h \
- efi_miniapp_file_image_exit.h \
-diff --git a/lib/efi_selftest/efi_selftest_debug_support.c b/lib/efi_selftest/efi_selftest_debug_support.c
-new file mode 100644
-index 00000000000..9cfa44c05a2
---- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_debug_support.c
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * efi_selftest_debug_support
-+ *
-+ * Copyright (c) 2025 Ying-Chun Liu, Linaro Ltd. <paul.liu@linaro.org>
-+ *
-+ * Test the EFI_DEBUG_SUPPORT
-+ */
-+
-+#include <efi_loader.h>
-+#include <efi_selftest.h>
-+
-+static const struct efi_system_table *local_systable;
-+
-+/**
-+ * efi_st_debug_support_setup() - setup test
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systable:	system table
-+ * Return:	status code
-+ */
-+static int efi_st_debug_support_setup(const efi_handle_t img_handle,
-+				      const struct efi_system_table *systable)
++static void sdhci_arasan_hw_reset(struct sdhci_host *host)
 +{
-+	local_systable = systable;
++	u8 reg;
 +
-+	return EFI_ST_SUCCESS;
++	reg = sdhci_readb(host, SDHCI_POWER_CONTROL);
++	reg |= SDHCI_HW_RST_EN;
++	sdhci_writeb(host, reg, SDHCI_POWER_CONTROL);
++	/* As per eMMC spec, minimum 1us is required but give it 2us for good measure */
++	udelay(2);
++	reg &= ~SDHCI_HW_RST_EN;
++	sdhci_writeb(host, reg, SDHCI_POWER_CONTROL);
++	/* As per eMMC spec, minimum 200us is required but give it 300us for good measure */
++	udelay(300);
 +}
 +
-+/**
-+ * efi_st_debug_support_execute() - execute test
-+ *
-+ * Test EFI_DEBUG_SUPPORT tables.
-+ *
-+ * Return:	status code
-+ */
-+static int efi_st_debug_support_execute(void)
-+{
-+	struct efi_debug_image_info_table_header *efi_st_debug_info_table_header = NULL;
-+	efi_guid_t efi_debug_image_info_table_guid = EFI_DEBUG_IMAGE_INFO_TABLE_GUID;
+ static int arasan_sdhci_probe(struct udevice *dev)
+ {
+ 	struct arasan_sdhci_plat *plat = dev_get_plat(dev);
+@@ -1221,7 +1238,13 @@ static int arasan_sdhci_probe(struct udevice *dev)
+ 		}
+ 	}
+ 
+-	return sdhci_probe(dev);
++	ret = sdhci_probe(dev);
++	if (ret)
++		return ret;
 +
-+	/* find EFI_DEBUG_IMAGE_INFO_TABLE */
-+	for (int idx = 0; idx < local_systable->nr_tables; idx++)
-+		if (!guidcmp(&efi_debug_image_info_table_guid, &local_systable->tables[idx].guid))
-+			efi_st_debug_info_table_header = local_systable->tables[idx].table;
++	sdhci_arasan_hw_reset(host);
 +
-+	if (!efi_st_debug_info_table_header)
-+		return EFI_ST_FAILURE;
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+EFI_UNIT_TEST(debug_support) = {
-+	.name = "debug_support",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.execute = efi_st_debug_support_execute,
-+	.setup = efi_st_debug_support_setup,
-+};
++	return 0;
+ }
+ 
+ static int arasan_sdhci_of_to_plat(struct udevice *dev)
 -- 
-2.39.5
+2.34.1
 
