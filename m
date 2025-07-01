@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D58D7C83030
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 01:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAE8C8302F
+	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 01:46:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 675A081FEE;
-	Tue,  1 Jul 2025 03:45:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C57EB81FEE;
+	Tue,  1 Jul 2025 03:46:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KhsGEvl7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="je/TLRPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3842581FFC; Tue,  1 Jul 2025 03:45:42 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id C23FA81FFC; Tue,  1 Jul 2025 03:46:47 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D10A8006D
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 03:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC5A78006D
+ for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 03:46:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-553b60de463so3204522e87.3
- for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:45:31 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5551a770828so1938869e87.1
+ for <u-boot@lists.denx.de>; Mon, 30 Jun 2025 18:46:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751334331; x=1751939131; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1751334403; x=1751939203; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UQTUQNPZlz5xD/IO92qKBUQkWiRWy0Eq/TDbTvjIq2I=;
- b=KhsGEvl7lz3IXBhIhF67bkXjx9WzWnxf1n9QNBIam8sYZ1n4EYmbOXRt1oWAug1DzX
- KRbOQGaR/Sf1xU9Emj/TyqTV8yCMVo8KEGqx2iWJEJDgjxj2int10jvbCK15AIKEsAlu
- 7i2f2Yi/QcDLpLRtc/mJxzOlhyKvoxUnHto488DYcPeYrJrA098QvRe8ErA6eo+agBzf
- Z8hZmXgmXXOhjs6r6cUZyEeUIZXLqRyacSATaNsEWFZiTDxsgmgFwwkXW58PD5KraqPI
- w8nLZYwEEJQrQ8I2+JGDA94npNl9I8jUtUy/I8cPgc+9ZsgxBQXUM6pfTdF0nZS0Wc5c
- 91yg==
+ bh=pc7xZjuE/YaJp1tFjaaf17H74tW/qkC1mfL4LqsZ06A=;
+ b=je/TLRPmMaAlIOYwhXJ3x7alpmcwkppRBFkSo9m++BFdyZAR0YmLis0iK1QDM4ia/G
+ l6P6LZQppOznj5xTY5ewPPNWVh9T98KtqPKuH8I8SfCfEHsuweVER+9L5ExgWDJJ43Nb
+ /I64GEdoWA/s9grolYzWcrKuDmdFRz24EmZDEE9zYsiLpVHXJ9XQzzRone1hcfiP7ccD
+ F50LNRURN+wJRgKPDWHg7fKFTSkRdbsjCAbIJJutCgOQksVF1ljY8nvTzwMoaaVnczeC
+ K4QLuKeepAiSEjetgTvWnxxh66M7wK4uwjpBKMXH6YSZ9HnV8o5FOdDQWjixnw/xuQrz
+ N/Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751334331; x=1751939131;
+ d=1e100.net; s=20230601; t=1751334403; x=1751939203;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UQTUQNPZlz5xD/IO92qKBUQkWiRWy0Eq/TDbTvjIq2I=;
- b=dF9DWILL7VFh0obq4WBuEKK+cVOK90kJ2WD+aj5IbTKpcj1ewZPr64GXFgijUeaDLk
- giKwhPbpXS9E2vsHzbXi2R02qdxBTFHo1bjrn33jucjI7tOdMqfmy1hpDj3qTj2EZlyY
- KFkbL6zbt+ldtXEyGA9YiQqfSBpivp8vDIH7h7cn02wyE8rDsbYpOO60OcelWaXv2ewZ
- DNau/GkymVbs84FTDsn7dY1Snv+IOuLDtfPE342EzB72D5SzU8J1Q39rungDb4I05zab
- 1a64TrU9bS/ENv0owtBbvfG4OAF5LASQmRFCKW+2TwD7q7mkzUO6BJPmCUIKUKUrHSeD
- csww==
+ bh=pc7xZjuE/YaJp1tFjaaf17H74tW/qkC1mfL4LqsZ06A=;
+ b=wIou/QzJ6dxx46FQEFYDKcraiYBY/3GZu8YWtM1KFY1fCYKusLpv48ornA+VJqY1A2
+ SCHebzuaUSqZz0KnZ+pVB0O4ntANjgOakv9WPGAGlnZhbMyklPdNrwDdd9b2hhjDsJHM
+ 6ljE3OOWWB3IVND7ZlEAY7A/dzx4BYFtlfLpCIxrRZHm6LKNqEKn+8X3CZNwWoOI1+ei
+ ZDpdb6WcrHHB2oiE1ZytxXt8Nlj4YTQ3PMlXvBg6FwQCjxXql0VGdurN3cNdrdSOx37i
+ M6Wp+Iea704f+ZI83epu+PM+Ath92vA6BldixqzfImpt50M5XolmDgTMcmBjdWtD9bZy
+ uiqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6/kUTOq5HCVYHiRMvdYgtXG4JTMFxAuUNbUQFN3mGofwquGDah61QyAYic7HYJ/GFCzk/5vs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwD306FfcOKA5fF4t2t4mO3TI3LRH7J3FAUBQ4geeyLqAxunXBp
- ujAkj51SOprZZNCwuEla5uCxiecQKmwcdMhlowGPvP74BuNUoXlBecTDvz3YNfEZFQ1bkONNGNE
- 9mV5pts6H+K8Lq5ybCMslu9AXZ23beR4=
-X-Gm-Gg: ASbGncsvmOU1XMGEJXxTuE40ippt2JWyjkKe2cpZnhfLr72VEiUsc14ySIhwc/xaJt3
- eUN0NUnHqN+xQJZu8MHhkJweG63/ncm87xJBUI/PV5jNWJ3RtIyyFkvW58zlc0xfg7F/uWA2djU
- 1Wtwp+EH8OE0GRDI7uBJ/Si+wWzKttwRSasiKepuvpDNiGBMYpZ5Idh2VtmshqXecdcLsWWAC9K
- LQ=
-X-Google-Smtp-Source: AGHT+IFNOeRg8RKeDC1OnoQtoMbYJbt/h0rss2Y6fk9VEYMqjSETFjqY6Esj3GzyMu8bwqOQBzCsi07jmWAxKj+/JJo=
-X-Received: by 2002:a05:6512:e8b:b0:553:3486:1d9b with SMTP id
- 2adb3069b0e04-5550b8d2b0fmr5143254e87.30.1751334330947; Mon, 30 Jun 2025
- 18:45:30 -0700 (PDT)
+ AJvYcCVo4nTTwnWMRnwpTCVeOmxwlcadOJ3v3KY24F15OK4O+voD0+SLbDxgKsZzJTxS0Saz309zhsc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCoac9x1mMvd86TCx2z3EVVilXe+pfzenslGFM7luF6FxRa8CQ
+ WPlRF6W2q0jrlm4iik9U1gtBKTTG7eqXDi6fznhw+BOGA4T67s4eRSxJuwge/UaKkjgWPYdzZbg
+ jrD2Tfi9i180ipw4zyEl6qgT11yEBMPI=
+X-Gm-Gg: ASbGnctolqwq2ARb2blMnNHWsA0/QAMbiO88VTG9Z1MpuKe2O3lDXwM8doIPk6GZdJ2
+ jvfctwf+4VRZDwt6tECgFP/M7CaPlF06fFetZ6MXOpFevxgN5KJiPPr4yfJKqf1WbB/g7RbE/mx
+ b2/cepRntHMuLjrZ2ZTTBAKpx4ZFGkZk3qr1h1Vhzrthq40Y6og1ig7u09naotb9B6mN5eti8GX
+ CI=
+X-Google-Smtp-Source: AGHT+IH+rYLvWSa37lKw1gDmH4HWsbEs7LjrGzQPowgoXCEg85RBtGL7KJtAnSbm7gwvduCo0bobsobYHfAJOEUIcBQ=
+X-Received: by 2002:a05:6512:224b:b0:553:2357:288c with SMTP id
+ 2adb3069b0e04-5550b8802b9mr5508887e87.17.1751334403100; Mon, 30 Jun 2025
+ 18:46:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250627054943.3140496-1-lukma@denx.de>
-In-Reply-To: <20250627054943.3140496-1-lukma@denx.de>
+References: <CAOMZO5BZR9e2EFKJho1QFM4B96L9oCKf=3+ZohfYujh7iFzUsg@mail.gmail.com>
+ <20250628221944.2412860-1-giulio.benetti@benettiengineering.com>
+In-Reply-To: <20250628221944.2412860-1-giulio.benetti@benettiengineering.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 30 Jun 2025 22:45:19 -0300
-X-Gm-Features: Ac12FXx8CZlnqvm1g1Jt_7KIFhhI0-BqXf9kJ05XyaMfd4bxogeKQ7Yb1kJPmdI
-Message-ID: <CAOMZO5Da48sAEX=wLXEhYsch8pZO0DxLwcW+Ps_MaDgBtaA+_g@mail.gmail.com>
-Subject: Re: [PATCH] arm: pinctrl: Define .mux_mask field for NXP's SoC
-To: Lukasz Majewski <lukma@denx.de>
+Date: Mon, 30 Jun 2025 22:46:31 -0300
+X-Gm-Features: Ac12FXzBjnoIjLuVstoTwonvAutRXWowseZtYKToFk3sjAZFZLtAp7132rlIxqc
+Message-ID: <CAOMZO5Cf+pbKo+zAO0FfkwoAi+aHYYHi_hfCiXF8qdq7jx=KWg@mail.gmail.com>
+Subject: Re: [PATCH v2] arch/arm/include/asm/arch-imxrt/gpio.h: imxrt gpio use
+ common gpio.h
+To: Giulio Benetti <giulio.benetti@benettiengineering.com>
 Cc: Stefano Babic <sbabic@nabladev.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, 
- Gary Bisson <bisson.gary@gmail.com>, Jonathan Currier <dullfire@yahoo.com>,
- Marek Vasut <marex@denx.de>, 
- Tim Harvey <tharvey@gateworks.com>, Jesse Taube <mr.bossman075@gmail.com>,
- u-boot@lists.denx.de
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,28 +97,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jun 27, 2025 at 2:50=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wro=
-te:
+On Sat, Jun 28, 2025 at 7:19=E2=80=AFPM Giulio Benetti
+<giulio.benetti@benettiengineering.com> wrote:
 >
-> The commit e8a9521e649f
-> ("vf500/vf610: synchronise device trees with linux")
-> has synchronized U-Boot's DTS with v5.19 Linux kernel.
-> It turned out that in Linux's upstream iomuxc node description the
-> 'fsl,mux_mask' was missing, so the U-Boot's pinctrl driver for NXP's
-> Vybrid SoC was not working properly.
+> The current file defines a struct gpio_regs identical to the one in
+> <asm/mach-imx/gpio.h>. To eliminate code duplication and align with
+> the approach used for i.MX8M, include the common header instead of
+> redefining the struct.
 >
-> As by default the mux mask was set to 0, for example the vf610 based
-> boards (like BK4) were bricked, due to misconfiguration of gpio at
-> early boot stage.
->
-> The fix for all NXP eligible boards is to define .mux_mask field for
-> soc specific *pinctrl_soc_info structure and use it directly in pinctrl
-> MMIO driver, without the need to read the "fsl,mux_mask" property from
-> device tree.
->
-> This change brings the NXP's pinctrl driver in U-Boot closer to Linux
-> upstream one.
->
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+> Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
 
 Applied to u-boot-imx/next, thanks.
