@@ -4,144 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FBD4C83F04
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 14:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C100DC83F04
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F4B380E9A;
-	Wed,  2 Jul 2025 16:48:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id ECF7582A76;
+	Wed,  2 Jul 2025 17:25:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="k+xXwovR";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86D6081FEE; Wed,  2 Jul 2025 16:47:59 +0200 (CEST)
-Received: from TYDPR03CU002.outbound.protection.outlook.com
- (mail-japaneastazolkn190130003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d405::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FDC2800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 16:47:57 +0200 (CEST)
+ id E3EB982ADA; Wed,  2 Jul 2025 17:25:43 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 42923800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:25:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=forbidden405@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QHggLmSP5RptLHpOIRON3JNvpgjP1rXvYJB4FdeZefcsDvfNN/eYKAF+d++2V0Hs0sAdUB6NHGsDUu8YfcBshfT2G2QWuMKY0BKLl9mZEQRIHbhKMB2LXQiuDt0QWx9+nVPV5rYHguA98nhBfM60IdTu8/wA97OGzYI0kOdSfnFBeJJ7eRRQXMhElE4snoGBJJAcOISpThoQwd7x52pjVLkn9k7VHfWGMvx+/OTuTJ5PM0GgCf5OOdSB7yfrRJ0W/OJCfUoQ9hFLe3zfSb74is3/zt4TmS9tj1Q8FHs+yr6zPYYcf4AWwUwHWNtclGH4owNeYZ//KhA/GEbcWiXxGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mIRLTEA+FnT/v+Nwewvn9PzMYsBA9Fx2anuCF4mKsyw=;
- b=mBk7pqt23xaA0p5drm/RHGyVkkAp1bpQ+k2YawjbgCphtCf+m9qpjvmDMy7/Df6rFGG/95At7gjTkI49/f8VkxajwWGsRATab2kQWw5PRpm4ueh16YSKBBdupKP18K159f5HBTlEzJS9Y5tyjwQJWSnbmoS1L+XjjSSLnYPu7Cq+UQoPCMMY1gEikHU07QVmD5PStmmhZzFhF4USS01w5WHzL6q5jsr/jlfNjatI0/OZrtaKwpfr4VLwXSwlJ9ALTaoP0Btd2VfZieD/4I5lRXdi4iO3B1Wf/GYD6VN7X/a34AqJBldwBZZvROm1eFsPqZ4axhPez3LrUj321FAFbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mIRLTEA+FnT/v+Nwewvn9PzMYsBA9Fx2anuCF4mKsyw=;
- b=k+xXwovRANqcgkpccspROvf6excOZTefg5YX9W0D573Jp4DoyuM/zcrqeZk/orq+vihcLb+avaDwZkD4ZDOZmbw9crig0NKI8x7kaWj7omIynX8ov+We/Xoyzipta9kn9omeDY6rskX2UKB4ABywullwizW0NwH4Av3y68tnJ7LNoF/T0o6yZN1VbLNjkZgbhn6DnbE5vHnLCpj0Ote39Aj4HmKHKZ6wJeabTJMd45ZqR5Ew+hsvEkJzYe5lL+yYhZxjKeuY/RITKuNGApqEhq1f3bqe76AGNbQYVzz9JLu471H38j1hvrrXSPabbs/6MNCxJj3mhrobQnzmhc8cVQ==
-Received: from SEYPR02MB5557.apcprd02.prod.outlook.com (2603:1096:101:52::6)
- by SI2PR02MB5489.apcprd02.prod.outlook.com (2603:1096:4:1a0::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.32; Wed, 2 Jul
- 2025 14:47:52 +0000
-Received: from SEYPR02MB5557.apcprd02.prod.outlook.com
- ([fe80::cb39:3489:a58d:107f]) by SEYPR02MB5557.apcprd02.prod.outlook.com
- ([fe80::cb39:3489:a58d:107f%4]) with mapi id 15.20.8901.018; Wed, 2 Jul 2025
- 14:47:51 +0000
-Message-ID: <SEYPR02MB5557A4D1B6B8249763D646439640A@SEYPR02MB5557.apcprd02.prod.outlook.com>
-Date: Wed, 2 Jul 2025 22:47:47 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 0/3] clk: support arbitrary clk_register() sequence
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-References: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
-Content-Language: en-US
-From: Yang Xiwen <forbidden405@outlook.com>
-In-Reply-To: <20250621-clk-reparent-v1-0-48a7f2f31c59@outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR01CA0013.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::9) To SEYPR02MB5557.apcprd02.prod.outlook.com
- (2603:1096:101:52::6)
-X-Microsoft-Original-Message-ID: <dc4a7b0c-b4d6-48ad-bf2f-6df7e156a626@outlook.com>
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C0F9D1424;
+ Wed,  2 Jul 2025 08:25:25 -0700 (PDT)
+Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.38.90])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7FB2D3F6A8;
+ Wed,  2 Jul 2025 08:25:37 -0700 (PDT)
+From: abdellatif.elkhlifi@arm.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, abdellatif.elkhlifi@arm.com,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Adam Johnston <Adam.Johnston@arm.com>
+Subject: [PATCH 00/25] Introduce Firmware Update Support for Arm PSA
+Date: Wed,  2 Jul 2025 16:25:03 +0100
+Message-Id: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEYPR02MB5557:EE_|SI2PR02MB5489:EE_
-X-MS-Office365-Filtering-Correlation-Id: 286ea6ab-5623-47cc-925a-08ddb9776aeb
-X-MS-Exchange-SLBlob-MailProps: 9IecXKUgicDXqI5EYWVMcktdevbVaYD2hWi4hlMqiiZn8irFvVSZzr8ogbmWB7m82N7FBi9RKjlfyh71dLjcVolUPPhUR3WtZROYIvVpoIJQRG/iiEOXIINtJLo5YejFbeAhzWFFSiWe2uhPTOeyJeBDbuL4Pw5RFHOvP5frITAdfdZEnNIsDOZ/LsImkJU3ryUXy0/4GLWN9O8xUBkl2o/qHqQN50qSIXyzm362wsIo6ZvLu/4tlkH6lSk0CvfBy8FCBb8Z827bmA7wb+/0fnhnI7F7kGbGuoHX8nofAggcZ5xUgULBkOQ0Wejyfx+Ys6o0OTHbJRgc3h7qEts/ma0I+1tVyat1Lxj1sPh0RPbvGlpxiI/lGWXsNei+BVymZOfX4z5dnfhJR2F7Vp7+dlZWeRF3HN0qSy02zQq/bfiI90TDeZuwLH2lHkhCnovvatKItHqz8AOVzqdGRBDHOYcune1Hl7893N/EbzrLp+ZJT/OchOtjccR+CB6aZcCbhQmCwAfoW1va/SnUkdqo/gQZhVnukCCBo9LFSb6wCrqdt7OMetYuJlK72DUnJ66YTOZVYbDTIvaBiPCR/A0XpwxHkVBQ1L7Fsts2zMceruPlx25FWhLM8Y5TgS9Ix2C/UL6wBxOCHA47BOm2sRzVVc6/y+4eQ2hC+wNOysBaYGjwb3MdBhC/h4o1sJu28K6Voobr0+MNrFF4h40TrsfdeLfM+t6X7ZJ9t3Cap5otYBxF3dLtV13EoQ==
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|6090799003|8060799009|19110799006|15080799009|461199028|5072599009|440099028|3412199025|52005399003|40105399003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WnZPamNad2ROcVA5c3RrTGVrNWVnWGFGaVBBME5mSmw3RmpGU0pPMEJwQXhM?=
- =?utf-8?B?ZTNvTVJGN0NOcnlWZkc0VHZKRnhXd0NJcldNcm1MVkNkeWZrTFlINU90OFRL?=
- =?utf-8?B?QmUzTnlTd1RVR3hFM0xJNjl4TCswYTRwRmVxQmFIL0QrZURUdTFRMlNTaHE5?=
- =?utf-8?B?aXJEdE1TUWZjM3RuSlpNTmpSc1h5YjM5V1ZRdTBrTVJIdlJ0ditsZ1dyVlZZ?=
- =?utf-8?B?cG14YmFRVHdYTFZyN2hPdW5vQ0cvb0VMcWhKSCsxUjZvd3RJeTMxU2VhR3dk?=
- =?utf-8?B?RktJOWQxMFgrdFo5NFVrQXVhZkNqZTFHSDBaQlk0VkZvcUFqV0JXY254bkZq?=
- =?utf-8?B?UG5CbjNvY0g5UXZJRWFVQXFLTVQxcCtHUzk4UlUrUytFd1hlYk5hZ2JrYWFa?=
- =?utf-8?B?aERwRkI1TUNwRmxBU0ZHVml3c3hneG1vMmdUL3pDNzh0aWVrOXlUY0huamVp?=
- =?utf-8?B?OEZyRHM3R3B3SVJ5NnlTeTVxaDRucGxqR1lhZ1QvSmdSWXQyZU5Cakhod1Iy?=
- =?utf-8?B?VUQ5b1Q4bXllNFRaNUdYdkhqQUI2d2FxWVMzcTBTZ2FOajJqVGtGclVESGQz?=
- =?utf-8?B?VXYrRDdMaWVxM01OaExKdW90WHJwVzhCT28rVmR2UWN4NXlWeEJIYjZ5c1l0?=
- =?utf-8?B?QWNUVDFveW50Q0FudXBpK3V6ek03WTFnSzRTbHNoNXllRDNMUmVsN3JwbWc3?=
- =?utf-8?B?eHp4YjNhRTBxTkcxdWlVVDhBRStMby9lVmJCU1hIejFMbk1WejE1YUs5TEtm?=
- =?utf-8?B?MjI5czJzSlMrWU9SaTUxWGV6bDR5bkd2K3UwUVdUcHZGMDRFMnBXR241SWJS?=
- =?utf-8?B?OWE4aXl1ZTNpSUM2ekpvMEVQN0l5RnlzaTc2Z29GS3FCSmVEdWQ3VTBieFBp?=
- =?utf-8?B?SFd5dW1uZ1QrcVBKa2xOZjZHZHoyMDFuTjlkdGdOODlSZlZ2TmthNzYrWUpU?=
- =?utf-8?B?L05LTElodVltS01pcEtYNXc5ZEhNRjNBc09wMEJEcEJHL3UxNi8yL1pPaHZ6?=
- =?utf-8?B?aEpTMDNJd3MwRUxiYmhweEpJZWNpMG93TUU5Q2N1OWpWM014N0k5dS9HTnJj?=
- =?utf-8?B?OUN5aTNWY1pDamhsd3dTcU5HcVZPRzNDVzlHSjRNWThzMmFxL2FSdk4wV3li?=
- =?utf-8?B?djhVakZ3L1lqNnFzeno0NUhwWGdpYy90c01FL1dNbytweWNhR2UxcEZUa0ZG?=
- =?utf-8?B?UkcwY2cwdEI2N1ljRXR1MlpJaUFiTzR1UXFGcVZ0VDRXQjRJRTNyakdzU3Az?=
- =?utf-8?B?QlVzNWxuMXcrbGVNWmxpN1daTEw2QjkyejVrZWVQMkw0ZHUzZWhUTGNTc0NH?=
- =?utf-8?B?bUNxaFU3WDUrNmk0QW9MZVptM2NKZjhwdmsvV1FoM29nSDQwSVRrSkpKdE5j?=
- =?utf-8?B?dHkvbmlxTUhJQ3NPdDlVbmtSTk1KcVVwUFdjSVNpWVhtWDcySnpRWVhjeXBR?=
- =?utf-8?B?REZxbWFBOWc1anlRVEVaNDhpR2FPM3VzaU9tVVN1SDBSa09YQy8xRzQ2QjBM?=
- =?utf-8?B?dXlUenBqN2dqUU4yKzZVWXhBWTJsNnAyTkttYmVMb2ZCb1Nwc1JUTExCZWtW?=
- =?utf-8?Q?NSxkECOWp/o+9lbaJ0TPcRm7U=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eFVPeUJjRkpYQlo3T0diWFM2YzJkdXQ5OHFtR0NyOHNWVzhsQUM0cjFXL3Vx?=
- =?utf-8?B?UXhmRzNUZmR1SHlicnozcS9JYWxLSTYyNnNncHpsTzFiVUJ1LzZJN3BQUWdE?=
- =?utf-8?B?NDU2Y215K2grMUJSTHlZbVlzWXFyQWVyZGxJVU5SQWpOQmNFNTJWeGUybDNX?=
- =?utf-8?B?c0pnZEVJTW1PdVg3UDR3QmNHdFNMNWVCMU1pY1B0R29HZjR6K3RvRkJ4TUJo?=
- =?utf-8?B?WTBXOGRkN1hJYVdDU3lsUzczbDc2VjlsUjNKNyt2aElaaE5EQzlMMElub3Bo?=
- =?utf-8?B?a1cxcEJ4R09HbmRocE90Qk4rbitCVnkxbjZiVWd2Sis5SDVSRWthNVFZSjBJ?=
- =?utf-8?B?M0MxK0hkd3FhR0k1M0R4TElUMEFuNnUrZG55ZnVLK0I3SDBHQTdGb21TeGgy?=
- =?utf-8?B?SExhR0gyYkdvaUVuQXM3QWJZMUtlZTBWNFZQTmhPWGZOODh5MUJLb2Fsb2lp?=
- =?utf-8?B?NTJQdmZJTnMrMDFYZ2hCeTVIMzJTSDVuUHlscU81bFlkSWZ5bzFMQTVtTGJl?=
- =?utf-8?B?NXhmOWdKaG4wd2ZVem1IZGcxSis4S2J6aDJCN3hIY2YvREJ2L2dVTGZ5WXY1?=
- =?utf-8?B?c2JscXRYV0pBR2ZCU25BRlFhZldCV25KZjJYaUI2cWZncTF4eHJ5RGoybkpU?=
- =?utf-8?B?T3RDdFhIU0REblRWdCtxNXpUMlhuLzdaRUJSWkFWMFFoYVZ5ZTljNGFkdmZV?=
- =?utf-8?B?S0ZqZWltM1pETXI4b1g2RXlQTWxzQWtKNVYxSWlOYnJzeXV2cnlLSURPNDZC?=
- =?utf-8?B?K1ZBdzdFaU5aNjh0QWV4R3BTNmk0OGRQUGZLaGZHbHUycUJXdEVHMGdYVnN5?=
- =?utf-8?B?S043czVWSnFRaDd3ajJpdnY1QmZmWUNOUElqTkZ2NFBBRWdtTHFlZVA2bVJV?=
- =?utf-8?B?VnRVVmpzcEFtQ0cyVGJEZmtCdThNWndydmlHWDgyOGdZNVYzYWIvclVkUUhD?=
- =?utf-8?B?YStHUU9Sa2FyOHBJbTVwOVd4TC9OeEpDdDlSOTBiUkJDUXprd0xHM05uN2NG?=
- =?utf-8?B?MlFHV0RlQ2JGZkdweDU0aUNiQm5nNll1d1pJeXlSRjliWUJudHdsSzN5ekNC?=
- =?utf-8?B?enh2NU96YllkdHhITkRFWXVSVDRCTlNjQnlMRkIwSDNGL0NGZW9mWHE3TmZK?=
- =?utf-8?B?d0p2MjBUYjNKeHV1dnFZb2x6OHRMWk1Yb29aSGZPL0hITUV6dUZHQVVNMW4v?=
- =?utf-8?B?UmZBY0NwZS9MV2NJVlZhN2pJUTgxMlRWZHR2ZEluL05DNnR1NnB0SGU2Tllh?=
- =?utf-8?B?TDZaYWcwL084cmtOV2VZNjRnRXFjaDlTZEZSaUNJTW90MW5DZHdZYnlTVDdx?=
- =?utf-8?B?UXAzN2o5WVZjVmhITWJVeWFWU05HQ2JYM0RVRW43cVE3dytwQVl4WnZ5Q0cx?=
- =?utf-8?B?b1NlZlROb1FxdUhVT3pEVlkvOXFOQWtOdGNYQlQ0T3BaWk9pemg5b2FHYStL?=
- =?utf-8?B?MHlVOElxZy9Pc3NrNEdVaVlQd3BjNXYzNTI2Y044NnlPMXdwZVVNNlArYitL?=
- =?utf-8?B?TjhkNmdkbEV6cUhLU1lVM3o0dlp3R3JWb3hXUzdFVzJsSWlUNnE1aVB1ZC9k?=
- =?utf-8?B?VU1wL3pnVEJWS2g5U3N5WDZDT2ZtWU5QbzVVUk1lRGxET3ZQNjZGYTlSei9s?=
- =?utf-8?B?cTVlKzl3UGJId1kxNmVheGdRTzZMcVM3SW83bjJkeWRBeUVUcUtRUXJNRkJq?=
- =?utf-8?B?RkZyMjJ2ZUtIcllpVVhwSGtnWmRIaFd4MDR5N21TRjExS3NwbXo4Q0RTSmRI?=
- =?utf-8?Q?el17m2yj+zMXuc+M8hT+/YIfIq4sev1LoKHSGx6?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 286ea6ab-5623-47cc-925a-08ddb9776aeb
-X-MS-Exchange-CrossTenant-AuthSource: SEYPR02MB5557.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2025 14:47:51.0324 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR02MB5489
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,47 +63,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/21/2025 6:54 PM, Yang Xiwen via B4 Relay wrote:
-> Currently U-Boot clk framework mandates the sequence of registering clks
-> to begin from root, and then its children. This is an addtional
-> requirement that doesn't exist in Linux kernel, which makes clk driver
-> porting more difficult.
->
-> Let's handle this entirely in clk framework and give driver the freedom
-> to register clocks in any order.
->
-> This is done by assigning the parent "lazily". It will cache the parent
-> name in the core clk struct and try to refresh it when clk consumers
-> call clk_get_parent(). It's transparent to clk consumers as long as they
-> only use APIs provided by clk framework.
->
-> I've ran `ut dm clk*` and verified these commits does not break any
-> existing testcases. Though no new testcase is added because I think
-> existing testcases already test the logic very well.
->
-> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-> ---
-> Yang Xiwen (3):
->        drivers: core: device: set new parent when old parent is NULL
->        clk: allow assigning parent lazily
->        clk: sandbox: reverse the order to register clk i2c_root and i2c
->
->   drivers/clk/clk-uclass.c      | 47 +++++++++++++++++++++++++++++++------------
->   drivers/clk/clk.c             | 14 +++++++++++--
->   drivers/clk/clk_sandbox_ccf.c |  6 +++---
->   drivers/core/device.c         |  5 +++++
->   include/clk.h                 |  2 ++
->   5 files changed, 56 insertions(+), 18 deletions(-)
-> ---
-> base-commit: 721eecd9cbf2cc59c5230abd37d02d4a02f75cc7
-> change-id: 20250621-clk-reparent-89d75f6a8e09
->
-> Best regards,
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Ping for review. This will be used by upcoming Amlogic meson8b clk 
-driver and is tested.
+This patch series adds Firmware Update (FWU) support for Arm PSA
+Certified platforms [1] such as Corstone-1000 [2], enabling U-Boot to serve as
+the FWU Client, with the Secure World acting as the Update Agent that
+manages the firmware store and its metadata.
 
+This implementation adheres to the Platform Security Firmware Update
+specification [3] for the A-profile Arm Architecture and leverages the
+Trusted Services framework [4] to interact with the Secure World update agent.
+By delegating update management to the Secure World, U-Boot handles only
+the client-side coordination, invoking a well-defined set of ABIs over
+the FF-A interface [5] to deliver update capsules.
+
+Key features include:
+
+- Generic, platform-agnostic design.
+- FF-A-based ABI: All interactions between U-Boot and the update agent
+    occur over the FF-A interface, ensuring compatibility across
+    PSA-compliant systems.
+- Multi-payload capsules: Support for capsules containing multiple
+    payloads, start/end markers, signed firmware images.
+- ESRT support: Capsule payloads may be signed for authenticity, and
+    U-Boot can populate the EFI System Resource Table (ESRT) for OS-level
+    firmware management.
+- On-disk and standard capsule handling.
+
+For implementation details, please refer to the README [6].
+
+Cheers,
+Abdellatif
+
+[1]: PSA: https://www.psacertified.org
+[2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
+[3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest 
+[4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
+[5]: FF-A interface: doc/arch/arm64.ffa.rst
+[6]: Readme of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
+
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
+Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Cc: Adam Johnston <Adam.Johnston@arm.com>
+
+Abdellatif El Khlifi (24):
+  arm_ffa: Add NULL pointer check to the uclass driver operations
+  arm_ffa: Add FFA_MEM_SHARE support
+  arm_ffa: Add FFA_MEM_RECLAIM support
+  arm_ffa: sandbox: Replace the emulator error log with debug log
+  arm_ffa: sandbox: Improve the readability of clearing the X registers
+  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+  fwu_arm_psa: Initialize the update agent
+  fwu_arm_psa: Read the FWU directory through get_image_info()
+  fwu_arm_psa: Add staging ABIs
+  efi_loader: fwu_arm_psa: Add set_image and get_image_info support
+  efi_loader: fwu_arm_psa: Keep the FMP payload header
+  efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
+    set_image()
+  efi_loader: fwu: fwu_arm_psa: Disable trial state handling
+  fwu_arm_psa: Add FWU acceptance mechanism
+  fwu_arm_psa: Add ESRT support
+  fwu_arm_psa: Add ExitBootService() notification handler
+  fwu_arm_psa: corstone1000: Enable FWU support
+  fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
+  fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
+  fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
+  fwu_arm_psa: Document FWU support for Arm PSA
+
+Emekcan Aras (1):
+  efi_loader: capsule: Add runtime capsule flags checks
+
+ MAINTAINERS                                   |    8 +
+ .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
+ board/armltd/corstone1000/corstone1000.c      |  255 ++-
+ board/armltd/corstone1000/corstone1000.env    |    8 +
+ configs/corstone1000_defconfig                |   13 +-
+ doc/arch/arm64.ffa.rst                        |    4 +
+ doc/develop/uefi/fwu_arm_psa.rst              |  153 ++
+ doc/develop/uefi/index.rst                    |    1 +
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  297 +++-
+ drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
+ drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
+ include/arm_ffa.h                             |  111 +-
+ include/arm_ffa_priv.h                        |  143 +-
+ include/efi_api.h                             |    8 +
+ include/efi_loader.h                          |    8 +
+ include/fwu_arm_psa.h                         |  427 +++++
+ lib/efi_loader/efi_capsule.c                  |   83 +-
+ lib/efi_loader/efi_firmware.c                 |  104 +-
+ lib/fwu_updates/Kconfig                       |   26 +
+ lib/fwu_updates/Makefile                      |    2 +
+ lib/fwu_updates/fwu.c                         |   29 +-
+ lib/fwu_updates/fwu_arm_psa.c                 | 1508 +++++++++++++++++
+ test/dm/ffa.c                                 |   73 +-
+ 24 files changed, 3275 insertions(+), 123 deletions(-)
+ create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+ create mode 100644 include/fwu_arm_psa.h
+ create mode 100644 lib/fwu_updates/fwu_arm_psa.c
+
+
+base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
 -- 
-Regards,
-Yang Xiwen
+2.25.1
 
