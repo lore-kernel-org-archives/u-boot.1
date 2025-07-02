@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB1E4C83F04
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D1BFC77B7C
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:29:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4136483087;
-	Wed,  2 Jul 2025 17:26:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 875908304C;
+	Wed,  2 Jul 2025 17:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2120583082; Wed,  2 Jul 2025 17:26:23 +0200 (CEST)
+ id A0F6E83095; Wed,  2 Jul 2025 17:26:25 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1EF2F83045
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:26:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 5088183045
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:26:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B668C2F7E;
- Wed,  2 Jul 2025 08:26:05 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E1D193024;
+ Wed,  2 Jul 2025 08:26:07 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.38.90])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C18063F6A8;
- Wed,  2 Jul 2025 08:26:18 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E58A33F738;
+ Wed,  2 Jul 2025 08:26:20 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, abdellatif.elkhlifi@arm.com,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Emekcan Aras <emekcan.aras@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH 19/25] fwu_arm_psa: Add ExitBootService() notification handler
-Date: Wed,  2 Jul 2025 16:25:22 +0100
-Message-Id: <20250702152528.1180414-20-abdellatif.elkhlifi@arm.com>
+ Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH 20/25] efi_loader: capsule: Add runtime capsule flags checks
+Date: Wed,  2 Jul 2025 16:25:23 +0100
+Message-Id: <20250702152528.1180414-21-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
 References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
@@ -58,60 +58,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+From: Emekcan Aras <emekcan.aras@arm.com>
 
-Provide a weak function that can be overridden
+Add missing checks according to the UEFI specification [1]
 
-Some boards need to perform custom actions on ExitBootService()
-related to FWU. This function can be overridden by the board.
+checks added for these capsule flags:
 
+CAPSULE_FLAGS_PERSIST_ACROSS_RESET
+CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE
+CAPSULE_FLAGS_INITIATE_RESET
+
+[1]: Table 8.8 Flag Firmware Behavior,
+        https://uefi.org/specs/UEFI/2.10/08_Services_Runtime_Services.html
+
+Signed-off-by: Emekcan Aras <emekcan.aras@arm.com>
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- lib/fwu_updates/fwu_arm_psa.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ lib/efi_loader/efi_capsule.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/lib/fwu_updates/fwu_arm_psa.c b/lib/fwu_updates/fwu_arm_psa.c
-index 7297e724569..6a829c631b0 100644
---- a/lib/fwu_updates/fwu_arm_psa.c
-+++ b/lib/fwu_updates/fwu_arm_psa.c
-@@ -1252,6 +1252,21 @@ static bool fwu_all_images_accepted(const struct fwu_data *fwu_data)
- 	return true;
- }
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index 113cfe30fde..a5ebe4994dc 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -769,6 +769,36 @@ efi_status_t EFIAPI efi_update_capsule(
+ 			continue;
+ 		}
  
-+/**
-+ * fwu_notify_exit_boot_services() - FWU notification handler
-+ *
-+ * Some boards need to perform custom actions on ExitBootService()
-+ * related to FWU. This function can be overridden by the board.
-+ *
-+ * Return:
-+ *
-+ * EFI_SUCCESS on success. Otherwise, failure
-+ */
-+efi_status_t __weak fwu_notify_exit_boot_services(void)
-+{
-+	return EFI_SUCCESS;
-+}
++		/*
++		 * ScatterGatherList must point to a list when the
++		 * CAPSULE_FLAGS_PERSIST_ACROSS_RESET flag is set.
++		 */
++		if ((capsule->flags & CAPSULE_FLAGS_PERSIST_ACROSS_RESET) &&
++		    !scatter_gather_list) {
++			ret = EFI_INVALID_PARAMETER;
++			goto out;
++		}
 +
- /**
-  * fwu_accept_notify_exit_boot_services() - ExitBootServices callback
-  *
-@@ -1292,6 +1307,8 @@ static void EFIAPI fwu_accept_notify_exit_boot_services(struct efi_event *event,
- 	}
- 
- out:
-+	fwu_notify_exit_boot_services();
++		/*
++		 * The CAPSULE_FLAGS_PERSIST_ACROSS_RESET flag must be set
++		 * along with the CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE flag.
++		 */
++		if ((capsule->flags & CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE) &&
++		    !(capsule->flags & CAPSULE_FLAGS_PERSIST_ACROSS_RESET)) {
++			ret = EFI_INVALID_PARAMETER;
++			goto out;
++		}
 +
- 	EFI_EXIT(efi_ret);
- }
- 
++		/*
++		 * The CAPSULE_FLAGS_PERSIST_ACROSS_RESET flag must be set
++		 * along with the CAPSULE_FLAGS_INITIATE_RESET flag.
++		 */
++		if ((capsule->flags & CAPSULE_FLAGS_INITIATE_RESET) &&
++		    !(capsule->flags & CAPSULE_FLAGS_PERSIST_ACROSS_RESET)) {
++			ret = EFI_INVALID_PARAMETER;
++			goto out;
++		}
++
+ 		log_debug("Capsule[%d] (guid:%pUs)\n",
+ 			  i, &capsule->capsule_guid);
+ 		ret  = efi_capsule_update_firmware(capsule);
 -- 
 2.25.1
 
