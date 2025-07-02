@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A64C83038
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E376C7EE30
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C60A882EB8;
-	Wed,  2 Jul 2025 03:04:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76D6F8304C;
+	Wed,  2 Jul 2025 03:05:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tYhZdhNZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OOANgR1Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4373C82103; Wed,  2 Jul 2025 03:04:37 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 2901F8304F; Wed,  2 Jul 2025 03:05:14 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EE0783022
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0CCB82103
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:05:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-2efc0ed41efso1932353fac.1
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:35 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-72c13802133so1282934a34.3
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:05:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418274; x=1752023074; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751418310; x=1752023110; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=8tnQi0FrpLVtI6wlxRr12CBAUTu/7m7NAreMxk5l5yw=;
- b=tYhZdhNZJMifBuXj4TJy+7/i//NzMmLTgwawXniI/95m4rq5H7ukZh8sD09XMgXBhK
- irI0HOXfzrVV3iW2FjOgyINCTzxJQypXkOEuIFrgZveI+S/KhKLcrmLrgi4lAs41y411
- i4gFFgaqotVEJ66MCHVsX8SgFIqY6uX77wYfg=
+ bh=66G9fapzJ81RzS5tUAj0Zga0dRUOr2GyeBipyhRq3yk=;
+ b=OOANgR1Yon7onXwPGPGz3Pc//6tbxTEgV+BkHnozAFHU/gQKeoNZSeqb5l82z8sSRB
+ uhlRX9ozxesa3sR8HxuZykOvE1uXPtkNlQQB9AljJrmoHfyh91GZw4AZqQVwxofJRCp0
+ OZ8+jR/l8fBDNAEvg7J60LLmOwLlGzaRQPHmY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418274; x=1752023074;
+ d=1e100.net; s=20230601; t=1751418310; x=1752023110;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8tnQi0FrpLVtI6wlxRr12CBAUTu/7m7NAreMxk5l5yw=;
- b=EBJmaLW2sKCJ3zFKSimPh3BtFw5rCDV45J7dQOF8Jkt7QxaX7qX7PsrOFZz4UZ1myS
- EKyhHe1IJMADe57VbwJ0VrexCC7HzuAaxzPnJ2ISHt7W4wTLW+dArtmpuQf5zcN7oP6y
- Np81D56cGY9qhxWBjXyeb6EEV4p8qVOq4/JoZShkjEWYg0f8SoaBn7sTi+CZSRbP+eTV
- 4KCEvz+gdvtfoKDl31UbWpaoqPHPAU6flY7Y1a7rIZBn9uBFl48Dn336ZJBTWV58YivB
- 9fofcDRiGHqP46D/DzLSkhzsNO3uuE45iVWRelYNK0IFz45vZDhSHHfjVJMpRFO7l2Ts
- /7lQ==
-X-Gm-Message-State: AOJu0YxcykgbEXVGVlOKTrIYICDoTyEjf0lmE72/zcsfCjKPf/Y5bxlB
- tgSCDFWD/U0HUQG19zaVIzFpaT7nfZW2rfOwtyuIZbeEB19YetnhJTp5JLOxXjWq37+CbLtPEtv
- F1GAVNXc=
-X-Gm-Gg: ASbGncseafi34V5j/M/LxnFBnqSPVZqtUvBDN+i1RBv/fAipuN4zEidE5fT6PRZfzPD
- ucxAF343XuJJikV+L6vO81el7Pc7h1UOqMF3K8fqP5yFOsQ0iR6S8J0cw8MMEqbsukTzFJPv9pa
- CH395hOYlOwsLC5NeLOQU4E3S9c1e5twOig4tVOGMvoJy+9gdmHIr84PBfAPAp+e7V36bfl9zk/
- 7DU5MasqyhtoxMLSbVluXkR50R71W1JDsvEtt4fTdbmMTGV0Y+53pcTZs2HlXUnLRKM/9Xkpy86
- VKK/lMHsP/4gcEuPXpxZnYsF4vEt70QfCoSyHEQ5FFukPFle9vxSq1vg3vkZyGY6Tw1OHVmkoci
- 8mrK9e2hG8F0xGbUroAEFRWo=
-X-Google-Smtp-Source: AGHT+IHCHnoin0ADUOV1rH4QcH1M/cDlY8+UnXPdtNcXFM7MTQT0ft0H4tG6eOaAK77TAKU7JNXzSQ==
-X-Received: by 2002:a05:6870:558f:b0:2d9:3868:b310 with SMTP id
- 586e51a60fabf-2f5a89fdb15mr700109fac.11.1751418273790; 
- Tue, 01 Jul 2025 18:04:33 -0700 (PDT)
+ bh=66G9fapzJ81RzS5tUAj0Zga0dRUOr2GyeBipyhRq3yk=;
+ b=t4ivoTLmvSclczqeD22+xO5nqHAOy5R//YnPJDdEuZWsOS1hLrieByDxUAq1jsHUQm
+ wHXvkmfBpUwPWF303L86oci8LbVur/+MGbdIX0QiISxO5z34LNVkdjA5oJ028EiONmVh
+ fg++HKNI33kBHGjmvxLZrj65OJqGxYpOkWnxCCU75Jnfn2r0sb3z/LUwEvXD1tJm0TrV
+ +4zMRoFJ+35w2cY+fnJqL+kI2F/hvLJpfjCB2rknDK71UKRsSxma67NFN6tAgYkVhFFM
+ da+j6tJ3tUh7ZkSlDudImByDjSXM0viz2X/Vo7ZWiZripD8qu5BeZs8nYPbCZ1aR3s0L
+ K7RQ==
+X-Gm-Message-State: AOJu0Yytf0cZ9EZzhKOEjVJvJyj7QHx2diao+47qlQ3xSzuIMn+3k4Y0
+ 4twyTC3VU5YzTDGsGRlEZs1YAF59sR0Vmh9JERzzV+VNvVvBMhiTUdzvSMkMF2mBC+ghw/9K0Va
+ l4enzj14=
+X-Gm-Gg: ASbGnctqDW52KdTPpCDA8QdgQUcE8wk4ECZ5PiZZpqj8cNevkxU4ER8bqkYoPfJ8/Kz
+ KcF1DSGBZD/RVYQQTiLKp5kv5ml6aiLn9hqIP1aYQLGmhoEXFMcqs7MfuAMEmvpodptv6VlGvwv
+ D+dRyYryKjVMYVR5v4rJnVc/FXhTqlJJfe/TSnu6R4Imy1DtJRbqjs/qJqkGXH1EnJ1llbjgaIB
+ BMtoEAzcMMamlMZGGrR/keO4duKflMG5RL6uWXec8uE+6k1A0Oo3JD4/4wgl52QnogWkwoh1z9c
+ LvrcyrTz3D+d/HJJCCy6KX1OdZAOyAcFKCzL2XaE2h/43PXfE85nyngdSzFA6QvMtOpjoZ/fWvX
+ w5ZRy8Wl+nfW4GMXZYNz5+VI=
+X-Google-Smtp-Source: AGHT+IGc07dPTE03xtO/L73mS5odDruFybYtELRgpJLHcVUaFUXf5BeqQYN7i3MXpofC0FhzP2qBGg==
+X-Received: by 2002:a05:6830:71a1:b0:73a:6d48:dec9 with SMTP id
+ 46e09a7af769-73b4ca330e0mr894962a34.4.1751418310128; 
+ Tue, 01 Jul 2025 18:05:10 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afb0089cesm2345034a34.25.2025.07.01.18.04.33
+ 46e09a7af769-73afb0e338esm2327406a34.40.2025.07.01.18.05.09
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:04:33 -0700 (PDT)
+ Tue, 01 Jul 2025 18:05:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] adc: Tighten some adc driver dependencies
-Date: Tue,  1 Jul 2025 19:04:32 -0600
-Message-ID: <20250702010432.18977-1-trini@konsulko.com>
+Subject: [PATCH] cmd/Kconfig: Tighten dependencies on CMD_SEAMA
+Date: Tue,  1 Jul 2025 19:05:08 -0600
+Message-ID: <20250702010508.19124-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,36 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few adc drivers cannot build without access to some platform specific
-header files. Express those requirements in Kconfig as well.
+In order to build this command we need to have configured some other
+board specific features. Express that requirement in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/adc/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ cmd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
-index 37235f557a3c..2b45f9e5ebad 100644
---- a/drivers/adc/Kconfig
-+++ b/drivers/adc/Kconfig
-@@ -18,7 +18,7 @@ config SPL_ADC
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 89f102855b0f..ceaa86643cb6 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -407,7 +407,7 @@ config BOOTM_RTEMS
  
- config ADC_EXYNOS
- 	bool "Enable Exynos 54xx ADC driver"
--	depends on ADC
-+	depends on ADC && ARCH_EXYNOS5
+ config CMD_SEAMA
+ 	bool "Support read SEAMA NAND images"
+-	depends on MTD_RAW_NAND
++	depends on (TARGET_BCMNS || TARGET_BCMNS3) && MTD_RAW_NAND
  	help
- 	  This enables basic driver for Exynos ADC compatible with Exynos54xx.
- 	  It provides:
-@@ -49,7 +49,7 @@ config SARADC_MESON
+ 	  Support reading NAND Seattle Image (SEAMA) images.
  
- config SARADC_ROCKCHIP
- 	bool "Enable Rockchip SARADC driver"
--	depends on ADC
-+	depends on ADC && ARCH_ROCKCHIP
- 	help
- 	  This enables driver for Rockchip SARADC.
- 	  It provides:
 -- 
 2.43.0
 
