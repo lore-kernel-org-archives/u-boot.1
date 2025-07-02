@@ -4,68 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE616C83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 07:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC256C8303C
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 07:39:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E29E81FEE;
-	Wed,  2 Jul 2025 09:37:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F73381FEE;
+	Wed,  2 Jul 2025 09:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZOyb/oEG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Ckufo2xl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FFA982103; Wed,  2 Jul 2025 09:37:07 +0200 (CEST)
+ id A583C82103; Wed,  2 Jul 2025 09:39:43 +0200 (CEST)
 Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::608])
+ (mail-dm6nam10on20616.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::616])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B81C381E13
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 09:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 934A481E13
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 09:39:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BIWEZLFx/LHUIJZ3hd72yp4afVRfhULRHJef1C1kYQkUCEjkWP/fsUddyL71l2J9zbMaLrgwFPwnKSNRqHxC4tf0FYCC3+MCP95M6ucgVnM+OROxFaIDG+FoJ+cBAEeR3PdJUMt8dO87TQLs2QWVg1LpMVIE7kBlcnPZvkOUHclqfBbVuGvUssLjbBxmE2ONP0L6ajJTCcaIUD6reuWAXZVXJANzJ6xBVvaC95tZYz1LOAmUsY+QHc4dQg7HMp8C9C+n1TU2banLr3b5ABtZA3+iO3T/xbpRHlNMviimvEK0D/TlU9eOk+jYJyYSRPJEsRJuUKgUegZS4GKHV/R0LQ==
+ b=W6R7XFZiJSsOh3dxVYSsH6tnT+i1rWUdeo2kznfNTwNeXdAqUV2bYxnzfNNC/r3YU6aDvzyYMMdztnZULhJjq3GSaG7ahWtlFJ/Li8fTDRtp9mu13OG7pxgwMmXe9zcnLWOTdSKvdumTS9AnM671gHiMKt4IbynGWdVYZWOvcxqxHbUDH6BqsJRx68E7ctNGPeVqoWd11cNVDpXXhj83su0yEvvqKZ3JEgU1eAu2166xmnWJafor/9uzMemkH2/twyqHuDi2yHFDFpBOQjGN5E0sM+FqlQdHQlXbpAj35g5gXrY0lfnLoFQe1lpUDUXbZEGrA1O5nzAaTpxC6yZ6Bg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ebv5lDSiBOAgUdzdr2soMb8M1YpdP+AkCqgiUYmws+Y=;
- b=IPD5rGKY2arZxc+QC0xKkQMBTS1wG6NGBrth4HufMG4t3kcPDFYnDEF2+s1oIHRcGqWBIhFI71C3cInQ2HTdkzBgX1J0COofQzg4hWSyH9EqD314XIqAoDeorjY0ONTScw0V3ZV6pNLASI0JbIkRxaKgXHRjlI6p2hQIArD03fPvj1EODqH/YkQZ7qWXkT3nJnnBghOYXD2VcLmTpaWu2apdUL8h8z+jAwKYBmx957kY1WxZYSEu0/0Z/yfqWxvgl7utu4nvfxHx+C1j56vrk854h80F1YG/1izV0Kzd3p+uoxArCYTe495MsZ7WNBvDBg568c8Trv8n/SAh8ALkSQ==
+ bh=+Wv+VKMUD8ZbASlXlHJjzoFfJagD8DlaErMXpgUd/3Y=;
+ b=S1bnXB60cfLDV5NxyuPG9CiIu88K0Bv17uroxI5Zbh6kggoNXYvfYOT16wB9xFsgZgwtAcm2xNNCbNOE3aiVhUaoce/ggf2FnljYdj8Jr6WLNdLLdtxlyjMklBagYTozjKfyrvy8z0qoHiRPw/I3v2rhQJg/uZiGIZ0DDtc/RMitjBcC+C8h5B3KHED687KirEDl8UnLGuQf0mEoZ4XqpbjwKOMcgiGl6zGuQe40BG6sJh7DQMI6iklpOaQ2CqYkYMxHB1NPTiTbxW7xGo5RWJdmAnqEnBXMIJAUnO2XNv/Lt71rdMacSQRuGxBkIxodkG2PEo/NbHNAx3EEZHEPaA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ebv5lDSiBOAgUdzdr2soMb8M1YpdP+AkCqgiUYmws+Y=;
- b=ZOyb/oEG24u7lqcPUOFy6QOl5v0bwZ/H38I42E9TmdT7cwM/pUKlrsfb1WbQ1/SnDSTK1D/XmkxkFooaBIv81Iyhn/O/C5YNHXvIdscflbFk97985QKTWSrzkKwuYDX7vHKg+lmJyAyzpO9qRsk+/nF6UOX/tYqhP97B5M7HlHk=
+ bh=+Wv+VKMUD8ZbASlXlHJjzoFfJagD8DlaErMXpgUd/3Y=;
+ b=Ckufo2xlHQfNZoL6Hk//UBjatBiKScwKHaOPsJTN7ip2m+3NP5gjvUXvKu9HfP310sF6ftPKim43VE9nh4CxkX1YVCeF0VwbjV1O3/jyoxbaOja6DCDXzgX9jXlix3tyJk/bpNKGxsSAUCY5CBlr2IdkbazMZDhy5sBZcaAchSM=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by SA0PR12MB4368.namprd12.prod.outlook.com (2603:10b6:806:9f::21)
+ by CH2PR12MB4135.namprd12.prod.outlook.com (2603:10b6:610:7c::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.19; Wed, 2 Jul
- 2025 07:37:01 +0000
+ 2025 07:39:35 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.8901.018; Wed, 2 Jul 2025
- 07:37:01 +0000
-Message-ID: <9cdc5507-331b-4856-acc0-082765a2293d@amd.com>
-Date: Wed, 2 Jul 2025 09:36:50 +0200
+ 07:39:34 +0000
+Message-ID: <27a43a27-2b87-4d56-92e8-23bd92f9cce5@amd.com>
+Date: Wed, 2 Jul 2025 09:39:25 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xilinx: Remove simple-bus description from mini
- configurations
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Padmarao Begari <padmarao.begari@amd.com>, Paul Alvin <alvin.paulp@amd.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <a51b11fa21c504a19701ebdccc1e61e899e1aed5.1751016029.git.michal.simek@amd.com>
+Subject: Re: [PATCH] mmc: zynq_sdhci: Add emmc hardware reset
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: peng.fan@nxp.com, jh80.chung@samsung.com, git@amd.com
+References: <20250701040915.530912-1-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -110,102 +105,103 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <a51b11fa21c504a19701ebdccc1e61e899e1aed5.1751016029.git.michal.simek@amd.com>
+In-Reply-To: <20250701040915.530912-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0289.eurprd07.prod.outlook.com
- (2603:10a6:800:130::17) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR07CA0230.eurprd07.prod.outlook.com
+ (2603:10a6:802:58::33) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA0PR12MB4368:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6ea0e0c1-2765-4a88-a05f-08ddb93b3bc9
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH2PR12MB4135:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9db5015f-78f8-411c-eebb-08ddb93b96fe
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NFhRTzNheEFpb0xUS3NjdUlaU1k4TklxZktWMGRCSXdxTk5pNERzV2R3U3hz?=
- =?utf-8?B?UnBKN2ZJdTk4RmlLalVyWmdtMUkwK2ZNcE54QVF2cHlCRzFJVFYyWWN2aEZ3?=
- =?utf-8?B?NUh0Qk5jS2U0TXV4eTdkY3Y3N1RrYlV6U3IwL1pUOVNmU0FRclFhWmpXYVc2?=
- =?utf-8?B?ejlockJhOE1DcXhhU0xET1AxWVlhWmt1dlVxelYrNmcrSXhwZ1ZzcG15Uk1s?=
- =?utf-8?B?M3o4bnBWUHgxb0dscy9hRE5BSnpkY0J2Vkx1RnMwT3g2NFIxVmw3bkZwNEVS?=
- =?utf-8?B?M2tXZWRsejZweEM0bkpzVGVxTG9FR0h1dFpWS25yQ1N4c1FnY2I0YlZvNXVr?=
- =?utf-8?B?YTJteTlkUS9GenZId1ZxOUVSdlJoeWNDSlVKK3JzelVTQXZxUk5TTmpPRXhk?=
- =?utf-8?B?S0JmMko5QkhkWk5lSERvRG5SdVY5bEVvZHlQazBZZXRad1g2ZXc2VTZHOUlD?=
- =?utf-8?B?dDVDYnlIM1VndkpsNDFVQkQ3Vi8ydmxlM2VJRVhxRmZwaTY3L21Zb1FyNmdL?=
- =?utf-8?B?MjVxYi9yZERjbk9PNXVNSTgrWkRUZk1NZ3lEaythTUZpOE5WQjFtWTI2WEF1?=
- =?utf-8?B?NWRMUjJaYTZsTDR5dkZwNVBvWnNQemc1YXFsS2lMNEc1Zk9RN1RjOGxBSFI1?=
- =?utf-8?B?N0hRYXBGRXdDOGxpM2s1Q3c5ZkFPRS9VWUI3bmRoU1YybXBvdHJReU9OZGNw?=
- =?utf-8?B?ay9DVUJxMGdESjN1UkR1ajQxdHRtQWJnZE5oNkFqU0UxTTZlZ3lIOXN4aGt2?=
- =?utf-8?B?SmZxeEhRZEpEQytidTFHM08zY2FGbnE1VkNHbFptR3JzVGV0cFVmRWFQcDZu?=
- =?utf-8?B?NXVLWklIbnJudXByUEpIY0p2L3RpK2ZHU2Jnb3huMzVBb2NZZ01VbEhSem9T?=
- =?utf-8?B?ZmhIVDdHSGp0cjcvTWtPOXFTUjl2alJXTVhSb2cvYVZTb2tRWmRZSVZnMXA3?=
- =?utf-8?B?eWZTRmp3Z0NtVDNYWEVTVi9MZ01CWk9GaHVxcnRQdCt3akRDMjZuRWJwWUhV?=
- =?utf-8?B?VDRLQlVSODBGbEJYVlNJUlBQTk4vLzFrNTh1Mit4dVFkNE12aXVOL2Fyb0kw?=
- =?utf-8?B?dlVpR3Vua0l0Z0FDMmk0Sm91RWpBR2VaaHZwR3R5UHRkS3hhUnNnNlZwMVRu?=
- =?utf-8?B?YjViMjZYTnZzTXpLWkxoTUY1a3lQcDZjZjNkTWc5UEdEWmNkbnhaNHo4Zmdo?=
- =?utf-8?B?VVRDeGlQdVRRRUJCaHJCeEdOcVVTOXlVck9xSWVNcEJ3bVhjRzduQm5WWkc3?=
- =?utf-8?B?L1dlYS9RUGR4aVhTWTJseDFPLysybmRFczdnK1QwcW56aEtvZTFGdXhHR2pp?=
- =?utf-8?B?TlVVUHFLekRwNUtlSUhNb2lIOHdEUVN0bnNkeDlPYk5PMUNJQWRpMU9aWDlM?=
- =?utf-8?B?cUNsSnJrb1Fmemt6RjNOaFhhMmJEL01QdXJtQnE3VWhlcEF4K0lHTkk4SVZq?=
- =?utf-8?B?VlRxbTZITk9EN0JRVXBIcHVmWXJ4TmNLank2STBoSkRQdDVKL0Q2TFBBejFI?=
- =?utf-8?B?andXdkY3ZWtzMDNaMlY5SFN2bnRBbzcwdEFOUDhad09GMUxvMkhmeW41Ylkr?=
- =?utf-8?B?S2ZrVFNWNkVFWllHSWIzaTNhSElQeEt6MWttclRBYUlMcGdoZnlua1NQRGJF?=
- =?utf-8?B?OVJvdUhHMXU0TVRLeUI2MkFxa2ZwTng3bXhSaVJtWVRNK2xVR25JTk02eDVw?=
- =?utf-8?B?Skc1b0lmb1c3a1RmRU5FTmZkeXoxSXBXZlptdkVFSEw2MDdpbm82ajFwcU1i?=
- =?utf-8?B?SkNRcit5cis3YTk2dm9jNmswVTlqZjZtS2RVc1JxS0RpODJJc0gvNjhxUTRZ?=
- =?utf-8?B?a0hGTzZublhIaGZndEFoVmNaYlZRZFRoNDRodXkwKzlJWXNmZm1sRVladkhi?=
- =?utf-8?B?SFhWbUJGVmVGMmFlUG5vMmh6Q3lELzVZc3RzZ2pxTHlwTzEwTVRMOW45TGN5?=
- =?utf-8?Q?bUAqC4O/6lU=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?U0lTb2ZsVDJwYndmd2Ribnh4WS82V0xxTjU0WHZkaEJUWWJyMCtIWEMzdnJv?=
+ =?utf-8?B?T3IwazY5YmxWbkRqdDk1aFM5em95NWVjajAxb3M0TnRNYmo1RWNCSU81d0pM?=
+ =?utf-8?B?UUdkaDdxRWE0TDl6S3BsZVc3SC9obEZ6ZE1pejJUQmR3R09jNUVsWk1HTzdS?=
+ =?utf-8?B?WU9EV29kZzNJYnp2dmhWRGNEd0NNQXBUQlV6bW5FVjErMWFTRkUrTER0aVRK?=
+ =?utf-8?B?OUpIbE9CNlFzR0R2Unh0VHRhd1czYURHRCtoUXkvSUpFeGVVRm1SenE3eUZY?=
+ =?utf-8?B?czVHanVRcmpIVkV5enJHY2xHaHhrK3J5cFVvd0NNNStLZkVSKzIxVXlGcHE3?=
+ =?utf-8?B?VnZMNHpraGxmbC9YbkhVdVlyYkhON3hZQ3dSbDVCUWtKckVFK3V4LzR0THg3?=
+ =?utf-8?B?NzVYUUlwREJza0NNTHQrS1ZSMjJ2U1Nxd24vUXlPajlOaTlIbnkxY2o1aFJn?=
+ =?utf-8?B?MFkrNS95VXhCdDh1TGlCMDc0SEJObGhkZGRUWndTcTI5ZFAvcXJoRFBvU0dW?=
+ =?utf-8?B?K1p5dXd3M0ZyU1Y4aVBsQzFsVmZkREFrVi93ZHJkQUNSQzBMUHJHdW5weVRL?=
+ =?utf-8?B?QThOV0JhUWtnUUpaNCt4NDZWTU5Fa2J2V2NtMzJ4NnFETUo5SWxMYklxYVhk?=
+ =?utf-8?B?aHlEQXRZUHpXcG5OOEtLak84MFliWFNnVFZ5aW12RytKL3Fpem4wdjNqdndD?=
+ =?utf-8?B?ODYyQkRBRmNSWmQzUEluM1YvV01JUkdNcC9iekZPMHJxNXA5R0UrNm1CUmlH?=
+ =?utf-8?B?S0ZneDdtaEVQdkxjS1ZsV2FReTh5Tk1UVGZ6b0RVaUVWa0M4UDhlN3I1Vkh2?=
+ =?utf-8?B?V2tKYStXTVZ1eklNd3VpRC9rdkZqOGd0d2liWDRzWDVEa2kxUEJsK2psUis4?=
+ =?utf-8?B?QnY4anRBaUJtTDZMRVBtMkFYdjJhemdEVmpzcE9oU3VjZmNORzZ0WFEvamlZ?=
+ =?utf-8?B?c3hZUG4ySzA4dGszVzAydC95RnlxbXlKNGFtektVeU9TOUVnenNZZHVZQVZh?=
+ =?utf-8?B?NTV0VE1DTERxbTBFS2JpY3BwOVJpY1k0bWhkZVZpOEVmVkFLN29icWZ5azdz?=
+ =?utf-8?B?cVFLVUc1enQxTGRxeHdXOGkrWjhneXZKTldrQ0xBdjFtRHk2K0F3U0F2Y2ty?=
+ =?utf-8?B?VkM4bWpFZ2pVZmJZZVJZUkErb3JhaVUwVG5iQm50WmQ1dmFtSlkzbTg2NURW?=
+ =?utf-8?B?Y29XRSttbnBXNEx5T01nMjZnT3BIb0dPbEJtS0xNYzJqRk5QbXl0NUlhYUw4?=
+ =?utf-8?B?TGgxVzl5MTVBM0s2L3BPN01EdU5BNnVRM05GVHZqaERDMklpaGFHeEphRTZM?=
+ =?utf-8?B?TDB2d1VIeU5IL21kNnhBbFdPSFhiM0MwTVNYMHFPZDAvVW5tR09WY29nM0sx?=
+ =?utf-8?B?enlBK1YzeXkzNE9XNTNVdFlWb2dSK2ovTzRkeW5JeE1ldnpoazVtdW1vOGh3?=
+ =?utf-8?B?VFJwR0xIWUo0WE5JK1FrOS9jbmpheHBib05xSmE4cituQ0M2YVU1V2hZVG9u?=
+ =?utf-8?B?Y3FZdmVDZ1lqZmhDLzhEMXJDWTNQVFRFZCs2R3YvQXpvNy9TYjFncEJwdUxK?=
+ =?utf-8?B?S2cvSHBoYUVwaE03YWFPRTVvL2RtcmV2Sk10UHFPSExIejhVRk1SOE1KcjRC?=
+ =?utf-8?B?cVplcUZ6S3N6RVoxZVFBRlhBWVFjb2F4RzJ5cEwyelZZbnR0WVdQK2ZJZDdP?=
+ =?utf-8?B?QlZUdjNyTEtCNHBHRlUveVBwVEJkSk56anhqclJLM1MreTNmZENHVndRY2l5?=
+ =?utf-8?B?Qy9uek5NaTFVTE1DMmlLWU1UMXJKNHVoQ211SzdOeWdiejhqdHMvRVd3Qy9E?=
+ =?utf-8?B?V2M0eDhkNlhwSnhVMmNMSTlmU1RrdFFsK0lPeEZnSzl4VGthYnNQMG55Rjhp?=
+ =?utf-8?B?RmtFd1NUcUl3aWVTVTFteks3OVR0NGxTQ1E2VzlCdTErZ3dnMmd6Z0NnOWN2?=
+ =?utf-8?Q?VMxA8H5d0FQ=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1dQSUpyS1p6bjBYTmpYYSt6NnJKMFZoeEhHU3FPRG5FcVAvZFBuMHo5T3pU?=
- =?utf-8?B?bjAyZXYvdC9WaW9RK2psTzdscXZLenpaazc1VS9vWTdkRGQrdW9rd25hUW9C?=
- =?utf-8?B?Sm5ld3FBVU9ETjdsRlN0RDdNQnJ2YTVla2g2UlhyRWtHNHdZN3RVT0lOZ2FE?=
- =?utf-8?B?bnprdHFiTDBEdWNCYmE2aUFMSk5UVC8rV0RrQmpBbnlwbFF1RTAvdXkzdW1H?=
- =?utf-8?B?cGVLRXcxV3dMbk9XREpodEZMak9iM0JNYm9YL3RoaUVwWVg5TkFwYlRkempR?=
- =?utf-8?B?Z3dVWkRYSEtpYWcwOFZKMlZOSlB4a3BmMGVtVzdxUHZ4S2ZhRktRYy9ScWY4?=
- =?utf-8?B?NFloMmxUK3pNalhqclV4SFZ3dytxZHBEOGN4U0FwejdYUGg1ZnVJMHZwa0RV?=
- =?utf-8?B?NWdzMzA0MXdoWmZkZnJQS1FLN08yR0hjRkN1eHgyUk5ZTlNUZldFNGJPWHQ3?=
- =?utf-8?B?N2RoWHRvci9FcHV0SER4dERzOTVzL1ppSzFTV3BqcXRTMUVVUmRUb0t2Q3l3?=
- =?utf-8?B?TG4zMUZZZHdUaU5iSU82ajk2N2pYalRSa3Q0OW1Ibm8xZldvQmdWNVFHM0Va?=
- =?utf-8?B?aUowS0VWNlZTT2ZQeDRYaUQ4SjhvNXFURW0rS25UZ1UvMjd5RjBvNTIzMTJZ?=
- =?utf-8?B?YVlYbDVVVzBUTGNBMG44OW5mZXMzUjRMZXFVbUkzY0lwcWJidTFlV2x0NVdM?=
- =?utf-8?B?VTdlVGg2ZkhiUFBHcitrdlVaWnB4NWNBWFdRN3o0OUxqMTBWcW1BNWFNdVNJ?=
- =?utf-8?B?N0VFMVVaWk00Ky80ZkYrRlRQSXFGUmUyM3FzWXVmQU5lRS9lZXNlVStBNzRK?=
- =?utf-8?B?cXczWGtMTzVXaEZhdk5SZTNaZE90YWpiWnczRnpqb0pDcnQ2ZGxMTFJoTmVE?=
- =?utf-8?B?RUhzY2k4RnVMalBZMDY0VFltTzJZMEt3MkVnbXRjN2g2UjF1N2xseENwU3F6?=
- =?utf-8?B?WWRRMkcrSmxrMFQwcDVsMmFaYitSSU1EV09PVjBKVldIMlUrMjVSbnFvdVRC?=
- =?utf-8?B?RG9kQlFHb3ZZU3ZENFQvRjB6MHBScGxKMGl6ZkZnOUswVGdacjU4YVk1K3FX?=
- =?utf-8?B?UzBIdll2Uk5KUGFqVndkWnFXM1FxTHZ0bTNtV3RoVU1sSm5sdi9tV09JbmFE?=
- =?utf-8?B?b3dSemkvVTB4SVNOZk8wdXhZZ2JvYmpDQlo0WUkrZ1QxNDh4MklBS0xPTjY0?=
- =?utf-8?B?VkVXUkpCVTlrTGdaNUs4QzVNeU9Lc0lpVEIwMjJzSWoxVDlYYXdKbGczWk1n?=
- =?utf-8?B?Y0hmeTNVbUlDaE1CSWtxWGo5dG1mSDVobTkydUxpTk56V0FZNEx4QUZFUFpl?=
- =?utf-8?B?Wm5VN3JUY3cwSlRyd05NYXNVUGRWcm0ydkV0b25ERG9NbmdvOGx6OVlBcG9R?=
- =?utf-8?B?elVjSjJmOG5QbGtRcTNid3NRRVNLVGV3ZzdNckJoQmc4dVJVcjhFRXVUakhl?=
- =?utf-8?B?TmNWTXZ0VmhHbFVPSUJHQkFIekl0SDlyVlo1YjlWSW1qM3JPY2NIMmNXMzY4?=
- =?utf-8?B?enZMM0RWMjBLbFlVWWE2VFlheVI3QW9OUEdxUVYxbFIzeDJ1RjBycHhNeFFq?=
- =?utf-8?B?RHJPZUhZQ2o5cDFyeUVLVXd5bkhCUFdCWHJJS0dnVVB4QW9oc1dQVksvL3Er?=
- =?utf-8?B?SHFzRW1DRTgxdDdkdG1qa2J4VnIrWFFiR2dPaVVhOW50L0lyek04N1FrVjlv?=
- =?utf-8?B?L2lRRHNLQTJuaThTbHhrcmZlakQ4VzdWYmFoWk9OaS90clpnVU1VV2c3ZnZI?=
- =?utf-8?B?cC9NU0lXSE5QNzhJMFNkNVdxeVRjOUhoU0dLTFFZZmdKclJSZ3g3dUtrblJY?=
- =?utf-8?B?Tm9EOFU1SUhIaFJtRXRBTk1GZ0ZkRFlrdW5NTVlZcktlbmMxdWxKdDcxMDYy?=
- =?utf-8?B?cjlRQ3BiUjlCdkY0QUh0dHdzWHdlOGRUUjM1cEl6OUNMUG0wTlk4NnlIZ2Y2?=
- =?utf-8?B?em54RDFWTFpFZm12NVlaOW5wblhQQU1aTnViRkxvWlR0RzRxemVvWE9hYmwx?=
- =?utf-8?B?Z21TOTRScnNLenVibncxR1ZUWVo2dGIwUllCSFNOMHg4bkRnRTFHWXc5NWJ5?=
- =?utf-8?B?TjVSWm9EU0pJdktmNEJLVXl6UWltaS9PM1BsVHlBbm14WDFUNjNGZGtVdHZF?=
- =?utf-8?Q?vcDEILE+NHDInWUcIGP8xPd3u?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V2VUV1BnNzVKaHBsa3F6ZG1Sam9Zc0FzdlBqb1paK3E3VU84QWsvRHptdzBx?=
+ =?utf-8?B?ZkdrdU9wNmYwUlcrUlR0SHNTSkRuUUVLUUlPTG9pbDVNb0dQa1dJZDR2VWRS?=
+ =?utf-8?B?UVB5VmJsYitvSWxrUXBPWDZPWTh2bG9lLzJ1WEtFY1FRc0V4RWh4aTJHa2U2?=
+ =?utf-8?B?b0dPcHZlVmtFQWNDWGpXTCs4L1RhZW1laHFRUm1sdXlwSXdMYUxVUG82U1Rz?=
+ =?utf-8?B?VytsdGFnNHV0VVZ5b2hIeHJ1OFdMc3Z0dnNGeVEzZzJ1UisrVmNVWkJhZ2dM?=
+ =?utf-8?B?TTJsWUg2UVVFQjBnTGtEY3NEdGpUVS9pbWZEZGd5RGtiemFyQUIyK1Z5ZjZm?=
+ =?utf-8?B?UjJpNWhyUStmdGNuWlM0d3RqUThna3Y1ZUdxZnFONllpVjBuK3NRWlZ2YU5W?=
+ =?utf-8?B?SjJzYVF4ZW1WeTJDdGRmbTRqNWFlbXk1NmVzZ0RDallpOW1oWUl3NU90MFBm?=
+ =?utf-8?B?M2Z0YnlLdHFqc3Z2WHo0eXdIeWo3Q1J6dUx3VXI0UVkrVWZsWlJIRStGTnV5?=
+ =?utf-8?B?TlpPVFpuZVE1YXhhb1M4N2FaRUx4Y2dOUnFIRTdtOHhqRFhYRUFIYVNLRCs1?=
+ =?utf-8?B?WXRobHFTMTI4RDlrbjFwV001YkJ2NjhGdVVVRm4yOXlxSithMnZPdlpUYVF2?=
+ =?utf-8?B?aWhkVS9RODYxVzd0OE9mT29vV25Sa1h4NGt4YXlaSStRVjFVWnZ2bDdaMy9H?=
+ =?utf-8?B?RFVKcmRGUVBDNytOd0lETW9yRmIxNWk4Z1dBTmxUbGNOb3RNN2k3ejU2eDhS?=
+ =?utf-8?B?akFzUEc5RERwRUZNTVExeVJTMWRSdVhBZmxBMjBZQnJjalFEN052N1FLZmE4?=
+ =?utf-8?B?aFZodGhwckNIcjVtTzM1ZWw3WkZnSUd2SDFMQll6VHB2d3B6YWQ3MjQ4VDNS?=
+ =?utf-8?B?Sm5DcHFvN0FDclJsdHZVcXlXVzJZZDFyN0NpejJ5NUVHa3JZZ3dqWVArbXBW?=
+ =?utf-8?B?ZGlpZnJOaS9GeDRMZXdOR1QrSnBULytCbzdYQUgwS3o0dHFRTCtlNDA0QnBN?=
+ =?utf-8?B?UEV3WlRHc09Kb25sQ3p0bjN4eUN1SXVWZ1lvZHNNMzYvazJyWU4zMFJqT2dE?=
+ =?utf-8?B?cHQvSDBQaC9NOTArK1ZIZEE1eHR3cG9oQnQ3WGcyRkFXc1grK0g1ektaeFZF?=
+ =?utf-8?B?alNIRTczRTh3dDIvNDVUT2hsYmFHS0xGUVFXc3hMQjZhcmJyYUJrMXZCcWJv?=
+ =?utf-8?B?RTdJejlnSUJFSzZ3cWt4OWFlQkxkaXBYUlVtZjR1RmdoTlF6NFlhNjQzRVhJ?=
+ =?utf-8?B?azdJS1Ftd1cvUEIzU0tEalR3cStLcHBWRVVESUVwWmplRjB3c0NwUDJzRHdp?=
+ =?utf-8?B?Q1lkdlJkaEtCRTMvQnJjREpvbmtLTVl1cTdtdE5lYm9DRmZnTXcyKzdPNXFC?=
+ =?utf-8?B?VDBZNHBveGdUeUNIQWt3bFVHQzBxZ1ZQQzU3TU5tbTNXUWQ1Yms5VVh5akVJ?=
+ =?utf-8?B?ajdTamIxeTI0SFJUSEhMZ09qNWh4YWFPRVJsVk9OTWVGdUE1Y1VQVzgwczZ5?=
+ =?utf-8?B?ZldNTFA3NDUrRHZyNUlHZkN1SlRyZUtiQ2c3NU1aNk83ck94ODRxaUU1eEUx?=
+ =?utf-8?B?azZGUGJXRFMvbTVkUW9CVGJlc1Q0OVhDNERLSzBHWFdOMWtMbjd5ZjNqTHlt?=
+ =?utf-8?B?UmlNL1hJNEVLTjVrTlM5VUg3ZE85UmJMT0VHem40Y2hQM3JRRG5RMEdwSnZG?=
+ =?utf-8?B?NFYycmNseEw4TGZqdmhsMzB1bSttaWtUVzdYT2JNZnR4dXZzZUJmTXhDRHhr?=
+ =?utf-8?B?aXd4eWI0WWJ5MWlvN2RhL08zVFVtZnlkdzRZaDVMMUh4V2NyMzZ6bkRQb2l4?=
+ =?utf-8?B?UjFVeGw3eEhyMUJGU2dqblFPcHNxS0ttVWdwYlZ3TXlQb2lFRlZYc3M3V0xM?=
+ =?utf-8?B?NVpOd0I0bW0rY0YvR0FCNFEzV00rNTFJRlhvQXhIT1c3ZU12ZEQySFVIKy93?=
+ =?utf-8?B?QWk2QU9GMS9IQTBmaHlLOVVvUCtHeVhQYU9xdVdMQzEvZldzb1VvYU5KYWNO?=
+ =?utf-8?B?UjNSb2t6SHR6ZG9RQjh0SXYvaWYycFIrSXdiZDBIZnBKeXNVaHo0ZHN1RE5H?=
+ =?utf-8?B?ZHJaTUdRcXRpbE53WTZia2Y5eFVabDIyZGJHVjN2MFZaakovRU9TdkJyVWts?=
+ =?utf-8?Q?SW5UvKzOGf9O0NJibrARj240e?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6ea0e0c1-2765-4a88-a05f-08ddb93b3bc9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9db5015f-78f8-411c-eebb-08ddb93b96fe
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2025 07:37:01.6374 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2025 07:39:34.6569 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: N5J5Jsp5YrtT9s1AYeuCT6CBs+BfV/35EHCrThegCy710X/hsZq9IQigaJSBcKcl
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4368
+X-MS-Exchange-CrossTenant-UserPrincipalName: mg4GKuzrKM65EKL0XTvg2Ky5k6QxWi0oRvu94wuZnJgvGvTMCKIpjUF9+5w9qV0c
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4135
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -224,884 +220,63 @@ X-Virus-Status: Clean
 
 
 
-On 6/27/25 11:20, Michal Simek wrote:
-> simple bus node and drivers not bringing up any value for mini
-> configuration that's why remove it and disable drivers for it to save some
-> space.
+On 7/1/25 06:09, Venkatesh Yadav Abbarapu wrote:
+> Add support for emmc hardware reset for the emmc card, trigger this
+> hardware reset at the end of arasan_sdhci_probe() function.
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
+>   drivers/mmc/zynq_sdhci.c | 25 ++++++++++++++++++++++++-
+>   1 file changed, 24 insertions(+), 1 deletion(-)
 > 
->   arch/arm/dts/versal-mini-emmc0.dts            | 36 +++++-------
->   arch/arm/dts/versal-mini-emmc1.dts            | 36 +++++-------
->   arch/arm/dts/versal-mini-ospi.dtsi            | 52 ++++++++---------
->   arch/arm/dts/versal-mini-qspi.dtsi            | 40 ++++++-------
->   arch/arm/dts/versal-net-mini-emmc.dts         | 36 +++++-------
->   arch/arm/dts/versal-net-mini-ospi.dtsi        | 56 ++++++++-----------
->   arch/arm/dts/versal-net-mini-qspi.dtsi        | 42 ++++++--------
->   arch/arm/dts/versal-net-mini.dts              | 26 +++------
->   arch/arm/dts/zynqmp-mini-emmc0.dts            | 31 ++++------
->   arch/arm/dts/zynqmp-mini-emmc1.dts            | 31 ++++------
->   arch/arm/dts/zynqmp-mini-nand.dts             | 35 +++++-------
->   arch/arm/dts/zynqmp-mini-qspi.dts             | 25 +++------
->   configs/amd_versal2_mini_defconfig            |  1 +
->   configs/amd_versal2_mini_emmc_defconfig       |  1 +
->   configs/amd_versal2_mini_ospi_defconfig       |  1 +
->   configs/amd_versal2_mini_qspi_defconfig       |  1 +
->   configs/xilinx_versal_mini_defconfig          |  1 +
->   configs/xilinx_versal_mini_emmc0_defconfig    |  1 +
->   configs/xilinx_versal_mini_emmc1_defconfig    |  1 +
->   configs/xilinx_versal_mini_ospi_defconfig     |  1 +
->   configs/xilinx_versal_mini_qspi_defconfig     |  1 +
->   configs/xilinx_versal_net_mini_defconfig      |  1 +
->   configs/xilinx_versal_net_mini_emmc_defconfig |  1 +
->   configs/xilinx_versal_net_mini_ospi_defconfig |  1 +
->   configs/xilinx_versal_net_mini_qspi_defconfig |  1 +
->   configs/xilinx_zynqmp_mini_defconfig          |  1 +
->   configs/xilinx_zynqmp_mini_emmc0_defconfig    |  1 +
->   configs/xilinx_zynqmp_mini_emmc1_defconfig    |  1 +
->   configs/xilinx_zynqmp_mini_nand_defconfig     |  1 +
->   .../xilinx_zynqmp_mini_nand_single_defconfig  |  1 +
->   configs/xilinx_zynqmp_mini_qspi_defconfig     |  1 +
->   31 files changed, 196 insertions(+), 269 deletions(-)
-> 
-> diff --git a/arch/arm/dts/versal-mini-emmc0.dts b/arch/arm/dts/versal-mini-emmc0.dts
-> index 179060c56eee..9044ef1889bb 100644
-> --- a/arch/arm/dts/versal-mini-emmc0.dts
-> +++ b/arch/arm/dts/versal-mini-emmc0.dts
-> @@ -28,28 +28,20 @@
->   		bootph-all;
->   	};
+> diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+> index 4d1f92931a3..f99d464a467 100644
+> --- a/drivers/mmc/zynq_sdhci.c
+> +++ b/drivers/mmc/zynq_sdhci.c
+> @@ -85,6 +85,8 @@
+>   #define VERSAL_NET_EMMC_ICLK_PHASE_DDR52_DLL		146
+>   #define VERSAL_NET_PHY_CTRL_STRB90_STRB180_VAL		0X77
 >   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <0x2>;
-> -		#size-cells = <0x2>;
-> -		ranges;
-> -
-> -		sdhci0: sdhci@f1040000 {
-> -			compatible = "xlnx,versal-8.9a", "arasan,sdhci-8.9a";
-> -			status = "okay";
-> -			non-removable;
-> -			disable-wp;
-> -			no-sd;
-> -			no-sdio;
-> -			cap-mmc-hw-reset;
-> -			bus-width = <8>;
-> -			reg = <0x0 0xf1040000 0x0 0x10000>;
-> -			clock-names = "clk_xin", "clk_ahb";
-> -			clocks = <&clk200 &clk200>;
-> -			no-1-8-v;
-> -			xlnx,mio-bank = <0>;
-> -		};
-> +	sdhci0: sdhci@f1040000 {
-> +		compatible = "xlnx,versal-8.9a", "arasan,sdhci-8.9a";
-> +		status = "okay";
-> +		non-removable;
-> +		disable-wp;
-> +		no-sd;
-> +		no-sdio;
-> +		cap-mmc-hw-reset;
-> +		bus-width = <8>;
-> +		reg = <0x0 0xf1040000 0x0 0x10000>;
-> +		clock-names = "clk_xin", "clk_ahb";
-> +		clocks = <&clk200 &clk200>;
-> +		no-1-8-v;
-> +		xlnx,mio-bank = <0>;
->   	};
+> +#define SDHCI_HW_RST_EN			BIT(4)
+> +
+>   struct arasan_sdhci_clk_data {
+>   	int clk_phase_in[MMC_TIMING_MMC_HS400 + 1];
+>   	int clk_phase_out[MMC_TIMING_MMC_HS400 + 1];
+> @@ -1101,6 +1103,21 @@ static int sdhci_zynqmp_set_dynamic_config(struct arasan_sdhci_priv *priv,
+>   }
+>   #endif
 >   
->   	aliases {
-> diff --git a/arch/arm/dts/versal-mini-emmc1.dts b/arch/arm/dts/versal-mini-emmc1.dts
-> index ffcc33345296..47f3b74c0655 100644
-> --- a/arch/arm/dts/versal-mini-emmc1.dts
-> +++ b/arch/arm/dts/versal-mini-emmc1.dts
-> @@ -28,28 +28,20 @@
->   		bootph-all;
->   	};
+> +static void sdhci_arasan_hw_reset(struct sdhci_host *host)
+> +{
+> +	u8 reg;
+> +
+> +	reg = sdhci_readb(host, SDHCI_POWER_CONTROL);
+> +	reg |= SDHCI_HW_RST_EN;
+> +	sdhci_writeb(host, reg, SDHCI_POWER_CONTROL);
+> +	/* As per eMMC spec, minimum 1us is required but give it 2us for good measure */
+> +	udelay(2);
+> +	reg &= ~SDHCI_HW_RST_EN;
+> +	sdhci_writeb(host, reg, SDHCI_POWER_CONTROL);
+> +	/* As per eMMC spec, minimum 200us is required but give it 300us for good measure */
+> +	udelay(300);
+> +}
+> +
+>   static int arasan_sdhci_probe(struct udevice *dev)
+>   {
+>   	struct arasan_sdhci_plat *plat = dev_get_plat(dev);
+> @@ -1221,7 +1238,13 @@ static int arasan_sdhci_probe(struct udevice *dev)
+>   		}
+>   	}
 >   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <0x2>;
-> -		#size-cells = <0x2>;
-> -		ranges;
-> -
-> -		sdhci1: sdhci@f1050000 {
-> -			compatible = "xlnx,versal-8.9a", "arasan,sdhci-8.9a";
-> -			status = "okay";
-> -			non-removable;
-> -			disable-wp;
-> -			no-sd;
-> -			no-sdio;
-> -			cap-mmc-hw-reset;
-> -			bus-width = <8>;
-> -			reg = <0x0 0xf1050000 0x0 0x10000>;
-> -			clock-names = "clk_xin", "clk_ahb";
-> -			clocks = <&clk200 &clk200>;
-> -			no-1-8-v;
-> -			xlnx,mio-bank = <0>;
-> -		};
-> +	sdhci1: sdhci@f1050000 {
-> +		compatible = "xlnx,versal-8.9a", "arasan,sdhci-8.9a";
-> +		status = "okay";
-> +		non-removable;
-> +		disable-wp;
-> +		no-sd;
-> +		no-sdio;
-> +		cap-mmc-hw-reset;
-> +		bus-width = <8>;
-> +		reg = <0x0 0xf1050000 0x0 0x10000>;
-> +		clock-names = "clk_xin", "clk_ahb";
-> +		clocks = <&clk200 &clk200>;
-> +		no-1-8-v;
-> +		xlnx,mio-bank = <0>;
->   	};
->   
->   	aliases {
-> diff --git a/arch/arm/dts/versal-mini-ospi.dtsi b/arch/arm/dts/versal-mini-ospi.dtsi
-> index 9ca0cf3c027f..eec2a08e7c70 100644
-> --- a/arch/arm/dts/versal-mini-ospi.dtsi
-> +++ b/arch/arm/dts/versal-mini-ospi.dtsi
-> @@ -28,37 +28,29 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <0x2>;
-> -		#size-cells = <0x2>;
-> -		ranges;
-> -
-> -		ospi: spi@f1010000 {
-> -			compatible = "cdns,qspi-nor";
-> -			status = "okay";
-> -			reg = <0 0xf1010000 0 0x10000 0 0xc0000000 0 0x20000000>;
-> -			clock-names = "ref_clk", "pclk";
-> -			clocks = <&clk125 &clk125>;
-> -			bus-num = <2>;
-> -			num-cs = <1>;
-> -			cdns,fifo-depth = <256>;
-> -			cdns,fifo-width = <4>;
-> -			cdns,is-dma = <1>;
-> -			cdns,trigger-address = <0xc0000000>;
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> +	ospi: spi@f1010000 {
-> +		compatible = "cdns,qspi-nor";
-> +		status = "okay";
-> +		reg = <0 0xf1010000 0 0x10000 0 0xc0000000 0 0x20000000>;
-> +		clock-names = "ref_clk", "pclk";
-> +		clocks = <&clk125 &clk125>;
-> +		bus-num = <2>;
-> +		num-cs = <1>;
-> +		cdns,fifo-depth = <256>;
-> +		cdns,fifo-width = <4>;
-> +		cdns,is-dma = <1>;
-> +		cdns,trigger-address = <0xc0000000>;
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
->   
-> -			flash0: flash@0 {
-> -				compatible = "n25q512a", "micron,m25p80",
-> -					     "jedec,spi-nor";
-> -				reg = <0x0>;
-> -				spi-tx-bus-width = <8>;
-> -				spi-rx-bus-width = <8>;
-> -				spi-max-frequency = <20000000>;
-> -				no-wp;
-> -			};
-> +		flash0: flash@0 {
-> +			compatible = "n25q512a", "micron,m25p80",
-> +				     "jedec,spi-nor";
-> +			reg = <0x0>;
-> +			spi-tx-bus-width = <8>;
-> +			spi-rx-bus-width = <8>;
-> +			spi-max-frequency = <20000000>;
-> +			no-wp;
->   		};
->   	};
->   
-> diff --git a/arch/arm/dts/versal-mini-qspi.dtsi b/arch/arm/dts/versal-mini-qspi.dtsi
-> index 57427e099f9e..ec4eef74020b 100644
-> --- a/arch/arm/dts/versal-mini-qspi.dtsi
-> +++ b/arch/arm/dts/versal-mini-qspi.dtsi
-> @@ -28,31 +28,23 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <0x2>;
-> -		#size-cells = <0x2>;
-> -		ranges;
-> -
-> -		qspi: spi@f1030000 {
-> -			compatible = "xlnx,versal-qspi-1.0";
-> -			status = "okay";
-> -			clock-names = "ref_clk", "pclk";
-> -			num-cs = <0x1>;
-> -			reg = <0x0 0xf1030000 0x0 0x1000>;
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> -			clocks = <&clk150 &clk150>;
-> +	qspi: spi@f1030000 {
-> +		compatible = "xlnx,versal-qspi-1.0";
-> +		status = "okay";
-> +		clock-names = "ref_clk", "pclk";
-> +		num-cs = <0x1>;
-> +		reg = <0x0 0xf1030000 0x0 0x1000>;
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +		clocks = <&clk150 &clk150>;
->   
-> -			flash0: flash@0 {
-> -				compatible = "n25q512a", "micron,m25p80",
-> -					     "jedec,spi-nor";
-> -				reg = <0x0>;
-> -				spi-tx-bus-width = <4>;
-> -				spi-rx-bus-width = <4>;
-> -				spi-max-frequency = <20000000>;
-> -			};
-> +		flash0: flash@0 {
-> +			compatible = "n25q512a", "micron,m25p80",
-> +				     "jedec,spi-nor";
-> +			reg = <0x0>;
-> +			spi-tx-bus-width = <4>;
-> +			spi-rx-bus-width = <4>;
-> +			spi-max-frequency = <20000000>;
->   		};
->   	};
->   
-> diff --git a/arch/arm/dts/versal-net-mini-emmc.dts b/arch/arm/dts/versal-net-mini-emmc.dts
-> index 20e4e2994048..567ceeb36a0b 100644
-> --- a/arch/arm/dts/versal-net-mini-emmc.dts
-> +++ b/arch/arm/dts/versal-net-mini-emmc.dts
-> @@ -2,7 +2,7 @@
->   /*
->    * dts file for Xilinx Versal NET Mini eMMC Configuration
->    *
-> - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2023-2025, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    * Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> @@ -42,26 +42,18 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> -
-> -		sdhci1: mmc@f1050000 {
-> -			compatible = "xlnx,versal-net-emmc";
-> -			status = "okay";
-> -			non-removable;
-> -			disable-wp;
-> -			no-sd;
-> -			no-sdio;
-> -			cap-mmc-hw-reset;
-> -			bus-width = <8>;
-> -			reg = <0 0xf1050000 0 0x10000>;
-> -			clock-names = "clk_xin", "clk_ahb";
-> -			clocks = <&clk200>, <&clk200>;
-> -			xlnx,mio-bank = <0>;
-> -		};
-> +	sdhci1: mmc@f1050000 {
-> +		compatible = "xlnx,versal-net-emmc";
-> +		status = "okay";
-> +		non-removable;
-> +		disable-wp;
-> +		no-sd;
-> +		no-sdio;
-> +		cap-mmc-hw-reset;
-> +		bus-width = <8>;
-> +		reg = <0 0xf1050000 0 0x10000>;
-> +		clock-names = "clk_xin", "clk_ahb";
-> +		clocks = <&clk200>, <&clk200>;
-> +		xlnx,mio-bank = <0>;
->   	};
->   };
-> diff --git a/arch/arm/dts/versal-net-mini-ospi.dtsi b/arch/arm/dts/versal-net-mini-ospi.dtsi
-> index a9bf7cc42484..1c94b352dc97 100644
-> --- a/arch/arm/dts/versal-net-mini-ospi.dtsi
-> +++ b/arch/arm/dts/versal-net-mini-ospi.dtsi
-> @@ -2,7 +2,7 @@
->   /*
->    * dts file for Xilinx Versal NET Mini OSPI Configuration
->    *
-> - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2023-2025, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    * Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> @@ -42,38 +42,30 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <0x2>;
-> -		#size-cells = <0x2>;
-> -		ranges;
-> -
-> -		ospi: spi@f1010000 {
-> -			compatible = "cdns,qspi-nor";
-> -			status = "okay";
-> -			reg = <0 0xf1010000 0 0x10000>, <0 0xc0000000 0 0x20000000>;
-> -			clock-names = "ref_clk", "pclk";
-> -			clocks = <&clk125>, <&clk125>;
-> -			bus-num = <2>;
-> -			num-cs = <1>;
-> -			cdns,fifo-depth = <256>;
-> -			cdns,fifo-width = <4>;
-> -			cdns,is-dma = <1>;
-> -			cdns,is-stig-pgm = <1>;
-> -			cdns,trigger-address = <0xc0000000>;
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> +	ospi: spi@f1010000 {
-> +		compatible = "cdns,qspi-nor";
-> +		status = "okay";
-> +		reg = <0 0xf1010000 0 0x10000>, <0 0xc0000000 0 0x20000000>;
-> +		clock-names = "ref_clk", "pclk";
-> +		clocks = <&clk125>, <&clk125>;
-> +		bus-num = <2>;
-> +		num-cs = <1>;
-> +		cdns,fifo-depth = <256>;
-> +		cdns,fifo-width = <4>;
-> +		cdns,is-dma = <1>;
-> +		cdns,is-stig-pgm = <1>;
-> +		cdns,trigger-address = <0xc0000000>;
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
->   
-> -			flash0: flash@0 {
-> -				compatible = "mt35xu02g", "micron,m25p80",
-> -					     "jedec,spi-nor";
-> -				reg = <0>;
-> -				spi-tx-bus-width = <8>;
-> -				spi-rx-bus-width = <8>;
-> -				spi-max-frequency = <20000000>;
-> -				no-wp;
-> -			};
-> +		flash0: flash@0 {
-> +			compatible = "mt35xu02g", "micron,m25p80",
-> +				     "jedec,spi-nor";
-> +			reg = <0>;
-> +			spi-tx-bus-width = <8>;
-> +			spi-rx-bus-width = <8>;
-> +			spi-max-frequency = <20000000>;
-> +			no-wp;
->   		};
->   	};
->   };
-> diff --git a/arch/arm/dts/versal-net-mini-qspi.dtsi b/arch/arm/dts/versal-net-mini-qspi.dtsi
-> index e29a3f36d6e4..97cc39c73e0d 100644
-> --- a/arch/arm/dts/versal-net-mini-qspi.dtsi
-> +++ b/arch/arm/dts/versal-net-mini-qspi.dtsi
-> @@ -2,7 +2,7 @@
->   /*
->    * dts file for Xilinx Versal NET Mini QSPI Configuration
->    *
-> - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2023-2025, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    * Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> @@ -42,31 +42,23 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		bootph-all;
-> -		compatible = "simple-bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> -
-> -		qspi: spi@f1030000 {
-> -			compatible = "xlnx,versal-qspi-1.0";
-> -			status = "okay";
-> -			clock-names = "ref_clk", "pclk";
-> -			num-cs = <1>;
-> -			reg = <0 0xf1030000 0 0x1000>;
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> -			clocks = <&clk150>, <&clk150>;
-> +	qspi: spi@f1030000 {
-> +		compatible = "xlnx,versal-qspi-1.0";
-> +		status = "okay";
-> +		clock-names = "ref_clk", "pclk";
-> +		num-cs = <1>;
-> +		reg = <0 0xf1030000 0 0x1000>;
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +		clocks = <&clk150>, <&clk150>;
->   
-> -			flash0: flash@0 {
-> -				compatible = "n25q512a", "micron,m25p80",
-> -					     "jedec,spi-nor";
-> -				reg = <0>;
-> -				spi-tx-bus-width = <4>;
-> -				spi-rx-bus-width = <4>;
-> -				spi-max-frequency = <20000000>;
-> -			};
-> +		flash0: flash@0 {
-> +			compatible = "n25q512a", "micron,m25p80",
-> +				     "jedec,spi-nor";
-> +			reg = <0>;
-> +			spi-tx-bus-width = <4>;
-> +			spi-rx-bus-width = <4>;
-> +			spi-max-frequency = <20000000>;
->   		};
->   	};
->   };
-> diff --git a/arch/arm/dts/versal-net-mini.dts b/arch/arm/dts/versal-net-mini.dts
-> index f98f95a5c2fc..0f0a82e3aa3f 100644
-> --- a/arch/arm/dts/versal-net-mini.dts
-> +++ b/arch/arm/dts/versal-net-mini.dts
-> @@ -3,7 +3,7 @@
->    * dts file for Xilinx Versal NET
->    *
->    * Copyright (C) 2021 - 2022, Xilinx, Inc.
-> - * Copyright (C) 2022, Advanced Micro Devices, Inc.
-> + * Copyright (C) 2022-2025, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    */
-> @@ -45,22 +45,14 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		compatible = "simple-bus";
-> +	serial0: serial@f1920000 {
->   		bootph-all;
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> -
-> -		serial0: serial@f1920000 {
-> -			bootph-all;
-> -			compatible = "arm,pl011", "arm,primecell";
-> -			reg = <0 0xf1920000 0 0x1000>;
-> -			reg-io-width = <4>;
-> -			clock-names = "uartclk", "apb_pclk";
-> -			clocks = <&clk1>, <&clk1>;
-> -			clock = <1000000>;
-> -			skip-init;
-> -		};
-> +		compatible = "arm,pl011", "arm,primecell";
-> +		reg = <0 0xf1920000 0 0x1000>;
-> +		reg-io-width = <4>;
-> +		clock-names = "uartclk", "apb_pclk";
-> +		clocks = <&clk1>, <&clk1>;
-> +		clock = <1000000>;
-> +		skip-init;
->   	};
->   };
-> diff --git a/arch/arm/dts/zynqmp-mini-emmc0.dts b/arch/arm/dts/zynqmp-mini-emmc0.dts
-> index ad4b3c5f8b1d..05f61d6bb359 100644
-> --- a/arch/arm/dts/zynqmp-mini-emmc0.dts
-> +++ b/arch/arm/dts/zynqmp-mini-emmc0.dts
-> @@ -41,25 +41,18 @@
->   		clock-frequency = <200000000>;
->   	};
->   
-> -	amba: axi {
-> -		compatible = "simple-bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> -
-> -		sdhci0: mmc@ff160000 {
-> -			bootph-all;
-> -			compatible = "xlnx,zynqmp-8.9a", "arasan,sdhci-8.9a";
-> -			status = "disabled";
-> -			non-removable;
-> -			no-sd;
-> -			no-sdio;
-> -			cap-mmc-hw-reset;
-> -			bus-width = <8>;
-> -			reg = <0x0 0xff160000 0x0 0x1000>;
-> -			clock-names = "clk_xin", "clk_ahb";
-> -			clocks = <&clk_xin &clk_xin>;
-> -		};
-> +	sdhci0: mmc@ff160000 {
-> +		bootph-all;
-> +		compatible = "xlnx,zynqmp-8.9a", "arasan,sdhci-8.9a";
-> +		status = "disabled";
-> +		non-removable;
-> +		no-sd;
-> +		no-sdio;
-> +		cap-mmc-hw-reset;
-> +		bus-width = <8>;
-> +		reg = <0x0 0xff160000 0x0 0x1000>;
-> +		clock-names = "clk_xin", "clk_ahb";
-> +		clocks = <&clk_xin &clk_xin>;
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynqmp-mini-emmc1.dts b/arch/arm/dts/zynqmp-mini-emmc1.dts
-> index fd421b4fe7ed..7857106260e1 100644
-> --- a/arch/arm/dts/zynqmp-mini-emmc1.dts
-> +++ b/arch/arm/dts/zynqmp-mini-emmc1.dts
-> @@ -41,25 +41,18 @@
->   		clock-frequency = <200000000>;
->   	};
->   
-> -	amba: axi {
-> -		compatible = "simple-bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> -
-> -		sdhci1: mmc@ff170000 {
-> -			bootph-all;
-> -			compatible = "xlnx,zynqmp-8.9a", "arasan,sdhci-8.9a";
-> -			status = "disabled";
-> -			non-removable;
-> -			no-sd;
-> -			no-sdio;
-> -			cap-mmc-hw-reset;
-> -			bus-width = <8>;
-> -			reg = <0x0 0xff170000 0x0 0x1000>;
-> -			clock-names = "clk_xin", "clk_ahb";
-> -			clocks = <&clk_xin &clk_xin>;
-> -		};
-> +	sdhci1: mmc@ff170000 {
-> +		bootph-all;
-> +		compatible = "xlnx,zynqmp-8.9a", "arasan,sdhci-8.9a";
-> +		status = "disabled";
-> +		non-removable;
-> +		no-sd;
-> +		no-sdio;
-> +		cap-mmc-hw-reset;
-> +		bus-width = <8>;
-> +		reg = <0x0 0xff170000 0x0 0x1000>;
-> +		clock-names = "clk_xin", "clk_ahb";
-> +		clocks = <&clk_xin &clk_xin>;
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynqmp-mini-nand.dts b/arch/arm/dts/zynqmp-mini-nand.dts
-> index 5e2135158cd5..1ece39997912 100644
-> --- a/arch/arm/dts/zynqmp-mini-nand.dts
-> +++ b/arch/arm/dts/zynqmp-mini-nand.dts
-> @@ -35,27 +35,20 @@
->   		bootph-all;
->   	};
->   
-> -	amba: axi {
-> -		compatible = "simple-bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <1>;
-> -		ranges;
-> -
-> -		nand0: nand@ff100000 {
-> -			compatible = "arasan,nfc-v3p10";
-> -			status = "okay";
-> -			reg = <0x0 0xff100000 0x1000>;
-> -			clock-names = "clk_sys", "clk_flash";
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> -			arasan,has-mdma;
-> -			num-cs = <2>;
-> -			nand@0 {
-> -				reg = <0>;
-> -				#address-cells = <2>;
-> -				#size-cells = <1>;
-> -				nand-ecc-mode = "hw";
-> -			};
-> +	nand0: nand@ff100000 {
-> +		compatible = "arasan,nfc-v3p10";
-> +		status = "okay";
-> +		reg = <0x0 0xff100000 0x1000>;
-> +		clock-names = "clk_sys", "clk_flash";
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +		arasan,has-mdma;
-> +		num-cs = <2>;
-> +		nand@0 {
-> +			reg = <0>;
-> +			#address-cells = <2>;
-> +			#size-cells = <1>;
-> +			nand-ecc-mode = "hw";
->   		};
->   	};
->   };
-> diff --git a/arch/arm/dts/zynqmp-mini-qspi.dts b/arch/arm/dts/zynqmp-mini-qspi.dts
-> index 917603dec61d..ddcc39b4e942 100644
-> --- a/arch/arm/dts/zynqmp-mini-qspi.dts
-> +++ b/arch/arm/dts/zynqmp-mini-qspi.dts
-> @@ -42,22 +42,15 @@
->   		clock-frequency = <125000000>;
->   	};
->   
-> -	amba: axi {
-> -		compatible = "simple-bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <1>;
-> -		ranges;
-> -
-> -		qspi: spi@ff0f0000 {
-> -			compatible = "xlnx,zynqmp-qspi-1.0";
-> -			status = "disabled";
-> -			clock-names = "ref_clk", "pclk";
-> -			clocks = <&misc_clk &misc_clk>;
-> -			num-cs = <1>;
-> -			reg = <0x0 0xff0f0000 0x1000 0x0 0xc0000000 0x8000000>;
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> -		};
-> +	qspi: spi@ff0f0000 {
-> +		compatible = "xlnx,zynqmp-qspi-1.0";
-> +		status = "disabled";
-> +		clock-names = "ref_clk", "pclk";
-> +		clocks = <&misc_clk &misc_clk>;
-> +		num-cs = <1>;
-> +		reg = <0x0 0xff0f0000 0x1000 0x0 0xc0000000 0x8000000>;
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
->   	};
->   };
->   
-> diff --git a/configs/amd_versal2_mini_defconfig b/configs/amd_versal2_mini_defconfig
-> index d224583f56ae..155b554d6c21 100644
-> --- a/configs/amd_versal2_mini_defconfig
-> +++ b/configs/amd_versal2_mini_defconfig
-> @@ -63,6 +63,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
->   # CONFIG_INPUT is not set
-> diff --git a/configs/amd_versal2_mini_emmc_defconfig b/configs/amd_versal2_mini_emmc_defconfig
-> index 3afc6cb2736b..90907dfb72cf 100644
-> --- a/configs/amd_versal2_mini_emmc_defconfig
-> +++ b/configs/amd_versal2_mini_emmc_defconfig
-> @@ -54,6 +54,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   CONFIG_MMC_HS200_SUPPORT=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_ZYNQ=y
-> diff --git a/configs/amd_versal2_mini_ospi_defconfig b/configs/amd_versal2_mini_ospi_defconfig
-> index 54328e85784a..3b4c6205da4b 100644
-> --- a/configs/amd_versal2_mini_ospi_defconfig
-> +++ b/configs/amd_versal2_mini_ospi_defconfig
-> @@ -57,6 +57,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
->   # CONFIG_INPUT is not set
-> diff --git a/configs/amd_versal2_mini_qspi_defconfig b/configs/amd_versal2_mini_qspi_defconfig
-> index 48fb7ae0e7f3..72e6f613cd56 100644
-> --- a/configs/amd_versal2_mini_qspi_defconfig
-> +++ b/configs/amd_versal2_mini_qspi_defconfig
-> @@ -57,6 +57,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
->   # CONFIG_INPUT is not set
-> diff --git a/configs/xilinx_versal_mini_defconfig b/configs/xilinx_versal_mini_defconfig
-> index 561459befb61..cd5eebabf9a6 100644
-> --- a/configs/xilinx_versal_mini_defconfig
-> +++ b/configs/xilinx_versal_mini_defconfig
-> @@ -60,6 +60,7 @@ CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_MMC is not set
->   CONFIG_ARM_DCC=y
->   # CONFIG_GZIP is not set
-> diff --git a/configs/xilinx_versal_mini_emmc0_defconfig b/configs/xilinx_versal_mini_emmc0_defconfig
-> index 21f241e07b14..ffa1395fea71 100644
-> --- a/configs/xilinx_versal_mini_emmc0_defconfig
-> +++ b/configs/xilinx_versal_mini_emmc0_defconfig
-> @@ -59,6 +59,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_ZYNQ=y
->   CONFIG_ARM_DCC=y
-> diff --git a/configs/xilinx_versal_mini_emmc1_defconfig b/configs/xilinx_versal_mini_emmc1_defconfig
-> index 6cb654c7a4bd..4d438a9b5cdd 100644
-> --- a/configs/xilinx_versal_mini_emmc1_defconfig
-> +++ b/configs/xilinx_versal_mini_emmc1_defconfig
-> @@ -59,6 +59,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_ZYNQ=y
->   CONFIG_ARM_DCC=y
-> diff --git a/configs/xilinx_versal_mini_ospi_defconfig b/configs/xilinx_versal_mini_ospi_defconfig
-> index af9ce4991690..cac691c92cee 100644
-> --- a/configs/xilinx_versal_mini_ospi_defconfig
-> +++ b/configs/xilinx_versal_mini_ospi_defconfig
-> @@ -54,6 +54,7 @@ CONFIG_SYS_PROMPT="Versal> "
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_MMC is not set
->   CONFIG_MTD=y
->   CONFIG_DM_SPI_FLASH=y
-> diff --git a/configs/xilinx_versal_mini_qspi_defconfig b/configs/xilinx_versal_mini_qspi_defconfig
-> index ecb3b16033cb..220daa894ea0 100644
-> --- a/configs/xilinx_versal_mini_qspi_defconfig
-> +++ b/configs/xilinx_versal_mini_qspi_defconfig
-> @@ -56,6 +56,7 @@ CONFIG_SYS_PROMPT="Versal> "
->   # CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is not set
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
->   # CONFIG_INPUT is not set
-> diff --git a/configs/xilinx_versal_net_mini_defconfig b/configs/xilinx_versal_net_mini_defconfig
-> index 04dd0cdb507a..7f2b1fbc88e7 100644
-> --- a/configs/xilinx_versal_net_mini_defconfig
-> +++ b/configs/xilinx_versal_net_mini_defconfig
-> @@ -64,6 +64,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
->   # CONFIG_INPUT is not set
-> diff --git a/configs/xilinx_versal_net_mini_emmc_defconfig b/configs/xilinx_versal_net_mini_emmc_defconfig
-> index ab201566407d..ba2c76c480b9 100644
-> --- a/configs/xilinx_versal_net_mini_emmc_defconfig
-> +++ b/configs/xilinx_versal_net_mini_emmc_defconfig
-> @@ -54,6 +54,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   CONFIG_MMC_HS200_SUPPORT=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_ZYNQ=y
-> diff --git a/configs/xilinx_versal_net_mini_ospi_defconfig b/configs/xilinx_versal_net_mini_ospi_defconfig
-> index 18ec73722586..a8d0c5fc1287 100644
-> --- a/configs/xilinx_versal_net_mini_ospi_defconfig
-> +++ b/configs/xilinx_versal_net_mini_ospi_defconfig
-> @@ -53,6 +53,7 @@ CONFIG_SYS_PROMPT="Versal NET> "
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_MMC is not set
->   CONFIG_MTD=y
->   CONFIG_DM_SPI_FLASH=y
-> diff --git a/configs/xilinx_versal_net_mini_qspi_defconfig b/configs/xilinx_versal_net_mini_qspi_defconfig
-> index 5241da6c63bb..1a3df99f65ed 100644
-> --- a/configs/xilinx_versal_net_mini_qspi_defconfig
-> +++ b/configs/xilinx_versal_net_mini_qspi_defconfig
-> @@ -55,6 +55,7 @@ CONFIG_SYS_PROMPT="Versal NET> "
->   # CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is not set
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
->   # CONFIG_INPUT is not set
-> diff --git a/configs/xilinx_zynqmp_mini_defconfig b/configs/xilinx_zynqmp_mini_defconfig
-> index 8aa4c8dc77dc..1f9fc71062f2 100644
-> --- a/configs/xilinx_zynqmp_mini_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_defconfig
-> @@ -57,6 +57,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_DM_MAILBOX is not set
->   # CONFIG_MMC is not set
->   CONFIG_ARM_DCC=y
-> diff --git a/configs/xilinx_zynqmp_mini_emmc0_defconfig b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-> index 66e0d5242821..4310412bed99 100644
-> --- a/configs/xilinx_zynqmp_mini_emmc0_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-> @@ -72,6 +72,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
->   CONFIG_SPL_DM_SEQ_ALIAS=y
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_DM_MAILBOX is not set
->   CONFIG_SUPPORT_EMMC_BOOT=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/xilinx_zynqmp_mini_emmc1_defconfig b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-> index cded70f8f2f1..142d3643ba7a 100644
-> --- a/configs/xilinx_zynqmp_mini_emmc1_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-> @@ -72,6 +72,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
->   CONFIG_SPL_DM_SEQ_ALIAS=y
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_DM_MAILBOX is not set
->   CONFIG_SUPPORT_EMMC_BOOT=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/xilinx_zynqmp_mini_nand_defconfig b/configs/xilinx_zynqmp_mini_nand_defconfig
-> index f5c79779df3d..cb474697f518 100644
-> --- a/configs/xilinx_zynqmp_mini_nand_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_nand_defconfig
-> @@ -52,6 +52,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_DM_MAILBOX is not set
->   # CONFIG_MMC is not set
->   CONFIG_DM_MTD=y
-> diff --git a/configs/xilinx_zynqmp_mini_nand_single_defconfig b/configs/xilinx_zynqmp_mini_nand_single_defconfig
-> index fa58f2a73c0d..717b66f8d384 100644
-> --- a/configs/xilinx_zynqmp_mini_nand_single_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_nand_single_defconfig
-> @@ -52,6 +52,7 @@ CONFIG_OF_EMBED=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_DM_MAILBOX is not set
->   # CONFIG_MMC is not set
->   CONFIG_DM_MTD=y
-> diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
-> index f2d0d6f16edd..2f6135144791 100644
-> --- a/configs/xilinx_zynqmp_mini_qspi_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
-> @@ -73,6 +73,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NO_NET=y
->   # CONFIG_DM_DEVICE_REMOVE is not set
->   CONFIG_SPL_DM_SEQ_ALIAS=y
-> +# CONFIG_SIMPLE_BUS is not set
->   # CONFIG_FIRMWARE is not set
->   # CONFIG_GPIO is not set
->   # CONFIG_I2C is not set
+> -	return sdhci_probe(dev);
+> +	ret = sdhci_probe(dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	sdhci_arasan_hw_reset(host);
 
-Applied.
-M
+This is called unconditionally also for SDs. Shouldn't this be called only for 
+EMMC as description suggests?
+
+Thanks,
+Michal
