@@ -4,59 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA9EC8303F
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 12:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F3BCC8303F
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 12:40:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8A7180E9A;
-	Wed,  2 Jul 2025 14:40:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id D743982CFA;
+	Wed,  2 Jul 2025 14:40:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TbYRGr/J";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XJm4DMVW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E798982B18; Wed,  2 Jul 2025 11:23:18 +0200 (CEST)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [217.70.183.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57AA680E9A
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 11:23:15 +0200 (CEST)
+ id BC9D682103; Wed,  2 Jul 2025 12:55:48 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D81B800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:55:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id DA79A432BD;
- Wed,  2 Jul 2025 09:23:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1751448194;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=8UwGZvSD2vMzAFqpBtuBHuSfDb1NeKhfhZdvhV0qCE8=;
- b=TbYRGr/Jo2adQHG044zd8SZF/Bk7Bz8wDm1FVgz1TxmOwK1AxW0Vv6003qhdCic1jz3hFs
- GLTBQh8QdU9voDM770Vcl5GZW9xAGXYb31iUjWNezLZJPPnccXABHVQdVdcyAIaMn4WLS3
- jzxcGpKLXbHQBH5a8z/NieeTVjSaNHx3xQLDzIGfOPlDI34p2x0mQpd4qeDPw8kHhVlah4
- rh73SgqevPw8dSm9X0XrgAierBdRsFq+JFMHQm3l97Ku5HCNnUOn5uqZwDKtB+ftwaf77k
- 9OkAN4IA7Chr7OLb6VrSoS6J9FScyr6GXq8mi2GTuq+Bpbq8nD7/3Zs+Szm6eA==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Steam Lin <stlin2@winbond.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, <u-boot@lists.denx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,
- 02}jv behave correctly
-Date: Wed,  2 Jul 2025 11:23:13 +0200
-Message-ID: <20250702092313.970234-1-miquel.raynal@bootlin.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 562AtcUf3215699;
+ Wed, 2 Jul 2025 05:55:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1751453738;
+ bh=hFpX+T4K7/sv7DfBGlZb5E7O5peMAEiHJhvXuUyZG5Y=;
+ h=From:To:CC:Subject:Date;
+ b=XJm4DMVWSne0H5WOtBo1/Vrz1l9pdY0SMJAU5sRbGP61m5Dd2rfcUbIsd/cnmUWhW
+ SNvqRYCh7yy+it5CCJO3rkKFS18hDN77t6ukFSvKI2DMd+W/85x5cTGgi7AtIeGEbN
+ V/VshsmjwVjAUctgNwKBuJuV3ull2z9Ou2rst4vc=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 562AtcQe781644
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 2 Jul 2025 05:55:38 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 2
+ Jul 2025 05:55:37 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 2 Jul 2025 05:55:37 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 562AtXU63018395;
+ Wed, 2 Jul 2025 05:55:34 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>, <afd@ti.com>,
+ <u-kumar1@ti.com>, <n-francis@ti.com>
+Subject: [PATCH] board: ti: Clean up formatting in rm-cfg.yaml
+Date: Wed, 2 Jul 2025 16:25:33 +0530
+Message-ID: <20250702105533.1533178-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgddujedtvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeeuieelleetgefghfefvefhiefhfeefvddtvdfgledvjeeljeevleeugeegveelheenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehffidrrddpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeejpdhrtghpthhtohepjhgrghgrnhesrghmrghruhhlrghsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepvhhighhnvghshhhrsehtihdrtghomhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehsthhlihhnvdesfihinhgsohhnugdrtghomhdprhgtphhtthhopehthhhomhgrshdrphgvthgriiiiohhnihessghoohhtlhhin
- hdrtghomhdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhm
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-Mailman-Approved-At: Wed, 02 Jul 2025 14:39:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,156 +80,13554 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These chips are internally made of two/four dies with linear addressing
-capabilities to make it transparent to the user that two/four dies were
-used. There is one drawback however, the read status operation is racy
-as the status bit only gives the active die status and not the status of
-the other die. For commands affecting the two dies, it means if another
-command is sent too fast after the first die has returned a valid
-status (deviation can be up to 200us), the chip will get corrupted/in an
-unstable state.
+Latest update to the K3 Resource Partitioning Tool updates the YAML
+configuration files to have standard formatting with respect to
+indentation. Update the files that require this cleanup.
 
-The solution adopted here is to iterate manually over all internal
-dies (which takes about 30us per die) until all are ready. This approach
-will always be faster than a blind delay which represents the maximum
-deviation, while also being totally safe.
-
-A flash-specific hook for the status register read had to be
-implemented. Testing with the flash_speed benchmark in Linux shown no
-difference with the existing performances (using the regular status read
-core function).
-
-As the presence of multiple dies is not filled in these chips SFDP
-tables (the table containing the crucial information is optional), we
-need to manually wire the hook.
-
-This change is adapted from Linux.
-
-Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volatile-bit-v3-1-735363f8cc7d@bootlin.com/
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 101 +++++++++++++++++++++++++++++++++
- 1 file changed, 101 insertions(+)
+Boot logs:
+https://gist.github.com/nehamalcom/73c1c66d674c32f71a6ade8049c97d21
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 6f352c5c0e2d..ab0baf4eb251 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -4215,6 +4215,90 @@ static struct spi_nor_fixups macronix_octal_fixups = {
- };
- #endif /* CONFIG_SPI_FLASH_MACRONIX */
+ board/ti/am64x/rm-cfg.yaml      | 2416 +++++++-------
+ board/ti/j7200/rm-cfg.yaml      | 3554 ++++++++++----------
+ board/ti/j721e/rm-cfg.yaml      | 5498 +++++++++++++++----------------
+ board/ti/j722s/rm-cfg.yaml      |   66 +-
+ board/ti/j722s/tifs-rm-cfg.yaml | 1552 ++++-----
+ 5 files changed, 6543 insertions(+), 6543 deletions(-)
+
+diff --git a/board/ti/am64x/rm-cfg.yaml b/board/ti/am64x/rm-cfg.yaml
+index 88b37b5972c..1cc4cd34430 100644
+--- a/board/ti/am64x/rm-cfg.yaml
++++ b/board/ti/am64x/rm-cfg.yaml
+@@ -1,1215 +1,1215 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
+ #
+-# Resource management configuration for AM64x
++# Resource management configuration for AM64X
+ #
  
-+#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
-+
-+#define WINBOND_NOR_OP_SELDIE  0xc2    /* Select active die */
-+
-+struct winbond_nor_priv {
-+	unsigned int n_dice;
-+};
-+
-+/**
-+ * winbond_nor_select_die() - Set active die.
-+ * @nor:       pointer to 'struct spi_nor'.
-+ * @die:       die to set active.
-+ *
-+ * Certain Winbond chips feature more than a single die. This is mostly hidden
-+ * to the user, except that some chips may experience time deviation when
-+ * modifying the status bits between dies, which in some corner cases may
-+ * produce problematic races. Being able to explicitly select a die to check its
-+ * state in this case may be useful.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+static int winbond_nor_select_die(struct spi_nor *nor, u8 die)
-+{
-+	struct spi_mem_op op =
-+		SPI_MEM_OP(SPI_MEM_OP_CMD(WINBOND_NOR_OP_SELDIE, 1),
-+			   SPI_MEM_OP_NO_ADDR,
-+			   SPI_MEM_OP_NO_DUMMY,
-+			   SPI_MEM_OP_DATA_OUT(1, &die, 0));
-+
-+	int ret;
-+
-+	spi_nor_setup_op(nor, &op, SNOR_PROTO_1_1_1);
-+	ret = spi_mem_exec_op(nor->spi, &op);
-+	if (ret)
-+		debug("Error %d selecting die %d\n", ret, die);
-+
-+	return ret;
-+}
-+
-+static int winbond_nor_multi_die_ready(struct spi_nor *nor)
-+{
-+	struct winbond_nor_priv *winbond_priv = nor->priv;
-+	unsigned int n_dice = winbond_priv ? winbond_priv->n_dice : 1;
-+	int ret, i;
-+
-+	for (i = 0; i < n_dice; i++) {
-+		ret = winbond_nor_select_die(nor, i);
-+		if (ret)
-+			return ret;
-+
-+		ret = spi_nor_sr_ready(nor);
-+		if (ret <= 0)
-+			return ret;
-+	}
-+
-+	return 1;
-+}
-+
-+static void winbond_nor_multi_die_post_sfdp_fixups(struct spi_nor *nor,
-+						   struct spi_nor_flash_parameter *param)
-+{
-+	struct winbond_nor_priv *winbond_priv;
-+
-+	winbond_priv = kmalloc(sizeof(*winbond_priv), GFP_KERNEL);
-+	if (!winbond_priv)
-+		return;
-+
-+	winbond_priv->n_dice = param->size / SZ_64M;
-+
-+	/*
-+	 * SFDP supports dice numbers, but this information is only available in
-+	 * optional additional tables which are not provided by these chips.
-+	 * Dice number has an impact though, because these devices need extra
-+	 * care when reading the busy bit.
-+	 */
-+	nor->priv = winbond_priv;
-+	nor->ready = winbond_nor_multi_die_ready;
-+}
-+
-+static struct spi_nor_fixups winbond_nor_multi_die_fixups = {
-+	.post_sfdp = winbond_nor_multi_die_post_sfdp_fixups,
-+};
-+#endif /* CONFIG_SPI_FLASH_WINBOND */
-+
- /** spi_nor_octal_dtr_enable() - enable Octal DTR I/O if needed
-  * @nor:                 pointer to a 'struct spi_nor'
-  *
-@@ -4426,6 +4510,23 @@ void spi_nor_set_fixups(struct spi_nor *nor)
- 	    nor->info->flags & SPI_NOR_OCTAL_DTR_READ)
- 		nor->fixups = &macronix_octal_fixups;
- #endif /* SPI_FLASH_MACRONIX */
-+
-+#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
-+	if (JEDEC_MFR(nor->info) == SNOR_MFR_WINBOND) {
-+		u8 multi_die_models[][2] = {
-+			{ 0x40, 0x21 }, /* W25Q01JV */
-+			{ 0x70, 0x22 }, /* W25Q02JV */
-+		};
-+		int i;
-+
-+		for (i = 0; i < sizeof(multi_die_models) / 2; i++) {
-+			if (!memcmp(nor->info->id + 1, multi_die_models[i], 2)) {
-+				nor->fixups = &winbond_nor_multi_die_fixups;
-+				break;
-+			}
-+		}
-+	}
-+#endif /* SPI_FLASH_WINBOND */
- }
+ ---
  
- int spi_nor_scan(struct spi_nor *nor)
+ rm-cfg:
+-        rm_boardcfg:
+-                rev:
+-                        boardcfg_abi_maj: 0x0
+-                        boardcfg_abi_min: 0x1
+-                host_cfg:
+-                        subhdr:
+-                                magic: 0x4C41
+-                                size: 356
+-                        host_cfg_entries:
+-                                -  # 1
+-                                        host_id: 12
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 2
+-                                        host_id: 30
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 3
+-                                        host_id: 36
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 4
+-                                        host_id: 38
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 5
+-                                        host_id: 41
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 6
+-                                        host_id: 43
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 7
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 8
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 9
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 10
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 11
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 12
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 13
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 14
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 15
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 16
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 17
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 18
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 19
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 20
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 21
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 22
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 23
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 24
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 25
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 26
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 27
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 28
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 29
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 30
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 31
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 32
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                resasg:
+-                        subhdr:
+-                                magic: 0x7B25
+-                                size: 8
+-                        resasg_entries_size: 1288
+-                        reserved: 0
+-        resasg_entries:
+-                -
+-                        start_resource: 0
+-                        num_resource: 16
+-                        type: 64
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 4
+-                        type: 64
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 4
+-                        type: 64
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 4
+-                        type: 64
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 4
+-                        type: 64
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 64
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 8
+-                        type: 64
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 12
+-                        type: 192
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 2
+-                        type: 192
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 192
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 320
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 320
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 41
+-                        type: 384
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 50176
+-                        num_resource: 136
+-                        type: 1666
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 1667
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 12
+-                        type: 1677
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 6
+-                        type: 1677
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 6
+-                        type: 1677
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 2
+-                        type: 1677
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 4
+-                        type: 1677
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 2
+-                        type: 1677
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 1
+-                        type: 1677
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 27
+-                        num_resource: 1
+-                        type: 1677
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 6
+-                        type: 1678
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 54
+-                        num_resource: 6
+-                        type: 1678
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 54
+-                        num_resource: 6
+-                        type: 1678
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 2
+-                        type: 1678
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 62
+-                        num_resource: 4
+-                        type: 1678
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 66
+-                        num_resource: 2
+-                        type: 1678
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 6
+-                        type: 1679
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 34
+-                        num_resource: 6
+-                        type: 1679
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 34
+-                        num_resource: 6
+-                        type: 1679
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 2
+-                        type: 1679
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 4
+-                        type: 1679
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 46
+-                        num_resource: 2
+-                        type: 1679
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 12
+-                        type: 1696
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 6
+-                        type: 1696
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 6
+-                        type: 1696
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 2
+-                        type: 1696
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 4
+-                        type: 1696
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 2
+-                        type: 1696
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 1
+-                        type: 1696
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 27
+-                        num_resource: 1
+-                        type: 1696
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 6
+-                        type: 1697
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 6
+-                        type: 1697
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 6
+-                        type: 1697
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 2
+-                        type: 1697
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 4
+-                        type: 1697
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 2
+-                        type: 1697
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 6
+-                        type: 1698
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 6
+-                        type: 1698
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 6
+-                        type: 1698
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 2
+-                        type: 1698
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 4
+-                        type: 1698
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 2
+-                        type: 1698
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 35
+-                        type: 1802
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 14
+-                        type: 1802
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 14
+-                        type: 1802
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 58
+-                        num_resource: 14
+-                        type: 1802
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 92
+-                        num_resource: 14
+-                        type: 1802
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 106
+-                        num_resource: 14
+-                        type: 1802
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 168
+-                        num_resource: 16
+-                        type: 1802
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 512
+-                        type: 1805
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 528
+-                        num_resource: 256
+-                        type: 1805
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 528
+-                        num_resource: 256
+-                        type: 1805
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 784
+-                        num_resource: 192
+-                        type: 1805
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 976
+-                        num_resource: 256
+-                        type: 1805
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 1232
+-                        num_resource: 192
+-                        type: 1805
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 1424
+-                        num_resource: 96
+-                        type: 1805
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 1520
+-                        num_resource: 16
+-                        type: 1805
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1024
+-                        type: 1807
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 4096
+-                        num_resource: 42
+-                        type: 1808
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 4608
+-                        num_resource: 112
+-                        type: 1809
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 5120
+-                        num_resource: 29
+-                        type: 1810
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 5632
+-                        num_resource: 176
+-                        type: 1811
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 6144
+-                        num_resource: 176
+-                        type: 1812
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 6656
+-                        num_resource: 176
+-                        type: 1813
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 8192
+-                        num_resource: 28
+-                        type: 1814
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 8704
+-                        num_resource: 28
+-                        type: 1815
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 9216
+-                        num_resource: 28
+-                        type: 1816
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 9728
+-                        num_resource: 20
+-                        type: 1817
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 10240
+-                        num_resource: 20
+-                        type: 1818
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 10752
+-                        num_resource: 20
+-                        type: 1819
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 11264
+-                        num_resource: 20
+-                        type: 1820
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 11776
+-                        num_resource: 20
+-                        type: 1821
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 12288
+-                        num_resource: 20
+-                        type: 1822
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 1923
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 1936
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1936
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1936
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 1936
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 4
+-                        type: 1936
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 1936
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 1
+-                        type: 1936
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 64
+-                        type: 1937
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 64
+-                        type: 1937
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 88
+-                        num_resource: 8
+-                        type: 1939
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 96
+-                        num_resource: 8
+-                        type: 1940
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 104
+-                        num_resource: 8
+-                        type: 1941
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 112
+-                        num_resource: 4
+-                        type: 1942
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 116
+-                        num_resource: 3
+-                        type: 1942
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 116
+-                        num_resource: 3
+-                        type: 1942
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 119
+-                        num_resource: 2
+-                        type: 1942
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 121
+-                        num_resource: 4
+-                        type: 1942
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 125
+-                        num_resource: 2
+-                        type: 1942
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 127
+-                        num_resource: 1
+-                        type: 1942
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 128
+-                        num_resource: 16
+-                        type: 1943
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 128
+-                        num_resource: 16
+-                        type: 1943
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 144
+-                        num_resource: 8
+-                        type: 1945
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 152
+-                        num_resource: 8
+-                        type: 1946
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 152
+-                        num_resource: 8
+-                        type: 1947
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 160
+-                        num_resource: 64
+-                        type: 1948
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 224
+-                        num_resource: 64
+-                        type: 1949
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 1955
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1955
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1955
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 1955
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 4
+-                        type: 1955
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 1955
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 1
+-                        type: 1955
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 1956
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 1956
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 25
+-                        num_resource: 1
+-                        type: 1958
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 8
+-                        type: 1959
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 34
+-                        num_resource: 8
+-                        type: 1960
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 1961
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1961
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1961
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 1961
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 4
+-                        type: 1961
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 1961
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 1
+-                        type: 1961
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 1962
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1962
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 3
+-                        type: 1962
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 1962
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 4
+-                        type: 1962
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 1962
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 1
+-                        type: 1962
+-                        host_id: 30
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 1
+-                        type: 1963
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 1
+-                        type: 1963
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 16
+-                        type: 1964
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 16
+-                        type: 1964
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 8
+-                        type: 1966
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 8
+-                        type: 1968
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 19
+-                        num_resource: 1
+-                        type: 1969
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 8
+-                        type: 1970
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 1
+-                        type: 1971
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 8
+-                        type: 1972
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 21
+-                        num_resource: 4
+-                        type: 1973
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 64
+-                        type: 1974
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 25
+-                        num_resource: 4
+-                        type: 1975
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 112
+-                        num_resource: 64
+-                        type: 1976
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 2112
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 2
+-                        type: 2122
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 2
+-                        type: 2124
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 2
+-                        type: 2124
+-                        host_id: 36
+-                        reserved: 0
+-                -
+-                        start_resource: 22
+-                        num_resource: 2
+-                        type: 2124
+-                        host_id: 38
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 2
+-                        type: 2124
+-                        host_id: 41
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 2
+-                        type: 2124
+-                        host_id: 43
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 2124
+-                        host_id: 128
+-                        reserved: 0
++    rm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
++        host_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 356
++            host_cfg_entries:
++                -  # 1
++                    host_id: 12
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 2
++                    host_id: 30
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 3
++                    host_id: 36
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 4
++                    host_id: 38
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 5
++                    host_id: 41
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 6
++                    host_id: 43
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 7
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 8
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 9
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 10
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 11
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 12
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 13
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 14
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 15
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 16
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 17
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 18
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 19
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 20
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 21
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 22
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 23
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 24
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 25
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 26
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 27
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 28
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 29
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 30
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 31
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 32
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++        resasg:
++            subhdr:
++                magic: 0x7B25
++                size: 8
++            resasg_entries_size: 1288
++            reserved: 0
++    resasg_entries:
++        -
++            start_resource: 0
++            num_resource: 16
++            type: 64
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 4
++            type: 64
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 4
++            type: 64
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 4
++            type: 64
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 64
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 64
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 8
++            type: 64
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 12
++            type: 192
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 192
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 192
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 320
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 320
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 41
++            type: 384
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 50176
++            num_resource: 136
++            type: 1666
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 1667
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 12
++            type: 1677
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1677
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1677
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 2
++            type: 1677
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 4
++            type: 1677
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 2
++            type: 1677
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 1
++            type: 1677
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 1
++            type: 1677
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 6
++            type: 1678
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 6
++            type: 1678
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 6
++            type: 1678
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 2
++            type: 1678
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 4
++            type: 1678
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 66
++            num_resource: 2
++            type: 1678
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 6
++            type: 1679
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 6
++            type: 1679
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 6
++            type: 1679
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 2
++            type: 1679
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 4
++            type: 1679
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 46
++            num_resource: 2
++            type: 1679
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 12
++            type: 1696
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1696
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1696
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 2
++            type: 1696
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 4
++            type: 1696
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 2
++            type: 1696
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 1
++            type: 1696
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 1
++            type: 1696
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 6
++            type: 1697
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 6
++            type: 1697
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 6
++            type: 1697
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 1697
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 4
++            type: 1697
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 2
++            type: 1697
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 6
++            type: 1698
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 6
++            type: 1698
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 6
++            type: 1698
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 1698
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 4
++            type: 1698
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 2
++            type: 1698
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 35
++            type: 1802
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 14
++            type: 1802
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 14
++            type: 1802
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 58
++            num_resource: 14
++            type: 1802
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 92
++            num_resource: 14
++            type: 1802
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 106
++            num_resource: 14
++            type: 1802
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 16
++            type: 1802
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 512
++            type: 1805
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 528
++            num_resource: 256
++            type: 1805
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 528
++            num_resource: 256
++            type: 1805
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 784
++            num_resource: 192
++            type: 1805
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 976
++            num_resource: 256
++            type: 1805
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 1232
++            num_resource: 192
++            type: 1805
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 1424
++            num_resource: 96
++            type: 1805
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 1520
++            num_resource: 16
++            type: 1805
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1024
++            type: 1807
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4096
++            num_resource: 42
++            type: 1808
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4608
++            num_resource: 112
++            type: 1809
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5120
++            num_resource: 29
++            type: 1810
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5632
++            num_resource: 176
++            type: 1811
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 6144
++            num_resource: 176
++            type: 1812
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 6656
++            num_resource: 176
++            type: 1813
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 8192
++            num_resource: 28
++            type: 1814
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 8704
++            num_resource: 28
++            type: 1815
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 9216
++            num_resource: 28
++            type: 1816
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 9728
++            num_resource: 20
++            type: 1817
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 10240
++            num_resource: 20
++            type: 1818
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 10752
++            num_resource: 20
++            type: 1819
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 11264
++            num_resource: 20
++            type: 1820
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 11776
++            num_resource: 20
++            type: 1821
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 12288
++            num_resource: 20
++            type: 1822
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 1923
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 1936
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1936
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1936
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 1936
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 1936
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 1936
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 1
++            type: 1936
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 64
++            type: 1937
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 64
++            type: 1937
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 88
++            num_resource: 8
++            type: 1939
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 8
++            type: 1940
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 104
++            num_resource: 8
++            type: 1941
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 112
++            num_resource: 4
++            type: 1942
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 116
++            num_resource: 3
++            type: 1942
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 116
++            num_resource: 3
++            type: 1942
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 119
++            num_resource: 2
++            type: 1942
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 121
++            num_resource: 4
++            type: 1942
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 125
++            num_resource: 2
++            type: 1942
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 127
++            num_resource: 1
++            type: 1942
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 128
++            num_resource: 16
++            type: 1943
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 128
++            num_resource: 16
++            type: 1943
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 144
++            num_resource: 8
++            type: 1945
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 152
++            num_resource: 8
++            type: 1946
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 152
++            num_resource: 8
++            type: 1947
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 160
++            num_resource: 64
++            type: 1948
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 224
++            num_resource: 64
++            type: 1949
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 1955
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1955
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1955
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 1955
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 1955
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 1955
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 1
++            type: 1955
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 1956
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 1956
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 1
++            type: 1958
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 8
++            type: 1959
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 8
++            type: 1960
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 1961
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1961
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1961
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 1961
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 1961
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 1961
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 1
++            type: 1961
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 1962
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1962
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 3
++            type: 1962
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 1962
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 1962
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 1962
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 1
++            type: 1962
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 1
++            type: 1963
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 1
++            type: 1963
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 16
++            type: 1964
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 16
++            type: 1964
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 8
++            type: 1966
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 8
++            type: 1968
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 1
++            type: 1969
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 8
++            type: 1970
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 1
++            type: 1971
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 8
++            type: 1972
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 4
++            type: 1973
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 64
++            type: 1974
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 4
++            type: 1975
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 112
++            num_resource: 64
++            type: 1976
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 2112
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 2122
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 2
++            type: 2124
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 2
++            type: 2124
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 2
++            type: 2124
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 2
++            type: 2124
++            host_id: 41
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 2
++            type: 2124
++            host_id: 43
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 2124
++            host_id: 128
++            reserved: 0
+diff --git a/board/ti/j7200/rm-cfg.yaml b/board/ti/j7200/rm-cfg.yaml
+index f83184bbfc0..9da0ea91ada 100644
+--- a/board/ti/j7200/rm-cfg.yaml
++++ b/board/ti/j7200/rm-cfg.yaml
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
+ #
+ # Resource management configuration for J7200
+ #
+@@ -7,1779 +7,1779 @@
+ ---
+ 
+ rm-cfg:
+-        rm_boardcfg:
+-                rev:
+-                        boardcfg_abi_maj: 0x0
+-                        boardcfg_abi_min: 0x1
+-                host_cfg:
+-                        subhdr:
+-                                magic: 0x4C41
+-                                size: 356
+-                        host_cfg_entries:
+-                                -  # 1
+-                                        host_id: 3
+-                                        allowed_atype: 0b101010
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 2
+-                                        host_id: 5
+-                                        allowed_atype: 0b101010
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 3
+-                                        host_id: 12
+-                                        allowed_atype: 0b101010
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 4
+-                                        host_id: 13
+-                                        allowed_atype: 0b101010
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 5
+-                                        host_id: 35
+-                                        allowed_atype: 0b101010
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 6
+-                                        host_id: 37
+-                                        allowed_atype: 0b101010
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 7
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 8
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 9
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 10
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 11
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 12
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 13
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 14
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 15
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 16
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 17
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 18
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 19
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 20
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 21
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 22
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 23
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 24
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 25
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 26
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 27
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 28
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 29
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 30
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 31
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 32
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                resasg:
+-                        subhdr:
+-                                magic: 0x7B25
+-                                size: 8
+-                        resasg_entries_size: 2048
+-                        reserved: 0
+-        resasg_entries:
+-                -
+-                        start_resource: 0
+-                        num_resource: 32
+-                        type: 8192
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 32
+-                        type: 8192
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 24
+-                        type: 8320
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 24
+-                        type: 8320
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 8
+-                        type: 8384
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 8
+-                        type: 8384
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 8384
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 8
+-                        type: 8384
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 16
+-                        type: 8384
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 16
+-                        type: 8384
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 48
+-                        type: 8704
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 8
+-                        type: 8768
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 8
+-                        type: 8768
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 8768
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 8
+-                        type: 8768
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 64
+-                        type: 13258
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 20480
+-                        num_resource: 1024
+-                        type: 13261
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 64
+-                        type: 13322
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 22528
+-                        num_resource: 1024
+-                        type: 13325
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 86
+-                        type: 13386
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 104
+-                        num_resource: 32
+-                        type: 13386
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 136
+-                        num_resource: 16
+-                        type: 13386
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 152
+-                        num_resource: 16
+-                        type: 13386
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 168
+-                        num_resource: 32
+-                        type: 13386
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 200
+-                        num_resource: 24
+-                        type: 13386
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 224
+-                        num_resource: 32
+-                        type: 13386
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 1024
+-                        type: 13389
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 1042
+-                        num_resource: 512
+-                        type: 13389
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 1554
+-                        num_resource: 128
+-                        type: 13389
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 1682
+-                        num_resource: 128
+-                        type: 13389
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 1810
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 2066
+-                        num_resource: 512
+-                        type: 13389
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 2578
+-                        num_resource: 2030
+-                        type: 13389
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 16
+-                        type: 13440
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 16
+-                        type: 13440
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 16
+-                        type: 13440
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 13504
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 120
+-                        num_resource: 200
+-                        type: 13505
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 320
+-                        num_resource: 40
+-                        type: 13505
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 360
+-                        num_resource: 32
+-                        type: 13505
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 392
+-                        num_resource: 32
+-                        type: 13505
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 424
+-                        num_resource: 256
+-                        type: 13505
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 680
+-                        num_resource: 256
+-                        type: 13505
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 936
+-                        num_resource: 38
+-                        type: 13505
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 64
+-                        num_resource: 4
+-                        type: 13506
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 68
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 70
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 72
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 74
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 76
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 78
+-                        num_resource: 20
+-                        type: 13506
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 98
+-                        num_resource: 4
+-                        type: 13506
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 102
+-                        num_resource: 8
+-                        type: 13506
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 110
+-                        num_resource: 8
+-                        type: 13506
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 118
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13507
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 20
+-                        type: 13507
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 4
+-                        type: 13507
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 8
+-                        type: 13507
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 50
+-                        num_resource: 8
+-                        type: 13507
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 58
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 62
+-                        num_resource: 0
+-                        type: 13509
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 62
+-                        num_resource: 1
+-                        type: 13509
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 62
+-                        num_resource: 0
+-                        type: 13509
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 63
+-                        num_resource: 1
+-                        type: 13509
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 0
+-                        type: 13510
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 2
+-                        type: 13510
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 0
+-                        type: 13511
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 1
+-                        type: 13511
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 0
+-                        type: 13511
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 1
+-                        type: 13511
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13512
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 13512
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 1
+-                        type: 13514
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 1
+-                        type: 13514
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 2
+-                        type: 13515
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 1
+-                        type: 13515
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 1
+-                        type: 13515
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 16
+-                        type: 13515
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 23
+-                        num_resource: 8
+-                        type: 13515
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 31
+-                        num_resource: 1
+-                        type: 13515
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 8
+-                        type: 13568
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 68
+-                        num_resource: 8
+-                        type: 13568
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 76
+-                        num_resource: 8
+-                        type: 13568
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 84
+-                        num_resource: 66
+-                        type: 13568
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 13569
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 49152
+-                        num_resource: 1024
+-                        type: 13570
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 13571
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13578
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 20
+-                        type: 13578
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 4
+-                        type: 13578
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 8
+-                        type: 13578
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 50
+-                        num_resource: 8
+-                        type: 13578
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 58
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 0
+-                        type: 13579
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 1
+-                        type: 13579
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 0
+-                        type: 13579
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 1
+-                        type: 13579
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13580
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 13580
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13581
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 18
+-                        num_resource: 20
+-                        type: 13581
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 4
+-                        type: 13581
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 8
+-                        type: 13581
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 50
+-                        num_resource: 8
+-                        type: 13581
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 58
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 0
+-                        type: 13583
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 1
+-                        type: 13583
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 0
+-                        type: 13583
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 1
+-                        type: 13583
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13584
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 13584
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 128
+-                        type: 13632
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 138
+-                        num_resource: 54
+-                        type: 13632
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 196
+-                        num_resource: 28
+-                        type: 13632
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 228
+-                        num_resource: 28
+-                        type: 13632
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 400
+-                        num_resource: 4
+-                        type: 13632
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 404
+-                        num_resource: 4
+-                        type: 13632
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 32
+-                        type: 14922
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 47
+-                        num_resource: 16
+-                        type: 14922
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 63
+-                        num_resource: 64
+-                        type: 14922
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 127
+-                        num_resource: 32
+-                        type: 14922
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 159
+-                        num_resource: 16
+-                        type: 14922
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 175
+-                        num_resource: 16
+-                        type: 14922
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 191
+-                        num_resource: 65
+-                        type: 14922
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 16399
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16527
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 16655
+-                        num_resource: 256
+-                        type: 14925
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 16911
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 17039
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 17167
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 17295
+-                        num_resource: 625
+-                        type: 14925
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 1
+-                        num_resource: 8
+-                        type: 14976
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 16
+-                        type: 14976
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 29
+-                        num_resource: 16
+-                        type: 14976
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 45
+-                        num_resource: 8
+-                        type: 14976
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 53
+-                        num_resource: 8
+-                        type: 14976
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 61
+-                        num_resource: 3
+-                        type: 14976
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15040
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 96
+-                        num_resource: 32
+-                        type: 15041
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 128
+-                        num_resource: 16
+-                        type: 15041
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 144
+-                        num_resource: 32
+-                        type: 15041
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 176
+-                        num_resource: 32
+-                        type: 15041
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 208
+-                        num_resource: 16
+-                        type: 15041
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 224
+-                        num_resource: 16
+-                        type: 15041
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 240
+-                        num_resource: 12
+-                        type: 15041
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 50
+-                        num_resource: 3
+-                        type: 15042
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 53
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 55
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 57
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 59
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 61
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 63
+-                        num_resource: 9
+-                        type: 15042
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 72
+-                        num_resource: 4
+-                        type: 15042
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 76
+-                        num_resource: 4
+-                        type: 15042
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 80
+-                        num_resource: 4
+-                        type: 15042
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 84
+-                        num_resource: 4
+-                        type: 15042
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 88
+-                        num_resource: 4
+-                        type: 15042
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 92
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 3
+-                        type: 15043
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 9
+-                        type: 15043
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 4
+-                        type: 15043
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 15043
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 4
+-                        type: 15043
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 4
+-                        type: 15043
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 4
+-                        type: 15043
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 0
+-                        type: 15045
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 0
+-                        type: 15045
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 1
+-                        type: 15045
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 49
+-                        num_resource: 1
+-                        type: 15045
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15047
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15047
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15047
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 1
+-                        num_resource: 1
+-                        type: 15047
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 1
+-                        type: 15050
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 1
+-                        type: 15050
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 2
+-                        type: 15051
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 6
+-                        type: 15051
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 6
+-                        type: 15051
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 17
+-                        num_resource: 5
+-                        type: 15051
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 22
+-                        num_resource: 5
+-                        type: 15051
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 27
+-                        num_resource: 5
+-                        type: 15051
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 8
+-                        type: 15104
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 56
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 8
+-                        type: 15104
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 68
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 72
+-                        num_resource: 8
+-                        type: 15104
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 80
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 84
+-                        num_resource: 12
+-                        type: 15104
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15105
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 56320
+-                        num_resource: 256
+-                        type: 15106
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15107
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 3
+-                        type: 15114
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 9
+-                        type: 15114
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 4
+-                        type: 15114
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 15114
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 4
+-                        type: 15114
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 4
+-                        type: 15114
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 4
+-                        type: 15114
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15115
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15115
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15115
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 1
+-                        num_resource: 1
+-                        type: 15115
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 3
+-                        type: 15117
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 9
+-                        type: 15117
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 4
+-                        type: 15117
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 15117
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 4
+-                        type: 15117
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 4
+-                        type: 15117
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 4
+-                        type: 15117
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15119
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15119
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15119
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 1
+-                        num_resource: 1
+-                        type: 15119
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 20
+-                        type: 15168
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 28
+-                        type: 15168
+-                        host_id: 5
+-                        reserved: 0
++    rm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
++        host_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 356
++            host_cfg_entries:
++                -  # 1
++                    host_id: 3
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 2
++                    host_id: 5
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 3
++                    host_id: 12
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 4
++                    host_id: 13
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 5
++                    host_id: 35
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 6
++                    host_id: 37
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 7
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 8
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 9
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 10
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 11
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 12
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 13
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 14
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 15
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 16
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 17
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 18
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 19
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 20
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 21
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 22
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 23
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 24
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 25
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 26
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 27
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 28
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 29
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 30
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 31
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 32
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++        resasg:
++            subhdr:
++                magic: 0x7B25
++                size: 8
++            resasg_entries_size: 2048
++            reserved: 0
++    resasg_entries:
++        -
++            start_resource: 0
++            num_resource: 32
++            type: 8192
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 32
++            type: 8192
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 24
++            type: 8320
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 24
++            type: 8320
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 8384
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 8384
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 8384
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 8
++            type: 8384
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 16
++            type: 8384
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 16
++            type: 8384
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 48
++            type: 8704
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 8768
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 8768
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 8768
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 8
++            type: 8768
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 64
++            type: 13258
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 20480
++            num_resource: 1024
++            type: 13261
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 64
++            type: 13322
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 22528
++            num_resource: 1024
++            type: 13325
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 86
++            type: 13386
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 104
++            num_resource: 32
++            type: 13386
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 136
++            num_resource: 16
++            type: 13386
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 152
++            num_resource: 16
++            type: 13386
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 32
++            type: 13386
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 200
++            num_resource: 24
++            type: 13386
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 224
++            num_resource: 32
++            type: 13386
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 1024
++            type: 13389
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1042
++            num_resource: 512
++            type: 13389
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 1554
++            num_resource: 128
++            type: 13389
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 1682
++            num_resource: 128
++            type: 13389
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 1810
++            num_resource: 256
++            type: 13389
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2066
++            num_resource: 512
++            type: 13389
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 2578
++            num_resource: 2030
++            type: 13389
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 13440
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13440
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 4
++            type: 13440
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 4
++            type: 13440
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 16
++            type: 13440
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 16
++            type: 13440
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 16
++            type: 13440
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 13504
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 120
++            num_resource: 200
++            type: 13505
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 320
++            num_resource: 40
++            type: 13505
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 360
++            num_resource: 32
++            type: 13505
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 392
++            num_resource: 32
++            type: 13505
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 424
++            num_resource: 256
++            type: 13505
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 680
++            num_resource: 256
++            type: 13505
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 936
++            num_resource: 38
++            type: 13505
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 64
++            num_resource: 4
++            type: 13506
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 68
++            num_resource: 2
++            type: 13506
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 70
++            num_resource: 2
++            type: 13506
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 72
++            num_resource: 2
++            type: 13506
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 74
++            num_resource: 2
++            type: 13506
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 76
++            num_resource: 2
++            type: 13506
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 78
++            num_resource: 20
++            type: 13506
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 98
++            num_resource: 4
++            type: 13506
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 102
++            num_resource: 8
++            type: 13506
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 110
++            num_resource: 8
++            type: 13506
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 118
++            num_resource: 2
++            type: 13506
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13507
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 2
++            type: 13507
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 2
++            type: 13507
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 13507
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 13507
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 2
++            type: 13507
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 20
++            type: 13507
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 4
++            type: 13507
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 8
++            type: 13507
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 8
++            type: 13507
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 58
++            num_resource: 2
++            type: 13507
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 0
++            type: 13509
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 1
++            type: 13509
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 0
++            type: 13509
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 1
++            type: 13509
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 0
++            type: 13510
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 2
++            type: 13510
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 0
++            type: 13511
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 13511
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 0
++            type: 13511
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 13511
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13512
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 13512
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 13514
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 13514
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 3
++            type: 13515
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 2
++            type: 13515
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 1
++            type: 13515
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 1
++            type: 13515
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 16
++            type: 13515
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 8
++            type: 13515
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 31
++            num_resource: 1
++            type: 13515
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 8
++            type: 13568
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 68
++            num_resource: 8
++            type: 13568
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 76
++            num_resource: 8
++            type: 13568
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 84
++            num_resource: 66
++            type: 13568
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 13569
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 49152
++            num_resource: 1024
++            type: 13570
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 13571
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13578
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 2
++            type: 13578
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 2
++            type: 13578
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 13578
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 13578
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 2
++            type: 13578
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 20
++            type: 13578
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 4
++            type: 13578
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 8
++            type: 13578
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 8
++            type: 13578
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 58
++            num_resource: 2
++            type: 13578
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 0
++            type: 13579
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 13579
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 0
++            type: 13579
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 13579
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13580
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 13580
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13581
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 2
++            type: 13581
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 2
++            type: 13581
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 2
++            type: 13581
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 13581
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 2
++            type: 13581
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 20
++            type: 13581
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 4
++            type: 13581
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 8
++            type: 13581
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 8
++            type: 13581
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 58
++            num_resource: 2
++            type: 13581
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 0
++            type: 13583
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 13583
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 0
++            type: 13583
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 13583
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13584
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 13584
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 128
++            type: 13632
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 138
++            num_resource: 54
++            type: 13632
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 196
++            num_resource: 28
++            type: 13632
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 228
++            num_resource: 28
++            type: 13632
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 400
++            num_resource: 4
++            type: 13632
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 404
++            num_resource: 4
++            type: 13632
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 32
++            type: 14922
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 47
++            num_resource: 16
++            type: 14922
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 64
++            type: 14922
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 127
++            num_resource: 32
++            type: 14922
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 159
++            num_resource: 16
++            type: 14922
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 175
++            num_resource: 16
++            type: 14922
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 191
++            num_resource: 65
++            type: 14922
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 16399
++            num_resource: 128
++            type: 14925
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16527
++            num_resource: 128
++            type: 14925
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 16655
++            num_resource: 256
++            type: 14925
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 16911
++            num_resource: 128
++            type: 14925
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 17039
++            num_resource: 128
++            type: 14925
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 17167
++            num_resource: 128
++            type: 14925
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 17295
++            num_resource: 625
++            type: 14925
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 8
++            type: 14976
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 14976
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 16
++            type: 14976
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 16
++            type: 14976
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 45
++            num_resource: 8
++            type: 14976
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 53
++            num_resource: 8
++            type: 14976
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 61
++            num_resource: 3
++            type: 14976
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15040
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 32
++            type: 15041
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 128
++            num_resource: 16
++            type: 15041
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 144
++            num_resource: 32
++            type: 15041
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 176
++            num_resource: 32
++            type: 15041
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 208
++            num_resource: 16
++            type: 15041
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 224
++            num_resource: 16
++            type: 15041
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 240
++            num_resource: 12
++            type: 15041
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 3
++            type: 15042
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 53
++            num_resource: 2
++            type: 15042
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 55
++            num_resource: 2
++            type: 15042
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 57
++            num_resource: 2
++            type: 15042
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 59
++            num_resource: 2
++            type: 15042
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 61
++            num_resource: 2
++            type: 15042
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 9
++            type: 15042
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 72
++            num_resource: 4
++            type: 15042
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 76
++            num_resource: 4
++            type: 15042
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 4
++            type: 15042
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 84
++            num_resource: 4
++            type: 15042
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 88
++            num_resource: 4
++            type: 15042
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 92
++            num_resource: 1
++            type: 15042
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 3
++            type: 15043
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 2
++            type: 15043
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 15043
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 2
++            type: 15043
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 2
++            type: 15043
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 15043
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 9
++            type: 15043
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 15043
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 15043
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 4
++            type: 15043
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 4
++            type: 15043
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 4
++            type: 15043
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 2
++            type: 15043
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 0
++            type: 15045
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 0
++            type: 15045
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 1
++            type: 15045
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 1
++            type: 15045
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15047
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15047
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15047
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 1
++            type: 15047
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 15050
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 15050
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 3
++            type: 15051
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 2
++            type: 15051
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 6
++            type: 15051
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 6
++            type: 15051
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 17
++            num_resource: 5
++            type: 15051
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 5
++            type: 15051
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 5
++            type: 15051
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 8
++            type: 15104
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 56
++            num_resource: 4
++            type: 15104
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 8
++            type: 15104
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 68
++            num_resource: 4
++            type: 15104
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 72
++            num_resource: 8
++            type: 15104
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 4
++            type: 15104
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 84
++            num_resource: 12
++            type: 15104
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15105
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 56320
++            num_resource: 256
++            type: 15106
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15107
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 3
++            type: 15114
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 2
++            type: 15114
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 15114
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 2
++            type: 15114
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 2
++            type: 15114
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 15114
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 9
++            type: 15114
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 15114
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 15114
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 4
++            type: 15114
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 4
++            type: 15114
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 4
++            type: 15114
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 1
++            type: 15114
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15115
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15115
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15115
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 1
++            type: 15115
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 3
++            type: 15117
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 2
++            type: 15117
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 2
++            type: 15117
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 2
++            type: 15117
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 2
++            type: 15117
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 2
++            type: 15117
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 9
++            type: 15117
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 15117
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 15117
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 4
++            type: 15117
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 4
++            type: 15117
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 4
++            type: 15117
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 2
++            type: 15117
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15119
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15119
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15119
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 1
++            type: 15119
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 20
++            type: 15168
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 28
++            type: 15168
++            host_id: 5
++            reserved: 0
+diff --git a/board/ti/j721e/rm-cfg.yaml b/board/ti/j721e/rm-cfg.yaml
+index 0163e3e1717..88ec2026db0 100644
+--- a/board/ti/j721e/rm-cfg.yaml
++++ b/board/ti/j721e/rm-cfg.yaml
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
+ #
+ # Resource management configuration for J721E
+ #
+@@ -7,2751 +7,2751 @@
+ ---
+ 
+ rm-cfg:
+-        rm_boardcfg:
+-                rev:
+-                        boardcfg_abi_maj: 0x0
+-                        boardcfg_abi_min: 0x1
+-                host_cfg:
+-                        subhdr:
+-                                magic: 0x4C41
+-                                size: 356
+-                        host_cfg_entries:
+-                                -  # 1
+-                                        host_id: 3
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 2
+-                                        host_id: 5
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 3
+-                                        host_id: 12
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 4
+-                                        host_id: 13
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 5
+-                                        host_id: 21
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 6
+-                                        host_id: 26
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 7
+-                                        host_id: 28
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 8
+-                                        host_id: 35
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 9
+-                                        host_id: 37
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 10
+-                                        host_id: 40
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 11
+-                                        host_id: 42
+-                                        allowed_atype: 0x2A
+-                                        allowed_qos: 0xAAAA
+-                                        allowed_orderid: 0xAAAAAAAA
+-                                        allowed_priority: 0xAAAA
+-                                        allowed_sched_priority: 0xAA
+-                                -  # 12
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 13
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 14
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 15
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 16
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 17
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 18
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 19
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 20
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 21
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 22
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 23
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 24
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 25
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 26
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 27
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 28
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 29
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 30
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 31
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                                -  # 32
+-                                        host_id: 0
+-                                        allowed_atype: 0
+-                                        allowed_qos: 0
+-                                        allowed_orderid: 0
+-                                        allowed_priority: 0
+-                                        allowed_sched_priority: 0
+-                resasg:
+-                        subhdr:
+-                                magic: 0x7B25
+-                                size: 8
+-                        resasg_entries_size: 3344
+-                        reserved: 0
+-        resasg_entries:
+-                -
+-                        start_resource: 4
+-                        num_resource: 93
+-                        type: 7744
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 93
+-                        type: 7808
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 32
+-                        type: 7872
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 32
+-                        type: 8192
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 32
+-                        type: 8192
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 24
+-                        type: 8320
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 24
+-                        type: 8320
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 8
+-                        type: 8384
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 8
+-                        type: 8384
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 4
+-                        type: 8384
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 4
+-                        type: 8384
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 4
+-                        type: 8384
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 8384
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 4
+-                        type: 8384
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 4
+-                        type: 8384
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 12
+-                        type: 8384
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 52
+-                        num_resource: 12
+-                        type: 8384
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 128
+-                        type: 8576
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 128
+-                        num_resource: 128
+-                        type: 8576
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 128
+-                        type: 8640
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 128
+-                        num_resource: 128
+-                        type: 8640
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 48
+-                        type: 8704
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 8
+-                        type: 8768
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 8
+-                        type: 8768
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 6
+-                        type: 8768
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 22
+-                        num_resource: 6
+-                        type: 8768
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 2
+-                        type: 8768
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 2
+-                        type: 8768
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 64
+-                        type: 13258
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 20480
+-                        num_resource: 1024
+-                        type: 13261
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 64
+-                        type: 13322
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 22528
+-                        num_resource: 1024
+-                        type: 13325
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 86
+-                        type: 13386
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 124
+-                        num_resource: 32
+-                        type: 13386
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 156
+-                        num_resource: 12
+-                        type: 13386
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 168
+-                        num_resource: 12
+-                        type: 13386
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 180
+-                        num_resource: 12
+-                        type: 13386
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 192
+-                        num_resource: 12
+-                        type: 13386
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 204
+-                        num_resource: 12
+-                        type: 13386
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 216
+-                        num_resource: 28
+-                        type: 13386
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 244
+-                        num_resource: 8
+-                        type: 13386
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 252
+-                        num_resource: 4
+-                        type: 13386
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 1024
+-                        type: 13389
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 1062
+-                        num_resource: 512
+-                        type: 13389
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 1574
+-                        num_resource: 32
+-                        type: 13389
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 1606
+-                        num_resource: 32
+-                        type: 13389
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 1638
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 1894
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 2150
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 2406
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 2662
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 2918
+-                        num_resource: 512
+-                        type: 13389
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 3430
+-                        num_resource: 256
+-                        type: 13389
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 3686
+-                        num_resource: 922
+-                        type: 13389
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 12
+-                        type: 13440
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 4
+-                        type: 13440
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 52
+-                        num_resource: 12
+-                        type: 13440
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 13504
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 440
+-                        num_resource: 150
+-                        type: 13505
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 590
+-                        num_resource: 40
+-                        type: 13505
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 630
+-                        num_resource: 6
+-                        type: 13505
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 636
+-                        num_resource: 6
+-                        type: 13505
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 642
+-                        num_resource: 10
+-                        type: 13505
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 652
+-                        num_resource: 10
+-                        type: 13505
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 662
+-                        num_resource: 32
+-                        type: 13505
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 694
+-                        num_resource: 38
+-                        type: 13505
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 732
+-                        num_resource: 12
+-                        type: 13505
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 744
+-                        num_resource: 182
+-                        type: 13505
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 926
+-                        num_resource: 40
+-                        type: 13505
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 966
+-                        num_resource: 8
+-                        type: 13505
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 316
+-                        num_resource: 8
+-                        type: 13506
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 324
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 324
+-                        num_resource: 0
+-                        type: 13506
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 326
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 328
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 330
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 332
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 334
+-                        num_resource: 8
+-                        type: 13506
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 342
+-                        num_resource: 2
+-                        type: 13506
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 344
+-                        num_resource: 4
+-                        type: 13506
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 348
+-                        num_resource: 1
+-                        type: 13506
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 349
+-                        num_resource: 47
+-                        type: 13506
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 396
+-                        num_resource: 1
+-                        type: 13506
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 397
+-                        num_resource: 4
+-                        type: 13506
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 401
+-                        num_resource: 4
+-                        type: 13506
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 405
+-                        num_resource: 4
+-                        type: 13506
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 409
+-                        num_resource: 8
+-                        type: 13506
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 417
+-                        num_resource: 6
+-                        type: 13506
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 423
+-                        num_resource: 16
+-                        type: 13506
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 439
+-                        num_resource: 1
+-                        type: 13506
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 13507
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 0
+-                        type: 13507
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 34
+-                        num_resource: 8
+-                        type: 13507
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 2
+-                        type: 13507
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 4
+-                        type: 13507
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 1
+-                        type: 13507
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 49
+-                        num_resource: 47
+-                        type: 13507
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 96
+-                        num_resource: 1
+-                        type: 13507
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 97
+-                        num_resource: 4
+-                        type: 13507
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 101
+-                        num_resource: 4
+-                        type: 13507
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 105
+-                        num_resource: 4
+-                        type: 13507
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 109
+-                        num_resource: 8
+-                        type: 13507
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 117
+-                        num_resource: 6
+-                        type: 13507
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 123
+-                        num_resource: 10
+-                        type: 13507
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 133
+-                        num_resource: 6
+-                        type: 13507
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 139
+-                        num_resource: 1
+-                        type: 13507
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 140
+-                        num_resource: 16
+-                        type: 13508
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 156
+-                        num_resource: 6
+-                        type: 13508
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 162
+-                        num_resource: 6
+-                        type: 13508
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 168
+-                        num_resource: 2
+-                        type: 13508
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 170
+-                        num_resource: 2
+-                        type: 13508
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 172
+-                        num_resource: 96
+-                        type: 13508
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 268
+-                        num_resource: 32
+-                        type: 13508
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 304
+-                        num_resource: 0
+-                        type: 13509
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 304
+-                        num_resource: 4
+-                        type: 13509
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 304
+-                        num_resource: 0
+-                        type: 13509
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 308
+-                        num_resource: 6
+-                        type: 13509
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 314
+-                        num_resource: 2
+-                        type: 13509
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 300
+-                        num_resource: 0
+-                        type: 13510
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 300
+-                        num_resource: 2
+-                        type: 13510
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 300
+-                        num_resource: 0
+-                        type: 13510
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 302
+-                        num_resource: 2
+-                        type: 13510
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 0
+-                        type: 13511
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13511
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 0
+-                        type: 13511
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 6
+-                        type: 13511
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 13511
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13512
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 13512
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13512
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 2
+-                        type: 13512
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 5
+-                        type: 13514
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 1
+-                        type: 13514
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 2
+-                        type: 13515
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 1
+-                        type: 13515
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 1
+-                        type: 13515
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 19
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 22
+-                        num_resource: 6
+-                        type: 13515
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 3
+-                        type: 13515
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 31
+-                        num_resource: 1
+-                        type: 13515
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 140
+-                        num_resource: 16
+-                        type: 13568
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 156
+-                        num_resource: 16
+-                        type: 13568
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 172
+-                        num_resource: 128
+-                        type: 13568
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 13569
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 49152
+-                        num_resource: 1024
+-                        type: 13570
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 13571
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 13578
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 0
+-                        type: 13578
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 34
+-                        num_resource: 8
+-                        type: 13578
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 2
+-                        type: 13578
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 4
+-                        type: 13578
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 1
+-                        type: 13578
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 49
+-                        num_resource: 47
+-                        type: 13578
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 96
+-                        num_resource: 1
+-                        type: 13578
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 97
+-                        num_resource: 4
+-                        type: 13578
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 101
+-                        num_resource: 4
+-                        type: 13578
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 105
+-                        num_resource: 4
+-                        type: 13578
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 109
+-                        num_resource: 8
+-                        type: 13578
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 117
+-                        num_resource: 6
+-                        type: 13578
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 123
+-                        num_resource: 16
+-                        type: 13578
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 139
+-                        num_resource: 1
+-                        type: 13578
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 0
+-                        type: 13579
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13579
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 0
+-                        type: 13579
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 6
+-                        type: 13579
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 13579
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13580
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 13580
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13580
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 2
+-                        type: 13580
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 8
+-                        type: 13581
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 0
+-                        type: 13581
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 28
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 32
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 34
+-                        num_resource: 8
+-                        type: 13581
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 2
+-                        type: 13581
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 44
+-                        num_resource: 4
+-                        type: 13581
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 1
+-                        type: 13581
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 49
+-                        num_resource: 47
+-                        type: 13581
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 96
+-                        num_resource: 1
+-                        type: 13581
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 97
+-                        num_resource: 4
+-                        type: 13581
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 101
+-                        num_resource: 4
+-                        type: 13581
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 105
+-                        num_resource: 4
+-                        type: 13581
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 109
+-                        num_resource: 8
+-                        type: 13581
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 117
+-                        num_resource: 6
+-                        type: 13581
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 123
+-                        num_resource: 10
+-                        type: 13581
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 133
+-                        num_resource: 6
+-                        type: 13581
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 139
+-                        num_resource: 1
+-                        type: 13581
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 140
+-                        num_resource: 16
+-                        type: 13582
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 156
+-                        num_resource: 6
+-                        type: 13582
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 162
+-                        num_resource: 6
+-                        type: 13582
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 168
+-                        num_resource: 2
+-                        type: 13582
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 170
+-                        num_resource: 2
+-                        type: 13582
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 172
+-                        num_resource: 96
+-                        type: 13582
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 268
+-                        num_resource: 32
+-                        type: 13582
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 0
+-                        type: 13583
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 4
+-                        type: 13583
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 4
+-                        num_resource: 0
+-                        type: 13583
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 6
+-                        type: 13583
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 2
+-                        type: 13583
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13584
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 13584
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 13584
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 2
+-                        type: 13584
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 100
+-                        type: 13632
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 110
+-                        num_resource: 32
+-                        type: 13632
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 142
+-                        num_resource: 46
+-                        type: 13632
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 196
+-                        num_resource: 28
+-                        type: 13632
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 228
+-                        num_resource: 28
+-                        type: 13632
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 260
+-                        num_resource: 28
+-                        type: 13632
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 292
+-                        num_resource: 28
+-                        type: 13632
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 320
+-                        num_resource: 24
+-                        type: 13632
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 352
+-                        num_resource: 24
+-                        type: 13632
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 400
+-                        num_resource: 4
+-                        type: 13632
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 404
+-                        num_resource: 4
+-                        type: 13632
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16
+-                        num_resource: 32
+-                        type: 14922
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 16
+-                        type: 14922
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 64
+-                        num_resource: 64
+-                        type: 14922
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 128
+-                        num_resource: 4
+-                        type: 14922
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 132
+-                        num_resource: 16
+-                        type: 14922
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 148
+-                        num_resource: 16
+-                        type: 14922
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 164
+-                        num_resource: 8
+-                        type: 14922
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 172
+-                        num_resource: 8
+-                        type: 14922
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 180
+-                        num_resource: 8
+-                        type: 14922
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 188
+-                        num_resource: 24
+-                        type: 14922
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 212
+-                        num_resource: 8
+-                        type: 14922
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 220
+-                        num_resource: 36
+-                        type: 14922
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 16400
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 16528
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 16656
+-                        num_resource: 256
+-                        type: 14925
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 16912
+-                        num_resource: 64
+-                        type: 14925
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 16976
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 17104
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 17232
+-                        num_resource: 64
+-                        type: 14925
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 17296
+-                        num_resource: 64
+-                        type: 14925
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 17360
+-                        num_resource: 64
+-                        type: 14925
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 17424
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 17552
+-                        num_resource: 128
+-                        type: 14925
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 17680
+-                        num_resource: 240
+-                        type: 14925
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 1
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 17
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 21
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 25
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 29
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 33
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 37
+-                        num_resource: 16
+-                        type: 14976
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 53
+-                        num_resource: 4
+-                        type: 14976
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 57
+-                        num_resource: 7
+-                        type: 14976
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15040
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 96
+-                        num_resource: 20
+-                        type: 15041
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 116
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 124
+-                        num_resource: 32
+-                        type: 15041
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 156
+-                        num_resource: 12
+-                        type: 15041
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 168
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 176
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 184
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 192
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 200
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 208
+-                        num_resource: 16
+-                        type: 15041
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 224
+-                        num_resource: 8
+-                        type: 15041
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 232
+-                        num_resource: 20
+-                        type: 15041
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 50
+-                        num_resource: 4
+-                        type: 15042
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 54
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 54
+-                        num_resource: 0
+-                        type: 15042
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 56
+-                        num_resource: 0
+-                        type: 15042
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 56
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 57
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 58
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 59
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 61
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 62
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 63
+-                        num_resource: 9
+-                        type: 15042
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 72
+-                        num_resource: 6
+-                        type: 15042
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 78
+-                        num_resource: 3
+-                        type: 15042
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 81
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 83
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 84
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 85
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 86
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 87
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 88
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 90
+-                        num_resource: 1
+-                        type: 15042
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 91
+-                        num_resource: 2
+-                        type: 15042
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 4
+-                        type: 15043
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 0
+-                        type: 15043
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 0
+-                        type: 15043
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 9
+-                        type: 15043
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 6
+-                        type: 15043
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 3
+-                        type: 15043
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 33
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 35
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 37
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 39
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 2
+-                        type: 15043
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 1
+-                        type: 15043
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 43
+-                        num_resource: 3
+-                        type: 15043
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 0
+-                        type: 15045
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 2
+-                        type: 15045
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15047
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 15047
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 5
+-                        type: 15050
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 7
+-                        num_resource: 1
+-                        type: 15050
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 3
+-                        num_resource: 2
+-                        type: 15051
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 5
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 17
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 20
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 23
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 26
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 29
+-                        num_resource: 3
+-                        type: 15051
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 48
+-                        num_resource: 8
+-                        type: 15104
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 56
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 60
+-                        num_resource: 8
+-                        type: 15104
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 68
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 72
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 76
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 80
+-                        num_resource: 8
+-                        type: 15104
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 88
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 92
+-                        num_resource: 4
+-                        type: 15104
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15105
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 56320
+-                        num_resource: 256
+-                        type: 15106
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 1
+-                        type: 15107
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 4
+-                        type: 15114
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 0
+-                        type: 15114
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 0
+-                        type: 15114
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 9
+-                        type: 15114
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 6
+-                        type: 15114
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 3
+-                        type: 15114
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 33
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 35
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 37
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 39
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 1
+-                        type: 15114
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 43
+-                        num_resource: 2
+-                        type: 15114
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15115
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 15115
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 2
+-                        num_resource: 4
+-                        type: 15117
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 6
+-                        num_resource: 0
+-                        type: 15117
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 0
+-                        type: 15117
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 8
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 9
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 10
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 11
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 13
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 14
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 15
+-                        num_resource: 9
+-                        type: 15117
+-                        host_id: 12
+-                        reserved: 0
+-                -
+-                        start_resource: 24
+-                        num_resource: 6
+-                        type: 15117
+-                        host_id: 13
+-                        reserved: 0
+-                -
+-                        start_resource: 30
+-                        num_resource: 3
+-                        type: 15117
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 33
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 5
+-                        reserved: 0
+-                -
+-                        start_resource: 35
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 40
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 42
+-                        reserved: 0
+-                -
+-                        start_resource: 37
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 21
+-                        reserved: 0
+-                -
+-                        start_resource: 38
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 26
+-                        reserved: 0
+-                -
+-                        start_resource: 39
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 28
+-                        reserved: 0
+-                -
+-                        start_resource: 40
+-                        num_resource: 2
+-                        type: 15117
+-                        host_id: 35
+-                        reserved: 0
+-                -
+-                        start_resource: 42
+-                        num_resource: 1
+-                        type: 15117
+-                        host_id: 37
+-                        reserved: 0
+-                -
+-                        start_resource: 43
+-                        num_resource: 3
+-                        type: 15117
+-                        host_id: 128
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 0
+-                        type: 15119
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 0
+-                        num_resource: 2
+-                        type: 15119
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 12
+-                        num_resource: 20
+-                        type: 15168
+-                        host_id: 3
+-                        reserved: 0
+-                -
+-                        start_resource: 36
+-                        num_resource: 28
+-                        type: 15168
+-                        host_id: 5
+-                        reserved: 0
++    rm_boardcfg:
++        rev:
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
++        host_cfg:
++            subhdr:
++                magic: 0x4C41
++                size: 356
++            host_cfg_entries:
++                -  # 1
++                    host_id: 3
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 2
++                    host_id: 5
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 3
++                    host_id: 12
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 4
++                    host_id: 13
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 5
++                    host_id: 21
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 6
++                    host_id: 26
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 7
++                    host_id: 28
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 8
++                    host_id: 35
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 9
++                    host_id: 37
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 10
++                    host_id: 40
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 11
++                    host_id: 42
++                    allowed_atype: 0x2A
++                    allowed_qos: 0xAAAA
++                    allowed_orderid: 0xAAAAAAAA
++                    allowed_priority: 0xAAAA
++                    allowed_sched_priority: 0xAA
++                -  # 12
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 13
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 14
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 15
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 16
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 17
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 18
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 19
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 20
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 21
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 22
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 23
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 24
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 25
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 26
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 27
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 28
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 29
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 30
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 31
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++                -  # 32
++                    host_id: 0
++                    allowed_atype: 0
++                    allowed_qos: 0
++                    allowed_orderid: 0
++                    allowed_priority: 0
++                    allowed_sched_priority: 0
++        resasg:
++            subhdr:
++                magic: 0x7B25
++                size: 8
++            resasg_entries_size: 3344
++            reserved: 0
++    resasg_entries:
++        -
++            start_resource: 4
++            num_resource: 93
++            type: 7744
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 93
++            type: 7808
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 32
++            type: 7872
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 32
++            type: 8192
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 32
++            type: 8192
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 24
++            type: 8320
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 24
++            type: 8320
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 8384
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 8384
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 4
++            type: 8384
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 4
++            type: 8384
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 8384
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 8384
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 4
++            type: 8384
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 4
++            type: 8384
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 12
++            type: 8384
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 52
++            num_resource: 12
++            type: 8384
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 128
++            type: 8576
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 128
++            num_resource: 128
++            type: 8576
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 128
++            type: 8640
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 128
++            num_resource: 128
++            type: 8640
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 48
++            type: 8704
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 8768
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 8
++            type: 8768
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 6
++            type: 8768
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 8768
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 8768
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 8768
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 64
++            type: 13258
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 20480
++            num_resource: 1024
++            type: 13261
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 64
++            type: 13322
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 22528
++            num_resource: 1024
++            type: 13325
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 86
++            type: 13386
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 124
++            num_resource: 32
++            type: 13386
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 156
++            num_resource: 12
++            type: 13386
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 12
++            type: 13386
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 180
++            num_resource: 12
++            type: 13386
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 192
++            num_resource: 12
++            type: 13386
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 204
++            num_resource: 12
++            type: 13386
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 216
++            num_resource: 28
++            type: 13386
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 244
++            num_resource: 8
++            type: 13386
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 252
++            num_resource: 4
++            type: 13386
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 1024
++            type: 13389
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 1062
++            num_resource: 512
++            type: 13389
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 1574
++            num_resource: 32
++            type: 13389
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 1606
++            num_resource: 32
++            type: 13389
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 1638
++            num_resource: 256
++            type: 13389
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 1894
++            num_resource: 256
++            type: 13389
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 2150
++            num_resource: 256
++            type: 13389
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 2406
++            num_resource: 256
++            type: 13389
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 2662
++            num_resource: 256
++            type: 13389
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 2918
++            num_resource: 512
++            type: 13389
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 3430
++            num_resource: 256
++            type: 13389
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 3686
++            num_resource: 922
++            type: 13389
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 4
++            type: 13440
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13440
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 4
++            type: 13440
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 4
++            type: 13440
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 4
++            type: 13440
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 4
++            type: 13440
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 13440
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 13440
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 4
++            type: 13440
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 12
++            type: 13440
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 4
++            type: 13440
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 52
++            num_resource: 12
++            type: 13440
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 13504
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 440
++            num_resource: 150
++            type: 13505
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 590
++            num_resource: 40
++            type: 13505
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 630
++            num_resource: 6
++            type: 13505
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 636
++            num_resource: 6
++            type: 13505
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 642
++            num_resource: 10
++            type: 13505
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 652
++            num_resource: 10
++            type: 13505
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 662
++            num_resource: 32
++            type: 13505
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 694
++            num_resource: 38
++            type: 13505
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 732
++            num_resource: 12
++            type: 13505
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 744
++            num_resource: 182
++            type: 13505
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 926
++            num_resource: 40
++            type: 13505
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 966
++            num_resource: 8
++            type: 13505
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 316
++            num_resource: 8
++            type: 13506
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 324
++            num_resource: 2
++            type: 13506
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 324
++            num_resource: 0
++            type: 13506
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 326
++            num_resource: 2
++            type: 13506
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 328
++            num_resource: 2
++            type: 13506
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 330
++            num_resource: 2
++            type: 13506
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 332
++            num_resource: 2
++            type: 13506
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 334
++            num_resource: 8
++            type: 13506
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 342
++            num_resource: 2
++            type: 13506
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 344
++            num_resource: 4
++            type: 13506
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 348
++            num_resource: 1
++            type: 13506
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 349
++            num_resource: 47
++            type: 13506
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 396
++            num_resource: 1
++            type: 13506
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 397
++            num_resource: 4
++            type: 13506
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 401
++            num_resource: 4
++            type: 13506
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 405
++            num_resource: 4
++            type: 13506
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 409
++            num_resource: 8
++            type: 13506
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 417
++            num_resource: 6
++            type: 13506
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 423
++            num_resource: 16
++            type: 13506
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 439
++            num_resource: 1
++            type: 13506
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 13507
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 2
++            type: 13507
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 0
++            type: 13507
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 2
++            type: 13507
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 13507
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 13507
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 2
++            type: 13507
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 8
++            type: 13507
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 2
++            type: 13507
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 4
++            type: 13507
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 1
++            type: 13507
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 47
++            type: 13507
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 1
++            type: 13507
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 97
++            num_resource: 4
++            type: 13507
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 101
++            num_resource: 4
++            type: 13507
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 105
++            num_resource: 4
++            type: 13507
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 8
++            type: 13507
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 117
++            num_resource: 6
++            type: 13507
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 123
++            num_resource: 10
++            type: 13507
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 133
++            num_resource: 6
++            type: 13507
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 139
++            num_resource: 1
++            type: 13507
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 140
++            num_resource: 16
++            type: 13508
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 156
++            num_resource: 6
++            type: 13508
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 162
++            num_resource: 6
++            type: 13508
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 2
++            type: 13508
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 170
++            num_resource: 2
++            type: 13508
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 172
++            num_resource: 96
++            type: 13508
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 268
++            num_resource: 32
++            type: 13508
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 304
++            num_resource: 0
++            type: 13509
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 304
++            num_resource: 4
++            type: 13509
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 304
++            num_resource: 0
++            type: 13509
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 308
++            num_resource: 6
++            type: 13509
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 314
++            num_resource: 2
++            type: 13509
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 300
++            num_resource: 0
++            type: 13510
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 300
++            num_resource: 2
++            type: 13510
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 300
++            num_resource: 0
++            type: 13510
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 302
++            num_resource: 2
++            type: 13510
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 0
++            type: 13511
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13511
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 0
++            type: 13511
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 6
++            type: 13511
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 13511
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13512
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 13512
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13512
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 13512
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 5
++            type: 13514
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 13514
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 3
++            type: 13515
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 2
++            type: 13515
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 1
++            type: 13515
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 1
++            type: 13515
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 3
++            type: 13515
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 13515
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 13515
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 13515
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 3
++            type: 13515
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 13515
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 3
++            type: 13515
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 31
++            num_resource: 1
++            type: 13515
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 140
++            num_resource: 16
++            type: 13568
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 156
++            num_resource: 16
++            type: 13568
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 172
++            num_resource: 128
++            type: 13568
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 13569
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 49152
++            num_resource: 1024
++            type: 13570
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 13571
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 13578
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 2
++            type: 13578
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 0
++            type: 13578
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 2
++            type: 13578
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 13578
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 13578
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 2
++            type: 13578
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 8
++            type: 13578
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 2
++            type: 13578
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 4
++            type: 13578
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 1
++            type: 13578
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 47
++            type: 13578
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 1
++            type: 13578
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 97
++            num_resource: 4
++            type: 13578
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 101
++            num_resource: 4
++            type: 13578
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 105
++            num_resource: 4
++            type: 13578
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 8
++            type: 13578
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 117
++            num_resource: 6
++            type: 13578
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 123
++            num_resource: 16
++            type: 13578
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 139
++            num_resource: 1
++            type: 13578
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 0
++            type: 13579
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13579
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 0
++            type: 13579
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 6
++            type: 13579
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 13579
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13580
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 13580
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13580
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 13580
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 8
++            type: 13581
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 2
++            type: 13581
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 0
++            type: 13581
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 2
++            type: 13581
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 13581
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 13581
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 2
++            type: 13581
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 34
++            num_resource: 8
++            type: 13581
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 2
++            type: 13581
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 4
++            type: 13581
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 1
++            type: 13581
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 49
++            num_resource: 47
++            type: 13581
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 1
++            type: 13581
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 97
++            num_resource: 4
++            type: 13581
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 101
++            num_resource: 4
++            type: 13581
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 105
++            num_resource: 4
++            type: 13581
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 8
++            type: 13581
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 117
++            num_resource: 6
++            type: 13581
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 123
++            num_resource: 10
++            type: 13581
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 133
++            num_resource: 6
++            type: 13581
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 139
++            num_resource: 1
++            type: 13581
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 140
++            num_resource: 16
++            type: 13582
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 156
++            num_resource: 6
++            type: 13582
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 162
++            num_resource: 6
++            type: 13582
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 2
++            type: 13582
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 170
++            num_resource: 2
++            type: 13582
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 172
++            num_resource: 96
++            type: 13582
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 268
++            num_resource: 32
++            type: 13582
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 0
++            type: 13583
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 4
++            type: 13583
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 0
++            type: 13583
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 6
++            type: 13583
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 2
++            type: 13583
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13584
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 13584
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 13584
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 13584
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 100
++            type: 13632
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 110
++            num_resource: 32
++            type: 13632
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 142
++            num_resource: 46
++            type: 13632
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 196
++            num_resource: 28
++            type: 13632
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 228
++            num_resource: 28
++            type: 13632
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 260
++            num_resource: 28
++            type: 13632
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 292
++            num_resource: 28
++            type: 13632
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 320
++            num_resource: 24
++            type: 13632
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 352
++            num_resource: 24
++            type: 13632
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 400
++            num_resource: 4
++            type: 13632
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 404
++            num_resource: 4
++            type: 13632
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 32
++            type: 14922
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 16
++            type: 14922
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 64
++            num_resource: 64
++            type: 14922
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 128
++            num_resource: 4
++            type: 14922
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 132
++            num_resource: 16
++            type: 14922
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 148
++            num_resource: 16
++            type: 14922
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 164
++            num_resource: 8
++            type: 14922
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 172
++            num_resource: 8
++            type: 14922
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 180
++            num_resource: 8
++            type: 14922
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 188
++            num_resource: 24
++            type: 14922
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 212
++            num_resource: 8
++            type: 14922
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 220
++            num_resource: 36
++            type: 14922
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 16400
++            num_resource: 128
++            type: 14925
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16528
++            num_resource: 128
++            type: 14925
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 16656
++            num_resource: 256
++            type: 14925
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 16912
++            num_resource: 64
++            type: 14925
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 16976
++            num_resource: 128
++            type: 14925
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 17104
++            num_resource: 128
++            type: 14925
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 17232
++            num_resource: 64
++            type: 14925
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 17296
++            num_resource: 64
++            type: 14925
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 17360
++            num_resource: 64
++            type: 14925
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 17424
++            num_resource: 128
++            type: 14925
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 17552
++            num_resource: 128
++            type: 14925
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 17680
++            num_resource: 240
++            type: 14925
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 1
++            num_resource: 4
++            type: 14976
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 4
++            type: 14976
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 4
++            type: 14976
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 4
++            type: 14976
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 17
++            num_resource: 4
++            type: 14976
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 4
++            type: 14976
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 4
++            type: 14976
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 4
++            type: 14976
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 4
++            type: 14976
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 37
++            num_resource: 16
++            type: 14976
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 53
++            num_resource: 4
++            type: 14976
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 57
++            num_resource: 7
++            type: 14976
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15040
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 96
++            num_resource: 20
++            type: 15041
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 116
++            num_resource: 8
++            type: 15041
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 124
++            num_resource: 32
++            type: 15041
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 156
++            num_resource: 12
++            type: 15041
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 8
++            type: 15041
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 176
++            num_resource: 8
++            type: 15041
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 184
++            num_resource: 8
++            type: 15041
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 192
++            num_resource: 8
++            type: 15041
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 200
++            num_resource: 8
++            type: 15041
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 208
++            num_resource: 16
++            type: 15041
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 224
++            num_resource: 8
++            type: 15041
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 232
++            num_resource: 20
++            type: 15041
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 4
++            type: 15042
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 2
++            type: 15042
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 0
++            type: 15042
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 56
++            num_resource: 0
++            type: 15042
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 56
++            num_resource: 1
++            type: 15042
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 57
++            num_resource: 1
++            type: 15042
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 58
++            num_resource: 1
++            type: 15042
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 59
++            num_resource: 1
++            type: 15042
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 1
++            type: 15042
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 61
++            num_resource: 1
++            type: 15042
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 62
++            num_resource: 1
++            type: 15042
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 63
++            num_resource: 9
++            type: 15042
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 72
++            num_resource: 6
++            type: 15042
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 78
++            num_resource: 3
++            type: 15042
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 81
++            num_resource: 2
++            type: 15042
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 83
++            num_resource: 1
++            type: 15042
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 84
++            num_resource: 1
++            type: 15042
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 85
++            num_resource: 1
++            type: 15042
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 86
++            num_resource: 1
++            type: 15042
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 87
++            num_resource: 1
++            type: 15042
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 88
++            num_resource: 2
++            type: 15042
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 90
++            num_resource: 1
++            type: 15042
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 91
++            num_resource: 2
++            type: 15042
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 4
++            type: 15043
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 2
++            type: 15043
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 0
++            type: 15043
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 0
++            type: 15043
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 1
++            type: 15043
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 1
++            type: 15043
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 1
++            type: 15043
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 1
++            type: 15043
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 1
++            type: 15043
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 1
++            type: 15043
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 1
++            type: 15043
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 9
++            type: 15043
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 6
++            type: 15043
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 3
++            type: 15043
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 2
++            type: 15043
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 1
++            type: 15043
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 1
++            type: 15043
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 37
++            num_resource: 1
++            type: 15043
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 1
++            type: 15043
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 39
++            num_resource: 1
++            type: 15043
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 2
++            type: 15043
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 1
++            type: 15043
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 3
++            type: 15043
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 0
++            type: 15045
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 2
++            type: 15045
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15047
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 15047
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 5
++            type: 15050
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 1
++            type: 15050
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 3
++            type: 15051
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 2
++            type: 15051
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 3
++            type: 15051
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 3
++            type: 15051
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 3
++            type: 15051
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 3
++            type: 15051
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 17
++            num_resource: 3
++            type: 15051
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 3
++            type: 15051
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 3
++            type: 15051
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 26
++            num_resource: 3
++            type: 15051
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 29
++            num_resource: 3
++            type: 15051
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 48
++            num_resource: 8
++            type: 15104
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 56
++            num_resource: 4
++            type: 15104
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 60
++            num_resource: 8
++            type: 15104
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 68
++            num_resource: 4
++            type: 15104
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 72
++            num_resource: 4
++            type: 15104
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 76
++            num_resource: 4
++            type: 15104
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 8
++            type: 15104
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 88
++            num_resource: 4
++            type: 15104
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 92
++            num_resource: 4
++            type: 15104
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15105
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 56320
++            num_resource: 256
++            type: 15106
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 15107
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 4
++            type: 15114
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 2
++            type: 15114
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 0
++            type: 15114
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 0
++            type: 15114
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 1
++            type: 15114
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 1
++            type: 15114
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 1
++            type: 15114
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 1
++            type: 15114
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 1
++            type: 15114
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 1
++            type: 15114
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 1
++            type: 15114
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 9
++            type: 15114
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 6
++            type: 15114
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 3
++            type: 15114
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 2
++            type: 15114
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 1
++            type: 15114
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 1
++            type: 15114
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 37
++            num_resource: 1
++            type: 15114
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 1
++            type: 15114
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 39
++            num_resource: 1
++            type: 15114
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 2
++            type: 15114
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 1
++            type: 15114
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 2
++            type: 15114
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15115
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 15115
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 4
++            type: 15117
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 2
++            type: 15117
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 6
++            num_resource: 0
++            type: 15117
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 0
++            type: 15117
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 1
++            type: 15117
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 9
++            num_resource: 1
++            type: 15117
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 1
++            type: 15117
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 11
++            num_resource: 1
++            type: 15117
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 1
++            type: 15117
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 1
++            type: 15117
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 14
++            num_resource: 1
++            type: 15117
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 15
++            num_resource: 9
++            type: 15117
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 6
++            type: 15117
++            host_id: 13
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 3
++            type: 15117
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 33
++            num_resource: 2
++            type: 15117
++            host_id: 5
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 1
++            type: 15117
++            host_id: 40
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 1
++            type: 15117
++            host_id: 42
++            reserved: 0
++        -
++            start_resource: 37
++            num_resource: 1
++            type: 15117
++            host_id: 21
++            reserved: 0
++        -
++            start_resource: 38
++            num_resource: 1
++            type: 15117
++            host_id: 26
++            reserved: 0
++        -
++            start_resource: 39
++            num_resource: 1
++            type: 15117
++            host_id: 28
++            reserved: 0
++        -
++            start_resource: 40
++            num_resource: 2
++            type: 15117
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 42
++            num_resource: 1
++            type: 15117
++            host_id: 37
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 3
++            type: 15117
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 0
++            type: 15119
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 15119
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 20
++            type: 15168
++            host_id: 3
++            reserved: 0
++        -
++            start_resource: 36
++            num_resource: 28
++            type: 15168
++            host_id: 5
++            reserved: 0
+diff --git a/board/ti/j722s/rm-cfg.yaml b/board/ti/j722s/rm-cfg.yaml
+index e32beb84795..62730adf216 100644
+--- a/board/ti/j722s/rm-cfg.yaml
++++ b/board/ti/j722s/rm-cfg.yaml
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
+ #
+ # Resource management configuration for J722S
+ #
+@@ -16,224 +16,224 @@ rm-cfg:
+                 magic: 0x4C41
+                 size: 356
+             host_cfg_entries:
+-                -
++                -  # 1
+                     host_id: 12
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                -
++                -  # 2
+                     host_id: 20
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                -
++                -  # 3
+                     host_id: 22
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                -
++                -  # 4
+                     host_id: 30
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                -
++                -  # 5
+                     host_id: 36
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                -
++                -  # 6
+                     host_id: 38
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                -
++                -  # 7
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 8
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 9
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 10
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 11
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 12
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 13
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 14
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 15
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 16
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 17
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 18
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 19
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 20
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 21
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 22
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 23
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 24
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 25
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 26
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 27
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 28
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 29
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 30
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 31
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                -
++                -  # 32
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+diff --git a/board/ti/j722s/tifs-rm-cfg.yaml b/board/ti/j722s/tifs-rm-cfg.yaml
+index 4a2af0ebcaf..7b2e58a89b3 100644
+--- a/board/ti/j722s/tifs-rm-cfg.yaml
++++ b/board/ti/j722s/tifs-rm-cfg.yaml
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
+ #
+ # Resource management configuration for J722S
+ #
+@@ -16,224 +16,224 @@ tifs-rm-cfg:
+                 magic: 0x4C41
+                 size: 356
+             host_cfg_entries:
+-                - #1
++                -  # 1
+                     host_id: 12
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #2
++                -  # 2
+                     host_id: 20
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #3
++                -  # 3
+                     host_id: 22
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #4
++                -  # 4
+                     host_id: 30
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #5
++                -  # 5
+                     host_id: 36
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #6
++                -  # 6
+                     host_id: 38
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #7
++                -  # 7
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #8
++                -  # 8
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #9
++                -  # 9
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #10
++                -  # 10
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #11
++                -  # 11
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #12
++                -  # 12
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #13
++                -  # 13
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #14
++                -  # 14
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #15
++                -  # 15
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #16
++                -  # 16
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #17
++                -  # 17
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #18
++                -  # 18
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #19
++                -  # 19
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #20
++                -  # 20
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #21
++                -  # 21
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #22
++                -  # 22
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #23
++                -  # 23
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #24
++                -  # 24
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #25
++                -  # 25
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #26
++                -  # 26
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #27
++                -  # 27
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #28
++                -  # 28
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #29
++                -  # 29
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #30
++                -  # 30
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #31
++                -  # 31
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #32
++                -  # 32
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+@@ -248,746 +248,746 @@ tifs-rm-cfg:
+             reserved: 0
+     resasg_entries:
+         -
+-                start_resource: 0
+-                num_resource: 16
+-                type: 1677
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 6
+-                type: 1677
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 6
+-                type: 1677
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 22
+-                num_resource: 2
+-                type: 1677
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 24
+-                num_resource: 4
+-                type: 1677
+-                host_id: 22
+-                reserved: 0
+-        -
+-                start_resource: 28
+-                num_resource: 4
+-                type: 1677
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 57
+-                num_resource: 16
+-                type: 1678
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 73
+-                num_resource: 5
+-                type: 1678
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 73
+-                num_resource: 5
+-                type: 1678
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 78
+-                num_resource: 2
+-                type: 1678
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 80
+-                num_resource: 2
+-                type: 1678
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 32
+-                num_resource: 12
+-                type: 1679
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 6
+-                type: 1679
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 6
+-                type: 1679
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 50
+-                num_resource: 2
+-                type: 1679
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 52
+-                num_resource: 2
+-                type: 1679
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 54
+-                num_resource: 3
+-                type: 1679
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 16
+-                type: 1696
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 6
+-                type: 1696
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 6
+-                type: 1696
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 22
+-                num_resource: 2
+-                type: 1696
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 24
+-                num_resource: 4
+-                type: 1696
+-                host_id: 22
+-                reserved: 0
+-        -
+-                start_resource: 28
+-                num_resource: 4
+-                type: 1696
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 16
+-                type: 1697
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 5
+-                type: 1697
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 5
+-                type: 1697
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 21
+-                num_resource: 2
+-                type: 1697
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 23
+-                num_resource: 2
+-                type: 1697
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 12
+-                type: 1698
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 12
+-                num_resource: 6
+-                type: 1698
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 12
+-                num_resource: 6
+-                type: 1698
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 2
+-                type: 1698
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 20
+-                num_resource: 2
+-                type: 1698
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 22
+-                num_resource: 3
+-                type: 1698
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 7
+-                num_resource: 21
+-                type: 1802
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 36
+-                type: 1802
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 36
+-                type: 1802
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 84
+-                num_resource: 16
+-                type: 1802
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 100
+-                num_resource: 16
+-                type: 1802
+-                host_id: 22
+-                reserved: 0
+-        -
+-                start_resource: 154
+-                num_resource: 14
+-                type: 1802
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 168
+-                num_resource: 16
+-                type: 1802
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 4096
+-                num_resource: 29
+-                type: 1807
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 4608
+-                num_resource: 99
+-                type: 1808
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 5120
+-                num_resource: 24
+-                type: 1809
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 5632
+-                num_resource: 51
+-                type: 1810
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 6144
+-                num_resource: 51
+-                type: 1811
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 8192
+-                num_resource: 32
+-                type: 1812
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 8704
+-                num_resource: 32
+-                type: 1813
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 9216
+-                num_resource: 32
+-                type: 1814
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 9728
+-                num_resource: 25
+-                type: 1815
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 10240
+-                num_resource: 25
+-                type: 1816
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 10752
+-                num_resource: 25
+-                type: 1817
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 11264
+-                num_resource: 25
+-                type: 1818
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 11776
+-                num_resource: 25
+-                type: 1819
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 12288
+-                num_resource: 25
+-                type: 1820
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1936
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1936
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1936
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1936
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1936
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 64
+-                type: 1937
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 64
+-                type: 1937
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 83
+-                num_resource: 8
+-                type: 1938
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 91
+-                num_resource: 8
+-                type: 1939
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 99
+-                num_resource: 10
+-                type: 1942
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 109
+-                num_resource: 3
+-                type: 1942
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 109
+-                num_resource: 3
+-                type: 1942
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 112
+-                num_resource: 3
+-                type: 1942
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 115
+-                num_resource: 3
+-                type: 1942
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 118
+-                num_resource: 16
+-                type: 1943
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 118
+-                num_resource: 16
+-                type: 1943
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 134
+-                num_resource: 8
+-                type: 1944
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 134
+-                num_resource: 8
+-                type: 1945
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 142
+-                num_resource: 8
+-                type: 1946
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 142
+-                num_resource: 8
+-                type: 1947
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1955
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1955
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1955
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1955
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1955
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 8
+-                type: 1956
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 8
+-                type: 1956
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 27
+-                num_resource: 1
+-                type: 1957
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 28
+-                num_resource: 1
+-                type: 1958
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1961
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1961
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1961
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1961
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1961
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1962
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1962
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1962
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1962
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1962
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 1
+-                type: 1963
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 1
+-                type: 1963
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 16
+-                type: 1964
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 16
+-                type: 1964
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 20
+-                num_resource: 1
+-                type: 1965
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 35
+-                num_resource: 8
+-                type: 1966
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 21
+-                num_resource: 1
+-                type: 1967
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 35
+-                num_resource: 8
+-                type: 1968
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 22
+-                num_resource: 1
+-                type: 1969
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 43
+-                num_resource: 8
+-                type: 1970
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 23
+-                num_resource: 1
+-                type: 1971
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 43
+-                num_resource: 8
+-                type: 1972
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 1
+-                type: 2112
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 2
+-                num_resource: 2
+-                type: 2122
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 8
+-                num_resource: 32
+-                type: 12750
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 8
+-                num_resource: 32
+-                type: 12750
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 8
+-                type: 12751
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 32
+-                type: 12769
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 32
+-                type: 12769
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 8
+-                type: 12770
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 2
+-                type: 12810
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 2
+-                num_resource: 2
+-                type: 12810
+-                host_id: 20
+-                reserved: 0
+-        -
+-                start_resource: 4
+-                num_resource: 2
+-                type: 12810
+-                host_id: 22
+-                reserved: 0
+-        -
+-                start_resource: 22
+-                num_resource: 18
+-                type: 12810
+-                host_id: 38
+-                reserved: 0
+-        -
+-                start_resource: 1536
+-                num_resource: 8
+-                type: 12823
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 2048
+-                num_resource: 8
+-                type: 12824
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 2560
+-                num_resource: 8
+-                type: 12825
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 3072
+-                num_resource: 32
+-                type: 12826
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 3584
+-                num_resource: 32
+-                type: 12827
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 4096
+-                num_resource: 32
+-                type: 12828
+-                host_id: 128
+-                reserved: 0
++            start_resource: 0
++            num_resource: 16
++            type: 1677
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 6
++            type: 1677
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 6
++            type: 1677
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 2
++            type: 1677
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 1677
++            host_id: 22
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 1677
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 57
++            num_resource: 16
++            type: 1678
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 73
++            num_resource: 5
++            type: 1678
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 73
++            num_resource: 5
++            type: 1678
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 78
++            num_resource: 2
++            type: 1678
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 2
++            type: 1678
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 12
++            type: 1679
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 6
++            type: 1679
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 6
++            type: 1679
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 2
++            type: 1679
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 52
++            num_resource: 2
++            type: 1679
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 54
++            num_resource: 3
++            type: 1679
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 16
++            type: 1696
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 6
++            type: 1696
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 6
++            type: 1696
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 2
++            type: 1696
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 24
++            num_resource: 4
++            type: 1696
++            host_id: 22
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 4
++            type: 1696
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 16
++            type: 1697
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 5
++            type: 1697
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 5
++            type: 1697
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 2
++            type: 1697
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 2
++            type: 1697
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 12
++            type: 1698
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1698
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1698
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 2
++            type: 1698
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 2
++            type: 1698
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 3
++            type: 1698
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 7
++            num_resource: 21
++            type: 1802
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 36
++            type: 1802
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 36
++            type: 1802
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 84
++            num_resource: 16
++            type: 1802
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 100
++            num_resource: 16
++            type: 1802
++            host_id: 22
++            reserved: 0
++        -
++            start_resource: 154
++            num_resource: 14
++            type: 1802
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 16
++            type: 1802
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 4096
++            num_resource: 29
++            type: 1807
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4608
++            num_resource: 99
++            type: 1808
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5120
++            num_resource: 24
++            type: 1809
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5632
++            num_resource: 51
++            type: 1810
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 6144
++            num_resource: 51
++            type: 1811
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 8192
++            num_resource: 32
++            type: 1812
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 8704
++            num_resource: 32
++            type: 1813
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 9216
++            num_resource: 32
++            type: 1814
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 9728
++            num_resource: 25
++            type: 1815
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 10240
++            num_resource: 25
++            type: 1816
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 10752
++            num_resource: 25
++            type: 1817
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 11264
++            num_resource: 25
++            type: 1818
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 11776
++            num_resource: 25
++            type: 1819
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 12288
++            num_resource: 25
++            type: 1820
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1936
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1936
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1936
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1936
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1936
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 64
++            type: 1937
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 64
++            type: 1937
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 83
++            num_resource: 8
++            type: 1938
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 91
++            num_resource: 8
++            type: 1939
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 99
++            num_resource: 10
++            type: 1942
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 3
++            type: 1942
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 3
++            type: 1942
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 112
++            num_resource: 3
++            type: 1942
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 115
++            num_resource: 3
++            type: 1942
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 118
++            num_resource: 16
++            type: 1943
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 118
++            num_resource: 16
++            type: 1943
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 134
++            num_resource: 8
++            type: 1944
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 134
++            num_resource: 8
++            type: 1945
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 142
++            num_resource: 8
++            type: 1946
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 142
++            num_resource: 8
++            type: 1947
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1955
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1955
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1955
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1955
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1955
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 8
++            type: 1956
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 8
++            type: 1956
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 1
++            type: 1957
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 1
++            type: 1958
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1961
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1961
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1961
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1961
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1961
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1962
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1962
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1962
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1962
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1962
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 1
++            type: 1963
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 1
++            type: 1963
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 16
++            type: 1964
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 16
++            type: 1964
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 1
++            type: 1965
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 8
++            type: 1966
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 1
++            type: 1967
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 8
++            type: 1968
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 1
++            type: 1969
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 8
++            type: 1970
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 1
++            type: 1971
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 8
++            type: 1972
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 2112
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 2122
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 32
++            type: 12750
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 8
++            num_resource: 32
++            type: 12750
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 12751
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 32
++            type: 12769
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 32
++            type: 12769
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 12770
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 12810
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 12810
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 2
++            type: 12810
++            host_id: 22
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 18
++            type: 12810
++            host_id: 38
++            reserved: 0
++        -
++            start_resource: 1536
++            num_resource: 8
++            type: 12823
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2048
++            num_resource: 8
++            type: 12824
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2560
++            num_resource: 8
++            type: 12825
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 3072
++            num_resource: 32
++            type: 12826
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 3584
++            num_resource: 32
++            type: 12827
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4096
++            num_resource: 32
++            type: 12828
++            host_id: 128
++            reserved: 0
 -- 
-2.49.0
+2.34.1
 
