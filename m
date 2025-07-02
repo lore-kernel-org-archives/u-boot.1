@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D66C83038
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DC0C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BDC181FEE;
-	Wed,  2 Jul 2025 03:03:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE8F382CFA;
+	Wed,  2 Jul 2025 03:03:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OG+Ll+Am";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oY32ZiII";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65DDA82ADA; Wed,  2 Jul 2025 03:03:51 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id D44CD82103; Wed,  2 Jul 2025 03:03:52 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4431381E13
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:03:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BE7E82103
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:03:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-2ea58f008e9so3305736fac.0
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:03:49 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2ea65f5a0easo3583779fac.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:03:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418228; x=1752023028; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WoDtnyq7tLiYPRawKigqs8RzXHqgBny7Yf/XORRB+QU=;
- b=OG+Ll+Am3zaP0vyiAI4ySMty1uZC8h0n9f2PlTDAByQDLs1FpfxCt2Brs/MhWACBvW
- R/0ud3gV0DGEO0A3HdJlgkrOyFNLW+RofDrmf4Hort1JBoRqHEr3Pyfi6gIWzYsYzktg
- RuOgmEdqCa4c1OAMHi6LpNSFazuaKqLpQJ/II=
+ d=konsulko.com; s=google; t=1751418229; x=1752023029; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vLLkDxTsLF4zAak5n6Yv2mK+8XaV7ZCK8sbNzmbc7Fs=;
+ b=oY32ZiIIZ0TgDy+mnirHVNJsvovUmxLpseWzzgS76pA8C+oDbZLvfhw0R40m8OQiP4
+ r0om7SJ+FmKapdTj7+tjTf5IPxQFgPZRoPR7O6cQHP0MW/9TFXYXOW2YMKWJa59oul5a
+ sflXwfBExezIzQSo/BuSsY1bHJuhnFjaPftgo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418228; x=1752023028;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WoDtnyq7tLiYPRawKigqs8RzXHqgBny7Yf/XORRB+QU=;
- b=k5ORcF04tTaI11ieJIHeBhKzLgZu1wNstxcgVXnSM6qD1zRLrHT09YJ3Jt1jJCwQz1
- oWdpzKoFPHV+sJdsnVdyywob/bDxUjLZoQbusxg5ucTakU/GaO/gAykA6AdiPWW72mWa
- 8ORSzP3hGWEcpsStuC7+XqJJqtSG4KVbjTqSps+UE29/HN0siSbCYYn7yOHCyOxk1wS2
- 7Kn931poIGMYxYyPJ07wBOd4XAXqA/7HNjk88IPNwCmMauz4+STgKGBE2m9tSZf/AOyV
- WUbo+EiEKLHgH6jAdWOLttBxy/wAXbF+c/xihr/zuMRNqm75LAFu4huUWrV+Z6+83bi7
- SY9A==
-X-Gm-Message-State: AOJu0Yy+OccoaP8KjatkHBIpWb4mvTZR+4G17N/mun5YFEEk2FCMMIxy
- N2RTJUl0jJZXBzKq86TIKEEnQfYEV2IcoNe3fzFkJ6NAS/cqNEhk0vWFTj0KxDv1WBROvC/A88n
- EIJ4l3/M=
-X-Gm-Gg: ASbGncuQ8ycCkIOF3L9JuDm5XjiJb/3m/eRJ8tFm/oQN50wpp2ih2zyDf4L71TreN9b
- V1R/FbeAS/vMH7nUW2vU2blDD0uyogSjQooZlLp9Cc+AFnqwLukGcl5WRacM7+IYUmorb+jLG3f
- qlbEKDM9jHzYP5Sx7gCG89OnRwLfKfi9hhUdiakHtm8jMyXFRXRwIYnj+ISSjd5rFXZzZum6CGx
- ti9/wYFeuvmBlwdB8hVM053q4+HBSJvlsbYoIPH2blNDZ2jshPHLN51JfvPASUg30NLVh4To2GJ
- AdGpu93fjBaSLI4AfIbjecj3LVHe0VJ0nof9UOY+66aZiKEPmM+MIbWXuyW6mzq9MCe08mbyr1D
- 5/3avWwm2WQAoviXTUvoAViw=
-X-Google-Smtp-Source: AGHT+IFB0d+QzT9hTH3PZfzGYFUI4ausIknhKJasYsoZH7UN74RRFxCbAA3UNrQS9mrLCFE6LN/67A==
-X-Received: by 2002:a05:6870:9d8f:b0:29e:48d6:2e62 with SMTP id
- 586e51a60fabf-2f5889b1720mr812272fac.9.1751418227903; 
- Tue, 01 Jul 2025 18:03:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751418229; x=1752023029;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vLLkDxTsLF4zAak5n6Yv2mK+8XaV7ZCK8sbNzmbc7Fs=;
+ b=Sibi1BACYEY8wAav8jXWpZtLGHgM3dJF4dMkRjUjAcOUnCq8nW3kffRKYC409g8zvu
+ sXDywZ4PqMUd1PYkPijbJquI081oZXV2t2KxlZSd1hwZXf6oCX/PsG5bLJnU0AU1bkxE
+ WkmRP3gzkwm6TR1ltxM6vuHKL2I1idcaMWd0u4kn149rlmqyj7Apkgm5Ovf76dd61wwW
+ ZhZas9iiZEaW2EXiDSINQze7R3asoMpogfTcoHefEuWeQVoJBptmvsS71gVK65yofLI3
+ tPfwxaPlLaK+tk3t3jIaWkuhnW5wTQqQ6w9oKqFTvS+2MCy5IwbhXVpeMwR+RbEktiXc
+ fi6A==
+X-Gm-Message-State: AOJu0Yww0wARmZQB5BXIrokOKT0qHUOlgb8i9p8BW+Bbvgxhh/OfPvFK
+ GSlBppFrsgjp7O+p915fVlC1l1KtiVzeD4wc3U5ZmCkd37e9Jyemb/6VjZ2zlkqTbZyWHnLKteo
+ ERkI10rs=
+X-Gm-Gg: ASbGnct1DH2XUXowXqI/NZOSnVSMJf4nwuUlz9ALrhCqKMFMrukmWZfsagfwp2mvLdw
+ lfuUZ1dNKrwR2rl4lLf3dh3TmCpmR9geJfd7Vgm2csUU5lwUdJDwXBid7G5D1xv8/CxTy8Eh80u
+ C77M04Qa9ojJ6UJ8j+0kwlrsrwOrEd4fby6l2UOckFoDFIIispiLtVr3vQsEpCqcRFfzBymbRnD
+ Tz6yt5cTxPnvqSvgtRXTPV6LWXcjGROQonFvIheoRO+aOG+jX9brV74kl76RhvYQoDW2pY0KlpJ
+ xq0k303hGiQF6Ya73et95KQygphNIO1ND6LV0VCXjxTnmYyqGdaBUWYFlgkO6/NE2tR3iOQcK0J
+ 2YCII2jDb5dKQhNh+PrY34Nw=
+X-Google-Smtp-Source: AGHT+IGcp0ARR/9Sxx67Ibvgl1h3NKBL6IL+i0T5Lv1mFCDsn97u9gQPNn+wobK6oQnagTvTsO015A==
+X-Received: by 2002:a05:6870:ac95:b0:2c2:4d73:ec43 with SMTP id
+ 586e51a60fabf-2f66491a310mr556162fac.15.1751418229327; 
+ Tue, 01 Jul 2025 18:03:49 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2efd4ef29absm3578201fac.14.2025.07.01.18.03.47
+ 586e51a60fabf-2efd4ef29absm3578201fac.14.2025.07.01.18.03.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:03:47 -0700 (PDT)
+ Tue, 01 Jul 2025 18:03:48 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Kever Yang <kever.yang@rock-chips.com>,
 	Marek Vasut <marex@denx.de>
-Subject: [PATCH 1/2] usb: gadget: rockchip: Add missing dependency
-Date: Tue,  1 Jul 2025 19:03:45 -0600
-Message-ID: <20250702010346.18716-1-trini@konsulko.com>
+Subject: [PATCH 2/2] usb: gadget: rockchip: Fix spacing around the Kconfig
+ option
+Date: Tue,  1 Jul 2025 19:03:46 -0600
+Message-ID: <20250702010346.18716-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250702010346.18716-1-trini@konsulko.com>
+References: <20250702010346.18716-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,29 +97,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The rockchip usb gadget driver cannot build without platform specific
-headers being available. Express that requirement in Kconfig as well.
+This Kconfig option used spaces and not tabs for indentation. Switch to
+tabs.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Kever Yang <kever.yang@rock-chips.com>
 Cc: Marek Vasut <marex@denx.de>
 ---
- drivers/usb/gadget/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/usb/gadget/Kconfig | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 46a83141481f..b0decd7b2512 100644
+index b0decd7b2512..6201663317be 100644
 --- a/drivers/usb/gadget/Kconfig
 +++ b/drivers/usb/gadget/Kconfig
-@@ -202,6 +202,7 @@ config USB_FUNCTION_MASS_STORAGE
+@@ -201,13 +201,13 @@ config USB_FUNCTION_MASS_STORAGE
+ 	  the eMMC/SD card content to HOST PC so it can be mounted.
  
  config USB_FUNCTION_ROCKUSB
-         bool "Enable USB rockusb gadget"
-+	depends on ARCH_ROCKCHIP
-         help
-           Rockusb protocol is widely used by Rockchip SoC based devices. It can
-           read/write info, image to/from devices. This enables the USB part of
+-        bool "Enable USB rockusb gadget"
++	bool "Enable USB rockusb gadget"
+ 	depends on ARCH_ROCKCHIP
+-        help
+-          Rockusb protocol is widely used by Rockchip SoC based devices. It can
+-          read/write info, image to/from devices. This enables the USB part of
+-          the rockusb gadget.for more detail about Rockusb protocol, please see
+-          doc/README.rockusb
++	help
++	  Rockusb protocol is widely used by Rockchip SoC based devices. It can
++	  read/write info, image to/from devices. This enables the USB part of
++	  the rockusb gadget.for more detail about Rockusb protocol, please see
++	  doc/README.rockusb
+ 
+ config USB_FUNCTION_SDP
+ 	bool "Enable USB SDP (Serial Download Protocol)"
 -- 
 2.43.0
 
