@@ -4,57 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF11C83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 07:22:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBCDC7EE30
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 07:25:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46A7F82103;
-	Wed,  2 Jul 2025 09:22:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB26081FEE;
+	Wed,  2 Jul 2025 09:25:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1751440958;
-	bh=48HQO8V00be4/MnndR5GGfeHao4TtBgIkBm8iT3Zb/g=;
+	s=phobos-20191101; t=1751441150;
+	bh=Wb356A/aJdHYyHxg2r2Isxa3Ad4YzX6UsnMaQ0S5P9M=;
 	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=S8ipki8hcgXtUDiA+b8aufvZrcUb1sfYr4yaZ0YWMUV/Qo2x7c9/IsokqSWPmp27Y
-	 l+ANGhE7uGISH9vN3PKv790zSlG0+Z6h/8zApQtXLWK59VCtQnFKgz0qqaezeoPgQg
-	 6EDn6btVXhfdngfGENE58QDvkV9I5T4K6n8dRFIzSIFMrOj0AOUQjB5IKTyBLHuwpG
-	 ZcTpd4E02lALsd2E/IGtE/rE83tzTBu/adN1UHZl7Ceuw6oUAKDdqQi5b17pJBmqu7
-	 l9fMr5Rv4uqllmgJBsjRPk2L7BxhvRzw8ajEXzxKhkIRpgZwzeP6bAs2AOpN0nY4Ww
-	 a6B4wJDwyR5jA==
+	b=pOwvPJBMHmTRrnARLcBpopAEQSzbIgQvYdr9yv25E+sL+17mvALu7sC+zatDuGvPE
+	 DMx9PrKjaq76+GDQobGHRcLzCjNDvR433vmmSzKljXnZ6sCe1MubkFw5MUVNNYpn3d
+	 LoZfeCO5bonkxyYcCJGFiPnd9mgGmKd6G8Xu9sPwrH3qNPRlIMTlzr6Cqh93xKK/Ps
+	 RteLssajLiNv8vXJud1vag5tUu7wK1nOojcxyAkjPSl6LCdk3xCjgfxhd4EHe1W+NY
+	 WIIqdd9zzxGWkNyTWtrCjPF9HnfHmt0QnJkng854hG3HPtPn/DvG4lyXcAqByDzMkp
+	 /CZQrNbsbnsbw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D96FF82ADA; Wed,  2 Jul 2025 09:22:37 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id A8DC082103; Wed,  2 Jul 2025 09:25:47 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD13A81FEE
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 09:22:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2B8981E13
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 09:25:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4bXBDn3888z9tKJ;
- Wed,  2 Jul 2025 09:22:33 +0200 (CEST)
-Message-ID: <80c125ce-7f0c-410a-b12d-0403fbe77a4f@denx.de>
-Date: Wed, 2 Jul 2025 09:22:31 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4bXBJR4Ynsz9swv;
+ Wed,  2 Jul 2025 09:25:43 +0200 (CEST)
+Message-ID: <ad005660-27f4-4246-b521-39a90ae98190@denx.de>
+Date: Wed, 2 Jul 2025 09:25:42 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v1] watchdog: qcom-wdt: Drop read check on write-only
- WDT_EN register
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- trini@konsulko.com, hello@paulsajna.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20250701065738.1644669-1-balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH] spi: mvebu: Correct dependencies on MVEBU_A3700_SPI
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250702010405.18791-1-trini@konsulko.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250701065738.1644669-1-balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <20250702010405.18791-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4bXBJR4Ynsz9swv
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,23 +68,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01.07.25 08:57, Balaji Selvanathan wrote:
-> On some Qualcomm platforms, such as Dragonwing boards, the WDT_EN
-> register is write-only. Reading it back after enabling the watchdog
-> can return invalid data or cause unexpected behavior.
+On 02.07.25 03:04, Tom Rini wrote:
+> A dependency exposed by "make allyesconfig" is that the logic around
+> this symbol was not quite correct. It needs to depend on ARCH_MVEBU and
+> ARM64 and then select CLK_MVEBU.
 > 
-> In particular, the check:
->    if (readl(wdt_addr(wdt, WDT_EN)) != 1)
-> may fail even though the watchdog is correctly enabled and running.
-> This leads to misleading error messages and unnecessary failures.
-> 
-> Removing the read check ensures compatibility and avoids false
-> negatives on platforms where WDT_EN is not readable.
-> 
-> This work builds upon this previous submission:
-> https://lore.kernel.org/u-boot/20250625094607.1348494-1-gopinath.sekar@oss.qualcomm.com/
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -95,25 +81,24 @@ Thanks,
 Stefan
 
 > ---
->   drivers/watchdog/qcom-wdt.c | 5 +----
->   1 file changed, 1 insertion(+), 4 deletions(-)
+> Cc: Stefan Roese <sr@denx.de>
+> ---
+>   drivers/spi/Kconfig | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
-> diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
-> index af97b27e311..e4ebb1f31d4 100644
-> --- a/drivers/watchdog/qcom-wdt.c
-> +++ b/drivers/watchdog/qcom-wdt.c
-> @@ -82,10 +82,7 @@ int qcom_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
->   	writel(bark_timeout_s, wdt_addr(wdt, WDT_BARK_TIME));
->   	writel(bite_timeout_s, wdt_addr(wdt, WDT_BITE_TIME));
->   	writel(BIT(0), wdt_addr(wdt, WDT_EN));
-> -	if (readl(wdt_addr(wdt, WDT_EN)) != 1) {
-> -		dev_err(dev, "Failed to enable Qualcomm watchdog!\n");
-> -		return -EIO;
-> -	}
-> +
->   	return 0;
->   }
+> diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+> index a3513f0a3ef8..1ae36b5a348b 100644
+> --- a/drivers/spi/Kconfig
+> +++ b/drivers/spi/Kconfig
+> @@ -351,6 +351,8 @@ config MTK_SPIM
 >   
+>   config MVEBU_A3700_SPI
+>   	bool "Marvell Armada 3700 SPI driver"
+> +	depends on ARCH_MVEBU && ARM64
+> +	select CLK_MVEBU
+>   	select CLK_ARMADA_3720
+>   	help
+>   	  Enable the Marvell Armada 3700 SPI driver. This driver can be
 
 Viele Grüße,
 Stefan Roese
