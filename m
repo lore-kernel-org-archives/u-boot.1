@@ -4,205 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68EAFC7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 08:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE1CC7EE30
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 09:12:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8D1781FEE;
-	Wed,  2 Jul 2025 10:52:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 67D6180E9A;
+	Wed,  2 Jul 2025 11:12:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="G+yoTBLU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="foZhSfls";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91A708206E; Wed,  2 Jul 2025 10:52:13 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::612])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7642F82E08; Wed,  2 Jul 2025 10:53:49 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8142881E13
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 10:52:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B58981E13;
+ Wed,  2 Jul 2025 10:53:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FpjgF0O1zG15FUstZnJnWBf+dRiN1uoJ5sxbNK44i+q0a2cFqi3Z1RUhp0CfnRZTMurcm9bliAIiYlnofuv7bO1NVCL8FjNPPlrhrWrYTt8leBOUjGhqlLKjHJ3Q95nqC4hL9XD81RoWaXXpR+Y3mG9FJa0svO1JIAZhlEp/z4DbCmECdTTqAcQiL1WhFD77bu1Gi4rKYM771DBLprrY1QGkRn2lQ4yEoK9kvMsg8gUD9htK4TnGGzzPAepn3pDKaF5H82b1cdymfSRIsGdv0e7GMYttTmDhbYizH7larvmU7lRm6jN2XOYu+FFQyxTPeoW8m4K3Zox4LkNAsychng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=F5Q2W+As5oof5jjB8RJ+YXVaacZn7qdBFFEzY2f4oOI=;
- b=w3q23O+qCujst9Sdeg2QViSpOhZvMUL6eId84Gx3hydck6Yy+OvCPmr4PIpN/6VDYDmKlKjUp8B4Ktbn23b4VW7a1ZLspr0CdQGygQsK+1QO3flLt08JrTT1E3TpYmwBixb9eX/riHJrzP8DfbdghN7iRUetPXXzTYPdHxsjMYmqOMF+OchcPLIp46V2mcpwqgDwxWkhNxONV/GQs7e94Er4w/2yY7saqFdWdKN5h4u9j03XK7PBRaJMwCbh21YzhQ2ni8zp5KaqOOYRcYBjgakZIDCVqtH4EPUTGHYPOVFkKDCui01b77obDCR6HeFLMX6NDRGBfNsgpqwOBB+uWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F5Q2W+As5oof5jjB8RJ+YXVaacZn7qdBFFEzY2f4oOI=;
- b=G+yoTBLU+2TKZf9tu6J9AaVZXaK8bk8bh8wh8PCpvO5Wg/pUyJWSNLbAlrhQkDhfjVX3pPD6ydDq2W3G2Lbo2MIETRAlUvnaXOsPRnmvH2WzGUifZ58WNYsWFd0wo1l6a2Xr55opx6sYD2Ii0eoC144/+gPQn2ucsvZakAEXUSE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CY5PR12MB6228.namprd12.prod.outlook.com (2603:10b6:930:20::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.23; Wed, 2 Jul
- 2025 08:52:07 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.8901.018; Wed, 2 Jul 2025
- 08:52:06 +0000
-Message-ID: <6e88abac-88fd-4b65-abff-bb36c2e7203c@amd.com>
-Date: Wed, 2 Jul 2025 10:51:57 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] Improve user feedback in case of FPGA bitstream
- load failure
-To: vtpieter@gmail.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-References: <20250626093519.115655-1-vtpieter@gmail.com>
- <20250626093519.115655-2-vtpieter@gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <20250626093519.115655-2-vtpieter@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1P190CA0013.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:802:2b::26) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CY5PR12MB6228:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2f8844ec-b70e-4ba5-80d6-08ddb945b93d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c3JyeWN3Y1l1Tzc1YWNSQWxwbWRWUlZPWFArN1JUaVVGdUxOK1NKSDIwdjdi?=
- =?utf-8?B?aythdkpRS3czd0VQcGFGWFZLUW9GWXJwVkhpWEVEMjN2YWFxd3Zwc3YwYWJm?=
- =?utf-8?B?cEJYSXRYNk5mMm9VcFM3dWRuRzQ1anlnU3BnLzRmV252dHk2eWVaOWMrMGNk?=
- =?utf-8?B?dHVKWG1SbVhBUmZGQXNud1dRSDZMVlFNMXUvYjV0TWZDVklUdXN0VW15RWtD?=
- =?utf-8?B?WlNBUFNaaWxNWnFiVmY0TWRmWEZvZGFWWXhhcDVpcWkzODYwOGYxSC9VNTZY?=
- =?utf-8?B?eTRyQVlOMXZaUDJvTCtHQUdPYSsyZE1lbFVvclBzeFk2RGJlQUdWSG93Kzkw?=
- =?utf-8?B?UXp4TmVZR3NTTjI5NVp2SkVRS004dUF6N3lTa3pMQmkzVEZNY3dyRGxRMzVO?=
- =?utf-8?B?eEw3M2xGYXRncEdweHBBQXRoRTlIZnV4N0o3OFZKcGIyKzQxSnM4WFJ4RHBz?=
- =?utf-8?B?bUFKRDM3VmRZREJNaC8vNXF6WTkrYTVGMTcwVmJDWXFWQXh4M3p1MEUwNDlh?=
- =?utf-8?B?eXdCbkZ5ZFF2cTFPVkxqOGRpNDZ3dzJ0SGl0M2QzUzkxQThKS2RsY1ZmZ3FY?=
- =?utf-8?B?Q0xjRUxGa1YxTmJpMU0rVU1PVE9kRlJNdVVEM2RCMXl6YzdXK3d3OWNMaVE0?=
- =?utf-8?B?K1pFMVlRTlJzYzduY2RWa3k1NWhzdlNLSFd4QnVnM3FNQVRvR3ZPamxIam53?=
- =?utf-8?B?Z2VpcWpKQklDZWN3WmdRUXNkR0UxbDBROW0zVlF0aUpnQjE4MWdQTDh4ZG1k?=
- =?utf-8?B?Z2dGek5Ca21lRG00ZHNrWndvVzFwSlFMR3VrTUt1Vk9QOHpwKzIyM2lkUStV?=
- =?utf-8?B?MGFrUjdpbGRIZGdxYjBYaHhvczZwalpEbFE5MjBldzF0WG5KVXB3alBqZnFD?=
- =?utf-8?B?OE1qTlVvMXRjS3EySzNmR0oxVmZlUDROU0NLeUIvZ2s3YUFSYmt5OFh5SFRG?=
- =?utf-8?B?OFd2Qkp2aGdBYSsrN3RRWnR6bDVTa1pvOEp5Tk4yeVUveHh1MTVpQTVIcytq?=
- =?utf-8?B?S3AwdGFVT21McXdFNFI1eEdkS25JUmVycVJoTGUrRG5tM284dUE5M0RWNmM2?=
- =?utf-8?B?L3BYZmZRUHZaVGpSb0pnM3VOV1R5S2xZSmFVSHVrcGRKSFdQcW96LzU5QU5l?=
- =?utf-8?B?MU5EQ3lvK0w3SDlhdGpodm50TW1oeGM1THlNVFB1YllsYlU2bnUwQUw5UmxD?=
- =?utf-8?B?bFBmQmdQYURiUklwVnVhalkzN2o2ZVpDNWdvVXJOSHB1b0syc2toNTVNWUJO?=
- =?utf-8?B?L0d4SDBzNWR2bWM1TkZrbXRseWZJMTlhZkF6NWZVV1BjNkNoWUJDN0k5RTFm?=
- =?utf-8?B?TlNYQi9VWCs2Z1k3TGU5Q2pYRm54V2dvUXY1eVpPMWxvUnRIM1ZNTER4SDI2?=
- =?utf-8?B?bmk2b09NTXpUbEFiUGNLcmxjaFhOajRlZGZ4cElOWjRMWStXRm42d0ROZmJk?=
- =?utf-8?B?ZlppcTVzKzlCV05SUy9DNytkNVp3WlVsMElEa2FGbWZva0M0b1NETjdPdmFp?=
- =?utf-8?B?Sk9EeUkvSGdRRnI1SWpPbUhnK1ZUR2tDUmM4U3JwM05VcmFraC8vbkZRVjYz?=
- =?utf-8?B?N3RLODMvVXhsVnpHSld1ZzhvN0ExOGY1MmpTTitXNWpsUzlSU05pQjltMHBh?=
- =?utf-8?B?MC9CbEZLdFpsYTFOMUlOR1UvMnFQZS9DQ1puQmU0UDl5bnRFaFlZeHRoV2Va?=
- =?utf-8?B?UFVLTGpSSDRDK0Q3L3pCWEo2Mk9oRi8wcWt0QVZ6QnY1c25WMVFOK2JMdGUz?=
- =?utf-8?B?alptMmEyUVl5cjlheEEySXkvN0V3K2E1dXhQckpoQUdLdkdKR3BVdkxqSE0v?=
- =?utf-8?B?K0RtMzRidzh2R1U2dlp2TUpqbW1saXU2WEZUeWNpcXMzWVZ5cENvZnVFNDlm?=
- =?utf-8?B?YnhwL1pYaUNXaDdDOU1qQk5uQUpHSmFyR0w1aXNidDJkaEJTeDZBdzBvYS95?=
- =?utf-8?Q?hZTndYDks1s=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OWtodVptNWRhdEwyakdoVGlnbkEwakFxQ1FWNmlJSlRtZm95anNOOXFXb2h1?=
- =?utf-8?B?YnRtSDNVcXRhbGk1OWxqbXRRaUtWK0p3R05jNER1a05Eb21Pd2JpZ3JpOFpI?=
- =?utf-8?B?Zm5QcUU0ejFhdkZrK1Q0OFI0L3JtZnZGYWtta0ZlcFF3R0p5Qmc3a0RJWURG?=
- =?utf-8?B?dXUrak1pSGx6VVBsWU0wRVIxR3F6YXJPdHFOSnBadmY3aXd2QUJEOW9NZExI?=
- =?utf-8?B?QmFCOWI3OUNtOUV0U3N4c3lHcnNSNmJTVkNVQzE4WXoyeC9Jc0pjeU9zejdi?=
- =?utf-8?B?VFlocTl6L2hjN3c2aEM4Y0U2MzVsYW9uMjcyd082cGNZY1F6aXdBekFCVDYy?=
- =?utf-8?B?L2lTWXZ3bWhpbFJZOGZWMXhlME1wUEpUY29YRStYazJkeTV2amt0VHlUNThJ?=
- =?utf-8?B?c0lVU1VZamxNZ2hGQ2VJTFdkaldPSkhEQ0x5T2h5MWVrVTNqMVhTODlBeUJp?=
- =?utf-8?B?RzJQeGx0dGkxRzQzUUlpNXVmVzJXc1E3OWhyaG1PYjJxbU9GendmenZoWFpu?=
- =?utf-8?B?bFNwSzNTTThUaUl5Y3pTMG9Kd1loZUU3alIyVWE3b3QwekZkV1k3eHdvZmRN?=
- =?utf-8?B?dDQ1VHkwMmdITWRCcjZ0UXNIS2w1Y0R6dGw3OEd4ZVVEeHZGUGJlTDYwekgz?=
- =?utf-8?B?d0tqRHlydXk5OUlGN1BTTDc5eHZoNE1NbzF0a3RpRFNnSElxY05xMFJVN0Vz?=
- =?utf-8?B?ZEd1a0JzTjBCVjFwZW9BZWpwU2FWc3E5aHdEQUZ4Z2J2T00wKzNSR3FuT2M4?=
- =?utf-8?B?NW83TnNvWGlob2FjVjlycTBwNW5uSTZzZXVXZ1hXRWRBZjUzVXg5dkdpQTJ0?=
- =?utf-8?B?UEZwWWo2VlVRelFlY2c1Q1lRMUJCT2lBL3IzMFE5WThaRkJiUUYrSWVXNWhC?=
- =?utf-8?B?QlhtbE5hMjZvaEkvb0dVcjJGejJaMS9aNnNnamNNMGN4Ymh3a2xMM1RvTXJW?=
- =?utf-8?B?NjdFaFNoLzZMTENiSS91ZENXMldrMFRaS0pMR04yR25mV2lZU2YwUGFxaFlx?=
- =?utf-8?B?RDZSelBjdFE2MFAyZ01pUjZuQjJVZTU4MVhGQ0FTb2psbk8rNnRTVFkrMDdS?=
- =?utf-8?B?UWthWEFlR2gvNkZST3NHQjN2c0JsM2l0SGlpYk9tbitJR0hKcTlJMGsxc0xn?=
- =?utf-8?B?aFhIYUpWL3RBc3g5aVJHblpuVzlxZVNoVjFUanV1Mm9ReklaRWdVV0c5ak1J?=
- =?utf-8?B?Y3UzZmR6WnkyMi8yWFQ5MDAzVXordnNnd2crN0xlZWNSeWNPOTZiSGJqeDFn?=
- =?utf-8?B?ZC81RW43Q1I4MDNXTFJuMC8ySVBpdGFlb1JZMjQxaFFOYTdLUUt1VCtNRU0y?=
- =?utf-8?B?MUlrbkFqWHNoUWxhR3dZNkpWV0UrYmNkaE1ZTTI0MENTQVNTc1lWVmVkcGpl?=
- =?utf-8?B?ZEJ4YkJKdUhmZEZsbmdwcmhPSXpEazNQQWw4MGtYMUNza0ZxWktma1ZYUzdG?=
- =?utf-8?B?RWkxWXhzVzBRWTc5NG9RYmNTQklnRGgzZzV1NU0zQkorZnEra0oxNWVmR3gv?=
- =?utf-8?B?bjJicXZhWWVrQ0xQakxSZ2tKcWRzcjFERHpUU2doY3NQNEdNN0JDcHBmMUdC?=
- =?utf-8?B?a3VQQ0lqeUlXVkJPYi9ZL0RPeHhPWmRySWNtd2FuV1FmYko3cHVBRUlENExn?=
- =?utf-8?B?U3luaGxNbjMzM1BVT2VqVENGS2E1Rk13cmdxT2c2M1VuVEZXSFNXT3FEUUpm?=
- =?utf-8?B?amZuQVBEK0NUdkR6NTdFcUZvQjhyOCtKVXdSNkdPYUxVR3ZFaWF1aUp6aGFN?=
- =?utf-8?B?blE0aFdzdHFIWVh4ZG5EZ1FyMXphQjgzdHdoaTJzcHpMMDkzKzBjbUFkOEI2?=
- =?utf-8?B?dHhlWjJzbW9TSkxpaitCMjVLRW5pTnNhT0hTMVhRSC9qR2VUZXVPVkRYRkQ3?=
- =?utf-8?B?VTZhcEs5ODRqWk16V3MyUlZKS01QeW9ZVzVNYzdMYTM4UDV0UVJQM3pJZFR3?=
- =?utf-8?B?ZTJTdFlHMzIvUEhhR0IxVkhPWkx4SGpiMzB2NHNsdzhxUkVNRkRDQjZKa2t4?=
- =?utf-8?B?dzFNVXFmQXJ3RldTM2Zrdi9HWGdrdXJlbndXZENyd2pjZ0NmUklrK2kxaHkz?=
- =?utf-8?B?eXlJdnZVQVYwK0FCQ3JoRFV4OGNVQXExK293WWJBWDBZeDhGZlU1VDJ1V3Jw?=
- =?utf-8?Q?zsyYrnqzMBJH1PHM3YvqvoG9t?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f8844ec-b70e-4ba5-80d6-08ddb945b93d
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2025 08:52:06.9238 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yBogQB8kZi8cyFWwdfg7t0Cw3dfdoRCxqwpNCww7ILXNRzhY5aghP3nnyARB9PGa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6228
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rmfrfs@gmail.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3a510432236so3056224f8f.0; 
+ Wed, 02 Jul 2025 01:53:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751446426; x=1752051226; darn=lists.denx.de;
+ h=in-reply-to:references:to:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uFP9mDss3nkmls1OdDVXDezK6ngKnTRFEofMtALBkxE=;
+ b=foZhSflsDumGiEhg7FAYU6lDbUDZzfnUXYxhzciazz+HsvkUJWgyfycnWi/D5j98Cf
+ fPTTviHNIsNzUQFPczLkR3MA/ff+9+YgGIOMuFbKmTLVCh3dqSLHKUIpmL5ZkLIL8ckz
+ QuM4qEfnd13b7JYo9/MoyIgZd3TdDaDNDK0CaQ1VtNNKxgTu2GUTCiTrKRCK4hRXz9aI
+ UbcQ2JgpUTjPX/Wbf/8TWAqCqMRCAE9A4J2GUKFxCVEH5r4eHNSxDLkVoQp4eQssQuPX
+ BUDgHDbtmS1VAHKXlnpMZu+Mh7PKGES5pmnEMQhtUhAOYtbNYSwGNXJBDJuejQcIxz8G
+ rCWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751446426; x=1752051226;
+ h=in-reply-to:references:to:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=uFP9mDss3nkmls1OdDVXDezK6ngKnTRFEofMtALBkxE=;
+ b=e5FZm6wFJy1dZOLAzetDU7kyvvSNXj52PKKrSCmOYmDV9NH5nuZ5O2dXNPwEfTydbC
+ Qw788r8W+Te50xV9RBh/h4BFm8gDWDFVFF/QCsYNDWsZoRYWMgxn0FJT2Nx0R73G6t4r
+ rw7jvaNgVH9+B9FLnLE0yMlbcGTos891XchAui+Hlq+LqWadgKkN5+OV3CfbEA7O5fdS
+ 59TKibuMGQrnl9TZKiHVJGBM6UV1sMizJWNtrpuh9FkJCwJhZjNClauPr6hivyZ7ahvO
+ HVPyjdkojDSCID4EEj3PzGH/C6ouHAlypxulgrtDSL9lmtuuDc0nC9o7loRv+reUxiNj
+ sZkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlOZIBEFtWzQAW9CqMGng7WgmC/FKUEbcUseRUGdgie+xbvL4pqVubgwAyoruM7AmB2OC1EVZJwck9fNW15A==@lists.denx.de
+X-Gm-Message-State: AOJu0YwzpHkVD+UMrsgRIBc9NUqTY0p4ta0AL9u2Z8zYTLc0OTmbpE5G
+ XGtjvt59ip2fFK2rbgJW55RIkQ07Qs57mOuVmoxFe4h6d/tKRkgpB3HX
+X-Gm-Gg: ASbGnctaJh/gLXUr+QlNp5FOuRjXEb9BulW3cJaskHSykVVPRTgMut6wtFOKz+MtzVe
+ 94cr1s+7DZExNuYAAYFp73T99TFPrBginZ7MF7eZkR2MTrW8BmRI3OQ+r8Y3z7G6Raub1jQ3Wb/
+ ZZdH43AEzhSuZnNYjmCTvrBUSmuiXfUULJu35vcJJfHnWji9MTw8rR7OB+9owIBtAnpZI/p1IJy
+ n7s8Ms4pItKijY9RGrkvg5Er4wfm/1q8nCdlvRmxOb8LNjd9IRhtGOOYgd8MwReq4/CMdJNiDeq
+ CsSw1nbFZCyv8EN0jS5Y1m/cTYwrq5fSHPS3J95wjjkcUS0fxX1UZy+gklzBaUe01fdfVFaF9Qy
+ lXoV+EDiwFuxv+w==
+X-Google-Smtp-Source: AGHT+IESSEDGtgP2rS9BtRCjx/N9LdqSzcttEZbzNEAMrpSrAwZqWRJOaDAgPhDmS4uA/U9l897nYw==
+X-Received: by 2002:a05:6000:3105:b0:3a4:d64a:3df6 with SMTP id
+ ffacd0b85a97d-3b1fe1e66bemr1511730f8f.3.1751446425150; 
+ Wed, 02 Jul 2025 01:53:45 -0700 (PDT)
+Received: from localhost (a95-94-245-170.cpe.netcabo.pt. [95.94.245.170])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5b1f17b1804b1-4538f754326sm166507285e9.18.2025.07.02.01.53.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 01:53:44 -0700 (PDT)
+From: Rui Miguel Silva <rmfrfs@gmail.com>
+X-Google-Original-From: "Rui Miguel Silva" <rui.silva@linaro.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 02 Jul 2025 09:53:43 +0100
+Message-Id: <DB1FXVBDM7V2.2DAT7R22DW2EA@linaro.com>
+Cc: <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>, "Alexey Minnekhanov"
+ <alexeymin@postmarketos.org>, "U-Boot" <u-boot-bounces@lists.denx.de>
+Subject: Re: [PATCH v2 1/2] gpio: qcom: add new driver for SPMI gpios
+To: "Neil Armstrong" <neil.armstrong@linaro.org>, "Tom Rini"
+ <trini@konsulko.com>, "Sumit Garg" <sumit.garg@kernel.org>, "Casey
+ Connolly" <casey.connolly@linaro.org>
+References: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-0-cc1512931197@linaro.org>
+ <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-1-cc1512931197@linaro.org>
+In-Reply-To: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-1-cc1512931197@linaro.org>
+X-Mailman-Approved-At: Wed, 02 Jul 2025 11:12:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -219,326 +104,1130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hey Neil,
+On Mon Jun 30, 2025 at 5:04 PM WEST, Neil Armstrong wrote:
 
+> The current qcom_pmic_gpio driver is too limited and doesn't
+> support state tracking for all pins like the Linux driver.
+>
+> Adding full pinconf support would require adding the state
+> and it's much simpler to restart from scratch with a new
+> driver based on the Linux one adapted to the U-Boot GPIO
+> and Pinctrl APIs.
+>
+> For now only the PMICs I've been able to validate are
+> added in the compatible list but we should be able to
+> add the entire list from the Linux driver.
+>
+> There's a few difference from the Linux driver:
+> - no IRQ support
+> - uses the U-Boot GPIO flags that maps very well
+> - uses the gpio-ranges to get the pins count
+> - no debugfs but prints the pin state via pinmux callback
+>
+> It uses the same CONFIG entry as the old one, since
+> the ultimate goal is to migrate entirely on this new
+> driver once we verify it doesn't break the older
+> platforms.
+>
+> Tested-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-On 6/26/25 11:35, vtpieter@gmail.com wrote:
-> From: Pieter Van Trappen <pieter.van.trappen@cern.ch>
-> 
-> In cmd/fpga.c, change some `debug` calls to `log_err` for important
-> user feedback and use CMD_RET_FAILURE in favor of CMD_RET_USAGE due to
-> its long output which hides the actual, useful return message. Change
-> the remaining `debug` calls to `log_debug`. Remove all 'fpga:' and
-> __func__ strings as `log_*` has this covered.
-> 
-> For `do_fpga_loads`, move up the `do_fpga_check_params` call for more
-> consistent command output; use a constant instead of multiple '5' use.
-> 
-> In drivers/fpga/zynq*.c, change 'up to' to 'above' which corrects this
-> confusing/wrong statement.
-> 
-> Signed-off-by: Pieter Van Trappen <pieter.van.trappen@cern.ch>
+LGTM
+Reviewed-by: Rui Miguel Silva <rui.silva@linaro.org>
+
+Cheers,
+    Rui
 > ---
->   cmd/fpga.c              | 99 +++++++++++++++++++++--------------------
->   drivers/fpga/zynqmppl.c |  4 +-
->   drivers/fpga/zynqpl.c   |  4 +-
->   3 files changed, 54 insertions(+), 53 deletions(-)
-> 
-> diff --git a/cmd/fpga.c b/cmd/fpga.c
-> index 9dc7b63db5d..9cc51f04698 100644
-> --- a/cmd/fpga.c
-> +++ b/cmd/fpga.c
-> @@ -28,7 +28,7 @@ static long do_fpga_get_device(char *arg)
->   	if (dev == FPGA_INVALID_DEVICE && arg)
->   		dev = simple_strtol(arg, NULL, 16);
->   
-> -	debug("%s: device = %ld\n", __func__, dev);
-> +	log_debug("device = %ld\n", dev);
->   
->   	return dev;
->   }
-> @@ -40,26 +40,26 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
->   	size_t local_data_size;
->   	long local_fpga_data;
->   
-> -	debug("%s %d, %d\n", __func__, argc, cmdtp->maxargs);
-> +	log_debug("%d, %d\n", argc, cmdtp->maxargs);
->   
->   	if (argc != cmdtp->maxargs) {
-> -		debug("fpga: incorrect parameters passed\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Incorrect number of parameters passed\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	*dev = do_fpga_get_device(argv[0]);
->   
->   	local_fpga_data = simple_strtol(argv[1], NULL, 16);
->   	if (!local_fpga_data) {
-> -		debug("fpga: zero fpga_data address\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Zero fpga_data address\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   	*fpga_data = local_fpga_data;
->   
->   	local_data_size = hextoul(argv[2], NULL);
->   	if (!local_data_size) {
-> -		debug("fpga: zero size\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Zero size\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   	*data_size = local_data_size;
->   
-> @@ -70,51 +70,52 @@ static int do_fpga_check_params(long *dev, long *fpga_data, size_t *data_size,
->   static int do_fpga_loads(struct cmd_tbl *cmdtp, int flag, int argc,
->   			 char *const argv[])
->   {
-> +	struct fpga_secure_info fpga_sec_info;
-> +	const int pos_userkey = 5;
->   	size_t data_size = 0;
->   	long fpga_data, dev;
->   	int ret;
-> -	struct fpga_secure_info fpga_sec_info;
->   
->   	memset(&fpga_sec_info, 0, sizeof(fpga_sec_info));
->   
-> -	if (argc < 5) {
-> -		debug("fpga: incorrect parameters passed\n");
-> -		return CMD_RET_USAGE;
-> +	if (argc < pos_userkey) {
-> +		log_err("Too few parameters passed\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
-> -	if (argc == 6)
-> +	if (argc == pos_userkey + 1)
->   		fpga_sec_info.userkey_addr = (u8 *)(uintptr_t)
-> -					      simple_strtoull(argv[5],
-> +					      simple_strtoull(argv[pos_userkey],
->   							      NULL, 16);
->   	else
->   		/*
->   		 * If 6th parameter is not passed then do_fpga_check_params
->   		 * will get 5 instead of expected 6 which means that function
-> -		 * return CMD_RET_USAGE. Increase number of params +1 to pass
-> +		 * return CMD_RET_FAILURE. Increase number of params +1 to pass
->   		 * this.
->   		 */
->   		argc++;
->   
-> +	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
-> +				   cmdtp, argc, argv);
+>  drivers/gpio/Makefile         |    2 +-
+>  drivers/gpio/qcom_spmi_gpio.c | 1034 +++++++++++++++++++++++++++++++++++=
+++++++
+>  2 files changed, 1035 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+> index d64c14db5cfd3e5e303285025188e68b24bb9448..73fd5a7b1bd408b972080c8a9=
+7052a5847c8966d 100644
+> --- a/drivers/gpio/Makefile
+> +++ b/drivers/gpio/Makefile
+> @@ -65,7 +65,7 @@ obj-$(CONFIG_OCTEON_GPIO)	+=3D octeon_gpio.o
+>  obj-$(CONFIG_MVEBU_GPIO)	+=3D mvebu_gpio.o
+>  obj-$(CONFIG_MSM_GPIO)		+=3D msm_gpio.o
+>  obj-$(CONFIG_$(PHASE_)PCF8575_GPIO)	+=3D pcf8575_gpio.o
+> -obj-$(CONFIG_$(PHASE_)QCOM_PMIC_GPIO)	+=3D qcom_pmic_gpio.o
+> +obj-$(CONFIG_$(PHASE_)QCOM_PMIC_GPIO)	+=3D qcom_pmic_gpio.o qcom_spmi_gp=
+io.o
+>  obj-$(CONFIG_MT7620_GPIO)	+=3D mt7620_gpio.o
+>  obj-$(CONFIG_MT7621_GPIO)	+=3D mt7621_gpio.o
+>  obj-$(CONFIG_MSCC_SGPIO)	+=3D mscc_sgpio.o
+> diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.=
+c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..2bb0f0d10c32ff55d3fd5c61b=
+9bc2999878bfea6
+> --- /dev/null
+> +++ b/drivers/gpio/qcom_spmi_gpio.c
+> @@ -0,0 +1,1034 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Qualcomm generic pmic gpio driver
+> + *
+> + * Based on the original qcom_spmi_pmic_gpio driver from:
+> + * Copyright (c) 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+> + *
+> + * Updated from the Linux pinctrl-spmi-gpio driver from:
+> + * Copyright (c) 2012-2014, 2016-2021 The Linux Foundation. All rights r=
+eserved.
+> + * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights r=
+eserved.
+> + */
+> +
+> +#include <dm.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+> +#include <dm/pinctrl.h>
+> +#include <dm/device_compat.h>
+> +#include <log.h>
+> +#include <power/pmic.h>
+> +#include <spmi/spmi.h>
+> +#include <asm/io.h>
+> +#include <stdlib.h>
+> +#include <asm/gpio.h>
+> +#include <linux/bitops.h>
+> +#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+> +
+> +#define PMIC_MAX_GPIOS				36
+> +
+> +#define PMIC_GPIO_ADDRESS_RANGE			0x100
+> +
+> +/* type and subtype registers base address offsets */
+> +#define PMIC_GPIO_REG_TYPE			0x4
+> +#define PMIC_GPIO_REG_SUBTYPE			0x5
+> +
+> +/* GPIO peripheral type and subtype out_values */
+> +#define PMIC_GPIO_TYPE				0x10
+> +#define PMIC_GPIO_SUBTYPE_GPIO_4CH		0x1
+> +#define PMIC_GPIO_SUBTYPE_GPIOC_4CH		0x5
+> +#define PMIC_GPIO_SUBTYPE_GPIO_8CH		0x9
+> +#define PMIC_GPIO_SUBTYPE_GPIOC_8CH		0xd
+> +#define PMIC_GPIO_SUBTYPE_GPIO_LV		0x10
+> +#define PMIC_GPIO_SUBTYPE_GPIO_MV		0x11
+> +#define PMIC_GPIO_SUBTYPE_GPIO_LV_VIN2		0x12
+> +#define PMIC_GPIO_SUBTYPE_GPIO_MV_VIN3		0x13
+> +
+> +#define PMIC_MPP_REG_RT_STS			0x10
+> +#define PMIC_MPP_REG_RT_STS_VAL_MASK		0x1
+> +
+> +/* control register base address offsets */
+> +#define PMIC_GPIO_REG_MODE_CTL			0x40
+> +#define PMIC_GPIO_REG_DIG_VIN_CTL		0x41
+> +#define PMIC_GPIO_REG_DIG_PULL_CTL		0x42
+> +#define PMIC_GPIO_REG_LV_MV_DIG_OUT_SOURCE_CTL	0x44
+> +	#define PMIC_GPIO_REG_DIG_IN_CTL		0x43
+> +#define PMIC_GPIO_REG_DIG_OUT_CTL		0x45
+> +#define PMIC_GPIO_REG_EN_CTL			0x46
+> +	#define PMIC_GPIO_REG_LV_MV_ANA_PASS_THRU_SEL	0x4A
+> +
+> +/* PMIC_GPIO_REG_MODE_CTL */
+> +#define PMIC_GPIO_REG_MODE_VALUE_SHIFT		0x1
+> +#define PMIC_GPIO_REG_MODE_FUNCTION_SHIFT	1
+> +#define PMIC_GPIO_REG_MODE_FUNCTION_MASK	0x7
+> +#define PMIC_GPIO_REG_MODE_DIR_SHIFT		4
+> +#define PMIC_GPIO_REG_MODE_DIR_MASK		0x7
+> +
+> +#define PMIC_GPIO_MODE_DIGITAL_INPUT		0
+> +#define PMIC_GPIO_MODE_DIGITAL_OUTPUT		1
+> +#define PMIC_GPIO_MODE_DIGITAL_INPUT_OUTPUT	2
+> +#define PMIC_GPIO_MODE_ANALOG_PASS_THRU		3
+> +#define PMIC_GPIO_REG_LV_MV_MODE_DIR_MASK	0x3
+> +
+> +/* PMIC_GPIO_REG_DIG_VIN_CTL */
+> +#define PMIC_GPIO_REG_VIN_SHIFT			0
+> +#define PMIC_GPIO_REG_VIN_MASK			0x7
+> +
+> +/* PMIC_GPIO_REG_DIG_PULL_CTL */
+> +#define PMIC_GPIO_REG_PULL_SHIFT		0
+> +#define PMIC_GPIO_REG_PULL_MASK			0x7
+> +
+> +#define PMIC_GPIO_PULL_DOWN			4
+> +#define PMIC_GPIO_PULL_DISABLE			5
+> +
+> +/* PMIC_GPIO_REG_LV_MV_DIG_OUT_SOURCE_CTL for LV/MV */
+> +#define PMIC_GPIO_LV_MV_OUTPUT_INVERT		0x80
+> +#define PMIC_GPIO_LV_MV_OUTPUT_INVERT_SHIFT	7
+> +#define PMIC_GPIO_LV_MV_OUTPUT_SOURCE_SEL_MASK	0xF
+> +
+> +/* PMIC_GPIO_REG_DIG_IN_CTL */
+> +#define PMIC_GPIO_LV_MV_DIG_IN_DTEST_EN		0x80
+> +#define PMIC_GPIO_LV_MV_DIG_IN_DTEST_SEL_MASK	0x7
+> +#define PMIC_GPIO_DIG_IN_DTEST_SEL_MASK		0xf
+> +
+> +/* PMIC_GPIO_REG_DIG_OUT_CTL */
+> +#define PMIC_GPIO_REG_OUT_STRENGTH_SHIFT	0
+> +#define PMIC_GPIO_REG_OUT_STRENGTH_MASK		0x3
+> +#define PMIC_GPIO_REG_OUT_TYPE_SHIFT		4
+> +#define PMIC_GPIO_REG_OUT_TYPE_MASK		0x3
+> +
+> +/*
+> + * Output type - indicates pin should be configured as push-pull,
+> + * open drain or open source.
+> + */
+> +#define PMIC_GPIO_OUT_BUF_CMOS			0
+> +#define PMIC_GPIO_OUT_BUF_OPEN_DRAIN_NMOS	1
+> +#define PMIC_GPIO_OUT_BUF_OPEN_DRAIN_PMOS	2
+> +
+> +#define PMIC_GPIO_OUT_STRENGTH_LOW		1
+> +#define PMIC_GPIO_OUT_STRENGTH_HIGH		3
+> +
+> +/* PMIC_GPIO_REG_EN_CTL */
+> +#define PMIC_GPIO_REG_MASTER_EN_SHIFT		7
+> +
+> +#define PMIC_GPIO_PHYSICAL_OFFSET		1
+> +
+> +/* PMIC_GPIO_REG_LV_MV_ANA_PASS_THRU_SEL */
+> +#define PMIC_GPIO_LV_MV_ANA_MUX_SEL_MASK		0x3
+> +
+> +/* The index of each function in spmi_pmic_gpio_functions[] array */
+> +enum spmi_pmic_gpio_func_index {
+> +	PMIC_GPIO_FUNC_INDEX_NORMAL,
+> +	PMIC_GPIO_FUNC_INDEX_PAIRED,
+> +	PMIC_GPIO_FUNC_INDEX_FUNC1,
+> +	PMIC_GPIO_FUNC_INDEX_FUNC2,
+> +	PMIC_GPIO_FUNC_INDEX_FUNC3,
+> +	PMIC_GPIO_FUNC_INDEX_FUNC4,
+> +	PMIC_GPIO_FUNC_INDEX_DTEST1,
+> +	PMIC_GPIO_FUNC_INDEX_DTEST2,
+> +	PMIC_GPIO_FUNC_INDEX_DTEST3,
+> +	PMIC_GPIO_FUNC_INDEX_DTEST4,
+> +};
+> +
+> +static const char *const spmi_pmic_gpio_functions[] =3D {
+> +	[PMIC_GPIO_FUNC_INDEX_NORMAL]	=3D PMIC_GPIO_FUNC_NORMAL,
+> +	[PMIC_GPIO_FUNC_INDEX_PAIRED]	=3D PMIC_GPIO_FUNC_PAIRED,
+> +	[PMIC_GPIO_FUNC_INDEX_FUNC1]	=3D PMIC_GPIO_FUNC_FUNC1,
+> +	[PMIC_GPIO_FUNC_INDEX_FUNC2]	=3D PMIC_GPIO_FUNC_FUNC2,
+> +	[PMIC_GPIO_FUNC_INDEX_FUNC3]	=3D PMIC_GPIO_FUNC_FUNC3,
+> +	[PMIC_GPIO_FUNC_INDEX_FUNC4]	=3D PMIC_GPIO_FUNC_FUNC4,
+> +	[PMIC_GPIO_FUNC_INDEX_DTEST1]	=3D PMIC_GPIO_FUNC_DTEST1,
+> +	[PMIC_GPIO_FUNC_INDEX_DTEST2]	=3D PMIC_GPIO_FUNC_DTEST2,
+> +	[PMIC_GPIO_FUNC_INDEX_DTEST3]	=3D PMIC_GPIO_FUNC_DTEST3,
+> +	[PMIC_GPIO_FUNC_INDEX_DTEST4]	=3D PMIC_GPIO_FUNC_DTEST4,
+> +};
+> +
+> +/**
+> + * struct spmi_pmic_gpio_pad - keep current GPIO settings
+> + * @base: Address base in SPMI device.
+> + * @is_enabled: Set to false when GPIO should be put in high Z state.
+> + * @out_value: Cached pin output value
+> + * @have_buffer: Set to true if GPIO output could be configured in push-=
+pull,
+> + *	open-drain or open-source mode.
+> + * @output_enabled: Set to true if GPIO output logic is enabled.
+> + * @input_enabled: Set to true if GPIO input buffer logic is enabled.
+> + * @analog_pass: Set to true if GPIO is in analog-pass-through mode.
+> + * @lv_mv_type: Set to true if GPIO subtype is GPIO_LV(0x10) or GPIO_MV(=
+0x11).
+> + * @num_sources: Number of power-sources supported by this GPIO.
+> + * @power_source: Current power-source used.
+> + * @buffer_type: Push-pull, open-drain or open-source.
+> + * @pullup: Constant current which flow trough GPIO output buffer.
+> + * @strength: No, Low, Medium, High
+> + * @function: See spmi_pmic_gpio_functions[]
+> + * @atest: the ATEST selection for GPIO analog-pass-through mode
+> + * @dtest_buffer: the DTEST buffer selection for digital input mode.
+> + */
+> +struct spmi_pmic_gpio_pad {
+> +	u16		base;
+> +	bool		is_enabled;
+> +	bool		out_value;
+> +	bool		have_buffer;
+> +	bool		output_enabled;
+> +	bool		input_enabled;
+> +	bool		analog_pass;
+> +	bool		lv_mv_type;
+> +	unsigned int	num_sources;
+> +	unsigned int	power_source;
+> +	unsigned int	buffer_type;
+> +	unsigned int	pullup;
+> +	unsigned int	strength;
+> +	unsigned int	function;
+> +	unsigned int	atest;
+> +	unsigned int	dtest_buffer;
+> +};
+> +
+> +struct qcom_spmi_pmic_gpio_data {
+> +	struct udevice *dev;
+> +	u32 pid; /* Peripheral ID on SPMI bus */
+> +	struct udevice *pmic; /* Reference to pmic device for read/write */
+> +	u32 pin_count;
+> +	struct spmi_pmic_gpio_pad *pads;
+> +};
+> +
+> +static int qcom_spmi_pmic_pinctrl_pinconf_set(struct udevice *dev, unsig=
+ned int selector,
+> +					      unsigned int param, unsigned int arg);
+> +
+> +static int spmi_pmic_gpio_read(struct qcom_spmi_pmic_gpio_data *plat,
+> +			       struct spmi_pmic_gpio_pad *pad,
+> +			       unsigned int addr)
+> +{
+> +	return pmic_reg_read(plat->pmic, pad->base + addr);
+> +}
+> +
+> +static int spmi_pmic_gpio_write(struct qcom_spmi_pmic_gpio_data *plat,
+> +				struct spmi_pmic_gpio_pad *pad,
+> +				unsigned int addr, unsigned int val)
+> +{
+> +	return pmic_reg_write(plat->pmic, pad->base + addr, val);
+> +}
+> +
+> +static void spmi_pmic_gpio_get_state(struct qcom_spmi_pmic_gpio_data *pl=
+at,
+> +				     struct spmi_pmic_gpio_pad *pad,
+> +				     char *buf, int size)
+> +{
+> +	int ret, val, function, cnt;
+> +
+> +	static const char *const biases[] =3D {
+> +		"pull-up 30uA", "pull-up 1.5uA", "pull-up 31.5uA",
+> +		"pull-up 1.5uA + 30uA boost", "pull-down 10uA", "no pull"
+> +	};
+> +	static const char *const buffer_types[] =3D {
+> +		"push-pull", "open-drain", "open-source"
+> +	};
+> +	static const char *const strengths[] =3D {
+> +		"no", "low", "medium", "high"
+> +	};
+> +
+> +	val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_EN_CTL);
+> +
+> +	if (val < 0 || !(val >> PMIC_GPIO_REG_MASTER_EN_SHIFT)) {
+> +		cnt =3D snprintf(buf, size, "disabled");
+> +	} else {
+> +		if (pad->input_enabled) {
+> +			ret =3D spmi_pmic_gpio_read(plat, pad, PMIC_MPP_REG_RT_STS);
+> +			if (ret < 0)
+> +				return;
+> +
+> +			ret &=3D PMIC_MPP_REG_RT_STS_VAL_MASK;
+> +			pad->out_value =3D ret;
+> +		}
+> +		/*
+> +		 * For the non-LV/MV subtypes only 2 special functions are
+> +		 * available, offsetting the dtest function values by 2.
+> +		 */
+> +		function =3D pad->function;
+> +		if (!pad->lv_mv_type &&
+> +		    pad->function >=3D PMIC_GPIO_FUNC_INDEX_FUNC3)
+> +			function +=3D PMIC_GPIO_FUNC_INDEX_DTEST1 -
+> +				PMIC_GPIO_FUNC_INDEX_FUNC3;
+> +
+> +		if (pad->analog_pass)
+> +			cnt =3D snprintf(buf, size, "analog-pass");
+> +		else
+> +			cnt =3D snprintf(buf, size, "%-4s",
+> +				       pad->output_enabled ? "out" : "in");
+> +		buf +=3D cnt;
+> +		size -=3D cnt;
+> +
+> +		snprintf(buf, size, " %-4s %-7s vin-%d %-27s %-10s %-7s atest-%d dtest=
+-%d",
+> +			 pad->out_value ? "high" : "low",
+> +			 spmi_pmic_gpio_functions[function],
+> +			 pad->power_source,
+> +			 biases[pad->pullup],
+> +			 buffer_types[pad->buffer_type],
+> +			 strengths[pad->strength],
+> +			 pad->atest,
+> +			 pad->dtest_buffer);
+> +	}
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_set(struct qcom_spmi_pmic_gpio_data *plat=
+,
+> +				   struct spmi_pmic_gpio_pad *pad)
+> +{
+> +	unsigned int val;
+> +	int ret;
+> +
+> +	val =3D pad->power_source << PMIC_GPIO_REG_VIN_SHIFT;
+> +
+> +	ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_DIG_VIN_CTL, val)=
+;
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	val =3D pad->pullup << PMIC_GPIO_REG_PULL_SHIFT;
+> +
+> +	ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_DIG_PULL_CTL, val=
+);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	val =3D pad->buffer_type << PMIC_GPIO_REG_OUT_TYPE_SHIFT;
+> +	val |=3D pad->strength << PMIC_GPIO_REG_OUT_STRENGTH_SHIFT;
+> +
+> +	ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_DIG_OUT_CTL, val)=
+;
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (pad->dtest_buffer =3D=3D 0) {
+> +		val =3D 0;
+> +	} else {
+> +		if (pad->lv_mv_type) {
+> +			val =3D pad->dtest_buffer - 1;
+> +			val |=3D PMIC_GPIO_LV_MV_DIG_IN_DTEST_EN;
+> +		} else {
+> +			val =3D BIT(pad->dtest_buffer - 1);
+> +		}
+> +	}
+> +	ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_DIG_IN_CTL, val);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (pad->analog_pass)
+> +		val =3D PMIC_GPIO_MODE_ANALOG_PASS_THRU;
+> +	else if (pad->output_enabled && pad->input_enabled)
+> +		val =3D PMIC_GPIO_MODE_DIGITAL_INPUT_OUTPUT;
+> +	else if (pad->output_enabled)
+> +		val =3D PMIC_GPIO_MODE_DIGITAL_OUTPUT;
+> +	else
+> +		val =3D PMIC_GPIO_MODE_DIGITAL_INPUT;
+> +
+> +	if (pad->lv_mv_type) {
+> +		ret =3D spmi_pmic_gpio_write(plat, pad,
+> +					   PMIC_GPIO_REG_MODE_CTL, val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		val =3D pad->atest - 1;
+> +		ret =3D spmi_pmic_gpio_write(plat, pad,
+> +					   PMIC_GPIO_REG_LV_MV_ANA_PASS_THRU_SEL,
+> +					   val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		val =3D pad->out_value
+> +			<< PMIC_GPIO_LV_MV_OUTPUT_INVERT_SHIFT;
+> +		val |=3D pad->function
+> +			& PMIC_GPIO_LV_MV_OUTPUT_SOURCE_SEL_MASK;
+> +		ret =3D spmi_pmic_gpio_write(plat, pad,
+> +					   PMIC_GPIO_REG_LV_MV_DIG_OUT_SOURCE_CTL,
+> +					   val);
+> +		if (ret < 0)
+> +			return ret;
+> +	} else {
+> +		val =3D val << PMIC_GPIO_REG_MODE_DIR_SHIFT;
+> +		val |=3D pad->function << PMIC_GPIO_REG_MODE_FUNCTION_SHIFT;
+> +		val |=3D pad->out_value & PMIC_GPIO_REG_MODE_VALUE_SHIFT;
+> +
+> +		ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_MODE_CTL, val);
+> +		if (ret < 0)
+> +			return ret;
+> +	}
+> +
+> +	val =3D pad->is_enabled << PMIC_GPIO_REG_MASTER_EN_SHIFT;
+> +
+> +	ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_EN_CTL, val);
 > +	if (ret)
 > +		return ret;
 > +
->   	fpga_sec_info.encflag = (u8)hextoul(argv[4], NULL);
->   	fpga_sec_info.authflag = (u8)hextoul(argv[3], NULL);
->   
->   	if (fpga_sec_info.authflag >= FPGA_NO_ENC_OR_NO_AUTH &&
->   	    fpga_sec_info.encflag >= FPGA_NO_ENC_OR_NO_AUTH) {
-> -		debug("fpga: Use <fpga load> for NonSecure bitstream\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Use <fpga load> for NonSecure bitstream\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	if (fpga_sec_info.encflag == FPGA_ENC_USR_KEY &&
->   	    !fpga_sec_info.userkey_addr) {
-> -		debug("fpga: User key not provided\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("User key not provided\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
-> -	ret = do_fpga_check_params(&dev, &fpga_data, &data_size,
-> -				   cmdtp, argc, argv);
-> -	if (ret)
-> -		return ret;
-> -
->   	return fpga_loads(dev, (void *)fpga_data, data_size, &fpga_sec_info);
->   }
->   #endif
-> @@ -245,23 +246,23 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
->   	ulong dev = do_fpga_get_device(argv[0]);
->   	char *datastr = env_get("fpgadata");
->   
-> -	debug("fpga: argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
-> +	log_debug("argc %x, dev %lx, datastr %s\n", argc, dev, datastr);
->   
->   	if (dev == FPGA_INVALID_DEVICE) {
-> -		debug("fpga: Invalid fpga device\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Invalid fpga device\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	if (argc == 0 && !datastr) {
-> -		debug("fpga: No datastr passed\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("No datastr passed\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	if (argc == 2) {
->   		datastr = argv[1];
-> -		debug("fpga: Full command with two args\n");
-> +		log_debug("Full command with two args\n");
->   	} else if (argc == 1 && !datastr) {
-> -		debug("fpga: Dev is setup - fpgadata passed\n");
-> +		log_debug("Dev is setup - fpgadata passed\n");
->   		datastr = argv[0];
->   	}
->   
-> @@ -269,20 +270,20 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
->   	if (fit_parse_subimage(datastr, (ulong)fpga_data,
->   			       &fit_addr, &fit_uname)) {
->   		fpga_data = (void *)fit_addr;
-> -		debug("*  fpga: subimage '%s' from FIT image ",
-> -		      fit_uname);
-> -		debug("at 0x%08lx\n", fit_addr);
-> +		log_debug("*  fpga: subimage '%s' from FIT image ",
-> +			  fit_uname);
-> +		log_debug("at 0x%08lx\n", fit_addr);
->   	} else
->   #endif
->   	{
->   		fpga_data = (void *)hextoul(datastr, NULL);
-> -		debug("*  fpga: cmdline image address = 0x%08lx\n",
-> -		      (ulong)fpga_data);
-> +		log_debug("*  fpga: cmdline image address = 0x%08lx\n",
-> +			  (ulong)fpga_data);
->   	}
-> -	debug("%s: fpga_data = 0x%lx\n", __func__, (ulong)fpga_data);
-> +	log_debug("fpga_data = 0x%lx\n", (ulong)fpga_data);
->   	if (!fpga_data) {
-> -		puts("Zero fpga_data address\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Zero fpga_data address\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	switch (genimg_get_format(fpga_data)) {
-> @@ -303,13 +304,13 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
->   
->   			if (gunzip((void *)data, ~0UL, (void *)image_buf,
->   				   &image_size) != 0) {
-> -				puts("GUNZIP: error\n");
-> +				log_err("Gunzip error\n");
->   				return CMD_RET_FAILURE;
->   			}
->   			data_size = image_size;
->   #else
-> -			puts("Gunzip image is not supported\n");
-> -			return 1;
-> +			log_err("Gunzip image is not supported\n");
-> +			return CMD_RET_FAILURE;
->   #endif
->   		} else {
->   			data = (ulong)image_get_data(hdr);
-> @@ -327,12 +328,12 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
->   		const void *fit_data;
->   
->   		if (!fit_uname) {
-> -			puts("No FIT subimage unit name\n");
-> +			log_err("No FIT subimage unit name\n");
->   			return CMD_RET_FAILURE;
->   		}
->   
->   		if (fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
-> -			puts("Bad FIT image format\n");
-> +			log_err("Bad FIT image format\n");
->   			return CMD_RET_FAILURE;
->   		}
->   
-> @@ -348,7 +349,7 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
->   	}
->   #endif
->   	default:
-> -		puts("** Unknown image type\n");
-> +		log_err("Unknown image type\n");
->   		return CMD_RET_FAILURE;
->   	}
->   }
-> @@ -390,16 +391,16 @@ static int do_fpga_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
->   	fpga_cmd = find_cmd_tbl(argv[1], fpga_commands,
->   				ARRAY_SIZE(fpga_commands));
->   	if (!fpga_cmd) {
-> -		debug("fpga: non existing command\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Non existing command\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	argc -= 2;
->   	argv += 2;
->   
->   	if (argc > fpga_cmd->maxargs) {
-> -		debug("fpga: more parameters passed\n");
-> -		return CMD_RET_USAGE;
-> +		log_err("Too many parameters passed\n");
-> +		return CMD_RET_FAILURE;
->   	}
->   
->   	ret = fpga_cmd->cmd(fpga_cmd, flag, argc, argv);
-> diff --git a/drivers/fpga/zynqmppl.c b/drivers/fpga/zynqmppl.c
-> index 2b62bbbe3cf..1199b249e36 100644
-> --- a/drivers/fpga/zynqmppl.c
-> +++ b/drivers/fpga/zynqmppl.c
-> @@ -191,8 +191,8 @@ static int zynqmp_validate_bitstream(xilinx_desc *desc, const void *buf,
->   	}
->   
->   	if ((ulong)buf < SZ_1M) {
-> -		printf("%s: Bitstream has to be placed up to 1MB (%px)\n",
-> -		       __func__, buf);
-> +		log_err("Bitstream has to be placed above 1MB (%px)\n",
-> +			buf);
->   		return FPGA_FAIL;
->   	}
->   
-> diff --git a/drivers/fpga/zynqpl.c b/drivers/fpga/zynqpl.c
-> index 3e86d854a01..a8ca015a8a6 100644
-> --- a/drivers/fpga/zynqpl.c
-> +++ b/drivers/fpga/zynqpl.c
-> @@ -360,8 +360,8 @@ static int zynq_validate_bitstream(xilinx_desc *desc, const void *buf,
->   	}
->   
->   	if ((u32)buf < SZ_1M) {
-> -		printf("%s: Bitstream has to be placed up to 1MB (%x)\n",
-> -		       __func__, (u32)buf);
-> +		log_err("Bitstream has to be placed above 1MB (%px)\n",
-> +			(u32)buf);
->   		return FPGA_FAIL;
->   	}
->   
-
-I would be the best if you can create also cover letter.
-But let me reply to this patch but issue is likely related to others. I am also 
-not in CC on 3/4.
-
-Anyway CI is failing with
-$ tools/buildman/buildman -o ${UBOOT_TRAVIS_BUILD_DIR} -w -E -W -e --board 
-${TEST_PY_BD} ${OVERRIDE}
-Building current source for 1 boards (1 thread, 64 jobs per thread)
-    sandbox:  +   sandbox
-+drivers/fpga/fpga.c:23:13: error: ‘fpga_no_sup’ defined but not used 
-[-Werror=unused-function]
-+   23 | static void fpga_no_sup(char *fn, char *msg)
-+      |             ^~~~~~~~~~~
-+cc1: all warnings being treated as errors
-+make[3]: *** [scripts/Makefile.build:249: drivers/fpga/fpga.o] Error 1
-+make[2]: *** [scripts/Makefile.build:388: drivers/fpga] Error 2
-+make[1]: *** [Makefile:1930: drivers] Error 2
-
-which should be fixed.
-
-Second thing is that all of your subjects are missing prefixes.
-That's why please use fpga: or cmd: fpga: there to see subsystems you are 
-targetting.
-
-Thakns,
-Michal
-
+> +	return 0;
+> +}
+> +
+> +static int spmi_pmic_gpio_populate(struct qcom_spmi_pmic_gpio_data *plat=
+,
+> +				   struct spmi_pmic_gpio_pad *pad)
+> +{
+> +	int type, subtype, val, dir;
+> +
+> +	type =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_TYPE);
+> +	if (type < 0)
+> +		return type;
+> +
+> +	if (type !=3D PMIC_GPIO_TYPE) {
+> +		dev_err(plat->dev, "incorrect block type 0x%x at 0x%x\n",
+> +			type, pad->base);
+> +		return -ENODEV;
+> +	}
+> +
+> +	subtype =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_SUBTYPE);
+> +	if (subtype < 0)
+> +		return subtype;
+> +
+> +	switch (subtype) {
+> +	case PMIC_GPIO_SUBTYPE_GPIO_4CH:
+> +		pad->have_buffer =3D true;
+> +		fallthrough;
+> +	case PMIC_GPIO_SUBTYPE_GPIOC_4CH:
+> +		pad->num_sources =3D 4;
+> +		break;
+> +	case PMIC_GPIO_SUBTYPE_GPIO_8CH:
+> +		pad->have_buffer =3D true;
+> +		fallthrough;
+> +	case PMIC_GPIO_SUBTYPE_GPIOC_8CH:
+> +		pad->num_sources =3D 8;
+> +		break;
+> +	case PMIC_GPIO_SUBTYPE_GPIO_LV:
+> +		pad->num_sources =3D 1;
+> +		pad->have_buffer =3D true;
+> +		pad->lv_mv_type =3D true;
+> +		break;
+> +	case PMIC_GPIO_SUBTYPE_GPIO_MV:
+> +		pad->num_sources =3D 2;
+> +		pad->have_buffer =3D true;
+> +		pad->lv_mv_type =3D true;
+> +		break;
+> +	case PMIC_GPIO_SUBTYPE_GPIO_LV_VIN2:
+> +		pad->num_sources =3D 2;
+> +		pad->have_buffer =3D true;
+> +		pad->lv_mv_type =3D true;
+> +		break;
+> +	case PMIC_GPIO_SUBTYPE_GPIO_MV_VIN3:
+> +		pad->num_sources =3D 3;
+> +		pad->have_buffer =3D true;
+> +		pad->lv_mv_type =3D true;
+> +		break;
+> +	default:
+> +		dev_err(plat->dev, "unknown GPIO type 0x%x\n", subtype);
+> +		return -ENODEV;
+> +	}
+> +
+> +	if (pad->lv_mv_type) {
+> +		val =3D spmi_pmic_gpio_read(plat, pad,
+> +					  PMIC_GPIO_REG_LV_MV_DIG_OUT_SOURCE_CTL);
+> +		if (val < 0)
+> +			return val;
+> +
+> +		pad->out_value =3D !!(val & PMIC_GPIO_LV_MV_OUTPUT_INVERT);
+> +		pad->function =3D val & PMIC_GPIO_LV_MV_OUTPUT_SOURCE_SEL_MASK;
+> +
+> +		val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_MODE_CTL);
+> +		if (val < 0)
+> +			return val;
+> +
+> +		dir =3D val & PMIC_GPIO_REG_LV_MV_MODE_DIR_MASK;
+> +	} else {
+> +		val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_MODE_CTL);
+> +		if (val < 0)
+> +			return val;
+> +
+> +		pad->out_value =3D val & PMIC_GPIO_REG_MODE_VALUE_SHIFT;
+> +
+> +		dir =3D val >> PMIC_GPIO_REG_MODE_DIR_SHIFT;
+> +		dir &=3D PMIC_GPIO_REG_MODE_DIR_MASK;
+> +		pad->function =3D val >> PMIC_GPIO_REG_MODE_FUNCTION_SHIFT;
+> +		pad->function &=3D PMIC_GPIO_REG_MODE_FUNCTION_MASK;
+> +	}
+> +
+> +	switch (dir) {
+> +	case PMIC_GPIO_MODE_DIGITAL_INPUT:
+> +		pad->input_enabled =3D true;
+> +		pad->output_enabled =3D false;
+> +		break;
+> +	case PMIC_GPIO_MODE_DIGITAL_OUTPUT:
+> +		pad->input_enabled =3D false;
+> +		pad->output_enabled =3D true;
+> +		break;
+> +	case PMIC_GPIO_MODE_DIGITAL_INPUT_OUTPUT:
+> +		pad->input_enabled =3D true;
+> +		pad->output_enabled =3D true;
+> +		break;
+> +	case PMIC_GPIO_MODE_ANALOG_PASS_THRU:
+> +		if (!pad->lv_mv_type)
+> +			return -ENODEV;
+> +		pad->analog_pass =3D true;
+> +		break;
+> +	default:
+> +		dev_err(plat->dev, "unknown GPIO direction\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_DIG_VIN_CTL);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	pad->power_source =3D val >> PMIC_GPIO_REG_VIN_SHIFT;
+> +	pad->power_source &=3D PMIC_GPIO_REG_VIN_MASK;
+> +
+> +	val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_DIG_PULL_CTL);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	pad->pullup =3D val >> PMIC_GPIO_REG_PULL_SHIFT;
+> +	pad->pullup &=3D PMIC_GPIO_REG_PULL_MASK;
+> +
+> +	val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_DIG_IN_CTL);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	if (pad->lv_mv_type && (val & PMIC_GPIO_LV_MV_DIG_IN_DTEST_EN))
+> +		pad->dtest_buffer =3D
+> +			(val & PMIC_GPIO_LV_MV_DIG_IN_DTEST_SEL_MASK) + 1;
+> +	else if (!pad->lv_mv_type)
+> +		pad->dtest_buffer =3D ffs(val);
+> +	else
+> +		pad->dtest_buffer =3D 0;
+> +
+> +	val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_DIG_OUT_CTL);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	pad->strength =3D val >> PMIC_GPIO_REG_OUT_STRENGTH_SHIFT;
+> +	pad->strength &=3D PMIC_GPIO_REG_OUT_STRENGTH_MASK;
+> +
+> +	pad->buffer_type =3D val >> PMIC_GPIO_REG_OUT_TYPE_SHIFT;
+> +	pad->buffer_type &=3D PMIC_GPIO_REG_OUT_TYPE_MASK;
+> +
+> +	if (pad->lv_mv_type) {
+> +		val =3D spmi_pmic_gpio_read(plat, pad,
+> +					  PMIC_GPIO_REG_LV_MV_ANA_PASS_THRU_SEL);
+> +		if (val < 0)
+> +			return val;
+> +
+> +		pad->atest =3D (val & PMIC_GPIO_LV_MV_ANA_MUX_SEL_MASK) + 1;
+> +	}
+> +
+> +	/* Pin could be disabled with PIN_CONFIG_BIAS_HIGH_IMPEDANCE */
+> +	pad->is_enabled =3D true;
+> +	return 0;
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_set_flags(struct udevice *dev, unsigned i=
+nt offset, ulong flags)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +
+> +	if (offset >=3D plat->pin_count)
+> +		return -EINVAL;
+> +
+> +	pad =3D &plat->pads[offset];
+> +
+> +	pad->input_enabled =3D flags & GPIOD_IS_IN;
+> +	pad->output_enabled =3D flags & GPIOD_IS_OUT;
+> +
+> +	if (pad->output_enabled) {
+> +		pad->out_value =3D flags & GPIOD_IS_OUT_ACTIVE;
+> +
+> +		if ((flags & GPIOD_OPEN_DRAIN) && pad->have_buffer)
+> +			pad->buffer_type =3D PMIC_GPIO_OUT_BUF_OPEN_DRAIN_NMOS;
+> +		else if ((flags & GPIOD_OPEN_SOURCE) && pad->have_buffer)
+> +			pad->buffer_type =3D PMIC_GPIO_OUT_BUF_OPEN_DRAIN_PMOS;
+> +		else
+> +			pad->buffer_type =3D PMIC_GPIO_OUT_BUF_CMOS;
+> +	}
+> +
+> +	if (flags & GPIOD_PULL_UP)
+> +		pad->pullup =3D PMIC_GPIO_PULL_UP_30;
+> +	else if (flags & GPIOD_PULL_DOWN)
+> +		pad->pullup =3D PMIC_GPIO_PULL_DOWN;
+> +
+> +	return qcom_spmi_pmic_gpio_set(plat, pad);
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_get_flags(struct udevice *dev, unsigned i=
+nt offset,
+> +					 ulong *flagsp)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +	ulong flags =3D 0;
+> +
+> +	if (offset >=3D plat->pin_count)
+> +		return -EINVAL;
+> +
+> +	pad =3D &plat->pads[offset];
+> +
+> +	if (pad->input_enabled)
+> +		flags |=3D GPIOD_IS_IN;
+> +
+> +	if (pad->output_enabled) {
+> +		flags |=3D GPIOD_IS_OUT;
+> +
+> +		if (pad->out_value)
+> +			flags |=3D GPIOD_IS_OUT_ACTIVE;
+> +
+> +		switch (pad->buffer_type) {
+> +		case PMIC_GPIO_OUT_BUF_OPEN_DRAIN_NMOS:
+> +			flags |=3D GPIOD_OPEN_DRAIN;
+> +			break;
+> +		case PMIC_GPIO_OUT_BUF_OPEN_DRAIN_PMOS:
+> +			flags |=3D GPIOD_OPEN_SOURCE;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (pad->pullup =3D=3D PMIC_GPIO_PULL_DOWN)
+> +		flags |=3D GPIOD_PULL_DOWN;
+> +	else if (pad->pullup !=3D PMIC_GPIO_PULL_DISABLE)
+> +		flags |=3D GPIOD_PULL_UP;
+> +
+> +	if (pad->analog_pass)
+> +		flags |=3D GPIOD_IS_AF;
+> +
+> +	*flagsp =3D flags;
+> +
+> +	return 0;
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_get_value(struct udevice *dev, unsigned i=
+nt offset)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +	int ret;
+> +
+> +	if (offset >=3D plat->pin_count)
+> +		return -EINVAL;
+> +
+> +	pad =3D &plat->pads[offset];
+> +
+> +	if (!pad->is_enabled)
+> +		return -EINVAL;
+> +
+> +	if (pad->input_enabled) {
+> +		ret =3D spmi_pmic_gpio_read(plat, pad, PMIC_MPP_REG_RT_STS);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		pad->out_value =3D ret & PMIC_MPP_REG_RT_STS_VAL_MASK;
+> +	}
+> +
+> +	return !!pad->out_value;
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_get_function(struct udevice *dev, unsigne=
+d int offset)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +	int val;
+> +
+> +	if (offset >=3D plat->pin_count)
+> +		return GPIOF_UNKNOWN;
+> +
+> +	pad =3D &plat->pads[offset];
+> +
+> +	val =3D spmi_pmic_gpio_read(plat, pad, PMIC_GPIO_REG_EN_CTL);
+> +	if (!(val >> PMIC_GPIO_REG_MASTER_EN_SHIFT))
+> +		return GPIOF_UNKNOWN;
+> +	else if (pad->analog_pass)
+> +		return GPIOF_FUNC;
+> +	else if (pad->output_enabled)
+> +		return GPIOF_OUTPUT;
+> +
+> +	return GPIOF_INPUT;
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_xlate(struct udevice *dev, struct gpio_de=
+sc *desc,
+> +				     struct ofnode_phandle_args *args)
+> +{
+> +	struct gpio_dev_priv *uc_priv =3D dev_get_uclass_priv(dev);
+> +
+> +	if (args->args_count < 1)
+> +		return -EINVAL;
+> +
+> +	/* GPIOs in DT are 1-based */
+> +	desc->offset =3D args->args[0] - 1;
+> +	if (desc->offset >=3D uc_priv->gpio_count)
+> +		return -EINVAL;
+> +
+> +	if (args->args_count < 2)
+> +		return 0;
+> +
+> +	desc->flags =3D gpio_flags_xlate(args->args[1]);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct dm_gpio_ops qcom_spmi_pmic_gpio_ops =3D {
+> +	.set_flags		=3D qcom_spmi_pmic_gpio_set_flags,
+> +	.get_flags		=3D qcom_spmi_pmic_gpio_get_flags,
+> +	.get_value		=3D qcom_spmi_pmic_gpio_get_value,
+> +	.get_function		=3D qcom_spmi_pmic_gpio_get_function,
+> +	.xlate			=3D qcom_spmi_pmic_gpio_xlate,
+> +};
+> +
+> +static int qcom_spmi_pmic_gpio_bind(struct udevice *dev)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct udevice *child;
+> +	struct driver *drv;
+> +	int ret;
+> +
+> +	drv =3D lists_driver_lookup_name("qcom_spmi_pmic_pinctrl");
+> +	if (!drv) {
+> +		log_warning("Cannot find driver '%s'\n", "qcom_spmi_pmic_pinctrl");
+> +		return -ENOENT;
+> +	}
+> +
+> +	/* Bind the GPIO driver as a child of the PMIC. */
+> +	ret =3D device_bind_with_driver_data(dev, drv,
+> +					   dev->name,
+> +					   0, dev_ofnode(dev), &child);
+> +	if (ret)
+> +		return log_msg_ret("bind", ret);
+> +
+> +	dev_set_plat(child, plat);
+> +
+> +	return 0;
+> +}
+> +
+> +static int qcom_spmi_pmic_gpio_probe(struct udevice *dev)
+> +{
+> +	struct gpio_dev_priv *uc_priv =3D dev_get_uclass_priv(dev);
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct ofnode_phandle_args args;
+> +	int i, ret;
+> +	u64 pid;
+> +
+> +	plat->dev =3D dev;
+> +	plat->pmic =3D dev->parent;
+> +
+> +	pid =3D dev_read_addr(dev);
+> +	if (pid =3D=3D FDT_ADDR_T_NONE)
+> +		return log_msg_ret("bad address", -EINVAL);
+> +
+> +	plat->pid =3D pid;
+> +
+> +	/*
+> +	 * Parse basic GPIO count specified via the gpio-ranges property
+> +	 * as specified in upstream devicetrees
+> +	 */
+> +	ret =3D ofnode_parse_phandle_with_args(dev_ofnode(dev), "gpio-ranges",
+> +					     NULL, 3, 0, &args);
+> +	if (ret)
+> +		return log_msg_ret("gpio-ranges", ret);
+> +
+> +	plat->pin_count =3D min_t(u32, args.args[2], PMIC_MAX_GPIOS);
+> +
+> +	uc_priv->gpio_count =3D plat->pin_count;
+> +
+> +	uc_priv->bank_name =3D strchr(dev_read_string(dev, "compatible"), ',');
+> +	if (uc_priv->bank_name)
+> +		uc_priv->bank_name +=3D 1; /* skip the , */
+> +	else
+> +		uc_priv->bank_name =3D dev->name;
+> +
+> +	plat->pads =3D calloc(plat->pin_count, sizeof(struct spmi_pmic_gpio_pad=
+));
+> +	if (!plat->pads)
+> +		return -ENOMEM;
+> +
+> +	for (i =3D 0; i < plat->pin_count; ++i) {
+> +		struct spmi_pmic_gpio_pad *pad =3D &plat->pads[i];
+> +
+> +		pad->base =3D plat->pid + i * PMIC_GPIO_ADDRESS_RANGE;
+> +
+> +		ret =3D spmi_pmic_gpio_populate(plat, pad);
+> +		if (ret < 0)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id qcom_spmi_pmic_gpio_ids[] =3D {
+> +	{ .compatible =3D "qcom,pm8550b-gpio" },
+> +	{ .compatible =3D "qcom,pm8550ve-gpio" },
+> +	{ .compatible =3D "qcom,pm8550vs-gpio" },
+> +	{ .compatible =3D "qcom,pmk8550-gpio" },
+> +	{ .compatible =3D "qcom,pmr735d-gpio" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_spmi_pmic_gpio) =3D {
+> +	.name	=3D "qcom_spmi_pmic_gpio",
+> +	.id	=3D UCLASS_GPIO,
+> +	.of_match =3D qcom_spmi_pmic_gpio_ids,
+> +	.bind	=3D qcom_spmi_pmic_gpio_bind,
+> +	.probe =3D qcom_spmi_pmic_gpio_probe,
+> +	.ops	=3D &qcom_spmi_pmic_gpio_ops,
+> +	.plat_auto =3D sizeof(struct qcom_spmi_pmic_gpio_data),
+> +	.flags =3D DM_FLAG_ALLOC_PDATA,
+> +};
+> +
+> +/* Qualcomm specific pin configurations */
+> +#define PMIC_GPIO_CONF_PULL_UP			(PIN_CONFIG_END + 1)
+> +#define PMIC_GPIO_CONF_STRENGTH			(PIN_CONFIG_END + 2)
+> +#define PMIC_GPIO_CONF_ATEST			(PIN_CONFIG_END + 3)
+> +#define PMIC_GPIO_CONF_ANALOG_PASS		(PIN_CONFIG_END + 4)
+> +#define PMIC_GPIO_CONF_DTEST_BUFFER		(PIN_CONFIG_END + 5)
+> +
+> +static const struct pinconf_param qcom_spmi_pmic_pinctrl_conf_params[] =
+=3D {
+> +	{ "drive-push-pull", PIN_CONFIG_DRIVE_PUSH_PULL, 0 },
+> +	{ "drive-open-drain", PIN_CONFIG_DRIVE_OPEN_DRAIN, 0 },
+> +	{ "drive-open-source", PIN_CONFIG_DRIVE_OPEN_SOURCE, 0 },
+> +	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
+> +	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, PMIC_GPIO_PULL_UP_30 },
+> +	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_UP, 0 },
+> +	{ "bias-high-impedance", PIN_CONFIG_BIAS_HIGH_IMPEDANCE, 0 },
+> +	{ "power-source", PIN_CONFIG_POWER_SOURCE, 0 },
+> +	{ "input-disable", PIN_CONFIG_INPUT_ENABLE, 0 },
+> +	{ "input-enable", PIN_CONFIG_INPUT_ENABLE, 1 },
+> +	{ "output-disable", PIN_CONFIG_OUTPUT_ENABLE, 0 },
+> +	{ "output-enable", PIN_CONFIG_OUTPUT_ENABLE, 1 },
+> +	{ "output-high", PIN_CONFIG_OUTPUT, 1 },
+> +	{ "output-low", PIN_CONFIG_OUTPUT, 0 },
+> +	{ "qcom,pull-up-strength", PMIC_GPIO_CONF_PULL_UP, 0},
+> +	{ "qcom,drive-strength", PMIC_GPIO_CONF_STRENGTH, 0},
+> +	{ "qcom,atest",	PMIC_GPIO_CONF_ATEST, 0},
+> +	{ "qcom,analog-pass", PMIC_GPIO_CONF_ANALOG_PASS, 0},
+> +	{ "qcom,dtest-buffer", PMIC_GPIO_CONF_DTEST_BUFFER, 0},
+> +};
+> +
+> +static int qcom_spmi_pmic_pinctrl_get_pins_count(struct udevice *dev)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +
+> +	return plat->pin_count;
+> +}
+> +
+> +static const char *qcom_spmi_pmic_pinctrl_get_pin_name(struct udevice *d=
+ev,
+> +						       unsigned int selector)
+> +{
+> +	static char name[8];
+> +
+> +	/* DT indexes from 1 */
+> +	snprintf(name, sizeof(name), "gpio%u", selector + 1);
+> +
+> +	return name;
+> +}
+> +
+> +static int qcom_spmi_pmic_pinctrl_get_pin_muxing(struct udevice *dev,
+> +						 unsigned int selector,
+> +						 char *buf, int size)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +
+> +	if (selector >=3D plat->pin_count)
+> +		return -EINVAL;
+> +
+> +	pad =3D &plat->pads[selector];
+> +
+> +	spmi_pmic_gpio_get_state(plat, pad, buf, size);
+> +
+> +	return 0;
+> +}
+> +
+> +static int qcom_spmi_pmic_pinctrl_pinconf_set(struct udevice *dev, unsig=
+ned int selector,
+> +					      unsigned int param, unsigned int arg)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +
+> +	if (selector >=3D plat->pin_count)
+> +		return -EINVAL;
+> +
+> +	pad =3D &plat->pads[selector];
+> +	pad->is_enabled =3D true;
+> +
+> +	switch (param) {
+> +	case PIN_CONFIG_DRIVE_PUSH_PULL:
+> +		pad->buffer_type =3D PMIC_GPIO_OUT_BUF_CMOS;
+> +		break;
+> +	case PIN_CONFIG_DRIVE_OPEN_DRAIN:
+> +		if (!pad->have_buffer)
+> +			return -EINVAL;
+> +		pad->buffer_type =3D PMIC_GPIO_OUT_BUF_OPEN_DRAIN_NMOS;
+> +		break;
+> +	case PIN_CONFIG_DRIVE_OPEN_SOURCE:
+> +		if (!pad->have_buffer)
+> +			return -EINVAL;
+> +		pad->buffer_type =3D PMIC_GPIO_OUT_BUF_OPEN_DRAIN_PMOS;
+> +		break;
+> +	case PIN_CONFIG_BIAS_DISABLE:
+> +		pad->pullup =3D PMIC_GPIO_PULL_DISABLE;
+> +		break;
+> +	case PIN_CONFIG_BIAS_PULL_UP:
+> +		pad->pullup =3D PMIC_GPIO_PULL_UP_30;
+> +		break;
+> +	case PIN_CONFIG_BIAS_PULL_DOWN:
+> +		if (arg)
+> +			pad->pullup =3D PMIC_GPIO_PULL_DOWN;
+> +		else
+> +			pad->pullup =3D PMIC_GPIO_PULL_DISABLE;
+> +		break;
+> +	case PIN_CONFIG_BIAS_HIGH_IMPEDANCE:
+> +		pad->is_enabled =3D false;
+> +		break;
+> +	case PIN_CONFIG_POWER_SOURCE:
+> +		if (arg >=3D pad->num_sources)
+> +			return -EINVAL;
+> +		pad->power_source =3D arg;
+> +		break;
+> +	case PIN_CONFIG_INPUT_ENABLE:
+> +		pad->input_enabled =3D arg ? true : false;
+> +		break;
+> +	case PIN_CONFIG_OUTPUT_ENABLE:
+> +		pad->output_enabled =3D arg ? true : false;
+> +		break;
+> +	case PIN_CONFIG_OUTPUT:
+> +		pad->output_enabled =3D true;
+> +		pad->out_value =3D arg;
+> +		break;
+> +	case PMIC_GPIO_CONF_PULL_UP:
+> +		if (arg > PMIC_GPIO_PULL_UP_1P5_30)
+> +			return -EINVAL;
+> +		pad->pullup =3D arg;
+> +		break;
+> +	case PMIC_GPIO_CONF_STRENGTH:
+> +		if (arg > PMIC_GPIO_STRENGTH_LOW)
+> +			return -EINVAL;
+> +		switch (arg) {
+> +		case PMIC_GPIO_STRENGTH_HIGH:
+> +			pad->strength =3D PMIC_GPIO_OUT_STRENGTH_HIGH;
+> +			break;
+> +		case PMIC_GPIO_STRENGTH_LOW:
+> +			pad->strength =3D PMIC_GPIO_OUT_STRENGTH_LOW;
+> +			break;
+> +		default:
+> +			pad->strength =3D arg;
+> +			break;
+> +		}
+> +		break;
+> +	case PMIC_GPIO_CONF_ATEST:
+> +		if (!pad->lv_mv_type || arg > 4)
+> +			return -EINVAL;
+> +		pad->atest =3D arg;
+> +		break;
+> +	case PMIC_GPIO_CONF_ANALOG_PASS:
+> +		if (!pad->lv_mv_type)
+> +			return -EINVAL;
+> +		pad->analog_pass =3D true;
+> +		break;
+> +	case PMIC_GPIO_CONF_DTEST_BUFFER:
+> +		if (arg > 4)
+> +			return -EINVAL;
+> +		pad->dtest_buffer =3D arg;
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	return qcom_spmi_pmic_gpio_set(plat, pad);
+> +}
+> +
+> +static const char *qcom_spmi_pmic_pinctrl_get_function_name(struct udevi=
+ce *dev,
+> +							    unsigned int selector)
+> +{
+> +	if (selector >=3D ARRAY_SIZE(spmi_pmic_gpio_functions))
+> +		return NULL;
+> +
+> +	return spmi_pmic_gpio_functions[selector];
+> +}
+> +
+> +static int qcom_spmi_pmic_pinctrl_get_functions_count(struct udevice *de=
+v)
+> +{
+> +	return ARRAY_SIZE(spmi_pmic_gpio_functions);
+> +}
+> +
+> +static int qcom_spmi_pmic_pinctrl_pinmux_set_mux(struct udevice *dev, un=
+signed int selector,
+> +						 unsigned int function)
+> +{
+> +	struct qcom_spmi_pmic_gpio_data *plat =3D dev_get_plat(dev);
+> +	struct spmi_pmic_gpio_pad *pad;
+> +	unsigned int val;
+> +	int ret;
+> +
+> +	if (selector >=3D plat->pin_count)
+> +		return -EINVAL;
+> +
+> +	pad =3D &plat->pads[selector];
+> +
+> +	/*
+> +	 * Non-LV/MV subtypes only support 2 special functions,
+> +	 * offsetting the dtestx function values by 2
+> +	 */
+> +	if (!pad->lv_mv_type) {
+> +		if (function =3D=3D PMIC_GPIO_FUNC_INDEX_FUNC3 ||
+> +		    function =3D=3D PMIC_GPIO_FUNC_INDEX_FUNC4) {
+> +			pr_err("LV/MV subtype doesn't have func3/func4\n");
+> +			return -EINVAL;
+> +		}
+> +		if (function >=3D PMIC_GPIO_FUNC_INDEX_DTEST1)
+> +			function -=3D (PMIC_GPIO_FUNC_INDEX_DTEST1 -
+> +					PMIC_GPIO_FUNC_INDEX_FUNC3);
+> +	}
+> +
+> +	pad->function =3D function;
+> +
+> +	if (pad->analog_pass)
+> +		val =3D PMIC_GPIO_MODE_ANALOG_PASS_THRU;
+> +	else if (pad->output_enabled && pad->input_enabled)
+> +		val =3D PMIC_GPIO_MODE_DIGITAL_INPUT_OUTPUT;
+> +	else if (pad->output_enabled)
+> +		val =3D PMIC_GPIO_MODE_DIGITAL_OUTPUT;
+> +	else
+> +		val =3D PMIC_GPIO_MODE_DIGITAL_INPUT;
+> +
+> +	if (pad->lv_mv_type) {
+> +		ret =3D spmi_pmic_gpio_write(plat, pad,
+> +					   PMIC_GPIO_REG_MODE_CTL, val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		val =3D pad->atest - 1;
+> +		ret =3D spmi_pmic_gpio_write(plat, pad,
+> +					   PMIC_GPIO_REG_LV_MV_ANA_PASS_THRU_SEL,
+> +					   val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		val =3D pad->out_value
+> +			<< PMIC_GPIO_LV_MV_OUTPUT_INVERT_SHIFT;
+> +		val |=3D pad->function
+> +			& PMIC_GPIO_LV_MV_OUTPUT_SOURCE_SEL_MASK;
+> +		ret =3D spmi_pmic_gpio_write(plat, pad,
+> +					   PMIC_GPIO_REG_LV_MV_DIG_OUT_SOURCE_CTL,
+> +					   val);
+> +		if (ret < 0)
+> +			return ret;
+> +	} else {
+> +		val =3D val << PMIC_GPIO_REG_MODE_DIR_SHIFT;
+> +		val |=3D pad->function << PMIC_GPIO_REG_MODE_FUNCTION_SHIFT;
+> +		val |=3D pad->out_value & PMIC_GPIO_REG_MODE_VALUE_SHIFT;
+> +
+> +		ret =3D spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_MODE_CTL, val);
+> +		if (ret < 0)
+> +			return ret;
+> +	}
+> +
+> +	val =3D pad->is_enabled << PMIC_GPIO_REG_MASTER_EN_SHIFT;
+> +
+> +	return spmi_pmic_gpio_write(plat, pad, PMIC_GPIO_REG_EN_CTL, val);
+> +}
+> +
+> +struct pinctrl_ops qcom_spmi_pmic_pinctrl_ops =3D {
+> +	.get_pins_count =3D qcom_spmi_pmic_pinctrl_get_pins_count,
+> +	.get_pin_name =3D qcom_spmi_pmic_pinctrl_get_pin_name,
+> +	.set_state =3D pinctrl_generic_set_state,
+> +	.pinconf_num_params =3D ARRAY_SIZE(qcom_spmi_pmic_pinctrl_conf_params),
+> +	.pinconf_params =3D qcom_spmi_pmic_pinctrl_conf_params,
+> +	.pinconf_set =3D qcom_spmi_pmic_pinctrl_pinconf_set,
+> +	.get_function_name =3D qcom_spmi_pmic_pinctrl_get_function_name,
+> +	.get_functions_count =3D qcom_spmi_pmic_pinctrl_get_functions_count,
+> +	.pinmux_set =3D qcom_spmi_pmic_pinctrl_pinmux_set_mux,
+> +	.get_pin_muxing =3D qcom_spmi_pmic_pinctrl_get_pin_muxing,
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_spmi_pmic_pinctrl) =3D {
+> +	.name	=3D "qcom_spmi_pmic_pinctrl",
+> +	.id	=3D UCLASS_PINCTRL,
+> +	.ops	=3D &qcom_spmi_pmic_pinctrl_ops,
+> +};
+>
+> --=20
+> 2.34.1
 
 
 
