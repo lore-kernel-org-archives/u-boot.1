@@ -4,70 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A094EC83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 10:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B91C83013
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 10:01:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A78E80E9A;
-	Wed,  2 Jul 2025 12:01:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 653D682CFA;
+	Wed,  2 Jul 2025 12:01:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oUHxlMdA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FS6QdgOR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49DBA82103; Wed,  2 Jul 2025 12:01:15 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AC29800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:01:12 +0200 (CEST)
+ id D02EA82F00; Wed,  2 Jul 2025 12:01:39 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F9CD800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:01:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 562A1AKE3891407;
- Wed, 2 Jul 2025 05:01:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751450470;
- bh=TLzDixrgGeg5BM6dXMPD1YOkWYxB5QhHmYPo4xToelg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=oUHxlMdAXNul3EvaCV/j88raOy4jU1xmx4TLYZ8NMtUgDGnQMQti2PRR8go1OqIqj
- KRdeEk/euGDZRjk68B+ttACczRH9Jh13muUijM3IvbeVIV3QLTxomjnKlG3cqdpi48
- OWotff3Q/vlgrMTNJpOxIZ3fD08Ijq399ytTNu5Q=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 562A1A0p3442696
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 2 Jul 2025 05:01:10 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 2
- Jul 2025 05:01:09 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 2 Jul 2025 05:01:09 -0500
-Received: from [10.249.142.58] ([10.249.142.58])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 562A16mZ3221708;
- Wed, 2 Jul 2025 05:01:06 -0500
-Message-ID: <66a408e7-3804-4efe-983f-159fa441f198@ti.com>
-Date: Wed, 2 Jul 2025 15:31:06 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3a6e8b1fa37so3657790f8f.2
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 03:01:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751450497; x=1752055297; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ExDJP5cKyLckfl7EtbQIEoQoulq/o2yQFt0mrGVGfK4=;
+ b=FS6QdgOR2/a2tpJ5DzTUK15OlUtREjKfRBrUO/vDdzjxyGh+cNW5XdajlazGvV+mBO
+ KBZzUhnpuL4uT/sr4NOG+q/zjnYVbJZ2nfDcuMTTiPCT2i3K2pPkR0ZnLS/tK885K0yV
+ 05buaR+nI9/ICcFCuyaQW8Xw4RfW9W1okq26y2tpYb5PJdWMtImCOOTYeq2Ck3BN0WC9
+ kw4PljI6alTuD0aEMtMYuZGSYYZmU/gATTl6ysbTE8sJJqRNrlO00aaGnz+R5JtPmn5A
+ yycUf8Uqp+bMw2u9otBKi7vMppqB1aNkUOq4z+sp9dR2y5hCWbQxqconPL+DxFbef8ct
+ iFDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751450497; x=1752055297;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ExDJP5cKyLckfl7EtbQIEoQoulq/o2yQFt0mrGVGfK4=;
+ b=HpSiEDfXGXuifoI1iM1SvEr4ijHnz+mJFlYa4XBfgnRd9EBM13rdZBMIsldyOwR/VJ
+ u+ExmCJkPvBoEc2Oss77IhJ81I8txFM8f1R0goVBWi/zNSAH2IBWroToiKBVOeKr81LU
+ 1RD/2nvekElwJ6pYO7OwalMLX/B8e1dd3QpyoK/c2ml8z2iiblHGf3twPMjISNH5aYdD
+ dpYlYsTC7OJz3yl0kfk6u570XaFEPPEQnN+OJGkDuz4hYZcv0ZXz/faEvsfuNloqtacc
+ zBAkdovBS7x1PTMmUQ1S8+KV7388IUaNhvLpR4MHX8BVSVKQKyP5uhr3pOpZnvUW827t
+ Sm/w==
+X-Gm-Message-State: AOJu0Yy7JrLWHmwWcjzeWk26sPZIn13FmaenRWQwZPpQbJISLiNkPWsm
+ un7twVNhpcCnjSNFzif/2wycz/l+wchtn4a5BDcTFwr/PEdnOD/2qSsx5hy+qLrq/JQ=
+X-Gm-Gg: ASbGnctkr/4yMuHZk1rcWzk6f1L7KNV2UmwpwpztGWSCQenkq+NYMxf1He5fvZixyhU
+ tuHgngKlHR6NaOSQh3bePxoo1/6TVWE1rydO4JjUN5MkQs13OCZN54K3jyAGayuI8HiKOYjsES6
+ iNXfknLb/Z0+fXUbfizOhFIp5DxkGFuFgUyOMT6Fs9NISwZb027UlHTcASUbqHjknRPwVE87sd+
+ WCVyy4yobJjMAYkjzy1nGWH8nL1Vvsz25SNQzouucqzF9ZTu0Cmakec+GtqgwnAAsqYBlmWPQQC
+ MugXjZUCuyDv+weLZVngdegLGg7d7cIAk03x2ri5Dm6n+gh4UFR+OqyqLUAdiB7L5xakW/0Ai5H
+ HKlVvTO0OWtVQGg==
+X-Google-Smtp-Source: AGHT+IFkNbNpJKnHOHvQWDKkbiT61Z9Y1XUgYfllRIHpo+XLwx36ONBUOjwqwBON+dgpv3rc9YVk5Q==
+X-Received: by 2002:a05:6000:2809:b0:3a4:f892:de7f with SMTP id
+ ffacd0b85a97d-3b2001acb8fmr1073368f8f.36.1751450496983; 
+ Wed, 02 Jul 2025 03:01:36 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:e07:801:2aa3:3d9f:604c:fc30])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a88c7e74fbsm15850233f8f.10.2025.07.02.03.01.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 03:01:36 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH v2 0/3] efi_loader: Address some issues found by Smatch
+Date: Wed, 02 Jul 2025 11:01:35 +0100
+Message-Id: <20250701-efiloader_fix-v2-0-eb6db16bbe4e@linaro.org>
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH v7 00/10] Add falcon support for am62a, 62p and 62x
-To: Francesco Valla <francesco@valla.it>
-CC: <u-boot@lists.denx.de>, Anshul Dalal <anshuld@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
- <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>
-References: <20250603142452.2707171-1-anshuld@ti.com>
- <2553134.XAFRqVoOGU@fedora.fritz.box>
- <3049d2ce-6303-4622-be6b-eebb47d21c45@ti.com>
- <07418d43d2ac7ad4b2241e3c0f0bf390@valla.it>
-From: "Raghavendra, Vignesh" <vigneshr@ti.com>
-Content-Language: en-US
-In-Reply-To: <07418d43d2ac7ad4b2241e3c0f0bf390@valla.it>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAH8DZWgC/3WNywqDMBBFf0Vm3ZTRtPax6n8UKWMcdcAmZSJiE
+ f+90X2X514OZ4HIKhzhni2gPEmU4BMUhwxcT75jI01iKLA44wVzw60MgRrWVyuzKa2zJd5cyc0
+ VklNTZFMreddv1pviyLodH03ivIeeVeJe4hj0u3enfFv/JabcoGltSmCNxCf7GMSThmPQDqp1X
+ X8mQ1cVxAAAAA==
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.12.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,57 +102,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Smatch reported that there were some unitialised variables and
+dereferencing of NULL pointers. This series addresses these issues.
 
-On 7/1/2025 3:53 PM, Francesco Valla wrote:
-[...]
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+Changes in v2:
+- Address review comments on 2/3 to return EFI_UNSUPPORTED and eliminate
+  the use of protocol_interface
+- Collect RB tags for unchanged patches
+- Link to v1: https://lore.kernel.org/r/20250701-efiloader_fix-v1-0-f3c6e0b0ae43@linaro.org
 
-> 
-> that was exactly the issue, after unlocking the CTRL_MMR region the
-> TB_CLKEN bits wrote correctly and the PWM started working again.
-> According to TRM, the correct region is number 1.
-> 
+---
+Andrew Goodbody (3):
+      efi_loader: Prevent dereferencing NULL pointer
+      efi_loader: Prevent dereference of uninitialised variable
+      efi_loader: Prevent free of uninitialised pointer
 
-Ah yes, sorry for the confusion
+ lib/efi_loader/efi_file.c | 2 +-
+ lib/efi_loader/efi_http.c | 9 ++++-----
+ lib/efi_loader/efi_net.c  | 2 +-
+ 3 files changed, 6 insertions(+), 7 deletions(-)
+---
+base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
+change-id: 20250701-efiloader_fix-63c3609c6ed8
 
-> These were the issued commands to unlock the CTRL_MMR region 1:
-> 
->  $ devmem2 0x105008 w 0x68EF3490
->  $ devmem2 0x10500C w 0xD172BC5A
-> 
-> and then to write TB_CLKEN for PWM channel 0:
-> 
->  $ devmem2 0x00104130 w 0x1
-> 
-> The clock then is marked as enabled also from a hardware point of view:
-> 
->  $ head -n 2 /sys/kernel/debug/clk/clk_summary && cat /sys/kernel/debug/
-> clk/clk_summary | grep pwm
-> 
->                                  enable  prepare  protect               
->                 duty  hardware                            connection
->    clock                          count    count    count        rate  
-> accuracy phase  cycle    enable   consumer                         id
->  epwm_tbclk2                         0       0        0        0        
->   0          0     50000      Y   deviceless                     
-> no_connection_id
->  epwm_tbclk1                         0       0        0        0        
->   0          0     50000      N   deviceless                     
-> no_connection_id
->  epwm_tbclk0                         1       1        0        0        
->   0          0     50000      N   23000000.pwm                    tbclk
->  clk:86:0                            0       0        0        250000000
->   0          0     50000      Y   23000000.pwm                    fck
-> 
-> 
-> What's the correct path to issue a bug for the DM firmware?
-> 
-
-Thanks for the confirmation. I am tracking this internally with firmware
-team. Will let you know once the fix is available.
-
-> Thank you!
-> 
-> Regards,
-> Francesco
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
