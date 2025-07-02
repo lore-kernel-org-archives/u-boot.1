@@ -4,147 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF1B7C7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:27:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E26C7EE30
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 02:59:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A8FA82ADA;
-	Wed,  2 Jul 2025 03:27:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B1A682103;
+	Wed,  2 Jul 2025 04:59:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=KARO-electronics.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="bzwqKdhV";
+	dkim=pass (2048-bit key; unprotected) header.d=karo-electronics.de header.i=@karo-electronics.de header.b="PTcLORex";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 458FA82CFA; Wed,  2 Jul 2025 03:27:15 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 20EBE82A76; Wed,  2 Jul 2025 04:59:38 +0200 (CEST)
+Received: from dd54918.kasserver.com (dd54918.kasserver.com [85.13.167.58])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FEFA82103
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:27:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04CD481FEE
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 04:59:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=KARO-electronics.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HMRPIfDlN8TFK99Rz+IbKkHYRNXNmAJ+0ka9razhIIKY4+nSKQ1YshLDTvDd5875CSk6vXegrBhvS0fFxLQ2pfUaO5hddxGzRrM7eeV3zUH1iU8z1egxr2i0BQfN/YXMM7W5idkE3hogY+KBzf2pG5gUCjelV8vmJktQrbShS+4lLQJ/yQrZ38aNwXl3oUpKAABAKPQTLJrTHMnmlFWY5lhWOOP5aNniWLBKRavJvVODfx0IgHg4dO5gwpwfVoxRlu5pgjPYmfEmSMBQ4JkpINawv8T2zLl0JxKG0wcqszfKG1QTz2ddD0T4Jcx7stuU09sgWWEmQyOFpQAuXjt/hw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bH5r8jqrEN5PGvn8yGsMkr6LB7PTTCfqp3m+7oSDFrs=;
- b=hcl1G4nXZAsalWInqoUbbXDiq85sPZrLFRUCLcWedxXQyVvEdtds6zOQhoiQ55zNpiSkVzaCu1sDRjU6DmTdHKk/b6xHrxjCPteKqwGOeXPJu/oA+sRukYNeFTzJcH2ss40GkkBDVH/cCQu7WfXI+6VT9D59IoKITFx/D1UumFU8OJA6D1zi3dCgHyY2eq/pmNF0ITwvgDQfas7ntEE0/Z1aH0RT18qBkuxAByauA3oyofcsr3IU4FROV/tmLNDafVkv31rOiT3eEarJW10N3z51LvQNe2BIe5eN+TaqRE666jl5WERJqBUwwtKodzlPL4LKmJjRqUEUcgC9VupHmg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bH5r8jqrEN5PGvn8yGsMkr6LB7PTTCfqp3m+7oSDFrs=;
- b=bzwqKdhVeo8V07lbubB0zo1Oy1Z1shMJpzk5mBpe/FR/GSniGR6iMnCEE8kJ/6xXdr3cjXYWGY2BPKO1NKzabwOOKVDByQTvgw61J+ztG6/yY/RQwnmCM1xHHSb6HdhK7j+KLwvGd3cXsCU3EZBhJoyWzaDULOI/KM1byNQkucv9DnPTgdqwAewxQojT+PqtcjHKiPf22fGrILGyPuFksfQHKi+sePH60LChTvmY/n2DcwHsqBk5qViaGNCZedCc+CDmzYyezwT6mQhFwDtSPJqQUdjyjwDu55xi2ohZ7h7HjOS6/WOvcjHZDH5WVMheptFiaHHhqxHSuWRzAq7LDQ==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AS8PR04MB7688.eurprd04.prod.outlook.com (2603:10a6:20b:29d::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.31; Wed, 2 Jul
- 2025 01:27:12 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8880.029; Wed, 2 Jul 2025
- 01:27:12 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- dl-uboot-imx <uboot-imx@nxp.com>
-Subject: RE: [PATCH] cmd/Kconfig: Tighten dependencies on CMD_BLOB
-Thread-Topic: [PATCH] cmd/Kconfig: Tighten dependencies on CMD_BLOB
-Thread-Index: AQHb6u1gH/qIhpyFmEyG0CaIkBtVQbQeCvPQ
-Date: Wed, 2 Jul 2025 01:27:12 +0000
-Message-ID: <PAXPR04MB8459CD314A699E08975F7CEA8840A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20250702010511.19141-1-trini@konsulko.com>
-In-Reply-To: <20250702010511.19141-1-trini@konsulko.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AS8PR04MB7688:EE_
-x-ms-office365-filtering-correlation-id: 9f9b0ef3-ff18-4c18-ee8a-08ddb90791ee
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|19092799006|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?pxGPcwMc5s+N0ALCD6yaHD2st1oUR1lwTn1LFrkbg4MdyDOAHrO+zqWZVqjG?=
- =?us-ascii?Q?QLPTyoaC/k/Ii/ioMwiIUrtBP7yj1bL31uKTE6CX2Mue19m8/ScQaE5FZ6zu?=
- =?us-ascii?Q?tPDLZT2wVOCDdGjyXsWuv9IyufEnHf7FDx1fr19XcuFXGVLGC5d/TszLJhIk?=
- =?us-ascii?Q?WN6dqCOu2+IrqJvJv2hSStAaTSwffGAlJTuMSxkQJzNPYHdDePURqKvK8EKt?=
- =?us-ascii?Q?zo1xKMKyFn1UVXhh4H9X8pCy0GaJSef7jvfNFdRzzSKtlA0mu/cZHVCz91Dh?=
- =?us-ascii?Q?xKvQMbkhVleaghZno/H59ru7Hco36fb1Be+e3IfMauQKliaKwx4mAkrg3DIY?=
- =?us-ascii?Q?cZpk8e+YjcNkCXkmUfUGMwLnCMFoIdUIQitypP48Q35LFtVtIWCBIJK6AS6D?=
- =?us-ascii?Q?Rc2Fr7bZUuW9y5yBhQZ3VF4iP0mPTlTX/qBGm6KP934B5TcOsrUcMjtlR3JZ?=
- =?us-ascii?Q?fq5LhG6HBFsd6YC1uPls2FEvXCozS7c8oNMa6OmpGkWdHgOiSYa3Dyh8AcQV?=
- =?us-ascii?Q?WQwpGsWDvQBYu4IfqdrI1KgzhNtbV80LtAAm6TCEzxPzBgLA0vzO8EOlzMIS?=
- =?us-ascii?Q?4FYAWXeI6C+q/oXh746AIVPpfZzkc0SqajQQSktOg9fe+Q26VnoRd1wpAwio?=
- =?us-ascii?Q?D9lat3FFNYh/B3srU/sodPS6OgSdKZ+ih1ahIJOJQ+tZt5b7qNldXZsSFIX7?=
- =?us-ascii?Q?WLp4caC7ZCA+NW+hygLOm1zQgIQmE+3+8Cy2Fcr5u0y2Y/0q8ngcnZ0r3xtf?=
- =?us-ascii?Q?JevM1nN/XoRaKBEUcyZRI8Rf9nNQxGhUFoculVPk8zVRhJ2X4dgSwQYYw/wN?=
- =?us-ascii?Q?pMWX4mBNnc6AcjI31WSG/5rIsAIrKUkcUsPj5U4fxTWysbsdtiG/+bnwAcIq?=
- =?us-ascii?Q?JJWc9CVGoM8QNchCqhCPneiBS4tSt6BzXoi3f+Yrpv+kzrD3yXdskPWsR+uy?=
- =?us-ascii?Q?9eqVRPMdwmEwg3fGapmMjcFQcLCV+ZVl5Lb7DpuR4++O2JplNi1aAKmexBW/?=
- =?us-ascii?Q?LVZLJ9eAUba8EFz2XbBNmCJJFN+4yX5mXRWg8dyiKF3YHhgWcyn+wlPDxp9V?=
- =?us-ascii?Q?Uf0R/FEjHFpkjd2fTYmuf9m1qCCT1d/fqw7kGI/svmtmrL3jqriQrUYOfKsS?=
- =?us-ascii?Q?pnh83mBUkszr27WSFkITEZBIS2qtrJvEAn72dcjxv9LTglT1VkWIe/aon67w?=
- =?us-ascii?Q?VIenwoha/rViWCUDZRrw1l1Wy1BdjohfFCRsvO+/z1nVZ6P3C2sRVCIhueOe?=
- =?us-ascii?Q?QWWWyh/EGUPADA8CcOxZrxb+rPZSWEyQvNjYD20rL4Y4Zke9AP4D5dIzLa++?=
- =?us-ascii?Q?zlq3VtpM5a+fmyksGKhtTclq5J2PsWQKhm0tXsbtvDXrKk/G6Recpmt684JI?=
- =?us-ascii?Q?K19FHkwTPJvpQqa0u5Wu/AVQNHE4Rhhbjpbph717leglgylwRXxFx9SuUP/D?=
- =?us-ascii?Q?QEkhJKJ1NrfNf+NkO2hBqGUJ62rqv8Nnpli6eMGbvtfNdLKYfxKy9jCCdThW?=
- =?us-ascii?Q?sVXVP8KT1Zh6o1w=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(19092799006)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?H2QUkrzeGlH2+4bedx6mvktd2GRY9XceSNpQAD9hLmmMycfq8pOkXaG855Ck?=
- =?us-ascii?Q?IP3acfAbH0gNrs0f1t9POdwkJRzWXi0T2+pUzv19phEYC46g1munU/nshPVf?=
- =?us-ascii?Q?bpTBk0mj9fStEaeRnatGJFdvGgS0zACidu2d64sEQDy5ThyiWE3n/mX25Pws?=
- =?us-ascii?Q?yTTX/5TwLUwfaJnGV9tbXsEjrwJ5RM0gW51wS1hE9nhDL2lmJr68pHvDhi7z?=
- =?us-ascii?Q?qY48usm7edSUIJjWLL4SvrFp712gHYA3yYfbaiCgcyq5JFv4BeCqGX5bQ1up?=
- =?us-ascii?Q?Zl9Wv7mKBpm3B9K9oluTyRI8Ve8kMcWO6OQtwRnxLAmAIfNdt+kazeqnDkCC?=
- =?us-ascii?Q?Va9K0WKl3whlqqEsaN4nNzoMQW1Ydi1FkL1TI2mqiAGBAJDazExyKcM9PwQC?=
- =?us-ascii?Q?9ejEs505RtkxPOG5aVPiCpw67JzUPB074fScTLsCxZpYAOjyH1tDcoVEH9pj?=
- =?us-ascii?Q?2WDezrrhStyljlRRrFmziWLPmuW09dqvjqCYZPG0+tgnmZf3kUi7K0gYyXt8?=
- =?us-ascii?Q?bSitpRU9HSmCJ+KTukn35h5Gp+jZ74WsyLB3lYzc8cs0oj10IErgCVhgaJhY?=
- =?us-ascii?Q?PNBZvB3ug6gb3aHkBjeBLhIJBt3PlX+eLhSCubAlcuJkp2tcjErZPEzDQLhv?=
- =?us-ascii?Q?j4DqbVif6p1dsUCwUgfbBM2IXHTgPJQaf2RB8dkF5BkyW+qMUZV0MKcTXC17?=
- =?us-ascii?Q?x9s4oKUgHKgsd1Y/mGphX/iOem6dj1I8NeTGKsgXYFe0isssDIkA9IO8GEXQ?=
- =?us-ascii?Q?Jfuyg+cgDGRZIYR+YcrkOR7pPSLCxwXwp+FH/DRNHQopm/d7E0qmD5ciP3hf?=
- =?us-ascii?Q?Yp47AL65dY9TBV4WgwlG1d6xhUym3ng+qksHtpfuUhGZXrWiCl/BVOHXvBkx?=
- =?us-ascii?Q?W02VTUR1eJ2uwKNy2OrEHskjZUQRfmhzPJik4mrylFNp2hd8/MLfb6mlFgXJ?=
- =?us-ascii?Q?UpXCY8VrLJvJslgi/ZDavJgJIUNx3OBu4+lBoZ/dtA8Kwfp9nE5LF4RAebIl?=
- =?us-ascii?Q?qMY4EZRicq3Z8Vbd7bfrN5puJklS6k5uPzJ+Ro2wQN+IMDrsBxvO985o6lR0?=
- =?us-ascii?Q?X7zqqpAqDOd3klH4Y090/RsInMiiarT4G6FjCyyrb3MnGiBS5wHgarlXDSPH?=
- =?us-ascii?Q?Hg8RNxc6lJAkLfjh4zGH37UXHmQvdPsGzV+4U4VCyhHtaXui/8pqqB7M0gR6?=
- =?us-ascii?Q?p/J5hQrJllmPRbXse9V5afCXcLzPYEngQmccfRN9lZp5620TjRJv0RMTOvm+?=
- =?us-ascii?Q?hb0VPh2c9KGcAkE3RwUKNkjJ3e/4Puj2lcP2yVeAc70z7WWd+cz1F+bbzL/z?=
- =?us-ascii?Q?VSOfBNkKC7g8CnRdYRr4HiO4Z1eNZqVc8HsG+4l3uJ/u6VC3DhFtG9K5rHxo?=
- =?us-ascii?Q?iXAPT83QYpK92237Vs8zl6Q7GNc1puj87oo3E1pFQ+OcO3WSi0yeJCW7a9B1?=
- =?us-ascii?Q?sL/1YLdTHHu3piaUhttevKIRBilMn4GEar7251i+skyMElUZBFt1A8J2HjaI?=
- =?us-ascii?Q?KlNSwmf6opfn+xeM//tNRf+0FUUo3wbdrzNN1sToe1WUpuHRSNqkdxSE8Q8W?=
- =?us-ascii?Q?xM5N1o5loKk7j4y9aAc=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=LW@KARO-electronics.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karo-electronics.de;
+ s=kas202503070814; t=1751425175;
+ bh=p0S96Zj3NoQHtRiEJ5X+YvH5nBqHZ3HpCZ1pJnCQR/E=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=PTcLORexnoDbvA5mQS4BMOLh1x4o3GulbG2U+nt0i3NAKCfFAeQ+Gvq3rnPkStqvj
+ clF9IEwO8AB+BU2ymPfKnN95VPnX2FZfiWJKHatPIN0HJfBda2TVke4NZvDNYw20hM
+ LbVEdcRMZqAf9iy96GiSzmIwS8GJYfWJZBGjjD52F+sB4aHUi9WEIYhQHJjwaBqEFZ
+ 73VjjbpElwEr8406WtUrG4XfLGZgQoloTgPc30IdHEjt4B6C32Ep2RR4YsrbOCJzex
+ qOE6khkAcYqpzWTpUwN5uL2up4DuEs+cCYW21zXunQSn/mmiul2YMSYhd5rGHBnmEa
+ fy9C1VX1V5bRA==
+Received: from karo-electronics.de (unknown [89.1.81.74])
+ by dd54918.kasserver.com (Postfix) with ESMTPSA id 6D8F87721A54;
+ Wed,  2 Jul 2025 04:59:35 +0200 (CEST)
+Date: Wed, 2 Jul 2025 04:59:34 +0200
+From: Lothar =?UTF-8?B?V2HDn21hbm4=?= <LW@KARO-electronics.de>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, u-boot@lists.denx.de, Dmitrii Merkurev
+ <dimorinny@google.com>
+Subject: Re: [PATCH RFT v6 1/3] fastboot: blk: introduce fastboot block
+ flashing support
+Message-ID: <20250702045934.15bc47ab@karo-electronics.de>
+In-Reply-To: <20250630-topic-fastboot-blk-v6-1-7cdfd3a24786@linaro.org>
+References: <20250630-topic-fastboot-blk-v6-0-7cdfd3a24786@linaro.org>
+ <20250630-topic-fastboot-blk-v6-1-7cdfd3a24786@linaro.org>
+Organization: Ka-Ro electronics GmbH
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f9b0ef3-ff18-4c18-ee8a-08ddb90791ee
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jul 2025 01:27:12.0376 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: PmsSsNC5wLikjFezYCMCJfg9AV10jYQNMEUkXAPGHi/NleybhnHYJuy6lC0q7pThNo5Rf6N5pBbAPxzDwYP61A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7688
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Bar: /
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,18 +71,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH] cmd/Kconfig: Tighten dependencies on CMD_BLOB
->=20
-> In order for this command to build we need to compile
-> drivers/crypto/fsl/fsl_blob.c and this in turn includes
-> drivers/crypto/fsl/jr.h which references "ccsr_sec_t" which is only a
-> defined type for SYS_FSL_SEC_COMPAT >=3D 4. Express that requirement
-> in Kconfig as well.
->=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Stefano Babic <sbabic@nabladev.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Hi,
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+On Mon, 30 Jun 2025 17:19:57 +0200 Neil Armstrong wrote:
+> From: Dmitrii Merkurev <dimorinny@google.com>
+>=20
+> Introduce fastboot block flashing functions and helpers
+> to be shared with the MMC implementation.
+>=20
+> The write logic comes from the mmc implementation, while
+> the partition lookup is much simpler and could be extended.
+>=20
+> For the erase logic, allmost no block drivers exposes the
+> erase operation, except mmc & virtio, so in order to allow
+> erasiong any partition a soft-erase logic has been added
+> to write zero-ed buffers in a loop.
+>=20
+> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  drivers/fastboot/fb_block.c | 323 ++++++++++++++++++++++++++++++++++++++=
+++++++
+>  include/fb_block.h          | 105 ++++++++++++++
+>  2 files changed, 428 insertions(+)
+>=20
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..b725397c91af2717812e69e2b=
+624076eb30f781d
+> --- /dev/null
+> +++ b/drivers/fastboot/fb_block.c
+> @@ -0,0 +1,323 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2024 The Android Open Source Project
+> + */
+> +
+> +#include <blk.h>
+> +#include <div64.h>
+> +#include <fastboot-internal.h>
+> +#include <fastboot.h>
+> +#include <fb_block.h>
+> +#include <image-sparse.h>
+> +#include <part.h>
+> +#include <malloc.h>
+>
+The alphabet seems to be a difficult concept for programmers to
+grasp... ;-)
+
+> +/**
+> + * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
+> + *
+> + * in the ERASE case we can have much larger buffer size since
+> + * we're not transferring an actual buffer
+> + */
+> +#define FASTBOOT_MAX_BLOCKS_ERASE 1048576
+> +/**
+> + * FASTBOOT_MAX_BLOCKS_SOFT_ERASE - maximum blocks to software erase at =
+once
+> + */
+> +#define FASTBOOT_MAX_BLOCKS_SOFT_ERASE 4096
+> +/**
+> + * FASTBOOT_MAX_BLOCKS_WRITE - maximum blocks to write per dwrite call
+> + */
+> +#define FASTBOOT_MAX_BLOCKS_WRITE 65536
+> +
+Why invent an arbitrary number here, when there is already
+CONFIG_FASTBOOT_BUF_SIZE which could be used for this purpose?
+
+> +struct fb_block_sparse {
+> +	struct blk_desc	*dev_desc;
+> +};
+> +
+> +/* Write 0s instead of using erase operation, inefficient but functional=
+ */
+> +static lbaint_t fb_block_soft_erase(struct blk_desc *block_dev, lbaint_t=
+ blk,
+> +				    lbaint_t cur_blkcnt, lbaint_t erase_buf_blks,
+> +				    void *erase_buffer)
+> +{
+> +	lbaint_t blks_written =3D 0;
+> +	int j;
+>
+lbaint_t to match the type of cur_blkcnt and prevent integer overflow
+on 32bit systems!
+
+> +
+> +	memset(erase_buffer, 0, erase_buf_blks * block_dev->blksz);
+> +
+> +	for (j =3D 0; j < cur_blkcnt; j +=3D erase_buf_blks) {
+> +		lbaint_t remain =3D min_t(lbaint_t, cur_blkcnt - j,
+> +				erase_buf_blks);
+> +
+No need for min_t() here (see above).
+
+> +		blks_written +=3D blk_dwrite(block_dev, blk + j,
+> +				remain, erase_buffer);
+> +		printf(".");
+> +	}
+> +
+> +	return blks_written;
+> +}
+> +
+> +static lbaint_t fb_block_write(struct blk_desc *block_dev, lbaint_t star=
+t,
+> +			       lbaint_t blkcnt, const void *buffer)
+> +{
+> +	lbaint_t blk =3D start;
+> +	lbaint_t blks_written =3D 0;
+> +	lbaint_t cur_blkcnt =3D 0;
+>
+useless initialization of cur_blkcnt; definition could be moved inside
+the for loop.
+> +	lbaint_t blks =3D 0;
+> +	void *erase_buf =3D NULL;
+> +	int erase_buf_blks =3D 0;
+> +	int step =3D buffer ? FASTBOOT_MAX_BLOCKS_WRITE : FASTBOOT_MAX_BLOCKS_E=
+RASE;
+> +	int i;
+>
+lbaint_t for 'step' an 'i' to match the type of blkcnt!
+
+> +
+> +	for (i =3D 0; i < blkcnt; i +=3D step) {
+> +		cur_blkcnt =3D min((int)blkcnt - i, step);
+>
+No type cast needed.
+
+
+Lothar Wa=C3=9Fmann
