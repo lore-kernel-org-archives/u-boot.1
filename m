@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5771DC7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 10:09:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05C6C83013
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 10:10:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3A5682103;
-	Wed,  2 Jul 2025 12:09:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5362382103;
+	Wed,  2 Jul 2025 12:10:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MdNPbeZL";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MZB+4/GF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D521282CFA; Wed,  2 Jul 2025 12:09:25 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id AB0F182CFA; Wed,  2 Jul 2025 12:10:53 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85E8580E9A
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:09:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A1A580E9A
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:10:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 90B05A535E9;
- Wed,  2 Jul 2025 10:09:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A5DAC4CEED;
- Wed,  2 Jul 2025 10:09:21 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D54B24613E;
+ Wed,  2 Jul 2025 10:10:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4680DC4CEED;
+ Wed,  2 Jul 2025 10:10:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751450962;
- bh=88RT9pZ1lopQzwgKUUbkRHe2qKGadBOrMj+oKV/Qn6s=;
+ s=k20201202; t=1751451049;
+ bh=HV4pjlvD8+eGFIzWBRppSx9YRNgC0vsSUfJ8brmZIeI=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=MdNPbeZLMq3XPP57dZmh3tss19sFhLZN5M6meDQ0V/5BKuQHaSgdKt1LpCIoY2HD5
- 3zGwZ2nonX9BqNtW1p+B+4NgdACrYwfIOz+u7rWET0fv26aftTL7oAGeCKwj1E3zAj
- Sqw8aNkyuN9sOCTOlUO2HI4IfKKsCUzZr5wugoEMyAKCh+8+gB9wMr46h4J5bz6Qnz
- OaMqQHYmk0JNIkiMZBJe5Gr5ZnoTf9vXGIlqZMUbQ6w17iTndG25nGK2Eq+ZluYZUI
- mhXM73Efxj72NfMpB67ckCg1AJFHeMnykFsmIenedbGNtu0DANReaui2YG5c6O5JWg
- 7734lTN5vKi5A==
+ b=MZB+4/GFmBg9x9kgxD18DC1LX30M2icsPfcD+cL0pse0UTSxwrxbC6MC13KLJVlok
+ eFYQWBV5fGj9pCGJn+x96YDO8P+kvGHnxT5ZopJv0cL8QwPoQKB82Ks8PeJeBTpQh2
+ ATkN5qTPx4nWDHUmRrV/rUwTjiBq9bOlGsq72v5ANl0DkEgFjAvbk9sEQ5medHXW+Z
+ eiCayxLBQG5bjvHI/7P590/iVGDyBvO/2Z3jRzIssnL7opVuMadsaGsHYX3PaoIPUD
+ 4PPDAT83+raHoJ2f9AtMXKREjIZBSl9GRSbavJM0KWX35HwiEiNN2CkIKhAtRYbb4a
+ DAqA7Zl0xSr+A==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-In-Reply-To: <20250618-maintainers-dfu-spl-v1-1-03f4bc745e36@kernel.org>
-References: <20250618-maintainers-dfu-spl-v1-1-03f4bc745e36@kernel.org>
-Subject: Re: [PATCH] MAINTAINERS: Add common/spl/spl_dfu to DFU entry
-Message-Id: <175145095945.54603.12460432413109856107.b4-ty@kernel.org>
-Date: Wed, 02 Jul 2025 12:09:19 +0200
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250625-abootimg_fix-v4-0-df7af00e87b0@linaro.org>
+References: <20250625-abootimg_fix-v4-0-df7af00e87b0@linaro.org>
+Subject: Re: [PATCH v4 0/2] Prevent use of unitialised variable vhdr
+Message-Id: <175145104713.55152.14849151834430606841.b4-ty@kernel.org>
+Date: Wed, 02 Jul 2025 12:10:47 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -72,18 +71,18 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Wed, 18 Jun 2025 15:43:44 +0200, Mattijs Korpershoek wrote:
-> This was not listed as part of the DFU entry.
-> 
-> Add it to make sure that the DFU maintainers get CC'ed on
-> patches for spl_dfu.
+On Thu, 26 Jun 2025 17:38:53 +0100, Andrew Goodbody wrote:
+> Ensure that vhdr is initialised so that its value is never
+> accessed when not initialised.
 > 
 > 
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
 
-[1/1] MAINTAINERS: Add common/spl/spl_dfu to DFU entry
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a6732920821a23e00cc3291d8069061bd7d00e67
+[1/2] cmd: abootimg: Prevent use of unintialised variable
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4b9717c6868f2f98b02fbe87a885cfa48a5b9946
+[2/2] boot: android: Prevent use of unintialised variable
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4b489f517366595cd3f003d4175e721bd927a18b
 
 --
 Mattijs
