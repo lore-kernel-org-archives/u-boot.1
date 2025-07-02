@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B22EC7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC07C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:07:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 567A583091;
-	Wed,  2 Jul 2025 03:05:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B5D382E9A;
+	Wed,  2 Jul 2025 03:05:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g+DeQEi4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UjcXLcLi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52E8182F03; Wed,  2 Jul 2025 03:05:40 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 7CCA183095; Wed,  2 Jul 2025 03:05:41 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D316E83086
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:05:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ADF082E9A
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:05:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-40b32b6af9eso2904872b6e.1
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:05:37 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4079f80ff0fso4241022b6e.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:05:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418336; x=1752023136; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ib/e9gzvsPtm/GTgPyTNF+iLDxQL3Nx9E+ZPoU0W2+4=;
- b=g+DeQEi453pRM51i8Sn443a8SA+Wy0sy4g1PX5KW2DS8A2ZlhMpj16ZUUhVOZHJE2F
- 5xQBZujloozBtoBn+UHu5+EsFKTaz6MNKRtZ6ud9E0v1eTjeR0TZ8oM2MtcY8OUWJR/l
- Y27FSuCaHQ2zSU2FiDyNRZdtO+2wNQu5GzV3U=
+ d=konsulko.com; s=google; t=1751418338; x=1752023138; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UTeZuqwmrEzU6qKjaBiAB9jALSwsPIWuJRlbxet3XoI=;
+ b=UjcXLcLiMheJYBdNZOUfgBUuQgd+mbPNPXG4anaQ+WR32haUjFu8zUs4w3on+l+Pa8
+ VLGbn0edUqb8bWIkz/RcqCq9iAmwk+cBtQ2TnSwxwbbPGbMqYaSYI5s9JHzi59MSTWx+
+ jw2W617CAY4uyXWmOGzvnrFCw3PFCrQsQsFZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418336; x=1752023136;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ib/e9gzvsPtm/GTgPyTNF+iLDxQL3Nx9E+ZPoU0W2+4=;
- b=H9ozWjyQgVSzziTX1gG5zOEjkQFaBjpGIWtJ98FnXc8ZHVldU6rL2A9eWLXQFQCdL6
- SiYOqxIHe32FqfNmE77OQ+0ud/9pQgTVqZCdzIfDLlN+KFRRxHHst4b5O0AwBfhq43WR
- 4HigZ34Uy0S9UzRFF6BnoP3b2sZ91BkcLXlIvfAtjdP0aVfEV2XoeKipbQEApW6jo5Hg
- /hR69glGLEN9eMLGqsH4JJSD/HuVLVpeWX/nC8lKwLzyGsmdScit5+/TY3BXe9uJcPYA
- xfswM5OULvBQUmWT3FEJqBKvfDFV30mH8zC1W+1lEKosoek+FBrG7cNL/JfDD52rzpdm
- PFWQ==
-X-Gm-Message-State: AOJu0YwN0CEK8cBkNYK3KpwLdF1GKnuSXJWxehIAp+S7AcsDQhGtMAuw
- mNhMX2mUcSXkBFxwnD/Rc+lbC1LspvJFgpuyqrH4Cx4tz95jMnEQjfx6gQc6tTewsgvh7NPwARb
- 7q0mn6bQ=
-X-Gm-Gg: ASbGncsjBt2LTp9b6oVMQAGd+uLI023e4QWx9iXMZvZ2RyfxXd/2V9A0lblIu/QKS7B
- ndsb+GoQfaMpvvW5cRK5CAonhulIgN3insk3JhnPr/lh9YQ/ATPNTGRK2KP9Yvaynof8xmtTdm1
- AOxkRdzBwS3atOadnFPFYx1K89Uji1zPWNNY9J2Dalqo53XXAQvUDDmB2yFKJmRMAOX4FXeODCb
- foX6rYMqdsKK7e8oK/9Xy8bPzjkLp8f3PXzklR96rQHE9F8D702jYkntDoGQSEsGnxNAhYIiUm3
- u+7m68q8ncwkKSSpzL15SbrVOtMFGvkfBC4cmSgTAbaOE8aM0LHBtc99K73UfSekk776TvBC6KC
- 4tNMUx7O2dYc52VxcaDbcs5oFAEqYX+DlvQ==
-X-Google-Smtp-Source: AGHT+IHk+B6HUhntQwqMdwx5sEyP3EdOu16CVpVetWWZwyuvqPh0OGZ9V3u6rUNO+1OpK2MQF+yJNA==
-X-Received: by 2002:a05:6808:2202:b0:406:67b7:8b62 with SMTP id
- 5614622812f47-40b89116b2bmr583602b6e.38.1751418336542; 
- Tue, 01 Jul 2025 18:05:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751418338; x=1752023138;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UTeZuqwmrEzU6qKjaBiAB9jALSwsPIWuJRlbxet3XoI=;
+ b=sGdH+TWy6NKbJ9lpYicmarFeGXUI5n/YH4n6WSC6Z6ao52Lj0k7rUmra1CzpJQcOsR
+ /7pbZuVSEC+iLxTtKc1iIE3v5PANp5L9Sgjsq/eyxDnFd8shNdiT8LCBHLbgox8VpbbF
+ 7JbMqpKI+jzoPGMm4NZF6KEVkPs04hbfxK3+W21EtOfl1x+GhdlaQ9W5XMq0nqaA4BSg
+ StmNcIJ1aBWgba9+pvWpzZ/Wm9F5cvyKngSbIvHBxCjsgQy3rMGnphDxDtZeURq3wrO6
+ BNoOrsJjmOV5iCaCy2oyHQYBLUy9PQ+bN6bRGS7q9c9g1JFGsJUPwPrc1s89hv2HrLYe
+ W/rw==
+X-Gm-Message-State: AOJu0Yx+adkoaZ9QqmWhpg8HAJIpxbUY5qgLg++MgJVmYapp/oL8opmU
+ TJ0vdmbddUUSZKz/DqvGdITieYUZklBh7H85nR0kP7yKddUsHjdUOsNszGCTzkbQjRXEspOSDHk
+ F2awCRX8=
+X-Gm-Gg: ASbGncs4TuvE1kFTxl0COob+4l8o/cOYm/3rpx20p5nZOHt/U1psdXKI1H5TxFsFnou
+ K4WZ8KsRj9pnZmHoZNUzwezITPCNjLc2+1AwnF9puAmcGVatgYxoznb05x928ixF8ztUFgf1iws
+ qc9/nkfaOeiYa2JjAqhU9SUaqvmi0ocVwb9F0PJRkyZRdjdUXWcAL2dYjhy1CLCByMqLxcL1A0/
+ XMqU3v0XqJ/DZeTq9Rhg53XGo5JlW8y42IFGpsKeiMVxvS4y+ehmr5f02/ZF/hzcFIzJ+FiROTM
+ 6YQSnBgH8wuG4vlaOeWXb/ehOMCh1VvCHUBoqeU4FwRvLmmlGRh271obls7AXNypA1b+iSV728l
+ UoE0qB4fNWuGPSnG8Z2TA9rM=
+X-Google-Smtp-Source: AGHT+IGA+6AGJIbV1YGiqD54KK1vTYI09sn+tJa6cXWrpVRpiyRMghnI8eWU4dCpPUctCSs7kda5uw==
+X-Received: by 2002:a05:6808:4f1f:b0:406:69b5:36da with SMTP id
+ 5614622812f47-40b8aabd9f3mr525837b6e.16.1751418337838; 
+ Tue, 01 Jul 2025 18:05:37 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b324054a2sm2377372b6e.31.2025.07.01.18.05.35
- for <u-boot@lists.denx.de>
+ 5614622812f47-40b324054a2sm2377372b6e.31.2025.07.01.18.05.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:05:36 -0700 (PDT)
+ Tue, 01 Jul 2025 18:05:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 1/3] clk: Add missing <dm/device.h> to include/clk.h
-Date: Tue,  1 Jul 2025 19:05:33 -0600
-Message-ID: <20250702010535.19250-1-trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>,
+	Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH 2/3] clk: clk-cdce9xx.c: Change from u32 to ulong for addresses
+Date: Tue,  1 Jul 2025 19:05:34 -0600
+Message-ID: <20250702010535.19250-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250702010535.19250-1-trini@konsulko.com>
+References: <20250702010535.19250-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,26 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this header we make direct references to some dm/device.h functions
-while not including the header directly. Add the missing include.
+For 32/64bit correctness, we need to use ulong and not u32 for casting
+for addresses.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- include/clk.h | 1 +
- 1 file changed, 1 insertion(+)
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>
+---
+ drivers/clk/clk-cdce9xx.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/clk.h b/include/clk.h
-index f94135ff778a..90b42a618675 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -9,6 +9,7 @@
- #define _CLK_H_
+diff --git a/drivers/clk/clk-cdce9xx.c b/drivers/clk/clk-cdce9xx.c
+index e5f74e714d54..afb997c06be5 100644
+--- a/drivers/clk/clk-cdce9xx.c
++++ b/drivers/clk/clk-cdce9xx.c
+@@ -103,7 +103,7 @@ static int cdce9xx_clk_probe(struct udevice *dev)
+ 	u32 val;
+ 	struct clk clk;
  
- #include <dm/ofnode.h>
-+#include <dm/device.h>
- #include <linux/err.h>
- #include <linux/errno.h>
- #include <linux/types.h>
+-	val = (u32)dev_read_addr_ptr(dev);
++	val = (ulong)dev_read_addr_ptr(dev);
+ 
+ 	ret = i2c_get_chip(dev->parent, val, 1, &data->i2c);
+ 	if (ret) {
+@@ -226,10 +226,10 @@ static ulong cdce9xx_clk_set_rate(struct clk *clk, ulong rate)
+ }
+ 
+ static const struct udevice_id cdce9xx_clk_of_match[] = {
+-	{ .compatible = "ti,cdce913", .data = (u32)&cdce913_chip_info },
+-	{ .compatible = "ti,cdce925", .data = (u32)&cdce925_chip_info },
+-	{ .compatible = "ti,cdce937", .data = (u32)&cdce937_chip_info },
+-	{ .compatible = "ti,cdce949", .data = (u32)&cdce949_chip_info },
++	{ .compatible = "ti,cdce913", .data = (ulong)&cdce913_chip_info },
++	{ .compatible = "ti,cdce925", .data = (ulong)&cdce925_chip_info },
++	{ .compatible = "ti,cdce937", .data = (ulong)&cdce937_chip_info },
++	{ .compatible = "ti,cdce949", .data = (ulong)&cdce949_chip_info },
+ 	{ /* sentinel */ },
+ };
+ 
 -- 
 2.43.0
 
