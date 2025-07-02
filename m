@@ -4,123 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C07EC83038
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 18:02:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B4E1C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 18:56:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB2A982EB8;
-	Wed,  2 Jul 2025 20:02:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 93AAC82103;
+	Wed,  2 Jul 2025 20:56:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WE50P+4e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PZNAiwF1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 464B882103; Wed,  2 Jul 2025 20:02:06 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0184E82A76; Wed,  2 Jul 2025 20:56:35 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE2DD82F4E
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 20:02:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id B90F881FEE
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 20:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5629ZhC2026748
- for <u-boot@lists.denx.de>; Wed, 2 Jul 2025 18:02:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=/hr3wvPP2e3
- U8VkY4xqvcDvbwCh9ZrYAO+2J0sEu6e8=; b=WE50P+4e+uh9Ftu3B71WjcQ9gVC
- UQPwonjTVGyvq9v+DVd2tPBuyppkSGsqfvmRrzTBzANgPEcG76a3uUQuI0q76I84
- kHvyRrYItBuqT1FQXi0sTiBIA2YEAeMyAZivBCctio0jG6VJU/xsPXPmUzLm7VYu
- XJYMZfphXd3E6BMFt/VRa8yXR5Rt5h7asaU5KeHLZjX8PdoRwzleEXgLL7JYiWP/
- Ue4/TO5+y6siy1IF8754zqXIJBKy6QTxzlzD8e1/A/9hiBt2w80Rf/TEWfr/8AS0
- 8L+vlmDONTsyiNhRfpEf4Ya1AV47of73441CPLcEvwjECQqB/t67TXy7hzQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47j8025cnf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 18:02:02 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-236725af87fso90573985ad.3
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 11:02:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7d442192c67so63340985a.3
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 11:56:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1751482591; x=1752087391; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fX57ZbdDjENsAnXRTS2mlyq9Hib3Iaa3sX/7lXYsNF0=;
+ b=PZNAiwF1uphCI4fDSjvC7I8qph9D+ebx8yXlZ4/WxYvFlrm8+HXKJ7glZMDDgGEYob
+ mZYNLnaaNd6dEzRsI6ayydiRhhuWL2+C8qrkLYPiKy9rv5tW5dlHwOItOqLPXZSW19mU
+ nJQQj3kbOcnpDaR4TOIcbYNYuZsGBijWFRciX1hYb/FCAXrppLes1IsSKDFQDbLVz5O7
+ 2tZE9VcWM8LCQMFPjMxkLetOHgtBosxq8WdLn9azvvfagRCR98pGz0crBvbY20ZUZxbi
+ z8GNwm+fY0Z4tMYxbcl+RWQg+lWoIPhbNLGlfrjb2H1+MX7vKSvBA/20Qg3DRvFsLCt1
+ nEhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751479321; x=1752084121;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/hr3wvPP2e3U8VkY4xqvcDvbwCh9ZrYAO+2J0sEu6e8=;
- b=mr1bKLcZp8ymxjzLGphk5pIwZWTP8gsJEYvSfBQ4MqVZmNOIX7G5E05HwapCvSMWQF
- x9pCFd01NYPQVUACtueDhUbbtJIlCgO2nslSdyv/rRj6cLOHwDUIa2WL29lsC+clYZUh
- 50U4Z5ngpTkBsQp8flhtPn4eewUp/g6bwTnrzeWSZ/Zc+UzG1UQwW5lIDI7gXTrL2uZk
- KsRrQTX2xTLJtqosaaz7ZvqNbEJ7oqI5f/UeI0t58tyMtaB7sVISsDihbOi43wgtj0+j
- UN3McFhyNBqZ3veheJUt8zwKxO7NLrTTUZa+po9v3nKaTCckRsKygBk3mub/Ut1/S/EP
- 11pw==
+ d=1e100.net; s=20230601; t=1751482591; x=1752087391;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fX57ZbdDjENsAnXRTS2mlyq9Hib3Iaa3sX/7lXYsNF0=;
+ b=nS4KG26s3JMwS3WodA7qGN2KoROxFxKRPhDxa86p/JbaRao41UWOjaXpNWq8xp+z9/
+ AjVzKIqccZ9OIPyvo0wIypnmVHADyEpWJHNndG7rWFmpzY1IY9vZii6r5Wx0BvJ8rIk5
+ X1qwQZZ444ocEB9tcxQol4t2hoicHRfjTxyRwWJIuiiRFLYmjQwflsOaneSrxSlkf+bv
+ KfpAh4s14dC1IdAUFrpjH2e/atusArtzaUSZbCl5JmWB2Bf5KMQPEIbP14YbFFz6bFkE
+ jwO03uEcGXNewTFn3o/s8PIdlAvpQ77U2HDrlca4VJa7AUcCwg0xOOB5Lm6XG5VqJgHd
+ TIeQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtkH2WcREVnDIsctH4mTetSnjptvS8vjEp0w2Iv0EftJa9H5iE0DWPTng8bS3xf4/0dlodefA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOvcaAfiv1h+U7QJlSPjqfP8oW6xuQD3e6NKYgzyzcc0NCpaqw
- zweqbRrWve7639lWPmJnTH/lqEOj1js9NVGDVMG/6qKfpwQDMKyHp4CV112bh08W/vLjxu6ScfO
- pJ3SRYc3gyIvsoKjAe65MWqskl0lJiRUTMcEqi8cH7oUXbAkULWyEAcmX
-X-Gm-Gg: ASbGnctC1xmVd3EthkKb7i+JyNYsXO2SwZvQJOltt3zlZ9IiFrnU4bGnfqvHla04JOD
- BWYabK232qGo0LdqweVoPk53mSPCL6jAA9SE+J6Qv45hPgZT28ERztsAi/Jz75pKGaI92pPTZlR
- xA90jPqNdi1WMAZAmpcCO0see3T6K7hMbE5L/6Bn3bpoyIkI8Q3SWIVGZ62Qnfjbx3qh4A+wsZS
- nI6FrxgoSGatTz48IKK2i+s4s+wEUbjOTrzwd5f8V37TC5OfbsWeIrVHhXxX/6iAcJEy5xrqGLo
- fltkQXPIHqfXvd/ezYatJQMo1UKW6Ugbd6c6/FJlaCCUGPgV/5fMGUW5mpW4m8Vz+3nPM8ucJRv
- SZYQZICPZf+Xb9dPGqkxarkyTaBnDLq5WS7cIKGdLiA==
-X-Received: by 2002:a17:902:c943:b0:224:24d3:6103 with SMTP id
- d9443c01a7336-23c6e5b72e9mr58271325ad.35.1751479321262; 
- Wed, 02 Jul 2025 11:02:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFfqlz9HA4cflM/TODx1dLEqxbKYJotIMe9VrOtc32ebWBpBluH9sC19OEZA+qoCx03l7nQ+Q==
-X-Received: by 2002:a17:902:c943:b0:224:24d3:6103 with SMTP id
- d9443c01a7336-23c6e5b72e9mr58270905ad.35.1751479320828; 
- Wed, 02 Jul 2025 11:02:00 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23acb2e39besm143315345ad.13.2025.07.02.11.01.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 11:02:00 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, jh80.chung@samsung.com,
- ilias.apalodimas@linaro.org, aswin.murugan@oss.qualcomm.com,
- rui.silva@linaro.org, me@samcday.com, christopher.obbard@linaro.org,
- quic_varada@quicinc.com, sughosh.ganu@linaro.org,
- balaji.selvanathan@oss.qualcomm.com, miquel.raynal@bootlin.com,
- sjg@chromium.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v3 4/4] configs: qcom: Add OF_LIVE_SA8775P & QCOM_POWER_DOMAIN
- config
-Date: Wed,  2 Jul 2025 23:31:33 +0530
-Message-Id: <20250702180133.1889709-5-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com>
-References: <20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com>
+ AJvYcCVsUeJ5tC4sRExlWEcY5WHqtiWaQDma8F5cX94S0SCVDdmNdxilH9/+EONTiYrBWOIhHR0M/jM=@lists.denx.de
+X-Gm-Message-State: AOJu0YylfaQPpSsrfCxAx+7lwCiZk3ulPIdb6hXgZFvz4ddeXSo50Pxp
+ NybmYENnzfvBxATsYjl+oWrgmzIwjnHQzBMlax114TaNrHc/lIcKxnqJ
+X-Gm-Gg: ASbGncsDD0oihc6y0IalAdG9CpTfXtIf0Yb/nlRMgdQiv697xa4U1wuqUGeb2rzPfE7
+ C8PjEyL+JkRByC5xRumYdZJSnCimYfA3mRqOObCoE06upC6HTnf6hyV5Lcv65+wpt6bcXQ30lFS
+ pJTA6U1/0SVSj/ePCSYKSZivOn7QDgS5sXnfPAOP9I9uBDt3X7T17pRvFbdefBz33PwVua2drqN
+ ltMA5SiEjmP/iiPKlCZ3t7zFgTBk7aBGqQlPqaKqyJi+IwDb+lSKkmdiAN8SL71ozy7XLwj92td
+ dgPlQNGKBIGIFMlivFQ4KazXkjmEJqhEl/bf7jkC1qa0WUtiWmDKGI1C5ZpSOIpDcUOP5jpXiFD
+ wQor5HKLakez7oaFOms67GnowRyGKZfikvR5aLg==
+X-Google-Smtp-Source: AGHT+IH+QIoKqgi3rPQT2/swXz+GiwRPNDVwyF9+/V8IXj2QQ3LZrkLDso7OtB+cb6Li95MyT9RJbQ==
+X-Received: by 2002:a05:620a:404c:b0:7c0:be0e:cb09 with SMTP id
+ af79cd13be357-7d5c469ea56mr189480185a.7.1751482591255; 
+ Wed, 02 Jul 2025 11:56:31 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-176-137.washdc.fios.verizon.net.
+ [108.48.176.137]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7d443204d45sm987211385a.60.2025.07.02.11.56.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Jul 2025 11:56:30 -0700 (PDT)
+Message-ID: <03c84e50-1383-f71c-7163-794ff15f1e8a@gmail.com>
+Date: Wed, 2 Jul 2025 14:56:29 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: RmNgjHbQoncmsp8rfgM0RCucGTy36Cy1
-X-Authority-Analysis: v=2.4 cv=YPWfyQGx c=1 sm=1 tr=0 ts=6865741a cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=FewLElwZLWEMPa2W824A:9
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: RmNgjHbQoncmsp8rfgM0RCucGTy36Cy1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAyMDE0OSBTYWx0ZWRfX/xW6HvbnSm4m
- j9340+ACVw2PoYcwu96xiYbfEe0QIXfchRREkeWHigvWhGxS4qWNTah2PJhHW4NPnwNaoqrIGri
- teEsjVW2mFpVHlbrOOYrVAByt8O0UIscv985klUoshoYnitsTw2PxbQRZXEnQ0ylnpjgF75suMT
- 2jhQN8rRt4y6R5Xg3r9UtQujZQfeX9g6QozESoFSTrlJhYzil0zmLAS5fP20ZcLmSNq6nm0l2z2
- tlogOVu3TRn3A3AA8Nh2Bb5rRkNHtVfgnenxDeLEIt+ziZhIA4eCryJuKlVszpkJWHNFJEV67z5
- 9m67+gLPCUeoC7OgGMJfsnFTOIz1xukEnn1BbuBM8OQPERqUI99Az6JUPO1rEAkkL9uIG95flf8
- PJtmqHJc4BeB7z4DHf/8klMsV8w0vitH/WBlYG5JpOf3CP/bnPSDFhW4UykIMzzdNNPhob3M
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-02_02,2025-07-02_04,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 mlxlogscore=911 mlxscore=0 malwarescore=0 suspectscore=0
- lowpriorityscore=0 clxscore=1015 impostorscore=0 adultscore=0
- priorityscore=1501 bulkscore=0 phishscore=0 classifier=spam authscore=0
- authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505280000 definitions=main-2507020149
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH] spi: cadence_qspi: Fix odd byte write issue in STIG mode
+Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: tudor.ambarus@linaro.org, j-humphreys@ti.com, marex@denx.de,
+ michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
+ u-kumar1@ti.com, trini@konsulko.com, caleb.connolly@linaro.org,
+ sjg@chromium.org, william.zhang@broadcom.com, stefan_b@posteo.net,
+ quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com, p-mantena@ti.com,
+ git@amd.com, Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+References: <20250702045951.637071-1-venkatesh.abbarapu@amd.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20250702045951.637071-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,31 +107,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable QCOM_POWER_DOMAIN & OF_LIVE_SA8775P config for qcs9100
+On 7/2/25 00:59, Venkatesh Yadav Abbarapu wrote:
+> Starting from 'commit <8077d296adff> ("spi: cadence-quadspi: Use STIG
+> mode for all ops with small payload") the utilization of STIG mode
+> has been implemented for read and write operations involving less
+> than 8 bytes of data.
+> 
+> However, following this commit, encountering timeout issues occurs when
+> writing odd bytes of data in DDR mode, as indicated below:
+> "jedec_spi_nor flash@0: flash operation timed out
+> SF: 3 bytes @ 0x0 Written: ERROR -110"
+> 
+> To resolve this issue, the number of bytes to write has been updated
+> specifically for DDR mode.
+> 
+> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/spi/cadence_qspi_apb.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
+> index b579699d2eb..c38bb523806 100644
+> --- a/drivers/spi/cadence_qspi_apb.c
+> +++ b/drivers/spi/cadence_qspi_apb.c
+> @@ -554,6 +554,9 @@ int cadence_qspi_apb_command_write(struct cadence_spi_priv *priv,
+>   	void *reg_base = priv->regbase;
+>   	u8 opcode;
+>   
+> +	if (priv->dtr)
+> +		txlen = ((txlen % 2) != 0) ? (txlen + 1) : txlen;
+> +
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
-v3:
-- Removed OF_LIVE_SA8775P config, since there is no SA8775p specific fixups are done
+txlen += txlen & 1;
 
-v2:
-- No changes to this patch in v2
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index b8399701da0..f7780c06454 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -123,6 +123,7 @@ CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SOC_QCOM=y
- CONFIG_QCOM_COMMAND_DB=y
-+CONFIG_QCOM_POWER_DOMAIN=y
- CONFIG_QCOM_RPMH=y
- CONFIG_SPMI_MSM=y
- CONFIG_SYSINFO=y
--- 
-2.34.1
+>   	if (priv->dtr)
+>   		opcode = op->cmd.opcode >> 8;
+>   	else
 
