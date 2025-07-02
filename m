@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C9A9C7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:04:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B614BC83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AE3E82F6F;
-	Wed,  2 Jul 2025 03:04:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE22E82F6D;
+	Wed,  2 Jul 2025 03:04:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rLZHZKc2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Du6kunEm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14B0D82F6D; Wed,  2 Jul 2025 03:04:16 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 4016082F2B; Wed,  2 Jul 2025 03:04:18 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2D3381E13
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 320BF81E13
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-404e580bf09so935915b6e.1
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:13 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2ea58f008e9so3306035fac.0
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418253; x=1752023053; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hEbIhs8cZFSgjn4C3TVke1Hfkj4AZOAMpmamP2gJsEk=;
- b=rLZHZKc2Eg/wYNay12ixEGye6rWDrjdDobcdNoJ7gENESle4JaBtBXmGQ2gyb3cHiq
- Yg02MMDIZpp07CYCP3LhRuIf5T2sf0aX9xKTQ7K32llxlN3rcMaaEZ+9x+3759QRrOwi
- mLIvrqjq3+75EUZDUdzz9q3dOYadyprgmfr+Y=
+ d=konsulko.com; s=google; t=1751418255; x=1752023055; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9A+EzciHkT3gmd5U2n315HfcSe67y6Prxb03EpybICc=;
+ b=Du6kunEmtiIM3S9kyGvEgaNh5YJulb8e5p80vfIiGSIajbqTFVnc3nfbJzwKikzliZ
+ dPEPdK/VhOC4Z46WtaA6t2DU3JCPN1TWxS5mqzN5WgZT6hoscxnJunv+6b9Ui9Ju4crT
+ oahGbSXSUDngCjsRjXcZBl12bBDV+Kpg0ycus=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418253; x=1752023053;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hEbIhs8cZFSgjn4C3TVke1Hfkj4AZOAMpmamP2gJsEk=;
- b=EEDSZJVv7Mt9mfSaYrMtUMAWQxkFp8YuID4IKIsB4tPu+5vI+l5arZrxBEGpkddPbP
- RfRYvL5L/E5O2653qwinHzYdxcZlZkOSj5EH7WvkM+Fo7cZv+U0uFHgkjlrF38drct/t
- WxVSCQOO7A51TxiJdN50bC9XNkE8Xme+Y8NLy5elF3Ii8bq//kjtSPyaYJWUezHxAxxf
- ie227Y+R1TkqBFh/1yndkav67Q+qoX0QXrBM1+C8mOGJVq7bNoiqMFEQU+yOFUGCOUcR
- xA+9LoqIewq4VbfAjuQgElJWovAKSoRd4niLoxMPZ1SyHqHvgG7RgKvrzStLezNbTu4E
- x62w==
-X-Gm-Message-State: AOJu0YxbxnYMG+8GRBf9CxE/9mqBXLvGq95y3GKcZCP5oszb3nJUbmKA
- Vy8RRV/HgtFXbvdRI9vjZjTXnM8gdWU31FHC9H0F0CY0bP6QPVy4rC4pVxUfz6paq9BOMQjH+gi
- LwwGrv98=
-X-Gm-Gg: ASbGncsKRrBEpsILaACFEcsRkb2Z4YBZpzCwm8v44eRQaoF2CtLj/YlA5i8m1OjP643
- eqHkRDbar1QFHVU6WboQmpgG5b3BPt2nLkf/iTTFmPa+MPhzqCJkqxVB9QKKWpawwjGx+Zq2yyF
- zL3S1zj4RtOxuu6EQfra6hls0FO0gBlCNL0uMNspyKycZlOMOyWxMcJr0Ia60vLpbp5Asrofz8t
- Y7Es8GgVdf1Xd8q9ztiCgTXPb9OlFCOEWKbFP/IYR1TdLZFMQpwkLjR+cVhy6eiguahm/6PMPwB
- aZ448hjZo2yFNnOjLlErVpV2It6RruEsDmMzY/H/Zaxtnu+1v3/dbc7iPwEaFXCbOInDM4Eu3mI
- DUYoHBk03PdlEI2cuAL1lMVM=
-X-Google-Smtp-Source: AGHT+IFUWccuVT5Ck2ndrdaBpfUGaMvy2ERQCajDW0ae+2q18J3LFiy3JLR2e+J1y94sFds/jZjQew==
-X-Received: by 2002:a05:6808:6552:20b0:40b:9361:cd69 with SMTP id
- 5614622812f47-40b9361ce09mr269985b6e.15.1751418252628; 
- Tue, 01 Jul 2025 18:04:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751418255; x=1752023055;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9A+EzciHkT3gmd5U2n315HfcSe67y6Prxb03EpybICc=;
+ b=Z7YMWlME3E81guqDGv/oQp4AWbUa1RVQ4M5b8lALAkgKDk24dvsEiaEWkwBgCur9rk
+ K6Cvxo1v/g8VU6AszQlbpeS9prKwZ/OgjTfPKW8v4HWGnjn/mSwg7DGgXHfn9AyjEuu4
+ mK3PMdwMsqZ17dRQILqPSQb7tXB0PF12LyhhjJAVD/JARWYBGNhZy20bcEXYvap8LwcH
+ uBHjrdaXWLUMfBZrR9a0BltEixMlcUZNhTw8tQQyILa7PDiqVhLDNFM6UBUNMxSYK2vc
+ QJLpDfVIR0nM6BTxu90N1NezzhIPZNuyGwopcoWV7xa1vVV7A1HJtmy5OUaS46SP0kF3
+ pO9g==
+X-Gm-Message-State: AOJu0YwAyg7AZOLoGN9S2EHUs0Q3OFaOWeERGAQzsZ7E3cmgYFlWgi7l
+ tt8kkoqj4VEuGq26+UfT0tTL6Aoe/e2VEuvXxc0HK3eWqSgvSdhBi3778OaQi+pu6d5pz71MmWj
+ zLzLDIbY=
+X-Gm-Gg: ASbGncv1/QvoOATN1ykDCFS1l3aS7oQPyQ1VDqRf/yKkLHXW5KQ7LPOXKogitGVJ8M5
+ sej3WTxtn/fawCykPmoaNKThNGVZNGc+EAuXi3kl1qhMG2T5nT5cd81NsbyFkCFfN3vGkZQqqcC
+ f8UdWMMs9zQwW3CWLDyQw/r6OiTneBhHdfBej8EOyMpJE/oHI+6iSr99Xv5DLxoM9rpfoDSxhPN
+ OKTif2bfZGd6YiJ3FpZUyHel74cS9c8hFbhdDVDIb1MC0VJUe3y5KhNCNgdHmTOtoulEPjBHRnE
+ Eplx6rQSg+GiVF1OKRNpIC1T1WdbfOL+JITwWdGvUSEbGsve5gRE6jXHs0qcxjFq76kirctmgS0
+ sgo8TsOBGI88jXXQv2VB2OL8=
+X-Google-Smtp-Source: AGHT+IFlUjc5tVnhcp7UtIGW8xWu0IauHu3OLxaImSKLWYe2Div7AZFy8hZRYGmSZrM4I3MFWwR+eA==
+X-Received: by 2002:a05:6870:e80b:b0:2e8:f216:7b23 with SMTP id
+ 586e51a60fabf-2f5a8cef7e7mr679765fac.37.1751418254869; 
+ Tue, 01 Jul 2025 18:04:14 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b32438b5bsm2330602b6e.44.2025.07.01.18.04.11
+ 46e09a7af769-73afafee51bsm2318394a34.10.2025.07.01.18.04.14
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:04:11 -0700 (PDT)
+ Tue, 01 Jul 2025 18:04:14 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>
-Subject: [PATCH] firmware: xilinx: Tighten dependencies for ZYNQMP_FIRMWARE
-Date: Tue,  1 Jul 2025 19:04:10 -0600
-Message-ID: <20250702010410.18828-1-trini@konsulko.com>
+Subject: [PATCH] dma: ti: Tighten some dependencies for some ti platforms
+Date: Tue,  1 Jul 2025 19:04:13 -0600
+Message-ID: <20250702010413.18852-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,28 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ZYNQMP_FIRMWARE code  cannot build without platform specific headers
-being available. Express that requirement in Kconfig as well.
+The TI EDMA3 driver cannot build without platform specific headers being
+available. Express that requirement in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Michal Simek <michal.simek@amd.com>
----
- drivers/firmware/Kconfig | 1 +
+ drivers/dma/Kconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
-index 8789b1ea1415..a094e6c3afef 100644
---- a/drivers/firmware/Kconfig
-+++ b/drivers/firmware/Kconfig
-@@ -29,6 +29,7 @@ config TI_SCI_PROTOCOL
+diff --git a/drivers/dma/Kconfig b/drivers/dma/Kconfig
+index e8ef90e2bd6a..1fccbc96f076 100644
+--- a/drivers/dma/Kconfig
++++ b/drivers/dma/Kconfig
+@@ -37,6 +37,7 @@ config BCM6348_IUDMA
  
- config ZYNQMP_FIRMWARE
- 	bool "ZynqMP Firmware interface"
-+	depends on ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2
- 	select FIRMWARE
+ config TI_EDMA3
+ 	bool "TI EDMA3 driver"
++	depends on ARCH_OMAP2PLUS || ARCH_KEYSTONE
+ 	select DMA_LEGACY
  	help
- 	  Firmware interface driver is used by different
+ 	  Enable the TI EDMA3 driver for DRA7xx and AM43xx evms.
 -- 
 2.43.0
 
