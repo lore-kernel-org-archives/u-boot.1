@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6FEC7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A64C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8648300B;
-	Wed,  2 Jul 2025 03:04:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C60A882EB8;
+	Wed,  2 Jul 2025 03:04:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hzKeKRkg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tYhZdhNZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D4EE8303E; Wed,  2 Jul 2025 03:04:34 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 4373C82103; Wed,  2 Jul 2025 03:04:37 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 023AB82103
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EE0783022
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4067106dd56so2337418b6e.3
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:31 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2efc0ed41efso1932353fac.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418271; x=1752023071; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1751418274; x=1752023074; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=lH2YZGj7p33x1Rm8EJsGZSkv8A2GdTh2brNi2daim7Q=;
- b=hzKeKRkg5NvlDxIaeXFJ47+xRE9AlbWbl7dz86kgyo5y+DlaMDdVZG+m0rVij71SwC
- Y8IPULP4+F1jfC1GS3RP/xh/Z4S41ZCn6EYbyjO0QAPoLUaMYQEyWuEBDRSAOg6v1jmM
- xmVRGCld0v44E+mqL4cbgckwoaa6KeAQeOcio=
+ bh=8tnQi0FrpLVtI6wlxRr12CBAUTu/7m7NAreMxk5l5yw=;
+ b=tYhZdhNZJMifBuXj4TJy+7/i//NzMmLTgwawXniI/95m4rq5H7ukZh8sD09XMgXBhK
+ irI0HOXfzrVV3iW2FjOgyINCTzxJQypXkOEuIFrgZveI+S/KhKLcrmLrgi4lAs41y411
+ i4gFFgaqotVEJ66MCHVsX8SgFIqY6uX77wYfg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418271; x=1752023071;
+ d=1e100.net; s=20230601; t=1751418274; x=1752023074;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lH2YZGj7p33x1Rm8EJsGZSkv8A2GdTh2brNi2daim7Q=;
- b=VHiH0rX0p+FO45J8RtRQf/6xIBf/9X55CDHLL77dIJk87T1QO/SAFaEIpsqvNliPLq
- hAdctN3QR5QdNIxLvBFjubGvK+yl7xuhWoc6RYUCgHbNfkBYy92H+iRThMvCym4vbyHB
- PHR6gt+1eDwGr6Rnsr7D0NJikAGdsvYnWi2ANDIO9ulvR3grqbsMTKm7Um1WegjM+AHl
- FYwXRC6HyTBu5yW7RJvpxasCUAqzujlXpCt0K2bZ3ObyPFVAuO1act/3ABP6CI2YW1jc
- g1PyGJhBfHQCHF2edbBz+2z00qNAXoYnEsWu7xCEqGHnwmFhYEx9o80xhj+WKxlrpHU2
- HnHg==
-X-Gm-Message-State: AOJu0Ywvj3srP4rc+RnjBs/H7DFLSRj+lMmN6U1c6x73CceQfRKAdVk+
- OAS8HQXMVOGxvexEbwrVUXuTUplYw5ntyMckaHCqBWnW7LF/6CySlwVw9/oZyNJTn/aghl5nwNH
- RZKPRwu8=
-X-Gm-Gg: ASbGncv2SYl0gjeKD3iOdfobxQgX0ZRdGouNdsiqrsPEZXrCVKKOBlr3hwga+JUW8tv
- RjOIoB1Uf18QKkul7IJI7z0Z/NfY1IgWrdVIyfe/Lsg3qpBUGlXe/X75xGgHX56YicZgcicFgzN
- LF5z1czB036AkyhSHF0hrvuJLk9BGrkRR9Nt1laqZst6PXWUKJGKZvIffEv+okweTSX4ysAKguJ
- pTk0cXqMtQO0dqZk/LCw/0/+N5DE5uqRVhkPACWDxpT7QpzqEB/oUxfx9H5if2B8MItdJn2KB7N
- e0kAJj9JF2LqBUh7rVH9q49qLsW9QTl5YSnPaWE7jJxTJOJhcc27377zwZt9xxVG3BuTx62hLgk
- 3RVx55D8/T508zu7DokshfRM=
-X-Google-Smtp-Source: AGHT+IGwABZUD0CcLHzlFy0EPn3TzqLj1UAeE4P05zDRX9fe4tSh6d9aMgoL6ailSk+bL70tkPhn1w==
-X-Received: by 2002:a05:6808:3097:b0:405:6b13:ca55 with SMTP id
- 5614622812f47-40b8952131bmr586104b6e.37.1751418270593; 
- Tue, 01 Jul 2025 18:04:30 -0700 (PDT)
+ bh=8tnQi0FrpLVtI6wlxRr12CBAUTu/7m7NAreMxk5l5yw=;
+ b=EBJmaLW2sKCJ3zFKSimPh3BtFw5rCDV45J7dQOF8Jkt7QxaX7qX7PsrOFZz4UZ1myS
+ EKyhHe1IJMADe57VbwJ0VrexCC7HzuAaxzPnJ2ISHt7W4wTLW+dArtmpuQf5zcN7oP6y
+ Np81D56cGY9qhxWBjXyeb6EEV4p8qVOq4/JoZShkjEWYg0f8SoaBn7sTi+CZSRbP+eTV
+ 4KCEvz+gdvtfoKDl31UbWpaoqPHPAU6flY7Y1a7rIZBn9uBFl48Dn336ZJBTWV58YivB
+ 9fofcDRiGHqP46D/DzLSkhzsNO3uuE45iVWRelYNK0IFz45vZDhSHHfjVJMpRFO7l2Ts
+ /7lQ==
+X-Gm-Message-State: AOJu0YxcykgbEXVGVlOKTrIYICDoTyEjf0lmE72/zcsfCjKPf/Y5bxlB
+ tgSCDFWD/U0HUQG19zaVIzFpaT7nfZW2rfOwtyuIZbeEB19YetnhJTp5JLOxXjWq37+CbLtPEtv
+ F1GAVNXc=
+X-Gm-Gg: ASbGncseafi34V5j/M/LxnFBnqSPVZqtUvBDN+i1RBv/fAipuN4zEidE5fT6PRZfzPD
+ ucxAF343XuJJikV+L6vO81el7Pc7h1UOqMF3K8fqP5yFOsQ0iR6S8J0cw8MMEqbsukTzFJPv9pa
+ CH395hOYlOwsLC5NeLOQU4E3S9c1e5twOig4tVOGMvoJy+9gdmHIr84PBfAPAp+e7V36bfl9zk/
+ 7DU5MasqyhtoxMLSbVluXkR50R71W1JDsvEtt4fTdbmMTGV0Y+53pcTZs2HlXUnLRKM/9Xkpy86
+ VKK/lMHsP/4gcEuPXpxZnYsF4vEt70QfCoSyHEQ5FFukPFle9vxSq1vg3vkZyGY6Tw1OHVmkoci
+ 8mrK9e2hG8F0xGbUroAEFRWo=
+X-Google-Smtp-Source: AGHT+IHCHnoin0ADUOV1rH4QcH1M/cDlY8+UnXPdtNcXFM7MTQT0ft0H4tG6eOaAK77TAKU7JNXzSQ==
+X-Received: by 2002:a05:6870:558f:b0:2d9:3868:b310 with SMTP id
+ 586e51a60fabf-2f5a89fdb15mr700109fac.11.1751418273790; 
+ Tue, 01 Jul 2025 18:04:33 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40b32420a76sm2375225b6e.38.2025.07.01.18.04.29
+ 46e09a7af769-73afb0089cesm2345034a34.25.2025.07.01.18.04.33
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:04:30 -0700 (PDT)
+ Tue, 01 Jul 2025 18:04:33 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] ata: Correct two dependency issues
-Date: Tue,  1 Jul 2025 19:04:29 -0600
-Message-ID: <20250702010429.18958-1-trini@konsulko.com>
+Subject: [PATCH] adc: Tighten some adc driver dependencies
+Date: Tue,  1 Jul 2025 19:04:32 -0600
+Message-ID: <20250702010432.18977-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,37 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-First, the SATA_MV driver can only build on kirkwood or mvebu platforms
-due to header requirements, so add that as a dependency here. Second,
-SYS_SATA_MAX_DEVICE is also used by the API code so allow it to be
-configured in that case.
+A few adc drivers cannot build without access to some platform specific
+header files. Express those requirements in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/ata/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/adc/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
-index 29ceab849c02..da9c72a99d03 100644
---- a/drivers/ata/Kconfig
-+++ b/drivers/ata/Kconfig
-@@ -131,6 +131,7 @@ config FSL_SATA_V2
+diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
+index 37235f557a3c..2b45f9e5ebad 100644
+--- a/drivers/adc/Kconfig
++++ b/drivers/adc/Kconfig
+@@ -18,7 +18,7 @@ config SPL_ADC
  
- config SATA_MV
- 	bool "Enable Marvell SATA controller driver support"
-+	depends on ARCH_KIRKWOOD || ARCH_MVEBU
- 	select AHCI
- 	select LIBATA
+ config ADC_EXYNOS
+ 	bool "Enable Exynos 54xx ADC driver"
+-	depends on ADC
++	depends on ADC && ARCH_EXYNOS5
  	help
-@@ -148,7 +149,7 @@ config SATA_SIL
+ 	  This enables basic driver for Exynos ADC compatible with Exynos54xx.
+ 	  It provides:
+@@ -49,7 +49,7 @@ config SARADC_MESON
  
- config SYS_SATA_MAX_DEVICE
- 	int "Maximum number of SATA devices"
--	depends on !AHCI || FSL_SATA || SATA_MV
-+	depends on !AHCI || FSL_SATA || SATA_MV || API
+ config SARADC_ROCKCHIP
+ 	bool "Enable Rockchip SARADC driver"
+-	depends on ADC
++	depends on ADC && ARCH_ROCKCHIP
  	help
- 	  Sets the maximum number of SATA devices which can be supported
- 	  by U-Boot.
+ 	  This enables driver for Rockchip SARADC.
+ 	  It provides:
 -- 
 2.43.0
 
