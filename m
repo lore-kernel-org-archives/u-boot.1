@@ -4,84 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A8AC83F03
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 20:17:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38255C77B7C
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 20:17:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B350982103;
-	Wed,  2 Jul 2025 22:17:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1976382E08;
+	Wed,  2 Jul 2025 22:17:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OH+f7Os5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 352CC81FEE; Wed,  2 Jul 2025 16:48:46 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 5252882ADA; Wed,  2 Jul 2025 19:13:45 +0200 (CEST)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
+ [209.85.222.181])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E86ED800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 16:48:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBD3181FEE
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 19:13:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-b2c4331c50eso6699918a12.3
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 07:48:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751467722; x=1752072522; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K8D+gU+p1eHm9iiWxKufrydXYLgnh0rHbhWd+/HlWeE=;
- b=OH+f7Os5BWszgLBc3NRy74V4y8yjE72U6oHtZrKxw4JxJmlPXaBWAZ1QoecWERzRAp
- n49OhBBISuBJamDZkGP9Vv2ctRCvO6gskflHi16vcLG2cbk+tIdXwXZO+JSgACDCCc+v
- 5JcmDCXcQIsznhoNT5gIiVWccDEOoZztRTDHVk7nYUJ9kagBRorgFFFDc+PdyYfLafUN
- TVP2ln7b+uDvTkQg1NrQirJQpcW5rImYDHNMBOV/1rTRdswCRfohHVat5zCb1i3DWvSf
- V1L72ZIgajDVSS2weHIUAw/C1PLUbvFehKtjV4I/oFkcNepgM1Gpw0ZmIYARcDPKoClf
- XyHg==
+ spf=pass smtp.mailfrom=magnus.damm@gmail.com
+Received: by mail-qk1-f181.google.com with SMTP id
+ af79cd13be357-7d20f799fe9so782585585a.2
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 10:13:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751467722; x=1752072522;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K8D+gU+p1eHm9iiWxKufrydXYLgnh0rHbhWd+/HlWeE=;
- b=HBYw++W3I/C6Aie1cizt+dACPgQ0zFQ+QgVc+zVaNB9bLeG+LqwnmMotAN/ra5wVO3
- fHp7a+KPW/UqWGf4mpcOzhFksUE2VjGUC7TWFt8FA+58H+mB8r1QkAuvTTHxVowPCpJf
- UUapu2evqMRRQ1izJfA64/kT+QktejHoOiI5dgeEgur5IzSmozN2BYRiJvYZQCLJG2QF
- mCGEZW8/iYJUYjjYFuaPjyKNQJssUJ9oHbXbpYBRK45zTtGMlohJMXMqJjKUnEfJwKn/
- VdDJFjETJXJSzRxBi70jmiZwrDBlzg8d/MpAgbb1qSAEM+iTx2jMe/x6e0Jb9BgLiUMj
- QVww==
-X-Gm-Message-State: AOJu0YxRV+MWHJxR+B0pyG+78C0a0WZNYhHO+yR+c9D3NMaxuJP02IVr
- ExxoFBJhbx8SNKieFmfSMnPOw8QiADVyeKmDG4ShZd16gQG1XEsbsyK6kxzaFQ==
-X-Gm-Gg: ASbGnctPr3Mi+u6ctotHsUSGxoCoAd3DZBs2nYotyiqjT3rGzrk/bEpzPMDQIgzTC2J
- xpJ1oKB5JegL2pvB/4QKZbTwFpSnlNEg3frskI0AMMY7yiH+NSzBXDETep/Lj5lesYqqHxKYulv
- xnA7+yD9FzH83OljKrvzki7nhpebhwBROxKYDtvfXdT+f9QAkFrQ3jyWJOGibK5iPVhE5xLoNDo
- b4DED1fYIJuPXibtsXQB2By9SmoieaPcFM8afUbgofZrOTJNXqPIGdBg0WvQRXEuTVu8MxGMZ9I
- XNbHSpRT6FC6GMxptmcWOi+gt+kc+MqWG702P0KdPU3oIxEFdvM9SJk6FbZiQU/9yGmVLIGDwiK
- 73cZfraegG5ho3YpOxTzeDMy4/hooY3e/TybDvQ93xt6CAXgXvTWwal7uRSgzDCghefm+
-X-Google-Smtp-Source: AGHT+IFzRj6NYewseAZ7toh6px+hD/9YsLtlCPOVyaIG9vdwa/jOqRN0Glg0mKyKDw/Mqv6a/VIEWA==
-X-Received: by 2002:a17:90b:51c5:b0:311:d3a5:572a with SMTP id
- 98e67ed59e1d1-31a90b960bbmr4687994a91.8.1751467722047; 
- Wed, 02 Jul 2025 07:48:42 -0700 (PDT)
-Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-31a9cc66830sm22578a91.16.2025.07.02.07.48.40
+ d=1e100.net; s=20230601; t=1751476421; x=1752081221;
+ h=subject:message-id:date:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sCLOxVCqesDm2qpma1f1hAvdZOu1QKpwGUn6TuTV7T0=;
+ b=dJDGtM6WaXiqx1BVeCo8NzZFQ0F+8kmNcY0cLTFsf4i/bJfXrpVRvO7VO0Ht35+OgE
+ EAh/9T9gm209tqatuW51Ilq61MrN02MouZvo+kyX6DjEB0jtP6/faEun67d3ngzpDi9d
+ ifHQ5cgmoKIQHxHtESkZ3mYKPjEBvW7HxvGR0zeNOhrN8MYhl72rnAAyA0aMBXvD1btG
+ lrMWgGKK9xorZrncE0FQXQEP+M59mBYLVo+GDUtDaXem9RS54625J0ISMIoA9mUigl8K
+ L5nRFKrr6+I4SQ6hoJHvL/Eg/fIxmOoKSvELG7P/EkN5GgBR449Bsy+4k6wrW7u+lrTB
+ dKDA==
+X-Gm-Message-State: AOJu0YxXauZKMJWBa/2aR2g15RN+W7zuIA1rJhmj6m83lrWC1BhFkxMt
+ 1x9Tx6bqT8jIyJHHwx4qerh82HWAALG8NDyOXBVijrsAsqxFZ2+reZvp6DXO8y/q
+X-Gm-Gg: ASbGncvSyXOUIZVgNwf1UOU38tipMmPx+4yb7L6xNCa/s3t4BT9oyREAnVqDxa/+umt
+ 2nLyYvR0mjOC+uPnUv+YA4COlRDhhUt0MYboVkj7gAXK/ZrwcvhDrtxuLf+BF+kJw089euXToLU
+ ycjLXJ9syo8xKII2bIuqJ5CF8AhcGfqBcbpb+zssr7Sfgh95CQ3yZ886KtLJnKkWc6w/dlFimyw
+ M6yFNIFKlUd4CjMdmm+JQ+X0zp9E8ahNNOHnoetRh8wJr5B2ulvdW3/0zSpn3Pgx9BUafSfVrSy
+ 1j1YUXryK1MiFeNIR04ZKuNaYsupvJmUc4Ht5D6oHvX9AXNzs+b4SlXNFeo7mOinmpuBJIH6zt3
+ KvfOHRt9qHkGN
+X-Google-Smtp-Source: AGHT+IFgL6Du9Xaunh577Wtvydi60XFGcPi59ktkotZNaH4Kmv0+Mo7v0gmt1a9BRwOvtZhKZ8ijzA==
+X-Received: by 2002:ad4:5fcf:0:b0:6fa:a4ed:cce5 with SMTP id
+ 6a1803df08f44-702b1c1ddfamr48968336d6.44.1751476421533; 
+ Wed, 02 Jul 2025 10:13:41 -0700 (PDT)
+Received: from 1.0.0.127.in-addr.arpa ([167.99.4.198])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7d44313926asm966749885a.22.2025.07.02.10.13.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 07:48:41 -0700 (PDT)
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-To: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
- lucienzx159@gmail.com, jit.loon.lim@intel.com, tien.fong.chee@intel.com
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org,
- albert-al.lee@airoha.com
-Subject: [U-Boot, v1,
- 1/1] misc: fs_loader: Add request_firmware_into_buf_via_env API for
- environment-based firmware loading
-Date: Wed,  2 Jul 2025 22:47:53 +0800
-Message-Id: <20250702144753.18846-1-lucienzx159@gmail.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ Wed, 02 Jul 2025 10:13:41 -0700 (PDT)
+From: Magnus Damm <damm@opensource.se>
+To: u-boot@lists.denx.de
+Cc: Chris.Brandt@renesas.com, Magnus Damm <damm@opensource.se>,
+ marek.vasut+renesas@mailbox.org, geert+renesas@glider.be
+Date: Wed, 02 Jul 2025 19:13:38 +0200
+Message-Id: <175147641895.69121.4718662283609078812.sendpatchset@1.0.0.127.in-addr.arpa>
+Subject: [PATCH v2 0/2] Initial r7s72100 Genmai board support
 X-Mailman-Approved-At: Wed, 02 Jul 2025 22:17:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,116 +78,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit adds request_firmware_into_buf_via_env() to the fs_loader driver,
-enabling firmware loading into a buffer
-using environment variables for path and size.
-It supports multiple entries via indexed variable names
-(e.g., "fw_dir0", "fw_size0").
-This provides flexible, scriptable firmware loading without hardcoded details.
+Initial r7s72100 Genmai board support (V2)
 
-Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+[PATCH v2 1/2] ARM: renesas: Put common r7s72100 code in board/renesas/common
+[PATCH v2 2/2] ARM: renesas: Add support for the r7s72100 Genmai board
+
+These two patches for U-Boot aim at adding initial support for the
+Genmai board which is based on the r7s72100 (RZ/A1H) SoC from Renesas.
+
+The first patch takes SoC specific code from the GR-Peach board and
+breaks it out into the board/renesas/common directory so it can be
+easily shared between GR-Peach and Genmai.
+
+The second patch adds board specific details for the Genmai board.
+
+There is nothing out of the ordinary with this board or this board code,
+however please note that the external SDRAM (hooked up to CS2/CS3) to the
+r7s72100 on the Genmai board remains unconfigured at this point. Because of
+this the U-Boot Genmai board code is instead making use of the 10 MiB on-chip
+RAM available in the r7s72100 SoC. The upstream DT for the Genmai board is
+however describing the external SDRAM memory banks as expected from a Linux
+point of view, and to "make it work" the memory bank configuration in U-Boot
+today is not using DT to describe the memories.
+
+Once SDRAM configuration code gets added as an incremental patch the memory
+configuration code can be easily switched over to use DT by adjusting the
+number of memory banks in the defconfig and updating the dram_*() functions.
+
+Thanks to Chris Brandt for the older out of tree board code, Marek Vasut
+for the upstream GR-Peach board code, the pinctrl-rza1.c driver and a bunch
+of fixes and changes that have been rolled into these patches.
+
+Signed-off-by: Magnus Damm <damm@opensource.se>
 ---
- drivers/misc/fs_loader.c | 59 ++++++++++++++++++++++++++++++++++++++++
- include/fs_loader.h      | 18 ++++++++++++
- 2 files changed, 77 insertions(+)
 
-diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
-index 66803f4b997..a4f4448f5cc 100644
---- a/drivers/misc/fs_loader.c
-+++ b/drivers/misc/fs_loader.c
-@@ -228,6 +228,65 @@ int request_firmware_into_buf(struct udevice *dev,
- 	return ret;
- }
+ Applies to u-boot git cbb5672790d400e9ec6e9fceaf89ece2660c0117 (origin/next)
+  and
+ https://patchwork.ozlabs.org/project/uboot/list/?series=463012
+ https://patchwork.ozlabs.org/project/uboot/list/?series=463013
 
-+/**
-+ * request_firmware_into_buf_via_env - Load firmware using environment variables.
-+ * @dev: An instance of a driver.
-+ * @buf: Address of buffer to load firmware into.
-+ * @offset: Offset of a file for start reading into buffer.
-+ * @fw_index: Index of the firmware entry to load.
-+ *
-+ * This function loads firmware into the provided buffer using environment
-+ * variables to determine the firmware file path, address, and size. It supports
-+ * multiple firmware entries by using indexed environment variable names such as
-+ * "fw_dir0", "fw_size0", etc.
-+ *
-+ * Return: Size of total read, negative value when error.
-+ */
-+int request_firmware_into_buf_via_env(struct udevice *dev,
-+				      void *buf, u32 offset,
-+				      unsigned int fw_index)
-+{
-+	char var_name[32];
-+	size_t size;
-+	int ret;
-+
-+	for (unsigned int index = 0; index < fw_index; index++) {
-+		snprintf(var_name, sizeof(var_name), "fw_dir%u", index);
-+		const char *name = env_get(var_name);
-+
-+		if (!name) {
-+			printf("Error: env var %s not set.\n", var_name);
-+			goto fail;
-+		}
-+
-+		snprintf(var_name, sizeof(var_name), "fw_size%u", index);
-+		size = env_get_hex(var_name, 0);
-+		if (!size) {
-+			printf("Error: env var %s is invalid or zero.\n", var_name);
-+			goto fail;
-+		}
-+
-+		ret = request_firmware_into_buf(dev, name, buf, size, offset);
-+		if (ret < 0) {
-+			printf("Error: Failed to load firmware %s, size 0x%zx.\n",
-+			       name, size);
-+			return ret;
-+		}
-+
-+		buf = (void *)((uintptr_t)buf + size);
-+	}
-+
-+	return 0;
-+fail:
-+	printf("Error: Failed to load firmware via environment variables.\n"
-+	       "Set these environment variables for each firmware index:\n"
-+	       "  fw_dirN   - path to firmware file (e.g., fw_dir0)\n"
-+	       "  fw_sizeN  - size of firmware (e.g., fw_size0)\n"
-+	       "Where N is the firmware index (0, 1, ...).\n");
-+
-+	return -EINVAL;
-+}
-+
- static int fs_loader_of_to_plat(struct udevice *dev)
- {
- 	u32 phandlepart[2];
-diff --git a/include/fs_loader.h b/include/fs_loader.h
-index 5eb5b7ab4a1..0d130daacfc 100644
---- a/include/fs_loader.h
-+++ b/include/fs_loader.h
-@@ -64,4 +64,22 @@ int request_firmware_into_buf(struct udevice *dev,
-  * Return: 0 on success, negative value on error
-  */
- int get_fs_loader(struct udevice **dev);
-+
-+/**
-+ * request_firmware_into_buf_via_env - Load firmware using environment variables.
-+ * @dev: An instance of a driver.
-+ * @buf: Address of buffer to load firmware into.
-+ * @offset: Offset of a file for start reading into buffer.
-+ * @fw_index: Index of the firmware entry to load.
-+ *
-+ * This function loads firmware into the provided buffer using environment
-+ * variables to determine the firmware file path, address, and size. It supports
-+ * multiple firmware entries by using indexed environment variable names such as
-+ * "fw_dir0", "fw_size0", etc.
-+ *
-+ * Return: Size of total read, negative value when error.
-+ */
-+int request_firmware_into_buf_via_env(struct udevice *dev,
-+				      void *buf, u32 offset,
-+				      unsigned int fw_index);
- #endif
---
-2.34.1
-
+ arch/arm/dts/Makefile                     |    1 
+ arch/arm/dts/r7s72100-genmai-u-boot.dtsi  |   32 ++++++++
+ arch/arm/mach-renesas/Kconfig.rza1        |    4 +
+ board/renesas/common/Makefile             |    8 ++
+ board/renesas/common/rza1-common.c        |   27 +++++++
+ board/renesas/common/rza1-lowlevel_init.S |  106 +++++++++++++++++++++++++++++
+ board/renesas/genmai/Kconfig              |   12 +++
+ board/renesas/genmai/MAINTAINERS          |    5 +
+ board/renesas/genmai/Makefile             |    7 +
+ board/renesas/genmai/genmai.c             |   49 +++++++++++++
+ board/renesas/grpeach/Makefile            |    1 
+ board/renesas/grpeach/grpeach.c           |   22 ------
+ board/renesas/grpeach/lowlevel_init.S     |  106 -----------------------------
+ configs/genmai_defconfig                  |   17 ++++
+ include/configs/genmai.h                  |   15 ++++
+ 15 files changed, 283 insertions(+), 129 deletions(-)
