@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5824C7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:05:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C8C9C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:05:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 802ED82F00;
-	Wed,  2 Jul 2025 03:04:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4BF582CFA;
+	Wed,  2 Jul 2025 03:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MxT66QSe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BHXT1jJ5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABB3C81FEE; Wed,  2 Jul 2025 03:04:24 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 4115E82103; Wed,  2 Jul 2025 03:04:28 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9177B82F00
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 210C082FE1
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:04:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-736f1953673so1599255a34.0
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:22 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-40b54ee16ddso1888539b6e.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:04:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418261; x=1752023061; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DRki5Eyf7+4CsXuI9gJ+19DxxdrR8FhQSpQVD9HWWTQ=;
- b=MxT66QSeoaPkzK6KoaTF4ZfwudDKBods6XOF0qs5kjXtXavg+Pp6UUVLKwxH9QQab9
- xaK05ML1dkVgbzKXl/MQ3+GBg6TqJl9Loto4XU4om00tk2FME3N6MQSW7vwcL2qqNMsj
- IhkQanlKqxPQDJRB6JWMOYw7b6TTWTEIkVwJ0=
+ d=konsulko.com; s=google; t=1751418265; x=1752023065; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FYQzl36XBxYwmvbqzgc2Kxro0MxR9zWsmp93cVOYyZI=;
+ b=BHXT1jJ54sK/jV6gB1sSMAS07doyuS37N3Wl3TMGkSb1mnodZaGKS3Tthbk/U4+TfE
+ qZbX3EQSYkXEnBB140P+8bIA3nMHKLf1Cd9Bpgj/ALsmsznKlvkK0Fy3HeX/+R1fYxJ5
+ Q8ZySJpZJ2WhsAArEaNIgNGu/niOAtW/sjwmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418261; x=1752023061;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DRki5Eyf7+4CsXuI9gJ+19DxxdrR8FhQSpQVD9HWWTQ=;
- b=PwVsoebySvvrxbS+5iS2H9nLpy2D84EV4rEoIsZ9IagO9XT04Gl9W8DigxqRG2vLOz
- v0Xpm5VyrTDTfjR9/PLbE/+sZokWtU9GIfsLiEdCIGJmm9lyoyTJsEk61lof9eIPXgss
- M2Hrw/Mj3jEBe/b1DToRY3LuPPc+69Ne0y5kBxmqCcGiOvqAh4R/Xg+QlyaRALLC5RUk
- 39kIlCejW/JE+6o23P9q2Dhfv42YWfs55D0n0z/XCE3b+kCfKBEuqe5RNVCjyfExEU+i
- zYtkuf9LH6LbCHqEFjI3meI9a6wsLluf8tmf7nKY4ypWOWpvQp+g+YP287KuUmPVOpav
- 2dsw==
-X-Gm-Message-State: AOJu0Yz9NucU0XNL/m3p+vycWua6L8Bz0t6M+25TU8LhX3gP1TdjyEsA
- k7mUmfJh1ZSclgc17vfk95COqqdmMUAJv3KlbAk7aYShUu36ecuuox6ZhP4/QzvRqJ7B8TMU1yj
- jpSRXNhk=
-X-Gm-Gg: ASbGnctGY7/wjGg78V+M3Zc0WjKh4iWBHfwVkgGFpaUVLvyqII2VNnTuaoa8nGv9OTz
- /7mrW/qoUXA3BZAHFlqffe9ZUZCagd/SxSLWGlHEt7iChzGa5Ru5df+lax2eN7/tD+ZlhgjMBhl
- sDk0rjdzy/6b/OaAqxct4vusrpp0qZCHnlqO9o259ZZkfAJkBW2mrCrvzmNpLRO/wANq5hmjP3F
- tBhGPNHg5cTfTvzKnWRo27FORLUZ2pmbB+zTcsfO+HvWyLsDuHbqheCbCOhks7IM2TIU9FRhk7V
- YbFkUsE2PxdZqxkZzT7kPMUfbpblkI9D1O5ELb/YEtH03UTRqTVlOiDzi63Yv7mCeeit6AMODMr
- /4V/xQbxHr9dGyetNhrr1Fzc=
-X-Google-Smtp-Source: AGHT+IFYpmoCSG8CXuPwd6lKZhWT7o8PSkG50CSA/dzJNlZO1pzJBMzygRtrlfpvisbUrCsEbKm2Iw==
-X-Received: by 2002:a05:6830:6489:b0:72b:8889:8226 with SMTP id
- 46e09a7af769-73b4cdf6427mr679726a34.7.1751418261237; 
- Tue, 01 Jul 2025 18:04:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751418265; x=1752023065;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FYQzl36XBxYwmvbqzgc2Kxro0MxR9zWsmp93cVOYyZI=;
+ b=hBkMiMNfezzFKZUuHO5wcaqakTQMHKylAw6duC1T0RiDbqwlHf8PeZL5zJyPBwKsF+
+ 6jUhIKxJB/II6lfAMR3op7rKJxGPgCZdx8l0G9bFcYLjz70a17gZ4eKnWkE+QdiEmmLA
+ 7T4ca3ntXGHNG20Y6OV2oL/zg+Ti1tX/AZiuQZ4E9rEJ1Ty48bY0VHoKHLIGpmu3H8yz
+ BUSz62mwAuDptjpDaIFSzFBK2SPb4OzhgwhsauVEd1BgjDoKXEXgrUQz85ZVC5Fs5PRB
+ OVMXO8cqrQYT5XvyH8gjrKqqN0lQ4DvC/WXiD6k/ANbo0EcJ8wghC7rPnKQttj0+xshw
+ 0Ubg==
+X-Gm-Message-State: AOJu0YxP63jNxvjoOgwuem1rMJbE6NiprKxfo8gceHZlEbApj/UcmvGr
+ oHGT92kJluR7aznExTvjerbR8wN8YN8/B8fE7TNbfZRvUMr40DuJyOEeGhBjwbsJUykQSPf9Azq
+ sW+/KZbA=
+X-Gm-Gg: ASbGnctnUsw8CA5HDxc3oRt5y8ioTegTzXSt/6BvjyBLEEvJraHw8Y6Oa4G7QmilACu
+ AzNRYt92WCGC7M37SjD/GEatNiNZ2o+2OlDSnuCOsyGaCEvcApfLrI9pGObgOPywLhIbjJYMrts
+ +fTvFOfKXNFJXkbw0IyX9J3Sa7ugRsT5C8ne3IORLje8tXwBAK+z+S6S+8GDj1K5CaZShG6P03t
+ P2pqkoJJUi1KbJRkft//y4K1hZIImsthNl3sm17mACvMqTLCnYgy6B3HuiWG0xfjh6TyXKaPXJm
+ 83SELBygXcmMwf2MoHjxWsIJ2wawUMx3xezEnZsxxOisSL6g8nwP5qqxpEXguRaQeAOHPxmJgdv
+ /0xRZjmWmbp9q7jdqr3475xQ=
+X-Google-Smtp-Source: AGHT+IF+lUV5uXGIqlQQ9nl0no7zCYde98Vj2G0CmCZ0LtaEt2isFQ0D2vfZuSQ45dLwjRGmPLtmzQ==
+X-Received: by 2002:a05:6808:4f65:b0:40b:4230:387f with SMTP id
+ 5614622812f47-40b89137d1fmr574651b6e.32.1751418264735; 
+ Tue, 01 Jul 2025 18:04:24 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afb006480sm2335903a34.21.2025.07.01.18.04.20
+ 5614622812f47-40b32438b2dsm2318171b6e.45.2025.07.01.18.04.23
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:04:20 -0700 (PDT)
+ Tue, 01 Jul 2025 18:04:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Gaurav Jain <gaurav.jain@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] crypto: fsl: Only allow these to be chosen on ARM/PowerPC
-Date: Tue,  1 Jul 2025 19:04:19 -0600
-Message-ID: <20250702010419.18890-1-trini@konsulko.com>
+Subject: [PATCH] crypto: aspeed: Tighten some dependencies for the aspeed
+ platforms
+Date: Tue,  1 Jul 2025 19:04:22 -0600
+Message-ID: <20250702010422.18911-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,35 +92,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These drivers require various headers which only exist on the ARM /
-PowerPC platforms which implement the hardware. Express that requirement
-in Kconfig as well.
+Some of the aspeed platform drivers cannot build without platform
+specific headers being available. Express those requirements in Kconfig as
+well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Gaurav Jain <gaurav.jain@nxp.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
----
- drivers/crypto/fsl/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/crypto/aspeed/Kconfig | 4 ++++
+ drivers/crypto/hash/Kconfig   | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/crypto/fsl/Kconfig b/drivers/crypto/fsl/Kconfig
-index 9ed56632fcde..fe694f6022c2 100644
---- a/drivers/crypto/fsl/Kconfig
-+++ b/drivers/crypto/fsl/Kconfig
+diff --git a/drivers/crypto/aspeed/Kconfig b/drivers/crypto/aspeed/Kconfig
+index 6efcd7da7382..401225b8528d 100644
+--- a/drivers/crypto/aspeed/Kconfig
++++ b/drivers/crypto/aspeed/Kconfig
 @@ -1,3 +1,5 @@
-+if ARM || PPC
++if ARCH_ASPEED
 +
- config FSL_CAAM
- 	bool "Freescale Crypto Driver Support"
- 	select SHA_HW_ACCEL
-@@ -95,3 +97,5 @@ config FSL_DCP_RNG
- 	  module of the DCP. It uses the True Random Number Generator (TRNG)
- 	  and a Pseudo-Random Number Generator (PRNG) to achieve a true
- 	  randomness and cryptographic strength.
+ config ASPEED_HACE
+ 	bool "ASPEED Hash and Crypto Engine"
+ 	depends on DM_HASH
+@@ -38,3 +40,5 @@ config ASPEED_CPTRA_ECDSA
+ 
+ 	  Enabling this allows the use of ECDSA384 signature verification in hardware.
+ 	  Note that only ECDSA384 is supported by Caliptra.
 +
 +endif
+diff --git a/drivers/crypto/hash/Kconfig b/drivers/crypto/hash/Kconfig
+index aa355c44be85..72b955ac791a 100644
+--- a/drivers/crypto/hash/Kconfig
++++ b/drivers/crypto/hash/Kconfig
+@@ -18,7 +18,7 @@ config HASH_SOFTWARE
+ 
+ config HASH_ASPEED
+ 	bool "Enable Hash with ASPEED hash accelerator"
+-	depends on DM_HASH
++	depends on DM_HASH && ARCH_ASPEED
+ 	select ASPEED_HACE
+ 	help
+ 	  Enable this to support HW-assisted hashing operations using ASPEED Hash
 -- 
 2.43.0
 
