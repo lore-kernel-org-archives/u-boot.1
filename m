@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C528EC7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 09:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4614FC83013
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 09:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6C9E82E08;
-	Wed,  2 Jul 2025 11:12:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BDD7282103;
+	Wed,  2 Jul 2025 11:18:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FiGpg1Q4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kj4kl7nW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3341C82E08; Wed,  2 Jul 2025 10:53:51 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 74E9F82B18; Wed,  2 Jul 2025 11:18:23 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CCEE8206E;
- Wed,  2 Jul 2025 10:53:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79C3380E9A
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 11:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rmfrfs@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a54690d369so3920149f8f.3; 
- Wed, 02 Jul 2025 01:53:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-450ccda1a6eso34106295e9.2
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 02:18:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751446429; x=1752051229; darn=lists.denx.de;
- h=in-reply-to:references:to:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IQGhItBOFPV8tKhxDaZicvbqx4OWkNSB5RNSRL1rW5o=;
- b=FiGpg1Q44EQYbklptg+cYSdNSN4RxZ2tHXL2Y7PSeyY+fOu9VFXlysRJkXvwevPI9G
- xFr91n2rYtGnxNHZqUsgvJU62AwdIRw3JE/f85mPGHLcs8Vo1kegt5ILFufFXo4lJEen
- yxtOaGeYlB0qO1f+Yz67KqFKGK8SXy+GTiKypDe4TexCZqzf5A6aIl1aQNUXeBbN4QeO
- NKSJaAiAoYpHF48zjqgLTfA0w1zvE+lQsqHNy0XyFYFPVpwR0Qvu1KFaeNNx9xvMDtjd
- JrR1gA9hACMS/TJvmUZsezxjJQAFGxwkiL56/qHeMekA6eMD5M5FquM7cpH24tXIfA8B
- iITg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751446429; x=1752051229;
- h=in-reply-to:references:to:subject:cc:message-id:date
- :content-transfer-encoding:mime-version:from:x-gm-message-state:from
+ d=linaro.org; s=google; t=1751447901; x=1752052701; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
  :to:cc:subject:date:message-id:reply-to;
- bh=IQGhItBOFPV8tKhxDaZicvbqx4OWkNSB5RNSRL1rW5o=;
- b=lRpeH/zj+SGMBgI1qctb+Eq2AdW2q7JGKTiNmcPomC8D2g8fKvsYsZI3l6uws040zq
- nMGo4DkVAa5PeKy5bBCLc6YOaBGaatW9mNgZXg9grYYOTNrDgyovlNK53dRp9ImUDGpb
- j7YciyYJ254xYtxC10hhbbb9rW9kHVgch7VGbb4k3Io9AmGHB8BitvoK00OQASA9TWKJ
- a+PomDCj14EhP/8Ln6/rmiy0lt9BBsg99ZCa4/brR5W/+BsaRDBu/h8NgA27rvuyIem5
- Z0gqGmVEQnrYgmci6CFpHH3PAKDqi5f/RuFNp+YSvEYvPWmk7O2i/TvyIx7Q0MTbIgnl
- k4rA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX/cCn3Zwf7Jvmd4e9HQU3vN52W5yWoEW/QGNJbE1k4OqYhN/idt3B61MQQu3+GenV0uMF572qF+LkdnHkSMA==@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+JnESWb6uEZ6PHzCRnzT+z1FXaxyOQhjPPsVwkKW2Ie1sSG/+
- PD5tPQ/RF1yo8MWPZNSBUse9doBEGdYkKmlRMCZC2HmvSbOPYOq6QG2Kw3+azEAQ
-X-Gm-Gg: ASbGnctc4Raf+COI4AlQdfcwFlWrT3h/ATF0cizELe2Oez4939Kuio8GnuaPWNSVyE1
- C5eFd6gRUCkQO8g1FV1ZbtZ4TKQzJ1MDEj6IPw+k8gBj4Yf63VhjfKaT/cSMbSlsDznX+hfbq5E
- /+sgDuDr3kMN5znJC/E7fJkUxfbBNXf4DWEAYXD0fx3S+KG7/wY9xhF/ukxSmJWNvKj9CCOxmD2
- OPEjbJ8YccJstmkiXqsFW8pNJrIEk+L4rgw5wskLi5zcxrpIUm2DeuxIdbp33ZLKecsHYNw9w2/
- y5DW3wEIcE6QC8dhm4+B4ga/D8fJzdFzQRA9r0++c8LVVlbwBwUjVEx0BDKNR/Uu0fEcMfRQq/Y
- bAwH1aMzuHFHwwQ==
-X-Google-Smtp-Source: AGHT+IHQIQIjLHRqK62veZu9IfUq37Bg9/eZh2AJTDcEBJkazkwdS8xZEVlqzt/q+zCU1qgqfoSR0g==
-X-Received: by 2002:a05:6000:1449:b0:3a4:f379:65b6 with SMTP id
- ffacd0b85a97d-3b200f2168emr1484979f8f.46.1751446428525; 
- Wed, 02 Jul 2025 01:53:48 -0700 (PDT)
-Received: from localhost (a95-94-245-170.cpe.netcabo.pt. [95.94.245.170])
- by smtp.gmail.com with UTF8SMTPSA id
- ffacd0b85a97d-3a88c80b50bsm15303769f8f.42.2025.07.02.01.53.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 01:53:48 -0700 (PDT)
-From: Rui Miguel Silva <rmfrfs@gmail.com>
-X-Google-Original-From: "Rui Miguel Silva" <rui.silva@linaro.com>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 02 Jul 2025 09:53:47 +0100
-Message-Id: <DB1FXX03SS1X.3D705QLL4ES1X@linaro.com>
-Cc: <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>, "U-Boot"
- <u-boot-bounces@lists.denx.de>
-Subject: Re: [PATCH v2 2/2] gpio: qcom: move pm8550 gpio to new driver
-To: "Neil Armstrong" <neil.armstrong@linaro.org>, "Tom Rini"
- <trini@konsulko.com>, "Sumit Garg" <sumit.garg@kernel.org>, "Casey
- Connolly" <casey.connolly@linaro.org>
-References: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-0-cc1512931197@linaro.org>
- <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-2-cc1512931197@linaro.org>
-In-Reply-To: <20250630-topic-sm8x50-pmic-gpio-pinctrl-new-v2-2-cc1512931197@linaro.org>
-X-Mailman-Approved-At: Wed, 02 Jul 2025 11:12:13 +0200
+ bh=gP1aB/ueEivbumnnkhb0d7NKetZjFuDtzPF6MMJPljg=;
+ b=kj4kl7nWs0gPg1iGBh56Hk0Y6hum8ofPm9K6kY0KkCsF03EicY/Q3fpHY6A0slJS7c
+ QU14qb804VdrKDO7Z3dGY4fVWBXd+F794M+IziawA18QYL2dAnoMg2ayONhUTFV2ZrqM
+ 2KTpuEgc2usmN3DKrY2N9nD6pHofM7c/BNoRChm57amyCjNqhHQeDvQymvJIoIq1qCly
+ 0+I6yxkeGExfa/rcXw8Ec6SFYU2BQVY+54JGAW5O95apHaxWqbyoKEc2PnrC/IFZadyC
+ iWwBpoEp82Dc2mxzu0hIscIAUlUaXF2xsOoXR8ue7247gGlkFp/Pa+2z0zvwp/j7vowe
+ fg2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751447901; x=1752052701;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gP1aB/ueEivbumnnkhb0d7NKetZjFuDtzPF6MMJPljg=;
+ b=aaono7NWN+GyK5XTIq6Kxf79sOlcnfZmOApX8BaC1UJO+0/+RYh27zxumQ9boE8liO
+ zvi5x5yPnuQjs8kg0h1lt+vxavUWkWX8P4fiY1T0wCwu7fsxh9nfXq78ISUymODWe02V
+ eXetbAsYcugW1CzqwH3PPM/QNbgumAMuAkw7RO3xtx4im2zJfpr0rMXgEi+ruaWoXvWZ
+ aYwBBjgYZzMXBk08YZHC/0Mp2WOlhYPtfy/UyoOq5BeHsNQJLxg9oBsXvgCp12YujMej
+ kSVXFY5xhvEsQEAu6Zef+Kgnst2BL/FGP22bZlKQfk96xdcmN61B58Zj0ZQWomu4JbHP
+ 2fFA==
+X-Gm-Message-State: AOJu0YyxOrTZMSaHNT1/jUq9FMMjY8ITqNtpu25MPNnV02CzVykgisg/
+ wyD9h/1X02U4KtgHvW9yoUB4xqo+HkZZSiT1rZDBcY6TY4Nqx6kTP+zM/o780Mjcvy4=
+X-Gm-Gg: ASbGnctJmxHKc2vWYdD1vjMsKUWIbd93z5rp+V/P/drsOhipz0z8ZIunqcMf+MDcOr3
+ IGtOhVQbcYi/ZXw0w/0S3z6oLYqSITMibrZc0XcPuBtaxzmK+W5zPdRGGiSzNqJHWfFHr7LoFw4
+ a9Lb62l7r4IsOqwu9kSkSJV9R4UCYXP3eLcTjdYKwMDqAms1En5WHNXLZhzXYSfEtPw8TnAZIPj
+ TPXUXD5W/ZXYDJw7l7E3AMjLRdRhzDPTU4RXLZCmC+kA43297e04tigY2AFtI0t2zNBSFOqw1Lc
+ 1t5wHGYg0XZ08xblpuB5Gm5e150+jJN17nShO3DtGvtBo8r06lZDwdVIacIWHNeXUJYvvUFPl+y
+ CV6uSAlljWVDEj5eyo3PhbOVbjPUic7o5i+loISg=
+X-Google-Smtp-Source: AGHT+IFE2AsEFblpqqUI3GRYDLJplJvH1dqDUKWwJhFEt20IjSC14VVmztf/qd4+0hIjqxiFkKVgpw==
+X-Received: by 2002:a05:600c:8212:b0:43d:45a:8fc1 with SMTP id
+ 5b1f17b1804b1-454a36dd789mr24908845e9.4.1751447900816; 
+ Wed, 02 Jul 2025 02:18:20 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:e07:801:2aa3:3d9f:604c:fc30?
+ ([2a0a:ef40:e07:801:2aa3:3d9f:604c:fc30])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4538a3a5599sm196190115e9.13.2025.07.02.02.18.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Jul 2025 02:18:20 -0700 (PDT)
+Message-ID: <bc0d6906-c1a0-457d-900a-769f5186723c@linaro.org>
+Date: Wed, 2 Jul 2025 10:18:19 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] boot: menu: Do not dereference pointer if pointer is NULL
+To: Tom Rini <trini@konsulko.com>
+References: <20250630-scene_menu_fix-v1-1-9ccb9a49c4d8@linaro.org>
+ <20250701204042.GD523899@bill-the-cat>
+Content-Language: en-GB
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250701204042.GD523899@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,111 +101,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Neil,
-On Mon Jun 30, 2025 at 5:04 PM WEST, Neil Armstrong wrote:
+On 01/07/2025 21:40, Tom Rini wrote:
+> On Mon, Jun 30, 2025 at 05:06:07PM +0100, Andrew Goodbody wrote:
+> 
+>> scene_obj_find can return NULL but this is not checked for before
+>> the return is dereferenced. Add a NULL check.
+>>
+>> This issue was found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   boot/scene_menu.c | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+>> index 17150af145d..9a6e37d1c64 100644
+>> --- a/boot/scene_menu.c
+>> +++ b/boot/scene_menu.c
+>> @@ -508,7 +508,8 @@ int scene_menu_display(struct scene_obj_menu *menu)
+>>   		return 0;
+>>   
+>>   	pointer = scene_obj_find(scn, menu->pointer_id, SCENEOBJT_TEXT);
+>> -	pstr = expo_get_str(scn->expo, pointer->str_id);
+>> +	if (pointer)
+>> +		pstr = expo_get_str(scn->expo, pointer->str_id);
+>>   
+>>   	list_for_each_entry(item, &menu->item_head, sibling) {
+>>   		struct scene_obj_txt *key = NULL, *label = NULL;
+> 
+> This is in a slightly different place in -next, and I think the whole
+> function needs to be read and corrected for error handling. I think we
+> then will need to initialize pstr to NULL as well. Thanks.
 
-> Move support of the pm8550 gpios to the newly introduced
-> driver and drop the compatible entry and the read-only quirk
-> at the same time from the old driver.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Hi Tom,
 
-LGTM,
-Reviewed-by: Rui Miguel Silva <rui.silva@linaro.org>
+I will rebase to -next and resend. I also added a NULL check for str but 
+I am not sure what else might need doing though unless you have some 
+suggestions?
+It looks to me as though pstr is not used if pointer is NULL so there 
+should be no need to initialise it?
 
-Cheers,
-   Rui
-
-> ---
->  drivers/gpio/qcom_pmic_gpio.c | 20 +-------------------
->  drivers/gpio/qcom_spmi_gpio.c |  1 +
->  2 files changed, 2 insertions(+), 19 deletions(-)
->
-> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.=
-c
-> index cd9f3926ac41d84161b1e5311d9a99bb0b4a68ff..4458c55cd3da4d279b360b701=
-348b50247036198 100644
-> --- a/drivers/gpio/qcom_pmic_gpio.c
-> +++ b/drivers/gpio/qcom_pmic_gpio.c
-> @@ -69,17 +69,6 @@
->  #define REG_EN_CTL             0x46
->  #define REG_EN_CTL_ENABLE      (1 << 7)
-> =20
-> -/**
-> - * pmic_gpio_match_data - platform specific configuration
-> - *
-> - * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to c=
-onfigure them.
-> - * This is a workaround for an unknown bug on some platforms where tryin=
-g to write the
-> - * GPIO configuration registers causes the board to hang.
-> - */
-> -enum pmic_gpio_quirks {
-> -	QCOM_PMIC_QUIRK_READONLY =3D (1 << 0),
-> -};
-> -
->  struct qcom_pmic_gpio_data {
->  	uint32_t pid; /* Peripheral ID on SPMI bus */
->  	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
-> @@ -128,13 +117,8 @@ static int qcom_gpio_set_direction(struct udevice *d=
-ev, unsigned int offset,
->  {
->  	struct qcom_pmic_gpio_data *plat =3D dev_get_plat(dev);
->  	uint32_t gpio_base =3D plat->pid + REG_OFFSET(offset);
-> -	ulong quirks =3D dev_get_driver_data(dev);
->  	int ret =3D 0;
-> =20
-> -	/* Some PMICs don't like their GPIOs being configured */
-> -	if (quirks & QCOM_PMIC_QUIRK_READONLY)
-> -		return 0;
-> -
->  	/* Disable the GPIO */
->  	ret =3D pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
->  			      REG_EN_CTL_ENABLE, 0);
-> @@ -278,7 +262,6 @@ static int qcom_gpio_bind(struct udevice *dev)
->  {
-> =20
->  	struct qcom_pmic_gpio_data *plat =3D dev_get_plat(dev);
-> -	ulong quirks =3D dev_get_driver_data(dev);
->  	struct udevice *child;
->  	struct driver *drv;
->  	int ret;
-> @@ -292,7 +275,7 @@ static int qcom_gpio_bind(struct udevice *dev)
->  	/* Bind the GPIO driver as a child of the PMIC. */
->  	ret =3D device_bind_with_driver_data(dev, drv,
->  					   dev->name,
-> -					   quirks, dev_ofnode(dev), &child);
-> +					   0, dev_ofnode(dev), &child);
->  	if (ret)
->  		return log_msg_ret("bind", ret);
-> =20
-> @@ -365,7 +348,6 @@ static const struct udevice_id qcom_gpio_ids[] =3D {
->  	{ .compatible =3D "qcom,pms405-gpio" },
->  	{ .compatible =3D "qcom,pm6125-gpio" },
->  	{ .compatible =3D "qcom,pm8150-gpio" },
-> -	{ .compatible =3D "qcom,pm8550-gpio", .data =3D QCOM_PMIC_QUIRK_READONL=
-Y },
->  	{ }
->  };
-> =20
-> diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.=
-c
-> index 2bb0f0d10c32ff55d3fd5c61b9bc2999878bfea6..22c8072534e9188445f0aaef5=
-336863fd1da7a75 100644
-> --- a/drivers/gpio/qcom_spmi_gpio.c
-> +++ b/drivers/gpio/qcom_spmi_gpio.c
-> @@ -743,6 +743,7 @@ static int qcom_spmi_pmic_gpio_probe(struct udevice *=
-dev)
->  }
-> =20
->  static const struct udevice_id qcom_spmi_pmic_gpio_ids[] =3D {
-> +	{ .compatible =3D "qcom,pm8550-gpio" },
->  	{ .compatible =3D "qcom,pm8550b-gpio" },
->  	{ .compatible =3D "qcom,pm8550ve-gpio" },
->  	{ .compatible =3D "qcom,pm8550vs-gpio" },
->
-> --=20
-> 2.34.1
-
-
-
+Andrew
