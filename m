@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E376C7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA29AC83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D6F8304C;
-	Wed,  2 Jul 2025 03:05:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5DE6082ADA;
+	Wed,  2 Jul 2025 03:05:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OOANgR1Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="daP2Nuvc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2901F8304F; Wed,  2 Jul 2025 03:05:14 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id A96D582F03; Wed,  2 Jul 2025 03:05:17 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0CCB82103
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:05:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6670C82103
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:05:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72c13802133so1282934a34.3
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:05:11 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-2eacb421554so1146253fac.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:05:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751418310; x=1752023110; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=66G9fapzJ81RzS5tUAj0Zga0dRUOr2GyeBipyhRq3yk=;
- b=OOANgR1Yon7onXwPGPGz3Pc//6tbxTEgV+BkHnozAFHU/gQKeoNZSeqb5l82z8sSRB
- uhlRX9ozxesa3sR8HxuZykOvE1uXPtkNlQQB9AljJrmoHfyh91GZw4AZqQVwxofJRCp0
- OZ8+jR/l8fBDNAEvg7J60LLmOwLlGzaRQPHmY=
+ d=konsulko.com; s=google; t=1751418313; x=1752023113; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9sP9Ib06RhRAG1g2FFj21RRlncLu4of1Segn1FoMP2Y=;
+ b=daP2Nuvcm6aDMK+bpl74/UtXf3QXJtlJafHKPmKq868OhWEGfK6k30dd31R4tFMFic
+ VoAlAkH3UQHgd32LWR1JTeGY727P0E3QUWOYyH01Kfwur1xXWe67GR4OpiGf/SVgVfzb
+ +nKKxlaLW6+P7mWpnp779FZFPKUQvH6Uu+FK0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751418310; x=1752023110;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=66G9fapzJ81RzS5tUAj0Zga0dRUOr2GyeBipyhRq3yk=;
- b=t4ivoTLmvSclczqeD22+xO5nqHAOy5R//YnPJDdEuZWsOS1hLrieByDxUAq1jsHUQm
- wHXvkmfBpUwPWF303L86oci8LbVur/+MGbdIX0QiISxO5z34LNVkdjA5oJ028EiONmVh
- fg++HKNI33kBHGjmvxLZrj65OJqGxYpOkWnxCCU75Jnfn2r0sb3z/LUwEvXD1tJm0TrV
- +4zMRoFJ+35w2cY+fnJqL+kI2F/hvLJpfjCB2rknDK71UKRsSxma67NFN6tAgYkVhFFM
- da+j6tJ3tUh7ZkSlDudImByDjSXM0viz2X/Vo7ZWiZripD8qu5BeZs8nYPbCZ1aR3s0L
- K7RQ==
-X-Gm-Message-State: AOJu0Yytf0cZ9EZzhKOEjVJvJyj7QHx2diao+47qlQ3xSzuIMn+3k4Y0
- 4twyTC3VU5YzTDGsGRlEZs1YAF59sR0Vmh9JERzzV+VNvVvBMhiTUdzvSMkMF2mBC+ghw/9K0Va
- l4enzj14=
-X-Gm-Gg: ASbGnctqDW52KdTPpCDA8QdgQUcE8wk4ECZ5PiZZpqj8cNevkxU4ER8bqkYoPfJ8/Kz
- KcF1DSGBZD/RVYQQTiLKp5kv5ml6aiLn9hqIP1aYQLGmhoEXFMcqs7MfuAMEmvpodptv6VlGvwv
- D+dRyYryKjVMYVR5v4rJnVc/FXhTqlJJfe/TSnu6R4Imy1DtJRbqjs/qJqkGXH1EnJ1llbjgaIB
- BMtoEAzcMMamlMZGGrR/keO4duKflMG5RL6uWXec8uE+6k1A0Oo3JD4/4wgl52QnogWkwoh1z9c
- LvrcyrTz3D+d/HJJCCy6KX1OdZAOyAcFKCzL2XaE2h/43PXfE85nyngdSzFA6QvMtOpjoZ/fWvX
- w5ZRy8Wl+nfW4GMXZYNz5+VI=
-X-Google-Smtp-Source: AGHT+IGc07dPTE03xtO/L73mS5odDruFybYtELRgpJLHcVUaFUXf5BeqQYN7i3MXpofC0FhzP2qBGg==
-X-Received: by 2002:a05:6830:71a1:b0:73a:6d48:dec9 with SMTP id
- 46e09a7af769-73b4ca330e0mr894962a34.4.1751418310128; 
- Tue, 01 Jul 2025 18:05:10 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1751418313; x=1752023113;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9sP9Ib06RhRAG1g2FFj21RRlncLu4of1Segn1FoMP2Y=;
+ b=wxTSB6zh9+vNxyuk60N4apcBOHL2kQBE4zetrCpIW+hZ9dZKAx0j0HZYLcMthi8zKE
+ mE1zQQ140cMvRX/YTz0cFXNevIzQMp/UPJIqyA84Bgaq7nO/G8CgMfPjgJCP4/s6l/Op
+ FfxWF2o8gEjVeXmp2xUaExJiC9VFjp1vr9ul0LGLO/w3XiSolemK7aFwrfBwKP4BEon2
+ B7r/wu7RmKzIt+s7s3tfoQT5aW5izsL3IQapmjH6BxNqzcBlXNu98JfuWcnh5qUlDwk/
+ Mosxjdi623U1rTbNg1wED2Z+s36IhKuPcKoE74TKpP6QKlJYOxZMxWWf9t0p20hZjQcW
+ kq6g==
+X-Gm-Message-State: AOJu0YwUN73lwdEvBhpJvzO67btGiHmdR3EZTTVg5lnVNVh7zsiw2o5Z
+ i/XaW0p+shorumtT8Bgl6siQV+vfOtHzuwcOzk0aeyIC0rRjqqgtodvSRQjbrykCIJSTIjZ+xZo
+ Qzb6QNpM=
+X-Gm-Gg: ASbGncvoa2L6bbT11AEHPAPyhQCCvXNumEPUbVaXaJ/RSXskk6djWJLGhuvl7uXWIsK
+ 65Wkn8OR8XjbK4M0bPx0qd4B78wU29wghyvoy1HXMl3BVDuiz9BQL6D4YeCOm2HKsn/UF52TNvH
+ SFZpEfi0Eg9wrREr8Si1FzRD1BtLtk/pP90WKyp0lYAZGpMHY99BKze4x6X7yug4hqpzoy1g67t
+ TJgowPJEYdRJYlrfrr6ckpQ+o4Uzb6fYkXbRtfQMhGkbTCzbmjz/W+kN3SUD8EpDr9on15AVBR9
+ 638AGiEpkUjo2oDaAEXTXIYst71A4F80iRAt5aFsMZwffLeXbNGNd1yDRPmomHtoFB3hfg776dy
+ u+qmM69J6827gWNvtMRZS0j7GOf11lwhx0w==
+X-Google-Smtp-Source: AGHT+IEccvSExtwPcpOGqELzlwl5/6AF0unM5Ualbrp+BAf3Jvj5c3DeZlNE8MJ7s8T1JOYnPX6aJQ==
+X-Received: by 2002:a05:6870:a1a8:b0:2d4:ce45:6993 with SMTP id
+ 586e51a60fabf-2f5c7d80446mr796824fac.30.1751418313047; 
+ Tue, 01 Jul 2025 18:05:13 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afb0e338esm2327406a34.40.2025.07.01.18.05.09
- for <u-boot@lists.denx.de>
+ 586e51a60fabf-2efd4eb261fsm3613967fac.8.2025.07.01.18.05.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 18:05:09 -0700 (PDT)
+ Tue, 01 Jul 2025 18:05:12 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] cmd/Kconfig: Tighten dependencies on CMD_SEAMA
-Date: Tue,  1 Jul 2025 19:05:08 -0600
-Message-ID: <20250702010508.19124-1-trini@konsulko.com>
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: [PATCH] cmd/Kconfig: Tighten dependencies on CMD_BLOB
+Date: Tue,  1 Jul 2025 19:05:11 -0600
+Message-ID: <20250702010511.19141-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,27 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to build this command we need to have configured some other
-board specific features. Express that requirement in Kconfig as well.
+In order for this command to build we need to compile
+drivers/crypto/fsl/fsl_blob.c and this in turn includes
+drivers/crypto/fsl/jr.h which references "ccsr_sec_t" which is only a
+defined type for SYS_FSL_SEC_COMPAT >= 4. Express that requirement in
+Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: Stefano Babic <sbabic@nabladev.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+---
+ cmd/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 89f102855b0f..ceaa86643cb6 100644
+index 19f47c893439..89f102855b0f 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -407,7 +407,7 @@ config BOOTM_RTEMS
- 
- config CMD_SEAMA
- 	bool "Support read SEAMA NAND images"
--	depends on MTD_RAW_NAND
-+	depends on (TARGET_BCMNS || TARGET_BCMNS3) && MTD_RAW_NAND
+@@ -2621,6 +2621,7 @@ config CMD_AES
+ config CMD_BLOB
+ 	bool "Enable the 'blob' command"
+ 	depends on !MX6ULL && !MX6SLL && !MX6SL
++	depends on SYS_FSL_SEC_COMPAT >= 4
+ 	select IMX_HAB if ARCH_MX6 || ARCH_MX7 || ARCH_MX7ULP || ARCH_IMX8M
  	help
- 	  Support reading NAND Seattle Image (SEAMA) images.
- 
+ 	  This is used with the Freescale secure boot mechanism.
 -- 
 2.43.0
 
