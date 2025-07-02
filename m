@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2305CC83038
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 18:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02CD5C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 18:02:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D0EF82F03;
-	Wed,  2 Jul 2025 20:01:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8360C82F30;
+	Wed,  2 Jul 2025 20:02:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bNXojcj3";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="eA8RKJL5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6F5481FEE; Wed,  2 Jul 2025 20:01:56 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id ACB4A81FEE; Wed,  2 Jul 2025 20:02:01 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C85F482F08
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 20:01:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81A6F82F30
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 20:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 562DIT5V018559
- for <u-boot@lists.denx.de>; Wed, 2 Jul 2025 18:01:53 GMT
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 562BJA2S010779
+ for <u-boot@lists.denx.de>; Wed, 2 Jul 2025 18:01:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=412woEduuwr
- r3Ifyd2ZLsCrx5wUr2kIDJGrJFKDrel8=; b=bNXojcj3vKMCVRTdZmkb9OZGcQc
- j8afEOeYW73DDGuLS+UTQK8mOpTNjVuCJ+x8j4ELQaeexeNTbxTYRzT4Nnh4NTVw
- ThAOQi11rB6eOLkkkFPgzTMyE8Egqa0aCO75fsRdtJE3LRud/t2Ljp+CTAOKkfdb
- qTXyC8lC9B1LQa3/EVkX8Wli8NRpBpaVCsC7C2i0JJdT9z3z/ARtLXGeA+X1uwE3
- +jjW8Rbbp872J90Agg8LtBD4nBtFa41s+aMwR19MZuPZoJQSD+dCo8ow4WMGZLN1
- 1rkSeW1W7o/UEzUptsCJrHMSOEZpCu2DuRHcslQx1RI9PrR3EF314oMQLmw==
+ :mime-version:references:subject:to; s=qcppdkim1; bh=49jXLDdKpAh
+ xF8MXrEX9h7rNj+kvf1FkgUJcrW2Dvo0=; b=eA8RKJL5FjjA8QDk6QiNzVtWfGo
+ z1wzfsx9iYAPwjy2Aw9t4/VlAAQMHlJgP54pRWK5Wm4I5PCmq3oqpgRID58l2OPc
+ Hf8rUro6ZTiTpE6twd2IURelg+C0/RPEYGrLRkteVbrJtPnpZQHMvi1MrNsRQf/W
+ Pi43X5vyg6s5phnTu6iApcd1NBJItpKj9Y6fp5qhVTn8r+RqU3XUDWkJKek7/fYb
+ vJuGKxLlXUjBRqVC/dDZKSaseaQt61aRHCKFvhZLhYzRhkOajn/ioXLCMnID/Bjh
+ 2731oqxxiX8YAAaaegUujF6559XUYS6Ri5nx4iMA0UsyfubkxRdX8Sc/B2w==
 Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
  [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47j8fxnmbb-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47mw30amgn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 18:01:53 +0000 (GMT)
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 18:01:57 +0000 (GMT)
 Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-234a102faa3so52079955ad.0
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 11:01:53 -0700 (PDT)
+ d9443c01a7336-2349fe994a9so36530505ad.1
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 11:01:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751479312; x=1752084112;
+ d=1e100.net; s=20230601; t=1751479317; x=1752084117;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=412woEduuwrr3Ifyd2ZLsCrx5wUr2kIDJGrJFKDrel8=;
- b=NDj9ND4qUHgdBH60KspPjZTNaAwuxY/W1/93tpFrxtiyNZUSmXaNuybMfNXNzFDCLU
- 6jYWuuUlX8Jy2JvnUXKLZkUXmHHT43GKP3cXZhuMx7UWsCJQZBHXsL8h+ATkSk7h8cqO
- HDT0PafL0lsCFbb0J1ZDY93KGPgqDi5hOncwjNxBrsK8aX9uWXy6xDqwLKn9XsABpNBB
- tfKCmi/GcgW8wpOVBMCIoWqvVVrv3/guWbuz9VOboBAcM7VAaphgpHcJZAiAB/AaP2It
- XwbPhQLsfC5lOp4RGEJiJ/J7P+tTF7lH/0M5JxQ0oMaV3/kV3GuZwmif0m85gEzGBQOH
- zFCQ==
+ bh=49jXLDdKpAhxF8MXrEX9h7rNj+kvf1FkgUJcrW2Dvo0=;
+ b=xQ0JzEUjJ28ggyolB4D6dcRwmkNwrtFsDk3Fi0QtoT8VOmyt5jko6VhzjRgF9Cw3gB
+ 5fBNKmhMR2r3pIdrEzt7bbwmosA0EyWqBiVQjC0grdciFQdozQdhfLfi94eMeoGTak+Y
+ /zyuyjv2g/NYFBac0zvA1D5HnKtzQoFTjQ6cADHWX/HH21YeaGaJrx5DGKYpNIuCxax2
+ vyiDiFEBbz0kUO49SV13LKwIE+46EK2maDNhl1pmklk5qtd/O1GbOqFFy5wslm7nxT2/
+ JG6LZq+gjUgA6dDi8UZS25/xWs06y8nWSKUhlcGgfjN7LBLZ40KRl8jqwHFXvdrrlbBC
+ RUMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCViQK3mIHuhcZ9HrrcNjgdThUkGm7ALqA9ERthM7uNbfZdx0ohuWXFc8RyE2cevWwHvIw5HSZI=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywk53fel/09/CQvhk676wflClM5s+SQJ5AGf96iLAIJH6nHQPOF
- zrGyJnwDW3GGvSWZ15ipbrh3mAhC2+gtk46ZFXJrmmFUPu9K0VzR+URjntdlBWq+Bjo9CyrYltD
- pq6z89dgn/d2pk0102IKlZQJSegT92hEvFriUl1InyEapqq4uO1ziPMfK
-X-Gm-Gg: ASbGncvqzdjZSqdWLgVgECg4J69vqrb6MoeU9iBpoVDTTmQ0yTR/qlzigzAkYdescMZ
- i6BxHXmn+Ft92IVGlcVCumgV9e3WwHtRKmsDJ3DmO7qz3/rR3CMUQilAgJ72sZyPwhx93h+2qXa
- TtSORIoIqDJmEa116Qi34uj6DdKrzb/TL3IrzqB7XS0FvOVGqa9MGs3CKz1m7miD7V6deFG/oP2
- V1So+k3X18gPY8d7CppFAZb6uU4bgRRxdlEvoBIWsaH4FHjSPB5lYQOF7v68j9HeFjczMM3bo0x
- GD7LnYsW4egej41x85S/KL6udKuDBJjArXHV96+aFsLrsoE+/nItSJ0WraHHoxH4ak5sTzAO1fi
- eYF6sezwfRiNxke59t2HyTCiyrOshFzuYm1zQ/jg+Sg==
-X-Received: by 2002:a17:903:1a27:b0:235:eb8d:7fff with SMTP id
- d9443c01a7336-23c6e58df66mr66200755ad.28.1751479312068; 
- Wed, 02 Jul 2025 11:01:52 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH1AHzv/e1Ral9cnLGKcEjX7q26CP1uVod5oOmU5nJoB0oWgg2MK5cU0bk+Hha3OfkWbs6gKg==
-X-Received: by 2002:a17:903:1a27:b0:235:eb8d:7fff with SMTP id
- d9443c01a7336-23c6e58df66mr66200145ad.28.1751479311511; 
- Wed, 02 Jul 2025 11:01:51 -0700 (PDT)
+ AJvYcCVIxm2eHKq2l1dtJMl7YG69VwU4kcMnYSKcH+CoEU6LQ4J7cynz3EHZhmFHTwjQFZ+ypEjAMaE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyrDDhRhoSRHZ/3FDsprUZad8zKyYuf4SHRDS7fgYDRSqQe0JZY
+ U+q/1MaRR8ceO6cuPkQ6h5pq76g8HQADIcWh5H5ZJPbrqd42wuuH0t3qVssJ+H8ln1ITLVay3Ew
+ tfkp0jgLCGEt4Nc5KmQHy41gFxfHX4QA22g/vLLvCySzmgEXJNtBeuT3I
+X-Gm-Gg: ASbGncv6sw5Q76jkSB+3mqfjpAYWSpVO+GniQKTFyZcQGBIdFd3rbOQMWPw62VYvKg8
+ 744inrToHvHX706W8C+j/Kh97rfoNeklE0fDxNU+wdtH32kDsoOI7aaVkVJY+EKIhQKzBy8OztO
+ ZJdGmjtWPWt1Djjy+iHlQ9xd6AZWirWudR4/QBt255Myyyjbui4ZLIKDkwlUs4TOGufPoyRmqih
+ gAnD5nBQHNeAWOELRbNKmh/l9HzzkIlAOveONsCmlp455vgWwRtHw7//PVNJ9Loth8yBiH0roAG
+ hLHGKp+BuhNvV/53/b9naxtvVfCniwpo/nfYp4HbNFGmhuPsRl3EHczVUC0LgIfn5S5ULGNlQKy
+ Gogz4tjMIU+Xu3u2J0g2pgWqkHKXSMvmB2k9sBjWyfw==
+X-Received: by 2002:a17:903:2b04:b0:234:8c52:1f9b with SMTP id
+ d9443c01a7336-23c6e5706b7mr63805595ad.43.1751479316674; 
+ Wed, 02 Jul 2025 11:01:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGMC7Fr2xfNPb5s5Zvn1xp9PXHGPQLR7pGcP+OfA6PA4MX/eg2i3Q8fxEyEngVg/lfserc7Tw==
+X-Received: by 2002:a17:903:2b04:b0:234:8c52:1f9b with SMTP id
+ d9443c01a7336-23c6e5706b7mr63805065ad.43.1751479316207; 
+ Wed, 02 Jul 2025 11:01:56 -0700 (PDT)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23acb2e39besm143315345ad.13.2025.07.02.11.01.47
+ d9443c01a7336-23acb2e39besm143315345ad.13.2025.07.02.11.01.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 11:01:51 -0700 (PDT)
+ Wed, 02 Jul 2025 11:01:55 -0700 (PDT)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, jh80.chung@samsung.com,
@@ -90,37 +90,36 @@ To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  quic_varada@quicinc.com, sughosh.ganu@linaro.org,
  balaji.selvanathan@oss.qualcomm.com, miquel.raynal@bootlin.com,
  sjg@chromium.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v3 2/4] soc: qcom: cmd-db: Add cmd_db_read_slave_id() &
- cmd_db_read_aux_data() functions
-Date: Wed,  2 Jul 2025 23:31:31 +0530
-Message-Id: <20250702180133.1889709-3-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v3 3/4] mach-snapdragon: fixup power-domains
+Date: Wed,  2 Jul 2025 23:31:32 +0530
+Message-Id: <20250702180133.1889709-4-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com>
 References: <20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAyMDE0OSBTYWx0ZWRfX4KiESWO3kTTq
- eIZoSDCbHIc+dxQfpAMn2fFGns1ACLL3LCAf9jq85Q6mby3fdoh7TnmTLGgx5WSRk0ilZ6NhDof
- vmsF3I0woJ4UnJ3ziAewxXrI6pSnR0mpRBnHe+aXEKujx9DM33igIbDh5MVzmcizt1uZwCwouIg
- 4xLjjD1BoKgXcsgyo006uqPUB84cyWp+UXRanaQFCBR4+i8nl/fXMp+A7lM0tEaCKYf2qEr+Ol0
- 0g6jJt6bftasQ9cP74fn6D8pP+7suzgfVZxUXGKHAcYY9nm99UrrbmBloWw6KiVNBmaX+2rIjLW
- NWUt0iEiz2SbIvOXj4CR2A29KlvXy24wat6MwAisOeXCVnNLNidP2aNtnUVPPEkdoxNGTrTgKWs
- ss6c/CY4aN5DXNM8vDcDiE64NL6Gxy/Bb8XTZ09aeqdjLv3XCRrE1eccLAEcCx3PoAheUel0
-X-Proofpoint-GUID: FqxsI94lkUlr0w7b0S4N-Qfe7oOayTrx
-X-Proofpoint-ORIG-GUID: FqxsI94lkUlr0w7b0S4N-Qfe7oOayTrx
-X-Authority-Analysis: v=2.4 cv=TqPmhCXh c=1 sm=1 tr=0 ts=68657411 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=CY4I5Krl c=1 sm=1 tr=0 ts=68657415 cx=c_pps
  a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=BD0JAyWONCbPKr0S2ysA:9
+ a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=wbMr1Ebaa0m4whefL-8A:9
  a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-ORIG-GUID: 2ElkyqVd3PaRv6cAGxClQf4X9NDyTx14
+X-Proofpoint-GUID: 2ElkyqVd3PaRv6cAGxClQf4X9NDyTx14
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAyMDE0OSBTYWx0ZWRfX/7e6uxukwMAL
+ 41AsxxQVBpQHTiHPTzTEI74suBrEsCgaTXD/ZdXgdakdlR3r3m4YGU+hC0MEKFYkGP+GyOkecG8
+ 0AMk3jWuiZ0jhQ/q+t/vRXvmZ/BUD/japthiO4GCRxfWcLz8FOS8SP4+Y5qqSXd0IgU0jVGB0iG
+ LK5Gh+96uZjYzuncyR9WtcQpLR5pzYZspJIDme7hcf/tfN0qUp5D3KZ+mgrAAAT2OeP9n8+Ldv5
+ HNijnlc9H/OZjIhOjPmvFTT0SjAaK0pmrcp+vjW1vk1naxBOu5oMv2EIWyBEWfR0vf144lDcquc
+ RxIsF6BjcTNFxDvV/BFCVgzL0ocouSCiccxwA7VCf7KOjpPRmBfq0A+3n+8TLZuBNGoVzmvam7v
+ twi9byKRTYueBh1pHrs/zL8xtPdIzca07cvaOdkq7Ny67UCfWLcbgnVESAZprk0a0HZV2jds
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
  definitions=2025-07-02_02,2025-07-02_04,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 mlxlogscore=999 suspectscore=0 adultscore=0
- phishscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0 mlxscore=0
- impostorscore=0 spamscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507020149
+ adultscore=0 mlxlogscore=999 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 phishscore=0 suspectscore=0 bulkscore=0
+ malwarescore=0 impostorscore=0 spamscore=0 classifier=spam authscore=0
+ authtc=n/a authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2505280000 definitions=main-2507020149
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,94 +136,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Partially reverted commit "soc: qcom: cmd-db: drop unused
-functions" by restoring only the cmd_db_read_slave_id() and
-cmd_db_read_aux_data() functions, which were removed in that
-commit. These functions are required for the RPMH Power Domain
-Driver.
+RPMH power domain properties were initially removed from the
+device tree due to the absence of driver support. Support for
+SA8775P_MMCX and SA8775P_MMCX_AO has now been added in the RPMH
+Power Domain Driver for the SA8775P platform.
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
 v3:
-- No changes to this patch in v3
+- Removed OF_LIVE_SA8775P config, since there is no SA8775P specific fixups are done
 
 v2:
-- No changes to this patch in v2
+- Removed the power domain fixups, since the power domains are handled in qcom-rpmhpd driver
 ---
- drivers/soc/qcom/cmd-db.c | 45 +++++++++++++++++++++++++++++++++++++++
- include/soc/qcom/cmd-db.h |  2 ++
- 2 files changed, 47 insertions(+)
+ arch/arm/mach-snapdragon/of_fixup.c | 32 +----------------------------
+ 1 file changed, 1 insertion(+), 31 deletions(-)
 
-diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-index 67be18e89f4..d0a6047b8a6 100644
---- a/drivers/soc/qcom/cmd-db.c
-+++ b/drivers/soc/qcom/cmd-db.c
-@@ -183,6 +183,51 @@ u32 cmd_db_read_addr(const char *id)
+diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+index b398c6b7b9f..e36c541ac42 100644
+--- a/arch/arm/mach-snapdragon/of_fixup.c
++++ b/arch/arm/mach-snapdragon/of_fixup.c
+@@ -19,6 +19,7 @@
+ #define pr_fmt(fmt) "of_fixup: " fmt
+ 
+ #include <dt-bindings/input/linux-event-codes.h>
++#include <dt-bindings/power/qcom-rpmpd.h>
+ #include <dm/of_access.h>
+ #include <dm/of.h>
+ #include <event.h>
+@@ -129,36 +130,6 @@ static void fixup_usb_nodes(struct device_node *root)
+ 	}
  }
- EXPORT_SYMBOL_GPL(cmd_db_read_addr);
  
-+/**
-+ * cmd_db_read_slave_id - Get the slave ID for a given resource address
-+ *
-+ * @id: Resource id to query the DB for version
-+ *
-+ * Return: cmd_db_hw_type enum on success, CMD_DB_HW_INVALID on error
-+ */
-+enum cmd_db_hw_type cmd_db_read_slave_id(const char *id)
-+{
-+	int ret;
-+	const struct entry_header *ent;
-+	u32 addr;
-+
-+	ret = cmd_db_get_header(id, &ent, NULL);
-+	if (ret < 0)
-+		return CMD_DB_HW_INVALID;
-+
-+	addr = le32_to_cpu(ent->addr);
-+	return (addr >> SLAVE_ID_SHIFT) & SLAVE_ID_MASK;
-+}
-+
-+/**
-+ * cmd_db_read_aux_data() - Query command db for aux data.
-+ *
-+ *  @id: Resource to retrieve AUX Data on
-+ *  @len: size of data buffer returned
-+ *
-+ *  Return: pointer to data on success, error pointer otherwise
-+ */
-+const void *cmd_db_read_aux_data(const char *id, size_t *len)
-+{
-+	int ret;
-+	const struct entry_header *ent;
-+	const struct rsc_hdr *rsc_hdr;
-+
-+	ret = cmd_db_get_header(id, &ent, &rsc_hdr);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	if (len)
-+		*len = le16_to_cpu(ent->len);
-+
-+	return rsc_offset(rsc_hdr, ent);
-+}
-+
- static int cmd_db_bind(struct udevice *dev)
- {
- 	void __iomem *base;
-diff --git a/include/soc/qcom/cmd-db.h b/include/soc/qcom/cmd-db.h
-index 1190f2c22ca..16609ac9d78 100644
---- a/include/soc/qcom/cmd-db.h
-+++ b/include/soc/qcom/cmd-db.h
-@@ -21,6 +21,8 @@ enum cmd_db_hw_type {
+-/* Remove all references to the rpmhpd device */
+-static void fixup_power_domains(struct device_node *root)
+-{
+-	struct device_node *pd = NULL, *np = NULL;
+-	struct property *prop;
+-	const __be32 *val;
+-
+-	/* All Qualcomm platforms name the rpm(h)pd "power-controller" */
+-	for_each_of_allnodes_from(root, pd) {
+-		if (pd->name && !strcmp("power-controller", pd->name))
+-			break;
+-	}
+-
+-	/* Sanity check that this is indeed a power domain controller */
+-	if (!of_find_property(pd, "#power-domain-cells", NULL)) {
+-		log_err("Found power-controller but it doesn't have #power-domain-cells\n");
+-		return;
+-	}
+-
+-	/* Remove all references to the power domain controller */
+-	for_each_of_allnodes_from(root, np) {
+-		if (!(prop = of_find_property(np, "power-domains", NULL)))
+-			continue;
+-
+-		val = prop->value;
+-		if (val[0] == cpu_to_fdt32(pd->phandle))
+-			of_remove_property(np, prop);
+-	}
+-}
+-
+ #define time_call(func, ...) \
+ 	do { \
+ 		u64 start = timer_get_us(); \
+@@ -171,7 +142,6 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
+ 	struct device_node *root = event->data.of_live_built.root;
  
- #if IS_ENABLED(CONFIG_QCOM_COMMAND_DB)
- u32 cmd_db_read_addr(const char *resource_id);
-+enum cmd_db_hw_type cmd_db_read_slave_id(const char *resource_id);
-+const void *cmd_db_read_aux_data(const char *resource_id, size_t *len);
+ 	time_call(fixup_usb_nodes, root);
+-	time_call(fixup_power_domains, root);
  
- #else
- static inline u32 cmd_db_read_addr(const char *resource_id)
+ 	return 0;
+ }
 -- 
 2.34.1
 
