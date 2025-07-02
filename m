@@ -4,35 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8795AC77B7C
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620D8C83F04
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:30:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4CA3830C8;
-	Wed,  2 Jul 2025 17:26:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F14FF82A76;
+	Wed,  2 Jul 2025 17:26:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE44282103; Wed,  2 Jul 2025 17:26:29 +0200 (CEST)
+ id AB29282A76; Wed,  2 Jul 2025 17:26:32 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id CE3488309C
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:26:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0F06B82103
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:26:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 71D0E3025;
- Wed,  2 Jul 2025 08:26:12 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A4F8B2F9D;
+ Wed,  2 Jul 2025 08:26:14 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.38.90])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 88A073F6A8;
- Wed,  2 Jul 2025 08:26:26 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AAE0E3F6A8;
+ Wed,  2 Jul 2025 08:26:27 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, abdellatif.elkhlifi@arm.com,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-Subject: [PATCH 24/25] fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
-Date: Wed,  2 Jul 2025 16:25:27 +0100
-Message-Id: <20250702152528.1180414-25-abdellatif.elkhlifi@arm.com>
+ Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH 25/25] fwu_arm_psa: Document FWU support for Arm PSA
+Date: Wed,  2 Jul 2025 16:25:28 +0100
+Message-Id: <20250702152528.1180414-26-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
 References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
@@ -56,58 +63,209 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Set Boot0001 to point to the ESP partition path
-
-On-disk FWU requires setting the boot option to where the
-EFI System Partition (ESP) is so U-Boot's capsule driver
-can detect the ESP partition and start the FWU.
-
-Corstone-1000 supports on-disk FWU on FVP.
-The ESP partition is at mmc 1:1 and is accessible with boot option 1.
-
-To avoid setting manually Boot0001 at factory level, Boot0001 is
-set in the bootcmd. So, before starting the on-disk FWU, the bootcmd
-will be executed and Boot0001 will be set automatically.
+Add a README
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>
 ---
- board/armltd/corstone1000/corstone1000.env | 8 ++++++++
- configs/corstone1000_defconfig             | 2 +-
- 2 files changed, 9 insertions(+), 1 deletion(-)
+ MAINTAINERS                      |   1 +
+ doc/develop/uefi/fwu_arm_psa.rst | 153 +++++++++++++++++++++++++++++++
+ doc/develop/uefi/index.rst       |   1 +
+ 3 files changed, 155 insertions(+)
+ create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
 
-diff --git a/board/armltd/corstone1000/corstone1000.env b/board/armltd/corstone1000/corstone1000.env
-index ee318b1b1c3..6e631b12bc2 100644
---- a/board/armltd/corstone1000/corstone1000.env
-+++ b/board/armltd/corstone1000/corstone1000.env
-@@ -1,5 +1,13 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
+diff --git a/MAINTAINERS b/MAINTAINERS
+index fdf34c74049..a75bc1d2379 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1231,6 +1231,7 @@ FWU ARM PSA
+ M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+ M:	Davidson kumaresan <davidson.kumaresan@arm.com>
+ S:	Maintained
++F:	doc/develop/uefi/fwu_arm_psa.rst
+ F:	include/fwu_arm_psa.h
+ F:	lib/fwu_updates/fwu_arm_psa.c
  
-+/*
-+ * Copyright 2023, 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ */
+diff --git a/doc/develop/uefi/fwu_arm_psa.rst b/doc/develop/uefi/fwu_arm_psa.rst
+new file mode 100644
+index 00000000000..f91fd85f573
+--- /dev/null
++++ b/doc/develop/uefi/fwu_arm_psa.rst
+@@ -0,0 +1,153 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 +
- usb_pgood_delay=250
- boot_bank_flag=0x08005006
- kernel_addr_r=0x88200000
-+prepare_ondisk_fwu=
-+	if mmc dev 1; then
-+		efidebug boot add -B 1 OnDiskFWU mmc 1:1 / ;
-+	fi;
-diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
-index d52d39a0b36..e02fb7cca67 100644
---- a/configs/corstone1000_defconfig
-+++ b/configs/corstone1000_defconfig
-@@ -25,7 +25,7 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=3
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyAMA0 loglevel=9 ip=dhcp earlyprintk"
--CONFIG_BOOTCOMMAND="echo Loading kernel from $kernel_addr to memory ... ; unzip $kernel_addr 0x90000000; loadm 0x90000000 $kernel_addr_r $filesize; usb start; usb reset; run distro_bootcmd; bootefi $kernel_addr_r $fdtcontroladdr;"
-+CONFIG_BOOTCOMMAND="echo Loading kernel from $kernel_addr to memory ... ; unzip $kernel_addr 0x90000000; loadm 0x90000000 $kernel_addr_r $filesize; usb start; usb reset; run prepare_ondisk_fwu ; run distro_bootcmd; bootefi $kernel_addr_r $fdtcontroladdr;"
- CONFIG_CONSOLE_RECORD=y
- CONFIG_SYS_CBSIZE=512
- CONFIG_LOGLEVEL=7
++Firmware Update (FWU) Support for Arm PSA
++==========================================
++
++This README provides an overview of the Firmware Update (FWU) support
++implemented in U-Boot for Arm `PSA Certified`_ platforms, such as
++Corstone-1000. The feature aligns with the Platform Security Firmware Update
++specification for the A-profile Arm Architecture
++(see `DEN0118 v1.0 A specification`_) and leverages the Trusted Services (TS)
++framework to interact with Secure world update agent.
++
++Overview
++--------
++
++The FWU subsystem enables secure  firmware updates by
++delegating the update management to a Secure world agent. U-Boot acts as the
++FWU client, coordinating updates via a well-defined set of ABIs over the FF-A
++interface (see :doc:`Arm FF-A Support <../../arch/arm64.ffa>`).
++
++FWU for Arm PSA supports both on-disk and standard capsule updates.
++
++Key Features
++------------
++
++1. PSA Firmware Update Initialization
++-------------------------------------
++
++- Initialization of the update agent using the FF-A transport and discovery of
++  the Trusted Services FWU SP.
++
++- Discovery of the version of the ABIs using FWU_DISCOVER ABI.
++
++- Establishment and sharing of communication buffers between U-Boot
++  (Normal world) and Secure world.
++
++2. ESRT Support
++---------------
++
++Retrieval of ESRT (EFI System Resource Table) data from Secure world using
++FWU_READ_STREAM ABI, enabling compliance with UEFI standards
++(see `UEFI v2.10 specification`_).
++
++3. UEFI Capsule Handling
++------------------------
++
++- Runtime checks for capsule flags as per UEFI 2.10 specification:
++
++    - CAPSULE_FLAGS_PERSIST_ACROSS_RESET
++
++    - CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE
++
++    - CAPSULE_FLAGS_INITIATE_RESET
++
++- Support for keeping the FMP payload header in Arm PSA mode to preserve
++  critical metadata required by Secure world.
++
++4. Staging and Update Flow
++--------------------------
++
++- Full support for update staging flow as per PSA spec:
++
++    - FWU_BEGIN_STAGING
++
++    - FWU_END_STAGING
++
++    - FWU_CANCEL_STAGING
++
++    - FWU_WRITE_STREAM
++
++- Capsules can contain multiple payloads (including start/end markers
++  and the update content).
++
++5. Directory Access
++-------------------
++
++- Reading the FWU directory from Secure world using FWU_READ_STREAM ABI.
++
++6. Image Update Lifecycle
++-------------------------
++
++- Implementation of get_image_info() and set_image() using raw EFI firmware
++  services provided by the FMP driver for raw images.
++
++- FWU_ACCEPT_IMAGE ABI issued on ExitBootServices() to commit successfully
++  booted trial images.
++
++- Option to disable automatic acceptance on ExitBootServices() via
++  CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES.
++
++Configuration Options
++---------------------
++
++To enable FWU support for Arm PSA, include the following options in your board
++configuration:
++
++CONFIG_FWU_ARM_PSA=y enables the PSA-compliant firmware update client in U-Boot.
++
++CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES=y Enables auto-acceptance on
++ExitBootServices(). This option is enabled by default. It can be disabled if
++image acceptance should not be done at ExitBootServices().
++
++Platform Integration: Corstone-1000
++-----------------------------------
++
++- Corstone-1000 is the reference implementation for the FWU Arm PSA feature.
++
++- ESP partition detection is automated by setting Boot0001 in the U-Boot bootcmd.
++
++ABIs Implemented
++----------------
++
++The following ABIs from the PSA FWU specification have been implemented:
++
++    - FWU_DISCOVER
++
++    - FWU_BEGIN_STAGING
++
++    - FWU_END_STAGING
++
++    - FWU_CANCEL_STAGING
++
++    - FWU_OPEN
++
++    - FWU_WRITE_STREAM
++
++    - FWU_READ_STREAM
++
++    - FWU_COMMIT
++
++    - FWU_ACCEPT_IMAGE
++
++ExitBootServices() Integration
++------------------------------
++
++- The U-Boot FWU client performs several key actions during ExitBootServices():
++
++- Notifies Secure world about successful boot.
++
++- Accepts updated images in trial state.
++
++- Supports board-level override of fwu_notify_exit_boot_services() for custom
++  behavior.
++
++Contributors
++------------
++   * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
++   * Davidson kumaresan <davidson.kumaresan@arm.com>
++
++.. _`DEN0118 v1.0 A specification`: https://developer.arm.com/documentation/den0118/latest/
++.. _`PSA Certified`: https://www.psacertified.org/
++.. _`UEFI v2.10 specification`: https://uefi.org/specs/UEFI/2.10/
+diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
+index e26b1fbe05c..573630740a0 100644
+--- a/doc/develop/uefi/index.rst
++++ b/doc/develop/uefi/index.rst
+@@ -10,6 +10,7 @@ can be run an UEFI payload.
+ .. toctree::
+    :maxdepth: 2
+ 
++   fwu_arm_psa.rst
+    uefi.rst
+    u-boot_on_efi.rst
+    iscsi.rst
 -- 
 2.25.1
 
