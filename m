@@ -4,139 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E41E2C7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 06:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A51C83013
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 07:08:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FD4B81FEE;
-	Wed,  2 Jul 2025 08:57:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EC3581FEE;
+	Wed,  2 Jul 2025 09:08:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="op5Wnl9R";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AncY6tqR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D16A982103; Wed,  2 Jul 2025 08:57:44 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20628.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::628])
+ id 9F5A482103; Wed,  2 Jul 2025 09:08:40 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D98D8003E
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 08:57:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8C2581E13
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 09:08:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yyxCfbSdysONzkvP4WkMQqE6zI1iTHhsRUVfjUX2lhGoiFY2O6gmDibFUWcPPoEZtr8z+vfKkRB3y1XJZUH+em6IN6chnMbYz+ZF/iVIwvucT4qO4MHfqIH40m0mo4nq4+bn7dRPT36FJmX3T+w1sX6D8ACukspPdQ0X8Q6zMhzTvo57H5cilETt0u8qqXNHayFqurA3bpOZ6Umft0yCZJCyAcKbfVH5udEu2nlKBRVX6jD3KzYnjS5SpN4xtVC9aS/BkUAjoJ/1ikSQdJtgI4LbJa9sBM95glqYWbJ1RBqgbFQVnTTeB//1xDAoi1h2UB431gTJUoLOK72wZFIN1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=07vToAXC9ApeA85JWIeug2N3IEtrOJImi/kPzJBFXPA=;
- b=nTD9qkRbrjrRNsQzmCKnZ5k6lY+a4h2QQjnyiwbjTScNZvZM9onoZQBeNEmzyhZB7vh9Ph0s9WzlkjzCttYwzSEG3C5Z412urg+GIFc7pqBod2y2bNrg7iQYlTf884rQyiLr6kMxmKFBL84fujImr8ijT/O9ngHOa5lFis6+bvXOtIkWgvsFx/vzNZARslPCD9vcudVx/I3UC4NMiQGwFUL7ho4ngQuSpXXn/j+NSz/tISd9KAJp74a/GeUzvbTqJjrPfEYsZ+rKM/J7+VLvIBIFSciH1YKIVgOu5Sdp1OYgw0k0DL8Qx9xzpWgNsirjEo72vT7oYpUAx5vUl2iXfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=07vToAXC9ApeA85JWIeug2N3IEtrOJImi/kPzJBFXPA=;
- b=op5Wnl9R0pT74KZwxuxenV9Ro4k46ZTgiUunK/HyP/o0HQy5BDEsKTTDUHy9My2lKaHLR3YHrGvKVaTzoDo7vHRzllos9BjH+3Ghl4h4N8/xUR90i753/p+T4OjICLxNpUD2GmTD/oWM1h/A1zjWwHltbzcnDphfmICLIKlbcWY=
-Received: from BN9PR03CA0360.namprd03.prod.outlook.com (2603:10b6:408:f6::35)
- by MW5PR12MB5622.namprd12.prod.outlook.com (2603:10b6:303:198::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.19; Wed, 2 Jul
- 2025 06:57:37 +0000
-Received: from BN2PEPF000055DB.namprd21.prod.outlook.com
- (2603:10b6:408:f6:cafe::b6) by BN9PR03CA0360.outlook.office365.com
- (2603:10b6:408:f6::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.30 via Frontend Transport; Wed,
- 2 Jul 2025 06:57:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN2PEPF000055DB.mail.protection.outlook.com (10.167.245.5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8922.1 via Frontend Transport; Wed, 2 Jul 2025 06:57:35 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 2 Jul
- 2025 01:57:34 -0500
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 2 Jul 2025 01:57:29 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <tudor.ambarus@linaro.org>, <j-humphreys@ti.com>, <marex@denx.de>,
- <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
- <p-mantena@ti.com>, <git@amd.com>, Ashok Reddy Soma
- <ashok.reddy.soma@amd.com>
-Subject: [PATCH] spi: cadence_qspi: Set tshsl_ns to at least one sclk_ns
-Date: Wed, 2 Jul 2025 12:27:17 +0530
-Message-ID: <20250702065717.3871435-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1751440114; x=1752044914; i=xypron.glpk@gmx.de;
+ bh=W9hP8Wqm4jzNDXumKD/fZtZi2XM+49yGfYoRjgSH5S0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=AncY6tqRpHs1wCaY0SMgJgD0va3M9TGIoNHhD3eCkEg4FTGclvQd25xYS/6U5HQ2
+ q6GzdFhZpUsKBolyZ4ao05gxyZHLJU8wkVGmyQrzKAuOoowYpAD18cEN6uQwJwELR
+ gb/Ckk0eFFA2WHpp+D1rqD5/bKyFwIR5sdmGD/pPsgTdaQiI+qBW0DmxfhhBTEmtZ
+ koFqOp6oAHVb4lgNNj85Rfd2fJgxlvbR7Ngf/WxEeY84MFKoU5kvIzfGHAPYQ3N44
+ vt09TOV61NRbI6P0jvze+obhazMOdA3nVWVHqzba96YzkNK/+FK0dfg1qTn2jG7P3
+ uZ30fLTulAo9pg7jqQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N3siG-1ufUQs1XQO-00thsg; Wed, 02
+ Jul 2025 09:08:34 +0200
+Message-ID: <d56a6320-1007-41da-bb4d-640c8e9b5db8@gmx.de>
+Date: Wed, 2 Jul 2025 09:08:33 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DB:EE_|MW5PR12MB5622:EE_
-X-MS-Office365-Filtering-Correlation-Id: 613aedca-e0be-4c07-8a3b-08ddb935b9b5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|7416014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2moqazWZ2b5y0iRylWXbMRCTbtSfl6bQzuMub2qm68D9NvHn4cl1SPnIe7Ui?=
- =?us-ascii?Q?VXLjZfkqR8IKCf8zFJzfnDdJySY67nzCmDHXfZ/coFlL1S23EN4T6eeZyYHl?=
- =?us-ascii?Q?tx2GSWSTxQT88b4+RcNSgXeRaoWFyq1FPZEfdmkjwqYtkGlQtvh9Fsf8xkxF?=
- =?us-ascii?Q?NL2Bg3rTBZcroWYS3jHCoGPVCaDpDWsZrmRel+WTUKJuyAx0aOMaE8INZqfz?=
- =?us-ascii?Q?NEH1XWzrE2ZwOFB2DkJYAodWsRlJEgovH/A6YAbmSGjra/NK7KVnzm2XUsEe?=
- =?us-ascii?Q?571PfkX9bOntn9w5j4kTmHKlmVhsPB/6ZCd+7kPimYl4DzeZtaKuwUth/EsW?=
- =?us-ascii?Q?lz8Q9miAF4bT5LNv9mWWJiCIwdeWHFIRURMJjQKNzGWaTHaZpQLp9SyqDLe5?=
- =?us-ascii?Q?TZrq2JMFuJ9YxB0SXO6OtwrSF03fMaTeBcEmTkFd04aOu2r/BHgwF3hGralO?=
- =?us-ascii?Q?1UN5P41Oo4kaS24oc6xBKj52lmZwMWT7RHvFr2l+HXqPOqNUUS+utWSEbLUx?=
- =?us-ascii?Q?2MtFFgGVlI9hhzWAdUMa6w1yEqrlv9pbMlXhzmMVjAa6olkE/MwuPpQ0gzMk?=
- =?us-ascii?Q?KWXKrqLVsY9RI6Zx3W3JDHdxjq1PBjnoxoJjKoK1Zxhk3AIpy0tRzzKh7abt?=
- =?us-ascii?Q?C7vDHRS7D8u1IWNKG2fL3VS3333aZJ5MA3oCP4cszTdV+LYYZnsR46hJihzY?=
- =?us-ascii?Q?bMp9C8WNWEObNmF6jGvlOCqlIVoMq3XxD6JbJf28zSHrtAFNyWp8xhYMFAPy?=
- =?us-ascii?Q?zJrqRiF4TFADBsU26b9srO3j8JmNhOzr2V6lRotyUbT+4hiCF6MChrMCLMOn?=
- =?us-ascii?Q?DC0HhNSiwxSyYyJg+delwZWeLEhBFt20bmRt+U2hR4yE2KJ70z7Euq/gkcua?=
- =?us-ascii?Q?5jqA4ruQ+SsRz5GOklx6nRhGBykg9miiOcbWnuTuX5l0cRKceGdGTv6LvNmB?=
- =?us-ascii?Q?7PcdsNEaVdUBUcbbIqcFn/DNzXw41NBeY9Zk+1TkJMIAapIWt79xz41Q8ysT?=
- =?us-ascii?Q?Yg/8P4eN0eDLvZIFqXIKJjh5OWHlHWDtgZ2Vhh9Vwr4fq14F+S1iVe86ZWd9?=
- =?us-ascii?Q?NSv6tXVPpDqrfEHuW95LdGdy+Xn1wrFsAu87YNyFKkolH1Y2byAmXzBehyJI?=
- =?us-ascii?Q?P4W7WdDJwX6q7fW648DEjJwuvnhkiK5ui57qIMXd0dG/KGHRgwvzOFN3+I0o?=
- =?us-ascii?Q?mTk+QLlrPIa5s5ZUhDKzRFdU/5vDircGCZuxXiCOMSdPJHlvLLjjaCZUUs5Y?=
- =?us-ascii?Q?omP2OkVxBT/4KwbmIF79NU9Gp8GGISx+7RtvL1LLBcayloehaOAWOtB5tBIa?=
- =?us-ascii?Q?l131EsIV4HAkuUS0NJ7IyrAuOZ9rVozpUxm75yhsiuDI5e4/aWV3Uirl2tjQ?=
- =?us-ascii?Q?l86sCLhMYZCRBgMLZXJiXc/7R8t2FaqLsP5qOHrLIDJgxXOQMqpht8L83Pnw?=
- =?us-ascii?Q?tq3t/+YAm/fqHwGQ/j7P5V+77E2LzOV0fXmH57Fj2SD6k4PjHyy1wHmh31uu?=
- =?us-ascii?Q?zrs7PDe5isMGEy6UuKS0TTMsVEZyK2YOZH1T?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(7416014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2025 06:57:35.6140 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 613aedca-e0be-4c07-8a3b-08ddb935b9b5
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DB.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR12MB5622
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] efi_loader: Prevent dereference of uninitialised
+ variable
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250701-efiloader_fix-v1-0-f3c6e0b0ae43@linaro.org>
+ <20250701-efiloader_fix-v1-2-f3c6e0b0ae43@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250701-efiloader_fix-v1-2-f3c6e0b0ae43@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:QNRNh8oiQ1SEs9K+/8psWkR2Do8cGniwd9Mp66b1JC6P+H2JNb8
+ 4z6qO7mvmCafc9UGPgwvl9YoYI5xIXe/m715sv3+WmkfMe4s+jRHHXJz/93eatyCqzeyAvA
+ Zb/KJ4H/FMcFMQObyPUwJLUxqrbNWuNYteHEWXtIspIH2jj4vgoCx1Hgm+tw5LtFVU8YVdh
+ CF2KwfJBrz3PIpLcUTWNQ==
+UI-OutboundReport: notjunk:1;M01:P0:UdwmjB7P4zc=;Ypqq3+wGCQew6i2M8hAx93D5nDy
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,37 +128,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-tshsl_ns is the clock delay for chip select deassert. This is the delay in
-master reference clocks for the length that the master mode chip select
-outputs are de-asserted between transactions.
+On 01.07.25 15:38, Andrew Goodbody wrote:
+> If phandler is returned as NULL from efi_search_protocol then
+> protocol_interface is never assigned to. Add a check to prevent
+> protocol_interface being dereferenced in this case. Small refactor to
+> coalesce the two identical NULL checks of phandler.
+>=20
+> This issue found by Smatch.
+>=20
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>   lib/efi_loader/efi_http.c | 14 +++++++-------
+>   1 file changed, 7 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/efi_http.c
+> index 189317fe2d2..ce3a7a831ca 100644
+> --- a/lib/efi_loader/efi_http.c
+> +++ b/lib/efi_loader/efi_http.c
+> @@ -463,18 +463,18 @@ static efi_status_t EFIAPI efi_http_service_bindin=
+g_destroy_child(
+>  =20
+>   	efi_search_protocol(child_handle, &efi_http_guid, &phandler);
+>  =20
+> -	if (phandler)
+> -		protocol_interface =3D phandler->protocol_interface;
+> -
 
-The minimum delay is always SCLK period to ensure the chip select is never
-re-asserted within one SCLK period.
+If ChildHandle does not support the protocol that is being removed, we=20
+must return EFI_UNSUPPORTED and should not continue here.
+See 11.6.3 EFI_SERVICE_BINDING_PROTOCOL.DestroyChild() in the UEFI=20
+specification.
 
-That is why tshsl_ns delay should be at least one sclk_ns value. If it is
-less than sclk_ns, set it equal to sclk_ns.
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/spi/cadence_qspi_apb.c | 4 ++++
- 1 file changed, 4 insertions(+)
+>   	ret =3D efi_delete_handle(child_handle);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return EFI_EXIT(ret);
+>  =20
+> -	http_instance =3D (struct efi_http_instance *)protocol_interface;
+> -	efi_free_pool(http_instance->http_load_addr);
+> -	http_instance->http_load_addr =3D NULL;
+> +	if (phandler) {
+> +		protocol_interface =3D phandler->protocol_interface;
 
-diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-index 65fb2d8f9fb..4696c09f754 100644
---- a/drivers/spi/cadence_qspi_apb.c
-+++ b/drivers/spi/cadence_qspi_apb.c
-@@ -303,6 +303,10 @@ void cadence_qspi_apb_delay(void *reg_base,
- 		tshsl_ns -= sclk_ns + ref_clk_ns;
- 	if (tchsh_ns >= sclk_ns + 3 * ref_clk_ns)
- 		tchsh_ns -= sclk_ns + 3 * ref_clk_ns;
-+
-+	if (tshsl_ns < sclk_ns)
-+		tshsl_ns = sclk_ns;
-+
- 	tshsl = DIV_ROUND_UP(tshsl_ns, ref_clk_ns);
- 	tchsh = DIV_ROUND_UP(tchsh_ns, ref_clk_ns);
- 	tslch = DIV_ROUND_UP(tslch_ns, ref_clk_ns);
--- 
-2.25.1
+We should eliminate the variable protocol_interface.
+
+> +		http_instance =3D (struct efi_http_instance *)protocol_interface;
+
+This is not C++ code. The conversion from (void *) is superfluous.
+
+CCing  Adriano as author of the code.
+
+Best regards
+
+Heinrich
+
+> +		efi_free_pool(http_instance->http_load_addr);
+> +		http_instance->http_load_addr =3D NULL;
+>  =20
+> -	free(protocol_interface);
+> +		free(protocol_interface);
+> +	}
+>  =20
+>   	num_instances--;
+>  =20
+>=20
 
