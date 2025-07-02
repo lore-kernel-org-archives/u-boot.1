@@ -4,59 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42340C7EE30
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 10:18:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8CE7C7EE30
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 10:18:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2A3C82103;
-	Wed,  2 Jul 2025 12:18:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6760882ADA;
+	Wed,  2 Jul 2025 12:18:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iBq5EqxQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ioD0yO+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4F8C82ADA; Wed,  2 Jul 2025 12:18:04 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CB68782E08; Wed,  2 Jul 2025 12:18:49 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA02580E9A
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:18:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 90B9182103
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 12:18:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id D298BA535BA;
- Wed,  2 Jul 2025 10:18:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02D9DC4CEEE;
- Wed,  2 Jul 2025 10:18:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751451481;
- bh=TGZsVLLrhuLaBK/CoUsBZUEYTL6cD+BLYtQ0VYt5LRA=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=iBq5EqxQ9nWo7QqpKIAjsMvPKnQhVB1/gPgW8QhljgabmSlOzEUa8eBR223OpHYDA
- lPXn5TySQDTCv05NkPwOYTKH4jTwMwb2fTzkWYLcyOAD/EwkBPuAvdFhi2rEpaMYWd
- niB2rDKT6ua0daw/fmI3lbYDMd8r2cRzEwuY5mplaMNFzyk3a4tmpqH9c72RIxU9T/
- irr+Xtq+J+/jC2yFy1CYSwHvm740T/EMRDpkwa9fDQCq4J33uMCdThhS5YYw7gDP3T
- ldU7+3BxmC2SxxS2c9btgu47TkKdqTqoJevGcvVo/kRvRTn1i0j/H0qqZjIIwHR69o
- qEAj3+oT+Ox4g==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
-Cc: Peter Robinson <pbrobinson@gmail.com>, Casey Connolly
- <casey.connolly@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ibai
- Erkiaga <ibai.erkiaga-elorza@amd.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH v2 1/2] cmd: Introduce CMD_HELP
-In-Reply-To: <c17f825fb8a74e1d1912a3fd09a9a880c84a8bfd.1751286059.git.michal.simek@amd.com>
-References: <c17f825fb8a74e1d1912a3fd09a9a880c84a8bfd.1751286059.git.michal.simek@amd.com>
-Date: Wed, 02 Jul 2025 12:17:58 +0200
-Message-ID: <87frfeuca1.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-70e3c6b88dbso49417287b3.0
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 03:18:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1751451526; x=1752056326; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QsCGe3H6/dK15VTT+vsDAcwSVxy0fHR5zOoDrb6Bq68=;
+ b=ioD0yO+Zgwky91r0osP6Sty9ivvcltxIvrR4La2UvSmSLDdrBPMrfH/wJgBZFaoxHM
+ auUDSjURTbnRu1H7i7B4R71trnLYlZGDqtW80LmwOBnfZgmP+MVQixlDdWzLMgvMAOWE
+ N2L+85ogtLkt6z5nfiWAo6CsBd9GSUv8LoMPFNJDaHa9c4VoRQ/+Su6NZdYRBvi1qLHM
+ tZfeSkZrU0wvrtgVh4Lm6tG5BjH6saPXEIEVNwFZ0MYwMbu3gVTU3ZD2ErEA26MOZNfE
+ V+dhNC1UG4SIQw2xI6x8mKNZOajLisJCOEEv0rdld+Vo8PgSBzEk1N/INEXXLTWvtEHV
+ YXtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751451526; x=1752056326;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QsCGe3H6/dK15VTT+vsDAcwSVxy0fHR5zOoDrb6Bq68=;
+ b=tCiDY0RogjToSMu85Ewmkc8uB+OkuOGW3DydPzfSpKWlflMS0i035KGCOy73r5rN9z
+ NF9CK+amkLtEFo1m+Idsq1WBetuucD+X30i/NJx0Wi6LjB7nrCLSEcoURXN4FQUz1pwp
+ nxanQVzZV1rLjpH6NfZ4+VDB5dA4gZ4y9q2YoNa7hhj9qj5LJPmnkFeh2V2V8AxcviOh
+ ihNfBgoNGHWxCSCKrekGp3fT6ecCj46y8E78a8Cd7EZKUxTIOAMBclujA2gcOpbUyq+1
+ kTZ4NZ23PvTOFGXjx6NU+fFA7gV4ATFH72058Jl547dc5f5B3siWBehuWqnAJ+mk/dTf
+ +bZQ==
+X-Gm-Message-State: AOJu0YzDYGtz0FM54zaVxElcI3Jr4p/3ykG8RmJjqBDHJuwc6+xIK4AT
+ jwIm05eBn1hgxQmLpHAK/u8klo0gC5S0v85N1I70ziM16bwUr+jaWNmagOEM6fZNC1SWFnxTobn
+ YDFwraF9bBn9iOK+RWp8IU671C5N1vZUCU04B66+Ecw==
+X-Gm-Gg: ASbGncs3xw/ZBAhUOq6b6PGkElhMlA/kqEn7N1sxNclX483auFKrgJRRXCeHgDhbvSg
+ DgSEoyYJI30hvi4bM0UHF8chscL5QslI7FWEsNPFwapHsaKHSjep10l7RUdbU4rpidJdMQ2zO2N
+ CSlnRtGUUb1rudWeDHj/6Y1lei6Uu8ypSg2V00ht29dcHZM73O5YTtxRw=
+X-Google-Smtp-Source: AGHT+IGaKNCDzlakmgnXSSpvWF/SP507/CmvdNw+Of1GhDqNA420R0Qkpb4D9JeKtVyL9izNDP2xPmFvE5kzIrYtQq0=
+X-Received: by 2002:a05:690c:7487:b0:712:d70b:45eb with SMTP id
+ 00721157ae682-7164d539984mr28597927b3.31.1751451526404; Wed, 02 Jul 2025
+ 03:18:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <0e55eb3eade94e9cd0ffe04da0618aa6b1589f01.1751442246.git.michal.simek@amd.com>
+In-Reply-To: <0e55eb3eade94e9cd0ffe04da0618aa6b1589f01.1751442246.git.michal.simek@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 2 Jul 2025 13:18:10 +0300
+X-Gm-Features: Ac12FXzQuZaKna5IGXUoDtgefUAjF-jll1lnWoaVHcYJ1NLHkI8wceIEaVK2Gio
+Message-ID: <CAC_iWjL+nWRhQFMtns6BxODzJ-tfy9tn7Qs6fTTGW=gPsKsULg@mail.gmail.com>
+Subject: Re: [PATCH v3] arm64: zynqmp: Enable rng-seed generation
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Anshul Dalal <anshuld@ti.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,111 +96,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
-
-Thank you for the patch.
-
-On Mon, Jun 30, 2025 at 14:21, Michal Simek <michal.simek@amd.com> wrote:
-
-> Add option to disable help command in size constrained systems to save some
-> space. There is also no need to have ifdefs around CMDLINE because all
-> commands bepends on it.
-
-s/bepends/depends/
-
-> And also mark cmd_help dependency in test_help.py.
+On Wed, 2 Jul 2025 at 10:44, Michal Simek <michal.simek@amd.com> wrote:
+>
+> SOM has TPM with RNG in it that's why enable rng-seed generation.
 >
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
 > ---
 >
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+> Changes in v3:
+> - Move malloc allocation before rng_read
+>
 > Changes in v2:
-> - Remove CONFIG_CMDLINE ifdefs from code.
-> - Update test_help.
+> - Free alloc area in case of error
 >
->  cmd/Kconfig                | 6 ++++++
->  cmd/Makefile               | 2 +-
->  cmd/help.c                 | 6 ------
->  test/py/tests/test_help.py | 1 +
->  4 files changed, 8 insertions(+), 7 deletions(-)
+>  board/xilinx/common/board.c          | 33 +++++++++++++++++++++++++++-
+>  configs/xilinx_zynqmp_kria_defconfig |  1 +
+>  2 files changed, 33 insertions(+), 1 deletion(-)
 >
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 4eb0140c10a1..ee3fbe6a4f2b 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -189,6 +189,12 @@ config CMD_FWU_METADATA
->  	help
->  	  Command to read the metadata and dump it's contents
->  
-> +config CMD_HELP
-> +	bool "help"
-> +	default y
-> +	help
-> +	  Command to show help information about other commands.
-> +
->  config CMD_HISTORY
->  	bool "history"
->  	depends on CMDLINE_EDITING
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index 80cf70b7fe8c..718eff4ed197 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -7,7 +7,7 @@ ifndef CONFIG_XPL_BUILD
->  # core command
->  obj-y += boot.o
->  obj-$(CONFIG_CMD_BOOTM) += bootm.o
-> -obj-y += help.o
-> +obj-$(CONFIG_CMD_HELP) += help.o
->  obj-y += panic.o
->  obj-y += version.o
->  
-> diff --git a/cmd/help.c b/cmd/help.c
-> index 56579e28d31d..1be83ba607d4 100644
-> --- a/cmd/help.c
-> +++ b/cmd/help.c
-> @@ -9,13 +9,9 @@
->  static int do_help(struct cmd_tbl *cmdtp, int flag, int argc,
->  		   char *const argv[])
->  {
-> -#ifdef CONFIG_CMDLINE
->  	struct cmd_tbl *start = ll_entry_start(struct cmd_tbl, cmd);
->  	const int len = ll_entry_count(struct cmd_tbl, cmd);
->  	return _do_help(start, len, cmdtp, flag, argc, argv);
-> -#else
-> -	return 0;
-> -#endif
->  }
->  
->  U_BOOT_CMD(
-> @@ -27,7 +23,6 @@ U_BOOT_CMD(
->  	"	- print detailed usage of 'command'"
->  );
->  
-> -#ifdef CONFIG_CMDLINE
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index 8ffe74299016..ceb58da6d3cd 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -1,7 +1,7 @@
+>  // SPDX-License-Identifier: GPL-2.0+
 >  /*
->   * This does not use the U_BOOT_CMD macro as ? can't be used in symbol names
->   * nor can we rely on the CONFIG_SYS_LONGHELP helper macro
-> @@ -39,4 +34,3 @@ ll_entry_declare(struct cmd_tbl, question_mark, cmd) = {
->  	""
->  #endif /* CONFIG_SYS_LONGHELP */
->  };
-> -#endif
-> diff --git a/test/py/tests/test_help.py b/test/py/tests/test_help.py
-> index 12cb36b7b985..afb57201ba38 100644
-> --- a/test/py/tests/test_help.py
-> +++ b/test/py/tests/test_help.py
-> @@ -4,6 +4,7 @@
->  
->  import pytest
->  
-> +@pytest.mark.buildconfigspec('cmd_help')
->  def test_help(ubman):
->      """Test that the "help" command can be executed."""
->  
-> -- 
+>   * (C) Copyright 2014 - 2022, Xilinx, Inc.
+> - * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
+> + * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
+>   *
+>   * Michal Simek <michal.simek@amd.com>
+>   */
+> @@ -712,3 +712,34 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>  }
+>
+>  #endif
+> +
+> +#if IS_ENABLED(CONFIG_BOARD_RNG_SEED)
+> +/* Use hardware rng to seed Linux random. */
+> +__weak int board_rng_seed(struct abuf *buf)
+> +{
+> +       struct udevice *dev;
+> +       ulong len = 64;
+> +       u64 *data;
+> +
+> +       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+> +               printf("No RNG device\n");
+> +               return -ENODEV;
+> +       }
+> +
+> +       data = malloc(len);
+> +       if (!data) {
+> +               printf("Out of memory\n");
+> +               return -ENOMEM;
+> +       }
+> +
+> +       if (dm_rng_read(dev, data, len)) {
+> +               printf("Reading RNG failed\n");
+> +               free(data);
+> +               return -EIO;
+> +       }
+> +
+> +       abuf_init_set(buf, data, len);
+> +
+> +       return 0;
+> +}
+> +#endif
+> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+> index 22ba8a7cc158..3e2ac6144050 100644
+> --- a/configs/xilinx_zynqmp_kria_defconfig
+> +++ b/configs/xilinx_zynqmp_kria_defconfig
+> @@ -46,6 +46,7 @@ CONFIG_USE_PREBOOT=y
+>  CONFIG_SYS_PBSIZE=2073
+>  CONFIG_BOARD_EARLY_INIT_R=y
+>  CONFIG_CLOCKS=y
+> +CONFIG_BOARD_RNG_SEED=y
+>  CONFIG_SPL_MAX_SIZE=0x40000
+>  # CONFIG_SPL_BINMAN_SYMBOLS is not set
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> --
 > 2.43.0
 >
-> base-commit: 40ef75b0796307f718a4b424b5e52e79b36ae2f4
+> base-commit: 506757335edcf5e74eac0e608f1835a8b0102c4b
+> branch: debian-sent3
