@@ -4,70 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AE6C83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 12:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6D96C77B7C
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 13:44:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80DAF82F00;
-	Wed,  2 Jul 2025 14:40:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C9DAF80E9A;
+	Wed,  2 Jul 2025 15:44:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iEVpEAcD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ckqf4XqQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42C7682103; Wed,  2 Jul 2025 13:35:58 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81138800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 13:35:55 +0200 (CEST)
+ id A00F681FEE; Wed,  2 Jul 2025 15:44:55 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7359D800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 562BZnN23906032;
- Wed, 2 Jul 2025 06:35:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1751456149;
- bh=L+E7rEWjJhRyds/QG40WQpvdku6JHVL/tvacC4uIKLA=;
- h=From:To:CC:Subject:Date;
- b=iEVpEAcDpIXAzZGDdQibEygdzyEe485XH7752lbCPbfWeXwt4rN2dN0rQZ/U4aXny
- Si1ViCVvRpoasng79TJiamC7sgg/kof2jJeazQl47jQYRlbTK+uaVQ580ohUZRnECf
- NGUqOnHs/f/TsEDxFaPwEd2/FnmHv0yDMIRdd2rs=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 562BZnnE3503477
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 2 Jul 2025 06:35:49 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 2
- Jul 2025 06:35:48 -0500
-Received: from fllvem-mr08.itg.ti.com (10.64.41.88) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 2 Jul 2025 06:35:48 -0500
-Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
- by fllvem-mr08.itg.ti.com (8.18.1/8.18.1) with ESMTP id 562BZmKJ1575021;
- Wed, 2 Jul 2025 06:35:48 -0500
-Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 562BZlCG008051;
- Wed, 2 Jul 2025 06:35:48 -0500
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, MD Danish Anwar
- <danishanwar@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH] net: ti: icssg: Read firmware name from device-tree
-Date: Wed, 2 Jul 2025 17:05:45 +0530
-Message-ID: <20250702113545.367312-1-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-40ba3c10b3bso74275b6e.1
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 06:44:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1751463892; x=1752068692; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZjCiYMjiRh59tq0JIFd9x39WtBDBWaIkLDMIY1besKI=;
+ b=Ckqf4XqQc2Ga15RYNXHr6LxDd25rZkEf1HuQ72miOmc4i95SPQ0AwUpdbkEI5Jbr3F
+ 24lmI/nYiIfoOzAr79d0owZJsqMi9jw7q+6VwCnKEPGBSErNhgtkvjnycjvoR1r4ivah
+ 56lrJfShNehnhmDEefbaxfKGHMXK1fCrtX7BA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751463892; x=1752068692;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZjCiYMjiRh59tq0JIFd9x39WtBDBWaIkLDMIY1besKI=;
+ b=sogXZhgOZ7Wbbq5qjQOZ125PUDSgltgoSqExRmakwOXYmf4NdywTUMKegMEFO3KM0g
+ kIBSpp8mIHH5GCmssX73k+FSAgvGju2x9FgWPtnndwPIzb9gtprR+ThsEwZ89DVL15+m
+ 2HNch26iM9ZBC0/WcjE4UAN3E2+Ip8v4CpvyGHTBSrcfDGaF4qbarbAANVxcGjO+Dnw8
+ 0zGh9So0vfPQTSzGWfHcBOrYftnwLyn1uUgLwOSkvCoihq9gieAMLBNlnYt2pT0t9uQf
+ QKQYmAQRGLsmNs1vntSCBlIu4WBP1RL0CvhnKbYAOoyxP1QBKZifCD2ciUITo6VZXiGF
+ b7Bw==
+X-Gm-Message-State: AOJu0YwwPLXtTZjg2wpppEaq4KvHXZeBiqoKpZRzQezoD9GgVTmPZfM7
+ hQOclCmpgP/iGV4g19UjkyUVloxg4scAqwMEo4pfq7dSXH+SMP33/3FRvpm+7jHQmy78o7cemiz
+ +dMdrEvQ=
+X-Gm-Gg: ASbGncv7d6dCbAEkel5Kd3VgEmnEsgNBfGfeTnbKtlu4Alpw/Hfqw9pNsaaMONgUw4s
+ 31+iVdWoExF9F/xBJa4YSmNogCtBz9nBAD9PFwCFhE9zTYv+1hXXpmDnXywXXmBzjqqjH1WXlma
+ QaX/0Ozt1Z3n8Mz/8OHUYkEMT1tzwf8b4qgFKDyxR8PL25ddroL1SajnLKb4jt6jEgCy8Q+I3aO
+ ob3G3AjeMBevbupAt0ciMyXqsgIFDb3DgPi5tpEwF2S4QwMpBqnIWuXRLh9b5y3TX/tdj+3Zp7A
+ 4OYJm2QwxGlctF/FpNG/F4wj5wLBHYzc2nL96B1fl6sbF5I36nWdaOEt1nHoRO5yLK1tGEgCOwb
+ 6aRrHOBjoz5I3cqyiQRXK
+X-Google-Smtp-Source: AGHT+IE7yLB2WNS/MtyKaobSu4ERwkaHi+fGrjYbqelVNUoVbtp1B1Hbby3Xs0KNN2ZPfFi2sE+BIg==
+X-Received: by 2002:a05:6808:1a19:b0:401:e69a:8af2 with SMTP id
+ 5614622812f47-40b88540dc9mr1884522b6e.5.1751463892088; 
+ Wed, 02 Jul 2025 06:44:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-40b324054a2sm2570199b6e.31.2025.07.02.06.44.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 06:44:51 -0700 (PDT)
+Date: Wed, 2 Jul 2025 07:44:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] boot: menu: Do not dereference pointer if pointer is NULL
+Message-ID: <20250702134449.GA6424@bill-the-cat>
+References: <20250630-scene_menu_fix-v1-1-9ccb9a49c4d8@linaro.org>
+ <20250701204042.GD523899@bill-the-cat>
+ <bc0d6906-c1a0-457d-900a-769f5186723c@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Wed, 02 Jul 2025 14:39:59 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="y6wW32y7SFVaktSP"
+Content-Disposition: inline
+In-Reply-To: <bc0d6906-c1a0-457d-900a-769f5186723c@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,158 +98,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the ICSSG PRU Ethernet driver to read PRU/RTU/TXPRU firmware names
-from the Device Tree using the "firmware-name" property, instead of relying
-on the hard-coded firmware names. The firmware names are parsed during
-prueth_probe() and stored in the prueth->firmwares for each slice. The
-driver now uses these dynamically loaded names when starting the PRU cores.
 
-This change improves flexibility and allows firmware selection to be
-controlled via the device tree, making the driver more adaptable to
-different platforms and firmware configurations.
+--y6wW32y7SFVaktSP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
-This change is already part of the upstream Linux ICSSG driver.
-Corresponding Linux commit [1]
+On Wed, Jul 02, 2025 at 10:18:19AM +0100, Andrew Goodbody wrote:
+> On 01/07/2025 21:40, Tom Rini wrote:
+> > On Mon, Jun 30, 2025 at 05:06:07PM +0100, Andrew Goodbody wrote:
+> >=20
+> > > scene_obj_find can return NULL but this is not checked for before
+> > > the return is dereferenced. Add a NULL check.
+> > >=20
+> > > This issue was found by Smatch.
+> > >=20
+> > > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> > > ---
+> > >   boot/scene_menu.c | 3 ++-
+> > >   1 file changed, 2 insertions(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+> > > index 17150af145d..9a6e37d1c64 100644
+> > > --- a/boot/scene_menu.c
+> > > +++ b/boot/scene_menu.c
+> > > @@ -508,7 +508,8 @@ int scene_menu_display(struct scene_obj_menu *men=
+u)
+> > >   		return 0;
+> > >   	pointer =3D scene_obj_find(scn, menu->pointer_id, SCENEOBJT_TEXT);
+> > > -	pstr =3D expo_get_str(scn->expo, pointer->str_id);
+> > > +	if (pointer)
+> > > +		pstr =3D expo_get_str(scn->expo, pointer->str_id);
+> > >   	list_for_each_entry(item, &menu->item_head, sibling) {
+> > >   		struct scene_obj_txt *key =3D NULL, *label =3D NULL;
+> >=20
+> > This is in a slightly different place in -next, and I think the whole
+> > function needs to be read and corrected for error handling. I think we
+> > then will need to initialize pstr to NULL as well. Thanks.
+>=20
+> Hi Tom,
+>=20
+> I will rebase to -next and resend. I also added a NULL check for str but I
+> am not sure what else might need doing though unless you have some
+> suggestions?
+> It looks to me as though pstr is not used if pointer is NULL so there sho=
+uld
+> be no need to initialise it?
 
-All u-boot CI/CD checks [2] are passing for this patch. PR for this patch in u-boot is [3]
+Ah, I had to re-read the code again. We check for pointer before
+dereferencing pstr at the end of the list_for_each_entry. Sorry for the
+noise.
 
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git/commit/?id=ffe8a4909176
-[2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=11536&view=results
-[3] https://github.com/u-boot/u-boot/pull/793
+--=20
+Tom
 
- drivers/net/ti/icssg_prueth.c | 54 ++++++++++++++++++++++-------------
- drivers/net/ti/icssg_prueth.h |  7 +++++
- 2 files changed, 41 insertions(+), 20 deletions(-)
+--y6wW32y7SFVaktSP
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
-index 2639f960631..d8df3c9afb0 100644
---- a/drivers/net/ti/icssg_prueth.c
-+++ b/drivers/net/ti/icssg_prueth.c
-@@ -63,6 +63,7 @@
- 
- /* Number of PRU Cores per Slice */
- #define ICSSG_NUM_PRU_CORES		3
-+#define ICSSG_NUM_FIRMWARES		6
- 
- static int icssg_gmii_select(struct prueth_priv *priv)
- {
-@@ -192,25 +193,6 @@ static int icssg_update_link(struct prueth_priv *priv)
- 	return phy->link;
- }
- 
--struct icssg_firmwares {
--	char *pru;
--	char *rtu;
--	char *txpru;
--};
--
--static struct icssg_firmwares icssg_emac_firmwares[] = {
--	{
--		.pru = "/lib/firmware/ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
--		.rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
--		.txpru = "/lib/firmware/ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
--	},
--	{
--		.pru = "/lib/firmware/ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
--		.rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
--		.txpru = "/lib/firmware/ti-pruss/am65x-sr2-txpru1-prueth-fw.elf",
--	}
--};
--
- static int icssg_start_pru_cores(struct udevice *dev)
- {
- 	struct prueth_priv *priv = dev_get_priv(dev);
-@@ -223,7 +205,7 @@ static int icssg_start_pru_cores(struct udevice *dev)
- 
- 	slice = priv->port_id;
- 	index = slice * ICSSG_NUM_PRU_CORES;
--	firmwares = icssg_emac_firmwares;
-+	firmwares = prueth->firmwares;
- 
- 	ofnode_read_u32_index(dev_ofnode(prueth->dev), "ti,prus", index, &phandle);
- 	ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle, &rproc_dev);
-@@ -476,6 +458,24 @@ static const struct eth_ops prueth_ops = {
- 	.stop		= prueth_stop,
- };
- 
-+static char *prepend_fw_path(const char *fw_name)
-+{
-+	static const char fw_dir[] = "/lib/firmware/";
-+	char *result;
-+	int len;
-+
-+	if (!fw_name)
-+		return NULL;
-+
-+	len = strlen(fw_dir) + strlen(fw_name) + 1;
-+	result = malloc(len);
-+	if (!result)
-+		return NULL;
-+
-+	sprintf(result, "%s%s", fw_dir, fw_name);
-+	return result;
-+}
-+
- static int icssg_ofdata_parse_phy(struct udevice *dev)
- {
- 	struct prueth_priv *priv = dev_get_priv(dev);
-@@ -534,6 +534,8 @@ static int prueth_probe(struct udevice *dev)
- 	struct udevice **prussdev = NULL;
- 	ofnode eth_ports_node, eth_node;
- 	struct udevice *port_dev;
-+	const char **fw_names;
-+	int fw_count, i;
- 	int ret = 0;
- 
- 	prueth->dev = dev;
-@@ -659,6 +661,18 @@ static int prueth_probe(struct udevice *dev)
- 		}
- 	}
- 
-+	/* Parse firmware-name property from DT */
-+	fw_count = dev_read_string_list(dev, "firmware-name", &fw_names);
-+	if (fw_count != ICSSG_NUM_FIRMWARES) {
-+		dev_err(dev, "Expected %d firmware names, got %d\n", ICSSG_NUM_FIRMWARES, fw_count);
-+		return -EINVAL;
-+	}
-+	for (i = 0; i < 2; i++) {
-+		prueth->firmwares[i].pru   = prepend_fw_path(fw_names[i * 3 + 0]);
-+		prueth->firmwares[i].rtu   = prepend_fw_path(fw_names[i * 3 + 1]);
-+		prueth->firmwares[i].txpru = prepend_fw_path(fw_names[i * 3 + 2]);
-+	}
-+
- 	return 0;
- out:
- 	clk_disable(&prueth->mdiofck);
-diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
-index c69cfd4f162..d88b6fa88e7 100644
---- a/drivers/net/ti/icssg_prueth.h
-+++ b/drivers/net/ti/icssg_prueth.h
-@@ -38,6 +38,12 @@ enum prueth_port {
- 	PRUETH_PORT_MII1,	/* physical port MII 1 */
- };
- 
-+struct icssg_firmwares {
-+	char *pru;
-+	char *rtu;
-+	char *txpru;
-+};
-+
- struct prueth {
- 	struct udevice		*dev;
- 	struct udevice		*pruss;
-@@ -66,6 +72,7 @@ struct prueth {
- 	u8			rtu_core_id;
- 	u8			txpru_core_id;
- 	u8			icssg_hwcmdseq;
-+	struct icssg_firmwares  firmwares[PRUETH_NUM_MACS];
- };
- 
- struct prueth_priv {
+-----BEGIN PGP SIGNATURE-----
 
-base-commit: 7027b445cc0bfb86204ecb1f1fe596f5895048d9
--- 
-2.34.1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhlN84ACgkQFHw5/5Y0
+tyw2fwwAjl+h8cRKa+DJcul2aYn3dLtkHWPBxw5kjXD1oMVy1K5+/KfWdxS8yJWe
+6eNt+Atk69Q12+NUQe2OSCd5L9bICy7Bj14bek/5aS2CwwH3j50GLNyZG+JxDAFQ
+NK/dY1DxGf19OhgE8DfFdNM/uQtKwt4Cafdk6vCc5WTANQoacfqz8SLDaEWHAy7o
+r1gxwRRlJ+xZjj6/9m4kBQZQJkDlZFMQQuLQOOVyHa8X2mO161Ia1fmGE55YX0Cn
+p3FwWX8KULMGDOzdOA7IbIlnRHbsiyoHA0q1M8W3tq722/mCRy9RIVUIkRPVnSls
+w5NVvlqlAWY9NGw4hBMrSjVwrXbb37dXF17F/8/m6I1Zx6m2RbZskTShfR3UqHxB
+m66wxfFM5770gKuX7bqet/EbFYAzPRsImCcy6pGfuFLlhLOrj8eTR1uSfH9l3gw5
+pxRe3hx9op2BiZPqoFs8lym2NFrgNZhy/0d3jt364GaFfPJFC4tAnkcHVgidEhe3
+kR37I08R
+=DtmD
+-----END PGP SIGNATURE-----
 
+--y6wW32y7SFVaktSP--
