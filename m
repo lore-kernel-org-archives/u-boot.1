@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B26C77B7C
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 13:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC8BAC83F04
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 13:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8464C82B18;
-	Wed,  2 Jul 2025 15:49:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CD95882F03;
+	Wed,  2 Jul 2025 15:49:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QV0deSgX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aNNPtBja";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61FE81FEE; Wed,  2 Jul 2025 15:49:55 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id CCF0182F00; Wed,  2 Jul 2025 15:49:57 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D543C800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:49:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9151800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:49:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-60c4521ae2cso12192356a12.0
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 06:49:53 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ae0de1c378fso636817266b.3
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 06:49:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1751464193; x=1752068993; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NAF9tDes6TjxZ120MaH+ZCXk+77MZ2vkwhtiulYFIuk=;
- b=QV0deSgXHGjMrUI4+HsYPRSOU+XT7BySzKbBspYKFRsmZbJuGX5Ip0Dkwz3yYJE9Lp
- 7v4pp7ZtPbrbTHAHFzn3IBYht9pfSYrW3mQ5iCgNJ+ss1Kx7AFTMYIRyhYMStHJCwRFt
- M6M5H8mxEZEwgrrpKpn+pIri730k1fC7CyG8KKnWFOs/xtPs1yM/J6LXfhyinkTjayH7
- gFPeL0zT7CszJc3dvo8S1AWLwKvrU1SkVZ4tpaZl1JCJsiDXtmNAu4tR1dEWkhRzrVqo
- czNFioDtkqyqEnXgb+Cj4tBVIrc8db0+tSJweoYz42aQsVsZF9+i9mQEjheZgbjGJ7SE
- NLDQ==
+ d=gmail.com; s=20230601; t=1751464195; x=1752068995; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FtkH6X0rKvlr7AYqnxB4hT0D4EzDIGE74q5IzdtZQ90=;
+ b=aNNPtBjaTFubdZluD2SOnXlg3mOLilRSpOz7eFXpw+Dw1DtEl/S061IPBPCvSEjBhb
+ iqDimIo26NYYoJF2flDVANHucGoXgJRVgoJf2SwN1RYrE6JqhAYXe0zjPVDxj3eJM+oy
+ cG347cgLyvg0HaDdmE4EKmfolWSex9jkNnykXUMy5lRxkVjheOt+h5TCoC0TEzuxJo8n
+ x2Vx4IKgMJrvg0z2Dnd+L5i370KHCSTIn+D/cXwVPTQskuWs5pl+GVISOa2ELLuXx7el
+ aCaUeMMc2Hg/3/wWprQ3c0+dcBkpry8957vGLsXTfFbiFJScA4UB3vk3QSQT5ALj6vNP
+ 4shw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751464193; x=1752068993;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NAF9tDes6TjxZ120MaH+ZCXk+77MZ2vkwhtiulYFIuk=;
- b=ITP4fmX0oEuWiBWPKphNWAnPACgkGHNLNQqvlOfyx6au1xsTlOfrvLeS0W6q6u+UE0
- hXdtrAzPtsnWLTWDepRVfIp731QLuwLwhoJ6mMqC5jzkdjuR0vy/ieRC2Jzer/dxHNz3
- uaN7adjLxZ3g+FJ28ewIcNbwaMT4eOfgFmzpqTZpP+fbpZy5hzQUPESaWAKBfH2amsef
- ym1Zq9/HWJqaFrGDP2AdohW2/ILFQ9QePAohSLYuLJ06l6QkoYyyYvcwkQngQI8242OT
- ST5+CBsMRW39DrHhlxlICDdAbqiQxrKAqOq+Z1j4y+kJxmHjvDQdev0N0pjYClg+orNa
- j90w==
+ d=1e100.net; s=20230601; t=1751464195; x=1752068995;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FtkH6X0rKvlr7AYqnxB4hT0D4EzDIGE74q5IzdtZQ90=;
+ b=iEy8OCTiOz636jt8D20yTPQRom1KzPewY+0GAfifBtUpXen1087wFjBAkFmxC61sF/
+ QjYAtjFqz/mDkSbPcLqO3FoeYrG6S8PwuCd839sje+1ea3E1UoQqoOYo956wfeyG7TIb
+ T5ro31eKzCYZxdASkkScR7GeO32nYketqKa/ED7dyxrL5M3JvR0nFkux9VNAz2D+qy8Y
+ xrO0KbkGvM2Mi6gT1GAaewuFAmz+yrU5KOIiOW11bDaBcs22Lgug0MQrzaLsxQJ+/5LN
+ /pbpbLs57mI73IzOUoWyHQxmLu7x/N8jCLdNL/9QhiHA7Ny0m7h9ukw9c+FysOo9RpHz
+ F9wQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1hh8y0alV5TzoK9rw46IOtNL7mxKwWIxHkPteTHEKiadRvF6JNBYUjJMrZAuQt7SVECEEqsw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzH/rgu9I5WUOwFcgG+NSiBGm+NXve+qeEUepdhP4tzvI0M9Y/D
- iYVXnrugw0SSvbA5T/PLD4bUU9MVDEJTR0bDtNS1VeKGFlWsfeCsj3r1
-X-Gm-Gg: ASbGncu1atL6M5L8CqIJFwib31BVTd503Bfd4SDe6FfK/sGBb6lZpZZSoQ9FZ3xVp3U
- 32rgX+kqjPdi5MmzpD+HF/Eezos30n6U4eOM4jhr7veTkJyVOzBeJkaTPMzk1a6J5Rkc2my2gfg
- iUHZ6Tp34jNb3lvDzo4L1L2lC/dsjvyCT4igYZcHj9PZur9M8j4cRYuYi5yjC8gGHjszl6sTg6/
- N+jBRyf+4oc1YFUyJELPj23Wr7PV4rssMuQ3xqdNAPkPg1XPSKh0TDsnml9+E4gS720qN6nBMfY
- 5EJI3vYnrCTZGtRnSeIH8zT3lrxkKXeX4bTejKXBTVnv1H9jey5LCBk9hKBZKjkPR2bPNYRSvsW
- COKJBoalD
-X-Google-Smtp-Source: AGHT+IFGBDB8qEkLQnCEqfJ2vbcjpZ7MsB1zIjuJ/TStIMQSUkJ71w4mF0/ptzYW+yefddLDx2Nycw==
-X-Received: by 2002:a17:907:bd8a:b0:ad8:9844:1424 with SMTP id
- a640c23a62f3a-ae3c2e1aa56mr270350966b.61.1751464192934; 
- Wed, 02 Jul 2025 06:49:52 -0700 (PDT)
+ AJvYcCWQBpuEd9sNKQAg/U7r9jCSEKn2aJlTUlWpgCGTrpUTuhr54IPm1mSuyXRkHro03koTXQROC5M=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkNWlXRAA9FzZb69UqQfD3/xejq3SyJkd2m/bsqYBiz0D4Y3aX
+ ZO4WoT7u83IftqyOgth2BYs3D2a6SuTPgXYukv74VlF1qCOREX3dIVEC
+X-Gm-Gg: ASbGncs30uxFmnHjhdOAoTq7QYhPlvgxgT9FH2FD3dvQeTVNrf2AL0tOjbrDlaCGYrS
+ cp1fgyt3vTlxEeel8Mh/koA2Tvf1k5gIKDu+x6zPQStDW2Y2KiOQKRUIPBrRYWUmY1ZOBdxXwfJ
+ nf+L2DkGav/MruxaAozAYL5kvewD4TtfsobFxJiKMU0a7VDp1QwPW3UxJM5nGBvjHG45TXDp4R5
+ JmBDGrVD8+O0ATGU6mJObTprW5tqGTq62qOu0V0YeIzBi8eb0v3+mOfnkMPtCCEN5LosqbxXqI6
+ oqXiyZ8hBOS6BVASIhWx0sA9IOBJL/qxa737vhMX7iWVeEs9m0kJBSLii29zxp5rDE8oIlPcOdO
+ UoM/sLWs9nn19Bf4VC8o=
+X-Google-Smtp-Source: AGHT+IE1qNXE1i03UYS9aXE7SYmUO2Z6Sy92aljvJAzLuly9OVPSaJe5zPPnCEenhoVB7yJB9HEB9Q==
+X-Received: by 2002:a17:907:3d04:b0:ad2:425c:27ce with SMTP id
+ a640c23a62f3a-ae3c2b52867mr287105166b.2.1751464195048; 
+ Wed, 02 Jul 2025 06:49:55 -0700 (PDT)
 Received: from localhost.localdomain ([2001:b07:aac:705d:1f00:7f2f:5fbe:4831])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ae353c01bd1sm1101810666b.92.2025.07.02.06.49.51
+ a640c23a62f3a-ae353c01bd1sm1101810666b.92.2025.07.02.06.49.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 06:49:51 -0700 (PDT)
+ Wed, 02 Jul 2025 06:49:53 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1 0/2] Enable RNG support for KASLR on Toradex arm64 TI SoMs
-Date: Wed,  2 Jul 2025 15:49:35 +0200
-Message-ID: <20250702134942.1483436-1-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 1/2] configs: verdin-am62: enable RNG support for KASLR
+Date: Wed,  2 Jul 2025 15:49:36 +0200
+Message-ID: <20250702134942.1483436-2-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250702134942.1483436-1-ghidoliemanuele@gmail.com>
+References: <20250702134942.1483436-1-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,20 +103,40 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-This patch series enables RNG support to automatically populate /chosen/kaslr-seed on the following Toradex arm64 TI System on Modules:
-- Verdin AM62
-- Verdin AM62P
+Enable DM_RNG in U-Boot to populate /chosen/kaslr-seed automatically.
+Enable OP-TEE, which supports RNG, to provide entropy.
 
-This improves kernel security by supporting Kernel Address Space Layout Randomization (KASLR) using a runtime-provided seed.
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ configs/verdin-am62_a53_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Emanuele Ghidoli (2):
-  configs: verdin-am62: enable RNG support for KASLR
-  configs: verdin-am62p: enable RNG support for KASLR
-
- configs/verdin-am62_a53_defconfig  | 4 ++++
- configs/verdin-am62p_a53_defconfig | 4 ++++
- 2 files changed, 8 insertions(+)
-
+diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+index 584c416bd83b..0b3bb6007ddf 100644
+--- a/configs/verdin-am62_a53_defconfig
++++ b/configs/verdin-am62_a53_defconfig
+@@ -169,6 +169,7 @@ CONFIG_DM_REGULATOR_TPS65219=y
+ CONFIG_K3_SYSTEM_CONTROLLER=y
+ CONFIG_REMOTEPROC_TI_K3_ARM64=y
+ CONFIG_RESET_TI_SCI=y
++CONFIG_DM_RNG=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_SOC_DEVICE=y
+ CONFIG_SOC_DEVICE_TI_K3=y
+@@ -176,6 +177,8 @@ CONFIG_SOC_TI=y
+ CONFIG_SYSRESET=y
+ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_TI_SCI=y
++CONFIG_TEE=y
++CONFIG_OPTEE=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+@@ -194,3 +197,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
+ CONFIG_SPL_DFU=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+ CONFIG_HEXDUMP=y
++# CONFIG_OPTEE_LIB is not set
 -- 
 2.43.0
 
