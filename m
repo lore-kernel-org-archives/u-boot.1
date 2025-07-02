@@ -4,81 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1475C83013
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 12:21:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA9EC8303F
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 12:40:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBCE680E9A;
-	Wed,  2 Jul 2025 14:21:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E8A7180E9A;
+	Wed,  2 Jul 2025 14:40:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FcVrz6YI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TbYRGr/J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A94F82103; Wed,  2 Jul 2025 14:21:31 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E798982B18; Wed,  2 Jul 2025 11:23:18 +0200 (CEST)
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
+ [217.70.183.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B2C9800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 14:21:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57AA680E9A
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 11:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-711d4689084so73052527b3.0
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 05:21:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751458888; x=1752063688; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nfj8NVPltGGbYiP/MshSYoPeUDuCIMwbDGbK/1MyAfs=;
- b=FcVrz6YIbb31bj8upQhRTDNJGWsHPHbUfwwQqAD5wU80Nx0gu5lRBmK2khZzY3Q4jR
- HVTV6vwEp+SI5iLznrITinPwuA1N3p6BWFbBoAtjir6MecsVSeIVX9Y4MxnvvrSLty2K
- lXVRGdkoT3M9kY4EYqax6pI9U4UaMonuwX/mw+i2UzU3HfSOagytSFhSpG6N1Ln1SK1K
- Y+Sn6/21u5eBznAhO6H2xlJdI4Abd+aZTK/mHv0hlFXmoHEHd+3ZtSO7i9ixXBF347rH
- b6ykTQkUn2uvGjwOot85EW7gTMBfStZDuE7i1uyPp4XZb1E+Md3W4zUOntI2DdlkGlNx
- 4wJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751458888; x=1752063688;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nfj8NVPltGGbYiP/MshSYoPeUDuCIMwbDGbK/1MyAfs=;
- b=Cj8pqm74uxwbFRBbEmcgZket2H4oDBlnM38D8p5uZUjTLFAkSYOYMM79TETf9BwBCM
- XZXom1GbtBrpkMyBprWL21EiQT/bBdEF+oVXfBDMDcmreIomab1mxS/Jz4Atrdxj7I35
- 7iudhDxc6EsLO/wAf83QsP8dLnuuIqXU6aBTR+KcwBizQlBMTsSr/ioUJFNZsIhVV16X
- VdT3Yon2qXr7uOaLIGVZZ8TNeCZoLxmc/+LCnw1Wu6bno+yjkJ8dORoKSRomVjhouO04
- xZ9tX8dV53Kw6NDjlgPGe7Afg+hN50jzBdNtaBo6kMi5VNoTB+Eo1dQjPr9If9KaJEWR
- IBgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHnmu1xfZq/W7rCnam0IzYi4amrMTJSqRWPUTLHq68RjoM71/r39bOmidMavV6zVFVICQwxVk=@lists.denx.de
-X-Gm-Message-State: AOJu0YymlqPcffHxJU+3eeDkG8C90DRmfHyd4KKTiOxddbW+o0yBfTMW
- 7u81Wgkz743iQIOLeig9ts4TEZEgByS54JP0NkLJIYPny779QxjgMaZKMo+Ddcr7iw+IX9+gj6y
- 9W8SLLbF2ACJls/0QmSZHPMVFvDiL0BbEygZPlxOutA==
-X-Gm-Gg: ASbGnctVdXvRFkisqGzRNQA6KfqkVtxJDlSPoByx/UmA1H/A2r6COtJT8AZjJ16Z2jq
- coAgyPfGNKAh9zJpfaUUpdLhoE2atJrRY2lk0kkvpG5hntMkFYyDyuJwOLaCB4iOriNAPgk8fHR
- IBHxBDzsY4hyO5C/y9JCNLm+cV7gwaLDysg6QPAIaYI3ay
-X-Google-Smtp-Source: AGHT+IE9JyzgUKmoXYXgDhcnl8IGH2TGAYi9n405DuwdX0oi546yWUTHQVzmFT3tuXs0Iiz5wzRByf9qPZ8as/to2ZA=
-X-Received: by 2002:a05:690c:6603:b0:70f:87c5:5270 with SMTP id
- 00721157ae682-7164d4ce2b0mr34918027b3.19.1751458887993; Wed, 02 Jul 2025
- 05:21:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id DA79A432BD;
+ Wed,  2 Jul 2025 09:23:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1751448194;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8UwGZvSD2vMzAFqpBtuBHuSfDb1NeKhfhZdvhV0qCE8=;
+ b=TbYRGr/Jo2adQHG044zd8SZF/Bk7Bz8wDm1FVgz1TxmOwK1AxW0Vv6003qhdCic1jz3hFs
+ GLTBQh8QdU9voDM770Vcl5GZW9xAGXYb31iUjWNezLZJPPnccXABHVQdVdcyAIaMn4WLS3
+ jzxcGpKLXbHQBH5a8z/NieeTVjSaNHx3xQLDzIGfOPlDI34p2x0mQpd4qeDPw8kHhVlah4
+ rh73SgqevPw8dSm9X0XrgAierBdRsFq+JFMHQm3l97Ku5HCNnUOn5uqZwDKtB+ftwaf77k
+ 9OkAN4IA7Chr7OLb6VrSoS6J9FScyr6GXq8mi2GTuq+Bpbq8nD7/3Zs+Szm6eA==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Steam Lin <stlin2@winbond.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, <u-boot@lists.denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,
+ 02}jv behave correctly
+Date: Wed,  2 Jul 2025 11:23:13 +0200
+Message-ID: <20250702092313.970234-1-miquel.raynal@bootlin.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250701-efiloader_fix-v2-0-eb6db16bbe4e@linaro.org>
- <20250701-efiloader_fix-v2-2-eb6db16bbe4e@linaro.org>
-In-Reply-To: <20250701-efiloader_fix-v2-2-eb6db16bbe4e@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 2 Jul 2025 15:20:52 +0300
-X-Gm-Features: Ac12FXxxTXYNeR8k-3DABLiMKJRb_5rtVQuJDzwnQEcGckayAQD4g39StF5Oq8Q
-Message-ID: <CAC_iWjK-3hq4KUoEDj5Yv4uk-tJfP-BbiXxgR+3Kd=929YCGLA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] efi_loader: Prevent dereference of uninitialised
- variable
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgddujedtvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeeuieelleetgefghfefvefhiefhfeefvddtvdfgledvjeeljeevleeugeegveelheenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehffidrrddpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeejpdhrtghpthhtohepjhgrghgrnhesrghmrghruhhlrghsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepvhhighhnvghshhhrsehtihdrtghomhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehsthhlihhnvdesfihinhgsohhnugdrtghomhdprhgtphhtthhopehthhhomhgrshdrphgvthgriiiiohhnihessghoohhtlhhin
+ hdrtghomhdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhopehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhm
+X-GND-Sasl: miquel.raynal@bootlin.com
+X-Mailman-Approved-At: Wed, 02 Jul 2025 14:39:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,64 +74,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Andrew
+These chips are internally made of two/four dies with linear addressing
+capabilities to make it transparent to the user that two/four dies were
+used. There is one drawback however, the read status operation is racy
+as the status bit only gives the active die status and not the status of
+the other die. For commands affecting the two dies, it means if another
+command is sent too fast after the first die has returned a valid
+status (deviation can be up to 200us), the chip will get corrupted/in an
+unstable state.
 
-On Wed, 2 Jul 2025 at 13:01, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
->
-> If phandler is returned as NULL from efi_search_protocol then
-> protocol_interface is never assigned to. Instead return
-> EFI_UNSUPPORTED as per the spec.
->
-> This issue found by Smatch.
->
-> Also eliminate the use of the variable protocol_interface as it is not
-> needed.
->
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
+The solution adopted here is to iterate manually over all internal
+dies (which takes about 30us per die) until all are ready. This approach
+will always be faster than a blind delay which represents the maximum
+deviation, while also being totally safe.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+A flash-specific hook for the status register read had to be
+implemented. Testing with the flash_speed benchmark in Linux shown no
+difference with the existing performances (using the regular status read
+core function).
 
+As the presence of multiple dies is not filled in these chips SFDP
+tables (the table containing the crucial information is optional), we
+need to manually wire the hook.
 
->  lib/efi_loader/efi_http.c | 9 ++++-----
->  1 file changed, 4 insertions(+), 5 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/efi_http.c
-> index 189317fe2d2..9a0f2675132 100644
-> --- a/lib/efi_loader/efi_http.c
-> +++ b/lib/efi_loader/efi_http.c
-> @@ -453,7 +453,6 @@ static efi_status_t EFIAPI efi_http_service_binding_destroy_child(
->         efi_status_t ret = EFI_SUCCESS;
->         struct efi_http_instance *http_instance;
->         struct efi_handler *phandler;
-> -       void *protocol_interface;
->
->         if (num_instances == 0)
->                 return EFI_EXIT(EFI_NOT_FOUND);
-> @@ -463,18 +462,18 @@ static efi_status_t EFIAPI efi_http_service_binding_destroy_child(
->
->         efi_search_protocol(child_handle, &efi_http_guid, &phandler);
->
-> -       if (phandler)
-> -               protocol_interface = phandler->protocol_interface;
-> +       if (!phandler)
-> +               return EFI_EXIT(EFI_UNSUPPORTED);
->
->         ret = efi_delete_handle(child_handle);
->         if (ret != EFI_SUCCESS)
->                 return EFI_EXIT(ret);
->
-> -       http_instance = (struct efi_http_instance *)protocol_interface;
-> +       http_instance = phandler->protocol_interface;
->         efi_free_pool(http_instance->http_load_addr);
->         http_instance->http_load_addr = NULL;
->
-> -       free(protocol_interface);
-> +       free(phandler->protocol_interface);
->
->         num_instances--;
->
->
-> --
-> 2.39.5
->
+This change is adapted from Linux.
+
+Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volatile-bit-v3-1-735363f8cc7d@bootlin.com/
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+---
+ drivers/mtd/spi/spi-nor-core.c | 101 +++++++++++++++++++++++++++++++++
+ 1 file changed, 101 insertions(+)
+
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index 6f352c5c0e2d..ab0baf4eb251 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -4215,6 +4215,90 @@ static struct spi_nor_fixups macronix_octal_fixups = {
+ };
+ #endif /* CONFIG_SPI_FLASH_MACRONIX */
+ 
++#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
++
++#define WINBOND_NOR_OP_SELDIE  0xc2    /* Select active die */
++
++struct winbond_nor_priv {
++	unsigned int n_dice;
++};
++
++/**
++ * winbond_nor_select_die() - Set active die.
++ * @nor:       pointer to 'struct spi_nor'.
++ * @die:       die to set active.
++ *
++ * Certain Winbond chips feature more than a single die. This is mostly hidden
++ * to the user, except that some chips may experience time deviation when
++ * modifying the status bits between dies, which in some corner cases may
++ * produce problematic races. Being able to explicitly select a die to check its
++ * state in this case may be useful.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int winbond_nor_select_die(struct spi_nor *nor, u8 die)
++{
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(WINBOND_NOR_OP_SELDIE, 1),
++			   SPI_MEM_OP_NO_ADDR,
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, &die, 0));
++
++	int ret;
++
++	spi_nor_setup_op(nor, &op, SNOR_PROTO_1_1_1);
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret)
++		debug("Error %d selecting die %d\n", ret, die);
++
++	return ret;
++}
++
++static int winbond_nor_multi_die_ready(struct spi_nor *nor)
++{
++	struct winbond_nor_priv *winbond_priv = nor->priv;
++	unsigned int n_dice = winbond_priv ? winbond_priv->n_dice : 1;
++	int ret, i;
++
++	for (i = 0; i < n_dice; i++) {
++		ret = winbond_nor_select_die(nor, i);
++		if (ret)
++			return ret;
++
++		ret = spi_nor_sr_ready(nor);
++		if (ret <= 0)
++			return ret;
++	}
++
++	return 1;
++}
++
++static void winbond_nor_multi_die_post_sfdp_fixups(struct spi_nor *nor,
++						   struct spi_nor_flash_parameter *param)
++{
++	struct winbond_nor_priv *winbond_priv;
++
++	winbond_priv = kmalloc(sizeof(*winbond_priv), GFP_KERNEL);
++	if (!winbond_priv)
++		return;
++
++	winbond_priv->n_dice = param->size / SZ_64M;
++
++	/*
++	 * SFDP supports dice numbers, but this information is only available in
++	 * optional additional tables which are not provided by these chips.
++	 * Dice number has an impact though, because these devices need extra
++	 * care when reading the busy bit.
++	 */
++	nor->priv = winbond_priv;
++	nor->ready = winbond_nor_multi_die_ready;
++}
++
++static struct spi_nor_fixups winbond_nor_multi_die_fixups = {
++	.post_sfdp = winbond_nor_multi_die_post_sfdp_fixups,
++};
++#endif /* CONFIG_SPI_FLASH_WINBOND */
++
+ /** spi_nor_octal_dtr_enable() - enable Octal DTR I/O if needed
+  * @nor:                 pointer to a 'struct spi_nor'
+  *
+@@ -4426,6 +4510,23 @@ void spi_nor_set_fixups(struct spi_nor *nor)
+ 	    nor->info->flags & SPI_NOR_OCTAL_DTR_READ)
+ 		nor->fixups = &macronix_octal_fixups;
+ #endif /* SPI_FLASH_MACRONIX */
++
++#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
++	if (JEDEC_MFR(nor->info) == SNOR_MFR_WINBOND) {
++		u8 multi_die_models[][2] = {
++			{ 0x40, 0x21 }, /* W25Q01JV */
++			{ 0x70, 0x22 }, /* W25Q02JV */
++		};
++		int i;
++
++		for (i = 0; i < sizeof(multi_die_models) / 2; i++) {
++			if (!memcmp(nor->info->id + 1, multi_die_models[i], 2)) {
++				nor->fixups = &winbond_nor_multi_die_fixups;
++				break;
++			}
++		}
++	}
++#endif /* SPI_FLASH_WINBOND */
+ }
+ 
+ int spi_nor_scan(struct spi_nor *nor)
+-- 
+2.49.0
+
