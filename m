@@ -4,47 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C100DC83F04
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:25:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF39C83F04
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:25:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECF7582A76;
-	Wed,  2 Jul 2025 17:25:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D3BA82EA9;
+	Wed,  2 Jul 2025 17:25:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3EB982ADA; Wed,  2 Jul 2025 17:25:43 +0200 (CEST)
+ id 89A9780E9A; Wed,  2 Jul 2025 17:25:45 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 42923800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:25:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 8832582103
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C0F9D1424;
- Wed,  2 Jul 2025 08:25:25 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F1DD322D9;
+ Wed,  2 Jul 2025 08:25:27 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.38.90])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7FB2D3F6A8;
- Wed,  2 Jul 2025 08:25:37 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 012EC3F6A8;
+ Wed,  2 Jul 2025 08:25:40 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, abdellatif.elkhlifi@arm.com,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Davidson kumaresan <davidson.kumaresan@arm.com>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
- Adam Johnston <Adam.Johnston@arm.com>
-Subject: [PATCH 00/25] Introduce Firmware Update Support for Arm PSA
-Date: Wed,  2 Jul 2025 16:25:03 +0100
-Message-Id: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
+ Jens Wiklander <jens.wiklander@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH 01/25] arm_ffa: Add NULL pointer check to the uclass driver
+ operations
+Date: Wed,  2 Jul 2025 16:25:04 +0100
+Message-Id: <20250702152528.1180414-2-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
+References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -65,119 +59,65 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-This patch series adds Firmware Update (FWU) support for Arm PSA
-Certified platforms [1] such as Corstone-1000 [2], enabling U-Boot to serve as
-the FWU Client, with the Secure World acting as the Update Agent that
-manages the firmware store and its metadata.
+Add NULL pointer check for ops
 
-This implementation adheres to the Platform Security Firmware Update
-specification [3] for the A-profile Arm Architecture and leverages the
-Trusted Services framework [4] to interact with the Secure World update agent.
-By delegating update management to the Secure World, U-Boot handles only
-the client-side coordination, invoking a well-defined set of ABIs over
-the FF-A interface [5] to deliver update capsules.
+The device driver can miss defining an operations structure.
+So, ffa_get_ops() can return NULL.
+This commit adds checks for ops in the uclass driver operations
+and an error is returned when ops is NULL.
 
-Key features include:
-
-- Generic, platform-agnostic design.
-- FF-A-based ABI: All interactions between U-Boot and the update agent
-    occur over the FF-A interface, ensuring compatibility across
-    PSA-compliant systems.
-- Multi-payload capsules: Support for capsules containing multiple
-    payloads, start/end markers, signed firmware images.
-- ESRT support: Capsule payloads may be signed for authenticity, and
-    U-Boot can populate the EFI System Resource Table (ESRT) for OS-level
-    firmware management.
-- On-disk and standard capsule handling.
-
-For implementation details, please refer to the README [6].
-
-Cheers,
-Abdellatif
-
-[1]: PSA: https://www.psacertified.org
-[2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
-[3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest 
-[4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
-[5]: FF-A interface: doc/arch/arm64.ffa.rst
-[6]: Readme of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
-
+Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jens Wiklander <jens.wiklander@linaro.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
-Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-Cc: Adam Johnston <Adam.Johnston@arm.com>
+---
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-Abdellatif El Khlifi (24):
-  arm_ffa: Add NULL pointer check to the uclass driver operations
-  arm_ffa: Add FFA_MEM_SHARE support
-  arm_ffa: Add FFA_MEM_RECLAIM support
-  arm_ffa: sandbox: Replace the emulator error log with debug log
-  arm_ffa: sandbox: Improve the readability of clearing the X registers
-  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
-  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
-  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
-  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
-  fwu_arm_psa: Initialize the update agent
-  fwu_arm_psa: Read the FWU directory through get_image_info()
-  fwu_arm_psa: Add staging ABIs
-  efi_loader: fwu_arm_psa: Add set_image and get_image_info support
-  efi_loader: fwu_arm_psa: Keep the FMP payload header
-  efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
-    set_image()
-  efi_loader: fwu: fwu_arm_psa: Disable trial state handling
-  fwu_arm_psa: Add FWU acceptance mechanism
-  fwu_arm_psa: Add ESRT support
-  fwu_arm_psa: Add ExitBootService() notification handler
-  fwu_arm_psa: corstone1000: Enable FWU support
-  fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
-  fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
-  fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
-  fwu_arm_psa: Document FWU support for Arm PSA
-
-Emekcan Aras (1):
-  efi_loader: capsule: Add runtime capsule flags checks
-
- MAINTAINERS                                   |    8 +
- .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
- board/armltd/corstone1000/corstone1000.c      |  255 ++-
- board/armltd/corstone1000/corstone1000.env    |    8 +
- configs/corstone1000_defconfig                |   13 +-
- doc/arch/arm64.ffa.rst                        |    4 +
- doc/develop/uefi/fwu_arm_psa.rst              |  153 ++
- doc/develop/uefi/index.rst                    |    1 +
- drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  297 +++-
- drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
- drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
- drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
- include/arm_ffa.h                             |  111 +-
- include/arm_ffa_priv.h                        |  143 +-
- include/efi_api.h                             |    8 +
- include/efi_loader.h                          |    8 +
- include/fwu_arm_psa.h                         |  427 +++++
- lib/efi_loader/efi_capsule.c                  |   83 +-
- lib/efi_loader/efi_firmware.c                 |  104 +-
- lib/fwu_updates/Kconfig                       |   26 +
- lib/fwu_updates/Makefile                      |    2 +
- lib/fwu_updates/fwu.c                         |   29 +-
- lib/fwu_updates/fwu_arm_psa.c                 | 1508 +++++++++++++++++
- test/dm/ffa.c                                 |   73 +-
- 24 files changed, 3275 insertions(+), 123 deletions(-)
- create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
- create mode 100644 include/fwu_arm_psa.h
- create mode 100644 lib/fwu_updates/fwu_arm_psa.c
-
-
-base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
+diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+index 96c64964bb7..f8d231204db 100644
+--- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
++++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ * Copyright 2022-2023, 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+  *
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+@@ -954,6 +954,9 @@ int ffa_partition_info_get(struct udevice *dev, const char *uuid_str,
+ {
+ 	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+ 
++	if (!ops)
++		return -EINVAL;
++
+ 	if (!ops->partition_info_get)
+ 		return -ENOSYS;
+ 
+@@ -979,6 +982,9 @@ int ffa_sync_send_receive(struct udevice *dev, u16 dst_part_id,
+ {
+ 	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+ 
++	if (!ops)
++		return -EINVAL;
++
+ 	if (!ops->sync_send_receive)
+ 		return -ENOSYS;
+ 
+@@ -1000,6 +1006,9 @@ int ffa_rxtx_unmap(struct udevice *dev)
+ {
+ 	struct ffa_bus_ops *ops = ffa_get_ops(dev);
+ 
++	if (!ops)
++		return -EINVAL;
++
+ 	if (!ops->rxtx_unmap)
+ 		return -ENOSYS;
+ 
 -- 
 2.25.1
 
