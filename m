@@ -4,54 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5857BC83F04
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 13:50:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20DC9C83F04
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 14:06:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD61680E9A;
-	Wed,  2 Jul 2025 15:50:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 93E7980E9A;
+	Wed,  2 Jul 2025 16:06:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=opensource.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="M0EDtm/b";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C55CF81FEE; Wed,  2 Jul 2025 15:50:39 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1BC7980E9A; Wed,  2 Jul 2025 15:34:12 +0200 (CEST)
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
+ [209.85.219.47])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B56A9800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:50:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id EEC5F800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:34:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5EAFF5C39C2;
- Wed,  2 Jul 2025 13:50:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C96F7C4CEE7;
- Wed,  2 Jul 2025 13:50:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1751464236;
- bh=XV2R8zbqMRnejJFPMzV1OT92Q1Boqlt02SvwiDWMQas=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=M0EDtm/brs5uHxUfhofsn0l9QTlDgh/Pkd49a/F0Tj0hnWXEMlmXODykxIKbfHTm4
- 8+hcaVnsjn9U9cZ8Y6Q87rOgHrVwkHWcJR+jcNuuDErlLvo3qhGDSvGpHHhdurFoeL
- ET8FW+Jy8D0BwiiLCg/dyPMXaUYjNHTLJAiCI1U/sGB4A5pJguaEsOT04z4M/N/FZg
- QXerT1yDMvBDflwisB1r3OgsD3bcq44n+LdGdgV3VN2nGsik9Zys0OhAhWlRXSnJuP
- l5bVWBaDrv1dqJGvOEchPEh/n5Tq1XFvWnKHcD4ZBOm3qXhIaHzmmXz9FP/CnIHsp9
- CDtMYuoy9i6pw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>,
- Dmitrii Merkurev <dimorinny@google.com>
-Subject: Re: [PATCH RFT v6 3/3] fastboot: integrate block flashing back-end
-In-Reply-To: <20250630-topic-fastboot-blk-v6-3-7cdfd3a24786@linaro.org>
-References: <20250630-topic-fastboot-blk-v6-0-7cdfd3a24786@linaro.org>
- <20250630-topic-fastboot-blk-v6-3-7cdfd3a24786@linaro.org>
-Date: Wed, 02 Jul 2025 15:50:33 +0200
-Message-ID: <875xgau2fq.fsf@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain
+ dmarc=none (p=none dis=none) header.from=opensource.se
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=magnus.damm@gmail.com
+Received: by mail-qv1-f47.google.com with SMTP id
+ 6a1803df08f44-6fafdd322d3so49681776d6.3
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 06:34:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751463249; x=1752068049;
+ h=subject:message-id:date:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nAWL3JH4oPpqkfD3pM01gIvNSHpOUJtpOSSC9bR/Yfw=;
+ b=QxIAhCVFwWu1+QEvDl87qKKHS4XBnGQQY1T9IGEJ5/O3k4WWPR9Q+MKG4k/fO5sF9g
+ MTrjzqdlpqzN2hTf98RsS5t/L1HUKM4L4+gvLqX95fFmiOfigkzwMEvlpBcdjm9y063t
+ fJ6SJNq9P/5d34dTIYVeX4gAK2UbwBoh9cSUcIdEl0bZDrK12TgAqzN7+U92oHa8J+Ne
+ F+U2nhZR13ZENrsd8c61QCbXajOjbtFkgSovLLR1mrCy4e0Km6EC0warDT57zc1uThRj
+ nts1KXlhdCokPbCSZZCqSA+qFiKGYKH5UHyUvYGyRsE9l8lxELOgUtjt37mt0vxk4ABf
+ iCjQ==
+X-Gm-Message-State: AOJu0Yx9wkUMrbYf/5ibXltghvkANjQQJHxoN8s/nrSztUbYiA5vXn5P
+ kbFr4ikGPdkoLynuUF5qRyo66zY3cot+iYlrZsar5JDydOtNUnh5XJwFF+QPWN9Z
+X-Gm-Gg: ASbGncteJUu1dTCZt521D+L6shcn7EON7cVzBIQ56Q1FX2Ioso9/dQ3tOY0aq+hM2M+
+ 3oazLwtEWUlZiLeAWVS3ZDXyk+5vNURHjdPqg1E4cydovm4mraecoWsZgtTWiuSLqYesTwbS9z0
+ PVgrfr2U4IMJUqCRxZh3rCE/A3Iu+6e2Eo0N0AQAtHTcA5my6xBwSdo8PW6tPaaiXQXizQIP0ry
+ YR8AnSveY3ng1qbOwrYU1NCwPhcr9fujCGKjQH83zf7YC3rtgpwXhaq/wsatHPxjNaxiONHgnNt
+ 31oIQZo3TX0/fg1ZqD6zshIDN+r0LY11q5UCgdjuRSxHXgxRbS9fNK8Qr/K/6kyoMO4uZXRNwSX
+ ygAaLSBak3S7C
+X-Google-Smtp-Source: AGHT+IFuE4Yy12E0xiH5GQZQ0/SKgiICvsxiq+4H/h1w590lvFXYACaPWYLhn+2K2oZgpXxg5r2/ow==
+X-Received: by 2002:a05:6214:1c85:b0:6f8:b73e:8ea5 with SMTP id
+ 6a1803df08f44-702b1bab444mr34485346d6.26.1751463248407; 
+ Wed, 02 Jul 2025 06:34:08 -0700 (PDT)
+Received: from 1.0.0.127.in-addr.arpa ([167.99.4.198])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6fd7718d34csm100586256d6.19.2025.07.02.06.34.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 06:34:07 -0700 (PDT)
+From: Magnus Damm <damm@opensource.se>
+To: u-boot@lists.denx.de
+Cc: Magnus Damm <damm@opensource.se>,marek.vasut+renesas@mailbox.org
+Date: Wed, 02 Jul 2025 15:34:05 +0200
+Message-Id: <175146324587.68406.3781314116200023930.sendpatchset@1.0.0.127.in-addr.arpa>
+Subject: [PATCH] makefile: Adjust distclean to remove .binman_stamp file
+X-Mailman-Approved-At: Wed, 02 Jul 2025 16:06:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,41 +77,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jun 30, 2025 at 17:19, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+From: Magnus Damm <damm@opensource.se>
 
-> From: Dmitrii Merkurev <dimorinny@google.com>
->
-> 1. Get partition info/size
-> 2. Erase partition
-> 3. Flash partition
-> 4. BCB
->
-> Make FASTBOOT_FLASH also depend on BLK, but make sure
-> it doesn't affect SUNXI and ROCKCHIP platforms since they
-> default to y already.
->
-> Make it only default on SUNXI when MMC or NAND is enabled,
-> so it doesn't break the CHIP & Ninendo boards, and for ROCKCHIP
+Remove the .binman_stamp file during distclean
 
-s/Ninendo/Nintendo/ ?
+Signed-off-by: Magnus Damm <damm@opensource.se>
+---
 
-I can fix when applying if needed.
-Mattijs
+ On top of cbb5672790d400e9ec6e9fceaf89ece2660c0117 (origin/next)
 
-> when MMC is enabled.
->
-> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->  drivers/fastboot/Kconfig      | 32 ++++++++++++++++++++++++++++++--
->  drivers/fastboot/Makefile     |  1 +
->  drivers/fastboot/fb_command.c |  8 ++++++++
->  drivers/fastboot/fb_common.c  | 22 ++++++++++++++++++----
->  drivers/fastboot/fb_getvar.c  |  8 +++++++-
->  5 files changed, 64 insertions(+), 7 deletions(-)
->
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index 70207573de2bd0d56b4b7fa6f7e17fdc5803ba15..b2b20a2c5e430cccc49fd6c04d6fb8825b67ec04 100644
-> --- a/drivers/fastboot/Kconfig
+ Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- 0001/Makefile
++++ work/Makefile	2025-07-02 22:18:46.615791336 +0900
+@@ -2309,7 +2309,7 @@ distclean: mrproper
+ 		-o -name '.*.rej' -o -name '*%' -o -name 'core' \
+ 		-o -name '*.pyc' \) \
+ 		-type f -print | xargs rm -f
+-	@rm -f boards.cfg CHANGELOG
++	@rm -f boards.cfg CHANGELOG .binman_stamp
+ 
+ # See doc/develop/python_cq.rst
+ PHONY += pylint pylint_err
