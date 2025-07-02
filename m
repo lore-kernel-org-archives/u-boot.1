@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17926C83F04
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 13:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67AFFC77B7C
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 13:45:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CD2381FEE;
-	Wed,  2 Jul 2025 15:45:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E423780E9A;
+	Wed,  2 Jul 2025 15:45:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QSXzhqlu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pqsqyark";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A7AF82CFA; Wed,  2 Jul 2025 15:45:20 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 44A7A81FEE; Wed,  2 Jul 2025 15:45:53 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 142F0800D7
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:45:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 411A5800D7
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 15:45:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-73a5c41a71aso3645010a34.0
- for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 06:45:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-453634d8609so49051125e9.3
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 06:45:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751463917; x=1752068717; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/QEPz6mSnxHlnj3Z4ozMA29JxuJp8Gx3v00cpX6Z/FU=;
- b=QSXzhqluCx9CfZrNxf2jCQxOylzjBYm/fUKaq4di7KDQMesor06FzQzRhAbssCcCkK
- c88ce2NxBQYcbRQjkIrsjP2yKbVJ4XePnMSGi321j7KWu5ZlCeMCbGmNGnA6AEeUEzli
- n4sW/kV1w8FephSKPNCABGn34c5Ts98GG0Q/4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751463917; x=1752068717;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1751463950; x=1752068750; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/QEPz6mSnxHlnj3Z4ozMA29JxuJp8Gx3v00cpX6Z/FU=;
- b=Gg0pZJ3d8o1p40wuy2jeDlVuadldJ4p9sST1PP87syCw9lzp81dJjbALtjTdNSliUB
- oOCfvXKIuTv/oapWmuYWHIUlXICs+3Z1tnhc2Nn0Lfp+1T+PLzy2Ke1KZHIuZZnlA6ox
- PHqQF9e0/ONXwYP7fefiyGdWXZTmHhg2BWx247tC6OsuGCCbx2azKTLCbi2sGbtWOvGy
- QwM6Pq4KtasOa8AfX+suMLzoOMGvAZIvV9ovS/kfXjhD63ZYBW6b4aDATahDwpC/i+Z7
- +YxnXpoAfbweC0zDRYt2Dux3KsGjS3A5gmCUbNKl55LFxr45l7eTFe3fZHoorzcOVW2k
- 61ug==
-X-Gm-Message-State: AOJu0YzQzjsfqzMcXyTHyjX15M+LQXdXPMfpo+dyBch7mXoGpfC2jk5H
- YL8C9dG/tFevTlGAcX/Z58YpBPB0XDDV3INP49EE2w4I6WQyuBOZcCPVhgs3gv0fAd12BkghDKJ
- zzDzRjiw=
-X-Gm-Gg: ASbGncumPG56MxdUHLv0FtqigX1eIYZW1hyK9lRDBqfdb99t0vYFYxUyFGgsOEtfSFb
- 6wffEanguOuZQwlH1nKcrdbGXX48dE3rPrbt/IygJzAqgZ8mdY9V4btNKapXr2Z9CAsgM8fFki8
- k5yph1Z2S4624zIS+IUGR4Gi7/xYK/IrGDLBr1xQBFMFhWGx03N5Uzt2IOhaCU0Q+4YetHhZKOu
- KMPa5mpWEVGYF25Dechp2eWXNc9Ba5DaesziuDSJppK9s4NyLLl39f4WzaCnQxoZK9rIB9wyTPy
- 4YPAV64sXen+/3nimelgFM2m/9AklnqwfsOGLOfTr0YupnDiY89mtBZ8AdV5nQ0aEd5PgVO0Xje
- Wf7URP6RRv0Mk+V0AYMIm
-X-Google-Smtp-Source: AGHT+IEAoP7QqmaYmsRfjuqxYqghHt/irqou2jn3cS88svRvpo+1meo2TF1WaEqIC6JaI/9VMQsXGg==
-X-Received: by 2002:a05:6830:808a:b0:73a:e93c:ec22 with SMTP id
- 46e09a7af769-73b4ce3b9b3mr2188965a34.8.1751463916579; 
- Wed, 02 Jul 2025 06:45:16 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-73afb0e2ed7sm2512870a34.35.2025.07.02.06.45.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jul 2025 06:45:15 -0700 (PDT)
-Date: Wed, 2 Jul 2025 07:45:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] boot: menu: Do not dereference pointer if pointer is
- NULL
-Message-ID: <20250702134514.GB6424@bill-the-cat>
-References: <20250630-scene_menu_fix-v2-1-7d9141a45a63@linaro.org>
+ bh=+RghEcE1LitXXxRFPaq5AaVqHIC7kWqvv4+JqXpzgC0=;
+ b=Pqsqyark5V2HIRtBQbbxrDStdiPC/lvq2uUkV6Zp3/fu4RX2up5fSL+859sCm26139
+ nNJ8u7WF/OkW6wG6U+eIh1v4guXPcTyFCGOBtJDHtRQZKZibyyB+IgQhVJe/syssVNrx
+ bRcHKnKb3cJ6QQ6vy2S8vTJ5+n2JDtOzMWV3Yx3eude08cecaobXZNsDZqTBln82pHX7
+ xh5BvaYFGk6Ta0TAjRcAaqqQ2djV1zW8o0PlvL1RcZYYM5Y+7tON9EU6bmhl5GtpPPUs
+ Q6C+nViFIs02HIgBLbfA2YCuqn3gAJW9PV5o8Qzv0OrRqwzYbF7vRL/Q+njXlC0BJOAm
+ 4+eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751463950; x=1752068750;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=+RghEcE1LitXXxRFPaq5AaVqHIC7kWqvv4+JqXpzgC0=;
+ b=rSgxmD4V6yyR+ymjVqzE79jyJPbh6CTLZpkklpMxn1WssBq+w8ex074vPfqMDrnjNo
+ DCbIDfJ1uMR0ANF5jW71sodxyoNf3AVESo3CpPw2rUIcfcJ+HtaB/PmJe5KZdQxupzIl
+ 8yk6eTNixSaXiDnUiz2fsAmikgxkwd63jKBOP667VnkqbjItNJtisx18mRlpyDLtA77g
+ 0yJwrcMoWufd7852nzafNvrvX6xV/Nfd/okUC2gXWCHZ8A5K9ztfILUb0WpJRrUmJ2ox
+ 8IH5tEvBkyfFVqvVRGOF2blKerKT2gKWWGcif5zfIv6Cx4AKEzWrqRkwre57v2TPI+wg
+ RsJA==
+X-Gm-Message-State: AOJu0YwrnDH2Z0aYS7kMKtTjAblLwHWb6VdnkYtrgx4GWqRuNvhBeUlh
+ 16QdS8XatlYxwIv6yn/wbDt3h8kUDxFSSspheeSkqYNsE3NIw2GBXQP7edLZnWv0+vo=
+X-Gm-Gg: ASbGncsfVZFdl6tGkf1S7fp+WgjCEO2B4icIN37d2mio6EEd6q/Et727h44m9ZjtWMl
+ bjo4MeREMrMHM+UnCOCU1CBEOr/SvpijxQKlvYWNwLQJFdAGhSywKsbghbFL3xvnyRNokmcNUUR
+ dnpbJ76JUQbgN0SMyIvSHHkN5rBIDsoFaPoheVOR04TtmusWp2zaIQj/Hxp/fdMkTmHcNJsAu6z
+ x7WzWhS7fIEne23ZnVQWUwug9B6nP4vX57A9Ug4rERcBitPkcEG9yalEypu621hK+2glWPFc4fz
+ wXumasJtC8HrvIhASNPZaEpGkF5Z4sUl1usgoljNPGt+IJjSCYwHgmOzPtWeyTETMl56TkUpwjV
+ 97iRdAytgheLnRZeJ3exYpHp1+F85qApXdCKLu3bwPidhtOzN0A==
+X-Google-Smtp-Source: AGHT+IHOJXMEoi1umfR9SVNUp0mT7pY3IqjUCqpMrKbn3GqHvtfuNe4L6HaEyGzEZQmbXntESnHsEA==
+X-Received: by 2002:a05:600c:638e:b0:442:f4a3:b5f2 with SMTP id
+ 5b1f17b1804b1-454a36dc78fmr36606375e9.6.1751463949580; 
+ Wed, 02 Jul 2025 06:45:49 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:e07:801:2aa3:3d9f:604c:fc30?
+ ([2a0a:ef40:e07:801:2aa3:3d9f:604c:fc30])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4538a406489sm203042905e9.27.2025.07.02.06.45.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Jul 2025 06:45:48 -0700 (PDT)
+Message-ID: <047489d8-c453-4eb2-8a10-ef736da556b9@linaro.org>
+Date: Wed, 2 Jul 2025 14:45:48 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="f3my2O1HOhAmTGjp"
-Content-Disposition: inline
-In-Reply-To: <20250630-scene_menu_fix-v2-1-7d9141a45a63@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Casey Connolly <casey.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Julius Lehmann <lehmanju@devpi.de>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: Smatch reports for drivers/scsi/scsi.c
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,44 +102,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---f3my2O1HOhAmTGjp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Smatch reports the following for drivers/scsi/scsi.c
 
-On Wed, Jul 02, 2025 at 10:24:16AM +0100, Andrew Goodbody wrote:
+drivers/scsi/scsi.c:165 scsi_setup_erase_ext() warn: right shifting more 
+than type allows 16 vs 24
+drivers/scsi/scsi.c:166 scsi_setup_erase_ext() warn: right shifting more 
+than type allows 16 vs 16
 
-> scene_obj_find can return NULL but this is not checked for before
-> the return is dereferenced. Add a NULL check.
->=20
-> This issue was found by Smatch.
->=20
-> Also add a NULL check for str.
->=20
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+I just wanted some ideas on the best way to resolve this. There are 
+differing patterns even within this file about how the number of blocks 
+parameter should be handled in calls to static functions. In all cases 
+the value starts as a lbaint_t which can be a long or a 64 bit type.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+1) in scsi_read there are calls to scsi_setup_read_ext whose third 
+parameter is an unsigned short. The lbaint_t variable is assigned to an 
+unsigned short (smallblks), which will simply truncate the value, before 
+smallblks is passed as the 3rd parameter to scsi_setup_read_ext.
+In scsi_setup_read_ext the third parameter (blocks) is split into 2 
+bytes. A third byte is set to 0 and I am guessing that if appropriate 
+this could have taken a higher order byte if that had made sense.
 
---=20
-Tom
+2) scsi_write is similar to scsi_read
 
---f3my2O1HOhAmTGjp
-Content-Type: application/pgp-signature; name="signature.asc"
+3) scsi_erase calls scsi_setup_erase_ext with lbaint_t as the third 
+parameter. scsi_setup_erase_ext takes unsigned short so there is an 
+implicit truncation here. Here is where Smatch complains as this 
+unsigned short is shifted 16 or 24 bits to the right, both of which 
+exceed the size of this type.
 
------BEGIN PGP SIGNATURE-----
+So possible fixes are to make all three functions consistent and take an 
+lbaint_t as the third parameter. Or to make scsi_setup_erase_ext like 
+the other two and just hard code those bytes with excessive shifts to be 
+0. Can probably remove the use of the smallblks variable at the same time.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhlN+kACgkQFHw5/5Y0
-tywUcAv/SMxr6pAvlfDSq+gL6QbZkXs6KFhbdVLhP4YB51Q5ffZl8NxfO1jHBit/
-m8kWkDPgtyjhAHEoDEuPZPzadJ7j3jgixSjoDvtf/AyR2OaaG3UvDRwQ+GPyL8vb
-1Cd/Ov/+2VfXeorF0hkh/5qPO5V67I7R5XzPthjUdK6M50i1mrhCOH37mirXUkeO
-MPyYXIN6YBBGV3Ftj8QjMmoIN0GZKrcOhhdDcAjWQLdR2VlOO77P5fdjvT1ogjjP
-7htQVPYoTEaI5qeFfkgNnR+lTzlb46JVSjtwnDaBOaD+Kpr0+Wps4n1dEMSwg17K
-LusDyDXPdWozpnuRdHbooVCRLbcyvwo6PqkdmOiobg7xXggsSNeq2uzvI7FefLcV
-hbJPtcp2UKlpL+T5joxT22xfclVFUCoO2c1PH1LmBYmN074Go40qXvpF0jEXwG9e
-OWHzCCaPslCkHSv5gIiY+gshyRnLMuFJw9fnoGHbV89mnDhQAWogzk1zd91VkSaF
-4n/CpuTc
-=5mPI
------END PGP SIGNATURE-----
+Suggestions?
 
---f3my2O1HOhAmTGjp--
+Andrew
