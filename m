@@ -4,47 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620D8C83F04
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08886C83F04
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 15:38:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F14FF82A76;
-	Wed,  2 Jul 2025 17:26:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8172882CFA;
+	Wed,  2 Jul 2025 17:38:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P8NArrgp";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB29282A76; Wed,  2 Jul 2025 17:26:32 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0F06B82103
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:26:30 +0200 (CEST)
+ id B75BF82EB8; Wed,  2 Jul 2025 17:38:26 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AB8582A76
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 17:38:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A4F8B2F9D;
- Wed,  2 Jul 2025 08:26:14 -0700 (PDT)
-Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.38.90])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AAE0E3F6A8;
- Wed,  2 Jul 2025 08:26:27 -0700 (PDT)
-From: abdellatif.elkhlifi@arm.com
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, abdellatif.elkhlifi@arm.com,
- Davidson kumaresan <davidson.kumaresan@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH 25/25] fwu_arm_psa: Document FWU support for Arm PSA
-Date: Wed,  2 Jul 2025 16:25:28 +0100
-Message-Id: <20250702152528.1180414-26-abdellatif.elkhlifi@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
-References: <20250702152528.1180414-1-abdellatif.elkhlifi@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-73af5dc0066so1622482a34.1
+ for <u-boot@lists.denx.de>; Wed, 02 Jul 2025 08:38:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1751470703; x=1752075503; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MufP/iB0m9Fd8TBUlA+5odcaulBwdYsRId35o56aFzA=;
+ b=P8NArrgpdH4q4gLsuoW5VhPxG99Mt+Wv7Eu0hcdtUtKpRbPCgLOmEAy1Eq6vL9+Jyo
+ egLQRYwn+ibLo3rzvgRxFaiOVmrLPkhfXyVDMVl+FY0gJo5XYy6kCeDQgCSASGh+WyBR
+ ni6xKK1NK5/J4/l1stt82RQ9hCkTQiMo8jCXs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1751470703; x=1752075503;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MufP/iB0m9Fd8TBUlA+5odcaulBwdYsRId35o56aFzA=;
+ b=WsolJCNi/J5pc+r6pSKRD1VLPz76Sl3DcSzbj79/jnIMa3QmZNtwhtWP+vW1abJPUe
+ IEnuwGxwMmUn9/PqwwW2hej7j7C+yQ3q47XZZmUN09FtLtcoiO5rWZGaA46dUOiLgoEI
+ 65mJarX0Hw3j6Gzu1ARBSsQrX80mEF35RBKlYeCyZqasSsfN8kcu8l0kldjDMOpFi29f
+ pQ4MLaHSTTZRvGtFs5iRLx255AUkt+3g4f+4MVgwWrr5aiWzpw8FcqPmftMXKSUfXkaF
+ H5WJ9/grtczGaPpa6MZ3SwLjtf5EuXvttIzRTJRa/nN5xC5TkuoLuLxVuIs0NNy9fEgl
+ IhJQ==
+X-Gm-Message-State: AOJu0Yxime90gzoGi1lZLDv6UxSSNPzRan/ZGyKC6kvXbKfLMOczA4Wp
+ 8EzXOOkIiVV2aAMr3nYCevadU+A5/VRDeJLIUIV6oCseK4s1y8QCnRqiX0E1+P1lEMc=
+X-Gm-Gg: ASbGncvhLvXwbszVKhdvMxyhpQfWvvPpqKKx1z57FqlNRCRexHR6n8sOvYfI2wdZtbe
+ MpDUcUKpfkGJOGGfFpKvv5NUhWc62w5M+DamPCm6OKjjSTB/61t5zGwqQIIdn8ljV/qo8SjDH2T
+ 0mNColC6TlqEgcGpwJoL5ha2mft+XzrDW2dU6VbKHtlCUx1wJwEj2ie0RLYUXUHDgrZJz0z6HbG
+ I+XGzOi0hI41Xpfg8L5CrX82ou60GlWYV2tmsWDC+vD1Y6A8nT8aX/NS8nN2SWUFdQGKAWpoRJZ
+ B5vGHWN/BdtpjqDOnvbGdrQPGKGrgG5onmpqlzjSYQfmuJ94SRLpkFd6pYp6w3U7avVQkzNoekD
+ y8tge6SZthz3iddlqo+o=
+X-Google-Smtp-Source: AGHT+IFAI2fUNFwBn5GRyxGgYxhmtRr4e23Rvb5XEuUUEZkQVlfZt5SlhFMeteshw8f4BEhOkUv5fA==
+X-Received: by 2002:a05:6808:8188:20b0:40b:9948:f2a9 with SMTP id
+ 5614622812f47-40b9948ff2amr1171278b6e.11.1751470702939; 
+ Wed, 02 Jul 2025 08:38:22 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-611b848df75sm1756343eaf.15.2025.07.02.08.38.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Jul 2025 08:38:22 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250702085456.GA27006@nxa18884-linux>
+References: <20250702085456.GA27006@nxa18884-linux>
+Subject: Re: [GIT PULL] Please pull mmc-next-2025-07-02
+Message-Id: <175147070227.1759231.13672014601115488103.b4-ty@konsulko.com>
+Date: Wed, 02 Jul 2025 09:38:22 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,211 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+On Wed, 02 Jul 2025 16:54:57 +0800, Peng Fan wrote:
 
-Add a README
+> Please pull mmc-next-2025-07-02
+> 
+> CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/26911
+> 
+> -----------------------------------------------------------
+> Get clock manager address via DT for socfpga_dw_mmc
+> Revert "drivers: mmc: rpmb: Use R1 response"
+> Fix offsets relative to the end of the partition for mmc env
+> ------------------------------------------------------------
+> 
+> [...]
 
-Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Signed-off-by: Davidson kumaresan <davidson.kumaresan@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>
----
- MAINTAINERS                      |   1 +
- doc/develop/uefi/fwu_arm_psa.rst | 153 +++++++++++++++++++++++++++++++
- doc/develop/uefi/index.rst       |   1 +
- 3 files changed, 155 insertions(+)
- create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+Merged into u-boot/next, thanks!
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fdf34c74049..a75bc1d2379 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1231,6 +1231,7 @@ FWU ARM PSA
- M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
- M:	Davidson kumaresan <davidson.kumaresan@arm.com>
- S:	Maintained
-+F:	doc/develop/uefi/fwu_arm_psa.rst
- F:	include/fwu_arm_psa.h
- F:	lib/fwu_updates/fwu_arm_psa.c
- 
-diff --git a/doc/develop/uefi/fwu_arm_psa.rst b/doc/develop/uefi/fwu_arm_psa.rst
-new file mode 100644
-index 00000000000..f91fd85f573
---- /dev/null
-+++ b/doc/develop/uefi/fwu_arm_psa.rst
-@@ -0,0 +1,153 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+
-+Firmware Update (FWU) Support for Arm PSA
-+==========================================
-+
-+This README provides an overview of the Firmware Update (FWU) support
-+implemented in U-Boot for Arm `PSA Certified`_ platforms, such as
-+Corstone-1000. The feature aligns with the Platform Security Firmware Update
-+specification for the A-profile Arm Architecture
-+(see `DEN0118 v1.0 A specification`_) and leverages the Trusted Services (TS)
-+framework to interact with Secure world update agent.
-+
-+Overview
-+--------
-+
-+The FWU subsystem enables secure  firmware updates by
-+delegating the update management to a Secure world agent. U-Boot acts as the
-+FWU client, coordinating updates via a well-defined set of ABIs over the FF-A
-+interface (see :doc:`Arm FF-A Support <../../arch/arm64.ffa>`).
-+
-+FWU for Arm PSA supports both on-disk and standard capsule updates.
-+
-+Key Features
-+------------
-+
-+1. PSA Firmware Update Initialization
-+-------------------------------------
-+
-+- Initialization of the update agent using the FF-A transport and discovery of
-+  the Trusted Services FWU SP.
-+
-+- Discovery of the version of the ABIs using FWU_DISCOVER ABI.
-+
-+- Establishment and sharing of communication buffers between U-Boot
-+  (Normal world) and Secure world.
-+
-+2. ESRT Support
-+---------------
-+
-+Retrieval of ESRT (EFI System Resource Table) data from Secure world using
-+FWU_READ_STREAM ABI, enabling compliance with UEFI standards
-+(see `UEFI v2.10 specification`_).
-+
-+3. UEFI Capsule Handling
-+------------------------
-+
-+- Runtime checks for capsule flags as per UEFI 2.10 specification:
-+
-+    - CAPSULE_FLAGS_PERSIST_ACROSS_RESET
-+
-+    - CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE
-+
-+    - CAPSULE_FLAGS_INITIATE_RESET
-+
-+- Support for keeping the FMP payload header in Arm PSA mode to preserve
-+  critical metadata required by Secure world.
-+
-+4. Staging and Update Flow
-+--------------------------
-+
-+- Full support for update staging flow as per PSA spec:
-+
-+    - FWU_BEGIN_STAGING
-+
-+    - FWU_END_STAGING
-+
-+    - FWU_CANCEL_STAGING
-+
-+    - FWU_WRITE_STREAM
-+
-+- Capsules can contain multiple payloads (including start/end markers
-+  and the update content).
-+
-+5. Directory Access
-+-------------------
-+
-+- Reading the FWU directory from Secure world using FWU_READ_STREAM ABI.
-+
-+6. Image Update Lifecycle
-+-------------------------
-+
-+- Implementation of get_image_info() and set_image() using raw EFI firmware
-+  services provided by the FMP driver for raw images.
-+
-+- FWU_ACCEPT_IMAGE ABI issued on ExitBootServices() to commit successfully
-+  booted trial images.
-+
-+- Option to disable automatic acceptance on ExitBootServices() via
-+  CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES.
-+
-+Configuration Options
-+---------------------
-+
-+To enable FWU support for Arm PSA, include the following options in your board
-+configuration:
-+
-+CONFIG_FWU_ARM_PSA=y enables the PSA-compliant firmware update client in U-Boot.
-+
-+CONFIG_FWU_ARM_PSA_ACCEPT_IMAGES=y Enables auto-acceptance on
-+ExitBootServices(). This option is enabled by default. It can be disabled if
-+image acceptance should not be done at ExitBootServices().
-+
-+Platform Integration: Corstone-1000
-+-----------------------------------
-+
-+- Corstone-1000 is the reference implementation for the FWU Arm PSA feature.
-+
-+- ESP partition detection is automated by setting Boot0001 in the U-Boot bootcmd.
-+
-+ABIs Implemented
-+----------------
-+
-+The following ABIs from the PSA FWU specification have been implemented:
-+
-+    - FWU_DISCOVER
-+
-+    - FWU_BEGIN_STAGING
-+
-+    - FWU_END_STAGING
-+
-+    - FWU_CANCEL_STAGING
-+
-+    - FWU_OPEN
-+
-+    - FWU_WRITE_STREAM
-+
-+    - FWU_READ_STREAM
-+
-+    - FWU_COMMIT
-+
-+    - FWU_ACCEPT_IMAGE
-+
-+ExitBootServices() Integration
-+------------------------------
-+
-+- The U-Boot FWU client performs several key actions during ExitBootServices():
-+
-+- Notifies Secure world about successful boot.
-+
-+- Accepts updated images in trial state.
-+
-+- Supports board-level override of fwu_notify_exit_boot_services() for custom
-+  behavior.
-+
-+Contributors
-+------------
-+   * Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+   * Davidson kumaresan <davidson.kumaresan@arm.com>
-+
-+.. _`DEN0118 v1.0 A specification`: https://developer.arm.com/documentation/den0118/latest/
-+.. _`PSA Certified`: https://www.psacertified.org/
-+.. _`UEFI v2.10 specification`: https://uefi.org/specs/UEFI/2.10/
-diff --git a/doc/develop/uefi/index.rst b/doc/develop/uefi/index.rst
-index e26b1fbe05c..573630740a0 100644
---- a/doc/develop/uefi/index.rst
-+++ b/doc/develop/uefi/index.rst
-@@ -10,6 +10,7 @@ can be run an UEFI payload.
- .. toctree::
-    :maxdepth: 2
- 
-+   fwu_arm_psa.rst
-    uefi.rst
-    u-boot_on_efi.rst
-    iscsi.rst
 -- 
-2.25.1
+Tom
+
 
