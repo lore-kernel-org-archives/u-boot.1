@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2193BC83038
-	for <u-boot@archiver.kernel.org>; Tue,  1 Jul 2025 20:40:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D66C83038
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 01:03:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5296680B9B;
-	Tue,  1 Jul 2025 22:40:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BDC181FEE;
+	Wed,  2 Jul 2025 03:03:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WZwVpu5V";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OG+Ll+Am";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B746A81E13; Tue,  1 Jul 2025 22:40:48 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 65DDA82ADA; Wed,  2 Jul 2025 03:03:51 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94F078006D
- for <u-boot@lists.denx.de>; Tue,  1 Jul 2025 22:40:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4431381E13
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 03:03:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-6113e68da82so2413902eaf.1
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 13:40:46 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2ea58f008e9so3305736fac.0
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 18:03:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1751402445; x=1752007245; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/4xaajV1Q98gRMbUTbhXmgzBm/0oNP5cdMdHy4ELm3Y=;
- b=WZwVpu5VNuQ195s1be/QtLUuUPIlyDg88yrC7fYwO7ZYisOhAuOXPpO/aqt6UNM+pI
- rVvRj6yDKtCFewRjh7bLMv2ffDg9YihgOq3XCqC722HxGcSWozlafwYGY13WLtzJgYmE
- eKx9Q1iP4OF+QUmtZD9pJwEEiCV+MyTZfieOs=
+ d=konsulko.com; s=google; t=1751418228; x=1752023028; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WoDtnyq7tLiYPRawKigqs8RzXHqgBny7Yf/XORRB+QU=;
+ b=OG+Ll+Am3zaP0vyiAI4ySMty1uZC8h0n9f2PlTDAByQDLs1FpfxCt2Brs/MhWACBvW
+ R/0ud3gV0DGEO0A3HdJlgkrOyFNLW+RofDrmf4Hort1JBoRqHEr3Pyfi6gIWzYsYzktg
+ RuOgmEdqCa4c1OAMHi6LpNSFazuaKqLpQJ/II=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751402445; x=1752007245;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/4xaajV1Q98gRMbUTbhXmgzBm/0oNP5cdMdHy4ELm3Y=;
- b=WYptu+H2b2uWAZPhfAIWIY4T089ItQMjVd1Oaiig7SlS4/L0jOjDMaIRBUQHDGhcRU
- 5U+Az1yrz5XHF70u2uzZ0UeBJhBz2JzCtfulRCWp0+lzEnskOuK4+diUEg/RUCZUzSa/
- XB2EuS78b35v+OpHUwoseMJuWAf8H+a47xOnRa+21i5XSxLx2nf/Mh2NHjKag+4Sqhxh
- vA1aqJ0Hzka9b0R+hRGzKn7CtIFOsurmORxiz026dTUJPC0gXFdKwTxA5WM9ktrwgrxD
- QTKJrT2P7EYzPs7EqLVQcBHWrkkO7OjrleGSZaBC+Xer17t58bG/VfYEEB67nsdCjPZl
- wQtg==
-X-Gm-Message-State: AOJu0YzKDY/FwdVbUbwRtiY8OadFiTozQc+nKSR7DTjx0JVt4cHlPMRt
- LJb/D5mahaOwrvPDNm0XReMUrvrDJbQF5Up0TdKFoQbrpZPftCCa51TCuD0E+PY8UFtXkw1GPUk
- opcD7YkM=
-X-Gm-Gg: ASbGncsAHKcURwSLexVqV87FxgEs+bH9g5bH+9GnS58vw3DSB/mvB6ok/hDKUWays/0
- RVAWTMrK1lhVYRLBuM2Y8mesWedDC6DnQOL6C2xrZj44tJx0nb1tMQEOK92DOhppWeOESm/z/+q
- XNocHLJsKRe7a4TFOpf+IO6zqg80gadr/DK+SyLJdOLPRejfOgcLfxplXGp/w0vh/Ejs1rPxyeZ
- vxlUSSQGRZ/NcSZ0zblLBx/wkE9eaeIO7e9u0hkOWY+tM0NX/12IcVLjk6+2L9D/OT04znFKDSQ
- mCwPBlTb/IS/+KqlEi+pOCP1bB1eGUAj1xcqAJJ2XGHeIDOIqwN66/yw/iWWSV6cEG5zChmgsgq
- 1KZ2hvkPQfPvnXc6tIKeP0+o=
-X-Google-Smtp-Source: AGHT+IFN4Qs1Robe77RLwWFZr9oBbeuHON0QPE2e++mOp6TNBVi72Th/1TRfQuOkVbll6PacCJw+xA==
-X-Received: by 2002:a05:6820:198d:b0:611:e30a:fa1c with SMTP id
- 006d021491bc7-61200f7034bmr169848eaf.1.1751402445147; 
- Tue, 01 Jul 2025 13:40:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
- [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-611b857b915sm1507260eaf.25.2025.07.01.13.40.44
+ d=1e100.net; s=20230601; t=1751418228; x=1752023028;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WoDtnyq7tLiYPRawKigqs8RzXHqgBny7Yf/XORRB+QU=;
+ b=k5ORcF04tTaI11ieJIHeBhKzLgZu1wNstxcgVXnSM6qD1zRLrHT09YJ3Jt1jJCwQz1
+ oWdpzKoFPHV+sJdsnVdyywob/bDxUjLZoQbusxg5ucTakU/GaO/gAykA6AdiPWW72mWa
+ 8ORSzP3hGWEcpsStuC7+XqJJqtSG4KVbjTqSps+UE29/HN0siSbCYYn7yOHCyOxk1wS2
+ 7Kn931poIGMYxYyPJ07wBOd4XAXqA/7HNjk88IPNwCmMauz4+STgKGBE2m9tSZf/AOyV
+ WUbo+EiEKLHgH6jAdWOLttBxy/wAXbF+c/xihr/zuMRNqm75LAFu4huUWrV+Z6+83bi7
+ SY9A==
+X-Gm-Message-State: AOJu0Yy+OccoaP8KjatkHBIpWb4mvTZR+4G17N/mun5YFEEk2FCMMIxy
+ N2RTJUl0jJZXBzKq86TIKEEnQfYEV2IcoNe3fzFkJ6NAS/cqNEhk0vWFTj0KxDv1WBROvC/A88n
+ EIJ4l3/M=
+X-Gm-Gg: ASbGncuQ8ycCkIOF3L9JuDm5XjiJb/3m/eRJ8tFm/oQN50wpp2ih2zyDf4L71TreN9b
+ V1R/FbeAS/vMH7nUW2vU2blDD0uyogSjQooZlLp9Cc+AFnqwLukGcl5WRacM7+IYUmorb+jLG3f
+ qlbEKDM9jHzYP5Sx7gCG89OnRwLfKfi9hhUdiakHtm8jMyXFRXRwIYnj+ISSjd5rFXZzZum6CGx
+ ti9/wYFeuvmBlwdB8hVM053q4+HBSJvlsbYoIPH2blNDZ2jshPHLN51JfvPASUg30NLVh4To2GJ
+ AdGpu93fjBaSLI4AfIbjecj3LVHe0VJ0nof9UOY+66aZiKEPmM+MIbWXuyW6mzq9MCe08mbyr1D
+ 5/3avWwm2WQAoviXTUvoAViw=
+X-Google-Smtp-Source: AGHT+IFB0d+QzT9hTH3PZfzGYFUI4ausIknhKJasYsoZH7UN74RRFxCbAA3UNrQS9mrLCFE6LN/67A==
+X-Received: by 2002:a05:6870:9d8f:b0:29e:48d6:2e62 with SMTP id
+ 586e51a60fabf-2f5889b1720mr812272fac.9.1751418227903; 
+ Tue, 01 Jul 2025 18:03:47 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2efd4ef29absm3578201fac.14.2025.07.01.18.03.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Jul 2025 13:40:44 -0700 (PDT)
-Date: Tue, 1 Jul 2025 14:40:42 -0600
+ Tue, 01 Jul 2025 18:03:47 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] boot: menu: Do not dereference pointer if pointer is NULL
-Message-ID: <20250701204042.GD523899@bill-the-cat>
-References: <20250630-scene_menu_fix-v1-1-9ccb9a49c4d8@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+	Marek Vasut <marex@denx.de>
+Subject: [PATCH 1/2] usb: gadget: rockchip: Add missing dependency
+Date: Tue,  1 Jul 2025 19:03:45 -0600
+Message-ID: <20250702010346.18716-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h212f1wGhSN2kfVw"
-Content-Disposition: inline
-In-Reply-To: <20250630-scene_menu_fix-v1-1-9ccb9a49c4d8@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,62 +93,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The rockchip usb gadget driver cannot build without platform specific
+headers being available. Express that requirement in Kconfig as well.
 
---h212f1wGhSN2kfVw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Marek Vasut <marex@denx.de>
+---
+ drivers/usb/gadget/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Mon, Jun 30, 2025 at 05:06:07PM +0100, Andrew Goodbody wrote:
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 46a83141481f..b0decd7b2512 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -202,6 +202,7 @@ config USB_FUNCTION_MASS_STORAGE
+ 
+ config USB_FUNCTION_ROCKUSB
+         bool "Enable USB rockusb gadget"
++	depends on ARCH_ROCKCHIP
+         help
+           Rockusb protocol is widely used by Rockchip SoC based devices. It can
+           read/write info, image to/from devices. This enables the USB part of
+-- 
+2.43.0
 
-> scene_obj_find can return NULL but this is not checked for before
-> the return is dereferenced. Add a NULL check.
->=20
-> This issue was found by Smatch.
->=20
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->  boot/scene_menu.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-> index 17150af145d..9a6e37d1c64 100644
-> --- a/boot/scene_menu.c
-> +++ b/boot/scene_menu.c
-> @@ -508,7 +508,8 @@ int scene_menu_display(struct scene_obj_menu *menu)
->  		return 0;
-> =20
->  	pointer =3D scene_obj_find(scn, menu->pointer_id, SCENEOBJT_TEXT);
-> -	pstr =3D expo_get_str(scn->expo, pointer->str_id);
-> +	if (pointer)
-> +		pstr =3D expo_get_str(scn->expo, pointer->str_id);
-> =20
->  	list_for_each_entry(item, &menu->item_head, sibling) {
->  		struct scene_obj_txt *key =3D NULL, *label =3D NULL;
-
-This is in a slightly different place in -next, and I think the whole
-function needs to be read and corrected for error handling. I think we
-then will need to initialize pstr to NULL as well. Thanks.
-
---=20
-Tom
-
---h212f1wGhSN2kfVw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhkR8cACgkQFHw5/5Y0
-tyzwswwAmXlPf7s47iGgCL18lVML1w4xluP03w+K6nY2g6dREBfpPggCOL1/6iwC
-Fx/uzB9I/FOYSZbYnEEECMUJTYSIr8vnbBa1tPXvl+cYZXqyJeaxUeUjENKNUw68
-Ml7awZkN+ljLvX4Dqoz/OB/eNLSxqzQRAaCvQtdUl7pKyqUowu8iah6J+NUFlzyv
-R9KM01ZtR0f8jz3rFDt5MEPPNVirC4LDM50CcgzTl+RH/8zHi6I0Q/vpVdUY0QA0
-0XQPRgjhUqXyZM9mXUygpGNbj1ivvEgIXg62HQnhSWud9V7S3CNTg066hT/jCb/h
-DvUmn0EPPHixPximmmsWMhZ5nAJm1FVsw1xbbDdex1mLlMNI0FGwIiBJrPZFuJVf
-eiMImrxnJw2IKeQOVaPJZL9rk7KxOKep9kxsAOeYK1jI83ZhpZ7kORXOX+urlDiH
-kTbizR5f/SO5IouNERM9AiC/nc0ww9yA8I6stEIfp7vEaSeIcqcXROfxOsLWs9AJ
-J3lo2RYk
-=n/Qf
------END PGP SIGNATURE-----
-
---h212f1wGhSN2kfVw--
