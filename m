@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37521C83038
-	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 05:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8F0C83013
+	for <u-boot@archiver.kernel.org>; Wed,  2 Jul 2025 06:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E72D8206E;
-	Wed,  2 Jul 2025 07:49:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7A1581FEE;
+	Wed,  2 Jul 2025 08:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RXa5JkDa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="owpPjmdc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FFBC82ADA; Wed,  2 Jul 2025 07:49:19 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 003158003E; Wed,  2 Jul 2025 08:16:40 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0287981FEE
- for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 07:49:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 914FD8003E
+ for <u-boot@lists.denx.de>; Wed,  2 Jul 2025 08:16:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e7311e66a8eso3672404276.2
- for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 22:49:16 -0700 (PDT)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e8600c87293so4849528276.1
+ for <u-boot@lists.denx.de>; Tue, 01 Jul 2025 23:16:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1751435356; x=1752040156; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1751436997; x=1752041797; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pib+thVA/JoZ3DsXhDghpHapb6ppDxvRjonohc3BmmY=;
- b=RXa5JkDaLcfVe0wdUN182iqorZ+HRnYLv6AWz7LcORoCWdkyKRIoGi139+DbCpPNxV
- eZdQXN/Ht2b13SbnUfAkbT1t4A8CKkfswqSSqmCYLfdinLN8jpxI8OkMDrV/mP9RIPuo
- KCHiEfjMD8nN/EzzZ8avhuiY1WE4efcEA84/dXHYN04NqvGLbefh7gmveMA69Q4PcHyr
- 1bHG3QcaCeuB4xg+Nn0id4gLKWN5eyX0EzAmcjjn0XPOl48Oouh+/mZYUNZ6B/4r43+4
- lAVfevChXPMGIpYrAAOtgucQISJzPr2XZRZYD2eL3gNSR1otwSjc7R01IPdtABcZqzSu
- gmnA==
+ bh=uJbTdrKVQVKTpTq/l69l2kCPMgUNj68LzaKLUiD0ngg=;
+ b=owpPjmdc+oscbaqXz5xwqKQmNUFfJegL2gXmPJYSkVD4F7WnAGzqpYUJ2wcutljUVV
+ Vt7Jhg7NocrdQMH9yz15fLQ5wPBKKc07QhdE7EF42t7GnSlfK4AzS9m/hifWaQmoASu5
+ WilpDRZsEjzp8izYw3qR/1NUbspUzqbfhUhdqIw4tIwgSwkaOuRtbvf9/6gqaalKwfc+
+ uHj9F2+wJ9Jw2y//DBw0beh/gmwBGeAxHZduL1c+kQxBvs8sw6L8wTcJ95jxPy52HsJJ
+ 39ozBGrIOv0/m02gnqxrrdoDpE2oKacRGmmPkZRWxtrPxx8BPMXNyP3cy0ZXjm7+tvjh
+ PSmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1751435356; x=1752040156;
+ d=1e100.net; s=20230601; t=1751436997; x=1752041797;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pib+thVA/JoZ3DsXhDghpHapb6ppDxvRjonohc3BmmY=;
- b=cyZHBaWKSuT6gwp+w3Eppoh4LPycPtj3i/CwWoEUTVhVsgRGzC9MsS+qXgF6naoIaL
- Rl51F4eJwYPcvFPHWPM9pFoClwIlAv9t8fGP0fj0tKkT7WGPnpgA6CHWraSMqLiMrmrb
- mFjSt4MDacws+WCZNJxftN3j/7GSw/DEDw48/dORYOz9cwN9/v3E9YeF1XuExXexYFuL
- cs9cJJGYpQNdnz90K3rkBvYq5SXfWozJ4UcYhZ6aIUj5XXQU5Cbc5pvAF52JgM+L3sX1
- cRAVijWPtqHg/z298ce4BvMPgKGqKit9+dPWTjNp5DKPt9BrnJkq2mxh2zjAi/DOvpl/
- ZxyQ==
-X-Gm-Message-State: AOJu0Yz3LWctjoD/FlwWBzkEEsdu9+52lB0rxolUVzWeMndAyORChpZt
- HrEQH0LwcFuWoDlk9AMyUwFOltxQ5p+Pkf06jMXxv7LXpGJZ8uZZVjokFR6VS+OVU6BiLwvvIV+
- QSH3+g9/XE0rJwd47/QLb7rwDwbN4BXbtMeMNeB3m7PxtEizyjcod
-X-Gm-Gg: ASbGnctzxV+8bS+E39g8PyBHViYNH6ACekGJ4WqGjxcL/WmIhg1iyPZaG2olDYkPRcx
- PLc2micJk8hdjDog97aGeFD6UlRXqicwVNNs+xAc63sPanIfZjJ08CetHXUoax2wxPCy8R8tj8k
- KLgS2VEff4x5JtL2RPPJyA2qY9l1BGO6a+7a9BcjI/3gZT
-X-Google-Smtp-Source: AGHT+IGhCbVypZz1Z9iEfF8uXbzzsm2SiWTBrBzb5XhMqKpJ817GlNa+FSO5bwyVtxDUT7Tq53DOKEijPIkfUIHaKt4=
-X-Received: by 2002:a05:690c:3502:b0:710:f1da:1b5f with SMTP id
- 00721157ae682-7164d4b7c4dmr19414887b3.34.1751435355848; Tue, 01 Jul 2025
- 22:49:15 -0700 (PDT)
+ bh=uJbTdrKVQVKTpTq/l69l2kCPMgUNj68LzaKLUiD0ngg=;
+ b=iocmPPqXTjz/16+sw60bliBTRTYzgzo+xPIAgDprYI9jcdC85/qNECC68XvzNolU1s
+ qBpkxjXheppFsRC6shUgGm05/hHl6HpUMQ0k4pmrmwWtWIzsV0/TbRQsJbA7JtRxlemo
+ xbtU36YXIDlD5+VNfuchvFDI+IM5ESTAdzbsXc6XHhnG+8IRvmYoqn4znrXxWJuQWHNN
+ oJTBcwvAKciGLAJdyEoNfQtScQ5dMcEan10+CPsvL0bIzXD1YfeoRKXbjR7YxLS7FZMk
+ OKIs91C0AJQoL3swuMdAJ+9dQ+IdDG9pQxuFCKY015So0Q6/2K5svu2BRLIuxjpeGhyx
+ r3bQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU9iS3DxYjrljbxRgvkgsadUZoGZmSw3VSa+3GS2M0loShlZbtYuUcNRvGnUcJwDYLOjokjoQA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzTuzWskCB+eyE7bcuGJW2rGO07Z/uOkZJ6BnRIymqP18az/Cv
+ 2JdFqtZith8kydTJvC5duu+lYI5F0DretiQ/OtvhzVGwBKmu86m84VxPEwcoV7uGzBEiphTQNDT
+ xFBZrDoV2jSF6D4eWZiO8RNj7TEr7tzAMhCsJBGMKqQ==
+X-Gm-Gg: ASbGnct5Xs9yVtPCxdW5L7eQkNK/W4OyGjVfaNkvojrwHK3CpSCzzdSkrwkYVF/gNyV
+ p8zeJogD0FaijC7VTLM9rLREtHNEwzNVIqLKAixbAo4aoPPrxKcPIXuv9R/t6g8ccXLsIUJAbhY
+ MZORQEpMe6SbtVUXSAW32ig9MnzizR8SI6qARsj9llVIWJ
+X-Google-Smtp-Source: AGHT+IFUMs/wzkKxSGHW+gNCCW9dM7LR3C33sJ7LDtOnIPuL6Hhh+vXtFP1fQh7zB5YHs+RQ8wGhGYUf2quekIBBE8I=
+X-Received: by 2002:a05:690c:386:b0:710:e4c4:a92f with SMTP id
+ 00721157ae682-7164d305daemr18669597b3.5.1751436997393; Tue, 01 Jul 2025
+ 23:16:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250701104319.716162-1-sughosh.ganu@linaro.org>
-In-Reply-To: <20250701104319.716162-1-sughosh.ganu@linaro.org>
+References: <20250701-efiloader_fix-v1-0-f3c6e0b0ae43@linaro.org>
+ <20250701-efiloader_fix-v1-1-f3c6e0b0ae43@linaro.org>
+In-Reply-To: <20250701-efiloader_fix-v1-1-f3c6e0b0ae43@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 2 Jul 2025 08:48:39 +0300
-X-Gm-Features: Ac12FXzZGEVdoDRukUOrJ-KJRWwohAAznue-NmRAQBU18JxcSGeY4yEuodScdJM
-Message-ID: <CAC_iWjK6Uf3Xs==KcDobxYcjXy1OT46AknLQopZW-vq1gB2L8Q@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] eficonfig: add support for URI based boot option
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
+Date: Wed, 2 Jul 2025 09:16:01 +0300
+X-Gm-Features: Ac12FXwrgRcXJAFc7dhWuXerXEudL_oOFJaGrr5utQCFG2lUIckC-9VXEpXSQeM
+Message-ID: <CAC_iWj+417OyufQGaf6J8KcD+z5kQB77=N30ToU-MWw1mL-Ldg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] efi_loader: Prevent dereferencing NULL pointer
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,43 +93,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+On Tue, 1 Jul 2025 at 16:38, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
+>
+> Taking the first goto error: in file_open could either result in an
+> attempt to dereference fh when NULL or else free fh->path which has
+> not been assigned to and so will be unknown. Avoid both of these
+> problems by passing path to free instead of fh->path.
+>
+> This issue found by Smatch.
+>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-On Tue, 1 Jul 2025 at 13:43, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> ---
+>  lib/efi_loader/efi_file.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
+> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+> index 7d81da8f2d8..19b43c4a625 100644
+> --- a/lib/efi_loader/efi_file.c
+> +++ b/lib/efi_loader/efi_file.c
+> @@ -248,7 +248,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+>         return &fh->base;
 >
-> Add support for adding URI based boot option through the eficonfig
-> command. Also add a basic test case for checking validity of the URI's
-> being passed to the wget function.
->
-> Changes since V3:
-> * Do away with boot_file_option member of struct
->   eficonfig_boot_option - patch 1.
-> * Use the uri pointer being non-null in
->   eficonfig_process_show_file_option() for selecting menu items -
->   patch 1.
-> * Put a check for lo.file_path in eficonfig_edit_boot_option() before
->   calling fill_file_info() - patch 1
-
-Overall this works. I can add an HTTP option and boot it. However,
-there's a difference from your v1/v2. The URI is not visible anymore
-when you try to edit that option. Am I missing anything?
-
-Thanks
-/Ilias
->
->
-> Sughosh Ganu (2):
->   cmd: eficonfig: add support for URI device path based boot options
->   test: wget: add a test case for validating URI
->
->  cmd/eficonfig.c      | 129 ++++++++++++++++++++++++++++++++++++++++---
->  include/efi_config.h |   2 +
->  test/cmd/wget.c      |  20 +++++++
->  3 files changed, 143 insertions(+), 8 deletions(-)
+>  error:
+> -       free(fh->path);
+> +       free(path);
+>         free(fh);
+>         return NULL;
+>  }
 >
 > --
-> 2.34.1
->
+> 2.39.5
 >
